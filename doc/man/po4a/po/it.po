@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2020-01-01 17:37+0100\n"
-"PO-Revision-Date: 2020-01-01 19:17+0100\n"
-"Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
+"PO-Revision-Date: 2020-01-07 15:11+0100\n"
+"Last-Translator: Paride Barison\n"
 "Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -723,7 +723,7 @@ msgstr "Sintassi: <command>mkvextract <parameter>file-sorgente</parameter> <opti
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:423
 msgid "Causes extraction of the timestamps for the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option."
-msgstr ""
+msgstr "Causa l'estrazione delle marche temporali per la traccia con ID <parameter>TID</parameter> nel file <parameter>outname</parameter> se la traccia esiste nel file sorgente. Questa opzione può essere impostata più volte. Gli ID delle tracce sono gli stessi di quelli forniti dal risultato dell'opzione <option>--identify</option> di &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:429
@@ -759,12 +759,12 @@ msgstr "<parameter>TID:nome-file-destinazione</parameter>"
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:450
 msgid "Causes extraction of the cues for the track with the ID <parameter>TID</parameter> into the file <parameter>outname</parameter> if such a track exists in the source file. This option can be given multiple times. The track IDs are the same as the ones output by &mkvmerge;'s <option>--identify</option> option and not the numbers contained in the <classname>CueTrack</classname> element."
-msgstr ""
+msgstr "Causa l'estrazione dei metadati cue per la traccia con ID <parameter>TID</parameter> nel file <parameter>outname</parameter> se la traccia esiste nel file sorgente. Questa opzione può essere impostata più volte. Gli ID delle tracce sono gli stessi di quelli forniti dal risultato dell'opzione <option>--identify</option> di &mkvmerge; e non i numeri contenuti nell'elemento <classname>CueTrack</classname>."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:459
 msgid "The format output is a simple text format: one line per <classname>CuePoint</classname> element with <literal>key=value</literal> pairs. If an optional element is not present in a <classname>CuePoint</classname> (e.g. <classname>CueDuration</classname>) then a dash will be output as the value."
-msgstr ""
+msgstr "Il formato di output è in formato testo semplice: una linea per elemento <classname>CuePoint</classname> con coppie <literal>chiave=valore</literal>. Se un elemento non è presente in un <classname>CuePoint</classname> (per esempio <classname>CueDuration</classname>) allora un trattino sarà il valore di output."
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvextract.xml:468
@@ -787,7 +787,7 @@ msgstr "data/ora"
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:476
 msgid "The cue point's timestamp with nanosecond precision. The format is <literal>HH:MM:SS.nnnnnnnnn</literal>. This element is always set."
-msgstr ""
+msgstr "Punto cue della marca temporale con precisione al nanosecondo. Il formato è <literal>HH:MM:SS.nnnnnnnnn</literal>. Questo elemento è sempre impostato."
 
 #. type: Content of:
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><term>
@@ -799,7 +799,7 @@ msgstr "durata"
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:483
 msgid "The cue point's duration with nanosecond precision. The format is <literal>HH:MM:SS.nnnnnnnnn</literal>."
-msgstr ""
+msgstr "Durata del punto cue con precisione al nanosecondo. Il formato è <literal>HH:MM:SS.nnnnnnnnn</literal>."
 
 #. type: Content of:
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><term>
@@ -811,13 +811,13 @@ msgstr "cluster_position"
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:490
 msgid "The absolute position in bytes inside the &matroska; file where the cluster containing the referenced element starts."
-msgstr ""
+msgstr "Posizione assoluta in byte all'interno del file &matroska; dove il cluster contenente l'elemento di riferimento inizia."
 
 #. type: Content of:
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><note><para>
 #: doc/man/mkvextract.xml:493
 msgid "Inside the &matroska; file the <classname>CueClusterPosition</classname> is relative to the segment's data start offset. The value output by &mkvextract;'s cue extraction mode, however, contains that offset already and is an absolute offset from the beginning of the file."
-msgstr ""
+msgstr "All'interno del file &matroska; il <classname>CueClusterPosition</classname> è relativo all'offset di inizio del segmento dati. Il valore di output della modalità di estrazione di &mkvextract;, in ogni caso, contiene già quell'offset ed è un offset assoluto dall'inizio del file."
 
 #. type: Content of:
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><term>
@@ -829,13 +829,13 @@ msgstr "relative_position"
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:503
 msgid "The relative position in bytes inside the cluster where the <classname>BlockGroup</classname> or <classname>SimpleBlock</classname> element the cue point refers to starts."
-msgstr ""
+msgstr "Posizione relativa in byte all'interno del cluster dove l'elemento <classname>BlockGroup</classname> o l'elemento <classname>SimpleBlock</classname> DA FINIRE"
 
 #. type: Content of:
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><note><para>
 #: doc/man/mkvextract.xml:507
 msgid "Inside the &matroska; file the <classname>CueRelativePosition</classname> is relative to the cluster's data start offset. The value output by &mkvextract;'s cue extraction mode, however, is relative to the cluster's ID. The absolute position inside the file can be calculated by adding <literal>cluster_position</literal> and <literal>relative_position</literal>."
-msgstr ""
+msgstr "All'interno del file &matroska; il <classname>CueRelativePosition</classname> è relativo all'offset d'inizio dei dati del cluster. Il valore di output della modalità di estrazione di &mkvextract;, in ogni caso, è relativo all'ID del cluster. La posizione assoluta all'interno del file può essere calcolata aggiungendo <literal>cluster_position</literal> e <literal>relative_position</literal>."
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvextract.xml:520
@@ -853,35 +853,35 @@ msgstr "Esempi"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:528
 msgid "Extracting both chapters and tags in their respective &xml; formats at the same time:"
-msgstr ""
+msgstr "Estrarre allo stesso tempo entrambi i capitoli e tag nei loro rispettivi formati &xml;:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:531
 #, no-wrap
 msgid "$ mkvextract movie.mkv chapters movie-chapters.xml tags movie-tags.xml"
-msgstr ""
+msgstr "$ mkvextract film.mkv chapters capitoli-film.xml tags tag-film.xml"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:534
 msgid "Extracting a couple of tracks and their respective timestamps at the same time:"
-msgstr ""
+msgstr "Estrarre allo stesso tempo un po' di tracce e le loro rispettive marcature temporali:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:537
 #, no-wrap
 msgid "$ mkvextract \"Another Movie.mkv\" tracks 0:video.h265 \"1:main audio.aac\" \"2:director's comments.aac\" timestamps_v2 \"0:timestamps video.txt\" \"1:timestamps main audio.txt\" \"2:timestamps director's comments.txt\""
-msgstr ""
+msgstr "$ mkvextract \"Altro film.mkv\" tracks 0:video.h265 \"1:audio principale.aac\" \"2:commento del regista.aac\" timestamps_v2 \"0:marcature temporali video.txt\" \"1:marcature temporali audio principale.txt\" \"2:marcature temporali commenti del regista.txt\""
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:540
 msgid "Extracting chapters in the Ogg/OGM format and re-encoding a text subtitle track to another character set:"
-msgstr ""
+msgstr "Estrarre i capitoli nel formato Ogg/OGM e ricodificare una traccia sottotitoli in un'altra codifica caratteri:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvextract.xml:543
 #, no-wrap
 msgid "$ mkvextract \"My Movie.mkv\" chapters --simple \"My Chapters.txt\" tracks -c MS-ANSI \"2:My Subtitles.srt\""
-msgstr ""
+msgstr "$ mkvextract \"Mio Film.mkv\" chapters --simple \"Miei Capitoli.txt\" tracks -c MS-ANSI \"2:Miei Sottotitoli.srt\""
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:547
@@ -889,14 +889,14 @@ msgstr ""
 #: doc/man/mkvmerge.xml:2540
 #: doc/man/mkvpropedit.xml:729
 msgid "Text files and character set conversions"
-msgstr ""
+msgstr "File di testo e conversioni della codifica caratteri"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:550
 #: doc/man/mkvinfo.xml:323
 #: doc/man/mkvpropedit.xml:732
 msgid "For an in-depth discussion about how all tools in the MKVToolNix suite handle character set conversions, input/output encoding, command line encoding and console encoding please see the identically-named section in the &mkvmerge; man page."
-msgstr ""
+msgstr "Per una comprensione a fondo di come tutti gli strumenti presenti nella suite di MKVToolNix gestiscono la conversione della codifica caratteri, codifica input/output, codifica a riga di comando e console, vedere la sezione con lo stesso nome nel manuale di &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:556
@@ -906,7 +906,7 @@ msgstr "Formati di uscita dei file"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:559
 msgid "The decision about the output format is based on the track type, not on the extension used for the output file name. The following track types are supported at the moment:"
-msgstr ""
+msgstr "La decisione a proposito del formato di output è basata sul tipo di traccia, non nell'estensione usata dal nome del file. Attualmente le seguenti tracce sono supportate:"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:565
@@ -917,7 +917,7 @@ msgstr "A_AAC/MPEG2/*, A_AAC/MPEG4/*, A_AAC"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:568
 msgid "All <abbrev>AAC</abbrev> files will be written into an <abbrev>AAC</abbrev> file with <abbrev>ADTS</abbrev> headers before each packet. The <abbrev>ADTS</abbrev> headers will not contain the deprecated emphasis field."
-msgstr ""
+msgstr "Tutti i file<abbrev>AAC</abbrev> saranno scritti in un file <abbrev>AAC</abbrev> con intestazioni <abbrev>ADTS</abbrev> prima di ogni pacchetto. L'intestazione <abbrev>ADTS</abbrev> non conterrà il deprecato campo di enfasi."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:575
@@ -928,7 +928,7 @@ msgstr "A_AC3, A_EAC3"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:578
 msgid "These will be extracted to raw <abbrev>AC-3</abbrev> files."
-msgstr ""
+msgstr "Questi verranno estratti in file <abbrev>AC-3</abbrev> grezzi."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:584
@@ -1016,7 +1016,7 @@ msgstr "A_REAL/*"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:650
 msgid "<productname>RealAudio</productname> tracks are written to <productname>RealMedia</productname> files."
-msgstr ""
+msgstr "Le tracce <productname>RealAudio</productname> verranno scritte su file <productname>RealMedia</productname>. "
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:656
@@ -1027,7 +1027,7 @@ msgstr "A_TRUEHD, A_MLP"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:659
 msgid "These will be extracted to raw <abbrev>TrueHD</abbrev>/<abbrev>MLP</abbrev> files."
-msgstr ""
+msgstr "Questi saranno estratti su file grezzi <abbrev>TrueHD</abbrev>/<abbrev>MLP</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:665
@@ -1038,7 +1038,7 @@ msgstr "A_TTA1"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:668
 msgid "<productname>TrueAudio</productname> tracks are written to <abbrev>TTA</abbrev> files. Please note that due to &matroska;'s limited timestamp precision the extracted file's header will be different regarding two fields: <varname>data_length</varname> (the total number of samples in the file) and the <abbrev>CRC</abbrev>."
-msgstr ""
+msgstr "Le tracce <productname>TrueAudio</productname>sono scritte su file <abbrev>TTA</abbrev>. Notare che a causa della limitata precisione della marca temporale del formato &matroska;, l'intestazione del file estratto sarà differente in due campi: <varname>data_lenght</varname> (numero totale dei sample nel file) e il <abbrev>CRC</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:676
@@ -1049,7 +1049,7 @@ msgstr "A_VORBIS"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:679
 msgid "Vorbis audio will be written into an &oggvorbis; file."
-msgstr ""
+msgstr "L'audio Vorbis verrà scritto in un file &oggvorbis;."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:685
@@ -1060,7 +1060,7 @@ msgstr "A_WAVPACK4"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:688
 msgid "<productname>WavPack</productname> tracks are written to <abbrev>WV</abbrev> files."
-msgstr ""
+msgstr "Le tracce <productname>WavPack</productname> saranno scritte in file <abbrev>WV</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:694
@@ -1071,7 +1071,7 @@ msgstr "S_HDMV/PGS"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:697
 msgid "<abbrev>PGS</abbrev> subtitles will be written as <abbrev>SUP</abbrev> files."
-msgstr ""
+msgstr "I sottotitoli <abbrev>PGS</abbrev> saranno scritti come file <abbrev>SUP</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:703
@@ -1082,7 +1082,7 @@ msgstr "S_HDMV/TEXTST"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:706
 msgid "<abbrev>TextST</abbrev> subtitles will be written as a special file format invented for &mkvmerge; and &mkvextract;."
-msgstr ""
+msgstr "I sottotitoli <abbrev>TextST</abbrev> saranno scritti in uno speciale formato concepito per &mkvmerge; e &mkvextract;."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:712
@@ -1093,7 +1093,7 @@ msgstr "S_KATE"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:715
 msgid "<productname>Kate</productname> streams will be written within an <productname>Ogg</productname> container."
-msgstr ""
+msgstr "I flussi <productname>Kate</productname> saranno scritti in un contenitore <productname>Ogg</productname>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:721
@@ -1104,7 +1104,7 @@ msgstr "S_TEXT/SSA, S_TEXT/ASS, S_SSA, S_ASS"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:724
 msgid "<abbrev>SSA</abbrev> and <abbrev>ASS</abbrev> text subtitles will be written as <abbrev>SSA</abbrev>/<abbrev>ASS</abbrev> files respectively."
-msgstr ""
+msgstr "I sottotitoli <abbrev>SSA</abbrev> e <abbrev>ASS</abbrev> saranno scritti rispettivamente come file <abbrev>SSA</abbrev>/<abbrev>ASS</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:731
@@ -1115,7 +1115,7 @@ msgstr "S_TEXT/UTF8, S_TEXT/ASCII"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:734
 msgid "Simple text subtitles will be written as <abbrev>SRT</abbrev> files."
-msgstr ""
+msgstr "I sottotitoli in formato test saranno scritti come file <abbrev>SRT</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:740
@@ -1126,7 +1126,7 @@ msgstr "S_VOBSUB"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:743
 msgid "<productname>VobSub</productname> subtitles will be written as <abbrev>SUB</abbrev> files along with the respective index files, as <abbrev>IDX</abbrev> files."
-msgstr ""
+msgstr "I sottotitoli <productname>VobSub</productname> saranno scritti come file <abbrev>SUB</abbrev> insieme ai rispettivi file di indice come file <abbrev>IDX</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:750
@@ -1137,7 +1137,7 @@ msgstr "S_TEXT/USF"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:753
 msgid "<abbrev>USF</abbrev> text subtitles will be written as <abbrev>USF</abbrev> files."
-msgstr ""
+msgstr "I sottotitoli <abbrev>USF</abbrev> saranno scritti come file <abbrev>USF</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:759
@@ -1148,7 +1148,7 @@ msgstr "S_TEXT/WEBVTT"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:762
 msgid "<abbrev>WebVTT</abbrev> text subtitles will be written as <abbrev>WebVTT</abbrev> files."
-msgstr ""
+msgstr "I sottotitoli <abbrev>WebVTT</abbrev> saranno scritti su file <abbrev>WebVTT</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:768
@@ -1159,7 +1159,7 @@ msgstr "V_MPEG1, V_MPEG2"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:771
 msgid "<abbrev>MPEG-1</abbrev> and <abbrev>MPEG-2</abbrev> video tracks will be written as <abbrev>MPEG</abbrev> elementary streams."
-msgstr ""
+msgstr "Le tracce video <abbrev>MPEG-1</abbrev> e <abbrev>MPEG-2</abbrev> saranno scritti come flussi elementari <abbrev>MPEG</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:777
@@ -1170,7 +1170,7 @@ msgstr "V_MPEG4/ISO/AVC"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:780
 msgid "<abbrev>H.264</abbrev> / <abbrev>AVC</abbrev> video tracks are written to <abbrev>H.264</abbrev> elementary streams which can be processed further with e.g. <productname>MP4Box</productname> from the <productname>GPAC</productname> package."
-msgstr ""
+msgstr "Le tracce video <abbrev>H.264</abbrev>/<abbrev>AVC</abbrev> saranno scritte su flussi elementari <abbrev>H.264</abbrev> che potranno poi essere processati con, per esempio, <productname>MP4Box</productname> dal pacchetto <productname>GPAC</productname>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:787
@@ -1181,7 +1181,7 @@ msgstr "V_MPEG4/ISO/HEVC"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:790
 msgid "<abbrev>H.265</abbrev> / <abbrev>HEVC</abbrev> video tracks are written to <abbrev>H.265</abbrev> elementary streams which can be processed further with e.g. <productname>MP4Box</productname> from the <productname>GPAC</productname> package."
-msgstr ""
+msgstr "Le tracce video <abbrev>H.265</abbrev>/<abbrev>HEVC</abbrev> saranno scritte su flussi elementari <abbrev>H.265</abbrev> che potranno poi essere processati con, per esempio, <productname>MP4Box</productname> dal pacchetto <productname>GPAC</productname>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:797
@@ -1192,7 +1192,7 @@ msgstr "V_MS/VFW/FOURCC"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:800
 msgid "Fixed <abbrev>FPS</abbrev> video tracks with this <classname>CodecID</classname> are written to <abbrev>AVI</abbrev> files."
-msgstr ""
+msgstr "Le tracce video con <abbrev>FPS</abbrev> fissi con questo <classname>CodecID</classname> saranno scritte su file <abbrev>AVI</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:806
@@ -1203,7 +1203,7 @@ msgstr "V_REAL/*"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:809
 msgid "<productname>RealVideo</productname> tracks are written to <productname>RealMedia</productname> files."
-msgstr ""
+msgstr "Le tracce <productname>RealVideo</productname> saranno scritte su file <productname>RealMedia</productname>. "
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:815
@@ -1214,7 +1214,7 @@ msgstr "V_THEORA"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:818
 msgid "<productname>Theora</productname> streams will be written within an <productname>Ogg</productname> container"
-msgstr ""
+msgstr "I flussi <productname>Theora</productname> saranno scritti in un contenitore <productname>Ogg</productname>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:824
@@ -1225,7 +1225,7 @@ msgstr "V_VP8, V_VP9"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:827
 msgid "<abbrev>VP8</abbrev> / <abbrev>VP9</abbrev> tracks are written to <abbrev>IVF</abbrev> files."
-msgstr ""
+msgstr "Le tracce <abbrev>VP8</abbrev>/<abbrev>VP9</abbrev> saranno scritte su file <abbrev>IVF</abbrev>."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:833
@@ -1237,7 +1237,7 @@ msgstr "Tag"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:836
 msgid "Tags are converted to a &xml; format. This format is the same that &mkvmerge; supports for reading tags."
-msgstr ""
+msgstr "I tag saranno convertiti in formato &xml;. Questo formato è lo stesso che supporta &mkvmerge; per la lettura dei tag."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:842
@@ -1249,7 +1249,7 @@ msgstr "Allegati"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:845
 msgid "Attachments are written to the output file as they are. No conversion whatsoever is done."
-msgstr ""
+msgstr "Gli allegati saranno scritti nel formato di output in cui sono. Nessuna conversione verrà fatta."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:851
@@ -1261,7 +1261,7 @@ msgstr "Capitoli"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:854
 msgid "Chapters are converted to a &xml; format. This format is the same that &mkvmerge; supports for reading chapters. Alternatively a stripped-down version can be output in the simple <abbrev>OGM</abbrev> style format."
-msgstr ""
+msgstr "I capitoli saranno convertiti in formato &xml;. Questo formato è lo stesso che supporta &mkvmerge; per la lettura dei capitoli. Alternativamente una versione semplificata può essere di output in formato <abbrev>OGM</abbrev>. "
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:861
@@ -1272,7 +1272,7 @@ msgstr "Marche temporali"
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:864
 msgid "Timestamps are first sorted and then output as a timestamp v2 format compliant file ready to be fed to &mkvmerge;.  The extraction to other formats (v1, v3 and v4) is not supported."
-msgstr ""
+msgstr "Le marche temporali sono prima ordinate e poi convertite in formato conforme alla marca temporale v2, pronte per essere processate con &mkvmerge;. L'estrazione in altri formati (v1, v3 e v4) non è supportata."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:873
@@ -1290,17 +1290,17 @@ msgstr "&mkvextract; esce con uno di tre codici di uscita:"
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvextract.xml:882
 msgid "<constant>0</constant> -- This exit code means that extraction has completed successfully."
-msgstr ""
+msgstr "<constant>0</constant> -- Questo valore di uscita riporta che l'estrazione è stata completata correttamente."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvextract.xml:888
 msgid "<constant>1</constant> -- In this case &mkvextract; has output at least one warning, but extraction did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'.  Depending on the issues involved the resulting files might be ok or not.  The user is urged to check both the warning and the resulting files."
-msgstr ""
+msgstr "<constant>1</constant> -- In questo caso &mkvextract; ha almeno un avviso, ma l'estrazione è continuata. L'avviso è prefissato con la dicitura '<literal>Avviso:</literal>'. A seconda del problema il risultato potrebbe essere ok oppure no. L'utente è incoraggiato a controllare sia gli avvisi che i file."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvextract.xml:896
 msgid "<constant>2</constant> -- This exit code is used after an error occurred.  &mkvextract; aborts right after outputting the error message.  Error messages range from wrong command line arguments over read/write errors to broken files."
-msgstr ""
+msgstr "<constant>2</constant> -- Questo valore di uscita è utilizzato dopo che si è verificato un errore. &mkvextract; si interrompe dopo aver segnalato il messaggio di errore. I messaggi d'errore spaziano da un argomento della riga di comando errato a errori di lettura/scrittura a file corrotti."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:904
@@ -1313,29 +1313,29 @@ msgstr "Variabili d'ambiente"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:907
 msgid "&mkvextract; uses the default variables that determine the system's locale (e.g. <varname>LANG</varname> and the <varname>LC_*</varname> family). Additional variables:"
-msgstr ""
+msgstr "&mkvextract; usa delle variabili predefinite che determinano la lingua di sistema (per esempio: <varname>LANG</varname> e la famiglia <varname>LC_*</varname>). Variabili addizionali sono:"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:913
 msgid "<varname>MKVEXTRACT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
-msgstr ""
+msgstr "<varname>MKVEXTRACT_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> e la sua forma contratta <varname>MTX_DEBUG</varname>"
 
 #. type: Content of:
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:915
 msgid "The content is treated as if it had been passed via the <link linkend=\"mkvextract.description.debug\"><option>--debug</option></link> option."
-msgstr ""
+msgstr "Il contenuto è elaborato come se fosse stata utilizzata l'opzione <link linkend=\"mkvextract.description.debug\"><option>--debug</option></link>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:921
 msgid "<varname>MKVEXTRACT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
-msgstr ""
+msgstr "<varname>MKVEXTRACT_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> e la sua forma contratta <varname>MTX_ENGAGE</varname>"
 
 #. type: Content of:
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:923
 msgid "The content is treated as if it had been passed via the <link linkend=\"mkvextract.description.engage\"><option>--engage</option></link> option."
-msgstr ""
+msgstr "Il contenuto è elaborato come se fosse stata utilizzata l'opzione <link linkend=\"mkvextract.description.engage\"><option>--engage</option></link>."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:931
@@ -1382,7 +1382,7 @@ msgstr "Stampa informazioni sugli elementi nel file &matroska;"
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvinfo.xml:51
 msgid "<command>mkvinfo</command> <arg>options</arg> <arg choice=\"req\">source-filename</arg>"
-msgstr ""
+msgstr "<command>mkvinfo</command> <arg>opzioni</arg> <arg choice=\"req\">file-sorgente</arg>"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:60
@@ -1392,13 +1392,13 @@ msgstr "Questo programma elenca tutti gli elementi contenuti in a &matroska;. L'
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:66
 msgid "<option>-a</option>, <option>--all</option>"
-msgstr ""
+msgstr "<option>-a</option>, <option>--all</option>"
 
 #. type: Content of:
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:69
 msgid "By default &mkvinfo; stops when it encounters the first cluster.  Additionally it doesn't show certain often occurring elements.  With this option &mkvinfo; will continue processing regardless of the verbosity level and show all elements."
-msgstr ""
+msgstr "Come comportamento predefinito &mkvinfo; si interrompe quando incontra il primo cluster. Inoltre non mostra gli elementi che incontra spesso. Con questa opzione &mkvinfo; continuerà il processo indipendentemente dal livello di verbosità e mostrerà tutti gli elementi."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:76
@@ -1416,35 +1416,35 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:85
 msgid "<option>-o</option>, <option>--continue</option>"
-msgstr ""
+msgstr "<option>-o</option>, <option>--continue</option>"
 
 #. type: Content of:
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:88
 msgid "By default &mkvinfo; stops when it encounters the first cluster.  With this option &mkvinfo; will continue processing regardless of the verbosity level."
-msgstr ""
+msgstr "Come comportamento predefinito &mkvinfo; si interrompe quando incontra il primo cluster. Con questa opzione &mkvinfo; continuerà il processo indipendentemente dal livello di verbosità."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:95
 msgid "<option>-p</option>, <option>--hex-positions</option>"
-msgstr ""
+msgstr "<option>-p</option>, <option>--hex-positions</option>"
 
 #. type: Content of:
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:98
 msgid "Show the positions of all elements in hexadecimal regardless of the verbosity level."
-msgstr ""
+msgstr "Mostra la posizione di tutti gli elementi in esadecimale indipendentemente dal livello di verbosità."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:104
 msgid "<option>-P</option>, <option>--positions</option>"
-msgstr ""
+msgstr "<option>-P</option>, <option>--positions</option>"
 
 #. type: Content of:
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:107
 msgid "Show the positions of all elements in decimal regardless of the verbosity level."
-msgstr ""
+msgstr "Mostra la posizione di tutti gli elementi in decimale indipendentemente dal livello di verbosità."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:113
@@ -1507,19 +1507,19 @@ msgstr "Visualizza la dimensione di ogni elemento inclusa la sua intestazione."
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:181
 msgid "Writes all messages to the file <parameter>file-name</parameter> instead of to the console.  While this can be done easily with output redirection there are cases in which this option is needed: when the terminal reinterprets the output before writing it to a file.  The character set set with <link linkend=\"mkvinfo.description.output_charset\"><option>--output-charset</option></link> is honored."
-msgstr ""
+msgstr "Scrive tutti i messaggi nel file <parameter>nome-file</parameter> invece che sul terminale.  Mentre questo può essere fatto con la redirezione dell'output ci sono casi dove questa opzione può essere necessaria: quando il terminale reinterpreta l'output prima di scriverlo in un file. Il set caratteri impostato con <link linkend=\"mkvinfo.description.output_charset\"><option>--output-charset</option></link> viene rispettato."
 
 #. type: Content of:
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:222
 msgid "Turn on experimental features. A list of available features can be requested with <command>mkvinfo --engage list</command>. These features are not meant to be used in normal situations."
-msgstr ""
+msgstr "Abilita le funzionalità sperimentali. La lista di funzioni disponibili può essere richiamata con <command>mkvinfo --engage list</command>. Queste funzionalità non sono previste per l'utilizzo normale del programma."
 
 #. type: Content of:
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:244
 msgid "Be more verbose. See the section about <link linkend=\"mkvinfo.verbosity_levels\">verbosity levels</link> for a description which information will be output at which level."
-msgstr ""
+msgstr "Più verbosità. Vedere la sezione riguardo a <link linkend=\"mkvinfo.verbosity_levels\">livelli di verbosità</link> per una descrizione dei livelli."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvinfo.xml:281
@@ -1529,7 +1529,7 @@ msgstr "Livello di verbosità"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:284
 msgid "The <link linkend=\"mkvinfo.description.verbose\"><option>-v</option></link> option can be used to increase &mkvinfo;'s verbosity level and print more information about the current file."
-msgstr ""
+msgstr "L'opzione <link linkend=\"mkvinfo.description.verbose\"><option>-v</option></link> può essere utilizzata per aumentare il livello di verbosità di &mkvinfo;, quindi stampare più informazioni riguardo al file corrente."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:289
@@ -1569,44 +1569,44 @@ msgstr "&mkvinfo; esce con uno di tre codici di uscita:"
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvinfo.xml:338
 msgid "<constant>0</constant> -- This exit code means that the run has completed successfully."
-msgstr ""
+msgstr "<constant>0</constant> -- Questo valore di uscita riporta che il processo è stato completato correttamente."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvinfo.xml:344
 msgid "<constant>1</constant> -- In this case &mkvinfo; has output at least one warning, but the run did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'."
-msgstr ""
+msgstr "<constant>1</constant> -- In questo caso &mkvinfo; ha almeno un avviso, ma il processo è continuato. L'avviso è prefissato con la dicitura '<literal>Avviso:</literal>'."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvinfo.xml:351
 msgid "<constant>2</constant> -- This exit code is used after an error occurred.  &mkvinfo; aborts right after outputting the error message.  Error messages range from wrong command line arguments over read/write errors to broken files."
-msgstr ""
+msgstr "<constant>2</constant> -- Questo valore di uscita è utilizzato dopo che si è verificato un errore. &mkvinfo; si interrompe dopo aver segnalato il messaggio di errore. I messaggi d'errore spaziano da un argomento della riga di comando errato a errori di lettura/scrittura a file corrotti."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:362
 msgid "&mkvinfo; uses the default variables that determine the system's locale (e.g. <varname>LANG</varname> and the <varname>LC_*</varname> family). Additional variables:"
-msgstr ""
+msgstr "&mkvinfo; usa le variabili d'ambiente che determinano la lingua di sistema (per esempio: <varname>LANG</varname> e la famiglia <varname>LC_*</varname>). Variabili addizionali sono:"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:368
 msgid "<varname>MKVINFO_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname>"
-msgstr ""
+msgstr "<varname>MKVINFO_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> e la sua forma contratta <varname>MTX_DEBUG</varname>"
 
 #. type: Content of:
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:370
 msgid "The content is treated as if it had been passed via the <link linkend=\"mkvinfo.description.debug\"><option>--debug</option></link> option."
-msgstr ""
+msgstr "Il contenuto è elaborato come se fosse stata utilizzata l'opzione <link linkend=\"mkvinfo.description.debug\"><option>--debug</option></link>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:376
 msgid "<varname>MKVINFO_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname>"
-msgstr ""
+msgstr "<varname>MKVINFO_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> e la sua forma contratta <varname>MTX_ENGAGE</varname>"
 
 #. type: Content of:
 #. <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:378
 msgid "The content is treated as if it had been passed via the <link linkend=\"mkvinfo.description.engage\"><option>--engage</option></link> option."
-msgstr ""
+msgstr "Il contenuto è elaborato come se fosse stata utilizzata l'opzione <link linkend=\"mkvinfo.description.engage\"><option>--engage</option></link>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:388
@@ -1621,23 +1621,23 @@ msgstr "mkvmerge"
 #. type: Content of: <refentry><refnamediv><refpurpose>
 #: doc/man/mkvmerge.xml:45
 msgid "Merge multimedia streams into a &matroska; file"
-msgstr ""
+msgstr "Unisci i flussi multimediali in un file &matroska;."
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvmerge.xml:51
 msgid "<command>mkvmerge</command> <arg>global options</arg> <arg choice=\"req\">-o out</arg> <arg>options1</arg> <arg choice=\"req\">file1</arg> <arg> <arg>options2</arg> <arg choice=\"req\">file2</arg> </arg> <arg>@options-file.json</arg>"
-msgstr ""
+msgstr "<command>mkvmerge</command> <arg>opzioni globali</arg> <arg choice=\"req\">-o file di uscita</arg> <arg>opzione 1</arg> <arg choice=\"req\">file 1</arg> <arg> <arg>opzione 2</arg> <arg choice=\"req\">file 2</arg> </arg> <arg>@file_di_opzioni.json</arg>"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:67
 msgid "This program takes the input from several media files and joins their streams (all of them or just a selection) into a &matroska; file; see <ulink url=\"http://www.matroska.org/\">the &matroska; website</ulink>."
-msgstr ""
+msgstr "Questo programma prende l'input di diversi file multimediali e unisce i loro flussi (tutti oppure una selezione) in un file &matroska;. Per ulteriori informazioni visitare il <ulink url=\"http://www.matroska.org/\">sito di &matroska;</ulink>."
 
 #. type: Content of: <refentry><refsect1><important><para>
 #: doc/man/mkvmerge.xml:73
 #: doc/man/mkvmerge.xml:2262
 msgid "The order of command line options is important. Please read the section <link linkend=\"mkvmerge.option_order\">&quot;Option order&quot;</link> if you're new to the program."
-msgstr ""
+msgstr "L'ordine delle opzioni della riga di comando è importante. Leggere la sezione <link linkend=\"mkvmerge.option_order\">&quot;Opzioni&quot;</link> se queste sono le prime volte che si utilizza il programma."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:79
@@ -1672,7 +1672,7 @@ msgstr "<option>-o</option>, <option>--output</option> <parameter>nome-file</par
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:99
 msgid "Write to the file <parameter>file-name</parameter>.  If splitting is used then this parameter is treated a bit differently.  See the explanation for the <link linkend=\"mkvmerge.description.split\"><option>--split</option></link> option for details."
-msgstr ""
+msgstr "Scrive nel file <parameter>nome-file</parameter>. Se viene utilizzata la suddivisione questo parametro è trattato in maniera differente. Leggere la spiegazione per l'opzione <link linkend=\"mkvmerge.description.split\"><option>--split</option></link> per ulteriori dettagli."
 
 #. type: Content of:
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><term>
@@ -1684,13 +1684,13 @@ msgstr "<option>-w</option>, <option>--webm</option>"
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:107
 msgid "Create a WebM compliant file. This is also turned on if the output file name's extension is &quot;webm&quot;. This mode enforces several restrictions. The only allowed codecs are VP8, VP9 video and Opus, Vorbis audio tracks. The DocType header item is changed to &quot;webm&quot;."
-msgstr ""
+msgstr "Crea un file conforme al formato WebM. Ciò è inoltre abilitato se l'estensione del nome del file di output è &quot;webm&quot;. Questa modalità rafforza diverse restrizioni: i codec permessi sono soltanto VP8 e VP9 per le tracce video e Opus e Vorbis per le tracce audio. L'intestazione del tipo di documento (DocType) sarà cambiata in &quot;webm&quot;."
 
 #. type: Content of:
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:113
 msgid "For chapters and tags only a subset of elements are allowed. &mkvmerge; will automatically remove all elements not allowed by the specification."
-msgstr ""
+msgstr "Solo un sottoinsieme di elementi sono permessi per capitoli e tag. &mkvmerge; automaticamente rimuoverà tutti gli elementi non permessi dalle specifiche."
 
 #. type: Content of:
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><term>
@@ -1714,18 +1714,18 @@ msgstr "<option>--default-language</option> <parameter>codice-lingua</parameter>
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:129
 msgid "Sets the default language code that will be used for tracks for which no language is set with the <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> option and for which the source container doesn't provide a language."
-msgstr ""
+msgstr "Imposta il codice della lingua predefinita che verrà usato per le tracce dove nessuna lingua è impostata con l'opzione <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> e nelle quali il contenitore sorgente non provvede una lingua."
 
 #. type: Content of:
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:133
 msgid "The default language code is '<literal>und</literal>' for 'undefined'."
-msgstr ""
+msgstr "Il codice per la lingua predefinita è '<literal>und</literal>' per 'indeterminato'."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:140
 msgid "Segment info handling (global options)"
-msgstr ""
+msgstr "Gestione delle informazioni per il segmento (opzioni globali)."
 
 #. type: Content of:
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><term>
@@ -1737,7 +1737,7 @@ msgstr "<option>--segmentinfo</option> <parameter>nomefile.xml</parameter>"
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:147
 msgid "Read segment information from a <abbrev>XML</abbrev> file. This file can contain the segment family <abbrev>UID</abbrev>, segment <abbrev>UID</abbrev>, previous and next segment <abbrev>UID</abbrev> elements. An example file and a <abbrev>DTD</abbrev> are included in the MKVToolNix distribution."
-msgstr ""
+msgstr "Legge le informazioni del segmento da un file <abbrev>XML</abbrev>. Questo file può contenere gli <abbrev>UID</abbrev> della famiglia di segmenti, <abbrev>UID</abbrev> del segmento e gli <abbrev>UID</abbrev> dei segmenti precedenti e successivi. Un file d'esempio e un <abbrev>DTD</abbrev> sono inclusi nella distribuzione di MKVToolNix."
 
 #. type: Content of:
 #. <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
