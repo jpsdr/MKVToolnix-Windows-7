@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2020-01-13 20:07+0100\n"
-"PO-Revision-Date: 2020-01-07 15:11+0100\n"
-"Last-Translator: Paride Barison\n"
+"PO-Revision-Date: 2020-01-12 12:38+0000\n"
+"Last-Translator: Ioma Taani\n"
 "Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -1435,32 +1435,32 @@ msgstr "L'opzione <link linkend=\"mkvinfo.description.verbose\"><option>-v</opti
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:289
 msgid "At level 0 &mkvinfo; will print only the track headers it finds and their types. &mkvinfo; will exit as soon as the headers are parsed completely (more technical: as soon as the first cluster is encountered). In this level the seek head entries and the cues will not be displayed -- even if they're located in front of the track information."
-msgstr ""
+msgstr "Al livello 0 &mkvinfo; mostrerà solamente le intestazioni delle tracce e cercherà il tipo. &mkvinfo; uscirà quando tutte le intestazioni verranno completamente analizzate (in linguaggio tecnico: non appena il primo cluster viene analizzato). In questo livello le intestazioni di ricerca e i metadati cue non verranno mostrati -- anche se sono posizionati in testa alle informazioni della traccia."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:295
 msgid "At level 1 &mkvinfo; will also print all &matroska; elements encountered for the complete file but the seek head entries and the cue entries. If the summary mode is enabled then &mkvinfo; will output the frame position as well."
-msgstr ""
+msgstr "Al livello 1 &mkvinfo; stamperà tutti gli elementi &matroska; trovati in tutto il file, ma non le intestazioni di ricerca e i metadati cue. Se la modalità riepilogo è abilitata, &mkvinfo; stamperà anche la posizione del fotogramma."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:300
 msgid "The same effect can be achieved with the option <option>--continue</option>."
-msgstr ""
+msgstr "Lo stesso risultato può essere ottenuto con l'opzione <option>--continue</option>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:304
 msgid "At level 2 &mkvinfo; will also print the seek head entries, the cue entries and the file position at which each &matroska; element can be found at."
-msgstr ""
+msgstr "Al livello 2 &mkvinfo; stamperà anche le intestazioni di ricerca, i metadati cue e la posizione del file dove ogni elemento &matroska; può essere trovato."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:309
 msgid "The same effect can be achieved with the options <option>--all --positions</option>."
-msgstr ""
+msgstr "Lo stesso risultato può essere ottenuto con l'opzione <option>--all-positions</option>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:313
 msgid "At level 3 and above &mkvinfo; will print some information that is not directly connected to a &matroska; element. All other elements only print stuff about the elements that were just found. Level 3 adds meta information to ease debugging (read: it's intended for developers only). All lines written by level 3 are enclosed in square brackets to make filtering them out easy."
-msgstr ""
+msgstr "Al livello 3 ed oltre &mkvinfo; stamperà alcune informazioni non direttamente relative all'elemento &matroska;. Tutti gli altri elementi stamperanno informazioni relative agli elementi che sono stati trovati. Il livello 3 aggiunge altre informazioni per facilitare il debug (leggasi: è inteso solo per gli sviluppatori). Tutte le righe relative al livello 3 sono racchiuse da parentesi quadre per facilitarne il filtraggio."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:332
@@ -1626,7 +1626,7 @@ msgstr "Legge le informazioni del segmento da un file <abbrev>XML</abbrev>. Ques
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:153
 msgid "See the section about <link linkend=\"mkvmerge.segmentinfo\">segment info XML files</link> below for details."
-msgstr ""
+msgstr "Vedere le sezione riguardo <link linkend=\"mkvmerge.segmentinfo\">file XML di informazioni segmento </link> qui sotto per dettagli."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:159
@@ -1636,24 +1636,24 @@ msgstr "<option>--segment-uid</option> <parameter>SID1,SID2,...</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:162
 msgid "Sets the segment UIDs to use. This is a comma-separated list of 128-bit segment UIDs in the usual UID form: hex numbers with or without the &quot;0x&quot; prefix, with or without spaces, exactly 32 digits."
-msgstr ""
+msgstr "Imposta l'uso degli UID dei segmenti. Ciò è una lista separata da virgole di UID dei segmenti a 128-bit nella forma: numeri esadecimali con o senza prefisso &quot;0x&quot;, con o senza spazi; esattamente 32 cifre."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:167
 #: doc/man/mkvmerge.xml:889
 #: doc/man/mkvmerge.xml:903
 msgid "If SID starts with = then its rest is interpreted as the name of a Matroska file whose segment UID is read and used."
-msgstr ""
+msgstr "Se il SID comincia con = il resto è interpretato come nome per un file Matroska il cui UID del segmento è letto e usato."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:171
 msgid "Each file created contains one segment, and each segment has one segment UID. If more segment UIDs are specified than segments are created then the surplus UIDs are ignored. If fewer UIDs are specified than segments are created then random UIDs will be created for them."
-msgstr ""
+msgstr "Ogni file creato contiene un segmento e ogni segmento ha un UID. Se più UID sono specificati rispetto ai segmenti creati allora gli UID in più verranno ignorati. Se sono specificati meno UID rispetto ai segmenti verranno creati per loro UID casuali."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:181
 msgid "Chapter and tag handling (global options)"
-msgstr ""
+msgstr "Gestione capitoli e tag (opzioni globali)"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:185
@@ -1664,7 +1664,7 @@ msgstr "<option>--chapter-language</option> <parameter>codice-lingua</parameter>
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:188
 msgid "Sets the ISO 639-2 language code that is written for each chapter entry.  Defaults to '<literal>eng</literal>'.  See the section about <link linkend=\"mkvmerge.chapters\">chapters</link> below for details."
-msgstr ""
+msgstr "Imposta il codice lingua ISO 639-2 che è scritto in ogni capitolo. Come impostazione predefinita usa '<literal>eng</literal>'. Vedere la sezione riguardo a <link linkend=\"mkvmerge.chapters\">capitoli</link> qui sotto per dettagli."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:193
