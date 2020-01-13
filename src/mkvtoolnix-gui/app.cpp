@@ -482,6 +482,8 @@ App::handleCommandLineArgumentsLocally() {
 
   if (!p->m_cliParser->editHeaders().isEmpty())
     emit editingHeadersRequested(p->m_cliParser->editHeaders());
+
+  emit toolRequested(p->m_cliParser->requestedTool());
 }
 
 void

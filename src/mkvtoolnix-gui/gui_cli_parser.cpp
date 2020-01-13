@@ -7,8 +7,12 @@
 #include "common/command_line.h"
 #include "common/hacks.h"
 #include "common/qt.h"
+#include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/gui_cli_parser.h"
+#include "mkvtoolnix-gui/header_editor/tool.h"
+#include "mkvtoolnix-gui/info/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/merge/tool.h"
 
 namespace mtx::gui {
 
@@ -159,6 +163,11 @@ GuiCliParser::rebuildCommandLine()
   if (!p->editHeaders.isEmpty())
     args << Q("--edit-headers") << p->editHeaders;
 
+  args << (  p->toProcess == &p->runInfoOn    ? Q("--info")
+           : p->toProcess == &p->editHeaders  ? Q("--edit-headers")
+           : p->toProcess == &p->editChapters ? Q("--edit-chapters")
+           :                                    Q("--multiplex"));
+
   return args;
 }
 
@@ -200,6 +209,17 @@ QStringList const &
 GuiCliParser::editHeaders()
   const {
   return p_func()->editHeaders;
+}
+
+ToolBase *
+GuiCliParser::requestedTool()
+  const {
+  auto p = p_func();
+
+  return   p->toProcess == &p->runInfoOn    ? static_cast<ToolBase *>(MainWindow::infoTool())
+         : p->toProcess == &p->editHeaders  ? static_cast<ToolBase *>(MainWindow::headerEditorTool())
+         : p->toProcess == &p->editChapters ? static_cast<ToolBase *>(MainWindow::chapterEditorTool())
+         :                                    static_cast<ToolBase *>(MainWindow::mergeTool());
 }
 
 }

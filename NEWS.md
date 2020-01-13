@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: using one of the command line options `--info`,
+  `--edit-headers` or `--edit-chapters` will make the GUI select the
+  corresponding tool on startup even if no further file name is
+  given. Implements #2723.
+
 ## Bug fixes
 
 * mkvmerge: AVC/h.264 parser: the order of the NALUs before each key frame was

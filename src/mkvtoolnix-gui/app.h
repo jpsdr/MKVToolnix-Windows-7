@@ -80,6 +80,7 @@ signals:
   void editingHeadersRequested(QStringList const &fileNames);
   void openConfigFilesRequested(QStringList const &fileNames);
   void runningInfoOnRequested(QStringList const &fileNames);
+  void toolRequested(ToolBase *tool);
 
 public slots:
   void saveSettings() const;

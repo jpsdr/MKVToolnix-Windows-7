@@ -225,6 +225,8 @@ MainWindow::setupConnections() {
   connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::setToolSelectorVisibility);
   connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::reinitializeLanguageLists);
   connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::setupAppearance);
+
+  connect(app,                                    &App::toolRequested,                                    this,                 &MainWindow::switchToTool);
 }
 
 void

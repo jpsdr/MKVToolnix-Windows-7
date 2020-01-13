@@ -7,6 +7,8 @@
 
 namespace mtx::gui {
 
+class ToolBase;
+
 class GuiCliParserPrivate;
 class GuiCliParser: public mtx::cli::parser_c {
 protected:
@@ -30,6 +32,8 @@ public:
   QStringList const &editChapters() const;
   QStringList const &editHeaders() const;
   QStringList const &runInfoOn() const;
+
+  ToolBase *requestedTool() const;
 
 protected:
   void initParser();
