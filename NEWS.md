@@ -14,6 +14,9 @@
   haven't been seen so far) are found mid-stream, mkvmerge will prepend all
   following key frames with all current valid SPS & PPS NALUs (just like when
   SPS & PPS NALUs are overwritten mid-stream). Part of the fix of #2250.
+* mkvmerge: Ogg Opus reader: fixed the handling of Ogg Opus streams that
+  contain a just one Ogg page (`mkvmerge` aborted with an exception). Fixes
+  #2722.
 
 
 # Version 42.0.0 "Overtime" 2020-01-02

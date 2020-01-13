@@ -1246,7 +1246,7 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
     // discard padding present not just on the very last packet) can
     // be handled gracefully, too.
 
-    auto current_timestamp = m_previous_page_end_timestamp;
+    auto current_timestamp = m_previous_page_end_timestamp.value_or_zero();
 
     for (auto const &pair : packets) {
       pair.first->timestamp  = (current_timestamp + m_timestamp_shift).to_ns();
