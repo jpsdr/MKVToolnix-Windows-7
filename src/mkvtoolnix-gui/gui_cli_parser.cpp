@@ -97,7 +97,7 @@ GuiCliParser::setChaptersMode() {
 
 void
 GuiCliParser::setHeadersMode() {
-  auto         p = p_func();
+  auto p       = p_func();
   p->toProcess = &p->editHeaders;
 }
 
@@ -109,7 +109,7 @@ GuiCliParser::setInfoMode() {
 
 void
 GuiCliParser::setMergeMode() {
-  auto         p = p_func();
+  auto p       = p_func();
   p->toProcess = &p->addToMerge;
 }
 
