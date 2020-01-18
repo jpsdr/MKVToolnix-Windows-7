@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2019-12-31 22:43+0100\n"
-"PO-Revision-Date: 2019-11-27 04:09+0000\n"
+"PO-Revision-Date: 2020-01-15 22:21+0000\n"
 "Last-Translator: 夏勊倪 <chunkai.mao@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
 "Language: zh_TW\n"
@@ -397,14 +397,15 @@ msgstr ""
 "                           如果該布林值為 0 則強制不呈現。\n"
 
 #: src/merge/mkvmerge.cpp:376
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --deterministic <seed>   Enables the creation of byte-identical files\n"
 "                           if the same source files with the same options\n"
 "                           and the same seed are used.\n"
 msgstr ""
-"  --reduce-to-core <TID>   只保留支援 HD 擴充的核心音訊軌而不是同時\n"
-"                           保留擴充和核心音訊軌。\n"
+"  --deterministic <seed>   如果使用相同選項與種子(seed)\n"
+"                           並且來自相同的原始檔案，\n"
+"                           將啟用建立位元完全相同的檔案。\n"
 
 #: src/merge/mkvmerge.cpp:137
 #, no-c-format
@@ -3033,7 +3034,7 @@ msgstr "處理標籤和章節的動作"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1753
 #, no-c-format
 msgid "Add &Blu-ray cover images as attachments"
-msgstr ""
+msgstr "透過附件加入藍光封面圖片(&B)"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:329
 #, no-c-format
@@ -3058,7 +3059,7 @@ msgstr "加入所有檔案到目前合併設定"
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:156
 #, no-c-format
 msgid "Add as additional &parts to an existing source file"
-msgstr "加入現有輸入檔案的附加部分(&P)"
+msgstr "將附加部分加入現有輸入的檔案(&P)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:117
 #, no-c-format
@@ -3803,7 +3804,7 @@ msgstr "藍光播放列表檔案"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1752
 #, no-c-format
 msgid "Blu-rays"
-msgstr ""
+msgstr "藍光"
 
 #: src/common/property_element.cpp:188
 #, no-c-format
@@ -5443,9 +5444,9 @@ msgid "Don't show this message again."
 msgstr "不再顯示此訊息。"
 
 #: src/info/info_cli_parser.cpp:40
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Don't stop processing at the first cluster."
-msgstr "在第一個叢集停止"
+msgstr "不要在第一個叢集停止處理。"
 
 #: src/merge/mkvmerge.cpp:3046
 #, no-c-format
@@ -5670,11 +5671,9 @@ msgid "Enables splitting of the output into more than one file."
 msgstr "啟用將輸出檔案切割為多個檔案。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:63
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Enables the creation of byte-identical files if the same source files with the same options and the same seed are used."
-msgstr ""
-"  --reduce-to-core <TID>   只保留支援 HD 擴充的核心音訊軌而不是同時\n"
-"                           保留擴充和核心音訊軌。\n"
+msgstr "如果使用相同選項與種子(seed)並且來自相同的原始檔案，將啟用建立位元完全相同的檔案。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:200
 #, no-c-format
@@ -6745,7 +6744,7 @@ msgstr "如果勾選該選項，當新作業啟動時，將不會清除 \"作業
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:418
 #, no-c-format
 msgid "If enabled, the largest cover image of a Blu-ray will be added as an attachment when adding a Blu-ray playlist."
-msgstr ""
+msgstr "如果勾選該選項，加入藍光播放清單時，將透過附件加入最大的封面圖片。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:272
 #, no-c-format
@@ -7071,7 +7070,7 @@ msgstr "內部程式錯誤"
 #: src/input/unsupported_types_signature_prober.cpp:71
 #, no-c-format
 msgid "Internet Video Recording (IVR)"
-msgstr ""
+msgstr "網路視訊錄製 (IVR)"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1811
 #, no-c-format
@@ -7164,7 +7163,7 @@ msgstr "無效的索引選項指定，在 '--cues {0}' 中。\n"
 #: src/merge/mkvmerge.cpp:1282
 #, no-c-format
 msgid "Invalid cues option. No track ID specified in '--cues {0}'.\n"
-msgstr "無效的索引選項。未在 '--cues {0}' 指定軌道 ID。\n"
+msgstr "無效的 cues 索引選項。未在 '--cues {0}' 指定軌道 ID。\n"
 
 #: src/common/xml/ebml_converter.cpp:285
 #, no-c-format
@@ -9067,9 +9066,9 @@ msgid "Playlist items:"
 msgstr "播放清單項目:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:201
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Playlists & Blu-rays"
-msgstr "播放清單"
+msgstr "播放清單與藍光"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:58
 #, no-c-format
@@ -9235,7 +9234,7 @@ msgstr "僅適用於特定外觀比例的私有資料。"
 #: src/output/p_prores.h:28
 #, no-c-format
 msgid "ProRes video"
-msgstr ""
+msgstr "ProRes 視訊"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1690
 #, no-c-format
@@ -10354,7 +10353,7 @@ msgstr "顯示所有元件"
 #: src/info/info_cli_parser.cpp:37
 #, no-c-format
 msgid "Show all sub-elements (including cues & seek heads entries) and don't stop at the first cluster."
-msgstr ""
+msgstr "顯示所有子元素（包含 cue 與 定位表頭）並且不在第一個叢集停止。"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:169
 #, no-c-format
@@ -10382,14 +10381,14 @@ msgid "Show the first 16 bytes of each frame as a hex dump."
 msgstr "以十六進位轉儲形式顯示每影格的前 16 位元組。"
 
 #: src/info/info_cli_parser.cpp:41
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Show the position of each element in decimal."
-msgstr "顯示每個元件包含表頭的大小。"
+msgstr "在十進位中顯示每個元素的位置。"
 
 #: src/info/info_cli_parser.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Show the position of each element in hexadecimal."
-msgstr "顯示每個元件包含表頭的大小。"
+msgstr "顯示十六進位中每個元素的位置。"
 
 #: src/info/info_cli_parser.cpp:47
 #, no-c-format
