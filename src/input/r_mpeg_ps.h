@@ -194,7 +194,7 @@ private:
   int64_t global_timestamp_offset;
 
   std::map<int, int> id2idx;
-  std::map<int, bool> blacklisted_ids;
+  std::map<int, bool> m_blocked_ids;
 
   std::map<int, int> es_map;
   int version{};

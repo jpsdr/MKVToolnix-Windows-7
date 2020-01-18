@@ -660,8 +660,8 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
   }
 
   if ((MPV_PARSER_STATE_FRAME != state) || !found_i_frame || !m2v_parser->GetMPEGVersion() || !seq_hdr.width || !seq_hdr.height) {
-    mxdebug_if(m_debug_headers, fmt::format("MPEG PS: blacklisting id 0x{0:02x}({1:02x}) for supposed type MPEG1/2\n", id.id, id.sub_id));
-    blacklisted_ids[id.idx()] = true;
+    mxdebug_if(m_debug_headers, fmt::format("MPEG PS: blocking id 0x{0:02x}({1:02x}) for supposed type MPEG1/2\n", id.id, id.sub_id));
+    m_blocked_ids[id.idx()] = true;
     throw false;
   }
 
@@ -956,7 +956,7 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
                            id, format_timestamp(packet.pts()), packet.pts() * 90 / 1000000ll,
                            packet.has_dts() ? fmt::format("{0} [{1}]", format_timestamp(packet.dts()), packet.dts() * 90 / 1000000ll) : "none"s));
 
-    if (mtx::includes(blacklisted_ids, id.idx()))
+    if (mtx::includes(m_blocked_ids, id.idx()))
       return;
 
     int64_t timestamp_for_offset = packet.pts();
@@ -1082,7 +1082,7 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
     tracks.push_back(track);
 
   } catch (bool) {
-    blacklisted_ids[id.idx()] = true;
+    m_blocked_ids[id.idx()] = true;
 
   } catch (...) {
     mxerror_fn(m_ti.m_fname, Y("Error parsing a MPEG PS packet during the header reading phase. This stream seems to be badly damaged.\n"));
