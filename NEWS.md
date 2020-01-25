@@ -6,6 +6,9 @@
   `--edit-headers` or `--edit-chapters` will make the GUI select the
   corresponding tool on startup even if no further file name is
   given. Implements #2723.
+* MKVToolNix GUI: multiplexer: added a setting in the preferences for changing
+  the location of the MediaInfo executable for when the user accidentally
+  selected the wrong one.
 
 ## Bug fixes
 

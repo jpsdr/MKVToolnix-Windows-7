@@ -75,6 +75,8 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupCommonCharacterSets();
 
   // Merge page
+  if (!m_cfg.m_mediaInfoExe.isEmpty())
+    ui->leMMediaInfoExe->setText(QDir::toNativeSeparators(m_cfg.m_mediaInfoExe));
   ui->cbMAutoSetFileTitle->setChecked(m_cfg.m_autoSetFileTitle);
   ui->cbMAutoClearFileTitle->setChecked(m_cfg.m_autoClearFileTitle);
   ui->cbMSetAudioDelayFromFileName->setChecked(m_cfg.m_setAudioDelayFromFileName);
@@ -483,6 +485,7 @@ void
 PreferencesDialog::setupConnections() {
   connect(ui->pbMEditDefaultAdditionalCommandLineOptions, &QPushButton::clicked,                                         this,                                 &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
 
+  connect(ui->pbMBrowseMediaInfoExe,                      &QPushButton::clicked,                                         this,                                 &PreferencesDialog::browseMediaInfoExe);
   connect(ui->cbMAutoSetOutputFileName,                   &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableOutputFileNameControls);
   connect(ui->rbMAutoSetSameDirectory,                    &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
   connect(ui->rbMAutoSetRelativeDirectory,                &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
@@ -826,6 +829,7 @@ PreferencesDialog::save() {
   m_cfg.m_dropLastChapterFromBlurayPlaylist             = ui->cbCEDropLastFromBlurayPlaylist->isChecked();
 
   // Merge page:
+  m_cfg.m_mediaInfoExe                                  = ui->leMMediaInfoExe->text();
   m_cfg.m_autoSetFileTitle                              = ui->cbMAutoSetFileTitle->isChecked();
   m_cfg.m_autoClearFileTitle                            = ui->cbMAutoClearFileTitle->isChecked();
   m_cfg.m_setAudioDelayFromFileName                     = ui->cbMSetAudioDelayFromFileName->isChecked();
@@ -950,6 +954,20 @@ PreferencesDialog::browseFixedOutputDirectory() {
   auto dir = Util::getExistingDirectory(this, QY("Select destination directory"), ui->cbMAutoSetFixedDirectory->currentText());
   if (!dir.isEmpty())
     ui->cbMAutoSetFixedDirectory->setCurrentText(dir);
+}
+
+void
+PreferencesDialog::browseMediaInfoExe() {
+  auto filters = QStringList{};
+
+#if defined(SYS_WINDOWS)
+  filters << QY("Executable files") + Q(" (*.exe)");
+#endif
+  filters << QY("All files") + Q(" (*)");
+
+  auto fileName = Util::getOpenFileName(this, QY("Select executable"), ui->leMMediaInfoExe->text(), filters.join(Q(";;")));
+  if (!fileName.isEmpty())
+    ui->leMMediaInfoExe->setText(fileName);
 }
 
 void

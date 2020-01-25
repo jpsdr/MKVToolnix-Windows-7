@@ -58,6 +58,7 @@ public:
 public slots:
   void editDefaultAdditionalCommandLineOptions();
   void enableOutputFileNameControls();
+  void browseMediaInfoExe();
   void browseFixedOutputDirectory();
   void pageSelectionChanged(QModelIndex const &current);
   void addProgramToExecute();

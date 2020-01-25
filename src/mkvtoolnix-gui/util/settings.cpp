@@ -357,6 +357,7 @@ Settings::load() {
   m_ceTextFileCharacterSet             = reg.value(s_valCeTextFileCharacterSet).toString();
 
   m_mediaInfoExe                       = reg.value(s_valMediaInfoExe, Q("mediainfo-gui")).toString();
+  m_mediaInfoExe                       = determineMediaInfoExePath();
 
 #if defined(HAVE_LIBINTL_H)
   m_uiLocale                           = reg.value(s_valUiLocale).toString();
@@ -966,6 +967,24 @@ Settings::runOncePerVersion(QString const &topic,
   reg->setValue(key, Q(currentVersionNumber.to_string()));
 
   worker();
+}
+
+QString
+Settings::determineMediaInfoExePath() {
+  auto &cfg          = get();
+  auto potentialExes = QStringList{exeWithPath(cfg.m_mediaInfoExe.isEmpty() ? Q("mediainfo-gui") : cfg.m_mediaInfoExe)};
+
+#if defined(SYS_WINDOWS)
+  potentialExes << QSettings{Q("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\MediaInfo.exe"), QSettings::NativeFormat}.value("Default").toString();
+#endif
+
+  potentialExes << exeWithPath(Q("mediainfo"));
+
+  for (auto const &exe : potentialExes)
+    if (!exe.isEmpty() && QFileInfo{exe}.exists())
+      return QDir::toNativeSeparators(exe);
+
+  return {};
 }
 
 }

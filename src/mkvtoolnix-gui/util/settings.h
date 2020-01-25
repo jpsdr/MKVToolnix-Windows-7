@@ -250,6 +250,7 @@ public:
   static void runOncePerVersion(QString const &topic, std::function<void()> worker);
 
   static QString exeWithPath(QString const &exe);
+  static QString determineMediaInfoExePath();
 
   static void migrateFromRegistry();
   static void convertOldSettings();

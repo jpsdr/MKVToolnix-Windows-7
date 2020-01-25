@@ -1993,19 +1993,10 @@ Tab::onOpenTracksInMediaInfo() {
 QString
 Tab::mediaInfoLocation() {
   auto &cfg = Util::Settings::get();
-  auto exe  = cfg.m_mediaInfoExe.isEmpty() ? Q("mediainfo-gui") : cfg.m_mediaInfoExe;
-  exe       = Util::Settings::exeWithPath(exe);
+  auto exe  = Util::Settings::determineMediaInfoExePath();
 
   if (!exe.isEmpty() && QFileInfo{exe}.exists())
     return exe;
-
-  exe = Util::Settings::exeWithPath(Q("mediainfo"));
-
-#if defined(SYS_WINDOWS)
-  exe = QSettings{Q("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\MediaInfo.exe"), QSettings::NativeFormat}.value("Default").toString();
-  if (!exe.isEmpty() && QFileInfo{exe}.exists())
-    return exe;
-#endif
 
   ExecutableLocationDialog dlg{this};
   auto result = dlg

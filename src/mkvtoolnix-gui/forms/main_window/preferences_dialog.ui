@@ -345,23 +345,23 @@
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
             <layout class="QGridLayout" name="gridLayout_2">
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_13">
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_16">
                <property name="text">
-                <string>When &amp;dropping files:</string>
+                <string>Probe &amp;range percentage:</string>
                </property>
                <property name="buddy">
-                <cstring>cbMAddingAppendingFilesPolicy</cstring>
+                <cstring>cbMProbeRangePercentage</cstring>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="cbMAddingAppendingFilesPolicy">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_19">
+               <property name="text">
+                <string>Warn about missing &amp;audio tracks:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbMWarnMissingAudioTrack</cstring>
                </property>
               </widget>
              </item>
@@ -395,6 +395,19 @@
                </item>
               </widget>
              </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>When &amp;dropping files:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbMAddingAppendingFilesPolicy</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="cbMWarnMissingAudioTrack"/>
+             </item>
              <item row="3" column="0">
               <widget class="QLabel" name="label_5">
                <property name="text">
@@ -405,13 +418,23 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_16">
+             <item row="3" column="1">
+              <widget class="QComboBox" name="cbMProcessPriority">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_6">
                <property name="text">
-                <string>Probe &amp;range percentage:</string>
+                <string>Clearing settings auto&amp;matically:</string>
                </property>
                <property name="buddy">
-                <cstring>cbMProbeRangePercentage</cstring>
+                <cstring>cbMClearMergeSettings</cstring>
                </property>
               </widget>
              </item>
@@ -428,18 +451,8 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_6">
-               <property name="text">
-                <string>Clearing settings auto&amp;matically:</string>
-               </property>
-               <property name="buddy">
-                <cstring>cbMClearMergeSettings</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QComboBox" name="cbMProcessPriority">
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cbMAddingAppendingFilesPolicy">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -448,18 +461,33 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_19">
+             <item row="5" column="0">
+              <widget class="QLabel" name="label_20">
                <property name="text">
-                <string>Warn about missing &amp;audio tracks:</string>
+                <string>Location of MediaInfo &amp;GUI:</string>
                </property>
                <property name="buddy">
-                <cstring>cbMWarnMissingAudioTrack</cstring>
+                <cstring>leMMediaInfoExe</cstring>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
-              <widget class="QComboBox" name="cbMWarnMissingAudioTrack"/>
+             <item row="5" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_16">
+               <item>
+                <widget class="QLineEdit" name="leMMediaInfoExe"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbMBrowseMediaInfoExe">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="../../qt_resources.qrc">
+                   <normaloff>:/icons/16x16/document-open-folder.png</normaloff>:/icons/16x16/document-open-folder.png</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -2078,6 +2106,8 @@
   <tabstop>cbOftenUsedLanguagesOnly</tabstop>
   <tabstop>cbMClearMergeSettings</tabstop>
   <tabstop>cbMAddingAppendingFilesPolicy</tabstop>
+  <tabstop>leMMediaInfoExe</tabstop>
+  <tabstop>pbMBrowseMediaInfoExe</tabstop>
   <tabstop>cbMWarnMissingAudioTrack</tabstop>
   <tabstop>cbMProcessPriority</tabstop>
   <tabstop>cbMProbeRangePercentage</tabstop>
