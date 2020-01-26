@@ -27,6 +27,8 @@
 * mkvmerge: Ogg Opus reader: fixed the handling of Ogg Opus streams that
   contain a just one Ogg page (`mkvmerge` aborted with an exception). Fixes
   #2722.
+* mkvmerge: MPEG TS reader: fixed detection of MPEG-1/2 video tracks
+  consisting of very few frames. Fixes #2732.
 
 
 # Version 42.0.0 "Overtime" 2020-01-02

@@ -198,7 +198,7 @@ track_c::clear_pes_payload() {
 }
 
 int
-track_c::new_stream_v_mpeg_1_2() {
+track_c::new_stream_v_mpeg_1_2(bool end_of_detection) {
   if (!m_m2v_parser) {
     m_m2v_parser = std::shared_ptr<M2VParser>(new M2VParser);
     m_m2v_parser->SetProbeMode();
@@ -206,6 +206,8 @@ track_c::new_stream_v_mpeg_1_2() {
   }
 
   m_m2v_parser->WriteData(pes_payload_read->get_buffer(), pes_payload_read->get_size());
+  if (end_of_detection)
+    m_m2v_parser->SetEOS();
 
   int state = m_m2v_parser->GetState();
   if (state != MPV_PARSER_STATE_FRAME) {
@@ -1139,7 +1141,7 @@ reader_c::read_headers_for_file(std::size_t file_num) {
   // content to be found during probing will be set to OK, too.
   for (auto const &track : m_tracks) {
     track->clear_pes_payload();
-    probe_packet_complete(*track);
+    probe_packet_complete(*track, true);
   }
 
   brng::copy(m_tracks, std::back_inserter(m_all_probed_tracks));
@@ -2064,7 +2066,8 @@ reader_c::determine_track_type_by_pes_content(track_c &track) {
 }
 
 int
-reader_c::determine_track_parameters(track_c &track) {
+reader_c::determine_track_parameters(track_c &track,
+                                     bool end_of_detection) {
   if (track.type == pid_type_e::pat)
     return parse_pat(track) ? 0 : -1;
 
@@ -2079,7 +2082,7 @@ reader_c::determine_track_parameters(track_c &track) {
 
   if (track.type == pid_type_e::video) {
     if (track.codec.is(codec_c::type_e::V_MPEG12))
-      return track.new_stream_v_mpeg_1_2();
+      return track.new_stream_v_mpeg_1_2(end_of_detection);
     else if (track.codec.is(codec_c::type_e::V_MPEG4_P10))
       return track.new_stream_v_avc();
     else if (track.codec.is(codec_c::type_e::V_MPEGH_P2))
@@ -2116,7 +2119,8 @@ reader_c::determine_track_parameters(track_c &track) {
 }
 
 void
-reader_c::probe_packet_complete(track_c &track) {
+reader_c::probe_packet_complete(track_c &track,
+                                bool end_of_detection) {
   if (track.probed_ok) {
     track.clear_pes_payload();
     return;
@@ -2125,7 +2129,7 @@ reader_c::probe_packet_complete(track_c &track) {
   int result = -1;
 
   try {
-    result = determine_track_parameters(track);
+    result = determine_track_parameters(track, end_of_detection);
   } catch (...) {
   }
 

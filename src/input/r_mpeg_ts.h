@@ -349,7 +349,7 @@ public:
   bool is_pes_payload_size_unbounded() const;
   std::size_t remaining_payload_size_to_read() const;
 
-  int new_stream_v_mpeg_1_2();
+  int new_stream_v_mpeg_1_2(bool end_of_detection);
   int new_stream_v_avc();
   int new_stream_v_hevc();
   int new_stream_v_vc1();
@@ -489,8 +489,8 @@ private:
   bool parse_sdt(track_c &track);
   void parse_sdt_service_desciptor(mtx::bits::reader_c &r, uint16_t program_number);
   void parse_pes(track_c &track);
-  void probe_packet_complete(track_c &track);
-  int determine_track_parameters(track_c &track);
+  void probe_packet_complete(track_c &track, bool end_of_detection = false);
+  int determine_track_parameters(track_c &track, bool end_of_detection);
   void determine_track_type_by_pes_content(track_c &track);
 
   file_status_e finish();
