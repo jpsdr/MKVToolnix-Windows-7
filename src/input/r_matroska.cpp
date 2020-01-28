@@ -1210,19 +1210,21 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
   if (!found_in(*l1, element_found))
     delete element_found;
 
-  KaxTrackEntry *ktentry = FindChild<KaxTrackEntry>(*l1);
-  while (ktentry) {
+  for (auto *ktentry = FindChild<KaxTrackEntry>(*l1); ktentry; ktentry = FindNextChild(static_cast<EbmlMaster &>(*l1), *ktentry)) {
     // We actually found a track entry :) We're happy now.
-    auto track = std::make_shared<kax_track_t>();
+    auto track  = std::make_shared<kax_track_t>();
     track->tnum = m_tracks.size();
 
     auto ktnum = FindChild<KaxTrackNumber>(ktentry);
-    if (!ktnum)
-      mxerror(Y("matroska_reader: A track is missing its track number.\n"));
+    if (!ktnum) {
+      mxdebug_if(m_debug_track_headers, fmt::format("matroska_reader: track ID {} is missing its track number.\n", track->tnum));
+      continue;
+    }
 
     track->track_number = ktnum->GetValue();
     if (find_track_by_num(track->track_number, track.get())) {
-      ktentry = FindNextChild(static_cast<EbmlMaster &>(*l1), *ktentry);
+      mxdebug_if(m_debug_track_headers, fmt::format("matroska_reader: track number {} is already in use.\n", track->track_number));
+      m_known_bad_track_numbers[track->track_number] = true;
       continue;
     }
 
@@ -1235,8 +1237,12 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
       track->track_uid = ktuid->GetValue();
 
     auto kttype = FindChild<KaxTrackType>(ktentry);
-    if (!kttype)
-      mxerror(Y("matroska_reader: Track type was not found.\n"));
+    if (!kttype) {
+      mxdebug_if(m_debug_track_headers, fmt::format("matroska_reader: track number {} is missing the track type.\n", track->track_number));
+      m_known_bad_track_numbers[track->track_number] = true;
+      continue;
+    }
+
     unsigned char track_type = kttype->GetValue();
     track->type              = track_type == track_audio    ? 'a'
                              : track_type == track_video    ? 'v'
@@ -1252,9 +1258,8 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
       read_headers_track_video(track.get(), ktvideo);
 
     auto kcodecpriv = FindChild<KaxCodecPrivate>(ktentry);
-    if (kcodecpriv) {
+    if (kcodecpriv)
       track->private_data = memory_c::clone(kcodecpriv->GetBuffer(), kcodecpriv->GetSize());
-    }
 
     track->codec_id         = FindChildValue<KaxCodecID>(ktentry);
     track->codec_name       = to_utf8(FindChildValue<KaxCodecName>(ktentry));
@@ -1275,8 +1280,11 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     if (kax_codec_delay)
       track->codec_delay   = timestamp_c::ns(kax_codec_delay->GetValue());
 
-    if (track->codec_id.empty())
-      mxerror(Y("matroska_reader: The CodecID is missing.\n"));
+    if (track->codec_id.empty()) {
+      mxdebug_if(m_debug_track_headers, fmt::format("matroska_reader: track number {} is missing the CodecID.\n", track->track_number));
+      m_known_bad_track_numbers[track->track_number] = true;
+      continue;
+    }
 
     if (!track->language.empty()) {
       int index = map_to_iso639_2_code(track->language.c_str());
@@ -1302,9 +1310,8 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
       track->v_frate = 1000000000.0 / track->default_duration;
 
     track->content_decoder.initialize(*ktentry);
-    m_tracks.push_back(track);
 
-    ktentry = FindNextChild(static_cast<EbmlMaster &>(*l1), *ktentry);
+    m_tracks.push_back(track);
   } // while (ktentry)
 
   io->restore_pos();
@@ -2285,9 +2292,10 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
   auto block_timestamp = mtx::math::to_signed(block_simple->GlobalTimecode()) - m_global_timestamp_offset;
 
   if (!block_track) {
-    mxwarn_fn(m_ti.m_fname,
-              fmt::format(Y("A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. "
-                            "The block will be skipped.\n"), format_timestamp(block_timestamp), block_simple->TrackNum()));
+    if (!m_known_bad_track_numbers[block_simple->TrackNum()])
+      mxwarn_fn(m_ti.m_fname,
+                fmt::format(Y("A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. "
+                              "The block will be skipped.\n"), format_timestamp(block_timestamp), block_simple->TrackNum()));
     return;
   }
 
@@ -2393,9 +2401,10 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
   auto block_timestamp = mtx::math::to_signed(block->GlobalTimecode()) - m_global_timestamp_offset;
 
   if (!block_track) {
-    mxwarn_fn(m_ti.m_fname,
-              fmt::format(Y("A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. "
-                            "The block will be skipped.\n"), format_timestamp(block_timestamp), block->TrackNum()));
+    if (!m_known_bad_track_numbers[block->TrackNum()])
+      mxwarn_fn(m_ti.m_fname,
+                fmt::format(Y("A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. "
+                              "The block will be skipped.\n"), format_timestamp(block_timestamp), block->TrackNum()));
     return;
   }
 

@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: Matroska reader: when encountering certain errors in the track
+  headers such as the codec ID not being present mkvmerge will simply skip
+  those tracks instead of exiting with an error. Fixes #2737.
+
+
 # Version 43.0.0 "The Quartermaster" 2020-01-26
 
 ## New features and enhancements

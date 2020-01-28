@@ -201,6 +201,7 @@ private:
   std::vector<kax_track_cptr> m_tracks;
   std::map<generic_packetizer_c *, kax_track_t *> m_ptzr_to_track_map;
   std::unordered_map<uint64_t, timestamp_c> m_minimum_timestamps_by_track_number;
+  std::unordered_map<uint64_t, bool> m_known_bad_track_numbers;
 
   int64_t m_tc_scale;
 
@@ -228,7 +229,7 @@ private:
 
   bool m_opus_experimental_warning_shown{}, m_regenerate_chapter_uids{};
 
-  debugging_option_c m_debug_minimum_timestamp{"kax_reader|kax_reader_minimum_timestamp"};
+  debugging_option_c m_debug_minimum_timestamp{"kax_reader|kax_reader_minimum_timestamp"}, m_debug_track_headers{"kax_reader|kax_reader_track_headers"};
 
 public:
   kax_reader_c();
