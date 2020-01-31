@@ -19,12 +19,12 @@ namespace mtx::hdmv_pgs {
 
 char const *
 name_for_type(uint8_t type) {
-  return type == PALETTE_DEFINITION_SEGMENT       ? "Palette Definition Segment"
-       : type == OBJECT_DEFINITION_SEGMENT        ? "Object Definition Segment"
-       : type == PRESENTATION_COMPOSITION_SEGMENT ? "Presentation Composition Segment"
-       : type == WINDOW_DEFINITION_SEGMENT        ? "Window Definition Segment"
-       : type == INTERACTIVE_COMPOSITION_SEGMENT  ? "Interactive Composition Segment"
-       : type == END_OF_DISPLAY_SEGMENT           ? "End Of Display Segment"
+  return type == PALETTE_DEFINITION_SEGMENT       ? "Palette Definition"
+       : type == OBJECT_DEFINITION_SEGMENT        ? "Object Definition"
+       : type == PRESENTATION_COMPOSITION_SEGMENT ? "Presentation Composition"
+       : type == WINDOW_DEFINITION_SEGMENT        ? "Window Definition"
+       : type == INTERACTIVE_COMPOSITION_SEGMENT  ? "Interactive Composition"
+       : type == END_OF_DISPLAY_SEGMENT           ? "End Of Display"
        :                                            "reserved";
 }
 
