@@ -1217,94 +1217,19 @@ namespace :apps do
 end
 
 #
-# tools: ac3parser
+# tools
 #
-Application.new("src/tools/ac3parser").
-  description("Build the ac3parser executable").
-  aliases("tools:ac3parser").
-  sources("src/tools/ac3parser.cpp").
-  libraries($common_libs).
-  create
-
-#
-# tools: base64tool
-#
-Application.new("src/tools/base64tool").
-  description("Build the base64tool executable").
-  aliases("tools:base64tool").
-  sources("src/tools/base64tool.cpp").
-  libraries($common_libs).
-  create
-
-#
-# tools: checksum
-#
-Application.new("src/tools/checksum").
-  description("Build the checksum executable").
-  aliases("tools:checksum").
-  sources("src/tools/checksum.cpp").
-  libraries($common_libs).
-  create
-
-#
-# tools: diracparser
-#
-Application.new("src/tools/diracparser").
-  description("Build the diracparser executable").
-  aliases("tools:diracparser").
-  sources("src/tools/diracparser.cpp").
-  libraries($common_libs).
-  create
-
-#
-# tools: ebml_validator
-#
-Application.new("src/tools/ebml_validator").
-  description("Build the ebml_validator executable").
-  aliases("tools:ebml_validator").
-  sources("src/tools/ebml_validator.cpp", "src/tools/element_info.cpp").
-  libraries($common_libs).
-  create
-
-#
-# tools: hevc_dump
-#
-Application.new("src/tools/hevc_dump").
-  description("Build the hevc_dump executable").
-  aliases("tools:hevc_dump").
-  sources("src/tools/hevc_dump.cpp").
-  libraries($common_libs).
-  create
-
-#
-# tools: hevcs_dump
-#
-Application.new("src/tools/hevcc_dump").
-  description("Build the hevcc_dump executable").
-  aliases("tools:hevcc_dump").
-  sources("src/tools/hevcc_dump.cpp").
-  libraries($common_libs).
-  create
-
-#
-# tools: bluray_dump
-#
-Application.new("src/tools/bluray_dump").
-  description("Build the bluray_dump executable").
-  aliases("tools:bluray_dump").
-  sources("src/tools/bluray_dump.cpp").
-  libraries($common_libs).
-  create
-
-#
-# tools: vc1parser
-#
-Application.new("src/tools/vc1parser").
-  description("Build the vc1parser executable").
-  aliases("tools:vc1parser").
-  sources("src/tools/vc1parser.cpp").
-  libraries($common_libs).
-  create
+$tool_sources = {
+  "ebml_validator" => ["ebml_validator", "element_info"],
+}
+$tools.each do |tool|
+  Application.new("src/tools/#{tool}").
+    description("Build the #{tool} executable").
+    aliases("tools:#{tool}").
+    sources(* ($tool_sources[tool] || [tool]).map { |src| "src/tools/#{src}.cpp" }).
+    libraries($common_libs).
+    create
+end
 
 # Engage pch system
 PCH.engage(&cxx_compiler)
