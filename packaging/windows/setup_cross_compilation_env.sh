@@ -50,7 +50,8 @@ function update_mingw_cross_env {
   cd ${INSTALL_DIR}
   cat > settings.mk <<EOF
 MXE_TARGETS = ${HOST}
-MXE_PLUGIN_DIRS += plugins/gcc7
+MXE_USE_CCACHE =
+MXE_PLUGIN_DIRS += plugins/gcc9
 JOBS = ${PARALLEL}
 
 MKVTOOLNIX_DEPENDENCIES=gettext libiconv zlib boost file flac lzo ogg pthreads vorbis cmark
