@@ -363,8 +363,13 @@ Tab::findExistingDestination()
   auto nativeDestination = QDir::toNativeSeparators(m_config.m_destination);
   QFileInfo destinationInfo{nativeDestination};
 
-  if ((MuxConfig::DoNotSplit == m_config.m_splitMode) && !m_config.m_additionalOptions.contains(QRegularExpression{Q("--split(?:[^a-z-]|$)")}))
-    return destinationInfo.exists() ? nativeDestination : QString{};
+  if (destinationInfo.exists())
+    return nativeDestination;
+
+  auto splitting = (MuxConfig::DoNotSplit != m_config.m_splitMode)
+                || m_config.m_additionalOptions.contains(QRegularExpression{Q("--split(?:[^a-z-]|$)")});
+  if (!splitting)
+    return {};
 
 #if defined(SYS_WINDOWS)
   auto rePatternOptions     = QRegularExpression::CaseInsensitiveOption;
@@ -386,7 +391,11 @@ Tab::findExistingDestination()
 
 bool
 Tab::checkIfOverwritingIsOK() {
-  return MainWindow::jobTool()->checkIfOverwritingIsOK(m_config.m_destination, findExistingDestination());
+  auto existingDestination = findExistingDestination();
+  if (existingDestination.isEmpty())
+    return true;
+
+  return MainWindow::jobTool()->checkIfOverwritingIsOK(m_config.m_destination, existingDestination);
 }
 
 bool
