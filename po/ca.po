@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-01-25 19:43+0100\n"
+"POT-Creation-Date: 2020-03-08 16:16+0100\n"
 "PO-Revision-Date: 2020-01-27 15:08+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1679,7 +1679,7 @@ msgstr "&Copia la línia d'ordres al porta-retalls"
 msgid "&Country:"
 msgstr "&País:"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:419
+#: src/mkvtoolnix-gui/merge/tab.cpp:428
 #, no-c-format
 msgid "&Create file without audio track"
 msgstr "&Crea un fitxer sense pista d'àudio"
@@ -1982,8 +1982,7 @@ msgstr "&Ordenat"
 msgid "&Output"
 msgstr "S&ortida"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:585
-#: src/mkvtoolnix-gui/jobs/tool.cpp:610
+#: src/mkvtoolnix-gui/jobs/tool.cpp:611
 #, no-c-format
 msgid "&Overwrite file"
 msgstr "S&obreescriu el fitxer"
@@ -2678,7 +2677,7 @@ msgstr "«{0}» pista {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "«{0}»: està processant els següents fitxers com a bons: {1}\n"
 
-#: src/input/r_matroska.cpp:1846
+#: src/input/r_matroska.cpp:1853
 #, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "«{0}»: Esteu tornant a copiar una pista Opus que fou escrita en el mode experimental. La pista resultant s'escriurà seguint el mode final, però no es podrà recuperar el detall a partir d'una pista escrita en el mode experimental: el tall final. Això significa que un descodificador podria generar unes quantes mostres més del que tenia inicialment previst. Si és possible, hauríeu de tornar a multiplexar partint del fitxer Opus original.\n"
@@ -2843,8 +2842,8 @@ msgstr "<Fitxer sense desar>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> no és un element fill vàlid de <{1}> a la posició {2}."
 
-#: src/input/r_matroska.cpp:2289
-#: src/input/r_matroska.cpp:2397
+#: src/input/r_matroska.cpp:2297
+#: src/input/r_matroska.cpp:2406
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "S'ha trobat un bloc a la marca de temps {0} pel número de pista {1}. No obstant això, no s'ha trobat cap capçalera per aquest número de pista. El bloc serà omès.\n"
@@ -2891,7 +2890,7 @@ msgstr "Una cadena llegible especificant el còdec."
 msgid "A human-readable track name."
 msgstr "Un nom de pista llegible."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:607
+#: src/mkvtoolnix-gui/jobs/tool.cpp:608
 #, no-c-format
 msgid "A job creating the file '%1' is already in the job queue."
 msgstr "Una tasca crearà el fitxer «%1» que ja es troba a la cua de treball."
@@ -4001,6 +4000,11 @@ msgstr "C&onfiguració activa"
 msgid "C&onstrict or expand timestamps"
 msgstr "Redueix &o amplia les marques de temps"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:586
+#, no-c-format
+msgid "C&ontinue"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:125
 #: src/mkvtoolnix-gui/forms/util/text_display_dialog.h:81
 #, no-c-format
@@ -4048,11 +4052,11 @@ msgstr "Calcula les estadístiques per a totes les pistes i afegeix etiquetes no
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:267
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:874
 #: src/mkvtoolnix-gui/jobs/tool.cpp:517
-#: src/mkvtoolnix-gui/jobs/tool.cpp:586
-#: src/mkvtoolnix-gui/jobs/tool.cpp:611
+#: src/mkvtoolnix-gui/jobs/tool.cpp:587
+#: src/mkvtoolnix-gui/jobs/tool.cpp:612
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:433
 #: src/mkvtoolnix-gui/merge/input.cpp:1329
-#: src/mkvtoolnix-gui/merge/tab.cpp:420
+#: src/mkvtoolnix-gui/merge/tab.cpp:429
 #: src/mkvtoolnix-gui/merge/tool.cpp:219
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:197
 #, no-c-format
@@ -4789,7 +4793,7 @@ msgstr "Crea un fitxer conforme amb WebM."
 msgid "Create a new one or open an existing one via the \"multiplexer\" menu, the buttons below or drag & drop one here."
 msgstr "Creeu-ne una de nova o obriu-ne una ja existent a través del menú «Multiplexador», els botons de sota o arrossegueu i deixeu-ne una aquí."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:415
+#: src/mkvtoolnix-gui/merge/tab.cpp:424
 #, no-c-format
 msgid "Create file without audio track"
 msgstr "Crea un fitxer sense pista d'àudio"
@@ -5505,13 +5509,17 @@ msgstr "Esteu segur que voleu interrompre aquesta tasca?"
 msgid "Do you really want to add '%1' as another attachment?"
 msgstr "Esteu segur que voleu afegir «%1» com un altre adjunt?"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:418
+#: src/mkvtoolnix-gui/jobs/tool.cpp:585
+#, fuzzy, no-c-format
+msgid "Do you want to continue and risk overwriting the file?"
+msgstr "Esteu segur que voleu sobreescriure el fitxer?"
+
+#: src/mkvtoolnix-gui/merge/tab.cpp:427
 #, no-c-format
 msgid "Do you want to continue?"
 msgstr "Voleu continuar?"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:584
-#: src/mkvtoolnix-gui/jobs/tool.cpp:609
+#: src/mkvtoolnix-gui/jobs/tool.cpp:610
 #, no-c-format
 msgid "Do you want to overwrite the file?"
 msgstr "Esteu segur que voleu sobreescriure el fitxer?"
@@ -5828,7 +5836,7 @@ msgstr "Nom en l'idioma anglès"
 msgid "Ensure the file name is &unique"
 msgstr "Assegura que el nom de fitxer és úni&c"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:450
+#: src/mkvtoolnix-gui/merge/tab.cpp:459
 #, no-c-format
 msgid "Enter job description"
 msgstr "Introduïu la descripció de la tasca"
@@ -7034,7 +7042,7 @@ msgstr "Si les pistes són conegudes per estar presents, però no s'han trobat, 
 msgid "If two or more timestamps are used then you have to separate them with commas."
 msgstr "Si s'usen dos o més codis de temps, llavors els haureu de separar amb comes."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:608
+#: src/mkvtoolnix-gui/jobs/tool.cpp:609
 #, no-c-format
 msgid "If you add another job with the same destination file then file created before will be overwritten."
 msgstr "Si afegiu una altra tasca amb el mateix fitxer de destinació, llavors el fitxer creat abans serà sobreescrit."
@@ -7963,13 +7971,13 @@ msgstr "Llista de reproducció Blu-ray en MPLS"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Converteix aquesta pista en la predefinida per a cadascun dels seus tipus (àudio, vídeo, subtítols)."
 
-#: src/input/r_matroska.cpp:1718
-#: src/input/r_matroska.cpp:1735
+#: src/input/r_matroska.cpp:1725
+#: src/input/r_matroska.cpp:1742
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "S'han trobat dades d'inicialització del còdec AAC mal formades.\n"
 
-#: src/input/r_matroska.cpp:1728
+#: src/input/r_matroska.cpp:1735
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "ID del còdec amb format incorrecte «{0}».\n"
@@ -9074,7 +9082,7 @@ msgid "Output sampling frequency"
 msgstr "Freqüència de mostreig per a la sortida"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:581
-#: src/mkvtoolnix-gui/jobs/tool.cpp:605
+#: src/mkvtoolnix-gui/jobs/tool.cpp:606
 #, no-c-format
 msgid "Overwrite existing file"
 msgstr "Sobreescriu el fitxer existent"
@@ -9204,7 +9212,7 @@ msgid_plural "Playlists shorter than %1 seconds will be ignored."
 msgstr[0] "Les llistes de reproducció inferiors a %1 segon seran ignorades."
 msgstr[1] "Les llistes de reproducció inferiors a %1 segons seran ignorades."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:450
+#: src/mkvtoolnix-gui/merge/tab.cpp:459
 #, no-c-format
 msgid "Please enter the new job's description."
 msgstr "Si us plau, introduïu una descripció per a la tasca nova."
@@ -11583,8 +11591,8 @@ msgstr "El fitxer «%1» no s'ha pogut trobar a la carpeta d'instal·lació."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:583
 #, no-c-format
-msgid "The file '%1' exists already."
-msgstr "El fitxer «%1» ja existeix."
+msgid "The file '%1' exists already and might be overwritten depending on the configuration & the content of the source files."
+msgstr ""
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:546
 #, no-c-format
@@ -11808,8 +11816,8 @@ msgstr "El fitxer no ha estat reconegut com un format admès (codi de sortida: %
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1544
-#: src/input/r_matroska.cpp:2259
+#: src/input/r_matroska.cpp:1551
+#: src/input/r_matroska.cpp:2266
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Aquest fitxer no es processarà més."
@@ -12963,8 +12971,8 @@ msgstr "Aquesta pista conté dades AAC/HE-AAC/AAC+ en SBR."
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1544
-#: src/input/r_matroska.cpp:2259
+#: src/input/r_matroska.cpp:1551
+#: src/input/r_matroska.cpp:2266
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Això normalment significa una estructura de fitxers malmesa."
@@ -13133,7 +13141,7 @@ msgstr "Les privades del còdec de la pista {0} són massa petites.\n"
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr "La pista {0} ha estat comprimida amb un algorisme de compressió desconegut/no admès ({1}).\n"
 
-#: src/input/r_matroska.cpp:1232
+#: src/input/r_matroska.cpp:1234
 #, no-c-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "A la pista {0} li manca el seu element UID de la pista, el qual és necessari segons l'especificació de Matroska. Si el fitxer conté etiquetes, llavors aquestes podrien quedar malmeses.\n"
@@ -13420,7 +13428,7 @@ msgstr "mpeg_version de MPEG no admesa: 0x{0:02x} en el paquet {1} pel codi de t
 msgid "Unsupported file format"
 msgstr "Format de fitxer no implementat"
 
-#: src/input/r_matroska.cpp:2075
+#: src/input/r_matroska.cpp:2082
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Tipus de pista no admès per aquesta pista.\n"
@@ -13507,7 +13515,7 @@ msgstr "Emprar una longitud de mida NALU de 3 bytes hauria de donar lloc a piste
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "Emprant el demultiplexador pel format «{0}».\n"
 
-#: src/input/r_matroska.cpp:1573
+#: src/input/r_matroska.cpp:1580
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Emprant el mòdul de sortida genèric pel tipus de pista «{0}».\n"
@@ -14108,7 +14116,7 @@ msgstr "Amb «Crea uns ajustaments nous», s'afegirà un nou conjunt d'ajustamen
 msgid "With \"remove source files\" all source files will be removed."
 msgstr "Amb «Suprimeix els fitxers d'origen», se suprimiran tots els fitxers d'origen."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:417
+#: src/mkvtoolnix-gui/merge/tab.cpp:426
 #, no-c-format
 msgid "With the current multiplex settings the destination file will not contain an audio track."
 msgstr "Amb els ajustaments actuals per al multiplexat, el fitxer de destinació no contindrà cap pista d'àudio."
@@ -14605,18 +14613,13 @@ msgstr "matroska_reader: (mode de compatibilitat MS per a la pista {0}) Matroska
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (mode de compatibilitat MS per a la pista {0}) Matroska diu que l'amplada és de {1}, però el BITMAPINFOHEADER diu que és de {2}.\n"
 
-#: src/input/r_matroska.cpp:1221
-#, no-c-format
-msgid "matroska_reader: A track is missing its track number.\n"
-msgstr "matroska_reader: A una pista li manca el seu número de pista.\n"
-
-#: src/input/r_matroska.cpp:1636
+#: src/input/r_matroska.cpp:1643
 #, no-c-format
 msgid "matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"
 msgstr "matroska_reader: No ha pogut mantenir l'UID de la pista {0} perquè ja està assignat al fitxer nou.\n"
 
-#: src/input/r_matroska.cpp:1483
-#: src/input/r_matroska.cpp:1488
+#: src/input/r_matroska.cpp:1490
+#: src/input/r_matroska.cpp:1495
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: No s'ha trobat cap segment.\n"
@@ -14666,11 +14669,6 @@ msgstr "matroska_reader: L'ID del còdec per a la pista {0} és «{1}», però n
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_reader: L'ID del còdec per a la pista {0} és «{1}», però no s'han trobat dades privades del còdec.\n"
 
-#: src/input/r_matroska.cpp:1279
-#, no-c-format
-msgid "matroska_reader: The CodecID is missing.\n"
-msgstr "matroska_reader: Manca l'ID del còdec.\n"
-
 #: src/input/r_matroska.cpp:632
 #, no-c-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
@@ -14680,11 +14678,6 @@ msgstr "matroska_reader: No s'ha establert l'alçada per a la pista {0}.\n"
 #, no-c-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_reader: No s'ha establert l'amplada per a la pista {0}.\n"
-
-#: src/input/r_matroska.cpp:1239
-#, no-c-format
-msgid "matroska_reader: Track type was not found.\n"
-msgstr "matroska_reader: No s'ha trobat el tipus de la pista.\n"
 
 #: src/input/r_matroska.cpp:779
 #, no-c-format
@@ -14696,7 +14689,7 @@ msgstr "matroska_reader: La pista {0} sembla estar bé.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: El «mkvmerge» no ha estat compilat amb la implementació per a fitxers FLAC. La pista {0} serà ignorada.\n"
 
-#: src/input/r_matroska.cpp:1472
+#: src/input/r_matroska.cpp:1479
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: No s'ha trobat la capçalera EBML.\n"
@@ -15157,7 +15150,7 @@ msgstr "tta_reader: tag_size < 0 dins el constructor. {0}\n"
 #: src/common/kax_info.cpp:817
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:116
-#: src/input/r_matroska.cpp:2723
+#: src/input/r_matroska.cpp:2732
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -15168,7 +15161,7 @@ msgstr "tta_reader: tag_size < 0 dins el constructor. {0}\n"
 msgid "unknown"
 msgstr "Desconegut"
 
-#: src/input/r_matroska.cpp:2706
+#: src/input/r_matroska.cpp:2715
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "Desconegut, format de l'etiqueta 0x{0:04x}"
@@ -15289,8 +15282,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: s'ha produït una excepció (missatge: {1}; tipus: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1543
-#: src/input/r_matroska.cpp:2258
+#: src/input/r_matroska.cpp:1550
+#: src/input/r_matroska.cpp:2265
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: s'ha produït una excepció desconeguda."
@@ -16038,6 +16031,9 @@ msgstr "– Establert a «no» –"
 #~ "Bunkus <moritz@bunkus.org> si el tipus de fitxer és admès però no el "
 #~ "reconeix correctament.\n"
 
+#~ msgid "The file '%1' exists already."
+#~ msgstr "El fitxer «%1» ja existeix."
+
 #~ msgid ""
 #~ "The file has been changed by another program since it was read by the "
 #~ "header editor. Therefore you have to re-load it. Unfortunately this means "
@@ -16223,6 +16219,15 @@ msgstr "– Establert a «no» –"
 
 #~ msgid "lowest"
 #~ msgstr "Molt baixa"
+
+#~ msgid "matroska_reader: A track is missing its track number.\n"
+#~ msgstr "matroska_reader: A una pista li manca el seu número de pista.\n"
+
+#~ msgid "matroska_reader: The CodecID is missing.\n"
+#~ msgstr "matroska_reader: Manca l'ID del còdec.\n"
+
+#~ msgid "matroska_reader: Track type was not found.\n"
+#~ msgstr "matroska_reader: No s'ha trobat el tipus de la pista.\n"
 
 #~ msgid "merge"
 #~ msgstr "Fusiona"

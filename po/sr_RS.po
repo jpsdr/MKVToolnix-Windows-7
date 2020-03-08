@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-01-25 19:43+0100\n"
+"POT-Creation-Date: 2020-03-08 16:16+0100\n"
 "PO-Revision-Date: 2020-01-25 15:49+0000\n"
 "Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>\n"
 "Language-Team: Serbian (Serbia) (http://www.transifex.com/moritz-bunkus/"
@@ -1627,7 +1627,7 @@ msgstr "&Умножи линију наредбе у оставу"
 msgid "&Country:"
 msgstr "&Земља:"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:419
+#: src/mkvtoolnix-gui/merge/tab.cpp:428
 #, no-c-format
 msgid "&Create file without audio track"
 msgstr "&Направи файл без аудио стазе"
@@ -1932,8 +1932,7 @@ msgstr "&Поређано"
 msgid "&Output"
 msgstr "&Исходиште"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:585
-#: src/mkvtoolnix-gui/jobs/tool.cpp:610
+#: src/mkvtoolnix-gui/jobs/tool.cpp:611
 #, fuzzy, no-c-format
 msgid "&Overwrite file"
 msgstr "&Сачувај у текст. датотеку"
@@ -2634,7 +2633,7 @@ msgstr "„{0}“ запис {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "„{0}“: Обрађујем и наредне датотеке: {1}\n"
 
-#: src/input/r_matroska.cpp:1846
+#: src/input/r_matroska.cpp:1853
 #, fuzzy, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "„{0}“: Покушавате поново да сједините Опус-запис претходно сједињаван у огледном режиму. Добијени запис ће бити уписан у завршном режиму, али један детаљ не може да се опорави из записа сједињеног у огледном режиму: скраћивање на крају. Ово значи да декодер може да избаци неколико узорака више него што је испрва намеравано. Ако је то могуће, наново сједињујете из изворне Опус-датотеке.\n"
@@ -2799,8 +2798,8 @@ msgstr "<несачувана датотека>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> није ваљан под-елеменат <{1}>, на месту {2}."
 
-#: src/input/r_matroska.cpp:2289
-#: src/input/r_matroska.cpp:2397
+#: src/input/r_matroska.cpp:2297
+#: src/input/r_matroska.cpp:2406
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "Пронађен је блок на временској ознаци {0} за запис {1}, међутим, нису нађена заглавља за запис са тим бројем. Изоставићу овај блок.\n"
@@ -2847,7 +2846,7 @@ msgstr "Уљуднија знаковна ниска за одређење ко�
 msgid "A human-readable track name."
 msgstr "Уљуднији назив записа."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:607
+#: src/mkvtoolnix-gui/jobs/tool.cpp:608
 #, fuzzy, no-c-format
 msgid "A job creating the file '%1' is already in the job queue."
 msgstr "Не могу да отворим датотеку „{0}“ за руковаање исходиштем.\n"
@@ -3958,6 +3957,11 @@ msgstr ""
 msgid "C&onstrict or expand timestamps"
 msgstr "С&купи или рашири временске ознаке"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:586
+#, no-c-format
+msgid "C&ontinue"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:125
 #: src/mkvtoolnix-gui/forms/util/text_display_dialog.h:81
 #, no-c-format
@@ -4005,11 +4009,11 @@ msgstr ""
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:267
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:874
 #: src/mkvtoolnix-gui/jobs/tool.cpp:517
-#: src/mkvtoolnix-gui/jobs/tool.cpp:586
-#: src/mkvtoolnix-gui/jobs/tool.cpp:611
+#: src/mkvtoolnix-gui/jobs/tool.cpp:587
+#: src/mkvtoolnix-gui/jobs/tool.cpp:612
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:433
 #: src/mkvtoolnix-gui/merge/input.cpp:1329
-#: src/mkvtoolnix-gui/merge/tab.cpp:420
+#: src/mkvtoolnix-gui/merge/tab.cpp:429
 #: src/mkvtoolnix-gui/merge/tool.cpp:219
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:197
 #, no-c-format
@@ -4746,7 +4750,7 @@ msgstr "Створи ВебМ сродну датотеку"
 msgid "Create a new one or open an existing one via the \"multiplexer\" menu, the buttons below or drag & drop one here."
 msgstr "Створи нову или отвори постојећу преко изборника »Сједини«, дугмади испод или превлачењем једне овде."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:415
+#: src/mkvtoolnix-gui/merge/tab.cpp:424
 #, no-c-format
 msgid "Create file without audio track"
 msgstr ""
@@ -5460,13 +5464,17 @@ msgstr "Да ли заиста желите да зауставите ову р�
 msgid "Do you really want to add '%1' as another attachment?"
 msgstr "Да ли заиста желите да зауставите ову радњу?"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:418
+#: src/mkvtoolnix-gui/jobs/tool.cpp:585
+#, fuzzy, no-c-format
+msgid "Do you want to continue and risk overwriting the file?"
+msgstr "Да ли желите да зауставите дату радњу и изађете?"
+
+#: src/mkvtoolnix-gui/merge/tab.cpp:427
 #, fuzzy, no-c-format
 msgid "Do you want to continue?"
 msgstr "Да ли желите да зауставите дату радњу и изађете?"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:584
-#: src/mkvtoolnix-gui/jobs/tool.cpp:609
+#: src/mkvtoolnix-gui/jobs/tool.cpp:610
 #, fuzzy, no-c-format
 msgid "Do you want to overwrite the file?"
 msgstr "Да ли желите да зауставите дату радњу и изађете?"
@@ -5786,7 +5794,7 @@ msgstr "Назив на енглеском"
 msgid "Ensure the file name is &unique"
 msgstr "Осигурај &јединствене називе датотека"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:450
+#: src/mkvtoolnix-gui/merge/tab.cpp:459
 #, no-c-format
 msgid "Enter job description"
 msgstr "Унесите опис радње"
@@ -6993,7 +7001,7 @@ msgstr ""
 msgid "If two or more timestamps are used then you have to separate them with commas."
 msgstr "При употреби две или више временских ознака, оне се морају одвојити зарезима."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:608
+#: src/mkvtoolnix-gui/jobs/tool.cpp:609
 #, no-c-format
 msgid "If you add another job with the same destination file then file created before will be overwritten."
 msgstr ""
@@ -7923,13 +7931,13 @@ msgstr "Мплс-блуреј листа"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Учини овај запис подразумеваним за ову врсту (звук, видео, поднаписи)."
 
-#: src/input/r_matroska.cpp:1718
-#: src/input/r_matroska.cpp:1735
+#: src/input/r_matroska.cpp:1725
+#: src/input/r_matroska.cpp:1742
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Пронађени су неправилни подаци за отварање Аак-кодека.\n"
 
-#: src/input/r_matroska.cpp:1728
+#: src/input/r_matroska.cpp:1735
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "Неправилан ИБ-кодека „{0}“.\n"
@@ -9045,7 +9053,7 @@ msgid "Output sampling frequency"
 msgstr "Излазна учестаност узорковања: {0}"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:581
-#: src/mkvtoolnix-gui/jobs/tool.cpp:605
+#: src/mkvtoolnix-gui/jobs/tool.cpp:606
 #, fuzzy, no-c-format
 msgid "Overwrite existing file"
 msgstr "Отвори датотеку поставки"
@@ -9175,7 +9183,7 @@ msgstr[0] "Занемарићу листе краће од %1 секунде."
 msgstr[1] "Занемарићу листе краће од %1 секунде"
 msgstr[2] "Занемарићу листе краће од %1 секунди"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:450
+#: src/mkvtoolnix-gui/merge/tab.cpp:459
 #, no-c-format
 msgid "Please enter the new job's description."
 msgstr "Унесите опис нове радње."
@@ -11570,9 +11578,9 @@ msgid "The file '%1' could not be found in the installation folder."
 msgstr "Неуспело отварање датотеке „{0}“ за читање: {1}.\n"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:583
-#, fuzzy, no-c-format
-msgid "The file '%1' exists already."
-msgstr "У ИксМЛ-датотеци ознака „{0}“ постоји грешка: {1}\n"
+#, no-c-format
+msgid "The file '%1' exists already and might be overwritten depending on the configuration & the content of the source files."
+msgstr ""
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:546
 #, fuzzy, no-c-format
@@ -11796,8 +11804,8 @@ msgstr "Ова датотека није на списку подржаних в
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1544
-#: src/input/r_matroska.cpp:2259
+#: src/input/r_matroska.cpp:1551
+#: src/input/r_matroska.cpp:2266
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Надаље, нећу обрађивати ову датотеку."
@@ -12954,8 +12962,8 @@ msgstr "Овај запис садржи Сбр Аак/Хе-Аак/Аак+ по�
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1544
-#: src/input/r_matroska.cpp:2259
+#: src/input/r_matroska.cpp:1551
+#: src/input/r_matroska.cpp:2266
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Ово обично указује на оштећење устројства датотеке."
@@ -13124,7 +13132,7 @@ msgstr "„Кодек_приватно“ у запису {0} је премал�
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr "За запис {0} је употребљен непознат/неподржан алгоритам сажимања ({1}).\n"
 
-#: src/input/r_matroska.cpp:1232
+#: src/input/r_matroska.cpp:1234
 #, no-c-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "Запис {0} нема свој елеменат ЈИБ-записа чије је присуство по матрошка-спецификацији обавезно. Ако ова датотека садржи ознаке онда оне могу да буду оштећене.\n"
@@ -13411,7 +13419,7 @@ msgstr "Неподржан Мпег mpeg_version: 0x{0:02x} у пакету {1} 
 msgid "Unsupported file format"
 msgstr "Неподржана врста датотеке"
 
-#: src/input/r_matroska.cpp:2075
+#: src/input/r_matroska.cpp:2082
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Неподржана врста за овај запис.\n"
@@ -13498,7 +13506,7 @@ msgstr "Употреба НАЛУ-величине од 3 бајта може д
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "Употребљавам демултиплексер за формат „{0}“.\n"
 
-#: src/input/r_matroska.cpp:1573
+#: src/input/r_matroska.cpp:1580
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Употребљавам општи изл. модул за врсту записа „{0}“.\n"
@@ -14099,7 +14107,7 @@ msgstr "Опцијом „створи нове поставке“ додаће
 msgid "With \"remove source files\" all source files will be removed."
 msgstr "Опцијом „уклони улазне датотеке“ уклониће се све улазне датотеке."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:417
+#: src/mkvtoolnix-gui/merge/tab.cpp:426
 #, no-c-format
 msgid "With the current multiplex settings the destination file will not contain an audio track."
 msgstr ""
@@ -14595,18 +14603,13 @@ msgstr "„matroska_reader“: (МС-сагласан режим, запис {0}
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "„matroska_reader“: (МС-сагласан режим, запис {0}) По Матрошки, ширина видеа је {1}, а по „BITMAPINFOHEADER“, она је {2}.\n"
 
-#: src/input/r_matroska.cpp:1221
-#, no-c-format
-msgid "matroska_reader: A track is missing its track number.\n"
-msgstr "„matroska_reader“: Запис нема сопствени број.\n"
-
-#: src/input/r_matroska.cpp:1636
+#: src/input/r_matroska.cpp:1643
 #, no-c-format
 msgid "matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"
 msgstr "„matroska_reader“: Задршка ЈИБ-записа {0} није могућа јер је он намењен за употребу у новој датотеци.\n"
 
-#: src/input/r_matroska.cpp:1483
-#: src/input/r_matroska.cpp:1488
+#: src/input/r_matroska.cpp:1490
+#: src/input/r_matroska.cpp:1495
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "„matroska_reader“: Нема пронађеног одељка.\n"
@@ -14656,11 +14659,6 @@ msgstr "„matroska_reader“: За запис {0}, ИБ-кодека је „{1
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "„matroska_reader“: За запис {0}, ИБ-кодека је „{1}“, али нема приватних података.\n"
 
-#: src/input/r_matroska.cpp:1279
-#, no-c-format
-msgid "matroska_reader: The CodecID is missing.\n"
-msgstr "„matroska_reader“: Недостаје ИБ-кодека.\n"
-
 #: src/input/r_matroska.cpp:632
 #, no-c-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
@@ -14670,11 +14668,6 @@ msgstr "„matroska_reader“: За запис {0} није постављена
 #, no-c-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "„matroska_reader“: За запис {0} није постављена ширина.\n"
-
-#: src/input/r_matroska.cpp:1239
-#, no-c-format
-msgid "matroska_reader: Track type was not found.\n"
-msgstr "„matroska_reader“: Није нађена врста записа.\n"
 
 #: src/input/r_matroska.cpp:779
 #, no-c-format
@@ -14686,7 +14679,7 @@ msgstr "„matroska_reader“: Изгледа да је запис {0} ваља�
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "„matroska_reader“: Код превођења програмског кода Мкв-спојнице није укључена подршка за Флак-кодек. Занемарићу запис {0}.\n"
 
-#: src/input/r_matroska.cpp:1472
+#: src/input/r_matroska.cpp:1479
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "„matroska_reader“: нема ЕБМЛ-заглавља.\n"
@@ -15156,7 +15149,7 @@ msgstr "„tta_reader“: „tag_size“ < 0 у овом „c'tor.“ {0}\n"
 #: src/common/kax_info.cpp:817
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:116
-#: src/input/r_matroska.cpp:2723
+#: src/input/r_matroska.cpp:2732
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -15167,7 +15160,7 @@ msgstr "„tta_reader“: „tag_size“ < 0 у овом „c'tor.“ {0}\n"
 msgid "unknown"
 msgstr "непознато"
 
-#: src/input/r_matroska.cpp:2706
+#: src/input/r_matroska.cpp:2715
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "непознато, облик ознаке 0x{0:04x}"
@@ -15296,8 +15289,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: десио се изузетак (порука: {1}; врста: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1543
-#: src/input/r_matroska.cpp:2258
+#: src/input/r_matroska.cpp:1550
+#: src/input/r_matroska.cpp:2265
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: десио се непознат изузетак."
@@ -16007,6 +16000,9 @@ msgstr "— не постављај —"
 #~ "(е-пошта: moritz@bunkus.org) ако је врста ваше датотеке подржана, али "
 #~ "није ваљано препозната.\n"
 
+#~ msgid "The file '%1' exists already."
+#~ msgstr "У ИксМЛ-датотеци ознака „{0}“ постоји грешка: {1}\n"
+
 #~ msgid ""
 #~ "The file has been changed by another program since it was read by the "
 #~ "header editor. Therefore you have to re-load it. Unfortunately this means "
@@ -16179,6 +16175,15 @@ msgstr "— не постављај —"
 
 #~ msgid "lowest"
 #~ msgstr "најмањи"
+
+#~ msgid "matroska_reader: A track is missing its track number.\n"
+#~ msgstr "„matroska_reader“: Запис нема сопствени број.\n"
+
+#~ msgid "matroska_reader: The CodecID is missing.\n"
+#~ msgstr "„matroska_reader“: Недостаје ИБ-кодека.\n"
+
+#~ msgid "matroska_reader: Track type was not found.\n"
+#~ msgstr "„matroska_reader“: Није нађена врста записа.\n"
 
 #~ msgid "merge"
 #~ msgstr "Сједини"

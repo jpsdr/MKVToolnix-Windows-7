@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-01-25 19:43+0100\n"
+"POT-Creation-Date: 2020-03-08 16:16+0100\n"
 "PO-Revision-Date: 2020-01-25 20:54+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1607,7 +1607,7 @@ msgstr "Komut satırını panoya &kopyala"
 msgid "&Country:"
 msgstr "Ü&lke:"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:419
+#: src/mkvtoolnix-gui/merge/tab.cpp:428
 #, no-c-format
 msgid "&Create file without audio track"
 msgstr "Ses izi olmadan dosya &oluştur"
@@ -1910,8 +1910,7 @@ msgstr "&Sıralandı"
 msgid "&Output"
 msgstr "Çı&ktı"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:585
-#: src/mkvtoolnix-gui/jobs/tool.cpp:610
+#: src/mkvtoolnix-gui/jobs/tool.cpp:611
 #, no-c-format
 msgid "&Overwrite file"
 msgstr "Dosyanın ü&zerine yaz"
@@ -2606,7 +2605,7 @@ msgstr "'{0}' iz {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "'{0}': Aşağıdaki dosyalar dahi işleniyor: {1}\n"
 
-#: src/input/r_matroska.cpp:1846
+#: src/input/r_matroska.cpp:1853
 #, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr ""
@@ -2771,8 +2770,8 @@ msgstr "<Kaydedilmemiş dosya>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}>, {2} konumunda geçerli bir <{1}> alt öğesi değil."
 
-#: src/input/r_matroska.cpp:2289
-#: src/input/r_matroska.cpp:2397
+#: src/input/r_matroska.cpp:2297
+#: src/input/r_matroska.cpp:2406
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "İz numarası {1} için {0} zaman damgasında bir blok bulundu. Ancak, bu iz numarası için bulunan başlıklar yok. Blok atlanacaktır.\n"
@@ -2819,7 +2818,7 @@ msgstr "Kodeği belirten insanın okuyabileceği satır."
 msgid "A human-readable track name."
 msgstr "İnsanın okuyabileceği iz adı."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:607
+#: src/mkvtoolnix-gui/jobs/tool.cpp:608
 #, no-c-format
 msgid "A job creating the file '%1' is already in the job queue."
 msgstr "'%1' dosyasını oluşturan iş zaten iş kuyruğunda."
@@ -3929,6 +3928,11 @@ msgstr "Yapılandırma &etkin"
 msgid "C&onstrict or expand timestamps"
 msgstr "Zaman damgalarını d&aralt ya da genişlet"
 
+#: src/mkvtoolnix-gui/jobs/tool.cpp:586
+#, no-c-format
+msgid "C&ontinue"
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:125
 #: src/mkvtoolnix-gui/forms/util/text_display_dialog.h:81
 #, no-c-format
@@ -3976,11 +3980,11 @@ msgstr "Tüm izler için istatistikleri hesapla ve onlar için yeni etiketler ek
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:267
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:874
 #: src/mkvtoolnix-gui/jobs/tool.cpp:517
-#: src/mkvtoolnix-gui/jobs/tool.cpp:586
-#: src/mkvtoolnix-gui/jobs/tool.cpp:611
+#: src/mkvtoolnix-gui/jobs/tool.cpp:587
+#: src/mkvtoolnix-gui/jobs/tool.cpp:612
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:433
 #: src/mkvtoolnix-gui/merge/input.cpp:1329
-#: src/mkvtoolnix-gui/merge/tab.cpp:420
+#: src/mkvtoolnix-gui/merge/tab.cpp:429
 #: src/mkvtoolnix-gui/merge/tool.cpp:219
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:197
 #, no-c-format
@@ -4716,7 +4720,7 @@ msgstr "WebM uyumlu dosya oluşturur."
 msgid "Create a new one or open an existing one via the \"multiplexer\" menu, the buttons below or drag & drop one here."
 msgstr "Yeni bir tane oluşturun veya \"çoklayıcı\" menüsü, aşağıdaki düğmeler aracılığıyla ya da buraya birini sürükleyip bırakarak varolan bir taneyi açın."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:415
+#: src/mkvtoolnix-gui/merge/tab.cpp:424
 #, no-c-format
 msgid "Create file without audio track"
 msgstr "Ses izi olmadan dosya oluştur"
@@ -5430,13 +5434,17 @@ msgstr "Bu işi gerçekten iptal etmek istiyor musunuz?"
 msgid "Do you really want to add '%1' as another attachment?"
 msgstr "Başka bir ek olarak gerçekten '%1' eklemek istiyor musunuz?"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:418
+#: src/mkvtoolnix-gui/jobs/tool.cpp:585
+#, fuzzy, no-c-format
+msgid "Do you want to continue and risk overwriting the file?"
+msgstr "Dosyanın üzerine yazmak istiyor musunuz?"
+
+#: src/mkvtoolnix-gui/merge/tab.cpp:427
 #, no-c-format
 msgid "Do you want to continue?"
 msgstr "Devam etmek istiyor musunuz?"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:584
-#: src/mkvtoolnix-gui/jobs/tool.cpp:609
+#: src/mkvtoolnix-gui/jobs/tool.cpp:610
 #, no-c-format
 msgid "Do you want to overwrite the file?"
 msgstr "Dosyanın üzerine yazmak istiyor musunuz?"
@@ -5753,7 +5761,7 @@ msgstr "İngilizce dil adı"
 msgid "Ensure the file name is &unique"
 msgstr "Dosya adının ben&zersiz olduğundan emin ol"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:450
+#: src/mkvtoolnix-gui/merge/tab.cpp:459
 #, no-c-format
 msgid "Enter job description"
 msgstr "İş tanımını gir"
@@ -6959,7 +6967,7 @@ msgstr "Eğer izin mevcut olduğu biliniyorsa, ama bulunamadıysa, araştırma i
 msgid "If two or more timestamps are used then you have to separate them with commas."
 msgstr "Eğer iki veya daha fazla zaman damgası kullanıldıysa o zaman onları virgüllerle ayırmak zorundasınız."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:608
+#: src/mkvtoolnix-gui/jobs/tool.cpp:609
 #, no-c-format
 msgid "If you add another job with the same destination file then file created before will be overwritten."
 msgstr "Eğer aynı hedef dosya ile başka bir iş eklerseniz, o zaman önceden oluşturulan dosyanın üzerine yazılacaktır."
@@ -7888,13 +7896,13 @@ msgstr "MPLS Blu-ray oynatma listesi"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Türleri (ses, görüntü, altyazılar) için bu izi varsayılan iz yapın."
 
-#: src/input/r_matroska.cpp:1718
-#: src/input/r_matroska.cpp:1735
+#: src/input/r_matroska.cpp:1725
+#: src/input/r_matroska.cpp:1742
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Arızalanmış AAC kodek başlatma verisi bulundu.\n"
 
-#: src/input/r_matroska.cpp:1728
+#: src/input/r_matroska.cpp:1735
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "Arızalanmış kodek id '{0}'.\n"
@@ -8999,7 +9007,7 @@ msgid "Output sampling frequency"
 msgstr "Çıktı örnekleme sıklığı"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:581
-#: src/mkvtoolnix-gui/jobs/tool.cpp:605
+#: src/mkvtoolnix-gui/jobs/tool.cpp:606
 #, no-c-format
 msgid "Overwrite existing file"
 msgstr "Varolan dosyanın üzerine yaz"
@@ -9128,7 +9136,7 @@ msgid_plural "Playlists shorter than %1 seconds will be ignored."
 msgstr[0] "%1 saniyeden daha kısa oynatma listeleri yoksayılacaktır."
 msgstr[1] "%1 saniyeden daha kısa oynatma listeleri yoksayılacaktır."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:450
+#: src/mkvtoolnix-gui/merge/tab.cpp:459
 #, no-c-format
 msgid "Please enter the new job's description."
 msgstr "Lütfen yeni işin tanımını girin:"
@@ -11505,8 +11513,8 @@ msgstr "'%1' dosyası kurulum klasöründe bulunamadı."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:583
 #, no-c-format
-msgid "The file '%1' exists already."
-msgstr "'%1' dosyası zaten mevcut."
+msgid "The file '%1' exists already and might be overwritten depending on the configuration & the content of the source files."
+msgstr ""
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:546
 #, no-c-format
@@ -11730,8 +11738,8 @@ msgstr "Dosya desteklenen bir biçim olarak tanınmadı (çıkış kodu: %1)."
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1544
-#: src/input/r_matroska.cpp:2259
+#: src/input/r_matroska.cpp:1551
+#: src/input/r_matroska.cpp:2266
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Dosya daha fazla işlenmeyecektir."
@@ -12882,8 +12890,8 @@ msgstr "Bu iz SBR AAC/HE-AAC/AAC+ verisi içeriyor."
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1544
-#: src/input/r_matroska.cpp:2259
+#: src/input/r_matroska.cpp:1551
+#: src/input/r_matroska.cpp:2266
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Bu genellikle hasarlı bir dosya yapısını gösterir."
@@ -13052,7 +13060,7 @@ msgstr "İz {0} CodecPrivate çok küçük.\n"
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr "İz {0} bilinmeyen/desteklenmeyen bir sıkıştırma algoritması ile sıkıştırılmış ({1}).\n"
 
-#: src/input/r_matroska.cpp:1232
+#: src/input/r_matroska.cpp:1234
 #, no-c-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr ""
@@ -13341,7 +13349,7 @@ msgstr "Desteklenmeyen MPEG mpeg_sürümü: {2} zaman damgası için {1} paketin
 msgid "Unsupported file format"
 msgstr "Desteklenmeyen dosya biçimi"
 
-#: src/input/r_matroska.cpp:2075
+#: src/input/r_matroska.cpp:2082
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Bu iz için desteklenmeyen biçim.\n"
@@ -13428,7 +13436,7 @@ msgstr "3 baytlık NALU boyutu uzunluğu kullanmak, belirli AVC/H.264 kodekleriy
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "'{0}' biçimi için çoklama çözücü kullanılıyor.\n"
 
-#: src/input/r_matroska.cpp:1573
+#: src/input/r_matroska.cpp:1580
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "'{0}' iz türü için genel çıktı modülü kullanılıyor.\n"
@@ -14029,7 +14037,7 @@ msgstr "\"Yeni ayarları oluştur\" ile yeni bir çoklama ayarları grubu eklene
 msgid "With \"remove source files\" all source files will be removed."
 msgstr "\"Kaynak dosyaları kaldır\" ile tüm kaynak dosyalar kaldırılacaktır."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:417
+#: src/mkvtoolnix-gui/merge/tab.cpp:426
 #, no-c-format
 msgid "With the current multiplex settings the destination file will not contain an audio track."
 msgstr "Şu anki çoklama ayarları ile hedef dosya bir ses izi içermeyecek."
@@ -14525,18 +14533,13 @@ msgstr "matroska_okuyucusu: (MS uyumluluk kipi, iz {0}) Matroska görüntü yük
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_okuyucusu: (MS uyumluluk kipi, iz {0}) Matroska görüntü genişliği {1} diyor, ama BITMAPINFOHEADER {2} diyor.\n"
 
-#: src/input/r_matroska.cpp:1221
-#, no-c-format
-msgid "matroska_reader: A track is missing its track number.\n"
-msgstr "matroska_okuyucusu: İz eksik olan iz numarası.\n"
-
-#: src/input/r_matroska.cpp:1636
+#: src/input/r_matroska.cpp:1643
 #, no-c-format
 msgid "matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"
 msgstr "matroska_okuyucusu: İz UID {0} tutulmadı çünkü zaten yeni dosya için ayrıldı.\n"
 
-#: src/input/r_matroska.cpp:1483
-#: src/input/r_matroska.cpp:1488
+#: src/input/r_matroska.cpp:1490
+#: src/input/r_matroska.cpp:1495
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_okuyucusu: Bulunan parça yok.\n"
@@ -14586,11 +14589,6 @@ msgstr "matroska_okuyucusu: İz '{0}' için KodekID {1}, ama kodek özel başlı
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_okuyucusu: İz '{0}' için KodekID {1}, ama bulunan özel veri yoktur.\n"
 
-#: src/input/r_matroska.cpp:1279
-#, no-c-format
-msgid "matroska_reader: The CodecID is missing.\n"
-msgstr "matroska_okuyucusu: KodekID eksik.\n"
-
 #: src/input/r_matroska.cpp:632
 #, no-c-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
@@ -14600,11 +14598,6 @@ msgstr "matroska_okuyucusu: İz '{0}' için yükseklik ayarlı değildi.\n"
 #, no-c-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_okuyucusu: İz '{0}' için genişlik ayarlı değildi.\n"
-
-#: src/input/r_matroska.cpp:1239
-#, no-c-format
-msgid "matroska_reader: Track type was not found.\n"
-msgstr "matroska_okuyucusu: İz türü bulunmadı.\n"
 
 #: src/input/r_matroska.cpp:779
 #, no-c-format
@@ -14616,7 +14609,7 @@ msgstr "matroska_okuyucusu: İz {0} tamam görünüyor.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_okuyucusu: mkvmerge FLAC desteği ile derlenmedi. İz {0} yoksayılıyor.\n"
 
-#: src/input/r_matroska.cpp:1472
+#: src/input/r_matroska.cpp:1479
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_okuyucusu: Bulunan EBML başı yok.\n"
@@ -15076,7 +15069,7 @@ msgstr "tta_reader: c'tor içinde tag_size < 0. {0}\n"
 #: src/common/kax_info.cpp:817
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:116
-#: src/input/r_matroska.cpp:2723
+#: src/input/r_matroska.cpp:2732
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -15087,7 +15080,7 @@ msgstr "tta_reader: c'tor içinde tag_size < 0. {0}\n"
 msgid "unknown"
 msgstr "bilinmiyor"
 
-#: src/input/r_matroska.cpp:2706
+#: src/input/r_matroska.cpp:2715
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "bilinmiyor, biçim etiketi: 0x{0:04x}"
@@ -15211,8 +15204,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: beklenmedik bir olay meydana geldi (ileti: {1}; türü: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1543
-#: src/input/r_matroska.cpp:2258
+#: src/input/r_matroska.cpp:1550
+#: src/input/r_matroska.cpp:2265
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: bilinmeyen bir istisna meydana geldi."
@@ -15934,6 +15927,9 @@ msgstr "– Hiçbiri olarak ayarla –"
 #~ "düzgün olarak tanınmıyorsa, yazar Moritz Bunkus <moritz@bunkus.org> ile "
 #~ "irtibata geçin.\n"
 
+#~ msgid "The file '%1' exists already."
+#~ msgstr "'%1' dosyası zaten mevcut."
+
 #~ msgid ""
 #~ "The file has been changed by another program since it was read by the "
 #~ "header editor. Therefore you have to re-load it. Unfortunately this means "
@@ -16116,6 +16112,15 @@ msgstr "– Hiçbiri olarak ayarla –"
 
 #~ msgid "lowest"
 #~ msgstr "en düşük"
+
+#~ msgid "matroska_reader: A track is missing its track number.\n"
+#~ msgstr "matroska_okuyucusu: İz eksik olan iz numarası.\n"
+
+#~ msgid "matroska_reader: The CodecID is missing.\n"
+#~ msgstr "matroska_okuyucusu: KodekID eksik.\n"
+
+#~ msgid "matroska_reader: Track type was not found.\n"
+#~ msgstr "matroska_okuyucusu: İz türü bulunmadı.\n"
 
 #~ msgid "merge"
 #~ msgstr "birleştir"
