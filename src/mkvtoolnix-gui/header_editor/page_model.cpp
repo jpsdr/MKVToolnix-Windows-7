@@ -1,6 +1,10 @@
 #include "common/common_pch.h"
 
+#include <QMimeData>
+
 #include "common/qt.h"
+#include "mkvtoolnix-gui/header_editor/attached_file_page.h"
+#include "mkvtoolnix-gui/header_editor/attachments_page.h"
 #include "mkvtoolnix-gui/header_editor/page_base.h"
 #include "mkvtoolnix-gui/header_editor/page_model.h"
 #include "mkvtoolnix-gui/header_editor/top_level_page.h"
@@ -162,6 +166,54 @@ PageModel::retranslateUi() {
     if (page)
       page->setItems(itemsForIndex(currentIdx));
   });
+}
+
+void
+PageModel::rememberLastSelectedIndex(QModelIndex const &idx) {
+  m_lastSelectedIdx = idx;
+}
+
+bool
+PageModel::canDropMimeData(QMimeData const *data,
+                           Qt::DropAction action,
+                           int row,
+                           int,
+                           QModelIndex const &parent)
+  const {
+  if (   !data
+      || (Qt::MoveAction != action)
+      || !parent.isValid()
+      || !m_lastSelectedIdx.isValid()
+      || (0 > row))
+    return false;
+
+  auto draggedPage = selectedPage(m_lastSelectedIdx);
+  if (!draggedPage || !dynamic_cast<AttachedFilePage *>(draggedPage))
+    return false;
+
+  auto parentPage = selectedPage(parent);
+  if (!parentPage || !dynamic_cast<AttachmentsPage *>(parentPage))
+    return false;
+
+  return true;
+}
+
+bool
+PageModel::dropMimeData(QMimeData const *data,
+                        Qt::DropAction action,
+                        int row,
+                        int column,
+                        QModelIndex const &parent) {
+  if (!canDropMimeData(data, action, row, column, parent))
+    return false;
+
+  auto result = QStandardItemModel::dropMimeData(data, action, row, 0, parent);
+
+  Util::requestAllItems(*this);
+
+  emit attachmentsReordered();
+
+  return result;
 }
 
 }

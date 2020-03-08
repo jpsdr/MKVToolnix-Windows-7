@@ -76,4 +76,15 @@ AttachmentsPage::internalIdentifier()
   return Q("attachments");
 }
 
+void
+AttachmentsPage::rereadChildren(PageModel &model) {
+  auto numRows = model.rowCount(m_pageIdx);
+
+  m_children.clear();
+  m_children.reserve(numRows);
+
+  for (int row = 0; row < numRows; ++row)
+    m_children.push_back(model.selectedPage(model.index(row, 0, m_pageIdx)));
+}
+
 }

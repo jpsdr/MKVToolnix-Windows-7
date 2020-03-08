@@ -15,6 +15,8 @@ namespace Ui {
 class AttachmentsPage;
 }
 
+class PageModel;
+
 using KaxAttachedPtr  = std::shared_ptr<libmatroska::KaxAttached>;
 using KaxAttachedList = QList<KaxAttachedPtr>;
 
@@ -39,6 +41,7 @@ signals:
 
 public slots:
   virtual void retranslateUi() override;
+  virtual void rereadChildren(PageModel &model);
 
 protected:
   virtual void dragEnterEvent(QDragEnterEvent *event) override;

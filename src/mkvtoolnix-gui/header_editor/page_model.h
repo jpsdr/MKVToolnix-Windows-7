@@ -6,6 +6,7 @@
 #include <QStandardItemModel>
 
 class QAbstractItemView;
+class QMimeData;
 
 namespace mtx::gui::HeaderEditor {
 
@@ -17,6 +18,7 @@ protected:
   QHash<int, PageBase *> m_pages;
   QList<PageBase *> m_topLevelPages;
   int m_pageId{};
+  QModelIndex m_lastSelectedIdx;
 
 public:
   PageModel(QObject *parent);
@@ -39,6 +41,14 @@ public:
 
   QList<QStandardItem *> itemsForIndex(QModelIndex const &idx);
   QModelIndex indexFromPage(PageBase *page) const;
+
+  void rememberLastSelectedIndex(QModelIndex const &idx);
+
+  virtual bool canDropMimeData(QMimeData const *data, Qt::DropAction action, int row, int, QModelIndex const &parent) const override;
+  virtual bool dropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, QModelIndex const &parent) override;
+
+signals:
+  void attachmentsReordered();
 };
 
 }

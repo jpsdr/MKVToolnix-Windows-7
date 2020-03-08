@@ -309,6 +309,7 @@ Tab::setupUi() {
   connect(m_saveAttachmentContentAction,             &QAction::triggered,                              this, &Tab::saveAttachmentContent);
   connect(m_replaceAttachmentContentAction,          &QAction::triggered,                              [this]() { replaceAttachmentContent(false); });
   connect(m_replaceAttachmentContentSetValuesAction, &QAction::triggered,                              [this]() { replaceAttachmentContent(true); });
+  connect(m_model,                                   &PageModel::attachmentsReordered,                 [this]() { m_attachmentsPage->rereadChildren(*m_model); });
 }
 
 void
@@ -379,6 +380,8 @@ Tab::selectionChanged(QModelIndex const &current,
                       QModelIndex const &) {
   if (m_ignoreSelectionChanges)
     return;
+
+  m_model->rememberLastSelectedIndex(current);
 
   auto selectedPage = m_model->selectedPage(current);
   if (selectedPage)

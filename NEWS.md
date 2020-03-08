@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: header editor: the attachments can now be reordered via drag
+  & drop. Implements #2753.
+
 ## Bug fixes
 
 * mkvmerge: Matroska reader: when encountering certain errors in the track
