@@ -371,8 +371,8 @@ Tab::findExistingDestination()
 #else
   auto rePatternOptions     = QRegularExpression::NoPatternOption;
 #endif
-  auto destinationBaseName  = QRegularExpression::escape(destinationInfo.baseName());
-  auto destinationSuffix    = QRegularExpression::escape(destinationInfo.completeSuffix());
+  auto destinationBaseName  = QRegularExpression::escape(destinationInfo.completeBaseName());
+  auto destinationSuffix    = QRegularExpression::escape(destinationInfo.suffix());
   auto splitNameTestPattern = Q("^%1-\\d+%2%3$").arg(destinationBaseName).arg(destinationSuffix.isEmpty() ? Q("") : Q("\\.")).arg(destinationSuffix);
   auto splitNameTestRE      = QRegularExpression{splitNameTestPattern, rePatternOptions};
   auto destinationDir       = destinationInfo.dir();
