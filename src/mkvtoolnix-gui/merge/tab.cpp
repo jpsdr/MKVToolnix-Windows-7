@@ -363,7 +363,7 @@ Tab::findExistingDestination()
   auto nativeDestination = QDir::toNativeSeparators(m_config.m_destination);
   QFileInfo destinationInfo{nativeDestination};
 
-  if (MuxConfig::DoNotSplit == m_config.m_splitMode)
+  if ((MuxConfig::DoNotSplit == m_config.m_splitMode) && !m_config.m_additionalOptions.contains(QRegularExpression{Q("--split(?:[^a-z-]|$)")}))
     return destinationInfo.exists() ? nativeDestination : QString{};
 
 #if defined(SYS_WINDOWS)
