@@ -580,9 +580,10 @@ Tool::checkIfOverwritingIsOK(QString const &newDestination,
     auto answer = Util::MessageBox::question(this)
       ->title(QY("Overwrite existing file"))
       .text(Q("%1 %2")
-            .arg(QY("The file '%1' exists already.").arg(existingDestination.isEmpty() ? nativeDestination : QDir::toNativeSeparators(existingDestination)))
-            .arg(QY("Do you want to overwrite the file?")))
-      .buttonLabel(QMessageBox::Yes, QY("&Overwrite file"))
+            .arg(QY("The file '%1' exists already and might be overwritten depending on the configuration & the content of the source files.")
+                 .arg(existingDestination.isEmpty() ? nativeDestination : QDir::toNativeSeparators(existingDestination)))
+            .arg(QY("Do you want to continue and risk overwriting the file?")))
+      .buttonLabel(QMessageBox::Yes, QY("C&ontinue"))
       .buttonLabel(QMessageBox::No,  QY("Cancel"))
       .exec();
     if (answer != QMessageBox::Yes)
