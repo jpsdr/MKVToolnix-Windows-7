@@ -5,6 +5,8 @@
 * mkvmerge: Matroska reader: when encountering certain errors in the track
   headers such as the codec ID not being present mkvmerge will simply skip
   those tracks instead of exiting with an error. Fixes #2737.
+* MKVToolNix GUI: multiplexer: the "ask before overwriting" functionality did
+  not look for the correct file names when splitting was active. Fixes #2741.
 
 
 # Version 43.0.0 "The Quartermaster" 2020-01-26
