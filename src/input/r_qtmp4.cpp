@@ -1576,8 +1576,8 @@ qtmp4_reader_c::read(generic_packetizer_c *ptzr,
   if (m_demuxers.size() == dmx_idx)
     return flush_packetizers();
 
- auto &dmx   = *m_demuxers[dmx_idx];
- auto &index = dmx.m_index[dmx.pos];
+  auto &dmx   = *m_demuxers[dmx_idx];
+  auto &index = dmx.m_index[dmx.pos];
 
   m_in->setFilePointer(index.file_pos);
 
