@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: MP4 reader: fixed calculating the duration of video tracks that
+  only contain a single frame. Fixes #2747.
+
+
 # Version 44.0.0 "Domino" 2020-03-08
 
 ## New features and enhancements

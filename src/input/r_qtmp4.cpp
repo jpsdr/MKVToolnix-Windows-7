@@ -2104,8 +2104,20 @@ qtmp4_demuxer_c::calculate_frame_rate() {
     return;
   }
 
+  if (('v' == type) && time_scale && global_duration && (sample_table.size() < 2)) {
+    frame_rate = mtx::frame_timing::determine_frame_rate(static_cast<uint64_t>(global_duration) * 1'000'000'000ull / static_cast<uint64_t>(time_scale));
+    if (frame_rate)
+      m_use_frame_rate_for_duration = boost::rational_cast<int64_t>(int64_rational_c{1'000'000'000ll} / frame_rate);
+
+    mxdebug_if(m_debug_frame_rate,
+               fmt::format("calculate_frame_rate: case 2: video track with time scale {0} & duration {1} result: {2}\n",
+                           time_scale, global_duration, frame_rate ? format_timestamp(*m_use_frame_rate_for_duration) : "<invalid>"s));
+
+    return;
+  }
+
   if (sample_table.size() < 2) {
-    mxdebug_if(m_debug_frame_rate, fmt::format("calculate_frame_rate: case 2: sample table too small\n"));
+    mxdebug_if(m_debug_frame_rate, fmt::format("calculate_frame_rate: case 3: sample table too small\n"));
     return;
   }
 
@@ -2126,7 +2138,7 @@ qtmp4_demuxer_c::calculate_frame_rate() {
       m_use_frame_rate_for_duration = boost::rational_cast<int64_t>(int64_rational_c{1'000'000'000ll} / frame_rate);
 
     mxdebug_if(m_debug_frame_rate,
-               fmt::format("calculate_frame_rate: case 3: duration {0} num_frames {1} frame_duration {2} frame_rate {3}/{4} use_frame_rate_for_duration {5}\n",
+               fmt::format("calculate_frame_rate: case 4: duration {0} num_frames {1} frame_duration {2} frame_rate {3}/{4} use_frame_rate_for_duration {5}\n",
                            duration, num_frames, duration / num_frames, frame_rate.numerator(), frame_rate.denominator(), m_use_frame_rate_for_duration ? *m_use_frame_rate_for_duration : -1));
 
     return;
@@ -2146,7 +2158,7 @@ qtmp4_demuxer_c::calculate_frame_rate() {
     frame_rate.assign(static_cast<int64_t>(1000000000ll), to_nsecs(most_common.first));
 
   mxdebug_if(m_debug_frame_rate,
-             fmt::format("calculate_frame_rate: case 4: duration {0} num_frames {1} frame_duration {2} most_common.num_occurances {3} most_common.duration {4} frame_rate {5}/{6}\n",
+             fmt::format("calculate_frame_rate: case 5: duration {0} num_frames {1} frame_duration {2} most_common.num_occurances {3} most_common.duration {4} frame_rate {5}/{6}\n",
                          duration, num_frames, duration / num_frames, most_common.second, to_nsecs(most_common.first), frame_rate.numerator(), frame_rate.denominator()));
 }
 
