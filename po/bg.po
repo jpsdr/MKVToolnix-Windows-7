@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2020-03-08 16:16+0100\n"
-"PO-Revision-Date: 2020-03-08 15:07+0000\n"
-"Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
+"PO-Revision-Date: 2020-03-11 19:00+0000\n"
+"Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/bg/)\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -358,6 +358,9 @@ msgid ""
 "                           if the same source files with the same options\n"
 "                           and the same seed are used.\n"
 msgstr ""
+"  --deterministic <seed>   Позволява създаването на идентични по\n"
+"                            байтове файлове, ако се използват едни и същи\n"
+"                           файлове-източници и еднакви настройки.\n"
 
 #: src/merge/mkvmerge.cpp:137
 #, no-c-format
@@ -427,6 +430,9 @@ msgid ""
 "                           Automatically generate chapters according to\n"
 "                           the mode ('when-appending' or 'interval:<duration>').\n"
 msgstr ""
+"generate-chapters <mode>\n"
+"                          Автоматично генериране на епизоди според\n"
+"                          режима ('when-appending' или 'interval:<duration>“).\n"
 
 #: src/merge/mkvmerge.cpp:115
 #, no-c-format
@@ -598,6 +604,9 @@ msgid ""
 "                           HD extensions instead of copying both the core\n"
 "                           and the extensions.\n"
 msgstr ""
+"--reduce-to-core <TID>  Запазва се само ядрото на аудио записa (ако\n"
+"                         поддържа HD разширения) вместо да се копират и\n"
+"                         ядрото, и разширенията.\n"
 
 #: src/merge/mkvmerge.cpp:251
 #, no-c-format
@@ -862,7 +871,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:91
 #, no-c-format
 msgid "  -o, --output out         Write to the file 'out'.\n"
-msgstr ""
+msgstr "  -o, --output изх         Пиши във файла „изх“.\n"
 
 #: src/merge/mkvmerge.cpp:370
 #, no-c-format
@@ -2092,7 +2101,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:2492
 #, no-c-format
 msgid "'--generate-chapters' lacks the mode.\n"
-msgstr ""
+msgstr "при '--generate-chapters' липсва режим.\n"
 
 #: src/merge/mkvmerge.cpp:2263
 #, no-c-format
@@ -2207,7 +2216,7 @@ msgstr ""
 #: src/common/command_line.cpp:235
 #, no-c-format
 msgid "'{0}' is missing the file name.\n"
-msgstr "при '{0}' липсва името на файла.\n"
+msgstr "при „{0}“ липсва името на файла.\n"
 
 #: src/merge/mkvmerge.cpp:1828
 #, no-c-format
@@ -2229,12 +2238,12 @@ msgstr "„{0}“ не е валиден езиков код нито по ст�
 #: src/common/chapters/chapters.cpp:204
 #, no-c-format
 msgid "'{0}' is not a CHAPTERxx=... line."
-msgstr "'{0}' не е ред от типа ЕПИЗОДxx=... ред"
+msgstr "„{0}“ не е ред от типа ЕПИЗОДxx=... ред"
 
 #: src/common/chapters/chapters.cpp:208
 #, no-c-format
 msgid "'{0}' is not a CHAPTERxxNAME=... line."
-msgstr "'{0}' не е ред от типа ЕПИЗОДxxИМЕ=..."
+msgstr "„{0}“ не е ред от типа ЕПИЗОДxxИМЕ=..."
 
 #: src/common/xml/ebml_chapters_converter.cpp:151
 #, no-c-format
@@ -2244,7 +2253,7 @@ msgstr "„{0}“ не е валиден езиков код по стандар
 #: src/merge/mkvmerge.cpp:1536
 #, no-c-format
 msgid "'{0}' is not a valid append mode in '--append-mode {0}'.\n"
-msgstr ""
+msgstr "„{0}“ не е валиден режим за добавяне в '--append-mode {0}'.\n"
 
 #: src/merge/mkvmerge.cpp:1662
 #, no-c-format
@@ -2270,7 +2279,7 @@ msgstr ""
 #: src/common/hacks.cpp:102
 #, no-c-format
 msgid "'{0}' is not a valid hack.\n"
-msgstr "'{0}' не е валиден хак.\n"
+msgstr "„{0}“ не е валиден хак.\n"
 
 #: src/merge/mkvmerge.cpp:1521
 #, no-c-format
@@ -2330,7 +2339,7 @@ msgstr ""
 #: src/extract/extract_cli_parser.cpp:156
 #, no-c-format
 msgid "'{0}' is only allowed when extracting chapters.\n"
-msgstr "'{0}' е позволено само при извличането на епизоди.\n"
+msgstr "„{0}“ е позволено само при извличането на епизоди.\n"
 
 #: src/extract/extract_cli_parser.cpp:153
 #, no-c-format
@@ -3553,7 +3562,7 @@ msgstr "Аудио, субтитри, свойства на епизод"
 #: src/merge/mkvmerge.cpp:410
 #, no-c-format
 msgid "Automatic MIME type recognition for '{0}': {1}\n"
-msgstr "Автоматично разпознаване на MIME тип за '{0}': {1}\n"
+msgstr "Автоматично разпознаване на MIME тип за „{0}“: {1}\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1767
 #, no-c-format
@@ -3766,7 +3775,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/jobs/tool.cpp:586
 #, no-c-format
 msgid "C&ontinue"
-msgstr ""
+msgstr "&Продължи"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:125
 #: src/mkvtoolnix-gui/forms/util/text_display_dialog.h:81
@@ -4467,7 +4476,7 @@ msgstr ""
 #: src/merge/output_control.cpp:1702
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
-msgstr ""
+msgstr "Не може да се намери gptzr при прибавяне. {0}\n"
 
 #: src/output/p_mpeg4_p2.cpp:174
 #, no-c-format
@@ -4498,7 +4507,7 @@ msgstr ""
 #: src/common/chapters/chapters.cpp:296
 #, no-c-format
 msgid "Could not open '{0}' for reading.\n"
-msgstr "'{0}' не може да бъде отворен за четене.\n"
+msgstr "„{0}“ не може да бъде отворен за четене.\n"
 
 #: src/input/r_wavpack.cpp:66
 #, no-c-format
@@ -4588,7 +4597,7 @@ msgstr "Създай нов раздел с мултиплекс настрой�
 #: src/common/mm_io_x.h:117
 #, no-c-format
 msgid "Creating directory '{0}' failed: {1}"
-msgstr "Създаването на папка '{0}' се провали: {1}"
+msgstr "Създаването на папка „{0}“ се провали: {1}"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:713
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:202
@@ -4717,7 +4726,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1806
 #, no-c-format
 msgid "Cue name format:"
-msgstr ""
+msgstr "Cue име формат:"
 
 #: src/common/kax_element_names.cpp:212
 #, no-c-format
@@ -5031,7 +5040,7 @@ msgstr "Изтрий файловете, използвани като файл�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:407
 #, no-c-format
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
-msgstr ""
+msgstr "В зависимост от настройката по-долу, този език може да се използва и ако езикът във файла-източник е „неопределен“ (undetermined)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:367
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:373
@@ -5270,9 +5279,9 @@ msgid "Do you really want to add '%1' as another attachment?"
 msgstr ""
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:585
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Do you want to continue and risk overwriting the file?"
-msgstr "Искаш ли да презапишеш файла?"
+msgstr "Искаш ли да продължиш и да рискуваш файлът да бъде презаписан?"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:427
 #, no-c-format
@@ -5411,7 +5420,7 @@ msgstr ""
 #: src/common/kax_element_names.cpp:71
 #, no-c-format
 msgid "EBML head"
-msgstr ""
+msgstr "EBML head (Разширяем двоичен мета-език: заглавка)"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:177
 #, no-c-format
@@ -5554,7 +5563,7 @@ msgstr "Позволява крайният резултат да бъде ра�
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:63
 #, no-c-format
 msgid "Enables the creation of byte-identical files if the same source files with the same options and the same seed are used."
-msgstr ""
+msgstr "Позволява създаването на идентични по байтове файлове, ако се използват едни и същи файлове-източници и еднакви настройки."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:203
 #, no-c-format
@@ -5691,7 +5700,7 @@ msgstr "Грешка при четенето на Matroska файла"
 #: src/merge/output_control.cpp:735
 #, no-c-format
 msgid "Error reading from the file '{0}'.\n"
-msgstr "Грешка при четенето от файла '{0}'.\n"
+msgstr "Грешка при четенето от файла „{0}“.\n"
 
 #: src/common/qt_kax_analyzer.cpp:63
 #: src/common/qt_kax_analyzer.cpp:69
@@ -5749,7 +5758,7 @@ msgstr "Дори и при отсъствието на аудио пътечки
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1803
 #, no-c-format
 msgid "Even if there were errors"
-msgstr ""
+msgstr "Дори и да е имало грешки"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1802
 #, no-c-format
@@ -5798,7 +5807,7 @@ msgstr "Изпълними файлове"
 #: src/mkvtoolnix-gui/merge/input.cpp:2003
 #, no-c-format
 msgid "Executable not found"
-msgstr ""
+msgstr "Изпълнимият файл не бе намерен"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:194
 #: src/mkvtoolnix-gui/util/settings.cpp:62
@@ -5933,17 +5942,17 @@ msgstr ""
 #: src/extract/xtr_vobsub.cpp:260
 #, no-c-format
 msgid "Failed to create the file '{0}': {1}\n"
-msgstr "Не може да се създаде файла '{0}': {1}\n"
+msgstr "Не може да се създаде файла „{0}“: {1}\n"
 
 #: src/extract/xtr_base.cpp:81
 #, no-c-format
 msgid "Failed to create the file '{0}': {1} ({2})\n"
-msgstr "Не може да се създаде файла '{0}': {1} ({2})\n"
+msgstr "Не може да се създаде файла „{0}“: {1} ({2})\n"
 
 #: src/extract/xtr_tta.cpp:45
 #, no-c-format
 msgid "Failed to create the temporary file '{0}': {1}\n"
-msgstr "Грешка при създаването на временен файл '{0}': {1}\n"
+msgstr "Грешка при създаването на временен файл „{0}“: {1}\n"
 
 #: src/extract/xtr_textsubs.cpp:345
 #, no-c-format
@@ -5978,12 +5987,12 @@ msgstr ""
 #: src/merge/generic_reader.cpp:291
 #, no-c-format
 msgid "File '{0}': container: {1}"
-msgstr "Файл '{0}': контейнер: {1}"
+msgstr "Файл „{0}“: контейнер: {1}"
 
 #: src/merge/id_result.cpp:22
 #, no-c-format
 msgid "File '{0}': unsupported container: {1}\n"
-msgstr "Файл '{0}': неподдържан контейнер: {1}\n"
+msgstr "Файл „{0}“: неподдържан контейнер: {1}\n"
 
 #: src/common/kax_element_names.cpp:233
 #, no-c-format
@@ -6080,7 +6089,7 @@ msgstr "Приключено на:"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1752
 #, no-c-format
 msgid "Fix bitstream timing info"
-msgstr ""
+msgstr "Коригиране информацията за времето на битовия поток"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:176
 #, no-c-format
@@ -6308,7 +6317,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1804
 #, no-c-format
 msgid "Generating chapters:"
-msgstr "Генерирай епизоди:"
+msgstr "Генериране на епизоди:"
 
 #: src/extract/extract_cli_parser.cpp:68
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:65
@@ -6705,7 +6714,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/input.cpp:457
 #, no-c-format
 msgid "If set to 'determine automatically' then mkvmerge will choose one track of each type to have this flag set based on the information in the source files and the order of the tracks."
-msgstr ""
+msgstr "Ако е зададено „определи автоматично“, mkvmerge ще избере по една пътечка от всеки тип, на която да включи този флаг, въз основа на информацията от файловете-източници и реда на медийните пътечки."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:465
 #, no-c-format
@@ -6865,7 +6874,7 @@ msgstr "В долната част, &под файловете и пътечки
 #: src/mkvtoolnix-gui/merge/output.cpp:213
 #, no-c-format
 msgid "In fixed intervals: chapters are created in fixed intervals, e.g. every 30 seconds."
-msgstr ""
+msgstr "На фиксирани интервали: епизодите се създават на фиксирани интервали, например на всеки 30 секунди."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
 #, no-c-format
@@ -7026,7 +7035,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:3080
 #, no-c-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
-msgstr "Невалиден номер на епизод '{0}' за '--split' в '--split {1}': {2}\n"
+msgstr "Невалиден номер на епизод „{0}“ за '--split' в '--split {1}': {2}\n"
 
 #: src/merge/mkvmerge.cpp:1319
 #, no-c-format
@@ -7373,7 +7382,7 @@ msgstr "Игнорира се за XML файлове с епизоди."
 #: src/mkvtoolnix-gui/merge/input.cpp:2006
 #, no-c-format
 msgid "Its installation location could not be determined automatically."
-msgstr ""
+msgstr "Инсталационната му директория не може да бъде определена автоматично."
 
 #: src/common/command_line.cpp:61
 #: src/common/command_line.cpp:65
@@ -8142,7 +8151,7 @@ msgstr "Не"
 #: src/propedit/propedit.cpp:121
 #, no-c-format
 msgid "No 'EBML head' element was found."
-msgstr ""
+msgstr "Не бе открит „EBML head“ елемент."
 
 #: src/input/r_qtmp4.cpp:1648
 #, no-c-format
@@ -8157,7 +8166,7 @@ msgstr ""
 #: src/common/kax_info.cpp:1201
 #, no-c-format
 msgid "No EBML head found."
-msgstr ""
+msgstr "Не бе намерен EBML head."
 
 #: src/merge/mkvmerge.cpp:414
 #, no-c-format
@@ -8403,7 +8412,7 @@ msgstr "Не е ключов кадър"
 #: src/common/kax_analyzer.cpp:317
 #, no-c-format
 msgid "Not a valid Matroska file (no EBML head found)"
-msgstr ""
+msgstr "Невалиден Matroska файл (не бе намерен EBML head)"
 
 #: src/common/kax_analyzer.cpp:336
 #, no-c-format
@@ -8709,8 +8718,8 @@ msgstr[1] "Отвори съответните файлове в &МедияИн
 #, no-c-format
 msgid "Open file in &MediaInfo"
 msgid_plural "Open files in &MediaInfo"
-msgstr[0] "Отвори файл в &MediaInfo"
-msgstr[1] "Отвори файлове в &MediaInfo"
+msgstr[0] "Отвори файла в &MediaInfo"
+msgstr[1] "Отвори файловете в &MediaInfo"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:185
 #, no-c-format
@@ -9484,7 +9493,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1764
 #, no-c-format
 msgid "Reduce to core"
-msgstr ""
+msgstr "Reduce to core (Намаляване до ядрото)"
 
 #: src/common/kax_element_names.cpp:241
 #, no-c-format
@@ -9996,8 +10005,8 @@ msgstr ""
 #, no-c-format
 msgid "Select all &items from selected file"
 msgid_plural "Select all &items from selected files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Избери всички &ресурси от избрания файл"
+msgstr[1] "Избери всички &ресурси от избраните файлове"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1496
 #, no-c-format
@@ -10279,14 +10288,14 @@ msgid "Show the first 16 bytes of each frame as a hex dump."
 msgstr "Покажи първите 16 байта на всеки кадър в шестнадесетичен вид."
 
 #: src/info/info_cli_parser.cpp:41
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Show the position of each element in decimal."
-msgstr "Покажи размера на всеки елемент, включително заглавието му."
+msgstr "Покажи позицията на всеки елемент в десетичната система."
 
 #: src/info/info_cli_parser.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Show the position of each element in hexadecimal."
-msgstr "Покажи размера на всеки елемент, включително заглавието му."
+msgstr "Покажи позицията на всеки елемент в шестнадесетичен вид."
 
 #: src/info/info_cli_parser.cpp:47
 #, no-c-format
@@ -11327,7 +11336,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/input.cpp:1180
 #, no-c-format
 msgid "The file '%1' contains chapters."
-msgstr ""
+msgstr "Файлът „%1“ съдържа епизоди (chapters)."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1198
 #, no-c-format
@@ -11347,7 +11356,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/jobs/tool.cpp:583
 #, no-c-format
 msgid "The file '%1' exists already and might be overwritten depending on the configuration & the content of the source files."
-msgstr ""
+msgstr "Файлът „%1“ вече съществува и може да бъде презаписан в зависимост от съдържанието на файловете източници и конфигурацията."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:546
 #, no-c-format
@@ -11724,7 +11733,7 @@ msgstr "Езиковият код „{0}“ не е валиден езиков 
 #: src/mkvtoolnix-gui/merge/output.cpp:214
 #, no-c-format
 msgid "The language for the newly created chapters is set via the chapter language control above."
-msgstr ""
+msgstr "Езикът за новосъздадените епизоди е зададен чрез контрол на езика на епизода по-горе."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:451
 #, no-c-format
@@ -11935,7 +11944,7 @@ msgstr "Файлът с опции беше създаден."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:411
 #, no-c-format
 msgid "The options entered here are set for all new multiplex jobs by default."
-msgstr ""
+msgstr "Въведените тук настройки се задават по подразбиране за всички нови мултиплекс задачи."
 
 #: src/propedit/propedit_cli_parser.cpp:242
 #, no-c-format
@@ -12388,7 +12397,7 @@ msgstr ""
 #: src/propedit/propedit.cpp:122
 #, no-c-format
 msgid "There's not enough space at the beginning of the file to fit the updated 'EBML head' element in."
-msgstr ""
+msgstr "Няма достатъчно свободно място в началото на файла за да се набута актуализирания „EBML head“ елемент."
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
 #, no-c-format
@@ -12405,7 +12414,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/input.cpp:1217
 #, no-c-format
 msgid "These aren't treated like other source files in MKVToolNix."
-msgstr ""
+msgstr "Те не се третират като другите файлове-източници в MKVToolNix."
 
 #: src/input/r_avi.cpp:523
 #: src/input/r_real.cpp:267
@@ -13138,7 +13147,7 @@ msgstr ""
 #: src/common/cli_parser.cpp:117
 #, no-c-format
 msgid "Unknown option '{0}'.\n"
-msgstr "Неизвестна опция '{0}'.\n"
+msgstr "Неизвестна опция „{0}“.\n"
 
 #: src/propedit/propedit_cli_parser.cpp:34
 #, no-c-format
@@ -13275,7 +13284,7 @@ msgstr ""
 #: src/merge/generic_reader.h:44
 #, no-c-format
 msgid "Using the output module for the format '{0}'.\n"
-msgstr ""
+msgstr "Използване на изходния модул за формата „{0}“.\n"
 
 #: src/merge/cluster_helper.cpp:756
 #, no-c-format
@@ -13771,7 +13780,7 @@ msgstr "Обикновено, при добавяне на файл-източн
 #: src/mkvtoolnix-gui/merge/output.cpp:212
 #, no-c-format
 msgid "When appending: one chapter is created at the start and one whenever a file is appended."
-msgstr ""
+msgstr "При разширяване: създава се по един епизод в началото на всеки файл."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:286
 #, no-c-format
@@ -13902,7 +13911,7 @@ msgstr "Пишещо приложение"
 #: src/extract/xtr_vobsub.cpp:235
 #, no-c-format
 msgid "Writing the VobSub index file '{0}'.\n"
-msgstr "Писане на индексния VobSub файл '{0}'.\n"
+msgstr "Писане на индексния VobSub файл „{0}“.\n"
 
 #: src/common/kate.cpp:55
 #, no-c-format
@@ -14388,7 +14397,7 @@ msgstr "matroska_reader: Широчина на пикселите липсва.\
 #: src/input/r_matroska.cpp:741
 #, no-c-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
-msgstr "matroska_reader: CodecID '{0}' за медийна пътечка {1} е неизвестен.\n"
+msgstr "matroska_reader: CodecID „{0}“ за медийна пътечка {1} е неизвестен.\n"
 
 #: src/input/r_matroska.cpp:394
 #: src/input/r_matroska.cpp:439
@@ -14611,7 +14620,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/output.cpp:193
 #, no-c-format
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
-msgstr "mkvmerge поддържа два формата за епизоди: OGM текстов формат и зареденият с пълен набор от функции XML формат."
+msgstr "mkvmerge поддържа два формата за епизоди: OGM текстов формат и заредения с пълен набор от функции XML формат."
 
 #: src/merge/output_control.cpp:254
 #: src/merge/output_control.cpp:297
