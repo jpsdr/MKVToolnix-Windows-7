@@ -636,23 +636,20 @@ Tab::onCopyTitleToOutputFileName() {
 
   m_config.m_destinationUniquenessSuffix.clear();
 
-  auto info = QFileInfo{ m_config.m_destination };
-  auto path = info.path();
+  auto info  = QFileInfo{ m_config.m_destination };
+  auto path  = info.path();
+  auto title = Util::replaceInvalidFileNameCharacters(m_config.m_title);
 
   QString newFileName;
 
   if (Util::Settings::get().m_uniqueOutputFileNames)
-    newFileName = generateUniqueOutputFileName(m_config.m_title, QDir{path});
+    newFileName = generateUniqueOutputFileName(title, QDir{path});
 
   else {
-    if (!path.isEmpty())
-      newFileName = Q("%1/%2").arg(path).arg(newFileName);
-
     auto suffix = info.suffix();
-    if (suffix.isEmpty())
-      suffix = "mkv";
-
-    newFileName = Q("%1.%2").arg(newFileName).arg(suffix);
+    newFileName = Q("%1.%2")
+      .arg(path.isEmpty()   ? title    : Q("%1/%2").arg(path).arg(title))
+      .arg(suffix.isEmpty() ? Q("mkv") : suffix);
   }
 
   ui->output->setText(QDir::toNativeSeparators(newFileName));

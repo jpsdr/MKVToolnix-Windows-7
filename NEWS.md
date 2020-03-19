@@ -4,6 +4,14 @@
 
 * mkvmerge: MP4 reader: fixed calculating the duration of video tracks that
   only contain a single frame. Fixes #2747.
+* MKVToolNix GUI: multiplexer: when using the title as part of the destination
+  file name (both automatically as well as using the "copy title to
+  destination file name" function) all characters that aren't valid in a file
+  name are replaced by hyphens.
+* MKVToolNix GUI: multiplexer: the "copy title to destination file name"
+  function was broken when the "make file name unique" option in the
+  preferences was disabled. In that case the file base name was removed
+  regardless of what the title was set to at the time.
 
 
 # Version 44.0.0 "Domino" 2020-03-08

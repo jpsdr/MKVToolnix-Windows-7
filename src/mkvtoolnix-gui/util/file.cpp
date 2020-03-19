@@ -75,6 +75,19 @@ removeInvalidPathCharacters(QString fileName) {
 #endif
 }
 
+QString
+replaceInvalidFileNameCharacters(QString fileName) {
+#if defined(SYS_WINDOWS)
+  static DeferredRegularExpression s_invalidCharRE{Q(R"([\\/:<>"|?*\x{01}-\x{1f}]+)")};
+#else
+  static DeferredRegularExpression s_invalidCharRE{Q("/+")};
+#endif
+
+  fileName.replace(*s_invalidCharRE, Q("-"));
+
+  return fileName;
+}
+
 QStringList
 replaceDirectoriesByContainedFiles(QStringList const &namesToCheck) {
   QStringList fileNames;
