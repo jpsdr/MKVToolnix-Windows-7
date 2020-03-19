@@ -148,7 +148,7 @@ run(options_cptr &options) {
   try {
     ok = analyzer
       ->set_parse_mode(options->m_parse_mode)
-      .set_open_mode(MODE_WRITE)
+      .set_open_mode(MODE_READ)
       .set_throw_on_error(true)
       .set_doc_type_version_handler(g_doc_type_version_handler.get())
       .process();
@@ -173,13 +173,18 @@ run(options_cptr &options) {
   if (has_content_been_modified(options)) {
     mxinfo(Y("The changes are written to the file.\n"));
 
-    write_changes(options, analyzer.get());
+    try {
+      write_changes(options, analyzer.get());
 
-    auto result = analyzer->update_uid_referrals(g_track_uid_changes);
-    if (kax_analyzer_c::uer_success != result)
-      display_update_element_result(KaxTracks::ClassInfos, result);
+      auto result = analyzer->update_uid_referrals(g_track_uid_changes);
+      if (kax_analyzer_c::uer_success != result)
+        display_update_element_result(KaxTracks::ClassInfos, result);
 
-    update_ebml_head(analyzer->get_file());
+      update_ebml_head(analyzer->get_file());
+    } catch (mtx::exception &ex) {
+      mxerror(fmt::format(Y("The file '{0}' could not be opened for reading and writing, or a read/write operation on it failed: {1}.\n"), options->m_file_name, ex));
+    } catch (...) {
+    }
 
     mxinfo(Y("Done.\n"));
 

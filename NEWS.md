@@ -12,6 +12,9 @@
   function was broken when the "make file name unique" option in the
   preferences was disabled. In that case the file base name was removed
   regardless of what the title was set to at the time.
+* mkvpropedit: Windows: mkvpropedit wasn't caching when reading the file to
+  modify, slowing down operations such as adding track statistics tags
+  considerably. Fixes #2761.
 
 
 # Version 44.0.0 "Domino" 2020-03-08
