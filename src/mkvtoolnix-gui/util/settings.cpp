@@ -840,13 +840,13 @@ Settings::exeWithPath(QString const &exe) {
 
   for (auto const &potentialExe : potentialExes)
     if (bfs::exists(potentialExe))
-      return to_qs(potentialExe.string());
+      return QDir::toNativeSeparators(to_qs(potentialExe.string()));
 
   auto location = QStandardPaths::findExecutable(to_qs(program.string()));
   if (!location.isEmpty())
-    return location;
+    return QDir::toNativeSeparators(location);
 
-  return exe;
+  return QDir::toNativeSeparators(exe);
 }
 
 void

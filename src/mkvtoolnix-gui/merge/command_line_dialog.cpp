@@ -59,6 +59,11 @@ CommandLineDialog::onEscapeModeChanged(int index) {
   if (mtx::included_in(mode, Util::EscapeJSON))
     opts.removeFirst();
 
+#if defined(SYS_WINDOWS)
+  else if (mode == Util::EscapeShellUnix)
+    opts[0].replace(QChar{'\\'}, QChar{'/'});
+#endif  // SYS_WINDOWS
+
   ui->commandLine->setPlainText(Util::escape(opts, mode).join(Q(" ")));
 }
 

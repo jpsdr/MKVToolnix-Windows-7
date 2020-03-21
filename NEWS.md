@@ -15,6 +15,10 @@
 * mkvpropedit: Windows: mkvpropedit wasn't caching when reading the file to
   modify, slowing down operations such as adding track statistics tags
   considerably. Fixes #2761.
+* MKVToolNix GUI: multiplexer: when using the "show command line" menu option
+  on Windows the path to the `mkvmerge` executable was shown with forward
+  slashes instead of backslashes. This is a purely cosmetic fix as Windows
+  supports both forward and backward slashes.
 
 
 # Version 44.0.0 "Domino" 2020-03-08
