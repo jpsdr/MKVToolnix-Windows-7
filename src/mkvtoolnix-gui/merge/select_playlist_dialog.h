@@ -2,6 +2,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/bluray/disc_library.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 
 #include <QDialog>
@@ -22,9 +23,10 @@ class SelectPlaylistDialog : public QDialog {
 protected:
   std::unique_ptr<Ui::SelectPlaylistDialog> ui;
   QList<SourceFilePtr> m_scannedFiles;
+  std::optional<mtx::bluray::disc_library::disc_library_t> m_discLibrary;
 
 public:
-  explicit SelectPlaylistDialog(QWidget *parent, QList<SourceFilePtr> const &scannedFiles);
+  explicit SelectPlaylistDialog(QWidget *parent, QList<SourceFilePtr> const &scannedFiles, std::optional<mtx::bluray::disc_library::disc_library_t> const &discLibrary);
   ~SelectPlaylistDialog();
 
   SourceFilePtr select();
@@ -34,6 +36,8 @@ protected slots:
 
 protected:
   void setupUi();
+  void setupScannedFiles();
+  void setupDiscLibrary();
 };
 
 }

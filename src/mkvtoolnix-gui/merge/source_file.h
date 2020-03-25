@@ -2,6 +2,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/bluray/disc_library.h"
 #include "common/file_types.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
@@ -38,6 +39,8 @@ public:
   uint64_t m_playlistDuration, m_playlistSize, m_playlistChapters;
 
   double m_probeRangePercentage;
+
+  std::optional<mtx::bluray::disc_library::info_t> m_discLibraryInfoToAdd;
 
 public:
   explicit SourceFile(QString const &fileName = QString{""});

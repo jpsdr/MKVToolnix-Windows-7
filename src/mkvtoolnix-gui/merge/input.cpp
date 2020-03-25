@@ -1283,28 +1283,16 @@ Tab::addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles,
 void
 Tab::addDataFromIdentifiedBlurayFiles(QList<SourceFilePtr> const &files) {
   for (auto const &file : files) {
-    if (!file->m_isPlaylist)
+    if (!file->m_discLibraryInfoToAdd)
       continue;
 
-    auto disc_library = mtx::bluray::disc_library::locate_and_parse(to_utf8(file->m_fileName));
-    if (!disc_library)
-      continue;
+    auto &info = *file->m_discLibraryInfoToAdd;
 
-    auto info = disc_library->m_infos_by_language.begin();
-    auto end  = disc_library->m_infos_by_language.end();
-
-    if (disc_library->m_infos_by_language.size() > 1)
-      while ((info != end) && (info->first != "eng"))
-        ++info;
-
-    if (info == end)
-      continue;
-
-    if (!info->second.m_title.empty())
-      setTitleMaybe(Q(info->second.m_title));
+    if (!info.m_title.empty())
+      setTitleMaybe(Q(info.m_title));
 
     if (Util::Settings::get().m_mergeAddBlurayCovers)
-      addAttachmentsFromIdentifiedBluray(info->second);
+      addAttachmentsFromIdentifiedBluray(info);
   }
 }
 
@@ -1347,7 +1335,23 @@ Tab::showScanningPlaylistDialog(int numFilesToScan) {
 
 void
 Tab::selectPlaylistToAdd(QList<SourceFilePtr> const &identifiedPlaylists) {
-  auto playlist = SelectPlaylistDialog{this, identifiedPlaylists}.select();
+  if (identifiedPlaylists.isEmpty())
+    return;
+
+  auto discLibrary = mtx::bluray::disc_library::locate_and_parse(to_utf8(identifiedPlaylists[0]->m_fileName));
+
+  if ((identifiedPlaylists.size() == 1) && (!discLibrary || (discLibrary->m_infos_by_language.size() <= 1))) {
+    if (discLibrary && (discLibrary->m_infos_by_language.size() == 1))
+      identifiedPlaylists[0]->m_discLibraryInfoToAdd = discLibrary->m_infos_by_language.begin()->second;
+
+    m_identifier->worker().addIdentifiedFile(identifiedPlaylists[0]);
+
+    m_identifier->continueIdentification();
+
+    return;
+  }
+
+  auto playlist = SelectPlaylistDialog{this, identifiedPlaylists, discLibrary}.select();
 
   if (playlist)
     m_identifier->worker().addIdentifiedFile(playlist);

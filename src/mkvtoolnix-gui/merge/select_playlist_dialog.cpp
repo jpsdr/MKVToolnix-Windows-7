@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include "common/iso639.h"
 #include "common/strings/formatting.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/select_playlist_dialog.h"
@@ -156,11 +157,83 @@ PlaylistItem::create(unsigned int order,
 
 // ------------------------------------------------------------
 
+class DiscLibraryItem: public QTreeWidgetItem {
+public:
+  mtx::bluray::disc_library::info_t m_info;
+
+public:
+  DiscLibraryItem(mtx::bluray::disc_library::info_t const &info, QStringList const &texts);
+  virtual bool operator <(QTreeWidgetItem const &cmp) const;
+
+public:
+  static DiscLibraryItem *create(std::string const &language, mtx::bluray::disc_library::info_t const &info);
+};
+
+DiscLibraryItem::DiscLibraryItem(mtx::bluray::disc_library::info_t const &info,
+                                 QStringList const &texts)
+  : QTreeWidgetItem{texts}
+  , m_info{info}
+{
+}
+
+bool
+DiscLibraryItem::operator <(QTreeWidgetItem const &cmp)
+  const {
+  auto &otherItem = static_cast<DiscLibraryItem const &>(cmp);
+  auto column     = treeWidget()->sortColumn();
+
+  if (column != 3)
+    return text(column).toLower() < otherItem.text(column).toLower();
+
+  auto mySize    = std::make_pair(          data(3, Qt::UserRole).toUInt(),           data(3, Qt::UserRole + 1).toUInt());
+  auto otherSize = std::make_pair(otherItem.data(3, Qt::UserRole).toUInt(), otherItem.data(3, Qt::UserRole + 1).toUInt());
+
+  return mySize < otherSize;
+}
+
+DiscLibraryItem *
+DiscLibraryItem::create(std::string const &language,
+                        mtx::bluray::disc_library::info_t const &info) {
+  auto biggestThumbnail = info.m_thumbnails.begin();
+  auto end              = info.m_thumbnails.end();
+
+  for (auto currentThumbnail = info.m_thumbnails.begin(); currentThumbnail != end; ++currentThumbnail) {
+    auto size = currentThumbnail->m_width * currentThumbnail->m_height;
+
+    if (size > (biggestThumbnail->m_width * biggestThumbnail->m_height))
+      biggestThumbnail = currentThumbnail;
+  }
+
+  auto languageIdx  = map_to_iso639_2_code(language);
+  auto languageName = languageIdx >= 0 ? Q(g_iso639_languages[languageIdx].english_name) : Q(language);
+
+  auto item = new DiscLibraryItem{info, QStringList{
+    languageName,
+    Q(info.m_title),
+    biggestThumbnail == end ? Q("") : Q(biggestThumbnail->m_file_name.filename().string()),
+    biggestThumbnail == end ? Q("") : Q("%1x%2").arg(biggestThumbnail->m_width).arg(biggestThumbnail->m_height),
+  }};
+
+  item->setData(0, Qt::UserRole, Q(language));
+
+  if (biggestThumbnail != end) {
+    item->setTextAlignment(3, Qt::AlignRight | Qt::AlignVCenter);
+    item->setData(3, Qt::UserRole,     biggestThumbnail->m_width);
+    item->setData(3, Qt::UserRole + 1, biggestThumbnail->m_height);
+  }
+
+  return item;
+}
+
+// ------------------------------------------------------------
+
 SelectPlaylistDialog::SelectPlaylistDialog(QWidget *parent,
-                                           QList<SourceFilePtr> const &scannedFiles)
+                                           QList<SourceFilePtr> const &scannedFiles,
+                                           std::optional<mtx::bluray::disc_library::disc_library_t> const &discLibrary)
   : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , ui{new Ui::SelectPlaylistDialog}
   , m_scannedFiles{scannedFiles}
+  , m_discLibrary{discLibrary}
 {
   // Setup UI controls.
   ui->setupUi(this);
@@ -173,12 +246,7 @@ SelectPlaylistDialog::~SelectPlaylistDialog() {
 }
 
 void
-SelectPlaylistDialog::setupUi() {
-  auto &cfg = Util::Settings::get();
-
-  cfg.handleSplitterSizes(ui->selectPlaylistDialogSplitter1);
-  cfg.handleSplitterSizes(ui->selectPlaylistDialogSplitter2);
-
+SelectPlaylistDialog::setupScannedFiles() {
   auto items = QList<QTreeWidgetItem *>{};
   for (auto const &scannedFile : m_scannedFiles)
     items << ScannedFileItem::create(*scannedFile);
@@ -187,13 +255,60 @@ SelectPlaylistDialog::setupUi() {
   ui->scannedFiles->setSortingEnabled(true);
   ui->scannedFiles->sortItems(1, Qt::DescendingOrder);
 
+  Util::selectRow(ui->scannedFiles, 0);
+
   Util::resizeViewColumnsToContents(ui->scannedFiles);
+}
+
+void
+SelectPlaylistDialog::setupDiscLibrary() {
+  auto haveLibrary = m_discLibrary && !m_discLibrary->m_infos_by_language.empty();
+
+  ui->discLibraryStack->setCurrentIndex(haveLibrary ? 0 : 1);
+
+  if (!haveLibrary)
+    return;
+
+  auto items = QList<QTreeWidgetItem *>{};
+  for (auto const &infoItr : m_discLibrary->m_infos_by_language)
+    items << DiscLibraryItem::create(infoItr.first, infoItr.second);
+
+  ui->discLibrary->insertTopLevelItems(0, items);
+  ui->discLibrary->setSortingEnabled(true);
+  ui->discLibrary->sortItems(0, Qt::AscendingOrder);
+
+  int rowToSelect = 0;
+  auto model      = ui->discLibrary->model();
+
+  for (auto row = 0, numRows = model->rowCount(); row < numRows; ++row) {
+    auto language = model->data(model->index(row, 0), Qt::UserRole).toString();
+    if (language == Q("eng")) {
+      rowToSelect = row;
+      break;
+    }
+  }
+
+  Util::selectRow(ui->discLibrary, rowToSelect);
+
+  Util::resizeViewColumnsToContents(ui->discLibrary);
+}
+
+void
+SelectPlaylistDialog::setupUi() {
+  auto &cfg = Util::Settings::get();
+
+  setupScannedFiles();
+  setupDiscLibrary();
+
+  cfg.handleSplitterSizes(ui->selectPlaylistDialogSplitter1);
+  cfg.handleSplitterSizes(ui->selectPlaylistDialogSplitter2);
+  cfg.handleSplitterSizes(ui->selectPlaylistDialogSplitter3);
+
+  Util::restoreWidgetGeometry(this);
 
   auto okButton = Util::buttonForRole(ui->buttonBox, QDialogButtonBox::AcceptRole);
   okButton->setText(QY("&Add"));
   okButton->setDefault(true);
-
-  Util::restoreWidgetGeometry(this);
 
   connect(ui->buttonBox,    &QDialogButtonBox::accepted,      this, &SelectPlaylistDialog::accept);
   connect(ui->buttonBox,    &QDialogButtonBox::rejected,      this, &SelectPlaylistDialog::reject);
@@ -246,14 +361,31 @@ SelectPlaylistDialog::onScannedFileSelected(QTreeWidgetItem *current,
 SourceFilePtr
 SelectPlaylistDialog::select() {
   if (exec() == QDialog::Rejected)
-    return SourceFilePtr{};
+    return {};
 
-  auto item = static_cast<ScannedFileItem *>(ui->scannedFiles->currentItem());
-  if (!item)
-    return SourceFilePtr{};
+  auto modelIdx = Util::selectedRowIdx(ui->scannedFiles);
+  if (!modelIdx.isValid())
+    return {};
 
-  auto idx = Util::findPtr(item->m_file, m_scannedFiles);
-  return idx >= 0 ? m_scannedFiles[idx] : SourceFilePtr{};
+  auto fileItem = dynamic_cast<ScannedFileItem *>(ui->scannedFiles->invisibleRootItem()->child(modelIdx.row()));
+  if (!fileItem)
+    return {};
+
+  auto idx = Util::findPtr(fileItem->m_file, m_scannedFiles);
+  if (idx < 0)
+    return {};
+
+  auto sourceFile = m_scannedFiles[idx];
+  modelIdx        = Util::selectedRowIdx(ui->discLibrary);
+
+  if (!modelIdx.isValid())
+    return sourceFile;
+
+  auto libraryItem = dynamic_cast<DiscLibraryItem *>(ui->discLibrary->invisibleRootItem()->child(modelIdx.row()));
+  if (libraryItem)
+    sourceFile->m_discLibraryInfoToAdd = libraryItem->m_info;
+
+  return sourceFile;
 }
 
 }

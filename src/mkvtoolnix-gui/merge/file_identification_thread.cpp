@@ -243,13 +243,7 @@ FileIdentificationWorker::scanPlaylists(QFileInfoList const &files) {
     return Result::Continue;
   }
 
-  if (identifiedPlaylists.count() == 1) {
-    qDebug() << "FileIdentificationWorker::scanPlaylists: scan finished, exactly one file, adding directly";
-    addIdentifiedFile(identifiedPlaylists.first());
-    return Result::Continue;
-  }
-
-  qDebug() << "FileIdentificationWorker::scanPlaylists: scan finished, multiple files, requiring user selection";
+  qDebug() << "FileIdentificationWorker::scanPlaylists: scan finished with one or more files, potentially requiring user selection";
 
   emit playlistSelectionNeeded(identifiedPlaylists);
 

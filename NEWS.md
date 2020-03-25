@@ -21,8 +21,9 @@
   supports both forward and backward slashes.
 * MKVToolNix GUI: multiplexer: when adding Blu-ray playlists the GUI used to
   only look for the English version of the disc library information (title &
-  cover images). Now the GUI will also use another disc library information
-  for a different language if that language's the only one. Fixes #2765.
+  cover images). Now the GUI will present all disc library entries in the
+  "select playlist to add" dialog & let the user chose which one to use (if
+  any). Fixes #2765.
 
 
 # Version 44.0.0 "Domino" 2020-03-08
