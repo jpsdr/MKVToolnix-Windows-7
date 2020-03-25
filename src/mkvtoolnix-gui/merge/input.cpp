@@ -1286,15 +1286,25 @@ Tab::addDataFromIdentifiedBlurayFiles(QList<SourceFilePtr> const &files) {
     if (!file->m_isPlaylist)
       continue;
 
-    auto info = mtx::bluray::disc_library::locate_and_parse_for_language(to_utf8(file->m_fileName), "eng");
-    if (!info)
+    auto disc_library = mtx::bluray::disc_library::locate_and_parse(to_utf8(file->m_fileName));
+    if (!disc_library)
       continue;
 
-    if (!info->m_title.empty())
-      setTitleMaybe(Q(info->m_title));
+    auto info = disc_library->m_infos_by_language.begin();
+    auto end  = disc_library->m_infos_by_language.end();
+
+    if (disc_library->m_infos_by_language.size() > 1)
+      while ((info != end) && (info->first != "eng"))
+        ++info;
+
+    if (info == end)
+      continue;
+
+    if (!info->second.m_title.empty())
+      setTitleMaybe(Q(info->second.m_title));
 
     if (Util::Settings::get().m_mergeAddBlurayCovers)
-      addAttachmentsFromIdentifiedBluray(*info);
+      addAttachmentsFromIdentifiedBluray(info->second);
   }
 }
 

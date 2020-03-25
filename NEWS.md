@@ -19,6 +19,10 @@
   on Windows the path to the `mkvmerge` executable was shown with forward
   slashes instead of backslashes. This is a purely cosmetic fix as Windows
   supports both forward and backward slashes.
+* MKVToolNix GUI: multiplexer: when adding Blu-ray playlists the GUI used to
+  only look for the English version of the disc library information (title &
+  cover images). Now the GUI will also use another disc library information
+  for a different language if that language's the only one. Fixes #2765.
 
 
 # Version 44.0.0 "Domino" 2020-03-08
