@@ -153,6 +153,7 @@ public:
   ProcessPriority m_priority;
   double m_probeRangePercentage;
   QTabWidget::TabPosition m_tabPosition;
+  bool m_elideTabHeaderLabels;
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir;
   bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_autoClearFileTitle, m_disableCompressionForAllTrackTypes, m_disableDefaultTrackForSubtitles, m_mergeAlwaysShowOutputFileControls, m_dropLastChapterFromBlurayPlaylist;
   bool m_mergeEnableDialogNormGainRemoval, m_mergeAddBlurayCovers;

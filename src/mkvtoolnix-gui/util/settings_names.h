@@ -40,6 +40,7 @@ char const * const s_valDefaultVideoTrackLanguage           = "defaultVideoTrack
 char const * const s_valDisableCompressionForAllTrackTypes  = "disableCompressionForAllTrackTypes";
 char const * const s_valDisableDefaultTrackForSubtitles     = "disableDefaultTrackForSubtitles";
 char const * const s_valDropLastChapterFromBlurayPlaylist   = "dropLastChapterFromBlurayPlaylist";
+char const * const s_valElideTabHeaderLabels                = "elideTabHeaderLabels";
 char const * const s_valEnableMuxingAllAudioTracks          = "enableMuxingAllAudioTracks";
 char const * const s_valEnableMuxingAllSubtitleTracks       = "enableMuxingAllSubtitleTracks";
 char const * const s_valEnableMuxingAllVideoTracks          = "enableMuxingAllVideoTracks";

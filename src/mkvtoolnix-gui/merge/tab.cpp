@@ -92,17 +92,18 @@ Tab::Tab(QWidget *parent)
   ui->setupUi(this);
 
   auto mw = MainWindow::get();
-  connect(mw, &MainWindow::preferencesChanged, this, &Tab::setupTabPositions);
+  connect(mw, &MainWindow::preferencesChanged, [this]() { Util::setupTabWidgetHeaders(*ui->tabs); });
 
   m_filesModel->setOtherModels(m_tracksModel, m_attachedFilesModel);
 
   setupInputControls();
   setupOutputControls();
   setupAttachmentsControls();
-  setupTabPositions();
   setupFileIdentificationThread();
 
   setControlValuesFromConfig();
+
+  Util::setupTabWidgetHeaders(*ui->tabs);
 
   retranslateUi();
 
@@ -517,11 +518,6 @@ Tab::hasBeenModified() {
 bool
 Tab::isEmpty() {
   return currentState() == m_emptyState;
-}
-
-void
-Tab::setupTabPositions() {
-  ui->tabs->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
 }

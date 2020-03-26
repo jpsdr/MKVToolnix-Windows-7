@@ -40,7 +40,7 @@ Tool::~Tool() {
 
 void
 Tool::setupUi() {
-  setupTabPositions();
+  Util::setupTabWidgetHeaders(*ui->infos);
 
   showInfoWidget();
 
@@ -62,7 +62,7 @@ Tool::setupActions() {
   connect(ui->infos,                &QTabWidget::tabCloseRequested,  this, &Tool::closeTab);
   connect(ui->openFileButton,       &QPushButton::clicked,           this, &Tool::selectAndOpenFile);
 
-  connect(mw,                       &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
+  connect(mw,                       &MainWindow::preferencesChanged, [this]() { Util::setupTabWidgetHeaders(*ui->infos); });
   connect(mw,                       &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
 
   connect(App::instance(),          &App::runningInfoOnRequested,    this, &Tool::openMultipleFilesFromCommandLine);
@@ -215,11 +215,6 @@ Tool::openMultipleFilesFromCommandLine(QStringList const &fileNames) {
   MainWindow::get()->switchToTool(this);
   for (auto const &fileName : fileNames)
     openFile(fileName);
-}
-
-void
-Tool::setupTabPositions() {
-  ui->infos->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
 std::pair<QString, QString>

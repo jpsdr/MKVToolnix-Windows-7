@@ -204,4 +204,12 @@ addSegmentUIDFromFileToLineEdit(QWidget &parent,
   }
 }
 
+void
+setupTabWidgetHeaders(QTabWidget &tabWidget) {
+  auto &cfg = Util::Settings::get();
+
+  tabWidget.setTabPosition(Util::Settings::get().m_tabPosition);
+  tabWidget.setElideMode(cfg.m_elideTabHeaderLabels ? Qt::ElideMiddle : Qt::ElideNone);
+}
+
 }

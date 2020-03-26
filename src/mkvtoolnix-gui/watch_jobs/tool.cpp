@@ -34,7 +34,7 @@ Tool::~Tool() {
 
 void
 Tool::setupUi() {
-  setupTabPositions();
+  Util::setupTabWidgetHeaders(*ui->widgets);
 
   m_currentJobTab = new Tab{ui->widgets, true};
   ui->widgets->insertTab(0, m_currentJobTab, Q(""));
@@ -60,8 +60,8 @@ Tool::setupActions() {
   connect(ui->widgets,                   &QTabWidget::tabCloseRequested,  this, &Tool::closeTab);
   connect(ui->widgets,                   &QTabWidget::currentChanged,     this, &Tool::enableMenuActions);
   connect(m_jobOutputMenu,               &QMenu::aboutToShow,             this, &Tool::enableMenuActions);
-  connect(mw,                            &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
   connect(mw,                            &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
+  connect(mw,                            &MainWindow::preferencesChanged, [this]() { Util::setupTabWidgetHeaders(*ui->widgets); });
 }
 
 void
@@ -159,11 +159,6 @@ Tool::enableMenuActions() {
   mwUi->menuJobOutputAll->setEnabled(canSave || (numTabs > 1));
   mwUi->actionJobOutputSaveAll->setEnabled(canSave);
   mwUi->actionJobOutputCloseAll->setEnabled(numTabs > 1);
-}
-
-void
-Tool::setupTabPositions() {
-  ui->widgets->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
 void

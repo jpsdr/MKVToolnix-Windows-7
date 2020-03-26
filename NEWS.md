@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: added an option in the preferences to turn on eliding text
+  on tab headers. If enabled, tab names will be shortened so that all tab
+  headers fit into the window's width. Implements #2768.
+
 ## Bug fixes
 
 * mkvmerge: MP4 reader: fixed calculating the duration of video tracks that

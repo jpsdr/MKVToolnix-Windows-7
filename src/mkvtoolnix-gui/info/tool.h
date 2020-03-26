@@ -54,8 +54,6 @@ public slots:
   virtual void filesDropped(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
   virtual void openMultipleFilesFromCommandLine(QStringList const &fileNames);
 
-  virtual void setupTabPositions();
-
 protected:
   Tab *appendTab(Tab *tab);
   virtual Tab *currentTab();

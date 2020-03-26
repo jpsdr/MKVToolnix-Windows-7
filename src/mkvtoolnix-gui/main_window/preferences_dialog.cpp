@@ -50,10 +50,11 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   // GUI page
   ui->cbGuiCheckForUpdates->setChecked(m_cfg.m_checkForUpdates);
   ui->cbGuiShowToolSelector->setChecked(m_cfg.m_showToolSelector);
+  ui->cbGuiShowMoveUpDownButtons->setChecked(m_cfg.m_showMoveUpDownButtons);
+  ui->cbGuiElideTabHeaderLabels->setChecked(m_cfg.m_elideTabHeaderLabels);
   ui->cbGuiWarnBeforeClosingModifiedTabs->setChecked(m_cfg.m_warnBeforeClosingModifiedTabs);
   ui->cbGuiWarnBeforeAbortingJobs->setChecked(m_cfg.m_warnBeforeAbortingJobs);
   ui->cbGuiWarnBeforeOverwriting->setChecked(m_cfg.m_warnBeforeOverwriting);
-  ui->cbGuiShowMoveUpDownButtons->setChecked(m_cfg.m_showMoveUpDownButtons);
   setupFontAndScaling();
   setupInterfaceLanguage();
   setupTabPositions();
@@ -250,6 +251,8 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("Normally selected entries in list view can be moved around via drag & drop and with keyboard shortcuts (Ctrl+Up, Ctrl+Down)."))
                    .arg(QY("If checked, additional buttons for moving selected entries up and down will be shown next to several list views.")));
+
+  Util::setToolTip(ui->cbGuiElideTabHeaderLabels, QY("If enabled, the names of tab headers will be shortened so that all tab headers fit into the window's width."));
 
   Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled, the program will ask for confirmation before overwriting files and jobs."));
 
@@ -808,10 +811,11 @@ PreferencesDialog::save() {
   m_cfg.m_uiDisableDarkStyleSheet                       = ui->cbGuiDisableDarkStyleSheet->isChecked();
   m_cfg.m_checkForUpdates                               = ui->cbGuiCheckForUpdates->isChecked();
   m_cfg.m_showToolSelector                              = ui->cbGuiShowToolSelector->isChecked();
+  m_cfg.m_showMoveUpDownButtons                         = ui->cbGuiShowMoveUpDownButtons->isChecked();
+  m_cfg.m_elideTabHeaderLabels                          = ui->cbGuiElideTabHeaderLabels->isChecked();
   m_cfg.m_warnBeforeClosingModifiedTabs                 = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();
   m_cfg.m_warnBeforeAbortingJobs                        = ui->cbGuiWarnBeforeAbortingJobs->isChecked();
   m_cfg.m_warnBeforeOverwriting                         = ui->cbGuiWarnBeforeOverwriting->isChecked();
-  m_cfg.m_showMoveUpDownButtons                         = ui->cbGuiShowMoveUpDownButtons->isChecked();
   m_cfg.m_useDefaultJobDescription                      = ui->cbGuiUseDefaultJobDescription->isChecked();
   m_cfg.m_showOutputOfAllJobs                           = ui->cbGuiShowOutputOfAllJobs->isChecked();
   m_cfg.m_switchToJobOutputAfterStarting                = ui->cbGuiSwitchToJobOutputAfterStarting->isChecked();

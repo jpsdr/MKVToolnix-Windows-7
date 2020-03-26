@@ -38,4 +38,6 @@ void enableChildren(QObject *parent, bool enable);
 
 void addSegmentUIDFromFileToLineEdit(QWidget &parent, QLineEdit &lineEdit, bool append);
 
+void setupTabWidgetHeaders(QTabWidget &tabWidget);
+
 }

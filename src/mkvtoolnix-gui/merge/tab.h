@@ -260,7 +260,6 @@ public slots:
 
   virtual void retranslateUi();
   virtual void handleClearingMergeSettings(Util::Settings::ClearMergeSettingsAction action);
-  virtual void setupTabPositions();
 
   virtual void signalRemovalOfThisTab();
 

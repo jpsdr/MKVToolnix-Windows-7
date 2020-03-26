@@ -51,7 +51,6 @@ public slots:
   virtual void reload();
   virtual void openFiles(QStringList const &fileNames);
   virtual void openFilesFromCommandLine(QStringList const &fileNames);
-  virtual void setupTabPositions();
   virtual void enableMenuActions();
   virtual void showTab(Tab &tab);
 

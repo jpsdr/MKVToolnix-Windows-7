@@ -44,7 +44,7 @@ Tool::~Tool() {
 
 void
 Tool::setupUi() {
-  setupTabPositions();
+  Util::setupTabWidgetHeaders(*ui->editors);
 
   showChapterEditorsWidget();
 
@@ -74,7 +74,7 @@ Tool::setupActions() {
   connect(ui->openFileButton,                          &QPushButton::clicked,           this, [this]() { selectFileToOpen(false); });
 
   connect(m_chapterEditorMenu,                         &QMenu::aboutToShow,             this, &Tool::enableMenuActions);
-  connect(mw,                                          &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
+  connect(mw,                                          &MainWindow::preferencesChanged, [this]() { Util::setupTabWidgetHeaders(*ui->editors); });
   connect(mw,                                          &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
 
   connect(App::instance(),                             &App::editingChaptersRequested,  this, &Tool::openFilesFromCommandLine);
@@ -310,11 +310,6 @@ Tool::tabTitleChanged() {
   auto idx = ui->editors->indexOf(tab);
   if (tab && (-1 != idx))
     ui->editors->setTabText(idx, Util::escape(tab->title(), Util::EscapeKeyboardShortcuts));
-}
-
-void
-Tool::setupTabPositions() {
-  ui->editors->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
 QString

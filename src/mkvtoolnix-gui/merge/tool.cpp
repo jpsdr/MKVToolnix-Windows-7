@@ -42,7 +42,7 @@ Tool::~Tool() {
 
 void
 Tool::setupUi() {
-  setupTabPositions();
+  Util::setupTabWidgetHeaders(*ui->merges);
 
   showMergeWidget();
 
@@ -78,7 +78,7 @@ Tool::setupActions() {
   connect(ui->newFileButton,                          &QPushButton::clicked,             this, &Tool::newConfig);
   connect(ui->openFileButton,                         &QPushButton::clicked,             this, &Tool::openConfig);
 
-  connect(mw,                                         &MainWindow::preferencesChanged,   this, &Tool::setupTabPositions);
+  connect(mw,                                         &MainWindow::preferencesChanged,   [this]() { Util::setupTabWidgetHeaders(*ui->merges); });
   connect(mw,                                         &MainWindow::preferencesChanged,   this, &Tool::retranslateUi);
   connect(mw,                                         &MainWindow::preferencesChanged,   this, []() { SourceFile::setupFromPreferences(); });
 
@@ -419,11 +419,6 @@ Tool::addMultipleFilesToNewSettings(QStringList const &fileNames,
 
     tab->addFiles(fileNamesToAdd);
   }
-}
-
-void
-Tool::setupTabPositions() {
-  ui->merges->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
 void

@@ -42,7 +42,7 @@ Tool::~Tool() {
 
 void
 Tool::setupUi() {
-  setupTabPositions();
+  Util::setupTabWidgetHeaders(*ui->editors);
 
   showHeaderEditorsWidget();
 
@@ -67,7 +67,7 @@ Tool::setupActions() {
   connect(ui->openFileButton,               &QPushButton::clicked,           this, &Tool::selectFileToOpen);
 
   connect(m_headerEditorMenu,               &QMenu::aboutToShow,             this, &Tool::enableMenuActions);
-  connect(mw,                               &MainWindow::preferencesChanged, this, &Tool::setupTabPositions);
+  connect(mw,                               &MainWindow::preferencesChanged, [this]() { Util::setupTabWidgetHeaders(*ui->editors); });
   connect(mw,                               &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
 
   connect(App::instance(),                  &App::editingHeadersRequested,   this, &Tool::openFilesFromCommandLine);
@@ -243,11 +243,6 @@ Tool::closeAllTabs() {
 Tab *
 Tool::currentTab() {
   return static_cast<Tab *>(ui->editors->widget(ui->editors->currentIndex()));
-}
-
-void
-Tool::setupTabPositions() {
-  ui->editors->setTabPosition(Util::Settings::get().m_tabPosition);
 }
 
 void
