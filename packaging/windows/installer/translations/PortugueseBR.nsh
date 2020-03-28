@@ -1,13 +1,9 @@
 !define LANG "PortugueseBR"
 
-# The next entry needs translations:
-!insertmacro LANG_STRING STRING_EXT_LINKS_INTRO "If you need a GUI for mkvextract then give these projects a try:"
-# The next entry needs translations:
-!insertmacro LANG_STRING STRING_MFF_CONTINUE_ANYWAY "Continue with installation anyway"
-# The next entry needs translations:
-!insertmacro LANG_STRING STRING_MFF_MORE_INFORMATION "More information"
-# The next entry needs translations:
-!insertmacro LANG_STRING STRING_MFF_NOT_FOUND "Your Windows installation seems to lack Microsoft's 'Media Foundation' framework. This framework is required by MKVToolNix. Please install it and run the MKVToolNix installer again."
+!insertmacro LANG_STRING STRING_EXT_LINKS_INTRO "Se você precisar de uma GUI para o mkvextract, experimente estes projetos:"
+!insertmacro LANG_STRING STRING_MFF_CONTINUE_ANYWAY "Continue com a instalação mesmo assim"
+!insertmacro LANG_STRING STRING_MFF_MORE_INFORMATION "Mais Informações"
+!insertmacro LANG_STRING STRING_MFF_NOT_FOUND "Sua instalação do Windows parece não ter a estrutura 'Media Foundation' da Microsoft. Essa estrutura é requerida pelo MKVToolNix. Por favor, instale-o e execute o instalador do MKVToolNix novamente."
 !insertmacro LANG_STRING STRING_REMOVE_JOB_FILES_QUESTION "Também deseja remover os arquivos de trabalho criados pela interface?"
 !insertmacro LANG_STRING STRING_REMOVE_PROGRAM_QUESTION "Deseja remover $(^Name) e todos os seus componentes?"
 !insertmacro LANG_STRING STRING_UNINSTALLED_OK "$(^Name) foi desinstalado com sucesso."
