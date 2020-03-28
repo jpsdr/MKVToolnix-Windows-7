@@ -148,6 +148,13 @@
             </widget>
            </item>
            <item>
+            <widget class="QCheckBox" name="cbGuiDisableToolTips">
+             <property name="text">
+              <string>Disable &amp;tooltips</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QCheckBox" name="cbGuiCheckForUpdates">
              <property name="text">
               <string>Check online for available &amp;updates</string>
@@ -2053,6 +2060,12 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>mtx::gui::Util::BasicTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>mkvtoolnix-gui/util/basic_tab_widget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>mtx::gui::Util::LanguageComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/language_combo_box.h</header>
@@ -2074,12 +2087,6 @@
    <header>mkvtoolnix-gui/util/country_combo_box.h</header>
   </customwidget>
   <customwidget>
-   <class>mtx::gui::Util::BasicTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>mkvtoolnix-gui/util/basic_tab_widget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>mtx::gui::Info::JobSettingsWidget</class>
    <extends>QWidget</extends>
    <header>mkvtoolnix-gui/info/job_settings_widget.h</header>
@@ -2099,6 +2106,7 @@
   <tabstop>sbGuiFontPointSize</tabstop>
   <tabstop>cbGuiDisableHighDPIScaling</tabstop>
   <tabstop>cbGuiDisableDarkStyleSheet</tabstop>
+  <tabstop>cbGuiDisableToolTips</tabstop>
   <tabstop>cbGuiCheckForUpdates</tabstop>
   <tabstop>cbGuiTabPositions</tabstop>
   <tabstop>cbGuiElideTabHeaderLabels</tabstop>

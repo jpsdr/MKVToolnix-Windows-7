@@ -365,6 +365,7 @@ Settings::load() {
 #endif
   m_uiDisableHighDPIScaling            = reg.value(s_valUiDisableHighDPIScaling).toBool();
   m_uiDisableDarkStyleSheet            = reg.value(s_valUiDisableDarkStyleSheet).toBool();
+  m_uiDisableToolTips                  = reg.value(s_valUiDisableToolTips).toBool();
   m_uiFontFamily                       = reg.value(s_valUiFontFamily,    defaultFont.family()).toString();
   m_uiFontPointSize                    = reg.value(s_valUiFontPointSize, defaultFont.pointSize()).toInt();
 
@@ -705,6 +706,7 @@ Settings::save()
   reg.setValue(s_valUiLocale,                           m_uiLocale);
   reg.setValue(s_valUiDisableHighDPIScaling,            m_uiDisableHighDPIScaling);
   reg.setValue(s_valUiDisableDarkStyleSheet,            m_uiDisableDarkStyleSheet);
+  reg.setValue(s_valUiDisableToolTips,                  m_uiDisableToolTips);
   reg.setValue(s_valUiFontFamily,                       m_uiFontFamily);
   reg.setValue(s_valUiFontPointSize,                    m_uiFontPointSize);
 

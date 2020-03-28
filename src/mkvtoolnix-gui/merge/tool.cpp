@@ -133,13 +133,15 @@ Tool::toolShown() {
 
 void
 Tool::retranslateUi() {
+  auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? Q("") : App::translate("CloseButton", "Close Tab");
+
   ui->retranslateUi(this);
 
   for (auto idx = 0, numTabs = ui->merges->count(); idx < numTabs; ++idx) {
     static_cast<Tab *>(ui->merges->widget(idx))->retranslateUi();
     auto button = Util::tabWidgetCloseTabButton(*ui->merges, idx);
     if (button)
-      button->setToolTip(App::translate("CloseButton", "Close Tab"));
+      button->setToolTip(buttonToolTip);
   }
 }
 

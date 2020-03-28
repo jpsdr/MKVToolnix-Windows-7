@@ -66,6 +66,8 @@ Tool::setupActions() {
 
 void
 Tool::retranslateUi() {
+  auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? Q("") : App::translate("CloseButton", "Close Tab");
+
   ui->retranslateUi(this);
   ui->widgets->setTabText(0, QY("Current job"));
 
@@ -74,7 +76,7 @@ Tool::retranslateUi() {
   for (auto idx = 0, numTabs = ui->widgets->count(); idx < numTabs; ++idx) {
     auto button = Util::tabWidgetCloseTabButton(*ui->widgets, idx);
     if (button)
-      button->setToolTip(App::translate("CloseButton", "Close Tab"));
+      button->setToolTip(buttonToolTip);
   }
 }
 

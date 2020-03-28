@@ -43,6 +43,7 @@ protected:
   std::unique_ptr<Ui::PreferencesDialog> ui;
   Util::Settings &m_cfg;
   QString const m_previousUiLocale;
+  bool const m_previousDisableToolTips;
   double m_previousProbeRangePercentage;
   QMap<Page, int> m_pageIndexes;
   bool m_ignoreNextCurrentChange;
@@ -53,6 +54,7 @@ public:
 
   void save();
   bool uiLocaleChanged() const;
+  bool disableToolTipsChanged() const;
   bool probeRangePercentageChanged() const;
 
 public slots:

@@ -36,6 +36,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   , ui{new Ui::PreferencesDialog}
   , m_cfg(Util::Settings::get())
   , m_previousUiLocale{m_cfg.m_uiLocale}
+  , m_previousDisableToolTips{m_cfg.m_uiDisableToolTips}
   , m_previousProbeRangePercentage{m_cfg.m_probeRangePercentage}
   , m_ignoreNextCurrentChange{}
 {
@@ -48,6 +49,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   Util::restoreWidgetGeometry(this);
 
   // GUI page
+  ui->cbGuiDisableToolTips->setChecked(m_cfg.m_uiDisableToolTips);
   ui->cbGuiCheckForUpdates->setChecked(m_cfg.m_checkForUpdates);
   ui->cbGuiShowToolSelector->setChecked(m_cfg.m_showToolSelector);
   ui->cbGuiShowMoveUpDownButtons->setChecked(m_cfg.m_showMoveUpDownButtons);
@@ -137,6 +139,12 @@ PreferencesDialog::uiLocaleChanged()
 }
 
 bool
+PreferencesDialog::disableToolTipsChanged()
+  const {
+  return m_previousDisableToolTips != m_cfg.m_uiDisableToolTips;
+}
+
+bool
 PreferencesDialog::probeRangePercentageChanged()
   const {
   return m_previousProbeRangePercentage != m_cfg.m_probeRangePercentage;
@@ -221,12 +229,16 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
 
 void
 PreferencesDialog::setupToolTips() {
+  if (m_cfg.m_uiDisableToolTips)
+    return;
+
   // GUI page
   Util::setToolTip(ui->cbGuiDisableHighDPIScaling,
                    Q("%1 %2")
                    .arg(QY("If enabled, automatic scaling for high DPI displays will be disabled."))
                    .arg(QY("Changes to this option will only take effect the next time the application is started.")));
 
+  Util::setToolTip(ui->cbGuiDisableToolTips, QY("If checked, the GUI will not show helpful usage tips in popup windows while hovering over a control — such as this one."));
   Util::setToolTip(ui->cbGuiDisableDarkStyleSheet,
                    Q("%1 %2")
                    .arg(QY("By default the GUI will start up with a dark color scheme if the color scheme in Windows is set to dark mode."))
@@ -809,6 +821,7 @@ PreferencesDialog::save() {
   m_cfg.m_uiFontPointSize                               = ui->sbGuiFontPointSize->value();
   m_cfg.m_uiDisableHighDPIScaling                       = ui->cbGuiDisableHighDPIScaling->isChecked();
   m_cfg.m_uiDisableDarkStyleSheet                       = ui->cbGuiDisableDarkStyleSheet->isChecked();
+  m_cfg.m_uiDisableToolTips                             = ui->cbGuiDisableToolTips->isChecked();
   m_cfg.m_checkForUpdates                               = ui->cbGuiCheckForUpdates->isChecked();
   m_cfg.m_showToolSelector                              = ui->cbGuiShowToolSelector->isChecked();
   m_cfg.m_showMoveUpDownButtons                         = ui->cbGuiShowMoveUpDownButtons->isChecked();

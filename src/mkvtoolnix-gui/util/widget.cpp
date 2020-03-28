@@ -101,6 +101,11 @@ buttonForRole(QDialogButtonBox *box,
 void
 setToolTip(QWidget *widget,
            QString const &toolTip) {
+  if (Util::Settings::get().m_uiDisableToolTips) {
+    widget->setToolTip({});
+    return;
+  }
+
   // Qt up to and including 5.3 only word-wraps tool tips
   // automatically if the format is recognized to be Rich Text. See
   // http://doc.qt.io/qt-5/qstandarditem.html

@@ -5,6 +5,7 @@
 * MKVToolNix GUI: added an option in the preferences to turn on eliding text
   on tab headers. If enabled, tab names will be shortened so that all tab
   headers fit into the window's width. Implements #2768.
+* MKVToolNix GUI: added an option in the preferences to disable all tooltips.
 
 ## Bug fixes
 

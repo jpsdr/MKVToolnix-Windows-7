@@ -482,7 +482,7 @@ MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
 
   dlg.save();
 
-  if (dlg.uiLocaleChanged())
+  if (dlg.uiLocaleChanged() || dlg.disableToolTipsChanged())
     App::instance()->initializeLocale();
 
   if (dlg.uiLocaleChanged() || dlg.probeRangePercentageChanged())
