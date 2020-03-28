@@ -517,6 +517,7 @@ PreferencesDialog::setupConnections() {
   connect(ui->pbMDeriveTrackLanguageRevertCustomRegex,    &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveTrackLanguageFromFileNameRegex);
 
   connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,                                           ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
+  connect(ui->cbGuiRemoveJobsOnExit,                      &QCheckBox::toggled,                                           ui->cbGuiJobRemovalOnExitPolicy,      &QComboBox::setEnabled);
   connect(ui->cbGuiRemoveOldJobs,                         &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
   connect(ui->sbGuiRemoveOldJobsDays,                     static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this,                                 &PreferencesDialog::adjustRemoveOldJobsControls);
 
@@ -551,12 +552,19 @@ PreferencesDialog::setupInterfaceLanguage() {
 
 void
 PreferencesDialog::setupJobRemovalPolicy() {
-  auto doRemove = Util::Settings::JobRemovalPolicy::Never != m_cfg.m_jobRemovalPolicy;
-  auto idx      = std::max(static_cast<int>(m_cfg.m_jobRemovalPolicy), 1) - 1;
+  auto doIt = [](Util::Settings::JobRemovalPolicy policy,
+                 QCheckBox &checkBox,
+                 QComboBox &comboBox) {
+    auto doRemove = Util::Settings::JobRemovalPolicy::Never != policy;
+    auto idx      = std::max(static_cast<int>(policy), 1) - 1;
 
-  ui->cbGuiRemoveJobs->setChecked(doRemove);
-  ui->cbGuiJobRemovalPolicy->setEnabled(doRemove);
-  ui->cbGuiJobRemovalPolicy->setCurrentIndex(idx);
+    checkBox.setChecked(doRemove);
+    comboBox.setEnabled(doRemove);
+    comboBox.setCurrentIndex(idx);
+  };
+
+  doIt(m_cfg.m_jobRemovalPolicy,       *ui->cbGuiRemoveJobs,       *ui->cbGuiJobRemovalPolicy);
+  doIt(m_cfg.m_jobRemovalOnExitPolicy, *ui->cbGuiRemoveJobsOnExit, *ui->cbGuiJobRemovalOnExitPolicy);
 }
 
 void
@@ -834,8 +842,10 @@ PreferencesDialog::save() {
   m_cfg.m_switchToJobOutputAfterStarting                = ui->cbGuiSwitchToJobOutputAfterStarting->isChecked();
   m_cfg.m_resetJobWarningErrorCountersOnExit            = ui->cbGuiResetJobWarningErrorCountersOnExit->isChecked();
   m_cfg.m_removeOutputFileOnJobFailure                  = ui->cbGuiRemoveOutputFileOnJobFailure->isChecked();
-  auto idx                                              = !ui->cbGuiRemoveJobs->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy->currentIndex() + 1;
+  auto idx                                              = !ui->cbGuiRemoveJobs      ->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy      ->currentIndex() + 1;
+  auto idxOnExit                                        = !ui->cbGuiRemoveJobsOnExit->isChecked() ? 0 : ui->cbGuiJobRemovalOnExitPolicy->currentIndex() + 1;
   m_cfg.m_jobRemovalPolicy                              = static_cast<Util::Settings::JobRemovalPolicy>(idx);
+  m_cfg.m_jobRemovalOnExitPolicy                        = static_cast<Util::Settings::JobRemovalPolicy>(idxOnExit);
   m_cfg.m_removeOldJobs                                 = ui->cbGuiRemoveOldJobs->isChecked();
   m_cfg.m_removeOldJobsDays                             = ui->sbGuiRemoveOldJobsDays->value();
 

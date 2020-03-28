@@ -148,6 +148,7 @@ Tool::setupActions() {
 
   connect(mw,                                               &MainWindow::preferencesChanged,                  this,    &Tool::retranslateUi);
   connect(mw,                                               &MainWindow::preferencesChanged,                  this,    &Tool::setupMoveJobsButtons);
+  connect(mw,                                               &MainWindow::aboutToClose,                        m_model, &Model::removeCompletedJobsBeforeExiting);
   connect(mw,                                               &MainWindow::aboutToClose,                        m_model, &Model::saveJobs);
 
   connect(MainWindow::watchCurrentJobTab(),                 &WatchJobs::Tab::watchCurrentJobTabCleared,       m_model, &Model::resetTotalProgress);

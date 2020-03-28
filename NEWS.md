@@ -6,6 +6,9 @@
   on tab headers. If enabled, tab names will be shortened so that all tab
   headers fit into the window's width. Implements #2768.
 * MKVToolNix GUI: added an option in the preferences to disable all tooltips.
+* MKVToolNix GUI: job queue: added an option in the preferences for removing
+  completed jobs when exiting the program depending on their status.
+  Implements #2769.
 
 ## Bug fixes
 

@@ -325,20 +325,28 @@ Model::scheduleJobForRemoval(uint64_t id) {
   QTimer::singleShot(0, this, SLOT(removeScheduledJobs()));
 }
 
-void
-Model::processAutomaticJobRemoval(uint64_t id,
-                                  Job::Status status) {
-  auto const &cfg = Util::Settings::get();
-  if (cfg.m_jobRemovalPolicy == Util::Settings::JobRemovalPolicy::Never)
-    return;
+bool
+Model::canJobBeRemovedAccordingToPolicy(Job::Status status,
+                                        Util::Settings::JobRemovalPolicy policy) {
+  if (policy == Util::Settings::JobRemovalPolicy::Never)
+    return false;
 
   bool doneOk       = Job::DoneOk       == status;
   bool doneWarnings = Job::DoneWarnings == status;
   bool done         = doneOk || doneWarnings || (Job::Failed == status) || (Job::Aborted == status);
 
-  if (   ((cfg.m_jobRemovalPolicy == Util::Settings::JobRemovalPolicy::IfSuccessful)    && doneOk)
-      || ((cfg.m_jobRemovalPolicy == Util::Settings::JobRemovalPolicy::IfWarningsFound) && (doneOk || doneWarnings))
-      || ((cfg.m_jobRemovalPolicy == Util::Settings::JobRemovalPolicy::Always)          && done))
+  if (   ((policy == Util::Settings::JobRemovalPolicy::IfSuccessful)    && doneOk)
+      || ((policy == Util::Settings::JobRemovalPolicy::IfWarningsFound) && (doneOk || doneWarnings))
+      || ((policy == Util::Settings::JobRemovalPolicy::Always)          && done))
+    return true;
+
+  return false;
+}
+
+void
+Model::processAutomaticJobRemoval(uint64_t id,
+                                  Job::Status status) {
+  if (canJobBeRemovedAccordingToPolicy(status, Util::Settings::get().m_jobRemovalPolicy))
     scheduleJobForRemoval(id);
 }
 
@@ -542,6 +550,13 @@ Model::convertJobQueueToSeparateIniFiles() {
     reg->remove(Q("job %1").arg(idx));
   reg->setValue("order", order);
   reg->endGroup();
+}
+
+void
+Model::removeCompletedJobsBeforeExiting() {
+  auto policy = Util::Settings::get().m_jobRemovalOnExitPolicy;
+
+  removeJobsIf([policy](auto const &job) { return canJobBeRemovedAccordingToPolicy(job.status(), policy); });
 }
 
 void

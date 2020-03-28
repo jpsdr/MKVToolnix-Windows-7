@@ -1822,13 +1822,6 @@
            </item>
            <item>
             <layout class="QGridLayout" name="gridLayout_7">
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="cbGuiRemoveJobs">
-               <property name="text">
-                <string>&amp;Remove job from queue after completion:</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="1">
               <widget class="QComboBox" name="cbGuiJobRemovalPolicy">
                <item>
@@ -1848,14 +1841,26 @@
                </item>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="cbGuiRemoveOldJobs">
-               <property name="text">
-                <string>Remove com&amp;pleted jobs older than x days:</string>
-               </property>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cbGuiJobRemovalOnExitPolicy">
+               <item>
+                <property name="text">
+                 <string>Only if the job completed successfully</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Even if there were warnings</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Even if there were errors</string>
+                </property>
+               </item>
               </widget>
              </item>
-             <item row="1" column="1">
+             <item row="2" column="1">
               <widget class="QSpinBox" name="sbGuiRemoveOldJobsDays">
                <property name="suffix">
                 <string notr="true"> days</string>
@@ -1865,6 +1870,27 @@
                </property>
                <property name="maximum">
                 <number>365</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="cbGuiRemoveJobs">
+               <property name="text">
+                <string>&amp;Remove job from queue after completion:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="cbGuiRemoveJobsOnExit">
+               <property name="text">
+                <string>Remove completed jobs from queue on &amp;exit:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="cbGuiRemoveOldJobs">
+               <property name="text">
+                <string>Remove com&amp;pleted jobs older than x days:</string>
                </property>
               </widget>
              </item>
@@ -2184,6 +2210,8 @@
   <tabstop>cbGuiRemoveOutputFileOnJobFailure</tabstop>
   <tabstop>cbGuiRemoveJobs</tabstop>
   <tabstop>cbGuiJobRemovalPolicy</tabstop>
+  <tabstop>cbGuiRemoveJobsOnExit</tabstop>
+  <tabstop>cbGuiJobRemovalOnExitPolicy</tabstop>
   <tabstop>cbGuiRemoveOldJobs</tabstop>
   <tabstop>sbGuiRemoveOldJobsDays</tabstop>
   <tabstop>pbJobsAddProgram</tabstop>

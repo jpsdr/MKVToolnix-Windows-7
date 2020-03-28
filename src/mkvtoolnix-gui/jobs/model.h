@@ -103,6 +103,7 @@ public slots:
 
   void resetTotalProgress();
 
+  void removeCompletedJobsBeforeExiting();
   void saveJobs();
 
   void runProgramOnQueueStop(QueueStatus status);
@@ -125,6 +126,7 @@ protected:
 
 public:
   static void convertJobQueueToSeparateIniFiles();
+  static bool canJobBeRemovedAccordingToPolicy(Job::Status status, Util::Settings::JobRemovalPolicy policy);
 };
 
 }
