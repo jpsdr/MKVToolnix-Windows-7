@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2020-01-13 20:07+0100\n"
-"PO-Revision-Date: 2020-03-27 10:04+0000\n"
+"PO-Revision-Date: 2020-03-28 18:19+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
 "Language: ru\n"
@@ -624,7 +624,7 @@ msgstr "<option>--simple-language</option> <parameter>язык</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:370
 msgid "If the simple format is enabled then &mkvextract; will only output a single entry for each chapter atom encountered even if a chapter atom contains more than one chapter name.  By default &mkvextract; will use the first chapter name found for each atom regardless of its language."
-msgstr ""
+msgstr "Если включён простой формат, то &mkvextract; будет выводить только единственную запись для каждого встречающегося атома глав, даже если атом глав содержит более одного названия главы. По умолчанию &mkvextract; будет использовать первый обнаруженный заголовок главы для каждого атома вне зависимости от его яыка."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:375
@@ -1325,7 +1325,7 @@ msgstr "<option>-o</option>, <option>--continue</option>"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:88
 msgid "By default &mkvinfo; stops when it encounters the first cluster.  With this option &mkvinfo; will continue processing regardless of the verbosity level."
-msgstr ""
+msgstr "По умолчанию &mkvinfo; останавливается, когда он обнаруживает первый кластер. С помощью этого параметра &mkvinfo; будет продолжать обработку независимо от уровня детализации."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:95
@@ -1654,7 +1654,7 @@ msgstr "<option>--chapter-language</option> <parameter>код-языка</parame
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:188
 msgid "Sets the ISO 639-2 language code that is written for each chapter entry.  Defaults to '<literal>eng</literal>'.  See the section about <link linkend=\"mkvmerge.chapters\">chapters</link> below for details."
-msgstr ""
+msgstr "Задает код языка в формате ISO 639-2, который записывается для каждой записи главы. По умолчанию используется '<literal>eng</literal>'. Подробности ниже в разделе <link linkend=\"mkvmerge.chapters\">главы</link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:193
@@ -1702,7 +1702,7 @@ msgstr ""
 #: doc/man/mkvmerge.xml:236
 #: doc/man/mkvmerge.xml:1353
 msgid "Defaults: no manual sync correction (which is the same as <parameter>d</parameter> = <constant>0</constant> and <parameter>o</parameter>/<parameter>p</parameter> = <constant>1.0</constant>)."
-msgstr ""
+msgstr "По умолчанию: ручная коррекция синхронизации отключена (что равноценно <parameter>d</parameter> = <constant>0</constant> и <parameter>o</parameter>/<parameter>p</parameter> = <constant>1.0</constant>)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:241
@@ -1908,7 +1908,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:433
 msgid "If no unit is used then &mkvmerge; will put at most <parameter>n</parameter> data blocks into each cluster. The maximum number of blocks is 65535."
-msgstr ""
+msgstr "Если значение не указано, то &mkvmerge; поместит в каждый кластер не более <parameter>n</parameter> блоков данных. Максимальное количество блоков — 65535."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:438
@@ -2023,7 +2023,7 @@ msgstr "<option>--split</option> <parameter>спецификация</parameter>
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:552
 msgid "Splits the output file after a given size or a given time.  Please note that tracks can only be split right before a key frame.  Therefore the split point may be a bit off from what the user has specified."
-msgstr ""
+msgstr "Разрезает выходной файл по достижению заданного размера или заданного времени. Обратите внимание, что треки могут быть разделены только непосредственно перед ключевым кадром. Поэтому точка разделения может быть немного не совпадать с тем, что указал пользователь."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:557
@@ -2144,12 +2144,12 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:662
 msgid "If a start timestamp is left out then it defaults to the previous range's end timestamp. If there was no previous range then it defaults to the start of the file (see example 3)."
-msgstr ""
+msgstr "Если начальная метка времени не указана, то по умолчанию будет использована метка времени конца предыдущего диапазона. Если предыдущего диапазона нет, то будет использоваться начало файла (см. пример 3)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:667
 msgid "If an end timestamp is left out then it defaults to the end of the source files which basically tells &mkvmerge; to keep the rest (see example 3)."
-msgstr ""
+msgstr "Если конечная метка времени не указана, то по умолчанию она указывает на конец фала, так что &mkvmerge; просто сохранит оставшееся (см. пример 3)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:672
@@ -2159,17 +2159,17 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:679
 msgid "In example 1 &mkvmerge; will create two files. The first will contain the content starting from <literal>00:01:20</literal> until <literal>00:02:45</literal>. The second file will contain the content starting from <literal>00:05:50</literal> until <literal>00:10:30</literal>."
-msgstr ""
+msgstr "В примере 1 &mkvmerge; создаст два файла. Первый будет содержать данные с <literal>00:01:20</literal> по <literal>00:02:45</literal>. Второй файл будет содержать данные с <literal>00:05:50</literal> по <literal>00:10:30</literal>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:685
 msgid "In example 2 &mkvmerge; will create only one file. This file will contain both the content starting from <literal>00:01:20</literal> until <literal>00:02:45</literal> and the content starting from <literal>00:05:50</literal> until <literal>00:10:30</literal>."
-msgstr ""
+msgstr "В примере 2 &mkvmerge; создаст единственный файл. Он будет содержать данные как с <literal>00:01:20</literal> по <literal>00:02:45</literal>, так и с <literal>00:05:50</literal> по <literal>00:10:30</literal>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:690
 msgid "In example 3 &mkvmerge; will create two files. The first will contain the content from the start of the source files until <literal>00:02:45</literal>. The second file will contain the content starting from <literal>00:05:50</literal> until the end of the source files."
-msgstr ""
+msgstr "В примере 3 &mkvmerge; создаст два файла. Первый будет содержать данные от начала исходного файла по <literal>00:02:45</literal>. Второй файл будет содержать данные с <literal>00:05:50</literal> и до конца исходного файла."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:697
@@ -2209,12 +2209,12 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:729
 msgid "If a start number is left out then it defaults to the previous range's end number. If there was no previous range then it defaults to the start of the file (see example 3)."
-msgstr ""
+msgstr "Если начальное число не указано, то по умолчанию будет использовано число конца предыдущего диапазона. Если предыдущего диапазона нет, то будет использоваться начало файла (см. пример 3)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:734
 msgid "If an end number is left out then it defaults to the end of the source files which basically tells &mkvmerge; to keep the rest (see example 3)."
-msgstr ""
+msgstr "Если конечная число не указана, то по умолчанию оно указывает на конец фала, так что &mkvmerge; просто сохранит оставшееся (см. пример 3)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:739
