@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
 "POT-Creation-Date: 2020-01-13 20:07+0100\n"
-"PO-Revision-Date: 2019-08-12 05:58+0000\n"
+"PO-Revision-Date: 2020-03-29 19:05+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -39,7 +39,7 @@ msgstr "34.0.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2020-01-02"
-msgstr ""
+msgstr "2020-01-02"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -120,7 +120,7 @@ msgstr "<abbrev>XML</abbrev>"
 #: doc/man/mkvpropedit.xml:21
 #: doc/man/mkvtoolnix-gui.xml:21
 msgid "en"
-msgstr "zh-hans"
+msgstr "zh-Hans"
 
 #. type: Content of: <refentry><refentryinfo>
 #: doc/man/mkvextract.xml:23
@@ -229,7 +229,7 @@ msgstr "用户命令"
 #. type: Content of: <refentry><refnamediv><refpurpose>
 #: doc/man/mkvextract.xml:45
 msgid "extract tracks from &matroska; files into other files"
-msgstr "将 &matroska; 文件中的轨道提取为另外的文件"
+msgstr "将 &matroska; 文件中的轨道提取为单独的文件"
 
 #. type: Content of: <refentry><refsynopsisdiv><title>
 #: doc/man/mkvextract.xml:49
@@ -259,7 +259,7 @@ msgstr "说明"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:66
 msgid "This program extracts specific parts from a &matroska; file to other useful formats. The first argument is the name of the source file which must be a &matroska; file."
-msgstr "该程序可将 &matroska; 文件的指定部分提取为其他有用的格式。第一个参数是输入文件名称，该文件必须为 &matroska; 文件。"
+msgstr "该程序可将 &matroska; 文件的指定部分提取为其他有用的格式。第一个参数是输入文件名，该文件必须为 &matroska; 文件。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:71
@@ -1299,15 +1299,13 @@ msgstr "本程序可列出 &matroska;文件中包含的所有轨道，输出信�
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:66
-#, fuzzy
-#| msgid "<option>-h</option>, <option>--help</option>"
 msgid "<option>-a</option>, <option>--all</option>"
-msgstr "<option>-h</option>, <option>--help</option>"
+msgstr "<option>-a</option>, <option>--all</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:69
 msgid "By default &mkvinfo; stops when it encounters the first cluster.  Additionally it doesn't show certain often occurring elements.  With this option &mkvinfo; will continue processing regardless of the verbosity level and show all elements."
-msgstr ""
+msgstr "默认情况下，&mkvinfo; 会在读取到首个簇时停下来。它也不会显示某些元素（通常是反复出现的元素）。通过此选项可以让 &mkvinfo; 忽略冗余级别继续处理，并显示所有元素。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:76
@@ -1321,39 +1319,33 @@ msgstr "计算并显示各帧的 <function>Adler-32</function> 校验码。仅�
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:85
-#, fuzzy
-#| msgid "<option>-z</option>, <option>--size</option>"
 msgid "<option>-o</option>, <option>--continue</option>"
-msgstr "<option>-z</option>, <option>--size</option>"
+msgstr "<option>-o</option>, <option>--continue</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:88
 msgid "By default &mkvinfo; stops when it encounters the first cluster.  With this option &mkvinfo; will continue processing regardless of the verbosity level."
-msgstr ""
+msgstr "默认情况下，&mkvinfo; 会在读取到首个簇时停下来。通过此选项可以让 &mkvinfo; 忽略冗余级别继续处理。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:95
-#, fuzzy
-#| msgid "<option>-V</option>, <option>--version</option>"
 msgid "<option>-p</option>, <option>--hex-positions</option>"
-msgstr "<option>-V</option>, <option>--version</option>"
+msgstr "<option>-p</option>, <option>--hex-positions</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:98
 msgid "Show the positions of all elements in hexadecimal regardless of the verbosity level."
-msgstr ""
+msgstr "忽略冗余级别，以十六进制显示所有元素的位置。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:104
-#, fuzzy
-#| msgid "<option>-V</option>, <option>--version</option>"
 msgid "<option>-P</option>, <option>--positions</option>"
-msgstr "<option>-V</option>, <option>--version</option>"
+msgstr "<option>-P</option>, <option>--positions</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:107
 msgid "Show the positions of all elements in decimal regardless of the verbosity level."
-msgstr ""
+msgstr "忽略冗余级别，以十进制显示所有元素的位置。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:113
@@ -1443,7 +1435,7 @@ msgstr "在 level 1 &mkvinfo; 同样将输出在整个文件中遇到的所有 &
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:300
 msgid "The same effect can be achieved with the option <option>--continue</option>."
-msgstr ""
+msgstr "通过选项「<option>--continue</option>」可以实现相同的效果。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:304
@@ -1453,7 +1445,7 @@ msgstr "在 level 2 &mkvinfo; 同样将输出定位头项与 cue 索引项，以
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:309
 msgid "The same effect can be achieved with the options <option>--all --positions</option>."
-msgstr ""
+msgstr "通过选项「<option>--all --positions</option>」可以实现相同的结果。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:313
@@ -1955,15 +1947,13 @@ msgstr "告诉 &mkvmerge; 在文件末尾创建包含所有簇的元定位元素
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:477
-#, fuzzy
-#| msgid "<option>--no-chapters</option>"
 msgid "<option>--no-date</option>"
-msgstr "<option>--no-chapters</option>"
+msgstr "<option>--no-date</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:480
 msgid "By default &mkvmerge; sets the \"date\" segment information field to the time &amp; date when multiplexing started.  With this option that field is not written at all."
-msgstr ""
+msgstr "默认情况下，&mkvmerge; 会将剪辑信息中的「date」字段设为混流开始的日期与时间。通过此选项可以完全不写入该字段。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:487
@@ -3431,45 +3421,43 @@ msgstr "将所有信息输出至文件 <parameter>文件名</parameter> 而不�
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:2138
-#, fuzzy
-#| msgid "<option>--title</option> <parameter>title</parameter>"
 msgid "<option>--deterministic</option> <parameter>seed</parameter>"
-msgstr "<option>--title</option> <parameter>标题</parameter>"
+msgstr "<option>--deterministic</option> <parameter>种子值</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2141
 msgid "Enables the creation of byte-identical files if the same version of &mkvmerge; is used with the same source files, the same set of options and the same seed.  Note that the \"date\" segment information field is not written in this mode."
-msgstr ""
+msgstr "启用完全确定模式。若使用的 &mkvmerge; 版本相同，且输入文件、选项参数及种子值完全相同，则会创建二进制层面完全一致的文件。注意，此模式下不会写入剪辑信息的「date」字段。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2145
 msgid "The seed can be an arbitrary string and does not have to be a number."
-msgstr ""
+msgstr "种子值可以是任意字符串，并不非得是数字。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2148
 msgid "The result of byte-identical files is only guaranteed under the following conditions:"
-msgstr ""
+msgstr "需要满足下列条件才能确保生成二进制层面完全相同的文件:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2153
 msgid "The same version of &mkvmerge; built with the same versions of libEBML and libMatroska is used."
-msgstr ""
+msgstr "相同版本的 &mkvmerge;，且编译时使用相同版本的 ibEBML 及 libMatroska。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2157
 msgid "The source files used are byte-identical."
-msgstr ""
+msgstr "所用的输入文件在二进制层面完全一致。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2161
 msgid "The same command line options are used in the same order (with the notable exception of <parameter>--output …</parameter>)."
-msgstr ""
+msgstr "所使用的命令行选项及顺序完全相同 (唯一的例外是「<parameter>--output …</parameter>」)。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2166
 msgid "Using other versions of &mkvmerge; or other command-line options may result in the same byte-identical file but is not guaranteed to do so."
-msgstr ""
+msgstr "使用其他版本的 &mkvmerge; 或其他命令行选项也有可能输出完全一致的文件，但作者不作任何保证。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2184
@@ -5101,10 +5089,8 @@ msgstr "<option>track:</option>=<parameter>uid</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:552
-#, fuzzy
-#| msgid "If the parameter starts with a '<literal>=</literal>' followed by a number <parameter>uid</parameter> then the track whose track <abbrev>UID</abbrev> element equals this <parameter>uid</parameter>. Track <abbrev>UIDs</abbrev> can be obtained with &mkvinfo;."
 msgid "If the parameter starts with a '<literal>=</literal>' followed by a number <parameter>uid</parameter>, the track whose track <abbrev>UID</abbrev> element equals the given <parameter>uid</parameter> will be selected. Track <abbrev>UIDs</abbrev> can be obtained with &mkvinfo;."
-msgstr "如果参数以 '<literal>=</literal>' 后接 <parameter>uid</parameter> 开头，则将选择轨道 <abbrev>UID</abbrev> 元素等于此 <parameter>uid</parameter> 的轨道。轨道 <abbrev>UID</abbrev> 可通过 &mkvinfo; 获取。"
+msgstr "若参数以「<literal>=</literal>」后接数字「<parameter>uid</parameter>」开头，则会选择轨道 <abbrev>UID</abbrev> 元素与参数所给出的「<parameter>uid</parameter>」相同的轨道。可使用 &mkvinfo; 获取轨道 <abbrev>UID</abbrev>。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:560
@@ -5113,10 +5099,8 @@ msgstr "<option>track:</option>@<parameter>数字</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:563
-#, fuzzy
-#| msgid "If the parameter starts with a '<literal>@</literal>' followed by a number <parameter>number</parameter> then the track whose track number element equals this <parameter>number</parameter>. Track number can be obtained with &mkvinfo;."
 msgid "If the parameter starts with a '<literal>@</literal>' followed by a number <parameter>number</parameter>, the track whose track number element equals this <parameter>number</parameter> will be selected. Track numbers can be obtained with &mkvinfo;."
-msgstr "如果参数以 '<literal>@</literal>' 后接 <parameter>数字</parameter> 开头，则选择轨道号元素等于 <parameter>数字</parameter> 的轨道。轨道号可以通过 &mkvinfo; 获取。"
+msgstr "若参数以「<literal>@</literal>」后接数字「<parameter>number</parameter>」开头，则会选择轨道编号等于该「 <parameter>number</parameter>」的轨道。可以通过 &mkvinfo; 获取轨道编号。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvpropedit.xml:572
@@ -5382,7 +5366,7 @@ msgstr "其后所有文件名将在信息工具中打开。"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:94
 msgid "Additionally the info tool will be selected on startup instead of the multiplexer tool."
-msgstr ""
+msgstr "此外，启动时会选择信息工具，而非混流工具。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:99
@@ -5397,7 +5381,7 @@ msgstr "后面的所有文件名都将在章节编辑器中打开。"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:102
 msgid "Additionally the chapter editor will be selected on startup instead of the multiplexer tool."
-msgstr ""
+msgstr "此外，启动时会选择章节编辑器，而非混流工具。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:107
@@ -5412,7 +5396,7 @@ msgstr "后面的所有文件名都将在头部编辑器中打开。"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvtoolnix-gui.xml:110
 msgid "Additionally the header editor will be selected on startup instead of the multiplexer tool."
-msgstr ""
+msgstr "此外，启动时会选择头部编辑器，而非混流工具。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:137
@@ -5423,67 +5407,65 @@ msgstr "&mkvmerge;, &mkvextract;, &mkvinfo;, &mkvpropedit;"
 #: doc/stylesheets/toc.xsl:6
 #, no-wrap
 msgid "Table of contents"
-msgstr ""
+msgstr "目录"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><xsl:if><xsl:text>
 #: doc/stylesheets/cmdsynopsis.xsl:16
 #: doc/stylesheets/cmdsynopsis.xsl:56
 #, no-wrap
 msgid "&#x20;"
-msgstr ""
+msgstr "&#x20;"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><xsl:text>
 #: doc/stylesheets/cmdsynopsis.xsl:19
 #: doc/stylesheets/docbook-to-html.xsl:176
 #, no-wrap
 msgid "["
-msgstr ""
+msgstr "["
 
 #. type: Content of: <xsl:stylesheet><xsl:template><xsl:for-each><xsl:if><xsl:text>
 #: doc/stylesheets/cmdsynopsis.xsl:25
 #, no-wrap
 msgid "&#x20;|"
-msgstr ""
+msgstr "&#x20;|"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><xsl:text>
 #: doc/stylesheets/cmdsynopsis.xsl:28
 #: doc/stylesheets/docbook-to-html.xsl:176
 #, no-wrap
 msgid "]"
-msgstr ""
+msgstr "]"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><sup><xsl:text>
 #: doc/stylesheets/docbook-to-html.xsl:32
 #, no-wrap
 msgid "(tm)"
-msgstr ""
+msgstr "(tm)"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><div><p>
 #: doc/stylesheets/docbook-to-html.xsl:37
 #, no-wrap
 msgid "Important:"
-msgstr ""
+msgstr "重要:"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><div><p>
 #: doc/stylesheets/docbook-to-html.xsl:44
-#, fuzzy, no-wrap
-#| msgid "Notes"
+#, no-wrap
 msgid "Note:"
-msgstr "注"
+msgstr "注意:"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><head><title><xsl:text>
 #: doc/stylesheets/docbook-to-html.xsl:59
 #: doc/stylesheets/head.xsl:8
 #, no-wrap
 msgid " -- "
-msgstr ""
+msgstr " -- "
 
 #. type: Content of: <xsl:stylesheet><xsl:template><table><thead><tr><th>
 #: doc/stylesheets/docbook-to-html.xsl:128
-#, fuzzy, no-wrap
-#| msgid "Options:"
+#, no-wrap
 msgid "Option"
-msgstr "选项:"
+msgstr "选项"
 
 #. type: Content of: <xsl:stylesheet><xsl:template><xsl:choose><xsl:otherwise><a><xsl:text>
 #: doc/stylesheets/docbook-to-html.xsl:183
@@ -5491,7 +5473,7 @@ msgstr "选项:"
 #: doc/stylesheets/docbook-to-html.xsl:194
 #, no-wrap
 msgid "("
-msgstr ""
+msgstr "("
 
 #. type: Content of: <xsl:stylesheet><xsl:template><xsl:choose><xsl:otherwise><a><xsl:text>
 #: doc/stylesheets/docbook-to-html.xsl:183
@@ -5499,7 +5481,7 @@ msgstr ""
 #: doc/stylesheets/docbook-to-html.xsl:194
 #, no-wrap
 msgid ")"
-msgstr ""
+msgstr ")"
 
 #~| msgid "2016-11-29"
 #~ msgid "2019-12-06"
