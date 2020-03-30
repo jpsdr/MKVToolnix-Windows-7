@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-03-28 15:39+0100\n"
+"POT-Creation-Date: 2020-03-30 18:41+0200\n"
 "PO-Revision-Date: 2020-03-28 14:54+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3518,7 +3518,7 @@ msgstr "Sonraki parçayla ilgili olarak gözden kaçan dosya adı."
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "Önceki parçayla ilgili olarak gözden kaçan dosya adı."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "Hedef dosya yazılırken bir istisna meydana geldi."
@@ -3575,10 +3575,15 @@ msgstr "Ortam dosyalarını ilave et"
 msgid "Append to an e&xisting source file"
 msgstr "Mevcut bir kaynak dosyaya ila&ve et"
 
-#: src/merge/output_control.cpp:1776
+#: src/merge/output_control.cpp:1799
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "{4} ('{5}') nolu dosyadan {3}. ize ilave edilen, {1} ('{2}') nolu dosyadan {0}. iz.\n"
+
+#: src/merge/output_control.cpp:1020
+#, fuzzy, no-c-format
+msgid "Appending tracks of this type is not supported."
+msgstr "Şifrelenmiş VOB'ları okuma desteklenmiyor.\n"
 
 #: src/merge/mkvmerge.cpp:658
 #, no-c-format
@@ -4634,7 +4639,7 @@ msgstr "Bu MPEG-1/2 izinden sıralı başlık çıkartılamadı.\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "Ses izi {0} için bir indeks bulunamadı (avilib hata iletisi: {1}). İz atlanıyor.\n"
 
-#: src/merge/output_control.cpp:1702
+#: src/merge/output_control.cpp:1725
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "İlave edilirken gptzr bulunamadı. {0}\n"
@@ -5965,7 +5970,7 @@ msgstr "Örnekler: 01:00:00 (bir saat sonra) ya da 1800s (1800 saniye sonra)."
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "Örnekler: 01:00:00,01:30:00 (bir saat sonra ve bir saat otuz dakika sonra) ya da 180s,300s,00:10:00 (üç, beş ve on dakika sonra)."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "Exception details:"
 msgstr "İstisna ayrıntıları:"
@@ -8202,7 +8207,7 @@ msgstr "Çoklama uygulaması"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "\"%2\" dizininde \"%1\" dosyasına çoklama"
 
-#: src/merge/mkvmerge.cpp:3158
+#: src/merge/mkvmerge.cpp:3159
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "Çoklama {0} sürdü.\n"
@@ -8664,7 +8669,7 @@ msgstr "Çoğu <MTX_…> değişkenlerinin, boş olduğunu ve değişkenleri ba�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Dosya adlarında ters eğik çizgilerin yerine Windows öne eğik çizgilerinin de kullanılabildiğini unutmayın."
 
-#: src/merge/generic_packetizer.cpp:1655
+#: src/merge/generic_packetizer.cpp:1660
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "'{0}' depolaması ile ilgili Matroska teknik özelliklerinin henüz sonuçlanmadığını unutmayın. Bu konuda mkvmerge'ün desteği bu nedenle değişebilir ve '{1}' yerine '{1}/EXPERIMENTAL' KodekID'sini kullanır. Bu uyarı, teknik özellikler tamamlandıktan ve mkvmerge buna göre güncellendikten sonra kaldırılacaktır.\n"
@@ -10641,7 +10646,7 @@ msgstr "Dilimler"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Bazı H.264/AVC izleri I dilimleri içerir ancak gerçek anahtar karelere ihtiyacı olur."
 
-#: src/merge/output_control.cpp:1267
+#: src/merge/output_control.cpp:1290
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "Bazı etiket öğeleri eksik (bu hata meydana gelmemeliydi - başka bir benzer hata önceden meydana gelmişti). {0}\n"
@@ -10711,6 +10716,11 @@ msgstr "Bölme kipi:"
 #, no-c-format
 msgid "Splitting"
 msgstr "Bölme"
+
+#: src/merge/output_control.cpp:1076
+#, fuzzy, no-c-format
+msgid "Splitting tracks of this type is not supported."
+msgstr "KodekID '{1}' ile olan iz ID {0} çıkartılması desteklenmiyor.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:312
 #, no-c-format
@@ -11326,7 +11336,6 @@ msgid "The codec type '{0}' cannot be used in a WebM compliant file.\n"
 msgstr "Kodek türü '{0}', WebM uyum dosyasında kullanılamaz.\n"
 
 #: src/merge/connection_checks.h:60
-#: src/output/p_flac.cpp:100
 #, no-c-format
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "Kodek'in özel verisi eşleşmiyor (uzunlukları: {0} ve {1})."
@@ -11373,7 +11382,7 @@ msgstr "Düzeltme dosya başlığı doğru olarak okunmadı.\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Sağdaki 'seçilen' listesindeki ülkeler, programdaki tüm aşağı açılır ülke listesinin en üstünde gösterilecektir."
 
-#: src/merge/output_control.cpp:1508
+#: src/merge/output_control.cpp:1531
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Cue girişleri (indeks) yazılıyor...\n"
@@ -11478,7 +11487,7 @@ msgstr "İki izin görüntü genişliği farklı: {0} ve {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "Olumsuz tarafı, uygulamadan çıkmadan önce mkvmerge, tüm veriler depolamaya yazılana kadar bekleyeceğinden çoklamanın daha uzun sürmesidir."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "The drive may be full."
 msgstr "Sürücü dolu olabilir."
@@ -11622,7 +11631,7 @@ msgstr "'{0}' dosyası yazmak için açılamadı: {1}."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1293
+#: src/merge/output_control.cpp:1316
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "'{0}' dosyası yazmak için açılamadı: {1}.\n"
@@ -11632,7 +11641,7 @@ msgstr "'{0}' dosyası yazmak için açılamadı: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "'{0}' dosyası açılamadı veya ayrıştırılamadı."
 
-#: src/merge/output_control.cpp:1297
+#: src/merge/output_control.cpp:1320
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "'{0}' dosyası yazmak için açıldı.\n"
@@ -12226,7 +12235,7 @@ msgstr "Özellik değeri, '{0}' içinde geçerli bir imzalı tam sayı değil. {
 msgid "The property value is not a valid unsigned integer in '{0}'. {1}\n"
 msgstr "Özellik değeri, '{0}' içinde geçerli bir imzasız sayı değil. {1}\n"
 
-#: src/merge/output_control.cpp:1020
+#: src/merge/output_control.cpp:1021
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "Sebep bilinmiyor."
@@ -12464,6 +12473,11 @@ msgstr "Bütün film için başlık."
 msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr "İz ID {0} geçerli KodekID'sine sahip değil.\n"
 
+#: src/merge/output_control.cpp:1078
+#, fuzzy, no-c-format
+msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
+msgstr "'{1}' dosyasından {0} nolu iz muhtemelen doğru bir şekilde '{3}' dosyasından {2} nolu ize ilave edilemez. {4}\n"
+
 #: src/merge/output_control.cpp:660
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
@@ -12479,7 +12493,7 @@ msgstr "Blok Başlığında kullanıldığı gibi iz numarası."
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "'{1}' dosyasından {0} nolu iz muhtemelen doğru bir şekilde '{3}' dosyasından {2} nolu ize ilave edilemez: {4} Lütfen sonuçta oluşan dosyanın bütün sürede doğru olarak oynadığından emin olun. Programın yazarı muhtemelen sonuçta oluşan dosya ile ilgili oynatma sorunları için destek vermeyecek.\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:1023
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr "'{1}' dosyasından {0} nolu iz muhtemelen doğru bir şekilde '{3}' dosyasından {2} nolu ize ilave edilemez. {4}\n"
@@ -12907,7 +12921,7 @@ msgstr "Bu özellik zorunlu ve '{0}' içinde silinemez. {1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Bu özellik benzersiz. Daha fazla benzerleri '{0}' içinde eklenemez. {1}\n"
 
-#: src/merge/output_control.cpp:1619
+#: src/merge/output_control.cpp:1642
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "Bu GERÇEKTEN olmamalıydı. İlk üst arama öğesi için ayrılan alan çok küçüktü. Gereken boyut: {0}. {1}\n"
@@ -14400,7 +14414,7 @@ msgstr "araya ekli sütun (önce sağ)"
 msgid "compression"
 msgstr "sıkıştırma"
 
-#: src/merge/generic_packetizer.cpp:1674
+#: src/merge/generic_packetizer.cpp:1679
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: file_num bulunamadı. {0}\n"

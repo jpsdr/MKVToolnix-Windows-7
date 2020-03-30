@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-03-28 15:39+0100\n"
+"POT-Creation-Date: 2020-03-30 18:41+0200\n"
 "PO-Revision-Date: 2019-09-10 20:42+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/moritz-"
@@ -3524,7 +3524,7 @@ msgstr "Ime fajla u kome se nalazi sledeći segment."
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "Ime fajla u kome se nalazi prethodni segment."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "Desilo se odstupanje prilikom zapisivanja odredišnog fajla."
@@ -3581,10 +3581,15 @@ msgstr "Spoji media fajlove"
 msgid "Append to an e&xisting source file"
 msgstr "Spoji sa p&ostojećim izvornim fajlom"
 
-#: src/merge/output_control.cpp:1776
+#: src/merge/output_control.cpp:1799
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Spajam stazu {0} iz fajla broj {1} ('{2}') u stazu {3} iz fajla broj {4} ('{5}').\n"
+
+#: src/merge/output_control.cpp:1020
+#, fuzzy, no-c-format
+msgid "Appending tracks of this type is not supported."
+msgstr "Čitanje šifrovanih VOB-ova nije podržano.\n"
 
 #: src/merge/mkvmerge.cpp:658
 #, no-c-format
@@ -4641,7 +4646,7 @@ msgstr "Ne mogu da izvučem zaglavlje sekvence iz ove MPEG-1/2 staze.\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "Ne mogu da pronađem indeks za audio stazu {0} (avilib poruka o grešci: {1}). Preskačem stazu.\n"
 
-#: src/merge/output_control.cpp:1702
+#: src/merge/output_control.cpp:1725
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "Ne mogu da nađem gptzr dok spajam. {0}\n"
@@ -5975,7 +5980,7 @@ msgstr "Primeri: 01:00:00 (posle jednog sata) ili 1800s (posle 1800 sekundi)."
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "Primeri: 01:00:00,01:30:00 (posle jednog sata i posle jednog sata i trideset minuta) ili 180s,300s,00:10:00 (posle tri, pet i deset minuta)."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "Exception details:"
 msgstr "Detalji odstupanja:"
@@ -8220,7 +8225,7 @@ msgstr "Multiplekser aplikacija"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Multipleksiram u fajl \"%1\" u direktorijumu \"%2\""
 
-#: src/merge/mkvmerge.cpp:3158
+#: src/merge/mkvmerge.cpp:3159
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "Multipleksiranje je trajalo {0}.\n"
@@ -8682,7 +8687,7 @@ msgstr "Znajte da su većina <MTX_…> promenljivih prazne i da će biti obrisan
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Znajte da u Windows-u takođe može da se koristi kosa crta umesto obrnute kose crte u putanji do fajla."
 
-#: src/merge/generic_packetizer.cpp:1655
+#: src/merge/generic_packetizer.cpp:1660
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Imajte u vidu da Matroska specifikacije koje se odnose na skladištenje '{0}' nisu još uvek finalizovane. Stoga je podrška za to podložna promeni i koristi CodecID '{1}/EXPERIMENTAL' umesto '{1}'. Ovo upozorenje će biti uklonjeno kada specifikacije budu finalizovane i mkvmerge ažuriran u skladu sa tim.\n"
@@ -10670,7 +10675,7 @@ msgstr "Slajsevi"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Neke H.264/AVC staze sadrže I slike koje nisu prave ključne slike."
 
-#: src/merge/output_control.cpp:1267
+#: src/merge/output_control.cpp:1290
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "Neki elementi tagova nedostaju (ova greška nije trebalo da se desi - druga slična greška je trebalo da se desi ranije). {0}\n"
@@ -10740,6 +10745,11 @@ msgstr "Režim deljenja:"
 #, no-c-format
 msgid "Splitting"
 msgstr "Deljenje"
+
+#: src/merge/output_control.cpp:1076
+#, fuzzy, no-c-format
+msgid "Splitting tracks of this type is not supported."
+msgstr "Izvlačenje track ID {0} sa CodecID '{1}' nije podržano.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:312
 #, no-c-format
@@ -11368,7 +11378,6 @@ msgid "The codec type '{0}' cannot be used in a WebM compliant file.\n"
 msgstr "Tip kodeka '{0}' ne može biti koršćen u WebM usaglašenim fajlovima.\n"
 
 #: src/merge/connection_checks.h:60
-#: src/output/p_flac.cpp:100
 #, no-c-format
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "Lični podaci kodeka se ne slažu (dužine: {0} i {1})."
@@ -11415,7 +11424,7 @@ msgstr "Ispravka zaglavlja fajla nije pravilno pročitana.\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Države sa liste 'izabrano' biće prikazane na vrhu padajuće liste sa državama u celom programu."
 
-#: src/merge/output_control.cpp:1508
+#: src/merge/output_control.cpp:1531
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Zapisuju se cue unosi (indeks)...\n"
@@ -11521,7 +11530,7 @@ msgstr "Širina slike dve staze je različita: {0} and {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "Mana je u tome da će multipleksiranje trajati duže jer će mkvmerge čekati sve dok svi podaci ne budu zapisani na skladišni uredjaj pre izlaska."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "The drive may be full."
 msgstr "Disk je možda pun."
@@ -11665,7 +11674,7 @@ msgstr "Fajl '{0}' ne može biti otvoren za zapisivanje: {1}."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1293
+#: src/merge/output_control.cpp:1316
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "Fajl '{0}' ne može biti otvoren za zapisivanje: {1}.\n"
@@ -11675,7 +11684,7 @@ msgstr "Fajl '{0}' ne može biti otvoren za zapisivanje: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "Fajl '{0}' ne može da se otvori ili raščlani."
 
-#: src/merge/output_control.cpp:1297
+#: src/merge/output_control.cpp:1320
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "Fajl '{0}' je otvoren za zapisivanje.\n"
@@ -12271,7 +12280,7 @@ msgstr "Vrednost svojstva nije važeći broj sa predznakom u '{0}'. {1}\n"
 msgid "The property value is not a valid unsigned integer in '{0}'. {1}\n"
 msgstr "Vrednost svojstva nije važeći broj bez predznaka u '{0}'. {1}\n"
 
-#: src/merge/output_control.cpp:1020
+#: src/merge/output_control.cpp:1021
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "Razlog je nepoznat."
@@ -12512,6 +12521,11 @@ msgstr "Naslov za ceo film."
 msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr "track ID {0} nema ispravan CodecID.\n"
 
+#: src/merge/output_control.cpp:1078
+#, fuzzy, no-c-format
+msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
+msgstr "Staza broj {0} iz fajla '{1}' ne može biti spojena sa stazom broj {2} iz fajla '{3}'. {4}\n"
+
 #: src/merge/output_control.cpp:660
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
@@ -12527,7 +12541,7 @@ msgstr "Broj staze, kako je korišćen u zaglavlju bloka."
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "Staza broj {0} iz fajla '{1}' verovatno ne može biti ispravno spojena sa stazom broj {2} iz fajla '{3}': {4} Molim vas da se uverite da se dobijeni fajl ispravno reprodukuje sve vreme. Autor ovog programa verovatno neće dati podršku za probleme sa reprodukcijom nastalog fajla.\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:1023
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr "Staza broj {0} iz fajla '{1}' ne može biti spojena sa stazom broj {2} iz fajla '{3}'. {4}\n"
@@ -12956,7 +12970,7 @@ msgstr "Ovo svojstvo je obavezno i ne može biti obrisano iz '{0}'. {1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Ovo svojstvo je jedinstveno. Ne može se dodati više instanci u '{0}'. {1}\n"
 
-#: src/merge/output_control.cpp:1619
+#: src/merge/output_control.cpp:1642
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "Ovo STVARNO nije trebalo da se desi. Prostor rezervisan za prvi meta seek element je previše mali. Potrebna veličina: {0}. {1}\n"
@@ -14447,7 +14461,7 @@ msgstr "isprepletan stub (desno prvo)"
 msgid "compression"
 msgstr "kompresija"
 
-#: src/merge/generic_packetizer.cpp:1674
+#: src/merge/generic_packetizer.cpp:1679
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: file_num nije nađen. {0}\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-03-28 15:39+0100\n"
+"POT-Creation-Date: 2020-03-30 18:41+0200\n"
 "PO-Revision-Date: 2020-03-29 19:19+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -3455,7 +3455,7 @@ msgstr "下一剪辑对应的已转义文件名。"
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "上一剪辑对应的已转义文件名。"
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "写入输出文件时发生异常。"
@@ -3512,10 +3512,15 @@ msgstr "追加媒体文件"
 msgid "Append to an e&xisting source file"
 msgstr "追加到现有输入文件(&X)"
 
-#: src/merge/output_control.cpp:1776
+#: src/merge/output_control.cpp:1799
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "正在将文件 {1} (「{2}」) 中的轨道 {0} 追加合并到第 {4} 个文件 (「{5}」) 的轨道 {3}。\n"
+
+#: src/merge/output_control.cpp:1020
+#, fuzzy, no-c-format
+msgid "Appending tracks of this type is not supported."
+msgstr "不支持读取已加密的 VOB。\n"
 
 #: src/merge/mkvmerge.cpp:658
 #, no-c-format
@@ -4572,7 +4577,7 @@ msgstr "无法从该 MPEG-1/2 轨道提取序列头。\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "找不到音频轨道 {0} 的索引 (avilib 错误消息: {1})。跳过此轨道。\n"
 
-#: src/merge/output_control.cpp:1702
+#: src/merge/output_control.cpp:1725
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "追加合并时找不到 gptzr。 {0}\n"
@@ -5903,7 +5908,7 @@ msgstr "示例: 01:00:00 (一小时以后) 或 1800s (1800 秒以后)。"
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "示例: 01:00:00,01:30:00 (一小时以后、一小时三十分钟以后) 或 180s,300s,00:10:00 (三分钟、五分钟、十分钟以后)。"
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "Exception details:"
 msgstr "异常详情:"
@@ -8138,7 +8143,7 @@ msgstr "混流应用程序"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "混流到目录“%2”中的文件“%1”"
 
-#: src/merge/mkvmerge.cpp:3158
+#: src/merge/mkvmerge.cpp:3159
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "混流耗时 {0}。\n"
@@ -8600,7 +8605,7 @@ msgstr "注意，大多 <MTX_…> 变量为空，执行将变量作为参数的�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "注意，在 Windows 平台，路径名称中的反斜杠 (\\) 也可以用正斜杠 (/) 代替。"
 
-#: src/merge/generic_packetizer.cpp:1655
+#: src/merge/generic_packetizer.cpp:1660
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "注意，与「{0}」存储相关的 Matroska 规范尚未定稿。因此 mkvmerge 对它的支持可能发生变动，在此采用 CodecID 「{1}/EXPERIMENTAL」代替「{1}」。本警告消息将在规范定稿且 mkvmerge 随之更新后取消。\n"
@@ -10567,7 +10572,7 @@ msgstr "切片"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "部分 H.264/AVC 轨道包含 I 分片但缺少对应的关键帧。"
 
-#: src/merge/output_control.cpp:1267
+#: src/merge/output_control.cpp:1290
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "缺少某些标签元素 (不该发生此错误 - 另一个类似的错误已经在早些时候发生)。{0}\n"
@@ -10637,6 +10642,11 @@ msgstr "分割模式:"
 #, no-c-format
 msgid "Splitting"
 msgstr "分割"
+
+#: src/merge/output_control.cpp:1076
+#, fuzzy, no-c-format
+msgid "Splitting tracks of this type is not supported."
+msgstr "不支持提取 CodecID 为 {1} 的轨道 ID {0}。\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:312
 #, no-c-format
@@ -11249,7 +11259,6 @@ msgid "The codec type '{0}' cannot be used in a WebM compliant file.\n"
 msgstr "WebM 兼容文件不允许编码类型「{0}」。\n"
 
 #: src/merge/connection_checks.h:60
-#: src/output/p_flac.cpp:100
 #, no-c-format
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "编码格式私有数据不匹配 (长度: {0} 与 {1})。"
@@ -11296,7 +11305,7 @@ msgstr "校正文件头部未能正确读取。\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "右侧“选中”列表中的国家将会显示在程序中所有国家下拉列表的顶部。"
 
-#: src/merge/output_control.cpp:1508
+#: src/merge/output_control.cpp:1531
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "正在写入 cue 条目 (索引)...\n"
@@ -11400,7 +11409,7 @@ msgstr "两条轨道的显示宽度不同: {0} 与 {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "缺点是混流耗时更长，因为 mkvmerge 在退出前需要等待所有数据写入存储设备。"
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "The drive may be full."
 msgstr "磁盘可能已满。"
@@ -11544,7 +11553,7 @@ msgstr "文件「{0}」无法以写入模式打开: {1}."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1293
+#: src/merge/output_control.cpp:1316
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "文件「{0}」无法以写入模式打开: {1}。\n"
@@ -11554,7 +11563,7 @@ msgstr "文件「{0}」无法以写入模式打开: {1}。\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "文件「{0}」无法打开或解析。"
 
-#: src/merge/output_control.cpp:1297
+#: src/merge/output_control.cpp:1320
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "以写入模式打开文件「{0}」。\n"
@@ -12148,7 +12157,7 @@ msgstr "「{0}」中的属性值不是有效的带符号整数。{1}\n"
 msgid "The property value is not a valid unsigned integer in '{0}'. {1}\n"
 msgstr "「{0}」中的属性值不是有效的无符号整数。{1}\n"
 
-#: src/merge/output_control.cpp:1020
+#: src/merge/output_control.cpp:1021
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "原因未知。"
@@ -12389,6 +12398,11 @@ msgstr "整部影片的标题。"
 msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr "轨道 ID {0} 没有有效的 CodecID。\n"
 
+#: src/merge/output_control.cpp:1078
+#, fuzzy, no-c-format
+msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
+msgstr "文件「{1}」中的轨道编号 {0} 无法追加到文件「{3}」中的轨道编号 {2}。{4}\n"
+
 #: src/merge/output_control.cpp:660
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
@@ -12404,7 +12418,7 @@ msgstr "区块头部中使用的轨道编号。"
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "文件「{1}」中的轨道编号 {0} 可能无法被正确追加到文件「{3}」中的轨道编号 {2}: {4} 请确认生成的文件是否可以完整播放。本程序的作者可能不会提供此文件播放问题的支持。\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:1023
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr "文件「{1}」中的轨道编号 {0} 无法追加到文件「{3}」中的轨道编号 {2}。{4}\n"
@@ -12831,7 +12845,7 @@ msgstr "「{0}」中的元素为必要元素，无法删除。{1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "该属性唯一。不可以将更多实例添加到「{0}」。{1}\n"
 
-#: src/merge/output_control.cpp:1619
+#: src/merge/output_control.cpp:1642
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "这 *真的* 不该发生。为首个元定位元素预留的空间过小。需要的空间: {0}. {1}\n"
@@ -14322,7 +14336,7 @@ msgstr "列交错 (右先)"
 msgid "compression"
 msgstr "压缩"
 
-#: src/merge/generic_packetizer.cpp:1674
+#: src/merge/generic_packetizer.cpp:1679
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: file_num 未找到。 {0}\n"

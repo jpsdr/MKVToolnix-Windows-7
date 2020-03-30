@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-03-28 15:39+0100\n"
+"POT-Creation-Date: 2020-03-30 18:41+0200\n"
 "PO-Revision-Date: 2020-03-13 13:10+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3590,7 +3590,7 @@ msgstr "Un nom de fitxer eludit corresponent al segment següent."
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "Un nom de fitxer eludit corresponent al segment previ."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "S'ha produït una excepció en escriure el fitxer de destinació."
@@ -3647,10 +3647,15 @@ msgstr "Annexa alguns fitxers de suports"
 msgid "Append to an e&xisting source file"
 msgstr "Annexa a un fitxer d'origen e&xistent"
 
-#: src/merge/output_control.cpp:1776
+#: src/merge/output_control.cpp:1799
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "S'està unint la pista {0} des del fitxer núm. {1} («{2}») a la pista {3} des del fitxer núm. {4} («{5}»).\n"
+
+#: src/merge/output_control.cpp:1020
+#, fuzzy, no-c-format
+msgid "Appending tracks of this type is not supported."
+msgstr "La lectura de VOB encriptats encara no està implementada.\n"
 
 #: src/merge/mkvmerge.cpp:658
 #, no-c-format
@@ -4707,7 +4712,7 @@ msgstr "No s'ha pogut extreure la capçalera de la seqüència des d'aquesta pis
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "No s'ha pogut trobar un índex per a la pista d'àudio {0} (Missatge d'error «avilib»: {1}). S'ha omès la pista.\n"
 
-#: src/merge/output_control.cpp:1702
+#: src/merge/output_control.cpp:1725
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "No s'ha pogut trobar «gptzr» en annexar. {0}\n"
@@ -6040,7 +6045,7 @@ msgstr "Exemples: «01:00:00» (després d'una hora) o «1800s» (després de 18
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "Exemples: «01:00:00,01:30:00» (després d'una hora i després d'una hora i trenta minuts) o «180s,300s,00:10:00» (després de tres, cinc i deu minuts)."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "Exception details:"
 msgstr "Detalls de l'excepció:"
@@ -8277,7 +8282,7 @@ msgstr "Aplicació de multiplexat"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Multiplexació al fitxer «%1» en el directori «%2»"
 
-#: src/merge/mkvmerge.cpp:3158
+#: src/merge/mkvmerge.cpp:3159
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "El multiplexat ha pres {0}.\n"
@@ -8739,7 +8744,7 @@ msgstr "Tingueu en compte que la majoria de les variables <MTX_…> estan buides
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Recordeu que al Windows també es poden emprar barres inverses en lloc de barres invertides en els noms dels camins."
 
-#: src/merge/generic_packetizer.cpp:1655
+#: src/merge/generic_packetizer.cpp:1660
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "Tingueu en compte que les especificacions de Matroska quant a l'emmagatzemament de «{0}» encara no han finalitzat. La implementació del «mkvmerge» està subjecta a canvis i usa el CodecID «{1}/EXPERIMENTAL» en comptes de «{1}». Aquest avís serà suprimit una vegada s'hagin finalitzat les especificacions i s'actualitzi el «mkvmerge».\n"
@@ -10719,7 +10724,7 @@ msgstr "Talls"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Algunes pistes H.264/AVC contenen talls I, però falten els fotogrames clau reals."
 
-#: src/merge/output_control.cpp:1267
+#: src/merge/output_control.cpp:1290
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "Manquen alguns elements de l'etiqueta (aquest error no hauria d'haver succeït -ja deu haver succeït quelcom semblant anteriorment-). {0}\n"
@@ -10789,6 +10794,11 @@ msgstr "Mode de tall:"
 #, no-c-format
 msgid "Splitting"
 msgstr "Divisió"
+
+#: src/merge/output_control.cpp:1076
+#, fuzzy, no-c-format
+msgid "Splitting tracks of this type is not supported."
+msgstr "L'extracció de la pista amb l'ID {0} i l'ID del còdec «{1}», no és admesa.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:312
 #, no-c-format
@@ -11404,7 +11414,6 @@ msgid "The codec type '{0}' cannot be used in a WebM compliant file.\n"
 msgstr "El tipus de còdec «{0}» no es pot emprar en un fitxer conforme amb WebM.\n"
 
 #: src/merge/connection_checks.h:60
-#: src/output/p_flac.cpp:100
 #, no-c-format
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "Les dades privades del còdec no coincideixen (longituds: {0} i {1})."
@@ -11451,7 +11460,7 @@ msgstr "La capçalera del fitxer de correcció no es pot llegir correctament.\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Els països «seleccionats» aquí es mostraran a la part superior de les llistes desplegables de país en el programa."
 
-#: src/merge/output_control.cpp:1508
+#: src/merge/output_control.cpp:1531
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "S'estan escrivint les entrades de l'índex...\n"
@@ -11556,7 +11565,7 @@ msgstr "L'amplada de visualització de les dues pistes és diferent: {0} i {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "L'inconvenient és que la multiplexació trigarà més, ja que el «mkvmerge» esperarà fins que totes les dades s'hagin escrit a l'emmagatzematge abans de sortir."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "The drive may be full."
 msgstr "La unitat podria estar plena."
@@ -11700,7 +11709,7 @@ msgstr "El fitxer «{0}» no s'ha pogut obrir per a escriptura: {1}."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1293
+#: src/merge/output_control.cpp:1316
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "El fitxer «{0}» no s'ha pogut obrir per a escriptura: {1}.\n"
@@ -11710,7 +11719,7 @@ msgstr "El fitxer «{0}» no s'ha pogut obrir per a escriptura: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "El fitxer «{0}» no s'ha pogut obrir o analitzar."
 
-#: src/merge/output_control.cpp:1297
+#: src/merge/output_control.cpp:1320
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "El fitxer «{0}» ha estat obert per a escriptura.\n"
@@ -12304,7 +12313,7 @@ msgstr "El valor de la propietat no és un enter amb signe vàlid a «{0}». {1}
 msgid "The property value is not a valid unsigned integer in '{0}'. {1}\n"
 msgstr "El valor de la propietat no és un enter sense signe vàlid a «{0}». {1}\n"
 
-#: src/merge/output_control.cpp:1020
+#: src/merge/output_control.cpp:1021
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "La raó és desconeguda."
@@ -12545,6 +12554,11 @@ msgstr "El títol per a tota la pel·lícula."
 msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr "La pista amb l'ID {0} no té un ID de còdec vàlid.\n"
 
+#: src/merge/output_control.cpp:1078
+#, fuzzy, no-c-format
+msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
+msgstr "El número de la pista {0} del fitxer «{1}» no es pot annexar al número de la pista {2} del fitxer «{3}». {4}\n"
+
 #: src/merge/output_control.cpp:660
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
@@ -12560,7 +12574,7 @@ msgstr "El número de la pista que s'usa a la capçalera del bloc."
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "El número de la pista {0} del fitxer «{1}» probablement no es pot annexar correctament al número de la pista {2} del fitxer «{3}»: {4} Si us plau, assegureu-vos que el fitxer resultant es reprodueix tot el temps de forma correcta. És poc probable que l'autor d'aquest programa proporcioni cap tipus de suport per a les errades de reproducció amb el fitxer resultant.\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:1023
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr "El número de la pista {0} del fitxer «{1}» no es pot annexar al número de la pista {2} del fitxer «{3}». {4}\n"
@@ -12988,7 +13002,7 @@ msgstr "Aquesta propietat és obligatòria i no es pot suprimir a «{0}». {1}\n
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Aquesta propietat és única. No es poden afegir més instàncies a «{0}». {1}\n"
 
-#: src/merge/output_control.cpp:1619
+#: src/merge/output_control.cpp:1642
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "REALMENT això no hauria d'haver succeït. L'espai reservat per al primer element de meta de cerca és massa petit. Mida necessària: {0}. {1}\n"
@@ -14479,7 +14493,7 @@ msgstr "Columna intercalada (primer dreta)"
 msgid "compression"
 msgstr "Compressió"
 
-#: src/merge/generic_packetizer.cpp:1674
+#: src/merge/generic_packetizer.cpp:1679
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: no es troba file_num. {0}\n"

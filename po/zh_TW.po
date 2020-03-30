@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-03-28 15:39+0100\n"
+"POT-Creation-Date: 2020-03-30 18:41+0200\n"
 "PO-Revision-Date: 2020-03-15 09:05+0000\n"
 "Last-Translator: 夏勊倪 <chunkai.mao@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -3482,7 +3482,7 @@ msgstr "對應下個剪輯轉義的檔名。"
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "對應上個剪輯轉義的檔名。"
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "寫入輸出檔案時發生異常狀況。"
@@ -3539,10 +3539,15 @@ msgstr "追加媒體檔案"
 msgid "Append to an e&xisting source file"
 msgstr "追加至已存在的輸入檔 (&X)"
 
-#: src/merge/output_control.cpp:1776
+#: src/merge/output_control.cpp:1799
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "正在追加合併軌道 {0} 自檔案 {1} ( '{2}' ) 至軌道 {3} 自檔案 {4} ( '{5}' ) 。\n"
+
+#: src/merge/output_control.cpp:1020
+#, fuzzy, no-c-format
+msgid "Appending tracks of this type is not supported."
+msgstr "不支援讀取加密的 VOB。\n"
 
 #: src/merge/mkvmerge.cpp:658
 #, no-c-format
@@ -4597,7 +4602,7 @@ msgstr "無法從該 MPEG-1/2 軌道擷取序列表頭。\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "找不到音訊軌 {0} 的索引 (avilib 錯誤訊息: {1})。正在跳過此軌。\n"
 
-#: src/merge/output_control.cpp:1702
+#: src/merge/output_control.cpp:1725
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "追加檔案時找不到 gptzr。 {0}\n"
@@ -5928,7 +5933,7 @@ msgstr "例如: 01:00:00 (一小時之後) 或 1800s (1800 秒之後)。"
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "例如: 01:00:00,01:30:00 (一小時之後和一小時三十分之後) 或 180s,300s,00:10:00 (三、五和十分鐘之後)。"
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "Exception details:"
 msgstr "異常狀況詳細資訊:"
@@ -8163,7 +8168,7 @@ msgstr "合成應用程式"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "合併到在目錄 \"%2\" 中的檔案 \"%1\""
 
-#: src/merge/mkvmerge.cpp:3158
+#: src/merge/mkvmerge.cpp:3159
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "合併花費時間 {0}。\n"
@@ -8625,7 +8630,7 @@ msgstr "注意，大多 <MTX_…> 的空白變數，將刪除可以採用變數�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "注意，在 Windows 平台，路徑名稱中的反斜線 (\\) 也可以用正斜線 (/) 代替。"
 
-#: src/merge/generic_packetizer.cpp:1655
+#: src/merge/generic_packetizer.cpp:1660
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "注意 Matroska 規範有關 '{0}' 的儲存方面尚未完成。mkvmerge 支援是因為改變主題且使用 CodecID '{1}/EXPERIMENTAL' 替代 '{1}' 。一旦規範完成會移除這個警告而 mkvmerge 也會相應地更新。\n"
@@ -10592,7 +10597,7 @@ msgstr "切面"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "部分 H.264/AVC 軌包含 I 配置，但缺少真正的關鍵影格。"
 
-#: src/merge/output_control.cpp:1267
+#: src/merge/output_control.cpp:1290
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "缺少某些標籤元件 (不該發生此錯誤 - 另一個類似的錯誤應該在早些時候發生過)。{0}\n"
@@ -10662,6 +10667,11 @@ msgstr "分割方式:"
 #, no-c-format
 msgid "Splitting"
 msgstr "分割"
+
+#: src/merge/output_control.cpp:1076
+#, fuzzy, no-c-format
+msgid "Splitting tracks of this type is not supported."
+msgstr "不支援要擷取的軌道識別碼 {0}（CodecID 為 '{1}' ）。\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:312
 #, no-c-format
@@ -11274,7 +11284,6 @@ msgid "The codec type '{0}' cannot be used in a WebM compliant file.\n"
 msgstr "此編碼器類型 '{0}' 無法用在 WebM 相容檔。\n"
 
 #: src/merge/connection_checks.h:60
-#: src/output/p_flac.cpp:100
 #, no-c-format
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "編碼器私有資料不符 (長度: {0} 與 {1})。"
@@ -11321,7 +11330,7 @@ msgstr "校正檔未能正常讀取。\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "右側 '選定' 清單中的國家將顯示在程式中所有國家下拉清單的頂部。"
 
-#: src/merge/output_control.cpp:1508
+#: src/merge/output_control.cpp:1531
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "正在寫入 cue 項目 (此索引)...\n"
@@ -11425,7 +11434,7 @@ msgstr "兩軌的顯示寬度不同: {0} 與 {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "缺點是合併工具需要更長的時間，因為 mkvmerge 會等到所有資料都寫入存儲後才能結束。"
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "The drive may be full."
 msgstr "可能硬碟空間已經滿了。"
@@ -11569,7 +11578,7 @@ msgstr "無法開啟檔案 '{0}' 進行寫入: {1}。"
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1293
+#: src/merge/output_control.cpp:1316
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "無法開啟檔案 '{0}' 進行寫入: {1}。\n"
@@ -11579,7 +11588,7 @@ msgstr "無法開啟檔案 '{0}' 進行寫入: {1}。\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "檔案 '{0}' 無法開啟或解析。"
 
-#: src/merge/output_control.cpp:1297
+#: src/merge/output_control.cpp:1320
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "檔案 '{0}' 已開啟以寫入。\n"
@@ -12173,7 +12182,7 @@ msgstr "屬性值 '{0}' 不是有效的帶正負號整數。{1}\n"
 msgid "The property value is not a valid unsigned integer in '{0}'. {1}\n"
 msgstr "此屬性值在 '{0}' 不是有效的不帶正負號整數。{1}\n"
 
-#: src/merge/output_control.cpp:1020
+#: src/merge/output_control.cpp:1021
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "原因不明。"
@@ -12414,6 +12423,11 @@ msgstr "整部影片的標題。"
 msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr "軌道識別碼 {0} 無有效的 CodecID。\n"
 
+#: src/merge/output_control.cpp:1078
+#, fuzzy, no-c-format
+msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
+msgstr "軌道編號 {0} （自檔案 '{1}' ）無法追加檔案至軌道編號 {2} （自檔案 '{3}' ）。{4}\n"
+
 #: src/merge/output_control.cpp:660
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
@@ -12429,7 +12443,7 @@ msgstr "區塊表頭使用的軌道編號。"
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "軌道編號 {0} （自檔案 '{1}' ）可能無法被正確追加檔案至軌道編號 {2} （自檔 '{3}' ）: {4} 請確認生成的檔是否可以完整地正常播放。此程式的作者可能無法提供關於播放生成的檔案的支援。\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:1023
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr "軌道編號 {0} （自檔案 '{1}' ）無法追加檔案至軌道編號 {2} （自檔案 '{3}' ）。{4}\n"
@@ -12856,7 +12870,7 @@ msgstr "這項屬性在 '{0}' 中是強制的且不能刪除的。{1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "這名稱是唯一的。多數情況下無法被加入到 '{0}' 。{1}\n"
 
-#: src/merge/output_control.cpp:1619
+#: src/merge/output_control.cpp:1642
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "這 *真的* 不該發生。為第一個變換定位元件預留的空間過小。需要的大小: {0}. {1}\n"
@@ -14347,7 +14361,7 @@ msgstr "直欄交錯 (從右邊開始)"
 msgid "compression"
 msgstr "壓縮"
 
-#: src/merge/generic_packetizer.cpp:1674
+#: src/merge/generic_packetizer.cpp:1679
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: file_num 未找到。 {0}\n"

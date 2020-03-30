@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-03-28 15:39+0100\n"
+"POT-Creation-Date: 2020-03-30 18:41+0200\n"
 "PO-Revision-Date: 2020-03-10 15:58+0000\n"
 "Last-Translator: NipponGo\n"
 "Language-Team: Japanese (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ja/)\n"
@@ -3498,7 +3498,7 @@ msgstr "次のセグメントに対応するエスケープされたファイル
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "前のセグメントに対応するエスケープされたファイル名です。"
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, fuzzy, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "出力ファイルの書き込み中に例外が発生しました。"
@@ -3555,10 +3555,15 @@ msgstr "メディアファイルを追加結合する"
 msgid "Append to an e&xisting source file"
 msgstr "既存の入力ファイルに追加結合する"
 
-#: src/merge/output_control.cpp:1776
+#: src/merge/output_control.cpp:1799
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "ファイル番号{1}（'{2}'）のトラック{0}を、ファイル番号{4}（'{5}'）のトラック{3}に追加しています。\n"
+
+#: src/merge/output_control.cpp:1020
+#, fuzzy, no-c-format
+msgid "Appending tracks of this type is not supported."
+msgstr "暗号化されたVOBの読み込みはサポートされていません。\n"
 
 #: src/merge/mkvmerge.cpp:658
 #, no-c-format
@@ -4613,7 +4618,7 @@ msgstr "このMPEG-1/2トラックからシーケンスヘッダを抽出する�
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "オーディオトラック{0}のインデックスを見つけられませんでした（avilibエラーメッセージ：{1}）。トラックをスキップします。\n"
 
-#: src/merge/output_control.cpp:1702
+#: src/merge/output_control.cpp:1725
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "追加結合時にgptzrを見つけられませんでした。{0}\n"
@@ -5949,7 +5954,7 @@ msgstr "例：01:00:00（一時間後）や1800s（1800秒後）。"
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "例：01:00:00、01:30:00（1時間後、1時間30分後）または180s、300s、00:10:00（3秒後、5分後、10分後）"
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "Exception details:"
 msgstr "例外の詳細："
@@ -8190,7 +8195,7 @@ msgstr "MUXアプリケーション"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "ディレクトリ»%2«のファイル»%1«へマージ"
 
-#: src/merge/mkvmerge.cpp:3158
+#: src/merge/mkvmerge.cpp:3159
 #, fuzzy, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "MUXに{0}かかりました。\n"
@@ -8652,7 +8657,7 @@ msgstr "殆どの<MTX_…>変数は空白であり、テストランでは削除
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Windowsではパス名で円記号の代わりにスラッシュも使用することができます。"
 
-#: src/merge/generic_packetizer.cpp:1655
+#: src/merge/generic_packetizer.cpp:1660
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "'{0}'の格納に関するMatroskaの仕様はまだ最終決定されていないことに注意してください。よってmkvmergeのサポートは変更される可能性があり、'{1}'の代わりに'{1}/EXPERIMENTAL'のコーデックIDを使用します。仕様が最終決定され次第この警告は削除され、mkvmergeもそれに従って更新されます。\n"
@@ -10619,7 +10624,7 @@ msgstr "スライス"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr ""
 
-#: src/merge/output_control.cpp:1267
+#: src/merge/output_control.cpp:1290
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "失われているタグ要素があります（このエラーは発生するはずはありません―似たような他のエラーが以前に発生しているはずです）。 {0}\n"
@@ -10689,6 +10694,11 @@ msgstr "分割モード："
 #, no-c-format
 msgid "Splitting"
 msgstr "ファイル分割"
+
+#: src/merge/output_control.cpp:1076
+#, fuzzy, no-c-format
+msgid "Splitting tracks of this type is not supported."
+msgstr "コーデックID '{1}'のトラックID{0}の抽出はサポートされていません。\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:312
 #, no-c-format
@@ -11309,7 +11319,6 @@ msgid "The codec type '{0}' cannot be used in a WebM compliant file.\n"
 msgstr "コーデックタイプ'{0}'はWebMの規格に準拠したファイルでは使用することができません。\n"
 
 #: src/merge/connection_checks.h:60
-#: src/output/p_flac.cpp:100
 #, no-c-format
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "コーデックのプライベートデータが一致しません（長さ：{0}と{1}）。"
@@ -11356,7 +11365,7 @@ msgstr "訂正ファイルのヘッダを正しく読み取ることができま
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "ここで選択した国はプログラムの全ての文字セットドロップダウンボックスで一番上に表示されます。"
 
-#: src/merge/output_control.cpp:1508
+#: src/merge/output_control.cpp:1531
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "キューエントリ（インデックス）が書き込まれています...\n"
@@ -11460,7 +11469,7 @@ msgstr "2つのトラック間で横解像度が異なっています：{0}と{1
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "The drive may be full."
 msgstr "ドライブが一杯である可能性があります。"
@@ -11604,7 +11613,7 @@ msgstr "ファイル'{0}'を開いて書き込むことができませんでし�
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1293
+#: src/merge/output_control.cpp:1316
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "ファイル'{0}'を開いて書き込むことができませんでした：{1}。\n"
@@ -11614,7 +11623,7 @@ msgstr "ファイル'{0}'を開いて書き込むことができませんでし�
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "ファイル「{0}」を開く、または解析することができませんでした。"
 
-#: src/merge/output_control.cpp:1297
+#: src/merge/output_control.cpp:1320
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "ファイル'{0}'を開いて書き込んでいます。\n"
@@ -12208,7 +12217,7 @@ msgstr "'{0}'においてこのプロパティの値は符号付き整数では�
 msgid "The property value is not a valid unsigned integer in '{0}'. {1}\n"
 msgstr "'{0}'においてこのプロパティの値は符号無し整数ではありません。{1}\n"
 
-#: src/merge/output_control.cpp:1020
+#: src/merge/output_control.cpp:1021
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "理由はわかりません。"
@@ -12449,6 +12458,11 @@ msgstr "動画全体のタイトルです。"
 msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr "トラックID{0}のコーデックIDが無効です。\n"
 
+#: src/merge/output_control.cpp:1078
+#, fuzzy, no-c-format
+msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
+msgstr "ファイル'{1}'のトラック番号{0}をファイル'{3}'のトラック番号{2}に追加結合することはできません。{4}\n"
+
 #: src/merge/output_control.cpp:660
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
@@ -12464,7 +12478,7 @@ msgstr "ブロックヘッダで使われるトラック番号です。"
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "ファイル'{1}'のトラック番号{0}をファイル'{3}'のトラック{2}に正しく追加結合することは恐らくできません：{4} 出力ファイルの全体が正しく再生されるか確認してください。このプログラムの作者はこの出力ファイルの再生に関する問題をサポートすることは恐らくありません。\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:1023
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr "ファイル'{1}'のトラック番号{0}をファイル'{3}'のトラック番号{2}に追加結合することはできません。{4}\n"
@@ -12891,7 +12905,7 @@ msgstr "このプロパティは必須であり、'{0}'で削除することは�
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "このプロパティは唯一のものです。'{0}'でさらに追加することはできません。{1}\n"
 
-#: src/merge/output_control.cpp:1619
+#: src/merge/output_control.cpp:1642
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "これは本当に、本当に発生するべきではありません。最初のメタシーク要素のために確保されたスペースが小さすぎます。必要なサイズ：{0}。{1}\n"
@@ -14382,7 +14396,7 @@ msgstr "垂直インターリーブ方式（ライトファースト）"
 msgid "compression"
 msgstr "圧縮"
 
-#: src/merge/generic_packetizer.cpp:1674
+#: src/merge/generic_packetizer.cpp:1679
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number：file_numが見つかりませんでした。{0}\n"

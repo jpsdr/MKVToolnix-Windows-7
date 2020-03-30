@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-03-28 15:39+0100\n"
+"POT-Creation-Date: 2020-03-30 18:41+0200\n"
 "PO-Revision-Date: 2020-03-27 21:36+0000\n"
 "Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/bg/)\n"
@@ -3362,7 +3362,7 @@ msgstr ""
 msgid "An escaped filename corresponding to the previous segment."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "Възникна изключение при записването на целевия файл."
@@ -3419,10 +3419,15 @@ msgstr "Разшири медийни файлове"
 msgid "Append to an e&xisting source file"
 msgstr "&Разшири някой от текущите файл-източници"
 
-#: src/merge/output_control.cpp:1776
+#: src/merge/output_control.cpp:1799
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Разширяване на пътечка {0} от файл № {1} („{2}“) към пътечка {3} от файл № {4} („{5}“).\n"
+
+#: src/merge/output_control.cpp:1020
+#, fuzzy, no-c-format
+msgid "Appending tracks of this type is not supported."
+msgstr "Типът на файла „{0}“ не се поддържа.\n"
 
 #: src/merge/mkvmerge.cpp:658
 #, no-c-format
@@ -4478,7 +4483,7 @@ msgstr ""
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1702
+#: src/merge/output_control.cpp:1725
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "Не може да се намери gptzr при прибавяне. {0}\n"
@@ -5809,7 +5814,7 @@ msgstr "Например: 01:00:00 (след един час) или 1800s (сл
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "Exception details:"
 msgstr ""
@@ -8046,7 +8051,7 @@ msgstr "Приложение за мултиплексиране"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Мултиплексиране към файл „%1“ в директория „%2“"
 
-#: src/merge/mkvmerge.cpp:3158
+#: src/merge/mkvmerge.cpp:3159
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "Мултиплексирането отне {0}.\n"
@@ -8508,7 +8513,7 @@ msgstr ""
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr ""
 
-#: src/merge/generic_packetizer.cpp:1655
+#: src/merge/generic_packetizer.cpp:1660
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr ""
@@ -10483,7 +10488,7 @@ msgstr ""
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr ""
 
-#: src/merge/output_control.cpp:1267
+#: src/merge/output_control.cpp:1290
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr ""
@@ -10553,6 +10558,11 @@ msgstr "Режим на разделяне:"
 #, no-c-format
 msgid "Splitting"
 msgstr "Разделяне"
+
+#: src/merge/output_control.cpp:1076
+#, no-c-format
+msgid "Splitting tracks of this type is not supported."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:312
 #, no-c-format
@@ -11168,7 +11178,6 @@ msgid "The codec type '{0}' cannot be used in a WebM compliant file.\n"
 msgstr ""
 
 #: src/merge/connection_checks.h:60
-#: src/output/p_flac.cpp:100
 #, no-c-format
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr ""
@@ -11215,7 +11224,7 @@ msgstr ""
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr ""
 
-#: src/merge/output_control.cpp:1508
+#: src/merge/output_control.cpp:1531
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr ""
@@ -11320,7 +11329,7 @@ msgstr "Широчината на показване на двете пътеч�
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "The drive may be full."
 msgstr "Дискът може би е пълен."
@@ -11464,7 +11473,7 @@ msgstr "Върху файла „{0}“ не може да бъде писано
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1293
+#: src/merge/output_control.cpp:1316
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "Върху файла „{0}“ не може да бъде писано: {1}.\n"
@@ -11474,7 +11483,7 @@ msgstr "Върху файла „{0}“ не може да бъде писано
 msgid "The file '{0}' could not be opened or parsed."
 msgstr ""
 
-#: src/merge/output_control.cpp:1297
+#: src/merge/output_control.cpp:1320
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "Файлът „{0}“ бе отворен за писане.\n"
@@ -12068,7 +12077,7 @@ msgstr ""
 msgid "The property value is not a valid unsigned integer in '{0}'. {1}\n"
 msgstr "Стойността на свойството не е валидно цяло положително число при „{0}“. {1}\n"
 
-#: src/merge/output_control.cpp:1020
+#: src/merge/output_control.cpp:1021
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "Причината е неизвестна."
@@ -12306,6 +12315,11 @@ msgstr "Заглавието за целия филм."
 msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr ""
 
+#: src/merge/output_control.cpp:1078
+#, no-c-format
+msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
+msgstr ""
+
 #: src/merge/output_control.cpp:660
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
@@ -12321,7 +12335,7 @@ msgstr ""
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:1023
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr ""
@@ -12749,7 +12763,7 @@ msgstr "Свойството е задължително и не може да �
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Това свойство е единствено и не може в „{0}“ да се добавят други като него. {1}\n"
 
-#: src/merge/output_control.cpp:1619
+#: src/merge/output_control.cpp:1642
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr ""
@@ -14240,7 +14254,7 @@ msgstr ""
 msgid "compression"
 msgstr "компресия"
 
-#: src/merge/generic_packetizer.cpp:1674
+#: src/merge/generic_packetizer.cpp:1679
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr ""

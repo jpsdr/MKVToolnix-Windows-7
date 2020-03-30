@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-03-28 15:39+0100\n"
+"POT-Creation-Date: 2020-03-30 18:41+0200\n"
 "PO-Revision-Date: 2018-10-11 00:17+0000\n"
 "Last-Translator: Ricardo Perdigão <ricardofonseca1977@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/pt/)\n"
@@ -3425,7 +3425,7 @@ msgstr "Nome do ficheiro do segmento seguinte."
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "Nome do ficheiro do segmento seguinte."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr ""
@@ -3482,10 +3482,15 @@ msgstr "Todos os ficheiros multimédia suportados|%s%s|%s"
 msgid "Append to an e&xisting source file"
 msgstr "Abrir um ficheiro Matroska existente"
 
-#: src/merge/output_control.cpp:1776
+#: src/merge/output_control.cpp:1799
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr ""
+
+#: src/merge/output_control.cpp:1020
+#, fuzzy, no-c-format
+msgid "Appending tracks of this type is not supported."
+msgstr "O ficheiro '{0}' não é suportado ({1}).\n"
 
 #: src/merge/mkvmerge.cpp:658
 #, no-c-format
@@ -4541,7 +4546,7 @@ msgstr ""
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1702
+#: src/merge/output_control.cpp:1725
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr ""
@@ -5872,7 +5877,7 @@ msgstr ""
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "Exception details:"
 msgstr ""
@@ -8115,7 +8120,7 @@ msgstr "Aplicação multiplexer"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Unir o ficheiro \"%1\" na pasta \"%2\""
 
-#: src/merge/mkvmerge.cpp:3158
+#: src/merge/mkvmerge.cpp:3159
 #, fuzzy, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "O processamento demorou {0}.\n"
@@ -8577,7 +8582,7 @@ msgstr ""
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr ""
 
-#: src/merge/generic_packetizer.cpp:1655
+#: src/merge/generic_packetizer.cpp:1660
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr ""
@@ -10552,7 +10557,7 @@ msgstr ""
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr ""
 
-#: src/merge/output_control.cpp:1267
+#: src/merge/output_control.cpp:1290
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr ""
@@ -10622,6 +10627,11 @@ msgstr "Modo de divisão:"
 #, no-c-format
 msgid "Splitting"
 msgstr "Dividir"
+
+#: src/merge/output_control.cpp:1076
+#, no-c-format
+msgid "Splitting tracks of this type is not supported."
+msgstr ""
 
 #: src/mkvtoolnix-gui/merge/output.cpp:312
 #, no-c-format
@@ -11247,7 +11257,6 @@ msgid "The codec type '{0}' cannot be used in a WebM compliant file.\n"
 msgstr ""
 
 #: src/merge/connection_checks.h:60
-#: src/output/p_flac.cpp:100
 #, no-c-format
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr ""
@@ -11294,7 +11303,7 @@ msgstr ""
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Os países seleccionados aqui serão mostrados na parte superior de todas drop boxes de países no programa."
 
-#: src/merge/output_control.cpp:1508
+#: src/merge/output_control.cpp:1531
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "As entradas CUE (o índice) estão a ser escritas...\n"
@@ -11397,7 +11406,7 @@ msgstr ""
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "The drive may be full."
 msgstr ""
@@ -11541,7 +11550,7 @@ msgstr "O ficheiro '{0} ' não pôde ser aberto para leitura: {1}.\n"
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1293
+#: src/merge/output_control.cpp:1316
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "O ficheiro '{0} ' não pôde ser aberto para leitura: {1}.\n"
@@ -11551,7 +11560,7 @@ msgstr "O ficheiro '{0} ' não pôde ser aberto para leitura: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "O ficheiro não pode ser aberto ou analisado.\n"
 
-#: src/merge/output_control.cpp:1297
+#: src/merge/output_control.cpp:1320
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "O ficheiro '{0}' foi criado para escrita.\n"
@@ -12150,7 +12159,7 @@ msgstr ""
 msgid "The property value is not a valid unsigned integer in '{0}'. {1}\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1020
+#: src/merge/output_control.cpp:1021
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "A razão é desconhecida"
@@ -12388,6 +12397,11 @@ msgstr "Título completo do filme."
 msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr ""
 
+#: src/merge/output_control.cpp:1078
+#, no-c-format
+msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
+msgstr ""
+
 #: src/merge/output_control.cpp:660
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
@@ -12403,7 +12417,7 @@ msgstr "O número da pista utilizada no cabeçalho."
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:1023
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr ""
@@ -12831,7 +12845,7 @@ msgstr ""
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1619
+#: src/merge/output_control.cpp:1642
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr ""
@@ -14322,7 +14336,7 @@ msgstr ""
 msgid "compression"
 msgstr "compressão"
 
-#: src/merge/generic_packetizer.cpp:1674
+#: src/merge/generic_packetizer.cpp:1679
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr ""

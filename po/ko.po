@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-03-28 15:39+0100\n"
+"POT-Creation-Date: 2020-03-30 18:41+0200\n"
 "PO-Revision-Date: 2018-04-11 00:40+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -3489,7 +3489,7 @@ msgstr "다음 세그먼트에 해당하는 이스케이프 파일 이름입니�
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "이전 시그먼트에 해당하는 이스케이프 파일 이름입니다."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "대상 파일에 기록할 때 예외가 발생했습니다."
@@ -3546,10 +3546,15 @@ msgstr "미디어 파일 결합하기"
 msgid "Append to an e&xisting source file"
 msgstr "기존의 소스 파일에 결합하기(&X)"
 
-#: src/merge/output_control.cpp:1776
+#: src/merge/output_control.cpp:1799
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "{1} ('{2}') 파일 번호의 {0} 트랙을 {4} ('{5}') 파일 번호의 {3} 트랙에 결합합니다.\n"
+
+#: src/merge/output_control.cpp:1020
+#, fuzzy, no-c-format
+msgid "Appending tracks of this type is not supported."
+msgstr "암호화된 VOB은 지원하지 않아 읽을 수 없습니다.\n"
 
 #: src/merge/mkvmerge.cpp:658
 #, no-c-format
@@ -4604,7 +4609,7 @@ msgstr "이 MPEG-1/2 트랙에서는 시퀀스 헤더를 추출할 수 없습니
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "오디오 트랙 {0}의 인덱스를 찾을 수 없습니다 (avilib 오류 메시지: {1}). 트랙을 건너 뜁니다.\n"
 
-#: src/merge/output_control.cpp:1702
+#: src/merge/output_control.cpp:1725
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "결합시에 gptzr을 찾을 수 없습니다. {0}\n"
@@ -5938,7 +5943,7 @@ msgstr "예: 01:00:00 (한 시간 이후) 또는 1800s (1800 초 이후)."
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "예: 01:00:00,01:30:00 (한 시간 이후, 한 시간 30분 이후) 또는 180s,300s,00:10:00 (3, 5, 10분)."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "Exception details:"
 msgstr "예외 세부 사항:"
@@ -8173,7 +8178,7 @@ msgstr "합치기 응용프로그램"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "\"%1\" 파일을 \"%2\" 폴더에서 합치기"
 
-#: src/merge/mkvmerge.cpp:3158
+#: src/merge/mkvmerge.cpp:3159
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "합치기 작업에 걸린 시간: {0}\n"
@@ -8635,7 +8640,7 @@ msgstr "주의: 대부분의 <MTX_…> 변수는 비어 있고 변수를 인수�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "주의: 윈도우상의 경로명에 슬래시는 역슬래시 대신으로도 사용할 수 있습니다."
 
-#: src/merge/generic_packetizer.cpp:1655
+#: src/merge/generic_packetizer.cpp:1660
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "'{0}' 저장에 대한 Matroska 사양은 아직 최종 결정되지 않았음에 유의하십시오. 따라서 mkvmerge 지원은 변경 될 수 있으며, '{1}'대신 '{1}/EXPERIMENTAL' 코덱ID를 사용합니다. 사양이 최종 결정되는대로 이 경고는 삭제되고 mkvmerge도 그에 따라 업데이트됩니다.\n"
@@ -10603,7 +10608,7 @@ msgstr "조각"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "몇몇 H.264/AVC 트랙은 l 조각들을 포함하지만 실제 키프레임은 없습니다."
 
-#: src/merge/output_control.cpp:1267
+#: src/merge/output_control.cpp:1290
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "태그 요소가 누락되어 있습니다 (이 오류는 발생하지 않아야 합니다 - 이전에 다른 유사한 오류가 발생했어야 합니다). {0}\n"
@@ -10673,6 +10678,11 @@ msgstr "분할 모드:"
 #, no-c-format
 msgid "Splitting"
 msgstr "파일 분할"
+
+#: src/merge/output_control.cpp:1076
+#, fuzzy, no-c-format
+msgid "Splitting tracks of this type is not supported."
+msgstr "코덱ID '{1}'의 트랙 ID {0}의 추출은 지원하지 않습니다.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:312
 #, no-c-format
@@ -11285,7 +11295,6 @@ msgid "The codec type '{0}' cannot be used in a WebM compliant file.\n"
 msgstr "코덱 유형 '{0}'는 표준 WebM 준수(호환) 파일에서는 사용할 수 없습니다.\n"
 
 #: src/merge/connection_checks.h:60
-#: src/output/p_flac.cpp:100
 #, no-c-format
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "코덱 개인 데이터가 일치하지 않습니다 (길이: {0} - {1})."
@@ -11332,7 +11341,7 @@ msgstr "수정한 파일 헤더를 제대로 읽을 수 없습니다.\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "오른쪽에서 '선택한' 목록의 나라들은 모든 국가 드롭 다운 상자의 맨 위쪽에 나타납니다."
 
-#: src/merge/output_control.cpp:1508
+#: src/merge/output_control.cpp:1531
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "큐(CUE) 항목(인덱스)을 쓰는 중입니다...\n"
@@ -11436,7 +11445,7 @@ msgstr "2개의 트랙이 가로(너비) 해상도가 서로 다름: {0} - {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "The drive may be full."
 msgstr "드라이브가 꽉 찼을지 모릅니다."
@@ -11580,7 +11589,7 @@ msgstr "'{0}' 파일을 쓰기 위해 열 수 없습니다: {1}."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1293
+#: src/merge/output_control.cpp:1316
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "'{0}' 파일을 읽기 위해 열 수 없습니다: {1}.\n"
@@ -11590,7 +11599,7 @@ msgstr "'{0}' 파일을 읽기 위해 열 수 없습니다: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "'{0}' 파일을 열거나 분석할 수 없습니다."
 
-#: src/merge/output_control.cpp:1297
+#: src/merge/output_control.cpp:1320
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "'{0}'에 쓰기 위해 해당 파일을 열었습니다.\n"
@@ -12184,7 +12193,7 @@ msgstr "'{0}'에서 이 속성값은 유부호 정수가 아닙니다. {1}\n"
 msgid "The property value is not a valid unsigned integer in '{0}'. {1}\n"
 msgstr "'{0}'에서 이 속성값은 무부호 정수가 아닙니다. {1}\n"
 
-#: src/merge/output_control.cpp:1020
+#: src/merge/output_control.cpp:1021
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "이유는 알 수 없습니다."
@@ -12425,6 +12434,11 @@ msgstr "전체 동영상의 제목입니다."
 msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr "{0} 트랙 ID의 코덱ID가 잘못되었습니다.\n"
 
+#: src/merge/output_control.cpp:1078
+#, fuzzy, no-c-format
+msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
+msgstr "'{1}' 파일의 {0} 트랙 번호를 '{3}' 파일의 {2} 트랙 번호에 결합할 수 없습니다. {4}\n"
+
 #: src/merge/output_control.cpp:660
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
@@ -12440,7 +12454,7 @@ msgstr "블록 헤더에서 사용되는 트랙 번호입니다."
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "'{1}' 파일의 {0} 트랙 번호를 '{3}' 파일의 {2} 트랙에 올바르게 결합할 수 없는 모양입니다: {4} 결과로 나오는 파일이 끝까지 맞게 잘 재생되는지 확인하세요. 이 프로그램의 제작자는 그 결과로 만들어진 파일에서 생기는 재생 문제는 아마도 지원해 주지 않습니다.\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:1023
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr "'{1}' 파일의 {0} 트랙 번호를 '{3}' 파일의 {2} 트랙 번호에 결합할 수 없습니다. {4}\n"
@@ -12867,7 +12881,7 @@ msgstr "이 속성은 필수이며, '{0}'에서 제거할 수 없습니다. {1}\
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "이 속성은 유일한 것입니다. '{0}'에 추가할 수 없습니다. {1}\n"
 
-#: src/merge/output_control.cpp:1619
+#: src/merge/output_control.cpp:1642
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "이것은 정말로 (절대로) 발생해서는 안 됩니다. 처음 MetaSeek 요소를 위해 확보된 공간이 너무 작습니다. 필요한 크기: {0}. {1}\n"
@@ -14358,7 +14372,7 @@ msgstr "수직 인터리브 방식 (우안 먼저)"
 msgid "compression"
 msgstr "압축"
 
-#: src/merge/generic_packetizer.cpp:1674
+#: src/merge/generic_packetizer.cpp:1679
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "트랙_번호_만들기: file_num를 찾지 못했습니다. {0}\n"

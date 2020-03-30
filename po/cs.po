@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-03-28 15:39+0100\n"
+"POT-Creation-Date: 2020-03-30 18:41+0200\n"
 "PO-Revision-Date: 2019-08-06 18:38+0200\n"
 "Last-Translator: Trottel <trottel09@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/cs/)\n"
@@ -3535,7 +3535,7 @@ msgstr "Uvozovací název souboru odpovídající dalšímu úseku."
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "Uvozovací název souboru odpovídající předchozímu úseku."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "Při zápisu cílového souboru došlo k výjimce."
@@ -3592,10 +3592,15 @@ msgstr "Připojit soubory médií"
 msgid "Append to an e&xisting source file"
 msgstr "Připojit ke &stávajícímu zdrojovému souboru"
 
-#: src/merge/output_control.cpp:1776
+#: src/merge/output_control.cpp:1799
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Připojení stopy {0} ze souboru č. {1} ('{2}') ke stopě {3} ze souboru č. {4} ('{5}').\n"
+
+#: src/merge/output_control.cpp:1020
+#, fuzzy, no-c-format
+msgid "Appending tracks of this type is not supported."
+msgstr "Čtení šifrovaných souborů VOB není podporováno.\n"
 
 #: src/merge/mkvmerge.cpp:658
 #, no-c-format
@@ -4653,7 +4658,7 @@ msgstr "Nelze extrahovat hlavičku posloupnosti z této stopy MPEG-1/2.\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "Nelze nalézt index pro stopu audia {0} (chybová zpráva avilib: {1}). Přeskočení stopy.\n"
 
-#: src/merge/output_control.cpp:1702
+#: src/merge/output_control.cpp:1725
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "Nelze nalézt gptzr při připojování. {0}\n"
@@ -5985,7 +5990,7 @@ msgstr "Příklady: 01:00:00 (po jedné hodině) nebo 1800s (po 1800 sekundách)
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "Příklady: 01:00:00,01:30:00 (po jedné hodině a po jedné hodině a třiceti minutách) nebo 180s,300s,00:10:00 (po třech, pěti a deseti minutách)."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "Exception details:"
 msgstr "Podrobnosti výjimky:"
@@ -8233,7 +8238,7 @@ msgstr "Aplikace multiplexování"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Multiplexování do souboru \"%1\" v adresáři \"%2\""
 
-#: src/merge/mkvmerge.cpp:3158
+#: src/merge/mkvmerge.cpp:3159
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "Multiplexování trvalo {0}.\n"
@@ -8695,7 +8700,7 @@ msgstr "Pamatujte, že většina proměnných <MTX_…> je prázdná a budou ode
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Pamatujte, že ve Windows mohou být v názvech cest použita také lomítka namísto zpětných lomítek ."
 
-#: src/merge/generic_packetizer.cpp:1655
+#: src/merge/generic_packetizer.cpp:1660
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr ""
@@ -10687,7 +10692,7 @@ msgstr "Výseče"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Některé stopy H.264/AVC obsahují řezy I, ale postrádají skutečné klíčové snímky."
 
-#: src/merge/output_control.cpp:1267
+#: src/merge/output_control.cpp:1290
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr ""
@@ -10757,6 +10762,11 @@ msgstr "Režim rozdělení:"
 #, no-c-format
 msgid "Splitting"
 msgstr "Rozdělení"
+
+#: src/merge/output_control.cpp:1076
+#, fuzzy, no-c-format
+msgid "Splitting tracks of this type is not supported."
+msgstr "Extrahování stopy s ID {0} s ID kodeku '{1}' není podporováno.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:312
 #, no-c-format
@@ -11384,7 +11394,6 @@ msgid "The codec type '{0}' cannot be used in a WebM compliant file.\n"
 msgstr ""
 
 #: src/merge/connection_checks.h:60
-#: src/output/p_flac.cpp:100
 #, no-c-format
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "Soukromá data kodeku nesouhlasí (délky: {0} a {1})."
@@ -11431,7 +11440,7 @@ msgstr ""
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Země v seznamu 'vybrané' vpravo budou zobrazeny v horní části všech rozevíracích polí země v programu."
 
-#: src/merge/output_control.cpp:1508
+#: src/merge/output_control.cpp:1531
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Jsou zapisovány položky indexu...\n"
@@ -11537,7 +11546,7 @@ msgstr "Šířka zobrazení dvou stop je rozdílná: {0} a {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "Nevýhodou je, že multiplexování bude trvat déle, protože mkvmerge bude před ukončením čekat, než budou všechna data zapsána do úložiště."
 
-#: src/merge/mkvmerge.cpp:3152
+#: src/merge/mkvmerge.cpp:3153
 #, no-c-format
 msgid "The drive may be full."
 msgstr "Jednotka může být plná."
@@ -11681,7 +11690,7 @@ msgstr "Soubor '{0}' nemohl být otevřen pro zápis: {1}."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1293
+#: src/merge/output_control.cpp:1316
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "Soubor '{0}' nemohl být otevřen pro zápis: {1}.\n"
@@ -11691,7 +11700,7 @@ msgstr "Soubor '{0}' nemohl být otevřen pro zápis: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "Soubor '{0}' nemohl být otevřen nebo analyzován."
 
-#: src/merge/output_control.cpp:1297
+#: src/merge/output_control.cpp:1320
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "Soubor '{0}' byl otevřen pro zápis.\n"
@@ -12285,7 +12294,7 @@ msgstr ""
 msgid "The property value is not a valid unsigned integer in '{0}'. {1}\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1020
+#: src/merge/output_control.cpp:1021
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "Důvod je neznámý."
@@ -12523,6 +12532,11 @@ msgstr "Název pro celý film."
 msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr "ID stopy {0} nemá platné ID kodeku.\n"
 
+#: src/merge/output_control.cpp:1078
+#, no-c-format
+msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
+msgstr ""
+
 #: src/merge/output_control.cpp:660
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
@@ -12538,7 +12552,7 @@ msgstr "Číslo stopy jak je použito v hlavičce bloku."
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:1023
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr ""
@@ -12967,7 +12981,7 @@ msgstr ""
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1619
+#: src/merge/output_control.cpp:1642
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr ""
@@ -14462,7 +14476,7 @@ msgstr "proložené sloupce (pravý první)"
 msgid "compression"
 msgstr "komprese"
 
-#: src/merge/generic_packetizer.cpp:1674
+#: src/merge/generic_packetizer.cpp:1679
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: file_num nenalezen. {0}\n"
