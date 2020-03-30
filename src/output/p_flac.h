@@ -38,7 +38,8 @@ public:
     return YT("FLAC");
   }
 
-  virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
+  virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) override;
+  virtual split_result_e can_be_split(std::string &error_message) override;
 };
 
 #endif  // HAVE_FLAC_STREAM_DECODER_H

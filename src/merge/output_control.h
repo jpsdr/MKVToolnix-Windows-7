@@ -187,6 +187,7 @@ void calc_attachment_sizes();
 void calc_max_chapter_size();
 void check_track_id_validity();
 void check_append_mapping();
+void check_split_support();
 
 void cleanup();
 void main_loop();

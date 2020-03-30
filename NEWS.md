@@ -9,6 +9,9 @@
 * MKVToolNix GUI: job queue: added an option in the preferences for removing
   completed jobs when exiting the program depending on their status.
   Implements #2769.
+* mkvmerge: mkvmerge has never supported appending & splitting FLAC audio
+  tracks. mkvmerge will now emit error messages when the user attempts either
+  instead of continuing and creating invalid FLAC tracks.
 
 ## Bug fixes
 

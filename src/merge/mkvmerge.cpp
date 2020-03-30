@@ -3133,6 +3133,7 @@ main(int argc,
     check_track_id_validity();
     create_append_mappings_for_playlists();
     check_append_mapping();
+    check_split_support();
     g_cluster_helper->verify_and_report_chapter_generation_parameters();
     calc_attachment_sizes();
     calc_max_chapter_size();

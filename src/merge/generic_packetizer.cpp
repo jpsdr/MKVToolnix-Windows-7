@@ -1604,6 +1604,11 @@ generic_packetizer_c::connect(generic_packetizer_c *src,
   }
 }
 
+split_result_e
+generic_packetizer_c::can_be_split(std::string &/* error_message */) {
+  return CAN_SPLIT_YES;
+}
+
 void
 generic_packetizer_c::set_displacement_maybe(int64_t displacement) {
   if ((1 == m_ti.m_tcsync.numerator) && (1 == m_ti.m_tcsync.denominator) && (0 == m_ti.m_tcsync.displacement))

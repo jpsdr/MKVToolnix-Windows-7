@@ -1015,9 +1015,11 @@ check_append_mapping() {
 
     else if (CAN_CONNECT_YES != result) {
       if (error_message.empty())
-        error_message = (  result == CAN_CONNECT_NO_FORMAT     ? Y("The formats do not match.")
-                         : result == CAN_CONNECT_NO_PARAMETERS ? Y("The track parameters do not match.")
-                         :                                       Y("The reason is unknown."));
+        error_message = result == CAN_CONNECT_NO_FORMAT      ? Y("The formats do not match.")
+                      : result == CAN_CONNECT_NO_PARAMETERS  ? Y("The track parameters do not match.")
+                      : result == CAN_CONNECT_NO_UNSUPPORTED ? Y("Appending tracks of this type is not supported.")
+                      :                                        Y("The reason is unknown.");
+
       mxerror(fmt::format(Y("The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"),
                           amap.src_track_id, g_files[amap.src_file_id]->name,
                           amap.dst_track_id, g_files[amap.dst_file_id]->name,
@@ -1053,6 +1055,27 @@ check_append_mapping() {
           break;
         }
     } while (cmp_amap != amap_end);
+  }
+}
+
+void
+check_split_support() {
+  if (!g_cluster_helper->splitting())
+    return;
+
+  for (auto &ptzr_cont : g_packetizers) {
+    std::string error_message;
+
+    auto &ptzr  = *ptzr_cont.packetizer;
+    auto result = ptzr.can_be_split(error_message);
+
+    if (CAN_SPLIT_YES == result)
+      continue;
+
+    if (error_message.empty())
+      error_message = Y("Splitting tracks of this type is not supported.");
+
+    mxerror(fmt::format(Y("The track ID {0} from the file '{1}' cannot be split. {2}\n"), ptzr.m_ti.m_id, ptzr.m_ti.m_fname, error_message));
   }
 }
 

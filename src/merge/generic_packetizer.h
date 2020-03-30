@@ -36,7 +36,13 @@ enum connection_result_e {
   CAN_CONNECT_YES,
   CAN_CONNECT_NO_FORMAT,
   CAN_CONNECT_NO_PARAMETERS,
+  CAN_CONNECT_NO_UNSUPPORTED,
   CAN_CONNECT_MAYBE_CODECPRIVATE
+};
+
+enum split_result_e {
+  CAN_SPLIT_YES,
+  CAN_SPLIT_NO_UNSUPPORTED,
 };
 
 using packet_cptr_di = std::deque<packet_cptr>::iterator;
@@ -259,6 +265,7 @@ public:
   virtual void force_duration_on_last_packet();
 
   virtual translatable_string_c get_format_name() const = 0;
+  virtual split_result_e can_be_split(std::string &error_message);
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) = 0;
   virtual void connect(generic_packetizer_c *src, int64_t append_timestamp_offset = -1);
 
