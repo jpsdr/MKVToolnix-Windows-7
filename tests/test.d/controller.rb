@@ -52,7 +52,7 @@ class Controller
       else
         nil
       end
-    end.compact.sort_by { |class_name| @results.duration? class_name }.reverse
+    end.compact.sort_by { |class_name| @results.duration? class_name }
   end
 
   def go
