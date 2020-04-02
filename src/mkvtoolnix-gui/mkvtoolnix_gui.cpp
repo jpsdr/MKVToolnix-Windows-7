@@ -34,6 +34,11 @@ enableOrDisableHighDPIScaling() {
 
 void
 initiateSettings() {
+#if defined(SYS_WINDOWS)
+  if (mtx::sys::get_environment_variable("").empty())
+    mtx::sys::set_environment_variable("QT_MESSAGE_PATTERN", "[%{type}] %{appname} (%{file}:%{line}) - %{message}");
+#endif
+
   QCoreApplication::setOrganizationName("bunkus.org");
   QCoreApplication::setOrganizationDomain("bunkus.org");
   QCoreApplication::setApplicationName("mkvtoolnix-gui");

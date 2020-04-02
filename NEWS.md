@@ -12,6 +12,9 @@
 * mkvmerge: mkvmerge has never supported appending & splitting FLAC audio
   tracks. mkvmerge will now emit error messages when the user attempts either
   instead of continuing and creating invalid FLAC tracks.
+* MKVToolNix GUI: Windows: debug output sent via Qt's to Windows' debugging
+  facility will use a more verbose message format including the application
+  name, making it easier to filter for in SysInternal's "Debug View" utility.
 
 ## Bug fixes
 
