@@ -84,6 +84,20 @@ FileIdentificationWorker::addIdentifiedFile(SourceFilePtr const &identifiedFile)
   p->m_toIdentify.first().m_identifiedFiles << identifiedFile;
 }
 
+bool
+FileIdentificationWorker::isEmpty()
+  const {
+  auto const &toIdentify = p_func()->m_toIdentify;
+
+  if (toIdentify.isEmpty())
+    return true;
+
+  if (toIdentify.size() != 1)
+    return false;
+
+  return toIdentify.first().m_fileNames.isEmpty();
+}
+
 void
 FileIdentificationWorker::identifyFiles() {
   auto p = p_func();
@@ -126,6 +140,21 @@ FileIdentificationWorker::identifyFiles() {
       return;
     }
   }
+}
+
+void
+FileIdentificationWorker::abortIdentification() {
+  auto p = p_func();
+
+  QMutexLocker lock{&p->m_mutex};
+  if (p->m_toIdentify.isEmpty())
+    return;
+
+  qDebug() << "FileIdentificationWorker::abortIdentification: skipping remaining files";
+
+  p->m_toIdentify.clear();
+
+  emit queueFinished();
 }
 
 bool
@@ -312,8 +341,19 @@ FileIdentificationThread::continueIdentification() {
 }
 
 void
+FileIdentificationThread::abortIdentification() {
+  QTimer::singleShot(0, &worker(), SLOT(abortIdentification()));
+}
+
+void
 FileIdentificationThread::continueByScanningPlaylists(QFileInfoList const &fileNames) {
   QMetaObject::invokeMethod(&worker(), "continueByScanningPlaylists", Q_ARG(QFileInfoList, fileNames));
+}
+
+bool
+FileIdentificationThread::isEmpty()
+  const {
+  return m_worker->isEmpty();
 }
 
 }

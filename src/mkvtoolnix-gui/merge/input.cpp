@@ -1229,8 +1229,19 @@ Tab::handleIdentifiedXmlTags(QString const &fileName) {
 void
 Tab::showFileIdentificationError(QString const &errorTitle,
                                  QString const &errorText) {
-  Util::MessageBox::critical(this)->title(errorTitle).text(errorText).exec();
-  m_identifier->continueIdentification();
+  auto dlg = Util::MessageBox::critical(this);
+
+  if (!m_identifier->isEmpty()) {
+    dlg->buttons(QMessageBox::Ok | QMessageBox::Cancel);
+    dlg->buttonLabel(QMessageBox::Ok, QY("&Continue identification"));
+  }
+
+  auto result = dlg->title(errorTitle).text(errorText).exec();
+
+  if (m_identifier->isEmpty() || (result == QMessageBox::Ok))
+    m_identifier->continueIdentification();
+  else
+    m_identifier->abortIdentification();
 }
 
 void

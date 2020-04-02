@@ -22,6 +22,9 @@
   what's gone wrong.
 * MKVToolNix GUI: multiplexer: if an error occurs during file identification,
   the name of the processed file will be mentioned in the error message.
+* MKVToolNix GUI: multiplexer: if an error occurs during identification of
+  multiple files, the GUI will ask the user whether to continue or abort the
+  identification process. Implements #2778.
 
 ## Bug fixes
 

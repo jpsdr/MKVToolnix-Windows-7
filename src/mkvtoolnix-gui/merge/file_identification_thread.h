@@ -38,11 +38,14 @@ public:
   void addIdentifiedFile(std::shared_ptr<SourceFile> const &identifiedFile);
   void abortPlaylistScan();
 
+  bool isEmpty() const;
+
 public slots:
   void continueByScanningPlaylists(QFileInfoList const &files);
 
 protected slots:
   void identifyFiles();
+  void abortIdentification();
 
 signals:
   void queueStarted();
@@ -84,8 +87,11 @@ public:
 
   FileIdentificationWorker &worker();
 
+  bool isEmpty() const;
+
   void continueByScanningPlaylists(QFileInfoList const &files);
   void continueIdentification();
+  void abortIdentification();
 
 public slots:
   void abortPlaylistScan();
