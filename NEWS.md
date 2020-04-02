@@ -20,6 +20,8 @@
   debugging facility (viewable with SysInternal's "Debug View" utility on
   Windows; on other systems it's output on `STDERR`) allowing insight into
   what's gone wrong.
+* MKVToolNix GUI: multiplexer: if an error occurs during file identification,
+  the name of the processed file will be mentioned in the error message.
 
 ## Bug fixes
 
