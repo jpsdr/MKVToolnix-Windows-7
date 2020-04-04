@@ -570,53 +570,58 @@ Tool::enableMoveJobsButtons() {
 }
 
 bool
-Tool::checkIfOverwritingIsOK(QString const &newDestination,
-                             QString const &existingDestination) {
+Tool::checkIfOverwritingExistingFileIsOK(QString const &existingDestination) {
   if (!Util::Settings::get().m_warnBeforeOverwriting)
     return true;
 
-  auto nativeDestination = QDir::toNativeSeparators(newDestination);
+  auto answer = Util::MessageBox::question(this)
+    ->title(QY("Overwrite existing file"))
+    .text(Q("%1 %2")
+          .arg(QY("The file '%1' exists already and might be overwritten depending on the configuration & the content of the source files.").arg(existingDestination))
+          .arg(QY("Do you want to continue and risk overwriting the file?")))
+    .buttonLabel(QMessageBox::Yes, QY("C&ontinue"))
+    .buttonLabel(QMessageBox::No,  QY("Cancel"))
+    .exec();
 
-  if (!existingDestination.isEmpty() || QFileInfo{nativeDestination}.exists()) {
-    auto answer = Util::MessageBox::question(this)
-      ->title(QY("Overwrite existing file"))
-      .text(Q("%1 %2")
-            .arg(QY("The file '%1' exists already and might be overwritten depending on the configuration & the content of the source files.")
-                 .arg(existingDestination.isEmpty() ? nativeDestination : QDir::toNativeSeparators(existingDestination)))
-            .arg(QY("Do you want to continue and risk overwriting the file?")))
-      .buttonLabel(QMessageBox::Yes, QY("C&ontinue"))
-      .buttonLabel(QMessageBox::No,  QY("Cancel"))
-      .exec();
-    if (answer != QMessageBox::Yes)
-      return false;
-  }
+  return answer == QMessageBox::Yes;
+}
+
+bool
+Tool::checkIfOverwritingExistingJobIsOK(QString const &newDestination,
+                                        bool isMuxJobAndSplittingEnabled) {
+  if (!Util::Settings::get().m_warnBeforeOverwriting)
+    return true;
 
   auto jobWithSameDestinationExists = false;
+  auto nativeNewDestination         = QDir::toNativeSeparators(newDestination);
 
-  m_model->withAllJobs([&jobWithSameDestinationExists, &nativeDestination](Jobs::Job &job) {
-    auto jobDestination = job.destinationFileName();
+  m_model->withAllJobs([&jobWithSameDestinationExists, &nativeNewDestination, isMuxJobAndSplittingEnabled](Jobs::Job &job) {
+    auto jobDestination        = job.destinationFileName();
+    auto jobIsSplittingEnabled = dynamic_cast<Jobs::MuxJob *>(&job) && static_cast<Jobs::MuxJob &>(job).config().isSplittingEnabled();
 
-    if (   !jobDestination.isEmpty()
-        && mtx::included_in(job.status(), Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Running)
-        && (QDir::toNativeSeparators(jobDestination) == nativeDestination))
+    if (   jobDestination.isEmpty()
+        || !mtx::included_in(job.status(), Jobs::Job::PendingManual, Jobs::Job::PendingAuto, Jobs::Job::Running))
+      return;
+
+    if (   (QDir::toNativeSeparators(jobDestination) == nativeNewDestination)
+        && (jobIsSplittingEnabled                    == isMuxJobAndSplittingEnabled))
       jobWithSameDestinationExists = true;
   });
 
-  if (jobWithSameDestinationExists) {
-    auto answer = Util::MessageBox::question(this)
-      ->title(QY("Overwrite existing file"))
-      .text(Q("%1 %2 %3")
-            .arg(QY("A job creating the file '%1' is already in the job queue.").arg(newDestination))
-            .arg(QY("If you add another job with the same destination file then file created before will be overwritten."))
-            .arg(QY("Do you want to overwrite the file?")))
-      .buttonLabel(QMessageBox::Yes, QY("&Overwrite file"))
-      .buttonLabel(QMessageBox::No,  QY("Cancel"))
-      .exec();
-    if (answer != QMessageBox::Yes)
-      return false;
-  }
+  if (!jobWithSameDestinationExists)
+    return true;
 
-  return true;
+  auto answer = Util::MessageBox::question(this)
+    ->title(QY("Overwrite existing file"))
+    .text(Q("%1 %2 %3")
+          .arg(QY("A job creating the file '%1' is already in the job queue.").arg(newDestination))
+          .arg(QY("If you add another job with the same destination file then file created before will be overwritten."))
+          .arg(QY("Do you want to overwrite the file?")))
+    .buttonLabel(QMessageBox::Yes, QY("&Overwrite file"))
+    .buttonLabel(QMessageBox::No,  QY("Cancel"))
+    .exec();
+
+  return answer == QMessageBox::Yes;
 }
 
 }

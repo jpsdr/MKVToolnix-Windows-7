@@ -50,6 +50,8 @@
   cover images). Now the GUI will present all disc library entries in the
   "select playlist to add" dialog & let the user chose which one to use (if
   any). Fixes #2765.
+* MKVToolNix GUI: multiplexer, info tool: fixed the "warn before overwriting"
+  check wrt. jobs creating the same file. Fixes #2758.
 
 
 # Version 44.0.0 "Domino" 2020-03-08

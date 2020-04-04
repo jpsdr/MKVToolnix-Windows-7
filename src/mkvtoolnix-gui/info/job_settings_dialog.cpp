@@ -51,8 +51,10 @@ JobSettingsDialog::accept() {
   auto &ui      = *p_func()->m_ui;
   auto settings = ui.settings->settings();
 
-  if (!MainWindow::jobTool()->checkIfOverwritingIsOK(settings.m_fileName))
+  if (QFileInfo{settings.m_fileName}.exists() && !MainWindow::jobTool()->checkIfOverwritingExistingFileIsOK(settings.m_fileName))
     return;
+
+  if (!MainWindow::jobTool()->checkIfOverwritingExistingJobIsOK(settings.m_fileName))
 
   if (ui.saveAsDefault->isChecked()) {
     auto &cfg                    = Util::Settings::get();

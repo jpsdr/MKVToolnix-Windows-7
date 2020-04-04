@@ -390,11 +390,15 @@ Tab::findExistingDestination()
 
 bool
 Tab::checkIfOverwritingIsOK() {
-  auto existingDestination = findExistingDestination();
-  if (existingDestination.isEmpty())
+  if (!Util::Settings::get().m_warnBeforeOverwriting)
     return true;
 
-  return MainWindow::jobTool()->checkIfOverwritingIsOK(m_config.m_destination, existingDestination);
+  auto existingDestination = findExistingDestination();
+
+  if (!existingDestination.isEmpty() && !MainWindow::jobTool()->checkIfOverwritingExistingFileIsOK(existingDestination))
+    return false;
+
+  return MainWindow::jobTool()->checkIfOverwritingExistingJobIsOK(m_config.m_destination, m_config.isSplittingEnabled());
 }
 
 bool
