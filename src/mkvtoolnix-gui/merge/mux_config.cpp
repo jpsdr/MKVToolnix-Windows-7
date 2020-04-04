@@ -14,6 +14,7 @@
 
 #include <QDir>
 #include <QFile>
+#include <QRegularExpression>
 #include <QStringList>
 #include <QTemporaryFile>
 
@@ -786,6 +787,13 @@ MuxConfig::formatDelayAndStretchBy(QString const &delay,
   }
 
   return arg;
+}
+
+bool
+MuxConfig::isSplittingEnabled()
+  const {
+  return (MuxConfig::DoNotSplit != m_splitMode)
+      || m_additionalOptions.contains(QRegularExpression{Q("--split(?:[^a-z-]|$)")});
 }
 
 }

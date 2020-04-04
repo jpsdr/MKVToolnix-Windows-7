@@ -98,6 +98,7 @@ public:
 
   virtual bool hasSourceFileWithTitle() const;
   virtual bool needChapterNameTemplateAndLanguage() const;
+  virtual bool isSplittingEnabled() const;
 
   virtual void verifyStructure() const;
 

@@ -367,9 +367,7 @@ Tab::findExistingDestination()
   if (destinationInfo.exists())
     return nativeDestination;
 
-  auto splitting = (MuxConfig::DoNotSplit != m_config.m_splitMode)
-                || m_config.m_additionalOptions.contains(QRegularExpression{Q("--split(?:[^a-z-]|$)")});
-  if (!splitting)
+  if (!m_config.isSplittingEnabled())
     return {};
 
 #if defined(SYS_WINDOWS)
