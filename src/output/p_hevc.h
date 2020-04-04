@@ -16,10 +16,14 @@
 
 #include "output/p_generic_video.h"
 
+class hevc_video_packetizer_private_c;
 class hevc_video_packetizer_c: public generic_video_packetizer_c {
 protected:
-  int m_nalu_size_len_src, m_nalu_size_len_dst;
-  int64_t m_max_nalu_size;
+  MTX_DECLARE_PRIVATE(hevc_video_packetizer_private_c)
+
+  std::unique_ptr<hevc_video_packetizer_private_c> const p_ptr;
+
+  explicit hevc_video_packetizer_c(hevc_video_packetizer_private_c &p);
 
 public:
   hevc_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, double fps, int width, int height);
