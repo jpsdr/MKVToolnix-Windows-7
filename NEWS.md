@@ -2,16 +2,13 @@
 
 ## New features and enhancements
 
+* mkvmerge: mkvmerge has never supported appending & splitting FLAC audio
+  tracks. mkvmerge will now emit error messages when the user attempts either
+  instead of continuing and creating invalid FLAC tracks.
 * MKVToolNix GUI: added an option in the preferences to turn on eliding text
   on tab headers. If enabled, tab names will be shortened so that all tab
   headers fit into the window's width. Implements #2768.
 * MKVToolNix GUI: added an option in the preferences to disable all tooltips.
-* MKVToolNix GUI: job queue: added an option in the preferences for removing
-  completed jobs when exiting the program depending on their status.
-  Implements #2769.
-* mkvmerge: mkvmerge has never supported appending & splitting FLAC audio
-  tracks. mkvmerge will now emit error messages when the user attempts either
-  instead of continuing and creating invalid FLAC tracks.
 * MKVToolNix GUI: Windows: debug output sent via Qt's to Windows' debugging
   facility will use a more verbose message format including the application
   name, making it easier to filter for in SysInternal's "Debug View" utility.
@@ -25,11 +22,23 @@
 * MKVToolNix GUI: multiplexer: if an error occurs during identification of
   multiple files, the GUI will ask the user whether to continue or abort the
   identification process. Implements #2778.
+* MKVToolNix GUI: job queue: added an option in the preferences for removing
+  completed jobs when exiting the program depending on their status.
+  Implements #2769.
 
 ## Bug fixes
 
+* mkvmerge: H.265/HEVC packetizer: fixed changing the NALU size length, it was
+  using the wrong offset into the `hevcC` structure.
 * mkvmerge: MP4 reader: fixed calculating the duration of video tracks that
   only contain a single frame. Fixes #2747.
+* mkvmerge: MP4 reader: if there's no frame offset table (`ctts` atom) present
+  for H.265/HEVC video tracks, mkvmerge will determine the timestamp order
+  itself instead of relying on the timestamps in the MP4 being in the
+  presentation order required by Matroska. Fixes #2777.
+* mkvpropedit: Windows: mkvpropedit wasn't caching when reading the file to
+  modify, slowing down operations such as adding track statistics tags
+  considerably. Fixes #2761.
 * MKVToolNix GUI: multiplexer: when using the title as part of the destination
   file name (both automatically as well as using the "copy title to
   destination file name" function) all characters that aren't valid in a file
@@ -38,9 +47,6 @@
   function was broken when the "make file name unique" option in the
   preferences was disabled. In that case the file base name was removed
   regardless of what the title was set to at the time.
-* mkvpropedit: Windows: mkvpropedit wasn't caching when reading the file to
-  modify, slowing down operations such as adding track statistics tags
-  considerably. Fixes #2761.
 * MKVToolNix GUI: multiplexer: when using the "show command line" menu option
   on Windows the path to the `mkvmerge` executable was shown with forward
   slashes instead of backslashes. This is a purely cosmetic fix as Windows
@@ -52,12 +58,6 @@
   any). Fixes #2765.
 * MKVToolNix GUI: multiplexer, info tool: fixed the "warn before overwriting"
   check wrt. jobs creating the same file. Fixes #2758.
-* mkvmerge: H.265/HEVC packetizer: fixed changing the NALU size length, it was
-  using the wrong offset into the `hevcC` structure.
-* mkvmerge: MP4 reader: if there's no frame offset table (`ctts` atom) present
-  for H.265/HEVC video tracks, mkvmerge will determine the timestamp order
-  itself instead of relying on the timestamps in the MP4 being in the
-  presentation order required by Matroska. Fixes #2777.
 
 
 # Version 44.0.0 "Domino" 2020-03-08
