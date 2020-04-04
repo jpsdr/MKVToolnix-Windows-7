@@ -52,6 +52,8 @@
   any). Fixes #2765.
 * MKVToolNix GUI: multiplexer, info tool: fixed the "warn before overwriting"
   check wrt. jobs creating the same file. Fixes #2758.
+* mkvmerge: H.265/HEVC packetizer: fixed changing the NALU size length, it was
+  using the wrong offset into the `hevcC` structure.
 
 
 # Version 44.0.0 "Domino" 2020-03-08

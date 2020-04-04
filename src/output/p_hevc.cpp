@@ -112,20 +112,21 @@ hevc_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
 
 void
 hevc_video_packetizer_c::setup_nalu_size_len_change() {
-  if (!m_ti.m_private_data || (5 > m_ti.m_private_data->get_size()))
+  if (!m_ti.m_private_data || (23 > m_ti.m_private_data->get_size()))
     return;
 
   auto &p             = *p_func();
   auto private_data   = m_ti.m_private_data->get_buffer();
-  p.nalu_size_len_src = (private_data[4] & 0x03) + 1;
+  auto const len_pos  = 21;
+  p.nalu_size_len_src = (private_data[len_pos] & 0x03) + 1;
   p.nalu_size_len_dst = p.nalu_size_len_src;
 
   if (!m_ti.m_nalu_size_length || (m_ti.m_nalu_size_length == p.nalu_size_len_src))
     return;
 
-  p.nalu_size_len_dst = m_ti.m_nalu_size_length;
-  private_data[4]     = (private_data[4] & 0xfc) | (p.nalu_size_len_dst - 1);
-  p.max_nalu_size     = 1ll << (8 * p.nalu_size_len_dst);
+  p.nalu_size_len_dst   = m_ti.m_nalu_size_length;
+  private_data[len_pos] = (private_data[len_pos] & 0xfc) | (p.nalu_size_len_dst - 1);
+  p.max_nalu_size       = 1ll << (8 * p.nalu_size_len_dst);
 
   set_codec_private(m_ti.m_private_data);
 
