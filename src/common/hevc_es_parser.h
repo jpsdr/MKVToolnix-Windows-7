@@ -118,6 +118,11 @@ public:
     add_bytes(buf->get_buffer(), buf->get_size());
   }
 
+  void add_bytes_framed(unsigned char *buf, size_t buffer_size, size_t nalu_size_length);
+  void add_bytes_framed(memory_cptr &buf, size_t nalu_size_length) {
+    add_bytes_framed(buf->get_buffer(), buf->get_size(), nalu_size_length);
+  }
+
   void flush();
   void clear();
 
@@ -134,6 +139,7 @@ public:
     return frame;
   }
 
+  void set_hevcc(memory_cptr const &hevcc_bytes);
   memory_cptr get_hevcc() const;
 
   bool hevcc_changed() const {

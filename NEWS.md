@@ -54,6 +54,10 @@
   check wrt. jobs creating the same file. Fixes #2758.
 * mkvmerge: H.265/HEVC packetizer: fixed changing the NALU size length, it was
   using the wrong offset into the `hevcC` structure.
+* mkvmerge: MP4 reader: if there's no frame offset table (`ctts` atom) present
+  for H.265/HEVC video tracks, mkvmerge will determine the timestamp order
+  itself instead of relying on the timestamps in the MP4 being in the
+  presentation order required by Matroska. Fixes #2777.
 
 
 # Version 44.0.0 "Domino" 2020-03-08

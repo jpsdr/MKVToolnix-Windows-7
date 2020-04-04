@@ -36,8 +36,15 @@ public:
     return YT("HEVC/H.265");
   }
 
+  virtual void rederive_timestamp_order();
+
 protected:
   virtual void extract_aspect_ratio();
   virtual void setup_nalu_size_len_change();
-  virtual void change_nalu_size_len(packet_cptr packet);
+  virtual void change_nalu_size_len(packet_cptr const &packet);
+
+  virtual void process_rederiving_timestamp_order(packet_t &packet);
+
+  virtual void flush_impl() override;
+  virtual void flush_frames();
 };

@@ -175,6 +175,31 @@ es_parser_c::add_bytes(unsigned char *buffer,
 }
 
 void
+es_parser_c::add_bytes_framed(unsigned char *buffer,
+                              size_t buffer_size,
+                              size_t nalu_size_length) {
+  auto pos = buffer;
+  auto end = buffer + buffer_size;
+
+  while ((pos + nalu_size_length) <= end) {
+    auto nalu_size     = get_uint_be(pos, nalu_size_length);
+    pos               += nalu_size_length;
+    m_stream_position += nalu_size_length;
+
+    if (!nalu_size)
+      continue;
+
+    if ((pos + nalu_size) > end)
+      return;
+
+    handle_nalu(memory_c::borrow(pos, nalu_size), m_stream_position);
+
+    pos               += nalu_size;
+    m_stream_position += nalu_size;
+  }
+}
+
+void
 es_parser_c::flush() {
   if (m_unparsed_buffer && (5 <= m_unparsed_buffer->get_size())) {
     m_parsed_position += m_unparsed_buffer->get_size();
@@ -876,6 +901,23 @@ memory_cptr
 es_parser_c::get_hevcc()
   const {
   return hevcc_c{static_cast<unsigned int>(m_nalu_size_length), m_vps_list, m_sps_list, m_pps_list, m_user_data, m_codec_private}.pack();
+}
+
+void
+es_parser_c::set_hevcc(memory_cptr const &hevcc_bytes) {
+  auto hevcc = hevcc_c::unpack(hevcc_bytes);
+
+  for (auto const &nalu : hevcc.m_vps_list)
+    handle_vps_nalu(nalu);
+
+  for (auto const &nalu : hevcc.m_sps_list)
+    handle_sps_nalu(nalu);
+
+  for (auto const &nalu : hevcc.m_pps_list)
+    handle_pps_nalu(nalu);
+
+  for (auto const &nalu : hevcc.m_sei_list)
+    handle_sei_nalu(nalu);
 }
 
 bool
