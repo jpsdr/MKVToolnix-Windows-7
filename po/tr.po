@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2020-04-02 22:37+0200\n"
-"PO-Revision-Date: 2020-03-30 20:43+0000\n"
+"PO-Revision-Date: 2020-04-03 15:17+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -710,15 +710,15 @@ msgstr ""
 "                           çekirdeğini tutar.\n"
 
 #: src/merge/mkvmerge.cpp:251
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --remove-dialog-normalization-gain <TID>\n"
 "                           Removes or minimizes the dialog normalization gain\n"
 "                           by modifying audio frame headers.\n"
 msgstr ""
-"  --aspect-ratio <TID:f|a/b>\n"
-"                           Bu en-boy oranı için genişlik ve yükseklik\n"
-"                           hesaplayarak görüntü boyutlarını ayarlar.\n"
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Ses karesi üstbilgilerini değiştirerek iletişim normalleştirme\n"
+"                           kazancını kaldırır veya en aza indirir.\n"
 
 #: src/merge/mkvmerge.cpp:121
 #, no-c-format
@@ -1598,9 +1598,9 @@ msgid "&Constrict start and end timestamps of sub-chapters to their parent's sta
 msgstr "Alt bölümlerin başlangıç ve bitiş zaman damgalarını onların esas başlangıç ve bitiş zaman damgalarına &daralt"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1236
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Continue identification"
-msgstr "İçerik şifreleme"
+msgstr "Tanımlamaya &devam et"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:615
 #, no-c-format
@@ -2698,7 +2698,7 @@ msgstr "--- '%1' işi tarafından verilen %2 zamanındaki uyarılar ---"
 #: src/propedit/propedit_cli_parser.cpp:262
 #, no-c-format
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify'. These are usually simply numbered starting from 0 (e.g. '2')."
-msgstr ""
+msgstr "1. 'mkvmerge --identify' tarafından listelenen bir ek kimliği olarak yorumlanacak bir sayı. Bunlar genellikle sadece 0'dan itibaren numaralandırılır (örn. '2')."
 
 #: src/common/kax_info.cpp:746
 #, no-c-format
@@ -2708,7 +2708,7 @@ msgstr "1: tüm kareler"
 #: src/propedit/propedit_cli_parser.cpp:263
 #, no-c-format
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
-msgstr ""
+msgstr "2. 'mkvmerge --identify' tarafından listelenen ekin benzersiz kimliği (UID) olarak yorumlanacak '=' öneki olan bir sayı. Bunlar genellikle rastgele görünen sayılardır (örn. '128975986723')."
 
 #: src/common/kax_info.cpp:748
 #, no-c-format
@@ -2718,7 +2718,7 @@ msgstr "2: kodek özel verisi"
 #: src/propedit/propedit_cli_parser.cpp:264
 #, no-c-format
 msgid "3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."
-msgstr ""
+msgstr "3. Ya 'adı:<value>' ya da 'mime-türü:<value>' durumunda seçici, adı veya MIME türü, sırasıyla <value> değerine eşit olan tüm eklere uygular."
 
 #: src/common/xml/ebml_chapters_converter.cpp:123
 #, no-c-format
@@ -4009,7 +4009,7 @@ msgstr "İptal"
 #: src/output/p_mpeg4_p2.cpp:110
 #, no-c-format
 msgid "Cannot convert non-native MPEG4 video frames into native ones if the source container provides neither timestamps nor a number of frames per second.\n"
-msgstr ""
+msgstr "Kaynak kapsayıcı, saniyede ne zaman damgalarını ne de bir dizi kareyi sağlamıyorsa, yerel olmayan MPEG4 görüntü karelerini yerel karelere dönüştüremez.\n"
 
 #: src/extract/xtr_vobsub.cpp:87
 #, no-c-format
@@ -4544,7 +4544,7 @@ msgstr "Sıkıştırma:"
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:43
 #, no-c-format
 msgid "Container"
-msgstr "Kalıp"
+msgstr "Kapsayıcı"
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:220
 #: src/mkvtoolnix-gui/info/model.cpp:87
@@ -6083,7 +6083,7 @@ msgstr "Çoklu öğeler aynı anda çıkartılıyor"
 #: src/extract/tracks.cpp:137
 #, no-c-format
 msgid "Extracting track {0} with the CodecID '{1}' to the file '{2}'. Container format: {3}\n"
-msgstr "KodekID '{1}' ile olan iz {0}, '{2}' dosyasına çıkartılıyor. Kalıp biçimi: {3}\n"
+msgstr "KodekID '{1}' ile olan iz {0}, '{2}' dosyasına çıkartılıyor. Kapsayıcı biçimi: {3}\n"
 
 #: src/extract/tracks.cpp:122
 #, no-c-format
@@ -6170,12 +6170,12 @@ msgstr "Alan sırası (0, 1, 2, 6, 9 veya 14, belgelere bakın)."
 #: src/merge/generic_reader.cpp:291
 #, no-c-format
 msgid "File '{0}': container: {1}"
-msgstr "Dosya '{0}': kalıp: {1}"
+msgstr "Dosya '{0}': kapsayıcı: {1}"
 
 #: src/merge/id_result.cpp:22
 #, no-c-format
 msgid "File '{0}': unsupported container: {1}\n"
-msgstr "Dosya '{0}': desteklenmeyen kalıp: {1}\n"
+msgstr "Dosya '{0}': desteklenmeyen kapsayıcı: {1}\n"
 
 #: src/common/kax_element_names.cpp:233
 #, no-c-format
@@ -8581,7 +8581,7 @@ msgstr "Normalde mkvmerge görüntü bit akışında saklanan zamanlama bilgisin
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:82
 #, no-c-format
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
-msgstr "Normalde mkvmerge en boy oranı bilgilerini MPEG4 görüntü bit akışları içinde tutar ve kalıp içine bilgileri koyar."
+msgstr "Normalde mkvmerge en boy oranı bilgilerini MPEG4 görüntü bit akışları içinde tutar ve kapsayıcı içine bilgileri koyar."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:335
 #, no-c-format
@@ -8638,7 +8638,7 @@ msgstr "Henüz tamamlanmadı"
 #: src/mkvtoolnix-gui/merge/input.cpp:526
 #, no-c-format
 msgid "Not needed for AAC tracks read from other container formats like MP4 or Matroska files."
-msgstr "MP4 veya Matroska dosyaları gibi diğer kalıp biçimlerinden okunan AAC izleri için gerekmez."
+msgstr "MP4 veya Matroska dosyaları gibi diğer kapsayıcı biçimlerinden okunan AAC izleri için gerekmez."
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:292
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:369
@@ -11091,9 +11091,9 @@ msgid "The ID '{0}' has already been used for another destination file.\n"
 msgstr "'{0}' ID zaten başka bir hedef dosya için kullanılmış.\n"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:153
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The JSON output generated by mkvmerge while identifying '%1' could not be parsed (parser's error message: %2)."
-msgstr "Mkvmerge tarafından üretilen JSON çıktısı ayrıştırılamadı (ayrıştırıcının hata iletisi: %1)."
+msgstr "'%1' tanımlanırken mkvmerge tarafından oluşturulan JSON çıktısı ayrıştırılamadı (ayrıştırıcının hata iletisi: %2)."
 
 #: src/input/r_ogm.cpp:1675
 #, no-c-format
@@ -11125,7 +11125,7 @@ msgstr "MP4 dosyası '{0}' biçimi tanınamayan bölümler içeriyor. Bu, bölü
 #: src/mkvtoolnix-gui/merge/input.cpp:502
 #, no-c-format
 msgid "The Matroska container format can store the display width/height for a video track."
-msgstr "Matroska kalıbı biçimi bir görüntü izi için görüntüleme genişliği/yüksekliğini saklayabilir."
+msgstr "Matroska kapsayıcı biçimi bir görüntü izi için görüntüleme genişliği/yüksekliğini saklayabilir."
 
 #: src/common/qt_kax_analyzer.cpp:76
 #, no-c-format
@@ -11536,7 +11536,7 @@ msgstr "İfade, yakalama parantezlerinin en az bir eşlemesini içermek zorundad
 #: src/output/p_mpeg4_p2.cpp:367
 #, no-c-format
 msgid "The extracted values for video width and height from the MPEG4 layer 2 video data bitstream differ from what the values in the source container. The ones from the video data bitstream ({0}x{1}) will be used.\n"
-msgstr "MPEG4 katman 2 götüntü verisi bit akışından gelen görüntü genişliği ve yüksekliği için çıkartılan değerler kaynak kalıpta olan değerlerden farklı. Götüntü verisi bit akışından ({0}x{1}) biri kullanılacaktır.\n"
+msgstr "MPEG4 katman 2 götüntü verisi bit akışından gelen görüntü genişliği ve yüksekliği için çıkartılan değerler kaynak kapsayıcıda olan değerlerden farklı. Götüntü verisi bit akışından ({0}x{1}) biri kullanılacaktır.\n"
 
 #: src/extract/extract_cli_parser.cpp:114
 #, no-c-format
@@ -11581,9 +11581,9 @@ msgid "The file '%1' exists already and might be overwritten depending on the co
 msgstr "'%1' dosyası zaten var ve yapılandırmaya ve kaynak dosyaların içeriğine bağlı olarak üzerine yazılmış olabilir."
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:165
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '%1' is an unsupported container format (%2)."
-msgstr "Dosya desteklenmeyen kalıp biçimidir (%1)."
+msgstr "'%1' dosyası desteklenmeyen bir kapsayıcı biçimidir (%2)."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:547
 #, no-c-format
@@ -11591,9 +11591,9 @@ msgid "The file '%1' is neither a job queue file nor a settings file."
 msgstr "'%1' dosyası ne bir iş kuyruğu dosyası ne de bir ayarlar dosyası."
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:160
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '%1' was not recognized as a supported format (exit code: %2)."
-msgstr "Dosya desteklenen bir biçim olarak tanınmadı (çıkış kodu: %1)."
+msgstr "'%1' dosyası desteklenen biçim olarak tanınmadı (çıkış kodu: %2)."
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:49
 #, no-c-format
@@ -11674,7 +11674,7 @@ msgstr "'{0}' dosyası bir Matroska dosyası değil ya da bulunamadı.\n"
 #: src/extract/xtr_wav.cpp:134
 #, no-c-format
 msgid "The file '{0}' was written as a W64 file instead of WAV as it is bigger than 4 GB and therefore too big to fit into the WAV container.\n"
-msgstr ""
+msgstr "'{0}' dosyası 4 GB'tan daha büyük olduğundan ve bu nedenle WAV kapsayıcısına sığmayacak kadar büyük olduğu için WAV yerine W64 dosyası olarak yazıldı.\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:754
 #: src/mkvtoolnix-gui/merge/attachments.cpp:221
@@ -12329,7 +12329,7 @@ msgstr "'{0}' kaynak dosyası başarılı olarak açılamadı, ya da sonuna kada
 #: src/mkvtoolnix-gui/merge/input.cpp:487
 #, no-c-format
 msgid "The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
-msgstr "Kalıbın zamanlama bilgisi için kaynak çeşitli şeyler olabilir: '--default-duration' seçeneği ile komut satırında verilen bir değer, kaynak kalıp ya da görüntü bit akışı."
+msgstr "Kapsayıcının zamanlama bilgisi için kaynak çeşitli şeyler olabilir: '--default-duration' seçeneği ile komut satırında verilen bir değer, kaynak kapsayıcı ya da görüntü bit akışı."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:872
 #, no-c-format
@@ -14116,7 +14116,7 @@ msgstr "Şu anki çoklama ayarları ile hedef dosya bir ses izi içermeyecek."
 #: src/mkvtoolnix-gui/merge/input.cpp:486
 #, no-c-format
 msgid "With this option that information is adjusted to match the container's timing information."
-msgstr "Bu seçenek ile bu bilgi kalıbın zamanlama bilgisiyle eşleşmesi için ayarlanır."
+msgstr "Bu seçenek ile bu bilgi kapsayıcının zamanlama bilgisiyle eşleşmesi için ayarlanır."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
 #, no-c-format
