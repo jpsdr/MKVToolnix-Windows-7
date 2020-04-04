@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2020-04-02 22:37+0200\n"
-"PO-Revision-Date: 2020-04-01 03:24+0000\n"
+"PO-Revision-Date: 2020-04-03 03:23+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -874,8 +874,8 @@ msgid ""
 "                           ('text' or 'json'; default is 'text').\n"
 msgstr ""
 "  -F, --identification-format <格式>\n"
-"                           设置识别结果输出格式\n"
-"                           ('text' 或 'json'; 默认为 'text')。\n"
+"                           设置鉴别结果的输出格式\n"
+"                           (「text」或「json」; 默认为「text」)。\n"
 
 #: src/merge/mkvmerge.cpp:352
 #, no-c-format
@@ -883,8 +883,8 @@ msgid ""
 "  -J <file>                This is a convenient alias for\n"
 "                           \"--identification-format json --identify file\".\n"
 msgstr ""
-"  -J <文件>                以 json 格式输出信息的简便写法，等同于\n"
-"                           “--identification-format json --identify 文件”。\n"
+"  -J <文件>                以 json 格式输出鉴别信息，等同于\n"
+"                           「--identification-format json --identify 文件」。\n"
 
 #: src/merge/mkvmerge.cpp:218
 #, no-c-format
@@ -951,7 +951,7 @@ msgstr "  -h, --help               显示本帮助。\n"
 #: src/merge/mkvmerge.cpp:351
 #, no-c-format
 msgid "  -i, --identify <file>    Print information about the source file.\n"
-msgstr "  -i, --identify <文件>    输出输入文件的信息。\n"
+msgstr "  -i, --identify <文件>    输出关于输入文件的信息。\n"
 
 #: src/merge/mkvmerge.cpp:361
 #, no-c-format
@@ -1542,9 +1542,9 @@ msgid "&Constrict start and end timestamps of sub-chapters to their parent's sta
 msgstr "将子章节的起止时间戳收缩到上级章节范围之内(&C)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1236
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Continue identification"
-msgstr "内容加密"
+msgstr "继续鉴别(&C)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:615
 #, no-c-format
@@ -2636,7 +2636,7 @@ msgstr "--- 任务“%1”(启动时间 %2) 的警告消息 ---"
 #: src/propedit/propedit_cli_parser.cpp:262
 #, no-c-format
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify'. These are usually simply numbered starting from 0 (e.g. '2')."
-msgstr "1. 数字形式的附件 ID，即「mkvmerge --identify」所列出的附件编号。通常从 0 开始依次递增 (如 '2')。"
+msgstr "1. 数字形式的附件 ID，与「mkvmerge --identify」所列出的附件编号一致。通常从 0 开始依次递增 (如「2」)。"
 
 #: src/common/kax_info.cpp:746
 #, no-c-format
@@ -2646,7 +2646,7 @@ msgstr "1: 所有帧"
 #: src/propedit/propedit_cli_parser.cpp:263
 #, no-c-format
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
-msgstr "2. 前缀为「=」的数字，表示附件的唯一 ID (UID)，即「mkvmerge --identify」所列出的 UID。通常看起来像随机数 (如 '128975986723')。"
+msgstr "2. 带有前缀「=」的数字，表示附件的唯一 ID (UID)，即「mkvmerge --identify」所列出的 UID。通常看起来像随机数 (如「128975986723」)。"
 
 #: src/common/kax_info.cpp:748
 #, no-c-format
@@ -2806,22 +2806,22 @@ msgstr "请求了 ID 为 {0} 的轨道但在文件中没有找到。相应的选
 #: src/common/property_element.cpp:126
 #, no-c-format
 msgid "A unique ID to identify the Track. This should be kept the same when making a direct stream copy of the Track to another file."
-msgstr "用于识别「轨道」的唯一 ID。在将轨道数据流直接复制到其他文件时应保持其不变。"
+msgstr "用于识别「轨道」的唯一 ID。在将轨道数据流直接复制到其他文件时通常保持不变。"
 
 #: src/common/property_element.cpp:119
 #, no-c-format
 msgid "A unique ID to identify the next chained segment (128 bits)."
-msgstr "用于识别链接的下一个剪辑的唯一 ID (128 位)。"
+msgstr "用于识别链接的下一剪辑的唯一 ID (128 位)。"
 
 #: src/common/property_element.cpp:118
 #, no-c-format
 msgid "A unique ID to identify the previous chained segment (128 bits)."
-msgstr "用于识别链接的上一个剪辑的唯一 ID (128 位)。"
+msgstr "用于识别链接的上一剪辑的唯一 ID (128 位)。"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:53
 #, no-c-format
 msgid "A unique, positive number unambiguously identifying the attachment within the Matroska file."
-msgstr "Matroska 文件中，可明确识别一个附件的唯一的正数。"
+msgstr "在 Matroska 文件中，可准确识别某个附件的唯一的正数。"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:301
 #, no-c-format
@@ -7285,7 +7285,7 @@ msgstr "头长度无效: {0} (总长度: {1}，idx: {2}，dataidx: {3})\n"
 #: src/merge/mkvmerge.cpp:2134
 #, no-c-format
 msgid "Invalid identification format in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中的识别结果输出格式无效。\n"
+msgstr "鉴别结果输出信息「{0} {1}」格式无效。\n"
 
 #: src/common/xml/ebml_converter.cpp:272
 #, no-c-format
@@ -11014,14 +11014,14 @@ msgid "The ID '{0}' has already been used for another destination file.\n"
 msgstr "ID 「{0}」已被另一个输出文件使用。\n"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:153
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The JSON output generated by mkvmerge while identifying '%1' could not be parsed (parser's error message: %2)."
-msgstr "mkvmerge 生成的 JSON 输出无法解析 (解析器提供的错误消息: %1)。"
+msgstr "mkvmerge 鉴别「%1」时所输出的 JSON 数据无法解析 (解析器的错误信息: %2)。"
 
 #: src/input/r_ogm.cpp:1675
 #, no-c-format
 msgid "The Kate identification header could not be parsed ({0}).\n"
-msgstr "无法解析 Kate 识别头 ({0})。\n"
+msgstr "无法解析 Kate 鉴别头 ({0})。\n"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:52
 #, no-c-format
@@ -11074,7 +11074,7 @@ msgstr "'--nalu-size-length {0}' 中的NALU 大小的数值长度必须为 2 与
 #: src/input/r_ogm.cpp:1485
 #, no-c-format
 msgid "The Theora identification header could not be parsed ({0}).\n"
-msgstr "无法解析 Theora 识别头 ({0})。\n"
+msgstr "无法解析 Theora 鉴别头 ({0})。\n"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:53
 #, no-c-format
@@ -11172,7 +11172,7 @@ msgstr "应用程序将立刻终止。"
 #: src/merge/mkvmerge.cpp:2200
 #, no-c-format
 msgid "The argument '{0}' is not allowed in identification mode.\n"
-msgstr "识别模式中不允许使用参数「{0}」。\n"
+msgstr "鉴别模式不允许使用参数「{0}」。\n"
 
 #: src/merge/mkvmerge.cpp:996
 #: src/merge/mkvmerge.cpp:1002
@@ -11503,9 +11503,9 @@ msgid "The file '%1' exists already and might be overwritten depending on the co
 msgstr "文件「%1」已存在，根据配置及输入文件内容的变化，有可能被覆盖。"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:165
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '%1' is an unsupported container format (%2)."
-msgstr "文件容器格式不支持 (%1)。"
+msgstr "文件「%1」属尚未支持的容器格式 (%2)。"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:547
 #, no-c-format
@@ -11513,9 +11513,9 @@ msgid "The file '%1' is neither a job queue file nor a settings file."
 msgstr "文件“%1”既非任务队列文件，亦非设置文件。"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:160
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '%1' was not recognized as a supported format (exit code: %2)."
-msgstr "该文件无法被识别为支持的格式 (退出代码: %1)。"
+msgstr "文件「%1」未能识别为受支持的格式 (退出代码: %2)。"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:49
 #, no-c-format
@@ -14090,12 +14090,12 @@ msgstr "错误的头类型: 0x{0:02x} != 0x{1:02x}"
 #: src/common/theora.cpp:35
 #, no-c-format
 msgid "Wrong identification string: '{0:6s}' != 'theora'"
-msgstr "错误的识别串: '{0:6s}' != 'theora'"
+msgstr "错误的鉴别字符串: '{0:6s}' != 'theora'"
 
 #: src/common/kate.cpp:45
 #, no-c-format
 msgid "Wrong identification string: '{0:7s}' != 'kate\\0\\0\\0'"
-msgstr "错误的识别串: '{0:7s}' != 'kate\\0\\0\\0'"
+msgstr "错误的鉴别字符串: '{0:7s}' != 'kate\\0\\0\\0'"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:701
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:193
@@ -14565,12 +14565,12 @@ msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但编码格式�
 #: src/input/r_matroska.cpp:560
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
-msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但不存在 BITMAPINFOHEADER 结构。因此我们没有可识别视频编码的 FourCC。\n"
+msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但不存在 BITMAPINFOHEADER 结构。因此我们没有可用于鉴别视频编码的 FourCC。\n"
 
 #: src/input/r_matroska.cpp:339
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
-msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但不存在 WAVEFORMATEX 结构。因此我们没有可识别音频编码的格式 ID。\n"
+msgstr "matroska_reader: 轨道 {0} 的 CodecID 为「{1}」，但不存在 WAVEFORMATEX 结构。因此我们没有可用于鉴别音频编码的格式 ID。\n"
 
 #: src/input/r_matroska.cpp:600
 #, no-c-format
