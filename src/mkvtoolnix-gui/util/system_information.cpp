@@ -59,23 +59,32 @@ gatherGeneralInfo(QStringList &info) {
 
 void
 gatherOperatingSystemInfo(QStringList &info) {
-  info << Q("") << Q("## Operating system");
-
+  QString osName, osVersion;
   auto versionInfo = QOperatingSystemVersion::current();
-  auto versionNum  = QStringList{};
 
-  if (versionInfo.majorVersion() != -1)
-    versionNum << QString::number(versionInfo.majorVersion());
-  if (versionInfo.minorVersion() != -1)
-    versionNum << QString::number(versionInfo.minorVersion());
-  if (versionInfo.microVersion() != -1)
-    versionNum << QString::number(versionInfo.microVersion());
+  if (versionInfo.type() != QOperatingSystemVersion::Unknown) {
+    osName = versionInfo.name();
+  } else {
+    osName = QSysInfo::productType();
+  }
 
-  auto osName    = versionInfo.name();
-  auto osVersion = versionNum.join(Q("."));
+  if (versionInfo.majorVersion() != -1) {
+    osVersion += QString::number(versionInfo.majorVersion());
+    if (versionInfo.minorVersion() != -1) {
+      osVersion += QLatin1Char('.');
+      osVersion += QString::number(versionInfo.minorVersion());
+      if (versionInfo.microVersion() != -1) {
+        osVersion += QLatin1Char('.');
+        osVersion += QString::number(versionInfo.microVersion());
+      }
+    }
+  } else {
+    osVersion = QSysInfo::productVersion();
+  }
 
+  info << Q("") << Q("## Operating system");
   info << Q("* Name: %1").arg(osName);
-  info << Q("* Version: %1").arg(osVersion.isEmpty() ? Q("unknown") : osVersion);
+  info << Q("* Version: %1").arg(osVersion);
   info << Q("* Pretty name: %1").arg(QSysInfo::prettyProductName());
 }
 
