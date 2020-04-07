@@ -31,7 +31,7 @@ else
 fi
 
 # It's just rude to go over the net to build
-XSLTPROC_FLAGS=--nonet
+XSLTPROC_FLAGS="--nonet --maxdepth 10000"
 
 AC_ARG_WITH(xsltproc,
   AC_HELP_STRING([--with-xsltproc=prog],[use prog instead of looking for xsltproc]),
@@ -52,7 +52,7 @@ AC_CACHE_CHECK([whether xsltproc works],
   [ac_cv_xsltproc_works],
   [
     ac_cv_xsltproc_works=no
-    "$XSLTPROC" "$XSLTPROC_FLAGS" "$DOCBOOK_ROOT/manpages/docbook.xsl" >/dev/null 2>/dev/null << END
+    "$XSLTPROC" $XSLTPROC_FLAGS "$DOCBOOK_ROOT/manpages/docbook.xsl" >/dev/null 2>/dev/null << END
 <?xml version="1.0" encoding='ISO-8859-1'?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
 <book id="test">
