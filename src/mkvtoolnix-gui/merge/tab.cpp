@@ -92,7 +92,7 @@ Tab::Tab(QWidget *parent)
   ui->setupUi(this);
 
   auto mw = MainWindow::get();
-  connect(mw, &MainWindow::preferencesChanged, [this]() { Util::setupTabWidgetHeaders(*ui->tabs); });
+  connect(mw, &MainWindow::preferencesChanged, this, [this]() { Util::setupTabWidgetHeaders(*ui->tabs); });
 
   m_filesModel->setOtherModels(m_tracksModel, m_attachedFilesModel);
 

@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* GUI: fixed a crash that happened when closing the preferences after having
+  closed at least one multiplexer tab. Fixes #2785.
+
+
 # Version 45.0.0 "Heaven in Pennies" 2020-04-04
 
 ## New features and enhancements
