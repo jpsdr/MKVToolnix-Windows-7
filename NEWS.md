@@ -4,6 +4,9 @@
 
 * GUI: fixed a crash that happened when closing the preferences after having
   closed at least one multiplexer tab. Fixes #2785.
+* MKVToolNix GUI: macOS: changed the default of the "elide tab header labels"
+  feature introduced in v45 from "no" to "yes" to mirror how versions before
+  v45 behaved on macOS.
 
 
 # Version 45.0.0 "Heaven in Pennies" 2020-04-04

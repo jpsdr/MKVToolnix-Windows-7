@@ -276,6 +276,12 @@ void
 Settings::load() {
   convertOldSettings();
 
+#if defined(SYS_APPLE)
+  auto defaultElideTabHeaderLabels = true;
+#else
+  auto defaultElideTabHeaderLabels = false;
+#endif
+
   auto regPtr      = registry();
   auto &reg        = *regPtr;
   auto defaultFont = defaultUiFont();
@@ -285,7 +291,7 @@ Settings::load() {
   m_priority                           = static_cast<ProcessPriority>(reg.value(s_valPriority, static_cast<int>(NormalPriority)).toInt());
   m_probeRangePercentage               = reg.value(s_valProbeRangePercentage, 0.3).toDouble();
   m_tabPosition                        = static_cast<QTabWidget::TabPosition>(reg.value(s_valTabPosition, static_cast<int>(QTabWidget::North)).toInt());
-  m_elideTabHeaderLabels               = reg.value(s_valElideTabHeaderLabels).toBool();
+  m_elideTabHeaderLabels               = reg.value(s_valElideTabHeaderLabels, defaultElideTabHeaderLabels).toBool();
   m_lastOpenDir                        = QDir{reg.value(s_valLastOpenDir).toString()};
   m_lastOutputDir                      = QDir{reg.value(s_valLastOutputDir).toString()};
   m_lastConfigDir                      = QDir{reg.value(s_valLastConfigDir).toString()};

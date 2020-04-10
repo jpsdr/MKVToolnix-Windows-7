@@ -209,12 +209,18 @@ addSegmentUIDFromFileToLineEdit(QWidget &parent,
   }
 }
 
+#if defined(SYS_APPLE)
+# define OS_SPECIFIC_ELIDE_POSITION Qt::ElideRight
+#else
+# define OS_SPECIFIC_ELIDE_POSITION Qt::ElideMiddle
+#endif
+
 void
 setupTabWidgetHeaders(QTabWidget &tabWidget) {
   auto &cfg = Util::Settings::get();
 
   tabWidget.setTabPosition(Util::Settings::get().m_tabPosition);
-  tabWidget.setElideMode(cfg.m_elideTabHeaderLabels ? Qt::ElideMiddle : Qt::ElideNone);
+  tabWidget.setElideMode(cfg.m_elideTabHeaderLabels ? OS_SPECIFIC_ELIDE_POSITION : Qt::ElideNone);
 }
 
 }
