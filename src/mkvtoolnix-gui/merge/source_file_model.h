@@ -55,7 +55,7 @@ public:
   virtual bool canDropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, QModelIndex const &parent) const override;
   virtual bool dropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, QModelIndex const &parent) override;
 
-public slots:
+public Q_SLOTS:
   void updateSelectionStatus();
   void updateSourceFileLists();
 

@@ -447,7 +447,7 @@ MainWindow::beforeCloseCheckRunningJobs() {
 
 void
 MainWindow::closeEvent(QCloseEvent *event) {
-  emit aboutToClose();
+  Q_EMIT aboutToClose();
 
   auto ok =       mergeTool()->closeAllTabs();
   ok      = ok && headerEditorTool()->closeAllTabs();
@@ -488,7 +488,7 @@ MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
   if (dlg.uiLocaleChanged() || dlg.probeRangePercentageChanged())
     QtConcurrent::run(Util::FileIdentifier::cleanAllCacheFiles);
 
-  emit preferencesChanged();
+  Q_EMIT preferencesChanged();
 }
 
 #if defined(HAVE_UPDATE_CHECK)
@@ -617,7 +617,7 @@ MainWindow::showSystemInformation() {
 
 void
 MainWindow::showEvent(QShowEvent *event) {
-  emit windowShown();
+  Q_EMIT windowShown();
   event->accept();
 }
 

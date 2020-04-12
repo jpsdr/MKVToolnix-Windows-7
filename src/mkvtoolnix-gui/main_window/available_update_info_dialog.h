@@ -35,7 +35,7 @@ public:
 
   void setChangeLogContent(QString const &content);
 
-public slots:
+public Q_SLOTS:
   void setReleaseInformation(std::shared_ptr<pugi::xml_document> releasesInfo);
   void updateCheckFinished(mtx::gui::UpdateCheckStatus status, mtx_release_version_t releaseVersion);
   void visitDownloadLocation();

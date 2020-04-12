@@ -333,7 +333,7 @@ PrefsRunProgramWidget::changeExecutable() {
 
   enableControls();
 
-  emit titleChanged();
+  Q_EMIT titleChanged();
 }
 
 void
@@ -349,12 +349,12 @@ PrefsRunProgramWidget::commandLineEdited(QString const &commandLine) {
 
   enableControls();
 
-  emit titleChanged();
+  Q_EMIT titleChanged();
 }
 
 void
 PrefsRunProgramWidget::nameEdited() {
-  emit titleChanged();
+  Q_EMIT titleChanged();
 }
 
 void
@@ -404,14 +404,14 @@ PrefsRunProgramWidget::changeAudioFile() {
 
   enableControls();
 
-  emit titleChanged();
+  Q_EMIT titleChanged();
 }
 
 void
 PrefsRunProgramWidget::audioFileEdited() {
   enableControls();
 
-  emit titleChanged();
+  Q_EMIT titleChanged();
 }
 
 void
@@ -421,7 +421,7 @@ PrefsRunProgramWidget::typeChanged(int index) {
 
   showPageForType(type);
 
-  emit titleChanged();
+  Q_EMIT titleChanged();
 
   enableControls();
 }

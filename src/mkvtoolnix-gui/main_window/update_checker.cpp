@@ -53,7 +53,7 @@ UpdateChecker::start() {
 
   qDebug() << "UpdateChecker::start: initiating requests";
 
-  emit checkStarted();
+  Q_EMIT checkStarted();
   qDebug() << "UpdateChecker::start: checkStarted emitted";
 
   auto &manager = App::instance()->networkAccessManager();
@@ -104,11 +104,11 @@ UpdateChecker::handleDownloadedContent(quint64 token,
 
     qDebug() << "UpdateChecker::handleDownloadedContent: latest version info retrieved; status:" << static_cast<int>(status);
 
-    emit checkFinished(status, p->m_release);
+    Q_EMIT checkFinished(status, p->m_release);
 
   } else {
     qDebug() << "UpdateChecker::handleDownloadedContent: releases info retrieved";
-    emit releaseInformationRetrieved(doc);
+    Q_EMIT releaseInformationRetrieved(doc);
   }
 
   if (p->m_numFinished < p->m_tokens.size())

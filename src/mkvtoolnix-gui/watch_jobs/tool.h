@@ -43,7 +43,7 @@ public:
   virtual void setupActions() override;
   virtual std::pair<QString, QString> nextPreviousWindowActionTexts() const override;
 
-public slots:
+public Q_SLOTS:
   virtual void toolShown() override;
   virtual void closeTab(int idx);
   virtual void closeCurrentTab();

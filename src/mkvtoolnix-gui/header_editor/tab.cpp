@@ -122,7 +122,7 @@ Tab::load() {
       .arg(QY("The file you tried to open (%1) is not recognized as a valid Matroska/WebM file.").arg(m_fileName))
       .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."));
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();
-    emit removeThisTab();
+    Q_EMIT removeThisTab();
     return;
   }
 
@@ -148,7 +148,7 @@ Tab::load() {
       .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(m_fileName))
       .arg(error);
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();
-    emit removeThisTab();
+    Q_EMIT removeThisTab();
     return;
   }
 

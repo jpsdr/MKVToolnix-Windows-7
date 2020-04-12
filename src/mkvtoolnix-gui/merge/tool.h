@@ -40,7 +40,7 @@ public:
 
   virtual void addMergeTabIfNoneOpen();
 
-public slots:
+public Q_SLOTS:
   virtual void retranslateUi();
 
   virtual void newConfig();

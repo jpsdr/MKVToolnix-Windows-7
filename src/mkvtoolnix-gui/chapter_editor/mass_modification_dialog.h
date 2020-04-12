@@ -45,7 +45,7 @@ public:
   void setupUi(QStringList const &additionalLanguages, QStringList const &additionalCountryCodes);
   void retranslateUi();
 
-public slots:
+public Q_SLOTS:
   void verifyOptions();
 
 protected:

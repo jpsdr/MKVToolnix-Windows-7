@@ -33,7 +33,7 @@ public:
 
   virtual bool eventFilter(QObject *o, QEvent *e) override;
 
-public slots:
+public Q_SLOTS:
   virtual void copyToClipboard();
 };
 

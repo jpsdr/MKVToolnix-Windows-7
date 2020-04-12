@@ -49,7 +49,7 @@ public:
 
     virtual ~WaitingSpinnerWidget();
 
-public slots:
+public Q_SLOTS:
     void start();
     void stop();
     void reset();
@@ -78,7 +78,7 @@ public:
 
     bool isSpinning() const;
 
-private slots:
+private Q_SLOTS:
     void rotate();
 
 protected:

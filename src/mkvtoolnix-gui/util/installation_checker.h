@@ -35,11 +35,11 @@ public:
   QString mkvmergeVersion() const;
   Problems problems() const;
 
-signals:
+Q_SIGNALS:
   void problemsFound(Util::InstallationChecker::Problems const &results);
   void finished();
 
-public slots:
+public Q_SLOTS:
   void runChecks();
 
 public:

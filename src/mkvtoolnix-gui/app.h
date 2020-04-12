@@ -74,7 +74,7 @@ public:
 
   Util::NetworkAccessManager &networkAccessManager();
 
-signals:
+Q_SIGNALS:
   void addingFilesToMergeRequested(QStringList const &fileNames);
   void editingChaptersRequested(QStringList const &fileNames);
   void editingHeadersRequested(QStringList const &fileNames);
@@ -82,7 +82,7 @@ signals:
   void runningInfoOnRequested(QStringList const &fileNames);
   void toolRequested(ToolBase *tool);
 
-public slots:
+public Q_SLOTS:
   void saveSettings() const;
   void receiveInstanceCommunication();
   void setupAppearance();

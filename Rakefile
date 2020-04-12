@@ -142,6 +142,7 @@ def setup_globals
   cflags_common           += " -march=i686"                                              if $building_for[:windows] && /i686/.match(c(:host))
   cflags_common           += " -fPIC "                                                   if c?(:USE_QT) && !$building_for[:windows]
   cflags_common           += " -DQT_STATICPLUGIN"                                        if c?(:USE_QT) &&  $building_for[:windows]
+  cflags_common           += " -DQT_NO_KEYWORDS"                                         if c?(:USE_QT)
   cflags_common           += " -DUSE_DRMINGW -I#{c(:DRMINGW_PATH)}/include"              if c?(:USE_DRMINGW) &&  $building_for[:windows]
   cflags_common           += " -DMTX_APPIMAGE"                                           if c?(:APPIMAGE_BUILD) && !$building_for[:windows]
 

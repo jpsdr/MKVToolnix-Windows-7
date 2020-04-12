@@ -328,7 +328,7 @@ Tab::setupInputControls() {
   m_appendFilesAction2->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-x.png")});
   m_addAdditionalPartsAction2->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-margin.png")});
 
-  // Connect signals & slots.
+  // Connect Q_SIGNALS & Q_SLOTS.
   auto mw = MainWindow::get();
   using CMSAction = Util::Settings::ClearMergeSettingsAction;
 

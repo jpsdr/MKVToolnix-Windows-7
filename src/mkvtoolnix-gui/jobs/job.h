@@ -114,7 +114,7 @@ protected:
   void setupJobConnections();
   virtual void maybeRemoveOutputFile();
 
-public slots:
+public Q_SLOTS:
   virtual void setStatus(Job::Status status);
   virtual void setProgress(unsigned int progress);
   virtual void addLineToInternalLogs(QString const &line, mtx::gui::Jobs::Job::LineType type);
@@ -122,7 +122,7 @@ public slots:
   virtual void updateUnacknowledgedWarningsAndErrors();
   virtual void openOutputFolder() const;
 
-signals:
+Q_SIGNALS:
   void statusChanged(uint64_t id, mtx::gui::Jobs::Job::Status oldStatus, mtx::gui::Jobs::Job::Status newStatus);
   void progressChanged(uint64_t id, unsigned int progress);
   void numUnacknowledgedWarningsOrErrorsChanged(uint64_t id, int numWarnings, int numErrors);

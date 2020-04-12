@@ -28,7 +28,7 @@ public:
   int fileIndex() const;
   bool alwaysUseThisDecision() const;
 
-public slots:
+public Q_SLOTS:
   void selectionChanged();
 };
 

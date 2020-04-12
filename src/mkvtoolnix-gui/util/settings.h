@@ -216,7 +216,7 @@ public:
   QString lastOpenDirPath() const;
   QString lastConfigDirPath() const;
 
-public slots:
+public Q_SLOTS:
   void storeSplitterSizes();
 
 protected:

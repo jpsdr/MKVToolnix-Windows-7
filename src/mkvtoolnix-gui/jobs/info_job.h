@@ -43,7 +43,7 @@ public:
 
   virtual void runProgramSetupVariables(ProgramRunner::VariableMap &variables) const override;
 
-public slots:
+public Q_SLOTS:
   virtual void abort() override;
   virtual void showError(const QString &message);
   virtual void updateProgress(int percentage, const QString &text);

@@ -67,7 +67,7 @@ AttachmentsPage::dragEnterEvent(QDragEnterEvent *event) {
 void
 AttachmentsPage::dropEvent(QDropEvent *event) {
   if (m_filesDDHandler.handle(event, true))
-    emit filesDropped(m_filesDDHandler.fileNames());
+    Q_EMIT filesDropped(m_filesDDHandler.fileNames());
 }
 
 QString

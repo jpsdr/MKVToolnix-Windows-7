@@ -31,10 +31,10 @@ public:
   void setSettings(JobSettings const &jobSettings);
   void setFileNameVisible(bool visible);
 
-signals:
+Q_SIGNALS:
   void fileNameChanged(QString const &fileName);
 
-public slots:
+public Q_SLOTS:
   void enableControlsAccordingToMode();
   void browseFileName();
   void emitFileNameChangeSignal(QString const &fileName);

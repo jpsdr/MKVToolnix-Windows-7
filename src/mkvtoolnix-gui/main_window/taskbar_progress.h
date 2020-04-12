@@ -25,7 +25,7 @@ public:
   explicit TaskbarProgress(QWidget *parent = nullptr);
   virtual ~TaskbarProgress();
 
-public slots:
+public Q_SLOTS:
   void setupWindowHandle();
   void updateTaskbarProgress(int progress, int totalProgress);
   void updateTaskbarStatus(Jobs::QueueStatus status);

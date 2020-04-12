@@ -129,14 +129,14 @@ Tab::load(QString const &fileName) {
     connect(&info, &Util::KaxInfo::elementFound,               p->m_model,        &Model::addElement);
     connect(&info, &Util::KaxInfo::elementInfoFound,           p->m_model,        &Model::addElementInfo);
 
-    emit titleChanged();
+    Q_EMIT titleChanged();
 
     p->m_queue->add(new InitialScan{info, Util::KaxInfo::ScanType::StartOfFile});
     p->m_queue->add(new InitialScan{info, Util::KaxInfo::ScanType::Level1Elements});
 
   } catch (mtx::mm_io::exception &ex) {
     Util::MessageBox::critical(this)->title(QY("Reading failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName)).exec();
-    emit removeThisTab();
+    Q_EMIT removeThisTab();
 
   } catch (mtx::kax_info::exception &ex) {
     qDebug() << "Info::Tab::load: kax_info exception:" << Q(ex.what());
@@ -188,13 +188,13 @@ Tab::retranslateUi() {
 
   p->m_showHexDumpAction->setText(QY("Show &hex dump"));
 
-  emit titleChanged();
+  Q_EMIT titleChanged();
 }
 
 void
 Tab::showError(const QString &message) {
   Util::MessageBox::critical(this)->title(QY("Error reading Matroska file")).text(message).exec();
-  emit removeThisTab();
+  Q_EMIT removeThisTab();
 }
 
 void

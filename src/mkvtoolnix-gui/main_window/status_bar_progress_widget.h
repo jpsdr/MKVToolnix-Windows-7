@@ -31,7 +31,7 @@ public:
 
   void retranslateUi();
 
-public slots:
+public Q_SLOTS:
   void setProgress(int progress, int totalProgress);
   void setJobStats(int numPendingAutomatic, int numPendingManual, int numRunning, int numOther);
   void setNumUnacknowledgedWarningsOrErrors(int numWarnings, int numErrors);

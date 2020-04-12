@@ -25,7 +25,7 @@ public:
   virtual void run() override;
   virtual void abort() override;
 
-signals:
+Q_SIGNALS:
   void elementRead(const QModelIndex &idx);
 };
 

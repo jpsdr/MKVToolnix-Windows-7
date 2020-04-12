@@ -62,7 +62,7 @@ public:
   virtual void modifyThis() override;
   virtual void retranslateUi() override;
 
-public slots:
+public Q_SLOTS:
   virtual void onResetClicked();
   virtual void onAddOrRemoveChecked();
 };

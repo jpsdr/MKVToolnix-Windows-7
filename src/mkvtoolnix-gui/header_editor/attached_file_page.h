@@ -46,7 +46,7 @@ public:
   virtual void saveContent();
   virtual void replaceContent(bool deriveNameAndMimeType);
 
-signals:
+Q_SIGNALS:
   void filesDropped(QStringList const &fileNames);
 
 protected:

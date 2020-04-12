@@ -345,7 +345,7 @@ void
 Tab::setDestination(QString const &newValue) {
   if (newValue.isEmpty()) {
     m_config.m_destination.clear();
-    emit titleChanged();
+    Q_EMIT titleChanged();
     return;
   }
 
@@ -360,7 +360,7 @@ Tab::setDestination(QString const &newValue) {
     settings.m_lastOutputDir = QFileInfo{ newValue }.absoluteDir();
   }
 
-  emit titleChanged();
+  Q_EMIT titleChanged();
 
   if (m_config.m_destination == newValue)
     return;

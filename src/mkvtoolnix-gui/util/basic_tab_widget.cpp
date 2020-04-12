@@ -52,7 +52,7 @@ BasicTabWidget::eventFilter(QObject *o,
       auto tabIdx = tabBar()->tabAt(me->pos());
 
       if (tabIdx >= 0)
-        emit tabCloseRequested(tabIdx);
+        Q_EMIT tabCloseRequested(tabIdx);
 
       return true;
     }

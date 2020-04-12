@@ -37,7 +37,7 @@ public:
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
   virtual void dropEvent(QDropEvent *event) override;
 
-public slots:
+public Q_SLOTS:
   virtual void retranslateUi();
   virtual void toolShown() override;
   virtual void selectFileToOpen();

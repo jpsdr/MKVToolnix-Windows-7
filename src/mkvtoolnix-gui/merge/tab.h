@@ -93,11 +93,11 @@ public:
   virtual void cloneConfig(MuxConfig const &config);
   virtual void addFiles(QStringList const &fileNames);
 
-signals:
+Q_SIGNALS:
   void removeThisTab();
   void titleChanged();
 
-public slots:
+public Q_SLOTS:
   // Input tab:
   virtual void onSaveConfig();
   virtual void onSaveConfigAs();

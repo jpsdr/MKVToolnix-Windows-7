@@ -469,21 +469,21 @@ App::handleCommandLineArgumentsLocally() {
   auto p = p_func();
 
   if (!p->m_cliParser->configFiles().isEmpty())
-    emit openConfigFilesRequested(p->m_cliParser->configFiles());
+    Q_EMIT openConfigFilesRequested(p->m_cliParser->configFiles());
 
   if (!p->m_cliParser->addToMerge().isEmpty())
-    emit addingFilesToMergeRequested(p->m_cliParser->addToMerge());
+    Q_EMIT addingFilesToMergeRequested(p->m_cliParser->addToMerge());
 
   if (!p->m_cliParser->runInfoOn().isEmpty())
-    emit runningInfoOnRequested(p->m_cliParser->runInfoOn());
+    Q_EMIT runningInfoOnRequested(p->m_cliParser->runInfoOn());
 
   if (!p->m_cliParser->editChapters().isEmpty())
-    emit editingChaptersRequested(p->m_cliParser->editChapters());
+    Q_EMIT editingChaptersRequested(p->m_cliParser->editChapters());
 
   if (!p->m_cliParser->editHeaders().isEmpty())
-    emit editingHeadersRequested(p->m_cliParser->editHeaders());
+    Q_EMIT editingHeadersRequested(p->m_cliParser->editHeaders());
 
-  emit toolRequested(p->m_cliParser->requestedTool());
+  Q_EMIT toolRequested(p->m_cliParser->requestedTool());
 }
 
 void

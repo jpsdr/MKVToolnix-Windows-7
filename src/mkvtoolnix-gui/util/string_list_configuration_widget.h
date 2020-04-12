@@ -39,7 +39,7 @@ public:
 
   void addItem(QString const &name);
 
-public slots:
+public Q_SLOTS:
   void enableControls();
 
   void addNewItem();

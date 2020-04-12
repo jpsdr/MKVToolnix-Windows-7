@@ -35,7 +35,7 @@ public:
   virtual std::pair<QString, QString> nextPreviousWindowActionTexts() const override;
   virtual QVector<Tab *> tabs();
 
-public slots:
+public Q_SLOTS:
   virtual void retranslateUi();
   virtual void toolShown() override;
   virtual void tabTitleChanged();

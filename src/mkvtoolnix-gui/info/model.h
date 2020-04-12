@@ -65,7 +65,7 @@ public:
   bool hasChildren(const QModelIndex &parent) const override;
   std::pair<QString, bool> elementName(libebml::EbmlElement &element);
 
-public slots:
+public Q_SLOTS:
   void addElement(int level, libebml::EbmlElement *element, bool readFully);
   void addElementInfo(int level, QString const &text, std::optional<int64_t> position, std::optional<int64_t> size, std::optional<int64_t> dataSize);
   void addElementStructure(QStandardItem &parent, libebml::EbmlElement &element);

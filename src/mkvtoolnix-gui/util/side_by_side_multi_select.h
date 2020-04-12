@@ -41,10 +41,10 @@ public:
   ItemList selectedItems() const;
   QStringList selectedItemValues() const;
 
-signals:
+Q_SIGNALS:
   void listsChanged();
 
-public slots:
+public Q_SLOTS:
   void availableSelectionChanged();
   void selectedSelectionChanged();
 

@@ -40,7 +40,7 @@ FilesDragDropWidget::dropEvent(QDropEvent *event) {
   auto p = p_func();
 
   if (p->m_filesDDHandler.handle(event, true))
-    emit filesDropped(p->m_filesDDHandler.fileNames());
+    Q_EMIT filesDropped(p->m_filesDDHandler.fileNames());
 }
 
 }

@@ -29,7 +29,7 @@ public:
   QString language() const;
   OptQString country() const;
 
-public slots:
+public Q_SLOTS:
   void verifyStartTimestamp();
 
 protected:

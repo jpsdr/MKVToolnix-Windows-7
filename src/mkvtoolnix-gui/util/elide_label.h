@@ -37,10 +37,10 @@ public:
   virtual QSize sizeHint() const;
   virtual QSize minimumSizeHint() const;
 
-public slots:
+public Q_SLOTS:
   void setText(QString const &text);
 
-signals:
+Q_SIGNALS:
   void textChanged(QString const &text);
 
 protected:

@@ -32,7 +32,7 @@ protected:
   virtual void setItems(QList<QStandardItem *> const &items) const override;
   virtual void summarizeProperties();
 
-public slots:
+public Q_SLOTS:
   virtual void retranslateUi() override;
 };
 

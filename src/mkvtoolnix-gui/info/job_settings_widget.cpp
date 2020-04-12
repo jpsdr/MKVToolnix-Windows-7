@@ -104,7 +104,7 @@ JobSettingsWidget::browseFileName() {
 
 void
 JobSettingsWidget::emitFileNameChangeSignal(QString const &fileName) {
-  emit fileNameChanged(fileName);
+  Q_EMIT fileNameChanged(fileName);
 }
 
 }

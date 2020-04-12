@@ -40,14 +40,14 @@ public:
 
   bool isEmpty() const;
 
-public slots:
+public Q_SLOTS:
   void continueByScanningPlaylists(QFileInfoList const &files);
 
-protected slots:
+protected Q_SLOTS:
   void identifyFiles();
   void abortIdentification();
 
-signals:
+Q_SIGNALS:
   void queueStarted();
   void queueFinished();
 
@@ -93,7 +93,7 @@ public:
   void continueIdentification();
   void abortIdentification();
 
-public slots:
+public Q_SLOTS:
   void abortPlaylistScan();
 };
 

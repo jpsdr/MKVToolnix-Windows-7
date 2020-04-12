@@ -63,7 +63,7 @@ ElideLabel::setText(QString const &text) {
 
   p->m_text = text;
   updateLabel();
-  emit textChanged(p->m_text);
+  Q_EMIT textChanged(p->m_text);
 }
 
 Qt::TextElideMode

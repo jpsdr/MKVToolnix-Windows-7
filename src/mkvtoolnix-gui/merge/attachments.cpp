@@ -68,7 +68,7 @@ Tab::setupAttachmentsControls() {
   m_removeAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
   m_selectAllAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/edit-select-all.png")});
 
-  // Signals & slots
+  // Q_SIGNALS & Q_SLOTS
   connect(m_addAttachmentsAction,               &QAction::triggered,                                                    this, &Tab::onAddAttachments);
   connect(m_removeAttachmentsAction,            &QAction::triggered,                                                    this, &Tab::onRemoveAttachments);
   connect(m_removeAllAttachmentsAction,         &QAction::triggered,                                                    this, &Tab::onRemoveAllAttachments);

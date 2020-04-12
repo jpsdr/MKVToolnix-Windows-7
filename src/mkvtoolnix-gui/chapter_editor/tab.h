@@ -78,12 +78,12 @@ public:
   virtual bool areWidgetsEnabled() const;
   virtual bool isSourceMatroska() const;
 
-signals:
+Q_SIGNALS:
   void removeThisTab();
   void titleChanged();
   void numberOfEntriesChanged();
 
-public slots:
+public Q_SLOTS:
   virtual void newFile();
   virtual void load();
   virtual void append(QString const &fileName);

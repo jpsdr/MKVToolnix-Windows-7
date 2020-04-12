@@ -68,12 +68,12 @@ public:
 
   virtual void registerSubWindowWidget(ToolBase &toolBase, QTabWidget &tabWidget);
 
-signals:
+Q_SIGNALS:
   void windowShown();
   void preferencesChanged();
   void aboutToClose();
 
-public slots:
+public Q_SLOTS:
   virtual void changeToolToSender();
   virtual void toolChanged(int index);
   virtual void editPreferences();

@@ -45,7 +45,7 @@ public:
 
   virtual void runProgramSetupVariables(ProgramRunner::VariableMap &variables) const override;
 
-public slots:
+public Q_SLOTS:
   virtual void readAvailable();
   virtual void processFinished(int exitCode, QProcess::ExitStatus exitStatus);
   virtual void processError(QProcess::ProcessError error);
@@ -57,7 +57,7 @@ protected:
   void processLine(QString const &rawLine);
   virtual void saveJobInternal(Util::ConfigFile &settings) const;
 
-signals:
+Q_SIGNALS:
   void startedScanningPlaylists();
   void finishedScanningPlaylists();
 

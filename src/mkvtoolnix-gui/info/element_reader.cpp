@@ -52,7 +52,7 @@ ElementReader::run() {
   } catch (mtx::mm_io::exception &) {
   }
 
-  emit elementRead(m_idx);
+  Q_EMIT elementRead(m_idx);
 }
 
 }

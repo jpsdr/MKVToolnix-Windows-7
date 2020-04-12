@@ -25,7 +25,7 @@ public:
 
   bool isPlaying() const;
 
-public slots:
+public Q_SLOTS:
   void playFile(QString const &fileName, unsigned int volume);
   void stopPlayback();
 };

@@ -17,7 +17,7 @@ public:
   virtual void setupActions() = 0;
   virtual std::pair<QString, QString> nextPreviousWindowActionTexts() const { return {}; };
 
-public slots:
+public Q_SLOTS:
   virtual void toolShown() = 0;
 };
 

@@ -92,7 +92,7 @@ SelectCharacterSetDialog::updatePreview() {
 
 void
 SelectCharacterSetDialog::emitResult() {
-  emit characterSetSelected(selectedCharacterSet());
+  Q_EMIT characterSetSelected(selectedCharacterSet());
 }
 
 QString

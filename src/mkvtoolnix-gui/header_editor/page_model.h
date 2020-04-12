@@ -47,7 +47,7 @@ public:
   virtual bool canDropMimeData(QMimeData const *data, Qt::DropAction action, int row, int, QModelIndex const &parent) const override;
   virtual bool dropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, QModelIndex const &parent) override;
 
-signals:
+Q_SIGNALS:
   void attachmentsReordered();
 };
 

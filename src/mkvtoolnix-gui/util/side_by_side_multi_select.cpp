@@ -138,7 +138,7 @@ SideBySideMultiSelect::moveSelectedListWidgetItems(QListWidget &from,
       to.addItem(actualItem);
   }
 
-  emit listsChanged();
+  Q_EMIT listsChanged();
 }
 
 void

@@ -35,12 +35,12 @@ public:
 
   UpdateChecker &setRetrieveReleasesInfo(bool enable);
 
-signals:
+Q_SIGNALS:
   void checkStarted();
   void checkFinished(mtx::gui::UpdateCheckStatus status, mtx_release_version_t release);
   void releaseInformationRetrieved(std::shared_ptr<pugi::xml_document> releasesInfo);
 
-public slots:
+public Q_SLOTS:
   void handleDownloadedContent(quint64 token, QByteArray const &content);
   void start();
 

@@ -95,8 +95,8 @@ InfoJob::infoStarted() {
   setStatus(Job::Running);
   setProgress(0);
 
-  emit lineRead(QY("Source file name: %1").arg(QDir::toNativeSeparators(p->config->m_sourceFileName)), InfoLine);
-  emit lineRead(QY("Destination file name: %1").arg(QDir::toNativeSeparators(p->config->m_destinationFileName)), InfoLine);
+  Q_EMIT lineRead(QY("Source file name: %1").arg(QDir::toNativeSeparators(p->config->m_sourceFileName)), InfoLine);
+  Q_EMIT lineRead(QY("Destination file name: %1").arg(QDir::toNativeSeparators(p->config->m_destinationFileName)), InfoLine);
 }
 
 void
@@ -119,7 +119,7 @@ InfoJob::updateProgress(int percentage,
 
 void
 InfoJob::showError(QString const &text) {
-  emit lineRead(text, ErrorLine);
+  Q_EMIT lineRead(text, ErrorLine);
 }
 
 QString

@@ -29,7 +29,7 @@ public:
   virtual bool validateValue() const override;
   virtual void copyValueToElement() override;
 
-public slots:
+public Q_SLOTS:
   virtual void setupPredefinedTrackNames();
 };
 

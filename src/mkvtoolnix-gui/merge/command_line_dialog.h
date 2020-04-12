@@ -23,7 +23,7 @@ public:
   explicit CommandLineDialog(QWidget *parent, QStringList const &options, QString const &title);
   ~CommandLineDialog();
 
-public slots:
+public Q_SLOTS:
   void onEscapeModeChanged(int index);
   void copyToClipboard();
 };

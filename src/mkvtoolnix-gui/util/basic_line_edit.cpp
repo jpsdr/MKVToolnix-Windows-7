@@ -69,7 +69,7 @@ BasicLineEdit::dropEvent(QDropEvent *event) {
     if (p->m_setTextToDroppedFileName && !fileNames.isEmpty())
       setText(fileNames[0]);
 
-    emit filesDropped(fileNames);
+    Q_EMIT filesDropped(fileNames);
 
     return;
   }
@@ -81,7 +81,7 @@ void
 BasicLineEdit::keyPressEvent(QKeyEvent *event) {
   if (   (event->modifiers() == Qt::ShiftModifier)
       && mtx::included_in(static_cast<Qt::Key>(event->key()), Qt::Key_Return, Qt::Key_Enter)) {
-    emit shiftReturnPressed();
+    Q_EMIT shiftReturnPressed();
     event->accept();
 
   } else

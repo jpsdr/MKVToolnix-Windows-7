@@ -67,10 +67,10 @@ public:
   virtual void addAttachment(KaxAttachedPtr const &attachment);
   virtual bool isClosingOrReloadingOkIfModified(ModifiedConfirmationMode mode);
 
-signals:
+Q_SIGNALS:
   void removeThisTab();
 
-public slots:
+public Q_SLOTS:
   virtual void showTreeContextMenu(QPoint const &pos);
   virtual void selectionChanged(QModelIndex const &current, QModelIndex const &previous);
   virtual void load();

@@ -28,10 +28,10 @@ public:
   Util::Settings::RunProgramConfigPtr config() const;
   QString validate() const;
 
-signals:
+Q_SIGNALS:
   void titleChanged();
 
-protected slots:
+protected Q_SLOTS:
   void typeChanged(int index);
 
   void selectVariableToAdd();

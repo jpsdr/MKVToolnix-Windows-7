@@ -26,7 +26,7 @@ public:
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
   virtual void dropEvent(QDropEvent *event) override;
 
-signals:
+Q_SIGNALS:
   void filesDropped(QStringList const &files);
 };
 

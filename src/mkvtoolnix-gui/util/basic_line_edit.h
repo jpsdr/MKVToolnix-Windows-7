@@ -31,7 +31,7 @@ public:
   BasicLineEdit &acceptDroppedFiles(bool enable);
   BasicLineEdit &setTextToDroppedFileName(bool enable);
 
-signals:
+Q_SIGNALS:
   void filesDropped(QStringList const &fileNames);
   void shiftReturnPressed();
 

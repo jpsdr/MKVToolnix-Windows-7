@@ -104,7 +104,7 @@ FileIdentificationWorker::identifyFiles() {
 
   qDebug() << "FileIdentificationWorker::identifyFiles: starting loop";
 
-  emit queueStarted();
+  Q_EMIT queueStarted();
 
   while (true) {
     QString fileName;
@@ -114,7 +114,7 @@ FileIdentificationWorker::identifyFiles() {
       if (p->m_toIdentify.isEmpty()) {
         qDebug() << "FileIdentificationWorker::identifyFiles: exiting loop (nothing left to do)";
 
-        emit queueFinished();
+        Q_EMIT queueFinished();
 
         return;
       }
@@ -124,7 +124,7 @@ FileIdentificationWorker::identifyFiles() {
       if (pack.m_fileNames.isEmpty()) {
         qDebug() << "FileIdentificationWorker::identifyFiles: pack finished, notifying";
 
-        emit filesIdentified(pack.m_identifiedFiles, pack.m_append, pack.m_sourceFileIdx);
+        Q_EMIT filesIdentified(pack.m_identifiedFiles, pack.m_append, pack.m_sourceFileIdx);
         p->m_toIdentify.removeFirst();
 
         continue;
@@ -154,7 +154,7 @@ FileIdentificationWorker::abortIdentification() {
 
   p->m_toIdentify.clear();
 
-  emit queueFinished();
+  Q_EMIT queueFinished();
 }
 
 bool
@@ -168,13 +168,13 @@ FileIdentificationWorker::handleFileThatShouldBeSelectedElsewhere(QString const 
   auto content = std::string{ file.read(1024).data() };
 
   if (std::regex_search(content, p->m_simpleChaptersRE) || std::regex_search(content, p->m_xmlChaptersRE))
-    emit identifiedAsXmlOrSimpleChapters(fileName);
+    Q_EMIT identifiedAsXmlOrSimpleChapters(fileName);
 
   else if (std::regex_search(content, p->m_xmlSegmentInfoRE))
-    emit identifiedAsXmlSegmentInfo(fileName);
+    Q_EMIT identifiedAsXmlSegmentInfo(fileName);
 
   else if (std::regex_search(content, p->m_xmlTagsRE))
-    emit identifiedAsXmlTags(fileName);
+    Q_EMIT identifiedAsXmlTags(fileName);
 
   else
     return false;
@@ -212,7 +212,7 @@ FileIdentificationWorker::handleIdentifiedPlaylist(SourceFilePtr const &sourceFi
   if (Util::Settings::AlwaysScan == policy)
     return scanPlaylists(files);
 
-  emit playlistScanDecisionNeeded(sourceFile, files);
+  Q_EMIT playlistScanDecisionNeeded(sourceFile, files);
 
   return Result::Wait;
 }
@@ -238,7 +238,7 @@ FileIdentificationWorker::scanPlaylists(QFileInfoList const &files) {
 
   p->m_abortPlaylistScan = false;
 
-  emit playlistScanStarted(numFiles);
+  Q_EMIT playlistScanStarted(numFiles);
 
   QList<SourceFilePtr> identifiedPlaylists;
   auto minimumPlaylistDuration = timestamp_c::s(Util::Settings::get().m_minimumPlaylistDuration);
@@ -256,16 +256,16 @@ FileIdentificationWorker::scanPlaylists(QFileInfoList const &files) {
     if (p->m_abortPlaylistScan) {
       qDebug() << "FileIdentificationWorker::scanPlaylists: scan aborted";
 
-      emit playlistScanFinished();
+      Q_EMIT playlistScanFinished();
 
       return Result::Continue;
     }
 
-    emit playlistScanProgressChanged(idx + 1);
+    Q_EMIT playlistScanProgressChanged(idx + 1);
   }
 
-  emit playlistScanProgressChanged(numFiles);
-  emit playlistScanFinished();
+  Q_EMIT playlistScanProgressChanged(numFiles);
+  Q_EMIT playlistScanFinished();
 
   if (identifiedPlaylists.isEmpty()) {
     qDebug() << "FileIdentificationWorker::scanPlaylists: scan finished, no files";
@@ -274,7 +274,7 @@ FileIdentificationWorker::scanPlaylists(QFileInfoList const &files) {
 
   qDebug() << "FileIdentificationWorker::scanPlaylists: scan finished with one or more files, potentially requiring user selection";
 
-  emit playlistSelectionNeeded(identifiedPlaylists);
+  Q_EMIT playlistSelectionNeeded(identifiedPlaylists);
 
   return Result::Wait;
 }
@@ -298,7 +298,7 @@ FileIdentificationWorker::identifyThisFile(QString const &fileName) {
   Util::FileIdentifier identifier{fileName};
   if (!identifier.identify()) {
     qDebug() << "FileIdentificationWorker::identifyThisFile: failed";
-    emit identificationFailed(identifier.errorTitle(), identifier.errorText());
+    Q_EMIT identificationFailed(identifier.errorTitle(), identifier.errorText());
     return Result::Wait;
   }
 

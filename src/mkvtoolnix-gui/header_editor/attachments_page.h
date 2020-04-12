@@ -36,10 +36,10 @@ public:
   virtual bool hasThisBeenModified() const override;
   virtual QString internalIdentifier() const override;
 
-signals:
+Q_SIGNALS:
   void filesDropped(QStringList const &fileNames);
 
-public slots:
+public Q_SLOTS:
   virtual void retranslateUi() override;
   virtual void rereadChildren(PageModel &model);
 

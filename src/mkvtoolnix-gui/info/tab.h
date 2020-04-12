@@ -33,11 +33,11 @@ public:
   void load(QString const &fileName);
   void save();
 
-signals:
+Q_SIGNALS:
   void removeThisTab();
   void titleChanged();
 
-public slots:
+public Q_SLOTS:
   void retranslateUi();
   void showError(const QString &message);
   void expandImportantElements();

@@ -111,10 +111,10 @@ public:
   int count() const;
   QRect tabRect(int index) const;
 
-signals:
+Q_SIGNALS:
   void currentChanged(int);
 
-public slots:
+public Q_SLOTS:
   void emitCurrentIndex();
 
 private:
@@ -154,14 +154,14 @@ public:
 
   FancyTabBar *tabBar();
 
-signals:
+Q_SIGNALS:
   void currentAboutToShow(int index);
   void currentChanged(int index);
 
-public slots:
+public Q_SLOTS:
   void setCurrentIndex(int index);
 
-private slots:
+private Q_SLOTS:
   void showWidget(int index);
 };
 

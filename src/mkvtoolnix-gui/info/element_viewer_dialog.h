@@ -38,7 +38,7 @@ public:
 
   void detachWindow();
 
-public slots:
+public Q_SLOTS:
   virtual int exec() override;
   virtual void retranslateUi();
   virtual void requestDetachingWindow();

@@ -211,7 +211,7 @@ PageModel::dropMimeData(QMimeData const *data,
 
   Util::requestAllItems(*this);
 
-  emit attachmentsReordered();
+  Q_EMIT attachmentsReordered();
 
   return result;
 }

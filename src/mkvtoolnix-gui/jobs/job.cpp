@@ -194,7 +194,7 @@ Job::setStatus(Status status) {
   if (oldStatus == Running)
     runProgramsAfterCompletion();
 
-  emit statusChanged(p->id, oldStatus, status);
+  Q_EMIT statusChanged(p->id, oldStatus, status);
 }
 
 bool
@@ -214,7 +214,7 @@ Job::setProgress(unsigned int progress) {
 
   p->progress = progress;
   p->modified = true;
-  emit progressChanged(p->id, p->progress);
+  Q_EMIT progressChanged(p->id, p->progress);
 }
 
 void
@@ -437,7 +437,7 @@ Job::acknowledgeErrors() {
 
 void
 Job::updateUnacknowledgedWarningsAndErrors() {
-  emit numUnacknowledgedWarningsOrErrorsChanged(p_func()->id, numUnacknowledgedWarnings(), numUnacknowledgedErrors());
+  Q_EMIT numUnacknowledgedWarningsOrErrorsChanged(p_func()->id, numUnacknowledgedWarnings(), numUnacknowledgedErrors());
 }
 
 int

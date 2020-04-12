@@ -35,7 +35,7 @@ public:
   virtual std::pair<QString, QString> nextPreviousWindowActionTexts() const override;
   virtual void openFile(QString const &fileName);
 
-public slots:
+public Q_SLOTS:
   virtual void retranslateUi();
 
   virtual void selectAndOpenFile();

@@ -39,7 +39,7 @@ public:
   virtual bool hasError() const;
   virtual void run();
 
-public slots:
+public Q_SLOTS:
   virtual void dataAvailable();
   virtual void onError();
 

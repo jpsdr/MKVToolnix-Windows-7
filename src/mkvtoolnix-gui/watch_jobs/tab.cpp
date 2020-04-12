@@ -46,7 +46,7 @@ class TabPrivate {
   bool m_forCurrentJob;
 
   // Only use this variable for determining whether or not to ignore
-  // certain signals.
+  // certain Q_SIGNALS.
   QObject const *m_currentlyConnectedJob;
 
   QAction *m_saveOutputAction, *m_clearOutputAction, *m_openFolderAction;
@@ -234,7 +234,7 @@ Tab::onStatusChanged(uint64_t id,
 
     // Check for the signalled status, not the current one, in order to
     // detect a change from "not running" to "running" only once, no
-    // matter which order the signals arrive in.
+    // matter which order the Q_SIGNALS arrive in.
     if (Jobs::Job::Running == newStatus)
       setInitialDisplay(*job);
 
@@ -456,7 +456,7 @@ Tab::clearOutput() {
   p->ui->remainingTimeCurrentJob->setText(Q("–"));
   p->ui->remainingTimeQueue->setText(Q("–"));
 
-  emit watchCurrentJobTabCleared();
+  Q_EMIT watchCurrentJobTabCleared();
 }
 
 void

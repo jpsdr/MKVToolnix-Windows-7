@@ -85,7 +85,7 @@ NetworkAccessManager::httpFinished() {
 
     qDebug() << "NetworkAccessManager::httpFinished: token" << token << "request done, read" << content.size();
 
-    emit downloadFinished(token, content);
+    Q_EMIT downloadFinished(token, content);
 
   } else
     qDebug() << "NetworkAccessManager::httpFinished: unknown reply?";

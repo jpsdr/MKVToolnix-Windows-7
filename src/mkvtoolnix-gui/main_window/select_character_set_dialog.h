@@ -30,10 +30,10 @@ public:
   void setUserData(QVariant const &data);
   QVariant const &userData() const;
 
-signals:
+Q_SIGNALS:
   void characterSetSelected(QString const &characterSet);
 
-public slots:
+public Q_SLOTS:
   virtual void updatePreview();
   virtual void emitResult();
   virtual void retranslateUi();

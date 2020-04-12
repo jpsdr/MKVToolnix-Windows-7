@@ -31,7 +31,7 @@ public:
   BasicTreeView &acceptDroppedFiles(bool enable);
   BasicTreeView &enterActivatesAllSelected(bool enable);
 
-signals:
+Q_SIGNALS:
   void filesDropped(QStringList const &fileNames, Qt::MouseButtons mouseButtons, Qt::KeyboardModifiers keyboardModifiers);
   void allSelectedActivated();
   void deletePressed();
@@ -39,7 +39,7 @@ signals:
   void ctrlUpPressed();
   void ctrlDownPressed();
 
-public slots:
+public Q_SLOTS:
   void toggleSelectionOfCurrentItem();
 
 protected:

@@ -54,13 +54,13 @@ public:
 
   void disableFrameInfo();
 
-public slots:
+public Q_SLOTS:
   virtual void runScan(ScanType type);
   virtual void scanStartOfFile();
   virtual void scanLevel1Elements();
   virtual void abort();
 
-signals:
+Q_SIGNALS:
   void elementInfoFound(int level, QString const &text, std::optional<int64_t> position, std::optional<int64_t> size, std::optional<int64_t> dataSize);
   void elementFound(int level, EbmlElement *e, bool readFully);
   void errorFound(const QString &message);

@@ -146,7 +146,7 @@ StyleHelper::setBaseColor(QColor const &newcolor) {
 
   if (color.isValid() && color != m_baseColor) {
     m_baseColor = color;
-    foreach (QWidget *w, QApplication::topLevelWidgets())
+    for (auto & w : QApplication::topLevelWidgets())
       w->update();
   }
 }

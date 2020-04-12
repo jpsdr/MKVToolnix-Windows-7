@@ -29,13 +29,13 @@ public:
 
   quint64 download(QUrl const &url);
 
-signals:
+Q_SIGNALS:
   void downloadFinished(quint64 token, QByteArray const &content);
 
-public slots:
+public Q_SLOTS:
   void httpFinished();
 
-protected slots:
+protected Q_SLOTS:
   void startDownload(quint64 token, QUrl const &url);
 
 protected:

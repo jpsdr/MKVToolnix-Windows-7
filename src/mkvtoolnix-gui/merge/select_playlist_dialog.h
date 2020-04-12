@@ -31,7 +31,7 @@ public:
 
   SourceFilePtr select();
 
-protected slots:
+protected Q_SLOTS:
   void onScannedFileSelected(QTreeWidgetItem *current, QTreeWidgetItem *);
 
 protected:

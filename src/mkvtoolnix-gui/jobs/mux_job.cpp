@@ -106,23 +106,23 @@ MuxJob::processLine(QString const &rawLine) {
 
   if (line.startsWith("#GUI#warning ")) {
     line.replace(QRegularExpression{"^#GUI#warning *"}, "");
-    emit lineRead(line, WarningLine);
+    Q_EMIT lineRead(line, WarningLine);
     return;
   }
 
   if (line.startsWith("#GUI#error ")) {
     line.replace(QRegularExpression{"^#GUI#error *"}, "");
-    emit lineRead(line, ErrorLine);
+    Q_EMIT lineRead(line, ErrorLine);
     return;
   }
 
   if (line.startsWith("#GUI#begin_scanning_playlists")) {
-    emit startedScanningPlaylists();
+    Q_EMIT startedScanningPlaylists();
     return;
   }
 
   if (line.startsWith("#GUI#end_scanning_playlists")) {
-    emit finishedScanningPlaylists();
+    Q_EMIT finishedScanningPlaylists();
     return;
   }
 
@@ -132,7 +132,7 @@ MuxJob::processLine(QString const &rawLine) {
     return;
   }
 
-  emit lineRead(line, InfoLine);
+  Q_EMIT lineRead(line, InfoLine);
 }
 
 void
@@ -167,7 +167,7 @@ MuxJob::processFinished(int exitCode,
 void
 MuxJob::processError(QProcess::ProcessError error) {
   if (QProcess::FailedToStart == error)
-    emit lineRead(QY("The mkvmerge executable was not found."), ErrorLine);
+    Q_EMIT lineRead(QY("The mkvmerge executable was not found."), ErrorLine);
 
   setStatus(Job::Failed);
 }

@@ -292,7 +292,7 @@ Model::onStatusChanged(uint64_t id,
     m_queueStartTime = QDateTime::currentDateTime();
     m_queueNumDone   = 0;
 
-    emit queueStatusChanged(QueueStatus::Running);
+    Q_EMIT queueStatusChanged(QueueStatus::Running);
 
   }
 
@@ -385,7 +385,7 @@ Model::updateNumUnacknowledgedWarningsOrErrors() {
     numErrors   += job->numUnacknowledgedErrors();
   }
 
-  emit numUnacknowledgedWarningsOrErrorsChanged(numWarnings, numErrors);
+  Q_EMIT numUnacknowledgedWarningsOrErrorsChanged(numWarnings, numErrors);
 }
 
 void
@@ -426,7 +426,7 @@ Model::startNextAutoJob() {
   auto wasRunning = m_running;
   m_running       = false;
   if (wasRunning)
-    emit queueStatusChanged(QueueStatus::Stopped);
+    Q_EMIT queueStatusChanged(QueueStatus::Stopped);
 }
 
 void
@@ -454,7 +454,7 @@ Model::stop() {
   auto wasRunning = m_running;
   m_running       = false;
   if (wasRunning)
-    emit queueStatusChanged(QueueStatus::Stopped);
+    Q_EMIT queueStatusChanged(QueueStatus::Stopped);
 }
 
 void
@@ -466,7 +466,7 @@ Model::resetTotalProgress() {
 
   m_queueNumDone = 0;
 
-  emit progressChanged(0, 0);
+  Q_EMIT progressChanged(0, 0);
 }
 
 void
@@ -496,7 +496,7 @@ Model::updateProgress() {
 
   qDebug() << "updateProgress: total" << totalProgress << "numDone" << m_queueNumDone << "numRunning" << numRunning << "numPendingAuto" << numPendingAuto << "runningProgress" << runningProgress;
 
-  emit progressChanged(progress, totalProgress);
+  Q_EMIT progressChanged(progress, totalProgress);
 }
 
 void
@@ -510,7 +510,7 @@ Model::updateJobStats() {
     ++numJobs[idx];
   }
 
-  emit jobStatsChanged(numJobs[ Job::PendingAuto ], numJobs[ Job::PendingManual ], numJobs[ Job::Running ], numJobs[ Job::Disabled ]);
+  Q_EMIT jobStatsChanged(numJobs[ Job::PendingAuto ], numJobs[ Job::PendingManual ], numJobs[ Job::Running ], numJobs[ Job::Disabled ]);
 }
 
 void

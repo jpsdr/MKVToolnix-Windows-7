@@ -61,7 +61,7 @@ KaxInfo::~KaxInfo() {
 
 void
 KaxInfo::ui_show_error(std::string const &error) {
-  emit errorFound(Q(error));
+  Q_EMIT errorFound(Q(error));
 }
 
 void
@@ -71,7 +71,7 @@ KaxInfo::ui_show_element_info(int level,
                               std::optional<int64_t> size,
                               std::optional<int64_t> dataSize) {
   if (p_func()->m_use_gui)
-    emit elementInfoFound(level, Q(text), position, size, dataSize);
+    Q_EMIT elementInfoFound(level, Q(text), position, size, dataSize);
 
   else
     kax_info_c::ui_show_element_info(level, text, position, size, dataSize);
@@ -85,7 +85,7 @@ KaxInfo::ui_show_element(EbmlElement &e) {
     if ((p->m_scanType == ScanType::StartOfFile) && Is<KaxCluster>(e))
       p->m_firstLevel1ElementPosition = e.GetElementPosition();
     else
-      emit elementFound(p->m_level, &e, p->m_scanType == ScanType::StartOfFile);
+      Q_EMIT elementFound(p->m_level, &e, p->m_scanType == ScanType::StartOfFile);
 
   } else
     kax_info_c::ui_show_element(e);
@@ -94,7 +94,7 @@ KaxInfo::ui_show_element(EbmlElement &e) {
 void
 KaxInfo::ui_show_progress(int percentage,
                           std::string const &text) {
-  emit progressChanged(percentage, Q(text));
+  Q_EMIT progressChanged(percentage, Q(text));
 }
 
 void
@@ -126,22 +126,22 @@ KaxInfo::scanStartOfFile() {
 
   auto p = p_func();
 
-  emit startOfFileScanStarted();
+  Q_EMIT startOfFileScanStarted();
 
   p->m_firstLevel1ElementPosition.reset();
   p->m_abort  = false;
   auto result = p->m_in ? process_file() : open_and_process_file(p->m_source_file_name);
 
-  emit startOfFileScanFinished(result);
+  Q_EMIT startOfFileScanFinished(result);
 }
 
 void
 KaxInfo::scanLevel1Elements() {
-  emit level1ElementsScanStarted();
+  Q_EMIT level1ElementsScanStarted();
 
   auto result = doScanLevel1Elements();
 
-  emit level1ElementsScanFinished(result);
+  Q_EMIT level1ElementsScanFinished(result);
 }
 
 mtx::kax_info_c::result_e

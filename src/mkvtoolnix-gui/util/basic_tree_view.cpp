@@ -72,7 +72,7 @@ BasicTreeView::dropEvent(QDropEvent *event) {
   auto p = p_func();
 
   if (p->m_acceptDroppedFiles && p->m_filesDDHandler.handle(event, true)) {
-    emit filesDropped(p->m_filesDDHandler.fileNames(), event->mouseButtons(), event->keyboardModifiers());
+    Q_EMIT filesDropped(p->m_filesDDHandler.fileNames(), event->mouseButtons(), event->keyboardModifiers());
     return;
   }
 
@@ -94,24 +94,24 @@ BasicTreeView::keyPressEvent(QKeyEvent *event) {
   if (   p->m_enterActivatesAllSelected
       && (event->modifiers() == Qt::NoModifier)
       && mtx::included_in(static_cast<Qt::Key>(event->key()), Qt::Key_Return, Qt::Key_Enter)) {
-    emit allSelectedActivated();
+    Q_EMIT allSelectedActivated();
     event->accept();
 
   } else if (   (event->modifiers() == Qt::NoModifier)
              && mtx::included_in(static_cast<Qt::Key>(event->key()), Qt::Key_Backspace, Qt::Key_Delete))
-    emit deletePressed();
+    Q_EMIT deletePressed();
 
   else if (   (event->modifiers() == Qt::NoModifier)
            && (event->key()       == Qt::Key_Insert))
-    emit insertPressed();
+    Q_EMIT insertPressed();
 
   else if (   (event->modifiers() == Qt::ControlModifier)
            && (event->key()       == Qt::Key_Up))
-    emit ctrlUpPressed();
+    Q_EMIT ctrlUpPressed();
 
   else if (   (event->modifiers() == Qt::ControlModifier)
            && (event->key()       == Qt::Key_Down))
-    emit ctrlDownPressed();
+    Q_EMIT ctrlDownPressed();
 
   else if (   (event->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier))
            && (event->key()       == Qt::Key_Space))

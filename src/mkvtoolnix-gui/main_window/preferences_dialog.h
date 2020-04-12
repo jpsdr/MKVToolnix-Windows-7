@@ -57,7 +57,7 @@ public:
   bool disableToolTipsChanged() const;
   bool probeRangePercentageChanged() const;
 
-public slots:
+public Q_SLOTS:
   void editDefaultAdditionalCommandLineOptions();
   void enableOutputFileNameControls();
   void browseMediaInfoExe();

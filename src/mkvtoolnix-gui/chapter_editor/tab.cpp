@@ -220,7 +220,7 @@ Tab::retranslateUi() {
   p->chapterModel->retranslateUi();
   p->nameModel->retranslateUi();
 
-  emit titleChanged();
+  Q_EMIT titleChanged();
 }
 
 void
@@ -370,12 +370,12 @@ Tab::loadFromMatroskaFile(QString const &fileName,
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(text).exec();
 
     if (!append)
-      emit removeThisTab();
+      Q_EMIT removeThisTab();
     return {};
   }
 
   if (!append && !readFileEndTimestampForMatroska(*analyzer)) {
-    emit removeThisTab();
+    Q_EMIT removeThisTab();
     return {};
   }
 
@@ -393,7 +393,7 @@ Tab::loadFromMatroskaFile(QString const &fileName,
   if (!chapters) {
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName)).exec();
     if (!append)
-      emit removeThisTab();
+      Q_EMIT removeThisTab();
     return {};
   }
 
@@ -461,14 +461,14 @@ Tab::loadFromChapterFile(QString const &fileName,
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(message).exec();
 
     if (!append)
-      emit removeThisTab();
+      Q_EMIT removeThisTab();
 
   } else if (format != mtx::chapters::format_e::xml) {
     auto result = checkSimpleFormatForBomAndNonAscii(chapters, fileName, append);
 
     if (!append) {
       p->fileName.clear();
-      emit titleChanged();
+      Q_EMIT titleChanged();
     }
 
     return result;
@@ -515,7 +515,7 @@ Tab::reloadOrAppendSimpleChaptersWithCharacterSet(QString const &characterSet,
 
   Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("Error message from the parser: %1").arg(error)).exec();
 
-  emit removeThisTab();
+  Q_EMIT removeThisTab();
 }
 
 bool
@@ -564,11 +564,11 @@ Tab::loadFromMplsFile(QString const &fileName,
 
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(message).exec();
     if (!append)
-      emit removeThisTab();
+      Q_EMIT removeThisTab();
 
   } else if (!append) {
     p->fileName.clear();
-    emit titleChanged();
+    Q_EMIT titleChanged();
   }
 
   return { chapters, false };
@@ -680,7 +680,7 @@ Tab::saveAsImpl(bool requireNewFileName,
     settings.save();
 
     updateFileNameDisplay();
-    emit titleChanged();
+    Q_EMIT titleChanged();
   }
 
   MainWindow::get()->setStatusBarMessage(QY("The file has been saved successfully."));
@@ -1226,7 +1226,7 @@ Tab::addEdition(bool before) {
 
   p->chapterModel->insertEdition(row, edition);
 
-  emit numberOfEntriesChanged();
+  Q_EMIT numberOfEntriesChanged();
 
   return p->chapterModel->index(row, 0);
 }
@@ -1292,7 +1292,7 @@ Tab::addChapter(bool before) {
 
   p->chapterModel->insertChapter(row, chapter, selectedIdx.parent());
 
-  emit numberOfEntriesChanged();
+  Q_EMIT numberOfEntriesChanged();
 
   return p->chapterModel->index(row, 0, selectedIdx.parent());
 }
@@ -1312,7 +1312,7 @@ Tab::addSubChapter() {
   p->chapterModel->appendChapter(chapter, selectedIdx);
   expandCollapseAll(true, selectedIdx);
 
-  emit numberOfEntriesChanged();
+  Q_EMIT numberOfEntriesChanged();
 }
 
 void
@@ -1320,7 +1320,7 @@ Tab::removeElement() {
   auto p = p_func();
 
   p->chapterModel->removeTree(Util::selectedRowIdx(p->ui->elements));
-  emit numberOfEntriesChanged();
+  Q_EMIT numberOfEntriesChanged();
 }
 
 void
@@ -1623,7 +1623,7 @@ Tab::duplicateElement() {
   if (newElementIdx.isValid())
     expandCollapseAll(true, newElementIdx);
 
-  emit numberOfEntriesChanged();
+  Q_EMIT numberOfEntriesChanged();
 }
 
 void
@@ -1699,7 +1699,7 @@ Tab::generateSubChapters() {
 
   expandCollapseAll(true, selectedIdx);
 
-  emit numberOfEntriesChanged();
+  Q_EMIT numberOfEntriesChanged();
 }
 
 bool
@@ -2046,7 +2046,7 @@ Tab::focusSameControlInNextChapterElement() {
 
 void
 Tab::closeTab() {
-  emit removeThisTab();
+  Q_EMIT removeThisTab();
 }
 
 void

@@ -25,7 +25,7 @@ public:
 
   virtual void add(Runnable *work);
 
-public slots:
+public Q_SLOTS:
   virtual void run();
   virtual void abort();
 

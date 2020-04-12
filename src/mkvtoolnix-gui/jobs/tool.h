@@ -49,7 +49,7 @@ public:
   bool checkIfOverwritingExistingFileIsOK(QString const &existingDestination);
   bool checkIfOverwritingExistingJobIsOK(QString const &newDestination, bool isMuxJobAndSplittingEnabled = false);
 
-public slots:
+public Q_SLOTS:
   virtual void retranslateUi();
   void onStartAutomatically();
   void onStartManually();

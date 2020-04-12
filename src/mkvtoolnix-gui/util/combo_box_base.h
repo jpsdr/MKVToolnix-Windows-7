@@ -37,7 +37,7 @@ public:
   virtual ComboBoxBase &reInitializeIfNecessary();
   virtual bool onlyShowOftenUsed() const;
 
-public slots:
+public Q_SLOTS:
   virtual void reInitialize();
 
 protected:

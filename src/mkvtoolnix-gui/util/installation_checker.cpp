@@ -61,9 +61,9 @@ InstallationChecker::runChecks() {
 #endif  // SYS_WINDOWS
 
   if (!m_problems.isEmpty())
-    emit problemsFound(m_problems);
+    Q_EMIT problemsFound(m_problems);
 
-  emit finished();
+  Q_EMIT finished();
 }
 
 void

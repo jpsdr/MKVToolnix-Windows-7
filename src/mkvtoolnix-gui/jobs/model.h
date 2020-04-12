@@ -83,14 +83,14 @@ public:
 
   QDateTime queueStartTime() const;
 
-signals:
+Q_SIGNALS:
   void progressChanged(int progress, int totalProgress);
   void jobStatsChanged(int numPendingAutomatic, int numPendingManual, int numRunning, int numOther);
   void numUnacknowledgedWarningsOrErrorsChanged(int numWarnings, int numErrors);
 
   void queueStatusChanged(QueueStatus status);
 
-public slots:
+public Q_SLOTS:
   void onStatusChanged(uint64_t id, mtx::gui::Jobs::Job::Status oldStatus, mtx::gui::Jobs::Job::Status newStatus);
   void onProgressChanged(uint64_t id, unsigned int progress);
   void onNumUnacknowledgedWarningsOrErrorsChanged(uint64_t id, int numWarnings, int numErrors);

@@ -43,7 +43,7 @@ public:
   QString additionalOptions() const;
   bool saveAsDefault() const;
 
-public slots:
+public Q_SLOTS:
   void enableOkButton();
 
 private:

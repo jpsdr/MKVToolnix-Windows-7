@@ -157,14 +157,14 @@ Tab::load(QString const &fileName) {
 
     MainWindow::get()->setStatusBarMessage(QY("The configuration has been loaded."));
 
-    emit titleChanged();
+    Q_EMIT titleChanged();
 
   } catch (InvalidSettingsX &) {
     m_config.reset();
 
     Util::MessageBox::critical(this)->title(QY("Error loading settings file")).text(QY("The settings file '%1' contains invalid settings and was not loaded.").arg(fileName)).exec();
 
-    emit removeThisTab();
+    Q_EMIT removeThisTab();
   }
 }
 
@@ -177,7 +177,7 @@ Tab::cloneConfig(MuxConfig const &config) {
   m_config.m_configFileName.clear();
   m_savedState.clear();
 
-  emit titleChanged();
+  Q_EMIT titleChanged();
 }
 
 void
@@ -223,7 +223,7 @@ Tab::onSaveConfigAs() {
 
   m_savedState = currentState();
 
-  emit titleChanged();
+  Q_EMIT titleChanged();
 
   MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
 }
@@ -331,7 +331,7 @@ Tab::retranslateUi() {
   retranslateOutputUI();
   retranslateAttachmentsUI();
 
-  emit titleChanged();
+  Q_EMIT titleChanged();
 }
 
 bool
@@ -503,7 +503,7 @@ Tab::handleClearingMergeSettings(Util::Settings::ClearMergeSettingsAction action
 
 void
 Tab::signalRemovalOfThisTab() {
-  emit removeThisTab();
+  Q_EMIT removeThisTab();
 }
 
 QString

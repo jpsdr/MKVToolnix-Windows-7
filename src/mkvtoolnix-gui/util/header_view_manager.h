@@ -30,7 +30,7 @@ public:
 
   HeaderViewManager &setDefaultSizes(QHash<QString, int> const &defaultSizes);
 
-public slots:
+public Q_SLOTS:
   void saveState();
   void restoreState();
 

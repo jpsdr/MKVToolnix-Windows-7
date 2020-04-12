@@ -39,7 +39,7 @@ public:
 
   virtual QString defaultAudioFileName() const;
 
-public slots:
+public Q_SLOTS:
   virtual void executeActionsAfterJobFinishes(Job const &job);
   virtual void executeActionsAfterQueueFinishes(Jobs::QueueStatus status);
 

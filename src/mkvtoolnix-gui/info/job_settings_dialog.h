@@ -29,7 +29,7 @@ public:
 
   JobSettings settings();
 
-public slots:
+public Q_SLOTS:
   virtual void accept() override;
   void enableOkButton(QString const &fileName);
 };

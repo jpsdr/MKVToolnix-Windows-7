@@ -219,7 +219,7 @@ FancyTabBar::tabRect(int index)
 // mode itself
 void
 FancyTabBar::emitCurrentIndex() {
-  emit currentChanged(m_currentIndex);
+  Q_EMIT currentChanged(m_currentIndex);
 }
 
 void
@@ -343,7 +343,7 @@ FancyTabBar::setCurrentIndex(int index) {
   if (isTabEnabled(index)) {
     m_currentIndex = index;
     update();
-    emit currentChanged(m_currentIndex);
+    Q_EMIT currentChanged(m_currentIndex);
   }
 }
 
@@ -578,9 +578,9 @@ FancyTabWidget::setCurrentIndex(int index) {
 
 void
 FancyTabWidget::showWidget(int index) {
-  emit currentAboutToShow(index);
+  Q_EMIT currentAboutToShow(index);
   m_modesStack->setCurrentIndex(index);
-  emit currentChanged(index);
+  Q_EMIT currentChanged(index);
 }
 
 void

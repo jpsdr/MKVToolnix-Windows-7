@@ -44,11 +44,11 @@ public:
   bool isSaveOutputEnabled() const;
   bool isCurrentJobTab() const;
 
-signals:
+Q_SIGNALS:
   void abortJob();
   void watchCurrentJobTabCleared();
 
-public slots:
+public Q_SLOTS:
   void onStatusChanged(uint64_t id, mtx::gui::Jobs::Job::Status oldStatus, mtx::gui::Jobs::Job::Status newStatus);
   void onJobProgressChanged(uint64_t id, unsigned int progress);
   void onQueueProgressChanged(int progress, int totalProgress);
