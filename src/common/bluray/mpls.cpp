@@ -62,12 +62,12 @@ play_item_t::dump()
                      "      connection_condition:    {2}\n"
                      "      is_multi_angle / stc_id: {3} / {4}\n"
                      "      in_time / out_time:      {5} / {6}\n"
-                     "      relative_in_time:        {7}\n",
+                     "      relative_in_time / end:  {7} / {8}\n",
                      clip_id, codec_id,
                      connection_condition,
                      is_multi_angle, stc_id,
                      in_time, out_time,
-                     relative_in_time));
+                     relative_in_time, relative_in_time + out_time - in_time));
 
   stn.dump();
 }
