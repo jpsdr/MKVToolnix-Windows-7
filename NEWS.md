@@ -11,6 +11,10 @@
   table (`ctts` atom) present, mkvmerge did not parse the `hevcC` structure
   correctly in certain cases, causing no video frames to be output at all or
   the output not being playable. This fixes #2782, a bug introduced in v45.
+* mkvmerge: MPLS handling/MPEG TS reader: timestamp restrictions as given in
+  an MPLS file were only honored for the first play item, not for subsequent
+  play items. For those play items the whole referenced file was always
+  copied. Fixes #2789.
 
 
 # Version 45.0.0 "Heaven in Pennies" 2020-04-04

@@ -382,8 +382,8 @@ read_file_headers() {
     try {
       file->reader->m_appending = file->appending;
       file->reader->set_track_info(*file->ti);
-      file->reader->read_headers();
       file->reader->set_timestamp_restrictions(file->restricted_timestamp_min, file->restricted_timestamp_max);
+      file->reader->read_headers();
 
       // Re-calculate file size because the reader might switch to a
       // multi I/O reader in read_headers().

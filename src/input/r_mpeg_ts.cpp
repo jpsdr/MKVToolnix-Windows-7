@@ -1151,6 +1151,9 @@ void
 reader_c::read_headers() {
   m_files.emplace_back(std::make_shared<file_t>(m_in));
 
+  m_files[0]->m_timestamp_restriction_min = m_restricted_timestamps_min;
+  m_files[0]->m_timestamp_restriction_max = m_restricted_timestamps_max;
+
   auto mpls_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input());
   if (mpls_in) {
     m_mpls_chapters = mpls_in->get_chapters();
