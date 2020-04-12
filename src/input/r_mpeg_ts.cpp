@@ -2563,6 +2563,8 @@ reader_c::add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in) {
 
     file->m_timestamp_restriction_min = item.in_time;
     file->m_timestamp_restriction_max = item.out_time;
+
+    mxdebug_if(m_debug_mpls, fmt::format("add_external_files_from_mpls: main restrictions for {0} min {1} max {2}\n", mpls_in.get_file_name(), item.in_time, item.out_time));
   }
 
   if (playlist.sub_paths.empty())
@@ -2591,6 +2593,9 @@ reader_c::add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in) {
       file->m_timestamp_mpls_sync       = item.sync_start_pts_of_playitem;
 
       m_files.push_back(file);
+
+      mxdebug_if(m_debug_mpls, fmt::format("add_external_files_from_mpls: sub_path file num {0} name {1} ts_rec_min {2} ts_rec_max {3} ts_mpls_sync {4}\n",
+                                           m_files.size() - 1, m2ts.string(), file->m_timestamp_restriction_min, file->m_timestamp_restriction_max, file->m_timestamp_mpls_sync));
 
     } catch (mtx::mm_io::exception &ex) {
       mxdebug_if(m_debug_mpls, fmt::format("add_external_files_from_mpls: could not open {0}: {1}\n", m2ts.string(), ex.error()));
