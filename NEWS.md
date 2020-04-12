@@ -7,6 +7,10 @@
 * MKVToolNix GUI: macOS: changed the default of the "elide tab header labels"
   feature introduced in v45 from "no" to "yes" to mirror how versions before
   v45 behaved on macOS.
+* mkvmerge: MP4 reader: when reading H.265/HEVC tracks without a frame offset
+  table (`ctts` atom) present, mkvmerge did not parse the `hevcC` structure
+  correctly in certain cases, causing no video frames to be output at all or
+  the output not being playable. This fixes #2782, a bug introduced in v45.
 
 
 # Version 45.0.0 "Heaven in Pennies" 2020-04-04

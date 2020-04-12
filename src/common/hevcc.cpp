@@ -434,7 +434,7 @@ hevcc_c::unpack(memory_cptr const &mem) {
     // now skip over initial data and read in parameter sets, use byte reader
     byte_reader.skip(23);
 
-    while (num_arrays > 1) {
+    while (num_arrays > 0) {
       auto type           = byte_reader.read_uint8() & 0x3F;
       auto nal_unit_count = byte_reader.read_uint16_be();
       auto &list          = type == HEVC_NALU_TYPE_VIDEO_PARAM ? hevcc.m_vps_list
