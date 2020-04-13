@@ -14,7 +14,10 @@
 * mkvmerge: MPLS handling/MPEG TS reader: timestamp restrictions as given in
   an MPLS file were only honored for the first play item, not for subsequent
   play items. For those play items the whole referenced file was always
-  copied. Fixes #2789.
+  copied. Part of the fix of #2789.
+* mkvmerge: MPLS handling/MPEG TS reader: under certain circumstances mkvmerge
+  copied one frame too many before switching to the next play item. Part of
+  the fix of #2789.
 
 
 # Version 45.0.0 "Heaven in Pennies" 2020-04-04

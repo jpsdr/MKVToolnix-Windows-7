@@ -138,8 +138,8 @@ track_c::send_to_packetizer() {
   auto const &max         = f.m_timestamp_restriction_max;
   auto use_packet         = ptzr != -1;
 
-  if (   (min.valid() && (timestamp_to_check < min))
-      || (max.valid() && (timestamp_to_check > max)))
+  if (   (min.valid() && (timestamp_to_check <  min))
+      || (max.valid() && (timestamp_to_check >= max)))
     use_packet = false;
 
   if (timestamp_to_use.valid() && f.m_global_timestamp_offset.valid())
