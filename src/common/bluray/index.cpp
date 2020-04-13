@@ -58,7 +58,7 @@ top_menu_t::dump()
                      :                          "reserved"));
 
   if (object_type == 0b01)
-    mxinfo(fmt::format("    mobj_id_ref:              0x{1:04x}\n", mobj_id_ref));
+    mxinfo(fmt::format("    mobj_id_ref:              0x{0:04x}\n", mobj_id_ref));
 
   else
     mxinfo(fmt::format("    bjdo_file_name:           {0}\n", bdjo_file_name));
