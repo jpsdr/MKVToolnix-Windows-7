@@ -598,8 +598,9 @@ cluster_helper_c::add_to_cues_maybe(packet_cptr &pack) {
   // ... or if the user requested entries for all frames ...
   add = add || (CUE_STRATEGY_ALL == strategy);
 
-  // ... or if this is an audio track, there is no video track and the
-  // last cue entry was created more than 2s ago.
+  // ... or if this is a key frame for an audio track, there is no
+  // video track and the last cue entry was created more than 0.5s
+  // ago.
   add = add || (   (CUE_STRATEGY_SPARSE == strategy)
                 && (track_audio         == source.get_track_type())
                 && !g_video_packetizer
