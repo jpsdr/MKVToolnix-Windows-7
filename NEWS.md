@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: for audio-only files mkvmerge will now write a cue entry every
+  500ms instead of every 2s.
+
 ## Bug fixes
 
 * GUI: fixed a crash that happened when closing the preferences after having

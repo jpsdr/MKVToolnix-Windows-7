@@ -604,7 +604,7 @@ cluster_helper_c::add_to_cues_maybe(packet_cptr &pack) {
                 && (track_audio         == source.get_track_type())
                 && !g_video_packetizer
                 && (   (0 > source.get_last_cue_timestamp())
-                    || ((pack->assigned_timestamp - source.get_last_cue_timestamp()) >= 2000000000)));
+                    || ((pack->assigned_timestamp - source.get_last_cue_timestamp()) >= 500'000'000)));
 
   if (!add)
     return false;
