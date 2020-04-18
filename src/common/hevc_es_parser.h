@@ -113,6 +113,10 @@ public:
     m_keep_ar_info = keep;
   }
 
+  void set_next_i_slice_is_key_frame() {
+    m_recovery_point_valid = true;
+  }
+
   void add_bytes(unsigned char *buf, size_t size);
   void add_bytes(memory_cptr &buf) {
     add_bytes(buf->get_buffer(), buf->get_size());

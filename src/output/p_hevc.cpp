@@ -222,6 +222,9 @@ void
 hevc_video_packetizer_c::process_rederiving_timestamp_order(packet_t &packet) {
   auto &p = *p_func();
 
+  if (packet.is_key_frame() && (VFT_PFRAMEAUTOMATIC != packet.bref))
+    p.parser->set_next_i_slice_is_key_frame();
+
   if (packet.has_timestamp())
     p.parser->add_timestamp(packet.timestamp);
 
