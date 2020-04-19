@@ -6,6 +6,13 @@ describe "mkvmerge / various test cases for segfaults collected in issue 1780 pa
 dir = "data/segfaults-assertions/issue-1780"
 
 # "MP4 reader: fix access beyond end of vector"
+
+exit_codes = {
+  'explorer:id:000097,sig:06,src:000005,op:flip1,pos:13730'         => :warning,
+  'explorer:id:000261,sig:11,src:000013,op:arith8,pos:13647,val:+7' => :warning,
+  'explorer:id:000323,sig:06,src:000314,op:flip1,pos:13731'         => :warning,
+}
+
 %w{
 explorer:id:000011,sig:11,src:000001,op:flip1,pos:42
 explorer:id:000012,sig:11,src:000001,op:flip1,pos:13438
@@ -28,7 +35,7 @@ explorer:id:000354,sig:11,src:000426,op:flip1,pos:13825
 explorer:id:000357,sig:11,src:000426,op:flip2,pos:13825
 explorer:id:000358,sig:06,src:000426,op:flip2,pos:13826
 }.each do |file|
-  test_merge "#{dir}/#{file}"
+  test_merge "#{dir}/#{file}", :exit_code => exit_codes[file] || :ok
 end
 
 # The following files cause uninitialized memory to be written and
@@ -36,5 +43,5 @@ end
 %w{
 explorer:id:000323,sig:06,src:000314,op:flip1,pos:13731
 }.each do |file|
-  test_merge "#{dir}/#{file}", :result_type => :exit_code_string
+  test_merge "#{dir}/#{file}", :result_type => :exit_code_string, :exit_code => exit_codes[file] || :ok
 end

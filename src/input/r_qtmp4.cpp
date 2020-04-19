@@ -3066,17 +3066,16 @@ qtmp4_demuxer_c::parse_video_header_priv_atoms(uint64_t atom_size,
       mxdebug_if(m_debug_headers, fmt::format("{0}Video private data size: {1}, type: '{2}'\n", space((level + 1) * 2 + 1), atom.size, atom.fourcc));
 
       if (mtx::included_in(atom.fourcc, "esds", "avcC", "hvcC", "av1C")) {
-        if (priv.empty()) {
-          priv.emplace_back(memory_c::alloc(atom.size - atom.hsize));
+        auto atom_data = memory_c::alloc(atom.size - atom.hsize);
 
-          if (mio.read(priv[0], priv[0]->get_size()) != priv[0]->get_size()) {
-            priv.clear();
-            return;
-          }
-        }
+        if (mio.read(atom_data->get_buffer(), atom_data->get_size()) != atom_data->get_size())
+          return;
+
+        if (priv.empty())
+          priv.emplace_back(atom_data);
 
         if ((atom.fourcc == "esds") && !esds_parsed) {
-          mm_mem_io_c memio(priv[0]->get_buffer(), priv[0]->get_size());
+          mm_mem_io_c memio{*atom_data};
           esds_parsed = parse_esds_atom(memio, level + 1);
         }
 
