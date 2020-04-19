@@ -26,6 +26,8 @@
 * mkvmerge: for audio-only files cues will only be created for I frames
   (important for e.g. TrueHD where decoding can only start on a sync
   frame). Fixes #2790.
+* mkvmerge: MP4 reader: fixed a crash that could potentially happen while
+  trying to identify H.265/HEVC tracks.
 
 
 # Version 45.0.0 "Heaven in Pennies" 2020-04-04

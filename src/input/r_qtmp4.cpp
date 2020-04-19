@@ -3333,7 +3333,7 @@ qtmp4_demuxer_c::derive_track_params_from_vorbis_private_data() {
 void
 qtmp4_demuxer_c::check_for_hevc_video_annex_b_bitstream() {
   auto buf = read_first_bytes(4);
-  if (buf->get_size() < 4)
+  if (!buf || (buf->get_size() < 4))
     return;
 
   auto value = get_uint32_be(buf->get_buffer());
