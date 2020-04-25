@@ -7,6 +7,9 @@
 * MKVToolNix GUI: job actions: split up the option "execute when the job
   finishes successfully or with warnings" into two separate options: "…when
   finishes successfully" and "…when exits with warnings". Implements #2798.
+* mkvmerge: when splitting, the placeholder `%c` can be used in the
+  destination file name. It'll be replaced by the name of the first chapter in
+  the file. Implements #2791.
 
 ## Bug fixes
 

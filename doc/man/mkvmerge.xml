@@ -864,6 +864,11 @@
        extension: '<code>-o output.mkv</code>' would result in '<code>output-001.mkv</code>' and so on. If there's no extension
        then '<code>-%03d</code>' will be appended to the name.
       </para>
+
+      <para>
+       Another possible pattern is '<code>%c</code>' which will be replaced by the name of the first chapter in the file. Note that when
+       '<code>%c</code>' is present, the pattern '<code>-%03d</code>' will not be added automatically.
+      </para>
      </listitem>
     </varlistentry>
 

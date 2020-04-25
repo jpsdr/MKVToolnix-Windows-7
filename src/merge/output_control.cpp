@@ -1171,6 +1171,37 @@ check_track_id_validity() {
   }
 }
 
+static std::string
+get_first_chapter_name_in_this_file() {
+  if (!s_chapters_in_this_file)
+    return {};
+
+  std::optional<std::pair<int64_t, std::string>> first_chapter;
+
+  for (auto const &chapters_child : *s_chapters_in_this_file) {
+    if (!dynamic_cast<KaxEditionEntry *>(chapters_child))
+      continue;
+
+    for (auto const &edition_child : *static_cast<KaxEditionEntry *>(chapters_child)) {
+      if (!dynamic_cast<KaxChapterAtom *>(edition_child))
+        continue;
+
+      auto &chapter_atom     = *static_cast<KaxChapterAtom *>(edition_child);
+      auto chapter_timestamp = static_cast<int64_t>(FindChildValue<KaxChapterTimeStart>(chapter_atom));
+      auto chapter_display   = FindChild<KaxChapterDisplay>(chapter_atom);
+
+      if (   !chapter_display
+          || (   first_chapter
+              && (chapter_timestamp >= first_chapter->first)))
+        continue;
+
+      first_chapter = std::make_pair(chapter_timestamp, to_utf8(FindChildValue<KaxChapterString>(*chapter_display)));
+    }
+  }
+
+  return first_chapter ? first_chapter->second : ""s;
+}
+
 /** \brief Transform the output filename and insert the current file number
 
    Rules and search order:
@@ -1194,6 +1225,11 @@ create_output_name() {
   auto converted = std::regex_replace(s, std::regex{"%(\\d+)d"}, "{0:$1}");
   if (converted != s)
     return fmt::format(converted, g_file_num);
+
+  // If chapter names are requested, don't force a numeric suffix. The
+  // chapter name template is replaced when closing the file.
+  if (s.find("%c") != std::string::npos)
+    return s;
 
   std::string buffer = fmt::format("-{0:03}", g_file_num);
 
@@ -1494,6 +1530,36 @@ set_track_statistics_tags(KaxTags *tags) {
   return tags;
 }
 
+static void
+insert_chapter_name_in_output_file_name(bfs::path const &original_file_name,
+                                        std::string const &chapter_name) {
+#if defined(SYS_WINDOWS)
+  static std::regex s_invalid_char_re{R"([\\/:<>"|?*]+)"};
+#else
+  static std::regex s_invalid_char_re{"/+"};
+#endif
+
+  // When splitting replace %c in file names with current chapter name.
+  if (!g_cluster_helper->split_mode_produces_many_files())
+    return;
+
+  // auto chapter_name  = get_current_chapter_name();
+  auto cleaned_chapter_name = std::regex_replace(chapter_name, s_invalid_char_re, "-");
+  auto new_file_name        = original_file_name.parent_path() / std::regex_replace(original_file_name.filename().string(), std::regex{"%c"s}, cleaned_chapter_name);
+
+  mxdebug_if(s_debug_splitting_chapters, fmt::format("insert_chapter_name_in_output_file_name: cleaned name {0} old {1} new {2}\n", cleaned_chapter_name, original_file_name.string(), new_file_name.string()));
+
+  if (original_file_name == new_file_name)
+    return;
+
+  try {
+    bfs::rename(original_file_name, new_file_name);
+    mxinfo(fmt::format(Y("The file '{0}' was renamed to '{1}'.\n"), original_file_name.string(), new_file_name.string()));
+  } catch (bfs::filesystem_error &) {
+    mxerror(fmt::format(Y("The file '{0}' could not be renamed to '{1}'.\n"), original_file_name.string(), new_file_name.string()));
+  }
+}
+
 /** \brief Finishes and closes the current file
 
    Renders the data that is generated during the muxing run. The cues
@@ -1625,6 +1691,8 @@ finish_file(bool last_file,
     delete tags_here;
   }
 
+  auto first_chapter_name = get_first_chapter_name_in_this_file();
+
   if (s_chapters_in_this_file) {
     if (!mtx::hacks::is_engaged(mtx::hacks::NO_CHAPTERS_IN_META_SEEK))
       g_kax_sh_main->IndexThis(*s_chapters_in_this_file, *g_kax_segment);
@@ -1650,6 +1718,8 @@ finish_file(bool last_file,
 
   update_ebml_head();
 
+  auto original_file_name = bfs::path{s_out->get_file_name()};
+
   s_out.reset();
 
   g_kax_segment.reset();
@@ -1659,6 +1729,8 @@ finish_file(bool last_file,
   g_kax_sh_cues.reset();
   s_head.reset();
   g_doc_type_version_handler.reset();
+
+  insert_chapter_name_in_output_file_name(original_file_name, first_chapter_name);
 }
 
 void
