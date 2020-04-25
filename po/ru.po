@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-04-25 10:38+0200\n"
+"POT-Creation-Date: 2020-04-25 15:05+0200\n"
 "PO-Revision-Date: 2020-04-05 10:39+0000\n"
 "Last-Translator: solokot <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
@@ -3394,7 +3394,7 @@ msgstr "Все поддерживаемые медиафайлы"
 msgid "Append to an e&xisting source file"
 msgstr "Добавить к су&ществующему исходному файлу"
 
-#: src/merge/output_control.cpp:1799
+#: src/merge/output_control.cpp:1870
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Присоединение дорожки {0} из файла № {1} (\"{2}\") к дорожке {3} из файла № {4} (\"{5}\").\n"
@@ -4462,7 +4462,7 @@ msgstr "Невозможно извлечь заголовок последов�
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "Невозможно найти индекс для звуковой дорожки {0} (сообщение об ошибке avilib: {1}). Дорожка пропущена.\n"
 
-#: src/merge/output_control.cpp:1725
+#: src/merge/output_control.cpp:1796
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "Невозможно обнаружить gptzr при присоединении. {0}\n"
@@ -10493,7 +10493,7 @@ msgstr "Слои"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Некоторые дорожки H.264/AVC содержат I-фрагменты, но не имеют реальных ключевых кадров."
 
-#: src/merge/output_control.cpp:1290
+#: src/merge/output_control.cpp:1326
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "Некоторые элементы тега отсутствуют (эта ошибка не должна происходить — другая подобная ошибка должна была иметь место ранее). {0}\n"
@@ -11235,7 +11235,7 @@ msgstr "Заголовок файла коррекции не был прочи�
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Страны в \"выбранном\" списке справа будут отображаться в верхней части всех раскрывающихся окнах стран программы."
 
-#: src/merge/output_control.cpp:1531
+#: src/merge/output_control.cpp:1596
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Пишутся записи cue (индекс)...\n"
@@ -11496,7 +11496,7 @@ msgstr "Файл '{0}' не может быть открыт для записи
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1316
+#: src/merge/output_control.cpp:1352
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "Файл '{0}' не может быть открыт для записи: {1}.\n"
@@ -11506,7 +11506,12 @@ msgstr "Файл '{0}' не может быть открыт для записи
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "Файл '{0}' не может быть открыт или проанализирован."
 
-#: src/merge/output_control.cpp:1320
+#: src/merge/output_control.cpp:1558
+#, fuzzy, no-c-format
+msgid "The file '{0}' could not be renamed to '{1}'.\n"
+msgstr "Файл '{0}' не может быть открыт для чтения: {1}.\n"
+
+#: src/merge/output_control.cpp:1356
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "Файл '{0}' открыт для записи.\n"
@@ -12781,7 +12786,7 @@ msgstr "Это свойство обязательно и не может быт
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Это свойство уникально. Больше таких не может быть включено в '{0}'. {1}\n"
 
-#: src/merge/output_control.cpp:1642
+#: src/merge/output_control.cpp:1709
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "Такого НА САМОМ ДЕЛЕ не должно происходить. Пространство, зарезервированное для первого метаэлемента поиска, слишком мало. Необходимо места: {0}. {1}\n"

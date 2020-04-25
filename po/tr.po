@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-04-25 10:38+0200\n"
+"POT-Creation-Date: 2020-04-25 15:05+0200\n"
 "PO-Revision-Date: 2020-04-07 13:49+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -3585,7 +3585,7 @@ msgstr "Ortam dosyalarını ilave et"
 msgid "Append to an e&xisting source file"
 msgstr "Mevcut bir kaynak dosyaya ila&ve et"
 
-#: src/merge/output_control.cpp:1799
+#: src/merge/output_control.cpp:1870
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "{4} ('{5}') nolu dosyadan {3}. ize ilave edilen, {1} ('{2}') nolu dosyadan {0}. iz.\n"
@@ -4649,7 +4649,7 @@ msgstr "Bu MPEG-1/2 izinden sıralı başlık çıkartılamadı.\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "Ses izi {0} için bir indeks bulunamadı (avilib hata iletisi: {1}). İz atlanıyor.\n"
 
-#: src/merge/output_control.cpp:1725
+#: src/merge/output_control.cpp:1796
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "İlave edilirken gptzr bulunamadı. {0}\n"
@@ -10656,7 +10656,7 @@ msgstr "Dilimler"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Bazı H.264/AVC izleri I dilimleri içerir ancak gerçek anahtar karelere ihtiyacı olur."
 
-#: src/merge/output_control.cpp:1290
+#: src/merge/output_control.cpp:1326
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "Bazı etiket öğeleri eksik (bu hata meydana gelmemeliydi - başka bir benzer hata önceden meydana gelmişti). {0}\n"
@@ -11392,7 +11392,7 @@ msgstr "Düzeltme dosya başlığı doğru olarak okunmadı.\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Sağdaki 'seçilen' listesindeki ülkeler, programdaki tüm aşağı açılır ülke listesinin en üstünde gösterilecektir."
 
-#: src/merge/output_control.cpp:1531
+#: src/merge/output_control.cpp:1596
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Cue girişleri (indeks) yazılıyor...\n"
@@ -11651,7 +11651,7 @@ msgstr "'{0}' dosyası yazmak için açılamadı: {1}."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1316
+#: src/merge/output_control.cpp:1352
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "'{0}' dosyası yazmak için açılamadı: {1}.\n"
@@ -11661,7 +11661,12 @@ msgstr "'{0}' dosyası yazmak için açılamadı: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "'{0}' dosyası açılamadı veya ayrıştırılamadı."
 
-#: src/merge/output_control.cpp:1320
+#: src/merge/output_control.cpp:1558
+#, fuzzy, no-c-format
+msgid "The file '{0}' could not be renamed to '{1}'.\n"
+msgstr "'{0}' dosyası okumak için açılamadı: {1}.\n"
+
+#: src/merge/output_control.cpp:1356
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "'{0}' dosyası yazmak için açıldı.\n"
@@ -12931,7 +12936,7 @@ msgstr "Bu özellik zorunlu ve '{0}' içinde silinemez. {1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Bu özellik benzersiz. Daha fazla benzerleri '{0}' içinde eklenemez. {1}\n"
 
-#: src/merge/output_control.cpp:1642
+#: src/merge/output_control.cpp:1709
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "Bu GERÇEKTEN olmamalıydı. İlk üst arama öğesi için ayrılan alan çok küçüktü. Gereken boyut: {0}. {1}\n"

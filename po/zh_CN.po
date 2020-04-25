@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-04-25 10:38+0200\n"
+"POT-Creation-Date: 2020-04-25 15:05+0200\n"
 "PO-Revision-Date: 2020-04-03 03:23+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -3522,7 +3522,7 @@ msgstr "追加媒体文件"
 msgid "Append to an e&xisting source file"
 msgstr "追加到现有输入文件(&X)"
 
-#: src/merge/output_control.cpp:1799
+#: src/merge/output_control.cpp:1870
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "正在将文件 {1} (「{2}」) 中的轨道 {0} 追加合并到第 {4} 个文件 (「{5}」) 的轨道 {3}。\n"
@@ -4587,7 +4587,7 @@ msgstr "无法从该 MPEG-1/2 轨道提取序列头。\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "找不到音频轨道 {0} 的索引 (avilib 错误消息: {1})。跳过此轨道。\n"
 
-#: src/merge/output_control.cpp:1725
+#: src/merge/output_control.cpp:1796
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "追加合并时找不到 gptzr。 {0}\n"
@@ -10582,7 +10582,7 @@ msgstr "切片"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "部分 H.264/AVC 轨道包含 I 分片但缺少对应的关键帧。"
 
-#: src/merge/output_control.cpp:1290
+#: src/merge/output_control.cpp:1326
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "缺少某些标签元素 (不该发生此错误 - 另一个类似的错误已经在早些时候发生)。{0}\n"
@@ -11315,7 +11315,7 @@ msgstr "校正文件头部未能正确读取。\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "右侧“选中”列表中的国家将会显示在程序中所有国家下拉列表的顶部。"
 
-#: src/merge/output_control.cpp:1531
+#: src/merge/output_control.cpp:1596
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "正在写入 cue 条目 (索引)...\n"
@@ -11573,7 +11573,7 @@ msgstr "文件「{0}」无法以写入模式打开: {1}."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1316
+#: src/merge/output_control.cpp:1352
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "文件「{0}」无法以写入模式打开: {1}。\n"
@@ -11583,7 +11583,12 @@ msgstr "文件「{0}」无法以写入模式打开: {1}。\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "文件「{0}」无法打开或解析。"
 
-#: src/merge/output_control.cpp:1320
+#: src/merge/output_control.cpp:1558
+#, fuzzy, no-c-format
+msgid "The file '{0}' could not be renamed to '{1}'.\n"
+msgstr "文件「{0}」无法以读取模式打开: {1}。\n"
+
+#: src/merge/output_control.cpp:1356
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "以写入模式打开文件「{0}」。\n"
@@ -12855,7 +12860,7 @@ msgstr "「{0}」中的元素为必要元素，无法删除。{1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "该属性唯一。不可以将更多实例添加到「{0}」。{1}\n"
 
-#: src/merge/output_control.cpp:1642
+#: src/merge/output_control.cpp:1709
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "这 *真的* 不该发生。为首个元定位元素预留的空间过小。需要的空间: {0}. {1}\n"

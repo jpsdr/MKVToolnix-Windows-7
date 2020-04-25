@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-04-25 10:38+0200\n"
+"POT-Creation-Date: 2020-04-25 15:05+0200\n"
 "PO-Revision-Date: 2018-04-11 00:40+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -3556,7 +3556,7 @@ msgstr "미디어 파일 결합하기"
 msgid "Append to an e&xisting source file"
 msgstr "기존의 소스 파일에 결합하기(&X)"
 
-#: src/merge/output_control.cpp:1799
+#: src/merge/output_control.cpp:1870
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "{1} ('{2}') 파일 번호의 {0} 트랙을 {4} ('{5}') 파일 번호의 {3} 트랙에 결합합니다.\n"
@@ -4619,7 +4619,7 @@ msgstr "이 MPEG-1/2 트랙에서는 시퀀스 헤더를 추출할 수 없습니
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "오디오 트랙 {0}의 인덱스를 찾을 수 없습니다 (avilib 오류 메시지: {1}). 트랙을 건너 뜁니다.\n"
 
-#: src/merge/output_control.cpp:1725
+#: src/merge/output_control.cpp:1796
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "결합시에 gptzr을 찾을 수 없습니다. {0}\n"
@@ -10618,7 +10618,7 @@ msgstr "조각"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "몇몇 H.264/AVC 트랙은 l 조각들을 포함하지만 실제 키프레임은 없습니다."
 
-#: src/merge/output_control.cpp:1290
+#: src/merge/output_control.cpp:1326
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "태그 요소가 누락되어 있습니다 (이 오류는 발생하지 않아야 합니다 - 이전에 다른 유사한 오류가 발생했어야 합니다). {0}\n"
@@ -11351,7 +11351,7 @@ msgstr "수정한 파일 헤더를 제대로 읽을 수 없습니다.\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "오른쪽에서 '선택한' 목록의 나라들은 모든 국가 드롭 다운 상자의 맨 위쪽에 나타납니다."
 
-#: src/merge/output_control.cpp:1531
+#: src/merge/output_control.cpp:1596
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "큐(CUE) 항목(인덱스)을 쓰는 중입니다...\n"
@@ -11609,7 +11609,7 @@ msgstr "'{0}' 파일을 쓰기 위해 열 수 없습니다: {1}."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1316
+#: src/merge/output_control.cpp:1352
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "'{0}' 파일을 읽기 위해 열 수 없습니다: {1}.\n"
@@ -11619,7 +11619,12 @@ msgstr "'{0}' 파일을 읽기 위해 열 수 없습니다: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "'{0}' 파일을 열거나 분석할 수 없습니다."
 
-#: src/merge/output_control.cpp:1320
+#: src/merge/output_control.cpp:1558
+#, fuzzy, no-c-format
+msgid "The file '{0}' could not be renamed to '{1}'.\n"
+msgstr "'{0}' 파일을 읽기 위해 열 수 없습니다: {1}.\n"
+
+#: src/merge/output_control.cpp:1356
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "'{0}'에 쓰기 위해 해당 파일을 열었습니다.\n"
@@ -12891,7 +12896,7 @@ msgstr "이 속성은 필수이며, '{0}'에서 제거할 수 없습니다. {1}\
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "이 속성은 유일한 것입니다. '{0}'에 추가할 수 없습니다. {1}\n"
 
-#: src/merge/output_control.cpp:1642
+#: src/merge/output_control.cpp:1709
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "이것은 정말로 (절대로) 발생해서는 안 됩니다. 처음 MetaSeek 요소를 위해 확보된 공간이 너무 작습니다. 필요한 크기: {0}. {1}\n"

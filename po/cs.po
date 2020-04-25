@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-04-25 10:38+0200\n"
+"POT-Creation-Date: 2020-04-25 15:05+0200\n"
 "PO-Revision-Date: 2019-08-06 18:38+0200\n"
 "Last-Translator: Trottel <trottel09@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/cs/)\n"
@@ -3602,7 +3602,7 @@ msgstr "Připojit soubory médií"
 msgid "Append to an e&xisting source file"
 msgstr "Připojit ke &stávajícímu zdrojovému souboru"
 
-#: src/merge/output_control.cpp:1799
+#: src/merge/output_control.cpp:1870
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Připojení stopy {0} ze souboru č. {1} ('{2}') ke stopě {3} ze souboru č. {4} ('{5}').\n"
@@ -4668,7 +4668,7 @@ msgstr "Nelze extrahovat hlavičku posloupnosti z této stopy MPEG-1/2.\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "Nelze nalézt index pro stopu audia {0} (chybová zpráva avilib: {1}). Přeskočení stopy.\n"
 
-#: src/merge/output_control.cpp:1725
+#: src/merge/output_control.cpp:1796
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "Nelze nalézt gptzr při připojování. {0}\n"
@@ -10702,7 +10702,7 @@ msgstr "Výseče"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Některé stopy H.264/AVC obsahují řezy I, ale postrádají skutečné klíčové snímky."
 
-#: src/merge/output_control.cpp:1290
+#: src/merge/output_control.cpp:1326
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr ""
@@ -11450,7 +11450,7 @@ msgstr ""
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Země v seznamu 'vybrané' vpravo budou zobrazeny v horní části všech rozevíracích polí země v programu."
 
-#: src/merge/output_control.cpp:1531
+#: src/merge/output_control.cpp:1596
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Jsou zapisovány položky indexu...\n"
@@ -11710,7 +11710,7 @@ msgstr "Soubor '{0}' nemohl být otevřen pro zápis: {1}."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1316
+#: src/merge/output_control.cpp:1352
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "Soubor '{0}' nemohl být otevřen pro zápis: {1}.\n"
@@ -11720,7 +11720,12 @@ msgstr "Soubor '{0}' nemohl být otevřen pro zápis: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "Soubor '{0}' nemohl být otevřen nebo analyzován."
 
-#: src/merge/output_control.cpp:1320
+#: src/merge/output_control.cpp:1558
+#, fuzzy, no-c-format
+msgid "The file '{0}' could not be renamed to '{1}'.\n"
+msgstr "Soubor '{0}' nemohl být otevřen pro čtení: {1}.\n"
+
+#: src/merge/output_control.cpp:1356
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "Soubor '{0}' byl otevřen pro zápis.\n"
@@ -12991,7 +12996,7 @@ msgstr ""
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr ""
 
-#: src/merge/output_control.cpp:1642
+#: src/merge/output_control.cpp:1709
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr ""

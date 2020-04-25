@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-04-25 10:38+0200\n"
-"PO-Revision-Date: 2020-04-25 10:40+0200\n"
+"POT-Creation-Date: 2020-04-25 15:05+0200\n"
+"PO-Revision-Date: 2020-04-25 15:06+0200\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -3611,7 +3611,7 @@ msgstr "Mediendateien anhängen"
 msgid "Append to an e&xisting source file"
 msgstr "An eine &bestehende Quelldatei anhängen"
 
-#: src/merge/output_control.cpp:1799
+#: src/merge/output_control.cpp:1870
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Spur {0} aus Datei Nummer {1} (»{2}«) wird an Spur {3} aus Datei Nummer {4} (»{5}«) angefügt.\n"
@@ -4675,7 +4675,7 @@ msgstr "Der Sequenzkopf konnte nicht aus dieser MPEG-1/2-Spur extrahiert werden.
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "Für Audiospur {0} konnte kein Index gefunden werden (Fehlermeldung der Avilib: {1}). Die Spur wird ausgelassen.\n"
 
-#: src/merge/output_control.cpp:1725
+#: src/merge/output_control.cpp:1796
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "»gptzr« konnte beim Anhängen nicht gefunden werden. {0}\n"
@@ -10683,7 +10683,7 @@ msgstr "Slices"
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Manche H.264/AVC-Spuren enthalten I-Teilbilder aber keine echten Schlüsselbilder."
 
-#: src/merge/output_control.cpp:1290
+#: src/merge/output_control.cpp:1326
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "Einige Tag-Elemente fehlen (dieser Fehler hätte nicht auftreten sollen, sondern früher ein ähnlicher). {0}\n"
@@ -11419,7 +11419,7 @@ msgstr "Der Dateikopf der Korrekturdatei konnte nicht gelesen werden.\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Die in der »Ausgewählt«-Liste aufgeführten Länder werden am Anfang aller im Programm vorhandenen Länder-Auswahlboxen angezeigt."
 
-#: src/merge/output_control.cpp:1531
+#: src/merge/output_control.cpp:1596
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Die Cue-Einträge (der Index) werden geschrieben …\n"
@@ -11681,7 +11681,7 @@ msgstr "Die Datei »{0}« konnte nicht zum Schreiben geöffnet werden: {1}."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1316
+#: src/merge/output_control.cpp:1352
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "Die Datei »{0}« konnte nicht zum Schreiben geöffnet werden: {1}.\n"
@@ -11691,7 +11691,12 @@ msgstr "Die Datei »{0}« konnte nicht zum Schreiben geöffnet werden: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "Die Datei »{0}« konnte nicht geöffnet oder ausgewertet werden."
 
-#: src/merge/output_control.cpp:1320
+#: src/merge/output_control.cpp:1558
+#, no-c-format
+msgid "The file '{0}' could not be renamed to '{1}'.\n"
+msgstr "Die Datei »{0}« konnte nicht in »{1}« umbenannt werden.\n"
+
+#: src/merge/output_control.cpp:1356
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "Die Datei »{0}« wurde zum Schreiben geöffnet.\n"
@@ -12964,7 +12969,7 @@ msgstr "Diese Eigenschaft ist erforderlich und kann nicht gelöscht werden bei �
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Diese Eigenschaft ist einzigartig. Es können keine weiteren Instanzen davon angelegt werden bei »{0}«. {1}\n"
 
-#: src/merge/output_control.cpp:1642
+#: src/merge/output_control.cpp:1709
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "Dies hätte WIRKLICH nicht passieren dürfen. Der für das erste Meta-Seek-Element reservierte Platz war zu klein. Benötigter Platz: {0}. {1}\n"
