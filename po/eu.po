@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-04-02 22:37+0200\n"
+"POT-Creation-Date: 2020-04-25 10:38+0200\n"
 "PO-Revision-Date: 2020-04-07 16:55+0000\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1594,7 +1594,7 @@ msgstr "&Conduct Kodea"
 msgid "&Collapse all"
 msgstr "&Bildu denak"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:328
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:337
 #, no-c-format
 msgid "&Command line:"
 msgstr "Agindu &lerroa:"
@@ -1619,7 +1619,7 @@ msgstr "&Kopiatu agindu lerroa gakora"
 msgid "&Country:"
 msgstr "Herrialdea:"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:429
+#: src/mkvtoolnix-gui/merge/tab.cpp:431
 #, no-c-format
 msgid "&Create file without audio track"
 msgstr "&Sortu agiria audio bide gabe"
@@ -1825,7 +1825,7 @@ msgid "&Multiply start and end timestamps by the following factor:"
 msgstr "&Biderkatu hasiera eta amaiera denbora-irarketak hurrengo faktoreaz:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:527
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:326
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:335
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1820
 #, no-c-format
 msgid "&Name:"
@@ -1927,7 +1927,7 @@ msgstr "&Hurrenkeran"
 msgid "&Output"
 msgstr "I&rteera"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:612
+#: src/mkvtoolnix-gui/jobs/tool.cpp:620
 #, no-c-format
 msgid "&Overwrite file"
 msgstr "&Gainidatzi agiria"
@@ -2122,7 +2122,7 @@ msgstr "Eti&keta editatzailea"
 msgid "&Tracks, chapters and tags:"
 msgstr "Bi&deak, atalak, etiketak:"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:325
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:334
 #, no-c-format
 msgid "&Type:"
 msgstr "&Mota:"
@@ -2161,7 +2161,7 @@ msgstr "&Bideo bideak:"
 msgid "&View output"
 msgstr "&Ikusi irteera"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:331
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:340
 #, no-c-format
 msgid "&Volume:"
 msgstr "&Bolumena:"
@@ -2835,7 +2835,7 @@ msgstr "Gizaki-irakurgarria den kate batek adierazten du kodeka."
 msgid "A human-readable track name."
 msgstr "Bide izen gizakiak-irakurgarri bat."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:609
+#: src/mkvtoolnix-gui/jobs/tool.cpp:617
 #, no-c-format
 msgid "A job creating the file '%1' is already in the job queue."
 msgstr "'%1' agiria sortzen ari den lana jadanik lan lerroan dago."
@@ -2909,7 +2909,7 @@ msgstr "&Ireki Matroska, WebM edo atal agiria"
 msgid "A&ppend files"
 msgstr "&Erantsi agiriak"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:330
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:339
 #, no-c-format
 msgid "A&udio file:"
 msgstr "A&udio agiria:"
@@ -3088,7 +3088,7 @@ msgstr "Etiketak eta atalak kudeatzeko ekintzak"
 msgid "Add &Blu-ray cover images as attachments"
 msgstr "Gehitu &Blu-ray azal irudia eranskin bezala"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:329
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:338
 #, no-c-format
 msgid "Add &variable"
 msgstr "Gehitu &aldagaia"
@@ -3258,12 +3258,17 @@ msgstr "Adler-32:"
 msgid "Adler-32: 0x{0:08x}"
 msgstr "Adler-32: 0x{0:08x}"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:320
-#, no-c-format
-msgid "After a job completes &successfully or with warnings"
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:328
+#, fuzzy, no-c-format
+msgid "After a job completes &successfully"
 msgstr "Lan bat ongi edo oharrekin o&satu ondoren"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:321
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:329
+#, fuzzy, no-c-format
+msgid "After a job exits with &warnings"
+msgstr "Lan bat ongi edo oharrekin o&satu ondoren"
+
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:330
 #, no-c-format
 msgid "After a job exits with an &error or the user aborts the job"
 msgstr "Lan bat a&katsekin dagoenean edo erabiltzaileak lana utzi ondoren"
@@ -3288,7 +3293,7 @@ msgstr "Irteera neurriaren ondoren"
 msgid "After specific timestamps"
 msgstr "Adierazitako denbora-kodeen ondoren"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:322
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:331
 #, no-c-format
 msgid "After the job &queue has stopped"
 msgstr "Lan lerroa gelditu &ondoren"
@@ -3352,8 +3357,8 @@ msgstr "Sarrera guztiak"
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:165
 #: src/mkvtoolnix-gui/info/tool.cpp:128
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:993
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:316
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:394
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:317
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:395
 #: src/mkvtoolnix-gui/merge/attachments.cpp:272
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:201
@@ -3485,7 +3490,7 @@ msgstr "Betik erakutsi irteera agiri aginteak &hegatsen azpian"
 msgid "Always use a &default description when adding a job to the queue"
 msgstr "Betik er&abili berezko azalpen bat lan bat lerrora gehitzerakoan"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:106
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:107
 #, no-c-format
 msgid "Always use full path names even if the application is located in the same directory as the GUI."
 msgstr "Betik erabili helburu izen osoak aplikazioa EIG-ren zuzenbide berean badago."
@@ -3702,7 +3707,7 @@ msgstr "Audio bit sakonera"
 msgid "Audio channels"
 msgstr "Audio bideak"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:393
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:394
 #, no-c-format
 msgid "Audio files"
 msgstr "Audio agiriak"
@@ -3940,7 +3945,7 @@ msgstr "Zatietan frame/eremu zenbakietan ohinarriturik"
 msgid "By parts based on timestamps"
 msgstr "Zatietan denbora-kodeetan ohinarriturik"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:319
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:327
 #, no-c-format
 msgid "C&onfiguration active"
 msgstr "Itx&urapena gaituta"
@@ -3950,7 +3955,7 @@ msgstr "Itx&urapena gaituta"
 msgid "C&onstrict or expand timestamps"
 msgstr "&Estutu edo hedatu denbora-kodeak"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:587
+#: src/mkvtoolnix-gui/jobs/tool.cpp:582
 #, no-c-format
 msgid "C&ontinue"
 msgstr "&Jarraitu"
@@ -4002,11 +4007,11 @@ msgstr "Kalkulatu estatistikak bide guztientzat eta gehitu berri bat/eguneratu b
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:270
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:877
 #: src/mkvtoolnix-gui/jobs/tool.cpp:518
-#: src/mkvtoolnix-gui/jobs/tool.cpp:588
-#: src/mkvtoolnix-gui/jobs/tool.cpp:613
+#: src/mkvtoolnix-gui/jobs/tool.cpp:583
+#: src/mkvtoolnix-gui/jobs/tool.cpp:621
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:433
 #: src/mkvtoolnix-gui/merge/input.cpp:1338
-#: src/mkvtoolnix-gui/merge/tab.cpp:430
+#: src/mkvtoolnix-gui/merge/tab.cpp:432
 #: src/mkvtoolnix-gui/merge/tool.cpp:221
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:197
 #, no-c-format
@@ -4131,7 +4136,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "&Lehenik sortutako sarreraren atal zenbakia:"
 
 #: src/common/chapters/chapters.cpp:47
-#: src/mkvtoolnix-gui/util/settings.cpp:357
+#: src/mkvtoolnix-gui/util/settings.cpp:379
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Atala <ZBK:2>"
@@ -4185,7 +4190,7 @@ msgstr "Atalaren ikurra gaituta"
 msgid "Chapter flag hidden"
 msgstr "Atalaren ikurra ezkutuan"
 
-#: src/merge/cluster_helper.cpp:754
+#: src/merge/cluster_helper.cpp:756
 #, no-c-format
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr "Atal sortzea gutxienez bideo edo audio bide bat kopiatzen denean bakarrik egin daiteke. \n"
@@ -4747,7 +4752,7 @@ msgstr "Sortu WebM agiri bateragarria."
 msgid "Create a new one or open an existing one via the \"multiplexer\" menu, the buttons below or drag & drop one here."
 msgstr "Sortu berri bat edo ireki badagoen bat \"multiplexatzailea\" menuaren, azpiko botoien edo hona bat arrastatu eta askatu bidez."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:425
+#: src/mkvtoolnix-gui/merge/tab.cpp:427
 #, no-c-format
 msgid "Create file without audio track"
 msgstr "Sortu agiria audio bide gabe"
@@ -5001,7 +5006,7 @@ msgstr "Cues (azpisarrerak jauzi egingo dira)"
 msgid "Current command line"
 msgstr "Oraingo agindu lerroa"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:251
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:252
 #, no-c-format
 msgid "Current date && time in ISO 8601 format"
 msgstr "Uneko eguna eta ordua ISO 8601 heuskarrian"
@@ -5089,7 +5094,7 @@ msgstr "Amaitze eguna"
 msgid "Date started"
 msgstr "Hasiera eguna"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
 #, no-c-format
 msgid "Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."
 msgstr "Hautakutxa hau ezgaitzea bide bat da itxurapena aldibaterako ezgaitzeko bere parametroak aldatu gabe."
@@ -5212,7 +5217,7 @@ msgstr "Ezabatu ezaugarri baten gertaera guztiak"
 msgid "Delete one or more attachments"
 msgstr "Ezabatu eranskin bat edo gehiago"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:199
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:200
 #: src/mkvtoolnix-gui/util/settings.cpp:54
 #, no-c-format
 msgid "Delete source files for multiplexer jobs"
@@ -5288,12 +5293,12 @@ msgstr "Helmuga agiriaren izena"
 msgid "Destination file name: %1"
 msgstr "Helburu agiri izena: %1"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:248
 #, no-c-format
 msgid "Destination file's directory"
 msgstr "Helmuga agiriaren zuzenbidea"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:246
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
 #, no-c-format
 msgid "Destination file's name"
 msgstr "Helmuga agiriaren izena"
@@ -5466,17 +5471,17 @@ msgstr "Egitan nahi duzu lan hau uztea?"
 msgid "Do you really want to add '%1' as another attachment?"
 msgstr "Egitan nahi duzu '%1' beste eranskin bat bezala gehitzea?"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:586
+#: src/mkvtoolnix-gui/jobs/tool.cpp:581
 #, no-c-format
 msgid "Do you want to continue and risk overwriting the file?"
 msgstr "Jarraitu nahi duzu eta agiria gainidaztearen arriskua hartu?"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:428
+#: src/mkvtoolnix-gui/merge/tab.cpp:430
 #, no-c-format
 msgid "Do you want to continue?"
 msgstr "Jarraitzea nahi duzu?"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:611
+#: src/mkvtoolnix-gui/jobs/tool.cpp:619
 #, no-c-format
 msgid "Do you want to overwrite the file?"
 msgstr "Agiria gainidaztea nahi duzu?"
@@ -5585,7 +5590,7 @@ msgstr "&Editatu dagokion tresnan eta kendu lerrotik"
 msgid "E&nable all attachments"
 msgstr "Gaitu &eranskin guztiak"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:323
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:332
 #, no-c-format
 msgid "E&xecute now"
 msgstr "E&xekutatu orain"
@@ -5796,7 +5801,7 @@ msgstr "Hizkuntza izena ingeleraz"
 msgid "Ensure the file name is &unique"
 msgstr "Zihurtatu agiri izena &bakarra dela"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:460
+#: src/mkvtoolnix-gui/merge/tab.cpp:462
 #, no-c-format
 msgid "Enter job description"
 msgstr "Sartu lanaren azalpena"
@@ -5816,7 +5821,7 @@ msgstr "Sartu aurrezehatutako banantze neurria"
 msgid "Enter predefined track name"
 msgstr "Sartu aurrezehatutako bide izena"
 
-#: src/mkvtoolnix-gui/merge/mux_config.cpp:284
+#: src/mkvtoolnix-gui/merge/mux_config.cpp:285
 #, no-c-format
 msgid "Error"
 msgstr "Akatsa"
@@ -5970,7 +5975,7 @@ msgstr "Baita kontuz-oharrak egonda ere"
 msgid "Example"
 msgstr "Adibidea"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:119
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:120
 #, no-c-format
 msgid "Examples"
 msgstr "Adibideak"
@@ -5991,7 +5996,7 @@ msgid "Exception details:"
 msgstr "Salbuespen xehetasunak:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:991
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:314
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:315
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 #, no-c-format
 msgid "Executable files"
@@ -6002,7 +6007,7 @@ msgstr "Agiri exekutagarriak"
 msgid "Executable not found"
 msgstr "Exekutagarria ez da aurkitu"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:194
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
 #: src/mkvtoolnix-gui/util/settings.cpp:62
 #, no-c-format
 msgid "Execute a program"
@@ -6023,7 +6028,7 @@ msgstr "Exekutatu ekintza &lerroa osatu ondoren"
 msgid "Execute program '%1'"
 msgstr "Exekutatu '%1' programa"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:228
 #, no-c-format
 msgid "Executes the action immediately."
 msgstr "Exekutatu ekintza berehala."
@@ -6038,7 +6043,7 @@ msgstr "Ekintzak exekutatzen"
 msgid "Executing actions after certain events"
 msgstr "Ekintza exekutatzea zenbait gertaeraren ondoen"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:243
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
 #, no-c-format
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
 msgstr "Irteera kodea (0: ongi, 1: kontuz-oharra gertatu dira, 2: akats gertatu dira)"
@@ -6063,7 +6068,7 @@ msgstr "Atera datuak raw agiri batera Kodek Pribatua idazburu bezala barneratuz.
 msgid "Extract the data to a raw file."
 msgstr "Atera datuak raw agiri batera."
 
-#: src/output/p_hevc.cpp:71
+#: src/output/p_hevc.cpp:78
 #: src/output/p_hevc_es.cpp:135
 #, no-c-format
 msgid "Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"
@@ -6492,7 +6497,7 @@ msgstr "Orokorra"
 msgid "General options"
 msgstr "Aukera orokorrak"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:250
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:251
 #, no-c-format
 msgid "General variables"
 msgstr "Aldagai orokorrak"
@@ -6583,7 +6588,7 @@ msgid "HDMV TextST subtitles"
 msgstr "HDMV TextST azpidatziak"
 
 #: src/common/file_types.cpp:88
-#: src/output/p_hevc.h:32
+#: src/output/p_hevc.h:36
 #, no-c-format
 msgid "HEVC/H.265"
 msgstr "HEVC/H.265"
@@ -6638,7 +6643,7 @@ msgstr "Kodeaturiko bideo framen garaiera pixeletan."
 msgid "Height of the video frames to display."
 msgstr "Erakuspenerako bideo framen garaiera."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
 #: src/mkvtoolnix-gui/util/settings.cpp:52
 #, no-c-format
 msgid "Hibernate the computer"
@@ -6737,7 +6742,7 @@ msgstr "Hasiera zenbaki bat kanpoan badago aurreko mailaren amaiera zenbakia era
 msgid "If a start timestamp is left out then the previous range's end timestamp is used, or the start of the file if there was no previous range."
 msgstr "Hasiera denbora-kode bat kanpoan badago aurreko mailaren amaiera denbora-kodea erabiltzen da, edo agiriaren hasiera ez badago aurreko mailarik."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:222
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:223
 #, no-c-format
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr ""
@@ -7014,7 +7019,7 @@ msgstr "Bideak egon behar direla jakiten bada baina ez badira aurkitzen, probare
 msgid "If two or more timestamps are used then you have to separate them with commas."
 msgstr "Denbora-kode bi edo gehiago erabiltzen badira hauek kakotxaz banandu behar dituzu."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:610
+#: src/mkvtoolnix-gui/jobs/tool.cpp:618
 #, no-c-format
 msgid "If you add another job with the same destination file then file created before will be overwritten."
 msgstr "Beste lan bat gehitzen baduzu helmuga agiri berdinarekin aurretik sortutako agiria gainidatzi egingo da."
@@ -7095,7 +7100,7 @@ msgstr "Elkartasun gabeko AAC audio paketea (luzera: {0} != {1})\n"
 msgid "Increase verbosity."
 msgstr "Handitu berritsukeria."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:223
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:224
 #, no-c-format
 msgid "Independent of the checkboxes, every active configuration can be triggered manually from the \"job output\" tool."
 msgstr ""
@@ -7598,12 +7603,12 @@ msgstr "JSON aukera agiriak JSON array bat eduki behar du JSON kate batez osatut
 msgid "Job &output"
 msgstr "La&n irteera"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:240
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:241
 #, no-c-format
 msgid "Job description"
 msgstr "Lanaren azalpena"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:242
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:243
 #, no-c-format
 msgid "Job end date && time in ISO 8601 format"
 msgstr "Lanaren amaiera eguna eta ordua ISO 8601 heuskarrian"
@@ -7621,12 +7626,12 @@ msgstr "Lan irteera"
 msgid "Job queue"
 msgstr "Lan lerroa"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:241
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:242
 #, no-c-format
 msgid "Job start date && time in ISO 8601 format"
 msgstr "Lanaren hasiera eguna eta ordua ISO 8601 heuskarrian"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:239
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:240
 #, no-c-format
 msgid "Job type ('multiplexer' or 'info')"
 msgstr "Lan mota ('multiplexer' edo 'info')"
@@ -7862,7 +7867,7 @@ msgstr "MKVToolNix EIG itxurapen agiriak"
 msgid "MKVToolNix GUI preferences"
 msgstr "MKVToolNix EIG hobespenak"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:252
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:253
 #, no-c-format
 msgid "MKVToolNix GUI's installation directory"
 msgstr "MKVToolNix EIG-ren ezarpen zuzenbidea"
@@ -8362,7 +8367,7 @@ msgstr "Ez da 'EBML buru' elementurik aurkitu."
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Ez AC-3 idazburua aurkitu da lehen framean: bidea jauzi egingo da.\n"
 
-#: src/input/r_qtmp4.cpp:3414
+#: src/input/r_qtmp4.cpp:3425
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Ez da DTS idazbururik aurkitu lehen framean; bidea jauzi egingo da.\n"
@@ -8674,12 +8679,12 @@ msgstr "Ohartu aukera ezgaituta badago ere mkvmergek iturburu agiriaren ezaugarr
 msgid "Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."
 msgstr "Ohartu irakurgailu askok ez dutela erakuspen zabalera/garaiera baliorik erabiltzen zuzenean baina balio hauek emandako maila bakarrik erabiltzen dutela hasierako leiho neurria ezartzerakoan."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:228
 #, no-c-format
 msgid "Note that most <MTX_…> variables are empty and will be removed for actions that can take variables as arguments."
 msgstr "Ohartu <MTX_…> aldagai gehienak hutsik daudela eta aldagaiak argumentutzat hartzen diren ekitzetatik kenduko direla."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:101
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:102
 #, no-c-format
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Ohartu Windowsen eskuin barrak erabili daitezkeela ezkerbarren ordez helburu izenetan ere."
@@ -8941,7 +8946,7 @@ msgstr "Ireki agiriak atal editatzailean"
 msgid "Open settings file"
 msgstr "Ireki ezarpen agiria"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:160
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:161
 #, no-c-format
 msgid "Open the multiplexed file with a player:"
 msgstr "Ireki multiplexatutako agiria irakurgailu batekin:"
@@ -9060,8 +9065,8 @@ msgstr "Irteera mezuak hizkikode honetan"
 msgid "Output sampling frequency"
 msgstr "Irteera laginketa maiztasuna"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:582
-#: src/mkvtoolnix-gui/jobs/tool.cpp:607
+#: src/mkvtoolnix-gui/jobs/tool.cpp:578
+#: src/mkvtoolnix-gui/jobs/tool.cpp:615
 #, no-c-format
 msgid "Overwrite existing file"
 msgstr "Gainidatzi dagoen agiria"
@@ -9147,12 +9152,12 @@ msgstr "Pixel garaiera"
 msgid "Pixel width"
 msgstr "Pixel zabalera"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:121
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:122
 #, no-c-format
 msgid "Play a WAV file with the default application:"
 msgstr "Irakurri WAV agiri bat berezko aplikazioarekin:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
 #: src/mkvtoolnix-gui/util/settings.cpp:74
 #, no-c-format
 msgid "Play an audio file"
@@ -9190,7 +9195,7 @@ msgid_plural "Playlists shorter than %1 seconds will be ignored."
 msgstr[0] "%1 segundu baino gutxiagoko irakur-zerrendak ezikusi egingo dira."
 msgstr[1] "%1 segundu baino gutxiagoko irakur-zerrendak ezikusi egingo dira."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:460
+#: src/mkvtoolnix-gui/merge/tab.cpp:462
 #, no-c-format
 msgid "Please enter the new job's description."
 msgstr "Mesedez sartu lan berriaren azalpena."
@@ -9474,7 +9479,7 @@ msgstr "QuickTime/MP4"
 msgid "Quicktime/MP4 reader: '{0}' atom is too small. Expected size: >= {1}. Actual size: {2}.\n"
 msgstr "Quicktime/MP4 irakurgailua: '{0}' atomoa txikiegia da. Itxarondako neurria: >= {1}. Oraingo neurria: {2}.\n"
 
-#: src/input/r_qtmp4.cpp:2339
+#: src/input/r_qtmp4.cpp:2351
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime/MP4 irakurgailua: Lagin-neurri aldagaitza eta iraupen aldakorra ez dago sostengaturik oraindik. Jarri harremanetan egilearekin lagin agiri bat baduzu.\n"
@@ -9484,13 +9489,13 @@ msgstr "Quicktime/MP4 irakurgailua: Lagin-neurri aldagaitza eta iraupen aldakorr
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Quicktime/MP4 irakurgailua: Ezin da irakurri {0}/{1} zenbakiko chunk-argibidea {2} neurriarekin {3} kokapenetik. Uzten.\n"
 
-#: src/input/r_qtmp4.cpp:2773
-#: src/input/r_qtmp4.cpp:2787
+#: src/input/r_qtmp4.cpp:2785
+#: src/input/r_qtmp4.cpp:2799
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 irakurgailua: Ezin da irakurri {0} ID-dun biderentzako soinu hedatu azalpen atomoa.\n"
 
-#: src/input/r_qtmp4.cpp:2739
+#: src/input/r_qtmp4.cpp:2751
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 irakurgailua: Ezin da irakurri {0} ID-dun biderentzako soinu azalpen atomoa.\n"
@@ -9500,7 +9505,7 @@ msgstr "Quicktime/MP4 irakurgailua: Ezin da irakurri {0} ID-dun biderentzako soi
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 irakurgailua: Ezin da irakurri {0} ID-dun biderentzako jario azalpen atomoa.\n"
 
-#: src/input/r_qtmp4.cpp:2821
+#: src/input/r_qtmp4.cpp:2833
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 irakurgailua: Ezin da irakurri {0} ID-dun biderentzako bideo azalpen atomoa.\n"
@@ -9520,17 +9525,17 @@ msgstr "Quicktime/MP4 irakurgailua: Ez da 'mdat' atomoa aurkitu. Ez da filma dat
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
 msgstr "Quicktime/MP4 irakurgailua: Chunk-argibide neurri baliogabea {0} --> {1}.\n"
 
-#: src/input/r_qtmp4.cpp:3464
+#: src/input/r_qtmp4.cpp:3475
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 irakurgailua: MPEG4 part 10/AVC {0} bideak ez du dekodeatzaile itxurapenik. Bide honi jauzi egiten.\n"
 
-#: src/input/r_qtmp4.cpp:3490
+#: src/input/r_qtmp4.cpp:3501
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 irakurgailua: MPEG4 part 10/AVC {0} bideak ez du esds atomo/dekodeatzaile itxurapenik. Bide honi jauzi egiten.\n"
 
-#: src/input/r_qtmp4.cpp:3474
+#: src/input/r_qtmp4.cpp:3485
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 irakurgailua: MPEG4 part 2/HEVC {0} bideak ez du dekodeatzaile itxurapenik. Bide honi jauzi egiten.\n"
@@ -9550,17 +9555,17 @@ msgstr "Quicktime/MP4 irakurgailua: 'neurria' eremua txikiegia da jario azalpen 
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 irakurgailua: 'denbora neurria' parametroa 0 izan da. Hau ez dago sostengaturik.\n"
 
-#: src/input/r_qtmp4.cpp:3432
+#: src/input/r_qtmp4.cpp:3443
 #, no-c-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 irakurgailua: {0} AAC bideak ez du esds atomo/dekodeatzaile itxurapenik. Bide honi jauzi egiten.\n"
 
-#: src/input/r_qtmp4.cpp:3427
+#: src/input/r_qtmp4.cpp:3438
 #, no-c-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 irakurgailua: {0} audio bidea sostengatu gabeko {1} 'objetu mota id'-a erabiltzen ari da 'esds' atomoan. Bide honi jauzi egiten.\n"
 
-#: src/input/r_qtmp4.cpp:3484
+#: src/input/r_qtmp4.cpp:3495
 #, no-c-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 irakurgailua: {0} bideo bideak ez du ESDS atomorik. Bide honi jauzi egiten.\n"
@@ -9585,16 +9590,16 @@ msgstr "Quicktime/MP4 irakurgailua: Agiri honek idazburu konprimituak erabiltzen
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: {0}. Aborting.\n"
 msgstr "Quicktime/MP4 irakurgailua: Agiri honek idazburu konprimituak erabiltzen ditu, baina ezin da deskonprimitu. Akats kodea zlib-tik: {0}. Uzten.\n"
 
-#: src/input/r_qtmp4.cpp:2747
-#: src/input/r_qtmp4.cpp:2828
+#: src/input/r_qtmp4.cpp:2759
+#: src/input/r_qtmp4.cpp:2840
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Quicktime/MP4 irakurgailua: {0} ID-dun bideak FourCC bat baino gehiago ditu. Lehen hau bakarrik erabiltzen ({1}), eta ez beste hau ({2}).\n"
 
-#: src/input/r_qtmp4.cpp:3378
-#: src/input/r_qtmp4.cpp:3397
-#: src/input/r_qtmp4.cpp:3445
-#: src/input/r_qtmp4.cpp:3508
+#: src/input/r_qtmp4.cpp:3389
+#: src/input/r_qtmp4.cpp:3408
+#: src/input/r_qtmp4.cpp:3456
+#: src/input/r_qtmp4.cpp:3519
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 irakurgailua: {0} bideak ez ditu datu batzuk. Hautsitako atomo idazburuak?\n"
@@ -10123,8 +10128,8 @@ msgstr[1] "Mihatzen {0} agiri {1} irakur-zerrendatan.\n"
 msgid "Scope"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:103
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:115
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:104
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:116
 #, no-c-format
 msgid "See below for examples."
 msgstr "Ikusi azpian adibideak."
@@ -10239,7 +10244,7 @@ msgstr "Hautatu adierazitako &motako bide guztiak"
 msgid "Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."
 msgstr "Hautatu badagoen Matroska edo WebM agiri bat eta EIG-k bere zati UID-ak gehituko ditu sarrera eremura ezkerraldean."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:397
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:398
 #, no-c-format
 msgid "Select audio file"
 msgstr "Hautatu audio agiria"
@@ -10272,7 +10277,7 @@ msgid "Select disc library information to use"
 msgstr "Hautatu erabiltzeko diska liburu informazioa"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:995
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:319
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:320
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 #, no-c-format
 msgid "Select executable"
@@ -10551,13 +10556,13 @@ msgstr "Erakutsi laguntza hau."
 msgid "Show version information."
 msgstr "Erakutsi bertsio argibideak."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
 #: src/mkvtoolnix-gui/util/settings.cpp:51
 #, no-c-format
 msgid "Shut down the computer"
 msgstr "Itzali ordenagailua"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:144
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:145
 #, no-c-format
 msgid "Shut down the system in one minute:"
 msgstr "Itzali sistema minutu batean:"
@@ -10650,7 +10655,7 @@ msgstr "Jauzita {0} byte (baliogabeko DTS idazburua aurkitu da). Honek audio/bid
 msgid "Skipping {0} bytes at the beginning (no valid MP3 header found).\n"
 msgstr "Jauzita {0} byte hasieran (baliogabeko MP3 idazburua aurkitu da).\n"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:199
 #: src/mkvtoolnix-gui/util/settings.cpp:53
 #, no-c-format
 msgid "Sleep the computer"
@@ -10692,7 +10697,7 @@ msgstr "Iturburu agiri izena"
 msgid "Source file name: %1"
 msgstr "Iturburu agiri izena: %1"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:248
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:249
 #, no-c-format
 msgid "Source file names"
 msgstr "Iturburu agiri izenak"
@@ -10768,12 +10773,12 @@ msgstr "Hasiera"
 msgid "Start &multiplexing"
 msgstr "&Hasi multiplexaketa"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:111
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:112
 #, no-c-format
 msgid "Start file types other than executable files via cmd.exe."
 msgstr "Abiarazi exekutagarriak ez diren beste agiri motak cmd.exe bidez."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:113
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:114
 #, no-c-format
 msgid "Start file types other than executable files via xdg-open."
 msgstr "Abiarazi exekutagarriak ez diren beste agiri motak xdg-open bidez."
@@ -11264,7 +11269,7 @@ msgstr ""
 msgid "The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/mux_config.cpp:280
+#: src/mkvtoolnix-gui/merge/mux_config.cpp:281
 #, no-c-format
 msgid "The application will terminate now."
 msgstr "Aplikazioa orain amaituko da."
@@ -11348,7 +11353,7 @@ msgid "The character sets in the 'selected' list on the right will be shown at t
 msgstr "'hautaturik' zerrendan ezarritako hizki-kodeak progamaren hedagarrietan hizki-kode guztien gainean erakutsiko dira."
 
 #: src/output/p_avc.cpp:181
-#: src/output/p_hevc.cpp:154
+#: src/output/p_hevc.cpp:171
 #, no-c-format
 msgid "The chosen NALU size length of {0} is too small. Try using '4'.\n"
 msgstr "Hautaturiko {0}-ren NALU neurri luzera txikiegia da. Saiatu '4' erabiltzen.\n"
@@ -11369,7 +11374,7 @@ msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "Kodekaren datu pribatuak ez datoz bat (luzerak: {0} eta {1})."
 
 #: src/output/p_avc.cpp:132
-#: src/output/p_hevc.cpp:100
+#: src/output/p_hevc.cpp:114
 #, no-c-format
 msgid "The codec's private data does not match. Both have the same length ({0}) but different content."
 msgstr "Kodekaren datu pribatuak ez datoz bat. Biek luzera berdina dute ({0}), baina eduki ezberdina."
@@ -11384,7 +11389,7 @@ msgstr "Bideoaren margo lehenak."
 msgid "The colour transfer characteristics of the video."
 msgstr "Bideoaren margo eskualdaketa ezaugarriak."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:98
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:99
 #, no-c-format
 msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
 msgstr "Agindu lerroak hemen Unix-erako shell irtenbidea erabiltzen du ezkerbarra hizkiarekin baita Windowsen."
@@ -11598,7 +11603,7 @@ msgstr "'%1' agiriak etiketak ditu."
 msgid "The file '%1' could not be found in the installation folder."
 msgstr "'%1' agiria ezin da ezarpen agiritegian aurkitu."
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:584
+#: src/mkvtoolnix-gui/jobs/tool.cpp:580
 #, no-c-format
 msgid "The file '%1' exists already and might be overwritten depending on the configuration & the content of the source files."
 msgstr ""
@@ -11896,7 +11901,7 @@ msgstr ""
 msgid "The following modes are supported:"
 msgstr "Hurrengo moduak sostengatzen dira:"
 
-#: src/mkvtoolnix-gui/merge/mux_config.cpp:278
+#: src/mkvtoolnix-gui/merge/mux_config.cpp:279
 #, no-c-format
 msgid "The following non-recoverable error was found: %1."
 msgstr ""
@@ -12808,7 +12813,7 @@ msgstr "Hau kakotxaz banandutako 128-biteko zati UID zerrenda bat da ohiko UID f
 msgid "This is also done when quitting the application."
 msgstr "Hau aplikazioa uzterakoan ere egiten da."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:225
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
 #, no-c-format
 msgid "This is an arbitrary name the GUI can use to refer to this particular configuration."
 msgstr "Hau EIG-k itxurapen zehatz hau izendatzeko erabili dezakeen izen arbitrario bat da."
@@ -12853,7 +12858,7 @@ msgstr "Hau erabiltzen dute adib. MPEG-1/-2 bideo bideek sekuentzia idazburuak b
 msgid "This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a playlist belongs to."
 msgstr "Hau erabilgarria da Blu-ray diskak bezalako egoeratan non irarkur zerrenda ugari dauden zuzenbide berean eta argi ez dagoen zein ezaugarri duen irakur-zerrenda bakoitzak (adib. filma nagusia, gehigarriak, etab)."
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:99
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:100
 #, no-c-format
 msgid "This means that either backslashes must be doubled or the whole argument must be enclosed in single quotes."
 msgstr "Honek esanahi du ezkerbarrak bikoitzak izan behar direla edo argumentu osoa adartxo soilen ('argm') barnean egon behar dela."
@@ -13223,7 +13228,7 @@ msgstr "{0} bidea: NAL handiegia. Idazburu eremuaren araberako neurria: {1}, byt
 msgid "Track {0}: Subtitle entry number {1} is missing its duration. Assuming a duration of 1s.\n"
 msgstr "{0} bidea: {1} zenbakiko azpidatzi sarrerak ez du iraupenik. 1 seg-ko iraupena suposatzen.\n"
 
-#: src/input/r_qtmp4.cpp:2910
+#: src/input/r_qtmp4.cpp:2922
 #, no-c-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "{0} bidea: AAC argibideak ezin dira aztertu.\n"
@@ -13288,7 +13293,7 @@ msgstr "Mota"
 msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
 msgstr "Erakuspenerako Zabalera/Garaiera unitate mota (0: pixel, 1: metroehunen, 2: hatzbete, 3: ikuspegi maila)."
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:327
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:336
 #, no-c-format
 msgid "Type-specific settings"
 msgstr "Idatzi ezarpen bereizika"
@@ -13473,7 +13478,7 @@ msgstr "Eguneratzen huts egin duen '{0}' gaia. Zergaitika:"
 msgid "Usage"
 msgstr "Erabilera"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:96
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:97
 #, no-c-format
 msgid "Usage and examples"
 msgstr "Erabilpena eta adibideak"
@@ -13543,7 +13548,7 @@ msgstr "Irteera modulo generikoa erabiltzen '{0}' bide motarako.\n"
 msgid "Using the output module for the format '{0}'.\n"
 msgstr "Irteera moduloa erabiltzen '{0}' heuskarrirako.\n"
 
-#: src/merge/cluster_helper.cpp:756
+#: src/merge/cluster_helper.cpp:758
 #, no-c-format
 msgid "Using the track with the ID {0} from the file '{1}' as the reference for chapter generation.\n"
 msgstr "ID {0} duen bidea erabiltzen '{1}' agiritik atal sortze zehaztasun bezala.\n"
@@ -13589,12 +13594,12 @@ msgstr "Balioa"
 msgid "Value: %1"
 msgstr "Balioa: %1"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:238
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:239
 #, no-c-format
 msgid "Variables for all job types"
 msgstr "Lan mota guztientzako aldagaiak"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:245
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:246
 #, no-c-format
 msgid "Variables for multiplex jobs"
 msgstr "Multiplexatze lanentzako aldagaiak"
@@ -14064,7 +14069,7 @@ msgstr "Erabiltzaileak agiriak kanpoko aplikazio batetik batze tresnara arrastat
 msgid "When the user drags & drops files from an external application onto the multiplex tool the GUI can take different actions."
 msgstr "Erabiltzaileak agiriak kanpoko aplikazio batetik multiplexatze tresnara arrastatu eta askatzen dituenean EIG-k ekintza ezberdinak egin ditzake."
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:324
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:333
 #, no-c-format
 msgid "When to execute:"
 msgstr "Exekutatu:"
@@ -14134,7 +14139,7 @@ msgstr "\"sortu ezarpen berriak\"-rekin multiplexatze ezarpen berri bat gehituko
 msgid "With \"remove source files\" all source files will be removed."
 msgstr "\"kendu sarrera agiriak\"-rekin iturburu arrera agiri guztiak kenduko dira."
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:427
+#: src/mkvtoolnix-gui/merge/tab.cpp:429
 #, no-c-format
 msgid "With the current multiplex settings the destination file will not contain an audio track."
 msgstr ""
@@ -14964,8 +14969,8 @@ msgstr "ogg_stream_init {0} zenbaki jariorako hutsegitea. Saiatzen jarraitu eta 
 msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer hutsegitea\n"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:126
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:130
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:127
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:131
 #, no-c-format
 msgid "or"
 msgstr "edo"

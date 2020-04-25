@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-04-02 22:37+0200\n"
+"POT-Creation-Date: 2020-04-25 10:38+0200\n"
 "PO-Revision-Date: 2020-04-03 03:23+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -1531,7 +1531,7 @@ msgstr "行为规范(&C)"
 msgid "&Collapse all"
 msgstr "全部收起(&C)"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:328
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:337
 #, no-c-format
 msgid "&Command line:"
 msgstr "命令行(&C):"
@@ -1556,7 +1556,7 @@ msgstr "复制命令行到剪贴板(&C)"
 msgid "&Country:"
 msgstr "国家(&C):"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:429
+#: src/mkvtoolnix-gui/merge/tab.cpp:431
 #, no-c-format
 msgid "&Create file without audio track"
 msgstr "创建无音频轨的文件(&C)"
@@ -1760,7 +1760,7 @@ msgid "&Multiply start and end timestamps by the following factor:"
 msgstr "将起止时间戳乘以该系数(&M):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:527
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:326
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:335
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1820
 #, no-c-format
 msgid "&Name:"
@@ -1862,7 +1862,7 @@ msgstr "有序(&O)"
 msgid "&Output"
 msgstr "输出(&O)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:612
+#: src/mkvtoolnix-gui/jobs/tool.cpp:620
 #, no-c-format
 msgid "&Overwrite file"
 msgstr "覆盖文件(&O)"
@@ -2053,7 +2053,7 @@ msgstr "标签编辑器(&T)"
 msgid "&Tracks, chapters and tags:"
 msgstr "轨道、章节及标签(&T):"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:325
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:334
 #, no-c-format
 msgid "&Type:"
 msgstr "类型(&T):"
@@ -2092,7 +2092,7 @@ msgstr "视频轨道(&V):"
 msgid "&View output"
 msgstr "查看输出消息(&V)"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:331
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:340
 #, no-c-format
 msgid "&Volume:"
 msgstr "音量(&V):"
@@ -2766,7 +2766,7 @@ msgstr "一个人类可读的字串，描述编码格式。"
 msgid "A human-readable track name."
 msgstr "一个人类可读的字串，描述轨道名称。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:609
+#: src/mkvtoolnix-gui/jobs/tool.cpp:617
 #, no-c-format
 msgid "A job creating the file '%1' is already in the job queue."
 msgstr "任务队列中已经存在一个输出文件为 '%1' 的任务。"
@@ -2839,7 +2839,7 @@ msgstr "从 Matroska / WebM / 章节文件追加章节(&P)"
 msgid "A&ppend files"
 msgstr "追加合并文件(&P)"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:330
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:339
 #, no-c-format
 msgid "A&udio file:"
 msgstr "音频文件(&U):"
@@ -3018,7 +3018,7 @@ msgstr "处理标签与章节的操作"
 msgid "Add &Blu-ray cover images as attachments"
 msgstr "将 &Blu-ray 封面图像添加为附件"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:329
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:338
 #, no-c-format
 msgid "Add &variable"
 msgstr "添加变量(&V)"
@@ -3188,12 +3188,17 @@ msgstr "Adler-32:"
 msgid "Adler-32: 0x{0:08x}"
 msgstr "Adler-32: 0x{0:08x}"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:320
-#, no-c-format
-msgid "After a job completes &successfully or with warnings"
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:328
+#, fuzzy, no-c-format
+msgid "After a job completes &successfully"
 msgstr "在任务成功完成后，或完成但有警告后执行(&S)"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:321
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:329
+#, fuzzy, no-c-format
+msgid "After a job exits with &warnings"
+msgstr "在任务成功完成后，或完成但有警告后执行(&S)"
+
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:330
 #, no-c-format
 msgid "After a job exits with an &error or the user aborts the job"
 msgstr "在任务出错退出后，或用户中止任务后执行(&E)"
@@ -3218,7 +3223,7 @@ msgstr "在输出一定大小后"
 msgid "After specific timestamps"
 msgstr "在特定时间点之后"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:322
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:331
 #, no-c-format
 msgid "After the job &queue has stopped"
 msgstr "在任务队列停止后执行(&Q)"
@@ -3282,8 +3287,8 @@ msgstr "所有条目"
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:165
 #: src/mkvtoolnix-gui/info/tool.cpp:128
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:993
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:316
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:394
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:317
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:395
 #: src/mkvtoolnix-gui/merge/attachments.cpp:272
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:65
 #: src/mkvtoolnix-gui/merge/tab.cpp:201
@@ -3415,7 +3420,7 @@ msgstr "总是在标签页下方显示“输出文件”控件(&B)"
 msgid "Always use a &default description when adding a job to the queue"
 msgstr "当添加任务到队列时，自动使用默认描述(&D)"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:106
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:107
 #, no-c-format
 msgid "Always use full path names even if the application is located in the same directory as the GUI."
 msgstr "请务必使用完整路径名称，即使应用程序与 GUI 位于同一个目录中。"
@@ -3634,7 +3639,7 @@ msgstr "音频位深"
 msgid "Audio channels"
 msgstr "音频声道数"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:393
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:394
 #, no-c-format
 msgid "Audio files"
 msgstr "音频文件"
@@ -3872,7 +3877,7 @@ msgstr "按帧/场编号分段"
 msgid "By parts based on timestamps"
 msgstr "按时间点分段"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:319
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:327
 #, no-c-format
 msgid "C&onfiguration active"
 msgstr "配置已启用(&O)"
@@ -3882,7 +3887,7 @@ msgstr "配置已启用(&O)"
 msgid "C&onstrict or expand timestamps"
 msgstr "收缩或扩展时间戳(&O)"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:587
+#: src/mkvtoolnix-gui/jobs/tool.cpp:582
 #, no-c-format
 msgid "C&ontinue"
 msgstr "继续(&O)"
@@ -3934,11 +3939,11 @@ msgstr "计算所有轨道的统计信息，并为其添加新的／更新现有
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:270
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:877
 #: src/mkvtoolnix-gui/jobs/tool.cpp:518
-#: src/mkvtoolnix-gui/jobs/tool.cpp:588
-#: src/mkvtoolnix-gui/jobs/tool.cpp:613
+#: src/mkvtoolnix-gui/jobs/tool.cpp:583
+#: src/mkvtoolnix-gui/jobs/tool.cpp:621
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:433
 #: src/mkvtoolnix-gui/merge/input.cpp:1338
-#: src/mkvtoolnix-gui/merge/tab.cpp:430
+#: src/mkvtoolnix-gui/merge/tab.cpp:432
 #: src/mkvtoolnix-gui/merge/tool.cpp:221
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:197
 #, no-c-format
@@ -4063,7 +4068,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "首个条目的章节编号(&N):"
 
 #: src/common/chapters/chapters.cpp:47
-#: src/mkvtoolnix-gui/util/settings.cpp:357
+#: src/mkvtoolnix-gui/util/settings.cpp:379
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "第 <NUM:2> 章"
@@ -4117,7 +4122,7 @@ msgstr "章节标记启用"
 msgid "Chapter flag hidden"
 msgstr "章节标记隐藏"
 
-#: src/merge/cluster_helper.cpp:754
+#: src/merge/cluster_helper.cpp:756
 #, no-c-format
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr "至少需复制一个视频轨或音频轨，方可使用章节生成。\n"
@@ -4678,7 +4683,7 @@ msgstr "创建 WebM 兼容文件。"
 msgid "Create a new one or open an existing one via the \"multiplexer\" menu, the buttons below or drag & drop one here."
 msgstr "新建一个任务，或打开现有的任务（通过“混流”菜单、下方的按钮或将设置文件拖入本窗口）。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:425
+#: src/mkvtoolnix-gui/merge/tab.cpp:427
 #, no-c-format
 msgid "Create file without audio track"
 msgstr "创建无音频轨的文件"
@@ -4932,7 +4937,7 @@ msgstr "索引 (子条目将被跳过)"
 msgid "Current command line"
 msgstr "当前命令行"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:251
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:252
 #, no-c-format
 msgid "Current date && time in ISO 8601 format"
 msgstr "当前日期与时间 (ISO 8601 格式)"
@@ -5020,7 +5025,7 @@ msgstr "完成时间"
 msgid "Date started"
 msgstr "启动时间"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
 #, no-c-format
 msgid "Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."
 msgstr "取消选择本复选框，可以临时禁用一项配置，而无需更改其参数。"
@@ -5143,7 +5148,7 @@ msgstr "删除该属性的所有条目"
 msgid "Delete one or more attachments"
 msgstr "删除一个或多个附件"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:199
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:200
 #: src/mkvtoolnix-gui/util/settings.cpp:54
 #, no-c-format
 msgid "Delete source files for multiplexer jobs"
@@ -5219,12 +5224,12 @@ msgstr "输出文件名"
 msgid "Destination file name: %1"
 msgstr "输出文件名: %1"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:248
 #, no-c-format
 msgid "Destination file's directory"
 msgstr "输出文件目录"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:246
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
 #, no-c-format
 msgid "Destination file's name"
 msgstr "输出文件名"
@@ -5397,17 +5402,17 @@ msgstr "确定要中止该任务吗？"
 msgid "Do you really want to add '%1' as another attachment?"
 msgstr "是否确定将“%1”添加为附件?"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:586
+#: src/mkvtoolnix-gui/jobs/tool.cpp:581
 #, no-c-format
 msgid "Do you want to continue and risk overwriting the file?"
 msgstr "是否希望冒着覆盖文件的风险继续操作?"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:428
+#: src/mkvtoolnix-gui/merge/tab.cpp:430
 #, no-c-format
 msgid "Do you want to continue?"
 msgstr "是否继续?"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:611
+#: src/mkvtoolnix-gui/jobs/tool.cpp:619
 #, no-c-format
 msgid "Do you want to overwrite the file?"
 msgstr "是否覆盖该文件？"
@@ -5516,7 +5521,7 @@ msgstr "在相应工具中编辑并从队列中移除(&D)"
 msgid "E&nable all attachments"
 msgstr "启用所有附件(&N)"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:323
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:332
 #, no-c-format
 msgid "E&xecute now"
 msgstr "立即执行(&X)"
@@ -5724,7 +5729,7 @@ msgstr "语言名称 (以英语表示)"
 msgid "Ensure the file name is &unique"
 msgstr "确保文件名唯一(&U)"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:460
+#: src/mkvtoolnix-gui/merge/tab.cpp:462
 #, no-c-format
 msgid "Enter job description"
 msgstr "输入任务描述"
@@ -5744,7 +5749,7 @@ msgstr "输入预先定义的切割大小"
 msgid "Enter predefined track name"
 msgstr "输入预先定义的轨道名称"
 
-#: src/mkvtoolnix-gui/merge/mux_config.cpp:284
+#: src/mkvtoolnix-gui/merge/mux_config.cpp:285
 #, no-c-format
 msgid "Error"
 msgstr "错误"
@@ -5898,7 +5903,7 @@ msgstr "即使存在警告也移除"
 msgid "Example"
 msgstr "示例"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:119
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:120
 #, no-c-format
 msgid "Examples"
 msgstr "示例"
@@ -5919,7 +5924,7 @@ msgid "Exception details:"
 msgstr "异常详情:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:991
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:314
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:315
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 #, no-c-format
 msgid "Executable files"
@@ -5930,7 +5935,7 @@ msgstr "可执行文件"
 msgid "Executable not found"
 msgstr "找不到可执行文件"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:194
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
 #: src/mkvtoolnix-gui/util/settings.cpp:62
 #, no-c-format
 msgid "Execute a program"
@@ -5951,7 +5956,7 @@ msgstr "队列完成后执行操作(&Q)"
 msgid "Execute program '%1'"
 msgstr "执行程序“%1”"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:228
 #, no-c-format
 msgid "Executes the action immediately."
 msgstr "立即执行操作。"
@@ -5966,7 +5971,7 @@ msgstr "操作执行"
 msgid "Executing actions after certain events"
 msgstr "在特定事件后执行操作"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:243
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
 #, no-c-format
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
 msgstr "退出代码 (0: 正常，1: 发生警告，2: 发生错误)"
@@ -5991,7 +5996,7 @@ msgstr "将数据提取为原始文件，并以 CodecPrivate 编码格式私有�
 msgid "Extract the data to a raw file."
 msgstr "将数据提取为原始文件。"
 
-#: src/output/p_hevc.cpp:71
+#: src/output/p_hevc.cpp:78
 #: src/output/p_hevc_es.cpp:135
 #, no-c-format
 msgid "Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"
@@ -6420,7 +6425,7 @@ msgstr "通用"
 msgid "General options"
 msgstr "通用选项"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:250
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:251
 #, no-c-format
 msgid "General variables"
 msgstr "通用变量"
@@ -6510,7 +6515,7 @@ msgid "HDMV TextST subtitles"
 msgstr "HDMV TextST 字幕"
 
 #: src/common/file_types.cpp:88
-#: src/output/p_hevc.h:32
+#: src/output/p_hevc.h:36
 #, no-c-format
 msgid "HEVC/H.265"
 msgstr "HEVC/H.265"
@@ -6565,7 +6570,7 @@ msgstr "视频帧的编码高度，单位为像素。"
 msgid "Height of the video frames to display."
 msgstr "视频帧的显示高度。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
 #: src/mkvtoolnix-gui/util/settings.cpp:52
 #, no-c-format
 msgid "Hibernate the computer"
@@ -6664,7 +6669,7 @@ msgstr "若起始编号未指定，则将使用前一范围的终止时间戳作
 msgid "If a start timestamp is left out then the previous range's end timestamp is used, or the start of the file if there was no previous range."
 msgstr "若起始时间戳未指定，则将使用前一范围的终止时间戳作为起始。如果不存在前一范围，则以文件开头作为起始。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:222
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:223
 #, no-c-format
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr "若选中了这些复选框，则将在符合特定条件时执行对应操作。"
@@ -6941,7 +6946,7 @@ msgstr "如果已知轨道存在，但未能找到，可以在此更改探测百
 msgid "If two or more timestamps are used then you have to separate them with commas."
 msgstr "若使用了两个或以上的时间戳，请在中间用逗号分隔。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:610
+#: src/mkvtoolnix-gui/jobs/tool.cpp:618
 #, no-c-format
 msgid "If you add another job with the same destination file then file created before will be overwritten."
 msgstr "如果再添加一个相同输出文件的任务，则先前任务创建的文件将会被覆盖。"
@@ -7022,7 +7027,7 @@ msgstr "不一致的 AAC 音频数据包 (长度: {0} != {1})\n"
 msgid "Increase verbosity."
 msgstr "启用更详细的输出消息。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:223
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:224
 #, no-c-format
 msgid "Independent of the checkboxes, every active configuration can be triggered manually from the \"job output\" tool."
 msgstr "不论复选框情况，配置的所有可用操作都可以在“任务输出”界面手动触发。"
@@ -7525,12 +7530,12 @@ msgstr "JSON 选项文件只能包含一个 JSON 数组，其元素只能为 JSO
 msgid "Job &output"
 msgstr "任务输出消息(&O)"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:240
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:241
 #, no-c-format
 msgid "Job description"
 msgstr "任务描述"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:242
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:243
 #, no-c-format
 msgid "Job end date && time in ISO 8601 format"
 msgstr "任务完成日期与时间 (ISO 8601 格式)"
@@ -7548,12 +7553,12 @@ msgstr "任务输出"
 msgid "Job queue"
 msgstr "任务队列"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:241
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:242
 #, no-c-format
 msgid "Job start date && time in ISO 8601 format"
 msgstr "任务启动日期与时间 (ISO 8601 格式)"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:239
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:240
 #, no-c-format
 msgid "Job type ('multiplexer' or 'info')"
 msgstr "任务类型 (「混流器」或「信息」)"
@@ -7788,7 +7793,7 @@ msgstr "MKVToolNix GUI 设置文件"
 msgid "MKVToolNix GUI preferences"
 msgstr "MKVToolNix GUI 偏好设置"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:252
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:253
 #, no-c-format
 msgid "MKVToolNix GUI's installation directory"
 msgstr "MKVToolNix GUI 安装目录"
@@ -8288,7 +8293,7 @@ msgstr "未找到「EBML 头」元素。"
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "初始帧中未发现 AC-3 头；此轨道将被跳过。\n"
 
-#: src/input/r_qtmp4.cpp:3414
+#: src/input/r_qtmp4.cpp:3425
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "初始帧中未发现 DTS 头; 该轨道将被跳过。\n"
@@ -8600,12 +8605,12 @@ msgstr "注意，即使不勾选该选项，除非用户手动指定标题，mkv
 msgid "Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."
 msgstr "注意，很多播放器设置初始窗口大小时，并不直接使用显示宽度/高度数值，而只使用它们的比值。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:228
 #, no-c-format
 msgid "Note that most <MTX_…> variables are empty and will be removed for actions that can take variables as arguments."
 msgstr "注意，大多 <MTX_…> 变量为空，执行将变量作为参数的操作时将移除这些变量。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:101
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:102
 #, no-c-format
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "注意，在 Windows 平台，路径名称中的反斜杠 (\\) 也可以用正斜杠 (/) 代替。"
@@ -8864,7 +8869,7 @@ msgstr "在章节编辑器中打开文件"
 msgid "Open settings file"
 msgstr "打开设置文件"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:160
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:161
 #, no-c-format
 msgid "Open the multiplexed file with a player:"
 msgstr "用播放器打开混流后的文件:"
@@ -8981,8 +8986,8 @@ msgstr "用指定的字符集输出消息"
 msgid "Output sampling frequency"
 msgstr "输出采样频率"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:582
-#: src/mkvtoolnix-gui/jobs/tool.cpp:607
+#: src/mkvtoolnix-gui/jobs/tool.cpp:578
+#: src/mkvtoolnix-gui/jobs/tool.cpp:615
 #, no-c-format
 msgid "Overwrite existing file"
 msgstr "覆盖已有文件"
@@ -9068,12 +9073,12 @@ msgstr "像素高度"
 msgid "Pixel width"
 msgstr "像素宽度"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:121
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:122
 #, no-c-format
 msgid "Play a WAV file with the default application:"
 msgstr "用默认应用程序播放 WAV 文件:"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:195
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
 #: src/mkvtoolnix-gui/util/settings.cpp:74
 #, no-c-format
 msgid "Play an audio file"
@@ -9110,7 +9115,7 @@ msgid "Playlists shorter than %1 second will be ignored."
 msgid_plural "Playlists shorter than %1 seconds will be ignored."
 msgstr[0] "长度小于 %1 秒的播放列表将会被忽略。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:460
+#: src/mkvtoolnix-gui/merge/tab.cpp:462
 #, no-c-format
 msgid "Please enter the new job's description."
 msgstr "请输入新任务的描述。"
@@ -9391,7 +9396,7 @@ msgstr "QuickTime/MP4"
 msgid "Quicktime/MP4 reader: '{0}' atom is too small. Expected size: >= {1}. Actual size: {2}.\n"
 msgstr "Quicktime/MP4 读取器:「{0}」单元过小。预期尺寸: >= {1}。实际尺寸: {2}。\n"
 
-#: src/input/r_qtmp4.cpp:2339
+#: src/input/r_qtmp4.cpp:2351
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime/MP4 读取器: 尚不支持恒定采样尺寸与可变时长。如果您有这样的文件样本，请联系作者。\n"
@@ -9401,13 +9406,13 @@ msgstr "Quicktime/MP4 读取器: 尚不支持恒定采样尺寸与可变时长�
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Quicktime/MP4 读取器: 无法从位置 {3} 读取大小为 {2} 的块 {0}/{1}。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:2773
-#: src/input/r_qtmp4.cpp:2787
+#: src/input/r_qtmp4.cpp:2785
+#: src/input/r_qtmp4.cpp:2799
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 读取器: 无法读取轨道 ID {0} 的扩展音频描述单元。\n"
 
-#: src/input/r_qtmp4.cpp:2739
+#: src/input/r_qtmp4.cpp:2751
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 读取器: 无法读取轨道 ID {0} 的音频描述单元。\n"
@@ -9417,7 +9422,7 @@ msgstr "Quicktime/MP4 读取器: 无法读取轨道 ID {0} 的音频描述单元
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 读取器: 无法读取轨道 ID {0} 的流描述单元。\n"
 
-#: src/input/r_qtmp4.cpp:2821
+#: src/input/r_qtmp4.cpp:2833
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Quicktime/MP4 读取器: 无法读取轨道 ID {0} 的视频描述单元。\n"
@@ -9437,17 +9442,17 @@ msgstr "Quicktime/MP4 读取器: 未发现 'mdat' 单元。找不到影片数据
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
 msgstr "Quicktime/MP4 读取器: 位置 {1} 存在无效的块大小 {0}。\n"
 
-#: src/input/r_qtmp4.cpp:3464
+#: src/input/r_qtmp4.cpp:3475
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEG4 part 10/AVC 轨道 {0} 缺少解码器配置信息。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3490
+#: src/input/r_qtmp4.cpp:3501
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEG4 轨道 {0} 缺少 esds 单元 (解码器配置信息)。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3474
+#: src/input/r_qtmp4.cpp:3485
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: MPEGH part 2/HEVC 轨道 {0} 缺少解码器配置信息。正在跳过该轨道。\n"
@@ -9467,17 +9472,17 @@ msgstr "Quicktime/MP4 读取器: 轨道 {0} 的流描述单元的 'size' 字段�
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime/MP4 读取器: 'time scale' 参数为 0。这不被支持。\n"
 
-#: src/input/r_qtmp4.cpp:3432
+#: src/input/r_qtmp4.cpp:3443
 #, no-c-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: AAC 轨道 {0} 缺少 esds 单元 (解码器配置信息)。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3427
+#: src/input/r_qtmp4.cpp:3438
 #, no-c-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: 音频轨道 {0} 的 'esds' 单元使用了不支持的 'object type id' {1}。正在跳过该轨道。\n"
 
-#: src/input/r_qtmp4.cpp:3484
+#: src/input/r_qtmp4.cpp:3495
 #, no-c-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime/MP4 读取器: 视频轨道 {0} 缺少 ESDS 单元。正在跳过此轨道。\n"
@@ -9502,16 +9507,16 @@ msgstr "Quicktime/MP4 读取器: 此文件头部经压缩，但无法初始化 z
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: {0}. Aborting.\n"
 msgstr "Quicktime/MP4 读取器: 此文件头部经压缩，但无法解压。zlib 错误代码: {0}。正在中止。\n"
 
-#: src/input/r_qtmp4.cpp:2747
-#: src/input/r_qtmp4.cpp:2828
+#: src/input/r_qtmp4.cpp:2759
+#: src/input/r_qtmp4.cpp:2840
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Quicktime/MP4 读取器: 轨道 ID {0} 有多于一个 FourCC。仅使用第一个 ({1}) 而非 ({2})。\n"
 
-#: src/input/r_qtmp4.cpp:3378
-#: src/input/r_qtmp4.cpp:3397
-#: src/input/r_qtmp4.cpp:3445
-#: src/input/r_qtmp4.cpp:3508
+#: src/input/r_qtmp4.cpp:3389
+#: src/input/r_qtmp4.cpp:3408
+#: src/input/r_qtmp4.cpp:3456
+#: src/input/r_qtmp4.cpp:3519
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Quicktime/MP4 读取器: 轨道 {0} 缺少一些数据。头部单元损坏？\n"
@@ -10039,8 +10044,8 @@ msgstr[0] "正在扫描 {1} 个播放列表中的 {0} 个文件。\n"
 msgid "Scope"
 msgstr "范围"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:103
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:115
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:104
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:116
 #, no-c-format
 msgid "See below for examples."
 msgstr "示例请参见下文。"
@@ -10154,7 +10159,7 @@ msgstr "选择所有同类轨道(&T)"
 msgid "Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."
 msgstr "选择一个现有的 Matroska 或 WebM 文件，GUI 会自动将其剪辑 UID 添加到左侧的输入框中。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:397
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:398
 #, no-c-format
 msgid "Select audio file"
 msgstr "选中音频文件"
@@ -10187,7 +10192,7 @@ msgid "Select disc library information to use"
 msgstr "选择要使用的光盘库信息"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:995
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:319
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:320
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 #, no-c-format
 msgid "Select executable"
@@ -10462,13 +10467,13 @@ msgstr "显示本帮助。"
 msgid "Show version information."
 msgstr "显示版本信息。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
 #: src/mkvtoolnix-gui/util/settings.cpp:51
 #, no-c-format
 msgid "Shut down the computer"
 msgstr "关闭计算机"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:144
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:145
 #, no-c-format
 msgid "Shut down the system in one minute:"
 msgstr "在一分钟内关闭系统:"
@@ -10561,7 +10566,7 @@ msgstr "跳过 {0} 字节 (未发现有效的 DTS 头)。这可能会导致音�
 msgid "Skipping {0} bytes at the beginning (no valid MP3 header found).\n"
 msgstr "跳过开头 {0} 字节 (未发现有效的 MP3 头)。\n"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:198
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:199
 #: src/mkvtoolnix-gui/util/settings.cpp:53
 #, no-c-format
 msgid "Sleep the computer"
@@ -10603,7 +10608,7 @@ msgstr "输入文件名"
 msgid "Source file name: %1"
 msgstr "输入文件名: %1"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:248
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:249
 #, no-c-format
 msgid "Source file names"
 msgstr "输入文件名"
@@ -10679,12 +10684,12 @@ msgstr "起始时间"
 msgid "Start &multiplexing"
 msgstr "开始混流(&M)"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:111
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:112
 #, no-c-format
 msgid "Start file types other than executable files via cmd.exe."
 msgstr "通过 cmd.exe 启动非可执行文件。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:113
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:114
 #, no-c-format
 msgid "Start file types other than executable files via xdg-open."
 msgstr "通过 xdg-open 启动非可执行文件。"
@@ -11164,7 +11169,7 @@ msgstr "对 Cr 与 Cb 通道中水平方向未移除的像素，需要移除的�
 msgid "The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."
 msgstr "对 Cr 与 Cb 通道中垂直方向未移除的像素，需要移除的像素数量。"
 
-#: src/mkvtoolnix-gui/merge/mux_config.cpp:280
+#: src/mkvtoolnix-gui/merge/mux_config.cpp:281
 #, no-c-format
 msgid "The application will terminate now."
 msgstr "应用程序将立刻终止。"
@@ -11248,7 +11253,7 @@ msgid "The character sets in the 'selected' list on the right will be shown at t
 msgstr "右侧“选中”列表中的字符集将会显示在程序中所有字符集下拉列表的顶部。"
 
 #: src/output/p_avc.cpp:181
-#: src/output/p_hevc.cpp:154
+#: src/output/p_hevc.cpp:171
 #, no-c-format
 msgid "The chosen NALU size length of {0} is too small. Try using '4'.\n"
 msgstr "选择的 NALU 大小的数值长度 {0} 过小。请尝试使用 '4'。\n"
@@ -11269,7 +11274,7 @@ msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "编码格式私有数据不匹配 (长度: {0} 与 {1})。"
 
 #: src/output/p_avc.cpp:132
-#: src/output/p_hevc.cpp:100
+#: src/output/p_hevc.cpp:114
 #, no-c-format
 msgid "The codec's private data does not match. Both have the same length ({0}) but different content."
 msgstr "编码格式私有数据不匹配。长度相同 ({0}) 但内容不同。"
@@ -11284,7 +11289,7 @@ msgstr "视频的颜色基准。"
 msgid "The colour transfer characteristics of the video."
 msgstr "视频的颜色传输特征。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:98
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:99
 #, no-c-format
 msgid "The command line here uses Unix-style shell escaping via the backslash character even on Windows."
 msgstr "这里的命令行采用 Unix 风格的 shell 转义（反斜杠“\\”），即使在 Windows 平台也是如此。"
@@ -11497,7 +11502,7 @@ msgstr "文件 '%1' 包含标签。"
 msgid "The file '%1' could not be found in the installation folder."
 msgstr "安装目录中找不到文件“%1”。"
 
-#: src/mkvtoolnix-gui/jobs/tool.cpp:584
+#: src/mkvtoolnix-gui/jobs/tool.cpp:580
 #, no-c-format
 msgid "The file '%1' exists already and might be overwritten depending on the configuration & the content of the source files."
 msgstr "文件「%1」已存在，根据配置及输入文件内容的变化，有可能被覆盖。"
@@ -11795,7 +11800,7 @@ msgstr "第一个非空的捕获圆括号将作为语言。"
 msgid "The following modes are supported:"
 msgstr "支持以下模式:"
 
-#: src/mkvtoolnix-gui/merge/mux_config.cpp:278
+#: src/mkvtoolnix-gui/merge/mux_config.cpp:279
 #, no-c-format
 msgid "The following non-recoverable error was found: %1."
 msgstr "出现下述无法挽救的错误: %1。"
@@ -12704,7 +12709,7 @@ msgstr "此处为逗号分隔的 128 位剪辑 UID 列表，UID 格式与通常�
 msgid "This is also done when quitting the application."
 msgstr "退出程序时同样也会询问。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:225
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:226
 #, no-c-format
 msgid "This is an arbitrary name the GUI can use to refer to this particular configuration."
 msgstr "GUI 用来准确定位该配置的字面名称。"
@@ -12749,7 +12754,7 @@ msgstr "该元素在 MPEG-1/-2 视频轨道等处用于存储序列头部。"
 msgid "This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a playlist belongs to."
 msgstr "该功能在同目录下存在较多播放列表且无法快速判断播放列表包含的内容 (正片、花絮等) 时比较有用，例如蓝光影碟。"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:99
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:100
 #, no-c-format
 msgid "This means that either backslashes must be doubled or the whole argument must be enclosed in single quotes."
 msgstr "这意味着要表示反斜杠，必须自转义（“\\\\”）或给整个参数加单引号。"
@@ -13119,7 +13124,7 @@ msgstr "轨道 {0}: NAL 过大。头部字段给出的大小: {1}，封包中可
 msgid "Track {0}: Subtitle entry number {1} is missing its duration. Assuming a duration of 1s.\n"
 msgstr "轨道 {0}: 字幕编号 {1} 缺少时长。视作 1 秒处理。\n"
 
-#: src/input/r_qtmp4.cpp:2910
+#: src/input/r_qtmp4.cpp:2922
 #, no-c-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "轨道 {0}: AAC 信息无法解析。\n"
@@ -13184,7 +13189,7 @@ msgstr "类型"
 msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
 msgstr "显示宽度/高度的单位类型 (0: 像素，1: 厘米，2: 英寸，3: 宽高比)。"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:327
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:336
 #, no-c-format
 msgid "Type-specific settings"
 msgstr "类型相关设置"
@@ -13369,7 +13374,7 @@ msgstr "更新元素「{0}」失败。原因:"
 msgid "Usage"
 msgstr "用法"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:96
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:97
 #, no-c-format
 msgid "Usage and examples"
 msgstr "用法及示例"
@@ -13439,7 +13444,7 @@ msgstr "使用「{0}」类型轨道通用输出模块。\n"
 msgid "Using the output module for the format '{0}'.\n"
 msgstr "使用「{0}」格式输出模块。\n"
 
-#: src/merge/cluster_helper.cpp:756
+#: src/merge/cluster_helper.cpp:758
 #, no-c-format
 msgid "Using the track with the ID {0} from the file '{1}' as the reference for chapter generation.\n"
 msgstr "使用文件「{1}」中 ID 为 {0} 的轨道作为章节生成的参考。\n"
@@ -13485,12 +13490,12 @@ msgstr "值"
 msgid "Value: %1"
 msgstr "值: %1"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:238
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:239
 #, no-c-format
 msgid "Variables for all job types"
 msgstr "用于所有任务类型的变量"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:245
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:246
 #, no-c-format
 msgid "Variables for multiplex jobs"
 msgstr "用于混流任务的变量"
@@ -13960,7 +13965,7 @@ msgstr "当用户将文件从外部应用程序拖放到头部编辑器标签页
 msgid "When the user drags & drops files from an external application onto the multiplex tool the GUI can take different actions."
 msgstr "当用户从外部程序中拖放文件到混流工具时，程序可以进行不同的操作。"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:324
+#: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:333
 #, no-c-format
 msgid "When to execute:"
 msgstr "执行条件:"
@@ -14030,7 +14035,7 @@ msgstr "若设为“新建设置页”，将新建一组混流设置。"
 msgid "With \"remove source files\" all source files will be removed."
 msgstr "若设为“移除输入文件”，所有输入文件将会被移除。"
 
-#: src/mkvtoolnix-gui/merge/tab.cpp:427
+#: src/mkvtoolnix-gui/merge/tab.cpp:429
 #, no-c-format
 msgid "With the current multiplex settings the destination file will not contain an audio track."
 msgstr "若使用当前的混流设置，输出文件将不含任何音频轨道。"
@@ -14860,8 +14865,8 @@ msgstr "ogg_stream_init 对流号 {0} 失败。将尝试继续并忽略该流。
 msgid "ogg_sync_buffer failed\n"
 msgstr "ogg_sync_buffer 失败\n"
 
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:126
-#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:130
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:127
+#: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:131
 #, no-c-format
 msgid "or"
 msgstr "或"
