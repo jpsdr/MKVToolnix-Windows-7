@@ -71,6 +71,7 @@ PrefsRunProgramWidget::setupUi(Util::Settings::RunProgramConfig const &cfg) {
 
   p->flagsByCheckbox[p->ui->cbAfterJobQueueStopped] = Util::Settings::RunAfterJobQueueFinishes;
   p->flagsByCheckbox[p->ui->cbAfterJobSuccessful]   = Util::Settings::RunAfterJobCompletesSuccessfully;
+  p->flagsByCheckbox[p->ui->cbAfterJobWarnings]     = Util::Settings::RunAfterJobCompletesWithWarnings;
   p->flagsByCheckbox[p->ui->cbAfterJobError]        = Util::Settings::RunAfterJobCompletesWithErrors;
 
   p->ui->cbConfigurationActive->setChecked(cfg.m_active);

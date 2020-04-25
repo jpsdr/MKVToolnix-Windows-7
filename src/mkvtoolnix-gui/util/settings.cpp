@@ -270,6 +270,22 @@ Settings::convertOldSettings() {
     reg->setValue(s_valMergePredefinedSubtitleTrackNames, value.toStringList());
   }
   reg->endGroup();
+
+  // Update program runner event types: v46 splits "run if job
+  // successful or with warnings" into two separate events.
+  if (writtenByVersion <= version_number_t{"45.0.0.26"}) {
+    reg->beginGroup(s_grpRunProgramConfigurations);
+
+    for (auto const &group : reg->childGroups()) {
+      reg->beginGroup(group);
+      auto forEvents = reg->value(s_valForEvents).toInt();
+      if (forEvents & 2)
+        reg->setValue(s_valForEvents, forEvents | 8);
+      reg->endGroup();
+    }
+
+    reg->endGroup();            // runProgramConfigurations
+  }
 }
 
 void

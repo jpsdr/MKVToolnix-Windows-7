@@ -4,6 +4,9 @@
 
 * mkvmerge: for audio-only files mkvmerge will now write a cue entry every
   500ms instead of every 2s.
+* MKVToolNix GUI: job actions: split up the option "execute when the job
+  finishes successfully or with warnings" into two separate options: "…when
+  finishes successfully" and "…when exits with warnings". Implements #2798.
 
 ## Bug fixes
 

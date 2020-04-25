@@ -31,7 +31,14 @@
        <item>
         <widget class="QCheckBox" name="cbAfterJobSuccessful">
          <property name="text">
-          <string>After a job completes &amp;successfully or with warnings</string>
+          <string>After a job completes &amp;successfully</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="cbAfterJobWarnings">
+         <property name="text">
+          <string>After a job exits with &amp;warnings</string>
          </property>
         </widget>
        </item>
@@ -316,6 +323,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>leName</tabstop>
   <tabstop>cbType</tabstop>
   <tabstop>cbAfterJobSuccessful</tabstop>
+  <tabstop>cbAfterJobWarnings</tabstop>
   <tabstop>cbAfterJobError</tabstop>
   <tabstop>cbAfterJobQueueStopped</tabstop>
   <tabstop>pbExecuteNow</tabstop>
@@ -325,6 +333,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>tbUsageNotes</tabstop>
   <tabstop>leAudioFile</tabstop>
   <tabstop>pbBrowseAudioFile</tabstop>
+  <tabstop>sbVolume</tabstop>
  </tabstops>
  <resources>
   <include location="../../qt_resources.qrc"/>

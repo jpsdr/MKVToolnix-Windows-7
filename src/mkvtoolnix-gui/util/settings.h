@@ -40,6 +40,7 @@ public:
     RunAfterJobQueueFinishes         = 0x01,
     RunAfterJobCompletesSuccessfully = 0x02,
     RunAfterJobCompletesWithErrors   = 0x04,
+    RunAfterJobCompletesWithWarnings = 0x08,
   };
 
   Q_DECLARE_FLAGS(RunProgramForEvents, RunProgramForEvent)

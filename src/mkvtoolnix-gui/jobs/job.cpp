@@ -468,7 +468,9 @@ Job::runProgramsAfterCompletion() {
   if (!mtx::included_in(p->status, DoneOk, DoneWarnings, Failed))
     return;
 
-  auto event = p->status == Failed ? Util::Settings::RunAfterJobCompletesWithErrors : Util::Settings::RunAfterJobCompletesSuccessfully;
+  auto event = p->status == Failed       ? Util::Settings::RunAfterJobCompletesWithErrors
+             : p->status == DoneWarnings ? Util::Settings::RunAfterJobCompletesWithWarnings
+             :                             Util::Settings::RunAfterJobCompletesSuccessfully;
 
   App::programRunner().run(event, [this](ProgramRunner::VariableMap &variables) {
     runProgramSetupVariables(variables);
