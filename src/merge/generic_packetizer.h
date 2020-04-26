@@ -99,6 +99,8 @@ protected:
   bool m_prevent_lacing;
   generic_packetizer_c *m_connected_successor;
 
+  std::string m_source_id;
+
 protected:                      // static
   static int ms_track_number;
 
@@ -290,6 +292,9 @@ public:
   virtual bool is_lacing_prevented() const;
 
   virtual generic_packetizer_c *get_connected_successor() const;
+
+  virtual void set_source_id(std::string const &source_id);
+  virtual std::string get_source_id() const;
 
   // Callbacks
   virtual void after_packet_timestamped(packet_t &packet);

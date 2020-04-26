@@ -25,6 +25,7 @@ track_statistics_c::create_tags(KaxTags &tags,
   const {
   auto bps      = get_bits_per_second();
   auto duration = get_duration();
+  auto names    = std::vector<std::string>{ "BPS"s, "DURATION"s, "NUMBER_OF_FRAMES"s, "NUMBER_OF_BYTES"s };
 
   mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(tags, m_track_uid, "BPS");
   mtx::tags::remove_simple_tags_for<KaxTagTrackUID>(tags, m_track_uid, "DURATION");
@@ -38,6 +39,11 @@ track_statistics_c::create_tags(KaxTags &tags,
   mtx::tags::set_simple(*tag, "NUMBER_OF_FRAMES", ::to_string(m_num_frames));
   mtx::tags::set_simple(*tag, "NUMBER_OF_BYTES",  ::to_string(m_num_bytes));
 
+  if (!m_source_id.empty()) {
+    mtx::tags::set_simple(*tag, "SOURCE_ID", m_source_id);
+    names.emplace_back("SOURCE_ID");
+  }
+
   mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_APP", writing_app);
 
   if (writing_date) {
@@ -45,5 +51,5 @@ track_statistics_c::create_tags(KaxTags &tags,
     mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_DATE_UTC", writing_date_str);
   }
 
-  mtx::tags::set_simple(*tag, "_STATISTICS_TAGS", "BPS DURATION NUMBER_OF_FRAMES NUMBER_OF_BYTES");
+  mtx::tags::set_simple(*tag, "_STATISTICS_TAGS", boost::join(names, " "));
 }

@@ -26,6 +26,7 @@ class track_statistics_c {
 private:
   std::optional<int64_t> m_min_timestamp, m_max_timestamp_and_duration;
   uint64_t m_num_bytes{}, m_num_frames{}, m_track_uid{};
+  std::string m_source_id;
 
 public:
   track_statistics_c()
@@ -43,6 +44,11 @@ public:
 
   track_statistics_c &set_track_uid(uint64_t track_uid) {
     m_track_uid = track_uid;
+    return *this;
+  }
+
+  track_statistics_c &set_source_id(std::string const &source_id) {
+    m_source_id = source_id;
     return *this;
   }
 

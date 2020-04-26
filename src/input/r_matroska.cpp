@@ -259,6 +259,24 @@ kax_track_t::fix_display_dimension_parameters() {
 }
 
 void
+kax_track_t::get_source_id_from_track_statistics_tags() {
+  if (!tags)
+    return;
+
+  for (auto const &tags_child : *tags) {
+    if (!dynamic_cast<KaxTag *>(tags_child))
+      continue;
+
+    auto value = mtx::tags::get_simple_value("SOURCE_ID", static_cast<KaxTag &>(*tags_child));
+    if (value.empty())
+      continue;
+
+    source_id = value;
+    return;
+  }
+}
+
+void
 kax_track_t::discard_track_statistics_tags() {
   if (!tags)
     return;
@@ -960,9 +978,13 @@ kax_reader_c::handle_tags(mm_io_c *io,
 }
 
 void
-kax_reader_c::discard_track_statistics_tags() {
-  for (auto const &track : m_tracks)
-    track->discard_track_statistics_tags();
+kax_reader_c::handle_track_statistics_tags() {
+  for (auto const &track : m_tracks) {
+    track->get_source_id_from_track_statistics_tags();
+
+    if (!mtx::hacks::is_engaged(mtx::hacks::KEEP_TRACK_STATISTICS_TAGS))
+      track->discard_track_statistics_tags();
+  }
 }
 
 void
@@ -1455,8 +1477,7 @@ kax_reader_c::read_deferred_level1_elements(KaxSegment &segment) {
   for (auto position : m_deferred_l1_positions[dl1t_tags])
     handle_tags(m_in.get(), &segment, position);
 
-  if (!mtx::hacks::is_engaged(mtx::hacks::KEEP_TRACK_STATISTICS_TAGS))
-    discard_track_statistics_tags();
+  handle_track_statistics_tags();
 
   if (!m_ti.m_no_global_tags)
     process_global_tags();
@@ -1643,6 +1664,7 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
     mxwarn(fmt::format(Y("matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"), t->track_uid));
 
   PTZR(t->ptzr)->set_codec_name(t->codec_name);
+  PTZR(t->ptzr)->set_source_id(t->source_id);
 }
 
 void

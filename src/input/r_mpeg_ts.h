@@ -388,6 +388,8 @@ public:
   void parse_iso639_language_from(void const *buffer);
 
   void reset_processing_state();
+
+  void set_packetizer_source_id() const;
 };
 
 struct file_t {
@@ -421,6 +423,7 @@ using file_cptr = std::shared_ptr<file_t>;
 
 class reader_c: public generic_reader_c {
 protected:
+  bool m_is_reading_mpls{};
   std::vector<file_cptr> m_files;
   std::size_t m_current_file{}, m_packet_num{};
 

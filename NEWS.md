@@ -10,6 +10,11 @@
 * mkvmerge: when splitting, the placeholder `%c` can be used in the
   destination file name. It'll be replaced by the name of the first chapter in
   the file. Implements #2791.
+* mkvmerge: when reading MPLS playlists mkvmerge will include a tag named
+  `SOURCE_ID` in the track's statistics tags that conveys the fact that the
+  source was a Blu-ray and what the track's ID was in the source
+  container. When reading Matroska file existing `SOURCE_ID` tags will be
+  kept. The format used is the same format MakeMKV uses. Implements #2774.
 
 ## Bug fixes
 

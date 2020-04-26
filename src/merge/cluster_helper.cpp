@@ -722,7 +722,10 @@ cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags,
   for (auto const &ptzr : g_packetizers) {
     auto track_uid = ptzr.packetizer->get_uid();
 
-    m->track_statistics[track_uid].set_track_uid(track_uid).create_tags(tags, writing_app, actual_writing_date);
+    m->track_statistics[track_uid]
+      .set_track_uid(track_uid)
+      .set_source_id(ptzr.packetizer->get_source_id())
+      .create_tags(tags, writing_app, actual_writing_date);
   }
 
   m->track_statistics.clear();

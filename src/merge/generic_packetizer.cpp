@@ -1738,3 +1738,14 @@ generic_packetizer_c::get_connected_successor()
   const {
   return m_connected_successor;
 }
+
+void
+generic_packetizer_c::set_source_id(std::string const &source_id) {
+  m_source_id = source_id;
+}
+
+std::string
+generic_packetizer_c::get_source_id()
+  const {
+  return m_source_id;
+}

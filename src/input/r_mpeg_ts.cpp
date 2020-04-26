@@ -949,6 +949,15 @@ track_c::transport_error_detected(packet_header_t &ts_header)
   return ts_header.continuity_counter() != m_expected_next_continuity_counter.value();
 }
 
+void
+track_c::set_packetizer_source_id()
+  const {
+  if (!reader.m_is_reading_mpls || (ptzr < 0))
+    return;
+
+  reader.m_reader_packetizers[ptzr]->set_source_id(fmt::format("00{0:04x}", pid));
+}
+
 // ------------------------------------------------------------
 
 file_t::file_t(mm_io_cptr const &in)
@@ -1156,7 +1165,9 @@ reader_c::read_headers() {
 
   auto mpls_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input());
   if (mpls_in) {
-    m_mpls_chapters = mpls_in->get_chapters();
+    m_is_reading_mpls = true;
+    m_mpls_chapters   = mpls_in->get_chapters();
+
     add_external_files_from_mpls(*mpls_in);
   }
 
@@ -2228,6 +2239,8 @@ reader_c::create_packetizer(int64_t id) {
     m_ptzr_to_track_map[ptzr] = track;
 
     m_files[track->m_file_num]->m_packetizers.push_back(ptzr);
+
+    track->set_packetizer_source_id();
 
     show_packetizer_info(id, ptzr);
   }
