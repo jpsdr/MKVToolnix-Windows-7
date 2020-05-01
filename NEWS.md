@@ -1,4 +1,4 @@
-# Version ?
+# Version 46.0.0 "No Deeper Escape" 2020-05-01
 
 ## New features and enhancements
 

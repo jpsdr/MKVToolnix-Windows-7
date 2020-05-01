@@ -4,7 +4,7 @@
 
 Name: mkvtoolnix
 URL: https://mkvtoolnix.download/
-Version: 45.0.0
+Version: 46.0.0
 Release: 1
 Summary: Tools to create, alter and inspect Matroska files
 Source: %{name}-%{version}.tar.xz
@@ -172,6 +172,9 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
 %{_datadir}/mkvtoolnix
 
 %changelog -n mkvtoolnix
+* Fri May  1 2020 Moritz Bunkus <moritz@bunkus.org> 46.0.0-1
+- New version
+
 * Sat Apr  4 2020 Moritz Bunkus <moritz@bunkus.org> 45.0.0-1
 - New version
 
