@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2020-04-25 15:07+0200\n"
-"PO-Revision-Date: 2020-04-25 13:27+0000\n"
+"PO-Revision-Date: 2020-05-01 08:52+0200\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
 "Language: ru\n"
@@ -422,7 +422,7 @@ msgstr "<option>--gui-mode</option>"
 #: doc/man/mkvmerge.xml:2199
 #: doc/man/mkvpropedit.xml:440
 msgid "Turns on GUI mode. In this mode specially-formatted lines may be output that can tell a controlling GUI what's happening. These messages follow the format '<literal>#GUI#message</literal>'. The message may be followed by key/value pairs as in '<literal>#GUI#message#key1=value1#key2=value2…</literal>'. Neither the messages nor the keys are ever translated and always output in English."
-msgstr "Включает режим графического интерфейса. В этом режиме могут отображаться специально отформатированные строки для отправки управляющих сообщений интерфейсу. Формат сообщений — '<literal>#GUI#message</literal>'. За сообщением огут быть указаны пары ключа и значения, например '<literal>#GUI#message#key1=value1#key2=value2…</literal>'. Сообщения и ключи не переводятся и всегда выводятся на английском."
+msgstr "Включает режим графического интерфейса. В этом режиме могут отображаться специально отформатированные строки для отправки управляющих сообщений интерфейсу. Формат сообщений — '<literal>#GUI#message</literal>'. За сообщением могут быть указаны пары ключа и значения, например '<literal>#GUI#message#key1=value1#key2=value2…</literal>'. Сообщения и ключи не переводятся и всегда выводятся на английском."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:199
@@ -763,7 +763,7 @@ msgstr "Абсолютная позиция в байтах внутри фай�
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><note><para>
 #: doc/man/mkvextract.xml:493
 msgid "Inside the &matroska; file the <classname>CueClusterPosition</classname> is relative to the segment's data start offset. The value output by &mkvextract;'s cue extraction mode, however, contains that offset already and is an absolute offset from the beginning of the file."
-msgstr ""
+msgstr "Внутри файла &matroska; <classname>CueClusterPosition</classname> находится относительно начального смещения данных сегмента. Однако значение, выводимое в режиме извлечения cue &mkvextract;, уже содержит это смещение и является абсолютным смещением от начала файла."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:501
@@ -1172,7 +1172,7 @@ msgstr "Главы"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:854
 msgid "Chapters are converted to a &xml; format. This format is the same that &mkvmerge; supports for reading chapters. Alternatively a stripped-down version can be output in the simple <abbrev>OGM</abbrev> style format."
-msgstr "Главы конвертируются в формат &xml;. Этот же формат &mkvmerge; использует для чтения глав. Либо можно извлечь урезанную версию в упрощенный стилевой формат <abbrev>OGM</abbrev>."
+msgstr "Главы конвертируются в формат &xml;. Этот же формат &mkvmerge; используется для чтения глав. Либо можно извлечь урезанную версию в упрощённый стилевой формат <abbrev>OGM</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:861
@@ -1205,12 +1205,12 @@ msgstr "<constant>0</constant> -- Этот код завершения озна�
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvextract.xml:888
 msgid "<constant>1</constant> -- In this case &mkvextract; has output at least one warning, but extraction did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'.  Depending on the issues involved the resulting files might be ok or not.  The user is urged to check both the warning and the resulting files."
-msgstr "<constant>1 </constant>-- В этом случае &mkvextract; выдал хотя бы одно предупреждение, однако извлечение продолжилось. Предупреждению предшествует текст '<literal>Warning:</literal>'. В зависимости от произошедших ошибок, результирующие файлы могут быть либо целыми либо поврежденными. Пользователю рекомендуется обратить внимание на само предупреждение и проверить результирующие файлы."
+msgstr "<constant>1 </constant>-- В этом случае &mkvextract; выдал хотя бы одно предупреждение, однако извлечение продолжилось. Предупреждению предшествует текст '<literal>Warning:</literal>'. В зависимости от произошедших ошибок, результирующие файлы могут быть либо целыми либо повреждёнными. Пользователю рекомендуется обратить внимание на само предупреждение и проверить результирующие файлы."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvextract.xml:896
 msgid "<constant>2</constant> -- This exit code is used after an error occurred.  &mkvextract; aborts right after outputting the error message.  Error messages range from wrong command line arguments over read/write errors to broken files."
-msgstr "<constant>2</constant> -- Этот код завершения используется в случае возникновения ошибки. &mkvextract; прекращает работу сразу после вывода сообщения об ошибке. Ошибки могут возникнуть из-за неверных параметров командной строки, из-за ошибки чтения/записи или просто из-за поврежденных файлов."
+msgstr "<constant>2</constant> -- Этот код завершения используется в случае возникновения ошибки. &mkvextract; прекращает работу сразу после вывода сообщения об ошибке. Ошибки могут возникнуть из-за неверных параметров командной строки, из-за ошибки чтения/записи или просто из-за повреждённых файлов."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:904
@@ -1430,7 +1430,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:295
 msgid "At level 1 &mkvinfo; will also print all &matroska; elements encountered for the complete file but the seek head entries and the cue entries. If the summary mode is enabled then &mkvinfo; will output the frame position as well."
-msgstr ""
+msgstr "На уровне 1 &mkvinfo; также будет печатать все элементы &matroska;, встречающиеся для полного файла, кроме записей заголовка поиска и записей cue. Если включён режим сводки, то &mkvinfo; также выведет положение кадра."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:300
@@ -1470,7 +1470,7 @@ msgstr "<constant>1 </constant>-- В этом случае &mkvinfo; выдал 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvinfo.xml:351
 msgid "<constant>2</constant> -- This exit code is used after an error occurred.  &mkvinfo; aborts right after outputting the error message.  Error messages range from wrong command line arguments over read/write errors to broken files."
-msgstr "<constant>2</constant> -- Этот код завершения используется в случае возникновения ошибки. &mkvinfo; прекращает работу сразу после вывода сообщения об ошибке. Ошибки могут возникнуть из-за неверных параметров командной строки, из-за ошибки чтения/записи или просто из-за поврежденных файлов."
+msgstr "<constant>2</constant> -- Этот код завершения используется в случае возникновения ошибки. &mkvinfo; прекращает работу сразу после вывода сообщения об ошибке. Ошибки могут возникнуть из-за неверных параметров командной строки, из-за ошибки чтения/записи или просто из-за повреждённых файлов."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:362
@@ -1591,7 +1591,7 @@ msgstr "<option>--default-language</option> <parameter>код-языка</parame
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:129
 msgid "Sets the default language code that will be used for tracks for which no language is set with the <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> option and for which the source container doesn't provide a language."
-msgstr ""
+msgstr "Задаёт код языка по умолчанию, который будет использоваться для треков, у которых не установлен язык с параметром <link linkend=\"mkvmerge.description.language\"><option>--language</option></link> и у которых исходный контейнер не предоставляет язык."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:133
@@ -1654,7 +1654,7 @@ msgstr "<option>--chapter-language</option> <parameter>код-языка</parame
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:188
 msgid "Sets the ISO 639-2 language code that is written for each chapter entry.  Defaults to '<literal>eng</literal>'.  See the section about <link linkend=\"mkvmerge.chapters\">chapters</link> below for details."
-msgstr "Задает код языка в формате ISO 639-2, который записывается для каждой записи главы. По умолчанию используется '<literal>eng</literal>'. Подробности ниже в разделе <link linkend=\"mkvmerge.chapters\">главы</link>."
+msgstr "Задаёт код языка в формате ISO 639-2, который записывается для каждой записи главы. По умолчанию используется '<literal>eng</literal>'. Подробности ниже в разделе <link linkend=\"mkvmerge.chapters\">главы</link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:193
@@ -1680,7 +1680,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:214
 msgid "This switch does also apply to chapters that are copied from certain container types, e.g. Ogg/OGM and MP4 files.  See the section about chapters below for details."
-msgstr "Этот переключатель также применяется к главам, скопированным из определенных типов контейнеров, например файлов Ogg/OGM и MP4. Дополнительные сведения смотрите ниже в разделе о главах."
+msgstr "Этот переключатель также применяется к главам, скопированным из определённых типов контейнеров, например файлов Ogg/OGM и MP4. Дополнительные сведения смотрите ниже в разделе о главах."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:221
@@ -1778,7 +1778,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:316
 msgid "You can control the format used by the start timestamp with <literal>&lt;START:format&gt;</literal>.  The format defaults to '<literal>%H:%M:%S</literal>' if none is given.  Valid format codes are:"
-msgstr ""
+msgstr "Вы можете управлять форматом, используемым начальной меткой времени, с помощью <literal>&lt;START:format&gt;</literal>. Когда формат не задан, то умолчанию используется '<literal>%H:%M:%S</literal>'. Допустимыми кодами формата являются:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:322
@@ -4702,12 +4702,12 @@ msgstr "<constant>0</constant> -- Этот код завершения озна�
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:3272
 msgid "<constant>1</constant> -- In this case &mkvmerge; has output at least one warning, but muxing did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'.  Depending on the issues involved the resulting file might be ok or not.  The user is urged to check both the warning and the resulting file."
-msgstr "<constant>1 </constant>-- В этом случае &mkvmerge; выдал хотя бы одно предупреждение, однако мультиплексирование продолжилось. Предупреждению предшествует текст '<literal>Warning:</literal>'. В зависимости от произошедших ошибок, результирующие файлы могут быть либо целыми либо поврежденными. Пользователю рекомендуется обратить внимание на само предупреждение и проверить результирующие файлы."
+msgstr "<constant>1 </constant>-- В этом случае &mkvmerge; выдал хотя бы одно предупреждение, однако мультиплексирование продолжилось. Предупреждению предшествует текст '<literal>Warning:</literal>'. В зависимости от произошедших ошибок, результирующие файлы могут быть либо целыми либо повреждёнными. Пользователю рекомендуется обратить внимание на само предупреждение и проверить результирующие файлы."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:3280
 msgid "<constant>2</constant> -- This exit code is used after an error occurred.  &mkvmerge; aborts right after outputting the error message.  Error messages range from wrong command line arguments over read/write errors to broken files."
-msgstr "<constant>2</constant> -- Этот код завершения используется в случае возникновения ошибки. &mkvmerge; прекращает работу сразу после вывода сообщения об ошибке. Ошибки могут возникнуть из-за неверных параметров командной строки, из-за ошибки чтения/записи или просто из-за поврежденных файлов."
+msgstr "<constant>2</constant> -- Этот код завершения используется в случае возникновения ошибки. &mkvmerge; прекращает работу сразу после вывода сообщения об ошибке. Ошибки могут возникнуть из-за неверных параметров командной строки, из-за ошибки чтения/записи или просто из-за повреждённых файлов."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3291
@@ -5281,12 +5281,12 @@ msgstr "<constant>0</constant> -- Этот код завершения озна�
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:713
 msgid "<constant>1</constant> -- In this case &mkvpropedit; has output at least one warning, but the modification did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'.  Depending on the issues involved the resulting files might be ok or not.  The user is urged to check both the warning and the resulting files."
-msgstr "<constant>1 </constant>-- В этом случае &mkvpropedit; выдал хотя бы одно предупреждение, однако модификация продолжилась. Предупреждению предшествует текст '<literal>Warning:</literal>'. В зависимости от произошедших ошибок, результирующие файлы могут быть либо целыми либо поврежденными. Пользователю рекомендуется обратить внимание на само предупреждение и проверить результирующие файлы."
+msgstr "<constant>1 </constant>-- В этом случае &mkvpropedit; выдал хотя бы одно предупреждение, однако модификация продолжилась. Предупреждению предшествует текст '<literal>Warning:</literal>'. В зависимости от произошедших ошибок, результирующие файлы могут быть либо целыми либо повреждёнными. Пользователю рекомендуется обратить внимание на само предупреждение и проверить результирующие файлы."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:721
 msgid "<constant>2</constant> -- This exit code is used after an error occurred.  &mkvpropedit; aborts right after outputting the error message.  Error messages range from wrong command line arguments over read/write errors to broken files."
-msgstr "<constant>2</constant> -- Этот код завершения используется в случае возникновения ошибки. &mkvpropedit; прекращает работу сразу после вывода сообщения об ошибке. Ошибки могут возникнуть из-за неверных параметров командной строки, из-за ошибки чтения/записи или просто из-за поврежденных файлов."
+msgstr "<constant>2</constant> -- Этот код завершения используется в случае возникновения ошибки. &mkvpropedit; прекращает работу сразу после вывода сообщения об ошибке. Ошибки могут возникнуть из-за неверных параметров командной строки, из-за ошибки чтения/записи или просто из-за повреждённых файлов."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:741
