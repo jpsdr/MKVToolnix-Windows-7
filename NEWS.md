@@ -2,11 +2,6 @@
 
 ## New features and enhancements
 
-* mkvmerge: for audio-only files mkvmerge will now write a cue entry every
-  500ms instead of every 2s.
-* MKVToolNix GUI: job actions: split up the option "execute when the job
-  finishes successfully or with warnings" into two separate options: "…when
-  finishes successfully" and "…when exits with warnings". Implements #2798.
 * mkvmerge: when splitting, the placeholder `%c` can be used in the
   destination file name. It'll be replaced by the name of the first chapter in
   the file. Implements #2791.
@@ -15,14 +10,19 @@
   source was a Blu-ray and what the track's ID was in the source
   container. When reading Matroska file existing `SOURCE_ID` tags will be
   kept. The format used is the same format MakeMKV uses. Implements #2774.
+* mkvmerge: for audio-only files mkvmerge will now write a cue entry every
+  500ms instead of every 2s.
+* MKVToolNix GUI: job actions: split up the option "execute when the job
+  finishes successfully or with warnings" into two separate options: "…when
+  finishes successfully" and "…when exits with warnings". Implements #2798.
 
 ## Bug fixes
 
-* GUI: fixed a crash that happened when closing the preferences after having
-  closed at least one multiplexer tab. Fixes #2785.
-* MKVToolNix GUI: macOS: changed the default of the "elide tab header labels"
-  feature introduced in v45 from "no" to "yes" to mirror how versions before
-  v45 behaved on macOS.
+* mkvmerge: Matroska reader: when regenerating UIDs for chapters mkvmerge will
+  now fix referencing tag chapter UID targets to have the same values. Fixes
+  #2804.
+* mkvmerge: MP4 reader: fixed a crash that could potentially happen while
+  trying to identify H.265/HEVC tracks.
 * mkvmerge: MP4 reader: when reading H.265/HEVC tracks without a frame offset
   table (`ctts` atom) present, mkvmerge did not parse the `hevcC` structure
   correctly in certain cases, causing no video frames to be output at all or
@@ -37,11 +37,11 @@
 * mkvmerge: for audio-only files cues will only be created for I frames
   (important for e.g. TrueHD where decoding can only start on a sync
   frame). Fixes #2790.
-* mkvmerge: MP4 reader: fixed a crash that could potentially happen while
-  trying to identify H.265/HEVC tracks.
-* mkvmerge: when regenerating UIDs for chapters read from Matroska files
-  mkvmerge will now fix referencing tag chapter UID targets to have the same
-  values. Fixes #2804.
+* MKVToolNix GUI: fixed a crash that happened when closing the preferences
+  after having closed at least one multiplexer tab. Fixes #2785.
+* MKVToolNix GUI: macOS: changed the default of the "elide tab header labels"
+  feature introduced in v45 from "no" to "yes" to mirror how versions before
+  v45 behaved on macOS.
 
 
 # Version 45.0.0 "Heaven in Pennies" 2020-04-04
