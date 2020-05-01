@@ -24,7 +24,7 @@ class KaxTags;
 namespace mtx::tags {
 
 struct vorbis_comments_t {
-  enum type_e {
+  enum class type_e {
     Unknown,
     Vorbis,
     VP8,
