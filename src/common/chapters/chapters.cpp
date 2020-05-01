@@ -1063,8 +1063,9 @@ align_uids(KaxChapters &reference,
   }
 }
 
-void
-regenerate_uids(EbmlMaster &master) {
+static void
+regenerate_uids_worker(EbmlMaster &master,
+                       std::unordered_map<uint64_t, uint64_t> &new_chapter_uids) {
   for (int idx = 0, end = master.ListSize(); end > idx; ++idx) {
     auto element     = master[idx];
     auto edition_uid = dynamic_cast<KaxEditionUID *>(element);
@@ -1077,14 +1078,26 @@ regenerate_uids(EbmlMaster &master) {
     auto chapter_uid = dynamic_cast<KaxChapterUID *>(element);
 
     if (chapter_uid) {
-      chapter_uid->SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
+      new_chapter_uids[chapter_uid->GetValue()] = create_unique_number(UNIQUE_CHAPTER_IDS);
+      chapter_uid->SetValue(new_chapter_uids[chapter_uid->GetValue()]);
       continue;
     }
 
     auto sub_master = dynamic_cast<EbmlMaster *>(master[idx]);
     if (sub_master)
-      regenerate_uids(*sub_master);
+      regenerate_uids_worker(*sub_master, new_chapter_uids);
   }
+}
+
+void
+regenerate_uids(EbmlMaster &master,
+                EbmlMaster *tags) {
+  std::unordered_map<uint64_t, uint64_t> new_chapter_uids;
+
+  regenerate_uids_worker(master, new_chapter_uids);
+
+  if (tags)
+    change_values<KaxTagChapterUID>(*tags, new_chapter_uids);
 }
 
 std::string

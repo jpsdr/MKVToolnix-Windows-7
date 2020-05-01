@@ -88,7 +88,7 @@ void move_by_edition(libmatroska::KaxChapters &dst, libmatroska::KaxChapters &sr
 void adjust_timestamps(libebml::EbmlMaster &master, int64_t offset, int64_t numerator = 1, int64_t denominator = 1);
 void merge_entries(libebml::EbmlMaster &master);
 int count_atoms(libebml::EbmlMaster &master);
-void regenerate_uids(libebml::EbmlMaster &master);
+void regenerate_uids(libebml::EbmlMaster &master, libebml::EbmlMaster *tags = nullptr);
 
 void align_uids(libmatroska::KaxChapters *chapters);
 void align_uids(libmatroska::KaxChapters &reference, libmatroska::KaxChapters &modify);

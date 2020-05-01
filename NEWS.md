@@ -39,6 +39,9 @@
   frame). Fixes #2790.
 * mkvmerge: MP4 reader: fixed a crash that could potentially happen while
   trying to identify H.265/HEVC tracks.
+* mkvmerge: when regenerating UIDs for chapters read from Matroska files
+  mkvmerge will now fix referencing tag chapter UID targets to have the same
+  values. Fixes #2804.
 
 
 # Version 45.0.0 "Heaven in Pennies" 2020-04-04

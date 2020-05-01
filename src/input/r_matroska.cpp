@@ -892,7 +892,7 @@ kax_reader_c::handle_chapters(mm_io_c *io,
     delete element_found;
 
   if (m_regenerate_chapter_uids)
-    mtx::chapters::regenerate_uids(*tmp_chapters);
+    mtx::chapters::regenerate_uids(*tmp_chapters, m_tags.get());
 
   if (!m_chapters)
     m_chapters = mtx::chapters::kax_cptr{new KaxChapters};
@@ -1470,12 +1470,12 @@ kax_reader_c::read_deferred_level1_elements(KaxSegment &segment) {
     for (auto position : m_deferred_l1_positions[dl1t_attachments])
       handle_attachments(m_in.get(), &segment, position);
 
+  for (auto position : m_deferred_l1_positions[dl1t_tags])
+    handle_tags(m_in.get(), &segment, position);
+
   if (!m_ti.m_no_chapters)
     for (auto position : m_deferred_l1_positions[dl1t_chapters])
       handle_chapters(m_in.get(), &segment, position);
-
-  for (auto position : m_deferred_l1_positions[dl1t_tags])
-    handle_tags(m_in.get(), &segment, position);
 
   handle_track_statistics_tags();
 
