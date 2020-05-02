@@ -166,9 +166,9 @@ parse_simple(mm_text_io_c *in,
   if (do_convert)
     cc_utf8 = charset_converter_c::init(charset);
 
-  std::string use_language = !language.empty()                          ? language
-                           : !g_default_language.empty() ? g_default_language
-                           :                                              "eng";
+  auto use_language = !language.empty()           ? language
+                    : !g_default_language.empty() ? g_default_language
+                    :                               "eng";
 
   std::regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE};
   std::regex timestamp_re{     SIMCHAP_RE_TIMESTAMP};
