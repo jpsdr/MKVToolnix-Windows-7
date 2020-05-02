@@ -48,6 +48,7 @@ get_list() {
       "keep_last_chapter_in_mpls",
       "keep_track_statistics_tags",
       "all_i_slices_are_key_frames",
+      "append_and_split_flac",
     };
   }
 

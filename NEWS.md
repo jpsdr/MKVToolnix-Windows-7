@@ -19,6 +19,10 @@
   will now look for simplified language names instead of the full ones
   (e.g. instead of looking for "Greek, Modern (1453-)" it would simply look
   for "Greek").
+* mkvmerge: add `--engage append_and_split_flac` that enables mkvmerge to
+  append and split FLAC tracks, restoring pre-v45 behavior.
+  The resulting tracks will be broken: the official FLAC tools will not be
+  able to decode them and seeking will not work as expected.
 
 ## Build system changes
 

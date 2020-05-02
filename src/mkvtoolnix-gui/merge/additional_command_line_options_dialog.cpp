@@ -95,6 +95,9 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
   add(Q("--engage all_i_slices_are_key_frames"),  false, hacks,
       { QY("Some H.264/AVC tracks contain I slices but lack real key frames."),
         QY("This option forces mkvmerge to treat all of those I slices as key frames.") });
+  add(Q("--engage append_and_split_flac"), false, hacks,
+      { QY("Enable appending and splitting FLAC tracks."),
+        QY("The resulting tracks will be broken: the official FLAC tools will not be able to decode them and seeking will not work as expected.") });
   add(Q("--engage cow"),                          false, hacks, { QY("No help available.") });
 
   m_ui->gbGlobalOutputControl->layout()->addItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));

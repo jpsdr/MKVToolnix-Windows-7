@@ -21,6 +21,7 @@
 #include "common/checksums/base.h"
 #include "common/codec.h"
 #include "common/flac.h"
+#include "common/hacks.h"
 #include "merge/connection_checks.h"
 #include "output/p_flac.h"
 
@@ -83,13 +84,28 @@ flac_packetizer_c::process(packet_cptr packet) {
 }
 
 connection_result_e
-flac_packetizer_c::can_connect_to(generic_packetizer_c */* src */,
-                                  std::string &/* error_message */) {
-  return CAN_CONNECT_NO_UNSUPPORTED;
+flac_packetizer_c::can_connect_to(generic_packetizer_c *src,
+                                  std::string &error_message) {
+  if (!mtx::hacks::is_engaged(mtx::hacks::APPEND_AND_SPLIT_FLAC))
+    return CAN_CONNECT_NO_UNSUPPORTED;
+
+  flac_packetizer_c *fsrc = dynamic_cast<flac_packetizer_c *>(src);
+  if (!fsrc)
+    return CAN_CONNECT_NO_FORMAT;
+
+  connect_check_a_samplerate(m_stream_info.sample_rate, fsrc->m_stream_info.sample_rate);
+  connect_check_a_channels(m_stream_info.channels, fsrc->m_stream_info.channels);
+  connect_check_a_bitdepth(m_stream_info.bits_per_sample, fsrc->m_stream_info.bits_per_sample);
+
+  return CAN_CONNECT_YES;
 }
 
 split_result_e
 flac_packetizer_c::can_be_split(std::string &/* error_message */) {
+  if (mtx::hacks::is_engaged(mtx::hacks::APPEND_AND_SPLIT_FLAC)) {
+    return CAN_SPLIT_YES;
+  }
+
   return CAN_SPLIT_NO_UNSUPPORTED;
 }
 
