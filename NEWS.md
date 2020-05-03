@@ -1,5 +1,15 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: chapters: mkvmerge can now read chapters from DVDs if the user
+  specifies the path to a DVD folder structure via the `--chapters …`
+  parameter. By default chapters from the first title will be imported. This
+  can be changed by append `:<title number>` to the file/directory name in the
+  `--chapters …` argument, e.g. `--chapters /srv/dvds/BigBuckBunny/VIDEO_TS:3`
+  This feature requires mkvmerge to have been built with the `libdvdread`
+  library.  Part of the implementation of #2808.
+
 ## Build system changes
 
 * The [`libdvdread`](https://www.videolan.org/developers/libdvdnav.html)

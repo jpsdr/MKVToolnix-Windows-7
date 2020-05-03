@@ -97,4 +97,6 @@ std::string format_name_template(std::string const &name_template, int chapter_n
 
 void fix_country_codes(libebml::EbmlMaster &chapters);
 
+std::shared_ptr<libmatroska::KaxChapters> create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editions_timestamps, std::string const &language, std::string const &name_template);
+
 }

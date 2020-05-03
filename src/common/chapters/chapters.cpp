@@ -20,6 +20,8 @@
 #include <matroska/KaxChapters.h>
 
 #include "common/chapters/chapters.h"
+#include "common/chapters/dvd.h"
+#include "common/construct.h"
 #include "common/ebml.h"
 #include "common/error.h"
 #include "common/extern_data.h"
@@ -281,6 +283,12 @@ parse(const std::string &file_name,
       format_e *format,
       std::unique_ptr<KaxTags> *tags) {
   try {
+#if defined(HAVE_DVDREAD)
+    auto parsed_chapters = maybe_parse_dvd(file_name, language);
+    if (parsed_chapters)
+      return parsed_chapters;
+#endif
+
     mm_text_io_c in(std::make_shared<mm_file_io_c>(file_name));
     return parse(&in, min_ts, max_ts, offset, language, charset, exception_on_error, format, tags);
 
@@ -1153,6 +1161,43 @@ fix_country_codes(EbmlMaster &chapters) {
     if (mapped_cctld)
       ccountry->SetValue(*mapped_cctld);
   }
+}
+
+std::shared_ptr<libmatroska::KaxChapters>
+create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editions_timestamps,
+                             std::string const &language,
+                             std::string const &name_template) {
+  auto chapters          = std::make_shared<libmatroska::KaxChapters>();
+  auto use_name_template = !name_template.empty()      ? name_template
+                         :                               g_chapter_generation_name_template.get_translated();
+  auto use_language      = !language.empty()           ? language
+                         : !g_default_language.empty() ? g_default_language
+                         :                               "eng";
+
+  for (auto const &timestamps : editions_timestamps) {
+    auto edition        = new libmatroska::KaxEditionEntry;
+    auto chapter_number = 0u;
+
+    chapters->PushElement(*edition);
+
+    GetChild<libmatroska::KaxEditionUID>(edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
+
+    for (auto const &timestamp : timestamps) {
+      ++chapter_number;
+
+      auto name = format_name_template(use_name_template, chapter_number, timestamp);
+      auto atom = mtx::construct::cons<libmatroska::KaxChapterAtom>(new libmatroska::KaxChapterUID,       create_unique_number(UNIQUE_CHAPTER_IDS),
+                                                                    new libmatroska::KaxChapterTimeStart, timestamp.to_ns());
+
+      if (!name.empty())
+        atom->PushElement(*mtx::construct::cons<libmatroska::KaxChapterDisplay>(new libmatroska::KaxChapterString,   name,
+                                                                                new libmatroska::KaxChapterLanguage, use_language));
+
+      edition->PushElement(*atom);
+    }
+  }
+
+  return chapters;
 }
 
 }
