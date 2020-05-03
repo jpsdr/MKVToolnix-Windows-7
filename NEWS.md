@@ -15,6 +15,10 @@
 * MKVToolNix GUI: chapter editor: the chapter editor can now read chapters
   from DVDs if MKVToolNix has been build with the `libdvdread` library. Part
   of the implementation of #2808.
+* MKVToolNix GUI: multiplexer: when deriving languages from file names the GUI
+  will now look for simplified language names instead of the full ones
+  (e.g. instead of looking for "Greek, Modern (1453-)" it would simply look
+  for "Greek").
 
 ## Build system changes
 

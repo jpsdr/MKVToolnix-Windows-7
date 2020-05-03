@@ -43,6 +43,7 @@ setupLanguageDerivationSubPatterns() {
     return;
 
   QStringList codes1List, codes2List, namesList;
+  QRegularExpression languageNameCleaner{Q(" *[\\(,].*")}, splitter{Q(" *; *")};
 
   auto &cfg = Util::Settings::get();
 
@@ -58,8 +59,10 @@ setupLanguageDerivationSubPatterns() {
     if (!language.terminology_abbrev.empty())
       codes2List << Q(language.terminology_abbrev);
 
-    for (auto const &name : Q(language.english_name).split(QRegularExpression{Q(" *; *")}, QString::SkipEmptyParts))
+    for (auto name : Q(language.english_name).split(splitter, QString::SkipEmptyParts)) {
+      name.remove(languageNameCleaner);
       namesList  << QRegularExpression::escape(name);
+    }
   }
 
   s_iso639_1CodesPattern = codes1List.join(Q("|"));
@@ -410,6 +413,7 @@ SourceFile::regexForDerivingLanguageFromFileName() {
 
 QString
 SourceFile::deriveLanguageFromFileName() {
+  auto &cfg     = Util::Settings::get();
   auto fileName = QFileInfo{m_fileName}.fileName();
   auto matches  = QRegularExpression{Q("s\\d+e\\d{2,}(.+)"), QRegularExpression::CaseInsensitiveOption}.match(fileName);
 
@@ -431,6 +435,7 @@ SourceFile::deriveLanguageFromFileName() {
   }
 
   QString language;
+  QRegularExpression languageNameCleaner{Q(" *[\\(,].*")}, splitter{Q(" *; *")};
   auto allCaptures = matches.capturedTexts();
 
   for (int captureIdx = 1, numCaptures = allCaptures.size(); captureIdx < numCaptures; ++captureIdx) {
@@ -439,9 +444,33 @@ SourceFile::deriveLanguageFromFileName() {
     if (capture.isEmpty())
       continue;
 
+    qDebug() << "language derivation match:" << capture;
+
     auto languageIdx = map_to_iso639_2_code(to_utf8(capture.toLower()));
-    if (languageIdx == -1)
-      continue;
+    if (languageIdx == -1) {
+      languageIdx = 0;
+
+      auto found = false;
+
+      for (int numLanguages = g_iso639_languages.size(); languageIdx < numLanguages; ++languageIdx) {
+        if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(g_iso639_languages[languageIdx].iso639_2_code)))
+          continue;
+
+        for (auto name : Q(g_iso639_languages[languageIdx].english_name).split(splitter, QString::SkipEmptyParts)) {
+          name.remove(languageNameCleaner);
+          if (name != capture)
+            continue;
+
+          found = true;
+        }
+
+        if (found)
+          break;
+      }
+
+      if (!found)
+        continue;
+    }
 
     language = Q(g_iso639_languages[languageIdx].iso639_2_code);
 
