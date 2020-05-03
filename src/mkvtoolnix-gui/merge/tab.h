@@ -228,6 +228,7 @@ public Q_SLOTS:
   virtual void onBrowsePreviousSegmentUID();
   virtual void onBrowseNextSegmentUID();
   virtual void onBrowseChapters();
+  virtual void onChapterTitleNumberChanged(int newValue);
   virtual void onChapterLanguageChanged(int newValue);
   virtual void onChapterCharacterSetChanged(QString newValue);
   virtual void onChapterDelayChanged(QString newValue);

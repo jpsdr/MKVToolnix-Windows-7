@@ -2,6 +2,7 @@
 
 #include <QFileInfo>
 #include <QMenu>
+#include <QStringList>
 
 #include "common/bitvalue.h"
 #include "common/qt.h"
@@ -45,7 +46,13 @@ Tab::setupOutputControls() {
   ui->splitMaxFiles->setMaximum(std::numeric_limits<int>::max());
 
   onSplitModeChanged(MuxConfig::DoNotSplit);
+  onChaptersChanged({});
   onChapterGenerationModeChanged();
+
+#if !defined(HAVE_DVDREAD)
+  chapterTitleNumberLabel->setVisible(false);
+  chapterTitleNumber     ->setVisible(false);
+#endif  // !defined(HAVE_DVDREAD)
 
   connect(MainWindow::get(),                 &MainWindow::preferencesChanged,                                                                  this, &Tab::setupOutputFileControls);
 
@@ -80,6 +87,7 @@ Tab::setupOutputControls() {
   connect(ui->chapterGenerationMode,         static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this, &Tab::onChapterGenerationModeChanged);
   connect(ui->chapterGenerationNameTemplate, &QLineEdit::textChanged,                                                                          this, &Tab::onChapterGenerationNameTemplateChanged);
   connect(ui->chapterGenerationInterval,     &QLineEdit::textChanged,                                                                          this, &Tab::onChapterGenerationIntervalChanged);
+  connect(ui->chapterTitleNumber,            static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged),                                    this, &Tab::onChapterTitleNumberChanged);
 }
 
 void
@@ -476,20 +484,47 @@ Tab::onNextSegmentUIDChanged(QString newValue) {
 void
 Tab::onChaptersChanged(QString newValue) {
   m_config.m_chapters = newValue;
-  ui->chapterCharacterSetPreview->setEnabled(!newValue.isEmpty());
+
+  auto enablePreview = !newValue.isEmpty();
+
+#if defined(HAVE_DVDREAD)
+  auto isDVD = newValue.toLower().endsWith(".ifo");
+
+  if (enablePreview && isDVD)
+    enablePreview = false;
+
+  ui->chapterTitleNumberLabel->setEnabled(isDVD);
+  ui->chapterTitleNumber     ->setEnabled(isDVD);
+#endif  // HAVE_DVDREAD
+
+  ui->chapterCharacterSetPreview->setEnabled(enablePreview);
 }
 
 void
 Tab::onBrowseChapters() {
-  auto fileName = getOpenFileName(QY("Select chapter file"),
-                                  QY("Supported file types")           + Q(" (*.txt *.xml);;") +
-                                  QY("XML chapter files")              + Q(" (*.xml);;") +
-                                  QY("Simple OGM-style chapter files") + Q(" (*.txt)"),
-                                  ui->chapters,
-                                  InitialDirMode::ContentFirstInputFileLastOpenDir);
+  QString ifo;
+  QStringList dvds;
+
+#if defined(HAVE_DVDREAD)
+  dvds << Q("%1 (*.ifo *.IFO)").arg(QY("DVDs"));
+  ifo = Q("*.ifo *.IFO ");
+#endif  // HAVE_DVDREAD
+
+  auto fileTypes = QStringList{} << Q("%1 (%2*.txt *.xml)").arg(QY("Supported file types")).arg(ifo)
+                                 << Q("%1 (*.xml)").arg(QY("XML chapter files"))
+                                 << Q("%1 (*.txt)").arg(QY("Simple OGM-style chapter files"));
+
+  fileTypes += dvds;
+
+  auto fileName = getOpenFileName(QY("Select chapter file"), fileTypes.join(Q(";;")), ui->chapters, InitialDirMode::ContentFirstInputFileLastOpenDir);
 
   if (!fileName.isEmpty())
     onChaptersChanged(fileName);
+}
+
+void
+Tab::onChapterTitleNumberChanged(int newValue) {
+  m_config.m_chapterTitleNumber = newValue;
 }
 
 void
@@ -562,6 +597,7 @@ Tab::setOutputControlValues() {
   ui->previousSegmentUID->setText(m_config.m_previousSegmentUID);
   ui->nextSegmentUID->setText(m_config.m_nextSegmentUID);
   ui->chapters->setText(m_config.m_chapters);
+  ui->chapterTitleNumber->setValue(m_config.m_chapterTitleNumber);
   ui->chapterDelay->setText(m_config.m_chapterDelay);
   ui->chapterStretchBy->setText(m_config.m_chapterStretchBy);
   ui->chapterCueNameFormat->setText(m_config.m_chapterCueNameFormat);

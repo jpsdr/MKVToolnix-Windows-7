@@ -9,6 +9,9 @@
   `--chapters …` argument, e.g. `--chapters /srv/dvds/BigBuckBunny/VIDEO_TS:3`
   This feature requires mkvmerge to have been built with the `libdvdread`
   library.  Part of the implementation of #2808.
+* MKVToolNix GUI: multiplexer: added support for mkvmerge's new support for
+  reading chapters from DVDs if both have been built with the `libdvdread`
+  library. Part of the implementation of #2808.
 
 ## Build system changes
 

@@ -79,10 +79,6 @@ fixMappings(SourceFile *oldFile,
 
 MuxConfig::MuxConfig(QString const &fileName)
   : m_configFileName{fileName}
-  , m_splitMode{DoNotSplit}
-  , m_splitMaxFiles{1}
-  , m_linkFiles{false}
-  , m_webmMode{false}
 {
   auto &settings                  = Util::Settings::get();
   m_additionalOptions             = settings.m_defaultAdditionalMergeOptions;
@@ -116,6 +112,7 @@ MuxConfig::operator =(MuxConfig const &other) {
   m_previousSegmentUID            = other.m_previousSegmentUID;
   m_nextSegmentUID                = other.m_nextSegmentUID;
   m_chapters                      = other.m_chapters;
+  m_chapterTitleNumber            = other.m_chapterTitleNumber;
   m_chapterLanguage               = other.m_chapterLanguage;
   m_chapterCharacterSet           = other.m_chapterCharacterSet;
   m_chapterDelay                  = other.m_chapterDelay;
@@ -432,6 +429,7 @@ MuxConfig::load(Util::ConfigFile &settings) {
   m_previousSegmentUID            = settings.value("previousSegmentUID").toString();
   m_nextSegmentUID                = settings.value("nextSegmentUID").toString();
   m_chapters                      = QDir::toNativeSeparators(settings.value("chapters").toString());
+  m_chapterTitleNumber            = settings.value("chapterTitleNumber", 1).toUInt();
   m_chapterLanguage               = settings.value("chapterLanguage").toString();
   m_chapterCharacterSet           = settings.value("chapterCharacterSet").toString();
   m_chapterDelay                  = settings.value("chapterDelay").toString();
@@ -484,6 +482,7 @@ MuxConfig::save(Util::ConfigFile &settings)
   settings.setValue("previousSegmentUID",            m_previousSegmentUID);
   settings.setValue("nextSegmentUID",                m_nextSegmentUID);
   settings.setValue("chapters",                      m_chapters);
+  settings.setValue("chapterTitleNumber",            m_chapterTitleNumber);
   settings.setValue("chapterLanguage",               m_chapterLanguage);
   settings.setValue("chapterCharacterSet",           m_chapterCharacterSet);
   settings.setValue("chapterDelay",                  m_chapterDelay);
@@ -668,11 +667,16 @@ MuxConfig::buildMkvmergeOptions()
     if (!m_chapterDelay.isEmpty() || !m_chapterStretchBy.isEmpty())
       options << Q("--chapter-sync") << formatDelayAndStretchBy(m_chapterDelay, m_chapterStretchBy);
 
-    options << Q("--chapters") << m_chapters;
+    auto chapters = m_chapters;
+    if (m_chapters.toLower().endsWith(".ifo"))
+      chapters += Q(":%1").arg(m_chapterTitleNumber);
+
+    options << Q("--chapters") << chapters;
   }
 
   if (needChapterNameTemplateAndLanguage()) {
-    add(Q("--chapter-language"), m_chapterLanguage);
+    if (m_chapters.isEmpty())
+      add(Q("--chapter-language"), m_chapterLanguage);
     options << Q("--generate-chapters-name-template") << m_chapterGenerationNameTemplate;
   }
 
@@ -771,6 +775,11 @@ MuxConfig::needChapterNameTemplateAndLanguage()
       if (track->m_muxThis && track->isChapters())
         return true;
   }
+
+#if defined(HAVE_DVDREAD)
+  if (m_chapters.toLower().endsWith(".ifo"))
+    return true;
+#endif  // HAVE_DVDREAD
 
   return false;
 }

@@ -74,9 +74,9 @@ public:
   QString m_firstInputFileName;
   QString m_title, m_destination, m_destinationAuto, m_destinationUniquenessSuffix, m_globalTags, m_segmentInfo, m_splitOptions;
   QString m_segmentUIDs, m_previousSegmentUID, m_nextSegmentUID, m_chapters, m_chapterLanguage, m_chapterCharacterSet, m_chapterCueNameFormat, m_chapterDelay, m_chapterStretchBy, m_additionalOptions;
-  SplitMode m_splitMode;
-  unsigned int m_splitMaxFiles;
-  bool m_linkFiles, m_webmMode;
+  SplitMode m_splitMode{DoNotSplit};
+  unsigned int m_splitMaxFiles{1}, m_chapterTitleNumber{1};
+  bool m_linkFiles{}, m_webmMode{};
 
   ChapterGenerationMode m_chapterGenerationMode;
   QString m_chapterGenerationNameTemplate, m_chapterGenerationInterval;
