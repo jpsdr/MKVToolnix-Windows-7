@@ -13,6 +13,7 @@
 #include "common/bluray/mpls.h"
 #include "common/chapters/bluray.h"
 #include "common/chapters/chapters.h"
+#include "common/chapters/dvd.h"
 #include "common/ebml.h"
 #include "common/kax_file.h"
 #include "common/math.h"
@@ -574,6 +575,49 @@ Tab::loadFromMplsFile(QString const &fileName,
   return { chapters, false };
 }
 
+Tab::LoadResult
+Tab::loadFromDVD([[maybe_unused]] QString const &fileName,
+                 [[maybe_unused]] bool append) {
+#if defined(HAVE_DVDREAD)
+  auto p            = p_func();
+  auto &cfg         = Util::Settings::get();
+  auto chapters     = ChaptersPtr{};
+  auto error        = QString{};
+
+  auto dvdDirectory = bfs::path{to_utf8(fileName)}.parent_path();
+
+  try {
+    auto titlesAndTimestamps = mtx::chapters::parse_dvd(dvdDirectory.string());
+    chapters                 = mtx::chapters::create_editions_and_chapters(titlesAndTimestamps, to_utf8(cfg.m_defaultChapterLanguage), to_utf8(cfg.m_chapterNameTemplate));
+
+  } catch (mtx::chapters::parser_x const &ex) {
+    error = Q(ex.what());
+  }
+
+  if (!chapters) {
+    auto message = QY("The file you tried to open (%1) is recognized as neither a valid Matroska nor a valid chapter file.").arg(fileName);
+    if (!error.isEmpty())
+      message = Q("%1 %2").arg(message).arg(QY("Error message from the parser: %1").arg(error));
+
+    Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(message).exec();
+    if (!append)
+      Q_EMIT removeThisTab();
+
+  } else if (!append) {
+    p->fileName.clear();
+    Q_EMIT titleChanged();
+  }
+
+  return { chapters, false };
+
+#else  // HAVE_DVDREAD
+  if (!append)
+    Q_EMIT removeThisTab();
+
+  return { {}, false };
+#endif  // HAVE_DVDREAD
+}
+
 void
 Tab::load() {
   auto p = p_func();
@@ -583,6 +627,7 @@ Tab::load() {
   p->savedState = currentState();
   auto result   = kax_analyzer_c::probe(to_utf8(p->fileName)) ? loadFromMatroskaFile(p->fileName, false)
                 : p->fileName.toLower().endsWith(Q(".mpls"))  ? loadFromMplsFile(p->fileName, false)
+                : p->fileName.toLower().endsWith(Q(".ifo"))   ? loadFromDVD(p->fileName, false)
                 :                                               loadFromChapterFile(p->fileName, false);
 
   if (result.first)
@@ -593,6 +638,7 @@ void
 Tab::append(QString const &fileName) {
   auto result   = kax_analyzer_c::probe(to_utf8(fileName)) ? loadFromMatroskaFile(fileName, true)
                 : fileName.toLower().endsWith(Q(".mpls"))  ? loadFromMplsFile(fileName, true)
+                : fileName.toLower().endsWith(Q(".ifo"))   ? loadFromDVD(fileName, true)
                 :                                            loadFromChapterFile(fileName, true);
 
   if (result.first)

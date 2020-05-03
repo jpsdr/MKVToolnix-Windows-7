@@ -132,6 +132,7 @@ protected:
   void expandCollapseAll(bool expand, QModelIndex const &parentIdx = {});
 
   LoadResult loadFromChapterFile(QString const &fileName, bool append);
+  LoadResult loadFromDVD(QString const &fileName, bool append);
   LoadResult loadFromMatroskaFile(QString const &fileName, bool append);
   LoadResult loadFromMplsFile(QString const &fileName, bool append);
   LoadResult checkSimpleFormatForBomAndNonAscii(ChaptersPtr const &chapters, QString const &fileName, bool append);

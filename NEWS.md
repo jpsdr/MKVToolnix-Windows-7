@@ -12,6 +12,9 @@
 * MKVToolNix GUI: multiplexer: added support for mkvmerge's new support for
   reading chapters from DVDs if both have been built with the `libdvdread`
   library. Part of the implementation of #2808.
+* MKVToolNix GUI: chapter editor: the chapter editor can now read chapters
+  from DVDs if MKVToolNix has been build with the `libdvdread` library. Part
+  of the implementation of #2808.
 
 ## Build system changes
 

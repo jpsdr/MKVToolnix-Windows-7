@@ -185,11 +185,19 @@ Tool::openFilesFromCommandLine(QStringList const &fileNames) {
 
 void
 Tool::selectFileToOpen(bool append) {
+  QString dvds, ifo;
+
+#if defined(HAVE_DVDREAD)
+  dvds = QY("DVDs") + Q(" (*.ifo *.IFO);;");
+  ifo  = Q(" *.ifo *.IFO");
+#endif  // HAVE_DVDREAD
+
   auto fileNames = Util::getOpenFileNames(this, append ? QY("Append files in chapter editor") : QY("Open files in chapter editor"), Util::Settings::get().lastOpenDirPath(),
-                                          QY("Supported file types")           + Q(" (*.cue *.mpls *.mkv *.mka *.mks *.mk3d *.txt *.webm *.xml);;") +
+                                          QY("Supported file types")           + Q(" (*.cue%1 *.mpls *.mkv *.mka *.mks *.mk3d *.txt *.webm *.xml);;").arg(ifo) +
                                           QY("Matroska files")                 + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
                                           QY("WebM files")                     + Q(" (*.webm);;") +
                                           QY("Blu-ray playlist files")         + Q(" (*.mpls);;") +
+                                          dvds +
                                           QY("XML chapter files")              + Q(" (*.xml);;") +
                                           QY("Simple OGM-style chapter files") + Q(" (*.txt);;") +
                                           QY("Cue sheet files")                + Q(" (*.cue);;") +
