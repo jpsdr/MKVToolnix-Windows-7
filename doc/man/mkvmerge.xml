@@ -2847,6 +2847,10 @@ Track ID 1: audio (A_MPEG/L3)</screen>
    functionality.
   </para>
 
+  <para>
+   Apart from dedicated chapter files &mkvmerge; can also read chapters from other file formats (e.g. MP4, Ogg, Blu-rays or DVDs).
+  </para>
+
   <refsect2 id="mkvmerge.chapters.simple">
    <title>The simple chapter format</title>
 
@@ -2949,6 +2953,34 @@ CHAPTER03NAME=Baby rocks the house</screen>
         ChapterProcessCommand (master)
           ChapterProcessTime (unsigned integer)
           ChapterProcessData (binary)</screen>
+  </refsect2>
+
+  <refsect2 id="mkvmerge.chapters.blurays">
+   <title>Reading chapters from Blu-rays</title>
+
+   <para>
+    &mkvmerge; can read chapters from unencrypted Blu-rays. For that you can use the path to one of the MPLS play lists with the
+    <parameter>--chapters</parameter> parameter.
+   </para>
+
+   <para>
+    Example: <literal>--chapters /srv/blurays/BigBuckBunny/BDMV/PLAYLIST/00001.mpls</literal>
+   </para>
+  </refsect2>
+
+  <refsect2 id="mkvmerge.chapters.dvds">
+   <title>Reading chapters from DVDs</title>
+
+   <para>
+    When MKVToolNix is compiled with the <productname>libdvdread</productname> library, &mkvmerge; can read chapters from DVDs. For that you
+    can use the path to one of the folders or files on the DVD with the <parameter>--chapters</parameter> parameter. As DVDs can contain
+    more than one title and each title has its own set of chapters, you can append a colon and the desired title number to the end of the
+    file name argument. The title number defaults to 1.
+   </para>
+
+   <para>
+    Example: <literal>--chapters /srv/dvds/BigBuckBunny/VIDEO_TS:2</literal>
+   </para>
   </refsect2>
 
   <refsect2>
