@@ -47,9 +47,24 @@ constexpr unsigned int APPEND_AND_SPLIT_FLAC        = 22;
 constexpr unsigned int MAX_IDX                      = 22;
 }
 
+struct hack_t {
+  std::string const name;
+  std::vector<std::string> const description;
+
+  hack_t(std::string const &p_name, std::vector<std::string> const &p_description)
+    : name{p_name}
+    , description{p_description}
+  {
+  }
+
+  hack_t(hack_t const &) = default;
+  hack_t(hack_t &&) = default;
+};
+
 void engage(const std::string &hacks);
 void engage(unsigned int id);
 bool is_engaged(unsigned int id);
 void init();
+std::vector<hack_t> get_list();
 
 }

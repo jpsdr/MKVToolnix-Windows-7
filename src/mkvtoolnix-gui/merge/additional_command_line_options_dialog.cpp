@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QRegularExpression>
 
+#include "common/hacks.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
@@ -62,43 +63,11 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
 
   add(Q("--deterministic"), true, global, { QY("Enables the creation of byte-identical files if the same source files with the same options and the same seed are used.") });
 
-  auto hacks  = m_ui->gridDevelopmentHacks;
+ auto hacks       = m_ui->gridDevelopmentHacks;
+ auto listOfHacks = mtx::hacks::get_list();
 
-  add(Q("--engage space_after_chapters"),         false, hacks, { QY("Leave additional space (EbmlVoid) in the destination file after the chapters.") });
-  add(Q("--engage no_chapters_in_meta_seek"),     false, hacks, { QY("Do not add an entry for the chapters in the meta seek element.") });
-  add(Q("--engage no_meta_seek"),                 false, hacks, { QY("Do not write meta seek elements at all.") });
-  add(Q("--engage lacing_xiph"),                  false, hacks, { QY("Force Xiph style lacing.") });
-  add(Q("--engage lacing_ebml"),                  false, hacks, { QY("Force EBML style lacing.") });
-  add(Q("--engage native_mpeg4"),                 false, hacks, { QY("Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs.") });
-  add(Q("--engage no_variable_data"),             false, hacks,
-      { QY("Use fixed values for the elements that change with each file otherwise (multiplexing date, segment UID, track UIDs etc.)."),
-        QY("Two files multiplexed with the same settings and this switch activated will be identical.") });
-  add(Q("--engage force_passthrough_packetizer"), false, hacks, { QY("Forces the Matroska reader to use the generic passthrough packetizer even for known and supported track types.") });
-  add(Q("--engage allow_avc_in_vfw_mode"),        false, hacks, { QY("Allows storing AVC/H.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI.") });
-  add(Q("--engage no_simpleblocks"),              false, hacks, { QY("Disable the use of SimpleBlocks instead of BlockGroups.") });
-  add(Q("--engage use_codec_state_only"),         false, hacks, { QY("Store changes in CodecPrivate data in CodecState elements instead of the frames."),
-                                                                  QY("This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers.") });
-  add(Q("--engage remove_bitstream_ar_info"),     false, hacks,
-      { QY("Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."),
-        QY("This option causes mkvmerge to remove the aspect ratio information from the bitstream.") });
-  add(Q("--engage vobsub_subpic_stop_cmds"),      false, hacks, { QY("Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field.") });
-  add(Q("--engage no_cue_duration"),              false, hacks, { QY("Causes mkvmerge not to write 'CueDuration' elements in the cues.") });
-  add(Q("--engage no_cue_relative_position"),     false, hacks, { QY("Causes mkvmerge not to write 'CueRelativePosition' elements in the cues.") });
-  add(Q("--engage no_delay_for_garbage_in_avi"),  false, hacks,
-      { QY("Garbage at the start of audio tracks in AVI files is normally used for delaying that track."),
-        QY("mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timestamps by it."),
-        QY("This option prevents that behavior.") });
-  add(Q("--engage keep_last_chapter_in_mpls"),    false, hacks,
-      { QY("Blu-ray discs often contain a chapter entry very close to the end of the movie."),
-        QY("mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."),
-        QY("Enabling this option causes mkvmerge to keep that last entry.") });
-  add(Q("--engage all_i_slices_are_key_frames"),  false, hacks,
-      { QY("Some H.264/AVC tracks contain I slices but lack real key frames."),
-        QY("This option forces mkvmerge to treat all of those I slices as key frames.") });
-  add(Q("--engage append_and_split_flac"), false, hacks,
-      { QY("Enable appending and splitting FLAC tracks."),
-        QY("The resulting tracks will be broken: the official FLAC tools will not be able to decode them and seeking will not work as expected.") });
-  add(Q("--engage cow"),                          false, hacks, { QY("No help available.") });
+  for (auto const &hack : listOfHacks)
+    add(Q("--engage %1").arg(Q(hack.name)), false, hacks, { Q(boost::join(hack.description, " ")) });
 
   m_ui->gbGlobalOutputControl->layout()->addItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
   m_ui->gbDevelopmentHacks   ->layout()->addItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
