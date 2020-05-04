@@ -18,6 +18,9 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <cmath>
 #include <iostream>
+#if defined(SYS_UNIX) || defined(SYS_APPLE)
+# include <signal.h>
+#endif
 #include <typeinfo>
 
 #include <ebml/EbmlHead.h>
