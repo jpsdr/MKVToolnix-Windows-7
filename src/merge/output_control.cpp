@@ -249,9 +249,16 @@ update_ebml_head() {
 */
 #if defined(SYS_UNIX) || defined(SYS_APPLE)
 void
+reraise_sigint() {
+  mxmsg(MXMSG_ERROR, Y("mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"));
+  signal(SIGINT, SIG_DFL);
+  kill(getpid(), SIGINT);
+}
+
+void
 sighandler(int /* signum */) {
   if (!s_out)
-    mxerror(Y("mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"));
+    reraise_sigint();
 
   mxwarn(Y("\nmkvmerge received a SIGINT (probably because the user pressed "
            "Ctrl+C). Trying to sanitize the file. If mkvmerge hangs during "
@@ -294,7 +301,7 @@ sighandler(int /* signum */) {
 
   cleanup();
 
-  mxerror(Y("mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"));
+  reraise_sigint();
 }
 #endif
 
