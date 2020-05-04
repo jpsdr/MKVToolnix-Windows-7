@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-05-03 12:01+0200\n"
+"POT-Creation-Date: 2020-05-04 19:32+0200\n"
 "PO-Revision-Date: 2020-04-08 11:13+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -29,7 +29,7 @@ msgstr ""
 "\n"
 "El archivo temporal de la TTA para track ID {0} se está copiando en el archivo final de TTA. Esto puede tomar algún tiempo.\n"
 
-#: src/merge/output_control.cpp:256
+#: src/merge/output_control.cpp:266
 #, no-c-format
 msgid ""
 "\n"
@@ -1370,10 +1370,10 @@ msgid_plural " days"
 msgstr[0] " día"
 msgstr[1] " días"
 
-#: src/merge/output_control.cpp:264
 #: src/merge/output_control.cpp:274
-#: src/merge/output_control.cpp:282
-#: src/merge/output_control.cpp:289
+#: src/merge/output_control.cpp:284
+#: src/merge/output_control.cpp:292
+#: src/merge/output_control.cpp:299
 #, no-c-format
 msgid " done\n"
 msgstr " hecho\n"
@@ -2531,7 +2531,7 @@ msgstr "'{0}' no es un orden de campos válido."
 msgid "'{0}' is not a valid file ID in '--track-order {1}'.\n"
 msgstr "'{0}' no es un ID de archivo válido en '--track-order {1}'.\n"
 
-#: src/common/hacks.cpp:102
+#: src/common/hacks.cpp:112
 #, no-c-format
 msgid "'{0}' is not a valid hack.\n"
 msgstr "'{0}' no es un corte válido.\n"
@@ -2900,7 +2900,7 @@ msgstr "Una lista separada por comas, de códigos de tiempo, del contenido a man
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "En su lugar, se usará un índice predeterminado y los ajustes por defecto para el ancho, alto y paleta de color."
 
-#: src/merge/output_control.cpp:235
+#: src/merge/output_control.cpp:238
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:266
 #: src/propedit/propedit.cpp:123
 #, no-c-format
@@ -3510,7 +3510,7 @@ msgstr "Todos los archivos multimedia compatibles"
 msgid "All units are based on 1024 (G = 1024^3, M = 1024^2, K = 1024)."
 msgstr "Todas las unidades se basan en 1024 (G = 1024^3, M = 1024^2, K = 1024)."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:77
+#: src/common/hacks.cpp:42
 #, no-c-format
 msgid "Allows storing AVC/H.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
 msgstr "Permite almacenar un vídeo AVC/H.264 en modo compatible con Video-for-Windows, p.e. cuando se lee desde un AVI."
@@ -3633,7 +3633,7 @@ msgstr "Ocurrió un error desconocido. El archivo se ha modificado."
 msgid "An unsigned integer was expected."
 msgstr "Se esperaba un entero sin signo."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:72
+#: src/common/hacks.cpp:37
 #, no-c-format
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "Analizar cadenas de bits MPEG4, poner a cada fotograma (frame) en un bloque de Matroska, y utilizar código de tiempo adecuado (I P B B = 0 120 40 80), usa V_MPEG4/ISO/... ID del Códec."
@@ -3674,12 +3674,12 @@ msgstr "Unir archivos multimedia"
 msgid "Append to an e&xisting source file"
 msgstr "Unir a un archivo de origen e&xistente"
 
-#: src/merge/output_control.cpp:1871
+#: src/merge/output_control.cpp:1881
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Uniendo la pista {0} del archivo n.º {1} ('{2}') a la pista {3} del archivo n.º {4} ('{5}').\n"
 
-#: src/merge/output_control.cpp:1020
+#: src/merge/output_control.cpp:1030
 #, no-c-format
 msgid "Appending tracks of this type is not supported."
 msgstr "No está admitida la unión de este tipo de pistas."
@@ -3930,8 +3930,8 @@ msgstr "Grupo del bloque"
 msgid "Block virtual"
 msgstr "Bloque virtual"
 
+#: src/common/hacks.cpp:57
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:289
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:92
 #, no-c-format
 msgid "Blu-ray discs often contain a chapter entry very close to the end of the movie."
 msgstr "Los discos Blu-ray a veces contienen un registro de capítulos muy próxima al final de la película."
@@ -4142,20 +4142,25 @@ msgstr "La categoría no terminó en NULO"
 msgid "Caught exception"
 msgstr "Excepción cerrada"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:85
+#: src/common/hacks.cpp:52
 #, no-c-format
 msgid "Causes mkvmerge not to write 'CueDuration' elements in the cues."
 msgstr "Hace que mkvmerge no escriba elementos 'CueDuration' en los cues (índices)."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:86
+#: src/common/hacks.cpp:53
 #, no-c-format
 msgid "Causes mkvmerge not to write 'CueRelativePosition' elements in the cues."
 msgstr "Hace que mkvmerge no escriba elementos 'CueRelativePosition' en los cues (índices)."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:84
+#: src/common/hacks.cpp:51
 #, no-c-format
 msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field."
 msgstr "Hace que mkvmerge añada comandos 'stop display' a los paquetes de subtítulo VobSub que no contienen un campo de duración."
+
+#: src/common/hacks.cpp:41
+#, fuzzy, no-c-format
+msgid "Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters)."
+msgstr "Indica a mkvmerge crear un elemento meta seek al final del archivo que contenga todos los clústeres."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:300
 #, no-c-format
@@ -4738,7 +4743,7 @@ msgstr "No se pudo extraer la cabecera de la secuencia de esta pista MPEG-1/2.\n
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "No se pudo encontrar un índice para la pista de audio {0} (mensaje de error avilib: {1}). Pista omitida.\n"
 
-#: src/merge/output_control.cpp:1797
+#: src/merge/output_control.cpp:1807
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "No se pudo encontrar gptz al unir. {0}\n"
@@ -5477,7 +5482,7 @@ msgstr "Deshabilitar el reescalado para pantallas de &alto DPI"
 msgid "Disable the &dark mode"
 msgstr "Deshabilitar mo&do oscuro"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:78
+#: src/common/hacks.cpp:44
 #, no-c-format
 msgid "Disable the use of SimpleBlocks instead of BlockGroups."
 msgstr "Deshabilitar el uso de bloques simples en lugar de grupo de bloques."
@@ -5488,7 +5493,7 @@ msgstr "Deshabilitar el uso de bloques simples en lugar de grupo de bloques."
 msgid "Disabled"
 msgstr "Deshabilitado"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
 #, no-c-format
 msgid "Disables lacing for all tracks."
 msgstr "Deshabilitar lacing para todas las pistas."
@@ -5529,7 +5534,7 @@ msgstr "Anchura de visualización"
 msgid "Display width/height:"
 msgstr "Anchura/altura de visualización:"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
+#: src/common/hacks.cpp:33
 #, no-c-format
 msgid "Do not add an entry for the chapters in the meta seek element."
 msgstr "No añadir un registro para los capítulos en el elemento de meta seek."
@@ -5544,7 +5549,7 @@ msgstr "No mostrar volcados hex"
 msgid "Do not split"
 msgstr "No dividir"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
+#: src/common/hacks.cpp:34
 #, no-c-format
 msgid "Do not write meta seek elements at all."
 msgstr "No escribir, en absoluto, elementos de meta seek."
@@ -5614,6 +5619,11 @@ msgstr "Sin caracteres de escape"
 #, no-c-format
 msgid "Don't generate chapters"
 msgstr "No generar capítulos"
+
+#: src/common/hacks.cpp:60
+#, no-c-format
+msgid "Don't remove track statistics tags when reading Matroska files, no matter if new ones are created or not."
+msgstr ""
 
 #: src/mkvtoolnix-gui/util/message_box.cpp:167
 #, no-c-format
@@ -5822,6 +5832,11 @@ msgstr "Elementos"
 msgid "Elements in the category '{0}' ('--edit {1}'):\n"
 msgstr "Elementos en la categoría '{0}' ('--edit {1}'):\n"
 
+#: src/common/hacks.cpp:63
+#, no-c-format
+msgid "Enable appending and splitting FLAC tracks."
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1801
 #, no-c-format
 msgid "Enable copying of items by their type"
@@ -5847,17 +5862,22 @@ msgstr "Activado"
 msgid "Enables splitting of the output into more than one file."
 msgstr "Habilitar el corte del archivo de salida en más de un archivo."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:63
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:64
 #, no-c-format
 msgid "Enables the creation of byte-identical files if the same source files with the same options and the same seed are used."
 msgstr "Habilita la creación de archivos idénticos en bytes si se usan los mismos archivos de origen con las mismas opciones y valor inicial."
+
+#: src/common/hacks.cpp:47
+#, no-c-format
+msgid "Enables warnings for certain conditions where timestamps aren't monotonous in situations where they should be which could indicate either a problem with the file or a programming error."
+msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:212
 #, no-c-format
 msgid "Enabling items"
 msgstr "Habilitar ítems"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:94
+#: src/common/hacks.cpp:59
 #, no-c-format
 msgid "Enabling this option causes mkvmerge to keep that last entry."
 msgstr "Habilitar esta opción provoca que mkvmerge mantenga ese último registro."
@@ -5985,7 +6005,7 @@ msgstr "Error analizando las etiquetas en '{0}': algunos elementos obligatorios 
 msgid "Error reading Matroska file"
 msgstr "Error al leer el archivo Matroska"
 
-#: src/merge/output_control.cpp:735
+#: src/merge/output_control.cpp:745
 #, no-c-format
 msgid "Error reading from the file '{0}'.\n"
 msgstr "Error de lectura del archivo '{0}'.\n"
@@ -6367,7 +6387,7 @@ msgstr "Algunos tipos de archivos tales como secuencias de programa MPEG y trans
 msgid "File/Segment linking"
 msgstr "Archivo/segmento vinculado"
 
-#: src/merge/output_control.cpp:915
+#: src/merge/output_control.cpp:925
 #, no-c-format
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "Los archivos no pueden ser unidos así mismos. El argumento para '--append-to' fue no válido.\n"
@@ -6426,7 +6446,7 @@ msgstr "Para todos los fotogramas"
 msgid "For an in-depth explanantion of file/segment linking and this feature please read mkvmerge's documentation."
 msgstr "Para una explicación más extensa del enlace de archivos/segmentos y sus características, por favor, lee la documentación de mkvmerge."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:51
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:52
 #, no-c-format
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
 msgstr "Para los archivos que aun sin contener una pista de vídeo tengan al menos una pista de audio, mkvmerge automáticamente elegirá un factor de escala para que todos los códigos de tiempo y duraciones tengan una precisión de una muestra."
@@ -6451,12 +6471,12 @@ msgstr "Fuerza 2 bytes"
 msgid "Force 4 bytes"
 msgstr "Fuerza 4 bytes"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:71
+#: src/common/hacks.cpp:36
 #, no-c-format
 msgid "Force EBML style lacing."
 msgstr "Establecer ataduras de estilo de EBML."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:70
+#: src/common/hacks.cpp:35
 #, no-c-format
 msgid "Force Xiph style lacing."
 msgstr "Establecer ataduras de estilo de Xiph."
@@ -6477,7 +6497,7 @@ msgstr "Pista forzada"
 msgid "Forced track flag"
 msgstr "Marcador de pista forzada"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:76
+#: src/common/hacks.cpp:40
 #, no-c-format
 msgid "Forces the Matroska reader to use the generic passthrough packetizer even for known and supported track types."
 msgstr "Establecer el lector de Matroska para utilizar el empaquetado genérico incluso para tipos de pistas conocidos y compatibles."
@@ -6492,7 +6512,7 @@ msgstr "Fuerza el tamaño NALU con una extensión de un cierto número de bytes.
 msgid "Forces the default duration or number of frames per second for a track."
 msgstr "Fuerza una duración predefinida o un número de fotogramas por segundo para una pista."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:48
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:49
 #, no-c-format
 msgid "Forces the timestamp scale factor to the given value."
 msgstr "Fuerza el factor de escala para los códigos de tiempo a un valor dado."
@@ -6572,7 +6592,7 @@ msgstr "GUI"
 msgid "Gamma"
 msgstr "Gamma"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:88
+#: src/common/hacks.cpp:54
 #, no-c-format
 msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track."
 msgstr "La basura al inicio de las pistas de audio en los archivos AVI se suele usar para aplicar un delay (retraso o adelanto) a esa pista."
@@ -7037,12 +7057,12 @@ msgstr "Si se utiliza el formato OGM y el código de caracteres del archivo no e
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
 msgstr "Si los capítulos fueron cargados a partir de un archivo Matroska, la marca de tiempo final del último capítulo del nivel superior se generará a partir de la duración del archivo."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:53
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:54
 #, no-c-format
 msgid "If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present."
 msgstr "Si se usa el valor mágico -1 entonces mkvmerge usará la precisión de muestra incluso si existe una pista de vídeo."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:32
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:33
 #, no-c-format
 msgid "If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster."
 msgstr "Si el número tiene un sufijo 'ms' entonces asigna como mínimo 'n' milisegundos de datos en cada clúster."
@@ -7815,7 +7835,7 @@ msgstr "Idioma:"
 msgid "Layout"
 msgstr "Diseño"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
+#: src/common/hacks.cpp:32
 #, no-c-format
 msgid "Leave additional space (EbmlVoid) in the destination file after the chapters."
 msgstr "Dejar un espacio adicional (EbmlVoid) en el archivo de salida después de los capítulos."
@@ -8085,7 +8105,7 @@ msgstr "Archivos Matroska de audio/vídeo"
 msgid "Matroska files"
 msgstr "Archivos Matroska"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:38
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:39
 #, no-c-format
 msgid "Matroska files can be played back without the cue data, but seeking will probably be imprecise and slower."
 msgstr "Los archivos Matroska pueden ser reproducidos sin información del índice, pero la búsqueda será probablemente imprecisa y lenta."
@@ -8273,7 +8293,7 @@ msgstr "Mas de un nombre de archivo ha sido asignado ('{0}' and '{1}').\n"
 msgid "More than one name was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Más de un nombre fue asignado para un unico archivo adjunto.  '{0}' será descartado y '{1}' utilizado en su lugar.\n"
 
-#: src/merge/output_control.cpp:988
+#: src/merge/output_control.cpp:998
 #, no-c-format
 msgid "More than one track is to be appended to the track {0} from file no. {1} ('{2}'). The argument for '--append-to' was invalid.\n"
 msgstr "Más de una pista es para ser unida a la pista {0} desde el archivo n.º {1} ('{2}'). El argumento para '--append-to' no es válido.\n"
@@ -8450,7 +8470,7 @@ msgstr "UID del siguiente segmento"
 msgid "No"
 msgstr "No"
 
-#: src/merge/output_control.cpp:233
+#: src/merge/output_control.cpp:236
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:264
 #: src/propedit/propedit.cpp:121
 #, no-c-format
@@ -8482,7 +8502,7 @@ msgstr "Ningún tipo MIME ha sido establecido para el archivo adjunto '{0}', y p
 msgid "No actions have been added yet."
 msgstr "Ninguna acción se ha añadido."
 
-#: src/merge/output_control.cpp:947
+#: src/merge/output_control.cpp:957
 #, no-c-format
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "Ninguna asignación añadida ha sido dada al archivo n.º {0} ('{1}'). En su lugar se empleará un trazado por defecto de {2}. Por favor, tenlo en cuenta por si mkvmerge lo cancela, mostrando un mensaje de error, respecto a opciones no válidas '--append-to'.\n"
@@ -8556,7 +8576,7 @@ msgstr "Ninguno de los nombres del archivo fueron relacionados entre '{0}' y '{1
 msgid "No filename found after the '@'."
 msgstr "No se encontró ningún nombre para el archivo después de la @."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:98
+#: src/common/hacks.cpp:65
 #, no-c-format
 msgid "No help available."
 msgstr "Ayuda no disponible."
@@ -8688,7 +8708,7 @@ msgstr "Normalmente las tareas realizadas permanecen en la lista de tareas hasta
 msgid "Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."
 msgstr "Por lo general, mkvmerge no cambia la información del timing (frecuencia de fotograma/campo) almacenado en el bitstream del vídeo."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:82
+#: src/common/hacks.cpp:49
 #, no-c-format
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
 msgstr "Normalmente, mkvmerge conserva la información de la relación de aspecto (aspect ratio) de los bitstreams del vídeo MPEG4 e inserta la información en el contenedor."
@@ -8698,7 +8718,7 @@ msgstr "Normalmente, mkvmerge conserva la información de la relación de aspect
 msgid "Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."
 msgstr "Normalmente, mkvmerge aplicará compresión sin pérdidas adicional para pistas de subtítulos de ciertos códecs."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:50
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:51
 #, no-c-format
 msgid "Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."
 msgstr "Por lo general, mkvmerge usará un valor de 1000000 que significa que los códigos de tiempo y las duraciones tendrán una precisión de 1ms."
@@ -8939,7 +8959,7 @@ msgstr "Solo está permitido un segmento de información del archivo en '{0} {1}
 msgid "Only one source file is allowed.\n"
 msgstr "Sólo se permite un archivo de origen.\n"
 
-#: src/merge/output_control.cpp:928
+#: src/merge/output_control.cpp:938
 #, no-c-format
 msgid "Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "Solo parte de las asignaciones añadidas se le dieron al archivo n.º {0} ('{1}'). Si no especificas ninguna asignación, se usará la establecida como predefinida; o puede establecer una asignación para todas las pistas que van a ser copiadas.\n"
@@ -9186,7 +9206,7 @@ msgstr "PGSSUP"
 msgid "PTS error: 0x{0:02x} {1:02x}{2:02x} {3:02x}{4:02x}\n"
 msgstr "Error PTS: 0x{0:02x} {1:02x}{2:02x} {3:02x}{4:02x}\n"
 
-#: src/output/p_flac.cpp:75
+#: src/output/p_flac.cpp:76
 #, no-c-format
 msgid "Packet number {0} contained an invalid FLAC header and is being skipped.\n"
 msgstr "El número de paquete {0} contenido en la cabecera FLAC no es válido y está siendo omitido.\n"
@@ -9479,7 +9499,7 @@ msgstr "Programa"
 msgid "Program execution failed"
 msgstr "La ejecución del programa falló"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:34
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:35
 #, no-c-format
 msgid "Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking."
 msgstr "Los programas sólo serán capaces de buscar clústeres, por lo que crear clústeres muy grandes podría generar búsquedas imprecisas o lentas."
@@ -9495,7 +9515,7 @@ msgstr "Progreso"
 msgid "Progress:"
 msgstr "Progreso:"
 
-#: src/merge/output_control.cpp:329
+#: src/merge/output_control.cpp:339
 #, no-c-format
 msgid "Progress: 100%{0}"
 msgstr "Progreso: 100%{0}"
@@ -9508,7 +9528,7 @@ msgstr "Progreso: [{0}{1}] {2}%"
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2950
-#: src/merge/output_control.cpp:352
+#: src/merge/output_control.cpp:362
 #: src/propedit/tag_target.cpp:354
 #: src/propedit/tag_target.cpp:367
 #: src/propedit/tag_target.cpp:372
@@ -10229,7 +10249,7 @@ msgstr "Ámbito"
 msgid "See below for examples."
 msgstr "Véanse más adelante los ejemplos."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:59
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:60
 #, no-c-format
 msgid "See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons."
 msgstr "Ver fallos #2469 y #2480 en el servidor de MKVToolNix para analizar en profundidad los pros y contras."
@@ -10757,12 +10777,12 @@ msgstr "Suspender el ordenador"
 msgid "Slices"
 msgstr "Cortes"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:96
+#: src/common/hacks.cpp:61
 #, no-c-format
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "Algunas pistas H.264/AVC contienen fragmentos I pero carecen de auténticos fotogramas claves."
 
-#: src/merge/output_control.cpp:1326
+#: src/merge/output_control.cpp:1336
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "Algunos elementos de la etiqueta están ausentes (este error no debería haber ocurrido - otro error similar habrá ocurrido anteriormente). {0}\n"
@@ -10833,7 +10853,7 @@ msgstr "Modo de corte:"
 msgid "Splitting"
 msgstr "División"
 
-#: src/merge/output_control.cpp:1076
+#: src/merge/output_control.cpp:1086
 #, no-c-format
 msgid "Splitting tracks of this type is not supported."
 msgstr "No se admite la división de pistas de este tipo."
@@ -10941,7 +10961,7 @@ msgstr "Detener &después de que todas las tareas en ejecución hayan finalizado
 msgid "Stop at the first cluster"
 msgstr "Parar en el primer clúster"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:79
+#: src/common/hacks.cpp:45
 #, no-c-format
 msgid "Store changes in CodecPrivate data in CodecState elements instead of the frames."
 msgstr "Almacena los cambios de los datos CodecPrivate en los elementos CodecState y no en los fotogramas."
@@ -11087,37 +11107,37 @@ msgstr "Valor de tipo de objetivo"
 msgid "Targets"
 msgstr "Objetivos"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:37
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:38
 #, no-c-format
 msgid "Tells mkvmerge not to create and write the cue data which can be compared to an index in an AVI."
 msgstr "Le dice a mkvmerge que no genere ni escriba la información del índice (cue data) que puede ser comparada a la de un índice en un AVI."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:46
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:47
 #, no-c-format
 msgid "Tells mkvmerge not to write tags with statistics for each track."
 msgstr "Le dice a mkvmerge que no escriba tags con estadísticas para cada pista."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 #, no-c-format
 msgid "Tells mkvmerge not to write the 'date' field in the segment information headers."
 msgstr "Le dice a mkvmerge que no escriba el campo 'date' en el segmento de información de las cabeceras."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:61
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:62
 #, no-c-format
 msgid "Tells mkvmerge to abort after the first warning is emitted."
 msgstr "Le dice a mkvmerge que finalice después de emitir la primera advertencia."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 #, no-c-format
 msgid "Tells mkvmerge to create a meta seek element at the end of the file containing all clusters."
 msgstr "Indica a mkvmerge crear un elemento meta seek al final del archivo que contenga todos los clústeres."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:56
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
 #, no-c-format
 msgid "Tells mkvmerge to flush all data cached in memory to storage when closing files opened for writing."
 msgstr "Le dice a mkvmerge que libere toda la memoria cache cuando se cierre un archivo abierto para su escritura."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:31
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:32
 #, no-c-format
 msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
 msgstr "Le dice a mkvmerge que no escriba más de 'n' bloques de información por cada clúster."
@@ -11154,7 +11174,7 @@ msgstr "El ID del codec de las dos pistas es diferente: {0} y {1}"
 msgid "The DocType header item is changed to \"webm\"."
 msgstr "El elemento de la cabecera DocType se ha cambiado a \"webm\"."
 
-#: src/output/p_flac.cpp:47
+#: src/output/p_flac.cpp:48
 #, no-c-format
 msgid "The FLAC headers could not be parsed: the stream info structure was not found.\n"
 msgstr "Los cabeceras FLAC no pudieron ser analizados: la información de la estructrura del archivo no se encontró.\n"
@@ -11498,7 +11518,7 @@ msgstr "La cabecera del archivo de corrección no fue posible leer correctamente
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Los conjuntos de caracteres seleccionados aquí se mostrarán en la parte superior de todas las listas desplegables del tipo 'Conjunto de caracteres'."
 
-#: src/merge/output_control.cpp:1597
+#: src/merge/output_control.cpp:1607
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Los registros del cue (el índice) están siendo escritos...\n"
@@ -11598,7 +11618,7 @@ msgstr "La altura de visualización de las dos pistas es diferente: {0} and {1}"
 msgid "The display width of the two tracks is different: {0} and {1}"
 msgstr "La anchura de visualización de las dos pistas es diferente: {0} and {1}"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:58
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:59
 #, no-c-format
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "La desventaja es que el multiplexado tardará más, ya que mkvmerge esperará hasta que todos los datos se hayan escrito para guardarlos antes de salir."
@@ -11757,7 +11777,7 @@ msgstr "El archivo '{0}' no pudo abrirse para su escritura: {1}."
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1352
+#: src/merge/output_control.cpp:1362
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "El archivo '{0}' no fue posible abrir para su escritura: {1}.\n"
@@ -11767,12 +11787,12 @@ msgstr "El archivo '{0}' no fue posible abrir para su escritura: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "El archivo '{0}' no se pudo abrir o analizar."
 
-#: src/merge/output_control.cpp:1559
+#: src/merge/output_control.cpp:1569
 #, fuzzy, no-c-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
 msgstr "El archivo '{0}' no se pudo abrir para su lectura: {1}.\n"
 
-#: src/merge/output_control.cpp:1356
+#: src/merge/output_control.cpp:1366
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "El archivo {0} ha sido abierto para su escritura.\n"
@@ -11787,7 +11807,7 @@ msgstr "El archivo {0} es un tipo de archivo incompatible ({1}).\n"
 msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "El archivo '{0}' no es un archivo Matroska o no pudo ser encontrado.\n"
 
-#: src/merge/output_control.cpp:1557
+#: src/merge/output_control.cpp:1567
 #, fuzzy, no-c-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
 msgstr "El archivo '{0}' no se pudo abrir para su lectura: {1}.\n"
@@ -11871,22 +11891,22 @@ msgstr "Los cabeceras del archvo no pudieron ser analizados, p.e. porque están 
 msgid "The file is being analyzed."
 msgstr "El archivo está siendo analizado."
 
-#: src/merge/output_control.cpp:260
+#: src/merge/output_control.cpp:270
 #, no-c-format
 msgid "The file is being fixed, part 1/4..."
 msgstr "El archivo esta siendo fijado, parte 1/4..."
 
-#: src/merge/output_control.cpp:266
+#: src/merge/output_control.cpp:276
 #, no-c-format
 msgid "The file is being fixed, part 2/4..."
 msgstr "El archivo esta siendo fijado, parte 2/4..."
 
-#: src/merge/output_control.cpp:276
+#: src/merge/output_control.cpp:286
 #, no-c-format
 msgid "The file is being fixed, part 3/4..."
 msgstr "El archivo esta siendo fijado, parte 3/4..."
 
-#: src/merge/output_control.cpp:284
+#: src/merge/output_control.cpp:294
 #, no-c-format
 msgid "The file is being fixed, part 4/4..."
 msgstr "El archivo esta siendo fijado, parte 4/4..."
@@ -11901,17 +11921,17 @@ msgstr "El archivo se lee con el fin de crear las estadísticas de la pista.\n"
 msgid "The file name for this segment."
 msgstr "El nombre del archivo para este segmento."
 
-#: src/merge/output_control.cpp:961
+#: src/merge/output_control.cpp:971
 #, no-c-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "El archivo n.º {0} ('{1}') no contiene una pista con ID {2}, o que la pista no se va a copiar. El argumento para '--append-to' no es válido.\n"
 
-#: src/merge/output_control.cpp:967
+#: src/merge/output_control.cpp:977
 #, no-c-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "El archivo n.º {0} ('{1}') no contiene una pista con ID {2}, o que la pista no se va a copiar. Por lo tanto, ninguna pista puede ser unida al archivo. El argumento para '--append-to' no es válido.\n"
 
-#: src/merge/output_control.cpp:907
+#: src/merge/output_control.cpp:917
 #, no-c-format
 msgid "The file no. {0} ('{1}') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "El archivo n.º {0} ('{1}') no está siendo unido. El argumento para '--append-to' no es válido.\n"
@@ -12030,7 +12050,7 @@ msgstr "El formato es de la forma 'HH:MM:SS.nnnnnnnnn' o como un número de segu
 msgid "The formats can be mixed, too."
 msgstr "Los formatos también se pueden combinar."
 
-#: src/merge/output_control.cpp:1018
+#: src/merge/output_control.cpp:1028
 #, no-c-format
 msgid "The formats do not match."
 msgstr "Los formatos no coinciden."
@@ -12140,7 +12160,7 @@ msgstr "La lista de idiomas reconocidos de pista en los nombres de los archivos 
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
 msgstr "La carpeta local no ha podido establecerse correctamente. Comprueba el LANG, LC_ALL y las variables de entorno LC_MESSAGES.\n"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:33
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:34
 #, no-c-format
 msgid "The maximum length for a cluster that mkvmerge accepts is 60000 blocks and 32000ms; the minimum length is 100ms."
 msgstr "La longitud máxima para un clúster que mkvmerge admite es 60000 bloques y 32000ms; la longitud mínima es de 100ms."
@@ -12362,7 +12382,7 @@ msgstr "El valor de la propiedad no es un entero con signo válido en '{0}'. {1}
 msgid "The property value is not a valid unsigned integer in '{0}'. {1}\n"
 msgstr "El valor de la propiedad no es un entero sin signo válido en '{0}'. {1}\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:1031
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "La razón es desconocida."
@@ -12386,6 +12406,11 @@ msgstr "El resto es copiado tal y como es."
 #, no-c-format
 msgid "The resulting number will be padded with leading zeroes if the number of places is less than specified."
 msgstr "El número final será rellenado con ceros a la izquierda si el número de posiciones es menor que el especificado."
+
+#: src/common/hacks.cpp:64
+#, no-c-format
+msgid "The resulting tracks will be broken: the official FLAC tools will not be able to decode them and seeking will not work as expected."
+msgstr ""
 
 #: src/common/xml/ebml_converter.cpp:341
 #, no-c-format
@@ -12608,12 +12633,12 @@ msgstr ""
 msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr "La pista con ID {0} no tiene un CodecID válido.\n"
 
-#: src/merge/output_control.cpp:1078
+#: src/merge/output_control.cpp:1088
 #, no-c-format
 msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
 msgstr "La pista con ID {0} del archivo '{1}' no se pudo dividir. {2}\n"
 
-#: src/merge/output_control.cpp:660
+#: src/merge/output_control.cpp:670
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
 msgstr "Las cabeceras de la pista no han podido ser reproducidas correctamente. {0}\n"
@@ -12623,17 +12648,17 @@ msgstr "Las cabeceras de la pista no han podido ser reproducidas correctamente. 
 msgid "The track number as used in the Block Header."
 msgstr "El número de pista que se utiliza en la cabecera de bloque."
 
-#: src/merge/output_control.cpp:1009
+#: src/merge/output_control.cpp:1019
 #, no-c-format
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "El número de pista {0} del archivo '{1}' probablemente no puede ser unida correctamente al número de pista {2} del archivo '{3}': {4} Por favor, asegúrate de que el archivo resultante se reproduce todo el tiempo de forma correcta. El autor del programa probablemente no desarrollará ninguna herramienta de compatibilidad para los fallos de reproducción con el archivo resultante.\n"
 
-#: src/merge/output_control.cpp:1023
+#: src/merge/output_control.cpp:1033
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr "El número de pista {0} del archivo '{1}' no puede ser unido al número de pista {2} del archivo '{3}'. {4}\n"
 
-#: src/merge/output_control.cpp:1019
+#: src/merge/output_control.cpp:1029
 #, no-c-format
 msgid "The track parameters do not match."
 msgstr "Los parámetros de la pista no coinciden."
@@ -12643,7 +12668,7 @@ msgstr "Los parámetros de la pista no coinciden."
 msgid "The track properties on the \"input\" tab can be laid out in three different way in order to serve different workflows."
 msgstr "Las propiedades de la pista en la pestaña \"Entrada\" se pueden colocar de tres maneras distintas a fin de satisfacer diferentes maneras de trabajo."
 
-#: src/merge/output_control.cpp:977
+#: src/merge/output_control.cpp:987
 #, no-c-format
 msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "La pista {0} del archivo n.º {1} ('{2}') puede ser unida más de una vez. El argumento para '--append-to' no es válido.\n"
@@ -12728,8 +12753,8 @@ msgstr "Hay una nueva versión disponible."
 msgid "There is currently a job running."
 msgstr "Hay una tarea en ejecución."
 
-#: src/merge/output_control.cpp:901
 #: src/merge/output_control.cpp:911
+#: src/merge/output_control.cpp:921
 #, no-c-format
 msgid "There is no file with the ID '{0}'. The argument for '--append-to' was invalid.\n"
 msgstr "No hay archivo con el ID '{0}'. El argumento para '--append-to' no fue válido.\n"
@@ -12750,7 +12775,7 @@ msgstr "Hubo un error al consultar el estado de la actualización."
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "Hubo errores en los valores de cabecera que impidieron que se guardasen. El primer error ha sido seleccionado."
 
-#: src/merge/output_control.cpp:234
+#: src/merge/output_control.cpp:237
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:265
 #: src/propedit/propedit.cpp:122
 #, no-c-format
@@ -12838,12 +12863,12 @@ msgid_plural "This audio track contains {0} bytes of invalid data which were ski
 msgstr[0] "Esta pista de audio contiene {0} byte de datos inservibles que fue omitido antes del código de tiempo {1}."
 msgstr[1] "Esta pista de audio contiene {0} bytes de datos inservibles que fueron omitidos antes del código de tiempo {1}."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:58
 #, no-c-format
 msgid "This can be used to prevent data loss on power outages or to circumvent certain problems in the operating system or drivers."
 msgstr "Esto se puede usar para evitar la pérdida de datos en cortes de energía o para evitar ciertos problemas en el sistema operativo o los controladores."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:52
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:53
 #, no-c-format
 msgid "This causes bigger overhead but allows precise seeking and extraction."
 msgstr "Esto causa un gran sobrecarga pero permite precisar la búsqueda y extracción."
@@ -12864,7 +12889,7 @@ msgstr "Este elemento está actualmente presente en el archivo."
 msgid "This element is not currently present in the file."
 msgstr "Este elemento no está actualmente presente en el archivo."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
 #, no-c-format
 msgid "This field is normally set to the date the file is created."
 msgstr "El campo se establece normalmento a la fecha en la que el archivo fue creado."
@@ -12945,7 +12970,7 @@ msgstr "Este es el idioma que se asigna automáticamente a los nombres de los ca
 msgid "This is the title that players may show as the 'main title' for this movie."
 msgstr "Este es el título que el reproductor debe mostrar como el título principal para esta pelicula."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:80
+#: src/common/hacks.cpp:46
 #, no-c-format
 msgid "This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers."
 msgstr "Por ejemplo, esto se utiliza para almacenar las cabeceras de la secuencia de pistas de vídeo MPEG1/2."
@@ -12996,7 +13021,7 @@ msgstr "Únicamente funciona con pistas de audio AC-3, DTS y TrueHD."
 msgid "This only works with DTS audio tracks."
 msgstr "Únicamente funciona con pistas de audio DTS."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:83
+#: src/common/hacks.cpp:50
 #, no-c-format
 msgid "This option causes mkvmerge to remove the aspect ratio information from the bitstream."
 msgstr "Esta opción provoca que mkvmerge elimine la información de la relación de aspecto del bitstream."
@@ -13006,17 +13031,22 @@ msgstr "Esta opción provoca que mkvmerge elimine la información de la relació
 msgid "This option controls how the chapter names are created."
 msgstr "Esta opción controla cómo se generan los nombres del capítulo."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:97
+#: src/common/hacks.cpp:43
+#, no-c-format
+msgid "This option does nothing and is only kept for backwards compatibility."
+msgstr ""
+
+#: src/common/hacks.cpp:62
 #, no-c-format
 msgid "This option forces mkvmerge to treat all of those I slices as key frames."
 msgstr "Esta opción fuerza a mkvmerge a tratar todos aquellos segmentos I como fotogramas claves."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:30
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:31
 #, no-c-format
 msgid "This option needs an additional argument 'n'."
 msgstr "Esta opción requiere un argumento adicional 'n'."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:90
+#: src/common/hacks.cpp:56
 #, no-c-format
 msgid "This option prevents that behavior."
 msgstr "Esta opción evita ese comportamiento."
@@ -13056,12 +13086,12 @@ msgstr "Esta propiedad es obligatoria y no puede ser eliminada en '{0}'. {1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Esta propiedad es única. No pueden ser añadidos más instancias en '{0}'. {1}\n"
 
-#: src/merge/output_control.cpp:1710
+#: src/merge/output_control.cpp:1720
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "REALMENTE esto no debería haber ocurrido. El espacio reservado para el primer elemento de meta seek es demasiado pequeño. Tamaño necesario: {0}. {1}\n"
 
-#: src/merge/output_control.cpp:280
+#: src/merge/output_control.cpp:290
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. {0}\n"
 msgstr "REALMENTE esto no debería haber ocurrido. El espacio reservado para el primer elemento meta seek es demasiado pequeño. {0}\n"
@@ -13096,12 +13126,12 @@ msgstr "Esta pista contiene información SBR AAC/HE-AAC/AAC+."
 msgid "This usually indicates a damaged file structure."
 msgstr "Esto normalmente indica que la estructura del archivo está dañada."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:46
 #, no-c-format
 msgid "This will increase file size and does not offer any additional value for players at the moment."
 msgstr "Esto incrementara el tamaño del archivo, y por el momento no ofrece ningún valor adicional para los reproductores."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
 #, no-c-format
 msgid "This will increase the file's size, especially if there are many audio tracks."
 msgstr "Esto incrementará el tamaño del archivo, especialmente si hay varias pistas de audio."
@@ -13371,7 +13401,7 @@ msgstr "TrueHD"
 msgid "Two VobSub tracks can only be extracted into the same file if their CodecPrivate data matches. This is not the case for the tracks {0} and {1}.\n"
 msgstr "Las dos pistas VobSub solo pueden ser extraídas en el mismo archivo si sus datos particulares del códec que coinciden. Este no es el caso para las pistas {0} y {1}.\n"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:75
+#: src/common/hacks.cpp:39
 #, no-c-format
 msgid "Two files multiplexed with the same settings and this switch activated will be identical."
 msgstr "Dos archivos multiplexados con la misma configuración y con este interruptor activado serán idénticos."
@@ -13558,7 +13588,7 @@ msgstr "Tipo de pista no compatible para esta pista.\n"
 msgid "Update an attachment's properties"
 msgstr "Actualizar propiedades de un adjunto"
 
-#: src/merge/output_control.cpp:237
+#: src/merge/output_control.cpp:240
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:267
 #: src/propedit/propedit.cpp:125
 #, no-c-format
@@ -13590,12 +13620,12 @@ msgstr "Usar 'segmentos vinculados' para los archivos resultantes."
 msgid "Use fi&xed directory:"
 msgstr "Usa el directorio fi&jado:"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:74
+#: src/common/hacks.cpp:38
 #, no-c-format
 msgid "Use fixed values for the elements that change with each file otherwise (multiplexing date, segment UID, track UIDs etc.)."
 msgstr "Usar los valores fijados para los elementos que cambian con cada archivo de otro modo (fecha de multiplexado, segmento UID, UID de pistas, etc.)."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
 #, no-c-format
 msgid "Use only for testing."
 msgstr "Sólo para hacer pruebas."
@@ -13605,7 +13635,7 @@ msgstr "Sólo para hacer pruebas."
 msgid "Use the &title as the base file name if a title is set"
 msgstr "Usa el &título como base del nombre del archivo si el título está establecido"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:39
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:40
 #, no-c-format
 msgid "Use this only for testing purposes."
 msgstr "Úsalo únicamente con fines de testeo."
@@ -13671,7 +13701,7 @@ msgstr "VP8/VP9"
 msgid "Valid format codes are:"
 msgstr "Los códigos válidos de formatos son:"
 
-#: src/common/hacks.cpp:80
+#: src/common/hacks.cpp:88
 #, no-c-format
 msgid "Valid hacks are:\n"
 msgstr "Las modificaciones validas son:\n"
@@ -14246,7 +14276,7 @@ msgstr "Con lo actuales ajustes de multiplexado el archivo de salida no contendr
 msgid "With this option that information is adjusted to match the container's timing information."
 msgstr "Con esta opción, la información del timing se ajusta para que coincida con la del contenedor."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:46
 #, no-c-format
 msgid "Write durations for all blocks."
 msgstr "Escribir duraciones para todos los bloques."
@@ -14427,7 +14457,7 @@ msgstr "Aún puede insertar manualmente valores no incluidos en esta lista del m
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr "No puede añadir partes adicionales a los archivos que no contengan pistas."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:49
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:50
 #, no-c-format
 msgid "You have to enter a value between 1000 and 10000000 or the magic value -1."
 msgstr "Tienes que introducir un valor entre 1000 y 10000000 o el valor mágico -1."
@@ -14602,7 +14632,7 @@ msgstr "cifrado"
 msgid "equirectangular"
 msgstr "equirectangular"
 
-#: src/merge/output_control.cpp:427
+#: src/merge/output_control.cpp:437
 #, no-c-format
 msgid "filelist_t not found for generic_packetizer_c. {0}\n"
 msgstr "filelist_t no se encuentra para generic_packetizer_c. {0}\n"
@@ -14965,12 +14995,12 @@ msgstr ""
 msgid "mkvmerge has not been compiled with FLAC support but handling of this stream has been requested.\n"
 msgstr "mkvmerge no ha sido compilado con compatibilidad para archivos FLAC, pero la manipulación de estos archivos ha sido solicitado.\n"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:89
+#: src/common/hacks.cpp:55
 #, no-c-format
 msgid "mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timestamps by it."
 msgstr "Generalmente, mkvmerge calcula el delay implicado y lo compensa en los códigos de tiempo de la pista."
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:93
+#: src/common/hacks.cpp:58
 #, no-c-format
 msgid "mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."
 msgstr "Normalmente, mkvmerge elimina ese último registro si su código de tiempo esta dentro de los últimos cinco segundos de la duración total."
@@ -14983,8 +15013,7 @@ msgstr "Normalmente, mkvmerge elimina ese último registro si su código de tiem
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
 msgstr "mkvmerge admite dos formatos de capítulos: El OGM como formato de texto y el formato XML con todas sus funciones."
 
-#: src/merge/output_control.cpp:254
-#: src/merge/output_control.cpp:297
+#: src/merge/output_control.cpp:256
 #, no-c-format
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmerge fue interrumpido por un SIGINT (señales de inteligencia) (¿Ctrl+C?)\n"

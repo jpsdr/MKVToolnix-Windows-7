@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-05-03 12:01+0200\n"
+"POT-Creation-Date: 2020-05-04 19:32+0200\n"
 "PO-Revision-Date: 2020-04-01 04:10+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -27,7 +27,7 @@ msgstr ""
 "\n"
 "第 {0} 軌的暫存 TTA 檔正被複製到最終 TTA 檔中。這可能需要些時間。\n"
 
-#: src/merge/output_control.cpp:256
+#: src/merge/output_control.cpp:266
 #, no-c-format
 msgid ""
 "\n"
@@ -1264,10 +1264,10 @@ msgid " day"
 msgid_plural " days"
 msgstr[0] " 天"
 
-#: src/merge/output_control.cpp:264
 #: src/merge/output_control.cpp:274
-#: src/merge/output_control.cpp:282
-#: src/merge/output_control.cpp:289
+#: src/merge/output_control.cpp:284
+#: src/merge/output_control.cpp:292
+#: src/merge/output_control.cpp:299
 #, no-c-format
 msgid " done\n"
 msgstr " 完成\n"
@@ -2412,7 +2412,7 @@ msgstr "'{0}' 不是有效的欄位順序。"
 msgid "'{0}' is not a valid file ID in '--track-order {1}'.\n"
 msgstr "在 '--track-order {1}' 中，'{0}' 不是有效的檔案 ID 。\n"
 
-#: src/common/hacks.cpp:102
+#: src/common/hacks.cpp:112
 #, no-c-format
 msgid "'{0}' is not a valid hack.\n"
 msgstr "'{0}' 不是有效的 hack 程式語言。\n"
@@ -2781,7 +2781,7 @@ msgstr "用逗號區隔開要保留內容時間戳記範圍的清單。"
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "將使用預設索引及其寬度、高度和調色盤的預設設定。"
 
-#: src/merge/output_control.cpp:235
+#: src/merge/output_control.cpp:238
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:266
 #: src/propedit/propedit.cpp:123
 #, no-c-format
@@ -3390,7 +3390,7 @@ msgstr "所有支援的媒體檔"
 msgid "All units are based on 1024 (G = 1024^3, M = 1024^2, K = 1024)."
 msgstr "全部單位以 1024 為基礎 (G = 1024^3, M = 1024^2, K = 1024)。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:77
+#: src/common/hacks.cpp:42
 #, no-c-format
 msgid "Allows storing AVC/H.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
 msgstr "允許以 Video-for-Windows 相容模式存儲的 AVC/H.264 視訊，例如從 AVI 檔中讀取的。"
@@ -3513,7 +3513,7 @@ msgstr "發生未知錯誤。檔案已修改。"
 msgid "An unsigned integer was expected."
 msgstr "期待不帶正負號的整數。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:72
+#: src/common/hacks.cpp:37
 #, no-c-format
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
 msgstr "分析 MPEG4 位流，將每一影格置於單獨的 Matroska 塊中，使用固有的時間戳記 (I P B B = 0 120 40 80)，使用形如 V_MPEG4/ISO/... 的 CodecID。"
@@ -3554,12 +3554,12 @@ msgstr "追加媒體檔案"
 msgid "Append to an e&xisting source file"
 msgstr "追加至已存在的輸入檔 (&X)"
 
-#: src/merge/output_control.cpp:1871
+#: src/merge/output_control.cpp:1881
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "正在追加合併軌道 {0} 自檔案 {1} ( '{2}' ) 至軌道 {3} 自檔案 {4} ( '{5}' ) 。\n"
 
-#: src/merge/output_control.cpp:1020
+#: src/merge/output_control.cpp:1030
 #, fuzzy, no-c-format
 msgid "Appending tracks of this type is not supported."
 msgstr "不支援讀取加密的 VOB。\n"
@@ -3810,8 +3810,8 @@ msgstr "區塊群組"
 msgid "Block virtual"
 msgstr "虛擬區塊"
 
+#: src/common/hacks.cpp:57
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:289
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:92
 #, no-c-format
 msgid "Blu-ray discs often contain a chapter entry very close to the end of the movie."
 msgstr "藍光光碟經常包含一個十分接近影片末尾的章節項目。"
@@ -4022,20 +4022,25 @@ msgstr "類別未以 NUL 結尾"
 msgid "Caught exception"
 msgstr "發生異常"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:85
+#: src/common/hacks.cpp:52
 #, no-c-format
 msgid "Causes mkvmerge not to write 'CueDuration' elements in the cues."
 msgstr "使 mkvmerge 不在索引部分寫入 'CueDuration' 元素。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:86
+#: src/common/hacks.cpp:53
 #, no-c-format
 msgid "Causes mkvmerge not to write 'CueRelativePosition' elements in the cues."
 msgstr "使 mkvmerge 不在索引部分寫入 'CueRelativePosition' 元素。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:84
+#: src/common/hacks.cpp:51
 #, no-c-format
 msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field."
 msgstr "讓 mkvmerge 加入 '停止顯示' 指令到不包含時間長度欄位的 VobSub 字幕套組。"
+
+#: src/common/hacks.cpp:41
+#, fuzzy, no-c-format
+msgid "Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters)."
+msgstr "讓 mkvmerge 在包含所有叢集的檔案建立變換定位元素。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:300
 #, no-c-format
@@ -4617,7 +4622,7 @@ msgstr "無法從該 MPEG-1/2 軌道擷取序列表頭。\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "找不到音訊軌 {0} 的索引 (avilib 錯誤訊息: {1})。正在跳過此軌。\n"
 
-#: src/merge/output_control.cpp:1797
+#: src/merge/output_control.cpp:1807
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "追加檔案時找不到 gptzr。 {0}\n"
@@ -5356,7 +5361,7 @@ msgstr "停用高 DPI 顯示器的縮放(&H)"
 msgid "Disable the &dark mode"
 msgstr "停用深色模式(&D)"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:78
+#: src/common/hacks.cpp:44
 #, no-c-format
 msgid "Disable the use of SimpleBlocks instead of BlockGroups."
 msgstr "停用 SimpleBlocks 簡單區塊替代 BlockGroups 區塊群組。"
@@ -5367,7 +5372,7 @@ msgstr "停用 SimpleBlocks 簡單區塊替代 BlockGroups 區塊群組。"
 msgid "Disabled"
 msgstr "停用"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
 #, no-c-format
 msgid "Disables lacing for all tracks."
 msgstr "停用所有軌道的緊縮。"
@@ -5408,7 +5413,7 @@ msgstr "顯示寬度"
 msgid "Display width/height:"
 msgstr "顯示寬/高:"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
+#: src/common/hacks.cpp:33
 #, no-c-format
 msgid "Do not add an entry for the chapters in the meta seek element."
 msgstr "不要在變換定位元件中新增章節項目。"
@@ -5423,7 +5428,7 @@ msgstr "不顯示十六進位轉儲形式"
 msgid "Do not split"
 msgstr "不分割"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
+#: src/common/hacks.cpp:34
 #, no-c-format
 msgid "Do not write meta seek elements at all."
 msgstr "不要寫入任何變換定位元件。"
@@ -5493,6 +5498,11 @@ msgstr "不轉義"
 #, no-c-format
 msgid "Don't generate chapters"
 msgstr "不要產生章節"
+
+#: src/common/hacks.cpp:60
+#, no-c-format
+msgid "Don't remove track statistics tags when reading Matroska files, no matter if new ones are created or not."
+msgstr ""
 
 #: src/mkvtoolnix-gui/util/message_box.cpp:167
 #, no-c-format
@@ -5701,6 +5711,11 @@ msgstr "元件"
 msgid "Elements in the category '{0}' ('--edit {1}'):\n"
 msgstr "元件於類別 '{0}' ( '--edit {1}' ):\n"
 
+#: src/common/hacks.cpp:63
+#, no-c-format
+msgid "Enable appending and splitting FLAC tracks."
+msgstr ""
+
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1801
 #, no-c-format
 msgid "Enable copying of items by their type"
@@ -5726,17 +5741,22 @@ msgstr "啟用"
 msgid "Enables splitting of the output into more than one file."
 msgstr "啟用將輸出檔案切割為多個檔案。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:63
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:64
 #, no-c-format
 msgid "Enables the creation of byte-identical files if the same source files with the same options and the same seed are used."
 msgstr "如果使用相同選項與種子(seed)並且來自相同的原始檔案，將啟用建立位元完全相同的檔案。"
+
+#: src/common/hacks.cpp:47
+#, no-c-format
+msgid "Enables warnings for certain conditions where timestamps aren't monotonous in situations where they should be which could indicate either a problem with the file or a programming error."
+msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:212
 #, no-c-format
 msgid "Enabling items"
 msgstr "啟用項目"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:94
+#: src/common/hacks.cpp:59
 #, no-c-format
 msgid "Enabling this option causes mkvmerge to keep that last entry."
 msgstr "啟用該選項使 mkvmerge 保留此項目。"
@@ -5864,7 +5884,7 @@ msgstr "解析 '{0}' 中的標籤發生錯誤: 缺少一些必須的元件。\n"
 msgid "Error reading Matroska file"
 msgstr "讀取 Matroska 檔案時發生錯誤"
 
-#: src/merge/output_control.cpp:735
+#: src/merge/output_control.cpp:745
 #, no-c-format
 msgid "Error reading from the file '{0}'.\n"
 msgstr "讀取檔案 '{0}' 發生錯誤。\n"
@@ -6246,7 +6266,7 @@ msgstr "部分檔案類型，如 MPEG 程式和傳輸串流 (.vob, .m2ts) ，需
 msgid "File/Segment linking"
 msgstr "檔案/剪輯"
 
-#: src/merge/output_control.cpp:915
+#: src/merge/output_control.cpp:925
 #, no-c-format
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
 msgstr "無法將檔追加到自身。 '--append-to' 的參數無效。\n"
@@ -6305,7 +6325,7 @@ msgstr "全部影格"
 msgid "For an in-depth explanantion of file/segment linking and this feature please read mkvmerge's documentation."
 msgstr "要深入瞭解檔案/剪輯連接功能，請閱讀 mkvmerge 文件檔。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:51
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:52
 #, no-c-format
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
 msgstr "檔案可以不包含視訊軌但至少有一條音訊軌mkvmerge 會自動選擇時間戳記縮放係數，因此全部時間戳記和時間長度會有單次取樣的精準度。"
@@ -6330,12 +6350,12 @@ msgstr "強制 2 位元組"
 msgid "Force 4 bytes"
 msgstr "強制 4 位元組"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:71
+#: src/common/hacks.cpp:36
 #, no-c-format
 msgid "Force EBML style lacing."
 msgstr "強制 EBML 式緊縮。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:70
+#: src/common/hacks.cpp:35
 #, no-c-format
 msgid "Force Xiph style lacing."
 msgstr "強制 Xiph 式緊縮。"
@@ -6356,7 +6376,7 @@ msgstr "強制軌道"
 msgid "Forced track flag"
 msgstr "強制軌標記"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:76
+#: src/common/hacks.cpp:40
 #, no-c-format
 msgid "Forces the Matroska reader to use the generic passthrough packetizer even for known and supported track types."
 msgstr "強制 Matroska 讀取器使用通用呈遞分組器即使軌道類型已知或受支援。"
@@ -6371,7 +6391,7 @@ msgstr "強制 NACHOU 大小長度為確切的位元組數。"
 msgid "Forces the default duration or number of frames per second for a track."
 msgstr "強制軌道的預設時間長度或每秒畫面數。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:48
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:49
 #, no-c-format
 msgid "Forces the timestamp scale factor to the given value."
 msgstr "強制時間戳記的縮放係數為給定的數值。"
@@ -6451,7 +6471,7 @@ msgstr "圖形使用者介面"
 msgid "Gamma"
 msgstr "伽瑪修正"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:88
+#: src/common/hacks.cpp:54
 #, no-c-format
 msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track."
 msgstr "AVI 檔案中音訊起始的無用資訊通常用來延遲軌道。"
@@ -6915,12 +6935,12 @@ msgstr "如果使用 OGM 格式並且無法正確識別檔案的字元集，此�
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
 msgstr "如果從 Matroska 檔載入章節，則最頂層最後一章的結束時間戳記將從檔的持續時間取得。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:53
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:54
 #, no-c-format
 msgid "If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present."
 msgstr "如果使用魔術值 -1 ，即使已存在的視訊軌道， mkvmerge 也會使用取樣精確度。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:32
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:33
 #, no-c-format
 msgid "If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster."
 msgstr "如果數字字尾有 'ms' ，將會以 'n' 毫秒資料對每個叢進行集計算。"
@@ -7691,7 +7711,7 @@ msgstr "語言:"
 msgid "Layout"
 msgstr "版面配置"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
+#: src/common/hacks.cpp:32
 #, no-c-format
 msgid "Leave additional space (EbmlVoid) in the destination file after the chapters."
 msgstr "在輸出檔的章節中留額外的空格 (EbmlVoid)。"
@@ -7960,7 +7980,7 @@ msgstr "Matroska 音訊/視訊檔"
 msgid "Matroska files"
 msgstr "Matroska 檔案"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:38
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:39
 #, no-c-format
 msgid "Matroska files can be played back without the cue data, but seeking will probably be imprecise and slower."
 msgstr "Matroska 檔可以在無 cue 索引資料的情況下播放，但定位可能會不精確且比較遲鈍。"
@@ -8148,7 +8168,7 @@ msgstr "指定多個檔名 ( '{0}' 和 '{1}' )。\n"
 msgid "More than one name was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "單個附件被指定了多於一個名稱。 '{0}' 將被廢棄，並用 '{1}' 代替。\n"
 
-#: src/merge/output_control.cpp:988
+#: src/merge/output_control.cpp:998
 #, no-c-format
 msgid "More than one track is to be appended to the track {0} from file no. {1} ('{2}'). The argument for '--append-to' was invalid.\n"
 msgstr "被追加至軌道 {0} 自檔案 {1} ( '{2}' ) 的軌道多於一條。 '--append-to' 的參數無效。\n"
@@ -8325,7 +8345,7 @@ msgstr "下個剪輯的唯一 ID"
 msgid "No"
 msgstr "否"
 
-#: src/merge/output_control.cpp:233
+#: src/merge/output_control.cpp:236
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:264
 #: src/propedit/propedit.cpp:121
 #, no-c-format
@@ -8357,7 +8377,7 @@ msgstr "附件 '{0}' 的 MIME 類型尚未設定，且無法猜測。\n"
 msgid "No actions have been added yet."
 msgstr "尚未加入任何動作。"
 
-#: src/merge/output_control.cpp:947
+#: src/merge/output_control.cpp:957
 #, no-c-format
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
 msgstr "沒有為檔案 {0} ( '{1}' ) 指定追加對應。將使用預設對應 {2}。如果 mkvmerge 異常中止並輸出關於無效的 '--append-to' 選項的錯誤訊息，請留意。\n"
@@ -8431,7 +8451,7 @@ msgstr "沒有檔案名稱是 '{0}' 與 '{1}' 之間列出。\n"
 msgid "No filename found after the '@'."
 msgstr "在 '@' 後面沒有找到檔名。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:98
+#: src/common/hacks.cpp:65
 #, no-c-format
 msgid "No help available."
 msgstr "無可用的說明。"
@@ -8563,7 +8583,7 @@ msgstr "通常即使是程式重新動完成的作業也會留在佇列中，直
 msgid "Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."
 msgstr "通常 mkvmerge 不會變更儲存在影片位元串流的時間資訊 (畫面/圖場率)。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:82
+#: src/common/hacks.cpp:49
 #, no-c-format
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
 msgstr "通常 mkvmerge 保留 MPEG4 視訊位元流中的外觀比例資訊並將資訊置於容器中。"
@@ -8573,7 +8593,7 @@ msgstr "通常 mkvmerge 保留 MPEG4 視訊位元流中的外觀比例資訊並�
 msgid "Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."
 msgstr "通常 mkvmerge 會對特定編碼的字幕軌進行額外的無損壓縮。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:50
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:51
 #, no-c-format
 msgid "Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."
 msgstr "通常 mkvmerge 會使用 1000000 數值表示時間戳記和時間長度的精確度為 1 毫秒。"
@@ -8814,7 +8834,7 @@ msgstr "僅允許一個剪輯檔，在 '{0} {1}' 。\n"
 msgid "Only one source file is allowed.\n"
 msgstr "僅允許一個輸入檔。\n"
 
-#: src/merge/output_control.cpp:928
+#: src/merge/output_control.cpp:938
 #, no-c-format
 msgid "Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr "僅為檔案 {0} ( '{1}' ) 提供部分追加的對應。只有不指定任何對應 (此時將使用預設對應) 或為所有軌道指定對應時，才會複製所有軌道。\n"
@@ -9056,7 +9076,7 @@ msgstr "PGSSUP"
 msgid "PTS error: 0x{0:02x} {1:02x}{2:02x} {3:02x}{4:02x}\n"
 msgstr "PTS 錯誤: 0x{0:02x} {1:02x}{2:02x} {3:02x}{4:02x}\n"
 
-#: src/output/p_flac.cpp:75
+#: src/output/p_flac.cpp:76
 #, no-c-format
 msgid "Packet number {0} contained an invalid FLAC header and is being skipped.\n"
 msgstr "套件編號 {0} 包含無效的 FLAC 表頭，將被跳過。\n"
@@ -9345,7 +9365,7 @@ msgstr "進度"
 msgid "Program execution failed"
 msgstr "程式執行失敗"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:34
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:35
 #, no-c-format
 msgid "Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking."
 msgstr "程式只能定位叢集，因此建立較大的叢集可能變得不精確或定位較慢。"
@@ -9361,7 +9381,7 @@ msgstr "進度"
 msgid "Progress:"
 msgstr "進度:"
 
-#: src/merge/output_control.cpp:329
+#: src/merge/output_control.cpp:339
 #, no-c-format
 msgid "Progress: 100%{0}"
 msgstr "進度: 100%{0}"
@@ -9374,7 +9394,7 @@ msgstr "進度: [{0}{1}] {2}%"
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2950
-#: src/merge/output_control.cpp:352
+#: src/merge/output_control.cpp:362
 #: src/propedit/tag_target.cpp:354
 #: src/propedit/tag_target.cpp:367
 #: src/propedit/tag_target.cpp:372
@@ -10094,7 +10114,7 @@ msgstr "範圍"
 msgid "See below for examples."
 msgstr "範例請參見下文。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:59
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:60
 #, no-c-format
 msgid "See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons."
 msgstr "請參閱 MKVToolNix 錯誤追蹤上的 #2469 和 #2480 問題，以便深入瞭解其優缺點。"
@@ -10621,12 +10641,12 @@ msgstr "電腦睡眠"
 msgid "Slices"
 msgstr "切面"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:96
+#: src/common/hacks.cpp:61
 #, no-c-format
 msgid "Some H.264/AVC tracks contain I slices but lack real key frames."
 msgstr "部分 H.264/AVC 軌包含 I 配置，但缺少真正的關鍵影格。"
 
-#: src/merge/output_control.cpp:1326
+#: src/merge/output_control.cpp:1336
 #, no-c-format
 msgid "Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"
 msgstr "缺少某些標籤元件 (不該發生此錯誤 - 另一個類似的錯誤應該在早些時候發生過)。{0}\n"
@@ -10697,7 +10717,7 @@ msgstr "分割方式:"
 msgid "Splitting"
 msgstr "分割"
 
-#: src/merge/output_control.cpp:1076
+#: src/merge/output_control.cpp:1086
 #, fuzzy, no-c-format
 msgid "Splitting tracks of this type is not supported."
 msgstr "不支援要擷取的軌道識別碼 {0}（CodecID 為 '{1}' ）。\n"
@@ -10803,7 +10823,7 @@ msgstr "所有正在執行的作業結束後停止(&A)"
 msgid "Stop at the first cluster"
 msgstr "在第一個叢集停止"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:79
+#: src/common/hacks.cpp:45
 #, no-c-format
 msgid "Store changes in CodecPrivate data in CodecState elements instead of the frames."
 msgstr "將 CodecPrivate 資料的變更儲存在 CodecState 元件中，而不是儲存在影格中。"
@@ -10948,37 +10968,37 @@ msgstr "目標類型值數"
 msgid "Targets"
 msgstr "目標"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:37
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:38
 #, no-c-format
 msgid "Tells mkvmerge not to create and write the cue data which can be compared to an index in an AVI."
 msgstr "不要讓 mkvmerge 建立和寫入能與 AVI 索引比較的 cue 資料。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:46
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:47
 #, no-c-format
 msgid "Tells mkvmerge not to write tags with statistics for each track."
 msgstr "不要讓 mkvmerge 對每條軌道寫入含有統計資料的標籤。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 #, no-c-format
 msgid "Tells mkvmerge not to write the 'date' field in the segment information headers."
 msgstr "不要讓 mkvmerge 在剪輯資訊標頭中寫入 '日期' 欄位。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:61
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:62
 #, no-c-format
 msgid "Tells mkvmerge to abort after the first warning is emitted."
 msgstr "在發出第一個警告後讓 mkvmerge 終止程式。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:42
 #, no-c-format
 msgid "Tells mkvmerge to create a meta seek element at the end of the file containing all clusters."
 msgstr "讓 mkvmerge 在包含所有叢集的檔案建立變換定位元素。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:56
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
 #, no-c-format
 msgid "Tells mkvmerge to flush all data cached in memory to storage when closing files opened for writing."
 msgstr "在關閉已開啟的寫入檔時，讓 mkvmerge 將記憶體中緩存的所有資料寫入到儲存空間。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:31
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:32
 #, no-c-format
 msgid "Tells mkvmerge to put at most 'n' data blocks into each cluster."
 msgstr "讓 mkvmerge 將大部分的 'n' 資料區塊放到每個叢集中。"
@@ -11015,7 +11035,7 @@ msgstr "兩軌的 CodecID 不同: {0} 與 {1}"
 msgid "The DocType header item is changed to \"webm\"."
 msgstr "DocType 標頭項目變更為 \"webm\" 。"
 
-#: src/output/p_flac.cpp:47
+#: src/output/p_flac.cpp:48
 #, no-c-format
 msgid "The FLAC headers could not be parsed: the stream info structure was not found.\n"
 msgstr "無法解析 FLAC 頭: 找不到媒體流資訊結構。\n"
@@ -11359,7 +11379,7 @@ msgstr "校正檔未能正常讀取。\n"
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "右側 '選定' 清單中的國家將顯示在程式中所有國家下拉清單的頂部。"
 
-#: src/merge/output_control.cpp:1597
+#: src/merge/output_control.cpp:1607
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "正在寫入 cue 項目 (此索引)...\n"
@@ -11458,7 +11478,7 @@ msgstr "兩軌的顯示高度不同: {0} 與 {1}"
 msgid "The display width of the two tracks is different: {0} and {1}"
 msgstr "兩軌的顯示寬度不同: {0} 與 {1}"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:58
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:59
 #, no-c-format
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "缺點是合併工具需要更長的時間，因為 mkvmerge 會等到所有資料都寫入存儲後才能結束。"
@@ -11617,7 +11637,7 @@ msgstr "無法開啟檔案 '{0}' 進行寫入: {1}。"
 #: src/extract/xtr_rmff.cpp:40
 #: src/extract/xtr_tta.cpp:76
 #: src/extract/xtr_wav.cpp:194
-#: src/merge/output_control.cpp:1352
+#: src/merge/output_control.cpp:1362
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}.\n"
 msgstr "無法開啟檔案 '{0}' 進行寫入: {1}。\n"
@@ -11627,12 +11647,12 @@ msgstr "無法開啟檔案 '{0}' 進行寫入: {1}。\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "檔案 '{0}' 無法開啟或解析。"
 
-#: src/merge/output_control.cpp:1559
+#: src/merge/output_control.cpp:1569
 #, fuzzy, no-c-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
 msgstr "無法開啟檔案 '{0}' 進行讀取: {1}。\n"
 
-#: src/merge/output_control.cpp:1356
+#: src/merge/output_control.cpp:1366
 #, no-c-format
 msgid "The file '{0}' has been opened for writing.\n"
 msgstr "檔案 '{0}' 已開啟以寫入。\n"
@@ -11647,7 +11667,7 @@ msgstr "此檔案 '{0}' 類型不支援 ({1})。\n"
 msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "'{0}' 檔案不是 Matroska 檔，或者找不到該檔。\n"
 
-#: src/merge/output_control.cpp:1557
+#: src/merge/output_control.cpp:1567
 #, fuzzy, no-c-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
 msgstr "無法開啟檔案 '{0}' 進行讀取: {1}。\n"
@@ -11731,22 +11751,22 @@ msgstr "無法解析此檔案表頭，可能是因為檔案不完整、無效或
 msgid "The file is being analyzed."
 msgstr "正在分析檔案。"
 
-#: src/merge/output_control.cpp:260
+#: src/merge/output_control.cpp:270
 #, no-c-format
 msgid "The file is being fixed, part 1/4..."
 msgstr "正在修復檔案，第 1/4 步..."
 
-#: src/merge/output_control.cpp:266
+#: src/merge/output_control.cpp:276
 #, no-c-format
 msgid "The file is being fixed, part 2/4..."
 msgstr "正在修復檔案，第 2/4 步..."
 
-#: src/merge/output_control.cpp:276
+#: src/merge/output_control.cpp:286
 #, no-c-format
 msgid "The file is being fixed, part 3/4..."
 msgstr "正在修復檔案，第 3/4 步..."
 
-#: src/merge/output_control.cpp:284
+#: src/merge/output_control.cpp:294
 #, no-c-format
 msgid "The file is being fixed, part 4/4..."
 msgstr "正在修復檔案，第 4/4 步..."
@@ -11761,17 +11781,17 @@ msgstr "要建立軌道統計資訊，需要讀取該檔案。\n"
 msgid "The file name for this segment."
 msgstr "此剪輯的檔名。"
 
-#: src/merge/output_control.cpp:961
+#: src/merge/output_control.cpp:971
 #, no-c-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. The argument for '--append-to' was invalid.\n"
 msgstr "檔案 {0} ( '{1}' ) 不含 ID 為 {2} 的軌道，或者沒選擇複製該軌道。選項 '--append-to' 的參數無效。\n"
 
-#: src/merge/output_control.cpp:967
+#: src/merge/output_control.cpp:977
 #, no-c-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
 msgstr "檔案 {0} ( '{1}' ) 不含 ID 為 {2} 的軌道，或者沒選擇複製該軌道。因此沒有軌道可以追加給它。選項 '--append-to' 的參數無效。\n"
 
-#: src/merge/output_control.cpp:907
+#: src/merge/output_control.cpp:917
 #, no-c-format
 msgid "The file no. {0} ('{1}') is not being appended. The argument for '--append-to' was invalid.\n"
 msgstr "此檔案 {0} ( '{1}' ) 未被追加。選項 '--append-to' 的參數無效。\n"
@@ -11890,7 +11910,7 @@ msgstr "格式可以是 'HH:MM:SS.nnnnnnnnn' 這種形式或單位為 's', 'ms' 
 msgid "The formats can be mixed, too."
 msgstr "也可以混用這些格式。"
 
-#: src/merge/output_control.cpp:1018
+#: src/merge/output_control.cpp:1028
 #, no-c-format
 msgid "The formats do not match."
 msgstr "格式不符。"
@@ -12000,7 +12020,7 @@ msgstr "檔案名中已識別的軌道語言清單不能為空白。"
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
 msgstr "地區無法正常設定。請檢查 LANG, LC_ALL 和 LC_MESSAGES 環境變數。\n"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:33
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:34
 #, no-c-format
 msgid "The maximum length for a cluster that mkvmerge accepts is 60000 blocks and 32000ms; the minimum length is 100ms."
 msgstr "mkvmerge 能接受的叢集最大長度是 60000 區塊和 32000ms；最小長度是 100ms。"
@@ -12222,7 +12242,7 @@ msgstr "屬性值 '{0}' 不是有效的帶正負號整數。{1}\n"
 msgid "The property value is not a valid unsigned integer in '{0}'. {1}\n"
 msgstr "此屬性值在 '{0}' 不是有效的不帶正負號整數。{1}\n"
 
-#: src/merge/output_control.cpp:1021
+#: src/merge/output_control.cpp:1031
 #, no-c-format
 msgid "The reason is unknown."
 msgstr "原因不明。"
@@ -12246,6 +12266,11 @@ msgstr "剩下已複製。"
 #, no-c-format
 msgid "The resulting number will be padded with leading zeroes if the number of places is less than specified."
 msgstr "若產生的數字位數小於指定數值，將會在前面 加入 0 以補齊位數。"
+
+#: src/common/hacks.cpp:64
+#, no-c-format
+msgid "The resulting tracks will be broken: the official FLAC tools will not be able to decode them and seeking will not work as expected."
+msgstr ""
 
 #: src/common/xml/ebml_converter.cpp:341
 #, no-c-format
@@ -12468,12 +12493,12 @@ msgstr ""
 msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr "軌道識別碼 {0} 無有效的 CodecID。\n"
 
-#: src/merge/output_control.cpp:1078
+#: src/merge/output_control.cpp:1088
 #, fuzzy, no-c-format
 msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
 msgstr "軌道編號 {0} （自檔案 '{1}' ）無法追加檔案至軌道編號 {2} （自檔案 '{3}' ）。{4}\n"
 
-#: src/merge/output_control.cpp:660
+#: src/merge/output_control.cpp:670
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
 msgstr "軌道頭無法正確演算。{0}\n"
@@ -12483,17 +12508,17 @@ msgstr "軌道頭無法正確演算。{0}\n"
 msgid "The track number as used in the Block Header."
 msgstr "區塊表頭使用的軌道編號。"
 
-#: src/merge/output_control.cpp:1009
+#: src/merge/output_control.cpp:1019
 #, no-c-format
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
 msgstr "軌道編號 {0} （自檔案 '{1}' ）可能無法被正確追加檔案至軌道編號 {2} （自檔 '{3}' ）: {4} 請確認生成的檔是否可以完整地正常播放。此程式的作者可能無法提供關於播放生成的檔案的支援。\n"
 
-#: src/merge/output_control.cpp:1023
+#: src/merge/output_control.cpp:1033
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
 msgstr "軌道編號 {0} （自檔案 '{1}' ）無法追加檔案至軌道編號 {2} （自檔案 '{3}' ）。{4}\n"
 
-#: src/merge/output_control.cpp:1019
+#: src/merge/output_control.cpp:1029
 #, no-c-format
 msgid "The track parameters do not match."
 msgstr "軌道參數不符。"
@@ -12503,7 +12528,7 @@ msgstr "軌道參數不符。"
 msgid "The track properties on the \"input\" tab can be laid out in three different way in order to serve different workflows."
 msgstr "\"輸入\" 標籤頁的軌道屬性控制項，能以三種不同的方式排列，以適應不同的作業流程。"
 
-#: src/merge/output_control.cpp:977
+#: src/merge/output_control.cpp:987
 #, no-c-format
 msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once. The argument for '--append-to' was invalid.\n"
 msgstr "軌道 {0} 自檔案 {1} ( '{2}' ) 被追加超過一次。 '--append-to' 的參數無效。\n"
@@ -12588,8 +12613,8 @@ msgstr "線上有新版本可更新。"
 msgid "There is currently a job running."
 msgstr "目前有一個作業正在執行。"
 
-#: src/merge/output_control.cpp:901
 #: src/merge/output_control.cpp:911
+#: src/merge/output_control.cpp:921
 #, no-c-format
 msgid "There is no file with the ID '{0}'. The argument for '--append-to' was invalid.\n"
 msgstr "沒有檔案的 ID 為 '{0}' 。參數 '--append-to' 無效。\n"
@@ -12610,7 +12635,7 @@ msgstr "查詢更新狀態時發生錯誤。"
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
 msgstr "出現一些影響表頭資訊儲存的表頭值錯誤。第一處錯誤已被選中。"
 
-#: src/merge/output_control.cpp:234
+#: src/merge/output_control.cpp:237
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:265
 #: src/propedit/propedit.cpp:122
 #, no-c-format
@@ -12697,12 +12722,12 @@ msgid "This audio track contains {0} byte of invalid data which was skipped befo
 msgid_plural "This audio track contains {0} bytes of invalid data which were skipped before timestamp {1}."
 msgstr[0] "該音訊軌在時間戳記 {1} 之前包含 {0} 位元組的無效資料，已經略過處理。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:58
 #, no-c-format
 msgid "This can be used to prevent data loss on power outages or to circumvent certain problems in the operating system or drivers."
 msgstr "這可用於防止斷電時資料丟失或規避作業系統或驅動程式中的某些問題。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:52
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:53
 #, no-c-format
 msgid "This causes bigger overhead but allows precise seeking and extraction."
 msgstr "這會導致需要更多的電腦資源但能提供精確定位與擷取。"
@@ -12723,7 +12748,7 @@ msgstr "該檔案中目前存在此元件。"
 msgid "This element is not currently present in the file."
 msgstr "該檔案中目前不存在此元件。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
 #, no-c-format
 msgid "This field is normally set to the date the file is created."
 msgstr "此欄位通常設定為建立檔的日期。"
@@ -12804,7 +12829,7 @@ msgstr "這是新加入的章節自動分配名稱的語言。"
 msgid "This is the title that players may show as the 'main title' for this movie."
 msgstr "這是播放器將作為此影片的“主標題”顯示的標題。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:80
+#: src/common/hacks.cpp:46
 #, no-c-format
 msgid "This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers."
 msgstr "這被用於 MPEG-1/-2 視訊軌的序列表頭存儲。"
@@ -12855,7 +12880,7 @@ msgstr "此作業只適用於 AC-3, DTS 與 TrueHD 音訊軌。"
 msgid "This only works with DTS audio tracks."
 msgstr "這只適用於 DTS 音訊軌。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:83
+#: src/common/hacks.cpp:50
 #, no-c-format
 msgid "This option causes mkvmerge to remove the aspect ratio information from the bitstream."
 msgstr "此選項會讓 mkvmerge 從位元串流中移除外觀比例資訊。"
@@ -12865,17 +12890,22 @@ msgstr "此選項會讓 mkvmerge 從位元串流中移除外觀比例資訊。"
 msgid "This option controls how the chapter names are created."
 msgstr "此選項控制如何建立章節名稱。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:97
+#: src/common/hacks.cpp:43
+#, no-c-format
+msgid "This option does nothing and is only kept for backwards compatibility."
+msgstr ""
+
+#: src/common/hacks.cpp:62
 #, no-c-format
 msgid "This option forces mkvmerge to treat all of those I slices as key frames."
 msgstr "此選項強制 mkvmerge 使所有的 I 扇形區成為關鍵影格。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:30
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:31
 #, no-c-format
 msgid "This option needs an additional argument 'n'."
 msgstr "此選項需要額外參數 'n' 。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:90
+#: src/common/hacks.cpp:56
 #, no-c-format
 msgid "This option prevents that behavior."
 msgstr "此選項可防止該行為。"
@@ -12915,12 +12945,12 @@ msgstr "這項屬性在 '{0}' 中是強制的且不能刪除的。{1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "這名稱是唯一的。多數情況下無法被加入到 '{0}' 。{1}\n"
 
-#: src/merge/output_control.cpp:1710
+#: src/merge/output_control.cpp:1720
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "這 *真的* 不該發生。為第一個變換定位元件預留的空間過小。需要的大小: {0}. {1}\n"
 
-#: src/merge/output_control.cpp:280
+#: src/merge/output_control.cpp:290
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. {0}\n"
 msgstr "這 *真的* 不該發生。為第一個變換定位元件預留的空間過小。{0}\n"
@@ -12955,12 +12985,12 @@ msgstr "此軌道包含 SBR AAC/HE-AAC/AAC+ 資料。"
 msgid "This usually indicates a damaged file structure."
 msgstr "這通常用以表示損壞的檔案結構。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:46
 #, no-c-format
 msgid "This will increase file size and does not offer any additional value for players at the moment."
 msgstr "這將增加檔案大小且目前對播放器而言不會提供任何額外的好處。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
 #, no-c-format
 msgid "This will increase the file's size, especially if there are many audio tracks."
 msgstr "這將增加檔案大小，尤其是當有很多音訊軌時。"
@@ -13230,7 +13260,7 @@ msgstr "TrueHD"
 msgid "Two VobSub tracks can only be extracted into the same file if their CodecPrivate data matches. This is not the case for the tracks {0} and {1}.\n"
 msgstr "兩個 VobSub 軌道只能擷取至同一個檔案中，如果 CodecPrivate 資料相符的話。此問題只出在軌道 {0} 與 {1}。\n"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:75
+#: src/common/hacks.cpp:39
 #, no-c-format
 msgid "Two files multiplexed with the same settings and this switch activated will be identical."
 msgstr "啟動此選項，使用相同的設定合併兩個檔案一致。"
@@ -13417,7 +13447,7 @@ msgstr "不支援此軌道的軌道類型。\n"
 msgid "Update an attachment's properties"
 msgstr "更新附件屬性"
 
-#: src/merge/output_control.cpp:237
+#: src/merge/output_control.cpp:240
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:267
 #: src/propedit/propedit.cpp:125
 #, no-c-format
@@ -13449,12 +13479,12 @@ msgstr "結果檔案使用 '剪輯連結' 。"
 msgid "Use fi&xed directory:"
 msgstr "使用固定的目錄(&X):"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:74
+#: src/common/hacks.cpp:38
 #, no-c-format
 msgid "Use fixed values for the elements that change with each file otherwise (multiplexing date, segment UID, track UIDs etc.)."
 msgstr "對隨著檔案改變而變動的元件使用固定值 (合併日期、剪輯 UID、軌道 UID 等) 。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
 #, no-c-format
 msgid "Use only for testing."
 msgstr "僅供測試使用。"
@@ -13464,7 +13494,7 @@ msgstr "僅供測試使用。"
 msgid "Use the &title as the base file name if a title is set"
 msgstr "如果已設定標題，將使用標題作為檔名的基礎(&T)"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:39
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:40
 #, no-c-format
 msgid "Use this only for testing purposes."
 msgstr "僅供測試用途使用。"
@@ -13530,7 +13560,7 @@ msgstr "VP8/VP9"
 msgid "Valid format codes are:"
 msgstr "可用的格式代碼有："
 
-#: src/common/hacks.cpp:80
+#: src/common/hacks.cpp:88
 #, no-c-format
 msgid "Valid hacks are:\n"
 msgstr "有效的 hack 程式語言 為:\n"
@@ -14105,7 +14135,7 @@ msgstr "使用目前的合併設定，輸出檔並不會包含聲音軌。"
 msgid "With this option that information is adjusted to match the container's timing information."
 msgstr "用此選項會調整資訊以符合容器的時間資訊。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:46
 #, no-c-format
 msgid "Write durations for all blocks."
 msgstr "寫入所有區塊的時間長度。"
@@ -14286,7 +14316,7 @@ msgstr "仍可以在合併工具中手動輸入未列在此清單的數值。"
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr "不能加入不含軌道的附加部分到檔案中。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:49
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:50
 #, no-c-format
 msgid "You have to enter a value between 1000 and 10000000 or the magic value -1."
 msgstr "必須輸入範圍從 1000 到 10000000 的一個數值或者是神奇數值 -1。"
@@ -14461,7 +14491,7 @@ msgstr "加密"
 msgid "equirectangular"
 msgstr "等量矩形投影"
 
-#: src/merge/output_control.cpp:427
+#: src/merge/output_control.cpp:437
 #, no-c-format
 msgid "filelist_t not found for generic_packetizer_c. {0}\n"
 msgstr "未找到 generic_packetizer_c 所需的 filelist_t。 {0}\n"
@@ -14826,12 +14856,12 @@ msgstr ""
 msgid "mkvmerge has not been compiled with FLAC support but handling of this stream has been requested.\n"
 msgstr "mkvmerge 編譯時未包含 FLAC 支援，但收到了對此類媒體流的處理請求。\n"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:89
+#: src/common/hacks.cpp:55
 #, no-c-format
 msgid "mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timestamps by it."
 msgstr "mkvmerge 通常會根據本身資訊計算延遲並依照計算結果偏移所有軌道時間戳記。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:93
+#: src/common/hacks.cpp:58
 #, no-c-format
 msgid "mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."
 msgstr "如果最後的時間戳記總長度在五秒以內，mkvmerge 通常都會移除。"
@@ -14844,8 +14874,7 @@ msgstr "如果最後的時間戳記總長度在五秒以內，mkvmerge 通常都
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
 msgstr "mkvmerge 支援兩種章節格式: 類似 OGM 的文字格式和全功能的 XML 格式。"
 
-#: src/merge/output_control.cpp:254
-#: src/merge/output_control.cpp:297
+#: src/merge/output_control.cpp:256
 #, no-c-format
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmerge 被 SIGINT 中止 (按了 Ctrl+C?)\n"
