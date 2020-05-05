@@ -50,8 +50,8 @@ Tab::setupOutputControls() {
   onChapterGenerationModeChanged();
 
 #if !defined(HAVE_DVDREAD)
-  chapterTitleNumberLabel->setVisible(false);
-  chapterTitleNumber     ->setVisible(false);
+  ui->chapterTitleNumberLabel->setVisible(false);
+  ui->chapterTitleNumber     ->setVisible(false);
 #endif  // !defined(HAVE_DVDREAD)
 
   connect(MainWindow::get(),                 &MainWindow::preferencesChanged,                                                                  this, &Tab::setupOutputFileControls);
