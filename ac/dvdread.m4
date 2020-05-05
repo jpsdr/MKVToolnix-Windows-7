@@ -2,11 +2,15 @@ dnl
 dnl Check for dvdread
 dnl
 
-PKG_CHECK_EXISTS([dvdread],[dvdread_found=yes],[dvdread_found=no])
-if test x"$dvdread_found" = xyes; then
-  PKG_CHECK_MODULES([dvdread],[dvdread],[dvdread_found=yes])
-  DVDREAD_CFLAGS="`$PKG_CONFIG --cflags dvdread`"
-  DVDREAD_LIBS="`$PKG_CONFIG --libs dvdread`"
+AC_ARG_WITH([dvdread], AC_HELP_STRING([--without-dvdread], [do not build with libdvdread for reading chapters from DVDs]),
+            [ with_dvdread=${withval} ], [ with_dvdread=yes ])
+if test "x$with_dvdread" != "xno"; then
+  PKG_CHECK_EXISTS([dvdread],[dvdread_found=yes],[dvdread_found=no])
+  if test x"$dvdread_found" = xyes; then
+    PKG_CHECK_MODULES([dvdread],[dvdread],[dvdread_found=yes])
+    DVDREAD_CFLAGS="`$PKG_CONFIG --cflags dvdread`"
+    DVDREAD_LIBS="`$PKG_CONFIG --libs dvdread`"
+  fi
 fi
 
 if test x"$dvdread_found" = xyes; then
