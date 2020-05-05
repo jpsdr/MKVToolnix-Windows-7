@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2020-05-03 12:16+0200\n"
-"PO-Revision-Date: 2020-04-26 06:03+0000\n"
+"PO-Revision-Date: 2020-05-04 07:49+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -41,10 +41,8 @@ msgstr "46.0.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2020-04-04"
 msgid "2020-05-01"
-msgstr "04-04-2020"
+msgstr "01-05-2020"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -4057,7 +4055,7 @@ msgstr "Fichiers de sous-titres bitmap VobSub"
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2752
 msgid "PGS bitmap subtitle files as found on BluRay discs"
-msgstr "Fichiers de sous-titres bitmap PGS comme trouvés sur les disques BluRay"
+msgstr "Fichiers de sous-titres bitmap PGS tels que trouvés sur les disques Blu-ray"
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvmerge.xml:2759
@@ -4147,7 +4145,7 @@ msgstr "&mkvmerge; prend en charge 2 sortes de fichiers de chapitres comme sourc
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2851
 msgid "Apart from dedicated chapter files &mkvmerge; can also read chapters from other file formats (e.g. MP4, Ogg, Blu-rays or DVDs)."
-msgstr ""
+msgstr "En plus des fichiers de chapitres tels quels, &mkvmerge; peut aussi lire les chapitres d'autres formats de fichiers (par ex. MP4, Ogg, Blu-ray ou DVD)."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2855
@@ -4344,34 +4342,32 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2959
 msgid "Reading chapters from Blu-rays"
-msgstr ""
+msgstr "Lecture des chapitres de Blu-ray"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2962
 msgid "&mkvmerge; can read chapters from unencrypted Blu-rays. For that you can use the path to one of the MPLS play lists with the <parameter>--chapters</parameter> parameter."
-msgstr ""
+msgstr "&mkvmerge; peut lire les chapitres de Blu-ray non protégés. Pour cela, il faut utiliser le chemin d'une des listes de lecture MPLS avec le paramètre <parameter>--chapters</parameter>."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2967
 msgid "Example: <literal>--chapters /srv/blurays/BigBuckBunny/BDMV/PLAYLIST/00001.mpls</literal>"
-msgstr ""
+msgstr "Exemple : <literal>--chapters /srv/blurays/BigBuckBunny/BDMV/PLAYLIST/00001.mpls</literal>"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2972
 msgid "Reading chapters from DVDs"
-msgstr ""
+msgstr "Lecture des chapitres des DVD"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2975
 msgid "When MKVToolNix is compiled with the <productname>libdvdread</productname> library, &mkvmerge; can read chapters from DVDs. For that you can use the path to one of the folders or files on the DVD with the <parameter>--chapters</parameter> parameter. As DVDs can contain more than one title and each title has its own set of chapters, you can append a colon and the desired title number to the end of the file name argument. The title number defaults to 1."
-msgstr ""
+msgstr "Quand MKVToolNix est compilé avec la bibliothèque <productname>libdvdread</productname>, &mkvmerge; peut lire les chapitres de DVD. Pour cela il faut utiliser le chemin d'un des dossiers ou fichiers sur le DVD avec le paramètre<parameter>--chapters</parameter>. Comme un DVD peut posséder plus d'un titre et que chaque titre a son propre ensemble de chapitres, il est possible d'ajouter un double point suivi du numéro de titre désiré à la fin de l'argument de nom de fichier. Le numéro de titre par défaut est 1."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2982
-#, fuzzy
-#| msgid "Example: <literal>--generate-chapters interval:45s</literal>"
 msgid "Example: <literal>--chapters /srv/dvds/BigBuckBunny/VIDEO_TS:2</literal>"
-msgstr "Example : <literal>--generate-chapters interval:45s</literal>"
+msgstr "Exemple : <literal>--chapters /srv/dvds/BigBuckBunny/VIDEO_TS:2</literal>"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2987
@@ -5084,7 +5080,7 @@ msgstr "Sélecteurs d'édition"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:490
 msgid "The <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option sets the &matroska; file section (segment information or a certain track's headers) that all following <link linkend=\"mkvpropedit.description.add\">add</link>, <link linkend=\"mkvpropedit.description.set\">set</link> and <link linkend=\"mkvpropedit.description.delete\">delete</link> actions operate on. This stays valid until the next <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option is found. The argument to this option is called the edit selector."
-msgstr "L'option <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> définit la section de fichier &matroska; (informations de segment ou certaines entêtes de pistes) sur lesquelles opèrent toutes les actions <link linkend=\"mkvpropedit.description.add\">add</link>, <link linkend=\"mkvpropedit.description.set\">set</link> et <link linkend=\"mkvpropedit.description.delete\">delete</link>. Ceci reste valide jusqu'à temps que l'option suivante <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> est trouvée. L'argument de cette option est appelé le sélecteur d'édition."
+msgstr "L'option <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> définit la section de fichier &matroska; (informations de segment ou certaines entêtes de pistes) sur lesquelles opèrent toutes les actions <link linkend=\"mkvpropedit.description.add\">add</link>, <link linkend=\"mkvpropedit.description.set\">set</link> et <link linkend=\"mkvpropedit.description.delete\">delete</link>. Ceci reste valide jusqu'à temps que l'option suivante <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> soit trouvée. L'argument de cette option est appelé le sélecteur d'édition."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvpropedit.xml:502
