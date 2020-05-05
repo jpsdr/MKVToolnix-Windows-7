@@ -14,13 +14,12 @@ if test "x$with_dvdread" != "xno"; then
 fi
 
 if test x"$dvdread_found" = xyes; then
+  AC_DEFINE(HAVE_DVDREAD,,[define if building with dvdread])
   USE_DVDREAD=yes
   opt_features_yes="$opt_features_yes\n   * DVD chapter support via libdvdread"
 else
   opt_features_no="$opt_features_no\n   * DVD chapter support via libdvdread"
 fi
-
-AC_DEFINE(HAVE_DVDREAD,,[define if building with dvdread])
 
 AC_SUBST(DVDREAD_CFLAGS)
 AC_SUBST(DVDREAD_LIBS)
