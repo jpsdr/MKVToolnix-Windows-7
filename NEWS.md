@@ -24,6 +24,13 @@
   The resulting tracks will be broken: the official FLAC tools will not be
   able to decode them and seeking will not work as expected.
 
+## Bug fixes
+
+* all: fixed a crash when using the `MTX_LOGGER=file` syntax for logging debug
+  messages without specifying a file name to log to. It will now log to a file
+  called `mkvtoolnix-debug.log` in the system's default temporary directory,
+  as initially intended.
+
 ## Build system changes
 
 * The [`libdvdread`](https://www.videolan.org/developers/libdvdnav.html)

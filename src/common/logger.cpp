@@ -69,9 +69,7 @@ target_c::get_default_logger() {
     auto spec = split(var, ":");
 
     if (spec[0] == "file") {
-      auto file = spec[1];
-      if (file.empty())
-        file = "mkvtoolnix-debug.log";
+      auto file = (spec.size() > 1) && !spec[1].empty() ? spec[1] : "mkvtoolnix-debug.log"s;
 
       set_default_logger(target_cptr{new file_target_c{file}});
 
