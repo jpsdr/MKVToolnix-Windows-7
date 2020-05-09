@@ -11,9 +11,9 @@
 
 #include "common/common_pch.h"
 
-#include <boost/date_time/gregorian/gregorian.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
+#include <iomanip>
 #include <sstream>
+#include <time.h>
 #if defined(SYS_WINDOWS)
 # include <windows.h>
 #endif
@@ -22,30 +22,38 @@
 
 namespace mtx::date_time {
 
-int64_t
-to_time_t(boost::posix_time::ptime const &pt) {
-  auto diff = pt - boost::posix_time::ptime{ boost::gregorian::date(1970, 1, 1) };
-  return diff.ticks() / diff.ticks_per_second();
+std::optional<std::tm>
+time_t_to_tm(std::time_t time,
+             epoch_timezone_e timezone) {
+  static std::mutex s_mutex;
+  std::lock_guard<std::mutex> lock{s_mutex};
+
+  auto tm = timezone == epoch_timezone_e::UTC ? std::gmtime(&time) : std::localtime(&time);
+  if (tm)
+    return *tm;
+
+  return {};
 }
 
-std::string
-to_string(boost::posix_time::ptime const &writing_date,
-          char const *format) {
-  std::stringstream ss;
-  auto output_facet = new boost::posix_time::time_facet(format);
+std::time_t
+tm_to_time_t(std::tm time_info,
+             epoch_timezone_e timezone) {
+  if (timezone == epoch_timezone_e::local)
+    return std::mktime(&time_info);
 
-  ss.imbue(std::locale{ std::locale::classic(), output_facet });
-
-  ss << writing_date;
-
-  return ss.str();
+#if defined(SYS_WINDOWS)
+  return ::_mkgmtime(&time_info);
+#else
+  return ::timegm(&time_info);
+#endif
 }
+
 
 std::string
 format_epoch_time(time_t const epoch_time,
                   std::string format_string,
                   epoch_timezone_e timezone) {
-  auto time_info = timezone == epoch_timezone_e::UTC ? std::gmtime(&epoch_time) : std::localtime(&epoch_time);
+  auto time_info = time_t_to_tm(epoch_time, timezone);
   if (!time_info)
     return {};
 
@@ -69,7 +77,7 @@ format_epoch_time(time_t const epoch_time,
   buffer.resize(format_string.size());
 
   while (true) {
-    auto len = std::strftime(&buffer[0], buffer.size(), format_string.c_str(), time_info);
+    auto len = std::strftime(&buffer[0], buffer.size(), format_string.c_str(), &*time_info);
     if (len) {
       buffer.resize(len - 1);
       break;
@@ -92,6 +100,23 @@ format_epoch_time_iso_8601(std::time_t const epoch_time,
     result.insert(result.length() - 2, ":");
 
   return result;
+}
+
+std::string
+format_time_point(point_t const &time_point,
+                  std::string const &format_string,
+                  epoch_timezone_e timezone) {
+  auto epoch_time = std::chrono::system_clock::to_time_t(time_point);
+  auto time_info  = time_t_to_tm(epoch_time, timezone);
+  if (!time_info)
+    return {};
+
+  auto ms           = std::chrono::duration_cast<std::chrono::milliseconds>(time_point.time_since_epoch()).count() % 1'000;
+  auto fixed_format = format_string;
+
+  boost::replace_all(fixed_format, "%f", fmt::format("{0:03d}", ms));
+
+  return format_epoch_time(epoch_time, fixed_format, timezone);
 }
 
 }

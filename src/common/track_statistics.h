@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include <boost/date_time/posix_time/ptime.hpp>
+#include "common/date_time_fwd.h"
 
 namespace libmatroska {
 class KaxTags;
@@ -92,5 +92,5 @@ public:
                        bps                          ? *bps                          : -1);
   }
 
-  void create_tags(libmatroska::KaxTags &tags, std::string const &writing_app, std::optional<boost::posix_time::ptime> writing_date) const;
+  void create_tags(libmatroska::KaxTags &tags, std::string const &writing_app, std::optional<mtx::date_time::point_t> const &writing_date) const;
 };

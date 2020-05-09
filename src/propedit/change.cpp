@@ -10,7 +10,6 @@
 
 #include "common/common_pch.h"
 
-#include <boost/date_time/posix_time/posix_time.hpp>
 #include <ebml/EbmlBinary.h>
 #include <ebml/EbmlFloat.h>
 #include <ebml/EbmlSInteger.h>
@@ -161,8 +160,8 @@ change_c::parse_date_time() {
   //              1        2        3                4        5        6           7  8     9        10
   std::regex re{"^(\\d{4})-(\\d{2})-(\\d{2})(?:T|\\s)(\\d{2}):(\\d{2}):(\\d{2})\\s*(Z|([+-])(\\d{2}):(\\d{2}))$", std::regex_constants::icase};
   std::smatch matches;
-  int64_t year, month, day, hours, minutes, seconds;
-  int64_t offset_hours = 0, offset_minutes = 0, offset_mult = 1;
+  int64_t year{}, month{}, day{}, hours{}, minutes{}, seconds{};
+  int64_t offset_hours{}, offset_minutes{}, offset_mult{1};
 
   auto valid = std::regex_match(m_value, matches, re);
 
@@ -192,34 +191,34 @@ change_c::parse_date_time() {
     && (hours          <=  23)
     && (minutes        >=   0)
     && (minutes        <=  59)
+    && (seconds        >=   0)
+    && (seconds        <=  59)
     && (offset_hours   >=   0)
     && (offset_hours   <=  23)
     && (offset_minutes >=   0)
     && (offset_minutes <=  59);
 
-  if (valid) {
-    try {
-      auto date_time = boost::posix_time::ptime{ boost::gregorian::date(year, month, day), boost::posix_time::time_duration(hours, minutes, seconds) };
+  if (!valid)
+    mxerror(fmt::format("{0} {1} {2} {3}\n",
+                        fmt::format(Y("The property value is not a valid date & time string in '{0}'."), get_spec()),
+                        Y("The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28:00-02:00."),
+                        Y("The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."),
+                        FILE_NOT_MODIFIED));
 
-      if (!date_time.is_not_a_date_time()) {
-        auto tz_offset  = (offset_hours * 60 + offset_minutes) * offset_mult;
-        date_time      -= boost::posix_time::minutes(tz_offset);
-      }
+  std::tm time_info{};
 
-      if (!date_time.is_not_a_date_time())
-        m_ui_value = mtx::date_time::to_time_t(date_time);
+  time_info.tm_sec        = seconds;
+  time_info.tm_min        = minutes;
+  time_info.tm_hour       = hours;
+  time_info.tm_mday       = day;
+  time_info.tm_mon        = month - 1;
+  time_info.tm_year       = year - 1900;
+  time_info.tm_isdst      = -1;
 
-      return;
+  m_ui_value              = mtx::date_time::tm_to_time_t(time_info, mtx::date_time::epoch_timezone_e::UTC);
 
-    } catch (std::out_of_range &) {
-    }
-  }
-
-  mxerror(fmt::format("{0} {1} {2} {3}\n",
-                      fmt::format(Y("The property value is not a valid date & time string in '{0}'."), get_spec()),
-                      Y("The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28:00-02:00."),
-                      Y("The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."),
-                      FILE_NOT_MODIFIED));
+  auto tz_offset_minutes  = (offset_hours * 60 + offset_minutes) * offset_mult;
+  m_ui_value             -= tz_offset_minutes * 60;
 }
 
 void

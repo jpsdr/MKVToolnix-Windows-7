@@ -15,7 +15,6 @@
 
 #include "common/common_pch.h"
 
-#include <boost/date_time/posix_time/posix_time.hpp>
 #include <cmath>
 #include <iostream>
 #if defined(SYS_UNIX) || defined(SYS_APPLE)
@@ -190,7 +189,7 @@ static mtx::bits::value_c s_seguid_prev(128), s_seguid_current(128), s_seguid_ne
 static std::unique_ptr<EbmlHead> s_head;
 
 static std::string s_muxing_app, s_writing_app;
-static boost::posix_time::ptime s_writing_date;
+static mtx::date_time::point_t s_writing_date;
 
 static std::optional<int64_t> s_maximum_progress;
 int64_t s_current_progress{};
@@ -553,7 +552,7 @@ render_headers(mm_io_c *out) {
     GetChild<KaxWritingApp>(*s_kax_infos).SetValueUTF8(s_writing_app);
 
     if (g_write_date)
-      GetChild<KaxDateUTC>(*s_kax_infos).SetEpochDate(s_writing_date.is_not_a_date_time() ? 0 : mtx::date_time::to_time_t(s_writing_date));
+      GetChild<KaxDateUTC>(*s_kax_infos).SetEpochDate(std::chrono::system_clock::to_time_t(s_writing_date));
     else
       DeleteChildren<KaxDateUTC>(*s_kax_infos);
 

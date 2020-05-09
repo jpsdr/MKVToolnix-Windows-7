@@ -21,7 +21,7 @@ using namespace libmatroska;
 void
 track_statistics_c::create_tags(KaxTags &tags,
                                 std::string const &writing_app,
-                                std::optional<boost::posix_time::ptime> writing_date)
+                                std::optional<mtx::date_time::point_t> const &writing_date)
   const {
   auto bps      = get_bits_per_second();
   auto duration = get_duration();
@@ -47,7 +47,7 @@ track_statistics_c::create_tags(KaxTags &tags,
   mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_APP", writing_app);
 
   if (writing_date) {
-    auto writing_date_str = !writing_date->is_not_a_date_time() ? mtx::date_time::to_string(*writing_date, "%Y-%m-%d %H:%M:%S") : "1970-01-01 00:00:00";
+    auto writing_date_str = mtx::date_time::format_time_point(*writing_date, "%Y-%m-%d %H:%M:%S", mtx::date_time::epoch_timezone_e::UTC);
     mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_DATE_UTC", writing_date_str);
   }
 

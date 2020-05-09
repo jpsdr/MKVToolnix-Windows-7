@@ -18,8 +18,6 @@
 #include <sstream>
 #include <typeinfo>
 
-#include <boost/date_time/posix_time/posix_time.hpp>
-
 #include <ebml/EbmlDummy.h>
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlSubHead.h>
@@ -356,7 +354,7 @@ kax_info_c::format_element_value_default(EbmlElement &e) {
     return format_binary(static_cast<EbmlBinary &>(e));
 
   if (dynamic_cast<EbmlDate *>(&e))
-    return mtx::date_time::to_string(boost::posix_time::from_time_t(static_cast<EbmlDate &>(e).GetEpochDate()), "%a %b %d %H:%M:%S %Y UTC");
+    return mtx::date_time::format_epoch_time(static_cast<EbmlDate &>(e).GetEpochDate(), "%a %b %d %H:%M:%S %Y UTC", mtx::date_time::epoch_timezone_e::UTC);
 
   if (dynamic_cast<EbmlMaster *>(&e))
     return {};

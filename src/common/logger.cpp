@@ -10,10 +10,10 @@
 
 #include "common/common_pch.h"
 
-#include <chrono>
 #include <ctime>
 #include <iostream>
 
+#include "common/date_time.h"
 #include "common/logger.h"
 #if defined(SYS_WINDOWS)
 # include "common/logger/windows.h"
@@ -38,15 +38,11 @@ target_c::target_c()
 
 std::string
 target_c::format_line(std::string const &message) {
-  auto now  = std::chrono::system_clock::now();
-  auto diff = now - s_program_start_time;
-  auto tnow = std::chrono::system_clock::to_time_t(now);
+  auto now       = std::chrono::system_clock::now();
+  auto diff      = now - s_program_start_time;
+  auto timestamp = mtx::date_time::format_time_point(now, "%Y-%m-%d %H:%M:%S", mtx::date_time::epoch_timezone_e::local);
+  auto line      = fmt::format("[mtx] {0} +{1}ms {2}", timestamp, std::chrono::duration_cast<std::chrono::milliseconds>(diff).count(), message);
 
-  // 2013-03-02 15:42:32
-  char timestamp[30];
-  std::strftime(timestamp, 30, "%Y-%m-%d %H:%M:%S", std::localtime(&tnow));
-
-  auto line = fmt::format("[mtx] {0} +{1}ms {2}", timestamp, std::chrono::duration_cast<std::chrono::milliseconds>(diff).count(), message);
   if (message.size() && (message[message.size() - 1] != '\n'))
     line += "\n";
 

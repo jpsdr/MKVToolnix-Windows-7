@@ -15,9 +15,9 @@
 
 #include "common/common_pch.h"
 
-#include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/operators.hpp>
 
+#include "common/date_time_fwd.h"
 #include "common/xml/xml.h"
 
 #define MTX_VERSION_CHECK_URL "https://mkvtoolnix.download/latest-release.xml"
@@ -59,7 +59,7 @@ enum version_info_flags_e {
 
 struct segment_info_data_t {
   std::string muxing_app, writing_app;
-  boost::posix_time::ptime writing_date;
+  mtx::date_time::point_t writing_date;
 };
 
 std::string get_version_info(const std::string &program, version_info_flags_e flags = vif_default);

@@ -13,9 +13,6 @@
 
 #include "common/common_pch.h"
 
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include <sstream>
-
 #include "common/command_line.h"
 #include "common/date_time.h"
 #include "common/debugging.h"
@@ -126,7 +123,7 @@ mxmsg(unsigned int level,
 
   std::string prefix;
   if (s_timestamped_messages) {
-    prefix += mtx::date_time::to_string(boost::posix_time::microsec_clock::local_time(), "%Y-%m-%d %H:%M:%S.%f ");
+    prefix += mtx::date_time::format_time_point(std::chrono::system_clock::now(), "%Y-%m-%d %H:%M:%S.%f ", mtx::date_time::epoch_timezone_e::local);
   }
   if (s_memory_usage_in_messages) {
     prefix += fmt::format("{0} kB ", mtx::sys::get_memory_usage() / 1024);
