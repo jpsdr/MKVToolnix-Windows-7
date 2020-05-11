@@ -49,8 +49,8 @@ is_unique_number(uint64_t number,
   if (mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA))
     return true;
 
-  return boost::find_if(s_random_unique_numbers[category], [=](uint64_t stored_number) { return number == stored_number; })
-    == s_random_unique_numbers[category].end();
+  auto &numbers = s_random_unique_numbers[category];
+  return std::find_if(numbers.begin(), numbers.end(), [=](uint64_t stored_number) { return number == stored_number; }) == numbers.end();
 }
 
 void
@@ -69,7 +69,8 @@ remove_unique_number(uint64_t number,
                      unique_id_category_e category) {
   assert_valid_category(category);
 
-  boost::remove_erase_if(s_random_unique_numbers[category], [=](uint64_t stored_number) { return number == stored_number; });
+  auto &numbers = s_random_unique_numbers[category];
+  numbers.erase(std::remove_if(numbers.begin(), numbers.end(), [=](uint64_t stored_number) { return number == stored_number; }), numbers.end());
 }
 
 uint64_t

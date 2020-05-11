@@ -323,14 +323,14 @@ kax_reader_c::packets_available() {
 kax_track_t *
 kax_reader_c::find_track_by_num(uint64_t n,
                                 kax_track_t *c) {
-  auto itr = brng::find_if(m_tracks, [n, c](auto &track) { return (track->track_number == n) && (track.get() != c); });
+  auto itr = std::find_if(m_tracks.begin(), m_tracks.end(), [n, c](auto &track) { return (track->track_number == n) && (track.get() != c); });
   return itr == m_tracks.end() ? nullptr : itr->get();
 }
 
 kax_track_t *
 kax_reader_c::find_track_by_uid(uint64_t uid,
                                 kax_track_t *c) {
-  auto itr = brng::find_if(m_tracks, [uid, c](auto &track) { return (track->track_uid == uid) && (track.get() != c); });
+  auto itr = std::find_if(m_tracks.begin(), m_tracks.end(), [uid, c](auto &track) { return (track->track_uid == uid) && (track.get() != c); });
   return itr == m_tracks.end() ? nullptr : itr->get();
 }
 
@@ -2612,7 +2612,7 @@ kax_reader_c::determine_minimum_timestamps() {
     return;
 
   auto track_numbers = mtx::keys(m_minimum_timestamps_by_track_number);
-  brng::sort(track_numbers);
+  std::sort(track_numbers.begin(), track_numbers.end());
 
   mxdebug("Minimum timestamps by track number:\n");
 

@@ -325,7 +325,7 @@ format_number(uint64_t number) {
     number /= 10;
   }
 
-  boost::reverse(output);
+  std::reverse(output.begin(), output.end());
 
   return output;
 }

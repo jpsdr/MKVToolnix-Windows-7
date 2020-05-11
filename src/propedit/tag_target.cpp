@@ -381,7 +381,7 @@ tag_target_c::create_track_statistics_tags() {
   for (auto const &elt : m_track_statistics_by_number)
     track_numbers.push_back(elt.first);
 
-  brng::sort(track_numbers);
+  std::sort(track_numbers.begin(), track_numbers.end());
 
   for (auto const &track_number : track_numbers)
     m_track_statistics_by_number[track_number].create_tags(*static_cast<KaxTags *>(m_level1_element), writing_app, writing_date);

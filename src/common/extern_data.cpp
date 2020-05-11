@@ -1989,11 +1989,11 @@ static std::map<std::string, std::string> const s_deprecated_cctlds{
 
 std::optional<std::string>
 map_to_cctld(std::string const &s) {
-  auto deprecated = brng::find_if(s_deprecated_cctlds, [&s](std::pair<std::string, std::string> const &entry) { return entry.first == s; });
+  auto deprecated = std::find_if(s_deprecated_cctlds.begin(), s_deprecated_cctlds.end(), [&s](std::pair<std::string, std::string> const &entry) { return entry.first == s; });
   if (deprecated != s_deprecated_cctlds.end())
     return deprecated->second;
 
-  auto current = brng::find_if(g_cctlds, [&s](cctld_t const &entry) { return entry.code == s; });
+  auto current = std::find_if(g_cctlds.begin(), g_cctlds.end(), [&s](cctld_t const &entry) { return entry.code == s; });
   if (current != g_cctlds.end())
     return s;
 

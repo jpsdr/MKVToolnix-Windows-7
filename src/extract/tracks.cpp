@@ -108,7 +108,7 @@ create_extractors(KaxTracks &kax_tracks,
     }
 
     // Does the user want this track to be extracted?
-    auto tspec_itr = brng::find_if(tracks, [track_id](auto const &t) { return (track_spec_t::tm_timestamps != t.target_mode) && (track_id == t.tid); });
+    auto tspec_itr = std::find_if(tracks.begin(), tracks.end(), [track_id](auto const &t) { return (track_spec_t::tm_timestamps != t.target_mode) && (track_id == t.tid); });
     if (tspec_itr == tracks.end())
       continue;
 
@@ -124,7 +124,7 @@ create_extractors(KaxTracks &kax_tracks,
     extractor->m_track_num = tnum;
 
     // Has there another file been requested with the same name?
-    auto extractor_itr = brng::find_if(track_extractor_list, [&tspec_itr](auto &x) { return x->m_file_name == tspec_itr->out_name; });
+    auto extractor_itr = std::find_if(track_extractor_list.begin(), track_extractor_list.end(), [&tspec_itr](auto &x) { return x->m_file_name == tspec_itr->out_name; });
     xtr_base_c *master = extractor_itr != track_extractor_list.end() ? extractor_itr->get() : nullptr;
 
     // Let the extractor create the file.

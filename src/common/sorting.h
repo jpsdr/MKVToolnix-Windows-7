@@ -46,7 +46,7 @@ by(Titer first,
   for (auto idx = first; idx < last; ++idx)
     to_sort.push_back(std::make_pair(std::move(*idx), criterion_maker(*idx)));
 
-  brng::sort(to_sort, [&comparator](pair_type const &a, pair_type const &b) { return comparator(a.second, b.second); });
+  std::sort(to_sort.begin(), to_sort.end(), [&comparator](pair_type const &a, pair_type const &b) { return comparator(a.second, b.second); });
 
   std::transform(to_sort.begin(), to_sort.end(), first, [](pair_type &pair) -> value_type && { return std::move(pair.first); });
 }

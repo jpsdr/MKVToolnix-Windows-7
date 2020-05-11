@@ -262,19 +262,19 @@ void
 es_parser_c::add_sps_and_pps_to_extra_data() {
   mxdebug_if(m_debug_sps_pps_changes, fmt::format("mpeg4::p10: adding all SPS & PPS before key frame due to changes from AVCC\n"));
 
-  brng::remove_erase_if(m_extra_data, [this](memory_cptr const &nalu) -> bool {
+  m_extra_data.erase(std::remove_if(m_extra_data.begin(), m_extra_data.end(), [this](memory_cptr const &nalu) -> bool {
     if (nalu->get_size() < static_cast<std::size_t>(m_nalu_size_length + 1))
       return true;
 
     auto const type = *(nalu->get_buffer() + m_nalu_size_length) & 0x1f;
     return (type == NALU_TYPE_SEQ_PARAM) || (type == NALU_TYPE_PIC_PARAM);
-  });
+  }), m_extra_data.end());
 
   std::vector<memory_cptr> tmp;
   tmp.reserve(m_extra_data.size() + m_sps_list.size() + m_pps_list.size());
 
-  brng::transform(m_sps_list, std::back_inserter(tmp), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
-  brng::transform(m_pps_list, std::back_inserter(tmp), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
+  std::transform(m_sps_list.begin(), m_sps_list.end(), std::back_inserter(tmp), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
+  std::transform(m_pps_list.begin(), m_pps_list.end(), std::back_inserter(tmp), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
   tmp.insert(tmp.end(), m_extra_data.begin(), m_extra_data.end());
 
   m_extra_data = std::move(tmp);
@@ -681,7 +681,7 @@ es_parser_c::get_most_often_used_duration()
   mxdebug_if(m_debug_timestamps,
              fmt::format("Duration frequency. Result: {0}, diff {1}. Best before adjustment: {2}. All: {3}\n",
                          best.first, best.second, most_often->first,
-                         boost::accumulate(m_duration_frequency, ""s, [](auto const &accu, auto const &pair) {
+                         std::accumulate(m_duration_frequency.begin(), m_duration_frequency.end(), ""s, [](auto const &accu, auto const &pair) {
                            return accu + fmt::format(" <{0} {1}>", pair.first, pair.second);
                          })));
 
@@ -782,19 +782,19 @@ es_parser_c::calculate_provided_timestamps_to_use() {
                          "  provided timestamps (available):\n{4}"
                          "  provided timestamps (to use):\n{5}",
                          num_frames, num_provided_timestamps, provided_timestamps_to_use.size(),
-                         boost::accumulate(m_frames, std::string{}, [](auto const &str, auto const &frame) {
+                         std::accumulate(m_frames.begin(), m_frames.end(), std::string{}, [](auto const &str, auto const &frame) {
                            return str + fmt::format("    pos {0} size {1} type {2}\n", frame.m_position, frame.m_data->get_size(), frame.m_type);
                          }),
-                         boost::accumulate(m_provided_timestamps, std::string{}, [](auto const &str, auto const &provided_timestamp) {
+                         std::accumulate(m_provided_timestamps.begin(), m_provided_timestamps.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
                            return str + fmt::format("    pos {0} timestamp {1}\n", provided_timestamp.second, format_timestamp(provided_timestamp.first));
                          }),
-                         boost::accumulate(provided_timestamps_to_use, std::string{}, [](auto const &str, auto const &provided_timestamp) {
+                         std::accumulate(provided_timestamps_to_use.begin(), provided_timestamps_to_use.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
                            return str + fmt::format("    timestamp {0}\n", format_timestamp(provided_timestamp));
                          })));
 
   m_provided_timestamps.erase(m_provided_timestamps.begin(), m_provided_timestamps.begin() + provided_timestamps_idx);
 
-  brng::sort(provided_timestamps_to_use);
+  std::sort(provided_timestamps_to_use.begin(), provided_timestamps_to_use.end());
 
   return provided_timestamps_to_use;
 }
@@ -805,7 +805,7 @@ es_parser_c::calculate_frame_timestamps_and_references() {
   auto provided_timestamps_to_use                = calculate_provided_timestamps_to_use();
 
   if (!m_simple_picture_order && !s_debug_force_simple_picture_order)
-    brng::sort(m_frames, [](const frame_t &f1, const frame_t &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
+    std::sort(m_frames.begin(), m_frames.end(), [](const frame_t &f1, const frame_t &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
 
   auto frames_begin            = m_frames.begin();
   auto frames_end              = m_frames.end();
@@ -862,7 +862,7 @@ es_parser_c::calculate_frame_timestamps_and_references() {
     mxdebug_if(m_debug_timestamps, fmt::format("  type {0} TS {1} ref1 {2} ref2 {3} decode_order {4}\n", frame.m_type, format_timestamp(frame.m_start), frame.m_ref1, frame.m_ref2, frame.m_decode_order));
 
   if (!m_simple_picture_order)
-    brng::sort(m_frames, [](const frame_t &f1, const frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
+    std::sort(m_frames.begin(), m_frames.end(), [](const frame_t &f1, const frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
 }
 
 void

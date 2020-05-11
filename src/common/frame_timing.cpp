@@ -52,7 +52,7 @@ determine_frame_rate(int64_t duration,
     return {};
   }
 
-  brng::sort(potentials, [](auto const &a, auto const &b) {
+  std::sort(potentials.begin(), potentials.end(), [](auto const &a, auto const &b) {
     return a.first < b.first;
   });
 

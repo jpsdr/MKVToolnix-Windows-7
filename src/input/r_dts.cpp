@@ -28,7 +28,7 @@
 bool
 dts_reader_c::probe_file() {
   m_chunks        = scan_chunks(*m_in);
-  m_current_chunk = brng::find_if(m_chunks, [](chunk_t const &chunk) { return chunk.type == chunk_type_e::strmdata; });
+  m_current_chunk = std::find_if(m_chunks.begin(), m_chunks.end(), [](chunk_t const &chunk) { return chunk.type == chunk_type_e::strmdata; });
 
   if (m_current_chunk == m_chunks.end())
     return false;

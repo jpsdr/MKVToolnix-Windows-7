@@ -111,7 +111,7 @@ disc_library_t::dump()
   for (auto const &elt : m_infos_by_language)
     languages.emplace_back(elt.first);
 
-  brng::sort(languages);
+  std::sort(languages.begin(), languages.end());
 
   mxinfo(fmt::format("Disc library dump:\n"));
 

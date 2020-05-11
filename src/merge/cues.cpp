@@ -134,7 +134,7 @@ cues_c::write(mm_io_c &out,
 
 void
 cues_c::sort() {
-  brng::sort(m_points, [](cue_point_t const &a, cue_point_t const &b) -> bool {
+  std::sort(m_points.begin(), m_points.end(), [](cue_point_t const &a, cue_point_t const &b) -> bool {
       if (a.timestamp < b.timestamp)
         return true;
       if (a.timestamp > b.timestamp)
@@ -245,7 +245,7 @@ cues_c::postprocess_cues(KaxCues &cues,
 uint64_t
 cues_c::calculate_total_size()
   const {
-  return boost::accumulate(m_points, 0ull, [this](uint64_t sum, cue_point_t const &point) { return sum + calculate_point_size(point); });
+  return std::accumulate(m_points.begin(), m_points.end(), 0ull, [this](uint64_t sum, cue_point_t const &point) { return sum + calculate_point_size(point); });
 }
 
 uint64_t

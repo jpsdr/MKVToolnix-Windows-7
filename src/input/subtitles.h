@@ -63,7 +63,7 @@ public:
   }
 
   int64_t get_total_byte_size() {
-    return boost::accumulate(entries, 0ull, [](int64_t num, auto const &entry) { return num + entry.subs.length(); });
+    return std::accumulate(entries.begin(), entries.end(), 0ull, [](int64_t num, auto const &entry) { return num + entry.subs.length(); });
   }
 
   int64_t get_next_byte_size() {

@@ -2229,7 +2229,7 @@ Tab::collectChapterAtomDataForEdition(QStandardItem *item) {
       if (!data)
         continue;
 
-      auto itr            = brng::lower_bound(sortedData, data, [](auto const &a, auto const &b) { return a->start <= b->start; });
+      auto itr            = std::lower_bound(sortedData.begin(), sortedData.end(), data, [](auto const &a, auto const &b) { return a->start <= b->start; });
       data->calculatedEnd = itr == sortedData.end() ? parentEndTimestamp : (*itr)->start;
     }
 
@@ -2246,7 +2246,7 @@ Tab::collectChapterAtomDataForEdition(QStandardItem *item) {
 
   // Sort all levels by their start times.
   for (auto const &key : atomsByParent.keys())
-    brng::sort(atomsByParent[key], [](ChapterAtomDataPtr const &a, ChapterAtomDataPtr const &b) { return a->start < b->start; });
+    std::sort(atomsByParent[key].begin(), atomsByParent[key].end(), [](ChapterAtomDataPtr const &a, ChapterAtomDataPtr const &b) { return a->start < b->start; });
 
   // Calculate end timestamps.
   calculator(item);

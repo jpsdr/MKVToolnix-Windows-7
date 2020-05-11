@@ -181,13 +181,13 @@ SourceFile::isPlaylist()
 bool
 SourceFile::hasRegularTrack()
   const {
-  return m_tracks.end() != brng::find_if(m_tracks, [](TrackPtr const &track) { return track->isRegular(); });
+  return m_tracks.end() != std::find_if(m_tracks.begin(), m_tracks.end(), [](TrackPtr const &track) { return track->isRegular(); });
 }
 
 bool
 SourceFile::hasVideoTrack()
   const {
-  return m_tracks.end() != brng::find_if(m_tracks, [](TrackPtr const &track) { return track->isVideo(); });
+  return m_tracks.end() != std::find_if(m_tracks.begin(), m_tracks.end(), [](TrackPtr const &track) { return track->isVideo(); });
 }
 
 QString

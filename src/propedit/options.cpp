@@ -169,7 +169,7 @@ options_c::has_changes()
 
 void
 options_c::remove_empty_targets() {
-  boost::remove_erase_if(m_targets, [](target_cptr &target) { return !target->has_changes(); });
+  m_targets.erase(std::remove_if(m_targets.begin(), m_targets.end(), [](target_cptr &target) { return !target->has_changes(); }), m_targets.end());
 }
 
 template<typename T> static ebml_element_cptr

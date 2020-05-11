@@ -11,7 +11,7 @@ template<typename Tstored, typename Tcontainer>
 int
 findPtr(Tstored *needle,
         Tcontainer const &haystack) {
-  auto itr = brng::find_if(haystack, [needle](auto const &cmp) { return cmp.get() == needle; });
+  auto itr = std::find_if(haystack.begin(), haystack.end(), [needle](auto const &cmp) { return cmp.get() == needle; });
   return haystack.end() == itr ? -1 : std::distance(haystack.begin(), itr);
 }
 

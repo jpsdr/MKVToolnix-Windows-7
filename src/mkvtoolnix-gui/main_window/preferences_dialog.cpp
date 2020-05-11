@@ -540,7 +540,7 @@ PreferencesDialog::setupInterfaceLanguage() {
   for (auto const &translation : translation_c::ms_available_translations)
     translations.emplace_back(Q("%1 (%2)").arg(Q(translation.m_translated_name)).arg(Q(translation.m_english_name)), Q(translation.get_locale()));
 
-  brng::sort(translations);
+  std::sort(translations.begin(), translations.end());
 
   for (auto const &translation : translations)
     ui->cbGuiInterfaceLanguage->addItem(translation.first, translation.second);

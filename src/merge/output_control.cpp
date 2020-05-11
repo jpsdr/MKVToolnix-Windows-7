@@ -315,7 +315,7 @@ add_to_progress(int64_t num_bytes_processed) {
 static int64_t
 get_maximum_progress() {
   if (!s_maximum_progress)
-    s_maximum_progress = boost::accumulate(g_files, 0ull, [](int64_t num, auto const &file) { return num + file->reader->get_maximum_progress(); });
+    s_maximum_progress = std::accumulate(g_files.begin(), g_files.end(), 0ull, [](int64_t num, auto const &file) { return num + file->reader->get_maximum_progress(); });
 
   return *s_maximum_progress;
 }
@@ -931,7 +931,7 @@ check_append_mapping() {
     if (!src_file->appending)
       continue;
 
-    size_t count = boost::count_if(g_append_mapping, [&src_file](auto const &e) { return e.src_file_id == src_file->id; });
+    size_t count = std::accumulate(g_append_mapping.begin(), g_append_mapping.end(), 0, [&src_file](auto count, auto const &e) { return count + (e.src_file_id == src_file->id ? 1 : 0); });
 
     if ((0 < count) && (src_file-> reader->m_used_track_ids.size() > count))
       mxerror(fmt::format(Y("Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the "
@@ -1043,7 +1043,7 @@ check_append_mapping() {
   // concatenated files. This is needed for displaying the progress.
   for (auto amap = g_append_mapping.begin(), amap_end = g_append_mapping.end(); amap != amap_end; ++amap) {
     // Is this the first in a chain?
-    auto cmp_amap = boost::find_if(g_append_mapping, [&amap](auto const &e) {
+    auto cmp_amap = std::find_if(g_append_mapping.begin(), g_append_mapping.end(), [&amap](auto const &e) {
       return (*amap              != e)
           && (amap->dst_file_id  == e.src_file_id)
           && (amap->dst_track_id == e.src_track_id);
@@ -1402,7 +1402,7 @@ add_split_points_from_remainig_chapter_numbers() {
     }
   }
 
-  brng::sort(chapter_start_timestamps);
+  std::sort(chapter_start_timestamps.begin(), chapter_start_timestamps.end());
 
   std::vector<std::pair<split_point_c, unsigned int>> new_split_points;
 
@@ -1798,7 +1798,7 @@ append_track(packetizer_t &ptzr,
 
   // Find the generic_packetizer_c that we will be appending to the one
   // stored in ptzr.
-  auto gptzr = brng::find_if(src_file.reader->m_reader_packetizers, [&amap](auto p) -> bool {
+  auto gptzr = std::find_if(src_file.reader->m_reader_packetizers.begin(), src_file.reader->m_reader_packetizers.end(), [&amap](auto p) -> bool {
     return amap.src_track_id == static_cast<size_t>(p->m_ti.m_id);
   });
 
@@ -1829,7 +1829,7 @@ append_track(packetizer_t &ptzr,
       if (file->done)
         continue;
 
-      auto vptzr = brng::find_if(file->reader->m_reader_packetizers, [](auto p) { return p->get_track_type() == track_video; });
+      auto vptzr = std::find_if(file->reader->m_reader_packetizers.begin(), file->reader->m_reader_packetizers.end(), [](auto p) { return p->get_track_type() == track_video; });
       if (vptzr == file->reader->m_reader_packetizers.end())
         continue;
 
@@ -1926,7 +1926,7 @@ append_track(packetizer_t &ptzr,
       ptzr.status = ptzr.packetizer->read(false);
 
     if (src_file.reader->m_ptzr_first_packet) {
-      auto cmp_amap = brng::find_if(g_append_mapping, [&amap, &src_file](append_spec_t const &m) {
+      auto cmp_amap = std::find_if(g_append_mapping.begin(), g_append_mapping.end(), [&amap, &src_file](append_spec_t const &m) {
         return (m.src_file_id  == amap.src_file_id)
             && (m.src_track_id == static_cast<size_t>(src_file.reader->m_ptzr_first_packet->m_ti.m_id))
             && (m.dst_file_id  == amap.dst_file_id);

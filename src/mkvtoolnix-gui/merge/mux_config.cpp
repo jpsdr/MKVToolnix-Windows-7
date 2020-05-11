@@ -366,7 +366,7 @@ MuxConfig::determineFirstInputFileName(QList<SourceFilePtr> const &files) {
   if (!Util::Settings::get().m_autoDestinationOnlyForVideoFiles)
     return files[0]->m_fileName;
 
-  auto itr = brng::find_if(files, [](auto const &file) { return file->hasVideoTrack(); });
+  auto itr = std::find_if(files.begin(), files.end(), [](auto const &file) { return file->hasVideoTrack(); });
   return itr != files.end() ? (*itr)->m_fileName : QString{};
 }
 

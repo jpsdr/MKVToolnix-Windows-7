@@ -183,7 +183,7 @@ parse_latest_release_version(mtx::xml::document_cptr const &doc) {
 
   if (debugging_c::requested("version_check")) {
     std::stringstream urls;
-    brng::for_each(release.urls, [&urls](auto const &kv) { urls << " " << kv.first << ":" << kv.second; });
+    std::for_each(release.urls.begin(), release.urls.end(), [&urls](auto const &kv) { urls << " " << kv.first << ":" << kv.second; });
     mxdebug(fmt::format("update check: current {0} latest source {1} latest winpre {2} URLs{3}\n",
                         release.current_version.to_string(), release.latest_source.to_string(), release.latest_windows_build.to_string(), urls.str()));
   }

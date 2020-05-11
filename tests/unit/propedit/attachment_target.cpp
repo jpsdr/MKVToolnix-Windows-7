@@ -240,8 +240,9 @@ test_delete(std::string const &spec,
 
   attachment_target_c::options_t opt;
 
-  brng::sort(expected_deletions);
-  for (auto idx : expected_deletions | badap::reversed) {
+  std::sort(expected_deletions.begin(), expected_deletions.end());
+  std::reverse(expected_deletions.begin(), expected_deletions.end());
+  for (auto idx : expected_deletions) {
     delete (*l1_b)[idx];
     l1_b->Remove(idx);
   }

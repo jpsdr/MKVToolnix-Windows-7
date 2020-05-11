@@ -364,7 +364,7 @@ find_element_in_master(EbmlMaster *master,
     return std::make_pair<EbmlMaster *, size_t>(nullptr, 0);
 
   auto &elements = master->GetElementList();
-  auto itr       = brng::find(elements, element_to_find);
+  auto itr       = std::find(elements.begin(), elements.end(), element_to_find);
 
   if (itr != elements.end())
     return std::make_pair(master, std::distance(elements.begin(), itr));

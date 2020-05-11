@@ -31,7 +31,7 @@ public:
     , files{p_file_names}
     , display_file_name{p_display_file_name}
     , mpls_parser{p_mpls_parser}
-    , total_size{boost::accumulate(p_file_names, 0ull, [](uint64_t accu, bfs::path const &file) { return accu + bfs::file_size(file); })}
+    , total_size{std::accumulate(p_file_names.begin(), p_file_names.end(), 0ull, [](uint64_t accu, bfs::path const &file) { return accu + bfs::file_size(file); })}
   {
   }
 };

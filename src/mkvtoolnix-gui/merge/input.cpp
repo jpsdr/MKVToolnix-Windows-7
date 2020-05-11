@@ -1463,7 +1463,7 @@ Tab::enableFilesActions() {
   int numSelected      = selectedSourceFiles().size();
   bool hasRegularTrack = false;
   if (1 == numSelected)
-    hasRegularTrack = m_config.m_files.end() != brng::find_if(m_config.m_files, [](SourceFilePtr const &file) { return file->hasRegularTrack(); });
+    hasRegularTrack = m_config.m_files.end() != std::find_if(m_config.m_files.begin(), m_config.m_files.end(), [](SourceFilePtr const &file) { return file->hasRegularTrack(); });
 
   m_addFilesAction->setEnabled(true);
   m_addFilesAction2->setEnabled(true);

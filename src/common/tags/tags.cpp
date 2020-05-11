@@ -395,7 +395,7 @@ convert_tagets_to_index(KaxTagTargets const &targets) {
     if (dynamic_cast<EbmlUInteger *>(child) && !dynamic_cast<KaxTagTargetTypeValue *>(child))
       properties.emplace_back(fmt::format("{}:{}", EBML_NAME(child), static_cast<EbmlUInteger *>(child)->GetValue()));
 
-  brng::sort(properties);
+  std::sort(properties.begin(), properties.end());
 
   return boost::join(properties, " ");
 }

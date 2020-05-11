@@ -116,7 +116,7 @@ content_decoder_c::initialize(KaxTrackEntry &ktentry) {
     }
   }
 
-  brng::stable_sort(encodings, [](kax_content_encoding_t const &a, kax_content_encoding_t const &b) { return a.order < b.order; });
+  std::stable_sort(encodings.begin(), encodings.end(), [](kax_content_encoding_t const &a, kax_content_encoding_t const &b) { return a.order < b.order; });
 
   return ok;
 }
@@ -137,7 +137,8 @@ content_decoder_c::descriptive_algorithm_list() {
   std::string list;
   std::vector<std::string> algorithms;
 
-  boost::for_each(encodings, [&algorithms](auto const &enc) { algorithms.push_back(to_string(enc.comp_algo)); });
+  for (auto const &enc : encodings)
+    algorithms.push_back(to_string(enc.comp_algo));
 
   return boost::join(algorithms, ",");
 }

@@ -514,7 +514,7 @@ es_parser_c::process_unparsed_packets() {
 void
 es_parser_c::combine_extra_data_with_packet() {
   auto sum_fn     = [](size_t size, const memory_cptr &buffer) { return size + buffer->get_size(); };
-  auto extra_size = boost::accumulate(m_pre_frame_extra_data, 0, sum_fn) + boost::accumulate(m_post_frame_extra_data, 0, sum_fn);
+  auto extra_size = std::accumulate(m_pre_frame_extra_data.begin(), m_pre_frame_extra_data.end(), 0, sum_fn) + std::accumulate(m_post_frame_extra_data.begin(), m_post_frame_extra_data.end(), 0, sum_fn);
 
   auto new_packet = memory_c::alloc(extra_size + m_current_frame->data->get_size());
   auto ptr        = new_packet->get_buffer();

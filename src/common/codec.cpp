@@ -97,7 +97,7 @@ codec_c const
 codec_c::look_up(std::string const &fourcc_or_codec_id) {
   initialize();
 
-  auto itr = brng::find_if(ms_codecs, [&fourcc_or_codec_id](codec_c const &c) { return c.matches(fourcc_or_codec_id); });
+  auto itr = std::find_if(ms_codecs.begin(), ms_codecs.end(), [&fourcc_or_codec_id](codec_c const &c) { return c.matches(fourcc_or_codec_id); });
 
   return itr == ms_codecs.end() ? codec_c{} : *itr;
 }
@@ -106,7 +106,7 @@ codec_c const
 codec_c::look_up(type_e type) {
   initialize();
 
-  auto itr = brng::find_if(ms_codecs, [type](codec_c const &c) { return c.m_type == type; });
+  auto itr = std::find_if(ms_codecs.begin(), ms_codecs.end(), [type](codec_c const &c) { return c.m_type == type; });
 
   return itr == ms_codecs.end() ? codec_c{} : *itr;
 }
@@ -120,7 +120,7 @@ codec_c const
 codec_c::look_up(fourcc_c const &fourcc) {
   initialize();
 
-  auto itr = brng::find_if(ms_codecs, [&fourcc](codec_c const &c) { return brng::find(c.m_fourccs, fourcc) != c.m_fourccs.end(); });
+  auto itr = std::find_if(ms_codecs.begin(), ms_codecs.end(), [&fourcc](codec_c const &c) { return std::find(c.m_fourccs.begin(), c.m_fourccs.end(), fourcc) != c.m_fourccs.end(); });
 
   return itr != ms_codecs.end() ? *itr : look_up(fourcc.str());
 }
@@ -129,7 +129,7 @@ codec_c const
 codec_c::look_up_audio_format(uint16_t audio_format) {
   initialize();
 
-  auto itr = brng::find_if(ms_codecs, [audio_format](codec_c const &c) { return brng::find(c.m_audio_formats, audio_format) != c.m_audio_formats.end(); });
+  auto itr = std::find_if(ms_codecs.begin(), ms_codecs.end(), [audio_format](codec_c const &c) { return std::find(c.m_audio_formats.begin(), c.m_audio_formats.end(), audio_format) != c.m_audio_formats.end(); });
 
   return itr == ms_codecs.end() ? codec_c{} : *itr;
 }
@@ -163,7 +163,7 @@ codec_c::matches(std::string const &fourcc_or_codec_id)
     return true;
 
   if (fourcc_or_codec_id.length() == 4)
-    return brng::find(m_fourccs, fourcc_c{fourcc_or_codec_id}) != m_fourccs.end();
+    return std::find(m_fourccs.begin(), m_fourccs.end(), fourcc_c{fourcc_or_codec_id}) != m_fourccs.end();
 
   return false;
 }

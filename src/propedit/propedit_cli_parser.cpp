@@ -176,7 +176,7 @@ propedit_cli_parser_c::list_property_names_for_table(const std::vector<property_
                                                      const std::string &edit_spec) {
   auto &ebml_type_map = get_ebml_type_abbrev_map();
 
-  auto max_name_len = boost::accumulate(table, 0u, [](size_t a, const property_element_c &e) { return std::max(a, e.m_name.length()); });
+  auto max_name_len = std::accumulate(table.begin(), table.end(), 0u, [](size_t a, const property_element_c &e) { return std::max(a, e.m_name.length()); });
 
   static std::regex s_newline_re("[ \\t]*\\n[ \\t]*");
   std::string indent_string = std::string(max_name_len, ' ') + " |    | ";

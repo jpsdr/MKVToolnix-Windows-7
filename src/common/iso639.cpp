@@ -596,7 +596,7 @@ std::vector<std::string> const g_popular_language_codes{
 
 bool
 is_valid_iso639_2_code(std::string const &iso639_2_code) {
-  return brng::find_if(g_iso639_languages, [&iso639_2_code](auto const &lang) { return lang.iso639_2_code == iso639_2_code; }) != g_iso639_languages.end();
+  return std::find_if(g_iso639_languages.begin(), g_iso639_languages.end(), [&iso639_2_code](auto const &lang) { return lang.iso639_2_code == iso639_2_code; }) != g_iso639_languages.end();
 }
 
 #define FILL(s, idx) s + std::wstring(longest[idx] - get_width_in_em(s), L' ')
@@ -628,7 +628,7 @@ list_iso639_languages() {
 
 std::string const &
 map_iso639_2_to_iso639_1(std::string const &iso639_2_code) {
-  auto lang = brng::find_if(g_iso639_languages, [&iso639_2_code](auto const &lang) { return lang.iso639_2_code == iso639_2_code; });
+  auto lang = std::find_if(g_iso639_languages.begin(), g_iso639_languages.end(), [&iso639_2_code](auto const &lang) { return lang.iso639_2_code == iso639_2_code; });
   return (lang != g_iso639_languages.end()) ? lang->iso639_1_code : empty_string;
 }
 
@@ -654,23 +654,15 @@ map_to_iso639_2_code(std::string const &s,
   if (deprecated_code != s_deprecated_1_and_2_codes.end())
     source = deprecated_code->second;
 
-  auto lang_code = brng::find_if(g_iso639_languages, [&source](auto const &lang) { return (lang.iso639_2_code == source) || (lang.terminology_abbrev == source) || (lang.iso639_1_code == source); });
+  auto lang_code = std::find_if(g_iso639_languages.begin(), g_iso639_languages.end(), [&source](auto const &lang) { return (lang.iso639_2_code == source) || (lang.terminology_abbrev == source) || (lang.iso639_1_code == source); });
   if (lang_code != g_iso639_languages.end())
     return std::distance(g_iso639_languages.begin(), lang_code);
 
-  auto range = g_iso639_languages | badap::indexed(0);
-  auto end   = boost::end(range);
-  for (auto lang = boost::begin(range); lang != end; lang++) {
-#if BOOST_VERSION < 105600
-    auto const &english_name = lang->english_name;
-    auto index               = lang.index();
-#else
-    auto const &english_name = lang->value().english_name;
-    auto index               = lang->index();
-#endif
+  for (int index = 0, num_languages = g_iso639_languages.size(); index < num_languages; ++index) {
+    auto const &english_name = g_iso639_languages[index].english_name;
+    auto s_lower             = balg::to_lower_copy(s);
+    auto names               = split(english_name, ";");
 
-    auto s_lower = balg::to_lower_copy(s);
-    auto names   = split(english_name, ";");
     strip(names);
 
     for (auto const &name : names)
@@ -681,18 +673,13 @@ map_to_iso639_2_code(std::string const &s,
   if (!allow_short_english_name)
     return -1;
 
-  for (auto lang = boost::begin(range); lang != end; lang++) {
-#if BOOST_VERSION < 105600
-    auto const &english_name = lang->english_name;
-    auto index               = lang.index();
-#else
-    auto const &english_name = lang->value().english_name;
-    auto index               = lang->index();
-#endif
+  for (int index = 0, num_languages = g_iso639_languages.size(); index < num_languages; ++index) {
+    auto const &english_name = g_iso639_languages[index].english_name;
+    auto names               = split(english_name, ";");
 
-    auto names = split(english_name, ";");
     strip(names);
-    if (names.end() != brng::find_if(names, [&source](auto const &name) { return balg::istarts_with(name, source); }))
+
+    if (names.end() != std::find_if(names.begin(), names.end(), [&source](auto const &name) { return balg::istarts_with(name, source); }))
       return index;
   }
 

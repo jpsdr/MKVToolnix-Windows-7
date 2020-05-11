@@ -192,7 +192,7 @@ void
 qtmp4_reader_c::calculate_num_bytes_to_process() {
   for (auto const &dmx : m_demuxers)
     if (demuxing_requested(dmx->type, dmx->id, dmx->language))
-      m_bytes_to_process += boost::accumulate(dmx->m_index, 0ull, [](int64_t num, auto const &entry) { return num + entry.size; });
+      m_bytes_to_process += std::accumulate(dmx->m_index.begin(), dmx->m_index.end(), 0ull, [](int64_t num, auto const &entry) { return num + entry.size; });
 }
 
 qt_atom_t
@@ -308,7 +308,7 @@ qtmp4_reader_c::parse_headers() {
 
   read_chapter_track();
 
-  brng::remove_erase_if(m_demuxers, [](qtmp4_demuxer_cptr const &dmx) { return !dmx->ok || dmx->is_chapters(); });
+  m_demuxers.erase(std::remove_if(m_demuxers.begin(), m_demuxers.end(), [](qtmp4_demuxer_cptr const &dmx) { return !dmx->ok || dmx->is_chapters(); }), m_demuxers.end());
 
   detect_interleaving();
 
@@ -801,7 +801,7 @@ qtmp4_reader_c::handle_tfhd_atom(qt_atom_t,
 
   auto flags     = m_in->read_uint24_be();
   auto track_id  = m_in->read_uint32_be();
-  auto track_itr = brng::find_if(m_demuxers, [track_id](qtmp4_demuxer_cptr const &dmx) { return dmx->container_id == track_id; });
+  auto track_itr = std::find_if(m_demuxers.begin(), m_demuxers.end(), [track_id](qtmp4_demuxer_cptr const &dmx) { return dmx->container_id == track_id; });
 
   if (!track_id || !mtx::includes(m_track_defaults, track_id) || (m_demuxers.end() == track_itr)) {
     mxdebug_if(m_debug_headers,
@@ -1100,7 +1100,7 @@ qtmp4_reader_c::read_chapter_track() {
   if (m_ti.m_no_chapters || m_chapters)
     return;
 
-  auto chapter_dmx_itr = brng::find_if(m_demuxers, [](qtmp4_demuxer_cptr const &dmx) { return dmx->is_chapters(); });
+  auto chapter_dmx_itr = std::find_if(m_demuxers.begin(), m_demuxers.end(), [](qtmp4_demuxer_cptr const &dmx) { return dmx->is_chapters(); });
   if (m_demuxers.end() == chapter_dmx_itr)
     return;
 
@@ -2076,9 +2076,10 @@ qtmp4_reader_c::recode_chapter_entries(std::vector<qtmp4_chapter_entry_t> &entri
 
 void
 qtmp4_reader_c::detect_interleaving() {
-  std::list<qtmp4_demuxer_cptr> demuxers_to_read;
-  boost::remove_copy_if(m_demuxers, std::back_inserter(demuxers_to_read), [this](auto const &dmx) {
-    return !(dmx->ok && (dmx->is_audio() || dmx->is_video()) && this->demuxing_requested(dmx->type, dmx->id, dmx->language) && (dmx->sample_table.size() > 1));
+  decltype(m_demuxers) demuxers_to_read;
+
+  std::copy_if(m_demuxers.begin(), m_demuxers.end(), std::back_inserter(demuxers_to_read), [this](auto const &dmx) {
+    return (dmx->ok && (dmx->is_audio() || dmx->is_video()) && this->demuxing_requested(dmx->type, dmx->id, dmx->language) && (dmx->sample_table.size() > 1));
   });
 
   if (demuxers_to_read.size() < 2) {
@@ -2090,14 +2091,14 @@ qtmp4_reader_c::detect_interleaving() {
 
   std::list<double> gradients;
   for (auto &dmx : demuxers_to_read) {
-    uint64_t min = boost::min_element(dmx->sample_table, cmp)->pos;
-    uint64_t max = boost::max_element(dmx->sample_table, cmp)->pos;
+    uint64_t min = std::min_element(dmx->sample_table.begin(), dmx->sample_table.end(), cmp)->pos;
+    uint64_t max = std::max_element(dmx->sample_table.begin(), dmx->sample_table.end(), cmp)->pos;
     gradients.push_back(static_cast<double>(max - min) / m_in->get_size());
 
     mxdebug_if(m_debug_interleaving, fmt::format("Interleaving: Track id {0} min {1} max {2} gradient {3}\n", dmx->id, min, max, gradients.back()));
   }
 
-  double badness = *boost::max_element(gradients) - *boost::min_element(gradients);
+  double badness = *std::max_element(gradients.begin(), gradients.end()) - *std::min_element(gradients.begin(), gradients.end());
   mxdebug_if(m_debug_interleaving, fmt::format("Interleaving: Badness: {0} ({1})\n", badness, MAX_INTERLEAVING_BADNESS < badness ? "badly interleaved" : "ok"));
 
   if (MAX_INTERLEAVING_BADNESS < badness)
@@ -2288,7 +2289,7 @@ qtmp4_demuxer_c::min_timestamp()
     return {};
   }
 
-  return boost::accumulate(m_index, std::numeric_limits<int64_t>::max(), [](int64_t min, auto const &entry) { return std::min(min, entry.timestamp); });
+  return std::accumulate(m_index.begin(), m_index.end(), std::numeric_limits<int64_t>::max(), [](int64_t min, auto const &entry) { return std::min(min, entry.timestamp); });
 }
 
 bool
@@ -2481,7 +2482,7 @@ qtmp4_demuxer_c::apply_edit_list() {
     auto const edit_duration  = to_nsecs(edit.segment_duration, global_time_scale);
     auto const edit_start_cts = to_nsecs(edit.media_time);
     auto const edit_end_cts   = edit_start_cts + edit_duration;
-    auto itr                  = boost::range::find_if(m_index, [edit_start_cts](auto const &entry) { return (entry.timestamp + entry.duration - (entry.duration > 0 ? 1 : 0)) >= edit_start_cts; });
+    auto itr                  = std::find_if(m_index.begin(), m_index.end(), [edit_start_cts](auto const &entry) { return (entry.timestamp + entry.duration - (entry.duration > 0 ? 1 : 0)) >= edit_start_cts; });
     auto const frame_idx      = static_cast<uint64_t>(std::distance(index_begin, itr));
 
     mxdebug_if(m_debug_editlists,

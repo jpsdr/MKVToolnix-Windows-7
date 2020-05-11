@@ -111,7 +111,7 @@ translation_c::look_up_translation(const std::string &locale) {
     }
 
     if (!hits.empty()) {
-      brng::sort(hits);
+      std::sort(hits.begin(), hits.end());
       return hits.back().second;
     }
 
@@ -123,7 +123,7 @@ translation_c::look_up_translation(const std::string &locale) {
 
 int
 translation_c::look_up_translation(int language_id, int sub_language_id) {
-  auto ptr = brng::find_if(ms_available_translations, [language_id,sub_language_id](translation_c const &tr) {
+  auto ptr = std::find_if(ms_available_translations.begin(), ms_available_translations.end(), [language_id,sub_language_id](translation_c const &tr) {
       return (tr.m_language_id == language_id) && (!tr.m_sub_language_id || (tr.m_sub_language_id == sub_language_id));
     });
 

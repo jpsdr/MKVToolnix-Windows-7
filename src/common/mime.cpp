@@ -34,7 +34,7 @@ guess_type_by_ext(std::string ext) {
   ext = balg::to_lower_copy(ext.substr(i + 1));
 
   for (auto &type : g_types)
-    if (brng::find(type.extensions, ext) != type.extensions.end())
+    if (std::find(type.extensions.begin(), type.extensions.end(), ext) != type.extensions.end())
       return type.name;
 
   return "";
@@ -131,7 +131,7 @@ guess_type_internal(std::string ext,
 
 std::string
 primary_file_extension_for_type(std::string const &type) {
-  auto itr = brng::find_if(g_types, [&type](auto const &m) { return m.name == type; });
+  auto itr = std::find_if(g_types.begin(), g_types.end(), [&type](auto const &m) { return m.name == type; });
 
   return (itr != g_types.end()) && !itr->extensions.empty() ? itr->extensions[0] : std::string{};
 }

@@ -68,7 +68,7 @@ timestamp_calculator_c::drop_timestamps_before_position(uint64_t stream_position
   if (m_available_timestamps.empty())
     return;
 
-  auto itr = brng::find_if(m_available_timestamps, [stream_position](auto const &entry) {
+  auto itr = std::find_if(m_available_timestamps.begin(), m_available_timestamps.end(), [stream_position](auto const &entry) {
     return entry.second && (*entry.second >= stream_position);
   });
 

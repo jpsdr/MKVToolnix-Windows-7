@@ -56,7 +56,7 @@ usf_reader_c::read_headers() {
     create_codec_private(doc);
 
     for (auto track : m_tracks) {
-      brng::stable_sort(track->m_entries);
+      std::stable_sort(track->m_entries.begin(), track->m_entries.end());
       track->m_current_entry = track->m_entries.begin();
       if (!m_longest_track || (m_longest_track->m_entries.size() < track->m_entries.size()))
         m_longest_track = track;
@@ -171,7 +171,7 @@ usf_reader_c::create_packetizers() {
 file_status_e
 usf_reader_c::read(generic_packetizer_c *ptzr,
                    bool) {
-  auto track_itr = brng::find_if(m_tracks, [this, ptzr](auto &tr) { return (-1 != tr->m_ptzr) && (PTZR(tr->m_ptzr) == ptzr); });
+  auto track_itr = std::find_if(m_tracks.begin(), m_tracks.end(), [this, ptzr](auto &tr) { return (-1 != tr->m_ptzr) && (PTZR(tr->m_ptzr) == ptzr); });
   if (track_itr == m_tracks.end())
     return FILE_STATUS_DONE;
 

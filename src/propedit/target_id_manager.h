@@ -78,7 +78,7 @@ target_id_manager_c<T>::remove(int id) {
 template<typename T>
 void
 target_id_manager_c<T>::remove(T *target) {
-  auto itr = brng::find(m_targets, target);
+  auto itr = std::find(m_targets.begin(), m_targets.end(), target);
   if (m_targets.end() != itr)
     m_targets[std::distance(m_targets.begin(), itr)] = nullptr;
 }

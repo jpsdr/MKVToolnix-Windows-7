@@ -59,7 +59,7 @@ options_c::dump()
 
 std::vector<options_c::mode_options_c>::iterator
 options_c::get_options_for_mode(extraction_mode_e mode) {
-  auto itr = brng::find_if(m_modes, [mode](auto const &mode_options) {
+  auto itr = std::find_if(m_modes.begin(), m_modes.end(), [mode](auto const &mode_options) {
     return (mode_options.m_extraction_mode == mode)
         && mtx::included_in(mode, em_attachments, em_cues, em_timestamps_v2, em_tracks);
   });
@@ -76,8 +76,8 @@ options_c::get_options_for_mode(extraction_mode_e mode) {
 
 void
 options_c::merge_tracks_and_timestamps_targets() {
-  auto tracks_itr     = brng::find_if(m_modes, [](auto const &mode) { return em_tracks        == mode.m_extraction_mode; });
-  auto timestamps_itr = brng::find_if(m_modes, [](auto const &mode) { return em_timestamps_v2 == mode.m_extraction_mode; });
+  auto tracks_itr     = std::find_if(m_modes.begin(), m_modes.end(), [](auto const &mode) { return em_tracks        == mode.m_extraction_mode; });
+  auto timestamps_itr = std::find_if(m_modes.begin(), m_modes.end(), [](auto const &mode) { return em_timestamps_v2 == mode.m_extraction_mode; });
 
   if (timestamps_itr == m_modes.end())
     return;
@@ -89,7 +89,7 @@ options_c::merge_tracks_and_timestamps_targets() {
     timestamps_itr->m_extraction_mode = em_tracks;
 
   else {
-    brng::copy(timestamps_itr->m_tracks, std::back_inserter(tracks_itr->m_tracks));
+    std::copy(timestamps_itr->m_tracks.begin(), timestamps_itr->m_tracks.end(), std::back_inserter(tracks_itr->m_tracks));
     m_modes.erase(timestamps_itr);
   }
 }

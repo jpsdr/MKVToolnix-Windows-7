@@ -1480,7 +1480,7 @@ parse_arg_track_order(const std::string &s) {
     if (!parse_number(pair[1], to.track_id))
       mxerror(fmt::format(Y("'{0}' is not a valid file ID in '--track-order {1}'.\n"), pair[1], s));
 
-    if (brng::find_if(g_track_order, [&to](auto const &ref) { return (ref.file_id == to.file_id) && (ref.track_id == to.track_id); }) == g_track_order.end())
+    if (std::find_if(g_track_order.begin(), g_track_order.end(), [&to](auto const &ref) { return (ref.file_id == to.file_id) && (ref.track_id == to.track_id); }) == g_track_order.end())
       g_track_order.push_back(to);
   }
 }
@@ -3037,7 +3037,7 @@ add_filelists_for_playlists() {
     }
   }
 
-  brng::copy(new_filelists, std::back_inserter(g_files));
+  std::copy(new_filelists.begin(), new_filelists.end(), std::back_inserter(g_files));
 
   display_playlist_scan_progress(num_files_in_playlists, num_files_in_playlists);
 

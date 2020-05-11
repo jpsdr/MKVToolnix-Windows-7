@@ -738,7 +738,7 @@ Model::sortJobs(QList<Job *> &jobs,
   std::sort(jobs.begin(), jobs.end(), [&rows](Job *a, Job *b) { return rows[a] < rows[b]; });
 
   if (reverse)
-    brng::reverse(jobs);
+    std::reverse(jobs.begin(), jobs.end());
 }
 
 void

@@ -1318,7 +1318,7 @@ kax_analyzer_c::move_level1_element_before_cluster_to_end_of_file() {
 
   // Sort by their importance first and position second. Lower
   // importance means the element is more likely to be moved.
-  brng::sort(candidates_for_moving);
+  std::sort(candidates_for_moving.begin(), candidates_for_moving.end());
 
   auto const to_move_idx = candidates_for_moving.front().second;
   auto const &to_move    = *m_data[to_move_idx];

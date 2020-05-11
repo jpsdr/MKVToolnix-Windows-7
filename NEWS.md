@@ -37,7 +37,7 @@
   library will be used if found via `pkg-config`. If it is found, support for
   reading chapters from DVDs will be enabled in `mkvmerge` and the MKVToolNix
   GUI. Part of the implementation of #2808.
-* Boost's Date/Time library is not used anymore.
+* Boost's Date/Time, Range and Range Adaptors libraries are not used anymore.
 
 
 # Version 46.0.0 "No Deeper Escape" 2020-05-01

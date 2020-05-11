@@ -445,7 +445,7 @@ kax_info_c::read_master(EbmlMaster *m,
   if (m->ListSize() == 0)
     return;
 
-  brng::sort(m->GetElementList(), [](EbmlElement const *a, EbmlElement const *b) { return a->GetElementPosition() < b->GetElementPosition(); });
+  std::sort(m->begin(), m->end(), [](auto const *a, auto const *b) { return a->GetElementPosition() < b->GetElementPosition(); });
 }
 
 std::string
@@ -951,7 +951,7 @@ kax_info_c::post_block_group(EbmlElement &e) {
   tinfo.m_blocks                                                       += p->m_frame_sizes.size();
   tinfo.m_blocks_by_ref_num[std::min<int64_t>(p->m_num_references, 2)] += p->m_frame_sizes.size();
   tinfo.m_min_timestamp                                                 = std::min(tinfo.m_min_timestamp ? *tinfo.m_min_timestamp : p->m_lf_timestamp, p->m_lf_timestamp);
-  tinfo.m_size                                                         += boost::accumulate(p->m_frame_sizes, 0);
+  tinfo.m_size                                                         += std::accumulate(p->m_frame_sizes.begin(), p->m_frame_sizes.end(), 0);
 
   if (tinfo.m_max_timestamp && (*tinfo.m_max_timestamp >= p->m_lf_timestamp))
     return;
@@ -1059,7 +1059,7 @@ kax_info_c::post_simple_block(EbmlElement &e) {
   tinfo.m_min_timestamp                                                              = std::min(tinfo.m_min_timestamp ? *tinfo.m_min_timestamp : static_cast<int64_t>(timestamp_ns), static_cast<int64_t>(timestamp_ns));
   tinfo.m_max_timestamp                                                              = std::max(tinfo.m_max_timestamp ? *tinfo.m_max_timestamp : static_cast<int64_t>(timestamp_ns), static_cast<int64_t>(timestamp_ns));
   tinfo.m_add_duration_for_n_packets                                                 = block.NumberFrames();
-  tinfo.m_size                                                                      += boost::accumulate(p->m_frame_sizes, 0);
+  tinfo.m_size                                                                      += std::accumulate(p->m_frame_sizes.begin(), p->m_frame_sizes.end(), 0);
 }
 
 kax_info_c::result_e
@@ -1313,7 +1313,11 @@ kax_info_c::retain_element(std::shared_ptr<EbmlElement> const &element) {
 
 void
 kax_info_c::discard_retained_element(EbmlElement &element_to_remove) {
-  boost::remove_erase_if(p_func()->m_retained_elements, [&element_to_remove](auto const &retained_element) { return retained_element.get() == &element_to_remove; });
+  auto p = p_func();
+
+  p->m_retained_elements.erase(std::remove_if(p->m_retained_elements.begin(), p->m_retained_elements.end(),
+                                              [&element_to_remove](auto const &retained_element) { return retained_element.get() == &element_to_remove; }),
+                               p->m_retained_elements.end());
 }
 
 }

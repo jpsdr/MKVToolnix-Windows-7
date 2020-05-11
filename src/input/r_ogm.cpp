@@ -757,7 +757,7 @@ ogm_reader_c::handle_chapters(mtx::tags::vorbis_comments_t const &comments) {
       // show any chapters at all (if "parse_chapters()"
       // fails). So just remove all chars > 127.
       for (auto chapter_string : chapter_strings) {
-        brng::remove_erase_if(chapter_string, [](char c) { return c < 0; });
+        chapter_string.erase(std::remove_if(chapter_string.begin(), chapter_string.end(), [](char c) { return c < 0; }), chapter_string.end());
         out->puts(chapter_string + "\n"s);
       }
 

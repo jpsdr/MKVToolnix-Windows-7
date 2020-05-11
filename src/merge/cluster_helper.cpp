@@ -175,7 +175,7 @@ cluster_helper_c::split_if_necessary(packet_cptr &packet) {
 
     if (!m->packets.empty())
       // Cluster + Cluster timestamp: roughly 21 bytes. Add all frame sizes & their overheaders, too.
-      additional_size = 21 + boost::accumulate(m->packets, 0, [](size_t size, const packet_cptr &p) { return size + p->data->get_size() + (p->is_key_frame() ? 10 : p->is_p_frame() ? 13 : 16); });
+      additional_size = 21 + std::accumulate(m->packets.begin(), m->packets.end(), 0, [](size_t size, const packet_cptr &p) { return size + p->data->get_size() + (p->is_key_frame() ? 10 : p->is_p_frame() ? 13 : 16); });
 
     additional_size += 18 * m->num_cue_elements;
 
@@ -403,7 +403,7 @@ cluster_helper_c::render() {
 
   // Make sure that we don't have negative/wrapped around timestamps in the output file.
   // Can happend when we're splitting; so adjust timestamp_offset accordingly.
-  m->timestamp_offset      = boost::accumulate(m->packets, m->timestamp_offset, [](int64_t a, const packet_cptr &p) { return std::min(a, p->assigned_timestamp); });
+  m->timestamp_offset      = std::accumulate(m->packets.begin(), m->packets.end(), m->timestamp_offset, [](int64_t a, const packet_cptr &p) { return std::min(a, p->assigned_timestamp); });
   int64_t timestamp_offset = m->timestamp_offset + get_discarded_duration();
 
   for (auto &pack : m->packets) {
@@ -710,7 +710,7 @@ cluster_helper_c::dump_split_points()
   const {
   mxdebug_if(m->debug_splitting,
              fmt::format("Split points:{0}\n",
-                         boost::accumulate(m->split_points, ""s, [](std::string const &accu, split_point_c const &point) { return accu + " " + point.str(); })));
+                         std::accumulate(m->split_points.begin(), m->split_points.end(), ""s, [](std::string const &accu, split_point_c const &point) { return accu + " " + point.str(); })));
 }
 
 void

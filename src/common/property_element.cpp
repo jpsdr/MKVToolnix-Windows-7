@@ -208,7 +208,8 @@ property_element_c::init_tables() {
   ELE("bit-depth",                 KaxAudioBitDepth::ClassInfos,           YT("Audio bit depth"),                 YT("Bits per sample, mostly used for PCM."));
 
   auto look_up = [](EbmlCallbacks const &callbacks, std::string const &name) -> property_element_c & {
-    auto itr = brng::find_if(s_properties[callbacks.GlobalId.GetValue()], [&name](auto const &prop) { return prop.m_name == name; });
+    auto &props = s_properties[callbacks.GlobalId.GetValue()];
+    auto itr    = std::find_if(props.begin(), props.end(), [&name](auto const &prop) { return prop.m_name == name; });
     return *itr;
   };
 

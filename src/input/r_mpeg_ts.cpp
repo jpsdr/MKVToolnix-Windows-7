@@ -1153,7 +1153,7 @@ reader_c::read_headers_for_file(std::size_t file_num) {
     probe_packet_complete(*track, true);
   }
 
-  brng::copy(m_tracks, std::back_inserter(m_all_probed_tracks));
+  std::copy(m_tracks.begin(), m_tracks.end(), std::back_inserter(m_all_probed_tracks));
 }
 
 void
@@ -1305,7 +1305,7 @@ reader_c::add_programs_to_identification_info(mtx::id::info_c &info) {
   if (m_files[0]->m_programs.empty())
     return;
 
-  brng::sort(m_files[0]->m_programs);
+  std::sort(m_files[0]->m_programs.begin(), m_files[0]->m_programs.end());
 
   auto programs_json = nlohmann::json::array();
 
@@ -1364,7 +1364,7 @@ reader_c::identify() {
       add_multiplexed_ids(multiplexed_track_ids, *track->m_master);
 
     if (!multiplexed_track_ids.empty()) {
-      brng::sort(multiplexed_track_ids);
+      std::sort(multiplexed_track_ids.begin(), multiplexed_track_ids.end());
       info.set(mtx::id::multiplexed_tracks, multiplexed_track_ids);
     }
 
@@ -1532,7 +1532,7 @@ reader_c::parse_pmt_pid_info(mm_mem_io_c &mem,
     m_tracks.push_back(track);
     ++f.m_es_to_process;
 
-    brng::copy(track->m_coupled_tracks, std::back_inserter(m_tracks));
+    std::copy(track->m_coupled_tracks.begin(), track->m_coupled_tracks.end(), std::back_inserter(m_tracks));
     f.m_es_to_process += track->m_coupled_tracks.size();
   }
 
@@ -2157,7 +2157,7 @@ reader_c::probe_packet_complete(track_c &track,
   }
 
   if (mtx::included_in(track.type, pid_type_e::pat, pid_type_e::pmt)) {
-    auto it = brng::find_if(m_tracks, [&track](track_ptr const &candidate) { return candidate.get() == &track; });
+    auto it = std::find_if(m_tracks.begin(), m_tracks.end(), [&track](track_ptr const &candidate) { return candidate.get() == &track; });
     if (m_tracks.end() != it)
       m_tracks.erase(it);
 

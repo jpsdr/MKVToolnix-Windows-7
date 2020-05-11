@@ -130,7 +130,7 @@ generic_reader_c::get_num_packetizers()
 generic_packetizer_c *
 generic_reader_c::find_packetizer_by_id(int64_t id)
   const {
-  auto itr = brng::find_if(m_reader_packetizers, [id](auto p) { return p->m_ti.m_id == id; });
+  auto itr = std::find_if(m_reader_packetizers.begin(), m_reader_packetizers.end(), [id](auto p) { return p->m_ti.m_id == id; });
 
   return itr != m_reader_packetizers.end() ? (*itr).get() : nullptr;
 }

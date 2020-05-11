@@ -84,7 +84,7 @@ engage(const std::string &hacks) {
   auto engage_args   = split(hacks, ",");
   auto list_of_hacks = get_list();
 
-  if (brng::find(engage_args, "list") != engage_args.end()) {
+  if (std::find(engage_args.begin(), engage_args.end(), "list") != engage_args.end()) {
     mxinfo(Y("Valid hacks are:\n"));
 
     for (auto const &hack : list_of_hacks)
@@ -93,7 +93,7 @@ engage(const std::string &hacks) {
     mxexit();
   }
 
-  if (brng::find(engage_args, "cow") != engage_args.end()) {
+  if (std::find(engage_args.begin(), engage_args.end(), "cow") != engage_args.end()) {
     auto const initial    = "ICAgICAgICAgIChfXykKICAgICAgICAgICgqKikgIE9oIGhvbmV5LCB0aGF0J3Mgc28gc3dlZXQhCiAgIC8tLS0tLS0tXC8gICBPZiBjb3Vyc2UgSSdsbCBtYXJyeSB5b3UhCiAgLyB8ICAgICB8fAogKiAgfHwtLS0tfHwKICAgIF5eICAgIF5eCg=="s;
     auto const correction = mtx::base64::decode(initial);
     mxinfo(correction->to_string());
@@ -104,7 +104,7 @@ engage(const std::string &hacks) {
   auto hacks_end   = list_of_hacks.end();
 
   for (auto const &name : engage_args) {
-    auto itr = brng::find_if(list_of_hacks, [&name](auto const &hack) { return hack.name == name; });
+    auto itr = std::find_if(list_of_hacks.begin(), list_of_hacks.end(), [&name](auto const &hack) { return hack.name == name; });
 
     if (itr != hacks_end)
       s_engaged_hacks[std::distance(hacks_begin, itr)] = true;

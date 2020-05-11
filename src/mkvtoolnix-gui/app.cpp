@@ -253,8 +253,8 @@ App::initializeIso639Languages() {
     s_iso639_2LanguageCodeToDescription[languageCode] = description;
   }
 
-  brng::sort(s_iso639Languages);
-  brng::sort(s_commonIso639Languages);
+  std::sort(s_iso639Languages.begin(), s_iso639Languages.end());
+  std::sort(s_commonIso639Languages.begin(), s_commonIso639Languages.end());
 }
 
 void
@@ -276,8 +276,8 @@ App::initializeTopLevelDomainCountryCodes() {
     s_topLevelDomainCountryCodeToDescription[countryCode] = description;
   }
 
-  brng::sort(s_topLevelDomainCountryCodes);
-  brng::sort(s_commonTopLevelDomainCountryCodes);
+  std::sort(s_topLevelDomainCountryCodes.begin(), s_topLevelDomainCountryCodes.end());
+  std::sort(s_commonTopLevelDomainCountryCodes.begin(), s_commonTopLevelDomainCountryCodes.end());
 }
 
 void
@@ -295,8 +295,8 @@ App::initializeCharacterSets() {
       s_commonCharacterSets.emplace_back(qCharacterSet);
   }
 
-  brng::sort(s_characterSets);
-  brng::sort(s_commonCharacterSets);
+  std::sort(s_characterSets.begin(), s_characterSets.end());
+  std::sort(s_commonCharacterSets.begin(), s_commonCharacterSets.end());
 }
 
 Iso639LanguageList const &

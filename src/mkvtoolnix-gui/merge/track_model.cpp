@@ -216,7 +216,7 @@ TrackModel::appendTracks(SourceFile *fileToAppendTo,
   if (tracks.isEmpty())
     return;
 
-  auto lastTrack = boost::accumulate(*m_tracks, static_cast<Track *>(nullptr), [](Track *accu, Track *t) { return t->isRegular() ? t : accu; });
+  auto lastTrack = std::accumulate(m_tracks->begin(), m_tracks->end(), static_cast<Track *>(nullptr), [](Track *accu, Track *t) { return t->isRegular() ? t : accu; });
   Q_ASSERT(!!lastTrack);
 
   auto trackOffsets = QHash<TrackType, int>{};

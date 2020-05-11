@@ -680,7 +680,7 @@ es_parser_c::get_most_often_used_duration()
   mxdebug_if(m_debug_timestamps,
              fmt::format("Duration frequency. Result: {0}, diff {1}. Best before adjustment: {2}. All: {3}\n",
                          best.first, best.second, most_often->first,
-                         boost::accumulate(m_duration_frequency, ""s, [](std::string const &accu, std::pair<int64_t, int64_t> const &pair) {
+                         std::accumulate(m_duration_frequency.begin(), m_duration_frequency.end(), ""s, [](std::string const &accu, std::pair<int64_t, int64_t> const &pair) {
                            return accu + fmt::format(" <{0} {1}>", pair.first, pair.second);
                          })));
 
@@ -775,19 +775,19 @@ es_parser_c::calculate_provided_timestamps_to_use() {
                          "  provided timestamps (available):\n{4}"
                          "  provided timestamps (to use):\n{5}",
                          num_frames, num_provided_timestamps, provided_timestamps_to_use.size(),
-                         boost::accumulate(m_frames, std::string{}, [](auto const &str, auto const &frame) {
+                         std::accumulate(m_frames.begin(), m_frames.end(), std::string{}, [](auto const &str, auto const &frame) {
                            return str + fmt::format("    pos {0} size {1} key? {2}\n", frame.m_position, frame.m_data->get_size(), frame.m_keyframe);
                          }),
-                         boost::accumulate(m_provided_timestamps, std::string{}, [](auto const &str, auto const &provided_timestamp) {
+                         std::accumulate(m_provided_timestamps.begin(), m_provided_timestamps.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
                            return str + fmt::format("    pos {0} timestamp {1}\n", provided_timestamp.second, format_timestamp(provided_timestamp.first));
                          }),
-                         boost::accumulate(provided_timestamps_to_use, std::string{}, [](auto const &str, auto const &provided_timestamp) {
+                         std::accumulate(provided_timestamps_to_use.begin(), provided_timestamps_to_use.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
                            return str + fmt::format("    timestamp {0}\n", format_timestamp(provided_timestamp));
                          })));
 
   m_provided_timestamps.erase(m_provided_timestamps.begin(), m_provided_timestamps.begin() + provided_timestamps_idx);
 
-  brng::sort(provided_timestamps_to_use);
+  std::sort(provided_timestamps_to_use.begin(), provided_timestamps_to_use.end());
 
   return provided_timestamps_to_use;
 }
@@ -797,7 +797,7 @@ es_parser_c::calculate_frame_timestamps() {
   auto provided_timestamps_to_use = calculate_provided_timestamps_to_use();
 
   if (!m_simple_picture_order)
-    brng::sort(m_frames, [](const frame_t &f1, const frame_t &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
+    std::sort(m_frames.begin(), m_frames.end(), [](const frame_t &f1, const frame_t &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
 
   auto frames_begin           = m_frames.begin();
   auto frames_end             = m_frames.end();
@@ -826,12 +826,12 @@ es_parser_c::calculate_frame_timestamps() {
 
   mxdebug_if(m_debug_timestamps,
              fmt::format("CLEANUP frames <pres_ord dec_ord has_prov_ts tc dur>: {0}\n",
-                         boost::accumulate(m_frames, ""s, [](std::string const &accu, frame_t const &frame) {
+                         std::accumulate(m_frames.begin(), m_frames.end(), ""s, [](std::string const &accu, frame_t const &frame) {
                            return accu + fmt::format(" <{0} {1} {2} {3} {4}>", frame.m_presentation_order, frame.m_decode_order, frame.m_has_provided_timestamp, frame.m_start, frame.m_end - frame.m_start);
                          })));
 
   if (!m_simple_picture_order)
-    brng::sort(m_frames, [](const frame_t &f1, const frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
+    std::sort(m_frames.begin(), m_frames.end(), [](const frame_t &f1, const frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
 }
 
 void

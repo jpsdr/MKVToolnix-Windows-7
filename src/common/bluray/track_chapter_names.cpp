@@ -93,7 +93,7 @@ locate_and_parse_for_title(bfs::path const &location,
       chapter_names.emplace_back(language, names);
   }
 
-  brng::sort(chapter_names);
+  std::sort(chapter_names.begin(), chapter_names.end());
 
   return chapter_names;
 }

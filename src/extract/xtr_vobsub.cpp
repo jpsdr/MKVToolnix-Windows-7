@@ -248,7 +248,7 @@ xtr_vobsub_c::finish_file() {
 
     idx.puts(header + "\n");
 
-    if (!balg::find_first(header, "langidx:"))
+    if (header.find("langidx:") == std::string::npos)
       idx.puts("langidx: 0\n");
 
     write_idx(idx, 0);

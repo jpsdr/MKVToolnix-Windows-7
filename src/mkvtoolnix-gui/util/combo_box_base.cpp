@@ -141,16 +141,16 @@ ComboBoxBase::mergeCommonAndAdditionalItems(StringPairVector const &commonItems,
       return existingItem.second == additionalItem;
     };
 
-    auto itr = brng::find_if(commonItems, finder);
+    auto itr = std::find_if(commonItems.begin(), commonItems.end(), finder);
     if (itr != commonItems.end())
       continue;
 
-    itr = brng::find_if(allItems, finder);
+    itr = std::find_if(allItems.begin(), allItems.end(), finder);
     if (itr != allItems.end())
       items.push_back(*itr);
   }
 
-  brng::sort(items);
+  std::sort(items.begin(), items.end());
 
   return items;
 }

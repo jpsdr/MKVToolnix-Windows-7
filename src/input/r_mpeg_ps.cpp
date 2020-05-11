@@ -215,7 +215,7 @@ mpeg_ps_reader_c::calculate_global_timestamp_offset() {
   for (auto &track : tracks)
     track->timestamp_offset -= track->timestamp_b_frame_offset;
 
-  auto const &track_min_offset = *brng::min_element(tracks, [](mpeg_ps_track_ptr const &a, mpeg_ps_track_ptr const &b) { return a->timestamp_offset < b->timestamp_offset; });
+  auto const &track_min_offset = *std::min_element(tracks.begin(), tracks.end(), [](mpeg_ps_track_ptr const &a, mpeg_ps_track_ptr const &b) { return a->timestamp_offset < b->timestamp_offset; });
   global_timestamp_offset      = std::numeric_limits<int64_t>::max() == track_min_offset->timestamp_offset ? 0 : track_min_offset->timestamp_offset;
 
   for (auto &track : tracks)

@@ -53,7 +53,7 @@ includes(Tcontainer const &container,
          Tkey const &key)
   -> typename std::enable_if< !is_associative_container<Tcontainer>::value , bool >::type
 {
-  return brng::find(container, key) != container.end();
+  return std::find(container.begin(), container.end(), key) != container.end();
 }
 
 template<typename Tcontainer>

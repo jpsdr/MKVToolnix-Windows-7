@@ -161,7 +161,7 @@ std::vector<debugging_option_c::option_c> debugging_option_c::ms_registered_opti
 
 size_t
 debugging_option_c::register_option(std::string const &option) {
-  auto itr = brng::find_if(ms_registered_options, [&option](option_c const &opt) { return opt.m_option == option; });
+  auto itr = std::find_if(ms_registered_options.begin(), ms_registered_options.end(), [&option](option_c const &opt) { return opt.m_option == option; });
   if (itr != ms_registered_options.end())
     return std::distance(ms_registered_options.begin(), itr);
 

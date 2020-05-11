@@ -77,7 +77,7 @@ write_simple(KaxChapters &chapters,
     }
   }
 
-  brng::sort(chapter_entries);
+  std::sort(chapter_entries.begin(), chapter_entries.end());
 
   auto chapter_num = 0u;
 

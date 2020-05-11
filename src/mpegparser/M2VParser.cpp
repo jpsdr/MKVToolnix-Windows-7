@@ -275,14 +275,14 @@ M2VParser::TimestampWaitingFrames() {
   for (int idx = 0, numFrames = waitQueue.size(); idx < numFrames; ++idx)
     waitQueue[idx]->decodingOrder = idx;
 
-  brng::sort(waitQueue, [](MPEGFrame *a, MPEGFrame *b) { return a->timestamp < b->timestamp; });
+  std::sort(waitQueue.begin(), waitQueue.end(), [](MPEGFrame *a, MPEGFrame *b) { return a->timestamp < b->timestamp; });
 
   for (auto const &frame : waitQueue)
     StampFrame(frame);
   for (auto const &frame : waitQueue)
     UpdateFrame(frame);
 
-  brng::sort(waitQueue, [](MPEGFrame *a, MPEGFrame *b) { return a->decodingOrder < b->decodingOrder; });
+  std::sort(waitQueue.begin(), waitQueue.end(), [](MPEGFrame *a, MPEGFrame *b) { return a->decodingOrder < b->decodingOrder; });
 
   for (auto const &frame : waitQueue)
     buffers.push(frame);
