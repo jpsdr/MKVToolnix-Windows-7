@@ -39,6 +39,11 @@
   GUI. Part of the implementation of #2808.
 * Boost's Date/Time, Range, Range Adaptors, Tri-Bool, Variant libraries are
   not used anymore.
+* MKVToolNix now requires a C++ compiler & standard library that support the
+  following features of the C++17 standard: "`std::variant`", "`std::gdc`".
+  For the GNU Compiler Collection (gcc) this means v7 or newer; for clang it
+  means v4 or newer — the same versions required by earlier MKVToolNix
+  versions.
 
 
 # Version 46.0.0 "No Deeper Escape" 2020-05-01
