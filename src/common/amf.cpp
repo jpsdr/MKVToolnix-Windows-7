@@ -19,6 +19,24 @@
 
 namespace mtx::amf {
 
+namespace {
+
+std::string
+value_to_string(value_type_t const &value) {
+  if (std::holds_alternative<double>(value))
+    return fmt::format("{0}", std::get<double>(value));
+
+  if (std::holds_alternative<bool>(value))
+    return std::get<bool>(value) ? "yes" : "no";
+
+  if (std::holds_alternative<std::string>(value))
+    return std::get<std::string>(value);
+
+  return {};
+}
+
+}
+
 script_parser_c::script_parser_c(memory_cptr const &mem)
   : m_data_mem{mem}
   , m_data{*mem.get()}
@@ -62,7 +80,7 @@ script_parser_c::read_properties(std::unordered_map<std::string, value_type_t> &
     auto key   = read_string(TYPE_STRING);
     auto value = read_value();
 
-    mxdebug_if(m_debug, fmt::format("{0}Property key: {1}; value read: {2}; value: {3}\n", level_spacer(), key, value.second, boost::apply_visitor(value_to_string_c(), value.first)));
+    mxdebug_if(m_debug, fmt::format("{0}Property key: {1}; value read: {2}; value: {3}\n", level_spacer(), key, value.second, value_to_string(value.first)));
 
     if (key.empty() || !value.second)
       break;
@@ -99,7 +117,7 @@ script_parser_c::read_value() {
 
   else if ((TYPE_STRING == data_type) || (TYPE_LONG_STRING == data_type)) {
     value = read_string(data_type);
-    m_in_meta_data = boost::get<std::string>(value) == "onMetaData";
+    m_in_meta_data = std::get<std::string>(value) == "onMetaData";
 
   } else if (TYPE_OBJECT == data_type) {
     std::unordered_map<std::string, value_type_t> dummy;

@@ -680,7 +680,7 @@ flv_reader_c::process_script_tag() {
     mtx::amf::script_parser_c parser{m_in->read(m_tag.m_data_size)};
     parser.parse();
 
-    double const *number;
+    std::optional<double> number;
 
     if ((number = parser.get_meta_data_value<double>("framerate"))) {
       m_tracks[m_video_track_idx]->m_v_frame_rate = *number;

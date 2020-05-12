@@ -16,29 +16,14 @@
 #include "common/common_pch.h"
 
 #include <unordered_map>
-#include <boost/variant.hpp>
+#include <variant>
 
 #include "common/mm_mem_io.h"
 
 namespace mtx::amf {
 
-using value_type_t = boost::variant<double, bool, std::string>;
+using value_type_t = std::variant<double, bool, std::string>;
 using meta_data_t  = std::unordered_map<std::string, value_type_t>;
-
-class value_to_string_c: public boost::static_visitor<std::string> {
-public:
-  std::string operator ()(double value) const {
-    return fmt::format("{0}", value);
-  }
-
-  std::string operator ()(bool value) const {
-    return value ? "yes" : "no";
-  }
-
-  std::string operator ()(std::string const &value) const {
-    return value;
-  }
-};
 
 class script_parser_c {
 public:
@@ -74,13 +59,13 @@ public:
   meta_data_t const &get_meta_data() const;
 
   template<typename T>
-  T const *
+  std::optional<T>
   get_meta_data_value(std::string const &key) {
     auto itr = m_meta_data.find(key);
     if (m_meta_data.end() == itr)
-      return nullptr;
+      return {};
 
-    return boost::get<T>(&itr->second);
+    return std::get<T>(itr->second);
   }
 
 protected:
