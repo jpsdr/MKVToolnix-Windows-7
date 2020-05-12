@@ -32,10 +32,6 @@ track_info_c::track_info_c()
   , m_display_dimensions_source{OPTION_SOURCE_NONE}
   , m_reset_timestamps{}
   , m_cues{CUE_STRATEGY_UNSPECIFIED}
-  , m_default_track{boost::logic::indeterminate}
-  , m_fix_bitstream_frame_rate{boost::logic::indeterminate}
-  , m_forced_track{boost::logic::indeterminate}
-  , m_enabled_track{boost::logic::indeterminate}
   , m_compression{COMPRESSION_UNSPECIFIED}
   , m_nalu_size_length{}
   , m_no_chapters{}

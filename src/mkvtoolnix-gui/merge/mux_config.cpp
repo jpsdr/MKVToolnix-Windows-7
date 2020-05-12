@@ -646,10 +646,8 @@ MuxConfig::buildMkvmergeOptions()
       options << Q("--link");
   }
 
-  auto add = [&options](auto const &arg, auto const &value, boost::logic::tribool predicate = boost::indeterminate) {
-    if (boost::logic::indeterminate(predicate))
-      predicate = !value.isEmpty();
-    if (predicate)
+  auto add = [&options](auto const &arg, auto const &value, std::optional<bool> predicate = {}) {
+    if (predicate.value_or(!value.isEmpty()))
       options << arg << value;
   };
 

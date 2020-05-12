@@ -1651,13 +1651,13 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
   if (t->default_track)
     PTZR(t->ptzr)->set_as_default_track(t->type == 'v' ? DEFTRACK_TYPE_VIDEO : t->type == 'a' ? DEFTRACK_TYPE_AUDIO : DEFTRACK_TYPE_SUBS, DEFAULT_TRACK_PRIORITY_FROM_SOURCE);
 
-  else if (!boost::logic::indeterminate(t->default_track) && boost::logic::indeterminate(PTZR(t->ptzr)->m_ti.m_default_track))
+  else if (!PTZR(t->ptzr)->m_ti.m_default_track.has_value())
     PTZR(t->ptzr)->m_ti.m_default_track = false;
 
-  if (t->forced_track && boost::logic::indeterminate(PTZR(t->ptzr)->m_ti.m_forced_track))
+  if (t->forced_track && !PTZR(t->ptzr)->m_ti.m_forced_track.has_value())
     PTZR(t->ptzr)->set_track_forced_flag(true);
 
-  if (boost::logic::indeterminate(PTZR(t->ptzr)->m_ti.m_enabled_track))
+  if (!PTZR(t->ptzr)->m_ti.m_enabled_track.has_value())
     PTZR(t->ptzr)->set_track_enabled_flag(static_cast<bool>(t->enabled_track));
 
   if ((0 != t->track_uid) && !PTZR(t->ptzr)->set_uid(t->track_uid))

@@ -86,7 +86,7 @@ struct kax_track_t {
 
   std::vector<memory_cptr> headers;
 
-  boost::logic::tribool default_track, forced_track, enabled_track;
+  bool default_track, forced_track, enabled_track;
   std::string language;
 
   int64_t units_processed;
@@ -156,7 +156,7 @@ struct kax_track_t {
     , a_sfreq(8000.0)
     , a_osfreq(0.0)
     , default_track(true)
-    , forced_track(boost::logic::indeterminate)
+    , forced_track(false)
     , enabled_track(true)
     , language("eng")
     , units_processed(0)

@@ -51,8 +51,6 @@
 
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/function.hpp>
-#include <boost/logic/tribool.hpp>
 #include <boost/rational.hpp>
 #include <boost/system/error_code.hpp>
 

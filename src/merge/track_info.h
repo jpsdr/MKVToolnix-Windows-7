@@ -262,16 +262,16 @@ public:
   cue_strategy_e m_cues;          // For this very track
 
   std::map<int64_t, bool> m_default_track_flags; // As given on the command line
-  boost::logic::tribool m_default_track;    // For this very track
+  std::optional<bool> m_default_track;    // For this very track
 
   std::map<int64_t, bool> m_fix_bitstream_frame_rate_flags; // As given on the command line
-  boost::logic::tribool m_fix_bitstream_frame_rate;         // For this very track
+  std::optional<bool> m_fix_bitstream_frame_rate;         // For this very track
 
   std::map<int64_t, bool> m_forced_track_flags; // As given on the command line
-  boost::logic::tribool m_forced_track;    // For this very track
+  std::optional<bool> m_forced_track;    // For this very track
 
   std::map<int64_t, bool> m_enabled_track_flags; // As given on the command line
-  boost::logic::tribool m_enabled_track;    // For this very track
+  std::optional<bool> m_enabled_track;    // For this very track
 
   std::map<int64_t, std::string> m_languages; // As given on the command line
   std::string m_language;              // For this very track

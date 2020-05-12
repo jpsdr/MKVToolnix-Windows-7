@@ -44,20 +44,19 @@ public:
 
 class debugging_option_c {
   struct option_c {
-    boost::tribool m_requested;
+    std::optional<bool> m_requested;
     std::string m_option;
 
     option_c(std::string const &option)
-      : m_requested{boost::logic::indeterminate}
-      , m_option{option}
+      : m_option{option}
     {
     }
 
     bool get() {
-      if (boost::logic::indeterminate(m_requested))
+      if (!m_requested.has_value())
         m_requested = debugging_c::requested(m_option);
 
-      return static_cast<bool>(m_requested);
+      return m_requested.value();
     }
   };
 
@@ -79,7 +78,7 @@ public:
     return ms_registered_options.at(get_idx()).get();
   }
 
-  void set(boost::tribool requested) {
+  void set(std::optional<bool> requested) {
     ms_registered_options.at(get_idx()).m_requested = requested;
   }
 

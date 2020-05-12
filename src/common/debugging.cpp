@@ -173,7 +173,7 @@ debugging_option_c::register_option(std::string const &option) {
 void
 debugging_option_c::invalidate_cache() {
   for (auto &opt : ms_registered_options)
-    opt.m_requested = boost::logic::indeterminate;
+    opt.m_requested.reset();
 }
 
 // ------------------------------------------------------------

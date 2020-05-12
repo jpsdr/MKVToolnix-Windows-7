@@ -1022,9 +1022,9 @@ generic_packetizer_c::set_headers() {
 
   idx = TRACK_TYPE_TO_DEFTRACK_TYPE(m_htrack_type);
 
-  if (boost::logic::indeterminate(m_ti.m_default_track))
+  if (!m_ti.m_default_track.has_value())
     set_as_default_track(idx, DEFAULT_TRACK_PRIORITY_FROM_TYPE);
-  else if (m_ti.m_default_track)
+  else if (m_ti.m_default_track.value())
     set_as_default_track(idx, DEFAULT_TRACK_PRIORITY_CMDLINE);
   else if (g_default_tracks[idx] == m_hserialno)
     g_default_tracks[idx] = 0;
@@ -1034,11 +1034,11 @@ generic_packetizer_c::set_headers() {
   if (!m_ti.m_track_name.empty())
     GetChild<KaxTrackName>(m_track_entry).SetValueUTF8(m_ti.m_track_name);
 
-  if (!boost::logic::indeterminate(m_ti.m_forced_track))
-    GetChild<KaxTrackFlagForced>(m_track_entry).SetValue(m_ti.m_forced_track ? 1 : 0);
+  if (m_ti.m_forced_track.has_value())
+    GetChild<KaxTrackFlagForced>(m_track_entry).SetValue(m_ti.m_forced_track.value() ? 1 : 0);
 
-  if (!boost::logic::indeterminate(m_ti.m_enabled_track))
-    GetChild<KaxTrackFlagEnabled>(m_track_entry).SetValue(m_ti.m_enabled_track ? 1 : 0);
+  if (m_ti.m_enabled_track.has_value())
+    GetChild<KaxTrackFlagEnabled>(m_track_entry).SetValue(m_ti.m_enabled_track.value() ? 1 : 0);
 
   if (m_seek_pre_roll.valid())
     GetChild<KaxSeekPreRoll>(m_track_entry).SetValue(m_seek_pre_roll.to_ns());
