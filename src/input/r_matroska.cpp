@@ -243,7 +243,7 @@ kax_track_t::fix_display_dimension_parameters() {
   if ((0 != v_display_unit) || ((8 * v_dwidth) > v_width) || ((8 * v_dheight) > v_height))
     return;
 
-  if (boost::gcd(v_dwidth, v_dheight) != 1)
+  if (std::gcd(v_dwidth, v_dheight) != 1)
     return;
 
   // max shrinking was applied, ie x264 style

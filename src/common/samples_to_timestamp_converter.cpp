@@ -20,7 +20,7 @@ samples_to_timestamp_converter_c::set(int64_t numerator,
   if (0 == denominator)
     return;
 
-  int64_t gcd   = boost::gcd(numerator, denominator);
+  int64_t gcd   = std::gcd(numerator, denominator);
 
   m_numerator   = numerator   / gcd;
   m_denominator = denominator / gcd;

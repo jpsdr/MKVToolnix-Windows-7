@@ -83,7 +83,7 @@ xtr_wav_c::write_wav_header() {
   put_uint16_le(&wh.common.wChannels,        m_channels);
   put_uint32_le(&wh.common.dwSamplesPerSec,  m_sfreq);
   put_uint32_le(&wh.common.dwAvgBytesPerSec, m_channels * m_sfreq * m_bps / 8);
-  put_uint16_le(&wh.common.wBlockAlign,      m_bps * m_channels / boost::gcd(8, m_bps));
+  put_uint16_le(&wh.common.wBlockAlign,      m_bps * m_channels / std::gcd(8, m_bps));
   put_uint16_le(&wh.common.wBitsPerSample,   m_bps);
 
   m_out->setFilePointer(0);
@@ -104,7 +104,7 @@ xtr_wav_c::write_w64_header() {
   put_uint16_le(&wh.common.wChannels,        m_channels);
   put_uint32_le(&wh.common.dwSamplesPerSec,  m_sfreq);
   put_uint32_le(&wh.common.dwAvgBytesPerSec, m_channels * m_sfreq * m_bps / 8);
-  put_uint16_le(&wh.common.wBlockAlign,      m_bps * m_channels / boost::gcd(8, m_bps));
+  put_uint16_le(&wh.common.wBlockAlign,      m_bps * m_channels / std::gcd(8, m_bps));
   put_uint16_le(&wh.common.wBitsPerSample,   m_bps);
 
   m_out->setFilePointer(0);

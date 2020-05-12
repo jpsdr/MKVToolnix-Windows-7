@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <functional>
 #include <memory>
+#include <numeric>
 #include <optional>
 #include <regex>
 #include <stdexcept>
