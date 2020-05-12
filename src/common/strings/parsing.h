@@ -17,8 +17,6 @@
 
 #include <locale.h>
 
-#include <boost/lexical_cast.hpp>
-
 #include "common/math_fwd.h"
 #include "common/strings/editing.h"
 #include "common/timestamp.h"
@@ -28,15 +26,14 @@ namespace mtx::conversion {
 template <bool is_unsigned>
 struct unsigned_checker {
   template<typename StrT>
-  static inline void do_check(StrT const &) { }
+  static inline bool is_ok(StrT const &) { return true; }
 };
 
 template <>
 struct unsigned_checker<true> {
   template<typename StrT>
-  static inline void do_check(StrT const &str) {
-    if (str[0] == '-')
-      boost::throw_exception( boost::bad_lexical_cast{} );
+  static inline bool is_ok(StrT const &str) {
+    return str[0] != '-';
   }
 };
 
@@ -48,13 +45,14 @@ template<typename StrT, typename ValueT>
 bool
 parse_number(StrT const &string,
              ValueT &value) {
-  try {
-    mtx::conversion::unsigned_checker< std::is_unsigned<ValueT>::value >::do_check(string);
-    value = boost::lexical_cast<ValueT>(string);
-    return true;
-  } catch (boost::bad_lexical_cast &) {
+  if (!mtx::conversion::unsigned_checker< std::is_unsigned<ValueT>::value >::is_ok(string))
     return false;
-  }
+
+  std::istringstream in{string};
+
+  in >> std::noskipws >> value;
+
+  return !in.fail() && in.eof();
 }
 
 template<typename StrT>

@@ -37,8 +37,8 @@
   library will be used if found via `pkg-config`. If it is found, support for
   reading chapters from DVDs will be enabled in `mkvmerge` and the MKVToolNix
   GUI. Part of the implementation of #2808.
-* Boost's Date/Time, Range, Range Adaptors, Tri-Bool, Variant libraries are
-  not used anymore.
+* Boost's Date/Time, Lexical Cast, Range, Range Adaptors, Tri-Bool, Variant
+  libraries are not used anymore.
 * MKVToolNix now requires a C++ compiler & standard library that support the
   following features of the C++17 standard: "`std::variant`", "`std::gdc`".
   For the GNU Compiler Collection (gcc) this means v7 or newer; for clang it

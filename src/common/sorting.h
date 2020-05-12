@@ -15,8 +15,7 @@
 
 #include "common/common_pch.h"
 
-#include <boost/lexical_cast.hpp>
-
+#include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
 
 namespace mtx::sort {
@@ -57,20 +56,14 @@ template<typename StrT>
 class natural_element_c {
 private:
   StrT m_content;
-  uint64_t m_number;
-  bool m_is_numeric;
+  uint64_t m_number{};
+  bool m_is_numeric{};
 
 public:
   natural_element_c(StrT const &content)
     : m_content{content}
-    , m_number{0}
-    , m_is_numeric{false}
   {
-    try {
-      m_number     = boost::lexical_cast<uint64_t>(m_content);
-      m_is_numeric = true;
-    } catch (boost::bad_lexical_cast &){
-    }
+    m_is_numeric = parse_number(m_content, m_number);
   }
 
   bool

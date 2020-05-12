@@ -19,10 +19,6 @@ AX_BOOST_CHECK_HEADERS([boost/rational.hpp],,[
   AC_MSG_ERROR([Boost's rational library is required but wasn't found])
 ])
 
-AX_BOOST_CHECK_HEADERS([boost/lexical_cast.hpp],,[
-  AC_MSG_ERROR([Boost's lexical_cast library is required but wasn't found])
-])
-
 AX_BOOST_CHECK_HEADERS([boost/operators.hpp],,[
   AC_MSG_ERROR([Boost's Operators library is required but wasn't found])
 ])
