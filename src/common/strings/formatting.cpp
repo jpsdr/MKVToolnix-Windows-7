@@ -136,46 +136,6 @@ to_string(int64_t numerator,
   return output;
 }
 
-void
-fix_format(const char *fmt,
-           std::string &new_fmt) {
-#if defined(COMP_MINGW) || defined(COMP_MSC)
-  new_fmt    = "";
-  int len    = strlen(fmt);
-  bool state = false;
-  int i;
-
-  for (i = 0; i < len; i++) {
-    if (fmt[i] == '%') {
-      state = !state;
-      new_fmt += '%';
-
-    } else if (!state)
-      new_fmt += fmt[i];
-
-    else {
-      if (((i + 3) <= len) && (fmt[i] == 'l') && (fmt[i + 1] == 'l') &&
-          ((fmt[i + 2] == 'u') || (fmt[i + 2] == 'd'))) {
-        new_fmt += "I64";
-        new_fmt += fmt[i + 2];
-        i += 2;
-        state = false;
-
-      } else {
-        new_fmt += fmt[i];
-        if (isalpha(fmt[i]))
-          state = false;
-      }
-    }
-  }
-
-#else
-
-  new_fmt = fmt;
-
-#endif
-}
-
 std::wstring
 format_paragraph(const std::wstring &text_to_wrap,
                  int indent_column,

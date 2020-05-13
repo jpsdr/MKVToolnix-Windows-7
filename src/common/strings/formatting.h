@@ -62,8 +62,6 @@ std::wstring format_paragraph(const std::wstring &text_to_wrap,
                               int wrap_column                       = WRAP_AT_TERMINAL_WIDTH,
                               const std::wstring &break_chars       = L" ,.)/:");
 
-void fix_format(const char *fmt, std::string &new_fmt);
-
 inline std::string
 to_string(std::string const &value) {
   return value;
