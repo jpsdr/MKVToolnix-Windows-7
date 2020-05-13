@@ -15,11 +15,6 @@
 
 #include "common/common_pch.h"
 
-namespace mtx {
-
-std::string regex_escape(std::string const &s);
-
-}
 
 enum class line_ending_style_e {
   cr_lf,
