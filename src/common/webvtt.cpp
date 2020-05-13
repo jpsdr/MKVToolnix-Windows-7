@@ -41,7 +41,7 @@ webvtt_parser_c::~webvtt_parser_c() { // NOLINT(modernize-use-equals-default) du
 
 void
 webvtt_parser_c::add_line(std::string const &line) {
-  auto tmp = chomp(line);
+  auto tmp = mtx::string::chomp(line);
 
   if (tmp.empty())
     add_block();
@@ -52,7 +52,7 @@ webvtt_parser_c::add_line(std::string const &line) {
 
 void
 webvtt_parser_c::add_joined_lines(std::string const &joined_lines) {
-  auto lines = split(chomp(normalize_line_endings(joined_lines)), "\n");
+  auto lines = mtx::string::split(mtx::string::chomp(mtx::string::normalize_line_endings(joined_lines)), "\n");
 
   for (auto const &line : lines)
     add_line(line);
@@ -100,8 +100,8 @@ webvtt_parser_c::add_block() {
   m->parsing_global_data = false;
 
   timestamp_c start, end;
-  parse_timestamp(matches[1].str(), start);
-  parse_timestamp(matches[2].str(), end);
+  mtx::string::parse_timestamp(matches[1].str(), start);
+  mtx::string::parse_timestamp(matches[2].str(), end);
 
   auto content       = boost::join(std::make_pair(m->current_block.begin() + timestamp_line + 1, m->current_block.end()), "\n");;
   content            = adjust_embedded_timestamps(content, start.negate());
@@ -183,7 +183,7 @@ webvtt_parser_c::adjust_embedded_timestamps(std::string const &text,
 
   return mtx::regex::replace(text, *s_embedded_timestamp_re, [&offset](std::smatch const &match) -> std::string {
     timestamp_c timestamp;
-    parse_timestamp(match[1].str(), timestamp);
-    return fmt::format("<{0}>", format_timestamp(timestamp + offset, 3));
+    mtx::string::parse_timestamp(match[1].str(), timestamp);
+    return fmt::format("<{0}>", mtx::string::format_timestamp(timestamp + offset, 3));
   });
 }

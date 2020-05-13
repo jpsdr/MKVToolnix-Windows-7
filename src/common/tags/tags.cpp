@@ -367,7 +367,7 @@ remove_track_statistics(KaxTags *tags,
       if (simple_tag_name != "_STATISTICS_TAGS")
         continue;
 
-      auto all_to_discard = split(mtx::tags::get_simple_value(*simple_tag), std::regex{"\\s+"});
+      auto all_to_discard = mtx::string::split(mtx::tags::get_simple_value(*simple_tag), std::regex{"\\s+"});
       for (auto const &to_discard : all_to_discard)
         tags_to_discard.insert(to_discard);
     }

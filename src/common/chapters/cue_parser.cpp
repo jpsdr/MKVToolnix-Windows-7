@@ -87,11 +87,11 @@ cue_entries_to_name(std::string &performer,
       else if (*next_char == 't')
         name += title;
       else if (*next_char == 'n')
-        name += to_string(num);
+        name += mtx::string::to_string(num);
       else if (*next_char == 'N') {
         if (num < 10)
           name += '0';
-        name += to_string(num);
+        name += mtx::string::to_string(num);
       } else {
         name += *this_char;
         this_char--;
@@ -180,7 +180,7 @@ add_tag_for_cue_entry(cue_parser_args_t &a,
   GetChild<KaxTagTargetType>(targets).SetValue("track");
 
   create_tag1(a.title, "TITLE");
-  tag->PushElement(*create_simple_tag(a, "PART_NUMBER", to_string(a.num)));
+  tag->PushElement(*create_simple_tag(a, "PART_NUMBER", mtx::string::to_string(a.num)));
   create_tag2(a.performer, a.global_performer, "ARTIST");
   create_tag2(a.date, a.global_date, "DATE_RELEASED");
   create_tag2(a.genre, a.global_genre, "GENRE");
@@ -289,7 +289,7 @@ static std::string
 get_quoted(std::string src,
            int offset) {
   src.erase(0, offset);
-  strip(src);
+  mtx::string::strip(src);
 
   if (!src.empty() && (src[0] == '"'))
     src.erase(0, 1);
@@ -350,7 +350,7 @@ parse_cue(mm_text_io_c *in,
 
   while (in->getline2(line)) {
     a.line_num++;
-    strip(line);
+    mtx::string::strip(line);
 
     if ((line.empty()) || balg::istarts_with(line, "file "))
       continue;
@@ -374,7 +374,7 @@ parse_cue(mm_text_io_c *in,
       unsigned int index, min, sec, frames;
 
       line.erase(0, 6);
-      strip(line);
+      mtx::string::strip(line);
       if (sscanf(line.c_str(), "%u %u:%u:%u", &index, &min, &sec, &frames) < 4)
         mxerror(fmt::format(Y("Cue sheet parser: Invalid INDEX entry in line {0}.\n"), a.line_num));
 

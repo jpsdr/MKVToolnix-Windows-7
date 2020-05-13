@@ -145,7 +145,7 @@ attachment_target_c::parse_spec(command_e command,
     if (ac_replace == m_command)
       m_file_name   = matches[3].str();
     m_selector_type = matches[1].str() == "=" ? st_uid : st_id;
-    if (!parse_number(matches[2].str(), m_selector_num_arg))
+    if (!mtx::string::parse_number(matches[2].str(), m_selector_num_arg))
       throw std::invalid_argument{"ID/UID not a number"};
 
   } else {

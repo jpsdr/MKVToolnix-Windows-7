@@ -58,7 +58,7 @@ mpeg1_2_video_packetizer_c::~mpeg1_2_video_packetizer_c() {
 
 void
 mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(packet_cptr packet) {
-  mxdebug_if(m_debug_stuffing_removal, fmt::format("Starting stuff removal, frame size {0}, timestamp {1}\n", packet->data->get_size(), format_timestamp(packet->timestamp)));
+  mxdebug_if(m_debug_stuffing_removal, fmt::format("Starting stuff removal, frame size {0}, timestamp {1}\n", packet->data->get_size(), mtx::string::format_timestamp(packet->timestamp)));
 
   auto buf              = packet->data->get_buffer();
   auto size             = packet->data->get_size();

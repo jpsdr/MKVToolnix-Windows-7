@@ -53,11 +53,11 @@ srt_parser_c::probe(mm_text_io_c &io) {
     std::string s;
     do {
       s = io.getline(10);
-      strip(s);
+      mtx::string::strip(s);
     } while (s.empty());
 
     int64_t dummy;
-    if (!parse_number(s, dummy))
+    if (!mtx::string::parse_number(s, dummy))
       return false;
 
     s = io.getline(100);
@@ -109,7 +109,7 @@ srt_parser_c::parse() {
       break;
 
     line_number++;
-    strip_back(s);
+    mtx::string::strip_back(s);
 
     mxdebug_if(m_debug, fmt::format("line {0} state {1} content »{2}«\n", line_number, state == STATE_INITIAL ? "initial" : state == STATE_TIME ? "time" : state == STATE_SUBS ? "subs" : "subs-or-number", s));
 
@@ -131,7 +131,7 @@ srt_parser_c::parse() {
         break;
       }
       state = STATE_TIME;
-      parse_number(s, subtitle_number);
+      mtx::string::parse_number(s, subtitle_number);
 
     } else if (STATE_TIME == state) {
       std::smatch matches;
@@ -145,12 +145,12 @@ srt_parser_c::parse() {
       //        1         2       3      4        5     6                7     8
       // "\\s*(-?)\\s*(\\d+):\\s(-?)*(\\d+):\\s*(-?)(\\d+)(?:[,\\.]\\s*(-?)(\\d+))?"
 
-      parse_number(matches[ 2].str(), s_h);
-      parse_number(matches[ 4].str(), s_min);
-      parse_number(matches[ 6].str(), s_sec);
-      parse_number(matches[10].str(), e_h);
-      parse_number(matches[12].str(), e_min);
-      parse_number(matches[14].str(), e_sec);
+      mtx::string::parse_number(matches[ 2].str(), s_h);
+      mtx::string::parse_number(matches[ 4].str(), s_min);
+      mtx::string::parse_number(matches[ 6].str(), s_sec);
+      mtx::string::parse_number(matches[10].str(), e_h);
+      mtx::string::parse_number(matches[12].str(), e_min);
+      mtx::string::parse_number(matches[14].str(), e_sec);
 
       std::string s_rest = matches[ 8].str();
       std::string e_rest = matches[16].str();
@@ -175,7 +175,7 @@ srt_parser_c::parse() {
 
       // The previous entry is done now. Append it to the list of subtitles.
       if (!subtitles.empty()) {
-        strip_back(subtitles, true);
+        mtx::string::strip_back(subtitles, true);
         add(start, end, timestamp_number, subtitles.c_str());
       }
 
@@ -189,8 +189,8 @@ srt_parser_c::parse() {
       if (e_rest.length() > 9)
         e_rest.erase(9);
 
-      parse_number(s_rest, s_ns);
-      parse_number(e_rest, e_ns);
+      mtx::string::parse_number(s_rest, s_ns);
+      mtx::string::parse_number(e_rest, e_ns);
 
       // Calculate the start and end time in ns precision for the following entry.
       start  = ((s_h * 60 * 60 + s_min * 60 + s_sec) * 1'000'000'000ll + s_ns) * s_neg;
@@ -227,7 +227,7 @@ srt_parser_c::parse() {
 
     } else if (std::regex_match(s, number_re)) {
       state = STATE_TIME;
-      parse_number(s, subtitle_number);
+      mtx::string::parse_number(s, subtitle_number);
 
     } else {
       if (!subtitles.empty())
@@ -237,7 +237,7 @@ srt_parser_c::parse() {
   }
 
   if (!subtitles.empty()) {
-    strip_back(subtitles, true);
+    mtx::string::strip_back(subtitles, true);
     add(start, end, timestamp_number, subtitles.c_str());
   }
 
@@ -360,8 +360,8 @@ ssa_parser_c::parse() {
     } else if (SSA_SECTION_EVENTS == section) {
       if (balg::istarts_with(line, "Format: ")) {
         // Analyze the format string.
-        m_format = split(&line.c_str()[strlen("Format: ")]);
-        strip(m_format);
+        m_format = mtx::string::split(&line.c_str()[strlen("Format: ")]);
+        mtx::string::strip(m_format);
 
         // Let's see if "Actor" is used in the format instead of "Name".
         size_t i;
@@ -380,7 +380,7 @@ ssa_parser_c::parse() {
         line.erase(0, strlen("Dialogue: ")); // Trim the start.
 
         // Split the line into fields.
-        std::vector<std::string> fields = split(line.c_str(), ",", m_format.size());
+        std::vector<std::string> fields = mtx::string::split(line.c_str(), ",", m_format.size());
         while (fields.size() < m_format.size())
           fields.push_back(""s);
 
@@ -403,7 +403,7 @@ ssa_parser_c::parse() {
 
         std::string comma = ",";
         line
-          = to_string(num)                          + comma
+          = mtx::string::to_string(num)                          + comma
           + get_element("Layer", fields)            + comma
           + get_element("Style", fields)            + comma
           + get_element(name_field.c_str(), fields) + comma
@@ -424,11 +424,11 @@ ssa_parser_c::parse() {
         add_attachment_maybe(attachment_name, attachment_data_uu, section);
 
         line.erase(0, strlen("fontname:"));
-        strip(line, true);
+        mtx::string::strip(line, true);
         attachment_name = line;
 
       } else {
-        strip(line, true);
+        mtx::string::strip(line, true);
         attachment_data_uu += line;
       }
 
@@ -470,7 +470,7 @@ ssa_parser_c::parse_time(std::string &stime) {
     return -1;
 
   std::string s = stime.substr(0, pos);
-  if (!parse_number(s, th))
+  if (!mtx::string::parse_number(s, th))
     return -1;
   stime.erase(0, pos + 1);
 
@@ -479,7 +479,7 @@ ssa_parser_c::parse_time(std::string &stime) {
     return -1;
 
   s = stime.substr(0, pos);
-  if (!parse_number(s, tm))
+  if (!mtx::string::parse_number(s, tm))
     return -1;
   stime.erase(0, pos + 1);
 
@@ -488,11 +488,11 @@ ssa_parser_c::parse_time(std::string &stime) {
     return -1;
 
   s = stime.substr(0, pos);
-  if (!parse_number(s, ts))
+  if (!mtx::string::parse_number(s, ts))
     return -1;
   stime.erase(0, pos + 1);
 
-  if (!parse_number(stime, tds))
+  if (!mtx::string::parse_number(stime, tds))
     return -1;
 
   return (tds * 10 + ts * 1000 + tm * 60 * 1000 + th * 60 * 60 * 1000) * 1000000;

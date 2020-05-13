@@ -33,8 +33,8 @@ parse_split_parts(const std::string &arg,
     throw format_x{fmt::format(Y("Missing start/end specifications for '--split' in '--split {0}'.\n"), arg)};
 
   std::vector<std::tuple<int64_t, int64_t, bool> > requested_split_points;
-  for (auto const &part_spec : split(s, ",")) {
-    auto pair = split(part_spec, "-");
+  for (auto const &part_spec : mtx::string::split(s, ",")) {
+    auto pair = mtx::string::split(part_spec, "-");
     if (pair.size() != 2)
       throw format_x{fmt::format(Y("Invalid start/end specification for '--split' in '--split {0}' (current part: {1}).\n"), arg, part_spec)};
 
@@ -49,20 +49,20 @@ parse_split_parts(const std::string &arg,
     if (pair[0].empty())
       start = requested_split_points.empty() ? 0 : std::get<1>(requested_split_points.back());
 
-    else if (!frames_fields && !parse_timestamp(pair[0], start))
-      throw format_x{fmt::format(Y("Invalid start time for '--split' in '--split {0}' (current part: {1}). Additional error message: {2}.\n"), arg, part_spec, timestamp_parser_error)};
+    else if (!frames_fields && !mtx::string::parse_timestamp(pair[0], start))
+      throw format_x{fmt::format(Y("Invalid start time for '--split' in '--split {0}' (current part: {1}). Additional error message: {2}.\n"), arg, part_spec, mtx::string::timestamp_parser_error)};
 
-    else if (frames_fields && (!parse_number(pair[0], start) || (0 > start)))
+    else if (frames_fields && (!mtx::string::parse_number(pair[0], start) || (0 > start)))
       throw format_x{fmt::format(Y("Invalid start frame/field number for '--split' in '--split {0}' (current part: {1}).\n"), arg, part_spec)};
 
     int64_t end;
     if (pair[1].empty())
       end = std::numeric_limits<int64_t>::max();
 
-    else if (!frames_fields && !parse_timestamp(pair[1], end))
-      throw format_x{fmt::format(Y("Invalid end time for '--split' in '--split {0}' (current part: {1}). Additional error message: {2}.\n"), arg, part_spec, timestamp_parser_error)};
+    else if (!frames_fields && !mtx::string::parse_timestamp(pair[1], end))
+      throw format_x{fmt::format(Y("Invalid end time for '--split' in '--split {0}' (current part: {1}). Additional error message: {2}.\n"), arg, part_spec, mtx::string::timestamp_parser_error)};
 
-    else if (frames_fields && (!parse_number(pair[1], end) || (0 > end)))
+    else if (frames_fields && (!mtx::string::parse_number(pair[1], end) || (0 > end)))
       throw format_x{fmt::format(Y("Invalid end frame/field number for '--split' in '--split {0}' (current part: {1}).\n"), arg, part_spec)};
 
     if (end <= start) {

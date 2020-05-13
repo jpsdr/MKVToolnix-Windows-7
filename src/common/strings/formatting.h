@@ -21,6 +21,8 @@
 #include "common/strings/editing.h"
 #include "common/timestamp.h"
 
+namespace mtx::string {
+
 #define WRAP_AT_TERMINAL_WIDTH -1
 
 std::string format_timestamp(int64_t timestamp, unsigned int precision = 9);
@@ -44,23 +46,12 @@ format_timestamp(basic_timestamp_c<T> const &timestamp,
   return format_timestamp(timestamp.to_ns(), format);
 }
 
-template<typename T>
-std::ostream &
-operator <<(std::ostream &out,
-            basic_timestamp_c<T> const &timestamp) {
-  if (timestamp.valid())
-    out << format_timestamp(timestamp);
-  else
-    out << "<InvTC>";
-  return out;
-}
-
 std::string format_file_size(int64_t size);
 
-std::string format_paragraph(const std::string &text_to_wrap,
+std::string format_paragraph(std::string const &text_to_wrap,
                              int indent_column                    = 0,
-                             const std::string &indent_first_line = empty_string,
-                             std::string indent_following_lines   = empty_string,
+                             std::string const &indent_first_line = {},
+                             std::string indent_following_lines   = {},
                              int wrap_column                      = WRAP_AT_TERMINAL_WIDTH,
                              const char *break_chars              = " ,.)/:");
 
@@ -122,3 +113,13 @@ to_hex(libebml::EbmlBinary &bin,
 
 std::string create_minutes_seconds_time_string(unsigned int seconds, bool omit_minutes_if_zero = false);
 std::string elide_string(std::string s, unsigned int max_length = 60);
+
+} // mtx::string
+
+template<typename T>
+std::ostream &
+operator <<(std::ostream &out,
+            basic_timestamp_c<T> const &timestamp) {
+  out << mtx::string::format_timestamp(timestamp);
+  return out;
+}

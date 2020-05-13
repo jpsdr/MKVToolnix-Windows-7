@@ -60,8 +60,8 @@ parse_bdmt_xml(bfs::path const &file_name) {
       std::smatch matches;
 
       if (   std::regex_match(size, matches, size_re)
-          && parse_number(matches[1].str(), thumbnail.m_width)
-          && parse_number(matches[2].str(), thumbnail.m_height))
+          && mtx::string::parse_number(matches[1].str(), thumbnail.m_width)
+          && mtx::string::parse_number(matches[2].str(), thumbnail.m_height))
         ok = true;
 
       if (!ok) {

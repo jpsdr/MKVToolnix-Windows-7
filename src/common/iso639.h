@@ -24,5 +24,5 @@ extern std::vector<std::string> const g_popular_language_codes;
 
 int map_to_iso639_2_code(std::string const &s, bool allow_short_english_names = false);
 bool is_valid_iso639_2_code(std::string const &s);
-std::string const &map_iso639_2_to_iso639_1(std::string const &iso639_2_code);
+std::string map_iso639_2_to_iso639_1(std::string const &iso639_2_code);
 void list_iso639_languages();

@@ -360,10 +360,10 @@ qtmp4_reader_c::calculate_global_min_timestamp()
       global_min_timestamp = *dmx_min_timestamp;
     }
 
-    mxdebug_if(m_debug_headers, fmt::format("Minimum timestamp of track {0}: {1}\n", dmx->id, dmx_min_timestamp ? format_timestamp(*dmx_min_timestamp) : "none"));
+    mxdebug_if(m_debug_headers, fmt::format("Minimum timestamp of track {0}: {1}\n", dmx->id, dmx_min_timestamp ? mtx::string::format_timestamp(*dmx_min_timestamp) : "none"));
   }
 
-  mxdebug_if(m_debug_headers, fmt::format("Minimum global timestamp: {0}\n", global_min_timestamp ? format_timestamp(*global_min_timestamp) : "none"));
+  mxdebug_if(m_debug_headers, fmt::format("Minimum global timestamp: {0}\n", global_min_timestamp ? mtx::string::format_timestamp(*global_min_timestamp) : "none"));
 
   return global_min_timestamp;
 }
@@ -933,7 +933,7 @@ qtmp4_reader_c::handle_mvhd_atom(qt_atom_t atom,
   if ((duration != std::numeric_limits<uint32_t>::max()) && (m_time_scale != 0))
     m_duration = boost::rational_cast<uint64_t>(boost::rational<uint64_t>{duration, static_cast<uint64_t>(m_time_scale)} * 1'000'000'000ull);
 
-  mxdebug_if(m_debug_headers, fmt::format("{0}Time scale: {1} duration: {2}\n", space(level * 2 + 1), m_time_scale, m_duration ? format_timestamp(*m_duration) : "—"s));
+  mxdebug_if(m_debug_headers, fmt::format("{0}Time scale: {1} duration: {2}\n", space(level * 2 + 1), m_time_scale, m_duration ? mtx::string::format_timestamp(*m_duration) : "—"s));
 }
 
 void
@@ -1090,7 +1090,7 @@ qtmp4_reader_c::parse_itunsmpb(std::string data) {
     return;
 
   try {
-    m_audio_encoder_delay_samples = from_hex(data.substr(8, 8));
+    m_audio_encoder_delay_samples = mtx::string::from_hex(data.substr(8, 8));
   } catch (std::bad_cast &) {
   }
 }
@@ -1154,7 +1154,7 @@ qtmp4_reader_c::process_chapter_entries(int level,
   for (; entries.size() > i; ++i) {
     qtmp4_chapter_entry_t &chapter = entries[i];
 
-    mxdebug_if(m_debug_chapters, fmt::format("{0}{1}: start {3} name {2}\n", space((level + 1) * 2 + 1), i, chapter.m_name, format_timestamp(chapter.m_timestamp)));
+    mxdebug_if(m_debug_chapters, fmt::format("{0}{1}: start {3} name {2}\n", space((level + 1) * 2 + 1), i, chapter.m_name, mtx::string::format_timestamp(chapter.m_timestamp)));
 
     out.puts(fmt::format("CHAPTER{0:02}={1:02}:{2:02}:{3:02}.{4:03}\n"
                          "CHAPTER{0:02}NAME={5}\n",
@@ -2051,7 +2051,7 @@ void
 qtmp4_reader_c::recode_chapter_entries(std::vector<qtmp4_chapter_entry_t> &entries) {
   if (g_identifying) {
     for (auto &entry : entries)
-      entry.m_name = empty_string;
+      entry.m_name.clear();
     return;
   }
 
@@ -2124,7 +2124,7 @@ qtmp4_demuxer_c::calculate_frame_rate() {
 
     mxdebug_if(m_debug_frame_rate,
                fmt::format("calculate_frame_rate: case 2: video track with time scale {0} & duration {1} result: {2}\n",
-                           time_scale, global_duration, frame_rate ? format_timestamp(*m_use_frame_rate_for_duration) : "<invalid>"s));
+                           time_scale, global_duration, frame_rate ? mtx::string::format_timestamp(*m_use_frame_rate_for_duration) : "<invalid>"s));
 
     return;
   }
@@ -2264,7 +2264,7 @@ qtmp4_demuxer_c::calculate_timestamps() {
     auto end = std::min<std::size_t>(!m_debug_tables_full ? 20 : std::numeric_limits<std::size_t>::max(), timestamps.size());
 
     for (auto idx = 0u; idx < end; ++idx)
-      mxdebug(fmt::format("  {0}: pts {1}\n", idx, format_timestamp(timestamps[idx])));
+      mxdebug(fmt::format("  {0}: pts {1}\n", idx, mtx::string::format_timestamp(timestamps[idx])));
   }
 
   build_index();
@@ -2435,12 +2435,12 @@ qtmp4_demuxer_c::apply_edit_list() {
     ++entry_index;
 
     if ((edit.media_rate_integer == 0) && (edit.media_rate_fraction == 0)) {
-      mxdebug_if(m_debug_editlists, fmt::format("  {0}: dwell at timeline CTS {1}; such entries are not supported yet\n", info, format_timestamp(timeline_cts)));
+      mxdebug_if(m_debug_editlists, fmt::format("  {0}: dwell at timeline CTS {1}; such entries are not supported yet\n", info, mtx::string::format_timestamp(timeline_cts)));
       continue;
     }
 
     if ((edit.media_rate_integer != 1) || (edit.media_rate_fraction != 0)) {
-      mxdebug_if(m_debug_editlists, fmt::format("  {0}: slow down/speed up at timeline CTS {1}; such entries are not supported yet\n", info, format_timestamp(timeline_cts)));
+      mxdebug_if(m_debug_editlists, fmt::format("  {0}: slow down/speed up at timeline CTS {1}; such entries are not supported yet\n", info, mtx::string::format_timestamp(timeline_cts)));
       continue;
     }
 
@@ -2451,7 +2451,7 @@ qtmp4_demuxer_c::apply_edit_list() {
 
     if (edit.media_time == -1) {
       timeline_cts = to_nsecs(edit.segment_duration, global_time_scale);
-      mxdebug_if(m_debug_editlists, fmt::format("  {0}: empty edit (media_time == -1); track start offset {1}\n", info, format_timestamp(timeline_cts)));
+      mxdebug_if(m_debug_editlists, fmt::format("  {0}: empty edit (media_time == -1); track start offset {1}\n", info, mtx::string::format_timestamp(timeline_cts)));
       continue;
     }
 
@@ -2464,7 +2464,7 @@ qtmp4_demuxer_c::apply_edit_list() {
       timeline_cts          = to_nsecs(edit.media_time) * -1;
       edit.media_time       = 0;
       edit.segment_duration = 0;
-      mxdebug_if(m_debug_editlists, fmt::format("  {0}: single edit with positive media_time; track start offset {1}; change to non-edit to copy the rest\n", info, format_timestamp(timeline_cts)));
+      mxdebug_if(m_debug_editlists, fmt::format("  {0}: single edit with positive media_time; track start offset {1}; change to non-edit to copy the rest\n", info, mtx::string::format_timestamp(timeline_cts)));
 
     } else if (   (num_edits   == 2)
                && (entry_index == 2)
@@ -2473,7 +2473,7 @@ qtmp4_demuxer_c::apply_edit_list() {
                && ((timeline_cts - static_cast<int64_t>(*m_reader.m_duration)) >= timestamp_c::s(-60).to_ns())) {
       mxdebug_if(m_debug_editlists,
                  fmt::format("  {0}: edit list with two identical entries, each spanning the whole file; ignoring the second one; total duration: {1} timeline CTS {2}\n",
-                             info, format_timestamp(timeline_cts), format_timestamp(*m_reader.m_duration)));
+                             info, mtx::string::format_timestamp(timeline_cts), mtx::string::format_timestamp(*m_reader.m_duration)));
       continue;
     }
 
@@ -2487,7 +2487,7 @@ qtmp4_demuxer_c::apply_edit_list() {
 
     mxdebug_if(m_debug_editlists,
                fmt::format("  {0}: normal entry; first frame {1} edit CTS {2}–{3} at timeline CTS {4}\n",
-                           info, frame_idx >= num_index_entries ? -1 : frame_idx, format_timestamp(edit_start_cts), format_timestamp(edit_end_cts), format_timestamp(timeline_cts)));
+                           info, frame_idx >= num_index_entries ? -1 : frame_idx, mtx::string::format_timestamp(edit_start_cts), mtx::string::format_timestamp(edit_end_cts), mtx::string::format_timestamp(timeline_cts)));
 
     // Find active key frame.
     while ((itr != index_end) && (itr > index_begin) && !itr->is_keyframe) {
@@ -2520,7 +2520,7 @@ qtmp4_demuxer_c::dump_index_entries(std::string const &message)
 
   for (int idx = 0; idx < end; ++idx) {
     auto const &entry = m_index[idx];
-    mxdebug(fmt::format("  {0}: timestamp {1} duration {2} key? {3} file_pos {4} size {5}\n", idx, format_timestamp(entry.timestamp), format_timestamp(entry.duration), entry.is_keyframe, entry.file_pos, entry.size));
+    mxdebug(fmt::format("  {0}: timestamp {1} duration {2} key? {3} file_pos {4} size {5}\n", idx, mtx::string::format_timestamp(entry.timestamp), mtx::string::format_timestamp(entry.duration), entry.is_keyframe, entry.file_pos, entry.size));
   }
 
   if (m_debug_indexes_full)
@@ -2531,7 +2531,7 @@ qtmp4_demuxer_c::dump_index_entries(std::string const &message)
 
   for (int idx = start; idx < end; ++idx) {
     auto const &entry = m_index[idx];
-    mxdebug(fmt::format("  {0}: timestamp {1} duration {2} key? {3} file_pos {4} size {5}\n", idx, format_timestamp(entry.timestamp), format_timestamp(entry.duration), entry.is_keyframe, entry.file_pos, entry.size));
+    mxdebug(fmt::format("  {0}: timestamp {1} duration {2} key? {3} file_pos {4} size {5}\n", idx, mtx::string::format_timestamp(entry.timestamp), mtx::string::format_timestamp(entry.duration), entry.is_keyframe, entry.file_pos, entry.size));
   }
 }
 

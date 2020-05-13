@@ -119,11 +119,11 @@ QString
 AttachedFilePage::formatSize()
   const {
   if (m_newFileContent)
-    return QNY("%1 byte (%2)", "%1 bytes (%2)", m_newFileContent->get_size()).arg(m_newFileContent->get_size()).arg(Q(format_file_size(m_newFileContent->get_size())));
+    return QNY("%1 byte (%2)", "%1 bytes (%2)", m_newFileContent->get_size()).arg(m_newFileContent->get_size()).arg(Q(mtx::string::format_file_size(m_newFileContent->get_size())));
 
   auto content = FindChild<KaxFileData>(*m_attachment);
   if (content)
-    return QNY("%1 byte (%2)", "%1 bytes (%2)", content->GetSize()).arg(content->GetSize()).arg(Q(format_file_size(content->GetSize())));
+    return QNY("%1 byte (%2)", "%1 bytes (%2)", content->GetSize()).arg(content->GetSize()).arg(Q(mtx::string::format_file_size(content->GetSize())));
 
   return {};
 }

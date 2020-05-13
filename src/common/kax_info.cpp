@@ -339,10 +339,10 @@ kax_info_c::format_element_value_default(EbmlElement &e) {
     return fmt::format("0x{0:08x}", static_cast<EbmlCrc32 &>(e).GetCrc32());
 
   if (dynamic_cast<EbmlUInteger *>(&e))
-    return to_string(static_cast<EbmlUInteger &>(e).GetValue());
+    return mtx::string::to_string(static_cast<EbmlUInteger &>(e).GetValue());
 
   if (dynamic_cast<EbmlSInteger *>(&e))
-    return to_string(static_cast<EbmlSInteger &>(e).GetValue());
+    return mtx::string::to_string(static_cast<EbmlSInteger &>(e).GetValue());
 
   if (dynamic_cast<EbmlString *>(&e))
     return static_cast<EbmlString &>(e).GetValue();
@@ -360,7 +360,7 @@ kax_info_c::format_element_value_default(EbmlElement &e) {
     return {};
 
   if (dynamic_cast<EbmlFloat *>(&e))
-    return to_string(static_cast<EbmlFloat &>(e).GetValue());
+    return mtx::string::to_string(static_cast<EbmlFloat &>(e).GetValue());
 
   throw std::invalid_argument{"format_element_value: unsupported EbmlElement type"};
 }
@@ -453,7 +453,7 @@ kax_info_c::format_binary(EbmlBinary &bin,
                           std::size_t max_len) {
   auto len     = std::min(max_len, static_cast<std::size_t>(bin.GetSize()));
   auto const b = bin.GetBuffer();
-  auto result  = fmt::format(Y("length {0}, data: {1}"), bin.GetSize(), to_hex(b, len));
+  auto result  = fmt::format(Y("length {0}, data: {1}"), bin.GetSize(), mtx::string::to_hex(b, len));
 
   if (len < bin.GetSize())
     result += "...";
@@ -461,14 +461,14 @@ kax_info_c::format_binary(EbmlBinary &bin,
   if (p_func()->m_calc_checksums)
     result += fmt::format(Y(" (adler: 0x{0:08x})"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, bin.GetBuffer(), bin.GetSize()));
 
-  strip(result);
+  mtx::string::strip(result);
 
   return result;
 }
 
 std::string
 kax_info_c::format_binary_as_hex(EbmlElement &e) {
-  return to_hex(static_cast<EbmlBinary &>(e));
+  return mtx::string::to_hex(static_cast<EbmlBinary &>(e));
 }
 
 std::string
@@ -480,22 +480,22 @@ kax_info_c::format_element_size(EbmlElement &e) {
 
 std::string
 kax_info_c::format_unsigned_integer_as_timestamp(EbmlElement &e) {
-  return format_timestamp(static_cast<EbmlUInteger &>(e).GetValue());
+  return mtx::string::format_timestamp(static_cast<EbmlUInteger &>(e).GetValue());
 }
 
 std::string
 kax_info_c::format_unsigned_integer_as_scaled_timestamp(EbmlElement &e) {
-  return format_timestamp(p_func()->m_ts_scale * static_cast<EbmlUInteger &>(e).GetValue());
+  return mtx::string::format_timestamp(p_func()->m_ts_scale * static_cast<EbmlUInteger &>(e).GetValue());
 }
 
 std::string
 kax_info_c::format_signed_integer_as_timestamp(EbmlElement &e) {
-  return format_timestamp(static_cast<EbmlSInteger &>(e).GetValue());
+  return mtx::string::format_timestamp(static_cast<EbmlSInteger &>(e).GetValue());
 }
 
 std::string
 kax_info_c::format_signed_integer_as_scaled_timestamp(EbmlElement &e) {
-  return format_timestamp(p_func()->m_ts_scale * static_cast<EbmlSInteger &>(e).GetValue());
+  return mtx::string::format_timestamp(p_func()->m_ts_scale * static_cast<EbmlSInteger &>(e).GetValue());
 }
 
 #define PRE(  Class, Processor) p->m_custom_element_pre_processors.insert(  { Class::ClassInfos.GlobalId.GetValue(), Processor });
@@ -666,7 +666,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   FMTM(KaxBlockDuration,    format_unsigned_integer_as_scaled_timestamp);
   FMTM(KaxReferenceBlock,   format_signed_integer_as_scaled_timestamp);
 
-  FMT(KaxDuration,          [p](EbmlElement &e) { return format_timestamp(static_cast<int64_t>(static_cast<EbmlFloat &>(e).GetValue() * p->m_ts_scale)); });
+  FMT(KaxDuration,          [p](EbmlElement &e) { return mtx::string::format_timestamp(static_cast<int64_t>(static_cast<EbmlFloat &>(e).GetValue() * p->m_ts_scale)); });
 
   // More complex formatters:
   FMT(KaxSeekID, [](EbmlElement &e) -> std::string {
@@ -674,7 +674,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     EbmlId id(seek_id.GetBuffer(), seek_id.GetSize());
 
     return fmt::format("{0} ({1})",
-                       to_hex(seek_id),
+                       mtx::string::to_hex(seek_id),
                          Is<KaxInfo>(id)        ? "KaxInfo"
                        : Is<KaxCluster>(id)     ? "KaxCluster"
                        : Is<KaxTracks>(id)      ? "KaxTracks"
@@ -822,7 +822,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   FMT(KaxTrackDefaultDuration, [](EbmlElement &e) -> std::string {
     auto default_duration = static_cast<KaxTrackDefaultDuration &>(e).GetValue();
     return fmt::format(Y("{0} ({1:.3f} frames/fields per second for a video track)"),
-                       format_timestamp(default_duration),
+                       mtx::string::format_timestamp(default_duration),
                        1'000'000'000.0 / static_cast<double>(default_duration));
   });
 }
@@ -855,7 +855,7 @@ kax_info_c::format_block(EbmlElement &e) {
 
   auto &block = static_cast<KaxBlock &>(e);
 
-  return fmt::format(Y("track number {0}, {1} frame(s), timestamp {2}"), block.TrackNum(), block.NumberFrames(), format_timestamp(p->m_lf_timestamp));
+  return fmt::format(Y("track number {0}, {1} frame(s), timestamp {2}"), block.TrackNum(), block.NumberFrames(), mtx::string::format_timestamp(p->m_lf_timestamp));
 }
 
 void
@@ -928,8 +928,8 @@ kax_info_c::post_block_group(EbmlElement &e) {
         p->m_out->puts(fmt::format(Y("{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"),
                                    (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I'),
                                    p->m_lf_tnum,
-                                   format_timestamp(p->m_lf_timestamp),
-                                   format_timestamp(*p->m_block_duration),
+                                   mtx::string::format_timestamp(p->m_lf_timestamp),
+                                   mtx::string::format_timestamp(*p->m_block_duration),
                                    p->m_frame_sizes[fidx],
                                    p->m_frame_adlers[fidx],
                                    p->m_frame_hexdumps[fidx],
@@ -938,7 +938,7 @@ kax_info_c::post_block_group(EbmlElement &e) {
         p->m_out->puts(fmt::format(Y("{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"),
                                    (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I'),
                                    p->m_lf_tnum,
-                                   format_timestamp(p->m_lf_timestamp),
+                                   mtx::string::format_timestamp(p->m_lf_timestamp),
                                    p->m_frame_sizes[fidx],
                                    p->m_frame_adlers[fidx],
                                    p->m_frame_hexdumps[fidx],
@@ -994,7 +994,7 @@ kax_info_c::format_simple_block(EbmlElement &e) {
                      info,
                      block.TrackNum(),
                      block.NumberFrames(),
-                     format_timestamp(timestamp_ns));
+                     mtx::string::format_timestamp(timestamp_ns));
 }
 
 void
@@ -1047,7 +1047,7 @@ kax_info_c::post_simple_block(EbmlElement &e) {
       p->m_out->puts(fmt::format(Y("{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}\n"),
                                  (block.IsKeyframe() ? 'I' : block.IsDiscardable() ? 'B' : 'P'),
                                  block.TrackNum(),
-                                 format_timestamp(timestamp_ns),
+                                 mtx::string::format_timestamp(timestamp_ns),
                                  p->m_frame_sizes[idx],
                                  p->m_frame_adlers[idx],
                                  position));

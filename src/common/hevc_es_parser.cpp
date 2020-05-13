@@ -779,10 +779,10 @@ es_parser_c::calculate_provided_timestamps_to_use() {
                            return str + fmt::format("    pos {0} size {1} key? {2}\n", frame.m_position, frame.m_data->get_size(), frame.m_keyframe);
                          }),
                          std::accumulate(m_provided_timestamps.begin(), m_provided_timestamps.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
-                           return str + fmt::format("    pos {0} timestamp {1}\n", provided_timestamp.second, format_timestamp(provided_timestamp.first));
+                           return str + fmt::format("    pos {0} timestamp {1}\n", provided_timestamp.second, mtx::string::format_timestamp(provided_timestamp.first));
                          }),
                          std::accumulate(provided_timestamps_to_use.begin(), provided_timestamps_to_use.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
-                           return str + fmt::format("    timestamp {0}\n", format_timestamp(provided_timestamp));
+                           return str + fmt::format("    timestamp {0}\n", mtx::string::format_timestamp(provided_timestamp));
                          })));
 
   m_provided_timestamps.erase(m_provided_timestamps.begin(), m_provided_timestamps.begin() + provided_timestamps_idx);
@@ -969,9 +969,9 @@ es_parser_c::dump_info()
     mxinfo(fmt::format("size {0} key {1} start {2} end {3} ref1 {4} adler32 0x{5:08x}\n",
                        frame.m_data->get_size(),
                        frame.m_keyframe,
-                       format_timestamp(frame.m_start),
-                       format_timestamp(frame.m_end),
-                       format_timestamp(frame.m_ref1),
+                       mtx::string::format_timestamp(frame.m_start),
+                       mtx::string::format_timestamp(frame.m_end),
+                       mtx::string::format_timestamp(frame.m_ref1),
                        mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *frame.m_data)));
   }
 }

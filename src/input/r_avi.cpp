@@ -204,7 +204,7 @@ avi_reader_c::create_video_packetizer() {
     mxverb(4, fmt::format("track extra data size: {0}\n", m_ti.m_private_data->get_size() - sizeof(alBITMAPINFOHEADER)));
 
     if (sizeof(alBITMAPINFOHEADER) < m_ti.m_private_data->get_size())
-      mxverb(4, fmt::format("  {0}\n", to_hex(m_ti.m_private_data->get_buffer() + sizeof(alBITMAPINFOHEADER), m_ti.m_private_data->get_size() - sizeof(alBITMAPINFOHEADER))));
+      mxverb(4, fmt::format("  {0}\n", mtx::string::to_hex(m_ti.m_private_data->get_buffer() + sizeof(alBITMAPINFOHEADER), m_ti.m_private_data->get_size() - sizeof(alBITMAPINFOHEADER))));
   }
 
   const char *codec = AVI_video_compressor(m_avi);

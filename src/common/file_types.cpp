@@ -117,7 +117,7 @@ std::set<file_type_e>
 file_type_t::by_extension(const std::string& p_ext) {
   std::set<file_type_e> res;
   for (auto &type : get_supported()) {
-    for (auto const &ext : split(type.extensions, " ")) {
+    for (auto const &ext : mtx::string::split(type.extensions, " ")) {
       if (ext == p_ext) {
         res.insert(type.id);
       }

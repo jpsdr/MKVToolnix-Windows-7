@@ -45,7 +45,7 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->setupUi(this);
 
   m_ui->sbFirstChapterNumber->setValue(firstChapterNumber);
-  m_ui->leStartTimestamp->setText(Q(format_timestamp(startTimestamp)));
+  m_ui->leStartTimestamp->setText(Q(mtx::string::format_timestamp(startTimestamp)));
   m_ui->leNameTemplate->setText(cfg.m_chapterNameTemplate);
 
   m_ui->cbLanguage->setAdditionalItems(additionalLanguages).setup().setCurrentByData(cfg.m_defaultChapterLanguage);
@@ -91,7 +91,7 @@ uint64_t
 GenerateSubChaptersParametersDialog::startTimestamp()
   const {
   int64_t timestamp = 0;
-  parse_timestamp(to_utf8(m_ui->leStartTimestamp->text()), timestamp);
+  mtx::string::parse_timestamp(to_utf8(m_ui->leStartTimestamp->text()), timestamp);
 
   return timestamp;
 }
@@ -118,7 +118,7 @@ GenerateSubChaptersParametersDialog::country()
 void
 GenerateSubChaptersParametersDialog::verifyStartTimestamp() {
   int64_t dummy = 0;
-  Util::buttonForRole(m_ui->buttonBox)->setEnabled(parse_timestamp(to_utf8(m_ui->leStartTimestamp->text()), dummy));
+  Util::buttonForRole(m_ui->buttonBox)->setEnabled(mtx::string::parse_timestamp(to_utf8(m_ui->leStartTimestamp->text()), dummy));
 }
 
 }

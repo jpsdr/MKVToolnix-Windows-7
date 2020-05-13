@@ -17,6 +17,8 @@
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 
+namespace mtx::string {
+
 std::string timestamp_parser_error;
 
 inline bool
@@ -191,7 +193,7 @@ parse_timestamp(const std::string &src,
                 timestamp_c &timestamp,
                 bool allow_negative) {
   int64_t tmp{};
-  if (!parse_timestamp(src, tmp, allow_negative))
+  if (!mtx::string::parse_timestamp(src, tmp, allow_negative))
     return false;
 
   timestamp = timestamp_c::ns(tmp);
@@ -318,3 +320,5 @@ from_hex(const std::string &data) {
 
   return value;
 }
+
+} // mtx::string

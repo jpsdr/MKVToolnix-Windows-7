@@ -324,7 +324,7 @@ FileIdentifier::cacheKey()
   auto p        = p_func();
   auto fileName = to_utf8(QDir::toNativeSeparators(p->m_fileName));
 
-  return Q(to_hex(mtx::checksum::calculate(mtx::checksum::algorithm_e::md5, &fileName[0], fileName.length()), true));
+  return Q(mtx::string::to_hex(mtx::checksum::calculate(mtx::checksum::algorithm_e::md5, &fileName[0], fileName.length()), true));
 }
 
 QHash<QString, QVariant>

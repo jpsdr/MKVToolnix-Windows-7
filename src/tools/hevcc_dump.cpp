@@ -126,11 +126,11 @@ parse_args(std::vector<std::string> &args) {
       mxerror("Superfluous arguments given.\n");
 
     else if (!file_pos) {
-      if (!parse_number(arg, file_pos))
+      if (!mtx::string::parse_number(arg, file_pos))
         mxerror("The file position is not a valid number.\n");
 
     } else if (!size) {
-      if (!parse_number(arg, size))
+      if (!mtx::string::parse_number(arg, size))
         mxerror("The size is not a valid number.\n");
     }
   }

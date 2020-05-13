@@ -626,10 +626,10 @@ list_iso639_languages() {
   }
 }
 
-std::string const &
+std::string
 map_iso639_2_to_iso639_1(std::string const &iso639_2_code) {
   auto lang = std::find_if(g_iso639_languages.begin(), g_iso639_languages.end(), [&iso639_2_code](auto const &lang) { return lang.iso639_2_code == iso639_2_code; });
-  return (lang != g_iso639_languages.end()) ? lang->iso639_1_code : empty_string;
+  return (lang != g_iso639_languages.end()) ? lang->iso639_1_code : std::string{};
 }
 
 /** \brief Map a string to a ISO 639-2 language code
@@ -661,9 +661,9 @@ map_to_iso639_2_code(std::string const &s,
   for (int index = 0, num_languages = g_iso639_languages.size(); index < num_languages; ++index) {
     auto const &english_name = g_iso639_languages[index].english_name;
     auto s_lower             = balg::to_lower_copy(s);
-    auto names               = split(english_name, ";");
+    auto names               = mtx::string::split(english_name, ";");
 
-    strip(names);
+    mtx::string::strip(names);
 
     for (auto const &name : names)
       if (balg::to_lower_copy(name) == s_lower)
@@ -675,9 +675,9 @@ map_to_iso639_2_code(std::string const &s,
 
   for (int index = 0, num_languages = g_iso639_languages.size(); index < num_languages; ++index) {
     auto const &english_name = g_iso639_languages[index].english_name;
-    auto names               = split(english_name, ";");
+    auto names               = mtx::string::split(english_name, ";");
 
-    strip(names);
+    mtx::string::strip(names);
 
     if (names.end() != std::find_if(names.begin(), names.end(), [&source](auto const &name) { return balg::istarts_with(name, source); }))
       return index;

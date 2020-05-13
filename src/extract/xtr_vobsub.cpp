@@ -112,7 +112,7 @@ xtr_vobsub_c::fix_spu_duration(memory_c &buffer,
   if (diff >= timestamp_c::ms(1)) {
     mxdebug_if(debug,
                fmt::format("vobsub: setting SPU duration to {0} (existing duration: {1}, difference: {2})\n",
-                           format_timestamp(duration), format_timestamp(current_duration.to_ns(0)), format_timestamp(diff)));
+                           mtx::string::format_timestamp(duration), mtx::string::format_timestamp(current_duration.to_ns(0)), mtx::string::format_timestamp(diff)));
     mtx::spu::set_duration(buffer.get_buffer(), buffer.get_size(), duration);
   }
 }
@@ -241,7 +241,7 @@ xtr_vobsub_c::finish_file() {
       --size;
 
     auto header = std::string{ buffer, size };
-    strip(header, true);
+    mtx::string::strip(header, true);
 
     if (!balg::istarts_with(header, header_line))
       idx.puts(header_line);

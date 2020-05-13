@@ -1383,7 +1383,7 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
     } else
       mxwarn_tid(m_ti.m_fname, m_ti.m_id,
                  fmt::format("generic_packetizer_c::add_packet2: timestamp < last_timestamp ({0} < {1}). {2}\n",
-                             format_timestamp(pack->timestamp), format_timestamp(m_safety_last_timestamp), BUGMSG));
+                             mtx::string::format_timestamp(pack->timestamp), mtx::string::format_timestamp(m_safety_last_timestamp), BUGMSG));
   }
 
   m_safety_last_timestamp        = pack->timestamp;
@@ -1560,7 +1560,7 @@ generic_packetizer_c::force_duration_on_last_packet() {
   packet_cptr &packet        = m_packet_queue.back();
   packet->duration_mandatory = true;
   mxverb_tid(3, m_ti.m_fname, m_ti.m_id,
-             fmt::format("force_duration_on_last_packet: forcing at {0} with {1:.3f}ms\n", format_timestamp(packet->timestamp), packet->duration / 1000.0));
+             fmt::format("force_duration_on_last_packet: forcing at {0} with {1:.3f}ms\n", mtx::string::format_timestamp(packet->timestamp), packet->duration / 1000.0));
 }
 
 int64_t

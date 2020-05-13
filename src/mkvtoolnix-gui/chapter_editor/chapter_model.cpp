@@ -114,8 +114,8 @@ ChapterModel::setChapterRowText(QList<QStandardItem *> const &rowItems) {
   rowItems[1]->setData(static_cast<qulonglong>(kStart ? kStart->GetValue() : 0), QStandardItemModel::sortRole());
 
   rowItems[0]->setText(chapterDisplayName(*chapter));
-  rowItems[1]->setText(kStart ? Q(format_timestamp(kStart->GetValue(), 9)) : Q(""));
-  rowItems[2]->setText(kEnd   ? Q(format_timestamp(kEnd->GetValue(),   9)) : Q(""));
+  rowItems[1]->setText(kStart ? Q(mtx::string::format_timestamp(kStart->GetValue(), 9)) : Q(""));
+  rowItems[2]->setText(kEnd   ? Q(mtx::string::format_timestamp(kEnd->GetValue(),   9)) : Q(""));
   rowItems[3]->setText(flags.join(Q(", ")));
 }
 

@@ -70,7 +70,7 @@ tag_target_c::validate() {
 void
 tag_target_c::parse_tags_spec(const std::string &spec) {
   m_spec                         = spec;
-  std::vector<std::string> parts = split(spec, ":", 2);
+  auto parts = mtx::string::split(spec, ":", 2);
 
   if (2 != parts.size())
     throw std::runtime_error("missing file name");
@@ -85,7 +85,7 @@ tag_target_c::parse_tags_spec(const std::string &spec) {
 
   else if (parts[0] == "track") {
     m_operation_mode = tom_track;
-    parts                = split(parts[1], ":", 2);
+    parts                = mtx::string::split(parts[1], ":", 2);
     parse_spec(balg::to_lower_copy(parts[0]));
 
   } else

@@ -64,7 +64,7 @@ main(int argc,
 
   maxlen = 72;
   if ((argc == 5) && (mode == 'e')) {
-    if (!parse_number(argv[4], maxlen) || (maxlen < 4))
+    if (!mtx::string::parse_number(argv[4], maxlen) || (maxlen < 4))
       mxerror(Y("Max line length must be >= 4.\n\n"));
   } else if ((argc > 5) || ((argc > 4) && (mode == 'd')))
     mtx::cli::display_usage(2);
@@ -104,7 +104,7 @@ main(int argc,
   } else {
 
     while (intext->getline2(line)) {
-      strip(line);
+      mtx::string::strip(line);
       s += line;
     }
 

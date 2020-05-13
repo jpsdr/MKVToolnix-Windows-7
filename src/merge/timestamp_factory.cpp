@@ -43,7 +43,7 @@ timestamp_factory_c::create(std::string const &file_name,
     std::smatch matches;
 
     if (std::regex_search(line, matches, format_line_re))
-      ok = parse_number(matches[1].str(), version);
+      ok = mtx::string::parse_number(matches[1].str(), version);
     else
       ok = false;
   }
@@ -88,7 +88,7 @@ timestamp_factory_v1_c::parse(mm_io_c &in) {
     if (!in.getline2(line))
       mxerror(fmt::format(Y("The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"), m_file_name));
     line_no++;
-    strip(line);
+    mtx::string::strip(line);
     if (!line.empty() && ('#' != line[0]))
       break;
   } while (true);
@@ -97,22 +97,22 @@ timestamp_factory_v1_c::parse(mm_io_c &in) {
     mxerror(fmt::format(Y("The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"), m_file_name));
 
   line.erase(0, 6);
-  strip(line);
+  mtx::string::strip(line);
 
-  if (!parse_number(line.c_str(), m_default_fps))
+  if (!mtx::string::parse_number(line.c_str(), m_default_fps))
     mxerror(fmt::format(Y("The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"), m_file_name));
 
   while (in.getline2(line)) {
     line_no++;
-    strip(line, true);
+    mtx::string::strip(line, true);
     if (line.empty() || ('#' == line[0]))
       continue;
 
-    std::vector<std::string> parts = split(line, ",", 3);
+    auto parts = mtx::string::split(line, ",", 3);
     if (   (parts.size() != 3)
-        || !parse_number(parts[0], t.start_frame)
-        || !parse_number(parts[1], t.end_frame)
-        || !parse_number(parts[2], t.fps)) {
+        || !mtx::string::parse_number(parts[0], t.start_frame)
+        || !mtx::string::parse_number(parts[1], t.end_frame)
+        || !mtx::string::parse_number(parts[2], t.fps)) {
       mxwarn(fmt::format(Y("Line {0} of the timestamp file '{1}' could not be parsed.\n"), line_no, m_file_name));
       continue;
     }
@@ -206,12 +206,12 @@ timestamp_factory_v2_c::parse(mm_io_c &in) {
 
   while (in.getline2(line)) {
     line_no++;
-    strip(line);
+    mtx::string::strip(line);
     if ((line.length() == 0) || (line[0] == '#'))
       continue;
 
     double timestamp;
-    if (!parse_number(line.c_str(), timestamp))
+    if (!mtx::string::parse_number(line.c_str(), timestamp))
       mxerror(fmt::format(Y("The line {0} of the timestamp file '{1}' does not contain a valid floating point number.\n"), line_no, m_file_name));
 
     if ((2 == m_version) && (timestamp < previous_timestamp))
@@ -307,7 +307,7 @@ timestamp_factory_v3_c::parse(mm_io_c &in) {
     if (!in.getline2(line))
       mxerror(err_msg_assume);
     line_no++;
-    strip(line);
+    mtx::string::strip(line);
     if ((line.length() != 0) && (line[0] != '#'))
       break;
   } while (true);
@@ -315,37 +315,37 @@ timestamp_factory_v3_c::parse(mm_io_c &in) {
   if (!balg::istarts_with(line, "assume "))
     mxerror(err_msg_assume);
   line.erase(0, 6);
-  strip(line);
+  mtx::string::strip(line);
 
-  if (!parse_number(line.c_str(), m_default_fps))
+  if (!mtx::string::parse_number(line.c_str(), m_default_fps))
     mxerror(err_msg_assume);
 
   while (in.getline2(line)) {
     line_no++;
-    strip(line, true);
+    mtx::string::strip(line, true);
     if ((line.length() == 0) || (line[0] == '#'))
       continue;
 
     double dur;
     if (balg::istarts_with(line, "gap,")) {
       line.erase(0, 4);
-      strip(line);
+      mtx::string::strip(line);
 
       t.is_gap = true;
       t.fps    = m_default_fps;
 
-      if (!parse_number(line.c_str(), dur))
+      if (!mtx::string::parse_number(line.c_str(), dur))
         mxerror(fmt::format(Y("The timestamp file '{0}' does not contain a valid 'Gap' line with the duration of the gap.\n"), m_file_name));
       t.duration = (int64_t)(1000000000.0 * dur);
 
     } else {
       t.is_gap = false;
-      std::vector<std::string> parts = split(line, ",");
+      auto parts = mtx::string::split(line, ",");
 
-      if ((1 == parts.size()) && parse_number(parts[0], dur))
+      if ((1 == parts.size()) && mtx::string::parse_number(parts[0], dur))
         t.fps = m_default_fps;
 
-      else if ((2 != parts.size()) || !parse_number(parts[1], t.fps)) {
+      else if ((2 != parts.size()) || !mtx::string::parse_number(parts[1], t.fps)) {
         mxwarn(fmt::format(Y("Line {0} of the timestamp file '{1}' could not be parsed.\n"), line_no, m_file_name));
         continue;
       }

@@ -259,7 +259,7 @@ Tab::updateOneRemainingTimeLabel(QLabel *label,
   else {
     auto totalDuration     = elapsedDuration * 100 / progress;
     auto remainingDuration = totalDuration - elapsedDuration;
-    label->setText(Q(create_minutes_seconds_time_string(remainingDuration / 1000)));
+    label->setText(Q(mtx::string::create_minutes_seconds_time_string(remainingDuration / 1000)));
   }
 }
 

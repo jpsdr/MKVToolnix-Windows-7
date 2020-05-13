@@ -85,7 +85,7 @@ parse_file(const std::string &file_name) {
 
     auto adler32 = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *segment_data);
 
-    mxinfo(fmt::format("segment at {0:9d} size {1:5d} timestamp {2} checksum 0x{3:08x} type {4:3d} ({5})\n", position, segment_size, format_timestamp(timestamp), adler32, type, mtx::hdmv_pgs::name_for_type(type)));
+    mxinfo(fmt::format("segment at {0:9d} size {1:5d} timestamp {2} checksum 0x{3:08x} type {4:3d} ({5})\n", position, segment_size, mtx::string::format_timestamp(timestamp), adler32, type, mtx::hdmv_pgs::name_for_type(type)));
   }
 }
 

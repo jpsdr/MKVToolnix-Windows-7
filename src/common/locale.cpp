@@ -266,7 +266,7 @@ windows_charset_converter_c::extract_code_page(const std::string &charset) {
 
   std::string number_as_str = charset.substr(2, charset.length() - 2);
   uint64_t number           = 0;
-  if (!parse_number(number_as_str.c_str(), number))
+  if (!mtx::string::parse_number(number_as_str.c_str(), number))
     return 0;
 
   return number;
@@ -282,12 +282,12 @@ get_local_charset() {
 
   setlocale(LC_CTYPE, "");
 #if defined(COMP_MINGW) || defined(COMP_MSC)
-  lc_charset = "CP" + to_string(GetACP());
+  lc_charset = "CP" + mtx::string::to_string(GetACP());
 #elif defined(SYS_SOLARIS)
   int i;
 
   lc_charset = nl_langinfo(CODESET);
-  if (parse_number(lc_charset, i))
+  if (mtx::string::parse_number(lc_charset, i))
     lc_charset = "ISO"s + lc_charset + "-US"s;
 #elif HAVE_NL_LANGINFO
   lc_charset = nl_langinfo(CODESET);
@@ -302,8 +302,8 @@ std::string
 get_local_console_charset() {
 #if defined(SYS_WINDOWS)
   if (mtx::sys::get_windows_version() >= WINDOWS_VERSION_VISTA)
-    return "CP"s + to_string(GetACP());
-  return "CP"s + to_string(GetOEMCP());
+    return "CP"s + mtx::string::to_string(GetACP());
+  return "CP"s + mtx::string::to_string(GetOEMCP());
 #else
   return get_local_charset();
 #endif

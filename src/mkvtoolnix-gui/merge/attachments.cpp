@@ -218,7 +218,7 @@ Tab::prepareFileForAttaching(QString const &fileName,
     Util::MessageBox::critical(this)
       ->title(QY("Reading failed"))
       .text(Q("%1 %2")
-            .arg(QY("The file (%1) is too big (%2).").arg(fileName).arg(Q(format_file_size(info.size()))))
+            .arg(QY("The file (%1) is too big (%2).").arg(fileName).arg(Q(mtx::string::format_file_size(info.size()))))
             .arg(QY("Only files smaller than 2 GiB are supported.")))
       .exec();
     return {};

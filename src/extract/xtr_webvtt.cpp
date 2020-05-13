@@ -39,7 +39,7 @@ xtr_webvtt_c::create_file(xtr_base_c *master,
 
   m_out->write_bom("UTF-8");
 
-  auto global = chomp(normalize_line_endings(decode_codec_private(priv)->to_string())) + "\n";
+  auto global = mtx::string::chomp(mtx::string::normalize_line_endings(decode_codec_private(priv)->to_string())) + "\n";
   m_out->write(global);
 }
 
@@ -60,24 +60,24 @@ xtr_webvtt_c::handle_frame(xtr_frame_t &f) {
 
     if (block_addition) {
       auto content = std::string{reinterpret_cast<char const *>(block_addition->GetBuffer()), static_cast<std::string::size_type>(block_addition->GetSize())};
-      auto lines   = split(chomp(normalize_line_endings(content)), "\n", 3);
+      auto lines   = mtx::string::split(mtx::string::chomp(mtx::string::normalize_line_endings(content)), "\n", 3);
 
       if ((lines.size() > 0) && !lines[0].empty())
-        settings_list = " "s + boost::trim_copy(lines[0]);
+        settings_list = " "s + mtx::string::strip_copy(lines[0]);
 
       if ((lines.size() > 1) && !lines[1].empty())
-        label = boost::trim_copy(lines[1]) + "\n";
+        label = mtx::string::strip_copy(lines[1]) + "\n";
 
       if ((lines.size() > 2) && !lines[2].empty())
-        local_blocks = chomp(lines[2]) + "\n\n";
+        local_blocks = mtx::string::chomp(lines[2]) + "\n\n";
     }
   }
 
-  auto content = chomp(normalize_line_endings(f.frame->to_string())) + "\n";
+  auto content = mtx::string::chomp(mtx::string::normalize_line_endings(f.frame->to_string())) + "\n";
   content      = webvtt_parser_c::adjust_embedded_timestamps(content, timestamp_c::ns(f.timestamp));
   content      = fmt::format("\n{0}{1}{2} --> {3}{4}\n{5}",
                              local_blocks, label,
-                             format_timestamp(f.timestamp, 3), format_timestamp(f.timestamp + f.duration, 3),
+                             mtx::string::format_timestamp(f.timestamp, 3), mtx::string::format_timestamp(f.timestamp + f.duration, 3),
                              settings_list, content);
 
   m_out->write(content);

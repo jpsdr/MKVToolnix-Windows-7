@@ -208,7 +208,7 @@ track_target_c::parse_spec(std::string const &spec) {
     throw false;
 
   std::string prefix = matches[1].str();
-  parse_number(matches[2].str(), m_selection_param);
+  mtx::string::parse_number(matches[2].str(), m_selection_param);
 
   m_selection_mode = prefix.empty() ? sm_by_position
                    : prefix == "="  ? sm_by_uid

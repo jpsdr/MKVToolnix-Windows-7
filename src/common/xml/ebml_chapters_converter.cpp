@@ -67,7 +67,7 @@ ebml_chapters_converter_c::fix_xml(document_cptr &doc)
   const {
   auto result = doc->select_nodes("//ChapterAtom[not(ChapterTimeStart)]");
   for (auto &atom : result)
-    atom.node().append_child("ChapterTimeStart").append_child(pugi::node_pcdata).set_value(::format_timestamp(0).c_str());
+    atom.node().append_child("ChapterTimeStart").append_child(pugi::node_pcdata).set_value(mtx::string::format_timestamp(0).c_str());
 
   result = doc->select_nodes("//ChapterDisplay[not(ChapterString)]");
   for (auto &atom : result)
@@ -190,7 +190,7 @@ ebml_chapters_converter_c::probe_file(std::string const &file_name) {
 
     while (in.getline2(line)) {
       // I assume that if it looks like XML then it is a XML chapter file :)
-      strip(line);
+      mtx::string::strip(line);
       if (balg::istarts_with(line, "<?xml"))
         return true;
       else if (!line.empty())

@@ -210,8 +210,8 @@ kax_analyzer_c::verify_data_structures_against_file(const std::string &hook_name
   size_t i;
 
   for (i = 0; num_items > i; ++i) {
-    info_this.push_back(                 m_data.size() > i ?                m_data[i]->to_string() : empty_string);
-    info_actual.push_back(actual_content.m_data.size() > i ? actual_content.m_data[i]->to_string() : empty_string);
+    info_this.push_back(                 m_data.size() > i ?                m_data[i]->to_string() : std::string{});
+    info_actual.push_back(actual_content.m_data.size() > i ? actual_content.m_data[i]->to_string() : std::string{});
 
     max_info_len           = std::max(max_info_len, info_this.back().length());
 
@@ -668,7 +668,7 @@ kax_analyzer_c::handle_void_elements(size_t data_idx) {
 
     mxdebug_if(s_debug_void,
                fmt::format("handle_void_elements({0}): void_size == 1: writing {1} header bytes at position {2} (ID length {3} coded size length {4} previous size length {5} element size {6}); bytes: {7}\n",
-                           data_idx, head_size, new_pos, head_size - coded_size, coded_size, e->GetSizeLength(), e->GetSize(), to_hex(head, head_size)));
+                           data_idx, head_size, new_pos, head_size - coded_size, coded_size, e->GetSizeLength(), e->GetSize(), mtx::string::to_hex(head, head_size)));
 
     m_file->setFilePointer(new_pos);
     m_file->write(head, head_size);

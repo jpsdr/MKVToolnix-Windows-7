@@ -171,9 +171,9 @@ from_vorbis_comments(vorbis_comments_t const &vorbis_comments) {
   converted_vorbis_comments_t converted;
 
   for (auto const &[vorbis_full_key, value] : vorbis_comments.m_comments) {
-    mxdebug_if(s_debug, fmt::format("from_vorbis_comments: parsing {}={}\n", vorbis_full_key, elide_string(value, 40)));
+    mxdebug_if(s_debug, fmt::format("from_vorbis_comments: parsing {}={}\n", vorbis_full_key, mtx::string::elide_string(value, 40)));
 
-    auto key_name_language                  = split(vorbis_full_key, "-", 2);
+    auto key_name_language                  = mtx::string::split(vorbis_full_key, "-", 2);
     auto vorbis_key                         = std::regex_replace(balg::to_upper_copy(key_name_language[0]), std::regex{" +"}, "");
     auto const &[matroska_key, target_type] = s_vorbis_to_matroska[vorbis_key];
 
@@ -255,7 +255,7 @@ parse_vorbis_comments_from_packet(memory_c const &packet) {
 
       in.read(line, comment_length);
 
-      auto parts = split(line, "=", 2);
+      auto parts = mtx::string::split(line, "=", 2);
       if (parts.size() == 2)
         comments.m_comments.emplace_back(parts[0], parts[1]);
     }

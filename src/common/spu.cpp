@@ -56,7 +56,7 @@ find_stop_display_position(unsigned char const *data,
         case 0x02: {
           // Stop display
           auto date = timestamp_c::mpeg(static_cast<int64_t>(get_uint16_be(&data[start_off])) * 1024);
-          info     += fmt::format("stop display: {0}\n", format_timestamp(date));
+          info     += fmt::format("stop display: {0}\n", mtx::string::format_timestamp(date));
           mxdebug_if(debug, info);
           return start_off;
         }

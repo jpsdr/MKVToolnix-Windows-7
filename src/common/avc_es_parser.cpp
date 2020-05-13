@@ -333,9 +333,9 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
                            !m_current_key_frame_bottom_field ? "none"  : *m_current_key_frame_bottom_field ? "bottom field" : "top field"));
 
     // if (!m_first_keyframe_found) {
-    //   mxinfo(fmt::format("first KF; num prov TC {0} last prov TC {1}\n", m_provided_timestamps.size(), format_timestamp(m_provided_timestamps.empty() ? -1 : m_provided_timestamps.back().first)));
+    //   mxinfo(fmt::format("first KF; num prov TC {0} last prov TC {1}\n", m_provided_timestamps.size(), mtx::string::format_timestamp(m_provided_timestamps.empty() ? -1 : m_provided_timestamps.back().first)));
     //   for (auto const &t : m_provided_timestamps)
-    //     mxinfo(fmt::format("  {0} @ {1}\n", format_timestamp(t.first), t.second));
+    //     mxinfo(fmt::format("  {0} @ {1}\n", mtx::string::format_timestamp(t.first), t.second));
 
     // }
 
@@ -786,10 +786,10 @@ es_parser_c::calculate_provided_timestamps_to_use() {
                            return str + fmt::format("    pos {0} size {1} type {2}\n", frame.m_position, frame.m_data->get_size(), frame.m_type);
                          }),
                          std::accumulate(m_provided_timestamps.begin(), m_provided_timestamps.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
-                           return str + fmt::format("    pos {0} timestamp {1}\n", provided_timestamp.second, format_timestamp(provided_timestamp.first));
+                           return str + fmt::format("    pos {0} timestamp {1}\n", provided_timestamp.second, mtx::string::format_timestamp(provided_timestamp.first));
                          }),
                          std::accumulate(provided_timestamps_to_use.begin(), provided_timestamps_to_use.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
-                           return str + fmt::format("    timestamp {0}\n", format_timestamp(provided_timestamp));
+                           return str + fmt::format("    timestamp {0}\n", mtx::string::format_timestamp(provided_timestamp));
                          })));
 
   m_provided_timestamps.erase(m_provided_timestamps.begin(), m_provided_timestamps.begin() + provided_timestamps_idx);
@@ -859,7 +859,7 @@ es_parser_c::calculate_frame_timestamps_and_references() {
   mxdebug_if(m_debug_timestamps, fmt::format("PRESENTATION order dump\n"));
 
   for (auto &frame : m_frames)
-    mxdebug_if(m_debug_timestamps, fmt::format("  type {0} TS {1} ref1 {2} ref2 {3} decode_order {4}\n", frame.m_type, format_timestamp(frame.m_start), frame.m_ref1, frame.m_ref2, frame.m_decode_order));
+    mxdebug_if(m_debug_timestamps, fmt::format("  type {0} TS {1} ref1 {2} ref2 {3} decode_order {4}\n", frame.m_type, mtx::string::format_timestamp(frame.m_start), frame.m_ref1, frame.m_ref2, frame.m_decode_order));
 
   if (!m_simple_picture_order)
     std::sort(m_frames.begin(), m_frames.end(), [](const frame_t &f1, const frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
@@ -870,7 +870,7 @@ es_parser_c::update_frame_stats() {
   mxdebug_if(m_debug_timestamps, fmt::format("DECODE order dump\n"));
 
   for (auto &frame : m_frames) {
-    mxdebug_if(m_debug_timestamps, fmt::format("  type {0} TS {1} ref1 {2} ref2 {3}\n", frame.m_type, format_timestamp(frame.m_start), frame.m_ref1, frame.m_ref2));
+    mxdebug_if(m_debug_timestamps, fmt::format("  type {0} TS {1} ref1 {2} ref2 {3}\n", frame.m_type, mtx::string::format_timestamp(frame.m_start), frame.m_ref1, frame.m_ref2));
 
     m_duration_frequency[frame.m_end - frame.m_start]++;
 
@@ -982,9 +982,9 @@ es_parser_c::dump_info()
     mxinfo(fmt::format("size {0} key {1} start {2} end {3} ref1 {4} adler32 0x{5:08x}\n",
                        frame.m_data->get_size(),
                        frame.m_keyframe,
-                       format_timestamp(frame.m_start),
-                       format_timestamp(frame.m_end),
-                       format_timestamp(frame.m_ref1),
+                       mtx::string::format_timestamp(frame.m_start),
+                       mtx::string::format_timestamp(frame.m_end),
+                       mtx::string::format_timestamp(frame.m_ref1),
                        mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *frame.m_data)));
   }
 }

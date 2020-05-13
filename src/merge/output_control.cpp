@@ -1225,7 +1225,7 @@ create_output_name() {
   // First possibility: %d
   int p    = s.find("%d");
   if (0 <= p) {
-    s.replace(p, 2, to_string(g_file_num));
+    s.replace(p, 2, mtx::string::to_string(g_file_num));
 
     return s;
   }
@@ -1941,12 +1941,12 @@ append_track(packetizer_t &ptzr,
   }
 
   if ((APPEND_MODE_FILE_BASED == g_append_mode) || (ptzr.packetizer->get_track_type() == track_subtitle)) {
-    mxdebug_if(s_debug_appending, fmt::format("appending: new timestamp_adjustment for append_mode == FILE_BASED or subtitle track: {0} for {1}\n", format_timestamp(timestamp_adjustment), ptzr.packetizer->m_ti.m_id));
+    mxdebug_if(s_debug_appending, fmt::format("appending: new timestamp_adjustment for append_mode == FILE_BASED or subtitle track: {0} for {1}\n", mtx::string::format_timestamp(timestamp_adjustment), ptzr.packetizer->m_ti.m_id));
     // The actual connection.
     ptzr.packetizer->connect(old_packetizer, timestamp_adjustment);
 
   } else {
-    mxdebug_if(s_debug_appending, fmt::format("appending: new timestamp_adjustment for append_mode == TRACK_BASED and NON subtitle track: {0} for {1}\n", format_timestamp(timestamp_adjustment), ptzr.packetizer->m_ti.m_id));
+    mxdebug_if(s_debug_appending, fmt::format("appending: new timestamp_adjustment for append_mode == TRACK_BASED and NON subtitle track: {0} for {1}\n", mtx::string::format_timestamp(timestamp_adjustment), ptzr.packetizer->m_ti.m_id));
     // The actual connection.
     ptzr.packetizer->connect(old_packetizer);
   }

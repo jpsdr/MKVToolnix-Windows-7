@@ -107,7 +107,7 @@ parse_args(std::vector<std::string> &args) {
       if (next_arg.empty())
         mxerror(fmt::format("Missing argument to {0}\n", arg));
 
-      if (!parse_number(next_arg, options.m_chunk_size))
+      if (!mtx::string::parse_number(next_arg, options.m_chunk_size))
         mxerror(fmt::format("Invalid argument to {0}: {1}\n", arg, next_arg));
 
       ++current;
@@ -116,7 +116,7 @@ parse_args(std::vector<std::string> &args) {
       if (next_arg.empty())
         mxerror(fmt::format("Missing argument to {0}\n", arg));
 
-      if (!parse_number(next_arg, options.m_initial_value))
+      if (!mtx::string::parse_number(next_arg, options.m_initial_value))
         mxerror(fmt::format("Invalid argument to {0}: {1}\n", arg, next_arg));
 
       ++current;
@@ -125,7 +125,7 @@ parse_args(std::vector<std::string> &args) {
       if (next_arg.empty())
         mxerror(fmt::format("Missing argument to {0}\n", arg));
 
-      if (!parse_number(next_arg, options.m_xor_result))
+      if (!mtx::string::parse_number(next_arg, options.m_xor_result))
         mxerror(fmt::format("Invalid argument to {0}: {1}\n", arg, next_arg));
 
       ++current;

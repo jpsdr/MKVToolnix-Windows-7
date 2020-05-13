@@ -45,7 +45,7 @@ find_tag_for_track(int idx,
                    int64_t tuid,
                    int64_t cuid,
                    EbmlMaster &m) {
-  std::string sidx = to_string(idx);
+  std::string sidx = mtx::string::to_string(idx);
 
   size_t i;
   for (i = 0; i < m.ListSize(); i++) {

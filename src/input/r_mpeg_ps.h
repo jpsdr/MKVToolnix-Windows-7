@@ -95,8 +95,8 @@ operator <<(std::ostream &out,
             mpeg_ps_packet_c const &p) {
   out << fmt::format("[ID {0} PTS {1} DTS {2} length {3} full_length {4} valid? {5} read? {6}]",
                      p.m_id,
-                     p.has_pts() ? format_timestamp(p.pts()) : "none"s,
-                     p.has_dts() ? format_timestamp(p.dts()) : "none"s,
+                     p.has_pts() ? mtx::string::format_timestamp(p.pts()) : "none"s,
+                     p.has_dts() ? mtx::string::format_timestamp(p.dts()) : "none"s,
                      p.m_length, p.m_full_length, p.m_valid,
                      p.has_been_read() ? "yes, fully" : p.m_buffer ? "only partially" : "no");
 

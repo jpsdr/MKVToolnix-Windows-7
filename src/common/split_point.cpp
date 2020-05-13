@@ -20,7 +20,7 @@ std::string
 split_point_c::str()
   const {
   return fmt::format("<{0} {1} once:{2} discard:{3} create_file:{4}>",
-                      format_timestamp(m_point),
+                      mtx::string::format_timestamp(m_point),
                         duration          == m_type ? "duration"
                       : size              == m_type ? "size"
                       : timestamp         == m_type ? "timestamp"

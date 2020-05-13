@@ -953,8 +953,8 @@ mpeg_ps_reader_c::found_new_stream(mpeg_ps_id_t id) {
 
     mxdebug_if(m_debug_timestamps && packet.has_pts(),
                fmt::format("Timestamp for track {0}: {1} [{2}] (DTS: {3})\n",
-                           id, format_timestamp(packet.pts()), packet.pts() * 90 / 1000000ll,
-                           packet.has_dts() ? fmt::format("{0} [{1}]", format_timestamp(packet.dts()), packet.dts() * 90 / 1000000ll) : "none"s));
+                           id, mtx::string::format_timestamp(packet.pts()), packet.pts() * 90 / 1000000ll,
+                           packet.has_dts() ? fmt::format("{0} [{1}]", mtx::string::format_timestamp(packet.dts()), packet.dts() * 90 / 1000000ll) : "none"s));
 
     if (mtx::includes(m_blocked_ids, id.idx()))
       return;

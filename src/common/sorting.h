@@ -63,7 +63,7 @@ public:
   natural_element_c(StrT const &content)
     : m_content{content}
   {
-    m_is_numeric = parse_number(m_content, m_number);
+    m_is_numeric = mtx::string::parse_number(m_content, m_number);
   }
 
   bool

@@ -21,7 +21,7 @@
 #include "common/strings/editing.h"
 #include "common/timestamp.h"
 
-namespace mtx::conversion {
+namespace mtx::string::conversion {
 
 template <bool is_unsigned>
 struct unsigned_checker {
@@ -39,13 +39,15 @@ struct unsigned_checker<true> {
 
 }
 
+namespace mtx::string {
+
 bool parse_number_as_rational(std::string const &string, int64_rational_c &value);
 
 template<typename StrT, typename ValueT>
 bool
 parse_number(StrT const &string,
              ValueT &value) {
-  if (!mtx::conversion::unsigned_checker< std::is_unsigned<ValueT>::value >::is_ok(string))
+  if (!mtx::string::conversion::unsigned_checker< std::is_unsigned<ValueT>::value >::is_ok(string))
     return false;
 
   std::istringstream in{string};
@@ -130,3 +132,5 @@ extern bool parse_timestamp(const std::string &s, timestamp_c &timestamp, bool a
 bool parse_bool(std::string value);
 
 uint64_t from_hex(const std::string &data);
+
+} // mtx::string

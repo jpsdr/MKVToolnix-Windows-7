@@ -17,7 +17,7 @@
 #include "common/strings/editing.h"
 #include "common/strings/regex.h"
 
-const std::string empty_string("");
+namespace mtx::string {
 
 std::vector<std::string>
 split(std::string const &text,
@@ -117,8 +117,8 @@ shrink_whitespace(std::string &s) {
 }
 
 std::string
-get_displayable_string(const char *src,
-                       int max_len) {
+get_displayable(const char *src,
+                int max_len) {
   std::string result;
   int len = (-1 == max_len) ? strlen(src) : max_len;
 
@@ -129,8 +129,8 @@ get_displayable_string(const char *src,
 }
 
 std::string
-get_displayable_string(std::string const &src) {
-  return get_displayable_string(src.c_str(), src.length());
+get_displayable(std::string const &src) {
+  return get_displayable(src.c_str(), src.length());
 }
 
 std::string
@@ -162,3 +162,5 @@ chomp(std::string const &str) {
 
   return std::regex_replace(str, *s_trailing_lf_re, "");
 }
+
+} // mtx::string

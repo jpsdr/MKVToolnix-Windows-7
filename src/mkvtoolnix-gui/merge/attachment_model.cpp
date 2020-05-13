@@ -43,7 +43,7 @@ void
 AttachmentModel::setRowData(QList<QStandardItem *> const &items,
                             Attachment const &attachment) {
   auto info = QFileInfo{attachment.m_fileName};
-  auto size = QNY("%1 byte (%2)", "%1 bytes (%2)", info.size()).arg(info.size()).arg(Q(format_file_size(info.size())));
+  auto size = QNY("%1 byte (%2)", "%1 bytes (%2)", info.size()).arg(info.size()).arg(Q(mtx::string::format_file_size(info.size())));
 
   items[NameColumn       ]->setText(attachment.m_name);
   items[MIMETypeColumn   ]->setText(attachment.m_MIMEType);

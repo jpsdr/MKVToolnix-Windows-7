@@ -201,7 +201,7 @@ vobsub_reader_c::parse_headers() {
 
     if (balg::istarts_with(line, "delay:")) {
       line.erase(0, 6);
-      strip(line);
+      mtx::string::strip(line);
 
       int factor = 1;
       if (!line.empty() && (line[0] == '-')) {
@@ -210,7 +210,7 @@ vobsub_reader_c::parse_headers() {
       }
 
       int64_t timestamp;
-      if (!parse_timestamp(line, timestamp, true))
+      if (!mtx::string::parse_timestamp(line, timestamp, true))
         mxerror_fn(m_ti.m_fname, fmt::format(Y("line {0}: The 'delay' timestamp could not be parsed.\n"), line_no));
       delay += timestamp * factor;
     }
@@ -219,9 +219,9 @@ vobsub_reader_c::parse_headers() {
       if (!track)
         mxerror_fn(m_ti.m_fname, Y("The .idx file does not contain an 'id: ...' line to indicate the language.\n"));
 
-      strip(line);
-      shrink_whitespace(line);
-      std::vector<std::string> parts = split(line.c_str(), " ");
+      mtx::string::strip(line);
+      mtx::string::shrink_whitespace(line);
+      auto parts = mtx::string::split(line.c_str(), " ");
 
       if ((4 != parts.size()) || (13 > parts[1].length()) || !balg::iequals(parts[2], "filepos:")) {
         mxwarn_fn(m_ti.m_fname, fmt::format(Y("Line {0}: The line seems to be a subtitle entry but the format couldn't be recognized. This entry will be skipped.\n"), line_no));
@@ -245,7 +245,7 @@ vobsub_reader_c::parse_headers() {
       }
 
       int64_t timestamp;
-      if (!parse_timestamp(parts[1], timestamp)) {
+      if (!mtx::string::parse_timestamp(parts[1], timestamp)) {
         mxwarn_fn(m_ti.m_fname,
                   fmt::format(Y("Line {0}: The line seems to be a subtitle entry but the format couldn't be recognized. This entry will be skipped.\n"), line_no));
         continue;
@@ -278,7 +278,7 @@ vobsub_reader_c::parse_headers() {
                                 "The entries will be sorted according to their timestamps. "
                                 "This might result in the wrong order for some subtitle entries. "
                                 "If this is the case then you have to fix the .idx file manually.\n"),
-                              line_no, format_timestamp(entry.timestamp, 3), format_timestamp(last_timestamp, 3)));
+                              line_no, mtx::string::format_timestamp(entry.timestamp, 3), mtx::string::format_timestamp(last_timestamp, 3)));
         sort_required = true;
       }
       last_timestamp = entry.timestamp;
@@ -309,7 +309,7 @@ vobsub_reader_c::parse_headers() {
       for (k = 0; k < tracks[i]->entries.size(); k++)
         mxinfo(fmt::format("vobsub_reader:  {0:04} position: {1:12} (0x{2:04x}{3:08x}), timestamp: {4:12} ({5})\n",
                            k, tracks[i]->entries[k].position, tracks[i]->entries[k].position >> 32, tracks[i]->entries[k].position & 0xffffffff,
-                           tracks[i]->entries[k].timestamp / 1000000, format_timestamp(tracks[i]->entries[k].timestamp, 3)));
+                           tracks[i]->entries[k].timestamp / 1000000, mtx::string::format_timestamp(tracks[i]->entries[k].timestamp, 3)));
     }
   }
 }
@@ -329,7 +329,7 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
   auto duration = mtx::spu::get_duration(buf, size);
   if (!duration.valid()) {
     duration = timestamp_c::ns(default_duration);
-    mxverb(2, fmt::format("vobsub_reader: Could not extract the duration for a SPU packet (timestamp: {0}).", format_timestamp(timestamp, 3)));
+    mxverb(2, fmt::format("vobsub_reader: Could not extract the duration for a SPU packet (timestamp: {0}).", mtx::string::format_timestamp(timestamp, 3)));
 
     int dcsq  =                   get_uint16_be(&buf[2]);
     int dcsq2 = dcsq + 3 < size ? get_uint16_be(&buf[dcsq + 2]) : -1;
@@ -430,7 +430,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
       if (dst_size != spu_len)
         mxverb(3,
                fmt::format("r_vobsub.cpp: stddeliver spu_len different from dst_size; pts {4} spu_len {0} dst_size {1} curpos {2} endpos {3}\n",
-                           spu_len, dst_size, m_sub_file->getFilePointer(), extraction_end_pos, format_timestamp(pts)));
+                           spu_len, dst_size, m_sub_file->getFilePointer(), extraction_end_pos, mtx::string::format_timestamp(pts)));
       if (2 < dst_size)
         put_uint16_be(dst_buf, dst_size);
 
@@ -463,7 +463,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
             mxwarn_tid(m_ti.m_fname, track_id,
                        fmt::format(Y("Unsupported MPEG mpeg_version: 0x{0:02x} in packet {1} for timestamp {2}, assuming MPEG2. "
                                      "No further warnings will be printed for this track.\n"),
-                                   c, track->packet_num, format_timestamp(timestamp, 3)));
+                                   c, track->packet_num, mtx::string::format_timestamp(timestamp, 3)));
             track->mpeg_version_warning_printed = true;
           }
           mpeg_version = 2;
@@ -556,7 +556,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
           } else
             dst_buf = (unsigned char *)saferealloc(dst_buf, dst_size + packet_size);
 
-          mxverb(3, fmt::format("vobsub_reader: sub packet data: aid: {0}, pts: {1}, packet_size: {2}\n", track->aid, format_timestamp(pts, 3), packet_size));
+          mxverb(3, fmt::format("vobsub_reader: sub packet data: aid: {0}, pts: {1}, packet_size: {2}\n", track->aid, mtx::string::format_timestamp(pts, 3), packet_size));
           if (m_sub_file->read(&dst_buf[dst_size], packet_size) != packet_size) {
             mxwarn(Y("vobsub_reader: sub file read failure"));
             return deliver();

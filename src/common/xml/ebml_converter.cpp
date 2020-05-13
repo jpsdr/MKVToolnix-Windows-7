@@ -126,19 +126,19 @@ ebml_converter_c::fix_ebml(EbmlMaster &)
 void
 ebml_converter_c::format_uint(pugi::xml_node &node,
                               EbmlElement &e) {
-  node.append_child(pugi::node_pcdata).set_value(to_string(static_cast<EbmlUInteger &>(e).GetValue()).c_str());
+  node.append_child(pugi::node_pcdata).set_value(mtx::string::to_string(static_cast<EbmlUInteger &>(e).GetValue()).c_str());
 }
 
 void
 ebml_converter_c::format_int(pugi::xml_node &node,
                              EbmlElement &e) {
-  node.append_child(pugi::node_pcdata).set_value(to_string(static_cast<EbmlSInteger &>(e).GetValue()).c_str());
+  node.append_child(pugi::node_pcdata).set_value(mtx::string::to_string(static_cast<EbmlSInteger &>(e).GetValue()).c_str());
 }
 
 void
 ebml_converter_c::format_timestamp(pugi::xml_node &node,
                                   EbmlElement &e) {
-  node.append_child(pugi::node_pcdata).set_value(::format_timestamp(static_cast<EbmlUInteger &>(e).GetValue()).c_str());
+  node.append_child(pugi::node_pcdata).set_value(mtx::string::format_timestamp(static_cast<EbmlUInteger &>(e).GetValue()).c_str());
 }
 
 void
@@ -157,7 +157,7 @@ void
 ebml_converter_c::format_binary(pugi::xml_node &node,
                                 EbmlElement &e) {
   auto &binary = static_cast<EbmlBinary &>(e);
-  auto hex     = to_hex(binary.GetBuffer(), binary.GetSize(), true);
+  auto hex     = mtx::string::to_hex(binary.GetBuffer(), binary.GetSize(), true);
 
   node.append_child(pugi::node_pcdata).set_value(hex.c_str());
   node.append_attribute("format") = "hex";
@@ -166,7 +166,7 @@ ebml_converter_c::format_binary(pugi::xml_node &node,
 void
 ebml_converter_c::parse_uint(parser_context_t &ctx) {
   uint64_t value;
-  if (!::parse_number(strip_copy(ctx.content), value))
+  if (!mtx::string::parse_number(mtx::string::strip_copy(ctx.content), value))
     throw malformed_data_x{ ctx.name, ctx.node.offset_debug(), Y("An unsigned integer was expected.") };
 
   if (ctx.limits.has_min && (value < static_cast<uint64_t>(ctx.limits.min)))
@@ -180,7 +180,7 @@ ebml_converter_c::parse_uint(parser_context_t &ctx) {
 void
 ebml_converter_c::parse_int(parser_context_t &ctx) {
   int64_t value;
-  if (!::parse_number(strip_copy(ctx.content), value))
+  if (!mtx::string::parse_number(mtx::string::strip_copy(ctx.content), value))
     throw malformed_data_x{ ctx.name, ctx.node.offset_debug() };
 
   if (ctx.limits.has_min && (value < ctx.limits.min))
@@ -204,12 +204,12 @@ ebml_converter_c::parse_ustring(parser_context_t &ctx) {
 void
 ebml_converter_c::parse_timestamp(parser_context_t &ctx) {
   int64_t value;
-  if (!::parse_timestamp(strip_copy(ctx.content), value)) {
+  if (!mtx::string::parse_timestamp(mtx::string::strip_copy(ctx.content), value)) {
     auto details = fmt::format(Y("Expected a time in the following format: HH:MM:SS.nnn "
                                  "(HH = hour, MM = minute, SS = second, nnn = millisecond up to nanosecond. "
                                  "You may use up to nine digits for 'n' which would mean nanosecond precision). "
                                  "You may omit the hour as well. Found '{0}' instead. Additional error message: {1}"),
-                               ctx.content, timestamp_parser_error.c_str());
+                               ctx.content, mtx::string::timestamp_parser_error.c_str());
 
     throw malformed_data_x{ ctx.name, ctx.node.offset_debug(), details };
   }
@@ -233,7 +233,7 @@ ebml_converter_c::parse_binary(parser_context_t &ctx) {
 
   ctx.handled_attributes["format"] = true;
 
-  auto content = strip_copy(ctx.content);
+  auto content = mtx::string::strip_copy(ctx.content);
 
   if (balg::starts_with(content, "@")) {
     if (content.length() == 1)
@@ -275,7 +275,7 @@ ebml_converter_c::parse_binary(parser_context_t &ctx) {
     content.resize(hex_content.size() / 2);
 
     for (auto idx = 0u; idx < hex_content.length(); idx += 2)
-      content[idx / 2] = static_cast<char>(from_hex(hex_content.substr(idx, 2)));
+      content[idx / 2] = static_cast<char>(mtx::string::from_hex(hex_content.substr(idx, 2)));
 
   } else if (format == "base64") {
     try {

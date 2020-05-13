@@ -47,7 +47,7 @@ void
 AttachedFileModel::setRowData(QList<QStandardItem *> const &items,
                               Track const &attachedFile) {
   auto info = QFileInfo{attachedFile.m_file->m_fileName};
-  auto size = QNY("%1 byte (%2)", "%1 bytes (%2)", attachedFile.m_size).arg(attachedFile.m_size).arg(Q(format_file_size(attachedFile.m_size)));
+  auto size = QNY("%1 byte (%2)", "%1 bytes (%2)", attachedFile.m_size).arg(attachedFile.m_size).arg(Q(mtx::string::format_file_size(attachedFile.m_size)));
 
   items[NameColumn       ]->setText(attachedFile.m_name);
   items[MIMETypeColumn   ]->setText(attachedFile.m_codec);

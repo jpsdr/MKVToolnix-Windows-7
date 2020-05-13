@@ -21,6 +21,8 @@
 #include "common/terminal.h"
 #include "common/translation.h"
 
+namespace mtx::string {
+
 std::string
 format_timestamp(int64_t timestamp,
                 unsigned int precision) {
@@ -347,3 +349,5 @@ elide_string(std::string s,
 
   return s;
 }
+
+} // mtx::string

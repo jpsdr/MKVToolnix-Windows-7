@@ -55,17 +55,17 @@ version_number_t::version_number_t(const std::string &s)
     return;
 
   valid          = true;
-  auto str_parts = split(matches[1].str() + matches[2].str(), ".");
+  auto str_parts = mtx::string::split(matches[1].str() + matches[2].str(), ".");
 
   for (auto const &str_part : str_parts) {
     parts.push_back(0);
-    if (!parse_number(str_part, parts.back())) {
+    if (!mtx::string::parse_number(str_part, parts.back())) {
       valid = false;
       break;
     }
   }
 
-  if (matches[3].length() && !parse_number(matches[3].str(), build))
+  if (matches[3].length() && !mtx::string::parse_number(matches[3].str(), build))
     valid = false;
 
   if (parts.empty())
@@ -121,11 +121,11 @@ version_number_t::to_string()
   for (auto const &part : parts) {
     if (!v.empty())
       v += ".";
-    v += ::to_string(part);
+    v += mtx::string::to_string(part);
   }
 
   if (0 != build)
-    v += " build " + ::to_string(build);
+    v += " build " + mtx::string::to_string(build);
 
   return v;
 }

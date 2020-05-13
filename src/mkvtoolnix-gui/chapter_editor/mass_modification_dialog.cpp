@@ -120,7 +120,7 @@ int64_t
 MassModificationDialog::shiftBy()
   const {
   auto timestamp = int64_t{};
-  parse_timestamp(to_utf8(m_ui->leShiftBy->text()), timestamp, true);
+  mtx::string::parse_timestamp(to_utf8(m_ui->leShiftBy->text()), timestamp, true);
   return timestamp;
 }
 
@@ -152,7 +152,7 @@ MassModificationDialog::isShiftByValid()
     return true;
 
   auto timestamp = int64_t{};
-  return parse_timestamp(to_utf8(m_ui->leShiftBy->text()), timestamp, true);
+  return mtx::string::parse_timestamp(to_utf8(m_ui->leShiftBy->text()), timestamp, true);
 }
 
 void

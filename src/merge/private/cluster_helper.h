@@ -42,9 +42,7 @@ public:
     auto diff   = timestamp_c::ns(pack.assigned_timestamp - m_expected_next_timestamp).abs();
     auto result = diff > timestamp_c::ms(2);
 
-    mxdebug_if(ms_gap_detection,
-               fmt::format("follows gap {0} expected next: {1} assigned {2}  {3}\n",
-                           result, format_timestamp(m_expected_next_timestamp), format_timestamp(pack.assigned_timestamp), diff));
+    mxdebug_if(ms_gap_detection, fmt::format("follows gap {0} expected next: {1} assigned {2}  {3}\n", result, m_expected_next_timestamp, pack.assigned_timestamp, diff));
 
     return result;
   }

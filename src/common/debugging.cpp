@@ -39,7 +39,7 @@ bool debugging_c::ms_send_to_logger = false;
 bool
 debugging_c::requested(const char *option,
                        std::string *arg) {
-  auto options = split(option, "|");
+  auto options = mtx::string::split(option, "|");
 
   for (auto &current_option : options) {
     auto option_ptr = ms_debugging_options.find(current_option);
@@ -57,10 +57,10 @@ debugging_c::requested(const char *option,
 void
 debugging_c::request(const std::string &options,
                      bool enable) {
-  auto all_options = split(options);
+  auto all_options = mtx::string::split(options);
 
   for (auto &one_option : all_options) {
-    auto parts = split(one_option, "=", 2);
+    auto parts = mtx::string::split(one_option, "=", 2);
     if (!parts[0].size())
       continue;
     if (parts[0] == "!")
@@ -191,12 +191,12 @@ ebml_dumper_c::ebml_dumper_c()
 std::string
 ebml_dumper_c::to_string(EbmlElement const *element)
   const {
-  return dynamic_cast<EbmlUInteger      const *>(element) ? ::to_string(static_cast<EbmlUInteger      const *>(element)->GetValue())
-       : dynamic_cast<EbmlSInteger      const *>(element) ? ::to_string(static_cast<EbmlSInteger      const *>(element)->GetValue())
-       : dynamic_cast<EbmlFloat         const *>(element) ? ::to_string(static_cast<EbmlFloat         const *>(element)->GetValue(), 9)
-       : dynamic_cast<EbmlUnicodeString const *>(element) ?             static_cast<EbmlUnicodeString const *>(element)->GetValueUTF8()
-       : dynamic_cast<EbmlString        const *>(element) ?             static_cast<EbmlString        const *>(element)->GetValue()
-       : dynamic_cast<EbmlDate          const *>(element) ? ::to_string(static_cast<EbmlDate          const *>(element)->GetEpochDate())
+  return dynamic_cast<EbmlUInteger      const *>(element) ? mtx::string::to_string(static_cast<EbmlUInteger      const *>(element)->GetValue())
+       : dynamic_cast<EbmlSInteger      const *>(element) ? mtx::string::to_string(static_cast<EbmlSInteger      const *>(element)->GetValue())
+       : dynamic_cast<EbmlFloat         const *>(element) ? mtx::string::to_string(static_cast<EbmlFloat         const *>(element)->GetValue(), 9)
+       : dynamic_cast<EbmlUnicodeString const *>(element) ?                        static_cast<EbmlUnicodeString const *>(element)->GetValueUTF8()
+       : dynamic_cast<EbmlString        const *>(element) ?                        static_cast<EbmlString        const *>(element)->GetValue()
+       : dynamic_cast<EbmlDate          const *>(element) ? mtx::string::to_string(static_cast<EbmlDate          const *>(element)->GetEpochDate())
        : fmt::format("(type: {0} size: {1})",
                        dynamic_cast<EbmlBinary const *>(element)    ? "binary"
                      : dynamic_cast<EbmlMaster const *>(element)    ? "master"
@@ -277,7 +277,7 @@ ebml_dumper_c::dump_impl(EbmlElement const *element,
     m_buffer << fmt::format(" @{0}", static_cast<void const *>(element));
 
   if (m_values)
-    m_buffer << " " << to_string(element);
+    m_buffer << " " << mtx::string::to_string(element);
 
   m_buffer << std::endl;
 

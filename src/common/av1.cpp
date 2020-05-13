@@ -242,7 +242,7 @@ parser_c::parse_timing_info(mtx::bits::reader_c &r) {
                          p->time_scale,
                          p->equal_picture_interval,
                          p->num_ticks_per_picture,
-                         format_timestamp(boost::rational_cast<uint64_t>(p->bitstream_default_duration))));
+                         mtx::string::format_timestamp(boost::rational_cast<uint64_t>(p->bitstream_default_duration))));
 }
 
 void

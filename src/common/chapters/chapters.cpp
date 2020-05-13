@@ -86,7 +86,7 @@ probe_simple(mm_text_io_c *in) {
 
   in->setFilePointer(0);
   while (in->getline2(line)) {
-    strip(line);
+    mtx::string::strip(line);
     if (line.empty())
       continue;
 
@@ -94,7 +94,7 @@ probe_simple(mm_text_io_c *in) {
       return false;
 
     while (in->getline2(line)) {
-      strip(line);
+      mtx::string::strip(line);
       if (line.empty())
         continue;
 
@@ -180,7 +180,7 @@ parse_simple(mm_text_io_c *in,
   std::string line;
 
   while (in->getline2(line)) {
-    strip(line);
+    mtx::string::strip(line);
     if (line.empty())
       continue;
 
@@ -189,10 +189,10 @@ parse_simple(mm_text_io_c *in,
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
 
       int64_t hour = 0, minute = 0, second = 0, msecs = 0;
-      parse_number(matches[1].str(), hour);
-      parse_number(matches[2].str(), minute);
-      parse_number(matches[3].str(), second);
-      parse_number(matches[4].str(), msecs);
+      mtx::string::parse_number(matches[1].str(), hour);
+      mtx::string::parse_number(matches[2].str(), minute);
+      mtx::string::parse_number(matches[3].str(), second);
+      mtx::string::parse_number(matches[4].str(), msecs);
 
       if (59 < minute)
         chapter_error(fmt::format(Y("Invalid minute: {0}"), minute));
@@ -1124,7 +1124,7 @@ format_name_template(std::string const &name_template,
     auto number_str    = fmt::format("{0}", chapter_number);
     auto wanted_length = 1u;
 
-    if (match[1].length() && !parse_number(match[1].str(), wanted_length))
+    if (match[1].length() && !mtx::string::parse_number(match[1].str(), wanted_length))
       wanted_length = 1;
 
     if (number_str.length() < wanted_length)
@@ -1135,7 +1135,7 @@ format_name_template(std::string const &name_template,
 
   name = mtx::regex::replace(name, timestamp_re, [=](std::smatch const &match) {
     auto format = match[1].length() ? match[1] : "%H:%M:%S"s;
-    return format_timestamp(start_timestamp.to_ns(), format);
+    return mtx::string::format_timestamp(start_timestamp.to_ns(), format);
   });
 
   name = std::regex_replace(name, file_name_re,     appended_file_name_p.stem().string());

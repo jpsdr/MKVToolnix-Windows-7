@@ -151,11 +151,11 @@ close_timestamp_files() {
 
     std::sort(timestamps.begin(), timestamps.end());
     for (auto timestamp : timestamps)
-      extractor.m_file->puts(to_string(timestamp.m_timestamp, 1000000, 6) + "\n");
+      extractor.m_file->puts(mtx::string::to_string(timestamp.m_timestamp, 1000000, 6) + "\n");
 
     if (!timestamps.empty()) {
       timestamp_t &last_timestamp = timestamps.back();
-      extractor.m_file->puts(to_string(last_timestamp.m_timestamp + last_timestamp.m_duration, 1000000, 6) + "\n");
+      extractor.m_file->puts(mtx::string::to_string(last_timestamp.m_timestamp + last_timestamp.m_duration, 1000000, 6) + "\n");
     }
   }
 

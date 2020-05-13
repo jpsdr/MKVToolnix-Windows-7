@@ -1072,14 +1072,14 @@ kax_reader_c::read_headers_info_writing_app(KaxWritingApp *&km_writing_app) {
   size_t idx;
 
   std::string s = km_writing_app->GetValueUTF8();
-  strip(s);
+  mtx::string::strip(s);
 
   m_raw_writing_app = s;
 
   if (balg::istarts_with(s, "avi-mux gui"))
     s.replace(0, strlen("avi-mux gui"), "avimuxgui");
 
-  std::vector<std::string> parts = split(s.c_str(), " ", 3);
+  auto parts = mtx::string::split(s.c_str(), " ", 3);
   if (parts.size() < 2) {
     m_writing_app = "";
     for (idx = 0; idx < s.size(); idx++)
@@ -1097,7 +1097,7 @@ kax_reader_c::read_headers_info_writing_app(KaxWritingApp *&km_writing_app) {
       if (isdigit(parts[1][idx]) || (parts[1][idx] == '.'))
         s += parts[1][idx];
 
-    std::vector<std::string> ver_parts = split(s.c_str(), ".");
+    auto ver_parts = mtx::string::split(s.c_str(), ".");
     for (idx = ver_parts.size(); idx < 4; idx++)
       ver_parts.push_back("0");
 
@@ -1107,7 +1107,7 @@ kax_reader_c::read_headers_info_writing_app(KaxWritingApp *&km_writing_app) {
     for (idx = 0; idx < 4; idx++) {
       int num;
 
-      if (!parse_number(ver_parts[idx], num) || (0 > num) || (255 < num)) {
+      if (!mtx::string::parse_number(ver_parts[idx], num) || (0 > num) || (255 < num)) {
         failed = true;
         break;
       }
@@ -2317,7 +2317,7 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
     if (!m_known_bad_track_numbers[block_simple->TrackNum()])
       mxwarn_fn(m_ti.m_fname,
                 fmt::format(Y("A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. "
-                              "The block will be skipped.\n"), format_timestamp(block_timestamp), block_simple->TrackNum()));
+                              "The block will be skipped.\n"), mtx::string::format_timestamp(block_timestamp), block_simple->TrackNum()));
     return;
   }
 
@@ -2426,7 +2426,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
     if (!m_known_bad_track_numbers[block->TrackNum()])
       mxwarn_fn(m_ti.m_fname,
                 fmt::format(Y("A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. "
-                              "The block will be skipped.\n"), format_timestamp(block_timestamp), block->TrackNum()));
+                              "The block will be skipped.\n"), mtx::string::format_timestamp(block_timestamp), block->TrackNum()));
     return;
   }
 
@@ -2652,7 +2652,7 @@ kax_reader_c::identify() {
 
   auto add_uid_info = [&info](memory_cptr const &uid, std::string const &property) {
     if (uid)
-      info.add(property, to_hex(uid, true));
+      info.add(property, mtx::string::to_hex(uid, true));
   };
   add_uid_info(m_segment_uid,          mtx::id::segment_uid);
   add_uid_info(m_next_segment_uid,     mtx::id::next_segment_uid);
@@ -2688,7 +2688,7 @@ kax_reader_c::identify() {
     info.set(mtx::id::enabled_track,        track->enabled_track ? true : false);
 
     if (track->private_data && (0 != track->private_data->get_size()))
-      info.add(mtx::id::codec_private_data, to_hex(track->private_data->get_buffer(), track->private_data->get_size(), true));
+      info.add(mtx::id::codec_private_data, mtx::string::to_hex(track->private_data->get_buffer(), track->private_data->get_size(), true));
 
     if ((0 != track->v_width) && (0 != track->v_height))
       info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", track->v_width, track->v_height));

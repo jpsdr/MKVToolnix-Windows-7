@@ -29,13 +29,13 @@ dump(EbmlElement *element,
 
   if (with_values) {
     if (dynamic_cast<EbmlUInteger *>(element))
-      value_str = to_string(uint64(*static_cast<EbmlUInteger *>(element)));
+      value_str = mtx::string::to_string(uint64(*static_cast<EbmlUInteger *>(element)));
 
     else if (dynamic_cast<EbmlSInteger *>(element))
-      value_str = to_string(int64(*static_cast<EbmlSInteger *>(element)));
+      value_str = mtx::string::to_string(int64(*static_cast<EbmlSInteger *>(element)));
 
     else if (dynamic_cast<EbmlFloat *>(element))
-      value_str = to_string(double(*static_cast<EbmlFloat *>(element)));
+      value_str = mtx::string::to_string(double(*static_cast<EbmlFloat *>(element)));
 
     else if (dynamic_cast<EbmlUnicodeString *>(element))
       value_str = UTFstring(*static_cast<EbmlUnicodeString *>(element)).GetUTF8();
@@ -44,7 +44,7 @@ dump(EbmlElement *element,
       value_str = std::string(*static_cast<EbmlString *>(element));
 
     else if (dynamic_cast<EbmlDate *>(element))
-      value_str = to_string(static_cast<EbmlDate *>(element)->GetEpochDate());
+      value_str = mtx::string::to_string(static_cast<EbmlDate *>(element)->GetEpochDate());
 
     else
       value_str = fmt::format("(type: {0})",

@@ -25,7 +25,7 @@ protected:
   charset_converter_cptr m_cc_utf8;
   bool m_try_utf8{}, m_invalid_utf8_warned{}, m_converter_is_utf8{};
   std::string m_codec_id;
-  line_ending_style_e m_line_ending_style{line_ending_style_e::cr_lf};
+  mtx::string::line_ending_style_e m_line_ending_style{mtx::string::line_ending_style_e::cr_lf};
   packet_cptr m_buffered_packet;
 
 public:
@@ -34,7 +34,7 @@ public:
 
   virtual int process(packet_cptr packet);
   virtual void set_headers();
-  virtual void set_line_ending_style(line_ending_style_e line_ending_style);
+  virtual void set_line_ending_style(mtx::string::line_ending_style_e line_ending_style);
 
   virtual translatable_string_c get_format_name() const {
     return YT("text subtitles");

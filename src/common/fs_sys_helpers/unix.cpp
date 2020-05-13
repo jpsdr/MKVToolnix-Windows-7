@@ -131,7 +131,7 @@ get_memory_usage() {
     }
 
     uint64_t value{};
-    return parse_number(split(content->to_string(), " ", 2)[0], value) ? value * 4096 : 0;
+    return mtx::string::parse_number(mtx::string::split(content->to_string(), " ", 2)[0], value) ? value * 4096 : 0;
 
   } catch (...) {
     return 0;

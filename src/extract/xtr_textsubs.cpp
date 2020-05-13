@@ -52,7 +52,7 @@ xtr_srt_c::handle_frame(xtr_frame_t &f) {
   m_entry.m_timestamp = f.timestamp;
   m_entry.m_duration  = f.duration;
   m_entry.m_text      = m_conv->native(f.frame->to_string());
-  m_entry.m_text      = strip_copy(std::regex_replace(m_entry.m_text, std::regex{"\r+"}, ""), true);
+  m_entry.m_text      = mtx::string::strip_copy(std::regex_replace(m_entry.m_text, std::regex{"\r+"}, ""), true);
 
   if (m_entry.m_duration && !m_entry.m_text.empty())
     flush_entry();
@@ -152,8 +152,8 @@ xtr_ssa_c::create_file(xtr_base_c *master,
     sconv.insert(pos2, ", Text");
   }
 
-  m_ssa_format = split(format_line, ",");
-  strip(m_ssa_format, true);
+  m_ssa_format = mtx::string::split(format_line, ",");
+  mtx::string::strip(m_ssa_format, true);
 
   m_num_fields = 1;             // ReadOrder
   for (auto const &field : m_ssa_format)
@@ -188,16 +188,16 @@ xtr_ssa_c::handle_frame(xtr_frame_t &f) {
   s[f.frame->get_size()] = 0;
 
   // Split the line into the fields.
-  auto fields = split(s, ",", m_num_fields);
+  auto fields = mtx::string::split(s, ",", m_num_fields);
 
   while (m_num_fields != fields.size())
     fields.emplace_back("");
 
   // Convert the ReadOrder entry so that we can re-order the entries later.
   int num;
-  if (!parse_number(fields[0], num)) {
+  if (!mtx::string::parse_number(fields[0], num)) {
     mxwarn(fmt::format(Y("Invalid format for a SSA line ('{0}') at timestamp {1}: The first field is not an integer. This entry will be skipped.\n"),
-                       s, format_timestamp(f.timestamp * 1000000, 3)));
+                       s, mtx::string::format_timestamp(f.timestamp * 1000000, 3)));
     return;
   }
 
@@ -361,18 +361,18 @@ xtr_usf_c::finish_track() {
 
   for (auto &entry : m_entries) {
     std::string text = "<subtitle>"s + entry.m_text + "</subtitle>";
-    strip(text, true);
+    mtx::string::strip(text, true);
 
     std::stringstream text_in(text);
     pugi::xml_document subtitle_doc;
     if (!subtitle_doc.load(text_in, pugi::parse_default | pugi::parse_declaration | pugi::parse_doctype | pugi::parse_pi | pugi::parse_comments)) {
-      mxwarn(fmt::format(Y("Track {0}: An USF subtitle entry starting at timestamp {1} is not well-formed XML and will be skipped.\n"), m_tid, format_timestamp(entry.m_start * 1000000, 3)));
+      mxwarn(fmt::format(Y("Track {0}: An USF subtitle entry starting at timestamp {1} is not well-formed XML and will be skipped.\n"), m_tid, mtx::string::format_timestamp(entry.m_start * 1000000, 3)));
       continue;
     }
 
     auto subtitle = subtitles.append_child("subtitle");
-    subtitle.append_attribute("start").set_value(format_timestamp(entry.m_start * 1000000, 3).c_str());
-    subtitle.append_attribute("stop"). set_value(format_timestamp(entry.m_end   * 1000000, 3).c_str());
+    subtitle.append_attribute("start").set_value(mtx::string::format_timestamp(entry.m_start * 1000000, 3).c_str());
+    subtitle.append_attribute("stop"). set_value(mtx::string::format_timestamp(entry.m_end   * 1000000, 3).c_str());
 
     for (auto child : subtitle_doc.document_element())
       subtitle.append_copy(child);

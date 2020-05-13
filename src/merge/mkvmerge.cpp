@@ -557,12 +557,12 @@ parse_arg_tracks(std::string s,
     tracks.set_reversed();
   }
 
-  auto elements = split(s, ",");
-  strip(elements);
+  auto elements = mtx::string::split(s, ",");
+  mtx::string::strip(elements);
 
   for (auto const &element : elements) {
     int64_t tid;
-    if (parse_number(element, tid))
+    if (mtx::string::parse_number(element, tid))
       tracks.add(tid);
     else if (is_valid_iso639_2_code(element))
       tracks.add(element);
@@ -591,11 +591,11 @@ parse_arg_sync(std::string s,
   int64_t id = 0;
 
   if (!force_track_id) {
-    auto parts = split(s, ":", 2);
+    auto parts = mtx::string::split(s, ":", 2);
     if (parts.size() != 2)
       mxerror(fmt::format(Y("Invalid sync option. No track ID specified in '{0} {1}'.\n"), opt, s));
 
-    if (!parse_number(parts[0], id))
+    if (!mtx::string::parse_number(parts[0], id))
       mxerror(fmt::format(Y("Invalid track ID specified in '{0} {1}'.\n"), opt, s));
 
     s = parts[1];
@@ -637,7 +637,7 @@ parse_arg_sync(std::string s,
 
   }
 
-  if (!parse_number(s, tcsync.displacement))
+  if (!mtx::string::parse_number(s, tcsync.displacement))
     mxerror(fmt::format(Y("Invalid sync option specified in '{0} {1}'.\n"), opt, orig));
 
   tcsync.displacement     *= 1000000ll;
@@ -658,12 +658,12 @@ parse_arg_aspect_ratio(std::string const &s,
   std::string msg      = is_factor ? Y("Aspect ratio factor") : Y("Aspect ratio");
 
   dprop.ar_factor      = is_factor;
-  std::vector<std::string> parts = split(s, ":", 2);
+  std::vector<std::string> parts = mtx::string::split(s, ":", 2);
   if (parts.size() != 2)
     mxerror(fmt::format(Y("{0}: missing track ID in '{1} {2}'.\n"), msg, opt, s));
 
   int64_t id = 0;
-  if (!parse_number(parts[0], id))
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("{0}: invalid track ID in '{1} {2}'.\n"), msg, opt, s));
 
   dprop.width  = -1;
@@ -704,15 +704,15 @@ parse_arg_display_dimensions(const std::string s,
                              track_info_c &ti) {
   display_properties_t dprop;
 
-  std::vector<std::string> parts = split(s, ":", 2);
-  strip(parts);
+  std::vector<std::string> parts = mtx::string::split(s, ":", 2);
+  mtx::string::strip(parts);
   if (parts.size() != 2)
     mxerror(fmt::format(Y("Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '{0}').\n"), s));
 
-  std::vector<std::string> dims = split(parts[1], "x", 2);
+  std::vector<std::string> dims = mtx::string::split(parts[1], "x", 2);
   int64_t id = 0;
   int w = 0, h = 0;
-  if ((dims.size() != 2) || !parse_number(parts[0], id) || !parse_number(dims[0], w) || !parse_number(dims[1], h) || (0 >= w) || (0 >= h))
+  if ((dims.size() != 2) || !mtx::string::parse_number(parts[0], id) || !mtx::string::parse_number(dims[0], w) || !mtx::string::parse_number(dims[1], h) || (0 >= w) || (0 >= h))
     mxerror(fmt::format(Y("Display dimensions: not given in the form <TID>:<width>x<height>, e.g. 1:640x480 (argument was '{0}').\n"), s));
 
   dprop.aspect_ratio          = -1.0;
@@ -734,19 +734,19 @@ parse_arg_cropping(std::string const &s,
 
   std::string err_msg        = Y("Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '{0}').\n");
 
-  std::vector<std::string> v = split(s, ":");
+  std::vector<std::string> v = mtx::string::split(s, ":");
   if (v.size() != 2)
     mxerror(fmt::format(err_msg, s));
 
   int64_t id = 0;
-  if (!parse_number(v[0], id))
+  if (!mtx::string::parse_number(v[0], id))
     mxerror(fmt::format(err_msg, s));
 
-  v = split(v[1], ",");
+  v = mtx::string::split(v[1], ",");
   if (v.size() != 4)
     mxerror(fmt::format(err_msg, s));
 
-  if (!parse_number(v[0], crop.left) || !parse_number(v[1], crop.top) || !parse_number(v[2], crop.right) || !parse_number(v[3], crop.bottom))
+  if (!mtx::string::parse_number(v[0], crop.left) || !mtx::string::parse_number(v[1], crop.top) || !mtx::string::parse_number(v[2], crop.right) || !mtx::string::parse_number(v[3], crop.bottom))
     mxerror(fmt::format(err_msg, s));
 
   ti.m_pixel_crop_list[id] = crop;
@@ -771,7 +771,7 @@ parse_arg_cropping(std::string const &s,
 static void
 parse_arg_colour_matrix_coefficients(std::string const &s,
                                      track_info_c &ti) {
-  if (!parse_property_to_value<int>(s, ti.m_colour_matrix_coeff_list))
+  if (!mtx::string::parse_property_to_value<int>(s, ti.m_colour_matrix_coeff_list))
     mxerror(fmt::format("Colour matrix coefficients parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -781,7 +781,7 @@ parse_arg_colour_matrix_coefficients(std::string const &s,
 static void
 parse_arg_colour_bits_per_channel(std::string const &s,
                                   track_info_c &ti) {
-  if (!parse_property_to_value<int>(s, ti.m_bits_per_channel_list))
+  if (!mtx::string::parse_property_to_value<int>(s, ti.m_bits_per_channel_list))
     mxerror(fmt::format("Bits per channel parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -791,7 +791,7 @@ parse_arg_colour_bits_per_channel(std::string const &s,
 static void
 parse_arg_chroma_subsample(std::string const &s,
                            track_info_c &ti) {
-  if (!parse_property_to_struct<chroma_subsample_t, int>(
+  if (!mtx::string::parse_property_to_struct<chroma_subsample_t, int>(
           s, ti.m_chroma_subsample_list))
     mxerror(fmt::format("Chroma subsampling parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
@@ -802,7 +802,7 @@ parse_arg_chroma_subsample(std::string const &s,
 static void
 parse_arg_cb_subsample(std::string const &s,
                        track_info_c &ti) {
-  if (!parse_property_to_struct<cb_subsample_t, int>(s, ti.m_cb_subsample_list))
+  if (!mtx::string::parse_property_to_struct<cb_subsample_t, int>(s, ti.m_cb_subsample_list))
     mxerror(fmt::format("Cb subsampling parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
@@ -812,7 +812,7 @@ parse_arg_cb_subsample(std::string const &s,
 static void
 parse_arg_chroma_siting(std::string const &s,
                         track_info_c &ti) {
-  if (!parse_property_to_struct<chroma_siting_t, int>(s, ti.m_chroma_siting_list))
+  if (!mtx::string::parse_property_to_struct<chroma_siting_t, int>(s, ti.m_chroma_siting_list))
     mxerror(fmt::format("Chroma siting parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
@@ -822,7 +822,7 @@ parse_arg_chroma_siting(std::string const &s,
 static void
 parse_arg_colour_range(std::string const &s,
                        track_info_c &ti) {
-  if (!parse_property_to_value<int>(s, ti.m_colour_range_list))
+  if (!mtx::string::parse_property_to_value<int>(s, ti.m_colour_range_list))
     mxerror(fmt::format("Colour range parameters: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -832,7 +832,7 @@ parse_arg_colour_range(std::string const &s,
 static void
 parse_arg_colour_transfer(std::string const &s,
                           track_info_c &ti) {
-  if (!parse_property_to_value<int>(s, ti.m_colour_transfer_list))
+  if (!mtx::string::parse_property_to_value<int>(s, ti.m_colour_transfer_list))
     mxerror(fmt::format("Colour transfer characteristics parameter : not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -842,7 +842,7 @@ parse_arg_colour_transfer(std::string const &s,
 static void
 parse_arg_colour_primaries(std::string const &s,
                            track_info_c &ti) {
-  if (!parse_property_to_value<int>(s, ti.m_colour_primaries_list))
+  if (!mtx::string::parse_property_to_value<int>(s, ti.m_colour_primaries_list))
     mxerror(fmt::format("Colour primaries parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -852,7 +852,7 @@ parse_arg_colour_primaries(std::string const &s,
 static void
 parse_arg_max_content_light(std::string const &s,
                             track_info_c &ti) {
-  if (!parse_property_to_value<int>(s, ti.m_max_cll_list))
+  if (!mtx::string::parse_property_to_value<int>(s, ti.m_max_cll_list))
     mxerror(fmt::format("Max content light parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -862,7 +862,7 @@ parse_arg_max_content_light(std::string const &s,
 static void
 parse_arg_max_frame_light(std::string const &s,
                           track_info_c &ti) {
-  if (!parse_property_to_value<int>(s, ti.m_max_fall_list))
+  if (!mtx::string::parse_property_to_value<int>(s, ti.m_max_fall_list))
     mxerror(fmt::format("Max frame light parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -873,7 +873,7 @@ parse_arg_max_frame_light(std::string const &s,
 static void
 parse_arg_chroma_coordinates(std::string const &s,
                              track_info_c &ti) {
-  if (!parse_property_to_struct<chroma_coordinates_t, double>(s, ti.m_chroma_coordinates_list))
+  if (!mtx::string::parse_property_to_struct<chroma_coordinates_t, double>(s, ti.m_chroma_coordinates_list))
     mxerror(fmt::format("chromaticity coordinates parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
@@ -883,7 +883,7 @@ parse_arg_chroma_coordinates(std::string const &s,
 static void
 parse_arg_white_coordinates(std::string const &s,
                             track_info_c &ti) {
-  if (!parse_property_to_struct<white_colour_coordinates_t, double>(s, ti.m_white_coordinates_list))
+  if (!mtx::string::parse_property_to_struct<white_colour_coordinates_t, double>(s, ti.m_white_coordinates_list))
     mxerror(fmt::format("white colour coordinates parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
@@ -893,7 +893,7 @@ parse_arg_white_coordinates(std::string const &s,
 static void
 parse_arg_max_luminance(std::string const &s,
                         track_info_c &ti) {
-  if (!parse_property_to_value<double>(s, ti.m_max_luminance_list))
+  if (!mtx::string::parse_property_to_value<double>(s, ti.m_max_luminance_list))
     mxerror(fmt::format("Max luminance parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -903,26 +903,26 @@ parse_arg_max_luminance(std::string const &s,
 static void
 parse_arg_min_luminance(std::string const &s,
                         track_info_c &ti) {
-  if (!parse_property_to_value<double>(s, ti.m_min_luminance_list))
+  if (!mtx::string::parse_property_to_value<double>(s, ti.m_min_luminance_list))
     mxerror(fmt::format("Min luminance parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
 static void
 parse_arg_projection_type(std::string const &s,
                           track_info_c &ti) {
-  if (!parse_property_to_value<uint64_t>(s, ti.m_projection_type_list))
+  if (!mtx::string::parse_property_to_value<uint64_t>(s, ti.m_projection_type_list))
     mxerror(fmt::format("Parameter {0}: not given in the form <TID>:n (argument was '{1}').\n", "--projection-type", s));
 }
 
 static void
 parse_arg_projection_private(std::string const &s,
                              track_info_c &ti) {
-  auto parts = split(s, ":");
-  strip(parts);
+  auto parts = mtx::string::split(s, ":");
+  mtx::string::strip(parts);
 
   uint64_t tid{};
 
-  if ((parts.size() != 2) || !parse_number(parts[0], tid))
+  if ((parts.size() != 2) || !mtx::string::parse_number(parts[0], tid))
     mxerror(fmt::format("Parameter {0}: not given in the form <TID>:n (argument was '{1}').\n", "--projection-private", s));
 
   try {
@@ -938,7 +938,7 @@ static void
 parse_arg_projection_pose_xyz(std::string const &s,
                               std::map<int64_t, double> &list,
                               std::string const &arg_suffix) {
-  if (!parse_property_to_value<double>(s, list))
+  if (!mtx::string::parse_property_to_value<double>(s, list))
     mxerror(fmt::format("Parameter {0}: not given in the form <TID>:n (argument was '{1}').\n", fmt::format("--projection-pose-{0}", arg_suffix), s));
 }
 
@@ -966,12 +966,12 @@ parse_arg_stereo_mode(const std::string &s,
   std::string errmsg = Y("Stereo mode parameter: not given in the form <TID>:<n|keyword> where n is a number between 0 and {0} "
                          "or one of these keywords: {1} (argument was '{2}').\n");
 
-  std::vector<std::string> v = split(s, ":");
+  std::vector<std::string> v = mtx::string::split(s, ":");
   if (v.size() != 2)
     mxerror(fmt::format(errmsg, stereo_mode_c::max_index(), stereo_mode_c::displayable_modes_list(), s));
 
   int64_t id = 0;
-  if (!parse_number(v[0], id))
+  if (!mtx::string::parse_number(v[0], id))
     mxerror(fmt::format(errmsg, stereo_mode_c::max_index(), stereo_mode_c::displayable_modes_list(), s));
 
   stereo_mode_c::mode mode = stereo_mode_c::parse_mode(v[1]);
@@ -981,7 +981,7 @@ parse_arg_stereo_mode(const std::string &s,
   }
 
   int index;
-  if (!parse_number(v[1], index) || !stereo_mode_c::valid_index(index))
+  if (!mtx::string::parse_number(v[1], index) || !stereo_mode_c::valid_index(index))
     mxerror(fmt::format(errmsg, stereo_mode_c::max_index(), stereo_mode_c::displayable_modes_list(), s));
 
   ti.m_stereo_mode_list[id] = static_cast<stereo_mode_c::mode>(index);
@@ -990,20 +990,20 @@ parse_arg_stereo_mode(const std::string &s,
 static void
 parse_arg_field_order(const std::string &s,
                       track_info_c &ti) {
-  std::vector<std::string> parts = split(s, ":");
+  std::vector<std::string> parts = mtx::string::split(s, ":");
   if (parts.size() != 2)
     mxerror(fmt::format("{0} {1}\n",
                         fmt::format(Y("The argument '{0}' to '{1}' is invalid."), s, "--field-order"),
                         Y("It does not consist of a track ID and a value separated by a colon.")));
 
   int64_t id = 0;
-  if (!parse_number(parts[0], id))
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format("{0} {1}\n",
                         fmt::format(Y("The argument '{0}' to '{1}' is invalid."), s, "--field-order"),
                         fmt::format(Y("'{0}' is not a valid track ID."), parts[0])));
 
   uint64_t order;
-  if (!parse_number(parts[1], order) || !mtx::included_in(order, 0u, 1u, 2u, 6u, 9u, 14u))
+  if (!mtx::string::parse_number(parts[1], order) || !mtx::included_in(order, 0u, 1u, 2u, 6u, 9u, 14u))
     mxerror(fmt::format("{0} {1}\n",
                         fmt::format(Y("The argument '{0}' to '{1}' is invalid."), s, "--field-order"),
                         fmt::format(Y("'{0}' is not a valid field order."), parts[0])));
@@ -1024,8 +1024,8 @@ parse_arg_split_duration(const std::string &arg) {
     s.erase(0, strlen("duration:"));
 
   int64_t split_after;
-  if (!parse_timestamp(s, split_after))
-    mxerror(fmt::format(Y("Invalid time for '--split' in '--split {0}'. Additional error message: {1}\n"), arg, timestamp_parser_error));
+  if (!mtx::string::parse_timestamp(s, split_after))
+    mxerror(fmt::format(Y("Invalid time for '--split' in '--split {0}'. Additional error message: {1}\n"), arg, mtx::string::timestamp_parser_error));
 
   g_cluster_helper->add_split_point(split_point_c(split_after, split_point_c::duration, false));
 }
@@ -1042,11 +1042,11 @@ parse_arg_split_timestamps(const std::string &arg) {
   if (std::regex_search(s, std::regex{"^time(?:stamps|codes):", std::regex_constants::icase}))
     s = std::regex_replace(s, std::regex{"^.*?:"}, "");
 
-  std::vector<std::string> timestamps = split(s, ",");
+  auto timestamps = mtx::string::split(s, ",");
   for (auto &timestamp : timestamps) {
     int64_t split_after;
-    if (!parse_timestamp(timestamp, split_after))
-      mxerror(fmt::format(Y("Invalid time for '--split' in '--split {0}'. Additional error message: {1}.\n"), arg, timestamp_parser_error));
+    if (!mtx::string::parse_timestamp(timestamp, split_after))
+      mxerror(fmt::format(Y("Invalid time for '--split' in '--split {0}'. Additional error message: {1}.\n"), arg, mtx::string::timestamp_parser_error));
     g_cluster_helper->add_split_point(split_point_c(split_after, split_point_c::timestamp, true));
   }
 }
@@ -1063,10 +1063,10 @@ parse_arg_split_frames(std::string const &arg) {
   if (balg::istarts_with(s, "frames:"))
     s.erase(0, 7);
 
-  std::vector<std::string> frames = split(s, ",");
+  auto frames = mtx::string::split(s, ",");
   for (auto &frame : frames) {
     uint64_t split_after = 0;
-    if (!parse_number(frame, split_after) || (0 == split_after))
+    if (!mtx::string::parse_number(frame, split_after) || (0 == split_after))
       mxerror(fmt::format(Y("Invalid frame for '--split' in '--split {0}'.\n"), arg));
     g_cluster_helper->add_split_point(split_point_c(split_after, split_point_c::frame_field, true));
   }
@@ -1085,9 +1085,9 @@ parse_arg_split_chapters(std::string const &arg) {
     return;
   }
 
-  for (auto &number_str : split(s, ",")) {
+  for (auto &number_str : mtx::string::split(s, ",")) {
     auto number = 0u;
-    if (!parse_number(number_str, number) || !number)
+    if (!mtx::string::parse_number(number_str, number) || !number)
       mxerror(fmt::format(Y("Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"), number_str, arg, Y("Not a valid number or not positive.")));
 
     g_splitting_by_chapter_numbers[number] = 1;
@@ -1142,7 +1142,7 @@ parse_arg_split_size(const std::string &arg) {
     s.erase(s.size() - 1);
 
   int64_t split_after = 0;
-  if (!parse_number(s, split_after))
+  if (!mtx::string::parse_number(s, split_after))
     mxerror(fmt::format(err_msg, arg));
 
   g_cluster_helper->add_split_point(split_point_c(split_after * modifier, split_point_c::size, false));
@@ -1224,16 +1224,16 @@ static void
 parse_arg_default_track(const std::string &s,
                         track_info_c &ti) {
   bool is_default      = true;
-  std::vector<std::string> parts = split(s, ":", 2);
+  auto parts = mtx::string::split(s, ":", 2);
   int64_t id           = 0;
 
-  strip(parts);
-  if (!parse_number(parts[0], id))
+  mtx::string::strip(parts);
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("Invalid track ID specified in '--default-track {0}'.\n"), s));
 
   try {
     if (2 == parts.size())
-      is_default = parse_bool(parts[1]);
+      is_default = mtx::string::parse_bool(parts[1]);
   } catch (...) {
     mxerror(fmt::format(Y("Invalid boolean option specified in '--default-track {0}'.\n"), s));
   }
@@ -1250,16 +1250,16 @@ static void
 parse_arg_forced_track(const std::string &s,
                         track_info_c &ti) {
   bool is_forced                 = true;
-  std::vector<std::string> parts = split(s, ":", 2);
+  auto parts = mtx::string::split(s, ":", 2);
   int64_t id                     = 0;
 
-  strip(parts);
-  if (!parse_number(parts[0], id))
+  mtx::string::strip(parts);
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("Invalid track ID specified in '--forced-track {0}'.\n"), s));
 
   try {
     if (2 == parts.size())
-      is_forced = parse_bool(parts[1]);
+      is_forced = mtx::string::parse_bool(parts[1]);
   } catch (...) {
     mxerror(fmt::format(Y("Invalid boolean option specified in '--forced-track {0}'.\n"), s));
   }
@@ -1276,13 +1276,13 @@ parse_arg_cues(const std::string &s,
                track_info_c &ti) {
 
   // Extract the track number.
-  std::vector<std::string> parts = split(s, ":", 2);
-  strip(parts);
+  auto parts = mtx::string::split(s, ":", 2);
+  mtx::string::strip(parts);
   if (parts.size() != 2)
     mxerror(fmt::format(Y("Invalid cues option. No track ID specified in '--cues {0}'.\n"), s));
 
   int64_t id = 0;
-  if (!parse_number(parts[0], id))
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("Invalid track ID specified in '--cues {0}'.\n"), s));
 
   if (parts[1].empty())
@@ -1306,13 +1306,13 @@ static void
 parse_arg_compression(const std::string &s,
                   track_info_c &ti) {
   // Extract the track number.
-  std::vector<std::string> parts = split(s, ":", 2);
-  strip(parts);
+  auto parts = mtx::string::split(s, ":", 2);
+  mtx::string::strip(parts);
   if (parts.size() != 2)
     mxerror(fmt::format(Y("Invalid compression option. No track ID specified in '--compression {0}'.\n"), s));
 
   int64_t id = 0;
-  if (!parse_number(parts[0], id))
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("Invalid track ID specified in '--compression {0}'.\n"), s));
 
   if (parts[1].size() == 0)
@@ -1356,8 +1356,8 @@ parse_arg_language(const std::string &s,
                    bool check,
                    bool empty_ok = false) {
   // Extract the track number.
-  std::vector<std::string>parts = split(s, ":", 2);
-  strip(parts);
+  auto parts = mtx::string::split(s, ":", 2);
+  mtx::string::strip(parts);
   if (parts.empty())
     mxerror(fmt::format(Y("No track ID specified in '--{0} {1}'.\n"), opt, s));
   if (1 == parts.size()) {
@@ -1367,7 +1367,7 @@ parse_arg_language(const std::string &s,
   }
 
   int64_t id = 0;
-  if (!parse_number(parts[0], id))
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("Invalid track ID specified in '--{0} {1}'.\n"), opt, s));
 
   if (check) {
@@ -1393,13 +1393,13 @@ static void
 parse_arg_sub_charset(const std::string &s,
                       track_info_c &ti) {
   // Extract the track number.
-  std::vector<std::string> parts = split(s, ":", 2);
-  strip(parts);
+  auto parts = mtx::string::split(s, ":", 2);
+  mtx::string::strip(parts);
   if (parts.size() != 2)
     mxerror(fmt::format(Y("Invalid sub charset option. No track ID specified in '--sub-charset {0}'.\n"), s));
 
   int64_t id = 0;
-  if (!parse_number(parts[0], id))
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("Invalid track ID specified in '--sub-charset {0}'.\n"), s));
 
   if (parts[1].empty())
@@ -1417,13 +1417,13 @@ parse_arg_tags(const std::string &s,
                const std::string &opt,
                track_info_c &ti) {
   // Extract the track number.
-  std::vector<std::string> parts = split(s, ":", 2);
-  strip(parts);
+  auto parts = mtx::string::split(s, ":", 2);
+  mtx::string::strip(parts);
   if (parts.size() != 2)
     mxerror(fmt::format(Y("Invalid tags option. No track ID specified in '{0} {1}'.\n"), opt, s));
 
   int64_t id = 0;
-  if (!parse_number(parts[0], id))
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("Invalid track ID specified in '{0} {1}'.\n"), opt, s));
 
   if (parts[1].empty())
@@ -1441,13 +1441,13 @@ parse_arg_fourcc(const std::string &s,
                  const std::string &opt,
                  track_info_c &ti) {
   std::string orig               = s;
-  std::vector<std::string> parts = split(s, ":", 2);
+  auto parts = mtx::string::split(s, ":", 2);
 
   if (parts.size() != 2)
     mxerror(fmt::format(Y("FourCC: Missing track ID in '{0} {1}'.\n"), opt, orig));
 
   int64_t id = 0;
-  if (!parse_number(parts[0], id))
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("FourCC: Invalid track ID in '{0} {1}'.\n"), opt, orig));
 
   if (parts[1].size() != 4)
@@ -1464,20 +1464,20 @@ static void
 parse_arg_track_order(const std::string &s) {
   track_order_t to;
 
-  std::vector<std::string> parts = split(s, ",");
-  strip(parts);
+  auto parts = mtx::string::split(s, ",");
+  mtx::string::strip(parts);
 
   size_t i;
   for (i = 0; i < parts.size(); i++) {
-    std::vector<std::string> pair = split(parts[i].c_str(), ":");
+    auto pair = mtx::string::split(parts[i].c_str(), ":");
 
     if (pair.size() != 2)
       mxerror(fmt::format(Y("'{0}' is not a valid pair of file ID and track ID in '--track-order {1}'.\n"), parts[i], s));
 
-    if (!parse_number(pair[0], to.file_id))
+    if (!mtx::string::parse_number(pair[0], to.file_id))
       mxerror(fmt::format(Y("'{0}' is not a valid file ID in '--track-order {1}'.\n"), pair[0], s));
 
-    if (!parse_number(pair[1], to.track_id))
+    if (!mtx::string::parse_number(pair[1], to.track_id))
       mxerror(fmt::format(Y("'{0}' is not a valid file ID in '--track-order {1}'.\n"), pair[1], s));
 
     if (std::find_if(g_track_order.begin(), g_track_order.end(), [&to](auto const &ref) { return (ref.file_id == to.file_id) && (ref.track_id == to.track_id); }) == g_track_order.end())
@@ -1505,19 +1505,19 @@ parse_arg_track_order(const std::string &s) {
 static void
 parse_arg_append_to(const std::string &s) {
   g_append_mapping.clear();
-  std::vector<std::string> entries = split(s, ",");
-  strip(entries);
+  auto entries = mtx::string::split(s, ",");
+  mtx::string::strip(entries);
 
   for (auto &entry : entries) {
     append_spec_t mapping;
 
-    std::vector<std::string> parts = split(entry, ":");
+    auto parts = mtx::string::split(entry, ":");
 
     if (   (parts.size() != 4)
-        || !parse_number(parts[0], mapping.src_file_id)
-        || !parse_number(parts[1], mapping.src_track_id)
-        || !parse_number(parts[2], mapping.dst_file_id)
-        || !parse_number(parts[3], mapping.dst_track_id))
+        || !mtx::string::parse_number(parts[0], mapping.src_file_id)
+        || !mtx::string::parse_number(parts[1], mapping.src_track_id)
+        || !mtx::string::parse_number(parts[2], mapping.dst_file_id)
+        || !mtx::string::parse_number(parts[3], mapping.dst_track_id))
       mxerror(fmt::format(Y("'{0}' is not a valid mapping of file and track IDs in '--append-to {1}'.\n"), entry, s));
 
     g_append_mapping.push_back(mapping);
@@ -1545,16 +1545,16 @@ parse_arg_append_mode(const std::string &s) {
 static void
 parse_arg_default_duration(const std::string &s,
                            track_info_c &ti) {
-  std::vector<std::string> parts = split(s, ":");
+  auto parts = mtx::string::split(s, ":");
   if (parts.size() != 2)
     mxerror(fmt::format(Y("'{0}' is not a valid pair of track ID and default duration in '--default-duration {0}'.\n"), s));
 
   int64_t id = 0;
-  if (!parse_number(parts[0], id))
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("'{0}' is not a valid track ID in '--default-duration {1}'.\n"), parts[0], s));
 
   int64_t default_duration{};
-  if (!parse_duration_number_with_unit(parts[1], default_duration))
+  if (!mtx::string::parse_duration_number_with_unit(parts[1], default_duration))
     mxerror(fmt::format(Y("'{0}' is not recognized as a valid number format or it doesn't contain a valid unit ('s', 'ms', 'us', 'ns', 'fps', 'p' or 'i') in '{1}'.\n"),
                         parts[1], fmt::format("--default-duration {0}", s)));
 
@@ -1573,16 +1573,16 @@ parse_arg_nalu_size_length(const std::string &s,
                            track_info_c &ti) {
   static bool s_nalu_size_length_3_warning_printed = false;
 
-  std::vector<std::string> parts = split(s, ":");
+  auto parts = mtx::string::split(s, ":");
   if (parts.size() != 2)
     mxerror(fmt::format(Y("'{0}' is not a valid pair of track ID and NALU size length in '--nalu-size-length {0}'.\n"), s));
 
   int64_t id = 0;
-  if (!parse_number(parts[0], id))
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("'{0}' is not a valid track ID in '--nalu-size-length {1}'.\n"), parts[0], s));
 
   int64_t nalu_size_length;
-  if (!parse_number(parts[1], nalu_size_length) || (2 > nalu_size_length) || (4 < nalu_size_length))
+  if (!mtx::string::parse_number(parts[1], nalu_size_length) || (2 > nalu_size_length) || (4 < nalu_size_length))
     mxerror(fmt::format(Y("The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length {0}'.\n"), s));
 
   if ((3 == nalu_size_length) && !s_nalu_size_length_3_warning_printed) {
@@ -1602,16 +1602,16 @@ static void
 parse_arg_fix_bitstream_frame_rate(const std::string &s,
                                    track_info_c &ti) {
   bool fix   = true;
-  auto parts = split(s, ":", 2);
+  auto parts = mtx::string::split(s, ":", 2);
   int64_t id = 0;
 
-  strip(parts);
-  if (!parse_number(parts[0], id))
+  mtx::string::strip(parts);
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("Invalid track ID specified in '--fix-bitstream-timing-information {0}'.\n"), s));
 
   try {
     if (2 == parts.size())
-      fix = parse_bool(parts[1]);
+      fix = mtx::string::parse_bool(parts[1]);
   } catch (...) {
     mxerror(fmt::format(Y("Invalid boolean option specified in '--fix-bitstream-timing-information {0}'.\n"), s));
   }
@@ -1624,7 +1624,7 @@ parse_arg_reduce_to_core(const std::string &s,
                          track_info_c &ti) {
   int64_t id = 0;
 
-  if (!parse_number(s, id))
+  if (!mtx::string::parse_number(s, id))
     mxerror(fmt::format(Y("Invalid track ID specified in '{0} {1}'.\n"), "--reduce-to-core", s));
 
   ti.m_reduce_to_core[id] = true;
@@ -1635,7 +1635,7 @@ parse_arg_remove_dialog_normalization_gain(const std::string &s,
                                            track_info_c &ti) {
   int64_t id = 0;
 
-  if (!parse_number(s, id))
+  if (!mtx::string::parse_number(s, id))
     mxerror(fmt::format(Y("Invalid track ID specified in '{0} {1}'.\n"), "--remove-dialog-normalization-gain", s));
 
   ti.m_remove_dialog_normalization_gain[id] = true;
@@ -1649,16 +1649,16 @@ parse_arg_remove_dialog_normalization_gain(const std::string &s,
 static void
 parse_arg_max_blockadd_id(const std::string &s,
                           track_info_c &ti) {
-  std::vector<std::string> parts = split(s, ":");
+  auto parts = mtx::string::split(s, ":");
   if (parts.size() != 2)
     mxerror(fmt::format(Y("'{0}' is not a valid pair of track ID and block additional in '--blockadd {0}'.\n"), s));
 
   int64_t id = 0;
-  if (!parse_number(parts[0], id))
+  if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("'{0}' is not a valid track ID in '--blockadd {1}'.\n"), parts[0], s));
 
   int64_t max_blockadd_id = 0;
-  if (!parse_number(parts[1], max_blockadd_id) || (max_blockadd_id < 0))
+  if (!mtx::string::parse_number(parts[1], max_blockadd_id) || (max_blockadd_id < 0))
     mxerror(fmt::format(Y("'{0}' is not a valid block additional max in '--blockadd {1}'.\n"), parts[1], s));
 
   ti.m_max_blockadd_ids[id] = max_blockadd_id;
@@ -1673,10 +1673,10 @@ parse_arg_max_blockadd_id(const std::string &s,
 static void
 parse_arg_aac_is_sbr(const std::string &s,
                      track_info_c &ti) {
-  std::vector<std::string> parts = split(s, ":", 2);
+  auto parts = mtx::string::split(s, ":", 2);
 
   int64_t id = 0;
-  if (!parse_number(parts[0], id) || (id < 0))
+  if (!mtx::string::parse_number(parts[0], id) || (id < 0))
     mxerror(fmt::format(Y("Invalid track ID specified in '--aac-is-sbr {0}'.\n"), s));
 
   if ((parts.size() == 2) && (parts[1] != "0") && (parts[1] != "1"))
@@ -1745,7 +1745,7 @@ parse_arg_next_segment_uid(const std::string &param,
 static void
 parse_arg_segment_uid(const std::string &param,
                       const std::string &arg) {
-  std::vector<std::string> parts = split(arg, ",");
+  auto parts = mtx::string::split(arg, ",");
   for (auto &part : parts) {
     try {
       g_forced_seguids.emplace_back(parse_segment_uid_or_read_from_file(part));
@@ -1761,14 +1761,14 @@ parse_arg_cluster_length(std::string arg) {
   if (0 <= idx) {
     arg.erase(idx);
     int64_t max_ms_per_cluster;
-    if (!parse_number(arg, max_ms_per_cluster) || (100 > max_ms_per_cluster) || (32000 < max_ms_per_cluster))
+    if (!mtx::string::parse_number(arg, max_ms_per_cluster) || (100 > max_ms_per_cluster) || (32000 < max_ms_per_cluster))
       mxerror(fmt::format(Y("Cluster length '{0}' out of range (100..32000).\n"), arg));
 
     g_max_ns_per_cluster     = max_ms_per_cluster * 1000000;
     g_max_blocks_per_cluster = 65535;
 
   } else {
-    if (!parse_number(arg, g_max_blocks_per_cluster) || (0 > g_max_blocks_per_cluster) || (65535 < g_max_blocks_per_cluster))
+    if (!mtx::string::parse_number(arg, g_max_blocks_per_cluster) || (0 > g_max_blocks_per_cluster) || (65535 < g_max_blocks_per_cluster))
       mxerror(fmt::format(Y("Cluster length '{0}' out of range (0..65535).\n"), arg));
 
     g_max_ns_per_cluster = 32000000000ull;
@@ -1785,7 +1785,7 @@ parse_arg_attach_file(attachment_cptr const &attachment,
 
     if (size > 0x7fffffff)
       mxerror(fmt::format("{0} {1}\n",
-                          fmt::format(Y("The attachment ({0}) is too big ({1})."), arg, format_file_size(size)),
+                          fmt::format(Y("The attachment ({0}) is too big ({1})."), arg, mtx::string::format_file_size(size)),
                           Y("Only files smaller than 2 GiB are supported.")));
 
   } catch (...) {
@@ -1878,7 +1878,7 @@ parse_arg_chapters(const std::string &param,
 
 static void
 parse_arg_generate_chapters(std::string const &arg) {
-  auto parts = split(arg, ":", 2);
+  auto parts = mtx::string::split(arg, ":", 2);
 
   if (parts[0] == "when-appending") {
     g_cluster_helper->enable_chapter_generation(chapter_generation_mode_e::when_appending, g_chapter_language);
@@ -1893,7 +1893,7 @@ parse_arg_generate_chapters(std::string const &arg) {
     parts.emplace_back("");
 
   auto interval = int64_t{};
-  if (!parse_timestamp(parts[1], interval) || (interval < 0))
+  if (!mtx::string::parse_timestamp(parts[1], interval) || (interval < 0))
     mxerror(fmt::format("The chapter generation interval must be a positive number in '--generate-chapters {0}'.\n", arg));
 
   g_cluster_helper->enable_chapter_generation(chapter_generation_mode_e::interval, g_chapter_language);
@@ -1919,7 +1919,7 @@ parse_arg_timestamp_scale(const std::string &arg) {
     mxerror(Y("'--timestamp-scale' was used more than once.\n"));
 
   int64_t temp = 0;
-  if (!parse_number(arg, temp))
+  if (!mtx::string::parse_number(arg, temp))
     mxerror(Y("The argument to '--timestamp-scale' must be a number.\n"));
 
   if (-1 == temp)
@@ -1952,11 +1952,11 @@ parse_arg_attachments(const std::string &param,
     ti.m_attach_mode_list.set_reversed();
   }
 
-  std::vector<std::string> elements = split(arg, ",");
+  auto elements = mtx::string::split(arg, ",");
 
   size_t i;
   for (i = 0; elements.size() > i; ++i) {
-    std::vector<std::string> pair = split(elements[i], ":");
+    auto pair = mtx::string::split(elements[i], ":");
 
     if (1 == pair.size())
       pair.push_back("all");
@@ -1965,7 +1965,7 @@ parse_arg_attachments(const std::string &param,
       mxerror(fmt::format(Y("The argument '{0}' to '{1}' is invalid: too many colons in element '{2}'.\n"), arg, param, elements[i]));
 
     int64_t id;
-    if (!parse_number(pair[0], id))
+    if (!mtx::string::parse_number(pair[0], id))
       mxerror(fmt::format(Y("The argument '{0}' to '{1}' is invalid: '{2}' is not a valid track ID.\n"), arg, param, pair[0]));
 
     if (pair[1] == "all")
@@ -2142,7 +2142,7 @@ parse_arg_probe_range(std::optional<std::string> next_arg) {
     mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), "--probe-range-percentage"));
 
   int64_rational_c probe_range_percentage{0, 1};
-  if (   !parse_number_as_rational(*next_arg, probe_range_percentage)
+  if (   !mtx::string::parse_number_as_rational(*next_arg, probe_range_percentage)
       || !probe_range_percentage.denominator()
       || (boost::rational_cast<double>(probe_range_percentage) <= 0)
       || (boost::rational_cast<double>(probe_range_percentage)  > 100))
@@ -2345,7 +2345,7 @@ parse_args(std::vector<std::string> args) {
       if ((no_next_arg) || (next_arg[0] == 0))
         mxerror(Y("'--split-max-files' lacks the number of files.\n"));
 
-      if (!parse_number(next_arg, g_split_max_num_files) || (2 > g_split_max_num_files))
+      if (!mtx::string::parse_number(next_arg, g_split_max_num_files) || (2 > g_split_max_num_files))
         mxerror(Y("Wrong argument to '--split-max-files'.\n"));
 
       sit++;
@@ -3156,7 +3156,7 @@ main(int argc,
 
   check_for_unused_chapter_numbers_while_spliting_by_chapters();
 
-  mxinfo(fmt::format(Y("Multiplexing took {0}.\n"), create_minutes_seconds_time_string((mtx::sys::get_current_time_millis() - start + 500) / 1000, true)));
+  mxinfo(fmt::format(Y("Multiplexing took {0}.\n"), mtx::string::create_minutes_seconds_time_string((mtx::sys::get_current_time_millis() - start + 500) / 1000, true)));
 
   cleanup();
 

@@ -22,7 +22,7 @@ webvtt_packetizer_c::webvtt_packetizer_c(generic_reader_c *p_reader,
                                          track_info_c &p_ti)
   : textsubs_packetizer_c{p_reader, p_ti, MKV_S_TEXTWEBVTT}
 {
-  m_line_ending_style = line_ending_style_e::lf;
+  m_line_ending_style = mtx::string::line_ending_style_e::lf;
 }
 
 webvtt_packetizer_c::~webvtt_packetizer_c() {
@@ -31,7 +31,7 @@ webvtt_packetizer_c::~webvtt_packetizer_c() {
 int
 webvtt_packetizer_c::process(packet_cptr packet) {
   for (auto &addition : packet->data_adds)
-    addition = memory_c::clone(normalize_line_endings(addition->to_string()));
+    addition = memory_c::clone(mtx::string::normalize_line_endings(addition->to_string()));
 
   return textsubs_packetizer_c::process(packet);
 }

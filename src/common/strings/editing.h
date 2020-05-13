@@ -15,6 +15,7 @@
 
 #include "common/common_pch.h"
 
+namespace mtx::string {
 
 enum class line_ending_style_e {
   cr_lf,
@@ -34,7 +35,7 @@ void strip_back(std::string &s, bool newlines = false);
 
 std::string &shrink_whitespace(std::string &s);
 
-std::string get_displayable_string(const char *src, int max_len = -1);
-std::string get_displayable_string(std::string const &src);
+std::string get_displayable(const char *src, int max_len = -1);
+std::string get_displayable(std::string const &src);
 
-extern const std::string empty_string;
+} // mtx::string

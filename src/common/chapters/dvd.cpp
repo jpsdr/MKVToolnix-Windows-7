@@ -113,7 +113,7 @@ maybe_parse_dvd(std::string const &file_name,
   if (std::regex_search(cleaned_file_name, matches, std::regex{"(.+):([0-9]+)$"})) {
     cleaned_file_name = matches[1].str();
 
-    if (!parse_number(matches[2].str(), title) || (title < 1))
+    if (!mtx::string::parse_number(matches[2].str(), title) || (title < 1))
       throw parser_x{fmt::format(Y("'{0}' is not a valid DVD title number."), matches[2].str())};
   }
 

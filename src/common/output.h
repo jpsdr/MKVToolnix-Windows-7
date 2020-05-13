@@ -64,6 +64,4 @@ void mxerror_tid(const std::string &file_name, int64_t track_id, const std::stri
 void mxverb_fn(unsigned int level, const std::string &file_name, const std::string &message);
 void mxverb_tid(unsigned int level, const std::string &file_name, int64_t track_id, const std::string &message);
 
-extern const std::string empty_string;
-
 std::string fourcc_to_string(uint32_t fourcc);

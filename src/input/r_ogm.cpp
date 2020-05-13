@@ -1225,7 +1225,7 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
     if (gap_here) {
       mxdebug_if(ms_debug,
                  fmt::format("Opus packet after gap; Ogg page end timestamp {0} page duration {1} first timestamp {2}\n",
-                             page_end_timestamp, page_duration, format_timestamp(packets.front().first->timestamp)));
+                             page_end_timestamp, page_duration, mtx::string::format_timestamp(packets.front().first->timestamp)));
 
     } else if (current_timestamp != timestamp_c::ns(0)) {
       if (current_timestamp < timestamp_c::ns(0)) {
@@ -1236,7 +1236,7 @@ ogm_a_opus_demuxer_c::process_page(int64_t granulepos) {
 
       mxdebug_if(ms_debug,
                  fmt::format("Opus first packet's timestamp is not zero; Ogg page end timestamp {0} page duration {1} first timestamp {2} (Ogg page's granulepos {3}) shift {4}\n",
-                             page_end_timestamp, page_duration, format_timestamp(packets.front().first->timestamp), granulepos, m_timestamp_shift));
+                             page_end_timestamp, page_duration, mtx::string::format_timestamp(packets.front().first->timestamp), granulepos, m_timestamp_shift));
     }
 
   } else {

@@ -70,7 +70,7 @@ mp3_packetizer_c::handle_garbage(int64_t bytes) {
                  fmt::format("{0} {1}\n",
                              fmt::format(NY("This audio track contains {0} byte of invalid data which was skipped before timestamp {1}.",
                                             "This audio track contains {0} bytes of invalid data which were skipped before timestamp {1}.", bytes),
-                                         bytes, format_timestamp(packet->assigned_timestamp - timestamp_offset)),
+                                         bytes, mtx::string::format_timestamp(packet->assigned_timestamp - timestamp_offset)),
                              Y("The audio/video synchronization may have been lost.")));
     }));
 }

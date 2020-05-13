@@ -92,7 +92,7 @@ propedit_cli_parser_c::set_attachment_mime_type() {
 void
 propedit_cli_parser_c::set_attachment_uid() {
   auto uid = uint64_t{};
-  if (!parse_number(m_next_arg, uid))
+  if (!mtx::string::parse_number(m_next_arg, uid))
     mxerror(fmt::format(Y("The value '{0}' is not a number.\n"), m_next_arg));
 
   m_attachment.m_uid = uid;
@@ -189,7 +189,7 @@ propedit_cli_parser_c::list_property_names_for_table(const std::vector<property_
     auto description = property.m_title.get_translated()
                      + ": "
                      + std::regex_replace(property.m_description.get_translated(), s_newline_re, " ");
-    mxinfo(format_paragraph(description, max_name_len + 8, name, indent_string));
+    mxinfo(mtx::string::format_paragraph(description, max_name_len + 8, name, indent_string));
   }
 }
 

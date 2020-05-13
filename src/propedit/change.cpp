@@ -119,20 +119,20 @@ change_c::parse_unicode_string() {
 
 void
 change_c::parse_unsigned_integer() {
-  if (!parse_number(m_value, m_ui_value))
+  if (!mtx::string::parse_number(m_value, m_ui_value))
     mxerror(fmt::format(Y("The property value is not a valid unsigned integer in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED));
 }
 
 void
 change_c::parse_signed_integer() {
-  if (!parse_number(m_value, m_si_value))
+  if (!mtx::string::parse_number(m_value, m_si_value))
     mxerror(fmt::format(Y("The property value is not a valid signed integer in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED));
 }
 
 void
 change_c::parse_boolean() {
   try {
-    m_b_value = parse_bool(m_value);
+    m_b_value = mtx::string::parse_bool(m_value);
   } catch (...) {
     mxerror(fmt::format(Y("The property value is not a valid boolean in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED));
   }
@@ -140,7 +140,7 @@ change_c::parse_boolean() {
 
 void
 change_c::parse_floating_point_number() {
-  if (!parse_number(m_value, m_fp_value))
+  if (!mtx::string::parse_number(m_value, m_fp_value))
     mxerror(fmt::format(Y("The property value is not a valid floating point number in '{0}'. {1}\n"), get_spec(), FILE_NOT_MODIFIED));
 }
 
@@ -166,16 +166,16 @@ change_c::parse_date_time() {
   auto valid = std::regex_match(m_value, matches, re);
 
   if (valid)
-    valid = parse_number(matches[1].str(), year)
-         && parse_number(matches[2].str(), month)
-         && parse_number(matches[3].str(), day)
-         && parse_number(matches[4].str(), hours)
-         && parse_number(matches[5].str(), minutes)
-         && parse_number(matches[6].str(), seconds);
+    valid = mtx::string::parse_number(matches[1].str(), year)
+         && mtx::string::parse_number(matches[2].str(), month)
+         && mtx::string::parse_number(matches[3].str(), day)
+         && mtx::string::parse_number(matches[4].str(), hours)
+         && mtx::string::parse_number(matches[5].str(), minutes)
+         && mtx::string::parse_number(matches[6].str(), seconds);
 
   if (valid && (matches[7].str() != "Z")) {
-    valid = parse_number(matches[9].str(),  offset_hours)
-         && parse_number(matches[10].str(), offset_minutes);
+    valid = mtx::string::parse_number(matches[9].str(),  offset_hours)
+         && mtx::string::parse_number(matches[10].str(), offset_minutes);
 
     if (matches[8].str() == "-")
       offset_mult = -1;
@@ -356,7 +356,7 @@ change_c::parse_spec(change_c::change_type_e type,
     name = spec;
 
   else {
-    auto parts = split(spec, "=", 2);
+    auto parts = mtx::string::split(spec, "=", 2);
     if (2 != parts.size())
       throw std::runtime_error(Y("missing value"));
 

@@ -1200,7 +1200,7 @@ header_c::parse_audio_specific_config(const unsigned char *data,
   if (size < 2)
     return;
 
-  mxdebug_if(s_debug_parse_data, fmt::format("mtx::aac::parse_audio_specific_config: size {0}, data: {1}\n", size, to_hex(data, size)));
+  mxdebug_if(s_debug_parse_data, fmt::format("mtx::aac::parse_audio_specific_config: size {0}, data: {1}\n", size, mtx::string::to_hex(data, size)));
 
   mtx::bits::reader_c bc{data, static_cast<unsigned int>(size)};
   parse_audio_specific_config(bc, look_for_sync_extension);

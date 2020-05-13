@@ -50,9 +50,9 @@ ScannedFileItem *
 ScannedFileItem::create(SourceFile const &scannedFile) {
   auto item = new ScannedFileItem{ scannedFile, QStringList{
       QFileInfo{scannedFile.m_fileName}.fileName(),
-      to_qs(format_timestamp(scannedFile.m_playlistDuration, 0)),
+      to_qs(mtx::string::format_timestamp(scannedFile.m_playlistDuration, 0)),
       QString::number(scannedFile.m_playlistChapters),
-      to_qs(format_file_size(scannedFile.m_playlistSize)),
+      to_qs(mtx::string::format_file_size(scannedFile.m_playlistSize)),
     }};
 
   for (auto column = 1; column <= 3; ++column)
@@ -325,8 +325,8 @@ SelectPlaylistDialog::onScannedFileSelected(QTreeWidgetItem *current,
 
   auto const &file = *selectedItem->m_file;
 
-  ui->duration->setText(to_qs(format_timestamp(file.m_playlistDuration, 0)));
-  ui->size->setText(to_qs(format_file_size(file.m_playlistSize)));
+  ui->duration->setText(to_qs(mtx::string::format_timestamp(file.m_playlistDuration, 0)));
+  ui->size->setText(to_qs(mtx::string::format_file_size(file.m_playlistSize)));
   ui->numberOfChapters->setText(QString::number(file.m_playlistChapters));
 
   ui->tracks->setSortingEnabled(false);

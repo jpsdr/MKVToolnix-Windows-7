@@ -690,7 +690,7 @@ MuxConfig::buildMkvmergeOptions()
 
   add(Q("--global-tags"), m_globalTags);
 
-  auto additionalOptions = Q(strip_copy(to_utf8(m_additionalOptions)));
+  auto additionalOptions = Q(mtx::string::strip_copy(to_utf8(m_additionalOptions)));
   if (!additionalOptions.isEmpty())
     options += additionalOptions.split(QRegExp{" +"});
 

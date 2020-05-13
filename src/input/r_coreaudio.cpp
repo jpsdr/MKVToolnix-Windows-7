@@ -167,7 +167,7 @@ coreaudio_reader_c::scan_chunks() {
       chunk.m_size          = std::min<uint64_t>(chunk.m_size ? chunk.m_size : std::numeric_limits<uint64_t>::max(), file_size);
       chunk.m_data_position = m_in->getFilePointer();
 
-      mxdebug_if(m_debug_chunks,fmt::format("scan_chunks() new chunk at {0} data position {3} type '{1}' size {2}\n", chunk.m_position, get_displayable_string(chunk.m_type), chunk.m_size, chunk.m_data_position));
+      mxdebug_if(m_debug_chunks,fmt::format("scan_chunks() new chunk at {0} data position {3} type '{1}' size {2}\n", chunk.m_position, mtx::string::get_displayable(chunk.m_type), chunk.m_size, chunk.m_data_position));
 
       m_chunks.push_back(chunk);
       m_in->setFilePointer(chunk.m_size, seek_current);
@@ -291,7 +291,7 @@ coreaudio_reader_c::parse_pakt_chunk() {
       mxdebug_if(m_debug_packets,
                  fmt::format("  {3}) position {0} size {1} raw duration {2} raw timestamp {5} duration {6} timestamp {7} position in 'pakt' {4}\n",
                              packet.m_position, packet.m_size, packet.m_duration, packet_num, mem.getFilePointer(), packet.m_timestamp,
-                             format_timestamp(packet.m_duration * m_frames_to_timestamp), format_timestamp(packet.m_timestamp * m_frames_to_timestamp)));
+                             mtx::string::format_timestamp(packet.m_duration * m_frames_to_timestamp), mtx::string::format_timestamp(packet.m_timestamp * m_frames_to_timestamp)));
     }
 
     mxdebug_if(m_debug_headers, fmt::format("Final value for 'position': {0} data chunk end: {1}\n", position, data_chunk->m_position + 12 + data_chunk->m_size));

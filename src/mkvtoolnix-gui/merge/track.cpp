@@ -418,7 +418,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
   if (m_fixBitstreamTimingInfo)
     opt.options << Q("--fix-bitstream-timing-information") << Q("%1:1").arg(sid);
 
-  auto additionalOptions = Q(strip_copy(to_utf8(m_additionalOptions)));
+  auto additionalOptions = Q(mtx::string::strip_copy(to_utf8(m_additionalOptions)));
   if (!additionalOptions.isEmpty())
     opt.options += additionalOptions.replace(Q("<TID>"), sid).split(QRegExp{" +"});
 }

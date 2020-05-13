@@ -117,7 +117,7 @@ cluster_helper_c::render_before_adding_if_necessary(packet_cptr &packet) {
              fmt::format("cluster_helper_c::add_packet(): new packet { source {0}/{1} "
                          "timestamp: {2} duration: {3} bref: {4} fref: {5} assigned_timestamp: {6} timestamp_delay: {7} }\n",
                          packet->source->m_ti.m_id, packet->source->m_ti.m_fname, packet->timestamp,          packet->duration,
-                         packet->bref,              packet->fref,                 packet->assigned_timestamp, format_timestamp(timestamp_delay)));
+                         packet->bref,              packet->fref,                 packet->assigned_timestamp, mtx::string::format_timestamp(timestamp_delay)));
 
   bool is_video_keyframe = (packet->source == g_video_packetizer) && packet->is_key_frame();
   bool do_render         = (std::numeric_limits<int16_t>::max() < timestamp_delay)
@@ -216,7 +216,7 @@ cluster_helper_c::split(packet_cptr &packet) {
   bool create_new_file       = current_split_point.m_create_new_file;
   bool previously_discarding = m->discarding;
 
-  mxdebug_if(m->debug_splitting, fmt::format("Splitting: splitpoint {0} reached before timestamp {1}, create new? {2}.\n", current_split_point.str(), format_timestamp(packet->assigned_timestamp), create_new_file));
+  mxdebug_if(m->debug_splitting, fmt::format("Splitting: splitpoint {0} reached before timestamp {1}, create new? {2}.\n", current_split_point.str(), mtx::string::format_timestamp(packet->assigned_timestamp), create_new_file));
 
   finish_file(false, create_new_file, previously_discarding);
 
@@ -357,7 +357,7 @@ cluster_helper_c::must_duration_be_set(render_groups_c *rg,
             && (ROUND_TIMESTAMP_SCALE(block_duration) != ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration)))) {
       // if (!rg)
       //   mxinfo(fmt::format("YOYO 1 np mand {0} blodu {1} defdur {2} bloduRND {3} defdurRND {4} groupsize {5} ts {6}\n", new_packet->duration_mandatory, block_duration, (group_size + 1) * def_duration,
-      //          ROUND_TIMESTAMP_SCALE(block_duration), ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration), group_size, format_timestamp(new_packet->assigned_timestamp)));
+      //          ROUND_TIMESTAMP_SCALE(block_duration), ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration), group_size, mtx::string::format_timestamp(new_packet->assigned_timestamp)));
       return true;
     }
 
@@ -367,7 +367,7 @@ cluster_helper_c::must_duration_be_set(render_groups_c *rg,
              && (ROUND_TIMESTAMP_SCALE(block_duration) != ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration))) {
     // if (!rg)
     //   mxinfo(fmt::format("YOYO 1 np blodu {0} defdur {1} bloduRND {2} defdurRND {3} ts {4}\n", block_duration, def_duration, ROUND_TIMESTAMP_SCALE(block_duration), ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration),
-    //          format_timestamp(new_packet->assigned_timestamp)));
+    //          mtx::string::format_timestamp(new_packet->assigned_timestamp)));
     return true;
   }
 
@@ -643,7 +643,7 @@ cluster_helper_c::handle_discarded_duration(bool create_new_file,
   if (create_new_file) { // || (!previously_discarding && m->discarding)) {
     mxdebug_if(m->debug_splitting,
                fmt::format("RESETTING discarded duration of {0}, create_new_file {1} previously_discarding {2} m->discarding {3}\n",
-                           format_timestamp(m->discarded_duration), create_new_file, previously_discarding, m->discarding));
+                           m->discarded_duration, create_new_file, previously_discarding, m->discarding));
     m->discarded_duration = 0;
 
   } else if (previously_discarding && !m->discarding) {
@@ -652,12 +652,12 @@ cluster_helper_c::handle_discarded_duration(bool create_new_file,
 
     mxdebug_if(m->debug_splitting,
                fmt::format("ADDING to discarded duration TC at {0} / {1} diff {2} new total {3} create_new_file {4} previously_discarding {5} m->discarding {6}\n",
-                           format_timestamp(m->first_discarded_timestamp), format_timestamp(m->last_discarded_timestamp_and_duration), format_timestamp(diff), format_timestamp(m->discarded_duration),
+                           m->first_discarded_timestamp, m->last_discarded_timestamp_and_duration, diff, m->discarded_duration,
                            create_new_file, previously_discarding, m->discarding));
   } else
     mxdebug_if(m->debug_splitting,
                fmt::format("KEEPING discarded duration at {0}, create_new_file {1} previously_discarding {2} m->discarding {3}\n",
-                           format_timestamp(m->discarded_duration), create_new_file, previously_discarding, m->discarding));
+                           m->discarded_duration, create_new_file, previously_discarding, m->discarding));
 
   m->first_discarded_timestamp             = -1;
   m->last_discarded_timestamp_and_duration =  0;

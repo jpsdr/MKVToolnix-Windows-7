@@ -176,7 +176,7 @@ extract_cli_parser_c::set_cuesheet() {
 void
 extract_cli_parser_c::set_blockadd() {
   assert_mode(options_c::em_tracks);
-  if (!parse_number(m_next_arg, m_extract_blockadd_level) || (-1 > m_extract_blockadd_level))
+  if (!mtx::string::parse_number(m_next_arg, m_extract_blockadd_level) || (-1 > m_extract_blockadd_level))
     mxerror(fmt::format(Y("Invalid BlockAddition level in argument '{0}'.\n"), m_next_arg));
 }
 
@@ -351,7 +351,7 @@ extract_cli_parser_c::add_extraction_spec() {
 
   track_spec_t track;
 
-  parse_number(matches[1].str(), track.tid);
+  mtx::string::parse_number(matches[1].str(), track.tid);
 
   if (m_used_tids[m_current_mode->m_extraction_mode][track.tid])
     mxerror(fmt::format(Y("The ID '{0}' has already been used for another destination file.\n"), track.tid));

@@ -62,10 +62,10 @@ write_cues(std::vector<track_spec_t> const &tracks,
 
       for (auto const &p : track_cue_points) {
         auto line = fmt::format("timestamp={0} duration={1} cluster_position={2} relative_position={3}\n",
-                                format_timestamp(p.timestamp * timestamp_scale, 9),
-                                p.duration          ? format_timestamp(p.duration.value() * timestamp_scale, 9)      : "-",
-                                p.cluster_position  ? to_string(p.cluster_position.value() + segment_data_start_pos) : "-",
-                                p.relative_position ? to_string(p.relative_position.value())                         : "-");
+                                mtx::string::format_timestamp(p.timestamp * timestamp_scale, 9),
+                                p.duration          ? mtx::string::format_timestamp(p.duration.value() * timestamp_scale, 9)      : "-",
+                                p.cluster_position  ? mtx::string::to_string(p.cluster_position.value() + segment_data_start_pos) : "-",
+                                p.relative_position ? mtx::string::to_string(p.relative_position.value())                         : "-");
         out.puts(line);
       }
 

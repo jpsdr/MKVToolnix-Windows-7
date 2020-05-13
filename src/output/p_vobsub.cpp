@@ -73,7 +73,7 @@ vobsub_packetizer_c::after_packet_timestamped(packet_t &packet) {
     auto new_duration = mtx::spu::get_duration(packet.data->get_buffer(), packet.data->get_size());
     packet.duration   = new_duration.to_ns(0);
 
-    mxdebug_if(debug, fmt::format("vobsub: no duration at the container level; setting to {0} from SPU packets\n", format_timestamp(new_duration.to_ns(0))));
+    mxdebug_if(debug, fmt::format("vobsub: no duration at the container level; setting to {0} from SPU packets\n", mtx::string::format_timestamp(new_duration.to_ns(0))));
 
     return;
   }
@@ -84,7 +84,7 @@ vobsub_packetizer_c::after_packet_timestamped(packet_t &packet) {
   if (diff >= timestamp_c::ms(1)) {
     mxdebug_if(debug,
                fmt::format("vobsub: setting SPU duration to {0} (existing duration: {1}, difference: {2})\n",
-                           format_timestamp(packet.duration), format_timestamp(current_duration.to_ns(0)), format_timestamp(diff)));
+                           mtx::string::format_timestamp(packet.duration), mtx::string::format_timestamp(current_duration.to_ns(0)), mtx::string::format_timestamp(diff)));
     mtx::spu::set_duration(packet.data->get_buffer(), packet.data->get_size(), timestamp_c::ns(packet.duration));
   }
 }

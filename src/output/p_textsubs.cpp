@@ -47,13 +47,13 @@ textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
   if (!debugging_c::requested("textsubs_force_rerender", &arg))
     return;
 
-  auto tid_and_packetno = split(arg, ":");
+  auto tid_and_packetno = mtx::string::split(arg, ":");
   auto tid              = int64_t{};
-  if (!parse_number(tid_and_packetno[0], tid) || (tid != m_ti.m_id))
+  if (!mtx::string::parse_number(tid_and_packetno[0], tid) || (tid != m_ti.m_id))
     return;
 
   unsigned int packetno{};
-  parse_number(tid_and_packetno[1], packetno);
+  mtx::string::parse_number(tid_and_packetno[1], packetno);
   m_force_rerender_track_headers_on_packetno = packetno;
 
   mxdebug(fmt::format("textsubs_packetizer_c: track {0}: forcing rerendering of track headers after packet {1}\n", tid, packetno));
@@ -73,7 +73,7 @@ textsubs_packetizer_c::set_headers() {
 }
 
 void
-textsubs_packetizer_c::set_line_ending_style(line_ending_style_e line_ending_style) {
+textsubs_packetizer_c::set_line_ending_style(mtx::string::line_ending_style_e line_ending_style) {
   m_line_ending_style = line_ending_style;
 }
 
@@ -86,9 +86,9 @@ textsubs_packetizer_c::process(packet_cptr packet) {
   }
 
   auto subs = packet->data->to_string();
-  subs      = normalize_line_endings(subs, m_line_ending_style);
+  subs      = mtx::string::normalize_line_endings(subs, m_line_ending_style);
 
-  strip_back(subs);
+  mtx::string::strip_back(subs);
 
   if (subs.empty())
     return FILE_STATUS_MOREDATA;

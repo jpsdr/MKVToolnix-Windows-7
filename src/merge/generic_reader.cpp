@@ -247,17 +247,17 @@ generic_reader_c::id_result_track(int64_t track_id,
                                   std::string const &type,
                                   std::string const &info,
                                   mtx::id::verbose_info_t const &verbose_info) {
-  id_result_t result(track_id, type, info, empty_string, 0);
+  id_result_t result(track_id, type, info, {}, 0);
   result.verbose_info = verbose_info;
   m_id_results_tracks.push_back(result);
 }
 
 void
 generic_reader_c::id_result_attachment(int64_t attachment_id,
-                                       const std::string &type,
+                                       std::string const &type,
                                        int size,
-                                       const std::string &file_name,
-                                       const std::string &description,
+                                       std::string const &file_name,
+                                       std::string const &description,
                                        std::optional<uint64_t> id) {
   id_result_t result(attachment_id, type, file_name, description, size);
   if (id)
@@ -267,14 +267,14 @@ generic_reader_c::id_result_attachment(int64_t attachment_id,
 
 void
 generic_reader_c::id_result_chapters(int num_entries) {
-  id_result_t result(0, ID_RESULT_CHAPTERS, empty_string, empty_string, num_entries);
+  id_result_t result(0, ID_RESULT_CHAPTERS, {}, {}, num_entries);
   m_id_results_chapters.push_back(result);
 }
 
 void
 generic_reader_c::id_result_tags(int64_t track_id,
                                  int num_entries) {
-  id_result_t result(track_id, ID_RESULT_TAGS, empty_string, empty_string, num_entries);
+  id_result_t result(track_id, ID_RESULT_TAGS, {}, {}, num_entries);
   m_id_results_tags.push_back(result);
 }
 

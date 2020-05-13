@@ -308,7 +308,7 @@ Tab::readFileEndTimestampForMatroska(kax_analyzer_c &analyzer) {
   auto timestampScale = FindChildValue<KaxTimecodeScale, uint64_t>(static_cast<KaxInfo &>(*info), TIMESTAMP_SCALE);
   auto duration       = timestamp_c::ns(durationKax->GetValue() * timestampScale);
 
-  qDebug() << "readFileEndTimestampForMatroska: duration is" << Q(format_timestamp(duration));
+  qDebug() << "readFileEndTimestampForMatroska: duration is" << Q(mtx::string::format_timestamp(duration));
 
   auto &fileIo = analyzer.get_file();
   fileIo.setFilePointer(analyzer.get_segment_data_start_pos());
@@ -353,7 +353,7 @@ Tab::readFileEndTimestampForMatroska(kax_analyzer_c &analyzer) {
 
   p->fileEndTimestamp = minBlockTimestamp + duration;
 
-  qDebug() << "readFileEndTimestampForMatroska: minBlockTimestamp" << Q(format_timestamp(minBlockTimestamp)) << "result" << Q(format_timestamp(p->fileEndTimestamp));
+  qDebug() << "readFileEndTimestampForMatroska: minBlockTimestamp" << Q(mtx::string::format_timestamp(minBlockTimestamp)) << "result" << Q(mtx::string::format_timestamp(p->fileEndTimestamp));
 
   return true;
 }
@@ -914,14 +914,14 @@ Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
     DeleteChildren<KaxChapterFlagHidden>(*chapter);
 
   auto startTimestamp = int64_t{};
-  if (!parse_timestamp(to_utf8(p->ui->leChStart->text()), startTimestamp))
-    return { false, QY("The start time could not be parsed: %1").arg(Q(timestamp_parser_error)) };
+  if (!mtx::string::parse_timestamp(to_utf8(p->ui->leChStart->text()), startTimestamp))
+    return { false, QY("The start time could not be parsed: %1").arg(Q(mtx::string::timestamp_parser_error)) };
   GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTimestamp);
 
   if (!p->ui->leChEnd->text().isEmpty()) {
     auto endTimestamp = int64_t{};
-    if (!parse_timestamp(to_utf8(p->ui->leChEnd->text()), endTimestamp))
-      return { false, QY("The end time could not be parsed: %1").arg(Q(timestamp_parser_error)) };
+    if (!mtx::string::parse_timestamp(to_utf8(p->ui->leChEnd->text()), endTimestamp))
+      return { false, QY("The end time could not be parsed: %1").arg(Q(mtx::string::timestamp_parser_error)) };
 
     if (endTimestamp <= startTimestamp)
       return { false, QY("The end time must be greater than the start time.") };
@@ -1031,8 +1031,8 @@ Tab::setChapterControlsFromStorage(ChapterPtr const &chapter) {
   auto segmentEditionUid = FindChild<KaxChapterSegmentEditionUID>(*chapter);
 
   p->ui->lChapter->setText(p->chapterModel->chapterDisplayName(*chapter));
-  p->ui->leChStart->setText(Q(format_timestamp(FindChildValue<KaxChapterTimeStart>(*chapter))));
-  p->ui->leChEnd->setText(end ? Q(format_timestamp(end->GetValue())) : Q(""));
+  p->ui->leChStart->setText(Q(mtx::string::format_timestamp(FindChildValue<KaxChapterTimeStart>(*chapter))));
+  p->ui->leChEnd->setText(end ? Q(mtx::string::format_timestamp(end->GetValue())) : Q(""));
   p->ui->cbChFlagEnabled->setChecked(!!FindChildValue<KaxChapterFlagEnabled>(*chapter, 1));
   p->ui->cbChFlagHidden->setChecked(!!FindChildValue<KaxChapterFlagHidden>(*chapter));
   p->ui->leChUid->setText(uid ? QString::number(uid) : Q(""));
@@ -1826,9 +1826,9 @@ Tab::renumberSubChapters() {
       firstName = name;
 
     if (end)
-      chapterTitles << Q("%1 (%2 – %3)").arg(name).arg(Q(format_timestamp(start))).arg(Q(format_timestamp(end->GetValue())));
+      chapterTitles << Q("%1 (%2 – %3)").arg(name).arg(Q(mtx::string::format_timestamp(start))).arg(Q(mtx::string::format_timestamp(end->GetValue())));
     else
-      chapterTitles << Q("%1 (%2)").arg(name).arg(Q(format_timestamp(start)));
+      chapterTitles << Q("%1 (%2)").arg(name).arg(Q(mtx::string::format_timestamp(start)));
   }
 
   auto matches       = QRegularExpression{Q("(\\d+)$")}.match(firstName);

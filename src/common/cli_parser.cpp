@@ -69,12 +69,12 @@ parser_c::option_t::format_text() {
     return {};
 
   if ((parser_c::option_t::ot_option == m_type) || (parser_c::option_t::ot_informational_option == m_type))
-    return format_paragraph(description, INDENT_DEFAULT == m_indent ? INDENT_COLUMN_OPTION_DESCRIPTION : m_indent, std::string(INDENT_COLUMN_OPTION_NAME, ' ') + m_name);
+    return mtx::string::format_paragraph(description, INDENT_DEFAULT == m_indent ? INDENT_COLUMN_OPTION_DESCRIPTION : m_indent, std::string(INDENT_COLUMN_OPTION_NAME, ' ') + m_name);
 
   else if (parser_c::option_t::ot_section_header == m_type)
-    return "\n"s + format_paragraph(description + ":", INDENT_DEFAULT == m_indent ? INDENT_COLUMN_SECTION_HEADER : m_indent);
+    return "\n"s + mtx::string::format_paragraph(description + ":", INDENT_DEFAULT == m_indent ? INDENT_COLUMN_SECTION_HEADER : m_indent);
 
-  return format_paragraph(description, INDENT_DEFAULT == m_indent ? 0 : m_indent);
+  return mtx::string::format_paragraph(description, INDENT_DEFAULT == m_indent ? 0 : m_indent);
 }
 
 // ------------------------------------------------------------
@@ -128,10 +128,10 @@ void
 parser_c::add_option(std::string const &spec,
                      parser_cb_t const &callback,
                      translatable_string_c description) {
-  auto parts     = split(spec, "=", 2);
+  auto parts     = mtx::string::split(spec, "=", 2);
   auto needs_arg = parts.size() == 2;
   auto option    = parser_c::option_t{spec, std::move(description), callback, needs_arg};
-  auto names     = split(parts[0], "|");
+  auto names     = mtx::string::split(parts[0], "|");
 
   for (auto &name : names) {
     auto full_name = '@' == name[0]       ? name

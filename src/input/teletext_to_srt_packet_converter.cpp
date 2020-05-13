@@ -331,7 +331,7 @@ teletext_to_srt_packet_converter_c::decode_page_data(unsigned char ttx_header_ma
 
   mxdebug_if(m_debug,
              fmt::format("  ttx page {0} at {5} subpage {1} erase? {2} national set {3} subtitle? {4} flags {6:02x} queued timestamp {7} queued content size {8}\n",
-                         page_data.page, page_data.subpage, page_data.erase_flag, page_data.national_set, subtitle, format_timestamp(m_current_packet_timestamp), static_cast<unsigned int>(page_data.flags),
+                         page_data.page, page_data.subpage, page_data.erase_flag, page_data.national_set, subtitle, mtx::string::format_timestamp(m_current_packet_timestamp), static_cast<unsigned int>(page_data.flags),
                          m_current_track->m_queued_timestamp, page_content.size()));
 
   queue_page_content(page_content);
@@ -372,7 +372,7 @@ teletext_to_srt_packet_converter_c::deliver_queued_packet() {
 
   mxdebug_if(m_debug,
              fmt::format("  queue: delivering packet {0} duration {1} content {2}\n",
-                         format_timestamp(packet->timestamp), format_timestamp(packet->duration), displayable_packet_content(*packet->data)));
+                         mtx::string::format_timestamp(packet->timestamp), mtx::string::format_timestamp(packet->duration), displayable_packet_content(*packet->data)));
 
   m_current_track->m_ptzr->process(packet);
   packet.reset();
@@ -399,7 +399,7 @@ teletext_to_srt_packet_converter_c::maybe_merge_queued_and_new_packet(packet_t c
   m_current_track->m_queued_packet->duration = (timestamp_c::ns(new_packet.timestamp + new_packet.duration) - prev_timestamp).abs().to_ns();
   mxdebug_if(m_debug,
              fmt::format("  queue: merging packet with previous, now {0} duration {1} content {2}\n",
-                         format_timestamp(prev_timestamp), format_timestamp(m_current_track->m_queued_packet->duration), displayable_packet_content(new_content)));
+                         mtx::string::format_timestamp(prev_timestamp), mtx::string::format_timestamp(m_current_track->m_queued_packet->duration), displayable_packet_content(new_content)));
 
   return true;
 }
@@ -413,7 +413,7 @@ teletext_to_srt_packet_converter_c::queue_packet(packet_cptr const &new_packet) 
 
   mxdebug_if(m_debug,
              fmt::format("  queue: queueing packet {0} duration {1} content {2}\n",
-                         format_timestamp(new_packet->timestamp), format_timestamp(new_packet->duration), displayable_packet_content(*new_packet->data)));
+                         mtx::string::format_timestamp(new_packet->timestamp), mtx::string::format_timestamp(new_packet->duration), displayable_packet_content(*new_packet->data)));
   m_current_track->m_queued_packet = new_packet;
 }
 
@@ -426,7 +426,7 @@ teletext_to_srt_packet_converter_c::flush() {
 
     mxdebug_if(m_debug,
                fmt::format("  queue: flushing packet {0} duration {1} content {2}\n",
-                           format_timestamp(data->m_queued_packet->timestamp), format_timestamp(data->m_queued_packet->duration), displayable_packet_content(*data->m_queued_packet->data)));
+                           mtx::string::format_timestamp(data->m_queued_packet->timestamp), mtx::string::format_timestamp(data->m_queued_packet->duration), displayable_packet_content(*data->m_queued_packet->data)));
 
     data->m_ptzr->process(data->m_queued_packet);
     data->m_queued_packet.reset();
@@ -490,7 +490,7 @@ teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
   m_pos                      = 1;                // skip sub ID
   m_current_packet_timestamp = timestamp_c::ns(packet->timestamp);
 
-  mxdebug_if(m_debug_conversion, fmt::format("Starting conversion on packet with length {0} timestamp {1}\n", m_in_size, format_timestamp(packet->timestamp)));
+  mxdebug_if(m_debug_conversion, fmt::format("Starting conversion on packet with length {0} timestamp {1}\n", m_in_size, mtx::string::format_timestamp(packet->timestamp)));
 
   //
   // PES teletext payload (payload_index) packet length = 44 + 2 = 46

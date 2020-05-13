@@ -81,7 +81,7 @@ engage(unsigned int id) {
 
 void
 engage(const std::string &hacks) {
-  auto engage_args   = split(hacks, ",");
+  auto engage_args   = mtx::string::split(hacks, ",");
   auto list_of_hacks = get_list();
 
   if (std::find(engage_args.begin(), engage_args.end(), "list") != engage_args.end()) {
