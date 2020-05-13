@@ -1340,7 +1340,7 @@ parse_arg_compression(const std::string &s,
       ti.m_compression_list[id] = COMPRESSION_ANALYZE_HEADER_REMOVAL;
 
   if (ti.m_compression_list[id] == COMPRESSION_UNSPECIFIED)
-    mxerror(fmt::format(Y("'{0}' is an unsupported argument for --compression. Available compression methods are: {1}\n"), s, boost::join(available_compression_methods, ", ")));
+    mxerror(fmt::format(Y("'{0}' is an unsupported argument for --compression. Available compression methods are: {1}\n"), s, mtx::string::join(available_compression_methods, ", ")));
 }
 
 /** \brief Parse the argument for a couple of options

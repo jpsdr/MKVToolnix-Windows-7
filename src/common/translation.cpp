@@ -26,6 +26,7 @@
 #include "common/locale_string.h"
 #include "common/utf8_codecvt_facet.h"
 #include "common/strings/editing.h"
+#include "common/strings/formatting.h"
 #include "common/translation.h"
 
 #if defined(SYS_WINDOWS)
@@ -267,7 +268,7 @@ std::string
 translatable_string_c::join(std::vector<std::string> const &strings)
   const {
   auto separator = translation_c::get_active_translation().m_line_breaks_anywhere ? "" : " ";
-  return boost::join(strings, separator);
+  return mtx::string::join(strings, separator);
 }
 
 // ------------------------------------------------------------

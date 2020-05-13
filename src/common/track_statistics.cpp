@@ -51,5 +51,5 @@ track_statistics_c::create_tags(KaxTags &tags,
     mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_DATE_UTC", writing_date_str);
   }
 
-  mtx::tags::set_simple(*tag, "_STATISTICS_TAGS", boost::join(names, " "));
+  mtx::tags::set_simple(*tag, "_STATISTICS_TAGS", mtx::string::join(names, " "));
 }

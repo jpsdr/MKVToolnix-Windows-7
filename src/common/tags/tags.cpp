@@ -18,6 +18,7 @@
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"
 #include "common/strings/editing.h"
+#include "common/strings/formatting.h"
 #include "common/strings/utf8.h"
 #include "common/tags/tags.h"
 #include "common/tags/target_type.h"
@@ -397,7 +398,7 @@ convert_tagets_to_index(KaxTagTargets const &targets) {
 
   std::sort(properties.begin(), properties.end());
 
-  return boost::join(properties, " ");
+  return mtx::string::join(properties, " ");
 }
 
 }

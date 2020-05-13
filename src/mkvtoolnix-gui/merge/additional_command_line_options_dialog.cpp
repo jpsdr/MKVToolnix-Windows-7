@@ -8,6 +8,7 @@
 
 #include "common/hacks.h"
 #include "common/qt.h"
+#include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -67,7 +68,7 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
  auto listOfHacks = mtx::hacks::get_list();
 
   for (auto const &hack : listOfHacks)
-    add(Q("--engage %1").arg(Q(hack.name)), false, hacks, { Q(boost::join(hack.description, " ")) });
+    add(Q("--engage %1").arg(Q(hack.name)), false, hacks, { Q(mtx::string::join(hack.description, " ")) });
 
   m_ui->gbGlobalOutputControl->layout()->addItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
   m_ui->gbDevelopmentHacks   ->layout()->addItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));

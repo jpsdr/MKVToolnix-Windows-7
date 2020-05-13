@@ -16,6 +16,7 @@
 #include "common/base64.h"
 #include "common/hacks.h"
 #include "common/strings/editing.h"
+#include "common/strings/formatting.h"
 
 namespace mtx::hacks {
 
@@ -88,7 +89,7 @@ engage(const std::string &hacks) {
     mxinfo(Y("Valid hacks are:\n"));
 
     for (auto const &hack : list_of_hacks)
-      mxinfo(fmt::format(u8"  • {0} — {1}\n", hack.name, boost::join(hack.description, " ")));
+      mxinfo(fmt::format(u8"  • {0} — {1}\n", hack.name, mtx::string::join(hack.description, " ")));
 
     mxexit();
   }

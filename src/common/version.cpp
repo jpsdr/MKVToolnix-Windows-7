@@ -148,7 +148,7 @@ get_version_info(const std::string &program,
   if (flags & vif_architecture)
     info.push_back(fmt::format("{0}-bit", __SIZEOF_POINTER__ * 8));
 
-  return boost::join(info, " ");
+  return mtx::string::join(info, " ");
 }
 
 int

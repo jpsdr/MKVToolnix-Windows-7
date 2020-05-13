@@ -640,7 +640,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                                p->m_track->codec_id,
                                p->m_track->fourcc,
                                p->m_summary.empty() ? "" : ", ",
-                               boost::join(p->m_summary, ", ")));
+                               mtx::string::join(p->m_summary, ", ")));
   });
 
   // Simple formatters:
@@ -749,7 +749,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     if (scope.empty())
       scope.emplace_back(Y("unknown"));
 
-    return fmt::format("{0} ({1})", ce_scope, boost::join(scope, ", "));
+    return fmt::format("{0} ({1})", ce_scope, mtx::string::join(scope, ", "));
   });
 
   FMT(KaxContentEncodingType, [](EbmlElement &e) -> std::string {

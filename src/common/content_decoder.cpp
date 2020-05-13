@@ -140,5 +140,5 @@ content_decoder_c::descriptive_algorithm_list() {
   for (auto const &enc : encodings)
     algorithms.push_back(mtx::string::to_string(enc.comp_algo));
 
-  return boost::join(algorithms, ",");
+  return mtx::string::join(algorithms, ",");
 }

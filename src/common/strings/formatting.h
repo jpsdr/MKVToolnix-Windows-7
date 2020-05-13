@@ -114,6 +114,21 @@ to_hex(libebml::EbmlBinary &bin,
 std::string create_minutes_seconds_time_string(unsigned int seconds, bool omit_minutes_if_zero = false);
 std::string elide_string(std::string s, unsigned int max_length = 60);
 
+template<typename RangeT, typename SeparatorT>
+std::string
+join(RangeT const &range,
+     SeparatorT const &separator) {
+  return fmt::format("{}", fmt::join(range, separator));
+}
+
+template<typename IteratorT, typename SeparatorT>
+std::string
+join(IteratorT first,
+     IteratorT last,
+     SeparatorT const &separator) {
+  return fmt::format("{}", fmt::join(first, last, separator));
+}
+
 } // mtx::string
 
 template<typename T>

@@ -513,7 +513,7 @@ parser_c::dump()
     for (auto const &name : entry.names)
       names.push_back(fmt::format("{}:{}", name.language, name.name));
 
-    auto names_str = names.empty() ? ""s : fmt::format(" {}", boost::join(names, " "));
+    auto names_str = names.empty() ? ""s : fmt::format(" {}", mtx::string::join(names, " "));
 
     mxinfo(fmt::format("    {0}{1}\n", entry.timestamp, names_str));
   }
