@@ -282,7 +282,7 @@ get_local_charset() {
 
   setlocale(LC_CTYPE, "");
 #if defined(COMP_MINGW) || defined(COMP_MSC)
-  lc_charset = "CP" + mtx::string::to_string(GetACP());
+  lc_charset = fmt::format("CP{0}", GetACP());
 #elif defined(SYS_SOLARIS)
   int i;
 
@@ -302,8 +302,8 @@ std::string
 get_local_console_charset() {
 #if defined(SYS_WINDOWS)
   if (mtx::sys::get_windows_version() >= WINDOWS_VERSION_VISTA)
-    return "CP"s + mtx::string::to_string(GetACP());
-  return "CP"s + mtx::string::to_string(GetOEMCP());
+    return fmt::format("CP{0}", GetACP());
+  return fmt::format("CP{0}", GetOEMCP());
 #else
   return get_local_charset();
 #endif

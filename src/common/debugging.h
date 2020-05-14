@@ -145,10 +145,17 @@ public:
 
 public:
   static std::string dump_to_string(libebml::EbmlElement const *element, dump_style_e style = style_default);
+  static std::string to_string(libebml::EbmlElement const &element);
 
 private:
   void dump_impl(libebml::EbmlElement const *element, size_t level, size_t index);
-  std::string to_string(libebml::EbmlElement const *element) const;
 };
 
 void dump_ebml_elements(libebml::EbmlElement *element, bool with_values = true);
+
+inline std::ostream &
+operator <<(std::ostream &out,
+            libebml::EbmlElement const &element) {
+  out << ebml_dumper_c::to_string(element);
+  return out;
+}

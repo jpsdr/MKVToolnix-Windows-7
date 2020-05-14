@@ -87,11 +87,11 @@ cue_entries_to_name(std::string &performer,
       else if (*next_char == 't')
         name += title;
       else if (*next_char == 'n')
-        name += mtx::string::to_string(num);
+        name += fmt::to_string(num);
       else if (*next_char == 'N') {
         if (num < 10)
           name += '0';
-        name += mtx::string::to_string(num);
+        name += fmt::to_string(num);
       } else {
         name += *this_char;
         this_char--;
@@ -180,7 +180,7 @@ add_tag_for_cue_entry(cue_parser_args_t &a,
   GetChild<KaxTagTargetType>(targets).SetValue("track");
 
   create_tag1(a.title, "TITLE");
-  tag->PushElement(*create_simple_tag(a, "PART_NUMBER", mtx::string::to_string(a.num)));
+  tag->PushElement(*create_simple_tag(a, "PART_NUMBER", fmt::to_string(a.num)));
   create_tag2(a.performer, a.global_performer, "ARTIST");
   create_tag2(a.date, a.global_date, "DATE_RELEASED");
   create_tag2(a.genre, a.global_genre, "GENRE");

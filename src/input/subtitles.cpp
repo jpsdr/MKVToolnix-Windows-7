@@ -403,7 +403,7 @@ ssa_parser_c::parse() {
 
         std::string comma = ",";
         line
-          = mtx::string::to_string(num)                          + comma
+          = fmt::to_string(num)                     + comma
           + get_element("Layer", fields)            + comma
           + get_element("Style", fields)            + comma
           + get_element(name_field.c_str(), fields) + comma

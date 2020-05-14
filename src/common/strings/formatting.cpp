@@ -104,20 +104,10 @@ format_timestamp(int64_t timestamp,
 }
 
 std::string
-to_string(double value,
-          unsigned int precision) {
-  int64_t scale = 1;
-  for (int i = 0; i < static_cast<int>(precision); ++i)
-    scale *= 10;
-
-  return to_string(static_cast<int64_t>(value * scale), scale, precision);
-}
-
-std::string
-to_string(int64_t numerator,
-          int64_t denominator,
-          unsigned int precision) {
-  std::string output      = to_string(numerator / denominator);
+format_rational(int64_t numerator,
+                int64_t denominator,
+                unsigned int precision) {
+  auto output             = fmt::to_string(numerator / denominator);
   int64_t fractional_part = numerator % denominator;
 
   if (0 == fractional_part)
@@ -136,7 +126,7 @@ to_string(int64_t numerator,
   return output;
 }
 
-std::wstring
+static std::wstring
 format_paragraph(const std::wstring &text_to_wrap,
                  int indent_column,
                  const std::wstring &indent_first_line,

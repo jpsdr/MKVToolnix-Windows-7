@@ -121,11 +121,11 @@ version_number_t::to_string()
   for (auto const &part : parts) {
     if (!v.empty())
       v += ".";
-    v += mtx::string::to_string(part);
+    v += fmt::to_string(part);
   }
 
   if (0 != build)
-    v += " build " + mtx::string::to_string(build);
+    v += " build " + fmt::to_string(build);
 
   return v;
 }

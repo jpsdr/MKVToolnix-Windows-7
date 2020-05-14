@@ -531,11 +531,11 @@ track_c::set_pid(uint16_t new_pid) {
   std::string arg;
   m_debug_delivery = debugging_c::requested("mpeg_ts")
                   || (   debugging_c::requested("mpeg_ts_delivery", &arg)
-                      && (arg.empty() || (arg == mtx::string::to_string(pid))));
+                      && (arg.empty() || (arg == fmt::to_string(pid))));
 
   m_debug_timestamp_wrapping = debugging_c::requested("mpeg_ts")
                             || (   debugging_c::requested("mpeg_ts_timestamp_wrapping", &arg)
-                                && (arg.empty() || (arg == mtx::string::to_string(pid))));
+                                && (arg.empty() || (arg == fmt::to_string(pid))));
 }
 
 bool
@@ -1997,7 +1997,7 @@ reader_c::handle_transport_errors(track_c &track,
                            track.pid,
                            file().m_position,
                            ts_header.has_transport_error() ? "transport_error flag" : "wrong continuity_counter",
-                           track.m_expected_next_continuity_counter ? mtx::string::to_string(static_cast<unsigned int>(track.m_expected_next_continuity_counter.value())) : "—"s,
+                           track.m_expected_next_continuity_counter ? fmt::to_string(static_cast<unsigned int>(track.m_expected_next_continuity_counter.value())) : "—"s,
                            static_cast<unsigned int>(ts_header.continuity_counter()),
                            track.pes_payload_size_to_read,
                            track.pes_payload_read->get_size(),

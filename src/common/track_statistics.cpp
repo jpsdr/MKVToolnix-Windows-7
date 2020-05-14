@@ -34,10 +34,10 @@ track_statistics_c::create_tags(KaxTags &tags,
 
   auto tag = mtx::tags::find_tag_for<KaxTagTrackUID>(tags, m_track_uid, mtx::tags::Movie, true, "MOVIE");
 
-  mtx::tags::set_simple(*tag, "BPS",              mtx::string::to_string(bps ? *bps : 0));
+  mtx::tags::set_simple(*tag, "BPS",              fmt::to_string(bps ? *bps : 0));
   mtx::tags::set_simple(*tag, "DURATION",         mtx::string::format_timestamp(duration ? *duration : 0));
-  mtx::tags::set_simple(*tag, "NUMBER_OF_FRAMES", mtx::string::to_string(m_num_frames));
-  mtx::tags::set_simple(*tag, "NUMBER_OF_BYTES",  mtx::string::to_string(m_num_bytes));
+  mtx::tags::set_simple(*tag, "NUMBER_OF_FRAMES", fmt::to_string(m_num_frames));
+  mtx::tags::set_simple(*tag, "NUMBER_OF_BYTES",  fmt::to_string(m_num_bytes));
 
   if (!m_source_id.empty()) {
     mtx::tags::set_simple(*tag, "SOURCE_ID", m_source_id);

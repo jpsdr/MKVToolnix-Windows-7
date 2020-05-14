@@ -339,10 +339,10 @@ kax_info_c::format_element_value_default(EbmlElement &e) {
     return fmt::format("0x{0:08x}", static_cast<EbmlCrc32 &>(e).GetCrc32());
 
   if (dynamic_cast<EbmlUInteger *>(&e))
-    return mtx::string::to_string(static_cast<EbmlUInteger &>(e).GetValue());
+    return fmt::to_string(static_cast<EbmlUInteger &>(e).GetValue());
 
   if (dynamic_cast<EbmlSInteger *>(&e))
-    return mtx::string::to_string(static_cast<EbmlSInteger &>(e).GetValue());
+    return fmt::to_string(static_cast<EbmlSInteger &>(e).GetValue());
 
   if (dynamic_cast<EbmlString *>(&e))
     return static_cast<EbmlString &>(e).GetValue();
@@ -360,7 +360,7 @@ kax_info_c::format_element_value_default(EbmlElement &e) {
     return {};
 
   if (dynamic_cast<EbmlFloat *>(&e))
-    return mtx::string::to_string(static_cast<EbmlFloat &>(e).GetValue());
+    return fmt::to_string(static_cast<EbmlFloat &>(e).GetValue());
 
   throw std::invalid_argument{"format_element_value: unsupported EbmlElement type"};
 }

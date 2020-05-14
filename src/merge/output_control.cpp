@@ -1225,7 +1225,7 @@ create_output_name() {
   // First possibility: %d
   int p    = s.find("%d");
   if (0 <= p) {
-    s.replace(p, 2, mtx::string::to_string(g_file_num));
+    s.replace(p, 2, fmt::to_string(g_file_num));
 
     return s;
   }

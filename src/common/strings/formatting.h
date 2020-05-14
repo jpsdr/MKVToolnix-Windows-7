@@ -55,37 +55,9 @@ std::string format_paragraph(std::string const &text_to_wrap,
                              int wrap_column                      = WRAP_AT_TERMINAL_WIDTH,
                              const char *break_chars              = " ,.)/:");
 
-std::wstring format_paragraph(const std::wstring &text_to_wrap,
-                              int indent_column                     = 0,
-                              const std::wstring &indent_first_line = L" ",
-                              std::wstring indent_following_lines   = L" ",
-                              int wrap_column                       = WRAP_AT_TERMINAL_WIDTH,
-                              const std::wstring &break_chars       = L" ,.)/:");
-
-inline std::string
-to_string(std::string const &value) {
-  return value;
-}
-
-std::string to_string(double value, unsigned int precision);
-std::string to_string(int64_t numerator, int64_t denominator, unsigned int precision);
+std::string format_rational(int64_t numerator, int64_t denominator, unsigned int precision);
 std::string format_number(int64_t number);
 std::string format_number(uint64_t number);
-
-template<typename T>
-std::string
-to_string(basic_timestamp_c<T> const &timestamp) {
-  return format_timestamp(timestamp.to_ns());
-}
-
-
-template<typename T>
-std::string
-to_string(T const &value) {
-  std::stringstream ss;
-  ss << value;
-  return ss.str();
-}
 
 std::string to_hex(const unsigned char *buf, size_t size, bool compact = false);
 inline std::string

@@ -126,13 +126,13 @@ ebml_converter_c::fix_ebml(EbmlMaster &)
 void
 ebml_converter_c::format_uint(pugi::xml_node &node,
                               EbmlElement &e) {
-  node.append_child(pugi::node_pcdata).set_value(mtx::string::to_string(static_cast<EbmlUInteger &>(e).GetValue()).c_str());
+  node.append_child(pugi::node_pcdata).set_value(fmt::to_string(static_cast<EbmlUInteger &>(e).GetValue()).c_str());
 }
 
 void
 ebml_converter_c::format_int(pugi::xml_node &node,
                              EbmlElement &e) {
-  node.append_child(pugi::node_pcdata).set_value(mtx::string::to_string(static_cast<EbmlSInteger &>(e).GetValue()).c_str());
+  node.append_child(pugi::node_pcdata).set_value(fmt::to_string(static_cast<EbmlSInteger &>(e).GetValue()).c_str());
 }
 
 void
