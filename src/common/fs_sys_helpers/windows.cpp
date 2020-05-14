@@ -169,7 +169,7 @@ format_windows_message(uint64_t message_id) {
 
   LocalFree(buffer);
 
-  return chomp(message);
+  return mtx::string::chomp(message);
 }
 
 }
