@@ -44,9 +44,10 @@
   For the GNU Compiler Collection (gcc) this means v7 or newer; for clang it
   means v4 or newer — the same versions required by earlier MKVToolNix
   versions.
-* MKVToolNix now requires version 4 of fmtlib or later for the
-  `fmt::to_string` function. If a system-wide version is installed that's
-  older, the bundled copy will be used.
+* MKVToolNix now requires version 6.1.0 of fmtlib or later for the
+  `fmt::to_string` function and bugfixes to the formatting of floating point
+  numbers. If a system-wide version is installed that's older, the bundled
+  copy will be used.
 * The bundled version of fmtlib has been updated to release 6.2.1.
 
 

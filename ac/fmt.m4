@@ -14,6 +14,10 @@ AC_CACHE_CHECK([fmt],[ac_cv_fmt],[
   AC_TRY_COMPILE([
     #include <fmt/format.h>
     #include <fmt/ostream.h>
+
+    #if !defined(FMT_VERSION) || (FMT_VERSION < 60100)
+    #error fmtlib is too old, need 6.1.0 or later
+    #endif
   ],[
     fmt::format("{0:02}", fmt::to_string(4254));
   ],[ac_cv_fmt=yes],[ac_cv_fmt=no])
