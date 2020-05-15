@@ -86,11 +86,12 @@ using namespace mtx::kax_info;
 
 namespace {
 
+template<typename T>
 std::string
-normalize_fmt_double_output(double value) {
+normalize_fmt_double_output(T value) {
   // Some fmt library versions output a trailing ".0" even if the
   // decimal part is zero, others don't. Normalize to not include it.
-  return std::regex_replace(fmt::format("{}", value), std::regex{"\\.0*$"}, "");
+  return std::regex_replace(fmt::format("{}", value), std::regex{"\\.?0*$"}, "");
 }
 
 }
@@ -1170,7 +1171,7 @@ kax_info_c::display_track_info() {
                                track->tnum,
                                tinfo.m_blocks,
                                tinfo.m_size,
-                               normalize_fmt_double_output(duration / 1000000000.0),
+                               normalize_fmt_double_output(fmt::format("{0:.9f}", duration / 1000000000.0)),
                                static_cast<uint64_t>(duration == 0 ? 0 : tinfo.m_size * 8000000000.0 / duration)));
   }
 }
