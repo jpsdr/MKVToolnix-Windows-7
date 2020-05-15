@@ -40,7 +40,7 @@
 * Boost's Date/Time, Lexical Cast, Range, Range Adaptors, Tri-Bool, Variant
   libraries are not used anymore.
 * MKVToolNix now requires a C++ compiler & standard library that support the
-  following features of the C++17 standard: "`std::variant`", "`std::gdc`".
+  following features of the C++17 standard: "`std::variant`", "`std::gcd`".
   For the GNU Compiler Collection (gcc) this means v7 or newer; for clang it
   means v4 or newer — the same versions required by earlier MKVToolNix
   versions.
