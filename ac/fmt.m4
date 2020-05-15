@@ -15,7 +15,7 @@ AC_CACHE_CHECK([fmt],[ac_cv_fmt],[
     #include <fmt/format.h>
     #include <fmt/ostream.h>
   ],[
-    fmt::format("{0:02}", 4254);
+    fmt::format("{0:02}", fmt::to_string(4254));
   ],[ac_cv_fmt=yes],[ac_cv_fmt=no])
 
   CXXFLAGS="$ac_save_CXXFLAGS"
