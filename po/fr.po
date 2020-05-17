@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2020-05-04 19:32+0200\n"
-"PO-Revision-Date: 2020-05-04 07:48+0000\n"
+"PO-Revision-Date: 2020-05-10 12:00+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -707,9 +707,9 @@ msgid ""
 "                           HD extensions instead of copying both the core\n"
 "                           and the extensions.\n"
 msgstr ""
-"  --reduce-to-core <TID>   Ne conserve que le noyau des pistes audio prenant\n"
-"                           en charge les extensions HD au lieu de copier à la fois\n"
-"                           le noyau et les extensions.\n"
+"  --reduce-to-core <TID>   Ne conserve que le noyau des pistes audio\n"
+"                           prenant en charge les extensions HD au lieu de copier\n"
+"                            à la fois le noyau et les extensions.\n"
 
 #: src/merge/mkvmerge.cpp:251
 #, no-c-format
@@ -791,7 +791,7 @@ msgid ""
 msgstr ""
 "  --split parts:start1-end1[,[+]start2-end2,…]\n"
 "                           Conserve les intervalles d'horodatages de début-fin\n"
-"                           dans les fichiers séparés ou ajoute au fichier\n"
+"                           soit en fichiers séparés soit concaténé au fichier\n"
 "                           de l'intervalle précédent si préfixé par « + ».\n"
 
 #: src/merge/mkvmerge.cpp:147
@@ -1019,9 +1019,8 @@ msgstr ""
 "  -m, --attachments <n[:all|first],m[:all|first],...>\n"
 "                           Copie les pièces jointes avec les IDs n, m, etc.\n"
 "                           vers tous ou seulement le premier fichier\n"
-"                           destination. Par défaut, copie toutes les\n"
-"                           pièces jointes vers tous les fichiers\n"
-"                           destination.\n"
+"                           destination. Par défaut, copie toutes les pièces\n"
+"                           jointes vers tous les fichiers destination.\n"
 
 #: src/merge/mkvmerge.cpp:91
 #, no-c-format
@@ -3590,7 +3589,7 @@ msgstr "Outre demander, l'interface peut toujours ouvrir les fichiers déposés 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:195
 #, no-c-format
 msgid "Append files in chapter editor"
-msgstr "Ajouter les fichiers dans l'éditeur de chapitres"
+msgstr "Concaténer les fichiers dans l'éditeur de chapitres"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1165
 #, no-c-format
@@ -3610,7 +3609,7 @@ msgstr "Concaténation de la piste {0} du fichier  n° {1} (« {2} ») à la pis
 #: src/merge/output_control.cpp:1030
 #, no-c-format
 msgid "Appending tracks of this type is not supported."
-msgstr "L'ajout de pistes de ce type n'est pas pris en charge."
+msgstr "La concaténation de pistes de ce type n'est pas prise en charge."
 
 #: src/merge/mkvmerge.cpp:658
 #, no-c-format
@@ -4648,7 +4647,7 @@ msgstr "Copier le &titre du fichier vers le nom du fichier destination"
 #: src/mkvtoolnix-gui/merge/track_model.cpp:49
 #, no-c-format
 msgid "Copy item"
-msgstr "Copier l'élément"
+msgstr "Copier"
 
 #: src/common/file_types.cpp:81
 #, no-c-format
@@ -5206,7 +5205,7 @@ msgstr "Par défaut pour les pistes nouvellement ajoutées"
 #: src/mkvtoolnix-gui/merge/track_model.cpp:60
 #, no-c-format
 msgid "Delay"
-msgstr "Delai"
+msgstr "Délai"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1760
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1827
@@ -9782,12 +9781,12 @@ msgstr "Recharger les fichiers modifiés"
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:294
 #, no-c-format
 msgid "Remaining time for current job:"
-msgstr "Temps restant pour la tâche actuelle :"
+msgstr "Temps restant :"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:297
 #, no-c-format
 msgid "Remaining time for queue:"
-msgstr "Temps restant pour la file d'attente :"
+msgstr "Temps restant total :"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:714
 #, no-c-format
@@ -11860,7 +11859,7 @@ msgstr "Le fichier n° {0} (« {1} ») ne contient pas de piste d'identifiant {2
 #: src/merge/output_control.cpp:977
 #, no-c-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
-msgstr "Le fichier n° {0} (« {1} ») ne contient pas de piste d'identifiant {2} ou cette piste ne doit pas être copiée. Aucune piste ne peut donc lui être ajoutée. L'argument de « --append-to » était invalide.\n"
+msgstr "Le fichier n° {0} (« {1} ») ne contient pas de piste d'identifiant {2} ou cette piste ne doit pas être copiée. Aucune piste ne peut donc lui être concaténée. L'argument de « --append-to » était invalide.\n"
 
 #: src/merge/output_control.cpp:917
 #, no-c-format
@@ -11929,7 +11928,7 @@ msgstr "Le premier fichier destination seulement"
 #: src/merge/mkvmerge.cpp:2070
 #, no-c-format
 msgid "The first file cannot be appended because there are no files to append to.\n"
-msgstr "Le premier fichier ne peut pas être concaténé car il n'y a aucun fichier auquel l'ajouter.\n"
+msgstr "Le premier fichier ne peut pas être concaténé car il n'y a aucun fichier auquel le concaténer.\n"
 
 #: src/extract/extract_cli_parser.cpp:74
 #, no-c-format
@@ -12457,7 +12456,7 @@ msgstr "La chaîne « track:n », où « n » est un nombre, sélectionne la ni�
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:332
 #, no-c-format
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
-msgstr "Les chaînes « <FILE_NAME> » et « <FILE_NAME_WITH_EXT> », qui ne fonctionnent que lors de la génération de chapitres pour des fichiers concatenés, seront remplacées par le nom de ces fichiers (la deuxième chaîne inclue l'extension du fichier, mais pas la première)."
+msgstr "Les chaînes « <FILE_NAME> » et « <FILE_NAME_WITH_EXT> », qui ne fonctionnent que lors de la génération de chapitres pour des fichiers concaténés, seront remplacées par le nom de ces fichiers (la deuxième chaîne inclue l'extension du fichier, mais pas la première)."
 
 #: src/propedit/propedit_cli_parser.cpp:246
 #, no-c-format
