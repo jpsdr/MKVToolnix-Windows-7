@@ -36,7 +36,7 @@ public:
   QCheckBox *m_cbAddOrRemove{};
   QWidget *m_input{};
   QPushButton *m_bReset{};
-  QLabel *m_lTitle{}, *m_lTypeLabel{}, *m_lType{}, *m_lDescriptionLabel{}, *m_lDescription{}, *m_lStatusLabel{}, *m_lStatus{}, *m_lOriginalValueLabel{}, *m_lOriginalValue{}, *m_lValueLabel{};
+  QLabel *m_lTitle{}, *m_lTypeLabel{}, *m_lType{}, *m_lDescriptionLabel{}, *m_lDescription{}, *m_lStatusLabel{}, *m_lStatus{}, *m_lOriginalValueLabel{}, *m_lOriginalValue{}, *m_lValueLabel{}, *m_lNote{}, *m_lNoteLabel{};
 
   EbmlElement *m_element{};
   bool m_present{}, m_mayBeRemoved{};
@@ -52,6 +52,7 @@ public:
   virtual QWidget *createInputControl() = 0;
   virtual QString originalValueAsString() const = 0;
   virtual QString currentValueAsString() const = 0;
+  virtual QString note() const;
   virtual void resetValue() = 0;
   virtual bool validateValue() const = 0;
   virtual void copyValueToElement() = 0;
@@ -65,6 +66,9 @@ public:
 public Q_SLOTS:
   virtual void onResetClicked();
   virtual void onAddOrRemoveChecked();
+
+protected:
+  virtual void setupNote();
 };
 
 }

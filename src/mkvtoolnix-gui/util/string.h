@@ -31,8 +31,6 @@ QStringList unescapeSplit(QString const &source, EscapeMode mode);
 
 QString joinSentences(QStringList const &sentences);
 
-QString displayableDate(QDateTime const &date);
-
 QString itemFlagsToString(Qt::ItemFlags const &flags);
 
 QString mapToTopLevelCountryCode(QString const &countryCode);

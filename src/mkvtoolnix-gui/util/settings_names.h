@@ -50,6 +50,7 @@ char const * const s_valEnableMuxingTracksByTheseTypes      = "enableMuxingTrack
 char const * const s_valFixedOutputDir                      = "fixedOutputDir";
 char const * const s_valForEvents                           = "forEvents";
 char const * const s_valGuiVersion                          = "guiVersion";
+char const * const s_valHeaderEditorDateTimeInUTC           = "headerEditorDateTimeInUTC";
 char const * const s_valHeaderEditorDroppedFilesPolicy      = "headerEditorDroppedFilesPolicy";
 char const * const s_valHexDumps                            = "hexDumps";
 char const * const s_valHexPositions                        = "hexPositions";

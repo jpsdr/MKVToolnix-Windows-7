@@ -161,6 +161,7 @@ public:
   ClearMergeSettingsAction m_clearMergeSettings;
   MergeAddingAppendingFilesPolicy m_mergeAddingAppendingFilesPolicy, m_mergeLastAddingAppendingDecision;
   HeaderEditorDroppedFilesPolicy m_headerEditorDroppedFilesPolicy;
+  bool m_headerEditorDateTimeInUTC;
   TrackPropertiesLayout m_mergeTrackPropertiesLayout;
   MergeMissingAudioTrackPolicy m_mergeWarnMissingAudioTrack;
   RecentlyUsedStrings m_mergeLastRelativeOutputDirs{10}, m_mergeLastFixedOutputDirs{10}, m_mergeLastOutputDirs{10};

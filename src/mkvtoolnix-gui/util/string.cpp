@@ -1,6 +1,5 @@
 #include "common/common_pch.h"
 
-#include <QDateTime>
 #include <QDebug>
 #include <QDir>
 #include <QRegularExpression>
@@ -241,11 +240,6 @@ joinSentences(QStringList const &sentences) {
   // TODO: act differently depending on the UI locale. Some languages,
   // e.g. Japanese, don't join sentences with spaces.
   return sentences.join(" ");
-}
-
-QString
-displayableDate(QDateTime const &date) {
-  return date.isValid() ? date.toString(QString{"yyyy-MM-dd hh:mm:ss"}) : QString{""};
 }
 
 QString

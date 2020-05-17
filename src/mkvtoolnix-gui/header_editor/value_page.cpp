@@ -94,6 +94,10 @@ ValuePage::init() {
   m_input       = createInputControl();
   m_input->setEnabled(m_present);
 
+  m_lNoteLabel = new QLabel{this};
+  m_lNote      = new QLabel{this};
+  m_lNote->setWordWrap(true);
+
   m_bReset = new QPushButton{this};
   m_bReset->setIcon(QIcon{Q(":/icons/16x16/edit-undo.png")});
 
@@ -121,6 +125,9 @@ ValuePage::init() {
 
   gridLayout->addWidget(m_lValueLabel,           row,   0, 1, 1);
   gridLayout->addWidget(m_input,                 row++, 1, 1, 1);
+
+  gridLayout->addWidget(m_lNoteLabel,            row,   0, 1, 1, Qt::AlignTop);
+  gridLayout->addWidget(m_lNote,                 row++, 1, 1, 1, Qt::AlignTop);
 
   auto resetLayout = new QHBoxLayout{};
   resetLayout->addItem(new QSpacerItem{0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum});
@@ -193,6 +200,19 @@ ValuePage::retranslateUi() {
 
   m_bReset->setText(QY("&Reset this value"));
   Util::setToolTip(m_bReset, QY("Resets the header value on this page to how it's saved in the file."));
+
+  setupNote();
+}
+
+void
+ValuePage::setupNote() {
+  auto theNote = note();
+
+  m_lNote     ->setText(theNote);
+  m_lNoteLabel->setText(QY("Note:"));
+
+  m_lNote     ->setVisible(!theNote.isEmpty());
+  m_lNoteLabel->setVisible(!theNote.isEmpty());
 }
 
 void
@@ -255,6 +275,12 @@ ValuePage::modifyThis() {
   }
 
   copyValueToElement();
+}
+
+QString
+ValuePage::note()
+  const {
+  return {};
 }
 
 }

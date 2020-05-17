@@ -1585,24 +1585,35 @@
           <property name="title">
            <string>Header editor</string>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <layout class="QVBoxLayout" name="verticalLayout_41">
            <item>
-            <widget class="QLabel" name="label_14">
-             <property name="text">
-              <string>When &amp;dropping files:</string>
-             </property>
-             <property name="buddy">
-              <cstring>cbHEDroppedFilesPolicy</cstring>
-             </property>
-            </widget>
+            <layout class="QHBoxLayout" name="horizontalLayout_11">
+             <item>
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>When &amp;dropping files:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbHEDroppedFilesPolicy</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="cbHEDroppedFilesPolicy">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
-            <widget class="QComboBox" name="cbHEDroppedFilesPolicy">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+            <widget class="QCheckBox" name="cbHEDateTimeInUTC">
+             <property name="text">
+              <string>Show dates &amp;&amp; times in &amp;UTC instead of the local time zone</string>
              </property>
             </widget>
            </item>
@@ -2198,6 +2209,7 @@
   <tabstop>sbMMinPlaylistDuration</tabstop>
   <tabstop>wIDefaultJobSettings</tabstop>
   <tabstop>cbHEDroppedFilesPolicy</tabstop>
+  <tabstop>cbHEDateTimeInUTC</tabstop>
   <tabstop>cbCEDropLastFromBlurayPlaylist</tabstop>
   <tabstop>cbCETextFileCharacterSet</tabstop>
   <tabstop>leCENameTemplate</tabstop>

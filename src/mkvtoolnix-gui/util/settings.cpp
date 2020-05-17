@@ -342,6 +342,7 @@ Settings::load() {
   m_mergeLastAddingAppendingDecision   = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeLastAddingAppendingDecision, static_cast<int>(MergeAddingAppendingFilesPolicy::Add)).toInt());
   m_mergeWarnMissingAudioTrack         = static_cast<MergeMissingAudioTrackPolicy>(reg.value(s_valMergeWarnMissingAudioTrack, static_cast<int>(MergeMissingAudioTrackPolicy::IfAudioTrackPresent)).toInt());
   m_headerEditorDroppedFilesPolicy     = static_cast<HeaderEditorDroppedFilesPolicy>(reg.value(s_valHeaderEditorDroppedFilesPolicy, static_cast<int>(HeaderEditorDroppedFilesPolicy::Ask)).toInt());
+  m_headerEditorDateTimeInUTC          = reg.value(s_valHeaderEditorDateTimeInUTC).toBool();
 
   m_outputFileNamePolicy               = static_cast<OutputFileNamePolicy>(reg.value(s_valOutputFileNamePolicy, static_cast<int>(ToSameAsFirstInputFile)).toInt());
   m_autoDestinationOnlyForVideoFiles   = reg.value(s_valAutoDestinationOnlyForVideoFiles, false).toBool();
@@ -691,6 +692,7 @@ Settings::save()
   reg.setValue(s_valMergeLastAddingAppendingDecision,   static_cast<int>(m_mergeLastAddingAppendingDecision));
   reg.setValue(s_valMergeWarnMissingAudioTrack,         static_cast<int>(m_mergeWarnMissingAudioTrack));
   reg.setValue(s_valHeaderEditorDroppedFilesPolicy,     static_cast<int>(m_headerEditorDroppedFilesPolicy));
+  reg.setValue(s_valHeaderEditorDateTimeInUTC,          m_headerEditorDateTimeInUTC);
 
   reg.setValue(s_valOutputFileNamePolicy,               static_cast<int>(m_outputFileNamePolicy));
   reg.setValue(s_valAutoDestinationOnlyForVideoFiles,   m_autoDestinationOnlyForVideoFiles);

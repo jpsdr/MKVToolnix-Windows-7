@@ -23,6 +23,9 @@
   append and split FLAC tracks, restoring pre-v45 behavior.
   The resulting tracks will be broken: the official FLAC tools will not be
   able to decode them and seeking will not work as expected.
+* MKVToolNix GUI: header editor: added an option in the preferences for
+  displaying all date & time values in UTC instead of the local time
+  zone. Implements #2814.
 
 ## Bug fixes
 

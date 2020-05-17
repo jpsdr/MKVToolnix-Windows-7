@@ -119,6 +119,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
 
   // Header editor page
   setupHeaderEditorDroppedFilesPolicy();
+  ui->cbHEDateTimeInUTC->setChecked(m_cfg.m_headerEditorDateTimeInUTC);
 
   setupJobsRunPrograms();
 
@@ -924,6 +925,7 @@ PreferencesDialog::save() {
 
   // Header editor page
   m_cfg.m_headerEditorDroppedFilesPolicy                = static_cast<Util::Settings::HeaderEditorDroppedFilesPolicy>(ui->cbHEDroppedFilesPolicy->currentData().toInt());
+  m_cfg.m_headerEditorDateTimeInUTC                     = ui->cbHEDateTimeInUTC->isChecked();
 
   // Run programs page:
   m_cfg.m_runProgramConfigurations.clear();
