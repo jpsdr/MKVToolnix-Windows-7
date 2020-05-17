@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
 "POT-Creation-Date: 2020-05-03 12:16+0200\n"
-"PO-Revision-Date: 2020-04-25 22:40+0000\n"
+"PO-Revision-Date: 2020-05-07 14:50+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -36,10 +36,8 @@ msgstr "46.0.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2020-04-04"
 msgid "2020-05-01"
-msgstr "2020-04-04"
+msgstr "2020-05-01"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -4139,7 +4137,7 @@ msgstr "&mkvmerge; 支持输入两种章节文件。第一种格式，叫作 '�
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2851
 msgid "Apart from dedicated chapter files &mkvmerge; can also read chapters from other file formats (e.g. MP4, Ogg, Blu-rays or DVDs)."
-msgstr ""
+msgstr "除了专用的章节文件格式以外，&mkvmerge; 还能够从其他文件格式读取章节数据 (如 MP4、Ogg、Blu-ray 以及 DVD 光盘)。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2855
@@ -4336,34 +4334,32 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2959
 msgid "Reading chapters from Blu-rays"
-msgstr ""
+msgstr "从 Blu-ray 光盘读取章节数据"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2962
 msgid "&mkvmerge; can read chapters from unencrypted Blu-rays. For that you can use the path to one of the MPLS play lists with the <parameter>--chapters</parameter> parameter."
-msgstr ""
+msgstr "&mkvmerge; 可以从未加密的 Blu-ray 光盘读取章节数据。要这样做，您可以通过「<parameter>--chapters</parameter>」参数提供任一 MPLS 播放列表的路径。"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2967
 msgid "Example: <literal>--chapters /srv/blurays/BigBuckBunny/BDMV/PLAYLIST/00001.mpls</literal>"
-msgstr ""
+msgstr "例: <literal>--chapters /宝藏/蓝光/BigBuckBunny/BDMV/PLAYLIST/00001.mpls</literal>"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2972
 msgid "Reading chapters from DVDs"
-msgstr ""
+msgstr "从 DVD 光盘读取章节数据"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2975
 msgid "When MKVToolNix is compiled with the <productname>libdvdread</productname> library, &mkvmerge; can read chapters from DVDs. For that you can use the path to one of the folders or files on the DVD with the <parameter>--chapters</parameter> parameter. As DVDs can contain more than one title and each title has its own set of chapters, you can append a colon and the desired title number to the end of the file name argument. The title number defaults to 1."
-msgstr ""
+msgstr "若 MKVToolNix 编译时链接了 <productname>libdvdread</productname> 库，&mkvmerge; 就能从 DVD 光盘中读取章节数据。要这样做，您可以通过「<parameter>--chapters</parameter>」参数提供 DVD 文件夹或文件的路径。由于 DVD 光盘可包含多个标题，且每个标题可以有自己的一组章节，您可以在文件名参数后添加冒号及所需的标题编号。标题编号默认为 1。"
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2982
-#, fuzzy
-#| msgid "Example: <literal>--generate-chapters interval:45s</literal>"
 msgid "Example: <literal>--chapters /srv/dvds/BigBuckBunny/VIDEO_TS:2</literal>"
-msgstr "示例: <literal>--generate-chapters interval:45s</literal>"
+msgstr "例: <literal>--chapters /宝藏/dvd光盘/BigBuckBunny/VIDEO_TS:2</literal>"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2987
