@@ -29,6 +29,8 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
   auto global = m_ui->gridGlobalOutputControl;
 
   add(Q("--abort-on-warnings"), false, global, { QY("Tells mkvmerge to abort after the first warning is emitted.") });
+  add(Q("--append-mode"),       true,  global, { QY("Selects how mkvmerge calculates timestamps when appending files."),
+                                                 QY("The default is 'file' with 'track' being an alternative mode.") });
   add(Q("--cluster-length"), true, global,
       { QY("This option needs an additional argument 'n'."),
         QY("Tells mkvmerge to put at most 'n' data blocks into each cluster."),
