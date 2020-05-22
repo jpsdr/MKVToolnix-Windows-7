@@ -26,6 +26,10 @@
 * MKVToolNix GUI: header editor: added an option in the preferences for
   displaying all date & time values in UTC instead of the local time
   zone. Implements #2814.
+* MKVToolNix GUI: multiplexer: the options in the "additional command-line
+  options" dialog are now sorted alphabetically. Additionally the
+  `--append-mode` option has been added as one of the only missing global
+  options.
 
 ## Bug fixes
 
