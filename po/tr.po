@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2020-05-22 12:55+0200\n"
-"PO-Revision-Date: 2020-05-06 08:16+0000\n"
+"PO-Revision-Date: 2020-05-18 22:22+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/tr/)\n"
@@ -620,7 +620,7 @@ msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
 "                           information headers.\n"
 msgstr ""
-"  --no-date                Parça bilgileri başlıklarındaki 'date' alanına\n"
+"  --no-date                Parça bilgisi üstbilgilerindeki 'date' alanına\n"
 "                           yazma.\n"
 
 #: src/merge/mkvmerge.cpp:223
@@ -717,7 +717,7 @@ msgid ""
 "                           by modifying audio frame headers.\n"
 msgstr ""
 "  --remove-dialog-normalization-gain <TID>\n"
-"                           Ses karesi başlıklarını değiştirerek iletişim normalleştirme\n"
+"                           Ses karesi üstbilgilerini değiştirerek iletişim normalleştirme\n"
 "                           kazancını kaldırır veya en aza indirir.\n"
 
 #: src/merge/mkvmerge.cpp:121
@@ -1668,7 +1668,7 @@ msgstr "Yürütmek için mevcut eylemleri düz&enle"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1743
 #, no-c-format
 msgid "&Elide text in tab headers of tab widgets"
-msgstr "Sekme parçacıklarının sekme başlıklarındaki metni &yuvarla"
+msgstr "Sekme parçacıklarının sekme üstbilgilerindeki metni &yuvarla"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1522
 #, no-c-format
@@ -1731,7 +1731,7 @@ msgstr "Alt bölümleri &oluştur"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:660
 #, no-c-format
 msgid "&Header editor"
-msgstr "&Başlık düzenleyici"
+msgstr "Üst&bilgi düzenleyici"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:413
 #, no-c-format
@@ -1840,7 +1840,7 @@ msgstr "&Sonraki bölüm düzenleyici sekmesi"
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:272
 #, no-c-format
 msgid "&Next header editor tab"
-msgstr "&Sonraki başlık düzenleyici sekmesi"
+msgstr "&Sonraki üstbilgi düzenleyici sekmesi"
 
 #: src/mkvtoolnix-gui/info/tool.cpp:226
 #, no-c-format
@@ -1890,7 +1890,7 @@ msgstr "Matroska veya WebM dosyası &aç"
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:116
 #, no-c-format
 msgid "&Open as new tabs in the header editor"
-msgstr "Başlık düzenleyicide yeni sekme olarak &aç"
+msgstr "Üstbilgi düzenleyicide yeni sekme olarak &aç"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:406
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:146
@@ -1938,7 +1938,7 @@ msgstr "Ö&nceki bölüm düzenleyici sekmesi"
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:273
 #, no-c-format
 msgid "&Previous header editor tab"
-msgstr "Ö&nceki başlık düzenleyici sekmesi"
+msgstr "Ö&nceki üstbilgi düzenleyici sekmesi"
 
 #: src/mkvtoolnix-gui/info/tool.cpp:227
 #, no-c-format
@@ -2118,7 +2118,7 @@ msgstr "İ&zler, bölümler ve etiketler:"
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:334
 #, no-c-format
 msgid "&Type:"
-msgstr "&Türü:"
+msgstr "&Tür:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:515
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:520
@@ -2789,7 +2789,7 @@ msgstr "<{0}>, {2} konumunda geçerli bir <{1}> alt öğesi değil."
 #: src/input/r_matroska.cpp:2428
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
-msgstr "İz numarası {1} için {0} zaman damgasında bir blok bulundu. Ancak, bu iz numarası için bulunan başlıklar yok. Blok atlanacaktır.\n"
+msgstr "İz numarası {1} için {0} zaman damgasında bir blok bulundu. Ancak, bu iz numarası için bulunan üstbilgiler yok. Blok atlanacaktır.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:322
 #, no-c-format
@@ -2936,7 +2936,7 @@ msgstr "AAC, SBR/HE-AAC/AAC+ olsun:"
 #: src/input/unsupported_types_signature_prober.cpp:66
 #, no-c-format
 msgid "AAC with ADIF headers"
-msgstr "ADIF başlıkları ile AAC"
+msgstr "ADIF üstbilgileri ile AAC"
 
 #: src/common/file_types.cpp:74
 #: src/output/p_ac3.h:44
@@ -3384,7 +3384,7 @@ msgstr "Tüm aşağıdaki dosya adları bölüm düzenleyicide açılacaktır."
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:62
 #, no-c-format
 msgid "All following file names will be opened in the header editor."
-msgstr "Tüm aşağıdaki dosya adları başlık düzenleyicide açılacaktır."
+msgstr "Tüm aşağıdaki dosya adları üstbilgi düzenleyicide açılacaktır."
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:60
 #, no-c-format
@@ -3394,7 +3394,7 @@ msgstr "Tüm aşağıdaki dosya adları bilgi aracında açılacaktır."
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:636
 #, no-c-format
 msgid "All header values are OK."
-msgstr "Tüm başlık değerleri TAMAM."
+msgstr "Tüm üstbilgi değerleri TAMAM."
 
 #: src/propedit/propedit_cli_parser.cpp:154
 #, no-c-format
@@ -3414,7 +3414,7 @@ msgstr "Diğer tüm bağımsız değişkenler, ya belirli bir çıkarma kipine g
 #: src/propedit/propedit_cli_parser.cpp:258
 #, no-c-format
 msgid "All other strings work just like the track header selectors (see above)."
-msgstr "Tüm diğer dizgiler tıpkı iz başlığı seçicileri gibi çalışır (yukarı bakın)."
+msgstr "Tüm diğer dizgiler tıpkı iz üstbilgisi seçicileri gibi çalışır (yukarı bakın)."
 
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:51
 #, no-c-format
@@ -3568,7 +3568,7 @@ msgstr "Burada verilen herhangi bir seçenek mkvmerge komut satırının sonuna 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:53
 #, no-c-format
 msgid "Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode."
-msgstr "Herhangi bir diğer dosya adı çoklama için bir kaynak dosya olarak eklendi, şu anki kipe bağlı bölüm düzenleyicide ya da başlık düzenleyicide açıldı."
+msgstr "Herhangi bir diğer dosya adı çoklama için bir kaynak dosya olarak eklendi, şu anki kipe bağlı bölüm düzenleyicide ya da üstbilgi düzenleyicide açıldı."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:497
 #, no-c-format
@@ -4074,9 +4074,9 @@ msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets
 msgstr "mkvmerge'ün süre alanı içermeyen VobSub altyazı paketlerine 'stop display' komutu eklemesine neden olur."
 
 #: src/common/hacks.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters)."
-msgstr "mkvmerge'e dosyanın sonunda içerdiği tüm kümelerin üst arama öğesini oluşturmasını söyler."
+msgstr "Mkvmerge'ün dosyanın sonuna yakın ikinci bir benzer iz üstbilgileri kümesini yazmaya neden olur (tüm kümelerden sonra)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:301
 #, no-c-format
@@ -4652,7 +4652,7 @@ msgstr "AVC/H.264 izinden çözücü belirli yapılandırma verisi (AVCC) çıka
 #: src/input/r_avi.cpp:278
 #, no-c-format
 msgid "Could not extract the sequence header from this MPEG-1/2 track.\n"
-msgstr "Bu MPEG-1/2 izinden sıralı başlık çıkartılamadı.\n"
+msgstr "Bu MPEG-1/2 izinden sıralı üstbilgi çıkartılamadı.\n"
 
 #: src/input/r_avi.cpp:424
 #, no-c-format
@@ -4677,7 +4677,7 @@ msgstr "Sonraki Ogg sayfasında bulunamadı. Bu, hasarlı bir Ogg/Ogm dosyasın�
 #: src/input/r_avi.cpp:577
 #, no-c-format
 msgid "Could not find valid DTS headers in this track's first frames.\n"
-msgstr "Bu izin ilk karelerinde geçerli DTS başlıkları bulunamadı.\n"
+msgstr "Bu izin ilk karelerinde geçerli DTS üstbilgileri bulunamadı.\n"
 
 #: src/common/locale.cpp:134
 #, no-c-format
@@ -4724,7 +4724,7 @@ msgstr "'{0}' içindeki bölümler ayrıştırılamadı: {1}\n"
 #: src/input/r_ogm_flac.cpp:250
 #, no-c-format
 msgid "Could not read the FLAC header packets.\n"
-msgstr "FLAC başlık paketlerini okuyamadı.\n"
+msgstr "FLAC üstbilgi paketlerini okuyamadı.\n"
 
 #: src/common/mm_file_io/windows.cpp:157
 #, no-c-format
@@ -5055,7 +5055,7 @@ msgstr "DTS"
 #: src/output/p_dts.cpp:76
 #, no-c-format
 msgid "DTS header information changed! - New format:\n"
-msgstr "DTS başlığı bilgileri değişti! - Yeni biçim:\n"
+msgstr "DTS üstbilgisi bilgileri değişti! - Yeni biçim:\n"
 
 #: src/common/file_types.cpp:35
 #, no-c-format
@@ -5539,7 +5539,7 @@ msgstr "Bölümleri oluşturma"
 #: src/common/hacks.cpp:61
 #, no-c-format
 msgid "Don't remove track statistics tags when reading Matroska files, no matter if new ones are created or not."
-msgstr ""
+msgstr "Matroska dosyalarını okurken, yenileri oluşturulsa da oluşturulmasa da izleme istatistikleri etiketlerini kaldırmayın."
 
 #: src/mkvtoolnix-gui/util/message_box.cpp:167
 #, no-c-format
@@ -5751,7 +5751,7 @@ msgstr "'{0}' kategorisi içindeki öğeler ('--edit {1}'):\n"
 #: src/common/hacks.cpp:64
 #, no-c-format
 msgid "Enable appending and splitting FLAC tracks."
-msgstr ""
+msgstr "FLAC izlerini eklemeyi ve bölmeyi etkinleştirin."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1814
 #, no-c-format
@@ -5786,7 +5786,7 @@ msgstr "Aynı seçeneklere ve aynı çekirdeğe sahip aynı kaynak dosyaları ku
 #: src/common/hacks.cpp:48
 #, no-c-format
 msgid "Enables warnings for certain conditions where timestamps aren't monotonous in situations where they should be which could indicate either a problem with the file or a programming error."
-msgstr ""
+msgstr "Zaman damgalarının, ya dosya ile bir sorun ya da bir programlama hatası olduğunu gösterebildikleri, olmaları gereken durumlarda monoton olmadıkları belirli şartlar için uyarıları etkinleştirir."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:213
 #, no-c-format
@@ -5902,7 +5902,7 @@ msgstr "Ayrıştırıcıdan gelen hata iletisi: %1"
 #: src/input/r_mpeg_ps.cpp:1088
 #, no-c-format
 msgid "Error parsing a MPEG PS packet during the header reading phase. This stream seems to be badly damaged.\n"
-msgstr "Başlık okuma aşaması sırasında MPEG PS paketi ayrıştırma hastası. Bu akış kötü bir şekilde hasarlı görünüyor.\n"
+msgstr "Üstbilgi okuma aşaması sırasında MPEG PS paketi ayrıştırma hastası. Bu akış kötü bir şekilde hasarlı görünüyor.\n"
 
 #: src/propedit/chapter_target.cpp:69
 #, no-c-format
@@ -6089,7 +6089,7 @@ msgstr "OGM araçları içinde kullanılan basit biçimdeki bölüm bilgilerini 
 #: src/extract/extract_cli_parser.cpp:79
 #, no-c-format
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
-msgstr "Veriyi başlık olarak CodecPrivate dahil ham bir dosyaya çıkart."
+msgstr "Veriyi bir üstbilgi olarak CodecPrivate dahil ham bir dosyaya çıkart."
 
 #: src/extract/extract_cli_parser.cpp:78
 #, no-c-format
@@ -6635,7 +6635,7 @@ msgstr "HEVC/H.265 temel akışları"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:409
 #, no-c-format
 msgid "Header &editor"
-msgstr "Başlık &düzenleyici"
+msgstr "Üstbilgi &düzenleyici"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1831
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:246
@@ -6643,7 +6643,7 @@ msgstr "Başlık &düzenleyici"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:216
 #, no-c-format
 msgid "Header editor"
-msgstr "Başlık düzenleyici"
+msgstr "Üstbilgi düzenleyici"
 
 #: src/common/compression/header_removal.cpp:49
 #, no-c-format
@@ -6660,7 +6660,7 @@ msgstr "Üstbilgiyi kaldırma sıkıştırması mümkün değil çünkü arabell
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:653
 #, no-c-format
 msgid "Header validation"
-msgstr "Başlık onaylama"
+msgstr "Üstbilgi doğrulama"
 
 #: src/common/property_element.cpp:150
 #, no-c-format
@@ -7231,7 +7231,7 @@ msgstr "Geçersiz UTF-8 kar. İlk bayt: 0x{0:02x}"
 #: src/input/r_avi.cpp:607
 #, no-c-format
 msgid "Invalid Vorbis headers in AVI audio track."
-msgstr "AVI ses izinde geçersiz Vorbis başlıkları."
+msgstr "AVI ses izinde geçersiz Vorbis üstbilgileri."
 
 #: src/extract/extract_cli_parser.cpp:347
 #, no-c-format
@@ -7387,7 +7387,7 @@ msgstr "'--split {0}' içinde '--split' için geçersiz kare.\n"
 #: src/input/r_vobsub.cpp:517
 #, no-c-format
 msgid "Invalid header length: {0} (total length: {1}, idx: {2}, dataidx: {3})\n"
-msgstr "Geçersiz başlık uzunluğu: {0} (toplam uzunluk: {1}, idx: {2}, dataidx: {3})\n"
+msgstr "Geçersiz üstbilgi uzunluğu: {0} (toplam uzunluk: {1}, idx: {2}, dataidx: {3})\n"
 
 #: src/merge/mkvmerge.cpp:2134
 #, no-c-format
@@ -7598,7 +7598,7 @@ msgstr "Görünmez"
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:184
 #, no-c-format
 msgid "It cannot be removed because it is a mandatory header field."
-msgstr "Kaldırılamaz çünkü zorunlu başlık alanıdır."
+msgstr "Zorunlu bir üstbilgi alanı olduğundan kaldırılamaz."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:519
 #, no-c-format
@@ -8394,12 +8394,12 @@ msgstr "Hiç 'EBML başı' öğesi bulunamadı."
 #: src/input/r_qtmp4.cpp:1648
 #, no-c-format
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
-msgstr "İlk karede bulunan AC-3 başlığı yok; iz atlanacaktır.\n"
+msgstr "İlk karede bulunan AC-3 üstbilgisi yok; iz atlanacaktır.\n"
 
 #: src/input/r_qtmp4.cpp:3426
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
-msgstr "İlk karede bulunan DTS başlığı yok; iz atlanacaktır.\n"
+msgstr "İlk karede bulunan DTS üstbilgisi yok; iz atlanacaktır.\n"
 
 #: src/common/kax_info.cpp:1200
 #, no-c-format
@@ -8575,7 +8575,7 @@ msgstr "Düzenleme özelliği '{0}' ile ilgili hiç iz bulunamadı. {1}\n"
 #: src/propedit/tag_target.cpp:267
 #, no-c-format
 msgid "No track headers were found for which statistics could be calculated.\n"
-msgstr "İstatistikleri hesaplanabilmesi için hiç iz başlıkları bulunamadı.\n"
+msgstr "İstatistikleri hesaplanabilmesi için hiç iz üstbilgileri bulunamadı.\n"
 
 #: src/extract/tracks.cpp:431
 #, no-c-format
@@ -8736,7 +8736,7 @@ msgstr "Görüntü içeriğinin bu seçenek ile değiştirilemediğini unutmayı
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:212
 #, no-c-format
 msgid "Note:"
-msgstr ""
+msgstr "Not:"
 
 #: src/extract/mkvextract.cpp:165
 #: src/propedit/options.cpp:38
@@ -8939,7 +8939,7 @@ msgstr "Matroska veya WebM dosyalarını aç"
 #: src/mkvtoolnix-gui/forms/header_editor/tool.h:180
 #, no-c-format
 msgid "Open a Matroska or WebM file via the \"header editor\" menu, the button below or drag & drop one here."
-msgstr "Matroska veya WebM dosyasını \"başlık düzenleyici\" menüsü, aşağıdaki düğme aracılığıyla ya da birini buraya sürükle ve bırakarak açın."
+msgstr "Matroska veya WebM dosyasını \"üstbilgi düzenleyici\" menüsü, aşağıdaki düğme aracılığıyla ya da birini buraya sürükle ve bırakarak açın."
 
 #: src/mkvtoolnix-gui/forms/info/tool.h:180
 #, no-c-format
@@ -8954,7 +8954,7 @@ msgstr "Dosyayı \"bölüm düzenleyici\" menüsü, aşağıdaki düğmeler arac
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:725
 #, no-c-format
 msgid "Open all files as tabs in the header editor"
-msgstr "Tüm dosyaları başlık düzenleyicide sekme olarak aç"
+msgstr "Tüm dosyaları üstbilgi düzenleyicide sekme olarak aç"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1501
 #, no-c-format
@@ -8996,8 +8996,8 @@ msgstr[1] "Bölüm düzenleyicide %1 dosya açılıyor..."
 #, no-c-format
 msgid "Opening %1 file in the header editor…"
 msgid_plural "Opening %1 files in the header editor…"
-msgstr[0] "Başlık düzenleyicide %1 dosya açılıyor..."
-msgstr[1] "Başlık düzenleyicide %1 dosya açılıyor..."
+msgstr[0] "Üstbilgi düzenleyicide %1 dosya açılıyor..."
+msgstr[1] "Üstbilgi düzenleyicide %1 dosya açılıyor..."
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:113
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:114
@@ -9128,7 +9128,7 @@ msgstr "PTS hatası: 0x{0:02x} {1:02x}{2:02x} {3:02x}{4:02x}\n"
 #: src/output/p_flac.cpp:76
 #, no-c-format
 msgid "Packet number {0} contained an invalid FLAC header and is being skipped.\n"
-msgstr "Paket numarası {0} geçersiz bir FLAC başlığı içerdi ve atlanmakta.\n"
+msgstr "Paket numarası {0} geçersiz bir FLAC üstbilgisi içermekte ve atlanıyor.\n"
 
 #: src/extract/extract_cli_parser.cpp:69
 #, no-c-format
@@ -9546,7 +9546,7 @@ msgstr "Quicktime/MP4 okuyucusu: İz ID {0} için görüntü tanımlama atomu ok
 #: src/input/r_qtmp4.cpp:302
 #, no-c-format
 msgid "Quicktime/MP4 reader: Have not found any header atoms.\n"
-msgstr "Quicktime/MP4 okuyucusu: Herhangi bir başlık atomları bulunmadı.\n"
+msgstr "Quicktime/MP4 okuyucusu: Herhangi bir üstbilgi atomu bulunmadı.\n"
 
 #: src/input/r_qtmp4.cpp:305
 #, no-c-format
@@ -9576,7 +9576,7 @@ msgstr "Quicktime/MP4 okuyucusu: MPEG4 kısım 2/HEVC izi {0}, çözücü yapıl
 #: src/input/r_qtmp4.cpp:673
 #, no-c-format
 msgid "Quicktime/MP4 reader: The 'media header' atom ('mdhd') uses the unsupported version {0}.\n"
-msgstr "Quicktime/MP4 okuyucusu: 'Ortam başlığı' atomu ('mdhd') desteklenmeyen sürüm {0} kullanıyor.\n"
+msgstr "Quicktime/MP4 okuyucusu: 'Ortam üstbilgisi' atomu ('mdhd') desteklenmeyen sürüm {0} kullanıyor.\n"
 
 #: src/input/r_qtmp4.cpp:1310
 #, no-c-format
@@ -9606,22 +9606,22 @@ msgstr "Quicktime/MP4 okuyucusu: Görüntü izi {0}, ESDS atomu eksik. Bu iz atl
 #: src/input/r_qtmp4.cpp:449
 #, no-c-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers with an unknown or unsupported compression algorithm '{0}'. Aborting.\n"
-msgstr "Quicktime/MP4 okuyucusu: Bu dosya, bilinmeyen veya desteklenmeyen sıkıştırma algoritması '{0}' ile sıkıştırılmış başlıkları kullanır. İptal ediliyor.\n"
+msgstr "Quicktime/MP4 okuyucusu: Bu dosya, bilinmeyen veya desteklenmeyen sıkıştırma algoritması '{0}' ile sıkıştırılmış üstbilgileri kullanır. İptal ediliyor.\n"
 
 #: src/input/r_qtmp4.cpp:482
 #, no-c-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the expected uncompressed size ({0}) was not what is available after uncompressing ({1}).\n"
-msgstr "Quicktime/MP4 okuyucusu: Bu dosya sıkıştırılmış başlıkları kullanıyor ama beklenen genişletilmiş boyut ({0}), genişletildikten ({1}) sonra kullanılabilir olan değildir.\n"
+msgstr "Quicktime/MP4 okuyucusu: Bu dosya sıkıştırılmış üstbilgileri kullanıyor, ancak beklenen genişletilmiş boyut ({0}), genişletildikten ({1}) sonra kullanılabilir olan değildir.\n"
 
 #: src/input/r_qtmp4.cpp:473
 #, no-c-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but the zlib library could not be initialized. Error code from zlib: {0}. Aborting.\n"
-msgstr "Quicktime/MP4 okuyucusu: Bu dosya sıkıştırılmış başlıkları kullanıyor ama zlib kütüphanesi başlatılamadı. zlib'ten hata kodu: {0}. İptal ediliyor.\n"
+msgstr "Quicktime/MP4 okuyucusu: Bu dosya sıkıştırılmış üstbilgileri kullanıyor, ancak zlib kütüphanesi başlatılamadı. zlib'ten hata kodu: {0}. İptal ediliyor.\n"
 
 #: src/input/r_qtmp4.cpp:478
 #, no-c-format
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: {0}. Aborting.\n"
-msgstr "Quicktime/MP4 okuyucusu: Bu dosya sıkıştırılmış başlıkları kullanıyor ama genişletilemediler. zlib'ten hata kodu: {0}. İptal ediliyor.\n"
+msgstr "Quicktime/MP4 okuyucusu: Bu dosya sıkıştırılmış üstbilgileri kullanıyor, ancak genişletilemediler. zlib'ten hata kodu: {0}. İptal ediliyor.\n"
 
 #: src/input/r_qtmp4.cpp:2760
 #: src/input/r_qtmp4.cpp:2841
@@ -9635,7 +9635,7 @@ msgstr "Quicktime/MP4 okuyucusu: İz ID {0} birden fazla FourCC'ye sahip. Sadece
 #: src/input/r_qtmp4.cpp:3520
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
-msgstr "Quicktime/MP4 okuyucusu: İz {0} bazı verisi eksik. Bozuk başlık atomları olabilir mi?\n"
+msgstr "Quicktime/MP4 okuyucusu: İz {0} bazı verisi eksik. Bozuk üstbilgi atomları olabilir mi?\n"
 
 #: src/common/file_types.cpp:79
 #, no-c-format
@@ -9850,7 +9850,7 @@ msgstr "Bir iş hatalarla sona erdiğinde veya iptal edildiğinde çıktı &dosy
 #: src/mkvtoolnix-gui/merge/input.cpp:533
 #, no-c-format
 msgid "Removes or at least minimizes the dialog normalization gain by modifying audio headers."
-msgstr "Ses üst bilgilerini değiştirerek konuşma normalleştirmesi kazancını kaldırır ya da en aza indirir."
+msgstr "Ses üstbilgilerini değiştirerek konuşma normalleştirmesi kazancını kaldırır ya da en aza indirir."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:356
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:374
@@ -9912,7 +9912,7 @@ msgstr "Uyarı ve hata &sayaçlarını çıkışta sıfırla"
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:202
 #, no-c-format
 msgid "Resets the header value on this page to how it's saved in the file."
-msgstr "Dosyada nasıl kaydedilmişse bu sayfadaki başlık değerini sıfırlar."
+msgstr "Dosyada nasıl kaydedilmişse bu sayfadaki üstbilgi değerini sıfırlar."
 
 #: src/common/kax_file.cpp:287
 #, no-c-format
@@ -9947,7 +9947,7 @@ msgstr "Yayınların ve bölümlerin eylemleri için sağ tuşa tıklayın"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:362
 #, no-c-format
 msgid "Right-click for actions for header elements and attachments"
-msgstr "Başlık öğelerinin ve eklerin eylemleri için sağ tuşa tıklayın"
+msgstr "Üstbilgi öğelerinin ve eklerin eylemleri için sağ tuşa tıklayın"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:418
 #, no-c-format
@@ -10121,12 +10121,12 @@ msgstr "Değiştirilmiş ekleri kaydetme başarısız oldu."
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:221
 #, no-c-format
 msgid "Saving the modified segment information header failed."
-msgstr "Değiştirilmiş parça bilgileri başlığını kaydetme başarısız oldu."
+msgstr "Değiştirilmiş parça bilgileri üstbilgisini kaydetme başarısız oldu."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:229
 #, no-c-format
 msgid "Saving the modified track headers failed."
-msgstr "Değiştirilmiş iz başlıklarını kaydetme başarısız oldu."
+msgstr "Değiştirilmiş iz üstbilgilerini kaydetme başarısız oldu."
 
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:139
 #, no-c-format
@@ -10539,7 +10539,7 @@ msgstr "Tüm alt öğeleri (cue'lar ve arama başları girişleri dahil) göster
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1833
 #, no-c-format
 msgid "Show dates && times in &UTC instead of the local time zone"
-msgstr ""
+msgstr "Tarihleri ​​ve saatleri yerel saat dilimi yerine UTC olarak göster"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:169
 #, no-c-format
@@ -10579,7 +10579,7 @@ msgstr "Her öğenin konumunu onaltılık olarak göster."
 #: src/info/info_cli_parser.cpp:47
 #, no-c-format
 msgid "Show the size of each element including its header."
-msgstr "Başlıklarını içeren her bir öğenin boyutunu göster."
+msgstr "Öğenin üstbilgisini içeren her öğenin boyutunu göster."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1744
 #, no-c-format
@@ -10663,7 +10663,7 @@ msgstr "Basit bölüm ayrıştırıcısı: {0}\n"
 #: src/mpegparser/M2VParser.cpp:399
 #, no-c-format
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
-msgstr "GOP başlığından önce tek alan karesi saptandı. Çoklamak için denemeden önce MPEG2 görüntü akışını düzeltin.\n"
+msgstr "GOP üstbilgisinden önce tek alan karesi algılandı. Çoklamak için denemeden önce MPEG2 görüntü akışını düzeltin.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:303
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:327
@@ -10685,17 +10685,17 @@ msgstr "Boyut:"
 #: src/output/p_aac.cpp:133
 #, no-c-format
 msgid "Skipping {0} bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"
-msgstr "{0} bayt atlanıyor (bulunan geçerli AAC başlığı yok). Bu, ses/görüntü eşitliliği bozukluğuna neden olabilir.\n"
+msgstr "{0} bayt atlanıyor (bulunan geçerli AAC üstbilgisi yok). Bu, ses/görüntü eşitliliği bozukluğuna neden olabilir.\n"
 
 #: src/output/p_dts.cpp:92
 #, no-c-format
 msgid "Skipping {0} bytes (no valid DTS header found). This might cause audio/video desynchronisation.\n"
-msgstr "{0} bayt atlanıyor (bulunan geçerli DTS başlığı yok). Bu, ses/görüntü eşitliliği bozukluğuna neden olabilir.\n"
+msgstr "{0} bayt atlanıyor (bulunan geçerli DTS üstbilgisi yok). Bu, ses/görüntü eşitliliği bozukluğuna neden olabilir.\n"
 
 #: src/input/r_mp3.cpp:62
 #, no-c-format
 msgid "Skipping {0} bytes at the beginning (no valid MP3 header found).\n"
-msgstr "Başlangıçtan {0} bayt atlanıyor (bulunan geçerli MP3 başlığı yok).\n"
+msgstr "Başlangıçtan {0} bayt atlanıyor (bulunan geçerli MP3 üstbilgisi yok).\n"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:199
 #: src/mkvtoolnix-gui/util/settings.cpp:53
@@ -11051,7 +11051,7 @@ msgstr "mkvmerge'e her iz için istatistikler ile etiketleri yazmamasını söyl
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:58
 #, no-c-format
 msgid "Tells mkvmerge not to write the 'date' field in the segment information headers."
-msgstr "mkvmerge'e parça bilgisi başlıklarındaki 'date' alanına yazmamasını söyler."
+msgstr "mkvmerge'e parça bilgisi üstbilgilerindeki 'date' alanına yazmamasını söyler."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:31
 #, no-c-format
@@ -11088,7 +11088,7 @@ msgstr ".idx dosyası dili gösteren 'id: ...' satırı içermiyor.\n"
 #: src/input/r_aac.cpp:70
 #, no-c-format
 msgid "The AAC file '{0}' contains invalid header data: the sampling frequency or the number of channels is 0.\n"
-msgstr "AAC dosyası '{0}' geçersiz başlık verisi içeriyor: örnekleme sıklığı veya kanal sayısı 0'dır.\n"
+msgstr "AAC dosyası '{0}' geçersiz üstbilgi verisi içeriyor: örnekleme sıklığı veya kanal sayısı 0'dır.\n"
 
 #: src/output/p_aac.cpp:149
 #, no-c-format
@@ -11103,12 +11103,12 @@ msgstr "İki izin KodekID'leri farklı: {0} ve {1}"
 #: src/mkvtoolnix-gui/merge/output.cpp:232
 #, no-c-format
 msgid "The DocType header item is changed to \"webm\"."
-msgstr "DocType başlığı öğesi \"webm\" olarak değiştirilir."
+msgstr "DocType üstbilgisi öğesi \"webm\" olarak değiştirilir."
 
 #: src/output/p_flac.cpp:48
 #, no-c-format
 msgid "The FLAC headers could not be parsed: the stream info structure was not found.\n"
-msgstr "FLAC başlıkları ayrıştırılamadı: akış bilgisi yapısı bulunmadı.\n"
+msgstr "FLAC üstbilgileri ayrıştırılamadı: akış bilgisi yapısı bulunmadı.\n"
 
 #: src/output/p_generic_video.cpp:73
 #, no-c-format
@@ -11160,7 +11160,7 @@ msgstr "'%1' tanımlanırken mkvmerge tarafından oluşturulan JSON çıktısı 
 #: src/input/r_ogm.cpp:1675
 #, no-c-format
 msgid "The Kate identification header could not be parsed ({0}).\n"
-msgstr "Kate tanımlama başlığı ayrıştırılamadı ({0}).\n"
+msgstr "Kate tanımlama üstbilgisi ayrıştırılamadı ({0}).\n"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:52
 #, no-c-format
@@ -11213,7 +11213,7 @@ msgstr "NALU boyut uzunluğu '--nalu-size-length {0}' olarak 2 ve 4 kapsayarak a
 #: src/input/r_ogm.cpp:1485
 #, no-c-format
 msgid "The Theora identification header could not be parsed ({0}).\n"
-msgstr "Theora tanımlama başlığı ayrıştırılamadı ({0}).\n"
+msgstr "Theora tanımlama üstbilgisi ayrıştırılamadı ({0}).\n"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:53
 #, no-c-format
@@ -11442,7 +11442,7 @@ msgstr "Yapılandırma kaydedildi."
 #: src/input/r_wavpack.cpp:59
 #, no-c-format
 msgid "The correction file header was not read correctly.\n"
-msgstr "Düzeltme dosya başlığı doğru olarak okunmadı.\n"
+msgstr "Düzeltme dosya üstbilgisi doğru olarak okunmadı.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:480
 #, no-c-format
@@ -11487,12 +11487,12 @@ msgstr "Dosyadaki veri bozulmuş ve güvenle değiştirilemez"
 #: src/mkvtoolnix-gui/header_editor/time_value_page.cpp:92
 #, no-c-format
 msgid "The date & time shown is in UTC."
-msgstr ""
+msgstr "Gösterilen tarih ve saat UTC olaraktır."
 
 #: src/mkvtoolnix-gui/header_editor/time_value_page.cpp:92
 #, no-c-format
 msgid "The date & time shown is in your local time zone."
-msgstr ""
+msgstr "Gösterilen tarih ve saat yerel saat diliminizdedir."
 
 #: src/common/property_element.cpp:112
 #, no-c-format
@@ -11784,7 +11784,7 @@ msgstr "Dosya içeriği biçim türüyle eşleşmiyor ve tanınmadı."
 #: src/merge/reader_detection_and_creation.cpp:400
 #, no-c-format
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
-msgstr "Dosya okumak için açılamadı ya da başlığını ayrıştırmak için yeterli veri yoktu."
+msgstr "Dosya, okumak için açılamadı ya da üstbilgilerini ayrıştırmak için yeterli veri yoktu."
 
 #: src/common/qt_kax_analyzer.cpp:84
 #: src/propedit/propedit.cpp:52
@@ -11819,17 +11819,17 @@ msgstr "Dosya değiştirilmedi."
 #: src/input/r_tta.cpp:50
 #, no-c-format
 msgid "The file header is too short.\n"
-msgstr "Dosya başlığı çok kısa.\n"
+msgstr "Dosya üstbilgisi çok kısa.\n"
 
 #: src/input/r_wavpack.cpp:44
 #, no-c-format
 msgid "The file header was not read correctly.\n"
-msgstr "Dosya başlığı doğru olarak okunmadı.\n"
+msgstr "Dosya üstbilgisi doğru olarak okunmadı.\n"
 
 #: src/merge/reader_detection_and_creation.cpp:406
 #, no-c-format
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
-msgstr "Dosya başlığı ayrıştırılamadı, örn. çünkü tamamlanmadı, geçersiz ya da hasarlı."
+msgstr "Dosya üstbilgisi ayrıştırılamadı, örn. çünkü tamamlanmamış, geçersiz ya da hasarlı."
 
 #: src/common/qt_kax_analyzer.cpp:34
 #: src/propedit/propedit.cpp:143
@@ -12019,7 +12019,7 @@ msgstr "Verilen zaman damgası ölçeği etkeni geçerli aralığın dışında 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:197
 #, no-c-format
 msgid "The header values have not been modified. There is nothing to save."
-msgstr "Başlık değerleri değiştirilmemiş. Kaydetmek için hiçbir şey yok."
+msgstr "Üstbilgi değerleri değiştirilmemiş. Kaydetmek için hiçbir şey yok."
 
 #: src/merge/connection_checks.h:38
 #, no-c-format
@@ -12177,7 +12177,7 @@ msgstr "'{0}' hedef dosyasının adı ve kaynak dosyalardan biri aynı."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:310
 #, no-c-format
 msgid "The names will be available for easy selection in both the multiplexer and the header editor."
-msgstr "Adlar, hem çoklayıcı hem de başlık düzenleyicisinde kolay seçim için kullanılabilir olacaktır."
+msgstr "Adlar, hem çoklayıcı hem de üstbilgi düzenleyicisinde kolay seçim için kullanılabilir olacaktır."
 
 #: src/merge/mkvmerge.cpp:1736
 #, no-c-format
@@ -12356,7 +12356,7 @@ msgstr "Sonuçta oluşan numara, basamakların sayısı belirtilenden az ise ba�
 #: src/common/hacks.cpp:65
 #, no-c-format
 msgid "The resulting tracks will be broken: the official FLAC tools will not be able to decode them and seeking will not work as expected."
-msgstr ""
+msgstr "Ortaya çıkan izler bozulacaktır: resmi FLAC araçları bunların kodunu çözemeyecektir ve arama beklendiği gibi çalışmayacaktır."
 
 #: src/common/xml/ebml_converter.cpp:341
 #, no-c-format
@@ -12584,12 +12584,12 @@ msgstr "'{1}' dosyasından iz ID {0} bölünemez. {2}\n"
 #: src/merge/output_control.cpp:669
 #, no-c-format
 msgid "The track headers could not be rendered correctly. {0}\n"
-msgstr "İz başlıkları doğru olarak hareketlendirilemedi. {0}\n"
+msgstr "İz üstbilgileri doğru olarak işlenemedi. {0}\n"
 
 #: src/common/property_element.cpp:125
 #, no-c-format
 msgid "The track number as used in the Block Header."
-msgstr "Blok Başlığında kullanıldığı gibi iz numarası."
+msgstr "Blok Üstbilgisinde kullanılan iz numarası."
 
 #: src/merge/output_control.cpp:1018
 #, no-c-format
@@ -12653,7 +12653,7 @@ msgstr "Değer eksi olabilir, ancak unutmamak gerekir ki bu hesaplamadan sonra z
 #: src/mkvtoolnix-gui/merge/input.cpp:510
 #, no-c-format
 msgid "The values are only stored in the track headers."
-msgstr "Değerler sadece iz başlıklarında saklanır."
+msgstr "Değerler sadece iz üstbilgilerinde saklanır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:317
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:323
@@ -12716,7 +12716,7 @@ msgstr "Güncelleme durumunu sorgularken hata oldu."
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:653
 #, no-c-format
 msgid "There were errors in the header values preventing the headers from being saved. The first error has been selected."
-msgstr "Başlıkların kaydedilmesini önleyen başlık değerlerinde hatalar vardı. İlk hata seçildi."
+msgstr "Üstbilgilerin kaydedilmesini önleyen üstbilgi değerlerinde hatalar vardı. İlk hata seçildi."
 
 #: src/merge/output_control.cpp:236
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:265
@@ -12746,7 +12746,7 @@ msgstr "Bunlar MKVToolNix içindeki diğer kaynak dosyalar gibi işlem görmezle
 #: src/input/r_real.cpp:267
 #, no-c-format
 msgid "This AAC track does not contain valid headers. Could not parse the AAC information.\n"
-msgstr "Bu AAC izi geçerli başlıkları içermiyor. AAC bilgisi ayrıştırılamadı.\n"
+msgstr "Bu AAC izi geçerli üstbilgileri içermiyor. AAC bilgisi ayrıştırılamadı.\n"
 
 #: src/output/p_ac3.cpp:66
 #, no-c-format
@@ -12916,7 +12916,7 @@ msgstr "Bu, oynatıcının bu film için 'ana başlıkta' gösterebileceği baş
 #: src/common/hacks.cpp:47
 #, no-c-format
 msgid "This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers."
-msgstr "Bu, sıralı başlıkları depolamak için örn. MPEG-1/-2 görüntü izlerinde kullanılır."
+msgstr "Bu, sıralı üstbilgileri depolamak için örn. MPEG-1/-2 görüntü izlerinde kullanılır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:433
 #, no-c-format
@@ -12977,7 +12977,7 @@ msgstr "Bu seçenek, bölüm adlarının nasıl oluşturulduğunu denetler."
 #: src/common/hacks.cpp:44
 #, no-c-format
 msgid "This option does nothing and is only kept for backwards compatibility."
-msgstr ""
+msgstr "Bu seçenek hiçbir şey yapmaz ve sadece geriye dönük uyumluluk için tutulur."
 
 #: src/common/hacks.cpp:63
 #, no-c-format
@@ -13187,7 +13187,7 @@ msgstr "İz çıkartma"
 #: src/propedit/propedit_cli_parser.cpp:248
 #, no-c-format
 msgid "Track headers"
-msgstr "İz başlıkları"
+msgstr "İz üstbilgileri"
 
 #: src/common/kax_element_names.cpp:180
 #: src/common/property_element.cpp:125
@@ -13252,7 +13252,7 @@ msgstr "KodekID '{1}' ile iz {0} AAC için geçersiz \"codec private\" verisi i�
 #: src/extract/xtr_ogg.cpp:97
 #, no-c-format
 msgid "Track {0} with the CodecID '{1}' does not contain valid headers.\n"
-msgstr "KodekID '{1}' ile iz {0} geçerli başlıkları içermiyor.\n"
+msgstr "KodekID '{1}' ile iz {0} geçerli üstbilgileri içermiyor.\n"
 
 #: src/extract/xtr_wav.cpp:48
 #, no-c-format
@@ -13291,7 +13291,7 @@ msgstr "İz {0}: {1} zaman damgasından başlayan USF altyazı girişi iyi biçi
 #: src/extract/xtr_hevc.cpp:85
 #, no-c-format
 msgid "Track {0}: NAL too big. Size according to header field: {1}, available bytes in packet: {2}. This NAL is defect and will be skipped.\n"
-msgstr "İz {0}: NAL çok büyük. Başlık alanına göre boyut: {1}, paket olarak mevcut baytlar: {2}. Bu NAL kusurlu ve atlanacaktır.\n"
+msgstr "İz {0}: NAL çok büyük. Üstbilgi alanına göre boyut: {1}, paket olarak mevcut baytlar: {2}. Bu NAL kusurlu ve atlanacaktır.\n"
 
 #: src/extract/xtr_webvtt.cpp:51
 #, no-c-format
@@ -13358,7 +13358,7 @@ msgstr "Aynı ayarlarla çoklanmış iki dosya ve etkinleştirilen bu anahtar ay
 #: src/mkvtoolnix-gui/merge/track_model.cpp:48
 #, no-c-format
 msgid "Type"
-msgstr "Türü"
+msgstr "Tür"
 
 #: src/common/property_element.cpp:153
 #, no-c-format
@@ -13368,7 +13368,7 @@ msgstr "GörüntüGenişliği/Yüksekliği için birim türü (0: piksel, 1: san
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:336
 #, no-c-format
 msgid "Type-specific settings"
-msgstr "Belirli tür ayarları"
+msgstr "Türe özgü ayarlar"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:274
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:205
@@ -13376,7 +13376,7 @@ msgstr "Belirli tür ayarları"
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:173
 #, no-c-format
 msgid "Type:"
-msgstr "Türü:"
+msgstr "Tür:"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:156
 #, no-c-format
@@ -13471,7 +13471,7 @@ msgstr "'{0} {1}' içinde bilinmeyen biçim.\n"
 #: src/input/r_vobsub.cpp:595
 #, no-c-format
 msgid "Unknown header 0x{0:02x}{1:02x}{2:02x}{3:02x}\n"
-msgstr "Bilinmeyen başlık 0x{0:02x}{1:02x}{2:02x}{3:02x}\n"
+msgstr "Bilinmeyen üstbilgi 0x{0:02x}{1:02x}{2:02x}{3:02x}\n"
 
 #: src/extract/extract_cli_parser.cpp:269
 #, no-c-format
@@ -13526,7 +13526,7 @@ msgstr "Desteklenmeyen dosya biçimi"
 #: src/input/r_matroska.cpp:2104
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
-msgstr "Bu iz için desteklenmeyen biçim.\n"
+msgstr "Bu iz için desteklenmeyen iz türü.\n"
 
 #: src/propedit/propedit_cli_parser.cpp:231
 #, no-c-format
@@ -13538,7 +13538,7 @@ msgstr "Ekin özelliklerini güncelle"
 #: src/propedit/propedit.cpp:125
 #, no-c-format
 msgid "Updating the 'document type version' or 'document type read version' header fields failed."
-msgstr "'Belge türü sürümü' veya 'belge türü okuma sürümü' başlığı alanını güncelleme başarısız oldu."
+msgstr "'Belge türü sürümü' veya 'belge türü okuma sürümü' üstbilgisi alanını güncelleme başarısız oldu."
 
 #: src/propedit/propedit.cpp:34
 #, no-c-format
@@ -13715,7 +13715,7 @@ msgstr "Görüntü"
 #: src/common/property_element.cpp:158
 #, no-c-format
 msgid "Video aspect ratio type"
-msgstr "Görüntü en-boy oranı"
+msgstr "Görüntü en-boy oranı türü"
 
 #: src/common/kax_element_names.cpp:122
 #, no-c-format
@@ -14134,7 +14134,7 @@ msgstr "Kullanıcı böyle bir dosya eklediğinde, izin dil girdisi kaynak dosya
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:495
 #, no-c-format
 msgid "When the user drags & drops files from an external application onto a header editor tab the GUI can take different actions."
-msgstr "Kullanıcı dosyaları harici bir uygulamadan başlık düzenleyici sekmesi üzerine sürükleyip ve bıraktığı zaman GKA farklı eylemler gerçekleştirebilir."
+msgstr "Kullanıcı dosyaları harici bir uygulamadan üstbilgi düzenleyici sekmesi üzerine sürükleyip ve bıraktığı zaman GKA farklı eylemler gerçekleştirebilir."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:372
 #, no-c-format
@@ -14266,7 +14266,7 @@ msgstr "'--split-max-files' için yanlış bağımsız değişken.\n"
 #: src/common/theora.cpp:30
 #, no-c-format
 msgid "Wrong header type: 0x{0:02x} != 0x{1:02x}"
-msgstr "Yanlış başlık türü: 0x{0:02x} != 0x{1:02x}"
+msgstr "Yanlış üstbilgi türü: 0x{0:02x} != 0x{1:02x}"
 
 #: src/common/theora.cpp:35
 #, no-c-format
@@ -14354,12 +14354,12 @@ msgstr "Belli iz türlerini aşağıdaki ilgili onay kutusunu işaretleyerek bu 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:195
 #, no-c-format
 msgid "You can let the header editor add the element to the file."
-msgstr "Başlık düzenleyiciye öğeyi dosyaya eklemesi için izin verebilirsiniz."
+msgstr "Üstbilgi düzenleyiciye, öğeyi dosyaya eklemesi için izin verebilirsiniz."
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:186
 #, no-c-format
 msgid "You can let the header editor remove the element from the file."
-msgstr "Başlık düzenleyiciye öğeyi dosyadan kaldırması için izin verebilirsiniz."
+msgstr "Üstbilgi düzenleyiciye, öğeyi dosyadan kaldırması için izin verebilirsiniz."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:283
 #, no-c-format
@@ -14615,17 +14615,17 @@ msgstr "flac_header_extraction: FLAC__stream_decoder_new() başarısız oldu.\n"
 #: src/input/r_ogm_flac.cpp:43
 #, no-c-format
 msgid "flac_header_extraction: bytes ({0}) < op.bytes ({1}). Could not read the FLAC headers.\n"
-msgstr "flac_header_extraction: bayt ({0}) < işl.bayt ({1}). FLAC başlıkları okunamadı.\n"
+msgstr "flac_header_extraction: bayt ({0}) < işl.bayt ({1}). FLAC üstbilgileri okunamadı.\n"
 
 #: src/input/r_flac.cpp:62
 #, no-c-format
 msgid "flac_reader: Could not read a header packet.\n"
-msgstr "flac_reader: Başlık paketi okunamadı.\n"
+msgstr "flac_reader: Üstbilgi paketi okunamadı.\n"
 
 #: src/input/r_flac.cpp:154
 #, no-c-format
 msgid "flac_reader: Could not read all header packets.\n"
-msgstr "flac_reader: Tüm başlık paketleri okunamadı.\n"
+msgstr "flac_reader: Tüm üstbilgi paketleri okunamadı.\n"
 
 #: src/input/r_flac.cpp:288
 #, no-c-format
@@ -14655,7 +14655,7 @@ msgstr "kapsamlı görüntü"
 #: src/common/kax_info.cpp:772
 #, no-c-format
 msgid "header removal"
-msgstr "başlık kaldırma"
+msgstr "üstbilgi kaldırma"
 
 #: src/common/compression/zlib.cpp:37
 #, no-c-format
@@ -14741,7 +14741,7 @@ msgstr "matroska_okuyucusu: İz {1} için KodekID '{0}' bilinmiyor.\n"
 #: src/input/r_matroska.cpp:694
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
-msgstr "matroska_okuyucusu: İz '{0}' için KodekID {1}, ama özel kodek verisi geçerli başlıkları içermiyor.\n"
+msgstr "matroska_okuyucusu: İz '{0}' için KodekID {1}, ama özel kodek verisi geçerli üstbilgileri içermiyor.\n"
 
 #: src/input/r_matroska.cpp:578
 #, no-c-format
@@ -14756,7 +14756,7 @@ msgstr "matroska_okuyucusu: İz '{0}' için KodekID {1}, ama WAVEFORMATEX yapı 
 #: src/input/r_matroska.cpp:618
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
-msgstr "matroska_okuyucusu: İz '{0}' için KodekID {1}, ama kodek özel başlıkları yoktur.\n"
+msgstr "matroska_okuyucusu: İz '{0}' için KodekID {1}, ancak kodek özel üstbilgileri yoktu.\n"
 
 #: src/input/r_matroska.cpp:712
 #, no-c-format
@@ -15104,7 +15104,7 @@ msgstr "real_okuyucusu: id {0} için RealAudio FourCC bulunamadı (açıklama uz
 #: src/input/r_real.cpp:219
 #, no-c-format
 msgid "real_reader: Only audio header versions 3, 4 and 5 are supported. Track ID {0} uses version {1} and will be skipped.\n"
-msgstr "real_okuyucusu: Sadece ses başlığı sürümleri 3, 4 ve 5 desteklenir. İz ID {0}, sürüm {1} kullanıyor ve atlanacaktır.\n"
+msgstr "real_okuyucusu: Sadece ses üstbilgisi sürümleri 3, 4 ve 5 desteklenir. İz ID {0}, sürüm {1} kullanıyor ve atlanacaktır.\n"
 
 #: src/common/kax_info.cpp:692
 #, no-c-format
