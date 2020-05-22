@@ -48,8 +48,8 @@ constexpr unsigned int MAX_IDX                      = 22;
 }
 
 struct hack_t {
-  std::string const name;
-  std::vector<std::string> const description;
+  std::string name;
+  std::vector<std::string> description;
 
   hack_t(std::string const &p_name, std::vector<std::string> const &p_description)
     : name{p_name}
@@ -59,6 +59,9 @@ struct hack_t {
 
   hack_t(hack_t const &) = default;
   hack_t(hack_t &&) = default;
+
+  hack_t &operator =(hack_t const &) = default;
+  hack_t &operator =(hack_t &&) = default;
 };
 
 void engage(const std::string &hacks);

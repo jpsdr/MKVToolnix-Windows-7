@@ -28,6 +28,7 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
 
   auto global = m_ui->gridGlobalOutputControl;
 
+  add(Q("--abort-on-warnings"), false, global, { QY("Tells mkvmerge to abort after the first warning is emitted.") });
   add(Q("--cluster-length"), true, global,
       { QY("This option needs an additional argument 'n'."),
         QY("Tells mkvmerge to put at most 'n' data blocks into each cluster."),
@@ -35,24 +36,11 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
         QY("The maximum length for a cluster that mkvmerge accepts is 60000 blocks and 32000ms; the minimum length is 100ms."),
         QY("Programs will only be able to seek to clusters, so creating larger clusters may lead to imprecise or slow seeking.") });
 
-  add(Q("--no-cues"), false, global,
-      { QY("Tells mkvmerge not to create and write the cue data which can be compared to an index in an AVI."),
-        QY("Matroska files can be played back without the cue data, but seeking will probably be imprecise and slower."),
-        QY("Use this only for testing purposes.") });
-
   add(Q("--clusters-in-meta-seek"),         false, global, { QY("Tells mkvmerge to create a meta seek element at the end of the file containing all clusters.") });
-  add(Q("--no-date"),                       false, global, { QY("Tells mkvmerge not to write the 'date' field in the segment information headers."),
-                                                             QY("This field is normally set to the date the file is created.") });
+  add(Q("--deterministic"),                 true,  global, { QY("Enables the creation of byte-identical files if the same source files with the same options and the same seed are used.") });
   add(Q("--disable-lacing"),                false, global, { QY("Disables lacing for all tracks."), QY("This will increase the file's size, especially if there are many audio tracks."), QY("Use only for testing.") });
-  add(Q("--enable-durations"),              false, global, { QY("Write durations for all blocks."), QY("This will increase file size and does not offer any additional value for players at the moment.") });
   add(Q("--disable-track-statistics-tags"), false, global, { QY("Tells mkvmerge not to write tags with statistics for each track.") });
-  add(Q("--timestamp-scale"),               true,  global,
-      { QY("Forces the timestamp scale factor to the given value."),
-        QY("You have to enter a value between 1000 and 10000000 or the magic value -1."),
-        QY("Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."),
-        QY("For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."),
-        QY("This causes bigger overhead but allows precise seeking and extraction."),
-        QY("If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present.") });
+  add(Q("--enable-durations"),              false, global, { QY("Write durations for all blocks."), QY("This will increase file size and does not offer any additional value for players at the moment.") });
 
   add(Q("--flush-on-close"), false, global,
       { QY("Tells mkvmerge to flush all data cached in memory to storage when closing files opened for writing."),
@@ -60,12 +48,26 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
         QY("The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."),
         QY("See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons.") });
 
-  add(Q("--abort-on-warnings"), false, global, { QY("Tells mkvmerge to abort after the first warning is emitted.") });
+  add(Q("--no-cues"), false, global,
+      { QY("Tells mkvmerge not to create and write the cue data which can be compared to an index in an AVI."),
+        QY("Matroska files can be played back without the cue data, but seeking will probably be imprecise and slower."),
+        QY("Use this only for testing purposes.") });
 
-  add(Q("--deterministic"), true, global, { QY("Enables the creation of byte-identical files if the same source files with the same options and the same seed are used.") });
+  add(Q("--no-date"), false, global, { QY("Tells mkvmerge not to write the 'date' field in the segment information headers."),
+                                       QY("This field is normally set to the date the file is created.") });
 
- auto hacks       = m_ui->gridDevelopmentHacks;
- auto listOfHacks = mtx::hacks::get_list();
+  add(Q("--timestamp-scale"), true,  global,
+      { QY("Forces the timestamp scale factor to the given value."),
+        QY("You have to enter a value between 1000 and 10000000 or the magic value -1."),
+        QY("Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."),
+        QY("For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."),
+        QY("This causes bigger overhead but allows precise seeking and extraction."),
+        QY("If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present.") });
+
+  auto hacks       = m_ui->gridDevelopmentHacks;
+  auto listOfHacks = mtx::hacks::get_list();
+
+  std::sort(listOfHacks.begin(), listOfHacks.end(), [](auto const &a, auto const &b) { return a.name < b.name; });
 
   for (auto const &hack : listOfHacks)
     add(Q("--engage %1").arg(Q(hack.name)), false, hacks, { Q(mtx::string::join(hack.description, " ")) });
