@@ -9,27 +9,27 @@
   `--chapters …` argument, e.g. `--chapters /srv/dvds/BigBuckBunny/VIDEO_TS:3`
   This feature requires mkvmerge to have been built with the `libdvdread`
   library.  Part of the implementation of #2808.
+* mkvmerge: added `--engage append_and_split_flac` that enables mkvmerge to
+  append and split FLAC tracks, restoring pre-v45 behavior.  The resulting
+  tracks will be broken: the official FLAC tools will not be able to decode
+  them and seeking will not work as expected.
 * MKVToolNix GUI: multiplexer: added support for mkvmerge's new support for
   reading chapters from DVDs if both have been built with the `libdvdread`
   library. Part of the implementation of #2808.
-* MKVToolNix GUI: chapter editor: the chapter editor can now read chapters
-  from DVDs if MKVToolNix has been build with the `libdvdread` library. Part
-  of the implementation of #2808.
 * MKVToolNix GUI: multiplexer: when deriving languages from file names the GUI
   will now look for simplified language names instead of the full ones
   (e.g. instead of looking for "Greek, Modern (1453-)" it would simply look
   for "Greek").
-* mkvmerge: add `--engage append_and_split_flac` that enables mkvmerge to
-  append and split FLAC tracks, restoring pre-v45 behavior.
-  The resulting tracks will be broken: the official FLAC tools will not be
-  able to decode them and seeking will not work as expected.
-* MKVToolNix GUI: header editor: added an option in the preferences for
-  displaying all date & time values in UTC instead of the local time
-  zone. Implements #2814.
 * MKVToolNix GUI: multiplexer: the options in the "additional command-line
   options" dialog are now sorted alphabetically. Additionally the
   `--append-mode` option has been added as one of the only missing global
   options.
+* MKVToolNix GUI: chapter editor: the chapter editor can now read chapters
+  from DVDs if MKVToolNix has been build with the `libdvdread` library. Part
+  of the implementation of #2808.
+* MKVToolNix GUI: header editor: added an option in the preferences for
+  displaying all date & time values in UTC instead of the local time
+  zone. Implements #2814.
 
 ## Bug fixes
 
