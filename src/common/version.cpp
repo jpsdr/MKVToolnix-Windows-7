@@ -23,7 +23,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "No Deeper Escape"
+#define VERSIONNAME "Black Flag"
 
 version_number_t::version_number_t(const std::string &s)
   : valid{}
