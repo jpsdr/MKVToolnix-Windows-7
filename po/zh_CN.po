@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2020-05-22 12:55+0200\n"
-"PO-Revision-Date: 2020-05-07 14:42+0000\n"
+"PO-Revision-Date: 2020-05-24 08:00+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
@@ -4013,9 +4013,9 @@ msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets
 msgstr "使 mkvmerge 向不包含时长字段的 VobSub 字幕包添加“停止显示”指令。"
 
 #: src/common/hacks.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters)."
-msgstr "使 mkvmerge 在文件尾部创建包含所有簇的元定位元素。"
+msgstr "让 mkvmerge 在文件末尾附近 (所有簇之后) 写入另一组完全一致的轨道头部。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:301
 #, no-c-format
@@ -5477,7 +5477,7 @@ msgstr "不要生成章节"
 #: src/common/hacks.cpp:61
 #, no-c-format
 msgid "Don't remove track statistics tags when reading Matroska files, no matter if new ones are created or not."
-msgstr ""
+msgstr "读取 Matroska 文件时不要移除轨道统计标签，不论是否要创建新的轨道统计标签。"
 
 #: src/mkvtoolnix-gui/util/message_box.cpp:167
 #, no-c-format
@@ -5689,7 +5689,7 @@ msgstr "类别「{0}」中的元素 ('--edit {1}'): \n"
 #: src/common/hacks.cpp:64
 #, no-c-format
 msgid "Enable appending and splitting FLAC tracks."
-msgstr ""
+msgstr "启用对 FLAC 轨道的追加、切割支持。"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1814
 #, no-c-format
@@ -5724,7 +5724,7 @@ msgstr "启用创建完全确定的文件。若输入文件相同，且选项参
 #: src/common/hacks.cpp:48
 #, no-c-format
 msgid "Enables warnings for certain conditions where timestamps aren't monotonous in situations where they should be which could indicate either a problem with the file or a programming error."
-msgstr ""
+msgstr "启用对特定情况下时间戳应该顺序排布却逆向排布的警告，这通常说明文件或程序出现错误。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:213
 #, no-c-format
@@ -8672,7 +8672,7 @@ msgstr "注意，视频内容不会被该选项所修改。"
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:212
 #, no-c-format
 msgid "Note:"
-msgstr ""
+msgstr "注意:"
 
 #: src/extract/mkvextract.cpp:165
 #: src/propedit/options.cpp:38
@@ -10284,11 +10284,9 @@ msgid "Selects for which blocks mkvmerge will produce index entries ( = cue entr
 msgstr "选择 mkvmerge 将为哪些区块创建索引条目 (即 cue 条目)。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:32
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Selects how mkvmerge calculates timestamps when appending files."
-msgstr ""
-"  --append-mode <file|track>\n"
-"                           选择 mkvmerge 追加合并文件时如何计算时间戳。\n"
+msgstr "选择 mkvmerge 在追加文件时计算时间戳的方式。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:537
 #, no-c-format
@@ -10464,7 +10462,7 @@ msgstr "显示所有子元素 (包括 cue 条目与寻道头条目) 且不要在
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1833
 #, no-c-format
 msgid "Show dates && times in &UTC instead of the local time zone"
-msgstr ""
+msgstr "以 &UTC 而非本地时区显示日期与时间"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:169
 #, no-c-format
@@ -11409,12 +11407,12 @@ msgstr "文件中的数据已损坏，无法安全修改"
 #: src/mkvtoolnix-gui/header_editor/time_value_page.cpp:92
 #, no-c-format
 msgid "The date & time shown is in UTC."
-msgstr ""
+msgstr "显示的日期与时间为 UTC+0 的时间。"
 
 #: src/mkvtoolnix-gui/header_editor/time_value_page.cpp:92
 #, no-c-format
 msgid "The date & time shown is in your local time zone."
-msgstr ""
+msgstr "显示的日期与时间为您本地时区的时间。"
 
 #: src/common/property_element.cpp:112
 #, no-c-format
@@ -11424,7 +11422,7 @@ msgstr "文件创建的日期。"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:33
 #, no-c-format
 msgid "The default is 'file' with 'track' being an alternative mode."
-msgstr ""
+msgstr "默认为「文件」，备选模式为「轨道」。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:373
 #, no-c-format
@@ -12277,7 +12275,7 @@ msgstr "若生成的数字位数小于指定数值，将会在前面添 0 以补
 #: src/common/hacks.cpp:65
 #, no-c-format
 msgid "The resulting tracks will be broken: the official FLAC tools will not be able to decode them and seeking will not work as expected."
-msgstr ""
+msgstr "将生成损坏的轨道: 官方的 FLAC 工具将无法解码这些轨道，且定位功能可能无法正常工作。"
 
 #: src/common/xml/ebml_converter.cpp:341
 #, no-c-format
@@ -12900,7 +12898,7 @@ msgstr "使用该选项控制生成的章节名称。"
 #: src/common/hacks.cpp:44
 #, no-c-format
 msgid "This option does nothing and is only kept for backwards compatibility."
-msgstr ""
+msgstr "此选项没有任何作用，仅仅保留以便向下兼容。"
 
 #: src/common/hacks.cpp:63
 #, no-c-format
