@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2020-05-03 12:16+0200\n"
-"PO-Revision-Date: 2020-03-07 12:07+0000\n"
-"Last-Translator: Ioma Taani\n"
+"PO-Revision-Date: 2020-05-30 13:57+0200\n"
+"Last-Translator: bovirus <roberto.boriotti@canon-europe.com>\n"
 "Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -38,10 +38,8 @@ msgstr "46.0.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2020-01-02"
 msgid "2020-05-01"
-msgstr "2020-01-02"
+msgstr "2020-05-01"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -781,7 +779,7 @@ msgstr "relative_position"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:503
 msgid "The relative position in bytes inside the cluster where the <classname>BlockGroup</classname> or <classname>SimpleBlock</classname> element the cue point refers to starts."
-msgstr "Posizione relativa in byte all'interno del cluster dove l'elemento <classname>BlockGroup</classname> o l'elemento <classname>SimpleBlock</classname> DA FINIRE"
+msgstr "La posizione relativa in byte all'interno del cluster in cui inizia l'elemento <classname>BlockGroup</classname> o <classname>SimpleBlock</classname>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><note><para>
 #: doc/man/mkvextract.xml:507
@@ -957,7 +955,7 @@ msgstr "A_REAL/*"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:650
 msgid "<productname>RealAudio</productname> tracks are written to <productname>RealMedia</productname> files."
-msgstr "Le tracce <productname>RealAudio</productname> verranno scritte su file <productname>RealMedia</productname>. "
+msgstr "Le tracce <productname>RealAudio</productname> sono scritte su file <productname>RealMedia</productname>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:656
@@ -1127,7 +1125,7 @@ msgstr "V_REAL/*"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:809
 msgid "<productname>RealVideo</productname> tracks are written to <productname>RealMedia</productname> files."
-msgstr "Le tracce <productname>RealVideo</productname> saranno scritte su file <productname>RealMedia</productname>. "
+msgstr "Le tracce <productname>RealVideo</productname> sono scritte su file <productname>RealMedia</productname>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:815
@@ -1137,7 +1135,7 @@ msgstr "V_THEORA"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:818
 msgid "<productname>Theora</productname> streams will be written within an <productname>Ogg</productname> container"
-msgstr "I flussi <productname>Theora</productname> saranno scritti in un contenitore <productname>Ogg</productname>."
+msgstr "I flussi <productname>Theora</productname> sono scritti in un contenitore <productname>Ogg</productname>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:824
@@ -1180,7 +1178,10 @@ msgstr "Capitoli"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:854
 msgid "Chapters are converted to a &xml; format. This format is the same that &mkvmerge; supports for reading chapters. Alternatively a stripped-down version can be output in the simple <abbrev>OGM</abbrev> style format."
-msgstr "I capitoli saranno convertiti in formato &xml;. Questo formato è lo stesso che supporta &mkvmerge; per la lettura dei capitoli. Alternativamente una versione semplificata può essere di output in formato <abbrev>OGM</abbrev>. "
+msgstr ""
+"I capitoli sono convertiti in formato &xml;.\n"
+"Questo formato è lo stesso che supporta &mkvmerge; per la lettura dei capitoli.\n"
+"Alternativamente una versione semplificata può essere in formato <abbrev>OGM</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:861
@@ -1693,6 +1694,8 @@ msgstr "Imposta la codifica caratteri che viene utilizzata per la conversione in
 #: doc/man/mkvmerge.xml:214
 msgid "This switch does also apply to chapters that are copied from certain container types, e.g. Ogg/OGM and MP4 files.  See the section about chapters below for details."
 msgstr ""
+"Questa opzione si applica anche ai capitoli copiati da determinati tipi di container, ad es. file Ogg / OGM e MP4. \n"
+"Vedi la sezione sui capitoli di seguito per i dettagli."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:221
@@ -1703,18 +1706,22 @@ msgstr "<option>--chapter-sync</option> <parameter>d<optional>,o<optional>/p</op
 #: doc/man/mkvmerge.xml:224
 msgid "Adjust the timestamps of the chapters in the following source file by <parameter>d</parameter> ms. Alternatively you can use the <option>--sync</option> option with the special track ID <constant>-2</constant> (see section <link linkend=\"mkvmerge.track_ids.special_ids\">special track IDs</link>)."
 msgstr ""
+"Regola i timestamp dei capitoli nel seguente file sorgente di <parameter>d</parameter> ms.\n"
+"In alternativa è possibile utilizzare l'opzione <option>--sync</option> con l'ID traccia speciale <constant>-2</constant> (vedi la sezione <link linkend=\"mkvmerge.track_ids.special_ids\">ID traccia speciale</link>)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:230
 #: doc/man/mkvmerge.xml:1352
 msgid "<parameter>o</parameter>/<parameter>p</parameter>: adjust the timestamps by <parameter>o</parameter>/<parameter>p</parameter> to fix linear drifts. <parameter>p</parameter> defaults to 1 if omitted. Both <parameter>o</parameter> and <parameter>p</parameter> can be floating point numbers."
 msgstr ""
+"<parameter>o</parameter>/<parameter>p</parameter> regola i timestamp di <parameter>o</parameter>/<parameter>p</parameter> per correggere le derive lineari. <parameter>p</parameter> viene impostato automaticamente su 1 se omesso. \n"
+"Sia <parameter>o</parameter> che <parameter>p</parameter> possono essere numeri in virgola mobile."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:236
 #: doc/man/mkvmerge.xml:1358
 msgid "Defaults: no manual sync correction (which is the same as <parameter>d</parameter> = <constant>0</constant> and <parameter>o</parameter>/<parameter>p</parameter> = <constant>1.0</constant>)."
-msgstr ""
+msgstr "Predefiniti: nessuna correzione manuale della sincronizzazione (che è la stessa di <parameter>d</parameter> = <constant>0</constant> e <parameter>o</parameter>/<parameter>p</parameter> = <constant>1.0</constant>)"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:241
