@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 17.12.2018\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2020-05-22 12:55+0200\n"
-"PO-Revision-Date: 2020-04-10 17:49+0000\n"
-"Last-Translator: Paride Barison\n"
+"PO-Revision-Date: 2020-05-30 09:29+0000\n"
+"Last-Translator: bovirus <roberto.boriotti@canon-europe.com>\n"
 "Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/it/)\n"
 "Language: it\n"
@@ -26,7 +26,8 @@ msgid ""
 "The temporary TTA file for track ID {0} is being copied into the final TTA file. This may take some time.\n"
 msgstr ""
 "\n"
-"Il file temporaneo TTA per l'ID traccia {0} sarà copiato nel file finale TTA. Ciò potrebbe richiedere del tempo.\n"
+"Il file temporaneo TTA per l'ID traccia {0} sarà copiato nel file finale TTA.\n"
+"Ciò potrebbe richiedere del tempo.\n"
 
 #: src/merge/output_control.cpp:265
 #, no-c-format
@@ -1917,9 +1918,9 @@ msgstr "Apri imp&ostazioni"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:196
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:641
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Open supported chapter file format"
-msgstr "Formato file non supportato"
+msgstr "Apri f&ormato file capitolo supportati"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:514
 #, no-c-format
@@ -2423,9 +2424,9 @@ msgid "'{0}' is not a CHAPTERxxNAME=... line."
 msgstr "'{0}' non è una riga 'CHAPTERxxNAME=...'."
 
 #: src/common/chapters/dvd.cpp:117
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "'{0}' is not a valid DVD title number."
-msgstr "'{0}' non è un ordine campo valido."
+msgstr "'{0}' non è numero titolo DVD valido"
 
 #: src/common/xml/ebml_chapters_converter.cpp:151
 #, no-c-format
@@ -2910,9 +2911,9 @@ msgid "A&cknowledge warnings/errors"
 msgstr "Notifiche/errori"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:645
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "A&ppend chapters from supported file format"
-msgstr "Appendi capitoli da file Matroska, WebM o capitolo"
+msgstr "A&ppendi capitoli dal formato supportato"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1511
 #: src/mkvtoolnix-gui/merge/input.cpp:1512
@@ -3270,14 +3271,14 @@ msgid "Adler-32: 0x{0:08x}"
 msgstr "Adler-32: 0x{0:08x}"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:328
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "After a job completes &successfully"
-msgstr "Dopo un'attività completata correttamente o con avvi&si"
+msgstr "Al termine di una attività completata"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:329
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "After a job exits with &warnings"
-msgstr "Dopo un'attività completata correttamente o con avvi&si"
+msgstr "Al termine di una attività con avvisi"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:330
 #, no-c-format
@@ -4087,9 +4088,9 @@ msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets
 msgstr "A causa dell'aggiunta del comando 'stop display' di mkvmerge al pacchetto sottotitoli VobSub che non contiene un campo durata."
 
 #: src/common/hacks.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters)."
-msgstr "Istruisce mkvmerge a creare un elemento meta seek alla fine del file contenente tutti i cluster."
+msgstr "Fa sì che mkvmerge scriva un secondo set di intestazioni di traccia identiche vicino alla fine del file (dopo tutti i cluster)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:301
 #, no-c-format
@@ -5086,15 +5087,15 @@ msgid "DVB subtitles"
 msgstr "Sottotitoli DVB"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1828
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "DVD title number:"
-msgstr "Numeri capitoli:"
+msgstr "Numero titolo DVD:"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:191
 #: src/mkvtoolnix-gui/merge/output.cpp:509
 #, no-c-format
 msgid "DVDs"
-msgstr ""
+msgstr "DVD"
 
 #: src/mkvtoolnix-gui/info/model.cpp:90
 #, no-c-format
@@ -5552,7 +5553,7 @@ msgstr "Non generare i capitoli"
 #: src/common/hacks.cpp:61
 #, no-c-format
 msgid "Don't remove track statistics tags when reading Matroska files, no matter if new ones are created or not."
-msgstr ""
+msgstr "Non rimuove le etichette delle statistiche delle tracce durante la lettura dei file Matroska, indipendentemente dal fatto che ne vengano creati di nuovi o meno."
 
 #: src/mkvtoolnix-gui/util/message_box.cpp:167
 #, no-c-format
@@ -5764,7 +5765,7 @@ msgstr "Gli elementi nella categoria '{0}' ('--edit {1}'):\n"
 #: src/common/hacks.cpp:64
 #, no-c-format
 msgid "Enable appending and splitting FLAC tracks."
-msgstr ""
+msgstr "Abilita aggiunta e suddivisione tracce FLAC."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1814
 #, no-c-format
@@ -5799,7 +5800,7 @@ msgstr "Abilita la creazione di file identici byte-per-byte se i file sorgenti s
 #: src/common/hacks.cpp:48
 #, no-c-format
 msgid "Enables warnings for certain conditions where timestamps aren't monotonous in situations where they should be which could indicate either a problem with the file or a programming error."
-msgstr ""
+msgstr "Attiva avvisi per determinate condizioni in cui i timestamp non sono monotoni in situazioni in cui dovrebbero essere, che potrebbero indicare un problema con il file o un errore di programmazione."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:213
 #, no-c-format
@@ -6815,7 +6816,7 @@ msgstr "Se selezionata, verrà inclusa nella selezione del programma solo l'elen
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:242
 #, no-c-format
 msgid "If checked, the GUI will not show helpful usage tips in popup windows while hovering over a control — such as this one."
-msgstr ""
+msgstr "Se selezionata, la GUI non visualizzerà utili consigli nelle finestre popup mentre si passa sopra un controllo, come questo."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:456
 #, no-c-format
@@ -6891,7 +6892,7 @@ msgstr "Se abilitata, l'ultimo elemento sarà ignorato quando si caricano capito
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:268
 #, no-c-format
 msgid "If enabled, the names of tab headers will be shortened so that all tab headers fit into the window's width."
-msgstr ""
+msgstr "Se abilitato, i nomi delle intestazioni schede verranno abbreviati in modo che tutte le intestazioni schede si adattino alla larghezza della finestra."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:270
 #, no-c-format
@@ -8468,7 +8469,7 @@ msgstr "Nessun nome file di destinazione specificato. Sarà usato il nome dell'a
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
 #, no-c-format
 msgid "No disc library information was found."
-msgstr ""
+msgstr "Nessuna informazione libreria disco trovata."
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:150
 #, no-c-format
@@ -8749,7 +8750,7 @@ msgstr "Nota che il contenuto video non è stato modificato da questa opzione."
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:212
 #, no-c-format
 msgid "Note:"
-msgstr ""
+msgstr "Nota:"
 
 #: src/extract/mkvextract.cpp:165
 #: src/propedit/options.cpp:38
@@ -9837,9 +9838,9 @@ msgid "Remove com&pleted jobs older than x days:"
 msgstr "Rimuovi attività com&pletate più vecchie di x giorni:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1856
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Remove completed jobs from queue on &exit:"
-msgstr "Rimuovi attività com&pletate più vecchie di x giorni:"
+msgstr "All'uscita rimuovi attività compl&etata dalla coda"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1779
 #, no-c-format
@@ -10321,7 +10322,7 @@ msgstr "Seleziona nome file destinazione"
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:325
 #, no-c-format
 msgid "Select disc library information to use"
-msgstr ""
+msgstr "Seleziona informazioni libreria disco da usare"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:997
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:320
@@ -10341,9 +10342,9 @@ msgid "Select one of the ISO 639-2 language codes."
 msgstr "Seleziona una dei codici lingua ISO 639-2."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:300
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select playlist to add"
-msgstr "Seleziona il file da aggiungere"
+msgstr "Seleziona playlist da aggiungere"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:440
 #, no-c-format
@@ -10372,12 +10373,9 @@ msgid "Selects for which blocks mkvmerge will produce index entries ( = cue entr
 msgstr "Seleziona per quale blocchi mkvmerge produrrà elementi indice (= elementi taglio)."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:32
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Selects how mkvmerge calculates timestamps when appending files."
-msgstr ""
-"  --append-mode <file|traccia>\n"
-"                           Seleziona come mkvmerge calcola i timestamp quando\n"
-"                           aggiungi file.\n"
+msgstr "Seleziona il modo in cui mkvmerge calcola i timestamp durante l'aggiunta di file."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:537
 #, no-c-format
@@ -10556,7 +10554,7 @@ msgstr "Mostra tutti i sotto elementi (includendo metadati cue e intestazioni di
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1833
 #, no-c-format
 msgid "Show dates && times in &UTC instead of the local time zone"
-msgstr ""
+msgstr "Visualizza data/ora in &UTC anziché nel fuso orario locale"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:169
 #, no-c-format
@@ -10802,9 +10800,9 @@ msgid "Splitting"
 msgstr "Suddivisione"
 
 #: src/merge/output_control.cpp:1085
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Splitting tracks of this type is not supported."
-msgstr "Estrazione ID traccia {0} con ID codec '{1}' non supportata.\n"
+msgstr "La divisione di tracce di questo tipo non è supportata."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:320
 #, no-c-format
@@ -11170,9 +11168,9 @@ msgid "The ID '{0}' has already been used for another destination file.\n"
 msgstr "Il file '{0}' è stato già usato per un altro file di destinazione.\n"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:153
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The JSON output generated by mkvmerge while identifying '%1' could not be parsed (parser's error message: %2)."
-msgstr "Questo output JSON generata da mkvmerge non può essere analizzata (messaggio errore analisi: %1)."
+msgstr "Impossibile analizzare l'output JSON generato da mkvmerge durante l'identificazione di '%1' (messaggio errore analisi:%2)."
 
 #: src/input/r_ogm.cpp:1675
 #, no-c-format
@@ -11504,12 +11502,12 @@ msgstr "Il dato nel file è corrotto e non può essere modificato in modo sicuro
 #: src/mkvtoolnix-gui/header_editor/time_value_page.cpp:92
 #, no-c-format
 msgid "The date & time shown is in UTC."
-msgstr ""
+msgstr "La data e l'ora sono visualizzate in UTC."
 
 #: src/mkvtoolnix-gui/header_editor/time_value_page.cpp:92
 #, no-c-format
 msgid "The date & time shown is in your local time zone."
-msgstr ""
+msgstr "La data e l'ora sono visualizzate con il fuso locale."
 
 #: src/common/property_element.cpp:112
 #, no-c-format
@@ -11519,7 +11517,7 @@ msgstr "La data del file è stata creata."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:33
 #, no-c-format
 msgid "The default is 'file' with 'track' being an alternative mode."
-msgstr ""
+msgstr "L'impostazione predefinita è \"file\" con \"traccia\" come modalità alternativa."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:373
 #, no-c-format
@@ -11672,12 +11670,12 @@ msgstr "Il file '%1' non è stato trovato nella cartella di installazione."
 #: src/mkvtoolnix-gui/jobs/tool.cpp:580
 #, no-c-format
 msgid "The file '%1' exists already and might be overwritten depending on the configuration & the content of the source files."
-msgstr ""
+msgstr "Il file '%1' esiste già e potrebbe essere sovrascritto a seconda della configurazione e del contenuto dei file sorgente."
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:165
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '%1' is an unsupported container format (%2)."
-msgstr "Il file è un formato contenitore non supportato (%1)."
+msgstr "Il file '%1' è un formato contenitore non supportato (%2)."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:547
 #, no-c-format
@@ -11685,9 +11683,9 @@ msgid "The file '%1' is neither a job queue file nor a settings file."
 msgstr "Il file '%1' non è una coda attività né un file impostazioni."
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:160
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '%1' was not recognized as a supported format (exit code: %2)."
-msgstr "Il file non è stato riconosciuto come un formato supportato (%1)."
+msgstr "Il file '%1' non è stato riconosciuto come formato supportato (codice di uscita: %2)."
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:49
 #, no-c-format
@@ -11751,9 +11749,9 @@ msgid "The file '{0}' could not be opened or parsed."
 msgstr "Il file '{0}' non può essere aperto o analizzato."
 
 #: src/merge/output_control.cpp:1568
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
-msgstr "Il file '{0}' non può essere aperto per la lettura: {1}.\n"
+msgstr "Il file \"{0}\" non può essere rinominato in \"{1}\".\n"
 
 #: src/merge/output_control.cpp:1365
 #, no-c-format
@@ -11771,9 +11769,9 @@ msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "Il file '{0}' non è un file Matroska o non è stato trovato.\n"
 
 #: src/merge/output_control.cpp:1566
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
-msgstr "Il file '{0}' non può essere aperto per la lettura: {1}.\n"
+msgstr "Il file \"{0}\" è stato rinominato in \"{1}\".\n"
 
 #: src/extract/xtr_wav.cpp:134
 #, no-c-format
@@ -12380,7 +12378,7 @@ msgstr "Il numero risultato verrà riempito con degli zero se il numero è infer
 #: src/common/hacks.cpp:65
 #, no-c-format
 msgid "The resulting tracks will be broken: the official FLAC tools will not be able to decode them and seeking will not work as expected."
-msgstr ""
+msgstr "Le tracce risultanti verranno interrotte: gli strumenti FLAC ufficiali non saranno in grado di decodificarli e la ricerca non funzionerà come previsto."
 
 #: src/common/xml/ebml_converter.cpp:341
 #, no-c-format
@@ -12596,7 +12594,7 @@ msgstr "Il titolo per l'intero filmato."
 #: src/common/chapters/dvd.cpp:134
 #, no-c-format
 msgid "The title number '{0}' is higher than the number of titles on the DVD ({1})."
-msgstr ""
+msgstr "Il numero del titolo '{0}' è superiore al numero di titoli nel DVD ({1})."
 
 #: src/extract/tracks.cpp:118
 #, no-c-format
@@ -12604,9 +12602,9 @@ msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr "L'ID traccia {0} non ha un CodecID valido.\n"
 
 #: src/merge/output_control.cpp:1087
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
-msgstr "La traccia numero {0} del file '{1}' non può essere aggiunta alla traccia numero {2} del file '{3}'. {4}\n"
+msgstr "L'ID traccia {0} dal file '{1}' non può essere diviso. {2}\n"
 
 #: src/merge/output_control.cpp:669
 #, no-c-format
@@ -13004,7 +13002,7 @@ msgstr "Questa opzione controlla come viene creato il nome capitolo."
 #: src/common/hacks.cpp:44
 #, no-c-format
 msgid "This option does nothing and is only kept for backwards compatibility."
-msgstr ""
+msgstr "Questa opzione non fa nulla ed è mantenuta solo per compatibilità con le versioni precedenti."
 
 #: src/common/hacks.cpp:63
 #, no-c-format
