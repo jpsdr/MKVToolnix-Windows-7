@@ -75,9 +75,11 @@ struct wavpack_meta_t {
 #define WV_SRATE_LSB      23
 #define WV_SRATE_MASK     (0xfL << WV_SRATE_LSB)
 
-#define WV_IGNORED_FLAGS  0x18000000  // reserved, but ignore if encountered
 #define WV_NEW_SHAPING    0x20000000  // use IIR filter for negative shaping
-#define WV_UNKNOWN_FLAGS  0xC0000000  // also reserved, but refuse decode if
-                                      //  encountered
+
+// Introduced in WavPack 5.0:
+#define WV_HAS_CHECKSUM  0x10000000      // block contains a trailing checksum
+#define WV_DSD_FLAG      0x80000000      // block is encoded DSD (1-bit PCM)
 
 int32_t wv_parse_frame(mm_io_c &mm_io, wavpack_header_t &header, wavpack_meta_t &meta, bool read_blocked_frames, bool keep_initial_position);
+int wv_checksum_byte_count (const unsigned char *buffer, int bcount);
