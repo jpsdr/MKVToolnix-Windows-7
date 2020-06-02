@@ -53,6 +53,7 @@ require_relative "rake.d/helpers"
 require_relative "rake.d/target"
 require_relative "rake.d/application"
 require_relative "rake.d/installer"
+require_relative "rake.d/iso639"
 require_relative "rake.d/library"
 require_relative "rake.d/compilation_database"
 require_relative "rake.d/format_string_verifier"
@@ -903,6 +904,11 @@ namespace :dev do
     longest = prereqs.map { |p| p[0].length }.max
 
     puts prereqs.map { |p| sprintf("%-#{longest}s => %s", p[0], p[1].sort.join(" ")) }.join("\n")
+  end
+
+  desc "Create iso639_lists.cpp from system ISO code list"
+  task :iso39_list do
+    create_iso639_language_list_file
   end
 end
 

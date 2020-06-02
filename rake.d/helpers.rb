@@ -287,6 +287,26 @@ def update_version_number_include
   end
 end
 
+def format_table rows, options = {}
+  column_suffix = options[:column_suffix] || ''
+  max_lengths   = [0] * rows[0].count
+
+  rows.each do |row|
+    row.each_with_index do |value, column|
+      max_lengths[column] = [ max_lengths[column], value.length + (column == row.count - 1 ? 0 : column_suffix.length) ].max
+    end
+  end
+
+  row_prefix = options[:row_prefix]    || ''
+  row_suffix = options[:row_suffix]    || ''
+  format     = max_lengths.map { |len| "%-#{len}s" }.join(' ')
+
+  return rows.map do |row|
+    formatted_row = sprintf(format, *(0..row.count - 1).map { |column| row[column].to_s + (column == row.count - 1 ? '' : column_suffix) })
+    row_prefix + formatted_row + row_suffix
+  end
+end
+
 def add_qrc_dependencies *qrcs
   qrc_content = read_files(*qrcs)
   qrc_content.each do |file_name, content|
