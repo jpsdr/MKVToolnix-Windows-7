@@ -21,6 +21,7 @@ class translation_c {
 public:
   static std::vector<translation_c> ms_available_translations;
   static int ms_active_translation_idx;
+  static std::string ms_default_iso639_ui_language;
 
 public:
   std::string m_iso639_2_code, m_unix_locale, m_windows_locale, m_windows_locale_sysname, m_english_name, m_translated_name;
@@ -44,6 +45,7 @@ public:
   static int look_up_translation(const std::string &locale);
   static int look_up_translation(int language_id, int sub_language_id);
   static std::string get_default_ui_locale();
+  static void determine_default_iso639_ui_language();
   static translation_c &get_active_translation();
   static void set_active_translation(const std::string &locale);
 };

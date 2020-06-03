@@ -23,10 +23,12 @@
 #include <locale>
 
 #include "common/fs_sys_helpers.h"
+#include "common/iso639.h"
 #include "common/locale_string.h"
 #include "common/utf8_codecvt_facet.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
+#include "common/strings/utf8.h"
 #include "common/translation.h"
 
 #if defined(SYS_WINDOWS)
@@ -38,6 +40,7 @@
 
 std::vector<translation_c> translation_c::ms_available_translations;
 int translation_c::ms_active_translation_idx = 0;
+std::string translation_c::ms_default_iso639_ui_language;
 
 translation_c::translation_c(std::string iso639_2_code,
                              std::string unix_locale,
@@ -132,6 +135,46 @@ translation_c::look_up_translation(int language_id, int sub_language_id) {
   mxdebug_if(debugging_c::requested("locale"), fmt::format("look_up_translation for 0x{0:04x}/0x{1:02x}: {2}\n", language_id, sub_language_id, idx));
 
   return idx;
+}
+
+void
+translation_c::determine_default_iso639_ui_language() {
+  std::string language_code;
+
+#if defined(SYS_WINDOWS)
+  auto language_id = GetUserDefaultUILanguage();
+  auto length      = GetLocaleInfoW(language_id, LOCALE_SISO639LANGNAME2, NULL, 0);
+
+  if (length <= 0)
+    return;
+
+  std::wstring language_code_wide(length, L' ');
+  GetLocaleInfoW(language_id, LOCALE_SISO639LANGNAME2, &language_code_wide[0], length);
+  language_code_wide.resize(length - 1);
+
+  language_code = to_utf8(language_code_wide);
+
+#else   // SYS_WINDOWS
+
+  auto data = setlocale(LC_MESSAGES, nullptr);
+  std::string previous_locale;
+
+  if (data)
+    previous_locale = data;
+
+  setlocale(LC_MESSAGES, "");
+  data = setlocale(LC_MESSAGES, nullptr);
+
+  if (data)
+    language_code = std::regex_replace(data, std::regex{"_.*"}, "");
+
+  setlocale(LC_MESSAGES, previous_locale.c_str());
+
+#endif  // SYS_WINDOWS
+
+  auto language_idx = map_to_iso639_2_code(language_code);
+  if (language_idx >= 0)
+    ms_default_iso639_ui_language = g_iso639_languages[language_idx].iso639_2_code;
 }
 
 std::string
@@ -279,9 +322,10 @@ void
 init_locales(std::string locale) {
   auto debug = debugging_c::requested("locale");
 
+  translation_c::determine_default_iso639_ui_language();
   translation_c::initialize_available_translations();
 
-  mxdebug_if(debug, fmt::format("[init_locales start: locale {0}]\n", locale));
+  mxdebug_if(debug, fmt::format("[init_locales start: locale {0} default_iso639_ui_language {1}]\n", locale, translation_c::ms_default_iso639_ui_language));
 
   std::string locale_dir;
   std::string default_locale = translation_c::get_default_ui_locale();
@@ -394,6 +438,7 @@ init_locales(std::string locale) {
 
 void
 init_locales(std::string) {
+  translation_c::determine_default_iso639_ui_language();
   translation_c::initialize_available_translations();
 }
 
