@@ -1,3 +1,12 @@
+# Version ?
+
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: on new installations the GUI will now recognize
+  all known ISO 639-2 language codes in file names by default instead of only
+  the top 100 of languages by native speakers.
+
+
 # Version 47.0.0 "Black Flag" 2020-05-30
 
 ## New features and enhancements
