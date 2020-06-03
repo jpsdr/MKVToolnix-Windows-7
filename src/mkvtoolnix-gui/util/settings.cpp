@@ -316,7 +316,7 @@ Settings::load() {
   m_oftenUsedCountries                 = reg.value(s_valOftenUsedCountries).toStringList();
   m_oftenUsedCharacterSets             = reg.value(s_valOftenUsedCharacterSets).toStringList();
 
-  m_oftenUsedLanguagesOnly             = reg.value(s_valOftenUsedLanguagesOnly,     true).toBool();;
+  m_oftenUsedLanguagesOnly             = reg.value(s_valOftenUsedLanguagesOnly,     false).toBool();;
   m_oftenUsedCountriesOnly             = reg.value(s_valOftenUsedCountriesOnly,     false).toBool();;
   m_oftenUsedCharacterSetsOnly         = reg.value(s_valOftenUsedCharacterSetsOnly, false).toBool();;
 
@@ -418,9 +418,20 @@ Settings::load() {
 
 void
 Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
-  if (m_oftenUsedLanguages.isEmpty())
-    for (auto const &languageCode : g_popular_language_codes)
-      m_oftenUsedLanguages << Q(languageCode);
+  if (m_oftenUsedLanguages.isEmpty()) {
+    m_oftenUsedLanguages
+      << Q("mul")               // multiple languages
+      << Q("zxx")               // no linguistic content
+      << Q("qaa")               // reserved for local use
+      << Q("mis")               // uncoded languages
+      << Q("und")               // undetermined
+      << Q("eng");              // English
+
+    if (!translation_c::ms_default_iso639_ui_language.empty() && !m_oftenUsedLanguages.contains(Q(translation_c::ms_default_iso639_ui_language)))
+      m_oftenUsedLanguages << Q(translation_c::ms_default_iso639_ui_language);
+
+    m_oftenUsedLanguages.sort();
+  }
 
   if (m_oftenUsedCountries.isEmpty())
     for (auto const &countryCode : g_popular_country_codes)

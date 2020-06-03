@@ -5,6 +5,11 @@
 * MKVToolNix GUI: multiplexer: on new installations the GUI will now recognize
   all known ISO 639-2 language codes in file names by default instead of only
   the top 100 of languages by native speakers.
+* MKVToolNix GUI: multiplexer: on new installations the list of "often used
+  languages" will by default only contain certain agnostic ones ("multiple
+  languages", "no linguistic content", "reserved for local use", "uncoded
+  languages"), "English" and the default user interface language. The "list of
+  spoken languages by native speaks" isn't used anymore. Also implements #2716.
 
 
 # Version 47.0.0 "Black Flag" 2020-05-30
