@@ -20,7 +20,6 @@ struct iso639_language_t {
 };
 
 extern std::vector<iso639_language_t> const g_iso639_languages;
-extern std::vector<std::string> const g_popular_language_codes;
 
 int map_to_iso639_2_code(std::string const &s, bool allow_short_english_names = false);
 bool is_valid_iso639_2_code(std::string const &s);
