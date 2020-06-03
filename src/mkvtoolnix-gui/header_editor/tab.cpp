@@ -68,6 +68,7 @@ Tab::Tab(QWidget *parent,
   , m_collapseAllAction{new QAction{this}}
   , m_addAttachmentsAction{new QAction{this}}
   , m_removeAttachmentAction{new QAction{this}}
+  , m_removeAllAttachmentsAction{new QAction{this}}
   , m_saveAttachmentContentAction{new QAction{this}}
   , m_replaceAttachmentContentAction{new QAction{this}}
   , m_replaceAttachmentContentSetValuesAction{new QAction{this}}
@@ -306,6 +307,7 @@ Tab::setupUi() {
   connect(m_collapseAllAction,                       &QAction::triggered,                              this, &Tab::collapseAll);
   connect(m_addAttachmentsAction,                    &QAction::triggered,                              this, &Tab::selectAttachmentsAndAdd);
   connect(m_removeAttachmentAction,                  &QAction::triggered,                              this, &Tab::removeSelectedAttachment);
+  connect(m_removeAllAttachmentsAction,              &QAction::triggered,                              this, &Tab::removeAllAttachments);
   connect(m_saveAttachmentContentAction,             &QAction::triggered,                              this, &Tab::saveAttachmentContent);
   connect(m_replaceAttachmentContentAction,          &QAction::triggered,                              [this]() { replaceAttachmentContent(false); });
   connect(m_replaceAttachmentContentSetValuesAction, &QAction::triggered,                              [this]() { replaceAttachmentContent(true); });
@@ -340,6 +342,7 @@ Tab::retranslateUi() {
   m_collapseAllAction->setText(QY("&Collapse all"));
   m_addAttachmentsAction->setText(QY("&Add attachments"));
   m_removeAttachmentAction->setText(QY("&Remove attachment"));
+  m_removeAllAttachmentsAction->setText(QY("Remove a&ll attachments"));
   m_saveAttachmentContentAction->setText(QY("&Save attachment content to a file"));
   m_replaceAttachmentContentAction->setText(QY("Re&place attachment with a new file"));
   m_replaceAttachmentContentSetValuesAction->setText(QY("Replace attachment with a new file and &derive name && MIME type from it"));
@@ -684,12 +687,14 @@ Tab::showTreeContextMenu(QPoint const &pos) {
 
   if (isAttachments) {
     m_treeContextMenu->addAction(m_removeAttachmentAction);
+    m_treeContextMenu->addAction(m_removeAllAttachmentsAction);
     m_treeContextMenu->addSeparator();
     m_treeContextMenu->addAction(m_saveAttachmentContentAction);
     m_treeContextMenu->addAction(m_replaceAttachmentContentAction);
     m_treeContextMenu->addAction(m_replaceAttachmentContentSetValuesAction);
 
     m_removeAttachmentAction->setEnabled(isAttachedFilePage);
+    m_removeAllAttachmentsAction->setEnabled(!m_attachmentsPage->m_children.isEmpty());
     m_saveAttachmentContentAction->setEnabled(isAttachedFilePage);
     m_replaceAttachmentContentAction->setEnabled(isAttachedFilePage);
     m_replaceAttachmentContentSetValuesAction->setEnabled(isAttachedFilePage);
@@ -741,6 +746,18 @@ Tab::removeSelectedAttachment() {
 
   m_attachmentsPage->m_children.removeAll(selectedPage);
   m_model->deletePage(selectedPage);
+}
+
+void
+Tab::removeAllAttachments() {
+  auto attachmentsItem = m_model->itemFromIndex(m_attachmentsPage->m_pageIdx);
+
+  m_model->removeRows(0, attachmentsItem->rowCount(), m_attachmentsPage->m_pageIdx);
+
+  for (auto const &attachmentPage : m_attachmentsPage->m_children)
+    m_model->deletePage(attachmentPage);
+
+  m_attachmentsPage->m_children.clear();
 }
 
 memory_cptr

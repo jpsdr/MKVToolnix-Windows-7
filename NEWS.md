@@ -10,6 +10,8 @@
   languages", "no linguistic content", "reserved for local use", "uncoded
   languages"), "English" and the default user interface language. The "list of
   spoken languages by native speaks" isn't used anymore. Also implements #2716.
+* MKVToolNix GUI: header editor: added an option to remove all attachments to
+  the tree context menu. Implements #2835.
 
 
 # Version 47.0.0 "Black Flag" 2020-05-30

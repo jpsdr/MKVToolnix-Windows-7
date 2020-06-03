@@ -48,7 +48,8 @@ protected:
   bool m_ignoreSelectionChanges{};
 
   QMenu *m_treeContextMenu;
-  QAction *m_expandAllAction, *m_collapseAllAction, *m_addAttachmentsAction, *m_removeAttachmentAction, *m_saveAttachmentContentAction, *m_replaceAttachmentContentAction, *m_replaceAttachmentContentSetValuesAction;
+  QAction *m_expandAllAction, *m_collapseAllAction, *m_addAttachmentsAction, *m_removeAttachmentAction, *m_removeAllAttachmentsAction, *m_saveAttachmentContentAction;
+  QAction *m_replaceAttachmentContentAction, *m_replaceAttachmentContentSetValuesAction;
 
   std::shared_ptr<EbmlElement> m_eSegmentInfo, m_eTracks;
 
@@ -79,6 +80,7 @@ public Q_SLOTS:
   virtual void collapseAll();
   virtual void selectAttachmentsAndAdd();
   virtual void addAttachments(QStringList const &fileNames);
+  virtual void removeAllAttachments();
   virtual void removeSelectedAttachment();
   virtual void saveAttachmentContent();
   virtual void replaceAttachmentContent(bool deriveNameAndMimeType);
