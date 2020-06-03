@@ -46,7 +46,10 @@ LanguageComboBox::setup(bool withEmpty,
     ++separatorOffset;
   }
 
-  if (!onlyOftenUsed) {
+  auto commonLanguages = onlyOftenUsed ? mergeCommonAndAdditionalItems(App::commonIso639Languages(), App::iso639Languages(), additionalItems()) : App::commonIso639Languages();
+  auto undIsCommon     = std::find_if(commonLanguages.begin(), commonLanguages.end(), [](auto const &language) { return language.second == Q("und"); }) != commonLanguages.end();
+
+  if (!onlyOftenUsed && !undIsCommon) {
     for (auto const &language : App::iso639Languages()) {
       if (language.second != Q("und"))
         continue;
@@ -58,8 +61,6 @@ LanguageComboBox::setup(bool withEmpty,
     }
 
   }
-
-  auto commonLanguages = onlyOftenUsed ? mergeCommonAndAdditionalItems(App::commonIso639Languages(), App::iso639Languages(), additionalItems()) : App::commonIso639Languages();
 
   if (!commonLanguages.empty()) {
     for (auto const &language : commonLanguages)
