@@ -25,8 +25,8 @@ protected:
   explicit ElideLabel(QWidget *parent, ElideLabelPrivate &p);
 
 public:
-  explicit ElideLabel(QWidget *parent = nullptr, Qt::WindowFlags flags = 0);
-  explicit ElideLabel(QString const &text, QWidget *parent = nullptr, Qt::WindowFlags flags = 0);
+  explicit ElideLabel(QWidget *parent = nullptr, Qt::WindowFlags flags = {});
+  explicit ElideLabel(QString const &text, QWidget *parent = nullptr, Qt::WindowFlags flags = {});
   virtual ~ElideLabel();
 
   QString text() const;

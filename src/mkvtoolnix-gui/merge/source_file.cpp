@@ -59,7 +59,9 @@ setupLanguageDerivationSubPatterns() {
     if (!language.terminology_abbrev.empty())
       codes2List << Q(language.terminology_abbrev);
 
-    for (auto name : Q(language.english_name).split(splitter, QString::SkipEmptyParts)) {
+    for (auto name : Q(language.english_name).split(splitter)) {
+      if (name.isEmpty())
+        continue;
       name.remove(languageNameCleaner);
       namesList  << QRegularExpression::escape(name);
     }
@@ -456,7 +458,7 @@ SourceFile::deriveLanguageFromFileName() {
         if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(g_iso639_languages[languageIdx].iso639_2_code)))
           continue;
 
-        for (auto name : Q(g_iso639_languages[languageIdx].english_name).split(splitter, QString::SkipEmptyParts)) {
+        for (auto name : Q(g_iso639_languages[languageIdx].english_name).split(splitter)) {
           name.remove(languageNameCleaner);
           if (name != capture)
             continue;

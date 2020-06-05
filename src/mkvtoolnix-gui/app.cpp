@@ -20,7 +20,6 @@
 #include "common/kax_element_names.h"
 #include "common/kax_info.h"
 #include "common/qt.h"
-#include "common/random.h"
 #include "common/unique_numbers.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
@@ -68,8 +67,6 @@ App::App(int &argc,
   , p_ptr{new AppPrivate{}}
 {
   mtx::cli::g_version_info = get_version_info("mkvtoolnix-gui", vif_full);
-
-  qsrand(random_c::generate_64bits());
 
   // The routines for handling unique numbers cannot cope with
   // multiple chapters being worked on at the same time as they safe

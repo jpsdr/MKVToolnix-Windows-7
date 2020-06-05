@@ -23,7 +23,7 @@ protected:
   virtual void shutDownComputer(Util::Settings::RunProgramConfig &config) override;
   virtual void hibernateComputer(Util::Settings::RunProgramConfig &config) override;
   virtual void sleepComputer(Util::Settings::RunProgramConfig &config) override;
-  virtual void hibernateOrSleepComputer(bool hibernate);
+  virtual void systemctlAction(QString const &action);
 };
 
 }}

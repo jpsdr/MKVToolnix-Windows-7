@@ -28,36 +28,31 @@ LinuxProgramRunner::isRunProgramTypeSupported(Util::Settings::RunProgramType typ
 }
 
 void
-LinuxProgramRunner::shutDownComputer(Util::Settings::RunProgramConfig &) {
-  qDebug() << "LinuxProgramRunner::shutDownComputer: about to shut down the computer via systemctl";
+LinuxProgramRunner::systemctlAction(QString const &action) {
+  qDebug() << Q("LinuxProgramRunner::systemctlAction: about to execute 'systemctl %1'").arg(action);
 
-  auto result = QProcess::execute("systemctl poweroff");
+  auto args   = QStringList{} << action;
+  auto result = QProcess::execute(Q("systemctl"), args);
 
   if (result == 0)
     return;
 
-  qDebug() << "LinuxProgramRunner::shutDownComputer: 'systemctl poweroff' failed:" << result;
+  qDebug() << Q("LinuxProgramRunner::systemctlAction: 'systemctl %1' failed: %2").arg(action).arg(result);
 }
 
 void
-LinuxProgramRunner::hibernateOrSleepComputer(bool hibernate) {
-  auto action = Q(hibernate ? "hibernate" : "suspend");
-  qDebug() << "LinuxProgramRunner::hibernateOrSleepComputer: about to" << action << "the computer via systemctl";
-
-  auto result = QProcess::execute(Q("systemctl %1").arg(action));
-
-  if (result != 0)
-    qDebug() << "LinuxProgramRunner::hibernateOrSleepComputer: 'systemctl" << action << "' failed:" << result;
+LinuxProgramRunner::shutDownComputer(Util::Settings::RunProgramConfig &) {
+  systemctlAction(Q("poweroff"));
 }
 
 void
 LinuxProgramRunner::hibernateComputer(Util::Settings::RunProgramConfig &) {
-  hibernateOrSleepComputer(true);
+  systemctlAction(Q("hibernate"));
 }
 
 void
 LinuxProgramRunner::sleepComputer(Util::Settings::RunProgramConfig &) {
-  hibernateOrSleepComputer(false);
+  systemctlAction(Q("suspend"));
 }
 
 }

@@ -36,7 +36,7 @@ LanguageValuePage::createInputControl() {
 
   m_cbValue = new Util::LanguageComboBox{this};
   m_cbValue->setFrame(true);
-  m_cbValue->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLength);
+  m_cbValue->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
 
   m_cbValue->setAdditionalItems(Q(currentValue))
     .setup()
