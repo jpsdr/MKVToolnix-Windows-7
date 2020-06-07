@@ -14,6 +14,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/at_scope_exit.h"
 #include "common/doc_type_version_handler.h"
 #include "common/ebml.h"
 #include "common/hacks.h"
@@ -552,6 +553,10 @@ cluster_helper_c::render() {
     source->after_packet_rendered(*pack);
   }
 
+  mtx::at_scope_exit_c cleanup([this]() {
+    m->cluster->delete_non_blocks();
+  });
+
   if (!discarding()) {
     if (0 < elements_in_cluster) {
       for (auto &rg : render_groups)
@@ -578,8 +583,6 @@ cluster_helper_c::render() {
 
   m->min_timestamp_in_cluster = -1;
   m->max_timestamp_in_cluster = -1;
-
-  m->cluster->delete_non_blocks();
 
   return 1;
 }

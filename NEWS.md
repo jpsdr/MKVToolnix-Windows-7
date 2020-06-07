@@ -13,6 +13,11 @@
 * MKVToolNix GUI: header editor: added an option to remove all attachments to
   the tree context menu. Implements #2835.
 
+## Bug fixes
+
+* mkvmerge: fixed a segmentation fault when exiting prematurely due to write
+  errors such as the destination having run out of space. Fixes #2843.
+
 
 # Version 47.0.0 "Black Flag" 2020-05-30
 
