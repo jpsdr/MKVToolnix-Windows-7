@@ -1153,6 +1153,9 @@ reader_c::read_headers_for_file(std::size_t file_num) {
   // each track. This way tracks that don't actually need their
   // content to be found during probing will be set to OK, too.
   for (auto const &track : m_tracks) {
+    if (track->is_pes_payload_size_unbounded() && (track->pes_payload_read->get_size() >= 6))
+      parse_pes(*track);
+
     track->clear_pes_payload();
     probe_packet_complete(*track, true);
   }
