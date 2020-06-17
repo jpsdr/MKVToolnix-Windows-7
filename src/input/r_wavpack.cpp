@@ -144,7 +144,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
     if (2 < meta.channel_count)
       put_uint32_le(databuffer - 4, block_size - truncate_bytes);
     databuffer += block_size - truncate_bytes;
-    data_size -= truncate_bytes;
+    data_size  -= truncate_bytes;
   }
 
   packet_cptr packet(new packet_t(memory_c::take_ownership(chunk, data_size)));
@@ -212,7 +212,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
     if (2 < meta_correc.channel_count)
       put_uint32_le(databuffer - 4, block_size - truncate_bytes);
     databuffer += block_size - truncate_bytes;
-    data_size -= truncate_bytes;
+    data_size  -= truncate_bytes;
   }
 
   mem->resize(data_size);

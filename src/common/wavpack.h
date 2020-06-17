@@ -82,4 +82,4 @@ struct wavpack_meta_t {
 #define WV_DSD_FLAG      0x80000000      // block is encoded DSD (1-bit PCM)
 
 int32_t wv_parse_frame(mm_io_c &mm_io, wavpack_header_t &header, wavpack_meta_t &meta, bool read_blocked_frames, bool keep_initial_position);
-int wv_checksum_byte_count (const unsigned char *buffer, int bcount);
+int wv_checksum_byte_count(unsigned char const *buffer, int bcount);

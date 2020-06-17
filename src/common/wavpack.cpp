@@ -19,6 +19,15 @@
 #include "common/endian.h"
 #include "common/wavpack.h"
 
+#define ID_DSD_BLOCK            0x0e
+#define ID_OPTIONAL_DATA        0x20
+#define ID_UNIQUE               0x3f
+#define ID_ODD_SIZE             0x40
+#define ID_LARGE                0x80
+
+#define ID_BLOCK_CHECKSUM       (ID_OPTIONAL_DATA | 0xf)
+#define ID_SAMPLE_RATE          (ID_OPTIONAL_DATA | 0x7)
+
 const uint32_t sample_rates [] = {
    6000,  8000,  9600, 11025, 12000, 16000, 22050,
   24000, 32000, 44100, 48000, 64000, 88200, 96000, 192000 };
@@ -65,13 +74,6 @@ read_next_header(mm_io_c &in,
   }
 }
 
-#define ID_UNIQUE               0x3f
-#define ID_OPTIONAL_DATA        0x20
-#define ID_ODD_SIZE             0x40
-#define ID_LARGE                0x80
-
-#define ID_BLOCK_CHECKSUM       (ID_OPTIONAL_DATA | 0xf)
-
 // Given a WavPack block (complete, but not including the 32-byte header), parse the metadata
 // blocks to the end and return the number of bytes used by the trailing block checksum if one
 // is found, otherwise return zero. This is the number of bytes that can be deleted from the
@@ -79,25 +81,23 @@ read_next_header(mm_io_c &in,
 // must be reset.
 
 int
-wv_checksum_byte_count (const unsigned char *buffer, int bcount) {
-  unsigned char meta_id, c1, c2;
-  int meta_bc;
-
+wv_checksum_byte_count(unsigned char const *buffer,
+                       int bcount) {
   while (bcount >= 2) {
-    meta_id = *buffer++;
-    c1 = *buffer++;
+    auto meta_id = *buffer++;
+    auto c1      = *buffer++;
 
-    meta_bc = c1 << 1;
-    bcount -= 2;
+    int meta_bc  = c1 << 1;
+    bcount      -= 2;
 
     if (meta_id & ID_LARGE) {
       if (bcount < 2)
         return 0;
 
-      c1 = *buffer++;
-      c2 = *buffer++;
-      meta_bc += ((uint32_t) c1 << 9) + ((uint32_t) c2 << 17);
-      bcount -= 2;
+      c1       = *buffer++;
+      auto c2  = *buffer++;
+      meta_bc += (static_cast<uint32_t>(c1) << 9) + (static_cast<uint32_t>(c2) << 17);
+      bcount  -= 2;
     }
 
     if (bcount < meta_bc)
@@ -105,7 +105,7 @@ wv_checksum_byte_count (const unsigned char *buffer, int bcount) {
 
     // if we got a block-checksum and we're at the end of the block, return its size
 
-    if (meta_id == ID_BLOCK_CHECKSUM && meta_bc == bcount)
+    if ((meta_id == ID_BLOCK_CHECKSUM) && (meta_bc == bcount))
       return meta_bc + 2;
 
     bcount -= meta_bc;
@@ -115,32 +115,28 @@ wv_checksum_byte_count (const unsigned char *buffer, int bcount) {
   return 0;
 }
 
-#define ID_SAMPLE_RATE          (ID_OPTIONAL_DATA | 0x7)
-
 // Given a WavPack block (complete, but not including the 32-byte header), parse the metadata
 // blocks until an ID_SAMPLE_RATE block is found and return the non-standard sample rate
 // contained there, or zero if no such block is found.
 
 static int
-wv_get_non_standard_rate (unsigned char *buffer, int bcount) {
-  unsigned char meta_id, c1, c2;
-  int meta_bc;
-
+wv_get_non_standard_rate(unsigned char const *buffer,
+                         int bcount) {
   while (bcount >= 2) {
-    meta_id = *buffer++;
-    c1 = *buffer++;
+    auto meta_id  = *buffer++;
+    auto c1       = *buffer++;
 
-    meta_bc = c1 << 1;
-    bcount -= 2;
+    auto meta_bc  = c1 << 1;
+    bcount       -= 2;
 
     if (meta_id & ID_LARGE) {
       if (bcount < 2)
         return 0;
 
-      c1 = *buffer++;
-      c2 = *buffer++;
-      meta_bc += ((uint32_t) c1 << 9) + ((uint32_t) c2 << 17);
-      bcount -= 2;
+      c1       = *buffer++;
+      auto c2  = *buffer++;
+      meta_bc += (static_cast<uint32_t>(c1) << 9) + (static_cast<uint32_t>(c2) << 17);
+      bcount  -= 2;
     }
 
     if (bcount < meta_bc)
@@ -148,16 +144,16 @@ wv_get_non_standard_rate (unsigned char *buffer, int bcount) {
 
     // if we got a sample rate, return it
 
-    if ((meta_id & ID_UNIQUE) == ID_SAMPLE_RATE && (meta_bc == 3 || meta_bc == 4)) {
-      int sample_rate = (int32_t) *buffer++;
-        sample_rate |= (int32_t) *buffer++ << 8;
-        sample_rate |= (int32_t) *buffer++ << 16;
+    if (   ((meta_id & ID_UNIQUE) == ID_SAMPLE_RATE)
+        && (   (meta_bc == 3)
+            || (meta_bc == 4))) {
+      int sample_rate = get_uint24_le(buffer);
 
-        if (meta_bc == 4)
-          sample_rate |= (int32_t) (*buffer & 0x7f) << 24;
+      if (meta_bc == 4)
+        sample_rate |= static_cast<int32_t>(buffer[3] & 0x7f) << 24;
 
-        return sample_rate;
-      }
+      return sample_rate;
+    }
 
     bcount -= meta_bc;
     buffer += meta_bc;
@@ -165,8 +161,6 @@ wv_get_non_standard_rate (unsigned char *buffer, int bcount) {
 
   return 0;
 }
-
-#define ID_DSD_BLOCK            0xe
 
 // Given a WavPack block (complete, but not including the 32-byte header), parse the metadata
 // blocks until a DSD audio data block is found and return the sample-rate shift value
@@ -177,25 +171,23 @@ wv_get_non_standard_rate (unsigned char *buffer, int bcount) {
 // bit sample rate.
 
 static int
-wv_get_dsd_rate_shifter (unsigned char *buffer, int bcount) {
-  unsigned char meta_id, c1, c2;
-  int meta_bc;
-
+wv_get_dsd_rate_shifter(unsigned char const *buffer,
+                        int bcount) {
   while (bcount >= 2) {
-    meta_id = *buffer++;
-    c1 = *buffer++;
+    auto meta_id  = *buffer++;
+    auto c1       = *buffer++;
 
-    meta_bc = c1 << 1;
-    bcount -= 2;
+    auto meta_bc  = c1 << 1;
+    bcount       -= 2;
 
     if (meta_id & ID_LARGE) {
       if (bcount < 2)
         return 0;
 
-      c1 = *buffer++;
-      c2 = *buffer++;
-      meta_bc += ((uint32_t) c1 << 9) + ((uint32_t) c2 << 17);
-      bcount -= 2;
+      c1       = *buffer++;
+      auto c2  = *buffer++;
+      meta_bc += (static_cast<uint32_t>(c1) << 9) + (static_cast<uint32_t>(c2) << 17);
+      bcount  -= 2;
     }
 
     if (bcount < meta_bc)
@@ -203,7 +195,7 @@ wv_get_dsd_rate_shifter (unsigned char *buffer, int bcount) {
 
     // if we got DSD block, return the specified rate shift amount
 
-    if ((meta_id & ID_UNIQUE) == ID_DSD_BLOCK && meta_bc && *buffer <= 31)
+    if (((meta_id & ID_UNIQUE) == ID_DSD_BLOCK) && meta_bc && (*buffer <= 31))
       return *buffer;
 
     bcount -= meta_bc;
@@ -249,22 +241,19 @@ wv_parse_frame(mm_io_c &in,
         // do this only on the very first block of the file since it can't change after that.
 
         if (meta.sample_rate == 15 || flags & WV_DSD_FLAG) {
-          int adjusted_block_size = ck_size - sizeof(wavpack_header_t) + 8;
-          unsigned char *buffer = new unsigned char [adjusted_block_size];
+          auto adjusted_block_size = ck_size - sizeof(wavpack_header_t) + 8;
+          auto buffer              = memory_c::alloc(adjusted_block_size);
 
-          if (in.read(buffer, adjusted_block_size) != static_cast<unsigned int>(adjusted_block_size)) {
-            delete [] buffer;
+          if (in.read(buffer, adjusted_block_size) != static_cast<unsigned int>(adjusted_block_size))
             return -1;
-          }
 
           if (meta.sample_rate == 15)
-            non_standard_rate = wv_get_non_standard_rate (buffer, adjusted_block_size);
+            non_standard_rate = wv_get_non_standard_rate(buffer->get_buffer(), adjusted_block_size);
 
           if (flags & WV_DSD_FLAG)
-            dsd_rate_shifter = wv_get_dsd_rate_shifter (buffer, adjusted_block_size);
+            dsd_rate_shifter = wv_get_dsd_rate_shifter(buffer->get_buffer(), adjusted_block_size);
 
           in.skip(-adjusted_block_size);
-          delete [] buffer;
         }
 
         if (meta.sample_rate < 15)
