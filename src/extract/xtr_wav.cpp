@@ -213,6 +213,7 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
 
   const binary *mybuffer  = f.frame->get_buffer();
   int data_size           = f.frame->get_size();
+  int truncate_bytes      = 0;
   m_number_of_samples    += get_uint32_le(mybuffer);
 
   // rest of the header:
@@ -224,31 +225,45 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
   if (2 < m_channels) {
     uint32_t block_size = get_uint32_le(&mybuffer[12]);
 
-    put_uint32_le(&wv_header[4], block_size + 24);  // ck_size
+    // For now, we are deleting any block checksums that might be present in the WavPack data. They can't be verified
+    // because the original 32-byte header is gone (which is included in the checksum) and they will probably be wrong
+    // if we write them here because we are creating new headers. This also applies to the correction blocks below.
+
+    truncate_bytes = (get_uint32_le(&wv_header[24]) & WV_HAS_CHECKSUM) ? wv_checksum_byte_count(mybuffer + 16, block_size) : 0;
+    put_uint32_le(&wv_header[24], get_uint32_le(&wv_header[24]) & ~WV_HAS_CHECKSUM);
+
+    put_uint32_le(&wv_header[4], block_size + 24 - truncate_bytes);  // ck_size
     m_out->write(wv_header, 32);
     flags.push_back(get_uint32_le(&mybuffer[4]));
     mybuffer += 16;
-    m_out->write(mybuffer, block_size);
+    m_out->write(mybuffer, block_size - truncate_bytes);
     mybuffer  += block_size;
     data_size -= block_size + 16;
     while (0 < data_size) {
       block_size = get_uint32_le(&mybuffer[8]);
       memcpy(&wv_header[24], mybuffer, 8);
-      put_uint32_le(&wv_header[4], block_size + 24);
+
+      truncate_bytes = (get_uint32_le(&wv_header[24]) & WV_HAS_CHECKSUM) ? wv_checksum_byte_count (mybuffer + 12, block_size) : 0;
+      put_uint32_le(&wv_header[24], get_uint32_le(&wv_header[24]) & ~WV_HAS_CHECKSUM);
+
+      put_uint32_le(&wv_header[4], block_size + 24 - truncate_bytes);
       m_out->write(wv_header, 32);
 
       flags.push_back(get_uint32_le(mybuffer));
       mybuffer += 12;
-      m_out->write(mybuffer, block_size);
+      m_out->write(mybuffer, block_size - truncate_bytes);
 
       mybuffer  += block_size;
       data_size -= block_size + 12;
     }
 
   } else {
-    put_uint32_le(&wv_header[4], data_size + 12); // ck_size
+    truncate_bytes = (get_uint32_le(&wv_header[24]) & WV_HAS_CHECKSUM) ? wv_checksum_byte_count (mybuffer + 12, data_size - 12) : 0;
+    put_uint32_le (&wv_header[24], get_uint32_le(&wv_header[24]) & ~WV_HAS_CHECKSUM);
+
+    put_uint32_le(&wv_header[4], data_size + 12 - truncate_bytes); // ck_size
     m_out->write(wv_header, 32);
-    m_out->write(&mybuffer[12], data_size - 12); // the rest of the
+    m_out->write(&mybuffer[12], data_size - 12 - truncate_bytes); // the rest of the
   }
 
   // support hybrid mode data
@@ -271,21 +286,26 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
       while (0 < data_size) {
         uint32_t block_size = get_uint32_le(&mybuffer[4]);
 
-        put_uint32_le(&wv_header[4], block_size + 24); // ck_size
         memcpy(&wv_header[24], &flags[flags_index++], 4); // flags
         memcpy(&wv_header[28], mybuffer, 4); // crc
+
+        truncate_bytes = (get_uint32_le(&wv_header[24]) & WV_HAS_CHECKSUM) ? wv_checksum_byte_count (mybuffer + 8, block_size) : 0;
+        put_uint32_le (&wv_header[24], get_uint32_le(&wv_header[24]) & ~WV_HAS_CHECKSUM);
+
+        put_uint32_le(&wv_header[4], block_size + 24 - truncate_bytes); // ck_size
         m_corr_out->write(wv_header, 32);
         mybuffer += 8;
-        m_corr_out->write(mybuffer, block_size);
+        m_corr_out->write(mybuffer, block_size - truncate_bytes);
         mybuffer += block_size;
         data_size -= 8 + block_size;
       }
 
     } else {
-      put_uint32_le(&wv_header[4], data_size + 20); // ck_size
+      truncate_bytes = truncate_bytes ? wv_checksum_byte_count (mybuffer + 4, data_size - 4) : 0;
+      put_uint32_le(&wv_header[4], data_size + 20 - truncate_bytes); // ck_size
       memcpy(&wv_header[28], mybuffer, 4); // crc
       m_corr_out->write(wv_header, 32);
-      m_corr_out->write(&mybuffer[4], data_size - 4);
+      m_corr_out->write(&mybuffer[4], data_size - 4 - truncate_bytes);
     }
   }
 }

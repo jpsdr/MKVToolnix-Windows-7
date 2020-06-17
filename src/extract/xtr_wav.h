@@ -13,6 +13,7 @@
 #pragma once
 
 #include "common/common_pch.h"
+#include "common/wavpack.h"
 
 #include "extract/xtr_base.h"
 

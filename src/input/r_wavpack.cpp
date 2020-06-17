@@ -95,7 +95,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
   uint8_t *chunk, *databuffer;
 
   // determine the final data size
-  int32_t data_size = 0, block_size;
+  int32_t data_size = 0, block_size, truncate_bytes;
   int extra_frames_number = -1;
 
   dummy_meta.channel_count = 0;
@@ -125,7 +125,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
   databuffer               = &chunk[4];
   while (dummy_meta.channel_count < meta.channel_count) {
     block_size = wv_parse_frame(*m_in, dummy_header, dummy_meta, false, false);
-    put_uint32_le(databuffer, dummy_header.flags);
+    put_uint32_le(databuffer, dummy_header.flags & ~WV_HAS_CHECKSUM);
     databuffer += 4;
     put_uint32_le(databuffer, dummy_header.crc);
     databuffer += 4;
@@ -136,7 +136,15 @@ wavpack_reader_c::read(generic_packetizer_c *,
     }
     if (m_in->read(databuffer, block_size) != static_cast<size_t>(block_size))
       return flush_packetizers();
-    databuffer += block_size;
+
+    // If the WavPack block contains a trailing checksum (added for WavPack 5) then delete it here because it's
+    // useless without the included 32-byte WavPack header. This also applies to the correction block below.
+
+    truncate_bytes = (dummy_header.flags & WV_HAS_CHECKSUM) ? wv_checksum_byte_count (databuffer, block_size) : 0;
+    if (2 < meta.channel_count)
+      put_uint32_le(databuffer - 4, block_size - truncate_bytes);
+    databuffer += block_size - truncate_bytes;
+    data_size -= truncate_bytes;
   }
 
   packet_cptr packet(new packet_t(memory_c::take_ownership(chunk, data_size)));
@@ -200,9 +208,14 @@ wavpack_reader_c::read(generic_packetizer_c *,
     }
     if (m_in_correc->read(databuffer, block_size) != static_cast<size_t>(block_size))
       m_in_correc.reset();
-    databuffer += block_size;
+    truncate_bytes = (dummy_header_correc.flags & WV_HAS_CHECKSUM) ? wv_checksum_byte_count (databuffer, block_size) : 0;
+    if (2 < meta_correc.channel_count)
+      put_uint32_le(databuffer - 4, block_size - truncate_bytes);
+    databuffer += block_size - truncate_bytes;
+    data_size -= truncate_bytes;
   }
 
+  mem->resize(data_size);
   packet->data_adds.push_back(mem);
 
   PTZR0->process(packet);
