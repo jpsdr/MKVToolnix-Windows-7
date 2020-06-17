@@ -21,6 +21,9 @@
   that consist of only a single frame. Part of the fix of #2849.
 * mkvmerge: MPEG TS reader: fixed handling of unbounded PES sizes for tracks
   that consist of only a single PES packet. Part of the fix of #2849.
+* mkvmerge: WavPack: fixed support for files created by v5 of the
+  program. Checksums, DSD audio data and non-standard sampling rates are
+  handled correctly. Patch by David Bryant.
 
 
 # Version 47.0.0 "Black Flag" 2020-05-30
