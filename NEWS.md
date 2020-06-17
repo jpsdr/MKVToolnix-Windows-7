@@ -17,6 +17,8 @@
 
 * mkvmerge: fixed a segmentation fault when exiting prematurely due to write
   errors such as the destination having run out of space. Fixes #2843.
+* mkvmerge: MPEG TS reader: fixed detecting h.264/AVC and h.265/HEVC tracks
+  that consist of only a single frame. Part of the fix of #2849.
 
 
 # Version 47.0.0 "Black Flag" 2020-05-30

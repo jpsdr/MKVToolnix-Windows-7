@@ -350,8 +350,8 @@ public:
   std::size_t remaining_payload_size_to_read() const;
 
   int new_stream_v_mpeg_1_2(bool end_of_detection);
-  int new_stream_v_avc();
-  int new_stream_v_hevc();
+  int new_stream_v_avc(bool end_of_detection);
+  int new_stream_v_hevc(bool end_of_detection);
   int new_stream_v_vc1();
   int new_stream_a_mpeg();
   int new_stream_a_aac();
