@@ -12,6 +12,9 @@
   spoken languages by native speaks" isn't used anymore. Also implements #2716.
 * MKVToolNix GUI: header editor: added an option to remove all attachments to
   the tree context menu. Implements #2835.
+* MKVToolNix GUI: while the GUI is running it will remember the last page that
+  was selected when the preferences dialog is closed. Upon re-opening the
+  preferences that page will be selected by default. Implements #2852.
 
 ## Bug fixes
 

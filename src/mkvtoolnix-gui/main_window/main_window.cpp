@@ -466,7 +466,7 @@ MainWindow::closeEvent(QCloseEvent *event) {
 
 void
 MainWindow::editPreferences() {
-  editPreferencesAndShowPage(PreferencesDialog::Page::Default);
+  editPreferencesAndShowPage(PreferencesDialog::Page::PreviouslySelected);
 }
 
 void

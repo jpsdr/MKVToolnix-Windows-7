@@ -35,10 +35,12 @@ public:
     Jobs,
     RunPrograms,
 
-    Default = Gui,
+    PreviouslySelected,
   };
 
 protected:
+  static Page ms_previouslySelectedPage;
+
   // UI stuff:
   std::unique_ptr<Ui::PreferencesDialog> ui;
   Util::Settings &m_cfg;
@@ -75,6 +77,7 @@ public Q_SLOTS:
   void enableOftendUsedCharacterSetsOnly();
 
   virtual void accept() override;
+  virtual void reject() override;
 
 protected:
   void setupPageSelector(Page pageToShow);
@@ -110,6 +113,8 @@ protected:
 
   bool verifyDeriveTrackLanguageSettings();
   bool verifyRunProgramConfigurations();
+
+  void rememberCurrentlySelectedPage();
 };
 
 }

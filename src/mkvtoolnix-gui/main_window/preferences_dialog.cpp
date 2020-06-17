@@ -30,6 +30,8 @@
 
 namespace mtx::gui {
 
+PreferencesDialog::Page PreferencesDialog::ms_previouslySelectedPage{PreferencesDialog::Page::Gui};
+
 PreferencesDialog::PreferencesDialog(QWidget *parent,
                                      Page pageToShow)
   : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
@@ -42,7 +44,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
 {
   ui->setupUi(this);
 
-  setupPageSelector(pageToShow);
+  setupPageSelector(pageToShow == Page::PreviouslySelected ? ms_previouslySelectedPage : pageToShow);
 
   ui->tbOftenUsedXYZ->setTabPosition(m_cfg.m_tabPosition);
 
@@ -953,6 +955,15 @@ PreferencesDialog::save() {
 }
 
 void
+PreferencesDialog::rememberCurrentlySelectedPage() {
+  auto pageIndex = ui->pages->currentIndex();
+  auto pageTypes = m_pageIndexes.keys(pageIndex);
+
+  if (!pageTypes.isEmpty())
+    ms_previouslySelectedPage = pageTypes[0];
+}
+
+void
 PreferencesDialog::enableOftendUsedLanguagesOnly() {
   ui->cbOftenUsedLanguagesOnly->setEnabled(!ui->tbOftenUsedLanguages->selectedItemValues().isEmpty());
 }
@@ -1151,8 +1162,16 @@ PreferencesDialog::verifyRunProgramConfigurations() {
 void
 PreferencesDialog::accept() {
   if (   verifyDeriveTrackLanguageSettings()
-      && verifyRunProgramConfigurations())
+      && verifyRunProgramConfigurations()) {
+    rememberCurrentlySelectedPage();
     QDialog::accept();
+  }
+}
+
+void
+PreferencesDialog::reject() {
+  rememberCurrentlySelectedPage();
+  QDialog::reject();
 }
 
 }
