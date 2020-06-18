@@ -25,62 +25,63 @@ class reader_c;
 #define CLPI_FILE_MAGIC2C FOURCC('0', '3', '0', '0')
 
 namespace mtx::bluray::clpi {
-  struct program_stream_t {
-    uint16_t pid;
-    unsigned char coding_type;
-    unsigned char format;
-    unsigned char rate;
-    unsigned char aspect;
-    unsigned char oc_flag;
-    unsigned char char_code;
-    std::string language;
 
-    program_stream_t();
+struct program_stream_t {
+  uint16_t pid;
+  unsigned char coding_type;
+  unsigned char format;
+  unsigned char rate;
+  unsigned char aspect;
+  unsigned char oc_flag;
+  unsigned char char_code;
+  std::string language;
 
-    void dump();
-  };
-  using program_stream_cptr = std::shared_ptr<program_stream_t>;
+  program_stream_t();
 
-  struct program_t {
-    uint32_t spn_program_sequence_start;
-    uint16_t program_map_pid;
-    unsigned char num_streams;
-    unsigned char num_groups;
-    std::vector<program_stream_cptr> program_streams;
+  void dump();
+};
+using program_stream_cptr = std::shared_ptr<program_stream_t>;
 
-    program_t();
+struct program_t {
+  uint32_t spn_program_sequence_start;
+  uint16_t program_map_pid;
+  unsigned char num_streams;
+  unsigned char num_groups;
+  std::vector<program_stream_cptr> program_streams;
 
-    void dump();
-  };
-  using program_cptr = std::shared_ptr<program_t>;
+  program_t();
 
-  class parser_c {
-  protected:
-    std::string m_file_name;
-    bool m_ok;
-    debugging_option_c m_debug;
+  void dump();
+};
+using program_cptr = std::shared_ptr<program_t>;
 
-    size_t m_sequence_info_start, m_program_info_start;
+class parser_c {
+protected:
+  std::string m_file_name;
+  bool m_ok;
+  debugging_option_c m_debug;
 
-  public:
-    std::vector<program_cptr> m_programs;
+  size_t m_sequence_info_start, m_program_info_start;
 
-  public:
-    parser_c(std::string file_name);
-    virtual ~parser_c() = default;
+public:
+  std::vector<program_cptr> m_programs;
 
-    virtual bool parse();
-    virtual bool is_ok() {
-      return m_ok;
-    }
+public:
+  parser_c(std::string file_name);
+  virtual ~parser_c() = default;
 
-    virtual void dump();
+  virtual bool parse();
+  virtual bool is_ok() {
+    return m_ok;
+  }
 
-  protected:
-    virtual void parse_header(mtx::bits::reader_c &bc);
-    virtual void parse_program_info(mtx::bits::reader_c &bc);
-    virtual void parse_program_stream(mtx::bits::reader_c &bc, program_cptr &program);
-  };
-  using parser_cptr = std::shared_ptr<parser_c>;
+  virtual void dump();
+
+protected:
+  virtual void parse_header(mtx::bits::reader_c &bc);
+  virtual void parse_program_info(mtx::bits::reader_c &bc);
+  virtual void parse_program_stream(mtx::bits::reader_c &bc, program_cptr &program);
+};
+using parser_cptr = std::shared_ptr<parser_c>;
 
 }                             // namespace mtx::bluray::clpi
