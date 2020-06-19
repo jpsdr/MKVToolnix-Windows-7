@@ -16,6 +16,7 @@
 #include "common/bit_reader.h"
 #include "common/bluray/clpi.h"
 #include "common/mm_file_io.h"
+#include "common/strings/formatting.h"
 
 namespace mtx::bluray::clpi {
 
@@ -72,22 +73,61 @@ program_stream_t::dump() {
                      language));
 }
 
+void
+ep_map_one_stream_t::dump(std::size_t idx)
+  const {
+  mxinfo(fmt::format("  EP map for one stream[{0}]:\n"
+                     "    PID:               {1}\n"
+                     "    type:              {2}\n"
+                     "    num_coarse_points: {3}\n"
+                     "    num_fine_points:   {4}\n"
+                     "    address:           {5}\n",
+                     idx, pid, type, num_coarse_points, num_fine_points, address));
+
+  idx = 0;
+  for (auto const &coarse_point : coarse_points)
+    mxinfo(fmt::format("    coarse point[{0}]:\n"
+                       "      ref_to_fine_id: {1}\n"
+                       "      PTS:            {2}\n"
+                       "      SPN:            {3}\n",
+                       idx++, coarse_point.ref_to_fine_id, coarse_point.pts, coarse_point.spn));
+
+  idx = 0;
+  for (auto const &fine_point : fine_points)
+    mxinfo(fmt::format("    fine point[{0}]:\n"
+                       "      PTS: {1}\n"
+                       "      SPN: {2}\n",
+                       idx++, fine_point.pts, fine_point.spn));
+
+  idx = 0;
+  for (auto const &point : points)
+    mxinfo(fmt::format("    calculated point[{0}]:\n"
+                       "      PTS: {1}\n"
+                       "      SPN: {2}\n",
+                       idx++, point.pts, point.spn));
+}
+
 parser_c::parser_c(std::string file_name)
   : m_file_name{std::move(file_name)}
-  , m_ok{}
-  , m_debug{"clpi|clpi_parser"}
 {
 }
 
 void
 parser_c::dump() {
   mxinfo(fmt::format("Parser dump:\n"
-                     "  sequence_info_start: {0}\n"
-                     "  program_info_start:  {1}\n",
-                     m_sequence_info_start, m_program_info_start));
+                     "  sequence_info_start:             {0}\n"
+                     "  program_info_start:              {1}\n"
+                     "  characteristic_point_info_start: {2}\n",
+                     m_sequence_info_start, m_program_info_start, m_characteristic_point_info_start));
 
   for (auto &program : m_programs)
     program->dump();
+
+  mxinfo(fmt::format("Characteristic point info dump:\n"));
+
+  auto idx = 0u;
+  for (auto const &ep_map : m_ep_map)
+    ep_map.dump(idx++);
 }
 
 bool
@@ -106,6 +146,7 @@ parser_c::parse() {
 
     parse_header(*bc);
     parse_program_info(*bc);
+    parse_characteristic_point_info(*bc);
 
     if (m_debug)
       dump();
@@ -133,8 +174,9 @@ parser_c::parse_header(mtx::bits::reader_c &bc) {
   if ((CLPI_FILE_MAGIC2A != magic) && (CLPI_FILE_MAGIC2B != magic) && (CLPI_FILE_MAGIC2C != magic))
     throw false;
 
-  m_sequence_info_start = bc.get_bits(32);
-  m_program_info_start  = bc.get_bits(32);
+  m_sequence_info_start             = bc.get_bits(32);
+  m_program_info_start              = bc.get_bits(32);
+  m_characteristic_point_info_start = bc.get_bits(32);
 }
 
 void
@@ -229,6 +271,90 @@ parser_c::parse_program_stream(mtx::bits::reader_c &bc,
   stream->language = language;
 
   bc.set_bit_position(position_in_bits + length_in_bytes * 8);
+}
+
+void
+parser_c::parse_characteristic_point_info(mtx::bits::reader_c &bc) {
+  bc.set_bit_position(m_characteristic_point_info_start * 8);
+
+  auto length = bc.get_bits(32);
+  if (length < 2)
+    return;
+
+  auto cpi_type = bc.skip_get_bits(12, 4);
+  if (cpi_type == 1)            // 1 == EP_map
+    parse_ep_map(bc);
+}
+
+void
+parser_c::parse_ep_map(mtx::bits::reader_c &bc) {
+  auto ep_map_start = bc.get_bit_position();
+
+  bc.skip_bits(8);              // reserved for word align
+
+  auto num_stream_pid_entries = bc.get_bits(8);
+  for (auto idx = 0u; idx < num_stream_pid_entries; ++idx) {
+    m_ep_map.emplace_back();
+    auto &entry             = m_ep_map.back();
+
+    entry.pid               = bc.get_bits(16);
+    entry.type              = bc.skip_get_bits(10, 4); // reserved for word align
+    entry.num_coarse_points = bc.get_bits(16);
+    entry.num_fine_points   = bc.get_bits(18);
+    entry.address           = bc.get_bits(32);
+  }
+
+  for (auto &entry : m_ep_map) {
+    bc.set_bit_position(ep_map_start + entry.address * 8);
+    parse_ep_map_for_one_stream_pid(bc, entry);
+  }
+}
+
+void
+parser_c::parse_ep_map_for_one_stream_pid(mtx::bits::reader_c &bc,
+                                          ep_map_one_stream_t &map) {
+  if (!map.num_coarse_points)
+    return;
+
+  auto start            = bc.get_bit_position();
+  auto fine_table_start = bc.get_bits(32);
+
+  for (auto idx = 0u; idx < map.num_coarse_points; ++idx) {
+    map.coarse_points.emplace_back();
+    auto &coarse_point          = map.coarse_points.back();
+
+    coarse_point.ref_to_fine_id = bc.get_bits(18);
+    coarse_point.pts            = bc.get_bits(14);
+    coarse_point.spn            = bc.get_bits(32);
+  }
+
+  bc.set_bit_position(start + fine_table_start * 8);
+
+  auto current_coarse_point = map.coarse_points.begin(),
+    next_coarse_point       = current_coarse_point + 1,
+    coarse_end              = map.coarse_points.end();
+
+  for (auto idx = 0u; idx < map.num_fine_points; ++idx) {
+    bc.skip_bits(1 + 3);        // is_angle_change_point, l_end_position_offset
+
+    map.fine_points.emplace_back();
+    auto &fine_point = map.fine_points.back();
+
+    fine_point.pts   = bc.get_bits(11);
+    fine_point.spn   = bc.get_bits(17);
+
+    if (   (next_coarse_point < coarse_end)
+        && (idx               >= next_coarse_point->ref_to_fine_id)) {
+      ++current_coarse_point;
+      ++next_coarse_point;
+    }
+
+    map.points.emplace_back();
+    auto &point = map.points.back();
+
+    point.pts = timestamp_c::mpeg(((current_coarse_point->pts & ~0x01) << 19) + (fine_point.pts << 9));
+    point.spn = (current_coarse_point->spn & ~0x1ffff) + fine_point.spn;
+  }
 }
 
 }

@@ -15,6 +15,8 @@
 
 #include "common/common_pch.h"
 
+#include "common/timestamp.h"
+
 namespace mtx::bits {
 class reader_c;
 }
@@ -55,16 +57,41 @@ struct program_t {
 };
 using program_cptr = std::shared_ptr<program_t>;
 
+struct ep_map_one_stream_t {
+  struct coarse_point_t {
+    uint64_t ref_to_fine_id{}, pts{}, spn{};
+  };
+
+  struct fine_point_t {
+    uint64_t pts{}, spn{};
+  };
+
+  struct point_t {
+    timestamp_c pts;
+    uint64_t spn{};
+  };
+
+  uint16_t pid{}, type{};
+  uint32_t num_coarse_points{}, num_fine_points{}, address{};
+
+  std::vector<coarse_point_t> coarse_points;
+  std::vector<fine_point_t>   fine_points;
+  std::vector<point_t>        points;
+
+  void dump(std::size_t idx) const;
+};
+
 class parser_c {
 protected:
   std::string m_file_name;
-  bool m_ok;
-  debugging_option_c m_debug;
+  bool m_ok{};
+  debugging_option_c m_debug{"clpi|clpi_parser"};
 
-  size_t m_sequence_info_start, m_program_info_start;
+  std::size_t m_sequence_info_start{}, m_program_info_start{}, m_characteristic_point_info_start{};
 
 public:
   std::vector<program_cptr> m_programs;
+  std::vector<ep_map_one_stream_t> m_ep_map;
 
 public:
   parser_c(std::string file_name);
@@ -81,6 +108,9 @@ protected:
   virtual void parse_header(mtx::bits::reader_c &bc);
   virtual void parse_program_info(mtx::bits::reader_c &bc);
   virtual void parse_program_stream(mtx::bits::reader_c &bc, program_cptr &program);
+  virtual void parse_characteristic_point_info(mtx::bits::reader_c &bc);
+  virtual void parse_ep_map(mtx::bits::reader_c &bc);
+  virtual void parse_ep_map_for_one_stream_pid(mtx::bits::reader_c &bc, ep_map_one_stream_t &map);
 };
 using parser_cptr = std::shared_ptr<parser_c>;
 
