@@ -27,6 +27,9 @@
 * mkvmerge: WavPack: fixed support for files created by v5 of the
   program. Checksums, DSD audio data and non-standard sampling rates are
   handled correctly. Patch by David Bryant.
+* MKVToolNix GUI: multiplexer: fixed the cursor being positioned wrong after
+  entering or pasting characters that aren't allowed in file names into the
+  "destination file" control. Fixes #2855.
 
 
 # Version 47.0.0 "Black Flag" 2020-05-30
