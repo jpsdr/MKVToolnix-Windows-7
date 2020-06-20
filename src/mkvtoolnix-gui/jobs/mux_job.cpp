@@ -161,7 +161,7 @@ MuxJob::processFinished(int exitCode,
   setStatus(status);
 
   if (p->quitAfterFinished)
-    QTimer::singleShot(0, MainWindow::get(), SLOT(close()));
+    QTimer::singleShot(0, MainWindow::get(), []() { MainWindow::get()->close(); });
 }
 
 void

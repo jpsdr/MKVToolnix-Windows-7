@@ -1148,7 +1148,7 @@ Tab::nameSelectionChanged(QItemSelection const &selected,
       enableNameWidgets(true);
 
       p->ui->leChName->selectAll();
-      QTimer::singleShot(0, p->ui->leChName, SLOT(setFocus()));
+      QTimer::singleShot(0, p->ui->leChName, [p]() { p->ui->leChName->setFocus(); });
 
       return;
     }

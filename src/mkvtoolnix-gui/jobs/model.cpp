@@ -322,7 +322,7 @@ Model::scheduleJobForRemoval(uint64_t id) {
   QMutexLocker locked{&m_mutex};
 
   m_toBeRemoved[id] = true;
-  QTimer::singleShot(0, this, SLOT(removeScheduledJobs()));
+  QTimer::singleShot(0, this, [this]() { removeScheduledJobs(); });
 }
 
 bool

@@ -533,7 +533,7 @@ void
 Tool::dropEvent(QDropEvent *event) {
   if (m_filesDDHandler.handle(event, true)) {
     m_droppedFiles += m_filesDDHandler.fileNames();
-    QTimer::singleShot(0, this, SLOT(processDroppedFiles()));
+    QTimer::singleShot(0, this, [this]() { processDroppedFiles(); });
   }
 }
 

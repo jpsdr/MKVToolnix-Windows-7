@@ -515,7 +515,7 @@ MainWindow::silentlyCheckForUpdates() {
 
   connect(checker, &UpdateChecker::checkFinished, this, &MainWindow::updateCheckFinished);
 
-  QTimer::singleShot(0, checker, SLOT(start()));
+  QTimer::singleShot(0, checker, [checker]() { checker->start(); });
 }
 
 QString

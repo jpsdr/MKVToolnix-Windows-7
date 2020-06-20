@@ -42,8 +42,6 @@ public:
 
 public Q_SLOTS:
   void continueByScanningPlaylists(QFileInfoList const &files);
-
-protected Q_SLOTS:
   void identifyFiles();
   void abortIdentification();
 

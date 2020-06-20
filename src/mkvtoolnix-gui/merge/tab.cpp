@@ -492,13 +492,13 @@ Tab::handleClearingMergeSettings(Util::Settings::ClearMergeSettingsAction action
   }
 
   if (Util::Settings::ClearMergeSettingsAction::CloseSettings == action) {
-    QTimer::singleShot(0, this, SLOT(signalRemovalOfThisTab()));
+    QTimer::singleShot(0, this, [this]() { signalRemovalOfThisTab(); });
     return;
   }
 
   // Util::Settings::ClearMergeSettingsAction::NewSettings
   MainWindow::mergeTool()->newConfig();
-  QTimer::singleShot(0, this, SLOT(signalRemovalOfThisTab()));
+  QTimer::singleShot(0, this, [this]() { signalRemovalOfThisTab(); });
 }
 
 void

@@ -1794,7 +1794,7 @@ Tab::addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames,
   m_filesToAddDelayed                += fileNames;
   m_mouseButtonsForFilesToAddDelayed  = mouseButtons;
 
-  QTimer::singleShot(0, this, SLOT(addOrAppendDroppedFilesDelayed()));
+  QTimer::singleShot(0, this, [this]() { addOrAppendDroppedFilesDelayed(); });
 }
 
 void

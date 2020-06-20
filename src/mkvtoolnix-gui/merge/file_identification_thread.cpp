@@ -65,7 +65,7 @@ FileIdentificationWorker::addFilesToIdentify(QStringList const &fileNames,
 
   p->m_toIdentify.push_back({ fileNames, append, sourceFileIdx });
 
-  QTimer::singleShot(0, this, SLOT(identifyFiles()));
+  QTimer::singleShot(0, this, [this]() { identifyFiles(); });
 }
 
 
@@ -337,12 +337,12 @@ FileIdentificationThread::abortPlaylistScan() {
 
 void
 FileIdentificationThread::continueIdentification() {
-  QTimer::singleShot(0, &worker(), SLOT(identifyFiles()));
+  QTimer::singleShot(0, &worker(), [this]() { worker().identifyFiles(); });
 }
 
 void
 FileIdentificationThread::abortIdentification() {
-  QTimer::singleShot(0, &worker(), SLOT(abortIdentification()));
+  QTimer::singleShot(0, &worker(), [this]() { worker().abortIdentification(); });
 }
 
 void

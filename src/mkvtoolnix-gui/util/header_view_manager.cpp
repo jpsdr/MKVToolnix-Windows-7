@@ -48,7 +48,7 @@ HeaderViewManager::manage(QTreeView &treeView,
 
   p->treeView->header()->setContextMenuPolicy(Qt::CustomContextMenu);
 
-  QTimer::singleShot(0, this, SLOT(restoreState()));
+  QTimer::singleShot(0, this, [this]() { restoreState(); });
 }
 
 HeaderViewManager &
