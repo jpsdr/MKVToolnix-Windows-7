@@ -404,6 +404,7 @@ struct file_t {
   unsigned int m_num_pmts_found, m_num_pmts_to_find;
   int m_es_to_process;
   timestamp_c m_global_timestamp_offset, m_stream_timestamp, m_timestamp_restriction_min, m_timestamp_restriction_max, m_timestamp_mpls_sync, m_last_non_subtitle_pts, m_last_non_subtitle_dts;
+  bool m_timestamp_restriction_min_seen{};
 
   processing_state_e m_state;
   uint64_t m_probe_range, m_position{};

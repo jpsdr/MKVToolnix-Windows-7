@@ -35,6 +35,15 @@
   subtitles not being timestamped correctly. Symptoms were that they were
   shown at the wrong time or that they were shown indefinitely. Fixes #2736
   and partially fixes #2824.
+* mkvmerge: MPEG TS reader: when reading MPLS playlists the start timestamps
+  of a play items were handled wrong: all the timestamps of packets read were
+  compared to that start timestamp, dropping those packets whose timestamps
+  were smaller than the play item's start timestamp. The correct behavior is
+  to accept all packets as soon as the first one with a timestamp equal to or
+  larger than the play item's start timestamp is encountered. This could
+  result in PGS subtitle entries located right at the start of the play item
+  being garbled/lost as they consist of multiple PES packets for which some
+  timestamps are often slightly smaller. Part of the fix of #2824.
 
 
 # Version 47.0.0 "Black Flag" 2020-05-30

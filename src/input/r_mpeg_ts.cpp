@@ -139,9 +139,12 @@ track_c::send_to_packetizer() {
   auto use_packet         = ptzr != -1;
   auto bytes_to_skip      = std::min<size_t>(pes_payload_read->get_size(), skip_packet_data_bytes);
 
-  if (   (min.valid() && (timestamp_to_check <  min))
+  if (   (min.valid() && (timestamp_to_check <  min) && !f.m_timestamp_restriction_min_seen)
       || (max.valid() && (timestamp_to_check >= max)))
     use_packet = false;
+
+  if (use_packet && !f.m_timestamp_restriction_min_seen && min.valid())
+    f.m_timestamp_restriction_min_seen = true;
 
   if (timestamp_to_use.valid() && f.m_global_timestamp_offset.valid())
     timestamp_to_use -= std::min(timestamp_to_use, f.m_global_timestamp_offset);
