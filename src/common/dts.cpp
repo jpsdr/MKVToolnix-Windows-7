@@ -97,7 +97,7 @@ count_channels_for_mask(unsigned int mask) {
 
 int
 find_header_internal(unsigned char const *buf,
-                     size_t size,
+                     std::size_t size,
                      header_t &header,
                      bool allow_no_exss_search) {
   if (15 > size)
@@ -128,7 +128,7 @@ find_header_internal(unsigned char const *buf,
 
 int
 find_sync_word(unsigned char const *buf,
-               size_t size) {
+               std::size_t size) {
   if (4 > size)
     // not enough data for one header
     return -1;
@@ -151,7 +151,7 @@ find_sync_word(unsigned char const *buf,
 
 int
 find_header(unsigned char const *buf,
-            size_t size,
+            std::size_t size,
             header_t &header,
             bool allow_no_exss_search) {
   try {
@@ -163,7 +163,7 @@ find_header(unsigned char const *buf,
 
 int
 find_consecutive_headers(unsigned char const *buf,
-                         size_t size,
+                         std::size_t size,
                          unsigned int num) {
   static auto s_debug = debugging_option_c{"dts_detection"};
 
@@ -398,10 +398,10 @@ header_t::get_codec_specialization()
 bool
 header_t::set_one_extension_offset(substream_asset_t &asset,
                                    extension_mask_e wanted_mask,
-                                   size_t &offset,
-                                   size_t &size,
-                                   size_t &offset_in_asset,
-                                   size_t size_in_asset) {
+                                   std::size_t &offset,
+                                   std::size_t &size,
+                                   std::size_t &offset_in_asset,
+                                   std::size_t size_in_asset) {
   if (!(asset.extension_mask & wanted_mask))
     return true;
 
@@ -431,7 +431,7 @@ header_t::set_extension_offsets(substream_asset_t &asset) {
 
 bool
 header_t::decode_core_header(unsigned char const *buf,
-                             size_t size,
+                             std::size_t size,
                              bool allow_no_exss_search) {
   try {
     auto bc = mtx::bits::reader_c{buf, size};
@@ -814,7 +814,7 @@ header_t::decode_asset(mtx::bits::reader_c &bc,
 
 bool
 header_t::decode_x96_header(unsigned char const *buf,
-                             size_t size) {
+                             std::size_t size) {
   try {
     auto bc = mtx::bits::reader_c{buf, size};
     bc.skip_bits(32);             // sync word
@@ -832,7 +832,7 @@ header_t::decode_x96_header(unsigned char const *buf,
 
 bool
 header_t::decode_exss_header(unsigned char const *buf,
-                             size_t size) {
+                             std::size_t size) {
   try {
     auto bc = mtx::bits::reader_c{buf, size};
     bc.skip_bits(32);             // sync word

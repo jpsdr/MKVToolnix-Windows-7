@@ -205,7 +205,7 @@ struct header_t {
   unsigned int num_mixing_channels[5];
 
   struct substream_asset_t {
-    size_t asset_offset{}, asset_size{}, asset_index{};
+    std::size_t asset_offset{}, asset_size{}, asset_index{};
 
     unsigned int pcm_bit_res{}, max_sample_rate{}, num_channels_total{};
     bool one_to_one_map_channel_to_speaker{}, embedded_stereo{}, embedded_6ch{};
@@ -214,16 +214,16 @@ struct header_t {
     int coding_mode{};
     extension_mask_e extension_mask{};
 
-    size_t core_offset{}, core_size{};
-    size_t xbr_offset{},  xbr_size{};
-    size_t xxch_offset{}, xxch_size{};
-    size_t x96_offset{},  x96_size{};
-    size_t lbr_offset{},  lbr_size{};
-    size_t xll_offset{},  xll_size{};
+    std::size_t core_offset{}, core_size{};
+    std::size_t xbr_offset{},  xbr_size{};
+    std::size_t xxch_offset{}, xxch_size{};
+    std::size_t x96_offset{},  x96_size{};
+    std::size_t lbr_offset{},  lbr_size{};
+    std::size_t xll_offset{},  xll_size{};
 
     bool lbr_sync_present{}, xll_sync_present{};
     int xll_delay_num_frames{};
-    size_t xll_sync_offset{};
+    std::size_t xll_sync_offset{};
 
     unsigned int hd_stream_id{};
   };
@@ -241,9 +241,9 @@ public:
 
   void print() const;
 
-  bool decode_core_header(unsigned char const *buf, size_t size, bool allow_no_exss_search = false);
-  bool decode_exss_header(unsigned char const *buf, size_t size);
-  bool decode_x96_header(unsigned char const *buf, size_t size);
+  bool decode_core_header(unsigned char const *buf, std::size_t size, bool allow_no_exss_search = false);
+  bool decode_exss_header(unsigned char const *buf, std::size_t size);
+  bool decode_x96_header(unsigned char const *buf, std::size_t size);
 
 protected:
   bool decode_asset(mtx::bits::reader_c &bc, substream_asset_t &asset);
@@ -252,13 +252,13 @@ protected:
   void parse_lbr_parameters(mtx::bits::reader_c &bc, substream_asset_t &asset);
   void parse_xll_parameters(mtx::bits::reader_c &bc, substream_asset_t &asset);
 
-  bool set_one_extension_offset(substream_asset_t &asset, extension_mask_e wanted_mask, size_t &offset, size_t &size, size_t &offset_in_asset, size_t size_in_asset);
+  bool set_one_extension_offset(substream_asset_t &asset, extension_mask_e wanted_mask, std::size_t &offset, std::size_t &size, std::size_t &offset_in_asset, std::size_t size_in_asset);
   bool set_extension_offsets(substream_asset_t &asset);
 };
 
-int find_sync_word(unsigned char const *buf, size_t size);
-int find_header(unsigned char const *buf, size_t size, header_t &header, bool allow_no_exss_search = false);
-int find_consecutive_headers(unsigned char const *buf, size_t size, unsigned int num);
+int find_sync_word(unsigned char const *buf, std::size_t size);
+int find_header(unsigned char const *buf, std::size_t size, header_t &header, bool allow_no_exss_search = false);
+int find_consecutive_headers(unsigned char const *buf, std::size_t size, unsigned int num);
 
 bool operator ==(header_t const &h1, header_t const &h2);
 bool operator!=(header_t const &h1, header_t const &h2);
