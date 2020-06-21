@@ -30,6 +30,11 @@
 * MKVToolNix GUI: multiplexer: fixed the cursor being positioned wrong after
   entering or pasting characters that aren't allowed in file names into the
   "destination file" control. Fixes #2855.
+* mkvmerge: MPEG TS reader: PGS subtitle tracks are now exempt from the
+  "detect bogus subtitle timestamps" heuristic which could lead to some PGS
+  subtitles not being timestamped correctly. Symptoms were that they were
+  shown at the wrong time or that they were shown indefinitely. Fixes #2736
+  and partially fixes #2824.
 
 
 # Version 47.0.0 "Black Flag" 2020-05-30

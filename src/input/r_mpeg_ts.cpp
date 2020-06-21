@@ -626,6 +626,14 @@ track_c::handle_bogus_subtitle_timestamps(timestamp_c &pts,
   if (pid_type_e::subtitles != type)
     return drop_decision_e::keep;
 
+  // PGS subtitles often have their "stop displaying" segments located
+  // right after the "display stuff" segments. In that case their PTS
+  // will differ from the surrounding audio/video PTS
+  // considerably. That's fine, though. No correction must take in
+  // such a case.
+  if (codec.is(codec_c::type_e::S_HDMV_PGS))
+    return drop_decision_e::keep;
+
   if (pts.valid())
     pts += m_subtitle_timestamp_correction;
   if (dts.valid())
