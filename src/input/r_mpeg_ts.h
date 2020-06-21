@@ -29,6 +29,10 @@
 #include "merge/generic_reader.h"
 #include "mpegparser/M2VParser.h"
 
+namespace mtx::bluray::clpi {
+class parser_c;
+}
+
 namespace mtx::mpeg_ts {
 
 enum class processing_state_e {
@@ -407,18 +411,21 @@ struct file_t {
   bool m_timestamp_restriction_min_seen{};
 
   processing_state_e m_state;
-  uint64_t m_probe_range, m_position{};
+  uint64_t m_probe_range, m_position{}, m_start_source_packet_number{};
 
   bool m_file_done, m_packet_sent_to_packetizer;
 
   unsigned int m_detected_packet_size, m_num_pat_crc_errors, m_num_pmt_crc_errors;
   bool m_validate_pat_crc, m_validate_pmt_crc, m_has_audio_or_video_track;
 
+  std::shared_ptr<mtx::bluray::clpi::parser_c> m_clpi_parser;
+
   file_t(mm_io_cptr const &in);
 
   int64_t get_queued_bytes() const;
   void reset_processing_state(processing_state_e new_state);
   bool all_pmts_found() const;
+  uint64_t get_start_source_packet_position() const;
 };
 using file_cptr = std::shared_ptr<file_t>;
 
@@ -518,6 +525,7 @@ private:
   void determine_global_timestamp_offset();
 
   void parse_clip_info_file(std::size_t file_idx);
+  void determine_start_source_packet_number(file_t &file);
 
   void add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in);
   void add_programs_to_identification_info(mtx::id::info_c &info);

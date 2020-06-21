@@ -1021,6 +1021,12 @@ file_t::all_pmts_found()
   return (0 != m_num_pmts_to_find) && (m_num_pmts_found >= m_num_pmts_to_find);
 }
 
+uint64_t
+file_t::get_start_source_packet_position()
+  const {
+  return m_start_source_packet_number * m_detected_packet_size;
+}
+
 // ------------------------------------------------------------
 
 bool
@@ -1159,8 +1165,6 @@ reader_c::read_headers_for_file(std::size_t file_num) {
 
   mxdebug_if(m_debug_headers, fmt::format("read_headers: Detection done on {0} bytes\n", f.m_in->getFilePointer()));
 
-  f.m_in->setFilePointer(0); // rewind file for later remux
-
   // Run probe_packet_complete() for track-type detection once for
   // each track. This way tracks that don't actually need their
   // content to be found during probing will be set to OK, too.
@@ -1173,6 +1177,39 @@ reader_c::read_headers_for_file(std::size_t file_num) {
   }
 
   std::copy(m_tracks.begin(), m_tracks.end(), std::back_inserter(m_all_probed_tracks));
+}
+
+void
+reader_c::determine_start_source_packet_number(file_t &file) {
+  mxdebug_if(m_debug_mpls, fmt::format("MPLS: start SPN: file {0} min timestamp restriction {1}\n", std::regex_replace(file.m_in->get_file_name(), std::regex{".*[/\\\\]"}, ""), file.m_timestamp_restriction_min));
+
+  if (!file.m_clpi_parser || !file.m_timestamp_restriction_min.valid()) {
+    mxdebug_if(m_debug_mpls, fmt::format("MPLS: start SPN: clip information not found or no minimum timestamp restriction\n"));
+    return;
+  }
+
+  std::vector<uint64_t> source_packet_numbers;
+
+  for (auto const &ep_map : file.m_clpi_parser->m_ep_map) {
+    std::optional<uint64_t> source_packet_number;
+
+    for (auto const &point : ep_map.points) {
+      if (point.pts <= file.m_timestamp_restriction_min)
+        source_packet_number = point.spn;
+      else
+        break;
+    }
+
+    if (source_packet_number) {
+      mxdebug_if(m_debug_mpls, fmt::format("MPLS: start SPN: candidate SPN for PID {0} is {1}\n", ep_map.pid, *source_packet_number));
+      source_packet_numbers.push_back(*source_packet_number);
+    }
+  }
+
+  if (!source_packet_numbers.empty())
+    file.m_start_source_packet_number = *std::min_element(source_packet_numbers.begin(), source_packet_numbers.end());
+
+  mxdebug_if(m_debug_mpls, fmt::format("MPLS: start SPN: chosen start SPN is {0}\n", file.m_start_source_packet_number));
 }
 
 void
@@ -1195,8 +1232,10 @@ reader_c::read_headers() {
 
   m_tracks = std::move(m_all_probed_tracks);
 
-  for (int idx = 0, num_files = m_files.size(); idx < num_files; ++idx)
+  for (int idx = 0, num_files = m_files.size(); idx < num_files; ++idx) {
     parse_clip_info_file(idx);
+    determine_start_source_packet_number(*m_files[idx]);
+  }
 
   process_chapter_entries();
 
@@ -1250,7 +1289,10 @@ reader_c::determine_global_timestamp_offset() {
 
   auto &f = file();
 
-  f.m_in->setFilePointer(0);
+  auto probe_start_pos = f.get_start_source_packet_position();
+  auto probe_end_pos   = probe_start_pos + f.m_probe_range;
+
+  f.m_in->setFilePointer(probe_start_pos);
   f.m_in->clear_eof();
 
   mxdebug_if(m_debug_timestamp_offset, fmt::format("determine_global_timestamp_offset: determining global timestamp offset from the first {0} bytes\n", f.m_probe_range));
@@ -1258,7 +1300,7 @@ reader_c::determine_global_timestamp_offset() {
   try {
     unsigned char buf[TS_MAX_PACKET_SIZE]; // maximum TS packet size + 1
 
-    while (f.m_in->getFilePointer() < f.m_probe_range) {
+    while (f.m_in->getFilePointer() < probe_end_pos) {
       if (f.m_in->read(buf, f.m_detected_packet_size) != static_cast<unsigned int>(f.m_detected_packet_size))
         break;
 
@@ -1276,7 +1318,7 @@ reader_c::determine_global_timestamp_offset() {
 
   mxdebug_if(m_debug_timestamp_offset, fmt::format("determine_global_timestamp_offset: detection done; global timestamp offset is {0}\n", f.m_global_timestamp_offset));
 
-  f.m_in->setFilePointer(0);
+  f.m_in->setFilePointer(f.get_start_source_packet_position());
   f.m_in->clear_eof();
 
   reset_processing_state(processing_state_e::muxing);
@@ -1876,6 +1918,12 @@ reader_c::parse_pes(track_c &track) {
   if (processing_state_e::determining_timestamp_offset == f.m_state)
     return;
 
+  if (f.m_timestamp_restriction_max.valid() && has_pts && (pts >= f.m_timestamp_restriction_max)) {
+    mxdebug_if(m_debug_mpls, fmt::format("MPLS: stopping processing file as PTS {0} >= max. timestamp restriction {1}\n", pts, f.m_timestamp_restriction_max));
+    f.m_in->setFilePointer(f.m_in->get_size());
+    return;
+  }
+
   if (m_debug_packet) {
     mxdebug(fmt::format("parse_pes: PES info at file position {0} (file num {1}):\n", f.m_position, track.m_file_num));
     mxdebug(fmt::format("parse_pes:    stream_id = {0} PID = {1}\n", static_cast<unsigned int>(pes_header->stream_id), track.pid));
@@ -2473,9 +2521,11 @@ reader_c::parse_clip_info_file(std::size_t file_idx) {
   if (clpi_file.empty())
     return;
 
-  mtx::bluray::clpi::parser_c parser(clpi_file.string());
-  if (!parser.parse())
+  file.m_clpi_parser.reset(new mtx::bluray::clpi::parser_c{clpi_file.string()});
+  if (!file.m_clpi_parser->parse()) {
+    file.m_clpi_parser.reset();
     return;
+  }
 
   for (auto &track : m_tracks) {
     if (track->m_file_num != file_idx)
@@ -2483,7 +2533,7 @@ reader_c::parse_clip_info_file(std::size_t file_idx) {
 
     bool found = false;
 
-    for (auto &program : parser.m_programs) {
+    for (auto &program : file.m_clpi_parser->m_programs) {
       for (auto &stream : program->program_streams) {
         if ((stream->pid != track->pid) || stream->language.empty())
           continue;

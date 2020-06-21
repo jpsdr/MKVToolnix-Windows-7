@@ -44,6 +44,15 @@
   result in PGS subtitle entries located right at the start of the play item
   being garbled/lost as they consist of multiple PES packets for which some
   timestamps are often slightly smaller. Part of the fix of #2824.
+* mkvmerge: MPEG TS reader: when reading MPLS playlists mkvmerge will no
+  longer read the whole M2TS files they reference, processing only the packets
+  lying inside the timestamp range given by the playlists's play item's start
+  & end timestamps. Instead mkvmerge will use the index information present in
+  corresponding clip information (CLPI) files in order to seek to the nearest
+  file position of the play item's start timestamp. Additionally mkvmerge will
+  simply stop processing a file once the end timestamp is seen. This change
+  greatly speeds up processing files from which only small portions must be
+  read. Part of the fix of #2824.
 
 
 # Version 47.0.0 "Black Flag" 2020-05-30
