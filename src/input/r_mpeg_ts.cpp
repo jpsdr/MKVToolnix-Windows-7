@@ -137,6 +137,7 @@ track_c::send_to_packetizer() {
   auto const &min         = f.m_timestamp_restriction_min;
   auto const &max         = f.m_timestamp_restriction_max;
   auto use_packet         = ptzr != -1;
+  auto bytes_to_skip      = std::min<size_t>(pes_payload_read->get_size(), skip_packet_data_bytes);
 
   if (   (min.valid() && (timestamp_to_check <  min))
       || (max.valid() && (timestamp_to_check >= max)))
@@ -145,11 +146,11 @@ track_c::send_to_packetizer() {
   if (timestamp_to_use.valid() && f.m_global_timestamp_offset.valid())
     timestamp_to_use -= std::min(timestamp_to_use, f.m_global_timestamp_offset);
 
-  mxdebug_if(m_debug_delivery, fmt::format("send_to_packetizer: PID {0} expected {1} actual {2} timestamp_to_use {3} m_previous_timestamp {4} stream_timestamp {5} restriction {6}/{7} use? {8}\n",
-                                           pid, pes_payload_size_to_read, pes_payload_read->get_size(), timestamp_to_use, m_previous_timestamp, f.m_stream_timestamp, min, max, use_packet));
+  mxdebug_if(m_debug_delivery,
+             fmt::format("send_to_packetizer: PID {0} expected {1} actual {2} timestamp_to_use {3} timestamp_to_check {4} m_timestamp {5} m_previous_timestamp {6} stream_timestamp {7} restriction {8}/{9} ptzr {10} use? {11}\n",
+                         pid, pes_payload_size_to_read, pes_payload_read->get_size() - bytes_to_skip, timestamp_to_use, timestamp_to_check, m_timestamp, m_previous_timestamp, f.m_stream_timestamp, min, max, ptzr, use_packet));
 
   if (use_packet) {
-    auto bytes_to_skip = std::min<size_t>(pes_payload_read->get_size(), skip_packet_data_bytes);
     process(std::make_shared<packet_t>(memory_c::clone(pes_payload_read->get_buffer() + bytes_to_skip, pes_payload_read->get_size() - bytes_to_skip), timestamp_to_use.to_ns(-1)));
 
     f.m_packet_sent_to_packetizer = true;
@@ -1249,7 +1250,7 @@ reader_c::determine_global_timestamp_offset() {
   f.m_in->setFilePointer(0);
   f.m_in->clear_eof();
 
-  mxdebug_if(m_debug_headers, fmt::format("determine_global_timestamp_offset: determining global timestamp offset from the first {0} bytes\n", f.m_probe_range));
+  mxdebug_if(m_debug_timestamp_offset, fmt::format("determine_global_timestamp_offset: determining global timestamp offset from the first {0} bytes\n", f.m_probe_range));
 
   try {
     unsigned char buf[TS_MAX_PACKET_SIZE]; // maximum TS packet size + 1
@@ -1267,10 +1268,10 @@ reader_c::determine_global_timestamp_offset() {
       parse_packet(buf);
     }
   } catch (...) {
-    mxdebug_if(m_debug_headers, fmt::format("determine_global_timestamp_offset: caught exception\n"));
+    mxdebug_if(m_debug_timestamp_offset, fmt::format("determine_global_timestamp_offset: caught exception\n"));
   }
 
-  mxdebug_if(m_debug_headers, fmt::format("determine_global_timestamp_offset: detection done; global timestamp offset is {0}\n", f.m_global_timestamp_offset));
+  mxdebug_if(m_debug_timestamp_offset, fmt::format("determine_global_timestamp_offset: detection done; global timestamp offset is {0}\n", f.m_global_timestamp_offset));
 
   f.m_in->setFilePointer(0);
   f.m_in->clear_eof();

@@ -445,7 +445,8 @@ protected:
     , m_debug_aac{               "mpeg_ts|mpeg_ts_aac"}
     , m_debug_timestamp_wrapping{"mpeg_ts|mpeg_ts_timestamp_wrapping"}
     , m_debug_clpi{              "mpeg_ts|mpeg_ts_clpi|clpi"}
-    , m_debug_mpls{              "mpeg_ts|mpeg_ts_mpls|mpls"};
+    , m_debug_mpls{              "mpeg_ts|mpeg_ts_mpls|mpls"}
+    , m_debug_timestamp_offset{  "mpeg_ts|mpeg_ts_headers|mpeg_ts_timestamp_offset|mpeg_ts_timestamp_offsets"};
 
 protected:
   static int potential_packet_sizes[];
