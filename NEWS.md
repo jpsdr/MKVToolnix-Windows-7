@@ -53,6 +53,8 @@
   simply stop processing a file once the end timestamp is seen. This change
   greatly speeds up processing files from which only small portions must be
   read. Part of the fix of #2824.
+* mkvmerge: DTS: fixed wrong channel count for DTS tracks with XCh
+  extensions. Fixes #2715.
 
 ## Build system changes
 

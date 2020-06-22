@@ -363,6 +363,8 @@ header_t::get_core_num_audio_channels()
   auto total_num_audio_channels = audio_channels;
   if ((lfe_type_e::lfe_64 == lfe_type) || (lfe_type_e::lfe_128 == lfe_type))
     ++total_num_audio_channels;
+  if (has_xch)
+    ++total_num_audio_channels;
 
   return total_num_audio_channels;
 }
@@ -427,6 +429,41 @@ header_t::set_extension_offsets(substream_asset_t &asset) {
              && set_one_extension_offset(asset, exss_xll,  offset, size, asset.xll_offset,  asset.xll_size);
 
   return result;
+}
+
+void
+header_t::locate_and_decode_xch_header(unsigned char const *buf,
+                                       std::size_t size) {
+  static auto s_debug = debugging_option_c{"dts_xch"};
+
+  mxdebug_if(s_debug, fmt::format("DTS XCh detection: starting on size {0}\n", size));
+
+  auto pos  = size - 96;
+  auto sync = get_uint32_be(&buf[pos]);
+
+  for (; pos > 0;
+       sync = (sync >> 8) | (static_cast<uint32_t>(buf[--pos]) << 24)) {
+    if (sync != static_cast<unsigned int>(sync_word_e::xch))
+      continue;
+
+    auto bc = mtx::bits::reader_c{&buf[pos], size - pos};
+
+    bc.skip_bits(32);           // sync word
+    auto primary_frame_byte_size = bc.get_bits(10) + 1;
+
+    mxdebug_if(s_debug, fmt::format("DTS XCh detection: found sync word at {0} primary frame byte size {1} ok? {2}\n", pos, primary_frame_byte_size, (pos + primary_frame_byte_size) == size));
+
+    if ((pos + primary_frame_byte_size) != size)
+      continue;
+
+    auto audio_mode = bc.get_bits(4);
+    has_xch         = true;
+
+    mxdebug_if(s_debug, fmt::format("DTS XCh detection: OK, total 6.1 channels, audio_mode {0} audio_channels {1} arrangement {2}\n",
+                                    audio_mode, channel_arrangements[audio_mode].num_channels, channel_arrangements[audio_mode].description));
+
+    return;
+  }
 }
 
 bool
@@ -524,6 +561,9 @@ header_t::decode_core_header(unsigned char const *buf,
     exss_part_size = 0;
     exss_offset    = frame_byte_size;
     dts_type       = dts_type_e::normal;
+
+    if (extended_coding && (extension_audio_descriptor_e::xch == extension_audio_descriptor) && (frame_byte_size <= size))
+      locate_and_decode_xch_header(buf, frame_byte_size);
 
     if (extended_coding && mtx::included_in(extension_audio_descriptor, extension_audio_descriptor_e::x96k, extension_audio_descriptor_e::xch_x96k))
       dts_type = dts_type_e::x96_24;

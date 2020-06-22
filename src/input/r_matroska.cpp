@@ -426,6 +426,7 @@ kax_reader_c::verify_dts_audio_track(kax_track_t *t) {
     if (-1 == mtx::dts::find_header(buffer.get_buffer(), buffer.get_size(), t->dts_header))
       return false;
 
+    t->a_channels = t->dts_header.get_total_num_audio_channels();
     t->codec.set_specialization(t->dts_header.get_codec_specialization());
 
   } catch (...) {

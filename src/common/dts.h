@@ -29,6 +29,7 @@ enum class sync_word_e {
   , lbr  = 0x0a801921
   , xll  = 0x41a29547
   , x96  = 0x1d95f262
+  , xch  = 0x5a5a5a5a
 };
 
 enum class frametype_e {
@@ -194,7 +195,7 @@ struct header_t {
 
   std::optional<unsigned int> crc{};
 
-  bool has_core{}, has_exss{};
+  bool has_core{}, has_exss{}, has_xch{};
   unsigned int exss_offset{}, exss_header_size{}, exss_part_size{};
 
   dts_type_e dts_type{ dts_type_e::normal };
@@ -251,6 +252,7 @@ protected:
   bool decode_xll_header(mtx::bits::reader_c &bc, substream_asset_t &asset);
   void parse_lbr_parameters(mtx::bits::reader_c &bc, substream_asset_t &asset);
   void parse_xll_parameters(mtx::bits::reader_c &bc, substream_asset_t &asset);
+  void locate_and_decode_xch_header(unsigned char const *buf, std::size_t size);
 
   bool set_one_extension_offset(substream_asset_t &asset, extension_mask_e wanted_mask, std::size_t &offset, std::size_t &size, std::size_t &offset_in_asset, std::size_t size_in_asset);
   bool set_extension_offsets(substream_asset_t &asset);
