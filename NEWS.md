@@ -54,6 +54,10 @@
   greatly speeds up processing files from which only small portions must be
   read. Part of the fix of #2824.
 
+## Build system changes
+
+* libEBML v1.4.0 and libMatroska v1.6.0 are now required.
+
 
 # Version 47.0.0 "Black Flag" 2020-05-30
 
