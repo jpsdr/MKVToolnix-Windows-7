@@ -90,6 +90,7 @@ codec_c::initialize() {
 
   ms_specialization_descriptions.emplace(specialization_e::truehd_atmos,           "TrueHD Atmos");
 
+  ms_specialization_descriptions.emplace(specialization_e::ac3_dolby_surround_ex,  "AC-3 Dolby Surround EX");
   ms_specialization_descriptions.emplace(specialization_e::e_ac_3,                 "E-AC-3");
 }
 

@@ -15,6 +15,8 @@
 * MKVToolNix GUI: while the GUI is running it will remember the last page that
   was selected when the preferences dialog is closed. Upon re-opening the
   preferences that page will be selected by default. Implements #2852.
+* mkvmerge: AC-3: file identification will report AC-3 tracks encoded in Dolby
+  Surround EX as codec "AC-3 Dolby Surround EX". Implements #2740.
 
 ## Bug fixes
 

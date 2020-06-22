@@ -165,6 +165,7 @@ public:
 
     , truehd_atmos
 
+    , ac3_dolby_surround_ex
     , e_ac_3
   };
 

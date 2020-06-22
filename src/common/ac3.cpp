@@ -77,7 +77,11 @@ frame_c::is_eac3()
 codec_c
 frame_c::get_codec()
   const {
-  return codec_c::look_up(codec_c::type_e::A_AC3).specialize(is_eac3() ? codec_c::specialization_e::e_ac_3 : codec_c::specialization_e::none);
+  auto specialization = is_eac3()        ? codec_c::specialization_e::e_ac_3
+                      : m_is_surround_ex ? codec_c::specialization_e::ac3_dolby_surround_ex
+                      :                    codec_c::specialization_e::none;
+
+  return codec_c::look_up(codec_c::type_e::A_AC3).specialize(specialization);
 }
 
 void
@@ -228,8 +232,11 @@ frame_c::decode_header_type_ac3(mtx::bits::reader_c &bc) {
   if (38 <= frmsizecod)
     return false;
 
-  bc.skip_bits(5 + 3);          // bsid, bsmod
-  uint8_t acmod      = bc.get_bits(3);
+  auto bsid = bc.get_bits(5);   // bsid
+  bc.skip_bits(3);              // bsmod
+
+  uint8_t acmod = bc.get_bits(3);
+
   if ((acmod & 0x01) && (acmod != 0x01))
     bc.skip_bits(2);            // cmixlev
   if (acmod & 0x04)
@@ -252,17 +259,39 @@ frame_c::decode_header_type_ac3(mtx::bits::reader_c &bc) {
   m_samples                                = 1536;
   m_frame_type                             = EAC3_FRAME_TYPE_INDEPENDENT;
 
+  if (bc.get_bit())           // compre
+    bc.skip_bits(8);          // compr
+  if (bc.get_bit())           // langcode
+    bc.skip_bits(8);          // langcod
+  if (bc.get_bit())           // audprodie
+    bc.skip_bits(5 + 2);      // mixlevel, roomtyp
+
   if (acmod == 0) {
     // Dual-mono mode
-    if (bc.get_bit())           // compre
-      bc.skip_bits(8);          // compr
-    if (bc.get_bit())           // langcode
-      bc.skip_bits(8);          // langcod
-    if (bc.get_bit())           // audprodie
-      bc.skip_bits(5 + 2);      // mixlevel, roomtyp
-
     m_dialog_normalization_gain2_bit_position = bc.get_bit_position();
     m_dialog_normalization_gain2              = bc.get_bits(5);
+
+    if (bc.get_bit())           // compre2
+      bc.skip_bits(8);          // compr2
+    if (bc.get_bit())           // langcode2
+      bc.skip_bits(8);          // langcod2
+    if (bc.get_bit())           // audprodie2
+      bc.skip_bits(5 + 2);      // mixlevel2, roomtyp2
+  }
+
+  bc.skip_bits(2);              // copyrightb, origbs
+
+  if (bsid == 6) {
+    // Alternate Bit Syntax Stream
+
+    if (bc.get_bit())           // xbsi1e
+      bc.skip_bits(  2 + 3 + 3  // dmixmod, ltrtcmixlev, ltrtsurmixlev
+                   + 3 + 3);    // lorocmixlev, lorosurmixlev
+
+    if (bc.get_bit()) {         // xbsi2e
+      auto dsurexmod   = bc.get_bits(2);
+      m_is_surround_ex = dsurexmod == 0b10;
+    }
   }
 
   return m_bytes != 0;

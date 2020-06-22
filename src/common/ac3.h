@@ -55,7 +55,7 @@ public:
   unsigned int m_dialog_normalization_gain{}, m_dialog_normalization_gain_bit_position{};
   std::optional<unsigned int> m_dialog_normalization_gain2, m_dialog_normalization_gain2_bit_position;
   uint64_t m_stream_position{}, m_garbage_size{};
-  bool m_valid{}, m_lfeon{};
+  bool m_valid{}, m_lfeon{}, m_is_surround_ex{};
   memory_cptr m_data;
   std::vector<frame_c> m_dependent_frames;
 
