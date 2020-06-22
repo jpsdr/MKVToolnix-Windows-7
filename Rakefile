@@ -236,7 +236,8 @@ end
 def generate_helper_files
   return unless c?(:EBML_MATROSKA_INTERNAL)
 
-  ensure_file("lib/libebml/ebml/ebml_export.h", "#define EBML_DLL_API\n")
+  ensure_file("lib/libebml/ebml/ebml_export.h",             "#define EBML_DLL_API\n")
+  ensure_file("lib/libmatroska/matroska/matroska_export.h", "#define MATROSKA_DLL_API\n")
 end
 
 def define_default_task
