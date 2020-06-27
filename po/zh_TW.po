@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2020-05-22 12:55+0200\n"
-"PO-Revision-Date: 2020-04-01 04:10+0000\n"
-"Last-Translator: Dian Li <xslidian@gmail.com>\n"
+"PO-Revision-Date: 2020-06-20 08:32+0000\n"
+"Last-Translator: 夏勊倪 <chunkai.mao@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -71,7 +71,7 @@ msgid ""
 "                           appending files.\n"
 msgstr ""
 "  --append-mode <file|track>\n"
-"                           在追加檔案時\n"
+"                           在附加檔案時\n"
 "\\v                           選擇如何計算 mkvmerge 時間戳記。\n"
 
 #: src/merge/mkvmerge.cpp:167
@@ -85,7 +85,7 @@ msgid ""
 msgstr ""
 "  --append-to <SFID1:STID1:DFID1:DTID1,SFID2:STID2:DFID2:DTID2,...>\n"
 "                           以逗號分隔的一組檔案及軌道 ID 的清單，\n"
-"                           決定一個檔案的哪個軌道將被追加至前一個\n"
+"                           決定一個檔案的哪個軌道將被附加至前一個\n"
 "                           檔案的某一軌道。\n"
 
 #: src/merge/mkvmerge.cpp:268
@@ -183,7 +183,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:99
 #, no-c-format
 msgid "  --chapter-charset <cset> Charset for a simple chapter file.\n"
-msgstr "  --chapter-charset <cset> 簡單章節檔的字元集。\n"
+msgstr "  --chapter-charset <cset> 用於簡易章節檔的字元集。\n"
 
 #: src/merge/mkvmerge.cpp:98
 #, no-c-format
@@ -489,7 +489,7 @@ msgid ""
 msgstr ""
 "  --cue-chapter-name-format <format>\n"
 "                           由 CUE 索引向章節名稱的轉換模式。\n"
-"                           ('在追加檔案' 或 '區間:<duration>').\n"
+"                           ('在附加檔案' 或 '區間:<duration>').\n"
 
 #: src/merge/mkvmerge.cpp:115
 #, no-c-format
@@ -774,7 +774,7 @@ msgid ""
 msgstr ""
 "  --split parts:start1-end1[,[+]start2-end2,...]\n"
 "                           保留時間戳記起始-結束範圍，若字首加上 '+' \n"
-"                           則會分割成多個檔案或者追加檔案到上個範圍的檔案。\n"
+"                           則會分割成多個檔案或者附加檔案到上個範圍的檔案。\n"
 
 #: src/merge/mkvmerge.cpp:147
 #, no-c-format
@@ -1051,7 +1051,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:175
 #, no-c-format
 msgid "  <file1> + <file2>        Append file2 to file1.\n"
-msgstr "  <檔案1> + <檔案2>        將檔案2 追加到檔案1 後面。\n"
+msgstr "  <檔案1> + <檔案2>        將檔案2 附加到檔案1 後面。\n"
 
 #: src/merge/mkvmerge.cpp:176
 #, no-c-format
@@ -1200,7 +1200,7 @@ msgstr " 章節處理:\n"
 #: src/merge/mkvmerge.cpp:143
 #, no-c-format
 msgid " File splitting, linking, appending and concatenating (more global options):\n"
-msgstr " 檔案分割、連結、追加檔案和連接 (更多全域選項):\n"
+msgstr " 檔案分割、連結、附加檔案和連接 (更多全域選項):\n"
 
 #: src/merge/mkvmerge.cpp:124
 #, no-c-format
@@ -1569,9 +1569,9 @@ msgid "&Constrict start and end timestamps of sub-chapters to their parent's sta
 msgstr "將子章節的開始和結束時間戳記限制在其主開始和結束時間戳記中(&C)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1236
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Continue identification"
-msgstr "內容加密"
+msgstr "繼續識別(&C)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:615
 #, no-c-format
@@ -1638,7 +1638,7 @@ msgstr "編輯可執行的操作(&E)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1743
 #, no-c-format
 msgid "&Elide text in tab headers of tab widgets"
-msgstr ""
+msgstr "精簡標頭標籤小工具中的文字(&E)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1522
 #, no-c-format
@@ -1875,9 +1875,9 @@ msgstr "開啟設定值(&O)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:196
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:641
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Open supported chapter file format"
-msgstr "不支援的檔案格式"
+msgstr "開啟支援的章節檔案格式(&O)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:514
 #, no-c-format
@@ -2377,9 +2377,9 @@ msgid "'{0}' is not a CHAPTERxxNAME=... line."
 msgstr "第 '{0}' 行的格式不是 CHAPTERxxNAME=... 。"
 
 #: src/common/chapters/dvd.cpp:117
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "'{0}' is not a valid DVD title number."
-msgstr "'{0}' 不是有效的欄位順序。"
+msgstr "'{0}' 不是有效的 DVD 標題編號。"
 
 #: src/common/xml/ebml_chapters_converter.cpp:151
 #, no-c-format
@@ -2389,7 +2389,7 @@ msgstr "'{0}' 不是有效的 ISO 639-2 語言碼。"
 #: src/merge/mkvmerge.cpp:1536
 #, no-c-format
 msgid "'{0}' is not a valid append mode in '--append-mode {0}'.\n"
-msgstr "在 '--append-mode {0}' 中，'{0}' 不是有效的追加模式。\n"
+msgstr "在 '--append-mode {0}' 中，'{0}' 不是有效的附加模式。\n"
 
 #: src/merge/mkvmerge.cpp:1662
 #, no-c-format
@@ -2861,9 +2861,9 @@ msgid "A&cknowledge warnings/errors"
 msgstr "確認警告/錯誤(&C)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:645
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "A&ppend chapters from supported file format"
-msgstr "從 Matroska 、 WebM 或章節檔案附加章節(&A)"
+msgstr "從支援的檔案格式附加章節(&P)"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1511
 #: src/mkvtoolnix-gui/merge/input.cpp:1512
@@ -3167,7 +3167,7 @@ msgstr "加入章節檔案"
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:149
 #, no-c-format
 msgid "Adding or appending files"
-msgstr "加入或追加檔案"
+msgstr "加入或附加檔案"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1196
 #, no-c-format
@@ -3182,7 +3182,7 @@ msgstr "加入標籤檔案"
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:150
 #, no-c-format
 msgid "Adding, appending or adding as additional parts"
-msgstr "新增、追加檔案或加入為附加檔案的部分"
+msgstr "新增、附加檔案或加入為附加檔案的部分"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:214
 #, no-c-format
@@ -3221,14 +3221,14 @@ msgid "Adler-32: 0x{0:08x}"
 msgstr "Adler-32: 0x{0:08x}"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:328
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "After a job completes &successfully"
-msgstr "作業成功完成後，或完成但有警告後執行(&S)"
+msgstr "作業成功完成後(&S)"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:329
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "After a job exits with &warnings"
-msgstr "作業成功完成後，或完成但有警告後執行(&S)"
+msgstr "作業出現警告後退出(&W)"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:330
 #, no-c-format
@@ -3542,27 +3542,27 @@ msgstr "除了每次均詢問以外，可以選擇讓圖形使用者介面總是
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:195
 #, no-c-format
 msgid "Append files in chapter editor"
-msgstr "在章節編輯中追加檔案"
+msgstr "在章節編輯中附加檔案"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1165
 #, no-c-format
 msgid "Append media files"
-msgstr "追加媒體檔案"
+msgstr "附加媒體檔案"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:155
 #, no-c-format
 msgid "Append to an e&xisting source file"
-msgstr "追加至已存在的輸入檔 (&X)"
+msgstr "附加至已存在的輸入檔 (&X)"
 
 #: src/merge/output_control.cpp:1880
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
-msgstr "正在追加合併軌道 {0} 自檔案 {1} ( '{2}' ) 至軌道 {3} 自檔案 {4} ( '{5}' ) 。\n"
+msgstr "正在附加合併軌道 {0} 自檔案 {1} ( '{2}' ) 至軌道 {3} 自檔案 {4} ( '{5}' ) 。\n"
 
 #: src/merge/output_control.cpp:1029
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Appending tracks of this type is not supported."
-msgstr "不支援讀取加密的 VOB。\n"
+msgstr "不支援附加此類型的軌道。"
 
 #: src/merge/mkvmerge.cpp:658
 #, no-c-format
@@ -4038,9 +4038,9 @@ msgid "Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets
 msgstr "讓 mkvmerge 加入 '停止顯示' 指令到不包含時間長度欄位的 VobSub 字幕套組。"
 
 #: src/common/hacks.cpp:42
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters)."
-msgstr "讓 mkvmerge 在包含所有叢集的檔案建立變換定位元素。"
+msgstr "使 mkvmerge 在檔末尾(在所有群集之後)寫入第二組相同的軌道標頭。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:301
 #, no-c-format
@@ -4625,7 +4625,7 @@ msgstr "找不到音訊軌 {0} 的索引 (avilib 錯誤訊息: {1})。正在跳�
 #: src/merge/output_control.cpp:1806
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
-msgstr "追加檔案時找不到 gptzr。 {0}\n"
+msgstr "附加檔案時找不到 gptzr。 {0}\n"
 
 #: src/output/p_mpeg4_p2.cpp:174
 #, no-c-format
@@ -5036,15 +5036,15 @@ msgid "DVB subtitles"
 msgstr "DVB 字幕"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1828
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "DVD title number:"
-msgstr "章節編號:"
+msgstr "DVD 標題編號:"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:191
 #: src/mkvtoolnix-gui/merge/output.cpp:509
 #, no-c-format
 msgid "DVDs"
-msgstr ""
+msgstr "DVD"
 
 #: src/mkvtoolnix-gui/info/model.cpp:90
 #, no-c-format
@@ -5342,9 +5342,9 @@ msgid "Disable \"de&fault track\" flag for subtitle tracks"
 msgstr "停用字幕軌的 \"預設軌\" 標記(&F)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1739
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Disable &tooltips"
-msgstr "停用動畫效果(&M)"
+msgstr "停用提示工具(&T)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1788
 #, no-c-format
@@ -5502,7 +5502,7 @@ msgstr "不要產生章節"
 #: src/common/hacks.cpp:61
 #, no-c-format
 msgid "Don't remove track statistics tags when reading Matroska files, no matter if new ones are created or not."
-msgstr ""
+msgstr "讀取 Matroska 檔時，無論是否建立新檔，都不要刪除軌道統計資訊標記。"
 
 #: src/mkvtoolnix-gui/util/message_box.cpp:167
 #, no-c-format
@@ -5714,7 +5714,7 @@ msgstr "元件於類別 '{0}' ( '--edit {1}' ):\n"
 #: src/common/hacks.cpp:64
 #, no-c-format
 msgid "Enable appending and splitting FLAC tracks."
-msgstr ""
+msgstr "啟用附加與分割 FLAC 軌道。"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1814
 #, no-c-format
@@ -5749,7 +5749,7 @@ msgstr "如果使用相同選項與種子(seed)並且來自相同的原始檔案
 #: src/common/hacks.cpp:48
 #, no-c-format
 msgid "Enables warnings for certain conditions where timestamps aren't monotonous in situations where they should be which could indicate either a problem with the file or a programming error."
-msgstr ""
+msgstr "啟用對特定狀況下時間戳記未依照指示執行發出警告，通常表示檔案或程式發生錯誤。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:213
 #, no-c-format
@@ -6269,7 +6269,7 @@ msgstr "檔案/剪輯"
 #: src/merge/output_control.cpp:924
 #, no-c-format
 msgid "Files cannot be appended to themselves. The argument for '--append-to' was invalid.\n"
-msgstr "無法將檔追加到自身。 '--append-to' 的參數無效。\n"
+msgstr "無法將檔附加到自身。 '--append-to' 的參數無效。\n"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:295
 #, no-c-format
@@ -7038,7 +7038,7 @@ msgstr "依檔案大小切割時，如果需要經常使用相同的數值，可
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:157
 #, no-c-format
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
-msgstr "若要追加或加入作為附加部分那麼必須選擇要加入的輸入檔案:"
+msgstr "若要附加或加入作為附加部分那麼必須選擇要加入的輸入檔案:"
 
 #: src/output/p_textsubs.cpp:117
 #, no-c-format
@@ -8171,7 +8171,7 @@ msgstr "單個附件被指定了多於一個名稱。 '{0}' 將被廢棄，並�
 #: src/merge/output_control.cpp:997
 #, no-c-format
 msgid "More than one track is to be appended to the track {0} from file no. {1} ('{2}'). The argument for '--append-to' was invalid.\n"
-msgstr "被追加至軌道 {0} 自檔案 {1} ( '{2}' ) 的軌道多於一條。 '--append-to' 的參數無效。\n"
+msgstr "被附加至軌道 {0} 自檔案 {1} ( '{2}' ) 的軌道多於一條。 '--append-to' 的參數無效。\n"
 
 #: src/extract/tracks.cpp:106
 #, no-c-format
@@ -8380,7 +8380,7 @@ msgstr "尚未加入任何動作。"
 #: src/merge/output_control.cpp:956
 #, no-c-format
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
-msgstr "沒有為檔案 {0} ( '{1}' ) 指定追加對應。將使用預設對應 {2}。如果 mkvmerge 異常中止並輸出關於無效的 '--append-to' 選項的錯誤訊息，請留意。\n"
+msgstr "沒有為檔案 {0} ( '{1}' ) 指定附加對應。將使用預設對應 {2}。如果 mkvmerge 異常中止並輸出關於無效的 '--append-to' 選項的錯誤訊息，請留意。\n"
 
 #: src/propedit/attachment_target.cpp:204
 #: src/propedit/attachment_target.cpp:215
@@ -8416,7 +8416,7 @@ msgstr "未指定輸出檔名，將使用附件名。\n"
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
 #, no-c-format
 msgid "No disc library information was found."
-msgstr ""
+msgstr "未找到光碟庫資訊。"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:150
 #, no-c-format
@@ -8697,7 +8697,7 @@ msgstr "注意視訊內容不根據此選項進行修改。"
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:212
 #, no-c-format
 msgid "Note:"
-msgstr ""
+msgstr "注意:"
 
 #: src/extract/mkvextract.cpp:165
 #: src/propedit/options.cpp:38
@@ -8748,7 +8748,7 @@ msgstr "Ogg/OGM 音訊/視訊檔"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1821
 #, no-c-format
 msgid "One chapter for each appended file"
-msgstr "每個追加檔案為一個章節"
+msgstr "每個附加檔案為一個章節"
 
 #: src/propedit/propedit_cli_parser.cpp:274
 #, no-c-format
@@ -8842,7 +8842,7 @@ msgstr "僅允許一個輸入檔。\n"
 #: src/merge/output_control.cpp:937
 #, no-c-format
 msgid "Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
-msgstr "僅為檔案 {0} ( '{1}' ) 提供部分追加的對應。只有不指定任何對應 (此時將使用預設對應) 或為所有軌道指定對應時，才會複製所有軌道。\n"
+msgstr "僅為檔案 {0} ( '{1}' ) 提供部分附加的對應。只有不指定任何對應 (此時將使用預設對應) 或為所有軌道指定對應時，才會複製所有軌道。\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:436
 #, no-c-format
@@ -9915,7 +9915,7 @@ msgstr "按右鍵執行附件"
 #: src/mkvtoolnix-gui/merge/input.cpp:444
 #, no-c-format
 msgid "Right-click to add, append and remove files"
-msgstr "按右鍵加入、追加與移除檔案"
+msgstr "按右鍵加入、附加與移除檔案"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:269
 #, no-c-format
@@ -10278,9 +10278,9 @@ msgid "Select one of the ISO 639-2 language codes."
 msgstr "選擇一種 ISO 639-2 語言碼。"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:300
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select playlist to add"
-msgstr "選擇要加入的檔案"
+msgstr "選擇要新增的播放清單"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:440
 #, no-c-format
@@ -11071,7 +11071,7 @@ msgstr "FourCC 值必須為四個字元的長度，在 '{0} {1}' 。\n"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:374
 #, no-c-format
 msgid "The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new multiplex settings and adding them to those."
-msgstr "圖形使用者介面也可以設定每次詢問使用者。例如，是追加還是加入，或是新增並加入到新的合併設定中。"
+msgstr "圖形使用者介面也可以設定每次詢問使用者。例如，是附加還是加入，或是新增並加入到新的合併設定中。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:376
 #, no-c-format
@@ -11822,12 +11822,12 @@ msgstr "檔案 {0} ( '{1}' ) 不含 ID 為 {2} 的軌道，或者沒選擇複製
 #: src/merge/output_control.cpp:976
 #, no-c-format
 msgid "The file no. {0} ('{1}') does not contain a track with the ID {2}, or that track is not to be copied. Therefore no track can be appended to it. The argument for '--append-to' was invalid.\n"
-msgstr "檔案 {0} ( '{1}' ) 不含 ID 為 {2} 的軌道，或者沒選擇複製該軌道。因此沒有軌道可以追加給它。選項 '--append-to' 的參數無效。\n"
+msgstr "檔案 {0} ( '{1}' ) 不含 ID 為 {2} 的軌道，或者沒選擇複製該軌道。因此沒有軌道可以附加給它。選項 '--append-to' 的參數無效。\n"
 
 #: src/merge/output_control.cpp:916
 #, no-c-format
 msgid "The file no. {0} ('{1}') is not being appended. The argument for '--append-to' was invalid.\n"
-msgstr "此檔案 {0} ( '{1}' ) 未被追加。選項 '--append-to' 的參數無效。\n"
+msgstr "此檔案 {0} ( '{1}' ) 未被附加。選項 '--append-to' 的參數無效。\n"
 
 #: src/common/mm_io_x.cpp:38
 #, no-c-format
@@ -11891,7 +11891,7 @@ msgstr "僅限第一個輸出檔案"
 #: src/merge/mkvmerge.cpp:2070
 #, no-c-format
 msgid "The first file cannot be appended because there are no files to append to.\n"
-msgstr "第一個檔案不能作為追加檔案，因為沒有檔案可供其追加。\n"
+msgstr "第一個檔案不能作為附加檔案，因為沒有檔案可供其附加。\n"
 
 #: src/extract/extract_cli_parser.cpp:74
 #, no-c-format
@@ -12419,7 +12419,7 @@ msgstr "字串 'track:n' 中的 'n' 為一個數字表示選擇第幾軌道。�
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:332
 #, no-c-format
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
-msgstr "字串 '<FILE_NAME>'  '<FILE_NAME_WITH_EXT>' 僅當為追加檔案產生章節時有效，將被追加檔案的名稱取代 (前者省略副檔名，而後者保留)。"
+msgstr "字串 '<FILE_NAME>'  '<FILE_NAME_WITH_EXT>' 僅當為附加檔案產生章節時有效，將被附加檔案的名稱取代 (前者省略副檔名，而後者保留)。"
 
 #: src/propedit/propedit_cli_parser.cpp:246
 #, no-c-format
@@ -12544,12 +12544,12 @@ msgstr "區塊表頭使用的軌道編號。"
 #: src/merge/output_control.cpp:1018
 #, no-c-format
 msgid "The track number {0} from the file '{1}' can probably not be appended correctly to the track number {2} from the file '{3}': {4} Please make sure that the resulting file plays correctly the whole time. The author of this program will probably not give support for playback issues with the resulting file.\n"
-msgstr "軌道編號 {0} （自檔案 '{1}' ）可能無法被正確追加檔案至軌道編號 {2} （自檔 '{3}' ）: {4} 請確認生成的檔是否可以完整地正常播放。此程式的作者可能無法提供關於播放生成的檔案的支援。\n"
+msgstr "軌道編號 {0} （自檔案 '{1}' ）可能無法被正確附加檔案至軌道編號 {2} （自檔 '{3}' ）: {4} 請確認生成的檔是否可以完整地正常播放。此程式的作者可能無法提供關於播放生成的檔案的支援。\n"
 
 #: src/merge/output_control.cpp:1032
 #, no-c-format
 msgid "The track number {0} from the file '{1}' cannot be appended to the track number {2} from the file '{3}'. {4}\n"
-msgstr "軌道編號 {0} （自檔案 '{1}' ）無法追加檔案至軌道編號 {2} （自檔案 '{3}' ）。{4}\n"
+msgstr "軌道編號 {0} （自檔案 '{1}' ）無法附加檔案至軌道編號 {2} （自檔案 '{3}' ）。{4}\n"
 
 #: src/merge/output_control.cpp:1028
 #, no-c-format
@@ -12564,7 +12564,7 @@ msgstr "\"輸入\" 標籤頁的軌道屬性控制項，能以三種不同的方�
 #: src/merge/output_control.cpp:986
 #, no-c-format
 msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once. The argument for '--append-to' was invalid.\n"
-msgstr "軌道 {0} 自檔案 {1} ( '{2}' ) 被追加超過一次。 '--append-to' 的參數無效。\n"
+msgstr "軌道 {0} 自檔案 {1} ( '{2}' ) 被附加超過一次。 '--append-to' 的參數無效。\n"
 
 #: src/merge/mkvmerge.cpp:2081
 #: src/merge/mkvmerge.cpp:2973
@@ -13349,7 +13349,7 @@ msgstr "USF 文字字幕"
 #: src/mkvtoolnix-gui/merge/input.cpp:1407
 #, no-c-format
 msgid "Unable to append files"
-msgstr "無法追加檔案"
+msgstr "無法附加檔案"
 
 #: src/common/iso639.cpp:692
 #, no-c-format
@@ -14061,7 +14061,7 @@ msgstr "加入檔案時通常所有軌道都會被設定為用於合併到輸出
 #: src/mkvtoolnix-gui/merge/output.cpp:220
 #, no-c-format
 msgid "When appending: one chapter is created at the start and one whenever a file is appended."
-msgstr "在追加檔案時: 檔案開頭為第一章，隨後每追加一個檔案便建立一個章節。"
+msgstr "附加檔案時: 檔案開頭為第一章，隨後每附加一個檔案便建立一個章節。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:302
 #, no-c-format
