@@ -99,6 +99,9 @@ join(IteratorT first,
   return fmt::format("{}", fmt::join(first, last, separator));
 }
 
+std::string to_lower_ascii(std::string const &src);
+std::string to_upper_ascii(std::string const &src);
+
 } // mtx::string
 
 template<typename T>

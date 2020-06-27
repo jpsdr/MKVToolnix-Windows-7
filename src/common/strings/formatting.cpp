@@ -300,4 +300,31 @@ elide_string(std::string s,
   return s;
 }
 
+static std::string
+to_upper_or_lower_ascii(std::string const &src,
+                        bool downcase) {
+  std::string dst;
+
+  char diff = downcase ? 'a' - 'A' : 'A' - 'a';
+  char min  = downcase ? 'A' : 'a';
+  char max  = downcase ? 'Z' : 'z';
+
+  dst.reserve(src.size());
+
+  for (auto c : src)
+    dst += (c >= min) && (c <= max) ? static_cast<char>(c + diff) : c;
+
+  return dst;
+}
+
+std::string
+to_upper_ascii(std::string const &src) {
+  return to_upper_or_lower_ascii(src, false);
+}
+
+std::string
+to_lower_ascii(std::string const &src) {
+  return to_upper_or_lower_ascii(src, true);
+}
+
 } // mtx::string
