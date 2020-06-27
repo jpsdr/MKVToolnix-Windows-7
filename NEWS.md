@@ -1,4 +1,4 @@
-# Version ?
+# Version 48.0.0 "Sick Of Losing Soulmates" 2020-06-27
 
 ## New features and enhancements
 

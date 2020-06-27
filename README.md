@@ -1,4 +1,4 @@
-MKVToolNix 47.0.0
+MKVToolNix 48.0.0
 =================
 
 # Table of contents
