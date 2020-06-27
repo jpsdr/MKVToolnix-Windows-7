@@ -62,6 +62,10 @@
 
 * libEBML v1.4.0 and libMatroska v1.6.0 are now required.
 
+## Other changes
+
+* The source code repository's main development branch was renamed to `main`.
+
 
 # Version 47.0.0 "Black Flag" 2020-05-30
 
