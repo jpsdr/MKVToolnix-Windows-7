@@ -2,6 +2,8 @@
 
 ## New features and enhancements
 
+* mkvmerge: AC-3: file identification will report AC-3 tracks encoded in Dolby
+  Surround EX as codec "AC-3 Dolby Surround EX". Implements #2740.
 * MKVToolNix GUI: multiplexer: on new installations the GUI will now recognize
   all known ISO 639-2 language codes in file names by default instead of only
   the top 100 of languages by native speakers.
@@ -15,23 +17,17 @@
 * MKVToolNix GUI: while the GUI is running it will remember the last page that
   was selected when the preferences dialog is closed. Upon re-opening the
   preferences that page will be selected by default. Implements #2852.
-* mkvmerge: AC-3: file identification will report AC-3 tracks encoded in Dolby
-  Surround EX as codec "AC-3 Dolby Surround EX". Implements #2740.
 
 ## Bug fixes
 
 * mkvmerge: fixed a segmentation fault when exiting prematurely due to write
   errors such as the destination having run out of space. Fixes #2843.
+* mkvmerge: DTS: fixed wrong channel count for DTS tracks with XCh
+  extensions. Fixes #2715.
 * mkvmerge: MPEG TS reader: fixed detecting h.264/AVC and h.265/HEVC tracks
   that consist of only a single frame. Part of the fix of #2849.
 * mkvmerge: MPEG TS reader: fixed handling of unbounded PES sizes for tracks
   that consist of only a single PES packet. Part of the fix of #2849.
-* mkvmerge: WavPack: fixed support for files created by v5 of the
-  program. Checksums, DSD audio data and non-standard sampling rates are
-  handled correctly. Patch by David Bryant.
-* MKVToolNix GUI: multiplexer: fixed the cursor being positioned wrong after
-  entering or pasting characters that aren't allowed in file names into the
-  "destination file" control. Fixes #2855.
 * mkvmerge: MPEG TS reader: PGS subtitle tracks are now exempt from the
   "detect bogus subtitle timestamps" heuristic which could lead to some PGS
   subtitles not being timestamped correctly. Symptoms were that they were
@@ -55,8 +51,12 @@
   simply stop processing a file once the end timestamp is seen. This change
   greatly speeds up processing files from which only small portions must be
   read. Part of the fix of #2824.
-* mkvmerge: DTS: fixed wrong channel count for DTS tracks with XCh
-  extensions. Fixes #2715.
+* mkvmerge: WavPack: fixed support for files created by v5 of the
+  program. Checksums, DSD audio data and non-standard sampling rates are
+  handled correctly. Patch by David Bryant.
+* MKVToolNix GUI: multiplexer: fixed the cursor being positioned wrong after
+  entering or pasting characters that aren't allowed in file names into the
+  "destination file" control. Fixes #2855.
 
 ## Build system changes
 
