@@ -54,6 +54,7 @@ require_relative "rake.d/target"
 require_relative "rake.d/application"
 require_relative "rake.d/installer"
 require_relative "rake.d/iso639"
+require_relative "rake.d/iso15924"
 require_relative "rake.d/library"
 require_relative "rake.d/compilation_database"
 require_relative "rake.d/format_string_verifier"
@@ -853,6 +854,11 @@ namespace :dev do
   desc "Create iso639_language_list.cpp from system ISO code list"
   task :iso639_list do
     create_iso639_language_list_file
+  end
+
+  desc "Create iso15924_script_list.cpp from official script list"
+  task :iso15924_list do
+    create_iso15924_script_list_file
   end
 end
 
