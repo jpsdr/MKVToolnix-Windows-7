@@ -82,9 +82,9 @@ ensure
   end
 end
 
-def runq(action, target, cmdline, options = {})
-  start  = Time.now
-  runner = lambda { run_wrapper cmdline, options.clone.merge(:dont_echo => !$verbose) }
+def runq(action, target, cmdline = nil, options = {}, &runner)
+  start    = Time.now
+  runner ||= lambda { run_wrapper cmdline, options.clone.merge(:dont_echo => !$verbose) }
 
   puts_action action, :target => target, :prefix => $run_show_start_stop ? "[start          ]" : nil
 

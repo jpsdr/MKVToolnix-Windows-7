@@ -16,6 +16,18 @@ class String
   def blank?
     empty?
   end
+
+  def to_c_string
+  '"' + self.gsub(%r{"}, '\"') + '"'
+  end
+
+  def to_cpp_string
+    self.to_c_string + "s"
+  end
+
+  def to_u8_cpp_string
+    "u8" + self.to_c_string + "s"
+  end
 end
 
 class TrueClass

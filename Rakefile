@@ -850,8 +850,8 @@ namespace :dev do
     puts prereqs.map { |p| sprintf("%-#{longest}s => %s", p[0], p[1].sort.join(" ")) }.join("\n")
   end
 
-  desc "Create iso639_lists.cpp from system ISO code list"
-  task :iso39_list do
+  desc "Create iso639_language_list.cpp from system ISO code list"
+  task :iso639_list do
     create_iso639_language_list_file
   end
 end
