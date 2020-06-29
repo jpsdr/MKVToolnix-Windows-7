@@ -1649,11 +1649,12 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
   if (m_appending)
     return;
 
-  if (t->default_track)
-    PTZR(t->ptzr)->set_as_default_track(t->type == 'v' ? DEFTRACK_TYPE_VIDEO : t->type == 'a' ? DEFTRACK_TYPE_AUDIO : DEFTRACK_TYPE_SUBS, DEFAULT_TRACK_PRIORITY_FROM_SOURCE);
-
-  else if (!PTZR(t->ptzr)->m_ti.m_default_track.has_value())
-    PTZR(t->ptzr)->m_ti.m_default_track = false;
+  if (!PTZR(t->ptzr)->m_ti.m_default_track.has_value()) {
+    if (t->default_track)
+      PTZR(t->ptzr)->set_as_default_track(t->type == 'v' ? DEFTRACK_TYPE_VIDEO : t->type == 'a' ? DEFTRACK_TYPE_AUDIO : DEFTRACK_TYPE_SUBS, DEFAULT_TRACK_PRIORITY_FROM_SOURCE);
+    else
+      PTZR(t->ptzr)->m_ti.m_default_track = false;
+  }
 
   if (t->forced_track && !PTZR(t->ptzr)->m_ti.m_forced_track.has_value())
     PTZR(t->ptzr)->set_track_forced_flag(true);

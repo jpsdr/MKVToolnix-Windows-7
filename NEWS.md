@@ -1,3 +1,14 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: Matroska reader: when reading tracks (e.g. a subtitle track) from
+  Matroska files with their `default track` flag set to `yes`, and when
+  overwriting those via the command line to `no`, `mkvmerge` would not promote
+  additional tracks of the same type from other files (e.g. another subtitle
+  track from an SRT file). Fixes #2863.
+
+
 # Version 48.0.0 "Sick Of Losing Soulmates" 2020-06-27
 
 ## New features and enhancements
