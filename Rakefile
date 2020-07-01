@@ -52,6 +52,7 @@ require_relative "rake.d/digest"
 require_relative "rake.d/helpers"
 require_relative "rake.d/target"
 require_relative "rake.d/application"
+require_relative "rake.d/iana_language_subtag_registry"
 require_relative "rake.d/installer"
 require_relative "rake.d/iso639"
 require_relative "rake.d/iso3166"
@@ -865,6 +866,11 @@ namespace :dev do
   desc "Create iso15924_script_list.cpp from official script list"
   task :iso15924_list do
     create_iso15924_script_list_file
+  end
+
+  desc "Create iana_language_subtag_registry_list.cpp from official list"
+  task :iana_language_subtag_registry_list do
+    create_iana_language_subtag_registry_list_file
   end
 end
 
