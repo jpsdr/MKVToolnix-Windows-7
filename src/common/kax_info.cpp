@@ -69,6 +69,9 @@
 #include "common/math.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
+#include "common/mm_proxy_io.h"
+#include "common/mm_read_buffer_io.h"
+#include "common/mm_write_buffer_io.h"
 #include "common/stereo_mode.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
@@ -1259,7 +1262,7 @@ kax_info_c::open_and_process_file() {
 
   // open input file
   try {
-    p->m_in = mm_file_io_c::open(p->m_source_file_name);
+    p->m_in = std::make_shared<mm_read_buffer_io_c>(mm_file_io_c::open(p->m_source_file_name));
   } catch (mtx::mm_io::exception &ex) {
     ui_show_error(fmt::format(Y("Error: Couldn't open source file {0} ({1})."), p->m_source_file_name, ex));
     return result_e::failed;
@@ -1274,7 +1277,7 @@ kax_info_c::open_and_process_file() {
   // open output file
   if (!p->m_destination_file_name.empty()) {
     try {
-      p->m_out = std::make_shared<mm_file_io_c>(p->m_destination_file_name, MODE_CREATE);
+      p->m_out = std::make_shared<mm_write_buffer_io_c>(mm_file_io_c::open(p->m_destination_file_name, MODE_CREATE), 1024 * 1024);
 
     } catch (mtx::mm_io::exception &ex) {
       ui_show_error(fmt::format(Y("The file '{0}' could not be opened for writing: {1}."), p->m_destination_file_name, ex));
