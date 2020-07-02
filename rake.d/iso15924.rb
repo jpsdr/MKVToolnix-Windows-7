@@ -19,7 +19,7 @@ def create_iso15924_script_list_file
     select { |line| %r{;.*;.*;}.match(line) }.
     map    { |line| line.split(';') }.
     map    { |line| [
-      (line[0][0..0].upcase + line[0][1..].downcase).to_cpp_string,
+      (line[0][0..0].upcase + line[0][1..line[0].length].downcase).to_cpp_string,
       sprintf('%03s', line[1].gsub(%r{^0}, '')),
       line[2].to_u8_cpp_string,
     ] }
