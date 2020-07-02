@@ -9,6 +9,7 @@
   track from an SRT file). Fixes #2863.
 * MKVToolNix: info tool: when saving to a text file the checkbox "Save as
   default for saving output to text files" did nothing. Fixes #2869.
+* Windows installer: the images are shown again. Fixes #2868.
 
 
 # Version 48.0.0 "Sick Of Losing Soulmates" 2020-06-27
