@@ -9,6 +9,9 @@
   track from an SRT file). Fixes #2863.
 * MKVToolNix: info tool: when saving to a text file the checkbox "Save as
   default for saving output to text files" did nothing. Fixes #2869.
+* MKVToolNix: info tool: when saving to a text file in "all elements in a
+  tree-like structure" mode, the GUI always stopped at the first cluster
+  regardless of the setting of the "verbosity" option.
 * Windows installer: the images are shown again. Fixes #2868.
 
 
