@@ -7,6 +7,8 @@
   overwriting those via the command line to `no`, `mkvmerge` would not promote
   additional tracks of the same type from other files (e.g. another subtitle
   track from an SRT file). Fixes #2863.
+* MKVToolNix: info tool: when saving to a text file the checkbox "Save as
+  default for saving output to text files" did nothing. Fixes #2869.
 
 
 # Version 48.0.0 "Sick Of Losing Soulmates" 2020-06-27

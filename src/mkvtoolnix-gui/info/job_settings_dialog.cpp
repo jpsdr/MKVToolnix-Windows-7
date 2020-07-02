@@ -55,6 +55,7 @@ JobSettingsDialog::accept() {
     return;
 
   if (!MainWindow::jobTool()->checkIfOverwritingExistingJobIsOK(settings.m_fileName))
+    return;
 
   if (ui.saveAsDefault->isChecked()) {
     auto &cfg                    = Util::Settings::get();
