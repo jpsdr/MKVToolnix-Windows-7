@@ -144,12 +144,12 @@ wv_get_non_standard_rate(unsigned char const *buffer,
 
     // if we got a sample rate, return it
 
-    if (   ((meta_id & ID_UNIQUE) == ID_SAMPLE_RATE)
-        && (   (meta_bc == 3)
-            || (meta_bc == 4))) {
+    if (((meta_id & ID_UNIQUE) == ID_SAMPLE_RATE) && (meta_bc == 4)) {
       int sample_rate = get_uint24_le(buffer);
 
-      if (meta_bc == 4)
+      // only use 4th byte if it's really there (i.e., size is even)
+
+      if (!(meta_id & ID_ODD_SIZE))
         sample_rate |= static_cast<int32_t>(buffer[3] & 0x7f) << 24;
 
       return sample_rate;
