@@ -369,11 +369,11 @@ change_c::parse_spec(change_c::change_type_e type,
 
   if (   mtx::included_in(type, ct_add, ct_set)
       && (name == "language")) {
-    auto idx = map_to_iso639_2_code(value);
-    if (-1 == idx)
+    auto idx = mtx::iso639::look_up(value);
+    if (!idx)
       throw std::runtime_error{fmt::format(("invalid ISO 639-2 language code '{0}'"), value)};
 
-    value = g_iso639_languages[idx].iso639_2_code;
+    value = mtx::iso639::g_languages[*idx].iso639_2_code;
   }
 
   return std::make_shared<change_c>(type, name, value);

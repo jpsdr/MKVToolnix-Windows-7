@@ -47,7 +47,7 @@ setupLanguageDerivationSubPatterns() {
 
   auto &cfg = Util::Settings::get();
 
-  for (auto const &language : g_iso639_languages) {
+  for (auto const &language : mtx::iso639::g_languages) {
     if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(language.iso639_2_code)))
       continue;
 
@@ -448,17 +448,17 @@ SourceFile::deriveLanguageFromFileName() {
 
     qDebug() << "language derivation match:" << capture;
 
-    auto languageIdx = map_to_iso639_2_code(to_utf8(capture.toLower()));
-    if (languageIdx == -1) {
+    auto languageIdx = mtx::iso639::look_up(to_utf8(capture.toLower()));
+    if (!languageIdx) {
       languageIdx = 0;
 
       auto found = false;
 
-      for (int numLanguages = g_iso639_languages.size(); languageIdx < numLanguages; ++languageIdx) {
-        if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(g_iso639_languages[languageIdx].iso639_2_code)))
+      for (auto numLanguages = mtx::iso639::g_languages.size(); *languageIdx < numLanguages; ++(*languageIdx)) {
+        if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(mtx::iso639::g_languages[*languageIdx].iso639_2_code)))
           continue;
 
-        for (auto name : Q(g_iso639_languages[languageIdx].english_name).split(splitter)) {
+        for (auto name : Q(mtx::iso639::g_languages[*languageIdx].english_name).split(splitter)) {
           name.remove(languageNameCleaner);
           if (name != capture)
             continue;
@@ -474,7 +474,7 @@ SourceFile::deriveLanguageFromFileName() {
         continue;
     }
 
-    language = Q(g_iso639_languages[languageIdx].iso639_2_code);
+    language = Q(mtx::iso639::g_languages[*languageIdx].iso639_2_code);
 
     qDebug() << "derived language:" << language;
 

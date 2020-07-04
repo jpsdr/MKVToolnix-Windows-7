@@ -41,11 +41,15 @@ def create_iso639_language_list_file
 
 #include "common/iso639.h"
 
-std::vector<iso639_language_t> const g_iso639_languages{
+namespace mtx::iso639 {
+
+std::vector<language_t> const g_languages{
 EOT
 
   footer = <<EOT
 };
+
+} // namespace mtx::iso639
 EOT
 
   content = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => "  },").join("\n") + "\n" + footer

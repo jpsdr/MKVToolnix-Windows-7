@@ -15,13 +15,15 @@
 
 #include "common/common_pch.h"
 
-struct iso639_language_t {
+namespace mtx::iso639 {
+
+struct language_t {
   std::string const english_name, iso639_2_code, iso639_1_code, terminology_abbrev;
 };
 
-extern std::vector<iso639_language_t> const g_iso639_languages;
+extern std::vector<language_t> const g_languages;
 
-int map_to_iso639_2_code(std::string const &s, bool allow_short_english_names = false);
-bool is_valid_iso639_2_code(std::string const &s);
-std::string map_iso639_2_to_iso639_1(std::string const &iso639_2_code);
-void list_iso639_languages();
+std::optional<std::size_t> look_up(std::string const &s, bool allow_short_english_names = false);
+void list_languages();
+
+} // namespace mtx::iso639

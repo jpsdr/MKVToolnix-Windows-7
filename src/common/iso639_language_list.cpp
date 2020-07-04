@@ -19,7 +19,9 @@
 
 #include "common/iso639.h"
 
-std::vector<iso639_language_t> const g_iso639_languages{
+namespace mtx::iso639 {
+
+std::vector<language_t> const g_languages{
   { "Reserved for local use: qaa",                                                         "qaa",  ""s,   ""s     },
   { "Reserved for local use: qab",                                                         "qab",  ""s,   ""s     },
   { "Reserved for local use: qac",                                                         "qac",  ""s,   ""s     },
@@ -510,3 +512,5 @@ std::vector<iso639_language_t> const g_iso639_languages{
   { u8"Zulu"s,                                                                             "zul"s, "zu"s, ""s     },
   { u8"Zuni"s,                                                                             "zun"s, ""s,   ""s     },
 };
+
+} // namespace mtx::iso639

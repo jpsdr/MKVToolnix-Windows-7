@@ -95,18 +95,18 @@ init_vorbis_to_matroska() {
 
 std::string
 parse_language(std::string key_language) {
-  auto index = map_to_iso639_2_code(key_language, true);
-  if (-1 != index)
-    return g_iso639_languages[index].iso639_2_code;
+  auto index = mtx::iso639::look_up(key_language, true);
+  if (index)
+    return mtx::iso639::g_languages[*index].iso639_2_code;
 
   std::smatch matches;
   if (   std::regex_search(key_language, matches, std::regex{".*\\[(.+?)\\]"})
-      && ((index = map_to_iso639_2_code(boost::to_lower_copy(matches[1].str()), true)) != -1))
-    return g_iso639_languages[index].iso639_2_code;
+      && ((index = mtx::iso639::look_up(boost::to_lower_copy(matches[1].str()), true))))
+    return mtx::iso639::g_languages[*index].iso639_2_code;
 
   if (   std::regex_search(key_language, matches, std::regex{".*\\((.+?)\\)"})
-      && ((index = map_to_iso639_2_code(boost::to_lower_copy(matches[1].str()), true)) != -1))
-    return g_iso639_languages[index].iso639_2_code;
+      && ((index = mtx::iso639::look_up(boost::to_lower_copy(matches[1].str()), true))))
+    return mtx::iso639::g_languages[*index].iso639_2_code;
 
   return {};
 }

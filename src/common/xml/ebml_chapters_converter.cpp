@@ -145,9 +145,9 @@ ebml_chapters_converter_c::fix_display(KaxChapterDisplay &display)
     display.PushElement((new KaxChapterLanguage)->SetValue("eng"));
 
   else {
-    int index = map_to_iso639_2_code(std::string(*clanguage));
+    auto index = mtx::iso639::look_up(std::string(*clanguage));
 
-    if (-1 == index)
+    if (!index)
       throw conversion_x{fmt::format(Y("'{0}' is not a valid ISO 639-2 language code."), clanguage->GetValue())};
 
   }

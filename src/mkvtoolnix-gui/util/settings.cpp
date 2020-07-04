@@ -442,7 +442,7 @@ Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
       m_oftenUsedCharacterSets << Q(characterSet);
 
   if (m_recognizedTrackLanguagesInFileNames.isEmpty())
-    for (auto const &language : g_iso639_languages)
+    for (auto const &language : mtx::iso639::g_languages)
       m_recognizedTrackLanguagesInFileNames << Q(language.iso639_2_code);
 
   if (m_regexForDerivingTrackLanguagesFromFileNames.isEmpty())

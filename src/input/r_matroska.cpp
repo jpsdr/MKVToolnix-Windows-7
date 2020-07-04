@@ -1310,9 +1310,9 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     }
 
     if (!track->language.empty()) {
-      int index = map_to_iso639_2_code(track->language.c_str());
-      if (-1 != index)
-        track->language = g_iso639_languages[index].iso639_2_code;
+      auto index = mtx::iso639::look_up(track->language.c_str());
+      if (index)
+        track->language = mtx::iso639::g_languages[*index].iso639_2_code;
       else
         track->language.clear();
     }
