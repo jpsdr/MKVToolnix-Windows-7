@@ -18,20 +18,35 @@
 
 namespace mtx::iana::language_subtag_registry {
 
+namespace {
+
 std::optional<std::size_t>
-look_up_variant(std::string const &s) {
+look_up_entry(std::string const &s,
+             std::vector<entry_t> const &entries) {
   if (s.empty())
     return {};
 
   auto s_lower = mtx::string::to_lower_ascii(s);
-  auto itr     = std::find_if(g_variants.begin(), g_variants.end(), [&s_lower](auto const &variant) {
-    return s_lower == mtx::string::to_lower_ascii(variant.variant);
+  auto itr     = std::find_if(entries.begin(), entries.end(), [&s_lower](auto const &entry) {
+    return s_lower == mtx::string::to_lower_ascii(entry.code);
   });
 
-  if (itr == g_variants.end())
+  if (itr == entries.end())
     return {};
 
-  return std::distance(g_variants.begin(), itr);
+  return std::distance(entries.begin(), itr);
+}
+
+}
+
+std::optional<std::size_t>
+look_up_extlang(std::string const &s) {
+  return look_up_entry(s, g_extlangs);
+}
+
+std::optional<std::size_t>
+look_up_variant(std::string const &s) {
+  return look_up_entry(s, g_variants);
 }
 
 } // namespace mtx::iana::language_subtag_registry

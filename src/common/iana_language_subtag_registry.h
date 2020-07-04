@@ -17,13 +17,14 @@
 
 namespace mtx::iana::language_subtag_registry {
 
-struct variant_t {
-  std::string const variant, description;
+struct entry_t {
+  std::string const code, description;
   std::vector<std::string> const prefixes;
 };
 
-extern std::vector<variant_t> const g_variants;
+extern std::vector<entry_t> const g_extlangs, g_variants;
 
+std::optional<std::size_t> look_up_extlang(std::string const &s);
 std::optional<std::size_t> look_up_variant(std::string const &s);
 
 } // namespace mtx::iana::language_subtag_registry

@@ -38,7 +38,7 @@ def create_iana_language_subtag_registry_list_file
 
   process.call
 
-  rows = entries["variant"].map do |entry|
+  formatter = lambda do |entry|
     if entry[:prefix]
       prefix = '{ ' + entry[:prefix].sort.map(&:to_cpp_string).join(', ') + ' }'
     else
@@ -50,6 +50,18 @@ def create_iana_language_subtag_registry_list_file
       prefix,
     ]
   end
+
+  rows = entries["extlang"].map(&formatter)
+
+  extlangs = "std::vector<entry_t> const g_extlangs{\n" +
+    format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => "  },").join("\n") +
+    "\n};\n"
+
+  rows = entries["variant"].map(&formatter)
+
+  variants = "std::vector<entry_t> const g_variants{\n" +
+    format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => "  },").join("\n") +
+    "\n};\n"
 
   header = <<EOT
 /*
@@ -75,16 +87,18 @@ def create_iana_language_subtag_registry_list_file
 
 namespace mtx::iana::language_subtag_registry {
 
-std::vector<variant_t> const g_variants{
 EOT
 
   footer = <<EOT
-};
 
 } // namespace mtx::iana::language_subtag_registry
 EOT
 
-  content = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => "  },").join("\n") + "\n" + footer
+  content = header +
+    extlangs +
+    "\n" +
+    variants +
+    footer
 
   runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }
 
