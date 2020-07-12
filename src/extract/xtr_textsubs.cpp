@@ -366,13 +366,13 @@ xtr_usf_c::finish_track() {
     std::stringstream text_in(text);
     pugi::xml_document subtitle_doc;
     if (!subtitle_doc.load(text_in, pugi::parse_default | pugi::parse_declaration | pugi::parse_doctype | pugi::parse_pi | pugi::parse_comments)) {
-      mxwarn(fmt::format(Y("Track {0}: An USF subtitle entry starting at timestamp {1} is not well-formed XML and will be skipped.\n"), m_tid, mtx::string::format_timestamp(entry.m_start * 1000000, 3)));
+      mxwarn(fmt::format(Y("Track {0}: An USF subtitle entry starting at timestamp {1} is not well-formed XML and will be skipped.\n"), m_tid, mtx::string::format_timestamp(entry.m_start, 3)));
       continue;
     }
 
     auto subtitle = subtitles.append_child("subtitle");
-    subtitle.append_attribute("start").set_value(mtx::string::format_timestamp(entry.m_start * 1000000, 3).c_str());
-    subtitle.append_attribute("stop"). set_value(mtx::string::format_timestamp(entry.m_end   * 1000000, 3).c_str());
+    subtitle.append_attribute("start").set_value(mtx::string::format_timestamp(entry.m_start, 3).c_str());
+    subtitle.append_attribute("stop"). set_value(mtx::string::format_timestamp(entry.m_end,   3).c_str());
 
     for (auto child : subtitle_doc.document_element())
       subtitle.append_copy(child);

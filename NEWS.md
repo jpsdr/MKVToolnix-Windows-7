@@ -13,6 +13,8 @@
   tree-like structure" mode, the GUI always stopped at the first cluster
   regardless of the setting of the "verbosity" option.
 * Windows installer: the images are shown again. Fixes #2868.
+* mkvextract: USF subtitles: start & end timestamps were too high by a factor
+  of 1.000.000. Fixes #2875.
 
 
 # Version 48.0.0 "Sick Of Losing Soulmates" 2020-06-27
