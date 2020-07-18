@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2020-05-22 12:55+0200\n"
-"PO-Revision-Date: 2020-06-26 21:49+0000\n"
+"PO-Revision-Date: 2020-07-13 20:18+0000\n"
 "Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/bg/)\n"
 "Language: bg\n"
@@ -95,6 +95,9 @@ msgid ""
 "                           Sets the display dimensions by calculating\n"
 "                           width and height for this aspect ratio.\n"
 msgstr ""
+"  --aspect-ratio <TID:f|a/b>\n"
+"                           Задава размера на показване, изчислявайки\n"
+"                           широчината и височината спрямо съотношението.\n"
 
 #: src/merge/mkvmerge.cpp:271
 #, no-c-format
@@ -105,6 +108,12 @@ msgid ""
 "                           with this factor and calculates the display\n"
 "                           dimensions from this factor.\n"
 msgstr ""
+"  --aspect-ratio-factor <TID:f|a/b>\n"
+"                           Изчислява съотношението на страните\n"
+"                           като умножава оригиналното съотношение\n"
+"                           с този коефициент. После изчислява и\n"
+"                           резолюцията при показване въз основа\n"
+"                           на този коефициент.\n"
 
 #: src/merge/mkvmerge.cpp:191
 #, no-c-format
@@ -208,6 +217,8 @@ msgid ""
 "  --chroma-siting <TID:hori,vert>\n"
 "                            How chroma is sited horizontally/vertically.\n"
 msgstr ""
+"  --chroma-siting <TID:hori,vert>\n"
+"                            Как е разположена цветността хоризонтално/вертикално.\n"
 
 #: src/merge/mkvmerge.cpp:294
 #, no-c-format
@@ -2108,12 +2119,12 @@ msgstr ""
 #: src/common/command_line.cpp:195
 #, no-c-format
 msgid "'--engage' lacks its argument.\n"
-msgstr ""
+msgstr "при „--engage“ липсва аргумент.\n"
 
 #: src/merge/mkvmerge.cpp:2492
 #, no-c-format
 msgid "'--generate-chapters' lacks the mode.\n"
-msgstr "при '--generate-chapters' липсва режим.\n"
+msgstr "при „--generate-chapters“ липсва режим.\n"
 
 #: src/merge/mkvmerge.cpp:2263
 #, no-c-format
@@ -2270,7 +2281,7 @@ msgstr "„{0}“ не е валиден езиков код по стандар
 #: src/merge/mkvmerge.cpp:1536
 #, no-c-format
 msgid "'{0}' is not a valid append mode in '--append-mode {0}'.\n"
-msgstr "„{0}“ не е валиден режим за добавяне в '--append-mode {0}'.\n"
+msgstr "„{0}“ не е валиден режим за разширяване при „--append-mode {0}“.\n"
 
 #: src/merge/mkvmerge.cpp:1662
 #, no-c-format
@@ -2591,7 +2602,7 @@ msgstr "На <ChapterTrack> му липсва <ChapterTrackNumber>."
 #: src/mkvtoolnix-gui/merge/input.cpp:1546
 #, no-c-format
 msgid "<Do not change>"
-msgstr "<Do not change>"
+msgstr "<Не променяй>"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:132
 #, no-c-format
@@ -3337,7 +3348,7 @@ msgstr "Винаги използвай &описание по подразби�
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:107
 #, no-c-format
 msgid "Always use full path names even if the application is located in the same directory as the GUI."
-msgstr ""
+msgstr "Винаги използвайте пълното име на пътя, дори и ако приложението се намира в директорията на тази програма."
 
 #: src/propedit/propedit_cli_parser.cpp:261
 #, no-c-format
@@ -4859,7 +4870,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:252
 #, no-c-format
 msgid "Current date && time in ISO 8601 format"
-msgstr ""
+msgstr "Текущата дата &и час в ISO 8601 формат"
 
 #: src/mkvtoolnix-gui/watch_jobs/tool.cpp:72
 #, no-c-format
@@ -5019,7 +5030,7 @@ msgstr "Стойности по подразбиране"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1830
 #, no-c-format
 msgid "Defaults for jobs saving info tool output to text files"
-msgstr "По подразбиране заданията запазват данните от инструмента за изход в текстови файлове"
+msgstr "Настройки по подразбиране при запазване на информацията в текстов файл"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1837
 #, no-c-format
@@ -5719,7 +5730,7 @@ msgstr "Подробности за грешката: %1."
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:153
 #, no-c-format
 msgid "Error executing mkvmerge"
-msgstr "Грешка при изпълнение на mkvmerge"
+msgstr "Грешка при изпълнението на mkvmerge"
 
 #: src/input/subtitles.cpp:139
 #, no-c-format
@@ -5862,7 +5873,7 @@ msgstr "Например: 01:00:00 (след един час) или 1800s (сл
 #: src/mkvtoolnix-gui/merge/output.cpp:274
 #, no-c-format
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
-msgstr ""
+msgstr "Например: 01:00:00,01:30:00 (след един час и след един час и тридесет минути) или 180s,300s,00:10:00 (след три, пет и десет минути)."
 
 #: src/merge/mkvmerge.cpp:3153
 #, no-c-format
@@ -5946,23 +5957,23 @@ msgstr "Извлечи данните в суров файл."
 #: src/output/p_hevc_es.cpp:135
 #, no-c-format
 msgid "Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"
-msgstr ""
+msgstr "Информацията за съотношението на страните е извлечена от видео данните на HEVC и резолюцията на показване е зададена на {0}/{1}.\n"
 
 #: src/output/p_avc.cpp:101
 #: src/output/p_avc_es.cpp:149
 #, no-c-format
 msgid "Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to {0}/{1}.\n"
-msgstr ""
+msgstr "Информацията за съотношението на страните е извлечена от видео данните на MPEG-4 layer 10 (AVC) и резолюцията на показване е зададена на {0}/{1}.\n"
 
 #: src/output/p_mpeg4_p2.cpp:326
 #, no-c-format
 msgid "Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to {0}/{1}.\n"
-msgstr ""
+msgstr "Информацията за съотношението на страните е извлечена от видео данните на MPEG4 layer 2 и резолюцията на показване е зададена на {0}/{1}.\n"
 
 #: src/output/p_theora.cpp:72
 #, no-c-format
 msgid "Extracted the aspect ratio information from the Theora video headers and set the display dimensions to {0}/{1}.\n"
-msgstr ""
+msgstr "Информацията за съотношението на страните е извлечена от видео метаданните на Theora и резолюцията на показване е зададена на {0}/{1}.\n"
 
 #: src/extract/extract_cli_parser.cpp:136
 #, no-c-format
@@ -6206,7 +6217,7 @@ msgstr "За всички кадри"
 #: src/mkvtoolnix-gui/merge/output.cpp:187
 #, no-c-format
 msgid "For an in-depth explanantion of file/segment linking and this feature please read mkvmerge's documentation."
-msgstr ""
+msgstr "За по-задълбочено обяснение за това как работи свързването на файлове/сегменти, моля прочетете документацията на mkvmerge."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:65
 #, no-c-format
@@ -6756,7 +6767,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/output.cpp:257
 #, no-c-format
 msgid "If given then you may use up to nine digits after the decimal point."
-msgstr ""
+msgstr "Ако присъства, може да се използват до 9 цифри след десетичната точка."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:330
 #, no-c-format
@@ -6902,7 +6913,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/output.cpp:174
 #, no-c-format
 msgid "If you leave this empty then there is no limit for the number of files mkvmerge might create."
-msgstr ""
+msgstr "Ако оставиш това поле непопълнено, тогава няма ограничение за броя файлове, които mkvmerge може да създаде."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:309
 #, no-c-format
@@ -6988,7 +6999,7 @@ msgstr "Индексиране (cues):"
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:134
 #, no-c-format
 msgid "Info job"
-msgstr ""
+msgstr "Инфо задача"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:245
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:398
@@ -7118,7 +7129,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:3080
 #, no-c-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
-msgstr "Невалиден номер на епизод „{0}“ за '--split' в '--split {1}': {2}\n"
+msgstr "Невалиден номер на епизод „{0}“ за „--split“ при „--split {1}“: {2}\n"
 
 #: src/merge/mkvmerge.cpp:1319
 #, no-c-format
@@ -7486,7 +7497,7 @@ msgstr "Описание на задачата"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:243
 #, no-c-format
 msgid "Job end date && time in ISO 8601 format"
-msgstr ""
+msgstr "Края на задачата в ISO 8601 формат (дата и час)"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:250
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:398
@@ -7504,12 +7515,12 @@ msgstr "Опашка от задания"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:242
 #, no-c-format
 msgid "Job start date && time in ISO 8601 format"
-msgstr ""
+msgstr "Началото на задачата в ISO 8601 формат (дата и час)"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:240
 #, no-c-format
 msgid "Job type ('multiplexer' or 'info')"
-msgstr "Тип на задачата („мултиплексор“ или „информация“)"
+msgstr "Тип на задачата („multiplexer“ или „info“)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:218
 #, no-c-format
@@ -7682,7 +7693,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:141
 #, no-c-format
 msgid "Listing content of file \"%1\" in directory \"%2\""
-msgstr ""
+msgstr "Правене на списък със съдържанието на файла „%1“ в директория „%2“"
 
 #: src/mkvtoolnix-gui/info/tab.cpp:244
 #, no-c-format
@@ -8471,7 +8482,7 @@ msgstr ""
 #: src/common/hacks.cpp:50
 #, no-c-format
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
-msgstr ""
+msgstr "Обикновено mkvmerge запазва информацията за съотношението на страните в MPEG4 видео битстриймове и я слага в контейнера."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:336
 #, no-c-format
@@ -9035,7 +9046,7 @@ msgstr "Широчина на пикселите"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:122
 #, no-c-format
 msgid "Play a WAV file with the default application:"
-msgstr ""
+msgstr "Изпълнение на WAV аудиофайл с приложението по подразбиране:"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
 #: src/mkvtoolnix-gui/util/settings.cpp:74
@@ -9907,7 +9918,7 @@ msgstr "Запази &по подразбиране за нови мултипл
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:74
 #, no-c-format
 msgid "Save as &default for saving output to text files"
-msgstr ""
+msgstr "Задай по &подразбиране при записване в текстов файл"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:180
 #, no-c-format
@@ -10325,7 +10336,7 @@ msgstr "Настройки"
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:73
 #, no-c-format
 msgid "Settings for saving output to a text file"
-msgstr ""
+msgstr "Настройки за запазване на информацията в текстов файл"
 
 #: src/input/r_real.cpp:526
 #, no-c-format
@@ -10593,27 +10604,27 @@ msgstr "Директория на файла-източник"
 #: src/common/property_element.cpp:200
 #, no-c-format
 msgid "Specifies a pitch rotation to the projection."
-msgstr ""
+msgstr "Задава завъртане на стъпката към прожекцията."
 
 #: src/common/property_element.cpp:201
 #, no-c-format
 msgid "Specifies a roll rotation to the projection."
-msgstr ""
+msgstr "Задава завъртане на наклона към прожекцията."
 
 #: src/common/property_element.cpp:199
 #, no-c-format
 msgid "Specifies a yaw rotation to the projection."
-msgstr ""
+msgstr "Задава завъртане на отклонението към прожекцията."
 
 #: src/common/property_element.cpp:141
 #, no-c-format
 msgid "Specifies the language of the track in the Matroska languages form."
-msgstr ""
+msgstr "Задава езика на пътечката във формата за езици на Matroska."
 
 #: src/common/property_element.cpp:158
 #, no-c-format
 msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
-msgstr ""
+msgstr "Посочване на възможните промени в съотношението на страните (0: свободно преоразмеряване, 1: запазване на съотношението, 2: фиксирано)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1796
 #, no-c-format
@@ -10628,7 +10639,7 @@ msgstr "Разделяне"
 #: src/merge/output_control.cpp:1085
 #, no-c-format
 msgid "Splitting tracks of this type is not supported."
-msgstr ""
+msgstr "Разделянето на пътечки от този тип не се поддържа."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:320
 #, no-c-format
@@ -10659,12 +10670,12 @@ msgstr "Започни &мултиплексиране"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:112
 #, no-c-format
 msgid "Start file types other than executable files via cmd.exe."
-msgstr ""
+msgstr "Стартирай файлове, различни от изпълним файл, чрез cmd.exe."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:114
 #, no-c-format
 msgid "Start file types other than executable files via xdg-open."
-msgstr ""
+msgstr "Стартирай файлове, различни от изпълним файл, чрез xdg-open."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:216
 #, no-c-format
@@ -10887,7 +10898,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
 #, no-c-format
 msgid "Tells mkvmerge not to write tags with statistics for each track."
-msgstr ""
+msgstr "Казва на mkvmerge да не записва тагове със статистики за всяка пътечка."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:58
 #, no-c-format
@@ -10944,7 +10955,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/output.cpp:232
 #, no-c-format
 msgid "The DocType header item is changed to \"webm\"."
-msgstr ""
+msgstr "Атрибутът „DocType header“ бива променен на „webm“."
 
 #: src/output/p_flac.cpp:48
 #, no-c-format
@@ -11241,7 +11252,7 @@ msgstr "Затварящият символ „{0}“ липсва.\n"
 #: src/merge/generic_reader.cpp:113
 #, no-c-format
 msgid "The codec type '{0}' cannot be used in a WebM compliant file.\n"
-msgstr ""
+msgstr "Типът кодек „{0}“ не може да бъде използван в съвместим с WebM стандарта файл.\n"
 
 #: src/merge/connection_checks.h:60
 #, no-c-format
@@ -11343,7 +11354,7 @@ msgstr "Датата, когато файлът е бил създаден."
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:33
 #, no-c-format
 msgid "The default is 'file' with 'track' being an alternative mode."
-msgstr ""
+msgstr "Стойността по подразбиране е „file“, а алтернативно може да се използва и „track“."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:373
 #, no-c-format
@@ -11860,7 +11871,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:197
 #, no-c-format
 msgid "The header values have not been modified. There is nothing to save."
-msgstr ""
+msgstr "Метаданните не са били променени. Няма нищо за запаметяване."
 
 #: src/merge/connection_checks.h:38
 #, no-c-format
@@ -12808,7 +12819,7 @@ msgstr "Това работи само за DTS аудио пътечки."
 #: src/common/hacks.cpp:51
 #, no-c-format
 msgid "This option causes mkvmerge to remove the aspect ratio information from the bitstream."
-msgstr ""
+msgstr "Тази опция кара mkvmerge да премахне информацията за съотношението на страните от битовия поток."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:207
 #, no-c-format
@@ -12843,7 +12854,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/input.cpp:492
 #, no-c-format
 msgid "This option tells mkvmerge the display aspect ratio to use when it calculates the display width/height."
-msgstr ""
+msgstr "Тази опция казва на mkvmerge какво съотношение да използва, когато изчислява широчина/височина на показване."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:521
 #, no-c-format
@@ -13202,7 +13213,7 @@ msgstr "Тип"
 #: src/common/property_element.cpp:153
 #, no-c-format
 msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
-msgstr ""
+msgstr "Мерна единица за ширина/височина на показване (0: пиксели, 1: сантиметри, 2: инчове, 3: пропорция на страните)."
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:336
 #, no-c-format
@@ -13397,7 +13408,7 @@ msgstr "Употреба и примери"
 #: src/mkvtoolnix-gui/merge/output.cpp:177
 #, no-c-format
 msgid "Use 'segment linking' for the resulting files."
-msgstr ""
+msgstr "Свързване на получените файлове чрез използване на „segment linking“."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1810
 #, no-c-format
@@ -13427,7 +13438,7 @@ msgstr "Използвай това само с цел тестване."
 #: src/mkvtoolnix-gui/merge/output.cpp:173
 #, no-c-format
 msgid "Useful e.g. when you want exactly two files."
-msgstr ""
+msgstr "Полезно, ако например искаш точно два файла."
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:678
 #, no-c-format
@@ -13513,7 +13524,7 @@ msgstr "Променливи за всички типове задачи"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:246
 #, no-c-format
 msgid "Variables for multiplex jobs"
-msgstr "Променливи за всички мултиплекс задачи"
+msgstr "Променливи само за мултиплекс задачи"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:118
 #, no-c-format
@@ -14254,12 +14265,12 @@ msgstr "Първо трябва да зададеш име на целевия �
 #: src/mkvtoolnix-gui/merge/output.cpp:256
 #, no-c-format
 msgid "You may omit the number of hours 'HH' and the number of nanoseconds 'nnnnnnnnn'."
-msgstr ""
+msgstr "Може да пропуснете числото с часовете „ЧЧ“ и броя на наносекундите 'ннннннннн'."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:269
 #, no-c-format
 msgid "You may omit the number of hours 'HH'."
-msgstr ""
+msgstr "Може да пропуснете числото с часовете „ЧЧ“."
 
 #: src/common/compression/zlib.cpp:52
 #: src/common/compression/zlib.cpp:90
