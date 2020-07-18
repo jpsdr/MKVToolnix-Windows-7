@@ -128,8 +128,10 @@ xtr_ssa_c::create_file(xtr_base_c *master,
     else
       sconv += "\n[Events]\nFormat: Layer, Start, End, Style, Actor, MarginL, MarginR, MarginV, Effect, Text\n";
 
-  } else if (sconv.empty() || (sconv[sconv.length() - 1] != '\n'))
-    sconv += "\n";
+  }
+
+  mtx::string::strip_back(sconv, true);
+  sconv += "\n";
 
   // Keep the Format: line so that the extracted file has the
   // correct field order.

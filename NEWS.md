@@ -15,6 +15,8 @@
 * Windows installer: the images are shown again. Fixes #2868.
 * mkvextract: USF subtitles: start & end timestamps were too high by a factor
   of 1.000.000. Fixes #2875.
+* mkvextract: SSA/ASS extraction: mkvextract is no longer inserting empty
+  lines before the `Dialogue:` lines. Fixes #2876.
 
 
 # Version 48.0.0 "Fortress Around Your Heart" 2020-06-27
