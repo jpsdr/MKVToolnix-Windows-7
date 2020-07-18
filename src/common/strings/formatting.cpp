@@ -327,4 +327,27 @@ to_lower_ascii(std::string const &src) {
   return to_upper_or_lower_ascii(src, true);
 }
 
+std::vector<std::string>
+to_lower_upper_ascii(std::vector<std::string> const &elements,
+                     std::function<std::string(std::string const &)> converter) {
+  std::vector<std::string> result;
+
+  result.reserve(elements.size());
+
+  for (auto const &element : elements)
+    result.emplace_back(converter(element));
+
+  return result;
+}
+
+std::vector<std::string>
+to_lower_ascii(std::vector<std::string> const &src) {
+  return to_lower_upper_ascii(src, [](auto const &elt) { return to_lower_ascii(elt); });
+}
+
+std::vector<std::string>
+to_upper_ascii(std::vector<std::string> const &src) {
+  return to_lower_upper_ascii(src, [](auto const &elt) { return to_upper_ascii(elt); });
+}
+
 } // mtx::string

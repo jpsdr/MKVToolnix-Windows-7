@@ -102,6 +102,9 @@ join(IteratorT first,
 std::string to_lower_ascii(std::string const &src);
 std::string to_upper_ascii(std::string const &src);
 
+std::vector<std::string> to_lower_ascii(std::vector<std::string> const &src);
+std::vector<std::string> to_upper_ascii(std::vector<std::string> const &src);
+
 } // mtx::string
 
 template<typename T>
