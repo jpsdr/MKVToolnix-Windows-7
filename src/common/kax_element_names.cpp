@@ -204,6 +204,7 @@ kax_element_names_c::init() {
   ADD(KaxTrackFlagDefault,             Y("Default track flag"));
   ADD(KaxTrackFlagForced,              Y("Forced track flag"));
   ADD(KaxTrackLanguage,                Y("Language"));
+  ADD(KaxLanguageIETF,                 Y("Language (IETF BCP 47)"));
   ADD(KaxTrackTimecodeScale,           Y("Timestamp scale"));
   ADD(KaxMaxBlockAdditionID,           Y("Maximum block additional ID"));
   ADD(KaxContentEncodings,             Y("Content encodings"));
@@ -289,7 +290,7 @@ kax_element_names_c::init() {
   ADD(KaxChapterDisplay,               Y("Chapter display"));
   ADD(KaxChapterString,                Y("Chapter string"));
   ADD(KaxChapterLanguage,              Y("Chapter language"));
-  ADD(KaxChapLanguageIETF,             Y("Chapter language (IETF)"));
+  ADD(KaxChapLanguageIETF,             Y("Chapter language (IETF BCP 47)"));
   ADD(KaxChapterCountry,               Y("Chapter country"));
   ADD(KaxChapterProcess,               Y("Chapter process"));
   ADD(KaxChapterProcessCodecID,        Y("Chapter process codec ID"));
@@ -312,7 +313,7 @@ kax_element_names_c::init() {
   ADD(KaxTagString,                    Y("String"));
   ADD(KaxTagBinary,                    Y("Binary"));
   ADD(KaxTagLangue,                    Y("Tag language"));
-  ADD(KaxTagLanguageIETF,              Y("Tag language (IETF)"));
+  ADD(KaxTagLanguageIETF,              Y("Tag language (IETF BCP 47)"));
   ADD(KaxTagDefault,                   Y("Default language"));
 }
 

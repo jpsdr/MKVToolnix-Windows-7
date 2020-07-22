@@ -618,6 +618,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   POST(KaxVideoPixelCropRight,     [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop right: {0}"), static_cast<KaxVideoPixelCropRight &>(e).GetValue())); });
   POST(KaxVideoPixelCropBottom,    [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop bottom: {0}"), static_cast<KaxVideoPixelCropBottom &>(e).GetValue())); });
   POST(KaxTrackLanguage,           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("language: {0}"), static_cast<KaxTrackLanguage &>(e).GetValue())); });
+  POST(KaxLanguageIETF,            [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("language (IETF BCP 47): {0}"), static_cast<KaxLanguageIETF &>(e).GetValue())); });
   POST(KaxBlockDuration,           [p](EbmlElement &e) { p->m_block_duration = static_cast<double>(static_cast<KaxBlockDuration &>(e).GetValue()) * p->m_ts_scale; });
   POST(KaxReferenceBlock,          [p](EbmlElement &)  { ++p->m_num_references; });
 

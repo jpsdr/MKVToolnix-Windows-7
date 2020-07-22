@@ -17,6 +17,8 @@
 * mkvmerge: IETF BCP 47/RFC 5646 language tags: if present the "LanguageIETF"
   track header element will be reported as the `language_ietf` property in
   JSON identification mode. Part of the implementation of #2419.
+* mkvinfo: IETF BCP 47/RFC 5646 language tags: added support for the
+  "LanguageIETF" track header element. Part of the implementation of #2419.
 
 ## Bug fixes
 
