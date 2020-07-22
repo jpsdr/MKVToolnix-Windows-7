@@ -658,8 +658,12 @@ generic_packetizer_c::set_language(mtx::bcp47::language_c const &language) {
 
   m_ti.m_language = language;
 
-  if (m_track_entry && language.has_valid_iso639_code())
+  if (!m_track_entry || !language.is_valid())
+    return;
+
+  if (language.has_valid_iso639_code())
     GetChild<KaxTrackLanguage>(m_track_entry).SetValue(language.get_iso639_2_code());
+  GetChild<KaxLanguageIETF>(m_track_entry).SetValue(language.format());
 }
 
 void
@@ -1039,8 +1043,10 @@ generic_packetizer_c::set_headers() {
   else if (g_default_tracks[idx] == m_hserialno)
     g_default_tracks[idx] = 0;
 
-  auto code = m_ti.m_language.has_valid_iso639_code() ? m_ti.m_language.get_iso639_2_code() : g_default_language.get_iso639_2_code();
-  GetChild<KaxTrackLanguage>(m_track_entry).SetValue(code);
+  auto iso639_2_code = m_ti.m_language.has_valid_iso639_code() ? m_ti.m_language.get_iso639_2_code() : g_default_language.get_iso639_2_code();
+  auto language      = m_ti.m_language.is_valid()              ? m_ti.m_language                     : g_default_language;
+  GetChild<KaxTrackLanguage>(m_track_entry).SetValue(iso639_2_code);
+  GetChild<KaxLanguageIETF>(m_track_entry).SetValue(language.format());
 
   if (!m_ti.m_track_name.empty())
     GetChild<KaxTrackName>(m_track_entry).SetValueUTF8(m_ti.m_track_name);

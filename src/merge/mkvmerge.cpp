@@ -241,8 +241,8 @@ set_usage() {
   usage_text += Y("  --cues <TID:none|iframes|all>\n"
                   "                           Create cue (index) entries for this track:\n"
                   "                           None at all, only for I frames, for all.\n");
-  usage_text += Y("  --language <TID:lang>    Sets the language for the track (ISO 639-2\n"
-                  "                           code, see --list-languages).\n");
+  usage_text += Y("  --language <TID:lang>    Sets the language for the track (IETF BCP 47/\n"
+                  "                           RFC 5646 language tag).\n");
   usage_text += Y("  --aac-is-sbr <TID[:0|1]> The track with the ID is HE-AAC/AAC+/SBR-AAC\n"
                   "                           or not. The value ':1' can be omitted.\n");
   usage_text += Y("  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
@@ -547,8 +547,10 @@ parse_language(std::string const &arg,
                std::string const &option) {
   auto language = mtx::bcp47::language_c::parse(arg);
 
-  if (!language.has_valid_iso639_code())
-    mxerror(fmt::format(Y("Invalid track ID or language code in '{0}'.\n"), option));
+  if (!language.is_valid())
+    mxerror(fmt::format(Y("'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. "
+                          "Additional information from the parser: {2}\n"),
+                        arg, option, language.get_error()));
 
   return language;
 }

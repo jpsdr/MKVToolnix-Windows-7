@@ -19,6 +19,12 @@
   JSON identification mode. Part of the implementation of #2419.
 * mkvinfo: IETF BCP 47/RFC 5646 language tags: added support for the
   "LanguageIETF" track header element. Part of the implementation of #2419.
+* mkvmerge: IETF BCP 47/RFC 5646 language tags: mkvmerge will now accept full
+  BCP 47 language tags for all options taking a language. mkvmerge will always
+  write "LanguageIETF" track header elements. If the language tag contains a
+  valid ISO 639-2 language code it will also set the legacy "Language" track
+  header element to the included ISO 639-2 code. Part of the implementation of
+  #2419.
 
 ## Bug fixes
 

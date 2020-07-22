@@ -89,7 +89,7 @@ struct kax_track_t {
   std::vector<memory_cptr> headers;
 
   bool default_track, forced_track, enabled_track;
-  mtx::bcp47::language_c language, language_ietf;
+  mtx::bcp47::language_c language, language_ietf, effective_language;
 
   int64_t units_processed;
 

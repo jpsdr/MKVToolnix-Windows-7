@@ -1344,6 +1344,8 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     if (!track->language.is_valid())
       track->language = mtx::bcp47::language_c::parse("und");
 
+    track->effective_language = track->language_ietf.is_valid() ? track->language_ietf : track->language;
+
     if (0 != track->default_duration)
       track->v_frate = 1000000000.0 / track->default_duration;
 
@@ -2083,7 +2085,7 @@ void
 kax_reader_c::create_packetizer(int64_t tid) {
   kax_track_t *t = m_tracks[tid].get();
 
-  if ((-1 != t->ptzr) || !t->ok || !demuxing_requested(t->type, t->tnum, t->language))
+  if ((-1 != t->ptzr) || !t->ok || !demuxing_requested(t->type, t->tnum, t->effective_language))
     return;
 
   track_info_c nti(m_ti);
@@ -2091,7 +2093,7 @@ kax_reader_c::create_packetizer(int64_t tid) {
   nti.m_id           = t->tnum; // ID for this track.
 
   if (!nti.m_language.is_valid())
-    nti.m_language   = t->language;
+    nti.m_language   = t->effective_language;
   if (nti.m_track_name == "")
     nti.m_track_name = t->track_name;
   if (t->tags && demuxing_requested('T', t->tnum))
