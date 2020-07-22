@@ -225,7 +225,10 @@ parse_simple(mm_text_io_c *in,
         auto &display = GetChild<KaxChapterDisplay>(*atom);
 
         GetChild<KaxChapterString>(display).SetValueUTF8(do_convert ? cc_utf8->utf8(name) : name);
-        GetChild<KaxChapterLanguage>(display).SetValue(use_language.get_iso639_2_code_or("und"));
+        if (use_language.is_valid()) {
+          GetChild<KaxChapterLanguage>(display).SetValue(use_language.get_iso639_2_code_or("und"));
+          GetChild<KaxChapLanguageIETF>(display).SetValue(use_language.format());
+        }
 
         if (!g_default_country.empty())
           GetChild<KaxChapterCountry>(display).SetValue(g_default_country);

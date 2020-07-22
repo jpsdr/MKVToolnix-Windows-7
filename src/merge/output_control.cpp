@@ -1485,12 +1485,20 @@ prepare_additional_chapter_atoms_for_rendering() {
   if (!FindChild<KaxEditionUID>(edition))
     GetChild<KaxEditionUID>(edition).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
 
-  for (auto const &additional_chapter : s_additional_chapter_atoms) {
+  for (auto const &[ch_timestamp, ch_name, ch_language] : s_additional_chapter_atoms) {
     auto atom = cons<KaxChapterAtom>(new KaxChapterUID,       create_unique_number(UNIQUE_CHAPTER_IDS),
-                                     new KaxChapterTimeStart, (std::get<0>(additional_chapter) - offset).to_ns());
-    if (!std::get<1>(additional_chapter).empty())
-      atom->PushElement(*cons<KaxChapterDisplay>(new KaxChapterString,   std::get<1>(additional_chapter),
-                                                 new KaxChapterLanguage, std::get<2>(additional_chapter).get_iso639_2_code()));
+                                     new KaxChapterTimeStart, (ch_timestamp - offset).to_ns());
+
+    if (!ch_name.empty()) {
+      auto &display = GetChild<KaxChapterDisplay>(*atom);
+
+      GetChild<KaxChapterString>(display).SetValueUTF8(ch_name);
+
+      if (ch_language.is_valid()) {
+        GetChild<KaxChapterLanguage>(display).SetValue(ch_language.get_iso639_2_code_or("und"));
+        GetChild<KaxChapLanguageIETF>(display).SetValue(ch_language.format());
+      }
+    }
 
     edition.PushElement(*atom);
   }
