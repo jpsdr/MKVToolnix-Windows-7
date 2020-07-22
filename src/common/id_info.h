@@ -41,6 +41,7 @@ char const * const encoding                        = "encoding";                
 char const * const enabled_track                   = "enabled_track";                   // track boolean
 char const * const forced_track                    = "forced_track";                    // track boolean
 char const * const language                        = "language";                        // track ascii-string format:^\w{3}$
+char const * const language_ietf                   = "language_ietf";                   // track ascii-string
 char const * const minimum_timestamp               = "minimum_timestamp";               // track unsigned-integer
 char const * const mpeg4_p10_es_video              = "mpeg4_p10_es_video";              // track boolean
 char const * const mpeg4_p10_video                 = "mpeg4_p10_video";                 // track boolean

@@ -14,6 +14,9 @@
   big performance improvements in all places where regular expressions are
   used for parsing big chunks of text, e.g. in the subtitle parsers. Part of
   the fix of #2899.
+* mkvmerge: IETF BCP 47/RFC 5646 language tags: if present the "LanguageIETF"
+  track header element will be reported as the `language_ietf` property in
+  JSON identification mode. Part of the implementation of #2419.
 
 ## Bug fixes
 

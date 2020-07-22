@@ -1294,6 +1294,7 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     track->codec_name       = to_utf8(FindChildValue<KaxCodecName>(ktentry));
     track->track_name       = to_utf8(FindChildValue<KaxTrackName>(ktentry));
     track->language         = mtx::bcp47::language_c::parse(FindChildValue<KaxTrackLanguage, std::string>(ktentry, "eng"));
+    track->language_ietf    = mtx::bcp47::language_c::parse(FindChildValue<KaxLanguageIETF, std::string>(ktentry, {}));
     track->default_duration = FindChildValue<KaxTrackDefaultDuration>(ktentry, track->default_duration);
     track->default_track    = FindChildValue<KaxTrackFlagDefault, bool>(ktentry, true);
     track->forced_track     = FindChildValue<KaxTrackFlagForced>(ktentry);
@@ -2700,6 +2701,7 @@ kax_reader_c::identify() {
     info.add(mtx::id::codec_delay,          track->codec_delay.to_ns(0));
     info.add(mtx::id::codec_name,           track->codec_name);
     info.add(mtx::id::language,             track->language.get_iso639_2_code());
+    info.add(mtx::id::language_ietf,        track->language_ietf.format());
     info.add(mtx::id::track_name,           track->track_name);
     info.add(mtx::id::stereo_mode,          static_cast<int>(track->v_stereo_mode), static_cast<int>(stereo_mode_c::unspecified));
     info.add(mtx::id::default_duration,     track->default_duration);
