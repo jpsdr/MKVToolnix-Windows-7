@@ -306,25 +306,21 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->cbMAutoClearFileTitle, QY("If this option is enabled, the GUI will always clear the \"file title\" input box whenever the last source file is removed."));
 
   auto widgets = QList<mtx::gui::Util::StringListConfigurationWidget *>{} << ui->lwMPredefinedVideoTrackNames << ui->lwMPredefinedAudioTrackNames << ui->lwMPredefinedSubtitleTrackNames;
-  for (auto const &widget : widgets) {
+  for (auto const &widget : widgets)
     widget->setToolTips(Q("%1 %2 %3")
                         .arg(QY("If you often use the same names for tracks, you can enter them here."))
                         .arg(QY("The names will be available for easy selection in both the multiplexer and the header editor."))
                         .arg(QY("You can still enter track names not present in this list manually in both tools.")));
-    widget->setAddItemDialogTexts(QY("Enter predefined track name"), QY("Please enter the new predefined track name."));
-  }
 
   ui->lwMPredefinedSplitSizes->setToolTips(Q("%1 %2 %3")
                                            .arg(QY("If you often use the same values when splitting by size, you can enter them here."))
                                            .arg(QY("The values will be available for easy selection in the multiplexer."))
                                            .arg(QY("You can still enter values not present in this list manually in the multiplexer.")));
-  ui->lwMPredefinedSplitSizes->setAddItemDialogTexts(QY("Enter predefined split size"), QY("Please enter the new predefined split size."));
 
   ui->lwMPredefinedSplitDurations->setToolTips(Q("%1 %2 %3")
                                                .arg(QY("If you often use the same values when splitting by duration, you can enter them here."))
                                                .arg(QY("The values will be available for easy selection in the multiplexer."))
                                                .arg(QY("You can still enter values not present in this list manually in the multiplexer.")));
-  ui->lwMPredefinedSplitDurations->setAddItemDialogTexts(QY("Enter predefined split duration"), QY("Please enter the new predefined split duration."));
 
   Util::setToolTip(ui->cbMSetAudioDelayFromFileName,
                    Q("%1 %2")
@@ -719,6 +715,13 @@ PreferencesDialog::setupMergePredefinedItems() {
   ui->lwMPredefinedSubtitleTrackNames->setItems(cfg.m_mergePredefinedSubtitleTrackNames);
   ui->lwMPredefinedSplitSizes->setItems(cfg.m_mergePredefinedSplitSizes);
   ui->lwMPredefinedSplitDurations->setItems(cfg.m_mergePredefinedSplitDurations);
+
+  auto widgets = QList<mtx::gui::Util::StringListConfigurationWidget *>{} << ui->lwMPredefinedVideoTrackNames << ui->lwMPredefinedAudioTrackNames << ui->lwMPredefinedSubtitleTrackNames;
+  for (auto const &widget : widgets)
+    widget->setAddItemDialogTexts(QY("Enter predefined track name"), QY("Please enter the new predefined track name."));
+
+  ui->lwMPredefinedSplitSizes->setAddItemDialogTexts(QY("Enter predefined split size"), QY("Please enter the new predefined split size."));
+  ui->lwMPredefinedSplitDurations->setAddItemDialogTexts(QY("Enter predefined split duration"), QY("Please enter the new predefined split duration."));
 }
 
 void

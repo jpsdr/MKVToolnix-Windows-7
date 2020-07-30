@@ -18,6 +18,9 @@
 * mkvextract: SSA/ASS extraction: mkvextract is no longer inserting empty
   lines before the `Dialogue:` lines. Fixes #2876.
 * configure: fixed detection of QtDBus. Fixes #2886.
+* MKVToolNix GUI: preferences: when tooltips were disabled the dialogs for
+  adding new entries to the various "predefined values" lists were missing
+  their texts.
 
 
 # Version 48.0.0 "Fortress Around Your Heart" 2020-06-27
