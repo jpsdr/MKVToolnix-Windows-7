@@ -95,6 +95,7 @@ protected:
   void setupProcessPriority();
   void setupPlaylistScanningPolicy();
   void setupOutputFileNamePolicy();
+  void setupRecentDestinationDirectoryList();
   void setupTrackPropertiesLayout();
   void setupEnableMuxingTracksByType();
   void setupEnableMuxingTracksByLanguage();

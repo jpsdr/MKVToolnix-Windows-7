@@ -1205,17 +1205,16 @@
          </widget>
         </item>
         <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+         <widget class="QGroupBox" name="groupBox_22">
+          <property name="title">
+           <string>Recent destination directories</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>141</height>
-           </size>
-          </property>
-         </spacer>
+          <layout class="QVBoxLayout" name="verticalLayout_42">
+           <item>
+            <widget class="mtx::gui::Util::StringListConfigurationWidget" name="lwMRecentDestinationDirectories" native="true"/>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -2199,6 +2198,7 @@
   <tabstop>pbMBrowseAutoSetFixedDirectory</tabstop>
   <tabstop>cbMUniqueOutputFileNames</tabstop>
   <tabstop>cbMAutoClearOutputFileName</tabstop>
+  <tabstop>lwMRecentDestinationDirectories</tabstop>
   <tabstop>tbMEnableMuxingTracksByType</tabstop>
   <tabstop>cbMEnableMuxingTracksByLanguage</tabstop>
   <tabstop>cbMEnableMuxingAllVideoTracks</tabstop>

@@ -19,6 +19,12 @@ class StringListConfigurationWidgetPrivate;
 class StringListConfigurationWidget : public QWidget {
   Q_OBJECT
 
+public:
+  enum class ItemType {
+    String,
+    Directory,
+  };
+
 protected:
   MTX_DECLARE_PRIVATE(StringListConfigurationWidgetPrivate)
 
@@ -34,6 +40,8 @@ public:
   void setToolTips(QString const &items, QString const &add = {}, QString const &remove = {});
   void setAddItemDialogTexts(QString const &title, QString const &text);
   void setItems(QStringList const &items);
+  void setItemType(ItemType itemType);
+  void setMaximumNumItems(unsigned int maximumNumItems);
 
   QStringList items() const;
 

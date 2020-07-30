@@ -4,6 +4,9 @@
 
 * MKVToolNix GUI: preferences: the values in the various "predefined values"
   lists can now be re-ordered freely by dragging & dropping.
+* MKVToolNix GUI: multiplexer: the list of recent directories can now be
+  edited in the preferences → "Multiplexer" → "Destination file
+  name". Implements #2861.
 
 ## Bug fixes
 

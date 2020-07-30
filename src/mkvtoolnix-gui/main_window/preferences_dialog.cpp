@@ -101,6 +101,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupProcessPriority();
   setupPlaylistScanningPolicy();
   setupOutputFileNamePolicy();
+  setupRecentDestinationDirectoryList();
   setupEnableMuxingTracksByType();
   setupEnableMuxingTracksByLanguage();
   setupMergeAddingAppendingFilesPolicy();
@@ -651,6 +652,14 @@ PreferencesDialog::setupOutputFileNamePolicy() {
 }
 
 void
+PreferencesDialog::setupRecentDestinationDirectoryList() {
+  ui->lwMRecentDestinationDirectories->setItems(m_cfg.m_mergeLastOutputDirs.items());
+  ui->lwMRecentDestinationDirectories->setMaximumNumItems(m_cfg.m_mergeLastOutputDirs.maximumNumItems());
+  ui->lwMRecentDestinationDirectories->setAddItemDialogTexts(QY("Select a directory"), {});
+  ui->lwMRecentDestinationDirectories->setItemType(Util::StringListConfigurationWidget::ItemType::Directory);
+}
+
+void
 PreferencesDialog::setupEnableMuxingTracksByType() {
   auto allTypes      = Util::SideBySideMultiSelect::ItemList{};
   auto selectedTypes = QStringList{};
@@ -909,6 +918,7 @@ PreferencesDialog::save() {
 
   m_cfg.m_mergeLastFixedOutputDirs.add(QDir::toNativeSeparators(m_cfg.m_fixedOutputDir.path()));
   m_cfg.m_mergeLastRelativeOutputDirs.add(QDir::toNativeSeparators(m_cfg.m_relativeOutputDir.path()));
+  m_cfg.m_mergeLastOutputDirs.setItems(ui->lwMRecentDestinationDirectories->items());
 
   m_cfg.m_enableMuxingTracksByLanguage                  = ui->cbMEnableMuxingTracksByLanguage->isChecked();
   m_cfg.m_enableMuxingAllVideoTracks                    = ui->cbMEnableMuxingAllVideoTracks->isChecked();

@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QDir>
 #include <QInputDialog>
 #include <QListWidget>
 #include <QPushButton>
@@ -7,6 +8,7 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/util/string_list_configuration_widget.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/string_list_configuration_widget.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
@@ -19,6 +21,8 @@ class StringListConfigurationWidgetPrivate {
 
   std::unique_ptr<Ui::StringListConfigurationWidget> ui{new Ui::StringListConfigurationWidget};
   QString addItemDialogTitle, addItemDialogText;
+  StringListConfigurationWidget::ItemType itemType{StringListConfigurationWidget::ItemType::String};
+  std::optional<unsigned int> maximumNumItems;
 };
 
 StringListConfigurationWidget::StringListConfigurationWidget(QWidget *parent)
@@ -63,6 +67,12 @@ StringListConfigurationWidget::setAddItemDialogTexts(QString const &title,
 }
 
 void
+StringListConfigurationWidget::setMaximumNumItems(unsigned int maximumNumItems) {
+  p_func()->maximumNumItems = maximumNumItems;
+  enableControls();
+}
+
+void
 StringListConfigurationWidget::setupConnections() {
   auto p = p_func();
 
@@ -75,6 +85,7 @@ void
 StringListConfigurationWidget::enableControls() {
   auto p = p_func();
 
+  p->ui->pbAddItem->setEnabled(!p->maximumNumItems || (static_cast<unsigned int>(p->ui->lwItems->count()) < *p->maximumNumItems));
   p->ui->pbRemoveItem->setEnabled(!p->ui->lwItems->selectedItems().isEmpty());
 }
 
@@ -82,11 +93,26 @@ void
 StringListConfigurationWidget::addNewItem() {
   auto p = p_func();
 
-  auto newName = QInputDialog::getText(this, p->addItemDialogTitle, p->addItemDialogText);
-  if (newName.isEmpty())
+  QString newValue;
+
+  if (p->itemType == ItemType::String)
+    newValue = QInputDialog::getText(this, p->addItemDialogTitle, p->addItemDialogText);
+
+  else {
+    newValue = Util::getExistingDirectory(this, p->addItemDialogTitle);
+
+    for (auto row = 0, numRows = p->ui->lwItems->count(); row < numRows; ++row) {
+      auto value = p->ui->lwItems->item(row)->text();
+      if (value == newValue)
+        return;
+    }
+  }
+
+  if (newValue.isEmpty())
     return;
 
-  addItem(newName);
+  addItem(newValue);
+  enableControls();
 }
 
 void
@@ -98,15 +124,18 @@ void
 StringListConfigurationWidget::removeSelectedItems() {
   for (auto const &item : p_func()->ui->lwItems->selectedItems())
     delete item;
+
+  enableControls();
 }
 
 void
 StringListConfigurationWidget::setItems(QStringList const &items) {
-  auto p = p_func();
+  auto p                 = p_func();
+  auto const isDirectory = p->itemType == ItemType::Directory;
 
   p->ui->lwItems->clear();
   for (auto const &item : items)
-    addItem(item);
+    addItem(isDirectory ? QDir::toNativeSeparators(item) : item);
 }
 
 QStringList
@@ -122,6 +151,11 @@ StringListConfigurationWidget::items()
   }
 
   return list;
+}
+
+void
+StringListConfigurationWidget::setItemType(ItemType itemType) {
+  p_func()->itemType = itemType;
 }
 
 }

@@ -65,4 +65,10 @@ RecentlyUsedStrings::isEmpty()
   return p_func()->m_items.isEmpty();
 }
 
+int
+RecentlyUsedStrings::maximumNumItems()
+  const {
+  return p_func()->m_numItems;
+}
+
 }
