@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: preferences: the values in the various "predefined values"
+  lists can now be re-ordered freely by dragging & dropping.
+
 ## Bug fixes
 
 * mkvmerge: Matroska reader: when reading tracks (e.g. a subtitle track) from

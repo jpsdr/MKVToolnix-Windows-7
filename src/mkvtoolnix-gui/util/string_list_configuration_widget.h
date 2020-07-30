@@ -45,8 +45,6 @@ public Q_SLOTS:
   void addNewItem();
   void removeSelectedItems();
 
-  void sortAfterItemChanged(QListWidgetItem *item);
-
 protected:
   void setupConnections();
 };

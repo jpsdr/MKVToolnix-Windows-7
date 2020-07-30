@@ -12,54 +12,6 @@
 
 namespace mtx::gui::Util {
 
-namespace {
-
-class Item: public QListWidgetItem {
-public:
-  std::pair<uint64_t, QString> m_values;
-
-public:
-  explicit Item(QString const &name);
-
-  virtual bool operator <(QListWidgetItem const &cmp) const;
-  void extractSortValues();
-};
-
-Item::Item(QString const &name)
-  : QListWidgetItem{name}
-{
-  extractSortValues();
-  setFlags(flags() | Qt::ItemIsEditable);
-}
-
-void
-Item::extractSortValues() {
-  auto name = text();
-
-  QRegularExpressionMatch match;
-
-  if (name.contains(QRegularExpression{Q("^([0-9]+)(.*)")}, &match)) {
-    m_values.first  = match.captured(1).toULongLong();
-    m_values.second = match.captured(2);
-
-  } else {
-    m_values.first  = std::numeric_limits<uint64_t>::max();
-    m_values.second = name;
-  }
-}
-
-bool
-Item::operator <(QListWidgetItem const &cmp)
-  const {
-  auto &otherItem = static_cast<Item const &>(cmp);
-
-  return m_values.first < otherItem.m_values.first ? true
-       : m_values.first > otherItem.m_values.first ? false
-       :                                             m_values.second.compare(otherItem.m_values.second, Qt::CaseInsensitive) < 0;
-}
-
-}
-
 // ------------------------------------------------------------
 
 class StringListConfigurationWidgetPrivate {
@@ -115,7 +67,6 @@ StringListConfigurationWidget::setupConnections() {
   auto p = p_func();
 
   connect(p->ui->lwItems,      &QListWidget::itemSelectionChanged, this, &StringListConfigurationWidget::enableControls);
-  connect(p->ui->lwItems,      &QListWidget::itemChanged,          this, &StringListConfigurationWidget::sortAfterItemChanged);
   connect(p->ui->pbAddItem,    &QPushButton::clicked,              this, &StringListConfigurationWidget::addNewItem);
   connect(p->ui->pbRemoveItem, &QPushButton::clicked,              this, &StringListConfigurationWidget::removeSelectedItems);
 }
@@ -140,7 +91,7 @@ StringListConfigurationWidget::addNewItem() {
 
 void
 StringListConfigurationWidget::addItem(QString const &name) {
-  p_func()->ui->lwItems->addItem(new Item{name});
+  p_func()->ui->lwItems->addItem(new QListWidgetItem{name});
 }
 
 void
@@ -171,16 +122,6 @@ StringListConfigurationWidget::items()
   }
 
   return list;
-}
-
-void
-StringListConfigurationWidget::sortAfterItemChanged(QListWidgetItem *item) {
-  auto cfgItem = dynamic_cast<Item *>(item);
-  if (!cfgItem)
-    return;
-
-  cfgItem->extractSortValues();
-  p_func()->ui->lwItems->sortItems();
 }
 
 }
