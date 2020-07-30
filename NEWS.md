@@ -17,6 +17,7 @@
   of 1.000.000. Fixes #2875.
 * mkvextract: SSA/ASS extraction: mkvextract is no longer inserting empty
   lines before the `Dialogue:` lines. Fixes #2876.
+* configure: fixed detection of QtDBus. Fixes #2886.
 
 
 # Version 48.0.0 "Fortress Around Your Heart" 2020-06-27

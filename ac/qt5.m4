@@ -170,8 +170,11 @@ if test x"$enable_qt" = "xyes" -a \
     fi
 
     if test x"$MINGW" != x1 && ! echo "$host" | grep -q -i apple ; then
-      PKG_CHECK_EXISTS([Qt5DBus],[with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5DBus"])
-      AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
+      PKG_CHECK_EXISTS([Qt5DBus],[dbus_found=yes],[dbus_found=no])
+      if test x"$dbus_found" = xyes; then
+        with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5DBus"
+        AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
+      fi
     fi
 
     with_qt_pkg_config_modules="`echo "$with_qt_pkg_config_modules" | sed -e 's/,/ /g'`"
