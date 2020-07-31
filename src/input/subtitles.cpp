@@ -121,7 +121,7 @@ srt_parser_c::parse() {
 
       if (!subtitles.empty())
         subtitles += "\n";
-      subtitles += "\n";
+
       continue;
     }
 

@@ -29,6 +29,7 @@
 * MKVToolNix GUI: preferences: when tooltips were disabled the dialogs for
   adding new entries to the various "predefined values" lists were missing
   their texts.
+* mkvmerge: SRT reader: empty lines inside entries were doubled. Fixes #2888.
 
 
 # Version 48.0.0 "Fortress Around Your Heart" 2020-06-27
