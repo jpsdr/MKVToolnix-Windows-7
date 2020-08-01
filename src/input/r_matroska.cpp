@@ -1315,6 +1315,7 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
 
       block_addition_mapping_t mapping;
 
+      mapping.id_name       = FindChildValue<KaxBlockAddIDName>(kmapping);
       mapping.id_type       = FindOptionalChildValue<KaxBlockAddIDType>(kmapping);
       mapping.id_value      = FindOptionalChildValue<KaxBlockAddIDValue>(kmapping);
       mapping.id_extra_data = FindChildValue<KaxBlockAddIDExtraData>(kmapping);

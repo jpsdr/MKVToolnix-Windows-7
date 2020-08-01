@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 struct block_addition_mapping_t {
+  std::string id_name;
   std::optional<uint64_t> id_type, id_value;
   memory_cptr id_extra_data;
 

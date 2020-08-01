@@ -1297,6 +1297,9 @@ generic_packetizer_c::apply_block_addition_mappings() {
 
     auto &kmapping = AddEmptyChild<KaxBlockAdditionMapping>(m_track_entry);
 
+    if (!mapping.id_name.empty())
+      GetChild<KaxBlockAddIDName>(kmapping).SetValue(mapping.id_name);
+
     if (mapping.id_type)
       GetChild<KaxBlockAddIDType>(kmapping).SetValue(*mapping.id_type);
 

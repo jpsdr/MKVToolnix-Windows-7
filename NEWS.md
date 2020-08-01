@@ -11,8 +11,9 @@
   `BlockAdditionMapping`, `BlockAddIDName`, BlockAddIDType`, `BlockAddIDValue`
   and `BlockAddIDExtraData`. Part of the implementation of #2887.
 * mkvmerge: added support for copying the new track header elements
-  `BlockAddIDType`, `BlockAddIDValue` and `BlockAddIDExtraData` from Matroska
-  files if they exist. Part of the implementation of #2887.
+  `BlockAddIDName`, `BlockAddIDType`, `BlockAddIDValue` and
+  `BlockAddIDExtraData` from Matroska files if they exist. Part of the
+  implementation of #2887.
 
 ## Bug fixes
 
