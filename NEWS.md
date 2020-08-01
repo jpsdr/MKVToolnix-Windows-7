@@ -30,6 +30,9 @@
   adding new entries to the various "predefined values" lists were missing
   their texts.
 * mkvmerge: SRT reader: empty lines inside entries were doubled. Fixes #2888.
+* mkvmerge: subtitles: when calculating the rounded duration of each entry the
+  error from rounding the corresponding timestamp will be taken into
+  account. Fixes #2890.
 
 
 # Version 48.0.0 "Fortress Around Your Heart" 2020-06-27

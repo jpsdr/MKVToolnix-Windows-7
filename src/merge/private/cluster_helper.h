@@ -23,6 +23,7 @@ public:
   generic_packetizer_c *m_source;
   bool m_more_data, m_duration_mandatory, m_has_discard_padding;
   int64_t m_expected_next_timestamp{-1};
+  std::optional<int64_t> m_first_timestamp_rounding_error;
   static debugging_option_c ms_gap_detection;
 
   render_groups_c(generic_packetizer_c *source)

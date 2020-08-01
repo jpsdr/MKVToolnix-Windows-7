@@ -324,8 +324,10 @@ cluster_helper_c::set_duration(render_groups_c *rg) {
   if (rg->m_duration_mandatory) {
     if (   (0 == block_duration)
         || (   (0 < block_duration)
-            && (ROUND_TIMESTAMP_SCALE(block_duration) != ROUND_TIMESTAMP_SCALE(static_cast<int64_t>(rg->m_durations.size()) * def_duration))))
-      group->set_block_duration(ROUND_TIMESTAMP_SCALE(block_duration));
+            && (ROUND_TIMESTAMP_SCALE(block_duration) != ROUND_TIMESTAMP_SCALE(static_cast<int64_t>(rg->m_durations.size()) * def_duration)))) {
+      auto rounding_error = rg->m_source->get_track_type() == track_subtitle ? rg->m_first_timestamp_rounding_error.value_or(0) : 0;
+      group->set_block_duration(ROUND_TIMESTAMP_SCALE(block_duration + rounding_error));
+    }
 
   } else if (   (   g_use_durations
                  || (0 < def_duration))
@@ -459,6 +461,7 @@ cluster_helper_c::render() {
       set_duration(render_group);
       render_group->m_durations.clear();
       render_group->m_duration_mandatory = false;
+      render_group->m_first_timestamp_rounding_error.reset();
 
       BlockBlobType this_block_blob_type
         = !use_simpleblock                         ? BLOCK_BLOB_NO_SIMPLE
@@ -475,6 +478,9 @@ cluster_helper_c::render() {
 
       added_to_cues = false;
     }
+
+    if (!render_group->m_first_timestamp_rounding_error)
+      render_group->m_first_timestamp_rounding_error = pack->unmodified_assigned_timestamp - pack->assigned_timestamp;
 
     for (auto const &extension : pack->extensions)
       if (packet_extension_c::BEFORE_ADDING_TO_CLUSTER_CB == extension->get_type())
