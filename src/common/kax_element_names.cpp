@@ -177,6 +177,7 @@ kax_element_names_c::init() {
 
   ADD(KaxBlockAdditionMapping,         Y("Block addition mapping"));
   ADD(KaxBlockAddIDExtraData,          Y("Block addition ID extra data"));
+  ADD(KaxBlockAddIDName,               Y("Block addition ID name"));
   ADD(KaxBlockAddIDType,               Y("Block addition ID type"));
   ADD(KaxBlockAddIDValue,              Y("Block addition ID value"));
 

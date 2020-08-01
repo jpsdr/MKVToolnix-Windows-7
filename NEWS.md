@@ -8,8 +8,8 @@
   edited in the preferences → "Multiplexer" → "Destination file
   name". Implements #2861.
 * mkvinfo: added support for the new track header elements
-  `BlockAdditionMapping`, `BlockAddIDType`, `BlockAddIDValue` and
-  `BlockAddIDExtraData`. Part of the implementation of #2887.
+  `BlockAdditionMapping`, `BlockAddIDName`, BlockAddIDType`, `BlockAddIDValue`
+  and `BlockAddIDExtraData`. Part of the implementation of #2887.
 * mkvmerge: added support for copying the new track header elements
   `BlockAddIDType`, `BlockAddIDValue` and `BlockAddIDExtraData` from Matroska
   files if they exist. Part of the implementation of #2887.
