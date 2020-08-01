@@ -460,7 +460,7 @@ kax_info_c::format_binary(EbmlBinary &bin,
   auto result  = fmt::format(Y("length {0}, data: {1}"), bin.GetSize(), mtx::string::to_hex(b, len));
 
   if (len < bin.GetSize())
-    result += "...";
+    result += u8"…";
 
   if (p_func()->m_calc_checksums)
     result += fmt::format(Y(" (adler: 0x{0:08x})"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, bin.GetBuffer(), bin.GetSize()));
