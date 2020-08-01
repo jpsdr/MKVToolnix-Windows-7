@@ -19,6 +19,6 @@ struct block_addition_mapping_t {
   memory_cptr id_extra_data;
 
   bool is_valid() const {
-    return id_type || id_value || (id_extra_data && id_extra_data->get_size());
+    return !!id_type;
   }
 };
