@@ -175,6 +175,11 @@ kax_element_names_c::init() {
   ADD(KaxContentSigKeyID,              Y("Signature key ID"));
   ADD(KaxContentSignature,             Y("Signature"));
 
+  ADD(KaxBlockAdditionMapping,         Y("Block addition mapping"));
+  ADD(KaxBlockAddIDExtraData,          Y("Block addition ID extra data"));
+  ADD(KaxBlockAddIDType,               Y("Block addition ID type"));
+  ADD(KaxBlockAddIDValue,              Y("Block addition ID value"));
+
   ADD(KaxTracks,                       Y("Tracks"));
   ADD(KaxTrackEntry,                   Y("Track"));
   ADD(KaxTrackNumber,                  Y("Track number"));

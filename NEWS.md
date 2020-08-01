@@ -7,6 +7,9 @@
 * MKVToolNix GUI: multiplexer: the list of recent directories can now be
   edited in the preferences → "Multiplexer" → "Destination file
   name". Implements #2861.
+* mkvinfo: added support for the new track header elements
+  `BlockAdditionMapping`, `BlockAddIDType`, `BlockAddIDValue` and
+  `BlockAddIDExtraData`. Part of the implementation of #2887.
 
 ## Bug fixes
 

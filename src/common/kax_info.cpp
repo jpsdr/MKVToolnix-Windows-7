@@ -829,6 +829,13 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        mtx::string::format_timestamp(default_duration),
                        1'000'000'000.0 / static_cast<double>(default_duration));
   });
+
+  FMT(KaxBlockAddIDType, [](auto &e) -> std::string {
+    auto value = static_cast<EbmlUInteger &>(e).GetValue();
+    if (value < std::numeric_limits<uint32_t>::max())
+      return fmt::format("{0} ({1})", value, fourcc_c{static_cast<uint32_t>(value)});
+    return fmt::format("{0}", value);
+  });
 }
 
 #undef FMT
