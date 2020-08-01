@@ -4,7 +4,7 @@
 
    Distributed under the GPL v2
    see the file COPYING for details
-   or visit http://www.gnu.org/copyleft/gpl.html
+   or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
    class definition for the MPEG 4 part 10 ES video output module
 

@@ -26,7 +26,7 @@ def create_iso639_language_list_file
 
    Distributed under the GPL v2
    see the file COPYING for details
-   or visit http://www.gnu.org/copyleft/gpl.html
+   or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
    ISO 639 language definitions, lookup functions
 

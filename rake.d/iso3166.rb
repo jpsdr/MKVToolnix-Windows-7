@@ -17,7 +17,7 @@ def create_iso3166_country_list_file
 
    Distributed under the GPL v2
    see the file COPYING for details
-   or visit http://www.gnu.org/copyleft/gpl.html
+   or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
    ISO 3166 countries
 

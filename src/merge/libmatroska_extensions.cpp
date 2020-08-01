@@ -4,7 +4,7 @@
 
    Distributed under the GPL v2
    see the file COPYING for details
-   or visit http://www.gnu.org/copyleft/gpl.html
+   or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
    The cluster helper groups frames into blocks groups and those
    into clusters, sets the durations, renders the clusters etc.
