@@ -20,6 +20,7 @@
 #include "common/option_with_source.h"
 #include "common/timestamp.h"
 #include "common/translation.h"
+#include "merge/block_addition_mapping.h"
 #include "merge/file_status.h"
 #include "merge/packet.h"
 #include "merge/timestamp_factory.h"
@@ -85,6 +86,8 @@ protected:
   int m_haudio_channels, m_haudio_bit_depth;
 
   int m_hvideo_interlaced_flag, m_hvideo_pixel_width, m_hvideo_pixel_height, m_hvideo_display_width, m_hvideo_display_height, m_hvideo_display_unit;
+
+  std::vector<block_addition_mapping_t> m_block_addition_mappings;
 
   compression_method_e m_hcompression;
   compressor_ptr m_compressor;
@@ -251,6 +254,8 @@ public:
   virtual void set_video_stereo_mode(stereo_mode_c::mode stereo_mode, option_source_e source);
   virtual void set_video_stereo_mode_impl(libebml::EbmlMaster &video, stereo_mode_c::mode stereo_mode);
 
+  virtual void set_block_addition_mappings(std::vector<block_addition_mapping_t> const &mappings);
+
   virtual void set_as_default_track(int type, int priority);
 
   virtual void set_tag_track_uid();
@@ -310,6 +315,8 @@ protected:
 
   virtual void compress_packet(packet_t &packet);
   virtual void account_enqueued_bytes(packet_t &packet, int64_t factor);
+
+  virtual void apply_block_addition_mappings();
 };
 
 extern std::vector<generic_packetizer_c *> ptzrs_in_header_order;

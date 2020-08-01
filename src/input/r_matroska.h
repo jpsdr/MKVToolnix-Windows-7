@@ -24,6 +24,7 @@
 #include "common/error.h"
 #include "common/kax_file.h"
 #include "common/mm_io.h"
+#include "merge/block_addition_mapping.h"
 #include "merge/generic_reader.h"
 #include "merge/track_info.h"
 
@@ -77,6 +78,7 @@ struct kax_track_t {
   std::optional<uint64_t> v_projection_type;
   memory_cptr v_projection_private;
   std::optional<double> v_projection_pose_yaw, v_projection_pose_pitch, v_projection_pose_roll;
+  std::vector<block_addition_mapping_t> block_addition_mappings;
 
   // Parameters for audio tracks
   uint64_t a_channels, a_bps, a_formattag;
@@ -181,6 +183,7 @@ struct kax_track_t {
   void handle_packetizer_default_duration();
   void handle_packetizer_output_sampling_freq();
   void handle_packetizer_codec_delay();
+  void handle_packetizer_block_addition_mapping();
   void fix_display_dimension_parameters();
   void get_source_id_from_track_statistics_tags();
   void discard_track_statistics_tags();

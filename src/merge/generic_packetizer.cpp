@@ -968,6 +968,12 @@ generic_packetizer_c::set_video_colour_space(memory_cptr const &value,
 }
 
 void
+generic_packetizer_c::set_block_addition_mappings(std::vector<block_addition_mapping_t> const &mappings) {
+  m_block_addition_mappings = mappings;
+  apply_block_addition_mappings();
+}
+
+void
 generic_packetizer_c::set_headers() {
   if (0 < m_connected_to) {
     mxerror(fmt::format("generic_packetizer_c::set_headers(): connected_to > 0 (type: {0}). {1}\n", typeid(*this).name(), BUGMSG));
@@ -1264,6 +1270,8 @@ generic_packetizer_c::set_headers() {
     m_compressor->set_track_headers(c_encoding);
   }
 
+  apply_block_addition_mappings();
+
   if (g_no_lacing)
     m_track_entry->EnableLacing(false);
 
@@ -1273,6 +1281,30 @@ generic_packetizer_c::set_headers() {
       add_tags(static_cast<KaxTag &>(*(*m_ti.m_tags)[0]));
       m_ti.m_tags->Remove(0);
     }
+  }
+}
+
+void
+generic_packetizer_c::apply_block_addition_mappings() {
+  if (!m_track_entry)
+    return;
+
+  DeleteChildren<KaxBlockAdditionMapping>(m_track_entry);
+
+  for (auto const &mapping : m_block_addition_mappings) {
+    if (!mapping.is_valid())
+      continue;
+
+    auto &kmapping = AddEmptyChild<KaxBlockAdditionMapping>(m_track_entry);
+
+    if (mapping.id_type)
+      GetChild<KaxBlockAddIDType>(kmapping).SetValue(*mapping.id_type);
+
+    if (mapping.id_value)
+      GetChild<KaxBlockAddIDValue>(kmapping).SetValue(*mapping.id_value);
+
+    if (mapping.id_extra_data && mapping.id_extra_data->get_size())
+      GetChild<KaxBlockAddIDExtraData>(kmapping).CopyBuffer(mapping.id_extra_data->get_buffer(), mapping.id_extra_data->get_size());
   }
 }
 

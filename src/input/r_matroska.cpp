@@ -230,6 +230,11 @@ kax_track_t::handle_packetizer_codec_delay() {
     ptzr_ptr->set_codec_delay(codec_delay);
 }
 
+void
+kax_track_t::handle_packetizer_block_addition_mapping() {
+  ptzr_ptr->set_block_addition_mappings(block_addition_mappings);
+}
+
 /* Fix display dimension parameters
 
    Certain Matroska muxers abuse the DisplayWidth/DisplayHeight
@@ -1303,6 +1308,21 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     if (kax_codec_delay)
       track->codec_delay   = timestamp_c::ns(kax_codec_delay->GetValue());
 
+    for (auto const &child : *ktentry) {
+      auto kmapping = dynamic_cast<KaxBlockAdditionMapping *>(child);
+      if (!kmapping)
+        continue;
+
+      block_addition_mapping_t mapping;
+
+      mapping.id_type       = FindOptionalChildValue<KaxBlockAddIDType>(kmapping);
+      mapping.id_value      = FindOptionalChildValue<KaxBlockAddIDValue>(kmapping);
+      mapping.id_extra_data = FindChildValue<KaxBlockAddIDExtraData>(kmapping);
+
+      if (mapping.is_valid())
+        track->block_addition_mappings.push_back(mapping);
+    }
+
     if (track->codec_id.empty()) {
       mxdebug_if(m_debug_track_headers, fmt::format("matroska_reader: track number {} is missing the CodecID.\n", track->track_number));
       m_known_bad_track_numbers[track->track_number] = true;
@@ -1617,6 +1637,8 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
   if (t->seek_pre_roll.valid())
     ptzr->set_track_seek_pre_roll(t->seek_pre_roll);
 
+  t->handle_packetizer_block_addition_mapping();
+
   if ('v' == t->type) {
     ptzr->set_video_pixel_width(t->v_width);
     ptzr->set_video_pixel_height(t->v_height);
@@ -1667,6 +1689,8 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
 
   PTZR(t->ptzr)->set_codec_name(t->codec_name);
   PTZR(t->ptzr)->set_source_id(t->source_id);
+
+  t->handle_packetizer_block_addition_mapping();
 }
 
 void
