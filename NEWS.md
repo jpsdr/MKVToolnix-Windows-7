@@ -41,6 +41,11 @@
 * Windows installer: the images are shown again. Fixes #2868.
 * configure: fixed detection of QtDBus. Fixes #2886.
 
+## Build system changes
+
+* libMatroska v1.6.1 is now required. The bundled version has been updated to
+  that version.
+
 
 # Version 48.0.0 "Fortress Around Your Heart" 2020-06-27
 

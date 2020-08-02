@@ -124,8 +124,8 @@ These libraries are:
 - [fmt](http://fmtlib.net/) — a small, safe and fast formatting
   library. Version 3 or later is required.
 
-- [libEBML v1.3.5](http://dl.matroska.org/downloads/libebml/) or later
-  and [libMatroska v1.4.8](http://dl.matroska.org/downloads/libmatroska/)
+- [libEBML v1.4.0](http://dl.matroska.org/downloads/libebml/) or later
+  and [libMatroska v1.6.1](http://dl.matroska.org/downloads/libmatroska/)
   or later for low-level access to Matroska files. Instructions on how to
   compile them are a bit further down in this file.
 
@@ -174,8 +174,8 @@ This is optional as MKVToolNix comes with its own set of the
 libraries. It will use them if no version is found on the system.
 
 Start by either downloading releases of [libEBML
-v1.3.5](http://dl.matroska.org/downloads/libebml/) and [libMatroska
-v1.4.8](http://dl.matroska.org/downloads/libmatroska/) or by getting
+v1.4.0](http://dl.matroska.org/downloads/libebml/) and [libMatroska
+v1.6.1](http://dl.matroska.org/downloads/libmatroska/) or by getting
 fresh copies from their git repositories:
 
     git clone https://github.com/Matroska-Org/libebml.git
