@@ -2,18 +2,18 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: preferences: the values in the various "predefined values"
-  lists can now be re-ordered freely by dragging & dropping.
-* MKVToolNix GUI: multiplexer: the list of recent directories can now be
-  edited in the preferences → "Multiplexer" → "Destination file
-  name". Implements #2861.
-* mkvinfo: added support for the new track header elements
-  `BlockAdditionMapping`, `BlockAddIDName`, BlockAddIDType`, `BlockAddIDValue`
-  and `BlockAddIDExtraData`. Part of the implementation of #2887.
 * mkvmerge: added support for copying the new track header elements
   `BlockAddIDName`, `BlockAddIDType`, `BlockAddIDValue` and
   `BlockAddIDExtraData` from Matroska files if they exist. Part of the
   implementation of #2887.
+* mkvinfo: added support for the new track header elements
+  `BlockAdditionMapping`, `BlockAddIDName`, BlockAddIDType`, `BlockAddIDValue`
+  and `BlockAddIDExtraData`. Part of the implementation of #2887.
+* MKVToolNix GUI: multiplexer: the list of recent directories can now be
+  edited in the preferences → "Multiplexer" → "Destination file
+  name". Implements #2861.
+* MKVToolNix GUI: preferences: the values in the various "predefined values"
+  lists can now be re-ordered freely by dragging & dropping.
 
 ## Bug fixes
 
@@ -22,24 +22,24 @@
   overwriting those via the command line to `no`, `mkvmerge` would not promote
   additional tracks of the same type from other files (e.g. another subtitle
   track from an SRT file). Fixes #2863.
+* mkvmerge: SRT reader: empty lines inside entries were doubled. Fixes #2888.
+* mkvmerge: subtitles: when calculating the rounded duration of each entry the
+  error from rounding the corresponding timestamp will be taken into
+  account. Fixes #2890.
+* mkvextract: SSA/ASS extraction: mkvextract is no longer inserting empty
+  lines before the `Dialogue:` lines. Fixes #2876.
+* mkvextract: USF subtitles: start & end timestamps were too high by a factor
+  of 1.000.000. Fixes #2875.
 * MKVToolNix: info tool: when saving to a text file the checkbox "Save as
   default for saving output to text files" did nothing. Fixes #2869.
 * MKVToolNix: info tool: when saving to a text file in "all elements in a
   tree-like structure" mode, the GUI always stopped at the first cluster
   regardless of the setting of the "verbosity" option.
-* Windows installer: the images are shown again. Fixes #2868.
-* mkvextract: USF subtitles: start & end timestamps were too high by a factor
-  of 1.000.000. Fixes #2875.
-* mkvextract: SSA/ASS extraction: mkvextract is no longer inserting empty
-  lines before the `Dialogue:` lines. Fixes #2876.
-* configure: fixed detection of QtDBus. Fixes #2886.
 * MKVToolNix GUI: preferences: when tooltips were disabled the dialogs for
   adding new entries to the various "predefined values" lists were missing
   their texts.
-* mkvmerge: SRT reader: empty lines inside entries were doubled. Fixes #2888.
-* mkvmerge: subtitles: when calculating the rounded duration of each entry the
-  error from rounding the corresponding timestamp will be taken into
-  account. Fixes #2890.
+* Windows installer: the images are shown again. Fixes #2868.
+* configure: fixed detection of QtDBus. Fixes #2886.
 
 
 # Version 48.0.0 "Fortress Around Your Heart" 2020-06-27
