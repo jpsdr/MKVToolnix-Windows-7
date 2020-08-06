@@ -66,12 +66,21 @@ kate_parse_identification_header(const unsigned char *buffer,
   header.gnum     = get_bits32_le(bc);
   header.gden     = get_bits32_le(bc);
 
-  for (i = 0; 16 > i; ++i)
-    header.language[i] = bc.get_bits(8);
-  if (header.language[15])
-    throw mtx::kate::header_parsing_x(Y("Language is not NUL terminated"));
-  for (i = 0; 16 > i; ++i)
-    header.category[i] = bc.get_bits(8);
-  if (header.category[15])
-    throw mtx::kate::header_parsing_x(Y("Category is not NUL terminated"));
+  auto read_string16 = [&bc]() -> std::string {
+    std::string s;
+    bool end = false;
+
+    for (int idx = 0; idx < 16; ++idx) {
+      auto uc = bc.get_bits(8);
+      if (!uc)
+        end = true;
+      else if (!end)
+        s += static_cast<char>(uc);
+    }
+
+    return s;
+  };
+
+  header.language = read_string16();
+  header.category = read_string16();
 }

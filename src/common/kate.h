@@ -52,8 +52,7 @@ struct kate_identification_header_t {
   int32_t gnum{};
   int32_t gden{};
 
-  uint8_t language[16]{};
-  uint8_t category[16]{};
+  std::string language, category;
 };
 
 void kate_parse_identification_header(const unsigned char *buffer, int size, kate_identification_header_t &header);
