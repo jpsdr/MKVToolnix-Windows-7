@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-07-30 19:41+0200\n"
+"POT-Creation-Date: 2020-08-16 18:39+0200\n"
 "PO-Revision-Date: 2019-08-06 18:38+0200\n"
 "Last-Translator: Trottel <trottel09@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/cs/)\n"
@@ -1156,8 +1156,8 @@ msgstr " (profil HEVC: {0} @L{1}.{2})"
 
 #: src/common/kax_info.cpp:466
 #: src/common/kax_info.cpp:587
-#: src/common/kax_info.cpp:880
-#: src/common/kax_info.cpp:1025
+#: src/common/kax_info.cpp:887
+#: src/common/kax_info.cpp:1032
 #, no-c-format
 msgid " (adler: 0x{0:08x})"
 msgstr " (adler: 0x{0:08x})"
@@ -1273,7 +1273,7 @@ msgstr " v {0}"
 msgid " data size {0}"
 msgstr " velikost dat {0}"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1086
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1092
 #, no-c-format
 msgid " day"
 msgid_plural " days"
@@ -1290,7 +1290,7 @@ msgstr[3] "dnů"
 msgid " done\n"
 msgstr " hotovo\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1080
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1086
 #, no-c-format
 msgid " second"
 msgid_plural " seconds"
@@ -2636,7 +2636,7 @@ msgstr "'{0}' stopa {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "'{0}': Zpracovat také následující soubory: {1}\n"
 
-#: src/input/r_matroska.cpp:1877
+#: src/input/r_matroska.cpp:1902
 #, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'{0}': Znovu zpracováváte stopu Opus, která byla zpracována v experimentálním režimu. Výsledná stopa bude zapsána v konečném režimu, ale jedna drobnost nemůže být obnovena ze stopy zpracované v experimentálním režimu: oříznutí konce. To znamená, že dekodér může vytvořit o pár vzorků více, než bylo původně zamýšleno. Měli byste znovu zpracovat z původní souboru Opus, pokud je to možné.\n"
@@ -2689,14 +2689,14 @@ msgstr ", popis '{0}'"
 msgid ", file name '{0}'"
 msgstr ", název souboru '{0}'"
 
-#: src/common/kax_info.cpp:927
-#: src/common/kax_info.cpp:1047
+#: src/common/kax_info.cpp:934
+#: src/common/kax_info.cpp:1054
 #, no-c-format
 msgid ", position 0x{0:x}"
 msgstr ", pozice 0x{0:x}"
 
-#: src/common/kax_info.cpp:927
-#: src/common/kax_info.cpp:1047
+#: src/common/kax_info.cpp:934
+#: src/common/kax_info.cpp:1054
 #, no-c-format
 msgid ", position {0}"
 msgstr ", pozice {0}"
@@ -2801,8 +2801,8 @@ msgstr "<Neuložený soubor>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> není platný podřízený prvek <{1}> na pozici {2}."
 
-#: src/input/r_matroska.cpp:2321
-#: src/input/r_matroska.cpp:2430
+#: src/input/r_matroska.cpp:2346
+#: src/input/r_matroska.cpp:2455
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "Na časové značce {0} byl nalezen blok pro stopu číslo {1}. Nebyly však nalezeny žádné hlavičky pro toto číslo stopy. Blok bude přeskočen.\n"
@@ -2827,7 +2827,7 @@ msgstr "Čárkami oddělený seznam čísel snímků nebo polí, po kterých roz
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "Čárkami oddělený seznam rozsahů časových razítek obsahu, který ponechat."
 
-#: src/input/r_matroska.cpp:727
+#: src/input/r_matroska.cpp:732
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr ""
@@ -2872,7 +2872,7 @@ msgstr[2] ""
 msgid "A randomly generated unique ID to identify the current segment between many others (128 bits)."
 msgstr "Náhodně generované jedinečné ID pro identifikaci aktuálního úseku mezi mnoha jinými (128 bitů)."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:397
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:403
 #, no-c-format
 msgid "A regular expression is used for matching the file name against a list of recognized languages limited by characters such as '.' or '['…']'."
 msgstr "Regulární výraz je použit pro porovnání názvu souboru se seznamem rozpoznaných jazyků omezených znaky, jako je například '.' nebo '['…']'."
@@ -3113,12 +3113,12 @@ msgstr "Přidat pro&měnnou"
 msgid "Add additional command line options for mkvmerge"
 msgstr "Přidat dodatečné volby příkazového řádku pro mkvmerge"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:740
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:746
 #, no-c-format
 msgid "Add all files as new attachments to the current tab"
 msgstr "Přidat všechny soubory jako nové přílohy na aktuální kartu"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:694
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:700
 #, no-c-format
 msgid "Add all files to the current multiplex settings"
 msgstr "Přidat všechny soubory do aktuálního nastavení multiplexování"
@@ -3253,7 +3253,7 @@ msgstr "Dodatečné volby příkazového řádku"
 msgid "Additional options:"
 msgstr "Dodatečné volby:"
 
-#: src/common/kax_element_names.cpp:254
+#: src/common/kax_element_names.cpp:260
 #, no-c-format
 msgid "Additions"
 msgstr "Přídavky"
@@ -3371,7 +3371,7 @@ msgstr "Všechny položky"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:709
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:165
 #: src/mkvtoolnix-gui/info/tool.cpp:128
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1019
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1025
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:317
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:395
 #: src/mkvtoolnix-gui/merge/attachments.cpp:272
@@ -3448,8 +3448,8 @@ msgstr "Všechny jednotky jsou založené na 1024 (G = 1024^3, M = 1024^2, K = 1
 msgid "Allows storing AVC/H.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI."
 msgstr "Umožňuje ukládání videa AVC/H.264 v režimu kompatibility videa pro Windows, např. při čtení z AVI."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:777
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:798
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:783
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:804
 #, no-c-format
 msgid "Also if the language is 'undetermined' ('und')"
 msgstr "Také pokud je jazyk 'Undetermined (und)'"
@@ -3478,8 +3478,8 @@ msgstr "&Vždy okamžitě přepnout na nástroj výstupu úlohy po spuštění n
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1835
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:141
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:118
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:693
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:738
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:699
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:744
 #, no-c-format
 msgid "Always ask the user"
 msgstr "Vždy se ptát uživatele"
@@ -3587,7 +3587,7 @@ msgstr "Jakákoliv sem zadaná volba bude přidána na konec příkazového řá
 msgid "Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:496
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:502
 #, no-c-format
 msgid "Apart from asking the GUI can always open the dropped files as new tabs or it can always add them as new attachments to the current tab."
 msgstr "Kromě zeptání se může grafické rozhraní vždy otevřít přetažené soubory jako nové karty nebo je vždy přidat jako nové přílohy na aktuální kartu."
@@ -3657,7 +3657,7 @@ msgstr "Připojit &k:"
 msgid "Attach to"
 msgstr "Připojit k"
 
-#: src/common/kax_element_names.cpp:228
+#: src/common/kax_element_names.cpp:234
 #, no-c-format
 msgid "Attached"
 msgstr "Přiloženo"
@@ -3673,7 +3673,7 @@ msgstr "Příloha"
 msgid "Attachment ID {0}: type '{1}', size {2} bytes"
 msgstr "ID přílohy {0}: typ '{1}', velikost {2} bajtů"
 
-#: src/common/kax_element_names.cpp:301
+#: src/common/kax_element_names.cpp:307
 #, no-c-format
 msgid "Attachment UID"
 msgstr "UID přílohy"
@@ -3693,7 +3693,7 @@ msgstr "Přepínač příloh"
 msgid "Attachment with same name present"
 msgstr "Příloha se stejným názvem existuje"
 
-#: src/common/kax_element_names.cpp:227
+#: src/common/kax_element_names.cpp:233
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:110
 #: src/mkvtoolnix-gui/header_editor/attachments_page.cpp:20
 #: src/propedit/options.cpp:224
@@ -3807,7 +3807,7 @@ msgstr "Dostupné:"
 msgid "Before chapters"
 msgstr "Před kapitolami"
 
-#: src/common/kax_element_names.cpp:307
+#: src/common/kax_element_names.cpp:313
 #, no-c-format
 msgid "Binary"
 msgstr "Binární"
@@ -3832,39 +3832,64 @@ msgstr "Bitů na kanál"
 msgid "Bits per sample, mostly used for PCM."
 msgstr "Bitů na vzorek, většinou používáno pro PCM."
 
-#: src/common/kax_element_names.cpp:239
+#: src/common/kax_element_names.cpp:245
 #, no-c-format
 msgid "Block"
 msgstr "Blok"
 
-#: src/common/kax_element_names.cpp:247
+#: src/common/kax_element_names.cpp:179
+#, fuzzy, no-c-format
+msgid "Block addition ID extra data"
+msgstr "ID dodatečného bloku"
+
+#: src/common/kax_element_names.cpp:180
+#, fuzzy, no-c-format
+msgid "Block addition ID name"
+msgstr "ID dodatečného bloku"
+
+#: src/common/kax_element_names.cpp:181
+#, fuzzy, no-c-format
+msgid "Block addition ID type"
+msgstr "ID dodatečného bloku"
+
+#: src/common/kax_element_names.cpp:182
+#, fuzzy, no-c-format
+msgid "Block addition ID value"
+msgstr "Dodatečný blok"
+
+#: src/common/kax_element_names.cpp:178
+#, fuzzy, no-c-format
+msgid "Block addition mapping"
+msgstr "Dodatečný blok"
+
+#: src/common/kax_element_names.cpp:253
 #, no-c-format
 msgid "Block additional"
 msgstr "Dodatečný blok"
 
-#: src/common/kax_element_names.cpp:246
 #: src/common/kax_element_names.cpp:252
+#: src/common/kax_element_names.cpp:258
 #, no-c-format
 msgid "Block additional ID"
 msgstr "ID dodatečného bloku"
 
-#: src/common/kax_element_names.cpp:240
+#: src/common/kax_element_names.cpp:246
 #, no-c-format
 msgid "Block duration"
 msgstr "Délka bloku"
 
-#: src/common/kax_element_names.cpp:238
+#: src/common/kax_element_names.cpp:244
 #, no-c-format
 msgid "Block group"
 msgstr "Skupina bloku"
 
-#: src/common/kax_element_names.cpp:243
+#: src/common/kax_element_names.cpp:249
 #, no-c-format
 msgid "Block virtual"
 msgstr "Virtuální blok"
 
 #: src/common/hacks.cpp:58
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:293
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:299
 #, no-c-format
 msgid "Blu-ray discs often contain a chapter entry very close to the end of the movie."
 msgstr "Disky Blu-ray často obsahují položku kapitoly velice blízko konce filmu."
@@ -3924,7 +3949,7 @@ msgstr "Byl zadán jak poměr stran tak i '--display-dimensions'.\n"
 msgid "Both the aspect ratio factor and '--display-dimensions' were given.\n"
 msgstr "Byl zadán jak koeficient poměru stran tak i '--display-dimensions'.\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:762
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:768
 #, no-c-format
 msgid "Bottom"
 msgstr "Dole"
@@ -3940,12 +3965,12 @@ msgstr ""
 msgid "Buttons"
 msgstr "Tlačítka"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:298
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
 #, no-c-format
 msgid "By default it always asks the user which character set to use when opening a file for which it cannot be recognized automatically."
 msgstr "Ve výchozím nastavení se vždy ptá uživatele, kterou znakovou sadu použít při otevírání souboru, pro který ji nelze automaticky rozpoznat."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:248
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:254
 #, no-c-format
 msgid "By default the GUI will start up with a dark color scheme if the color scheme in Windows is set to dark mode."
 msgstr ""
@@ -4062,13 +4087,8 @@ msgstr "Nelze zapsat stopu {0} s ID kodeku '{1}' do souboru '{2}', protože stop
 msgid "Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already being written to the same file.\n"
 msgstr "Nelze zapsat stopu {0} s ID kodeku '{1}' do souboru '{2}', protože stopa {3} s ID kodeku '{4}' je již zapsána do stejného souboru.\n"
 
-#: src/common/kate.cpp:76
-#, no-c-format
-msgid "Category is not NUL terminated"
-msgstr "Kategorie je ukončena nenulovým znakem"
-
-#: src/common/kax_info.cpp:1296
-#: src/common/kax_info.cpp:1300
+#: src/common/kax_info.cpp:1303
+#: src/common/kax_info.cpp:1307
 #: src/extract/tracks.cpp:564
 #: src/mkvtoolnix-gui/util/kax_info.cpp:209
 #, no-c-format
@@ -4095,17 +4115,17 @@ msgstr "Způsobí, že mkvmerge přidá příkaz 'zastavit zobrazení' do paket�
 msgid "Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters)."
 msgstr "Říká mkvmerge, aby na konci souboru vytvořilo metavyhledávací prvek, který obsahuje všechny clustery."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:304
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:310
 #, no-c-format
 msgid "Certain file formats have 'title' property."
 msgstr "Určité formáty souborů mají vlastnost 'název'."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:379
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:385
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:391
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:407
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:397
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:413
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:419
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:425
 #, no-c-format
 msgid "Certain file formats have a 'language' property for their tracks."
 msgstr "Určité formáty souborů mají pro své stopy vlastnost 'jazyk'."
@@ -4135,7 +4155,7 @@ msgstr "Provedena změna pro '{0}'. Počet nastavených položek: {1}\n"
 msgid "Change for '{0}' executed. One entry added.\n"
 msgstr "Provedena změna pro '{0}'. Přidána jedna položka.\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:243
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:249
 #, no-c-format
 msgid "Changes to this option will only take effect the next time the application is started."
 msgstr "Změny pro tuto volbu budou uplatněny pouze po příštím spuštění aplikace."
@@ -4161,23 +4181,23 @@ msgstr "Číslo kapitoly první vytvořené položky:"
 msgid "Chapter <NUM:2>"
 msgstr "Kapitola <NUM:2>"
 
-#: src/common/kax_element_names.cpp:272
-#: src/common/kax_element_names.cpp:300
+#: src/common/kax_element_names.cpp:278
+#: src/common/kax_element_names.cpp:306
 #, no-c-format
 msgid "Chapter UID"
 msgstr "UID kapitoly"
 
-#: src/common/kax_element_names.cpp:271
+#: src/common/kax_element_names.cpp:277
 #, fuzzy, no-c-format
 msgid "Chapter atom"
 msgstr "Editor kapitol"
 
-#: src/common/kax_element_names.cpp:287
+#: src/common/kax_element_names.cpp:293
 #, no-c-format
 msgid "Chapter country"
 msgstr "Země kapitoly"
 
-#: src/common/kax_element_names.cpp:283
+#: src/common/kax_element_names.cpp:289
 #, fuzzy, no-c-format
 msgid "Chapter display"
 msgstr "Soubor kapitol:"
@@ -4185,7 +4205,7 @@ msgstr "Soubor kapitol:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1846
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:247
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:398
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:220
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:224
 #, no-c-format
 msgid "Chapter editor"
 msgstr "Editor kapitol"
@@ -4200,27 +4220,27 @@ msgstr "Extrahování kapitoly"
 msgid "Chapter file:"
 msgstr "Soubor kapitol:"
 
-#: src/common/kax_element_names.cpp:277
+#: src/common/kax_element_names.cpp:283
 #, fuzzy, no-c-format
 msgid "Chapter flag enabled"
 msgstr "Soubor kapitol:"
 
-#: src/common/kax_element_names.cpp:276
+#: src/common/kax_element_names.cpp:282
 #, no-c-format
 msgid "Chapter flag hidden"
 msgstr "Příznak kapitoly skrytý"
 
-#: src/merge/cluster_helper.cpp:764
+#: src/merge/cluster_helper.cpp:770
 #, no-c-format
 msgid "Chapter generation is only possible if at least one video or audio track is copied.\n"
 msgstr ""
 
-#: src/common/kax_element_names.cpp:285
+#: src/common/kax_element_names.cpp:291
 #, no-c-format
 msgid "Chapter language"
 msgstr "Jazyk kapitoly"
 
-#: src/common/kax_element_names.cpp:286
+#: src/common/kax_element_names.cpp:292
 #, no-c-format
 msgid "Chapter language (IETF)"
 msgstr "Jazyk kapitoly (IETF)"
@@ -4240,77 +4260,77 @@ msgstr "Čísla kapitol:"
 msgid "Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"
 msgstr "Analyzátor kapitol: UID edice {0} není jedinečné a nemůže být znovu použito. Bude vytvořeno nové.\n"
 
-#: src/common/kax_element_names.cpp:280
+#: src/common/kax_element_names.cpp:286
 #, no-c-format
 msgid "Chapter physical equivalent"
 msgstr ""
 
-#: src/common/kax_element_names.cpp:288
+#: src/common/kax_element_names.cpp:294
 #, no-c-format
 msgid "Chapter process"
 msgstr "Zpracování kapitoly"
 
-#: src/common/kax_element_names.cpp:289
+#: src/common/kax_element_names.cpp:295
 #, no-c-format
 msgid "Chapter process codec ID"
 msgstr "ID kodeku zpracování kapitoly"
 
-#: src/common/kax_element_names.cpp:291
+#: src/common/kax_element_names.cpp:297
 #, no-c-format
 msgid "Chapter process command"
 msgstr ""
 
-#: src/common/kax_element_names.cpp:293
+#: src/common/kax_element_names.cpp:299
 #, no-c-format
 msgid "Chapter process data"
 msgstr "Data zpracování kapitoly"
 
-#: src/common/kax_element_names.cpp:290
+#: src/common/kax_element_names.cpp:296
 #, fuzzy, no-c-format
 msgid "Chapter process private"
 msgstr "Překlad kapitoly"
 
-#: src/common/kax_element_names.cpp:292
+#: src/common/kax_element_names.cpp:298
 #, no-c-format
 msgid "Chapter process time"
 msgstr "Čas zpracování kapitoly"
 
-#: src/common/kax_element_names.cpp:278
+#: src/common/kax_element_names.cpp:284
 #, no-c-format
 msgid "Chapter segment UID"
 msgstr "UID úseku kapitoly"
 
-#: src/common/kax_element_names.cpp:279
+#: src/common/kax_element_names.cpp:285
 #, fuzzy, no-c-format
 msgid "Chapter segment edition UID"
 msgstr "UID &střihu úseku:"
 
-#: src/common/kax_element_names.cpp:284
+#: src/common/kax_element_names.cpp:290
 #, no-c-format
 msgid "Chapter string"
 msgstr "Řetězec kapitoly"
 
-#: src/common/kax_element_names.cpp:273
+#: src/common/kax_element_names.cpp:279
 #, no-c-format
 msgid "Chapter string UID"
 msgstr "UID řetězce kapitoly"
 
-#: src/common/kax_element_names.cpp:275
+#: src/common/kax_element_names.cpp:281
 #, no-c-format
 msgid "Chapter time end"
 msgstr "Čas konce kapitoly"
 
-#: src/common/kax_element_names.cpp:274
+#: src/common/kax_element_names.cpp:280
 #, no-c-format
 msgid "Chapter time start"
 msgstr "Čas začátku kapitoly"
 
-#: src/common/kax_element_names.cpp:281
+#: src/common/kax_element_names.cpp:287
 #, no-c-format
 msgid "Chapter track"
 msgstr "Stopa kapitoly"
 
-#: src/common/kax_element_names.cpp:282
+#: src/common/kax_element_names.cpp:288
 #, no-c-format
 msgid "Chapter track number"
 msgstr "Číslo stopy kapitoly"
@@ -4335,7 +4355,7 @@ msgstr "Kodek překladu kapitoly"
 msgid "Chapter translate edition UID"
 msgstr "UID edice překladu kapitoly"
 
-#: src/common/kax_element_names.cpp:265
+#: src/common/kax_element_names.cpp:271
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:304
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1812
 #: src/mkvtoolnix-gui/merge/track.cpp:433
@@ -4389,7 +4409,7 @@ msgstr "Zkontrolovat dostupné aktualizace"
 msgid "Check online for available &updates"
 msgstr "Kontrolovat online dostupné &aktualizace"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:336
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
 #, no-c-format
 msgid "Checking this option causes the GUI to set that compression to \"none\" by default for all track types when adding files."
 msgstr "Zaškrtnutí této volby způsobí, že grafické rozhraní nastaví ve výchozím nastavení tuto kompresi na \"žádná\" pro všechny typy stop při přidávání souborů."
@@ -4425,7 +4445,7 @@ msgstr "Zavřít změněný soubor"
 msgid "Close modified settings"
 msgstr "Zavřít změněný soubor"
 
-#: src/common/kax_element_names.cpp:260
+#: src/common/kax_element_names.cpp:266
 #, no-c-format
 msgid "Cluster"
 msgstr "Cluster"
@@ -4440,17 +4460,17 @@ msgstr "Délka clusteru '{0}' je mimo rozsah (0..65535).\n"
 msgid "Cluster length '{0}' out of range (100..32000).\n"
 msgstr "Délka clusteru '{0}' je mimo rozsah (100..32000).\n"
 
-#: src/common/kax_element_names.cpp:262
+#: src/common/kax_element_names.cpp:268
 #, no-c-format
 msgid "Cluster position"
 msgstr "Pozice clusteru"
 
-#: src/common/kax_element_names.cpp:263
+#: src/common/kax_element_names.cpp:269
 #, no-c-format
 msgid "Cluster previous size"
 msgstr "Předchozí velikost clusteru"
 
-#: src/common/kax_element_names.cpp:261
+#: src/common/kax_element_names.cpp:267
 #, no-c-format
 msgid "Cluster timestamp"
 msgstr "Časové razítko clusteru"
@@ -4461,7 +4481,7 @@ msgstr "Časové razítko clusteru"
 msgid "Codec"
 msgstr "Kodek"
 
-#: src/common/kax_element_names.cpp:185
+#: src/common/kax_element_names.cpp:191
 #: src/common/property_element.cpp:142
 #, no-c-format
 msgid "Codec ID"
@@ -4473,43 +4493,43 @@ msgstr "ID kodeku"
 msgid "Codec ID:"
 msgstr "ID kodeku:"
 
-#: src/common/kax_element_names.cpp:192
+#: src/common/kax_element_names.cpp:198
 #, no-c-format
 msgid "Codec decode all"
 msgstr "Kodek dekódovat vše"
 
-#: src/common/kax_element_names.cpp:191
+#: src/common/kax_element_names.cpp:197
 #, no-c-format
 msgid "Codec download URL"
 msgstr "Adresa stažení kodeku"
 
-#: src/common/kax_element_names.cpp:190
+#: src/common/kax_element_names.cpp:196
 #, no-c-format
 msgid "Codec info URL"
 msgstr "Adresa informací o kodeku"
 
-#: src/common/kax_element_names.cpp:187
+#: src/common/kax_element_names.cpp:193
 #: src/common/property_element.cpp:143
 #, no-c-format
 msgid "Codec name"
 msgstr "Název kodeku"
 
-#: src/common/kax_element_names.cpp:189
+#: src/common/kax_element_names.cpp:195
 #, no-c-format
 msgid "Codec settings"
 msgstr "Nastavení kodeku"
 
-#: src/common/kax_element_names.cpp:245
+#: src/common/kax_element_names.cpp:251
 #, no-c-format
 msgid "Codec state"
 msgstr "Stav kodeku"
 
-#: src/common/kax_element_names.cpp:186
+#: src/common/kax_element_names.cpp:192
 #, no-c-format
 msgid "Codec's private data"
 msgstr "Soukromá data kodeku"
 
-#: src/common/kax_element_names.cpp:188
+#: src/common/kax_element_names.cpp:194
 #: src/common/property_element.cpp:144
 #, no-c-format
 msgid "Codec-inherent delay"
@@ -4565,7 +4585,7 @@ msgstr "V pořádku dokončeno"
 msgid "Completed with warnings"
 msgstr "Dokončeno s upozorněními"
 
-#: src/merge/generic_packetizer.cpp:1299
+#: src/merge/generic_packetizer.cpp:1334
 #, no-c-format
 msgid "Compression failed: {0}\n"
 msgstr "Komprese selhala: {0}\n"
@@ -4597,7 +4617,7 @@ msgid "Content encoding"
 msgstr "Kódování obsahu"
 
 #: src/common/kax_element_names.cpp:162
-#: src/common/kax_element_names.cpp:203
+#: src/common/kax_element_names.cpp:209
 #, no-c-format
 msgid "Content encodings"
 msgstr "Kódování obsahů"
@@ -4795,12 +4815,12 @@ msgstr "Vytvořit nové nastavení multiplexování pro &každý soubor"
 msgid "Create new settings"
 msgstr "Vytvořit nové nastavení"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:695
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:701
 #, no-c-format
 msgid "Create one new multiplex settings tab and add all files there"
 msgstr "Vytvořit jednu novou kartu nastavení multiplexování a přidat tam všechny soubory"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:696
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:702
 #, no-c-format
 msgid "Create one new multiplex settings tab for each file"
 msgstr "Vytvořit jednu novou kartu nastavení multiplexování pro každý soubor"
@@ -4909,22 +4929,22 @@ msgstr "Ctrl+T"
 msgid "Ctrl+W"
 msgstr "Ctrl+W"
 
-#: src/common/kax_element_names.cpp:219
+#: src/common/kax_element_names.cpp:225
 #, no-c-format
 msgid "Cue block number"
 msgstr "Číslo bloku indexu"
 
-#: src/common/kax_element_names.cpp:216
+#: src/common/kax_element_names.cpp:222
 #, no-c-format
 msgid "Cue cluster position"
 msgstr "Pozice clusteru indexu"
 
-#: src/common/kax_element_names.cpp:220
+#: src/common/kax_element_names.cpp:226
 #, no-c-format
 msgid "Cue codec state"
 msgstr "Stav kodeku indexu"
 
-#: src/common/kax_element_names.cpp:218
+#: src/common/kax_element_names.cpp:224
 #, no-c-format
 msgid "Cue duration"
 msgstr "Délka indexu"
@@ -4939,37 +4959,37 @@ msgstr "Extrahování indexu"
 msgid "Cue name format:"
 msgstr "Formát názvu:"
 
-#: src/common/kax_element_names.cpp:212
+#: src/common/kax_element_names.cpp:218
 #, no-c-format
 msgid "Cue point"
 msgstr "Bod indexu"
 
-#: src/common/kax_element_names.cpp:223
+#: src/common/kax_element_names.cpp:229
 #, no-c-format
 msgid "Cue ref cluster"
 msgstr "Referenční cluster indexu"
 
-#: src/common/kax_element_names.cpp:225
+#: src/common/kax_element_names.cpp:231
 #, no-c-format
 msgid "Cue ref codec state"
 msgstr "Referenční stav kodeku indexu"
 
-#: src/common/kax_element_names.cpp:224
+#: src/common/kax_element_names.cpp:230
 #, no-c-format
 msgid "Cue ref number"
 msgstr "Referenční číslo indexu"
 
-#: src/common/kax_element_names.cpp:222
+#: src/common/kax_element_names.cpp:228
 #, no-c-format
 msgid "Cue ref time"
 msgstr "Referenční čas indexu"
 
-#: src/common/kax_element_names.cpp:221
+#: src/common/kax_element_names.cpp:227
 #, no-c-format
 msgid "Cue reference"
 msgstr "Reference indexu"
 
-#: src/common/kax_element_names.cpp:217
+#: src/common/kax_element_names.cpp:223
 #, no-c-format
 msgid "Cue relative position"
 msgstr "Relativní pozice indexu"
@@ -4999,22 +5019,22 @@ msgstr "Analýza listu indexu: Neplatné číslo INDEXU (získáno: {0}, očeká
 msgid "Cue sheet parser: No INDEX entry found for the previous TRACK entry (current line: {0})\n"
 msgstr "Analýza listu indexu: Nebyla nalezena žádná položka INDEXU pro předchozí položku STOPY (aktuální řádek: {0})\n"
 
-#: src/common/kax_element_names.cpp:213
+#: src/common/kax_element_names.cpp:219
 #, no-c-format
 msgid "Cue time"
 msgstr "Čas indexu"
 
-#: src/common/kax_element_names.cpp:215
+#: src/common/kax_element_names.cpp:221
 #, no-c-format
 msgid "Cue track"
 msgstr "Stopa indexu"
 
-#: src/common/kax_element_names.cpp:214
+#: src/common/kax_element_names.cpp:220
 #, no-c-format
 msgid "Cue track positions"
 msgstr "Pozice stopy indexu"
 
-#: src/common/kax_element_names.cpp:211
+#: src/common/kax_element_names.cpp:217
 #, no-c-format
 msgid "Cues"
 msgstr "Indexy"
@@ -5143,7 +5163,7 @@ msgstr "Výchozí"
 msgid "Default additional co&mmand line options:"
 msgstr "Výchozí dodatečné volby &příkazového řádku:"
 
-#: src/common/kax_element_names.cpp:196
+#: src/common/kax_element_names.cpp:202
 #: src/common/property_element.cpp:139
 #, no-c-format
 msgid "Default duration"
@@ -5154,7 +5174,7 @@ msgstr "Výchozí délka"
 msgid "Default duration/FPS:"
 msgstr "Výchozí délka nebo snímky za sekundu:"
 
-#: src/common/kax_element_names.cpp:310
+#: src/common/kax_element_names.cpp:316
 #, no-c-format
 msgid "Default language"
 msgstr "Výchozí jazyk"
@@ -5169,7 +5189,7 @@ msgstr "Vý&chozí znaková sada titulků:"
 msgid "Default track"
 msgstr "Výchozí stopa"
 
-#: src/common/kax_element_names.cpp:198
+#: src/common/kax_element_names.cpp:204
 #, no-c-format
 msgid "Default track flag"
 msgstr "Příznak výchozí stopy"
@@ -5184,7 +5204,7 @@ msgstr "Výchozí stopa ve výstupu"
 msgid "Default track languages to set"
 msgstr "Výchozí jazyky stop"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:213
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:217
 #, no-c-format
 msgid "Default values"
 msgstr "Výchozí hodnoty"
@@ -5209,7 +5229,7 @@ msgstr "Výchozí pro nová nastavení multiplexování"
 msgid "Defaults for newly added tracks"
 msgstr "Výchozí pro nově přidané stopy"
 
-#: src/common/kax_element_names.cpp:250
+#: src/common/kax_element_names.cpp:256
 #: src/mkvtoolnix-gui/merge/track_model.cpp:60
 #, no-c-format
 msgid "Delay"
@@ -5257,16 +5277,16 @@ msgstr "Odstranit jednu nebo více příloh"
 msgid "Delete source files for multiplexer jobs"
 msgstr "Odstranit zdrojové soubory pro úlohy multiplexeru"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:410
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:416
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:422
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:428
 #, no-c-format
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
 msgstr "V závislosti na níže uvedeném nastavení může být tento jazyk také použít, pokud je jazyk ve zdrojovém souboru 'Undetermined (und)'."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:382
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:388
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:394
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:400
 #, no-c-format
 msgid "Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und')."
 msgstr "V závislosti na tomto nastavení může být jazyk také odvozen z názvu souboru, pokud je jazyk ve zdrojovém souboru 'Undetermined (und)'."
@@ -5276,7 +5296,7 @@ msgstr "V závislosti na tomto nastavení může být jazyk také odvozen z náz
 msgid "Derive &end timestamps from start timestamps"
 msgstr "Odvodit časová razítka &konců od časových razítek začátků"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:214
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:218
 #, no-c-format
 msgid "Deriving track languages"
 msgstr "Odvozování jazyků stop"
@@ -5317,7 +5337,7 @@ msgid "Destination file"
 msgstr "Cílový soubor"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1813
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:215
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:219
 #, no-c-format
 msgid "Destination file name"
 msgstr "Název cílového souboru"
@@ -5433,7 +5453,7 @@ msgstr "Zakázáno"
 msgid "Disables lacing for all tracks."
 msgstr "Zakáže svazování pro všechny stopy."
 
-#: src/common/kax_element_names.cpp:253
+#: src/common/kax_element_names.cpp:259
 #, no-c-format
 msgid "Discard padding"
 msgstr "Zrušit odsazení"
@@ -5607,7 +5627,7 @@ msgid "Due to the particular structure of the file this situation cannot be fixe
 msgstr "Vzhledem ke konkrétní struktuře souboru nelze tuto situaci automaticky opravit."
 
 #: src/common/kax_element_names.cpp:85
-#: src/common/kax_element_names.cpp:251
+#: src/common/kax_element_names.cpp:257
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:305
 #, no-c-format
 msgid "Duration"
@@ -5694,30 +5714,30 @@ msgstr "Každý rozsah se skládá z počátečního a koncového časového raz
 msgid "Edit selectors for properties"
 msgstr "Upravit přepínače pro vlastnosti"
 
-#: src/common/kax_element_names.cpp:267
-#: src/common/kax_element_names.cpp:299
+#: src/common/kax_element_names.cpp:273
+#: src/common/kax_element_names.cpp:305
 #, no-c-format
 msgid "Edition UID"
 msgstr "UID střihu"
 
-#: src/common/kax_element_names.cpp:266
+#: src/common/kax_element_names.cpp:272
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:81
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:510
 #, no-c-format
 msgid "Edition entry"
 msgstr "Položka střihu"
 
-#: src/common/kax_element_names.cpp:269
+#: src/common/kax_element_names.cpp:275
 #, fuzzy, no-c-format
 msgid "Edition flag default"
 msgstr "Položka střihu"
 
-#: src/common/kax_element_names.cpp:268
+#: src/common/kax_element_names.cpp:274
 #, fuzzy, no-c-format
 msgid "Edition flag hidden"
 msgstr "Položka střihu"
 
-#: src/common/kax_element_names.cpp:270
+#: src/common/kax_element_names.cpp:276
 #, fuzzy, no-c-format
 msgid "Edition flag ordered"
 msgstr "Položka střihu"
@@ -5727,7 +5747,7 @@ msgstr "Položka střihu"
 msgid "Edition/Chapter"
 msgstr "Střih nebo kapitola"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1166
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1171
 #, no-c-format
 msgid "Either fix the error or remove the configuration before closing the preferences dialog."
 msgstr "Před zavřením dialogového okna předvoleb buď chybu opravte, nebo odeberte konfiguraci."
@@ -5787,7 +5807,7 @@ msgstr "Povolit kopírování stop podle jejich jazyka"
 msgid "Enable dialog &normalization gain removal for audio tracks"
 msgstr "Povolit odebrání zesílení &dialogů pro stopy audia"
 
-#: src/common/kax_element_names.cpp:183
+#: src/common/kax_element_names.cpp:189
 #, no-c-format
 msgid "Enabled"
 msgstr "Povoleno"
@@ -5810,7 +5830,7 @@ msgstr ""
 msgid "Enables warnings for certain conditions where timestamps aren't monotonous in situations where they should be which could indicate either a problem with the file or a programming error."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:216
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:220
 #, no-c-format
 msgid "Enabling items"
 msgstr "Povolování položek"
@@ -5855,17 +5875,17 @@ msgstr "Ujistěte se, že je název souboru &jedinečný"
 msgid "Enter job description"
 msgstr "Zadejte popis úlohy"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:733
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:739
 #, no-c-format
 msgid "Enter predefined split duration"
 msgstr "Zadejte předdefinovanou délku rozdělení"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:732
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:738
 #, no-c-format
 msgid "Enter predefined split size"
 msgstr "Zadejte předdefinovanou velikost rozdělení"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:730
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:736
 #, no-c-format
 msgid "Enter predefined track name"
 msgstr "Zadejte předdefinovaný název stopy"
@@ -5967,7 +5987,7 @@ msgstr "Chyba zapisování souboru Matroska"
 msgid "Error:"
 msgstr "Chyba:"
 
-#: src/common/kax_info.cpp:1267
+#: src/common/kax_info.cpp:1274
 #, no-c-format
 msgid "Error: Couldn't open source file {0} ({1})."
 msgstr "Chyba: Nelze otevřít zdrojový soubor {0} ({1})."
@@ -5994,7 +6014,7 @@ msgstr "Chyba: vorbis_packetizer: Nelze extrahovat parametry stopy z prvních pa
 msgid "Errors:"
 msgstr "Chyby:"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:709
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:715
 #, no-c-format
 msgid "Even if no audio tracks are present"
 msgstr "I když nejsou přítomny žádné stopy audia"
@@ -6043,7 +6063,7 @@ msgstr "Příklady: 01:00:00,01:30:00 (po jedné hodině a po jedné hodině a t
 msgid "Exception details:"
 msgstr "Podrobnosti výjimky:"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1017
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1023
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:315
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:63
 #, no-c-format
@@ -6081,7 +6101,7 @@ msgstr "Spustit program '%1'"
 msgid "Executes the action immediately."
 msgstr "Spustí akci okamžitě."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:222
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:226
 #, no-c-format
 msgid "Executing actions"
 msgstr "Spouštění akcí"
@@ -6240,7 +6260,7 @@ msgstr "Soubor '{0}': kontejner: {1}"
 msgid "File '{0}': unsupported container: {1}\n"
 msgstr "Soubor '{0}': nepodporovaný kontejner: {1}\n"
 
-#: src/common/kax_element_names.cpp:233
+#: src/common/kax_element_names.cpp:239
 #, no-c-format
 msgid "File UID"
 msgstr "UID souboru"
@@ -6251,12 +6271,12 @@ msgstr "UID souboru"
 msgid "File contains fewer frames than expected or is corrupt after frame {0}.\n"
 msgstr "Soubor obsahuje méně snímků, než se čekalo, nebo je po snímku {0} poškozen.\n"
 
-#: src/common/kax_element_names.cpp:232
+#: src/common/kax_element_names.cpp:238
 #, no-c-format
 msgid "File data"
 msgstr "Data souboru"
 
-#: src/common/kax_element_names.cpp:229
+#: src/common/kax_element_names.cpp:235
 #, no-c-format
 msgid "File description"
 msgstr "Popis souboru"
@@ -6266,7 +6286,7 @@ msgstr "Popis souboru"
 msgid "File has not been modified"
 msgstr "Soubor nebyl změněn"
 
-#: src/common/kax_element_names.cpp:230
+#: src/common/kax_element_names.cpp:236
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:323
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:42
@@ -6313,7 +6333,7 @@ msgstr "Velikost souboru"
 msgid "File structure warning"
 msgstr "Upozornění na strukturu souboru"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:348
 #, no-c-format
 msgid "File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."
 msgstr "Typy souborů, jako je program MPEG a transportní datové proudy (.vob, .m2ts) vyžadují analýzu určitého množství dat, aby bylo možné rozpoznat všechny stopy obsažené v souboru."
@@ -6428,7 +6448,7 @@ msgstr "Vynutit použití překladu pro 'code'."
 msgid "Forced track"
 msgstr "Vynucená stopa"
 
-#: src/common/kax_element_names.cpp:199
+#: src/common/kax_element_names.cpp:205
 #, no-c-format
 msgid "Forced track flag"
 msgstr "Příznak vynucené stopy"
@@ -6480,7 +6500,7 @@ msgstr "Snímek"
 msgid "Frame #%1"
 msgstr "Snímek č. %1"
 
-#: src/common/kax_element_names.cpp:249
+#: src/common/kax_element_names.cpp:255
 #, no-c-format
 msgid "Frame number"
 msgstr "Číslo snímku"
@@ -6496,8 +6516,8 @@ msgstr "Frekvence snímků"
 msgid "Frame size #%1: %2"
 msgstr "Velikost snímku #%1: %2"
 
-#: src/common/kax_info.cpp:887
-#: src/common/kax_info.cpp:1032
+#: src/common/kax_info.cpp:894
+#: src/common/kax_info.cpp:1039
 #, no-c-format
 msgid "Frame with size {0}{1}{2}"
 msgstr "Snímek s velikostí {0}{1}{2}"
@@ -6507,8 +6527,8 @@ msgstr "Snímek s velikostí {0}{1}{2}"
 msgid "Frames/fields:"
 msgstr "Snímky nebo pole:"
 
-#: src/common/kax_info.cpp:886
-#: src/common/kax_info.cpp:1031
+#: src/common/kax_info.cpp:893
+#: src/common/kax_info.cpp:1038
 #, no-c-format
 msgid "Frame{0}{1}"
 msgstr "Snímek{0}{1}"
@@ -6518,7 +6538,7 @@ msgstr "Snímek{0}{1}"
 msgid "Free-form edit field for user defined options for this track."
 msgstr "Volně upravitelné pole pro uživatelem definované volby pro tuto stopu."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:209
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:213
 #, no-c-format
 msgid "GUI"
 msgstr "Grafické rozhraní"
@@ -6662,7 +6682,7 @@ msgstr "&Editor hlaviček"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1843
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:246
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:398
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:219
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:223
 #, no-c-format
 msgid "Header editor"
 msgstr "Editor hlaviček"
@@ -6706,12 +6726,12 @@ msgstr "Hibernovat počítač"
 msgid "Hidden"
 msgstr "Skryto"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:599
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:605
 #, no-c-format
 msgid "Higher priority"
 msgstr "Vyšší priorita"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:598
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:604
 #, no-c-format
 msgid "Highest priority"
 msgstr "Nejvyšší priorita"
@@ -6763,12 +6783,12 @@ msgstr "Kód ISO 639-2"
 msgid "IVF (AV1, VP8, VP9)"
 msgstr "IVF (AV1, VP8, VP9)"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:299
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:305
 #, no-c-format
 msgid "If a character set is selected here, it will be used instead of asking the user."
 msgstr "Pokud je zde vybrána nějaká znaková sada, bude použita místo zeptání se uživatele."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:424
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:430
 #, no-c-format
 msgid "If a character set is selected here, the program will automatically set the character set input to this value for newly added text subtitle tracks."
 msgstr "Pokud je zde vybrána znaková sada, program automaticky nastaví znakovou sadu vstupu na tuto hodnotu pro nově přidané stopy textových titulků."
@@ -6798,7 +6818,7 @@ msgstr "Pokud je počáteční časové razítko vynecháno, bude použito konco
 msgid "If any of these checkboxes is checked, the action will be executed when the corresponding condition is met."
 msgstr "Pokud je zaškrtnuto některé z těchto zaškrtávacích políček, bude při splnění odpovídající podmínky spuštěna akce."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:708
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:714
 #, no-c-format
 msgid "If audio tracks are present but none is enabled"
 msgstr "Pokud jsou stopy audia přítomny, ale žádná není povolena"
@@ -6809,117 +6829,117 @@ msgstr "Pokud jsou stopy audia přítomny, ale žádná není povolena"
 msgid "If both shifting and multiplication are enabled then the shift will be performed before the multiplication."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:275
 #, no-c-format
 msgid "If checked, additional buttons for moving selected entries up and down will be shown next to several list views."
 msgstr "Pokud je zaškrtnuto, budou zobrazeny vedle několika zobrazení seznamu další tlačítka pro přesun vybraných položek nahoru a dolů."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:476
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:482
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:488
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:494
 #, no-c-format
 msgid "If checked, only the list of often used entries will be included in the selections in the program."
 msgstr "Pokud je zaškrtnuto, bude do výběrů v programu zahrnut pouze seznam často používaných položek."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:245
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:251
 #, no-c-format
 msgid "If checked, the GUI will not show helpful usage tips in popup windows while hovering over a control — such as this one."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:455
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:461
 #, no-c-format
 msgid "If checked, the program makes sure the suggested destination file name is unique by adding a number (e.g. ' (1)') to the end of the file name."
 msgstr "Pokud je zaškrtnuto, program se ujistí, že navrhovaný název cílového souboru je jedinečný tím, že přidá číslo (např. ' (1)') na konec názvu souboru."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:263
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
 #, no-c-format
 msgid "If checked, the program will ask for confirmation before aborting a running job."
 msgstr "Pokud je zaškrtnuto, program požádá o potvrzení před přerušením spuštěné úlohy."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:259
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:265
 #, no-c-format
 msgid "If checked, the program will ask for confirmation before closing or reloading tabs that have been modified."
 msgstr "Pokud je zaškrtnuto, program požádá o potvrzení před zavřením nebo obnovením karet, které byly změněny."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:275
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:281
 #, no-c-format
 msgid "If disabled, the GUI will let you enter a description for a job when adding it to the queue."
 msgstr "Pokud je zakázáno, grafické rozhraní vám umožní zadat popis pro úlohu, když ji přidáváte do fronty."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:331
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:337
 #, no-c-format
 msgid "If enabled, all subtitle tracks will have their \"default track\" flag set to \"no\" when they're added."
 msgstr "Pokud je povoleno, všechny stopy titulků budou mít při přidávání příznak \"výchozí stopa\" nastaven na \"ne\"."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:242
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:248
 #, no-c-format
 msgid "If enabled, automatic scaling for high DPI displays will be disabled."
 msgstr "Pokud je povoleno, bude automatické škálování pro displeje s vysokým DPI zakázáno."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:338
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:344
 #, no-c-format
 msgid "If enabled, removal of dialog normalization gain will be enabled for all audio tracks for which removal is supported."
 msgstr "Pokud je povoleno, bude odebrání zesílení dialogu povoleno pro všechny stopy audia, pro které je odebrání podporováno."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:277
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:283
 #, no-c-format
 msgid "If enabled, the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start multiplexing\")."
 msgstr "Pokud je povoleno, grafické rozhraní se automaticky přepne na nástroj Výstup úlohy, kdykoliv spustíte nějakou úlohu (např. stisknutím tlačítka \"Spustit multiplexování\")."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:280
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:281
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:286
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:287
 #, no-c-format
 msgid "If enabled, the GUI will remove completed jobs older than the configured number of days no matter their status on exit."
 msgstr "Pokud je povoleno, grafické rozhraní odebere dokončené úlohy starší než nakonfigurovaný počet dní bez ohledu na jejich stav při ukončení."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:279
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:285
 #, no-c-format
 msgid "If enabled, the GUI will remove the output file created by a job if that job ends with an error or if the user aborts the job."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:348
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:354
 #, no-c-format
 msgid "If enabled, the destination file name controls will always be visible no matter which tab is currently shown."
 msgstr "Pokud je povoleno, ovládání názvu cílového souboru bude vždy viditelné bez ohledu na to, která karta je aktuálně zobrazena."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:276
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:282
 #, no-c-format
 msgid "If enabled, the first tab in the \"job output\" tool will not be cleared when a new job starts."
 msgstr "Pokud je povoleno, první karta v nástroji \"výstup úlohy\" nebude vymazána, když se spustí nová úloha."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:436
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:442
 #, no-c-format
 msgid "If enabled, the largest cover image of a Blu-ray will be added as an attachment when adding a Blu-ray playlist."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:294
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:300
 #, no-c-format
 msgid "If enabled, the last entry will be skipped when loading chapters from such playlists in the chapter editor if it is located within five seconds of the end of the movie."
 msgstr "Pokud je povoleno, bude poslední položka při načítání kapitol z takových seznamů stop v editoru kapitol přeskočena, pokud je umístěna do pěti sekund od konce filmu."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:271
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:277
 #, no-c-format
 msgid "If enabled, the names of tab headers will be shortened so that all tab headers fit into the window's width."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:273
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:279
 #, no-c-format
 msgid "If enabled, the program will ask for confirmation before overwriting files and jobs."
 msgstr "Pokud je povoleno, program požádá o potvrzení před přepsáním souborů a úloh."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:253
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:259
 #, no-c-format
 msgid "If enabled, the program will check online whether or not a new release of MKVToolNix is available on the home page."
 msgstr "Pokud je povoleno, program bude kontrolovat online, zda je dostupné nové vydání MKVToolNix na domovské stránce."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:278
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:284
 #, no-c-format
 msgid "If enabled, the warning and error counters of all jobs and the global counters in the status bar will be reset to 0 when the program exits."
 msgstr "Pokud je povoleno, budou počítadla upozornění a chyb všech úloh a všeobecná počítadla ve stavovém řádku při ukončení programu obnovena na 0."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:466
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:467
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:468
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:472
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:473
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:474
 #, no-c-format
 msgid "If enabled, tracks of this type will always be set to be copied regardless of their language."
 msgstr "Pokud je povoleno, skladby tohoto typu budou vždy nastaveny tak, aby byly zkopírovány bez ohledu na jejich jazyk."
@@ -6934,7 +6954,7 @@ msgstr "Pokud je zadáno méně UID úseků, než je vytvořeno úseků, pak pro
 msgid "If given then you may use up to nine digits after the decimal point."
 msgstr "Pokud je zadáno, můžete použít až devět číslic za desetinnou čárkou."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:329
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:335
 #, no-c-format
 msgid "If it contains the word 'DELAY' followed by a number, this number is automatically put into the 'delay' input field for any audio track found in the file."
 msgstr "Pokud obsahuje slovo 'DELAY' následované číslem, pak je toto číslo automaticky vloženo do vstupního pole 'zpoždění' pro všechny stopy audia nalezené v souboru."
@@ -7005,17 +7025,17 @@ msgstr "Pokud je použita magická hodnota -1, pak mkvmerge použije přesnost v
 msgid "If the number is postfixed with 'ms' then put at most 'n' milliseconds of data into each cluster."
 msgstr "Pokud má číslo příponu 'ms', pak vložit nanejvýše 'n' milisekund dat do každého clusteru."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:393
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:399
 #, no-c-format
 msgid "If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
 msgstr "Pokud zdrojový soubor neobsahuje žádnou takovou vlastnost pro stopu titulků, pak může být jazyk odvozen z názvu souboru, pokud odpovídá určitým vzorům (např. '…[cze]…' pro Czech)."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:387
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:393
 #, no-c-format
 msgid "If the source file contains no such property for a video track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
 msgstr "Pokud zdrojový soubor neobsahuje žádnou takovou vlastnost pro stopu videa, pak může být jazyk odvozen z názvu souboru, pokud odpovídá určitým vzorům (např. '…[cze]…' pro Czech)."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:381
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:387
 #, no-c-format
 msgid "If the source file contains no such property for an audio track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
 msgstr "Pokud zdrojový soubor neobsahuje žádnou takovou vlastnost pro stopu audia, pak může být jazyk odvozen z názvu souboru, pokud odpovídá určitým vzorům (např. '…[cze]…' pro Czech)."
@@ -7025,42 +7045,42 @@ msgstr "Pokud zdrojový soubor neobsahuje žádnou takovou vlastnost pro stopu a
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
 msgstr "Pokud taková kapitola neexistuje, použije se místo toho časová značka konce nadřazené kapitoly."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:440
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:446
 #, no-c-format
 msgid "If this option is enabled and if there is currently no destination file name set, the program will set one for you when you add a source file."
 msgstr "Pokud je tato volba povolena a pokud zde není aktuálně nastaven žádný název cílového souboru, pak ho program pro vás nastaví, když přidáte zdrojový soubor."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:445
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:451
 #, no-c-format
 msgid "If this option is enabled, only source files containing video tracks will be used for setting the destination file name."
 msgstr "Pokud je tato volba povolena, budou pro nastavení názvu cílového souboru použity pouze zdrojové soubory obsahující stopy videa."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:463
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:469
 #, no-c-format
 msgid "If this option is enabled, only those tracks will be set to be copied whose language is selected below."
 msgstr "Pokud je tato volba povolena, pak bude nastaveno, aby byly zkopírovány pouze takové stopy, jejichž jazyk je vybrán níže."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:457
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:463
 #, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."
 msgstr "Pokud je tato volba povolena, grafické rozhraní při každém odebrání posledního zdrojového souboru vždy vymaže vstupní pole \"Název cílového souboru\"."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:307
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
 #, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"file title\" input box whenever the last source file is removed."
 msgstr "Pokud je tato volba povolena, grafické rozhraní při každém odebrání posledního zdrojového souboru vždy vymaže vstupní pole \"Název souboru\"."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:249
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:255
 #, fuzzy, no-c-format
 msgid "If this option is enabled, the GUI will not use its dark mode and fall back to the default color scheme."
 msgstr "Pokud je tato volba povolena, grafické rozhraní při každém odebrání posledního zdrojového souboru vždy vymaže vstupní pole \"Název cílového souboru\"."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:450
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:456
 #, fuzzy, no-c-format
 msgid "If this option is enabled, the file title will be used as the basis for the destination file name if a file title is set."
 msgstr "Pokud je tato volba povolena, grafické rozhraní při každém odebrání posledního zdrojového souboru vždy vymaže vstupní pole \"Název souboru\"."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:344
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:350
 #, no-c-format
 msgid "If tracks are known to be present but not found, the percentage to probe can be changed here."
 msgstr "Pokud je známo, že stopy jsou přítomny, ale nebyly nalezeny, může být procento zjišťování změněno zde."
@@ -7080,17 +7100,17 @@ msgstr "Pokud přidáte další úlohu se stejným cílovým souborem, bude dř�
 msgid "If you leave this empty then there is no limit for the number of files mkvmerge might create."
 msgstr "Pokud toto ponecháte prázdné, tak není žádné omezení pro počet souborů, které mkvmerge může vytvořit."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:312
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 #, no-c-format
 msgid "If you often use the same names for tracks, you can enter them here."
 msgstr "Pokud často používáte stejné názvy pro stopy, můžete je sem zadat."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:322
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:328
 #, no-c-format
 msgid "If you often use the same values when splitting by duration, you can enter them here."
 msgstr "Pokud často používáte stejné hodnoty při rozdělování podle délky, můžete je sem zadat."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:317
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:323
 #, no-c-format
 msgid "If you often use the same values when splitting by size, you can enter them here."
 msgstr "Pokud často používáte stejné hodnoty při rozdělování podle velikosti, můžete je sem zadat."
@@ -7135,7 +7155,7 @@ msgstr "Na kartě &widgetu pod soubory a stopami"
 msgid "In fixed intervals: chapters are created in fixed intervals, e.g. every 30 seconds."
 msgstr "V pevných intervalech: kapitoly jsou vytvořeny v pevných intervalech, např. každých 30 sekund."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:356
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:362
 #, no-c-format
 msgid "In the most compact layout the track properties are located to the right of the files and tracks lists in a scrollable single column."
 msgstr "V nejkompaktnějším rozložení jsou vlastnosti stopy umístěny vpravo od seznamů souborů a stop v jediném posouvatelném sloupci."
@@ -7168,7 +7188,7 @@ msgstr "Úloha informací"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:245
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:398
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:218
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:222
 #, no-c-format
 msgid "Info tool"
 msgstr "Nástroj informací"
@@ -7451,9 +7471,9 @@ msgstr "Neplatná sekunda: {0}"
 msgid "Invalid selector in '{0} {1}'.\n"
 msgstr "Neplatný přepínač v '{0} {1}'.\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1126
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1138
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1161
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1131
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1143
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1166
 #, no-c-format
 msgid "Invalid settings"
 msgstr "Neplatné nastavení"
@@ -7687,7 +7707,7 @@ msgstr "Datum a čas začátku úlohy ve formátu ISO 8601"
 msgid "Job type ('multiplexer' or 'info')"
 msgstr "Typ úlohy ('multiplexer' nebo 'info')"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:221
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:225
 #, no-c-format
 msgid "Jobs & job queue"
 msgstr "Úlohy a fronta úloh"
@@ -7732,17 +7752,17 @@ msgstr "&Známé problémy v posledních vydáních"
 msgid "Known element, but invalid at this position: {0} (ID: 0x{1})"
 msgstr "Známý prvek, ale neplatný na této pozici: {0} (ID: 0x{1})"
 
-#: src/common/kax_element_names.cpp:248
+#: src/common/kax_element_names.cpp:254
 #, no-c-format
 msgid "Lace number"
 msgstr "Číslo svázání"
 
-#: src/common/kax_element_names.cpp:197
+#: src/common/kax_element_names.cpp:203
 #, no-c-format
 msgid "Lacing flag"
 msgstr "Příznak svazování"
 
-#: src/common/kax_element_names.cpp:200
+#: src/common/kax_element_names.cpp:206
 #: src/common/property_element.cpp:141
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:27
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:316
@@ -7752,11 +7772,6 @@ msgstr "Příznak svazování"
 #, no-c-format
 msgid "Language"
 msgstr "Jazyk"
-
-#: src/common/kate.cpp:72
-#, no-c-format
-msgid "Language is not NUL terminated"
-msgstr "Jazyk je ukončen nenulovým znakem"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:278
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1826
@@ -7776,7 +7791,7 @@ msgstr "Rozložení"
 msgid "Leave additional space (EbmlVoid) in the destination file after the chapters."
 msgstr "Ponechat v cílovém souboru po kapitolách dodatečné místo (EbmlVoid)."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:763
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:769
 #, no-c-format
 msgid "Left"
 msgstr "Vlevo"
@@ -7871,12 +7886,12 @@ msgstr "Načítání…"
 msgid "Location of MediaInfo &GUI:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:602
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:608
 #, no-c-format
 msgid "Lower priority"
 msgstr "Nižší priorita"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:603
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:609
 #, no-c-format
 msgid "Lowest priority"
 msgstr "Nejnižší priorita"
@@ -7891,7 +7906,7 @@ msgstr "&Více akcí"
 msgid "MD5"
 msgstr "MD5"
 
-#: src/common/kax_element_names.cpp:231
+#: src/common/kax_element_names.cpp:237
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:89
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:63
 #, no-c-format
@@ -8001,13 +8016,13 @@ msgstr "Seznam stop MPLS Blu-ray"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Nastaví tuto stopu jako výchozí stopu pro její typ (audio, video, titulky)."
 
-#: src/input/r_matroska.cpp:1749
-#: src/input/r_matroska.cpp:1766
+#: src/input/r_matroska.cpp:1774
+#: src/input/r_matroska.cpp:1791
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Nalezena poškozená inicializační data kodeku AAC.\n"
 
-#: src/input/r_matroska.cpp:1759
+#: src/input/r_matroska.cpp:1784
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "Poškozené ID kodeku '{0}'.\n"
@@ -8069,7 +8084,7 @@ msgstr "Maximální povolená délka: {0}, skutečná délka: {1}"
 msgid "Maximum allowed value: {0}, actual value: {1}"
 msgstr "Maximální povolená hodnota: {0}, skutečná hodnota: {1}"
 
-#: src/common/kax_element_names.cpp:202
+#: src/common/kax_element_names.cpp:208
 #, no-c-format
 msgid "Maximum block additional ID"
 msgstr "Maximální ID dodatečného bloku"
@@ -8082,7 +8097,7 @@ msgstr ""
 "                           Vytvoří přílohu uvnitř prvního zapsaného\n"
 "                           souboru Matroska.\n"
 
-#: src/common/kax_element_names.cpp:195
+#: src/common/kax_element_names.cpp:201
 #: src/common/property_element.cpp:137
 #, no-c-format
 msgid "Maximum cache"
@@ -8148,7 +8163,7 @@ msgstr "Minimální povolená délka: {0}, skutečná délka: {1}"
 msgid "Minimum allowed value: {0}, actual value: {1}"
 msgstr "Minimální povolená hodnota: {0}, skutečná hodnota: {1}"
 
-#: src/common/kax_element_names.cpp:194
+#: src/common/kax_element_names.cpp:200
 #: src/common/property_element.cpp:135
 #, no-c-format
 msgid "Minimum cache"
@@ -8211,7 +8226,7 @@ msgstr "Režimy"
 msgid "Modification of properties in the section '{0}' was requested, but no corresponding level 1 element was found in the file. {1}\n"
 msgstr ""
 
-#: src/common/kax_element_names.cpp:255
+#: src/common/kax_element_names.cpp:261
 #, no-c-format
 msgid "More"
 msgstr "Více"
@@ -8248,7 +8263,7 @@ msgstr ""
 "Nalezena více než jedna stopa s číslem stopy {0}.\n"
 "\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:366
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:372
 #, no-c-format
 msgid "Most of the other settings on the output tab will be kept intact, though."
 msgstr "Většina ostatních nastavení na kartě výstupu však bude ponechána nedotčena."
@@ -8271,7 +8286,7 @@ msgstr "Úloha multiplexování"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:243
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:398
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:211
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:215
 #, no-c-format
 msgid "Multiplexer"
 msgstr "Multiplexer"
@@ -8313,8 +8328,8 @@ msgstr "Velikost NALU:"
 msgid "Na&me template:"
 msgstr "Šablona &názvu:"
 
-#: src/common/kax_element_names.cpp:184
-#: src/common/kax_element_names.cpp:305
+#: src/common/kax_element_names.cpp:190
+#: src/common/kax_element_names.cpp:311
 #: src/common/property_element.cpp:140
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:26
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:88
@@ -8356,8 +8371,8 @@ msgstr "Názvy"
 msgid "Negative values are allowed."
 msgstr "Záporné hodnoty jsou povoleny."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:707
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:775
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:713
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:781
 #, no-c-format
 msgid "Never"
 msgstr "Nikdy"
@@ -8432,7 +8447,7 @@ msgstr "Nenalezena žádná hlavička AC-3 v prvním snímku; stopa bude přesko
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Nenalezena žádná hlavička DTS v prvních snímcích; stopa bude přeskočena.\n"
 
-#: src/common/kax_info.cpp:1203
+#: src/common/kax_info.cpp:1210
 #, no-c-format
 msgid "No EBML head found."
 msgstr "Nenalezena žádná hlavička EBML."
@@ -8526,7 +8541,7 @@ msgstr "Nebyl nalezen žádný název souboru po '@'."
 msgid "No help available."
 msgstr "Není dostupná žádná nápověda."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:255
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:261
 #, no-c-format
 msgid "No information is transmitted to the server."
 msgstr "Na server nejsou přenášeny žádné informace."
@@ -8638,12 +8653,12 @@ msgstr "Byly zjištěny nešestnáctkové číslice."
 msgid "Nor&mal output:"
 msgstr "&Normální výstup:"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:601
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:607
 #, no-c-format
 msgid "Normal priority"
 msgstr "Normální priorita"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:285
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:291
 #, no-c-format
 msgid "Normally completed jobs stay in the queue even over restarts until the user clears them out manually."
 msgstr "Normálně dokončené úlohy zůstávají ve frontě i přes restarty, dokud je uživatel nevymaže ručně."
@@ -8658,7 +8673,7 @@ msgstr "Normálně mkvmerge nemění informace o časování (poměr snímek/pol
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
 msgstr "Normálně mkvmerge ponechá informaci o poměru stran v bitových tocích videa MPEG4 a vloží informaci do kontejneru."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:335
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
 #, no-c-format
 msgid "Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."
 msgstr "Normálně mkvmerge použije dodatečnou bezztrátovou kompresi pro stopy titulků pro určité kodeky."
@@ -8668,7 +8683,7 @@ msgstr "Normálně mkvmerge použije dodatečnou bezztrátovou kompresi pro stop
 msgid "Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."
 msgstr "Normálně mkvmerge použije hodnotu 1000000, což znamená, že časová razítka a délky budou mít přesnost 1 ms."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:268
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:274
 #, no-c-format
 msgid "Normally selected entries in list view can be moved around via drag & drop and with keyboard shortcuts (Ctrl+Up, Ctrl+Down)."
 msgstr "Normálně lze vybrané položky v zobrazení seznamu přesouvat pomocí přetažení a klávesových zkratek (Ctrl+Nahoru, Ctrl+Dolů)."
@@ -8727,7 +8742,7 @@ msgstr "Zatím nespuštěno"
 msgid "Note also that there are not a lot of players that support the cropping parameters."
 msgstr "Také pamatujte, že není mnoho přehrávačů, které podporují parametry oříznutí."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:306
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:312
 #, no-c-format
 msgid "Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user."
 msgstr "Pamatujte, že i když je tato volba zakázána, mkvmerge zkopíruje vlastnost název zdrojového souboru, pokud není název nastaven ručně uživatelem."
@@ -8749,12 +8764,12 @@ msgstr "Pamatujte, že většina proměnných <MTX_…> je prázdná a budou ode
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "Pamatujte, že ve Windows mohou být v názvech cest použita také lomítka namísto zpětných lomítek ."
 
-#: src/merge/generic_packetizer.cpp:1660
+#: src/merge/generic_packetizer.cpp:1695
 #, no-c-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:465
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:471
 #, no-c-format
 msgid "Note that the language \"Undetermined (und)\" is assumed for tracks for which no language is known (e.g. those read from SRT subtitle files)."
 msgstr "Pamatujte, že jazyk \"Undetermined (und)\" je předpokládán pro stopy, pro které není znám žádný jazyk (např. ty, které jsou čteny ze souborů titulků SRT)."
@@ -8800,7 +8815,7 @@ msgstr "Počet nanosekund (bez změny velikosti) na snímek."
 msgid "Numbers of channels in the track."
 msgstr "Počet kanálů ve stopě."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:210
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:214
 #, no-c-format
 msgid "Often used selections"
 msgstr "Často používané výběry"
@@ -8835,7 +8850,7 @@ msgstr "Jednořádkové souhrny pro každou stopu a snímek"
 msgid "Online check for updates"
 msgstr "Kontrola aktualizací online"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:401
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:407
 #, no-c-format
 msgid "Only English language names are supported."
 msgstr "Jsou podporovány pouze anglické názvy jazyka."
@@ -8858,13 +8873,13 @@ msgstr "Pouze pro snímky I"
 msgid "Only if the job completed successfully"
 msgstr "Pouze pokud byla úloha úspěšně dokončena"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:776
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:797
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:782
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:803
 #, no-c-format
 msgid "Only if the source doesn't contain a language"
 msgstr "Pouze pokud zdroj neobsahuje jazyk"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:459
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:465
 #, no-c-format
 msgid "Only items whose type is in the 'selected' list on the right will be set to be copied by default."
 msgstr "Pouze položky, jejichž typ je ve 'vybraném' seznamu vpravo, budou nastaveny ve výchozím nastavení, aby byly zkopírovány."
@@ -8914,7 +8929,7 @@ msgstr "Je povolen pouze jeden zdrojový soubor.\n"
 msgid "Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:435
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:441
 #, no-c-format
 msgid "Only playlists whose duration are at least this long are considered and offered to the user for selection."
 msgstr "Jsou zvažovány a nabídnuty uživateli k výběru pouze seznamy stop, jejichž délka je alespoň takto dlouhá."
@@ -8929,7 +8944,7 @@ msgstr "Zobrazovat pouze souhrny obsahů, ne každý prvek."
 msgid "Only the first %1 bytes are shown."
 msgstr "Je zobrazeno pouze prvních %1 bajtů."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:403
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:409
 #, no-c-format
 msgid "Only the languages in the 'selected' list on the right will be recognized as track languages in file names."
 msgstr "Pouze jazyky v seznamu 'vybrané' vpravo budou rozpoznány jako jazyky stop v názvech souborů."
@@ -8939,7 +8954,7 @@ msgstr "Pouze jazyky v seznamu 'vybrané' vpravo budou rozpoznány jako jazyky s
 msgid "Only to the first destination file"
 msgstr "Pouze pro první cílový soubor"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:470
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:476
 #, no-c-format
 msgid "Only tracks with a language in this list will be set to be copied by default."
 msgstr "Ve výchozím nastavení budou nastaveny ke zkopírování pouze stopy s jazykem na tomto seznamu."
@@ -8985,7 +9000,7 @@ msgstr "Otevřete soubor Matroska nebo WebM pomocí nabídky \"Nástroj informac
 msgid "Open a file via the \"chapter editor\" menu, the buttons below or drag & drop one here."
 msgstr "Otevřete soubor pomocí nabídky \"Editor kapitol\", níže uvedenými tlačítky nebo sem nějaký přetáhněte."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:739
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:745
 #, no-c-format
 msgid "Open all files as tabs in the header editor"
 msgstr "Otevřít všechny soubory jako karty v editoru hlaviček"
@@ -9091,7 +9106,7 @@ msgstr "Seřazeno"
 msgid "Original value:"
 msgstr "Původní hodnota:"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:446
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:452
 #, no-c-format
 msgid "Other files are ignored when they're added."
 msgstr "Ostatní soubory jsou při přidání ignorovány."
@@ -9107,19 +9122,19 @@ msgstr "Další volby"
 msgid "Other parts of the file (e.g. a subtitle track) may refer to this attachment via this name."
 msgstr "Jiné části souboru (např. stopa titulků) mohou odkazovat na tuto přílohu prostřednictvím tohoto názvu."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:451
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:457
 #, fuzzy, no-c-format
 msgid "Otherwise the destination file name is derived from the source file names."
 msgstr "Nastavit název cílového &souboru z názvu vybraného souboru"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:477
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:483
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:489
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:495
 #, no-c-format
 msgid "Otherwise the often used entries will be included first and the full list of all entries afterwards."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:349
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:355
 #, no-c-format
 msgid "Otherwise they're shown on the 'output' tab."
 msgstr "Jinak je zobrazeno na kartě 'výstup'."
@@ -9257,7 +9272,7 @@ msgstr "Přehrávače by měly upřednostňovat stopy s nastaveným příznakem 
 msgid "Playlist items:"
 msgstr "Položky seznamu stop:"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:217
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:221
 #, fuzzy, no-c-format
 msgid "Playlists & Blu-rays"
 msgstr "Seznamy stop"
@@ -9276,17 +9291,17 @@ msgstr[3] "Seznamy stop kratší než %1 sekund budou ignorovány."
 msgid "Please enter the new job's description."
 msgstr "Zadejte popis nové úlohy."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:733
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:739
 #, no-c-format
 msgid "Please enter the new predefined split duration."
 msgstr "Zadejte novou předdefinovanou délku rozdělení."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:732
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:738
 #, no-c-format
 msgid "Please enter the new predefined split size."
 msgstr "Zadejte novou předdefinovanou velikost rozdělení."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:730
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:736
 #, no-c-format
 msgid "Please enter the new predefined track name."
 msgstr "Zadejte nový předdefinovaný název stopy."
@@ -9390,7 +9405,7 @@ msgstr "Předdefinovaná velikost rozdělení"
 msgid "Predefined subtitle track names"
 msgstr "Předdefinované názvy stop"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:212
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:216
 #, fuzzy, no-c-format
 msgid "Predefined values"
 msgstr "Předdefinovaná velikost rozdělení"
@@ -9793,17 +9808,17 @@ msgstr "Přesměruje všechny zprávy do tohoto souboru."
 msgid "Reduce to core"
 msgstr "Zmenšit na jádro"
 
-#: src/common/kax_element_names.cpp:241
+#: src/common/kax_element_names.cpp:247
 #, no-c-format
 msgid "Reference block"
 msgstr ""
 
-#: src/common/kax_element_names.cpp:242
+#: src/common/kax_element_names.cpp:248
 #, fuzzy, no-c-format
 msgid "Reference priority"
 msgstr "&Priorita procesu:"
 
-#: src/common/kax_element_names.cpp:244
+#: src/common/kax_element_names.cpp:250
 #, no-c-format
 msgid "Reference virtual"
 msgstr ""
@@ -9972,12 +9987,12 @@ msgstr "Nová synchronizace selhala: nebyl nalezen žádný prvek Matroska úrov
 msgid "Resyncing successful at position {0}.\n"
 msgstr "Úspěšná nová synchronizace na pozici {0}.\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:402
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:408
 #, no-c-format
 msgid "Revert the regular expression to its default value."
 msgstr "Vrátit regulární výraz na jeho výchozí hodnotu."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:764
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:770
 #, no-c-format
 msgid "Right"
 msgstr "Vpravo"
@@ -10222,17 +10237,17 @@ msgstr "Viz příklady níže."
 msgid "See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons."
 msgstr ""
 
-#: src/common/kax_element_names.cpp:208
+#: src/common/kax_element_names.cpp:214
 #, no-c-format
 msgid "Seek ID"
 msgstr ""
 
-#: src/common/kax_element_names.cpp:207
+#: src/common/kax_element_names.cpp:213
 #, no-c-format
 msgid "Seek entry"
 msgstr ""
 
-#: src/common/kax_element_names.cpp:206
+#: src/common/kax_element_names.cpp:212
 #, no-c-format
 msgid "Seek head"
 msgstr ""
@@ -10242,12 +10257,12 @@ msgstr ""
 msgid "Seek head (subentries will be skipped)"
 msgstr ""
 
-#: src/common/kax_element_names.cpp:209
+#: src/common/kax_element_names.cpp:215
 #, fuzzy, no-c-format
 msgid "Seek position"
 msgstr "Pozice stopy indexu"
 
-#: src/common/kax_element_names.cpp:204
+#: src/common/kax_element_names.cpp:210
 #, no-c-format
 msgid "Seek pre-roll"
 msgstr ""
@@ -10307,7 +10322,7 @@ msgstr "Jedinečné ID úseku"
 msgid "Select Matroska file to read segment UID from"
 msgstr "Vyberte soubor Matroska, ze kterého číst UID segmentu"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:658
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:664
 #, fuzzy, no-c-format
 msgid "Select a directory"
 msgstr "Vyberte výstupní adresář"
@@ -10350,7 +10365,7 @@ msgstr "Vyberte soubor kapitol"
 msgid "Select character set"
 msgstr "Vybrat znakovou sadu"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1007
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1013
 #, no-c-format
 msgid "Select destination directory"
 msgstr "Vyberte cílový adresář"
@@ -10366,7 +10381,7 @@ msgstr "Vyberte název cílového souboru"
 msgid "Select disc library information to use"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1021
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1027
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:320
 #: src/mkvtoolnix-gui/merge/executable_location_dialog.cpp:67
 #, no-c-format
@@ -10686,17 +10701,17 @@ msgstr "Hash algoritmu podpisu"
 msgid "Signature key ID"
 msgstr "ID podpisového klíče"
 
-#: src/common/kax_element_names.cpp:236
+#: src/common/kax_element_names.cpp:242
 #, no-c-format
 msgid "Silent track number"
 msgstr "Číslo tiché stopy"
 
-#: src/common/kax_element_names.cpp:235
+#: src/common/kax_element_names.cpp:241
 #, no-c-format
 msgid "Silent tracks"
 msgstr "Tiché stopy"
 
-#: src/common/kax_element_names.cpp:304
+#: src/common/kax_element_names.cpp:310
 #, fuzzy, no-c-format
 msgid "Simple"
 msgstr "Příklad"
@@ -10707,7 +10722,7 @@ msgstr "Příklad"
 msgid "Simple OGM-style chapter files"
 msgstr ""
 
-#: src/common/kax_element_names.cpp:258
+#: src/common/kax_element_names.cpp:264
 #, no-c-format
 msgid "Simple block"
 msgstr ""
@@ -10760,7 +10775,7 @@ msgstr "Přeskakování {0} bajtů na začátku (nenalezena žádná platná hla
 msgid "Sleep the computer"
 msgstr "Uspat počítač"
 
-#: src/common/kax_element_names.cpp:256
+#: src/common/kax_element_names.cpp:262
 #, no-c-format
 msgid "Slices"
 msgstr "Výseče"
@@ -10903,7 +10918,7 @@ msgstr[2] "Spustit úlohy &ručně"
 msgid "Started at:"
 msgstr "Spuštěno:"
 
-#: src/common/kax_info.cpp:1173
+#: src/common/kax_info.cpp:1180
 #, no-c-format
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr ""
@@ -10962,7 +10977,7 @@ msgstr ""
 msgid "Stretch by:"
 msgstr "Roztáhnout:"
 
-#: src/common/kax_element_names.cpp:306
+#: src/common/kax_element_names.cpp:312
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:166
 #, no-c-format
 msgid "String"
@@ -11028,7 +11043,7 @@ msgstr "TTA (kodek The lossless True Audio)"
 msgid "Tab &position in tab widgets:"
 msgstr "&Umístění karty ve widgetech karet:"
 
-#: src/common/kax_element_names.cpp:296
+#: src/common/kax_element_names.cpp:302
 #, no-c-format
 msgid "Tag"
 msgstr "Štítek"
@@ -11043,12 +11058,12 @@ msgstr "Editor štítků"
 msgid "Tag extraction"
 msgstr "Extrahování štítku"
 
-#: src/common/kax_element_names.cpp:308
+#: src/common/kax_element_names.cpp:314
 #, no-c-format
 msgid "Tag language"
 msgstr "Jazyk štítku"
 
-#: src/common/kax_element_names.cpp:309
+#: src/common/kax_element_names.cpp:315
 #, no-c-format
 msgid "Tag language (IETF)"
 msgstr "Jazyk štítku (IETF)"
@@ -11058,7 +11073,7 @@ msgstr "Jazyk štítku (IETF)"
 msgid "Tag selectors"
 msgstr "Přepínače štítků"
 
-#: src/common/kax_element_names.cpp:295
+#: src/common/kax_element_names.cpp:301
 #: src/mkvtoolnix-gui/merge/track.cpp:434
 #: src/propedit/options.cpp:206
 #, no-c-format
@@ -11084,17 +11099,17 @@ msgstr[3] "Štítky pro stopu s ID {0}: {1} položek"
 msgid "Tags:"
 msgstr "Štítky:"
 
-#: src/common/kax_element_names.cpp:302
+#: src/common/kax_element_names.cpp:308
 #, no-c-format
 msgid "Target type"
 msgstr "Cílový typ"
 
-#: src/common/kax_element_names.cpp:303
+#: src/common/kax_element_names.cpp:309
 #, no-c-format
 msgid "Target type value"
 msgstr "Hodnota cílového typu"
 
-#: src/common/kax_element_names.cpp:297
+#: src/common/kax_element_names.cpp:303
 #, no-c-format
 msgid "Targets"
 msgstr "Cíle"
@@ -11181,17 +11196,17 @@ msgstr ""
 msgid "The FourCC must be exactly four characters long in '{0} {1}'.\n"
 msgstr "FourCC musí mít přesně čtyři znaky v '{0} {1}'.\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:373
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:379
 #, no-c-format
 msgid "The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new multiplex settings and adding them to those."
 msgstr "Grafické rozhraní se může také pokaždé zeptat uživatele, co má dělat, např. připojit je namísto jejich přidání nebo vytvoření nových nastavení multiplexování a jejich přidávání k nim."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:375
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:381
 #, no-c-format
 msgid "The GUI can ask for confirmation when you're about to create a file without audio tracks in it."
 msgstr "Grafické rozhraní může požádat o potvrzení, když chcete vytvořit soubor bez zvukových stop v něm."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:362
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:368
 #, no-c-format
 msgid "The GUI can help you start your next multiplex settings after having started a job or having added a one to the job queue."
 msgstr "Grafické rozhraní vám může pomoci spustit další nastavení multiplexování po spuštění úlohy nebo přidání úlohy do fronty úloh."
@@ -11281,7 +11296,7 @@ msgstr "Identifikační hlavička Theora nemohla být analyzována ({0}).\n"
 msgid "The UID must not be left empty."
 msgstr "UID nesmí zůstat prázdné."
 
-#: src/input/r_matroska.cpp:726
+#: src/input/r_matroska.cpp:731
 #, no-c-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr ""
@@ -11445,12 +11460,12 @@ msgstr "Změny jsou zapsány do souboru.\n"
 msgid "The chapter UID must be a number if given."
 msgstr "UID kapitoly musí být číslo, pokud je zadáno."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:297
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:303
 #, no-c-format
 msgid "The chapter editor needs to know the character set a text chapter file uses in order to display all characters properly."
 msgstr "Editor kapitol potřebuje znát znakovou sadu, kterou textový soubor kapitol používá, aby správně zobrazil všechny znaky."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:485
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:491
 #, no-c-format
 msgid "The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."
 msgstr "Znakové sady v seznamu 'vybrané' vpravo budou zobrazeny v horní části všech rozevíracích polí znakové sady v programu."
@@ -11513,7 +11528,7 @@ msgstr "Konfigurace byla uložena."
 msgid "The correction file header was not read correctly.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:479
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:485
 #, no-c-format
 msgid "The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."
 msgstr "Země v seznamu 'vybrané' vpravo budou zobrazeny v horní části všech rozevíracích polí země v programu."
@@ -11538,12 +11553,12 @@ msgstr "Indexy pro stopu {0} jsou zapsány do '{1}'.\n"
 msgid "The current mode can be changed with --multiplex, --edit-chapters or --edit-headers."
 msgstr "Aktuální režim může být změněn pomocí --multiplex, --edit-chapters nebo --edit-headers."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:364
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:370
 #, no-c-format
 msgid "The current multiplex settings will be closed."
 msgstr "Aktuální nastavení multiplexování bude zavřeno."
 
-#: src/merge/generic_packetizer.cpp:1373
+#: src/merge/generic_packetizer.cpp:1408
 #, no-c-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr ""
@@ -11573,12 +11588,12 @@ msgstr "Datum, kdy byl soubor vytvořen."
 msgid "The default is 'file' with 'track' being an alternative mode."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:372
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:378
 #, no-c-format
 msgid "The default is to always add all the files to the current multiplex settings."
 msgstr "Výchozí je vždy přidat všechny soubory do aktuálního nastavení multiplexování."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:495
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:501
 #, no-c-format
 msgid "The default is to ask the user what to do with the dropped files."
 msgstr "Výchozí je zeptat se uživatele, co dělat s přetaženými soubory."
@@ -11675,7 +11690,7 @@ msgstr "Koncový čas nemohl být analyzován: %1"
 msgid "The end time must be greater than the start time."
 msgstr "Koncový čas musí být větší než počáteční čas."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:398
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:404
 #, no-c-format
 msgid "The expression must contain at least one pair of capturing parenthesis."
 msgstr "Výraz musí obsahovat alespoň jeden pár zachytávacích závorek."
@@ -11779,7 +11794,7 @@ msgstr "Soubor '{0}' nemohl být otevřen pro čtení: {1}."
 msgid "The file '{0}' could not be opened for reading: {1}.\n"
 msgstr "Soubor '{0}' nemohl být otevřen pro čtení: {1}.\n"
 
-#: src/common/kax_info.cpp:1283
+#: src/common/kax_info.cpp:1290
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}."
 msgstr "Soubor '{0}' nemohl být otevřen pro zápis: {1}."
@@ -11960,8 +11975,8 @@ msgstr "Soubor nebo adresář nebyl nalezen"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1573
-#: src/input/r_matroska.cpp:2290
+#: src/input/r_matroska.cpp:1594
+#: src/input/r_matroska.cpp:2315
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Soubor nebude dále zpracován."
@@ -12021,7 +12036,7 @@ msgstr "První soubor nelze připojit, protože nejsou žádné soubory, ke kter
 msgid "The first mode extracts some tracks to external files."
 msgstr "První režim extrahuje některé stopy do externích souborů."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:399
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:405
 #, no-c-format
 msgid "The first non-empty capturing parenthesis will be used as the language."
 msgstr "Jako jazyk budou použity první neprázdné zachytávací závorky."
@@ -12036,7 +12051,7 @@ msgstr "Jsou podporovány následující režimy:"
 msgid "The following non-recoverable error was found: %1."
 msgstr "Byla nalezena následující neobnovitelná chyba: %1."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:400
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:406
 #, no-c-format
 msgid "The following placeholders can be used to match the list of recognized languages: '<ISO_639_1_CODES>', '<ISO_639_2_CODES>' and '<LANGUAGE_NAMES>'."
 msgstr "Následující zástupné symboly mohou být použity k porovnání seznamu rozpoznaných jazyků: '<ISO_639_1_CODES>', '<ISO_639_2_CODES>' a '<LANGUAGE_NAMES>'."
@@ -12076,7 +12091,7 @@ msgstr "Formáty se neshodují."
 msgid "The fourth mode extracts the chapters, converts them to XML and writes them to an output file."
 msgstr "Čtvrtý režim extrahuje kapitoly, převede je na XML a zapíše je do výstupního souboru."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:441
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:447
 #, no-c-format
 msgid "The generated destination file name has the same base name as the source file name but with an extension based on the track types present in the file."
 msgstr "Generovaný název cílového souboru má stejný základní název jako název zdrojového souboru, ale s příponou založenou na typech stop přítomných v souboru."
@@ -12096,7 +12111,7 @@ msgstr "Hodnoty hlavičky nebyly změněny. Není co ukládat."
 msgid "The height of the two tracks is different: {0} and {1}"
 msgstr "Výška dvou stop je rozdílná: {0} a {1}"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:358
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:364
 #, no-c-format
 msgid "The horizontal layout with two fixed columns results in a wider window while the vertical tab widget layout results in a higher window."
 msgstr "Vodorovné rozložení se dvěma pevnými sloupci má za následek širší okno, zatímco rozložení svislé karty widgetu má za následek vyšší okno."
@@ -12121,17 +12136,17 @@ msgstr "Jazyk pro nově vytvořené kapitoly je nastaven prostřednictvím ovlá
 msgid "The language for this track that players can use for automatic track selection and display for the user."
 msgstr "Jazyk pro tuto stopu, který přehrávače mohou použít pro automatický výběr stopy a její zobrazení uživateli."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:409
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:415
 #, no-c-format
 msgid "The language selected here is used for audio tracks for which their source file contains no such property and for which the language has not been derived from the file name."
 msgstr "Zde vybraný jazyk je použit pro stopy audia, pro které jejich zdrojový soubor neobsahuje žádnou takovou vlastnost a pro které nebyl jazyk odvozen z názvu souboru."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:421
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:427
 #, no-c-format
 msgid "The language selected here is used for subtitle tracks for which their source file contains no such property and for which the language has not been derived from the file name."
 msgstr "Zde vybraný jazyk je použit pro stopy titulků, pro které jejich zdrojový soubor neobsahuje žádnou takovou vlastnost a pro které nebyl jazyk odvozen z názvu souboru."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:415
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:421
 #, no-c-format
 msgid "The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."
 msgstr "Zde vybraný jazyk je použit pro stopy videa, pro které jejich zdrojový soubor neobsahuje žádnou takovou vlastnost a pro které nebyl jazyk odvozen z názvu souboru."
@@ -12141,7 +12156,7 @@ msgstr "Zde vybraný jazyk je použit pro stopy videa, pro které jejich zdrojov
 msgid "The language set here is also used when chapters are generated."
 msgstr "Zde nastavený jazyk je také použit při generování kapitol."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:473
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:479
 #, no-c-format
 msgid "The languages in the 'selected' list on the right will be shown at the top of all the language drop-down boxes in the program."
 msgstr "Jazyky v seznamu 'vybrané' vpravo budou zobrazeny v horní části všech rozevíracích polí jazyka v programu."
@@ -12166,7 +12181,7 @@ msgstr ""
 msgid "The line {0} of the timestamp file '{1}' does not contain a valid floating point number.\n"
 msgstr "Řádek {0} souboru časových razítek '{1}' neobsahuje platné číslo s plovoucí desetinnou čárkou.\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1139
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1144
 #, no-c-format
 msgid "The list of recognized track languages in file names must not be empty."
 msgstr "Seznam rozpoznaných jazyků stop v názvech souborů nesmí být prázdný."
@@ -12244,7 +12259,7 @@ msgstr "Název aplikace nebo knihovny použité pro zapisování souboru."
 msgid "The name of the destination file '{0}' and of one of the source files is the same."
 msgstr "Název cílového souboru '{0}' a jednoho ze zdrojových souborů je stejný."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:319
 #, no-c-format
 msgid "The names will be available for easy selection in both the multiplexer and the header editor."
 msgstr "Názvy budou dostupné pro snadný výběr jak v multiplexeru, tak v editoru hlavičky."
@@ -12322,7 +12337,7 @@ msgstr ""
 msgid "The option file has been created."
 msgstr "Byl vytvořen soubor voleb."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:426
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:432
 #, no-c-format
 msgid "The options entered here are set for all new multiplex jobs by default."
 msgstr "Volby zadané zde jsou nastaveny pro všechny nové úlohy multiplexování jako výchozí."
@@ -12332,7 +12347,7 @@ msgstr "Volby zadané zde jsou nastaveny pro všechny nové úlohy multiplexová
 msgid "The order of the various options is not important."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:357
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:363
 #, no-c-format
 msgid "The other two layouts available are: in two fixed columns to the right or in a tab widget below the files and tracks lists."
 msgstr "Další dvě dostupná rozložení jsou: ve dvou pevných sloupcích vpravo nebo na kartě widgetu pod seznamy souborů a stop."
@@ -12408,7 +12423,7 @@ msgstr "Důvod je neznámý."
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28:00-02:00."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1127
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1132
 #, no-c-format
 msgid "The regular expression for deriving the track language from file names is invalid: %1"
 msgstr "Regulární výraz pro odvození jazyka stopy z názvů souborů je neplatný: %1"
@@ -12676,7 +12691,7 @@ msgstr ""
 msgid "The track parameters do not match."
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:355
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:361
 #, no-c-format
 msgid "The track properties on the \"input\" tab can be laid out in three different way in order to serve different workflows."
 msgstr "Vlastnosti stopy na kartě \"Vstup\" mohou být rozloženy třemi různými způsoby, aby sloužily různým pracovním postupům."
@@ -12697,7 +12712,7 @@ msgstr "Typ souboru '{0}' nemohl být rozpoznán.\n"
 msgid "The type of file '{0}' is not supported.\n"
 msgstr "Typ souboru '{0}' není podporován.\n"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:431
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:437
 #, no-c-format
 msgid "The user can then select which playlist to actually add."
 msgstr "Uživatel pak může vybrat, ke kterému seznamu stop skutečně přidat."
@@ -12725,8 +12740,8 @@ msgstr "Hodnota může být záporná, ale mějte na paměti, že jakýkoliv sn�
 msgid "The values are only stored in the track headers."
 msgstr "Tyto hodnoty jsou uloženy pouze v hlavičkách stop."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:323
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:324
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:329
 #, no-c-format
 msgid "The values will be available for easy selection in the multiplexer."
 msgstr "Hodnoty budou dostupné pro snadný výběr v multiplexeru."
@@ -12863,7 +12878,7 @@ msgstr ""
 msgid "This Ogg/OGM file contains chapters but they could not be parsed. This can be due to the character set not being set properly for them or due to the entries not matching the expected SRT-style format.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:343
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:349
 #, no-c-format
 msgid "This amount is 0.3% of the source file's size or 10 MB, whichever is higher."
 msgstr "Toto množství je 0,3 % velikosti zdrojového souboru nebo 10 MB, podle toho, co je vyšší."
@@ -12887,7 +12902,7 @@ msgstr ""
 msgid "This causes bigger overhead but allows precise seeking and extraction."
 msgstr "Toto způsobí větší ztrátu výkonu, ale umožní přesné hledání a extrahování."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1164
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1169
 #, no-c-format
 msgid "This configuration is currently invalid."
 msgstr "Tato konfigurace je aktuálně neplatná."
@@ -12919,7 +12934,7 @@ msgstr ""
 msgid "This file could not be opened or parsed.\n"
 msgstr "Tento soubor nemohl být otevřen nebo analyzován.\n"
 
-#: src/common/kax_info.cpp:1203
+#: src/common/kax_info.cpp:1210
 #, no-c-format
 msgid "This file is probably not a Matroska file."
 msgstr "Soubor pravděpodobně není soubor Matroska."
@@ -12929,7 +12944,7 @@ msgstr "Soubor pravděpodobně není soubor Matroska."
 msgid "This function requires the application %1."
 msgstr "Tato funkce vyžaduje aplikaci %1."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:264
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:270
 #, no-c-format
 msgid "This happens when clicking the \"abort job\" button in a \"job output\" tab and when quitting the application."
 msgstr "To se stane při kliknutí na tlačítko \"přerušit úlohu\" na kartě \"výstup úlohy\" a při ukončení aplikace."
@@ -12944,7 +12959,7 @@ msgstr ""
 msgid "This is a comma-separated list of 128-bit segment UIDs in the usual UID form: hex numbers with or without the \"0x\" prefix, with or without spaces, exactly 32 digits."
 msgstr "Je to čárkami oddělený seznam 128bitových UID úseků v obvyklém tvaru UID: šestnáctková čísla s nebo bez předpony \"0x\", s nebo bez mezer, přesně 32 číslic."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:260
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:266
 #, no-c-format
 msgid "This is also done when quitting the application."
 msgstr "Toto se také provádí při ukončování aplikace."
@@ -12954,17 +12969,17 @@ msgstr "Toto se také provádí při ukončování aplikace."
 msgid "This is an arbitrary name the GUI can use to refer to this particular configuration."
 msgstr "Toto je libovolný název, který může grafické rozhraní použít pro označení této konkrétní konfigurace."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:254
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:260
 #, no-c-format
 msgid "This is done at startup and at most once within 24 hours."
 msgstr "To je prováděno při spuštění a nanejvýše jednou za 24 hodin."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:456
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:462
 #, no-c-format
 msgid "This is done only if there is already a file whose name matches the unmodified destination file name."
 msgstr "To je prováděno pouze v případě, že již existuje soubor, jehož název odpovídá nezměněnému názvu cílového souboru."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:290
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:296
 #, no-c-format
 msgid "This is the country that newly added chapter names get assigned automatically."
 msgstr "Toto je země, kterou nově přidané názvy kapitol dostanou automaticky přiřazenu."
@@ -12974,7 +12989,7 @@ msgstr "Toto je země, kterou nově přidané názvy kapitol dostanou automatick
 msgid "This is the default mode."
 msgstr "Toto je výchozí režim."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:289
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:295
 #, no-c-format
 msgid "This is the language that newly added chapter names get assigned automatically."
 msgstr "Toto je jazyk, který nově přidané názvy kapitol dostanou automaticky přiřazen."
@@ -12989,7 +13004,7 @@ msgstr "Toto je název, který přehrávač může zobrazovat jako 'hlavní náz
 msgid "This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers."
 msgstr "To se používá například pro stopy videa MPEG-1/-2 pro uložení hlaviček posloupností."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:432
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:438
 #, no-c-format
 msgid "This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a playlist belongs to."
 msgstr "Toto je užitečné pro situace, jako jsou disky Blu-ray, na kterých je množství seznamů stop ve stejném adresáři, a kde není zřejmé, která vlastnost (např. hlavní film, doplňky atd.) k seznamu stop patří."
@@ -13134,8 +13149,8 @@ msgstr "Tato stopa obsahuje data SBR AAC/HE-AAC/AAC+."
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1573
-#: src/input/r_matroska.cpp:2290
+#: src/input/r_matroska.cpp:1594
+#: src/input/r_matroska.cpp:2315
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr ""
@@ -13165,7 +13180,7 @@ msgstr "Toto funguje pro všechny typy stop."
 msgid "This would cause mkvmerge to overwrite one of your source files."
 msgstr ""
 
-#: src/common/kax_element_names.cpp:257
+#: src/common/kax_element_names.cpp:263
 #, no-c-format
 msgid "Time slice"
 msgstr "Časový interval"
@@ -13181,7 +13196,7 @@ msgid "Timestamp file:"
 msgstr "Soubor s časovými razítky:"
 
 #: src/common/kax_element_names.cpp:84
-#: src/common/kax_element_names.cpp:201
+#: src/common/kax_element_names.cpp:207
 #, fuzzy, no-c-format
 msgid "Timestamp scale"
 msgstr "Soubor s časovými kódy:"
@@ -13209,7 +13224,7 @@ msgstr "Název"
 msgid "To all destination files"
 msgstr "Pro všechny cílové soubory"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:761
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:767
 #, no-c-format
 msgid "Top"
 msgstr "Nahoře"
@@ -13219,7 +13234,7 @@ msgstr "Nahoře"
 msgid "Trac&k name:"
 msgstr "&Název stopy:"
 
-#: src/common/kax_element_names.cpp:179
+#: src/common/kax_element_names.cpp:185
 #, no-c-format
 msgid "Track"
 msgstr "Stopa"
@@ -13241,8 +13256,8 @@ msgstr "Stopa s ID {0} má neznámý typ AAC.\n"
 msgid "Track ID {0}: {1} ({2})"
 msgstr "Stopa s ID {0}: {1} ({2})"
 
-#: src/common/kax_element_names.cpp:181
-#: src/common/kax_element_names.cpp:298
+#: src/common/kax_element_names.cpp:187
+#: src/common/kax_element_names.cpp:304
 #: src/common/property_element.cpp:126
 #, no-c-format
 msgid "Track UID"
@@ -13260,7 +13275,7 @@ msgstr "Extrahování stopy"
 msgid "Track headers"
 msgstr "Hlavičky stopy"
 
-#: src/common/kax_element_names.cpp:180
+#: src/common/kax_element_names.cpp:186
 #: src/common/property_element.cpp:125
 #, no-c-format
 msgid "Track number"
@@ -13282,12 +13297,12 @@ msgstr ""
 msgid "Track number:"
 msgstr "Číslo stopy:"
 
-#: src/common/kax_element_names.cpp:193
+#: src/common/kax_element_names.cpp:199
 #, fuzzy, no-c-format
 msgid "Track overlay"
 msgstr "Číslo stopy"
 
-#: src/common/kax_element_names.cpp:182
+#: src/common/kax_element_names.cpp:188
 #, no-c-format
 msgid "Track type"
 msgstr "Typ stopy"
@@ -13305,7 +13320,7 @@ msgstr ""
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1257
+#: src/input/r_matroska.cpp:1262
 #, no-c-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr ""
@@ -13379,12 +13394,12 @@ msgstr "Stopa {0}: Informace AAC nemohla být analyzována.\n"
 msgid "Track {0}: {1}, codec ID: {2}{3}{4}{5}\n"
 msgstr "Stopa {0}: {1}, ID kodeku: {2}{3}{4}{5}\n"
 
-#: src/common/kax_element_names.cpp:178
+#: src/common/kax_element_names.cpp:184
 #, no-c-format
 msgid "Tracks"
 msgstr "Stopy"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:469
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:475
 #, no-c-format
 msgid "Tracks with a language in this list will be set not to be copied by default."
 msgstr "Stopy s jazykem na tomto seznamu nebudou ve výchozím nastavení nastaveny ke zkopírování ."
@@ -13506,7 +13521,7 @@ msgstr ""
 msgid "Unknown content encoding type {0} for track {1}.\n"
 msgstr ""
 
-#: src/common/kax_info.cpp:1227
+#: src/common/kax_info.cpp:1234
 #, no-c-format
 msgid "Unknown element"
 msgstr "Neznámý prvek"
@@ -13594,7 +13609,7 @@ msgstr ""
 msgid "Unsupported file format"
 msgstr "Nepodporovaný formát souboru"
 
-#: src/input/r_matroska.cpp:2106
+#: src/input/r_matroska.cpp:2131
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Nepodporovaný typ stopy pro tuto stopu.\n"
@@ -13681,7 +13696,7 @@ msgstr "Použití délky NALU 3 bajty by mohlo mít za následek stopy, které n
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "Použit demultiplexer pro formát '{0}'.\n"
 
-#: src/input/r_matroska.cpp:1602
+#: src/input/r_matroska.cpp:1623
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Použit všeobecný výstupní modul pro stopu typu '{0}'.\n"
@@ -13691,7 +13706,7 @@ msgstr "Použit všeobecný výstupní modul pro stopu typu '{0}'.\n"
 msgid "Using the output module for the format '{0}'.\n"
 msgstr "Použit výstupní modul pro formát '{0}'.\n"
 
-#: src/merge/cluster_helper.cpp:766
+#: src/merge/cluster_helper.cpp:772
 #, no-c-format
 msgid "Using the track with the ID {0} from the file '{1}' as the reference for chapter generation.\n"
 msgstr ""
@@ -14174,12 +14189,12 @@ msgstr "&Při přetažení souborů:"
 msgid "When &finished…"
 msgstr "&Po dokončení…"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:328
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:334
 #, no-c-format
 msgid "When a file is added its name is scanned."
 msgstr "Když je přidán soubor, je jeho název prohledán."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:462
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:468
 #, no-c-format
 msgid "When adding source files all tracks are normally set to be copied into the destination file."
 msgstr "Při přidávání zdrojových souborů jsou všechny stopy normálně nastaveny ke zkopírování do cílového souboru."
@@ -14189,27 +14204,27 @@ msgstr "Při přidávání zdrojových souborů jsou všechny stopy normálně n
 msgid "When appending: one chapter is created at the start and one whenever a file is appended."
 msgstr "Při připojování: jedna kapitola je vytvořena na začátku a jedna tam, kde je připojen soubor."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:305
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:311
 #, no-c-format
 msgid "When the user adds a file containing such a title, the program will copy the title into the \"file title\" input box if this option is enabled."
 msgstr "Když uživatel přidá soubor obsahující takový název, tak program zkopíruje název do vstupního pole \"název souboru\", pokud je tato volba povolena."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:380
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:386
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:392
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:408
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:398
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:414
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:420
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:426
 #, no-c-format
 msgid "When the user adds such a file the track's language input is set to the language property from the source file."
 msgstr "Když uživatel přidá takový soubor, tak je vstupní jazyk stopy nastaven na vlastnost jazyk ze zdrojového souboru."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:494
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:500
 #, no-c-format
 msgid "When the user drags & drops files from an external application onto a header editor tab the GUI can take different actions."
 msgstr "Když uživatel přetáhne soubory z externí aplikace na kartu editoru hlavičky, může grafické rozhraní provádět různé akce."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:371
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:377
 #, no-c-format
 msgid "When the user drags & drops files from an external application onto the multiplex tool the GUI can take different actions."
 msgstr "Když uživatel přetáhne soubory z externí aplikace na nástroj multiplexování, může grafické rozhraní provádět různé akce."
@@ -14219,7 +14234,7 @@ msgstr "Když uživatel přetáhne soubory z externí aplikace na nástroj multi
 msgid "When to execute:"
 msgstr "Kdy spustit:"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:430
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:436
 #, no-c-format
 msgid "Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."
 msgstr "Kdykoliv uživatel přidá seznam stop, program může automaticky vyhledat v adresáři další seznamy stop a předložit uživateli podrobný seznam nalezených seznamů stop."
@@ -14269,17 +14284,17 @@ msgstr "Windows Media (ASF/WMV)"
 msgid "Windows Television DVR"
 msgstr ""
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:367
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:373
 #, no-c-format
 msgid "With \"close current settings\" the current multiplex settings will be closed without opening new ones."
 msgstr "Pomocí \"Zavřít aktuální nastavení\" bude aktuální nastavení multiplexování zavřeno bez otevření nových."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:363
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:369
 #, no-c-format
 msgid "With \"create new settings\" a new set of multiplex settings will be added."
 msgstr "Pomocí \"Vytvořit nové nastavení\" bude přidána nová sada nastavení multiplexování."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:365
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:371
 #, no-c-format
 msgid "With \"remove source files\" all source files will be removed."
 msgstr "Pomocí \"Odebrat zdrojové soubory\" budou odebrány všechny zdrojové soubory."
@@ -14419,7 +14434,7 @@ msgstr "Formát použitý časovým razítkem začátku můžete řídit pomocí
 msgid "You can download the application from the following URL:"
 msgstr "Aplikaci můžete stáhnout z následující adresy:"
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:464
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:470
 #, no-c-format
 msgid "You can exempt certain track types from this restriction by checking the corresponding check box below, e.g. for video tracks."
 msgstr "Můžete vyloučit určité typy stop z tohoto omezení zaškrtnutím odpovídajícího zaškrtávací políčko níže, např. pro stopy videa."
@@ -14434,7 +14449,7 @@ msgstr "Můžete nechat editor hlaviček přidat prvek do souboru."
 msgid "You can let the header editor remove the element from the file."
 msgstr "Můžete nechat editor hlaviček odebrat prvek ze souboru."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:286
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:292
 #, no-c-format
 msgid "You can opt for having them removed automatically under certain conditions."
 msgstr "Můžete se rozhodnout nechat je odebírat automaticky za určitých podmínek."
@@ -14459,13 +14474,13 @@ msgstr "Můžete zadat až devět číslic pro počet nanosekund 'nnnnnnnnn' neb
 msgid "You can split based on the amount of time passed, based on timestamps, on frame/field numbers or on chapter numbers."
 msgstr "Můžete rozdělovat na základě množství uplynulého času, na základě časových razítek, podle čísel snímků nebo polí a čísel kapitol."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:314
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:320
 #, no-c-format
 msgid "You can still enter track names not present in this list manually in both tools."
 msgstr "V obou nástrojích můžete stále ručně zadat názvy stop, které nejsou v tomto seznamu."
 
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:319
-#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:324
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:325
+#: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:330
 #, no-c-format
 msgid "You can still enter values not present in this list manually in the multiplexer."
 msgstr "V multiplexeru můžete stále ručně zadat hodnoty, které nejsou v tomto seznamu."
@@ -14595,7 +14610,7 @@ msgstr "proložené sloupce (pravý první)"
 msgid "compression"
 msgstr "komprese"
 
-#: src/merge/generic_packetizer.cpp:1679
+#: src/merge/generic_packetizer.cpp:1714
 #, no-c-format
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: file_num nenalezen. {0}\n"
@@ -14625,7 +14640,7 @@ msgstr "výchozí délka: {0:.3f}ms ({1:.3f} snímků/polí za sekundu pro stopu
 msgid "deflateInit() failed. Result: {0}\n"
 msgstr "deflateInit() selhalo. Výsledek: {0}\n"
 
-#: src/common/kax_info.cpp:995
+#: src/common/kax_info.cpp:1002
 #, no-c-format
 msgid "discardable, "
 msgstr "zrušitelné, "
@@ -14735,7 +14750,7 @@ msgstr "odebrání hlavičky"
 msgid "inflateInit() failed. Result: {0}\n"
 msgstr "inflateInit() selhalo. Výsledek: {0}\n"
 
-#: src/common/kax_info.cpp:993
+#: src/common/kax_info.cpp:1000
 #, no-c-format
 msgid "key, "
 msgstr "klíč, "
@@ -14755,113 +14770,113 @@ msgstr "délka {0}, data: {1}"
 msgid "line {0}: The 'delay' timestamp could not be parsed.\n"
 msgstr "řádek {0}: Časové razítko 'delay' nemohlo být analyzováno.\n"
 
-#: src/input/r_matroska.cpp:397
+#: src/input/r_matroska.cpp:402
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (Režim kompatibility MS pro stopu {0}) Matroska říká, že je zde {1} bitů na vzorek, ale WAVEFORMATEX říká, že jich je zde {2}.\n"
 
-#: src/input/r_matroska.cpp:388
+#: src/input/r_matroska.cpp:393
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (Režim kompatibility MS pro stopu {0}) Matroska říká, že je zde {1} kanálů, ale WAVEFORMATEX říká, že jich je zde {2}.\n"
 
-#: src/input/r_matroska.cpp:379
+#: src/input/r_matroska.cpp:384
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, but WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader: (Režim kompatibility MS pro stopu {0}) Matroska říká, že je zde {1} vzorků za sekundu, ale WAVEFORMATEX říká, že jich je zde {2}.\n"
 
-#: src/input/r_matroska.cpp:600
+#: src/input/r_matroska.cpp:605
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (Režim kompatibility MS, stopa {0}) Matroska říká, že výška videa je {1}, ale BITMAPINFOHEADER říká, že je {2}.\n"
 
-#: src/input/r_matroska.cpp:591
+#: src/input/r_matroska.cpp:596
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (Režim kompatibility MS, stopa {0}) Matroska říká, že šířka videa je {1}, ale BITMAPINFOHEADER říká, že je {2}.\n"
 
-#: src/input/r_matroska.cpp:1666
+#: src/input/r_matroska.cpp:1689
 #, no-c-format
 msgid "matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"
 msgstr "matroska_reader: Nelze ponechat UID stopy {0}, protože je již přiděleno pro nový soubor.\n"
 
-#: src/input/r_matroska.cpp:1512
-#: src/input/r_matroska.cpp:1517
+#: src/input/r_matroska.cpp:1533
+#: src/input/r_matroska.cpp:1538
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Nenalezen žádný úsek.\n"
 
-#: src/input/r_matroska.cpp:1206
+#: src/input/r_matroska.cpp:1211
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Chybí výška v pixelech.\n"
 
-#: src/input/r_matroska.cpp:1204
+#: src/input/r_matroska.cpp:1209
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Chybí šířka v pixelech.\n"
 
-#: src/input/r_matroska.cpp:760
+#: src/input/r_matroska.cpp:765
 #, no-c-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr "matroska_reader: ID kodeku '{0}' pro stopu {1} je neznámé.\n"
 
-#: src/input/r_matroska.cpp:412
-#: src/input/r_matroska.cpp:458
-#: src/input/r_matroska.cpp:481
-#: src/input/r_matroska.cpp:664
-#: src/input/r_matroska.cpp:674
-#: src/input/r_matroska.cpp:695
+#: src/input/r_matroska.cpp:417
+#: src/input/r_matroska.cpp:463
+#: src/input/r_matroska.cpp:486
+#: src/input/r_matroska.cpp:669
+#: src/input/r_matroska.cpp:679
+#: src/input/r_matroska.cpp:700
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: ID kodeku pro stopu {0} je '{1}', ale soukromá data kodeku neobsahují platné hlavičky.\n"
 
-#: src/input/r_matroska.cpp:579
+#: src/input/r_matroska.cpp:584
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader: ID kodeku pro stopu {0} je '{1}', ale není zde přítomná žádná struktura BITMAPINFOHEADER. Proto nemáme FourCC k identifikaci použitého kodeku videa.\n"
 
-#: src/input/r_matroska.cpp:357
+#: src/input/r_matroska.cpp:362
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader: ID kodeku pro stopu {0} je '{1}', ale není zde přítomná žádná struktura WAVEFORMATEX. Proto nemáme ID formátu k identifikaci použitého kodeku audia.\n"
 
-#: src/input/r_matroska.cpp:619
+#: src/input/r_matroska.cpp:624
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr "matroska_reader: ID kodeku pro stopu {0} je '{1}', ale nejsou zde žádné soukromé hlavičky kodeku.\n"
 
-#: src/input/r_matroska.cpp:713
+#: src/input/r_matroska.cpp:718
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_reader: ID kodeku pro stopu {0} je '{1}', ale nebyla zde nalezena žádná soukromá data.\n"
 
-#: src/input/r_matroska.cpp:651
+#: src/input/r_matroska.cpp:656
 #, no-c-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr "matroska_reader: Výška pro stopu {0} nebyla nastavena.\n"
 
-#: src/input/r_matroska.cpp:645
+#: src/input/r_matroska.cpp:650
 #, no-c-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_reader: Šířka pro stopu {0} nebyla nastavena.\n"
 
-#: src/input/r_matroska.cpp:798
+#: src/input/r_matroska.cpp:803
 #, no-c-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr "matroska_reader: Stopa {0} se zdá být v pořádku.\n"
 
-#: src/input/r_matroska.cpp:449
+#: src/input/r_matroska.cpp:454
 #, no-c-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: mkvmerge nebylo kompilováno s podporou FLAC. Ignoruje se stopa {0}.\n"
 
-#: src/input/r_matroska.cpp:1501
+#: src/input/r_matroska.cpp:1522
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: Nenalezena žádná hlavička EBML.\n"
 
-#: src/input/r_matroska.cpp:793
+#: src/input/r_matroska.cpp:798
 #, no-c-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr "matroska_reader: Neznámý typ nástroje demuxer pro stopu {0}: '{1}'\n"
@@ -15282,7 +15297,7 @@ msgstr ""
 msgid "track name"
 msgstr "název stopy"
 
-#: src/common/kax_info.cpp:862
+#: src/common/kax_info.cpp:869
 #, no-c-format
 msgid "track number {0}, {1} frame(s), timestamp {2}"
 msgstr "číslo stopy {0}, {1} snímků, časové razítko {2}"
@@ -15311,7 +15326,7 @@ msgstr "tta_reader: tag_size < 0 v c'tor. {0}\n"
 #: src/common/kax_info.cpp:819
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:116
-#: src/input/r_matroska.cpp:2756
+#: src/input/r_matroska.cpp:2781
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -15322,7 +15337,7 @@ msgstr "tta_reader: tag_size < 0 v c'tor. {0}\n"
 msgid "unknown"
 msgstr "neznámý"
 
-#: src/input/r_matroska.cpp:2739
+#: src/input/r_matroska.cpp:2764
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "neznámý, štítek formátu 0x{0:04x}"
@@ -15378,17 +15393,17 @@ msgstr[1] "{0} bajty"
 msgstr[2] "{0} bajtů"
 msgstr[3] "{0} bajtů"
 
-#: src/common/kax_info.cpp:932
+#: src/common/kax_info.cpp:939
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"
 msgstr "{0} snímek, stopa {1}, časové razítko {2}, délka {3}, velikost {4}, adler 0x{5:08x}{6}{7}\n"
 
-#: src/common/kax_info.cpp:1051
+#: src/common/kax_info.cpp:1058
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}\n"
 msgstr "{0} snímek, stopa {1}, časové razítko {2}, velikost {3}, adler 0x{4:08x}{5}\n"
 
-#: src/common/kax_info.cpp:942
+#: src/common/kax_info.cpp:949
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"
 msgstr "{0} snímek, stopa {1}, časové razítko {2}, velikost {3}, adler 0x{4:08x}{5}{6}\n"
@@ -15443,8 +15458,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: došlo k výjimce (zpráva: {1}; typ: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1572
-#: src/input/r_matroska.cpp:2289
+#: src/input/r_matroska.cpp:1593
+#: src/input/r_matroska.cpp:2314
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: došlo k neznámé výjimce."
@@ -15474,7 +15489,7 @@ msgstr "{0}: chybějící dělitel v '{1} {2}'.\n"
 msgid "{0}: missing track ID in '{1} {2}'.\n"
 msgstr "{0}: chybějící ID stopy v '{1} {2}'.\n"
 
-#: src/common/kax_info.cpp:997
+#: src/common/kax_info.cpp:1004
 #, no-c-format
 msgid "{0}track number {1}, {2} frame(s), timestamp {3}"
 msgstr "{0}číslo stopy {1}, {2} snímků, časové razítko {3}"
@@ -15665,6 +15680,9 @@ msgstr "– Nastavit na žádný –"
 #~ msgid "Block duration: %1%.%|2$06d|ms"
 #~ msgstr "Délka bloku: %1%.%|2$06d|ms"
 
+#~ msgid "Category is not NUL terminated"
+#~ msgstr "Kategorie je ukončena nenulovým znakem"
+
 #~ msgid "Chapter Translate ID: %1%"
 #~ msgstr "ID překladu kapitoly: %1%"
 
@@ -15844,6 +15862,9 @@ msgstr "– Nastavit na žádný –"
 
 #~ msgid "It was written by Moritz Bunkus <moritz@bunkus.org>."
 #~ msgstr "Jeho autorem je Moritz Bunkus <moritz@bunkus.org>."
+
+#~ msgid "Language is not NUL terminated"
+#~ msgstr "Jazyk je ukončen nenulovým znakem"
 
 #~ msgid "Language: %1%"
 #~ msgstr "Jazyk: %1%"
