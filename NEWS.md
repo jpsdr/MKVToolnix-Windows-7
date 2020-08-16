@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: preferences: under certain conditions changing the selected
+  entry in the page tree on the left did not cause the page shown on the right
+  to be updated. Fixes #2895.
+
+
 # Version 49.0.0 "Sick Of Losing Soulmates" 2020-08-02
 
 ## New features and enhancements
