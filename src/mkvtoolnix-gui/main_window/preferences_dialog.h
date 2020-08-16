@@ -6,6 +6,7 @@
 
 #include "mkvtoolnix-gui/util/settings.h"
 
+class QItemSelection;
 class QListWidget;
 class QModelIndex;
 
@@ -64,7 +65,7 @@ public Q_SLOTS:
   void enableOutputFileNameControls();
   void browseMediaInfoExe();
   void browseFixedOutputDirectory();
-  void pageSelectionChanged(QModelIndex const &current);
+  void pageSelectionChanged(QItemSelection const &selection);
   void addProgramToExecute();
   void removeProgramToExecute(int index);
   void setSendersTabTitleForRunProgramWidget();

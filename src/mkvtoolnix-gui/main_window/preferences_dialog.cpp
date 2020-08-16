@@ -155,7 +155,11 @@ PreferencesDialog::probeRangePercentageChanged()
 }
 
 void
-PreferencesDialog::pageSelectionChanged(QModelIndex const &current) {
+PreferencesDialog::pageSelectionChanged(QItemSelection const &selection) {
+  if (selection.indexes().isEmpty())
+    return;
+
+  auto current = selection.indexes().first();
   if (!current.isValid())
     return;
 
@@ -228,7 +232,9 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
 
   showPage(pageToShow);
 
-  connect(ui->pageSelector->selectionModel(), &QItemSelectionModel::currentChanged, this, &PreferencesDialog::pageSelectionChanged);
+  m_ignoreNextCurrentChange = false;
+
+  connect(ui->pageSelector->selectionModel(), &QItemSelectionModel::selectionChanged, this, &PreferencesDialog::pageSelectionChanged);
 }
 
 void
@@ -1095,9 +1101,8 @@ PreferencesDialog::showPage(Page page) {
     return;
 
   m_ignoreNextCurrentChange = true;
-  auto selection            = QItemSelection{pageModelIndex, pageModelIndex};
 
-  ui->pageSelector->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
+  ui->pageSelector->selectionModel()->select(pageModelIndex, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
   ui->pages->setCurrentIndex(pageIndex);
 }
 
