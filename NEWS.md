@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: the chapter generation mode `when-appending` now also works with
+  the splitting modes `parts:` & `parts-frames:` when using the `…,+…` syntax
+  for appending other sections of the source file to the same destination
+  file. Implements #2898.
+
 ## Bug fixes
 
 * MKVToolNix GUI: preferences: under certain conditions changing the selected

@@ -216,12 +216,19 @@ cluster_helper_c::split(packet_cptr &packet) {
   auto &current_split_point  = m->split_points[m->current_split_point_idx];
   bool create_new_file       = current_split_point.m_create_new_file;
   bool previously_discarding = m->discarding;
+  auto generate_chapter      = false;
 
   mxdebug_if(m->debug_splitting, fmt::format("Splitting: splitpoint {0} reached before timestamp {1}, create new? {2}.\n", current_split_point.str(), mtx::string::format_timestamp(packet->assigned_timestamp), create_new_file));
 
   finish_file(false, create_new_file, previously_discarding);
 
   if (current_split_point.m_use_once) {
+    if (   !current_split_point.m_discard
+        && (chapter_generation_mode_e::when_appending == m->chapter_generation_mode)
+        && (   (split_point_c::parts             == current_split_point.m_type)
+            || (split_point_c::parts_frame_field == current_split_point.m_type)))
+      generate_chapter = true;
+
     if (   current_split_point.m_discard
         && (   (split_point_c::parts             == current_split_point.m_type)
             || (split_point_c::parts_frame_field == current_split_point.m_type))
@@ -250,6 +257,9 @@ cluster_helper_c::split(packet_cptr &packet) {
   m->first_timestamp_in_part = -1;
 
   handle_discarded_duration(create_new_file, previously_discarding);
+
+  if (generate_chapter)
+    generate_one_chapter(timestamp_c::ns(packet->assigned_timestamp - std::max<int64_t>(0, m->timestamp_offset) - m->discarded_duration));
 
   prepare_new_cluster();
 }

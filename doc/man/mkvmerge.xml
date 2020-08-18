@@ -256,6 +256,12 @@
          '<literal>when-appending</literal>' – This mode creates one chapter at the start and one chapter whenever a file is appended.
         </para>
 
+        <para>
+         This mode also works with split modes '<literal>parts:</literal>' and '<literal>parts-frames:</literal>'. For these modes one
+         chapter will be generated for each appended timestamp range (those whose start timestamps are prefixed with
+         '<literal>+</literal>').
+        </para>
+
         <note>
          <para>
           &mkvmerge; requires a video or an audio track to be present in order to be able to determine when a new file is appended.  If one or
