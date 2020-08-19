@@ -30,8 +30,7 @@ split(std::string const &text,
   std::size_t previous_match_end = 0;
 
   while (   (match != end)
-         && (   (0 == max)
-             || ((results.size() + 1) < max))) {
+         && ((results.size() + 1) < max)) {
     results.push_back(text.substr(previous_match_end, match->position(0) - previous_match_end));
     previous_match_end = match->position(0) + match->length(0);
     ++match;
