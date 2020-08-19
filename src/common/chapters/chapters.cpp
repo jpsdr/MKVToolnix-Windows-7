@@ -30,10 +30,10 @@
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/regex.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
-#include "common/strings/regex.h"
 #include "common/unique_numbers.h"
 #include "common/xml/ebml_chapters_converter.h"
 

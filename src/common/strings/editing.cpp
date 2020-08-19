@@ -15,7 +15,6 @@
 
 #include "common/memory.h"
 #include "common/strings/editing.h"
-#include "common/strings/regex.h"
 
 namespace mtx::string {
 

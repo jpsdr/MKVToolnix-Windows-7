@@ -17,8 +17,6 @@
 
 namespace mtx::regex {
 
-std::string escape(std::string const &s);
-
 template<typename Tunary_function>
 std::string
 replace(std::string::const_iterator first,

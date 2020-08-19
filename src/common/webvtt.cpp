@@ -13,9 +13,9 @@
 
 #include "common/common_pch.h"
 
+#include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
-#include "common/strings/regex.h"
 #include "common/webvtt.h"
 
 #define RE_TIMESTAMP "((?:\\d{2}:)?\\d{2}:\\d{2}\\.\\d{3})"

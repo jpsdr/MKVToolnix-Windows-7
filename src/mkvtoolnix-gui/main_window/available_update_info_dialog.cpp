@@ -8,7 +8,7 @@
 
 #include "common/markdown.h"
 #include "common/qt.h"
-#include "common/strings/regex.h"
+#include "common/regex.h"
 #include "mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h"
 #include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
 
