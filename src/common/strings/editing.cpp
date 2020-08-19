@@ -47,7 +47,31 @@ std::vector<std::string>
 split(std::string const &text,
       std::string const &pattern,
       std::size_t max) {
-  return split(text, std::regex{mtx::regex::escape(pattern)}, max);
+  if (text.empty())
+    return { ""s };
+
+  if (pattern.empty())
+    return { text };
+
+  std::vector<std::string> results;
+
+  auto pos = text.find(pattern);
+  std::size_t consumed_up_to = 0;
+
+  while ((pos != std::string::npos) && ((results.size() + 1) < max)) {
+    results.emplace_back(text.substr(consumed_up_to, pos - consumed_up_to));
+
+    consumed_up_to = pos + pattern.size();
+    pos            = text.find(pattern, consumed_up_to);
+  }
+
+  if (consumed_up_to < text.size())
+    results.emplace_back(text.substr(consumed_up_to));
+
+  else if (consumed_up_to == text.size())
+    results.emplace_back(""s);
+
+  return results;
 }
 
 void

@@ -12,6 +12,10 @@
 * MKVToolNix GUI: preferences: under certain conditions changing the selected
   entry in the page tree on the left did not cause the page shown on the right
   to be updated. Fixes #2895.
+* mkvmerge: splitting text by a fixed string (e.g. `,`) is now done by using
+  `std::string.find()` instead of using a regular-expression-based text
+  splitting function, greatly improving its performance. Part of the fix of
+  #2899.
 
 
 # Version 49.0.0 "Sick Of Losing Soulmates" 2020-08-02

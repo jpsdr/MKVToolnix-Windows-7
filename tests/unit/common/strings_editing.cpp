@@ -21,4 +21,71 @@ TEST(StringsEditing, Chomp) {
   EXPECT_EQ("this\ris\r\ra kind\r\n\r\nof\nmagic ", mtx::string::chomp("this\ris\r\ra kind\r\n\r\nof\nmagic "));
 }
 
+TEST(StringsEditing, SplittingByStringEmptyPattern) {
+  auto r = mtx::string::split("This, and that, is stuff."s, ""s);
+
+  ASSERT_EQ(1,                            r.size());
+  EXPECT_EQ("This, and that, is stuff."s, r[0]);
+}
+
+TEST(StringsEditing, SplittingByStringEmptyText) {
+  auto r = mtx::string::split(""s, ","s);
+
+  ASSERT_EQ(1,   r.size());
+  EXPECT_EQ(""s, r[0]);
+}
+
+TEST(StringsEditing, SplittingByStringOneCharPattern) {
+  auto r = mtx::string::split("This, and that, is stuff."s, ","s);
+
+  ASSERT_EQ(3,             r.size());
+  EXPECT_EQ("This"s,       r[0]);
+  EXPECT_EQ(" and that"s,  r[1]);
+  EXPECT_EQ(" is stuff."s, r[2]);
+}
+
+TEST(StringsEditing, SplittingByStringTwoCharsPattern) {
+  auto r = mtx::string::split("This, and that, is stuff."s, ", "s);
+
+  ASSERT_EQ(3,            r.size());
+  EXPECT_EQ("This"s,      r[0]);
+  EXPECT_EQ("and that"s,  r[1]);
+  EXPECT_EQ("is stuff."s, r[2]);
+}
+
+TEST(StringsEditing, SplittingByStringLimit2) {
+  auto r = mtx::string::split("This, and that, is stuff."s, ", "s, 2);
+
+  ASSERT_EQ(2,                      r.size());
+  EXPECT_EQ("This"s,                r[0]);
+  EXPECT_EQ("and that, is stuff."s, r[1]);
+}
+
+TEST(StringsEditing, SplittingByStringLimit1) {
+  auto r = mtx::string::split("This, and that, is stuff."s, ", "s, 1);
+
+  ASSERT_EQ(1,                            r.size());
+  EXPECT_EQ("This, and that, is stuff."s, r[0]);
+}
+
+TEST(StringsEditing, SplittingByStringPatternAtStart) {
+  auto r = mtx::string::split(",This, and that, is stuff."s, ","s);
+
+  ASSERT_EQ(4,             r.size());
+  EXPECT_EQ(""s,           r[0]);
+  EXPECT_EQ("This"s,       r[1]);
+  EXPECT_EQ(" and that"s,  r[2]);
+  EXPECT_EQ(" is stuff."s, r[3]);
+}
+
+TEST(StringsEditing, SplittingByStringPatternAtEnd) {
+  auto r = mtx::string::split("This, and that, is stuff.,"s, ","s);
+
+  ASSERT_EQ(4,             r.size());
+  EXPECT_EQ("This"s,       r[0]);
+  EXPECT_EQ(" and that"s,  r[1]);
+  EXPECT_EQ(" is stuff."s, r[2]);
+  EXPECT_EQ(""s,           r[3]);
+}
+
 }

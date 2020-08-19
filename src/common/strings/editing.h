@@ -26,7 +26,7 @@ std::string normalize_line_endings(std::string const &str, line_ending_style_e l
 std::string chomp(std::string const &str);
 
 std::vector<std::string> split(std::string const &text, std::regex const &pattern, std::size_t max = 0);
-std::vector<std::string> split(std::string const &text, std::string const &pattern = ",", std::size_t max = 0);
+std::vector<std::string> split(std::string const &text, std::string const &pattern = ",", std::size_t max = std::numeric_limits<std::size_t>::max());
 
 void strip(std::string &s, bool newlines = false);
 std::string strip_copy(std::string const &s, bool newlines = false);
