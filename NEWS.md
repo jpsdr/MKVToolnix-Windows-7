@@ -6,6 +6,8 @@
   the splitting modes `parts:` & `parts-frames:` when using the `…,+…` syntax
   for appending other sections of the source file to the same destination
   file. Implements #2898.
+* MKVToolNix GUI: multiplexer: the file selection dialogs now include the
+  extension `.dtsma` for DTS files. Implements #2901.
 
 ## Bug fixes
 

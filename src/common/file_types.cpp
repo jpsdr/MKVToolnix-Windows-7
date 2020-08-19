@@ -32,7 +32,7 @@ file_type_t::get_supported() {
   s_supported_file_types.emplace_back(file_type_e::is_unknown,  Y("ALAC (Apple Lossless Audio Codec)"),   "caf m4a mp4");
   s_supported_file_types.emplace_back(file_type_e::dirac,       Y("Dirac"),                               "drc");
   s_supported_file_types.emplace_back(file_type_e::truehd,      Y("Dolby TrueHD"),                        "thd thd+ac3 truehd true-hd");
-  s_supported_file_types.emplace_back(file_type_e::dts,         Y("DTS/DTS-HD (Digital Theater System)"), "dts dtshd dts-hd");
+  s_supported_file_types.emplace_back(file_type_e::dts,         Y("DTS/DTS-HD (Digital Theater System)"), "dts dtshd dts-hd dtsma");
 #if defined(HAVE_FLAC_FORMAT_H)
   s_supported_file_types.emplace_back(file_type_e::flac,        Y("FLAC (Free Lossless Audio Codec)"),    "flac ogg");
 #endif
