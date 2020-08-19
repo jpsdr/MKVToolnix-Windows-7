@@ -2019,7 +2019,7 @@ struct select{
         ///@param nas jp::MapNas map.
         ///@param ntn jp::MapNtN map.
         ///@return empty string.
-        static String eraseFill(NumSub const &num, MapNas const &nas, MapNtN const &ntn){
+        static String eraseFill([[maybe_unused]] NumSub const &num, [[maybe_unused]] MapNas const &nas, [[maybe_unused]] MapNtN const &ntn){
             return String();
         }
 
@@ -2043,7 +2043,7 @@ struct select{
         ///@param nas jp::MapNas map.
         ///@param ntn jp::MapNtN map.
         ///@return total match (group 0) of current match.
-        static String fill(NumSub const &num, MapNas const &nas, MapNtn const &ntn){
+        static String fill(NumSub const &num, [[maybe_unused]] MapNas const &nas, [[maybe_unused]] MapNtn const &ntn){
             return num[0];
         }
 
@@ -4588,7 +4588,7 @@ typename jpcre2::select<Char_T>::String jpcre2::select<Char_T>::MatchEvaluator::
 
 #if JPCRE2_USE_MINIMUM_CXX_11
 template<typename Char_T, template<typename...> class Map>
-typename jpcre2::select<Char_T, Map>::String jpcre2::select<Char_T, Map>::MatchEvaluator::nreplace(bool do_match, Uint jo, SIZE_T* counter){
+typename jpcre2::select<Char_T, Map>::String jpcre2::select<Char_T, Map>::MatchEvaluator::nreplace(bool do_match, [[maybe_unused]] Uint jo, SIZE_T* counter){
 #else
 template<typename Char_T>
 typename jpcre2::select<Char_T>::String jpcre2::select<Char_T>::MatchEvaluator::nreplace(bool do_match, Uint jo, SIZE_T* counter){
