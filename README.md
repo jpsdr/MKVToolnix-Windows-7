@@ -32,6 +32,7 @@ MKVToolNix 49.0.0
     11. [QtWaitingSpinner](#611-qtwaitingspinner)
     12. [Fancy tab widget](#612-fancy-tab-widget)
     13. [fmt](#613-fmt)
+    14. [jpcre2](#614-jpcre2)
 
 -----------------
 
@@ -466,3 +467,12 @@ Small, safe and fast formatting library
   * License: BSD (see `doc/licenses/fmt-BSD.txt`)
   * URL: http://fmtlib.net/latest/
   * Corresponding files: `lib/fmt/*`
+
+## 6.14. jpcre2
+
+C++ wrapper for PCRE2 Library
+
+  * Copyright: 2015–2017 Md Jahidul Hamid
+  * License: BSD (see `doc/licenses/jpcre2-BSD.txt`)
+  * URL: https://github.com/jpcre2/jpcre2/
+  * Corresponding files: `lib/jpcre2/*`
