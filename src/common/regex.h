@@ -15,7 +15,31 @@
 
 #include "common/common_pch.h"
 
+#include "jpcre2/jpcre2.hpp"
+
 namespace mtx::regex {
+
+using jp = jpcre2::select<char>;
+
+inline auto
+match(std::string const &subject,
+      jp::Regex const &regex) {
+  return jp::RegexMatch()
+    .setRegexObject(&regex)
+    .setSubject(subject)
+    .match();
+}
+
+inline auto
+match(std::string const &subject,
+      jp::VecNum &matches,
+      jp::Regex const &regex) {
+  return jp::RegexMatch()
+    .setRegexObject(&regex)
+    .setNumberedSubstringVector(&matches)
+    .setSubject(subject)
+    .match();
+}
 
 template<typename Tunary_function>
 std::string
