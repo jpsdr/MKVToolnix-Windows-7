@@ -14,7 +14,7 @@ TEST(StringsEditing, NormalizeLineEndings) {
   EXPECT_EQ("",                                            mtx::string::normalize_line_endings("",                                    mtx::string::line_ending_style_e::cr_lf));
 }
 
-TEST(StringsFormatting, Chomp) {
+TEST(StringsEditing, Chomp) {
   EXPECT_EQ("this\ris\r\ra kind\r\n\r\nof\nmagic",  mtx::string::chomp("this\ris\r\ra kind\r\n\r\nof\nmagic\r\n\r\n"));
   EXPECT_EQ("this\ris\r\ra kind\r\n\r\nof\nmagic",  mtx::string::chomp("this\ris\r\ra kind\r\n\r\nof\nmagic\n\n"));
   EXPECT_EQ("this\ris\r\ra kind\r\n\r\nof\nmagic",  mtx::string::chomp("this\ris\r\ra kind\r\n\r\nof\nmagic\r\r"));
