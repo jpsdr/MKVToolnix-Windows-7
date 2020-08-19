@@ -16,6 +16,9 @@
   `std::string.find()` instead of using a regular-expression-based text
   splitting function, greatly improving its performance. Part of the fix of
   #2899.
+* mkvmerge: mkvmerge will now read-buffer file I/O when probing text file
+  formats which increases its speed significantly on Windows. Part of the fix
+  of #2899.
 
 
 # Version 49.0.0 "Sick Of Losing Soulmates" 2020-08-02

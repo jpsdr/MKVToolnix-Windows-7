@@ -199,7 +199,7 @@ prober_for_type(mtx::file_type_e type) {
 std::unique_ptr<generic_reader_c>
 detect_text_file_formats(filelist_t const &file) {
   try {
-    auto text_io = std::make_shared<mm_text_io_c>(std::make_shared<mm_file_io_c>(file.name));
+    auto text_io = std::make_shared<mm_text_io_c>(std::make_shared<mm_read_buffer_io_c>(std::make_shared<mm_file_io_c>(file.name)));
     std::unique_ptr<generic_reader_c> reader;
 
     if ((reader = do_probe<webvtt_reader_c>(text_io)))
