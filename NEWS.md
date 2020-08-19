@@ -26,6 +26,10 @@
 * mkvmerge: MP4 reader: fixed handling of `tkhd` atoms of version 1. Fixes
   #2900.
 
+## Build system changes
+
+* The PCRE2 library (the 8-bit variant) is now required.
+
 
 # Version 49.0.0 "Sick Of Losing Soulmates" 2020-08-02
 

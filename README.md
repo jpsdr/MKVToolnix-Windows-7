@@ -103,6 +103,9 @@ programs and libraries you absolutely need are:
   [DocBook XSL stylesheets](https://sourceforge.net/projects/docbook/files/docbook-xsl/)
   — for creating man pages from XML documents
 
+- [PCRE2](https://pcre.org/) — the Perl-compatible regular expression
+  library
+
 You also need the `rake` or `drake` build program. I suggest `rake`
 v10.0.0 or newer (this is included with Ruby 2.1) as it offers
 parallel builds out of the box. If you only have an earlier version of
