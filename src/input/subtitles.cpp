@@ -17,6 +17,7 @@
 #include "common/mime.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
@@ -61,8 +62,8 @@ srt_parser_c::probe(mm_text_io_c &io) {
       return false;
 
     s = io.getline(100);
-    std::regex timestamp_re(SRT_RE_TIMESTAMP_LINE);
-    if (!std::regex_search(s, timestamp_re))
+    mtx::regex::jp::Regex timestamp_re(SRT_RE_TIMESTAMP_LINE);
+    if (!timestamp_re.match(s))
       return false;
 
     s = io.getline();
@@ -87,9 +88,9 @@ srt_parser_c::srt_parser_c(mm_text_io_cptr const &io,
 
 void
 srt_parser_c::parse() {
-  std::regex timestamp_re(SRT_RE_TIMESTAMP_LINE);
-  std::regex number_re("^\\d+$");
-  std::regex coordinates_re(SRT_RE_COORDINATES);
+  mtx::regex::jp::Regex timestamp_re(SRT_RE_TIMESTAMP_LINE, "S");
+  mtx::regex::jp::Regex number_re("^\\d+$", "S");
+  mtx::regex::jp::Regex coordinates_re(SRT_RE_COORDINATES, "S");
 
   int64_t start                  = 0;
   int64_t end                    = 0;
@@ -126,7 +127,7 @@ srt_parser_c::parse() {
     }
 
     if (STATE_INITIAL == state) {
-      if (!std::regex_match(s, number_re)) {
+      if (!number_re.match(s)) {
         mxwarn_tid(m_file_name, m_tid, fmt::format(Y("Error in line {0}: expected subtitle number and found some text.\n"), line_number));
         break;
       }
@@ -134,38 +135,39 @@ srt_parser_c::parse() {
       mtx::string::parse_number(s, subtitle_number);
 
     } else if (STATE_TIME == state) {
-      std::smatch matches;
-      if (!std::regex_search(s, matches, timestamp_re)) {
+      mtx::regex::jp::VecNum matches;
+      if (!mtx::regex::match(s, matches, timestamp_re)) {
         mxwarn_tid(m_file_name, m_tid, fmt::format(Y("Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"), line_number));
         break;
       }
 
       int64_t s_h = 0, s_min = 0, s_sec = 0, s_ns = 0, e_h = 0, e_min = 0, e_sec = 0, e_ns = 0;
 
-      //        1         2       3      4        5     6                7     8
+      //      1       2         3    4          5   6                  7   8
       // "\\s*(-?)\\s*(\\d+):\\s(-?)*(\\d+):\\s*(-?)(\\d+)(?:[,\\.]\\s*(-?)(\\d+))?"
 
-      mtx::string::parse_number(matches[ 2].str(), s_h);
-      mtx::string::parse_number(matches[ 4].str(), s_min);
-      mtx::string::parse_number(matches[ 6].str(), s_sec);
-      mtx::string::parse_number(matches[10].str(), e_h);
-      mtx::string::parse_number(matches[12].str(), e_min);
-      mtx::string::parse_number(matches[14].str(), e_sec);
+      mtx::string::parse_number(matches[0][ 2], s_h);
+      mtx::string::parse_number(matches[0][ 4], s_min);
+      mtx::string::parse_number(matches[0][ 6], s_sec);
+      mtx::string::parse_number(matches[0][10], e_h);
+      mtx::string::parse_number(matches[0][12], e_min);
+      mtx::string::parse_number(matches[0][14], e_sec);
 
-      std::string s_rest = matches[ 8].str();
-      std::string e_rest = matches[16].str();
+      std::string s_rest = matches[0][ 8];
+      std::string e_rest = matches[0][16];
 
       auto neg_calculator = [&matches](auto start_idx) -> auto {
         int64_t neg = 1;
-        for (auto idx = start_idx; idx <= (start_idx + 6); idx += 2)
-          neg *= matches[idx].str() == "-" ? -1 : 1;
+        for (auto idx = 0; idx < 4; ++idx)
+          if (matches[0][start_idx + (idx * 2)] == "-")
+            neg *= -1;
         return neg;
       };
 
       int64_t s_neg = neg_calculator(1);
       int64_t e_neg = neg_calculator(9);
 
-      if (std::regex_search(s, coordinates_re) && !m_coordinates_warning_shown) {
+      if (coordinates_re.match(s) && !m_coordinates_warning_shown) {
         mxwarn_tid(m_file_name, m_tid,
                    Y("This file contains coordinates in the timestamp lines. "
                      "Such coordinates are not supported by the Matroska SRT subtitle format. "
@@ -225,7 +227,7 @@ srt_parser_c::parse() {
         subtitles += "\n";
       subtitles += s;
 
-    } else if (std::regex_match(s, number_re)) {
+    } else if (number_re.match(s)) {
       state = STATE_TIME;
       mtx::string::parse_number(s, subtitle_number);
 
@@ -248,9 +250,9 @@ srt_parser_c::parse() {
 
 bool
 ssa_parser_c::probe(mm_text_io_c &io) {
-  std::regex script_info_re("^\\s*\\[script\\s+info\\]",   std::regex_constants::icase);
-  std::regex styles_re(     "^\\s*\\[V4\\+?\\s+Styles\\]", std::regex_constants::icase);
-  std::regex comment_re(    "^\\s*$|^\\s*[!;]",            std::regex_constants::icase);
+  mtx::regex::jp::Regex script_info_re("^\\s*\\[script\\s+info\\]",   "i");
+  mtx::regex::jp::Regex styles_re(     "^\\s*\\[V4\\+?\\s+Styles\\]", "i");
+  mtx::regex::jp::Regex comment_re(    "^\\s*$|^\\s*[!;]",            "i");
 
   try {
     int line_number = 0;
@@ -265,11 +267,11 @@ ssa_parser_c::probe(mm_text_io_c &io) {
         return false;
 
       // Skip comments and empty lines.
-      if (std::regex_search(line, comment_re))
+      if (comment_re.match(line))
         continue;
 
       // This is the line mkvmerge is looking for: positive match.
-      if (std::regex_search(line, script_info_re) || std::regex_search(line, styles_re))
+      if (script_info_re.match(line) || styles_re.match(line))
         return true;
 
       // Neither a wanted line nor an empty one/a comment: negative result.
@@ -309,12 +311,12 @@ ssa_parser_c::set_charset_converter(charset_converter_cptr const &cc_utf8) {
 
 void
 ssa_parser_c::parse() {
-  std::regex sec_styles_ass_re("^\\s*\\[V4\\+\\s+Styles\\]", std::regex_constants::icase);
-  std::regex sec_styles_re(    "^\\s*\\[V4\\s+Styles\\]",    std::regex_constants::icase);
-  std::regex sec_info_re(      "^\\s*\\[Script\\s+Info\\]",  std::regex_constants::icase);
-  std::regex sec_events_re(    "^\\s*\\[Events\\]",          std::regex_constants::icase);
-  std::regex sec_graphics_re(  "^\\s*\\[Graphics\\]",        std::regex_constants::icase);
-  std::regex sec_fonts_re(     "^\\s*\\[Fonts\\]",           std::regex_constants::icase);
+  mtx::regex::jp::Regex sec_styles_ass_re("^\\s*\\[V4\\+\\s+Styles\\]", "iS");
+  mtx::regex::jp::Regex sec_styles_re(    "^\\s*\\[V4\\s+Styles\\]",    "iS");
+  mtx::regex::jp::Regex sec_info_re(      "^\\s*\\[Script\\s+Info\\]",  "iS");
+  mtx::regex::jp::Regex sec_events_re(    "^\\s*\\[Events\\]",          "iS");
+  mtx::regex::jp::Regex sec_graphics_re(  "^\\s*\\[Graphics\\]",        "iS");
+  mtx::regex::jp::Regex sec_fonts_re(     "^\\s*\\[Fonts\\]",           "iS");
 
   int num                        = 0;
   ssa_section_e section          = SSA_SECTION_NONE;
@@ -336,24 +338,24 @@ ssa_parser_c::parse() {
     if (!strcasecmp(line.c_str(), "ScriptType: v4.00+"))
       m_is_ass = true;
 
-    else if (std::regex_search(line, sec_styles_ass_re)) {
+    else if (sec_styles_ass_re.match(line)) {
       m_is_ass = true;
       section  = SSA_SECTION_V4STYLES;
 
-    } else if (std::regex_search(line, sec_styles_re))
+    } else if (sec_styles_re.match(line))
       section = SSA_SECTION_V4STYLES;
 
-    else if (std::regex_search(line, sec_info_re))
+    else if (sec_info_re.match(line))
       section = SSA_SECTION_INFO;
 
-    else if (std::regex_search(line, sec_events_re))
+    else if (sec_events_re.match(line))
       section = SSA_SECTION_EVENTS;
 
-    else if (std::regex_search(line, sec_graphics_re)) {
+    else if (sec_graphics_re.match(line)) {
       section       = SSA_SECTION_GRAPHICS;
       add_to_global = false;
 
-    } else if (std::regex_search(line, sec_fonts_re)) {
+    } else if (sec_fonts_re.match(line)) {
       section       = SSA_SECTION_FONTS;
       add_to_global = false;
 
