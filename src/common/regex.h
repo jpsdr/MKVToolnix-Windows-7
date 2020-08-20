@@ -23,21 +23,25 @@ using jp = jpcre2::select<char>;
 
 inline auto
 match(std::string const &subject,
-      jp::Regex const &regex) {
+      jp::Regex const &regex,
+      std::string const &modifier = {}) {
   return jp::RegexMatch()
     .setRegexObject(&regex)
     .setSubject(subject)
+    .setModifier(modifier)
     .match();
 }
 
 inline auto
 match(std::string const &subject,
       jp::VecNum &matches,
-      jp::Regex const &regex) {
+      jp::Regex const &regex,
+      std::string const &modifier = {}) {
   return jp::RegexMatch()
     .setRegexObject(&regex)
     .setNumberedSubstringVector(&matches)
     .setSubject(subject)
+    .setModifier(modifier)
     .match();
 }
 
