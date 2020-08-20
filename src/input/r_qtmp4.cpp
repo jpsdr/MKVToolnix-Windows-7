@@ -38,6 +38,7 @@
 #include "common/mm_text_io.h"
 #include "common/mp3.h"
 #include "common/mp4.h"
+#include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/vobsub.h"
@@ -1101,7 +1102,7 @@ qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
 
 void
 qtmp4_reader_c::parse_itunsmpb(std::string data) {
-  data = std::regex_replace(data, std::regex("[^0-9da-fA-F]+"), "");
+  data = mtx::regex::replace(data, mtx::regex::jp::Regex("[^0-9da-fA-F]+"), "g", "");
 
   if (16 > data.length())
     return;

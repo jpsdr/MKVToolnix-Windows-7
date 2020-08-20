@@ -22,6 +22,7 @@
 #include "common/mp3.h"
 #include "common/mpeg1_2.h"
 #include "common/mpeg4_p2.h"
+#include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "common/truehd.h"
 #include "input/r_mpeg_ps.h"
@@ -80,7 +81,7 @@ mpeg_ps_reader_c::read_headers() {
   try {
     uint8_t byte;
 
-    if (!m_ti.m_disable_multi_file && std::regex_search(bfs::path{m_ti.m_fname}.filename().string(), std::regex{"^vts_\\d+_\\d+", std::regex_constants::icase})) {
+    if (!m_ti.m_disable_multi_file && mtx::regex::match(bfs::path{m_ti.m_fname}.filename().string(), mtx::regex::jp::Regex{"^vts_\\d+_\\d+", "i"})) {
       m_in.reset();               // Close the source file first before opening it a second time.
       m_in = mm_multi_file_io_c::open_multi(m_ti.m_fname, false);
     }
