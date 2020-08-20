@@ -25,6 +25,7 @@
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/locale_string.h"
+#include "common/regex.h"
 #include "common/utf8_codecvt_facet.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
@@ -166,7 +167,7 @@ translation_c::determine_default_iso639_ui_language() {
   data = setlocale(LC_MESSAGES, nullptr);
 
   if (data)
-    language_code = std::regex_replace(data, std::regex{"_.*"}, "");
+    language_code = mtx::regex::replace(data, mtx::regex::jp::Regex{"_.*"}, "", "");
 
   setlocale(LC_MESSAGES, previous_locale.c_str());
 
