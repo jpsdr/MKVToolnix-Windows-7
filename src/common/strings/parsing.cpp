@@ -231,29 +231,33 @@ parse_bool(std::string value) {
 bool
 parse_duration_number_with_unit(const std::string &s,
                                 int64_t &value) {
-  std::regex re1("(-?\\d+\\.?\\d*)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?", std::regex_constants::icase);
-  std::regex re2("(-?\\d+)/(-?\\d+)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?", std::regex_constants::icase);
+  static std::optional<mtx::regex::jp::Regex> re1, re2;
+
+  if (!re1) {
+    re1 = mtx::regex::jp::Regex{"^(-?\\d+\\.?\\d*)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?$",  "iS"};
+    re2 = mtx::regex::jp::Regex{"^(-?\\d+)/(-?\\d+)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?$", "iS"};
+  }
 
   std::string unit, s_n, s_d;
   int64_rational_c r{0, 1};
+  mtx::regex::jp::VecNum matches;
 
-  std::smatch matches;
-  if (std::regex_match(s, matches, re1)) {
-    if (!parse_number(matches[1], r))
+  if (mtx::regex::match(s, matches, *re1)) {
+    if (!parse_number(matches[0][1], r))
       return false;
 
-    if (matches.size() > 2)
-      unit = matches[2];
+    if (matches[0].size() > 2)
+      unit = matches[0][2];
 
-  } else if (std::regex_match(s, matches, re2)) {
+  } else if (mtx::regex::match(s, matches, *re2)) {
     int64_t n, d;
-    if (!parse_number(matches[1], n) || !parse_number(matches[2], d))
+    if (!parse_number(matches[0][1], n) || !parse_number(matches[0][2], d))
       return false;
 
     r = int64_rational_c{n, d};
 
-    if (matches.size() > 3)
-      unit = matches[3];
+    if (matches[0].size() > 3)
+      unit = matches[0][3];
 
   } else
     return false;
