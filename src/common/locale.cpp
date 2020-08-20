@@ -29,6 +29,7 @@
 #include "common/mm_mem_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/regex.h"
 #include "common/strings/parsing.h"
 #ifdef SYS_WINDOWS
 # include "common/fs_sys_helpers.h"
@@ -82,7 +83,7 @@ charset_converter_c::init(const std::string &charset,
 
 bool
 charset_converter_c::is_utf8_charset_name(const std::string &charset) {
-  return std::regex_match(charset, std::regex{"^utf-?8$", std::regex_constants::icase});
+  return mtx::regex::match(charset, mtx::regex::jp::Regex{"^utf-?8$", "i"});
 }
 
 void
