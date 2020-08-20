@@ -19,6 +19,7 @@
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/regex.h"
 #include "common/xml/xml.h"
 
 namespace mtx {
@@ -71,21 +72,24 @@ load_file(std::string const &file_name,
     throw mtx::mm_io::end_of_file_x{};
 
   if (byte_order_mark_e::none == in.get_byte_order_mark()) {
-    std::regex encoding_re("^\\s*"             // ignore leading whitespace
-                           "<\\?xml"           // XML declaration start
-                           "[^\\?]+?"          // skip to encoding, but don't go beyond XML declaration
-                           "encoding\\s*=\\s*" // encoding attribute
-                           "\"([^\"]+)\"",     // attribute value
-                           std::regex_constants::icase);
+    mtx::regex::jp::Regex encoding_re{
+      "^\\s*"             // ignore leading whitespace
+      "<\\?xml"           // XML declaration start
+      "[^\\?]+?"          // skip to encoding, but don't go beyond XML declaration
+      "encoding\\s*=\\s*" // encoding attribute
+      "\"([^\"]+)\"",     // attribute value
+      "i"};
 
-    std::smatch matches;
-    if (std::regex_search(content, matches, encoding_re)) {
-      // Extract the old encoding, replace the string with "UTF-8" so
-      // that pugixml doesn't recode, and recode to UTF-8.
-      auto encoding = matches[1].str();
-      content.replace(matches.position(1), matches.length(1), "UTF-8");
+    // Extract the old encoding, replace the string with "UTF-8" so
+    // that pugixml doesn't recode, and recode to UTF-8.
+    std::string encoding;
+    content = mtx::regex::replace(content, encoding_re, "", [&encoding](auto const &match) {
+      encoding = match[1];
+      return "UTF-8"s;
+    });
+
+    if (!encoding.empty())
       content = charset_converter_c::init(encoding)->utf8(content);
-    }
   }
 
   std::stringstream scontent(content);
