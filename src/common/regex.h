@@ -46,6 +46,21 @@ match(std::string const &subject,
 }
 
 inline auto
+match(std::string const &subject,
+      jpcre2::VecOff &matches_start,
+      jpcre2::VecOff &matches_end,
+      jp::Regex const &regex,
+      std::string const &modifier = {}) {
+  return jp::RegexMatch()
+    .setRegexObject(&regex)
+    .setMatchStartOffsetVector(&matches_start)
+    .setMatchEndOffsetVector(&matches_end)
+    .setSubject(subject)
+    .setModifier(modifier)
+    .match();
+}
+
+inline auto
 replace(std::string const &subject,
         jp::Regex const &regex,
         std::string const &modifier,
