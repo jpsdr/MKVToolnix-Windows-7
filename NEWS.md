@@ -156,9 +156,9 @@
   can be changed by append `:<title number>` to the file/directory name in the
   `--chapters …` argument, e.g. `--chapters /srv/dvds/BigBuckBunny/VIDEO_TS:3`
   This feature requires mkvmerge to have been built with the `libdvdread`
-  library.  Part of the implementation of #2808.
+  library. Part of the implementation of #2808.
 * mkvmerge: added `--engage append_and_split_flac` that enables mkvmerge to
-  append and split FLAC tracks, restoring pre-v45 behavior.  The resulting
+  append and split FLAC tracks, restoring pre-v45 behavior. The resulting
   tracks will be broken: the official FLAC tools will not be able to decode
   them and seeking will not work as expected.
 * MKVToolNix GUI: multiplexer: added support for mkvmerge's new support for
