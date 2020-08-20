@@ -37,25 +37,6 @@ struct PACKED_STRUCTURE mvhd_atom_t {
   uint32_t next_track_id;
 };
 
-// 'Track header' atom
-struct PACKED_STRUCTURE tkhd_atom_t {
-  uint8_t  version;
-  uint8_t  flags[3];
-  uint32_t creation_time;
-  uint32_t modification_time;
-  uint32_t track_id;
-  uint8_t  reserved1[4];
-  uint32_t duration;
-  uint8_t  reserved2[8];
-  uint16_t layer;
-  uint16_t alternate_group;
-  uint16_t volume;
-  uint8_t  reserved3[2];
-  uint8_t  matrix_structure[36];
-  uint32_t track_width;
-  uint32_t track_height;
-};
-
 // 'Media header' atom
 struct PACKED_STRUCTURE mdhd_atom_t {
   uint8_t  version;              // == 0

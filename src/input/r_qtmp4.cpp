@@ -95,6 +95,13 @@ public:
 
 }
 
+static void
+print_atom_too_small_error_size(std::string const &name,
+                                qt_atom_t const &atom,
+                                std::size_t actual_size) {
+  mxerror(fmt::format(Y("Quicktime/MP4 reader: '{0}' atom is too small. Expected size: >= {1}. Actual size: {2}.\n"), name, actual_size, atom.size));
+}
+
 static std::string
 space(int num) {
   return std::string(num, ' ');
@@ -401,9 +408,8 @@ qtmp4_reader_c::handle_audio_encoder_delay(qtmp4_demuxer_c &dmx) {
 #define print_basic_atom_info() \
   mxdebug_if(m_debug_headers, fmt::format("{0}'{1}' atom, size {2}, at {3}–{4}\n", space(2 * level + 1), atom.fourcc, atom.size, atom.pos, atom.pos + atom.size));
 
-#define print_atom_too_small_error(name, type)                                                                          \
-  mxerror(fmt::format(Y("Quicktime/MP4 reader: '{0}' atom is too small. Expected size: >= {1}. Actual size: {2}.\n") \
-          , name, sizeof(type), atom.size));
+#define print_atom_too_small_error(name, type) \
+  print_atom_too_small_error_size(name, atom, sizeof(type));
 
 void
 qtmp4_reader_c::process_atom(qt_atom_t const &parent,
@@ -1491,23 +1497,35 @@ void
 qtmp4_reader_c::handle_tkhd_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t atom,
                                  int level) {
-  tkhd_atom_t tkhd;
+  if (atom.size < 1)
+    print_atom_too_small_error_size("tkhd", atom, 1);
 
-  if (sizeof(tkhd_atom_t) > atom.size)
-    print_atom_too_small_error("tkhd", tkhd_atom_t);
+  auto version       = m_in->read_uint8();
+  auto expected_size = 4u + 2 * (version == 1 ? 8 : 4) + 4 + 4 + (version == 1 ? 8 : 4) + 2 * 4 + 3 * 2 + 2 + 9 * 4 + 2 * 4;
 
-  if (m_in->read(&tkhd, sizeof(tkhd_atom_t)) != sizeof(tkhd_atom_t))
-    throw mtx::input::header_parsing_x();
+  if (atom.size < expected_size)
+    print_atom_too_small_error_size("tkhd", atom, expected_size);
 
-  dmx.container_id         = get_uint32_be(&tkhd.track_id);
-  dmx.v_display_width_flt  = get_uint32_be(&tkhd.track_width);
-  dmx.v_display_height_flt = get_uint32_be(&tkhd.track_height);
+  m_in->skip(3                              // flags
+             + 2 * (version == 1 ? 8 : 4)); // creation_time, modification_time
+
+  dmx.container_id = m_in->read_uint32_be();
+
+  m_in->skip(4                        // reserved
+             + (version == 1 ? 8 : 4) // duration
+             + 2 * 4                  // reserved
+             + 3 * 2                  // layer, alternate_group, volume
+             + 2                      // reserved
+             + 9 * 4);                // matrix
+
+  dmx.v_display_width_flt  = m_in->read_uint32_be();
+  dmx.v_display_height_flt = m_in->read_uint32_be();
   dmx.v_width              = dmx.v_display_width_flt  >> 16;
   dmx.v_height             = dmx.v_display_height_flt >> 16;
 
   mxdebug_if(m_debug_headers,
              fmt::format("{0}Track ID: {1} display width × height {2}.{3} × {4}.{5}\n",
-                         space(level * 2 + 1), dmx.id, dmx.v_display_width_flt >> 16, dmx.v_display_width_flt & 0xffff, dmx.v_display_height_flt >> 16, dmx.v_display_height_flt & 0xffff));
+                         space(level * 2 + 1), dmx.container_id, dmx.v_display_width_flt >> 16, dmx.v_display_width_flt & 0xffff, dmx.v_display_height_flt >> 16, dmx.v_display_height_flt & 0xffff));
 }
 
 void
