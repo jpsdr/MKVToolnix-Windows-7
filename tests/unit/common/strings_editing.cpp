@@ -89,7 +89,7 @@ TEST(StringsEditing, SplittingByStringPatternAtEnd) {
 }
 
 TEST(StringsEditing, SplittingRegexByStringEmptyPattern) {
-  auto r = mtx::string::split("This, and that, is stuff."s, std::regex{""s});
+  auto r = mtx::string::split("This, and that, is stuff."s, mtx::regex::jp::Regex{""s});
 
   ASSERT_EQ(27,  r.size());
   EXPECT_EQ("",  r[0]);
@@ -122,14 +122,14 @@ TEST(StringsEditing, SplittingRegexByStringEmptyPattern) {
 }
 
 TEST(StringsEditing, SplittingRegexByStringEmptyText) {
-  auto r = mtx::string::split(""s, std::regex{","s});
+  auto r = mtx::string::split(""s, mtx::regex::jp::Regex{","s});
 
   ASSERT_EQ(1,   r.size());
   EXPECT_EQ(""s, r[0]);
 }
 
 TEST(StringsEditing, SplittingRegexByStringOneCharPattern) {
-  auto r = mtx::string::split("This, and that, is stuff."s, std::regex{","s});
+  auto r = mtx::string::split("This, and that, is stuff."s, mtx::regex::jp::Regex{","s});
 
   ASSERT_EQ(3,             r.size());
   EXPECT_EQ("This"s,       r[0]);
@@ -138,7 +138,7 @@ TEST(StringsEditing, SplittingRegexByStringOneCharPattern) {
 }
 
 TEST(StringsEditing, SplittingRegexByStringTwoCharsPattern) {
-  auto r = mtx::string::split("This,  and that,    is stuff."s, std::regex{", *"s});
+  auto r = mtx::string::split("This,  and that,    is stuff."s, mtx::regex::jp::Regex{", *"s});
 
   ASSERT_EQ(3,            r.size());
   EXPECT_EQ("This"s,      r[0]);
@@ -147,7 +147,7 @@ TEST(StringsEditing, SplittingRegexByStringTwoCharsPattern) {
 }
 
 TEST(StringsEditing, SplittingRegexByStringLimit2) {
-  auto r = mtx::string::split("This,  and that,   is stuff."s, std::regex{", *"s}, 2);
+  auto r = mtx::string::split("This,  and that,   is stuff."s, mtx::regex::jp::Regex{", *"s}, 2);
 
   ASSERT_EQ(2,                        r.size());
   EXPECT_EQ("This"s,                  r[0]);
@@ -155,14 +155,14 @@ TEST(StringsEditing, SplittingRegexByStringLimit2) {
 }
 
 TEST(StringsEditing, SplittingRegexByStringLimit1) {
-  auto r = mtx::string::split("This,  and that,   is stuff."s, std::regex{", *"s}, 1);
+  auto r = mtx::string::split("This,  and that,   is stuff."s, mtx::regex::jp::Regex{", *"s}, 1);
 
   ASSERT_EQ(1,                               r.size());
   EXPECT_EQ("This,  and that,   is stuff."s, r[0]);
 }
 
 TEST(StringsEditing, SplittingRegexByStringPatternAtStart) {
-  auto r = mtx::string::split(",This, and that, is stuff."s, std::regex{", *"s});
+  auto r = mtx::string::split(",This, and that, is stuff."s, mtx::regex::jp::Regex{", *"s});
 
   ASSERT_EQ(4,            r.size());
   EXPECT_EQ(""s,          r[0]);
@@ -172,7 +172,7 @@ TEST(StringsEditing, SplittingRegexByStringPatternAtStart) {
 }
 
 TEST(StringsEditing, SplittingRegexByStringPatternAtEnd) {
-  auto r = mtx::string::split("This, and that, is stuff.,"s, std::regex{", *"s});
+  auto r = mtx::string::split("This, and that, is stuff.,"s, mtx::regex::jp::Regex{", *"s});
 
   ASSERT_EQ(4,            r.size());
   EXPECT_EQ("This"s,      r[0]);

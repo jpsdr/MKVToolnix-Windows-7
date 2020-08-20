@@ -20,23 +20,32 @@ namespace mtx::string {
 
 std::vector<std::string>
 split(std::string const &text,
-      std::regex const &pattern,
+      mtx::regex::jp::Regex const &pattern,
       std::size_t max) {
+  if (text.empty())
+    return { text };
+
   std::vector<std::string> results;
+  jpcre2::VecOff match_start, match_end;
 
-  auto match = std::sregex_iterator(text.begin(), text.end(), pattern);
-  std::sregex_iterator end;
-  std::size_t previous_match_end = 0;
+  if (!mtx::regex::match(text, match_start, match_end, pattern, "g"))
+    return {};
 
-  while (   (match != end)
+  if (match_start.size() != match_end.size())
+    return {};
+
+  std::size_t previous_match_end = 0, idx = 0;
+  auto const num_matches = match_start.size();
+
+  while (   (idx < num_matches)
          && ((results.size() + 1) < max)) {
-    results.push_back(text.substr(previous_match_end, match->position(0) - previous_match_end));
-    previous_match_end = match->position(0) + match->length(0);
-    ++match;
+    results.emplace_back(text.substr(previous_match_end, match_start[idx] - previous_match_end));
+    previous_match_end = match_end[idx];
+    ++idx;
   }
 
   if (previous_match_end <= text.size())
-    results.push_back(text.substr(std::min(previous_match_end, std::max<std::size_t>(text.size(), 1) - 1), text.size() - previous_match_end));
+    results.emplace_back(text.substr(std::min(previous_match_end, text.size() - 1), text.size() - previous_match_end));
 
   return results;
 }

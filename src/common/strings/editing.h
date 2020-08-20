@@ -15,6 +15,8 @@
 
 #include "common/common_pch.h"
 
+#include "common/regex.h"
+
 namespace mtx::string {
 
 enum class line_ending_style_e {
@@ -25,7 +27,7 @@ enum class line_ending_style_e {
 std::string normalize_line_endings(std::string const &str, line_ending_style_e line_ending_style = line_ending_style_e::lf);
 std::string chomp(std::string const &str);
 
-std::vector<std::string> split(std::string const &text, std::regex const &pattern, std::size_t max = std::numeric_limits<std::size_t>::max());
+std::vector<std::string> split(std::string const &text, mtx::regex::jp::Regex const &pattern, std::size_t max = std::numeric_limits<std::size_t>::max());
 std::vector<std::string> split(std::string const &text, std::string const &pattern = ",", std::size_t max = std::numeric_limits<std::size_t>::max());
 
 void strip(std::string &s, bool newlines = false);
