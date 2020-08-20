@@ -22,6 +22,7 @@
 #include "common/at_scope_exit.h"
 #include "common/chapters/chapters.h"
 #include "common/chapters/dvd.h"
+#include "common/regex.h"
 #include "common/strings/parsing.h"
 #include "common/timestamp.h"
 
@@ -108,18 +109,18 @@ maybe_parse_dvd(std::string const &file_name,
                 std::string const &language) {
   auto title             = 1u;
   auto cleaned_file_name = file_name;
-  std::smatch matches;
+  mtx::regex::jp::VecNum matches;
 
-  if (std::regex_search(cleaned_file_name, matches, std::regex{"(.+):([0-9]+)$"})) {
-    cleaned_file_name = matches[1].str();
+  if (mtx::regex::match(cleaned_file_name, matches, mtx::regex::jp::Regex{"(.+):([0-9]+)$"})) {
+    cleaned_file_name = matches[0][1];
 
-    if (!mtx::string::parse_number(matches[2].str(), title) || (title < 1))
-      throw parser_x{fmt::format(Y("'{0}' is not a valid DVD title number."), matches[2].str())};
+    if (!mtx::string::parse_number(matches[0][2], title) || (title < 1))
+      throw parser_x{fmt::format(Y("'{0}' is not a valid DVD title number."), matches[0][2])};
   }
 
   auto dvd_dir = bfs::path{cleaned_file_name};
 
-  if (std::regex_search(boost::to_lower_copy(cleaned_file_name), std::regex{"\\.(bup|ifo|vob)$"}))
+  if (mtx::regex::match(cleaned_file_name, mtx::regex::jp::Regex{"\\.(bup|ifo|vob)$", "i"}))
     dvd_dir = dvd_dir.parent_path();
 
   else if (   !bfs::exists(dvd_dir)
