@@ -21,6 +21,7 @@
 #include "common/mm_multi_file_io.h"
 #include "common/mm_multi_file_io_p.h"
 #include "common/output.h"
+#include "common/regex.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 
@@ -194,19 +195,19 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
   bfs::path first_file_name(bfs::system_complete(bfs::path(display_file_name)));
   std::string base_name = bfs::basename(first_file_name);
   std::string extension = balg::to_lower_copy(bfs::extension(first_file_name));
-  std::regex file_name_re("(.+[_\\-])(\\d+)$");
-  std::smatch matches;
+  mtx::regex::jp::Regex file_name_re{"(.+[_\\-])(\\d+)$"};
+  mtx::regex::jp::VecNum matches;
 
-  if (!std::regex_match(base_name, matches, file_name_re) || single_only) {
+  if (!mtx::regex::match(base_name, matches, file_name_re) || single_only) {
     std::vector<bfs::path> file_names;
     file_names.push_back(first_file_name);
     return mm_io_cptr(new mm_multi_file_io_c(file_names, display_file_name));
   }
 
   int start_number = 1;
-  mtx::string::parse_number(matches[2].str(), start_number);
+  mtx::string::parse_number(matches[0][2], start_number);
 
-  base_name = balg::to_lower_copy(matches[1].str());
+  base_name = balg::to_lower_copy(matches[0][1]);
 
   std::vector<std::pair<int, bfs::path>> paths;
   paths.emplace_back(start_number, first_file_name);
@@ -220,9 +221,9 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
     std::string stem   = bfs::basename(itr->path());
     int current_number = 0;
 
-    if (   !std::regex_match(stem, matches, file_name_re)
-        || !balg::iequals(matches[1].str(), base_name)
-        || !mtx::string::parse_number(matches[2].str(), current_number)
+    if (   !mtx::regex::match(stem, matches, file_name_re)
+        || !balg::iequals(matches[0][1], base_name)
+        || !mtx::string::parse_number(matches[0][2], current_number)
         || (current_number <= start_number))
       continue;
 
