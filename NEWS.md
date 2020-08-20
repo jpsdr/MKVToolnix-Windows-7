@@ -8,6 +8,8 @@
   file. Implements #2898.
 * MKVToolNix GUI: multiplexer: the file selection dialogs now include the
   extension `.dtsma` for DTS files. Implements #2901.
+* mkvmerge: MP4 reader: sped up parsing MP4 DASH files with a lot of segments
+  (`trun` atoms) quite a bit. Part of the fix of #2900.
 
 ## Bug fixes
 

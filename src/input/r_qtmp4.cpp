@@ -862,16 +862,24 @@ qtmp4_reader_c::handle_trun_atom(qt_atom_t,
   auto first_sample_flags = flags & QTMP4_TRUN_FIRST_SAMPLE_FLAGS ? m_in->read_uint32_be() : m_fragment->sample_flags;
   auto offset             = m_fragment->base_data_offset + data_offset;
 
+  auto calc_reserve_size  = [entries](auto current_size) {
+    auto constexpr reserve_chunk_size = 1024u;
+    return (((current_size + entries) / reserve_chunk_size) + 1) * reserve_chunk_size;
+  };
+
+  track.durmap_table.reserve(calc_reserve_size(track.durmap_table.size()));
+  track.sample_table.reserve(calc_reserve_size(track.sample_table.size()));
+  track.chunk_table.reserve(calc_reserve_size(track.chunk_table.size()));
+  track.raw_frame_offset_table.reserve(calc_reserve_size(track.raw_frame_offset_table.size()));
+  track.keyframe_table.reserve(calc_reserve_size(track.keyframe_table.size()));
+
   std::vector<uint32_t> all_sample_flags;
   std::vector<bool> all_keyframe_flags;
 
-  track.durmap_table.reserve(track.durmap_table.size() + entries);
-  track.sample_table.reserve(track.sample_table.size() + entries);
-  track.chunk_table.reserve(track.chunk_table.size() + entries);
-  track.raw_frame_offset_table.reserve(track.raw_frame_offset_table.size() + entries);
-  track.keyframe_table.reserve(track.keyframe_table.size() + entries);
-  all_sample_flags.reserve(entries);
-  all_keyframe_flags.reserve(entries);
+  if (m_debug_tables) {
+    all_sample_flags.reserve(entries);
+    all_keyframe_flags.reserve(entries);
+  }
 
   for (auto idx = 0u; idx < entries; ++idx) {
     auto sample_duration = flags & QTMP4_TRUN_SAMPLE_DURATION   ? m_in->read_uint32_be() : m_fragment->sample_duration;
@@ -891,6 +899,9 @@ qtmp4_reader_c::handle_trun_atom(qt_atom_t,
     offset += sample_size;
 
     track.num_frames_from_trun++;
+
+    if (!m_debug_tables)
+      continue;
 
     all_sample_flags.emplace_back(sample_flags);
     all_keyframe_flags.push_back(keyframe);
