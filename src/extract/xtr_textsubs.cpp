@@ -20,6 +20,7 @@
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/regex.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -52,7 +53,7 @@ xtr_srt_c::handle_frame(xtr_frame_t &f) {
   m_entry.m_timestamp = f.timestamp;
   m_entry.m_duration  = f.duration;
   m_entry.m_text      = m_conv->native(f.frame->to_string());
-  m_entry.m_text      = mtx::string::strip_copy(std::regex_replace(m_entry.m_text, std::regex{"\r+"}, ""), true);
+  m_entry.m_text      = mtx::string::strip_copy(mtx::regex::replace(m_entry.m_text, mtx::regex::jp::Regex{"\r+"}, "g", ""), true);
 
   if (m_entry.m_duration && !m_entry.m_text.empty())
     flush_entry();
@@ -267,7 +268,7 @@ xtr_usf_c::xtr_usf_c(const std::string &codec_id,
   if (m_sub_charset.empty())
     m_sub_charset = "UTF-8";
 
-  m_simplified_sub_charset = std::regex_replace(balg::to_lower_copy(m_sub_charset), std::regex("[^a-z0-9]+"), "");
+  m_simplified_sub_charset = mtx::regex::replace(balg::to_lower_copy(m_sub_charset), mtx::regex::jp::Regex("[^a-z0-9]+"), "g", "");
 }
 
 void

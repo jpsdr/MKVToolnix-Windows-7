@@ -16,6 +16,7 @@
 #include "common/ebml.h"
 #include "common/iso639.h"
 #include "common/list_utils.h"
+#include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/translation.h"
@@ -339,10 +340,10 @@ extract_cli_parser_c::add_extraction_spec() {
       && (options_c::em_attachments   != m_current_mode->m_extraction_mode))
     mxerror(fmt::format(Y("Unrecognized command line option '{0}'.\n"), m_current_arg));
 
-  std::regex s_track_id_re("^(\\d+)(:(.+))?$");
+  mtx::regex::jp::Regex s_track_id_re{"^(\\d+)(?::(.+))?$"};
 
-  std::smatch matches;
-  if (!std::regex_search(m_current_arg, matches, s_track_id_re)) {
+  mtx::regex::jp::VecNum matches;
+  if (!mtx::regex::match(m_current_arg, matches, s_track_id_re)) {
     if (options_c::em_attachments == m_current_mode->m_extraction_mode)
       mxerror(fmt::format(Y("Invalid attachment ID/file name specification in argument '{0}'.\n"), m_current_arg));
     else
@@ -351,15 +352,15 @@ extract_cli_parser_c::add_extraction_spec() {
 
   track_spec_t track;
 
-  mtx::string::parse_number(matches[1].str(), track.tid);
+  mtx::string::parse_number(matches[0][1], track.tid);
 
   if (m_used_tids[m_current_mode->m_extraction_mode][track.tid])
     mxerror(fmt::format(Y("The ID '{0}' has already been used for another destination file.\n"), track.tid));
   m_used_tids[m_current_mode->m_extraction_mode][track.tid] = true;
 
   std::string output_file_name;
-  if (matches[3].matched)
-    output_file_name = matches[3].str();
+  if (!matches[0][2].empty())
+    output_file_name = matches[0][2];
 
   if (output_file_name.empty()) {
     if (options_c::em_attachments == m_current_mode->m_extraction_mode)
