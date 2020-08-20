@@ -21,6 +21,7 @@
 #include "common/mime.h"
 #include "common/mm_io_x.h"
 #include "common/mm_mem_io.h"
+#include "common/regex.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -99,13 +100,13 @@ parse_language(std::string key_language) {
   if (index)
     return mtx::iso639::g_languages[*index].iso639_2_code;
 
-  std::smatch matches;
-  if (   std::regex_search(key_language, matches, std::regex{".*\\[(.+?)\\]"})
-      && ((index = mtx::iso639::look_up(boost::to_lower_copy(matches[1].str()), true))))
+  mtx::regex::jp::VecNum matches;
+  if (   mtx::regex::match(key_language, matches, mtx::regex::jp::Regex{".*\\[(.+?)\\]"})
+      && ((index = mtx::iso639::look_up(boost::to_lower_copy(matches[0][1]), true))))
     return mtx::iso639::g_languages[*index].iso639_2_code;
 
-  if (   std::regex_search(key_language, matches, std::regex{".*\\((.+?)\\)"})
-      && ((index = mtx::iso639::look_up(boost::to_lower_copy(matches[1].str()), true))))
+  if (   mtx::regex::match(key_language, matches, mtx::regex::jp::Regex{".*\\((.+?)\\)"})
+      && ((index = mtx::iso639::look_up(boost::to_lower_copy(matches[0][1]), true))))
     return mtx::iso639::g_languages[*index].iso639_2_code;
 
   return {};
@@ -174,7 +175,7 @@ from_vorbis_comments(vorbis_comments_t const &vorbis_comments) {
     mxdebug_if(s_debug, fmt::format("from_vorbis_comments: parsing {}={}\n", vorbis_full_key, mtx::string::elide_string(value, 40)));
 
     auto key_name_language                  = mtx::string::split(vorbis_full_key, "-", 2);
-    auto vorbis_key                         = std::regex_replace(balg::to_upper_copy(key_name_language[0]), std::regex{" +"}, "");
+    auto vorbis_key                         = mtx::regex::replace(balg::to_upper_copy(key_name_language[0]), mtx::regex::jp::Regex{" +"}, "g", "");
     auto const &[matroska_key, target_type] = s_vorbis_to_matroska[vorbis_key];
 
     if (vorbis_key == "TITLE") {
@@ -224,15 +225,15 @@ parse_vorbis_comments_from_packet(memory_c const &packet) {
       comments.m_type = vorbis_comments_t::type_e::Opus;
       offset          = 8;
 
-    } else if (std::regex_search(header, std::regex{"^.vorbis"})) {
+    } else if (mtx::regex::match(header, mtx::regex::jp::Regex{"^.vorbis"})) {
       comments.m_type = vorbis_comments_t::type_e::Vorbis;
       offset          = 7;
 
-    } else if (std::regex_search(header, std::regex{"^OVP80"})) {
+    } else if (mtx::regex::match(header, mtx::regex::jp::Regex{"^OVP80"})) {
       comments.m_type = vorbis_comments_t::type_e::VP8;
       offset          = 7;
 
-    // } else if (std::regex_search(header, std::regex{"^OVP90"})) {
+    // } else if (mtx::regex::match(header, mtx::regex::jp::Regex{"^OVP90"})) {
     //   comments.m_type = vorbis_comments_t::type_e::VP9;
     //   offset          = 7;
 
