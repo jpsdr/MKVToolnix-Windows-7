@@ -15,6 +15,7 @@
 
 #include "common/codec.h"
 #include "common/mp4.h"
+#include "common/regex.h"
 
 namespace {
 
@@ -33,7 +34,7 @@ protected:
   codec_c::type_e type{codec_c::type_e::UNKNOWN};
   codec_c::specialization_e specialization{codec_c::specialization_e::none};
   track_type the_track_type{static_cast<track_type>(0)};
-  std::regex match_re;
+  mtx::regex::jp::Regex match_re;
   std::vector<fourcc_c> fourccs;
   std::vector<uint16_t> audio_formats;
 
@@ -55,7 +56,7 @@ codec_private_c::codec_private_c(std::string const &p_name,
   : name{p_name}
   , type{p_type}
   , the_track_type{p_track_type}
-  , match_re{fmt::format("(?:{0})", p_match_re), std::regex_constants::icase}
+  , match_re{fmt::format("^(?:{0})$", p_match_re), "i"}
 {
 }
 
@@ -336,7 +337,7 @@ codec_c::matches(std::string const &fourcc_or_codec_id)
   const {
   auto &p = *p_func();
 
-  if (std::regex_match(fourcc_or_codec_id, p.match_re))
+  if (mtx::regex::match(fourcc_or_codec_id, p.match_re))
     return true;
 
   if (fourcc_or_codec_id.length() == 4)

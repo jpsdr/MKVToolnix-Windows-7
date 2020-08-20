@@ -72,6 +72,7 @@
 #include "common/mm_proxy_io.h"
 #include "common/mm_read_buffer_io.h"
 #include "common/mm_write_buffer_io.h"
+#include "common/regex.h"
 #include "common/stereo_mode.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
@@ -94,7 +95,7 @@ std::string
 normalize_fmt_double_output(T value) {
   // Some fmt library versions output a trailing ".0" even if the
   // decimal part is zero, others don't. Normalize to not include it.
-  return std::regex_replace(fmt::format("{}", value), std::regex{"\\.?0*$"}, "");
+  return mtx::regex::replace(fmt::format("{}", value), mtx::regex::jp::Regex{"\\.?0*$"}, "", "");
 }
 
 }
