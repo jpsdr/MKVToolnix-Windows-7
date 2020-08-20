@@ -17,8 +17,7 @@
 
 #include "pugixml.hpp"
 
-namespace mtx {
-namespace xml {
+namespace mtx::xml {
 
 class exception: public mtx::exception {
 public:
@@ -156,4 +155,4 @@ using document_cptr = std::shared_ptr<pugi::xml_document>;
 
 document_cptr load_file(std::string const &file_name, unsigned int options = pugi::parse_default, std::optional<int64_t> max_read_size = std::optional<int64_t>{});
 
-}}
+}

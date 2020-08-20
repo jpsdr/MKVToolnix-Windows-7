@@ -22,8 +22,7 @@
 #include "common/regex.h"
 #include "common/xml/xml.h"
 
-namespace mtx {
-namespace xml {
+namespace mtx::xml {
 
 std::string
 escape(const std::string &source) {
@@ -101,4 +100,4 @@ load_file(std::string const &file_name,
   return doc;
 }
 
-}}
+}
