@@ -167,31 +167,31 @@ get_displayable(std::string const &src) {
 std::string
 normalize_line_endings(std::string const &str,
                        line_ending_style_e line_ending_style) {
-  static std::optional<std::regex> s_cr_lf_re, s_cr_re, s_lf_re;
+  static std::optional<mtx::regex::jp::Regex> s_cr_lf_re, s_cr_re, s_lf_re;
 
   if (!s_cr_lf_re) {
-    s_cr_lf_re = std::regex{"\r\n"};
-    s_cr_re    = std::regex{"\r"};
-    s_lf_re    = std::regex{"\n"};
+    s_cr_lf_re = mtx::regex::jp::Regex{"\r\n", "S"};
+    s_cr_re    = mtx::regex::jp::Regex{"\r",   "S"};
+    s_lf_re    = mtx::regex::jp::Regex{"\n",   "S"};
   }
 
-  auto result = std::regex_replace(str,    *s_cr_lf_re, "\n");
-  result      = std::regex_replace(result, *s_cr_re,    "\n");
+  auto result = mtx::regex::replace(str,    *s_cr_lf_re, "g", "\n");
+  result      = mtx::regex::replace(result, *s_cr_re,    "g", "\n");
 
   if (line_ending_style_e::lf == line_ending_style)
     return result;
 
-  return std::regex_replace(result, *s_lf_re, "\r\n");
+  return mtx::regex::replace(result, *s_lf_re, "g", "\r\n");
 }
 
 std::string
 chomp(std::string const &str) {
-  static std::optional<std::regex> s_trailing_lf_re;
+  static std::optional<mtx::regex::jp::Regex> s_trailing_lf_re;
 
   if (!s_trailing_lf_re)
-    s_trailing_lf_re = std::regex{"[\r\n]+$"};
+    s_trailing_lf_re = mtx::regex::jp::Regex{"[\r\n]+$", "S"};
 
-  return std::regex_replace(str, *s_trailing_lf_re, "");
+  return mtx::regex::replace(str, *s_trailing_lf_re, "g", "");
 }
 
 } // mtx::string
