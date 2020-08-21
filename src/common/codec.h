@@ -93,7 +93,7 @@
 class codec_private_c;
 class codec_c {
 protected:
-  MTX_DECLARE_PRIVATE(codec_private_c);
+  MTX_DECLARE_PRIVATE(codec_private_c)
 
   std::unique_ptr<codec_private_c> const p_ptr;
 
