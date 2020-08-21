@@ -127,13 +127,13 @@ attachment_target_c::parse_spec(command_e command,
   auto offset = 0u;
 
   if (ac_replace == m_command) {
-    // captures:                           1   2      3        4                5       6
-    s_spec_re = mtx::regex::jp::Regex{"^(?:(=)?(\\d+):(.+))|(?:(name|mime-type):([^:]+):(.+))$", "i"};
+    // captures:                              1   2      3        4                5       6
+    s_spec_re = mtx::regex::jp::Regex{"^(?:(?:(=)?(\\d+):(.+))|(?:(name|mime-type):([^:]+):(.+)))$", "i"};
     offset    = 1;
 
   } else if (mtx::included_in(m_command, ac_delete, ac_update))
-    // captures:                           1   2          3                4
-    s_spec_re = mtx::regex::jp::Regex{"^(?:(=)?(\\d+))|(?:(name|mime-type):(.+))$", "i"};
+    // captures:                              1   2          3                4
+    s_spec_re = mtx::regex::jp::Regex{"^(?:(?:(=)?(\\d+))|(?:(name|mime-type):(.+)))$", "i"};
 
   else
     assert(false);
