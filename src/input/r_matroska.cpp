@@ -57,6 +57,7 @@
 #include "common/kax_analyzer.h"
 #include "common/math.h"
 #include "common/mm_io.h"
+#include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
@@ -1052,7 +1053,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
     // as both files contain chapters with the same UIDs and mkvmerge
     // thinks those should be merged. So ignore the chapter UIDs for
     // files that aren't created by known-good applications.
-    if (!std::regex_search(m_writing_app, std::regex{"^(?:mkvmerge|no_variable_data)", std::regex_constants::icase}))
+    if (!mtx::regex::match(m_writing_app, mtx::regex::jp::Regex{"^(?:mkvmerge|no_variable_data)", "i"}))
       m_regenerate_chapter_uids = true;
   }
 

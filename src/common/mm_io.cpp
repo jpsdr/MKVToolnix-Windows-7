@@ -20,6 +20,7 @@
 #include "common/mm_io.h"
 #include "common/mm_io_p.h"
 #include "common/mm_io_x.h"
+#include "common/regex.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 
@@ -425,7 +426,7 @@ mm_io_c::write_bom(const std::string &charset_) {
   if (p->string_output_converter && !charset_converter_c::is_utf8_charset_name(p->string_output_converter->get_charset()))
     return false;
 
-  auto charset = std::regex_replace(balg::to_lower_copy(charset_), std::regex("[^a-z0-9]+"), "");
+  auto charset = mtx::regex::replace(balg::to_lower_copy(charset_), mtx::regex::jp::Regex{"[^a-z0-9]+"}, "g", "");
   if (charset == "utf8") {
     bom_len = 3;
     bom     = utf8_bom;

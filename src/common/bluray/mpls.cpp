@@ -19,6 +19,7 @@
 #include "common/debugging.h"
 #include "common/hacks.h"
 #include "common/list_utils.h"
+#include "common/regex.h"
 #include "common/strings/formatting.h"
 
 namespace mtx::bluray::mpls {
@@ -489,11 +490,11 @@ parser_c::read_string(unsigned int length) {
 
 void
 parser_c::read_chapter_names(std::string const &base_file_name) {
-  std::smatch matches;
-  if (!std::regex_search(base_file_name, matches, std::regex{"(.{5})\\.mpls$"}))
+  mtx::regex::jp::VecNum matches;
+  if (!mtx::regex::match(base_file_name, matches, mtx::regex::jp::Regex{"(.{5})\\.mpls$"}))
     return;
 
-  auto all_names = mtx::bluray::track_chapter_names::locate_and_parse_for_title(base_file_name, matches[1].str());
+  auto all_names = mtx::bluray::track_chapter_names::locate_and_parse_for_title(base_file_name, matches[0][1]);
 
   for (auto chapter_idx = 0, num_chapters = static_cast<int>(m_chapters.size()); chapter_idx < num_chapters; ++chapter_idx)
     for (auto const &[language, names] : all_names)

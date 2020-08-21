@@ -13,10 +13,11 @@
 
 #include "common/common_pch.h"
 
+#include "common/regex.h"
 #include "common/webm.h"
 
 bool
 is_webm_file_name(const std::string &file_name) {
-  static std::regex s_webm_file_name_re("\\.webm[av]?$");
-  return std::regex_search(file_name, s_webm_file_name_re);
+  static mtx::regex::jp::Regex s_webm_file_name_re("\\.webm[av]?$");
+  return mtx::regex::match(file_name, s_webm_file_name_re);
 }

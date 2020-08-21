@@ -16,6 +16,7 @@
 #include "common/bluray/track_chapter_names.h"
 #include "common/bluray/util.h"
 #include "common/debugging.h"
+#include "common/regex.h"
 #include "common/xml/xml.h"
 
 namespace mtx::bluray::track_chapter_names {
@@ -74,17 +75,17 @@ locate_and_parse_for_title(bfs::path const &location,
 
   mxdebug_if(debug, fmt::format("found TN directory at {}\n", track_chapter_names_dir));
 
-  std::regex tnmt_re{fmt::format("tnmt_([a-z]{{3}})_{}\\.xml", title_number)};
+  mtx::regex::jp::Regex tnmt_re{fmt::format("tnmt_([a-z]{{3}})_{}\\.xml", title_number)};
 
   std::vector<chapter_names_t> chapter_names;
 
   for (bfs::directory_iterator dir_itr{track_chapter_names_dir}, end_itr; dir_itr != end_itr; ++dir_itr) {
-    std::smatch matches;
+    mtx::regex::jp::VecNum matches;
     auto entry_name = dir_itr->path().filename().string();
-    if (!std::regex_match(entry_name, matches, tnmt_re))
+    if (!mtx::regex::match(entry_name, matches, tnmt_re))
       continue;
 
-    auto language = matches[1].str();
+    auto const &language = matches[0][1];
 
     mxdebug_if(debug, fmt::format("found TNMT file for language {}\n", language));
 

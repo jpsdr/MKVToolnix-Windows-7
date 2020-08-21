@@ -10,6 +10,10 @@
   extension `.dtsma` for DTS files. Implements #2901.
 * mkvmerge: MP4 reader: sped up parsing MP4 DASH files with a lot of segments
   (`trun` atoms) quite a bit. Part of the fix of #2900.
+* The PCRE2 regular expression library is now used instead of `std::regex` for
+  big performance improvements in all places where regular expressions are
+  used for parsing big chunks of text, e.g. in the subtitle parsers. Part of
+  the fix of #2899.
 
 ## Bug fixes
 
@@ -25,6 +29,10 @@
   of #2899.
 * mkvmerge: MP4 reader: fixed handling of `tkhd` atoms of version 1. Fixes
   #2900.
+
+## Build system changes
+
+* The PCRE2 library (the 8-bit variant) is now required.
 
 
 # Version 49.0.0 "Sick Of Losing Soulmates" 2020-08-02

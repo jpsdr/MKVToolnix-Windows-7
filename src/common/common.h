@@ -25,7 +25,6 @@
 #include <memory>
 #include <numeric>
 #include <optional>
-#include <regex>
 #include <stdexcept>
 #include <string>
 #include <vector>

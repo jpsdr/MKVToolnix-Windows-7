@@ -13,9 +13,9 @@
 
 #include "common/common_pch.h"
 
+#include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
-#include "common/strings/regex.h"
 #include "common/webvtt.h"
 
 #define RE_TIMESTAMP "((?:\\d{2}:)?\\d{2}:\\d{2}\\.\\d{3})"
@@ -28,7 +28,7 @@ public:
   unsigned int current_cue_number{}, total_number_of_cues{}, total_number_of_bytes{};
   debugging_option_c debug{"webvtt_parser"};
 
-  std::regex timestamp_line_re{"^" RE_TIMESTAMP " --> " RE_TIMESTAMP "(?: ([^\\n]+))?$"};
+  mtx::regex::jp::Regex timestamp_line_re{"^" RE_TIMESTAMP " --> " RE_TIMESTAMP "(?: ([^\\n]+))?$", "S"};
 };
 
 webvtt_parser_c::webvtt_parser_c()
@@ -77,14 +77,14 @@ webvtt_parser_c::add_block() {
   if (m->current_block.empty())
     return;
 
-  std::smatch matches;
+  mtx::regex::jp::VecNum matches;
   std::string label, additional;
   auto timestamp_line = -1;
 
-  if (std::regex_search(m->current_block[0], matches, m->timestamp_line_re))
+  if (mtx::regex::match(m->current_block[0], matches, m->timestamp_line_re))
     timestamp_line = 0;
 
-  else if ((m->current_block.size() > 1) && std::regex_search(m->current_block[1], matches, m->timestamp_line_re)) {
+  else if ((m->current_block.size() > 1) && mtx::regex::match(m->current_block[1], matches, m->timestamp_line_re)) {
     timestamp_line = 1;
     label          = std::move(m->current_block[0]);
 
@@ -100,8 +100,8 @@ webvtt_parser_c::add_block() {
   m->parsing_global_data = false;
 
   timestamp_c start, end;
-  mtx::string::parse_timestamp(matches[1].str(), start);
-  mtx::string::parse_timestamp(matches[2].str(), end);
+  mtx::string::parse_timestamp(matches[0][1], start);
+  mtx::string::parse_timestamp(matches[0][2], end);
 
   auto content       = mtx::string::join(m->current_block.begin() + timestamp_line + 1, m->current_block.end(), "\n");
   content            = adjust_embedded_timestamps(content, start.negate());
@@ -109,7 +109,7 @@ webvtt_parser_c::add_block() {
   cue->m_start       = start;
   cue->m_duration    = end - start;
   cue->m_content     = memory_c::clone(content);
-  auto settings_list = matches[3].str();
+  auto settings_list = matches[0][3];
 
   if (! (label.empty() && settings_list.empty() && m->local_blocks.empty())) {
     additional = settings_list + "\n" + label + "\n" + mtx::string::join(m->local_blocks, "\n");
@@ -118,9 +118,9 @@ webvtt_parser_c::add_block() {
 
   mxdebug_if(m->debug,
              fmt::format("label «{0}» start «{1}» end «{2}» settings list «{3}» additional «{4}» content «{5}»\n",
-                         label, matches[1].str(), matches[2].str(), matches[3].str(),
-                         std::regex_replace(additional, std::regex{"\n+"}, "–"),
-                         std::regex_replace(content,    std::regex{"\n+"}, "–")));
+                         label, matches[0][1], matches[0][2], matches[0][3],
+                         mtx::regex::replace(additional, mtx::regex::jp::Regex{"\n+"}, "g", "–"),
+                         mtx::regex::replace(content,    mtx::regex::jp::Regex{"\n+"}, "g", "–")));
 
   m->local_blocks.clear();
   m->current_block.clear();
@@ -176,14 +176,14 @@ webvtt_parser_c::get_total_number_of_bytes()
 std::string
 webvtt_parser_c::adjust_embedded_timestamps(std::string const &text,
                                             timestamp_c const &offset) {
-  static std::optional<std::regex> s_embedded_timestamp_re;
+  static std::optional<mtx::regex::jp::Regex> s_embedded_timestamp_re;
 
   if (!s_embedded_timestamp_re)
-    s_embedded_timestamp_re = std::regex{"<" RE_TIMESTAMP ">"};
+    s_embedded_timestamp_re = mtx::regex::jp::Regex{"<" RE_TIMESTAMP ">", "S"};
 
-  return mtx::regex::replace(text, *s_embedded_timestamp_re, [&offset](std::smatch const &match) -> std::string {
+  return mtx::regex::replace(text, *s_embedded_timestamp_re, "g", [&offset](auto const &match) -> std::string {
     timestamp_c timestamp;
-    mtx::string::parse_timestamp(match[1].str(), timestamp);
+    mtx::string::parse_timestamp(match[1], timestamp);
     return fmt::format("<{0}>", mtx::string::format_timestamp(timestamp + offset, 3));
   });
 }

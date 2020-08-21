@@ -15,6 +15,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/regex.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
 
@@ -93,14 +94,14 @@ public:
   natural_string_c(StrT const &original)
     : m_original{original}
   {
-    static std::regex re("\\d+");
+    static mtx::regex::jp::Regex re{"(\\D+|\\d+)"};
+    mtx::regex::jp::VecNum matches;
 
     auto utf8 = to_utf8(m_original);
 
-    std::sregex_token_iterator it(utf8.begin(), utf8.end(), re, std::vector<int>{ -1, 0 });
-    std::sregex_token_iterator end;
-    while (it != end)
-      m_parts.push_back(natural_element_c<std::string>{*it++});
+    if (mtx::regex::match(utf8, matches, re, "g"))
+      for (auto const &match : matches)
+        m_parts.emplace_back(match[1]);
   }
 
   StrT const &

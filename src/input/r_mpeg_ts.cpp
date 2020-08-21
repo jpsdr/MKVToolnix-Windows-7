@@ -38,6 +38,7 @@
 #include "common/mm_text_io.h"
 #include "common/mpeg1_2.h"
 #include "common/mpeg4_p2.h"
+#include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "input/aac_framing_packet_converter.h"
 #include "input/bluray_pcm_channel_removal_packet_converter.h"
@@ -1181,7 +1182,7 @@ reader_c::read_headers_for_file(std::size_t file_num) {
 
 void
 reader_c::determine_start_source_packet_number(file_t &file) {
-  mxdebug_if(m_debug_mpls, fmt::format("MPLS: start SPN: file {0} min timestamp restriction {1}\n", std::regex_replace(file.m_in->get_file_name(), std::regex{".*[/\\\\]"}, ""), file.m_timestamp_restriction_min));
+  mxdebug_if(m_debug_mpls, fmt::format("MPLS: start SPN: file {0} min timestamp restriction {1}\n", mtx::regex::replace(file.m_in->get_file_name(), mtx::regex::jp::Regex{".*[/\\\\]"}, "", ""), file.m_timestamp_restriction_min));
 
   if (!file.m_clpi_parser || !file.m_timestamp_restriction_min.valid()) {
     mxdebug_if(m_debug_mpls, fmt::format("MPLS: start SPN: clip information not found or no minimum timestamp restriction\n"));

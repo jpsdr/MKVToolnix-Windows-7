@@ -9,6 +9,7 @@
 #include <QTimer>
 
 #include "common/qt.h"
+#include "common/regex.h"
 #include "common/timestamp.h"
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
@@ -30,7 +31,7 @@ class FileIdentificationWorkerPrivate {
   QList<IdentificationPack> m_toIdentify;
   QMutex m_mutex;
   QAtomicInteger<bool> m_abortPlaylistScan;
-  std::regex m_simpleChaptersRE, m_xmlChaptersRE, m_xmlSegmentInfoRE, m_xmlTagsRE;
+  mtx::regex::jp::Regex m_simpleChaptersRE, m_xmlChaptersRE, m_xmlSegmentInfoRE, m_xmlTagsRE;
 
   explicit FileIdentificationWorkerPrivate()
   {
@@ -44,10 +45,10 @@ FileIdentificationWorker::FileIdentificationWorker(QObject *parent)
   , p_ptr{new FileIdentificationWorkerPrivate{}}
 {
   auto p                = p_func();
-  p->m_simpleChaptersRE = std::regex{R"(^CHAPTER\d{2}=[\s\S]*CHAPTER\d{2}NAME=)"};
-  p->m_xmlChaptersRE    = std::regex{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Chapters>)"};
-  p->m_xmlSegmentInfoRE = std::regex{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Info>)"};
-  p->m_xmlTagsRE        = std::regex{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Tags>)"};
+  p->m_simpleChaptersRE = mtx::regex::jp::Regex{R"(^CHAPTER\d{2}=[\s\S]*CHAPTER\d{2}NAME=)"};
+  p->m_xmlChaptersRE    = mtx::regex::jp::Regex{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Chapters>)"};
+  p->m_xmlSegmentInfoRE = mtx::regex::jp::Regex{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Info>)"};
+  p->m_xmlTagsRE        = mtx::regex::jp::Regex{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Tags>)"};
 }
 
 FileIdentificationWorker::~FileIdentificationWorker() {
@@ -167,13 +168,13 @@ FileIdentificationWorker::handleFileThatShouldBeSelectedElsewhere(QString const 
 
   auto content = std::string{ file.read(1024).data() };
 
-  if (std::regex_search(content, p->m_simpleChaptersRE) || std::regex_search(content, p->m_xmlChaptersRE))
+  if (mtx::regex::match(content, p->m_simpleChaptersRE) || mtx::regex::match(content, p->m_xmlChaptersRE))
     Q_EMIT identifiedAsXmlOrSimpleChapters(fileName);
 
-  else if (std::regex_search(content, p->m_xmlSegmentInfoRE))
+  else if (mtx::regex::match(content, p->m_xmlSegmentInfoRE))
     Q_EMIT identifiedAsXmlSegmentInfo(fileName);
 
-  else if (std::regex_search(content, p->m_xmlTagsRE))
+  else if (mtx::regex::match(content, p->m_xmlTagsRE))
     Q_EMIT identifiedAsXmlTags(fileName);
 
   else

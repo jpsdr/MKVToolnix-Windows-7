@@ -30,10 +30,10 @@
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/regex.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
-#include "common/strings/regex.h"
 #include "common/unique_numbers.h"
 #include "common/xml/ebml_chapters_converter.h"
 
@@ -76,9 +76,8 @@ chapter_error(const std::string &error) {
 */
 bool
 probe_simple(mm_text_io_c *in) {
-  std::regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE};
-  std::regex name_line_re{     SIMCHAP_RE_NAME_LINE};
-  std::smatch matches;
+  mtx::regex::jp::Regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE};
+  mtx::regex::jp::Regex name_line_re{     SIMCHAP_RE_NAME_LINE};
 
   std::string line;
 
@@ -90,7 +89,7 @@ probe_simple(mm_text_io_c *in) {
     if (line.empty())
       continue;
 
-    if (!std::regex_search(line, timestamp_line_re))
+    if (!mtx::regex::match(line, timestamp_line_re))
       return false;
 
     while (in->getline2(line)) {
@@ -98,7 +97,7 @@ probe_simple(mm_text_io_c *in) {
       if (line.empty())
         continue;
 
-      return std::regex_search(line, name_line_re);
+      return mtx::regex::match(line, name_line_re);
     }
 
     return false;
@@ -172,10 +171,10 @@ parse_simple(mm_text_io_c *in,
                     : !g_default_language.empty() ? g_default_language
                     :                               "eng";
 
-  std::regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE};
-  std::regex timestamp_re{     SIMCHAP_RE_TIMESTAMP};
-  std::regex name_line_re{     SIMCHAP_RE_NAME_LINE};
-  std::smatch matches;
+  mtx::regex::jp::Regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE, "S"};
+  mtx::regex::jp::Regex timestamp_re{     SIMCHAP_RE_TIMESTAMP,      "S"};
+  mtx::regex::jp::Regex name_line_re{     SIMCHAP_RE_NAME_LINE,      "S"};
+  mtx::regex::jp::VecNum matches;
 
   std::string line;
 
@@ -185,14 +184,14 @@ parse_simple(mm_text_io_c *in,
       continue;
 
     if (0 == mode) {
-      if (!std::regex_match(line, matches, timestamp_line_re))
+      if (!mtx::regex::match(line, matches, timestamp_line_re))
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
 
       int64_t hour = 0, minute = 0, second = 0, msecs = 0;
-      mtx::string::parse_number(matches[1].str(), hour);
-      mtx::string::parse_number(matches[2].str(), minute);
-      mtx::string::parse_number(matches[3].str(), second);
-      mtx::string::parse_number(matches[4].str(), msecs);
+      mtx::string::parse_number(matches[0][1], hour);
+      mtx::string::parse_number(matches[0][2], minute);
+      mtx::string::parse_number(matches[0][3], second);
+      mtx::string::parse_number(matches[0][4], msecs);
 
       if (59 < minute)
         chapter_error(fmt::format(Y("Invalid minute: {0}"), minute));
@@ -202,14 +201,14 @@ parse_simple(mm_text_io_c *in,
       start = msecs + second * 1000 + minute * 1000 * 60 + hour * 1000 * 60 * 60;
       mode  = 1;
 
-      if (!std::regex_match(line, matches, timestamp_re))
+      if (!mtx::regex::match(line, matches, timestamp_re))
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
 
     } else {
-      if (!std::regex_match(line, matches, name_line_re))
+      if (!mtx::regex::match(line, matches, name_line_re))
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxxNAME=... line."), line));
 
-      std::string name = matches[1].str();
+      auto name = matches[0][1];
       if (name.empty())
         name = format_name_template(g_chapter_generation_name_template.get_translated(), num + 1, timestamp_c::ms(start));
 
@@ -1114,17 +1113,17 @@ format_name_template(std::string const &name_template,
                      timestamp_c const &start_timestamp,
                      std::string const &appended_file_name) {
   auto name                 = name_template;
-  auto number_re            = std::regex{"<NUM(?::(\\d+))?>"};
-  auto timestamp_re         = std::regex{"<START(?::([^>]+))?>"};
-  auto file_name_re         = std::regex{"<FILE_NAME>"};
-  auto file_name_ext_re     = std::regex{"<FILE_NAME_WITH_EXT>"};
+  auto number_re            = mtx::regex::jp::Regex{"<NUM(?::(\\d+))?>"};
+  auto timestamp_re         = mtx::regex::jp::Regex{"<START(?::([^>]+))?>"};
+  auto file_name_re         = mtx::regex::jp::Regex{"<FILE_NAME>"};
+  auto file_name_ext_re     = mtx::regex::jp::Regex{"<FILE_NAME_WITH_EXT>"};
   auto appended_file_name_p = bfs::path{appended_file_name};
 
-  name = mtx::regex::replace(name, number_re, [=](std::smatch const &match) {
+  name = mtx::regex::replace(name, number_re, "g", [=](auto const &match) {
     auto number_str    = fmt::format("{0}", chapter_number);
     auto wanted_length = 1u;
 
-    if (match[1].length() && !mtx::string::parse_number(match[1].str(), wanted_length))
+    if (!match[1].empty() && !mtx::string::parse_number(match[1], wanted_length))
       wanted_length = 1;
 
     if (number_str.length() < wanted_length)
@@ -1133,13 +1132,13 @@ format_name_template(std::string const &name_template,
     return number_str;
   });
 
-  name = mtx::regex::replace(name, timestamp_re, [=](std::smatch const &match) {
-    auto format = match[1].length() ? match[1] : "%H:%M:%S"s;
+  name = mtx::regex::replace(name, timestamp_re, "g", [=](auto const &match) {
+    auto format = !match[1].empty() ? match[1] : "%H:%M:%S"s;
     return mtx::string::format_timestamp(start_timestamp.to_ns(), format);
   });
 
-  name = std::regex_replace(name, file_name_re,     appended_file_name_p.stem().string());
-  name = std::regex_replace(name, file_name_ext_re, appended_file_name_p.filename().string());
+  name = mtx::regex::replace(name, file_name_re,     "g", appended_file_name_p.stem().string());
+  name = mtx::regex::replace(name, file_name_ext_re, "g", appended_file_name_p.filename().string());
 
   return name;
 }

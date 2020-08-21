@@ -17,6 +17,7 @@
 #include "common/bluray/track_chapter_names.h"
 #include "common/command_line.h"
 #include "common/mm_file_io.h"
+#include "common/regex.h"
 #include "common/version.h"
 
 static char const * const s_program_name = "bluray_dump";
@@ -95,11 +96,11 @@ parse_disc_library_file(std::string const &file_name) {
 
 static void
 parse_track_chapter_names_file(std::string const &file_name) {
-  std::smatch matches;
-  if (!std::regex_search(file_name, matches, std::regex{"tnmt_[a-z]{3}_(.{5})\\.xml$"}))
+  mtx::regex::jp::VecNum matches;
+  if (!mtx::regex::match(file_name, matches, mtx::regex::jp::Regex{"tnmt_[a-z]{3}_(.{5})\\.xml$"}))
     mxerror("Could not parse tnmt file name.\n");
 
-  auto names = mtx::bluray::track_chapter_names::locate_and_parse_for_title(file_name, matches[1].str());
+  auto names = mtx::bluray::track_chapter_names::locate_and_parse_for_title(file_name, matches[0][1]);
   if (names.empty())
     mxerror("Track/chapter names could no be parsed.\n");
 
@@ -108,19 +109,19 @@ parse_track_chapter_names_file(std::string const &file_name) {
 
 static void
 parse_file(std::string const &file_name) {
-  if (std::regex_search(file_name, std::regex{"\\.clpi$"}))
+  if (mtx::regex::match(file_name, mtx::regex::jp::Regex{"\\.clpi$"}))
     parse_clpi_file(file_name);
 
-  else if (std::regex_search(file_name, std::regex{"\\.mpls$"}))
+  else if (mtx::regex::match(file_name, mtx::regex::jp::Regex{"\\.mpls$"}))
     parse_mpls_file(file_name);
 
-  else if (std::regex_search(file_name, std::regex{"index\\.bdmv"}))
+  else if (mtx::regex::match(file_name, mtx::regex::jp::Regex{"index\\.bdmv"}))
     parse_index_file(file_name);
 
-  else if (std::regex_search(file_name, std::regex{"bdmt_[a-z]{3}\\.xml$"}))
+  else if (mtx::regex::match(file_name, mtx::regex::jp::Regex{"bdmt_[a-z]{3}\\.xml$"}))
     parse_disc_library_file(file_name);
 
-  else if (std::regex_search(file_name, std::regex{"tnmt_[a-z]{3}_.{5}\\.xml$"}))
+  else if (mtx::regex::match(file_name, mtx::regex::jp::Regex{"tnmt_[a-z]{3}_.{5}\\.xml$"}))
     parse_track_chapter_names_file(file_name);
 
   else

@@ -15,29 +15,37 @@
 
 #include "common/memory.h"
 #include "common/strings/editing.h"
-#include "common/strings/regex.h"
 
 namespace mtx::string {
 
 std::vector<std::string>
 split(std::string const &text,
-      std::regex const &pattern,
+      mtx::regex::jp::Regex const &pattern,
       std::size_t max) {
+  if (text.empty())
+    return { text };
+
   std::vector<std::string> results;
+  jpcre2::VecOff match_start, match_end;
 
-  auto match = std::sregex_iterator(text.begin(), text.end(), pattern);
-  std::sregex_iterator end;
-  std::size_t previous_match_end = 0;
+  if (!mtx::regex::match(text, match_start, match_end, pattern, "g"))
+    return {};
 
-  while (   (match != end)
+  if (match_start.size() != match_end.size())
+    return {};
+
+  std::size_t previous_match_end = 0, idx = 0;
+  auto const num_matches = match_start.size();
+
+  while (   (idx < num_matches)
          && ((results.size() + 1) < max)) {
-    results.push_back(text.substr(previous_match_end, match->position(0) - previous_match_end));
-    previous_match_end = match->position(0) + match->length(0);
-    ++match;
+    results.emplace_back(text.substr(previous_match_end, match_start[idx] - previous_match_end));
+    previous_match_end = match_end[idx];
+    ++idx;
   }
 
   if (previous_match_end <= text.size())
-    results.push_back(text.substr(std::min(previous_match_end, std::max<std::size_t>(text.size(), 1) - 1), text.size() - previous_match_end));
+    results.emplace_back(text.substr(std::min(previous_match_end, text.size() - 1), text.size() - previous_match_end));
 
   return results;
 }
@@ -159,31 +167,31 @@ get_displayable(std::string const &src) {
 std::string
 normalize_line_endings(std::string const &str,
                        line_ending_style_e line_ending_style) {
-  static std::optional<std::regex> s_cr_lf_re, s_cr_re, s_lf_re;
+  static std::optional<mtx::regex::jp::Regex> s_cr_lf_re, s_cr_re, s_lf_re;
 
   if (!s_cr_lf_re) {
-    s_cr_lf_re = std::regex{"\r\n"};
-    s_cr_re    = std::regex{"\r"};
-    s_lf_re    = std::regex{"\n"};
+    s_cr_lf_re = mtx::regex::jp::Regex{"\r\n", "S"};
+    s_cr_re    = mtx::regex::jp::Regex{"\r",   "S"};
+    s_lf_re    = mtx::regex::jp::Regex{"\n",   "S"};
   }
 
-  auto result = std::regex_replace(str,    *s_cr_lf_re, "\n");
-  result      = std::regex_replace(result, *s_cr_re,    "\n");
+  auto result = mtx::regex::replace(str,    *s_cr_lf_re, "g", "\n");
+  result      = mtx::regex::replace(result, *s_cr_re,    "g", "\n");
 
   if (line_ending_style_e::lf == line_ending_style)
     return result;
 
-  return std::regex_replace(result, *s_lf_re, "\r\n");
+  return mtx::regex::replace(result, *s_lf_re, "g", "\r\n");
 }
 
 std::string
 chomp(std::string const &str) {
-  static std::optional<std::regex> s_trailing_lf_re;
+  static std::optional<mtx::regex::jp::Regex> s_trailing_lf_re;
 
   if (!s_trailing_lf_re)
-    s_trailing_lf_re = std::regex{"[\r\n]+$"};
+    s_trailing_lf_re = mtx::regex::jp::Regex{"[\r\n]+$", "S"};
 
-  return std::regex_replace(str, *s_trailing_lf_re, "");
+  return mtx::regex::replace(str, *s_trailing_lf_re, "g", "");
 }
 
 } // mtx::string

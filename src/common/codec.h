@@ -90,7 +90,15 @@
 
 #define MKV_B_VOBBTN       "B_VOBBTN"
 
+class codec_private_c;
 class codec_c {
+protected:
+  MTX_DECLARE_PRIVATE(codec_private_c);
+
+  std::unique_ptr<codec_private_c> const p_ptr;
+
+  explicit codec_c(codec_private_c &p);
+
 public:
   enum class type_e {
       UNKNOWN  = 0
@@ -169,101 +177,34 @@ public:
     , e_ac_3
   };
 
-private:
-  using specialization_map_t = std::unordered_map<specialization_e, std::string, mtx::hash<specialization_e> >;
-
-  static std::vector<codec_c> ms_codecs;
-  static specialization_map_t ms_specialization_descriptions;
-
-protected:
-  std::regex m_match_re;
-  std::string m_name;
-  type_e m_type{type_e::UNKNOWN};
-  specialization_e m_specialization{specialization_e::none};
-  track_type m_track_type{static_cast<track_type>(0)};
-  std::vector<uint16_t> m_audio_formats;
-  std::vector<fourcc_c> m_fourccs;
-
 public:
-  codec_c()
-  {
-  }
+  codec_c();
+  virtual ~codec_c();
 
-  codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, uint16_t audio_format = 0u)
-    : m_match_re{fmt::format("(?:{0})", match_re), std::regex_constants::icase}
-    , m_name{name}
-    , m_type{type}
-    , m_track_type{p_track_type}
-  {
-    if (audio_format)
-      m_audio_formats.push_back(audio_format);
-  }
+  codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, uint16_t audio_format = 0u);
+  codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, fourcc_c const &fourcc);
+  codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, std::vector<uint16_t> const &audio_formats);
+  codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, std::vector<fourcc_c> const &fourccs);
 
-  codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, fourcc_c const &fourcc)
-    : m_match_re{fmt::format("(?:{0})", match_re), std::regex_constants::icase}
-    , m_name{name}
-    , m_type{type}
-    , m_track_type{p_track_type}
-    , m_fourccs{fourcc}
-  {
-  }
+  codec_c(codec_c const &src);
 
-  codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, std::vector<uint16_t> audio_formats)
-    : m_match_re{fmt::format("(?:{0})", match_re), std::regex_constants::icase}
-    , m_name{name}
-    , m_type{type}
-    , m_track_type{p_track_type}
-    , m_audio_formats{audio_formats}
-  {
-  }
-
-  codec_c(std::string const &name, type_e type, track_type p_track_type, std::string const &match_re, std::vector<fourcc_c> fourccs)
-    : m_match_re{fmt::format("(?:{0})", match_re), std::regex_constants::icase}
-    , m_name{name}
-    , m_type{type}
-    , m_track_type{p_track_type}
-    , m_fourccs{fourccs}
-  {
-  }
+  codec_c &operator =(codec_c const &src);
 
   bool matches(std::string const &fourcc_or_codec_id) const;
 
-  bool valid() const {
-    return m_type != type_e::UNKNOWN;
-  }
-
-  operator bool() const {
-    return valid();
-  }
-
-  bool is(type_e type) const {
-    return type == m_type;
-  }
+  bool valid() const;
+  operator bool() const;
+  bool is(type_e type) const;
 
   std::string const get_name(std::string fallback = "") const;
+  type_e get_type() const;
+  specialization_e get_specialization() const;
+  track_type get_track_type() const;
+  codec_c &set_specialization(specialization_e specialization);
+  codec_c specialize(specialization_e specialization) const;
 
-  type_e get_type() const {
-    return m_type;
-  }
-
-  specialization_e get_specialization() const {
-    return m_specialization;
-  }
-
-  track_type get_track_type() const {
-    return m_track_type;
-  }
-
-  codec_c &set_specialization(specialization_e specialization) {
-    m_specialization = specialization;
-    return *this;
-  }
-
-  codec_c specialize(specialization_e specialization) const {
-    auto new_codec = *this;
-    new_codec.m_specialization = specialization;
-    return new_codec;
-  }
+  std::vector<fourcc_c> const &get_fourccs() const;
+  std::vector<uint16_t> const &get_audio_formats() const;
 
 private:
   static void initialize();
