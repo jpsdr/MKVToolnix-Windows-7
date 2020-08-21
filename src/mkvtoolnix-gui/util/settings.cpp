@@ -12,6 +12,7 @@
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/qt.h"
+#include "common/regex.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
@@ -970,7 +971,7 @@ Settings::localeToUse(QString const &requestedLocale)
     locale = "";
 
   if (locale.empty()) {
-    locale = std::regex_replace(translation_c::get_default_ui_locale(), std::regex{"\\..*"}, "");
+    locale = mtx::regex::replace(translation_c::get_default_ui_locale(), mtx::regex::jp::Regex{"\\..*"}, "", "");
     if (-1 == translation_c::look_up_translation(locale))
       locale = "";
   }

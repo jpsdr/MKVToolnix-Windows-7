@@ -6,6 +6,7 @@
 #include <QIcon>
 #include <QLabel>
 #include <QMessageBox>
+#include <QRegularExpression>
 #include <QStaticText>
 #include <QVBoxLayout>
 #include <QtConcurrent>
@@ -520,7 +521,7 @@ MainWindow::silentlyCheckForUpdates() {
 
 QString
 MainWindow::versionStringForSettings(version_number_t const &version) {
-  return Q("version_%1").arg(to_qs(std::regex_replace(version.to_string(), std::regex{"[^0-9]+"}, "_")));
+  return Q("version_%1").arg(Q(version.to_string()).replace(QRegularExpression{Q("[^0-9]+")}, Q("_")));
 }
 
 void
