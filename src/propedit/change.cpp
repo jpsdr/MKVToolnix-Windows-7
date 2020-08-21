@@ -24,6 +24,7 @@
 #include "common/iso639.h"
 #include "common/list_utils.h"
 #include "common/output.h"
+#include "common/regex.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 #include "propedit/change.h"
@@ -157,27 +158,27 @@ change_c::parse_binary() {
 
 void
 change_c::parse_date_time() {
-  //              1        2        3                4        5        6           7  8     9        10
-  std::regex re{"^(\\d{4})-(\\d{2})-(\\d{2})(?:T|\\s)(\\d{2}):(\\d{2}):(\\d{2})\\s*(Z|([+-])(\\d{2}):(\\d{2}))$", std::regex_constants::icase};
-  std::smatch matches;
+  //                         1        2        3                4        5        6           7  8     9        10
+  mtx::regex::jp::Regex re{"^(\\d{4})-(\\d{2})-(\\d{2})(?:T|\\s)(\\d{2}):(\\d{2}):(\\d{2})\\s*(Z|([+-])(\\d{2}):(\\d{2}))$", "i"};
+  mtx::regex::jp::VecNum matches;
   int64_t year{}, month{}, day{}, hours{}, minutes{}, seconds{};
   int64_t offset_hours{}, offset_minutes{}, offset_mult{1};
 
-  auto valid = std::regex_match(m_value, matches, re);
+  auto valid = mtx::regex::match(m_value, matches, re);
 
   if (valid)
-    valid = mtx::string::parse_number(matches[1].str(), year)
-         && mtx::string::parse_number(matches[2].str(), month)
-         && mtx::string::parse_number(matches[3].str(), day)
-         && mtx::string::parse_number(matches[4].str(), hours)
-         && mtx::string::parse_number(matches[5].str(), minutes)
-         && mtx::string::parse_number(matches[6].str(), seconds);
+    valid = mtx::string::parse_number(matches[0][1], year)
+         && mtx::string::parse_number(matches[0][2], month)
+         && mtx::string::parse_number(matches[0][3], day)
+         && mtx::string::parse_number(matches[0][4], hours)
+         && mtx::string::parse_number(matches[0][5], minutes)
+         && mtx::string::parse_number(matches[0][6], seconds);
 
-  if (valid && (matches[7].str() != "Z")) {
-    valid = mtx::string::parse_number(matches[9].str(),  offset_hours)
-         && mtx::string::parse_number(matches[10].str(), offset_minutes);
+  if (valid && (matches[0][7] != "Z")) {
+    valid = mtx::string::parse_number(matches[0][9],  offset_hours)
+         && mtx::string::parse_number(matches[0][10], offset_minutes);
 
-    if (matches[8].str() == "-")
+    if (matches[0][8] == "-")
       offset_mult = -1;
   }
 

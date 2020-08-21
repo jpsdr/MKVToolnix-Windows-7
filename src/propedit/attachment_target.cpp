@@ -17,6 +17,7 @@
 #include "common/mime.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
+#include "common/regex.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
@@ -121,39 +122,39 @@ attachment_target_c::parse_spec(command_e command,
     return;
   }
 
-  std::regex s_spec_re;
-  std::smatch matches;
+  mtx::regex::jp::Regex s_spec_re;
+  mtx::regex::jp::VecNum matches;
   auto offset = 0u;
 
   if (ac_replace == m_command) {
     // captures:                1   2      3        4                5       6
-    s_spec_re = std::regex{"^(?:(=)?(\\d+):(.+))|(?:(name|mime-type):([^:]+):(.+))$", std::regex_constants::icase};
+    s_spec_re = mtx::regex::jp::Regex{"^(?:(=)?(\\d+):(.+))|(?:(name|mime-type):([^:]+):(.+))$", "i"};
     offset    = 1;
 
   } else if (mtx::included_in(m_command, ac_delete, ac_update))
     // captures:                1   2          3                4
-    s_spec_re = std::regex{"^(?:(=)?(\\d+))|(?:(name|mime-type):(.+))$", std::regex_constants::icase};
+    s_spec_re = mtx::regex::jp::Regex{"^(?:(=)?(\\d+))|(?:(name|mime-type):(.+))$", "i"};
 
   else
     assert(false);
 
-  if (!std::regex_match(spec, matches, s_spec_re))
+  if (!mtx::regex::match(spec, matches, s_spec_re))
     throw std::invalid_argument{"generic format error"};
 
-  if (matches[3 + offset].str().empty()) {
+  if (matches[0][3 + offset].empty()) {
     // First case: by ID/UID
     if (ac_replace == m_command)
-      m_file_name   = matches[3].str();
-    m_selector_type = matches[1].str() == "=" ? st_uid : st_id;
-    if (!mtx::string::parse_number(matches[2].str(), m_selector_num_arg))
+      m_file_name   = matches[0][3];
+    m_selector_type = matches[0][1] == "=" ? st_uid : st_id;
+    if (!mtx::string::parse_number(matches[0][2], m_selector_num_arg))
       throw std::invalid_argument{"ID/UID not a number"};
 
   } else {
     // Second case: by name/MIME type
     if (ac_replace == m_command)
-      m_file_name         = matches[6].str();
-    m_selector_type       = balg::to_lower_copy(matches[3 + offset].str()) == "name" ? st_name : st_mime_type;
-    m_selector_string_arg = matches[4 + offset].str();
+      m_file_name         = matches[0][6];
+    m_selector_type       = balg::to_lower_copy(matches[0][3 + offset]) == "name" ? st_name : st_mime_type;
+    m_selector_string_arg = matches[0][4 + offset];
 
     if (ac_replace == m_command)
       m_selector_string_arg = unescape_colon(m_selector_string_arg);

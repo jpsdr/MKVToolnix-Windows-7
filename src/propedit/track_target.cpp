@@ -10,6 +10,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/regex.h"
 #include "common/strings/parsing.h"
 #include "propedit/propedit.h"
 #include "propedit/track_target.h"
@@ -201,14 +202,14 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
 
 void
 track_target_c::parse_spec(std::string const &spec) {
-  static std::regex track_re("^([absv=@]?)(\\d+)");
-  std::smatch matches;
+  static mtx::regex::jp::Regex track_re{"^([absv=@]?)(\\d+)"};
+  mtx::regex::jp::VecNum matches;
 
-  if (!std::regex_match(spec, matches, track_re))
+  if (!mtx::regex::match(spec, matches, track_re))
     throw false;
 
-  std::string prefix = matches[1].str();
-  mtx::string::parse_number(matches[2].str(), m_selection_param);
+  std::string prefix = matches[0][1];
+  mtx::string::parse_number(matches[0][2], m_selection_param);
 
   m_selection_mode = prefix.empty() ? sm_by_position
                    : prefix == "="  ? sm_by_uid
