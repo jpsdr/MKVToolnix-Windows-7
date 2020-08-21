@@ -17,6 +17,7 @@
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "merge/timestamp_factory.h"
@@ -39,11 +40,11 @@ timestamp_factory_c::create(std::string const &file_name,
   int version = -1;
   bool ok     = in->getline2(line);
   if (ok) {
-    auto format_line_re = std::regex{"^# *time(?:code|stamp) *format v(\\d+).*"};
-    std::smatch matches;
+    auto format_line_re = mtx::regex::jp::Regex{"^# *time(?:code|stamp) *format v(\\d+).*"};
+    mtx::regex::jp::VecNum matches;
 
-    if (std::regex_search(line, matches, format_line_re))
-      ok = mtx::string::parse_number(matches[1].str(), version);
+    if (mtx::regex::match(line, matches, format_line_re))
+      ok = mtx::string::parse_number(matches[0][1], version);
     else
       ok = false;
   }

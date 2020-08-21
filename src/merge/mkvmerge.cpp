@@ -54,6 +54,7 @@
 #include "common/mm_file_io.h"
 #include "common/mm_mpls_multi_file_io.h"
 #include "common/random.h"
+#include "common/regex.h"
 #include "common/segmentinfo.h"
 #include "common/split_arg_parsing.h"
 #include "common/strings/formatting.h"
@@ -1043,8 +1044,8 @@ static void
 parse_arg_split_timestamps(const std::string &arg) {
   std::string s = arg;
 
-  if (std::regex_search(s, std::regex{"^time(?:stamps|codes):", std::regex_constants::icase}))
-    s = std::regex_replace(s, std::regex{"^.*?:"}, "");
+  if (mtx::regex::match(s, mtx::regex::jp::Regex{"^time(?:stamps|codes):", "i"}))
+    s = mtx::regex::replace(s, mtx::regex::jp::Regex{"^.*?:"}, "", "");
 
   auto timestamps = mtx::string::split(s, ",");
   for (auto &timestamp : timestamps) {
@@ -1182,7 +1183,7 @@ parse_arg_split(const std::string &arg) {
   else if (balg::istarts_with(s, "size:"))
     parse_arg_split_size(arg);
 
-  else if (std::regex_search(s, std::regex{"^time(?:stamps|codes):", std::regex_constants::icase}))
+  else if (mtx::regex::match(s, mtx::regex::jp::Regex{"^time(?:stamps|codes):", "i"}))
     parse_arg_split_timestamps(arg);
 
   else if (balg::istarts_with(s, "parts:"))
@@ -1563,7 +1564,7 @@ parse_arg_default_duration(const std::string &s,
                         parts[1], fmt::format("--default-duration {0}", s)));
 
   ti.m_default_durations[id].first  = default_duration;
-  ti.m_default_durations[id].second = std::regex_match(parts[1], std::regex{".*i$"});
+  ti.m_default_durations[id].second = mtx::regex::match(parts[1], mtx::regex::jp::Regex{".*i$"});
 }
 
 /** \brief Parse the argument for \c --nalu-size-length

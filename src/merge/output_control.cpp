@@ -63,6 +63,7 @@
 #include "common/mm_null_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_write_buffer_io.h"
+#include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "common/tags/tags.h"
 #include "common/translation.h"
@@ -1231,7 +1232,7 @@ create_output_name() {
   }
 
   // Now search for something like %02d
-  auto converted = std::regex_replace(s, std::regex{"%(\\d+)d"}, "{0:$1}");
+  auto converted = mtx::regex::replace(s, mtx::regex::jp::Regex{"%(\\d+)d"}, "g", "{0:$1}");
   if (converted != s)
     return fmt::format(converted, g_file_num);
 
@@ -1543,9 +1544,9 @@ static void
 insert_chapter_name_in_output_file_name(bfs::path const &original_file_name,
                                         std::string const &chapter_name) {
 #if defined(SYS_WINDOWS)
-  static std::regex s_invalid_char_re{R"([\\/:<>"|?*]+)"};
+  static mtx::regex::jp::Regex s_invalid_char_re{R"([\\/:<>"|?*]+)"};
 #else
-  static std::regex s_invalid_char_re{"/+"};
+  static mtx::regex::jp::Regex s_invalid_char_re{"/+"};
 #endif
 
   // When splitting replace %c in file names with current chapter name.
@@ -1553,8 +1554,8 @@ insert_chapter_name_in_output_file_name(bfs::path const &original_file_name,
     return;
 
   // auto chapter_name  = get_current_chapter_name();
-  auto cleaned_chapter_name = std::regex_replace(chapter_name, s_invalid_char_re, "-");
-  auto new_file_name        = original_file_name.parent_path() / std::regex_replace(original_file_name.filename().string(), std::regex{"%c"s}, cleaned_chapter_name);
+  auto cleaned_chapter_name = mtx::regex::replace(chapter_name, s_invalid_char_re, "g", "-");
+  auto new_file_name        = original_file_name.parent_path() / mtx::regex::replace(original_file_name.filename().string(), mtx::regex::jp::Regex{"%c"s}, "g", cleaned_chapter_name);
 
   mxdebug_if(s_debug_splitting_chapters, fmt::format("insert_chapter_name_in_output_file_name: cleaned name {0} old {1} new {2}\n", cleaned_chapter_name, original_file_name.string(), new_file_name.string()));
 
