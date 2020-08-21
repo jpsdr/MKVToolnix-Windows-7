@@ -21,6 +21,8 @@
 #   libvorbis-devel
 #   libxslt
 #   make
+#   pcre2
+#   pcre2-devel
 #   pkgconfig
 #   po4a
 #   qt5-qtbase-devel
