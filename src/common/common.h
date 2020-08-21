@@ -74,7 +74,9 @@ using namespace std::string_literals;
 // libintl defines 'snprintf' to 'libintl_snprintf' on certain
 // platforms such as mingw or macOS.  'std::snprintf' becomes
 // 'std::libintl_snprintf' which doesn't exist.
+# undef fprintf
 # undef snprintf
+# undef sprintf
 #else
 # define gettext(s)                            (s)
 # define ngettext(s_singular, s_plural, count) ((count) != 1 ? (s_plural) : (s_singular))
