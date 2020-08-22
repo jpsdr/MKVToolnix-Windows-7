@@ -46,6 +46,8 @@ FORMS += \
     forms/merge/select_playlist_dialog.ui \
     forms/merge/tab.ui \
     forms/merge/tool.ui \
+    forms/util/language_dialog.ui \
+    forms/util/language_widget.ui \
     forms/util/side_by_side_multi_select.ui \
     forms/util/string_list_configuration_widget.ui \
     forms/util/text_display_dialog.ui \

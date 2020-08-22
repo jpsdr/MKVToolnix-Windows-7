@@ -240,8 +240,9 @@ App::initializeIso639Languages() {
   s_commonIso639Languages.reserve(cfg.m_oftenUsedLanguages.size());
 
   for (auto const &language : mtx::iso639::g_languages) {
-    auto languageCode = Q(language.iso639_2_code);
-    auto description  = Q("%1 (%2)").arg(Q(gettext(language.english_name.c_str()))).arg(languageCode);
+    auto languageCode  = Q(language.iso639_2_code);
+    auto languageCodes = language.iso639_1_code.empty() ? languageCode : Q("%1; %2").arg(Q(language.iso639_1_code)).arg(languageCode);
+    auto description  = Q("%1 (%2)").arg(Q(gettext(language.english_name.c_str()))).arg(languageCodes);
     auto isCommon     = cfg.m_oftenUsedLanguages.indexOf(languageCode) != -1;
 
     s_iso639Languages.emplace_back(description, languageCode);
