@@ -53,7 +53,8 @@ public:
   void execute(EbmlMaster *master, EbmlMaster *sub_master);
 
 public:
-  static change_cptr parse_spec(change_type_e type, std::string const &spec);
+  static std::vector<change_cptr> parse_spec(change_type_e type, std::string const &spec);
+  static std::vector<change_cptr> make_change_for_language(change_type_e type, std::string const &name, std::string const &value);
 
 protected:
   void parse_ascii_string();

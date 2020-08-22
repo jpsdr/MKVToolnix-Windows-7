@@ -186,6 +186,9 @@ propedit_cli_parser_c::list_property_names_for_table(const std::vector<property_
   mxinfo(fmt::format(Y("Elements in the category '{0}' ('--edit {1}'):\n"), title, edit_spec));
 
   for (auto &property : table) {
+    if (property.m_title.get_untranslated().empty())
+      continue;
+
     auto name        = fmt::format("{0:<{1}} | {2:<2} |", property.m_name, max_name_len, ebml_type_map[property.m_type]);
     auto description = property.m_title.get_translated()
                      + ": "

@@ -18,7 +18,7 @@
 #include <ebml/EbmlUnicodeString.h>
 #include <matroska/KaxSegment.h>
 
-#include "common/common_pch.h"
+#include "common/bcp47.h"
 #include "common/date_time.h"
 #include "common/ebml.h"
 #include "common/iso639.h"
@@ -349,7 +349,7 @@ change_c::get_semantic() {
   return find_ebml_semantic(libmatroska::KaxSegment::ClassInfos, m_property.m_callbacks->GlobalId);
 }
 
-change_cptr
+std::vector<change_cptr>
 change_c::parse_spec(change_c::change_type_e type,
                      const std::string &spec) {
   std::string name, value;
@@ -368,14 +368,34 @@ change_c::parse_spec(change_c::change_type_e type,
   if (name.empty())
     throw std::runtime_error(Y("missing property name"));
 
-  if (   mtx::included_in(type, ct_add, ct_set)
-      && (name == "language")) {
-    auto language_opt = mtx::iso639::look_up(value);
-    if (!language_opt)
-      throw std::runtime_error{fmt::format(("invalid ISO 639-2 language code '{0}'"), value)};
+  if (mtx::included_in(name, "language", "language-ietf"))
+    return make_change_for_language(type, name, value);
 
-    value = language_opt->iso639_2_code;
+  return { std::make_shared<change_c>(type, name, value) };
+}
+
+std::vector<change_cptr>
+change_c::make_change_for_language(change_c::change_type_e type,
+                                   std::string const &name,
+                                   std::string const &value) {
+  std::vector<change_cptr> changes;
+
+  if (type == ct_delete) {
+    if (name == "language")
+      changes.emplace_back(std::make_shared<change_c>(ct_delete, "language", value));
+    changes.emplace_back(std::make_shared<change_c>(ct_delete, "language-ietf", value));
+
+    return changes;
   }
 
-  return std::make_shared<change_c>(type, name, value);
+  auto language = mtx::bcp47::language_c::parse(value);
+  if (!language.is_valid())
+    throw std::runtime_error{fmt::format(Y("invalid language tag '{0}': {1}"), value, language.get_error())};
+
+  if (language.has_valid_iso639_code() && (name == "language"))
+    changes.push_back(std::make_shared<change_c>(type, "language", language.get_iso639_2_code()));
+
+  changes.push_back(std::make_shared<change_c>(type, "language-ietf", language.format()));
+
+  return changes;
 }

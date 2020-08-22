@@ -30,6 +30,9 @@
   the simple chapter format or when generating chapters due to the
   `--generate-chapters` command line option. Part of the implementation of
   #2419.
+* mkvpropedit: IETF BCP 47/RFC 5646 language tags: setting/deleting the track
+  language now acts on both the old language element as well as the
+  "LanguageIETF" track header element. Part of the implementation of #2419.
 
 ## Bug fixes
 

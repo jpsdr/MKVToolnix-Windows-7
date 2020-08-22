@@ -52,7 +52,8 @@ segment_info_target_c::look_up_property_elements() {
 void
 segment_info_target_c::add_change(change_c::change_type_e type,
                                   const std::string &spec) {
-  m_changes.push_back(change_c::parse_spec(type, spec));
+  for (auto const &change : change_c::parse_spec(type, spec))
+    m_changes.push_back(change);
 }
 
 void

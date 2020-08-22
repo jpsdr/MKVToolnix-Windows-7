@@ -138,7 +138,8 @@ property_element_c::init_tables() {
                                                                                                    "If set to 0, the reference pseudo-cache system is not used."));
   ELE("default-duration",     KaxTrackDefaultDuration::ClassInfos, YT("Default duration"),      YT("Number of nanoseconds (not scaled) per frame."));
   ELE("name",                 KaxTrackName::ClassInfos,            YT("Name"),                  YT("A human-readable track name."));
-  ELE("language",             KaxTrackLanguage::ClassInfos,        YT("Language"),              YT("Specifies the language of the track in the Matroska languages form."));
+  ELE("language",             KaxTrackLanguage::ClassInfos,        YT("Language"),              YT("Specifies the language of the track."));
+  ELE("language-ietf",        KaxLanguageIETF::ClassInfos,         YT("Language (IETF BCP 47)"), YT("Specifies the language of the track in the form of a BCP 47 language tag."));
   ELE("codec-id",             KaxCodecID::ClassInfos,              YT("Codec ID"),              YT("An ID corresponding to the codec."));
   ELE("codec-name",           KaxCodecName::ClassInfos,            YT("Codec name"),            YT("A human-readable string specifying the codec."));
   ELE("codec-delay",          KaxCodecDelay::ClassInfos,           YT("Codec-inherent delay"),  YT("Delay built into the codec during decoding in ns."));
