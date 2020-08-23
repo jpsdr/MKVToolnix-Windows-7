@@ -96,18 +96,22 @@ init_vorbis_to_matroska() {
 
 std::string
 parse_language(std::string key_language) {
-  auto index = mtx::iso639::look_up(key_language, true);
-  if (index)
-    return mtx::iso639::g_languages[*index].iso639_2_code;
+  auto language = mtx::iso639::look_up(key_language, true);
+  if (language)
+    return language->iso639_2_code;
 
   mtx::regex::jp::VecNum matches;
-  if (   mtx::regex::match(key_language, matches, mtx::regex::jp::Regex{".*\\[(.+?)\\]"})
-      && ((index = mtx::iso639::look_up(boost::to_lower_copy(matches[0][1]), true))))
-    return mtx::iso639::g_languages[*index].iso639_2_code;
+  if (mtx::regex::match(key_language, matches, mtx::regex::jp::Regex{".*\\[(.+?)\\]"})) {
+    auto language2 = mtx::iso639::look_up(boost::to_lower_copy(matches[0][1]), true);
+    if (language2)
+      return language2->iso639_2_code;
+  }
 
-  if (   mtx::regex::match(key_language, matches, mtx::regex::jp::Regex{".*\\((.+?)\\)"})
-      && ((index = mtx::iso639::look_up(boost::to_lower_copy(matches[0][1]), true))))
-    return mtx::iso639::g_languages[*index].iso639_2_code;
+  if (mtx::regex::match(key_language, matches, mtx::regex::jp::Regex{".*\\((.+?)\\)"})) {
+    auto language2 = mtx::iso639::look_up(boost::to_lower_copy(matches[0][1]), true);
+    if (language2)
+      return language2->iso639_2_code;
+  }
 
   return {};
 }

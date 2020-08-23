@@ -448,33 +448,30 @@ SourceFile::deriveLanguageFromFileName() {
 
     qDebug() << "language derivation match:" << capture;
 
-    auto languageIdx = mtx::iso639::look_up(to_utf8(capture.toLower()));
-    if (!languageIdx) {
-      languageIdx = 0;
+    auto languageOpt = mtx::iso639::look_up(to_utf8(capture.toLower()));
+    if (languageOpt)
+      language = Q(languageOpt->iso639_2_code);
 
-      auto found = false;
-
-      for (auto numLanguages = mtx::iso639::g_languages.size(); *languageIdx < numLanguages; ++(*languageIdx)) {
-        if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(mtx::iso639::g_languages[*languageIdx].iso639_2_code)))
+    else {
+      for (auto const &languageElt : mtx::iso639::g_languages) {
+        if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(languageElt.iso639_2_code)))
           continue;
 
-        for (auto name : Q(mtx::iso639::g_languages[*languageIdx].english_name).split(splitter)) {
+        for (auto name : Q(languageElt.english_name).split(splitter)) {
           name.remove(languageNameCleaner);
           if (name != capture)
             continue;
 
-          found = true;
+          language = Q(languageElt.iso639_2_code);
         }
 
-        if (found)
+        if (!language.isEmpty())
           break;
       }
 
-      if (!found)
+      if (language.isEmpty())
         continue;
     }
-
-    language = Q(mtx::iso639::g_languages[*languageIdx].iso639_2_code);
 
     qDebug() << "derived language:" << language;
 

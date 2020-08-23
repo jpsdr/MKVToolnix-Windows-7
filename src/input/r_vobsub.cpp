@@ -170,9 +170,9 @@ vobsub_reader_c::parse_headers() {
       if (line.length() >= 6) {
         language        = sline[4];
         language       += sline[5];
-        auto lang_index = mtx::iso639::look_up(language.c_str());
-        if (lang_index)
-          language = mtx::iso639::g_languages[*lang_index].iso639_2_code;
+        auto lang_opt   = mtx::iso639::look_up(language.c_str());
+        if (lang_opt)
+          language = lang_opt->iso639_2_code;
         else
           language = "";
       } else

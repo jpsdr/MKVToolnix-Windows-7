@@ -2070,9 +2070,9 @@ qtmp4_reader_c::decode_and_verify_language(uint16_t coded_language) {
   for (i = 0; 3 > i; ++i)
     language += static_cast<char>(((coded_language >> ((2 - i) * 5)) & 0x1f) + 0x60);
 
-  auto idx = mtx::iso639::look_up(balg::to_lower_copy(language));
-  if (idx)
-    return mtx::iso639::g_languages[*idx].iso639_2_code;
+  auto language_opt = mtx::iso639::look_up(balg::to_lower_copy(language));
+  if (language_opt)
+    return language_opt->iso639_2_code;
 
   return "";
 }

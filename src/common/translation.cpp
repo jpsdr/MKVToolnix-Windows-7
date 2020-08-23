@@ -173,9 +173,9 @@ translation_c::determine_default_iso639_ui_language() {
 
 #endif  // SYS_WINDOWS
 
-  auto language_idx = mtx::iso639::look_up(language_code);
-  if (language_idx)
-    ms_default_iso639_ui_language = mtx::iso639::g_languages[*language_idx].iso639_2_code;
+  auto language = mtx::iso639::look_up(language_code);
+  if (language)
+    ms_default_iso639_ui_language = language->iso639_2_code;
 }
 
 std::string

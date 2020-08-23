@@ -568,11 +568,11 @@ parse_arg_tracks(std::string s,
       continue;
     }
 
-    auto idx = mtx::iso639::look_up(element);
-    if (!idx)
+    auto language_opt = mtx::iso639::look_up(element);
+    if (!language_opt)
       mxerror(fmt::format(Y("Invalid track ID or language code in '{0} {1}'.\n"), opt, s));
 
-    tracks.add(mtx::iso639::g_languages[*idx].iso639_2_code);
+    tracks.add(language_opt->iso639_2_code);
   }
 }
 
@@ -1379,12 +1379,12 @@ parse_arg_language(const std::string &s,
     if (parts[1].empty())
       mxerror(fmt::format(Y("Invalid {0} specified in '--{1} {2}'.\n"), topic, opt, s));
 
-    auto index = mtx::iso639::look_up(parts[1].c_str());
-    if (!index)
+    auto language_opt = mtx::iso639::look_up(parts[1].c_str());
+    if (!language_opt)
       mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code. "
                             "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), parts[1]));
 
-    parts[1] = mtx::iso639::g_languages[*index].iso639_2_code;
+    parts[1] = language_opt->iso639_2_code;
   }
 
   storage[id] = parts[1];
@@ -1828,13 +1828,13 @@ parse_arg_chapter_language(const std::string &arg,
   if (g_chapter_file_name != "")
     mxerror(fmt::format(Y("'--chapter-language' must be given before '--chapters' in '--chapter-language {0}'.\n"), arg));
 
-  auto idx = mtx::iso639::look_up(arg.c_str());
-  if (!idx)
+  auto language_opt = mtx::iso639::look_up(arg.c_str());
+  if (!language_opt)
     mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code in '--chapter-language {0}'. "
                           "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), arg));
 
-  g_chapter_language    = mtx::iso639::g_languages[*idx].iso639_2_code;
-  ti.m_chapter_language = mtx::iso639::g_languages[*idx].iso639_2_code;
+  g_chapter_language    = language_opt->iso639_2_code;
+  ti.m_chapter_language = language_opt->iso639_2_code;
 }
 
 static void
@@ -1940,12 +1940,12 @@ parse_arg_timestamp_scale(const std::string &arg) {
 
 static void
 parse_arg_default_language(const std::string &arg) {
-  auto idx = mtx::iso639::look_up(arg.c_str());
-  if (!idx)
+  auto language_opt = mtx::iso639::look_up(arg.c_str());
+  if (!language_opt)
     mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code in '--default-language {0}'. "
                           "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), arg));
 
-  g_default_language = mtx::iso639::g_languages[*idx].iso639_2_code;
+  g_default_language = language_opt->iso639_2_code;
 }
 
 static void

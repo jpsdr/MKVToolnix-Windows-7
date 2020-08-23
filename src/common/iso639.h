@@ -23,7 +23,7 @@ struct language_t {
 
 extern std::vector<language_t> const g_languages;
 
-std::optional<std::size_t> look_up(std::string const &s, bool allow_short_english_names = false);
+std::optional<language_t> look_up(std::string const &s, bool allow_short_english_names = false);
 void list_languages();
 
 } // namespace mtx::iso639

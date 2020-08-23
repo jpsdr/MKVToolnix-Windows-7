@@ -264,8 +264,8 @@ xtr_vobsub_c::finish_file() {
 void
 xtr_vobsub_c::write_idx(mm_io_c &idx,
                         int index) {
-  auto language_idx = mtx::iso639::look_up(m_language);
-  auto iso639_1     = language_idx ? mtx::iso639::g_languages[*language_idx].iso639_1_code : "en"s;
+  auto language = mtx::iso639::look_up(m_language);
+  auto iso639_1 = language ? language->iso639_1_code : "en"s;
   idx.puts(fmt::format("\nid: {0}, index: {1}\n", iso639_1.empty() ? "en"s : iso639_1, index));
 
   size_t i;

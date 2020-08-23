@@ -204,8 +204,8 @@ DiscLibraryItem::create(std::string const &language,
       biggestThumbnail = currentThumbnail;
   }
 
-  auto languageIdx  = mtx::iso639::look_up(language);
-  auto languageName = languageIdx ? Q(mtx::iso639::g_languages[*languageIdx].english_name) : Q(language);
+  auto languageOpt  = mtx::iso639::look_up(language);
+  auto languageName = languageOpt ? Q(languageOpt->english_name) : Q(language);
 
   auto item = new DiscLibraryItem{info, QStringList{
     languageName,

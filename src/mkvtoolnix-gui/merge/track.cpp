@@ -165,9 +165,9 @@ Track::setDefaults(QString const &languageDerivedFromFileName) {
              : isSubtitles() ? settings.m_defaultSubtitleTrackLanguage
              :                 Q("");
 
-  auto idx = mtx::iso639::look_up(to_utf8(language), true);
-  if (idx)
-    m_language = to_qs(mtx::iso639::g_languages[*idx].iso639_2_code);
+  auto languageOpt = mtx::iso639::look_up(to_utf8(language), true);
+  if (languageOpt)
+    m_language = Q(languageOpt->iso639_2_code);
 
   QRegExp re_displayDimensions{"^(\\d+)x(\\d+)$"};
   if (-1 != re_displayDimensions.indexIn(m_properties.value("display_dimensions").toString())) {

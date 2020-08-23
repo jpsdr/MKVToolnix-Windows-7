@@ -1332,9 +1332,9 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     }
 
     if (!track->language.empty()) {
-      auto index = mtx::iso639::look_up(track->language.c_str());
-      if (index)
-        track->language = mtx::iso639::g_languages[*index].iso639_2_code;
+      auto language_opt = mtx::iso639::look_up(track->language.c_str());
+      if (language_opt)
+        track->language = language_opt->iso639_2_code;
       else
         track->language.clear();
     }

@@ -79,9 +79,9 @@ void
 usf_reader_c::parse_metadata(mtx::xml::document_cptr &doc) {
   auto attribute = doc->document_element().child("metadata").child("language").attribute("code");
   if (attribute && !std::string{attribute.value()}.empty()) {
-    auto index = mtx::iso639::look_up(attribute.value());
-    if (index)
-      m_default_language = mtx::iso639::g_languages[*index].iso639_2_code;
+    auto language_opt = mtx::iso639::look_up(attribute.value());
+    if (language_opt)
+      m_default_language = language_opt->iso639_2_code;
     else if (!g_identifying)
       mxwarn_fn(m_ti.m_fname, fmt::format(Y("The default language code '{0}' is not a valid ISO 639-2 language code and will be ignored.\n"), attribute.value()));
   }
@@ -95,9 +95,9 @@ usf_reader_c::parse_subtitles(mtx::xml::document_cptr &doc) {
 
     auto attribute = subtitles.child("language").attribute("code");
     if (attribute && !std::string{attribute.value()}.empty()) {
-      auto index = mtx::iso639::look_up(attribute.value());
-      if (index)
-        track->m_language = mtx::iso639::g_languages[*index].iso639_2_code;
+      auto language_opt = mtx::iso639::look_up(attribute.value());
+      if (language_opt)
+        track->m_language = language_opt->iso639_2_code;
       else if (!g_identifying)
         mxwarn_tid(m_ti.m_fname, m_tracks.size() - 1, fmt::format(Y("The language code '{0}' is not a valid ISO 639-2 language code and will be ignored.\n"), attribute.value()));
     }

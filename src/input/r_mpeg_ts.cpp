@@ -817,9 +817,9 @@ track_c::parse_subtitling_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
 void
 track_c::parse_iso639_language_from(void const *buffer) {
   auto value        = std::string{ reinterpret_cast<char const *>(buffer), 3 };
-  auto language_idx = mtx::iso639::look_up(balg::to_lower_copy(value));
-  if (language_idx)
-    language = mtx::iso639::g_languages[*language_idx].iso639_2_code;
+  auto language_opt = mtx::iso639::look_up(balg::to_lower_copy(value));
+  if (language_opt)
+    language = language_opt->iso639_2_code;
 }
 
 std::size_t
@@ -2539,11 +2539,11 @@ reader_c::parse_clip_info_file(std::size_t file_idx) {
         if ((stream->pid != track->pid) || stream->language.empty())
           continue;
 
-        auto language_idx = mtx::iso639::look_up(stream->language.c_str());
-        if (!language_idx)
+        auto language_opt = mtx::iso639::look_up(stream->language.c_str());
+        if (!language_opt)
           continue;
 
-        track->language = mtx::iso639::g_languages[*language_idx].iso639_2_code;
+        track->language = language_opt->iso639_2_code;
         found = true;
         break;
       }

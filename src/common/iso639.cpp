@@ -74,7 +74,7 @@ list_languages() {
    \return The index into the \c g_languages array if found or
    an empty optional if no such entry was found.
 */
-std::optional<std::size_t>
+std::optional<language_t>
 look_up(std::string const &s,
         bool allow_short_english_name) {
   if (s.empty())
@@ -87,10 +87,10 @@ look_up(std::string const &s,
 
   auto lang_code = std::find_if(g_languages.begin(), g_languages.end(), [&source](auto const &lang) { return (lang.iso639_2_code == source) || (lang.terminology_abbrev == source) || (lang.iso639_1_code == source); });
   if (lang_code != g_languages.end())
-    return std::distance(g_languages.begin(), lang_code);
+    return *lang_code;
 
-  for (int index = 0, num_languages = g_languages.size(); index < num_languages; ++index) {
-    auto const &english_name = g_languages[index].english_name;
+  for (auto const &language : g_languages) {
+    auto const &english_name = language.english_name;
     auto s_lower             = balg::to_lower_copy(s);
     auto names               = mtx::string::split(english_name, ";");
 
@@ -98,20 +98,19 @@ look_up(std::string const &s,
 
     for (auto const &name : names)
       if (balg::to_lower_copy(name) == s_lower)
-        return index;
+        return language;
   }
 
   if (!allow_short_english_name)
     return {};
 
-  for (int index = 0, num_languages = g_languages.size(); index < num_languages; ++index) {
-    auto const &english_name = g_languages[index].english_name;
-    auto names               = mtx::string::split(english_name, ";");
+  for (auto const &language : g_languages) {
+    auto names = mtx::string::split(language.english_name, ";");
 
     mtx::string::strip(names);
 
     if (names.end() != std::find_if(names.begin(), names.end(), [&source](auto const &name) { return balg::istarts_with(name, source); }))
-      return index;
+      return language;
   }
 
   return {};
