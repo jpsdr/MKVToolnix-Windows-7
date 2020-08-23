@@ -6,8 +6,6 @@
    see the file COPYING for details
    or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-   declarations for ComboBox data
-
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
@@ -15,4 +13,4 @@
 
 #include "common/common_pch.h"
 
-extern std::vector<std::string> const sub_charsets, g_popular_character_sets;
+extern std::vector<std::string> const g_character_sets, g_popular_character_sets;

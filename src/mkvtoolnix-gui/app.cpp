@@ -13,8 +13,8 @@
 #include <QThread>
 #include <QTranslator>
 
+#include "common/character_sets.h"
 #include "common/command_line.h"
-#include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/iso3166.h"
@@ -282,10 +282,10 @@ void
 App::initializeCharacterSets() {
   auto &cfg = Util::Settings::get();
 
-  s_characterSets.reserve(sub_charsets.size());
+  s_characterSets.reserve(g_character_sets.size());
   s_commonCharacterSets.reserve(cfg.m_oftenUsedCharacterSets.size());
 
-  for (auto const &characterSet : sub_charsets) {
+  for (auto const &characterSet : g_character_sets) {
     auto qCharacterSet = Q(characterSet);
 
     s_characterSets.emplace_back(qCharacterSet);

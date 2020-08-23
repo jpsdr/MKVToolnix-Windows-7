@@ -8,7 +8,7 @@
 #include <QStandardPaths>
 
 #include "common/chapters/chapters.h"
-#include "common/extern_data.h"
+#include "common/character_sets.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/iso3166.h"

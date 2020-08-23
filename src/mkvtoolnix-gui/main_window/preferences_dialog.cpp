@@ -10,7 +10,6 @@
 #include <QVector>
 
 #include "common/chapters/chapters.h"
-#include "common/extern_data.h"
 #include "common/qt.h"
 #include "common/translation.h"
 #include "mkvtoolnix-gui/app.h"

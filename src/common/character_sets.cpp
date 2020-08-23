@@ -7,16 +7,14 @@
    or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
-   Changes by Robert Millan <rmh@aybabtu.com>.
-   Changes by Daniel Løvbrøtte Olsen <daniel@dodsorf.as>
 */
 
 #include "common/common_pch.h"
 
-#include "common/extern_data.h"
+#include "common/character_sets.h"
 
 #ifdef SYS_UNIX
-std::vector<std::string> const sub_charsets = {
+std::vector<std::string> const g_character_sets = {
   "1026",
   "1046",
   "1047",
@@ -956,7 +954,7 @@ std::vector<std::string> const sub_charsets = {
   "YU",
 };
 #elif defined(SYS_APPLE)
-std::vector<std::string> const sub_charsets = {
+std::vector<std::string> const g_character_sets = {
   "437",
   "850",
   "852",
@@ -1358,7 +1356,7 @@ std::vector<std::string> const sub_charsets = {
   "X0212",
 };
 #else
-std::vector<std::string> const sub_charsets = {
+std::vector<std::string> const g_character_sets = {
   "437",
   "850",
   "852",

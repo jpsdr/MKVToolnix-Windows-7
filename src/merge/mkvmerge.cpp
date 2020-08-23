@@ -44,7 +44,6 @@
 #include "common/checksums/base.h"
 #include "common/command_line.h"
 #include "common/ebml.h"
-#include "common/extern_data.h"
 #include "common/file_types.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"

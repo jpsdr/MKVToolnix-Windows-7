@@ -15,7 +15,6 @@
 
 #include "common/base64.h"
 #include "common/codec.h"
-#include "common/extern_data.h"
 #include "common/id_info.h"
 #include "common/locale.h"
 #include "common/mm_proxy_io.h"

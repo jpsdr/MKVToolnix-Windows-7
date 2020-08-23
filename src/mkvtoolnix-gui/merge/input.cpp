@@ -18,7 +18,6 @@
 #include <QTimer>
 
 #include "common/bluray/disc_library.h"
-#include "common/extern_data.h"
 #include "common/iso639.h"
 #include "common/logger.h"
 #include "common/qt.h"
