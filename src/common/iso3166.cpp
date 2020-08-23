@@ -20,19 +20,19 @@ namespace mtx::iso3166 {
 
 namespace {
 
-std::optional<std::size_t>
+std::optional<country_t>
 look_up(std::function<bool(country_t const &)> const &test) {
   auto itr = std::find_if(g_countries.begin(), g_countries.end(), test);
 
-  if (itr == g_countries.end())
-    return {};
+  if (itr != g_countries.end())
+    return *itr;
 
-  return std::distance(g_countries.begin(), itr);
+  return {};
 }
 
 } // anonymous namespace
 
-std::optional<std::size_t>
+std::optional<country_t>
 look_up(std::string const &s) {
   if (s.empty())
     return {};
@@ -44,7 +44,7 @@ look_up(std::string const &s) {
   });
 }
 
-std::optional<std::size_t>
+std::optional<country_t>
 look_up(unsigned int number) {
   return look_up([number](auto const &country) {
     return country.number == number;
