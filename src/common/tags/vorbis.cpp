@@ -94,23 +94,23 @@ init_vorbis_to_matroska() {
 //     s_matroska_to_vorbis[matroska.second][matroska.first] = vorbis;
 // }
 
-std::string
+mtx::bcp47::language_c
 parse_language(std::string key_language) {
   auto language = mtx::iso639::look_up(key_language, true);
   if (language)
-    return language->iso639_2_code;
+    return mtx::bcp47::language_c::parse(language->iso639_2_code);
 
   mtx::regex::jp::VecNum matches;
   if (mtx::regex::match(key_language, matches, mtx::regex::jp::Regex{".*\\[(.+?)\\]"})) {
     auto language2 = mtx::iso639::look_up(boost::to_lower_copy(matches[0][1]), true);
     if (language2)
-      return language2->iso639_2_code;
+      return mtx::bcp47::language_c::parse(language2->iso639_2_code);
   }
 
   if (mtx::regex::match(key_language, matches, mtx::regex::jp::Regex{".*\\((.+?)\\)"})) {
     auto language2 = mtx::iso639::look_up(boost::to_lower_copy(matches[0][1]), true);
     if (language2)
-      return language2->iso639_2_code;
+      return mtx::bcp47::language_c::parse(language2->iso639_2_code);
   }
 
   return {};
@@ -189,7 +189,7 @@ from_vorbis_comments(vorbis_comments_t const &vorbis_comments) {
 
     if (vorbis_key == "LANGUAGE") {
       auto new_language = parse_language(value);
-      if (!new_language.empty())
+      if (new_language.is_valid())
         converted.m_language = new_language;
       continue;
     }

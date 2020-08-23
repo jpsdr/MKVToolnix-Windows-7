@@ -275,7 +275,7 @@ struct qtmp4_demuxer_c {
 
   int ptzr;
 
-  std::string language;
+  mtx::bcp47::language_c language;
 
   debugging_option_c m_debug_tables, m_debug_tables_full, m_debug_frame_rate, m_debug_headers, m_debug_editlists, m_debug_indexes, m_debug_indexes_full;
 
@@ -571,7 +571,7 @@ protected:
 
   virtual void handle_audio_encoder_delay(qtmp4_demuxer_c &dmx);
 
-  virtual std::string decode_and_verify_language(uint16_t coded_language);
+  virtual mtx::bcp47::language_c decode_and_verify_language(uint16_t coded_language);
   virtual void read_chapter_track();
   virtual void recode_chapter_entries(std::vector<qtmp4_chapter_entry_t> &entries);
   virtual void process_chapter_entries(int level, std::vector<qtmp4_chapter_entry_t> &entries);

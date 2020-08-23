@@ -15,6 +15,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/bcp47.h"
 #include "common/container.h"
 
 template<typename T>
@@ -22,7 +23,7 @@ class item_selector_c {
 public:
   T m_default_value;
   std::unordered_map<int64_t, T> m_items;
-  std::unordered_map<std::string, T> m_string_items;
+  std::unordered_map<mtx::bcp47::language_c, T> m_language_items;
   bool m_none{}, m_reversed{};
 
 public:
@@ -33,28 +34,28 @@ public:
 
   bool
   selected(int64_t item,
-           std::optional<std::string> const &string_item = std::nullopt)
+           mtx::bcp47::language_c const &language_item = {})
     const {
     if (m_none)
       return false;
 
-    if (m_items.empty() && m_string_items.empty())
+    if (m_items.empty() && m_language_items.empty())
       return !m_reversed;
 
-    auto included = (               !m_items.empty()        && mtx::includes(m_items, item))
-                 || (string_item && !m_string_items.empty() && mtx::includes(m_string_items, *string_item));
+    auto included = (                            !m_items.empty()          && mtx::includes(m_items, item))
+                 || (language_item.is_valid() && !m_language_items.empty() && mtx::includes(m_language_items, language_item));
     return m_reversed ? !included : included;
   }
 
   T
   get(int64_t item,
-      std::optional<std::string> const &string_item = std::nullopt)
+      mtx::bcp47::language_c const &language_item = {})
     const {
-    if (!selected(item, string_item))
+    if (!selected(item, language_item))
       return m_default_value;
 
-    if (!m_string_items.empty())
-      return string_item && mtx::includes(m_string_items, *string_item) ? m_string_items.at(*string_item) : m_default_value;
+    if (!m_language_items.empty())
+      return language_item.is_valid() && mtx::includes(m_language_items, language_item) ? m_language_items.at(language_item) : m_default_value;
 
     return mtx::includes(m_items, item) ? m_items.at(item) : m_default_value;
   }
@@ -75,16 +76,16 @@ public:
     m_items[item] = value;
   }
 
-  void add(std::string const &item, T value = T{}) {
-    m_string_items[item] = value;
+  void add(mtx::bcp47::language_c const &item, T value = T{}) {
+    m_language_items[item] = value;
   }
 
   void clear() {
     m_items.clear();
-    m_string_items.clear();
+    m_language_items.clear();
   }
 
   bool empty() const {
-    return m_items.empty() && m_string_items.empty();
+    return m_items.empty() && m_language_items.empty();
   }
 };

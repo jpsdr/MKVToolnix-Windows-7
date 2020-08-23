@@ -43,7 +43,8 @@ public:
   int serialno, eos;
   unsigned int units_processed, num_non_header_packets;
   bool headers_read;
-  std::string language, title;
+  mtx::bcp47::language_c language;
+  std::string title;
   std::vector<memory_cptr> packet_data, nh_packet_data;
   int64_t first_granulepos, last_granulepos, default_duration;
   bool in_use;

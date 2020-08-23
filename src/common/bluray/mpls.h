@@ -15,8 +15,7 @@
 
 #include "common/common_pch.h"
 
-#include <vector>
-
+#include "common/bcp47.h"
 #include "common/bit_reader.h"
 #include "common/fourcc.h"
 #include "common/timestamp.h"
@@ -84,7 +83,7 @@ struct stream_t {
   stream_type_e stream_type;
   stream_coding_type_e coding_type;
   unsigned int sub_path_id, sub_clip_id, pid, format, rate, char_code;
-  std::string language;
+  mtx::bcp47::language_c language;
 
   void dump(std::string const &type) const;
 };
@@ -142,7 +141,8 @@ struct playlist_t {
 
 struct chapter_t {
   struct name_t {
-    std::string language, name;
+    mtx::bcp47::language_c language;
+    std::string name;
   };
 
   timestamp_c timestamp;

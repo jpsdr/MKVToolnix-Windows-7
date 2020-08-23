@@ -326,7 +326,7 @@ public:
   track_c *m_master;
 
   // general track parameters
-  std::string language;
+  mtx::bcp47::language_c language;
 
   // used for probing for stream types
   mtx::bytes::buffer_cptr m_probe_data;

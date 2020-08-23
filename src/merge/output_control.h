@@ -20,6 +20,7 @@
 #include <unordered_map>
 
 #include "common/attachment.h"
+#include "common/bcp47.h"
 #include "common/bitvalue.h"
 #include "common/chapters/chapters.h"
 #include "common/segmentinfo.h"
@@ -138,7 +139,7 @@ extern kax_info_cptr g_kax_info_chap;
 extern bool g_write_meta_seek_for_clusters;
 
 extern std::string g_chapter_file_name;
-extern std::string g_chapter_language;
+extern mtx::bcp47::language_c g_chapter_language;
 extern std::string g_chapter_charset;
 
 extern std::string g_segmentinfo_file_name;
@@ -154,7 +155,7 @@ extern int64_t g_tags_size;
 extern std::string g_segment_title;
 extern bool g_segment_title_set;
 extern std::string g_segment_filename, g_previous_segment_filename, g_next_segment_filename;
-extern std::string g_default_language;
+extern mtx::bcp47::language_c g_default_language;
 
 extern double g_video_fps;
 extern generic_packetizer_c *g_video_packetizer;
@@ -194,7 +195,7 @@ void main_loop();
 
 void add_packetizer_globally(generic_packetizer_c *packetizer);
 void add_tags(libmatroska::KaxTag &tags);
-void add_chapter_atom(timestamp_c const &start_timestamp, std::string const &name, std::string const &language);
+void add_chapter_atom(timestamp_c const &start_timestamp, std::string const &name, mtx::bcp47::language_c const &language);
 int64_t add_attachment(attachment_cptr const &attachment);
 
 void create_next_output_file();

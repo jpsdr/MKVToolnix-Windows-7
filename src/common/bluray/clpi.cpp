@@ -268,7 +268,7 @@ parser_c::parse_program_stream(mtx::bits::reader_c &bc,
       break;
   }
 
-  stream->language = language;
+  stream->language = mtx::bcp47::language_c::parse(language);
 
   bc.set_bit_position(position_in_bits + length_in_bytes * 8);
 }

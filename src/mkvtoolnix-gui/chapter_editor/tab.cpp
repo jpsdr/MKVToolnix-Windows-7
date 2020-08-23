@@ -445,7 +445,7 @@ Tab::loadFromChapterFile(QString const &fileName,
   auto error    = QString{};
 
   try {
-    chapters = mtx::chapters::parse(to_utf8(fileName), 0, -1, 0, "", to_utf8(Util::Settings::get().m_ceTextFileCharacterSet), true, &format);
+    chapters = mtx::chapters::parse(to_utf8(fileName), 0, -1, 0, {}, to_utf8(Util::Settings::get().m_ceTextFileCharacterSet), true, &format);
 
   } catch (mtx::mm_io::exception &ex) {
     error = Q(ex.what());
@@ -495,7 +495,7 @@ Tab::reloadOrAppendSimpleChaptersWithCharacterSet(QString const &characterSet,
   auto error = QString{};
 
   try {
-    auto chapters = mtx::chapters::parse(to_utf8(p->originalFileName), 0, -1, 0, "", to_utf8(characterSet), true);
+    auto chapters = mtx::chapters::parse(to_utf8(p->originalFileName), 0, -1, 0, {}, to_utf8(characterSet), true);
 
     if (!append)
       chaptersLoaded(chapters, false);
@@ -531,7 +531,7 @@ ChaptersPtr
 Tab::mplsChaptersToMatroskaChapters(std::vector<mtx::bluray::mpls::chapter_t> const &mplsChapters)
   const {
   auto &cfg = Util::Settings::get();
-  return mtx::chapters::convert_mpls_chapters_kax_chapters(mplsChapters, to_utf8(cfg.m_defaultChapterLanguage), to_utf8(cfg.m_chapterNameTemplate));
+  return mtx::chapters::convert_mpls_chapters_kax_chapters(mplsChapters, mtx::bcp47::language_c::parse(to_utf8(cfg.m_defaultChapterLanguage)), to_utf8(cfg.m_chapterNameTemplate));
 }
 
 Tab::LoadResult
@@ -588,7 +588,7 @@ Tab::loadFromDVD([[maybe_unused]] QString const &fileName,
 
   try {
     auto titlesAndTimestamps = mtx::chapters::parse_dvd(dvdDirectory.string());
-    chapters                 = mtx::chapters::create_editions_and_chapters(titlesAndTimestamps, to_utf8(cfg.m_defaultChapterLanguage), to_utf8(cfg.m_chapterNameTemplate));
+    chapters                 = mtx::chapters::create_editions_and_chapters(titlesAndTimestamps, mtx::bcp47::language_c::parse(to_utf8(cfg.m_defaultChapterLanguage)), to_utf8(cfg.m_chapterNameTemplate));
 
   } catch (mtx::chapters::parser_x const &ex) {
     error = Q(ex.what());

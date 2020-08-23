@@ -89,7 +89,7 @@ struct kax_track_t {
   std::vector<memory_cptr> headers;
 
   bool default_track, forced_track, enabled_track;
-  std::string language;
+  mtx::bcp47::language_c language;
 
   int64_t units_processed;
 
@@ -160,7 +160,7 @@ struct kax_track_t {
     , default_track(true)
     , forced_track(false)
     , enabled_track(true)
-    , language("eng")
+    , language{mtx::bcp47::language_c::parse("eng")}
     , units_processed(0)
     , ok(false)
     , previous_timestamp(0)

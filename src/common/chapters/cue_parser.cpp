@@ -133,7 +133,7 @@ struct cue_parser_args_t {
   std::vector<std::string> global_rem;
   std::vector<std::string> global_comment;
   std::vector<std::string> comment;
-  std::string language;
+  mtx::bcp47::language_c language;
   int line_num{};
   charset_converter_cptr cc_utf8;
 };
@@ -278,7 +278,7 @@ add_elements_for_cue_entry(cue_parser_args_t &a,
 
   auto &display = GetChild<KaxChapterDisplay>(*a.atom);
   GetChild<KaxChapterString>(display).SetValue(cue_str_internal_to_utf(a, a.name));
-  GetChild<KaxChapterLanguage>(display).SetValue(a.language);
+  GetChild<KaxChapterLanguage>(display).SetValue(a.language.get_iso639_2_code_or("und"));
 
   add_subchapters_for_index_entries(a);
 
@@ -328,8 +328,8 @@ parse_cue(mm_text_io_c *in,
           int64_t min_ts,
           int64_t max_ts,
           int64_t offset,
-          const std::string &language,
-          const std::string &charset,
+          mtx::bcp47::language_c const &language,
+          std::string const &charset,
           std::unique_ptr<KaxTags> *tags) {
   cue_parser_args_t a;
   std::string line;
@@ -343,7 +343,7 @@ parse_cue(mm_text_io_c *in,
     a.cc_utf8    = charset_converter_c::init(charset);
   }
 
-  a.language = language.empty() ? "eng" : language;
+  a.language = language.is_valid() ? language : mtx::bcp47::language_c::parse("eng");
   a.min_ts   = min_ts;
   a.max_ts   = max_ts;
   a.offset   = offset;

@@ -12,6 +12,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/bcp47.h"
 #include "extract/track_spec.h"
 
 class options_c {
@@ -30,7 +31,7 @@ public:
   class mode_options_c {
   public:
     bool m_simple_chapter_format;
-    std::optional<std::string> m_simple_chapter_language;
+    mtx::bcp47::language_c m_simple_chapter_language;
     extraction_mode_e m_extraction_mode;
 
     std::vector<track_spec_t> m_tracks;

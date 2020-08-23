@@ -31,7 +31,6 @@
 #include "common/mm_mpls_multi_file_io.h"
 #include "common/ac3.h"
 #include "common/id_info.h"
-#include "common/iso639.h"
 #include "common/list_utils.h"
 #include "common/mm_mem_io.h"
 #include "common/mm_proxy_io.h"
@@ -816,10 +815,11 @@ track_c::parse_subtitling_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
 
 void
 track_c::parse_iso639_language_from(void const *buffer) {
-  auto value        = std::string{ reinterpret_cast<char const *>(buffer), 3 };
-  auto language_opt = mtx::iso639::look_up(balg::to_lower_copy(value));
-  if (language_opt)
-    language = language_opt->iso639_2_code;
+  auto value           = std::string{ reinterpret_cast<char const *>(buffer), 3 };
+  auto parsed_language = mtx::bcp47::language_c::parse(value);
+
+  if (parsed_language.has_valid_iso639_code())
+    language = parsed_language;
 }
 
 std::size_t
@@ -1262,7 +1262,7 @@ reader_c::read_headers() {
     // track->timestamp_offset = -1;
 
     for (auto const &coupled_track : track->m_coupled_tracks)
-      if (coupled_track->language.empty())
+      if (!coupled_track->language.is_valid())
         coupled_track->language = track->language;
 
     identified_tracks.push_back(track);
@@ -1334,9 +1334,9 @@ reader_c::process_chapter_entries() {
   if (m_mpls_chapters.empty() || m_ti.m_no_chapters)
     return;
 
-  auto language    = !m_ti.m_chapter_language.empty() ? m_ti.m_chapter_language
-                   : !g_default_language.empty()      ? g_default_language
-                   :                                    std::string{"eng"};
+  auto language    = m_ti.m_chapter_language.is_valid() ? m_ti.m_chapter_language
+                   : g_default_language.is_valid()      ? g_default_language
+                   :                                      mtx::bcp47::language_c::parse("eng");
 
   m_chapters       = mtx::chapters::convert_mpls_chapters_kax_chapters(m_mpls_chapters, language);
 
@@ -1397,7 +1397,7 @@ reader_c::identify() {
 
   for (auto const &track : m_tracks) {
     info = mtx::id::info_c{};
-    info.add(mtx::id::language,  track->language);
+    info.add(mtx::id::language,  track->language.get_iso639_2_code());
     info.set(mtx::id::stream_id, track->pid);
     info.set(mtx::id::number,    track->pid);
 
@@ -2397,7 +2397,7 @@ reader_c::create_srt_subtitles_packetizer(track_ptr const &track) {
   auto &converter         = dynamic_cast<teletext_to_srt_packet_converter_c &>(*track->converter);
 
   converter.demux_page(*track->m_ttx_wanted_page, PTZR(track->ptzr));
-  converter.override_encoding(*track->m_ttx_wanted_page, track->language);
+  converter.override_encoding(*track->m_ttx_wanted_page, track->language.get_iso639_2_code());
 }
 
 void
@@ -2536,14 +2536,10 @@ reader_c::parse_clip_info_file(std::size_t file_idx) {
 
     for (auto &program : file.m_clpi_parser->m_programs) {
       for (auto &stream : program->program_streams) {
-        if ((stream->pid != track->pid) || stream->language.empty())
+        if ((stream->pid != track->pid) || !stream->language.is_valid())
           continue;
 
-        auto language_opt = mtx::iso639::look_up(stream->language.c_str());
-        if (!language_opt)
-          continue;
-
-        track->language = language_opt->iso639_2_code;
+        track->language = stream->language;
         found = true;
         break;
       }

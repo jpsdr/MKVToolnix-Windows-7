@@ -106,7 +106,7 @@ parse_dvd(std::string const &file_name) {
 
 std::shared_ptr<libmatroska::KaxChapters>
 maybe_parse_dvd(std::string const &file_name,
-                std::string const &language) {
+                mtx::bcp47::language_c const &language) {
   auto title             = 1u;
   auto cleaned_file_name = file_name;
   mtx::regex::jp::VecNum matches;

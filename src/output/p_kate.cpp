@@ -38,7 +38,7 @@ kate_packetizer_c::kate_packetizer_c(generic_reader_c *reader,
   if (blocks.size() != m_kate_id.nheaders)
     throw false;
 
-  set_language(m_kate_id.language);
+  set_language(mtx::bcp47::language_c::parse(m_kate_id.language));
   int i;
   for (i = 0; i < m_kate_id.nheaders; ++i)
     m_headers.push_back(memory_cptr(blocks[i]->clone()));

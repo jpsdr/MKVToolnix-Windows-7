@@ -1293,7 +1293,7 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     track->codec_id         = FindChildValue<KaxCodecID>(ktentry);
     track->codec_name       = to_utf8(FindChildValue<KaxCodecName>(ktentry));
     track->track_name       = to_utf8(FindChildValue<KaxTrackName>(ktentry));
-    track->language         = FindChildValue<KaxTrackLanguage, std::string>(ktentry, "eng");
+    track->language         = mtx::bcp47::language_c::parse(FindChildValue<KaxTrackLanguage, std::string>(ktentry, "eng"));
     track->default_duration = FindChildValue<KaxTrackDefaultDuration>(ktentry, track->default_duration);
     track->default_track    = FindChildValue<KaxTrackFlagDefault, bool>(ktentry, true);
     track->forced_track     = FindChildValue<KaxTrackFlagForced>(ktentry);
@@ -1331,14 +1331,6 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
       continue;
     }
 
-    if (!track->language.empty()) {
-      auto language_opt = mtx::iso639::look_up(track->language.c_str());
-      if (language_opt)
-        track->language = language_opt->iso639_2_code;
-      else
-        track->language.clear();
-    }
-
     // The variable can be empty in two cases, both of which are a
     // violation of the specification:
     //
@@ -1348,8 +1340,8 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     //
     // The closest code that's semantically the closest to such a
     // situation is probably "und" = "undetermined".
-    if (track->language.empty())
-      track->language = "und";
+    if (!track->language.is_valid())
+      track->language = mtx::bcp47::language_c::parse("und");
 
     if (0 != track->default_duration)
       track->v_frate = 1000000000.0 / track->default_duration;
@@ -2097,7 +2089,7 @@ kax_reader_c::create_packetizer(int64_t tid) {
   nti.m_private_data = t->private_data ? t->private_data->clone() : memory_cptr{};
   nti.m_id           = t->tnum; // ID for this track.
 
-  if (nti.m_language == "")
+  if (!nti.m_language.is_valid())
     nti.m_language   = t->language;
   if (nti.m_track_name == "")
     nti.m_track_name = t->track_name;
@@ -2707,7 +2699,7 @@ kax_reader_c::identify() {
     info.set(mtx::id::codec_private_length, track->private_data ? track->private_data->get_size() : 0u);
     info.add(mtx::id::codec_delay,          track->codec_delay.to_ns(0));
     info.add(mtx::id::codec_name,           track->codec_name);
-    info.add(mtx::id::language,             track->language);
+    info.add(mtx::id::language,             track->language.get_iso639_2_code());
     info.add(mtx::id::track_name,           track->track_name);
     info.add(mtx::id::stereo_mode,          static_cast<int>(track->v_stereo_mode), static_cast<int>(stereo_mode_c::unspecified));
     info.add(mtx::id::default_duration,     track->default_duration);

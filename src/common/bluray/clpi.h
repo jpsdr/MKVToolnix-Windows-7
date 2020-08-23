@@ -15,6 +15,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/bcp47.h"
 #include "common/timestamp.h"
 
 namespace mtx::bits {
@@ -36,7 +37,7 @@ struct program_stream_t {
   unsigned char aspect;
   unsigned char oc_flag;
   unsigned char char_code;
-  std::string language;
+  mtx::bcp47::language_c language;
 
   program_stream_t();
 

@@ -42,7 +42,7 @@ using namespace libmatroska;
 namespace mtx::chapters {
 
 /** The default language for all chapter entries that don't have their own. */
-std::string g_default_language;
+mtx::bcp47::language_c g_default_language;
 /** The default country for all chapter entries that don't have their own. */
 std::string g_default_country;
 
@@ -141,7 +141,7 @@ parse_simple(mm_text_io_c *in,
              int64_t min_ts,
              int64_t max_ts,
              int64_t offset,
-             std::string const &language,
+             mtx::bcp47::language_c const &language,
              std::string const &charset) {
   assert(in);
 
@@ -167,9 +167,9 @@ parse_simple(mm_text_io_c *in,
   if (do_convert)
     cc_utf8 = charset_converter_c::init(charset);
 
-  auto use_language = !language.empty()           ? language
-                    : !g_default_language.empty() ? g_default_language
-                    :                               "eng";
+  auto use_language = language.is_valid()           ? language
+                    : g_default_language.is_valid() ? g_default_language
+                    :                                 mtx::bcp47::language_c::parse("eng"s);
 
   mtx::regex::jp::Regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE, "S"};
   mtx::regex::jp::Regex timestamp_re{     SIMCHAP_RE_TIMESTAMP,      "S"};
@@ -225,7 +225,7 @@ parse_simple(mm_text_io_c *in,
         auto &display = GetChild<KaxChapterDisplay>(*atom);
 
         GetChild<KaxChapterString>(display).SetValueUTF8(do_convert ? cc_utf8->utf8(name) : name);
-        GetChild<KaxChapterLanguage>(display).SetValue(use_language);
+        GetChild<KaxChapterLanguage>(display).SetValue(use_language.get_iso639_2_code_or("und"));
 
         if (!g_default_country.empty())
           GetChild<KaxChapterCountry>(display).SetValue(g_default_country);
@@ -269,14 +269,14 @@ parse_simple(mm_text_io_c *in,
 
    \return The chapters parsed from the file or \c nullptr if an error occurred.
 
-   \see ::parse_chapters(mm_text_io_c *in,int64_t min_ts,int64_t max_ts, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,format_e *format,KaxTags **tags)
+   \see ::parse_chapters(mm_text_io_c *in,int64_t min_ts,int64_t max_ts, int64_t offset,const mtx::bcp47::language_c &language,const std::string &charset,bool exception_on_error,format_e *format,KaxTags **tags)
 */
 kax_cptr
 parse(const std::string &file_name,
       int64_t min_ts,
       int64_t max_ts,
       int64_t offset,
-      const std::string &language,
+      const mtx::bcp47::language_c &language,
       const std::string &charset,
       bool exception_on_error,
       format_e *format,
@@ -337,14 +337,14 @@ parse(const std::string &file_name,
 
    \return The chapters parsed from the file or \c nullptr if an error occurred.
 
-   \see ::parse_chapters(const std::string &file_name,int64_t min_ts,int64_t max_ts, int64_t offset,const std::string &language,const std::string &charset,bool exception_on_error,format_e *format,std::unique_ptr<KaxTags> *tags)
+   \see ::parse_chapters(const std::string &file_name,int64_t min_ts,int64_t max_ts, int64_t offset,const mtx::bcp47::language_c &language,const std::string &charset,bool exception_on_error,format_e *format,std::unique_ptr<KaxTags> *tags)
 */
 kax_cptr
 parse(mm_text_io_c *in,
       int64_t min_ts,
       int64_t max_ts,
       int64_t offset,
-      const std::string &language,
+      const mtx::bcp47::language_c &language,
       const std::string &charset,
       bool exception_on_error,
       format_e *format,
@@ -1164,14 +1164,14 @@ fix_country_codes(EbmlMaster &chapters) {
 
 std::shared_ptr<libmatroska::KaxChapters>
 create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editions_timestamps,
-                             std::string const &language,
+                             mtx::bcp47::language_c const &language,
                              std::string const &name_template) {
   auto chapters          = std::make_shared<libmatroska::KaxChapters>();
-  auto use_name_template = !name_template.empty()      ? name_template
-                         :                               g_chapter_generation_name_template.get_translated();
-  auto use_language      = !language.empty()           ? language
-                         : !g_default_language.empty() ? g_default_language
-                         :                               "eng";
+  auto use_name_template = !name_template.empty()        ? name_template
+                         :                                 g_chapter_generation_name_template.get_translated();
+  auto use_language      = language.is_valid()           ? language
+                         : g_default_language.is_valid() ? g_default_language
+                         :                                 mtx::bcp47::language_c::parse("eng");
 
   for (auto const &timestamps : editions_timestamps) {
     auto edition        = new libmatroska::KaxEditionEntry;
@@ -1190,7 +1190,7 @@ create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editio
 
       if (!name.empty())
         atom->PushElement(*mtx::construct::cons<libmatroska::KaxChapterDisplay>(new libmatroska::KaxChapterString,   name,
-                                                                                new libmatroska::KaxChapterLanguage, use_language));
+                                                                                new libmatroska::KaxChapterLanguage, use_language.get_iso639_2_code_or("und")));
 
       edition->PushElement(*atom);
     }

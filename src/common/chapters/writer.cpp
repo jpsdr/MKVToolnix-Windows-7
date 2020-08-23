@@ -30,7 +30,7 @@ using chapter_entry_storage_c = std::vector<chapter_entry_c>;
 static void
 handle_atom(KaxChapterAtom const &atom,
             chapter_entry_storage_c &chapter_entries,
-            std::optional<std::string> const &language_to_extract) {
+            mtx::bcp47::language_c const &language_to_extract) {
   if (FindChildValue<KaxChapterFlagHidden>(atom) != 0)
     return;
 
@@ -45,8 +45,8 @@ handle_atom(KaxChapterAtom const &atom,
     if (!display)
       continue;
 
-    auto language = FindChildValue<KaxChapterLanguage>(display, "eng"s);
-    if (language_to_extract && (*language_to_extract != language))
+    auto language = mtx::bcp47::language_c::parse(FindChildValue<KaxChapterLanguage>(display, "eng"s));
+    if (language_to_extract.is_valid() && (language != language_to_extract))
       continue;
 
     name = to_utf8(FindChildValue<KaxChapterString>(display));
@@ -62,7 +62,7 @@ handle_atom(KaxChapterAtom const &atom,
 std::size_t
 write_simple(KaxChapters &chapters,
              mm_io_c &out,
-             std::optional<std::string> const &language_to_extract) {
+             mtx::bcp47::language_c const &language_to_extract) {
   auto chapter_entries = chapter_entry_storage_c{};
 
   for (auto const &chapters_child : chapters) {

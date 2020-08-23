@@ -138,7 +138,7 @@ mtx::chapters::kax_cptr g_kax_chapters;
 std::unique_ptr<KaxTags> g_tags_from_cue_chapters;
 
 std::string g_chapter_file_name;
-std::string g_chapter_language;
+mtx::bcp47::language_c g_chapter_language;
 std::string g_chapter_charset;
 
 std::string g_segmentinfo_file_name;
@@ -162,7 +162,7 @@ auto s_debug_appending                      = debugging_option_c{"append|appendi
 auto s_debug_rerender_track_headers         = debugging_option_c{"rerender|rerender_track_headers"};
 auto s_debug_splitting_chapters             = debugging_option_c{"splitting_chapters"};
 
-std::string g_default_language              = "und";
+mtx::bcp47::language_c g_default_language;
 
 mtx::bits::value_cptr g_seguid_link_previous;
 mtx::bits::value_cptr g_seguid_link_next;
@@ -181,7 +181,7 @@ static std::unique_ptr<EbmlVoid> s_kax_chapters_void;
 static int64_t s_max_chapter_size           = 0;
 static std::unique_ptr<EbmlVoid> s_void_after_track_headers;
 
-static std::vector<std::tuple<timestamp_c, std::string, std::string>> s_additional_chapter_atoms;
+static std::vector<std::tuple<timestamp_c, std::string, mtx::bcp47::language_c>> s_additional_chapter_atoms;
 
 static mm_io_cptr s_out;
 
@@ -1462,7 +1462,7 @@ add_chapters_for_current_part() {
 void
 add_chapter_atom(timestamp_c const &start_timestamp,
                  std::string const &name,
-                 std::string const &language) {
+                 mtx::bcp47::language_c const &language) {
   s_additional_chapter_atoms.emplace_back(start_timestamp, name, language);
 }
 
@@ -1490,7 +1490,7 @@ prepare_additional_chapter_atoms_for_rendering() {
                                      new KaxChapterTimeStart, (std::get<0>(additional_chapter) - offset).to_ns());
     if (!std::get<1>(additional_chapter).empty())
       atom->PushElement(*cons<KaxChapterDisplay>(new KaxChapterString,   std::get<1>(additional_chapter),
-                                                 new KaxChapterLanguage, std::get<2>(additional_chapter)));
+                                                 new KaxChapterLanguage, std::get<2>(additional_chapter).get_iso639_2_code()));
 
     edition.PushElement(*atom);
   }

@@ -754,9 +754,9 @@ cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags,
 
 void
 cluster_helper_c::enable_chapter_generation(chapter_generation_mode_e mode,
-                                            std::string const &language) {
+                                            mtx::bcp47::language_c const &language) {
   m->chapter_generation_mode     = mode;
-  m->chapter_generation_language = !language.empty() ? language : "eng";
+  m->chapter_generation_language = language.is_valid() ? language : mtx::bcp47::language_c::parse("eng");
 }
 
 chapter_generation_mode_e

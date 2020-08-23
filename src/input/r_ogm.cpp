@@ -683,7 +683,7 @@ ogm_reader_c::identify() {
     info = mtx::id::info_c{};
 
     info.set(mtx::id::number,   dmx->serialno);
-    info.add(mtx::id::language, dmx->language);
+    info.add(mtx::id::language, dmx->language.get_iso639_2_code());
 
     if (!dmx->title.empty() && !dmx->ms_compat)
       info.add(mtx::id::track_name, dmx->title);
@@ -788,7 +788,7 @@ ogm_reader_c::handle_chapters(mtx::tags::vorbis_comments_t const &comments) {
 void
 ogm_reader_c::handle_language_and_title(mtx::tags::converted_vorbis_comments_t const &converted,
                                         ogm_demuxer_cptr const &dmx) {
-  if (!converted.m_language.empty())
+  if (converted.m_language.has_valid_iso639_code())
     dmx->language = converted.m_language;
 
   if (converted.m_title.empty())
@@ -1671,6 +1671,10 @@ ogm_s_kate_demuxer_c::initialize() {
   try {
     memory_cptr &mem = packet_data[0];
     kate_parse_identification_header(mem->get_buffer(), mem->get_size(), kate);
+
+    if (!language.is_valid())
+      language = mtx::bcp47::language_c::parse(kate.language);
+
   } catch (mtx::kate::header_parsing_x &e) {
     mxerror_tid(reader->m_ti.m_fname, track_id, fmt::format(Y("The Kate identification header could not be parsed ({0}).\n"), e.error()));
   }

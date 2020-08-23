@@ -20,6 +20,7 @@
 #include <matroska/KaxBlock.h>
 #include <matroska/KaxCluster.h>
 
+#include "common/bcp47.h"
 #include "common/date_time_fwd.h"
 #include "common/split_point.h"
 #include "common/timestamp.h"
@@ -78,7 +79,7 @@ public:
 
   void register_new_packetizer(generic_packetizer_c &ptzr);
 
-  void enable_chapter_generation(chapter_generation_mode_e mode, std::string const &language = "");
+  void enable_chapter_generation(chapter_generation_mode_e mode, mtx::bcp47::language_c const &language = {});
   chapter_generation_mode_e get_chapter_generation_mode() const;
   void set_chapter_generation_interval(timestamp_c const &interval);
   void verify_and_report_chapter_generation_parameters() const;

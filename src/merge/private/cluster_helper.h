@@ -72,7 +72,7 @@ public:
   timestamp_c chapter_generation_interval, chapter_generation_last_generated;
   generic_packetizer_c *chapter_generation_reference_track{};
   unsigned int chapter_generation_number{};
-  std::string chapter_generation_language;
+  mtx::bcp47::language_c chapter_generation_language;
 
   std::unordered_map<uint64_t, track_statistics_c> track_statistics;
 

@@ -29,7 +29,7 @@ public:
 
 class vobsub_track_c {
 public:
-  std::string language;
+  mtx::bcp47::language_c language;
   int ptzr;
   std::vector<vobsub_entry_c> entries;
   unsigned int idx;
@@ -38,7 +38,7 @@ public:
   int64_t packet_num, spu_size, overhead;
 
 public:
-  vobsub_track_c(const std::string &new_language):
+  vobsub_track_c(mtx::bcp47::language_c const &new_language):
     language(new_language),
     ptzr(-1),
     idx(0),

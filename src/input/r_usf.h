@@ -44,7 +44,7 @@ struct usf_entry_t {
 struct usf_track_t {
   int m_ptzr{-1};
 
-  std::string m_language;
+  mtx::bcp47::language_c m_language;
   std::vector<usf_entry_t> m_entries;
   std::vector<usf_entry_t>::const_iterator m_current_entry;
   int64_t m_byte_size{};
@@ -54,7 +54,8 @@ using usf_track_cptr = std::shared_ptr<usf_track_t>;
 class usf_reader_c: public generic_reader_c {
 private:
   std::vector<usf_track_cptr> m_tracks;
-  std::string m_private_data, m_default_language;
+  std::string m_private_data;
+  mtx::bcp47::language_c m_default_language;
   usf_track_cptr m_longest_track;
   int64_t m_bytes_to_process{}, m_bytes_processed{};
 

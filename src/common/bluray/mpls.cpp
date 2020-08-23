@@ -426,14 +426,14 @@ parser_c::parse_stream() {
                               stream_coding_type_e::eac3_audio_secondary, stream_coding_type_e::dts_hd_audio_secondary)) {
     str.format   = m_bc->get_bits(4);
     str.rate     = m_bc->get_bits(4);
-    str.language = read_string(3);
+    str.language = mtx::bcp47::language_c::parse(read_string(3));
 
   } else if (mtx::included_in(str.coding_type, stream_coding_type_e::presentation_graphics_subtitles, stream_coding_type_e::interactive_graphics_menu))
-    str.language = read_string(3);
+    str.language = mtx::bcp47::language_c::parse(read_string(3));
 
   else if (stream_coding_type_e::text_subtitles == str.coding_type) {
     str.char_code = m_bc->get_bits(8);
-    str.language  = read_string(3);
+    str.language  = mtx::bcp47::language_c::parse(read_string(3));
 
   } else
     mxdebug_if(m_debug, fmt::format("Unrecognized coding type {0:02x}\n", static_cast<unsigned int>(str.coding_type)));
@@ -499,7 +499,7 @@ parser_c::read_chapter_names(std::string const &base_file_name) {
   for (auto chapter_idx = 0, num_chapters = static_cast<int>(m_chapters.size()); chapter_idx < num_chapters; ++chapter_idx)
     for (auto const &[language, names] : all_names)
       if (chapter_idx < static_cast<int>(names.size()))
-        m_chapters[chapter_idx].names.push_back({ language, names[chapter_idx] });
+        m_chapters[chapter_idx].names.push_back({ mtx::bcp47::language_c::parse(language), names[chapter_idx] });
 }
 
 void

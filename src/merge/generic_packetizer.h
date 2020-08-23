@@ -198,7 +198,7 @@ public:
     return m_codec_delay;
   }
 
-  virtual void set_language(const std::string &language);
+  virtual void set_language(mtx::bcp47::language_c const &language);
 
   virtual void set_codec_id(const std::string &id);
   virtual void set_codec_private(memory_cptr const &buffer);

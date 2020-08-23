@@ -75,7 +75,7 @@ generic_reader_c::read_next(generic_packetizer_c *ptzr,
 bool
 generic_reader_c::demuxing_requested(char type,
                                      int64_t id,
-                                     std::optional<std::string> const &language)
+                                     mtx::bcp47::language_c const &language)
   const {
   auto const *tracks = 'v' == type ? &m_ti.m_vtracks
                      : 'a' == type ? &m_ti.m_atracks

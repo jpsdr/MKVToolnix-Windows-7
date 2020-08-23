@@ -261,7 +261,7 @@ void
 set_simple(KaxTag &tag,
            std::string const &name,
            std::string const &value,
-           std::string const &language) {
+           mtx::bcp47::language_c const &language) {
   KaxTagSimple *k_simple_tag = nullptr;
 
   for (auto const &element : tag) {
@@ -281,8 +281,8 @@ set_simple(KaxTag &tag,
   GetChild<KaxTagName>(k_simple_tag).SetValueUTF8(name);
   GetChild<KaxTagString>(k_simple_tag).SetValueUTF8(value);
 
-  if (!language.empty())
-    GetChild<KaxTagLangue>(k_simple_tag).SetValue(language);
+  if (language.has_valid_iso639_code())
+    GetChild<KaxTagLangue>(k_simple_tag).SetValue(language.get_iso639_2_code());
 }
 
 void

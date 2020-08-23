@@ -2027,7 +2027,7 @@ qtmp4_reader_c::identify() {
     else if (dmx.codec.is(codec_c::type_e::V_MPEGH_P2))
       info.add(mtx::id::packetizer, dmx.m_hevc_is_annex_b ? mtx::id::mpegh_p2_es_video : mtx::id::mpegh_p2_video);
 
-    info.add(mtx::id::language, dmx.language);
+    info.add(mtx::id::language, dmx.language.get_iso639_2_code());
 
     if (dmx.is_video())
       info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", dmx.v_width, dmx.v_height));
@@ -2062,19 +2062,14 @@ qtmp4_reader_c::add_available_track_ids() {
     add_available_track_id(track_info_c::chapter_track_id);
 }
 
-std::string
+mtx::bcp47::language_c
 qtmp4_reader_c::decode_and_verify_language(uint16_t coded_language) {
   std::string language;
-  int i;
 
-  for (i = 0; 3 > i; ++i)
+  for (int i = 0; 3 > i; ++i)
     language += static_cast<char>(((coded_language >> ((2 - i) * 5)) & 0x1f) + 0x60);
 
-  auto language_opt = mtx::iso639::look_up(balg::to_lower_copy(language));
-  if (language_opt)
-    return language_opt->iso639_2_code;
-
-  return "";
+  return mtx::bcp47::language_c::parse(language);
 }
 
 void

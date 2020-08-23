@@ -43,7 +43,6 @@ struct avi_subs_demuxer_t {
 
   int m_ptzr{-1};
 
-  std::string m_sub_language;
   memory_cptr m_subtitles;
 
   mm_text_io_cptr m_text_io;

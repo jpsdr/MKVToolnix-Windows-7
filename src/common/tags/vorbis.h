@@ -16,6 +16,7 @@
 #include "common/common_pch.h"
 
 #include "common/attachment.h"
+#include "common/bcp47.h"
 
 namespace libmatroska {
 class KaxTags;
@@ -42,7 +43,8 @@ struct vorbis_comments_t {
 };
 
 struct converted_vorbis_comments_t {
-  std::string m_title, m_language;
+  std::string m_title;
+  mtx::bcp47::language_c m_language;
   std::shared_ptr<libmatroska::KaxTags> m_track_tags, m_album_tags;
   std::vector<std::shared_ptr<attachment_t>> m_pictures;
 };

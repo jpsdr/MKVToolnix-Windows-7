@@ -61,7 +61,7 @@ usf_reader_c::read_headers() {
       if (!m_longest_track || (m_longest_track->m_entries.size() < track->m_entries.size()))
         m_longest_track = track;
 
-      if ((m_default_language != "") && (track->m_language == ""))
+      if (m_default_language.is_valid() && !track->m_language.is_valid())
         track->m_language = m_default_language;
     }
 
@@ -79,9 +79,11 @@ void
 usf_reader_c::parse_metadata(mtx::xml::document_cptr &doc) {
   auto attribute = doc->document_element().child("metadata").child("language").attribute("code");
   if (attribute && !std::string{attribute.value()}.empty()) {
-    auto language_opt = mtx::iso639::look_up(attribute.value());
-    if (language_opt)
-      m_default_language = language_opt->iso639_2_code;
+    auto language = mtx::bcp47::language_c::parse(attribute.value());
+
+    if (language.is_valid())
+      m_default_language = language;
+
     else if (!g_identifying)
       mxwarn_fn(m_ti.m_fname, fmt::format(Y("The default language code '{0}' is not a valid ISO 639-2 language code and will be ignored.\n"), attribute.value()));
   }
@@ -95,9 +97,11 @@ usf_reader_c::parse_subtitles(mtx::xml::document_cptr &doc) {
 
     auto attribute = subtitles.child("language").attribute("code");
     if (attribute && !std::string{attribute.value()}.empty()) {
-      auto language_opt = mtx::iso639::look_up(attribute.value());
-      if (language_opt)
-        track->m_language = language_opt->iso639_2_code;
+      auto language = mtx::bcp47::language_c::parse(attribute.value());
+
+      if (language.is_valid())
+        track->m_language = language;
+
       else if (!g_identifying)
         mxwarn_tid(m_ti.m_fname, m_tracks.size() - 1, fmt::format(Y("The language code '{0}' is not a valid ISO 639-2 language code and will be ignored.\n"), attribute.value()));
     }
@@ -222,7 +226,7 @@ usf_reader_c::identify() {
     auto track = m_tracks[i];
     auto info  = mtx::id::info_c{};
 
-    info.add(mtx::id::language, track->m_language);
+    info.add(mtx::id::language, track->m_language.get_iso639_2_code());
 
     id_result_track(i, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_USF, "USF"), info.get());
   }

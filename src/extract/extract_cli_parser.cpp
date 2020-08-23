@@ -203,11 +203,9 @@ void
 extract_cli_parser_c::set_simple_language() {
   assert_mode(options_c::em_chapters);
 
-  auto language_opt = mtx::iso639::look_up(m_next_arg);
-  if (!language_opt)
+  m_current_mode->m_simple_chapter_language = mtx::bcp47::language_c::parse(m_next_arg);
+  if (!m_current_mode->m_simple_chapter_language.has_valid_iso639_code())
     mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code. See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), m_next_arg));
-
-  m_current_mode->m_simple_chapter_language = language_opt->iso639_2_code;
 }
 
 std::optional<options_c::extraction_mode_e>

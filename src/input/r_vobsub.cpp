@@ -22,6 +22,7 @@
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/regex.h"
 #include "common/spu.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -134,7 +135,7 @@ vobsub_reader_c::create_packetizer(int64_t tid) {
     m_bytes_to_process += end_position - track->entries[idx].position;
   }
 
-  m_ti.m_language = "";
+  m_ti.m_language.clear();
   show_packetizer_info(tid, PTZR(track->ptzr));
 }
 
@@ -148,7 +149,8 @@ vobsub_reader_c::create_packetizers() {
 
 void
 vobsub_reader_c::parse_headers() {
-  std::string language, line;
+  mtx::bcp47::language_c language;
+  std::string line;
   vobsub_track_c *track  = nullptr;
   int64_t line_no        = 0;
   int64_t last_timestamp = 0;
@@ -164,19 +166,9 @@ vobsub_reader_c::parse_headers() {
     if ((line.length() == 0) || (line[0] == '#'))
       continue;
 
-    const char *sline = line.c_str();
-
-    if (!strncasecmp(sline, "id:", 3)) {
-      if (line.length() >= 6) {
-        language        = sline[4];
-        language       += sline[5];
-        auto lang_opt   = mtx::iso639::look_up(language.c_str());
-        if (lang_opt)
-          language = lang_opt->iso639_2_code;
-        else
-          language = "";
-      } else
-        language = "";
+    mtx::regex::jp::VecNum matches;
+    if (mtx::regex::match(line, matches, mtx::regex::jp::Regex{"^id: *([a-z]+)", "i"})) {
+      language = mtx::bcp47::language_c::parse(balg::to_lower_copy(matches[0][1]));
 
       if (track) {
         if (track->entries.empty())
@@ -196,7 +188,7 @@ vobsub_reader_c::parse_headers() {
       continue;
     }
 
-    if (!strncasecmp(sline, "alt:", 4) || !strncasecmp(sline, "langidx:", 8))
+    if (balg::istarts_with(line, "alt:") || balg::istarts_with(line, "langidx:"))
       continue;
 
     if (balg::istarts_with(line, "delay:")) {
@@ -229,7 +221,7 @@ vobsub_reader_c::parse_headers() {
       }
 
       int idx         = 0;
-      sline           = parts[3].c_str();
+      auto sline      = parts[3].c_str();
       int64_t filepos = hexvalue(sline[idx]);
       idx++;
       while ((0 != sline[idx]) && ishexdigit(sline[idx])) {
@@ -644,7 +636,7 @@ vobsub_reader_c::identify() {
   for (i = 0; i < tracks.size(); i++) {
     auto info = mtx::id::info_c{};
 
-    info.add(mtx::id::language, tracks[i]->language);
+    info.add(mtx::id::language, tracks[i]->language.get_iso639_2_code());
 
     id_result_track(i, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_VOBSUB, "VobSub"), info.get());
   }

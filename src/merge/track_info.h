@@ -15,6 +15,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/bcp47.h"
 #include "common/compression.h"
 #include "common/option_with_source.h"
 #include "common/stereo_mode.h"
@@ -273,8 +274,8 @@ public:
   std::map<int64_t, bool> m_enabled_track_flags; // As given on the command line
   std::optional<bool> m_enabled_track;    // For this very track
 
-  std::map<int64_t, std::string> m_languages; // As given on the command line
-  std::string m_language;              // For this very track
+  std::map<int64_t, mtx::bcp47::language_c> m_languages; // As given on the command line
+  mtx::bcp47::language_c m_language;                     // For this very track
 
   std::map<int64_t, std::string> m_sub_charsets; // As given on the command line
   std::string m_sub_charset;           // For this very track
@@ -377,7 +378,8 @@ public:
 
   // Some file formats can contain chapters, but for some the charset
   // cannot be identified unambiguously (*cough* OGM *cough*).
-  std::string m_chapter_charset, m_chapter_language;
+  std::string m_chapter_charset;
+  mtx::bcp47::language_c m_chapter_language;
 
   bool m_avi_audio_sync_enabled;
   int64_t m_avi_audio_data_rate;

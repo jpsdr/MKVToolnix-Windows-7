@@ -567,11 +567,11 @@ parse_arg_tracks(std::string s,
       continue;
     }
 
-    auto language_opt = mtx::iso639::look_up(element);
-    if (!language_opt)
+    auto language = mtx::bcp47::language_c::parse(element);
+    if (!language.has_valid_iso639_code())
       mxerror(fmt::format(Y("Invalid track ID or language code in '{0} {1}'.\n"), opt, s));
 
-    tracks.add(language_opt->iso639_2_code);
+    tracks.add(language);
   }
 }
 
@@ -1347,18 +1347,12 @@ parse_arg_compression(const std::string &s,
     mxerror(fmt::format(Y("'{0}' is an unsupported argument for --compression. Available compression methods are: {1}\n"), s, mtx::string::join(available_compression_methods, ", ")));
 }
 
-/** \brief Parse the argument for a couple of options
-
-   Some options have similar parameter styles. The arguments must have
-   the form \c TID:value, e.g. \c 0:XVID.
-*/
-static void
-parse_arg_language(const std::string &s,
-                   std::map<int64_t, std::string> &storage,
-                   const std::string &opt,
-                   const char *topic,
-                   bool check,
-                   bool empty_ok = false) {
+static int64_t
+parse_arg_tid_and_string(std::string const &s,
+                         std::map<int64_t, std::string> &storage,
+                         const std::string &opt,
+                         const char *topic,
+                         bool empty_ok = false) {
   // Extract the track number.
   auto parts = mtx::string::split(s, ":", 2);
   mtx::string::strip(parts);
@@ -1374,19 +1368,31 @@ parse_arg_language(const std::string &s,
   if (!mtx::string::parse_number(parts[0], id))
     mxerror(fmt::format(Y("Invalid track ID specified in '--{0} {1}'.\n"), opt, s));
 
-  if (check) {
-    if (parts[1].empty())
-      mxerror(fmt::format(Y("Invalid {0} specified in '--{1} {2}'.\n"), topic, opt, s));
-
-    auto language_opt = mtx::iso639::look_up(parts[1].c_str());
-    if (!language_opt)
-      mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code. "
-                            "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), parts[1]));
-
-    parts[1] = language_opt->iso639_2_code;
-  }
-
   storage[id] = parts[1];
+
+  return id;
+}
+
+/** \brief Parse the argument for a couple of options
+
+   Some options have similar parameter styles. The arguments must have
+   the form \c TID:value, e.g. \c 0:XVID.
+*/
+static void
+parse_arg_language(std::string const &s,
+                   std::map<int64_t, mtx::bcp47::language_c> &storage,
+                   std::string const &opt,
+                   char const *topic) {
+  std::map<int64_t, std::string> parts;
+
+  auto tid      = parse_arg_tid_and_string(s, parts, opt, topic);
+  auto language = mtx::bcp47::language_c::parse(parts[tid]);
+
+  if (!language.has_valid_iso639_code())
+    mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code. "
+                          "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), parts[1]));
+
+  storage[tid] = language;
 }
 
 /** \brief Parse the \c --subtitle-charset argument
@@ -1821,28 +1827,28 @@ parse_arg_attach_file(attachment_cptr const &attachment,
 static void
 parse_arg_chapter_language(const std::string &arg,
                            track_info_c &ti) {
-  if (g_chapter_language != "")
+  if (g_chapter_language.is_valid())
     mxerror(fmt::format(Y("'--chapter-language' may only be given once in '--chapter-language {0}'.\n"), arg));
 
-  if (g_chapter_file_name != "")
+  if (!g_chapter_file_name.empty())
     mxerror(fmt::format(Y("'--chapter-language' must be given before '--chapters' in '--chapter-language {0}'.\n"), arg));
 
-  auto language_opt = mtx::iso639::look_up(arg.c_str());
-  if (!language_opt)
+  auto language = mtx::bcp47::language_c::parse(arg);
+  if (!language.has_valid_iso639_code())
     mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code in '--chapter-language {0}'. "
                           "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), arg));
 
-  g_chapter_language    = language_opt->iso639_2_code;
-  ti.m_chapter_language = language_opt->iso639_2_code;
+  g_chapter_language    = language;
+  ti.m_chapter_language = language;
 }
 
 static void
 parse_arg_chapter_charset(const std::string &arg,
                           track_info_c &ti) {
-  if (g_chapter_charset != "")
+  if (!g_chapter_charset.empty())
     mxerror(fmt::format(Y("'--chapter-charset' may only be given once in '--chapter-charset {0}'.\n"), arg));
 
-  if (g_chapter_file_name != "")
+  if (!g_chapter_file_name.empty())
     mxerror(fmt::format(Y("'--chapter-charset' must be given before '--chapters' in '--chapter-charset {0}'.\n"), arg));
 
   g_chapter_charset    = arg;
@@ -1858,7 +1864,7 @@ parse_arg_chapters(const std::string &param,
 
   auto format         = mtx::chapters::format_e::xml;
   g_chapter_file_name = arg;
-  g_kax_chapters      = mtx::chapters::parse(g_chapter_file_name, 0, -1, 0, g_chapter_language.c_str(), g_chapter_charset.c_str(), false, &format, &g_tags_from_cue_chapters);
+  g_kax_chapters      = mtx::chapters::parse(g_chapter_file_name, 0, -1, 0, g_chapter_language, g_chapter_charset, false, &format, &g_tags_from_cue_chapters);
 
   auto sync = ti.m_timestamp_syncs.find(track_info_c::chapter_track_id);
   if (sync == ti.m_timestamp_syncs.end())
@@ -1939,12 +1945,12 @@ parse_arg_timestamp_scale(const std::string &arg) {
 
 static void
 parse_arg_default_language(const std::string &arg) {
-  auto language_opt = mtx::iso639::look_up(arg.c_str());
-  if (!language_opt)
+  auto language = mtx::bcp47::language_c::parse(arg);
+  if (!language.has_valid_iso639_code())
     mxerror(fmt::format(Y("'{0}' is neither a valid ISO 639-2 nor a valid ISO 639-1 code in '--default-language {0}'. "
                           "See 'mkvmerge --list-languages' for a list of all languages and their respective ISO 639-2 codes.\n"), arg));
 
-  g_default_language = language_opt->iso639_2_code;
+  g_default_language = language;
 }
 
 static void
@@ -2800,7 +2806,7 @@ parse_args(std::vector<std::string> args) {
       if (no_next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_language(next_arg, ti->m_languages, "language", "language", true);
+      parse_arg_language(next_arg, ti->m_languages, "language", "language");
       sit++;
 
     } else if (this_arg == "--default-language") {
@@ -2849,14 +2855,14 @@ parse_args(std::vector<std::string> args) {
       if (no_next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_language(next_arg, ti->m_track_names, "track-name", Y("track name"), false, true);
+      parse_arg_tid_and_string(next_arg, ti->m_track_names, "track-name", Y("track name"), true);
       sit++;
 
     } else if (mtx::included_in(this_arg, "--timecodes", "--timestamps")) {
       if (no_next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_language(next_arg, ti->m_all_ext_timestamps, this_arg, Y("timestamps"), false);
+      parse_arg_tid_and_string(next_arg, ti->m_all_ext_timestamps, this_arg, Y("timestamps"));
       sit++;
 
     } else if (this_arg == "--track-order") {
@@ -3098,7 +3104,9 @@ setup(int argc,
   clear_list_of_unique_numbers(UNIQUE_ALL_IDS);
 
   mtx_common_init("mkvmerge", argv[0]);
-  g_kax_tracks = std::make_unique<KaxTracks>();
+
+  g_kax_tracks       = std::make_unique<KaxTracks>();
+  g_default_language = mtx::bcp47::language_c::parse("und");
 
 #if defined(SYS_UNIX) || defined(SYS_APPLE)
   signal(SIGUSR1, sighandler);

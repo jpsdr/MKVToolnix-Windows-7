@@ -360,7 +360,7 @@ void
 avi_reader_c::create_subs_packetizer(int idx) {
   auto &demuxer = m_subtitle_demuxers[idx];
 
-  if (!demuxing_requested('s', 1 + AVI_audio_tracks(m_avi) + idx, demuxer.m_sub_language))
+  if (!demuxing_requested('s', 1 + AVI_audio_tracks(m_avi) + idx))
     return;
 
   m_ti.m_private_data.reset();

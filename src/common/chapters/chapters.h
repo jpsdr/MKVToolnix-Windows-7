@@ -17,6 +17,7 @@
 
 #include <ebml/EbmlElement.h>
 
+#include "common/bcp47.h"
 #include "common/timestamp.h"
 #include "common/translation.h"
 
@@ -54,23 +55,24 @@ enum class format_e {
 };
 
 mtx::chapters::kax_cptr
-parse(const std::string &file_name, int64_t min_ts = 0, int64_t max_ts = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",
+parse(const std::string &file_name, int64_t min_ts = 0, int64_t max_ts = -1, int64_t offset = 0, mtx::bcp47::language_c const &language = {}, const std::string &charset = "",
       bool exception_on_error = false, format_e *format = nullptr, std::unique_ptr<libmatroska::KaxTags> *tags = nullptr);
 
 mtx::chapters::kax_cptr
-parse(mm_text_io_c *io, int64_t min_ts = 0, int64_t max_ts = -1, int64_t offset = 0, const std::string &language = "", const std::string &charset = "",
+parse(mm_text_io_c *io, int64_t min_ts = 0, int64_t max_ts = -1, int64_t offset = 0, mtx::bcp47::language_c const &language = {}, const std::string &charset = "",
       bool exception_on_error = false, format_e *format = nullptr, std::unique_ptr<libmatroska::KaxTags> *tags = nullptr);
 
 bool probe_simple(mm_text_io_c *in);
-mtx::chapters::kax_cptr parse_simple(mm_text_io_c *in, int64_t min_ts, int64_t max_ts, int64_t offset, const std::string &language, const std::string &charset);
+mtx::chapters::kax_cptr parse_simple(mm_text_io_c *in, int64_t min_ts, int64_t max_ts, int64_t offset, mtx::bcp47::language_c const &language, const std::string &charset);
 
-extern std::string g_cue_name_format, g_default_language, g_default_country;
+extern std::string g_cue_name_format, g_default_country;
+extern mtx::bcp47::language_c g_default_language;
 extern translatable_string_c g_chapter_generation_name_template;
 
 bool probe_cue(mm_text_io_c *in);
-mtx::chapters::kax_cptr parse_cue(mm_text_io_c *in, int64_t min_ts, int64_t max_ts, int64_t offset, const std::string &language, const std::string &charset, std::unique_ptr<libmatroska::KaxTags> *tags = nullptr);
+mtx::chapters::kax_cptr parse_cue(mm_text_io_c *in, int64_t min_ts, int64_t max_ts, int64_t offset, mtx::bcp47::language_c const &language, const std::string &charset, std::unique_ptr<libmatroska::KaxTags> *tags = nullptr);
 
-std::size_t write_simple(libmatroska::KaxChapters &chapters, mm_io_c &out, std::optional<std::string> const &language_to_extract);
+std::size_t write_simple(libmatroska::KaxChapters &chapters, mm_io_c &out, mtx::bcp47::language_c const &language_to_extract);
 
 bool select_in_timeframe(libmatroska::KaxChapters *chapters, int64_t min_ts, int64_t max_ts, int64_t offset);
 
@@ -97,6 +99,6 @@ std::string format_name_template(std::string const &name_template, int chapter_n
 
 void fix_country_codes(libebml::EbmlMaster &chapters);
 
-std::shared_ptr<libmatroska::KaxChapters> create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editions_timestamps, std::string const &language, std::string const &name_template);
+std::shared_ptr<libmatroska::KaxChapters> create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editions_timestamps, mtx::bcp47::language_c const &language, std::string const &name_template);
 
 }

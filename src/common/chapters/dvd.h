@@ -19,7 +19,7 @@
 namespace mtx::chapters {
 
 std::vector<std::vector<timestamp_c>> parse_dvd(std::string const &file_name);
-std::shared_ptr<libmatroska::KaxChapters> maybe_parse_dvd(std::string const &file_name, std::string const &language);
+std::shared_ptr<libmatroska::KaxChapters> maybe_parse_dvd(std::string const &file_name, mtx::bcp47::language_c const &language);
 
 }
 
