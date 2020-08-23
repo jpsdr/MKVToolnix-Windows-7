@@ -17,6 +17,7 @@
 #include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
+#include "common/iso3166.h"
 #include "common/kax_element_names.h"
 #include "common/kax_info.h"
 #include "common/qt.h"
@@ -258,12 +259,12 @@ void
 App::initializeTopLevelDomainCountryCodes() {
   auto &cfg = Util::Settings::get();
 
-  s_topLevelDomainCountryCodes.reserve(g_cctlds.size());
-  s_commonTopLevelDomainCountryCodes.reserve(g_cctlds.size());
+  s_topLevelDomainCountryCodes.reserve(mtx::iso3166::g_countries.size());
+  s_commonTopLevelDomainCountryCodes.reserve(mtx::iso3166::g_countries.size());
 
-  for (auto const &country : g_cctlds) {
-    auto countryCode = Q(country.code);
-    auto description = Q("%1 (%2)").arg(Q(country.country)).arg(countryCode);
+  for (auto const &country : mtx::iso3166::g_countries) {
+    auto countryCode = Q(country.alpha_2_code).toLower();
+    auto description = Q("%1 (%2)").arg(Q(country.name)).arg(countryCode.toUpper());
     auto isCommon    = cfg.m_oftenUsedCountries.indexOf(countryCode) != -1;
 
     s_topLevelDomainCountryCodes.emplace_back(description, countryCode);

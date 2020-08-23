@@ -24,7 +24,7 @@
 #include "common/construct.h"
 #include "common/ebml.h"
 #include "common/error.h"
-#include "common/extern_data.h"
+#include "common/iso3166.h"
 #include "common/locale.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
@@ -1156,9 +1156,9 @@ fix_country_codes(EbmlMaster &chapters) {
     if (!ccountry)
       continue;
 
-    auto mapped_cctld = map_to_cctld(ccountry->GetValue());
-    if (mapped_cctld)
-      ccountry->SetValue(*mapped_cctld);
+    auto country_opt = mtx::iso3166::look_up_cctld(ccountry->GetValue());
+    if (country_opt)
+      ccountry->SetValue(mtx::string::to_lower_ascii(country_opt->alpha_2_code));
   }
 }
 

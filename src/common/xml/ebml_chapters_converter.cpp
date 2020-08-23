@@ -15,8 +15,8 @@
 
 #include <sstream>
 
-#include "common/extern_data.h"
 #include "common/iso639.h"
+#include "common/iso3166.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
@@ -156,13 +156,15 @@ ebml_chapters_converter_c::fix_display(KaxChapterDisplay &display)
   if (!ccountry)
     return;
 
-  auto country = ccountry->GetValue();
-  auto cctld   = map_to_cctld(country);
-  if (!cctld)
+  auto country     = ccountry->GetValue();
+  auto country_opt = mtx::iso3166::look_up_cctld(country);
+  if (!country_opt)
     throw conversion_x{fmt::format(Y("'{0}' is not a valid ccTLD country code."), country)};
 
-  if (country != *cctld)
-    ccountry->SetValue(*cctld);
+  auto cctld = mtx::string::to_lower_ascii(country_opt->alpha_2_code);
+
+  if (country != cctld)
+    ccountry->SetValue(cctld);
 }
 
 void

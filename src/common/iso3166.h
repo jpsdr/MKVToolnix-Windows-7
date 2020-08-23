@@ -24,8 +24,11 @@ struct country_t {
 };
 
 extern std::vector<country_t> const g_countries;
+extern std::vector<std::string> const g_popular_country_codes;
 
 std::optional<country_t> look_up(std::string const &s);
 std::optional<country_t> look_up(unsigned int number);
+
+std::optional<country_t> look_up_cctld(std::string const &s);
 
 } // namespace mtx::iso3166

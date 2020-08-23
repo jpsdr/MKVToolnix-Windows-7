@@ -6,7 +6,6 @@
 #include <QString>
 #include <QStringList>
 
-#include "common/extern_data.h"
 #include "common/json.h"
 #include "common/list_utils.h"
 #include "common/qt.h"
@@ -256,12 +255,6 @@ itemFlagsToString(Qt::ItemFlags const &flags) {
   if (flags & Qt::ItemNeverHasChildren) items << "NeverHasChildren";
 
   return items.join(Q("|"));
-}
-
-QString
-mapToTopLevelCountryCode(QString const &countryCode) {
-  auto ccTLD = map_to_cctld(to_utf8(countryCode));
-  return ccTLD ? Q(*ccTLD) : countryCode;
 }
 
 QString

@@ -11,6 +11,7 @@
 #include "common/extern_data.h"
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
+#include "common/iso3166.h"
 #include "common/qt.h"
 #include "common/regex.h"
 #include "common/version.h"
@@ -435,8 +436,8 @@ Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
   }
 
   if (m_oftenUsedCountries.isEmpty())
-    for (auto const &countryCode : g_popular_country_codes)
-      m_oftenUsedCountries << Util::mapToTopLevelCountryCode(Q(countryCode));
+    for (auto const &countryCode : mtx::iso3166::g_popular_country_codes)
+      m_oftenUsedCountries << Q(countryCode).toLower();
 
   if (m_oftenUsedCharacterSets.isEmpty())
     for (auto const &characterSet : g_popular_character_sets)
@@ -488,7 +489,7 @@ Settings::loadDefaults(QSettings &reg) {
   m_defaultSubtitleTrackLanguage       = reg.value(s_valDefaultSubtitleTrackLanguage, Q("und")).toString();
   m_whenToSetDefaultLanguage           = static_cast<SetDefaultLanguagePolicy>(reg.value(s_valWhenToSetDefaultLanguage,     static_cast<int>(SetDefaultLanguagePolicy::IfAbsentOrUndetermined)).toInt());
   m_defaultChapterLanguage             = reg.value(s_valDefaultChapterLanguage, Q("und")).toString();
-  m_defaultChapterCountry              = Util::mapToTopLevelCountryCode(reg.value(s_valDefaultChapterCountry).toString());
+  m_defaultChapterCountry              = reg.value(s_valDefaultChapterCountry).toString();
   m_defaultSubtitleCharset             = reg.value(s_valDefaultSubtitleCharset).toString();
   m_defaultAdditionalMergeOptions      = reg.value(s_valDefaultAdditionalMergeOptions).toString();
   reg.endGroup();               // defaults
