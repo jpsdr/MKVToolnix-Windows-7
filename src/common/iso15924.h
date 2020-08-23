@@ -25,6 +25,6 @@ struct script_t {
 
 extern std::vector<script_t> const g_scripts;
 
-std::optional<std::size_t> look_up(std::string const &s);
+std::optional<script_t> look_up(std::string const &s);
 
 } // namespace mtx::iso15924

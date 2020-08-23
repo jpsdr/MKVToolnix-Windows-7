@@ -18,7 +18,7 @@
 
 namespace mtx::iso15924 {
 
-std::optional<std::size_t>
+std::optional<script_t>
 look_up(std::string const &s) {
   if (s.empty())
     return {};
@@ -28,10 +28,10 @@ look_up(std::string const &s) {
     return s_lower == mtx::string::to_lower_ascii(script.code);
   });
 
-  if (itr == g_scripts.end())
-    return {};
+  if (itr != g_scripts.end())
+    return *itr;
 
-  return std::distance(g_scripts.begin(), itr);
+  return {};
 }
 
 } // namespace mtx::iso15924
