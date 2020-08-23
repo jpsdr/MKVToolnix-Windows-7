@@ -24,7 +24,7 @@ struct entry_t {
 
 extern std::vector<entry_t> const g_extlangs, g_variants;
 
-std::optional<std::size_t> look_up_extlang(std::string const &s);
-std::optional<std::size_t> look_up_variant(std::string const &s);
+std::optional<entry_t> look_up_extlang(std::string const &s);
+std::optional<entry_t> look_up_variant(std::string const &s);
 
 } // namespace mtx::iana::language_subtag_registry

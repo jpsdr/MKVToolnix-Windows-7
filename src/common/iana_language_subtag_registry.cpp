@@ -20,7 +20,7 @@ namespace mtx::iana::language_subtag_registry {
 
 namespace {
 
-std::optional<std::size_t>
+std::optional<entry_t>
 look_up_entry(std::string const &s,
              std::vector<entry_t> const &entries) {
   if (s.empty())
@@ -31,20 +31,20 @@ look_up_entry(std::string const &s,
     return s_lower == mtx::string::to_lower_ascii(entry.code);
   });
 
-  if (itr == entries.end())
-    return {};
+  if (itr != entries.end())
+    return *itr;
 
-  return std::distance(entries.begin(), itr);
+  return {};
 }
 
 }
 
-std::optional<std::size_t>
+std::optional<entry_t>
 look_up_extlang(std::string const &s) {
   return look_up_entry(s, g_extlangs);
 }
 
-std::optional<std::size_t>
+std::optional<entry_t>
 look_up_variant(std::string const &s) {
   return look_up_entry(s, g_variants);
 }
