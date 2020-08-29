@@ -41,7 +41,6 @@ MassModificationDialog::setupUi(QStringList const &additionalLanguages,
   m_ui->cbLanguage->setAdditionalItems(additionalLanguages).setup();
   m_ui->cbCountry->setAdditionalItems(additionalCountryCodes).setup(true, QY("– Set to none –"));
 
-  auto mw = MainWindow::get();
   connect(m_ui->cbShift,               &QCheckBox::toggled,                                                          this,                        &MassModificationDialog::verifyOptions);
   connect(m_ui->leShiftBy,             &QLineEdit::textChanged,                                                      this,                        &MassModificationDialog::verifyOptions);
   connect(m_ui->cbMultiply,            &QCheckBox::toggled,                                                          this,                        &MassModificationDialog::verifyOptions);
@@ -54,9 +53,6 @@ MassModificationDialog::setupUi(QStringList const &additionalLanguages,
   connect(m_ui->cbRemoveEndTimestamps, &QCheckBox::toggled,                                                          m_ui->cbSetEndTimestamps,    &QRadioButton::setDisabled);
   connect(m_ui->buttonBox,             &QDialogButtonBox::accepted,                                                  this,                        &MassModificationDialog::accept);
   connect(m_ui->buttonBox,             &QDialogButtonBox::rejected,                                                  this,                        &MassModificationDialog::reject);
-
-  connect(mw,                          &MainWindow::preferencesChanged,                                              m_ui->cbLanguage,            &Util::ComboBoxBase::reInitialize);
-  connect(mw,                          &MainWindow::preferencesChanged,                                              m_ui->cbCountry,             &Util::ComboBoxBase::reInitialize);
 
   m_ui->leShiftBy->setEnabled(false);
   m_ui->dsbMultiplyBy->setEnabled(false);
