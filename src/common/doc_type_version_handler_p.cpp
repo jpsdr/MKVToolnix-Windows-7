@@ -51,8 +51,6 @@ doc_type_version_handler_private_c::init_tables() {
   s_version_by_element[KaxChapLanguageIETF::ClassInfos.GlobalId.GetValue()]                 = 4;
   s_version_by_element[KaxCodecDelay::ClassInfos.GlobalId.GetValue()]                       = 4;
   s_version_by_element[KaxCueDuration::ClassInfos.GlobalId.GetValue()]                      = 4;
-  s_version_by_element[KaxCueDuration::ClassInfos.GlobalId.GetValue()]                      = 4;
-  s_version_by_element[KaxCueRelativePosition::ClassInfos.GlobalId.GetValue()]              = 4;
   s_version_by_element[KaxCueRelativePosition::ClassInfos.GlobalId.GetValue()]              = 4;
   s_version_by_element[KaxDiscardPadding::ClassInfos.GlobalId.GetValue()]                   = 4;
   s_version_by_element[KaxLanguageIETF::ClassInfos.GlobalId.GetValue()]                     = 4;
