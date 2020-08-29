@@ -18,6 +18,10 @@ class QMenu;
 class QProgressDialog;
 class QTreeView;
 
+namespace mtx::bcp47 {
+class language_c;
+}
+
 namespace mtx::bluray::disc_library {
 struct info_t;
 }
@@ -229,7 +233,7 @@ public Q_SLOTS:
   virtual void onBrowseNextSegmentUID();
   virtual void onBrowseChapters();
   virtual void onChapterTitleNumberChanged(int newValue);
-  virtual void onChapterLanguageChanged(int newValue);
+  virtual void onChapterLanguageChanged(mtx::bcp47::language_c const &newLanguage);
   virtual void onChapterCharacterSetChanged(QString newValue);
   virtual void onChapterDelayChanged(QString newValue);
   virtual void onChapterStretchByChanged(QString newValue);

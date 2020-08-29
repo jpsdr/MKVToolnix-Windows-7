@@ -4,6 +4,7 @@
 #include <QMenu>
 #include <QStringList>
 
+#include "common/bcp47.h"
 #include "common/bitvalue.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
@@ -13,6 +14,7 @@
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/util/file.h"
+#include "mkvtoolnix-gui/util/language_display_widget.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -32,11 +34,12 @@ Tab::setupOutputControls() {
 
   setupOutputFileControls();
 
+  ui->chapterLanguage->enableClearingLanguage(true);
   ui->chapterCharacterSetPreview->setEnabled(false);
 
   m_splitControls << ui->splitOptions << ui->splitOptionsLabel << ui->splitMaxFilesLabel << ui->splitMaxFiles << ui->linkFiles;
 
-  auto comboBoxControls = QList<QComboBox *>{} << ui->splitMode << ui->chapterLanguage << ui->chapterCharacterSet << ui->chapterGenerationMode;
+  auto comboBoxControls = QList<QComboBox *>{} << ui->splitMode << ui->chapterCharacterSet << ui->chapterGenerationMode;
   for (auto const &control : comboBoxControls) {
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     Util::fixComboBoxViewWidth(*control);
@@ -69,7 +72,7 @@ Tab::setupOutputControls() {
   connect(ui->chapterDelay,                  &QLineEdit::textChanged,                                                                          this, &Tab::onChapterDelayChanged);
   connect(ui->chapterStretchBy,              &QLineEdit::textChanged,                                                                          this, &Tab::onChapterStretchByChanged);
   connect(ui->chapterCueNameFormat,          &QLineEdit::textChanged,                                                                          this, &Tab::onChapterCueNameFormatChanged);
-  connect(ui->chapterLanguage,               static_cast<void (Util::LanguageComboBox::*)(int)>(&Util::LanguageComboBox::currentIndexChanged), this, &Tab::onChapterLanguageChanged);
+  connect(ui->chapterLanguage,               &Util::LanguageDisplayWidget::languageChanged,                                                    this, &Tab::onChapterLanguageChanged);
   connect(ui->chapters,                      &QLineEdit::textChanged,                                                                          this, &Tab::onChaptersChanged);
   connect(ui->globalTags,                    &QLineEdit::textChanged,                                                                          this, &Tab::onGlobalTagsChanged);
   connect(ui->linkFiles,                     &QPushButton::clicked,                                                                            this, &Tab::onLinkFilesClicked);
@@ -156,6 +159,8 @@ Tab::retranslateOutputUI() {
                          QStringList{} << QY("Do not split")                 << QY("After output size")                     << QY("After output duration")     << QY("After specific timestamps")
                                        << QY("By parts based on timestamps") << QY("By parts based on frame/field numbers") << QY("After frame/field numbers") << QY("Before chapters"));
 
+  ui->chapterLanguage->retranslateUi();
+
   setupOutputToolTips();
   setupSplitModeLabelAndToolTips();
 }
@@ -190,12 +195,11 @@ Tab::setupOutputToolTips() {
   Util::setToolTip(ui->browseSegmentUID,         QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
   Util::setToolTip(ui->browseNextSegmentUID,     QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
   Util::setToolTip(ui->browsePreviousSegmentUID, QY("Select an existing Matroska or WebM file and the GUI will add its segment UID to the input field on the left."));
-  Util::setToolTip(ui->chapterLanguage,
-                   Q("<p>%1 %2 %3</p><p>%4</p>")
-                   .arg(QYH("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."))
-                   .arg(QYH("This option specifies the language to be associated with chapters if the OGM chapter format is used."))
-                   .arg(QYH("It is ignored for XML chapter files."))
-                   .arg(QYH("The language set here is also used when chapters are generated.")));
+  Util::setToolTip(ui->chapterLanguage,          Q("<p>%1 %2 %3</p><p>%4</p>")
+                                                 .arg(QYH("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."))
+                                                 .arg(QYH("This option specifies the language to be associated with chapters if the OGM chapter format is used."))
+                                                 .arg(QYH("It is ignored for XML chapter files."))
+                                                 .arg(QYH("The language set here is also used when chapters are generated.")));
   Util::setToolTip(ui->chapterCharacterSet,
                    Q("%1 %2 %3")
                    .arg(QY("mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."))
@@ -530,10 +534,8 @@ Tab::onChapterTitleNumberChanged(int newValue) {
 }
 
 void
-Tab::onChapterLanguageChanged(int newValue) {
-  auto data = ui->chapterLanguage->itemData(newValue);
-  if (data.isValid())
-    m_config.m_chapterLanguage = data.toString();
+Tab::onChapterLanguageChanged(mtx::bcp47::language_c const &newLanguage) {
+  m_config.m_chapterLanguage = newLanguage.is_valid() ? Q(newLanguage.format()) : QString{};
 }
 
 void
@@ -606,9 +608,7 @@ Tab::setOutputControlValues() {
   ui->additionalOptions->setText(m_config.m_additionalOptions);
   ui->webmMode->setChecked(m_config.m_webmMode);
 
-  ui->chapterLanguage->setAdditionalItems(m_config.m_chapterLanguage)
-    .reInitializeIfNecessary()
-    .setCurrentByData(m_config.m_chapterLanguage);
+  ui->chapterLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(m_config.m_chapterLanguage)));
   ui->chapterCharacterSet->setAdditionalItems(m_config.m_chapterCharacterSet)
     .reInitializeIfNecessary()
     .setCurrentByData(m_config.m_chapterCharacterSet);

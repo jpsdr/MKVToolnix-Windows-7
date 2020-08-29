@@ -218,9 +218,8 @@ Tab::setupInputControls() {
   ui->defaultDuration->lineEdit()->setClearButtonEnabled(true);
   ui->aspectRatio->lineEdit()->setClearButtonEnabled(true);
 
-  // Track & chapter language
+  // Track language
   ui->trackLanguage->setup();
-  ui->chapterLanguage->setup(true);
 
   // Track & chapter character set
   ui->subtitleCharacterSet->setup(true);
@@ -427,7 +426,6 @@ Tab::setupInputControls() {
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  this,                     &Tab::setupInputLayout);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  this,                     &Tab::setupPredefinedTrackNames);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  ui->trackLanguage,        &Util::ComboBoxBase::reInitialize);
-  connect(mw,                                &MainWindow::preferencesChanged,                                                                  ui->chapterLanguage,      &Util::ComboBoxBase::reInitialize);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  ui->subtitleCharacterSet, &Util::ComboBoxBase::reInitialize);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  ui->chapterCharacterSet,  &Util::ComboBoxBase::reInitialize);
 
