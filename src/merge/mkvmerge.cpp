@@ -130,13 +130,13 @@ set_usage() {
                   "                           If the number is postfixed with 'ms' then\n"
                   "                           put at most n milliseconds of data into each\n"
                   "                           cluster.\n");
-  usage_text += Y("  --no-cues                Do not write the cue data (the index).\n");
   usage_text += Y("  --clusters-in-meta-seek  Write meta seek data for clusters.\n");
+  usage_text += Y("  --timestamp-scale <n>    Force the timestamp scale factor to n.\n");
+  usage_text += Y("  --enable-durations       Enable block durations for all blocks.\n");
+  usage_text += Y("  --no-cues                Do not write the cue data (the index).\n");
   usage_text += Y("  --no-date                Do not write the 'date' field in the segment\n"
                   "                           information headers.\n");
   usage_text += Y("  --disable-lacing         Do not use lacing.\n");
-  usage_text += Y("  --enable-durations       Enable block durations for all blocks.\n");
-  usage_text += Y("  --timestamp-scale <n>    Force the timestamp scale factor to n.\n");
   usage_text += Y("  --disable-track-statistics-tags\n"
                   "                           Do not write tags with track statistics.\n");
   usage_text +=   "\n";
