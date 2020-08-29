@@ -19,6 +19,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
+#include "mkvtoolnix-gui/util/language_display_widget.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/settings_names.h"
@@ -101,6 +102,11 @@ buttonForRole(QDialogButtonBox *box,
 void
 setToolTip(QWidget *widget,
            QString const &toolTip) {
+  if (dynamic_cast<LanguageDisplayWidget *>(widget)) {
+    static_cast<LanguageDisplayWidget &>(*widget).setAdditionalToolTip(toolTip);
+    return;
+  }
+
   if (Util::Settings::get().m_uiDisableToolTips) {
     widget->setToolTip({});
     return;
