@@ -48,7 +48,10 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->leStartTimestamp->setText(Q(mtx::string::format_timestamp(startTimestamp)));
   m_ui->leNameTemplate->setText(cfg.m_chapterNameTemplate);
 
-  m_ui->cbLanguage->setAdditionalItems(additionalLanguages).setup().setCurrentByData(cfg.m_defaultChapterLanguage);
+  m_ui->ldwLanguage->setAdditionalLanguages(additionalLanguages);
+  m_ui->ldwLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(cfg.m_defaultChapterLanguage)));
+  m_ui->ldwLanguage->enableClearingLanguage(true);
+  m_ui->ldwLanguage->setClearTitle(QY("– Set to none –"));
   m_ui->cbCountry->setAdditionalItems(additionalCountryCodes).setup(true, QY("– Set to none –")).setCurrentByData(cfg.m_defaultChapterCountry);
 
   m_ui->sbNumberOfEntries->setFocus();
@@ -102,7 +105,7 @@ GenerateSubChaptersParametersDialog::nameTemplate()
 QString
 GenerateSubChaptersParametersDialog::language()
   const {
-  return m_ui->cbLanguage->currentData().toString();
+  return Q(m_ui->ldwLanguage->language().format());
 }
 
 OptQString

@@ -36,7 +36,7 @@
         <string>&amp;Language:</string>
        </property>
        <property name="buddy">
-        <cstring>cbLanguage</cstring>
+        <cstring>ldwLanguage</cstring>
        </property>
       </widget>
      </item>
@@ -154,7 +154,7 @@
       </widget>
      </item>
      <item row="5" column="1">
-      <widget class="mtx::gui::Util::LanguageComboBox" name="cbLanguage"/>
+      <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwLanguage"/>
      </item>
      <item row="6" column="1">
       <widget class="mtx::gui::Util::CountryComboBox" name="cbCountry"/>
@@ -188,9 +188,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>mtx::gui::Util::LanguageComboBox</class>
-   <extends>QComboBox</extends>
-   <header>mkvtoolnix-gui/util/language_combo_box.h</header>
+   <class>mtx::gui::Util::LanguageDisplayWidget</class>
+   <extends>QForm</extends>
+   <header>mkvtoolnix-gui/util/language_display_widget.h</header>
   </customwidget>
   <customwidget>
    <class>mtx::gui::Util::CountryComboBox</class>
@@ -204,7 +204,7 @@
   <tabstop>sbFirstChapterNumber</tabstop>
   <tabstop>leStartTimestamp</tabstop>
   <tabstop>leNameTemplate</tabstop>
-  <tabstop>cbLanguage</tabstop>
+  <tabstop>ldwLanguage</tabstop>
   <tabstop>cbCountry</tabstop>
  </tabstops>
  <resources/>
