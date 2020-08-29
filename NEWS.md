@@ -36,6 +36,10 @@
 * mkvmerge: IETF BCP 47/RFC 5646 language tags: added an option
   `--disable-language-ietf` that causes mkvmerge to only write the legacy
   language elements.
+* mkvpropedit: IETF BCP 47/RFC 5646 language tags: added an option
+  `--disable-language-ietf` that causes mkvpropedit to apply changes to the
+  `language` track header property only to the legacy language track header
+  element.
 
 ## Bug fixes
 

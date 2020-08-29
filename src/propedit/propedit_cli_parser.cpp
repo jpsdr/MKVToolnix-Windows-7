@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/bcp47.h"
 #include "common/ebml.h"
 #include "common/regex.h"
 #include "common/strings/formatting.h"
@@ -202,6 +203,11 @@ propedit_cli_parser_c::set_file_name() {
   m_options->set_file_name(m_current_arg);
 }
 
+void
+propedit_cli_parser_c::disable_language_ietf() {
+  mtx::bcp47::language_c::disable();
+}
+
 #define OPT(spec, func, description) add_option(spec, std::bind(&propedit_cli_parser_c::func, this), description)
 
 void
@@ -240,6 +246,7 @@ propedit_cli_parser_c::init_parser() {
   OPT("attachment-uid=<uid>",                              set_attachment_uid,         YT("Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
 
   add_section_header(YT("Other options"));
+  OPT("disable-language-ietf", disable_language_ietf, YT("Do not change LanguageIETF track header elements when the 'language' property is changed."));
   add_common_options();
 
   add_separator();

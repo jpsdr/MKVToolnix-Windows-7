@@ -37,6 +37,7 @@ protected:
   void add_chapters();
   void set_parse_mode();
   void set_file_name();
+  void disable_language_ietf();
 
   void set_attachment_name();
   void set_attachment_description();

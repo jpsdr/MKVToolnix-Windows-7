@@ -383,7 +383,9 @@ change_c::make_change_for_language(change_c::change_type_e type,
   if (type == ct_delete) {
     if (name == "language")
       changes.emplace_back(std::make_shared<change_c>(ct_delete, "language", value));
-    changes.emplace_back(std::make_shared<change_c>(ct_delete, "language-ietf", value));
+
+    if ((name == "language-ietf") || !mtx::bcp47::language_c::is_disabled())
+      changes.emplace_back(std::make_shared<change_c>(ct_delete, "language-ietf", value));
 
     return changes;
   }
@@ -395,7 +397,8 @@ change_c::make_change_for_language(change_c::change_type_e type,
   if (language.has_valid_iso639_code() && (name == "language"))
     changes.push_back(std::make_shared<change_c>(type, "language", language.get_iso639_2_code()));
 
-  changes.push_back(std::make_shared<change_c>(type, "language-ietf", language.format()));
+  if ((name == "language-ietf") || !mtx::bcp47::language_c::is_disabled())
+    changes.push_back(std::make_shared<change_c>(type, "language-ietf", language.format()));
 
   return changes;
 }
