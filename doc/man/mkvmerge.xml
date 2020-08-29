@@ -457,6 +457,47 @@
      </listitem>
     </varlistentry>
 
+    <varlistentry id="mkvmerge.description.clusters_in_meta_seek">
+     <term><option>--clusters-in-meta-seek</option></term>
+     <listitem>
+      <para>
+       Tells &mkvmerge; to create a meta seek element at the end of the file containing all clusters. See also the section about the
+       <link linkend="mkvmerge.file_layout">&matroska; file layout</link>.
+      </para>
+     </listitem>
+    </varlistentry>
+
+
+    <varlistentry id="mkvmerge.description.timestamp_scale">
+     <term><option>--timestamp-scale</option> <parameter>factor</parameter></term>
+     <listitem>
+      <para>
+       Forces the timestamp scale factor to <parameter>factor</parameter>. Valid values are in the range
+       <constant>1000</constant>..<constant>10000000</constant> or the special value <constant>-1</constant>.
+      </para>
+
+      <para>
+       Normally &mkvmerge; will use a value of <constant>1000000</constant> which means that timestamps and durations will have a precision of
+       1ms. For files that will not contain a video track but at least one audio track &mkvmerge; will automatically chose a timestamp scale
+       factor so that all timestamps and durations have a precision of one audio sample. This causes bigger overhead but allows precise
+       seeking and extraction.
+      </para>
+
+      <para>
+       If the special value <constant>-1</constant> is used then &mkvmerge; will use sample precision even if a video track is present.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry id="mkvmerge.description.enable_durations">
+     <term><option>--enable-durations</option></term>
+     <listitem>
+      <para>
+       Write durations for all blocks. This will increase file size and does not offer any additional value for players at the moment.
+      </para>
+     </listitem>
+    </varlistentry>
+
     <varlistentry id="mkvmerge.description.no_cues">
      <term><option>--no-cues</option></term>
      <listitem>
@@ -465,16 +506,6 @@
        without the cue data, but seeking will probably be imprecise and slower. Use this only if you're really desperate for space or for
        testing purposes. See also option <link linkend="mkvmerge.description.cues"><option>--cues</option></link> which can be specified for
        each input file.
-      </para>
-     </listitem>
-    </varlistentry>
-
-    <varlistentry id="mkvmerge.description.clusters_in_meta_seek">
-     <term><option>--clusters-in-meta-seek</option></term>
-     <listitem>
-      <para>
-       Tells &mkvmerge; to create a meta seek element at the end of the file containing all clusters. See also the section about the
-       <link linkend="mkvmerge.file_layout">&matroska; file layout</link>.
       </para>
      </listitem>
     </varlistentry>
@@ -499,15 +530,6 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry id="mkvmerge.description.enable_durations">
-     <term><option>--enable-durations</option></term>
-     <listitem>
-      <para>
-       Write durations for all blocks. This will increase file size and does not offer any additional value for players at the moment.
-      </para>
-     </listitem>
-    </varlistentry>
-
     <varlistentry id="mkvmerge.description.disable_track_statistics_tags">
      <term><option>--disable-track-statistics-tags</option></term>
      <listitem>
@@ -519,27 +541,6 @@
 
       <para>
        Enabling this option prevents &mkvmerge; from writing those tags and from touching any existing tags with same names.
-      </para>
-     </listitem>
-    </varlistentry>
-
-    <varlistentry id="mkvmerge.description.timestamp_scale">
-     <term><option>--timestamp-scale</option> <parameter>factor</parameter></term>
-     <listitem>
-      <para>
-       Forces the timestamp scale factor to <parameter>factor</parameter>. Valid values are in the range
-       <constant>1000</constant>..<constant>10000000</constant> or the special value <constant>-1</constant>.
-      </para>
-
-      <para>
-       Normally &mkvmerge; will use a value of <constant>1000000</constant> which means that timestamps and durations will have a precision of
-       1ms. For files that will not contain a video track but at least one audio track &mkvmerge; will automatically chose a timestamp scale
-       factor so that all timestamps and durations have a precision of one audio sample. This causes bigger overhead but allows precise
-       seeking and extraction.
-      </para>
-
-      <para>
-       If the special value <constant>-1</constant> is used then &mkvmerge; will use sample precision even if a video track is present.
       </para>
      </listitem>
     </varlistentry>
