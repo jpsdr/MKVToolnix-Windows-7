@@ -33,6 +33,9 @@
 * mkvpropedit: IETF BCP 47/RFC 5646 language tags: setting/deleting the track
   language now acts on both the old language element as well as the
   "LanguageIETF" track header element. Part of the implementation of #2419.
+* mkvmerge: IETF BCP 47/RFC 5646 language tags: added an option
+  `--disable-language-ietf` that causes mkvmerge to only write the legacy
+  language elements.
 
 ## Bug fixes
 

@@ -26,6 +26,8 @@
 
 namespace mtx::bcp47 {
 
+bool language_c::ms_disabled = false;
+
 void
 language_c::clear()
   noexcept {
@@ -406,6 +408,16 @@ bool
 language_c::operator !=(language_c const &other)
   const noexcept {
   return format() != other.format();
+}
+
+void
+language_c::disable() {
+  ms_disabled = true;
+}
+
+bool
+language_c::is_disabled() {
+  return ms_disabled;
 }
 
 } // namespace mtx::bcp47

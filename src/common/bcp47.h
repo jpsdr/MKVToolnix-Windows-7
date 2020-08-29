@@ -33,6 +33,8 @@ protected:
   mutable std::string m_formatted;
   mutable bool m_formatted_up_to_date{};
 
+  static bool ms_disabled;
+
 public:
   void clear() noexcept;
 
@@ -75,6 +77,9 @@ protected:
 
 public:
   static language_c parse(std::string const &language);
+
+  static void disable();
+  static bool is_disabled();
 };
 
 void init_re();

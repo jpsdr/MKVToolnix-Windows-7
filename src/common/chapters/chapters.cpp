@@ -227,7 +227,10 @@ parse_simple(mm_text_io_c *in,
         GetChild<KaxChapterString>(display).SetValueUTF8(do_convert ? cc_utf8->utf8(name) : name);
         if (use_language.is_valid()) {
           GetChild<KaxChapterLanguage>(display).SetValue(use_language.get_iso639_2_code_or("und"));
-          GetChild<KaxChapLanguageIETF>(display).SetValue(use_language.format());
+          if (!mtx::bcp47::language_c::is_disabled())
+            GetChild<KaxChapLanguageIETF>(display).SetValue(use_language.format());
+          else
+            DeleteChildren<KaxChapLanguageIETF>(display);
         }
 
         if (!g_default_country.empty())

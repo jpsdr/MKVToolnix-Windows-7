@@ -1496,7 +1496,10 @@ prepare_additional_chapter_atoms_for_rendering() {
 
       if (ch_language.is_valid()) {
         GetChild<KaxChapterLanguage>(display).SetValue(ch_language.get_iso639_2_code_or("und"));
-        GetChild<KaxChapLanguageIETF>(display).SetValue(ch_language.format());
+        if (!mtx::bcp47::language_c::is_disabled())
+          GetChild<KaxChapLanguageIETF>(display).SetValue(ch_language.format());
+        else
+          DeleteChildren<KaxChapLanguageIETF>(display);
       }
     }
 
