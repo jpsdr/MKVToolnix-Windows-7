@@ -79,21 +79,21 @@
    <title>Global options</title>
 
    <variablelist>
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.verbose">
      <term><option>-v</option>, <option>--verbose</option></term>
      <listitem>
       <para>Increase verbosity.</para>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.quiet">
      <term><option>-q</option>, <option>--quiet</option></term>
      <listitem>
       <para>Suppress status output.</para>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.output">
      <term><option>-o</option>, <option>--output</option> <parameter>file-name</parameter></term>
      <listitem>
       <para>Write to the file <parameter>file-name</parameter>.  If splitting is used then this parameter is treated a bit differently.  See
@@ -101,7 +101,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.webm">
      <term><option>-w</option>, <option>--webm</option></term>
      <listitem>
       <para>Create a WebM compliant file. This is also turned on if the output file name's extension is &quot;webm&quot;. This mode enforces
@@ -123,7 +123,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.default_language">
      <term><option>--default-language</option> <parameter>language-code</parameter></term>
      <listitem>
       <para>Sets the default language code that will be used for tracks for which no language is set with the <link
@@ -140,7 +140,7 @@
    <title>Segment info handling (global options)</title>
 
    <variablelist>
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.segmentinfo">
      <term><option>--segmentinfo</option> <parameter>filename.xml</parameter></term>
      <listitem>
       <para>
@@ -155,7 +155,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.segment_uid">
      <term><option>--segment-uid</option> <parameter>SID1,SID2,...</parameter></term>
      <listitem>
       <para>
@@ -352,7 +352,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.cue_chapter_name_format">
      <term><option>--cue-chapter-name-format</option> <parameter>format</parameter></term>
      <listitem>
       <para>
@@ -389,7 +389,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.chapters">
      <term><option>--chapters</option> <parameter>file-name</parameter></term>
      <listitem>
       <para>
@@ -415,7 +415,7 @@
    <title>General output control (advanced global options)</title>
 
    <variablelist>
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.track_order">
      <term><option>--track-order</option> <parameter>FID1:TID1,FID2:TID2,...</parameter></term>
      <listitem>
       <para>
@@ -427,7 +427,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.cluster_length">
      <term><option>--cluster-length</option> <parameter>spec</parameter></term>
      <listitem>
       <para>
@@ -469,7 +469,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.clusters_in_meta_seek">
      <term><option>--clusters-in-meta-seek</option></term>
      <listitem>
       <para>
@@ -489,7 +489,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.disable_lacing">
      <term><option>--disable-lacing</option></term>
      <listitem>
       <para>
@@ -499,7 +499,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.enable_durations">
      <term><option>--enable-durations</option></term>
      <listitem>
       <para>
@@ -508,7 +508,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.disable_track_statistics_tags">
      <term><option>--disable-track-statistics-tags</option></term>
      <listitem>
       <para>
@@ -888,7 +888,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.link_to_previous">
      <term><option>--link-to-previous</option> <parameter>segment-UID</parameter></term>
      <listitem>
       <para>
@@ -902,7 +902,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.link_to_next">
      <term><option>--link-to-next</option> <parameter>segment-UID</parameter></term>
      <listitem>
       <para>
@@ -916,7 +916,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.append_mode">
      <term><option>--append-mode</option> <parameter>mode</parameter></term>
      <listitem>
       <para>
@@ -946,7 +946,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.append_to">
      <term><option>--append-to</option> <parameter>SFID1:STID1:DFID1:DTID1<optional>,...</optional></parameter></term>
      <listitem>
       <para>
@@ -963,7 +963,7 @@
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.plus_sign">
      <term><option>+</option></term>
      <listitem>
       <para>
@@ -976,7 +976,7 @@ $ mkvmerge -o full.mkv file1.mkv +file2.mkv</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.square_brackets">
      <term><option>[</option> <parameter>file1</parameter> <parameter>file2</parameter> <option>]</option></term>
      <listitem>
       <para>
@@ -1076,7 +1076,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.attachment_mime_type">
      <term><option>--attachment-mime-type</option> <parameter>MIME type</parameter></term>
      <listitem>
       <para>
@@ -1089,7 +1089,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.attachment_name">
      <term><option>--attachment-name</option> <parameter>name</parameter></term>
      <listitem>
       <para>
@@ -1126,7 +1126,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
    <title>Options that can be used for each input file</title>
 
    <variablelist>
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.audio_tracks">
      <term><option>-a</option>, <option>--audio-tracks</option> <parameter><optional>!</optional>n,m,...</parameter></term>
      <listitem>
       <para>
@@ -1151,7 +1151,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.video_tracks">
      <term><option>-d</option>, <option>--video-tracks</option> <parameter><optional>!</optional>n,m,...</parameter></term>
      <listitem>
       <para>
@@ -1172,7 +1172,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.subtitle_tracks">
      <term><option>-s</option>, <option>--subtitle-tracks</option> <parameter><optional>!</optional>n,m,...</parameter></term>
      <listitem>
       <para>
@@ -1193,7 +1193,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.button_tracks">
      <term><option>-b</option>, <option>--button-tracks</option> <parameter><optional>!</optional>n,m,...</parameter></term>
      <listitem>
       <para>
@@ -1214,7 +1214,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.track_tags">
      <term><option>--track-tags</option> <parameter><optional>!</optional>n,m,...</parameter></term>
      <listitem>
       <para>
@@ -1252,7 +1252,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.no_audio">
      <term><option>-A</option>, <option>--no-audio</option></term>
      <listitem>
       <para>
@@ -1261,7 +1261,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.no_video">
      <term><option>-D</option>, <option>--no-video</option></term>
      <listitem>
       <para>
@@ -1270,7 +1270,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.no_subtitles">
      <term><option>-S</option>, <option>--no-subtitles</option></term>
      <listitem>
       <para>
@@ -1279,7 +1279,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.no_buttons">
      <term><option>-B</option>, <option>--no-buttons</option></term>
      <listitem>
       <para>
@@ -1288,7 +1288,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.no_track_tags">
      <term><option>-T</option>, <option>--no-track-tags</option></term>
      <listitem>
       <para>
@@ -1315,7 +1315,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.no_global_tags">
      <term><option>--no-global-tags</option></term>
      <listitem>
       <para>
@@ -1324,7 +1324,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.chapter_charset">
      <term><option>--chapter-charset</option> <parameter>character-set</parameter></term>
      <listitem>
       <para>
@@ -1335,7 +1335,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.chapter_language">
      <term><option>--chapter-language</option> <parameter>language-code</parameter></term>
      <listitem>
       <para>
@@ -1345,7 +1345,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.sync">
      <term><option>-y</option>, <option>--sync</option> <parameter>TID:d<optional>,o<optional>/p</optional></optional></parameter></term>
      <listitem>
       <para>
@@ -1393,7 +1393,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.default_track">
      <term><option>--default-track</option> <parameter>TID<optional>:bool</optional></parameter></term>
      <listitem>
       <para>
@@ -1410,7 +1410,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.forced_track">
      <term><option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter></term>
      <listitem>
       <para>
@@ -1424,7 +1424,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.blockadd">
      <term><option>--blockadd</option> <parameter>TID:level</parameter></term>
      <listitem>
       <para>
@@ -1470,7 +1470,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.aac_is_sbr">
      <term><option>--aac-is-sbr</option> <parameter>TID<optional>:0|1</optional></parameter></term>
      <listitem>
       <para>
@@ -1495,7 +1495,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.reduce_to_core">
      <term><option>--reduce-to-core</option> <parameter>TID</parameter></term>
      <listitem>
       <para>
@@ -1511,7 +1511,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.remove_dialog_normalization_gain">
      <term><option>--remove-dialog-normalization-gain</option> <parameter>TID</parameter></term>
      <listitem>
       <para>
@@ -1525,7 +1525,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.timestamps">
      <term><option>--timestamps</option> <parameter>TID:file-name</parameter></term>
      <listitem>
       <para>
@@ -1575,7 +1575,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.nalu_size_length">
      <term><option>--nalu-size-length</option> <parameter>TID:n</parameter></term>
      <listitem>
       <para>
@@ -1610,7 +1610,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
    <title>Options that only apply to video tracks</title>
 
    <variablelist>
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.fourcc">
      <term><option>-f</option>, <option>--fourcc</option> <parameter>TID:FourCC</parameter></term>
      <listitem>
       <para>
@@ -1673,7 +1673,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.cropping">
      <term><option>--cropping</option> <parameter>TID:left,top,right,bottom</parameter></term>
      <listitem>
       <para>
@@ -1682,7 +1682,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.colour_matrix">
      <term><option>--colour-matrix</option> <parameter>TID:n</parameter></term>
      <listitem>
       <para>
@@ -1703,7 +1703,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.colour_bits_per_channel">
      <term><option>--colour-bits-per-channel</option> <parameter>TID:n</parameter></term>
      <listitem>
       <para>
@@ -1713,7 +1713,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.chroma_subsample">
      <term><option>--chroma-subsample</option> <parameter>TID:hori,vert</parameter></term>
      <listitem>
       <para>
@@ -1727,7 +1727,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.cb_subsample">
      <term><option>--cb-subsample</option> <parameter>TID:hori,vert</parameter></term>
      <listitem>
       <para>
@@ -1743,7 +1743,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.chroma_siting">
      <term><option>--chroma-siting</option> <parameter>TID:hori,vert</parameter></term>
      <listitem>
       <para>
@@ -1753,7 +1753,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.colour_range">
      <term><option>--colour-range</option> <parameter>TID:n</parameter></term>
      <listitem>
       <para>
@@ -1763,7 +1763,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.colour_transfer_characteristics">
      <term><option>--colour-transfer-characteristics</option> <parameter>TID:n</parameter></term>
      <listitem>
       <para>
@@ -1785,7 +1785,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.colour_primaries">
      <term><option>--colour-primaries</option> <parameter>TID:n</parameter></term>
      <listitem>
       <para>
@@ -1805,7 +1805,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.max_content_light">
      <term><option>--max-content-light</option> <parameter>TID:n</parameter></term>
      <listitem>
       <para>
@@ -1815,7 +1815,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.max_frame_light">
      <term><option>--max-frame-light</option> <parameter>TID:n</parameter></term>
      <listitem>
       <para>
@@ -1826,7 +1826,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.chromaticity_coordinates">
      <term><option>--chromaticity-coordinates</option>
      <parameter>TID:red-x,red-y,green-x,green-y,blue-x,blue-y</parameter></term>
      <listitem>
@@ -1836,7 +1836,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.white_colour_coordinates">
      <term><option>--white-colour-coordinates</option> <parameter>TID:x,y</parameter></term>
      <listitem>
       <para>
@@ -1845,7 +1845,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.max_luminance">
      <term><option>--max-luminance</option> <parameter>TID:float</parameter></term>
      <listitem>
       <para>
@@ -1854,7 +1854,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.min_luminance">
      <term><option>--min-luminance</option> <parameter>TID:float</parameter></term>
      <listitem>
       <para>
@@ -1863,7 +1863,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.projection_type">
      <term><option>--projection-type</option> <parameter>TID:method</parameter></term>
      <listitem>
       <para>
@@ -1872,7 +1872,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.projection_private">
      <term><option>--projection-private</option> <parameter>TID:data</parameter></term>
      <listitem>
       <para>
@@ -1881,7 +1881,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.projection_pose_yaw">
      <term><option>--projection-pose-yaw</option> <parameter>TID:float</parameter></term>
      <listitem>
       <para>
@@ -1890,7 +1890,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.projection_pose_pitch">
      <term><option>--projection-pose-pitch</option> <parameter>TID:float</parameter></term>
      <listitem>
       <para>
@@ -1899,7 +1899,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.projection_pose_roll">
      <term><option>--projection-pose-roll</option> <parameter>TID:float</parameter></term>
      <listitem>
       <para>
@@ -1924,7 +1924,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.stereo_mode">
      <term><option>--stereo-mode</option> <parameter>TID:n|keyword</parameter></term>
      <listitem>
       <para>
@@ -2044,7 +2044,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.list_types">
      <term><option>-l</option>, <option>--list-types</option></term>
      <listitem>
       <para>
@@ -2063,7 +2063,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.priority">
      <term><option>--priority</option> <parameter>priority</parameter></term>
      <listitem>
       <para>
@@ -2210,7 +2210,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.at_sign">
      <term><option>@</option><parameter>options-file.json</parameter></term>
      <listitem>
       <para>
@@ -2220,7 +2220,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.capabilities">
      <term><option>--capabilities</option></term>
      <listitem>
       <para>
@@ -2240,7 +2240,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.help">
      <term><option>-h</option>, <option>--help</option></term>
      <listitem>
       <para>
@@ -2249,7 +2249,7 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry>
+    <varlistentry id="mkvmerge.description.version">
      <term><option>-V</option>, <option>--version</option></term>
      <listitem>
       <para>
@@ -3279,7 +3279,7 @@ gap, 10.050
   </para>
 
   <variablelist>
-   <varlistentry>
+   <varlistentry id="mkvmerge.description.debug">
     <term><varname>MKVMERGE_DEBUG</varname>, <varname>MKVTOOLNIX_DEBUG</varname> and its short form <varname>MTX_DEBUG</varname></term>
     <listitem>
      <para>The content is treated as if it had been passed via the <link
@@ -3287,7 +3287,7 @@ gap, 10.050
     </listitem>
    </varlistentry>
 
-   <varlistentry>
+   <varlistentry id="mkvmerge.description.engage">
     <term><varname>MKVMERGE_ENGAGE</varname>, <varname>MKVTOOLNIX_ENGAGE</varname> and its short form <varname>MTX_ENGAGE</varname></term>
     <listitem>
      <para>The content is treated as if it had been passed via the <link
