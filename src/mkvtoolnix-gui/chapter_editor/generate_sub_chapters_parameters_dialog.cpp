@@ -55,12 +55,9 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
 
   adjustSize();
 
-  auto mw = MainWindow::get();
-  connect(m_ui->leStartTimestamp, &QLineEdit::textChanged,         this,             &GenerateSubChaptersParametersDialog::verifyStartTimestamp);
-  connect(m_ui->buttonBox,        &QDialogButtonBox::accepted,     this,             &GenerateSubChaptersParametersDialog::accept);
-  connect(m_ui->buttonBox,        &QDialogButtonBox::rejected,     this,             &GenerateSubChaptersParametersDialog::reject);
-  connect(mw,                     &MainWindow::preferencesChanged, m_ui->cbLanguage, &Util::ComboBoxBase::reInitialize);
-  connect(mw,                     &MainWindow::preferencesChanged, m_ui->cbCountry,  &Util::ComboBoxBase::reInitialize);
+  connect(m_ui->leStartTimestamp, &QLineEdit::textChanged,     this, &GenerateSubChaptersParametersDialog::verifyStartTimestamp);
+  connect(m_ui->buttonBox,        &QDialogButtonBox::accepted, this, &GenerateSubChaptersParametersDialog::accept);
+  connect(m_ui->buttonBox,        &QDialogButtonBox::rejected, this, &GenerateSubChaptersParametersDialog::reject);
 }
 
 void
