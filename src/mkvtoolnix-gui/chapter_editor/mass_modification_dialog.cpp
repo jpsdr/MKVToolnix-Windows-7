@@ -38,14 +38,14 @@ MassModificationDialog::setupUi(QStringList const &additionalLanguages,
                                 QStringList const &additionalCountryCodes) {
   m_ui->setupUi(this);
 
-  m_ui->cbLanguage->setAdditionalItems(additionalLanguages).setup();
+  m_ui->ldwLanguage->setAdditionalLanguages(additionalLanguages);
   m_ui->cbCountry->setAdditionalItems(additionalCountryCodes).setup(true, QY("– Set to none –"));
 
   connect(m_ui->cbShift,               &QCheckBox::toggled,                                                          this,                        &MassModificationDialog::verifyOptions);
   connect(m_ui->leShiftBy,             &QLineEdit::textChanged,                                                      this,                        &MassModificationDialog::verifyOptions);
   connect(m_ui->cbMultiply,            &QCheckBox::toggled,                                                          this,                        &MassModificationDialog::verifyOptions);
   connect(m_ui->dsbMultiplyBy,         static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this,                        &MassModificationDialog::verifyOptions);
-  connect(m_ui->cbSetLanguage,         &QCheckBox::toggled,                                                          m_ui->cbLanguage,            &QComboBox::setEnabled);
+  connect(m_ui->cbSetLanguage,         &QCheckBox::toggled,                                                          m_ui->ldwLanguage,           &QComboBox::setEnabled);
   connect(m_ui->cbSetCountry,          &QCheckBox::toggled,                                                          m_ui->cbCountry,             &QComboBox::setEnabled);
   connect(m_ui->cbConstrictExpand,     &QCheckBox::toggled,                                                          m_ui->rbConstrict,           &QRadioButton::setEnabled);
   connect(m_ui->cbConstrictExpand,     &QCheckBox::toggled,                                                          m_ui->rbExpand,              &QRadioButton::setEnabled);
@@ -56,7 +56,7 @@ MassModificationDialog::setupUi(QStringList const &additionalLanguages,
 
   m_ui->leShiftBy->setEnabled(false);
   m_ui->dsbMultiplyBy->setEnabled(false);
-  m_ui->cbLanguage->setEnabled(false);
+  m_ui->ldwLanguage->setEnabled(false);
   m_ui->cbCountry->setEnabled(false);
   m_ui->rbConstrict->setEnabled(false);
   m_ui->rbExpand->setEnabled(false);
@@ -123,7 +123,7 @@ MassModificationDialog::shiftBy()
 QString
 MassModificationDialog::language()
   const {
-  return m_ui->cbLanguage->currentData().toString();
+  return Q(m_ui->ldwLanguage->language().format());
 }
 
 QString

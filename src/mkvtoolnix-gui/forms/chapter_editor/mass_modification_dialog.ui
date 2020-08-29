@@ -74,7 +74,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="mtx::gui::Util::LanguageComboBox" name="cbLanguage"/>
+      <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwLanguage"/>
      </item>
      <item row="1" column="0">
       <widget class="QCheckBox" name="cbMultiply">
@@ -201,9 +201,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>mtx::gui::Util::LanguageComboBox</class>
-   <extends>QComboBox</extends>
-   <header>mkvtoolnix-gui/util/language_combo_box.h</header>
+   <class>mtx::gui::Util::LanguageDisplayWidget</class>
+   <extends>QForm</extends>
+   <header>mkvtoolnix-gui/util/language_display_widget.h</header>
   </customwidget>
   <customwidget>
    <class>mtx::gui::Util::CountryComboBox</class>
@@ -217,7 +217,7 @@
   <tabstop>cbMultiply</tabstop>
   <tabstop>dsbMultiplyBy</tabstop>
   <tabstop>cbSetLanguage</tabstop>
-  <tabstop>cbLanguage</tabstop>
+  <tabstop>ldwLanguage</tabstop>
   <tabstop>cbSetCountry</tabstop>
   <tabstop>cbCountry</tabstop>
   <tabstop>cbSort</tabstop>
