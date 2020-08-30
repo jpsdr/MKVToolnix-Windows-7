@@ -44,6 +44,7 @@ public:
 
   std::string dump() const noexcept;
   std::string format(bool force = false) const noexcept;
+  std::string format_long(bool force = false) const noexcept;
   bool is_valid() const noexcept;
   std::string const &get_error() const noexcept;
 

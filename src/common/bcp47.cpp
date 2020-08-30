@@ -114,6 +114,25 @@ language_c::format_internal(bool force)
   return output;
 }
 
+std::string
+language_c::format_long(bool force)
+  const noexcept {
+  auto formatted = format(force);
+
+  if (formatted.empty())
+    return formatted;
+
+  std::string text;
+
+  if (!get_language().empty()) {
+    auto language_opt = mtx::iso639::look_up(get_language());
+    if (language_opt)
+      return fmt::format("{0} ({1})", language_opt->english_name, formatted);
+  }
+
+  return formatted;
+}
+
 bool
 language_c::parse_language(std::string const &code) {
   auto language = mtx::iso639::look_up(code);

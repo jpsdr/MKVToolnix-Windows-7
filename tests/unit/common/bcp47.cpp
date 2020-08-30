@@ -43,6 +43,7 @@ TEST(BCP47LanguageTags, Formatting) {
   l.set_private_use({ "weee"s });
 
   EXPECT_EQ("de-Latn-CH-x-weee"s, l.format());
+  EXPECT_EQ("German (de-Latn-CH-x-weee)"s, l.format_long());
 
   l = mtx::bcp47::language_c{};
   l.set_valid(true);
@@ -52,12 +53,14 @@ TEST(BCP47LanguageTags, Formatting) {
   l.set_private_use({ "WEEE"s });
 
   EXPECT_EQ("de-Latn-CH-x-weee"s, l.format());
+  EXPECT_EQ("German (de-Latn-CH-x-weee)"s, l.format_long());
 
   l = mtx::bcp47::language_c{};
   l.set_valid(true);
   l.set_private_use({ "weee"s, "wooo"s });
 
   EXPECT_EQ("x-weee-wooo"s, l.format());
+  EXPECT_EQ("x-weee-wooo"s, l.format_long());
 
   l = mtx::bcp47::language_c{};
   l.set_private_use({ "weee"s, "wooo"s });
@@ -65,6 +68,10 @@ TEST(BCP47LanguageTags, Formatting) {
   EXPECT_EQ(""s,            l.format());
   EXPECT_EQ(""s,            l.format(false));
   EXPECT_EQ("x-weee-wooo"s, l.format(true));
+
+  EXPECT_EQ(""s,            l.format_long());
+  EXPECT_EQ(""s,            l.format_long(false));
+  EXPECT_EQ("x-weee-wooo"s, l.format_long(true));
 }
 
 TEST(BCP47LanguageTags, CodeConversion) {
