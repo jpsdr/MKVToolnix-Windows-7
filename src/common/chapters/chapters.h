@@ -21,14 +21,14 @@
 #include "common/translation.h"
 
 namespace libebml {
-  class EbmlMaster;
+class EbmlMaster;
 }
 
 namespace libmatroska {
-  class KaxChapters;
-  class KaxTags;
-  class KaxEditionEntry;
-  class KaxChapterAtom;
+class KaxChapterAtom;
+class KaxChapters;
+class KaxEditionEntry;
+class KaxTags;
 }
 
 namespace mtx::chapters {
