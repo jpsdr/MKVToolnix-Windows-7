@@ -27,6 +27,7 @@ class EbmlMaster;
 
 namespace libmatroska {
 class KaxChapterAtom;
+class KaxChapterDisplay;
 class KaxChapters;
 class KaxEditionEntry;
 class KaxTags;
@@ -100,5 +101,9 @@ std::string format_name_template(std::string const &name_template, int chapter_n
 void fix_country_codes(libebml::EbmlMaster &chapters);
 
 std::shared_ptr<libmatroska::KaxChapters> create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editions_timestamps, mtx::bcp47::language_c const &language, std::string const &name_template);
+
+void set_languages_in_display(libmatroska::KaxChapterDisplay &display, mtx::bcp47::language_c const &parsed_language);
+void set_languages_in_display(libmatroska::KaxChapterDisplay &display, std::string const &language);
+mtx::bcp47::language_c get_language_from_display(libmatroska::KaxChapterDisplay &display, std::string const &default_if_missing);
 
 }

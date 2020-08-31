@@ -1199,4 +1199,32 @@ create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editio
   return chapters;
 }
 
+void
+set_languages_in_display(libmatroska::KaxChapterDisplay &display,
+                         mtx::bcp47::language_c const &parsed_language) {
+  if (!parsed_language.is_valid())
+    return;
+
+  GetChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(parsed_language.format());
+
+  if (parsed_language.has_valid_iso639_code())
+    GetChild<libmatroska::KaxChapterLanguage>(display).SetValue(parsed_language.get_iso639_2_code());
+}
+
+void
+set_languages_in_display(libmatroska::KaxChapterDisplay &display,
+                         std::string const &language) {
+  set_languages_in_display(display, mtx::bcp47::language_c::parse(language));
+}
+
+mtx::bcp47::language_c
+get_language_from_display(libmatroska::KaxChapterDisplay &display,
+                          std::string const &default_if_missing) {
+  auto language = FindChildValue<libmatroska::KaxChapLanguageIETF>(display);
+  if (language.empty())
+    language = FindChildValue<libmatroska::KaxChapterLanguage>(display);
+
+  return mtx::bcp47::language_c::parse(!language.empty() ? language : default_if_missing);
+}
+
 }
