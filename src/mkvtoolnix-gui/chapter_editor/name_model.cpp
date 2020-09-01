@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include "common/chapters/chapters.h"
 #include "common/ebml.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
@@ -49,7 +50,7 @@ NameModel::setRowText(QList<QStandardItem *> const &rowItems) {
   auto &display = *displayFromItem(rowItems[0]);
 
   rowItems[0]->setText(Q(GetChildValue<KaxChapterString>(display)));
-  rowItems[1]->setText(App::descriptionFromIso639_2LanguageCode(Q(FindChildValue<KaxChapterLanguage>(display, "eng"s))));
+  rowItems[1]->setText(Q(mtx::chapters::get_language_from_display(display, "eng"s).format_long()));
   rowItems[2]->setText(App::descriptionFromTopLevelDomainCountryCode(Q(FindChildValue<KaxChapterCountry>(display, ""s))));
 }
 
@@ -82,7 +83,7 @@ NameModel::addNew() {
   auto display = new KaxChapterDisplay;
 
   GetChild<KaxChapterString>(display).SetValueUTF8(Y("<Unnamed>"));
-  GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(cfg.m_defaultChapterLanguage));
+  mtx::chapters::set_languages_in_display(*display, to_utf8(cfg.m_defaultChapterLanguage));
   GetChild<KaxChapterCountry>(display).SetValue(to_utf8(cfg.m_defaultChapterCountry));
 
   m_chapter->PushElement(*display);

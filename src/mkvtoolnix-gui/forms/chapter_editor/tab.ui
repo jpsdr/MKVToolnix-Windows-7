@@ -466,15 +466,12 @@
                  <item row="1" column="0">
                   <widget class="QLabel" name="lChNameLanguage">
                    <property name="text">
-                    <string>&amp;Language:</string>
-                   </property>
-                   <property name="buddy">
-                    <cstring>cbChNameLanguage</cstring>
+                    <string>Language:</string>
                    </property>
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="mtx::gui::Util::LanguageComboBox" name="cbChNameLanguage"/>
+                  <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwChNameLanguage"/>
                  </item>
                  <item row="2" column="0">
                   <widget class="QLabel" name="lChNameCountry">
@@ -535,9 +532,9 @@
    <header>mkvtoolnix-gui/util/elide_label.h</header>
   </customwidget>
   <customwidget>
-   <class>mtx::gui::Util::LanguageComboBox</class>
-   <extends>QComboBox</extends>
-   <header>mkvtoolnix-gui/util/language_combo_box.h</header>
+   <class>mtx::gui::Util::LanguageDisplayWidget</class>
+   <extends>QForm</extends>
+   <header>mkvtoolnix-gui/util/language_display_widget.h</header>
   </customwidget>
   <customwidget>
    <class>mtx::gui::Util::CountryComboBox</class>
@@ -564,7 +561,7 @@
   <tabstop>pbChAddName</tabstop>
   <tabstop>pbChRemoveName</tabstop>
   <tabstop>leChName</tabstop>
-  <tabstop>cbChNameLanguage</tabstop>
+  <tabstop>ldwChNameLanguage</tabstop>
   <tabstop>cbChNameCountry</tabstop>
  </tabstops>
  <resources>

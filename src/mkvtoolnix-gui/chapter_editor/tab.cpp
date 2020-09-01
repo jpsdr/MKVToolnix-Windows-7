@@ -115,16 +115,15 @@ Tab::setupUi() {
 
   p->ui->cbChNameCountry->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-  p->ui->cbChNameLanguage->setup();
+  p->ui->ldwChNameLanguage->enableClearingLanguage(true);
   p->ui->cbChNameCountry->setup(true);
 
   p->nameWidgets << p->ui->pbChRemoveName
                  << p->ui->lChName         << p->ui->leChName
-                 << p->ui->lChNameLanguage << p->ui->cbChNameLanguage
+                 << p->ui->lChNameLanguage << p->ui->ldwChNameLanguage
                  << p->ui->lChNameCountry  << p->ui->cbChNameCountry;
 
   Util::fixScrollAreaBackground(p->ui->scrollArea);
-  Util::fixComboBoxViewWidth(*p->ui->cbChNameLanguage);
   Util::fixComboBoxViewWidth(*p->ui->cbChNameCountry);
   Util::HeaderViewManager::create(*p->ui->elements,  "ChapterEditor::Elements")    .setDefaultSizes({ { Q("editionChapter"), 200 }, { Q("start"),    130 }, { Q("end"), 130 } });
   Util::HeaderViewManager::create(*p->ui->tvChNames, "ChapterEditor::ChapterNames").setDefaultSizes({ { Q("name"),           200 }, { Q("language"), 150 } });
@@ -149,7 +148,7 @@ Tab::setupUi() {
   connect(p->ui->elements->selectionModel(),  &QItemSelectionModel::selectionChanged,                                 this,                    &Tab::chapterSelectionChanged);
   connect(p->ui->tvChNames->selectionModel(), &QItemSelectionModel::selectionChanged,                                 this,                    &Tab::nameSelectionChanged);
   connect(p->ui->leChName,                    &QLineEdit::textEdited,                                                 this,                    &Tab::chapterNameEdited);
-  connect(p->ui->cbChNameLanguage,            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                    &Tab::chapterNameLanguageChanged);
+  connect(p->ui->ldwChNameLanguage,           &Util::LanguageDisplayWidget::languageChanged,                          this,                    &Tab::chapterNameLanguageChanged);
   connect(p->ui->cbChNameCountry,             static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                    &Tab::chapterNameCountryChanged);
   connect(p->ui->pbChAddName,                 &QPushButton::clicked,                                                  this,                    &Tab::addChapterName);
   connect(p->ui->pbChRemoveName,              &QPushButton::clicked,                                                  this,                    &Tab::removeChapterName);
@@ -168,7 +167,6 @@ Tab::setupUi() {
   connect(p->generateSubChaptersAction,       &QAction::triggered,                                                    this,                    &Tab::generateSubChapters);
   connect(p->renumberSubChaptersAction,       &QAction::triggered,                                                    this,                    &Tab::renumberSubChapters);
 
-  connect(mw,                                 &MainWindow::preferencesChanged,                                        p->ui->cbChNameLanguage, &Util::ComboBoxBase::reInitialize);
   connect(mw,                                 &MainWindow::preferencesChanged,                                        p->ui->cbChNameCountry,  &Util::ComboBoxBase::reInitialize);
 
   for (auto &lineEdit : findChildren<Util::BasicLineEdit *>()) {
@@ -1124,12 +1122,11 @@ Tab::setNameControlsFromStorage(QModelIndex const &idx) {
   if (!display)
     return false;
 
-  auto language = Q(FindChildValue<KaxChapterLanguage>(display, "eng"s));
+  auto language = mtx::chapters::get_language_from_display(*display, "eng"s);
 
   p->ui->leChName->setText(Q(GetChildValue<KaxChapterString>(display)));
-  p->ui->cbChNameLanguage->setAdditionalItems(usedNameLanguages())
-    .reInitializeIfNecessary()
-    .setCurrentByData(language);
+  p->ui->ldwChNameLanguage->setAdditionalLanguages(usedNameLanguages());
+  p->ui->ldwChNameLanguage->setLanguage(language);
   p->ui->cbChNameCountry->setAdditionalItems(usedNameCountryCodes())
     .reInitializeIfNecessary()
     .setCurrentByData(Q(FindChildValue<KaxChapterCountry>(display)));
@@ -1182,14 +1179,11 @@ Tab::chapterNameEdited(QString const &text) {
 }
 
 void
-Tab::chapterNameLanguageChanged(int index) {
+Tab::chapterNameLanguageChanged(mtx::bcp47::language_c const &language) {
   auto p = p_func();
 
-  if (0 > index)
-    return;
-
-  withSelectedName([p, index](QModelIndex const &idx, KaxChapterDisplay &display) {
-    GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(p->ui->cbChNameLanguage->itemData(index).toString()));
+  withSelectedName([p, &language](QModelIndex const &idx, KaxChapterDisplay &display) {
+    mtx::chapters::set_languages_in_display(display, language);
     p->nameModel->updateRow(idx.row());
   });
 }
@@ -1306,7 +1300,7 @@ Tab::createEmptyChapter(int64_t startTime,
   if (!name.isEmpty()) {
     auto &display = GetChild<KaxChapterDisplay>(*chapter);
     GetChild<KaxChapterString>(display).SetValue(to_wide(name));
-    GetChild<KaxChapterLanguage>(display).SetValue(to_utf8(language ? *language : cfg.m_defaultChapterLanguage));
+    mtx::chapters::set_languages_in_display(display, to_utf8(language ? *language : cfg.m_defaultChapterLanguage));
     if ((country && !country->isEmpty()) || !cfg.m_defaultChapterCountry.isEmpty())
       GetChild<KaxChapterCountry>(display).SetValue(to_utf8((country && !country->isEmpty()) ? *country : cfg.m_defaultChapterCountry));
   }
@@ -1503,7 +1497,7 @@ Tab::setLanguages(QStandardItem *item,
     for (auto const &element : *chapter) {
       auto kDisplay = dynamic_cast<KaxChapterDisplay *>(element);
       if (kDisplay)
-        GetChild<KaxChapterLanguage>(*kDisplay).SetValue(to_utf8(language));
+        mtx::chapters::set_languages_in_display(*kDisplay, to_utf8(language));
     }
 
   for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)
@@ -1785,9 +1779,10 @@ Tab::changeChapterName(QModelIndex const &parentIdx,
     if (!kDisplay)
       continue;
 
-    auto language = FindChildValue<KaxChapterLanguage>(kDisplay, "eng"s);
+    auto language = mtx::chapters::get_language_from_display(*kDisplay, "eng"s);
     if (   (RenumberSubChaptersParametersDialog::NameMatch::All == nameMatchingMode)
-        || (Q(language)                                         == languageOfNamesToReplace))
+        || (Q(language.get_language())                          == languageOfNamesToReplace)
+        || (Q(language.get_iso639_2_code())                     == languageOfNamesToReplace))
       GetChild<KaxChapterString>(*kDisplay).SetValue(name);
   }
 
@@ -2122,8 +2117,7 @@ Tab::usedNameLanguages(QStandardItem *rootItem) {
         if (!kDisplay)
           continue;
 
-        auto kLanguage = FindChild<KaxChapterLanguage>(*kDisplay);
-        names << (kLanguage ? Q(*kLanguage) : Q("eng"));
+        names << Q(mtx::chapters::get_language_from_display(*kDisplay, "eng"s).format());
       }
 
     for (int row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)

@@ -181,8 +181,10 @@ ChapterModel::chapterNameForLanguage(KaxChapterAtom &chapter,
     if (!kDisplay)
       continue;
 
-    auto actualLanguage = FindChildValue<KaxChapterLanguage>(kDisplay, "eng"s);
-    if (language.empty() || (language == actualLanguage))
+    auto actualLanguage = mtx::chapters::get_language_from_display(*kDisplay, "eng"s);
+    if (   language.empty()
+        || (language == actualLanguage.get_language())
+        || (language == actualLanguage.get_iso639_2_code()))
       return Q(FindChildValue<KaxChapterString>(kDisplay));
   }
 

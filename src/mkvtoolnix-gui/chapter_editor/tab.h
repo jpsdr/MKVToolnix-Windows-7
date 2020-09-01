@@ -18,6 +18,10 @@ namespace libebml {
 class EbmlBinary;
 }
 
+namespace mtx::bcp47 {
+class language_c;
+}
+
 namespace mtx::bluray::mpls {
 struct chapter_t;
 }
@@ -113,7 +117,7 @@ public Q_SLOTS:
 
   virtual void nameSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
   virtual void chapterNameEdited(QString const &text);
-  virtual void chapterNameLanguageChanged(int index);
+  virtual void chapterNameLanguageChanged(mtx::bcp47::language_c const &language);
   virtual void chapterNameCountryChanged(int index);
   virtual void addChapterName();
   virtual void removeChapterName();
