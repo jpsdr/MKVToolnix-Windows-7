@@ -1748,7 +1748,7 @@ Tab::changeChapterName(QModelIndex const &parentIdx,
                        int chapterNumber,
                        QString const &nameTemplate,
                        RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode,
-                       QString const &languageOfNamesToReplace,
+                       mtx::bcp47::language_c const &languageOfNamesToReplace,
                        bool skipHidden) {
   auto p       = p_func();
   auto idx     = p->chapterModel->index(row, 0, parentIdx);
@@ -1781,8 +1781,7 @@ Tab::changeChapterName(QModelIndex const &parentIdx,
 
     auto language = mtx::chapters::get_language_from_display(*kDisplay, "eng"s);
     if (   (RenumberSubChaptersParametersDialog::NameMatch::All == nameMatchingMode)
-        || (Q(language.get_language())                          == languageOfNamesToReplace)
-        || (Q(language.get_iso639_2_code())                     == languageOfNamesToReplace))
+        || (language                                            == languageOfNamesToReplace))
       GetChild<KaxChapterString>(*kDisplay).SetValue(name);
   }
 

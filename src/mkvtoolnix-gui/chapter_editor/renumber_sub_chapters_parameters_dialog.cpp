@@ -46,21 +46,24 @@ RenumberSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->sbFirstChapterNumber->setValue(firstChapterNumber);
   m_ui->leNameTemplate->setText(cfg.m_chapterNameTemplate);
 
-  m_ui->cbLanguageOfNamesToReplace->setAdditionalItems(additionalLanguages).setup();
-  m_ui->cbLanguageOfNamesToReplace->insertItem(0, QY("– First chapter name regardless of its language –"),  static_cast<int>(NameMatch::First));
-  m_ui->cbLanguageOfNamesToReplace->insertItem(1, QY("– All chapter names regardless of their language –"), static_cast<int>(NameMatch::All));
-  m_ui->cbLanguageOfNamesToReplace->insertSeparator(2);
+  m_ui->ldwLanguageOfNamesToReplace->setAdditionalLanguages(additionalLanguages);
 
-  m_ui->cbLanguageOfNamesToReplace->setCurrentIndex(0);
+  m_ui->cbLanguageOfNamesMode->insertItem(0, QY("First chapter name regardless of its language"),  static_cast<int>(NameMatch::First));
+  m_ui->cbLanguageOfNamesMode->insertItem(1, QY("All chapter names regardless of their language"), static_cast<int>(NameMatch::All));
+  m_ui->cbLanguageOfNamesMode->insertItem(2, QY("Language selected below"),                        static_cast<int>(NameMatch::ByLanguage));
+  m_ui->cbLanguageOfNamesMode->setCurrentIndex(0);
 
   Util::setToolTip(m_ui->leNameTemplate, Tool::chapterNameTemplateToolTip());
 
   m_ui->cbFirstEntryToRenumber->setFocus();
 
   adjustSize();
+  enableControls();
 
-  connect(m_ui->buttonBox, &QDialogButtonBox::accepted, this, &RenumberSubChaptersParametersDialog::accept);
-  connect(m_ui->buttonBox, &QDialogButtonBox::rejected, this, &RenumberSubChaptersParametersDialog::reject);
+  connect(m_ui->cbLanguageOfNamesMode,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &RenumberSubChaptersParametersDialog::enableControls);
+  connect(m_ui->ldwLanguageOfNamesToReplace, &Util::LanguageDisplayWidget::languageChanged,                          this, &RenumberSubChaptersParametersDialog::enableControls);
+  connect(m_ui->buttonBox,                   &QDialogButtonBox::accepted,                                            this, &RenumberSubChaptersParametersDialog::accept);
+  connect(m_ui->buttonBox,                   &QDialogButtonBox::rejected,                                            this, &RenumberSubChaptersParametersDialog::reject);
 }
 
 int
@@ -90,25 +93,31 @@ RenumberSubChaptersParametersDialog::nameTemplate()
 RenumberSubChaptersParametersDialog::NameMatch
 RenumberSubChaptersParametersDialog::nameMatchingMode()
   const {
-  auto data = m_ui->cbLanguageOfNamesToReplace->currentData();
-
-  if (data.type() == static_cast<QVariant::Type>(QMetaType::Int))
-    return static_cast<NameMatch>(data.toInt());
-  return NameMatch::ByLanguage;
+  return static_cast<NameMatch>(m_ui->cbLanguageOfNamesMode->currentData().toInt());
 }
 
-QString
+mtx::bcp47::language_c
 RenumberSubChaptersParametersDialog::languageOfNamesToReplace()
   const {
   if (nameMatchingMode() != NameMatch::ByLanguage)
-    return Q("");
-  return m_ui->cbLanguageOfNamesToReplace->currentData().toString();
+    return {};
+  return m_ui->ldwLanguageOfNamesToReplace->language();
 }
 
 bool
 RenumberSubChaptersParametersDialog::skipHidden()
   const {
   return m_ui->cbSkipHidden->isChecked();
+}
+
+void
+RenumberSubChaptersParametersDialog::enableControls() {
+  auto byLanguage = static_cast<NameMatch>(m_ui->cbLanguageOfNamesMode->currentData().toInt()) == NameMatch::ByLanguage;
+
+  m_ui->ldwLanguageOfNamesToReplace->setEnabled(byLanguage);
+
+  auto canAccept = !byLanguage || m_ui->ldwLanguageOfNamesToReplace->language().is_valid();
+  Util::buttonForRole(m_ui->buttonBox, QDialogButtonBox::AcceptRole)->setEnabled(canAccept);
 }
 
 }

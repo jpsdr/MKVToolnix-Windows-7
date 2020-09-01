@@ -6,6 +6,10 @@
 
 #include "mkvtoolnix-gui/types.h"
 
+namespace mtx::bcp47 {
+class language_c;
+}
+
 namespace mtx::gui::ChapterEditor {
 
 namespace Ui {
@@ -19,7 +23,7 @@ private:
 
 public:
   enum class NameMatch {
-      All = 1
+      All = 0
     , First
     , ByLanguage
   };
@@ -33,8 +37,11 @@ public:
   int firstChapterNumber() const;
   QString nameTemplate() const;
   NameMatch nameMatchingMode() const;
-  QString languageOfNamesToReplace() const;
+  mtx::bcp47::language_c languageOfNamesToReplace() const;
   bool skipHidden() const;
+
+public Q_SLOTS:
+  void enableControls();
 
 protected:
   void setupUi(int firstChapterNumber, QStringList const &existingSubChapters, QStringList const &additionalLanguages);

@@ -200,8 +200,8 @@ protected:
   ChaptersPtr mplsChaptersToMatroskaChapters(std::vector<mtx::bluray::mpls::chapter_t> const &mplsChapters) const;
   QHash<libmatroska::KaxChapterAtom *, ChapterAtomDataPtr> collectChapterAtomDataForEdition(QStandardItem *item);
   QString formatChapterName(QString const &nameTemplate, int chapterNumber, timestamp_c const &startTimestamp) const;
-  bool changeChapterName(QModelIndex const &parentIdx, int row, int chapterNumber, QString const &nameTemplate, RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode, QString const &languageOfNamesToReplace,
-                         bool skipHidden);
+  bool changeChapterName(QModelIndex const &parentIdx, int row, int chapterNumber, QString const &nameTemplate, RenumberSubChaptersParametersDialog::NameMatch nameMatchingMode,
+                         mtx::bcp47::language_c const &languageOfNamesToReplace, bool skipHidden);
 
   bool focusNextChapterAtom(FocusElementType toFocus);
   bool focusNextChapterName();
