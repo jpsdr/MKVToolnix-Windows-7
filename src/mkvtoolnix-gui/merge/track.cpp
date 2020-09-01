@@ -119,7 +119,7 @@ Track::setDefaultsNonRegular() {
 }
 
 void
-Track::setDefaults(QString const &languageDerivedFromFileName) {
+Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   if (!isRegular()) {
     setDefaultsNonRegular();
     return;
@@ -144,30 +144,33 @@ Track::setDefaults(QString const &languageDerivedFromFileName) {
                                : canChangeSubCharset() ? settings.m_defaultSubtitleCharset
                                :                         Q("");
 
-  auto language = m_properties.value("language").toString();
+  auto languageProperty = m_properties.value("language_ietf").toString();
+  if (languageProperty.isEmpty())
+    languageProperty = m_properties.value("language").toString();
 
-  if (!languageDerivedFromFileName.isEmpty()) {
+  auto language = mtx::bcp47::language_c::parse(to_utf8(languageProperty));
+
+  if (languageDerivedFromFileName.is_valid()) {
     auto policy = isAudio()     ? settings.m_deriveAudioTrackLanguageFromFileNamePolicy
                 : isVideo()     ? settings.m_deriveVideoTrackLanguageFromFileNamePolicy
                 : isSubtitles() ? settings.m_deriveSubtitleTrackLanguageFromFileNamePolicy
                 :                 Util::Settings::DeriveLanguageFromFileNamePolicy::Never;
 
-    if (   ((policy != Util::Settings::DeriveLanguageFromFileNamePolicy::Never)                  && language.isEmpty())
-        || ((policy == Util::Settings::DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined) && (language == Q("und"))))
+    if (   ((policy != Util::Settings::DeriveLanguageFromFileNamePolicy::Never)                  && !language.is_valid())
+        || ((policy == Util::Settings::DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined) && (language.get_language() == "und"s)))
       language = languageDerivedFromFileName;
   }
 
-  if (   language.isEmpty()
+  if (   !language.is_valid()
       || (   (Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndetermined == settings.m_whenToSetDefaultLanguage)
-          && (language == Q("und"))))
-    language = isAudio()     ? Q(settings.m_defaultAudioTrackLanguage.format())
-             : isVideo()     ? Q(settings.m_defaultVideoTrackLanguage.format())
-             : isSubtitles() ? Q(settings.m_defaultSubtitleTrackLanguage.format())
-             :                 Q("");
+          && (language.get_language() == "und"s)))
+    language = isAudio()     ? settings.m_defaultAudioTrackLanguage
+             : isVideo()     ? settings.m_defaultVideoTrackLanguage
+             : isSubtitles() ? settings.m_defaultSubtitleTrackLanguage
+             :                 mtx::bcp47::language_c{};
 
-  auto languageOpt = mtx::iso639::look_up(to_utf8(language), true);
-  if (languageOpt)
-    m_language = Q(languageOpt->iso639_2_code);
+  if (language.is_valid())
+    m_language = language;
 
   QRegExp re_displayDimensions{"^(\\d+)x(\\d+)$"};
   if (-1 != re_displayDimensions.indexIn(m_properties.value("display_dimensions").toString())) {
@@ -189,8 +192,8 @@ Track::setDefaults(QString const &languageDerivedFromFileName) {
     m_muxThis = true;
 
   else {
-    language  = m_language.isEmpty() ? Q("und") : m_language;
-    m_muxThis = settings.m_enableMuxingTracksByTheseLanguages.contains(language);
+    language  = !m_language.is_valid() ? mtx::bcp47::language_c::parse("und"s) : m_language;
+    m_muxThis = settings.m_enableMuxingTracksByTheseLanguages.contains(Q(language.get_iso639_2_code()));
   }
 }
 
@@ -227,7 +230,7 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("fixBitstreamTimingInfo",        m_fixBitstreamTimingInfo);
   settings.setValue("name",                          m_name);
   settings.setValue("codec",                         m_codec);
-  settings.setValue("language",                      m_language);
+  settings.setValue("language",                      Q(m_language.format()));
   settings.setValue("tags",                          m_tags);
   settings.setValue("delay",                         m_delay);
   settings.setValue("stretchBy",                     m_stretchBy);
@@ -273,7 +276,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_nameWasPresent                = l.settings.value("nameWasPresent").toBool();
   m_fixBitstreamTimingInfo        = l.settings.value("fixBitstreamTimingInfo").toBool();
   m_codec                         = l.settings.value("codec").toString();
-  m_language                      = l.settings.value("language").toString();
+  m_language                      = mtx::bcp47::language_c::parse(to_utf8(l.settings.value("language").toString()));
   m_tags                          = l.settings.value("tags").toString();
   m_delay                         = l.settings.value("delay").toString();
   m_stretchBy                     = l.settings.value("stretchBy").toString();
@@ -358,8 +361,8 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     if (!m_characterSet.isEmpty())
       opt.options << Q("--chapter-charset") << m_characterSet;
 
-    if (!m_language.isEmpty())
-      opt.options << Q("--chapter-language") << m_language;
+    if (m_language.is_valid())
+      opt.options << Q("--chapter-language") << Q(m_language.format());
 
     return;
 
@@ -367,7 +370,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     return;
 
   if (!m_appendedTo) {
-    opt.options << Q("--language") << Q("%1:%2").arg(sid).arg(m_language);
+    opt.options << Q("--language") << Q("%1:%2").arg(sid).arg(Q(m_language.format()));
 
     if (m_cues) {
       auto cues = 1 == m_cues ? Q(":iframes")

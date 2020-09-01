@@ -83,7 +83,7 @@ MuxConfig::MuxConfig(QString const &fileName)
   auto &settings                  = Util::Settings::get();
   m_additionalOptions             = settings.m_defaultAdditionalMergeOptions;
   m_chapterGenerationNameTemplate = settings.m_chapterNameTemplate;
-  m_chapterLanguage               = Q(settings.m_defaultChapterLanguage.format());
+  m_chapterLanguage               = settings.m_defaultChapterLanguage;
 }
 
 MuxConfig::~MuxConfig() {
@@ -430,7 +430,7 @@ MuxConfig::load(Util::ConfigFile &settings) {
   m_nextSegmentUID                = settings.value("nextSegmentUID").toString();
   m_chapters                      = QDir::toNativeSeparators(settings.value("chapters").toString());
   m_chapterTitleNumber            = settings.value("chapterTitleNumber", 1).toUInt();
-  m_chapterLanguage               = settings.value("chapterLanguage").toString();
+  m_chapterLanguage               = mtx::bcp47::language_c::parse(to_utf8(settings.value("chapterLanguage").toString()));
   m_chapterCharacterSet           = settings.value("chapterCharacterSet").toString();
   m_chapterDelay                  = settings.value("chapterDelay").toString();
   m_chapterStretchBy              = settings.value("chapterStretchBy").toString();
@@ -483,7 +483,7 @@ MuxConfig::save(Util::ConfigFile &settings)
   settings.setValue("nextSegmentUID",                m_nextSegmentUID);
   settings.setValue("chapters",                      m_chapters);
   settings.setValue("chapterTitleNumber",            m_chapterTitleNumber);
-  settings.setValue("chapterLanguage",               m_chapterLanguage);
+  settings.setValue("chapterLanguage",               Q(m_chapterLanguage.format()));
   settings.setValue("chapterCharacterSet",           m_chapterCharacterSet);
   settings.setValue("chapterDelay",                  m_chapterDelay);
   settings.setValue("chapterStretchBy",              m_chapterStretchBy);
@@ -658,7 +658,7 @@ MuxConfig::buildMkvmergeOptions()
   add(Q("--segmentinfo"),      m_segmentInfo);
 
   if (!m_chapters.isEmpty()) {
-    add(Q("--chapter-language"),        m_chapterLanguage);
+    add(Q("--chapter-language"),        Q(m_chapterLanguage.format()));
     add(Q("--chapter-charset"),         m_chapterCharacterSet);
     add(Q("--cue-chapter-name-format"), m_chapterCueNameFormat);
 
@@ -674,7 +674,7 @@ MuxConfig::buildMkvmergeOptions()
 
   if (needChapterNameTemplateAndLanguage()) {
     if (m_chapters.isEmpty())
-      add(Q("--chapter-language"), m_chapterLanguage);
+      add(Q("--chapter-language"), Q(m_chapterLanguage.format()));
     options << Q("--generate-chapters-name-template") << m_chapterGenerationNameTemplate;
   }
 

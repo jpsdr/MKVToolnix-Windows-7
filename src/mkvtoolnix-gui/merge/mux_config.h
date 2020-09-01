@@ -7,6 +7,7 @@
 #include <QStringList>
 #include <QVariant>
 
+#include "common/bcp47.h"
 #include "mkvtoolnix-gui/util/config_file.h"
 
 class QTemporaryFile;
@@ -73,7 +74,8 @@ public:
 
   QString m_firstInputFileName;
   QString m_title, m_destination, m_destinationAuto, m_destinationUniquenessSuffix, m_globalTags, m_segmentInfo, m_splitOptions;
-  QString m_segmentUIDs, m_previousSegmentUID, m_nextSegmentUID, m_chapters, m_chapterLanguage, m_chapterCharacterSet, m_chapterCueNameFormat, m_chapterDelay, m_chapterStretchBy, m_additionalOptions;
+  QString m_segmentUIDs, m_previousSegmentUID, m_nextSegmentUID, m_chapters, m_chapterCharacterSet, m_chapterCueNameFormat, m_chapterDelay, m_chapterStretchBy, m_additionalOptions;
+  mtx::bcp47::language_c m_chapterLanguage;
   SplitMode m_splitMode{DoNotSplit};
   unsigned int m_splitMaxFiles{1}, m_chapterTitleNumber{1};
   bool m_linkFiles{}, m_webmMode{};

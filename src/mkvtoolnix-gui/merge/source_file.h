@@ -70,7 +70,7 @@ public:
   void buildMkvmergeOptions(QStringList &options) const;
 
 protected:
-  virtual QString deriveLanguageFromFileName();
+  virtual mtx::bcp47::language_c deriveLanguageFromFileName();
   virtual QRegularExpression regexForDerivingLanguageFromFileName();
 
 public:

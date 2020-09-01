@@ -715,7 +715,7 @@ Tab::setInputControlValues(Track *track) {
 
   for (auto const &sourceFile : m_config.m_files)
     for (auto const &sourceTrack : sourceFile->m_tracks) {
-      additionalLanguages     << sourceTrack->m_language;
+      additionalLanguages     << Q(sourceTrack->m_language.format());
       additionalCharacterSets << sourceTrack->m_characterSet;
     }
 
@@ -737,7 +737,7 @@ Tab::setInputControlValues(Track *track) {
   Util::setComboBoxIndexIf(ui->naluSizeLength,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);                         });
   Util::setComboBoxIndexIf(ui->aacIsSBR,         [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);                               });
 
-  ui->trackLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(track->m_language)));
+  ui->trackLanguage->setLanguage(track->m_language);
   ui->subtitleCharacterSet->setCurrentByData(track->m_characterSet);
 
   ui->trackName->setEditText(                    track->m_name);
@@ -933,9 +933,7 @@ Tab::toggleMuxThisForSelectedTracks() {
 
 void
 Tab::onTrackLanguageChanged(mtx::bcp47::language_c const &newLanguage) {
-  auto const formattedLanguage = Q(newLanguage.format());
-
-  withSelectedTracks([&formattedLanguage](auto &track) { track.m_language = formattedLanguage; }, true);
+  withSelectedTracks([&newLanguage](auto &track) { track.m_language = newLanguage; }, true);
 }
 
 void

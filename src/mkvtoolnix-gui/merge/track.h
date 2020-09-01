@@ -5,6 +5,7 @@
 #include <QString>
 #include <QVariant>
 
+#include "common/bcp47.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
@@ -30,7 +31,8 @@ public:
 
   bool m_muxThis{true}, m_setAspectRatio{}, m_defaultTrackFlagWasSet{}, m_defaultTrackFlagWasPresent{}, m_forcedTrackFlagWasSet{}, m_aacSbrWasDetected{}, m_nameWasPresent{}, m_fixBitstreamTimingInfo{}, m_reduceAudioToCore{};
   bool m_removeDialogNormalizationGain{};
-  QString m_name, m_codec, m_language, m_tags, m_delay, m_stretchBy, m_defaultDuration, m_timestamps, m_aspectRatio, m_displayWidth, m_displayHeight, m_cropping, m_characterSet, m_additionalOptions;
+  mtx::bcp47::language_c m_language;
+  QString m_name, m_codec, m_tags, m_delay, m_stretchBy, m_defaultDuration, m_timestamps, m_aspectRatio, m_displayWidth, m_displayHeight, m_cropping, m_characterSet, m_additionalOptions;
   unsigned int m_defaultTrackFlag{}, m_forcedTrackFlag{}, m_stereoscopy{}, m_naluSizeLength{}, m_cues{}, m_aacIsSBR{};
   TrackCompression m_compression{TrackCompression::Default};
   std::optional<bool> m_effectiveDefaultTrackFlag;
@@ -60,7 +62,7 @@ public:
   virtual bool canRemoveDialogNormalizationGain() const;
   virtual bool canSetAacToSbr() const;
 
-  virtual void setDefaults(QString const &languageDerivedFromFileName);
+  virtual void setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName);
   virtual void setDefaultsNonRegular();
   virtual QString extractAudioDelayFromFileName() const;
 

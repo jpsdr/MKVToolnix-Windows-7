@@ -413,7 +413,7 @@ SourceFile::regexForDerivingLanguageFromFileName() {
   return QRegularExpression{replaceLanguageSubPatterns(pattern), QRegularExpression::CaseInsensitiveOption};
 }
 
-QString
+mtx::bcp47::language_c
 SourceFile::deriveLanguageFromFileName() {
   auto &cfg     = Util::Settings::get();
   auto fileName = QFileInfo{m_fileName}.fileName();
@@ -475,7 +475,7 @@ SourceFile::deriveLanguageFromFileName() {
 
     qDebug() << "derived language:" << language;
 
-    return language;
+    return mtx::bcp47::language_c::parse(to_utf8(language));
   }
 
   qDebug() << "language could not be derived: match found but no mapping to language:" << matches.capturedTexts();

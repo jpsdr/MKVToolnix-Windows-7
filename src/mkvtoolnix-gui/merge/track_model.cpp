@@ -109,7 +109,7 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[CodecColumn]           ->setText(track->isChapters() || track->isGlobalTags() || track->isTags() ? QNY("%1 entry", "%1 entries", track->m_size).arg(track->m_size) : track->m_codec);
   items[TypeColumn]            ->setText(track->nameForType());
   items[MuxThisColumn]         ->setText(track->m_muxThis ? QY("Yes") : QY("No"));
-  items[LanguageColumn]        ->setText(track->isAppended() ? QString{} : track->m_language);
+  items[LanguageColumn]        ->setText(track->isAppended() ? QString{} : Q(track->m_language.format()));
   items[NameColumn]            ->setText(track->isAppended() ? QString{} : track->m_name);
   items[IDColumn]              ->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
   items[DefaultTrackFlagColumn]->setText(!track->m_effectiveDefaultTrackFlag ? Q("") : *track->m_effectiveDefaultTrackFlag ? QY("Yes") : QY("No"));

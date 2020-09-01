@@ -535,7 +535,8 @@ Tab::onChapterTitleNumberChanged(int newValue) {
 
 void
 Tab::onChapterLanguageChanged(mtx::bcp47::language_c const &newLanguage) {
-  m_config.m_chapterLanguage = newLanguage.is_valid() ? Q(newLanguage.format()) : QString{};
+  if (newLanguage.is_valid())
+    m_config.m_chapterLanguage = newLanguage;
 }
 
 void
@@ -608,7 +609,7 @@ Tab::setOutputControlValues() {
   ui->additionalOptions->setText(m_config.m_additionalOptions);
   ui->webmMode->setChecked(m_config.m_webmMode);
 
-  ui->chapterLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(m_config.m_chapterLanguage)));
+  ui->chapterLanguage->setLanguage(m_config.m_chapterLanguage);
   ui->chapterCharacterSet->setAdditionalItems(m_config.m_chapterCharacterSet)
     .reInitializeIfNecessary()
     .setCurrentByData(m_config.m_chapterCharacterSet);

@@ -88,12 +88,12 @@ TrackItem::operator <(QTreeWidgetItem const &cmp)
   auto otherTrack = static_cast<TrackItem const &>(cmp).m_track;
   auto column     = treeWidget()->sortColumn();
 
-  return 1 == column                                     ? m_track->nameForType() <  otherTrack->nameForType()
-       : 2 == column                                     ? m_track->m_codec       <  otherTrack->m_codec
-       : 3 == column                                     ? m_track->m_language    <  otherTrack->m_language
-       : (m_track->m_id >= 0) && (otherTrack->m_id >= 0) ? m_track->m_id          <  otherTrack->m_id
-       : (m_track->m_id <  0) && (otherTrack->m_id <  0) ? m_track->m_codec       <  otherTrack->m_codec
-       :                                                   m_track->m_id          >= 0;
+  return 1 == column                                     ? m_track->nameForType()          <  otherTrack->nameForType()
+       : 2 == column                                     ? m_track->m_codec                <  otherTrack->m_codec
+       : 3 == column                                     ? Q(m_track->m_language.format()) <  Q(otherTrack->m_language.format())
+       : (m_track->m_id >= 0) && (otherTrack->m_id >= 0) ? m_track->m_id                   <  otherTrack->m_id
+       : (m_track->m_id <  0) && (otherTrack->m_id <  0) ? m_track->m_codec                <  otherTrack->m_codec
+       :                                                   m_track->m_id                   >= 0;
 }
 
 TrackItem *
@@ -102,7 +102,7 @@ TrackItem::create(Track const &track) {
       track.m_id >= 0 ? QString::number(track.m_id) : QString{},
       track.nameForType(),
       track.m_codec,
-      track.m_language,
+      Q(track.m_language.format()),
     }};
 
   item->setTextAlignment(0, Qt::AlignRight | Qt::AlignVCenter);
