@@ -83,7 +83,7 @@ MuxConfig::MuxConfig(QString const &fileName)
   auto &settings                  = Util::Settings::get();
   m_additionalOptions             = settings.m_defaultAdditionalMergeOptions;
   m_chapterGenerationNameTemplate = settings.m_chapterNameTemplate;
-  m_chapterLanguage               = settings.m_defaultChapterLanguage;
+  m_chapterLanguage               = Q(settings.m_defaultChapterLanguage.format());
 }
 
 MuxConfig::~MuxConfig() {

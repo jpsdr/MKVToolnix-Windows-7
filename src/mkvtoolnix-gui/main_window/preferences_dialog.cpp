@@ -90,12 +90,9 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbMEnableDialogNormGainRemoval->setChecked(m_cfg.m_mergeEnableDialogNormGainRemoval);
   ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
-  ui->ldwMDefaultAudioTrackLanguage->setAdditionalLanguages(m_cfg.m_defaultAudioTrackLanguage);
-  ui->ldwMDefaultAudioTrackLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(m_cfg.m_defaultAudioTrackLanguage)));
-  ui->ldwMDefaultVideoTrackLanguage->setAdditionalLanguages(m_cfg.m_defaultVideoTrackLanguage);
-  ui->ldwMDefaultVideoTrackLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(m_cfg.m_defaultVideoTrackLanguage)));
-  ui->ldwMDefaultSubtitleTrackLanguage->setAdditionalLanguages(m_cfg.m_defaultSubtitleTrackLanguage);
-  ui->ldwMDefaultSubtitleTrackLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(m_cfg.m_defaultSubtitleTrackLanguage)));
+  ui->ldwMDefaultAudioTrackLanguage->setLanguage(m_cfg.m_defaultAudioTrackLanguage);
+  ui->ldwMDefaultVideoTrackLanguage->setLanguage(m_cfg.m_defaultVideoTrackLanguage);
+  ui->ldwMDefaultSubtitleTrackLanguage->setLanguage(m_cfg.m_defaultSubtitleTrackLanguage);
   ui->cbMDefaultSubtitleCharset->setAdditionalItems(m_cfg.m_defaultSubtitleCharset).setup(true, QY("– No selection by default –")).setCurrentByData(m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
   ui->cbMProbeRangePercentage->setValue(m_cfg.m_probeRangePercentage);
@@ -120,8 +117,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbCEDropLastFromBlurayPlaylist->setChecked(m_cfg.m_dropLastChapterFromBlurayPlaylist);
   ui->cbCETextFileCharacterSet->setAdditionalItems(m_cfg.m_ceTextFileCharacterSet).setup(true, QY("Always ask the user")).setCurrentByData(m_cfg.m_ceTextFileCharacterSet);
   ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
-  ui->ldwCEDefaultLanguage->setAdditionalLanguages(m_cfg.m_defaultChapterLanguage);
-  ui->ldwCEDefaultLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(m_cfg.m_defaultChapterLanguage)));
+  ui->ldwCEDefaultLanguage->setLanguage(m_cfg.m_defaultChapterLanguage);
   ui->cbCEDefaultCountry->setAdditionalItems(m_cfg.m_defaultChapterCountry).setup(true, QY("– No selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
 
   // Header editor page
@@ -888,7 +884,7 @@ PreferencesDialog::save() {
 
   m_cfg.m_chapterNameTemplate                           = ui->leCENameTemplate->text();
   m_cfg.m_ceTextFileCharacterSet                        = ui->cbCETextFileCharacterSet->currentData().toString();
-  m_cfg.m_defaultChapterLanguage                        = Q(ui->ldwCEDefaultLanguage->language().format());
+  m_cfg.m_defaultChapterLanguage                        = ui->ldwCEDefaultLanguage->language();
   m_cfg.m_defaultChapterCountry                         = ui->cbCEDefaultCountry->currentData().toString();
   m_cfg.m_dropLastChapterFromBlurayPlaylist             = ui->cbCEDropLastFromBlurayPlaylist->isChecked();
 
@@ -907,9 +903,9 @@ PreferencesDialog::save() {
                                                         : ui->rbMTrackPropertiesLayoutHorizontalTwoColumns->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalTwoColumns
                                                         :                                                                 Util::Settings::TrackPropertiesLayout::VerticalTabWidget;
   m_cfg.m_clearMergeSettings                            = static_cast<Util::Settings::ClearMergeSettingsAction>(ui->cbMClearMergeSettings->currentIndex());
-  m_cfg.m_defaultAudioTrackLanguage                     = Q(ui->ldwMDefaultAudioTrackLanguage->language().format());
-  m_cfg.m_defaultVideoTrackLanguage                     = Q(ui->ldwMDefaultVideoTrackLanguage->language().format());
-  m_cfg.m_defaultSubtitleTrackLanguage                  = Q(ui->ldwMDefaultSubtitleTrackLanguage->language().format());
+  m_cfg.m_defaultAudioTrackLanguage                     = ui->ldwMDefaultAudioTrackLanguage->language();
+  m_cfg.m_defaultVideoTrackLanguage                     = ui->ldwMDefaultVideoTrackLanguage->language();
+  m_cfg.m_defaultSubtitleTrackLanguage                  = ui->ldwMDefaultSubtitleTrackLanguage->language();
   m_cfg.m_whenToSetDefaultLanguage                      = static_cast<Util::Settings::SetDefaultLanguagePolicy>(ui->cbMWhenToSetDefaultLanguage->currentData().toInt());
   m_cfg.m_defaultSubtitleCharset                        = ui->cbMDefaultSubtitleCharset->currentData().toString();
   m_cfg.m_priority                                      = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());

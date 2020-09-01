@@ -160,9 +160,9 @@ Track::setDefaults(QString const &languageDerivedFromFileName) {
   if (   language.isEmpty()
       || (   (Util::Settings::SetDefaultLanguagePolicy::IfAbsentOrUndetermined == settings.m_whenToSetDefaultLanguage)
           && (language == Q("und"))))
-    language = isAudio()     ? settings.m_defaultAudioTrackLanguage
-             : isVideo()     ? settings.m_defaultVideoTrackLanguage
-             : isSubtitles() ? settings.m_defaultSubtitleTrackLanguage
+    language = isAudio()     ? Q(settings.m_defaultAudioTrackLanguage.format())
+             : isVideo()     ? Q(settings.m_defaultVideoTrackLanguage.format())
+             : isSubtitles() ? Q(settings.m_defaultSubtitleTrackLanguage.format())
              :                 Q("");
 
   auto languageOpt = mtx::iso639::look_up(to_utf8(language), true);

@@ -485,11 +485,11 @@ Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
 void
 Settings::loadDefaults(QSettings &reg) {
   reg.beginGroup(s_grpDefaults);
-  m_defaultAudioTrackLanguage          = reg.value(s_valDefaultAudioTrackLanguage,    Q("und")).toString();
-  m_defaultVideoTrackLanguage          = reg.value(s_valDefaultVideoTrackLanguage,    Q("und")).toString();
-  m_defaultSubtitleTrackLanguage       = reg.value(s_valDefaultSubtitleTrackLanguage, Q("und")).toString();
+  m_defaultAudioTrackLanguage          = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultAudioTrackLanguage,    Q("und")).toString()));
+  m_defaultVideoTrackLanguage          = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultVideoTrackLanguage,    Q("und")).toString()));
+  m_defaultSubtitleTrackLanguage       = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultSubtitleTrackLanguage, Q("und")).toString()));
   m_whenToSetDefaultLanguage           = static_cast<SetDefaultLanguagePolicy>(reg.value(s_valWhenToSetDefaultLanguage,     static_cast<int>(SetDefaultLanguagePolicy::IfAbsentOrUndetermined)).toInt());
-  m_defaultChapterLanguage             = reg.value(s_valDefaultChapterLanguage, Q("und")).toString();
+  m_defaultChapterLanguage             = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultChapterLanguage,       Q("und")).toString()));
   m_defaultChapterCountry              = reg.value(s_valDefaultChapterCountry).toString();
   m_defaultSubtitleCharset             = reg.value(s_valDefaultSubtitleCharset).toString();
   m_defaultAdditionalMergeOptions      = reg.value(s_valDefaultAdditionalMergeOptions).toString();
@@ -770,11 +770,11 @@ void
 Settings::saveDefaults(QSettings &reg)
   const {
   reg.beginGroup(s_grpDefaults);
-  reg.setValue(s_valDefaultAudioTrackLanguage,          m_defaultAudioTrackLanguage);
-  reg.setValue(s_valDefaultVideoTrackLanguage,          m_defaultVideoTrackLanguage);
-  reg.setValue(s_valDefaultSubtitleTrackLanguage,       m_defaultSubtitleTrackLanguage);
+  reg.setValue(s_valDefaultAudioTrackLanguage,          Q(m_defaultAudioTrackLanguage.format()));
+  reg.setValue(s_valDefaultVideoTrackLanguage,          Q(m_defaultVideoTrackLanguage.format()));
+  reg.setValue(s_valDefaultSubtitleTrackLanguage,       Q(m_defaultSubtitleTrackLanguage.format()));
   reg.setValue(s_valWhenToSetDefaultLanguage,           static_cast<int>(m_whenToSetDefaultLanguage));
-  reg.setValue(s_valDefaultChapterLanguage,             m_defaultChapterLanguage);
+  reg.setValue(s_valDefaultChapterLanguage,             Q(m_defaultChapterLanguage.format()));
   reg.setValue(s_valDefaultChapterCountry,              m_defaultChapterCountry);
   reg.setValue(s_valDefaultSubtitleCharset,             m_defaultSubtitleCharset);
   reg.setValue(s_valDefaultAdditionalMergeOptions,      m_defaultAdditionalMergeOptions);

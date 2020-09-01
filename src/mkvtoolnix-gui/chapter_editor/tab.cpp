@@ -529,7 +529,7 @@ ChaptersPtr
 Tab::mplsChaptersToMatroskaChapters(std::vector<mtx::bluray::mpls::chapter_t> const &mplsChapters)
   const {
   auto &cfg = Util::Settings::get();
-  return mtx::chapters::convert_mpls_chapters_kax_chapters(mplsChapters, mtx::bcp47::language_c::parse(to_utf8(cfg.m_defaultChapterLanguage)), to_utf8(cfg.m_chapterNameTemplate));
+  return mtx::chapters::convert_mpls_chapters_kax_chapters(mplsChapters, cfg.m_defaultChapterLanguage, to_utf8(cfg.m_chapterNameTemplate));
 }
 
 Tab::LoadResult
@@ -586,7 +586,7 @@ Tab::loadFromDVD([[maybe_unused]] QString const &fileName,
 
   try {
     auto titlesAndTimestamps = mtx::chapters::parse_dvd(dvdDirectory.string());
-    chapters                 = mtx::chapters::create_editions_and_chapters(titlesAndTimestamps, mtx::bcp47::language_c::parse(to_utf8(cfg.m_defaultChapterLanguage)), to_utf8(cfg.m_chapterNameTemplate));
+    chapters                 = mtx::chapters::create_editions_and_chapters(titlesAndTimestamps, cfg.m_defaultChapterLanguage, to_utf8(cfg.m_chapterNameTemplate));
 
   } catch (mtx::chapters::parser_x const &ex) {
     error = Q(ex.what());
@@ -1300,7 +1300,7 @@ Tab::createEmptyChapter(int64_t startTime,
   if (!name.isEmpty()) {
     auto &display = GetChild<KaxChapterDisplay>(*chapter);
     GetChild<KaxChapterString>(display).SetValue(to_wide(name));
-    mtx::chapters::set_languages_in_display(display, to_utf8(language ? *language : cfg.m_defaultChapterLanguage));
+    mtx::chapters::set_languages_in_display(display, language ? mtx::bcp47::language_c::parse(to_utf8(*language)) : cfg.m_defaultChapterLanguage);
     if ((country && !country->isEmpty()) || !cfg.m_defaultChapterCountry.isEmpty())
       GetChild<KaxChapterCountry>(display).SetValue(to_utf8((country && !country->isEmpty()) ? *country : cfg.m_defaultChapterCountry));
   }

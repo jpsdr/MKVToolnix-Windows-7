@@ -8,6 +8,7 @@
 #include <QTabWidget>
 #include <QVariant>
 
+#include "common/bcp47.h"
 #include "common/translation.h"
 #include "mkvtoolnix-gui/info/job_settings.h"
 #include "mkvtoolnix-gui/merge/enums.h"
@@ -147,13 +148,13 @@ public:
   using RunProgramConfigPtr  = std::shared_ptr<RunProgramConfig>;
   using RunProgramConfigList = QList<RunProgramConfigPtr>;
 
-  QString m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage;
+  mtx::bcp47::language_c m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage, m_defaultChapterLanguage;
   SetDefaultLanguagePolicy m_whenToSetDefaultLanguage;
   DeriveLanguageFromFileNamePolicy m_deriveAudioTrackLanguageFromFileNamePolicy, m_deriveVideoTrackLanguageFromFileNamePolicy, m_deriveSubtitleTrackLanguageFromFileNamePolicy;
   QString m_regexForDerivingTrackLanguagesFromFileNames;
   QStringList m_recognizedTrackLanguagesInFileNames, m_mergePredefinedSplitSizes, m_mergePredefinedSplitDurations;
   QStringList m_mergePredefinedVideoTrackNames, m_mergePredefinedAudioTrackNames, m_mergePredefinedSubtitleTrackNames;
-  QString m_chapterNameTemplate, m_defaultChapterLanguage, m_defaultChapterCountry, m_ceTextFileCharacterSet, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
+  QString m_chapterNameTemplate, m_defaultChapterCountry, m_ceTextFileCharacterSet, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
   QStringList m_oftenUsedLanguages, m_oftenUsedCountries, m_oftenUsedCharacterSets;
   bool m_oftenUsedLanguagesOnly, m_oftenUsedCountriesOnly, m_oftenUsedCharacterSetsOnly;
   ProcessPriority m_priority;

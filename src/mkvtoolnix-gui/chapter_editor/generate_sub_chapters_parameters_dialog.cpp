@@ -49,7 +49,7 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->leNameTemplate->setText(cfg.m_chapterNameTemplate);
 
   m_ui->ldwLanguage->setAdditionalLanguages(additionalLanguages);
-  m_ui->ldwLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(cfg.m_defaultChapterLanguage)));
+  m_ui->ldwLanguage->setLanguage(cfg.m_defaultChapterLanguage);
   m_ui->ldwLanguage->enableClearingLanguage(true);
   m_ui->ldwLanguage->setClearTitle(QY("– Set to none –"));
   m_ui->cbCountry->setAdditionalItems(additionalCountryCodes).setup(true, QY("– Set to none –")).setCurrentByData(cfg.m_defaultChapterCountry);
