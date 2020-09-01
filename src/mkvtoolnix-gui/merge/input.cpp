@@ -80,7 +80,7 @@ Tab::setupControlLists() {
                      << ui->miscellaneousBox << ui->cuesLabel << ui->cues << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions
                      << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo << ui->reduceToAudioCore << ui->removeDialogNormalizationGain << ui->naluSizeLengthLabel << ui->naluSizeLength;
 
-  m_comboBoxControls << ui->muxThis << ui->trackLanguage << ui->defaultTrackFlag << ui->forcedTrackFlag << ui->compression << ui->cues << ui->stereoscopy << ui->naluSizeLength << ui->aacIsSBR << ui->subtitleCharacterSet;
+  m_comboBoxControls << ui->muxThis << ui->defaultTrackFlag << ui->forcedTrackFlag << ui->compression << ui->cues << ui->stereoscopy << ui->naluSizeLength << ui->aacIsSBR << ui->subtitleCharacterSet;
 
   m_notIfAppendingControls << ui->trackLanguageLabel   << ui->trackLanguage           << ui->trackNameLabel              << ui->trackName        << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
                            << ui->forcedTrackFlagLabel << ui->forcedTrackFlag         << ui->compressionLabel            << ui->compression      << ui->trackTagsLabel        << ui->trackTags         << ui->browseTrackTags
@@ -217,9 +217,6 @@ Tab::setupInputControls() {
   ui->trackName->lineEdit()->setClearButtonEnabled(true);
   ui->defaultDuration->lineEdit()->setClearButtonEnabled(true);
   ui->aspectRatio->lineEdit()->setClearButtonEnabled(true);
-
-  // Track language
-  ui->trackLanguage->setup();
 
   // Track & chapter character set
   ui->subtitleCharacterSet->setup(true);
@@ -374,7 +371,7 @@ Tab::setupInputControls() {
   connect(ui->subtitleCharacterSet,          static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onSubtitleCharacterSetChanged);
   connect(ui->subtitleCharacterSetPreview,   &QPushButton::clicked,                                                                            this,                     &Tab::onPreviewSubtitleCharacterSet);
   connect(ui->timestamps,                    &QLineEdit::textChanged,                                                                          this,                     &Tab::onTimestampsChanged);
-  connect(ui->trackLanguage,                 static_cast<void (Util::LanguageComboBox::*)(int)>(&Util::LanguageComboBox::currentIndexChanged), this,                     &Tab::onTrackLanguageChanged);
+  connect(ui->trackLanguage,                 &Util::LanguageDisplayWidget::languageChanged,                                                    this,                     &Tab::onTrackLanguageChanged);
   connect(ui->trackName,                     &QComboBox::editTextChanged,                                                                      this,                     &Tab::onTrackNameChanged);
   connect(ui->trackTags,                     &QLineEdit::textChanged,                                                                          this,                     &Tab::onTrackTagsChanged);
   connect(ui->tracks,                        &QTreeView::doubleClicked,                                                                        this,                     &Tab::toggleMuxThisForSelectedTracks);
@@ -425,7 +422,6 @@ Tab::setupInputControls() {
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  this,                     &Tab::setupMoveUpDownButtons);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  this,                     &Tab::setupInputLayout);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  this,                     &Tab::setupPredefinedTrackNames);
-  connect(mw,                                &MainWindow::preferencesChanged,                                                                  ui->trackLanguage,        &Util::ComboBoxBase::reInitialize);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  ui->subtitleCharacterSet, &Util::ComboBoxBase::reInitialize);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  ui->chapterCharacterSet,  &Util::ComboBoxBase::reInitialize);
 
@@ -443,10 +439,7 @@ Tab::setupInputToolTips() {
 
   Util::setToolTip(ui->muxThis,   QY("If set to 'no' then the selected tracks will not be copied to the destination file."));
   Util::setToolTip(ui->trackName, QY("A name for this track that players can display helping the user choose the right track to play, e.g. \"director's comments\"."));
-  Util::setToolTip(ui->trackLanguage,
-                   Q("%1 %2")
-                   .arg(QY("The language for this track that players can use for automatic track selection and display for the user."))
-                   .arg(QY("Select one of the ISO 639-2 language codes.")));
+  Util::setToolTip(ui->trackLanguage, QY("The language for this track that players can use for automatic track selection and display for the user."));
   Util::setToolTip(ui->defaultTrackFlag,
                    Q("%1 %2 %3")
                    .arg(QY("Make this track the default track for its type (audio, video, subtitles)."))
@@ -696,6 +689,8 @@ Tab::addOrRemoveEmptyComboBoxItem(bool add) {
 
 void
 Tab::clearInputControlValues() {
+  ui->trackLanguage->setLanguage({});
+
   for (auto comboBox : m_comboBoxControls)
     comboBox->setCurrentIndex(0);
 
@@ -724,7 +719,7 @@ Tab::setInputControlValues(Track *track) {
       additionalCharacterSets << sourceTrack->m_characterSet;
     }
 
-  ui->trackLanguage->setAdditionalItems(additionalLanguages.values()).reInitializeIfNecessary();
+  ui->trackLanguage->setAdditionalLanguages(additionalLanguages.values());
   ui->subtitleCharacterSet->setAdditionalItems(additionalCharacterSets.values()).reInitializeIfNecessary();
 
   if (!track) {
@@ -742,7 +737,7 @@ Tab::setInputControlValues(Track *track) {
   Util::setComboBoxIndexIf(ui->naluSizeLength,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);                         });
   Util::setComboBoxIndexIf(ui->aacIsSBR,         [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);                               });
 
-  ui->trackLanguage->setCurrentByData(track->m_language);
+  ui->trackLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(track->m_language)));
   ui->subtitleCharacterSet->setCurrentByData(track->m_characterSet);
 
   ui->trackName->setEditText(                    track->m_name);
@@ -937,12 +932,10 @@ Tab::toggleMuxThisForSelectedTracks() {
 }
 
 void
-Tab::onTrackLanguageChanged(int newValue) {
-  auto code = ui->trackLanguage->itemData(newValue).toString();
-  if (code.isEmpty())
-    return;
+Tab::onTrackLanguageChanged(mtx::bcp47::language_c const &newLanguage) {
+  auto const formattedLanguage = Q(newLanguage.format());
 
-  withSelectedTracks([&code](auto &track) { track.m_language = code; }, true);
+  withSelectedTracks([&formattedLanguage](auto &track) { track.m_language = formattedLanguage; }, true);
 }
 
 void
@@ -1500,6 +1493,8 @@ Tab::enableTracksActions() {
 
 void
 Tab::retranslateInputUI() {
+  ui->trackLanguage->setClearTitle(QY("<Do not change>"));
+
   m_filesModel->retranslateUi();
   m_tracksModel->retranslateUi();
 

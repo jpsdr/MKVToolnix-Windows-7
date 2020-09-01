@@ -107,7 +107,7 @@ LanguageDisplayWidget::setClearTitle(QString const &clearTitle) {
 
 void
 LanguageDisplayWidget::setAdditionalToolTip(QString const &additionalToolTip) {
-  p_func()->additionalToolTip = additionalToolTip;
+  p_func()->additionalToolTip = additionalToolTip.isEmpty() || additionalToolTip.startsWith('<') ? additionalToolTip : Q("<span>%1</span>").arg(additionalToolTip.toHtmlEscaped());
 
   updateDisplay();
 }

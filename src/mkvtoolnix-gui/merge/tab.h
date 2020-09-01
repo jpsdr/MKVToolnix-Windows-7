@@ -144,7 +144,7 @@ public Q_SLOTS:
   virtual void onTrackNameChanged(QString newValue);
   virtual void onTrackItemChanged(QStandardItem *item);
   virtual void onMuxThisChanged(int selected);
-  virtual void onTrackLanguageChanged(int newValue);
+  virtual void onTrackLanguageChanged(mtx::bcp47::language_c const &newLanguage);
   virtual void onDefaultTrackFlagChanged(int newValue);
   virtual void onForcedTrackFlagChanged(int newValue);
   virtual void onCompressionChanged(int newValue);

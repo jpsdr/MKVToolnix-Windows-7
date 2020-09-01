@@ -484,11 +484,7 @@
                           </widget>
                          </item>
                          <item row="2" column="1">
-                          <widget class="mtx::gui::Util::LanguageComboBox" name="trackLanguage">
-                           <property name="sizeAdjustPolicy">
-                            <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
-                           </property>
-                          </widget>
+                          <widget class="mtx::gui::Util::LanguageDisplayWidget" name="trackLanguage"/>
                          </item>
                          <item row="3" column="0">
                           <widget class="QLabel" name="defaultTrackFlagLabel">
@@ -1999,11 +1995,6 @@
    <class>mtx::gui::Util::BasicTreeView</class>
    <extends>QTreeView</extends>
    <header>mkvtoolnix-gui/util/basic_tree_view.h</header>
-  </customwidget>
-  <customwidget>
-   <class>mtx::gui::Util::LanguageComboBox</class>
-   <extends>QComboBox</extends>
-   <header>mkvtoolnix-gui/util/language_combo_box.h</header>
   </customwidget>
   <customwidget>
    <class>mtx::gui::Util::LanguageDisplayWidget</class>
