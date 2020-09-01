@@ -90,9 +90,12 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbMEnableDialogNormGainRemoval->setChecked(m_cfg.m_mergeEnableDialogNormGainRemoval);
   ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
-  ui->cbMDefaultAudioTrackLanguage->setAdditionalItems(m_cfg.m_defaultAudioTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultAudioTrackLanguage);
-  ui->cbMDefaultVideoTrackLanguage->setAdditionalItems(m_cfg.m_defaultVideoTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultVideoTrackLanguage);
-  ui->cbMDefaultSubtitleTrackLanguage->setAdditionalItems(m_cfg.m_defaultSubtitleTrackLanguage).setup().setCurrentByData(m_cfg.m_defaultSubtitleTrackLanguage);
+  ui->ldwMDefaultAudioTrackLanguage->setAdditionalLanguages(m_cfg.m_defaultAudioTrackLanguage);
+  ui->ldwMDefaultAudioTrackLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(m_cfg.m_defaultAudioTrackLanguage)));
+  ui->ldwMDefaultVideoTrackLanguage->setAdditionalLanguages(m_cfg.m_defaultVideoTrackLanguage);
+  ui->ldwMDefaultVideoTrackLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(m_cfg.m_defaultVideoTrackLanguage)));
+  ui->ldwMDefaultSubtitleTrackLanguage->setAdditionalLanguages(m_cfg.m_defaultSubtitleTrackLanguage);
+  ui->ldwMDefaultSubtitleTrackLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(m_cfg.m_defaultSubtitleTrackLanguage)));
   ui->cbMDefaultSubtitleCharset->setAdditionalItems(m_cfg.m_defaultSubtitleCharset).setup(true, QY("– No selection by default –")).setCurrentByData(m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
   ui->cbMProbeRangePercentage->setValue(m_cfg.m_probeRangePercentage);
@@ -117,7 +120,8 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbCEDropLastFromBlurayPlaylist->setChecked(m_cfg.m_dropLastChapterFromBlurayPlaylist);
   ui->cbCETextFileCharacterSet->setAdditionalItems(m_cfg.m_ceTextFileCharacterSet).setup(true, QY("Always ask the user")).setCurrentByData(m_cfg.m_ceTextFileCharacterSet);
   ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
-  ui->cbCEDefaultLanguage->setAdditionalItems(m_cfg.m_defaultChapterLanguage).setup().setCurrentByData(m_cfg.m_defaultChapterLanguage);
+  ui->ldwCEDefaultLanguage->setAdditionalLanguages(m_cfg.m_defaultChapterLanguage);
+  ui->ldwCEDefaultLanguage->setLanguage(mtx::bcp47::language_c::parse(to_utf8(m_cfg.m_defaultChapterLanguage)));
   ui->cbCEDefaultCountry->setAdditionalItems(m_cfg.m_defaultChapterCountry).setup(true, QY("– No selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
 
   // Header editor page
@@ -292,7 +296,7 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("You can opt for having them removed automatically under certain conditions.")));
 
   Util::setToolTip(ui->leCENameTemplate, ChapterEditor::Tool::chapterNameTemplateToolTip());
-  Util::setToolTip(ui->cbCEDefaultLanguage, QY("This is the language that newly added chapter names get assigned automatically."));
+  Util::setToolTip(ui->ldwCEDefaultLanguage, QY("This is the language that newly added chapter names get assigned automatically."));
   Util::setToolTip(ui->cbCEDefaultCountry, QY("This is the country that newly added chapter names get assigned automatically."));
   Util::setToolTip(ui->cbCEDropLastFromBlurayPlaylist,
                    Q("%1 %2")
@@ -408,19 +412,19 @@ PreferencesDialog::setupToolTips() {
   Util::setToolTip(ui->pbMDeriveTrackLanguageRevertCustomRegex, QY("Revert the regular expression to its default value."));
   ui->tbMDeriveTrackLanguageRecognizedLanguages->setToolTips(QY("Only the languages in the 'selected' list on the right will be recognized as track languages in file names."));
 
-  Util::setToolTip(ui->cbMDefaultAudioTrackLanguage,
+  Util::setToolTip(ui->ldwMDefaultAudioTrackLanguage,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("The language selected here is used for audio tracks for which their source file contains no such property and for which the language has not been derived from the file name."))
                    .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und').")));
-  Util::setToolTip(ui->cbMDefaultVideoTrackLanguage,
+  Util::setToolTip(ui->ldwMDefaultVideoTrackLanguage,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."))
                    .arg(QYH("Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und').")));
-  Util::setToolTip(ui->cbMDefaultSubtitleTrackLanguage,
+  Util::setToolTip(ui->ldwMDefaultSubtitleTrackLanguage,
                    Q("<p>%1 %2</p><p>%3 %4</p>")
                    .arg(QYH("Certain file formats have a 'language' property for their tracks."))
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
@@ -884,7 +888,7 @@ PreferencesDialog::save() {
 
   m_cfg.m_chapterNameTemplate                           = ui->leCENameTemplate->text();
   m_cfg.m_ceTextFileCharacterSet                        = ui->cbCETextFileCharacterSet->currentData().toString();
-  m_cfg.m_defaultChapterLanguage                        = ui->cbCEDefaultLanguage->currentData().toString();
+  m_cfg.m_defaultChapterLanguage                        = Q(ui->ldwCEDefaultLanguage->language().format());
   m_cfg.m_defaultChapterCountry                         = ui->cbCEDefaultCountry->currentData().toString();
   m_cfg.m_dropLastChapterFromBlurayPlaylist             = ui->cbCEDropLastFromBlurayPlaylist->isChecked();
 
@@ -903,9 +907,9 @@ PreferencesDialog::save() {
                                                         : ui->rbMTrackPropertiesLayoutHorizontalTwoColumns->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalTwoColumns
                                                         :                                                                 Util::Settings::TrackPropertiesLayout::VerticalTabWidget;
   m_cfg.m_clearMergeSettings                            = static_cast<Util::Settings::ClearMergeSettingsAction>(ui->cbMClearMergeSettings->currentIndex());
-  m_cfg.m_defaultAudioTrackLanguage                     = ui->cbMDefaultAudioTrackLanguage->currentData().toString();
-  m_cfg.m_defaultVideoTrackLanguage                     = ui->cbMDefaultVideoTrackLanguage->currentData().toString();
-  m_cfg.m_defaultSubtitleTrackLanguage                  = ui->cbMDefaultSubtitleTrackLanguage->currentData().toString();
+  m_cfg.m_defaultAudioTrackLanguage                     = Q(ui->ldwMDefaultAudioTrackLanguage->language().format());
+  m_cfg.m_defaultVideoTrackLanguage                     = Q(ui->ldwMDefaultVideoTrackLanguage->language().format());
+  m_cfg.m_defaultSubtitleTrackLanguage                  = Q(ui->ldwMDefaultSubtitleTrackLanguage->language().format());
   m_cfg.m_whenToSetDefaultLanguage                      = static_cast<Util::Settings::SetDefaultLanguagePolicy>(ui->cbMWhenToSetDefaultLanguage->currentData().toInt());
   m_cfg.m_defaultSubtitleCharset                        = ui->cbMDefaultSubtitleCharset->currentData().toString();
   m_cfg.m_priority                                      = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());

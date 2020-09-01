@@ -827,15 +827,12 @@
               <item row="0" column="0">
                <widget class="QLabel" name="lDefaultAudioTrackLanguage">
                 <property name="text">
-                 <string>&amp;Audio tracks:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>cbMDefaultAudioTrackLanguage</cstring>
+                 <string>Audio tracks:</string>
                 </property>
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDefaultAudioTrackLanguage">
+               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultAudioTrackLanguage">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -845,7 +842,7 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDefaultSubtitleTrackLanguage">
+               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultSubtitleTrackLanguage">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -855,7 +852,7 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDefaultVideoTrackLanguage">
+               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultVideoTrackLanguage">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -867,20 +864,14 @@
               <item row="1" column="0">
                <widget class="QLabel" name="lDefaultVIdeoTrackLanguage">
                 <property name="text">
-                 <string>&amp;Video tracks:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>cbMDefaultVideoTrackLanguage</cstring>
+                 <string>Video tracks:</string>
                 </property>
                </widget>
               </item>
               <item row="2" column="0">
                <widget class="QLabel" name="lDefaultSubtitleTrackLanguage">
                 <property name="text">
-                 <string>&amp;Subtitle tracks:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>cbMDefaultSubtitleTrackLanguage</cstring>
+                 <string>Subtitle tracks:</string>
                 </property>
                </widget>
               </item>
@@ -1733,15 +1724,12 @@
            <item row="1" column="0">
             <widget class="QLabel" name="label_10">
              <property name="text">
-              <string>&amp;Language:</string>
-             </property>
-             <property name="buddy">
-              <cstring>cbCEDefaultLanguage</cstring>
+              <string>Language:</string>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="mtx::gui::Util::LanguageComboBox" name="cbCEDefaultLanguage">
+            <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwCEDefaultLanguage">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -2114,6 +2102,11 @@
    <header>mkvtoolnix-gui/util/language_combo_box.h</header>
   </customwidget>
   <customwidget>
+   <class>mtx::gui::Util::LanguageDisplayWidget</class>
+   <extends>QForm</extends>
+   <header>mkvtoolnix-gui/util/language_display_widget.h</header>
+  </customwidget>
+  <customwidget>
    <class>mtx::gui::Util::CharacterSetComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/character_set_combo_box.h</header>
@@ -2190,9 +2183,9 @@
   <tabstop>cbMDisableCompressionForAllTrackTypes</tabstop>
   <tabstop>cbMEnableDialogNormGainRemoval</tabstop>
   <tabstop>cbMDefaultSubtitleCharset</tabstop>
-  <tabstop>cbMDefaultAudioTrackLanguage</tabstop>
-  <tabstop>cbMDefaultVideoTrackLanguage</tabstop>
-  <tabstop>cbMDefaultSubtitleTrackLanguage</tabstop>
+  <tabstop>ldwMDefaultAudioTrackLanguage</tabstop>
+  <tabstop>ldwMDefaultVideoTrackLanguage</tabstop>
+  <tabstop>ldwMDefaultSubtitleTrackLanguage</tabstop>
   <tabstop>cbMWhenToSetDefaultLanguage</tabstop>
   <tabstop>cbMDeriveAudioTrackLanguageFromFileName</tabstop>
   <tabstop>cbMDeriveVideoTrackLanguageFromFileName</tabstop>
@@ -2227,7 +2220,7 @@
   <tabstop>cbCEDropLastFromBlurayPlaylist</tabstop>
   <tabstop>cbCETextFileCharacterSet</tabstop>
   <tabstop>leCENameTemplate</tabstop>
-  <tabstop>cbCEDefaultLanguage</tabstop>
+  <tabstop>ldwCEDefaultLanguage</tabstop>
   <tabstop>cbCEDefaultCountry</tabstop>
   <tabstop>cbGuiSwitchToJobOutputAfterStarting</tabstop>
   <tabstop>cbGuiUseDefaultJobDescription</tabstop>
