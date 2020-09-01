@@ -61,6 +61,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupFontAndScaling();
   setupInterfaceLanguage();
   setupTabPositions();
+  setupBCP47LanguageEditMode();
   setupDerivingTrackLanguagesFromFileName();
   setupWhenToSetDefaultLanguage();
 
@@ -761,6 +762,17 @@ PreferencesDialog::setupTrackPropertiesLayout() {
 }
 
 void
+PreferencesDialog::setupBCP47LanguageEditMode() {
+  ui->cbGuiBCP47LanguageEditingMode->clear();
+  ui->cbGuiBCP47LanguageEditingMode->addItem(QY("Free-form input"),                  static_cast<int>(Util::Settings::BCP47LanguageEditingMode::FreeForm));
+  ui->cbGuiBCP47LanguageEditingMode->addItem(QY("Individually selected components"), static_cast<int>(Util::Settings::BCP47LanguageEditingMode::Components));
+
+  Util::setComboBoxIndexIf(ui->cbGuiBCP47LanguageEditingMode, [this](auto const &, auto const &data) {
+    return data.toInt() == static_cast<int>(m_cfg.m_bcp47LanguageEditingMode);
+  });
+}
+
+void
 PreferencesDialog::setupTabPositions() {
   ui->cbGuiTabPositions->clear();
   ui->cbGuiTabPositions->addItem(QY("Top"),    static_cast<int>(QTabWidget::North));
@@ -845,6 +857,7 @@ PreferencesDialog::save() {
   // GUI page:
   m_cfg.m_uiLocale                                      = ui->cbGuiInterfaceLanguage->currentData().toString();
   m_cfg.m_tabPosition                                   = static_cast<QTabWidget::TabPosition>(ui->cbGuiTabPositions->currentData().toInt());
+  m_cfg.m_bcp47LanguageEditingMode                      = static_cast<Util::Settings::BCP47LanguageEditingMode>(ui->cbGuiBCP47LanguageEditingMode->currentData().toInt());
   m_cfg.m_uiFontFamily                                  = ui->fcbGuiFontFamily->currentFont().family();
   m_cfg.m_uiFontPointSize                               = ui->sbGuiFontPointSize->value();
   m_cfg.m_uiDisableHighDPIScaling                       = ui->cbGuiDisableHighDPIScaling->isChecked();

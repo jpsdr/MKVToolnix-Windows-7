@@ -16,6 +16,7 @@
 #include "mkvtoolnix-gui/forms/util/language_widget.h"
 #include "mkvtoolnix-gui/util/language_combo_box.h"
 #include "mkvtoolnix-gui/util/language_widget.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx::gui::Util {
@@ -66,8 +67,14 @@ LanguageWidget::LanguageWidget(QWidget *parent)
   p.ui->setupUi(this);
   Util::fixScrollAreaBackground(p.ui->saComponents);
 
-  p.ui->rbFreeForm->setChecked(true);
-  p.ui->leFreeForm->setFocus();
+  if (Settings::get().m_bcp47LanguageEditingMode == Settings::BCP47LanguageEditingMode::FreeForm) {
+    p.ui->rbFreeForm->setChecked(true);
+    p.ui->leFreeForm->setFocus();
+
+  } else {
+    p.ui->rbComponentSelection->setChecked(true);
+    p.ui->cbLanguage->setFocus();
+  }
 
   createInitialComponentWidgetList();
   createGridLayoutFromComponentWidgetList();

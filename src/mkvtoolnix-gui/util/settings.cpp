@@ -378,6 +378,7 @@ Settings::load() {
   m_warnBeforeAbortingJobs             = reg.value(s_valWarnBeforeAbortingJobs, true).toBool();
   m_warnBeforeOverwriting              = reg.value(s_valWarnBeforeOverwriting,  true).toBool();
   m_showMoveUpDownButtons              = reg.value(s_valShowMoveUpDownButtons, false).toBool();
+  m_bcp47LanguageEditingMode           = static_cast<BCP47LanguageEditingMode>(reg.value(s_valBCP47LanguageEditingMode, static_cast<int>(BCP47LanguageEditingMode::Components)).toInt());
 
   m_chapterNameTemplate                = reg.value(s_valChapterNameTemplate, QY("Chapter <NUM:2>")).toString();
   m_dropLastChapterFromBlurayPlaylist  = reg.value(s_valDropLastChapterFromBlurayPlaylist, true).toBool();
@@ -737,6 +738,7 @@ Settings::save()
   reg.setValue(s_valWarnBeforeAbortingJobs,             m_warnBeforeAbortingJobs);
   reg.setValue(s_valWarnBeforeOverwriting,              m_warnBeforeOverwriting);
   reg.setValue(s_valShowMoveUpDownButtons,              m_showMoveUpDownButtons);
+  reg.setValue(s_valBCP47LanguageEditingMode,           static_cast<int>(m_bcp47LanguageEditingMode));
 
   reg.setValue(s_valChapterNameTemplate,                m_chapterNameTemplate);
   reg.setValue(s_valDropLastChapterFromBlurayPlaylist,  m_dropLastChapterFromBlurayPlaylist);

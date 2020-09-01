@@ -171,8 +171,8 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_30">
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item>
+            <layout class="QGridLayout" name="gridLayout_9">
+             <item row="0" column="0">
               <widget class="QLabel" name="label_9">
                <property name="text">
                 <string>Tab &amp;position in tab widgets:</string>
@@ -182,7 +182,7 @@
                </property>
               </widget>
              </item>
-             <item>
+             <item row="0" column="1">
               <widget class="QComboBox" name="cbGuiTabPositions">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -191,6 +191,19 @@
                 </sizepolicy>
                </property>
               </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_21">
+               <property name="text">
+                <string>Default IETF BCP 47 language editing &amp;mode:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbGuiBCP47LanguageEditingMode</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cbGuiBCP47LanguageEditingMode"/>
              </item>
             </layout>
            </item>
@@ -2096,12 +2109,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>mtx::gui::Util::BasicTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>mkvtoolnix-gui/util/basic_tab_widget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>mtx::gui::Util::LanguageComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/language_combo_box.h</header>
@@ -2112,15 +2119,21 @@
    <header>mkvtoolnix-gui/util/character_set_combo_box.h</header>
   </customwidget>
   <customwidget>
+   <class>mtx::gui::Util::CountryComboBox</class>
+   <extends>QComboBox</extends>
+   <header>mkvtoolnix-gui/util/country_combo_box.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::BasicTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>mkvtoolnix-gui/util/basic_tab_widget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>mtx::gui::Util::SideBySideMultiSelect</class>
    <extends>QWidget</extends>
    <header>mkvtoolnix-gui/util/side_by_side_multi_select.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>mtx::gui::Util::CountryComboBox</class>
-   <extends>QComboBox</extends>
-   <header>mkvtoolnix-gui/util/country_combo_box.h</header>
   </customwidget>
   <customwidget>
    <class>mtx::gui::Info::JobSettingsWidget</class>
@@ -2145,6 +2158,7 @@
   <tabstop>cbGuiDisableToolTips</tabstop>
   <tabstop>cbGuiCheckForUpdates</tabstop>
   <tabstop>cbGuiTabPositions</tabstop>
+  <tabstop>cbGuiBCP47LanguageEditingMode</tabstop>
   <tabstop>cbGuiElideTabHeaderLabels</tabstop>
   <tabstop>cbGuiShowToolSelector</tabstop>
   <tabstop>cbGuiShowMoveUpDownButtons</tabstop>

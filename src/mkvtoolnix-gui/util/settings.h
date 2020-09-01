@@ -120,6 +120,11 @@ public:
     Always,
   };
 
+  enum class BCP47LanguageEditingMode {
+    FreeForm,
+    Components,
+  };
+
   class RunProgramConfig {
   public:
     RunProgramType m_type{RunProgramType::ExecuteProgram};
@@ -198,6 +203,8 @@ public:
 
   Info::JobSettings m_defaultInfoJobSettings;
   RunProgramConfigList m_runProgramConfigurations;
+
+  BCP47LanguageEditingMode m_bcp47LanguageEditingMode;
 
 public:
   Settings();

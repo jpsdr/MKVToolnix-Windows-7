@@ -85,6 +85,7 @@ protected:
   void setupToolTips();
   void setupConnections();
 
+  void setupBCP47LanguageEditMode();
   void setupInterfaceLanguage();
   void setupTabPositions();
   void setupDerivingTrackLanguagesFromFileName();
