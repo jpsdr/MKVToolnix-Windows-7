@@ -104,7 +104,6 @@ public:
   static Iso639LanguageList const &commonIso639Languages();
   static TopLevelDomainCountryCodeList const &topLevelDomainCountryCodes();
   static TopLevelDomainCountryCodeList const &commonTopLevelDomainCountryCodes();
-  static QString const &descriptionFromIso639_2LanguageCode(QString const &code);
   static QString const &descriptionFromTopLevelDomainCountryCode(QString const &code);
   static CharacterSetList const &characterSets();
   static CharacterSetList const &commonCharacterSets();

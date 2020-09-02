@@ -335,12 +335,6 @@ App::commonCharacterSets() {
 }
 
 QString const &
-App::descriptionFromIso639_2LanguageCode(QString const &code) {
-  initializeLanguageLists();
-  return s_iso639_2LanguageCodeToDescription.contains(code) ? s_iso639_2LanguageCodeToDescription[code] : code;
-}
-
-QString const &
 App::descriptionFromTopLevelDomainCountryCode(QString const &code) {
   initializeLanguageLists();
   return s_topLevelDomainCountryCodeToDescription.contains(code) ? s_topLevelDomainCountryCodeToDescription[code] : code;
