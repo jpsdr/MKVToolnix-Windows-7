@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2020-08-18 16:24+0200\n"
-"PO-Revision-Date: 2020-08-19 07:00+0000\n"
+"PO-Revision-Date: 2020-08-29 17:48+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -307,7 +307,7 @@ msgstr "<option>--command-line-charset</option> <parameter>character-set</parame
 #: doc/man/mkvinfo.xml:161
 #: doc/man/mkvpropedit.xml:369
 msgid "Sets the character set to convert strings given on the command line from. It defaults to the character set given by system's current locale."
-msgstr "Définit le jeu de caractères utilisé pour la conversion des chaînes fournies en ligne de commande. Par défaut, celui-ci correspond à celui donné par la « locale » du système."
+msgstr "Définit le jeu de caractères utilisé pour la conversion des chaînes fournies en ligne de commande. Par défaut, celui-ci correspond à celui donné par la « locale » du système."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:114
@@ -323,7 +323,7 @@ msgstr "<option>--output-charset</option> <parameter>character-set</parameter>"
 #: doc/man/mkvmerge.xml:2099
 #: doc/man/mkvpropedit.xml:379
 msgid "Sets the character set to which strings are converted that are to be output.  It defaults to the character set given by system's current locale."
-msgstr "Définit le jeu de caractères dans lequel les chaînes en sortie sont converties. Par défaut, celui-ci correspond à celui donné par la « locale » système."
+msgstr "Définit le jeu de caractères dans lequel les chaînes en sortie sont converties. Par défaut, celui-ci correspond à celui donné par la « locale » du système."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:124
@@ -1226,7 +1226,7 @@ msgstr "Variables d'environment"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:907
 msgid "&mkvextract; uses the default variables that determine the system's locale (e.g. <varname>LANG</varname> and the <varname>LC_*</varname> family). Additional variables:"
-msgstr "&mkvmerge; utilise les variables par défaut qui déterminent la locale du système (par ex. <varname>LANG</varname> et la famille <varname>LC_*</varname>). Variables additionnelles :"
+msgstr "&mkvmerge; utilise les variables par défaut qui déterminent la « locale » du système (par ex. <varname>LANG</varname> et la famille <varname>LC_*</varname>). Variables additionnelles :"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:913
@@ -1478,7 +1478,7 @@ msgstr "<constant>2</constant> -- Ce code de fermeture est utilisé lorsqu'une e
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:362
 msgid "&mkvinfo; uses the default variables that determine the system's locale (e.g. <varname>LANG</varname> and the <varname>LC_*</varname> family). Additional variables:"
-msgstr "&mkvmerge; utilise les variables par défaut qui déterminent la « locale » du système (par ex. <varname>LANG</varname> et la famille <varname>LC_*</varname>). Variables additionnelles :"
+msgstr "&mkvmerge; utilise les variables par défaut qui déterminent la « locale » du système (par ex. <varname>LANG</varname> et la famille <varname>LC_*</varname>). Variables additionnelles :"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:368
@@ -3305,7 +3305,7 @@ msgstr "<option>--sub-charset</option> <parameter>TID:character-set</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1957
 msgid "Sets the character set for the conversion to UTF-8 for UTF-8 subtitles for the given track ID. If not specified the charset will be derived from the current locale settings. Note that a charset is not needed for subtitles read from &matroska; files or from Kate streams, as these are always stored in UTF-8. See the section about <link linkend=\"mkvmerge.text_files_and_charsets\">text files and character sets</link> for an explanation how &mkvmerge; converts between character sets."
-msgstr "Définit le jeu de caractères pour la conversion vers UTF-8 des sous-titres UTF-8 pour l'ID de piste donné. Si non spécifié, le jeu de caractères sera déduit de la localisation courante. Noter qu'un jeu de caractères n'est pas requis pour les sous-titres lus depuis des fichiers &matroska; ou des flux Kate, car ils sont toujours stockés en UTF-8. Voir la section à propos <link linkend=\"mkvmerge.text_files_and_charsets\">des fichiers texte et des jeux de caractères</link> pour savoir comment &mkvmerge; convertit les jeux de caractères."
+msgstr "Définit le jeu de caractères pour la conversion vers UTF-8 des sous-titres UTF-8 pour l'ID de piste donné. Si non spécifié, le jeu de caractères sera déduit de la « locale » courante. Noter qu'un jeu de caractères n'est pas requis pour les sous-titres lus depuis des fichiers &matroska; ou des flux Kate, car ils sont toujours stockés en UTF-8. Voir la section à propos <link linkend=\"mkvmerge.text_files_and_charsets\">des fichiers texte et des jeux de caractères</link> pour savoir comment &mkvmerge; convertit les jeux de caractères."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:1972
@@ -3425,7 +3425,7 @@ msgstr "Sélectionner '<literal>lowest</literal>' oblige aussi &mkvmerge; à sé
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2086
 msgid "Sets the character set to convert strings given on the command line from. It defaults to the character set given by system's current locale. This settings applies to arguments of the following options: <link linkend=\"mkvmerge.description.title\"><option>--title</option></link>, <link linkend=\"mkvmerge.description.track_name\"><option>--track-name</option></link> and <link linkend=\"mkvmerge.description.attachment_description\"><option>--attachment-description</option></link>."
-msgstr "Définit le jeu de caractères pour convertir les chaînes données en ligne de commande. C'est par défaut le jeu de caractères fourni par la « locale » actuelle du système. Ce paramètre s'applique aux arguments des options suivantes : <link linkend=\"mkvmerge.description.title\"><option>--title</option></link>, <link linkend=\"mkvmerge.description.track_name\"><option>--track-name</option></link> et <link linkend=\"mkvmerge.description.attachment_description\"><option>--attachment-description</option></link>."
+msgstr "Définit le jeu de caractères pour convertir les chaînes données en ligne de commande. C'est par défaut le jeu de caractères fourni par la « locale » actuelle du système. Ce paramètre s'applique aux arguments des options suivantes : <link linkend=\"mkvmerge.description.title\"><option>--title</option></link>, <link linkend=\"mkvmerge.description.track_name\"><option>--track-name</option></link> et <link linkend=\"mkvmerge.description.attachment_description\"><option>--attachment-description</option></link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2109
@@ -3881,7 +3881,7 @@ msgstr "Tout le texte dans un fichier &matroska; est encodé en UTF-8. Cela sign
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2568
 msgid "&mkvmerge; does this conversion automatically based on the presence of a byte order marker (short: <abbrev>BOM</abbrev>) or the system's current locale. How the character set is inferred from the locale depends on the operating system that &mkvmerge; is run on."
-msgstr "&mkvmerge; effectue cette conversion automatiquement d'après la présence d'un marqueur d'ordre d'octet (byte order marker, soit : <abbrev>BOM</abbrev>) ou la localisation du système. Le jeu de caractères déduit de la localisation dépend du système d'exploitation sur lequel est exécuté &mkvmerge;."
+msgstr "&mkvmerge; effectue cette conversion automatiquement d'après la présence d'un marqueur d'ordre d'octet (byte order marker, soit : <abbrev>BOM</abbrev>) ou la « locale » du système. Le jeu de caractères déduit de la « locale » dépend du système d'exploitation sur lequel est exécuté &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2574
@@ -4713,7 +4713,7 @@ msgstr "<constant>2</constant> -- Ce code de fermeture est utilisé après la su
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3277
 msgid "&mkvmerge; uses the default variables that determine the system's locale (e.g. <varname>LANG</varname> and the <varname>LC_*</varname> family). Additional variables:"
-msgstr "&mkvmerge; utilise les variables par défaut qui déterminent la « locale » du système (par ex. <varname>LANG</varname> et la famille <varname>LC_*</varname>). Variables additionnelles :"
+msgstr "&mkvmerge; utilise les variables par défaut qui déterminent la « locale » du système (par ex. <varname>LANG</varname> et la famille <varname>LC_*</varname>). Variables additionnelles :"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:3283
@@ -5292,7 +5292,7 @@ msgstr "<constant>2</constant> -- Ce code de fermeture est utilisé lorsqu'une e
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:741
 msgid "&mkvpropedit; uses the default variables that determine the system's locale (e.g. <varname>LANG</varname> and the <varname>LC_*</varname> family). Additional variables:"
-msgstr "&mkvpropedit; utilise les variables par défaut qui déterminent la « locale » du système (par ex. <varname>LANG</varname> et la famille <varname>LC_*</varname>). Variables additionnelles :"
+msgstr "&mkvpropedit; utilise les variables par défaut qui déterminent la « locale » du système (par ex. <varname>LANG</varname> et la famille <varname>LC_*</varname>). Variables additionnelles :"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:747
