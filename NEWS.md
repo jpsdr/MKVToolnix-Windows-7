@@ -40,6 +40,15 @@
   `--disable-language-ietf` that causes mkvpropedit to apply changes to the
   `language` track header property only to the legacy language track header
   element.
+* MKVToolNix GUI: multiplexer: added full support for IETF BCP 47/RFC 5646
+  language tags for both track and chapter languages. Part of the
+  implementation of #2419.
+* MKVToolNix GUI: chapter: added full support for IETF BCP 47/RFC 5646
+  language tags for chapter languages. Part of the implementation of #2419.
+* MKVToolNix GUI: header editor: added full support for IETF BCP 47/RFC 5646
+  language tags for track header languages. The header editor allows editing
+  of the legacy language elements and the IETF BCP 47 language elements
+  independent of each other. Part of the implementation of #2419.
 
 ## Bug fixes
 
