@@ -940,7 +940,7 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveAudioTrackLanguageFromFileName">
+            <widget class="QComboBox" name="cbMDeriveAudioTrackLanguageFromFileName">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -960,7 +960,7 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveVideoTrackLanguageFromFileName">
+            <widget class="QComboBox" name="cbMDeriveVideoTrackLanguageFromFileName">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -980,7 +980,7 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="mtx::gui::Util::LanguageComboBox" name="cbMDeriveSubtitleTrackLanguageFromFileName">
+            <widget class="QComboBox" name="cbMDeriveSubtitleTrackLanguageFromFileName">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -2096,11 +2096,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>mtx::gui::Util::LanguageComboBox</class>
-   <extends>QComboBox</extends>
-   <header>mkvtoolnix-gui/util/language_combo_box.h</header>
-  </customwidget>
   <customwidget>
    <class>mtx::gui::Util::LanguageDisplayWidget</class>
    <extends>QForm</extends>

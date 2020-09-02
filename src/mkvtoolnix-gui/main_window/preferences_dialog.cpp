@@ -793,6 +793,8 @@ PreferencesDialog::setupDerivingTrackLanguagesFromFileName() {
     cb.addItem(QY("Only if the source doesn't contain a language"),  static_cast<int>(Util::Settings::DeriveLanguageFromFileNamePolicy::OnlyIfAbsent));
     cb.addItem(QY("Also if the language is 'undetermined' ('und')"), static_cast<int>(Util::Settings::DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined));
 
+    Util::fixComboBoxViewWidth(cb);
+
     Util::setComboBoxIndexIf(&cb, [policy](QString const &, QVariant const &data) {
       return data.toInt() == static_cast<int>(policy);
     });
