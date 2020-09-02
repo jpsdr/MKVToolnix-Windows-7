@@ -35,8 +35,8 @@ public:
 
   void setAdditionalLanguages(QStringList const &additionalLanguages);
 
-  void setLanguage(QString const &language);
-  QString language() const;
+  void setLanguage(mtx::bcp47::language_c const &language);
+  mtx::bcp47::language_c language() const;
 
 public Q_SLOTS:
   void updateFromFreeForm();

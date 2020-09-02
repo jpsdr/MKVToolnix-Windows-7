@@ -52,11 +52,11 @@ LanguageDialog::setAdditionalLanguages(QStringList const &additionalLanguages) {
 }
 
 void
-LanguageDialog::setLanguage(QString const &language) {
+LanguageDialog::setLanguage(mtx::bcp47::language_c const &language) {
   p_func()->ui->languageWidget->setLanguage(language);
 }
 
-QString
+mtx::bcp47::language_c
 LanguageDialog::language()
   const {
   return p_func()->ui->languageWidget->language();

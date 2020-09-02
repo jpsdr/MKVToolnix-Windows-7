@@ -5,6 +5,7 @@
 #include <QDateTime>
 #include <QModelIndex>
 
+#include "common/bcp47.h"
 #include "common/qt.h"
 #include "common/qt_kax_analyzer.h"
 #include "common/timestamp.h"
@@ -169,7 +170,7 @@ protected:
   QModelIndex addEdition(bool before);
   QModelIndex addChapter(bool before);
 
-  ChapterPtr createEmptyChapter(int64_t startTime, int chapterNumber, OptQString const &nameTemplate = OptQString{}, OptQString const &language = OptQString{}, OptQString const &country = OptQString{});
+  ChapterPtr createEmptyChapter(int64_t startTime, int chapterNumber, OptQString const &nameTemplate = OptQString{}, mtx::bcp47::language_c const &language = {}, OptQString const &country = OptQString{});
 
   void saveAsImpl(bool requireNewFileName, std::function<bool(bool, QString &)> const &worker);
   void saveAsXmlImpl(bool requireNewFileName);
@@ -181,7 +182,7 @@ protected:
   void shiftTimestamps(QStandardItem *item, int64_t delta);
   void constrictTimestamps(QStandardItem *item, std::optional<uint64_t> const &constrictStart, std::optional<uint64_t> const &constrictEnd);
   std::pair<std::optional<uint64_t>, std::optional<uint64_t>> expandTimestamps(QStandardItem *item);
-  void setLanguages(QStandardItem *item, QString const &language);
+  void setLanguages(QStandardItem *item, mtx::bcp47::language_c const &language);
   void setCountries(QStandardItem *item, QString const &country);
   void setEndTimestamps(QStandardItem *startItem);
   void removeEndTimestamps(QStandardItem *startItem);

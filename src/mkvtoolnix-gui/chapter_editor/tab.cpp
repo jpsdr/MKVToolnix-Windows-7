@@ -1289,7 +1289,7 @@ ChapterPtr
 Tab::createEmptyChapter(int64_t startTime,
                         int chapterNumber,
                         std::optional<QString> const &nameTemplate,
-                        std::optional<QString> const &language,
+                        mtx::bcp47::language_c const &language,
                         std::optional<QString> const &country) {
   auto &cfg    = Util::Settings::get();
   auto chapter = std::make_shared<KaxChapterAtom>();
@@ -1300,7 +1300,7 @@ Tab::createEmptyChapter(int64_t startTime,
   if (!name.isEmpty()) {
     auto &display = GetChild<KaxChapterDisplay>(*chapter);
     GetChild<KaxChapterString>(display).SetValue(to_wide(name));
-    mtx::chapters::set_languages_in_display(display, language ? mtx::bcp47::language_c::parse(to_utf8(*language)) : cfg.m_defaultChapterLanguage);
+    mtx::chapters::set_languages_in_display(display, language.is_valid() ? language : cfg.m_defaultChapterLanguage);
     if ((country && !country->isEmpty()) || !cfg.m_defaultChapterCountry.isEmpty())
       GetChild<KaxChapterCountry>(display).SetValue(to_utf8((country && !country->isEmpty()) ? *country : cfg.m_defaultChapterCountry));
   }
@@ -1486,7 +1486,7 @@ Tab::expandTimestamps(QStandardItem *item) {
 
 void
 Tab::setLanguages(QStandardItem *item,
-                  QString const &language) {
+                  mtx::bcp47::language_c const &language) {
   auto p = p_func();
 
   if (!item)
@@ -1497,7 +1497,7 @@ Tab::setLanguages(QStandardItem *item,
     for (auto const &element : *chapter) {
       auto kDisplay = dynamic_cast<KaxChapterDisplay *>(element);
       if (kDisplay)
-        mtx::chapters::set_languages_in_display(*kDisplay, to_utf8(language));
+        mtx::chapters::set_languages_in_display(*kDisplay, language);
     }
 
   for (auto row = 0, numRows = item->rowCount(); row < numRows; ++row)

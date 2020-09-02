@@ -6,6 +6,10 @@
 
 #include "mkvtoolnix-gui/types.h"
 
+namespace mtx::bcp47 {
+class language_c;
+}
+
 namespace mtx::gui::ChapterEditor {
 
 namespace Ui {
@@ -26,7 +30,7 @@ public:
   int firstChapterNumber() const;
   uint64_t startTimestamp() const;
   QString nameTemplate() const;
-  QString language() const;
+  mtx::bcp47::language_c language() const;
   OptQString country() const;
 
 public Q_SLOTS:

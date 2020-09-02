@@ -5,6 +5,10 @@
 #include <QDialog>
 #include <QFlags>
 
+namespace mtx::bcp47 {
+class language_c;
+}
+
 namespace mtx::gui::ChapterEditor {
 
 namespace Ui {
@@ -39,7 +43,7 @@ public:
   Actions actions() const;
   int64_t shiftBy() const;
   double multiplyBy() const;
-  QString language() const;
+  mtx::bcp47::language_c language() const;
   QString country() const;
 
   void setupUi(QStringList const &additionalLanguages, QStringList const &additionalCountryCodes);

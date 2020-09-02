@@ -120,10 +120,10 @@ MassModificationDialog::shiftBy()
   return timestamp;
 }
 
-QString
+mtx::bcp47::language_c
 MassModificationDialog::language()
   const {
-  return Q(m_ui->ldwLanguage->language().format());
+  return m_ui->ldwLanguage->language();
 }
 
 QString

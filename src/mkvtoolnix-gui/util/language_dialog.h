@@ -4,6 +4,10 @@
 
 #include <QDialog>
 
+namespace mtx::bcp47 {
+class language_c;
+}
+
 namespace mtx::gui::Util {
 
 namespace Ui {
@@ -27,8 +31,8 @@ public:
 
   void setAdditionalLanguages(QStringList const &additionalLanguages);
 
-  void setLanguage(QString const &language);
-  QString language() const;
+  void setLanguage(mtx::bcp47::language_c const &language);
+  mtx::bcp47::language_c language() const;
 
   void retranslateUi();
 

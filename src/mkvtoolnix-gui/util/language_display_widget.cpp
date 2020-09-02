@@ -67,14 +67,14 @@ LanguageDisplayWidget::editLanguage() {
   LanguageDialog dlg{this};
 
   if (p.language.is_valid())
-    dlg.setLanguage(Q(p.language.format()));
+    dlg.setLanguage(p.language);
 
   dlg.setAdditionalLanguages(p.additionalLanguages);
 
   if (!dlg.exec())
     return;
 
-  p.language = mtx::bcp47::language_c::parse(to_utf8(dlg.language()));
+  p.language = dlg.language();
 
   updateDisplay();
 

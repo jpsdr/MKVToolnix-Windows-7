@@ -102,10 +102,10 @@ GenerateSubChaptersParametersDialog::nameTemplate()
   return m_ui->leNameTemplate->text();
 }
 
-QString
+mtx::bcp47::language_c
 GenerateSubChaptersParametersDialog::language()
   const {
-  return Q(m_ui->ldwLanguage->language().format());
+  return m_ui->ldwLanguage->language();
 }
 
 OptQString

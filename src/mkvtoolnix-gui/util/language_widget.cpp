@@ -164,25 +164,24 @@ LanguageWidget::setAdditionalLanguages(QStringList const &additionalLanguages) {
 }
 
 void
-LanguageWidget::setLanguage(QString const &language) {
+LanguageWidget::setLanguage(mtx::bcp47::language_c const &language) {
   auto &p = *p_func();
 
-  auto parsedLanguage = mtx::bcp47::language_c::parse(to_utf8(language));
-  if (parsedLanguage.is_valid() && parsedLanguage.has_valid_iso639_code()) {
-    p.initialISO639_2Code = Q(parsedLanguage.get_iso639_2_code());
+  if (language.is_valid() && language.has_valid_iso639_code()) {
+    p.initialISO639_2Code = Q(language.get_iso639_2_code());
     reinitializeLanguageComboBox();
   }
 
-  p.ui->leFreeForm->setText(language);
+  p.ui->leFreeForm->setText(Q(language.format()));
 
   if (p.ui->rbComponentSelection->isChecked())
     updateFromFreeForm();
 }
 
-QString
+mtx::bcp47::language_c
 LanguageWidget::language()
   const {
-  return p_func()->ui->leFreeForm->text();
+  return mtx::bcp47::language_c::parse(to_utf8(p_func()->ui->leFreeForm->text()));
 }
 
 QVector<QWidget *>
