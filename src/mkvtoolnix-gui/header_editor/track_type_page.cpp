@@ -2,7 +2,6 @@
 
 #include "common/ebml.h"
 #include "common/qt.h"
-#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"

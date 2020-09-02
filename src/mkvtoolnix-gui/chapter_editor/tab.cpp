@@ -25,7 +25,6 @@
 #include "common/strings/parsing.h"
 #include "common/translation.h"
 #include "common/xml/ebml_chapters_converter.h"
-#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/chapter_editor/tab.h"
 #include "mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.h"
 #include "mkvtoolnix-gui/chapter_editor/name_model.h"
