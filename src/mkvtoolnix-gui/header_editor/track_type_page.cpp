@@ -22,11 +22,14 @@ TrackTypePage::TrackTypePage(Tab &parent,
   , m_trackNumber{FindChildValue<KaxTrackNumber>(m_master)}
   , m_trackUid{FindChildValue<KaxTrackUID>(m_master)}
   , m_codecId{Q(FindChildValue<KaxCodecID>(m_master))}
-  , m_language{Q(FindChildValue<KaxTrackLanguage>(m_master, "eng"s))}
   , m_name{Q(FindChildValue<KaxTrackName>(m_master))}
   , m_defaultTrackFlag{!!FindChildValue<KaxTrackFlagDefault>(m_master, 1u)}
   , m_forcedTrackFlag{!!FindChildValue<KaxTrackFlagForced>(m_master, 0u)}
 {
+  m_language = mtx::bcp47::language_c::parse(FindChildValue<KaxLanguageIETF>(m_master));
+  if (!m_language.is_valid())
+    m_language = mtx::bcp47::language_c::parse(FindChildValue<KaxTrackLanguage>(m_master, "eng"s));
+
   ui->setupUi(this);
 }
 
@@ -67,7 +70,7 @@ TrackTypePage::retranslateUi() {
   ui->m_lUid->setText(Q("%1").arg(m_trackUid));
 
   ui->m_lLanguageLabel->setText(QY("Language:"));
-  ui->m_lLanguage->setText(App::descriptionFromIso639_2LanguageCode(m_language));
+  ui->m_lLanguage->setText(Q(m_language.format_long()));
 
   ui->m_lNameLabel->setText(QY("Name:"));
   ui->m_lName->setText(m_name);
@@ -90,7 +93,7 @@ TrackTypePage::setItems(QList<QStandardItem *> const &items)
   TopLevelPage::setItems(items);
 
   items.at(1)->setText(m_codecId);
-  items.at(2)->setText(App::descriptionFromIso639_2LanguageCode(m_language));
+  items.at(2)->setText(Q(m_language.format_long()));
   items.at(3)->setText(m_name);
   items.at(4)->setText(QString::number(m_trackUid));
   items.at(5)->setText(m_defaultTrackFlag ? QY("Yes") : QY("No"));
