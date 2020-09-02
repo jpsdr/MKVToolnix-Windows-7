@@ -14,6 +14,7 @@
 #include "common/qt.h"
 #include "common/sorting.h"
 #include "mkvtoolnix-gui/forms/util/language_widget.h"
+#include "mkvtoolnix-gui/util/container.h"
 #include "mkvtoolnix-gui/util/language_combo_box.h"
 #include "mkvtoolnix-gui/util/language_widget.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -140,10 +141,10 @@ LanguageWidget::reinitializeLanguageComboBox() {
   if (!p.initialISO639_2Code.isEmpty())
     additionalItems << p.initialISO639_2Code;
 
-  auto uniqueItems = QSet<QString>{additionalItems.begin(), additionalItems.end()};
+  auto uniqueItems = qListToSet(additionalItems);
 
   p.ui->cbLanguage
-    ->setAdditionalItems(QStringList{uniqueItems.begin(), uniqueItems.end()})
+    ->setAdditionalItems(qSetToList(uniqueItems))
     .reInitializeIfNecessary();
 }
 
