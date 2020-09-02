@@ -25,11 +25,16 @@
   valid ISO 639-2 language code it will also set the legacy "Language" track
   header element to the included ISO 639-2 code. Part of the implementation of
   #2419.
-* mkvmerge: IETF BCP 47/RFC 5646 language tags: mkvmerge will now write
-  "ChapLanguageIETF" elements when creating chapter atoms, either when reading
-  the simple chapter format or when generating chapters due to the
+* mkvmerge: IETF BCP 47/RFC 5646 language tags in chapters: mkvmerge will now
+  write "ChapLanguageIETF" elements when creating chapter atoms, either when
+  reading the simple chapter format or when generating chapters due to the
   `--generate-chapters` command line option. Part of the implementation of
   #2419.
+* mkvmerge, mkvpropedit, MKVToolNix GUI's chapter editor: IETF BCP 47/RFC 5646
+  language tags in chapters: when reading XML chapter files the programs will
+  now add "ChapLanguageIETF" elements for atoms that don't contain them. The
+  values are derived from existing "ChapterLanguage" elements. Part of the
+  implementation of #2419.
 * mkvpropedit: IETF BCP 47/RFC 5646 language tags: setting/deleting the track
   language now acts on both the old language element as well as the
   "LanguageIETF" track header element. Part of the implementation of #2419.

@@ -140,16 +140,37 @@ ebml_chapters_converter_c::fix_display(KaxChapterDisplay &display)
   if (!FindChild<KaxChapterString>(display))
     throw conversion_x{Y("<ChapterDisplay> is missing the <ChapterString> child.")};
 
-  auto clanguage = FindChild<KaxChapterLanguage>(display);
-  if (!clanguage)
-    display.PushElement((new KaxChapterLanguage)->SetValue("eng"));
+  auto clanguage_ietf  = FindChild<KaxChapLanguageIETF>(display);
+  auto clanguage       = FindChild<KaxChapterLanguage>(display);
+  auto value_to_parse  = clanguage_ietf ? clanguage_ietf->GetValue()
+                       : clanguage      ? clanguage->GetValue()
+                       :                  "eng"s;
+  auto parsed_language = mtx::bcp47::language_c::parse(value_to_parse);
 
-  else {
-    auto language_opt = mtx::iso639::look_up(std::string(*clanguage));
+  if (!parsed_language.is_valid())
+    throw conversion_x{fmt::format(Y("'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"), value_to_parse, parsed_language.get_error())};
+
+  if (!clanguage_ietf && !mtx::bcp47::language_c::is_disabled()) {
+    clanguage_ietf = new KaxChapLanguageIETF;
+    display.PushElement(*clanguage_ietf);
+  }
+
+  if (clanguage_ietf)
+    clanguage_ietf->SetValue(parsed_language.format());
+
+  if (parsed_language.has_valid_iso639_code()) {
+    if (!clanguage) {
+      clanguage = new KaxChapterLanguage;
+      display.PushElement(*clanguage);
+    }
+
+    clanguage->SetValue(parsed_language.get_iso639_2_code());
+
+  } else if (clanguage) {
+    auto language_opt = mtx::iso639::look_up(clanguage->GetValue());
 
     if (!language_opt)
       throw conversion_x{fmt::format(Y("'{0}' is not a valid ISO 639-2 language code."), clanguage->GetValue())};
-
   }
 
   auto ccountry = FindChild<KaxChapterCountry>(display);
