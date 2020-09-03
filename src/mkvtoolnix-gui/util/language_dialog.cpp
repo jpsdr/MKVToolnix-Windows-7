@@ -70,7 +70,6 @@ LanguageDialog::LanguageDialog(QWidget *parent)
   auto &p = *p_ptr;
 
   p.ui->setupUi(this);
-  Util::fixScrollAreaBackground(p.ui->saComponents);
 
   if (Settings::get().m_bcp47LanguageEditingMode == Settings::BCP47LanguageEditingMode::FreeForm) {
     p.ui->rbFreeForm->setChecked(true);
