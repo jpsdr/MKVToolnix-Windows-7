@@ -117,6 +117,7 @@ LanguageDialog::createGridLayoutFromComponentWidgetList() {
   delete p.ui->sawComponents->layout();
 
   auto layout = new QGridLayout;
+  layout->setContentsMargins(0, 0, 0, 0);
 
   for (auto rowIdx = 0, numRows = p.componentWidgets.size(); rowIdx < numRows; ++rowIdx) {
     auto &row = p.componentWidgets[rowIdx];
@@ -125,6 +126,10 @@ LanguageDialog::createGridLayoutFromComponentWidgetList() {
       if (row[columnIdx])
         layout->addWidget(row[columnIdx], rowIdx, columnIdx, 1, 1);
   }
+
+  auto spacer = new QSpacerItem{0, 0, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding};
+
+  layout->addItem(spacer, p.componentWidgets.size(), 1, 1, 1);
 
   p.ui->sawComponents->setLayout(layout);
   p.ui->sawComponents->updateGeometry();
