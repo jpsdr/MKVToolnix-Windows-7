@@ -13,8 +13,8 @@
 
 #include "common/common_pch.h"
 
-#include <sstream>
-
+#include "common/bcp47.h"
+#include "common/iso639.h"
 #include "common/mm_io_x.h"
 #include "common/strings/formatting.h"
 #include "common/xml/ebml_tags_converter.h"
@@ -45,9 +45,11 @@ ebml_tags_converter_c::setup_maps() {
   m_debug_to_tag_name_map["TagString"]          = "String";
   m_debug_to_tag_name_map["TagBinary"]          = "Binary";
   m_debug_to_tag_name_map["TagLanguage"]        = "TagLanguage";
+  m_debug_to_tag_name_map["TagLanguageIETF"]    = "TagLanguageIETF";
   m_debug_to_tag_name_map["TagDefault"]         = "DefaultLanguage";
 
   m_limits["TagDefault"]                        = limits_t{ true, true, 0, 1 };
+  m_limits["TagLanguageIETF"]                   = limits_t{ true, true, 0, 1 };
 
   reverse_debug_to_tag_name_map();
 
@@ -100,6 +102,39 @@ ebml_tags_converter_c::fix_tag(KaxTag &tag)
     throw conversion_x{ Y("Only one of <String> and <Binary> may be used beneath <Simple> but not both at the same time.") };
   if (!string && !binary && !FindChild<KaxTagSimple>(*simple))
     throw conversion_x{ Y("<Simple> must contain either a <String> or a <Binary> child.") };
+
+  auto tlanguage_ietf  = FindChild<KaxTagLanguageIETF>(simple);
+  auto tlanguage       = FindChild<KaxTagLangue>(simple);
+  auto value_to_parse  = tlanguage_ietf ? tlanguage_ietf->GetValue()
+                       : tlanguage      ? tlanguage->GetValue()
+                       :                  "eng"s;
+  auto parsed_language = mtx::bcp47::language_c::parse(value_to_parse);
+
+  if (!parsed_language.is_valid())
+    throw conversion_x{fmt::format(Y("'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"), value_to_parse, parsed_language.get_error())};
+
+  if (!tlanguage_ietf && !mtx::bcp47::language_c::is_disabled()) {
+    tlanguage_ietf = new KaxTagLanguageIETF;
+    simple->PushElement(*tlanguage_ietf);
+  }
+
+  if (tlanguage_ietf)
+    tlanguage_ietf->SetValue(parsed_language.format());
+
+  if (parsed_language.has_valid_iso639_code()) {
+    if (!tlanguage) {
+      tlanguage = new KaxTagLangue;
+      simple->PushElement(*tlanguage);
+    }
+
+    tlanguage->SetValue(parsed_language.get_iso639_2_code());
+
+  } else if (tlanguage) {
+    auto language_opt = mtx::iso639::look_up(tlanguage->GetValue());
+
+    if (!language_opt)
+      throw conversion_x{fmt::format(Y("'{0}' is not a valid ISO 639-2 language code."), tlanguage->GetValue())};
+  }
 }
 
 std::shared_ptr<KaxTags>

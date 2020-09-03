@@ -310,6 +310,7 @@ remove_elements_unsupported_by_webm(EbmlMaster &master) {
     add(KaxTagSimple);
     add(KaxTagName);
     add(KaxTagLangue);
+    add(KaxTagLanguageIETF);
     add(KaxTagDefault);
     add(KaxTagString);
     add(KaxTagBinary);

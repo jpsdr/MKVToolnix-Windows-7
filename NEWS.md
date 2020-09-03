@@ -30,6 +30,10 @@
   reading the simple chapter format or when generating chapters due to the
   `--generate-chapters` command line option. Part of the implementation of
   #2419.
+* mkvmerge: IETF BCP 47/RFC 5646 language tags in tags: mkvmerge will now
+  write "TagLanguageIETF" elements when creating "simple tag" elements, either
+  when reading tag XML files or when generating them. Part of the
+  implementation of #2419.
 * mkvmerge, mkvpropedit, MKVToolNix GUI's chapter editor: IETF BCP 47/RFC 5646
   language tags in chapters: when reading XML chapter files the programs will
   now add "ChapLanguageIETF" elements for atoms that don't contain them. The
