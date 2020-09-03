@@ -93,9 +93,16 @@ LanguageDialog::LanguageDialog(QWidget *parent)
 
   setupConnections();
   setupFreeFormAndComponentControls();
+
+  Util::restoreWidgetGeometry(this);
 }
 
 LanguageDialog::~LanguageDialog() {
+}
+
+void
+LanguageDialog::saveDialogGeometry() {
+  Util::saveWidgetGeometry(this);
 }
 
 void
@@ -236,6 +243,7 @@ LanguageDialog::setupConnections() {
   connect(this,                       &LanguageDialog::tagValidityChanged, okButton, &QPushButton::setEnabled);
   connect(p.ui->buttonBox,            &QDialogButtonBox::accepted,         this,     &QDialog::accept);
   connect(p.ui->buttonBox,            &QDialogButtonBox::rejected,         this,     &QDialog::reject);
+  connect(this,                       &QDialog::finished,                  this,     &LanguageDialog::saveDialogGeometry);
 
   connect(p.ui->rbFreeForm,           &QRadioButton::clicked,              this,     &LanguageDialog::setupFreeFormAndComponentControls);
   connect(p.ui->rbComponentSelection, &QRadioButton::clicked,              this,     &LanguageDialog::setupFreeFormAndComponentControls);

@@ -54,6 +54,8 @@ public Q_SLOTS:
 
   void maybeEnableAddExtendedSubtagButton();
 
+  void saveDialogGeometry();
+
 Q_SIGNALS:
   void tagValidityChanged(bool isValid);
 
