@@ -281,8 +281,13 @@ set_simple(KaxTag &tag,
   GetChild<KaxTagName>(k_simple_tag).SetValueUTF8(name);
   GetChild<KaxTagString>(k_simple_tag).SetValueUTF8(value);
 
+  if (!language.is_valid())
+    return;
+
   if (language.has_valid_iso639_code())
     GetChild<KaxTagLangue>(k_simple_tag).SetValue(language.get_iso639_2_code());
+
+  GetChild<KaxTagLanguageIETF>(k_simple_tag).SetValue(language.format());
 }
 
 void
