@@ -8,9 +8,11 @@
     </dependentAssembly>
   </dependency>
   <asmv3:application>
-    <asmv3:windowsSettings xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">
-      <dpiAware>true</dpiAware>
-      <dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2</dpiAwareness>
+    <asmv3:windowsSettings xmlns:ws2005="http://schemas.microsoft.com/SMI/2005/WindowsSettings"
+                           xmlns:ws2016="http://schemas.microsoft.com/SMI/2016/WindowsSettings">
+      <ws2005:dpiAware>true</ws2005:dpiAware>
+      <ws2016:dpiAwareness>PerMonitorV2</ws2016:dpiAwareness>
+      <ws2016:longPathAware>true</ws2016:longPathAware>
     </asmv3:windowsSettings>
   </asmv3:application>
   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">

@@ -58,6 +58,8 @@
   language tags for track header languages. The header editor allows editing
   of the legacy language elements and the IETF BCP 47 language elements
   independent of each other. Part of the implementation of #2419.
+* all programs: Windows: all programs now support long file names on Windows
+  10 release 1604 if they're turned on in the registry. Implements #2916.
 
 ## Bug fixes
 
