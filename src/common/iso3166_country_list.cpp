@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-   ISO 3166 countries
+   ISO 3166 countries & UN M.49 regions
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
@@ -21,7 +21,7 @@
 
 namespace mtx::iso3166 {
 
-std::vector<country_t> const g_countries{
+std::vector<region_t> const g_regions{
   { "AD"s, "AND"s,  20, u8"Andorra"s,                                      u8"Principality of Andorra"s                               },
   { "AE"s, "ARE"s, 784, u8"United Arab Emirates"s,                         u8""s                                                      },
   { "AF"s, "AFG"s,   4, u8"Afghanistan"s,                                  u8"Islamic Republic of Afghanistan"s                       },

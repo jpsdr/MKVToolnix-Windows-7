@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-   ISO 3166 countries
+   ISO 3166 countries & UN M.49 regions
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
@@ -22,7 +22,7 @@ std::vector<std::string> const g_popular_country_codes{ "CN", "DE", "ES", "FI", 
 
 namespace {
 
-std::vector<country_t> const s_cctlds_only{
+std::vector<region_t> const s_cctlds_only{
   { "AC"s, {}, 0, u8"Ascension Island"s,     {} },
   { "AN"s, {}, 0, u8"Netherlands Antilles"s, {} },
   { "EU"s, {}, 0, u8"European Union"s,       {} },
@@ -35,11 +35,11 @@ std::map<std::string, std::string> const s_deprecated_cctlds{
   { "TP", "TL" },
 };
 
-std::optional<country_t>
-look_up(std::function<bool(country_t const &)> const &test) {
-  auto itr = std::find_if(g_countries.begin(), g_countries.end(), test);
+std::optional<region_t>
+look_up(std::function<bool(region_t const &)> const &test) {
+  auto itr = std::find_if(g_regions.begin(), g_regions.end(), test);
 
-  if (itr != g_countries.end())
+  if (itr != g_regions.end())
     return *itr;
 
   return {};
@@ -47,7 +47,7 @@ look_up(std::function<bool(country_t const &)> const &test) {
 
 } // anonymous namespace
 
-std::optional<country_t>
+std::optional<region_t>
 look_up(std::string const &s) {
   if (s.empty())
     return {};
@@ -59,14 +59,14 @@ look_up(std::string const &s) {
   });
 }
 
-std::optional<country_t>
+std::optional<region_t>
 look_up(unsigned int number) {
   return look_up([number](auto const &country) {
     return country.number == number;
   });
 }
 
-std::optional<country_t>
+std::optional<region_t>
 look_up_cctld(std::string const &s) {
   if (s.empty())
     return {};

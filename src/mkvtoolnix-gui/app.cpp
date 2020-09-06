@@ -260,12 +260,12 @@ void
 App::initializeTopLevelDomainCountryCodes() {
   auto &cfg = Util::Settings::get();
 
-  s_topLevelDomainCountryCodes.reserve(mtx::iso3166::g_countries.size());
-  s_commonTopLevelDomainCountryCodes.reserve(mtx::iso3166::g_countries.size());
+  s_topLevelDomainCountryCodes.reserve(mtx::iso3166::g_regions.size());
+  s_commonTopLevelDomainCountryCodes.reserve(mtx::iso3166::g_regions.size());
 
-  for (auto const &country : mtx::iso3166::g_countries) {
-    auto countryCode = Q(country.alpha_2_code).toLower();
-    auto description = Q("%1 (%2)").arg(Q(country.name)).arg(countryCode.toUpper());
+  for (auto const &region : mtx::iso3166::g_regions) {
+    auto countryCode = Q(region.alpha_2_code).toLower();
+    auto description = Q("%1 (%2)").arg(Q(region.name)).arg(countryCode.toUpper());
     auto isCommon    = cfg.m_oftenUsedCountries.indexOf(countryCode) != -1;
 
     s_topLevelDomainCountryCodes.emplace_back(description, countryCode);

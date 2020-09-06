@@ -19,7 +19,7 @@ def create_iso3166_country_list_file
    see the file COPYING for details
    or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-   ISO 3166 countries
+   ISO 3166 countries & UN M.49 regions
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
@@ -34,7 +34,7 @@ def create_iso3166_country_list_file
 
 namespace mtx::iso3166 {
 
-std::vector<country_t> const g_countries{
+std::vector<region_t> const g_regions{
 EOT
 
   footer = <<EOT
