@@ -1,6 +1,58 @@
 # Version ?
 
-## New features and enhancements
+## New feature: IETF BCP 47 language tags
+
+* I've written up a [nice FAQ
+  entry](https://gitlab.com/mbunkus/mkvtoolnix/-/wikis/Languages-in-Matroska-and-MKVToolNix)
+  about the switch to using IETF BCP 47 language tags, how they interact with
+  legacy language elements, how the programs actually behave and how to
+  disable their use if necessary.
+* mkvmerge: IETF BCP 47/RFC 5646 language tags: mkvmerge will now accept full
+  BCP 47 language tags for all options taking a language. mkvmerge will always
+  write "LanguageIETF" track header elements. If the language tag contains a
+  valid ISO 639-2 language code it will also set the legacy "Language" track
+  header element to the included ISO 639-2 code. Part of the implementation of
+  #2419.
+* mkvmerge: IETF BCP 47/RFC 5646 language tags: if present the "LanguageIETF"
+  track header element will be reported as the `language_ietf` property in
+  JSON identification mode. Part of the implementation of #2419.
+* mkvmerge: IETF BCP 47/RFC 5646 language tags in chapters: mkvmerge will now
+  write "ChapLanguageIETF" elements when creating chapter atoms, either when
+  reading the simple chapter format or when generating chapters due to the
+  `--generate-chapters` command line option. Part of the implementation of
+  #2419.
+* mkvmerge: IETF BCP 47/RFC 5646 language tags in tags: mkvmerge will now
+  write "TagLanguageIETF" elements when creating "simple tag" elements, either
+  when reading tag XML files or when generating them. Part of the
+  implementation of #2419.
+* mkvmerge: IETF BCP 47/RFC 5646 language tags: added an option
+  `--disable-language-ietf` that causes mkvmerge to only write the legacy
+  language elements.
+* mkvmerge, mkvpropedit, MKVToolNix GUI's chapter editor: IETF BCP 47/RFC 5646
+  language tags in chapters: when reading XML chapter files the programs will
+  now add "ChapLanguageIETF" elements for atoms that don't contain them. The
+  values are derived from existing "ChapterLanguage" elements. Part of the
+  implementation of #2419.
+* mkvpropedit: IETF BCP 47/RFC 5646 language tags: setting/deleting the track
+  language now acts on both the old language element as well as the
+  "LanguageIETF" track header element. Part of the implementation of #2419.
+* mkvpropedit: IETF BCP 47/RFC 5646 language tags: added an option
+  `--disable-language-ietf` that causes mkvpropedit to apply changes to the
+  `language` track header property only to the legacy language track header
+  element.
+* mkvinfo: IETF BCP 47/RFC 5646 language tags: added support for the
+  "LanguageIETF" track header element. Part of the implementation of #2419.
+* MKVToolNix GUI: multiplexer: added full support for IETF BCP 47/RFC 5646
+  language tags for both track and chapter languages. Part of the
+  implementation of #2419.
+* MKVToolNix GUI: chapter: added full support for IETF BCP 47/RFC 5646
+  language tags for chapter languages. Part of the implementation of #2419.
+* MKVToolNix GUI: header editor: added full support for IETF BCP 47/RFC 5646
+  language tags for track header languages. The header editor allows editing
+  of the legacy language elements and the IETF BCP 47 language elements
+  independent of each other. Part of the implementation of #2419.
+
+## Other new features and enhancements
 
 * mkvmerge: the chapter generation mode `when-appending` now also works with
   the splitting modes `parts:` & `parts-frames:` when using the `…,+…` syntax
@@ -14,50 +66,6 @@
   big performance improvements in all places where regular expressions are
   used for parsing big chunks of text, e.g. in the subtitle parsers. Part of
   the fix of #2899.
-* mkvmerge: IETF BCP 47/RFC 5646 language tags: if present the "LanguageIETF"
-  track header element will be reported as the `language_ietf` property in
-  JSON identification mode. Part of the implementation of #2419.
-* mkvinfo: IETF BCP 47/RFC 5646 language tags: added support for the
-  "LanguageIETF" track header element. Part of the implementation of #2419.
-* mkvmerge: IETF BCP 47/RFC 5646 language tags: mkvmerge will now accept full
-  BCP 47 language tags for all options taking a language. mkvmerge will always
-  write "LanguageIETF" track header elements. If the language tag contains a
-  valid ISO 639-2 language code it will also set the legacy "Language" track
-  header element to the included ISO 639-2 code. Part of the implementation of
-  #2419.
-* mkvmerge: IETF BCP 47/RFC 5646 language tags in chapters: mkvmerge will now
-  write "ChapLanguageIETF" elements when creating chapter atoms, either when
-  reading the simple chapter format or when generating chapters due to the
-  `--generate-chapters` command line option. Part of the implementation of
-  #2419.
-* mkvmerge: IETF BCP 47/RFC 5646 language tags in tags: mkvmerge will now
-  write "TagLanguageIETF" elements when creating "simple tag" elements, either
-  when reading tag XML files or when generating them. Part of the
-  implementation of #2419.
-* mkvmerge, mkvpropedit, MKVToolNix GUI's chapter editor: IETF BCP 47/RFC 5646
-  language tags in chapters: when reading XML chapter files the programs will
-  now add "ChapLanguageIETF" elements for atoms that don't contain them. The
-  values are derived from existing "ChapterLanguage" elements. Part of the
-  implementation of #2419.
-* mkvpropedit: IETF BCP 47/RFC 5646 language tags: setting/deleting the track
-  language now acts on both the old language element as well as the
-  "LanguageIETF" track header element. Part of the implementation of #2419.
-* mkvmerge: IETF BCP 47/RFC 5646 language tags: added an option
-  `--disable-language-ietf` that causes mkvmerge to only write the legacy
-  language elements.
-* mkvpropedit: IETF BCP 47/RFC 5646 language tags: added an option
-  `--disable-language-ietf` that causes mkvpropedit to apply changes to the
-  `language` track header property only to the legacy language track header
-  element.
-* MKVToolNix GUI: multiplexer: added full support for IETF BCP 47/RFC 5646
-  language tags for both track and chapter languages. Part of the
-  implementation of #2419.
-* MKVToolNix GUI: chapter: added full support for IETF BCP 47/RFC 5646
-  language tags for chapter languages. Part of the implementation of #2419.
-* MKVToolNix GUI: header editor: added full support for IETF BCP 47/RFC 5646
-  language tags for track header languages. The header editor allows editing
-  of the legacy language elements and the IETF BCP 47 language elements
-  independent of each other. Part of the implementation of #2419.
 * all programs: Windows: all programs now support long file names on Windows
   10 release 1604 if they're turned on in the registry. Implements #2916.
 
