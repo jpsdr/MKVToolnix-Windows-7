@@ -240,6 +240,18 @@ function build_gettext {
     --disable-shared
 }
 
+function build_pcre2 {
+  build_package pcre2 \
+    --prefix=${TARGET} \
+    --enable-pcre2-16 \
+    --enable-utf \
+    --enable-unicode-properties \
+    --enable-cpp \
+    --disable-pcre2grep-libz \
+    --disable-pcre2grep-libbz2 \
+    --disable-pcre2test-libreadline
+}
+
 function build_boost {
   local -a args properties
 
@@ -627,6 +639,7 @@ if [[ -z $@ ]]; then
   build_zlib
   build_gettext
   build_cmark
+  build_pcre2
   build_boost
   build_qt
   build_configured_mkvtoolnix
