@@ -357,6 +357,7 @@ std::vector<entry_t> const g_variants{
   { "sutsilv"s,  u8"Sutsilvan idiom of Romansh"s,                                 { "rm"s }                                                                                    },
   { "tarask"s,   u8"Belarusian in Taraskievica orthography"s,                     { "be"s }                                                                                    },
   { "tongyong"s, u8"Tongyong Pinyin romanization"s,                               { "zh-Latn"s }                                                                               },
+  { "tunumiit"s, u8"Østgrønlandsk"s,                                              { "kl"s }                                                                                    },
   { "uccor"s,    u8"Unified Cornish orthography of Revived Cornish"s,             { "kw"s }                                                                                    },
   { "ucrcor"s,   u8"Unified Cornish Revised orthography of Revived Cornish"s,     { "kw"s }                                                                                    },
   { "ulster"s,   u8"Ulster dialect of Scots"s,                                    { "sco"s }                                                                                   },
