@@ -1,4 +1,4 @@
-# Version ?
+# Version 50.0.0 "Awakenings" 2020-09-06
 
 ## New feature: IETF BCP 47 language tags
 
