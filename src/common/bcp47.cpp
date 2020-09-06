@@ -186,7 +186,10 @@ language_c::parse_region(std::string const &code) {
     return false;
   }
 
-  m_region = region->alpha_2_code;
+  if (region->alpha_2_code.empty())
+    m_region = fmt::format("{0:03}", region->number);
+  else
+    m_region = region->alpha_2_code;
 
   return true;
 }

@@ -10,6 +10,21 @@ def create_iso3166_country_list_file
       (entry["official_name"] || '').to_u8_cpp_string,
     ]
   end
+
+  Mtx::IANALanguageSubtagRegistry.with_registry do |entries|
+    entries["region"].
+      select { |region| %r{^\d+$}.match(region[:subtag]) }.
+      each do |region|
+
+      rows << [
+        '""s', '""s',
+        sprintf('%03s', region[:subtag].gsub(%r{^0+}, '')),
+        region[:description].to_u8_cpp_string,
+        '""s',
+      ]
+    end
+  end
+
   header = <<EOT
 /*
    mkvmerge -- utility for splicing together matroska files
@@ -43,7 +58,8 @@ EOT
 } // namespace mtx::iso3166
 EOT
 
-  content = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => "  },").join("\n") + "\n" + footer
+  rows    = rows.sort_by { |row| [ row[0], row[1], row[3] ].join('::') }
+  content = header + format_table(rows, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => "  },").join("\n") + "\n" + footer
 
   runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }
 end

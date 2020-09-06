@@ -21,6 +21,11 @@ TEST(BCP47LanguageTags, ParsingValid) {
   EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Cyrl-ekavsk").is_valid());
 }
 
+TEST(BCP47LanguageTags, ParsingValidUNM49) {
+  EXPECT_EQ("es-MX"s,  mtx::bcp47::language_c::parse("es-484").format());
+  EXPECT_EQ("es-419"s, mtx::bcp47::language_c::parse("es-419").format());
+}
+
 TEST(BCP47LanguageTags, ParsingInvalid) {
   EXPECT_FALSE(mtx::bcp47::language_c::parse("muh-Latn-CH-x-weeee").is_valid());  // invalid (muh not ISO 639 code).is_valid())
   EXPECT_FALSE(mtx::bcp47::language_c::parse("ger-muku-CH-x-weeee").is_valid());  // invalid (muku not a script).is_valid())
