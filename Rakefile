@@ -870,7 +870,7 @@ namespace :dev do
 
   desc "Create iana_language_subtag_registry_list.cpp from official list"
   task :iana_language_subtag_registry_list do
-    create_iana_language_subtag_registry_list_file
+    Mtx::IANALanguageSubtagRegistry.create_cpp
   end
 end
 
