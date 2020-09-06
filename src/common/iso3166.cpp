@@ -18,8 +18,6 @@
 
 namespace mtx::iso3166 {
 
-std::vector<std::string> const g_popular_country_codes{ "CN", "DE", "ES", "FI", "FR", "IT", "JP", "NL", "NO", "PT", "RU", "SE", "GB", "US" };
-
 namespace {
 
 std::vector<region_t> const s_cctlds_only{

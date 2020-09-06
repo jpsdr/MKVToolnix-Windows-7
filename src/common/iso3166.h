@@ -24,7 +24,6 @@ struct region_t {
 };
 
 extern std::vector<region_t> const g_regions;
-extern std::vector<std::string> const g_popular_country_codes;
 
 std::optional<region_t> look_up(std::string const &s);
 std::optional<region_t> look_up(unsigned int number);

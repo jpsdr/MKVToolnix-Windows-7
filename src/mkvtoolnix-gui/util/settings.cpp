@@ -436,10 +436,6 @@ Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
     m_oftenUsedLanguages.sort();
   }
 
-  if (m_oftenUsedCountries.isEmpty())
-    for (auto const &countryCode : mtx::iso3166::g_popular_country_codes)
-      m_oftenUsedCountries << Q(countryCode).toLower();
-
   if (m_oftenUsedCharacterSets.isEmpty())
     for (auto const &characterSet : g_popular_character_sets)
       m_oftenUsedCharacterSets << Q(characterSet);
