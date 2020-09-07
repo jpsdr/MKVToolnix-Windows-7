@@ -29,7 +29,7 @@ bool
 CountryComboBox::onlyShowOftenUsed()
   const {
   auto &cfg = Util::Settings::get();
-  return cfg.m_oftenUsedCountriesOnly && !cfg.m_oftenUsedCountries.isEmpty();
+  return cfg.m_oftenUsedRegionsOnly && !cfg.m_oftenUsedRegions.isEmpty();
 }
 
 ComboBoxBase &
@@ -42,14 +42,14 @@ CountryComboBox::setup(bool withEmpty,
   if (withEmpty)
     addItem(emptyTitle, Q(""));
 
-  auto commonCountries = onlyOftenUsed ? mergeCommonAndAdditionalItems(App::commonTopLevelDomainCountryCodes(), App::topLevelDomainCountryCodes(), additionalItems()) : App::commonTopLevelDomainCountryCodes();
+  auto commonRegions = onlyOftenUsed ? mergeCommonAndAdditionalItems(App::commonRegions(), App::regions(), additionalItems()) : App::commonRegions();
 
-  if (!commonCountries.empty()) {
-    for (auto const &country : commonCountries)
+  if (!commonRegions.empty()) {
+    for (auto const &country : commonRegions)
       addItem(country.first, country.second);
 
     if (!onlyOftenUsed)
-      insertSeparator(commonCountries.size() + (withEmpty ? 1 : 0));
+      insertSeparator(commonRegions.size() + (withEmpty ? 1 : 0));
   }
 
   if (!onlyOftenUsed)

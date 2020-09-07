@@ -76,7 +76,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupJobRemovalPolicy();
 
   setupCommonLanguages();
-  setupCommonCountries();
+  setupCommonRegions();
   setupCommonCharacterSets();
 
   // Merge page
@@ -482,8 +482,8 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("If checked, only the list of often used entries will be included in the selections in the program."))
                    .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
 
-  ui->tbOftenUsedCountries->setToolTips(QY("The countries in the 'selected' list on the right will be shown at the top of all the country drop-down boxes in the program."));
-  Util::setToolTip(ui->cbOftenUsedCountriesOnly,
+  ui->tbOftenUsedRegions->setToolTips(QY("The entries in the 'selected' list on the right will be shown at the top of all the drop-down boxes with countries and regions in the program."));
+  Util::setToolTip(ui->cbOftenUsedRegionsOnly,
                    Q("%1 %2")
                    .arg(QYH("If checked, only the list of often used entries will be included in the selections in the program."))
                    .arg(QYH("Otherwise the often used entries will be included first and the full list of all entries afterwards.")));
@@ -533,7 +533,7 @@ PreferencesDialog::setupConnections() {
   connect(ui->buttons,                                    &QDialogButtonBox::rejected,                                   this,                                 &PreferencesDialog::reject);
 
   connect(ui->tbOftenUsedLanguages,                       &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedLanguagesOnly);
-  connect(ui->tbOftenUsedCountries,                       &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedCountriesOnly);
+  connect(ui->tbOftenUsedRegions,                         &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedRegionsOnly);
   connect(ui->tbOftenUsedCharacterSets,                   &Util::SideBySideMultiSelect::listsChanged,                    this,                                 &PreferencesDialog::enableOftendUsedCharacterSetsOnly);
 }
 
@@ -583,12 +583,12 @@ PreferencesDialog::setupCommonLanguages() {
 }
 
 void
-PreferencesDialog::setupCommonCountries() {
-  auto &allCountries = App::topLevelDomainCountryCodes();
+PreferencesDialog::setupCommonRegions() {
+  auto &allRegions = App::regions();
 
-  ui->tbOftenUsedCountries->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(Util::stdVectorToQVector<Util::SideBySideMultiSelect::Item>(allCountries)), m_cfg.m_oftenUsedCountries);
-  ui->cbOftenUsedCountriesOnly->setChecked(m_cfg.m_oftenUsedCountriesOnly && !m_cfg.m_oftenUsedCountries.isEmpty());
-  enableOftendUsedCountriesOnly();
+  ui->tbOftenUsedRegions->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(Util::stdVectorToQVector<Util::SideBySideMultiSelect::Item>(allRegions)), m_cfg.m_oftenUsedRegions);
+  ui->cbOftenUsedRegionsOnly->setChecked(m_cfg.m_oftenUsedRegionsOnly && !m_cfg.m_oftenUsedRegions.isEmpty());
+  enableOftendUsedRegionsOnly();
 }
 
 void
@@ -948,11 +948,11 @@ PreferencesDialog::save() {
 
   // Often used selections page:
   m_cfg.m_oftenUsedLanguages                            = ui->tbOftenUsedLanguages->selectedItemValues();
-  m_cfg.m_oftenUsedCountries                            = ui->tbOftenUsedCountries->selectedItemValues();
+  m_cfg.m_oftenUsedRegions                              = ui->tbOftenUsedRegions->selectedItemValues();
   m_cfg.m_oftenUsedCharacterSets                        = ui->tbOftenUsedCharacterSets->selectedItemValues();
 
-  m_cfg.m_oftenUsedLanguagesOnly                        = ui->cbOftenUsedLanguagesOnly->isChecked() && !m_cfg.m_oftenUsedLanguages.isEmpty();
-  m_cfg.m_oftenUsedCountriesOnly                        = ui->cbOftenUsedCountriesOnly->isChecked() && !m_cfg.m_oftenUsedCountries.isEmpty();
+  m_cfg.m_oftenUsedLanguagesOnly                        = ui->cbOftenUsedLanguagesOnly    ->isChecked() && !m_cfg.m_oftenUsedLanguages    .isEmpty();
+  m_cfg.m_oftenUsedRegionsOnly                          = ui->cbOftenUsedRegionsOnly      ->isChecked() && !m_cfg.m_oftenUsedRegions      .isEmpty();
   m_cfg.m_oftenUsedCharacterSetsOnly                    = ui->cbOftenUsedCharacterSetsOnly->isChecked() && !m_cfg.m_oftenUsedCharacterSets.isEmpty();
 
   // Info tool page
@@ -1002,8 +1002,8 @@ PreferencesDialog::enableOftendUsedLanguagesOnly() {
 }
 
 void
-PreferencesDialog::enableOftendUsedCountriesOnly() {
-  ui->cbOftenUsedCountriesOnly->setEnabled(!ui->tbOftenUsedCountries->selectedItemValues().isEmpty());
+PreferencesDialog::enableOftendUsedRegionsOnly() {
+  ui->cbOftenUsedRegionsOnly->setEnabled(!ui->tbOftenUsedRegions->selectedItemValues().isEmpty());
 }
 
 void

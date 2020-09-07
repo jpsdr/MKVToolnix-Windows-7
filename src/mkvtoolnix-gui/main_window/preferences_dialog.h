@@ -74,7 +74,7 @@ public Q_SLOTS:
   void revertDeriveTrackLanguageFromFileNameRegex();
 
   void enableOftendUsedLanguagesOnly();
-  void enableOftendUsedCountriesOnly();
+  void enableOftendUsedRegionsOnly();
   void enableOftendUsedCharacterSetsOnly();
 
   virtual void accept() override;
@@ -92,7 +92,7 @@ protected:
   void setupWhenToSetDefaultLanguage();
   void setupJobRemovalPolicy();
   void setupCommonLanguages();
-  void setupCommonCountries();
+  void setupCommonRegions();
   void setupCommonCharacterSets();
   void setupProcessPriority();
   void setupPlaylistScanningPolicy();

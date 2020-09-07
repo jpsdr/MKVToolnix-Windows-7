@@ -37,9 +37,9 @@
 namespace mtx::gui {
 
 static Iso639LanguageList s_iso639Languages, s_commonIso639Languages;
-static TopLevelDomainCountryCodeList s_topLevelDomainCountryCodes, s_commonTopLevelDomainCountryCodes;
+static RegionList s_regions, s_commonRegions;
 static CharacterSetList s_characterSets, s_commonCharacterSets;
-static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_topLevelDomainCountryCodeToDescription;
+static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_regionToDescription;
 
 static std::optional<bool> s_is_installed;
 
@@ -210,10 +210,10 @@ void
 App::reinitializeLanguageLists() {
   s_iso639Languages.clear();
   s_commonIso639Languages.clear();
-  s_topLevelDomainCountryCodes.clear();
-  s_commonTopLevelDomainCountryCodes.clear();
+  s_regions.clear();
+  s_commonRegions.clear();
   s_iso639_2LanguageCodeToDescription.clear();
-  s_topLevelDomainCountryCodeToDescription.clear();
+  s_regionToDescription.clear();
   s_characterSets.clear();
   s_commonCharacterSets.clear();
 
@@ -228,7 +228,7 @@ App::initializeLanguageLists() {
     return;
 
   initializeIso639Languages();
-  initializeTopLevelDomainCountryCodes();
+  initializeRegions();
   initializeCharacterSets();
 }
 
@@ -257,26 +257,28 @@ App::initializeIso639Languages() {
 }
 
 void
-App::initializeTopLevelDomainCountryCodes() {
+App::initializeRegions() {
   auto &cfg = Util::Settings::get();
 
-  s_topLevelDomainCountryCodes.reserve(mtx::iso3166::g_regions.size());
-  s_commonTopLevelDomainCountryCodes.reserve(mtx::iso3166::g_regions.size());
+  s_regions.reserve(mtx::iso3166::g_regions.size());
+  s_commonRegions.reserve(mtx::iso3166::g_regions.size());
 
   for (auto const &region : mtx::iso3166::g_regions) {
-    auto countryCode = Q(region.alpha_2_code).toLower();
-    auto description = Q("%1 (%2)").arg(Q(region.name)).arg(countryCode.toUpper());
-    auto isCommon    = cfg.m_oftenUsedCountries.indexOf(countryCode) != -1;
+    auto number       = Q(fmt::format("{0:03}", region.number));
+    auto countryCode  = !region.alpha_2_code.empty() ? Q(region.alpha_2_code).toLower()                              : number;
+    auto countryCodes = !region.alpha_2_code.empty() ? Q("%1; %2").arg(Q(region.alpha_2_code).toLower()).arg(number) : number;
+    auto description  = Q("%1 (%2)").arg(Q(region.name)).arg(countryCodes);
+    auto isCommon     = cfg.m_oftenUsedRegions.indexOf(countryCode) != -1;
 
-    s_topLevelDomainCountryCodes.emplace_back(description, countryCode);
+    s_regions.emplace_back(description, countryCode);
     if (isCommon)
-      s_commonTopLevelDomainCountryCodes.emplace_back(description, countryCode);
+      s_commonRegions.emplace_back(description, countryCode);
 
-    s_topLevelDomainCountryCodeToDescription[countryCode] = description;
+    s_regionToDescription[countryCode] = description;
   }
 
-  std::sort(s_topLevelDomainCountryCodes.begin(), s_topLevelDomainCountryCodes.end());
-  std::sort(s_commonTopLevelDomainCountryCodes.begin(), s_commonTopLevelDomainCountryCodes.end());
+  std::sort(s_regions.begin(),       s_regions.end());
+  std::sort(s_commonRegions.begin(), s_commonRegions.end());
 }
 
 void
@@ -310,16 +312,16 @@ App::commonIso639Languages() {
   return s_commonIso639Languages;
 }
 
-TopLevelDomainCountryCodeList const &
-App::topLevelDomainCountryCodes() {
+RegionList const &
+App::regions() {
   initializeLanguageLists();
-  return s_topLevelDomainCountryCodes;
+  return s_regions;
 }
 
-TopLevelDomainCountryCodeList const &
-App::commonTopLevelDomainCountryCodes() {
+RegionList const &
+App::commonRegions() {
   initializeLanguageLists();
-  return s_commonTopLevelDomainCountryCodes;
+  return s_commonRegions;
 }
 
 CharacterSetList const &
@@ -335,9 +337,9 @@ App::commonCharacterSets() {
 }
 
 QString const &
-App::descriptionFromTopLevelDomainCountryCode(QString const &code) {
+App::descriptionForRegion(QString const &region) {
   initializeLanguageLists();
-  return s_topLevelDomainCountryCodeToDescription.contains(code) ? s_topLevelDomainCountryCodeToDescription[code] : code;
+  return s_regionToDescription.contains(region) ? s_regionToDescription[region] : region;
 }
 
 bool

@@ -288,6 +288,19 @@ Settings::convertOldSettings() {
 
     reg->endGroup();            // runProgramConfigurations
   }
+
+  // "Often used countries" was renamed to "often used regions" in
+  // v51.
+  reg->beginGroup(s_grpSettings);
+  if (!reg->value(s_valOftenUsedRegions).isValid()) {
+    reg->setValue(s_valOftenUsedRegions, reg->value(s_valOftenUsedCountries));
+    reg->remove(s_valOftenUsedCountries);
+  }
+  if (!reg->value(s_valOftenUsedRegionsOnly).isValid()) {
+    reg->setValue(s_valOftenUsedRegionsOnly, reg->value(s_valOftenUsedCountriesOnly));
+    reg->remove(s_valOftenUsedCountriesOnly);
+  }
+  reg->endGroup();
 }
 
 void
@@ -315,11 +328,11 @@ Settings::load() {
   m_lastConfigDir                      = QDir{reg.value(s_valLastConfigDir).toString()};
 
   m_oftenUsedLanguages                 = reg.value(s_valOftenUsedLanguages).toStringList();
-  m_oftenUsedCountries                 = reg.value(s_valOftenUsedCountries).toStringList();
+  m_oftenUsedRegions                   = reg.value(s_valOftenUsedRegions).toStringList();
   m_oftenUsedCharacterSets             = reg.value(s_valOftenUsedCharacterSets).toStringList();
 
   m_oftenUsedLanguagesOnly             = reg.value(s_valOftenUsedLanguagesOnly,     false).toBool();;
-  m_oftenUsedCountriesOnly             = reg.value(s_valOftenUsedCountriesOnly,     false).toBool();;
+  m_oftenUsedRegionsOnly               = reg.value(s_valOftenUsedRegionsOnly,       false).toBool();;
   m_oftenUsedCharacterSetsOnly         = reg.value(s_valOftenUsedCharacterSetsOnly, false).toBool();;
 
   m_scanForPlaylistsPolicy             = static_cast<ScanForPlaylistsPolicy>(reg.value(s_valScanForPlaylistsPolicy, static_cast<int>(AskBeforeScanning)).toInt());
@@ -670,11 +683,11 @@ Settings::save()
   reg.setValue(s_valLastConfigDir,                      m_lastConfigDir.path());
 
   reg.setValue(s_valOftenUsedLanguages,                 m_oftenUsedLanguages);
-  reg.setValue(s_valOftenUsedCountries,                 m_oftenUsedCountries);
+  reg.setValue(s_valOftenUsedRegions,                   m_oftenUsedRegions);
   reg.setValue(s_valOftenUsedCharacterSets,             m_oftenUsedCharacterSets);
 
   reg.setValue(s_valOftenUsedLanguagesOnly,             m_oftenUsedLanguagesOnly);
-  reg.setValue(s_valOftenUsedCountriesOnly,             m_oftenUsedCountriesOnly);
+  reg.setValue(s_valOftenUsedRegionsOnly,               m_oftenUsedRegionsOnly);
   reg.setValue(s_valOftenUsedCharacterSetsOnly,         m_oftenUsedCharacterSetsOnly);
 
   reg.setValue(s_valScanForPlaylistsPolicy,             static_cast<int>(m_scanForPlaylistsPolicy));
