@@ -247,6 +247,7 @@ function build_pcre2 {
     --enable-utf \
     --enable-unicode-properties \
     --enable-cpp \
+    --enable-shared=no \
     --disable-pcre2grep-libz \
     --disable-pcre2grep-libbz2 \
     --disable-pcre2test-libreadline
