@@ -115,6 +115,7 @@ Tab::setupUi() {
   p->ui->cbChNameCountry->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
   p->ui->ldwChNameLanguage->enableClearingLanguage(true);
+  p->ui->cbChNameCountry->setWithAlphaCodesOnly(true);
   p->ui->cbChNameCountry->setup(true);
 
   p->nameWidgets << p->ui->pbChRemoveName

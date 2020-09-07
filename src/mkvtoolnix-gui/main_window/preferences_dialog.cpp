@@ -118,7 +118,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbCETextFileCharacterSet->setAdditionalItems(m_cfg.m_ceTextFileCharacterSet).setup(true, QY("Always ask the user")).setCurrentByData(m_cfg.m_ceTextFileCharacterSet);
   ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
   ui->ldwCEDefaultLanguage->setLanguage(m_cfg.m_defaultChapterLanguage);
-  ui->cbCEDefaultCountry->setAdditionalItems(m_cfg.m_defaultChapterCountry).setup(true, QY("– No selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
+  ui->cbCEDefaultCountry->setWithAlphaCodesOnly(true).setAdditionalItems(m_cfg.m_defaultChapterCountry).setup(true, QY("– No selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
 
   // Header editor page
   setupHeaderEditorDroppedFilesPolicy();
