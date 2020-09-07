@@ -120,7 +120,6 @@ EOT
   end
 
   END {
-    puts "the END"
     File.unlink(@@registry_file) if @@registry_downloaded && FileTest.exists?(@@registry_file)
   }
 end
