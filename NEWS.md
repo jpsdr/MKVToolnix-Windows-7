@@ -1,3 +1,13 @@
+# Version ?
+
+## New features and enhancements
+
+* mkvmerge, mkvpropedit, MKVToolNix GUI: IETF BCP 47 language tags: added
+  missing support for UN M.49 regions for which there are no corresponding ISO
+  3166 alpha codes. This enables language tags such as `es-419` = Spanish in
+  Latin America and the Caribbean. Implements #2919.
+
+
 # Version 50.0.0 "Awakenings" 2020-09-06
 
 ## New feature: IETF BCP 47 language tags
