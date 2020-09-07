@@ -11,18 +11,17 @@ def create_iso3166_country_list_file
     ]
   end
 
-  Mtx::IANALanguageSubtagRegistry.with_registry do |entries|
-    entries["region"].
-      select { |region| %r{^\d+$}.match(region[:subtag]) }.
-      each do |region|
+  entries = Mtx::IANALanguageSubtagRegistry.fetch_registry
+  entries["region"].
+    select { |region| %r{^\d+$}.match(region[:subtag]) }.
+    each do |region|
 
-      rows << [
-        '""s', '""s',
-        sprintf('%03s', region[:subtag].gsub(%r{^0+}, '')),
-        region[:description].to_u8_cpp_string,
-        '""s',
-      ]
-    end
+    rows << [
+      '""s', '""s',
+      sprintf('%03s', region[:subtag].gsub(%r{^0+}, '')),
+      region[:description].to_u8_cpp_string,
+      '""s',
+    ]
   end
 
   header = <<EOT

@@ -1,46 +1,52 @@
 module Mtx::IANALanguageSubtagRegistry
-  def self.with_registry &func
-    url               = "https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry"
-    registry          = "language-subtag-registry"
-    download_registry = !FileTest.exists?(registry)
+  @@registry_mutex      = Mutex.new
+  @@registry            = nil
+  @@registry_downloaded = false
+  @@registry_file       = "language-subtag-registry"
 
-    runq "wget", url, "wget --quiet -O #{registry} #{url}" if download_registry
+  def self.fetch_registry
+    @@registry_mutex.synchronize {
+      return @@registry if @@registry
 
-    entry   = {}
-    entries = {}
-    process = lambda do
-      type = entry.delete(:type)
-
-      if type
-        entries[type] ||= []
-        entries[type]  << entry
+      if !FileTest.exists?(@@registry_file)
+        url = "https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry"
+        runq "wget", url, "wget --quiet -O #{@@registry_file} #{url}"
+        @@registry_downloaded = true
       end
 
-      entry = {}
-    end
+      @@registry = {}
+      entry      = {}
+      process    = lambda do
+        type = entry.delete(:type)
 
-    IO.readlines(registry).
-      map(&:chomp).
-      each do |line|
+        if type
+          @@registry[type] ||= []
+          @@registry[type]  << entry
+        end
 
-      if line == '%%'
-        process.call
-
-      elsif %r{^(Type|Subtag|Description): *(.+)}i.match(line)
-        entry[$1.downcase.to_sym] = $2
-
-      elsif %r{^Prefix: *(.+)}i.match(line)
-        entry[:prefix] ||= []
-        entry[:prefix]  << $1
+        entry = {}
       end
-    end
 
-    process.call
+      IO.readlines(@@registry_file).
+        map(&:chomp).
+        each do |line|
 
-    func.call(entries)
+        if line == '%%'
+          process.call
 
-  ensure
-    File.unlink(registry) if download_registry && FileTest.exists?(registry)
+        elsif %r{^(Type|Subtag|Description): *(.+)}i.match(line)
+          entry[$1.downcase.to_sym] = $2
+
+        elsif %r{^Prefix: *(.+)}i.match(line)
+          entry[:prefix] ||= []
+          entry[:prefix]  << $1
+        end
+      end
+
+      process.call
+    }
+
+    return @@registry
   end
 
   def self.do_create_cpp entries
@@ -110,6 +116,11 @@ EOT
   end
 
   def self.create_cpp
-    self.with_registry { |entries| do_create_cpp(entries) }
+    do_create_cpp(self.fetch_registry)
   end
+
+  END {
+    puts "the END"
+    File.unlink(@@registry_file) if @@registry_downloaded && FileTest.exists?(@@registry_file)
+  }
 end

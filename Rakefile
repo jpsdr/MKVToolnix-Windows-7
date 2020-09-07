@@ -872,6 +872,9 @@ namespace :dev do
   task :iana_language_subtag_registry_list do
     Mtx::IANALanguageSubtagRegistry.create_cpp
   end
+
+  desc "Create all auto-generated lists"
+  task :lists => [ :iso639_list, :iso3166_list, :iso15924_list, :iana_language_subtag_registry_list ]
 end
 
 # Installation tasks
