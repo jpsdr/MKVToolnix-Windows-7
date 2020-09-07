@@ -24,6 +24,10 @@
 
 namespace mtx::gui::Util {
 
+char const * const s_cbExtendedSubtag = "cbExtendedSubtag";
+char const * const s_cbVariant        = "cbVariant";
+char const * const s_lePrivateUse     = "lePrivateUse";
+
 // ------------------------------------------------------------
 
 namespace {
@@ -210,7 +214,8 @@ LanguageDialog::allComponentWidgets() {
     p.ui->cbRegion,
   };
 
-  widgets += allComponentWidgetsMatchingName(QRegularExpression{ Q("^(cb(ExtendedSubtag|Variant)|lePrivate)") });
+  auto reStr = Q("^(%1|%2|%3)").arg(Q(s_cbExtendedSubtag)).arg(Q(s_cbVariant)).arg(Q(s_lePrivateUse));
+  widgets += allComponentWidgetsMatchingName(QRegularExpression{reStr});
 
   return widgets;
 }
@@ -383,9 +388,9 @@ LanguageDialog::addRowItem(QString const &type,
 
 QWidget *
 LanguageDialog::addExtendedSubtagRow() {
-  return addRowItem(Q("cbExtendedSubtag"), [this](int newIdx) {
+  return addRowItem(Q(s_cbExtendedSubtag), [this](int newIdx) {
     auto comboBox = new QComboBox{p_func()->ui->sawComponents};
-    comboBox->setObjectName(Q("cbExtendedSubtag%1").arg(newIdx));
+    comboBox->setObjectName(Q("%1%2").arg(Q(s_cbExtendedSubtag)).arg(newIdx));
 
     setupExtendedSubtagsComboBox(*comboBox);
 
@@ -395,9 +400,9 @@ LanguageDialog::addExtendedSubtagRow() {
 
 QWidget *
 LanguageDialog::addVariantRow() {
-  return addRowItem(Q("cbVariant"), [this](int newIdx) {
+  return addRowItem(Q(s_cbVariant), [this](int newIdx) {
     auto comboBox = new QComboBox{p_func()->ui->sawComponents};
-    comboBox->setObjectName(Q("cbVariant%1").arg(newIdx));
+    comboBox->setObjectName(Q("%1%2").arg(Q(s_cbVariant)).arg(newIdx));
 
     setupVariantComboBox(*comboBox);
 
@@ -407,9 +412,9 @@ LanguageDialog::addVariantRow() {
 
 QWidget *
 LanguageDialog::addPrivateUseRow() {
-  return addRowItem(Q("lePrivateUse"), [this](int newIdx) {
+  return addRowItem(Q(s_lePrivateUse), [this](int newIdx) {
     auto lineEdit = new QLineEdit{p_func()->ui->sawComponents};
-    lineEdit->setObjectName(Q("lePrivateUse%1").arg(newIdx));
+    lineEdit->setObjectName(Q("%1%2").arg(Q(s_lePrivateUse)).arg(newIdx));
 
     return lineEdit;
   });
@@ -467,7 +472,7 @@ void
 LanguageDialog::maybeEnableAddExtendedSubtagButton() {
   auto &p = *p_func();
 
-  auto widgets = allComponentWidgetsMatchingName(QRegularExpression{ Q("^cbExtendedSubtag") });
+  auto widgets = allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(Q(s_cbExtendedSubtag)) });
   p.ui->pbAddExtendedSubtag->setEnabled(p.ui->rbComponentSelection->isChecked() && (widgets.size() < 3));
 }
 
@@ -519,9 +524,9 @@ LanguageDialog::setComponentsFromLanguageTag(mtx::bcp47::language_c const &tag) 
   setComboBoxTextByData(p.ui->cbRegion,   Q(tag.get_region()).toLower());
   setComboBoxTextByData(p.ui->cbScript,   Q(tag.get_script()));
 
-  setMultipleWidgetsTexts(Q("cbExtendedSubtag"), tag.get_extended_language_subtags());
-  setMultipleWidgetsTexts(Q("cbVariants"),       tag.get_variants());
-  setMultipleWidgetsTexts(Q("lePrivateUse"),     tag.get_private_use());
+  setMultipleWidgetsTexts(Q(s_cbExtendedSubtag), tag.get_extended_language_subtags());
+  setMultipleWidgetsTexts(Q(s_cbVariant),        tag.get_variants());
+  setMultipleWidgetsTexts(Q(s_lePrivateUse),     tag.get_private_use());
 }
 
 mtx::bcp47::language_c
@@ -535,7 +540,7 @@ LanguageDialog::languageTagFromComponents() {
   tag.set_script(to_utf8(p.ui->cbScript->currentData().toString()));
   tag.set_region(to_utf8(p.ui->cbRegion->currentData().toString()));
 
-  for (auto comboBox : allComponentWidgetsMatchingName(QRegularExpression{ Q("^cbExtendedSubtag") })) {
+  for (auto comboBox : allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(Q(s_cbExtendedSubtag)) })) {
     auto code = dynamic_cast<QComboBox &>(*comboBox).currentData().toString();
     if (!code.isEmpty())
       strings.emplace_back(to_utf8(code));
@@ -545,7 +550,7 @@ LanguageDialog::languageTagFromComponents() {
 
   strings.clear();
 
-  for (auto comboBox : allComponentWidgetsMatchingName(QRegularExpression{ Q("^cbVariant") })) {
+  for (auto comboBox : allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(Q(s_cbVariant)) })) {
     auto code = dynamic_cast<QComboBox &>(*comboBox).currentData().toString();
     if (!code.isEmpty())
       strings.emplace_back(to_utf8(code));
@@ -555,7 +560,7 @@ LanguageDialog::languageTagFromComponents() {
 
   strings.clear();
 
-  for (auto lineEdit : allComponentWidgetsMatchingName(QRegularExpression{ Q("^lePrivateUse") })) {
+  for (auto lineEdit : allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(Q(s_lePrivateUse)) })) {
     auto text = dynamic_cast<QLineEdit &>(*lineEdit).text();
     if (!text.isEmpty())
       strings.emplace_back(to_utf8(text));

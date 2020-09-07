@@ -7,6 +7,12 @@
   3166 alpha codes. This enables language tags such as `es-419` = Spanish in
   Latin America and the Caribbean. Implements #2919.
 
+## Bug fixes
+
+* MKVToolNix GUI: IETF BCP 47 language tags: the "variants" combo-boxes were
+  not populated even when the language tag was valid and contained at a
+  variant. Fixes #2923.
+
 
 # Version 50.0.0 "Awakenings" 2020-09-06
 
