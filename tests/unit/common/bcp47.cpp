@@ -79,6 +79,16 @@ TEST(BCP47LanguageTags, Formatting) {
   EXPECT_EQ("x-weee-wooo"s, l.format_long(true));
 }
 
+TEST(BCP47LanguageTags, FormattingInvalidWithoutLanguage) {
+  auto l = mtx::bcp47::language_c{};
+
+  l.set_region("FR"s);
+  l.set_private_use({ "moo"s });
+
+  EXPECT_EQ(""s,          l.format());
+  EXPECT_EQ("-FR-x-moo"s, l.format(true));
+}
+
 TEST(BCP47LanguageTags, CodeConversion) {
   EXPECT_EQ(""s,    mtx::bcp47::language_c{}.get_iso639_2_code());
   EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("de").get_iso639_2_code());

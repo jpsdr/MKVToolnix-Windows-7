@@ -12,6 +12,10 @@
 * MKVToolNix GUI: IETF BCP 47 language tags: the "variants" combo-boxes were
   not populated even when the language tag was valid and contained at a
   variant. Fixes #2923.
+* MKVToolNix GUI: IETF BCP 47 language tags: when no language is selected, at
+  least one of the other components (extended subtags, region, or variants)
+  has something selected and "private use" is not empty, the GUI would claim
+  this to be a valid tag, which it isn't. Fixes #2924.
 
 
 # Version 50.0.0 "Awakenings" 2020-09-06

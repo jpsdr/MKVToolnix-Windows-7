@@ -79,15 +79,6 @@ language_c::format_internal(bool force)
   if (!m_valid && !force)
     return {};
 
-  if (m_language.empty()) {
-    auto output = "x"s;
-
-    for (auto const &private_use : m_private_use)
-      output += fmt::format("-{}", mtx::string::to_lower_ascii(private_use));
-
-    return output;
-  }
-
   auto output = mtx::string::to_lower_ascii(m_language);
 
   for (auto const &subtag : m_extended_language_subtags)
@@ -106,7 +97,11 @@ language_c::format_internal(bool force)
     output += fmt::format("-{}", mtx::string::to_lower_ascii(extension));
 
   if (!m_private_use.empty()) {
-    output += "-x";
+    if (!output.empty())
+      output += "-";
+
+    output += "x";
+
     for (auto const &private_use : m_private_use)
       output += fmt::format("-{}", mtx::string::to_lower_ascii(private_use));
   }
