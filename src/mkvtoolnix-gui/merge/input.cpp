@@ -624,8 +624,10 @@ Tab::onTrackSelectionChanged() {
 
   auto selection = ui->tracks->selectionModel()->selection();
   auto numRows   = Util::numSelectedRows(selection);
-  if (!numRows)
+  if (!numRows) {
+    clearInputControlValues();
     return;
+  }
 
   ui->moveTracksUp->setEnabled(true);
   ui->moveTracksDown->setEnabled(true);

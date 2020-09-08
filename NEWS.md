@@ -16,6 +16,10 @@
   least one of the other components (extended subtags, region, or variants)
   has something selected and "private use" is not empty, the GUI would claim
   this to be a valid tag, which it isn't. Fixes #2924.
+* MKVToolNix GUI: multiplexer: when the tracks/chapters/tags selection changes
+  from "at least one entry selected" to "no entry selected", the input
+  controls will be reset to their default state and not just disabled. Fixes
+  #2927.
 
 
 # Version 50.0.0 "Awakenings" 2020-09-06
