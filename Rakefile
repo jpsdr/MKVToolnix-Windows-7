@@ -1051,6 +1051,7 @@ $common_libs = [
   :iconv,
   :fmt,
   :pcre2,
+  "-lstdc++",
 ]
 
 $common_libs += [:cmark]   if c?(:USE_QT)
