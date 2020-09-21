@@ -70,7 +70,7 @@ public:
 
   std::optional<int64_t> get_bits_per_second() const {
     auto duration = get_duration();
-    return duration && (*duration != 0) ? ((m_num_bytes * 8000) / (*duration / 1000000)) : std::optional<int64_t>{};
+    return duration && (1'000'000 < *duration) ? ((m_num_bytes * 8000) / (*duration / 1'000'000)) : std::optional<int64_t>{};
   }
 
   void account(int64_t timestamp, int64_t duration, uint64_t num_bytes) {

@@ -29,6 +29,8 @@
   no longer claim to recognize data that looks like AVC or HEVC but with
   invalid video width/height values as that lead to failed assertions in
   libEBML later. Found by fuzzying.
+* mkvmerge: track statistics: fixed a "division by zero" error when the
+  content's shorter than 1ms. Found by fuzzying.
 
 
 # Version 50.0.0 "Awakenings" 2020-09-06
