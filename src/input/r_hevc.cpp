@@ -50,6 +50,9 @@ hevc_es_reader_c::probe_file() {
     m_width  = parser.get_width();
     m_height = parser.get_height();
 
+    if ((0 >= m_width) || (0 >= m_height))
+      return false;
+
     return true;
   }
 

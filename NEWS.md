@@ -25,6 +25,10 @@
 * mkvmerge: fixed mkvmerge aborting with a "division by zero" error due to the
   timestamp scaling factor being 0 after handling certain data constellations
   found by fuzzying.
+* mkvmerge: h.264/AVC and h.265/HEVC elementary stream readers: mkvmerge will
+  no longer claim to recognize data that looks like AVC or HEVC but with
+  invalid video width/height values as that lead to failed assertions in
+  libEBML later. Found by fuzzying.
 
 
 # Version 50.0.0 "Awakenings" 2020-09-06
