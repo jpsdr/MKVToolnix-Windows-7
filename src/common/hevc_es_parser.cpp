@@ -469,8 +469,8 @@ es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
 }
 
 void
-es_parser_c::handle_nalu(memory_cptr const &nalu,
-                         uint64_t nalu_pos) {
+es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
+                                  uint64_t nalu_pos) {
   if (1 > nalu->get_size())
     return;
 
@@ -543,6 +543,17 @@ es_parser_c::handle_nalu(memory_cptr const &nalu,
       m_extra_data.push_back(create_nalu_with_size(nalu));
 
       break;
+  }
+}
+
+void
+es_parser_c::handle_nalu(memory_cptr const &nalu,
+                         uint64_t nalu_pos) {
+  try {
+    handle_nalu_internal(nalu, nalu_pos);
+
+  } catch (bool) {
+  } catch (mtx::mm_io::end_of_file_x const &) {
   }
 }
 

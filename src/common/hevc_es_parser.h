@@ -208,6 +208,7 @@ public:
 
 protected:
   bool parse_slice(memory_cptr const &nalu, slice_info_t &si);
+  void handle_nalu_internal(memory_cptr const &nalu, uint64_t nalu_pos);
   void handle_vps_nalu(memory_cptr const &nalu);
   void handle_sps_nalu(memory_cptr const &nalu);
   void handle_pps_nalu(memory_cptr const &nalu);

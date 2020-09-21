@@ -20,6 +20,8 @@
   from "at least one entry selected" to "no entry selected", the input
   controls will be reset to their default state and not just disabled. Fixes
   #2927.
+* mkvmerge: HEVC parser: fixed mkvmerge aborting after uncaught exceptions due
+  to certain data constellations found by fuzzying.
 
 
 # Version 50.0.0 "Awakenings" 2020-09-06
