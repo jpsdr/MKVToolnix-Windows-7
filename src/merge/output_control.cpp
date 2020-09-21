@@ -467,8 +467,11 @@ set_timestamp_scale() {
       && audio_present
       && (0 < highest_sample_rate)
       && (   !video_present
-          || (TIMESTAMP_SCALE_MODE_AUTO == g_timestamp_scale_mode)))
-    g_timestamp_scale = static_cast<int64_t>(1000000000.0 / highest_sample_rate - 1.0);
+          || (TIMESTAMP_SCALE_MODE_AUTO == g_timestamp_scale_mode))) {
+    auto new_timestamp_scale = static_cast<int64_t>(1'000'000'000.0 / highest_sample_rate - 1.0);
+    if (new_timestamp_scale >= 1)
+      g_timestamp_scale = new_timestamp_scale;
+  }
 
   g_max_ns_per_cluster = std::min<int64_t>(32700 * g_timestamp_scale, g_max_ns_per_cluster);
   GetChild<KaxTimecodeScale>(*s_kax_infos).SetValue(g_timestamp_scale);

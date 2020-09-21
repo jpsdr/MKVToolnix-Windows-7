@@ -22,6 +22,9 @@
   #2927.
 * mkvmerge: HEVC parser: fixed mkvmerge aborting after uncaught exceptions due
   to certain data constellations found by fuzzying.
+* mkvmerge: fixed mkvmerge aborting with a "division by zero" error due to the
+  timestamp scaling factor being 0 after handling certain data constellations
+  found by fuzzying.
 
 
 # Version 50.0.0 "Awakenings" 2020-09-06
