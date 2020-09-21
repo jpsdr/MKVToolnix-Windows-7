@@ -31,6 +31,9 @@
   libEBML later. Found by fuzzying.
 * mkvmerge: track statistics: fixed a "division by zero" error when the
   content's shorter than 1ms. Found by fuzzying.
+* mkvmerge: DTS reader: fixed handling of buffers with an odd length when
+  byte-swapped DTS is detected so that mkvmerge doesn't abort with a failed
+  assertion. Found by fuzzying.
 
 
 # Version 50.0.0 "Awakenings" 2020-09-06
