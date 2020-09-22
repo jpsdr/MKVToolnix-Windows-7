@@ -93,11 +93,7 @@ ElideLabel::sizeHint()
 QSize
 ElideLabel::minimumSizeHint()
   const {
-  if (Qt::ElideNone == p_func()->m_elideMode)
-    return sizeHint();
-
-  auto metrics = fontMetrics();
-  return QSize{ Util::horizontalAdvance(metrics, Q("…")), metrics.height() };
+  return sizeHint();
 }
 
 void
