@@ -227,7 +227,8 @@ LanguageDisplayWidget::eventFilter(QObject *obj,
   auto &p = *p_func();
 
   if ((obj == p.ui->lLanguage) && (ev->type() == QEvent::MouseButtonRelease)) {
-    editLanguage();
+    if (p.ui->lLanguage->isEnabled())
+      editLanguage();
     return true;
   }
 
