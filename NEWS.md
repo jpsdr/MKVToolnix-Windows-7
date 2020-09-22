@@ -6,6 +6,10 @@
   missing support for UN M.49 regions for which there are no corresponding ISO
   3166 alpha codes. This enables language tags such as `es-419` = Spanish in
   Latin America and the Caribbean. Implements #2919.
+* MKVToolNix GUI: IETF BCP 47 language tags: the text in the widget displaying
+  the current language & the corresponding edit button is now displayed like a
+  link (depending on the theme: different color & underlined), making it
+  clearer that not just the edit button can be clicked but the text, too.
 
 ## Bug fixes
 

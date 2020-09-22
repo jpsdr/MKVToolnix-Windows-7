@@ -1,6 +1,5 @@
 #include "common/common_pch.h"
 
-#include <QEvent>
 #include <QPushButton>
 
 #include "common/bcp47.h"
@@ -38,10 +37,11 @@ LanguageDisplayWidget::LanguageDisplayWidget(QWidget *parent)
 
   updateDisplay();
 
-  p.ui->lLanguage->installEventFilter(this);
+  p.ui->lLanguage->setClickable(true);
 
-  connect(p.ui->pbClear, &QPushButton::clicked, this, &LanguageDisplayWidget::clearLanguage);
-  connect(p.ui->pbEdit,  &QPushButton::clicked, this, &LanguageDisplayWidget::editLanguage);
+  connect(p.ui->pbClear,   &QPushButton::clicked,      this, &LanguageDisplayWidget::clearLanguage);
+  connect(p.ui->pbEdit,    &QPushButton::clicked,      this, &LanguageDisplayWidget::editLanguage);
+  connect(p.ui->lLanguage, &Util::ElideLabel::clicked, this, &LanguageDisplayWidget::editLanguage);
 }
 
 LanguageDisplayWidget::~LanguageDisplayWidget() {
@@ -219,20 +219,6 @@ LanguageDisplayWidget::updateToolTip() {
           << Q("</table>");
 
   p.ui->lLanguage->setToolTip(content.join(QString{}));
-}
-
-bool
-LanguageDisplayWidget::eventFilter(QObject *obj,
-                                   QEvent *ev) {
-  auto &p = *p_func();
-
-  if ((obj == p.ui->lLanguage) && (ev->type() == QEvent::MouseButtonRelease)) {
-    if (p.ui->lLanguage->isEnabled())
-      editLanguage();
-    return true;
-  }
-
-  return QWidget::eventFilter(obj, ev);
 }
 
 }

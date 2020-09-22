@@ -33,21 +33,25 @@ public:
 
   Qt::TextElideMode elideMode() const;
   void setElideMode(Qt::TextElideMode mode);
+  void setClickable(bool clickable);
 
   virtual QSize sizeHint() const;
   virtual QSize minimumSizeHint() const;
 
 public Q_SLOTS:
   void setText(QString const &text);
+  void emitClickedSignal();
 
 Q_SIGNALS:
   void textChanged(QString const &text);
+  void clicked();
 
 protected:
-  virtual void changeEvent(QEvent *event);
-  virtual void paintEvent(QPaintEvent *event);
+  virtual void changeEvent(QEvent *event) override;
+  virtual void paintEvent(QPaintEvent *event) override;
 
   void updateLabel();
+  void setup();
 };
 
 }

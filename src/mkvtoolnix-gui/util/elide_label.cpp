@@ -2,8 +2,9 @@
 
 #include <QEvent>
 #include <QFrame>
+#include <QLabel>
 #include <QPaintEvent>
-#include <QPainter>
+// #include <QPainter>
 #include <QString>
 
 #include "common/common_pch.h"
@@ -19,7 +20,9 @@ private:
   friend class ElideLabel;
 
   QString m_text;
+  QLabel *m_label{};
   Qt::TextElideMode m_elideMode{Qt::ElideMiddle};
+  bool m_clickable{};
 };
 
 ElideLabel::ElideLabel(QWidget *parent,
@@ -27,6 +30,7 @@ ElideLabel::ElideLabel(QWidget *parent,
   : QFrame{parent, flags}
   , p_ptr{new ElideLabelPrivate}
 {
+  setup();
 }
 
 ElideLabel::ElideLabel(QString const &text,
@@ -35,6 +39,7 @@ ElideLabel::ElideLabel(QString const &text,
   : QFrame{parent, flags}
   , p_ptr{new ElideLabelPrivate}
 {
+  setup();
   p_func()->m_text = text;
 }
 
@@ -43,9 +48,22 @@ ElideLabel::ElideLabel(QWidget *parent,
   : QFrame{parent}
   , p_ptr{&p}
 {
+  setup();
 }
 
 ElideLabel::~ElideLabel() {
+}
+
+void
+ElideLabel::setup() {
+  auto &p = *p_func();
+
+  if (!p.m_label)
+    p.m_label = new QLabel{this};
+
+  p.m_label->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
+
+  connect(p.m_label, &QLabel::linkActivated, this, &ElideLabel::emitClickedSignal);
 }
 
 QString
@@ -64,6 +82,12 @@ ElideLabel::setText(QString const &text) {
   p->m_text = text;
   updateLabel();
   Q_EMIT textChanged(p->m_text);
+}
+
+void
+ElideLabel::setClickable(bool clickable) {
+  p_func()->m_clickable = clickable;
+  updateLabel();
 }
 
 Qt::TextElideMode
@@ -107,15 +131,30 @@ ElideLabel::changeEvent(QEvent *event) {
 
 void
 ElideLabel::paintEvent(QPaintEvent *event) {
-  auto p = p_func();
+  auto &p = *p_func();
 
   QFrame::paintEvent(event);
 
   auto r          = contentsRect();
-  auto elidedText = fontMetrics().elidedText(p->m_text, p->m_elideMode, r.width());
+  auto elidedText = fontMetrics().elidedText(p.m_text, p.m_elideMode, r.width());
 
-  QPainter painter{this};
-  painter.drawText(r, Qt::AlignLeft, elidedText);
+  p.m_label->resize(r.width(), r.height());
+
+  if (p.m_clickable && isEnabled()) {
+    p.m_label->setTextFormat(Qt::RichText);
+    p.m_label->setText(Q("<a href=\"click://\">%1</a>").arg(elidedText.toHtmlEscaped()));
+
+  } else {
+    p.m_label->setTextFormat(Qt::PlainText);
+    p.m_label->setText(elidedText);
+  }
+
+  p.m_label->setEnabled(isEnabled());
+}
+
+void
+ElideLabel::emitClickedSignal() {
+  Q_EMIT clicked();
 }
 
 void

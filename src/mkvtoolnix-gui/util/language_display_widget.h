@@ -6,8 +6,6 @@
 
 #include "common/bcp47.h"
 
-class QEvent;
-
 namespace mtx::gui::Util {
 
 namespace Ui {
@@ -50,8 +48,6 @@ Q_SIGNALS:
 protected:
   void updateDisplay();
   void updateToolTip();
-
-  bool eventFilter(QObject *obj, QEvent *ev) override;
 };
 
 }
