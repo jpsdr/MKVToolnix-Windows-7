@@ -138,7 +138,7 @@ mm_text_io_c::get_encoding(byte_order_mark_e byte_order_mark) {
        : byte_order_mark_e::utf16_le == byte_order_mark ? "UTF-16LE"s
        : byte_order_mark_e::utf16_be == byte_order_mark ? "UTF-16BE"s
        : byte_order_mark_e::utf32_le == byte_order_mark ? "UTF-32LE"s
-       :                             "UTF-32BE"s;
+       :                                                  "UTF-32BE"s;
 }
 
 // 1 byte: 0xxxxxxx,
