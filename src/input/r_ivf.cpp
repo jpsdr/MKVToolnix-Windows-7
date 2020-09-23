@@ -45,13 +45,20 @@ ivf_reader_c::read_headers() {
   m_height         = get_uint16_le(&m_header.height);
   m_frame_rate_num = get_uint32_le(&m_header.frame_rate_num);
   m_frame_rate_den = get_uint32_le(&m_header.frame_rate_den);
+  m_ok             = m_width && m_height && m_frame_rate_num && m_frame_rate_den;
 
   show_demuxer_info();
 }
 
 void
+ivf_reader_c::add_available_track_ids() {
+  if (m_ok)
+    add_available_track_id(0);
+}
+
+void
 ivf_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('v', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('v', 0) || (NPTZR() != 0) || !m_ok)
     return;
 
   if (m_codec.is(codec_c::type_e::V_AV1))
@@ -119,9 +126,12 @@ ivf_reader_c::read(generic_packetizer_c *,
 
 void
 ivf_reader_c::identify() {
+  id_result_container();
+
+  if (!m_ok)
+    return;
+
   auto info = mtx::id::info_c{};
   info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", m_width, m_height));
-
-  id_result_container();
   id_result_track(0, ID_RESULT_TRACK_VIDEO, m_codec.get_name(), info.get());
 }

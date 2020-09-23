@@ -43,6 +43,8 @@
   widget.
 * mkvmerge: AV1 parser: fixed mkvmerge crashing after uncaught exceptions due
   to certain data conditions. Found by fuzzying.
+* mkvmerge: IVF reader: fixed mkvmerge crashing with a "division by zero"
+  error due to certain data conditions. Found by fuzzying.
 
 
 # Version 50.0.0 "Awakenings" 2020-09-06

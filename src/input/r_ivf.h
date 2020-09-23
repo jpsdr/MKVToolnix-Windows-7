@@ -23,9 +23,10 @@
 class ivf_reader_c: public generic_reader_c {
 private:
   ivf::file_header_t m_header;
-  uint16_t m_width, m_height;
-  uint64_t m_frame_rate_num, m_frame_rate_den;
+  uint16_t m_width{}, m_height{};
+  uint64_t m_frame_rate_num{}, m_frame_rate_den{};
   codec_c m_codec;
+  bool m_ok{};
   debugging_option_c m_debug{"ivf_reader"};
 
 public:
@@ -33,6 +34,7 @@ public:
     return mtx::file_type_e::ivf;
   }
 
+  virtual void add_available_track_ids() override;
   virtual void read_headers() override;
   virtual void identify() override;
   virtual void create_packetizer(int64_t id) override;
