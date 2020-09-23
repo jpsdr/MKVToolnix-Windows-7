@@ -386,8 +386,13 @@ parser_c::parse(unsigned char const *buffer,
   mxdebug_if(p->debug_parser, fmt::format("debug_parser: start on size {0}\n", buffer_size));
 
   while (r.get_remaining_bits() > 0)
-    if (!parse_obu())
+    try {
+      if (!parse_obu())
+        break;
+    } catch (exception const &ex) {
+      mxdebug_if(p->debug_parser, fmt::format("debug_parser: exception: {0}\n", ex.what()));
       break;
+    }
 
   p->buffer.remove((r.get_bit_position() + 7) / 8);
 }

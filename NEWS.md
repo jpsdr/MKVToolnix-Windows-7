@@ -41,6 +41,8 @@
 * MKVToolNix GIU: IETF BCP 47/RFC 5646 language tags: the GUI will no longer
   open the language dialog when clicking on a disabled language display
   widget.
+* mkvmerge: AV1 parser: fixed mkvmerge crashing after uncaught exceptions due
+  to certain data conditions. Found by fuzzying.
 
 
 # Version 50.0.0 "Awakenings" 2020-09-06
