@@ -102,8 +102,18 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
           && (   is_level1_element_id(actual_id)
               || is_global_element_id(actual_id)))) {
     auto l1 = read_one_element();
-    if (l1)
-      return l1;
+
+    if (l1) {
+      mxdebug_if(m_debug_read_next,
+                 fmt::format("kax_file::read_next_level1_element() case 1: other level 1 element {0} new pos {1} fsize {2} epos {3} esize {4}\n",
+                             EBML_NAME(l1), l1->GetElementPosition() + get_element_size(*l1), m_file_size, l1->GetElementPosition(), get_element_size(*l1)));
+
+      // If a specific level 1 is wanted, make sure it was actually
+      // read. Otherwise try again.
+      if (!wanted_id || (wanted_id == EbmlId(*l1).Value))
+        return l1;
+      return read_next_level1_element(wanted_id);
+    }
   }
 
   // If a specific level 1 is wanted then look for next ID by skipping

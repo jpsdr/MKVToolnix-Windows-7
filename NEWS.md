@@ -45,6 +45,8 @@
   to certain data conditions. Found by fuzzying.
 * mkvmerge: IVF reader: fixed mkvmerge crashing with a "division by zero"
   error due to certain data conditions. Found by fuzzying.
+* mkvmerge, mkvinfo, mkvextract, mkvpropedit: Matroska access class: fixed an
+  invalid memory access under certain data conditions. Found by fuzzying.
 
 
 # Version 50.0.0 "Awakenings" 2020-09-06
