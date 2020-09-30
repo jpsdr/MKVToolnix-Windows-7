@@ -1,5 +1,5 @@
 dnl
-dnl Check for nlohmann's json-cpp library
+dnl Check for the fmt library
 dnl
 
 
