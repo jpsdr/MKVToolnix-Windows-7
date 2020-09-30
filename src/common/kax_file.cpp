@@ -87,8 +87,7 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
   auto actual_id        = vint_c::read_ebml_id(m_in);
   m_in.setFilePointer(search_start_pos);
 
-  if (m_debug_read_next)
-    mxinfo(fmt::format("kax_file::read_next_level1_element(): search at {0} for {3:x} act id {1:x} is_valid {2}\n", search_start_pos, actual_id.m_value, actual_id.is_valid(), wanted_id));
+  mxdebug_if(m_debug_read_next, fmt::format("kax_file::read_next_level1_element(): search at {0} for {3:x} act id {1:x} is_valid {2}\n", search_start_pos, actual_id.m_value, actual_id.is_valid(), wanted_id));
 
   // If no valid ID was read then re-sync right away. No other tests
   // can be run.
@@ -118,9 +117,9 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
       auto element_size = get_element_size(*l1);
       auto ok           = (0 != element_size) && m_in.setFilePointer2(l1->GetElementPosition() + element_size);
 
-      if (m_debug_read_next)
-        mxinfo(fmt::format("kax_file::read_next_level1_element(): other level 1 element {0} new pos {1} fsize {2} epos {3} esize {4}\n",
-                           EBML_NAME(l1), l1->GetElementPosition() + element_size, m_file_size, l1->GetElementPosition(), element_size));
+      mxdebug_if(m_debug_read_next,
+                 fmt::format("kax_file::read_next_level1_element() case 2: other level 1 element {0} new pos {1} fsize {2} epos {3} esize {4}\n",
+                             EBML_NAME(l1), l1->GetElementPosition() + element_size, m_file_size, l1->GetElementPosition(), element_size));
 
       return ok ? read_next_level1_element(wanted_id) : nullptr;
     }
@@ -163,9 +162,9 @@ kax_file_c::read_one_element() {
   }
 
   auto element_size = get_element_size(*l1);
-  if (m_debug_resync)
-    mxinfo(fmt::format("kax_file::read_one_element(): read element at {0} calculated size {1} stored size {2}\n",
-                       l1->GetElementPosition(), element_size, l1->IsFiniteSize() ? fmt::format("{0}", l1->ElementSize()) : "unknown"s));
+  mxdebug_if(m_debug_resync,
+             fmt::format("kax_file::read_one_element(): read element at {0} calculated size {1} stored size {2}\n",
+                         l1->GetElementPosition(), element_size, l1->IsFiniteSize() ? fmt::format("{0}", l1->ElementSize()) : "unknown"s));
   m_in.setFilePointer(l1->GetElementPosition() + element_size);
 
   return l1;
@@ -192,8 +191,7 @@ kax_file_c::resync_to_level1_element(uint32_t wanted_id) {
   try {
     return resync_to_level1_element_internal(wanted_id);
   } catch (...) {
-    if (m_debug_resync)
-      mxinfo("kax_file::resync_to_level1_element(): exception\n");
+    mxdebug_if(m_debug_resync, "kax_file::resync_to_level1_element(): exception\n");
     return {};
   }
 }
@@ -218,8 +216,7 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
     m_last_timestamp = -1;
   }
 
-  if (m_debug_resync)
-    mxinfo(fmt::format("kax_file::resync_to_level1_element(): starting at {0} potential ID {1:08x}\n", m_resync_start_pos, actual_id));
+  mxdebug_if(m_debug_resync, fmt::format("kax_file::resync_to_level1_element(): starting at {0} potential ID {1:08x}\n", m_resync_start_pos, actual_id));
 
   while (m_in.getFilePointer() < m_file_size) {
     auto now = mtx::sys::get_current_time_millis();
@@ -239,16 +236,13 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
     auto num_headers        = 1u;
     auto valid_unknown_size = false;
 
-    if (m_debug_resync)
-      mxinfo(fmt::format("kax_file::resync_to_level1_element(): byte-for-byte search, found level 1 ID {1:x} at {0}\n", current_start_pos, actual_id));
+    mxdebug_if(m_debug_resync, fmt::format("kax_file::resync_to_level1_element(): byte-for-byte search, found level 1 ID {1:x} at {0}\n", current_start_pos, actual_id));
 
     try {
       for (auto idx = 0; 3 > idx; ++idx) {
         auto length = vint_c::read(m_in);
 
-        if (m_debug_resync)
-          mxinfo(fmt::format("kax_file::resync_to_level1_element():   read ebml length {0}/{1} valid? {2} unknown? {3}\n",
-                             length.m_value, length.m_coded_size, length.is_valid(), length.is_unknown()));
+        mxdebug_if(m_debug_resync, fmt::format("kax_file::resync_to_level1_element():   read ebml length {0}/{1} valid? {2} unknown? {3}\n", length.m_value, length.m_coded_size, length.is_valid(), length.is_unknown()));
 
         if (length.is_unknown()) {
           valid_unknown_size = true;
@@ -263,8 +257,7 @@ kax_file_c::resync_to_level1_element_internal(uint32_t wanted_id) {
         element_pos  = m_in.getFilePointer();
         auto next_id = m_in.read_uint32_be();
 
-        if (m_debug_resync)
-          mxinfo(fmt::format("kax_file::resync_to_level1_element():   next ID is {0:x} at {1}\n", next_id, element_pos));
+        mxdebug_if(m_debug_resync, fmt::format("kax_file::resync_to_level1_element():   next ID is {0:x} at {1}\n", next_id, element_pos));
 
         if (   ((0 != wanted_id) && (wanted_id != next_id))
             || ((0 == wanted_id) && !is_level1_element_id(vint_c(next_id, 4))))
