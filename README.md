@@ -128,6 +128,9 @@ These libraries are:
 - [fmt](http://fmtlib.net/) — a small, safe and fast formatting
   library. Version 3 or later is required.
 
+- [JPCRE2](https://github.com/jpcre2/jpcre2/) — C++ wrapper for the
+  PCRE2 library. Version 10.32.1 or newer is required.
+
 - [libEBML v1.4.0](http://dl.matroska.org/downloads/libebml/) or later
   and [libMatroska v1.6.1](http://dl.matroska.org/downloads/libmatroska/)
   or later for low-level access to Matroska files. Instructions on how to

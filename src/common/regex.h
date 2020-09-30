@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-#include "jpcre2/jpcre2.hpp"
+#include <jpcre2.hpp>
 
 namespace mtx::regex {
 

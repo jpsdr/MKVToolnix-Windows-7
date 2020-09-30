@@ -48,6 +48,13 @@
 * mkvmerge, mkvinfo, mkvextract, mkvpropedit: Matroska access class: fixed an
   invalid memory access under certain data conditions. Found by fuzzying.
 
+## Build system changes
+
+* `configure` now checks for the presence of the a system-wide installed copy
+  of the JPCRE2 C++ wrapper library for the PCRE2 library and uses that if
+  it's new enough (at least v10.32.1). If not, the bundled version will be
+  used as a fallback. Implements #2929.
+
 
 # Version 50.0.0 "Awakenings" 2020-09-06
 

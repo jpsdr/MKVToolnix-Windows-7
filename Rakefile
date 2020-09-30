@@ -86,6 +86,7 @@ def setup_globals
   $manpages                << "doc/man/mkvtoolnix-gui.1" if $build_mkvtoolnix_gui
 
   $system_includes         = "-I. -Ilib -Ilib/avilib-0.6.10 -Isrc"
+  $system_includes        += " -Ilib/jpcre2"          if c?(:JPCRE2_INTERNAL)
   $system_includes        += " -Ilib/utf8-cpp/source" if c?(:UTF8CPP_INTERNAL)
   $system_includes        += " -Ilib/pugixml/src"     if c?(:PUGIXML_INTERNAL)
   $system_libdirs          = "-Llib/avilib-0.6.10 -Llib/librmff -Lsrc/common"
