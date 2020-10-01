@@ -129,9 +129,10 @@ av1_video_packetizer_c::flush_frames() {
   while (m_parser.frame_available()) {
     auto frame           = m_parser.get_next_frame();
     auto bref            = frame.is_keyframe ? -1 : m_previous_timestamp;
+    auto duration        = m_htrack_default_duration > 0 ? m_htrack_default_duration : -1;
     m_previous_timestamp = frame.timestamp;
 
-    add_packet(std::make_shared<packet_t>(frame.mem, frame.timestamp, -1, bref));
+    add_packet(std::make_shared<packet_t>(frame.mem, frame.timestamp, duration, bref));
   }
 }
 

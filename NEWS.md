@@ -47,6 +47,9 @@
   error due to certain data conditions. Found by fuzzying.
 * mkvmerge, mkvinfo, mkvextract, mkvpropedit: Matroska access class: fixed an
   invalid memory access under certain data conditions. Found by fuzzying.
+* mkvmerge: AV1 packetizer: the duration of frames wasn't set properly. When
+  appending AV1 IVF or OBU files this meant that the last frame of the Nth
+  file and the first frame of file N+1 had the same timestamp. Fixes #2937.
 
 ## Build system changes
 

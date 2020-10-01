@@ -7,5 +7,5 @@ test "extraction to IVF" do
   extract "data/av1/av1.webm", 0 => "#{tmp}-1"
   merge "#{tmp}-1", :output => "#{tmp}-2"
 
-  (1..2).map { |idx| hash_file("#{tmp}-#{idx}") }.join('+')
+  (1..2).map { |idx| hash_file("#{tmp}-#{idx}") }.join('-')
 end
