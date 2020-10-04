@@ -13,6 +13,32 @@
 
 ## Bug fixes
 
+* mkvmerge: AV1 parser: fixed mkvmerge crashing after uncaught exceptions due
+  to certain data conditions. Found by fuzzying.
+* mkvmerge: AV1 packetizer: the duration of frames wasn't set properly. When
+  appending AV1 IVF or OBU files this meant that the last frame of the Nth
+  file and the first frame of file N+1 had the same timestamp. Fixes #2937.
+* mkvmerge: DTS reader: fixed handling of buffers with an odd length when
+  byte-swapped DTS is detected so that mkvmerge doesn't abort with a failed
+  assertion. Found by fuzzying.
+* mkvmerge: h.264/AVC and h.265/HEVC elementary stream readers: mkvmerge will
+  no longer claim to recognize data that looks like AVC or HEVC but with
+  invalid video width/height values as that lead to failed assertions in
+  libEBML later. Found by fuzzying.
+* mkvmerge: h.265/HEVC parser: fixed mkvmerge aborting after uncaught
+  exceptions due to certain data constellations found by fuzzying.
+* mkvmerge: IVF reader: fixed mkvmerge crashing with a "division by zero"
+  error due to certain data conditions. Found by fuzzying.
+* mkvmerge: fixed mkvmerge aborting with a "division by zero" error due to the
+  timestamp scaling factor being 0 after handling certain data constellations
+  found by fuzzying.
+* mkvmerge: track statistics: fixed a "division by zero" error when the
+  content's shorter than 1ms. Found by fuzzying.
+* mkvmerge, mkvinfo, mkvextract, mkvpropedit: Matroska access class: fixed an
+  invalid memory access under certain data conditions. Found by fuzzying.
+* MKVToolNix GIU: IETF BCP 47/RFC 5646 language tags: the GUI will no longer
+  open the language dialog when clicking on a disabled language display
+  widget.
 * MKVToolNix GUI: IETF BCP 47 language tags: the "variants" combo-boxes were
   not populated even when the language tag was valid and contained at a
   variant. Fixes #2923.
@@ -24,32 +50,6 @@
   from "at least one entry selected" to "no entry selected", the input
   controls will be reset to their default state and not just disabled. Fixes
   #2927.
-* mkvmerge: HEVC parser: fixed mkvmerge aborting after uncaught exceptions due
-  to certain data constellations found by fuzzying.
-* mkvmerge: fixed mkvmerge aborting with a "division by zero" error due to the
-  timestamp scaling factor being 0 after handling certain data constellations
-  found by fuzzying.
-* mkvmerge: h.264/AVC and h.265/HEVC elementary stream readers: mkvmerge will
-  no longer claim to recognize data that looks like AVC or HEVC but with
-  invalid video width/height values as that lead to failed assertions in
-  libEBML later. Found by fuzzying.
-* mkvmerge: track statistics: fixed a "division by zero" error when the
-  content's shorter than 1ms. Found by fuzzying.
-* mkvmerge: DTS reader: fixed handling of buffers with an odd length when
-  byte-swapped DTS is detected so that mkvmerge doesn't abort with a failed
-  assertion. Found by fuzzying.
-* MKVToolNix GIU: IETF BCP 47/RFC 5646 language tags: the GUI will no longer
-  open the language dialog when clicking on a disabled language display
-  widget.
-* mkvmerge: AV1 parser: fixed mkvmerge crashing after uncaught exceptions due
-  to certain data conditions. Found by fuzzying.
-* mkvmerge: IVF reader: fixed mkvmerge crashing with a "division by zero"
-  error due to certain data conditions. Found by fuzzying.
-* mkvmerge, mkvinfo, mkvextract, mkvpropedit: Matroska access class: fixed an
-  invalid memory access under certain data conditions. Found by fuzzying.
-* mkvmerge: AV1 packetizer: the duration of frames wasn't set properly. When
-  appending AV1 IVF or OBU files this meant that the last frame of the Nth
-  file and the first frame of file N+1 had the same timestamp. Fixes #2937.
 
 ## Build system changes
 
