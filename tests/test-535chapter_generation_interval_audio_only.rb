@@ -1,6 +1,4 @@
 #!/usr/bin/ruby -w
-# coding: utf-8
-
 file = "data/simple/v.mp3"
 
 # T_535chapter_generation_interval_audio_only

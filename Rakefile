@@ -1,5 +1,3 @@
-# coding: utf-8
-
 $build_start = Time.now
 
 if Signal.list.key?('ALRM')

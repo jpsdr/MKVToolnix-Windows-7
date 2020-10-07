@@ -1,4 +1,3 @@
-# coding: utf-8
 #
 #   mkvtoolnix - programs for manipulating Matroska files
 #   Copyright © 2003…2016 Moritz Bunkus

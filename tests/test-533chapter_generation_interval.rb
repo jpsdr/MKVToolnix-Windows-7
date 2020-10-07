@@ -1,6 +1,4 @@
 #!/usr/bin/ruby -w
-# coding: utf-8
-
 file = "data/avi/v-h264-aac.avi"
 
 # T_533chapter_generation_interval

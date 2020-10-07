@@ -1,5 +1,3 @@
-# coding: utf-8
-
 module Mtx::Installer
   def self.read_translation_file file_name
     # Local Variables:

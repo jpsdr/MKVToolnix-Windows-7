@@ -1,6 +1,4 @@
 #!/usr/bin/ruby -w
-# coding: utf-8
-
 # T_671emojis
 describe "mkvmerge / Emojis"
 

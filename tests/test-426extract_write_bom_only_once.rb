@@ -1,6 +1,4 @@
 #!/usr/bin/ruby -w
-# -*- coding: utf-8 -*-
-
 # T_426extract_write_bom_only_once
 file = "data/mkv/complex.mkv"
 

@@ -1,5 +1,3 @@
-# coding: utf-8
-
 module Mtx::SourceTests
   def self.collect_header_files
     ui_file_names        = FileList["src/**/*.ui"]

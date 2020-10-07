@@ -1,6 +1,4 @@
 #!/usr/bin/ruby -w
-# coding: utf-8
-
 base = "data/simple/Datei didödeldü "
 
 # T_552chapter_generation_appending_file_name_variables
