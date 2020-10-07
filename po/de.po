@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-10-04 15:53+0200\n"
-"PO-Revision-Date: 2020-10-04 15:55+0200\n"
+"POT-Creation-Date: 2020-10-07 16:23+0200\n"
+"PO-Revision-Date: 2020-10-07 16:32+0200\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -4791,6 +4791,11 @@ msgstr "Die Bibliothek »iconv« konnte nicht für die Zeichensatzumwandlung von
 #, no-c-format
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "Die Bibliothek »iconv« konnte nicht für die Zeichensatzumwandlung von {0} nach UTF-8 initialisiert werden. Einige Zeichenketten werden somit nicht nach UTF-8 konvertiert und die entstehende Matroska-Datei wird eventuell nicht den Spezifikationen entsprechen (Fehlermeldung: {1}, {2}).\n"
+
+#: src/input/r_matroska.cpp:1685
+#, no-c-format
+msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
+msgstr "Die UID {0} einer Spur kann nicht beibehalten werden, da die UID schon einer anderen Spur zugeordnet wurde. Eine neue, zufällige UID wird automatisch erzeugt.\n"
 
 #: src/common/chapters/chapters.cpp:307
 #: src/common/chapters/chapters.cpp:309
@@ -14989,11 +14994,6 @@ msgstr "matroska_reader: (MS-Kompatibilitätsmodus für Spur {0}) Laut Matroska-
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (MS-Kompatibilitätsmodus für Spur {0}) Laut Matroska-Kopfdaten hat die Spur eine Breite von {1} Pixeln, laut BITMAPINFOHEADER-Struktur jedoch {2}.\n"
-
-#: src/input/r_matroska.cpp:1685
-#, no-c-format
-msgid "matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"
-msgstr "matroska_reader: Die Spur-UID {0} kann nicht beibehalten werden, da sie schon für eine andere Spur benutzt wird.\n"
 
 #: src/input/r_matroska.cpp:1529
 #: src/input/r_matroska.cpp:1534

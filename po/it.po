@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 17.12.2018\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-10-04 15:53+0200\n"
+"POT-Creation-Date: 2020-10-07 16:23+0200\n"
 "PO-Revision-Date: 2020-10-06 08:34+0000\n"
 "Last-Translator: bovirus <roberto.boriotti@canon-europe.com>\n"
 "Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -4783,6 +4783,11 @@ msgstr "Impossibile inizializzare la libreria icone per la conversione da {0} a 
 #, no-c-format
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "Impossibile inizializzare la libreria icone per la conversione da {0} a UTF-8. Alcune stringhe non verranno convertite in UTF-8 e il file Matroska risultante potrebbe non essere compatibile con le specifiche Matroska (errore: {1}, {2}).\n"
+
+#: src/input/r_matroska.cpp:1685
+#, fuzzy, no-c-format
+msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
+msgstr "matroska_reader: impossibile mantenere l'UID traccia {0} poiché è già allocato per il nuovo file.\n"
 
 #: src/common/chapters/chapters.cpp:307
 #: src/common/chapters/chapters.cpp:309
@@ -14990,11 +14995,6 @@ msgstr "matroska_reader: (modo compatibilità MS per la traccia {0}) Matroska ri
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (modo compatibilità MS per la traccia {0}) Matroska riporta che la larghezza è {1}, ma BITMAPINFO riporta che è {2}.\n"
-
-#: src/input/r_matroska.cpp:1685
-#, no-c-format
-msgid "matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"
-msgstr "matroska_reader: impossibile mantenere l'UID traccia {0} poiché è già allocato per il nuovo file.\n"
 
 #: src/input/r_matroska.cpp:1529
 #: src/input/r_matroska.cpp:1534

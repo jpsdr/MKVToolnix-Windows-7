@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-10-04 15:53+0200\n"
+"POT-Creation-Date: 2020-10-07 16:23+0200\n"
 "PO-Revision-Date: 2020-09-02 18:12+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Czech (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/cs/)\n"
@@ -4782,6 +4782,11 @@ msgstr "Nelze inicializovat knihovnu iconv pro převod z UTF-8 na {0}. Některé
 #, no-c-format
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "Nelze inicializovat knihovnu iconv pro převod z {0} na UTF-8. Některé řetězce nebudou převedeny na UTF-8 a výsledný soubor Matroska nemusí odpovídat specifikaci Matroska (chyba: {1}, {2}).\n"
+
+#: src/input/r_matroska.cpp:1685
+#, fuzzy, no-c-format
+msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
+msgstr "matroska_reader: Nelze ponechat UID stopy {0}, protože je již přiděleno pro nový soubor.\n"
 
 #: src/common/chapters/chapters.cpp:307
 #: src/common/chapters/chapters.cpp:309
@@ -15021,11 +15026,6 @@ msgstr "matroska_reader: (Režim kompatibility MS, stopa {0}) Matroska říká, 
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (Režim kompatibility MS, stopa {0}) Matroska říká, že šířka videa je {1}, ale BITMAPINFOHEADER říká, že je {2}.\n"
-
-#: src/input/r_matroska.cpp:1685
-#, no-c-format
-msgid "matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"
-msgstr "matroska_reader: Nelze ponechat UID stopy {0}, protože je již přiděleno pro nový soubor.\n"
 
 #: src/input/r_matroska.cpp:1529
 #: src/input/r_matroska.cpp:1534

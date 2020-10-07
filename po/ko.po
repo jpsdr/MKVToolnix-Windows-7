@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2020-10-04 15:53+0200\n"
+"POT-Creation-Date: 2020-10-07 16:23+0200\n"
 "PO-Revision-Date: 2020-09-02 18:12+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -4733,6 +4733,11 @@ msgstr "UTF-8에서 {0}로 변환에 필요한 iconv 라이브러리를 초기�
 #, no-c-format
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "{0}에서 UTF-8로 변환에 필요한 iconv 라이브러리를 초기화할 수 없습니다. 몇몇 문자열은 UTF-8로 변환하지 못할 것이고 결과로 나오는 Matroska 파일은 Matroska 스펙을 준수하지 못할 수 있습니다. (오류: {1}, {2}).\n"
+
+#: src/input/r_matroska.cpp:1685
+#, fuzzy, no-c-format
+msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
+msgstr "matroska_리더: 새 파일에 이미 할당되었기 때문에, 트랙UID {0}를 유지할 수 없습니다.\n"
 
 #: src/common/chapters/chapters.cpp:307
 #: src/common/chapters/chapters.cpp:309
@@ -14917,11 +14922,6 @@ msgstr "matroska_리더: (트랙 {0}, MS 호환 모드) Matroska에 따르면 �
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_리더: (트랙 {0}, MS 호환 모드) Matroska에 따르면 비디오 가로(너비) 해상도는 {1}이지만, BITMAPINFOHEADER에 따르면 {2}입니다.\n"
-
-#: src/input/r_matroska.cpp:1685
-#, no-c-format
-msgid "matroska_reader: Could not keep the track UID {0} because it is already allocated for the new file.\n"
-msgstr "matroska_리더: 새 파일에 이미 할당되었기 때문에, 트랙UID {0}를 유지할 수 없습니다.\n"
 
 #: src/input/r_matroska.cpp:1529
 #: src/input/r_matroska.cpp:1534
