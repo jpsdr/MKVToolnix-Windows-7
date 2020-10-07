@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2020-10-04 15:53+0200\n"
-"PO-Revision-Date: 2020-10-02 16:34+0000\n"
+"PO-Revision-Date: 2020-10-07 10:44+0000\n"
 "Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/bg/)\n"
 "Language: bg\n"
@@ -643,6 +643,10 @@ msgid ""
 "                           Removes or minimizes the dialog normalization gain\n"
 "                           by modifying audio frame headers.\n"
 msgstr ""
+"  --remove-dialog-normalization-gain <TID>\n"
+"                           Премахва или поне намалява нормализиращото\n"
+"                           усилване на диалозите чрез модифициране на\n"
+"                           хедърите за аудио кадри.\n"
 
 #: src/merge/mkvmerge.cpp:121
 #, no-c-format
@@ -1561,7 +1565,7 @@ msgstr "&Включено"
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:119
 #, no-c-format
 msgid "&Escape arguments for:"
-msgstr ""
+msgstr "&Екраниране на аргументи за:"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:203
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:342
@@ -3912,9 +3916,9 @@ msgid "C&opy to clipboard"
 msgstr "&Копирай в клипборда"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1775
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "C&ountries && regions"
-msgstr "Д&ържави"
+msgstr "&Държави и региони"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:201
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1863
@@ -4950,7 +4954,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:118
 #, no-c-format
 msgid "Current command line"
-msgstr ""
+msgstr "Текущ команден ред"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:252
 #, no-c-format
@@ -5481,7 +5485,7 @@ msgstr "Не променяй"
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:123
 #, no-c-format
 msgid "Don't escape"
-msgstr ""
+msgstr "Без екраниране"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1819
 #, no-c-format
@@ -6348,7 +6352,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/input.cpp:510
 #, no-c-format
 msgid "For such files you can use this parameter and decrease the size to 2."
-msgstr ""
+msgstr "За такива файлове може да използваш този параметър и да намалиш размера на 2."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1541
 #, no-c-format
@@ -6903,7 +6907,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/input.cpp:505
 #, no-c-format
 msgid "If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all."
-msgstr ""
+msgstr "Ако се остави празно, тогава ще бъде запазен оригиналният стерео режим, или ако такъв липсва – няма въобще да бъде задаван."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:189
 #, no-c-format
@@ -7044,7 +7048,7 @@ msgstr "Ако оставиш това поле непопълнено, тога
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:318
 #, no-c-format
 msgid "If you often use the same names for tracks, you can enter them here."
-msgstr ""
+msgstr "Ако често използвате едни и същи имена за пътечки, може да ги въведете тук."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:328
 #, no-c-format
@@ -7581,7 +7585,7 @@ msgstr "Това поле е задължително и не може да бъ
 #: src/mkvtoolnix-gui/merge/input.cpp:509
 #, no-c-format
 msgid "It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes."
-msgstr ""
+msgstr "По подразбиране е 4 байта, но има файлове, които не съдържат кадри или парчета, по-големи от 65535 байта."
 
 #: src/merge/mkvmerge.cpp:1014
 #, no-c-format
@@ -8898,7 +8902,7 @@ msgstr "Показани са само първите %1 байта."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:409
 #, no-c-format
 msgid "Only the languages in the 'selected' list on the right will be recognized as track languages in file names."
-msgstr ""
+msgstr "Единствено езиците в списъка „избрани“ вдясно ще бъдат разпознати като езици на пътечки в имената на файловете."
 
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 #, no-c-format
@@ -9561,7 +9565,7 @@ msgstr ""
 #: src/input/r_qtmp4.cpp:130
 #, no-c-format
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
-msgstr ""
+msgstr "Quicktime/MP4 четец: Невалиден размер на парчето {0} при {1}.\n"
 
 #: src/input/r_qtmp4.cpp:3501
 #, no-c-format
@@ -9846,7 +9850,7 @@ msgstr "Премахни завършилите задания от опашка
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1778
 #, no-c-format
 msgid "Remove dialog normalization gain"
-msgstr ""
+msgstr "Премахни нормализиращо усилване на диалога"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:189
 #, no-c-format
@@ -9866,7 +9870,7 @@ msgstr "Премахни изходния &файл при завършване 
 #: src/mkvtoolnix-gui/merge/input.cpp:523
 #, no-c-format
 msgid "Removes or at least minimizes the dialog normalization gain by modifying audio headers."
-msgstr ""
+msgstr "Премахва или поне намалява нормализиращото усилване на диалозите чрез модифициране на аудио хедърите."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:356
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:374
@@ -11286,22 +11290,22 @@ msgstr "XML файлът с епизоди „{0}“ не може да бъде
 #: src/common/xml/ebml_converter.cpp:349
 #, no-c-format
 msgid "The XML root element is not a master element."
-msgstr ""
+msgstr "Коренният XML елемент не е главен елемент."
 
 #: src/common/xml/ebml_segmentinfo_converter.cpp:95
 #, no-c-format
 msgid "The XML segmentinfo file '{0}' contains an error at position {2}: {1}\n"
-msgstr ""
+msgstr "XML segmentinfo файлът „{0}“ съдържа грешка на позиция {2}: {1}\n"
 
 #: src/common/xml/ebml_segmentinfo_converter.cpp:98
 #, no-c-format
 msgid "The XML segmentinfo file '{0}' contains an error: {1}\n"
-msgstr ""
+msgstr "XML segmentinfo файлът „{0}“ съдържа грешка: {1}\n"
 
 #: src/common/xml/ebml_segmentinfo_converter.cpp:92
 #, no-c-format
 msgid "The XML segmentinfo file '{0}' could not be read.\n"
-msgstr ""
+msgstr "XML segmentinfo файлът „{0}“ не може да бъде прочетен.\n"
 
 #: src/common/xml/ebml_tags_converter.cpp:159
 #, no-c-format
@@ -11419,7 +11423,7 @@ msgstr "Редакторът на епизоди трябва да знае на
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:491
 #, no-c-format
 msgid "The character sets in the 'selected' list on the right will be shown at the top of all the character set drop-down boxes in the program."
-msgstr ""
+msgstr "Нещата в списъка „избрани“ вдясно ще бъдат показани преди останалите в падащото меню за избор на набор от символи."
 
 #: src/output/p_avc.cpp:181
 #: src/output/p_hevc.cpp:171
@@ -11636,9 +11640,9 @@ msgid "The end time must be greater than the start time."
 msgstr "Времето за край трябва да е по-голямо от времето за начало."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:485
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The entries in the 'selected' list on the right will be shown at the top of all the drop-down boxes with countries and regions in the program."
-msgstr "Езиците в списъка „избрани“ вдясно ще бъдат показани преди останалите в падащото меню за избор на език."
+msgstr "Нещата в списъка „избрани“ вдясно ще бъдат показани преди останалите в падащото меню за избор на държави и региони."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:404
 #, no-c-format
@@ -12227,7 +12231,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:319
 #, no-c-format
 msgid "The names will be available for easy selection in both the multiplexer and the header editor."
-msgstr ""
+msgstr "Имената ще бъдат налични за лесно избиране и в мултиплексора, и в редактора на метаданни."
 
 #: src/merge/mkvmerge.cpp:1747
 #, no-c-format
@@ -13589,7 +13593,7 @@ msgstr "Без ограничения"
 #: src/extract/extract_cli_parser.cpp:339
 #, no-c-format
 msgid "Unrecognized command line option '{0}'.\n"
-msgstr ""
+msgstr "Неразпозната опция от командния ред: „{0}“.\n"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:160
 #, no-c-format
@@ -14317,7 +14321,7 @@ msgstr "С текущите мултиплекс настройки целеви
 #: src/mkvtoolnix-gui/merge/input.cpp:476
 #, no-c-format
 msgid "With this option that information is adjusted to match the container's timing information."
-msgstr ""
+msgstr "С тази опция тази информация се наглася така, че да съответства на времевата информация в контейнера."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:46
 #, no-c-format
@@ -14487,13 +14491,13 @@ msgstr "Можеш да разделяш използвайки или коли�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:320
 #, no-c-format
 msgid "You can still enter track names not present in this list manually in both tools."
-msgstr "Все още можеш да въведеш имена на медийните пътечки, които не присъстват в този списък, и от двата инструмента."
+msgstr "Възможността да се въвеждат неприсъстващи в този списък имена на медийни пътечки ще се запази."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:325
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:330
 #, no-c-format
 msgid "You can still enter values not present in this list manually in the multiplexer."
-msgstr "Все още можеш да въведеш стойности, които не са налични в този списък, ръчно от мултиплексора."
+msgstr "Все още ще може ръчно от мултиплексора да се въвеждат неприсъстващи в този списък стойности."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1397
 #, no-c-format
@@ -14593,7 +14597,7 @@ msgstr "канали: {0}"
 #: src/extract/extract_cli_parser.cpp:54
 #, no-c-format
 msgid "chapters [options] out.xml"
-msgstr ""
+msgstr "епизоди [опции] изх.xml"
 
 #: src/common/stereo_mode.cpp:54
 #, no-c-format
@@ -15285,7 +15289,7 @@ msgstr "субтитри"
 #: src/extract/extract_cli_parser.cpp:52
 #, no-c-format
 msgid "tags [options] out.xml"
-msgstr "тагове [опции] out.xml"
+msgstr "тагове [опции] изх.xml"
 
 #: src/output/p_textsubs.h:40
 #, no-c-format
