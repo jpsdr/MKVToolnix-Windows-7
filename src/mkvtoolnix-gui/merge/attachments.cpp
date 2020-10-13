@@ -7,6 +7,7 @@
 #include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/merge/tab.h"
+#include "mkvtoolnix-gui/merge/tab_p.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_widget.h"
@@ -22,115 +23,123 @@ using namespace mtx::gui;
 
 void
 Tab::setupAttachmentsControls() {
-  ui->attachedFiles->setModel(m_attachedFilesModel);
-  ui->attachments->setModel(m_attachmentsModel);
+  auto &p = *p_func();
 
-  ui->attachedFiles->enterActivatesAllSelected(true);
+  p.ui->attachedFiles->setModel(p.attachedFilesModel);
+  p.ui->attachments->setModel(p.attachmentsModel);
+
+  p.ui->attachedFiles->enterActivatesAllSelected(true);
 
   // Attached files context menu
-  m_attachedFilesMenu->addAction(m_enableSelectedAttachedFilesAction);
-  m_attachedFilesMenu->addAction(m_disableSelectedAttachedFilesAction);
-  m_attachedFilesMenu->addSeparator();
-  m_attachedFilesMenu->addAction(m_enableAllAttachedFilesAction);
-  m_attachedFilesMenu->addAction(m_disableAllAttachedFilesAction);
+  p.attachedFilesMenu->addAction(p.enableSelectedAttachedFilesAction);
+  p.attachedFilesMenu->addAction(p.disableSelectedAttachedFilesAction);
+  p.attachedFilesMenu->addSeparator();
+  p.attachedFilesMenu->addAction(p.enableAllAttachedFilesAction);
+  p.attachedFilesMenu->addAction(p.disableAllAttachedFilesAction);
 
   // Attachments context menu
-  m_attachmentsMenu->addAction(m_addAttachmentsAction);
-  m_attachmentsMenu->addSeparator();
-  m_attachmentsMenu->addAction(m_removeAttachmentsAction);
-  m_attachmentsMenu->addAction(m_removeAllAttachmentsAction);
-  m_attachmentsMenu->addSeparator();
-  m_attachmentsMenu->addAction(m_selectAllAttachmentsAction);
+  p.attachmentsMenu->addAction(p.addAttachmentsAction);
+  p.attachmentsMenu->addSeparator();
+  p.attachmentsMenu->addAction(p.removeAttachmentsAction);
+  p.attachmentsMenu->addAction(p.removeAllAttachmentsAction);
+  p.attachmentsMenu->addSeparator();
+  p.attachmentsMenu->addAction(p.selectAllAttachmentsAction);
 
   // MIME type
   for (auto &mime_type : mtx::mime::g_types)
-    ui->attachmentMIMEType->addItem(to_qs(mime_type.name), to_qs(mime_type.name));
+    p.ui->attachmentMIMEType->addItem(to_qs(mime_type.name), to_qs(mime_type.name));
 
-  ui->attachmentMIMEType->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-  ui->attachmentStyle   ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+  p.ui->attachmentMIMEType->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+  p.ui->attachmentStyle   ->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-  Util::fixComboBoxViewWidth(*ui->attachmentMIMEType);
-  Util::fixComboBoxViewWidth(*ui->attachmentStyle);
+  Util::fixComboBoxViewWidth(*p.ui->attachmentMIMEType);
+  Util::fixComboBoxViewWidth(*p.ui->attachmentStyle);
 
-  ui->attachmentMIMEType->lineEdit()->setClearButtonEnabled(true);
+  p.ui->attachmentMIMEType->lineEdit()->setClearButtonEnabled(true);
 
   auto &cfg = Util::Settings::get();
-  cfg.handleSplitterSizes(ui->mergeAttachmentsSplitter);
+  cfg.handleSplitterSizes(p.ui->mergeAttachmentsSplitter);
 
-  Util::HeaderViewManager::create(*ui->attachedFiles, "Merge::AttachedFiles").setDefaultSizes({ { Q("name"), 180 }, { Q("mimeType"), 180 }, { Q("size"), 100 } });
+  Util::HeaderViewManager::create(*p.ui->attachedFiles, "Merge::AttachedFiles").setDefaultSizes({ { Q("name"), 180 }, { Q("mimeType"), 180 }, { Q("size"), 100 } });
 
-  m_enableSelectedAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox.png")});
-  m_disableSelectedAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox-unchecked.png")});
-  m_enableAllAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox.png")});
-  m_disableAllAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox-unchecked.png")});
+  p.enableSelectedAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox.png")});
+  p.disableSelectedAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox-unchecked.png")});
+  p.enableAllAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox.png")});
+  p.disableAllAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox-unchecked.png")});
 
-  m_addAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
-  m_removeAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
-  m_selectAllAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/edit-select-all.png")});
+  p.addAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
+  p.removeAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
+  p.selectAllAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/edit-select-all.png")});
 
   // Q_SIGNALS & Q_SLOTS
-  connect(m_addAttachmentsAction,               &QAction::triggered,                                                    this, &Tab::onAddAttachments);
-  connect(m_removeAttachmentsAction,            &QAction::triggered,                                                    this, &Tab::onRemoveAttachments);
-  connect(m_removeAllAttachmentsAction,         &QAction::triggered,                                                    this, &Tab::onRemoveAllAttachments);
-  connect(m_selectAllAttachmentsAction,         &QAction::triggered,                                                    this, &Tab::onSelectAllAttachments);
+  connect(p.addAttachmentsAction,               &QAction::triggered,                                                    this, &Tab::onAddAttachments);
+  connect(p.removeAttachmentsAction,            &QAction::triggered,                                                    this, &Tab::onRemoveAttachments);
+  connect(p.removeAllAttachmentsAction,         &QAction::triggered,                                                    this, &Tab::onRemoveAllAttachments);
+  connect(p.selectAllAttachmentsAction,         &QAction::triggered,                                                    this, &Tab::onSelectAllAttachments);
 
-  connect(m_enableAllAttachedFilesAction,       &QAction::triggered,                                                    this, [=]() { enableDisableAllAttachedFiles(true); });
-  connect(m_disableAllAttachedFilesAction,      &QAction::triggered,                                                    this, [=]() { enableDisableAllAttachedFiles(false); });
-  connect(m_enableSelectedAttachedFilesAction,  &QAction::triggered,                                                    this, [=]() { enableDisableSelectedAttachedFiles(true); });
-  connect(m_disableSelectedAttachedFilesAction, &QAction::triggered,                                                    this, [=]() { enableDisableSelectedAttachedFiles(false); });
+  connect(p.enableAllAttachedFilesAction,       &QAction::triggered,                                                    this, [=]() { enableDisableAllAttachedFiles(true); });
+  connect(p.disableAllAttachedFilesAction,      &QAction::triggered,                                                    this, [=]() { enableDisableAllAttachedFiles(false); });
+  connect(p.enableSelectedAttachedFilesAction,  &QAction::triggered,                                                    this, [=]() { enableDisableSelectedAttachedFiles(true); });
+  connect(p.disableSelectedAttachedFilesAction, &QAction::triggered,                                                    this, [=]() { enableDisableSelectedAttachedFiles(false); });
 
-  connect(ui->attachmentDescription,            &QLineEdit::textChanged,                                                this, &Tab::onAttachmentDescriptionChanged);
-  connect(ui->attachmentMIMEType,               &QComboBox::currentTextChanged,                                         this, &Tab::onAttachmentMIMETypeChanged);
-  connect(ui->attachmentMIMEType,               &QComboBox::editTextChanged,                                            this, &Tab::onAttachmentMIMETypeChanged);
-  connect(ui->attachmentName,                   &QLineEdit::textChanged,                                                this, &Tab::onAttachmentNameChanged);
-  connect(ui->attachmentStyle,                  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Tab::onAttachmentStyleChanged);
-  connect(ui->attachments,                      &Util::BasicTreeView::ctrlDownPressed,                                  this, &Tab::onMoveAttachmentsDown);
-  connect(ui->attachments,                      &Util::BasicTreeView::ctrlUpPressed,                                    this, &Tab::onMoveAttachmentsUp);
-  connect(ui->attachments,                      &Util::BasicTreeView::customContextMenuRequested,                       this, &Tab::showAttachmentsContextMenu);
-  connect(ui->attachments,                      &Util::BasicTreeView::deletePressed,                                    this, &Tab::onRemoveAttachments);
-  connect(ui->attachments,                      &Util::BasicTreeView::insertPressed,                                    this, &Tab::onAddAttachments);
-  connect(ui->attachments->selectionModel(),    &QItemSelectionModel::selectionChanged,                                 this, &Tab::onAttachmentSelectionChanged);
-  connect(ui->attachmentsTab,                   &Util::FilesDragDropWidget::filesDropped,                               this, &Tab::addAttachments);
-  connect(ui->moveAttachmentsDown,              &QPushButton::clicked,                                                  this, &Tab::onMoveAttachmentsDown);
-  connect(ui->moveAttachmentsUp,                &QPushButton::clicked,                                                  this, &Tab::onMoveAttachmentsUp);
-  connect(ui->attachedFiles,                    &Util::BasicTreeView::doubleClicked,                                    this, &Tab::toggleMuxThisForSelectedAttachedFiles);
-  connect(ui->attachedFiles,                    &Util::BasicTreeView::allSelectedActivated,                             this, &Tab::toggleMuxThisForSelectedAttachedFiles);
-  connect(ui->attachedFiles,                    &Util::BasicTreeView::customContextMenuRequested,                       this, &Tab::showAttachedFilesContextMenu);
-  connect(m_attachedFilesModel,                 &AttachedFileModel::itemChanged,                                        this, &Tab::attachedFileItemChanged);
+  connect(p.ui->attachmentDescription,            &QLineEdit::textChanged,                                                this, &Tab::onAttachmentDescriptionChanged);
+  connect(p.ui->attachmentMIMEType,               &QComboBox::currentTextChanged,                                         this, &Tab::onAttachmentMIMETypeChanged);
+  connect(p.ui->attachmentMIMEType,               &QComboBox::editTextChanged,                                            this, &Tab::onAttachmentMIMETypeChanged);
+  connect(p.ui->attachmentName,                   &QLineEdit::textChanged,                                                this, &Tab::onAttachmentNameChanged);
+  connect(p.ui->attachmentStyle,                  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &Tab::onAttachmentStyleChanged);
+  connect(p.ui->attachments,                      &Util::BasicTreeView::ctrlDownPressed,                                  this, &Tab::onMoveAttachmentsDown);
+  connect(p.ui->attachments,                      &Util::BasicTreeView::ctrlUpPressed,                                    this, &Tab::onMoveAttachmentsUp);
+  connect(p.ui->attachments,                      &Util::BasicTreeView::customContextMenuRequested,                       this, &Tab::showAttachmentsContextMenu);
+  connect(p.ui->attachments,                      &Util::BasicTreeView::deletePressed,                                    this, &Tab::onRemoveAttachments);
+  connect(p.ui->attachments,                      &Util::BasicTreeView::insertPressed,                                    this, &Tab::onAddAttachments);
+  connect(p.ui->attachments->selectionModel(),    &QItemSelectionModel::selectionChanged,                                 this, &Tab::onAttachmentSelectionChanged);
+  connect(p.ui->attachmentsTab,                   &Util::FilesDragDropWidget::filesDropped,                               this, &Tab::addAttachments);
+  connect(p.ui->moveAttachmentsDown,              &QPushButton::clicked,                                                  this, &Tab::onMoveAttachmentsDown);
+  connect(p.ui->moveAttachmentsUp,                &QPushButton::clicked,                                                  this, &Tab::onMoveAttachmentsUp);
+  connect(p.ui->attachedFiles,                    &Util::BasicTreeView::doubleClicked,                                    this, &Tab::toggleMuxThisForSelectedAttachedFiles);
+  connect(p.ui->attachedFiles,                    &Util::BasicTreeView::allSelectedActivated,                             this, &Tab::toggleMuxThisForSelectedAttachedFiles);
+  connect(p.ui->attachedFiles,                    &Util::BasicTreeView::customContextMenuRequested,                       this, &Tab::showAttachedFilesContextMenu);
+  connect(p.attachedFilesModel,                 &AttachedFileModel::itemChanged,                                        this, &Tab::attachedFileItemChanged);
 
   onAttachmentSelectionChanged();
 
-  Util::HeaderViewManager::create(*ui->attachments, "Merge::Attachments").setDefaultSizes({ { Q("name"), 180 }, { Q("mimeType"), 180 }, { Q("attachTo"), 130 }, { Q("size"), 100 } });
+  Util::HeaderViewManager::create(*p.ui->attachments, "Merge::Attachments").setDefaultSizes({ { Q("name"), 180 }, { Q("mimeType"), 180 }, { Q("attachTo"), 130 }, { Q("size"), 100 } });
 }
 
 void
 Tab::withSelectedAttachedFiles(std::function<void(Track &)> code) {
-  if (m_currentlySettingInputControlValues)
+  auto &p = *p_func();
+
+  if (p.currentlySettingInputControlValues)
     return;
 
   for (auto const &attachedFile : selectedAttachedFiles()) {
     code(*attachedFile);
-    m_attachedFilesModel->attachedFileUpdated(*attachedFile);
+    p.attachedFilesModel->attachedFileUpdated(*attachedFile);
   }
 }
 
 void
 Tab::withSelectedAttachments(std::function<void(Attachment &)> code) {
-  if (m_currentlySettingInputControlValues)
+  auto &p = *p_func();
+
+  if (p.currentlySettingInputControlValues)
     return;
 
   for (auto const &attachment : selectedAttachments()) {
     code(*attachment);
-    m_attachmentsModel->attachmentUpdated(*attachment);
+    p.attachmentsModel->attachmentUpdated(*attachment);
   }
 }
 
 QList<Track *>
 Tab::selectedAttachedFiles()
   const {
+  auto &p = *p_func();
+
   auto attachedFiles = QList<Track *>{};
-  Util::withSelectedIndexes(ui->attachedFiles, [&attachedFiles, this](QModelIndex const &idx) {
-    auto attachedFile = m_attachedFilesModel->attachedFileForRow(idx.row());
+  Util::withSelectedIndexes(p.ui->attachedFiles, [&attachedFiles, &p](QModelIndex const &idx) {
+    auto attachedFile = p.attachedFilesModel->attachedFileForRow(idx.row());
     if (attachedFile)
       attachedFiles << attachedFile.get();
   });
@@ -141,9 +150,10 @@ Tab::selectedAttachedFiles()
 QList<Attachment *>
 Tab::selectedAttachments()
   const {
+  auto &p          = *p_func();
   auto attachments = QList<Attachment *>{};
-  Util::withSelectedIndexes(ui->attachments, [&attachments, this](QModelIndex const &idx) {
-    auto attachment = m_attachmentsModel->attachmentForRow(idx.row());
+  Util::withSelectedIndexes(p.ui->attachments, [&attachments, &p](QModelIndex const &idx) {
+    auto attachment = p.attachmentsModel->attachmentForRow(idx.row());
     if (attachment)
       attachments << attachment.get();
   });
@@ -153,15 +163,16 @@ Tab::selectedAttachments()
 
 void
 Tab::selectAttachments(QList<Attachment *> const &attachments) {
-  auto numColumns = m_attachmentsModel->columnCount() - 1;
+  auto &p         = *p_func();
+  auto numColumns = p.attachmentsModel->columnCount() - 1;
   auto selection  = QItemSelection{};
 
   for (auto const &attachment : attachments) {
-    auto row = m_attachmentsModel->rowForAttachment(*attachment);
-    selection.select(m_attachmentsModel->index(row, 0), m_attachmentsModel->index(row, numColumns));
+    auto row = p.attachmentsModel->rowForAttachment(*attachment);
+    selection.select(p.attachmentsModel->index(row, 0), p.attachmentsModel->index(row, numColumns));
   }
 
-  ui->attachments->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+  p.ui->attachments->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
 }
 
 void
@@ -173,14 +184,16 @@ Tab::enableDisableSelectedAttachedFiles(bool enable) {
 
 void
 Tab::enableDisableAllAttachedFiles(bool enable) {
-  if (m_currentlySettingInputControlValues)
+  auto &p = *p_func();
+
+  if (p.currentlySettingInputControlValues)
     return;
 
-  for (int row = 0, numRows = m_attachedFilesModel->rowCount(); row < numRows; ++row) {
-    auto attachedFile = m_attachedFilesModel->attachedFileForRow(row);
+  for (int row = 0, numRows = p.attachedFilesModel->rowCount(); row < numRows; ++row) {
+    auto attachedFile = p.attachedFilesModel->attachedFileForRow(row);
     if (attachedFile) {
       attachedFile->m_muxThis = enable;
-      m_attachedFilesModel->attachedFileUpdated(*attachedFile);
+      p.attachedFilesModel->attachedFileUpdated(*attachedFile);
     }
   }
 }
@@ -202,7 +215,8 @@ Tab::onAttachmentMIMETypeChanged(QString newValue) {
 
 void
 Tab::onAttachmentStyleChanged(int newValue) {
-  auto data = ui->attachmentStyle->itemData(newValue);
+  auto &p   = *p_func();
+  auto data = p.ui->attachmentStyle->itemData(newValue);
   if (!data.isValid())
     return;
 
@@ -257,7 +271,7 @@ Tab::addAttachments(QStringList const &fileNames) {
       attachmentsToAdd << attachment;
   }
 
-  m_attachmentsModel->addAttachments(attachmentsToAdd);
+  p_func()->attachmentsModel->addAttachments(attachmentsToAdd);
 }
 
 void
@@ -279,36 +293,40 @@ Tab::selectAttachmentsToAdd() {
 
 void
 Tab::onRemoveAttachments() {
-  m_attachmentsModel->removeSelectedAttachments(ui->attachments->selectionModel()->selection());
+  auto &p = *p_func();
+
+  p.attachmentsModel->removeSelectedAttachments(p.ui->attachments->selectionModel()->selection());
 
   onAttachmentSelectionChanged();
 }
 
 void
 Tab::onRemoveAllAttachments() {
-  m_attachmentsModel->reset();
+  p_func()->attachmentsModel->reset();
   onAttachmentSelectionChanged();
 }
 
 void
 Tab::onSelectAllAttachments() {
-  auto numRows = m_attachmentsModel->rowCount();
+  auto &p      = *p_func();
+  auto numRows = p.attachmentsModel->rowCount();
   if (!numRows)
     return;
 
   auto selection = QItemSelection{};
-  selection.select(m_attachmentsModel->index(0, 0), m_attachmentsModel->index(numRows - 1, m_attachmentsModel->columnCount() - 1));
+  selection.select(p.attachmentsModel->index(0, 0), p.attachmentsModel->index(numRows - 1, p.attachmentsModel->columnCount() - 1));
 
-  ui->attachments->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+  p.ui->attachments->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
 }
 
 void
 Tab::onAttachmentSelectionChanged() {
-  auto selection = ui->attachments->selectionModel()->selection();
+  auto &p        = *p_func();
+  auto selection = p.ui->attachments->selectionModel()->selection();
   auto numRows   = Util::numSelectedRows(selection);
 
-  ui->moveAttachmentsUp->setEnabled(!!numRows);
-  ui->moveAttachmentsDown->setEnabled(!!numRows);
+  p.ui->moveAttachmentsUp->setEnabled(!!numRows);
+  p.ui->moveAttachmentsDown->setEnabled(!!numRows);
 
   if (!numRows) {
     enableAttachmentControls(false);
@@ -326,7 +344,7 @@ Tab::onAttachmentSelectionChanged() {
   if (idxs.isEmpty() || !idxs.at(0).isValid())
     return;
 
-  auto attachment = m_attachmentsModel->attachmentForRow(idxs.at(0).row());
+  auto attachment = p.attachmentsModel->attachmentForRow(idxs.at(0).row());
   if (!attachment)
     return;
 
@@ -335,96 +353,103 @@ Tab::onAttachmentSelectionChanged() {
 
 void
 Tab::enableAttachmentControls(bool enable) {
-  auto controls = std::vector<QWidget *>{ui->attachmentName,     ui->attachmentNameLabel,     ui->attachmentDescription, ui->attachmentDescriptionLabel,
-                                         ui->attachmentMIMEType, ui->attachmentMIMETypeLabel, ui->attachmentStyle,       ui->attachmentStyleLabel,};
+  auto &p       = *p_func();
+  auto controls = std::vector<QWidget *>{p.ui->attachmentName,     p.ui->attachmentNameLabel,     p.ui->attachmentDescription, p.ui->attachmentDescriptionLabel,
+                                         p.ui->attachmentMIMEType, p.ui->attachmentMIMETypeLabel, p.ui->attachmentStyle,       p.ui->attachmentStyleLabel,};
   for (auto &control : controls)
     control->setEnabled(enable);
 }
 
 void
 Tab::enableAttachedFilesActions() {
+  auto &p           = *p_func();
   auto numSelected  = selectedAttachedFiles().size();
   auto hasSelection = !!numSelected;
-  auto hasEntries   = !!m_attachedFilesModel->rowCount();
+  auto hasEntries   = !!p.attachedFilesModel->rowCount();
 
-  m_enableSelectedAttachedFilesAction->setEnabled(hasSelection);
-  m_disableSelectedAttachedFilesAction->setEnabled(hasSelection);
-  m_enableAllAttachedFilesAction->setEnabled(hasEntries);
-  m_disableAllAttachedFilesAction->setEnabled(hasEntries);
+  p.enableSelectedAttachedFilesAction->setEnabled(hasSelection);
+  p.disableSelectedAttachedFilesAction->setEnabled(hasSelection);
+  p.enableAllAttachedFilesAction->setEnabled(hasEntries);
+  p.disableAllAttachedFilesAction->setEnabled(hasEntries);
 
-  m_enableSelectedAttachedFilesAction->setText(QNY("&Enable selected attachment", "&Enable selected attachments", numSelected));
-  m_disableSelectedAttachedFilesAction->setText(QNY("&Disable selected attachment", "&Disable selected attachments", numSelected));
+  p.enableSelectedAttachedFilesAction->setText(QNY("&Enable selected attachment", "&Enable selected attachments", numSelected));
+  p.disableSelectedAttachedFilesAction->setText(QNY("&Disable selected attachment", "&Disable selected attachments", numSelected));
 }
 
 void
 Tab::enableAttachmentsActions() {
+  auto &p           = *p_func();
   auto numSelected  = selectedAttachments().size();
   auto hasSelection = !!numSelected;
-  auto hasEntries   = !!m_attachmentsModel->rowCount();
+  auto hasEntries   = !!p.attachmentsModel->rowCount();
 
-  m_removeAttachmentsAction->setEnabled(hasSelection);
-  m_removeAllAttachmentsAction->setEnabled(hasEntries);
-  m_selectAllAttachmentsAction->setEnabled(hasEntries);
+  p.removeAttachmentsAction->setEnabled(hasSelection);
+  p.removeAllAttachmentsAction->setEnabled(hasEntries);
+  p.selectAllAttachmentsAction->setEnabled(hasEntries);
 
-  m_removeAttachmentsAction->setText(QNY("&Remove attachment", "&Remove attachments", numSelected));
+  p.removeAttachmentsAction->setText(QNY("&Remove attachment", "&Remove attachments", numSelected));
 }
 
 void
 Tab::setAttachmentControlValues(Attachment *attachment) {
-  m_currentlySettingInputControlValues = true;
+  auto &p = *p_func();
 
-  if (!attachment && ui->attachmentStyle->itemData(0).isValid())
-    ui->attachmentStyle->insertItem(0, QY("<Do not change>"));
+  p.currentlySettingInputControlValues = true;
 
-  else if (attachment && !ui->attachmentStyle->itemData(0).isValid())
-    ui->attachmentStyle->removeItem(0);
+  if (!attachment && p.ui->attachmentStyle->itemData(0).isValid())
+    p.ui->attachmentStyle->insertItem(0, QY("<Do not change>"));
+
+  else if (attachment && !p.ui->attachmentStyle->itemData(0).isValid())
+    p.ui->attachmentStyle->removeItem(0);
 
   if (!attachment) {
-    ui->attachmentName->setText(Q(""));
-    ui->attachmentDescription->setText(Q(""));
-    ui->attachmentMIMEType->setEditText(Q(""));
-    ui->attachmentStyle->setCurrentIndex(0);
+    p.ui->attachmentName->setText(Q(""));
+    p.ui->attachmentDescription->setText(Q(""));
+    p.ui->attachmentMIMEType->setEditText(Q(""));
+    p.ui->attachmentStyle->setCurrentIndex(0);
 
   } else {
-    ui->attachmentName->setText(        attachment->m_name);
-    ui->attachmentDescription->setText( attachment->m_description);
-    ui->attachmentMIMEType->setEditText(attachment->m_MIMEType);
+    p.ui->attachmentName->setText(        attachment->m_name);
+    p.ui->attachmentDescription->setText( attachment->m_description);
+    p.ui->attachmentMIMEType->setEditText(attachment->m_MIMEType);
 
-    Util::setComboBoxIndexIf(ui->attachmentStyle, [&attachment](auto const &, auto const &data) { return data.isValid() && (data.toInt() == static_cast<int>(attachment->m_style)); });
+    Util::setComboBoxIndexIf(p.ui->attachmentStyle, [&attachment](auto const &, auto const &data) { return data.isValid() && (data.toInt() == static_cast<int>(attachment->m_style)); });
   }
 
-  m_currentlySettingInputControlValues = false;
+  p.currentlySettingInputControlValues = false;
 }
 
 void
 Tab::retranslateAttachmentsUI() {
-  m_attachedFilesModel->retranslateUi();
-  m_attachmentsModel->retranslateUi();
+  auto &p = *p_func();
 
-  m_enableAllAttachedFilesAction->setText(QY("E&nable all attachments"));
-  m_disableAllAttachedFilesAction->setText(QY("Di&sable all attachments"));
+  p.attachedFilesModel->retranslateUi();
+  p.attachmentsModel->retranslateUi();
 
-  m_addAttachmentsAction->setText(QY("&Add attachments"));
-  m_removeAllAttachmentsAction->setText(QY("Remove a&ll attachments"));
-  m_selectAllAttachmentsAction->setText(QY("&Select all attachments"));
+  p.enableAllAttachedFilesAction->setText(QY("E&nable all attachments"));
+  p.disableAllAttachedFilesAction->setText(QY("Di&sable all attachments"));
+
+  p.addAttachmentsAction->setText(QY("&Add attachments"));
+  p.removeAllAttachmentsAction->setText(QY("Remove a&ll attachments"));
+  p.selectAllAttachmentsAction->setText(QY("&Select all attachments"));
 
   // Attachment style
-  ui->attachmentStyle->setItemData(0, static_cast<int>(Attachment::ToAllFiles));
-  ui->attachmentStyle->setItemData(1, static_cast<int>(Attachment::ToFirstFile));
+  p.ui->attachmentStyle->setItemData(0, static_cast<int>(Attachment::ToAllFiles));
+  p.ui->attachmentStyle->setItemData(1, static_cast<int>(Attachment::ToFirstFile));
 
   setupAttachmentsToolTips();
 }
 
 void
 Tab::setupAttachmentsToolTips() {
-  Util::setToolTip(ui->attachments, QY("Right-click for attachment actions"));
+  Util::setToolTip(p_func()->ui->attachments, QY("Right-click for attachment actions"));
 }
 
 void
 Tab::moveAttachmentsUpOrDown(bool up) {
   auto attachments = selectedAttachments();
 
-  m_attachmentsModel->moveAttachmentsUpOrDown(attachments, up);
+  p_func()->attachmentsModel->moveAttachmentsUpOrDown(attachments, up);
 
   selectAttachments(attachments);
 }
@@ -441,14 +466,18 @@ Tab::onMoveAttachmentsDown() {
 
 void
 Tab::showAttachmentsContextMenu(QPoint const &pos) {
+  auto &p = *p_func();
+
   enableAttachmentsActions();
-  m_attachmentsMenu->exec(ui->attachments->viewport()->mapToGlobal(pos));
+  p.attachmentsMenu->exec(p.ui->attachments->viewport()->mapToGlobal(pos));
 }
 
 void
 Tab::showAttachedFilesContextMenu(QPoint const &pos) {
+  auto &p = *p_func();
+
   enableAttachedFilesActions();
-  m_attachedFilesMenu->exec(ui->attachedFiles->viewport()->mapToGlobal(pos));
+  p.attachedFilesMenu->exec(p.ui->attachedFiles->viewport()->mapToGlobal(pos));
 }
 
 void
@@ -473,14 +502,16 @@ Tab::toggleMuxThisForSelectedAttachedFiles() {
 
 void
 Tab::attachedFileItemChanged(QStandardItem *item) {
+  auto &p = *p_func();
+
   if (!item)
     return;
 
-  auto idx = m_attachedFilesModel->indexFromItem(item);
+  auto idx = p.attachedFilesModel->indexFromItem(item);
   if (idx.column())
     return;
 
-  auto attachedFile = m_attachedFilesModel->attachedFileForRow(idx.row());
+  auto attachedFile = p.attachedFilesModel->attachedFileForRow(idx.row());
   if (!attachedFile)
     return;
 
@@ -489,15 +520,16 @@ Tab::attachedFileItemChanged(QStandardItem *item) {
     return;
 
   attachedFile->m_muxThis = newMuxThis;
-  m_attachedFilesModel->attachedFileUpdated(*attachedFile);
+  p.attachedFilesModel->attachedFileUpdated(*attachedFile);
 }
 
 std::optional<QString>
 Tab::findExistingAttachmentFileName(QString const &fileName) {
+  auto &p            = *p_func();
   auto lowerFileName = fileName.toLower();
 
-  for (int row = 0, numRows = m_attachedFilesModel->rowCount(); row < numRows; ++row) {
-    auto attachedFile = m_attachedFilesModel->attachedFileForRow(row);
+  for (int row = 0, numRows = p.attachedFilesModel->rowCount(); row < numRows; ++row) {
+    auto attachedFile = p.attachedFilesModel->attachedFileForRow(row);
 
     if (!attachedFile || !attachedFile->m_muxThis)
       continue;
@@ -507,8 +539,8 @@ Tab::findExistingAttachmentFileName(QString const &fileName) {
       return existingFileName;
   }
 
-  for (int row = 0, numRows = m_attachmentsModel->rowCount(); row < numRows; ++row) {
-    auto attachment = m_attachmentsModel->attachmentForRow(row);
+  for (int row = 0, numRows = p.attachmentsModel->rowCount(); row < numRows; ++row) {
+    auto attachment = p.attachmentsModel->attachmentForRow(row);
 
     if (!attachment)
       continue;
@@ -544,7 +576,7 @@ Tab::addAttachmentsFromIdentifiedBluray(mtx::bluray::disc_library::info_t const 
 
   attachment->m_name = Q("cover%2").arg(Q(fileName.extension().string()).toLower());
 
-  m_attachmentsModel->addAttachments(QList<AttachmentPtr>{} << attachment);
+  p_func()->attachmentsModel->addAttachments(QList<AttachmentPtr>{} << attachment);
 }
 
 }

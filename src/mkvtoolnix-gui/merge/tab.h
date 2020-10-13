@@ -3,20 +3,12 @@
 #include "common/common_pch.h"
 
 #include "mkvtoolnix-gui/main_window/tool_base.h"
-#include "mkvtoolnix-gui/merge/attached_file_model.h"
-#include "mkvtoolnix-gui/merge/attachment_model.h"
-#include "mkvtoolnix-gui/merge/mux_config.h"
-#include "mkvtoolnix-gui/merge/source_file_model.h"
-#include "mkvtoolnix-gui/merge/track_model.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 #include <QList>
 
-class QComboBox;
 class QLineEdit;
-class QMenu;
-class QProgressDialog;
-class QTreeView;
+class QStandardItem;
 
 namespace mtx::bcp47 {
 class language_c;
@@ -28,58 +20,22 @@ struct info_t;
 
 namespace mtx::gui::Merge {
 
-namespace Ui {
-class Tab;
-}
-
 enum class InitialDirMode {
     ContentLastOpenDir
   , ContentFirstInputFileLastOpenDir
 };
 
 class FileIdentificationThread;
+class MuxConfig;
 
+class TabPrivate;
 class Tab : public QWidget {
   Q_OBJECT
 
 protected:
-  // non-UI stuff:
-  MuxConfig m_config;
+  MTX_DECLARE_PRIVATE(TabPrivate)
 
-  int m_lastAddAppendFileIdx;
-
-  // UI stuff:
-  std::unique_ptr<Ui::Tab> ui;
-  QStringList m_filesToAddDelayed;
-  Qt::MouseButtons m_mouseButtonsForFilesToAddDelayed;
-
-  // "Input" tab:
-  SourceFileModel *m_filesModel;
-  TrackModel *m_tracksModel;
-
-  QList<QWidget *> m_audioControls, m_videoControls, m_subtitleControls, m_chapterControls, m_typeIndependentControls, m_allInputControls, m_splitControls, m_notIfAppendingControls;
-  QList<QComboBox *> m_comboBoxControls;
-  bool m_currentlySettingInputControlValues;
-
-  QAction *m_addFilesAction, *m_appendFilesAction, *m_addAdditionalPartsAction, *m_addFilesAction2, *m_appendFilesAction2, *m_addAdditionalPartsAction2;
-  QAction *m_removeFilesAction, *m_removeAllFilesAction, *m_setDestinationFileNameAction, *m_selectAllTracksAction, *m_enableAllTracksAction, *m_disableAllTracksAction;
-  QAction *m_selectAllVideoTracksAction, *m_selectAllAudioTracksAction, *m_selectAllSubtitlesTracksAction, *m_openFilesInMediaInfoAction, *m_openTracksInMediaInfoAction, *m_selectTracksFromFilesAction;
-  QAction *m_enableAllAttachedFilesAction, *m_disableAllAttachedFilesAction, *m_enableSelectedAttachedFilesAction, *m_disableSelectedAttachedFilesAction;
-  QAction *m_startMuxingLeaveAsIs, *m_startMuxingCreateNewSettings, *m_startMuxingCloseSettings, *m_startMuxingRemoveInputFiles;
-  QAction *m_addToJobQueueLeaveAsIs, *m_addToJobQueueCreateNewSettings, *m_addToJobQueueCloseSettings, *m_addToJobQueueRemoveInputFiles;
-  QMenu *m_filesMenu, *m_tracksMenu, *m_attachedFilesMenu, *m_attachmentsMenu, *m_selectTracksOfTypeMenu, *m_addFilesMenu, *m_startMuxingMenu, *m_addToJobQueueMenu;
-
-  // "Attachments" tab:
-  AttachedFileModel *m_attachedFilesModel;
-  AttachmentModel *m_attachmentsModel;
-  QAction *m_addAttachmentsAction, *m_removeAttachmentsAction, *m_removeAllAttachmentsAction, *m_selectAllAttachmentsAction;
-
-  QString m_savedState, m_emptyState;
-
-  FileIdentificationThread *m_identifier;
-  QProgressDialog *m_scanningDirectoryDialog{};
-
-  debugging_option_c m_debugTrackModel;
+  std::unique_ptr<TabPrivate> const p_ptr;
 
 public:
   explicit Tab(QWidget *parent);

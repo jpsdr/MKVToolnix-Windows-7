@@ -11,6 +11,7 @@
 #include "mkvtoolnix-gui/forms/merge/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
+#include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"

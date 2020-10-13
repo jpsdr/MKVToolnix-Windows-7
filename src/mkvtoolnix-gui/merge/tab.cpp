@@ -9,6 +9,7 @@
 #include "mkvtoolnix-gui/merge/command_line_dialog.h"
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/tab.h"
+#include "mkvtoolnix-gui/merge/tab_p.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
@@ -33,68 +34,75 @@ namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
+TabPrivate::TabPrivate(QWidget *parent)
+  : ui{new Ui::Tab}
+  , mouseButtonsForFilesToAddDelayed{}
+  , filesModel{new SourceFileModel{parent}}
+  , tracksModel{new TrackModel{parent}}
+  , currentlySettingInputControlValues{false}
+  , addFilesAction{new QAction{parent}}
+  , appendFilesAction{new QAction{parent}}
+  , addAdditionalPartsAction{new QAction{parent}}
+  , addFilesAction2{new QAction{parent}}
+  , appendFilesAction2{new QAction{parent}}
+  , addAdditionalPartsAction2{new QAction{parent}}
+  , removeFilesAction{new QAction{parent}}
+  , removeAllFilesAction{new QAction{parent}}
+  , setDestinationFileNameAction{new QAction{parent}}
+  , selectAllTracksAction{new QAction{parent}}
+  , enableAllTracksAction{new QAction{parent}}
+  , disableAllTracksAction{new QAction{parent}}
+  , selectAllVideoTracksAction{new QAction{parent}}
+  , selectAllAudioTracksAction{new QAction{parent}}
+  , selectAllSubtitlesTracksAction{new QAction{parent}}
+  , openFilesInMediaInfoAction{new QAction{parent}}
+  , openTracksInMediaInfoAction{new QAction{parent}}
+  , selectTracksFromFilesAction{new QAction{parent}}
+  , enableAllAttachedFilesAction{new QAction{parent}}
+  , disableAllAttachedFilesAction{new QAction{parent}}
+  , enableSelectedAttachedFilesAction{new QAction{parent}}
+  , disableSelectedAttachedFilesAction{new QAction{parent}}
+  , startMuxingLeaveAsIs{new QAction{parent}}
+  , startMuxingCreateNewSettings{new QAction{parent}}
+  , startMuxingCloseSettings{new QAction{parent}}
+  , startMuxingRemoveInputFiles{new QAction{parent}}
+  , addToJobQueueLeaveAsIs{new QAction{parent}}
+  , addToJobQueueCreateNewSettings{new QAction{parent}}
+  , addToJobQueueCloseSettings{new QAction{parent}}
+  , addToJobQueueRemoveInputFiles{new QAction{parent}}
+  , filesMenu{new QMenu{parent}}
+  , tracksMenu{new QMenu{parent}}
+  , attachedFilesMenu{new QMenu{parent}}
+  , attachmentsMenu{new QMenu{parent}}
+  , selectTracksOfTypeMenu{new QMenu{parent}}
+  , addFilesMenu{new QMenu{parent}}
+  , startMuxingMenu{new QMenu{parent}}
+  , addToJobQueueMenu{new QMenu{parent}}
+  , attachedFilesModel{new AttachedFileModel{parent}}
+  , attachmentsModel{new AttachmentModel{parent}}
+  , addAttachmentsAction{new QAction{parent}}
+  , removeAttachmentsAction{new QAction{parent}}
+  , removeAllAttachmentsAction{new QAction{parent}}
+  , selectAllAttachmentsAction{new QAction{parent}}
+  , identifier{new FileIdentificationThread{parent}}
+{
+}
+
+// ------------------------------------------------------------
+
 Tab::Tab(QWidget *parent)
   : QWidget{parent}
-  , m_lastAddAppendFileIdx{-1}
-  , ui{new Ui::Tab}
-  , m_mouseButtonsForFilesToAddDelayed{}
-  , m_filesModel{new SourceFileModel{this}}
-  , m_tracksModel{new TrackModel{this}}
-  , m_currentlySettingInputControlValues{false}
-  , m_addFilesAction{new QAction{this}}
-  , m_appendFilesAction{new QAction{this}}
-  , m_addAdditionalPartsAction{new QAction{this}}
-  , m_addFilesAction2{new QAction{this}}
-  , m_appendFilesAction2{new QAction{this}}
-  , m_addAdditionalPartsAction2{new QAction{this}}
-  , m_removeFilesAction{new QAction{this}}
-  , m_removeAllFilesAction{new QAction{this}}
-  , m_setDestinationFileNameAction{new QAction{this}}
-  , m_selectAllTracksAction{new QAction{this}}
-  , m_enableAllTracksAction{new QAction{this}}
-  , m_disableAllTracksAction{new QAction{this}}
-  , m_selectAllVideoTracksAction{new QAction{this}}
-  , m_selectAllAudioTracksAction{new QAction{this}}
-  , m_selectAllSubtitlesTracksAction{new QAction{this}}
-  , m_openFilesInMediaInfoAction{new QAction{this}}
-  , m_openTracksInMediaInfoAction{new QAction{this}}
-  , m_selectTracksFromFilesAction{new QAction{this}}
-  , m_enableAllAttachedFilesAction{new QAction{this}}
-  , m_disableAllAttachedFilesAction{new QAction{this}}
-  , m_enableSelectedAttachedFilesAction{new QAction{this}}
-  , m_disableSelectedAttachedFilesAction{new QAction{this}}
-  , m_startMuxingLeaveAsIs{new QAction{this}}
-  , m_startMuxingCreateNewSettings{new QAction{this}}
-  , m_startMuxingCloseSettings{new QAction{this}}
-  , m_startMuxingRemoveInputFiles{new QAction{this}}
-  , m_addToJobQueueLeaveAsIs{new QAction{this}}
-  , m_addToJobQueueCreateNewSettings{new QAction{this}}
-  , m_addToJobQueueCloseSettings{new QAction{this}}
-  , m_addToJobQueueRemoveInputFiles{new QAction{this}}
-  , m_filesMenu{new QMenu{this}}
-  , m_tracksMenu{new QMenu{this}}
-  , m_attachedFilesMenu{new QMenu{this}}
-  , m_attachmentsMenu{new QMenu{this}}
-  , m_selectTracksOfTypeMenu{new QMenu{this}}
-  , m_addFilesMenu{new QMenu{this}}
-  , m_startMuxingMenu{new QMenu{this}}
-  , m_addToJobQueueMenu{new QMenu{this}}
-  , m_attachedFilesModel{new AttachedFileModel{this}}
-  , m_attachmentsModel{new AttachmentModel{this}}
-  , m_addAttachmentsAction{new QAction{this}}
-  , m_removeAttachmentsAction{new QAction{this}}
-  , m_removeAllAttachmentsAction{new QAction{this}}
-  , m_selectAllAttachmentsAction{new QAction{this}}
-  , m_identifier{new FileIdentificationThread{this}}
-  , m_debugTrackModel{"track_model"}
+  , p_ptr{new TabPrivate{this}}
 {
+  auto &p = *p_func();
+
   // Setup UI controls.
-  ui->setupUi(this);
+  p.ui->setupUi(this);
 
   auto mw = MainWindow::get();
-  connect(mw, &MainWindow::preferencesChanged, this, [this]() { Util::setupTabWidgetHeaders(*ui->tabs); });
+  connect(mw, &MainWindow::preferencesChanged, this, [this]() { Util::setupTabWidgetHeaders(*p_func()->ui->tabs); });
 
-  m_filesModel->setOtherModels(m_tracksModel, m_attachedFilesModel);
+  p.filesModel->setOtherModels(p.tracksModel, p.attachedFilesModel);
 
   setupInputControls();
   setupOutputControls();
@@ -103,35 +111,38 @@ Tab::Tab(QWidget *parent)
 
   setControlValuesFromConfig();
 
-  Util::setupTabWidgetHeaders(*ui->tabs);
+  Util::setupTabWidgetHeaders(*p.ui->tabs);
 
   retranslateUi();
 
-  Util::fixScrollAreaBackground(ui->propertiesScrollArea);
+  Util::fixScrollAreaBackground(p.ui->propertiesScrollArea);
   Util::preventScrollingWithoutFocus(this);
 
-  m_savedState = currentState();
-  m_emptyState = m_savedState;
+  p.savedState = currentState();
+  p.emptyState = p.savedState;
 }
 
 Tab::~Tab() {
-  m_identifier->abortPlaylistScan();
-  m_identifier->quit();
-  m_identifier->wait();
+  auto &p = *p_func();
+
+  p.identifier->abortPlaylistScan();
+  p.identifier->quit();
+  p.identifier->wait();
 }
 
 QString const &
 Tab::fileName()
   const {
-  return m_config.m_configFileName;
+  return p_func()->config.m_configFileName;
 }
 
 QString
 Tab::title()
   const {
-  auto title = m_config.m_destination.isEmpty() ? QY("<No destination file>") : QFileInfo{m_config.m_destination}.fileName();
-  if (!m_config.m_configFileName.isEmpty())
-    title = Q("%1 (%2)").arg(title).arg(QFileInfo{m_config.m_configFileName}.fileName());
+  auto &p    = *p_func();
+  auto title = p.config.m_destination.isEmpty() ? QY("<No destination file>") : QFileInfo{p.config.m_destination}.fileName();
+  if (!p.config.m_configFileName.isEmpty())
+    title = Q("%1 (%2)").arg(title).arg(QFileInfo{p.config.m_configFileName}.fileName());
 
   return title;
 }
@@ -144,23 +155,25 @@ Tab::onShowCommandLine() {
 
 void
 Tab::load(QString const &fileName) {
+  auto &p = *p_func();
+
   try {
     if (Util::ConfigFile::determineType(fileName) == Util::ConfigFile::UnknownType)
       throw InvalidSettingsX{};
 
-    m_config.load(fileName);
+    p.config.load(fileName);
     setControlValuesFromConfig();
 
-    m_tracksModel->updateEffectiveDefaultTrackFlags();
+    p.tracksModel->updateEffectiveDefaultTrackFlags();
 
-    m_savedState = currentState();
+    p.savedState = currentState();
 
     MainWindow::get()->setStatusBarMessage(QY("The configuration has been loaded."));
 
     Q_EMIT titleChanged();
 
   } catch (InvalidSettingsX &) {
-    m_config.reset();
+    p.config.reset();
 
     Util::MessageBox::critical(this)->title(QY("Error loading settings file")).text(QY("The settings file '%1' contains invalid settings and was not loaded.").arg(fileName)).exec();
 
@@ -170,27 +183,30 @@ Tab::load(QString const &fileName) {
 
 void
 Tab::cloneConfig(MuxConfig const &config) {
-  m_config = config;
+  auto &p  = *p_func();
+  p.config = config;
 
   setControlValuesFromConfig();
 
-  m_config.m_configFileName.clear();
-  m_savedState.clear();
+  p.config.m_configFileName.clear();
+  p.savedState.clear();
 
   Q_EMIT titleChanged();
 }
 
 void
 Tab::onSaveConfig() {
-  if (m_config.m_configFileName.isEmpty()) {
+  auto &p = *p_func();
+
+  if (p.config.m_configFileName.isEmpty()) {
     onSaveConfigAs();
     return;
   }
 
   updateConfigFromControlValues();
-  m_config.save();
+  p.config.save();
 
-  m_savedState = currentState();
+  p.savedState = currentState();
 
   MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
 }
@@ -211,17 +227,18 @@ Tab::onSaveOptionFile() {
 
 void
 Tab::onSaveConfigAs() {
+  auto &p        = *p_func();
   auto &settings = Util::Settings::get();
   auto fileName  = Util::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
   if (fileName.isEmpty())
     return;
 
   updateConfigFromControlValues();
-  m_config.save(fileName);
+  p.config.save(fileName);
   settings.m_lastConfigDir.setPath(QFileInfo{fileName}.path());
   settings.save();
 
-  m_savedState = currentState();
+  p.savedState = currentState();
 
   Q_EMIT titleChanged();
 
@@ -232,13 +249,15 @@ QString
 Tab::determineInitialDir(QLineEdit *lineEdit,
                          InitialDirMode mode)
   const {
+  auto &p = *p_func();
+
   if (lineEdit && !lineEdit->text().isEmpty())
     return Util::dirPath(QFileInfo{ lineEdit->text() }.path());
 
   if (   (mode == InitialDirMode::ContentFirstInputFileLastOpenDir)
-      && !m_config.m_files.isEmpty()
-      && !m_config.m_files[0]->m_fileName.isEmpty())
-    return Util::dirPath(QFileInfo{ m_config.m_files[0]->m_fileName }.path());
+      && !p.config.m_files.isEmpty()
+      && !p.config.m_files[0]->m_fileName.isEmpty())
+    return Util::dirPath(QFileInfo{ p.config.m_files[0]->m_fileName }.path());
 
   return Util::Settings::get().lastOpenDirPath();
 }
@@ -296,20 +315,22 @@ Tab::getSaveFileName(QString const &title,
 
 void
 Tab::setControlValuesFromConfig() {
-  m_filesModel->setSourceFiles(m_config.m_files);
-  m_tracksModel->setTracks(m_config.m_tracks);
-  m_attachmentsModel->replaceAttachments(m_config.m_attachments);
+  auto &p = *p_func();
 
-  m_attachedFilesModel->reset();
-  for (auto const &sourceFile : m_config.m_files) {
-    m_attachedFilesModel->addAttachedFiles(sourceFile->m_attachedFiles);
+  p.filesModel->setSourceFiles(p.config.m_files);
+  p.tracksModel->setTracks(p.config.m_tracks);
+  p.attachmentsModel->replaceAttachments(p.config.m_attachments);
+
+  p.attachedFilesModel->reset();
+  for (auto const &sourceFile : p.config.m_files) {
+    p.attachedFilesModel->addAttachedFiles(sourceFile->m_attachedFiles);
 
     for (auto const &appendedFile : sourceFile->m_appendedFiles)
-      m_attachedFilesModel->addAttachedFiles(appendedFile->m_attachedFiles);
+      p.attachedFilesModel->addAttachedFiles(appendedFile->m_attachedFiles);
   }
 
-  ui->attachedFiles->sortByColumn(0, Qt::AscendingOrder);
-  m_attachedFilesModel->sort(0, Qt::AscendingOrder);
+  p.ui->attachedFiles->sortByColumn(0, Qt::AscendingOrder);
+  p.attachedFilesModel->sort(0, Qt::AscendingOrder);
 
   onTrackSelectionChanged();
   setOutputControlValues();
@@ -318,14 +339,18 @@ Tab::setControlValuesFromConfig() {
 
 MuxConfig &
 Tab::updateConfigFromControlValues() {
-  m_config.m_attachments = m_attachmentsModel->attachments();
+  auto &p = *p_func();
 
-  return m_config;
+  p.config.m_attachments = p.attachmentsModel->attachments();
+
+  return p.config;
 }
 
 void
 Tab::retranslateUi() {
-  ui->retranslateUi(this);
+  auto &p = *p_func();
+
+  p.ui->retranslateUi(this);
 
   retranslateInputUI();
   retranslateOutputUI();
@@ -336,7 +361,9 @@ Tab::retranslateUi() {
 
 bool
 Tab::isReadyForMerging() {
-  auto destination = QDir::toNativeSeparators(ui->output->text());
+  auto &p = *p_func();
+
+  auto destination = QDir::toNativeSeparators(p.ui->output->text());
 
   if (destination.isEmpty()) {
     Util::MessageBox::critical(this)->title(QY("Cannot start multiplexing")).text(QY("You have to set the destination file name before you can start multiplexing or add a job to the job queue.")).exec();
@@ -361,13 +388,14 @@ Tab::isReadyForMerging() {
 QString
 Tab::findExistingDestination()
   const {
-  auto nativeDestination = QDir::toNativeSeparators(m_config.m_destination);
+  auto &p                = *p_func();
+  auto nativeDestination = QDir::toNativeSeparators(p.config.m_destination);
   QFileInfo destinationInfo{nativeDestination};
 
   if (destinationInfo.exists())
     return nativeDestination;
 
-  if (!m_config.isSplittingEnabled())
+  if (!p.config.isSplittingEnabled())
     return {};
 
 #if defined(SYS_WINDOWS)
@@ -398,7 +426,7 @@ Tab::checkIfOverwritingIsOK() {
   if (!existingDestination.isEmpty() && !MainWindow::jobTool()->checkIfOverwritingExistingFileIsOK(existingDestination))
     return false;
 
-  return MainWindow::jobTool()->checkIfOverwritingExistingJobIsOK(m_config.m_destination, m_config.isSplittingEnabled());
+  return MainWindow::jobTool()->checkIfOverwritingExistingJobIsOK(p_func()->config.m_destination, p_func()->config.isSplittingEnabled());
 }
 
 bool
@@ -409,7 +437,7 @@ Tab::checkIfMissingAudioTrackIsOK() {
 
   auto haveAudioTrack = false;
 
-  for (auto const &file : m_config.m_files)
+  for (auto const &file : p_func()->config.m_files)
     for (auto const &track : file->m_tracks) {
       if (!track->isAudio())
         continue;
@@ -438,6 +466,8 @@ Tab::checkIfMissingAudioTrackIsOK() {
 void
 Tab::addToJobQueue(bool startNow,
                    std::optional<Util::Settings::ClearMergeSettingsAction> clearSettings) {
+  auto &p = *p_func();
+
   updateConfigFromControlValues();
   setOutputFileNameMaybe();
 
@@ -447,7 +477,7 @@ Tab::addToJobQueue(bool startNow,
     return;
 
   auto &cfg      = Util::Settings::get();
-  auto newConfig = std::make_shared<MuxConfig>(m_config);
+  auto newConfig = std::make_shared<MuxConfig>(p.config);
   auto job       = std::make_shared<Jobs::MuxJob>(startNow ? Jobs::Job::PendingAuto : Jobs::Job::PendingManual, newConfig);
 
   job->setDateAdded(QDateTime::currentDateTime());
@@ -472,9 +502,9 @@ Tab::addToJobQueue(bool startNow,
 
   MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
 
-  m_savedState = currentState();
+  p.savedState = currentState();
 
-  cfg.m_mergeLastOutputDirs.add(QDir::toNativeSeparators(QFileInfo{ m_config.m_destination }.path()));
+  cfg.m_mergeLastOutputDirs.add(QDir::toNativeSeparators(QFileInfo{ p.config.m_destination }.path()));
   cfg.save();
 
   auto action = clearSettings ? *clearSettings : Util::Settings::get().m_clearMergeSettings;
@@ -509,17 +539,17 @@ Tab::signalRemovalOfThisTab() {
 QString
 Tab::currentState() {
   updateConfigFromControlValues();
-  return m_config.toString();
+  return p_func()->config.toString();
 }
 
 bool
 Tab::hasBeenModified() {
-  return currentState() != m_savedState;
+  return currentState() != p_func()->savedState;
 }
 
 bool
 Tab::isEmpty() {
-  return currentState() == m_emptyState;
+  return currentState() == p_func()->emptyState;
 }
 
 }

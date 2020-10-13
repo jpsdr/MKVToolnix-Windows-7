@@ -33,6 +33,7 @@
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
+#include "mkvtoolnix-gui/merge/tab_p.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
@@ -50,50 +51,53 @@ using namespace mtx::gui;
 
 void
 Tab::setupControlLists() {
-  m_typeIndependentControls << ui->generalOptionsBox << ui->muxThisLabel << ui->muxThis << ui->miscellaneousBox << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions;
+  auto &p = *p_func();
 
-  m_audioControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag << ui->forcedTrackFlagLabel << ui->forcedTrackFlag
-                  << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timestampsAndDefaultDurationBox
-                  << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->timestampsLabel << ui->timestamps << ui->browseTimestamps << ui->audioPropertiesBox << ui->aacIsSBR << ui->aacIsSBRLabel
-                  << ui->cuesLabel << ui->cues << ui->propertiesLabel << ui->generalOptionsBox << ui->reduceToAudioCore << ui->removeDialogNormalizationGain;
+  p.typeIndependentControls << p.ui->generalOptionsBox << p.ui->muxThisLabel << p.ui->muxThis << p.ui->miscellaneousBox << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions;
 
-  m_videoControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
-                  << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timestampsAndDefaultDurationBox
-                  << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->defaultDurationLabel << ui->defaultDuration << ui->timestampsLabel << ui->timestamps << ui->browseTimestamps
-                  << ui->videoPropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
-                  << ui->stereoscopy << ui->naluSizeLengthLabel << ui->naluSizeLength << ui->croppingLabel << ui->cropping << ui->cuesLabel << ui->cues
-                  << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo;
+  p.audioControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
+                  << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
+                  << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps << p.ui->audioPropertiesBox << p.ui->aacIsSBR << p.ui->aacIsSBRLabel
+                  << p.ui->cuesLabel << p.ui->cues << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain;
 
-  m_subtitleControls << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
-                     << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timestampsAndDefaultDurationBox
-                     << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->timestampsLabel << ui->timestamps << ui->browseTimestamps
-                     << ui->subtitleAndChapterPropertiesBox << ui->characterSetLabel << ui->subtitleCharacterSet << ui->cuesLabel << ui->cues
-                     << ui->propertiesLabel << ui->generalOptionsBox;
+  p.videoControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag
+                  << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
+                  << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->defaultDurationLabel << p.ui->defaultDuration << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps
+                  << p.ui->videoPropertiesBox << p.ui->setAspectRatio << p.ui->aspectRatio << p.ui->setDisplayWidthHeight << p.ui->displayWidth << p.ui->displayDimensionsXLabel << p.ui->displayHeight << p.ui->stereoscopyLabel
+                  << p.ui->stereoscopy << p.ui->naluSizeLengthLabel << p.ui->naluSizeLength << p.ui->croppingLabel << p.ui->cropping << p.ui->cuesLabel << p.ui->cues
+                  << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo;
 
-  m_chapterControls << ui->subtitleAndChapterPropertiesBox << ui->characterSetLabel << ui->subtitleCharacterSet << ui->propertiesLabel << ui->generalOptionsBox;
+  p.subtitleControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag
+                     << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
+                     << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps
+                     << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet << p.ui->cuesLabel << p.ui->cues
+                     << p.ui->propertiesLabel << p.ui->generalOptionsBox;
 
-  m_allInputControls << ui->muxThisLabel << ui->muxThis << ui->trackNameLabel << ui->trackName << ui->trackLanguageLabel << ui->trackLanguage << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
-                     << ui->forcedTrackFlagLabel << ui->forcedTrackFlag << ui->compressionLabel << ui->compression << ui->trackTagsLabel << ui->trackTags << ui->browseTrackTags << ui->timestampsAndDefaultDurationBox
-                     << ui->delayLabel << ui->delay << ui->stretchByLabel << ui->stretchBy << ui->defaultDurationLabel << ui->defaultDuration << ui->timestampsLabel << ui->timestamps << ui->browseTimestamps
-                     << ui->videoPropertiesBox << ui->setAspectRatio << ui->aspectRatio << ui->setDisplayWidthHeight << ui->displayWidth << ui->displayDimensionsXLabel << ui->displayHeight << ui->stereoscopyLabel
-                     << ui->stereoscopy << ui->croppingLabel << ui->cropping << ui->audioPropertiesBox << ui->aacIsSBR << ui->subtitleAndChapterPropertiesBox << ui->characterSetLabel << ui->subtitleCharacterSet
-                     << ui->miscellaneousBox << ui->cuesLabel << ui->cues << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions
-                     << ui->propertiesLabel << ui->generalOptionsBox << ui->fixBitstreamTimingInfo << ui->reduceToAudioCore << ui->removeDialogNormalizationGain << ui->naluSizeLengthLabel << ui->naluSizeLength;
+  p.chapterControls << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet << p.ui->propertiesLabel << p.ui->generalOptionsBox;
 
-  m_comboBoxControls << ui->muxThis << ui->defaultTrackFlag << ui->forcedTrackFlag << ui->compression << ui->cues << ui->stereoscopy << ui->naluSizeLength << ui->aacIsSBR << ui->subtitleCharacterSet;
+  p.allInputControls << p.ui->muxThisLabel << p.ui->muxThis << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag
+                     << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
+                     << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->defaultDurationLabel << p.ui->defaultDuration << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps
+                     << p.ui->videoPropertiesBox << p.ui->setAspectRatio << p.ui->aspectRatio << p.ui->setDisplayWidthHeight << p.ui->displayWidth << p.ui->displayDimensionsXLabel << p.ui->displayHeight << p.ui->stereoscopyLabel
+                     << p.ui->stereoscopy << p.ui->croppingLabel << p.ui->cropping << p.ui->audioPropertiesBox << p.ui->aacIsSBR << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet
+                     << p.ui->miscellaneousBox << p.ui->cuesLabel << p.ui->cues << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions
+                     << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain << p.ui->naluSizeLengthLabel << p.ui->naluSizeLength;
 
-  m_notIfAppendingControls << ui->trackLanguageLabel   << ui->trackLanguage           << ui->trackNameLabel              << ui->trackName        << ui->defaultTrackFlagLabel << ui->defaultTrackFlag
-                           << ui->forcedTrackFlagLabel << ui->forcedTrackFlag         << ui->compressionLabel            << ui->compression      << ui->trackTagsLabel        << ui->trackTags         << ui->browseTrackTags
-                           << ui->defaultDurationLabel << ui->defaultDuration         << ui->fixBitstreamTimingInfo      << ui->setAspectRatio   << ui->setDisplayWidthHeight << ui->aspectRatio
-                           << ui->displayWidth         << ui->displayDimensionsXLabel << ui->displayHeight               << ui->stereoscopyLabel << ui->stereoscopy
-                           << ui->naluSizeLengthLabel  << ui->naluSizeLength          << ui->croppingLabel               << ui->cropping         << ui->aacIsSBR
-                           << ui->cuesLabel            << ui->cues                    << ui->additionalTrackOptionsLabel << ui->additionalTrackOptions;
+  p.comboBoxControls << p.ui->muxThis << p.ui->defaultTrackFlag << p.ui->forcedTrackFlag << p.ui->compression << p.ui->cues << p.ui->stereoscopy << p.ui->naluSizeLength << p.ui->aacIsSBR << p.ui->subtitleCharacterSet;
+
+  p.notIfAppendingControls << p.ui->trackLanguageLabel   << p.ui->trackLanguage           << p.ui->trackNameLabel              << p.ui->trackName        << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag
+                           << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag         << p.ui->compressionLabel            << p.ui->compression      << p.ui->trackTagsLabel        << p.ui->trackTags         << p.ui->browseTrackTags
+                           << p.ui->defaultDurationLabel << p.ui->defaultDuration         << p.ui->fixBitstreamTimingInfo      << p.ui->setAspectRatio   << p.ui->setDisplayWidthHeight << p.ui->aspectRatio
+                           << p.ui->displayWidth         << p.ui->displayDimensionsXLabel << p.ui->displayHeight               << p.ui->stereoscopyLabel << p.ui->stereoscopy
+                           << p.ui->naluSizeLengthLabel  << p.ui->naluSizeLength          << p.ui->croppingLabel               << p.ui->cropping         << p.ui->aacIsSBR
+                           << p.ui->cuesLabel            << p.ui->cues                    << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions;
 }
 
 void
 Tab::setupMoveUpDownButtons() {
+  auto &p      = *p_func();
   auto show    = Util::Settings::get().m_showMoveUpDownButtons;
-  auto widgets = QList<QWidget *>{} << ui->moveFilesButtons << ui->moveTracksButtons << ui->moveAttachmentsButtons;
+  auto widgets = QList<QWidget *>{} << p.ui->moveFilesButtons << p.ui->moveTracksButtons << p.ui->moveAttachmentsButtons;
 
   for (auto const &widget : widgets)
     widget->setVisible(show);
@@ -115,41 +119,45 @@ Tab::setupInputLayout() {
 
 void
 Tab::setupHorizontalScrollAreaInputLayout() {
-  if (ui->wProperties->isVisible() && (0 == ui->propertiesStack->currentIndex()))
+  auto &p = *p_func();
+
+  if (p.ui->wProperties->isVisible() && (0 == p.ui->propertiesStack->currentIndex()))
     return;
 
-  ui->twProperties->hide();
-  ui->wProperties->show();
+  p.ui->twProperties->hide();
+  p.ui->wProperties->show();
 
-  auto layout = qobject_cast<QBoxLayout *>(ui->scrollAreaWidgetContents->layout());
+  auto layout = qobject_cast<QBoxLayout *>(p.ui->scrollAreaWidgetContents->layout());
 
   Q_ASSERT(!!layout);
 
-  auto widgets = QWidgetList{} << ui->generalOptionsBox << ui->timestampsAndDefaultDurationBox << ui->videoPropertiesBox << ui->audioPropertiesBox << ui->subtitleAndChapterPropertiesBox << ui->miscellaneousBox;
+  auto widgets = QWidgetList{} << p.ui->generalOptionsBox << p.ui->timestampsAndDefaultDurationBox << p.ui->videoPropertiesBox << p.ui->audioPropertiesBox << p.ui->subtitleAndChapterPropertiesBox << p.ui->miscellaneousBox;
   for (auto const &widget : widgets)
-    widget->setParent(ui->scrollAreaWidgetContents);
+    widget->setParent(p.ui->scrollAreaWidgetContents);
 
-  layout->insertWidget(0, ui->generalOptionsBox);
-  layout->insertWidget(1, ui->timestampsAndDefaultDurationBox);
-  layout->insertWidget(2, ui->videoPropertiesBox);
-  layout->insertWidget(3, ui->audioPropertiesBox);
-  layout->insertWidget(4, ui->subtitleAndChapterPropertiesBox);
-  layout->insertWidget(5, ui->miscellaneousBox);
+  layout->insertWidget(0, p.ui->generalOptionsBox);
+  layout->insertWidget(1, p.ui->timestampsAndDefaultDurationBox);
+  layout->insertWidget(2, p.ui->videoPropertiesBox);
+  layout->insertWidget(3, p.ui->audioPropertiesBox);
+  layout->insertWidget(4, p.ui->subtitleAndChapterPropertiesBox);
+  layout->insertWidget(5, p.ui->miscellaneousBox);
 
-  ui->propertiesColumn1->updateGeometry();
-  ui->propertiesColumn2->updateGeometry();
+  p.ui->propertiesColumn1->updateGeometry();
+  p.ui->propertiesColumn2->updateGeometry();
 
-  ui->propertiesStack->setCurrentIndex(0);
+  p.ui->propertiesStack->setCurrentIndex(0);
 }
 
 void
 Tab::setupHorizontalTwoColumnsInputLayout() {
-  if (ui->wProperties->isVisible() && (1 == ui->propertiesStack->currentIndex()))
+  auto &p = *p_func();
+
+  if (p.ui->wProperties->isVisible() && (1 == p.ui->propertiesStack->currentIndex()))
     return;
 
-  ui->twProperties->hide();
-  ui->wProperties->show();
-  ui->propertiesStack->setCurrentIndex(1);
+  p.ui->twProperties->hide();
+  p.ui->wProperties->show();
+  p.ui->propertiesStack->setCurrentIndex(1);
 
   auto moveTo = [](QWidget *column, int position, QWidget *widget) {
     auto layout = qobject_cast<QBoxLayout *>(column->layout());
@@ -159,21 +167,23 @@ Tab::setupHorizontalTwoColumnsInputLayout() {
     layout->insertWidget(position, widget);
   };
 
-  moveTo(ui->propertiesColumn1, 0, ui->generalOptionsBox);
-  moveTo(ui->propertiesColumn1, 1, ui->timestampsAndDefaultDurationBox);
-  moveTo(ui->propertiesColumn2, 0, ui->videoPropertiesBox);
-  moveTo(ui->propertiesColumn2, 1, ui->audioPropertiesBox);
-  moveTo(ui->propertiesColumn2, 2, ui->subtitleAndChapterPropertiesBox);
-  moveTo(ui->propertiesColumn2, 3, ui->miscellaneousBox);
+  moveTo(p.ui->propertiesColumn1, 0, p.ui->generalOptionsBox);
+  moveTo(p.ui->propertiesColumn1, 1, p.ui->timestampsAndDefaultDurationBox);
+  moveTo(p.ui->propertiesColumn2, 0, p.ui->videoPropertiesBox);
+  moveTo(p.ui->propertiesColumn2, 1, p.ui->audioPropertiesBox);
+  moveTo(p.ui->propertiesColumn2, 2, p.ui->subtitleAndChapterPropertiesBox);
+  moveTo(p.ui->propertiesColumn2, 3, p.ui->miscellaneousBox);
 }
 
 void
 Tab::setupVerticalTabWidgetInputLayout() {
-  if (ui->twProperties->isVisible())
+  auto &p = *p_func();
+
+  if (p.ui->twProperties->isVisible())
     return;
 
-  ui->twProperties->show();
-  ui->wProperties->hide();
+  p.ui->twProperties->show();
+  p.ui->wProperties->hide();
 
   auto moveTo = [](QWidget *page, int position, QWidget *widget) {
     auto layout = qobject_cast<QBoxLayout *>(page->layout());
@@ -183,356 +193,359 @@ Tab::setupVerticalTabWidgetInputLayout() {
     layout->insertWidget(position, widget);
   };
 
-  moveTo(ui->generalOptionsPage,                 0, ui->generalOptionsBox);
-  moveTo(ui->timestampsAndDefaultDurationPage,   0, ui->timestampsAndDefaultDurationBox);
-  moveTo(ui->videoPropertiesPage,                0, ui->videoPropertiesBox);
-  moveTo(ui->audioSubtitleChapterPropertiesPage, 0, ui->audioPropertiesBox);
-  moveTo(ui->audioSubtitleChapterPropertiesPage, 1, ui->subtitleAndChapterPropertiesBox);
-  moveTo(ui->miscellaneousPage,                  0, ui->miscellaneousBox);
+  moveTo(p.ui->generalOptionsPage,                 0, p.ui->generalOptionsBox);
+  moveTo(p.ui->timestampsAndDefaultDurationPage,   0, p.ui->timestampsAndDefaultDurationBox);
+  moveTo(p.ui->videoPropertiesPage,                0, p.ui->videoPropertiesBox);
+  moveTo(p.ui->audioSubtitleChapterPropertiesPage, 0, p.ui->audioPropertiesBox);
+  moveTo(p.ui->audioSubtitleChapterPropertiesPage, 1, p.ui->subtitleAndChapterPropertiesBox);
+  moveTo(p.ui->miscellaneousPage,                  0, p.ui->miscellaneousBox);
 
-  ui->propertiesColumn1->updateGeometry();
-  ui->propertiesColumn2->updateGeometry();
+  p.ui->propertiesColumn1->updateGeometry();
+  p.ui->propertiesColumn2->updateGeometry();
 }
 
 void
 Tab::setupInputControls() {
+  auto &p   = *p_func();
   auto &cfg = Util::Settings::get();
 
-  ui->twProperties->hide();
+  p.ui->twProperties->hide();
 
   setupControlLists();
   setupMoveUpDownButtons();
   setupInputLayout();
 
-  ui->files->setModel(m_filesModel);
-  ui->tracks->setModel(m_tracksModel);
-  ui->tracks->enterActivatesAllSelected(true);
+  p.ui->files->setModel(p.filesModel);
+  p.ui->tracks->setModel(p.tracksModel);
+  p.ui->tracks->enterActivatesAllSelected(true);
 
-  ui->files->acceptDroppedFiles(true);
-  ui->tracks->acceptDroppedFiles(true);
+  p.ui->files->acceptDroppedFiles(true);
+  p.ui->tracks->acceptDroppedFiles(true);
 
-  cfg.handleSplitterSizes(ui->mergeInputSplitter);
-  cfg.handleSplitterSizes(ui->mergeFilesTracksSplitter);
+  cfg.handleSplitterSizes(p.ui->mergeInputSplitter);
+  cfg.handleSplitterSizes(p.ui->mergeFilesTracksSplitter);
 
-  ui->trackName->lineEdit()->setClearButtonEnabled(true);
-  ui->defaultDuration->lineEdit()->setClearButtonEnabled(true);
-  ui->aspectRatio->lineEdit()->setClearButtonEnabled(true);
+  p.ui->trackName->lineEdit()->setClearButtonEnabled(true);
+  p.ui->defaultDuration->lineEdit()->setClearButtonEnabled(true);
+  p.ui->aspectRatio->lineEdit()->setClearButtonEnabled(true);
 
   // Track & chapter character set
-  ui->subtitleCharacterSet->setup(true);
-  ui->chapterCharacterSet->setup(true);
+  p.ui->subtitleCharacterSet->setup(true);
+  p.ui->chapterCharacterSet->setup(true);
 
-  ui->muxThis->addItem(QString{}, true);
-  ui->muxThis->addItem(QString{}, false);
+  p.ui->muxThis->addItem(QString{}, true);
+  p.ui->muxThis->addItem(QString{}, false);
 
   // Stereoscopy
-  ui->stereoscopy->addItem(Q(""), 0);
+  p.ui->stereoscopy->addItem(Q(""), 0);
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
-    ui->stereoscopy->addItem(QString{}, idx + 1);
+    p.ui->stereoscopy->addItem(QString{}, idx + 1);
 
   // NALU size length
   for (auto idx = 0; idx < 3; ++idx)
-    ui->naluSizeLength->addItem(QString{}, idx * 2);
+    p.ui->naluSizeLength->addItem(QString{}, idx * 2);
 
   for (auto idx = 0; idx < 3; ++idx)
-    ui->defaultTrackFlag->addItem(QString{}, idx);
+    p.ui->defaultTrackFlag->addItem(QString{}, idx);
 
   // Originally the "forced track" flag's options where ordered "off,
   // on"; now they're ordered "yes, no" for consistency with other
   // flags, requiring the values to be reversed.
-  ui->forcedTrackFlag->addItem(QString{}, 1);
-  ui->forcedTrackFlag->addItem(QString{}, 0);
-  ui->forcedTrackFlag->setCurrentIndex(1);
+  p.ui->forcedTrackFlag->addItem(QString{}, 1);
+  p.ui->forcedTrackFlag->addItem(QString{}, 0);
+  p.ui->forcedTrackFlag->setCurrentIndex(1);
 
   for (auto idx = 0; idx < 3; ++idx)
-    ui->compression->addItem(QString{}, idx);
+    p.ui->compression->addItem(QString{}, idx);
 
   for (auto idx = 0; idx < 4; ++idx)
-    ui->cues->addItem(QString{}, idx);
+    p.ui->cues->addItem(QString{}, idx);
 
   for (auto idx = 0; idx < 3; ++idx)
-    ui->aacIsSBR->addItem(QString{}, idx);
+    p.ui->aacIsSBR->addItem(QString{}, idx);
 
-  for (auto const &control : m_comboBoxControls) {
+  for (auto const &control : p.comboBoxControls) {
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     Util::fixComboBoxViewWidth(*control);
   }
 
   // "files" context menu
-  m_filesMenu->addAction(m_addFilesAction);
-  m_filesMenu->addAction(m_appendFilesAction);
-  m_filesMenu->addAction(m_addAdditionalPartsAction);
-  m_filesMenu->addSeparator();
-  m_filesMenu->addAction(m_removeFilesAction);
-  m_filesMenu->addAction(m_removeAllFilesAction);
-  m_filesMenu->addSeparator();
-  m_filesMenu->addAction(m_setDestinationFileNameAction);
-  m_filesMenu->addSeparator();
-  m_filesMenu->addAction(m_openFilesInMediaInfoAction);
-  m_filesMenu->addSeparator();
-  m_filesMenu->addAction(m_selectTracksFromFilesAction);
+  p.filesMenu->addAction(p.addFilesAction);
+  p.filesMenu->addAction(p.appendFilesAction);
+  p.filesMenu->addAction(p.addAdditionalPartsAction);
+  p.filesMenu->addSeparator();
+  p.filesMenu->addAction(p.removeFilesAction);
+  p.filesMenu->addAction(p.removeAllFilesAction);
+  p.filesMenu->addSeparator();
+  p.filesMenu->addAction(p.setDestinationFileNameAction);
+  p.filesMenu->addSeparator();
+  p.filesMenu->addAction(p.openFilesInMediaInfoAction);
+  p.filesMenu->addSeparator();
+  p.filesMenu->addAction(p.selectTracksFromFilesAction);
 
-  m_addFilesAction->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
-  m_appendFilesAction->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-x.png")});
-  m_addAdditionalPartsAction->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-margin.png")});
-  m_removeFilesAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
-  m_openFilesInMediaInfoAction->setIcon(QIcon{Q(":/icons/16x16/documentinfo.png")});
+  p.addFilesAction->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
+  p.appendFilesAction->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-x.png")});
+  p.addAdditionalPartsAction->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-margin.png")});
+  p.removeFilesAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
+  p.openFilesInMediaInfoAction->setIcon(QIcon{Q(":/icons/16x16/documentinfo.png")});
 
   // "tracks" context menu
-  m_tracksMenu->addAction(m_selectAllTracksAction);
-  m_tracksMenu->addMenu(m_selectTracksOfTypeMenu);
-  m_tracksMenu->addAction(m_enableAllTracksAction);
-  m_tracksMenu->addAction(m_disableAllTracksAction);
-  m_tracksMenu->addSeparator();
-  m_tracksMenu->addAction(m_openTracksInMediaInfoAction);
+  p.tracksMenu->addAction(p.selectAllTracksAction);
+  p.tracksMenu->addMenu(p.selectTracksOfTypeMenu);
+  p.tracksMenu->addAction(p.enableAllTracksAction);
+  p.tracksMenu->addAction(p.disableAllTracksAction);
+  p.tracksMenu->addSeparator();
+  p.tracksMenu->addAction(p.openTracksInMediaInfoAction);
 
-  m_selectTracksOfTypeMenu->addAction(m_selectAllVideoTracksAction);
-  m_selectTracksOfTypeMenu->addAction(m_selectAllAudioTracksAction);
-  m_selectTracksOfTypeMenu->addAction(m_selectAllSubtitlesTracksAction);
+  p.selectTracksOfTypeMenu->addAction(p.selectAllVideoTracksAction);
+  p.selectTracksOfTypeMenu->addAction(p.selectAllAudioTracksAction);
+  p.selectTracksOfTypeMenu->addAction(p.selectAllSubtitlesTracksAction);
 
-  m_selectAllTracksAction->setIcon(QIcon{Q(":/icons/16x16/edit-select-all.png")});
-  m_enableAllTracksAction->setIcon(QIcon{Q(":/icons/16x16/checkbox.png")});
-  m_disableAllTracksAction->setIcon(QIcon{Q(":/icons/16x16/checkbox-unchecked.png")});
-  m_openTracksInMediaInfoAction->setIcon(QIcon{Q(":/icons/16x16/documentinfo.png")});
+  p.selectAllTracksAction->setIcon(QIcon{Q(":/icons/16x16/edit-select-all.png")});
+  p.enableAllTracksAction->setIcon(QIcon{Q(":/icons/16x16/checkbox.png")});
+  p.disableAllTracksAction->setIcon(QIcon{Q(":/icons/16x16/checkbox-unchecked.png")});
+  p.openTracksInMediaInfoAction->setIcon(QIcon{Q(":/icons/16x16/documentinfo.png")});
 
-  m_selectAllVideoTracksAction->setIcon(QIcon{Q(":/icons/16x16/tool-animator.png")});
-  m_selectAllAudioTracksAction->setIcon(QIcon{Q(":/icons/16x16/knotify.png")});
-  m_selectAllSubtitlesTracksAction->setIcon(QIcon{Q(":/icons/16x16/subtitles.png")});
+  p.selectAllVideoTracksAction->setIcon(QIcon{Q(":/icons/16x16/tool-animator.png")});
+  p.selectAllAudioTracksAction->setIcon(QIcon{Q(":/icons/16x16/knotify.png")});
+  p.selectAllSubtitlesTracksAction->setIcon(QIcon{Q(":/icons/16x16/subtitles.png")});
 
   // "add source files" menu
-  m_addFilesMenu->addAction(m_addFilesAction2);
-  m_addFilesMenu->addAction(m_appendFilesAction2);
-  m_addFilesMenu->addAction(m_addAdditionalPartsAction2);
-  ui->addFiles->setMenu(m_addFilesMenu);
+  p.addFilesMenu->addAction(p.addFilesAction2);
+  p.addFilesMenu->addAction(p.appendFilesAction2);
+  p.addFilesMenu->addAction(p.addAdditionalPartsAction2);
+  p.ui->addFiles->setMenu(p.addFilesMenu);
 
   // "start muxing" menu
-  m_startMuxingMenu->addAction(m_startMuxingLeaveAsIs);
-  m_startMuxingMenu->addAction(m_startMuxingCreateNewSettings);
-  m_startMuxingMenu->addAction(m_startMuxingRemoveInputFiles);
-  m_startMuxingMenu->addAction(m_startMuxingCloseSettings);
-  ui->startMuxing->setMenu(m_startMuxingMenu);
+  p.startMuxingMenu->addAction(p.startMuxingLeaveAsIs);
+  p.startMuxingMenu->addAction(p.startMuxingCreateNewSettings);
+  p.startMuxingMenu->addAction(p.startMuxingRemoveInputFiles);
+  p.startMuxingMenu->addAction(p.startMuxingCloseSettings);
+  p.ui->startMuxing->setMenu(p.startMuxingMenu);
 
   // "add to job queue" menu
-  m_addToJobQueueMenu->addAction(m_addToJobQueueLeaveAsIs);
-  m_addToJobQueueMenu->addAction(m_addToJobQueueCreateNewSettings);
-  m_addToJobQueueMenu->addAction(m_addToJobQueueRemoveInputFiles);
-  m_addToJobQueueMenu->addAction(m_addToJobQueueCloseSettings);
-  ui->addToJobQueue->setMenu(m_addToJobQueueMenu);
+  p.addToJobQueueMenu->addAction(p.addToJobQueueLeaveAsIs);
+  p.addToJobQueueMenu->addAction(p.addToJobQueueCreateNewSettings);
+  p.addToJobQueueMenu->addAction(p.addToJobQueueRemoveInputFiles);
+  p.addToJobQueueMenu->addAction(p.addToJobQueueCloseSettings);
+  p.ui->addToJobQueue->setMenu(p.addToJobQueueMenu);
 
-  m_addFilesAction2->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
-  m_appendFilesAction2->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-x.png")});
-  m_addAdditionalPartsAction2->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-margin.png")});
+  p.addFilesAction2->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
+  p.appendFilesAction2->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-x.png")});
+  p.addAdditionalPartsAction2->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-margin.png")});
 
   // Connect Q_SIGNALS & Q_SLOTS.
   auto mw = MainWindow::get();
   using CMSAction = Util::Settings::ClearMergeSettingsAction;
 
-  connect(ui->aacIsSBR,                      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onAacIsSBRChanged);
-  connect(ui->addFiles,                      &QToolButton::clicked,                                                                            this,                     &Tab::onAddFiles);
-  connect(ui->addToJobQueue,                 &QPushButton::clicked,                                                                            this,                     [=]() { addToJobQueue(false); });
-  connect(ui->additionalTrackOptions,        &QLineEdit::textChanged,                                                                          this,                     &Tab::onAdditionalTrackOptionsChanged);
-  connect(ui->aspectRatio,                   &QComboBox::currentTextChanged,                                                                   this,                     &Tab::onAspectRatioChanged);
-  connect(ui->aspectRatio,                   &QComboBox::editTextChanged,                                                                      this,                     &Tab::onAspectRatioChanged);
-  connect(ui->browseTimestamps,              &QPushButton::clicked,                                                                            this,                     &Tab::onBrowseTimestamps);
-  connect(ui->browseTrackTags,               &QPushButton::clicked,                                                                            this,                     &Tab::onBrowseTrackTags);
-  connect(ui->compression,                   static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onCompressionChanged);
-  connect(ui->cropping,                      &QLineEdit::textChanged,                                                                          this,                     &Tab::onCroppingChanged);
-  connect(ui->cues,                          static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onCuesChanged);
-  connect(ui->defaultDuration,               &QComboBox::currentTextChanged,                                                                   this,                     &Tab::onDefaultDurationChanged);
-  connect(ui->defaultDuration,               &QComboBox::editTextChanged,                                                                      this,                     &Tab::onDefaultDurationChanged);
-  connect(ui->defaultTrackFlag,              static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onDefaultTrackFlagChanged);
-  connect(ui->delay,                         &QLineEdit::textChanged,                                                                          this,                     &Tab::onDelayChanged);
-  connect(ui->displayHeight,                 &QLineEdit::textChanged,                                                                          this,                     &Tab::onDisplayHeightChanged);
-  connect(ui->displayWidth,                  &QLineEdit::textChanged,                                                                          this,                     &Tab::onDisplayWidthChanged);
-  connect(ui->editAdditionalOptions,         &QPushButton::clicked,                                                                            this,                     &Tab::onEditAdditionalOptions);
-  connect(ui->files,                         &Util::BasicTreeView::ctrlDownPressed,                                                            this,                     &Tab::onMoveFilesDown);
-  connect(ui->files,                         &Util::BasicTreeView::ctrlUpPressed,                                                              this,                     &Tab::onMoveFilesUp);
-  connect(ui->files,                         &Util::BasicTreeView::customContextMenuRequested,                                                 this,                     &Tab::showFilesContextMenu);
-  connect(ui->files,                         &Util::BasicTreeView::deletePressed,                                                              this,                     &Tab::onRemoveFiles);
-  connect(ui->files,                         &Util::BasicTreeView::insertPressed,                                                              this,                     &Tab::onAddFiles);
-  connect(ui->files,                         &Util::BasicTreeView::filesDropped,                                                               this,                     &Tab::addOrAppendDroppedFiles);
-  connect(ui->files->selectionModel(),       &QItemSelectionModel::selectionChanged,                                                           m_filesModel,             &SourceFileModel::updateSelectionStatus);
-  connect(ui->files->selectionModel(),       &QItemSelectionModel::selectionChanged,                                                           this,                     &Tab::enableMoveFilesButtons);
-  connect(ui->fixBitstreamTimingInfo,        &QCheckBox::toggled,                                                                              this,                     &Tab::onFixBitstreamTimingInfoChanged);
-  connect(ui->forcedTrackFlag,               static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onForcedTrackFlagChanged);
-  connect(ui->moveFilesDown,                 &QPushButton::clicked,                                                                            this,                     &Tab::onMoveFilesDown);
-  connect(ui->moveFilesUp,                   &QPushButton::clicked,                                                                            this,                     &Tab::onMoveFilesUp);
-  connect(ui->moveTracksDown,                &QPushButton::clicked,                                                                            this,                     &Tab::onMoveTracksDown);
-  connect(ui->moveTracksUp,                  &QPushButton::clicked,                                                                            this,                     &Tab::onMoveTracksUp);
-  connect(ui->muxThis,                       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onMuxThisChanged);
-  connect(ui->naluSizeLength,                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onNaluSizeLengthChanged);
-  connect(ui->reduceToAudioCore,             &QCheckBox::toggled,                                                                              this,                     &Tab::onReduceAudioToCoreChanged);
-  connect(ui->removeDialogNormalizationGain, &QCheckBox::toggled,                                                                              this,                     &Tab::onRemoveDialogNormalizationGainChanged);
-  connect(ui->setAspectRatio,                &QPushButton::clicked,                                                                            this,                     &Tab::onSetAspectRatio);
-  connect(ui->setDisplayWidthHeight,         &QPushButton::clicked,                                                                            this,                     &Tab::onSetDisplayDimensions);
-  connect(ui->startMuxing,                   &QPushButton::clicked,                                                                            this,                     [=]() { addToJobQueue(true); });
-  connect(ui->stereoscopy,                   static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onStereoscopyChanged);
-  connect(ui->stretchBy,                     &QLineEdit::textChanged,                                                                          this,                     &Tab::onStretchByChanged);
-  connect(ui->subtitleCharacterSet,          static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onSubtitleCharacterSetChanged);
-  connect(ui->subtitleCharacterSetPreview,   &QPushButton::clicked,                                                                            this,                     &Tab::onPreviewSubtitleCharacterSet);
-  connect(ui->timestamps,                    &QLineEdit::textChanged,                                                                          this,                     &Tab::onTimestampsChanged);
-  connect(ui->trackLanguage,                 &Util::LanguageDisplayWidget::languageChanged,                                                    this,                     &Tab::onTrackLanguageChanged);
-  connect(ui->trackName,                     &QComboBox::editTextChanged,                                                                      this,                     &Tab::onTrackNameChanged);
-  connect(ui->trackTags,                     &QLineEdit::textChanged,                                                                          this,                     &Tab::onTrackTagsChanged);
-  connect(ui->tracks,                        &QTreeView::doubleClicked,                                                                        this,                     &Tab::toggleMuxThisForSelectedTracks);
-  connect(ui->tracks,                        &Util::BasicTreeView::allSelectedActivated,                                                       this,                     &Tab::toggleMuxThisForSelectedTracks);
-  connect(ui->tracks,                        &Util::BasicTreeView::ctrlDownPressed,                                                            this,                     &Tab::onMoveTracksDown);
-  connect(ui->tracks,                        &Util::BasicTreeView::ctrlUpPressed,                                                              this,                     &Tab::onMoveTracksUp);
-  connect(ui->tracks,                        &Util::BasicTreeView::customContextMenuRequested,                                                 this,                     &Tab::showTracksContextMenu);
-  connect(ui->tracks,                        &Util::BasicTreeView::filesDropped,                                                               this,                     &Tab::addOrAppendDroppedFiles);
-  connect(ui->tracks->selectionModel(),      &QItemSelectionModel::selectionChanged,                                                           m_tracksModel,            &TrackModel::updateSelectionStatus);
-  connect(ui->tracks->selectionModel(),      &QItemSelectionModel::selectionChanged,                                                           this,                     &Tab::onTrackSelectionChanged);
+  connect(p.ui->aacIsSBR,                      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onAacIsSBRChanged);
+  connect(p.ui->addFiles,                      &QToolButton::clicked,                                                                            this,                     &Tab::onAddFiles);
+  connect(p.ui->addToJobQueue,                 &QPushButton::clicked,                                                                            this,                     [=]() { addToJobQueue(false); });
+  connect(p.ui->additionalTrackOptions,        &QLineEdit::textChanged,                                                                          this,                     &Tab::onAdditionalTrackOptionsChanged);
+  connect(p.ui->aspectRatio,                   &QComboBox::currentTextChanged,                                                                   this,                     &Tab::onAspectRatioChanged);
+  connect(p.ui->aspectRatio,                   &QComboBox::editTextChanged,                                                                      this,                     &Tab::onAspectRatioChanged);
+  connect(p.ui->browseTimestamps,              &QPushButton::clicked,                                                                            this,                     &Tab::onBrowseTimestamps);
+  connect(p.ui->browseTrackTags,               &QPushButton::clicked,                                                                            this,                     &Tab::onBrowseTrackTags);
+  connect(p.ui->compression,                   static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onCompressionChanged);
+  connect(p.ui->cropping,                      &QLineEdit::textChanged,                                                                          this,                     &Tab::onCroppingChanged);
+  connect(p.ui->cues,                          static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onCuesChanged);
+  connect(p.ui->defaultDuration,               &QComboBox::currentTextChanged,                                                                   this,                     &Tab::onDefaultDurationChanged);
+  connect(p.ui->defaultDuration,               &QComboBox::editTextChanged,                                                                      this,                     &Tab::onDefaultDurationChanged);
+  connect(p.ui->defaultTrackFlag,              static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onDefaultTrackFlagChanged);
+  connect(p.ui->delay,                         &QLineEdit::textChanged,                                                                          this,                     &Tab::onDelayChanged);
+  connect(p.ui->displayHeight,                 &QLineEdit::textChanged,                                                                          this,                     &Tab::onDisplayHeightChanged);
+  connect(p.ui->displayWidth,                  &QLineEdit::textChanged,                                                                          this,                     &Tab::onDisplayWidthChanged);
+  connect(p.ui->editAdditionalOptions,         &QPushButton::clicked,                                                                            this,                     &Tab::onEditAdditionalOptions);
+  connect(p.ui->files,                         &Util::BasicTreeView::ctrlDownPressed,                                                            this,                     &Tab::onMoveFilesDown);
+  connect(p.ui->files,                         &Util::BasicTreeView::ctrlUpPressed,                                                              this,                     &Tab::onMoveFilesUp);
+  connect(p.ui->files,                         &Util::BasicTreeView::customContextMenuRequested,                                                 this,                     &Tab::showFilesContextMenu);
+  connect(p.ui->files,                         &Util::BasicTreeView::deletePressed,                                                              this,                     &Tab::onRemoveFiles);
+  connect(p.ui->files,                         &Util::BasicTreeView::insertPressed,                                                              this,                     &Tab::onAddFiles);
+  connect(p.ui->files,                         &Util::BasicTreeView::filesDropped,                                                               this,                     &Tab::addOrAppendDroppedFiles);
+  connect(p.ui->files->selectionModel(),       &QItemSelectionModel::selectionChanged,                                                           p.filesModel,             &SourceFileModel::updateSelectionStatus);
+  connect(p.ui->files->selectionModel(),       &QItemSelectionModel::selectionChanged,                                                           this,                     &Tab::enableMoveFilesButtons);
+  connect(p.ui->fixBitstreamTimingInfo,        &QCheckBox::toggled,                                                                              this,                     &Tab::onFixBitstreamTimingInfoChanged);
+  connect(p.ui->forcedTrackFlag,               static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onForcedTrackFlagChanged);
+  connect(p.ui->moveFilesDown,                 &QPushButton::clicked,                                                                            this,                     &Tab::onMoveFilesDown);
+  connect(p.ui->moveFilesUp,                   &QPushButton::clicked,                                                                            this,                     &Tab::onMoveFilesUp);
+  connect(p.ui->moveTracksDown,                &QPushButton::clicked,                                                                            this,                     &Tab::onMoveTracksDown);
+  connect(p.ui->moveTracksUp,                  &QPushButton::clicked,                                                                            this,                     &Tab::onMoveTracksUp);
+  connect(p.ui->muxThis,                       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onMuxThisChanged);
+  connect(p.ui->naluSizeLength,                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onNaluSizeLengthChanged);
+  connect(p.ui->reduceToAudioCore,             &QCheckBox::toggled,                                                                              this,                     &Tab::onReduceAudioToCoreChanged);
+  connect(p.ui->removeDialogNormalizationGain, &QCheckBox::toggled,                                                                              this,                     &Tab::onRemoveDialogNormalizationGainChanged);
+  connect(p.ui->setAspectRatio,                &QPushButton::clicked,                                                                            this,                     &Tab::onSetAspectRatio);
+  connect(p.ui->setDisplayWidthHeight,         &QPushButton::clicked,                                                                            this,                     &Tab::onSetDisplayDimensions);
+  connect(p.ui->startMuxing,                   &QPushButton::clicked,                                                                            this,                     [=]() { addToJobQueue(true); });
+  connect(p.ui->stereoscopy,                   static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onStereoscopyChanged);
+  connect(p.ui->stretchBy,                     &QLineEdit::textChanged,                                                                          this,                     &Tab::onStretchByChanged);
+  connect(p.ui->subtitleCharacterSet,          static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this,                     &Tab::onSubtitleCharacterSetChanged);
+  connect(p.ui->subtitleCharacterSetPreview,   &QPushButton::clicked,                                                                            this,                     &Tab::onPreviewSubtitleCharacterSet);
+  connect(p.ui->timestamps,                    &QLineEdit::textChanged,                                                                          this,                     &Tab::onTimestampsChanged);
+  connect(p.ui->trackLanguage,                 &Util::LanguageDisplayWidget::languageChanged,                                                    this,                     &Tab::onTrackLanguageChanged);
+  connect(p.ui->trackName,                     &QComboBox::editTextChanged,                                                                      this,                     &Tab::onTrackNameChanged);
+  connect(p.ui->trackTags,                     &QLineEdit::textChanged,                                                                          this,                     &Tab::onTrackTagsChanged);
+  connect(p.ui->tracks,                        &QTreeView::doubleClicked,                                                                        this,                     &Tab::toggleMuxThisForSelectedTracks);
+  connect(p.ui->tracks,                        &Util::BasicTreeView::allSelectedActivated,                                                       this,                     &Tab::toggleMuxThisForSelectedTracks);
+  connect(p.ui->tracks,                        &Util::BasicTreeView::ctrlDownPressed,                                                            this,                     &Tab::onMoveTracksDown);
+  connect(p.ui->tracks,                        &Util::BasicTreeView::ctrlUpPressed,                                                              this,                     &Tab::onMoveTracksUp);
+  connect(p.ui->tracks,                        &Util::BasicTreeView::customContextMenuRequested,                                                 this,                     &Tab::showTracksContextMenu);
+  connect(p.ui->tracks,                        &Util::BasicTreeView::filesDropped,                                                               this,                     &Tab::addOrAppendDroppedFiles);
+  connect(p.ui->tracks->selectionModel(),      &QItemSelectionModel::selectionChanged,                                                           p.tracksModel,            &TrackModel::updateSelectionStatus);
+  connect(p.ui->tracks->selectionModel(),      &QItemSelectionModel::selectionChanged,                                                           this,                     &Tab::onTrackSelectionChanged);
 
-  connect(m_addFilesAction,                  &QAction::triggered,                                                                              this,                     &Tab::onAddFiles);
-  connect(m_addFilesAction2,                 &QAction::triggered,                                                                              this,                     &Tab::onAddFiles);
-  connect(m_appendFilesAction,               &QAction::triggered,                                                                              this,                     &Tab::onAppendFiles);
-  connect(m_appendFilesAction2,              &QAction::triggered,                                                                              this,                     &Tab::onAppendFiles);
-  connect(m_addAdditionalPartsAction,        &QAction::triggered,                                                                              this,                     &Tab::onAddAdditionalParts);
-  connect(m_addAdditionalPartsAction2,       &QAction::triggered,                                                                              this,                     &Tab::onAddAdditionalParts);
-  connect(m_removeFilesAction,               &QAction::triggered,                                                                              this,                     &Tab::onRemoveFiles);
-  connect(m_removeAllFilesAction,            &QAction::triggered,                                                                              this,                     &Tab::onRemoveAllFiles);
-  connect(m_setDestinationFileNameAction,    &QAction::triggered,                                                                              this,                     &Tab::setDestinationFileNameFromSelectedFile);
-  connect(m_openFilesInMediaInfoAction,      &QAction::triggered,                                                                              this,                     &Tab::onOpenFilesInMediaInfo);
-  connect(m_openTracksInMediaInfoAction,     &QAction::triggered,                                                                              this,                     &Tab::onOpenTracksInMediaInfo);
+  connect(p.addFilesAction,                  &QAction::triggered,                                                                              this,                     &Tab::onAddFiles);
+  connect(p.addFilesAction2,                 &QAction::triggered,                                                                              this,                     &Tab::onAddFiles);
+  connect(p.appendFilesAction,               &QAction::triggered,                                                                              this,                     &Tab::onAppendFiles);
+  connect(p.appendFilesAction2,              &QAction::triggered,                                                                              this,                     &Tab::onAppendFiles);
+  connect(p.addAdditionalPartsAction,        &QAction::triggered,                                                                              this,                     &Tab::onAddAdditionalParts);
+  connect(p.addAdditionalPartsAction2,       &QAction::triggered,                                                                              this,                     &Tab::onAddAdditionalParts);
+  connect(p.removeFilesAction,               &QAction::triggered,                                                                              this,                     &Tab::onRemoveFiles);
+  connect(p.removeAllFilesAction,            &QAction::triggered,                                                                              this,                     &Tab::onRemoveAllFiles);
+  connect(p.setDestinationFileNameAction,    &QAction::triggered,                                                                              this,                     &Tab::setDestinationFileNameFromSelectedFile);
+  connect(p.openFilesInMediaInfoAction,      &QAction::triggered,                                                                              this,                     &Tab::onOpenFilesInMediaInfo);
+  connect(p.openTracksInMediaInfoAction,     &QAction::triggered,                                                                              this,                     &Tab::onOpenTracksInMediaInfo);
 
-  connect(m_selectAllTracksAction,           &QAction::triggered,                                                                              this,                     &Tab::selectAllTracks);
-  connect(m_selectAllVideoTracksAction,      &QAction::triggered,                                                                              this,                     &Tab::selectAllVideoTracks);
-  connect(m_selectAllAudioTracksAction,      &QAction::triggered,                                                                              this,                     &Tab::selectAllAudioTracks);
-  connect(m_selectAllSubtitlesTracksAction,  &QAction::triggered,                                                                              this,                     &Tab::selectAllSubtitlesTracks);
-  connect(m_selectTracksFromFilesAction,     &QAction::triggered,                                                                              this,                     &Tab::selectAllTracksFromSelectedFiles);
-  connect(m_enableAllTracksAction,           &QAction::triggered,                                                                              this,                     &Tab::enableAllTracks);
-  connect(m_disableAllTracksAction,          &QAction::triggered,                                                                              this,                     &Tab::disableAllTracks);
+  connect(p.selectAllTracksAction,           &QAction::triggered,                                                                              this,                     &Tab::selectAllTracks);
+  connect(p.selectAllVideoTracksAction,      &QAction::triggered,                                                                              this,                     &Tab::selectAllVideoTracks);
+  connect(p.selectAllAudioTracksAction,      &QAction::triggered,                                                                              this,                     &Tab::selectAllAudioTracks);
+  connect(p.selectAllSubtitlesTracksAction,  &QAction::triggered,                                                                              this,                     &Tab::selectAllSubtitlesTracks);
+  connect(p.selectTracksFromFilesAction,     &QAction::triggered,                                                                              this,                     &Tab::selectAllTracksFromSelectedFiles);
+  connect(p.enableAllTracksAction,           &QAction::triggered,                                                                              this,                     &Tab::enableAllTracks);
+  connect(p.disableAllTracksAction,          &QAction::triggered,                                                                              this,                     &Tab::disableAllTracks);
 
-  connect(m_startMuxingLeaveAsIs,            &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::None); });
-  connect(m_startMuxingCreateNewSettings,    &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::NewSettings); });
-  connect(m_startMuxingCloseSettings,        &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::CloseSettings); });
-  connect(m_startMuxingRemoveInputFiles,     &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::RemoveInputFiles); });
+  connect(p.startMuxingLeaveAsIs,            &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::None); });
+  connect(p.startMuxingCreateNewSettings,    &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::NewSettings); });
+  connect(p.startMuxingCloseSettings,        &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::CloseSettings); });
+  connect(p.startMuxingRemoveInputFiles,     &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(true,  CMSAction::RemoveInputFiles); });
 
-  connect(m_addToJobQueueLeaveAsIs,          &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::None); });
-  connect(m_addToJobQueueCreateNewSettings,  &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::NewSettings); });
-  connect(m_addToJobQueueCloseSettings,      &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::CloseSettings); });
-  connect(m_addToJobQueueRemoveInputFiles,   &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::RemoveInputFiles); });
+  connect(p.addToJobQueueLeaveAsIs,          &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::None); });
+  connect(p.addToJobQueueCreateNewSettings,  &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::NewSettings); });
+  connect(p.addToJobQueueCloseSettings,      &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::CloseSettings); });
+  connect(p.addToJobQueueRemoveInputFiles,   &QAction::triggered,                                                                              this,                     [=]() { addToJobQueue(false, CMSAction::RemoveInputFiles); });
 
-  connect(m_addFilesMenu,                    &QMenu::aboutToShow,                                                                              this,                     &Tab::enableFilesActions);
+  connect(p.addFilesMenu,                    &QMenu::aboutToShow,                                                                              this,                     &Tab::enableFilesActions);
 
-  connect(m_filesModel,                      &SourceFileModel::rowsInserted,                                                                   this,                     &Tab::onFileRowsInserted);
-  connect(m_tracksModel,                     &TrackModel::rowsInserted,                                                                        this,                     &Tab::onTrackRowsInserted);
-  connect(m_tracksModel,                     &TrackModel::itemChanged,                                                                         this,                     &Tab::onTrackItemChanged);
+  connect(p.filesModel,                      &SourceFileModel::rowsInserted,                                                                   this,                     &Tab::onFileRowsInserted);
+  connect(p.tracksModel,                     &TrackModel::rowsInserted,                                                                        this,                     &Tab::onTrackRowsInserted);
+  connect(p.tracksModel,                     &TrackModel::itemChanged,                                                                         this,                     &Tab::onTrackItemChanged);
 
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  this,                     &Tab::setupMoveUpDownButtons);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  this,                     &Tab::setupInputLayout);
   connect(mw,                                &MainWindow::preferencesChanged,                                                                  this,                     &Tab::setupPredefinedTrackNames);
-  connect(mw,                                &MainWindow::preferencesChanged,                                                                  ui->subtitleCharacterSet, &Util::ComboBoxBase::reInitialize);
-  connect(mw,                                &MainWindow::preferencesChanged,                                                                  ui->chapterCharacterSet,  &Util::ComboBoxBase::reInitialize);
+  connect(mw,                                &MainWindow::preferencesChanged,                                                                  p.ui->subtitleCharacterSet, &Util::ComboBoxBase::reInitialize);
+  connect(mw,                                &MainWindow::preferencesChanged,                                                                  p.ui->chapterCharacterSet,  &Util::ComboBoxBase::reInitialize);
 
   enableMoveFilesButtons();
   onTrackSelectionChanged();
 
-  Util::HeaderViewManager::create(*ui->files,  "Merge::Files") .setDefaultSizes({ { Q("fileName"), 200 }, { Q("container"), 100 }, { Q("fileSize"),  60 } });
-  Util::HeaderViewManager::create(*ui->tracks, "Merge::Tracks").setDefaultSizes({ { Q("codec"),    150 }, { Q("type"),       80 }, { Q("name"),     150 }, { Q("properties"), 150 } });
+  Util::HeaderViewManager::create(*p.ui->files,  "Merge::Files") .setDefaultSizes({ { Q("fileName"), 200 }, { Q("container"), 100 }, { Q("fileSize"),  60 } });
+  Util::HeaderViewManager::create(*p.ui->tracks, "Merge::Tracks").setDefaultSizes({ { Q("codec"),    150 }, { Q("type"),       80 }, { Q("name"),     150 }, { Q("properties"), 150 } });
 }
 
 void
 Tab::setupInputToolTips() {
-  Util::setToolTip(ui->files,     QY("Right-click to add, append and remove files"));
-  Util::setToolTip(ui->tracks,    QY("Right-click for actions for all items"));
+  auto &p = *p_func();
 
-  Util::setToolTip(ui->muxThis,   QY("If set to 'no' then the selected tracks will not be copied to the destination file."));
-  Util::setToolTip(ui->trackName, QY("A name for this track that players can display helping the user choose the right track to play, e.g. \"director's comments\"."));
-  Util::setToolTip(ui->trackLanguage, QY("The language for this track that players can use for automatic track selection and display for the user."));
-  Util::setToolTip(ui->defaultTrackFlag,
+  Util::setToolTip(p.ui->files,     QY("Right-click to add, append and remove files"));
+  Util::setToolTip(p.ui->tracks,    QY("Right-click for actions for all items"));
+
+  Util::setToolTip(p.ui->muxThis,   QY("If set to 'no' then the selected tracks will not be copied to the destination file."));
+  Util::setToolTip(p.ui->trackName, QY("A name for this track that players can display helping the user choose the right track to play, e.g. \"director's comments\"."));
+  Util::setToolTip(p.ui->trackLanguage, QY("The language for this track that players can use for automatic track selection and display for the user."));
+  Util::setToolTip(p.ui->defaultTrackFlag,
                    Q("%1 %2 %3")
                    .arg(QY("Make this track the default track for its type (audio, video, subtitles)."))
                    .arg(QY("Players should prefer tracks with the default track flag set."))
                    .arg(QY("If set to 'determine automatically' then mkvmerge will choose one track of each type to have this flag set based on the information in the source files and the order of the tracks.")));
-  Util::setToolTip(ui->forcedTrackFlag,
+  Util::setToolTip(p.ui->forcedTrackFlag,
                    Q("%1 %2")
                    .arg(QY("Mark this track as 'forced'."))
                    .arg(QY("Players must play this track.")));
-  Util::setToolTip(ui->compression,
+  Util::setToolTip(p.ui->compression,
                    Q("%1 %2 %3")
                    .arg(QY("Sets the lossless compression algorithm to be used for this track."))
                    .arg(QY("If set to 'determine automatically' then mkvmerge will decide whether or not to compress and which algorithm to use based on the track type."))
                    .arg(QY("Currently only certain subtitle formats are compressed with the zlib algorithm.")));
-  Util::setToolTip(ui->delay,
+  Util::setToolTip(p.ui->delay,
                    Q("%1 %2 %3")
                    .arg(QY("Delay this track's timestamps by a couple of ms."))
                    .arg(QY("The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."))
                    .arg(QY("This works with all track types.")));
-  Util::setToolTip(ui->stretchBy,
+  Util::setToolTip(p.ui->stretchBy,
                    Q("<p>%1 %2</p><p>%3</p>")
                    .arg(QYH("Multiply this track's timestamps with a factor."))
                    .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."))
                    .arg(QYH("This works well for video and subtitle tracks but should not be used with audio tracks.")));
-  Util::setToolTip(ui->defaultDuration,
+  Util::setToolTip(p.ui->defaultDuration,
                    Q("%1 %2 %3 %4")
                    .arg(QY("Forces the default duration or number of frames per second for a track."))
                    .arg(QY("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."))
                    .arg(QY("You can specify one of the units 's', 'ms', 'us', 'ns', 'fps', 'i' or 'p'."))
                    .arg(QY("If no unit is given, 'fps' will be used.")));
-  Util::setToolTip(ui->fixBitstreamTimingInfo,
+  Util::setToolTip(p.ui->fixBitstreamTimingInfo,
                    Q("%1 %2 %3")
                    .arg(QY("Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."))
                    .arg(QY("With this option that information is adjusted to match the container's timing information."))
                    .arg(QY("The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, "
                            "the source container or the video bitstream.")));
-  Util::setToolTip(ui->aspectRatio,
+  Util::setToolTip(p.ui->aspectRatio,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
                    .arg(QYH("The Matroska container format can store the display width/height for a video track."))
                    .arg(QYH("This option tells mkvmerge the display aspect ratio to use when it calculates the display width/height."))
                    .arg(QYH("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size."))
                    .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456).")));
-  Util::setToolTip(ui->displayWidth,
+  Util::setToolTip(p.ui->displayWidth,
                    Q("<p>%1 %2</p><p>%3</p>")
                    .arg(QYH("The Matroska container format can store the display width/height for a video track."))
                    .arg(QYH("This parameter is the display width in pixels."))
                    .arg(QYH("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size.")));
-  Util::setToolTip(ui->displayHeight,
+  Util::setToolTip(p.ui->displayHeight,
                    Q("<p>%1 %2</p><p>%3</p>")
                    .arg(QYH("The Matroska container format can store the display width/height for a video track."))
                    .arg(QYH("This parameter is the display height in pixels."))
                    .arg(QYH("Note that many players don't use the display width/height values directly but only use the ratio given by these values when setting the initial window size.")));
-  Util::setToolTip(ui->cropping,
+  Util::setToolTip(p.ui->cropping,
                    Q("<p>%1 %2</p><p>%3 %4</p><p>%5</p>")
                    .arg(QYH("Sets the cropping parameters which tell a player to omit a certain number of pixels on the four sides during playback."))
                    .arg(QYH("This must be a comma-separated list of four numbers for the cropping to be used at the left, top, right and bottom, e.g. '0,20,0,20'."))
                    .arg(QYH("Note that the video content is not modified by this option."))
                    .arg(QYH("The values are only stored in the track headers."))
                    .arg(QYH("Note also that there are not a lot of players that support the cropping parameters.")));
-  Util::setToolTip(ui->stereoscopy,
+  Util::setToolTip(p.ui->stereoscopy,
                    Q("%1 %2")
                    .arg(QY("Sets the stereo mode of the video track to this value."))
                    .arg(QY("If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all.")));
-  Util::setToolTip(ui->naluSizeLength,
+  Util::setToolTip(p.ui->naluSizeLength,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
                    .arg(QYH("Forces the NALU size length to a certain number of bytes."))
                    .arg(QYH("It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes."))
                    .arg(QYH("For such files you can use this parameter and decrease the size to 2."))
                    .arg(QYH("This parameter is only effective for AVC/H.264 and HEVC/H.265 elementary streams read from AVC/H.264 ES or HEVC/H.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'.")));
-  Util::setToolTip(ui->aacIsSBR,
+  Util::setToolTip(p.ui->aacIsSBR,
                    Q("%1 %2 %3")
                    .arg(QY("This track contains SBR AAC/HE-AAC/AAC+ data."))
                    .arg(QY("Only needed for AAC source files as SBR AAC cannot be detected automatically for these files."))
                    .arg(QY("Not needed for AAC tracks read from other container formats like MP4 or Matroska files.")));
-  Util::setToolTip(ui->reduceToAudioCore,
+  Util::setToolTip(p.ui->reduceToAudioCore,
                    Q("%1 %2")
                    .arg(QY("Drops all HD extensions from an audio track and keeps only its lossy core."))
                    .arg(QY("This only works with DTS audio tracks.")));
-  Util::setToolTip(ui->removeDialogNormalizationGain,
+  Util::setToolTip(p.ui->removeDialogNormalizationGain,
                    Q("%1 %2")
                    .arg(QY("Removes or at least minimizes the dialog normalization gain by modifying audio headers."))
                    .arg(QY("This only works with AC-3, DTS & TrueHD audio tracks.")));
-  Util::setToolTip(ui->subtitleCharacterSet,
+  Util::setToolTip(p.ui->subtitleCharacterSet,
                    Q("<p>%1 %2</p><p><ol><li>%3</li><li>%4</li></p>")
                    .arg(QYH("Selects the character set a subtitle file or chapter information was written with."))
                    .arg(QYH("Only needed in certain situations:"))
                    .arg(QYH("for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)").arg(Q(g_cc_local_utf8->get_charset())))
                    .arg(QYH("for files with chapter information (e.g. OGM, MP4) for which mkvmerge does not detect the encoding correctly")));
-  Util::setToolTip(ui->cues,
+  Util::setToolTip(p.ui->cues,
                    Q("%1 %2")
                    .arg(QY("Selects for which blocks mkvmerge will produce index entries ( = cue entries)."))
                    .arg(QY("\"Determine automatically\" is a good choice for almost all situations.")));
-  Util::setToolTip(ui->additionalTrackOptions,
+  Util::setToolTip(p.ui->additionalTrackOptions,
                    Q("%1 %2 %3")
                    .arg(QY("Free-form edit field for user defined options for this track."))
                    .arg(QY("What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."))
@@ -541,13 +554,15 @@ Tab::setupInputToolTips() {
 
 void
 Tab::setupPredefinedTrackNames() {
-  QSignalBlocker const blocker{ui->trackName};
+  auto &p = *p_func();
 
-  auto name = ui->trackName->currentText();
+  QSignalBlocker const blocker{p.ui->trackName};
+
+  auto name = p.ui->trackName->currentText();
   QMap<TrackType, bool> haveType;
 
-  Util::withSelectedIndexes(ui->tracks, [&](QModelIndex const &idx) {
-    auto track = m_tracksModel->fromIndex(idx);
+  Util::withSelectedIndexes(p.ui->tracks, [&](QModelIndex const &idx) {
+    auto track = p.tracksModel->fromIndex(idx);
     if (track)
       haveType[track->m_type] = true;
   });
@@ -565,14 +580,15 @@ Tab::setupPredefinedTrackNames() {
   items.sort(Qt::CaseInsensitive);
   items.erase(std::unique(items.begin(), items.end()), items.end());
 
-  ui->trackName->clear();
-  ui->trackName->addItems(items);
-  ui->trackName->setCurrentText(name);
+  p.ui->trackName->clear();
+  p.ui->trackName->addItems(items);
+  p.ui->trackName->setCurrentText(name);
 }
 
 void
 Tab::setupFileIdentificationThread() {
-  auto &worker = m_identifier->worker();
+  auto &p      = *p_func();
+  auto &worker = p.identifier->worker();
 
   connect(&worker, &FileIdentificationWorker::queueStarted,                    this, &Tab::fileIdentificationStarted);
   connect(&worker, &FileIdentificationWorker::queueFinished,                   this, &Tab::fileIdentificationFinished);
@@ -586,17 +602,17 @@ Tab::setupFileIdentificationThread() {
   connect(&worker, &FileIdentificationWorker::playlistScanDecisionNeeded,      this, &Tab::selectScanPlaylistPolicy);
   connect(&worker, &FileIdentificationWorker::playlistSelectionNeeded,         this, &Tab::selectPlaylistToAdd);
 
-  m_identifier->start();
+  p.identifier->start();
 }
 
 void
 Tab::fileIdentificationStarted() {
-  ui->overlordWidget->setEnabled(false);
+  p_func()->ui->overlordWidget->setEnabled(false);
 }
 
 void
 Tab::fileIdentificationFinished() {
-  ui->overlordWidget->setEnabled(true);
+  p_func()->ui->overlordWidget->setEnabled(true);
 }
 
 void
@@ -604,7 +620,7 @@ Tab::onFileRowsInserted(QModelIndex const &parentIdx,
                         int,
                         int) {
   if (parentIdx.isValid())
-    ui->files->setExpanded(parentIdx, true);
+    p_func()->ui->files->setExpanded(parentIdx, true);
 }
 
 void
@@ -612,40 +628,42 @@ Tab::onTrackRowsInserted(QModelIndex const &parentIdx,
                          int,
                          int) {
   if (parentIdx.isValid())
-    ui->tracks->setExpanded(parentIdx, true);
+    p_func()->ui->tracks->setExpanded(parentIdx, true);
 }
 
 void
 Tab::onTrackSelectionChanged() {
-  Util::enableWidgets(m_allInputControls, false);
-  ui->moveTracksUp->setEnabled(false);
-  ui->moveTracksDown->setEnabled(false);
-  ui->subtitleCharacterSetPreview->setEnabled(false);
+  auto &p = *p_func();
 
-  auto selection = ui->tracks->selectionModel()->selection();
+  Util::enableWidgets(p.allInputControls, false);
+  p.ui->moveTracksUp->setEnabled(false);
+  p.ui->moveTracksDown->setEnabled(false);
+  p.ui->subtitleCharacterSetPreview->setEnabled(false);
+
+  auto selection = p.ui->tracks->selectionModel()->selection();
   auto numRows   = Util::numSelectedRows(selection);
   if (!numRows) {
     clearInputControlValues();
     return;
   }
 
-  ui->moveTracksUp->setEnabled(true);
-  ui->moveTracksDown->setEnabled(true);
+  p.ui->moveTracksUp->setEnabled(true);
+  p.ui->moveTracksDown->setEnabled(true);
 
   if (1 < numRows) {
     setInputControlValues(nullptr);
     setupPredefinedTrackNames();
-    Util::enableWidgets(m_allInputControls, true);
+    Util::enableWidgets(p.allInputControls, true);
     return;
   }
 
-  Util::enableWidgets(m_typeIndependentControls, true);
+  Util::enableWidgets(p.typeIndependentControls, true);
 
   auto idxs = selection[0].indexes();
   if (idxs.isEmpty() || !idxs[0].isValid())
     return;
 
-  auto track = m_tracksModel->fromIndex(idxs[0]);
+  auto track = p.tracksModel->fromIndex(idxs[0]);
   if (!track)
     return;
 
@@ -653,36 +671,36 @@ Tab::onTrackSelectionChanged() {
   setupPredefinedTrackNames();
 
   if (track->isAudio()) {
-    Util::enableWidgets(m_audioControls, true);
-    Util::enableWidgets({ ui->aacIsSBRLabel, ui->aacIsSBR }, track->canSetAacToSbr());
-    ui->reduceToAudioCore->setEnabled(track->canReduceToAudioCore());
-    ui->removeDialogNormalizationGain->setEnabled(track->canRemoveDialogNormalizationGain());
+    Util::enableWidgets(p.audioControls, true);
+    Util::enableWidgets({ p.ui->aacIsSBRLabel, p.ui->aacIsSBR }, track->canSetAacToSbr());
+    p.ui->reduceToAudioCore->setEnabled(track->canReduceToAudioCore());
+    p.ui->removeDialogNormalizationGain->setEnabled(track->canRemoveDialogNormalizationGain());
 
   } else if (track->isVideo())
-    Util::enableWidgets(m_videoControls, true);
+    Util::enableWidgets(p.videoControls, true);
 
   else if (track->isSubtitles()) {
-    Util::enableWidgets(m_subtitleControls, true);
+    Util::enableWidgets(p.subtitleControls, true);
     if (!track->canChangeSubCharset())
-      Util::enableWidgets(QList<QWidget *>{} << ui->characterSetLabel << ui->subtitleCharacterSet, false);
+      Util::enableWidgets(QList<QWidget *>{} << p.ui->characterSetLabel << p.ui->subtitleCharacterSet, false);
 
     else if (track->m_file->isTextSubtitleContainer())
-      ui->subtitleCharacterSetPreview->setEnabled(true);
+      p.ui->subtitleCharacterSetPreview->setEnabled(true);
 
   } else if (track->isChapters()) {
-    Util::enableWidgets(m_chapterControls, true);
+    Util::enableWidgets(p.chapterControls, true);
 
     if (!track->canChangeSubCharset())
-      Util::enableWidgets(QList<QWidget *>{} << ui->characterSetLabel << ui->subtitleCharacterSet, false);
+      Util::enableWidgets(QList<QWidget *>{} << p.ui->characterSetLabel << p.ui->subtitleCharacterSet, false);
   }
 
   if (track->isAppended())
-    Util::enableWidgets(m_notIfAppendingControls, false);
+    Util::enableWidgets(p.notIfAppendingControls, false);
 }
 
 void
 Tab::addOrRemoveEmptyComboBoxItem(bool add) {
-  for (auto &comboBox : m_comboBoxControls)
+  for (auto &comboBox : p_func()->comboBoxControls)
     if (add && comboBox->itemData(0).isValid())
       comboBox->insertItem(0, QY("<Do not change>"));
     else if (!add && !comboBox->itemData(0).isValid())
@@ -691,84 +709,89 @@ Tab::addOrRemoveEmptyComboBoxItem(bool add) {
 
 void
 Tab::clearInputControlValues() {
-  ui->trackLanguage->setLanguage({});
+  auto &p = *p_func();
 
-  for (auto comboBox : m_comboBoxControls)
+  p.ui->trackLanguage->setLanguage({});
+
+  for (auto comboBox : p.comboBoxControls)
     comboBox->setCurrentIndex(0);
 
-  for (auto control : std::vector<QLineEdit *>{ui->trackTags, ui->delay, ui->stretchBy, ui->timestamps, ui->displayWidth, ui->displayHeight, ui->cropping, ui->additionalTrackOptions})
+  for (auto control : std::vector<QLineEdit *>{p.ui->trackTags, p.ui->delay, p.ui->stretchBy, p.ui->timestamps, p.ui->displayWidth, p.ui->displayHeight, p.ui->cropping, p.ui->additionalTrackOptions})
     control->setText(Q(""));
 
-  for (auto control : std::vector<QComboBox *>{ui->trackName, ui->defaultDuration, ui->aspectRatio})
+  for (auto control : std::vector<QComboBox *>{p.ui->trackName, p.ui->defaultDuration, p.ui->aspectRatio})
     control->setEditText(Q(""));
 
-  ui->setAspectRatio->setChecked(false);
-  ui->setDisplayWidthHeight->setChecked(false);
+  p.ui->setAspectRatio->setChecked(false);
+  p.ui->setDisplayWidthHeight->setChecked(false);
 }
 
 void
 Tab::setInputControlValues(Track *track) {
-  m_currentlySettingInputControlValues = true;
+  auto &p = *p_func();
+
+  p.currentlySettingInputControlValues = true;
 
   addOrRemoveEmptyComboBoxItem(!track);
 
   auto additionalLanguages     = QSet<QString>{};
   auto additionalCharacterSets = QSet<QString>{};
 
-  for (auto const &sourceFile : m_config.m_files)
+  for (auto const &sourceFile : p.config.m_files)
     for (auto const &sourceTrack : sourceFile->m_tracks) {
       additionalLanguages     << Q(sourceTrack->m_language.format());
       additionalCharacterSets << sourceTrack->m_characterSet;
     }
 
-  ui->trackLanguage->setAdditionalLanguages(additionalLanguages.values());
-  ui->subtitleCharacterSet->setAdditionalItems(additionalCharacterSets.values()).reInitializeIfNecessary();
+  p.ui->trackLanguage->setAdditionalLanguages(additionalLanguages.values());
+  p.ui->subtitleCharacterSet->setAdditionalItems(additionalCharacterSets.values()).reInitializeIfNecessary();
 
   if (!track) {
     clearInputControlValues();
-    m_currentlySettingInputControlValues = false;
+    p.currentlySettingInputControlValues = false;
     return;
   }
 
-  Util::setComboBoxIndexIf(ui->muxThis,          [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_muxThis);                                });
-  Util::setComboBoxIndexIf(ui->defaultTrackFlag, [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_defaultTrackFlag);                       });
-  Util::setComboBoxIndexIf(ui->forcedTrackFlag,  [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_forcedTrackFlag);                        });
-  Util::setComboBoxIndexIf(ui->compression,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == static_cast<unsigned int>(track->m_compression)); });
-  Util::setComboBoxIndexIf(ui->cues,             [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_cues);                                   });
-  Util::setComboBoxIndexIf(ui->stereoscopy,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_stereoscopy);                            });
-  Util::setComboBoxIndexIf(ui->naluSizeLength,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);                         });
-  Util::setComboBoxIndexIf(ui->aacIsSBR,         [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);                               });
+  Util::setComboBoxIndexIf(p.ui->muxThis,          [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_muxThis);                                });
+  Util::setComboBoxIndexIf(p.ui->defaultTrackFlag, [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_defaultTrackFlag);                       });
+  Util::setComboBoxIndexIf(p.ui->forcedTrackFlag,  [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_forcedTrackFlag);                        });
+  Util::setComboBoxIndexIf(p.ui->compression,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == static_cast<unsigned int>(track->m_compression)); });
+  Util::setComboBoxIndexIf(p.ui->cues,             [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_cues);                                   });
+  Util::setComboBoxIndexIf(p.ui->stereoscopy,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_stereoscopy);                            });
+  Util::setComboBoxIndexIf(p.ui->naluSizeLength,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);                         });
+  Util::setComboBoxIndexIf(p.ui->aacIsSBR,         [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);                               });
 
-  ui->trackLanguage->setLanguage(track->m_language);
-  ui->subtitleCharacterSet->setCurrentByData(track->m_characterSet);
+  p.ui->trackLanguage->setLanguage(track->m_language);
+  p.ui->subtitleCharacterSet->setCurrentByData(track->m_characterSet);
 
-  ui->trackName->setEditText(                    track->m_name);
-  ui->trackTags->setText(                        track->m_tags);
-  ui->delay->setText(                            track->m_delay);
-  ui->stretchBy->setText(                        track->m_stretchBy);
-  ui->timestamps->setText(                       track->m_timestamps);
-  ui->displayWidth->setText(                     track->m_displayWidth);
-  ui->displayHeight->setText(                    track->m_displayHeight);
-  ui->cropping->setText(                         track->m_cropping);
-  ui->additionalTrackOptions->setText(           track->m_additionalOptions);
-  ui->defaultDuration->setEditText(              track->m_defaultDuration);
-  ui->aspectRatio->setEditText(                  track->m_aspectRatio);
+  p.ui->trackName->setEditText(                    track->m_name);
+  p.ui->trackTags->setText(                        track->m_tags);
+  p.ui->delay->setText(                            track->m_delay);
+  p.ui->stretchBy->setText(                        track->m_stretchBy);
+  p.ui->timestamps->setText(                       track->m_timestamps);
+  p.ui->displayWidth->setText(                     track->m_displayWidth);
+  p.ui->displayHeight->setText(                    track->m_displayHeight);
+  p.ui->cropping->setText(                         track->m_cropping);
+  p.ui->additionalTrackOptions->setText(           track->m_additionalOptions);
+  p.ui->defaultDuration->setEditText(              track->m_defaultDuration);
+  p.ui->aspectRatio->setEditText(                  track->m_aspectRatio);
 
-  ui->setAspectRatio->setChecked(                track->m_setAspectRatio);
-  ui->setDisplayWidthHeight->setChecked(        !track->m_setAspectRatio);
-  ui->fixBitstreamTimingInfo->setChecked(        track->m_fixBitstreamTimingInfo);
-  ui->reduceToAudioCore->setChecked(             track->m_reduceAudioToCore);
-  ui->removeDialogNormalizationGain->setChecked( track->m_removeDialogNormalizationGain);
+  p.ui->setAspectRatio->setChecked(                track->m_setAspectRatio);
+  p.ui->setDisplayWidthHeight->setChecked(        !track->m_setAspectRatio);
+  p.ui->fixBitstreamTimingInfo->setChecked(        track->m_fixBitstreamTimingInfo);
+  p.ui->reduceToAudioCore->setChecked(             track->m_reduceAudioToCore);
+  p.ui->removeDialogNormalizationGain->setChecked( track->m_removeDialogNormalizationGain);
 
-  m_currentlySettingInputControlValues = false;
+  p.currentlySettingInputControlValues = false;
 }
 
 QList<SourceFile *>
 Tab::selectedSourceFiles()
   const {
+  auto &p          = *p_func();
   auto sourceFiles = QList<SourceFile *>{};
-  Util::withSelectedIndexes(ui->files, [&sourceFiles, this](QModelIndex const &idx) {
-      auto sourceFile = m_filesModel->fromIndex(idx);
+  Util::withSelectedIndexes(p.ui->files, [&sourceFiles, &p](QModelIndex const &idx) {
+      auto sourceFile = p.filesModel->fromIndex(idx);
       if (sourceFile)
         sourceFiles << sourceFile.get();
   });
@@ -779,9 +802,10 @@ Tab::selectedSourceFiles()
 QList<Track *>
 Tab::selectedTracks()
   const {
+  auto &p     = *p_func();
   auto tracks = QList<Track *>{};
-  Util::withSelectedIndexes(ui->tracks, [&tracks, this](QModelIndex const &idx) {
-      auto track = m_tracksModel->fromIndex(idx);
+  Util::withSelectedIndexes(p.ui->tracks, [&tracks, &p](QModelIndex const &idx) {
+      auto track = p.tracksModel->fromIndex(idx);
       if (track)
         tracks << track;
     });
@@ -793,7 +817,9 @@ void
 Tab::withSelectedTracks(std::function<void(Track &)> code,
                         bool notIfAppending,
                         QWidget *widget) {
-  if (m_currentlySettingInputControlValues)
+  auto &p = *p_func();
+
+  if (p.currentlySettingInputControlValues)
     return;
 
   auto tracks = selectedTracks();
@@ -803,11 +829,11 @@ Tab::withSelectedTracks(std::function<void(Track &)> code,
   if (!widget)
     widget = static_cast<QWidget *>(QObject::sender());
 
-  bool withAudio     = m_audioControls.contains(widget);
-  bool withVideo     = m_videoControls.contains(widget);
-  bool withSubtitles = m_subtitleControls.contains(widget);
-  bool withChapters  = m_chapterControls.contains(widget);
-  bool withAll       = m_typeIndependentControls.contains(widget);
+  bool withAudio     = p.audioControls.contains(widget);
+  bool withVideo     = p.videoControls.contains(widget);
+  bool withSubtitles = p.subtitleControls.contains(widget);
+  bool withChapters  = p.chapterControls.contains(widget);
+  bool withAll       = p.typeIndependentControls.contains(widget);
 
   for (auto &track : tracks) {
     if (track->m_appendedTo && notIfAppending)
@@ -819,7 +845,7 @@ Tab::withSelectedTracks(std::function<void(Track &)> code,
         || (track->isSubtitles() && withSubtitles)
         || (track->isChapters()  && withChapters)) {
       code(*track);
-      m_tracksModel->trackUpdated(track);
+      p.tracksModel->trackUpdated(track);
     }
   }
 }
@@ -831,14 +857,16 @@ Tab::onTrackNameChanged(QString newValue) {
 
 void
 Tab::onTrackItemChanged(QStandardItem *item) {
+  auto &p = *p_func();
+
   if (!item)
     return;
 
-  auto idx = m_tracksModel->indexFromItem(item);
+  auto idx = p.tracksModel->indexFromItem(item);
   if (idx.column())
     return;
 
-  auto track = m_tracksModel->fromIndex(idx);
+  auto track = p.tracksModel->fromIndex(idx);
   if (!track)
     return;
 
@@ -852,25 +880,26 @@ Tab::onTrackItemChanged(QStandardItem *item) {
     return;
 
   track->m_muxThis = newMuxThis;
-  m_tracksModel->trackUpdated(track);
+  p.tracksModel->trackUpdated(track);
 
   for (auto appendedTrack : track->m_appendedTracks) {
     appendedTrack->m_muxThis = newMuxThis;
-    m_tracksModel->trackUpdated(appendedTrack);
+    p.tracksModel->trackUpdated(appendedTrack);
   }
 
   auto selected = selectedTracks();
   if ((1 == selected.count()) && selected.contains(track))
-    Util::setComboBoxIndexIf(ui->muxThis, [newMuxThis](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == newMuxThis); });
+    Util::setComboBoxIndexIf(p.ui->muxThis, [newMuxThis](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == newMuxThis); });
 
   setOutputFileNameMaybe();
 
-  m_tracksModel->updateEffectiveDefaultTrackFlags();
+  p.tracksModel->updateEffectiveDefaultTrackFlags();
 }
 
 void
 Tab::onMuxThisChanged(int selected) {
-  auto data = ui->muxThis->itemData(selected);
+  auto &p   = *p_func();
+  auto data = p.ui->muxThis->itemData(selected);
   if (!data.isValid())
     return;
 
@@ -885,20 +914,21 @@ Tab::onMuxThisChanged(int selected) {
 
   for (auto track : appendedTracks) {
     track->m_muxThis = muxThis;
-    m_tracksModel->trackUpdated(track);
+    p.tracksModel->trackUpdated(track);
   }
 
   setOutputFileNameMaybe();
 
-  m_tracksModel->updateEffectiveDefaultTrackFlags();
+  p.tracksModel->updateEffectiveDefaultTrackFlags();
 
   auto tracks = selectedTracks();
   if (1 == tracks.count())
-    Util::setComboBoxIndexIf(ui->muxThis, [&tracks](QString const &, QVariant const &eltData) { return eltData.isValid() && (eltData.toBool() == tracks[0]->m_muxThis); });
+    Util::setComboBoxIndexIf(p.ui->muxThis, [&tracks](QString const &, QVariant const &eltData) { return eltData.isValid() && (eltData.toBool() == tracks[0]->m_muxThis); });
 }
 
 void
 Tab::toggleMuxThisForSelectedTracks() {
+  auto &p             = *p_func();
   auto allEnabled     = true;
   auto tracksSelected = false;
 
@@ -907,10 +937,10 @@ Tab::toggleMuxThisForSelectedTracks() {
 
     if (!track.m_muxThis)
       allEnabled = false;
-  }, false, ui->muxThis);
+  }, false, p.ui->muxThis);
 
   if (!tracksSelected) {
-    m_tracksModel->updateEffectiveDefaultTrackFlags();
+    p.tracksModel->updateEffectiveDefaultTrackFlags();
     return;
   }
 
@@ -921,16 +951,16 @@ Tab::toggleMuxThisForSelectedTracks() {
     if (!track.m_appendedTo || track.m_appendedTo->m_muxThis)
       track.m_muxThis = newEnabled;
     appendedTracks += track.m_appendedTracks;
-  }, false, ui->muxThis);
+  }, false, p.ui->muxThis);
 
   for (auto track : appendedTracks) {
     track->m_muxThis = newEnabled;
-    m_tracksModel->trackUpdated(track);
+    p.tracksModel->trackUpdated(track);
   }
 
-  Util::setComboBoxIndexIf(ui->muxThis, [newEnabled](auto const &, auto const &data) { return data.isValid() && (data.toBool() == newEnabled); });
+  Util::setComboBoxIndexIf(p.ui->muxThis, [newEnabled](auto const &, auto const &data) { return data.isValid() && (data.toBool() == newEnabled); });
 
-  m_tracksModel->updateEffectiveDefaultTrackFlags();
+  p.tracksModel->updateEffectiveDefaultTrackFlags();
 }
 
 void
@@ -940,9 +970,12 @@ Tab::onTrackLanguageChanged(mtx::bcp47::language_c const &newLanguage) {
 
 void
 Tab::onDefaultTrackFlagChanged(int newValue) {
-  auto data = ui->defaultTrackFlag->itemData(newValue);
+  auto &p   = *p_func();
+  auto data = p.ui->defaultTrackFlag->itemData(newValue);
+
   if (!data.isValid())
     return;
+
   newValue = data.toInt();
 
   withSelectedTracks([this, newValue](auto &track) {
@@ -951,14 +984,17 @@ Tab::onDefaultTrackFlagChanged(int newValue) {
       this->ensureOneDefaultFlagOnly(&track);
   }, true);
 
-  m_tracksModel->updateEffectiveDefaultTrackFlags();
+  p.tracksModel->updateEffectiveDefaultTrackFlags();
 }
 
 void
 Tab::onForcedTrackFlagChanged(int newValue) {
-  auto data = ui->forcedTrackFlag->itemData(newValue);
+  auto &p   = *p_func();
+  auto data = p.ui->forcedTrackFlag->itemData(newValue);
+
   if (!data.isValid())
     return;
+
   newValue = data.toInt();
 
   withSelectedTracks([&newValue](auto &track) { track.m_forcedTrackFlag = newValue; }, true);
@@ -966,7 +1002,7 @@ Tab::onForcedTrackFlagChanged(int newValue) {
 
 void
 Tab::onCompressionChanged(int newValue) {
-  auto data = ui->compression->itemData(newValue);
+  auto data = p_func()->ui->compression->itemData(newValue);
   if (!data.isValid())
     return;
   newValue = data.toInt();
@@ -1005,7 +1041,7 @@ Tab::onTimestampsChanged(QString newValue) {
 
 void
 Tab::onBrowseTimestamps() {
-  auto fileName = getOpenFileName(QY("Select timestamp file"), QY("Text files") + Q(" (*.txt)"), ui->timestamps);
+  auto fileName = getOpenFileName(QY("Select timestamp file"), QY("Text files") + Q(" (*.txt)"), p_func()->ui->timestamps);
   if (!fileName.isEmpty())
     withSelectedTracks([&fileName](auto &track) { track.m_timestamps = fileName; });
 }
@@ -1017,7 +1053,7 @@ Tab::onFixBitstreamTimingInfoChanged(bool newValue) {
 
 void
 Tab::onBrowseTrackTags() {
-  auto fileName = getOpenFileName(QY("Select tags file"), QY("XML tag files") + Q(" (*.xml)"), ui->trackTags);
+  auto fileName = getOpenFileName(QY("Select tags file"), QY("XML tag files") + Q(" (*.xml)"), p_func()->ui->trackTags);
   if (!fileName.isEmpty())
     withSelectedTracks([&fileName](auto &track) { track.m_tags = fileName; }, true);
 }
@@ -1035,7 +1071,7 @@ Tab::onSetDisplayDimensions() {
 void
 Tab::onAspectRatioChanged(QString newValue) {
   if (!newValue.isEmpty()) {
-    ui->setAspectRatio->setChecked(true);
+    p_func()->ui->setAspectRatio->setChecked(true);
     onSetAspectRatio();
   }
 
@@ -1045,7 +1081,7 @@ Tab::onAspectRatioChanged(QString newValue) {
 void
 Tab::onDisplayWidthChanged(QString newValue) {
   if (!newValue.isEmpty()) {
-    ui->setDisplayWidthHeight->setChecked(true);
+    p_func()->ui->setDisplayWidthHeight->setChecked(true);
     onSetDisplayDimensions();
   }
 
@@ -1055,7 +1091,7 @@ Tab::onDisplayWidthChanged(QString newValue) {
 void
 Tab::onDisplayHeightChanged(QString newValue) {
   if (!newValue.isEmpty()) {
-    ui->setDisplayWidthHeight->setChecked(true);
+    p_func()->ui->setDisplayWidthHeight->setChecked(true);
     onSetDisplayDimensions();
   }
 
@@ -1064,7 +1100,7 @@ Tab::onDisplayHeightChanged(QString newValue) {
 
 void
 Tab::onStereoscopyChanged(int newValue) {
-  auto data = ui->stereoscopy->itemData(newValue);
+  auto data = p_func()->ui->stereoscopy->itemData(newValue);
   if (!data.isValid())
     return;
   newValue = data.toInt();
@@ -1074,7 +1110,7 @@ Tab::onStereoscopyChanged(int newValue) {
 
 void
 Tab::onNaluSizeLengthChanged(int newValue) {
-  auto data = ui->naluSizeLength->itemData(newValue);
+  auto data = p_func()->ui->naluSizeLength->itemData(newValue);
   if (!data.isValid())
     return;
   newValue = data.toInt();
@@ -1089,7 +1125,7 @@ Tab::onCroppingChanged(QString newValue) {
 
 void
 Tab::onAacIsSBRChanged(int newValue) {
-  auto data = ui->aacIsSBR->itemData(newValue);
+  auto data = p_func()->ui->aacIsSBR->itemData(newValue);
   if (!data.isValid())
     return;
   newValue = data.toInt();
@@ -1115,7 +1151,7 @@ Tab::onRemoveDialogNormalizationGainChanged(bool newValue) {
 
 void
 Tab::onSubtitleCharacterSetChanged(int newValue) {
-  auto data = ui->subtitleCharacterSet->itemData(newValue);
+  auto data = p_func()->ui->subtitleCharacterSet->itemData(newValue);
   if (!data.isValid())
     return;
 
@@ -1127,7 +1163,7 @@ Tab::onSubtitleCharacterSetChanged(int newValue) {
 
 void
 Tab::onCuesChanged(int newValue) {
-  auto data = ui->cues->itemData(newValue);
+  auto data = p_func()->ui->cues->itemData(newValue);
   if (!data.isValid())
     return;
   newValue = data.toInt();
@@ -1164,6 +1200,8 @@ Tab::addFiles(QStringList const &fileNames) {
 
 void
 Tab::handleIdentifiedXmlOrSimpleChapters(QString const &fileName) {
+  auto &p = *p_func();
+
   Util::MessageBox::warning(this)
     ->title(QY("Adding chapter files"))
     .text(Q("%1 %2 %3 %4")
@@ -1174,14 +1212,16 @@ Tab::handleIdentifiedXmlOrSimpleChapters(QString const &fileName) {
     .onlyOnce(Q("mergeChaptersDropped"))
     .exec();
 
-  m_config.m_chapters = fileName;
-  ui->chapters->setText(fileName);
+  p.config.m_chapters = fileName;
+  p.ui->chapters->setText(fileName);
 
-  m_identifier->continueIdentification();
+  p.identifier->continueIdentification();
 }
 
 void
 Tab::handleIdentifiedXmlSegmentInfo(QString const &fileName) {
+  auto &p = *p_func();
+
   Util::MessageBox::warning(this)
     ->title(QY("Adding segment info files"))
     .text(Q("%1 %2 %3 %4")
@@ -1192,14 +1232,16 @@ Tab::handleIdentifiedXmlSegmentInfo(QString const &fileName) {
     .onlyOnce(Q("mergeSegmentInfoDropped"))
     .exec();
 
-  m_config.m_segmentInfo = fileName;
-  ui->segmentInfo->setText(fileName);
+  p.config.m_segmentInfo = fileName;
+  p.ui->segmentInfo->setText(fileName);
 
-  m_identifier->continueIdentification();
+  p.identifier->continueIdentification();
 }
 
 void
 Tab::handleIdentifiedXmlTags(QString const &fileName) {
+  auto &p = *p_func();
+
   Util::MessageBox::warning(this)
     ->title(QY("Adding tag files"))
     .text(Q("%1 %2 %3 %4")
@@ -1210,28 +1252,29 @@ Tab::handleIdentifiedXmlTags(QString const &fileName) {
     .onlyOnce(Q("mergeTagsDropped"))
     .exec();
 
-  m_config.m_globalTags = fileName;
-  ui->globalTags->setText(fileName);
+  p.config.m_globalTags = fileName;
+  p.ui->globalTags->setText(fileName);
 
-  m_identifier->continueIdentification();
+  p.identifier->continueIdentification();
 }
 
 void
 Tab::showFileIdentificationError(QString const &errorTitle,
                                  QString const &errorText) {
+  auto &p  = *p_func();
   auto dlg = Util::MessageBox::critical(this);
 
-  if (!m_identifier->isEmpty()) {
+  if (!p.identifier->isEmpty()) {
     dlg->buttons(QMessageBox::Ok | QMessageBox::Cancel);
     dlg->buttonLabel(QMessageBox::Ok, QY("&Continue identification"));
   }
 
   auto result = dlg->title(errorTitle).text(errorText).exec();
 
-  if (m_identifier->isEmpty() || (result == QMessageBox::Ok))
-    m_identifier->continueIdentification();
+  if (p.identifier->isEmpty() || (result == QMessageBox::Ok))
+    p.identifier->continueIdentification();
   else
-    m_identifier->abortIdentification();
+    p.identifier->abortIdentification();
 }
 
 void
@@ -1243,42 +1286,44 @@ Tab::addOrAppendFiles(bool append,
 
   qDebug() << "Tab::addOrAppendFiles: TID" << QThread::currentThreadId();
 
-  m_identifier->worker().addFilesToIdentify(fileNames, append, sourceFileIdx);
+  p_func()->identifier->worker().addFilesToIdentify(fileNames, append, sourceFileIdx);
 }
 
 void
 Tab::addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles,
                                 bool append,
                                 QModelIndex const &sourceFileIdx) {
+  auto &p = *p_func();
+
   if (identifiedFiles.isEmpty())
     return;
 
-  if (m_debugTrackModel) {
+  if (p.debugTrackModel) {
     log_it(fmt::format("### BEFORE adding/appending ###\n"));
-    m_config.debugDumpFileList();
-    m_config.debugDumpTrackList();
+    p.config.debugDumpFileList();
+    p.config.debugDumpTrackList();
   }
 
   setDefaultsFromSettingsForAddedFiles(identifiedFiles);
 
-  m_filesModel->addOrAppendFilesAndTracks(sourceFileIdx, identifiedFiles, append);
+  p.filesModel->addOrAppendFilesAndTracks(sourceFileIdx, identifiedFiles, append);
 
-  if (m_debugTrackModel) {
+  if (p.debugTrackModel) {
     log_it(fmt::format("### AFTER adding/appending ###\n"));
-    m_config.debugDumpFileList();
-    m_config.debugDumpTrackList();
+    p.config.debugDumpFileList();
+    p.config.debugDumpTrackList();
   }
 
   reinitFilesTracksControls();
 
-  if (m_config.m_firstInputFileName.isEmpty())
-    m_config.m_firstInputFileName = m_config.determineFirstInputFileName(identifiedFiles);
+  if (p.config.m_firstInputFileName.isEmpty())
+    p.config.m_firstInputFileName = p.config.determineFirstInputFileName(identifiedFiles);
 
   setTitleMaybe(identifiedFiles);
   addDataFromIdentifiedBlurayFiles(identifiedFiles);
   setOutputFileNameMaybe();
 
-  m_config.verifyStructure();
+  p.config.verifyStructure();
 }
 
 void
@@ -1300,42 +1345,49 @@ Tab::addDataFromIdentifiedBlurayFiles(QList<SourceFilePtr> const &files) {
 void
 Tab::selectScanPlaylistPolicy(SourceFilePtr const &sourceFile,
                               QFileInfoList const &files) {
+  auto &p = *p_func();
+
   AskScanForPlaylistsDialog dialog{this};
 
   if (dialog.ask(*sourceFile, files.count() - 1))
-    m_identifier->continueByScanningPlaylists(files);
+    p.identifier->continueByScanningPlaylists(files);
 
   else {
-    m_identifier->worker().addIdentifiedFile(sourceFile);
-    m_identifier->continueIdentification();
+    p.identifier->worker().addIdentifiedFile(sourceFile);
+    p.identifier->continueIdentification();
   }
 }
 
 void
 Tab::hideScanningDirectoryDialog() {
-  if (!m_scanningDirectoryDialog)
+  auto &p = *p_func();
+
+  if (!p.scanningDirectoryDialog)
     return;
 
-  delete m_scanningDirectoryDialog;
-  m_scanningDirectoryDialog = nullptr;
+  delete p.scanningDirectoryDialog;
+  p.scanningDirectoryDialog = nullptr;
 }
 
 void
 Tab::showScanningPlaylistDialog(int numFilesToScan) {
-  auto &worker = m_identifier->worker();
+  auto &p      = *p_func();
+  auto &worker = p.identifier->worker();
 
-  if (!m_scanningDirectoryDialog)
-    m_scanningDirectoryDialog = new QProgressDialog{ QY("Scanning directory"), QY("Cancel"), 0, numFilesToScan, this };
+  if (!p.scanningDirectoryDialog)
+    p.scanningDirectoryDialog = new QProgressDialog{ QY("Scanning directory"), QY("Cancel"), 0, numFilesToScan, this };
 
-  connect(&worker,                   &FileIdentificationWorker::playlistScanProgressChanged, m_scanningDirectoryDialog, &QProgressDialog::setValue);
-  connect(m_scanningDirectoryDialog, &QProgressDialog::canceled,                             m_identifier,              &FileIdentificationThread::abortPlaylistScan);
+  connect(&worker,                   &FileIdentificationWorker::playlistScanProgressChanged, p.scanningDirectoryDialog, &QProgressDialog::setValue);
+  connect(p.scanningDirectoryDialog, &QProgressDialog::canceled,                             p.identifier,              &FileIdentificationThread::abortPlaylistScan);
 
-  m_scanningDirectoryDialog->setWindowTitle(QY("Scanning directory"));
-  m_scanningDirectoryDialog->show();
+  p.scanningDirectoryDialog->setWindowTitle(QY("Scanning directory"));
+  p.scanningDirectoryDialog->show();
 }
 
 void
 Tab::selectPlaylistToAdd(QList<SourceFilePtr> const &identifiedPlaylists) {
+  auto &p = *p_func();
+
   if (identifiedPlaylists.isEmpty())
     return;
 
@@ -1345,9 +1397,9 @@ Tab::selectPlaylistToAdd(QList<SourceFilePtr> const &identifiedPlaylists) {
     if (discLibrary && (discLibrary->m_infos_by_language.size() == 1))
       identifiedPlaylists[0]->m_discLibraryInfoToAdd = discLibrary->m_infos_by_language.begin()->second;
 
-    m_identifier->worker().addIdentifiedFile(identifiedPlaylists[0]);
+    p.identifier->worker().addIdentifiedFile(identifiedPlaylists[0]);
 
-    m_identifier->continueIdentification();
+    p.identifier->continueIdentification();
 
     return;
   }
@@ -1355,9 +1407,9 @@ Tab::selectPlaylistToAdd(QList<SourceFilePtr> const &identifiedPlaylists) {
   auto playlist = SelectPlaylistDialog{this, identifiedPlaylists, discLibrary}.select();
 
   if (playlist)
-    m_identifier->worker().addIdentifiedFile(playlist);
+    p.identifier->worker().addIdentifiedFile(playlist);
 
-  m_identifier->continueIdentification();
+  p.identifier->continueIdentification();
 }
 
 void
@@ -1365,7 +1417,7 @@ Tab::setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files) {
   auto &cfg = Util::Settings::get();
 
   auto defaultFlagSet = QHash<TrackType, bool>{};
-  for (auto const &track : m_config.m_tracks)
+  for (auto const &track : p_func()->config.m_tracks)
     if (track->m_defaultTrackFlag == 1)
       defaultFlagSet[track->m_type] = true;
 
@@ -1391,28 +1443,32 @@ Tab::selectFilesToAdd(QString const &title) {
 
 void
 Tab::onAddAdditionalParts() {
+  auto &p         = *p_func();
   auto currentIdx = selectedSourceFile();
-  auto sourceFile = m_filesModel->fromIndex(currentIdx);
+  auto sourceFile = p.filesModel->fromIndex(currentIdx);
+
   if (sourceFile && !sourceFile->m_tracks.size()) {
     Util::MessageBox::critical(this)->title(QY("Unable to append files")).text(QY("You cannot add additional parts to files that don't contain tracks.")).exec();
     return;
   }
 
-  m_filesModel->addAdditionalParts(currentIdx, selectFilesToAdd(QY("Add media files as additional parts")));
+  p.filesModel->addAdditionalParts(currentIdx, selectFilesToAdd(QY("Add media files as additional parts")));
 }
 
 void
 Tab::onRemoveFiles() {
+  auto &p            = *p_func();
   auto selectedFiles = selectedSourceFiles();
+
   if (selectedFiles.isEmpty())
     return;
 
-  m_filesModel->removeFiles(selectedFiles);
+  p.filesModel->removeFiles(selectedFiles);
 
   reinitFilesTracksControls();
 
-  if (!m_filesModel->rowCount()) {
-    m_config.m_firstInputFileName.clear();
+  if (!p.filesModel->rowCount()) {
+    p.config.m_firstInputFileName.clear();
     clearDestinationMaybe();
     clearTitleMaybe();
   }
@@ -1420,15 +1476,17 @@ Tab::onRemoveFiles() {
 
 void
 Tab::onRemoveAllFiles() {
-  if (m_config.m_files.isEmpty())
+  auto &p = *p_func();
+
+  if (p.config.m_files.isEmpty())
     return;
 
-  m_attachedFilesModel->reset();
-  m_filesModel->removeRows(0, m_filesModel->rowCount());
-  m_tracksModel->removeRows(0, m_tracksModel->rowCount());
-  m_config.m_files.clear();
-  m_config.m_tracks.clear();
-  m_config.m_firstInputFileName.clear();
+  p.attachedFilesModel->reset();
+  p.filesModel->removeRows(0, p.filesModel->rowCount());
+  p.tracksModel->removeRows(0, p.tracksModel->rowCount());
+  p.config.m_files.clear();
+  p.config.m_tracks.clear();
+  p.config.m_firstInputFileName.clear();
 
   reinitFilesTracksControls();
   clearDestinationMaybe();
@@ -1442,108 +1500,114 @@ Tab::reinitFilesTracksControls() {
 
 void
 Tab::enableMoveFilesButtons() {
-  auto hasSelected = !ui->files->selectionModel()->selection().isEmpty();
+  auto &p          = *p_func();
+  auto hasSelected = !p.ui->files->selectionModel()->selection().isEmpty();
 
-  ui->moveFilesUp->setEnabled(hasSelected);
-  ui->moveFilesDown->setEnabled(hasSelected);
+  p.ui->moveFilesUp->setEnabled(hasSelected);
+  p.ui->moveFilesDown->setEnabled(hasSelected);
 }
 
 void
 Tab::enableFilesActions() {
+  auto &p              = *p_func();
   int numSelected      = selectedSourceFiles().size();
   bool hasRegularTrack = false;
+
   if (1 == numSelected)
-    hasRegularTrack = m_config.m_files.end() != std::find_if(m_config.m_files.begin(), m_config.m_files.end(), [](SourceFilePtr const &file) { return file->hasRegularTrack(); });
+    hasRegularTrack = p.config.m_files.end() != std::find_if(p.config.m_files.begin(), p.config.m_files.end(), [](SourceFilePtr const &file) { return file->hasRegularTrack(); });
 
-  m_addFilesAction->setEnabled(true);
-  m_addFilesAction2->setEnabled(true);
-  m_appendFilesAction->setEnabled((1 == numSelected) && hasRegularTrack);
-  m_appendFilesAction2->setEnabled((1 == numSelected) && hasRegularTrack);
-  m_addAdditionalPartsAction->setEnabled(1 == numSelected);
-  m_addAdditionalPartsAction2->setEnabled(1 == numSelected);
-  m_removeFilesAction->setEnabled(0 < numSelected);
-  m_removeAllFilesAction->setEnabled(!m_config.m_files.isEmpty());
-  m_setDestinationFileNameAction->setEnabled(1 == numSelected);
-  m_openFilesInMediaInfoAction->setEnabled(0 < numSelected);
-  m_selectTracksFromFilesAction->setEnabled(0 < numSelected);
+  p.addFilesAction->setEnabled(true);
+  p.addFilesAction2->setEnabled(true);
+  p.appendFilesAction->setEnabled((1 == numSelected) && hasRegularTrack);
+  p.appendFilesAction2->setEnabled((1 == numSelected) && hasRegularTrack);
+  p.addAdditionalPartsAction->setEnabled(1 == numSelected);
+  p.addAdditionalPartsAction2->setEnabled(1 == numSelected);
+  p.removeFilesAction->setEnabled(0 < numSelected);
+  p.removeAllFilesAction->setEnabled(!p.config.m_files.isEmpty());
+  p.setDestinationFileNameAction->setEnabled(1 == numSelected);
+  p.openFilesInMediaInfoAction->setEnabled(0 < numSelected);
+  p.selectTracksFromFilesAction->setEnabled(0 < numSelected);
 
-  m_removeFilesAction->setText(QNY("&Remove file", "&Remove files", numSelected));
-  m_openFilesInMediaInfoAction->setText(QNY("Open file in &MediaInfo", "Open files in &MediaInfo", numSelected));
-  m_selectTracksFromFilesAction->setText(QNY("Select all &items from selected file", "Select all &items from selected files", numSelected));
+  p.removeFilesAction->setText(QNY("&Remove file", "&Remove files", numSelected));
+  p.openFilesInMediaInfoAction->setText(QNY("Open file in &MediaInfo", "Open files in &MediaInfo", numSelected));
+  p.selectTracksFromFilesAction->setText(QNY("Select all &items from selected file", "Select all &items from selected files", numSelected));
 }
 
 void
 Tab::enableTracksActions() {
+  auto &p         = *p_func();
   int numSelected = selectedTracks().size();
-  bool hasTracks  = !!m_tracksModel->rowCount();
+  bool hasTracks  = !!p.tracksModel->rowCount();
 
-  m_selectAllTracksAction->setEnabled(hasTracks);
-  m_selectTracksOfTypeMenu->setEnabled(hasTracks);
-  m_enableAllTracksAction->setEnabled(hasTracks);
-  m_disableAllTracksAction->setEnabled(hasTracks);
+  p.selectAllTracksAction->setEnabled(hasTracks);
+  p.selectTracksOfTypeMenu->setEnabled(hasTracks);
+  p.enableAllTracksAction->setEnabled(hasTracks);
+  p.disableAllTracksAction->setEnabled(hasTracks);
 
-  m_selectAllVideoTracksAction->setEnabled(hasTracks);
-  m_selectAllAudioTracksAction->setEnabled(hasTracks);
-  m_selectAllSubtitlesTracksAction->setEnabled(hasTracks);
+  p.selectAllVideoTracksAction->setEnabled(hasTracks);
+  p.selectAllAudioTracksAction->setEnabled(hasTracks);
+  p.selectAllSubtitlesTracksAction->setEnabled(hasTracks);
 
-  m_openTracksInMediaInfoAction->setEnabled(0 < numSelected);
+  p.openTracksInMediaInfoAction->setEnabled(0 < numSelected);
 
-  m_openTracksInMediaInfoAction->setText(QNY("Open corresponding file in &MediaInfo", "Open corresponding files in &MediaInfo", numSelected));
+  p.openTracksInMediaInfoAction->setText(QNY("Open corresponding file in &MediaInfo", "Open corresponding files in &MediaInfo", numSelected));
 }
 
 void
 Tab::retranslateInputUI() {
-  ui->trackLanguage->setClearTitle(QY("<Do not change>"));
+  auto &p = *p_func();
 
-  m_filesModel->retranslateUi();
-  m_tracksModel->retranslateUi();
+  p.ui->trackLanguage->setClearTitle(QY("<Do not change>"));
 
-  m_addFilesAction ->setText(QY("&Add files"));
-  m_addFilesAction2->setText(QY("&Add files"));
-  m_appendFilesAction ->setText(QY("A&ppend files"));
-  m_appendFilesAction2->setText(QY("A&ppend files"));
-  m_addAdditionalPartsAction ->setText(QY("Add files as a&dditional parts"));
-  m_addAdditionalPartsAction2->setText(QY("Add files as a&dditional parts"));
+  p.filesModel->retranslateUi();
+  p.tracksModel->retranslateUi();
 
-  m_removeAllFilesAction->setText(QY("Remove a&ll files"));
+  p.addFilesAction ->setText(QY("&Add files"));
+  p.addFilesAction2->setText(QY("&Add files"));
+  p.appendFilesAction ->setText(QY("A&ppend files"));
+  p.appendFilesAction2->setText(QY("A&ppend files"));
+  p.addAdditionalPartsAction ->setText(QY("Add files as a&dditional parts"));
+  p.addAdditionalPartsAction2->setText(QY("Add files as a&dditional parts"));
 
-  m_setDestinationFileNameAction->setText(QY("Set destination &file name from selected file's name"));
+  p.removeAllFilesAction->setText(QY("Remove a&ll files"));
 
-  m_selectAllTracksAction->setText(QY("&Select all items"));
-  m_selectTracksOfTypeMenu->setTitle(QY("Select all tracks of specific &type"));
-  m_enableAllTracksAction->setText(QY("&Enable all items"));
-  m_disableAllTracksAction->setText(QY("&Disable all items"));
+  p.setDestinationFileNameAction->setText(QY("Set destination &file name from selected file's name"));
 
-  m_selectAllVideoTracksAction->setText(QY("&Video"));
-  m_selectAllAudioTracksAction->setText(QY("&Audio"));
-  m_selectAllSubtitlesTracksAction->setText(QY("&Subtitles"));
+  p.selectAllTracksAction->setText(QY("&Select all items"));
+  p.selectTracksOfTypeMenu->setTitle(QY("Select all tracks of specific &type"));
+  p.enableAllTracksAction->setText(QY("&Enable all items"));
+  p.disableAllTracksAction->setText(QY("&Disable all items"));
 
-  m_startMuxingLeaveAsIs->setText(QY("Afterwards &leave the settings as they are."));
-  m_startMuxingCreateNewSettings->setText(QY("Afterwards create &new multiplex settings and close the current ones."));
-  m_startMuxingCloseSettings->setText(QY("Afterwards &close the current multiplex settings."));
-  m_startMuxingRemoveInputFiles->setText(QY("Afterwards &remove all source files."));
+  p.selectAllVideoTracksAction->setText(QY("&Video"));
+  p.selectAllAudioTracksAction->setText(QY("&Audio"));
+  p.selectAllSubtitlesTracksAction->setText(QY("&Subtitles"));
 
-  m_addToJobQueueLeaveAsIs->setText(QY("Afterwards &leave the settings as they are."));
-  m_addToJobQueueCreateNewSettings->setText(QY("Afterwards create &new multiplex settings and close the current ones."));
-  m_addToJobQueueCloseSettings->setText(QY("Afterwards &close the current multiplex settings."));
-  m_addToJobQueueRemoveInputFiles->setText(QY("Afterwards &remove all source files."));
+  p.startMuxingLeaveAsIs->setText(QY("Afterwards &leave the settings as they are."));
+  p.startMuxingCreateNewSettings->setText(QY("Afterwards create &new multiplex settings and close the current ones."));
+  p.startMuxingCloseSettings->setText(QY("Afterwards &close the current multiplex settings."));
+  p.startMuxingRemoveInputFiles->setText(QY("Afterwards &remove all source files."));
+
+  p.addToJobQueueLeaveAsIs->setText(QY("Afterwards &leave the settings as they are."));
+  p.addToJobQueueCreateNewSettings->setText(QY("Afterwards create &new multiplex settings and close the current ones."));
+  p.addToJobQueueCloseSettings->setText(QY("Afterwards &close the current multiplex settings."));
+  p.addToJobQueueRemoveInputFiles->setText(QY("Afterwards &remove all source files."));
 
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
-    ui->stereoscopy->setItemText(idx + 1, to_qs(stereo_mode_c::translate(idx)));
+    p.ui->stereoscopy->setItemText(idx + 1, to_qs(stereo_mode_c::translate(idx)));
 
-  Util::fixComboBoxViewWidth(*ui->stereoscopy);
+  Util::fixComboBoxViewWidth(*p.ui->stereoscopy);
 
-  for (auto &comboBox : m_comboBoxControls)
+  for (auto &comboBox : p.comboBoxControls)
     if (comboBox->count() && !comboBox->itemData(0).isValid())
       comboBox->setItemText(0, QY("<Do not change>"));
 
-  Util::setComboBoxTexts(ui->muxThis,          QStringList{}                                  << QY("Yes")                  << QY("No"));
-  Util::setComboBoxTexts(ui->naluSizeLength,   QStringList{} << QY("Don't change")            << QY("Force 2 bytes")        << QY("Force 4 bytes"));
-  Util::setComboBoxTexts(ui->defaultTrackFlag, QStringList{} << QY("Determine automatically") << QY("Yes")                  << QY("No"));
-  Util::setComboBoxTexts(ui->forcedTrackFlag,  QStringList{}                                  << QY("Yes")                  << QY("No"));
-  Util::setComboBoxTexts(ui->compression,      QStringList{} << QY("Determine automatically") << QY("No extra compression") << Q("zlib"));
-  Util::setComboBoxTexts(ui->cues,             QStringList{} << QY("Determine automatically") << QY("Only for I frames")    << QY("For all frames") << QY("No cues"));
-  Util::setComboBoxTexts(ui->aacIsSBR,         QStringList{} << QY("Determine automatically") << QY("Yes")                  << QY("No"));
+  Util::setComboBoxTexts(p.ui->muxThis,          QStringList{}                                  << QY("Yes")                  << QY("No"));
+  Util::setComboBoxTexts(p.ui->naluSizeLength,   QStringList{} << QY("Don't change")            << QY("Force 2 bytes")        << QY("Force 4 bytes"));
+  Util::setComboBoxTexts(p.ui->defaultTrackFlag, QStringList{} << QY("Determine automatically") << QY("Yes")                  << QY("No"));
+  Util::setComboBoxTexts(p.ui->forcedTrackFlag,  QStringList{}                                  << QY("Yes")                  << QY("No"));
+  Util::setComboBoxTexts(p.ui->compression,      QStringList{} << QY("Determine automatically") << QY("No extra compression") << Q("zlib"));
+  Util::setComboBoxTexts(p.ui->cues,             QStringList{} << QY("Determine automatically") << QY("Only for I frames")    << QY("For all frames") << QY("No cues"));
+  Util::setComboBoxTexts(p.ui->aacIsSBR,         QStringList{} << QY("Determine automatically") << QY("Yes")                  << QY("No"));
 
   setupInputToolTips();
 }
@@ -1551,8 +1615,9 @@ Tab::retranslateInputUI() {
 QModelIndex
 Tab::selectedSourceFile()
   const {
-  auto idx = ui->files->selectionModel()->currentIndex();
-  return m_filesModel->index(idx.row(), 0, idx.parent());
+  auto &p  = *p_func();
+  auto idx = p.ui->files->selectionModel()->currentIndex();
+  return p.filesModel->index(idx.row(), 0, idx.parent());
 }
 
 void
@@ -1573,19 +1638,22 @@ Tab::setTitleMaybe(QList<SourceFilePtr> const &files) {
 
 void
 Tab::setTitleMaybe(QString const &title) {
-  if (!Util::Settings::get().m_autoSetFileTitle || title.isEmpty() || !m_config.m_title.isEmpty())
+  auto &p = *p_func();
+
+  if (!Util::Settings::get().m_autoSetFileTitle || title.isEmpty() || !p.config.m_title.isEmpty())
     return;
 
-  ui->title->setText(title);
-  m_config.m_title = title;
+  p.ui->title->setText(title);
+  p.config.m_title = title;
 }
 
 QString
 Tab::suggestOutputFileNameExtension()
   const {
+  auto &p        = *p_func();
   auto hasTracks = false, hasVideo = false, hasAudio = false, hasStereoscopy = false;
 
-  for (auto const &t : m_config.m_tracks) {
+  for (auto const &t : p.config.m_tracks) {
     if (!t->m_muxThis)
       continue;
 
@@ -1600,7 +1668,7 @@ Tab::suggestOutputFileNameExtension()
       hasAudio = true;
   }
 
-  return m_config.m_webmMode ? "webm"
+  return p.config.m_webmMode ? "webm"
        : hasStereoscopy      ? "mk3d"
        : hasVideo            ? "mkv"
        : hasAudio            ? "mka"
@@ -1610,22 +1678,23 @@ Tab::suggestOutputFileNameExtension()
 
 void
 Tab::setOutputFileNameMaybe(bool force) {
+  auto &p        = *p_func();
   auto &settings = Util::Settings::get();
   auto policy    = settings.m_outputFileNamePolicy;
 
   if (   !force
       && (   (Util::Settings::DontSetOutputFileName == policy)
-          || m_config.m_firstInputFileName.isEmpty()))
+          || p.config.m_firstInputFileName.isEmpty()))
     return;
 
-  auto currentOutput = ui->output->text();
+  auto currentOutput = p.ui->output->text();
   QDir outputDir;
 
   // Don't override custom changes to the destination file name.
   if (   !force
       && !currentOutput.isEmpty()
-      && !m_config.m_destinationAuto.isEmpty()
-      && (QDir::toNativeSeparators(currentOutput) != QDir::toNativeSeparators(m_config.m_destinationAuto)))
+      && !p.config.m_destinationAuto.isEmpty()
+      && (QDir::toNativeSeparators(currentOutput) != QDir::toNativeSeparators(p.config.m_destinationAuto)))
     return;
 
   if (Util::Settings::ToPreviousDirectory == policy)
@@ -1635,42 +1704,43 @@ Tab::setOutputFileNameMaybe(bool force) {
     outputDir = settings.m_fixedOutputDir;
 
   else if (Util::Settings::ToRelativeOfFirstInputFile == policy)
-    outputDir = QDir{ QFileInfo{m_config.m_firstInputFileName}.absoluteDir().path() + Q("/") + settings.m_relativeOutputDir.path() };
+    outputDir = QDir{ QFileInfo{p.config.m_firstInputFileName}.absoluteDir().path() + Q("/") + settings.m_relativeOutputDir.path() };
 
   else if (   (Util::Settings::ToSameAsFirstInputFile == policy)
            || force)
-    outputDir = QFileInfo{m_config.m_firstInputFileName}.absoluteDir();
+    outputDir = QFileInfo{p.config.m_firstInputFileName}.absoluteDir();
 
   else
     Q_ASSERT_X(false, "setOutputFileNameMaybe", "Untested destination file name policy");
 
-  auto cleanedTitle          = Util::replaceInvalidFileNameCharacters(m_config.m_title);
-  auto firstInputBaseName    = QFileInfo{ m_config.m_firstInputFileName }.completeBaseName();
+  auto cleanedTitle          = Util::replaceInvalidFileNameCharacters(p.config.m_title);
+  auto firstInputBaseName    = QFileInfo{ p.config.m_firstInputFileName }.completeBaseName();
   auto baseName              = !settings.m_mergeSetDestinationFromTitle ? firstInputBaseName
                              : !cleanedTitle.isEmpty()                  ? cleanedTitle
                              :                                            firstInputBaseName;
-  m_config.m_destinationAuto = generateUniqueOutputFileName(baseName, outputDir);
+  p.config.m_destinationAuto = generateUniqueOutputFileName(baseName, outputDir);
 
-  ui->output->setText(m_config.m_destinationAuto);
-  setDestination(m_config.m_destinationAuto);
+  p.ui->output->setText(p.config.m_destinationAuto);
+  setDestination(p.config.m_destinationAuto);
 }
 
 QString
 Tab::generateUniqueOutputFileName(QString const &baseName,
                                   QDir const &outputDir,
                                   bool removeUniquenessSuffix) {
+  auto &p              = *p_func();
   auto &settings       = Util::Settings::get();
   auto cleanedBaseName = baseName;
   auto suffix          = suggestOutputFileNameExtension();
   auto needToRemove    =    removeUniquenessSuffix
-                         && !m_config.m_destinationUniquenessSuffix.isEmpty()
-                         && cleanedBaseName.endsWith(m_config.m_destinationUniquenessSuffix);
+                         && !p.config.m_destinationUniquenessSuffix.isEmpty()
+                         && cleanedBaseName.endsWith(p.config.m_destinationUniquenessSuffix);
 
-  qDebug() << "generateUniqueOutputFileName: baseName" << baseName << "suffix" << suffix << "destinationUniquenessSuffix" << m_config.m_destinationUniquenessSuffix
+  qDebug() << "generateUniqueOutputFileName: baseName" << baseName << "suffix" << suffix << "destinationUniquenessSuffix" << p.config.m_destinationUniquenessSuffix
            << "removeUniquenessSuffix" << removeUniquenessSuffix << "needToRemove" << needToRemove;
 
   if (needToRemove)
-    cleanedBaseName.remove(cleanedBaseName.length() - m_config.m_destinationUniquenessSuffix.length(), m_config.m_destinationUniquenessSuffix.length());
+    cleanedBaseName.remove(cleanedBaseName.length() - p.config.m_destinationUniquenessSuffix.length(), p.config.m_destinationUniquenessSuffix.length());
 
   auto idx = 0;
 
@@ -1681,7 +1751,7 @@ Tab::generateUniqueOutputFileName(QString const &baseName,
     auto outputFileName   = QFileInfo{outputDir, currentBaseName};
 
     if (!settings.m_uniqueOutputFileNames || !outputFileName.exists()) {
-      m_config.m_destinationUniquenessSuffix = uniquenessSuffix;
+      p.config.m_destinationUniquenessSuffix = uniquenessSuffix;
       return QDir::toNativeSeparators(outputFileName.absoluteFilePath());
     }
 
@@ -1691,26 +1761,27 @@ Tab::generateUniqueOutputFileName(QString const &baseName,
 
 void
 Tab::setDestinationFileNameFromSelectedFile() {
+  auto &p            = *p_func();
   auto selectedFiles = selectedSourceFiles();
   if (selectedFiles.isEmpty())
     return;
 
   auto selectedFileName = selectedFiles[0]->m_fileName;
 
-  if (!m_config.m_destination.isEmpty()) {
-    m_config.m_destinationUniquenessSuffix.clear();
+  if (!p.config.m_destination.isEmpty()) {
+    p.config.m_destinationUniquenessSuffix.clear();
 
     auto baseName       = QFileInfo{selectedFileName}.completeBaseName();
-    auto destinationDir = QDir{ QFileInfo{ m_config.m_destination }.path() };
+    auto destinationDir = QDir{ QFileInfo{ p.config.m_destination }.path() };
     auto newFileName    = generateUniqueOutputFileName(baseName, destinationDir);
 
-    ui->output->setText(QDir::toNativeSeparators(newFileName));
+    p.ui->output->setText(QDir::toNativeSeparators(newFileName));
 
     return;
   }
 
-  m_config.m_destinationAuto.clear();
-  m_config.m_firstInputFileName = QDir::toNativeSeparators(selectedFileName);
+  p.config.m_destinationAuto.clear();
+  p.config.m_firstInputFileName = QDir::toNativeSeparators(selectedFileName);
 
   setOutputFileNameMaybe(true);
 }
@@ -1718,12 +1789,13 @@ Tab::setDestinationFileNameFromSelectedFile() {
 void
 Tab::addOrAppendDroppedFiles(QStringList const &fileNamesToAddOrAppend,
                              Qt::MouseButtons mouseButtons) {
+  auto &p        = *p_func();
   auto fileNames = Util::replaceDirectoriesByContainedFiles(fileNamesToAddOrAppend);
 
   if (fileNames.isEmpty())
     return;
 
-  auto noFilesAdded = m_config.m_files.isEmpty();
+  auto noFilesAdded = p.config.m_files.isEmpty();
 
   if ((fileNames.count() == 1) && noFilesAdded) {
     addOrAppendFiles(false, fileNames, QModelIndex{});
@@ -1737,16 +1809,16 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNamesToAddOrAppend,
 
   if (   (Util::Settings::MergeAddingAppendingFilesPolicy::Ask == decision)
       || ((mouseButtons & Qt::RightButton)                     == Qt::RightButton)) {
-    AddingAppendingFilesDialog dlg{this, m_config.m_files};
-    dlg.setDefaults(settings.m_mergeLastAddingAppendingDecision, m_lastAddAppendFileIdx);
+    AddingAppendingFilesDialog dlg{this, p.config.m_files};
+    dlg.setDefaults(settings.m_mergeLastAddingAppendingDecision, p.lastAddAppendFileIdx);
     if (!dlg.exec())
       return;
 
     decision = dlg.decision();
-    fileIdx  = m_filesModel->index(dlg.fileIndex(), 0);
+    fileIdx  = p.filesModel->index(dlg.fileIndex(), 0);
 
     settings.m_mergeLastAddingAppendingDecision = decision;
-    m_lastAddAppendFileIdx                      = dlg.fileIndex();
+    p.lastAddAppendFileIdx                      = dlg.fileIndex();
 
     if (dlg.alwaysUseThisDecision())
       settings.m_mergeAddingAppendingFilesPolicy = decision;
@@ -1755,7 +1827,7 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNamesToAddOrAppend,
   }
 
   if (Util::Settings::MergeAddingAppendingFilesPolicy::AddAdditionalParts == decision)
-    m_filesModel->addAdditionalParts(fileIdx, fileNames);
+    p.filesModel->addAdditionalParts(fileIdx, fileNames);
 
   else if (Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew == decision)
     MainWindow::mergeTool()->addMultipleFilesToNewSettings(fileNames, false);
@@ -1775,49 +1847,54 @@ Tab::addOrAppendDroppedFiles(QStringList const &fileNamesToAddOrAppend,
 
 void
 Tab::addOrAppendDroppedFilesDelayed() {
-  addOrAppendDroppedFiles(m_filesToAddDelayed, m_mouseButtonsForFilesToAddDelayed);
-  m_filesToAddDelayed.clear();
-  m_mouseButtonsForFilesToAddDelayed = Qt::NoButton;
+  auto &p = *p_func();
+
+  addOrAppendDroppedFiles(p.filesToAddDelayed, p.mouseButtonsForFilesToAddDelayed);
+  p.filesToAddDelayed.clear();
+  p.mouseButtonsForFilesToAddDelayed = Qt::NoButton;
 }
 
 void
 Tab::addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames,
                                         Qt::MouseButtons mouseButtons) {
-  m_filesToAddDelayed                += fileNames;
-  m_mouseButtonsForFilesToAddDelayed  = mouseButtons;
+  auto &p = *p_func();
+
+  p.filesToAddDelayed                += fileNames;
+  p.mouseButtonsForFilesToAddDelayed  = mouseButtons;
 
   QTimer::singleShot(0, this, [this]() { addOrAppendDroppedFilesDelayed(); });
 }
 
 void
 Tab::selectAllTracksOfType(std::optional<TrackType> type) {
-  auto numRows = m_tracksModel->rowCount();
+  auto &p      = *p_func();
+  auto numRows = p.tracksModel->rowCount();
   if (!numRows)
     return;
 
-  auto lastColumn = m_tracksModel->columnCount() - 1;
+  auto lastColumn = p.tracksModel->columnCount() - 1;
   auto selection  = QItemSelection{};
 
   for (auto row = 0; row < numRows; ++row) {
-    auto &track      = *m_config.m_tracks[row];
+    auto &track      = *p.config.m_tracks[row];
     auto numAppended = track.m_appendedTracks.count();
 
     if (!type || (track.m_type == *type))
-      selection.select(m_tracksModel->index(row, 0), m_tracksModel->index(row, lastColumn));
+      selection.select(p.tracksModel->index(row, 0), p.tracksModel->index(row, lastColumn));
 
     if (!numAppended)
       continue;
 
-    auto rowIdx = m_tracksModel->index(row, 0);
+    auto rowIdx = p.tracksModel->index(row, 0);
 
     for (auto appendedRow = 0; appendedRow < numAppended; ++appendedRow) {
       auto &appendedTrack = *track.m_appendedTracks[appendedRow];
       if (!type || (appendedTrack.m_type == *type))
-        selection.select(m_tracksModel->index(appendedRow, 0, rowIdx), m_tracksModel->index(appendedRow, lastColumn, rowIdx));
+        selection.select(p.tracksModel->index(appendedRow, 0, rowIdx), p.tracksModel->index(appendedRow, lastColumn, rowIdx));
     }
   }
 
-  ui->tracks->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+  p.ui->tracks->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
 }
 
 void
@@ -1842,7 +1919,7 @@ Tab::selectAllSubtitlesTracks() {
 
 void
 Tab::selectAllTracksFromSelectedFiles() {
-  if (!m_tracksModel->rowCount())
+  if (!p_func()->tracksModel->rowCount())
     return;
 
   auto tracksToSelect = QList<Track *>{};
@@ -1855,28 +1932,30 @@ Tab::selectAllTracksFromSelectedFiles() {
 
 void
 Tab::selectTracks(QList<Track *> const &tracks) {
-  auto numColumns = m_tracksModel->columnCount() - 1;
+  auto &p         = *p_func();
+  auto numColumns = p.tracksModel->columnCount() - 1;
   auto selection  = QItemSelection{};
 
   for (auto const &track : tracks) {
-    auto idx = m_tracksModel->indexFromTrack(track);
+    auto idx = p.tracksModel->indexFromTrack(track);
     selection.select(idx.sibling(idx.row(), 0), idx.sibling(idx.row(), numColumns));
   }
 
-  ui->tracks->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+  p.ui->tracks->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
 }
 
 void
 Tab::selectSourceFiles(QList<SourceFile *> const &files) {
-  auto numColumns = m_filesModel->columnCount() - 1;
+  auto &p         = *p_func();
+  auto numColumns = p.filesModel->columnCount() - 1;
   auto selection  = QItemSelection{};
 
   for (auto const &file : files) {
-    auto idx = m_filesModel->indexFromSourceFile(file);
+    auto idx = p.filesModel->indexFromSourceFile(file);
     selection.select(idx.sibling(idx.row(), 0), idx.sibling(idx.row(), numColumns));
   }
 
-  ui->files->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
+  p.ui->files->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect);
 }
 
 void
@@ -1891,46 +1970,50 @@ Tab::disableAllTracks() {
 
 void
 Tab::enableDisableAllTracks(bool enable) {
-  for (auto row = 0, numRows = m_tracksModel->rowCount(); row < numRows; ++row) {
-    auto track       = m_tracksModel->fromIndex(m_tracksModel->index(row, 0));
+  auto &p = *p_func();
+
+  for (auto row = 0, numRows = p.tracksModel->rowCount(); row < numRows; ++row) {
+    auto track       = p.tracksModel->fromIndex(p.tracksModel->index(row, 0));
     track->m_muxThis = enable;
-    m_tracksModel->trackUpdated(track);
+    p.tracksModel->trackUpdated(track);
 
     for (auto const &appendedTrack : track->m_appendedTracks) {
       appendedTrack->m_muxThis = enable;
-      m_tracksModel->trackUpdated(appendedTrack);
+      p.tracksModel->trackUpdated(appendedTrack);
     }
   }
 
-  auto base = ui->muxThis->itemData(0).isValid() ? 0 : 1;
-  ui->muxThis->setCurrentIndex(base + (enable ? 0 : 1));
+  auto base = p.ui->muxThis->itemData(0).isValid() ? 0 : 1;
+  p.ui->muxThis->setCurrentIndex(base + (enable ? 0 : 1));
 }
 
 void
 Tab::ensureOneDefaultFlagOnly(Track *thisOneHasIt) {
+  auto &p        = *p_func();
   auto selection = selectedTracks();
-  for (auto const &track : m_config.m_tracks)
+  for (auto const &track : p.config.m_tracks)
     if (   (track->m_defaultTrackFlag == 1)
         && (track->m_type             == thisOneHasIt->m_type)
         && (track                     != thisOneHasIt)) {
       track->m_defaultTrackFlag = 0;
       if ((selection.count() == 1) && (selection[0] == track))
-        ui->defaultTrackFlag->setCurrentIndex(0);
+        p.ui->defaultTrackFlag->setCurrentIndex(0);
     }
 
-  m_tracksModel->updateEffectiveDefaultTrackFlags();
+  p.tracksModel->updateEffectiveDefaultTrackFlags();
 }
 
 void
 Tab::moveSourceFilesUpOrDown(bool up) {
+  auto &p    = *p_func();
   auto focus = App::instance()->focusWidget();
   auto files = selectedSourceFiles();
 
-  m_filesModel->moveSourceFilesUpOrDown(files, up);
+  p.filesModel->moveSourceFilesUpOrDown(files, up);
 
   for (auto const &file : files)
     if (file->isRegular())
-      ui->files->setExpanded(m_filesModel->indexFromSourceFile(file), true);
+      p.ui->files->setExpanded(p.filesModel->indexFromSourceFile(file), true);
 
   selectSourceFiles(files);
 
@@ -1950,14 +2033,15 @@ Tab::onMoveFilesDown() {
 
 void
 Tab::moveTracksUpOrDown(bool up) {
+  auto &p     = *p_func();
   auto focus  = App::instance()->focusWidget();
   auto tracks = selectedTracks();
 
-  m_tracksModel->moveTracksUpOrDown(tracks, up);
+  p.tracksModel->moveTracksUpOrDown(tracks, up);
 
   for (auto const &track : tracks)
     if (track->isRegular() && !track->m_appendedTo)
-      ui->tracks->setExpanded(m_tracksModel->indexFromTrack(track), true);
+      p.ui->tracks->setExpanded(p.tracksModel->indexFromTrack(track), true);
 
   selectTracks(tracks);
 
@@ -1977,14 +2061,18 @@ Tab::onMoveTracksDown() {
 
 void
 Tab::showFilesContextMenu(QPoint const &pos) {
+  auto &p = *p_func();
+
   enableFilesActions();
-  m_filesMenu->exec(ui->files->viewport()->mapToGlobal(pos));
+  p.filesMenu->exec(p.ui->files->viewport()->mapToGlobal(pos));
 }
 
 void
 Tab::showTracksContextMenu(QPoint const &pos) {
+  auto &p = *p_func();
+
   enableTracksActions();
-  m_tracksMenu->exec(ui->tracks->viewport()->mapToGlobal(pos));
+  p.tracksMenu->exec(p.ui->tracks->viewport()->mapToGlobal(pos));
 }
 
 void
@@ -2059,7 +2147,7 @@ Tab::onPreviewSubtitleCharacterSet() {
 
   auto additionalCharacterSets = QSet<QString>{};
 
-  for (auto const &sourceFile : m_config.m_files)
+  for (auto const &sourceFile : p_func()->config.m_files)
     for (auto const &sourceTrack : sourceFile->m_tracks)
       additionalCharacterSets << sourceTrack->m_characterSet;
 
@@ -2073,26 +2161,27 @@ Tab::onPreviewSubtitleCharacterSet() {
 
 void
 Tab::setSubtitleCharacterSet(QString const &characterSet) {
+  auto &p  = *p_func();
   auto dlg = qobject_cast<SelectCharacterSetDialog *>(QObject::sender());
   if (!dlg)
     return;
 
   auto track = reinterpret_cast<Track *>(dlg->userData().toULongLong());
 
-  if (!m_config.m_tracks.contains(track))
+  if (!p.config.m_tracks.contains(track))
     return;
 
   track->m_characterSet = characterSet;
   auto selection        = selectedTracks();
 
   if ((selection.count() == 1) && (selection[0] == track))
-    Util::setComboBoxTextByData(ui->subtitleCharacterSet, characterSet);
+    Util::setComboBoxTextByData(p.ui->subtitleCharacterSet, characterSet);
 }
 
 bool
 Tab::hasSourceFiles()
   const {
-  return !m_config.m_files.isEmpty();
+  return !p_func()->config.m_files.isEmpty();
 }
 
 }
