@@ -1397,7 +1397,7 @@ reader_c::identify() {
 
   for (auto const &track : m_tracks) {
     info = mtx::id::info_c{};
-    info.add(mtx::id::language,  track->language.get_iso639_2_code());
+    info.add(mtx::id::language,  track->language.get_iso639_alpha_3_code());
     info.set(mtx::id::stream_id, track->pid);
     info.set(mtx::id::number,    track->pid);
 
@@ -2397,7 +2397,7 @@ reader_c::create_srt_subtitles_packetizer(track_ptr const &track) {
   auto &converter         = dynamic_cast<teletext_to_srt_packet_converter_c &>(*track->converter);
 
   converter.demux_page(*track->m_ttx_wanted_page, PTZR(track->ptzr));
-  converter.override_encoding(*track->m_ttx_wanted_page, track->language.get_iso639_2_code());
+  converter.override_encoding(*track->m_ttx_wanted_page, track->language.get_iso639_alpha_3_code());
 }
 
 void

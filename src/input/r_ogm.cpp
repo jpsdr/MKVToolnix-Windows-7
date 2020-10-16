@@ -683,7 +683,7 @@ ogm_reader_c::identify() {
     info = mtx::id::info_c{};
 
     info.set(mtx::id::number,   dmx->serialno);
-    info.add(mtx::id::language, dmx->language.get_iso639_2_code());
+    info.add(mtx::id::language, dmx->language.get_iso639_alpha_3_code());
 
     if (!dmx->title.empty() && !dmx->ms_compat)
       info.add(mtx::id::track_name, dmx->title);

@@ -76,7 +76,7 @@ public:
   virtual bool convert(packet_cptr const &packet) override;
   virtual void flush() override;
 
-  virtual void override_encoding(int page, std::string const &iso639_2_code);
+  virtual void override_encoding(int page, std::string const &iso639_alpha_3_code);
   virtual void demux_page(int page, generic_packetizer_c *ptzr);
 
 protected:

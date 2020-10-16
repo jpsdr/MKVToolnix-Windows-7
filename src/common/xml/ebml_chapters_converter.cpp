@@ -164,7 +164,7 @@ ebml_chapters_converter_c::fix_display(KaxChapterDisplay &display)
       display.PushElement(*clanguage);
     }
 
-    clanguage->SetValue(parsed_language.get_iso639_2_code());
+    clanguage->SetValue(parsed_language.get_iso639_alpha_3_code());
 
   } else if (clanguage) {
     auto language_opt = mtx::iso639::look_up(clanguage->GetValue());

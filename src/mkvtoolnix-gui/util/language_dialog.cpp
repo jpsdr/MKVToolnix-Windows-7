@@ -177,7 +177,7 @@ LanguageDialog::setAdditionalLanguages(QStringList const &additionalLanguages) {
     auto parsedLanguage = mtx::bcp47::language_c::parse(to_utf8(language));
 
     if (parsedLanguage.is_valid() && parsedLanguage.has_valid_iso639_code())
-      p.additionalISO639_2Codes << Q(parsedLanguage.get_iso639_2_code());
+      p.additionalISO639_2Codes << Q(parsedLanguage.get_iso639_alpha_3_code());
   }
 
   reinitializeLanguageComboBox();
@@ -188,7 +188,7 @@ LanguageDialog::setLanguage(mtx::bcp47::language_c const &language) {
   auto &p = *p_func();
 
   if (language.is_valid() && language.has_valid_iso639_code()) {
-    p.initialISO639_2Code = Q(language.get_iso639_2_code());
+    p.initialISO639_2Code = Q(language.get_iso639_alpha_3_code());
     reinitializeLanguageComboBox();
   }
 
@@ -520,7 +520,7 @@ LanguageDialog::setComponentsFromLanguageTag(mtx::bcp47::language_c const &tag) 
   if (!tag.is_valid())
     return;
 
-  setComboBoxTextByData(p.ui->cbLanguage, Q(tag.get_iso639_2_code_or({})));
+  setComboBoxTextByData(p.ui->cbLanguage, Q(tag.get_iso639_alpha_3_code_or({})));
   setComboBoxTextByData(p.ui->cbRegion,   Q(tag.get_region()).toLower());
   setComboBoxTextByData(p.ui->cbScript,   Q(tag.get_script()));
 

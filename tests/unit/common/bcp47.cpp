@@ -90,14 +90,14 @@ TEST(BCP47LanguageTags, FormattingInvalidWithoutLanguage) {
 }
 
 TEST(BCP47LanguageTags, CodeConversion) {
-  EXPECT_EQ(""s,    mtx::bcp47::language_c{}.get_iso639_2_code());
-  EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("de").get_iso639_2_code());
-  EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("deu").get_iso639_2_code());
-  EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("ger").get_iso639_2_code());
+  EXPECT_EQ(""s,    mtx::bcp47::language_c{}.get_iso639_alpha_3_code());
+  EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("de").get_iso639_alpha_3_code());
+  EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("deu").get_iso639_alpha_3_code());
+  EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("ger").get_iso639_alpha_3_code());
 
   mtx::bcp47::language_c l;
   l.set_language("muh");
-  EXPECT_EQ(""s, l.get_iso639_2_code());
+  EXPECT_EQ(""s, l.get_iso639_alpha_3_code());
 
   EXPECT_FALSE(mtx::bcp47::language_c{}.has_valid_iso639_code());
   EXPECT_FALSE(mtx::bcp47::language_c::parse("muh").has_valid_iso639_code());
@@ -107,12 +107,12 @@ TEST(BCP47LanguageTags, CodeConversion) {
   EXPECT_TRUE(mtx::bcp47::language_c::parse("deu").has_valid_iso639_code());
   EXPECT_TRUE(mtx::bcp47::language_c::parse("ger").has_valid_iso639_code());
 
-  EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("de").get_iso639_2_code_or("eng"s));
-  EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("deu").get_iso639_2_code_or("eng"s));
-  EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("ger").get_iso639_2_code_or("eng"s));
+  EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("de").get_iso639_alpha_3_code_or("eng"s));
+  EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("deu").get_iso639_alpha_3_code_or("eng"s));
+  EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("ger").get_iso639_alpha_3_code_or("eng"s));
 
-  EXPECT_EQ("eng"s, mtx::bcp47::language_c::parse("").get_iso639_2_code_or("eng"s));
-  EXPECT_EQ("eng"s, mtx::bcp47::language_c::parse("x-moo").get_iso639_2_code_or("eng"s));
+  EXPECT_EQ("eng"s, mtx::bcp47::language_c::parse("").get_iso639_alpha_3_code_or("eng"s));
+  EXPECT_EQ("eng"s, mtx::bcp47::language_c::parse("x-moo").get_iso639_alpha_3_code_or("eng"s));
 }
 
 TEST(BCP47LanguageTags, UnorderedMap) {

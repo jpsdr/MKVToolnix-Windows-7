@@ -136,7 +136,7 @@ language_c::parse_language(std::string const &code) {
     return false;
   }
 
-  m_language = !language->iso639_1_code.empty() ? language->iso639_1_code : language->iso639_2_code;
+  m_language = !language->alpha_2_code.empty() ? language->alpha_2_code : language->alpha_3_code;
 
   return true;
 }
@@ -290,22 +290,22 @@ language_c::parse(std::string const &language) {
 }
 
 std::string
-language_c::get_iso639_2_code()
+language_c::get_iso639_alpha_3_code()
   const noexcept {
   if (!has_valid_iso639_code())
     return {};
 
   auto language = mtx::iso639::look_up(m_language);
   if (language)
-    return language->iso639_2_code;
+    return language->alpha_3_code;
 
   return {};
 }
 
 std::string
-language_c::get_iso639_2_code_or(std::string const &value_if_invalid)
+language_c::get_iso639_alpha_3_code_or(std::string const &value_if_invalid)
   const noexcept {
-  auto code = get_iso639_2_code();
+  auto code = get_iso639_alpha_3_code();
   return !code.empty() ? code : value_if_invalid;
 }
 

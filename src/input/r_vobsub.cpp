@@ -636,7 +636,7 @@ vobsub_reader_c::identify() {
   for (i = 0; i < tracks.size(); i++) {
     auto info = mtx::id::info_c{};
 
-    info.add(mtx::id::language, tracks[i]->language.get_iso639_2_code());
+    info.add(mtx::id::language, tracks[i]->language.get_iso639_alpha_3_code());
 
     id_result_track(i, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_VOBSUB, "VobSub"), info.get());
   }

@@ -127,7 +127,7 @@ ebml_tags_converter_c::fix_tag(KaxTag &tag)
       simple->PushElement(*tlanguage);
     }
 
-    tlanguage->SetValue(parsed_language.get_iso639_2_code());
+    tlanguage->SetValue(parsed_language.get_iso639_alpha_3_code());
 
   } else if (tlanguage) {
     auto language_opt = mtx::iso639::look_up(tlanguage->GetValue());

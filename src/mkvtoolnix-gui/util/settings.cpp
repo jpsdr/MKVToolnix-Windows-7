@@ -455,7 +455,7 @@ Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
 
   if (m_recognizedTrackLanguagesInFileNames.isEmpty())
     for (auto const &language : mtx::iso639::g_languages)
-      m_recognizedTrackLanguagesInFileNames << Q(language.iso639_2_code);
+      m_recognizedTrackLanguagesInFileNames << Q(language.alpha_3_code);
 
   if (m_regexForDerivingTrackLanguagesFromFileNames.isEmpty())
     m_regexForDerivingTrackLanguagesFromFileNames = mtx::gui::Merge::SourceFile::defaultRegexForDerivingLanguageFromFileName();

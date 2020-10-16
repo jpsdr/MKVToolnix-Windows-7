@@ -98,19 +98,19 @@ mtx::bcp47::language_c
 parse_language(std::string key_language) {
   auto language = mtx::iso639::look_up(key_language, true);
   if (language)
-    return mtx::bcp47::language_c::parse(language->iso639_2_code);
+    return mtx::bcp47::language_c::parse(language->alpha_3_code);
 
   mtx::regex::jp::VecNum matches;
   if (mtx::regex::match(key_language, matches, mtx::regex::jp::Regex{".*\\[(.+?)\\]"})) {
     auto language2 = mtx::iso639::look_up(boost::to_lower_copy(matches[0][1]), true);
     if (language2)
-      return mtx::bcp47::language_c::parse(language2->iso639_2_code);
+      return mtx::bcp47::language_c::parse(language2->alpha_3_code);
   }
 
   if (mtx::regex::match(key_language, matches, mtx::regex::jp::Regex{".*\\((.+?)\\)"})) {
     auto language2 = mtx::iso639::look_up(boost::to_lower_copy(matches[0][1]), true);
     if (language2)
-      return mtx::bcp47::language_c::parse(language2->iso639_2_code);
+      return mtx::bcp47::language_c::parse(language2->alpha_3_code);
   }
 
   return {};

@@ -193,7 +193,7 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
 
   else {
     language  = !m_language.is_valid() ? mtx::bcp47::language_c::parse("und"s) : m_language;
-    m_muxThis = settings.m_enableMuxingTracksByTheseLanguages.contains(Q(language.get_iso639_2_code()));
+    m_muxThis = settings.m_enableMuxingTracksByTheseLanguages.contains(Q(language.get_iso639_alpha_3_code()));
   }
 }
 

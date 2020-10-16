@@ -226,7 +226,7 @@ usf_reader_c::identify() {
     auto track = m_tracks[i];
     auto info  = mtx::id::info_c{};
 
-    info.add(mtx::id::language, track->m_language.get_iso639_2_code());
+    info.add(mtx::id::language, track->m_language.get_iso639_alpha_3_code());
 
     id_result_track(i, ID_RESULT_TRACK_SUBTITLES, codec_c::get_name(codec_c::type_e::S_USF, "USF"), info.get());
   }

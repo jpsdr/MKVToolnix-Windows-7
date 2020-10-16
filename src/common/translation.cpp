@@ -43,7 +43,7 @@ std::vector<translation_c> translation_c::ms_available_translations;
 int translation_c::ms_active_translation_idx = 0;
 std::string translation_c::ms_default_iso639_ui_language;
 
-translation_c::translation_c(std::string iso639_2_code,
+translation_c::translation_c(std::string iso639_alpha_3_code,
                              std::string unix_locale,
                              std::string windows_locale,
                              std::string windows_locale_sysname,
@@ -52,7 +52,7 @@ translation_c::translation_c(std::string iso639_2_code,
                              bool line_breaks_anywhere,
                              int language_id,
                              int sub_language_id)
-  : m_iso639_2_code{std::move(iso639_2_code)}
+  : m_iso639_alpha_3_code{std::move(iso639_alpha_3_code)}
   , m_unix_locale{std::move(unix_locale)}
   , m_windows_locale{std::move(windows_locale)}
   , m_windows_locale_sysname{std::move(windows_locale_sysname)}
@@ -175,7 +175,7 @@ translation_c::determine_default_iso639_ui_language() {
 
   auto language = mtx::iso639::look_up(language_code);
   if (language)
-    ms_default_iso639_ui_language = language->iso639_2_code;
+    ms_default_iso639_ui_language = language->alpha_3_code;
 }
 
 std::string

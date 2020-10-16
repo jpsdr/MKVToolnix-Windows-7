@@ -24,11 +24,11 @@ public:
   static std::string ms_default_iso639_ui_language;
 
 public:
-  std::string m_iso639_2_code, m_unix_locale, m_windows_locale, m_windows_locale_sysname, m_english_name, m_translated_name;
+  std::string m_iso639_alpha_3_code, m_unix_locale, m_windows_locale, m_windows_locale_sysname, m_english_name, m_translated_name;
   bool m_line_breaks_anywhere;
   int m_language_id, m_sub_language_id;
 
-  translation_c(std::string iso639_2_code,
+  translation_c(std::string iso639_alpha_3_code,
                 std::string unix_locale,
                 std::string windows_locale,
                 std::string windows_locale_sysname,

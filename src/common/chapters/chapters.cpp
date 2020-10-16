@@ -226,7 +226,7 @@ parse_simple(mm_text_io_c *in,
 
         GetChild<KaxChapterString>(display).SetValueUTF8(do_convert ? cc_utf8->utf8(name) : name);
         if (use_language.is_valid()) {
-          GetChild<KaxChapterLanguage>(display).SetValue(use_language.get_iso639_2_code_or("und"));
+          GetChild<KaxChapterLanguage>(display).SetValue(use_language.get_iso639_alpha_3_code_or("und"));
           if (!mtx::bcp47::language_c::is_disabled())
             GetChild<KaxChapLanguageIETF>(display).SetValue(use_language.format());
           else
@@ -1196,7 +1196,7 @@ create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editio
 
       if (!name.empty())
         atom->PushElement(*mtx::construct::cons<libmatroska::KaxChapterDisplay>(new libmatroska::KaxChapterString,   name,
-                                                                                new libmatroska::KaxChapterLanguage, use_language.get_iso639_2_code_or("und")));
+                                                                                new libmatroska::KaxChapterLanguage, use_language.get_iso639_alpha_3_code_or("und")));
 
       edition->PushElement(*atom);
     }
@@ -1214,7 +1214,7 @@ set_languages_in_display(libmatroska::KaxChapterDisplay &display,
   GetChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(parsed_language.format());
 
   if (parsed_language.has_valid_iso639_code())
-    GetChild<libmatroska::KaxChapterLanguage>(display).SetValue(parsed_language.get_iso639_2_code());
+    GetChild<libmatroska::KaxChapterLanguage>(display).SetValue(parsed_language.get_iso639_alpha_3_code());
 }
 
 void

@@ -2027,7 +2027,7 @@ qtmp4_reader_c::identify() {
     else if (dmx.codec.is(codec_c::type_e::V_MPEGH_P2))
       info.add(mtx::id::packetizer, dmx.m_hevc_is_annex_b ? mtx::id::mpegh_p2_es_video : mtx::id::mpegh_p2_video);
 
-    info.add(mtx::id::language, dmx.language.get_iso639_2_code());
+    info.add(mtx::id::language, dmx.language.get_iso639_alpha_3_code());
 
     if (dmx.is_video())
       info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", dmx.v_width, dmx.v_height));

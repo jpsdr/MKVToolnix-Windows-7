@@ -24,7 +24,7 @@ std::shared_ptr<libmatroska::KaxChapters>
 convert_mpls_chapters_kax_chapters(mtx::bluray::mpls::chapters_t const &mpls_chapters,
                                    mtx::bcp47::language_c const &main_language_,
                                    std::string const &name_template_) {
-  auto main_language  = !main_language_.has_valid_iso639_code() || (main_language_.get_iso639_2_code() == "und") ? mtx::bcp47::language_c::parse("eng"s) : main_language_;
+  auto main_language  = !main_language_.has_valid_iso639_code() || (main_language_.get_iso639_alpha_3_code() == "und") ? mtx::bcp47::language_c::parse("eng"s) : main_language_;
   auto name_template  = name_template_.empty() ? mtx::chapters::g_chapter_generation_name_template.get_translated() : name_template_;
   auto chapter_number = 0;
   auto kax_chapters   = std::make_shared<libmatroska::KaxChapters>();
@@ -50,12 +50,12 @@ convert_mpls_chapters_kax_chapters(mtx::bluray::mpls::chapters_t const &mpls_cha
 
     if (!name.empty())
       atom->PushElement(*mtx::construct::cons<libmatroska::KaxChapterDisplay>(new libmatroska::KaxChapterString,   name,
-                                                                              new libmatroska::KaxChapterLanguage, main_language.get_iso639_2_code_or("und"s)));
+                                                                              new libmatroska::KaxChapterLanguage, main_language.get_iso639_alpha_3_code_or("und"s)));
 
     for (auto const &[entry_language, entry_name] : entry.names)
       if ((entry_language != main_language) && !entry_name.empty())
         atom->PushElement(*mtx::construct::cons<libmatroska::KaxChapterDisplay>(new libmatroska::KaxChapterString,   entry_name,
-                                                                                new libmatroska::KaxChapterLanguage, entry_language.get_iso639_2_code_or("und"s)));
+                                                                                new libmatroska::KaxChapterLanguage, entry_language.get_iso639_alpha_3_code_or("und"s)));
 
     edition.PushElement(*atom);
   }

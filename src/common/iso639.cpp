@@ -48,8 +48,8 @@ list_languages() {
 
   for (auto &lang : g_languages) {
     longest[0] = std::max(longest[0], get_width_in_em(to_wide(gettext(lang.english_name.c_str()))));
-    longest[1] = std::max(longest[1], get_width_in_em(to_wide(lang.iso639_2_code)));
-    longest[2] = std::max(longest[2], get_width_in_em(to_wide(lang.iso639_1_code)));
+    longest[1] = std::max(longest[1], get_width_in_em(to_wide(lang.alpha_3_code)));
+    longest[2] = std::max(longest[2], get_width_in_em(to_wide(lang.alpha_2_code)));
   }
 
   mxinfo(FILL(w_col1, 0) + L" | " + FILL(w_col2, 1) + L" | " + FILL(w_col3, 2) + L"\n");
@@ -57,8 +57,8 @@ list_languages() {
 
   for (auto &lang : g_languages) {
     std::wstring english = to_wide(gettext(lang.english_name.c_str()));
-    std::wstring code2   = to_wide(lang.iso639_2_code);
-    std::wstring code1   = to_wide(lang.iso639_1_code);
+    std::wstring code2   = to_wide(lang.alpha_3_code);
+    std::wstring code1   = to_wide(lang.alpha_2_code);
     mxinfo(FILL(english, 0) + L" | " + FILL(code2, 1) + L" | " + FILL(code1, 2) + L"\n");
   }
 }
@@ -85,7 +85,7 @@ look_up(std::string const &s,
   if (deprecated_code != s_deprecated_1_and_2_codes.end())
     source = deprecated_code->second;
 
-  auto lang_code = std::find_if(g_languages.begin(), g_languages.end(), [&source](auto const &lang) { return (lang.iso639_2_code == source) || (lang.terminology_abbrev == source) || (lang.iso639_1_code == source); });
+  auto lang_code = std::find_if(g_languages.begin(), g_languages.end(), [&source](auto const &lang) { return (lang.alpha_3_code == source) || (lang.terminology_abbrev == source) || (lang.alpha_2_code == source); });
   if (lang_code != g_languages.end())
     return *lang_code;
 
