@@ -3,7 +3,6 @@
 #include "common/common_pch.h"
 
 #include "mkvtoolnix-gui/main_window/tool_base.h"
-#include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 
 class QDragEnterEvent;
 class QDragMoveEvent;
@@ -12,21 +11,17 @@ class QMenu;
 
 namespace mtx::gui::Merge {
 
-namespace Ui {
-class Tool;
-}
-
 class MuxConfig;
 class Tab;
 
+class ToolPrivate;
 class Tool : public ToolBase {
   Q_OBJECT
 
 protected:
-  // UI stuff:
-  std::unique_ptr<Ui::Tool> ui;
-  QMenu *m_mergeMenu;
-  mtx::gui::Util::FilesDragDropHandler m_filesDDHandler;
+  MTX_DECLARE_PRIVATE(ToolPrivate)
+
+  std::unique_ptr<ToolPrivate> const p_ptr;
 
 public:
   explicit Tool(QWidget *parent, QMenu *mergeMenu);

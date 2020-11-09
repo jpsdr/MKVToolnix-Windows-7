@@ -16,6 +16,7 @@
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
+#include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
@@ -25,17 +26,36 @@ namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
+class ToolPrivate {
+  friend class Tool;
+
+  // UI stuff:
+  std::unique_ptr<Ui::Tool> ui;
+  QMenu *mergeMenu{};
+  mtx::gui::Util::FilesDragDropHandler filesDDHandler{Util::FilesDragDropHandler::Mode::Remember};
+
+  ToolPrivate(QMenu *p_mergeMenu);
+};
+
+ToolPrivate::ToolPrivate(QMenu *p_mergeMenu)
+  : ui{new Ui::Tool}
+  , mergeMenu{p_mergeMenu}
+{
+}
+
+// ------------------------------------------------------------
+
 Tool::Tool(QWidget *parent,
            QMenu *mergeMenu)
   : ToolBase{parent}
-  , ui{new Ui::Tool}
-  , m_mergeMenu{mergeMenu}
-  , m_filesDDHandler{Util::FilesDragDropHandler::Mode::Remember}
+  , p_ptr{new ToolPrivate{mergeMenu}}
 {
-  // Setup UI controls.
-  ui->setupUi(this);
+  auto &p = *p_func();
 
-  MainWindow::get()->registerSubWindowWidget(*this, *ui->merges);
+  // Setup UI controls.
+  p.ui->setupUi(this);
+
+  MainWindow::get()->registerSubWindowWidget(*this, *p.ui->merges);
 }
 
 Tool::~Tool() {
@@ -43,7 +63,9 @@ Tool::~Tool() {
 
 void
 Tool::setupUi() {
-  Util::setupTabWidgetHeaders(*ui->merges);
+  auto &p = *p_func();
+
+  Util::setupTabWidgetHeaders(*p.ui->merges);
 
   showMergeWidget();
 
@@ -52,11 +74,12 @@ Tool::setupUi() {
 
 void
 Tool::setupActions() {
+  auto &p   = *p_func();
   auto mw   = MainWindow::get();
   auto mwUi = MainWindow::getUi();
 
-  connect(m_mergeMenu,                                &QMenu::aboutToShow,               this, &Tool::enableMenuActions);
-  connect(m_mergeMenu,                                &QMenu::aboutToHide,               this, &Tool::enableCopyMenuActions);
+  connect(p.mergeMenu,                                &QMenu::aboutToShow,               this, &Tool::enableMenuActions);
+  connect(p.mergeMenu,                                &QMenu::aboutToHide,               this, &Tool::enableCopyMenuActions);
 
   connect(mwUi->actionMergeNew,                       &QAction::triggered,               this, &Tool::newConfig);
   connect(mwUi->actionMergeOpen,                      &QAction::triggered,               this, &Tool::openConfig);
@@ -75,11 +98,11 @@ Tool::setupActions() {
   connect(mwUi->actionMergeCopyOutputFileNameToTitle, &QAction::triggered,               this, &Tool::copyOutputFileNameToTitle);
   connect(mwUi->actionMergeCopyTitleToOutputFileName, &QAction::triggered,               this, &Tool::copyTitleToOutputFileName);
 
-  connect(ui->merges,                                 &QTabWidget::tabCloseRequested,    this, &Tool::closeTab);
-  connect(ui->newFileButton,                          &QPushButton::clicked,             this, &Tool::newConfig);
-  connect(ui->openFileButton,                         &QPushButton::clicked,             this, &Tool::openConfig);
+  connect(p.ui->merges,                               &QTabWidget::tabCloseRequested,    this, &Tool::closeTab);
+  connect(p.ui->newFileButton,                        &QPushButton::clicked,             this, &Tool::newConfig);
+  connect(p.ui->openFileButton,                       &QPushButton::clicked,             this, &Tool::openConfig);
 
-  connect(mw,                                         &MainWindow::preferencesChanged,   [this]() { Util::setupTabWidgetHeaders(*ui->merges); });
+  connect(mw,                                         &MainWindow::preferencesChanged,   this, [&p]() { Util::setupTabWidgetHeaders(*p.ui->merges); });
   connect(mw,                                         &MainWindow::preferencesChanged,   this, &Tool::retranslateUi);
   connect(mw,                                         &MainWindow::preferencesChanged,   this, []() { SourceFile::setupFromPreferences(); });
 
@@ -121,26 +144,29 @@ Tool::enableCopyMenuActions() {
 
 void
 Tool::showMergeWidget() {
-  ui->stack->setCurrentWidget(ui->merges->count() ? ui->mergesPage : ui->noMergesPage);
+  auto &p = *p_func();
+
+  p.ui->stack->setCurrentWidget(p.ui->merges->count() ? p.ui->mergesPage : p.ui->noMergesPage);
   enableMenuActions();
   enableCopyMenuActions();
 }
 
 void
 Tool::toolShown() {
-  MainWindow::get()->showTheseMenusOnly({ m_mergeMenu });
+  MainWindow::get()->showTheseMenusOnly({ p_func()->mergeMenu });
   showMergeWidget();
 }
 
 void
 Tool::retranslateUi() {
+  auto &p            = *p_func();
   auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? Q("") : App::translate("CloseButton", "Close Tab");
 
-  ui->retranslateUi(this);
+  p.ui->retranslateUi(this);
 
-  for (auto idx = 0, numTabs = ui->merges->count(); idx < numTabs; ++idx) {
-    static_cast<Tab *>(ui->merges->widget(idx))->retranslateUi();
-    auto button = Util::tabWidgetCloseTabButton(*ui->merges, idx);
+  for (auto idx = 0, numTabs = p.ui->merges->count(); idx < numTabs; ++idx) {
+    static_cast<Tab *>(p.ui->merges->widget(idx))->retranslateUi();
+    auto button = Util::tabWidgetCloseTabButton(*p.ui->merges, idx);
     if (button)
       button->setToolTip(buttonToolTip);
   }
@@ -148,16 +174,20 @@ Tool::retranslateUi() {
 
 Tab *
 Tool::currentTab() {
-  return static_cast<Tab *>(ui->merges->widget(ui->merges->currentIndex()));
+  auto &p = *p_func();
+
+  return static_cast<Tab *>(p.ui->merges->widget(p.ui->merges->currentIndex()));
 }
 
 Tab *
 Tool::appendTab(Tab *tab) {
+  auto &p = *p_func();
+
   connect(tab, &Tab::removeThisTab, this, &Tool::closeSendingTab);
   connect(tab, &Tab::titleChanged,  this, &Tool::tabTitleChanged);
 
-  ui->merges->addTab(tab, Util::escape(tab->title(), Util::EscapeKeyboardShortcuts));
-  ui->merges->setCurrentIndex(ui->merges->count() - 1);
+  p.ui->merges->addTab(tab, Util::escape(tab->title(), Util::EscapeKeyboardShortcuts));
+  p.ui->merges->setCurrentIndex(p.ui->merges->count() - 1);
 
   showMergeWidget();
 
@@ -206,14 +236,16 @@ Tool::openFromConfig(MuxConfig const &config) {
 
 bool
 Tool::closeTab(int index) {
-  if ((0  > index) || (ui->merges->count() <= index))
+  auto &p = *p_func();
+
+  if ((0  > index) || (p.ui->merges->count() <= index))
     return false;
 
-  auto tab = static_cast<Tab *>(ui->merges->widget(index));
+  auto tab = static_cast<Tab *>(p.ui->merges->widget(index));
 
   if (Util::Settings::get().m_warnBeforeClosingModifiedTabs && tab->hasBeenModified()) {
     MainWindow::get()->switchToTool(this);
-    ui->merges->setCurrentIndex(index);
+    p.ui->merges->setCurrentIndex(index);
 
     auto answer = Util::MessageBox::question(this)
       ->title(QY("Close modified settings"))
@@ -225,7 +257,7 @@ Tool::closeTab(int index) {
       return false;
   }
 
-  ui->merges->removeTab(index);
+  p.ui->merges->removeTab(index);
   delete tab;
 
   showMergeWidget();
@@ -235,20 +267,25 @@ Tool::closeTab(int index) {
 
 void
 Tool::closeCurrentTab() {
-  closeTab(ui->merges->currentIndex());
+  auto &p = *p_func();
+
+  closeTab(p.ui->merges->currentIndex());
 }
 
 void
 Tool::closeSendingTab() {
-  auto idx = ui->merges->indexOf(dynamic_cast<Tab *>(sender()));
+  auto &p  = *p_func();
+  auto idx = p.ui->merges->indexOf(dynamic_cast<Tab *>(sender()));
   if (-1 != idx)
     closeTab(idx);
 }
 
 bool
 Tool::closeAllTabs() {
-  for (auto index = ui->merges->count(); index > 0; --index) {
-    ui->merges->setCurrentIndex(index);
+  auto &p = *p_func();
+
+  for (auto index = p.ui->merges->count(); index > 0; --index) {
+    p.ui->merges->setCurrentIndex(index);
     if (!closeTab(index - 1))
       return false;
   }
@@ -336,26 +373,33 @@ Tool::copyTitleToOutputFileName() {
 
 void
 Tool::tabTitleChanged() {
+  auto &p  = *p_func();
   auto tab = dynamic_cast<Tab *>(sender());
-  auto idx = ui->merges->indexOf(tab);
+  auto idx = p.ui->merges->indexOf(tab);
   if (tab && (-1 != idx))
-    ui->merges->setTabText(idx, Util::escape(tab->title(), Util::EscapeKeyboardShortcuts));
+    p.ui->merges->setTabText(idx, Util::escape(tab->title(), Util::EscapeKeyboardShortcuts));
 }
 
 void
 Tool::dragEnterEvent(QDragEnterEvent *event) {
-  m_filesDDHandler.handle(event, false);
+  auto &p = *p_func();
+
+  p.filesDDHandler.handle(event, false);
 }
 
 void
 Tool::dragMoveEvent(QDragMoveEvent *event) {
-  m_filesDDHandler.handle(event, false);
+  auto &p = *p_func();
+
+  p.filesDDHandler.handle(event, false);
 }
 
 void
 Tool::dropEvent(QDropEvent *event) {
-  if (m_filesDDHandler.handle(event, true))
-    filesDropped(m_filesDDHandler.fileNames(), event->mouseButtons());
+  auto &p = *p_func();
+
+  if (p.filesDDHandler.handle(event, true))
+    filesDropped(p.filesDDHandler.fileNames(), event->mouseButtons());
 }
 
 void
@@ -377,7 +421,9 @@ Tool::filesDropped(QStringList const &fileNames,
 void
 Tool::addMultipleFiles(QStringList const &fileNames,
                        Qt::MouseButtons mouseButtons) {
-  if (!ui->merges->count())
+  auto &p = *p_func();
+
+  if (!p.ui->merges->count())
     newConfig();
 
   auto tab = currentTab();
@@ -426,20 +472,23 @@ Tool::addMultipleFilesToNewSettings(QStringList const &fileNames,
 
 void
 Tool::addMergeTabIfNoneOpen() {
-  if (!ui->merges->count())
+  auto &p = *p_func();
+
+  if (!p.ui->merges->count())
     appendTab(new Tab{this});
 }
 
 void
 Tool::forEachTab(std::function<void(Tab &)> const &worker) {
-  auto currentIndex = ui->merges->currentIndex();
+  auto &p           = *p_func();
+  auto currentIndex = p.ui->merges->currentIndex();
 
-  for (auto index = 0, numTabs = ui->merges->count(); index < numTabs; ++index) {
-    ui->merges->setCurrentIndex(index);
-    worker(dynamic_cast<Tab &>(*ui->merges->widget(index)));
+  for (auto index = 0, numTabs = p.ui->merges->count(); index < numTabs; ++index) {
+    p.ui->merges->setCurrentIndex(index);
+    worker(dynamic_cast<Tab &>(*p.ui->merges->widget(index)));
   }
 
-  ui->merges->setCurrentIndex(currentIndex);
+  p.ui->merges->setCurrentIndex(currentIndex);
 }
 
 std::pair<QString, QString>
