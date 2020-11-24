@@ -179,7 +179,7 @@ struct PACKED_STRUCTURE qt_image_description_t {
 #define MP4DT_TAGS_END          0xFE
 
 // MPEG4 esds structure
-typedef struct {
+struct esds_t {
   uint8_t        version{};
   uint32_t       flags{};
   uint16_t       esid{};
@@ -191,4 +191,4 @@ typedef struct {
   uint32_t       avg_bitrate{};
   memory_cptr    decoder_config;
   memory_cptr    sl_config;
-} esds_t;
+};
