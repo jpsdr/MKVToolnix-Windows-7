@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2020-10-07 16:23+0200\n"
-"PO-Revision-Date: 2020-10-07 06:29+0000\n"
+"PO-Revision-Date: 2020-10-20 17:11+0000\n"
 "Last-Translator: 夏勊倪 <chunkai.mao@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
 "Language: zh_TW\n"
@@ -418,6 +418,8 @@ msgid ""
 "  --disable-language-ietf  Do not write LanguageIETF track header and\n"
 "                           ChapLanguageIETF chapter elements.\n"
 msgstr ""
+"  --disable-language-ietf  不要寫入 LanguageIETF 軌道表頭與\n"
+"                           ChapLanguageIETF 章節元件。\n"
 
 #: src/merge/mkvmerge.cpp:140
 #, no-c-format
@@ -515,13 +517,13 @@ msgid "  --global-tags <file>     Read global tags from an XML file.\n"
 msgstr "  --global-tags <file>     從指定的 XML 檔案讀取全域標籤。\n"
 
 #: src/merge/mkvmerge.cpp:246
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --language <TID:lang>    Sets the language for the track (IETF BCP 47/\n"
 "                           RFC 5646 language tag).\n"
 msgstr ""
-"  --language <TID:lang>    設定指定軌道的語言（ISO 639-2 碼，\n"
-"                           參看 --list-languages）。\n"
+"  --language <TID:lang>    設定軌道語言 (IETF BCP 47/\n"
+"                           RFC 5646 語言標籤)。\n"
 
 #: src/merge/mkvmerge.cpp:166
 #, no-c-format
@@ -603,7 +605,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:226
 #, no-c-format
 msgid "  --no-chapters            Don't keep chapters from the source file.\n"
-msgstr "  --no-chapters            不要保留此輸入檔中的章節。\n"
+msgstr "  --no-chapters            不要保留此原始檔案中的章節。\n"
 
 #: src/merge/mkvmerge.cpp:136
 #, no-c-format
@@ -622,7 +624,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:225
 #, no-c-format
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
-msgstr "  --no-global-tags         不要保留此輸入檔中的全域標籤。\n"
+msgstr "  --no-global-tags         不要保留此原始檔案中的全域標籤。\n"
 
 #: src/merge/mkvmerge.cpp:371
 #, no-c-format
@@ -916,7 +918,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:220
 #, no-c-format
 msgid "  -M, --no-attachments     Don't copy attachments from a source file.\n"
-msgstr "  -M, --no-attachments     不要從指定輸入檔案中複製附件。\n"
+msgstr "  -M, --no-attachments     不要從指定原始檔案中複製附件。\n"
 
 #: src/merge/mkvmerge.cpp:211
 #, no-c-format
@@ -926,7 +928,7 @@ msgstr "  -S, --no-subtitles       不要從這個檔案中複製任何字幕軌
 #: src/merge/mkvmerge.cpp:224
 #, no-c-format
 msgid "  -T, --no-track-tags      Don't copy tags for tracks from the source file.\n"
-msgstr "  -T, --no-track-tags      不要從此輸入檔中複製軌道的標籤。\n"
+msgstr "  -T, --no-track-tags      不要從此原始檔案中複製軌道的標籤。\n"
 
 #: src/merge/mkvmerge.cpp:387
 #, no-c-format
@@ -983,12 +985,12 @@ msgstr "  -h, --help               顯示這個説明。\n"
 #: src/merge/mkvmerge.cpp:353
 #, no-c-format
 msgid "  -i, --identify <file>    Print information about the source file.\n"
-msgstr "  -i, --identify <file>    輸出輸入檔的資訊。\n"
+msgstr "  -i, --identify <file>    輸出原始檔案的資訊。\n"
 
 #: src/merge/mkvmerge.cpp:363
 #, no-c-format
 msgid "  -l, --list-types         Lists supported source file types.\n"
-msgstr "  -l, --list-types         列出支援的輸入檔案類型。\n"
+msgstr "  -l, --list-types         列出支援的原始檔案類型。\n"
 
 #: src/merge/mkvmerge.cpp:216
 #, no-c-format
@@ -1222,7 +1224,7 @@ msgstr " 全域選項:\n"
 #: src/merge/mkvmerge.cpp:199
 #, no-c-format
 msgid " Options for each source file:\n"
-msgstr " 每個輸入檔的各自選項:\n"
+msgstr " 每個原始檔案的各自選項:\n"
 
 #: src/merge/mkvmerge.cpp:347
 #, no-c-format
@@ -1467,7 +1469,7 @@ msgstr "加入檔案(&A)"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1843
 #, no-c-format
 msgid "&Add source files"
-msgstr "加入輸入檔案(&A)"
+msgstr "加入原始檔案(&A)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1842
 #: src/mkvtoolnix-gui/merge/input.cpp:1518
@@ -1676,7 +1678,7 @@ msgstr "展開全部項目(&E)"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:329
 #, no-c-format
 msgid "&Extended subtags:"
-msgstr ""
+msgstr "擃展的子標籤(&E):"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:658
 #, no-c-format
@@ -1706,7 +1708,7 @@ msgstr "字型及大小(&F):"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:323
 #, no-c-format
 msgid "&Free-form input"
-msgstr ""
+msgstr "自由格式輸入(&F)"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:213
 #, no-c-format
@@ -1735,9 +1737,9 @@ msgid "&Hidden"
 msgstr "隱藏(&H)"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:324
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Individually selected components"
-msgstr "啟用已選取附件(&E)"
+msgstr "個別選擇的原件(&I)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:659
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:750
@@ -1947,12 +1949,12 @@ msgstr "上一個合併設定(&P)"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:328
 #, no-c-format
 msgid "&Private use:"
-msgstr ""
+msgstr "專用(&P)"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:330
 #, no-c-format
 msgid "&Region:"
-msgstr ""
+msgstr "區域(&R):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1822
 #, no-c-format
@@ -2048,9 +2050,9 @@ msgid "&Scan for other playlists"
 msgstr "掃描其他播放清單(&S)"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:326
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Script:"
-msgstr "描述(&D):"
+msgstr "指令碼(&S):"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:409
 #, no-c-format
@@ -2134,7 +2136,7 @@ msgstr "驗證值(&V)"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:332
 #, no-c-format
 msgid "&Variants:"
-msgstr ""
+msgstr "變體(&V):"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
 #, no-c-format
@@ -2335,22 +2337,22 @@ msgstr "'--track-order' 只能指定一次。\n"
 #: src/merge/mkvmerge.cpp:2041
 #, no-c-format
 msgid "'-A' and '-a' used on the same source file.\n"
-msgstr "'-A' 和 '-a' 使用相同的輸入檔。\n"
+msgstr "'-A' 和 '-a' 使用相同的原始檔案。\n"
 
 #: src/merge/mkvmerge.cpp:2050
 #, no-c-format
 msgid "'-B' and '-b' used on the same source file.\n"
-msgstr "'-B' 和 '-b' 使用相同的輸入檔。\n"
+msgstr "'-B' 和 '-b' 使用相同的原始檔案。\n"
 
 #: src/merge/mkvmerge.cpp:2044
 #, no-c-format
 msgid "'-D' and '-d' used on the same source file.\n"
-msgstr "'-D' 和 '-d' 使用相同的輸入檔。\n"
+msgstr "'-D' 和 '-d' 使用相同的原始檔案。\n"
 
 #: src/merge/mkvmerge.cpp:2047
 #, no-c-format
 msgid "'-S' and '-s' used on the same source file.\n"
-msgstr "'-S' 和 '-s' 使用相同的輸入檔。\n"
+msgstr "'-S' 和 '-s' 使用相同的原始檔案。\n"
 
 #: src/common/property_element.cpp:128
 #, no-c-format
@@ -2411,13 +2413,13 @@ msgstr "'{0}' 不是有效的 DVD 標題編號。"
 #: src/merge/mkvmerge.cpp:553
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Additional information from the parser: {2}\n"
-msgstr ""
+msgstr "'{0}' 不是 '{1}' 的有效 IETF BCP 47/RFC 5646 語言標籤。來自解析器的其他資訊: {2}\n"
 
 #: src/common/xml/ebml_chapters_converter.cpp:151
 #: src/common/xml/ebml_tags_converter.cpp:114
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
-msgstr ""
+msgstr "'{0}' 不是 IETF BCP 47/RFC 5646 有效的語言標籤。來自解析器的其他資訊: {1}"
 
 #: src/common/xml/ebml_chapters_converter.cpp:173
 #: src/common/xml/ebml_tags_converter.cpp:136
@@ -2750,7 +2752,7 @@ msgstr "<ChapterTrack> 缺少 <ChapterTrackNumber> 子元件。"
 #: src/mkvtoolnix-gui/merge/input.cpp:1538
 #, no-c-format
 msgid "<Do not change>"
-msgstr "<請勿變更>"
+msgstr "<不更改>"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:132
 #, no-c-format
@@ -3113,7 +3115,7 @@ msgstr "加入所有檔案到目前合併設定"
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:156
 #, no-c-format
 msgid "Add as additional &parts to an existing source file"
-msgstr "將附加部分加入現有輸入的檔案(&P)"
+msgstr "將附加部分加入現有原始檔案(&P)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:117
 #, no-c-format
@@ -3316,7 +3318,7 @@ msgstr "完成後保留各設定(&L)。"
 #: src/mkvtoolnix-gui/merge/input.cpp:1529
 #, no-c-format
 msgid "Afterwards &remove all source files."
-msgstr "完成後移除所有輸入檔案(&R)。"
+msgstr "完成後移除所有原始檔案(&R)。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1522
 #: src/mkvtoolnix-gui/merge/input.cpp:1527
@@ -3330,9 +3332,9 @@ msgid "Algorithm"
 msgstr "演算法"
 
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:52
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "All chapter names regardless of their language"
-msgstr "– 所有章節名稱 (無論何種語言) –"
+msgstr "不限語言，所有章節名稱"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:384
 #, no-c-format
@@ -3577,7 +3579,7 @@ msgstr "這裡給定的任何選項會加入到 mkvmerge 命令列的尾端。"
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:53
 #, no-c-format
 msgid "Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode."
-msgstr "根據目前模式的不同，其餘檔名將加入合併工具的輸入檔案，或在章節編輯或表頭編輯中開啟。"
+msgstr "根據目前模式的不同，其餘檔名將加入合併工具的原始檔案，或在章節編輯或表頭編輯中開啟。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:502
 #, no-c-format
@@ -3597,7 +3599,7 @@ msgstr "附加媒體檔案"
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:155
 #, no-c-format
 msgid "Append to an e&xisting source file"
-msgstr "附加至已存在的輸入檔 (&X)"
+msgstr "附加至已存在的原始檔案 (&X)"
 
 #: src/merge/output_control.cpp:1895
 #, no-c-format
@@ -3696,7 +3698,7 @@ msgstr "附件"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1829
 #, no-c-format
 msgid "Attachments from &source files:"
-msgstr "輸入檔案中的附件(&S):"
+msgstr "原始檔案中的附件(&S):"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:50
 #: src/mkvtoolnix-gui/merge/track.cpp:431
@@ -3745,9 +3747,9 @@ msgid "Audio track %1"
 msgstr "音訊軌 %1"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1814
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Audio tracks:"
-msgstr "音訊軌(&A)："
+msgstr "音訊軌:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1746
 #, no-c-format
@@ -3777,12 +3779,12 @@ msgstr "由輸出檔的副檔名自動啟用 WebM 規範模式。\n"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1806
 #, no-c-format
 msgid "Automatically set the file &title from source files"
-msgstr "自動從輸入檔案設定檔案標題(&T)"
+msgstr "自動從原始檔案設定檔案標題(&T)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1808
 #, no-c-format
 msgid "Automatically set track &delays from source file name"
-msgstr "自動從輸入檔案設定軌道延遲(&D)"
+msgstr "自動從原始檔案設定軌道延遲(&D)"
 
 #: src/common/command_line.cpp:258
 #, no-c-format
@@ -3800,9 +3802,9 @@ msgid "Available:"
 msgstr "可用的選項:"
 
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:211
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "BCP 47 language tag details"
-msgstr "探測百分比 '{0}' 無效。\n"
+msgstr "BCP 47 語言標籤詳細資訊"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:160
 #, no-c-format
@@ -3840,29 +3842,29 @@ msgid "Block"
 msgstr "區塊"
 
 #: src/common/kax_element_names.cpp:179
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Block addition ID extra data"
-msgstr "附加區塊 ID"
+msgstr "附加區塊 ID 額外資料"
 
 #: src/common/kax_element_names.cpp:180
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Block addition ID name"
-msgstr "附加區塊 ID"
+msgstr "附加區塊 ID 名稱"
 
 #: src/common/kax_element_names.cpp:181
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Block addition ID type"
-msgstr "附加區塊 ID"
+msgstr "附加區塊 ID 類型"
 
 #: src/common/kax_element_names.cpp:182
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Block addition ID value"
-msgstr "附加區塊"
+msgstr "附加區塊 ID 參數"
 
 #: src/common/kax_element_names.cpp:178
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Block addition mapping"
-msgstr "附加區塊"
+msgstr "附加區塊 ID 對應"
 
 #: src/common/kax_element_names.cpp:254
 #, no-c-format
@@ -4100,12 +4102,12 @@ msgstr "發生異常"
 #: src/common/hacks.cpp:53
 #, no-c-format
 msgid "Causes mkvmerge not to write 'CueDuration' elements in the cues."
-msgstr "使 mkvmerge 不在索引部分寫入 'CueDuration' 元素。"
+msgstr "使 mkvmerge 不在索引部分寫入 'CueDuration' 元件。"
 
 #: src/common/hacks.cpp:54
 #, no-c-format
 msgid "Causes mkvmerge not to write 'CueRelativePosition' elements in the cues."
-msgstr "使 mkvmerge 不在索引部分寫入 'CueRelativePosition' 元素。"
+msgstr "使 mkvmerge 不在索引部分寫入 'CueRelativePosition' 元件。"
 
 #: src/common/hacks.cpp:52
 #, no-c-format
@@ -4192,7 +4194,7 @@ msgstr "章節"
 #: src/common/kax_element_names.cpp:278
 #, no-c-format
 msgid "Chapter atom"
-msgstr "章節 atom"
+msgstr "章節單元"
 
 #: src/common/kax_element_names.cpp:294
 #, no-c-format
@@ -4243,9 +4245,9 @@ msgid "Chapter language"
 msgstr "章節語言"
 
 #: src/common/kax_element_names.cpp:293
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter language (IETF BCP 47)"
-msgstr "章節語言 (IETF)"
+msgstr "語言章節 (IETF BCP 47)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:217
 #, no-c-format
@@ -4659,7 +4661,7 @@ msgstr "以輸出檔案的名稱作為檔案標題(&D)"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:702
 #, no-c-format
 msgid "Copy &first source file's name to file title"
-msgstr "以第一個輸入檔案的名稱用作檔案標題(&F)"
+msgstr "以第一個原始檔案的名稱用作檔案標題(&F)"
 
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
 #, no-c-format
@@ -4728,9 +4730,9 @@ msgid "Could not initialize the iconv library for the conversion from {0} to UTF
 msgstr "無法初始化 iconv 函式庫以供從 {0} 至 UTF-8 的轉換。某些字串將不被轉換為 UTF-8，且生成的 Matroska 檔可能不符合 Matroska 規範 (錯誤: {1}, {2})。\n"
 
 #: src/input/r_matroska.cpp:1685
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
-msgstr "matroska_reader: 無法保留軌道 UID {0}，因為它已被指派給了新檔案。\n"
+msgstr "無法保留軌道的 UID {0} ，因為它已經分配給其他軌道使用。經會自動隨機分配新的 UID 。\n"
 
 #: src/common/chapters/chapters.cpp:307
 #: src/common/chapters/chapters.cpp:309
@@ -5165,7 +5167,7 @@ msgstr "預設"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1764
 #, no-c-format
 msgid "Default IETF BCP 47 language editing &mode:"
-msgstr ""
+msgstr "預設 IETF BCP 47 語言編輯模式(&M):"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1803
 #, no-c-format
@@ -5284,21 +5286,21 @@ msgstr "刪除一個或多個附件"
 #: src/mkvtoolnix-gui/util/settings.cpp:56
 #, no-c-format
 msgid "Delete source files for multiplexer jobs"
-msgstr "刪除合併工具作業的輸入檔"
+msgstr "刪除合併工具作業的原始檔案"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:416
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:422
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:428
 #, no-c-format
 msgid "Depending on the setting below this language can also be used if the language in the source file is 'undetermined' ('und')."
-msgstr "如果輸入檔的語言是 '未指定' ('und') ，則會依據設定使用相同語言設定。"
+msgstr "如果原始檔案的語言是 '未指定' ('und') ，則會依據設定使用相同語言設定。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:388
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:394
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:400
 #, no-c-format
 msgid "Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und')."
-msgstr "如果輸入檔的語言是 '未指定' ('und') ，則會依據設定從檔名使用相同語言設定。"
+msgstr "如果原始檔案的語言是 '未指定' ('und') ，則會依據設定從檔名使用相同語言設定。"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:226
 #, no-c-format
@@ -5412,7 +5414,7 @@ msgstr "目錄"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1831
 #, no-c-format
 msgid "Directory &relative to first source file's directory:"
-msgstr "第一個輸入檔案所在目錄的相對目錄(&R):"
+msgstr "第一個原始檔案所在目錄的相對目錄(&R):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:508
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
@@ -5506,7 +5508,7 @@ msgstr "不要在變換定位元件中新增章節項目。"
 #: src/propedit/propedit_cli_parser.cpp:249
 #, no-c-format
 msgid "Do not change LanguageIETF track header elements when the 'language' property is changed."
-msgstr ""
+msgstr "更改 '語言' 屬性時，請勿更改 LanguageIETF 軌道表頭元件。"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:168
 #, no-c-format
@@ -6007,7 +6009,7 @@ msgstr "錯誤:"
 #: src/common/kax_info.cpp:1276
 #, no-c-format
 msgid "Error: Couldn't open source file {0} ({1})."
-msgstr "錯誤: 無法開啟輸入檔 {0} ({1})。"
+msgstr "錯誤: 無法開啟原始檔案 {0} ({1})。"
 
 #: src/extract/tracks.cpp:467
 #, no-c-format
@@ -6133,7 +6135,7 @@ msgstr "在特定事件後執行動作"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
 #, no-c-format
 msgid "Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"
-msgstr "退出代碼 (0：正常，1：發生警告，2：發生錯誤)"
+msgstr "結束代碼 (0：正常，1：發生警告，2：發生錯誤)"
 
 #: src/common/xml/ebml_converter.cpp:208
 #, no-c-format
@@ -6148,7 +6150,7 @@ msgstr "用 OGM 工具的簡易格式來匯出章節資訊 (CHAPTER01=... CHAPTE
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:214
 #, no-c-format
 msgid "Extended subtags"
-msgstr ""
+msgstr "擃展的子標籤"
 
 #: src/extract/extract_cli_parser.cpp:80
 #, no-c-format
@@ -6378,14 +6380,14 @@ msgid "Finished at:"
 msgstr "完成時間:"
 
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:51
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "First chapter name regardless of its language"
-msgstr "– 第一個章節名稱 (無論何種語言) –"
+msgstr "不限語言，第一章名稱"
 
 #: src/common/bcp47.cpp:266
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
-msgstr ""
+msgstr "目前不支援５至８個字母的語言代碼。"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1765
 #, no-c-format
@@ -6515,7 +6517,7 @@ msgstr "在非關閉的 GOP 裡找到最少一個沒有秒數參考的 B 影格�
 #: src/common/bcp47.cpp:261
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
-msgstr ""
+msgstr "４字母的語言代碼為未來保留使用，但不支援。"
 
 #: src/merge/mkvmerge.cpp:1462
 #, no-c-format
@@ -6580,7 +6582,7 @@ msgstr "使用者定義此軌道選項的任意形式編輯欄位。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:767
 #, no-c-format
 msgid "Free-form input"
-msgstr ""
+msgstr "自由格式輸入"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:213
 #, no-c-format
@@ -6885,7 +6887,7 @@ msgstr "如果勾選該選項，程式中的選擇中僅包含常用項目的清
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:251
 #, no-c-format
 msgid "If checked, the GUI will not show helpful usage tips in popup windows while hovering over a control — such as this one."
-msgstr ""
+msgstr "如果勾選該選項，當滑鼠停留在控項上時，GUI不會在彈出視窗中顯示有用的使用提示 — 例如這個。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:461
 #, no-c-format
@@ -6961,7 +6963,7 @@ msgstr "如果勾選該選項，在章節編輯器從此類播放列表中讀取
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:277
 #, no-c-format
 msgid "If enabled, the names of tab headers will be shortened so that all tab headers fit into the window's width."
-msgstr ""
+msgstr "如果勾選該選項，標籤標題的名稱將被縮短，以便所有標籤標題都適合視窗的寬度。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:279
 #, no-c-format
@@ -6983,7 +6985,7 @@ msgstr "如果勾選該選項，在程式退出時，狀態列中所有作業和
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:474
 #, no-c-format
 msgid "If enabled, tracks of this type will always be set to be copied regardless of their language."
-msgstr "如果勾選該選項，不論何種語言，此類型的軌道將永遠設定為複製。"
+msgstr "如果勾選該選項，無限語言，此類型的軌道將永遠設定為複製。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:190
 #, no-c-format
@@ -7034,7 +7036,7 @@ msgstr "如果未輸入內容，將會自動產生章節，但不會設定名稱
 #: src/mkvtoolnix-gui/merge/input.cpp:447
 #, no-c-format
 msgid "If set to 'determine automatically' then mkvmerge will choose one track of each type to have this flag set based on the information in the source files and the order of the tracks."
-msgstr "如果設定為 '自動判定' 那麼 mkvmerge 會根據輸入檔案中有此標記的資訊，選擇每種類型軌道並依順序排列軌道。"
+msgstr "如果設定為 '自動判定' 那麼 mkvmerge 會根據原始檔案中有此標記的資訊，選擇每種類型軌道並依順序排列軌道。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:455
 #, no-c-format
@@ -7069,17 +7071,17 @@ msgstr "如果數字字尾有 'ms' ，將會以 'n' 毫秒資料對每個叢進�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:399
 #, no-c-format
 msgid "If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr "如果原始檔的字幕軌沒有此屬性，可以從檔名中特定的規則模式推斷可能的使用語言 (如: '…[chi]…' 為中文) 。"
+msgstr "如果原始檔案的字幕軌沒有此屬性，可以從檔名中特定的規則模式推斷可能的使用語言 (如: '…[chi]…' 為中文) 。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:393
 #, no-c-format
 msgid "If the source file contains no such property for a video track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr "如果原始檔的視訊軌沒有此屬性，可以從檔名中特定的規則模式推斷可能的使用語言 (如: '…[chi]…' 為中文) 。"
+msgstr "如果原始檔案的視訊軌沒有此屬性，可以從檔名中特定的規則模式推斷可能的使用語言 (如: '…[chi]…' 為中文) 。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:387
 #, no-c-format
 msgid "If the source file contains no such property for an audio track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr "如果原始檔的音訊軌沒有此屬性，可以從檔名中特定的規則模式推斷可能的使用語言 (如: '…[chi]…' 為中文) 。"
+msgstr "如果原始檔案的音訊軌沒有此屬性，可以從檔名中特定的規則模式推斷可能的使用語言 (如: '…[chi]…' 為中文) 。"
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:81
 #, no-c-format
@@ -7089,12 +7091,12 @@ msgstr "如果沒有此類章節，則將改為使用父章的結束時間戳記
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:446
 #, no-c-format
 msgid "If this option is enabled and if there is currently no destination file name set, the program will set one for you when you add a source file."
-msgstr "在啟用此選項後，若目前沒有設定輸出檔案的名稱，在新增輸入檔後，程式會自動設定。"
+msgstr "在啟用此選項後，若目前沒有設定輸出檔案的名稱，在新增原始檔案，程式會自動設定。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:451
 #, no-c-format
 msgid "If this option is enabled, only source files containing video tracks will be used for setting the destination file name."
-msgstr "在啟用此選項後，只有包含視訊軌的輸入檔名將用於設定輸出檔名。"
+msgstr "在啟用此選項後，只有包含視訊軌的原始檔案名稱將用於設定輸出檔案名稱。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:469
 #, no-c-format
@@ -7104,7 +7106,7 @@ msgstr "在啟用此選項後，只有在下列選取語言的軌道會設定為
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:463
 #, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."
-msgstr "在啟用此選項後，每當刪除最後一個原始檔案時，圖形使用者介面將一律清除 \"輸出檔名\" 的輸入框。"
+msgstr "在啟用此選項後，每當刪除最後一個原始檔案時，圖形使用者介面將一律清除 \"輸出檔案名稱\" 的輸入框。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
 #, no-c-format
@@ -7159,7 +7161,7 @@ msgstr "依檔案大小切割時，如果需要經常使用相同的數值，可
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:157
 #, no-c-format
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
-msgstr "若要附加或加入作為附加部分那麼必須選擇要加入的輸入檔案:"
+msgstr "若要附加或加入作為附加部分那麼必須選擇要加入的原始檔案:"
 
 #: src/output/p_textsubs.cpp:117
 #, no-c-format
@@ -7223,9 +7225,9 @@ msgid "Indexing (cues):"
 msgstr "索引 (cue):"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:768
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Individually selected components"
-msgstr "啟用已選取附件(&E)"
+msgstr "個別選擇的原件"
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:135
 #, no-c-format
@@ -7812,19 +7814,19 @@ msgstr "語言"
 
 #: src/common/kax_element_names.cpp:207
 #: src/common/property_element.cpp:142
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Language (IETF BCP 47)"
-msgstr "語言標間 (IETF)"
+msgstr "語言 (IETF BCP 47)"
 
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:53
 #, no-c-format
 msgid "Language selected below"
-msgstr ""
+msgstr "下方選擇語言"
 
 #: src/common/bcp47.cpp:280
 #, no-c-format
 msgid "Language tag extensions are currently not supported."
-msgstr ""
+msgstr "目前的語言標籤不支援擴展。"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:527
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:278
@@ -7844,7 +7846,7 @@ msgstr "版面配置"
 #: src/common/hacks.cpp:33
 #, no-c-format
 msgid "Leave additional space (EbmlVoid) in the destination file after the chapters."
-msgstr "在輸出檔的章節中留額外的空格 (EbmlVoid)。"
+msgstr "在輸出檔案的章節中留額外的空格 (EbmlVoid)。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:780
 #, no-c-format
@@ -8251,7 +8253,7 @@ msgstr "缺少給 '{0}' 的參數。\n"
 #: src/extract/extract_cli_parser.cpp:367
 #, no-c-format
 msgid "Missing destination file name in argument '{0}'.\n"
-msgstr "參數 '{0}' 缺少輸出檔名。\n"
+msgstr "參數 '{0}' 缺少輸出檔案名稱。\n"
 
 #: src/common/bitvalue.cpp:80
 #, no-c-format
@@ -8541,7 +8543,7 @@ msgstr "未找到 cue。\n"
 #: src/extract/extract_cli_parser.cpp:365
 #, no-c-format
 msgid "No destination file name specified, will use attachment name.\n"
-msgstr "未指定輸出檔名，將使用附件名。\n"
+msgstr "未指定輸出檔案名稱，將使用附件名稱。\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
 #, no-c-format
@@ -8549,9 +8551,9 @@ msgid "No disc library information was found."
 msgstr "未找到光碟庫資訊。"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:342
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "No error was found."
-msgstr "未找到 cue。\n"
+msgstr "未發現錯誤。"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:150
 #, no-c-format
@@ -8621,7 +8623,7 @@ msgstr "無語言內容; 不適用"
 #: src/input/r_flac.cpp:105
 #, no-c-format
 msgid "No metadata block found. This file is broken.\n"
-msgstr "未發現中繼資料區塊。檔案已損壞。\n"
+msgstr "未發現變換定位資料區塊。檔案已損壞。\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tool.h:215
 #, no-c-format
@@ -8651,7 +8653,7 @@ msgstr "未發現剪輯/0 層級元件。"
 #: src/merge/mkvmerge.cpp:2940
 #, no-c-format
 msgid "No source files were given.\n"
-msgstr "未設定輸入檔案。\n"
+msgstr "未指定原始檔案。\n"
 
 #: src/common/mm_io_x.cpp:39
 #, no-c-format
@@ -8676,7 +8678,7 @@ msgstr "未找到可以計算統計資訊的軌道表頭。\n"
 #: src/extract/tracks.cpp:431
 #, no-c-format
 msgid "No track with the ID {0} was found in the source file.\n"
-msgstr "在輸入檔案裡找不到 ID 為 {0} 的軌道。\n"
+msgstr "在原始檔案裡找不到 ID 為 {0} 的軌道。\n"
 
 #: src/input/r_vobsub.cpp:78
 #, no-c-format
@@ -8795,7 +8797,7 @@ msgstr "注意並不是很多播放程式支援裁剪參數。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:312
 #, no-c-format
 msgid "Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user."
-msgstr "即使停用此選項 mkvmerge 仍然會複製輸入檔案的標題屬性，除非使用者手動設定標題。"
+msgstr "即使停用此選項 mkvmerge 仍然會複製原始檔案的標題屬性，除非使用者手動設定標題。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:483
 #: src/mkvtoolnix-gui/merge/input.cpp:489
@@ -8937,7 +8939,7 @@ msgstr "僅在右側清單中 '已選擇' 的類型會預設為複製項目。"
 #: src/mkvtoolnix-gui/merge/input.cpp:515
 #, no-c-format
 msgid "Only needed for AAC source files as SBR AAC cannot be detected automatically for these files."
-msgstr "僅在 AAC 輸入檔案所需的 SBR ACC 無法偵測到這些檔案。"
+msgstr "僅在 AAC 原始檔案所需的 SBR ACC 無法偵測到這些檔案。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:528
 #, no-c-format
@@ -8952,7 +8954,7 @@ msgstr "僅允許一個章節檔，在 '{0} {1}' 。\n"
 #: src/merge/mkvmerge.cpp:2257
 #, no-c-format
 msgid "Only one destination file allowed.\n"
-msgstr "僅允許一個輸出檔。\n"
+msgstr "僅允許一個輸出檔案。\n"
 
 #: src/common/xml/xml.h:89
 #, no-c-format
@@ -8972,7 +8974,7 @@ msgstr "僅允許一個剪輯檔，在 '{0} {1}' 。\n"
 #: src/info/info_cli_parser.cpp:109
 #, no-c-format
 msgid "Only one source file is allowed.\n"
-msgstr "僅允許一個輸入檔。\n"
+msgstr "僅允許一個原始檔案。\n"
 
 #: src/merge/output_control.cpp:941
 #, no-c-format
@@ -9002,7 +9004,7 @@ msgstr "只有右側 '已選定' 清單中的語言才能在檔名中識別為�
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 #, no-c-format
 msgid "Only to the first destination file"
-msgstr "僅限到第一個輸出檔"
+msgstr "僅限到第一個輸出檔案"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:476
 #, no-c-format
@@ -9018,7 +9020,7 @@ msgstr "只支援 v7 和更高版本的 VobSub 檔。如果使用的是舊版檔
 #, no-c-format
 msgid "Only {0} chapter found in source files & chapter files."
 msgid_plural "Only {0} chapters found in source files & chapter files."
-msgstr[0] "輸入檔案及章節檔案中只有 {0} 個章節。"
+msgstr[0] "原始檔案及章節檔案中只有 {0} 個章節。"
 
 #: src/common/file_types.cpp:97
 #, no-c-format
@@ -9161,7 +9163,7 @@ msgstr "檔案的其他部分 (如：字幕軌) 可透過該名稱引用此附�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:457
 #, no-c-format
 msgid "Otherwise the destination file name is derived from the source file names."
-msgstr "否則，將由原始檔名指派為輸出檔名。"
+msgstr "否則，輸出檔案名稱將由原始檔案名稱命名。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:483
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:489
@@ -9229,7 +9231,7 @@ msgstr "解析整個檔案而不是依靠索引。"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:336
 #, no-c-format
 msgid "Parser error:"
-msgstr ""
+msgstr "解析器錯誤:"
 
 #: src/common/kax_info.cpp:602
 #, no-c-format
@@ -9482,7 +9484,7 @@ msgstr "僅適用於特定外觀比例的私有資料。"
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:218
 #, no-c-format
 msgid "Private use"
-msgstr ""
+msgstr "專用"
 
 #: src/output/p_prores.h:28
 #, no-c-format
@@ -9810,9 +9812,9 @@ msgid "RealMedia audio/video files"
 msgstr "RealMedia 音訊/視訊檔"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1836
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Recent destination directories"
-msgstr "選擇輸出目錄"
+msgstr "最近的輸出目錄"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1823
 #, no-c-format
@@ -9867,7 +9869,7 @@ msgstr "虛擬參考"
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:216
 #, no-c-format
 msgid "Region"
-msgstr ""
+msgstr "區域"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:168
 #, no-c-format
@@ -9932,9 +9934,9 @@ msgid "Remove com&pleted jobs older than x days:"
 msgstr "移除指定天前的已完成作業(&P)："
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1879
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Remove completed jobs from queue on &exit:"
-msgstr "移除指定天前的已完成作業(&P)："
+msgstr "離開時，從作業佇列中移除已完成的作業(&E):"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1778
 #, no-c-format
@@ -9949,7 +9951,7 @@ msgstr "移除元素"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1783
 #, no-c-format
 msgid "Remove source files"
-msgstr "移除輸入檔"
+msgstr "移除原始檔案"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1869
 #, no-c-format
@@ -10142,7 +10144,7 @@ msgstr "SSA/ASS: 將跳過以下行數，因為其中一個時間戳記小於 0 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1829
 #, no-c-format
 msgid "Sa&me directory as the first source file"
-msgstr "與第一個原始檔的目錄相同(&M)"
+msgstr "與第一個原始檔案的目錄相同(&M)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:604
 #, no-c-format
@@ -10272,7 +10274,7 @@ msgstr "範圍"
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:215
 #, no-c-format
 msgid "Script"
-msgstr ""
+msgstr "指令碼"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:104
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:116
@@ -10371,9 +10373,9 @@ msgid "Select Matroska file to read segment UID from"
 msgstr "選擇用於讀取剪輯 UID 的 Matroska 檔案"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:664
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select a directory"
-msgstr "選擇輸出目錄"
+msgstr "選擇目錄"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1472
 #, no-c-format
@@ -10419,12 +10421,12 @@ msgstr "選擇輸出目錄"
 #: src/mkvtoolnix-gui/merge/output.cpp:416
 #, no-c-format
 msgid "Select destination file name"
-msgstr "選擇輸出檔名"
+msgstr "選擇輸出檔案名稱"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:325
 #, no-c-format
 msgid "Select disc library information to use"
-msgstr ""
+msgstr "選擇要使用的光碟媒體櫃資訊"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1041
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:320
@@ -10470,12 +10472,9 @@ msgid "Selects for which blocks mkvmerge will produce index entries ( = cue entr
 msgstr "選擇 mkvmerge 將建立索引條目 (= cue 條目) 的區塊。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:32
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Selects how mkvmerge calculates timestamps when appending files."
-msgstr ""
-"  --append-mode <file|track>\n"
-"                           在追加檔案時\n"
-"\\v                           選擇如何計算 mkvmerge 時間戳記。\n"
+msgstr "在附加檔案時，選擇如何計算 mkvmerge 時間戳記。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:527
 #, no-c-format
@@ -10490,7 +10489,7 @@ msgstr "設定外觀比例:"
 #: src/mkvtoolnix-gui/merge/input.cpp:1510
 #, no-c-format
 msgid "Set destination &file name from selected file's name"
-msgstr "從已選的檔名設定輸出檔名(&F)"
+msgstr "從已選的檔名設定輸出檔案名稱(&F)"
 
 #: src/common/property_element.cpp:128
 #, no-c-format
@@ -10651,7 +10650,7 @@ msgstr "顯示所有子元素（包含 cue 與 定位表頭）並且不在第一
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1856
 #, no-c-format
 msgid "Show dates && times in &UTC instead of the local time zone"
-msgstr ""
+msgstr "以 UTC 取代本地時區顯示日期與時間(&U)"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:169
 #, no-c-format
@@ -10681,12 +10680,12 @@ msgstr "以十六進位轉儲形式顯示每影格的前 16 位元組。"
 #: src/info/info_cli_parser.cpp:41
 #, no-c-format
 msgid "Show the position of each element in decimal."
-msgstr "在十進位中顯示每個元素的位置。"
+msgstr "在十進位中顯示每個元件的位置。"
 
 #: src/info/info_cli_parser.cpp:42
 #, no-c-format
 msgid "Show the position of each element in hexadecimal."
-msgstr "顯示十六進位中每個元素的位置。"
+msgstr "顯示十六進位中每個元件的位置。"
 
 #: src/info/info_cli_parser.cpp:47
 #, no-c-format
@@ -10833,33 +10832,33 @@ msgstr "缺少某些標籤元件 (不該發生此錯誤 - 另一個類似的錯�
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1737
 #, no-c-format
 msgid "Source &files:"
-msgstr "輸入檔案(&F):"
+msgstr "原始檔案(&F):"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:57
 #, no-c-format
 msgid "Source file"
-msgstr "輸入檔案"
+msgstr "原始檔案"
 
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:92
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:66
 #, no-c-format
 msgid "Source file name"
-msgstr "輸入檔名"
+msgstr "原始檔案名稱"
 
 #: src/mkvtoolnix-gui/jobs/info_job.cpp:99
 #, no-c-format
 msgid "Source file name: %1"
-msgstr "輸入檔名: %1"
+msgstr "原始檔案名稱: %1"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:249
 #, no-c-format
 msgid "Source file names"
-msgstr "輸入檔名"
+msgstr "原始檔案名稱"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:58
 #, no-c-format
 msgid "Source file's directory"
-msgstr "輸入檔案目錄"
+msgstr "原始檔案的目錄"
 
 #: src/common/property_element.cpp:201
 #, no-c-format
@@ -10877,14 +10876,14 @@ msgid "Specifies a yaw rotation to the projection."
 msgstr "指定繞 Z 軸旋轉至視訊外觀比。"
 
 #: src/common/property_element.cpp:142
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Specifies the language of the track in the form of a BCP 47 language tag."
-msgstr "指定 Matroska 語言表單中軌道的語言。"
+msgstr "用 BCP 47 語言標籤的格式指定軌道的語言。"
 
 #: src/common/property_element.cpp:141
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Specifies the language of the track."
-msgstr "指定 Matroska 語言表單中軌道的語言。"
+msgstr "指定軌道的語言。"
 
 #: src/common/property_element.cpp:159
 #, no-c-format
@@ -10902,9 +10901,9 @@ msgid "Splitting"
 msgstr "分割"
 
 #: src/merge/output_control.cpp:1089
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Splitting tracks of this type is not supported."
-msgstr "不支援要擷取的軌道識別碼 {0}（CodecID 為 '{1}' ）。\n"
+msgstr "不支援分割此類型的軌道。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:324
 #, no-c-format
@@ -11042,9 +11041,9 @@ msgid "Subtitle track {0} is missing some duration elements. Please check the re
 msgstr "字幕軌 {0} 缺少時間長度元件。請檢查輸出的 SSA/ASS 檔中有相同起始和終止時間的項目。\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1816
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Subtitle tracks:"
-msgstr "字幕軌(&S)："
+msgstr "字幕軌:"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:52
 #: src/mkvtoolnix-gui/merge/track.cpp:433
@@ -11112,9 +11111,9 @@ msgid "Tag language"
 msgstr "語言標籤"
 
 #: src/common/kax_element_names.cpp:316
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Tag language (IETF BCP 47)"
-msgstr "語言標間 (IETF)"
+msgstr "語言標籤 (IETF BCP 47)"
 
 #: src/propedit/propedit_cli_parser.cpp:266
 #, no-c-format
@@ -11167,7 +11166,7 @@ msgstr "不要讓 mkvmerge 建立和寫入能與 AVI 索引比較的 cue 資料�
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:45
 #, no-c-format
 msgid "Tells mkvmerge not to write LanguageIETF track header elements and ChapLanguageIETF chapter elements."
-msgstr ""
+msgstr "告知 mkvmerge 不要編寫LanguageIETF 軌道表頭元素與 ChapLanguageIETF 章節元件。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:44
 #, no-c-format
@@ -11187,7 +11186,7 @@ msgstr "在發出第一個警告後讓 mkvmerge 終止程式。"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:41
 #, no-c-format
 msgid "Tells mkvmerge to create a meta seek element at the end of the file containing all clusters."
-msgstr "讓 mkvmerge 在包含所有叢集的檔案建立變換定位元素。"
+msgstr "讓 mkvmerge 在包含所有叢集的檔案建立變換定位元件。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:49
 #, no-c-format
@@ -11279,9 +11278,9 @@ msgid "The ID '{0}' has already been used for another destination file.\n"
 msgstr "另一個輸出檔案已經使用該識別碼 '{0}' 。\n"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:153
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The JSON output generated by mkvmerge while identifying '%1' could not be parsed (parser's error message: %2)."
-msgstr "mkvmerge 產生的 JSON 輸出無法解析 (解析器提供的錯誤訊息: %1)。"
+msgstr "無法解析 mkvmerge 在識別 '%1' 時產生的 JSON 輸出檔  (解析器的錯誤訊息: %2)。"
 
 #: src/input/r_ogm.cpp:1679
 #, no-c-format
@@ -11329,7 +11328,7 @@ msgstr "Matroska 檔已經修改過，但變換定位項目無法更新。這表
 #: src/propedit/propedit.cpp:64
 #, no-c-format
 msgid "The Matroska file's last element is set to an unknown size."
-msgstr "Matroska 檔案的最後一個元素所設定的尺寸未知。"
+msgstr "Matroska 檔案的最後一個元件所設定的尺寸未知。"
 
 #: src/merge/mkvmerge.cpp:1597
 #, no-c-format
@@ -11349,7 +11348,7 @@ msgstr "UID 不可以留空。"
 #: src/input/r_matroska.cpp:732
 #, no-c-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
-msgstr "VobSub 字幕軌道 {0} 的 CodecPrivate 元素不包含其索引。"
+msgstr "VobSub 字幕軌道 {0} 的 CodecPrivate 元件不包含其索引。"
 
 #: src/output/p_vorbis.cpp:131
 #, no-c-format
@@ -11598,7 +11597,7 @@ msgstr "將會關閉目前合併設定。"
 #: src/merge/generic_packetizer.cpp:1421
 #, no-c-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
-msgstr "目前套件的時間戳記比前一個套件的小。這通常表明輸入檔未正常 100% 建立的 Matroska 檔案。所有套件的時間戳記將以 {0}ms 調整以避免丟失任何資料。這可能導致音/視訊不同步，但可以透過 mkvmerge 的 \"--sync\" 選項修正。如果已經使用 \"--sync\" 但仍然收到此警告，請 *不要* 著急 -- 這是正常的。如果對於一個特定軌超過一次出現此錯誤且超過一次收到此訊息，既可能是因為輸入檔嚴重錯誤，也可能是因為 mkvmerge 包含了某個 bug。如果是這樣，請聯繫作者 Moritz Bunkus <moritz@bunkus.org>。\n"
+msgstr "目前套件的時間戳記比前一個套件的小。這通常表明原始檔案未正常 100% 建立的 Matroska 檔案。所有套件的時間戳記將以 {0}ms 調整以避免丟失任何資料。這可能導致音/視訊不同步，但可以透過 mkvmerge 的 \"--sync\" 選項修正。如果已經使用 \"--sync\" 但仍然收到此警告，請 *不要* 著急 -- 這是正常的。如果對於一個特定軌超過一次出現此錯誤且超過一次收到此訊息，既可能是因為原始檔案嚴重錯誤，也可能是因為 mkvmerge 包含了某個 bug。如果是這樣，請聯繫作者 Moritz Bunkus <moritz@bunkus.org>。\n"
 
 #: src/common/kax_analyzer.cpp:195
 #, no-c-format
@@ -11608,12 +11607,12 @@ msgstr "檔中的資料已損壞且無法安全修改"
 #: src/mkvtoolnix-gui/header_editor/time_value_page.cpp:92
 #, no-c-format
 msgid "The date & time shown is in UTC."
-msgstr ""
+msgstr "顯示的日期與時間以 UTC 表示。"
 
 #: src/mkvtoolnix-gui/header_editor/time_value_page.cpp:92
 #, no-c-format
 msgid "The date & time shown is in your local time zone."
-msgstr ""
+msgstr "顯示的日期與時間以您的本地時區表示。"
 
 #: src/common/property_element.cpp:112
 #, no-c-format
@@ -11623,7 +11622,7 @@ msgstr "已建立檔案日期。"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:33
 #, no-c-format
 msgid "The default is 'file' with 'track' being an alternative mode."
-msgstr ""
+msgstr "預設的 '檔案' 的 '軌道' 已成為複寫模式。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:378
 #, no-c-format
@@ -11666,7 +11665,7 @@ msgstr "描述可以留空。"
 #: src/mkvtoolnix-gui/merge/tab.cpp:354
 #, no-c-format
 msgid "The destination file name is invalid and must be fixed before you can start multiplexing or add a job to the job queue."
-msgstr "輸出檔名無效，必須要先修改，然後才能開始合併或將作業加入到作業佇列。"
+msgstr "輸出的檔案名稱無效，必須要先修改，然後才能開始合併或將作業加入到作業佇列。"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:50
 #, no-c-format
@@ -11726,9 +11725,9 @@ msgid "The end time must be greater than the start time."
 msgstr "結束時間必須大於開始時間。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:485
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The entries in the 'selected' list on the right will be shown at the top of all the drop-down boxes with countries and regions in the program."
-msgstr "右側 '選定' 清單中的國家將顯示在程式中所有國家下拉清單的頂部。"
+msgstr "右側 '已選' 的全部清單，將會在程式頂部裡國家與區域的下拉式選單中完整顯示。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:404
 #, no-c-format
@@ -11738,7 +11737,7 @@ msgstr "規則運算式必須擷取到至少一組左右括弧。"
 #: src/common/bcp47.cpp:218
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
-msgstr ""
+msgstr "擴展語言標籤的子標籤 '{}' 只能使用下列的首碼: {}."
 
 #: src/output/p_mpeg4_p2.cpp:367
 #, no-c-format
@@ -11788,9 +11787,9 @@ msgid "The file '%1' exists already and might be overwritten depending on the co
 msgstr "檔案 '%1' 已存在並且可能覆蓋取決於配置與原始檔案的內容。"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:165
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '%1' is an unsupported container format (%2)."
-msgstr "此檔案為不支援的容器格式 (%1)。"
+msgstr "檔案 '%1' 是不支援的容器格式 (%2) 。"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:547
 #, no-c-format
@@ -11798,9 +11797,9 @@ msgid "The file '%1' is neither a job queue file nor a settings file."
 msgstr "檔案 '%1' 既非作業佇列檔案，亦非設定檔案。"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:160
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '%1' was not recognized as a supported format (exit code: %2)."
-msgstr "此檔案無法辨識為支援的格式 (離開碼: %1)。"
+msgstr "檔案 '%1' 未被識別為已支援的格式 (結束代碼: %2) 。"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:49
 #, no-c-format
@@ -11864,9 +11863,9 @@ msgid "The file '{0}' could not be opened or parsed."
 msgstr "檔案 '{0}' 無法開啟或解析。"
 
 #: src/merge/output_control.cpp:1583
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
-msgstr "無法開啟檔案 '{0}' 進行讀取: {1}。\n"
+msgstr "檔案 '{0}' 無法重新命名為 '{1}'.\n"
 
 #: src/merge/output_control.cpp:1369
 #, no-c-format
@@ -11884,9 +11883,9 @@ msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "'{0}' 檔案不是 Matroska 檔，或者找不到該檔。\n"
 
 #: src/merge/output_control.cpp:1581
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
-msgstr "無法開啟檔案 '{0}' 進行讀取: {1}。\n"
+msgstr "檔案 '{0}' 已重新命名為 '{1}'.\n"
 
 #: src/extract/xtr_wav.cpp:135
 #, no-c-format
@@ -12059,7 +12058,7 @@ msgstr "嘗試開啟的檔案 (%1) 無法辨識為有效的 Matroska 檔或章�
 #: src/extract/extract_cli_parser.cpp:64
 #, no-c-format
 msgid "The first argument must be the name of source file."
-msgstr "第一個參數必須是輸入檔的名稱。"
+msgstr "第一個參數必須是原始檔案的名稱。"
 
 #: src/common/kax_file.cpp:51
 #, no-c-format
@@ -12139,7 +12138,7 @@ msgstr "第四種模式可解壓縮章節並將章節轉換成 XML 並將它們�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:447
 #, no-c-format
 msgid "The generated destination file name has the same base name as the source file name but with an extension based on the track types present in the file."
-msgstr "生成的輸出檔名有依據輸入檔名的相同基本名稱，但是副檔名則是由檔案中顯示的軌道類型決定。"
+msgstr "生成的輸出檔案名稱有依據原始檔案的相同基本名稱，但是副檔名則是由檔案中顯示的軌道類型決定。"
 
 #: src/merge/mkvmerge.cpp:1935
 #, no-c-format
@@ -12184,17 +12183,17 @@ msgstr "此軌道的語言，播放程式能使用此語言為使用者自動選
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:415
 #, no-c-format
 msgid "The language selected here is used for audio tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "此處選擇的語言用於輸入檔未指定語言屬性，而且無法從語言推斷可能使用語言的音訊軌。"
+msgstr "此處選擇的語言用於原始檔案未指定語言屬性，而且無法從語言推斷可能使用語言的音訊軌。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:427
 #, no-c-format
 msgid "The language selected here is used for subtitle tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "此處選擇的語言用於輸入檔未指定語言屬性，而且無法從語言推斷可能使用語言的字幕軌。"
+msgstr "此處選擇的語言用於原始檔案未指定語言屬性，而且無法從語言推斷可能使用語言的字幕軌。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:421
 #, no-c-format
 msgid "The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "此處選擇的語言用於輸入檔未指定語言屬性，而且無法從語言推斷可能使用語言的視訊軌。"
+msgstr "此處選擇的語言用於原始檔案未指定語言屬性，而且無法從語言推斷可能使用語言的視訊軌。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:202
 #, no-c-format
@@ -12202,14 +12201,14 @@ msgid "The language set here is also used when chapters are generated."
 msgstr "這裡設定的語言也將在產生章節時使用。"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:341
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The language tag is not valid."
-msgstr "空白檔名是無效的。\n"
+msgstr "無效的語言標籤。"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:341
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The language tag is valid."
-msgstr "探測百分比 '{0}' 無效。\n"
+msgstr "有效的語言標籤。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:479
 #, no-c-format
@@ -12312,7 +12311,7 @@ msgstr "用於寫入檔的應用程式或庫的名稱。"
 #: src/merge/mkvmerge.cpp:2036
 #, no-c-format
 msgid "The name of the destination file '{0}' and of one of the source files is the same."
-msgstr "輸出檔案 '{0}' 和其中一個原始檔案的名稱相同。"
+msgstr "輸出檔案 '{0}' 與其中一個原始檔案的名稱相同。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:319
 #, no-c-format
@@ -12496,7 +12495,7 @@ msgstr "若產生的數字位數小於指定數值，將會在前面 加入 0 �
 #: src/common/hacks.cpp:65
 #, no-c-format
 msgid "The resulting tracks will be broken: the official FLAC tools will not be able to decode them and seeking will not work as expected."
-msgstr ""
+msgstr "產生的軌道即將中斷: 官方的 FLAC 工具無法解析它們，並且無法預期執行。"
 
 #: src/common/xml/ebml_converter.cpp:341
 #, no-c-format
@@ -12557,7 +12556,7 @@ msgstr "附件 '{0}' 的大小為 0。\n"
 #: src/merge/reader_detection_and_creation.cpp:223
 #, no-c-format
 msgid "The source file '{0}' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
-msgstr "輸入檔案 '{0}' 無法成功開啟，或者無法透過定位至末端檢索。\n"
+msgstr "原始檔案 '{0}' 無法成功開啟，或者無法透過定位到末端檢索。\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:477
 #, no-c-format
@@ -12642,7 +12641,7 @@ msgstr "無法開啟暫存檔案 '{0}' 進行讀取: {1}。\n"
 #: src/extract/extract_cli_parser.cpp:97
 #, no-c-format
 msgid "The third mode extracts attachments from the source file."
-msgstr "第三種模式可從輸入檔擷取附件。"
+msgstr "第三種模式可從原始檔案擷取附件。"
 
 #: src/merge/timestamp_factory.cpp:67
 #, no-c-format
@@ -12702,7 +12701,7 @@ msgstr "此媒體流的時間戳記在檔案中途重置。這是不支援的。
 #: src/mkvtoolnix-gui/merge/output.cpp:270
 #, no-c-format
 msgid "The timestamps refer to the whole stream and not to each individual destination file."
-msgstr "此時間戳記涉及整個串流而不是單指個別輸出檔。"
+msgstr "此時間戳記涉及整個串流而不是單指個別輸出檔案。"
 
 #: src/common/property_element.cpp:111
 #, no-c-format
@@ -12712,7 +12711,7 @@ msgstr "整部影片的標題。"
 #: src/common/chapters/dvd.cpp:135
 #, no-c-format
 msgid "The title number '{0}' is higher than the number of titles on the DVD ({1})."
-msgstr ""
+msgstr "標題編號 '{0}' 大於 DVD 的標題編號 ({1}) 。"
 
 #: src/extract/tracks.cpp:118
 #, no-c-format
@@ -12720,9 +12719,9 @@ msgid "The track ID {0} does not have a valid CodecID.\n"
 msgstr "軌道識別碼 {0} 無有效的 CodecID。\n"
 
 #: src/merge/output_control.cpp:1091
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
-msgstr "軌道編號 {0} （自檔案 '{1}' ）無法追加檔案至軌道編號 {2} （自檔案 '{3}' ）。{4}\n"
+msgstr "無法從檔案 '{1}' 分割 軌道 ID {0} 。{2}\n"
 
 #: src/merge/output_control.cpp:673
 #, no-c-format
@@ -12781,34 +12780,34 @@ msgid "The value '{0}' is not a number.\n"
 msgstr "值 '{0}' 不是數字。\n"
 
 #: src/common/bcp47.cpp:148
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The value '{}' is not a valid ISO 15924 script code."
-msgstr "'{0}' 不是有效的 ISO 639-2 語言碼。"
+msgstr "值 '{}' 不是有效的 ISO 15924 指令代碼。"
 
 #: src/common/bcp47.cpp:162
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The value '{}' is not a valid ISO 3166-1 country code."
-msgstr "'{0}' 不是有效的 ccTLD 國家代碼。"
+msgstr "值 '{}' 不是有效的 ISO 3166-1 國家碼。"
 
 #: src/common/bcp47.cpp:135
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The value '{}' is not a valid ISO 639 language code."
-msgstr "'{0}' 不是有效的 ISO 639-2 語言碼。"
+msgstr "值 '{}' 為無效的 ISO 639 語言碼。"
 
 #: src/common/bcp47.cpp:180
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The value '{}' is not a valid UN M.49 country number code."
-msgstr "'{0}' 不是有效的 ccTLD 國家代碼。"
+msgstr "值 '{}' 不是有效的 UN M.49 國家數字碼。"
 
 #: src/common/bcp47.cpp:202
 #, no-c-format
 msgid "The value '{}' is not part of the IANA Language Subtag Registry for extended language subtags."
-msgstr ""
+msgstr "值 '{}' 不是擴展語言子標籤中的 IANA 語言子標記註冊表的一部分。"
 
 #: src/common/bcp47.cpp:203
 #, no-c-format
 msgid "The value '{}' is not part of the IANA Language Subtag Registry for language variants."
-msgstr ""
+msgstr "值 '{}' 不是擴展語言子標籤的 IANA 語言變體子標記註冊表的一部分。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:465
 #: src/mkvtoolnix-gui/merge/input.cpp:470
@@ -12826,7 +12825,7 @@ msgstr "此數值可以是負值，但注意任何畫面的時間戳記為負會
 #: src/common/bcp47.cpp:243
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
-msgstr ""
+msgstr "該值不符合 IETF BCP 47 / RFC 5646 語言標籤的一般結構。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:500
 #, no-c-format
@@ -12842,7 +12841,7 @@ msgstr "這些數值可在合併工具中輕鬆選擇。"
 #: src/common/bcp47.cpp:219
 #, no-c-format
 msgid "The variant '{}' must only be used with one of the following prefixes: {}."
-msgstr ""
+msgstr "變體 '{}' 只能使用下列的首碼: {}."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:703
 #, no-c-format
@@ -12906,7 +12905,7 @@ msgstr "出現一些影響表頭資訊儲存的表頭值錯誤。第一處錯誤
 #: src/propedit/propedit.cpp:122
 #, no-c-format
 msgid "There's not enough space at the beginning of the file to fit the updated 'EBML head' element in."
-msgstr "檔案開頭沒有足夠的空間來容納更新的 'EBML 前端' 元素。"
+msgstr "檔案開頭沒有足夠的空間來容納更新的 'EBML 前端' 元件。"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
 #, no-c-format
@@ -12923,7 +12922,7 @@ msgstr "這些選項專給程式開發使用。這些選項並沒有正式支援
 #: src/mkvtoolnix-gui/merge/input.cpp:1207
 #, no-c-format
 msgid "These aren't treated like other source files in MKVToolNix."
-msgstr "此類檔案在 MKVToolNix 中的處理方式與其他輸入檔案不同。"
+msgstr "此類檔案在 MKVToolNix 中的處理方式與其他原始檔案不同。"
 
 #: src/input/r_avi.cpp:523
 #: src/input/r_real.cpp:267
@@ -12979,7 +12978,7 @@ msgstr "這個 Ogg/OGM 檔案包含章節但無法解析。這可能是字元集
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:349
 #, no-c-format
 msgid "This amount is 0.3% of the source file's size or 10 MB, whichever is higher."
-msgstr "探測資料量為輸入檔案大小的 0.3% 或 10 MB，取其中較高者。"
+msgstr "探測資料量為原始檔案大小的 0.3% 或 10 MB，取其中較高者。"
 
 #: src/output/p_ac3.cpp:81
 #: src/output/p_mp3.cpp:71
@@ -13159,7 +13158,7 @@ msgstr "此選項控制如何建立章節名稱。"
 #: src/common/hacks.cpp:44
 #, no-c-format
 msgid "This option does nothing and is only kept for backwards compatibility."
-msgstr ""
+msgstr "此選不會有任何作用，但會保持回溯相容性。"
 
 #: src/common/hacks.cpp:63
 #, no-c-format
@@ -13274,7 +13273,7 @@ msgstr "這適用所有軌道類型。"
 #: src/merge/mkvmerge.cpp:2037
 #, no-c-format
 msgid "This would cause mkvmerge to overwrite one of your source files."
-msgstr "這將導致 mkvmerge 覆蓋使用者的其中一個輸入檔案。"
+msgstr "這將導致 mkvmerge 覆蓋使用者的其中一個原始檔案。"
 
 #: src/common/kax_element_names.cpp:264
 #, no-c-format
@@ -13318,7 +13317,7 @@ msgstr "標題"
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:51
 #, no-c-format
 msgid "To all destination files"
-msgstr "至所有輸出檔案"
+msgstr "到所有輸出檔案"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:778
 #, no-c-format
@@ -13783,7 +13782,7 @@ msgstr "使用指定語言的章節名稱，而非發現的第一個章節名稱
 #: src/merge/mkvmerge.cpp:1601
 #, no-c-format
 msgid "Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/H.264 codecs.\n"
-msgstr "使用 3 位元組的 NALU 長可能會導致某些 AVC/H.264 編碼器無法解碼該軌道。\n"
+msgstr "使用 3 位元組的 NALU 長可能會導致某些 AVC/H.264 編碼器無法編碼該軌道。\n"
 
 #: src/merge/generic_reader.h:42
 #, no-c-format
@@ -13814,7 +13813,7 @@ msgstr "VC-1"
 #: src/common/file_types.cpp:60
 #, no-c-format
 msgid "VC-1 elementary streams"
-msgstr "VC-1 基本流"
+msgstr "VC-1 基本串流"
 
 #: src/output/p_vpx.h:34
 #, no-c-format
@@ -13859,7 +13858,7 @@ msgstr "合併作業的變數"
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:217
 #, no-c-format
 msgid "Variants"
-msgstr ""
+msgstr "變體"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:118
 #, no-c-format
@@ -14004,9 +14003,9 @@ msgid "Video track %1"
 msgstr "視訊軌 %1"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1815
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video tracks:"
-msgstr "視訊軌(&V)："
+msgstr "視訊軌:"
 
 #: src/common/property_element.cpp:170
 #, no-c-format
@@ -14299,7 +14298,7 @@ msgstr "當加入檔案時掃描檔名。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:468
 #, no-c-format
 msgid "When adding source files all tracks are normally set to be copied into the destination file."
-msgstr "加入檔案時通常所有軌道都會被設定為用於合併到輸出檔案中。"
+msgstr "加入原始檔案時，通常所有軌道都會被設定為用於合併到輸出檔案中。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:224
 #, no-c-format
@@ -14319,7 +14318,7 @@ msgstr "在啟用此選項後，當使用者新增包含此類標題的檔時，
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:426
 #, no-c-format
 msgid "When the user adds such a file the track's language input is set to the language property from the source file."
-msgstr "當使用者加入檔案時軌道語言會設定成輸入檔案的語言屬性。"
+msgstr "當使用者加入檔案時軌道語言會設定成原始檔案的語言屬性。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:500
 #, no-c-format
@@ -14399,12 +14398,12 @@ msgstr "設為 \"建立新增設定\" 時，將會新增一組全新合併設定
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:371
 #, no-c-format
 msgid "With \"remove source files\" all source files will be removed."
-msgstr "設為 \"移除輸入檔案\" 時，所有輸入檔案將會被移除。"
+msgstr "設為 \"移除原始檔案\" 時，所有原始檔案將會被移除。"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:429
 #, no-c-format
 msgid "With the current multiplex settings the destination file will not contain an audio track."
-msgstr "使用目前的合併設定，輸出檔並不會包含聲音軌。"
+msgstr "使用目前的合併設定，輸出檔案並不會包含聲音軌。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:476
 #, no-c-format
@@ -14600,7 +14599,7 @@ msgstr "必須輸入範圍從 1000 到 10000000 的一個數值或者是神奇�
 #: src/mkvtoolnix-gui/merge/tab.cpp:342
 #, no-c-format
 msgid "You have to set the destination file name before you can start multiplexing or add a job to the job queue."
-msgstr "開始合併或加入作業到作業佇列中之前，必須設定輸出檔名。"
+msgstr "開始合併或加入作業到作業佇列中之前，必須設定輸出檔案名稱。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:260
 #, no-c-format
@@ -14853,9 +14852,9 @@ msgid "inflateInit() failed. Result: {0}\n"
 msgstr "inflateInit() 失敗。結果: {0}\n"
 
 #: src/propedit/change.cpp:395
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "invalid language tag '{0}': {1}"
-msgstr "在 '{0} {1}' 中無效的軌道 ID 或語言碼。\n"
+msgstr "無效語言標籤 '{0}': {1}"
 
 #: src/common/kax_info.cpp:1002
 #, no-c-format
@@ -14863,14 +14862,14 @@ msgid "key, "
 msgstr "關鍵影格, "
 
 #: src/merge/mkvmerge.cpp:1395
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "language"
 msgstr "語言"
 
 #: src/common/kax_info.cpp:621
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "language (IETF BCP 47): {0}"
-msgstr "語言標間 (IETF)"
+msgstr "語言 (IETF BCP 47): {0}"
 
 #: src/common/kax_info.cpp:620
 #, no-c-format
@@ -15096,7 +15095,7 @@ msgstr "mkvmerge -o out [全域選項] [選項1] <檔案1> [@optionsfile ...]\n"
 #: src/mkvtoolnix-gui/merge/output.cpp:232
 #, no-c-format
 msgid "mkvmerge also turns this on if the destination file name's extension is \"webm\"."
-msgstr "如果輸出檔名的副檔名為 \"webm\" ， mkvmerge 也會開啟此項。"
+msgstr "如果輸出檔案名稱的副檔名為 \"webm\" ， mkvmerge 也會開啟此項。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:222
 #, no-c-format
@@ -15223,7 +15222,7 @@ msgstr "無錯誤發生"
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:22
 #, no-c-format
 msgid "no language selected"
-msgstr ""
+msgstr "未選擇語言"
 
 #: src/common/kax_info.cpp:798
 #, no-c-format
