@@ -59,7 +59,7 @@ xtr_hevc_c::unwrap_write_hevcc(bool skip_sei) {
       auto nal_unit_type = (buf[pos + 2] >> 1) & 0x3f;
 
       if (skip_sei && (HEVC_NALU_TYPE_PREFIX_SEI == nal_unit_type))
-        pos += nal_size;
+        pos += nal_size + 2;
 
       else if (!write_nal(buf, pos, priv_size, 2))
         return;

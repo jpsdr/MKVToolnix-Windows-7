@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* mkvextract: h.265/HEVC extraction: the code for skipping extraction of
+  prefix SEI NALUs in the first frame was skipping two bytes too few,
+  resulting in broken processing of all following bytes. Patch by Mike Chen.
+
+
 # Version 51.0.0 "I Wish" 2020-10-04
 
 ## New features and enhancements
