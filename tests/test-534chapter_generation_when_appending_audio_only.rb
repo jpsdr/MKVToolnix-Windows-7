@@ -1,6 +1,4 @@
 #!/usr/bin/ruby -w
-# coding: utf-8
-
 file = "data/simple/v.mp3"
 
 # T_534chapter_generation_when_appending_audio_only

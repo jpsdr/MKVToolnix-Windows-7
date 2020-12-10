@@ -1,4 +1,3 @@
-# coding: utf-8
 def parse_news file_name
   news         = []
   current_line = []

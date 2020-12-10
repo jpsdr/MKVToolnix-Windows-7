@@ -1,5 +1,3 @@
-# coding: utf-8
-
 require "shellwords"
 
 $use_tempfile_for_run = defined?(RUBY_PLATFORM) && /mingw/i.match(RUBY_PLATFORM)

@@ -1,4 +1,3 @@
-# coding: utf-8
 class Controller
   attr_accessor :test_failed, :test_new, :test_date_after, :teset_date_before, :update_failed, :num_failed, :record_duration
   attr_reader   :num_threads, :results

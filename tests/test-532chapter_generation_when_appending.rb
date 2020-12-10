@@ -1,6 +1,4 @@
 #!/usr/bin/ruby -w
-# coding: utf-8
-
 file = "data/avi/v-h264-aac.avi"
 
 # T_532chapter_generation_when_appending

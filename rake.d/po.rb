@@ -1,5 +1,3 @@
-# coding: utf-8
-
 def format_string_for_po str
   return '"' + str.gsub(/"/, '\"') + '"' unless /\\n./.match(str)
 
