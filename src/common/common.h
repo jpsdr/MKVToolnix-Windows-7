@@ -18,8 +18,6 @@
 
 #include <type_traits>
 
-#undef __STRICT_ANSI__
-
 #include <algorithm>
 #include <functional>
 #include <memory>

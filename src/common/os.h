@@ -12,8 +12,6 @@
 
 #pragma once
 
-#undef __STRICT_ANSI__
-
 #include "config.h"
 
 // For PRId64 and PRIu64:
