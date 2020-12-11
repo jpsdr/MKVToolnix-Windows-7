@@ -1,5 +1,5 @@
-export TARGET=$HOME/net/home/opt/mac
-export SRCDIR=$HOME/net/home/prog/mac/source
+export TARGET=$HOME/net/sweet-chili/home/mosu/opt/mac
+export SRCDIR=$HOME/net/sweet-chili/home/mosu/prog/mac/source
 export PACKAGE_DIR=$HOME/prog/mac/packages
 export DOCBOOK_XSL_ROOT_DIR=$HOME/prog/mac/xsl-stylesheets
 export CMPL=$HOME/tmp/compile
