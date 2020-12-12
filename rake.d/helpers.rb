@@ -359,7 +359,7 @@ def update_qrc
         next if seen[icon] || warned[icon]
         next if %r{%}.match(icon)
 
-        puts "Warning: no double-sized variant found for '#{icon}' (found first in '#{file}:#{line_num}')"
+        puts "#{file}:#{line_num}: warning: no double-sized variant found for '#{icon}'"
         warned[icon] = true
       end
     end
