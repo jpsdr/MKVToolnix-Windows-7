@@ -51,7 +51,7 @@ xtr_aac_c::create_file(xtr_base_c *master,
       mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' contains invalid \"codec private\" data for AAC.\n"), m_tid, m_codec_id));
 
     m_id       = 0;
-    m_channels = audio_config->channels;
+    m_channels = audio_config->channels == 8 ? 7 : audio_config->channels;
     m_profile  = audio_config->profile;
 
     if (audio_config->ga_specific_config_contains_program_config_element) {
