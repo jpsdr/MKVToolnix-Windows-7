@@ -1057,10 +1057,10 @@ $common_libs += [:cmark]   if c?(:USE_QT)
 $common_libs += [:dvdread] if c?(:USE_DVDREAD)
 $common_libs += [:exchndl] if c?(:USE_DRMINGW) && $building_for[:windows]
 if !$libmtxcommon_as_dll
-  $common_libs += [
+  $common_libs = [
     :matroska,
     :ebml,
-  ]
+  ] + $common_libs
 end
 $common_libs += [ :CoreFoundation ] if $building_for[:macos]
 
