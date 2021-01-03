@@ -9,6 +9,8 @@
   file names selected for saving on platforms that don't add one itself
   (e.g. GNOME). For example, when saving multiplexer settings the extension
   `.mtxcfg` will be added. Implements #2983.
+* MKVToolNix GUI: added an option to the preferences for the window to stay on
+  top of other windows. Implements #2967.
 
 ## Bug fixes
 

@@ -853,6 +853,8 @@ PreferencesDialog::setupFontAndScaling() {
 #if !defined(SYS_WINDOWS)
   ui->cbGuiDisableDarkStyleSheet->setVisible(false);
 #endif
+
+  ui->cbGuiStayOnTop->setChecked(m_cfg.m_uiStayOnTop);
 }
 
 void
@@ -863,6 +865,7 @@ PreferencesDialog::save() {
   m_cfg.m_bcp47LanguageEditingMode                      = static_cast<Util::Settings::BCP47LanguageEditingMode>(ui->cbGuiBCP47LanguageEditingMode->currentData().toInt());
   m_cfg.m_uiFontFamily                                  = ui->fcbGuiFontFamily->currentFont().family();
   m_cfg.m_uiFontPointSize                               = ui->sbGuiFontPointSize->value();
+  m_cfg.m_uiStayOnTop                                   = ui->cbGuiStayOnTop->isChecked();
   m_cfg.m_uiDisableHighDPIScaling                       = ui->cbGuiDisableHighDPIScaling->isChecked();
   m_cfg.m_uiDisableDarkStyleSheet                       = ui->cbGuiDisableDarkStyleSheet->isChecked();
   m_cfg.m_uiDisableToolTips                             = ui->cbGuiDisableToolTips->isChecked();

@@ -118,6 +118,7 @@ char const * const s_valUiDisableHighDPIScaling             = "uiDisableHighDPIS
 char const * const s_valUiDisableToolTips                   = "uiDisableToolTips";
 char const * const s_valUiFontFamily                        = "uiFontFamily";
 char const * const s_valUiFontPointSize                     = "uiFontPointSize";
+char const * const s_valUiStayOnTop                         = "uiStayOnTop";
 char const * const s_valUiLocale                            = "uiLocale";
 char const * const s_valUniqueOutputFileNames               = "uniqueOutputFileNames";
 char const * const s_valUseDefaultJobDescription            = "useDefaultJobDescription";

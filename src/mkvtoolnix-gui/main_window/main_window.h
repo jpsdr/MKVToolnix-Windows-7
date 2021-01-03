@@ -83,6 +83,7 @@ public Q_SLOTS:
   virtual void showCodeOfConduct();
   virtual void showSystemInformation();
   virtual void setToolSelectorVisibility();
+  virtual void setStayOnTopStatus();
   virtual void raiseAndActivate();
 
 #if defined(HAVE_UPDATE_CHECK)

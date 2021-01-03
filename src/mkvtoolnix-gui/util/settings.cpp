@@ -409,6 +409,7 @@ Settings::load() {
   m_uiDisableToolTips                  = reg.value(s_valUiDisableToolTips).toBool();
   m_uiFontFamily                       = reg.value(s_valUiFontFamily,    defaultFont.family()).toString();
   m_uiFontPointSize                    = reg.value(s_valUiFontPointSize, defaultFont.pointSize()).toInt();
+  m_uiStayOnTop                        = reg.value(s_valUiStayOnTop,     false).toBool();
 
   reg.beginGroup(s_grpUpdates);
   m_checkForUpdates                    = reg.value(s_valCheckForUpdates, true).toBool();
@@ -761,6 +762,7 @@ Settings::save()
   reg.setValue(s_valUiDisableToolTips,                  m_uiDisableToolTips);
   reg.setValue(s_valUiFontFamily,                       m_uiFontFamily);
   reg.setValue(s_valUiFontPointSize,                    m_uiFontPointSize);
+  reg.setValue(s_valUiStayOnTop,                        m_uiStayOnTop);
 
   reg.setValue(s_valMediaInfoExe,                       m_mediaInfoExe);
 

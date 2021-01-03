@@ -194,6 +194,7 @@ public:
   bool m_showToolSelector, m_warnBeforeClosingModifiedTabs, m_warnBeforeAbortingJobs, m_warnBeforeOverwriting, m_showMoveUpDownButtons;
   QString m_uiLocale, m_uiFontFamily;
   int m_uiFontPointSize;
+  bool m_uiStayOnTop;
 
   bool m_enableMuxingTracksByLanguage, m_enableMuxingAllVideoTracks, m_enableMuxingAllAudioTracks, m_enableMuxingAllSubtitleTracks;
   QStringList m_enableMuxingTracksByTheseLanguages;

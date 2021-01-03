@@ -86,6 +86,7 @@ MainWindow::MainWindow(QWidget *parent)
   p->ui->setupUi(this);
 
   setToolSelectorVisibility();
+  setStayOnTopStatus();
   setupAuxiliaryWidgets();
   setupToolSelector();
   setupHelpURLs();
@@ -225,6 +226,7 @@ MainWindow::setupConnections() {
 
   // Auxiliary actions:
   connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::setToolSelectorVisibility);
+  connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::setStayOnTopStatus);
   connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::reinitializeLanguageLists);
   connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::setupAppearance);
 
@@ -628,6 +630,19 @@ MainWindow::setToolSelectorVisibility() {
   auto p = p_func();
 
   p->ui->tool->tabBar()->setVisible(Util::Settings::get().m_showToolSelector);
+}
+
+void
+MainWindow::setStayOnTopStatus() {
+  auto oldFlags = windowFlags();
+  auto newFlags = Util::Settings::get().m_uiStayOnTop ? oldFlags |  Qt::WindowStaysOnTopHint
+                :                                       oldFlags & ~Qt::WindowStaysOnTopHint;
+
+  if (oldFlags == newFlags)
+    return;
+
+  setWindowFlags(newFlags);
+  show();
 }
 
 std::optional<bool>
