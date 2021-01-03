@@ -390,7 +390,7 @@ void
 Tab::onSaveOutput() {
   auto p        = p_func();
   auto &cfg     = Util::Settings::get();
-  auto fileName = Util::getSaveFileName(this, QY("Save job output"), cfg.lastOpenDirPath(), QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"));
+  auto fileName = Util::getSaveFileName(this, QY("Save job output"), cfg.lastOpenDirPath(), QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"), Q("txt"));
 
   if (fileName.isEmpty())
     return;

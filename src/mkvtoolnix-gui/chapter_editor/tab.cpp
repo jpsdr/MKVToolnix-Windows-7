@@ -742,7 +742,7 @@ Tab::saveAsXmlImpl(bool requireNewFileName) {
   saveAsImpl(requireNewFileName, [this, p](bool doRequireNewFileName, QString &newFileName) -> bool {
     if (doRequireNewFileName) {
       auto defaultFilePath = !p->fileName.isEmpty() ? Util::dirPath(QFileInfo{p->fileName}.path()) : Util::Settings::get().lastOpenDirPath();
-      newFileName          = Util::getSaveFileName(this, QY("Save chapters as XML"), defaultFilePath, QY("XML chapter files") + Q(" (*.xml);;") + QY("All files") + Q(" (*)"));
+      newFileName          = Util::getSaveFileName(this, QY("Save chapters as XML"), defaultFilePath, QY("XML chapter files") + Q(" (*.xml);;") + QY("All files") + Q(" (*)"), Q("xml"));
 
       if (newFileName.isEmpty())
         return false;

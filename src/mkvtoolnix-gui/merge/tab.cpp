@@ -214,7 +214,7 @@ Tab::onSaveConfig() {
 void
 Tab::onSaveOptionFile() {
   auto &settings = Util::Settings::get();
-  auto fileName  = Util::getSaveFileName(this, QY("Save option file"), settings.m_lastConfigDir.path(), QY("MKVToolNix option files (JSON-formatted)") + Q(" (*.json);;") + QY("All files") + Q(" (*)"));
+  auto fileName  = Util::getSaveFileName(this, QY("Save option file"), settings.m_lastConfigDir.path(), QY("MKVToolNix option files (JSON-formatted)") + Q(" (*.json);;") + QY("All files") + Q(" (*)"), Q("json"));
   if (fileName.isEmpty())
     return;
 
@@ -229,7 +229,7 @@ void
 Tab::onSaveConfigAs() {
   auto &p        = *p_func();
   auto &settings = Util::Settings::get();
-  auto fileName  = Util::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"));
+  auto fileName  = Util::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"), Q("mtxcfg"));
   if (fileName.isEmpty())
     return;
 
@@ -291,7 +291,8 @@ Tab::getOpenFileName(QString const &title,
 QString
 Tab::getSaveFileName(QString const &title,
                      QString const &filter,
-                     QLineEdit *lineEdit) {
+                     QLineEdit *lineEdit,
+                     QString const &defaultSuffix) {
   auto fullFilter = filter;
   if (!fullFilter.isEmpty())
     fullFilter += Q(";;");
@@ -301,7 +302,7 @@ Tab::getSaveFileName(QString const &title,
   auto dir       = !lineEdit->text().isEmpty()                                                               ? lineEdit->text()
                  : !settings.m_lastOutputDir.path().isEmpty() && (settings.m_lastOutputDir.path() != Q(".")) ? Util::dirPath(settings.m_lastOutputDir.path())
                  :                                                                                             Util::dirPath(settings.m_lastOpenDir.path());
-  auto fileName  = Util::getSaveFileName(this, title, dir, fullFilter);
+  auto fileName  = Util::getSaveFileName(this, title, dir, fullFilter, defaultSuffix);
   if (fileName.isEmpty())
     return fileName;
 

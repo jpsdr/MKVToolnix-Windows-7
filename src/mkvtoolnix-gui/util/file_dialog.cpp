@@ -80,9 +80,18 @@ getSaveFileName(QWidget *parent,
                 QString const &caption,
                 QString const &dir,
                 QString const &filter,
+                QString const &defaultSuffix,
                 QString *selectedFilter,
                 QFileDialog::Options options) {
-  return QDir::toNativeSeparators(QFileDialog::getSaveFileName(parent, caption, sanitizeDirectory(dir, true), filter, selectedFilter, options & QFileDialog::DontUseCustomDirectoryIcons));
+  auto result = QDir::toNativeSeparators(QFileDialog::getSaveFileName(parent, caption, sanitizeDirectory(dir, true), filter, selectedFilter, options & QFileDialog::DontUseCustomDirectoryIcons));
+
+  if (result.isEmpty())
+    return result;
+
+  if (!defaultSuffix.isEmpty() && QFileInfo{result}.suffix().isEmpty())
+    result += Q(".") + defaultSuffix;
+
+  return result;
 }
 
 QString

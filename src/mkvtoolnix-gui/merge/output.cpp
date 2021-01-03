@@ -432,7 +432,7 @@ void
 Tab::onBrowseOutput() {
   auto &p       = *p_func();
   auto filter   = p.config.m_webmMode ? QY("WebM files") + Q(" (*.webm)") : QY("Matroska files") + Q(" (*.mkv *.mka *.mks *.mk3d)");
-  auto fileName = getSaveFileName(QY("Select destination file name"), filter, p.ui->output);
+  auto fileName = getSaveFileName(QY("Select destination file name"), filter, p.ui->output, Q("mkv"));
   if (fileName.isEmpty())
     return;
 

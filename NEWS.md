@@ -5,6 +5,10 @@
 * MKVToolNix GUI: job queue: the maximum number of jobs to run concurrently
   can now be increased in the preferences. The default remains
   at 1. Implements #2984.
+* MKVToolNix GUI: the GUI will now add a context-specific default extension to
+  file names selected for saving on platforms that don't add one itself
+  (e.g. GNOME). For example, when saving multiplexer settings the extension
+  `.mtxcfg` will be added. Implements #2983.
 
 ## Bug fixes
 
