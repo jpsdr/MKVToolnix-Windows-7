@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: job queue: the maximum number of jobs to run concurrently
+  can now be increased in the preferences. The default remains
+  at 1. Implements #2984.
+
 ## Bug fixes
 
 * mkvextract: h.265/HEVC extraction: the code for skipping extraction of

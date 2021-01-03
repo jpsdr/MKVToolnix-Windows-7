@@ -194,6 +194,7 @@ Job::setStatus(Status status) {
   if (oldStatus == Running)
     runProgramsAfterCompletion();
 
+  qDebug() << "setStatus emitting statusChanged(" << oldStatus << status << ")";
   Q_EMIT statusChanged(p->id, oldStatus, status);
 }
 

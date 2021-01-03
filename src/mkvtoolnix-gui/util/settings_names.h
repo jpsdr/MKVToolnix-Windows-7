@@ -62,6 +62,7 @@ char const * const s_valLastConfigDir                       = "lastConfigDir";
 char const * const s_valLastOpenDir                         = "lastOpenDir";
 char const * const s_valLastOutputDir                       = "lastOutputDir";
 char const * const s_valLastUpdateCheck                     = "lastUpdateCheck";
+char const * const s_valMaximumConcurrentJobs               = "maximumConcurrentJobs";
 char const * const s_valMediaInfoExe                        = "mediaInfoExe";
 char const * const s_valMergeAddBlurayCovers                = "mergeAddBlurayCovers";
 char const * const s_valMergeAddingAppendingFilesPolicy     = "mergeAddingAppendingFilesPolicy";

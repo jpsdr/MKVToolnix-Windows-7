@@ -383,6 +383,7 @@ Settings::load() {
   m_removeOutputFileOnJobFailure       = reg.value(s_valRemoveOutputFileOnJobFailure,       false).toBool();
   m_jobRemovalPolicy                   = static_cast<JobRemovalPolicy>(reg.value(s_valJobRemovalPolicy,       static_cast<int>(JobRemovalPolicy::Never)).toInt());
   m_jobRemovalOnExitPolicy             = static_cast<JobRemovalPolicy>(reg.value(s_valJobRemovalOnExitPolicy, static_cast<int>(JobRemovalPolicy::Never)).toInt());
+  m_maximumConcurrentJobs              = reg.value(s_valMaximumConcurrentJobs, 1).toUInt();
   m_removeOldJobs                      = reg.value(s_valRemoveOldJobs,                                  true).toBool();
   m_removeOldJobsDays                  = reg.value(s_valRemoveOldJobsDays,                              14).toInt();
 
@@ -739,6 +740,7 @@ Settings::save()
   reg.setValue(s_valRemoveOutputFileOnJobFailure,       m_removeOutputFileOnJobFailure);
   reg.setValue(s_valJobRemovalPolicy,                   static_cast<int>(m_jobRemovalPolicy));
   reg.setValue(s_valJobRemovalOnExitPolicy,             static_cast<int>(m_jobRemovalOnExitPolicy));
+  reg.setValue(s_valMaximumConcurrentJobs,              m_maximumConcurrentJobs);
   reg.setValue(s_valRemoveOldJobs,                      m_removeOldJobs);
   reg.setValue(s_valRemoveOldJobsDays,                  m_removeOldJobsDays);
 

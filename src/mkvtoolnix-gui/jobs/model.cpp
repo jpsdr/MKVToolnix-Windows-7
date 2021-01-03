@@ -292,8 +292,8 @@ Model::onStatusChanged(uint64_t id,
     m_queueStartTime = QDateTime::currentDateTime();
     m_queueNumDone   = 0;
 
+    qDebug() << "onStatusChanged emitting queueStatusChanged(Running)";
     Q_EMIT queueStatusChanged(QueueStatus::Running);
-
   }
 
   if ((Job::Running == oldStatus) && (Job::Running != newStatus))
@@ -389,6 +389,51 @@ Model::updateNumUnacknowledgedWarningsOrErrors() {
 }
 
 void
+Model::startJobInSingleJobMode(Job &job) {
+  MainWindow::watchCurrentJobTab()->connectToJob(job);
+
+  job.start();
+
+  updateJobStats();
+}
+
+void
+Model::startJobsInMultiJobMode(QVector<Job *> const &jobs,
+                               unsigned int numRunning) {
+  auto maxConcurrent = Util::Settings::get().m_maximumConcurrentJobs;
+
+  qDebug() << "startJobsInMultiJobMode numRunning" << numRunning << "maxConcurrent" << maxConcurrent;
+
+  if (numRunning >= maxConcurrent)
+    return;
+
+  auto numToStart = std::min<unsigned int>(jobs.size(), maxConcurrent - numRunning);
+
+  qDebug() << "startJobsInMultiJobMode numToStart" << numToStart;
+
+  for (auto idx = 0u; idx < numToStart; ++idx)
+    startJobImmediately(*jobs[idx]);
+}
+
+void
+Model::cleanupAtEndOfQueue() {
+  qDebug() << "cleanupAtEndOfQueue";
+
+  // All jobs are done. Clear total progress.
+  m_toBeProcessed.clear();
+  updateProgress();
+  updateJobStats();
+
+  auto wasRunning = m_running;
+  m_running       = false;
+
+  if (wasRunning) {
+    qDebug() << "cleanupAtEndOfQueue emitting queueStatsChanged(Stopped)";
+    Q_EMIT queueStatusChanged(QueueStatus::Stopped);
+  }
+}
+
+void
 Model::startNextAutoJob() {
   if (m_dontStartJobsNow)
     return;
@@ -400,38 +445,42 @@ Model::startNextAutoJob() {
   if (!m_started)
     return;
 
-  Job *toStart = nullptr;
-  for (auto row = 0, numRows = rowCount(); row < numRows; ++row) {
-    auto job = m_jobsById[idFromRow(row)].get();
+  QVector<Job *> toStart;
+  auto numRunning = 0u;
 
-    if (Job::Running == job->status())
-      return;
-    if (!toStart && (Job::PendingAuto == job->status()))
-      toStart = job;
+  for (auto row = 0, numRows = rowCount(); row < numRows; ++row) {
+    auto job    = m_jobsById[idFromRow(row)].get();
+    auto status = job->status();
+
+    if (Job::PendingAuto == status)
+      toStart << job;
+
+    else if (Job::Running == status)
+      ++numRunning;
   }
 
-  if (toStart) {
-    MainWindow::watchCurrentJobTab()->connectToJob(*toStart);
+  qDebug() << "startNextAutoJob numRunning" << numRunning << "toStart" << toStart;
 
-    toStart->start();
-    updateJobStats();
+  if (toStart.isEmpty()) {
+    if (!numRunning)
+      cleanupAtEndOfQueue();
     return;
   }
 
-  // All jobs are done. Clear total progress.
-  m_toBeProcessed.clear();
-  updateProgress();
-  updateJobStats();
+  if (Util::Settings::get().m_maximumConcurrentJobs > 1) {
+    startJobsInMultiJobMode(toStart, numRunning);
+    return;
+  }
 
-  auto wasRunning = m_running;
-  m_running       = false;
-  if (wasRunning)
-    Q_EMIT queueStatusChanged(QueueStatus::Stopped);
+  if (!numRunning)
+    startJobInSingleJobMode(*toStart[0]);
 }
 
 void
 Model::startJobImmediately(Job &job) {
   QMutexLocker locked{&m_mutex};
+
+  qDebug() << "startJobImmediately" << &job;
 
   MainWindow::watchCurrentJobTab()->disconnectFromJob(job);
   MainWindow::watchJobTool()->viewOutput(job);
@@ -453,8 +502,10 @@ Model::stop() {
 
   auto wasRunning = m_running;
   m_running       = false;
-  if (wasRunning)
+  if (wasRunning) {
+    qDebug() << "stop emitting queueStatusChanged(Stopped)";
     Q_EMIT queueStatusChanged(QueueStatus::Stopped);
+  }
 }
 
 void

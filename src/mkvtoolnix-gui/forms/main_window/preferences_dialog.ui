@@ -832,7 +832,7 @@
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultAudioTrackLanguage">
+               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultAudioTrackLanguage" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -842,7 +842,7 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultSubtitleTrackLanguage">
+               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultSubtitleTrackLanguage" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -852,7 +852,7 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultVideoTrackLanguage">
+               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultVideoTrackLanguage" native="true">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -1729,7 +1729,7 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwCEDefaultLanguage">
+            <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwCEDefaultLanguage" native="true">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -1833,27 +1833,29 @@
            </item>
            <item>
             <layout class="QGridLayout" name="gridLayout_7">
-             <item row="0" column="1">
-              <widget class="QComboBox" name="cbGuiJobRemovalPolicy">
-               <item>
-                <property name="text">
-                 <string>Only if the job completed successfully</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Even if there were warnings</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Even if there were errors</string>
-                </property>
-               </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="cbGuiRemoveOldJobs">
+               <property name="text">
+                <string>Remove com&amp;pleted jobs older than x days:</string>
+               </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="cbGuiJobRemovalOnExitPolicy">
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="cbGuiRemoveJobsOnExit">
+               <property name="text">
+                <string>Remove completed jobs from queue on &amp;exit:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="cbGuiRemoveJobs">
+               <property name="text">
+                <string>&amp;Remove job from queue after completion:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="cbGuiJobRemovalPolicy">
                <item>
                 <property name="text">
                  <string>Only if the job completed successfully</string>
@@ -1884,24 +1886,39 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="cbGuiRemoveJobs">
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cbGuiJobRemovalOnExitPolicy">
+               <item>
+                <property name="text">
+                 <string>Only if the job completed successfully</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Even if there were warnings</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Even if there were errors</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_22">
                <property name="text">
-                <string>&amp;Remove job from queue after completion:</string>
+                <string>Ma&amp;ximum number of concurrent jobs:</string>
+               </property>
+               <property name="buddy">
+                <cstring>sbGuiMaximumConcurrentJobs</cstring>
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="cbGuiRemoveJobsOnExit">
-               <property name="text">
-                <string>Remove completed jobs from queue on &amp;exit:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="cbGuiRemoveOldJobs">
-               <property name="text">
-                <string>Remove com&amp;pleted jobs older than x days:</string>
+             <item row="3" column="1">
+              <widget class="QSpinBox" name="sbGuiMaximumConcurrentJobs">
+               <property name="minimum">
+                <number>1</number>
                </property>
               </widget>
              </item>
@@ -2097,11 +2114,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>mtx::gui::Util::LanguageDisplayWidget</class>
-   <extends>QForm</extends>
-   <header>mkvtoolnix-gui/util/language_display_widget.h</header>
-  </customwidget>
-  <customwidget>
    <class>mtx::gui::Util::CharacterSetComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/character_set_combo_box.h</header>
@@ -2134,6 +2146,11 @@
    <extends>QWidget</extends>
    <header>mkvtoolnix-gui/util/string_list_configuration_widget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::LanguageDisplayWidget</class>
+   <extends>QWidget</extends>
+   <header>mkvtoolnix-gui/util/language_display_widget.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -2228,6 +2245,7 @@
   <tabstop>cbGuiJobRemovalOnExitPolicy</tabstop>
   <tabstop>cbGuiRemoveOldJobs</tabstop>
   <tabstop>sbGuiRemoveOldJobsDays</tabstop>
+  <tabstop>sbGuiMaximumConcurrentJobs</tabstop>
   <tabstop>pbJobsAddProgram</tabstop>
   <tabstop>cbOftenUsedCharacterSetsOnly</tabstop>
   <tabstop>cbOftenUsedRegionsOnly</tabstop>

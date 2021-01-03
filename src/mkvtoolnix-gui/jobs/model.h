@@ -124,6 +124,10 @@ protected:
 
   void sortJobs(QList<Job *> &jobs, bool reverse);
 
+  void startJobInSingleJobMode(Job &job);
+  void startJobsInMultiJobMode(QVector<Job *> const &jobs, unsigned int numRunning);
+  void cleanupAtEndOfQueue();
+
 public:
   static void convertJobQueueToSeparateIniFiles();
   static bool canJobBeRemovedAccordingToPolicy(Job::Status status, Util::Settings::JobRemovalPolicy policy);

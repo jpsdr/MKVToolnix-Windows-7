@@ -72,6 +72,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbGuiRemoveOutputFileOnJobFailure->setChecked(m_cfg.m_removeOutputFileOnJobFailure);
   ui->cbGuiRemoveOldJobs->setChecked(m_cfg.m_removeOldJobs);
   ui->sbGuiRemoveOldJobsDays->setValue(m_cfg.m_removeOldJobsDays);
+  ui->sbGuiMaximumConcurrentJobs->setValue(m_cfg.m_maximumConcurrentJobs);
   adjustRemoveOldJobsControls();
   setupJobRemovalPolicy();
 
@@ -883,6 +884,7 @@ PreferencesDialog::save() {
   m_cfg.m_jobRemovalOnExitPolicy                        = static_cast<Util::Settings::JobRemovalPolicy>(idxOnExit);
   m_cfg.m_removeOldJobs                                 = ui->cbGuiRemoveOldJobs->isChecked();
   m_cfg.m_removeOldJobsDays                             = ui->sbGuiRemoveOldJobsDays->value();
+  m_cfg.m_maximumConcurrentJobs                         = ui->sbGuiMaximumConcurrentJobs->value();
 
   m_cfg.m_chapterNameTemplate                           = ui->leCENameTemplate->text();
   m_cfg.m_ceTextFileCharacterSet                        = ui->cbCETextFileCharacterSet->currentData().toString();
