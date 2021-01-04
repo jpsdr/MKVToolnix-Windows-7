@@ -24,7 +24,7 @@
 * libEBML v1.4.1 is now required due to a bug in libEBML that caused pointers
   to just-freed memory being returned to the caller under certain invalid data
   constellations, causing use-after-free errors in all of MKVToolNix's
-  programs. Fixes #2990.
+  programs. Fixes #2989.
 
 
 # Version 51.0.0 "I Wish" 2020-10-04
