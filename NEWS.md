@@ -1,4 +1,4 @@
-# Version ?
+# Version 52.0.0 "Secret For The Mad" 2021-01-04
 
 ## New features and enhancements
 

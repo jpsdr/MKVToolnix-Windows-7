@@ -24,7 +24,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-#define VERSIONNAME "I Wish"
+#define VERSIONNAME "Secret For The Mad"
 
 version_number_t::version_number_t(const std::string &s)
   : valid{}
