@@ -19,6 +19,13 @@
   resulting in broken processing of all following bytes. Patch by Mike Chen.
 * libEBML: the optional, bundled version of libEBML was updated to v1.4.1.
 
+## Build system changes
+
+* libEBML v1.4.1 is now required due to a bug in libEBML that caused pointers
+  to just-freed memory being returned to the caller under certain invalid data
+  constellations, causing use-after-free errors in all of MKVToolNix's
+  programs. Fixes #2990.
+
 
 # Version 51.0.0 "I Wish" 2020-10-04
 
