@@ -17,6 +17,7 @@
 * mkvextract: h.265/HEVC extraction: the code for skipping extraction of
   prefix SEI NALUs in the first frame was skipping two bytes too few,
   resulting in broken processing of all following bytes. Patch by Mike Chen.
+* libEBML: the optional, bundled version of libEBML was updated to v1.4.1.
 
 
 # Version 51.0.0 "I Wish" 2020-10-04
