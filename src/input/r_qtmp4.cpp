@@ -23,6 +23,7 @@
 #include "avilib.h"
 #include "common/aac.h"
 #include "common/alac.h"
+#include "common/avc_es_parser.h"
 #include "common/chapters/chapters.h"
 #include "common/codec.h"
 #include "common/endian.h"
@@ -3496,13 +3497,41 @@ qtmp4_demuxer_c::verify_video_parameters() {
 }
 
 bool
-qtmp4_demuxer_c::verify_avc_video_parameters() {
-  if (priv.empty() || (4 > priv[0]->get_size())) {
-    mxwarn(fmt::format(Y("Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"), id));
-    return false;
-  }
+qtmp4_demuxer_c::derive_track_params_from_avc_bitstream() {
+  priv.clear();
 
-  return true;
+  // No avcC content? Try to build one from the first frames.
+  auto mem = read_first_bytes(10'000);
+
+  mxdebug_if(m_debug_headers, fmt::format("derive_track_params_from_avc_bitstream: deriving avcC from bitstream; read {0} bytes\n", mem ? mem->get_size() : 0));
+
+  if (!mem)
+    return false;
+
+  mtx::avc::es_parser_c parser;
+
+  parser.ignore_nalu_size_length_errors();
+  parser.add_bytes(mem->get_buffer(), mem->get_size());
+  parser.flush();
+
+  if (parser.headers_parsed())
+    priv.emplace_back(parser.get_avcc());
+
+  mxdebug_if(m_debug_headers, fmt::format("derive_track_params_from_avc_bitstream: avcC derived? size {0} bytes\n", !priv.empty() && priv[0] ? priv[0]->get_size() : 0));
+
+  return !priv.empty() && priv[0]->get_size();
+}
+
+bool
+qtmp4_demuxer_c::verify_avc_video_parameters() {
+  if (!priv.empty() && (4 <= priv[0]->get_size()))
+    return true;
+
+  if (derive_track_params_from_avc_bitstream())
+    return true;
+
+  mxwarn(fmt::format(Y("Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"), id));
+  return false;
 }
 
 bool

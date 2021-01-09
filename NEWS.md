@@ -1,3 +1,13 @@
+# Version ?
+
+## New features and enhancements
+
+* mkvmerge: MP4 reader: for h.264/AVC tracks that don't have an
+  `AVCConfigurationBox` (`avcC` atom) in their sample description (`stsd`)
+  atom or whose `avcC` atom contains no content `mkvmerge` will now re-derive
+  the `AVCConfigurationBox` from the bitstream. Implements #2995.
+
+
 # Version 52.0.0 "Secret For The Mad" 2021-01-04
 
 ## New features and enhancements

@@ -365,6 +365,7 @@ struct qtmp4_demuxer_c {
   bool verify_vobsub_subtitles_parameters();
 
   void derive_track_params_from_ac3_audio_bitstream();
+  bool derive_track_params_from_avc_bitstream();
   void derive_track_params_from_dts_audio_bitstream();
   void derive_track_params_from_mp3_audio_bitstream();
   bool derive_track_params_from_opus_private_data();
