@@ -2667,9 +2667,16 @@ int avi_parse_input_file(avi_t *AVI, int getIndex)
 	 }
 	 i += 8;
       }
+      else if (strncasecmp((char *)(hdrl_data+i),"vprp",4) == 0) {
+        if (   (lasttag == 1)
+            && !AVI->video_properties_valid
+            && ((sizeof(alVIDEO_PROPERTIES) + 8) <= n)) {
+          AVI->video_properties_valid = 1;
+          memcpy(&AVI->video_properties, hdrl_data + i + 8, sizeof(alVIDEO_PROPERTIES));
+        }
+      }
       else if((strncasecmp((char *)(hdrl_data+i),"JUNK",4) == 0) ||
-              (strncasecmp((char *)(hdrl_data+i),"strn",4) == 0) ||
-              (strncasecmp((char *)(hdrl_data+i),"vprp",4) == 0)){
+              (strncasecmp((char *)(hdrl_data+i),"strn",4) == 0)) {
 	 i += 8;
 	 // do not reset lasttag
       } else

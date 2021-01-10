@@ -6,6 +6,9 @@
   `AVCConfigurationBox` (`avcC` atom) in their sample description (`stsd`)
   atom or whose `avcC` atom contains no content `mkvmerge` will now re-derive
   the `AVCConfigurationBox` from the bitstream. Implements #2995.
+* mkvmerge: AVI reader: added support for reading the video aspect ratio from
+  the video properties header (`vprp` chunk) if present and setting the
+  display dimensions accordingly. Implements #2993.
 
 
 # Version 52.0.0 "Secret For The Mad" 2021-01-04

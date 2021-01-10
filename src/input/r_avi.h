@@ -65,11 +65,13 @@ private:
   std::vector<avi_subs_demuxer_t> m_subtitle_demuxers;
   double m_fps{1.0};
   unsigned int m_video_frames_read{}, m_max_video_frames{}, m_dropped_video_frames{};
-  unsigned int m_video_width{}, m_video_height{};
+  unsigned int m_video_width{}, m_video_height{}, m_video_display_width{}, m_video_display_height;
   int m_avc_nal_size_size{-1};
 
   uint64_t m_bytes_to_process{}, m_bytes_processed{};
   bool m_video_track_ok{};
+
+  debugging_option_c m_debug_aspect_ratio{"avi|avi_aspect_ratio"};
 
 public:
   virtual ~avi_reader_c();
@@ -94,6 +96,8 @@ protected:
   virtual file_status_e read_video();
   virtual file_status_e read_audio(avi_demuxer_t &demuxer);
   virtual file_status_e read_subtitles(avi_subs_demuxer_t &demuxer);
+
+  virtual void handle_video_aspect_ratio();
 
   virtual generic_packetizer_c *create_aac_packetizer(int aid, avi_demuxer_t &demuxer);
   virtual generic_packetizer_c *create_dts_packetizer(int aid);

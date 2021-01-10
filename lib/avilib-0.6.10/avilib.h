@@ -223,6 +223,21 @@ typedef struct PACKED_STRUCTURE
   uint16_t dw_right;
   uint16_t dw_bottom;
 } alAVISTREAMHEADER;
+
+typedef struct PACKED_STRUCTURE {
+  uint32_t video_format_token;
+  uint32_t video_standard;
+  uint32_t vertical_refresh_rate;
+  uint32_t h_total_in_t;
+  uint32_t v_total_in_lines;
+  uint16_t frame_aspect_ratio_y;
+  uint16_t frame_aspect_ratio_x;
+  uint32_t frame_width_in_pixels;
+  uint32_t frame_height_in_lines;
+  uint32_t fields_per_frame;
+  // VIDEO_FIELD_DESC field_info[fields_per_frame]
+} alVIDEO_PROPERTIES;
+
 #if defined(COMP_MSC)
 #pragma pack(pop)
 #endif
@@ -280,6 +295,8 @@ typedef struct
   alBITMAPINFOHEADER *bitmap_info_header;
   alWAVEFORMATEX *wave_format_ex[AVI_MAX_TRACKS];
   alAVISTREAMHEADER stream_headers[AVI_MAX_TRACKS];
+  alVIDEO_PROPERTIES video_properties;
+  int video_properties_valid;
 
   void*		extradata;
   unsigned long	extradata_size;

@@ -96,6 +96,8 @@ avi_reader_c::read_headers() {
   m_video_width      = std::abs(AVI_video_width(m_avi));
   m_video_height     = std::abs(AVI_video_height(m_avi));
 
+  handle_video_aspect_ratio();
+
   verify_video_track();
   parse_subtitle_chunks();
 
@@ -234,6 +236,44 @@ avi_reader_c::create_video_packetizer() {
 
   else
     create_standard_video_packetizer();
+
+  if (m_video_display_width)
+    PTZR(m_vptzr)->set_video_display_dimensions(m_video_display_width, m_video_display_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_CONTAINER);
+}
+
+void
+avi_reader_c::handle_video_aspect_ratio() {
+  if (!m_avi->video_properties_valid) {
+    mxdebug_if(m_debug_aspect_ratio, fmt::format("handle_video_aspect_ratio: video properties header not present\n"));
+    return;
+  }
+
+  uint64_t x = get_uint16_le(&m_avi->video_properties.frame_aspect_ratio_x),
+           y = get_uint16_le(&m_avi->video_properties.frame_aspect_ratio_y);
+
+  if (!x || !y) {
+    mxdebug_if(m_debug_aspect_ratio, fmt::format("handle_video_aspect_ratio: invalid aspect ratio {0}:{1}, ignoring\n", x, y));
+    return;
+  }
+
+  if (!m_video_width || !m_video_height) {
+    mxdebug_if(m_debug_aspect_ratio, fmt::format("handle_video_aspect_ratio: invalid video dimensions {0}x{1}, ignoring\n", m_video_width, m_video_height));
+    return;
+  }
+
+  auto aspect_ratio = int64_rational_c{x, y};
+
+  if (aspect_ratio >= int64_rational_c{m_video_width, m_video_height}) {
+    m_video_display_width  = boost::rational_cast<int64_t>(aspect_ratio * m_video_height);
+    m_video_display_height = m_video_height;
+
+  } else {
+    m_video_display_width  = m_video_width;
+    m_video_display_height = boost::rational_cast<int64_t>(int64_rational_c{y, x} * m_video_width);
+  }
+
+  mxdebug_if(m_debug_aspect_ratio, fmt::format("handle_video_aspect_ratio: frame aspect ratio {0}:{1} pixel dimensions {2}x{3} display dimensions {4}x{5}\n",
+                                               x, y, m_video_width, m_video_height, m_video_display_width, m_video_display_height));
 }
 
 void
@@ -862,6 +902,9 @@ avi_reader_c::identify_video() {
     info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_es_video);
 
   info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", m_video_width, m_video_height));
+
+  if (m_video_display_width)
+    info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", m_video_display_width, m_video_display_height));
 
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str), info.get());
 }
