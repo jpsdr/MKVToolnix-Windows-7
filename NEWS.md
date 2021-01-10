@@ -9,6 +9,11 @@
 * mkvmerge: AVI reader: added support for reading the video aspect ratio from
   the video properties header (`vprp` chunk) if present and setting the
   display dimensions accordingly. Implements #2993.
+* Windows installer: the `bluray_dump` command-line utility will be installed
+  into the `tools` sub-directory. `bluray_dump` can read & dump certain file
+  types used on Blu-rays: `.mpls` playlists, `.clpi` clip information
+  databases, `.bdmv` index files, `bdmt_….xml` disc library databases and
+  `tnmt_….xml` track & chapter name databases.
 
 
 # Version 52.0.0 "Secret For The Mad" 2021-01-04

@@ -31,7 +31,7 @@ function strip_files {
   print -n -- "Stripping files…"
 
   cd ${tgt_dir}
-  ${host}-strip *.exe **/*.dll
+  ${host}-strip **/*.exe **/*.dll
 
   print -- " done"
 }
@@ -130,6 +130,9 @@ function copy_files {
   rm -rf ${tgt_dir}/examples/stylesheets
   cp src/*.exe src/mkvtoolnix-gui/*.exe packaging/windows/installer/*.url ${tgt_dir}/
   cp share/icons/windows/mkvtoolnix-gui.ico ${tgt_dir}/installer/
+
+  mkdir ${tgt_dir}/tools
+  cp src/tools/bluray_dump.exe ${tgt_dir}/tools/
 
   cp ${mxe_usr_dir}/share/misc/magic.mgc ${tgt_dir}/share/misc/
   cp share/sounds/* ${tgt_dir}/data/sounds/

@@ -160,6 +160,7 @@ Section "Program files" SEC01
   File /r "../examples"
   File /r "../locale"
   File /r "../share"
+  File /r "../tools"
 
   ; Both if Qt is linked shared and if Dr. MinGW is used:
   File /nonfatal "../*.dll"
@@ -423,6 +424,7 @@ Section Uninstall
   RMDir /r "$INSTDIR\locale"
   RMDir /r "$INSTDIR\plugins"
   RMDir /r "$INSTDIR\share"
+  RMDir /r "$INSTDIR\tools"
   RMDir "$INSTDIR"
 
   DeleteRegKey ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}"
