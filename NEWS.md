@@ -14,6 +14,8 @@
   types used on Blu-rays: `.mpls` playlists, `.clpi` clip information
   databases, `.bdmv` index files, `bdmt_….xml` disc library databases and
   `tnmt_….xml` track & chapter name databases.
+* MKVToolNix GUI: preferences: the items in the "pre-defined …" lists can now
+  be renamed by double-clicking with the mouse or pressing the F2 key.
 
 ## Bug fixes
 

@@ -117,7 +117,10 @@ StringListConfigurationWidget::addNewItem() {
 
 void
 StringListConfigurationWidget::addItem(QString const &name) {
-  p_func()->ui->lwItems->addItem(new QListWidgetItem{name});
+  auto item = new QListWidgetItem{name};
+  item->setFlags(item->flags() | Qt::ItemIsEditable);
+
+  p_func()->ui->lwItems->addItem(item);
 }
 
 void
