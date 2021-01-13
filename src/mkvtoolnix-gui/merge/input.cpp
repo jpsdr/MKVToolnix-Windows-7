@@ -568,17 +568,24 @@ Tab::setupPredefinedTrackNames() {
   });
 
   QStringList items;
+  QMap<QString, bool> haveItem;
+
+  auto addItemsMaybe = [&items, &haveItem](QStringList const &newItems) {
+    for (auto const &newItem : newItems)
+      if (!haveItem[newItem]) {
+        haveItem[newItem] = true;
+        items += newItem;
+      }
+  };
+
   auto &settings = Util::Settings::get();
 
   if (haveType[TrackType::Audio])
-    items += settings.m_mergePredefinedAudioTrackNames;
+    addItemsMaybe(settings.m_mergePredefinedAudioTrackNames);
   if (haveType[TrackType::Video])
-    items += settings.m_mergePredefinedVideoTrackNames;
+    addItemsMaybe(settings.m_mergePredefinedVideoTrackNames);
   if (haveType[TrackType::Subtitles])
-    items += settings.m_mergePredefinedSubtitleTrackNames;
-
-  items.sort(Qt::CaseInsensitive);
-  items.erase(std::unique(items.begin(), items.end()), items.end());
+    addItemsMaybe(settings.m_mergePredefinedSubtitleTrackNames);
 
   p.ui->trackName->clear();
   p.ui->trackName->addItems(items);

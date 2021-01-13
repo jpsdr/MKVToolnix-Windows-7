@@ -15,6 +15,12 @@
   databases, `.bdmv` index files, `bdmt_….xml` disc library databases and
   `tnmt_….xml` track & chapter name databases.
 
+## Bug fixes
+
+* MKVToolNix GUI: multiplexer: the drop-down boxes with pre-defined track
+  names now follow the order set in the preferences instead of sorting the
+  entries alphabetically. Fixes #2999.
+
 
 # Version 52.0.0 "Secret For The Mad" 2021-01-04
 
