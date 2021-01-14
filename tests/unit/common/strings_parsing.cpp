@@ -366,4 +366,47 @@ TEST(StringParsing, ParseTimestampInvalidPatterns) {
   EXPECT_FALSE(mtx::string::parse_timestamp("q123s",                timestamp, false)); // number+unit: garbage before
 }
 
+TEST(StringParsing, ParseFloatingPointNumberAsRationalValid) {
+  int64_rational_c value;
+
+  EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("12345"s, value));
+  EXPECT_EQ(int64_rational_c(12345, 1), value);
+
+  EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("12345.6789"s, value));
+  EXPECT_EQ(int64_rational_c(123456789, 10000), value);
+
+  EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("12345.001"s, value));
+  EXPECT_EQ(int64_rational_c(12345001, 1000), value);
+
+  EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("1234.5"s, value));
+  EXPECT_EQ(int64_rational_c(12345, 10), value);
+
+  EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational(".5"s, value));
+  EXPECT_EQ(int64_rational_c(5, 10), value);
+
+  EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("-12345"s, value));
+  EXPECT_EQ(int64_rational_c(-12345, 1), value);
+
+  EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("-12345.6789"s, value));
+  EXPECT_EQ(int64_rational_c(-123456789, 10000), value);
+
+  EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("-12345.001"s, value));
+  EXPECT_EQ(int64_rational_c(-12345001, 1000), value);
+
+  EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("-1234.5"s, value));
+  EXPECT_EQ(int64_rational_c(-12345, 10), value);
+
+  EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("-.5"s, value));
+  EXPECT_EQ(int64_rational_c(-5, 10), value);
+}
+
+TEST(StringParsing, ParseFloatingPointNumberAsRationalInvalid) {
+  int64_rational_c value;
+
+  EXPECT_FALSE(mtx::string::parse_floating_point_number_as_rational(""s,           value));
+  EXPECT_FALSE(mtx::string::parse_floating_point_number_as_rational("12345."s,     value));
+  EXPECT_FALSE(mtx::string::parse_floating_point_number_as_rational("12345.-123"s, value));
+}
+
+
 }

@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include <iostream>
 #include "common/list_utils.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -25,6 +26,42 @@ inline bool
 set_tcp_error(const std::string &error) {
   timestamp_parser_error = error;
   return false;
+}
+
+static mtx::regex::jp::Regex s_floating_point_number_re{"^(-?)([0-9]+)?(?:\\.([0-9]+))?$"};
+
+bool
+parse_floating_point_number_as_rational(std::string const &string,
+                                        int64_rational_c &value) {
+  if (string.empty())
+    return false;
+
+  mtx::regex::jp::VecNum matches;
+  if (!mtx::regex::match(string, matches, s_floating_point_number_re))
+    return false;
+
+  int64_t numerator{}, sign{1};
+  if (!matches[0][2].empty() && !parse_number(matches[0][2], numerator))
+    return false;
+
+  if (!matches[0][1].empty())
+    sign = -1;
+
+  if (matches[0][3].empty()) {
+    value = int64_rational_c{sign * numerator, 1};
+    return true;
+  }
+
+  int64_t fractional{};
+  if (!parse_number(matches[0][3], fractional))
+    return false;
+
+  int64_t shift{1};
+  for (auto idx = 0u; idx < matches[0][3].length(); ++idx)
+    shift *= 10;
+
+  value = int64_rational_c{sign * (numerator * shift + fractional), shift};
+  return true;
 }
 
 bool

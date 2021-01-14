@@ -124,6 +124,7 @@ parse_property_to_value(std::string const &s,
 }
 
 bool parse_duration_number_with_unit(const std::string &s, int64_t &value);
+bool parse_floating_point_number_as_rational(std::string const &string, int64_rational_c &value);
 
 extern std::string timestamp_parser_error;
 extern bool parse_timestamp(const std::string &s, int64_t &timestamp, bool allow_negative = false);
