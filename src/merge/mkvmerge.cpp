@@ -1866,7 +1866,7 @@ parse_arg_chapters(const std::string &param,
     sync = ti.m_timestamp_syncs.find(track_info_c::all_tracks_id);
 
   if (sync != ti.m_timestamp_syncs.end()) {
-    mtx::chapters::adjust_timestamps(*g_kax_chapters, sync->second.displacement, sync->second.factor.numerator(), sync->second.factor.denominator());
+    mtx::chapters::adjust_timestamps(*g_kax_chapters, sync->second.displacement, sync->second.factor);
     ti.m_timestamp_syncs.erase(sync);
   }
 

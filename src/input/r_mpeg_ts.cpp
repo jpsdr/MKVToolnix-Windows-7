@@ -1343,7 +1343,7 @@ reader_c::process_chapter_entries() {
   auto const &sync = mtx::includes(m_ti.m_timestamp_syncs, track_info_c::chapter_track_id) ? m_ti.m_timestamp_syncs[track_info_c::chapter_track_id]
                    : mtx::includes(m_ti.m_timestamp_syncs, track_info_c::all_tracks_id)    ? m_ti.m_timestamp_syncs[track_info_c::all_tracks_id]
                    :                                                                         timestamp_sync_t{};
-  mtx::chapters::adjust_timestamps(*m_chapters, sync.displacement, sync.factor.numerator(), sync.factor.denominator());
+  mtx::chapters::adjust_timestamps(*m_chapters, sync.displacement, sync.factor);
 }
 
 uint32_t
