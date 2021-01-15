@@ -226,7 +226,7 @@ Tab::setupOutputToolTips() {
   Util::setToolTip(p.ui->chapterStretchBy,
                    Q("%1 %2")
                    .arg(QYH("Multiply the chapters' timestamps with a factor."))
-                   .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456).")));
+                   .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of numbers (e.g. 123/456.78).")));
   Util::setToolTip(p.ui->chapterGenerationMode,
                    Q("<p>%1 %2</p><ol><li>%3</li><li>%4</li></ol><p>%5</p>")
                    .arg(QYH("mkvmerge can generate chapters automatically."))

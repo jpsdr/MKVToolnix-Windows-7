@@ -475,7 +475,7 @@ Tab::setupInputToolTips() {
   Util::setToolTip(p.ui->stretchBy,
                    Q("<p>%1 %2</p><p>%3</p>")
                    .arg(QYH("Multiply this track's timestamps with a factor."))
-                   .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of integer values (e.g. 123/456)."))
+                   .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of numbers (e.g. 123/456.78)."))
                    .arg(QYH("This works well for video and subtitle tracks but should not be used with audio tracks.")));
   Util::setToolTip(p.ui->defaultDuration,
                    Q("%1 %2 %3 %4")
