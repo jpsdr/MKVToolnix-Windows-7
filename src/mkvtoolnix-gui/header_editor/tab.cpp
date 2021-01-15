@@ -342,7 +342,7 @@ Tab::retranslateUi() {
   m_expandAllAction->setText(QY("&Expand all"));
   m_collapseAllAction->setText(QY("&Collapse all"));
   m_addAttachmentsAction->setText(QY("&Add attachments"));
-  m_removeAttachmentAction->setText(QY("&Remove attachment"));
+  m_removeAttachmentAction->setText(QY("&Remove selected attachment"));
   m_removeAllAttachmentsAction->setText(QY("Remove a&ll attachments"));
   m_saveAttachmentContentAction->setText(QY("&Save attachment content to a file"));
   m_replaceAttachmentContentAction->setText(QY("Re&place attachment with a new file"));
