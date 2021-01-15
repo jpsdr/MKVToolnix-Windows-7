@@ -17,6 +17,7 @@
 
 #include "common/bcp47.h"
 #include "common/compression.h"
+#include "common/math.h"
 #include "common/option_with_source.h"
 #include "common/stereo_mode.h"
 #include "merge/item_selector.h"
@@ -42,19 +43,8 @@ enum cue_strategy_e {
 };
 
 struct timestamp_sync_t {
-  int64_t displacement;
-  double numerator, denominator;
-
-  timestamp_sync_t()
-  : displacement(0)
-  , numerator(1.0)
-  , denominator(1.0)
-  {
-  }
-
-  double factor() {
-    return numerator / denominator;
-  }
+  int64_t displacement{};
+  int64_rational_c factor{1, 1};
 };
 
 enum default_track_priority_e {

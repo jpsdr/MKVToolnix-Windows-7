@@ -1449,7 +1449,7 @@ kax_reader_c::adjust_chapter_timestamps() {
                    :                                                                         timestamp_sync_t{};
 
   mtx::chapters::adjust_timestamps(*m_chapters, -m_global_timestamp_offset);
-  mtx::chapters::adjust_timestamps(*m_chapters, sync.displacement, sync.numerator, sync.denominator);
+  mtx::chapters::adjust_timestamps(*m_chapters, sync.displacement, sync.factor.numerator(), sync.factor.denominator());
 }
 
 void

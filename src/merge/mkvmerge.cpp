@@ -634,22 +634,21 @@ parse_arg_sync(std::string s,
     std::string linear = s.substr(idx + 1);
     s.erase(idx);
     idx = linear.find('/');
-    if (idx < 0) {
-      tcsync.numerator   = strtod(linear.c_str(), nullptr);
-      tcsync.denominator = 1.0;
+    if (idx < 0)
+      mtx::string::parse_floating_point_number_as_rational(linear, tcsync.factor);
 
-    } else {
+    else {
+      int64_rational_c numerator, denominator;
       std::string div = linear.substr(idx + 1);
       linear.erase(idx);
-      double d1  = strtod(linear.c_str(), nullptr);
-      double d2  = strtod(div.c_str(), nullptr);
-      if (0.0 == d2)
+      if (   !mtx::string::parse_floating_point_number_as_rational(linear, numerator)
+          || !mtx::string::parse_floating_point_number_as_rational(div,    denominator)
+          || (denominator == 0))
         mxerror(fmt::format(Y("Invalid sync option specified in '{0} {1}'. The divisor is zero.\n"), opt, orig));
 
-      tcsync.numerator   = d1;
-      tcsync.denominator = d2;
+      tcsync.factor = numerator / denominator;
     }
-    if ((tcsync.numerator * tcsync.denominator) <= 0.0)
+    if ((tcsync.factor) <= int64_rational_c{0, 1})
       mxerror(fmt::format(Y("Invalid sync option specified in '{0} {1}'. The linear sync value may not be equal to or smaller than zero.\n"), opt, orig));
 
   }
@@ -1867,7 +1866,7 @@ parse_arg_chapters(const std::string &param,
     sync = ti.m_timestamp_syncs.find(track_info_c::all_tracks_id);
 
   if (sync != ti.m_timestamp_syncs.end()) {
-    mtx::chapters::adjust_timestamps(*g_kax_chapters, sync->second.displacement, sync->second.numerator, sync->second.denominator);
+    mtx::chapters::adjust_timestamps(*g_kax_chapters, sync->second.displacement, sync->second.factor.numerator(), sync->second.factor.denominator());
     ti.m_timestamp_syncs.erase(sync);
   }
 

@@ -104,10 +104,8 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
     m_ti.m_tcsync = m_ti.m_timestamp_syncs[m_ti.m_id];
   else if (mtx::includes(m_ti.m_timestamp_syncs, -1))
     m_ti.m_tcsync = m_ti.m_timestamp_syncs[-1];
-  if (0 == m_ti.m_tcsync.numerator)
-    m_ti.m_tcsync.numerator = 1;
-  if (0 == m_ti.m_tcsync.denominator)
-    m_ti.m_tcsync.denominator = 1;
+  if (0 == m_ti.m_tcsync.factor)
+    m_ti.m_tcsync.factor = int64_rational_c{1, 1};
 
   // Let's see if the user specified "reset timestamps" for this track.
   m_ti.m_reset_timestamps = mtx::includes(m_ti.m_reset_timestamps_specs, m_ti.m_id) || mtx::includes(m_ti.m_reset_timestamps_specs, -1);
@@ -470,7 +468,7 @@ generic_packetizer_c::set_track_default_duration(int64_t def_dur,
   if (!force && m_default_duration_forced)
     return;
 
-  m_htrack_default_duration = (int64_t)(def_dur * m_ti.m_tcsync.numerator / m_ti.m_tcsync.denominator);
+  m_htrack_default_duration = boost::rational_cast<int64_t>(m_ti.m_tcsync.factor * def_dur);
 
   if (m_track_entry) {
     if (m_htrack_default_duration)
@@ -1386,7 +1384,7 @@ generic_packetizer_c::add_packet(packet_cptr pack) {
     m_deferred_packets.push_back(pack);
 }
 
-#define ADJUST_TIMESTAMP(x) (int64_t)((x + m_correction_timestamp_offset + m_append_timestamp_offset) * m_ti.m_tcsync.numerator / m_ti.m_tcsync.denominator) + m_ti.m_tcsync.displacement
+#define ADJUST_TIMESTAMP(x) boost::rational_cast<int64_t>(m_ti.m_tcsync.factor * (x + m_correction_timestamp_offset + m_append_timestamp_offset)) + m_ti.m_tcsync.displacement
 
 void
 generic_packetizer_c::add_packet2(packet_cptr pack) {
@@ -1396,7 +1394,7 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
   if (pack->has_fref())
     pack->fref     = ADJUST_TIMESTAMP(pack->fref);
   if (pack->has_duration()) {
-    pack->duration = static_cast<int64_t>(pack->duration * m_ti.m_tcsync.numerator / m_ti.m_tcsync.denominator);
+    pack->duration = boost::rational_cast<int64_t>(m_ti.m_tcsync.factor * pack->duration);
     if (pack->has_discard_padding())
       pack->duration -= std::min(pack->duration, pack->discard_padding.to_ns());
   }
@@ -1659,7 +1657,7 @@ generic_packetizer_c::can_be_split(std::string &/* error_message */) {
 
 void
 generic_packetizer_c::set_displacement_maybe(int64_t displacement) {
-  if ((1 == m_ti.m_tcsync.numerator) && (1 == m_ti.m_tcsync.denominator) && (0 == m_ti.m_tcsync.displacement))
+  if ((1 == m_ti.m_tcsync.factor) && (0 == m_ti.m_tcsync.displacement))
     m_ti.m_tcsync.displacement = displacement;
 }
 
