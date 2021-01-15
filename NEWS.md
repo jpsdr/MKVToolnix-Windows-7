@@ -16,6 +16,9 @@
   `tnmt_….xml` track & chapter name databases.
 * MKVToolNix GUI: preferences: the items in the "pre-defined …" lists can now
   be renamed by double-clicking with the mouse or pressing the F2 key.
+* mkvextract: mkvextract will now check if any of the destination file names
+  is the same as the source file name and abort with an error if that's the
+  case. Implements #3001.
 
 ## Bug fixes
 

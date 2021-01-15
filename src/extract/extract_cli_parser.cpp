@@ -377,6 +377,23 @@ extract_cli_parser_c::add_extraction_spec() {
   set_default_values();
 }
 
+void
+extract_cli_parser_c::check_for_identical_source_and_destination_file_names() {
+  if (m_options.m_file_name.empty())
+    return;
+
+  auto source_file_name = bfs::absolute(bfs::path{m_options.m_file_name});
+
+  for (auto const &mode_option : m_options.m_modes) {
+    if (!mode_option.m_output_file_name.empty() && (bfs::absolute(bfs::path{mode_option.m_output_file_name}) == source_file_name))
+      mxerror(fmt::format(Y("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.string()));
+
+    for (auto const &track_spec : mode_option.m_tracks)
+      if (!track_spec.out_name.empty() && (bfs::absolute(bfs::path{track_spec.out_name}) == source_file_name))
+        mxerror(fmt::format(Y("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.string()));
+  }
+}
+
 options_c
 extract_cli_parser_c::run() {
   init_parser();
@@ -384,6 +401,8 @@ extract_cli_parser_c::run() {
   parse_args();
 
   m_options.merge_tracks_and_timestamps_targets();
+
+  check_for_identical_source_and_destination_file_names();
 
   if (m_debug)
     m_options.dump();

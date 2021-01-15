@@ -67,6 +67,8 @@ protected:
   void handle_unknown_arg_single_mode();
   void handle_unknown_arg_multiple_mode();
 
+  void check_for_identical_source_and_destination_file_names();
+
 protected:
   static std::optional<options_c::extraction_mode_e> extraction_mode_from_string(std::string const &mode_string);
   static std::string extraction_mode_to_string(std::optional<options_c::extraction_mode_e> mode);
