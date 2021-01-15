@@ -22,6 +22,10 @@
 * MKVToolNix GUI: multiplexer: the drop-down boxes with pre-defined track
   names now follow the order set in the preferences instead of sorting the
   entries alphabetically. Fixes #2999.
+* mkvmerge: stretching chapter timestamps with `--chapter-sync` now works
+  correctly with floating point values including fractions of floating point
+  numbers (e.g. `12.3/45.67`). The tooltips in the GUI have been adjusted
+  accordingly. Fixes #3002.
 
 
 # Version 52.0.0 "Secret For The Mad" 2021-01-04
