@@ -987,7 +987,8 @@ kax_reader_c::handle_tags(mm_io_c *io,
 void
 kax_reader_c::handle_track_statistics_tags() {
   for (auto const &track : m_tracks) {
-    track->get_source_id_from_track_statistics_tags();
+    if (!m_ti.m_track_tags.none())
+      track->get_source_id_from_track_statistics_tags();
 
     if (!mtx::hacks::is_engaged(mtx::hacks::KEEP_TRACK_STATISTICS_TAGS))
       track->discard_track_statistics_tags();

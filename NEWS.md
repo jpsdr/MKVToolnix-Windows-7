@@ -29,6 +29,8 @@
   correctly with floating point values including fractions of floating point
   numbers (e.g. `12.3/45.67`). The tooltips in the GUI have been adjusted
   accordingly. Fixes #3002.
+* mkvmerge: when remuxing a Matroska file with the `--no-track-tags`, existing
+  `SOURCE_ID` track tags are now skipped, too.
 
 
 # Version 52.0.0 "Secret For The Mad" 2021-01-04
