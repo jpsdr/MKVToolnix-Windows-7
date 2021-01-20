@@ -229,7 +229,7 @@ track_c::new_stream_v_mpeg_1_2(bool end_of_detection) {
   v_version      = m_m2v_parser->GetMPEGVersion();
   v_width        = seq_hdr.width;
   v_height       = seq_hdr.height;
-  v_frame_rate   = seq_hdr.frameOrFieldRate;
+  v_frame_rate   = seq_hdr.frameRate;
   v_aspect_ratio = seq_hdr.aspectRatio;
 
   if ((0 >= v_aspect_ratio) || (1 == v_aspect_ratio))

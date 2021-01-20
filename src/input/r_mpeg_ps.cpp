@@ -671,13 +671,13 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
   track->v_version                = m2v_parser->GetMPEGVersion();
   track->v_width                  = seq_hdr.width;
   track->v_height                 = seq_hdr.height;
-  track->v_frame_rate             = seq_hdr.progressiveSequence ? seq_hdr.frameOrFieldRate : seq_hdr.frameOrFieldRate * 2.0;
+  track->v_frame_rate             = seq_hdr.progressiveSequence ? seq_hdr.frameRate : seq_hdr.frameRate * 2.0;
   track->v_aspect_ratio           = seq_hdr.aspectRatio;
-  track->timestamp_b_frame_offset = 1000000000ll * num_leading_b_fields / seq_hdr.frameOrFieldRate / 2;
+  track->timestamp_b_frame_offset = 1000000000ll * num_leading_b_fields / (seq_hdr.frameRate * 2);
 
   mxdebug_if(m_debug_timestamps,
              fmt::format("Leading B fields {0} rate {1} progressive? {2} calculated_offset {3} found_i? {4} found_non_b? {5}\n",
-                         num_leading_b_fields, seq_hdr.frameOrFieldRate, !!seq_hdr.progressiveSequence, track->timestamp_b_frame_offset, found_i_frame, found_non_b_frame));
+                         num_leading_b_fields, seq_hdr.frameRate, !!seq_hdr.progressiveSequence, track->timestamp_b_frame_offset, found_i_frame, found_non_b_frame));
 
   if ((0 >= track->v_aspect_ratio) || (1 == track->v_aspect_ratio))
     track->v_dwidth = track->v_width;

@@ -325,7 +325,7 @@ avi_reader_c::create_mpeg1_2_packetizer() {
   else
     m_ti.m_private_data.reset();
 
-  m_vptzr                = add_packetizer(new mpeg1_2_video_packetizer_c(this, m_ti, m2v_parser->GetMPEGVersion(), seq_hdr.frameOrFieldRate,
+  m_vptzr                = add_packetizer(new mpeg1_2_video_packetizer_c(this, m_ti, m2v_parser->GetMPEGVersion(), seq_hdr.frameRate,
                                                                          seq_hdr.width, seq_hdr.height, display_width, seq_hdr.height, false));
 
   show_packetizer_info(0, PTZR(m_vptzr));
