@@ -40,7 +40,7 @@ public:
 
   bool has_valid_iso639_code() const noexcept;
   std::string get_iso639_alpha_3_code() const noexcept;
-  std::string get_iso639_alpha_3_code_or(std::string const &value_if_invalid) const noexcept;
+  std::string get_iso639_2_alpha_3_code_or(std::string const &value_if_invalid) const noexcept;
 
   std::string dump() const noexcept;
   std::string format(bool force = false) const noexcept;

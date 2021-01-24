@@ -303,7 +303,7 @@ language_c::get_iso639_alpha_3_code()
 }
 
 std::string
-language_c::get_iso639_alpha_3_code_or(std::string const &value_if_invalid)
+language_c::get_iso639_2_alpha_3_code_or(std::string const &value_if_invalid)
   const noexcept {
   auto code = get_iso639_alpha_3_code();
   return !code.empty() ? code : value_if_invalid;

@@ -1498,7 +1498,7 @@ prepare_additional_chapter_atoms_for_rendering() {
       GetChild<KaxChapterString>(display).SetValueUTF8(ch_name);
 
       if (ch_language.is_valid()) {
-        GetChild<KaxChapterLanguage>(display).SetValue(ch_language.get_iso639_alpha_3_code_or("und"));
+        GetChild<KaxChapterLanguage>(display).SetValue(ch_language.get_iso639_2_alpha_3_code_or("und"));
         if (!mtx::bcp47::language_c::is_disabled())
           GetChild<KaxChapLanguageIETF>(display).SetValue(ch_language.format());
         else
