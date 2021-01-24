@@ -167,21 +167,14 @@ M2VParser::~M2VParser(){
 }
 
 MediaTime M2VParser::GetFrameDuration(MPEG2PictureHeader picHdr){
-  if(m_seqHdr.progressiveSequence){
-    if(!picHdr.topFieldFirst && picHdr.repeatFirstField)
-      return 4;
-    else if(picHdr.topFieldFirst && picHdr.repeatFirstField)
-      return 6;
+  if (picHdr.repeatFirstField) {
+    // picHdr.progressive shall be 1 if picHdr.repeatFirstField is 1
+    if(m_seqHdr.progressiveSequence)
+      return picHdr.topFieldFirst ? 6 : 4;
     else
-      return 2;
-  }
-  if(picHdr.pictureStructure != MPEG2_PICTURE_TYPE_FRAME){
-    return 1;
-  }
-  if(picHdr.progressive && picHdr.repeatFirstField){ //TODO: fix this to support progressive sequences also.
-    return 3;
-  }else{
-    return 2;
+      return 3;
+  } else {
+    return picHdr.pictureStructure == MPEG2_PICTURE_TYPE_FRAME ? 2 : 1;
   }
 }
 
