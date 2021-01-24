@@ -68,7 +68,7 @@ module Mtx::IANALanguageSubtagRegistry
       rows = entries[type].map(&entry_formatter)
 
       "std::vector<entry_t> const g_#{name}{\n" +
-        format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => "  },").join("\n") +
+        format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => " },").join("\n") +
         "\n};\n"
     end
 
