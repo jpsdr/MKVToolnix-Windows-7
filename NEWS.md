@@ -31,6 +31,10 @@
   accordingly. Fixes #3002.
 * mkvmerge: when remuxing a Matroska file with the `--no-track-tags`, existing
   `SOURCE_ID` track tags are now skipped, too.
+* mkvmerge: MPEG 1/2 video handling: the "default duration" header field was
+  often half the value it actually should be, resulting in all video frames
+  having an explicit block duration with the correct value. This has been
+  fixed with a patch by Tom Yan.
 
 
 # Version 52.0.0 "Secret For The Mad" 2021-01-04
