@@ -8,6 +8,7 @@ def create_iso639_language_list_file
       (entry["bibliographic"] || entry["alpha_3"]).to_cpp_string,
       (entry["alpha_2"] || '').to_cpp_string,
       entry["bibliographic"] ? entry["alpha_3"].to_cpp_string : '""s',
+      'true ',
     ]
   end
 
@@ -16,6 +17,7 @@ def create_iso639_language_list_file
       %Q{"qa#{letter}"},
       '""s',
       '""s',
+      'true ',
     ]
   end
 

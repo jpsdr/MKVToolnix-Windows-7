@@ -19,6 +19,7 @@ namespace mtx::iso639 {
 
 struct language_t {
   std::string const english_name, alpha_3_code, alpha_2_code, terminology_abbrev;
+  bool is_part_of_iso639_2{};
 };
 
 extern std::vector<language_t> const g_languages;
