@@ -127,7 +127,7 @@ mpeg_es_reader_c::read_headers() {
     interlaced                  = !seq_hdr.progressiveSequence;
     width                       = seq_hdr.width;
     height                      = seq_hdr.height;
-    frame_rate                  = seq_hdr.progressiveSequence ? seq_hdr.frameOrFieldRate : seq_hdr.frameOrFieldRate * 2.0;
+    frame_rate                  = seq_hdr.frameRate;
     aspect_ratio                = seq_hdr.aspectRatio;
 
     if ((0 >= aspect_ratio) || (1 == aspect_ratio))

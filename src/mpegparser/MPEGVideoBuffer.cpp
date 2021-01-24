@@ -152,31 +152,31 @@ void ParseSequenceHeader(MPEGChunk* chunk, MPEG2SequenceHeader & hdr){
   }
   switch(pos[0] & 0x0F){
     case 0x01:
-      hdr.frameOrFieldRate = 24000.0/1001.0;//23.976
+      hdr.frameRate = 24000.0/1001.0;//23.976
       break;
     case 0x02:
-      hdr.frameOrFieldRate = 24.0;//24
+      hdr.frameRate = 24.0;//24
       break;
     case 0x03:
-      hdr.frameOrFieldRate = 25.0;//25
+      hdr.frameRate = 25.0;//25
       break;
     case 0x04:
-      hdr.frameOrFieldRate = 30000.0/1001.0;//29.97
+      hdr.frameRate = 30000.0/1001.0;//29.97
       break;
     case 0x05:
-      hdr.frameOrFieldRate = 30.0;//30
+      hdr.frameRate = 30.0;//30
       break;
     case 0x06:
-      hdr.frameOrFieldRate = 50.0;//50
+      hdr.frameRate = 50.0;//50
       break;
     case 0x07:
-      hdr.frameOrFieldRate = 60000.0 / 1001.0;//59.94
+      hdr.frameRate = 60000.0 / 1001.0;//59.94
       break;
     case 0x08:
-      hdr.frameOrFieldRate = 60.0;//60
+      hdr.frameRate = 60.0;//60
       break;
     default:
-      hdr.frameOrFieldRate = 0.0;
+      hdr.frameRate = 0.0;
   }
 
   //Seek to picturecoding extension

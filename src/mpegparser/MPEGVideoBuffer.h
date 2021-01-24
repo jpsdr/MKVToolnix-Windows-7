@@ -48,7 +48,7 @@ struct MPEG2SequenceHeader {
   uint32_t width;
   uint32_t height;
   double aspectRatio;
-  double frameOrFieldRate;
+  double frameRate;
   uint8_t profileLevelIndication;
   uint8_t progressiveSequence;
 
