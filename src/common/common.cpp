@@ -31,6 +31,7 @@
 #include "common/iana_language_subtag_registry.h"
 #include "common/iso639.h"
 #include "common/iso3166.h"
+#include "common/iso15924.h"
 #include "common/mm_file_io.h"
 #include "common/mm_stdio.h"
 #include "common/random.h"
@@ -202,6 +203,7 @@ mtx_common_init(std::string const &program_name,
   mtx::iana::language_subtag_registry::init();
   mtx::iso639::init();
   mtx::iso3166::init();
+  mtx::iso15924::init();
   stereo_mode_c::init();
 
   mtx::sys::determine_path_to_current_executable(argv0 ? std::string{argv0} : std::string{});

@@ -48,16 +48,21 @@ def create_iso15924_script_list_file
 
 namespace mtx::iso15924 {
 
-std::vector<script_t> const g_scripts{
+std::vector<script_t> g_scripts;
+
+void
+init() {
+  g_scripts.reserve(#{rows.size});
+
 EOT
 
   footer = <<EOT
-};
+}
 
 } // namespace mtx::iso15924
 EOT
 
-  content = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => " },").join("\n") + "\n" + footer
+  content = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_scripts.emplace_back(", :row_suffix => ");").join("\n") + "\n" + footer
 
   runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }
 
