@@ -18,6 +18,7 @@
 
 #include "common/iso639.h"
 #include "common/strings/editing.h"
+#include "common/strings/table_formatter.h"
 #include "common/strings/utf8.h"
 
 namespace mtx::iso639 {
@@ -36,31 +37,15 @@ std::unordered_map<std::string, std::string> s_deprecated_1_and_2_codes{
 
 } // anonymous namespace
 
-#define FILL(s, idx) s + std::wstring(longest[idx] - get_width_in_em(s), L' ')
-
 void
 list_languages() {
-  std::wstring w_col1 = to_wide(Y("English language name"));
-  std::wstring w_col2 = to_wide(Y("ISO 639-2 code"));
-  std::wstring w_col3 = to_wide(Y("ISO 639-1 code"));
+  mtx::string::table_formatter_c formatter;
+  formatter.set_header({ Y("English language name"), Y("ISO 639-2 code"), Y("ISO 639-1 code") });
 
-  size_t longest[3]   = { get_width_in_em(w_col1), get_width_in_em(w_col2), get_width_in_em(w_col3) };
+  for (auto &lang : g_languages)
+    formatter.add_row({ gettext(lang.english_name.c_str()), lang.alpha_3_code, lang.alpha_2_code });
 
-  for (auto &lang : g_languages) {
-    longest[0] = std::max(longest[0], get_width_in_em(to_wide(gettext(lang.english_name.c_str()))));
-    longest[1] = std::max(longest[1], get_width_in_em(to_wide(lang.alpha_3_code)));
-    longest[2] = std::max(longest[2], get_width_in_em(to_wide(lang.alpha_2_code)));
-  }
-
-  mxinfo(FILL(w_col1, 0) + L" | " + FILL(w_col2, 1) + L" | " + FILL(w_col3, 2) + L"\n");
-  mxinfo(std::wstring(longest[0] + 1, L'-') + L'+' + std::wstring(longest[1] + 2, L'-') + L'+' + std::wstring(longest[2] + 1, L'-') + L"\n");
-
-  for (auto &lang : g_languages) {
-    std::wstring english = to_wide(gettext(lang.english_name.c_str()));
-    std::wstring code2   = to_wide(lang.alpha_3_code);
-    std::wstring code1   = to_wide(lang.alpha_2_code);
-    mxinfo(FILL(english, 0) + L" | " + FILL(code2, 1) + L" | " + FILL(code1, 2) + L"\n");
-  }
+  mxinfo(formatter.format());
 }
 
 /** \brief Map a string to a ISO 639-2 language code
