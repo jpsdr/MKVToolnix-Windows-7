@@ -53,9 +53,9 @@ module Mtx::IANALanguageSubtagRegistry
     cpp_file_name   = "src/common/iana_language_subtag_registry_list.cpp"
     entry_formatter = lambda do |entry|
       if entry[:prefix]
-        prefix = '{ ' + entry[:prefix].sort.map(&:to_cpp_string).join(', ') + ' }'
+        prefix = 'VS{ ' + entry[:prefix].sort.map(&:to_cpp_string).join(', ') + ' }'
       else
-        prefix = '{}'
+        prefix = 'VS{}'
       end
 
       [ entry[:subtag].downcase.to_cpp_string,
@@ -67,9 +67,9 @@ module Mtx::IANALanguageSubtagRegistry
     formatter = lambda do |type, name|
       rows = entries[type].map(&entry_formatter)
 
-      "std::vector<entry_t> const g_#{name}{\n" +
-        format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => " },").join("\n") +
-        "\n};\n"
+      "  g_#{name}.reserve(#{entries[type].size});\n\n" +
+        format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_#{name}.emplace_back(", :row_suffix => ");").join("\n") +
+        "\n"
     end
 
     formatted = [
@@ -101,9 +101,16 @@ module Mtx::IANALanguageSubtagRegistry
 
 namespace mtx::iana::language_subtag_registry {
 
+std::vector<entry_t> g_extlangs, g_variants;
+
+using VS = std::vector<std::string>;
+
+void
+init() {
 EOT
 
     footer = <<EOT
+}
 
 } // namespace mtx::iana::language_subtag_registry
 EOT

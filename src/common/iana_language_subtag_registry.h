@@ -20,10 +20,18 @@ namespace mtx::iana::language_subtag_registry {
 struct entry_t {
   std::string const code, description;
   std::vector<std::string> const prefixes;
+
+  entry_t(std::string &&p_code, std::string &&p_description, std::vector<std::string> &&p_prefixes)
+    : code{std::move(p_code)}
+    , description{std::move(p_description)}
+    , prefixes{std::move(p_prefixes)}
+  {
+  }
 };
 
-extern std::vector<entry_t> const g_extlangs, g_variants;
+extern std::vector<entry_t> g_extlangs, g_variants;
 
+void init();
 std::optional<entry_t> look_up_extlang(std::string const &s);
 std::optional<entry_t> look_up_variant(std::string const &s);
 

@@ -28,6 +28,7 @@
 
 #include "common/fs_sys_helpers.h"
 #include "common/hacks.h"
+#include "common/iana_language_subtag_registry.h"
 #include "common/iso639.h"
 #include "common/mm_file_io.h"
 #include "common/mm_stdio.h"
@@ -197,6 +198,7 @@ mtx_common_init(std::string const &program_name,
   mm_file_io_c::setup();
   init_common_output(false);
 
+  mtx::iana::language_subtag_registry::init();
   mtx::iso639::init();
   stereo_mode_c::init();
 
