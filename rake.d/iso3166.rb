@@ -48,17 +48,22 @@ def create_iso3166_country_list_file
 
 namespace mtx::iso3166 {
 
-std::vector<region_t> const g_regions{
+std::vector<region_t> g_regions;
+
+void
+init() {
+  g_regions.reserve(#{rows.size});
+
 EOT
 
   footer = <<EOT
-};
+}
 
 } // namespace mtx::iso3166
 EOT
 
   rows    = rows.sort_by { |row| [ row[0], row[1], row[3] ].join('::') }
-  content = header + format_table(rows, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => " },").join("\n") + "\n" + footer
+  content = header + format_table(rows, :column_suffix => ',', :row_prefix => "  g_regions.emplace_back(", :row_suffix => ");").join("\n") + "\n" + footer
 
   runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }
 end
