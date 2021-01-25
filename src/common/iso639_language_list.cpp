@@ -21,496 +21,501 @@
 
 namespace mtx::iso639 {
 
-std::vector<language_t> const g_languages{
-  { "Reserved for local use: qaa",                                                         "qaa",  ""s,   ""s,    true  },
-  { "Reserved for local use: qab",                                                         "qab",  ""s,   ""s,    true  },
-  { "Reserved for local use: qac",                                                         "qac",  ""s,   ""s,    true  },
-  { "Reserved for local use: qad",                                                         "qad",  ""s,   ""s,    true  },
-  { u8"Abkhazian"s,                                                                        "abk"s, "ab"s, ""s,    true  },
-  { u8"Achinese"s,                                                                         "ace"s, ""s,   ""s,    true  },
-  { u8"Acoli"s,                                                                            "ach"s, ""s,   ""s,    true  },
-  { u8"Adangme"s,                                                                          "ada"s, ""s,   ""s,    true  },
-  { u8"Adyghe; Adygei"s,                                                                   "ady"s, ""s,   ""s,    true  },
-  { u8"Afar"s,                                                                             "aar"s, "aa"s, ""s,    true  },
-  { u8"Afrihili"s,                                                                         "afh"s, ""s,   ""s,    true  },
-  { u8"Afrikaans"s,                                                                        "afr"s, "af"s, ""s,    true  },
-  { u8"Afro-Asiatic languages"s,                                                           "afa"s, ""s,   ""s,    true  },
-  { u8"Ainu"s,                                                                             "ain"s, ""s,   ""s,    true  },
-  { u8"Akan"s,                                                                             "aka"s, "ak"s, ""s,    true  },
-  { u8"Akkadian"s,                                                                         "akk"s, ""s,   ""s,    true  },
-  { u8"Albanian"s,                                                                         "alb"s, "sq"s, "sqi"s, true  },
-  { u8"Aleut"s,                                                                            "ale"s, ""s,   ""s,    true  },
-  { u8"Algonquian languages"s,                                                             "alg"s, ""s,   ""s,    true  },
-  { u8"Altaic languages"s,                                                                 "tut"s, ""s,   ""s,    true  },
-  { u8"Amharic"s,                                                                          "amh"s, "am"s, ""s,    true  },
-  { u8"Angika"s,                                                                           "anp"s, ""s,   ""s,    true  },
-  { u8"Apache languages"s,                                                                 "apa"s, ""s,   ""s,    true  },
-  { u8"Arabic"s,                                                                           "ara"s, "ar"s, ""s,    true  },
-  { u8"Aragonese"s,                                                                        "arg"s, "an"s, ""s,    true  },
-  { u8"Arapaho"s,                                                                          "arp"s, ""s,   ""s,    true  },
-  { u8"Arawak"s,                                                                           "arw"s, ""s,   ""s,    true  },
-  { u8"Armenian"s,                                                                         "arm"s, "hy"s, "hye"s, true  },
-  { u8"Aromanian; Arumanian; Macedo-Romanian"s,                                            "rup"s, ""s,   ""s,    true  },
-  { u8"Artificial languages"s,                                                             "art"s, ""s,   ""s,    true  },
-  { u8"Assamese"s,                                                                         "asm"s, "as"s, ""s,    true  },
-  { u8"Asturian; Bable; Leonese; Asturleonese"s,                                           "ast"s, ""s,   ""s,    true  },
-  { u8"Athapascan languages"s,                                                             "ath"s, ""s,   ""s,    true  },
-  { u8"Australian languages"s,                                                             "aus"s, ""s,   ""s,    true  },
-  { u8"Austronesian languages"s,                                                           "map"s, ""s,   ""s,    true  },
-  { u8"Avaric"s,                                                                           "ava"s, "av"s, ""s,    true  },
-  { u8"Avestan"s,                                                                          "ave"s, "ae"s, ""s,    true  },
-  { u8"Awadhi"s,                                                                           "awa"s, ""s,   ""s,    true  },
-  { u8"Aymara"s,                                                                           "aym"s, "ay"s, ""s,    true  },
-  { u8"Azerbaijani"s,                                                                      "aze"s, "az"s, ""s,    true  },
-  { u8"Balinese"s,                                                                         "ban"s, ""s,   ""s,    true  },
-  { u8"Baltic languages"s,                                                                 "bat"s, ""s,   ""s,    true  },
-  { u8"Baluchi"s,                                                                          "bal"s, ""s,   ""s,    true  },
-  { u8"Bambara"s,                                                                          "bam"s, "bm"s, ""s,    true  },
-  { u8"Bamileke languages"s,                                                               "bai"s, ""s,   ""s,    true  },
-  { u8"Banda languages"s,                                                                  "bad"s, ""s,   ""s,    true  },
-  { u8"Bantu (Other)"s,                                                                    "bnt"s, ""s,   ""s,    true  },
-  { u8"Basa"s,                                                                             "bas"s, ""s,   ""s,    true  },
-  { u8"Bashkir"s,                                                                          "bak"s, "ba"s, ""s,    true  },
-  { u8"Basque"s,                                                                           "baq"s, "eu"s, "eus"s, true  },
-  { u8"Batak languages"s,                                                                  "btk"s, ""s,   ""s,    true  },
-  { u8"Beja; Bedawiyet"s,                                                                  "bej"s, ""s,   ""s,    true  },
-  { u8"Belarusian"s,                                                                       "bel"s, "be"s, ""s,    true  },
-  { u8"Bemba"s,                                                                            "bem"s, ""s,   ""s,    true  },
-  { u8"Bengali"s,                                                                          "ben"s, "bn"s, ""s,    true  },
-  { u8"Berber languages"s,                                                                 "ber"s, ""s,   ""s,    true  },
-  { u8"Bhojpuri"s,                                                                         "bho"s, ""s,   ""s,    true  },
-  { u8"Bihari languages"s,                                                                 "bih"s, "bh"s, ""s,    true  },
-  { u8"Bikol"s,                                                                            "bik"s, ""s,   ""s,    true  },
-  { u8"Bini; Edo"s,                                                                        "bin"s, ""s,   ""s,    true  },
-  { u8"Bislama"s,                                                                          "bis"s, "bi"s, ""s,    true  },
-  { u8"Blin; Bilin"s,                                                                      "byn"s, ""s,   ""s,    true  },
-  { u8"Blissymbols; Blissymbolics; Bliss"s,                                                "zbl"s, ""s,   ""s,    true  },
-  { u8"Bokmål, Norwegian; Norwegian Bokmål"s,                                              "nob"s, "nb"s, ""s,    true  },
-  { u8"Bosnian"s,                                                                          "bos"s, "bs"s, ""s,    true  },
-  { u8"Braj"s,                                                                             "bra"s, ""s,   ""s,    true  },
-  { u8"Breton"s,                                                                           "bre"s, "br"s, ""s,    true  },
-  { u8"Buginese"s,                                                                         "bug"s, ""s,   ""s,    true  },
-  { u8"Bulgarian"s,                                                                        "bul"s, "bg"s, ""s,    true  },
-  { u8"Buriat"s,                                                                           "bua"s, ""s,   ""s,    true  },
-  { u8"Burmese"s,                                                                          "bur"s, "my"s, "mya"s, true  },
-  { u8"Caddo"s,                                                                            "cad"s, ""s,   ""s,    true  },
-  { u8"Catalan; Valencian"s,                                                               "cat"s, "ca"s, ""s,    true  },
-  { u8"Caucasian languages"s,                                                              "cau"s, ""s,   ""s,    true  },
-  { u8"Cebuano"s,                                                                          "ceb"s, ""s,   ""s,    true  },
-  { u8"Celtic languages"s,                                                                 "cel"s, ""s,   ""s,    true  },
-  { u8"Central American Indian languages"s,                                                "cai"s, ""s,   ""s,    true  },
-  { u8"Central Khmer"s,                                                                    "khm"s, "km"s, ""s,    true  },
-  { u8"Chagatai"s,                                                                         "chg"s, ""s,   ""s,    true  },
-  { u8"Chamic languages"s,                                                                 "cmc"s, ""s,   ""s,    true  },
-  { u8"Chamorro"s,                                                                         "cha"s, "ch"s, ""s,    true  },
-  { u8"Chechen"s,                                                                          "che"s, "ce"s, ""s,    true  },
-  { u8"Cherokee"s,                                                                         "chr"s, ""s,   ""s,    true  },
-  { u8"Cheyenne"s,                                                                         "chy"s, ""s,   ""s,    true  },
-  { u8"Chibcha"s,                                                                          "chb"s, ""s,   ""s,    true  },
-  { u8"Chichewa; Chewa; Nyanja"s,                                                          "nya"s, "ny"s, ""s,    true  },
-  { u8"Chinese"s,                                                                          "chi"s, "zh"s, "zho"s, true  },
-  { u8"Chinook jargon"s,                                                                   "chn"s, ""s,   ""s,    true  },
-  { u8"Chipewyan; Dene Suline"s,                                                           "chp"s, ""s,   ""s,    true  },
-  { u8"Choctaw"s,                                                                          "cho"s, ""s,   ""s,    true  },
-  { u8"Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic"s, "chu"s, "cu"s, ""s,    true  },
-  { u8"Chuukese"s,                                                                         "chk"s, ""s,   ""s,    true  },
-  { u8"Chuvash"s,                                                                          "chv"s, "cv"s, ""s,    true  },
-  { u8"Classical Newari; Old Newari; Classical Nepal Bhasa"s,                              "nwc"s, ""s,   ""s,    true  },
-  { u8"Classical Syriac"s,                                                                 "syc"s, ""s,   ""s,    true  },
-  { u8"Coptic"s,                                                                           "cop"s, ""s,   ""s,    true  },
-  { u8"Cornish"s,                                                                          "cor"s, "kw"s, ""s,    true  },
-  { u8"Corsican"s,                                                                         "cos"s, "co"s, ""s,    true  },
-  { u8"Cree"s,                                                                             "cre"s, "cr"s, ""s,    true  },
-  { u8"Creek"s,                                                                            "mus"s, ""s,   ""s,    true  },
-  { u8"Creoles and pidgins"s,                                                              "crp"s, ""s,   ""s,    true  },
-  { u8"Creoles and pidgins, English based"s,                                               "cpe"s, ""s,   ""s,    true  },
-  { u8"Creoles and pidgins, French-based"s,                                                "cpf"s, ""s,   ""s,    true  },
-  { u8"Creoles and pidgins, Portuguese-based"s,                                            "cpp"s, ""s,   ""s,    true  },
-  { u8"Crimean Tatar; Crimean Turkish"s,                                                   "crh"s, ""s,   ""s,    true  },
-  { u8"Croatian"s,                                                                         "hrv"s, "hr"s, ""s,    true  },
-  { u8"Cushitic languages"s,                                                               "cus"s, ""s,   ""s,    true  },
-  { u8"Czech"s,                                                                            "cze"s, "cs"s, "ces"s, true  },
-  { u8"Dakota"s,                                                                           "dak"s, ""s,   ""s,    true  },
-  { u8"Danish"s,                                                                           "dan"s, "da"s, ""s,    true  },
-  { u8"Dargwa"s,                                                                           "dar"s, ""s,   ""s,    true  },
-  { u8"Delaware"s,                                                                         "del"s, ""s,   ""s,    true  },
-  { u8"Dinka"s,                                                                            "din"s, ""s,   ""s,    true  },
-  { u8"Divehi; Dhivehi; Maldivian"s,                                                       "div"s, "dv"s, ""s,    true  },
-  { u8"Dogri"s,                                                                            "doi"s, ""s,   ""s,    true  },
-  { u8"Dogrib"s,                                                                           "dgr"s, ""s,   ""s,    true  },
-  { u8"Dravidian languages"s,                                                              "dra"s, ""s,   ""s,    true  },
-  { u8"Duala"s,                                                                            "dua"s, ""s,   ""s,    true  },
-  { u8"Dutch, Middle (ca. 1050-1350)"s,                                                    "dum"s, ""s,   ""s,    true  },
-  { u8"Dutch; Flemish"s,                                                                   "dut"s, "nl"s, "nld"s, true  },
-  { u8"Dyula"s,                                                                            "dyu"s, ""s,   ""s,    true  },
-  { u8"Dzongkha"s,                                                                         "dzo"s, "dz"s, ""s,    true  },
-  { u8"Eastern Frisian"s,                                                                  "frs"s, ""s,   ""s,    true  },
-  { u8"Efik"s,                                                                             "efi"s, ""s,   ""s,    true  },
-  { u8"Egyptian (Ancient)"s,                                                               "egy"s, ""s,   ""s,    true  },
-  { u8"Ekajuk"s,                                                                           "eka"s, ""s,   ""s,    true  },
-  { u8"Elamite"s,                                                                          "elx"s, ""s,   ""s,    true  },
-  { u8"English"s,                                                                          "eng"s, "en"s, ""s,    true  },
-  { u8"English, Middle (1100-1500)"s,                                                      "enm"s, ""s,   ""s,    true  },
-  { u8"English, Old (ca. 450-1100)"s,                                                      "ang"s, ""s,   ""s,    true  },
-  { u8"Erzya"s,                                                                            "myv"s, ""s,   ""s,    true  },
-  { u8"Esperanto"s,                                                                        "epo"s, "eo"s, ""s,    true  },
-  { u8"Estonian"s,                                                                         "est"s, "et"s, ""s,    true  },
-  { u8"Ewe"s,                                                                              "ewe"s, "ee"s, ""s,    true  },
-  { u8"Ewondo"s,                                                                           "ewo"s, ""s,   ""s,    true  },
-  { u8"Fang"s,                                                                             "fan"s, ""s,   ""s,    true  },
-  { u8"Fanti"s,                                                                            "fat"s, ""s,   ""s,    true  },
-  { u8"Faroese"s,                                                                          "fao"s, "fo"s, ""s,    true  },
-  { u8"Fijian"s,                                                                           "fij"s, "fj"s, ""s,    true  },
-  { u8"Filipino; Pilipino"s,                                                               "fil"s, ""s,   ""s,    true  },
-  { u8"Finnish"s,                                                                          "fin"s, "fi"s, ""s,    true  },
-  { u8"Finno-Ugrian languages"s,                                                           "fiu"s, ""s,   ""s,    true  },
-  { u8"Fon"s,                                                                              "fon"s, ""s,   ""s,    true  },
-  { u8"French"s,                                                                           "fre"s, "fr"s, "fra"s, true  },
-  { u8"French, Middle (ca. 1400-1600)"s,                                                   "frm"s, ""s,   ""s,    true  },
-  { u8"French, Old (842-ca. 1400)"s,                                                       "fro"s, ""s,   ""s,    true  },
-  { u8"Friulian"s,                                                                         "fur"s, ""s,   ""s,    true  },
-  { u8"Fulah"s,                                                                            "ful"s, "ff"s, ""s,    true  },
-  { u8"Ga"s,                                                                               "gaa"s, ""s,   ""s,    true  },
-  { u8"Gaelic; Scottish Gaelic"s,                                                          "gla"s, "gd"s, ""s,    true  },
-  { u8"Galibi Carib"s,                                                                     "car"s, ""s,   ""s,    true  },
-  { u8"Galician"s,                                                                         "glg"s, "gl"s, ""s,    true  },
-  { u8"Ganda"s,                                                                            "lug"s, "lg"s, ""s,    true  },
-  { u8"Gayo"s,                                                                             "gay"s, ""s,   ""s,    true  },
-  { u8"Gbaya"s,                                                                            "gba"s, ""s,   ""s,    true  },
-  { u8"Geez"s,                                                                             "gez"s, ""s,   ""s,    true  },
-  { u8"Georgian"s,                                                                         "geo"s, "ka"s, "kat"s, true  },
-  { u8"German"s,                                                                           "ger"s, "de"s, "deu"s, true  },
-  { u8"German, Middle High (ca. 1050-1500)"s,                                              "gmh"s, ""s,   ""s,    true  },
-  { u8"German, Old High (ca. 750-1050)"s,                                                  "goh"s, ""s,   ""s,    true  },
-  { u8"Germanic languages"s,                                                               "gem"s, ""s,   ""s,    true  },
-  { u8"Gilbertese"s,                                                                       "gil"s, ""s,   ""s,    true  },
-  { u8"Gondi"s,                                                                            "gon"s, ""s,   ""s,    true  },
-  { u8"Gorontalo"s,                                                                        "gor"s, ""s,   ""s,    true  },
-  { u8"Gothic"s,                                                                           "got"s, ""s,   ""s,    true  },
-  { u8"Grebo"s,                                                                            "grb"s, ""s,   ""s,    true  },
-  { u8"Greek, Ancient (to 1453)"s,                                                         "grc"s, ""s,   ""s,    true  },
-  { u8"Greek, Modern (1453-)"s,                                                            "gre"s, "el"s, "ell"s, true  },
-  { u8"Guarani"s,                                                                          "grn"s, "gn"s, ""s,    true  },
-  { u8"Gujarati"s,                                                                         "guj"s, "gu"s, ""s,    true  },
-  { u8"Gwich'in"s,                                                                         "gwi"s, ""s,   ""s,    true  },
-  { u8"Haida"s,                                                                            "hai"s, ""s,   ""s,    true  },
-  { u8"Haitian; Haitian Creole"s,                                                          "hat"s, "ht"s, ""s,    true  },
-  { u8"Hausa"s,                                                                            "hau"s, "ha"s, ""s,    true  },
-  { u8"Hawaiian"s,                                                                         "haw"s, ""s,   ""s,    true  },
-  { u8"Hebrew"s,                                                                           "heb"s, "he"s, ""s,    true  },
-  { u8"Herero"s,                                                                           "her"s, "hz"s, ""s,    true  },
-  { u8"Hiligaynon"s,                                                                       "hil"s, ""s,   ""s,    true  },
-  { u8"Himachali languages; Western Pahari languages"s,                                    "him"s, ""s,   ""s,    true  },
-  { u8"Hindi"s,                                                                            "hin"s, "hi"s, ""s,    true  },
-  { u8"Hiri Motu"s,                                                                        "hmo"s, "ho"s, ""s,    true  },
-  { u8"Hittite"s,                                                                          "hit"s, ""s,   ""s,    true  },
-  { u8"Hmong; Mong"s,                                                                      "hmn"s, ""s,   ""s,    true  },
-  { u8"Hungarian"s,                                                                        "hun"s, "hu"s, ""s,    true  },
-  { u8"Hupa"s,                                                                             "hup"s, ""s,   ""s,    true  },
-  { u8"Iban"s,                                                                             "iba"s, ""s,   ""s,    true  },
-  { u8"Icelandic"s,                                                                        "ice"s, "is"s, "isl"s, true  },
-  { u8"Ido"s,                                                                              "ido"s, "io"s, ""s,    true  },
-  { u8"Igbo"s,                                                                             "ibo"s, "ig"s, ""s,    true  },
-  { u8"Ijo languages"s,                                                                    "ijo"s, ""s,   ""s,    true  },
-  { u8"Iloko"s,                                                                            "ilo"s, ""s,   ""s,    true  },
-  { u8"Inari Sami"s,                                                                       "smn"s, ""s,   ""s,    true  },
-  { u8"Indic languages"s,                                                                  "inc"s, ""s,   ""s,    true  },
-  { u8"Indo-European languages"s,                                                          "ine"s, ""s,   ""s,    true  },
-  { u8"Indonesian"s,                                                                       "ind"s, "id"s, ""s,    true  },
-  { u8"Ingush"s,                                                                           "inh"s, ""s,   ""s,    true  },
-  { u8"Interlingua (International Auxiliary Language Association)"s,                       "ina"s, "ia"s, ""s,    true  },
-  { u8"Interlingue; Occidental"s,                                                          "ile"s, "ie"s, ""s,    true  },
-  { u8"Inuktitut"s,                                                                        "iku"s, "iu"s, ""s,    true  },
-  { u8"Inupiaq"s,                                                                          "ipk"s, "ik"s, ""s,    true  },
-  { u8"Iranian languages"s,                                                                "ira"s, ""s,   ""s,    true  },
-  { u8"Irish"s,                                                                            "gle"s, "ga"s, ""s,    true  },
-  { u8"Irish, Middle (900-1200)"s,                                                         "mga"s, ""s,   ""s,    true  },
-  { u8"Irish, Old (to 900)"s,                                                              "sga"s, ""s,   ""s,    true  },
-  { u8"Iroquoian languages"s,                                                              "iro"s, ""s,   ""s,    true  },
-  { u8"Italian"s,                                                                          "ita"s, "it"s, ""s,    true  },
-  { u8"Japanese"s,                                                                         "jpn"s, "ja"s, ""s,    true  },
-  { u8"Javanese"s,                                                                         "jav"s, "jv"s, ""s,    true  },
-  { u8"Judeo-Arabic"s,                                                                     "jrb"s, ""s,   ""s,    true  },
-  { u8"Judeo-Persian"s,                                                                    "jpr"s, ""s,   ""s,    true  },
-  { u8"Kabardian"s,                                                                        "kbd"s, ""s,   ""s,    true  },
-  { u8"Kabyle"s,                                                                           "kab"s, ""s,   ""s,    true  },
-  { u8"Kachin; Jingpho"s,                                                                  "kac"s, ""s,   ""s,    true  },
-  { u8"Kalaallisut; Greenlandic"s,                                                         "kal"s, "kl"s, ""s,    true  },
-  { u8"Kalmyk; Oirat"s,                                                                    "xal"s, ""s,   ""s,    true  },
-  { u8"Kamba"s,                                                                            "kam"s, ""s,   ""s,    true  },
-  { u8"Kannada"s,                                                                          "kan"s, "kn"s, ""s,    true  },
-  { u8"Kanuri"s,                                                                           "kau"s, "kr"s, ""s,    true  },
-  { u8"Kara-Kalpak"s,                                                                      "kaa"s, ""s,   ""s,    true  },
-  { u8"Karachay-Balkar"s,                                                                  "krc"s, ""s,   ""s,    true  },
-  { u8"Karelian"s,                                                                         "krl"s, ""s,   ""s,    true  },
-  { u8"Karen languages"s,                                                                  "kar"s, ""s,   ""s,    true  },
-  { u8"Kashmiri"s,                                                                         "kas"s, "ks"s, ""s,    true  },
-  { u8"Kashubian"s,                                                                        "csb"s, ""s,   ""s,    true  },
-  { u8"Kawi"s,                                                                             "kaw"s, ""s,   ""s,    true  },
-  { u8"Kazakh"s,                                                                           "kaz"s, "kk"s, ""s,    true  },
-  { u8"Khasi"s,                                                                            "kha"s, ""s,   ""s,    true  },
-  { u8"Khoisan languages"s,                                                                "khi"s, ""s,   ""s,    true  },
-  { u8"Khotanese; Sakan"s,                                                                 "kho"s, ""s,   ""s,    true  },
-  { u8"Kikuyu; Gikuyu"s,                                                                   "kik"s, "ki"s, ""s,    true  },
-  { u8"Kimbundu"s,                                                                         "kmb"s, ""s,   ""s,    true  },
-  { u8"Kinyarwanda"s,                                                                      "kin"s, "rw"s, ""s,    true  },
-  { u8"Kirghiz; Kyrgyz"s,                                                                  "kir"s, "ky"s, ""s,    true  },
-  { u8"Klingon; tlhIngan-Hol"s,                                                            "tlh"s, ""s,   ""s,    true  },
-  { u8"Komi"s,                                                                             "kom"s, "kv"s, ""s,    true  },
-  { u8"Kongo"s,                                                                            "kon"s, "kg"s, ""s,    true  },
-  { u8"Konkani"s,                                                                          "kok"s, ""s,   ""s,    true  },
-  { u8"Korean"s,                                                                           "kor"s, "ko"s, ""s,    true  },
-  { u8"Kosraean"s,                                                                         "kos"s, ""s,   ""s,    true  },
-  { u8"Kpelle"s,                                                                           "kpe"s, ""s,   ""s,    true  },
-  { u8"Kru languages"s,                                                                    "kro"s, ""s,   ""s,    true  },
-  { u8"Kuanyama; Kwanyama"s,                                                               "kua"s, "kj"s, ""s,    true  },
-  { u8"Kumyk"s,                                                                            "kum"s, ""s,   ""s,    true  },
-  { u8"Kurdish"s,                                                                          "kur"s, "ku"s, ""s,    true  },
-  { u8"Kurukh"s,                                                                           "kru"s, ""s,   ""s,    true  },
-  { u8"Kutenai"s,                                                                          "kut"s, ""s,   ""s,    true  },
-  { u8"Ladino"s,                                                                           "lad"s, ""s,   ""s,    true  },
-  { u8"Lahnda"s,                                                                           "lah"s, ""s,   ""s,    true  },
-  { u8"Lamba"s,                                                                            "lam"s, ""s,   ""s,    true  },
-  { u8"Land Dayak languages"s,                                                             "day"s, ""s,   ""s,    true  },
-  { u8"Lao"s,                                                                              "lao"s, "lo"s, ""s,    true  },
-  { u8"Latin"s,                                                                            "lat"s, "la"s, ""s,    true  },
-  { u8"Latvian"s,                                                                          "lav"s, "lv"s, ""s,    true  },
-  { u8"Lezghian"s,                                                                         "lez"s, ""s,   ""s,    true  },
-  { u8"Limburgan; Limburger; Limburgish"s,                                                 "lim"s, "li"s, ""s,    true  },
-  { u8"Lingala"s,                                                                          "lin"s, "ln"s, ""s,    true  },
-  { u8"Lithuanian"s,                                                                       "lit"s, "lt"s, ""s,    true  },
-  { u8"Lojban"s,                                                                           "jbo"s, ""s,   ""s,    true  },
-  { u8"Low German; Low Saxon; German, Low; Saxon, Low"s,                                   "nds"s, ""s,   ""s,    true  },
-  { u8"Lower Sorbian"s,                                                                    "dsb"s, ""s,   ""s,    true  },
-  { u8"Lozi"s,                                                                             "loz"s, ""s,   ""s,    true  },
-  { u8"Luba-Katanga"s,                                                                     "lub"s, "lu"s, ""s,    true  },
-  { u8"Luba-Lulua"s,                                                                       "lua"s, ""s,   ""s,    true  },
-  { u8"Luiseno"s,                                                                          "lui"s, ""s,   ""s,    true  },
-  { u8"Lule Sami"s,                                                                        "smj"s, ""s,   ""s,    true  },
-  { u8"Lunda"s,                                                                            "lun"s, ""s,   ""s,    true  },
-  { u8"Luo (Kenya and Tanzania)"s,                                                         "luo"s, ""s,   ""s,    true  },
-  { u8"Lushai"s,                                                                           "lus"s, ""s,   ""s,    true  },
-  { u8"Luxembourgish; Letzeburgesch"s,                                                     "ltz"s, "lb"s, ""s,    true  },
-  { u8"Macedonian"s,                                                                       "mac"s, "mk"s, "mkd"s, true  },
-  { u8"Madurese"s,                                                                         "mad"s, ""s,   ""s,    true  },
-  { u8"Magahi"s,                                                                           "mag"s, ""s,   ""s,    true  },
-  { u8"Maithili"s,                                                                         "mai"s, ""s,   ""s,    true  },
-  { u8"Makasar"s,                                                                          "mak"s, ""s,   ""s,    true  },
-  { u8"Malagasy"s,                                                                         "mlg"s, "mg"s, ""s,    true  },
-  { u8"Malay"s,                                                                            "may"s, "ms"s, "msa"s, true  },
-  { u8"Malayalam"s,                                                                        "mal"s, "ml"s, ""s,    true  },
-  { u8"Maltese"s,                                                                          "mlt"s, "mt"s, ""s,    true  },
-  { u8"Manchu"s,                                                                           "mnc"s, ""s,   ""s,    true  },
-  { u8"Mandar"s,                                                                           "mdr"s, ""s,   ""s,    true  },
-  { u8"Mandingo"s,                                                                         "man"s, ""s,   ""s,    true  },
-  { u8"Manipuri"s,                                                                         "mni"s, ""s,   ""s,    true  },
-  { u8"Manobo languages"s,                                                                 "mno"s, ""s,   ""s,    true  },
-  { u8"Manx"s,                                                                             "glv"s, "gv"s, ""s,    true  },
-  { u8"Maori"s,                                                                            "mao"s, "mi"s, "mri"s, true  },
-  { u8"Mapudungun; Mapuche"s,                                                              "arn"s, ""s,   ""s,    true  },
-  { u8"Marathi"s,                                                                          "mar"s, "mr"s, ""s,    true  },
-  { u8"Mari"s,                                                                             "chm"s, ""s,   ""s,    true  },
-  { u8"Marshallese"s,                                                                      "mah"s, "mh"s, ""s,    true  },
-  { u8"Marwari"s,                                                                          "mwr"s, ""s,   ""s,    true  },
-  { u8"Masai"s,                                                                            "mas"s, ""s,   ""s,    true  },
-  { u8"Mayan languages"s,                                                                  "myn"s, ""s,   ""s,    true  },
-  { u8"Mende"s,                                                                            "men"s, ""s,   ""s,    true  },
-  { u8"Mi'kmaq; Micmac"s,                                                                  "mic"s, ""s,   ""s,    true  },
-  { u8"Minangkabau"s,                                                                      "min"s, ""s,   ""s,    true  },
-  { u8"Mirandese"s,                                                                        "mwl"s, ""s,   ""s,    true  },
-  { u8"Mohawk"s,                                                                           "moh"s, ""s,   ""s,    true  },
-  { u8"Moksha"s,                                                                           "mdf"s, ""s,   ""s,    true  },
-  { u8"Mon-Khmer languages"s,                                                              "mkh"s, ""s,   ""s,    true  },
-  { u8"Mongo"s,                                                                            "lol"s, ""s,   ""s,    true  },
-  { u8"Mongolian"s,                                                                        "mon"s, "mn"s, ""s,    true  },
-  { u8"Mossi"s,                                                                            "mos"s, ""s,   ""s,    true  },
-  { u8"Multiple languages"s,                                                               "mul"s, ""s,   ""s,    true  },
-  { u8"Munda languages"s,                                                                  "mun"s, ""s,   ""s,    true  },
-  { u8"N'Ko"s,                                                                             "nqo"s, ""s,   ""s,    true  },
-  { u8"Nahuatl languages"s,                                                                "nah"s, ""s,   ""s,    true  },
-  { u8"Nauru"s,                                                                            "nau"s, "na"s, ""s,    true  },
-  { u8"Navajo; Navaho"s,                                                                   "nav"s, "nv"s, ""s,    true  },
-  { u8"Ndebele, North; North Ndebele"s,                                                    "nde"s, "nd"s, ""s,    true  },
-  { u8"Ndebele, South; South Ndebele"s,                                                    "nbl"s, "nr"s, ""s,    true  },
-  { u8"Ndonga"s,                                                                           "ndo"s, "ng"s, ""s,    true  },
-  { u8"Neapolitan"s,                                                                       "nap"s, ""s,   ""s,    true  },
-  { u8"Nepal Bhasa; Newari"s,                                                              "new"s, ""s,   ""s,    true  },
-  { u8"Nepali"s,                                                                           "nep"s, "ne"s, ""s,    true  },
-  { u8"Nias"s,                                                                             "nia"s, ""s,   ""s,    true  },
-  { u8"Niger-Kordofanian languages"s,                                                      "nic"s, ""s,   ""s,    true  },
-  { u8"Nilo-Saharan languages"s,                                                           "ssa"s, ""s,   ""s,    true  },
-  { u8"Niuean"s,                                                                           "niu"s, ""s,   ""s,    true  },
-  { u8"No linguistic content; Not applicable"s,                                            "zxx"s, ""s,   ""s,    true  },
-  { u8"Nogai"s,                                                                            "nog"s, ""s,   ""s,    true  },
-  { u8"Norse, Old"s,                                                                       "non"s, ""s,   ""s,    true  },
-  { u8"North American Indian languages"s,                                                  "nai"s, ""s,   ""s,    true  },
-  { u8"Northern Frisian"s,                                                                 "frr"s, ""s,   ""s,    true  },
-  { u8"Northern Sami"s,                                                                    "sme"s, "se"s, ""s,    true  },
-  { u8"Norwegian Nynorsk; Nynorsk, Norwegian"s,                                            "nno"s, "nn"s, ""s,    true  },
-  { u8"Norwegian"s,                                                                        "nor"s, "no"s, ""s,    true  },
-  { u8"Nubian languages"s,                                                                 "nub"s, ""s,   ""s,    true  },
-  { u8"Nyamwezi"s,                                                                         "nym"s, ""s,   ""s,    true  },
-  { u8"Nyankole"s,                                                                         "nyn"s, ""s,   ""s,    true  },
-  { u8"Nyoro"s,                                                                            "nyo"s, ""s,   ""s,    true  },
-  { u8"Nzima"s,                                                                            "nzi"s, ""s,   ""s,    true  },
-  { u8"Occitan (post 1500); Provençal"s,                                                   "oci"s, "oc"s, ""s,    true  },
-  { u8"Official Aramaic (700-300 BCE); Imperial Aramaic (700-300 BCE)"s,                   "arc"s, ""s,   ""s,    true  },
-  { u8"Ojibwa"s,                                                                           "oji"s, "oj"s, ""s,    true  },
-  { u8"Oriya"s,                                                                            "ori"s, "or"s, ""s,    true  },
-  { u8"Oromo"s,                                                                            "orm"s, "om"s, ""s,    true  },
-  { u8"Osage"s,                                                                            "osa"s, ""s,   ""s,    true  },
-  { u8"Ossetian; Ossetic"s,                                                                "oss"s, "os"s, ""s,    true  },
-  { u8"Otomian languages"s,                                                                "oto"s, ""s,   ""s,    true  },
-  { u8"Pahlavi"s,                                                                          "pal"s, ""s,   ""s,    true  },
-  { u8"Palauan"s,                                                                          "pau"s, ""s,   ""s,    true  },
-  { u8"Pali"s,                                                                             "pli"s, "pi"s, ""s,    true  },
-  { u8"Pampanga; Kapampangan"s,                                                            "pam"s, ""s,   ""s,    true  },
-  { u8"Pangasinan"s,                                                                       "pag"s, ""s,   ""s,    true  },
-  { u8"Panjabi; Punjabi"s,                                                                 "pan"s, "pa"s, ""s,    true  },
-  { u8"Papiamento"s,                                                                       "pap"s, ""s,   ""s,    true  },
-  { u8"Papuan languages"s,                                                                 "paa"s, ""s,   ""s,    true  },
-  { u8"Pedi; Sepedi; Northern Sotho"s,                                                     "nso"s, ""s,   ""s,    true  },
-  { u8"Persian"s,                                                                          "per"s, "fa"s, "fas"s, true  },
-  { u8"Persian, Old (ca. 600-400 B.C.)"s,                                                  "peo"s, ""s,   ""s,    true  },
-  { u8"Philippine languages"s,                                                             "phi"s, ""s,   ""s,    true  },
-  { u8"Phoenician"s,                                                                       "phn"s, ""s,   ""s,    true  },
-  { u8"Pohnpeian"s,                                                                        "pon"s, ""s,   ""s,    true  },
-  { u8"Polish"s,                                                                           "pol"s, "pl"s, ""s,    true  },
-  { u8"Portuguese"s,                                                                       "por"s, "pt"s, ""s,    true  },
-  { u8"Prakrit languages"s,                                                                "pra"s, ""s,   ""s,    true  },
-  { u8"Provençal, Old (to 1500)"s,                                                         "pro"s, ""s,   ""s,    true  },
-  { u8"Pushto; Pashto"s,                                                                   "pus"s, "ps"s, ""s,    true  },
-  { u8"Quechua"s,                                                                          "que"s, "qu"s, ""s,    true  },
-  { u8"Rajasthani"s,                                                                       "raj"s, ""s,   ""s,    true  },
-  { u8"Rapanui"s,                                                                          "rap"s, ""s,   ""s,    true  },
-  { u8"Rarotongan; Cook Islands Maori"s,                                                   "rar"s, ""s,   ""s,    true  },
-  { u8"Romance languages"s,                                                                "roa"s, ""s,   ""s,    true  },
-  { u8"Romanian; Moldavian; Moldovan"s,                                                    "rum"s, "ro"s, "ron"s, true  },
-  { u8"Romansh"s,                                                                          "roh"s, "rm"s, ""s,    true  },
-  { u8"Romany"s,                                                                           "rom"s, ""s,   ""s,    true  },
-  { u8"Rundi"s,                                                                            "run"s, "rn"s, ""s,    true  },
-  { u8"Russian"s,                                                                          "rus"s, "ru"s, ""s,    true  },
-  { u8"Salishan languages"s,                                                               "sal"s, ""s,   ""s,    true  },
-  { u8"Samaritan Aramaic"s,                                                                "sam"s, ""s,   ""s,    true  },
-  { u8"Sami languages"s,                                                                   "smi"s, ""s,   ""s,    true  },
-  { u8"Samoan"s,                                                                           "smo"s, "sm"s, ""s,    true  },
-  { u8"Sandawe"s,                                                                          "sad"s, ""s,   ""s,    true  },
-  { u8"Sango"s,                                                                            "sag"s, "sg"s, ""s,    true  },
-  { u8"Sanskrit"s,                                                                         "san"s, "sa"s, ""s,    true  },
-  { u8"Santali"s,                                                                          "sat"s, ""s,   ""s,    true  },
-  { u8"Sardinian"s,                                                                        "srd"s, "sc"s, ""s,    true  },
-  { u8"Sasak"s,                                                                            "sas"s, ""s,   ""s,    true  },
-  { u8"Scots"s,                                                                            "sco"s, ""s,   ""s,    true  },
-  { u8"Selkup"s,                                                                           "sel"s, ""s,   ""s,    true  },
-  { u8"Semitic languages"s,                                                                "sem"s, ""s,   ""s,    true  },
-  { u8"Serbian"s,                                                                          "srp"s, "sr"s, ""s,    true  },
-  { u8"Serer"s,                                                                            "srr"s, ""s,   ""s,    true  },
-  { u8"Shan"s,                                                                             "shn"s, ""s,   ""s,    true  },
-  { u8"Shona"s,                                                                            "sna"s, "sn"s, ""s,    true  },
-  { u8"Sichuan Yi; Nuosu"s,                                                                "iii"s, "ii"s, ""s,    true  },
-  { u8"Sicilian"s,                                                                         "scn"s, ""s,   ""s,    true  },
-  { u8"Sidamo"s,                                                                           "sid"s, ""s,   ""s,    true  },
-  { u8"Sign Languages"s,                                                                   "sgn"s, ""s,   ""s,    true  },
-  { u8"Siksika"s,                                                                          "bla"s, ""s,   ""s,    true  },
-  { u8"Sindhi"s,                                                                           "snd"s, "sd"s, ""s,    true  },
-  { u8"Sinhala; Sinhalese"s,                                                               "sin"s, "si"s, ""s,    true  },
-  { u8"Sino-Tibetan languages"s,                                                           "sit"s, ""s,   ""s,    true  },
-  { u8"Siouan languages"s,                                                                 "sio"s, ""s,   ""s,    true  },
-  { u8"Skolt Sami"s,                                                                       "sms"s, ""s,   ""s,    true  },
-  { u8"Slave (Athapascan)"s,                                                               "den"s, ""s,   ""s,    true  },
-  { u8"Slavic languages"s,                                                                 "sla"s, ""s,   ""s,    true  },
-  { u8"Slovak"s,                                                                           "slo"s, "sk"s, "slk"s, true  },
-  { u8"Slovenian"s,                                                                        "slv"s, "sl"s, ""s,    true  },
-  { u8"Sogdian"s,                                                                          "sog"s, ""s,   ""s,    true  },
-  { u8"Somali"s,                                                                           "som"s, "so"s, ""s,    true  },
-  { u8"Songhai languages"s,                                                                "son"s, ""s,   ""s,    true  },
-  { u8"Soninke"s,                                                                          "snk"s, ""s,   ""s,    true  },
-  { u8"Sorbian languages"s,                                                                "wen"s, ""s,   ""s,    true  },
-  { u8"Sotho, Southern"s,                                                                  "sot"s, "st"s, ""s,    true  },
-  { u8"South American Indian (Other)"s,                                                    "sai"s, ""s,   ""s,    true  },
-  { u8"Southern Altai"s,                                                                   "alt"s, ""s,   ""s,    true  },
-  { u8"Southern Sami"s,                                                                    "sma"s, ""s,   ""s,    true  },
-  { u8"Spanish; Castilian"s,                                                               "spa"s, "es"s, ""s,    true  },
-  { u8"Sranan Tongo"s,                                                                     "srn"s, ""s,   ""s,    true  },
-  { u8"Standard Moroccan Tamazight"s,                                                      "zgh"s, ""s,   ""s,    true  },
-  { u8"Sukuma"s,                                                                           "suk"s, ""s,   ""s,    true  },
-  { u8"Sumerian"s,                                                                         "sux"s, ""s,   ""s,    true  },
-  { u8"Sundanese"s,                                                                        "sun"s, "su"s, ""s,    true  },
-  { u8"Susu"s,                                                                             "sus"s, ""s,   ""s,    true  },
-  { u8"Swahili"s,                                                                          "swa"s, "sw"s, ""s,    true  },
-  { u8"Swati"s,                                                                            "ssw"s, "ss"s, ""s,    true  },
-  { u8"Swedish"s,                                                                          "swe"s, "sv"s, ""s,    true  },
-  { u8"Swiss German; Alemannic; Alsatian"s,                                                "gsw"s, ""s,   ""s,    true  },
-  { u8"Syriac"s,                                                                           "syr"s, ""s,   ""s,    true  },
-  { u8"Tagalog"s,                                                                          "tgl"s, "tl"s, ""s,    true  },
-  { u8"Tahitian"s,                                                                         "tah"s, "ty"s, ""s,    true  },
-  { u8"Tai languages"s,                                                                    "tai"s, ""s,   ""s,    true  },
-  { u8"Tajik"s,                                                                            "tgk"s, "tg"s, ""s,    true  },
-  { u8"Tamashek"s,                                                                         "tmh"s, ""s,   ""s,    true  },
-  { u8"Tamil"s,                                                                            "tam"s, "ta"s, ""s,    true  },
-  { u8"Tatar"s,                                                                            "tat"s, "tt"s, ""s,    true  },
-  { u8"Telugu"s,                                                                           "tel"s, "te"s, ""s,    true  },
-  { u8"Tereno"s,                                                                           "ter"s, ""s,   ""s,    true  },
-  { u8"Tetum"s,                                                                            "tet"s, ""s,   ""s,    true  },
-  { u8"Thai"s,                                                                             "tha"s, "th"s, ""s,    true  },
-  { u8"Tibetan"s,                                                                          "tib"s, "bo"s, "bod"s, true  },
-  { u8"Tigre"s,                                                                            "tig"s, ""s,   ""s,    true  },
-  { u8"Tigrinya"s,                                                                         "tir"s, "ti"s, ""s,    true  },
-  { u8"Timne"s,                                                                            "tem"s, ""s,   ""s,    true  },
-  { u8"Tiv"s,                                                                              "tiv"s, ""s,   ""s,    true  },
-  { u8"Tlingit"s,                                                                          "tli"s, ""s,   ""s,    true  },
-  { u8"Tok Pisin"s,                                                                        "tpi"s, ""s,   ""s,    true  },
-  { u8"Tokelau"s,                                                                          "tkl"s, ""s,   ""s,    true  },
-  { u8"Tonga (Nyasa)"s,                                                                    "tog"s, ""s,   ""s,    true  },
-  { u8"Tonga (Tonga Islands)"s,                                                            "ton"s, "to"s, ""s,    true  },
-  { u8"Tsimshian"s,                                                                        "tsi"s, ""s,   ""s,    true  },
-  { u8"Tsonga"s,                                                                           "tso"s, "ts"s, ""s,    true  },
-  { u8"Tswana"s,                                                                           "tsn"s, "tn"s, ""s,    true  },
-  { u8"Tumbuka"s,                                                                          "tum"s, ""s,   ""s,    true  },
-  { u8"Tupi languages"s,                                                                   "tup"s, ""s,   ""s,    true  },
-  { u8"Turkish"s,                                                                          "tur"s, "tr"s, ""s,    true  },
-  { u8"Turkish, Ottoman (1500-1928)"s,                                                     "ota"s, ""s,   ""s,    true  },
-  { u8"Turkmen"s,                                                                          "tuk"s, "tk"s, ""s,    true  },
-  { u8"Tuvalu"s,                                                                           "tvl"s, ""s,   ""s,    true  },
-  { u8"Tuvinian"s,                                                                         "tyv"s, ""s,   ""s,    true  },
-  { u8"Twi"s,                                                                              "twi"s, "tw"s, ""s,    true  },
-  { u8"Udmurt"s,                                                                           "udm"s, ""s,   ""s,    true  },
-  { u8"Ugaritic"s,                                                                         "uga"s, ""s,   ""s,    true  },
-  { u8"Uighur; Uyghur"s,                                                                   "uig"s, "ug"s, ""s,    true  },
-  { u8"Ukrainian"s,                                                                        "ukr"s, "uk"s, ""s,    true  },
-  { u8"Umbundu"s,                                                                          "umb"s, ""s,   ""s,    true  },
-  { u8"Uncoded languages"s,                                                                "mis"s, ""s,   ""s,    true  },
-  { u8"Undetermined"s,                                                                     "und"s, ""s,   ""s,    true  },
-  { u8"Upper Sorbian"s,                                                                    "hsb"s, ""s,   ""s,    true  },
-  { u8"Urdu"s,                                                                             "urd"s, "ur"s, ""s,    true  },
-  { u8"Uzbek"s,                                                                            "uzb"s, "uz"s, ""s,    true  },
-  { u8"Vai"s,                                                                              "vai"s, ""s,   ""s,    true  },
-  { u8"Venda"s,                                                                            "ven"s, "ve"s, ""s,    true  },
-  { u8"Vietnamese"s,                                                                       "vie"s, "vi"s, ""s,    true  },
-  { u8"Volapük"s,                                                                          "vol"s, "vo"s, ""s,    true  },
-  { u8"Votic"s,                                                                            "vot"s, ""s,   ""s,    true  },
-  { u8"Wakashan languages"s,                                                               "wak"s, ""s,   ""s,    true  },
-  { u8"Walamo"s,                                                                           "wal"s, ""s,   ""s,    true  },
-  { u8"Walloon"s,                                                                          "wln"s, "wa"s, ""s,    true  },
-  { u8"Waray"s,                                                                            "war"s, ""s,   ""s,    true  },
-  { u8"Washo"s,                                                                            "was"s, ""s,   ""s,    true  },
-  { u8"Welsh"s,                                                                            "wel"s, "cy"s, "cym"s, true  },
-  { u8"Western Frisian"s,                                                                  "fry"s, "fy"s, ""s,    true  },
-  { u8"Wolof"s,                                                                            "wol"s, "wo"s, ""s,    true  },
-  { u8"Xhosa"s,                                                                            "xho"s, "xh"s, ""s,    true  },
-  { u8"Yakut"s,                                                                            "sah"s, ""s,   ""s,    true  },
-  { u8"Yao"s,                                                                              "yao"s, ""s,   ""s,    true  },
-  { u8"Yapese"s,                                                                           "yap"s, ""s,   ""s,    true  },
-  { u8"Yiddish"s,                                                                          "yid"s, "yi"s, ""s,    true  },
-  { u8"Yoruba"s,                                                                           "yor"s, "yo"s, ""s,    true  },
-  { u8"Yupik languages"s,                                                                  "ypk"s, ""s,   ""s,    true  },
-  { u8"Zande languages"s,                                                                  "znd"s, ""s,   ""s,    true  },
-  { u8"Zapotec"s,                                                                          "zap"s, ""s,   ""s,    true  },
-  { u8"Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki"s,                                   "zza"s, ""s,   ""s,    true  },
-  { u8"Zenaga"s,                                                                           "zen"s, ""s,   ""s,    true  },
-  { u8"Zhuang; Chuang"s,                                                                   "zha"s, "za"s, ""s,    true  },
-  { u8"Zulu"s,                                                                             "zul"s, "zu"s, ""s,    true  },
-  { u8"Zuni"s,                                                                             "zun"s, ""s,   ""s,    true  },
-};
+std::vector<language_t> g_languages;
+
+void
+init() {
+  g_languages.reserve(489);
+
+  g_languages.emplace_back(u8"Abkhazian"s,                                                                        "abk"s,   "ab"s, ""s,    true );
+  g_languages.emplace_back(u8"Achinese"s,                                                                         "ace"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Acoli"s,                                                                            "ach"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Adangme"s,                                                                          "ada"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Adyghe; Adygei"s,                                                                   "ady"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Afar"s,                                                                             "aar"s,   "aa"s, ""s,    true );
+  g_languages.emplace_back(u8"Afrihili"s,                                                                         "afh"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Afrikaans"s,                                                                        "afr"s,   "af"s, ""s,    true );
+  g_languages.emplace_back(u8"Afro-Asiatic languages"s,                                                           "afa"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Ainu"s,                                                                             "ain"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Akan"s,                                                                             "aka"s,   "ak"s, ""s,    true );
+  g_languages.emplace_back(u8"Akkadian"s,                                                                         "akk"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Albanian"s,                                                                         "alb"s,   "sq"s, "sqi"s, true );
+  g_languages.emplace_back(u8"Aleut"s,                                                                            "ale"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Algonquian languages"s,                                                             "alg"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Altaic languages"s,                                                                 "tut"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Amharic"s,                                                                          "amh"s,   "am"s, ""s,    true );
+  g_languages.emplace_back(u8"Angika"s,                                                                           "anp"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Apache languages"s,                                                                 "apa"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Arabic"s,                                                                           "ara"s,   "ar"s, ""s,    true );
+  g_languages.emplace_back(u8"Aragonese"s,                                                                        "arg"s,   "an"s, ""s,    true );
+  g_languages.emplace_back(u8"Arapaho"s,                                                                          "arp"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Arawak"s,                                                                           "arw"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Armenian"s,                                                                         "arm"s,   "hy"s, "hye"s, true );
+  g_languages.emplace_back(u8"Aromanian; Arumanian; Macedo-Romanian"s,                                            "rup"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Artificial languages"s,                                                             "art"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Assamese"s,                                                                         "asm"s,   "as"s, ""s,    true );
+  g_languages.emplace_back(u8"Asturian; Bable; Leonese; Asturleonese"s,                                           "ast"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Athapascan languages"s,                                                             "ath"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Australian languages"s,                                                             "aus"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Austronesian languages"s,                                                           "map"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Avaric"s,                                                                           "ava"s,   "av"s, ""s,    true );
+  g_languages.emplace_back(u8"Avestan"s,                                                                          "ave"s,   "ae"s, ""s,    true );
+  g_languages.emplace_back(u8"Awadhi"s,                                                                           "awa"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Aymara"s,                                                                           "aym"s,   "ay"s, ""s,    true );
+  g_languages.emplace_back(u8"Azerbaijani"s,                                                                      "aze"s,   "az"s, ""s,    true );
+  g_languages.emplace_back(u8"Balinese"s,                                                                         "ban"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Baltic languages"s,                                                                 "bat"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Baluchi"s,                                                                          "bal"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Bambara"s,                                                                          "bam"s,   "bm"s, ""s,    true );
+  g_languages.emplace_back(u8"Bamileke languages"s,                                                               "bai"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Banda languages"s,                                                                  "bad"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Bantu (Other)"s,                                                                    "bnt"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Basa"s,                                                                             "bas"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Bashkir"s,                                                                          "bak"s,   "ba"s, ""s,    true );
+  g_languages.emplace_back(u8"Basque"s,                                                                           "baq"s,   "eu"s, "eus"s, true );
+  g_languages.emplace_back(u8"Batak languages"s,                                                                  "btk"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Beja; Bedawiyet"s,                                                                  "bej"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Belarusian"s,                                                                       "bel"s,   "be"s, ""s,    true );
+  g_languages.emplace_back(u8"Bemba"s,                                                                            "bem"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Bengali"s,                                                                          "ben"s,   "bn"s, ""s,    true );
+  g_languages.emplace_back(u8"Berber languages"s,                                                                 "ber"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Bhojpuri"s,                                                                         "bho"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Bihari languages"s,                                                                 "bih"s,   "bh"s, ""s,    true );
+  g_languages.emplace_back(u8"Bikol"s,                                                                            "bik"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Bini; Edo"s,                                                                        "bin"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Bislama"s,                                                                          "bis"s,   "bi"s, ""s,    true );
+  g_languages.emplace_back(u8"Blin; Bilin"s,                                                                      "byn"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Blissymbols; Blissymbolics; Bliss"s,                                                "zbl"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Bokmål, Norwegian; Norwegian Bokmål"s,                                              "nob"s,   "nb"s, ""s,    true );
+  g_languages.emplace_back(u8"Bosnian"s,                                                                          "bos"s,   "bs"s, ""s,    true );
+  g_languages.emplace_back(u8"Braj"s,                                                                             "bra"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Breton"s,                                                                           "bre"s,   "br"s, ""s,    true );
+  g_languages.emplace_back(u8"Buginese"s,                                                                         "bug"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Bulgarian"s,                                                                        "bul"s,   "bg"s, ""s,    true );
+  g_languages.emplace_back(u8"Buriat"s,                                                                           "bua"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Burmese"s,                                                                          "bur"s,   "my"s, "mya"s, true );
+  g_languages.emplace_back(u8"Caddo"s,                                                                            "cad"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Catalan; Valencian"s,                                                               "cat"s,   "ca"s, ""s,    true );
+  g_languages.emplace_back(u8"Caucasian languages"s,                                                              "cau"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Cebuano"s,                                                                          "ceb"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Celtic languages"s,                                                                 "cel"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Central American Indian languages"s,                                                "cai"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Central Khmer"s,                                                                    "khm"s,   "km"s, ""s,    true );
+  g_languages.emplace_back(u8"Chagatai"s,                                                                         "chg"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Chamic languages"s,                                                                 "cmc"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Chamorro"s,                                                                         "cha"s,   "ch"s, ""s,    true );
+  g_languages.emplace_back(u8"Chechen"s,                                                                          "che"s,   "ce"s, ""s,    true );
+  g_languages.emplace_back(u8"Cherokee"s,                                                                         "chr"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Cheyenne"s,                                                                         "chy"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Chibcha"s,                                                                          "chb"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Chichewa; Chewa; Nyanja"s,                                                          "nya"s,   "ny"s, ""s,    true );
+  g_languages.emplace_back(u8"Chinese"s,                                                                          "chi"s,   "zh"s, "zho"s, true );
+  g_languages.emplace_back(u8"Chinook jargon"s,                                                                   "chn"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Chipewyan; Dene Suline"s,                                                           "chp"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Choctaw"s,                                                                          "cho"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Church Slavic; Old Slavonic; Church Slavonic; Old Bulgarian; Old Church Slavonic"s, "chu"s,   "cu"s, ""s,    true );
+  g_languages.emplace_back(u8"Chuukese"s,                                                                         "chk"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Chuvash"s,                                                                          "chv"s,   "cv"s, ""s,    true );
+  g_languages.emplace_back(u8"Classical Newari; Old Newari; Classical Nepal Bhasa"s,                              "nwc"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Classical Syriac"s,                                                                 "syc"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Coptic"s,                                                                           "cop"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Cornish"s,                                                                          "cor"s,   "kw"s, ""s,    true );
+  g_languages.emplace_back(u8"Corsican"s,                                                                         "cos"s,   "co"s, ""s,    true );
+  g_languages.emplace_back(u8"Cree"s,                                                                             "cre"s,   "cr"s, ""s,    true );
+  g_languages.emplace_back(u8"Creek"s,                                                                            "mus"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Creoles and pidgins"s,                                                              "crp"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Creoles and pidgins, English based"s,                                               "cpe"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Creoles and pidgins, French-based"s,                                                "cpf"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Creoles and pidgins, Portuguese-based"s,                                            "cpp"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Crimean Tatar; Crimean Turkish"s,                                                   "crh"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Croatian"s,                                                                         "hrv"s,   "hr"s, ""s,    true );
+  g_languages.emplace_back(u8"Cushitic languages"s,                                                               "cus"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Czech"s,                                                                            "cze"s,   "cs"s, "ces"s, true );
+  g_languages.emplace_back(u8"Dakota"s,                                                                           "dak"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Danish"s,                                                                           "dan"s,   "da"s, ""s,    true );
+  g_languages.emplace_back(u8"Dargwa"s,                                                                           "dar"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Delaware"s,                                                                         "del"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Dinka"s,                                                                            "din"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Divehi; Dhivehi; Maldivian"s,                                                       "div"s,   "dv"s, ""s,    true );
+  g_languages.emplace_back(u8"Dogri"s,                                                                            "doi"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Dogrib"s,                                                                           "dgr"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Dravidian languages"s,                                                              "dra"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Duala"s,                                                                            "dua"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Dutch, Middle (ca. 1050-1350)"s,                                                    "dum"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Dutch; Flemish"s,                                                                   "dut"s,   "nl"s, "nld"s, true );
+  g_languages.emplace_back(u8"Dyula"s,                                                                            "dyu"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Dzongkha"s,                                                                         "dzo"s,   "dz"s, ""s,    true );
+  g_languages.emplace_back(u8"Eastern Frisian"s,                                                                  "frs"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Efik"s,                                                                             "efi"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Egyptian (Ancient)"s,                                                               "egy"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Ekajuk"s,                                                                           "eka"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Elamite"s,                                                                          "elx"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"English"s,                                                                          "eng"s,   "en"s, ""s,    true );
+  g_languages.emplace_back(u8"English, Middle (1100-1500)"s,                                                      "enm"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"English, Old (ca. 450-1100)"s,                                                      "ang"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Erzya"s,                                                                            "myv"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Esperanto"s,                                                                        "epo"s,   "eo"s, ""s,    true );
+  g_languages.emplace_back(u8"Estonian"s,                                                                         "est"s,   "et"s, ""s,    true );
+  g_languages.emplace_back(u8"Ewe"s,                                                                              "ewe"s,   "ee"s, ""s,    true );
+  g_languages.emplace_back(u8"Ewondo"s,                                                                           "ewo"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Fang"s,                                                                             "fan"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Fanti"s,                                                                            "fat"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Faroese"s,                                                                          "fao"s,   "fo"s, ""s,    true );
+  g_languages.emplace_back(u8"Fijian"s,                                                                           "fij"s,   "fj"s, ""s,    true );
+  g_languages.emplace_back(u8"Filipino; Pilipino"s,                                                               "fil"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Finnish"s,                                                                          "fin"s,   "fi"s, ""s,    true );
+  g_languages.emplace_back(u8"Finno-Ugrian languages"s,                                                           "fiu"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Fon"s,                                                                              "fon"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"French"s,                                                                           "fre"s,   "fr"s, "fra"s, true );
+  g_languages.emplace_back(u8"French, Middle (ca. 1400-1600)"s,                                                   "frm"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"French, Old (842-ca. 1400)"s,                                                       "fro"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Friulian"s,                                                                         "fur"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Fulah"s,                                                                            "ful"s,   "ff"s, ""s,    true );
+  g_languages.emplace_back(u8"Ga"s,                                                                               "gaa"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Gaelic; Scottish Gaelic"s,                                                          "gla"s,   "gd"s, ""s,    true );
+  g_languages.emplace_back(u8"Galibi Carib"s,                                                                     "car"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Galician"s,                                                                         "glg"s,   "gl"s, ""s,    true );
+  g_languages.emplace_back(u8"Ganda"s,                                                                            "lug"s,   "lg"s, ""s,    true );
+  g_languages.emplace_back(u8"Gayo"s,                                                                             "gay"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Gbaya"s,                                                                            "gba"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Geez"s,                                                                             "gez"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Georgian"s,                                                                         "geo"s,   "ka"s, "kat"s, true );
+  g_languages.emplace_back(u8"German"s,                                                                           "ger"s,   "de"s, "deu"s, true );
+  g_languages.emplace_back(u8"German, Middle High (ca. 1050-1500)"s,                                              "gmh"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"German, Old High (ca. 750-1050)"s,                                                  "goh"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Germanic languages"s,                                                               "gem"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Gilbertese"s,                                                                       "gil"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Gondi"s,                                                                            "gon"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Gorontalo"s,                                                                        "gor"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Gothic"s,                                                                           "got"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Grebo"s,                                                                            "grb"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Greek, Ancient (to 1453)"s,                                                         "grc"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Greek, Modern (1453-)"s,                                                            "gre"s,   "el"s, "ell"s, true );
+  g_languages.emplace_back(u8"Guarani"s,                                                                          "grn"s,   "gn"s, ""s,    true );
+  g_languages.emplace_back(u8"Gujarati"s,                                                                         "guj"s,   "gu"s, ""s,    true );
+  g_languages.emplace_back(u8"Gwich'in"s,                                                                         "gwi"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Haida"s,                                                                            "hai"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Haitian; Haitian Creole"s,                                                          "hat"s,   "ht"s, ""s,    true );
+  g_languages.emplace_back(u8"Hausa"s,                                                                            "hau"s,   "ha"s, ""s,    true );
+  g_languages.emplace_back(u8"Hawaiian"s,                                                                         "haw"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Hebrew"s,                                                                           "heb"s,   "he"s, ""s,    true );
+  g_languages.emplace_back(u8"Herero"s,                                                                           "her"s,   "hz"s, ""s,    true );
+  g_languages.emplace_back(u8"Hiligaynon"s,                                                                       "hil"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Himachali languages; Western Pahari languages"s,                                    "him"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Hindi"s,                                                                            "hin"s,   "hi"s, ""s,    true );
+  g_languages.emplace_back(u8"Hiri Motu"s,                                                                        "hmo"s,   "ho"s, ""s,    true );
+  g_languages.emplace_back(u8"Hittite"s,                                                                          "hit"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Hmong; Mong"s,                                                                      "hmn"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Hungarian"s,                                                                        "hun"s,   "hu"s, ""s,    true );
+  g_languages.emplace_back(u8"Hupa"s,                                                                             "hup"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Iban"s,                                                                             "iba"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Icelandic"s,                                                                        "ice"s,   "is"s, "isl"s, true );
+  g_languages.emplace_back(u8"Ido"s,                                                                              "ido"s,   "io"s, ""s,    true );
+  g_languages.emplace_back(u8"Igbo"s,                                                                             "ibo"s,   "ig"s, ""s,    true );
+  g_languages.emplace_back(u8"Ijo languages"s,                                                                    "ijo"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Iloko"s,                                                                            "ilo"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Inari Sami"s,                                                                       "smn"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Indic languages"s,                                                                  "inc"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Indo-European languages"s,                                                          "ine"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Indonesian"s,                                                                       "ind"s,   "id"s, ""s,    true );
+  g_languages.emplace_back(u8"Ingush"s,                                                                           "inh"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Interlingua (International Auxiliary Language Association)"s,                       "ina"s,   "ia"s, ""s,    true );
+  g_languages.emplace_back(u8"Interlingue; Occidental"s,                                                          "ile"s,   "ie"s, ""s,    true );
+  g_languages.emplace_back(u8"Inuktitut"s,                                                                        "iku"s,   "iu"s, ""s,    true );
+  g_languages.emplace_back(u8"Inupiaq"s,                                                                          "ipk"s,   "ik"s, ""s,    true );
+  g_languages.emplace_back(u8"Iranian languages"s,                                                                "ira"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Irish"s,                                                                            "gle"s,   "ga"s, ""s,    true );
+  g_languages.emplace_back(u8"Irish, Middle (900-1200)"s,                                                         "mga"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Irish, Old (to 900)"s,                                                              "sga"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Iroquoian languages"s,                                                              "iro"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Italian"s,                                                                          "ita"s,   "it"s, ""s,    true );
+  g_languages.emplace_back(u8"Japanese"s,                                                                         "jpn"s,   "ja"s, ""s,    true );
+  g_languages.emplace_back(u8"Javanese"s,                                                                         "jav"s,   "jv"s, ""s,    true );
+  g_languages.emplace_back(u8"Judeo-Arabic"s,                                                                     "jrb"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Judeo-Persian"s,                                                                    "jpr"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kabardian"s,                                                                        "kbd"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kabyle"s,                                                                           "kab"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kachin; Jingpho"s,                                                                  "kac"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kalaallisut; Greenlandic"s,                                                         "kal"s,   "kl"s, ""s,    true );
+  g_languages.emplace_back(u8"Kalmyk; Oirat"s,                                                                    "xal"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kamba"s,                                                                            "kam"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kannada"s,                                                                          "kan"s,   "kn"s, ""s,    true );
+  g_languages.emplace_back(u8"Kanuri"s,                                                                           "kau"s,   "kr"s, ""s,    true );
+  g_languages.emplace_back(u8"Kara-Kalpak"s,                                                                      "kaa"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Karachay-Balkar"s,                                                                  "krc"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Karelian"s,                                                                         "krl"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Karen languages"s,                                                                  "kar"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kashmiri"s,                                                                         "kas"s,   "ks"s, ""s,    true );
+  g_languages.emplace_back(u8"Kashubian"s,                                                                        "csb"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kawi"s,                                                                             "kaw"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kazakh"s,                                                                           "kaz"s,   "kk"s, ""s,    true );
+  g_languages.emplace_back(u8"Khasi"s,                                                                            "kha"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Khoisan languages"s,                                                                "khi"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Khotanese; Sakan"s,                                                                 "kho"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kikuyu; Gikuyu"s,                                                                   "kik"s,   "ki"s, ""s,    true );
+  g_languages.emplace_back(u8"Kimbundu"s,                                                                         "kmb"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kinyarwanda"s,                                                                      "kin"s,   "rw"s, ""s,    true );
+  g_languages.emplace_back(u8"Kirghiz; Kyrgyz"s,                                                                  "kir"s,   "ky"s, ""s,    true );
+  g_languages.emplace_back(u8"Klingon; tlhIngan-Hol"s,                                                            "tlh"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Komi"s,                                                                             "kom"s,   "kv"s, ""s,    true );
+  g_languages.emplace_back(u8"Kongo"s,                                                                            "kon"s,   "kg"s, ""s,    true );
+  g_languages.emplace_back(u8"Konkani"s,                                                                          "kok"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Korean"s,                                                                           "kor"s,   "ko"s, ""s,    true );
+  g_languages.emplace_back(u8"Kosraean"s,                                                                         "kos"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kpelle"s,                                                                           "kpe"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kru languages"s,                                                                    "kro"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kuanyama; Kwanyama"s,                                                               "kua"s,   "kj"s, ""s,    true );
+  g_languages.emplace_back(u8"Kumyk"s,                                                                            "kum"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kurdish"s,                                                                          "kur"s,   "ku"s, ""s,    true );
+  g_languages.emplace_back(u8"Kurukh"s,                                                                           "kru"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Kutenai"s,                                                                          "kut"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Ladino"s,                                                                           "lad"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Lahnda"s,                                                                           "lah"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Lamba"s,                                                                            "lam"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Land Dayak languages"s,                                                             "day"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Lao"s,                                                                              "lao"s,   "lo"s, ""s,    true );
+  g_languages.emplace_back(u8"Latin"s,                                                                            "lat"s,   "la"s, ""s,    true );
+  g_languages.emplace_back(u8"Latvian"s,                                                                          "lav"s,   "lv"s, ""s,    true );
+  g_languages.emplace_back(u8"Lezghian"s,                                                                         "lez"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Limburgan; Limburger; Limburgish"s,                                                 "lim"s,   "li"s, ""s,    true );
+  g_languages.emplace_back(u8"Lingala"s,                                                                          "lin"s,   "ln"s, ""s,    true );
+  g_languages.emplace_back(u8"Lithuanian"s,                                                                       "lit"s,   "lt"s, ""s,    true );
+  g_languages.emplace_back(u8"Lojban"s,                                                                           "jbo"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Low German; Low Saxon; German, Low; Saxon, Low"s,                                   "nds"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Lower Sorbian"s,                                                                    "dsb"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Lozi"s,                                                                             "loz"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Luba-Katanga"s,                                                                     "lub"s,   "lu"s, ""s,    true );
+  g_languages.emplace_back(u8"Luba-Lulua"s,                                                                       "lua"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Luiseno"s,                                                                          "lui"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Lule Sami"s,                                                                        "smj"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Lunda"s,                                                                            "lun"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Luo (Kenya and Tanzania)"s,                                                         "luo"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Lushai"s,                                                                           "lus"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Luxembourgish; Letzeburgesch"s,                                                     "ltz"s,   "lb"s, ""s,    true );
+  g_languages.emplace_back(u8"Macedonian"s,                                                                       "mac"s,   "mk"s, "mkd"s, true );
+  g_languages.emplace_back(u8"Madurese"s,                                                                         "mad"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Magahi"s,                                                                           "mag"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Maithili"s,                                                                         "mai"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Makasar"s,                                                                          "mak"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Malagasy"s,                                                                         "mlg"s,   "mg"s, ""s,    true );
+  g_languages.emplace_back(u8"Malay"s,                                                                            "may"s,   "ms"s, "msa"s, true );
+  g_languages.emplace_back(u8"Malayalam"s,                                                                        "mal"s,   "ml"s, ""s,    true );
+  g_languages.emplace_back(u8"Maltese"s,                                                                          "mlt"s,   "mt"s, ""s,    true );
+  g_languages.emplace_back(u8"Manchu"s,                                                                           "mnc"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Mandar"s,                                                                           "mdr"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Mandingo"s,                                                                         "man"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Manipuri"s,                                                                         "mni"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Manobo languages"s,                                                                 "mno"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Manx"s,                                                                             "glv"s,   "gv"s, ""s,    true );
+  g_languages.emplace_back(u8"Maori"s,                                                                            "mao"s,   "mi"s, "mri"s, true );
+  g_languages.emplace_back(u8"Mapudungun; Mapuche"s,                                                              "arn"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Marathi"s,                                                                          "mar"s,   "mr"s, ""s,    true );
+  g_languages.emplace_back(u8"Mari"s,                                                                             "chm"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Marshallese"s,                                                                      "mah"s,   "mh"s, ""s,    true );
+  g_languages.emplace_back(u8"Marwari"s,                                                                          "mwr"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Masai"s,                                                                            "mas"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Mayan languages"s,                                                                  "myn"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Mende"s,                                                                            "men"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Mi'kmaq; Micmac"s,                                                                  "mic"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Minangkabau"s,                                                                      "min"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Mirandese"s,                                                                        "mwl"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Mohawk"s,                                                                           "moh"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Moksha"s,                                                                           "mdf"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Mon-Khmer languages"s,                                                              "mkh"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Mongo"s,                                                                            "lol"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Mongolian"s,                                                                        "mon"s,   "mn"s, ""s,    true );
+  g_languages.emplace_back(u8"Mossi"s,                                                                            "mos"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Multiple languages"s,                                                               "mul"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Munda languages"s,                                                                  "mun"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"N'Ko"s,                                                                             "nqo"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Nahuatl languages"s,                                                                "nah"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Nauru"s,                                                                            "nau"s,   "na"s, ""s,    true );
+  g_languages.emplace_back(u8"Navajo; Navaho"s,                                                                   "nav"s,   "nv"s, ""s,    true );
+  g_languages.emplace_back(u8"Ndebele, North; North Ndebele"s,                                                    "nde"s,   "nd"s, ""s,    true );
+  g_languages.emplace_back(u8"Ndebele, South; South Ndebele"s,                                                    "nbl"s,   "nr"s, ""s,    true );
+  g_languages.emplace_back(u8"Ndonga"s,                                                                           "ndo"s,   "ng"s, ""s,    true );
+  g_languages.emplace_back(u8"Neapolitan"s,                                                                       "nap"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Nepal Bhasa; Newari"s,                                                              "new"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Nepali"s,                                                                           "nep"s,   "ne"s, ""s,    true );
+  g_languages.emplace_back(u8"Nias"s,                                                                             "nia"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Niger-Kordofanian languages"s,                                                      "nic"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Nilo-Saharan languages"s,                                                           "ssa"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Niuean"s,                                                                           "niu"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"No linguistic content; Not applicable"s,                                            "zxx"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Nogai"s,                                                                            "nog"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Norse, Old"s,                                                                       "non"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"North American Indian languages"s,                                                  "nai"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Northern Frisian"s,                                                                 "frr"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Northern Sami"s,                                                                    "sme"s,   "se"s, ""s,    true );
+  g_languages.emplace_back(u8"Norwegian Nynorsk; Nynorsk, Norwegian"s,                                            "nno"s,   "nn"s, ""s,    true );
+  g_languages.emplace_back(u8"Norwegian"s,                                                                        "nor"s,   "no"s, ""s,    true );
+  g_languages.emplace_back(u8"Nubian languages"s,                                                                 "nub"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Nyamwezi"s,                                                                         "nym"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Nyankole"s,                                                                         "nyn"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Nyoro"s,                                                                            "nyo"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Nzima"s,                                                                            "nzi"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Occitan (post 1500); Provençal"s,                                                   "oci"s,   "oc"s, ""s,    true );
+  g_languages.emplace_back(u8"Official Aramaic (700-300 BCE); Imperial Aramaic (700-300 BCE)"s,                   "arc"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Ojibwa"s,                                                                           "oji"s,   "oj"s, ""s,    true );
+  g_languages.emplace_back(u8"Oriya"s,                                                                            "ori"s,   "or"s, ""s,    true );
+  g_languages.emplace_back(u8"Oromo"s,                                                                            "orm"s,   "om"s, ""s,    true );
+  g_languages.emplace_back(u8"Osage"s,                                                                            "osa"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Ossetian; Ossetic"s,                                                                "oss"s,   "os"s, ""s,    true );
+  g_languages.emplace_back(u8"Otomian languages"s,                                                                "oto"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Pahlavi"s,                                                                          "pal"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Palauan"s,                                                                          "pau"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Pali"s,                                                                             "pli"s,   "pi"s, ""s,    true );
+  g_languages.emplace_back(u8"Pampanga; Kapampangan"s,                                                            "pam"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Pangasinan"s,                                                                       "pag"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Panjabi; Punjabi"s,                                                                 "pan"s,   "pa"s, ""s,    true );
+  g_languages.emplace_back(u8"Papiamento"s,                                                                       "pap"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Papuan languages"s,                                                                 "paa"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Pedi; Sepedi; Northern Sotho"s,                                                     "nso"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Persian"s,                                                                          "per"s,   "fa"s, "fas"s, true );
+  g_languages.emplace_back(u8"Persian, Old (ca. 600-400 B.C.)"s,                                                  "peo"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Philippine languages"s,                                                             "phi"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Phoenician"s,                                                                       "phn"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Pohnpeian"s,                                                                        "pon"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Polish"s,                                                                           "pol"s,   "pl"s, ""s,    true );
+  g_languages.emplace_back(u8"Portuguese"s,                                                                       "por"s,   "pt"s, ""s,    true );
+  g_languages.emplace_back(u8"Prakrit languages"s,                                                                "pra"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Provençal, Old (to 1500)"s,                                                         "pro"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Pushto; Pashto"s,                                                                   "pus"s,   "ps"s, ""s,    true );
+  g_languages.emplace_back(u8"Quechua"s,                                                                          "que"s,   "qu"s, ""s,    true );
+  g_languages.emplace_back(u8"Rajasthani"s,                                                                       "raj"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Rapanui"s,                                                                          "rap"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Rarotongan; Cook Islands Maori"s,                                                   "rar"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Reserved for local use: qaa"s,                                                      u8"qaa"s, ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Reserved for local use: qab"s,                                                      u8"qab"s, ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Reserved for local use: qac"s,                                                      u8"qac"s, ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Reserved for local use: qad"s,                                                      u8"qad"s, ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Romance languages"s,                                                                "roa"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Romanian; Moldavian; Moldovan"s,                                                    "rum"s,   "ro"s, "ron"s, true );
+  g_languages.emplace_back(u8"Romansh"s,                                                                          "roh"s,   "rm"s, ""s,    true );
+  g_languages.emplace_back(u8"Romany"s,                                                                           "rom"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Rundi"s,                                                                            "run"s,   "rn"s, ""s,    true );
+  g_languages.emplace_back(u8"Russian"s,                                                                          "rus"s,   "ru"s, ""s,    true );
+  g_languages.emplace_back(u8"Salishan languages"s,                                                               "sal"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Samaritan Aramaic"s,                                                                "sam"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Sami languages"s,                                                                   "smi"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Samoan"s,                                                                           "smo"s,   "sm"s, ""s,    true );
+  g_languages.emplace_back(u8"Sandawe"s,                                                                          "sad"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Sango"s,                                                                            "sag"s,   "sg"s, ""s,    true );
+  g_languages.emplace_back(u8"Sanskrit"s,                                                                         "san"s,   "sa"s, ""s,    true );
+  g_languages.emplace_back(u8"Santali"s,                                                                          "sat"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Sardinian"s,                                                                        "srd"s,   "sc"s, ""s,    true );
+  g_languages.emplace_back(u8"Sasak"s,                                                                            "sas"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Scots"s,                                                                            "sco"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Selkup"s,                                                                           "sel"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Semitic languages"s,                                                                "sem"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Serbian"s,                                                                          "srp"s,   "sr"s, ""s,    true );
+  g_languages.emplace_back(u8"Serer"s,                                                                            "srr"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Shan"s,                                                                             "shn"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Shona"s,                                                                            "sna"s,   "sn"s, ""s,    true );
+  g_languages.emplace_back(u8"Sichuan Yi; Nuosu"s,                                                                "iii"s,   "ii"s, ""s,    true );
+  g_languages.emplace_back(u8"Sicilian"s,                                                                         "scn"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Sidamo"s,                                                                           "sid"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Sign Languages"s,                                                                   "sgn"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Siksika"s,                                                                          "bla"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Sindhi"s,                                                                           "snd"s,   "sd"s, ""s,    true );
+  g_languages.emplace_back(u8"Sinhala; Sinhalese"s,                                                               "sin"s,   "si"s, ""s,    true );
+  g_languages.emplace_back(u8"Sino-Tibetan languages"s,                                                           "sit"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Siouan languages"s,                                                                 "sio"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Skolt Sami"s,                                                                       "sms"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Slave (Athapascan)"s,                                                               "den"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Slavic languages"s,                                                                 "sla"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Slovak"s,                                                                           "slo"s,   "sk"s, "slk"s, true );
+  g_languages.emplace_back(u8"Slovenian"s,                                                                        "slv"s,   "sl"s, ""s,    true );
+  g_languages.emplace_back(u8"Sogdian"s,                                                                          "sog"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Somali"s,                                                                           "som"s,   "so"s, ""s,    true );
+  g_languages.emplace_back(u8"Songhai languages"s,                                                                "son"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Soninke"s,                                                                          "snk"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Sorbian languages"s,                                                                "wen"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Sotho, Southern"s,                                                                  "sot"s,   "st"s, ""s,    true );
+  g_languages.emplace_back(u8"South American Indian (Other)"s,                                                    "sai"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Southern Altai"s,                                                                   "alt"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Southern Sami"s,                                                                    "sma"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Spanish; Castilian"s,                                                               "spa"s,   "es"s, ""s,    true );
+  g_languages.emplace_back(u8"Sranan Tongo"s,                                                                     "srn"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Standard Moroccan Tamazight"s,                                                      "zgh"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Sukuma"s,                                                                           "suk"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Sumerian"s,                                                                         "sux"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Sundanese"s,                                                                        "sun"s,   "su"s, ""s,    true );
+  g_languages.emplace_back(u8"Susu"s,                                                                             "sus"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Swahili"s,                                                                          "swa"s,   "sw"s, ""s,    true );
+  g_languages.emplace_back(u8"Swati"s,                                                                            "ssw"s,   "ss"s, ""s,    true );
+  g_languages.emplace_back(u8"Swedish"s,                                                                          "swe"s,   "sv"s, ""s,    true );
+  g_languages.emplace_back(u8"Swiss German; Alemannic; Alsatian"s,                                                "gsw"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Syriac"s,                                                                           "syr"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tagalog"s,                                                                          "tgl"s,   "tl"s, ""s,    true );
+  g_languages.emplace_back(u8"Tahitian"s,                                                                         "tah"s,   "ty"s, ""s,    true );
+  g_languages.emplace_back(u8"Tai languages"s,                                                                    "tai"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tajik"s,                                                                            "tgk"s,   "tg"s, ""s,    true );
+  g_languages.emplace_back(u8"Tamashek"s,                                                                         "tmh"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tamil"s,                                                                            "tam"s,   "ta"s, ""s,    true );
+  g_languages.emplace_back(u8"Tatar"s,                                                                            "tat"s,   "tt"s, ""s,    true );
+  g_languages.emplace_back(u8"Telugu"s,                                                                           "tel"s,   "te"s, ""s,    true );
+  g_languages.emplace_back(u8"Tereno"s,                                                                           "ter"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tetum"s,                                                                            "tet"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Thai"s,                                                                             "tha"s,   "th"s, ""s,    true );
+  g_languages.emplace_back(u8"Tibetan"s,                                                                          "tib"s,   "bo"s, "bod"s, true );
+  g_languages.emplace_back(u8"Tigre"s,                                                                            "tig"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tigrinya"s,                                                                         "tir"s,   "ti"s, ""s,    true );
+  g_languages.emplace_back(u8"Timne"s,                                                                            "tem"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tiv"s,                                                                              "tiv"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tlingit"s,                                                                          "tli"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tok Pisin"s,                                                                        "tpi"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tokelau"s,                                                                          "tkl"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tonga (Nyasa)"s,                                                                    "tog"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tonga (Tonga Islands)"s,                                                            "ton"s,   "to"s, ""s,    true );
+  g_languages.emplace_back(u8"Tsimshian"s,                                                                        "tsi"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tsonga"s,                                                                           "tso"s,   "ts"s, ""s,    true );
+  g_languages.emplace_back(u8"Tswana"s,                                                                           "tsn"s,   "tn"s, ""s,    true );
+  g_languages.emplace_back(u8"Tumbuka"s,                                                                          "tum"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tupi languages"s,                                                                   "tup"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Turkish"s,                                                                          "tur"s,   "tr"s, ""s,    true );
+  g_languages.emplace_back(u8"Turkish, Ottoman (1500-1928)"s,                                                     "ota"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Turkmen"s,                                                                          "tuk"s,   "tk"s, ""s,    true );
+  g_languages.emplace_back(u8"Tuvalu"s,                                                                           "tvl"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Tuvinian"s,                                                                         "tyv"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Twi"s,                                                                              "twi"s,   "tw"s, ""s,    true );
+  g_languages.emplace_back(u8"Udmurt"s,                                                                           "udm"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Ugaritic"s,                                                                         "uga"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Uighur; Uyghur"s,                                                                   "uig"s,   "ug"s, ""s,    true );
+  g_languages.emplace_back(u8"Ukrainian"s,                                                                        "ukr"s,   "uk"s, ""s,    true );
+  g_languages.emplace_back(u8"Umbundu"s,                                                                          "umb"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Uncoded languages"s,                                                                "mis"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Undetermined"s,                                                                     "und"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Upper Sorbian"s,                                                                    "hsb"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Urdu"s,                                                                             "urd"s,   "ur"s, ""s,    true );
+  g_languages.emplace_back(u8"Uzbek"s,                                                                            "uzb"s,   "uz"s, ""s,    true );
+  g_languages.emplace_back(u8"Vai"s,                                                                              "vai"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Venda"s,                                                                            "ven"s,   "ve"s, ""s,    true );
+  g_languages.emplace_back(u8"Vietnamese"s,                                                                       "vie"s,   "vi"s, ""s,    true );
+  g_languages.emplace_back(u8"Volapük"s,                                                                          "vol"s,   "vo"s, ""s,    true );
+  g_languages.emplace_back(u8"Votic"s,                                                                            "vot"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Wakashan languages"s,                                                               "wak"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Walamo"s,                                                                           "wal"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Walloon"s,                                                                          "wln"s,   "wa"s, ""s,    true );
+  g_languages.emplace_back(u8"Waray"s,                                                                            "war"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Washo"s,                                                                            "was"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Welsh"s,                                                                            "wel"s,   "cy"s, "cym"s, true );
+  g_languages.emplace_back(u8"Western Frisian"s,                                                                  "fry"s,   "fy"s, ""s,    true );
+  g_languages.emplace_back(u8"Wolof"s,                                                                            "wol"s,   "wo"s, ""s,    true );
+  g_languages.emplace_back(u8"Xhosa"s,                                                                            "xho"s,   "xh"s, ""s,    true );
+  g_languages.emplace_back(u8"Yakut"s,                                                                            "sah"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Yao"s,                                                                              "yao"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Yapese"s,                                                                           "yap"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Yiddish"s,                                                                          "yid"s,   "yi"s, ""s,    true );
+  g_languages.emplace_back(u8"Yoruba"s,                                                                           "yor"s,   "yo"s, ""s,    true );
+  g_languages.emplace_back(u8"Yupik languages"s,                                                                  "ypk"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Zande languages"s,                                                                  "znd"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Zapotec"s,                                                                          "zap"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki"s,                                   "zza"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Zenaga"s,                                                                           "zen"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Zhuang; Chuang"s,                                                                   "zha"s,   "za"s, ""s,    true );
+  g_languages.emplace_back(u8"Zulu"s,                                                                             "zul"s,   "zu"s, ""s,    true );
+  g_languages.emplace_back(u8"Zuni"s,                                                                             "zun"s,   ""s,   ""s,    true );
+}
 
 } // namespace mtx::iso639

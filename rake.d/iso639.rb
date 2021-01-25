@@ -13,8 +13,8 @@ def create_iso639_language_list_file
   end
 
   rows += ("a".."d").map do |letter|
-    [ %Q{"Reserved for local use: qa#{letter}"},
-      %Q{"qa#{letter}"},
+    [ %Q{u8"Reserved for local use: qa#{letter}"s},
+      %Q{u8"qa#{letter}"s},
       '""s',
       '""s',
       'true ',
@@ -45,16 +45,21 @@ def create_iso639_language_list_file
 
 namespace mtx::iso639 {
 
-std::vector<language_t> const g_languages{
+std::vector<language_t> g_languages;
+
+void
+init() {
+  g_languages.reserve(#{rows.size});
+
 EOT
 
   footer = <<EOT
-};
+}
 
 } // namespace mtx::iso639
 EOT
 
-  content = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => " },").join("\n") + "\n" + footer
+  content = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_languages.emplace_back(", :row_suffix => ");").join("\n") + "\n" + footer
 
   runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }
 end
