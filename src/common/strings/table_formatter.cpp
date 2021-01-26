@@ -46,7 +46,7 @@ table_formatter_c::format()
 
   for (auto const &row : m_rows)
     for (auto column = 0u; column < num_columns; ++column)
-      column_widths[column] = std::max(column_widths[column], get_width_in_em(to_wide(row[column])));
+      column_widths[column] = std::max<uint64_t>(column_widths[column], get_width_in_em(to_wide(row[column])));
 
   // 2. Generate column format strings for fmt::format.
   std::vector<std::string> column_formats;
