@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 17.12.2018\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-01-15 21:44+0100\n"
+"POT-Creation-Date: 2021-01-27 16:03+0100\n"
 "PO-Revision-Date: 2021-01-17 12:58+0000\n"
 "Last-Translator: ROBERTO BORIOTTI <roberto.boriotti@canon-europe.com>\n"
 "Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -2681,7 +2681,7 @@ msgstr "'{0}' traccia {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "'{0}': Elaborazione dei seguenti file: {1}\n"
 
-#: src/input/r_matroska.cpp:1898
+#: src/input/r_matroska.cpp:1899
 #, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'{0}': stai copiando una traccia Opus che è stata scritta in modalità sperimentale. La traccia risultante sarà scritta in modo finale, ma un dettaglio (il taglio finale) non potrà essere recuperato da una traccia scritta in modalità sperimentale. Questo significa che il decodificatore potrebbe produrre alcuni campioni più di quelli attesi. Se possibile dovresti eseguire un nuovo multiplexing dal file Opus originale.\n"
@@ -2847,8 +2847,8 @@ msgstr "<Unsaved file>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> non è un valido elemento figlio di <{1}> alla posizione {2}."
 
-#: src/input/r_matroska.cpp:2342
-#: src/input/r_matroska.cpp:2451
+#: src/input/r_matroska.cpp:2343
+#: src/input/r_matroska.cpp:2452
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "Trovato un blocco alla posizione data {0} per la traccia numero {1}. Nessuna intestazione trovata per la traccia. Il blocco verrà ignorato.\n"
@@ -4788,7 +4788,7 @@ msgstr "Impossibile inizializzare la libreria icone per la conversione da {0} a 
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "Impossibile inizializzare la libreria icone per la conversione da {0} a UTF-8. Alcune stringhe non verranno convertite in UTF-8 e il file Matroska risultante potrebbe non essere compatibile con le specifiche Matroska (errore: {1}, {2}).\n"
 
-#: src/input/r_matroska.cpp:1685
+#: src/input/r_matroska.cpp:1686
 #, no-c-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr ""
@@ -6570,7 +6570,7 @@ msgstr "Forza la durata predefinita o il numero di frame per secondo per una tra
 msgid "Forces the timestamp scale factor to the given value."
 msgstr "Forza il fattore di scala timestamp ad un valore definito."
 
-#: src/mpegparser/M2VParser.cpp:448
+#: src/mpegparser/M2VParser.cpp:441
 #, no-c-format
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Trovato almeno un frame B senza secondo riferimento in un GOP non chiuso.\n"
@@ -6872,12 +6872,12 @@ msgstr "Come chroma è posizionato verticalmente."
 msgid "ID"
 msgstr "ID"
 
-#: src/common/iso639.cpp:45
+#: src/common/iso639.cpp:43
 #, no-c-format
 msgid "ISO 639-1 code"
 msgstr "Codice ISO 639-1"
 
-#: src/common/iso639.cpp:44
+#: src/common/iso639.cpp:43
 #, no-c-format
 msgid "ISO 639-2 code"
 msgstr "Codice ISO 639-2"
@@ -8139,13 +8139,13 @@ msgstr "Numero ma&x attività contemporanee:"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Rendi questa traccia la traccia predefinita per questo tipo (audio, video, sottotitoli)."
 
-#: src/input/r_matroska.cpp:1770
-#: src/input/r_matroska.cpp:1787
+#: src/input/r_matroska.cpp:1771
+#: src/input/r_matroska.cpp:1788
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Rilevati dati errati inizializzazione codec AAC.\n"
 
-#: src/input/r_matroska.cpp:1780
+#: src/input/r_matroska.cpp:1781
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "ID errato codec '{0}'.\n"
@@ -8683,7 +8683,7 @@ msgstr "Nessuna attività ancora avviata"
 msgid "No lacing"
 msgstr "Nessun collegamento"
 
-#: src/common/iso639.cpp:125
+#: src/common/iso639.cpp:110
 #, no-c-format
 msgid "No linguistic content; Not applicable"
 msgstr "Nessun contenuto linguistico - non applicabile"
@@ -9372,11 +9372,6 @@ msgstr "Riproduci un file audio"
 #, no-c-format
 msgid "Play audio file '%1'"
 msgstr "Riproduci file audio '%1'"
-
-#: src/mkvtoolnix-gui/merge/input.cpp:464
-#, no-c-format
-msgid "Players must play this track."
-msgstr "Il riproduttore deve riprodurre questa traccia."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:459
 #, no-c-format
@@ -10853,7 +10848,7 @@ msgstr "Blocco semplice"
 msgid "Simple chapter parser: {0}\n"
 msgstr "Analisi semplice carattere: {0}\n"
 
-#: src/mpegparser/M2VParser.cpp:399
+#: src/mpegparser/M2VParser.cpp:392
 #, no-c-format
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Rilevato campo singolo prima dell'intestazione GOP. Puoi correggere il flusso video MPEG2 prima di effettuare il multiplex.\n"
@@ -12110,8 +12105,8 @@ msgstr "Il file o la cartella non sono stati trovati"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1590
-#: src/input/r_matroska.cpp:2311
+#: src/input/r_matroska.cpp:1591
+#: src/input/r_matroska.cpp:2312
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Il file non verrà ulteriormente elaborato."
@@ -13353,8 +13348,8 @@ msgstr "Questa traccia contiene dati SBR AAC/HE-AAC/AAC+."
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1590
-#: src/input/r_matroska.cpp:2311
+#: src/input/r_matroska.cpp:1591
+#: src/input/r_matroska.cpp:2312
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Questo normalmente indica una struttura file danneggiata."
@@ -13524,7 +13519,7 @@ msgstr "Traccia {0} CodecPrivate è troppo piccolo.\n"
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr "La traccia {0} è stata compressa con un algoritmo di compressione sconosciuto/non supportato ({1}).\n"
 
-#: src/input/r_matroska.cpp:1263
+#: src/input/r_matroska.cpp:1264
 #, no-c-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "Nella traccia {0} manca l'elemento UID che è deve essere presente come da specifiche Matroska. Se il file contiene altri tag ma non questo il file potrebbe essere corrotto.\n"
@@ -13692,12 +13687,12 @@ msgstr "Sottotitoli testuali USF"
 msgid "Unable to append files"
 msgstr "Impossibile appendere file"
 
-#: src/common/iso639.cpp:124
+#: src/common/iso639.cpp:109
 #, no-c-format
 msgid "Undetermined"
 msgstr "Non determinato"
 
-#: src/mpegparser/M2VParser.cpp:254
+#: src/mpegparser/M2VParser.cpp:247
 #, no-c-format
 msgid "Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Frame immagine inaspettato dopo frame singolo campo. Ripara il flusso video MPEG2 prima di effettuare il multiplexing.\n"
@@ -13811,7 +13806,7 @@ msgstr "Versione MPEG non supportata: 0x{0:02x} nel pacchetto {1} per il timesta
 msgid "Unsupported file format"
 msgstr "Formato file non supportato"
 
-#: src/input/r_matroska.cpp:2127
+#: src/input/r_matroska.cpp:2128
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Tipo traccia non supportato per questa traccia.\n"
@@ -13868,6 +13863,11 @@ msgstr "Usare solo per test."
 msgid "Use the &title as the base file name if a title is set"
 msgstr "Usa il &titolo come base per il nome del file se il è impostato"
 
+#: src/mkvtoolnix-gui/merge/input.cpp:464
+#, no-c-format
+msgid "Use this for tracks containing onscreen text or foreign-language dialogue."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
 #, no-c-format
 msgid "Use this only for testing purposes."
@@ -13898,7 +13898,7 @@ msgstr "Usando una dimensione NALU di 3 byte potrebbe risultare una traccia che 
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "Utilizzo il demultiplexer per il formato '{0}'.\n"
 
-#: src/input/r_matroska.cpp:1619
+#: src/input/r_matroska.cpp:1620
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Uso modulo destinazione generico per la traccia di tipo '{0}'.\n"
@@ -15022,18 +15022,18 @@ msgstr "matroska_reader: (modo compatibilità MS per la traccia {0}) Matroska ri
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (modo compatibilità MS per la traccia {0}) Matroska riporta che la larghezza è {1}, ma BITMAPINFO riporta che è {2}.\n"
 
-#: src/input/r_matroska.cpp:1529
-#: src/input/r_matroska.cpp:1534
+#: src/input/r_matroska.cpp:1530
+#: src/input/r_matroska.cpp:1535
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: nessun segmento trovato.\n"
 
-#: src/input/r_matroska.cpp:1212
+#: src/input/r_matroska.cpp:1213
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: altezza pixel mancante.\n"
 
-#: src/input/r_matroska.cpp:1210
+#: src/input/r_matroska.cpp:1211
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: larghezza pixel mancante.\n"
@@ -15093,7 +15093,7 @@ msgstr "matroska_reader: la traccia {0} sembra ok.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: mkvmerge non è stato compilato con il supporto FLAC. Ignoro traccia {0}.\n"
 
-#: src/input/r_matroska.cpp:1518
+#: src/input/r_matroska.cpp:1519
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: nessun intestazione EBML trovata.\n"
@@ -15557,7 +15557,7 @@ msgstr "tta_reader: tag_size < 0 nel c'tor. {0}\n"
 #: src/common/kax_info.cpp:821
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:117
-#: src/input/r_matroska.cpp:2778
+#: src/input/r_matroska.cpp:2779
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -15568,7 +15568,7 @@ msgstr "tta_reader: tag_size < 0 nel c'tor. {0}\n"
 msgid "unknown"
 msgstr "sconosciuto"
 
-#: src/input/r_matroska.cpp:2761
+#: src/input/r_matroska.cpp:2762
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "sconosciuto, formato tag 0x{0:04x}"
@@ -15683,8 +15683,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: si è verificata una eccezione (messaggio: {1}, tipo: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1589
-#: src/input/r_matroska.cpp:2310
+#: src/input/r_matroska.cpp:1590
+#: src/input/r_matroska.cpp:2311
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: si è verificata una eccezione sconosciuta."
@@ -16296,6 +16296,9 @@ msgstr "-- Imposta a nessuno –"
 
 #~ msgid "Output file:"
 #~ msgstr "File destinazione:"
+
+#~ msgid "Players must play this track."
+#~ msgstr "Il riproduttore deve riprodurre questa traccia."
 
 #~ msgid "Previous file name"
 #~ msgstr "Nome file precedente"

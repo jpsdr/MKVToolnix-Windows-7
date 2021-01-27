@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.9.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-01-15 21:44+0100\n"
+"POT-Creation-Date: 2021-01-27 16:03+0100\n"
 "PO-Revision-Date: 2021-01-23 13:21+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -2737,7 +2737,7 @@ msgstr "«{0}» pista {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "«{0}»: està processant els següents fitxers com a bons: {1}\n"
 
-#: src/input/r_matroska.cpp:1898
+#: src/input/r_matroska.cpp:1899
 #, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "«{0}»: Esteu tornant a copiar una pista Opus que fou escrita en el mode experimental. La pista resultant s'escriurà seguint el mode final, però no es podrà recuperar el detall a partir d'una pista escrita en el mode experimental: el tall final. Això significa que un descodificador podria generar unes quantes mostres més del que tenia inicialment previst. Si és possible, hauríeu de tornar a multiplexar partint del fitxer Opus original.\n"
@@ -2903,8 +2903,8 @@ msgstr "<Fitxer sense desar>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> no és un element fill vàlid de <{1}> a la posició {2}."
 
-#: src/input/r_matroska.cpp:2342
-#: src/input/r_matroska.cpp:2451
+#: src/input/r_matroska.cpp:2343
+#: src/input/r_matroska.cpp:2452
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "S'ha trobat un bloc a la codi de temps {0} per al número de pista {1}. No obstant això, no s'ha trobat cap capçalera per a aquest número de pista. El bloc serà omès.\n"
@@ -4843,7 +4843,7 @@ msgstr "No s'ha pogut inicialitzar la biblioteca «iconv» per a la conversió d
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "No s'ha pogut inicialitzar la biblioteca «iconv» per a la conversió des de {0} a UTF-8. Algunes cadenes no seran convertides a UTF-8, i el fitxer Matroska resultant, podria no complir amb les especificacions Matroska (error: {1}, {2}).\n"
 
-#: src/input/r_matroska.cpp:1685
+#: src/input/r_matroska.cpp:1686
 #, no-c-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "No ha pogut mantenir l'UID de la pista {0} perquè ja està assignat a una altra pista. S'assignarà automàticament un UID nou aleatori.\n"
@@ -6625,7 +6625,7 @@ msgstr "Força una durada per omissió o un nombre de fotogrames per segon per a
 msgid "Forces the timestamp scale factor to the given value."
 msgstr "Força el factor de proporció per al codi de temps al valor indicat."
 
-#: src/mpegparser/M2VParser.cpp:448
+#: src/mpegparser/M2VParser.cpp:441
 #, no-c-format
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "S'ha trobat almenys un fotograma B sense una segona referència en un GOP sense tancar.\n"
@@ -6927,12 +6927,12 @@ msgstr "Com està ubicada verticalment la crominància."
 msgid "ID"
 msgstr "ID"
 
-#: src/common/iso639.cpp:45
+#: src/common/iso639.cpp:43
 #, no-c-format
 msgid "ISO 639-1 code"
 msgstr "Codi ISO 639-1"
 
-#: src/common/iso639.cpp:44
+#: src/common/iso639.cpp:43
 #, no-c-format
 msgid "ISO 639-2 code"
 msgstr "Codi ISO 639-2"
@@ -8194,13 +8194,13 @@ msgstr "Nombre mà&xim de tasques simultànies:"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Converteix aquesta pista en la predefinida per a cadascun dels seus tipus (àudio, vídeo, subtítols)."
 
-#: src/input/r_matroska.cpp:1770
-#: src/input/r_matroska.cpp:1787
+#: src/input/r_matroska.cpp:1771
+#: src/input/r_matroska.cpp:1788
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "S'han trobat dades d'inicialització del còdec AAC mal formades.\n"
 
-#: src/input/r_matroska.cpp:1780
+#: src/input/r_matroska.cpp:1781
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "ID del còdec amb format incorrecte «{0}».\n"
@@ -8738,7 +8738,7 @@ msgstr "Encara no s'ha iniciat la tasca"
 msgid "No lacing"
 msgstr "Sense lligam"
 
-#: src/common/iso639.cpp:125
+#: src/common/iso639.cpp:110
 #, no-c-format
 msgid "No linguistic content; Not applicable"
 msgstr "No hi ha contingut d'idioma; No aplicable"
@@ -9428,11 +9428,6 @@ msgstr "Reprodueix un fitxer d'àudio"
 #, no-c-format
 msgid "Play audio file '%1'"
 msgstr "Reprodueix el fitxer d'àudio «%1»"
-
-#: src/mkvtoolnix-gui/merge/input.cpp:464
-#, no-c-format
-msgid "Players must play this track."
-msgstr "Els reproductors hauran de reproduir aquesta pista."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:459
 #, no-c-format
@@ -10907,7 +10902,7 @@ msgstr "Bloc senzill"
 msgid "Simple chapter parser: {0}\n"
 msgstr "Analitzador de capítol senzill: {0}\n"
 
-#: src/mpegparser/M2VParser.cpp:399
+#: src/mpegparser/M2VParser.cpp:392
 #, no-c-format
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Fotograma amb un únic camp abans de la capçalera GOP detectada. Arregleu el fitxer de vídeo MPEG2 abans d'intentar el multiplexat.\n"
@@ -12164,8 +12159,8 @@ msgstr "No s'ha trobat el fitxer o directori"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1590
-#: src/input/r_matroska.cpp:2311
+#: src/input/r_matroska.cpp:1591
+#: src/input/r_matroska.cpp:2312
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Aquest fitxer no es processarà més."
@@ -13400,8 +13395,8 @@ msgstr "Aquesta pista conté dades AAC/HE-AAC/AAC+ en SBR."
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1590
-#: src/input/r_matroska.cpp:2311
+#: src/input/r_matroska.cpp:1591
+#: src/input/r_matroska.cpp:2312
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Això normalment significa una estructura de fitxers malmesa."
@@ -13571,7 +13566,7 @@ msgstr "Les privades del còdec de la pista {0} són massa petites.\n"
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr "La pista {0} ha estat comprimida amb un algorisme de compressió desconegut/no admès ({1}).\n"
 
-#: src/input/r_matroska.cpp:1263
+#: src/input/r_matroska.cpp:1264
 #, no-c-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "A la pista {0} li manca el seu element UID de la pista, el qual és necessari segons l'especificació de Matroska. Si el fitxer conté etiquetes, llavors aquestes podrien quedar malmeses.\n"
@@ -13739,12 +13734,12 @@ msgstr "Subtítols de text USF"
 msgid "Unable to append files"
 msgstr "No s'han pogut annexar els fitxers"
 
-#: src/common/iso639.cpp:124
+#: src/common/iso639.cpp:109
 #, no-c-format
 msgid "Undetermined"
 msgstr "Sense determinar"
 
-#: src/mpegparser/M2VParser.cpp:254
+#: src/mpegparser/M2VParser.cpp:247
 #, no-c-format
 msgid "Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Fotograma d'imatge inesperat després d'un camp únic de fotograma. Arregla el flux del vídeo MPEG2 abans d'intentar multiplexar-lo.\n"
@@ -13858,7 +13853,7 @@ msgstr "mpeg_version de MPEG no admesa: 0x{0:02x} en el paquet {1} per al codi d
 msgid "Unsupported file format"
 msgstr "Format de fitxer no implementat"
 
-#: src/input/r_matroska.cpp:2127
+#: src/input/r_matroska.cpp:2128
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Tipus de pista no admès per aquesta pista.\n"
@@ -13915,6 +13910,11 @@ msgstr "Empreu-ho només per a proves."
 msgid "Use the &title as the base file name if a title is set"
 msgstr "Si s'estableix un &títol, empra'l com el nom del fitxer base"
 
+#: src/mkvtoolnix-gui/merge/input.cpp:464
+#, no-c-format
+msgid "Use this for tracks containing onscreen text or foreign-language dialogue."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
 #, no-c-format
 msgid "Use this only for testing purposes."
@@ -13945,7 +13945,7 @@ msgstr "Emprar una longitud de mida NALU de 3 bytes hauria de donar lloc a piste
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "Emprant el demultiplexador per al format «{0}».\n"
 
-#: src/input/r_matroska.cpp:1619
+#: src/input/r_matroska.cpp:1620
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Emprant el mòdul de sortida genèric per al tipus de pista «{0}».\n"
@@ -15068,18 +15068,18 @@ msgstr "matroska_reader: (mode de compatibilitat MS per a la pista {0}) Matroska
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (mode de compatibilitat MS per a la pista {0}) Matroska diu que l'amplada és de {1}, però el BITMAPINFOHEADER diu que és de {2}.\n"
 
-#: src/input/r_matroska.cpp:1529
-#: src/input/r_matroska.cpp:1534
+#: src/input/r_matroska.cpp:1530
+#: src/input/r_matroska.cpp:1535
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: No s'ha trobat cap segment.\n"
 
-#: src/input/r_matroska.cpp:1212
+#: src/input/r_matroska.cpp:1213
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Manca l'alçada en píxels.\n"
 
-#: src/input/r_matroska.cpp:1210
+#: src/input/r_matroska.cpp:1211
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Manca l'amplada en píxels.\n"
@@ -15139,7 +15139,7 @@ msgstr "matroska_reader: La pista {0} sembla estar bé.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: El «mkvmerge» no ha estat compilat amb la implementació per a fitxers FLAC. La pista {0} serà ignorada.\n"
 
-#: src/input/r_matroska.cpp:1518
+#: src/input/r_matroska.cpp:1519
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: No s'ha trobat la capçalera EBML.\n"
@@ -15604,7 +15604,7 @@ msgstr "tta_reader: tag_size < 0 dins el constructor. {0}\n"
 #: src/common/kax_info.cpp:821
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:117
-#: src/input/r_matroska.cpp:2778
+#: src/input/r_matroska.cpp:2779
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -15615,7 +15615,7 @@ msgstr "tta_reader: tag_size < 0 dins el constructor. {0}\n"
 msgid "unknown"
 msgstr "Desconegut"
 
-#: src/input/r_matroska.cpp:2761
+#: src/input/r_matroska.cpp:2762
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "Desconegut, format de l'etiqueta 0x{0:04x}"
@@ -15731,8 +15731,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: s'ha produït una excepció (missatge: {1}; tipus: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1589
-#: src/input/r_matroska.cpp:2310
+#: src/input/r_matroska.cpp:1590
+#: src/input/r_matroska.cpp:2311
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: s'ha produït una excepció desconeguda."
@@ -16328,6 +16328,9 @@ msgstr "– Establert a «no» –"
 
 #~ msgid "Output file:"
 #~ msgstr "Fitxer de sortida:"
+
+#~ msgid "Players must play this track."
+#~ msgstr "Els reproductors hauran de reproduir aquesta pista."
 
 #~ msgid "Previous file name"
 #~ msgstr "Nom del fitxer anterior"

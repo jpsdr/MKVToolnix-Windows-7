@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-01-15 21:44+0100\n"
+"POT-Creation-Date: 2021-01-27 16:03+0100\n"
 "PO-Revision-Date: 2020-09-02 18:12+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Czech (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/cs/)\n"
@@ -2679,7 +2679,7 @@ msgstr "'{0}' stopa {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "'{0}': Zpracovat také následující soubory: {1}\n"
 
-#: src/input/r_matroska.cpp:1898
+#: src/input/r_matroska.cpp:1899
 #, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'{0}': Znovu zpracováváte stopu Opus, která byla zpracována v experimentálním režimu. Výsledná stopa bude zapsána v konečném režimu, ale jedna drobnost nemůže být obnovena ze stopy zpracované v experimentálním režimu: oříznutí konce. To znamená, že dekodér může vytvořit o pár vzorků více, než bylo původně zamýšleno. Měli byste znovu zpracovat z původní souboru Opus, pokud je to možné.\n"
@@ -2845,8 +2845,8 @@ msgstr "<Neuložený soubor>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> není platný podřízený prvek <{1}> na pozici {2}."
 
-#: src/input/r_matroska.cpp:2342
-#: src/input/r_matroska.cpp:2451
+#: src/input/r_matroska.cpp:2343
+#: src/input/r_matroska.cpp:2452
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "Na časové značce {0} byl nalezen blok pro stopu číslo {1}. Nebyly však nalezeny žádné hlavičky pro toto číslo stopy. Blok bude přeskočen.\n"
@@ -4787,7 +4787,7 @@ msgstr "Nelze inicializovat knihovnu iconv pro převod z UTF-8 na {0}. Některé
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "Nelze inicializovat knihovnu iconv pro převod z {0} na UTF-8. Některé řetězce nebudou převedeny na UTF-8 a výsledný soubor Matroska nemusí odpovídat specifikaci Matroska (chyba: {1}, {2}).\n"
 
-#: src/input/r_matroska.cpp:1685
+#: src/input/r_matroska.cpp:1686
 #, fuzzy, no-c-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "matroska_reader: Nelze ponechat UID stopy {0}, protože je již přiděleno pro nový soubor.\n"
@@ -6568,7 +6568,7 @@ msgstr "Vynutí výchozí délku nebo počet snímků za sekundu pro stopu."
 msgid "Forces the timestamp scale factor to the given value."
 msgstr "Vynutí měřítko časového razítka na zadanou hodnotu."
 
-#: src/mpegparser/M2VParser.cpp:448
+#: src/mpegparser/M2VParser.cpp:441
 #, no-c-format
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Byl nalezen alespoň jeden snímek B bez druhého odkazu v neuzavřeném GOP.\n"
@@ -6872,12 +6872,12 @@ msgstr ""
 msgid "ID"
 msgstr "ID"
 
-#: src/common/iso639.cpp:45
+#: src/common/iso639.cpp:43
 #, no-c-format
 msgid "ISO 639-1 code"
 msgstr "Kód ISO 639-1"
 
-#: src/common/iso639.cpp:44
+#: src/common/iso639.cpp:43
 #, no-c-format
 msgid "ISO 639-2 code"
 msgstr "Kód ISO 639-2"
@@ -8140,13 +8140,13 @@ msgstr "Maximální počet souborů:"
 msgid "Make this track the default track for its type (audio, video, subtitles)."
 msgstr "Nastaví tuto stopu jako výchozí stopu pro její typ (audio, video, titulky)."
 
-#: src/input/r_matroska.cpp:1770
-#: src/input/r_matroska.cpp:1787
+#: src/input/r_matroska.cpp:1771
+#: src/input/r_matroska.cpp:1788
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Nalezena poškozená inicializační data kodeku AAC.\n"
 
-#: src/input/r_matroska.cpp:1780
+#: src/input/r_matroska.cpp:1781
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "Poškozené ID kodeku '{0}'.\n"
@@ -8692,7 +8692,7 @@ msgstr "Zatím nebyla spuštěna žádná úloha"
 msgid "No lacing"
 msgstr "Bez svazování"
 
-#: src/common/iso639.cpp:125
+#: src/common/iso639.cpp:110
 #, no-c-format
 msgid "No linguistic content; Not applicable"
 msgstr ""
@@ -9390,11 +9390,6 @@ msgstr "Přehrát soubor audia"
 #, no-c-format
 msgid "Play audio file '%1'"
 msgstr "Přehrát soubor audia '%1'"
-
-#: src/mkvtoolnix-gui/merge/input.cpp:464
-#, no-c-format
-msgid "Players must play this track."
-msgstr "Přehrávače tuto stopu musí přehrát."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:459
 #, no-c-format
@@ -10876,7 +10871,7 @@ msgstr ""
 msgid "Simple chapter parser: {0}\n"
 msgstr ""
 
-#: src/mpegparser/M2VParser.cpp:399
+#: src/mpegparser/M2VParser.cpp:392
 #, no-c-format
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr ""
@@ -12146,8 +12141,8 @@ msgstr "Soubor nebo adresář nebyl nalezen"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1590
-#: src/input/r_matroska.cpp:2311
+#: src/input/r_matroska.cpp:1591
+#: src/input/r_matroska.cpp:2312
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Soubor nebude dále zpracován."
@@ -13380,8 +13375,8 @@ msgstr "Tato stopa obsahuje data SBR AAC/HE-AAC/AAC+."
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1590
-#: src/input/r_matroska.cpp:2311
+#: src/input/r_matroska.cpp:1591
+#: src/input/r_matroska.cpp:2312
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr ""
@@ -13551,7 +13546,7 @@ msgstr ""
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr ""
 
-#: src/input/r_matroska.cpp:1263
+#: src/input/r_matroska.cpp:1264
 #, no-c-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr ""
@@ -13719,12 +13714,12 @@ msgstr "Textové titulky USF"
 msgid "Unable to append files"
 msgstr "Nelze připojit soubory"
 
-#: src/common/iso639.cpp:124
+#: src/common/iso639.cpp:109
 #, no-c-format
 msgid "Undetermined"
 msgstr ""
 
-#: src/mpegparser/M2VParser.cpp:254
+#: src/mpegparser/M2VParser.cpp:247
 #, no-c-format
 msgid "Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr ""
@@ -13840,7 +13835,7 @@ msgstr ""
 msgid "Unsupported file format"
 msgstr "Nepodporovaný formát souboru"
 
-#: src/input/r_matroska.cpp:2127
+#: src/input/r_matroska.cpp:2128
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Nepodporovaný typ stopy pro tuto stopu.\n"
@@ -13897,6 +13892,11 @@ msgstr "Používejte pouze pro testování."
 msgid "Use the &title as the base file name if a title is set"
 msgstr ""
 
+#: src/mkvtoolnix-gui/merge/input.cpp:464
+#, no-c-format
+msgid "Use this for tracks containing onscreen text or foreign-language dialogue."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
 #, no-c-format
 msgid "Use this only for testing purposes."
@@ -13927,7 +13927,7 @@ msgstr "Použití délky NALU 3 bajty by mohlo mít za následek stopy, které n
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "Použit demultiplexer pro formát '{0}'.\n"
 
-#: src/input/r_matroska.cpp:1619
+#: src/input/r_matroska.cpp:1620
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Použit všeobecný výstupní modul pro stopu typu '{0}'.\n"
@@ -15051,18 +15051,18 @@ msgstr "matroska_reader: (Režim kompatibility MS, stopa {0}) Matroska říká, 
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader: (Režim kompatibility MS, stopa {0}) Matroska říká, že šířka videa je {1}, ale BITMAPINFOHEADER říká, že je {2}.\n"
 
-#: src/input/r_matroska.cpp:1529
-#: src/input/r_matroska.cpp:1534
+#: src/input/r_matroska.cpp:1530
+#: src/input/r_matroska.cpp:1535
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader: Nenalezen žádný úsek.\n"
 
-#: src/input/r_matroska.cpp:1212
+#: src/input/r_matroska.cpp:1213
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader: Chybí výška v pixelech.\n"
 
-#: src/input/r_matroska.cpp:1210
+#: src/input/r_matroska.cpp:1211
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader: Chybí šířka v pixelech.\n"
@@ -15122,7 +15122,7 @@ msgstr "matroska_reader: Stopa {0} se zdá být v pořádku.\n"
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader: mkvmerge nebylo kompilováno s podporou FLAC. Ignoruje se stopa {0}.\n"
 
-#: src/input/r_matroska.cpp:1518
+#: src/input/r_matroska.cpp:1519
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader: Nenalezena žádná hlavička EBML.\n"
@@ -15582,7 +15582,7 @@ msgstr "tta_reader: tag_size < 0 v c'tor. {0}\n"
 #: src/common/kax_info.cpp:821
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:117
-#: src/input/r_matroska.cpp:2778
+#: src/input/r_matroska.cpp:2779
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -15593,7 +15593,7 @@ msgstr "tta_reader: tag_size < 0 v c'tor. {0}\n"
 msgid "unknown"
 msgstr "neznámý"
 
-#: src/input/r_matroska.cpp:2761
+#: src/input/r_matroska.cpp:2762
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "neznámý, štítek formátu 0x{0:04x}"
@@ -15714,8 +15714,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: došlo k výjimce (zpráva: {1}; typ: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1589
-#: src/input/r_matroska.cpp:2310
+#: src/input/r_matroska.cpp:1590
+#: src/input/r_matroska.cpp:2311
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: došlo k neznámé výjimce."
@@ -16229,6 +16229,9 @@ msgstr "– Nastavit na žádný –"
 
 #~ msgid "Output file:"
 #~ msgstr "Výstupní soubor:"
+
+#~ msgid "Players must play this track."
+#~ msgstr "Přehrávače tuto stopu musí přehrát."
 
 #~ msgid "Previous file name"
 #~ msgstr "Předchozí název souboru"
