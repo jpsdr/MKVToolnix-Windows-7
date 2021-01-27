@@ -461,7 +461,7 @@ Tab::setupInputToolTips() {
   Util::setToolTip(p.ui->forcedTrackFlag,
                    Q("%1 %2")
                    .arg(QY("Mark this track as 'forced'."))
-                   .arg(QY("Players must play this track.")));
+                   .arg(QY("Use this for tracks containing onscreen text or foreign-language dialogue.")));
   Util::setToolTip(p.ui->compression,
                    Q("%1 %2 %3")
                    .arg(QY("Sets the lossless compression algorithm to be used for this track."))
