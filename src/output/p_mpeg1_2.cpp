@@ -194,10 +194,8 @@ mpeg1_2_video_packetizer_c::process_framed(packet_cptr packet) {
   if (0 == packet->data->get_size())
     return FILE_STATUS_MOREDATA;
 
-  if (4 > packet->data->get_size())
-    return generic_video_packetizer_c::process(packet);
-
-  remove_stuffing_bytes_and_handle_sequence_headers(packet);
+  if (4 <= packet->data->get_size())
+    remove_stuffing_bytes_and_handle_sequence_headers(packet);
 
   return generic_video_packetizer_c::process(packet);
 }

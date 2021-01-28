@@ -179,7 +179,7 @@ void ParseSequenceHeader(MPEGChunk* chunk, MPEG2SequenceHeader & hdr){
       hdr.frameRate = 0.0;
   }
 
-  //Seek to picturecoding extension
+  //Seek to extension
   hdr.progressiveSequence = 0;
   while(pos < (chunk->GetPointer() + chunk->GetSize() - 6)){
     if((pos[0] == 0x00) && (pos[1] == 0x00) && (pos[2] == 0x01) && (pos[3] == MPEG_VIDEO_EXT_START_CODE)){
@@ -236,7 +236,7 @@ bool ParsePictureHeader(MPEGChunk* chunk, MPEG2PictureHeader & hdr){
   temp = ((uint32_t)(pos[0] & 0x38)) >> 3 ;
   hdr.frameType = (uint8_t) temp;
 
-  //Seek to picturecoding extension
+  //Seek to extension
   while(pos < (chunk->GetPointer() + chunk->GetSize() - 4)){
     if((pos[0] == 0x00) && (pos[1] == 0x00) && (pos[2] == 0x01) && (pos[3] == MPEG_VIDEO_EXT_START_CODE)){
       if((pos[4] & 0xF0) == 0x80){ //Picture coding extension
