@@ -227,9 +227,6 @@ mpeg1_2_video_packetizer_c::process_unframed(packet_cptr packet) {
       if (!frame)
         break;
 
-      if (!m_hcodec_private)
-        create_private_data();
-
       packet_cptr new_packet  = packet_cptr(new packet_t(memory_c::take_ownership(frame->data, frame->size), frame->timestamp, frame->duration, frame->refs[0], frame->refs[1]));
       new_packet->time_factor = MPEG2_PICTURE_TYPE_FRAME == frame->pictureStructure ? 1 : 2;
 
@@ -282,13 +279,4 @@ mpeg1_2_video_packetizer_c::extract_aspect_ratio(const unsigned char *buffer,
 
   rerender_track_headers();
   m_aspect_ratio_extracted = true;
-}
-
-void
-mpeg1_2_video_packetizer_c::create_private_data() {
-  MPEGChunk *raw_seq_hdr = m_parser.GetRealSequenceHeader();
-  if (raw_seq_hdr) {
-    set_codec_private(memory_c::clone(raw_seq_hdr->GetPointer(), raw_seq_hdr->GetSize()));
-    rerender_track_headers();
-  }
 }

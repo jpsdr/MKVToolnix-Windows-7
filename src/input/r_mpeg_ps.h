@@ -117,8 +117,6 @@ struct mpeg_ps_track_t {
   bool v_interlaced;
   int v_version, v_width, v_height, v_dwidth, v_dheight;
   double v_frame_rate, v_aspect_ratio;
-  unsigned char *raw_seq_hdr;
-  int raw_seq_hdr_size;
 
   int a_channels, a_sample_rate, a_bits_per_sample, a_bsid;
   mtx::dts::header_t dts_header;
@@ -145,8 +143,6 @@ struct mpeg_ps_track_t {
     v_dheight(0),
     v_frame_rate(0),
     v_aspect_ratio(0),
-    raw_seq_hdr(nullptr),
-    raw_seq_hdr_size(0),
     a_channels(0),
     a_sample_rate(0),
     a_bits_per_sample(0),
@@ -176,7 +172,6 @@ struct mpeg_ps_track_t {
   }
 
   ~mpeg_ps_track_t() {
-    safefree(raw_seq_hdr);
     safefree(buffer);
     delete multiple_timestamps_packet_extension;
   }

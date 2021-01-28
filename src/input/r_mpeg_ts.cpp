@@ -238,12 +238,6 @@ track_c::new_stream_v_mpeg_1_2(bool end_of_detection) {
     v_dwidth = (int)(v_height * v_aspect_ratio);
   v_dheight  = v_height;
 
-  MPEGChunk *raw_seq_hdr_chunk = m_m2v_parser->GetRealSequenceHeader();
-  if (raw_seq_hdr_chunk) {
-    mxdebug_if(m_debug_headers, fmt::format("new_stream_v_mpeg_1_2: sequence header size: {0}\n", raw_seq_hdr_chunk->GetSize()));
-    m_codec_private_data = memory_c::clone(raw_seq_hdr_chunk->GetPointer(), raw_seq_hdr_chunk->GetSize());
-  }
-
   mxdebug_if(m_debug_headers, fmt::format("new_stream_v_mpeg_1_2: width: {0}, height: {1}\n", v_width, v_height));
   if (v_width == 0 || v_height == 0)
     return FILE_STATUS_MOREDATA;

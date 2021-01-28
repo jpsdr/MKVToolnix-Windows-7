@@ -685,12 +685,6 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
     track->v_dwidth = (int)(track->v_height * track->v_aspect_ratio);
   track->v_dheight  = track->v_height;
 
-  MPEGChunk *raw_seq_hdr = m2v_parser->GetRealSequenceHeader();
-  if (raw_seq_hdr) {
-    track->raw_seq_hdr      = (unsigned char *)safememdup(raw_seq_hdr->GetPointer(), raw_seq_hdr->GetSize());
-    track->raw_seq_hdr_size = raw_seq_hdr->GetSize();
-  }
-
   track->use_buffer(128000);
 }
 
@@ -1242,7 +1236,6 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
     if (track->codec.is(codec_c::type_e::V_MPEG12)) {
       generic_packetizer_c *m2vpacketizer;
 
-      m_ti.m_private_data = memory_c::clone(track->raw_seq_hdr, track->raw_seq_hdr_size);
       m2vpacketizer       = new mpeg1_2_video_packetizer_c(this, m_ti, track->v_version, track->v_frame_rate, track->v_width, track->v_height,
                                                            track->v_dwidth, track->v_dheight, false);
       track->ptzr         = add_packetizer(m2vpacketizer);

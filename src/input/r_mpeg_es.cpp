@@ -136,12 +136,6 @@ mpeg_es_reader_c::read_headers() {
       dwidth = (int)(height * aspect_ratio);
     dheight = height;
 
-    MPEGChunk *raw_seq_hdr = parser.GetRealSequenceHeader();
-    if (raw_seq_hdr)
-      m_ti.m_private_data = memory_c::clone(raw_seq_hdr->GetPointer(), raw_seq_hdr->GetSize());
-    else
-      m_ti.m_private_data.reset();
-
     mxverb(2, fmt::format("mpeg_es_reader: version {0} width {1} height {2} FPS {3} AR {4}\n", version, width, height, frame_rate, aspect_ratio));
 
   } catch (mtx::mm_io::exception &) {
