@@ -28,6 +28,6 @@ public:
   virtual void handle_codec_state(memory_cptr &codec_state);
 
   virtual const char *get_container_name() {
-    return "MPEG-1/-2 program stream";
+    return "MPEG-1/-2 elementary stream";
   };
 };
