@@ -172,10 +172,12 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
     rerender_track_headers();
   }
 
-  if (!m_seq_hdr || (*new_seq_hdr != *m_seq_hdr)) {
-    m_seq_hdr           = new_seq_hdr;
+  if (m_seq_hdr && (*new_seq_hdr != *m_seq_hdr)) {
+    mxdebug_if(m_debug_stuffing_removal, fmt::format("Sequence header changed, adding a CodecState of {0} bytes\n", new_seq_hdr->get_size()));
     packet->codec_state = new_seq_hdr->clone();
   }
+
+  m_seq_hdr = new_seq_hdr;
 }
 
 int
