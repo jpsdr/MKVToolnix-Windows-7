@@ -1688,6 +1688,9 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
   PTZR(t->ptzr)->set_codec_name(t->codec_name);
   PTZR(t->ptzr)->set_source_id(t->source_id);
 
+  if ((t->type == 'a') && (0 != t->a_bps))
+    PTZR(t->ptzr)->set_audio_bit_depth(t->a_bps);
+
   t->handle_packetizer_block_addition_mapping();
 }
 

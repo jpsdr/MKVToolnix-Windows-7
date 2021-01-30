@@ -1,3 +1,12 @@
+# Version ?
+
+## New features and enhancements
+
+* mkvmerge: Matroska reader: for audio tracks that have the bit depth track
+  header set mkvmerge will now keep that header even for codecs that don't
+  require it for decoding. Implements #3009.
+
+
 # Version 53.0.0 "Fool's Gold" 2021-01-30
 
 ## New features and enhancements
