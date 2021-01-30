@@ -214,7 +214,7 @@ Tab::onSaveConfig() {
 void
 Tab::onSaveOptionFile() {
   auto &settings = Util::Settings::get();
-  auto fileName  = Util::getSaveFileName(this, QY("Save option file"), settings.m_lastConfigDir.path(), QY("MKVToolNix option files (JSON-formatted)") + Q(" (*.json);;") + QY("All files") + Q(" (*)"), Q("json"));
+  auto fileName  = Util::getSaveFileName(this, QY("Save option file"), settings.m_lastConfigDir.path(), defaultFileNameForSaving(Q(".json")), QY("MKVToolNix option files (JSON-formatted)") + Q(" (*.json);;") + QY("All files") + Q(" (*)"), Q("json"));
   if (fileName.isEmpty())
     return;
 
@@ -229,7 +229,7 @@ void
 Tab::onSaveConfigAs() {
   auto &p        = *p_func();
   auto &settings = Util::Settings::get();
-  auto fileName  = Util::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"), Q("mtxcfg"));
+  auto fileName  = Util::getSaveFileName(this, QY("Save settings file as"), settings.m_lastConfigDir.path(), defaultFileNameForSaving(Q(".mtxcfg")), QY("MKVToolNix GUI config files") + Q(" (*.mtxcfg);;") + QY("All files") + Q(" (*)"), Q("mtxcfg"));
   if (fileName.isEmpty())
     return;
 
@@ -243,6 +243,15 @@ Tab::onSaveConfigAs() {
   Q_EMIT titleChanged();
 
   MainWindow::get()->setStatusBarMessage(QY("The configuration has been saved."));
+}
+
+QString
+Tab::defaultFileNameForSaving(QString const &ext) {
+  auto &p = *p_func();
+
+  return !p.config.m_destination.isEmpty() ? QFileInfo{p.config.m_destination         }.completeBaseName() + ext
+      : !p.config.m_files.isEmpty()        ? QFileInfo{p.config.m_files[0]->m_fileName}.completeBaseName() + ext
+      :                                      QString{};
 }
 
 QString
@@ -290,6 +299,7 @@ Tab::getOpenFileName(QString const &title,
 
 QString
 Tab::getSaveFileName(QString const &title,
+                     QString const &defaultFileName,
                      QString const &filter,
                      QLineEdit *lineEdit,
                      QString const &defaultSuffix) {
@@ -302,7 +312,7 @@ Tab::getSaveFileName(QString const &title,
   auto dir       = !lineEdit->text().isEmpty()                                                               ? lineEdit->text()
                  : !settings.m_lastOutputDir.path().isEmpty() && (settings.m_lastOutputDir.path() != Q(".")) ? Util::dirPath(settings.m_lastOutputDir.path())
                  :                                                                                             Util::dirPath(settings.m_lastOpenDir.path());
-  auto fileName  = Util::getSaveFileName(this, title, dir, fullFilter, defaultSuffix);
+  auto fileName  = Util::getSaveFileName(this, title, dir, defaultFileName, fullFilter, defaultSuffix);
   if (fileName.isEmpty())
     return fileName;
 

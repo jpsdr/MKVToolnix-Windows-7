@@ -16,6 +16,7 @@
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/date_time.h"
+#include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -390,7 +391,8 @@ void
 Tab::onSaveOutput() {
   auto p        = p_func();
   auto &cfg     = Util::Settings::get();
-  auto fileName = Util::getSaveFileName(this, QY("Save job output"), cfg.lastOpenDirPath(), QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"), Q("txt"));
+  auto txtName  = Util::replaceInvalidFileNameCharacters(p->m_currentJobDescription) + Q(".txt");
+  auto fileName = Util::getSaveFileName(this, QY("Save job output"), cfg.lastOpenDirPath(), txtName, QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"), Q("txt"));
 
   if (fileName.isEmpty())
     return;

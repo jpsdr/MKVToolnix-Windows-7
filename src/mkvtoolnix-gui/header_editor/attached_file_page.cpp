@@ -177,7 +177,7 @@ AttachedFilePage::saveContent() {
     return;
 
   auto &settings = Util::Settings::get();
-  auto fileName  = Util::getSaveFileName(this, QY("Save attachment"), Q("%1/%2").arg(Util::dirPath(settings.m_lastOutputDir.path())).arg(ui->name->text()), QY("All files") + Q(" (*)"));
+  auto fileName  = Util::getSaveFileName(this, QY("Save attachment"), Util::dirPath(settings.m_lastOutputDir.path()), ui->name->text(), QY("All files") + Q(" (*)"));
 
   if (fileName.isEmpty())
     return;

@@ -23,6 +23,12 @@
   the GUI will now select the right-most match instead of the left-most
   one. For example, "La.vie.en.rose.(fr).srt" will now be detected as French
   (fr) instead of English (en). Implements #3013.
+* MKVToolNix GUI: when querying the user for a file name for saving things
+  (e.g. multiplexer settings or an attachment in the header editor), the
+  automatically suggested file name will now be based on the
+  situation-specific file names (e.g. the destination file name for
+  multiplexer settings or the attachment's name when saving an attachment in
+  the header editor) instead of the directory's name. Implements #3012.
 
 ## Bug fixes
 

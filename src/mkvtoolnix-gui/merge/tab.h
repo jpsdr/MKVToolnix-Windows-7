@@ -262,8 +262,9 @@ protected:
   virtual void withSelectedAttachments(std::function<void(Attachment &)> code);
   virtual void addOrRemoveEmptyComboBoxItem(bool add);
   virtual QString getOpenFileName(QString const &title, QString const &filter, QLineEdit *lineEdit, InitialDirMode intialDirMode = InitialDirMode::ContentLastOpenDir);
-  virtual QString getSaveFileName(QString const &title, QString const &filter, QLineEdit *lineEdit, QString const &defaultSuffix);
+  virtual QString getSaveFileName(QString const &title, QString const &defaultFileName, QString const &filter, QLineEdit *lineEdit, QString const &defaultSuffix);
   virtual QString determineInitialDir(QLineEdit *lineEdit, InitialDirMode mode) const;
+  virtual QString defaultFileNameForSaving(QString const &ext);
 
   virtual void moveSourceFilesUpOrDown(bool up);
   virtual void moveTracksUpOrDown(bool up);
