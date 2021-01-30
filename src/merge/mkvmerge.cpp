@@ -1237,50 +1237,25 @@ parse_arg_split(const std::string &arg) {
    is equivalent to \c TID:1.
 */
 static void
-parse_arg_default_track(const std::string &s,
-                        track_info_c &ti) {
-  bool is_default      = true;
-  auto parts = mtx::string::split(s, ":", 2);
-  int64_t id           = 0;
+parse_arg_boolean_track_option(std::string const &option,
+                               std::string const &value,
+                               std::map<int64_t, bool> &storage) {
+  auto is_set = true;
+  auto parts  = mtx::string::split(value, ":", 2);
+  int64_t id  = 0;
 
   mtx::string::strip(parts);
   if (!mtx::string::parse_number(parts[0], id))
-    mxerror(fmt::format(Y("Invalid track ID specified in '--default-track {0}'.\n"), s));
+    mxerror(fmt::format(Y("Invalid track ID specified in '{0} {1}'.\n"), option, value));
 
   try {
     if (2 == parts.size())
-      is_default = mtx::string::parse_bool(parts[1]);
+      is_set = mtx::string::parse_bool(parts[1]);
   } catch (...) {
-    mxerror(fmt::format(Y("Invalid boolean option specified in '--default-track {0}'.\n"), s));
+    mxerror(fmt::format(Y("Invalid boolean option specified in '{0} {1}'.\n"), option, value));
   }
 
-  ti.m_default_track_flags[id] = is_default;
-}
-
-/** \brief Parse the \c --forced-track argument
-
-   The argument must have the form \c TID or \c TID:boolean. The former
-   is equivalent to \c TID:1.
-*/
-static void
-parse_arg_forced_track(const std::string &s,
-                        track_info_c &ti) {
-  bool is_forced                 = true;
-  auto parts = mtx::string::split(s, ":", 2);
-  int64_t id                     = 0;
-
-  mtx::string::strip(parts);
-  if (!mtx::string::parse_number(parts[0], id))
-    mxerror(fmt::format(Y("Invalid track ID specified in '--forced-track {0}'.\n"), s));
-
-  try {
-    if (2 == parts.size())
-      is_forced = mtx::string::parse_bool(parts[1]);
-  } catch (...) {
-    mxerror(fmt::format(Y("Invalid boolean option specified in '--forced-track {0}'.\n"), s));
-  }
-
-  ti.m_forced_track_flags[id] = is_forced;
+  storage[id] = is_set;
 }
 
 /** \brief Parse the \c --cues argument
@@ -1601,32 +1576,6 @@ parse_arg_nalu_size_length(const std::string &s,
   }
 
   ti.m_nalu_size_lengths[id] = nalu_size_length;
-}
-
-/** \brief Parse the \c --fix-bitstream-timing-information argument
-
-   The argument must have the form \c TID or \c TID:boolean. The former
-   is equivalent to \c TID:1.
-*/
-static void
-parse_arg_fix_bitstream_frame_rate(const std::string &s,
-                                   track_info_c &ti) {
-  bool fix   = true;
-  auto parts = mtx::string::split(s, ":", 2);
-  int64_t id = 0;
-
-  mtx::string::strip(parts);
-  if (!mtx::string::parse_number(parts[0], id))
-    mxerror(fmt::format(Y("Invalid track ID specified in '--fix-bitstream-timing-information {0}'.\n"), s));
-
-  try {
-    if (2 == parts.size())
-      fix = mtx::string::parse_bool(parts[1]);
-  } catch (...) {
-    mxerror(fmt::format(Y("Invalid boolean option specified in '--fix-bitstream-timing-information {0}'.\n"), s));
-  }
-
-  ti.m_fix_bitstream_frame_rate_flags[id] = fix;
 }
 
 static void
@@ -2785,14 +2734,14 @@ parse_args(std::vector<std::string> args) {
       if (no_next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_default_track(next_arg, *ti);
+      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_default_track_flags);
       sit++;
 
     } else if (this_arg == "--forced-track") {
       if (no_next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_forced_track(next_arg, *ti);
+      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_forced_track_flags);
       sit++;
 
     } else if (this_arg == "--language") {
@@ -2902,7 +2851,7 @@ parse_args(std::vector<std::string> args) {
       if (no_next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_fix_bitstream_frame_rate(next_arg, *ti);
+      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_fix_bitstream_frame_rate_flags);
       sit++;
 
     } else if (this_arg == "--reduce-to-core") {
