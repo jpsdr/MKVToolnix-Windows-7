@@ -256,6 +256,7 @@ def define_default_task
   targets = $applications.clone
 
   targets << "apps:tools" if $build_tools
+  targets << "apps:tools:bluray_dump" if $building_for[:windows]
   targets += (c(:ADDITIONAL_TARGETS) || '').split(%r{ +})
 
   # Build the unit tests only if requested
