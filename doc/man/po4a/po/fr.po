@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2021-01-27 16:05+0100\n"
-"PO-Revision-Date: 2020-10-05 12:08+0000\n"
+"PO-Revision-Date: 2021-01-30 08:38+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -42,7 +42,7 @@ msgstr "52.0.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2021-01-04"
-msgstr ""
+msgstr "04-01-2021"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -2792,7 +2792,7 @@ msgstr "<option>--default-track</option> <parameter>TID<optional>:bool</optional
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1391
 msgid "Sets the 'default' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present.  If the user does not explicitly select a track himself then the player should prefer the track that has his 'default' flag set. Only one track of each kind (audio, video, subtitles, buttons) can have his 'default' flag set.  If the user wants no track to have the default track flag set then he has to set <parameter>bool</parameter> to <constant>0</constant> for all tracks."
-msgstr "Définit le signal « Par défaut » pour la piste donnée (voir la section des <link linkend=\"mkvmerge.track_ids\">ID de piste</link>) si l'argument optionnel <parameter>bool</parameter> n'est pas présent. Si l'utilisateur ne sélectionne pas explicitement une piste lui-même, alors le lecteur devrait préférer la piste que a le signal « Par défaut » défini. Une seule piste de chaque type (audio, vidéo, sous-titres, boutons) peut avoir son signal « Par défaut » défini. Si l'utilisateur ne veut pas de piste avec ce signal défini, il doit définir la valeur <parameter>bool</parameter> à <constant>0</constant> pour toutes les pistes."
+msgstr "Définit le signal « Par défaut » pour la piste donnée (voir la section des <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument optionnel <parameter>bool</parameter> n'est pas présent. Si l'utilisateur ne sélectionne pas explicitement une piste lui-même, alors le lecteur devrait préférer la piste que a le signal « Par défaut » défini. Une seule piste de chaque type (audio, vidéo, sous-titres, boutons) peut avoir son signal « Par défaut » défini. Si l'utilisateur ne veut pas de piste avec ce signal défini, il doit définir la valeur <parameter>bool</parameter> à <constant>0</constant> pour toutes les pistes."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1405
@@ -2801,10 +2801,8 @@ msgstr "<option>--forced-track</option> <parameter>TID<optional>:bool</optional>
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1408
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. Use this for tracks containing onscreen text or foreign-language dialogue."
-msgstr "Définit le signal « forcé » pour la piste fournie (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument optionnel <parameter>bool</parameter> n'est pas présent. Un lecteur doit jouer toutes les pistes pour lesquelles ce signal est posé à <constant>1</constant>."
+msgstr "Pose le signal « Piste forcée » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif  <parameter>bool</parameter> n'est pas présent. Utiliser ceci pour les pistes contenant du texte à l'écran ou des dialogues en langues étrangères."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1419
@@ -3161,7 +3159,7 @@ msgstr "<option>--max-content-light</option> <parameter>TID:n</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1803
 msgid "Sets the maximum brightness of a single pixel (Maximum Content Light Level) in candelas per square meter (cd/m²). The value of <parameter>n</parameter> should be a non-negtive integer."
-msgstr "Définit la brillance maximale d'un pixel unique (Niveau de Contenu de Lumière Maximal - Maximum Content Light Level) en candelas par mètre carré (cd/m²). La valeur de <parameter>n</parameter> devrait être en entier non négatif."
+msgstr "Définit la brillance maximale d'un pixel unique (Niveau de Contenu de Lumière Maximal - Maximum Content Light Level) en candelas par mètre carré (cd/m²). La valeur de <parameter>n</parameter> devrait être un entier non négatif."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1810
@@ -3171,7 +3169,7 @@ msgstr "<option>--max-frame-light</option> <parameter>TID:n</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1813
 msgid "Sets the maximum brightness of a single full frame (Maximum Frame-Average Light Level) in candelas per square meter (cd/m²). The value of <parameter>n</parameter> should be a non-negtive integer."
-msgstr "Définit la brillance maximale d'une trame complète unique (Niveau de Contenu de Lumière Maximal - Maximum Content Light Level) en candelas par mètre carré (cd/m²). La valeur def <parameter>n</parameter>devrait être en entier non négatif."
+msgstr "Définit la brillance maximale d'une trame complète unique (Niveau de Contenu de Lumière Maximal - Maximum Content Light Level) en candelas par mètre carré (cd/m²). La valeur def <parameter>n</parameter>devrait être un entier non négatif."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1821
@@ -3739,7 +3737,7 @@ msgstr "$ mkvmerge --list-languages"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2432
 msgid "Search the list for the languages you need. Let's assume you have put two audio tracks into a &matroska; file and want to set their language codes and that their track IDs are 2 and 3. This can be done with"
-msgstr "Trouver dans la liste la langue souhaitée. Supposons qu'il y a 2 pistes audio dans un fichier &matroska; dont il faut définir les codes langue et que leurs ID de piste sont 2 et 3. Cela peut être réalisé avec"
+msgstr "Trouver dans la liste la langue souhaitée. Supposons qu'il y a 2 pistes audio dans un fichier &matroska; dont il faut définir les codes langue et que leurs ID de pistes sont 2 et 3. Cela peut être réalisé avec"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvmerge.xml:2436
@@ -3836,7 +3834,7 @@ msgstr "Fichiers <abbrev>AAC</abbrev>, <abbrev>AC-3</abbrev>, <abbrev>MP3</abbre
 #. type: Content of: <refentry><refsect1><refsect2><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2510
 msgid "Most other files: The track IDs are assigned in order the tracks are found in the file starting at 0."
-msgstr "La plupart des autres fichiers : les ID de piste sont assignées dans l'ordre des pistes dans le fichiers en débutant à 0."
+msgstr "La plupart des autres fichiers : les ID de pistes sont assignées dans l'ordre des pistes dans le fichiers en débutant à 0."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2516
