@@ -409,6 +409,7 @@ SourceFile::regexForDerivingLanguageFromFileName() {
 
   auto &cfg    = Util::Settings::get();
   auto pattern = !cfg.m_regexForDerivingTrackLanguagesFromFileNames.isEmpty() ? cfg.m_regexForDerivingTrackLanguagesFromFileNames : defaultRegexForDerivingLanguageFromFileName();
+  pattern      = Q(".*") + pattern;
 
   return QRegularExpression{replaceLanguageSubPatterns(pattern), QRegularExpression::CaseInsensitiveOption};
 }

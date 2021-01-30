@@ -19,6 +19,10 @@
 * mkvextract: mkvextract will now check if any of the destination file names
   is the same as the source file name and abort with an error if that's the
   case. Implements #3001.
+* MKVToolNix GUI: multiplexer: when deriving track languages from file names
+  the GUI will now select the right-most match instead of the left-most
+  one. For example, "La.vie.en.rose.(fr).srt" will now be detected as French
+  (fr) instead of English (en). Implements #3013.
 
 ## Bug fixes
 
