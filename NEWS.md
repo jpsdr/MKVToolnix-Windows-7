@@ -40,6 +40,9 @@
   often half the value it actually should be, resulting in all video frames
   having an explicit block duration with the correct value. This has been
   fixed with a patch by Tom Yan.
+* mkvmerge: MPEG 1/2 video handling: the data stored in `Codec private` and
+  `Codec state` doesn't contain extensions other than sequence & sequence
+  display extensions anymore. Fix by Tom Yan.
 * mkvmerge: tag handling: when remuxing a Matroska file with the
   `--no-track-tags`, existing `SOURCE_ID` track tags are now skipped, too.
 * MKVToolNix GUI: multiplexer: the drop-down boxes with pre-defined track
