@@ -2,49 +2,49 @@
 
 ## New features and enhancements
 
+* mkvmerge: AVI reader: added support for reading the video aspect ratio from
+  the video properties header (`vprp` chunk) if present and setting the
+  display dimensions accordingly. Implements #2993.
 * mkvmerge: MP4 reader: for h.264/AVC tracks that don't have an
   `AVCConfigurationBox` (`avcC` atom) in their sample description (`stsd`)
   atom or whose `avcC` atom contains no content `mkvmerge` will now re-derive
   the `AVCConfigurationBox` from the bitstream. Implements #2995.
-* mkvmerge: AVI reader: added support for reading the video aspect ratio from
-  the video properties header (`vprp` chunk) if present and setting the
-  display dimensions accordingly. Implements #2993.
-* Windows installer: the `bluray_dump` command-line utility will be installed
-  into the `tools` sub-directory. `bluray_dump` can read & dump certain file
-  types used on Blu-rays: `.mpls` playlists, `.clpi` clip information
-  databases, `.bdmv` index files, `bdmt_….xml` disc library databases and
-  `tnmt_….xml` track & chapter name databases.
-* MKVToolNix GUI: preferences: the items in the "pre-defined …" lists can now
-  be renamed by double-clicking with the mouse or pressing the F2 key.
 * mkvextract: mkvextract will now check if any of the destination file names
   is the same as the source file name and abort with an error if that's the
   case. Implements #3001.
-* MKVToolNix GUI: multiplexer: when deriving track languages from file names
-  the GUI will now select the right-most match instead of the left-most
-  one. For example, "La.vie.en.rose.(fr).srt" will now be detected as French
-  (fr) instead of English (en). Implements #3013.
 * MKVToolNix GUI: when querying the user for a file name for saving things
   (e.g. multiplexer settings or an attachment in the header editor), the
   automatically suggested file name will now be based on the
   situation-specific file names (e.g. the destination file name for
   multiplexer settings or the attachment's name when saving an attachment in
   the header editor) instead of the directory's name. Implements #3012.
+* MKVToolNix GUI: multiplexer: when deriving track languages from file names
+  the GUI will now select the right-most match instead of the left-most
+  one. For example, "La.vie.en.rose.(fr).srt" will now be detected as French
+  (fr) instead of English (en). Implements #3013.
+* MKVToolNix GUI: preferences: the items in the "pre-defined …" lists can now
+  be renamed by double-clicking with the mouse or pressing the F2 key.
+* Windows installer: the `bluray_dump` command-line utility will be installed
+  into the `tools` sub-directory. `bluray_dump` can read & dump certain file
+  types used on Blu-rays: `.mpls` playlists, `.clpi` clip information
+  databases, `.bdmv` index files, `bdmt_….xml` disc library databases and
+  `tnmt_….xml` track & chapter name databases.
 
 ## Bug fixes
 
-* MKVToolNix GUI: multiplexer: the drop-down boxes with pre-defined track
-  names now follow the order set in the preferences instead of sorting the
-  entries alphabetically. Fixes #2999.
 * mkvmerge: stretching chapter timestamps with `--chapter-sync` now works
   correctly with floating point values including fractions of floating point
   numbers (e.g. `12.3/45.67`). The tooltips in the GUI have been adjusted
   accordingly. Fixes #3002.
-* mkvmerge: when remuxing a Matroska file with the `--no-track-tags`, existing
-  `SOURCE_ID` track tags are now skipped, too.
 * mkvmerge: MPEG 1/2 video handling: the "default duration" header field was
   often half the value it actually should be, resulting in all video frames
   having an explicit block duration with the correct value. This has been
   fixed with a patch by Tom Yan.
+* mkvmerge: tag handling: when remuxing a Matroska file with the
+  `--no-track-tags`, existing `SOURCE_ID` track tags are now skipped, too.
+* MKVToolNix GUI: multiplexer: the drop-down boxes with pre-defined track
+  names now follow the order set in the preferences instead of sorting the
+  entries alphabetically. Fixes #2999.
 
 
 # Version 52.0.0 "Secret For The Mad" 2021-01-04
