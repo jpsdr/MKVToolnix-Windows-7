@@ -209,6 +209,11 @@ kax_element_names_c::init() {
   ADD(KaxMaxBlockAdditionID,           Y("Maximum block additional ID"));
   ADD(KaxContentEncodings,             Y("Content encodings"));
   ADD(KaxSeekPreRoll,                  Y("Seek pre-roll"));
+  ADD(KaxFlagHearingImpaired,          Y("\"Hearing impaired\" flag"));
+  ADD(KaxFlagVisualImpaired,           Y("\"Visual impaired\" flag"));
+  ADD(KaxFlagTextDescriptions,         Y("\"Text descriptions\" flag"));
+  ADD(KaxFlagOriginal,                 Y("\"Original language\" flag"));
+  ADD(KaxFlagCommentary,               Y("\"Commentary\" flag"));
 
   ADD(KaxSeekHead,                     Y("Seek head"));
   ADD(KaxSeek,                         Y("Seek entry"));
