@@ -99,6 +99,13 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_max_timestamp_seen{}
   , m_relaxed_timestamp_checking{}
 {
+  auto set_bool_maybe = [this](std::map<int64_t, bool> &flags, std::optional<bool> &flag) {
+    if (mtx::includes(flags, m_ti.m_id))
+      flag = flags[m_ti.m_id];
+    else if (mtx::includes(flags, -1))
+      flag = flags[-1];
+  };
+
   // Let's see if the user specified timestamp sync for this track.
   if (mtx::includes(m_ti.m_timestamp_syncs, m_ti.m_id))
     m_ti.m_tcsync = m_ti.m_timestamp_syncs[m_ti.m_id];
@@ -116,29 +123,10 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   else if (mtx::includes(m_ti.m_cue_creations, -1))
     m_ti.m_cues = m_ti.m_cue_creations[-1];
 
-  // Let's see if the user has given a default track flag for this track.
-  if (mtx::includes(m_ti.m_default_track_flags, m_ti.m_id))
-    m_ti.m_default_track = m_ti.m_default_track_flags[m_ti.m_id];
-  else if (mtx::includes(m_ti.m_default_track_flags, -1))
-    m_ti.m_default_track = m_ti.m_default_track_flags[-1];
-
-  // Let's see if the user has given a fix avc fps flag for this track.
-  if (mtx::includes(m_ti.m_fix_bitstream_frame_rate_flags, m_ti.m_id))
-    m_ti.m_fix_bitstream_frame_rate = m_ti.m_fix_bitstream_frame_rate_flags[m_ti.m_id];
-  else if (mtx::includes(m_ti.m_fix_bitstream_frame_rate_flags, -1))
-    m_ti.m_fix_bitstream_frame_rate = m_ti.m_fix_bitstream_frame_rate_flags[-1];
-
-  // Let's see if the user has given a forced track flag for this track.
-  if (mtx::includes(m_ti.m_forced_track_flags, m_ti.m_id))
-    m_ti.m_forced_track = m_ti.m_forced_track_flags[m_ti.m_id];
-  else if (mtx::includes(m_ti.m_forced_track_flags, -1))
-    m_ti.m_forced_track = m_ti.m_forced_track_flags[-1];
-
-  // Let's see if the user has given a enabled track flag for this track.
-  if (mtx::includes(m_ti.m_enabled_track_flags, m_ti.m_id))
-    m_ti.m_enabled_track = m_ti.m_enabled_track_flags[m_ti.m_id];
-  else if (mtx::includes(m_ti.m_enabled_track_flags, -1))
-    m_ti.m_enabled_track = m_ti.m_enabled_track_flags[-1];
+  set_bool_maybe(m_ti.m_default_track_flags,            m_ti.m_default_track);
+  set_bool_maybe(m_ti.m_forced_track_flags,             m_ti.m_forced_track);
+  set_bool_maybe(m_ti.m_enabled_track_flags,            m_ti.m_enabled_track);
+  set_bool_maybe(m_ti.m_fix_bitstream_frame_rate_flags, m_ti.m_fix_bitstream_frame_rate);
 
   // Let's see if the user has specified a language for this track.
   if (mtx::includes(m_ti.m_languages, m_ti.m_id))
