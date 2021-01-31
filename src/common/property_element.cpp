@@ -128,10 +128,7 @@ property_element_c::init_tables() {
   ELE("flag-default",         KaxTrackFlagDefault::ClassInfos,     YT("'Default track' flag"),   YT("Set if that track (audio, video or subs) SHOULD be used if no language found matches the "
                                                                                                     "user preference."));
   ELE("flag-enabled",         KaxTrackFlagEnabled::ClassInfos,     YT("'Track enabled' flag"),   YT("Set if the track is used."));
-  ELE("flag-forced",          KaxTrackFlagForced::ClassInfos,      YT("'Forced display' flag"),  YT("Set if that track MUST be used during playback. "
-                                                                                                    "There can be many forced track for a kind (audio, video or subs). "
-                                                                                                    "The player should select the one whose language matches the user preference or the "
-                                                                                                    "default + forced track."));
+  ELE("flag-forced",          KaxTrackFlagForced::ClassInfos,      YT("'Forced display' flag"),  YT("Can be set for tracks containing onscreen text or foreign-language dialog."));
   ELE("min-cache",            KaxTrackMinCache::ClassInfos,        YT("Minimum cache"),          YT("The minimum number of frames a player should be able to cache during playback. "
                                                                                                     "If set to 0, the reference pseudo-cache system is not used."));
   ELE("max-cache",            KaxTrackMaxCache::ClassInfos,        YT("Maximum cache"),          YT("The maximum number of frames a player should be able to cache during playback. "
