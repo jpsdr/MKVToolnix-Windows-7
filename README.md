@@ -132,7 +132,7 @@ These libraries are:
   PCRE2 library. Version 10.32.1 or newer is required.
 
 - [libEBML v1.4.1](http://dl.matroska.org/downloads/libebml/) or later
-  and [libMatroska v1.6.1](http://dl.matroska.org/downloads/libmatroska/)
+  and [libMatroska v1.6.3](http://dl.matroska.org/downloads/libmatroska/)
   or later for low-level access to Matroska files. Instructions on how to
   compile them are a bit further down in this file.
 
@@ -182,7 +182,7 @@ libraries. It will use them if no version is found on the system.
 
 Start by either downloading releases of [libEBML
 v1.4.1](http://dl.matroska.org/downloads/libebml/) and [libMatroska
-v1.6.1](http://dl.matroska.org/downloads/libmatroska/) or by getting
+v1.6.3](http://dl.matroska.org/downloads/libmatroska/) or by getting
 fresh copies from their git repositories:
 
     git clone https://github.com/Matroska-Org/libebml.git

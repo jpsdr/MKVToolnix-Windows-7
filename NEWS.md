@@ -6,6 +6,10 @@
   header set mkvmerge will now keep that header even for codecs that don't
   require it for decoding. Implements #3009.
 
+## Build system changes
+
+* libMatroska v1.6.3 is now required.
+
 
 # Version 53.0.0 "Fool's Gold" 2021-01-30
 
