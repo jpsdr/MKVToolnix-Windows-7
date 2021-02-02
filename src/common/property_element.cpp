@@ -122,24 +122,30 @@ property_element_c::init_tables() {
 
   current_index = KaxTracks::ClassInfos.GlobalId.Value;
 
-  ELE("track-number",         KaxTrackNumber::ClassInfos,          YT("Track number"),           YT("The track number as used in the Block Header."));
-  ELE("track-uid",            KaxTrackUID::ClassInfos,             YT("Track UID"),              YT("A unique ID to identify the Track. This should be kept the same when making a "
-                                                                                                    "direct stream copy of the Track to another file."));
-  ELE("flag-default",         KaxTrackFlagDefault::ClassInfos,     YT("'Default track' flag"),   YT("Set if that track (audio, video or subs) SHOULD be used if no language found matches the "
-                                                                                                    "user preference."));
-  ELE("flag-enabled",         KaxTrackFlagEnabled::ClassInfos,     YT("'Track enabled' flag"),   YT("Set if the track is used."));
-  ELE("flag-forced",          KaxTrackFlagForced::ClassInfos,      YT("'Forced display' flag"),  YT("Can be set for tracks containing onscreen text or foreign-language dialog."));
-  ELE("min-cache",            KaxTrackMinCache::ClassInfos,        YT("Minimum cache"),          YT("The minimum number of frames a player should be able to cache during playback. "
-                                                                                                    "If set to 0, the reference pseudo-cache system is not used."));
-  ELE("max-cache",            KaxTrackMaxCache::ClassInfos,        YT("Maximum cache"),          YT("The maximum number of frames a player should be able to cache during playback. "
-                                                                                                    "If set to 0, the reference pseudo-cache system is not used."));
-  ELE("default-duration",     KaxTrackDefaultDuration::ClassInfos, YT("Default duration"),       YT("Number of nanoseconds (not scaled) per frame."));
-  ELE("name",                 KaxTrackName::ClassInfos,            YT("Name"),                   YT("A human-readable track name."));
-  ELE("language",             KaxTrackLanguage::ClassInfos,        YT("Language"),               YT("Specifies the language of the track."));
-  ELE("language-ietf",        KaxLanguageIETF::ClassInfos,         YT("Language (IETF BCP 47)"), YT("Specifies the language of the track in the form of a BCP 47 language tag."));
-  ELE("codec-id",             KaxCodecID::ClassInfos,              YT("Codec ID"),               YT("An ID corresponding to the codec."));
-  ELE("codec-name",           KaxCodecName::ClassInfos,            YT("Codec name"),             YT("A human-readable string specifying the codec."));
-  ELE("codec-delay",          KaxCodecDelay::ClassInfos,           YT("Codec-inherent delay"),   YT("Delay built into the codec during decoding in ns."));
+  ELE("track-number",           KaxTrackNumber::ClassInfos,          YT("Track number"),               YT("The track number as used in the Block Header."));
+  ELE("track-uid",              KaxTrackUID::ClassInfos,             YT("Track UID"),                  YT("A unique ID to identify the Track. This should be kept the same when making a "
+                                                                                                          "direct stream copy of the Track to another file."));
+  ELE("flag-commentary",        KaxFlagCommentary::ClassInfos,       YT("\"Commentary\" flag"),        YT("Can be set if the track contains commentary."));
+  ELE("flag-default",           KaxTrackFlagDefault::ClassInfos,     YT("'Default track' flag"),       YT("Set if that track (audio, video or subs) SHOULD be used if no language found matches the "
+                                                                                                          "user preference."));
+  ELE("flag-enabled",           KaxTrackFlagEnabled::ClassInfos,     YT("'Track enabled' flag"),       YT("Set if the track is used."));
+  ELE("flag-forced",            KaxTrackFlagForced::ClassInfos,      YT("'Forced display' flag"),      YT("Can be set for tracks containing onscreen text or foreign-language dialog."));
+  ELE("flag-hearing-impaired",  KaxFlagHearingImpaired::ClassInfos,  YT("\"Hearing impaired\" flag"),  YT("Can be set if the track is suitable for users with hearing impairments."));
+  ELE("flag-original",          KaxFlagOriginal::ClassInfos,         YT("\"Original language\" flag"), YT("Can be set if the track is in the content's original language (not a translation)."));
+  ELE("flag-text-descriptions", KaxFlagTextDescriptions::ClassInfos, YT("\"Text descriptions\" flag"), YT("Can be set if the track contains textual descriptions of video content suitable for playback "
+                                                                                                          "via a text-to-speech system for a visually-impaired user."));
+  ELE("flag-visual-impaired",   KaxFlagVisualImpaired::ClassInfos,   YT("\"Visual impaired\" flag"),   YT("Can be set if the track is suitable for users with visual impairments."));
+  ELE("min-cache",              KaxTrackMinCache::ClassInfos,        YT("Minimum cache"),              YT("The minimum number of frames a player should be able to cache during playback. "
+                                                                                                          "If set to 0, the reference pseudo-cache system is not used."));
+  ELE("max-cache",              KaxTrackMaxCache::ClassInfos,        YT("Maximum cache"),              YT("The maximum number of frames a player should be able to cache during playback. "
+                                                                                                          "If set to 0, the reference pseudo-cache system is not used."));
+  ELE("default-duration",       KaxTrackDefaultDuration::ClassInfos, YT("Default duration"),           YT("Number of nanoseconds (not scaled) per frame."));
+  ELE("name",                   KaxTrackName::ClassInfos,            YT("Name"),                       YT("A human-readable track name."));
+  ELE("language",               KaxTrackLanguage::ClassInfos,        YT("Language"),                   YT("Specifies the language of the track."));
+  ELE("language-ietf",          KaxLanguageIETF::ClassInfos,         YT("Language (IETF BCP 47)"),     YT("Specifies the language of the track in the form of a BCP 47 language tag."));
+  ELE("codec-id",               KaxCodecID::ClassInfos,              YT("Codec ID"),                   YT("An ID corresponding to the codec."));
+  ELE("codec-name",             KaxCodecName::ClassInfos,            YT("Codec name"),                 YT("A human-readable string specifying the codec."));
+  ELE("codec-delay",            KaxCodecDelay::ClassInfos,           YT("Codec-inherent delay"),       YT("Delay built into the codec during decoding in ns."));
 
   sub_master_callbacks = &KaxTrackVideo::ClassInfos;
 

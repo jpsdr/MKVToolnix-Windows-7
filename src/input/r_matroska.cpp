@@ -1291,17 +1291,17 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     if (kcodecpriv)
       track->private_data = memory_c::clone(kcodecpriv->GetBuffer(), kcodecpriv->GetSize());
 
-    track->codec_id         = FindChildValue<KaxCodecID>(ktentry);
-    track->codec_name       = to_utf8(FindChildValue<KaxCodecName>(ktentry));
-    track->track_name       = to_utf8(FindChildValue<KaxTrackName>(ktentry));
-    track->language         = mtx::bcp47::language_c::parse(FindChildValue<KaxTrackLanguage, std::string>(ktentry, "eng"));
-    track->language_ietf    = mtx::bcp47::language_c::parse(FindChildValue<KaxLanguageIETF, std::string>(ktentry, {}));
-    track->default_duration = FindChildValue<KaxTrackDefaultDuration>(ktentry, track->default_duration);
-    track->default_track    = FindChildValue<KaxTrackFlagDefault, bool>(ktentry, true);
-    track->forced_track     = FindChildValue<KaxTrackFlagForced>(ktentry);
-    track->enabled_track    = FindChildValue<KaxTrackFlagEnabled, bool>(ktentry, true);
-    track->lacing_flag      = FindChildValue<KaxTrackFlagLacing>(ktentry);
-    track->max_blockadd_id  = FindChildValue<KaxMaxBlockAdditionID>(ktentry);
+    track->codec_id               = FindChildValue<KaxCodecID>(ktentry);
+    track->codec_name             = to_utf8(FindChildValue<KaxCodecName>(ktentry));
+    track->track_name             = to_utf8(FindChildValue<KaxTrackName>(ktentry));
+    track->language               = mtx::bcp47::language_c::parse(FindChildValue<KaxTrackLanguage, std::string>(ktentry, "eng"));
+    track->language_ietf          = mtx::bcp47::language_c::parse(FindChildValue<KaxLanguageIETF, std::string>(ktentry, {}));
+    track->default_duration       = FindChildValue<KaxTrackDefaultDuration>(ktentry, track->default_duration);
+    track->default_track          = FindChildValue<KaxTrackFlagDefault, bool>(ktentry, true);
+    track->forced_track           = FindChildValue<KaxTrackFlagForced>(ktentry);
+    track->enabled_track          = FindChildValue<KaxTrackFlagEnabled, bool>(ktentry, true);
+    track->lacing_flag            = FindChildValue<KaxTrackFlagLacing>(ktentry);
+    track->max_blockadd_id        = FindChildValue<KaxMaxBlockAdditionID>(ktentry);
     track->hearing_impaired_flag  = FindOptionalChildBoolValue<KaxFlagHearingImpaired>(ktentry);
     track->visual_impaired_flag   = FindOptionalChildBoolValue<KaxFlagVisualImpaired>(ktentry);
     track->text_descriptions_flag = FindOptionalChildBoolValue<KaxFlagTextDescriptions>(ktentry);
@@ -2720,20 +2720,20 @@ kax_reader_c::identify() {
 
     info = mtx::id::info_c{};
 
-    info.add(mtx::id::number,               track->track_number);
-    info.add(mtx::id::uid,                  track->track_uid);
-    info.add(mtx::id::codec_id,             track->codec_id);
-    info.set(mtx::id::codec_private_length, track->private_data ? track->private_data->get_size() : 0u);
-    info.add(mtx::id::codec_delay,          track->codec_delay.to_ns(0));
-    info.add(mtx::id::codec_name,           track->codec_name);
-    info.add(mtx::id::language,             track->language.get_iso639_alpha_3_code());
-    info.add(mtx::id::language_ietf,        track->language_ietf.format());
-    info.add(mtx::id::track_name,           track->track_name);
-    info.add(mtx::id::stereo_mode,          static_cast<int>(track->v_stereo_mode), static_cast<int>(stereo_mode_c::unspecified));
-    info.add(mtx::id::default_duration,     track->default_duration);
-    info.set(mtx::id::default_track,        track->default_track ? true : false);
-    info.set(mtx::id::forced_track,         track->forced_track  ? true : false);
-    info.set(mtx::id::enabled_track,        track->enabled_track ? true : false);
+    info.add(mtx::id::number,                 track->track_number);
+    info.add(mtx::id::uid,                    track->track_uid);
+    info.add(mtx::id::codec_id,               track->codec_id);
+    info.set(mtx::id::codec_private_length,   track->private_data ? track->private_data->get_size() : 0u);
+    info.add(mtx::id::codec_delay,            track->codec_delay.to_ns(0));
+    info.add(mtx::id::codec_name,             track->codec_name);
+    info.add(mtx::id::language,               track->language.get_iso639_alpha_3_code());
+    info.add(mtx::id::language_ietf,          track->language_ietf.format());
+    info.add(mtx::id::track_name,             track->track_name);
+    info.add(mtx::id::stereo_mode,            static_cast<int>(track->v_stereo_mode), static_cast<int>(stereo_mode_c::unspecified));
+    info.add(mtx::id::default_duration,       track->default_duration);
+    info.set(mtx::id::default_track,          track->default_track ? true : false);
+    info.set(mtx::id::forced_track,           track->forced_track  ? true : false);
+    info.set(mtx::id::enabled_track,          track->enabled_track ? true : false);
     info.add(mtx::id::flag_hearing_impaired,  track->hearing_impaired_flag);
     info.add(mtx::id::flag_visual_impaired,   track->visual_impaired_flag);
     info.add(mtx::id::flag_text_descriptions, track->text_descriptions_flag);
