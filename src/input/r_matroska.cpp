@@ -1302,6 +1302,11 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     track->enabled_track    = FindChildValue<KaxTrackFlagEnabled, bool>(ktentry, true);
     track->lacing_flag      = FindChildValue<KaxTrackFlagLacing>(ktentry);
     track->max_blockadd_id  = FindChildValue<KaxMaxBlockAdditionID>(ktentry);
+    track->hearing_impaired_flag  = FindOptionalChildBoolValue<KaxFlagHearingImpaired>(ktentry);
+    track->visual_impaired_flag   = FindOptionalChildBoolValue<KaxFlagVisualImpaired>(ktentry);
+    track->text_descriptions_flag = FindOptionalChildBoolValue<KaxFlagTextDescriptions>(ktentry);
+    track->original_flag          = FindOptionalChildBoolValue<KaxFlagOriginal>(ktentry);
+    track->commentary_flag        = FindOptionalChildBoolValue<KaxFlagCommentary>(ktentry);
 
     auto kax_seek_pre_roll  = FindChild<KaxSeekPreRoll>(ktentry);
     auto kax_codec_delay    = FindChild<KaxCodecDelay>(ktentry);
@@ -1678,6 +1683,21 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
 
   if (t->forced_track && !PTZR(t->ptzr)->m_ti.m_forced_track.has_value())
     PTZR(t->ptzr)->set_track_forced_flag(true);
+
+  if (t->hearing_impaired_flag.has_value() && !PTZR(t->ptzr)->m_ti.m_hearing_impaired_flag.has_value())
+    PTZR(t->ptzr)->set_hearing_impaired_flag(*t->hearing_impaired_flag);
+
+  if (t->visual_impaired_flag.has_value() && !PTZR(t->ptzr)->m_ti.m_visual_impaired_flag.has_value())
+    PTZR(t->ptzr)->set_visual_impaired_flag(*t->visual_impaired_flag);
+
+  if (t->text_descriptions_flag.has_value() && !PTZR(t->ptzr)->m_ti.m_text_descriptions_flag.has_value())
+    PTZR(t->ptzr)->set_text_descriptions_flag(*t->text_descriptions_flag);
+
+  if (t->original_flag.has_value() && !PTZR(t->ptzr)->m_ti.m_original_flag.has_value())
+    PTZR(t->ptzr)->set_original_flag(*t->original_flag);
+
+  if (t->commentary_flag.has_value() && !PTZR(t->ptzr)->m_ti.m_commentary_flag.has_value())
+    PTZR(t->ptzr)->set_commentary_flag(*t->commentary_flag);
 
   if (!PTZR(t->ptzr)->m_ti.m_enabled_track.has_value())
     PTZR(t->ptzr)->set_track_enabled_flag(static_cast<bool>(t->enabled_track));
@@ -2714,6 +2734,11 @@ kax_reader_c::identify() {
     info.set(mtx::id::default_track,        track->default_track ? true : false);
     info.set(mtx::id::forced_track,         track->forced_track  ? true : false);
     info.set(mtx::id::enabled_track,        track->enabled_track ? true : false);
+    info.add(mtx::id::flag_hearing_impaired,  track->hearing_impaired_flag);
+    info.add(mtx::id::flag_visual_impaired,   track->visual_impaired_flag);
+    info.add(mtx::id::flag_text_descriptions, track->text_descriptions_flag);
+    info.add(mtx::id::flag_original,          track->original_flag);
+    info.add(mtx::id::flag_commentary,        track->commentary_flag);
 
     if (track->private_data && (0 != track->private_data->get_size()))
       info.add(mtx::id::codec_private_data, mtx::string::to_hex(track->private_data->get_buffer(), track->private_data->get_size(), true));

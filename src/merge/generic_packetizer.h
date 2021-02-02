@@ -211,6 +211,11 @@ public:
   virtual void set_track_enabled_flag(bool enabled_track);
   virtual void set_track_seek_pre_roll(timestamp_c const &seek_pre_roll);
   virtual void set_codec_delay(timestamp_c const &codec_delay);
+  virtual void set_hearing_impaired_flag(bool hearing_impaired_flag);
+  virtual void set_visual_impaired_flag(bool visual_impaired_flag);
+  virtual void set_text_descriptions_flag(bool text_descriptions_flag);
+  virtual void set_original_flag(bool original_flag);
+  virtual void set_commentary_flag(bool commentary_flag);
 
   virtual void set_audio_sampling_freq(double freq);
   virtual double get_audio_sampling_freq() const {

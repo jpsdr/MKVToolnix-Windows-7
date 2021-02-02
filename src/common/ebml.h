@@ -387,6 +387,21 @@ FindOptionalChildValue(libebml::EbmlMaster const *master) {
 }
 
 template<typename Telement>
+std::optional<bool>
+FindOptionalChildBoolValue(libebml::EbmlMaster const &master) {
+  auto child = FindChild<Telement>(master);
+  if (child)
+    return static_cast<bool>(!!child->GetValue());
+  return std::nullopt;
+}
+
+template<typename Telement>
+std::optional<bool>
+FindOptionalChildBoolValue(libebml::EbmlMaster const *master) {
+  return FindOptionalChildBoolValue<Telement>(*master);
+}
+
+template<typename Telement>
 decltype(Telement().GetValue())
 GetChildValue(libebml::EbmlMaster &master) {
   return GetChild<Telement>(master).GetValue();

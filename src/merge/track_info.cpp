@@ -88,6 +88,21 @@ track_info_c::operator =(const track_info_c &src) {
   m_enabled_track_flags              = src.m_enabled_track_flags;
   m_enabled_track                    = src.m_enabled_track;
 
+  m_hearing_impaired_flags           = src.m_hearing_impaired_flags;
+  m_hearing_impaired_flag            = src.m_hearing_impaired_flag;
+
+  m_visual_impaired_flags            = src.m_visual_impaired_flags;
+  m_visual_impaired_flag             = src.m_visual_impaired_flag;
+
+  m_text_descriptions_flags          = src.m_text_descriptions_flags;
+  m_text_descriptions_flag           = src.m_text_descriptions_flag;
+
+  m_original_flags                   = src.m_original_flags;
+  m_original_flag                    = src.m_original_flag;
+
+  m_commentary_flags                 = src.m_commentary_flags;
+  m_commentary_flag                  = src.m_commentary_flag;
+
   m_languages                        = src.m_languages;
   m_language                         = src.m_language;
 

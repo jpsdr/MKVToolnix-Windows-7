@@ -112,6 +112,14 @@ public:
     return *this;
   }
 
+  info_c &
+  add(std::string const &key,
+      std::optional<bool> const &value) {
+    if (value.has_value())
+      set(key, *value);
+    return *this;
+  }
+
   verbose_info_t const &get() const {
     return m_info;
   }

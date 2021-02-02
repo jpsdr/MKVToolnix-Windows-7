@@ -237,6 +237,21 @@ set_usage() {
   usage_text += Y("  --forced-track <TID[:bool]>\n"
                   "                           Sets the 'forced' flag for this track or\n"
                   "                           forces it not to be present if bool is 0.\n");
+  usage_text += Y("  --hearing-impaired-flag <TID[:bool]>\n"
+                  "                           Sets the \"hearing impaired\" flag for this track or\n"
+                  "                           forces it not to be present if bool is 0.\n");
+  usage_text += Y("  --visual-impaired-flag <TID[:bool]>\n"
+                  "                           Sets the \"visual impaired\" flag for this track or\n"
+                  "                           forces it not to be present if bool is 0.\n");
+  usage_text += Y("  --text-descriptions-flag <TID[:bool]>\n"
+                  "                           Sets the \"text descriptions\" flag for this track\n"
+                  "                           or forces it not to be present if bool is 0.\n");
+  usage_text += Y("  --original-flag <TID[:bool]>\n"
+                  "                           Sets the \"original language\" flag for this track or\n"
+                  "                           forces it not to be present if bool is 0.\n");
+  usage_text += Y("  --commentary-flag <TID[:bool]>\n"
+                  "                           Sets the \"commentary\" flag for this track or\n"
+                  "                           forces it not to be present if bool is 0.\n");
   usage_text += Y("  --blockadd <TID:x>       Sets the max number of block additional\n"
                   "                           levels for this track.\n");
   usage_text += Y("  --track-name <TID:name>  Sets the name for a track.\n");
@@ -2742,6 +2757,41 @@ parse_args(std::vector<std::string> args) {
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
       parse_arg_boolean_track_option(this_arg, next_arg, ti->m_forced_track_flags);
+      sit++;
+
+    } else if (this_arg == "--hearing-impaired-flag") {
+      if (no_next_arg)
+        mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
+
+      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_hearing_impaired_flags);
+      sit++;
+
+    } else if (this_arg == "--visual-impaired-flag") {
+      if (no_next_arg)
+        mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
+
+      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_visual_impaired_flags);
+      sit++;
+
+    } else if (this_arg == "--text-descriptions-flag") {
+      if (no_next_arg)
+        mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
+
+      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_text_descriptions_flags);
+      sit++;
+
+    } else if (this_arg == "--original-flag") {
+      if (no_next_arg)
+        mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
+
+      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_original_flags);
+      sit++;
+
+    } else if (this_arg == "--commentary-flag") {
+      if (no_next_arg)
+        mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
+
+      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_commentary_flags);
       sit++;
 
     } else if (this_arg == "--language") {

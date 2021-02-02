@@ -53,6 +53,11 @@ doc_type_version_handler_private_c::init_tables() {
   s_version_by_element[KaxCueDuration::ClassInfos.GlobalId.GetValue()]                      = 4;
   s_version_by_element[KaxCueRelativePosition::ClassInfos.GlobalId.GetValue()]              = 4;
   s_version_by_element[KaxDiscardPadding::ClassInfos.GlobalId.GetValue()]                   = 4;
+  s_version_by_element[KaxFlagCommentary::ClassInfos.GlobalId.GetValue()]                   = 4;
+  s_version_by_element[KaxFlagHearingImpaired::ClassInfos.GlobalId.GetValue()]              = 4;
+  s_version_by_element[KaxFlagOriginal::ClassInfos.GlobalId.GetValue()]                     = 4;
+  s_version_by_element[KaxFlagTextDescriptions::ClassInfos.GlobalId.GetValue()]             = 4;
+  s_version_by_element[KaxFlagVisualImpaired::ClassInfos.GlobalId.GetValue()]               = 4;
   s_version_by_element[KaxLanguageIETF::ClassInfos.GlobalId.GetValue()]                     = 4;
   s_version_by_element[KaxSeekPreRoll::ClassInfos.GlobalId.GetValue()]                      = 4;
   s_version_by_element[KaxTagLanguageIETF::ClassInfos.GlobalId.GetValue()]                  = 4;
