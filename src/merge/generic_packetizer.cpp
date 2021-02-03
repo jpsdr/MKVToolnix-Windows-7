@@ -671,7 +671,7 @@ generic_packetizer_c::set_as_default_track(int type,
   } else if (   (DEFAULT_TRACK_PRIORITY_CMDLINE == priority)
              && (g_default_tracks[type] != m_hserialno)
              && !m_default_track_warning_printed) {
-    mxwarn(fmt::format(Y("Another default track for {0} tracks has already been set. The 'default' flag for track {1} of '{2}' will not be set.\n"),
+    mxwarn(fmt::format(Y("Another default track for {0} tracks has already been set. The \"default track\" flag for track {1} of '{2}' will not be set.\n"),
                        DEFTRACK_TYPE_AUDIO == type ? "audio" : DEFTRACK_TYPE_VIDEO == type ? "video" : "subtitle", m_ti.m_id, m_ti.m_fname));
     m_default_track_warning_printed = true;
   }

@@ -126,10 +126,10 @@ property_element_c::init_tables() {
   ELE("track-uid",              KaxTrackUID::ClassInfos,             YT("Track UID"),                  YT("A unique ID to identify the Track. This should be kept the same when making a "
                                                                                                           "direct stream copy of the Track to another file."));
   ELE("flag-commentary",        KaxFlagCommentary::ClassInfos,       YT("\"Commentary\" flag"),        YT("Can be set if the track contains commentary."));
-  ELE("flag-default",           KaxTrackFlagDefault::ClassInfos,     YT("'Default track' flag"),       YT("Set if that track (audio, video or subs) SHOULD be used if no language found matches the "
+  ELE("flag-default",           KaxTrackFlagDefault::ClassInfos,     YT("\"Default track\" flag"),     YT("Set if that track (audio, video or subs) SHOULD be used if no language found matches the "
                                                                                                           "user preference."));
-  ELE("flag-enabled",           KaxTrackFlagEnabled::ClassInfos,     YT("'Track enabled' flag"),       YT("Set if the track is used."));
-  ELE("flag-forced",            KaxTrackFlagForced::ClassInfos,      YT("'Forced display' flag"),      YT("Can be set for tracks containing onscreen text or foreign-language dialog."));
+  ELE("flag-enabled",           KaxTrackFlagEnabled::ClassInfos,     YT("\"Track enabled\" flag"),     YT("Set if the track is used."));
+  ELE("flag-forced",            KaxTrackFlagForced::ClassInfos,      YT("\"Forced display\" flag"),    YT("Can be set for tracks containing onscreen text or foreign-language dialog."));
   ELE("flag-hearing-impaired",  KaxFlagHearingImpaired::ClassInfos,  YT("\"Hearing impaired\" flag"),  YT("Can be set if the track is suitable for users with hearing impairments."));
   ELE("flag-original",          KaxFlagOriginal::ClassInfos,         YT("\"Original language\" flag"), YT("Can be set if the track is in the content's original language (not a translation)."));
   ELE("flag-text-descriptions", KaxFlagTextDescriptions::ClassInfos, YT("\"Text descriptions\" flag"), YT("Can be set if the track contains textual descriptions of video content suitable for playback "

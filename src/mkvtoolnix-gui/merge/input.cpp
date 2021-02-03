@@ -478,7 +478,7 @@ Tab::setupInputToolTips() {
                    .arg(QY("If set to 'determine automatically' then mkvmerge will choose one track of each type to have this flag set based on the information in the source files and the order of the tracks.")));
   Util::setToolTip(p.ui->forcedTrackFlag,
                    Q("%1 %2")
-                   .arg(QY("Mark this track as 'forced'."))
+                   .arg(QY("Mark this track as \"forced display\"."))
                    .arg(QY("Use this for tracks containing onscreen text or foreign-language dialogue.")));
   Util::setToolTip(p.ui->hearingImpairedFlag,  QY("Can be set if the track is suitable for users with hearing impairments."));
   Util::setToolTip(p.ui->visualImpairedFlag,   QY("Can be set if the track is suitable for users with visual impairments."));

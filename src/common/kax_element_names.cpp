@@ -186,7 +186,7 @@ kax_element_names_c::init() {
   ADD(KaxTrackNumber,                  Y("Track number"));
   ADD(KaxTrackUID,                     Y("Track UID"));
   ADD(KaxTrackType,                    Y("Track type"));
-  ADD(KaxTrackFlagEnabled,             Y("'Enabled' flag"));
+  ADD(KaxTrackFlagEnabled,             Y("\"Enabled\" flag"));
   ADD(KaxTrackName,                    Y("Name"));
   ADD(KaxCodecID,                      Y("Codec ID"));
   ADD(KaxCodecPrivate,                 Y("Codec's private data"));
@@ -200,9 +200,9 @@ kax_element_names_c::init() {
   ADD(KaxTrackMinCache,                Y("Minimum cache"));
   ADD(KaxTrackMaxCache,                Y("Maximum cache"));
   ADD(KaxTrackDefaultDuration,         Y("Default duration"));
-  ADD(KaxTrackFlagLacing,              Y("'Lacing' flag"));
-  ADD(KaxTrackFlagDefault,             Y("'Default track' flag"));
-  ADD(KaxTrackFlagForced,              Y("'Forced display' flag"));
+  ADD(KaxTrackFlagLacing,              Y("\"Lacing\" flag"));
+  ADD(KaxTrackFlagDefault,             Y("\"Default track\" flag"));
+  ADD(KaxTrackFlagForced,              Y("\"Forced display\" flag"));
   ADD(KaxTrackLanguage,                Y("Language"));
   ADD(KaxLanguageIETF,                 Y("Language (IETF BCP 47)"));
   ADD(KaxTrackTimecodeScale,           Y("Timestamp scale"));

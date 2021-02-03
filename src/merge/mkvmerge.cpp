@@ -232,10 +232,10 @@ set_usage() {
                   "                           1 if omitted. Both 'o' and 'p' can be\n"
                   "                           floating point numbers.\n");
   usage_text += Y("  --default-track <TID[:bool]>\n"
-                  "                           Sets the 'default' flag for this track or\n"
+                  "                           Sets the \"default track\" flag for this track or\n"
                   "                           forces it not to be present if bool is 0.\n");
   usage_text += Y("  --forced-track <TID[:bool]>\n"
-                  "                           Sets the 'forced' flag for this track or\n"
+                  "                           Sets the \"forced display\" flag for this track or\n"
                   "                           forces it not to be present if bool is 0.\n");
   usage_text += Y("  --hearing-impaired-flag <TID[:bool]>\n"
                   "                           Sets the \"hearing impaired\" flag for this track or\n"
