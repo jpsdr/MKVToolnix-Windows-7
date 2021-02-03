@@ -10,6 +10,11 @@
   impaired" flag, "text descriptions" flag, "original" flag, "commentary"
   flag. Implements #3011.
 
+## Bug fixes
+
+* mkvmerge: fixed the calculation of chapter timestamps read from NTSC
+  DVDs. Fix by Tom Yan.
+
 ## Build system changes
 
 * libMatroska v1.6.3 is now required.
