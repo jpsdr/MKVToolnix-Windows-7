@@ -155,7 +155,7 @@ PageModel::retranslateUi() {
     { QY("Name/Description"), Q("name")             },
     { QY("UID"),              Q("uid")              },
     { QY("Default track"),    Q("defaultTrackFlag") },
-    { QY("Forced track"),     Q("forcedTrackFlag")  },
+    { QY("Forced display"),   Q("forcedTrackFlag")  },
     { QY("Properties"),       Q("properties")       },
   });
 

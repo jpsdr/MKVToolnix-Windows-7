@@ -79,7 +79,7 @@ TrackTypePage::retranslateUi() {
   ui->m_lDefaultTrackFlag->setText(   m_defaultTrackFlag ? QY("Yes")             : QY("No"));
   ui->m_iDefaultTrackFlag->setPixmap((m_defaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon()).pixmap({ 16, 16 }));
 
-  ui->m_lForcedTrackFlagLabel->setText(QY("\"Forced track\" flag:"));
+  ui->m_lForcedTrackFlagLabel->setText(QY("\"Forced display\" flag:"));
   ui->m_lForcedTrackFlag->setText(   m_forcedTrackFlag ? QY("Yes")             : QY("No"));
   ui->m_iForcedTrackFlag->setPixmap((m_forcedTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon()).pixmap({ 16, 16 }));
 

@@ -51,7 +51,7 @@ TrackModel::retranslateUi() {
     { QY("Name"),                    Q("name")             },
     { QY("ID"),                      Q("id")               },
     { QY("Default track in output"), Q("defaultTrackFlag") },
-    { QY("Forced track"),            Q("forcedTrackFlag")  },
+    { QY("Forced display"),          Q("forcedTrackFlag")  },
     { QY("Character set"),           Q("characterSet")     },
     { QY("Properties"),              Q("properties")       },
     { QY("Source file"),             Q("sourceFile")       },
