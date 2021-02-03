@@ -2,6 +2,7 @@
 
 #include <QRegularExpression>
 
+#include "common/id_info.h"
 #include "common/iso639.h"
 #include "common/list_utils.h"
 #include "common/strings/editing.h"
@@ -130,8 +131,18 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   if (isAudio() && settings.m_setAudioDelayFromFileName)
     m_delay = extractAudioDelayFromFileName();
 
-  m_forcedTrackFlag            = m_properties.value("forced_track").toBool() ? 1 : 0;
+  m_forcedTrackFlag            = m_properties.value(Q(mtx::id::forced_track)).toBool() ? 1 : 0;
   m_forcedTrackFlagWasSet      = m_forcedTrackFlag == 1;
+  m_hearingImpairedFlag        = m_properties.value(Q(mtx::id::flag_hearing_impaired)).toBool();
+  m_hearingImpairedFlagWasSet  = m_hearingImpairedFlag;
+  m_visualImpairedFlag         = m_properties.value(Q(mtx::id::flag_visual_impaired)).toBool();
+  m_visualImpairedFlagWasSet   = m_visualImpairedFlag;
+  m_textDescriptionsFlag       = m_properties.value(Q(mtx::id::flag_text_descriptions)).toBool();
+  m_textDescriptionsFlagWasSet = m_textDescriptionsFlag;
+  m_originalFlag               = m_properties.value(Q(mtx::id::flag_original)).toBool();
+  m_originalFlagWasSet         = m_originalFlag;
+  m_commentaryFlag             = m_properties.value(Q(mtx::id::flag_commentary)).toBool();
+  m_commentaryFlagWasSet       = m_commentaryFlag;
   m_defaultTrackFlagWasSet     = m_properties.value("default_track").toBool();
   m_defaultTrackFlagWasPresent = m_properties.contains("default_track");
   m_name                       = m_properties.value("track_name").toString();
@@ -253,6 +264,16 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("compression",                   static_cast<int>(m_compression));
   settings.setValue("size",                          static_cast<qulonglong>(m_size));
   settings.setValue("attachmentDescription",         m_attachmentDescription);
+  settings.setValue("hearingImpairedFlag",           m_hearingImpairedFlag);
+  settings.setValue("hearingImpairedFlagWasSet",     m_hearingImpairedFlagWasSet);
+  settings.setValue("visualImpairedFlag",            m_visualImpairedFlag);
+  settings.setValue("visualImpairedFlagWasSet",      m_visualImpairedFlagWasSet);
+  settings.setValue("textDescriptionsFlag",          m_textDescriptionsFlag);
+  settings.setValue("textDescriptionsFlagWasSet",    m_textDescriptionsFlagWasSet);
+  settings.setValue("originalFlag",                  m_originalFlag);
+  settings.setValue("originalFlagWasSet",            m_originalFlagWasSet);
+  settings.setValue("commentaryFlag",                m_commentaryFlag);
+  settings.setValue("commentaryFlagWasSet",          m_commentaryFlagWasSet);
 }
 
 void
@@ -299,6 +320,16 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_compression                   = static_cast<TrackCompression>(l.settings.value("compression").toInt());
   m_size                          = l.settings.value("size").toULongLong();
   m_attachmentDescription         = l.settings.value("attachmentDescription").toString();
+  m_hearingImpairedFlag           = l.settings.value("hearingImpairedFlag").toBool();
+  m_hearingImpairedFlagWasSet     = l.settings.value("hearingImpairedFlagWasSet").toBool();
+  m_visualImpairedFlag            = l.settings.value("visualImpairedFlag").toBool();
+  m_visualImpairedFlagWasSet      = l.settings.value("visualImpairedFlagWasSet").toBool();
+  m_textDescriptionsFlag          = l.settings.value("textDescriptionsFlag").toBool();
+  m_textDescriptionsFlagWasSet    = l.settings.value("textDescriptionsFlagWasSet").toBool();
+  m_originalFlag                  = l.settings.value("originalFlag").toBool();
+  m_originalFlagWasSet            = l.settings.value("originalFlagWasSet").toBool();
+  m_commentaryFlag                = l.settings.value("commentaryFlag").toBool();
+  m_commentaryFlagWasSet          = l.settings.value("commentaryFlagWasSet").toBool();
 
   if (   (TrackType::Min        > m_type)        || (TrackType::Max        < m_type)
       || (TrackCompression::Min > m_compression) || (TrackCompression::Max < m_compression))
@@ -387,6 +418,21 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
 
     if (m_forcedTrackFlagWasSet != !!m_forcedTrackFlag)
       opt.options << Q("--forced-track") << Q("%1:%2").arg(sid).arg(m_forcedTrackFlag == 1 ? Q("yes") : Q("no"));
+
+    if (m_hearingImpairedFlagWasSet != m_hearingImpairedFlag)
+      opt.options << Q("--hearing-impaired-flag") << Q("%1:%2").arg(sid).arg(m_hearingImpairedFlag ? Q("yes") : Q("no"));
+
+    if (m_visualImpairedFlagWasSet != m_visualImpairedFlag)
+      opt.options << Q("--visual-impaired-flag") << Q("%1:%2").arg(sid).arg(m_visualImpairedFlag ? Q("yes") : Q("no"));
+
+    if (m_textDescriptionsFlagWasSet != m_textDescriptionsFlag)
+      opt.options << Q("--text-descriptions-flag") << Q("%1:%2").arg(sid).arg(m_textDescriptionsFlag ? Q("yes") : Q("no"));
+
+    if (m_originalFlagWasSet != m_originalFlag)
+      opt.options << Q("--original-flag") << Q("%1:%2").arg(sid).arg(m_originalFlag ? Q("yes") : Q("no"));
+
+    if (m_commentaryFlagWasSet != m_commentaryFlag)
+      opt.options << Q("--commentary-flag") << Q("%1:%2").arg(sid).arg(m_commentaryFlag ? Q("yes") : Q("no"));
 
     if (!m_tags.isEmpty())
       opt.options << Q("--tags") << Q("%1:%2").arg(sid).arg(m_tags);

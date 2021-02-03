@@ -56,19 +56,25 @@ Tab::setupControlLists() {
   p.typeIndependentControls << p.ui->generalOptionsBox << p.ui->muxThisLabel << p.ui->muxThis << p.ui->miscellaneousBox << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions;
 
   p.audioControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
+                  << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag
+                  << p.ui->originalFlagLabel << p.ui->originalFlag << p.ui->commentaryFlagLabel << p.ui->commentaryFlag
                   << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
                   << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps << p.ui->audioPropertiesBox << p.ui->aacIsSBR << p.ui->aacIsSBRLabel
                   << p.ui->cuesLabel << p.ui->cues << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain;
 
-  p.videoControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag
-                  << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
+  p.videoControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
+                  << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag
+                  << p.ui->originalFlagLabel << p.ui->originalFlag << p.ui->commentaryFlagLabel << p.ui->commentaryFlag
+                  << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
                   << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->defaultDurationLabel << p.ui->defaultDuration << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps
                   << p.ui->videoPropertiesBox << p.ui->setAspectRatio << p.ui->aspectRatio << p.ui->setDisplayWidthHeight << p.ui->displayWidth << p.ui->displayDimensionsXLabel << p.ui->displayHeight << p.ui->stereoscopyLabel
                   << p.ui->stereoscopy << p.ui->naluSizeLengthLabel << p.ui->naluSizeLength << p.ui->croppingLabel << p.ui->cropping << p.ui->cuesLabel << p.ui->cues
                   << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo;
 
-  p.subtitleControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag
-                     << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
+  p.subtitleControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
+                     << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlagLabel << p.ui->textDescriptionsFlag
+                     << p.ui->originalFlagLabel << p.ui->originalFlag << p.ui->commentaryFlagLabel << p.ui->commentaryFlag
+                     << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
                      << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps
                      << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet << p.ui->cuesLabel << p.ui->cues
                      << p.ui->propertiesLabel << p.ui->generalOptionsBox;
@@ -76,21 +82,27 @@ Tab::setupControlLists() {
   p.chapterControls << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet << p.ui->propertiesLabel << p.ui->generalOptionsBox;
 
   p.allInputControls << p.ui->muxThisLabel << p.ui->muxThis << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag
-                     << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
+                     << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
+                     << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlagLabel << p.ui->textDescriptionsFlag
+                     << p.ui->originalFlagLabel << p.ui->originalFlag << p.ui->commentaryFlagLabel << p.ui->commentaryFlag
+                     << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
                      << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->defaultDurationLabel << p.ui->defaultDuration << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps
                      << p.ui->videoPropertiesBox << p.ui->setAspectRatio << p.ui->aspectRatio << p.ui->setDisplayWidthHeight << p.ui->displayWidth << p.ui->displayDimensionsXLabel << p.ui->displayHeight << p.ui->stereoscopyLabel
                      << p.ui->stereoscopy << p.ui->croppingLabel << p.ui->cropping << p.ui->audioPropertiesBox << p.ui->aacIsSBR << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet
                      << p.ui->miscellaneousBox << p.ui->cuesLabel << p.ui->cues << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions
                      << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain << p.ui->naluSizeLengthLabel << p.ui->naluSizeLength;
 
-  p.comboBoxControls << p.ui->muxThis << p.ui->defaultTrackFlag << p.ui->forcedTrackFlag << p.ui->compression << p.ui->cues << p.ui->stereoscopy << p.ui->naluSizeLength << p.ui->aacIsSBR << p.ui->subtitleCharacterSet;
+  p.comboBoxControls << p.ui->muxThis << p.ui->defaultTrackFlag << p.ui->forcedTrackFlag << p.ui->compression << p.ui->cues << p.ui->stereoscopy << p.ui->naluSizeLength << p.ui->aacIsSBR << p.ui->subtitleCharacterSet
+                     << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlag<< p.ui->originalFlag << p.ui->commentaryFlag;
 
-  p.notIfAppendingControls << p.ui->trackLanguageLabel   << p.ui->trackLanguage           << p.ui->trackNameLabel              << p.ui->trackName        << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag
-                           << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag         << p.ui->compressionLabel            << p.ui->compression      << p.ui->trackTagsLabel        << p.ui->trackTags         << p.ui->browseTrackTags
-                           << p.ui->defaultDurationLabel << p.ui->defaultDuration         << p.ui->fixBitstreamTimingInfo      << p.ui->setAspectRatio   << p.ui->setDisplayWidthHeight << p.ui->aspectRatio
-                           << p.ui->displayWidth         << p.ui->displayDimensionsXLabel << p.ui->displayHeight               << p.ui->stereoscopyLabel << p.ui->stereoscopy
-                           << p.ui->naluSizeLengthLabel  << p.ui->naluSizeLength          << p.ui->croppingLabel               << p.ui->cropping         << p.ui->aacIsSBR
-                           << p.ui->cuesLabel            << p.ui->cues                    << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions;
+  p.notIfAppendingControls << p.ui->trackLanguageLabel       << p.ui->trackLanguage           << p.ui->trackNameLabel              << p.ui->trackName          << p.ui->defaultTrackFlagLabel     << p.ui->defaultTrackFlag
+                           << p.ui->forcedTrackFlagLabel     << p.ui->forcedTrackFlag         << p.ui->originalFlagLabel           << p.ui->originalFlag       << p.ui->commentaryFlagLabel       << p.ui->commentaryFlag
+                           << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag     << p.ui->visualImpairedFlagLabel     << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlagLabel << p.ui->textDescriptionsFlag
+                           << p.ui->compressionLabel         << p.ui->compression             << p.ui->trackTagsLabel              << p.ui->trackTags          << p.ui->browseTrackTags
+                           << p.ui->defaultDurationLabel     << p.ui->defaultDuration         << p.ui->fixBitstreamTimingInfo      << p.ui->setAspectRatio     << p.ui->setDisplayWidthHeight     << p.ui->aspectRatio
+                           << p.ui->displayWidth             << p.ui->displayDimensionsXLabel << p.ui->displayHeight               << p.ui->stereoscopyLabel   << p.ui->stereoscopy
+                           << p.ui->naluSizeLengthLabel      << p.ui->naluSizeLength          << p.ui->croppingLabel               << p.ui->cropping           << p.ui->aacIsSBR
+                           << p.ui->cuesLabel                << p.ui->cues                    << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions;
 }
 
 void
@@ -233,9 +245,6 @@ Tab::setupInputControls() {
   p.ui->subtitleCharacterSet->setup(true);
   p.ui->chapterCharacterSet->setup(true);
 
-  p.ui->muxThis->addItem(QString{}, true);
-  p.ui->muxThis->addItem(QString{}, false);
-
   // Stereoscopy
   p.ui->stereoscopy->addItem(Q(""), 0);
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
@@ -254,6 +263,10 @@ Tab::setupInputControls() {
   p.ui->forcedTrackFlag->addItem(QString{}, 1);
   p.ui->forcedTrackFlag->addItem(QString{}, 0);
   p.ui->forcedTrackFlag->setCurrentIndex(1);
+
+  for (auto &comboBox : std::vector<QComboBox *>{p.ui->muxThis, p.ui->hearingImpairedFlag, p.ui->visualImpairedFlag, p.ui->textDescriptionsFlag, p.ui->originalFlag, p.ui->commentaryFlag})
+    for (auto idx = 0; idx < 2; ++idx)
+      comboBox->addItem(QString{}, idx == 0);
 
   for (auto idx = 0; idx < 3; ++idx)
     p.ui->compression->addItem(QString{}, idx);
@@ -366,6 +379,11 @@ Tab::setupInputControls() {
   connect(p.ui->files->selectionModel(),       &QItemSelectionModel::selectionChanged,                                 this,                       &Tab::enableMoveFilesButtons);
   connect(p.ui->fixBitstreamTimingInfo,        &QCheckBox::toggled,                                                    this,                       &Tab::onFixBitstreamTimingInfoChanged);
   connect(p.ui->forcedTrackFlag,               static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onForcedTrackFlagChanged);
+  connect(p.ui->hearingImpairedFlag,           static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onHearingImpairedFlagChanged);
+  connect(p.ui->visualImpairedFlag,            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onVisualImpairedFlagChanged);
+  connect(p.ui->textDescriptionsFlag,          static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onTextDescriptionsFlagChanged);
+  connect(p.ui->originalFlag,                  static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onOriginalFlagChanged);
+  connect(p.ui->commentaryFlag,                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onCommentaryFlagChanged);
   connect(p.ui->moveFilesDown,                 &QPushButton::clicked,                                                  this,                       &Tab::onMoveFilesDown);
   connect(p.ui->moveFilesUp,                   &QPushButton::clicked,                                                  this,                       &Tab::onMoveFilesUp);
   connect(p.ui->moveTracksDown,                &QPushButton::clicked,                                                  this,                       &Tab::onMoveTracksDown);
@@ -462,6 +480,11 @@ Tab::setupInputToolTips() {
                    Q("%1 %2")
                    .arg(QY("Mark this track as 'forced'."))
                    .arg(QY("Use this for tracks containing onscreen text or foreign-language dialogue.")));
+  Util::setToolTip(p.ui->hearingImpairedFlag,  QY("Can be set if the track is suitable for users with hearing impairments."));
+  Util::setToolTip(p.ui->visualImpairedFlag,   QY("Can be set if the track is suitable for users with visual impairments."));
+  Util::setToolTip(p.ui->textDescriptionsFlag, QY("Can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."));
+  Util::setToolTip(p.ui->originalFlag,         QY("Can be set if the track is in the content's original language (not a translation)."));
+  Util::setToolTip(p.ui->commentaryFlag,       QY("Can be set if the track contains commentary."));
   Util::setToolTip(p.ui->compression,
                    Q("%1 %2 %3")
                    .arg(QY("Sets the lossless compression algorithm to be used for this track."))
@@ -767,6 +790,11 @@ Tab::setInputControlValues(Track *track) {
   Util::setComboBoxIndexIf(p.ui->stereoscopy,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_stereoscopy);                            });
   Util::setComboBoxIndexIf(p.ui->naluSizeLength,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);                         });
   Util::setComboBoxIndexIf(p.ui->aacIsSBR,         [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);                               });
+  Util::setComboBoxIndexIf(p.ui->hearingImpairedFlag,  [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_hearingImpairedFlag);                    });
+  Util::setComboBoxIndexIf(p.ui->visualImpairedFlag,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_visualImpairedFlag);                     });
+  Util::setComboBoxIndexIf(p.ui->textDescriptionsFlag, [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_textDescriptionsFlag);                   });
+  Util::setComboBoxIndexIf(p.ui->originalFlag,         [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_originalFlag);                           });
+  Util::setComboBoxIndexIf(p.ui->commentaryFlag,       [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_commentaryFlag);                         });
 
   p.ui->trackLanguage->setLanguage(track->m_language);
   p.ui->subtitleCharacterSet->setCurrentByData(track->m_characterSet);
@@ -1005,6 +1033,71 @@ Tab::onForcedTrackFlagChanged(int newValue) {
   newValue = data.toInt();
 
   withSelectedTracks([&newValue](auto &track) { track.m_forcedTrackFlag = newValue; }, true);
+}
+
+void
+Tab::onHearingImpairedFlagChanged(int newValue) {
+  auto &p   = *p_func();
+  auto data = p.ui->hearingImpairedFlag->itemData(newValue);
+
+  if (!data.isValid())
+    return;
+
+  newValue = data.toBool();
+
+  withSelectedTracks([&newValue](auto &track) { track.m_hearingImpairedFlag = newValue; }, true);
+}
+
+void
+Tab::onVisualImpairedFlagChanged(int newValue) {
+  auto &p   = *p_func();
+  auto data = p.ui->visualImpairedFlag->itemData(newValue);
+
+  if (!data.isValid())
+    return;
+
+  newValue = data.toBool();
+
+  withSelectedTracks([&newValue](auto &track) { track.m_visualImpairedFlag = newValue; }, true);
+}
+
+void
+Tab::onTextDescriptionsFlagChanged(int newValue) {
+  auto &p   = *p_func();
+  auto data = p.ui->textDescriptionsFlag->itemData(newValue);
+
+  if (!data.isValid())
+    return;
+
+  newValue = data.toBool();
+
+  withSelectedTracks([&newValue](auto &track) { track.m_textDescriptionsFlag = newValue; }, true);
+}
+
+void
+Tab::onOriginalFlagChanged(int newValue) {
+  auto &p   = *p_func();
+  auto data = p.ui->originalFlag->itemData(newValue);
+
+  if (!data.isValid())
+    return;
+
+  newValue = data.toBool();
+
+  withSelectedTracks([&newValue](auto &track) { track.m_originalFlag = newValue; }, true);
+}
+
+void
+Tab::onCommentaryFlagChanged(int newValue) {
+  auto &p   = *p_func();
+  auto data = p.ui->commentaryFlag->itemData(newValue);
+
+  if (!data.isValid())
+    return;
+
+  newValue = data.toBool();
+
+  withSelectedTracks([&newValue](auto &track) { track.m_commentaryFlag = newValue; }, true);
 }
 
 void
@@ -1608,10 +1701,11 @@ Tab::retranslateInputUI() {
     if (comboBox->count() && !comboBox->itemData(0).isValid())
       comboBox->setItemText(0, QY("<Do not change>"));
 
-  Util::setComboBoxTexts(p.ui->muxThis,          QStringList{}                                  << QY("Yes")                  << QY("No"));
+  for (auto &comboBox : std::vector<QComboBox *>{p.ui->muxThis, p.ui->forcedTrackFlag, p.ui->hearingImpairedFlag, p.ui->visualImpairedFlag, p.ui->textDescriptionsFlag, p.ui->originalFlag, p.ui->commentaryFlag})
+    Util::setComboBoxTexts(comboBox, QStringList{} << QY("Yes") << QY("No"));
+
   Util::setComboBoxTexts(p.ui->naluSizeLength,   QStringList{} << QY("Don't change")            << QY("Force 2 bytes")        << QY("Force 4 bytes"));
   Util::setComboBoxTexts(p.ui->defaultTrackFlag, QStringList{} << QY("Determine automatically") << QY("Yes")                  << QY("No"));
-  Util::setComboBoxTexts(p.ui->forcedTrackFlag,  QStringList{}                                  << QY("Yes")                  << QY("No"));
   Util::setComboBoxTexts(p.ui->compression,      QStringList{} << QY("Determine automatically") << QY("No extra compression") << Q("zlib"));
   Util::setComboBoxTexts(p.ui->cues,             QStringList{} << QY("Determine automatically") << QY("Only for I frames")    << QY("For all frames") << QY("No cues"));
   Util::setComboBoxTexts(p.ui->aacIsSBR,         QStringList{} << QY("Determine automatically") << QY("Yes")                  << QY("No"));

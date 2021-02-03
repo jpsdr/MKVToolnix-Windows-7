@@ -103,6 +103,11 @@ public Q_SLOTS:
   virtual void onTrackLanguageChanged(mtx::bcp47::language_c const &newLanguage);
   virtual void onDefaultTrackFlagChanged(int newValue);
   virtual void onForcedTrackFlagChanged(int newValue);
+  virtual void onHearingImpairedFlagChanged(int newValue);
+  virtual void onVisualImpairedFlagChanged(int newValue);
+  virtual void onTextDescriptionsFlagChanged(int newValue);
+  virtual void onOriginalFlagChanged(int newValue);
+  virtual void onCommentaryFlagChanged(int newValue);
   virtual void onCompressionChanged(int newValue);
   virtual void onTrackTagsChanged(QString newValue);
   virtual void onDelayChanged(QString newValue);
