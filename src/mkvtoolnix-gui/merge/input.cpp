@@ -782,19 +782,19 @@ Tab::setInputControlValues(Track *track) {
     return;
   }
 
-  Util::setComboBoxIndexIf(p.ui->muxThis,          [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_muxThis);                                });
-  Util::setComboBoxIndexIf(p.ui->defaultTrackFlag, [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_defaultTrackFlag);                       });
-  Util::setComboBoxIndexIf(p.ui->forcedTrackFlag,  [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_forcedTrackFlag);                        });
-  Util::setComboBoxIndexIf(p.ui->compression,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == static_cast<unsigned int>(track->m_compression)); });
-  Util::setComboBoxIndexIf(p.ui->cues,             [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_cues);                                   });
-  Util::setComboBoxIndexIf(p.ui->stereoscopy,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_stereoscopy);                            });
-  Util::setComboBoxIndexIf(p.ui->naluSizeLength,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);                         });
-  Util::setComboBoxIndexIf(p.ui->aacIsSBR,         [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);                               });
+  Util::setComboBoxIndexIf(p.ui->muxThis,              [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_muxThis);                                });
+  Util::setComboBoxIndexIf(p.ui->defaultTrackFlag,     [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_defaultTrackFlag);                       });
+  Util::setComboBoxIndexIf(p.ui->forcedTrackFlag,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_forcedTrackFlag);                        });
   Util::setComboBoxIndexIf(p.ui->hearingImpairedFlag,  [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_hearingImpairedFlag);                    });
   Util::setComboBoxIndexIf(p.ui->visualImpairedFlag,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_visualImpairedFlag);                     });
   Util::setComboBoxIndexIf(p.ui->textDescriptionsFlag, [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_textDescriptionsFlag);                   });
   Util::setComboBoxIndexIf(p.ui->originalFlag,         [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_originalFlag);                           });
   Util::setComboBoxIndexIf(p.ui->commentaryFlag,       [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_commentaryFlag);                         });
+  Util::setComboBoxIndexIf(p.ui->compression,          [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == static_cast<unsigned int>(track->m_compression)); });
+  Util::setComboBoxIndexIf(p.ui->cues,                 [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_cues);                                   });
+  Util::setComboBoxIndexIf(p.ui->stereoscopy,          [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_stereoscopy);                            });
+  Util::setComboBoxIndexIf(p.ui->naluSizeLength,       [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);                         });
+  Util::setComboBoxIndexIf(p.ui->aacIsSBR,             [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);                               });
 
   p.ui->trackLanguage->setLanguage(track->m_language);
   p.ui->subtitleCharacterSet->setCurrentByData(track->m_characterSet);
