@@ -1388,11 +1388,11 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      <term><option>--default-track</option> <parameter>TID<optional>:bool</optional></parameter></term>
      <listitem>
       <para>
-       Sets the 'default' flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) if the optional argument
-       <parameter>bool</parameter> is not present.  If the user does not explicitly select a track himself then the player should prefer the
-       track that has his 'default' flag set. Only one track of each kind (audio, video, subtitles, buttons) can have his 'default' flag set.
-       If the user wants no track to have the default track flag set then he has to set <parameter>bool</parameter> to <constant>0</constant>
-       for all tracks.
+       Sets the &amp;default track&amp; flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) if the
+       optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  If the user does not
+       explicitly select a track, the player should prefer the track that has his &amp;default track&amp; flag set. Only one track of each
+       kind (audio, video, subtitles, buttons) can have his &amp;default track&amp; flag set.  If the user wants no track to have the
+       default track flag set then he has to set <parameter>bool</parameter> to <constant>0</constant> for all tracks.
       </para>
 
       <para>
@@ -1405,8 +1405,85 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      <term><option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter></term>
      <listitem>
       <para>
-       Sets the 'forced' flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) if the optional argument
-       <parameter>bool</parameter> is not present. Use this for tracks containing onscreen text or foreign-language dialogue.
+       Sets the &amp;forced display&amp; flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) if the
+       optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  Use this for tracks
+       containing onscreen text or foreign-language dialogue.
+      </para>
+
+      <para>
+       This option can be used multiple times for an input file applying to several tracks by selecting different track IDs each time.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry id="mkvmerge.description.hearing_impaired_flag">
+     <term><option>--hearing-impaired-flag</option> <parameter>TID<optional>:bool</optional></parameter></term>
+     <listitem>
+      <para>
+       Sets the &amp;hearing impaired&amp; flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) if the
+       optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the
+       track is suitable for users with hearing impairments.
+      </para>
+
+      <para>
+       This option can be used multiple times for an input file applying to several tracks by selecting different track IDs each time.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry id="mkvmerge.description.visual_impaired_flag">
+     <term><option>--visual-impaired-flag</option> <parameter>TID<optional>:bool</optional></parameter></term>
+     <listitem>
+      <para>
+       Sets the &amp;visual impaired&amp; flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) if the
+       optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the
+       track is suitable for users with visual impairments.
+      </para>
+
+      <para>
+       This option can be used multiple times for an input file applying to several tracks by selecting different track IDs each time.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry id="mkvmerge.description.text_descriptions_flag">
+     <term><option>--text-descriptions-flag</option> <parameter>TID<optional>:bool</optional></parameter></term>
+     <listitem>
+      <para>
+       Sets the &amp;text descriptions&amp; flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) if
+       the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if
+       the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired
+       user.
+      </para>
+
+      <para>
+       This option can be used multiple times for an input file applying to several tracks by selecting different track IDs each time.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry id="mkvmerge.description.original_flag">
+     <term><option>--original-flag</option> <parameter>TID<optional>:bool</optional></parameter></term>
+     <listitem>
+      <para>
+       Sets the &amp;original language&amp; flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) if
+       the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if
+       the track is in the content's original language (not a translation).
+      </para>
+
+      <para>
+       This option can be used multiple times for an input file applying to several tracks by selecting different track IDs each time.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry id="mkvmerge.description.commentary_flag">
+     <term><option>--commentary-flag</option> <parameter>TID<optional>:bool</optional></parameter></term>
+     <listitem>
+      <para>
+       Sets the &amp;commentary&amp; flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) if the
+       optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the
+       track contains commentary.
       </para>
 
       <para>
