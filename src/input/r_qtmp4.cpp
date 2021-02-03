@@ -1768,18 +1768,19 @@ qtmp4_reader_c::create_video_packetizer_mpegh_p2_es(qtmp4_demuxer_c &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.priv.size() && dmx.priv[0]->get_size() ? dmx.priv[0] : memory_cptr{};
-  auto ptzr           = new hevc_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height);
+  auto ptzr           = new hevc_video_packetizer_c(this, m_ti, 0.0, dmx.v_width, dmx.v_height);
   dmx.ptzr            = add_packetizer(ptzr);
+
+  // rederive_timestamp_order() makes use of m_htrack_default_duration, so we set it early here
+  if (dmx.frame_rate.numerator()) {
+    auto duration = boost::rational_cast<int64_t>(int64_rational_c{dmx.frame_rate.denominator(), dmx.frame_rate.numerator()} * 1'000'000'000ll);
+    ptzr->set_track_default_duration(duration);
+  }
 
   if (dmx.raw_frame_offset_table.empty()) {
     mxdebug_if(m_debug_headers, fmt::format("HEVC/h.265 track {0} doesn't have a CTTS atom; enabling re-ordering of timestamps\n", dmx.id));
 
     ptzr->rederive_timestamp_order();
-
-    if (dmx.frame_rate.numerator()) {
-      auto duration = boost::rational_cast<int64_t>(int64_rational_c{dmx.frame_rate.denominator(), dmx.frame_rate.numerator()} * 1'000'000'000ll);
-      ptzr->set_track_default_duration(duration);
-    }
   }
 
   show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
