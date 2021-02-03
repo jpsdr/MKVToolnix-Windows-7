@@ -5,6 +5,10 @@
 * mkvmerge: Matroska reader: for audio tracks that have the bit depth track
   header set mkvmerge will now keep that header even for codecs that don't
   require it for decoding. Implements #3009.
+* mkvmerge, mkvinfo, mkvpropedit, MKVToolNix GUI: added support for the
+  following new track header elements: "hearing impaired" flag, "visual
+  impaired" flag, "text descriptions" flag, "original" flag, "commentary"
+  flag. Implements #3011.
 
 ## Build system changes
 
