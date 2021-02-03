@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix 6.2.0\n"
 "Report-Msgid-Bugs-To: mkvtoolnix@packages.debian.org\n"
 "POT-Creation-Date: 2021-02-03 19:38+0100\n"
-"PO-Revision-Date: 2021-02-03 19:46+0100\n"
+"PO-Revision-Date: 2021-02-03 20:01+0100\n"
 "Last-Translator: Chris Leick <c.leick@vollbio.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
@@ -287,7 +287,7 @@ msgstr "<option>-f</option>, <option>--parse-fully</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:95
 msgid "Sets the parse mode to 'full'. The default mode does not parse the whole file but uses the meta seek elements for locating the required elements of a source file. In 99% of all cases this is enough. But for files that do not contain meta seek elements or which are damaged the user might have to use this mode. A full scan of a file can take a couple of minutes while a fast scan only takes seconds."
-msgstr "setzt den Auswertungsmodus auf »full«. Der Standardmodus wertet nicht die ganze Datei aus, benutzt aber Metasuchelemente zum Orten der benötigten Elemente der Quelldatei. In 99% der Fälle reicht dies. Aber für Dateien, die keine Metasuchelemente enthalten oder beschädigt sind, kann es notwendig sein, dass der Anwender diesen Modus benutzt. Ein vollständiger Scan einer Datei kann ein paar Minuten in Anspruch nehmen, während ein schneller Scan nur Sekunden dauert."
+msgstr "Setzt den Auswertungsmodus auf »full«. Der Standardmodus wertet nicht die ganze Datei aus, benutzt aber Metasuchelemente zum Orten der benötigten Elemente der Quelldatei. In 99% der Fälle reicht dies. Aber für Dateien, die keine Metasuchelemente enthalten oder beschädigt sind, kann es notwendig sein, diesen Modus zu aktivieren. Ein vollständiger Scan einer Datei kann ein paar Minuten in Anspruch nehmen, während ein schneller Scan nur Sekunden dauert."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:104
@@ -627,7 +627,7 @@ msgstr "Falls das einfache Kapitelformat aktiviert ist, gibt &mkvextract; pro ge
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:375
 msgid "Using this option allows the user to determine which chapter names are output if atoms contain more than one chapter name.  The <parameter>language</parameter> parameter must be an ISO 639-1 or ISO 639-2 code."
-msgstr "Das Benutzen dieser Option erlaubt es der BenutzerIn festzulegen, welche Kapitelnamen ausgegeben werden, falls die Kapitel mehr als einen Namen besitzen. Der <parameter>Sprache</parameter>-Parameter muss ein ISO-639-1- oder ISO-639-2-Code sein."
+msgstr "Das Benutzen dieser Option erlaubt es festzulegen, welche Kapitelnamen ausgegeben werden, falls die Kapitel mehr als einen Namen besitzen. Der <parameter>Sprache</parameter>-Parameter muss ein ISO-639-1- oder ISO-639-2-Code sein."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvextract.xml:383
@@ -1205,7 +1205,7 @@ msgstr "<constant>0</constant> – dieser Rückgabewert bedeutet, dass das Extra
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvextract.xml:888
 msgid "<constant>1</constant> -- In this case &mkvextract; has output at least one warning, but extraction did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'.  Depending on the issues involved the resulting files might be ok or not.  The user is urged to check both the warning and the resulting files."
-msgstr "<constant>1</constant> – in diesem Fall hat &mkvextract; mindestens eine Warnung ausgegeben, das Extrahieren wurde aber fortgesetzt. Einer Warnung wird der Text »<literal>Warning:</literal>« vorangestellt. Abhängig von den aufgetretenen Problemen können die resultierenden Dateien in Ordnung oder nicht sein. Dem Anwender wird nachdrücklich geraten, sowohl die Warnung als auch die resultierenden Dateien zu überprüfen."
+msgstr "<constant>1</constant> – in diesem Fall hat &mkvextract; mindestens eine Warnung ausgegeben, das Extrahieren wurde aber fortgesetzt. Einer Warnung wird der Text »<literal>Warning:</literal>« vorangestellt. Abhängig von den aufgetretenen Problemen können die resultierenden Dateien in Ordnung oder nicht sein. Es wird nachdrücklich geraten, sowohl die Warnung als auch die resultierenden Dateien zu überprüfen."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvextract.xml:896
@@ -2042,7 +2042,7 @@ msgstr "<option>--split</option> <parameter>Spezifikation</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:570
 msgid "Splits the output file after a given size or a given time.  Please note that tracks can only be split right before a key frame.  Therefore the split point may be a bit off from what the user has specified."
-msgstr "teilt die Ausgabedatei nach der angegebenen Größe oder Zeit auf. Bitte beachten Sie, dass Spuren nur kurz vor einem Schlüsselbild geteilt werden können. Daher kann sich der Aufteilungspunkt ein wenig von dem unterscheiden, den der Benutzer angegeben hat."
+msgstr "teilt die Ausgabedatei nach der angegebenen Größe oder Zeit auf. Bitte beachten Sie, dass Spuren nur direkt vor einem Schlüsselbild geteilt werden können. Daher kann sich der Aufteilungspunkt ein wenig von dem unterscheiden, der angegeben wurde."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:575
@@ -2173,7 +2173,7 @@ msgstr "Falls ein Endzeitstempel weggelassen wird, dann wird dies standardmäßi
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:690
 msgid "Normally each range will be written to a new file. This can be changed so that consecutive ranges are written to the same file. For that the user has to prefix the start timestamp with a <literal>+</literal>. This tells &mkvmerge; not to create a new file and instead append the range to the same file the previous range was written to. Timestamps will be adjusted so that there will be no gap in the output file even if there was a gap in the two ranges in the input file."
-msgstr "Normalerweise wird jeder Bereich in eine neue Datei geschrieben. Dies kann so geändert werden, dass aufeinanderfolgende Bereiche in dieselbe Datei geschrieben werden. Dafür muss der Benutzer dem Startzeitstempel ein <literal>+</literal> voranstellen. Dies teilt &mkvmerge; mit, dass es keine neue Datei erstellen und den Bereich stattdessen an dieselbe Datei anhängen soll, in die der letzte Bereich geschrieben wurde. Zeitstempel werden angepasst, so dass es in der Ausgabedatei keine Lücke gibt, selbst wenn es in den beiden Bereichen in der Eingabedatei eine Lücke gab."
+msgstr "Normalerweise wird jeder Bereich in eine neue Datei geschrieben. Dies kann so geändert werden, dass aufeinanderfolgende Bereiche in dieselbe Datei geschrieben werden. Dafür muss man dem Startzeitstempel ein <literal>+</literal> voranstellen. Dies teilt &mkvmerge; mit, dass es keine neue Datei erstellen und den Bereich stattdessen an dieselbe Datei anhängen soll, in die der letzte Bereich geschrieben wurde. Zeitstempel werden angepasst, so dass es in der Ausgabedatei keine Lücke gibt, selbst wenn es in den beiden Bereichen in der Eingabedatei eine Lücke gab."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:697
@@ -2238,7 +2238,7 @@ msgstr "Falls eine Endnummer weggelassen wird, dann wird dies standardmäßig da
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:757
 msgid "Normally each range will be written to a new file. This can be changed so that consecutive ranges are written to the same file. For that the user has to prefix the start number with a <literal>+</literal>. This tells &mkvmerge; not to create a new file and instead append the range to the same file the previous range was written to. Timestamps will be adjusted so that there will be no gap in the output file even if there was a gap in the two ranges in the input file."
-msgstr "Normalerweise wird jeder Bereich in eine neue Datei geschrieben. Dies kann so geändert werden, dass aufeinanderfolgende Bereiche in dieselbe Datei geschrieben werden. Dafür muss der Benutzer der Startnummer ein <literal>+</literal> voranstellen. Dies teilt &mkvmerge; mit, dass es keine neue Datei erstellen und den Bereich stattdessen an dieselbe Datei anhängen soll, in die der letzte Bereich geschrieben wurde. Zeitstempel werden so angepasst, dass es in der Ausgabedatei keine Lücke gibt, auch dann nicht, wenn es in den beiden Bereichen in der Eingabedatei eine Lücke gab."
+msgstr "Normalerweise wird jeder Bereich in eine neue Datei geschrieben. Dies kann so geändert werden, dass aufeinanderfolgende Bereiche in dieselbe Datei geschrieben werden. Dafür muss man der Startnummer ein <literal>+</literal> voranstellen. Dies teilt &mkvmerge; mit, dass es keine neue Datei erstellen und den Bereich stattdessen an dieselbe Datei anhängen soll, in die der letzte Bereich geschrieben wurde. Zeitstempel werden so angepasst, dass es in der Ausgabedatei keine Lücke gibt, auch dann nicht, wenn es in den beiden Bereichen in der Eingabedatei eine Lücke gab."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:765
@@ -2795,7 +2795,7 @@ msgstr "<option>--default-track</option> <parameter>TID<optional>:bool</optional
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1391
 msgid "Sets the &amp;default track&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  If the user does not explicitly select a track, the player should prefer the track that has his &amp;default track&amp; flag set. Only one track of each kind (audio, video, subtitles, buttons) can have his &amp;default track&amp; flag set.  If the user wants no track to have the default track flag set then he has to set <parameter>bool</parameter> to <constant>0</constant> for all tracks."
-msgstr "setzt den »Standardspur«-Schalter für die angegebene Spur (siehe den Abschnitt <link linkend=\"mkvmerge.track_ids\">Spur-IDs</link>), falls das optionale Argument <parameter>bool</parameter> auf <constant>1</constant> gesetzt oder nicht vorhanden ist. Falls der Anwender nicht explizit selbst eine Spur auswählt, dann sollte das Abspielprogramm die Spur bevorzugen, für die der »Standardspur«-Schalter gesetzt ist. Nur eine Spur jeder Art (Ton, Video, Untertitel, Buttons) kann einen gesetzten »Standardspur«-Schalter haben. Falls der Anwender nicht möchte, dass der »Standardspur«-Schalter gesetzt ist, muss er <parameter>bool</parameter> für alle Spuren auf <constant>0</constant> setzen."
+msgstr "Setzt den »Standardspur«-Schalter für die angegebene Spur (siehe den Abschnitt <link linkend=\"mkvmerge.track_ids\">Spur-IDs</link>), falls das optionale Argument <parameter>bool</parameter> auf <constant>1</constant> gesetzt oder nicht vorhanden ist. Falls beim Abspielen keine Spur explizit auswählt wurde, sollte das Abspielprogramm die Spur bevorzugen, für die der »Standardspur«-Schalter gesetzt ist. Nur eine Spur jeder Art (Ton, Video, Untertitel, Buttons) kann einen gesetzten »Standardspur«-Schalter haben. Falls nicht gewünscht ist, dass der »Standardspur«-Schalter überhaupt gesetzt ist, muss der <parameter>bool</parameter> für alle Spuren auf <constant>0</constant> gesetzt werden."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1405
@@ -2936,7 +2936,7 @@ msgstr "Einige Audio-Codecs enthalten einen verlustbehafteten Kern und implement
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1575
 msgid "Currently only <abbrev>DTS</abbrev> tracks are affected by this option. TrueHD tracks that contain an embedded <abbrev>AC-3</abbrev> core are instead presented as two separate tracks for which the user can select which track to copy. For <abbrev>DTS</abbrev> such a scheme would not work as the HD extensions cannot be decoded by themselves – unlike the TrueHD data."
-msgstr "Momentan werden nur <abbrev>DTS</abbrev>-Spuren von dieser Option beeinflusst. TrueHD-Spuren, die einen eingebetteten <abbrev>AC-3</abbrev>-Kern enthalten, werden statt dessen als zwei einzelne Spuren präsentiert, für die der Anwender separat entscheiden kann, welche kopiert werden sollen. Bei <abbrev>DTS</abbrev> würde das nicht funktionen, da HD-Erweiterungen nicht alleinstehend decodiert werden können – anders als bei TrueHD-Daten."
+msgstr "Momentan werden nur <abbrev>DTS</abbrev>-Spuren von dieser Option beeinflusst. TrueHD-Spuren, die einen eingebetteten <abbrev>AC-3</abbrev>-Kern enthalten, werden statt dessen als zwei einzelne Spuren präsentiert, für die separat entschieden werden kann, welche kopiert werden sollen. Bei <abbrev>DTS</abbrev> würde das nicht funktionen, da HD-Erweiterungen nicht alleinstehend decodiert werden können – anders als bei TrueHD-Daten."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1583
@@ -3473,7 +3473,7 @@ msgstr "<option>--priority</option> <parameter>Priorität</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2138
 msgid "Sets the process priority that &mkvmerge; runs with. Valid values are '<literal>lowest</literal>', '<literal>lower</literal>', '<literal>normal</literal>', '<literal>higher</literal>' and '<literal>highest</literal>'. If nothing is given then '<literal>normal</literal>' is used. On Unix like systems &mkvmerge; will use the <citerefentry><refentrytitle>nice</refentrytitle><manvolnum>2</manvolnum></citerefentry> function. Therefore only the super user can use '<literal>higher</literal>' and '<literal>highest</literal>'. On Windows all values are useable for every user."
-msgstr "setzt die Prozesspriorität, mit der &mkvmerge; ausgeführt wird. Gültige Werte sind »<literal>lowest</literal>«, »<literal>lower</literal>«, »<literal>normal</literal>«, »<literal>higher</literal>« und »<literal>highest</literal>«. Falls nichts angegeben wurde, wird »<literal>normal</literal>« benutzt. Auf Unix-ähnlichen Systemen wird &mkvmerge; die Funktion <citerefentry><refentrytitle>nice</refentrytitle><manvolnum>2</manvolnum></citerefentry> verwenden. Daher kann nur der Superuser »<literal>higher</literal>« und »<literal>highest</literal>« benutzen. Auf Windows sind alle Werte für jeden Anwender benutzbar."
+msgstr "Setzt die Prozesspriorität, mit der &mkvmerge; ausgeführt wird. Gültige Werte sind »<literal>lowest</literal>«, »<literal>lower</literal>«, »<literal>normal</literal>«, »<literal>higher</literal>« und »<literal>highest</literal>«. Falls nichts angegeben wurde, wird »<literal>normal</literal>« benutzt. Auf Unix-ähnlichen Systemen wird &mkvmerge; die Funktion <citerefentry><refentrytitle>nice</refentrytitle><manvolnum>2</manvolnum></citerefentry> verwenden. Daher kann man »<literal>higher</literal>« und »<literal>highest</literal>« nur mit erhöhten Rechten nutzen. Auf Windows sind alle Werte unabhängig der Rechte nutzbar."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2145
@@ -3563,7 +3563,7 @@ msgstr "Aufruf"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2335
 msgid "For each file the user can select which tracks &mkvmerge; should take.  They are all put into the file specified with <option>-o</option>. A list of known (and supported) source formats can be obtained with the <option>-l</option> option."
-msgstr "Für jede Datei kann der Benutzer auswählen, welche Spuren &mkvmerge; nehmen soll. Sie alle werden in eine mit <option>-o</option> angegebene Datei abgelegt. Eine Liste bekannter (und unterstützter) Quellformate kann mit der Option <option>-l</option> abgefragt werden."
+msgstr "Für jede Datei kann auswählt werden, welche Spuren &mkvmerge; nehmen soll. Sie alle werden in eine mit <option>-o</option> angegebene Datei abgelegt. Eine Liste bekannter (und unterstützter) Quellformate kann mit der Option <option>-l</option> abgefragt werden."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvmerge.xml:2348
@@ -4096,7 +4096,7 @@ msgstr "Falls eine Datei in mehrere kleinere unterteilt wurde und Verknüpfen ve
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2802
 msgid "Regardless of whether splitting is active or not the user can tell &mkvmerge; to link the produced files to specific <abbrev>SIDs</abbrev>. This is achieved with the options <option>--link-to-previous</option> and <option>--link-to-next</option>.  These options accept a segment <abbrev>SID</abbrev> in the format that &mkvinfo; outputs: 16 hexadecimal numbers between <constant>0x00</constant> and <constant>0xff</constant> prefixed with '<literal>0x</literal>' each, e.g. '<code>0x41 0xda 0x73 0x66 0xd9 0xcf 0xb2 0x1e 0xae 0x78 0xeb 0xb4 0x5e 0xca 0xb3 0x93</code>'. Alternatively a shorter form can be used: 16 hexadecimal numbers between <constant>0x00</constant> and <constant>0xff</constant> without the '<literal>0x</literal>' prefixes and without the spaces, e.g.  '<code>41da7366d9cfb21eae78ebb45ecab393</code>'."
-msgstr "Unabhängig davon, ob Aufteilung aktiv ist oder nicht, kann der Anwender &mkvmerge; mitteilen, dass die erstellten Dateien mit speziellen <abbrev>SIDs</abbrev> verknüpft werden sollen. Dies kann mit den Optionen <option>--link-to-previous</option> und <option>--link-to-next</option> erreicht werden. Diese Optionen akzeptieren eine Segment-<abbrev>SID</abbrev> in dem von &mkvinfo; ausgegebenen Format: 16 hexadezimalen Zahlen zwischen <constant>0x00</constant> und <constant>0xff</constant>, denen jeweils »<literal>0x</literal>« vorangestellt wurde, z.B. »<code>0x41 0xda 0x73 0x66 0xd9 0xcf 0xb2 0x1e 0xae 0x78 0xeb 0xb4 0x5e 0xca 0xb3 0x93</code>«. Alternativ kann eine kürzere Form benutzt werden: 16 hexadezimalen Zahlen zwischen <constant>0x00</constant> und <constant>0xff</constant> ohne das vorangestellte »<literal>0x</literal>« und ohne die Leerzeichen, z.B. »<code>41da7366d9cfb21eae78ebb45ecab393</code>«."
+msgstr "Unabhängig davon, ob Aufteilung aktiv ist oder nicht, kann man &mkvmerge; mitteilen, dass die erstellten Dateien mit speziellen <abbrev>SIDs</abbrev> verknüpft werden sollen. Dies kann mit den Optionen <option>--link-to-previous</option> und <option>--link-to-next</option> erreicht werden. Diese Optionen akzeptieren eine Segment-<abbrev>SID</abbrev> in dem von &mkvinfo; ausgegebenen Format: 16 hexadezimalen Zahlen zwischen <constant>0x00</constant> und <constant>0xff</constant>, denen jeweils »<literal>0x</literal>« vorangestellt wurde, z.B. »<code>0x41 0xda 0x73 0x66 0xd9 0xcf 0xb2 0x1e 0xae 0x78 0xeb 0xb4 0x5e 0xca 0xb3 0x93</code>«. Alternativ kann eine kürzere Form benutzt werden: 16 hexadezimalen Zahlen zwischen <constant>0x00</constant> und <constant>0xff</constant> ohne das vorangestellte »<literal>0x</literal>« und ohne die Leerzeichen, z.B. »<code>41da7366d9cfb21eae78ebb45ecab393</code>«."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2812
@@ -4111,7 +4111,7 @@ msgstr "Vorgabewerte"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2821
 msgid "The &matroska; specification states that some elements have a default value. Usually an element is not written to the file if its value is equal to its default value in order to save space. The elements that the user might miss in &mkvinfo;'s output are the <parameter>language</parameter> and the <parameter>default track flag</parameter> elements.  The default value for the <parameter>language</parameter> is English ('<literal>eng</literal>'), and the default value for the <parameter>default track flag</parameter> is <parameter>true</parameter>. Therefore if you used <option>--language 0:eng</option> for a track then it will not show up in &mkvinfo;'s output."
-msgstr "Die &matroska;-Spezifikation legt fest, dass einige Elemente Vorgabewerte haben. Normalerweise wird ein Element, um Platz zu sparen, nicht in die Datei geschrieben, falls sein Wert dem Vorgabewert entspricht. Die Elemente, die der Anwender vielleicht in der Ausgabe von &mkvinfo; vermisst, sind <parameter>Sprache</parameter> und <parameter>Standardspurschalter</parameter>. Der Vorgabewert für die <parameter>Sprache</parameter> ist Englisch (»<literal>eng</literal>«) und der Vorgabewert für den <parameter>Standardspurschalter</parameter> ist <parameter>true</parameter>. Daher wird eine Spur, falls Sie <option>--language 0:eng</option> dafür verwenden, nicht in der Ausgabe von &mkvinfo; erscheinen."
+msgstr "Die &matroska;-Spezifikation legt fest, dass einige Elemente Vorgabewerte haben. Normalerweise wird ein Element, um Platz zu sparen, nicht in die Datei geschrieben, falls sein Wert dem Vorgabewert entspricht. Die Elemente, die in der Ausgabe von &mkvinfo; vielleicht vermisst werden, sind <parameter>Sprache</parameter> und <parameter>Standardspurschalter</parameter>. Der Vorgabewert für die <parameter>Sprache</parameter> ist Englisch (»<literal>eng</literal>«) und der Vorgabewert für den <parameter>Standardspurschalter</parameter> ist <parameter>true</parameter>. Daher wird eine Spur, falls Sie <option>--language 0:eng</option> dafür verwenden, nicht in der Ausgabe von &mkvinfo; erscheinen."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2833
@@ -4398,7 +4398,7 @@ msgstr "Beim Aufteilen von Dateien wird &mkvmerge; die Kapitel ebenfalls korrekt
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3016
 msgid "&mkvmerge; is able to copy chapters from &matroska; source files unless this is explicitly disabled with the <link linkend=\"mkvmerge.description.no_chapters\"><option>--no-chapters</option></link> option. The chapters from all sources (&matroska; files, Ogg files, <abbrev>MP4</abbrev> files, chapter text files) are usually not merged but end up in separate <classname>ChapterEditions</classname>. Only if chapters are read from several &matroska; or &xml; files that share the same edition UIDs will chapters be merged into a single <classname>ChapterEdition</classname>. If such a merge is desired in other situations as well then the user has to extract the chapters from all sources with &mkvextract; first, merge the &xml; files manually and mux them afterwards."
-msgstr "&mkvmerge; kann Kapitel aus &matroska;-Quelldateien kopieren, es sei denn, dies wurde explizit mit der Option <link linkend=\"mkvmerge.description.no_chapters\"><option>--no-chapters</option></link> deaktiviert. Die Kapitel aus allen Quellen (&matroska;-Dateien, Ogg-Dateien, <abbrev>MP4</abbrev>-Dateien, Kapiteltextdateien) werden üblicherweise nicht zusammengefügt, landen aber in separaten <classname>ChapterEditions</classname>. Nur falls Kapitel aus mehreren &matroska;- oder &xml;-Dateien gelesen werden, die dieselbe Fassung von UIDs gemeinsam benutzen, werden Kapitel in eine einzige <classname>ChapterEdition</classname>-Datei zusammengefügt. Falls ein derartiges Zusammenfügen in anderen Situationen ebenfalls erwünscht ist, dann muss der Anwender zuerst die Kapitel aus allen Quellen mit &mkvextract; extrahieren, die &xml;-Dateien zusammenfügen und sie dann hinterher multiplexen (ihre Datenströme zusammenfügen)."
+msgstr "&mkvmerge; kann Kapitel aus &matroska;-Quelldateien kopieren, es sei denn, dies wurde explizit mit der Option <link linkend=\"mkvmerge.description.no_chapters\"><option>--no-chapters</option></link> deaktiviert. Die Kapitel aus allen Quellen (&matroska;-Dateien, Ogg-Dateien, <abbrev>MP4</abbrev>-Dateien, Kapiteltextdateien) werden üblicherweise nicht zusammengefügt, landen aber in separaten <classname>ChapterEditions</classname>. Nur falls Kapitel aus mehreren &matroska;- oder &xml;-Dateien gelesen werden, die dieselbe Fassung von UIDs gemeinsam benutzen, werden Kapitel in eine einzige <classname>ChapterEdition</classname>-Datei zusammengefügt. Falls ein derartiges Zusammenfügen in anderen Situationen ebenfalls erwünscht ist, dann müssen zuerst die Kapitel aus allen Quellen mit &mkvextract; extrahiert und die &xml;-Dateien manuell zusammenfügt werden, bevor sie hinterher gemultiplext werden können."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3034
@@ -4642,7 +4642,7 @@ msgstr "Externe Zeitstempeldateien"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3236
 msgid "&mkvmerge; allows the user to chose the timestamps for a specific track himself. This can be used in order to create files with variable frame rate video or include gaps in audio. A frame in this case is the unit that &mkvmerge; creates separately per &matroska; block. For video this is exactly one frame, for audio this is one packet of the specific audio type. E.g. for <abbrev>AC-3</abbrev> this would be a packet containing <constant>1536</constant> samples."
-msgstr "&mkvmerge; erlaubt dem Benutzer, die Zeitstempel für eine bestimmte Spur selbst auszuwählen. Dies kann benutzt werden, um Dateien mit variabler Videobildrate zu erstellen oder Lücken in den Ton einzuarbeiten. In diesem Fall ist ein Bild die Einheit, die &mkvmerge; separat pro &matroska;-Block erstellt. Für Video ist dies genau ein Bild, für Ton ist dies ein Paket des speziellen Audiotyps. Dies wäre z.B. für <abbrev>AC-3</abbrev> ein Paket, das <constant>1536</constant>-Samples enthält."
+msgstr "&mkvmerge; erlaubt, die Zeitstempel für eine bestimmte Spur selbst auszuwählen. Dies kann benutzt werden, um Dateien mit variabler Videobildrate zu erstellen oder Lücken in den Ton einzuarbeiten. In diesem Fall ist ein Bild die Einheit, die &mkvmerge; separat pro &matroska;-Block erstellt. Für Video ist dies genau ein Bild, für Ton ist dies ein Paket des speziellen Audiotyps. Dies wäre z.B. für <abbrev>AC-3</abbrev> ein Paket, das <constant>1536</constant>-Samples enthält."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3243
@@ -4759,7 +4759,7 @@ msgstr "<constant>0</constant> – dieser Rückgabewert bedeutet, dass das Muxin
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:3326
 msgid "<constant>1</constant> -- In this case &mkvmerge; has output at least one warning, but muxing did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'.  Depending on the issues involved the resulting file might be ok or not.  The user is urged to check both the warning and the resulting file."
-msgstr "<constant>1</constant> – in diesem Fall hat &mkvmerge; mindestens eine Warnung ausgegeben, das Muxing wurde aber fortgesetzt. Einer Warnung wird der Text »<literal>Warning:</literal>« vorangestellt. Abhängig von den aufgetretenen Problemen können die resultierenden Dateien in Ordnung sein oder nicht. Dem Anwender wird nachdrücklich geraten, sowohl die Warnung als auch die resultierende Datei zu überprüfen."
+msgstr "<constant>1</constant> – in diesem Fall hat &mkvmerge; mindestens eine Warnung ausgegeben, das Muxing wurde aber fortgesetzt. Einer Warnung wird der Text »<literal>Warning:</literal>« vorangestellt. Abhängig von den aufgetretenen Problemen können die resultierenden Dateien in Ordnung sein oder nicht. Es wird nachdrücklich geraten, sowohl die Warnung als auch die resultierende Datei zu überprüfen."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:3334
@@ -4839,7 +4839,7 @@ msgstr "<option>-p</option>, <option>--parse-mode</option> <parameter>Modus</par
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:85
 msgid "Sets the parse mode. The parameter '<parameter>mode</parameter>' can either be '<literal>fast</literal>' (which is also the default)  or '<literal>full</literal>'. The '<literal>fast</literal>' mode does not parse the whole file but uses the meta seek elements for locating the required elements of a source file. In 99% of all cases this is enough. But for files that do not contain meta seek elements or which are damaged the user might have to set the '<literal>full</literal>' parse mode. A full scan of a file can take a couple of minutes while a fast scan only takes seconds."
-msgstr "setzt den Auswertungsmodus. Der Parameter <parameter>Modus</parameter> kann entweder »<literal>fast</literal>« (was auch die Voreinstellung ist) oder »<literal>full</literal>« sein. Der Modus »<literal>fast</literal>« wertet nicht die ganze Datei aus, benutzt aber die Metasuchelemente zum Orten der benötigten Elemente der Quelldatei. In 99% der Fälle reicht dies. Aber für Dateien, die keine Metasuchelemente enthalten oder beschädigt sind, kann es notwendig sein, dass der Anwender den Auswertungsmodus »<literal>full</literal>« benutzt. Ein vollständiger Scan einer Datei kann ein paar Minuten in Anspruch nehmen, während ein schneller Scan nur Sekunden dauert."
+msgstr "Setzt den Auswertungsmodus. Der Parameter <parameter>Modus</parameter> kann entweder »<literal>fast</literal>« (was auch die Voreinstellung ist) oder »<literal>full</literal>« sein. Der Modus »<literal>fast</literal>« wertet nicht die ganze Datei aus, benutzt aber die Metasuchelemente zum Orten der benötigten Elemente der Quelldatei. In 99% der Fälle reicht dies. Aber für Dateien, die keine Metasuchelemente enthalten oder beschädigt sind, kann es notwendig sein, dass der Auswertungsmodus »<literal>full</literal>« benutzt wird. Ein vollständiger Scan einer Datei kann ein paar Minuten in Anspruch nehmen, während ein schneller Scan nur Sekunden dauert."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:96
@@ -5348,7 +5348,7 @@ msgstr "<constant>0</constant> – dieser Rückgabewert bedeutet, dass die Ände
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:728
 msgid "<constant>1</constant> -- In this case &mkvpropedit; has output at least one warning, but the modification did continue.  A warning is prefixed with the text '<literal>Warning:</literal>'.  Depending on the issues involved the resulting files might be ok or not.  The user is urged to check both the warning and the resulting files."
-msgstr "<constant>1</constant> – in diesem Fall hat &mkvpropedit; mindestens eine Warnung ausgegeben, das Ändern wurde aber fortgesetzt. Einer Warnung wird der Text »<literal>Warning:</literal>« vorangestellt. Abhängig von den aufgetretenen Problemen können die resultierenden Dateien in Ordnung sein oder nicht. Dem Anwender wird nachdrücklich geraten, sowohl die Warnung als auch die resultierenden Dateien zu überprüfen."
+msgstr "<constant>1</constant> – in diesem Fall hat &mkvpropedit; mindestens eine Warnung ausgegeben, das Ändern wurde aber fortgesetzt. Einer Warnung wird der Text »<literal>Warning:</literal>« vorangestellt. Abhängig von den aufgetretenen Problemen können die resultierenden Dateien in Ordnung sein oder nicht. Es wird nachdrücklich geraten, sowohl die Warnung als auch die resultierenden Dateien zu überprüfen."
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:736
