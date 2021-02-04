@@ -14,6 +14,8 @@
 
 * mkvmerge: fixed the calculation of chapter timestamps read from NTSC
   DVDs. Fix by Tom Yan.
+* mkvextract: AAC: fixed wrong channel mask field in the ADTS headers for 7.1
+  channel layouts. Fix by Tom Yan. Fixes #2636.
 
 ## Build system changes
 
