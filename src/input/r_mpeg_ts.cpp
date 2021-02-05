@@ -40,7 +40,7 @@
 #include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "input/aac_framing_packet_converter.h"
-#include "input/bluray_pcm_channel_removal_packet_converter.h"
+#include "input/bluray_pcm_channel_layout_packet_converter.h"
 #include "input/dvbsub_pes_framing_removal_packet_converter.h"
 #include "input/r_mpeg_ts.h"
 #include "input/teletext_to_srt_packet_converter.h"

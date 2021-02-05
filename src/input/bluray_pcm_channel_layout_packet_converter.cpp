@@ -13,7 +13,7 @@
 
 #include "common/common_pch.h"
 
-#include "input/bluray_pcm_channel_removal_packet_converter.h"
+#include "input/bluray_pcm_channel_layout_packet_converter.h"
 #include "merge/generic_packetizer.h"
 
 bluray_pcm_channel_removal_packet_converter_c::bluray_pcm_channel_removal_packet_converter_c(std::size_t bytes_per_channel,
