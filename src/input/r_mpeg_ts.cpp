@@ -40,7 +40,7 @@
 #include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "input/aac_framing_packet_converter.h"
-#include "input/bluray_pcm_channel_removal_packet_converter.h"
+#include "input/bluray_pcm_channel_layout_packet_converter.h"
 #include "input/dvbsub_pes_framing_removal_packet_converter.h"
 #include "input/r_mpeg_ts.h"
 #include "input/teletext_to_srt_packet_converter.h"
@@ -433,8 +433,7 @@ track_c::new_stream_a_pcm() {
   if ((a_sample_rate == 0) || !mtx::included_in(a_bits_per_sample, 16, 24))
     return FILE_STATUS_DONE;
 
-  if ((a_channels % 2) != 0)
-    converter = std::make_shared<bluray_pcm_channel_removal_packet_converter_c>(a_bits_per_sample / 8, a_channels + 1, a_channels);
+  converter = std::make_shared<bluray_pcm_channel_layout_packet_converter_c>(a_bits_per_sample / 8, a_channels + 1, a_channels);
 
   return 0;
 }
