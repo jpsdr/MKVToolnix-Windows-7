@@ -116,8 +116,12 @@ bluray_pcm_channel_layout_packet_converter_c::convert(packet_cptr const &packet)
     removal(packet);
 
   // remap channels into WAVEFORMATEXTENSIBLE channel order
-  if (m_remap_buf)
+  if (m_remap_buf) {
+    auto remainder = packet->data->get_size() % (m_bytes_per_channel * m_num_output_channels);
+    if (remainder != 0)
+      packet->data->set_size(packet->data->get_size() - remainder);
     (this->*m_remap)(packet);
+  }
 
   m_ptzr->process(packet);
   return true;
