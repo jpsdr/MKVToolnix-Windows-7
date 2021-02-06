@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2021-02-03 19:38+0100\n"
-"PO-Revision-Date: 2021-02-03 18:47+0000\n"
-"Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
+"PO-Revision-Date: 2021-02-04 09:49+0000\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgstr "53.0.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2021-01-30"
-msgstr "30/01/2020"
+msgstr "30/01/2021"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -2001,7 +2001,7 @@ msgstr "<option>--disable-lacing</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:527
 msgid "Disables lacing for all tracks. This will increase the file's size, especially if there are many audio tracks. This option is not intended for everyday use."
-msgstr "Inhabilita l'enllaçat per a les pistes. Això incrementarà la mida del fitxer, especialment si hi ha moltes pistes d'àudio. Aquesta opció no ha estat dissenyada per a un ús freqüent."
+msgstr "Inhabilita el lligam per a les pistes. Això incrementarà la mida del fitxer, especialment si hi ha moltes pistes d'àudio. Aquesta opció no ha estat dissenyada per a un ús freqüent."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:534
@@ -2793,10 +2793,8 @@ msgstr "<option>--default-track</option> <parameter>TID<optional>:booleà</optio
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1391
-#, fuzzy
-#| msgid "Sets the 'default' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present.  If the user does not explicitly select a track himself then the player should prefer the track that has his 'default' flag set. Only one track of each kind (audio, video, subtitles, buttons) can have his 'default' flag set.  If the user wants no track to have the default track flag set then he has to set <parameter>bool</parameter> to <constant>0</constant> for all tracks."
 msgid "Sets the &amp;default track&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  If the user does not explicitly select a track, the player should prefer the track that has his &amp;default track&amp; flag set. Only one track of each kind (audio, video, subtitles, buttons) can have his &amp;default track&amp; flag set.  If the user wants no track to have the default track flag set then he has to set <parameter>bool</parameter> to <constant>0</constant> for all tracks."
-msgstr "Estableix l'etiqueta «per omissió» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> no està present. Si l'usuari no selecciona explícitament una pista, llavors el reproductor hauria de preferir la pista marcada amb l'etiqueta «per omissió». Només es pot establir una pista de cada tipus (àudio, vídeo, subtítols, botons). Si l'usuari vol que cap pista tingui aquesta etiqueta, llavors s'haurà d'establir el <parameter>booleà</parameter> a <constant>0</constant> per a totes les pistes."
+msgstr "Estableix l'etiqueta «Pista per omissió» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> està establert a <constant>1</constant> o si no està present. Si l'usuari no selecciona explícitament una pista, llavors el reproductor hauria de preferir la pista marcada amb l'etiqueta «Pista per omissió». Només es pot establir una pista de cada tipus (àudio, vídeo, subtítols, botons). Si l'usuari vol que cap pista contingui aquesta etiqueta, llavors s'haurà d'establir el <parameter>booleà</parameter> a 0 per a totes les pistes."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1405
@@ -2805,80 +2803,58 @@ msgstr "<option>--forced-track</option> <parameter>TID<optional>:booleà</option
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1408
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &amp;forced display&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  Use this for tracks containing onscreen text or foreign-language dialogue."
-msgstr "Estableix l'etiqueta de «forçada» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> no està present. Un reproductor haurà de mostrar totes les pistes marcades amb aquesta etiqueta establerta a <constant>1</constant>."
+msgstr "Estableix l'etiqueta de «Força el mostrar» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> està establert a <constant>1</constant> o si no està present. Useu-ho per a les pistes que continguin text en pantalla o algun diàleg en un idioma estranger."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1420
-#, fuzzy
-#| msgid "<option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--hearing-impaired-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-track</option> <parameter>TID<optional>:booleà</optional></parameter>"
+msgstr "<option>--hearing-impaired-flag</option> <parameter>TID<optional>:booleà</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1423
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &amp;hearing impaired&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is suitable for users with hearing impairments."
-msgstr "Estableix l'etiqueta de «forçada» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> no està present. Un reproductor haurà de mostrar totes les pistes marcades amb aquesta etiqueta establerta a <constant>1</constant>."
+msgstr "Estableix l'etiqueta de «Discapacitat auditiva» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> s'ha establert a <constant>1</constant> o si no està present. Aquesta etiqueta es pot establir si la pista és adequada per a usuaris amb discapacitat auditiva."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1435
-#, fuzzy
-#| msgid "<option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--visual-impaired-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-track</option> <parameter>TID<optional>:booleà</optional></parameter>"
+msgstr "<option>--visual-impaired-flag</option> <parameter>TID<optional>:booleà</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1438
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &amp;visual impaired&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is suitable for users with visual impairments."
-msgstr "Estableix l'etiqueta de «forçada» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> no està present. Un reproductor haurà de mostrar totes les pistes marcades amb aquesta etiqueta establerta a <constant>1</constant>."
+msgstr "Estableix l'etiqueta de «Discapacitat visual» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> s'ha establert a <constant>1</constant> o si no està present. Aquesta etiqueta es pot establir si la pista és adequada per a usuaris amb discapacitat visual."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1450
-#, fuzzy
-#| msgid "<option>--default-track</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--text-descriptions-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--default-track</option> <parameter>TID<optional>:booleà</optional></parameter>"
+msgstr "<option>--text-descriptions-flag</option> <parameter>TID<optional>:booleà</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1453
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &amp;text descriptions&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."
-msgstr "Estableix l'etiqueta de «forçada» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> no està present. Un reproductor haurà de mostrar totes les pistes marcades amb aquesta etiqueta establerta a <constant>1</constant>."
+msgstr "Estableix l'etiqueta de «Descripcions de text» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> s'ha establert a <constant>1</constant> o si no està present. Aquesta etiqueta es pot establir si la pista conté alguna descripció textual per al contingut del vídeo adequada per a la seva reproducció a través d'un sistema de conversió de text a veu per a un usuari amb discapacitat visual."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1466
-#, fuzzy
-#| msgid "<option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--original-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-track</option> <parameter>TID<optional>:booleà</optional></parameter>"
+msgstr "<option>--original-flag</option> <parameter>TID<optional>:booleà</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1469
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &amp;original language&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is in the content's original language (not a translation)."
-msgstr "Estableix l'etiqueta de «forçada» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> no està present. Un reproductor haurà de mostrar totes les pistes marcades amb aquesta etiqueta establerta a <constant>1</constant>."
+msgstr "Estableix l'etiqueta d'«Idioma original» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> s'ha establert a <constant>1</constant> o si no està present. Aquesta etiqueta es pot establir si la pista està en l'idioma original del contingut (no una traducció)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1481
-#, fuzzy
-#| msgid "<option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--commentary-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-track</option> <parameter>TID<optional>:booleà</optional></parameter>"
+msgstr "<option>--commentary-flag</option> <parameter>TID<optional>:booleà</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1484
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &amp;commentary&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track contains commentary."
-msgstr "Estableix l'etiqueta de «forçada» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> no està present. Un reproductor haurà de mostrar totes les pistes marcades amb aquesta etiqueta establerta a <constant>1</constant>."
+msgstr "Estableix l'etiqueta de «Comentari» a la pista indicada (vegeu la secció sobre <link linkend=\"mkvmerge.track_ids\">els ID de les pistes</link>) si l'argument opcional <parameter>booleà</parameter> s'ha establert a <constant>1</constant> o si no està present. Aquesta etiqueta es pot establir si la pista conté algun comentari."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1496
@@ -3439,10 +3415,8 @@ msgstr "La sortida del format <literal>json</literal>  és una representació JS
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2088
-#, fuzzy
-#| msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v12.json\"><literal>mkvmerge-identification-output-schema-v12.json</literal></ulink>"
 msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v14.json\"><literal>mkvmerge-identification-output-schema-v14.json</literal></ulink>"
-msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v12.json\"><literal>mkvmerge-identification-output-schema-v12.json</literal></ulink>"
+msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v14.json\"><literal>mkvmerge-identification-output-schema-v14.json</literal></ulink>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2092
@@ -4832,7 +4806,7 @@ msgstr "<command>mkvpropedit</command> <arg>opcions</arg> <arg choice=\"req\">no
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:61
 msgid "This program analyses an existing &matroska; file and modifies some of its properties. Then it writes those modifications to the existing file. Among the properties that can be changed are the segment information elements (e.g. the title) and the track headers (e.g. the language code, 'default track' flag or the name)."
-msgstr "Aquest programa analitza un fitxer &matroska; i modifica algunes de les seves propietats. Després escriu aquestes modificacions en el fitxer existent. Entre les propietats que es poden modificar es troben els elements sobre la informació del segment (p. ex., el títol), les capçaleres de les pistes (p. ex., el codi de l'idioma, l'etiqueta «pista per omissió» o el nom)."
+msgstr "Aquest programa analitza un fitxer &matroska; i modifica algunes de les seves propietats. Després escriu aquestes modificacions en el fitxer existent. Entre les propietats que es poden modificar es troben els elements sobre la informació del segment (p. ex., el títol), les capçaleres de les pistes (p. ex., el codi de l'idioma, l'etiqueta «Pista per omissió» o el nom)."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:67
