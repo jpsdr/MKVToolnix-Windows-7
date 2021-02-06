@@ -15,7 +15,9 @@ MKVToolNix 53.0.0
         2. [Configuration and compilation](#242-configuration-and-compilation)
     5. [Notes for compilation on (Open)Solaris](#25-notes-for-compilation-on-opensolaris)
     6. [Unit tests](#26-unit-tests)
-3. [Reporting bugs](#3-reporting-bugs)
+3. [Reporting bugs & getting support](#3-reporting-bugs-getting-support)
+    1. [Reporting bugs](#31-reporting-bugs)
+    2. [Getting support](#32-getting-support)
 4. [Test suite and continuous integration tests](#4-test-suite-and-continuous-integration-tests)
 5. [Code of Conduct](#5-code-of-conduct)
 6. [Included third-party components and their licenses](#6-included-third-party-components-and-their-licenses)
@@ -272,7 +274,9 @@ do this, you have to follow these steps:
         rake tests:run_unit
 
 
-# 3. Reporting bugs
+# 3. Reporting bugs & getting support
+
+# 3.1. Reporting bugs
 
 If you're sure you've found a bug — e.g. if one of my programs crashes
 with an obscur error message, or if the resulting file is missing part
@@ -288,6 +292,21 @@ reproduce the issue. If they are larger than 1 MB, please upload
 them somewhere and post a link in the issue. You can also upload them
 to my FTP server. Details on how to connect can be found in the
 [MKVToolNix FAQ](https://gitlab.com/mbunkus/mkvtoolnix/wikis/FTP-server).
+
+# 3.2. Getting support
+
+The issue tracker above is not meant for general support which you can
+find in the following places:
+
+* The [MKVToolNix sub-Reddit](https://www.reddit.com/r/mkvtoolnix) is
+  suitable for all kinds of questions.
+* The MKVToolNix thread on [Doom9's
+  forum](http://forum.doom9.org/showthread.php?t=155732) is more
+  suited for in-depth technical questions.
+* There's also the IRC channel `#matroska` on the [Freenode IRC
+  network](https://freenode.net/) where we hang out. The main
+  MKVToolNix author Moritz Bunkus is known as "mosu" there.
+
 
 # 4. Test suite and continuous integration tests
 
