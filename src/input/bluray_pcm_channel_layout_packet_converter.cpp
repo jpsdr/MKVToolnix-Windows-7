@@ -17,8 +17,8 @@
 #include "merge/generic_packetizer.h"
 
 bluray_pcm_channel_layout_packet_converter_c::bluray_pcm_channel_layout_packet_converter_c(std::size_t bytes_per_channel,
-                                                                                             std::size_t num_input_channels,
-                                                                                             std::size_t num_output_channels)
+                                                                                           std::size_t num_input_channels,
+                                                                                           std::size_t num_output_channels)
   : packet_converter_c{nullptr}
   , m_bytes_per_channel{bytes_per_channel}
   , m_num_input_channels{num_input_channels}
@@ -28,13 +28,13 @@ bluray_pcm_channel_layout_packet_converter_c::bluray_pcm_channel_layout_packet_c
 {
   if (m_num_output_channels == 6) {
     m_remap_buf_size = m_bytes_per_channel * 3;
-    m_remap = &bluray_pcm_channel_layout_packet_converter_c::remap_6ch;
+    m_remap          = &bluray_pcm_channel_layout_packet_converter_c::remap_6ch;
   } else if (m_num_output_channels == 7) {
     m_remap_buf_size = m_bytes_per_channel * 3;
-    m_remap = &bluray_pcm_channel_layout_packet_converter_c::remap_7ch;
+    m_remap          = &bluray_pcm_channel_layout_packet_converter_c::remap_7ch;
   } else if (m_num_output_channels == 8) {
     m_remap_buf_size = m_bytes_per_channel * 5;
-    m_remap = &bluray_pcm_channel_layout_packet_converter_c::remap_8ch;
+    m_remap          = &bluray_pcm_channel_layout_packet_converter_c::remap_8ch;
   }
 
   if (m_remap_buf_size > 0)
@@ -63,48 +63,53 @@ bluray_pcm_channel_layout_packet_converter_c::removal(packet_cptr const &packet)
 
 void
 bluray_pcm_channel_layout_packet_converter_c::remap_6ch(packet_cptr const &packet) {
-  auto start_ptr                  = packet->data->get_buffer();
-  auto end_ptr                    = start_ptr + packet->data->get_size();
+  auto start_ptr = packet->data->get_buffer();
+  auto end_ptr   = start_ptr + packet->data->get_size();
 
   // post-remap order: FL FR FC LFE BL BR
   while (start_ptr != end_ptr) {
     start_ptr += m_bytes_per_channel * 3;
-    memcpy(m_remap_buf->get_buffer(), start_ptr, m_remap_buf_size);
-    memcpy(start_ptr, m_remap_buf->get_buffer() + m_bytes_per_channel * 2, m_bytes_per_channel);
-    memcpy(start_ptr + m_bytes_per_channel, m_remap_buf->get_buffer(), m_bytes_per_channel * 2);
+
+    memcpy(m_remap_buf->get_buffer(),       start_ptr,                                           m_remap_buf_size);
+    memcpy(start_ptr,                       m_remap_buf->get_buffer() + m_bytes_per_channel * 2, m_bytes_per_channel);
+    memcpy(start_ptr + m_bytes_per_channel, m_remap_buf->get_buffer(),                           m_bytes_per_channel * 2);
+
     start_ptr += m_remap_buf_size;
   }
 }
 
 void
 bluray_pcm_channel_layout_packet_converter_c::remap_7ch(packet_cptr const &packet) {
-  auto start_ptr                  = packet->data->get_buffer();
-  auto end_ptr                    = start_ptr + packet->data->get_size();
+  auto start_ptr = packet->data->get_buffer();
+  auto end_ptr   = start_ptr + packet->data->get_size();
 
   // post-remap order: FL FR FC BL BR SL SR
   while (start_ptr != end_ptr) {
     start_ptr += m_bytes_per_channel * 3;
-    memcpy(m_remap_buf->get_buffer(), start_ptr, m_remap_buf_size);
-    memcpy(start_ptr, m_remap_buf->get_buffer() + m_bytes_per_channel, m_bytes_per_channel * 2);
-    memcpy(start_ptr + m_bytes_per_channel * 2, m_remap_buf->get_buffer(), m_bytes_per_channel);
+
+    memcpy(m_remap_buf->get_buffer(),           start_ptr,                                       m_remap_buf_size);
+    memcpy(start_ptr,                           m_remap_buf->get_buffer() + m_bytes_per_channel, m_bytes_per_channel * 2);
+    memcpy(start_ptr + m_bytes_per_channel * 2, m_remap_buf->get_buffer(),                       m_bytes_per_channel);
+
     start_ptr += m_remap_buf_size + m_bytes_per_channel;
   }
 }
 
 void
 bluray_pcm_channel_layout_packet_converter_c::remap_8ch(packet_cptr const &packet) {
-  auto start_ptr                  = packet->data->get_buffer();
-  auto end_ptr                    = start_ptr + packet->data->get_size();
+  auto start_ptr = packet->data->get_buffer();
+  auto end_ptr   = start_ptr + packet->data->get_size();
 
   // post-remap order: FL FR FC LFE BL BR SL SR
   while (start_ptr != end_ptr) {
     start_ptr += m_bytes_per_channel * 3;
-    memcpy(m_remap_buf->get_buffer(), start_ptr, m_remap_buf_size);
-    memcpy(start_ptr, m_remap_buf->get_buffer() + m_bytes_per_channel * 4, m_bytes_per_channel);
+
+    memcpy(m_remap_buf->get_buffer(),           start_ptr,                                           m_remap_buf_size);
+    memcpy(start_ptr,                           m_remap_buf->get_buffer() + m_bytes_per_channel * 4, m_bytes_per_channel);
     // BL and BR stay at the same place
-    memcpy(start_ptr + m_bytes_per_channel * 3, m_remap_buf->get_buffer(), m_bytes_per_channel);
-    memcpy(start_ptr + m_bytes_per_channel * 4,
-	   m_remap_buf->get_buffer() + m_bytes_per_channel * 3, m_bytes_per_channel);
+    memcpy(start_ptr + m_bytes_per_channel * 3, m_remap_buf->get_buffer(),                           m_bytes_per_channel);
+    memcpy(start_ptr + m_bytes_per_channel * 4, m_remap_buf->get_buffer() + m_bytes_per_channel * 3, m_bytes_per_channel);
+
     start_ptr += m_remap_buf_size;
   }
 }
@@ -120,9 +125,11 @@ bluray_pcm_channel_layout_packet_converter_c::convert(packet_cptr const &packet)
     auto remainder = packet->data->get_size() % (m_bytes_per_channel * m_num_output_channels);
     if (remainder != 0)
       packet->data->set_size(packet->data->get_size() - remainder);
+
     (this->*m_remap)(packet);
   }
 
   m_ptzr->process(packet);
+
   return true;
 }
