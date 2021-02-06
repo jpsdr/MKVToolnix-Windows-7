@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2021-02-03 19:38+0100\n"
-"PO-Revision-Date: 2021-02-03 18:47+0000\n"
-"Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
+"PO-Revision-Date: 2021-02-04 10:50+0000\n"
+"Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -2338,7 +2338,7 @@ msgstr "Le format &matroska; prend en charge une profondeur arbitraire de struct
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:878
 msgid "For this splitting mode the output filename is treated differently than for the normal operation. It may contain a <function>printf</function> like expression '<code>%d</code>' including an optional field width, e.g. '<code>%02d</code>'. If it does then the current file number will be formatted appropriately and inserted at that point in the filename.  If there is no such pattern then a pattern of '<code>-%03d</code>' is assumed right before the file's extension: '<code>-o output.mkv</code>' would result in '<code>output-001.mkv</code>' and so on. If there's no extension then '<code>-%03d</code>' will be appended to the name."
-msgstr "Pour ce mode de scission, le nom de fichier cible est traité différemment qu'en opération normale. Il peut contenir un <function>printf</function> comme l'expression '<code>%d</code>' et inclure une largeur de champ optionnelle, par ex. '<code>%02d</code>'. Si c'est le cas, alors le numéro de fichier actuel sera formaté de manière appropriée et inséré à ce point dans le nom de fichier. S'il n'y a pas un tel motif, alors un motif de '<code>-%03d</code>' est supposé juste avant l'extension de du fichier : '<code>-o output.mkv</code>' résulterait en '<code>output-001.mkv</code>' et ainsi de suite. S'il n'y a pas d'extension, alors '<code>-%03d</code>' sera ajouté au nom."
+msgstr "Pour ce mode de scission, le nom de fichier cible est traité différemment qu'en opération normale. Il peut contenir un <function>printf</function> comme l'expression '<code>%d</code>' et inclure une largeur de champ facultative, par ex. '<code>%02d</code>'. Si c'est le cas, alors le numéro de fichier actuel sera formaté de manière appropriée et inséré à ce point dans le nom de fichier. S'il n'y a pas un tel motif, alors un motif de '<code>-%03d</code>' est supposé juste avant l'extension de du fichier : '<code>-o output.mkv</code>' résulterait en '<code>output-001.mkv</code>' et ainsi de suite. S'il n'y a pas d'extension, alors '<code>-%03d</code>' sera ajouté au nom."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:887
@@ -2796,10 +2796,8 @@ msgstr "<option>--default-track</option> <parameter>TID<optional>:bool</optional
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1391
-#, fuzzy
-#| msgid "Sets the 'default' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present.  If the user does not explicitly select a track himself then the player should prefer the track that has his 'default' flag set. Only one track of each kind (audio, video, subtitles, buttons) can have his 'default' flag set.  If the user wants no track to have the default track flag set then he has to set <parameter>bool</parameter> to <constant>0</constant> for all tracks."
 msgid "Sets the &amp;default track&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  If the user does not explicitly select a track, the player should prefer the track that has his &amp;default track&amp; flag set. Only one track of each kind (audio, video, subtitles, buttons) can have his &amp;default track&amp; flag set.  If the user wants no track to have the default track flag set then he has to set <parameter>bool</parameter> to <constant>0</constant> for all tracks."
-msgstr "Définit le signal « Par défaut » pour la piste donnée (voir la section des <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument optionnel <parameter>bool</parameter> n'est pas présent. Si l'utilisateur ne sélectionne pas explicitement une piste lui-même, alors le lecteur devrait préférer la piste que a le signal « Par défaut » défini. Une seule piste de chaque type (audio, vidéo, sous-titres, boutons) peut avoir son signal « Par défaut » défini. Si l'utilisateur ne veut pas de piste avec ce signal défini, il doit définir la valeur <parameter>bool</parameter> à <constant>0</constant> pour toutes les pistes."
+msgstr "Pose le signal « Piste par défaut » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif <parameter>bool</parameter> est défini à <constant>1</constant> ou s'il n'est pas présent. Si l'utilisateur ne sélectionne pas explicitement une piste, le lecteur devrait préférer la piste avec le signal « Piste par défaut » posé. Une seule piste de chaque type (audio, vidéo, sous-titres, boutons) peut avoir son signal « Piste par défaut » posé. Si l'utilisateur ne veut aucune piste avec ce signal posé, il doit définir la valeur <parameter>bool</parameter> à <constant>0</constant> pour toutes les pistes."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1405
@@ -2808,80 +2806,58 @@ msgstr "<option>--forced-track</option> <parameter>TID<optional>:bool</optional>
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1408
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. Use this for tracks containing onscreen text or foreign-language dialogue."
 msgid "Sets the &amp;forced display&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  Use this for tracks containing onscreen text or foreign-language dialogue."
-msgstr "Pose le signal « Piste forcée » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif  <parameter>bool</parameter> n'est pas présent. Utiliser ceci pour les pistes contenant du texte à l'écran ou des dialogues en langues étrangères."
+msgstr "Pose le signal « Affichage forcé » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif  <parameter>bool</parameter> n'est pas présent. Utiliser ceci pour les pistes contenant du texte à l'écran ou des dialogues en langues étrangères."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1420
-#, fuzzy
-#| msgid "<option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--hearing-impaired-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--hearing-impaired-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1423
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. Use this for tracks containing onscreen text or foreign-language dialogue."
 msgid "Sets the &amp;hearing impaired&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is suitable for users with hearing impairments."
-msgstr "Pose le signal « Piste forcée » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif  <parameter>bool</parameter> n'est pas présent. Utiliser ceci pour les pistes contenant du texte à l'écran ou des dialogues en langues étrangères."
+msgstr "Pose le signal « Malentendant » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif <parameter>bool</parameter> est défini à <constant>1</constant> ou s'il n'est pas présent. Ce signal peut être posé si la piste est adaptée aux utilisateurs malentendants."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1435
-#, fuzzy
-#| msgid "<option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--visual-impaired-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--visual-impaired-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1438
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. Use this for tracks containing onscreen text or foreign-language dialogue."
 msgid "Sets the &amp;visual impaired&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is suitable for users with visual impairments."
-msgstr "Pose le signal « Piste forcée » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif  <parameter>bool</parameter> n'est pas présent. Utiliser ceci pour les pistes contenant du texte à l'écran ou des dialogues en langues étrangères."
+msgstr "Pose le signal « Malvoyant » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif <parameter>bool</parameter> est défini à <constant>1</constant> ou s'il n'est pas présent. Ce signal peut être posé si la piste est adaptée aux utilisateurs malvoyants."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1450
-#, fuzzy
-#| msgid "<option>--default-track</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--text-descriptions-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--default-track</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--text-descriptions-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1453
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. Use this for tracks containing onscreen text or foreign-language dialogue."
 msgid "Sets the &amp;text descriptions&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."
-msgstr "Pose le signal « Piste forcée » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif  <parameter>bool</parameter> n'est pas présent. Utiliser ceci pour les pistes contenant du texte à l'écran ou des dialogues en langues étrangères."
+msgstr "Pose le signal « Audiodescription » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif <parameter>bool</parameter> est défini à <constant>1</constant> ou s'il n'est pas présent. Ce signal peut être posé si la piste contient l'audiodescription de contenu vidéo adaptée à la lecture vocale pour l'utilisateur malvoyant"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1466
-#, fuzzy
-#| msgid "<option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--original-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--original-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1469
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. Use this for tracks containing onscreen text or foreign-language dialogue."
 msgid "Sets the &amp;original language&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is in the content's original language (not a translation)."
-msgstr "Pose le signal « Piste forcée » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif  <parameter>bool</parameter> n'est pas présent. Utiliser ceci pour les pistes contenant du texte à l'écran ou des dialogues en langues étrangères."
+msgstr "Pose le signal « Langue d'origine  » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif  <parameter>bool</parameter> n'est pas présent. Ce signal peut être posé si la piste est dans la langue d'origine du contenu (pas une traduction)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1481
-#, fuzzy
-#| msgid "<option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--commentary-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--commentary-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1484
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. Use this for tracks containing onscreen text or foreign-language dialogue."
 msgid "Sets the &amp;commentary&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track contains commentary."
-msgstr "Pose le signal « Piste forcée » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif  <parameter>bool</parameter> n'est pas présent. Utiliser ceci pour les pistes contenant du texte à l'écran ou des dialogues en langues étrangères."
+msgstr "Pose le signal « Commentaire » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif <parameter>bool</parameter> est défini à <constant>1</constant> ou s'il n'est pas présent. Ce signal peut être posé si la piste contient des commentaires."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1496
@@ -2951,7 +2927,7 @@ msgstr "<option>--reduce-to-core</option> <parameter>TID</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1570
 msgid "Some audio codecs have a lossy core and optional extensions that implement lossless decoding. This option tells &mkvmerge; to only copy the core but not the extensions. By default &mkvmerge; copies both the core and the extensions."
-msgstr "Quelques codecs audio ont un cœur avec perte et des extensions optionnelles qui implémentent un décodage sans perte. Cette option indique à &mkvmerge; de copier seulement le cœur mais pas les extensions. Par défaut &mkvmerge; copie le cœur et les extensions."
+msgstr "Quelques codecs audio ont un cœur avec perte et des extensions facultatives qui implémentent un décodage sans perte. Cette option indique à &mkvmerge; de copier seulement le cœur mais pas les extensions. Par défaut &mkvmerge; copie le cœur et les extensions."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1575
@@ -3442,10 +3418,8 @@ msgstr "Le format <literal>json</literal> génère une représentation JSON lisi
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2088
-#, fuzzy
-#| msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v12.json\"><literal>mkvmerge-identification-output-schema-v12.json</literal></ulink>"
 msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v14.json\"><literal>mkvmerge-identification-output-schema-v14.json</literal></ulink>"
-msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v12.json\"><literal>mkvmerge-identification-output-schema-v12.json</literal></ulink>"
+msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v14.json\"><literal>mkvmerge-identification-output-schema-v14.json</literal></ulink>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2092
@@ -3570,7 +3544,7 @@ msgstr "<option>--capabilities</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2295
 msgid "Lists information about optional features that have been compiled in and exit. The first line output will be the version information. All following lines contain exactly one word whose presence indicates that the feature has been compiled in. These features are:"
-msgstr "Liste les informations à propos des fonctionnalités optionnelles qui ont été compilées et quitte. La première ligne de sortie sera l'information de version. Touts les lignes suivantes contiennent exactement un mot dont la présence indique que la fonctionnalité a été compilée. Ces fonctionnalités sont :"
+msgstr "Liste les informations à propos des fonctionnalités optionnelles qui ont été compilées et quitte. La première ligne de sortie sera l'information de version. Toutes les lignes suivantes contiennent exactement un mot dont la présence indique que la fonctionnalité a été compilée. Ces fonctionnalités sont :"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2303
@@ -4631,7 +4605,7 @@ msgstr "[EBML head] [segment {meta seek #1} [segment information] [track informa
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3202
 msgid "The elements in curly braces are optional and depend on the contents and options used. A couple of notes:"
-msgstr "Les éléments entre accolades sont optionnels et dépendent du contenu et des options utilisées. Quelques remarques :"
+msgstr "Les éléments entre accolades sont facultatifs et dépendent des contenus et des options utilisées. Quelques remarques :"
 
 #. type: Content of: <refentry><refsect1><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:3208
@@ -4740,7 +4714,7 @@ msgstr "Format de fichier d'horodatage v3"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:3287
 msgid "In this format each line contains a duration in seconds followed by an optional number of frames per second.  Both can be floating point numbers.  If the number of frames per second is not present the default one is used.  For audio you should let the codec calculate the frame timestamps itself.  For that you should be using <constant>0.0</constant> as the number of frames per second.  You can also create gaps in the stream by using the '<literal>gap</literal>' keyword followed by the duration of the gap.  Example for an audio file:"
-msgstr "Dans ce format chaque ligne contient une durée en secondes suivie par un nombre optionnel de trames par seconde. Les deux peuvent être des nombres flottants. Si le nombre de trames par seconde n'est pas présent, celui par défaut est utilisé. Pour audio il est préférable de laisser le codec calculer les horodatages de trames lui-même. Pour cela on devrait utiliser <constant>0.0</constant> comme nombre de trames par seconde. Il est aussi possible de créer des blancs dans le flux en utilisant les mot clé '<literal>gap</literal>' suivi par la durée de ce blanc. Exemple pour un fichier audio :"
+msgstr "Dans ce format chaque ligne contient une durée en secondes suivie par un nombre facultatif de trames par seconde. Les deux peuvent être des nombres flottants. Si le nombre de trames par seconde n'est pas présent, celui par défaut est utilisé. Pour l'audio il est préférable de laisser le codec calculer les horodatages de trames lui-même. Pour cela on devrait utiliser <constant>0.0</constant> comme nombre de trames par seconde. Il est aussi possible de créer des blancs dans le flux en utilisant les mot clé '<literal>gap</literal>' suivi par la durée de ce blanc. Exemple pour un fichier audio :"
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvmerge.xml:3293
