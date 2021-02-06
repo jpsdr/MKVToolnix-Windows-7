@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-   Removal of superfluous extra channel on Blu-ray PCM with odd number of channels
+   Fix channel layout for Blu-ray PCM
 
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
@@ -16,18 +16,28 @@
 #include "input/bluray_pcm_channel_layout_packet_converter.h"
 #include "merge/generic_packetizer.h"
 
-bluray_pcm_channel_removal_packet_converter_c::bluray_pcm_channel_removal_packet_converter_c(std::size_t bytes_per_channel,
+bluray_pcm_channel_layout_packet_converter_c::bluray_pcm_channel_layout_packet_converter_c(std::size_t bytes_per_channel,
                                                                                              std::size_t num_input_channels,
                                                                                              std::size_t num_output_channels)
   : packet_converter_c{nullptr}
   , m_bytes_per_channel{bytes_per_channel}
   , m_num_input_channels{num_input_channels}
   , m_num_output_channels{num_output_channels}
+  , m_remap_buf_size{0}
 {
+  if (m_num_output_channels == 6)
+    m_remap_buf_size = m_bytes_per_channel * 3;
+  else if (m_num_output_channels == 7)
+    m_remap_buf_size = m_bytes_per_channel * 3;
+  else if (m_num_output_channels == 8)
+    m_remap_buf_size = m_bytes_per_channel * 5;
+
+  if (m_remap_buf_size > 0)
+    m_remap_buf = memory_c::alloc(m_remap_buf_size);
 }
 
-bool
-bluray_pcm_channel_removal_packet_converter_c::convert(packet_cptr const &packet) {
+void
+bluray_pcm_channel_layout_packet_converter_c::removal(packet_cptr const &packet) {
   auto start_ptr                  = packet->data->get_buffer();
   auto end_ptr                    = start_ptr + packet->data->get_size();
   auto input_ptr                  = start_ptr;
@@ -44,8 +54,53 @@ bluray_pcm_channel_removal_packet_converter_c::convert(packet_cptr const &packet
   }
 
   packet->data->set_size(output_ptr - start_ptr);
+}
+
+void
+bluray_pcm_channel_layout_packet_converter_c::remap(packet_cptr const &packet) {
+  auto start_ptr                  = packet->data->get_buffer();
+  auto end_ptr                    = start_ptr + packet->data->get_size();
+
+  if (m_num_output_channels == 6) { // post-remap order: FL FR FC LFE BL BR
+    while (start_ptr != end_ptr) {
+      start_ptr += m_bytes_per_channel * 3;
+      memcpy(m_remap_buf->get_buffer(), start_ptr, m_remap_buf_size);
+      memcpy(start_ptr, m_remap_buf->get_buffer() + m_bytes_per_channel * 2, m_bytes_per_channel);
+      memcpy(start_ptr + m_bytes_per_channel, m_remap_buf->get_buffer(), m_bytes_per_channel * 2);
+      start_ptr += m_remap_buf_size;
+    }
+  } else if (m_num_output_channels == 7) { // post-remap order: FL FR FC BL BR SL SR
+    while (start_ptr != end_ptr) {
+      start_ptr += m_bytes_per_channel * 3;
+      memcpy(m_remap_buf->get_buffer(), start_ptr, m_remap_buf_size);
+      memcpy(start_ptr, m_remap_buf->get_buffer() + m_bytes_per_channel, m_bytes_per_channel * 2);
+      memcpy(start_ptr + m_bytes_per_channel * 2, m_remap_buf->get_buffer(), m_bytes_per_channel);
+      start_ptr += m_remap_buf_size + m_bytes_per_channel;
+    }
+  } else if (m_num_output_channels == 8) { // post-remap order: FL FR FC LFE BL BR SL SR
+    while (start_ptr != end_ptr) {
+      start_ptr += m_bytes_per_channel * 3;
+      memcpy(m_remap_buf->get_buffer(), start_ptr, m_remap_buf_size);
+      memcpy(start_ptr, m_remap_buf->get_buffer() + m_bytes_per_channel * 4, m_bytes_per_channel);
+      // BL and BR stay at the same place
+      memcpy(start_ptr + m_bytes_per_channel * 3, m_remap_buf->get_buffer(), m_bytes_per_channel);
+      memcpy(start_ptr + m_bytes_per_channel * 4,
+             m_remap_buf->get_buffer() + m_bytes_per_channel * 3, m_bytes_per_channel);
+      start_ptr += m_remap_buf_size;
+    }
+  }
+}
+
+bool
+bluray_pcm_channel_layout_packet_converter_c::convert(packet_cptr const &packet) {
+  // remove superfluous extra channel
+  if ((m_num_output_channels % 2) != 0)
+    removal(packet);
+
+  // remap channels into WAVEFORMATEXTENSIBLE channel order
+  if (m_remap_buf)
+    remap(packet);
 
   m_ptzr->process(packet);
-
   return true;
 }
