@@ -9,6 +9,10 @@
   following new track header elements: "hearing impaired" flag, "visual
   impaired" flag, "text descriptions" flag, "original" flag, "commentary"
   flag. Implements #3011.
+* mkvmerge: MPEG transport stream reader, PCM audio tracks: mkvmerge will now
+  re-order the channels for 5.1, 7.0 and 7.1 channel tracks from the Blu-ray
+  layout to the WAVEFORMATEXTENSIBLE layout expected in Matroska. Patch by Tom
+  Yan. Implements #2988.
 
 ## Bug fixes
 
