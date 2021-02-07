@@ -97,19 +97,33 @@ frame_c::add_dependent_frame(frame_c const &frame,
 bool
 frame_c::decode_header(unsigned char const *buffer,
                        std::size_t buffer_size) {
-  mtx::bits::reader_c bc(buffer, buffer_size);
+  if (buffer_size < 18)
+    return false;
+
+  unsigned char swapped_buffer[18];
+  std::unique_ptr<mtx::bits::reader_c> r;
+
+  if (get_uint16_le(buffer) == AC3_SYNC_WORD) {
+    // byte-swapped
+    mtx::bytes::swap_buffer(buffer, swapped_buffer, 18, 2);
+    r.reset(new mtx::bits::reader_c(swapped_buffer, 18));
+
+  } else if (get_uint16_be(buffer) == AC3_SYNC_WORD)
+    r.reset(new mtx::bits::reader_c(buffer, 18));
+
+  else
+    return false;
 
   try {
     init();
 
-    if (AC3_SYNC_WORD != bc.get_bits(16))
-      return false;
+    r->set_bit_position(16);
+    m_bs_id = r->get_bits(29) & 0x1f;
+    r->set_bit_position(16);
 
-    m_bs_id = bc.get_bits(29) & 0x1f;
-    bc.set_bit_position(16);
-    m_valid = 0x10 == m_bs_id ? decode_header_type_eac3(bc)
+    m_valid = 0x10 == m_bs_id ? decode_header_type_eac3(*r)
             : 0x0c <= m_bs_id ? false
-            :                   decode_header_type_ac3(bc);
+            :                   decode_header_type_ac3(*r);
 
   } catch (mtx::mm_io::end_of_file_x &) {
   }
@@ -425,14 +439,23 @@ parser_c::get_parsed_stream_position()
 
 void
 parser_c::parse(bool end_of_stream) {
+  unsigned char swapped_buffer[18];
   unsigned char *const buffer = m_buffer.get_buffer();
   std::size_t buffer_size     = m_buffer.get_size();
   std::size_t position        = 0;
 
-  while ((position + 8) < buffer_size) {
+  while ((position + 18) < buffer_size) {
     frame_c frame;
+    unsigned char const *buffer_to_decode;
 
-    if (!frame.decode_header(&buffer[position], buffer_size - position)) {
+    if (get_uint16_le(&buffer[position]) == AC3_SYNC_WORD) {
+      mtx::bytes::swap_buffer(&buffer[position], swapped_buffer, 18, 2);
+      buffer_to_decode = swapped_buffer;
+
+    } else
+      buffer_to_decode = &buffer[position];
+
+    if (!frame.decode_header(buffer_to_decode, 18)) {
       ++position;
       ++m_garbage_size;
       continue;
@@ -440,6 +463,9 @@ parser_c::parse(bool end_of_stream) {
 
     if ((position + frame.m_bytes) > buffer_size)
       break;
+
+    if (buffer_to_decode == swapped_buffer)
+      mtx::bytes::swap_buffer(&buffer[position], &buffer[position], frame.m_bytes, 2);
 
     frame.m_stream_position = m_parsed_stream_position + position;
 

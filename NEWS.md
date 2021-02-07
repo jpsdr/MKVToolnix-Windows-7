@@ -13,6 +13,8 @@
   re-order the channels for 5.1, 7.0 and 7.1 channel tracks from the Blu-ray
   layout to the WAVEFORMATEXTENSIBLE layout expected in Matroska. Patch by Tom
   Yan. Implements #2988.
+* mkvmerge: AC-3 parser: added support for byte-swapped AC-3 data. Implements
+  #3022.
 
 ## Bug fixes
 
