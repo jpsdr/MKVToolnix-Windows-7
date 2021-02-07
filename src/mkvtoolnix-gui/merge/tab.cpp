@@ -255,8 +255,8 @@ Tab::defaultFileNameForSaving(QString const &ext) {
 }
 
 QString
-Tab::determineInitialDir(QLineEdit *lineEdit,
-                         InitialDirMode mode)
+Tab::determineInitialDirForOpening(QLineEdit *lineEdit,
+                                   InitialDirMode mode)
   const {
   auto &p = *p_func();
 
@@ -282,7 +282,7 @@ Tab::getOpenFileName(QString const &title,
   fullFilter += QY("All files") + Q(" (*)");
 
   auto &settings = Util::Settings::get();
-  auto dir       = determineInitialDir(lineEdit, initialDirMode);
+  auto dir       = determineInitialDirForOpening(lineEdit, initialDirMode);
   auto fileName  = Util::getOpenFileName(this, title, dir, fullFilter);
   if (fileName.isEmpty())
     return fileName;
