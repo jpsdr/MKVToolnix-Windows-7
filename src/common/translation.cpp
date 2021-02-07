@@ -359,12 +359,6 @@ init_locales(std::string locale) {
     translation_c::set_active_translation(locale);
   }
 
-  // Boost's path class uses wide chars on Windows for path
-  // names. Tell that all narrow strings are encoded in UTF-8.
-  std::locale utf8_locale(std::locale(), new mtx::utf8_codecvt_facet);
-  std::locale::global(utf8_locale);
-  boost::filesystem::path::imbue(utf8_locale);
-
   locale_dir = g_cc_local_utf8->native((mtx::sys::get_installation_path() / "locale").string());
 
 # else  // SYS_WINDOWS
@@ -435,6 +429,17 @@ init_locales(std::string locale) {
   bindtextdomain("mkvtoolnix", locale_dir.c_str());
   textdomain("mkvtoolnix");
   bind_textdomain_codeset("mkvtoolnix", "UTF-8");
+}
+
+void
+translation_c::initialize_std_and_boost_filesystem_locales() {
+#if defined(SYS_WINDOWS)
+  // Boost's path class uses wide chars on Windows for path
+  // names. Tell that all narrow strings are encoded in UTF-8.
+  std::locale utf8_locale(std::locale(), new mtx::utf8_codecvt_facet);
+  std::locale::global(utf8_locale);
+  boost::filesystem::path::imbue(utf8_locale);
+#endif
 }
 
 #else  // HAVE_LIBINTL_H

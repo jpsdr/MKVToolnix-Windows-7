@@ -176,11 +176,15 @@ mtx_common_init(std::string const &program_name,
   ExcHndlInit();
 #endif
 
-  mtx::sys::determine_path_to_current_executable(argv0 ? std::string{argv0} : std::string{});
-
   random_c::init();
 
   g_cc_local_utf8 = charset_converter_c::init("");
+
+#if defined(HAVE_LIBINTL_H)
+  translation_c::initialize_std_and_boost_filesystem_locales();
+#endif
+
+  mtx::sys::determine_path_to_current_executable(argv0 ? std::string{argv0} : std::string{});
 
   init_common_output(true);
 
