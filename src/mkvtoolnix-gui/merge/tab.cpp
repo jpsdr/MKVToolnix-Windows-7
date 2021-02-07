@@ -22,6 +22,7 @@
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
 #include <QComboBox>
+#include <QDebug>
 #include <QDir>
 #include <QMenu>
 #include <QTreeView>
@@ -296,6 +297,42 @@ Tab::getOpenFileName(QString const &title,
   return fileName;
 }
 
+QString
+Tab::determineInitialDirForSaving(QLineEdit *lineEdit)
+  const {
+  auto &p        = *p_func();
+  auto &settings = Util::Settings::get();
+  QString dir;
+
+  if (lineEdit && !lineEdit->text().isEmpty())
+    dir = QFileInfo{lineEdit->text()}.path();
+
+  else if (settings.m_outputFileNamePolicy == Util::Settings::ToFixedDirectory)
+    dir = settings.m_fixedOutputDir.path();
+
+  else if (   (settings.m_outputFileNamePolicy == Util::Settings::ToParentOfFirstInputFile)
+           || (settings.m_outputFileNamePolicy == Util::Settings::ToSameAsFirstInputFile)
+           || (settings.m_outputFileNamePolicy == Util::Settings::ToRelativeOfFirstInputFile)) {
+    if (!p.config.m_files.isEmpty()) {
+      auto firstDir = QFileInfo{p.config.m_files.at(0)->m_fileName}.path();
+      dir           = settings.m_outputFileNamePolicy == Util::Settings::ToParentOfFirstInputFile ? QFileInfo{firstDir}.path()
+                    : settings.m_outputFileNamePolicy == Util::Settings::ToSameAsFirstInputFile   ? firstDir
+                    :                                                                               firstDir + Q("/") + settings.m_relativeOutputDir.path();
+    }
+
+  } else if (!settings.m_lastOutputDir.path().isEmpty() && (settings.m_lastOutputDir.path() != Q(".")))
+    dir = settings.m_lastOutputDir.path();
+
+  qDebug() << "determineInitialDirForSaving()"
+           << "dir"      << dir
+           << "lineEdit" << (lineEdit ? lineEdit->text() : QString{})
+           << "mode"     << settings.m_outputFileNamePolicy
+           << "fixed"    << settings.m_fixedOutputDir.path()
+           << "relative" << settings.m_relativeOutputDir.path()
+           << "lastOut"  << settings.m_lastOutputDir.path();
+
+  return Util::dirPath(dir);
+}
 
 QString
 Tab::getSaveFileName(QString const &title,
@@ -308,14 +345,14 @@ Tab::getSaveFileName(QString const &title,
     fullFilter += Q(";;");
   fullFilter += QY("All files") + Q(" (*)");
 
-  auto &settings = Util::Settings::get();
-  auto dir       = !lineEdit->text().isEmpty()                                                               ? lineEdit->text()
-                 : !settings.m_lastOutputDir.path().isEmpty() && (settings.m_lastOutputDir.path() != Q(".")) ? Util::dirPath(settings.m_lastOutputDir.path())
-                 :                                                                                             Util::dirPath(settings.m_lastOpenDir.path());
-  auto fileName  = Util::getSaveFileName(this, title, dir, defaultFileName, fullFilter, defaultSuffix);
+  auto dir      = determineInitialDirForSaving(lineEdit);
+  auto fileName = Util::getSaveFileName(this, title, dir, defaultFileName, fullFilter, defaultSuffix);
+
+
   if (fileName.isEmpty())
     return fileName;
 
+  auto &settings = Util::Settings::get();
   settings.m_lastOutputDir.setPath(QFileInfo{fileName}.path());
   settings.save();
 

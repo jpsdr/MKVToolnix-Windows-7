@@ -22,6 +22,11 @@
   DVDs. Fix by Tom Yan.
 * mkvextract: AAC: fixed wrong channel mask field in the ADTS headers for 7.1
   channel layouts. Fix by Tom Yan. Fixes #2636.
+* MKVToolNix GUI: multiplexer: when browsing for the destination file name the
+  default directory is now chosen according to the preferences regarding how
+  the destination file name should be formed. For example, if the policy is
+  set to "fixed output directory" then that output directory will be the one
+  initially set when the directory selection dialog is opened. Fixes #3021.
 
 ## Build system changes
 

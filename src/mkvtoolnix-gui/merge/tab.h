@@ -269,6 +269,7 @@ protected:
   virtual QString getOpenFileName(QString const &title, QString const &filter, QLineEdit *lineEdit, InitialDirMode intialDirMode = InitialDirMode::ContentLastOpenDir);
   virtual QString getSaveFileName(QString const &title, QString const &defaultFileName, QString const &filter, QLineEdit *lineEdit, QString const &defaultSuffix);
   virtual QString determineInitialDirForOpening(QLineEdit *lineEdit, InitialDirMode mode) const;
+  virtual QString determineInitialDirForSaving(QLineEdit *lineEdit) const;
   virtual QString defaultFileNameForSaving(QString const &ext);
 
   virtual void moveSourceFilesUpOrDown(bool up);
