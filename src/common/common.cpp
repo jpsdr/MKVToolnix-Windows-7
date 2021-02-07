@@ -89,8 +89,6 @@ mtx_common_cleanup() {
     g_mm_stdio = std::shared_ptr<mm_io_c>(new mm_stdio_c);
   }
 
-  mm_file_io_c::cleanup();
-
   matroska_done();
 }
 
@@ -199,7 +197,6 @@ mtx_common_init(std::string const &program_name,
 
   init_locales();
 
-  mm_file_io_c::setup();
   init_common_output(false);
 
   mtx::iana::language_subtag_registry::init();

@@ -42,8 +42,6 @@ public:
   static void prepare_path(const std::string &path);
   static memory_cptr slurp(std::string const &file_name);
 
-  static void setup();
-  static void cleanup();
   static mm_io_cptr open(const std::string &path, const open_mode mode = MODE_READ);
 
   static void enable_flushing_on_close(bool enable);

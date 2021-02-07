@@ -150,9 +150,3 @@ mm_file_io_c::truncate(int64_t pos) {
   p->cached_size = -1;
   return ftruncate(fileno(p->file), pos);
 }
-
-/** \brief OS and kernel dependant setup
-*/
-void
-mm_file_io_c::setup() {
-}

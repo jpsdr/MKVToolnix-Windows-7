@@ -192,7 +192,3 @@ mm_file_io_c::truncate(int64_t pos) {
 
   return -1;
 }
-
-void
-mm_file_io_c::setup() {
-}

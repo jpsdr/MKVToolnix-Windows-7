@@ -77,10 +77,6 @@ mm_file_io_c::~mm_file_io_c() {
   p_func()->file_name.clear();
 }
 
-void
-mm_file_io_c::cleanup() {
-}
-
 std::string
 mm_file_io_c::get_file_name()
   const {
