@@ -27,6 +27,7 @@
   the destination file name should be formed. For example, if the policy is
   set to "fixed output directory" then that output directory will be the one
   initially set when the directory selection dialog is opened. Fixes #3021.
+* all: fixed compatibility with gettext 0.21 and newer on mingw (Windows).
 
 ## Build system changes
 

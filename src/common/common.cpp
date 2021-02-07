@@ -178,6 +178,8 @@ mtx_common_init(std::string const &program_name,
   ExcHndlInit();
 #endif
 
+  mtx::sys::determine_path_to_current_executable(argv0 ? std::string{argv0} : std::string{});
+
   random_c::init();
 
   g_cc_local_utf8 = charset_converter_c::init("");
@@ -205,8 +207,6 @@ mtx_common_init(std::string const &program_name,
   mtx::iso3166::init();
   mtx::iso15924::init();
   stereo_mode_c::init();
-
-  mtx::sys::determine_path_to_current_executable(argv0 ? std::string{argv0} : std::string{});
 }
 
 std::string const &
