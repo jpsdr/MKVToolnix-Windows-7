@@ -430,6 +430,8 @@ init_locales(std::string locale) {
   mxdebug_if(debug, fmt::format("[init_locales setenv() return code: {0}]\n", result));
 # endif
 
+  mxdebug_if(debug, fmt::format("[init_locales locale_dir: {0}]\n", locale_dir));
+
   bindtextdomain("mkvtoolnix", locale_dir.c_str());
   textdomain("mkvtoolnix");
   bind_textdomain_codeset("mkvtoolnix", "UTF-8");
