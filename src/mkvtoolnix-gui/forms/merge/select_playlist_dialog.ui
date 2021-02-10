@@ -24,7 +24,7 @@
      </property>
      <widget class="QGroupBox" name="gbPlaylists">
       <property name="title">
-       <string>Select playlist to add</string>
+       <string>Select one or more playlists to add</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_6">
        <item>
@@ -55,6 +55,9 @@
              </property>
              <property name="showDropIndicator" stdset="0">
               <bool>false</bool>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::ExtendedSelection</enum>
              </property>
              <column>
               <property name="text">

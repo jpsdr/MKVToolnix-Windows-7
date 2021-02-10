@@ -358,34 +358,41 @@ SelectPlaylistDialog::onScannedFileSelected(QTreeWidgetItem *current,
   Util::resizeViewColumnsToContents(ui->playlistItems);
 }
 
-SourceFilePtr
+QVector<SourceFilePtr>
 SelectPlaylistDialog::select() {
   if (exec() == QDialog::Rejected)
     return {};
 
-  auto modelIdx = Util::selectedRowIdx(ui->scannedFiles);
-  if (!modelIdx.isValid())
+  QVector<SourceFilePtr> selectedSourceFiles;
+  Util::withSelectedIndexes(ui->scannedFiles, [this, &selectedSourceFiles](QModelIndex const &sourceFileIdx) {
+      if (!sourceFileIdx.isValid())
+        return;
+
+      auto fileItem = dynamic_cast<ScannedFileItem *>(ui->scannedFiles->invisibleRootItem()->child(sourceFileIdx.row()));
+      if (!fileItem)
+        return;
+
+      auto idx = Util::findPtr(fileItem->m_file, m_scannedFiles);
+      if (idx < 0)
+        return;
+
+      selectedSourceFiles << m_scannedFiles[idx];
+    });
+
+  if (selectedSourceFiles.isEmpty())
     return {};
 
-  auto fileItem = dynamic_cast<ScannedFileItem *>(ui->scannedFiles->invisibleRootItem()->child(modelIdx.row()));
-  if (!fileItem)
-    return {};
+  auto discLibraryIdx = Util::selectedRowIdx(ui->discLibrary);
 
-  auto idx = Util::findPtr(fileItem->m_file, m_scannedFiles);
-  if (idx < 0)
-    return {};
+  if (!discLibraryIdx.isValid())
+    return selectedSourceFiles;
 
-  auto sourceFile = m_scannedFiles[idx];
-  modelIdx        = Util::selectedRowIdx(ui->discLibrary);
-
-  if (!modelIdx.isValid())
-    return sourceFile;
-
-  auto libraryItem = dynamic_cast<DiscLibraryItem *>(ui->discLibrary->invisibleRootItem()->child(modelIdx.row()));
+  auto libraryItem = dynamic_cast<DiscLibraryItem *>(ui->discLibrary->invisibleRootItem()->child(discLibraryIdx.row()));
   if (libraryItem)
-    sourceFile->m_discLibraryInfoToAdd = libraryItem->m_info;
+    for (auto &sourceFile : selectedSourceFiles)
+      sourceFile->m_discLibraryInfoToAdd = libraryItem->m_info;
 
-  return sourceFile;
+  return selectedSourceFiles;
 }
 
 }

@@ -767,9 +767,9 @@ Tool::selectPlaylistToAdd(QVector<SourceFilePtr> const &identifiedPlaylists) {
     return;
   }
 
-  auto playlist = SelectPlaylistDialog{this, identifiedPlaylists, discLibrary}.select();
+  auto playlists = SelectPlaylistDialog{this, identifiedPlaylists, discLibrary}.select();
 
-  if (playlist)
+  for (auto const &playlist : playlists)
     p.identifier->worker().addIdentifiedFile(playlist);
 
   p.identifier->continueIdentification();

@@ -15,6 +15,9 @@
   Yan. Implements #2988.
 * mkvmerge: AC-3 parser: added support for byte-swapped AC-3 data. Implements
   #3022.
+* MKVToolNix GUI: multiplexer: when adding Blu-rays the user can select
+  multiple playlists to add simultaneously in the "select playlist to add"
+  dialog. Implements #2961.
 
 ## Bug fixes
 

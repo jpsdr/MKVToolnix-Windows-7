@@ -29,7 +29,7 @@ public:
   explicit SelectPlaylistDialog(QWidget *parent, QVector<SourceFilePtr> const &scannedFiles, std::optional<mtx::bluray::disc_library::disc_library_t> const &discLibrary);
   ~SelectPlaylistDialog();
 
-  SourceFilePtr select();
+  QVector<SourceFilePtr> select();
 
 protected Q_SLOTS:
   void onScannedFileSelected(QTreeWidgetItem *current, QTreeWidgetItem *);
