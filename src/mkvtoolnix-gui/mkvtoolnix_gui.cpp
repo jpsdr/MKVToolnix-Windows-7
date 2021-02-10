@@ -11,6 +11,7 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/main_window/update_checker.h"
+#include "mkvtoolnix-gui/merge/file_identification_pack.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/installation_checker.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -56,6 +57,7 @@ registerMetaTypes() {
   qRegisterMetaType<QProcess::ExitStatus>("QProcess::ExitStatus");
   qRegisterMetaType<std::shared_ptr<Merge::SourceFile>>("std::shared_ptr<SourceFile>");
   qRegisterMetaType<QList<std::shared_ptr<Merge::SourceFile>>>("QList<std::shared_ptr<SourceFile>>");
+  qRegisterMetaType<QVector<std::shared_ptr<Merge::SourceFile>>>("QVector<std::shared_ptr<SourceFile>>");
   qRegisterMetaType<QFileInfoList>("QFileInfoList");
   qRegisterMetaType<mtx_release_version_t>("mtx_release_version_t");
   qRegisterMetaType<std::shared_ptr<pugi::xml_document>>("std::shared_ptr<pugi::xml_document>");
@@ -67,6 +69,7 @@ registerMetaTypes() {
   qRegisterMetaType<int64_t>("int64_t");
   qRegisterMetaType<EbmlElement *>("EbmlElement *");
   qRegisterMetaType<std::optional<int64_t>>("std::optional<int64_t>");
+  qRegisterMetaType<Merge::IdentificationPack>("Merge::IdentificationPack");
 }
 
 int

@@ -6,6 +6,7 @@
 #include <QString>
 #include <QStringList>
 #include <QVariant>
+#include <QVector>
 
 #include "common/bcp47.h"
 #include "mkvtoolnix-gui/util/config_file.h"
@@ -125,7 +126,7 @@ public:
   static void loadProperties(Util::ConfigFile &settings, QVariantMap &properties);
   static void debugDumpSpecificTrackList(QList<Track *> const &tracks);
   static QString settingsType();
-  static QString determineFirstInputFileName(QList<SourceFilePtr> const &files);
+  static QString determineFirstInputFileName(QVector<SourceFilePtr> const &files);
   static QString formatDelayAndStretchBy(QString const &delay, QString const &stretchBy);
 };
 

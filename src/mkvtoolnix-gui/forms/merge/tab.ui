@@ -15,2022 +15,2004 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QWidget" name="overlordWidget" native="true">
-     <layout class="QVBoxLayout" name="verticalLayout_25">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QTabWidget" name="tabs">
-        <property name="tabPosition">
-         <enum>QTabWidget::North</enum>
-        </property>
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <widget class="QWidget" name="inputTab">
-         <attribute name="title">
-          <string>&amp;Input</string>
-         </attribute>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QSplitter" name="mergeInputSplitter">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="childrenCollapsible">
-             <bool>false</bool>
-            </property>
-            <widget class="QSplitter" name="mergeFilesTracksSplitter">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="childrenCollapsible">
-              <bool>false</bool>
-             </property>
-             <widget class="QWidget" name="layoutWidget">
-              <layout class="QVBoxLayout" name="verticalLayout">
-               <item>
-                <widget class="QLabel" name="filesLabel">
-                 <property name="text">
-                  <string>Source &amp;files:</string>
-                 </property>
-                 <property name="buddy">
-                  <cstring>files</cstring>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_1">
-                 <item>
-                  <widget class="mtx::gui::Util::BasicTreeView" name="files">
-                   <property name="minimumSize">
-                    <size>
-                     <width>370</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="contextMenuPolicy">
-                    <enum>Qt::CustomContextMenu</enum>
-                   </property>
-                   <property name="acceptDrops">
-                    <bool>true</bool>
-                   </property>
-                   <property name="editTriggers">
-                    <set>QAbstractItemView::NoEditTriggers</set>
-                   </property>
-                   <property name="dragEnabled">
-                    <bool>true</bool>
-                   </property>
-                   <property name="dragDropMode">
-                    <enum>QAbstractItemView::InternalMove</enum>
-                   </property>
-                   <property name="defaultDropAction">
-                    <enum>Qt::MoveAction</enum>
-                   </property>
-                   <property name="alternatingRowColors">
-                    <bool>false</bool>
-                   </property>
-                   <property name="selectionMode">
-                    <enum>QAbstractItemView::ExtendedSelection</enum>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QWidget" name="moveFilesButtons" native="true">
-                   <layout class="QVBoxLayout" name="verticalLayout_1">
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QPushButton" name="moveFilesUp">
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="../../qt_resources.qrc">
-                        <normaloff>:/icons/16x16/arrow-up.png</normaloff>:/icons/16x16/arrow-up.png</iconset>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="moveFilesDown">
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="../../qt_resources.qrc">
-                        <normaloff>:/icons/16x16/arrow-down.png</normaloff>:/icons/16x16/arrow-down.png</iconset>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer_1">
-                      <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>20</width>
-                        <height>40</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QWidget" name="layoutWidget1">
-              <layout class="QVBoxLayout" name="verticalLayout_5">
-               <item>
-                <widget class="QLabel" name="tracksLabel">
-                 <property name="text">
-                  <string>&amp;Tracks, chapters and tags:</string>
-                 </property>
-                 <property name="buddy">
-                  <cstring>tracks</cstring>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_4">
-                 <item>
-                  <widget class="mtx::gui::Util::BasicTreeView" name="tracks">
-                   <property name="contextMenuPolicy">
-                    <enum>Qt::CustomContextMenu</enum>
-                   </property>
-                   <property name="acceptDrops">
-                    <bool>true</bool>
-                   </property>
-                   <property name="editTriggers">
-                    <set>QAbstractItemView::NoEditTriggers</set>
-                   </property>
-                   <property name="dragEnabled">
-                    <bool>true</bool>
-                   </property>
-                   <property name="dragDropMode">
-                    <enum>QAbstractItemView::InternalMove</enum>
-                   </property>
-                   <property name="defaultDropAction">
-                    <enum>Qt::MoveAction</enum>
-                   </property>
-                   <property name="selectionMode">
-                    <enum>QAbstractItemView::ExtendedSelection</enum>
-                   </property>
-                   <property name="expandsOnDoubleClick">
-                    <bool>false</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QWidget" name="moveTracksButtons" native="true">
-                   <layout class="QVBoxLayout" name="verticalLayout_13">
-                    <property name="leftMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="topMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="rightMargin">
-                     <number>0</number>
-                    </property>
-                    <property name="bottomMargin">
-                     <number>0</number>
-                    </property>
-                    <item>
-                     <widget class="QPushButton" name="moveTracksUp">
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="../../qt_resources.qrc">
-                        <normaloff>:/icons/16x16/arrow-up.png</normaloff>:/icons/16x16/arrow-up.png</iconset>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="moveTracksDown">
-                      <property name="text">
-                       <string/>
-                      </property>
-                      <property name="icon">
-                       <iconset resource="../../qt_resources.qrc">
-                        <normaloff>:/icons/16x16/arrow-down.png</normaloff>:/icons/16x16/arrow-down.png</iconset>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer">
-                      <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>20</width>
-                        <height>40</height>
-                       </size>
-                      </property>
-                     </spacer>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-             <widget class="QTabWidget" name="twProperties">
-              <property name="currentIndex">
-               <number>0</number>
-              </property>
-              <widget class="QWidget" name="generalOptionsPage">
-               <attribute name="title">
-                <string>General options</string>
-               </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_15">
-                <item>
-                 <spacer name="verticalSpacer_6">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </widget>
-              <widget class="QWidget" name="timestampsAndDefaultDurationPage">
-               <attribute name="title">
-                <string>Timestamps and default duration</string>
-               </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_16">
-                <item>
-                 <spacer name="verticalSpacer_7">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </widget>
-              <widget class="QWidget" name="videoPropertiesPage">
-               <attribute name="title">
-                <string>Video properties</string>
-               </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_17">
-                <item>
-                 <spacer name="verticalSpacer_8">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </widget>
-              <widget class="QWidget" name="audioSubtitleChapterPropertiesPage">
-               <attribute name="title">
-                <string>Audio, subtitle, chapter properties</string>
-               </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_18">
-                <item>
-                 <spacer name="verticalSpacer_9">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </widget>
-              <widget class="QWidget" name="miscellaneousPage">
-               <attribute name="title">
-                <string>Miscellaneous</string>
-               </attribute>
-               <layout class="QVBoxLayout" name="verticalLayout_19">
-                <item>
-                 <spacer name="verticalSpacer_10">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </widget>
-             </widget>
-            </widget>
-            <widget class="QWidget" name="wProperties" native="true">
-             <layout class="QVBoxLayout" name="verticalLayout_4">
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <item>
-               <widget class="QLabel" name="propertiesLabel">
-                <property name="text">
-                 <string>Properties:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QStackedWidget" name="propertiesStack">
-                <property name="currentIndex">
-                 <number>0</number>
-                </property>
-                <widget class="QWidget" name="propertiesScrollAreaPage">
-                 <layout class="QVBoxLayout" name="verticalLayout_20">
-                  <property name="leftMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>0</number>
-                  </property>
-                  <item>
-                   <widget class="QScrollArea" name="propertiesScrollArea">
-                    <property name="minimumSize">
-                     <size>
-                      <width>370</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="frameShape">
-                     <enum>QFrame::Box</enum>
-                    </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Plain</enum>
-                    </property>
-                    <property name="verticalScrollBarPolicy">
-                     <enum>Qt::ScrollBarAsNeeded</enum>
-                    </property>
-                    <property name="widgetResizable">
-                     <bool>true</bool>
-                    </property>
-                    <widget class="QWidget" name="scrollAreaWidgetContents">
-                     <property name="geometry">
-                      <rect>
-                       <x>0</x>
-                       <y>0</y>
-                       <width>430</width>
-                       <height>998</height>
-                      </rect>
-                     </property>
-                     <layout class="QVBoxLayout" name="verticalLayout_9">
-                      <item>
-                       <widget class="QGroupBox" name="generalOptionsBox">
-                        <property name="title">
-                         <string>General options</string>
-                        </property>
-                        <layout class="QGridLayout" name="gridLayout_5">
-                         <item row="4" column="1">
-                          <widget class="QComboBox" name="forcedTrackFlag"/>
-                         </item>
-                         <item row="3" column="0">
-                          <widget class="QLabel" name="defaultTrackFlagLabel">
-                           <property name="text">
-                            <string>&quot;Default track&quot; flag:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="4" column="0">
-                          <widget class="QLabel" name="forcedTrackFlagLabel">
-                           <property name="text">
-                            <string>&quot;Forced display&quot; flag:</string>
-                           </property>
-                           <property name="buddy">
-                            <cstring>forcedTrackFlag</cstring>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="8" column="0">
-                          <widget class="QLabel" name="originalFlagLabel">
-                           <property name="text">
-                            <string>&quot;Original language&quot; flag:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="1" column="1">
-                          <widget class="QComboBox" name="trackName">
-                           <property name="editable">
-                            <bool>true</bool>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="11" column="0">
-                          <widget class="QLabel" name="trackTagsLabel">
-                           <property name="text">
-                            <string>Tags:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="10" column="0">
-                          <widget class="QLabel" name="compressionLabel">
-                           <property name="text">
-                            <string>Compression:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="2" column="1">
-                          <widget class="mtx::gui::Util::LanguageDisplayWidget" name="trackLanguage"/>
-                         </item>
-                         <item row="3" column="1">
-                          <widget class="QComboBox" name="defaultTrackFlag"/>
-                         </item>
-                         <item row="7" column="1">
-                          <widget class="QComboBox" name="textDescriptionsFlag"/>
-                         </item>
-                         <item row="5" column="0">
-                          <widget class="QLabel" name="hearingImpairedFlagLabel">
-                           <property name="text">
-                            <string>&quot;Hearing impaired&quot; flag:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="1" column="0">
-                          <widget class="QLabel" name="trackNameLabel">
-                           <property name="text">
-                            <string>Trac&amp;k name:</string>
-                           </property>
-                           <property name="buddy">
-                            <cstring>trackName</cstring>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="0" column="0">
-                          <widget class="QLabel" name="muxThisLabel">
-                           <property name="text">
-                            <string>Cop&amp;y this item:</string>
-                           </property>
-                           <property name="buddy">
-                            <cstring>muxThis</cstring>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="7" column="0">
-                          <widget class="QLabel" name="textDescriptionsFlagLabel">
-                           <property name="text">
-                            <string>&quot;Text descriptions&quot; flag:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="2" column="0">
-                          <widget class="QLabel" name="trackLanguageLabel">
-                           <property name="text">
-                            <string>&amp;Language:</string>
-                           </property>
-                           <property name="buddy">
-                            <cstring>trackLanguage</cstring>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="11" column="1">
-                          <layout class="QHBoxLayout" name="horizontalLayout_11">
-                           <item>
-                            <widget class="mtx::gui::Util::BasicLineEdit" name="trackTags"/>
-                           </item>
-                           <item>
-                            <widget class="QPushButton" name="browseTrackTags">
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="icon">
-                              <iconset resource="../../qt_resources.qrc">
-                               <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item row="10" column="1">
-                          <widget class="QComboBox" name="compression"/>
-                         </item>
-                         <item row="6" column="1">
-                          <widget class="QComboBox" name="visualImpairedFlag"/>
-                         </item>
-                         <item row="8" column="1">
-                          <widget class="QComboBox" name="originalFlag"/>
-                         </item>
-                         <item row="6" column="0">
-                          <widget class="QLabel" name="visualImpairedFlagLabel">
-                           <property name="text">
-                            <string>&quot;Visual impaired&quot; flag:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="5" column="1">
-                          <widget class="QComboBox" name="hearingImpairedFlag"/>
-                         </item>
-                         <item row="0" column="1">
-                          <widget class="QComboBox" name="muxThis"/>
-                         </item>
-                         <item row="9" column="0">
-                          <widget class="QLabel" name="commentaryFlagLabel">
-                           <property name="text">
-                            <string>&quot;Commentary&quot; flag:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="9" column="1">
-                          <widget class="QComboBox" name="commentaryFlag"/>
-                         </item>
-                        </layout>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QGroupBox" name="timestampsAndDefaultDurationBox">
-                        <property name="title">
-                         <string>Timestamps and default duration</string>
-                        </property>
-                        <layout class="QVBoxLayout" name="verticalLayout_11">
-                         <item>
-                          <layout class="QGridLayout" name="gridLayout_6">
-                           <item row="0" column="0">
-                            <widget class="QLabel" name="delayLabel">
-                             <property name="text">
-                              <string>Delay (in ms):</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="0" column="1">
-                            <widget class="QLineEdit" name="delay">
-                             <property name="clearButtonEnabled">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="1" column="0">
-                            <widget class="QLabel" name="stretchByLabel">
-                             <property name="text">
-                              <string>Stretch by:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="1" column="1">
-                            <widget class="QLineEdit" name="stretchBy">
-                             <property name="clearButtonEnabled">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="2" column="0">
-                            <widget class="QLabel" name="defaultDurationLabel">
-                             <property name="text">
-                              <string>Default duration/FPS:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="2" column="1">
-                            <widget class="QComboBox" name="defaultDuration">
-                             <property name="editable">
-                              <bool>true</bool>
-                             </property>
-                             <item>
-                              <property name="text">
-                               <string notr="true"/>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">24p</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">25p</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">30p</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">48p</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">50i</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">50p</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">60i</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">60p</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">24000/1001p</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">30000/1001p</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">48000/1001p</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">60000/1001i</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string notr="true">60000/1001p</string>
-                              </property>
-                             </item>
-                            </widget>
-                           </item>
-                           <item row="3" column="0">
-                            <widget class="QLabel" name="timestampsLabel">
-                             <property name="text">
-                              <string>Timestamp file:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item row="3" column="1">
-                            <layout class="QHBoxLayout" name="horizontalLayout_12">
-                             <item>
-                              <widget class="mtx::gui::Util::BasicLineEdit" name="timestamps"/>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="browseTimestamps">
-                               <property name="text">
-                                <string/>
-                               </property>
-                               <property name="icon">
-                                <iconset resource="../../qt_resources.qrc">
-                                 <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-                               </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <widget class="QCheckBox" name="fixBitstreamTimingInfo">
-                           <property name="text">
-                            <string>Fix bitstream timing info</string>
-                           </property>
-                          </widget>
-                         </item>
-                        </layout>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QGroupBox" name="videoPropertiesBox">
-                        <property name="title">
-                         <string>Video properties</string>
-                        </property>
-                        <layout class="QGridLayout" name="gridLayout_7">
-                         <item row="1" column="1">
-                          <layout class="QHBoxLayout" name="horizontalLayout_14">
-                           <item>
-                            <widget class="QLineEdit" name="displayWidth">
-                             <property name="clearButtonEnabled">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QLabel" name="displayDimensionsXLabel">
-                             <property name="text">
-                              <string>x</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QLineEdit" name="displayHeight">
-                             <property name="clearButtonEnabled">
-                              <bool>true</bool>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item row="5" column="1">
-                          <widget class="QComboBox" name="stereoscopy"/>
-                         </item>
-                         <item row="7" column="0">
-                          <widget class="QLabel" name="naluSizeLengthLabel">
-                           <property name="mouseTracking">
-                            <bool>false</bool>
-                           </property>
-                           <property name="text">
-                            <string>NALU size length:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="0" column="0">
-                          <widget class="QRadioButton" name="setAspectRatio">
-                           <property name="text">
-                            <string>Set aspect ratio:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="0" column="1">
-                          <widget class="QComboBox" name="aspectRatio">
-                           <property name="editable">
-                            <bool>true</bool>
-                           </property>
-                           <item>
-                            <property name="text">
-                             <string/>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
-                             <string notr="true">4/3</string>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
-                             <string notr="true">1.66</string>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
-                             <string notr="true">16/9</string>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
-                             <string notr="true">1.85</string>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
-                             <string notr="true">2.00</string>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
-                             <string notr="true">2.21</string>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
-                             <string notr="true">2.35</string>
-                            </property>
-                           </item>
-                           <item>
-                            <property name="text">
-                             <string notr="true">2.40</string>
-                            </property>
-                           </item>
-                          </widget>
-                         </item>
-                         <item row="1" column="0">
-                          <widget class="QRadioButton" name="setDisplayWidthHeight">
-                           <property name="text">
-                            <string>Display width/height:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="3" column="1">
-                          <widget class="QLineEdit" name="cropping">
-                           <property name="clearButtonEnabled">
-                            <bool>true</bool>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="3" column="0">
-                          <widget class="QLabel" name="croppingLabel">
-                           <property name="text">
-                            <string>Cropping:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="5" column="0">
-                          <widget class="QLabel" name="stereoscopyLabel">
-                           <property name="text">
-                            <string>Stereoscopy:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="7" column="1">
-                          <widget class="QComboBox" name="naluSizeLength"/>
-                         </item>
-                        </layout>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QGroupBox" name="audioPropertiesBox">
-                        <property name="title">
-                         <string>Audio properties</string>
-                        </property>
-                        <layout class="QVBoxLayout" name="verticalLayout_12">
-                         <item>
-                          <layout class="QHBoxLayout" name="horizontalLayout_3">
-                           <item>
-                            <widget class="QLabel" name="aacIsSBRLabel">
-                             <property name="text">
-                              <string>AAC is SBR/HE-AAC/AAC+:</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QComboBox" name="aacIsSBR">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </item>
-                         <item>
-                          <widget class="QCheckBox" name="reduceToAudioCore">
-                           <property name="text">
-                            <string>Reduce to core</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QCheckBox" name="removeDialogNormalizationGain">
-                           <property name="text">
-                            <string>Remove dialog normalization gain</string>
-                           </property>
-                          </widget>
-                         </item>
-                        </layout>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QGroupBox" name="subtitleAndChapterPropertiesBox">
-                        <property name="title">
-                         <string>Subtitle and chapter properties</string>
-                        </property>
-                        <layout class="QHBoxLayout" name="horizontalLayout_16">
-                         <item>
-                          <widget class="QLabel" name="characterSetLabel">
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="text">
-                            <string>Character set:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="mtx::gui::Util::CharacterSetComboBox" name="subtitleCharacterSet">
-                           <property name="sizePolicy">
-                            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                             <horstretch>0</horstretch>
-                             <verstretch>0</verstretch>
-                            </sizepolicy>
-                           </property>
-                           <property name="sizeAdjustPolicy">
-                            <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
-                           </property>
-                          </widget>
-                         </item>
-                         <item>
-                          <widget class="QPushButton" name="subtitleCharacterSetPreview">
-                           <property name="text">
-                            <string/>
-                           </property>
-                           <property name="icon">
-                            <iconset resource="../../qt_resources.qrc">
-                             <normaloff>:/icons/16x16/character-set.png</normaloff>:/icons/16x16/character-set.png</iconset>
-                           </property>
-                          </widget>
-                         </item>
-                        </layout>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QGroupBox" name="miscellaneousBox">
-                        <property name="title">
-                         <string>Miscellaneous</string>
-                        </property>
-                        <layout class="QGridLayout" name="gridLayout_9">
-                         <item row="0" column="0">
-                          <widget class="QLabel" name="cuesLabel">
-                           <property name="text">
-                            <string>Indexing (cues):</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="0" column="1">
-                          <widget class="QComboBox" name="cues"/>
-                         </item>
-                         <item row="1" column="0">
-                          <widget class="QLabel" name="additionalTrackOptionsLabel">
-                           <property name="text">
-                            <string>Additional options:</string>
-                           </property>
-                          </widget>
-                         </item>
-                         <item row="1" column="1">
-                          <widget class="QLineEdit" name="additionalTrackOptions">
-                           <property name="clearButtonEnabled">
-                            <bool>true</bool>
-                           </property>
-                          </widget>
-                         </item>
-                        </layout>
-                       </widget>
-                      </item>
-                      <item>
-                       <spacer name="verticalSpacer_5">
-                        <property name="orientation">
-                         <enum>Qt::Vertical</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>20</width>
-                          <height>19</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                     </layout>
-                    </widget>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-                <widget class="QWidget" name="propertiesTwoColumnsPage">
-                 <layout class="QHBoxLayout" name="horizontalLayout_17">
-                  <property name="leftMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>0</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>0</number>
-                  </property>
-                  <item>
-                   <widget class="QWidget" name="propertiesColumn1" native="true">
-                    <layout class="QVBoxLayout" name="verticalLayout_21">
-                     <property name="leftMargin">
-                      <number>0</number>
-                     </property>
-                     <property name="topMargin">
-                      <number>0</number>
-                     </property>
-                     <property name="rightMargin">
-                      <number>0</number>
-                     </property>
-                     <property name="bottomMargin">
-                      <number>0</number>
-                     </property>
-                     <item>
-                      <spacer name="verticalSpacer_11">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>410</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                    </layout>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QWidget" name="propertiesColumn2" native="true">
-                    <layout class="QVBoxLayout" name="verticalLayout_22">
-                     <property name="leftMargin">
-                      <number>0</number>
-                     </property>
-                     <property name="topMargin">
-                      <number>0</number>
-                     </property>
-                     <property name="rightMargin">
-                      <number>0</number>
-                     </property>
-                     <property name="bottomMargin">
-                      <number>0</number>
-                     </property>
-                     <item>
-                      <spacer name="verticalSpacer_12">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>410</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                    </layout>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="outputTab">
-         <attribute name="title">
-          <string>&amp;Output</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <item>
-           <widget class="QSplitter" name="mergeOutputSplitter">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="childrenCollapsible">
-             <bool>false</bool>
-            </property>
-            <widget class="QWidget" name="layoutWidget4">
-             <layout class="QVBoxLayout" name="verticalLayout_7">
-              <item>
-               <widget class="QGroupBox" name="generalBox">
-                <property name="title">
-                 <string>General</string>
-                </property>
-                <layout class="QGridLayout" name="generalGridLayout">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="titleLael">
-                   <property name="text">
-                    <string>Fi&amp;le title:</string>
-                   </property>
-                   <property name="buddy">
-                    <cstring>title</cstring>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QLineEdit" name="title">
-                   <property name="clearButtonEnabled">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="outputLabel">
-                   <property name="text">
-                    <string>Destination file:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <layout class="QHBoxLayout" name="hlOutput">
-                   <item>
-                    <widget class="mtx::gui::Util::BasicLineEdit" name="output"/>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="browseOutput">
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="../../qt_resources.qrc">
-                       <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="outputRecentlyUsed">
-                     <property name="text">
-                      <string notr="true"/>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="../../qt_resources.qrc">
-                       <normaloff>:/icons/16x16/folder-favorites.png</normaloff>:/icons/16x16/folder-favorites.png</iconset>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="globalTagsLabel">
-                   <property name="text">
-                    <string>Global tags:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <layout class="QHBoxLayout" name="horizontalLayout_7">
-                   <item>
-                    <widget class="mtx::gui::Util::BasicLineEdit" name="globalTags"/>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="browseGlobalTags">
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="../../qt_resources.qrc">
-                       <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item row="3" column="0">
-                  <widget class="QLabel" name="segmentInfoLabel">
-                   <property name="text">
-                    <string>Segment info:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="1">
-                  <layout class="QHBoxLayout" name="horizontalLayout_8">
-                   <item>
-                    <widget class="mtx::gui::Util::BasicLineEdit" name="segmentInfo"/>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="browseSegmentInfo">
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="../../qt_resources.qrc">
-                       <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <widget class="QGroupBox" name="splittingBox">
-                <property name="minimumSize">
-                 <size>
-                  <width>400</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="title">
-                 <string>Splitting</string>
-                </property>
-                <layout class="QGridLayout" name="gridLayout_2">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="splitModeLabel">
-                   <property name="text">
-                    <string>Split mode:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QComboBox" name="splitMode">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QComboBox" name="splitOptions">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="editable">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="0">
-                  <widget class="QLabel" name="splitMaxFilesLabel">
-                   <property name="text">
-                    <string>Maximum number of files:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="1">
-                  <widget class="QSpinBox" name="splitMaxFiles">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="specialValueText">
-                    <string>Unlimited</string>
-                   </property>
-                   <property name="minimum">
-                    <number>1</number>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="0">
-                  <widget class="QCheckBox" name="linkFiles">
-                   <property name="text">
-                    <string>Link files</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="splitOptionsLabel">
-                   <property name="text">
-                    <string>Options:</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <widget class="QGroupBox" name="outputMischellaneousBox">
-                <property name="title">
-                 <string>Miscellaneous</string>
-                </property>
-                <layout class="QVBoxLayout" name="verticalLayout_6">
-                 <item>
-                  <widget class="QCheckBox" name="webmMode">
-                   <property name="text">
-                    <string>Create WebM compliant file</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_10">
-                   <item>
-                    <widget class="QLabel" name="additionalOptionsLabel">
-                     <property name="text">
-                      <string>Additional options:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="additionalOptions">
-                     <property name="clearButtonEnabled">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="editAdditionalOptions">
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="../../qt_resources.qrc">
-                       <normaloff>:/icons/16x16/view-choose.png</normaloff>:/icons/16x16/view-choose.png</iconset>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <spacer name="verticalSpacer_3">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>384</width>
-                  <height>0</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QWidget" name="layoutWidget5">
-             <layout class="QVBoxLayout" name="verticalLayout_8">
-              <item>
-               <widget class="QGroupBox" name="fileSegmentLinkingBox">
-                <property name="title">
-                 <string>File/Segment linking</string>
-                </property>
-                <layout class="QGridLayout" name="gridLayout1">
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="segmentUIDsLabel">
-                   <property name="text">
-                    <string>Segment UIDs:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <layout class="QHBoxLayout" name="horizontalLayout_61">
-                   <item>
-                    <widget class="QLineEdit" name="segmentUIDs">
-                     <property name="clearButtonEnabled">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="browseSegmentUID">
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="../../qt_resources.qrc">
-                       <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="previousSegmentUIDLabel">
-                   <property name="text">
-                    <string>Previous segment UID:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <layout class="QHBoxLayout" name="horizontalLayout_13">
-                   <item>
-                    <widget class="QLineEdit" name="previousSegmentUID">
-                     <property name="clearButtonEnabled">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="browsePreviousSegmentUID">
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="../../qt_resources.qrc">
-                       <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="nextSegmentUIDLabel">
-                   <property name="text">
-                    <string>Next segment UID:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <layout class="QHBoxLayout" name="horizontalLayout_15">
-                   <item>
-                    <widget class="QLineEdit" name="nextSegmentUID">
-                     <property name="clearButtonEnabled">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="browseNextSegmentUID">
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="../../qt_resources.qrc">
-                       <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <widget class="QGroupBox" name="chaptersBox">
-                <property name="minimumSize">
-                 <size>
-                  <width>400</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="title">
-                 <string>Chapters</string>
-                </property>
-                <layout class="QGridLayout" name="gridLayout">
-                 <item row="6" column="1">
-                  <widget class="QLineEdit" name="chapterStretchBy">
-                   <property name="clearButtonEnabled">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="chaptersLabel">
-                   <property name="text">
-                    <string>Chapter file:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="8" column="0">
-                  <widget class="QLabel" name="chapterGenerationNameTemplateLabel">
-                   <property name="text">
-                    <string>Name template:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="9" column="0">
-                  <widget class="QLabel" name="chapterGenerationIntervalLabel">
-                   <property name="text">
-                    <string>Interval:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <widget class="mtx::gui::Util::LanguageDisplayWidget" name="chapterLanguage"/>
-                 </item>
-                 <item row="3" column="1">
-                  <layout class="QHBoxLayout" name="horizontalLayout_6">
-                   <item>
-                    <widget class="mtx::gui::Util::CharacterSetComboBox" name="chapterCharacterSet">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="chapterCharacterSetPreview">
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="../../qt_resources.qrc">
-                       <normaloff>:/icons/16x16/character-set.png</normaloff>:/icons/16x16/character-set.png</iconset>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item row="4" column="0">
-                  <widget class="QLabel" name="chapterCueNameFormatLabel">
-                   <property name="text">
-                    <string>Cue name format:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="8" column="1">
-                  <widget class="QLineEdit" name="chapterGenerationNameTemplate">
-                   <property name="clearButtonEnabled">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="0">
-                  <widget class="QLabel" name="chapterGenerationLabel">
-                   <property name="text">
-                    <string>Generating chapters:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="6" column="0">
-                  <widget class="QLabel" name="chapterStretchByLabel">
-                   <property name="text">
-                    <string>Stretch by:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="4" column="1">
-                  <widget class="QLineEdit" name="chapterCueNameFormat">
-                   <property name="clearButtonEnabled">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="1">
-                  <widget class="QComboBox" name="chapterGenerationMode">
-                   <item>
-                    <property name="text">
-                     <string>Don't generate chapters</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>One chapter for each appended file</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>Chapters in fixed intervals</string>
-                    </property>
-                   </item>
-                  </widget>
-                 </item>
-                 <item row="3" column="0">
-                  <widget class="QLabel" name="chapterCharacterSetLabel">
-                   <property name="text">
-                    <string>Character set:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="9" column="1">
-                  <widget class="QLineEdit" name="chapterGenerationInterval">
-                   <property name="clearButtonEnabled">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="1">
-                  <widget class="QLineEdit" name="chapterDelay">
-                   <property name="clearButtonEnabled">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <layout class="QHBoxLayout" name="horizontalLayout_9">
-                   <item>
-                    <widget class="mtx::gui::Util::BasicLineEdit" name="chapters"/>
-                   </item>
-                   <item>
-                    <widget class="QPushButton" name="browseChapters">
-                     <property name="text">
-                      <string/>
-                     </property>
-                     <property name="icon">
-                      <iconset resource="../../qt_resources.qrc">
-                       <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="chapterLanguageLabel">
-                   <property name="text">
-                    <string>Language:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="5" column="0">
-                  <widget class="QLabel" name="chapterDelayLabel">
-                   <property name="text">
-                    <string>Delay (in ms):</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QLabel" name="chapterTitleNumberLabel">
-                   <property name="text">
-                    <string>DVD title number:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QSpinBox" name="chapterTitleNumber">
-                   <property name="minimum">
-                    <number>1</number>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-              <item>
-               <spacer name="verticalSpacer_4">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>0</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="mtx::gui::Util::FilesDragDropWidget" name="attachmentsTab">
-         <property name="acceptDrops">
-          <bool>true</bool>
+    <widget class="QTabWidget" name="tabs">
+     <property name="tabPosition">
+      <enum>QTabWidget::North</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="inputTab">
+      <attribute name="title">
+       <string>&amp;Input</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QSplitter" name="mergeInputSplitter">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
-         <attribute name="title">
-          <string>Atta&amp;chments</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_24">
-          <item>
-           <widget class="QSplitter" name="mergeAttachmentsSplitter">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <widget class="QWidget" name="layoutWidget2">
-             <layout class="QVBoxLayout" name="verticalLayout_23">
+         <property name="childrenCollapsible">
+          <bool>false</bool>
+         </property>
+         <widget class="QSplitter" name="mergeFilesTracksSplitter">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="childrenCollapsible">
+           <bool>false</bool>
+          </property>
+          <widget class="QWidget" name="layoutWidget">
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QLabel" name="filesLabel">
+              <property name="text">
+               <string>Source &amp;files:</string>
+              </property>
+              <property name="buddy">
+               <cstring>files</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_1">
               <item>
-               <widget class="QLabel" name="attachedFilesLabel">
-                <property name="text">
-                 <string>Attachments from &amp;source files:</string>
+               <widget class="mtx::gui::Util::BasicTreeView" name="files">
+                <property name="minimumSize">
+                 <size>
+                  <width>370</width>
+                  <height>0</height>
+                 </size>
                 </property>
-                <property name="buddy">
-                 <cstring>attachedFiles</cstring>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="mtx::gui::Util::BasicTreeView" name="attachedFiles">
                 <property name="contextMenuPolicy">
                  <enum>Qt::CustomContextMenu</enum>
+                </property>
+                <property name="acceptDrops">
+                 <bool>true</bool>
                 </property>
                 <property name="editTriggers">
                  <set>QAbstractItemView::NoEditTriggers</set>
                 </property>
-                <property name="showDropIndicator" stdset="0">
+                <property name="dragEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="dragDropMode">
+                 <enum>QAbstractItemView::InternalMove</enum>
+                </property>
+                <property name="defaultDropAction">
+                 <enum>Qt::MoveAction</enum>
+                </property>
+                <property name="alternatingRowColors">
                  <bool>false</bool>
                 </property>
                 <property name="selectionMode">
                  <enum>QAbstractItemView::ExtendedSelection</enum>
                 </property>
-                <property name="rootIsDecorated">
-                 <bool>false</bool>
-                </property>
-                <property name="sortingEnabled">
-                 <bool>true</bool>
-                </property>
-                <property name="allColumnsShowFocus">
-                 <bool>true</bool>
-                </property>
-                <attribute name="headerShowSortIndicator" stdset="0">
-                 <bool>true</bool>
-                </attribute>
-                <attribute name="headerStretchLastSection">
-                 <bool>false</bool>
-                </attribute>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="moveFilesButtons" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_1">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QPushButton" name="moveFilesUp">
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../qt_resources.qrc">
+                     <normaloff>:/icons/16x16/arrow-up.png</normaloff>:/icons/16x16/arrow-up.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="moveFilesDown">
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../qt_resources.qrc">
+                     <normaloff>:/icons/16x16/arrow-down.png</normaloff>:/icons/16x16/arrow-down.png</iconset>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_1">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
                </widget>
               </item>
              </layout>
-            </widget>
-            <widget class="QWidget" name="layoutWidget3">
-             <layout class="QVBoxLayout" name="verticalLayout_14">
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="layoutWidget1">
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="QLabel" name="tracksLabel">
+              <property name="text">
+               <string>&amp;Tracks, chapters and tags:</string>
+              </property>
+              <property name="buddy">
+               <cstring>tracks</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
-               <widget class="QLabel" name="attachmentsLabel">
-                <property name="text">
-                 <string>Atta&amp;chments to add:</string>
+               <widget class="mtx::gui::Util::BasicTreeView" name="tracks">
+                <property name="contextMenuPolicy">
+                 <enum>Qt::CustomContextMenu</enum>
                 </property>
-                <property name="buddy">
-                 <cstring>attachments</cstring>
+                <property name="acceptDrops">
+                 <bool>true</bool>
+                </property>
+                <property name="editTriggers">
+                 <set>QAbstractItemView::NoEditTriggers</set>
+                </property>
+                <property name="dragEnabled">
+                 <bool>true</bool>
+                </property>
+                <property name="dragDropMode">
+                 <enum>QAbstractItemView::InternalMove</enum>
+                </property>
+                <property name="defaultDropAction">
+                 <enum>Qt::MoveAction</enum>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::ExtendedSelection</enum>
+                </property>
+                <property name="expandsOnDoubleClick">
+                 <bool>false</bool>
                 </property>
                </widget>
               </item>
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_5">
-                <item>
-                 <widget class="mtx::gui::Util::BasicTreeView" name="attachments">
-                  <property name="contextMenuPolicy">
-                   <enum>Qt::CustomContextMenu</enum>
-                  </property>
-                  <property name="acceptDrops">
-                   <bool>true</bool>
-                  </property>
-                  <property name="editTriggers">
-                   <set>QAbstractItemView::NoEditTriggers</set>
-                  </property>
-                  <property name="dragEnabled">
-                   <bool>true</bool>
-                  </property>
-                  <property name="dragDropMode">
-                   <enum>QAbstractItemView::DragDrop</enum>
-                  </property>
-                  <property name="selectionMode">
-                   <enum>QAbstractItemView::ExtendedSelection</enum>
-                  </property>
-                  <attribute name="headerStretchLastSection">
-                   <bool>false</bool>
-                  </attribute>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QWidget" name="moveAttachmentsButtons" native="true">
-                  <layout class="QVBoxLayout" name="verticalLayout_10">
-                   <property name="leftMargin">
-                    <number>0</number>
+               <widget class="QWidget" name="moveTracksButtons" native="true">
+                <layout class="QVBoxLayout" name="verticalLayout_13">
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QPushButton" name="moveTracksUp">
+                   <property name="text">
+                    <string/>
                    </property>
-                   <property name="topMargin">
-                    <number>0</number>
+                   <property name="icon">
+                    <iconset resource="../../qt_resources.qrc">
+                     <normaloff>:/icons/16x16/arrow-up.png</normaloff>:/icons/16x16/arrow-up.png</iconset>
                    </property>
-                   <property name="rightMargin">
-                    <number>0</number>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="moveTracksDown">
+                   <property name="text">
+                    <string/>
                    </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
+                   <property name="icon">
+                    <iconset resource="../../qt_resources.qrc">
+                     <normaloff>:/icons/16x16/arrow-down.png</normaloff>:/icons/16x16/arrow-down.png</iconset>
                    </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QTabWidget" name="twProperties">
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <widget class="QWidget" name="generalOptionsPage">
+            <attribute name="title">
+             <string>General options</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_15">
+             <item>
+              <spacer name="verticalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="timestampsAndDefaultDurationPage">
+            <attribute name="title">
+             <string>Timestamps and default duration</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_16">
+             <item>
+              <spacer name="verticalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="videoPropertiesPage">
+            <attribute name="title">
+             <string>Video properties</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_17">
+             <item>
+              <spacer name="verticalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="audioSubtitleChapterPropertiesPage">
+            <attribute name="title">
+             <string>Audio, subtitle, chapter properties</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_18">
+             <item>
+              <spacer name="verticalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="miscellaneousPage">
+            <attribute name="title">
+             <string>Miscellaneous</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_19">
+             <item>
+              <spacer name="verticalSpacer_10">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="wProperties" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="propertiesLabel">
+             <property name="text">
+              <string>Properties:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QStackedWidget" name="propertiesStack">
+             <property name="currentIndex">
+              <number>0</number>
+             </property>
+             <widget class="QWidget" name="propertiesScrollAreaPage">
+              <layout class="QVBoxLayout" name="verticalLayout_20">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QScrollArea" name="propertiesScrollArea">
+                 <property name="minimumSize">
+                  <size>
+                   <width>370</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::Box</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Plain</enum>
+                 </property>
+                 <property name="verticalScrollBarPolicy">
+                  <enum>Qt::ScrollBarAsNeeded</enum>
+                 </property>
+                 <property name="widgetResizable">
+                  <bool>true</bool>
+                 </property>
+                 <widget class="QWidget" name="scrollAreaWidgetContents">
+                  <property name="geometry">
+                   <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>430</width>
+                    <height>998</height>
+                   </rect>
+                  </property>
+                  <layout class="QVBoxLayout" name="verticalLayout_9">
                    <item>
-                    <widget class="QPushButton" name="moveAttachmentsUp">
-                     <property name="text">
-                      <string/>
+                    <widget class="QGroupBox" name="generalOptionsBox">
+                     <property name="title">
+                      <string>General options</string>
                      </property>
-                     <property name="icon">
-                      <iconset resource="../../qt_resources.qrc">
-                       <normaloff>:/icons/16x16/arrow-up.png</normaloff>:/icons/16x16/arrow-up.png</iconset>
-                     </property>
+                     <layout class="QGridLayout" name="gridLayout_5">
+                      <item row="4" column="1">
+                       <widget class="QComboBox" name="forcedTrackFlag"/>
+                      </item>
+                      <item row="3" column="0">
+                       <widget class="QLabel" name="defaultTrackFlagLabel">
+                        <property name="text">
+                         <string>&quot;Default track&quot; flag:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="4" column="0">
+                       <widget class="QLabel" name="forcedTrackFlagLabel">
+                        <property name="text">
+                         <string>&quot;Forced display&quot; flag:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>forcedTrackFlag</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="8" column="0">
+                       <widget class="QLabel" name="originalFlagLabel">
+                        <property name="text">
+                         <string>&quot;Original language&quot; flag:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1">
+                       <widget class="QComboBox" name="trackName">
+                        <property name="editable">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="11" column="0">
+                       <widget class="QLabel" name="trackTagsLabel">
+                        <property name="text">
+                         <string>Tags:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="10" column="0">
+                       <widget class="QLabel" name="compressionLabel">
+                        <property name="text">
+                         <string>Compression:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="1">
+                       <widget class="mtx::gui::Util::LanguageDisplayWidget" name="trackLanguage"/>
+                      </item>
+                      <item row="3" column="1">
+                       <widget class="QComboBox" name="defaultTrackFlag"/>
+                      </item>
+                      <item row="7" column="1">
+                       <widget class="QComboBox" name="textDescriptionsFlag"/>
+                      </item>
+                      <item row="5" column="0">
+                       <widget class="QLabel" name="hearingImpairedFlagLabel">
+                        <property name="text">
+                         <string>&quot;Hearing impaired&quot; flag:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="trackNameLabel">
+                        <property name="text">
+                         <string>Trac&amp;k name:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>trackName</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="muxThisLabel">
+                        <property name="text">
+                         <string>Cop&amp;y this item:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>muxThis</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="7" column="0">
+                       <widget class="QLabel" name="textDescriptionsFlagLabel">
+                        <property name="text">
+                         <string>&quot;Text descriptions&quot; flag:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="0">
+                       <widget class="QLabel" name="trackLanguageLabel">
+                        <property name="text">
+                         <string>&amp;Language:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>trackLanguage</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="11" column="1">
+                       <layout class="QHBoxLayout" name="horizontalLayout_11">
+                        <item>
+                         <widget class="mtx::gui::Util::BasicLineEdit" name="trackTags"/>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="browseTrackTags">
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="icon">
+                           <iconset resource="../../qt_resources.qrc">
+                            <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item row="10" column="1">
+                       <widget class="QComboBox" name="compression"/>
+                      </item>
+                      <item row="6" column="1">
+                       <widget class="QComboBox" name="visualImpairedFlag"/>
+                      </item>
+                      <item row="8" column="1">
+                       <widget class="QComboBox" name="originalFlag"/>
+                      </item>
+                      <item row="6" column="0">
+                       <widget class="QLabel" name="visualImpairedFlagLabel">
+                        <property name="text">
+                         <string>&quot;Visual impaired&quot; flag:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="5" column="1">
+                       <widget class="QComboBox" name="hearingImpairedFlag"/>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QComboBox" name="muxThis"/>
+                      </item>
+                      <item row="9" column="0">
+                       <widget class="QLabel" name="commentaryFlagLabel">
+                        <property name="text">
+                         <string>&quot;Commentary&quot; flag:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="9" column="1">
+                       <widget class="QComboBox" name="commentaryFlag"/>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="moveAttachmentsDown">
-                     <property name="text">
-                      <string/>
+                    <widget class="QGroupBox" name="timestampsAndDefaultDurationBox">
+                     <property name="title">
+                      <string>Timestamps and default duration</string>
                      </property>
-                     <property name="icon">
-                      <iconset resource="../../qt_resources.qrc">
-                       <normaloff>:/icons/16x16/arrow-down.png</normaloff>:/icons/16x16/arrow-down.png</iconset>
-                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_11">
+                      <item>
+                       <layout class="QGridLayout" name="gridLayout_6">
+                        <item row="0" column="0">
+                         <widget class="QLabel" name="delayLabel">
+                          <property name="text">
+                           <string>Delay (in ms):</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="1">
+                         <widget class="QLineEdit" name="delay">
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="0">
+                         <widget class="QLabel" name="stretchByLabel">
+                          <property name="text">
+                           <string>Stretch by:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="1">
+                         <widget class="QLineEdit" name="stretchBy">
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="2" column="0">
+                         <widget class="QLabel" name="defaultDurationLabel">
+                          <property name="text">
+                           <string>Default duration/FPS:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="2" column="1">
+                         <widget class="QComboBox" name="defaultDuration">
+                          <property name="editable">
+                           <bool>true</bool>
+                          </property>
+                          <item>
+                           <property name="text">
+                            <string notr="true"/>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">24p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">25p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">30p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">48p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">50i</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">50p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">60i</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">60p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">24000/1001p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">30000/1001p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">48000/1001p</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">60000/1001i</string>
+                           </property>
+                          </item>
+                          <item>
+                           <property name="text">
+                            <string notr="true">60000/1001p</string>
+                           </property>
+                          </item>
+                         </widget>
+                        </item>
+                        <item row="3" column="0">
+                         <widget class="QLabel" name="timestampsLabel">
+                          <property name="text">
+                           <string>Timestamp file:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="3" column="1">
+                         <layout class="QHBoxLayout" name="horizontalLayout_12">
+                          <item>
+                           <widget class="mtx::gui::Util::BasicLineEdit" name="timestamps"/>
+                          </item>
+                          <item>
+                           <widget class="QPushButton" name="browseTimestamps">
+                            <property name="text">
+                             <string/>
+                            </property>
+                            <property name="icon">
+                             <iconset resource="../../qt_resources.qrc">
+                              <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="fixBitstreamTimingInfo">
+                        <property name="text">
+                         <string>Fix bitstream timing info</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                    <item>
-                    <spacer name="verticalSpacer_2">
+                    <widget class="QGroupBox" name="videoPropertiesBox">
+                     <property name="title">
+                      <string>Video properties</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_7">
+                      <item row="1" column="1">
+                       <layout class="QHBoxLayout" name="horizontalLayout_14">
+                        <item>
+                         <widget class="QLineEdit" name="displayWidth">
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="displayDimensionsXLabel">
+                          <property name="text">
+                           <string>x</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLineEdit" name="displayHeight">
+                          <property name="clearButtonEnabled">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item row="5" column="1">
+                       <widget class="QComboBox" name="stereoscopy"/>
+                      </item>
+                      <item row="7" column="0">
+                       <widget class="QLabel" name="naluSizeLengthLabel">
+                        <property name="mouseTracking">
+                         <bool>false</bool>
+                        </property>
+                        <property name="text">
+                         <string>NALU size length:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="0">
+                       <widget class="QRadioButton" name="setAspectRatio">
+                        <property name="text">
+                         <string>Set aspect ratio:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QComboBox" name="aspectRatio">
+                        <property name="editable">
+                         <bool>true</bool>
+                        </property>
+                        <item>
+                         <property name="text">
+                          <string/>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">4/3</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">1.66</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">16/9</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">1.85</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">2.00</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">2.21</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">2.35</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string notr="true">2.40</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QRadioButton" name="setDisplayWidthHeight">
+                        <property name="text">
+                         <string>Display width/height:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="1">
+                       <widget class="QLineEdit" name="cropping">
+                        <property name="clearButtonEnabled">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="0">
+                       <widget class="QLabel" name="croppingLabel">
+                        <property name="text">
+                         <string>Cropping:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="5" column="0">
+                       <widget class="QLabel" name="stereoscopyLabel">
+                        <property name="text">
+                         <string>Stereoscopy:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="7" column="1">
+                       <widget class="QComboBox" name="naluSizeLength"/>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QGroupBox" name="audioPropertiesBox">
+                     <property name="title">
+                      <string>Audio properties</string>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_12">
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_3">
+                        <item>
+                         <widget class="QLabel" name="aacIsSBRLabel">
+                          <property name="text">
+                           <string>AAC is SBR/HE-AAC/AAC+:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QComboBox" name="aacIsSBR">
+                          <property name="sizePolicy">
+                           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                           </sizepolicy>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="reduceToAudioCore">
+                        <property name="text">
+                         <string>Reduce to core</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="removeDialogNormalizationGain">
+                        <property name="text">
+                         <string>Remove dialog normalization gain</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QGroupBox" name="subtitleAndChapterPropertiesBox">
+                     <property name="title">
+                      <string>Subtitle and chapter properties</string>
+                     </property>
+                     <layout class="QHBoxLayout" name="horizontalLayout_16">
+                      <item>
+                       <widget class="QLabel" name="characterSetLabel">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="text">
+                         <string>Character set:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="mtx::gui::Util::CharacterSetComboBox" name="subtitleCharacterSet">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="sizeAdjustPolicy">
+                         <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="subtitleCharacterSetPreview">
+                        <property name="text">
+                         <string/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="../../qt_resources.qrc">
+                          <normaloff>:/icons/16x16/character-set.png</normaloff>:/icons/16x16/character-set.png</iconset>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QGroupBox" name="miscellaneousBox">
+                     <property name="title">
+                      <string>Miscellaneous</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_9">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="cuesLabel">
+                        <property name="text">
+                         <string>Indexing (cues):</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QComboBox" name="cues"/>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="additionalTrackOptionsLabel">
+                        <property name="text">
+                         <string>Additional options:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1">
+                       <widget class="QLineEdit" name="additionalTrackOptions">
+                        <property name="clearButtonEnabled">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_5">
                      <property name="orientation">
                       <enum>Qt::Vertical</enum>
                      </property>
                      <property name="sizeHint" stdset="0">
                       <size>
                        <width>20</width>
-                       <height>40</height>
+                       <height>19</height>
                       </size>
                      </property>
                     </spacer>
                    </item>
                   </layout>
                  </widget>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="propertiesTwoColumnsPage">
+              <layout class="QHBoxLayout" name="horizontalLayout_17">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QWidget" name="propertiesColumn1" native="true">
+                 <layout class="QVBoxLayout" name="verticalLayout_21">
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <spacer name="verticalSpacer_11">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>410</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QWidget" name="propertiesColumn2" native="true">
+                 <layout class="QVBoxLayout" name="verticalLayout_22">
+                  <property name="leftMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>0</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>0</number>
+                  </property>
+                  <item>
+                   <spacer name="verticalSpacer_12">
+                    <property name="orientation">
+                     <enum>Qt::Vertical</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>20</width>
+                      <height>410</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="outputTab">
+      <attribute name="title">
+       <string>&amp;Output</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QSplitter" name="mergeOutputSplitter">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="childrenCollapsible">
+          <bool>false</bool>
+         </property>
+         <widget class="QWidget" name="layoutWidget4">
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <widget class="QGroupBox" name="generalBox">
+             <property name="title">
+              <string>General</string>
+             </property>
+             <layout class="QGridLayout" name="generalGridLayout">
+              <item row="0" column="0">
+               <widget class="QLabel" name="titleLael">
+                <property name="text">
+                 <string>Fi&amp;le title:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>title</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="title">
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="outputLabel">
+                <property name="text">
+                 <string>Destination file:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <layout class="QHBoxLayout" name="hlOutput">
+                <item>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="output"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="browseOutput">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="outputRecentlyUsed">
+                  <property name="text">
+                   <string notr="true"/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/folder-favorites.png</normaloff>:/icons/16x16/folder-favorites.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="globalTagsLabel">
+                <property name="text">
+                 <string>Global tags:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_7">
+                <item>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="globalTags"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="browseGlobalTags">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="segmentInfoLabel">
+                <property name="text">
+                 <string>Segment info:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <item>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="segmentInfo"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="browseSegmentInfo">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
              </layout>
             </widget>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="attachmentSettingsBox">
-            <property name="title">
-             <string>Settings</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayout_8">
-             <item row="0" column="0">
-              <widget class="QLabel" name="attachmentNameLabel">
-               <property name="text">
-                <string>&amp;Name:</string>
-               </property>
-               <property name="buddy">
-                <cstring>attachmentName</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="attachmentName">
-               <property name="clearButtonEnabled">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QLabel" name="attachmentDescriptionLabel">
-               <property name="text">
-                <string>&amp;Description:</string>
-               </property>
-               <property name="buddy">
-                <cstring>attachmentDescription</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QLineEdit" name="attachmentDescription">
-               <property name="clearButtonEnabled">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="attachmentMIMETypeLabel">
-               <property name="text">
-                <string>&amp;MIME type:</string>
-               </property>
-               <property name="buddy">
-                <cstring>attachmentMIMEType</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="attachmentMIMEType">
-               <property name="editable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QLabel" name="attachmentStyleLabel">
-               <property name="text">
-                <string>Attach &amp;to:</string>
-               </property>
-               <property name="buddy">
-                <cstring>attachmentStyle</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QComboBox" name="attachmentStyle">
-               <item>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="splittingBox">
+             <property name="minimumSize">
+              <size>
+               <width>400</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>Splitting</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="0" column="0">
+               <widget class="QLabel" name="splitModeLabel">
                 <property name="text">
-                 <string>All destination files</string>
+                 <string>Split mode:</string>
                 </property>
-               </item>
-               <item>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="splitMode">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="splitOptions">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="splitMaxFilesLabel">
                 <property name="text">
-                 <string>The first destination file only</string>
+                 <string>Maximum number of files:</string>
                 </property>
-               </item>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QSpinBox" name="splitMaxFiles">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="specialValueText">
+                 <string>Unlimited</string>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QCheckBox" name="linkFiles">
+                <property name="text">
+                 <string>Link files</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="splitOptionsLabel">
+                <property name="text">
+                 <string>Options:</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="outputMischellaneousBox">
+             <property name="title">
+              <string>Miscellaneous</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <item>
+               <widget class="QCheckBox" name="webmMode">
+                <property name="text">
+                 <string>Create WebM compliant file</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                <item>
+                 <widget class="QLabel" name="additionalOptionsLabel">
+                  <property name="text">
+                   <string>Additional options:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="additionalOptions">
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="editAdditionalOptions">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/view-choose.png</normaloff>:/icons/16x16/view-choose.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>384</width>
+               <height>0</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="layoutWidget5">
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <widget class="QGroupBox" name="fileSegmentLinkingBox">
+             <property name="title">
+              <string>File/Segment linking</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout1">
+              <item row="0" column="0">
+               <widget class="QLabel" name="segmentUIDsLabel">
+                <property name="text">
+                 <string>Segment UIDs:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_61">
+                <item>
+                 <widget class="QLineEdit" name="segmentUIDs">
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="browseSegmentUID">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="previousSegmentUIDLabel">
+                <property name="text">
+                 <string>Previous segment UID:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_13">
+                <item>
+                 <widget class="QLineEdit" name="previousSegmentUID">
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="browsePreviousSegmentUID">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="nextSegmentUIDLabel">
+                <property name="text">
+                 <string>Next segment UID:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_15">
+                <item>
+                 <widget class="QLineEdit" name="nextSegmentUID">
+                  <property name="clearButtonEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="browseNextSegmentUID">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="chaptersBox">
+             <property name="minimumSize">
+              <size>
+               <width>400</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>Chapters</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="6" column="1">
+               <widget class="QLineEdit" name="chapterStretchBy">
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="chaptersLabel">
+                <property name="text">
+                 <string>Chapter file:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
+               <widget class="QLabel" name="chapterGenerationNameTemplateLabel">
+                <property name="text">
+                 <string>Name template:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="0">
+               <widget class="QLabel" name="chapterGenerationIntervalLabel">
+                <property name="text">
+                 <string>Interval:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="chapterLanguage"/>
+              </item>
+              <item row="3" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_6">
+                <item>
+                 <widget class="mtx::gui::Util::CharacterSetComboBox" name="chapterCharacterSet">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="chapterCharacterSetPreview">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/character-set.png</normaloff>:/icons/16x16/character-set.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="chapterCueNameFormatLabel">
+                <property name="text">
+                 <string>Cue name format:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="1">
+               <widget class="QLineEdit" name="chapterGenerationNameTemplate">
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="chapterGenerationLabel">
+                <property name="text">
+                 <string>Generating chapters:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="chapterStretchByLabel">
+                <property name="text">
+                 <string>Stretch by:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="chapterCueNameFormat">
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QComboBox" name="chapterGenerationMode">
+                <item>
+                 <property name="text">
+                  <string>Don't generate chapters</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>One chapter for each appended file</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Chapters in fixed intervals</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="chapterCharacterSetLabel">
+                <property name="text">
+                 <string>Character set:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <widget class="QLineEdit" name="chapterGenerationInterval">
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="chapterDelay">
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_9">
+                <item>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="chapters"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="browseChapters">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="chapterLanguageLabel">
+                <property name="text">
+                 <string>Language:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="chapterDelayLabel">
+                <property name="text">
+                 <string>Delay (in ms):</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="chapterTitleNumberLabel">
+                <property name="text">
+                 <string>DVD title number:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QSpinBox" name="chapterTitleNumber">
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>0</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="mtx::gui::Util::FilesDragDropWidget" name="attachmentsTab">
+      <property name="acceptDrops">
+       <bool>true</bool>
+      </property>
+      <attribute name="title">
+       <string>Atta&amp;chments</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_24">
+       <item>
+        <widget class="QSplitter" name="mergeAttachmentsSplitter">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <widget class="QWidget" name="layoutWidget2">
+          <layout class="QVBoxLayout" name="verticalLayout_23">
+           <item>
+            <widget class="QLabel" name="attachedFilesLabel">
+             <property name="text">
+              <string>Attachments from &amp;source files:</string>
+             </property>
+             <property name="buddy">
+              <cstring>attachedFiles</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="mtx::gui::Util::BasicTreeView" name="attachedFiles">
+             <property name="contextMenuPolicy">
+              <enum>Qt::CustomContextMenu</enum>
+             </property>
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="showDropIndicator" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::ExtendedSelection</enum>
+             </property>
+             <property name="rootIsDecorated">
+              <bool>false</bool>
+             </property>
+             <property name="sortingEnabled">
+              <bool>true</bool>
+             </property>
+             <property name="allColumnsShowFocus">
+              <bool>true</bool>
+             </property>
+             <attribute name="headerShowSortIndicator" stdset="0">
+              <bool>true</bool>
+             </attribute>
+             <attribute name="headerStretchLastSection">
+              <bool>false</bool>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="layoutWidget3">
+          <layout class="QVBoxLayout" name="verticalLayout_14">
+           <item>
+            <widget class="QLabel" name="attachmentsLabel">
+             <property name="text">
+              <string>Atta&amp;chments to add:</string>
+             </property>
+             <property name="buddy">
+              <cstring>attachments</cstring>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <item>
+              <widget class="mtx::gui::Util::BasicTreeView" name="attachments">
+               <property name="contextMenuPolicy">
+                <enum>Qt::CustomContextMenu</enum>
+               </property>
+               <property name="acceptDrops">
+                <bool>true</bool>
+               </property>
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+               <property name="dragEnabled">
+                <bool>true</bool>
+               </property>
+               <property name="dragDropMode">
+                <enum>QAbstractItemView::DragDrop</enum>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::ExtendedSelection</enum>
+               </property>
+               <attribute name="headerStretchLastSection">
+                <bool>false</bool>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="moveAttachmentsButtons" native="true">
+               <layout class="QVBoxLayout" name="verticalLayout_10">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="moveAttachmentsUp">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/arrow-up.png</normaloff>:/icons/16x16/arrow-up.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="moveAttachmentsDown">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/arrow-down.png</normaloff>:/icons/16x16/arrow-down.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="verticalSpacer_2">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
               </widget>
              </item>
             </layout>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="attachmentSettingsBox">
+         <property name="title">
+          <string>Settings</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <widget class="QLabel" name="attachmentNameLabel">
+            <property name="text">
+             <string>&amp;Name:</string>
+            </property>
+            <property name="buddy">
+             <cstring>attachmentName</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="attachmentName">
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="attachmentDescriptionLabel">
+            <property name="text">
+             <string>&amp;Description:</string>
+            </property>
+            <property name="buddy">
+             <cstring>attachmentDescription</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLineEdit" name="attachmentDescription">
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="attachmentMIMETypeLabel">
+            <property name="text">
+             <string>&amp;MIME type:</string>
+            </property>
+            <property name="buddy">
+             <cstring>attachmentMIMEType</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="attachmentMIMEType">
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLabel" name="attachmentStyleLabel">
+            <property name="text">
+             <string>Attach &amp;to:</string>
+            </property>
+            <property name="buddy">
+             <cstring>attachmentStyle</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QComboBox" name="attachmentStyle">
+            <item>
+             <property name="text">
+              <string>All destination files</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>The first destination file only</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
         </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="gbOutputFile">
-        <property name="title">
-         <string>Destination file</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QToolButton" name="addFiles">
-          <property name="text">
-           <string>&amp;Add source files</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../../qt_resources.qrc">
-            <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
-          </property>
-          <property name="popupMode">
-           <enum>QToolButton::MenuButtonPopup</enum>
-          </property>
-          <property name="toolButtonStyle">
-           <enum>Qt::ToolButtonTextBesideIcon</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="startMuxing">
-          <property name="text">
-           <string>Sta&amp;rt multiplexing</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../../qt_resources.qrc">
-            <normaloff>:/icons/16x16/media-playback-start.png</normaloff>:/icons/16x16/media-playback-start.png</iconset>
-          </property>
-          <property name="popupMode">
-           <enum>QToolButton::MenuButtonPopup</enum>
-          </property>
-          <property name="toolButtonStyle">
-           <enum>Qt::ToolButtonTextBesideIcon</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QToolButton" name="addToJobQueue">
-          <property name="text">
-           <string>Add to job &amp;queue</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../../qt_resources.qrc">
-            <normaloff>:/icons/16x16/task-delegate.png</normaloff>:/icons/16x16/task-delegate.png</iconset>
-          </property>
-          <property name="popupMode">
-           <enum>QToolButton::MenuButtonPopup</enum>
-          </property>
-          <property name="toolButtonStyle">
-           <enum>Qt::ToolButtonTextBesideIcon</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-     </layout>
+       </item>
+      </layout>
+     </widget>
     </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="gbOutputFile">
+     <property name="title">
+      <string>Destination file</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QToolButton" name="addFiles">
+       <property name="text">
+        <string>&amp;Add source files</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../qt_resources.qrc">
+         <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::MenuButtonPopup</enum>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="startMuxing">
+       <property name="text">
+        <string>Sta&amp;rt multiplexing</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../qt_resources.qrc">
+         <normaloff>:/icons/16x16/media-playback-start.png</normaloff>:/icons/16x16/media-playback-start.png</iconset>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::MenuButtonPopup</enum>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="addToJobQueue">
+       <property name="text">
+        <string>Add to job &amp;queue</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../qt_resources.qrc">
+         <normaloff>:/icons/16x16/task-delegate.png</normaloff>:/icons/16x16/task-delegate.png</iconset>
+       </property>
+       <property name="popupMode">
+        <enum>QToolButton::MenuButtonPopup</enum>
+       </property>
+       <property name="toolButtonStyle">
+        <enum>Qt::ToolButtonTextBesideIcon</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

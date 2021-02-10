@@ -9,7 +9,6 @@
 #include <QMenu>
 #include <QMessageBox>
 #include <QProcess>
-#include <QProgressDialog>
 #include <QRegularExpression>
 #include <QSettings>
 #include <QSignalBlocker>
@@ -26,12 +25,8 @@
 #include "mkvtoolnix-gui/forms/merge/tab.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/select_character_set_dialog.h"
-#include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
-#include "mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.h"
 #include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/merge/executable_location_dialog.h"
-#include "mkvtoolnix-gui/merge/file_identification_thread.h"
-#include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tab_p.h"
 #include "mkvtoolnix-gui/merge/tool.h"
@@ -231,9 +226,6 @@ Tab::setupInputControls() {
   p.ui->tracks->setModel(p.tracksModel);
   p.ui->tracks->enterActivatesAllSelected(true);
 
-  p.ui->files->acceptDroppedFiles(true);
-  p.ui->tracks->acceptDroppedFiles(true);
-
   cfg.handleSplitterSizes(p.ui->mergeInputSplitter);
   cfg.handleSplitterSizes(p.ui->mergeFilesTracksSplitter);
 
@@ -374,7 +366,6 @@ Tab::setupInputControls() {
   connect(p.ui->files,                         &Util::BasicTreeView::customContextMenuRequested,                       this,                       &Tab::showFilesContextMenu);
   connect(p.ui->files,                         &Util::BasicTreeView::deletePressed,                                    this,                       &Tab::onRemoveFiles);
   connect(p.ui->files,                         &Util::BasicTreeView::insertPressed,                                    this,                       &Tab::onAddFiles);
-  connect(p.ui->files,                         &Util::BasicTreeView::filesDropped,                                     this,                       &Tab::addOrAppendDroppedFiles);
   connect(p.ui->files->selectionModel(),       &QItemSelectionModel::selectionChanged,                                 p.filesModel,               &SourceFileModel::updateSelectionStatus);
   connect(p.ui->files->selectionModel(),       &QItemSelectionModel::selectionChanged,                                 this,                       &Tab::enableMoveFilesButtons);
   connect(p.ui->fixBitstreamTimingInfo,        &QCheckBox::toggled,                                                    this,                       &Tab::onFixBitstreamTimingInfoChanged);
@@ -408,7 +399,6 @@ Tab::setupInputControls() {
   connect(p.ui->tracks,                        &Util::BasicTreeView::ctrlDownPressed,                                  this,                       &Tab::onMoveTracksDown);
   connect(p.ui->tracks,                        &Util::BasicTreeView::ctrlUpPressed,                                    this,                       &Tab::onMoveTracksUp);
   connect(p.ui->tracks,                        &Util::BasicTreeView::customContextMenuRequested,                       this,                       &Tab::showTracksContextMenu);
-  connect(p.ui->tracks,                        &Util::BasicTreeView::filesDropped,                                     this,                       &Tab::addOrAppendDroppedFiles);
   connect(p.ui->tracks->selectionModel(),      &QItemSelectionModel::selectionChanged,                                 p.tracksModel,              &TrackModel::updateSelectionStatus);
   connect(p.ui->tracks->selectionModel(),      &QItemSelectionModel::selectionChanged,                                 this,                       &Tab::onTrackSelectionChanged);
 
@@ -613,36 +603,6 @@ Tab::setupPredefinedTrackNames() {
   p.ui->trackName->clear();
   p.ui->trackName->addItems(items);
   p.ui->trackName->setCurrentText(name);
-}
-
-void
-Tab::setupFileIdentificationThread() {
-  auto &p      = *p_func();
-  auto &worker = p.identifier->worker();
-
-  connect(&worker, &FileIdentificationWorker::queueStarted,                    this, &Tab::fileIdentificationStarted);
-  connect(&worker, &FileIdentificationWorker::queueFinished,                   this, &Tab::fileIdentificationFinished);
-  connect(&worker, &FileIdentificationWorker::filesIdentified,                 this, &Tab::addOrAppendIdentifiedFiles);
-  connect(&worker, &FileIdentificationWorker::identificationFailed,            this, &Tab::showFileIdentificationError);
-  connect(&worker, &FileIdentificationWorker::identifiedAsXmlOrSimpleChapters, this, &Tab::handleIdentifiedXmlOrSimpleChapters);
-  connect(&worker, &FileIdentificationWorker::identifiedAsXmlSegmentInfo,      this, &Tab::handleIdentifiedXmlSegmentInfo);
-  connect(&worker, &FileIdentificationWorker::identifiedAsXmlTags,             this, &Tab::handleIdentifiedXmlTags);
-  connect(&worker, &FileIdentificationWorker::playlistScanStarted,             this, &Tab::showScanningPlaylistDialog);
-  connect(&worker, &FileIdentificationWorker::playlistScanFinished,            this, &Tab::hideScanningDirectoryDialog);
-  connect(&worker, &FileIdentificationWorker::playlistScanDecisionNeeded,      this, &Tab::selectScanPlaylistPolicy);
-  connect(&worker, &FileIdentificationWorker::playlistSelectionNeeded,         this, &Tab::selectPlaylistToAdd);
-
-  p.identifier->start();
-}
-
-void
-Tab::fileIdentificationStarted() {
-  p_func()->ui->overlordWidget->setEnabled(false);
-}
-
-void
-Tab::fileIdentificationFinished() {
-  p_func()->ui->overlordWidget->setEnabled(true);
 }
 
 void
@@ -1278,121 +1238,34 @@ Tab::onAdditionalTrackOptionsChanged(QString newValue) {
 
 void
 Tab::onAddFiles() {
-  addOrAppendFiles(false);
+  selectFilesAndIdentifyForAddingOrAppending(IdentificationPack::AddMode::Add);
 }
 
 void
 Tab::onAppendFiles() {
-  addOrAppendFiles(true);
+  selectFilesAndIdentifyForAddingOrAppending(IdentificationPack::AddMode::Append);
 }
 
 void
-Tab::addOrAppendFiles(bool append) {
-  auto fileNames = selectFilesToAdd(append ? QY("Append media files") : QY("Add media files"));
-  if (!fileNames.isEmpty())
-    addOrAppendFiles(append, fileNames, selectedSourceFile());
+Tab::selectFilesAndIdentifyForAddingOrAppending(IdentificationPack::AddMode addMode) {
+  auto fileNames = selectFilesToAdd(addMode == IdentificationPack::AddMode::Append ? QY("Append media files") : QY("Add media files"));
+  if (fileNames.isEmpty())
+    return;
+
+  IdentificationPack pack;
+  pack.m_tabId         = reinterpret_cast<uint64_t>(this);
+  pack.m_addMode       = addMode;
+  pack.m_fileNames     = fileNames;
+  // pack.m_sourceFileIdx = sourceFileIdx;
+  pack.m_sourceFileIdx = selectedSourceFile();
+
+  Tool::identifier().addPackToIdentify(pack);
 }
 
 void
-Tab::addFiles(QStringList const &fileNames) {
-  addOrAppendFiles(false, fileNames, QModelIndex{});
-}
-
-void
-Tab::handleIdentifiedXmlOrSimpleChapters(QString const &fileName) {
-  auto &p = *p_func();
-
-  Util::MessageBox::warning(this)
-    ->title(QY("Adding chapter files"))
-    .text(Q("%1 %2 %3 %4")
-          .arg(QY("The file '%1' contains chapters.").arg(fileName))
-          .arg(QY("These aren't treated like other source files in MKVToolNix."))
-          .arg(QY("Instead such a file must be set via the 'chapter file' option on the 'output' tab."))
-          .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
-    .onlyOnce(Q("mergeChaptersDropped"))
-    .exec();
-
-  p.config.m_chapters = fileName;
-  p.ui->chapters->setText(fileName);
-
-  p.identifier->continueIdentification();
-}
-
-void
-Tab::handleIdentifiedXmlSegmentInfo(QString const &fileName) {
-  auto &p = *p_func();
-
-  Util::MessageBox::warning(this)
-    ->title(QY("Adding segment info files"))
-    .text(Q("%1 %2 %3 %4")
-          .arg(QY("The file '%1' contains segment information.").arg(fileName))
-          .arg(QY("These aren't treated like other source files in MKVToolNix."))
-          .arg(QY("Instead such a file must be set via the 'segment info' option on the 'output' tab."))
-          .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
-    .onlyOnce(Q("mergeSegmentInfoDropped"))
-    .exec();
-
-  p.config.m_segmentInfo = fileName;
-  p.ui->segmentInfo->setText(fileName);
-
-  p.identifier->continueIdentification();
-}
-
-void
-Tab::handleIdentifiedXmlTags(QString const &fileName) {
-  auto &p = *p_func();
-
-  Util::MessageBox::warning(this)
-    ->title(QY("Adding tag files"))
-    .text(Q("%1 %2 %3 %4")
-          .arg(QY("The file '%1' contains tags.").arg(fileName))
-          .arg(QY("These aren't treated like other source files in MKVToolNix."))
-          .arg(QY("Instead such a file must be set via the 'global tags' option on the 'output' tab."))
-          .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
-    .onlyOnce(Q("mergeTagsDropped"))
-    .exec();
-
-  p.config.m_globalTags = fileName;
-  p.ui->globalTags->setText(fileName);
-
-  p.identifier->continueIdentification();
-}
-
-void
-Tab::showFileIdentificationError(QString const &errorTitle,
-                                 QString const &errorText) {
-  auto &p  = *p_func();
-  auto dlg = Util::MessageBox::critical(this);
-
-  if (!p.identifier->isEmpty()) {
-    dlg->buttons(QMessageBox::Ok | QMessageBox::Cancel);
-    dlg->buttonLabel(QMessageBox::Ok, QY("&Continue identification"));
-  }
-
-  auto result = dlg->title(errorTitle).text(errorText).exec();
-
-  if (p.identifier->isEmpty() || (result == QMessageBox::Ok))
-    p.identifier->continueIdentification();
-  else
-    p.identifier->abortIdentification();
-}
-
-void
-Tab::addOrAppendFiles(bool append,
-                      QStringList const &fileNames,
-                      QModelIndex const &sourceFileIdx) {
-  if (!fileNames.isEmpty())
-    Util::Settings::get().m_lastOpenDir.setPath(QFileInfo{fileNames.last()}.path());
-
-  qDebug() << "Tab::addOrAppendFiles: TID" << QThread::currentThreadId();
-
-  p_func()->identifier->worker().addFilesToIdentify(fileNames, append, sourceFileIdx);
-}
-
-void
-Tab::addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles,
-                                bool append,
-                                QModelIndex const &sourceFileIdx) {
+Tab::addOrAppendIdentifiedFiles(QVector<SourceFilePtr> const &identifiedFiles,
+                                QModelIndex const &fileModelIdx,
+                                IdentificationPack::AddMode addMode) {
   auto &p = *p_func();
 
   if (identifiedFiles.isEmpty())
@@ -1406,7 +1279,7 @@ Tab::addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles,
 
   setDefaultsFromSettingsForAddedFiles(identifiedFiles);
 
-  p.filesModel->addOrAppendFilesAndTracks(sourceFileIdx, identifiedFiles, append);
+  p.filesModel->addOrAppendFilesAndTracks(identifiedFiles, fileModelIdx, addMode == IdentificationPack::AddMode::Append);
 
   if (p.debugTrackModel) {
     log_it(fmt::format("### AFTER adding/appending ###\n"));
@@ -1427,7 +1300,18 @@ Tab::addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles,
 }
 
 void
-Tab::addDataFromIdentifiedBlurayFiles(QList<SourceFilePtr> const &files) {
+Tab::addIdentifiedFilesAsAdditionalParts(QVector<SourceFilePtr> const &identifiedFiles,
+                                         QModelIndex const &fileModelIdx) {
+  QStringList fileNames;
+
+  for (auto const &identifiedFile : identifiedFiles)
+    fileNames << identifiedFile->m_fileName;
+
+  p_func()->filesModel->addAdditionalParts(fileNames, fileModelIdx);
+}
+
+void
+Tab::addDataFromIdentifiedBlurayFiles(QVector<SourceFilePtr> const &files) {
   for (auto const &file : files) {
     if (!file->m_discLibraryInfoToAdd)
       continue;
@@ -1443,77 +1327,7 @@ Tab::addDataFromIdentifiedBlurayFiles(QList<SourceFilePtr> const &files) {
 }
 
 void
-Tab::selectScanPlaylistPolicy(SourceFilePtr const &sourceFile,
-                              QFileInfoList const &files) {
-  auto &p = *p_func();
-
-  AskScanForPlaylistsDialog dialog{this};
-
-  if (dialog.ask(*sourceFile, files.count() - 1))
-    p.identifier->continueByScanningPlaylists(files);
-
-  else {
-    p.identifier->worker().addIdentifiedFile(sourceFile);
-    p.identifier->continueIdentification();
-  }
-}
-
-void
-Tab::hideScanningDirectoryDialog() {
-  auto &p = *p_func();
-
-  if (!p.scanningDirectoryDialog)
-    return;
-
-  delete p.scanningDirectoryDialog;
-  p.scanningDirectoryDialog = nullptr;
-}
-
-void
-Tab::showScanningPlaylistDialog(int numFilesToScan) {
-  auto &p      = *p_func();
-  auto &worker = p.identifier->worker();
-
-  if (!p.scanningDirectoryDialog)
-    p.scanningDirectoryDialog = new QProgressDialog{ QY("Scanning directory"), QY("Cancel"), 0, numFilesToScan, this };
-
-  connect(&worker,                   &FileIdentificationWorker::playlistScanProgressChanged, p.scanningDirectoryDialog, &QProgressDialog::setValue);
-  connect(p.scanningDirectoryDialog, &QProgressDialog::canceled,                             p.identifier,              &FileIdentificationThread::abortPlaylistScan);
-
-  p.scanningDirectoryDialog->setWindowTitle(QY("Scanning directory"));
-  p.scanningDirectoryDialog->show();
-}
-
-void
-Tab::selectPlaylistToAdd(QList<SourceFilePtr> const &identifiedPlaylists) {
-  auto &p = *p_func();
-
-  if (identifiedPlaylists.isEmpty())
-    return;
-
-  auto discLibrary = mtx::bluray::disc_library::locate_and_parse(to_utf8(identifiedPlaylists[0]->m_fileName));
-
-  if ((identifiedPlaylists.size() == 1) && (!discLibrary || (discLibrary->m_infos_by_language.size() <= 1))) {
-    if (discLibrary && (discLibrary->m_infos_by_language.size() == 1))
-      identifiedPlaylists[0]->m_discLibraryInfoToAdd = discLibrary->m_infos_by_language.begin()->second;
-
-    p.identifier->worker().addIdentifiedFile(identifiedPlaylists[0]);
-
-    p.identifier->continueIdentification();
-
-    return;
-  }
-
-  auto playlist = SelectPlaylistDialog{this, identifiedPlaylists, discLibrary}.select();
-
-  if (playlist)
-    p.identifier->worker().addIdentifiedFile(playlist);
-
-  p.identifier->continueIdentification();
-}
-
-void
-Tab::setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files) {
+Tab::setDefaultsFromSettingsForAddedFiles(QVector<SourceFilePtr> const &files) {
   auto &cfg = Util::Settings::get();
 
   auto defaultFlagSet = QHash<TrackType, bool>{};
@@ -1538,7 +1352,15 @@ Tab::setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files) {
 
 QStringList
 Tab::selectFilesToAdd(QString const &title) {
-  return Util::getOpenFileNames(this, title, Util::Settings::get().lastOpenDirPath(), Util::FileTypeFilter::get().join(Q(";;")), nullptr, QFileDialog::HideNameFilterDetails);
+  auto &settings = Util::Settings::get();
+  auto fileNames = Util::getOpenFileNames(this, title, settings.lastOpenDirPath(), Util::FileTypeFilter::get().join(Q(";;")), nullptr, QFileDialog::HideNameFilterDetails);
+
+  if (!fileNames.isEmpty()) {
+    settings.m_lastOpenDir.setPath(QFileInfo{fileNames[0]}.path());
+    settings.save();
+  }
+
+  return fileNames;
 }
 
 void
@@ -1552,7 +1374,7 @@ Tab::onAddAdditionalParts() {
     return;
   }
 
-  p.filesModel->addAdditionalParts(currentIdx, selectFilesToAdd(QY("Add media files as additional parts")));
+  p.filesModel->addAdditionalParts(selectFilesToAdd(QY("Add media files as additional parts")), currentIdx);
 }
 
 void
@@ -1722,7 +1544,7 @@ Tab::selectedSourceFile()
 }
 
 void
-Tab::setTitleMaybe(QList<SourceFilePtr> const &files) {
+Tab::setTitleMaybe(QVector<SourceFilePtr> const &files) {
   for (auto const &file : files) {
     setTitleMaybe(file->m_properties.value("title").toString());
 
@@ -1885,85 +1707,6 @@ Tab::setDestinationFileNameFromSelectedFile() {
   p.config.m_firstInputFileName = QDir::toNativeSeparators(selectedFileName);
 
   setOutputFileNameMaybe(true);
-}
-
-void
-Tab::addOrAppendDroppedFiles(QStringList const &fileNamesToAddOrAppend,
-                             Qt::MouseButtons mouseButtons) {
-  auto &p        = *p_func();
-  auto fileNames = Util::replaceDirectoriesByContainedFiles(fileNamesToAddOrAppend);
-
-  if (fileNames.isEmpty())
-    return;
-
-  auto noFilesAdded = p.config.m_files.isEmpty();
-
-  if ((fileNames.count() == 1) && noFilesAdded) {
-    addOrAppendFiles(false, fileNames, QModelIndex{});
-    return;
-  }
-
-  auto &settings = Util::Settings::get();
-
-  auto decision  = settings.m_mergeAddingAppendingFilesPolicy;
-  auto fileIdx   = QModelIndex{};
-
-  if (   (Util::Settings::MergeAddingAppendingFilesPolicy::Ask == decision)
-      || ((mouseButtons & Qt::RightButton)                     == Qt::RightButton)) {
-    AddingAppendingFilesDialog dlg{this, p.config.m_files};
-    dlg.setDefaults(settings.m_mergeLastAddingAppendingDecision, p.lastAddAppendFileIdx);
-    if (!dlg.exec())
-      return;
-
-    decision = dlg.decision();
-    fileIdx  = p.filesModel->index(dlg.fileIndex(), 0);
-
-    settings.m_mergeLastAddingAppendingDecision = decision;
-    p.lastAddAppendFileIdx                      = dlg.fileIndex();
-
-    if (dlg.alwaysUseThisDecision())
-      settings.m_mergeAddingAppendingFilesPolicy = decision;
-
-    settings.save();
-  }
-
-  if (Util::Settings::MergeAddingAppendingFilesPolicy::AddAdditionalParts == decision)
-    p.filesModel->addAdditionalParts(fileIdx, fileNames);
-
-  else if (Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew == decision)
-    MainWindow::mergeTool()->addMultipleFilesToNewSettings(fileNames, false);
-
-  else if (Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew == decision) {
-    auto toAdd = fileNames;
-
-    if (noFilesAdded)
-      addOrAppendFiles(false, QStringList{} << toAdd.takeFirst(), QModelIndex{});
-
-    if (!toAdd.isEmpty())
-      MainWindow::mergeTool()->addMultipleFilesToNewSettings(toAdd, true);
-
-  } else
-    addOrAppendFiles(Util::Settings::MergeAddingAppendingFilesPolicy::Append == decision, fileNames, fileIdx);
-}
-
-void
-Tab::addOrAppendDroppedFilesDelayed() {
-  auto &p = *p_func();
-
-  addOrAppendDroppedFiles(p.filesToAddDelayed, p.mouseButtonsForFilesToAddDelayed);
-  p.filesToAddDelayed.clear();
-  p.mouseButtonsForFilesToAddDelayed = Qt::NoButton;
-}
-
-void
-Tab::addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames,
-                                        Qt::MouseButtons mouseButtons) {
-  auto &p = *p_func();
-
-  p.filesToAddDelayed                += fileNames;
-  p.mouseButtonsForFilesToAddDelayed  = mouseButtons;
-
-  QTimer::singleShot(0, this, [this]() { addOrAppendDroppedFilesDelayed(); });
 }
 
 void

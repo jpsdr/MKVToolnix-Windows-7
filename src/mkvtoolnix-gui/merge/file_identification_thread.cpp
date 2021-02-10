@@ -21,14 +21,7 @@ namespace mtx::gui::Merge {
 class FileIdentificationWorkerPrivate {
   friend class FileIdentificationWorker;
 
-  struct IdentificationPack {
-    QStringList m_fileNames;
-    bool m_append;
-    QModelIndex m_sourceFileIdx;
-    QList<SourceFilePtr> m_identifiedFiles;
-  };
-
-  QList<IdentificationPack> m_toIdentify;
+  QVector<IdentificationPack> m_toIdentify;
   QMutex m_mutex;
   QAtomicInteger<bool> m_abortPlaylistScan;
   mtx::regex::jp::Regex m_simpleChaptersRE, m_xmlChaptersRE, m_xmlSegmentInfoRE, m_xmlTagsRE;
@@ -55,16 +48,14 @@ FileIdentificationWorker::~FileIdentificationWorker() {
 }
 
 void
-FileIdentificationWorker::addFilesToIdentify(QStringList const &fileNames,
-                                             bool append,
-                                             QModelIndex const &sourceFileIdx) {
+FileIdentificationWorker::addPackToIdentify(IdentificationPack const &pack) {
   auto p = p_func();
 
-  qDebug() << "FileIdentificationWorker::addFilesToIdentify: adding" << fileNames;
+  qDebug() << "FileIdentificationWorker::addFilesToIdentify: adding" << pack.m_fileNames;
 
   QMutexLocker lock{&p->m_mutex};
 
-  p->m_toIdentify.push_back({ fileNames, append, sourceFileIdx });
+  p->m_toIdentify.push_back(pack);
 
   QTimer::singleShot(0, this, [this]() { identifyFiles(); });
 }
@@ -78,11 +69,20 @@ FileIdentificationWorker::abortPlaylistScan() {
 }
 
 void
-FileIdentificationWorker::addIdentifiedFile(SourceFilePtr const &identifiedFile) {
+FileIdentificationWorker::addIdentifiedFile(SourceFilePtr const &sourceFile) {
   auto p = p_func();
 
   QMutexLocker lock{&p->m_mutex};
-  p->m_toIdentify.first().m_identifiedFiles << identifiedFile;
+  p->m_toIdentify.first().m_identifiedFiles << IdentificationPack::IdentifiedFile{ IdentificationPack::FileType::Regular, sourceFile->m_fileName, sourceFile };
+}
+
+void
+FileIdentificationWorker::addIdentifiedFile(IdentificationPack::FileType type,
+                                            QString const &fileName) {
+  auto p = p_func();
+
+  QMutexLocker lock{&p->m_mutex};
+  p->m_toIdentify.first().m_identifiedFiles << IdentificationPack::IdentifiedFile{ type, fileName, {} };
 }
 
 bool
@@ -125,7 +125,8 @@ FileIdentificationWorker::identifyFiles() {
       if (pack.m_fileNames.isEmpty()) {
         qDebug() << "FileIdentificationWorker::identifyFiles: pack finished, notifying";
 
-        Q_EMIT filesIdentified(pack.m_identifiedFiles, pack.m_append, pack.m_sourceFileIdx);
+        Q_EMIT packIdentified(pack);
+
         p->m_toIdentify.removeFirst();
 
         continue;
@@ -158,29 +159,26 @@ FileIdentificationWorker::abortIdentification() {
   Q_EMIT queueFinished();
 }
 
-bool
-FileIdentificationWorker::handleFileThatShouldBeSelectedElsewhere(QString const &fileName) {
+IdentificationPack::FileType
+FileIdentificationWorker::determineIfFileThatShouldBeSelectedElsewhere(QString const &fileName) {
   auto p = p_func();
 
   QFile file{fileName};
   if (!file.open(QIODevice::ReadOnly))
-    return false;
+    return IdentificationPack::FileType::Regular;
 
   auto content = std::string{ file.read(1024).data() };
 
   if (mtx::regex::match(content, p->m_simpleChaptersRE) || mtx::regex::match(content, p->m_xmlChaptersRE))
-    Q_EMIT identifiedAsXmlOrSimpleChapters(fileName);
+    return IdentificationPack::FileType::Chapters;
 
   else if (mtx::regex::match(content, p->m_xmlSegmentInfoRE))
-    Q_EMIT identifiedAsXmlSegmentInfo(fileName);
+    return IdentificationPack::FileType::SegmentInfo;
 
   else if (mtx::regex::match(content, p->m_xmlTagsRE))
-    Q_EMIT identifiedAsXmlTags(fileName);
+    return IdentificationPack::FileType::Tags;
 
-  else
-    return false;
-
-  return true;
+  return IdentificationPack::FileType::Regular;
 }
 
 std::optional<FileIdentificationWorker::Result>
@@ -241,7 +239,7 @@ FileIdentificationWorker::scanPlaylists(QFileInfoList const &files) {
 
   Q_EMIT playlistScanStarted(numFiles);
 
-  QList<SourceFilePtr> identifiedPlaylists;
+  QVector<SourceFilePtr> identifiedPlaylists;
   auto minimumPlaylistDuration = timestamp_c::s(Util::Settings::get().m_minimumPlaylistDuration);
 
   for (auto idx = 0; idx < numFiles; ++idx) {
@@ -285,9 +283,11 @@ FileIdentificationWorker::identifyThisFile(QString const &fileName) {
   qDebug() << "FileIdentificationWorker::identifyThisFile: starting for" << fileName;
   qDebug() << "FileIdentificationWorker::identifyThisFile: thread ID:" << QThread::currentThreadId();
 
-  if (handleFileThatShouldBeSelectedElsewhere(fileName)) {
+  auto fileType = determineIfFileThatShouldBeSelectedElsewhere(fileName);
+  if (fileType != IdentificationPack::FileType::Regular) {
     qDebug() << "FileIdentificationWorker::identifyThisFile: identified as chapters/tags/segmentinfo";
-    return Result::Wait;
+    addIdentifiedFile(fileType, fileName);
+    return Result::Continue;
   }
 
   auto result = handleBlurayMainFile(fileName);

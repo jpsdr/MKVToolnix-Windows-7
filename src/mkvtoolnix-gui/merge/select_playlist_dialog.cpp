@@ -228,7 +228,7 @@ DiscLibraryItem::create(std::string const &language,
 // ------------------------------------------------------------
 
 SelectPlaylistDialog::SelectPlaylistDialog(QWidget *parent,
-                                           QList<SourceFilePtr> const &scannedFiles,
+                                           QVector<SourceFilePtr> const &scannedFiles,
                                            std::optional<mtx::bluray::disc_library::disc_library_t> const &discLibrary)
   : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , ui{new Ui::SelectPlaylistDialog}

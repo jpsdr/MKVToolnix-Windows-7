@@ -10,7 +10,6 @@
 
 class QComboBox;
 class QMenu;
-class QProgressDialog;
 
 namespace mtx::gui::Merge {
 
@@ -26,12 +25,8 @@ class TabPrivate {
   // non-UI stuff:
   MuxConfig config;
 
-  int lastAddAppendFileIdx{-1};
-
   // UI stuff:
   std::unique_ptr<Ui::Tab> ui;
-  QStringList filesToAddDelayed;
-  Qt::MouseButtons mouseButtonsForFilesToAddDelayed;
 
   // "Input" tab:
   SourceFileModel *filesModel{};
@@ -55,9 +50,6 @@ class TabPrivate {
   QAction *addAttachmentsAction{}, *removeAttachmentsAction{}, *removeAllAttachmentsAction{}, *selectAllAttachmentsAction{};
 
   QString savedState, emptyState;
-
-  FileIdentificationThread *identifier{};
-  QProgressDialog *scanningDirectoryDialog{};
 
   debugging_option_c debugTrackModel{"track_model"};
 

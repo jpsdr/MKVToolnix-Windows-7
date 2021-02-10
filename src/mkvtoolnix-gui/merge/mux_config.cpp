@@ -359,7 +359,7 @@ MuxConfig::load(QString const &fileName) {
 }
 
 QString
-MuxConfig::determineFirstInputFileName(QList<SourceFilePtr> const &files) {
+MuxConfig::determineFirstInputFileName(QVector<SourceFilePtr> const &files) {
   if (files.isEmpty())
     return QString{};
 
@@ -411,7 +411,7 @@ MuxConfig::load(Util::ConfigFile &settings) {
     m_tracks << track;
   }
 
-  m_firstInputFileName = settings.value("firstInputFileName", determineFirstInputFileName(m_files)).toString();
+  m_firstInputFileName = settings.value("firstInputFileName", determineFirstInputFileName(m_files.toVector())).toString();
   m_firstInputFileName = QDir::toNativeSeparators(m_firstInputFileName);
 
   settings.endGroup();

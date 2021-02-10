@@ -7,7 +7,6 @@
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/merge/command_line_dialog.h"
-#include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tab_p.h"
 #include "mkvtoolnix-gui/merge/tool.h"
@@ -37,7 +36,6 @@ using namespace mtx::gui;
 
 TabPrivate::TabPrivate(QWidget *parent)
   : ui{new Ui::Tab}
-  , mouseButtonsForFilesToAddDelayed{}
   , filesModel{new SourceFileModel{parent}}
   , tracksModel{new TrackModel{parent}}
   , currentlySettingInputControlValues{false}
@@ -85,7 +83,6 @@ TabPrivate::TabPrivate(QWidget *parent)
   , removeAttachmentsAction{new QAction{parent}}
   , removeAllAttachmentsAction{new QAction{parent}}
   , selectAllAttachmentsAction{new QAction{parent}}
-  , identifier{new FileIdentificationThread{parent}}
 {
 }
 
@@ -108,7 +105,6 @@ Tab::Tab(QWidget *parent)
   setupInputControls();
   setupOutputControls();
   setupAttachmentsControls();
-  setupFileIdentificationThread();
 
   setControlValuesFromConfig();
 
@@ -124,11 +120,6 @@ Tab::Tab(QWidget *parent)
 }
 
 Tab::~Tab() {
-  auto &p = *p_func();
-
-  p.identifier->abortPlaylistScan();
-  p.identifier->quit();
-  p.identifier->wait();
 }
 
 QString const &
@@ -575,7 +566,7 @@ Tab::handleClearingMergeSettings(Util::Settings::ClearMergeSettingsAction action
   }
 
   // Util::Settings::ClearMergeSettingsAction::NewSettings
-  MainWindow::mergeTool()->newConfig();
+  MainWindow::mergeTool()->appendNewTab();
   QTimer::singleShot(0, this, [this]() { signalRemovalOfThisTab(); });
 }
 
@@ -598,6 +589,16 @@ Tab::hasBeenModified() {
 bool
 Tab::isEmpty() {
   return currentState() == p_func()->emptyState;
+}
+
+QList<SourceFilePtr> const &
+Tab::sourceFiles() {
+  return p_func()->config.m_files;
+}
+
+QModelIndex
+Tab::fileModelIndexForFileNum(unsigned int num) {
+  return p_func()->filesModel->index(num, 0);
 }
 
 }

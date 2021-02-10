@@ -689,6 +689,27 @@ Tab::setChapterCharacterSet(QString const &characterSet) {
 }
 
 void
+Tab::setChaptersFileName(QString const &fileName) {
+  auto &p             = *p_func();
+  p.config.m_chapters = fileName;
+  p.ui->chapters->setText(fileName);
+}
+
+void
+Tab::setTagsFileName(QString const &fileName) {
+  auto &p               = *p_func();
+  p.config.m_globalTags = fileName;
+  p.ui->globalTags->setText(fileName);
+}
+
+void
+Tab::setSegmentInfoFileName(QString const &fileName) {
+  auto &p                = *p_func();
+  p.config.m_segmentInfo = fileName;
+  p.ui->segmentInfo->setText(fileName);
+}
+
+void
 Tab::onCopyFirstFileNameToTitle() {
   auto &p = *p_func();
 

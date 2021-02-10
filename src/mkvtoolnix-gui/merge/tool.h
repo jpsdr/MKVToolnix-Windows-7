@@ -3,6 +3,8 @@
 #include "common/common_pch.h"
 
 #include "mkvtoolnix-gui/main_window/tool_base.h"
+#include "mkvtoolnix-gui/merge/file_identification_thread.h"
+#include "mkvtoolnix-gui/merge/source_file.h"
 
 class QDragEnterEvent;
 class QDragMoveEvent;
@@ -38,7 +40,7 @@ public:
 public Q_SLOTS:
   virtual void retranslateUi();
 
-  virtual void newConfig();
+  virtual Tab *appendNewTab();
   virtual void openConfig();
 
   virtual bool closeTab(int index);
@@ -62,16 +64,31 @@ public Q_SLOTS:
   virtual void toolShown() override;
   virtual void tabTitleChanged();
 
-  virtual void filesDropped(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
+  virtual void identifyMultipleFiles(QStringList const &fileNamesToIdentify, Qt::MouseButtons mouseButtons);
+  virtual void identifyMultipleFilesFromCommandLine(QStringList const &fileNames);
+  virtual void handleIdentifiedFiles(IdentificationPack pack);
+  virtual void handleIdentifiedNonSourceFiles(IdentificationPack &pack);
+  virtual void handleIdentifiedSourceFiles(IdentificationPack &sourceFiles);
 
-  virtual void addMultipleFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
-  virtual void addMultipleFilesFromCommandLine(QStringList const &fileNames);
   virtual void openMultipleConfigFilesFromCommandLine(QStringList const &fileNames);
-  virtual void addMultipleFilesToNewSettings(QStringList const &fileNames, bool newSettingsForEachFile);
+
+  virtual void fileIdentificationStarted();
+  virtual void fileIdentificationFinished();
+  virtual void handleIdentifiedXmlOrSimpleChapters(QString const &fileName);
+  virtual void handleIdentifiedXmlSegmentInfo(QString const &fileName);
+  virtual void handleIdentifiedXmlTags(QString const &fileName);
+  virtual void showFileIdentificationError(QString const &errorTitle, QString const &errorText);
+  virtual void showScanningPlaylistDialog(int numFilesToScan);
+  virtual void selectScanPlaylistPolicy(SourceFilePtr const &sourceFile, QFileInfoList const &files);
+  virtual void selectPlaylistToAdd(QVector<SourceFilePtr> const &identifiedPlaylists);
+  virtual void hideScanningDirectoryDialog();
+  virtual void handleDroppedFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
 
 protected:
-  Tab *appendTab(Tab *tab);
+  virtual void setupFileIdentificationThread();
+
   virtual Tab *currentTab();
+  virtual Tab *tabForAddingOrAppending(uint64_t wantedId);
   virtual void forEachTab(std::function<void(Tab &)> const &worker);
 
   virtual void enableMenuActions();
@@ -81,6 +98,9 @@ protected:
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
   virtual void dragMoveEvent(QDragMoveEvent *event) override;
   virtual void dropEvent(QDropEvent *event) override;
+
+public:
+  static FileIdentificationWorker &identifier();
 };
 
 }

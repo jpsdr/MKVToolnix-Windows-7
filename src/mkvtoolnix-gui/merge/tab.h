@@ -3,6 +3,7 @@
 #include "common/common_pch.h"
 
 #include "mkvtoolnix-gui/main_window/tool_base.h"
+#include "mkvtoolnix-gui/merge/file_identification_pack.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 #include <QList>
@@ -25,7 +26,6 @@ enum class InitialDirMode {
   , ContentFirstInputFileLastOpenDir
 };
 
-class FileIdentificationThread;
 class MuxConfig;
 
 class TabPrivate;
@@ -51,7 +51,16 @@ public:
   virtual QString title() const;
   virtual void load(QString const &fileName);
   virtual void cloneConfig(MuxConfig const &config);
-  virtual void addFiles(QStringList const &fileNames);
+
+  virtual void setChaptersFileName(QString const &fileName);
+  virtual void setTagsFileName(QString const &fileName);
+  virtual void setSegmentInfoFileName(QString const &fileName);
+
+  virtual QList<SourceFilePtr> const &sourceFiles();
+  virtual QModelIndex fileModelIndexForFileNum(unsigned int num);
+
+  virtual void addOrAppendIdentifiedFiles(QVector<SourceFilePtr> const &identifiedFiles, QModelIndex const &fileModelIdx, IdentificationPack::AddMode addMode);
+  virtual void addIdentifiedFilesAsAdditionalParts(QVector<SourceFilePtr> const &identifiedFiles, QModelIndex const &fileModelIdx);
 
 Q_SIGNALS:
   void removeThisTab();
@@ -95,7 +104,6 @@ public Q_SLOTS:
   virtual void enableMoveFilesButtons();
 
   virtual void setupInputLayout();
-  virtual void setupFileIdentificationThread();
 
   virtual void onTrackNameChanged(QString newValue);
   virtual void onTrackItemChanged(QStandardItem *item);
@@ -144,26 +152,11 @@ public Q_SLOTS:
 
   virtual void onFileRowsInserted(QModelIndex const &parentIdx, int first, int last);
   virtual void onTrackRowsInserted(QModelIndex const &parentIdx, int first, int last);
-  virtual void addOrAppendDroppedFiles(QStringList const &fileNamesToAddOrAppend, Qt::MouseButtons mouseButtons);
-  virtual void addOrAppendDroppedFilesDelayed();
-  virtual void addFilesToBeAddedOrAppendedDelayed(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
-  virtual void addOrAppendIdentifiedFiles(QList<SourceFilePtr> const &identifiedFiles, bool append, QModelIndex const &sourceFileIdx);
 
   virtual void showFilesContextMenu(QPoint const &pos);
   virtual void showTracksContextMenu(QPoint const &pos);
   virtual void showAttachedFilesContextMenu(QPoint const &pos);
   virtual void showAttachmentsContextMenu(QPoint const &pos);
-
-  virtual void fileIdentificationStarted();
-  virtual void fileIdentificationFinished();
-  virtual void handleIdentifiedXmlOrSimpleChapters(QString const &fileName);
-  virtual void handleIdentifiedXmlSegmentInfo(QString const &fileName);
-  virtual void handleIdentifiedXmlTags(QString const &fileName);
-  virtual void showFileIdentificationError(QString const &errorTitle, QString const &errorText);
-  virtual void showScanningPlaylistDialog(int numFilesToScan);
-  virtual void selectScanPlaylistPolicy(SourceFilePtr const &sourceFile, QFileInfoList const &files);
-  virtual void selectPlaylistToAdd(QList<SourceFilePtr> const &identifiedPlaylists);
-  virtual void hideScanningDirectoryDialog();
 
   // Output tab:
   virtual void setupOutputFileControls();
@@ -247,9 +240,8 @@ protected:
 
   virtual QStringList selectFilesToAdd(QString const &title);
   virtual QStringList selectAttachmentsToAdd();
-  virtual void addOrAppendFiles(bool append);
-  virtual void addOrAppendFiles(bool append, QStringList const &fileNames, QModelIndex const &sourceFileIdx);
-  virtual void setDefaultsFromSettingsForAddedFiles(QList<SourceFilePtr> const &files);
+  virtual void selectFilesAndIdentifyForAddingOrAppending(IdentificationPack::AddMode addMode);
+  virtual void setDefaultsFromSettingsForAddedFiles(QVector<SourceFilePtr> const &files);
 
   virtual void enableFilesActions();
   virtual void enableTracksActions();
@@ -303,7 +295,7 @@ protected:
   virtual bool checkIfMissingAudioTrackIsOK();
   virtual QString findExistingDestination() const;
 
-  virtual void setTitleMaybe(QList<SourceFilePtr> const &files);
+  virtual void setTitleMaybe(QVector<SourceFilePtr> const &files);
   virtual void setTitleMaybe(QString const &title);
 
   virtual void setOutputFileNameMaybe(bool force = false);
@@ -320,7 +312,7 @@ protected:
   virtual void openFilesInMediaInfo(QStringList const &fileNames);
 
   virtual void addSegmentUIDFromFile(QLineEdit &lineEdit, bool append);
-  virtual void addDataFromIdentifiedBlurayFiles(QList<SourceFilePtr> const &files);
+  virtual void addDataFromIdentifiedBlurayFiles(QVector<SourceFilePtr> const &files);
 };
 
 }

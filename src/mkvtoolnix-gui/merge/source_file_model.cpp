@@ -198,8 +198,8 @@ SourceFileModel::indexFromSourceFile(quint64 value,
 }
 
 void
-SourceFileModel::addAdditionalParts(QModelIndex const &fileToAddToIdx,
-                                    QStringList const &fileNames) {
+SourceFileModel::addAdditionalParts(QStringList const &fileNames,
+                                    QModelIndex const &fileToAddToIdx) {
   auto actualIdx = Util::toTopLevelIdx(fileToAddToIdx);
   if (fileNames.isEmpty() || !actualIdx.isValid())
     return;
@@ -234,8 +234,8 @@ SourceFileModel::addAdditionalParts(QModelIndex const &fileToAddToIdx,
 }
 
 void
-SourceFileModel::addOrAppendFilesAndTracks(QModelIndex const &fileToAddToIdx,
-                                           QList<SourceFilePtr> const &files,
+SourceFileModel::addOrAppendFilesAndTracks(QVector<SourceFilePtr> const &files,
+                                           QModelIndex const &fileToAddToIdx,
                                            bool append) {
   Q_ASSERT(m_tracksModel);
 
@@ -243,13 +243,13 @@ SourceFileModel::addOrAppendFilesAndTracks(QModelIndex const &fileToAddToIdx,
     return;
 
   if (append)
-    appendFilesAndTracks(fileToAddToIdx, files);
+    appendFilesAndTracks(files, fileToAddToIdx);
   else
     addFilesAndTracks(files);
 }
 
 void
-SourceFileModel::addFilesAndTracks(QList<SourceFilePtr> const &files) {
+SourceFileModel::addFilesAndTracks(QVector<SourceFilePtr> const &files) {
   for (auto const &file : files) {
     createAndAppendRow(invisibleRootItem(), file);
     *m_sourceFiles << file;
@@ -348,8 +348,8 @@ SourceFileModel::removeFiles(QList<SourceFile *> const &files) {
 }
 
 void
-SourceFileModel::appendFilesAndTracks(QModelIndex const &fileToAppendToIdx,
-                                      QList<SourceFilePtr> const &files) {
+SourceFileModel::appendFilesAndTracks(QVector<SourceFilePtr> const &files,
+                                      QModelIndex const &fileToAppendToIdx) {
   auto actualIdx = Util::toTopLevelIdx(fileToAppendToIdx);
   if (files.isEmpty() || !actualIdx.isValid())
     return;

@@ -8,6 +8,7 @@
 #include <QIcon>
 #include <QList>
 #include <QSet>
+#include <QVector>
 
 namespace mtx::gui::Merge {
 
@@ -36,8 +37,8 @@ public:
 
   virtual void setSourceFiles(QList<SourceFilePtr> &sourceFiles);
   virtual void setOtherModels(TrackModel *tracksModel, AttachedFileModel *attachedFilesModel);
-  virtual void addOrAppendFilesAndTracks(QModelIndex const &fileToAddToIdx, QList<SourceFilePtr> const &files, bool append);
-  virtual void addAdditionalParts(QModelIndex const &fileToAddToIdx, QStringList const &fileNames);
+  virtual void addOrAppendFilesAndTracks(QVector<SourceFilePtr> const &files, QModelIndex const &fileToAddToIdx, bool append);
+  virtual void addAdditionalParts(QStringList const &fileNames, QModelIndex const &fileToAddToIdx);
   virtual void removeFiles(QList<SourceFile *> const &files);
   virtual void removeFile(SourceFile *fileToBeRemoved);
 
@@ -60,8 +61,8 @@ public Q_SLOTS:
   void updateSourceFileLists();
 
 protected:
-  virtual void addFilesAndTracks(QList<SourceFilePtr> const &files);
-  virtual void appendFilesAndTracks(QModelIndex const &fileToAddToIdx, QList<SourceFilePtr> const &files);
+  virtual void addFilesAndTracks(QVector<SourceFilePtr> const &files);
+  virtual void appendFilesAndTracks(QVector<SourceFilePtr> const &files, QModelIndex const &fileToAddToIdx);
 
   void setItemsFromSourceFile(QList<QStandardItem *> const &items, SourceFile *sourceFile) const;
   QList<QStandardItem *> createRow(SourceFile *sourceFile) const;

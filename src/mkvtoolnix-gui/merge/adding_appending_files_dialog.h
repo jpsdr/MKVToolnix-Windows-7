@@ -9,6 +9,8 @@
 
 namespace mtx::gui::Merge {
 
+class Tab;
+
 namespace Ui {
 class AddingAppendingFilesDialog;
 }
@@ -19,13 +21,13 @@ protected:
   std::unique_ptr<Ui::AddingAppendingFilesDialog> ui;
 
 public:
-  explicit AddingAppendingFilesDialog(QWidget *parent, QList<SourceFilePtr> const &files);
+  explicit AddingAppendingFilesDialog(QWidget *parent, Tab &tab);
   ~AddingAppendingFilesDialog();
 
-  void setDefaults(Util::Settings::MergeAddingAppendingFilesPolicy decision, int fileIndex);
+  void setDefaults(Util::Settings::MergeAddingAppendingFilesPolicy decision, int fileNum);
 
   Util::Settings::MergeAddingAppendingFilesPolicy decision() const;
-  int fileIndex() const;
+  int fileNum() const;
   bool alwaysUseThisDecision() const;
 
 public Q_SLOTS:

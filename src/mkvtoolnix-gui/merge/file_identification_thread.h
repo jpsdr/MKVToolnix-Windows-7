@@ -3,15 +3,13 @@
 #include "common/common_pch.h"
 
 #include <QFileInfo>
-#include <QModelIndex>
 #include <QStringList>
 #include <QThread>
 
+#include "mkvtoolnix-gui/merge/file_identification_pack.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 
 namespace mtx::gui::Merge {
-
-class SourceFile;
 
 class FileIdentificationWorkerPrivate;
 class FileIdentificationWorker : public QObject {
@@ -33,9 +31,10 @@ public:
   FileIdentificationWorker(QObject *parent = nullptr);
   virtual ~FileIdentificationWorker();
 
-  void addFilesToIdentify(QStringList const &fileNames, bool append, QModelIndex const &sourceFileIdx);
+  void addPackToIdentify(IdentificationPack const &pack);
 
-  void addIdentifiedFile(std::shared_ptr<SourceFile> const &identifiedFile);
+  void addIdentifiedFile(SourceFilePtr const &identifiedFile);
+  void addIdentifiedFile(IdentificationPack::FileType type, QString const &fileName);
   void abortPlaylistScan();
 
   bool isEmpty() const;
@@ -53,19 +52,15 @@ Q_SIGNALS:
   void playlistScanFinished();
   void playlistScanProgressChanged(int numFilesScanned);
   void playlistScanDecisionNeeded(std::shared_ptr<SourceFile> sourceFile, QFileInfoList files);
-  void playlistSelectionNeeded(QList<std::shared_ptr<Merge::SourceFile>> identifiedPlaylists);
+  void playlistSelectionNeeded(QVector<std::shared_ptr<Merge::SourceFile>> identifiedPlaylists);
 
-  void filesIdentified(QList<std::shared_ptr<Merge::SourceFile>> identifiedFiles, bool append, QModelIndex sourceFileIdx);
-
-  void identifiedAsXmlOrSimpleChapters(QString const &fileName);
-  void identifiedAsXmlSegmentInfo(QString const &fileName);
-  void identifiedAsXmlTags(QString const &fileName);
+  void packIdentified(Merge::IdentificationPack const &pack);
   void identifiedAsPlaylist();
 
   void identificationFailed(QString const &errorTitle, QString const &errorText);
 
 protected:
-  bool handleFileThatShouldBeSelectedElsewhere(QString const &fileName);
+  IdentificationPack::FileType determineIfFileThatShouldBeSelectedElsewhere(QString const &fileName);
   std::optional<FileIdentificationWorker::Result> handleBlurayMainFile(QString const &fileName);
   std::optional<FileIdentificationWorker::Result> handleIdentifiedPlaylist(SourceFilePtr const &sourceFile);
   Result identifyThisFile(QString const &fileName);

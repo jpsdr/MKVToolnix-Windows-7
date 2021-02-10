@@ -6,13 +6,14 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h"
 #include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
+#include "mkvtoolnix-gui/merge/tab.h"
 
 namespace mtx::gui::Merge {
 
 using namespace mtx::gui;
 
 AddingAppendingFilesDialog::AddingAppendingFilesDialog(QWidget *parent,
-                                                       QList<SourceFilePtr> const &files)
+                                                       Tab &tab)
   : QDialog{parent}
   , ui{new Ui::AddingAppendingFilesDialog}
 {
@@ -22,12 +23,12 @@ AddingAppendingFilesDialog::AddingAppendingFilesDialog(QWidget *parent,
   ui->rbAdd->setChecked(true);
   ui->cbFileName->setEnabled(false);
 
-  for (auto const &file : files) {
+  for (auto const &file : tab.sourceFiles()) {
     auto info = QFileInfo{file->m_fileName};
     ui->cbFileName->addItem(Q("%1 (%2)").arg(info.fileName()).arg(info.path()));
   }
 
-  if (files.isEmpty()) {
+  if (tab.sourceFiles().isEmpty()) {
     ui->lAppendTo->setEnabled(false);
     ui->rbAppend->setEnabled(false);
     ui->rbAddAdditionalParts->setEnabled(false);
@@ -49,7 +50,7 @@ AddingAppendingFilesDialog::~AddingAppendingFilesDialog() {
 
 void
 AddingAppendingFilesDialog::setDefaults(Util::Settings::MergeAddingAppendingFilesPolicy decision,
-                                        int fileIndex) {
+                                        int fileNum) {
   auto ctrl = decision == Util::Settings::MergeAddingAppendingFilesPolicy::Add          ? ui->rbAdd
             : decision == Util::Settings::MergeAddingAppendingFilesPolicy::Append       ? ui->rbAppend
             : decision == Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew     ? ui->rbAddToNew
@@ -59,8 +60,8 @@ AddingAppendingFilesDialog::setDefaults(Util::Settings::MergeAddingAppendingFile
   ctrl->setChecked(true);
   ctrl->setFocus();
 
-  if ((fileIndex >= 0) && (fileIndex <= ui->cbFileName->count()))
-    ui->cbFileName->setCurrentIndex(fileIndex);
+  if (fileNum <= ui->cbFileName->count())
+    ui->cbFileName->setCurrentIndex(fileNum);
 
   selectionChanged();
 }
@@ -76,7 +77,7 @@ AddingAppendingFilesDialog::decision()
 }
 
 int
-AddingAppendingFilesDialog::fileIndex()
+AddingAppendingFilesDialog::fileNum()
   const {
   return ui->cbFileName->currentIndex();
 }

@@ -1,20 +1,28 @@
 #include "common/common_pch.h"
 
+#include <QDebug>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QFileInfo>
 #include <QMenu>
 #include <QMessageBox>
+#include <QProgressDialog>
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/merge/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
+#include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
+#include "mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.h"
+#include "mkvtoolnix-gui/merge/file_identification_thread.h"
+#include "mkvtoolnix-gui/merge/file_identification_pack.h"
+#include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 #include "mkvtoolnix-gui/util/message_box.h"
@@ -34,12 +42,19 @@ class ToolPrivate {
   QMenu *mergeMenu{};
   mtx::gui::Util::FilesDragDropHandler filesDDHandler{Util::FilesDragDropHandler::Mode::Remember};
 
-  ToolPrivate(QMenu *p_mergeMenu);
+  FileIdentificationThread *identifier{};
+  QProgressDialog *scanningDirectoryDialog{};
+
+  QHash<Tab *, int> lastAddAppendFileNum;
+
+  ToolPrivate(QWidget *p_parent, QMenu *p_mergeMenu);
 };
 
-ToolPrivate::ToolPrivate(QMenu *p_mergeMenu)
+ToolPrivate::ToolPrivate(QWidget *p_parent,
+                         QMenu *p_mergeMenu)
   : ui{new Ui::Tool}
   , mergeMenu{p_mergeMenu}
+  , identifier{new FileIdentificationThread{p_parent}}
 {
 }
 
@@ -48,17 +63,24 @@ ToolPrivate::ToolPrivate(QMenu *p_mergeMenu)
 Tool::Tool(QWidget *parent,
            QMenu *mergeMenu)
   : ToolBase{parent}
-  , p_ptr{new ToolPrivate{mergeMenu}}
+  , p_ptr{new ToolPrivate{this, mergeMenu}}
 {
   auto &p = *p_func();
 
   // Setup UI controls.
   p.ui->setupUi(this);
 
+  setupFileIdentificationThread();
+
   MainWindow::get()->registerSubWindowWidget(*this, *p.ui->merges);
 }
 
 Tool::~Tool() {
+  auto &p = *p_func();
+
+  p.identifier->abortPlaylistScan();
+  p.identifier->quit();
+  p.identifier->wait();
 }
 
 void
@@ -81,7 +103,7 @@ Tool::setupActions() {
   connect(p.mergeMenu,                                &QMenu::aboutToShow,               this, &Tool::enableMenuActions);
   connect(p.mergeMenu,                                &QMenu::aboutToHide,               this, &Tool::enableCopyMenuActions);
 
-  connect(mwUi->actionMergeNew,                       &QAction::triggered,               this, &Tool::newConfig);
+  connect(mwUi->actionMergeNew,                       &QAction::triggered,               this, &Tool::appendNewTab);
   connect(mwUi->actionMergeOpen,                      &QAction::triggered,               this, &Tool::openConfig);
   connect(mwUi->actionMergeClose,                     &QAction::triggered,               this, &Tool::closeCurrentTab);
   connect(mwUi->actionMergeCloseAll,                  &QAction::triggered,               this, &Tool::closeAllTabs);
@@ -99,15 +121,32 @@ Tool::setupActions() {
   connect(mwUi->actionMergeCopyTitleToOutputFileName, &QAction::triggered,               this, &Tool::copyTitleToOutputFileName);
 
   connect(p.ui->merges,                               &QTabWidget::tabCloseRequested,    this, &Tool::closeTab);
-  connect(p.ui->newFileButton,                        &QPushButton::clicked,             this, &Tool::newConfig);
+  connect(p.ui->newFileButton,                        &QPushButton::clicked,             this, &Tool::appendNewTab);
   connect(p.ui->openFileButton,                       &QPushButton::clicked,             this, &Tool::openConfig);
 
   connect(mw,                                         &MainWindow::preferencesChanged,   this, [&p]() { Util::setupTabWidgetHeaders(*p.ui->merges); });
   connect(mw,                                         &MainWindow::preferencesChanged,   this, &Tool::retranslateUi);
   connect(mw,                                         &MainWindow::preferencesChanged,   this, []() { SourceFile::setupFromPreferences(); });
 
-  connect(App::instance(),                            &App::addingFilesToMergeRequested, this, &Tool::addMultipleFilesFromCommandLine);
+  connect(App::instance(),                            &App::addingFilesToMergeRequested, this, &Tool::identifyMultipleFilesFromCommandLine);
   connect(App::instance(),                            &App::openConfigFilesRequested,    this, &Tool::openMultipleConfigFilesFromCommandLine);
+}
+
+void
+Tool::setupFileIdentificationThread() {
+  auto &p      = *p_func();
+  auto &worker = p.identifier->worker();
+
+  connect(&worker, &FileIdentificationWorker::queueStarted,               this, &Tool::fileIdentificationStarted);
+  connect(&worker, &FileIdentificationWorker::queueFinished,              this, &Tool::fileIdentificationFinished);
+  connect(&worker, &FileIdentificationWorker::packIdentified,             this, &Tool::handleIdentifiedFiles);
+  connect(&worker, &FileIdentificationWorker::identificationFailed,       this, &Tool::showFileIdentificationError);
+  connect(&worker, &FileIdentificationWorker::playlistScanStarted,        this, &Tool::showScanningPlaylistDialog);
+  connect(&worker, &FileIdentificationWorker::playlistScanFinished,       this, &Tool::hideScanningDirectoryDialog);
+  connect(&worker, &FileIdentificationWorker::playlistScanDecisionNeeded, this, &Tool::selectScanPlaylistPolicy);
+  connect(&worker, &FileIdentificationWorker::playlistSelectionNeeded,    this, &Tool::selectPlaylistToAdd);
+
+  p.identifier->start();
 }
 
 void
@@ -180,8 +219,9 @@ Tool::currentTab() {
 }
 
 Tab *
-Tool::appendTab(Tab *tab) {
-  auto &p = *p_func();
+Tool::appendNewTab() {
+  auto &p  = *p_func();
+  auto tab = new Tab{this};
 
   connect(tab, &Tab::removeThisTab, this, &Tool::closeSendingTab);
   connect(tab, &Tab::titleChanged,  this, &Tool::tabTitleChanged);
@@ -192,11 +232,6 @@ Tool::appendTab(Tab *tab) {
   showMergeWidget();
 
   return tab;
-}
-
-void
-Tool::newConfig() {
-  appendTab(new Tab{this});
 }
 
 void
@@ -224,14 +259,12 @@ Tool::openConfigFile(QString const &fileName) {
   if (tab && tab->isEmpty())
     tab->deleteLater();
 
-  appendTab(new Tab{this})
-    ->load(fileName);
+  appendNewTab()->load(fileName);
 }
 
 void
 Tool::openFromConfig(MuxConfig const &config) {
-  appendTab(new Tab{this})
-    ->cloneConfig(config);
+  appendNewTab()->cloneConfig(config);
 }
 
 bool
@@ -398,13 +431,21 @@ void
 Tool::dropEvent(QDropEvent *event) {
   auto &p = *p_func();
 
-  if (p.filesDDHandler.handle(event, true))
-    filesDropped(p.filesDDHandler.fileNames(), event->mouseButtons());
+  if (p.filesDDHandler.handle(event, true)) {
+    auto fileNames    = p.filesDDHandler.fileNames();
+    auto mouseButtons = event->mouseButtons();
+
+    qDebug() << "dropEvent with files" << fileNames;
+
+    QTimer::singleShot(0, this, [this, fileNames, mouseButtons]() {
+      handleDroppedFiles(fileNames, mouseButtons);
+    });
+  }
 }
 
 void
-Tool::filesDropped(QStringList const &fileNames,
-                   Qt::MouseButtons mouseButtons) {
+Tool::handleDroppedFiles(QStringList const &fileNames,
+                         Qt::MouseButtons mouseButtons) {
   auto configExt  = Q(".mtxcfg");
   auto mediaFiles = QStringList{};
 
@@ -414,28 +455,16 @@ Tool::filesDropped(QStringList const &fileNames,
     else
       mediaFiles << fileName;
 
+  qDebug() << "handleDroppedFiles mediaFiles" << mediaFiles;
+
   if (!mediaFiles.isEmpty())
-    addMultipleFiles(mediaFiles, mouseButtons);
+    identifyMultipleFiles(mediaFiles, mouseButtons);
 }
 
 void
-Tool::addMultipleFiles(QStringList const &fileNames,
-                       Qt::MouseButtons mouseButtons) {
-  auto &p = *p_func();
-
-  if (!p.ui->merges->count())
-    newConfig();
-
-  auto tab = currentTab();
-  Q_ASSERT(!!tab);
-
-  tab->addFilesToBeAddedOrAppendedDelayed(fileNames, mouseButtons);
-}
-
-void
-Tool::addMultipleFilesFromCommandLine(QStringList const &fileNames) {
+Tool::identifyMultipleFilesFromCommandLine(QStringList const &fileNames) {
   MainWindow::get()->switchToTool(this);
-  addMultipleFiles(fileNames, Qt::NoButton);
+  identifyMultipleFiles(fileNames, Qt::NoButton);
 }
 
 void
@@ -446,36 +475,26 @@ Tool::openMultipleConfigFilesFromCommandLine(QStringList const &fileNames) {
 }
 
 void
-Tool::addMultipleFilesToNewSettings(QStringList const &fileNames,
-                                    bool newSettingsForEachFile) {
-  auto toProcess = fileNames;
-
-  while (!toProcess.isEmpty()) {
-    auto fileNamesToAdd = QStringList{};
-
-    if (newSettingsForEachFile)
-      fileNamesToAdd << toProcess.takeFirst();
-
-    else {
-      fileNamesToAdd = toProcess;
-      toProcess.clear();
-    }
-
-    newConfig();
-
-    auto tab = currentTab();
-    Q_ASSERT(!!tab);
-
-    tab->addFiles(fileNamesToAdd);
-  }
-}
-
-void
 Tool::addMergeTabIfNoneOpen() {
   auto &p = *p_func();
 
   if (!p.ui->merges->count())
-    appendTab(new Tab{this});
+    appendNewTab();
+}
+
+Tab *
+Tool::tabForAddingOrAppending(uint64_t wantedId) {
+  auto &p = *p_func();
+
+  for (auto idx = 0, numTabs = p.ui->merges->count(); idx < numTabs; ++idx) {
+    auto tab = static_cast<Tab *>(p.ui->merges->widget(idx));
+    if (reinterpret_cast<uint64_t>(tab) == wantedId)
+      return tab;
+  }
+
+  addMergeTabIfNoneOpen();
+
+  return currentTab();
 }
 
 void
@@ -498,6 +517,267 @@ Tool::nextPreviousWindowActionTexts()
     QY("&Next multiplex settings"),
     QY("&Previous multiplex settings"),
   };
+}
+
+void
+Tool::handleIdentifiedNonSourceFiles(IdentificationPack &pack) {
+  QVector<IdentificationPack::IdentifiedFile> sourceFiles;
+
+  for (auto const &identifiedFile : pack.m_identifiedFiles) {
+    if (identifiedFile.m_type == IdentificationPack::FileType::Chapters)
+      handleIdentifiedXmlOrSimpleChapters(identifiedFile.m_fileName);
+
+    else if (identifiedFile.m_type == IdentificationPack::FileType::Tags)
+      handleIdentifiedXmlTags(identifiedFile.m_fileName);
+
+    else if (identifiedFile.m_type == IdentificationPack::FileType::SegmentInfo)
+      handleIdentifiedXmlSegmentInfo(identifiedFile.m_fileName);
+
+    else
+      sourceFiles << identifiedFile;
+  }
+
+  pack.m_identifiedFiles = sourceFiles;
+}
+
+void
+Tool::handleIdentifiedSourceFiles(IdentificationPack &pack) {
+  auto &p = *p_func();
+
+  qDebug() << "handling identified source files";
+
+  if (pack.m_identifiedFiles.isEmpty())
+    return;
+
+  auto identifiedSourceFiles = pack.sourceFiles();
+  auto tab                   = tabForAddingOrAppending(pack.m_tabId);
+  auto noFilesAdded          = tab->isEmpty();
+
+  if (   (   (identifiedSourceFiles.count() == 1)
+          && noFilesAdded)
+      || (pack.m_addMode == IdentificationPack::AddMode::Append)) {
+    tab->addOrAppendIdentifiedFiles(identifiedSourceFiles, pack.m_sourceFileIdx, pack.m_addMode);
+    return;
+  }
+
+  auto &settings    = Util::Settings::get();
+
+  auto decision     = settings.m_mergeAddingAppendingFilesPolicy;
+  auto fileModelIdx = QModelIndex{};
+
+  if (   (Util::Settings::MergeAddingAppendingFilesPolicy::Ask == decision)
+      || ((pack.m_mouseButtons & Qt::RightButton)              == Qt::RightButton)) {
+    AddingAppendingFilesDialog dlg{this, *tab};
+    dlg.setDefaults(settings.m_mergeLastAddingAppendingDecision, p.lastAddAppendFileNum[tab]);
+    if (!dlg.exec())
+      return;
+
+    decision                                    = dlg.decision();
+    fileModelIdx                                = tab->fileModelIndexForFileNum(dlg.fileNum());
+
+    settings.m_mergeLastAddingAppendingDecision = decision;
+    p.lastAddAppendFileNum[tab]                 = dlg.fileNum();
+
+    if (dlg.alwaysUseThisDecision())
+      settings.m_mergeAddingAppendingFilesPolicy = decision;
+
+    settings.save();
+  }
+
+  if (Util::Settings::MergeAddingAppendingFilesPolicy::AddAdditionalParts == decision)
+    tab->addIdentifiedFilesAsAdditionalParts(identifiedSourceFiles, fileModelIdx);
+
+  else if (Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew == decision) {
+    auto newTab = appendNewTab();
+    newTab->addOrAppendIdentifiedFiles(identifiedSourceFiles, {}, IdentificationPack::AddMode::Add);
+
+  } else if (Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew == decision) {
+    if (noFilesAdded)
+      tab->addOrAppendIdentifiedFiles({ identifiedSourceFiles.takeFirst() }, {}, IdentificationPack::AddMode::Add);
+
+    for (auto const &identifiedSourceFile : identifiedSourceFiles) {
+      auto newTab = appendNewTab();
+      newTab->addOrAppendIdentifiedFiles({ identifiedSourceFile }, {}, IdentificationPack::AddMode::Add);
+    }
+
+  } else
+    tab->addOrAppendIdentifiedFiles(identifiedSourceFiles, fileModelIdx, Util::Settings::MergeAddingAppendingFilesPolicy::Append == decision ? IdentificationPack::AddMode::Append : IdentificationPack::AddMode::Add);
+}
+
+void
+Tool::handleIdentifiedFiles(IdentificationPack identifiedFiles) {
+  qDebug() << "handling identified files";
+
+  addMergeTabIfNoneOpen();
+
+  handleIdentifiedNonSourceFiles(identifiedFiles);
+  handleIdentifiedSourceFiles(identifiedFiles);
+}
+
+void
+Tool::identifyMultipleFiles(QStringList const &fileNamesToIdentify,
+                            Qt::MouseButtons mouseButtons) {
+  auto &p        = *p_func();
+  auto fileNames = Util::replaceDirectoriesByContainedFiles(fileNamesToIdentify);
+
+  if (fileNames.isEmpty())
+    return;
+
+  IdentificationPack pack;
+  pack.m_tabId        = reinterpret_cast<uint64_t>(currentTab());
+  pack.m_fileNames    = fileNames;
+  pack.m_mouseButtons = mouseButtons;
+
+  p.identifier->worker().addPackToIdentify(pack);
+}
+
+void
+Tool::fileIdentificationStarted() {
+  p_func()->ui->overlordWidget->setEnabled(false);
+}
+
+void
+Tool::fileIdentificationFinished() {
+  p_func()->ui->overlordWidget->setEnabled(true);
+}
+
+void
+Tool::handleIdentifiedXmlOrSimpleChapters(QString const &fileName) {
+  Util::MessageBox::warning(this)
+    ->title(QY("Adding chapter files"))
+    .text(Q("%1 %2 %3 %4")
+          .arg(QY("The file '%1' contains chapters.").arg(fileName))
+          .arg(QY("These aren't treated like other source files in MKVToolNix."))
+          .arg(QY("Instead such a file must be set via the 'chapter file' option on the 'output' tab."))
+          .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
+    .onlyOnce(Q("mergeChaptersDropped"))
+    .exec();
+
+  currentTab()->setChaptersFileName(fileName);
+}
+
+void
+Tool::handleIdentifiedXmlSegmentInfo(QString const &fileName) {
+  Util::MessageBox::warning(this)
+    ->title(QY("Adding segment info files"))
+    .text(Q("%1 %2 %3 %4")
+          .arg(QY("The file '%1' contains segment information.").arg(fileName))
+          .arg(QY("These aren't treated like other source files in MKVToolNix."))
+          .arg(QY("Instead such a file must be set via the 'segment info' option on the 'output' tab."))
+          .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
+    .onlyOnce(Q("mergeSegmentInfoDropped"))
+    .exec();
+
+  currentTab()->setSegmentInfoFileName(fileName);
+}
+
+void
+Tool::handleIdentifiedXmlTags(QString const &fileName) {
+  Util::MessageBox::warning(this)
+    ->title(QY("Adding tag files"))
+    .text(Q("%1 %2 %3 %4")
+          .arg(QY("The file '%1' contains tags.").arg(fileName))
+          .arg(QY("These aren't treated like other source files in MKVToolNix."))
+          .arg(QY("Instead such a file must be set via the 'global tags' option on the 'output' tab."))
+          .arg(QY("The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier.")))
+    .onlyOnce(Q("mergeTagsDropped"))
+    .exec();
+
+  currentTab()->setTagsFileName(fileName);
+}
+
+void
+Tool::showFileIdentificationError(QString const &errorTitle,
+                                 QString const &errorText) {
+  auto &p  = *p_func();
+  auto dlg = Util::MessageBox::critical(this);
+
+  if (!p.identifier->isEmpty()) {
+    dlg->buttons(QMessageBox::Ok | QMessageBox::Cancel);
+    dlg->buttonLabel(QMessageBox::Ok, QY("&Continue identification"));
+  }
+
+  auto result = dlg->title(errorTitle).text(errorText).exec();
+
+  if (p.identifier->isEmpty() || (result == QMessageBox::Ok))
+    p.identifier->continueIdentification();
+  else
+    p.identifier->abortIdentification();
+}
+
+void
+Tool::selectScanPlaylistPolicy(SourceFilePtr const &sourceFile,
+                               QFileInfoList const &files) {
+  auto &p = *p_func();
+
+  AskScanForPlaylistsDialog dialog{this};
+
+  if (dialog.ask(*sourceFile, files.count() - 1))
+    p.identifier->continueByScanningPlaylists(files);
+
+  else {
+    p.identifier->worker().addIdentifiedFile(sourceFile);
+    p.identifier->continueIdentification();
+  }
+}
+
+void
+Tool::hideScanningDirectoryDialog() {
+  auto &p = *p_func();
+
+  if (!p.scanningDirectoryDialog)
+    return;
+
+  delete p.scanningDirectoryDialog;
+  p.scanningDirectoryDialog = nullptr;
+}
+
+void
+Tool::showScanningPlaylistDialog(int numFilesToScan) {
+  auto &p      = *p_func();
+  auto &worker = p.identifier->worker();
+
+  if (!p.scanningDirectoryDialog)
+    p.scanningDirectoryDialog = new QProgressDialog{ QY("Scanning directory"), QY("Cancel"), 0, numFilesToScan, this };
+
+  connect(&worker,                   &FileIdentificationWorker::playlistScanProgressChanged, p.scanningDirectoryDialog, &QProgressDialog::setValue);
+  connect(p.scanningDirectoryDialog, &QProgressDialog::canceled,                             p.identifier,              &FileIdentificationThread::abortPlaylistScan);
+
+  p.scanningDirectoryDialog->setWindowTitle(QY("Scanning directory"));
+  p.scanningDirectoryDialog->show();
+}
+
+void
+Tool::selectPlaylistToAdd(QVector<SourceFilePtr> const &identifiedPlaylists) {
+  auto &p = *p_func();
+
+  if (identifiedPlaylists.isEmpty())
+    return;
+
+  auto discLibrary = mtx::bluray::disc_library::locate_and_parse(to_utf8(identifiedPlaylists[0]->m_fileName));
+
+  if ((identifiedPlaylists.size() == 1) && (!discLibrary || (discLibrary->m_infos_by_language.size() <= 1))) {
+    if (discLibrary && (discLibrary->m_infos_by_language.size() == 1))
+      identifiedPlaylists[0]->m_discLibraryInfoToAdd = discLibrary->m_infos_by_language.begin()->second;
+
+    p.identifier->worker().addIdentifiedFile(identifiedPlaylists[0]);
+
+    p.identifier->continueIdentification();
+
+    return;
+  }
+
+  auto playlist = SelectPlaylistDialog{this, identifiedPlaylists, discLibrary}.select();
+
+  if (playlist)
+    p.identifier->worker().addIdentifiedFile(playlist);
+
+  p.identifier->continueIdentification();
+}
+
+FileIdentificationWorker &
+Tool::identifier() {
+  return MainWindow::mergeTool()->p_func()->identifier->worker();
 }
 
 }

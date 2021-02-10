@@ -22,11 +22,11 @@ class SelectPlaylistDialog : public QDialog {
   Q_OBJECT
 protected:
   std::unique_ptr<Ui::SelectPlaylistDialog> ui;
-  QList<SourceFilePtr> m_scannedFiles;
+  QVector<SourceFilePtr> m_scannedFiles;
   std::optional<mtx::bluray::disc_library::disc_library_t> m_discLibrary;
 
 public:
-  explicit SelectPlaylistDialog(QWidget *parent, QList<SourceFilePtr> const &scannedFiles, std::optional<mtx::bluray::disc_library::disc_library_t> const &discLibrary);
+  explicit SelectPlaylistDialog(QWidget *parent, QVector<SourceFilePtr> const &scannedFiles, std::optional<mtx::bluray::disc_library::disc_library_t> const &discLibrary);
   ~SelectPlaylistDialog();
 
   SourceFilePtr select();
