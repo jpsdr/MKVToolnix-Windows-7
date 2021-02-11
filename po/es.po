@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2021-02-03 19:26+0100\n"
-"PO-Revision-Date: 2021-02-04 23:24+0000\n"
+"PO-Revision-Date: 2021-02-07 15:09+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/es/)\n"
@@ -354,16 +354,15 @@ msgstr ""
 "                           sentencias en la línea de comandos\n"
 
 #: src/merge/mkvmerge.cpp:252
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --commentary-flag <TID[:bool]>\n"
 "                           Sets the \"commentary\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --forced-track <TID[:bool]>\n"
-"                           Establecer como forzado el marcador de esta pista o\n"
-"                           la obliga a no estar presente si el\n"
-"                           booleano es 0.\n"
+"  --commentary-flag <TID[:bool]>\n"
+"                           Establece para esta pista el indicador \"comentario\" o\n"
+"                           evita que esté presente si bool es 0.\n"
 
 #: src/merge/mkvmerge.cpp:363
 #, no-c-format
@@ -436,15 +435,15 @@ msgstr ""
 "                           que se reemplace con la opción de --language.\n"
 
 #: src/merge/mkvmerge.cpp:234
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --default-track <TID[:bool]>\n"
 "                           Sets the \"default track\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
 "  --default-track <TID[:bool]>\n"
-"                           Establecer como predefinido el marcador de esta pista o\n"
-"                           la fuerza a no estar presente si la booleana es 0.\n"
+"                            Establece para esta pista el indicador \"pista predefinida\" o\n"
+"                            evita que esté presente si bool es 0.\n"
 
 #: src/merge/mkvmerge.cpp:393
 #, no-c-format
@@ -533,16 +532,15 @@ msgstr ""
 "                           archivo abierto para su escritura.\n"
 
 #: src/merge/mkvmerge.cpp:237
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --forced-track <TID[:bool]>\n"
 "                           Sets the \"forced display\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
 "  --forced-track <TID[:bool]>\n"
-"                           Establecer como forzado el marcador de esta pista o\n"
-"                           la obliga a no estar presente si el\n"
-"                           booleano es 0.\n"
+"                           Establece para esta pista el indicador \"visualización forzada\"\n"
+"                           o evita que esté presente si bool es 0.\n"
 
 #: src/merge/mkvmerge.cpp:112
 #, no-c-format
@@ -574,16 +572,16 @@ msgstr ""
 "                           desde un archivo XML.\n"
 
 #: src/merge/mkvmerge.cpp:240
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --hearing-impaired-flag <TID[:bool]>\n"
 "                           Sets the \"hearing impaired\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --forced-track <TID[:bool]>\n"
-"                           Establecer como forzado el marcador de esta pista o\n"
-"                           la obliga a no estar presente si el\n"
-"                           booleano es 0.\n"
+"  --hearing-impaired-flag <TID[:bool]>\n"
+"                           Establece para esta pista el indicador \n"
+"                           \"discapacidad auditiva\" o evita que esté presente \n"
+"                           si bool es 0.\n"
 
 #: src/merge/mkvmerge.cpp:261
 #, no-c-format
@@ -702,16 +700,15 @@ msgstr ""
 "                           archivo origen.\n"
 
 #: src/merge/mkvmerge.cpp:249
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --original-flag <TID[:bool]>\n"
 "                           Sets the \"original language\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --forced-track <TID[:bool]>\n"
-"                           Establecer como forzado el marcador de esta pista o\n"
-"                           la obliga a no estar presente si el\n"
-"                           booleano es 0.\n"
+"  --original-flag <TID[:bool]>\n"
+"                           Establece para esta pista el indicador \"idioma original\" o\n"
+"                           evita que esté presente si bool es 0.\n"
 
 #: src/merge/mkvmerge.cpp:386
 #, no-c-format
@@ -930,15 +927,16 @@ msgstr ""
 "                           leídos para la conversión a UTF-8.\n"
 
 #: src/merge/mkvmerge.cpp:246
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --text-descriptions-flag <TID[:bool]>\n"
 "                           Sets the \"text descriptions\" flag for this track\n"
 "                           or forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --default-track <TID[:bool]>\n"
-"                           Establecer como predefinido el marcador de esta pista o\n"
-"                           la fuerza a no estar presente si la booleana es 0.\n"
+"  --text-descriptions-flag <TID[:bool]>\n"
+"                           Establece para esta pista el indicador \n"
+"                           \"descripciones de texto\" o evita que esté presente \n"
+"                           si bool es 0.\n"
 
 #: src/merge/mkvmerge.cpp:134
 #, no-c-format
@@ -997,16 +995,16 @@ msgstr ""
 "                           va a ser usado.\n"
 
 #: src/merge/mkvmerge.cpp:243
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --visual-impaired-flag <TID[:bool]>\n"
 "                           Sets the \"visual impaired\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --forced-track <TID[:bool]>\n"
-"                           Establecer como forzado el marcador de esta pista o\n"
-"                           la obliga a no estar presente si el\n"
-"                           booleano es 0.\n"
+"  --visual-impaired-flag <TID[:bool]>\n"
+"                           Establece para esta pista el indicador \n"
+"                           \"discapacidad visual\" o evita que esté presente \n"
+"                           si bool es 0.\n"
 
 #: src/merge/mkvmerge.cpp:336
 #, no-c-format
@@ -2330,7 +2328,7 @@ msgstr "&Seleccionar todo ítem"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:183
 #, no-c-format
 msgid "&Skip chapters flagged \"hidden\""
-msgstr "&Omitir capítulos marcados como \"ocultos\""
+msgstr "&Omitir capítulos indicados como \"ocultos\""
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:250
 #, no-c-format
@@ -4304,37 +4302,37 @@ msgstr "Calcular las estadísticas para todas las pistas y añadir nuevas o actu
 #: src/common/property_element.cpp:132
 #, no-c-format
 msgid "Can be set for tracks containing onscreen text or foreign-language dialog."
-msgstr "Puede establecerlo para pistas que incluyan texto en pantalla o diálogos en idioma extranjero."
+msgstr "Permite establecerlo para pistas que incluyan texto en pantalla o diálogos en idioma extranjero."
 
 #: src/common/property_element.cpp:128
 #: src/mkvtoolnix-gui/merge/input.cpp:487
 #, no-c-format
 msgid "Can be set if the track contains commentary."
-msgstr "Puede establecer si una pista incluye comentarios."
+msgstr "Permite establecer si una pista incluye comentarios."
 
 #: src/common/property_element.cpp:135
 #: src/mkvtoolnix-gui/merge/input.cpp:485
 #, no-c-format
 msgid "Can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."
-msgstr "Puede configurar si una pista incluye descripciones textuales del contenido del video aptas para reproducirse mediante un sistema de conversión de texto a voz para usuarios con discapacidad visual."
+msgstr "Permite configurar si la pista incluye descripciones textuales del contenido del video aptas para reproducirse mediante un sistema de conversión de texto a voz para usuarios con discapacidad visual."
 
 #: src/common/property_element.cpp:134
 #: src/mkvtoolnix-gui/merge/input.cpp:486
 #, no-c-format
 msgid "Can be set if the track is in the content's original language (not a translation)."
-msgstr "Puede configurar si la pista está en el idioma original del contenido (no una traducción)"
+msgstr "Permite configurar si la pista está en el idioma original del contenido (no una traducción)"
 
 #: src/common/property_element.cpp:133
 #: src/mkvtoolnix-gui/merge/input.cpp:483
 #, no-c-format
 msgid "Can be set if the track is suitable for users with hearing impairments."
-msgstr "Puede configurar si la pista es apta para usuarios con discapacidad auditiva."
+msgstr "Permite configurar si la pista es apta para usuarios con discapacidad auditiva."
 
 #: src/common/property_element.cpp:137
 #: src/mkvtoolnix-gui/merge/input.cpp:484
 #, no-c-format
 msgid "Can be set if the track is suitable for users with visual impairments."
-msgstr "Puede configurar si la pista es apta para usuarios con discapacidad visual."
+msgstr "Permite configurar si la pista es apta para usuarios con discapacidad visual."
 
 #: src/common/qt_kax_analyzer.cpp:34
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:255
@@ -4517,12 +4515,12 @@ msgstr "Archivo de capítulos:"
 #: src/common/kax_element_names.cpp:289
 #, no-c-format
 msgid "Chapter flag enabled"
-msgstr "Marcador de capítulo activada"
+msgstr "Indicador de capítulo activada"
 
 #: src/common/kax_element_names.cpp:288
 #, no-c-format
 msgid "Chapter flag hidden"
-msgstr "Marcador de capítulo oculta"
+msgstr "Indicador de capítulo oculta"
 
 #: src/merge/cluster_helper.cpp:780
 #, no-c-format
@@ -5712,7 +5710,7 @@ msgstr "Directorio:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1832
 #, no-c-format
 msgid "Disable \"de&fault track\" flag for subtitle tracks"
-msgstr "Deshabilitar el marcador de \"pista prede&finida\" para las pistas de subtítulos"
+msgstr "Deshabilitar el indicador de \"pista prede&finida\" para las pistas de subtítulos"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1783
 #, no-c-format
@@ -6038,17 +6036,17 @@ msgstr "Registro de edición"
 #: src/common/kax_element_names.cpp:281
 #, no-c-format
 msgid "Edition flag default"
-msgstr "Marcador predeterminado de edición"
+msgstr "Indicador predeterminado de edición"
 
 #: src/common/kax_element_names.cpp:280
 #, no-c-format
 msgid "Edition flag hidden"
-msgstr "Marcador oculto de edición"
+msgstr "Indicador oculto de edición"
 
 #: src/common/kax_element_names.cpp:282
 #, no-c-format
 msgid "Edition flag ordered"
-msgstr "Marcador ordenado de edición"
+msgstr "Indicador ordenado de edición"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:32
 #, no-c-format
@@ -6683,14 +6681,14 @@ msgstr "Tamaño-fijo ataduras"
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:35
 #, no-c-format
 msgid "Flags"
-msgstr "Marcadores"
+msgstr "Indicadores"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:510
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:516
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:180
 #, no-c-format
 msgid "Flags:"
-msgstr "Marcadores:"
+msgstr "Indicadores:"
 
 #: src/common/file_types.cpp:86
 #, no-c-format
@@ -7189,7 +7187,7 @@ msgstr "Si se deshabilita, la GUI le permitirá insertar una descripción para u
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:338
 #, no-c-format
 msgid "If enabled, all subtitle tracks will have their \"default track\" flag set to \"no\" when they're added."
-msgstr "Si se habilita, todas las pistas de subtítulos que se añadan tendrán su marcador de \"pista predefinida\" establecida a \"no\"."
+msgstr "Si se habilita, todas las pistas de subtítulos que se añadan tendrán su indicador de \"pista predefinida\" establecida a \"no\"."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:249
 #, no-c-format
@@ -7313,7 +7311,7 @@ msgstr "Si no se indica nada, los capítulos se generarán pero ningún nombre s
 #: src/mkvtoolnix-gui/merge/input.cpp:478
 #, no-c-format
 msgid "If set to 'determine automatically' then mkvmerge will choose one track of each type to have this flag set based on the information in the source files and the order of the tracks."
-msgstr "Si se establece 'determinar automáticamente' entonces mkvmerge elegirá una pista de cada tipo para establecer este marcador en base a la información de los archivos originales y el orden de las pistas."
+msgstr "Si se establece 'determinar automáticamente' entonces mkvmerge elegirá una pista de cada tipo para establecer este indicador en base a la información de los archivos originales y el orden de las pistas."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:491
 #, no-c-format
@@ -9563,7 +9561,7 @@ msgstr "Reproducir audio '%1'"
 #: src/mkvtoolnix-gui/merge/input.cpp:477
 #, no-c-format
 msgid "Players should prefer tracks with the default track flag set."
-msgstr "Los reproductores deberían preferir aquellas pistas establecidas con el marcador de pista predefinida."
+msgstr "Los reproductores deberían preferir aquellas pistas establecidas con el indicador de pista predefinida."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
 #, no-c-format
@@ -10805,7 +10803,7 @@ msgstr "Establecer una propiedad en el valor si es que existe; de lo contrario, 
 #: src/propedit/propedit_cli_parser.cpp:222
 #, no-c-format
 msgid "Sets the Matroska file section that all following add/set/delete actions operate on (see below and man page for syntax)"
-msgstr "Establecer la seccion del archivo Matroska para que todas las siguientes acciones añadir/establecer/borrar funcionen (mire más abajo y en la página principal para la sintaxis)"
+msgstr "Establecer la sección del archivo Matroska para que todas las siguientes acciones añadir/establecer/borrar funcionen (mire más abajo y en la página principal para la sintaxis)"
 
 #: src/propedit/propedit_cli_parser.cpp:219
 #, no-c-format
@@ -12655,7 +12653,7 @@ msgstr "Los únicos códecs permitidos para pistas de vídeo y audio son VP8/VP9
 #: src/merge/mkvmerge.cpp:2490
 #, no-c-format
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
-msgstr "La opción '--meta-seek-size' ya no es compatible. Por favor, lee la documentacion de mkvmerge, especialmente la sección acerca de MATROSKA FILE LAYOUT.\n"
+msgstr "La opción '--meta-seek-size' ya no es compatible. Por favor, consulte la documentación de mkvmerge, especialmente la sección acerca de MATROSKA FILE LAYOUT.\n"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:225
 #, no-c-format
@@ -14038,7 +14036,7 @@ msgstr "Usa el &título como base del nombre del archivo si el título está est
 #: src/mkvtoolnix-gui/merge/input.cpp:482
 #, no-c-format
 msgid "Use this for tracks containing onscreen text or foreign-language dialogue."
-msgstr "Use esto para las pistas que incluyan texto en pantalla o diálogos en un idioma extranjero."
+msgstr "Úselo para las pistas que incluyan texto en pantalla o diálogos en un idioma extranjero."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
 #, no-c-format
@@ -14235,7 +14233,7 @@ msgstr "Orden de campos del vídeo"
 #: src/common/property_element.cpp:152
 #, no-c-format
 msgid "Video interlaced flag"
-msgstr "Marcador de vídeo entrelazado"
+msgstr "Indicador de vídeo entrelazado"
 
 #: src/input/r_real.cpp:588
 #, no-c-format
