@@ -707,6 +707,8 @@ PreferencesDialog::setupMergeAddingAppendingFilesPolicy() {
   });
 
   Util::fixComboBoxViewWidth(*ui->cbMAddingAppendingFilesPolicy);
+
+  ui->cbMAlwaysCreateSettingsForVideoFiles->setChecked(m_cfg.m_mergeAlwaysCreateNewSettingsForVideoFiles);
 }
 
 void
@@ -904,6 +906,7 @@ PreferencesDialog::save() {
   m_cfg.m_disableDefaultTrackForSubtitles               = ui->cbMDisableDefaultTrackForSubtitles->isChecked();
   m_cfg.m_mergeEnableDialogNormGainRemoval              = ui->cbMEnableDialogNormGainRemoval->isChecked();
   m_cfg.m_mergeAddingAppendingFilesPolicy               = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
+  m_cfg.m_mergeAlwaysCreateNewSettingsForVideoFiles     = ui->cbMAlwaysCreateSettingsForVideoFiles->isChecked();
   m_cfg.m_mergeAlwaysShowOutputFileControls             = ui->cbMAlwaysShowOutputFileControls->isChecked();
   m_cfg.m_mergeWarnMissingAudioTrack                    = static_cast<Util::Settings::MergeMissingAudioTrackPolicy>(ui->cbMWarnMissingAudioTrack->currentData().toInt());
   m_cfg.m_mergeTrackPropertiesLayout                    = ui->rbMTrackPropertiesLayoutHorizontalScrollArea->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalScrollArea

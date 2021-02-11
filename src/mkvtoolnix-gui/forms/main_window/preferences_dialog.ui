@@ -379,23 +379,13 @@
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
             <layout class="QGridLayout" name="gridLayout_2">
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_16">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_6">
                <property name="text">
-                <string>Probe &amp;range percentage:</string>
+                <string>Clearing settings auto&amp;matically:</string>
                </property>
                <property name="buddy">
-                <cstring>cbMProbeRangePercentage</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_19">
-               <property name="text">
-                <string>Warn about missing &amp;audio tracks:</string>
-               </property>
-               <property name="buddy">
-                <cstring>cbMWarnMissingAudioTrack</cstring>
+                <cstring>cbMClearMergeSettings</cstring>
                </property>
               </widget>
              </item>
@@ -430,19 +420,19 @@
               </widget>
              </item>
              <item row="1" column="0">
-              <widget class="QLabel" name="label_13">
+              <widget class="QLabel" name="label_19">
                <property name="text">
-                <string>When &amp;dropping files:</string>
+                <string>Warn about missing &amp;audio tracks:</string>
                </property>
                <property name="buddy">
-                <cstring>cbMAddingAppendingFilesPolicy</cstring>
+                <cstring>cbMWarnMissingAudioTrack</cstring>
                </property>
               </widget>
              </item>
-             <item row="2" column="1">
+             <item row="1" column="1">
               <widget class="QComboBox" name="cbMWarnMissingAudioTrack"/>
              </item>
-             <item row="3" column="0">
+             <item row="2" column="0">
               <widget class="QLabel" name="label_5">
                <property name="text">
                 <string>Process &amp;priority:</string>
@@ -452,7 +442,7 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
+             <item row="2" column="1">
               <widget class="QComboBox" name="cbMProcessPriority">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -462,17 +452,17 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_6">
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_16">
                <property name="text">
-                <string>Clearing settings auto&amp;matically:</string>
+                <string>Probe &amp;range percentage:</string>
                </property>
                <property name="buddy">
-                <cstring>cbMClearMergeSettings</cstring>
+                <cstring>cbMProbeRangePercentage</cstring>
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
+             <item row="3" column="1">
               <widget class="QDoubleSpinBox" name="cbMProbeRangePercentage">
                <property name="minimum">
                 <double>0.010000000000000</double>
@@ -485,17 +475,7 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="cbMAddingAppendingFilesPolicy">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
+             <item row="4" column="0">
               <widget class="QLabel" name="label_20">
                <property name="text">
                 <string>Location of MediaInfo &amp;GUI:</string>
@@ -505,7 +485,7 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
+             <item row="4" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_16">
                <item>
                 <widget class="QLineEdit" name="leMMediaInfoExe"/>
@@ -524,6 +504,46 @@
               </layout>
              </item>
             </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_23">
+          <property name="title">
+           <string>Adding multiple files</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_43">
+           <item>
+            <layout class="QGridLayout" name="gridLayout_10">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>When a&amp;dding multiple files:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbMAddingAppendingFilesPolicy</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="cbMAddingAppendingFilesPolicy">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbMAlwaysCreateSettingsForVideoFiles">
+             <property name="text">
+              <string>Alwa&amp;ys create new mutliplex settings for files containing video tracks</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -2180,16 +2200,19 @@
   <tabstop>cbGuiWarnBeforeOverwriting</tabstop>
   <tabstop>tbOftenUsedXYZ</tabstop>
   <tabstop>tbOftenUsedLanguages</tabstop>
-  <tabstop>tbOftenUsedRegions</tabstop>
-  <tabstop>tbOftenUsedCharacterSets</tabstop>
   <tabstop>cbOftenUsedLanguagesOnly</tabstop>
+  <tabstop>tbOftenUsedRegions</tabstop>
+  <tabstop>cbOftenUsedRegionsOnly</tabstop>
+  <tabstop>tbOftenUsedCharacterSets</tabstop>
+  <tabstop>cbOftenUsedCharacterSetsOnly</tabstop>
   <tabstop>cbMClearMergeSettings</tabstop>
-  <tabstop>cbMAddingAppendingFilesPolicy</tabstop>
-  <tabstop>leMMediaInfoExe</tabstop>
-  <tabstop>pbMBrowseMediaInfoExe</tabstop>
   <tabstop>cbMWarnMissingAudioTrack</tabstop>
   <tabstop>cbMProcessPriority</tabstop>
   <tabstop>cbMProbeRangePercentage</tabstop>
+  <tabstop>leMMediaInfoExe</tabstop>
+  <tabstop>pbMBrowseMediaInfoExe</tabstop>
+  <tabstop>cbMAddingAppendingFilesPolicy</tabstop>
+  <tabstop>cbMAlwaysCreateSettingsForVideoFiles</tabstop>
   <tabstop>cbMAlwaysShowOutputFileControls</tabstop>
   <tabstop>rbMTrackPropertiesLayoutHorizontalScrollArea</tabstop>
   <tabstop>rbMTrackPropertiesLayoutHorizontalTwoColumns</tabstop>
@@ -2203,9 +2226,6 @@
   <tabstop>cbMDisableCompressionForAllTrackTypes</tabstop>
   <tabstop>cbMEnableDialogNormGainRemoval</tabstop>
   <tabstop>cbMDefaultSubtitleCharset</tabstop>
-  <tabstop>ldwMDefaultAudioTrackLanguage</tabstop>
-  <tabstop>ldwMDefaultVideoTrackLanguage</tabstop>
-  <tabstop>ldwMDefaultSubtitleTrackLanguage</tabstop>
   <tabstop>cbMWhenToSetDefaultLanguage</tabstop>
   <tabstop>cbMDeriveAudioTrackLanguageFromFileName</tabstop>
   <tabstop>cbMDeriveVideoTrackLanguageFromFileName</tabstop>
@@ -2225,7 +2245,6 @@
   <tabstop>pbMBrowseAutoSetFixedDirectory</tabstop>
   <tabstop>cbMUniqueOutputFileNames</tabstop>
   <tabstop>cbMAutoClearOutputFileName</tabstop>
-  <tabstop>lwMRecentDestinationDirectories</tabstop>
   <tabstop>tbMEnableMuxingTracksByType</tabstop>
   <tabstop>cbMEnableMuxingTracksByLanguage</tabstop>
   <tabstop>cbMEnableMuxingAllVideoTracks</tabstop>
@@ -2234,13 +2253,13 @@
   <tabstop>tbMEnableMuxingTracksByLanguage</tabstop>
   <tabstop>cbMScanPlaylistsPolicy</tabstop>
   <tabstop>sbMMinPlaylistDuration</tabstop>
+  <tabstop>cbMAddBlurayCovers</tabstop>
   <tabstop>wIDefaultJobSettings</tabstop>
   <tabstop>cbHEDroppedFilesPolicy</tabstop>
   <tabstop>cbHEDateTimeInUTC</tabstop>
   <tabstop>cbCEDropLastFromBlurayPlaylist</tabstop>
   <tabstop>cbCETextFileCharacterSet</tabstop>
   <tabstop>leCENameTemplate</tabstop>
-  <tabstop>ldwCEDefaultLanguage</tabstop>
   <tabstop>cbCEDefaultCountry</tabstop>
   <tabstop>cbGuiSwitchToJobOutputAfterStarting</tabstop>
   <tabstop>cbGuiUseDefaultJobDescription</tabstop>
@@ -2255,8 +2274,6 @@
   <tabstop>sbGuiRemoveOldJobsDays</tabstop>
   <tabstop>sbGuiMaximumConcurrentJobs</tabstop>
   <tabstop>pbJobsAddProgram</tabstop>
-  <tabstop>cbOftenUsedCharacterSetsOnly</tabstop>
-  <tabstop>cbOftenUsedRegionsOnly</tabstop>
   <tabstop>twJobsPrograms</tabstop>
  </tabstops>
  <resources>

@@ -24,10 +24,11 @@ public:
   explicit AddingAppendingFilesDialog(QWidget *parent, Tab &tab);
   ~AddingAppendingFilesDialog();
 
-  void setDefaults(Util::Settings::MergeAddingAppendingFilesPolicy decision, int fileNum);
+  void setDefaults(Util::Settings::MergeAddingAppendingFilesPolicy decision, int fileNum, bool alwaysCreateNewSettingsForVideoFiles);
 
   Util::Settings::MergeAddingAppendingFilesPolicy decision() const;
   int fileNum() const;
+  bool alwaysCreateNewSettingsForVideoFiles() const;
   bool alwaysUseThisDecision() const;
 
 public Q_SLOTS:

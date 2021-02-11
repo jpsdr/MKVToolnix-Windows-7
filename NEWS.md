@@ -21,6 +21,10 @@
 * MKVToolNix GUI: multiplexer: the file name extensions "eb3" and "ec3" were
   added for Dolby Digital Plus & "mpl" for Dolby TrueHD in the file
   dialogs. Part of the implementation of #3027.
+* MKVToolNix GUI: multiplexer: when adding multiple files the dialog asking
+  the user what to do with them has gained a new checkbox. If enabled, all
+  files containing at least one video track will always be placed in newly
+  created multiplex setting. Implements #2966.
 
 ## Bug fixes
 

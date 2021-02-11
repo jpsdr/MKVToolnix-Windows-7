@@ -50,7 +50,8 @@ AddingAppendingFilesDialog::~AddingAppendingFilesDialog() {
 
 void
 AddingAppendingFilesDialog::setDefaults(Util::Settings::MergeAddingAppendingFilesPolicy decision,
-                                        int fileNum) {
+                                        int fileNum,
+                                        bool alwaysCreateNewSettingsForVideoFiles) {
   auto ctrl = decision == Util::Settings::MergeAddingAppendingFilesPolicy::Add          ? ui->rbAdd
             : decision == Util::Settings::MergeAddingAppendingFilesPolicy::Append       ? ui->rbAppend
             : decision == Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew     ? ui->rbAddToNew
@@ -62,6 +63,8 @@ AddingAppendingFilesDialog::setDefaults(Util::Settings::MergeAddingAppendingFile
 
   if (fileNum <= ui->cbFileName->count())
     ui->cbFileName->setCurrentIndex(fileNum);
+
+  ui->cbAlwaysCreateNewSettingsForVideoFiles->setChecked(alwaysCreateNewSettingsForVideoFiles);
 
   selectionChanged();
 }
@@ -86,6 +89,12 @@ void
 AddingAppendingFilesDialog::selectionChanged() {
   ui->cbFileName->setEnabled(ui->rbAppend->isChecked() || ui->rbAddAdditionalParts->isChecked());
   ui->cbAlwaysUseThisDecision->setEnabled(ui->rbAdd->isChecked() || ui->rbAddToNew->isChecked() || ui->rbAddEachToNew->isChecked());
+}
+
+bool
+AddingAppendingFilesDialog::alwaysCreateNewSettingsForVideoFiles()
+  const {
+  return ui->cbAlwaysCreateNewSettingsForVideoFiles->isEnabled() && ui->cbAlwaysCreateNewSettingsForVideoFiles->isChecked();
 }
 
 bool

@@ -1238,7 +1238,7 @@ Tab::onAdditionalTrackOptionsChanged(QString newValue) {
 
 void
 Tab::onAddFiles() {
-  selectFilesAndIdentifyForAddingOrAppending(IdentificationPack::AddMode::Add);
+  selectFilesAndIdentifyForAddingOrAppending(IdentificationPack::AddMode::UserChoice);
 }
 
 void

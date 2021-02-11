@@ -67,6 +67,7 @@ char const * const s_valMediaInfoExe                        = "mediaInfoExe";
 char const * const s_valMergeAddBlurayCovers                = "mergeAddBlurayCovers";
 char const * const s_valMergeAddingAppendingFilesPolicy     = "mergeAddingAppendingFilesPolicy";
 char const * const s_valMergeAlwaysAddDroppedFiles          = "mergeAlwaysAddDroppedFiles";
+char const * const s_valMergeAlwaysCreateNewSettingsForVideoFiles = "mergeAlwaysCreateNewSettingsForVideoFiles";
 char const * const s_valMergeAlwaysShowOutputFileControls   = "mergeAlwaysShowOutputFileControls";
 char const * const s_valMergeEnableDialogNormGainRemoval    = "mergeEnableDialogNormGainRemoval";
 char const * const s_valMergeLastAddingAppendingDecision    = "mergeLastAddingAppendingDecision";

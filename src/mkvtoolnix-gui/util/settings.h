@@ -166,6 +166,7 @@ public:
   bool m_mergeEnableDialogNormGainRemoval, m_mergeAddBlurayCovers;
   ClearMergeSettingsAction m_clearMergeSettings;
   MergeAddingAppendingFilesPolicy m_mergeAddingAppendingFilesPolicy, m_mergeLastAddingAppendingDecision;
+  bool m_mergeAlwaysCreateNewSettingsForVideoFiles;
   HeaderEditorDroppedFilesPolicy m_headerEditorDroppedFilesPolicy;
   bool m_headerEditorDateTimeInUTC;
   TrackPropertiesLayout m_mergeTrackPropertiesLayout;

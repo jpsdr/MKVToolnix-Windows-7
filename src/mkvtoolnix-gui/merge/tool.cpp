@@ -551,37 +551,55 @@ Tool::handleIdentifiedSourceFiles(IdentificationPack &pack) {
 
   auto identifiedSourceFiles = pack.sourceFiles();
   auto tab                   = tabForAddingOrAppending(pack.m_tabId);
-  auto noFilesAdded          = tab->isEmpty();
 
   if (   (   (identifiedSourceFiles.count() == 1)
-          && noFilesAdded)
+          && tab->isEmpty())
       || (pack.m_addMode == IdentificationPack::AddMode::Append)) {
     tab->addOrAppendIdentifiedFiles(identifiedSourceFiles, pack.m_sourceFileIdx, pack.m_addMode);
     return;
   }
 
-  auto &settings    = Util::Settings::get();
+  auto &settings                            = Util::Settings::get();
 
-  auto decision     = settings.m_mergeAddingAppendingFilesPolicy;
-  auto fileModelIdx = QModelIndex{};
+  auto decision                             = settings.m_mergeAddingAppendingFilesPolicy;
+  auto fileModelIdx                         = QModelIndex{};
+  auto alwaysCreateNewSettingsForVideoFiles = settings.m_mergeAlwaysCreateNewSettingsForVideoFiles;
 
   if (   (Util::Settings::MergeAddingAppendingFilesPolicy::Ask == decision)
       || ((pack.m_mouseButtons & Qt::RightButton)              == Qt::RightButton)) {
     AddingAppendingFilesDialog dlg{this, *tab};
-    dlg.setDefaults(settings.m_mergeLastAddingAppendingDecision, p.lastAddAppendFileNum[tab]);
+    dlg.setDefaults(settings.m_mergeLastAddingAppendingDecision, p.lastAddAppendFileNum[tab], settings.m_mergeAlwaysCreateNewSettingsForVideoFiles);
     if (!dlg.exec())
       return;
 
     decision                                    = dlg.decision();
+    alwaysCreateNewSettingsForVideoFiles        = dlg.alwaysCreateNewSettingsForVideoFiles();
     fileModelIdx                                = tab->fileModelIndexForFileNum(dlg.fileNum());
 
     settings.m_mergeLastAddingAppendingDecision = decision;
     p.lastAddAppendFileNum[tab]                 = dlg.fileNum();
 
-    if (dlg.alwaysUseThisDecision())
-      settings.m_mergeAddingAppendingFilesPolicy = decision;
+    if (dlg.alwaysUseThisDecision()) {
+      settings.m_mergeAddingAppendingFilesPolicy           = decision;
+      settings.m_mergeAlwaysCreateNewSettingsForVideoFiles = alwaysCreateNewSettingsForVideoFiles;
+    }
 
     settings.save();
+  }
+
+  if (alwaysCreateNewSettingsForVideoFiles) {
+    auto tempIdentifiedSourceFiles = std::move(identifiedSourceFiles);
+    identifiedSourceFiles.clear();
+
+    for (auto const &identifiedSourceFile : tempIdentifiedSourceFiles) {
+      if (!identifiedSourceFile->hasVideoTrack()) {
+        identifiedSourceFiles << identifiedSourceFile;
+        continue;
+      }
+
+      auto tabToUse = tab->isEmpty() ? tab : appendNewTab();
+      tabToUse->addOrAppendIdentifiedFiles({ identifiedSourceFile }, {}, IdentificationPack::AddMode::Add);
+    }
   }
 
   if (Util::Settings::MergeAddingAppendingFilesPolicy::AddAdditionalParts == decision)
@@ -592,7 +610,7 @@ Tool::handleIdentifiedSourceFiles(IdentificationPack &pack) {
     newTab->addOrAppendIdentifiedFiles(identifiedSourceFiles, {}, IdentificationPack::AddMode::Add);
 
   } else if (Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew == decision) {
-    if (noFilesAdded)
+    if (tab->isEmpty())
       tab->addOrAppendIdentifiedFiles({ identifiedSourceFiles.takeFirst() }, {}, IdentificationPack::AddMode::Add);
 
     for (auto const &identifiedSourceFile : identifiedSourceFiles) {
