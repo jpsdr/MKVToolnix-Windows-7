@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2021-02-03 19:26+0100\n"
-"PO-Revision-Date: 2021-02-03 18:34+0000\n"
-"Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
+"PO-Revision-Date: 2021-02-10 18:06+0000\n"
+"Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/bg/)\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -302,15 +302,16 @@ msgstr ""
 "                           Кодова таблица за текст в командния ред\n"
 
 #: src/merge/mkvmerge.cpp:252
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --commentary-flag <TID[:bool]>\n"
 "                           Sets the \"commentary\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --compression <TID:method>\n"
-"                           Задава метода на компресиране, използван\n"
-"                           за съответната пътечка („none“ или „zlib“).\n"
+"  --commentary-flag <TID[:bool]>\n"
+"                           Задава флага „коментари“ за тази\n"
+"                           пътечка или го кара да не е наличен,\n"
+"                           ако булевата стойност е 0..\n"
 
 #: src/merge/mkvmerge.cpp:363
 #, no-c-format
@@ -369,15 +370,16 @@ msgid ""
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:234
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --default-track <TID[:bool]>\n"
 "                           Sets the \"default track\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --aspect-ratio <TID:f|a/b>\n"
-"                           Задава размера на показване, изчислявайки\n"
-"                           широчината и височината спрямо съотношението.\n"
+"  --default-track <TID[:bool]>\n"
+"                           Задава флага „пътечка по подразбиране“\n"
+"                           за тази пътечка или го кара да не е наличен,\n"
+"                           ако булевата стойност е 0.\n"
 
 #: src/merge/mkvmerge.cpp:393
 #, no-c-format
@@ -451,15 +453,16 @@ msgid ""
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:237
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --forced-track <TID[:bool]>\n"
 "                           Sets the \"forced display\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --aspect-ratio <TID:f|a/b>\n"
-"                           Задава размера на показване, изчислявайки\n"
-"                           широчината и височината спрямо съотношението.\n"
+"  --forced-track <TID[:bool]>\n"
+"                           Задава флага „задължително показване“\n"
+"                           за тази пътечка или го кара да не е наличен,\n"
+"                           ако булевата стойност е 0.\n"
 
 #: src/merge/mkvmerge.cpp:112
 #, no-c-format
@@ -486,15 +489,16 @@ msgid "  --global-tags <file>     Read global tags from an XML file.\n"
 msgstr "  --global-tags <file>     Прочитане на глобалните тагове от XML файл.\n"
 
 #: src/merge/mkvmerge.cpp:240
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --hearing-impaired-flag <TID[:bool]>\n"
 "                           Sets the \"hearing impaired\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --compression <TID:method>\n"
-"                           Задава метода на компресиране, използван\n"
-"                           за съответната пътечка („none“ или „zlib“).\n"
+"  --hearing-impaired-flag <TID[:bool]>\n"
+"                           Задава флага „за хора с увреден слух“ за\n"
+"                           тази пътечка или го кара да не е наличен,\n"
+"                           ако булевата стойност е 0.\n"
 
 #: src/merge/mkvmerge.cpp:261
 #, fuzzy, no-c-format
@@ -595,15 +599,16 @@ msgid "  --no-global-tags         Don't keep global tags from the source file.\n
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:249
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --original-flag <TID[:bool]>\n"
 "                           Sets the \"original language\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --compression <TID:method>\n"
-"                           Задава метода на компресиране, използван\n"
-"                           за съответната пътечка („none“ или „zlib“).\n"
+"  --original-flag <TID[:bool]>\n"
+"                           Задава флага „оригинален език“ за тази\n"
+"                           пътечка или го кара да не е наличен, ако\n"
+"                           булевата стойност е 0.\n"
 
 #: src/merge/mkvmerge.cpp:386
 #, no-c-format
@@ -776,15 +781,16 @@ msgid ""
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:246
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --text-descriptions-flag <TID[:bool]>\n"
 "                           Sets the \"text descriptions\" flag for this track\n"
 "                           or forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --aspect-ratio <TID:f|a/b>\n"
-"                           Задава размера на показване, изчислявайки\n"
-"                           широчината и височината спрямо съотношението.\n"
+"  --text-descriptions-flag <TID[:bool]>\n"
+"                           Задава флага „текстови описания“ за тази\n"
+"                           пътечка или го кара да не е наличен, ако\n"
+"                           булевата стойност е 0.\n"
 
 #: src/merge/mkvmerge.cpp:134
 #, no-c-format
@@ -834,15 +840,16 @@ msgid "  --ui-language <code>     Force the translations for 'code' to be used.\
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:243
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --visual-impaired-flag <TID[:bool]>\n"
 "                           Sets the \"visual impaired\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --aspect-ratio <TID:f|a/b>\n"
-"                           Задава размера на показване, изчислявайки\n"
-"                           широчината и височината спрямо съотношението.\n"
+"  --visual-impaired-flag <TID[:bool]>\n"
+"                           Задава флага „за хора с нарушено зрение“ за\n"
+"                           тази пътечка или го кара да не е наличен, ако\n"
+"                           булевата стойност е 0.\n"
 
 #: src/merge/mkvmerge.cpp:336
 #, no-c-format
@@ -1252,18 +1259,18 @@ msgstr " размер {0}"
 #: src/common/property_element.cpp:128
 #, no-c-format
 msgid "\"Commentary\" flag"
-msgstr ""
+msgstr "Флаг „коментари“"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1827
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Commentary\" flag:"
-msgstr "Задължителна пътечка:"
+msgstr "Флаг „коментари“:"
 
 #: src/common/kax_element_names.cpp:204
 #: src/common/property_element.cpp:129
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Default track\" flag"
-msgstr "Пътечка по подразбиране:"
+msgstr "Флаг „пътечка по подразбиране“"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:280
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1815
@@ -1278,76 +1285,76 @@ msgid "\"Determine automatically\" is a good choice for almost all situations."
 msgstr "„Определи автоматично“ е добър избор за почти всяка ситуация."
 
 #: src/common/kax_element_names.cpp:189
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Enabled\" flag"
-msgstr "Включено"
+msgstr "Флаг „включено“"
 
 #: src/common/kax_element_names.cpp:205
 #: src/common/property_element.cpp:132
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Forced display\" flag"
-msgstr "Флаг „покажи принудително“"
+msgstr "Флаг „задължително показване“"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:281
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1816
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:82
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Forced display\" flag:"
-msgstr "Флаг „покажи принудително“"
+msgstr "Флаг „задължително“:"
 
 #: src/common/kax_element_names.cpp:212
 #: src/common/property_element.cpp:133
 #, no-c-format
 msgid "\"Hearing impaired\" flag"
-msgstr ""
+msgstr "Флаг „за хора с увреден слух“"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1820
 #, no-c-format
 msgid "\"Hearing impaired\" flag:"
-msgstr ""
+msgstr "Флаг „увреден слух“:"
 
 #: src/common/kax_element_names.cpp:203
 #, no-c-format
 msgid "\"Lacing\" flag"
-msgstr ""
+msgstr "Флаг „lacing“"
 
 #: src/common/kax_element_names.cpp:215
 #: src/common/property_element.cpp:134
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Original language\" flag"
-msgstr "Оригинална стойност:"
+msgstr "Флаг „оригинален език“"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1817
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Original language\" flag:"
-msgstr "Оригинална стойност:"
+msgstr "Флаг „оригинален език“:"
 
 #: src/common/kax_element_names.cpp:214
 #: src/common/property_element.cpp:135
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Text descriptions\" flag"
-msgstr "Описание на файла"
+msgstr "Флаг „текстови описания“"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1823
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Text descriptions\" flag:"
-msgstr "Описание на файла"
+msgstr "Флаг „текстови описания“:"
 
 #: src/common/property_element.cpp:131
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Track enabled\" flag"
-msgstr "Флаг „включена медийна пътечка“"
+msgstr "Флаг „пътечката е включена“"
 
 #: src/common/kax_element_names.cpp:213
 #: src/common/property_element.cpp:137
 #, no-c-format
 msgid "\"Visual impaired\" flag"
-msgstr ""
+msgstr "Флаг „за хора с нарушено зрение“"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1826
 #, no-c-format
 msgid "\"Visual impaired\" flag:"
-msgstr ""
+msgstr "Флаг „увредено зрение“:"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:124
 #: src/mkvtoolnix-gui/merge/track_model.cpp:715
@@ -3610,7 +3617,7 @@ msgstr ""
 #: src/merge/generic_packetizer.cpp:674
 #, no-c-format
 msgid "Another default track for {0} tracks has already been set. The \"default track\" flag for track {1} of '{2}' will not be set.\n"
-msgstr ""
+msgstr "Друга пътечка по подразбиране за {0} пътечки вече е била зададена. Флагът „пътечка по подразбиране“ за пътечка {1} на „{2}“ няма да бъде зададен.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:247
 #: src/mkvtoolnix-gui/merge/output.cpp:248
@@ -4089,39 +4096,39 @@ msgid "Calculate statistics for all tracks and add new/update existing tags for 
 msgstr ""
 
 #: src/common/property_element.cpp:132
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Can be set for tracks containing onscreen text or foreign-language dialog."
-msgstr "Използвай това за пътечки, съдържащи текст на екрана или диалог на чужд език."
+msgstr "Може да бъде зададено ако пътечката съдържа текст на екрана или диалог на чужд език."
 
 #: src/common/property_element.cpp:128
 #: src/mkvtoolnix-gui/merge/input.cpp:487
 #, no-c-format
 msgid "Can be set if the track contains commentary."
-msgstr ""
+msgstr "Може да бъде зададено ако пътечката съдържа коментари (commentary)."
 
 #: src/common/property_element.cpp:135
 #: src/mkvtoolnix-gui/merge/input.cpp:485
 #, no-c-format
 msgid "Can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."
-msgstr ""
+msgstr "Може да бъде зададено ако в пътечката се описва видео съдържанието чрез текстови описания, подходящи за възпроизвеждане чрез система за текст-към-говор за потребители с нарушено зрение."
 
 #: src/common/property_element.cpp:134
 #: src/mkvtoolnix-gui/merge/input.cpp:486
 #, no-c-format
 msgid "Can be set if the track is in the content's original language (not a translation)."
-msgstr ""
+msgstr "Може да бъде зададено ако пътечката е в оригиналния език (а не превод)."
 
 #: src/common/property_element.cpp:133
 #: src/mkvtoolnix-gui/merge/input.cpp:483
 #, no-c-format
 msgid "Can be set if the track is suitable for users with hearing impairments."
-msgstr ""
+msgstr "Може да бъде зададено ако пътечката е подходяща за потребители със слухови увреждания."
 
 #: src/common/property_element.cpp:137
 #: src/mkvtoolnix-gui/merge/input.cpp:484
 #, no-c-format
 msgid "Can be set if the track is suitable for users with visual impairments."
-msgstr ""
+msgstr "Може да бъде зададено ако пътечката е подходяща за потребители със зрителни увреждания."
 
 #: src/common/qt_kax_analyzer.cpp:34
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:255
@@ -4194,7 +4201,7 @@ msgstr ""
 #: src/common/hacks.cpp:42
 #, no-c-format
 msgid "Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters)."
-msgstr ""
+msgstr "Кара mkvmerge да запише резервно копие на header-ите за пътечката в края на файла (след всички клъстери)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:311
 #, no-c-format
@@ -6460,7 +6467,7 @@ msgstr "5 до 8-буквени езикови кодове към момент�
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1835
 #, no-c-format
 msgid "Fix bitstream timing info"
-msgstr "Коригиране информацията за времето на битовия поток"
+msgstr "Коригирай времевата информация в битовия поток"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:176
 #, no-c-format
@@ -6548,9 +6555,9 @@ msgstr ""
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:158
 #: src/mkvtoolnix-gui/merge/track_model.cpp:54
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Forced display"
-msgstr "Флаг „покажи принудително“"
+msgstr "Принудително показване"
 
 #: src/common/hacks.cpp:41
 #, no-c-format
@@ -8124,9 +8131,9 @@ msgid "Malformed codec id '{0}'.\n"
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/input.cpp:481
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Mark this track as \"forced display\"."
-msgstr "Маркирай тази пътечка като „задължителна“."
+msgstr "Маркирай тази пътечка като „задължителна за показване“."
 
 #: src/common/file_types.cpp:91
 #, no-c-format
@@ -8952,7 +8959,7 @@ msgstr "Поддържат се само имена на английски."
 #: src/mkvtoolnix-gui/merge/attachments.cpp:236
 #, no-c-format
 msgid "Only files smaller than 2 GiB are supported."
-msgstr "Поддържат се само файлове по-малки от 2 GiB."
+msgstr "Поддържат се единствено файлове по-малки от 2 GiB."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1710
 #, no-c-format
@@ -9890,7 +9897,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1847
 #, no-c-format
 msgid "Reduce to core"
-msgstr "Reduce to core (Намаляване до ядрото)"
+msgstr "Намаляване до ядрото (Reduce to core)"
 
 #: src/common/kax_element_names.cpp:253
 #, no-c-format
@@ -12603,7 +12610,7 @@ msgstr "Размерът, след който бива създаден нов �
 #: src/merge/mkvmerge.cpp:1779
 #, no-c-format
 msgid "The size of attachment '{0}' is 0.\n"
-msgstr "Размерът на прикачен файл '{0}' е 0.\n"
+msgstr "Размерът на прикачения файл „{0}“ е 0.\n"
 
 #: src/merge/reader_detection_and_creation.cpp:90
 #: src/merge/reader_detection_and_creation.cpp:223
@@ -13355,7 +13362,7 @@ msgstr "Мащаб на времевото клеймо"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1828
 #, no-c-format
 msgid "Timestamps and default duration"
-msgstr "Времеви клейма и продължителност по подразбиране"
+msgstr "Времеви клейма и продължителност"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:279
 #, no-c-format
@@ -14711,12 +14718,12 @@ msgstr ""
 #: src/common/stereo_mode.cpp:62
 #, no-c-format
 msgid "both eyes laced in one block (left first)"
-msgstr ""
+msgstr "2 очи в 1 блок (първо ляво)"
 
 #: src/common/stereo_mode.cpp:63
 #, no-c-format
 msgid "both eyes laced in one block (right first)"
-msgstr ""
+msgstr "2 очи в 1 блок (първо дясно)"
 
 #: src/common/kax_info.cpp:724
 #, no-c-format
