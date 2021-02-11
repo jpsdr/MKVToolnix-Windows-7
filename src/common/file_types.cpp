@@ -25,13 +25,13 @@ file_type_t::get_supported() {
   if (!s_supported_file_types.empty())
     return s_supported_file_types;
 
-  s_supported_file_types.emplace_back(file_type_e::ac3,         Y("Dolby Digital/Dolby Digital Plus (AC-3, E-AC-3)"), "ac3 eac3");
+  s_supported_file_types.emplace_back(file_type_e::ac3,         Y("Dolby Digital/Dolby Digital Plus (AC-3, E-AC-3)"), "ac3 eac3 ab3 ec3");
   s_supported_file_types.emplace_back(file_type_e::aac,         Y("AAC (Advanced Audio Coding)"),         "aac m4a mp4");
   s_supported_file_types.emplace_back(file_type_e::avc_es,      Y("AVC/H.264 elementary streams"),        "264 avc h264 x264");
   s_supported_file_types.emplace_back(file_type_e::avi,         Y("AVI (Audio/Video Interleaved)"),       "avi");
   s_supported_file_types.emplace_back(file_type_e::is_unknown,  Y("ALAC (Apple Lossless Audio Codec)"),   "caf m4a mp4");
   s_supported_file_types.emplace_back(file_type_e::dirac,       Y("Dirac"),                               "drc");
-  s_supported_file_types.emplace_back(file_type_e::truehd,      Y("Dolby TrueHD"),                        "thd thd+ac3 truehd true-hd");
+  s_supported_file_types.emplace_back(file_type_e::truehd,      Y("Dolby TrueHD"),                        "mlp thd thd+ac3 truehd true-hd");
   s_supported_file_types.emplace_back(file_type_e::dts,         Y("DTS/DTS-HD (Digital Theater System)"), "dts dtshd dts-hd dtsma");
 #if defined(HAVE_FLAC_FORMAT_H)
   s_supported_file_types.emplace_back(file_type_e::flac,        Y("FLAC (Free Lossless Audio Codec)"),    "flac ogg");

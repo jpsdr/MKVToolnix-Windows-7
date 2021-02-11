@@ -18,6 +18,9 @@
 * MKVToolNix GUI: multiplexer: when adding Blu-rays the user can select
   multiple playlists to add simultaneously in the "select playlist to add"
   dialog. Implements #2961.
+* MKVToolNix GUI: multiplexer: the file name extensions "eb3" and "ec3" were
+  added for Dolby Digital Plus & "mpl" for Dolby TrueHD in the file
+  dialogs. Part of the implementation of #3027.
 
 ## Bug fixes
 
