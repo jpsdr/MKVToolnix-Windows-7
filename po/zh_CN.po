@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-02-11 23:05+0100\n"
+"POT-Creation-Date: 2021-02-12 11:50+0100\n"
 "PO-Revision-Date: 2020-09-02 18:12+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -12669,11 +12669,6 @@ msgstr "附件「{0}」的大小为 0。\n"
 msgid "The source file '{0}' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr "输入文件「{0}」无法成功打开，或者无法定位至末端以获取其大小。\n"
 
-#: src/mkvtoolnix-gui/merge/input.cpp:503
-#, no-c-format
-msgid "The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
-msgstr "容器的计时信息可能有多种来源: 命令行“--defualt-duration”参数给出的数值、输入文件容器或视频码流。"
-
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:916
 #, no-c-format
 msgid "The start time could not be parsed: %1"
@@ -12982,6 +12977,11 @@ msgstr "Theora"
 #, no-c-format
 msgid "There are no cues for track ID {0}.\n"
 msgstr "轨道 ID {0} 不包含索引。\n"
+
+#: src/mkvtoolnix-gui/merge/input.cpp:503
+#, fuzzy, no-c-format
+msgid "There are several potential sources for the container's timing information: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
+msgstr "容器的计时信息可能有多种来源: 命令行“--defualt-duration”参数给出的数值、输入文件容器或视频码流。"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:92
 #, no-c-format
