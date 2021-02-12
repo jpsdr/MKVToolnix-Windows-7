@@ -500,7 +500,7 @@ Tab::setupInputToolTips() {
                    Q("%1 %2 %3")
                    .arg(QY("Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."))
                    .arg(QY("With this option that information is adjusted to match the container's timing information."))
-                   .arg(QY("The source for the container's timing information be various things: a value given on the command line with the '--default-duration' option, "
+                   .arg(QY("There are several potential sources for the container's timing information: a value given on the command line with the '--default-duration' option, "
                            "the source container or the video bitstream.")));
   Util::setToolTip(p.ui->aspectRatio,
                    Q("<p>%1 %2 %3</p><p>%4</p>")
