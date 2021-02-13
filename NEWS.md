@@ -40,6 +40,8 @@
   set to "fixed output directory" then that output directory will be the one
   initially set when the directory selection dialog is opened. Fixes #3021.
 * all: fixed compatibility with gettext 0.21 and newer on mingw (Windows).
+* MKVToolNix GUI: multiplexer: fixed the removal of appended source files if
+  the "delete source files" end-of-job action is enabled. Fixes #3029.
 
 ## Build system changes
 
