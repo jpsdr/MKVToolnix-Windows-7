@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2021-02-13 15:43+0100\n"
-"PO-Revision-Date: 2021-02-07 15:09+0000\n"
+"PO-Revision-Date: 2021-02-12 13:27+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/es/)\n"
@@ -519,7 +519,7 @@ msgid ""
 msgstr ""
 "  --fix-bitstream-timing-information <TID[:bool]>\n"
 "                           Ajusta la tasa de fotogramas/campos\n"
-"                           almacenado en el vídeo para que coincida\n"
+"                           almacenado en flujo de bits del vídeo para que coincida\n"
 "                           con la duración por defecto de la pista.\n"
 
 #: src/merge/mkvmerge.cpp:389
@@ -3460,9 +3460,9 @@ msgid "Adding chapter files"
 msgstr "Añadiendo archivos de capítulos"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1831
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Adding multiple files"
-msgstr "Añadiendo archivos de etiquetas"
+msgstr "Añadiendo varios archivos"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:164
 #, no-c-format
@@ -3718,9 +3718,9 @@ msgstr "Usando también el archivo de corrección '{0}c'.\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1833
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:173
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Alwa&ys create new mutliplex settings for files containing video tracks"
-msgstr "Crear nuevo ajuste de multiplexado para &cada archivo"
+msgstr "S&iempre crea nuevos ajustes de multiplexado para archivos que contienen pistas de video"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:118
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:174
@@ -3827,7 +3827,7 @@ msgstr "Se esperaba un entero sin signo."
 #: src/common/hacks.cpp:38
 #, no-c-format
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
-msgstr "Analizar cadenas de bits MPEG4, poner a cada fotograma (frame) en un bloque de Matroska, y utilizar código de tiempo adecuado (I P B B = 0 120 40 80), usa V_MPEG4/ISO/... ID del Códec."
+msgstr "Analiza los flujos de bits MPEG4, pone cada fotograma (frame) en un bloque de Matroska, y utiliza un código de tiempo adecuado (I P B B = 0 120 40 80), usa V_MPEG4/ISO/... ID del Códec."
 
 #: src/merge/generic_packetizer.cpp:674
 #, no-c-format
@@ -5869,7 +5869,7 @@ msgstr "Versión de tipo de documento"
 #: src/common/file_types.cpp:28
 #, no-c-format
 msgid "Dolby Digital/Dolby Digital Plus (AC-3, E-AC-3)"
-msgstr ""
+msgstr "Dolby Digital/Dolby Digital Plus (AC-3, E-AC-3)"
 
 #: src/common/file_types.cpp:34
 #, no-c-format
@@ -6687,7 +6687,7 @@ msgstr "Actualmente, no se admiten códigos de idioma de cinco a ocho letras."
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1823
 #, no-c-format
 msgid "Fix bitstream timing info"
-msgstr "Corregir la información de sincronización del bitstream"
+msgstr "Corregir la información de sincronización del flujo de bits"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:176
 #, no-c-format
@@ -8987,12 +8987,12 @@ msgstr "Normalmente las tareas realizadas permanecen en la lista de tareas hasta
 #: src/mkvtoolnix-gui/merge/input.cpp:501
 #, no-c-format
 msgid "Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."
-msgstr "Por lo general, mkvmerge no cambia la información del timing (frecuencia de fotograma/campo) almacenado en el bitstream del vídeo."
+msgstr "Por lo general, mkvmerge no cambia la información de sincronización (frecuencia de fotograma/campo) almacenado en el flujo de bits del vídeo."
 
 #: src/common/hacks.cpp:50
 #, no-c-format
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
-msgstr "Normalmente, mkvmerge conserva la información de la relación de aspecto (aspect ratio) de los bitstreams del vídeo MPEG4 e inserta la información en el contenedor."
+msgstr "Normalmente, mkvmerge conserva la información de la relación de aspecto (aspect ratio) de los flujos de bits del vídeo MPEG4 e inserta la información en el contenedor."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
 #, no-c-format
@@ -10716,9 +10716,9 @@ msgid "Select file to add"
 msgstr "Seleccionar archivo a añadir"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:301
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select one or more playlists to add"
-msgstr "Seleccione la lista de reproducción a añadir"
+msgstr "Seleccione una o más listas de reproducción para añadir"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:471
 #, no-c-format
@@ -12021,7 +12021,7 @@ msgstr "La subetiqueta de idioma extendida '{}' sólo se debe usar con uno de lo
 #: src/output/p_mpeg4_p2.cpp:367
 #, no-c-format
 msgid "The extracted values for video width and height from the MPEG4 layer 2 video data bitstream differ from what the values in the source container. The ones from the video data bitstream ({0}x{1}) will be used.\n"
-msgstr "Los valores extraídos para el ancho y alto del vídeo desde los datos de las cadenas de bits del vídeo MPEG4 layer2 serán distintos a los valores de la fuente del contenedor. Los datos del paquete de bits del vídeo ({0}x{1}) serán usados.\n"
+msgstr "Los valores extraídos para el ancho y alto del vídeo desde los datos del flujo de bits del vídeo MPEG4 layer2 son distintos a los valores en el contenedor de origen. Se usarán los del flujo de bits del vídeo ({0}x{1}).\n"
 
 #: src/extract/extract_cli_parser.cpp:115
 #, no-c-format
@@ -13153,9 +13153,9 @@ msgid "There are no cues for track ID {0}.\n"
 msgstr "No hay índices (cues) para la pista con ID {0}.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:503
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "There are several potential sources for the container's timing information: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
-msgstr "La fuente de información para el timing del contenedor puede proceder del: valor dado en la línea de comandos con la opción '--default-duration', contenedor del archivo original o bitstream del vídeo."
+msgstr "Hay varias fuentes potenciales para contener información de sincronización del contenedor: un valor dado de línea de comandos con la opción '--default-duration', el contenedor original o el flujo de bits del vídeo."
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:92
 #, no-c-format
@@ -13237,7 +13237,7 @@ msgstr "Esta pista AVC/H.264 no comienza con un fotograma clave (keyframe). Los 
 #: src/output/p_avc_es.cpp:128
 #, no-c-format
 msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
-msgstr "La información de temporización de la pista AVC/H.264 indica que usa una tasa de fotogramas variable. Sin embargo, ni la duración por defecto ni un archivo externo de códigos de tiempo fue proporcionado a tal efecto, y el contenedor tampoco proporciona dichos códigos. Los códigos de tiempo resultantes puede que no sean válidos.\n"
+msgstr "La información de sincronización de la pista AVC/H.264 indica que usa una tasa de fotogramas variable. Sin embargo, ni la duración por defecto ni un archivo externo de códigos de tiempo fue proporcionado a tal efecto, y el contenedor tampoco proporciona dichos códigos. Los códigos de tiempo resultantes puede que no sean válidos.\n"
 
 #: src/output/p_hevc_es.cpp:96
 #, no-c-format
@@ -13438,7 +13438,7 @@ msgstr "Únicamente funciona con pistas de audio DTS."
 #: src/common/hacks.cpp:51
 #, no-c-format
 msgid "This option causes mkvmerge to remove the aspect ratio information from the bitstream."
-msgstr "Esta opción provoca que mkvmerge elimine la información de la relación de aspecto del bitstream."
+msgstr "Esta opción provoca que mkvmerge elimine la información de la relación de aspecto del flujo de bits."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:221
 #, no-c-format
@@ -14590,9 +14590,9 @@ msgid "When a file is added its name is scanned."
 msgstr "Cuando un archivo es añadido su nombre es analizado."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1832
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "When a&dding multiple files:"
-msgstr "Al &soltar archivos:"
+msgstr "Al aña&dir varios archivos:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:469
 #, no-c-format
@@ -14707,7 +14707,7 @@ msgstr "Con lo actuales ajustes de multiplexado el archivo de salida no contendr
 #: src/mkvtoolnix-gui/merge/input.cpp:502
 #, no-c-format
 msgid "With this option that information is adjusted to match the container's timing information."
-msgstr "Con esta opción, la información del timing se ajusta para que coincida con la del contenedor."
+msgstr "Con esta opción, la información de sincronización se ajusta para que coincida con la del contenedor."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:46
 #, no-c-format
