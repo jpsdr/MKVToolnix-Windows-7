@@ -60,6 +60,7 @@ public Q_SLOTS:
   virtual void copyFirstFileNameToTitle();
   virtual void copyOutputFileNameToTitle();
   virtual void copyTitleToOutputFileName();
+  virtual void addFilesFromClipboard();
 
   virtual void toolShown() override;
   virtual void tabTitleChanged();
@@ -94,6 +95,8 @@ protected:
   virtual void enableMenuActions();
   virtual void enableCopyMenuActions();
   virtual void showMergeWidget();
+
+  virtual QStringList fileNamesFromClipboard() const;
 
   virtual void dragEnterEvent(QDragEnterEvent *event) override;
   virtual void dragMoveEvent(QDragMoveEvent *event) override;

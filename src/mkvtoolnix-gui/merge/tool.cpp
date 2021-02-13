@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QClipboard>
 #include <QDebug>
 #include <QDragEnterEvent>
 #include <QDropEvent>
@@ -119,6 +120,7 @@ Tool::setupActions() {
   connect(mwUi->actionMergeCopyFirstFileNameToTitle,  &QAction::triggered,               this, &Tool::copyFirstFileNameToTitle);
   connect(mwUi->actionMergeCopyOutputFileNameToTitle, &QAction::triggered,               this, &Tool::copyOutputFileNameToTitle);
   connect(mwUi->actionMergeCopyTitleToOutputFileName, &QAction::triggered,               this, &Tool::copyTitleToOutputFileName);
+  connect(mwUi->actionMergeAddFilesFromClipboard,     &QAction::triggered,               this, &Tool::addFilesFromClipboard);
 
   connect(p.ui->merges,                               &QTabWidget::tabCloseRequested,    this, &Tool::closeTab);
   connect(p.ui->newFileButton,                        &QPushButton::clicked,             this, &Tool::appendNewTab);
@@ -170,6 +172,7 @@ Tool::enableMenuActions() {
   mwUi->actionMergeCloseAll->setEnabled(hasTab);
   mwUi->actionMergeStartMuxingAll->setEnabled(hasTab);
   mwUi->actionMergeAddAllToJobQueue->setEnabled(hasTab);
+  mwUi->actionMergeAddFilesFromClipboard->setEnabled(!fileNamesFromClipboard().isEmpty());
 }
 
 void
@@ -472,6 +475,65 @@ Tool::openMultipleConfigFilesFromCommandLine(QStringList const &fileNames) {
   MainWindow::get()->switchToTool(this);
   for (auto const &fileName : fileNames)
     openConfigFile(fileName);
+}
+
+QStringList
+Tool::fileNamesFromClipboard()
+  const {
+  // Windows Explorer copy file on mounted drive:            file:///E:/videos/file.avi
+  // Windows Explorer copy file on UNC path:                 file://disky/videos/file.avi
+  // Windows Explorer copy path on mounted drive in URL bar: \\disky\videos\file.avi
+  // Windows Explorer copy UNC path in URL bar:              \\disky\videos\file.avi
+  // Linux Krusader copy file:                               file:///home/mosu/videos/file.avi
+  // Linux raw file path:                                    /home/mosu/videos/file.avi
+
+#if defined(SYS_WINDOWS)
+  QRegularExpression driveFileUriRE{Q(R"(^file:///?([a-zA-Z]:[/\\].+))")}, uncUriRE{Q(R"(^file://([[:word:]].+?/.+))")}, uncRE{Q(R"(^\\\\.+\\.)")}, driveFileRE{Q(R"(^[a-zA-Z]:[/\\].)")};
+#else
+  QRegularExpression fileRE{Q("^/.+")};
+#endif
+  QRegularExpression fileUriRE{Q("^file://(/.+)")};
+  QStringList fileNames;
+
+  for (auto const &line : App::clipboard()->text().split(Q("\n"))) {
+#if defined(SYS_WINDOWS)
+    if (uncRE.match(line).hasMatch() || driveFileRE.match(line).hasMatch()) {
+      fileNames << line;
+      continue;
+    }
+
+    if (auto match = driveFileUriRE.match(line); match.hasMatch()) {
+      fileNames << match.captured(1);
+      continue;
+    }
+
+    if (auto match = uncUriRE.match(line); match.hasMatch()) {
+      fileNames << Q("\\\\%1").arg(match.captured(1).replace(Q("/"), Q("\\")));
+      continue;
+    }
+
+#else  // defined(SYS_WINDOWS)
+    if (fileRE.match(line).hasMatch()) {
+      fileNames << line;
+      continue;
+    }
+#endif  // defined(SYS_WINDOWS)
+
+    if (auto match = fileUriRE.match(line); match.hasMatch())
+      fileNames << match.captured(1);
+  }
+
+  qDebug() << fileNames;
+
+  return fileNames;
+}
+
+void
+Tool::addFilesFromClipboard() {
+  auto fileNames = fileNamesFromClipboard();
+
+  if (!fileNames.isEmpty())
+    identifyMultipleFiles(fileNames, Qt::NoButton);
 }
 
 void

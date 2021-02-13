@@ -25,6 +25,8 @@
   the user what to do with them has gained a new checkbox. If enabled, all
   files containing at least one video track will always be placed in newly
   created multiplex setting. Implements #2966.
+* MKVToolNix GUI: multiplexer: added a menu entry in the "Multiplexer" for
+  adding all files that are currently in the clipboard. Implements #3006.
 
 ## Bug fixes
 
