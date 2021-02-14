@@ -5,7 +5,7 @@ class FormatStringVerifier
     language  = file_name.gsub(%r{.*/|\.po$}, '')
     to_ignore = {
       'eu' => [ '74f8165349457fb0d89a559ffa83c4b3b3c1993b', 'aa8f04e33094d67c75256a298364323f38967abf' ],
-      'tr' => [ '62fc63d5ae795e24fcdbdfd5ec300c7bf5e46b76' ],
+      'tr' => [ '1934766bc7b88d6824e95d50e313ca3e129e62e7', '62fc63d5ae795e24fcdbdfd5ec300c7bf5e46b76' ],
     }
 
     entries = read_po(file_name).
