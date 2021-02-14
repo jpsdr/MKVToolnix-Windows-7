@@ -36,7 +36,7 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
   , m_samples_per_packet{}
   , m_samples_per_packet_packaged{}
   , m_packet_size(0)
-  , m_min_packet_size{static_cast<size_t>(samples_to_size(samples_per_sec * 4) / 1000)} // Minimum: 4ms of samples if we should pass it through unmodified
+  , m_min_packet_size{}
   , m_samples_output(0)
   , m_num_durations_provided{}
   , m_num_packets_with_different_sample_count{}
@@ -44,15 +44,14 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
   , m_s2ts(1000000000ll, m_samples_per_sec)
 {
 
-  int i;
-  for (i = 32; 2 < i; i >>= 2)
-    if ((m_samples_per_sec % i) == 0)
-      break;
+  // make sure each packet will not be less than 4ms
+  if ((samples_per_sec % 225) == 0)
+    m_min_packet_size = samples_to_size(samples_per_sec / 225);
+  else
+    m_min_packet_size = samples_to_size(samples_per_sec / 250);
 
-  if ((2 == i) && ((m_samples_per_sec % 5) == 0))
-    i = 5;
-
-  m_samples_per_packet = samples_per_sec / i;
+  // fall back to 40ms; it merely happens to be "second-aligned" for all common rates
+  m_samples_per_packet = samples_per_sec / 25;
   m_packet_size        = samples_to_size(m_samples_per_packet);
 
   set_track_type(track_audio);
