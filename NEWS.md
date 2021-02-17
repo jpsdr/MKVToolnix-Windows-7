@@ -46,6 +46,9 @@
   always contain the language code the user enters in the free-form field,
   even if it isn't in the list of often-used languages the user configured in
   the preferences.
+* MKVToolNix GUI: chapter editor: when importing chapters from DVDs the IETF
+  BCP 47 language elements will be set, too, not just the legacy language
+  elements.
 
 ## Build system changes
 

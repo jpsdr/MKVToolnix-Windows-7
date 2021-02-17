@@ -1194,8 +1194,9 @@ create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editio
                                                                     new libmatroska::KaxChapterTimeStart, timestamp.to_ns());
 
       if (!name.empty())
-        atom->PushElement(*mtx::construct::cons<libmatroska::KaxChapterDisplay>(new libmatroska::KaxChapterString,   name,
-                                                                                new libmatroska::KaxChapterLanguage, use_language.get_iso639_2_alpha_3_code_or("und")));
+        atom->PushElement(*mtx::construct::cons<libmatroska::KaxChapterDisplay>(new libmatroska::KaxChapterString,    name,
+                                                                                new libmatroska::KaxChapterLanguage,  use_language.get_iso639_2_alpha_3_code_or("und"),
+                                                                                new libmatroska::KaxChapLanguageIETF, use_language.format()));
 
       edition->PushElement(*atom);
     }
