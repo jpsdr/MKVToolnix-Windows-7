@@ -341,7 +341,7 @@ cxx_compiler = lambda do |*args|
   pchu   = pchi.use_flags ? " #{pchi.use_flags}" : ""
   pchx   = pchi.extra_flags ? " #{pchi.extra_flags}" : ""
   lang   = pchi.language ? pchi.language : "c++"
-  flags  = $flags[:cxxflags]
+  flags  = $flags[:cxxflags].dup
 
   if %r{lib/fmt/}.match(source)
     flags.gsub!(%r{-Wpedantic}, '')
