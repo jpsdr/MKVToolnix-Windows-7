@@ -63,9 +63,9 @@ class LanguageDialogPrivate {
   std::unique_ptr<Ui::LanguageDialog> ui{new Ui::LanguageDialog};
   QVector<QVector<QWidget *>> componentWidgets;
 
-  QString initialISO639_2Code;
-  QStringList additionalISO639_2Codes;
-  QSet<QString> previousAllAdditionalISO639_2Codes;
+  QString initialISO639Code;
+  QStringList additionalISO639Codes;
+  QSet<QString> previousAllAdditionalISO639Codes;
 };
 
 LanguageDialog::LanguageDialog(QWidget *parent)
@@ -156,21 +156,21 @@ void
 LanguageDialog::reinitializeLanguageComboBox() {
   auto &p = *p_func();
 
-  auto additionalItems = p.additionalISO639_2Codes;
+  auto additionalItems = p.additionalISO639Codes;
   auto tag             = mtx::bcp47::language_c::parse(to_utf8(p.ui->leFreeForm->text()));
 
-  if (!p.initialISO639_2Code.isEmpty())
-    additionalItems << p.initialISO639_2Code;
+  if (!p.initialISO639Code.isEmpty())
+    additionalItems << p.initialISO639Code;
 
   if (tag.is_valid() && tag.has_valid_iso639_code())
     additionalItems << Q(tag.get_iso639_alpha_3_code());
 
   auto uniqueItems = qListToSet(additionalItems);
 
-  if (uniqueItems == p.previousAllAdditionalISO639_2Codes)
+  if (uniqueItems == p.previousAllAdditionalISO639Codes)
     return;
 
-  p.previousAllAdditionalISO639_2Codes = uniqueItems;
+  p.previousAllAdditionalISO639Codes = uniqueItems;
 
   p.ui->cbLanguage
     ->setAdditionalItems(qSetToList(uniqueItems))
@@ -181,13 +181,13 @@ void
 LanguageDialog::setAdditionalLanguages(QStringList const &additionalLanguages) {
   auto &p = *p_func();
 
-  p.additionalISO639_2Codes.clear();
+  p.additionalISO639Codes.clear();
 
   for (auto const &language : additionalLanguages) {
     auto parsedLanguage = mtx::bcp47::language_c::parse(to_utf8(language));
 
     if (parsedLanguage.is_valid() && parsedLanguage.has_valid_iso639_code())
-      p.additionalISO639_2Codes << Q(parsedLanguage.get_iso639_alpha_3_code());
+      p.additionalISO639Codes << Q(parsedLanguage.get_iso639_alpha_3_code());
   }
 
   reinitializeLanguageComboBox();
@@ -198,7 +198,7 @@ LanguageDialog::setLanguage(mtx::bcp47::language_c const &language) {
   auto &p = *p_func();
 
   if (language.is_valid() && language.has_valid_iso639_code()) {
-    p.initialISO639_2Code = Q(language.get_iso639_alpha_3_code());
+    p.initialISO639Code = Q(language.get_iso639_alpha_3_code());
     reinitializeLanguageComboBox();
   }
 

@@ -27,7 +27,7 @@ TEST(BCP47LanguageTags, ParsingValidUNM49) {
 }
 
 TEST(BCP47LanguageTags, ParsingInvalid) {
-  EXPECT_FALSE(mtx::bcp47::language_c::parse("muh-Latn-CH-x-weeee").is_valid());  // invalid (muh not ISO 639 code).is_valid())
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("zyx-Latn-CH-x-weeee").is_valid());  // invalid (zyx not ISO 639 code).is_valid())
   EXPECT_FALSE(mtx::bcp47::language_c::parse("ger-muku-CH-x-weeee").is_valid());  // invalid (muku not a script).is_valid())
   EXPECT_FALSE(mtx::bcp47::language_c::parse("ger-777").is_valid());              // invalid (777 not a region code).is_valid())
   EXPECT_FALSE(mtx::bcp47::language_c::parse("zh-min").is_valid());               // invalid (min not allowed with zh).is_valid())
@@ -96,12 +96,12 @@ TEST(BCP47LanguageTags, CodeConversion) {
   EXPECT_EQ("ger"s, mtx::bcp47::language_c::parse("ger").get_iso639_alpha_3_code());
 
   mtx::bcp47::language_c l;
-  l.set_language("muh");
+  l.set_language("zyx");
   EXPECT_EQ(""s, l.get_iso639_alpha_3_code());
 
   EXPECT_FALSE(mtx::bcp47::language_c{}.has_valid_iso639_code());
-  EXPECT_FALSE(mtx::bcp47::language_c::parse("muh").has_valid_iso639_code());
-  EXPECT_FALSE(mtx::bcp47::language_c::parse("x-muh").has_valid_iso639_code());
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("zyx").has_valid_iso639_code());
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("x-zyx").has_valid_iso639_code());
 
   EXPECT_TRUE(mtx::bcp47::language_c::parse("de").has_valid_iso639_code());
   EXPECT_TRUE(mtx::bcp47::language_c::parse("deu").has_valid_iso639_code());
@@ -163,6 +163,14 @@ TEST(BCP47LanguageTags, EqualityOperators) {
   EXPECT_TRUE(mtx::bcp47::language_c::parse("ger") != mtx::bcp47::language_c::parse("eng"));
   EXPECT_TRUE(mtx::bcp47::language_c::parse("deu") != mtx::bcp47::language_c::parse("eng"));
   EXPECT_TRUE(mtx::bcp47::language_c::parse("de")  != mtx::bcp47::language_c::parse("eng"));
+}
+
+TEST(BCP47LanguageTags, DifferenceBetweenISO639_2And639_3) {
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de").has_valid_iso639_code());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de").has_valid_iso639_2_code());
+
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("cmn").has_valid_iso639_code());
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("cmn").has_valid_iso639_2_code());
 }
 
 }

@@ -40,10 +40,10 @@ std::unordered_map<std::string, std::string> s_deprecated_1_and_2_codes{
 void
 list_languages() {
   mtx::string::table_formatter_c formatter;
-  formatter.set_header({ Y("English language name"), Y("ISO 639-2 code"), Y("ISO 639-1 code") });
+  formatter.set_header({ Y("English language name"), Y("ISO 639-3 code"), Y("ISO 639-2 code"), Y("ISO 639-1 code") });
 
   for (auto &lang : g_languages)
-    formatter.add_row({ gettext(lang.english_name.c_str()), lang.alpha_3_code, lang.alpha_2_code });
+    formatter.add_row({ gettext(lang.english_name.c_str()), lang.alpha_3_code, lang.is_part_of_iso639_2 ? lang.alpha_3_code : ""s, lang.alpha_2_code });
 
   mxinfo(formatter.format());
 }

@@ -158,7 +158,7 @@ ebml_chapters_converter_c::fix_display(KaxChapterDisplay &display)
   if (clanguage_ietf)
     clanguage_ietf->SetValue(parsed_language.format());
 
-  if (parsed_language.has_valid_iso639_code()) {
+  if (parsed_language.has_valid_iso639_2_code()) {
     if (!clanguage) {
       clanguage = new KaxChapterLanguage;
       display.PushElement(*clanguage);
@@ -169,7 +169,7 @@ ebml_chapters_converter_c::fix_display(KaxChapterDisplay &display)
   } else if (clanguage) {
     auto language_opt = mtx::iso639::look_up(clanguage->GetValue());
 
-    if (!language_opt)
+    if (!language_opt || !language_opt->is_part_of_iso639_2)
       throw conversion_x{fmt::format(Y("'{0}' is not a valid ISO 639-2 language code."), clanguage->GetValue())};
   }
 

@@ -1,14 +1,36 @@
 def create_iso639_language_list_file
   cpp_file_name = "src/common/iso639_language_list.cpp"
-  iso639_2      = JSON.parse(IO.readlines("/usr/share/iso-codes/json/iso_639-2.json").join(''))
-  rows          = iso639_2["639-2"].
+  iso639_2      = JSON.parse(IO.readlines("/usr/share/iso-codes/json/iso_639-2.json").join('')) \
+    ["639-2"].
     reject { |entry| %r{^qaa}.match(entry["alpha_3"]) }.
     map do |entry|
+      entry["has_639_2"]      = true
+      entry["alpha_3_to_use"] = entry["bibliographic"] || entry["alpha_3"]
+      entry
+    end
+
+  used_codes = Hash[ *iso639_2.map { |entry| [ entry["alpha_3"], true, entry["bibliographic"], true ] }.flatten ]
+
+  JSON.parse(IO.readlines("/usr/share/iso-codes/json/iso_639-3.json").join('')) \
+    ["639-3"].
+    reject { |entry| entry["type"] != "L" }.
+    reject { |entry| used_codes.include?(entry["alpha_3"]) }.
+    each do |entry|
+      iso639_2 << {
+        "name"           => entry["name"],
+        "alpha_3"        => entry["alpha_3"],
+        "alpha_3_to_use" => entry["alpha_3"],
+        "has_639_2"      => false,
+      }
+    end
+
+  rows = iso639_2.
+    map do |entry|
     [ entry["name"].to_u8_cpp_string,
-      (entry["bibliographic"] || entry["alpha_3"]).to_cpp_string,
+      entry["alpha_3_to_use"].to_cpp_string,
       (entry["alpha_2"] || '').to_cpp_string,
       entry["bibliographic"] ? entry["alpha_3"].to_cpp_string : '""s',
-      'true ',
+      entry["has_639_2"].to_s,
     ]
   end
 

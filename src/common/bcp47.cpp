@@ -46,6 +46,16 @@ language_c::has_valid_iso639_code()
   return m_valid && !m_language.empty();
 }
 
+bool
+language_c::has_valid_iso639_2_code()
+  const noexcept {
+  if (!m_valid || m_language.empty())
+    return false;
+
+  auto language_opt = mtx::iso639::look_up(get_language());
+  return language_opt && language_opt->is_part_of_iso639_2;
+}
+
 std::string const &
 language_c::get_error()
   const noexcept {
@@ -305,8 +315,14 @@ language_c::get_iso639_alpha_3_code()
 std::string
 language_c::get_iso639_2_alpha_3_code_or(std::string const &value_if_invalid)
   const noexcept {
-  auto code = get_iso639_alpha_3_code();
-  return !code.empty() ? code : value_if_invalid;
+  if (!m_valid || m_language.empty())
+    return value_if_invalid;
+
+  auto language = mtx::iso639::look_up(m_language);
+  if (language && language->is_part_of_iso639_2)
+    return language->alpha_3_code;
+
+  return value_if_invalid;
 }
 
 language_c &

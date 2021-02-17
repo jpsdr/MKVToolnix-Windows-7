@@ -1212,7 +1212,7 @@ set_languages_in_display(libmatroska::KaxChapterDisplay &display,
 
   GetChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(parsed_language.format());
 
-  if (parsed_language.has_valid_iso639_code())
+  if (parsed_language.has_valid_iso639_2_code())
     GetChild<libmatroska::KaxChapterLanguage>(display).SetValue(parsed_language.get_iso639_alpha_3_code());
 }
 
