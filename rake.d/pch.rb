@@ -403,7 +403,7 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
 
   def self.info_for_user(user, ofile)
     f = Info.new
-    if c?(:USE_PRECOMPILED_HEADERS)
+    if c?(:USE_PRECOMPILED_HEADERS) && !%r{src/common/iso639_language_list.cpp}.match(user)
       user = Pathname.new(user).cleanpath.to_s
       f.language = "c++-header" if user.end_with?(".h")
       header = @db_scan.fetch(user, nil)
