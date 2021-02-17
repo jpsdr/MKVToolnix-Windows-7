@@ -27,6 +27,12 @@
   created multiplex setting. Implements #2966.
 * MKVToolNix GUI: multiplexer: added a menu entry in the "Multiplexer" for
   adding all files that are currently in the clipboard. Implements #3006.
+* mkvmerge: added support for using ISO 639-3 language codes in IETF BF47
+  language tags. Part of the implementation of #3007.
+* MKVToolNix GUI: added support for using ISO 639-3 language codes in IETF
+  BF47 language tags. As there are several thousand of them, they're
+  deactivated by default and must be activated in the preferences ("GUI" →
+  "Often used selections" → "Languages"). Part of the implementation of #3007.
 
 ## Bug fixes
 
