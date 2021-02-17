@@ -70,9 +70,11 @@ LanguageComboBox::setup(bool withEmpty,
       insertSeparator(commonLanguages.size() + separatorOffset);
   }
 
-  if (!onlyOftenUsed)
-    for (auto const &language : App::iso639Languages())
+  if (!onlyOftenUsed) {
+    auto &languages = Util::Settings::get().m_useISO639_3Languages ? App::iso639Languages() : App::iso639_2Languages();
+    for (auto const &language : languages)
       addItem(language.first, language.second);
+  }
 
   view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   Util::fixComboBoxViewWidth(*this);

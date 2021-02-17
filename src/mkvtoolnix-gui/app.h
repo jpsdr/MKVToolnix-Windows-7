@@ -101,6 +101,7 @@ public:
   static Jobs::ProgramRunner &programRunner();
 
   static Iso639LanguageList const &iso639Languages();
+  static Iso639LanguageList const &iso639_2Languages();
   static Iso639LanguageList const &commonIso639Languages();
   static RegionList const &regions();
   static RegionList const &commonRegions();

@@ -72,6 +72,7 @@ public Q_SLOTS:
   void adjustPlaylistControls();
   void adjustRemoveOldJobsControls();
   void revertDeriveTrackLanguageFromFileNameRegex();
+  void setupCommonLanguages(bool withISO639_3);
 
   void enableOftendUsedLanguagesOnly();
   void enableOftendUsedRegionsOnly();
@@ -91,7 +92,6 @@ protected:
   void setupDerivingTrackLanguagesFromFileName();
   void setupWhenToSetDefaultLanguage();
   void setupJobRemovalPolicy();
-  void setupCommonLanguages();
   void setupCommonRegions();
   void setupCommonCharacterSets();
   void setupProcessPriority();

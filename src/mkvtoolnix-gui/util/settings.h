@@ -157,6 +157,7 @@ public:
   QString m_chapterNameTemplate, m_defaultChapterCountry, m_ceTextFileCharacterSet, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
   QStringList m_oftenUsedLanguages, m_oftenUsedRegions, m_oftenUsedCharacterSets;
   bool m_oftenUsedLanguagesOnly, m_oftenUsedRegionsOnly, m_oftenUsedCharacterSetsOnly;
+  bool m_useISO639_3Languages;
   ProcessPriority m_priority;
   double m_probeRangePercentage;
   QTabWidget::TabPosition m_tabPosition;

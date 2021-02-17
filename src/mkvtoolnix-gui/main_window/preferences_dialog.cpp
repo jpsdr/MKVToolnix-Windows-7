@@ -76,9 +76,11 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   adjustRemoveOldJobsControls();
   setupJobRemovalPolicy();
 
-  setupCommonLanguages();
+  setupCommonLanguages(m_cfg.m_useISO639_3Languages);
   setupCommonRegions();
   setupCommonCharacterSets();
+
+  ui->cbUseISO639_3Languages->setChecked(m_cfg.m_useISO639_3Languages);
 
   // Merge page
   if (!m_cfg.m_mediaInfoExe.isEmpty())
@@ -505,6 +507,8 @@ PreferencesDialog::setupToolTips() {
 
 void
 PreferencesDialog::setupConnections() {
+  connect(ui->cbUseISO639_3Languages,                     &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::setupCommonLanguages);
+
   connect(ui->pbMEditDefaultAdditionalCommandLineOptions, &QPushButton::clicked,                                         this,                                 &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
 
   connect(ui->pbMBrowseMediaInfoExe,                      &QPushButton::clicked,                                         this,                                 &PreferencesDialog::browseMediaInfoExe);
@@ -575,8 +579,8 @@ PreferencesDialog::setupJobRemovalPolicy() {
 }
 
 void
-PreferencesDialog::setupCommonLanguages() {
-  auto &allLanguages = App::iso639Languages();
+PreferencesDialog::setupCommonLanguages(bool withISO639_3) {
+  auto &allLanguages = withISO639_3 ? App::iso639Languages() : App::iso639_2Languages();
 
   ui->tbOftenUsedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(Util::stdVectorToQVector<Util::SideBySideMultiSelect::Item>(allLanguages)), m_cfg.m_oftenUsedLanguages);
   ui->cbOftenUsedLanguagesOnly->setChecked(m_cfg.m_oftenUsedLanguagesOnly && !m_cfg.m_oftenUsedLanguages.isEmpty());
@@ -962,6 +966,7 @@ PreferencesDialog::save() {
   m_cfg.m_oftenUsedLanguagesOnly                        = ui->cbOftenUsedLanguagesOnly    ->isChecked() && !m_cfg.m_oftenUsedLanguages    .isEmpty();
   m_cfg.m_oftenUsedRegionsOnly                          = ui->cbOftenUsedRegionsOnly      ->isChecked() && !m_cfg.m_oftenUsedRegions      .isEmpty();
   m_cfg.m_oftenUsedCharacterSetsOnly                    = ui->cbOftenUsedCharacterSetsOnly->isChecked() && !m_cfg.m_oftenUsedCharacterSets.isEmpty();
+  m_cfg.m_useISO639_3Languages                          = ui->cbUseISO639_3Languages      ->isChecked();
 
   // Info tool page
   m_cfg.m_defaultInfoJobSettings                        = ui->wIDefaultJobSettings->settings();

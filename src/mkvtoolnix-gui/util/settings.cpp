@@ -331,9 +331,10 @@ Settings::load() {
   m_oftenUsedRegions                   = reg.value(s_valOftenUsedRegions).toStringList();
   m_oftenUsedCharacterSets             = reg.value(s_valOftenUsedCharacterSets).toStringList();
 
-  m_oftenUsedLanguagesOnly             = reg.value(s_valOftenUsedLanguagesOnly,     false).toBool();;
-  m_oftenUsedRegionsOnly               = reg.value(s_valOftenUsedRegionsOnly,       false).toBool();;
-  m_oftenUsedCharacterSetsOnly         = reg.value(s_valOftenUsedCharacterSetsOnly, false).toBool();;
+  m_oftenUsedLanguagesOnly             = reg.value(s_valOftenUsedLanguagesOnly,     false).toBool();
+  m_oftenUsedRegionsOnly               = reg.value(s_valOftenUsedRegionsOnly,       false).toBool();
+  m_oftenUsedCharacterSetsOnly         = reg.value(s_valOftenUsedCharacterSetsOnly, false).toBool();
+  m_useISO639_3Languages               = reg.value(s_valUseISO639_3Languages,       false).toBool();
 
   m_scanForPlaylistsPolicy             = static_cast<ScanForPlaylistsPolicy>(reg.value(s_valScanForPlaylistsPolicy, static_cast<int>(AskBeforeScanning)).toInt());
   m_minimumPlaylistDuration            = reg.value(s_valMinimumPlaylistDuration, 120).toUInt();
@@ -692,6 +693,7 @@ Settings::save()
   reg.setValue(s_valOftenUsedLanguagesOnly,             m_oftenUsedLanguagesOnly);
   reg.setValue(s_valOftenUsedRegionsOnly,               m_oftenUsedRegionsOnly);
   reg.setValue(s_valOftenUsedCharacterSetsOnly,         m_oftenUsedCharacterSetsOnly);
+  reg.setValue(s_valUseISO639_3Languages,               m_useISO639_3Languages);
 
   reg.setValue(s_valScanForPlaylistsPolicy,             static_cast<int>(m_scanForPlaylistsPolicy));
   reg.setValue(s_valMinimumPlaylistDuration,            m_minimumPlaylistDuration);

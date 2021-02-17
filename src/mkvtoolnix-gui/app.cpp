@@ -36,7 +36,7 @@
 
 namespace mtx::gui {
 
-static Iso639LanguageList s_iso639Languages, s_commonIso639Languages;
+static Iso639LanguageList s_iso639Languages, s_iso639_2Languages, s_commonIso639Languages;
 static RegionList s_regions, s_commonRegions;
 static CharacterSetList s_characterSets, s_commonCharacterSets;
 static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_regionToDescription;
@@ -209,6 +209,7 @@ App::retranslateUi() {
 void
 App::reinitializeLanguageLists() {
   s_iso639Languages.clear();
+  s_iso639_2Languages.clear();
   s_commonIso639Languages.clear();
   s_regions.clear();
   s_commonRegions.clear();
@@ -237,6 +238,7 @@ App::initializeIso639Languages() {
   auto &cfg = Util::Settings::get();
 
   s_iso639Languages.reserve(mtx::iso639::g_languages.size());
+  s_iso639_2Languages.reserve(mtx::iso639::g_languages.size());
   s_commonIso639Languages.reserve(cfg.m_oftenUsedLanguages.size());
 
   for (auto const &language : mtx::iso639::g_languages) {
@@ -246,13 +248,16 @@ App::initializeIso639Languages() {
     auto isCommon      = cfg.m_oftenUsedLanguages.indexOf(languageCode) != -1;
 
     s_iso639Languages.emplace_back(description, languageCode);
+    if (language.is_part_of_iso639_2)
+      s_iso639_2Languages.emplace_back(description, languageCode);
     if (isCommon)
       s_commonIso639Languages.emplace_back(description, languageCode);
 
     s_iso639_2LanguageCodeToDescription[languageCode] = description;
   }
 
-  std::sort(s_iso639Languages.begin(), s_iso639Languages.end());
+  std::sort(s_iso639Languages.begin(),       s_iso639Languages.end());
+  std::sort(s_iso639_2Languages.begin(),     s_iso639_2Languages.end());
   std::sort(s_commonIso639Languages.begin(), s_commonIso639Languages.end());
 }
 
@@ -304,6 +309,12 @@ Iso639LanguageList const &
 App::iso639Languages() {
   initializeLanguageLists();
   return s_iso639Languages;
+}
+
+Iso639LanguageList const &
+App::iso639_2Languages() {
+  initializeLanguageLists();
+  return s_iso639_2Languages;
 }
 
 Iso639LanguageList const &
