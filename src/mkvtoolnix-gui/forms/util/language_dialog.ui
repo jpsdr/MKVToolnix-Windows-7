@@ -105,7 +105,7 @@
             </rect>
            </property>
            <property name="autoFillBackground">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <layout class="QGridLayout" name="sawComponentsLayout">
             <property name="leftMargin">
@@ -282,6 +282,16 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="lStatusWarningsIcon">
+          <property name="text">
+           <string notr="true"/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="../../qt_resources.qrc">:/icons/16x16/dialog-warning.png</pixmap>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="lStatusBadIcon">
           <property name="text">
            <string notr="true"/>
@@ -301,6 +311,9 @@
           </property>
           <property name="text">
            <string notr="true">TextLabel</string>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -343,14 +356,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>mtx::gui::Util::LanguageComboBox</class>
-   <extends>QComboBox</extends>
-   <header>mkvtoolnix-gui/util/language_combo_box.h</header>
-  </customwidget>
-  <customwidget>
    <class>mtx::gui::Util::CountryComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/country_combo_box.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::LanguageComboBox</class>
+   <extends>QComboBox</extends>
+   <header>mkvtoolnix-gui/util/language_combo_box.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

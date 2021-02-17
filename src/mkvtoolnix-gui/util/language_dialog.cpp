@@ -11,6 +11,7 @@
 
 #include "common/bcp47.h"
 #include "common/iana_language_subtag_registry.h"
+#include "common/iso639.h"
 #include "common/iso3166.h"
 #include "common/iso15924.h"
 #include "common/qt.h"
@@ -344,12 +345,22 @@ LanguageDialog::setupFreeFormAndComponentControls() {
 
 void
 LanguageDialog::setStatusFromLanguageTag(mtx::bcp47::language_c const &tag) {
-  auto &p = *p_func();
+  auto &p         = *p_func();
+  auto statusText = tag.is_valid() ? QY("The language tag is valid.") : QY("The language tag is not valid.");
 
-  p.ui->lStatusOKIcon ->setVisible( tag.is_valid());
-  p.ui->lStatusBadIcon->setVisible(!tag.is_valid());
-  p.ui->lStatusText   ->setText(tag.is_valid() ? QY("The language tag is valid.") : QY("The language tag is not valid."));
-  p.ui->lParserError  ->setText(tag.is_valid() ? QY("No error was found.")        : Q(tag.get_error()));
+  QStringList warnings;
+
+  if (tag.has_valid_iso639_code() && !tag.has_valid_iso639_2_code())
+    warnings << QY("Warning: %1").arg(QY("The selected language code '%1' is not an ISO 639-2 code. Players that only support the legacy Matroska language elements but not the IETF BCP 47 language elements will therefore display a different language such as 'und' (undetermined).").arg(Q(tag.get_language())));
+
+  if (!warnings.isEmpty())
+    statusText += Q(" %1").arg(warnings.join(Q(" ")));
+
+  p.ui->lStatusOKIcon      ->setVisible( tag.is_valid() &&  warnings.isEmpty());
+  p.ui->lStatusWarningsIcon->setVisible( tag.is_valid() && !warnings.isEmpty());
+  p.ui->lStatusBadIcon     ->setVisible(!tag.is_valid());
+  p.ui->lStatusText        ->setText(statusText);
+  p.ui->lParserError       ->setText(tag.is_valid() ? QY("No error was found.") : Q(tag.get_error()));
 }
 
 int
