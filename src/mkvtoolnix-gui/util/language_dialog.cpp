@@ -65,6 +65,7 @@ class LanguageDialogPrivate {
 
   QString initialISO639_2Code;
   QStringList additionalISO639_2Codes;
+  QSet<QString> previousAllAdditionalISO639_2Codes;
 };
 
 LanguageDialog::LanguageDialog(QWidget *parent)
@@ -156,11 +157,20 @@ LanguageDialog::reinitializeLanguageComboBox() {
   auto &p = *p_func();
 
   auto additionalItems = p.additionalISO639_2Codes;
+  auto tag             = mtx::bcp47::language_c::parse(to_utf8(p.ui->leFreeForm->text()));
 
   if (!p.initialISO639_2Code.isEmpty())
     additionalItems << p.initialISO639_2Code;
 
+  if (tag.is_valid() && tag.has_valid_iso639_code())
+    additionalItems << Q(tag.get_iso639_alpha_3_code());
+
   auto uniqueItems = qListToSet(additionalItems);
+
+  if (uniqueItems == p.previousAllAdditionalISO639_2Codes)
+    return;
+
+  p.previousAllAdditionalISO639_2Codes = uniqueItems;
 
   p.ui->cbLanguage
     ->setAdditionalItems(qSetToList(uniqueItems))
@@ -519,6 +529,8 @@ LanguageDialog::setComponentsFromLanguageTag(mtx::bcp47::language_c const &tag) 
 
   if (!tag.is_valid())
     return;
+
+  reinitializeLanguageComboBox();
 
   setComboBoxTextByData(p.ui->cbLanguage, Q(tag.get_iso639_2_alpha_3_code_or({})));
   setComboBoxTextByData(p.ui->cbRegion,   Q(tag.get_region()).toLower());

@@ -42,6 +42,10 @@
 * all: fixed compatibility with gettext 0.21 and newer on mingw (Windows).
 * MKVToolNix GUI: multiplexer: fixed the removal of appended source files if
   the "delete source files" end-of-job action is enabled. Fixes #3029.
+* MKVToolNix GUI: IETF BCP 47 language widget: the language combo box will now
+  always contain the language code the user enters in the free-form field,
+  even if it isn't in the list of often-used languages the user configured in
+  the preferences.
 
 ## Build system changes
 
