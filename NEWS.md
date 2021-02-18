@@ -58,7 +58,8 @@
 
 ## Build system changes
 
-* libMatroska v1.6.3 is now required.
+* libEBML v1.4.2 and libMatroska v1.6.3 are now required. The optional,
+  bundled copies of both libraries have been updated to those versions.
 
 
 # Version 53.0.0 "Fool's Gold" 2021-01-30
