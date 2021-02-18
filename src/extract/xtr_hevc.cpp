@@ -31,25 +31,24 @@ xtr_hevc_c::create_file(xtr_base_c *master,
 
   m_decoded_codec_private->take_ownership();
 
-  unwrap_write_hevcc(false);
+  m_nal_size_size = 1 + (m_decoded_codec_private->get_buffer()[21] & 3);
 }
 
 void
-xtr_hevc_c::unwrap_write_hevcc(bool skip_sei) {
-  m_out->setFilePointer(0);
-  m_out->truncate(0);
-
-  auto buf        = m_decoded_codec_private->get_buffer();
-  m_nal_size_size = 1 + (buf[21] & 3);
-
+xtr_hevc_c::unwrap_write_hevcc(bool skip_prefix_sei) {
   // Parameter sets in this order: vps, sps, pps, sei
+  auto buf                = m_decoded_codec_private->get_buffer();
   auto num_parameter_sets = static_cast<unsigned int>(buf[22]);
   auto pos                = static_cast<size_t>(23);
   auto const priv_size    = m_decoded_codec_private->get_size();
 
+  mxdebug_if(m_debug, fmt::format("unwrap_write_hevcc: nal_size_size {0} num_parameter_sets {1}\n", m_nal_size_size, num_parameter_sets));
+
   while (num_parameter_sets && (priv_size > (pos + 3))) {
     auto nal_unit_count  = get_uint16_be(&buf[pos + 1]);
     pos                 += 3;
+
+    mxdebug_if(m_debug, fmt::format("unwrap_write_hevcc:   num_parameter_sets {0} nal_unit_count {1} pos {2}\n", num_parameter_sets, nal_unit_count, pos - 3));
 
     while (nal_unit_count && (priv_size > pos)) {
       if ((pos + 2 + 1) > priv_size)
@@ -57,8 +56,11 @@ xtr_hevc_c::unwrap_write_hevcc(bool skip_sei) {
 
       auto nal_size      = get_uint_be(&buf[pos], 2);
       auto nal_unit_type = (buf[pos + 2] >> 1) & 0x3f;
+      auto skip_this_nal = skip_prefix_sei && (HEVC_NALU_TYPE_PREFIX_SEI == nal_unit_type);
 
-      if (skip_sei && (HEVC_NALU_TYPE_PREFIX_SEI == nal_unit_type))
+      mxdebug_if(m_debug, fmt::format("unwrap_write_hevcc:     pos {0} nal_size {1} type 0x{2:02x} skip_this_nal {3}\n", pos, nal_size, static_cast<unsigned int>(nal_unit_type), skip_this_nal));
+
+      if (skip_this_nal)
         pos += nal_size + 2;
 
       else if (!write_nal(buf, pos, priv_size, 2))
@@ -99,38 +101,36 @@ xtr_hevc_c::write_nal(binary *data,
 }
 
 void
-xtr_hevc_c::check_for_sei_in_first_frame(nal_unit_list_t const &nal_units) {
-  if (!m_check_for_sei_in_first_frame)
+xtr_hevc_c::check_for_parameter_sets_in_first_frame(nal_unit_list_t const &nal_units) {
+  if (!m_check_for_parameter_sets_in_first_frame)
     return;
 
-  for (auto const &nal_unit : nal_units) {
-    if (HEVC_NALU_TYPE_PREFIX_SEI != nal_unit.second)
-      continue;
+  std::unordered_map<unsigned int, bool> nalu_types_found;
 
-    unwrap_write_hevcc(true);
-    break;
-  }
+  for (auto const &nal_unit : nal_units)
+    nalu_types_found[nal_unit.second] = true;
 
-  m_check_for_sei_in_first_frame = false;
+  auto have_all_parameter_sets = nalu_types_found[HEVC_NALU_TYPE_VIDEO_PARAM] && nalu_types_found[HEVC_NALU_TYPE_SEQ_PARAM] && nalu_types_found[HEVC_NALU_TYPE_PIC_PARAM];
+  auto have_prefix_sei         = nalu_types_found[HEVC_NALU_TYPE_PREFIX_SEI];
+
+  if (!have_all_parameter_sets)
+    unwrap_write_hevcc(have_prefix_sei);
+
+  m_check_for_parameter_sets_in_first_frame = false;
 }
 
 void
 xtr_hevc_c::handle_frame(xtr_frame_t &f) {
   auto nal_units = find_nal_units(f.frame->get_buffer(), f.frame->get_size());
 
-  check_for_sei_in_first_frame(nal_units);
+  check_for_parameter_sets_in_first_frame(nal_units);
 
   for (auto const &nal_unit : nal_units) {
-    if (m_drop_vps_sps_pps_in_frame && mtx::included_in(nal_unit.second, HEVC_NALU_TYPE_VIDEO_PARAM, HEVC_NALU_TYPE_SEQ_PARAM, HEVC_NALU_TYPE_PIC_PARAM))
-      continue;
-
     auto &mem = *nal_unit.first;
     auto pos  = static_cast<size_t>(0);
 
     write_nal(mem.get_buffer(), pos, mem.get_size(), m_nal_size_size);
   }
-
-  m_drop_vps_sps_pps_in_frame = false;
 }
 
 unsigned char

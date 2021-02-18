@@ -55,6 +55,9 @@
 * MKVToolNix GUI: chapter editor: when importing chapters from DVDs the IETF
   BCP 47 language elements will be set, too, not just the legacy language
   elements.
+* mkvextract: h.265/HEVC extraction: if the first frame starts with the
+  parameter sets (SPS, PPS & VPS), the ones from CodecPrivate aren't written
+  and the ones from the first frame are kept. Fixes #3031.
 
 ## Build system changes
 
