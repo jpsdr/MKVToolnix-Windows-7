@@ -90,7 +90,7 @@ programs and libraries you absolutely need are:
   literals for `std::string`, `[[maybe_unused]]` attribute, nested
   namespace definition, structured bindings, `std::optional`,
   `std::regex`. Others may be needed, too. For GCC this means at least
-  v7; for clang v4 or later.
+  v8; for clang v7 or later.
 
 - [libOgg](http://downloads.xiph.org/releases/ogg/) and
   [libVorbis](http://downloads.xiph.org/releases/vorbis/) for access to Ogg/OGM

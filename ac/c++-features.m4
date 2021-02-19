@@ -241,6 +241,6 @@ AX_CXX17_FILESYSTEM_LIBRARY
 if test x"$missing_cxx_features" != x ; then
   printf "The following features of the C++17 standards are not supported by $CXX:$missing_cxx_features\n"
   printf "If you are using the GNU C compiler collection (gcc), you need\n"
-  printf "at least v7; for clang v4 and newer should work.\n"
+  printf "at least v8; for clang v7 and newer should work.\n"
   AC_MSG_ERROR([support for required C++17 features incomplete])
 fi
