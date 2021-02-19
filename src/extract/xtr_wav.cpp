@@ -40,7 +40,7 @@ xtr_wav_c::create_file(xtr_base_c *master,
                        libmatroska::KaxTrackEntry &track) {
   init_content_decoder(track);
 
-  m_w64_requested = mtx::regex::match(get_file_name().string(), mtx::regex::jp::Regex{"\\.[wW]64$"});
+  m_w64_requested = mtx::regex::match(get_file_name().u8string(), mtx::regex::jp::Regex{"\\.[wW]64$"});
   m_channels      = kt_get_a_channels(track);
   m_sfreq         = kt_get_a_sfreq(track);
   m_bps           = kt_get_a_bps(track);
@@ -132,7 +132,7 @@ xtr_wav_c::finish_file() {
   }
 
   if (!m_w64_requested)
-    mxinfo(fmt::format(Y("The file '{0}' was written as a W64 file instead of WAV as it is bigger than 4 GB and therefore too big to fit into the WAV container.\n"), get_file_name().string()));
+    mxinfo(fmt::format(Y("The file '{0}' was written as a W64 file instead of WAV as it is bigger than 4 GB and therefore too big to fit into the WAV container.\n"), get_file_name().u8string()));
 
   write_w64_header();
 }

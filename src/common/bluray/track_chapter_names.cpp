@@ -25,9 +25,9 @@ namespace {
 debugging_option_c debug{"track_chapter_names|tnmt"};
 
 std::vector<std::string>
-parse_tnmt_xml(bfs::path const &file_name) {
+parse_tnmt_xml(std::filesystem::path const &file_name) {
   try {
-    auto doc = mtx::xml::load_file(file_name.string());
+    auto doc = mtx::xml::load_file(file_name.u8string());
 
     if (!doc) {
       mxdebug_if(debug, fmt::format("{}: could not load the XML file\n", file_name));
@@ -63,14 +63,14 @@ parse_tnmt_xml(bfs::path const &file_name) {
 // ------------------------------------------------------------
 
 all_chapter_names_t
-locate_and_parse_for_title(bfs::path const &location,
+locate_and_parse_for_title(std::filesystem::path const &location,
                            std::string const &title_number) {
   auto base_dir = mtx::bluray::find_base_dir(location);
   if (base_dir.empty())
     return {};
 
   auto track_chapter_names_dir = base_dir / "META" / "TN";
-  if (!bfs::exists(track_chapter_names_dir) || !bfs::is_directory(track_chapter_names_dir))
+  if (!std::filesystem::exists(track_chapter_names_dir) || !std::filesystem::is_directory(track_chapter_names_dir))
     return {};
 
   mxdebug_if(debug, fmt::format("found TN directory at {}\n", track_chapter_names_dir));
@@ -79,9 +79,9 @@ locate_and_parse_for_title(bfs::path const &location,
 
   std::vector<chapter_names_t> chapter_names;
 
-  for (bfs::directory_iterator dir_itr{track_chapter_names_dir}, end_itr; dir_itr != end_itr; ++dir_itr) {
+  for (std::filesystem::directory_iterator dir_itr{track_chapter_names_dir}, end_itr; dir_itr != end_itr; ++dir_itr) {
     mtx::regex::jp::VecNum matches;
-    auto entry_name = dir_itr->path().filename().string();
+    auto entry_name = dir_itr->path().filename().u8string();
     if (!mtx::regex::match(entry_name, matches, tnmt_re))
       continue;
 

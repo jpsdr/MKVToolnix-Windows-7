@@ -19,6 +19,7 @@
 #include <type_traits>
 
 #include <algorithm>
+#include <filesystem>
 #include <functional>
 #include <memory>
 #include <numeric>
@@ -48,12 +49,9 @@
 #include <fmt/ostream.h>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/rational.hpp>
-#include <boost/system/error_code.hpp>
 
 namespace balg = boost::algorithm;
-namespace bfs  = boost::filesystem;
 
 using namespace std::string_literals;
 

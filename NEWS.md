@@ -58,11 +58,19 @@
 * mkvextract: h.265/HEVC extraction: if the first frame starts with the
   parameter sets (SPS, PPS & VPS), the ones from CodecPrivate aren't written
   and the ones from the first frame are kept. Fixes #3031.
+* all: Windows: fixed several of the programs having problems with certain
+  Unicode characters (primarily emojis) in file names (e.g. mkvextract
+  wrongfully complaining about an "invalid mode" or the GUI not being able to
+  find parts of Blu-ray file structures).
 
 ## Build system changes
 
 * libEBML v1.4.2 and libMatroska v1.6.3 are now required. The optional,
   bundled copies of both libraries have been updated to those versions.
+* MKVToolNix is now using the C++17 library feature "file system library"
+  instead of Boost's "file system" and "system" libraries. For the GNU
+  Compiler Collection (gcc) libstdc++ this means v8 or newer is required; for
+  clang's libc++ it means v7 or newer.
 
 
 # Version 53.0.0 "Fool's Gold" 2021-01-30

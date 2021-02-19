@@ -63,6 +63,7 @@
 #include "common/mm_null_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_write_buffer_io.h"
+#include "common/path.h"
 #include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "common/tags/tags.h"
@@ -879,7 +880,7 @@ render_attachments(mm_io_c &out) {
 
       std::string name;
       if (attch.stored_name == "")
-        name = bfs::path{attch.name}.filename().string();
+        name = mtx::fs::to_path(attch.name).filename().u8string();
 
       else
         name = attch.stored_name;
@@ -1555,7 +1556,7 @@ set_track_statistics_tags(KaxTags *tags) {
 }
 
 static void
-insert_chapter_name_in_output_file_name(bfs::path const &original_file_name,
+insert_chapter_name_in_output_file_name(std::filesystem::path const &original_file_name,
                                         std::string const &chapter_name) {
 #if defined(SYS_WINDOWS)
   static mtx::regex::jp::Regex s_invalid_char_re{R"([\\/:<>"|?*]+)"};
@@ -1569,18 +1570,18 @@ insert_chapter_name_in_output_file_name(bfs::path const &original_file_name,
 
   // auto chapter_name  = get_current_chapter_name();
   auto cleaned_chapter_name = mtx::regex::replace(chapter_name, s_invalid_char_re, "g", "-");
-  auto new_file_name        = original_file_name.parent_path() / mtx::regex::replace(original_file_name.filename().string(), mtx::regex::jp::Regex{"%c"s}, "g", cleaned_chapter_name);
+  auto new_file_name        = original_file_name.parent_path() / mtx::regex::replace(original_file_name.filename().u8string(), mtx::regex::jp::Regex{"%c"s}, "g", cleaned_chapter_name);
 
-  mxdebug_if(s_debug_splitting_chapters, fmt::format("insert_chapter_name_in_output_file_name: cleaned name {0} old {1} new {2}\n", cleaned_chapter_name, original_file_name.string(), new_file_name.string()));
+  mxdebug_if(s_debug_splitting_chapters, fmt::format("insert_chapter_name_in_output_file_name: cleaned name {0} old {1} new {2}\n", cleaned_chapter_name, original_file_name.u8string(), new_file_name.u8string()));
 
   if (original_file_name == new_file_name)
     return;
 
   try {
-    bfs::rename(original_file_name, new_file_name);
-    mxinfo(fmt::format(Y("The file '{0}' was renamed to '{1}'.\n"), original_file_name.string(), new_file_name.string()));
-  } catch (bfs::filesystem_error &) {
-    mxerror(fmt::format(Y("The file '{0}' could not be renamed to '{1}'.\n"), original_file_name.string(), new_file_name.string()));
+    std::filesystem::rename(original_file_name, new_file_name);
+    mxinfo(fmt::format(Y("The file '{0}' was renamed to '{1}'.\n"), original_file_name.u8string(), new_file_name.u8string()));
+  } catch (std::filesystem::filesystem_error &) {
+    mxerror(fmt::format(Y("The file '{0}' could not be renamed to '{1}'.\n"), original_file_name.u8string(), new_file_name.u8string()));
   }
 }
 
@@ -1742,7 +1743,7 @@ finish_file(bool last_file,
 
   update_ebml_head();
 
-  auto original_file_name = bfs::path{s_out->get_file_name()};
+  auto original_file_name = mtx::fs::to_path(s_out->get_file_name());
 
   s_out.reset();
 

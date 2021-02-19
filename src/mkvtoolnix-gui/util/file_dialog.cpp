@@ -4,6 +4,7 @@
 #include <QStandardPaths>
 #include <QString>
 
+#include "common/path.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 
@@ -34,11 +35,11 @@ QString
 sanitizeDirectory(QString const &directory,
                   bool withFileName) {
   auto dir     = to_utf8(directory.isEmpty() || (directory == Q(".")) ? QStandardPaths::writableLocation(QStandardPaths::MoviesLocation) : directory);
-  auto oldPath = bfs::absolute(bfs::path{dir});
+  auto oldPath = std::filesystem::absolute(mtx::fs::to_path(dir));
   auto newPath = oldPath;
-  auto ec      = boost::system::error_code{};
+  auto ec      = std::error_code{};
 
-  while (   !(bfs::exists(newPath, ec) && bfs::is_directory(newPath, ec))
+  while (   !(std::filesystem::exists(newPath, ec) && std::filesystem::is_directory(newPath, ec))
          && !newPath.parent_path().empty())
     newPath = newPath.parent_path();
 
@@ -48,7 +49,7 @@ sanitizeDirectory(QString const &directory,
   // if (withFileName && (oldPath != newPath) && (oldPath.filename() != "."))
   //   newPath /= oldPath.filename();
 
-  return Q(newPath.string());
+  return Q(newPath.u8string());
 }
 
 QString
@@ -86,7 +87,7 @@ getSaveFileName(QWidget *parent,
                 QFileDialog::Options options) {
   auto defaultName = sanitizeDirectory(dir, true);
   if (!defaultFileName.isEmpty())
-    defaultName = QDir::toNativeSeparators(Q((bfs::path{to_utf8(dir)} / to_utf8(defaultFileName)).string()));
+    defaultName = QDir::toNativeSeparators(Q((mtx::fs::to_path(to_utf8(dir)) / to_utf8(defaultFileName)).u8string()));
 
   auto result = QDir::toNativeSeparators(QFileDialog::getSaveFileName(parent, caption, defaultName, filter, selectedFilter, options & QFileDialog::DontUseCustomDirectoryIcons));
 

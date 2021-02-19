@@ -17,9 +17,9 @@
 
 namespace mtx::sys {
 
-static bfs::path s_current_executable_path;
+static std::filesystem::path s_current_executable_path;
 
-bfs::path
+std::filesystem::path
 get_installation_path() {
   return s_current_executable_path;
 }

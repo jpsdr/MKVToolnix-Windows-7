@@ -23,6 +23,7 @@
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/path.h"
 #include "common/strings/formatting.h"
 
 namespace mtx::log {
@@ -67,7 +68,7 @@ target_c::get_default_logger() {
     if (spec[0] == "file") {
       auto file = (spec.size() > 1) && !spec[1].empty() ? spec[1] : "mkvtoolnix-debug.log"s;
 
-      set_default_logger(target_cptr{new file_target_c{file}});
+      set_default_logger(target_cptr{new file_target_c{mtx::fs::to_path(file)}});
 
 #if defined(SYS_WINDOWS)
     } else if (spec[0] == "debug") {
@@ -93,23 +94,23 @@ target_c::runtime() {
 
 // ----------------------------------------------------------------------
 
-file_target_c::file_target_c(bfs::path file_name)
+file_target_c::file_target_c(std::filesystem::path file_name)
   : target_c()                  // Don't use initializer-list syntax due to a bug in gcc < 4.8
   , m_file_name{std::move(file_name)}
 {
   if (!m_file_name.is_absolute())
-    m_file_name = bfs::temp_directory_path() / m_file_name;
+    m_file_name = std::filesystem::temp_directory_path() / m_file_name;
 
-  if (bfs::exists(m_file_name)) {
-    boost::system::error_code ec;
-    bfs::remove(m_file_name, ec);
+  if (std::filesystem::exists(m_file_name)) {
+    std::error_code ec;
+    std::filesystem::remove(m_file_name, ec);
   }
 }
 
 void
 file_target_c::log_line(std::string const &message) {
   try {
-    mm_text_io_c out(std::make_shared<mm_file_io_c>(m_file_name.string(), bfs::exists(m_file_name) ? MODE_WRITE : MODE_CREATE));
+    mm_text_io_c out(std::make_shared<mm_file_io_c>(m_file_name.u8string(), std::filesystem::exists(m_file_name) ? MODE_WRITE : MODE_CREATE));
     out.setFilePointer(0, libebml::seek_end);
     out.puts(format_line(message));
   } catch (mtx::mm_io::exception &ex) {

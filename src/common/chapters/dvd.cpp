@@ -22,6 +22,7 @@
 #include "common/at_scope_exit.h"
 #include "common/chapters/chapters.h"
 #include "common/chapters/dvd.h"
+#include "common/path.h"
 #include "common/regex.h"
 #include "common/strings/parsing.h"
 #include "common/timestamp.h"
@@ -130,18 +131,18 @@ maybe_parse_dvd(std::string const &file_name,
       throw parser_x{fmt::format(Y("'{0}' is not a valid DVD title number."), matches[0][2])};
   }
 
-  auto dvd_dir = bfs::path{cleaned_file_name};
+  auto dvd_dir = mtx::fs::to_path(cleaned_file_name);
 
   if (mtx::regex::match(cleaned_file_name, mtx::regex::jp::Regex{"\\.(bup|ifo|vob)$", "i"}))
     dvd_dir = dvd_dir.parent_path();
 
-  else if (   !bfs::exists(dvd_dir)
-           || !bfs::is_directory(dvd_dir)
-           || (   !bfs::exists(dvd_dir / "VIDEO_TS.IFO")
-               && !bfs::exists(dvd_dir / "VIDEO_TS" / "VIDEO_TS.IFO")))
+  else if (   !std::filesystem::exists(dvd_dir)
+           || !std::filesystem::is_directory(dvd_dir)
+           || (   !std::filesystem::exists(dvd_dir / "VIDEO_TS.IFO")
+               && !std::filesystem::exists(dvd_dir / "VIDEO_TS" / "VIDEO_TS.IFO")))
     return {};
 
-  auto titles_and_timestamps = parse_dvd(dvd_dir.string());
+  auto titles_and_timestamps = parse_dvd(dvd_dir.u8string());
 
   if (title > titles_and_timestamps.size())
     throw parser_x{fmt::format(Y("The title number '{0}' is higher than the number of titles on the DVD ({1})."), title, titles_and_timestamps.size())};

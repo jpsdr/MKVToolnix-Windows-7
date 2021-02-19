@@ -21,11 +21,12 @@
 #include "common/mm_multi_file_io.h"
 #include "common/mm_multi_file_io_p.h"
 #include "common/output.h"
+#include "common/path.h"
 #include "common/regex.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 
-mm_multi_file_io_c::mm_multi_file_io_c(std::vector<bfs::path> const &file_names,
+mm_multi_file_io_c::mm_multi_file_io_c(std::vector<std::filesystem::path> const &file_names,
                                        std::string const &display_file_name)
   : mm_io_c{*new mm_multi_file_io_private_c{file_names, display_file_name}}
 {
@@ -136,11 +137,11 @@ mm_multi_file_io_c::eof() {
   return p->files.empty() || ((p->current_file == (p->files.size() - 1)) && (p->current_local_pos >= p->files[p->current_file].size));
 }
 
-std::vector<bfs::path>
+std::vector<std::filesystem::path>
 mm_multi_file_io_c::get_file_names() {
   auto p = p_func();
 
-  std::vector<bfs::path> file_names;
+  std::vector<std::filesystem::path> file_names;
   for (auto &file : p->files)
     file_names.push_back(file.file_name);
 
@@ -153,7 +154,7 @@ mm_multi_file_io_c::create_verbose_identification_info(mtx::id::info_c &info) {
   auto file_names = nlohmann::json::array();
   for (auto &file : p->files)
     if (file.file_name != p->files.front().file_name)
-    file_names.push_back(file.file_name.string());
+    file_names.push_back(file.file_name.u8string());
 
   info.add(mtx::id::other_file, file_names);
 }
@@ -192,14 +193,14 @@ mm_multi_file_io_c::get_file_name()
 mm_io_cptr
 mm_multi_file_io_c::open_multi(const std::string &display_file_name,
                                bool single_only) {
-  bfs::path first_file_name(bfs::system_complete(bfs::path(display_file_name)));
-  std::string base_name = bfs::basename(first_file_name);
-  std::string extension = balg::to_lower_copy(bfs::extension(first_file_name));
+  auto first_file_name = std::filesystem::absolute(mtx::fs::to_path(display_file_name));
+  auto base_name       = mtx::fs::to_path(first_file_name).stem().u8string();
+  auto extension       = balg::to_lower_copy(mtx::fs::to_path(first_file_name).extension().u8string());
   mtx::regex::jp::Regex file_name_re{"(.+[_\\-])(\\d+)$"};
   mtx::regex::jp::VecNum matches;
 
   if (!mtx::regex::match(base_name, matches, file_name_re) || single_only) {
-    std::vector<bfs::path> file_names;
+    std::vector<std::filesystem::path> file_names;
     file_names.push_back(first_file_name);
     return mm_io_cptr(new mm_multi_file_io_c(file_names, display_file_name));
   }
@@ -209,16 +210,16 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
 
   base_name = balg::to_lower_copy(matches[0][1]);
 
-  std::vector<std::pair<int, bfs::path>> paths;
+  std::vector<std::pair<int, std::filesystem::path>> paths;
   paths.emplace_back(start_number, first_file_name);
 
-  bfs::directory_iterator end_itr;
-  for (bfs::directory_iterator itr(first_file_name.branch_path()); itr != end_itr; ++itr) {
-    if (   bfs::is_directory(itr->status())
-        || !balg::iequals(bfs::extension(itr->path()), extension))
+  std::filesystem::directory_iterator end_itr;
+  for (std::filesystem::directory_iterator itr(first_file_name.parent_path()); itr != end_itr; ++itr) {
+    if (   std::filesystem::is_directory(itr->status())
+        || !balg::iequals(itr->path().extension().u8string(), extension))
       continue;
 
-    std::string stem   = bfs::basename(itr->path());
+    auto stem          = itr->path().stem().u8string();
     int current_number = 0;
 
     if (   !mtx::regex::match(stem, matches, file_name_re)
@@ -232,7 +233,7 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
 
   std::sort(paths.begin(), paths.end());
 
-  std::vector<bfs::path> file_names;
+  std::vector<std::filesystem::path> file_names;
   for (auto &path : paths)
     file_names.emplace_back(std::get<1>(path));
 

@@ -93,7 +93,7 @@ guess_type_internal(std::string ext,
 # endif  // MAGIC_MIME_TYPE
 
 # ifdef MTX_APPIMAGE
-  auto magic_filename = (mtx::sys::get_installation_path() / ".." / "share" / "file" / "magic.mgc").string();
+  auto magic_filename = (mtx::sys::get_installation_path() / ".." / "share" / "file" / "magic.mgc").u8string();
   if (!m || (-1 == magic_load(m, magic_filename.c_str())) || (-1 == magic_load(m, nullptr)))
     return guess_type_by_ext(ext);
 # else

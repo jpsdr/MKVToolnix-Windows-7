@@ -16,6 +16,7 @@
 #include "common/ebml.h"
 #include "common/iso639.h"
 #include "common/list_utils.h"
+#include "common/path.h"
 #include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -258,7 +259,7 @@ extract_cli_parser_c::set_cli_mode() {
 
     mxdebug_if(m_debug, fmt::format("set_cli_mode: new mode is single\n"));
 
-  } else if (bfs::exists(bfs::path{m_current_arg})) {
+  } else if (std::filesystem::exists(mtx::fs::to_path(m_current_arg))) {
     m_cli_type            = cli_type_e::multiple;
     m_options.m_file_name = m_current_arg;
 
@@ -382,15 +383,15 @@ extract_cli_parser_c::check_for_identical_source_and_destination_file_names() {
   if (m_options.m_file_name.empty())
     return;
 
-  auto source_file_name = bfs::absolute(bfs::path{m_options.m_file_name});
+  auto source_file_name = std::filesystem::absolute(mtx::fs::to_path(m_options.m_file_name));
 
   for (auto const &mode_option : m_options.m_modes) {
-    if (!mode_option.m_output_file_name.empty() && (bfs::absolute(bfs::path{mode_option.m_output_file_name}) == source_file_name))
-      mxerror(fmt::format(Y("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.string()));
+    if (!mode_option.m_output_file_name.empty() && (std::filesystem::absolute(mtx::fs::to_path(mode_option.m_output_file_name)) == source_file_name))
+      mxerror(fmt::format(Y("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.u8string()));
 
     for (auto const &track_spec : mode_option.m_tracks)
-      if (!track_spec.out_name.empty() && (bfs::absolute(bfs::path{track_spec.out_name}) == source_file_name))
-        mxerror(fmt::format(Y("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.string()));
+      if (!track_spec.out_name.empty() && (std::filesystem::absolute(mtx::fs::to_path(track_spec.out_name)) == source_file_name))
+        mxerror(fmt::format(Y("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.u8string()));
   }
 }
 

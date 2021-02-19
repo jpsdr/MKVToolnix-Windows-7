@@ -23,6 +23,7 @@
 #include "common/error.h"
 #include "common/fs_sys_helpers.h"
 #include "common/mm_file_io.h"
+#include "common/path.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
@@ -38,25 +39,25 @@ get_current_time_millis() {
   return (int64_t)tv.tv_sec * 1000 + (int64_t)tv.tv_usec / 1000;
 }
 
-bfs::path
+std::filesystem::path
 get_application_data_folder() {
   auto home = getenv("HOME");
   if (!home)
-    return bfs::path{};
+    return {};
 
   // If $HOME/.mkvtoolnix exists already then keep using it to avoid
   // losing existing user configuration.
-  auto old_default_folder = bfs::path{home} / ".mkvtoolnix";
-  if (boost::filesystem::exists(old_default_folder))
+  auto old_default_folder = mtx::fs::to_path(home) / ".mkvtoolnix";
+  if (std::filesystem::exists(old_default_folder))
     return old_default_folder;
 
   // If XDG_CONFIG_HOME is set then use that folder.
   auto xdg_config_home = getenv("XDG_CONFIG_HOME");
   if (xdg_config_home)
-    return bfs::path{xdg_config_home} / "mkvtoolnix";
+    return mtx::fs::to_path(xdg_config_home) / "mkvtoolnix";
 
   // If all fails then use the XDG fallback folder for config files.
-  return bfs::path{home} / ".config" / "mkvtoolnix";
+  return mtx::fs::to_path(home) / ".config" / "mkvtoolnix";
 }
 
 std::string
@@ -75,7 +76,7 @@ system(std::string const &command) {
   return ::system(command.c_str());
 }
 
-bfs::path
+std::filesystem::path
 get_current_exe_path([[maybe_unused]] std::string const &argv0) {
 #if defined(SYS_APPLE)
   std::string file_name;
@@ -91,25 +92,25 @@ get_current_exe_path([[maybe_unused]] std::string const &argv0) {
       break;
   }
 
-  return bfs::absolute(bfs::path{file_name}).parent_path();
+  return std::filesystem::absolute(mtx::fs::to_path(file_name)).parent_path();
 
 #else // SYS_APPLE
-  auto exe = bfs::path{"/proc/self/exe"};
-  if (bfs::exists(exe)) {
-    auto exe_path = bfs::read_symlink(exe);
+  auto exe = mtx::fs::to_path("/proc/self/exe");
+  if (std::filesystem::exists(exe)) {
+    auto exe_path = std::filesystem::read_symlink(exe);
 
-    // only make absolute if needed, to avoid crash in case the current dir is deleted (as bfs::absolute calls bfs::current_path here)
-    return (exe_path.is_absolute() ? exe_path : bfs::absolute(exe_path)).parent_path();
+    // only make absolute if needed, to avoid crash in case the current dir is deleted (as std::filesystem::absolute calls std::filesystem::current_path here)
+    return (exe_path.is_absolute() ? exe_path : std::filesystem::absolute(exe_path)).parent_path();
   }
 
   if (argv0.empty())
-    return bfs::current_path();
+    return std::filesystem::current_path();
 
-  exe = bfs::absolute(argv0);
-  if (bfs::exists(exe))
+  exe = std::filesystem::absolute(argv0);
+  if (std::filesystem::exists(exe))
     return exe.parent_path();
 
-  return bfs::current_path();
+  return std::filesystem::current_path();
 #endif
 }
 

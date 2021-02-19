@@ -315,6 +315,16 @@ translatable_string_c::join(std::vector<std::string> const &strings)
   return mtx::string::join(strings, separator);
 }
 
+void
+translation_c::initialize_std_locale() {
+#if defined(SYS_WINDOWS)
+  // Boost's path class uses wide chars on Windows for path
+  // names. Tell that all narrow strings are encoded in UTF-8.
+  std::locale utf8_locale(std::locale(), new mtx::utf8_codecvt_facet);
+  std::locale::global(utf8_locale);
+#endif
+}
+
 // ------------------------------------------------------------
 
 #if defined(HAVE_LIBINTL_H)
@@ -359,7 +369,7 @@ init_locales(std::string locale) {
     translation_c::set_active_translation(locale);
   }
 
-  locale_dir = g_cc_local_utf8->native((mtx::sys::get_installation_path() / "locale").string());
+  locale_dir = g_cc_local_utf8->native((mtx::sys::get_installation_path() / "locale").u8string());
 
 # else  // SYS_WINDOWS
   auto language_var = mtx::sys::get_environment_variable("LANGUAGE");
@@ -410,9 +420,9 @@ init_locales(std::string locale) {
   translation_c::set_active_translation(chosen_locale);
 
 #  if defined(MTX_APPIMAGE)
-  locale_dir = (mtx::sys::get_installation_path() / ".." / "share" / "locale").string();
+  locale_dir = (mtx::sys::get_installation_path() / ".." / "share" / "locale").u8string();
 #  elif defined(SYS_APPLE)
-  locale_dir = (mtx::sys::get_installation_path() / "locale").string();
+  locale_dir = (mtx::sys::get_installation_path() / "locale").u8string();
 #  else
   locale_dir = MTX_LOCALE_DIR;
 #  endif  // MTX_APPIMAGE
@@ -429,17 +439,6 @@ init_locales(std::string locale) {
   bindtextdomain("mkvtoolnix", locale_dir.c_str());
   textdomain("mkvtoolnix");
   bind_textdomain_codeset("mkvtoolnix", "UTF-8");
-}
-
-void
-translation_c::initialize_std_and_boost_filesystem_locales() {
-#if defined(SYS_WINDOWS)
-  // Boost's path class uses wide chars on Windows for path
-  // names. Tell that all narrow strings are encoded in UTF-8.
-  std::locale utf8_locale(std::locale(), new mtx::utf8_codecvt_facet);
-  std::locale::global(utf8_locale);
-  boost::filesystem::path::imbue(utf8_locale);
-#endif
 }
 
 #else  // HAVE_LIBINTL_H

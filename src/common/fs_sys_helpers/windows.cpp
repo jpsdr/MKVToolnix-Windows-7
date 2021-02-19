@@ -22,6 +22,7 @@
 
 #include "common/error.h"
 #include "common/fs_sys_helpers.h"
+#include "common/path.h"
 #include "common/strings/editing.h"
 #include "common/strings/utf8.h"
 
@@ -79,14 +80,14 @@ get_windows_version() {
   return (os_version_info.dwMajorVersion << 16) | os_version_info.dwMinorVersion;
 }
 
-bfs::path
+std::filesystem::path
 get_application_data_folder() {
   wchar_t szPath[MAX_PATH];
 
   if (SUCCEEDED(SHGetFolderPathW(nullptr, CSIDL_APPDATA | CSIDL_FLAG_CREATE, nullptr, 0, szPath)))
-    return bfs::path{to_utf8(std::wstring(szPath))} / "mkvtoolnix";
+    return mtx::fs::to_path(std::wstring{szPath}) / "mkvtoolnix";
 
-  return bfs::path{};
+  return {};
 }
 
 int
@@ -122,7 +123,7 @@ system(std::string const &command) {
 
 }
 
-bfs::path
+std::filesystem::path
 get_current_exe_path(std::string const &) {
   std::wstring file_name;
   file_name.resize(4000);
@@ -138,13 +139,13 @@ get_current_exe_path(std::string const &) {
     file_name.resize(file_name.size() + 4000);
   }
 
-  return bfs::absolute(bfs::path{to_utf8(file_name)}).parent_path();
+  return std::filesystem::absolute(mtx::fs::to_path(file_name)).parent_path();
 }
 
 bool
 is_installed() {
   auto file_to_test = get_installation_path() / "data" / "portable-app";
-  return !bfs::exists(file_to_test);
+  return !std::filesystem::exists(file_to_test);
 }
 
 uint64_t

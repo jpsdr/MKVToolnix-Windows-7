@@ -17,6 +17,7 @@
 #include "common/mime.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
+#include "common/path.h"
 #include "common/regex.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
@@ -182,7 +183,7 @@ attachment_target_c::execute() {
 void
 attachment_target_c::execute_add() {
   auto mime_type   = m_options.m_mime_type                          ? *m_options.m_mime_type   : mtx::mime::guess_type(m_file_name, true);
-  auto file_name   = m_options.m_name && !m_options.m_name->empty() ? *m_options.m_name        : to_utf8(bfs::path{m_file_name}.filename().string());
+  auto file_name   = m_options.m_name && !m_options.m_name->empty() ? *m_options.m_name        : mtx::fs::to_path(m_file_name).filename().u8string();
   auto description = m_options.m_description                        ? *m_options.m_description : ""s;
   auto uid         = m_options.m_uid                                ? *m_options.m_uid         : create_unique_number(UNIQUE_ATTACHMENT_IDS);
 
@@ -315,7 +316,7 @@ attachment_target_c::replace_by_uid_name_mime_type() {
 void
 attachment_target_c::replace_attachment_values(KaxAttached &att) {
   if (m_options.m_name) {
-    auto file_name = !m_options.m_name->empty() ? *m_options.m_name : to_utf8(bfs::path{m_file_name}.filename().string());
+    auto file_name = !m_options.m_name->empty() ? *m_options.m_name : to_utf8(mtx::fs::to_path(m_file_name).filename().u8string());
     GetChild<KaxFileName>(att).SetValueUTF8(file_name);
   }
 

@@ -19,6 +19,7 @@
 #include "common/mm_proxy_io.h"
 #include "common/mm_read_buffer_io.h"
 #include "common/mm_text_io.h"
+#include "common/path.h"
 #include "common/strings/formatting.h"
 #include "common/xml/xml.h"
 #include "input/r_aac.h"
@@ -62,11 +63,11 @@
 #include "merge/probe_range_info.h"
 #include "merge/reader_detection_and_creation.h"
 
-static std::vector<bfs::path>
+static std::vector<std::filesystem::path>
 file_names_to_paths(const std::vector<std::string> &file_names) {
-  std::vector<bfs::path> paths;
+  std::vector<std::filesystem::path> paths;
   for (auto &file_name : file_names)
-    paths.push_back(bfs::system_complete(bfs::path(file_name)));
+    paths.push_back(std::filesystem::absolute(mtx::fs::to_path(file_name)));
 
   return paths;
 }
@@ -78,7 +79,7 @@ open_input_file(filelist_t &file) {
       return std::make_shared<mm_read_buffer_io_c>(std::make_shared<mm_file_io_c>(file.name));
 
     else {
-      std::vector<bfs::path> paths = file_names_to_paths(file.all_names);
+      std::vector<std::filesystem::path> paths = file_names_to_paths(file.all_names);
       return std::make_shared<mm_read_buffer_io_c>(std::make_shared<mm_multi_file_io_c>(paths, file.name));
     }
 
@@ -242,7 +243,7 @@ probe_file_format(filelist_t &file) {
     io = std::make_shared<mm_read_buffer_io_c>(file.playlist_mpls_in);
 
   // Prefer types hinted by extension
-  auto extension = boost::filesystem::extension(file.name);
+  auto extension = mtx::fs::to_path(file.name).extension().u8string();
   if (!extension.empty()) {
     for (auto type : mtx::file_type_t::by_extension(extension.substr(1))) {
       auto p = prober_for_type(type);

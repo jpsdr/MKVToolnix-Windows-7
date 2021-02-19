@@ -18,6 +18,7 @@
 #include <matroska/KaxTracks.h>
 
 #include "common/content_decoder.h"
+#include "common/path.h"
 #include "common/timestamp.h"
 #include "extract/mkvextract.h"
 
@@ -59,8 +60,8 @@ public:
 
   virtual void headers_done();
 
-  virtual bfs::path get_file_name() const {
-    return m_file_name;
+  virtual std::filesystem::path get_file_name() const {
+    return mtx::fs::to_path(m_file_name);
   }
   virtual const char *get_container_name() {
     return m_container_name.c_str();

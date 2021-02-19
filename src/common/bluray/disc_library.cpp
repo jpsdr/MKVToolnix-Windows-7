@@ -17,6 +17,7 @@
 #include "common/bluray/disc_library.h"
 #include "common/debugging.h"
 #include "common/image.h"
+#include "common/path.h"
 #include "common/regex.h"
 #include "common/strings/parsing.h"
 #include "common/xml/xml.h"
@@ -27,9 +28,9 @@ namespace {
 debugging_option_c debug{"disc_library|bdmt"};
 
 std::optional<info_t>
-parse_bdmt_xml(bfs::path const &file_name) {
+parse_bdmt_xml(std::filesystem::path const &file_name) {
   try {
-    auto doc = mtx::xml::load_file(file_name.string());
+    auto doc = mtx::xml::load_file(file_name.u8string());
 
     if (!doc) {
       mxdebug_if(debug, fmt::format("{}: could not load the XML file\n", file_name));
@@ -51,12 +52,12 @@ parse_bdmt_xml(bfs::path const &file_name) {
     for (auto node = root_node.child("di:discinfo").child("di:description").child("di:thumbnail"); node; node = node.next_sibling("di:thumbnail")) {
       thumbnail_t thumbnail;
 
-      thumbnail.m_file_name = bfs::path{node.attribute("href").value()};
+      thumbnail.m_file_name = mtx::fs::to_path(node.attribute("href").value());
       auto size             = std::string{node.attribute("size").value()};
       auto ok               = false;
 
       if (thumbnail.m_file_name.is_relative())
-        thumbnail.m_file_name = (bfs::absolute(file_name).parent_path() / thumbnail.m_file_name).lexically_normal();
+        thumbnail.m_file_name = (std::filesystem::absolute(file_name).parent_path() / thumbnail.m_file_name).lexically_normal();
 
       mtx::regex::jp::VecNum matches;
 
@@ -76,7 +77,7 @@ parse_bdmt_xml(bfs::path const &file_name) {
 
       if (ok) {
         info.m_thumbnails.push_back(thumbnail);
-        mxdebug_if(debug, fmt::format("{}: file name: {} width: {} height: {}\n", file_name, thumbnail.m_file_name.string(), thumbnail.m_width, thumbnail.m_height));
+        mxdebug_if(debug, fmt::format("{}: file name: {} width: {} height: {}\n", file_name, thumbnail.m_file_name.u8string(), thumbnail.m_width, thumbnail.m_height));
       }
     }
 
@@ -100,7 +101,7 @@ info_t::dump()
   const {
   mxinfo(fmt::format("    title: {}\n", m_title));
   for (auto const &thumbnail : m_thumbnails)
-    mxinfo(fmt::format("    thumbnail: {}x{} @ {}\n", thumbnail.m_width, thumbnail.m_height, thumbnail.m_file_name.string()));
+    mxinfo(fmt::format("    thumbnail: {}x{} @ {}\n", thumbnail.m_width, thumbnail.m_height, thumbnail.m_file_name.u8string()));
 }
 
 // ------------------------------------------------------------
@@ -125,13 +126,13 @@ disc_library_t::dump()
 // ------------------------------------------------------------
 
 std::optional<disc_library_t>
-locate_and_parse(bfs::path const &location) {
+locate_and_parse(std::filesystem::path const &location) {
   auto base_dir = mtx::bluray::find_base_dir(location);
   if (base_dir.empty())
     return {};
 
   auto disc_library_dir = base_dir / "META" / "DL";
-  if (!bfs::exists(disc_library_dir) || !bfs::is_directory(disc_library_dir))
+  if (!std::filesystem::exists(disc_library_dir) || !std::filesystem::is_directory(disc_library_dir))
     return {};
 
   mxdebug_if(debug, fmt::format("found DL directory at {}\n", disc_library_dir));
@@ -141,8 +142,8 @@ locate_and_parse(bfs::path const &location) {
 
   disc_library_t lib;
 
-  for (bfs::directory_iterator dir_itr{disc_library_dir}, end_itr; dir_itr != end_itr; ++dir_itr) {
-    auto other_file_name = dir_itr->path().filename().string();
+  for (std::filesystem::directory_iterator dir_itr{disc_library_dir}, end_itr; dir_itr != end_itr; ++dir_itr) {
+    auto other_file_name = dir_itr->path().filename().u8string();
     if (!mtx::regex::match(other_file_name, matches, bdmt_re))
       continue;
 
@@ -162,14 +163,14 @@ locate_and_parse(bfs::path const &location) {
 }
 
 std::optional<info_t>
-locate_and_parse_for_language(bfs::path const &location,
+locate_and_parse_for_language(std::filesystem::path const &location,
                               std::string const &language) {
   auto base_dir = mtx::bluray::find_base_dir(location);
   if (base_dir.empty())
     return {};
 
   auto disc_library_file = base_dir / "META" / "DL" / fmt::format("bdmt_{}.xml", language);
-  if (!bfs::exists(disc_library_file))
+  if (!std::filesystem::exists(disc_library_file))
     return {};
 
   mxdebug_if(debug, fmt::format("found DL file for language {} at {}\n", language, disc_library_file));

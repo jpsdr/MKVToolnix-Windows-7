@@ -19,6 +19,7 @@
 #include "common/math.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
+#include "common/path.h"
 #include "common/qt.h"
 #include "common/segmentinfo.h"
 #include "common/strings/formatting.h"
@@ -582,10 +583,10 @@ Tab::loadFromDVD([[maybe_unused]] QString const &fileName,
   auto chapters     = ChaptersPtr{};
   auto error        = QString{};
 
-  auto dvdDirectory = bfs::path{to_utf8(fileName)}.parent_path();
+  auto dvdDirectory = mtx::fs::to_path(to_utf8(fileName)).parent_path();
 
   try {
-    auto titlesAndTimestamps = mtx::chapters::parse_dvd(dvdDirectory.string());
+    auto titlesAndTimestamps = mtx::chapters::parse_dvd(dvdDirectory.u8string());
     chapters                 = mtx::chapters::create_editions_and_chapters(titlesAndTimestamps, cfg.m_defaultChapterLanguage, to_utf8(cfg.m_chapterNameTemplate));
 
   } catch (mtx::chapters::parser_x const &ex) {

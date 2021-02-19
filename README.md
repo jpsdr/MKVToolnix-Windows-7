@@ -99,8 +99,7 @@ programs and libraries you absolutely need are:
 - [zlib](http://www.zlib.net/) — a compression library
 
 - [Boost](http://www.boost.org/) — Several of Boost's libraries are
-  used: `filesystem`, `system`, `math`, `operators`, `rational`. At
-  least v1.60.0 is required.
+  used `operators`, `rational`. At least v1.60.0 is required.
 
 - [libxslt's xsltproc binary](http://xmlsoft.org/libxslt/) and
   [DocBook XSL stylesheets](https://sourceforge.net/projects/docbook/files/docbook-xsl/)

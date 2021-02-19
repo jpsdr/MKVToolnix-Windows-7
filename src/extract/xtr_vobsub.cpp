@@ -20,6 +20,7 @@
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_write_buffer_io.h"
+#include "common/path.h"
 #include "common/spu.h"
 #include "common/strings/formatting.h"
 #include "common/tta.h"
@@ -52,8 +53,8 @@ xtr_vobsub_c::xtr_vobsub_c(const std::string &codec_id,
                            int64_t tid,
                            track_spec_t &tspec)
   : xtr_base_c(codec_id, tid, tspec)
-  , m_idx_file_name{bfs::path{tspec.out_name}.replace_extension(".idx")}
-  , m_sub_file_name{bfs::path{tspec.out_name}.replace_extension(".sub")}
+  , m_idx_file_name{mtx::fs::to_path(tspec.out_name).replace_extension(".idx")}
+  , m_sub_file_name{mtx::fs::to_path(tspec.out_name).replace_extension(".sub")}
   , m_stream_id(0x20)
 {
 }
@@ -75,9 +76,9 @@ xtr_vobsub_c::create_file(xtr_base_c *master,
 
   if (!master) {
     try {
-      m_out = mm_write_buffer_io_c::open(m_sub_file_name.string(), 128 * 1024);
+      m_out = mm_write_buffer_io_c::open(m_sub_file_name.u8string(), 128 * 1024);
     } catch (mtx::mm_io::exception &ex) {
-      mxerror(fmt::format(Y("Failed to create the VobSub data file '{0}': {1}\n"), m_sub_file_name.string(), ex));
+      mxerror(fmt::format(Y("Failed to create the VobSub data file '{0}': {1}\n"), m_sub_file_name.u8string(), ex));
     }
 
   } else {
@@ -231,8 +232,8 @@ xtr_vobsub_c::finish_file() {
 
     m_out.reset();
 
-    mm_write_buffer_io_c idx(std::make_shared<mm_file_io_c>(m_idx_file_name.string(), MODE_CREATE), 128 * 1024);
-    mxinfo(fmt::format(Y("Writing the VobSub index file '{0}'.\n"), m_idx_file_name.string()));
+    mm_write_buffer_io_c idx(std::make_shared<mm_file_io_c>(m_idx_file_name.u8string(), MODE_CREATE), 128 * 1024);
+    mxinfo(fmt::format(Y("Writing the VobSub index file '{0}'.\n"), m_idx_file_name.u8string()));
 
     auto buffer = reinterpret_cast<char const *>(m_private_data->get_buffer());
     auto size   = m_private_data->get_size();
@@ -257,7 +258,7 @@ xtr_vobsub_c::finish_file() {
       m_slaves[slave]->write_idx(idx, slave + 1);
 
   } catch (mtx::mm_io::exception &ex) {
-    mxerror(fmt::format(Y("Failed to create the file '{0}': {1}\n"), m_idx_file_name.string(), ex));
+    mxerror(fmt::format(Y("Failed to create the file '{0}': {1}\n"), m_idx_file_name.u8string(), ex));
   }
 }
 
@@ -282,8 +283,8 @@ xtr_vobsub_c::write_idx(mm_io_c &idx,
   }
 }
 
-bfs::path
+std::filesystem::path
 xtr_vobsub_c::get_file_name()
   const {
-  return m_sub_file_name;
+  return mtx::fs::to_path(m_sub_file_name);
 }

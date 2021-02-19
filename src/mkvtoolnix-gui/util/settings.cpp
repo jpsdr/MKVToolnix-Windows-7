@@ -12,6 +12,7 @@
 #include "common/fs_sys_helpers.h"
 #include "common/iso639.h"
 #include "common/iso3166.h"
+#include "common/path.h"
 #include "common/qt.h"
 #include "common/regex.h"
 #include "common/version.h"
@@ -105,7 +106,7 @@ Settings::iniFileLocation() {
     // Util::Settings class might be used before QCoreApplication's
     // been instantiated, which QApplication::applicationDirPath()
     // requires.
-    return Q(mtx::sys::get_current_exe_path("").string());
+    return Q(mtx::sys::get_current_exe_path("").u8string());
 
   return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 #else
@@ -888,23 +889,23 @@ Settings::priorityAsString()
 
 QString
 Settings::exeWithPath(QString const &exe) {
-  auto path          = bfs::path{ to_utf8(exe) };
+  auto path          = mtx::fs::to_path( to_utf8(exe) );
   auto program       = path.filename();
-  auto installPath   = bfs::path{ to_utf8(App::applicationDirPath()) };
-  auto potentialExes = QList<bfs::path>{} << path << (installPath / path) << (installPath / ".." / path);
+  auto installPath   = mtx::fs::to_path( to_utf8(App::applicationDirPath()) );
+  auto potentialExes = QList<std::filesystem::path>{} << path << (installPath / path) << (installPath / ".." / path);
 
 #if defined(SYS_WINDOWS)
   for (auto &potentialExe : potentialExes)
-    potentialExe.replace_extension(bfs::path{"exe"});
+    potentialExe.replace_extension(mtx::fs::to_path("exe"));
 
-  program.replace_extension(bfs::path{"exe"});
+  program.replace_extension(mtx::fs::to_path("exe"));
 #endif  // SYS_WINDOWS
 
   for (auto const &potentialExe : potentialExes)
-    if (bfs::exists(potentialExe))
-      return QDir::toNativeSeparators(to_qs(potentialExe.string()));
+    if (std::filesystem::exists(potentialExe))
+      return QDir::toNativeSeparators(to_qs(potentialExe.u8string()));
 
-  auto location = QStandardPaths::findExecutable(to_qs(program.string()));
+  auto location = QStandardPaths::findExecutable(to_qs(program.u8string()));
   if (!location.isEmpty())
     return QDir::toNativeSeparators(location);
 

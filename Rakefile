@@ -1048,8 +1048,6 @@ end
 
 # libraries required for all programs via mtxcommon
 $common_libs = [
-  :boost_filesystem,
-  :boost_system,
   :magic,
   :flac,
   :z,

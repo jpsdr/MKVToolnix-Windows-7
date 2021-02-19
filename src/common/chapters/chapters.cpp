@@ -30,6 +30,7 @@
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/path.h"
 #include "common/regex.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
@@ -1122,7 +1123,7 @@ format_name_template(std::string const &name_template,
   auto timestamp_re         = mtx::regex::jp::Regex{"<START(?::([^>]+))?>"};
   auto file_name_re         = mtx::regex::jp::Regex{"<FILE_NAME>"};
   auto file_name_ext_re     = mtx::regex::jp::Regex{"<FILE_NAME_WITH_EXT>"};
-  auto appended_file_name_p = bfs::path{appended_file_name};
+  auto appended_file_name_p = mtx::fs::to_path(appended_file_name);
 
   name = mtx::regex::replace(name, number_re, "g", [=](auto const &match) {
     auto number_str    = fmt::format("{0}", chapter_number);
@@ -1142,8 +1143,8 @@ format_name_template(std::string const &name_template,
     return mtx::string::format_timestamp(start_timestamp.to_ns(), format);
   });
 
-  name = mtx::regex::replace(name, file_name_re,     "g", appended_file_name_p.stem().string());
-  name = mtx::regex::replace(name, file_name_ext_re, "g", appended_file_name_p.filename().string());
+  name = mtx::regex::replace(name, file_name_re,     "g", appended_file_name_p.stem().u8string());
+  name = mtx::regex::replace(name, file_name_ext_re, "g", appended_file_name_p.filename().u8string());
 
   return name;
 }

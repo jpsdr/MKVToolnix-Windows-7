@@ -183,6 +183,29 @@ AC_DEFUN([AX_CXX17_CONSTEXPR_IF],[
   fi
 ])
 
+AC_DEFUN([AX_CXX17_FILESYSTEM_LIBRARY],[
+  AC_CACHE_CHECK([for support for C++17 feature "file system library"], [ax_cv_cxx17_filesystem_library],[
+
+    CXXFLAGS_SAVED=$CXXFLAGS
+    CXXFLAGS="$CXXFLAGS $STD_CXX"
+    export CXXFLAGS
+
+    AC_LANG_PUSH(C++)
+    AC_TRY_COMPILE(
+      [#include <filesystem>],
+      [return std::filesystem::exists(std::filesystem::path{"/etc/passwd"}) ? 1 : 0;],
+      [ax_cv_cxx17_filesystem_library="yes"],
+      [ax_cv_cxx17_filesystem_library="no"])
+    AC_LANG_POP
+
+    CXXFLAGS="$CXXFLAGS_SAVED"
+  ])
+
+  if ! test x"$ax_cv_cxx17_filesystem_library" = xyes ; then
+    missing_cxx_features="$missing_cxx_features\n  * file system library (C++17)"
+  fi
+])
+
 dnl AC_DEFUN([AX_CXX17_DEF_NAME],[
 dnl   AC_CACHE_CHECK([for support for C++17 feature "human"], [ax_cv_cxx17_def_name],[
 dnl
@@ -213,6 +236,7 @@ AX_CXX17_STRUCTURED_BINDINGS
 AX_CXX17_STD_OPTIONAL
 AX_CXX17_STD_GCD
 AX_CXX17_CONSTEXPR_IF
+AX_CXX17_FILESYSTEM_LIBRARY
 
 if test x"$missing_cxx_features" != x ; then
   printf "The following features of the C++17 standards are not supported by $CXX:$missing_cxx_features\n"
