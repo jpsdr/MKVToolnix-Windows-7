@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2021-02-17 23:17+0100\n"
-"PO-Revision-Date: 2021-02-14 15:03+0000\n"
+"PO-Revision-Date: 2021-02-19 20:02+0000\n"
 "Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/bg/)\n"
 "Language: bg\n"
@@ -5906,9 +5906,9 @@ msgid "Elements in the category '{0}' ('--edit {1}'):\n"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1820
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Enable &ISO 639-3 languages"
-msgstr "Избери един от езиковите кодове по стандарта ISO 639-2."
+msgstr "Включи ISO 639-3 &езици"
 
 #: src/common/hacks.cpp:64
 #, no-c-format
@@ -6913,9 +6913,9 @@ msgid "ISO 639-2 code"
 msgstr "ISO 639-2 код"
 
 #: src/common/iso639.cpp:43
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "ISO 639-3 code"
-msgstr "ISO 639-1 код"
+msgstr "ISO 639-3 код"
 
 #: src/common/file_types.cpp:42
 #: src/common/file_types.cpp:90
@@ -11181,17 +11181,17 @@ msgstr "Редактор на тагове"
 #: src/extract/extract_cli_parser.cpp:88
 #, no-c-format
 msgid "Tag extraction"
-msgstr ""
+msgstr "Извличане на тагове"
 
 #: src/common/kax_element_names.cpp:320
 #, no-c-format
 msgid "Tag language"
-msgstr "Таг за език"
+msgstr "Език на тага"
 
 #: src/common/kax_element_names.cpp:321
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Tag language (IETF BCP 47)"
-msgstr "Таг за език (IETF)"
+msgstr "Език на тага (IETF BCP 47)"
 
 #: src/propedit/propedit_cli_parser.cpp:266
 #, no-c-format
@@ -11302,7 +11302,7 @@ msgstr "AAC профилите са различни: {0} и {1}"
 #: src/merge/connection_checks.h:53
 #, no-c-format
 msgid "The CodecID of the two tracks is different: {0} and {1}"
-msgstr ""
+msgstr "CodecID-то на двете пътечки е различно: {0} и {1}"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:246
 #, no-c-format
@@ -11412,7 +11412,7 @@ msgstr "Последният елемент от Matroska файла е зада
 #: src/merge/mkvmerge.cpp:1586
 #, no-c-format
 msgid "The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length {0}'.\n"
-msgstr ""
+msgstr "При „--nalu-size-length {0}“, дължината на NALU размера трябва да е число в диапазона от 2 до 4 включително.\n"
 
 #: src/input/r_ogm.cpp:1485
 #, no-c-format
@@ -11542,12 +11542,12 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:1892
 #, no-c-format
 msgid "The argument to '--timestamp-scale' must be a number.\n"
-msgstr ""
+msgstr "Аргументът при „--timestamp-scale“ трябва да е число.\n"
 
 #: src/extract/attachments.cpp:115
 #, no-c-format
 msgid "The attachment #{0}, ID {1}, MIME type {2}, size {3}, is written to '{4}'.\n"
-msgstr ""
+msgstr "Прикаченият файл #{0}, ID {1}, MIME тип {2}, размер {3}, е записан към „{4}“.\n"
 
 #: src/merge/mkvmerge.cpp:1785
 #, no-c-format
@@ -11594,7 +11594,7 @@ msgstr "Нещата в списъка „избрани“ вдясно ще б
 #: src/output/p_hevc.cpp:171
 #, no-c-format
 msgid "The chosen NALU size length of {0} is too small. Try using '4'.\n"
-msgstr ""
+msgstr "Избраната дължина на NALU размер на {0} е прекалено малка. Опитай с „4“.\n"
 
 #: src/merge/mkvmerge.cpp:1970
 #, no-c-format
@@ -11766,7 +11766,7 @@ msgstr "Широчината на показване на двете пътеч�
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:51
 #, no-c-format
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
-msgstr ""
+msgstr "Недостатъкът е, че мултиплексирането ще отнема повече време, тъй като преди да излезе, mkvmerge ще чака докато всички данни са записани на паметта."
 
 #: src/merge/mkvmerge.cpp:3159
 #, no-c-format
@@ -11987,7 +11987,7 @@ msgstr "Файлът може да бъде поправен след повто
 #: src/merge/reader_detection_and_creation.cpp:403
 #, no-c-format
 msgid "The file content does not match its format type and was not recognized."
-msgstr ""
+msgstr "Съдържанието на файла не съответства на формата му и не бе разпознато."
 
 #: src/merge/reader_detection_and_creation.cpp:397
 #: src/merge/reader_detection_and_creation.cpp:400
@@ -12616,7 +12616,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:354
 #, no-c-format
 msgid "The selected language code '%1' is not an ISO 639-2 code. Players that only support the legacy Matroska language elements but not the IETF BCP 47 language elements will therefore display a different language such as 'und' (undetermined)."
-msgstr ""
+msgstr "Избраният езиков код „%1“ не е ISO 639-2 код. Плеъри, които поддържат единствено старите Matroska езикови елементи, но не и IETF BCP 47 езиковите елементи, ще показват различен език, като например „und“ (неопределен език)."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:222
 #, no-c-format
@@ -14327,9 +14327,9 @@ msgid "Warning:"
 msgstr "Предупреждение:"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:354
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Warning: %1"
-msgstr "Предупреждение:"
+msgstr "Предупреждение: %1"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1816
 #, no-c-format
