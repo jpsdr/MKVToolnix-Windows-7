@@ -1056,6 +1056,7 @@ $common_libs = [
   :iconv,
   :fmt,
   :pcre2,
+  "-lstdc++fs",
   "-lstdc++",
 ]
 
