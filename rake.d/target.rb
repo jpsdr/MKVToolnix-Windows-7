@@ -167,6 +167,7 @@ class Target
       when :pugixml          then c?(:PUGIXML_INTERNAL) ? [ '-Llib/pugixml/src', '-lpugixml' ] : c(:PUGIXML_LIBS)
       when :qt               then c(:QT_LIBS)
       when :static           then c(:LINK_STATICALLY)
+      when :stdcppfs         then c(:STDCPPFS_LIBS)
       when :mpegparser       then [ '-Lsrc/mpegparser', '-lmpegparser'  ]
       when :mtxinput         then [ '-Lsrc/input',      '-lmtxinput'    ]
       when :mtxoutput        then [ '-Lsrc/output',     '-lmtxoutput'   ]
