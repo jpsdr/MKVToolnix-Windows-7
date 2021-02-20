@@ -42,8 +42,6 @@ extract_cli_parser_c::set_default_values() {
   m_target_mode            = track_spec_t::tm_normal;
 }
 
-#define OPT(spec, func, description) add_option(spec, std::bind(&extract_cli_parser_c::func, this), description)
-
 void
 extract_cli_parser_c::init_parser() {
   add_information(YT("mkvextract <source-filename> <mode1> [options] <extraction-spec1> [<mode2> [options] <extraction-spec2>…]"));
@@ -69,17 +67,17 @@ extract_cli_parser_c::init_parser() {
       YT("Most options can only be used in certain modes with a few options applying to all modes.") });
 
   add_section_header(YT("Global options"));
-  OPT("f|parse-fully", set_parse_fully, YT("Parse the whole file instead of relying on the index."));
+  add_option("f|parse-fully", std::bind(&extract_cli_parser_c::set_parse_fully, this), YT("Parse the whole file instead of relying on the index."));
 
   add_common_options();
 
   add_section_header(YT("Track extraction"));
   add_information(YT("The first mode extracts some tracks to external files."));
-  OPT("c=charset",      set_charset,  YT("Convert text subtitles to this charset (default: UTF-8)."));
-  OPT("cuesheet",       set_cuesheet, YT("Also try to extract the cue sheet from the chapter information and tags for this track."));
-  OPT("blockadd=level", set_blockadd, YT("Keep only the BlockAdditions up to this level (default: keep all levels)"));
-  OPT("raw",            set_raw,      YT("Extract the data to a raw file."));
-  OPT("fullraw",        set_fullraw,  YT("Extract the data to a raw file including the CodecPrivate as a header."));
+  add_option("c=charset",      std::bind(&extract_cli_parser_c::set_charset,  this), YT("Convert text subtitles to this charset (default: UTF-8)."));
+  add_option("cuesheet",       std::bind(&extract_cli_parser_c::set_cuesheet, this), YT("Also try to extract the cue sheet from the chapter information and tags for this track."));
+  add_option("blockadd=level", std::bind(&extract_cli_parser_c::set_blockadd, this), YT("Keep only the BlockAdditions up to this level (default: keep all levels)"));
+  add_option("raw",            std::bind(&extract_cli_parser_c::set_raw,      this), YT("Extract the data to a raw file."));
+  add_option("fullraw",        std::bind(&extract_cli_parser_c::set_fullraw,  this), YT("Extract the data to a raw file including the CodecPrivate as a header."));
   add_informational_option("TID:out", YT("Write track with the ID TID to the file 'out'."));
 
   add_section_header(YT("Example"));
@@ -105,8 +103,8 @@ extract_cli_parser_c::init_parser() {
 
   add_section_header(YT("Chapter extraction"));
   add_information(YT("The fourth mode extracts the chapters, converts them to XML and writes them to an output file."));
-  OPT("s|simple",                 set_simple,          YT("Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."));
-  OPT("simple-language=language", set_simple_language, YT("Uses the chapter names of the specified language for extraction instead of the first chapter name found."));
+  add_option("s|simple",                 std::bind(&extract_cli_parser_c::set_simple,          this), YT("Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."));
+  add_option("simple-language=language", std::bind(&extract_cli_parser_c::set_simple_language, this), YT("Uses the chapter names of the specified language for extraction instead of the first chapter name found."));
 
   add_section_header(YT("Example"));
 
