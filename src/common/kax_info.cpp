@@ -84,10 +84,6 @@
 using namespace libmatroska;
 using namespace mtx::kax_info;
 
-#define in_parent(parent) \
-  (   !parent->IsFiniteSize() \
-   || (p->m_in->getFilePointer() < (parent->GetElementPosition() + parent->HeadSize() + parent->GetSize())))
-
 namespace {
 
 template<typename T>
@@ -1101,8 +1097,12 @@ kax_info_c::handle_segment(EbmlElement *l0) {
 
     if (!p->m_in->setFilePointer2(l1->GetElementPosition() + kax_file->get_element_size(*l1)))
       break;
-    if (!in_parent(l0))
+
+    auto in_parent = !l0->IsFiniteSize()
+                  || (p->m_in->getFilePointer() < (l0->GetElementPosition() + l0->HeadSize() + l0->GetSize()));
+    if (!in_parent)
       break;
+
     if (p->m_abort)
       return result_e::aborted;
 
