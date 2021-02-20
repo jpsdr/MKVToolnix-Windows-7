@@ -21,6 +21,15 @@
 
 namespace mtx::bits {
 
+namespace {
+
+unsigned char
+hex_digit_to_decimal(char c) {
+  return isdigit(c) ? (c - '0') : (c - 'a' + 10);
+}
+
+}
+
 value_c::value_c(int bitsize) {
   assert((0 < bitsize) && (0 == (bitsize % 8)));
 
@@ -32,11 +41,8 @@ value_c::value_c(const value_c &src) {
   *this = src;
 }
 
-#define ishexdigit(c) (isdigit(c) || (((c) >= 'a') && ((c) <= 'f')))
-#define hextodec(c)   (isdigit(c) ? ((c) - '0') : ((c) - 'a' + 10))
-
 value_c::value_c(std::string s,
-                       unsigned int allowed_bitlength) {
+                 unsigned int allowed_bitlength) {
   if ((allowed_bitlength != 0) && ((allowed_bitlength % 8) != 0))
     throw mtx::invalid_parameter_x();
 
@@ -61,7 +67,8 @@ value_c::value_c(std::string s,
     }
 
     // Invalid character?
-    if (!ishexdigit(s[i]))
+    auto is_hex_digit = isdigit(s[i]) || ((s[i] >= 'a') && (s[i] <= 'f'));
+    if (!is_hex_digit)
       throw mtx::bits::value_parser_x{fmt::format(Y("Not a hex digit at position {0}"), i)};
 
     // Input too long?
@@ -83,7 +90,7 @@ value_c::value_c(std::string s,
 
   unsigned char *buffer = m_value->get_buffer();
   for (i = 0; i < len; i += 2)
-    buffer[i / 2] = hextodec(s2[i]) << 4 | hextodec(s2[i + 1]);
+    buffer[i / 2] = (hex_digit_to_decimal(s2[i]) << 4) | hex_digit_to_decimal(s2[i + 1]);
 }
 
 value_c::value_c(libebml::EbmlBinary const &elt)
