@@ -43,11 +43,9 @@
 using namespace libebml;
 using namespace libmatroska;
 
-#define in_parent(p) (!p->IsFiniteSize() || (m_file->getFilePointer() < (p->GetElementPosition() + p->HeadSize() + p->GetSize())))
-
-#define CONSOLE_PERCENTAGE_WIDTH 25
-
 namespace {
+
+constexpr auto CONSOLE_PERCENTAGE_WIDTH = 25;
 
 template<typename Tmaster,
          typename Telement>
@@ -377,7 +375,10 @@ kax_analyzer_c::process_internal() {
 
     aborted = !show_progress_running((int)(m_file->getFilePointer() * 100 / file_size));
 
-    if (!in_parent(m_segment) || aborted || (cluster_found && meta_seek_found && !parse_fully))
+    auto in_parent = !m_segment->IsFiniteSize()
+                  || (m_file->getFilePointer() < (m_segment->GetElementPosition() + m_segment->HeadSize() + m_segment->GetSize()));
+
+    if (!in_parent || aborted || (cluster_found && meta_seek_found && !parse_fully))
       break;
 
   } // while (l1)
