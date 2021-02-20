@@ -1000,14 +1000,12 @@ void rmff_put_uint32_be(void *buf, uint32_t value);
 */
 void rmff_put_uint32_le(void *buf, uint32_t value);
 
-#if defined(ARCH_LITTLEENDIAN)
+#if !defined(WORDS_BIGENDIAN) || (WORDS_BIGENDIAN != 1)
 # define rmff_get_uint32_me(b) rmff_get_uint32_le(b)
 # define rmff_put_uint32_me(b) rmff_put_uint32_le(b)
-#elif defined(ARCH_BIGENDIAN)
+#else
 # define rmff_get_uint32_me(b) rmff_get_uint32_be(b)
 # define rmff_put_uint32_me(b) rmff_put_uint32_be(b)
-#else
-# error Neither ARCH_LITTLEENDIAN nor ARCH_BIGENDIAN has been defined.
 #endif
 
 #if defined(__cplusplus)

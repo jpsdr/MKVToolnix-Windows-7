@@ -476,9 +476,9 @@ static int avi_add_odml_index_entry(avi_t *AVI, unsigned char *tag, long flags, 
 
 	if (AVI->video_superindex->nEntriesInUse > NR_IXNN_CHUNKS) {
 	    fprintf (stderr, "Internal error in avilib - redefine NR_IXNN_CHUNKS\n");
-	    fprintf (stderr, "[avilib dump] cur_std_idx=%d NR_IXNN_CHUNKS=%d"
-		    "POS=" LLD " towrite=" LLD "\n",
-		    cur_std_idx,NR_IXNN_CHUNKS, AVI->pos, towrite);
+	    /* fprintf (stderr, "[avilib dump] cur_std_idx=%d NR_IXNN_CHUNKS=%d" */
+	    /*         "POS=" LLD " towrite=" LLD "\n", */
+	    /*         cur_std_idx,NR_IXNN_CHUNKS, AVI->pos, towrite); */
 	    return -1;
 	}
 

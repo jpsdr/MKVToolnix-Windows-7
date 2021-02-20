@@ -16,9 +16,10 @@
 #undef min
 #undef max
 
-#include <type_traits>
-
 #include <algorithm>
+#include <cassert>
+#include <cstdint>
+#include <cstring>
 #include <filesystem>
 #include <functional>
 #include <memory>
@@ -26,20 +27,10 @@
 #include <optional>
 #include <stdexcept>
 #include <string>
+#include <type_traits>
 #include <vector>
 
-#include <cassert>
-#include <cstring>
-
-#if defined(HAVE_SYS_TYPES_H)
-# include <sys/types.h>
-#endif // HAVE_SYS_TYPES_H
-#if defined(HAVE_STDINT_H)
-# include <stdint.h>
-#endif // HAVE_STDINT_H
-#if defined(HAVE_INTTYPES_H)
-# include <inttypes.h>
-#endif // HAVE_INTTYPES_H
+#include <stdint.h>
 
 // Don't support user-defined literals in fmt as they aren't used by
 // MKVToolNix and produce a compiler warning in -Wpedantic
