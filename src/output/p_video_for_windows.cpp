@@ -53,10 +53,10 @@ video_for_windows_packetizer_c::check_fourcc() {
   memcpy(fourcc, &reinterpret_cast<alBITMAPINFOHEADER *>(m_ti.m_private_data->get_buffer())->bi_compression, 4);
   fourcc[4] = 0;
 
-  if (mpeg4::p2::is_v3_fourcc(fourcc))
+  if (mtx::mpeg4_p2::is_v3_fourcc(fourcc))
     m_codec_type = video_for_windows_packetizer_c::ct_div3;
 
-  else if (mpeg4::p2::is_fourcc(fourcc))
+  else if (mtx::mpeg4_p2::is_fourcc(fourcc))
     m_codec_type = video_for_windows_packetizer_c::ct_mpeg4_p2;
 }
 

@@ -110,8 +110,8 @@ mpeg4_p2_video_packetizer_c::process_non_native(packet_cptr packet) {
     mxerror_tid(m_ti.m_fname, m_ti.m_id, Y("Cannot convert non-native MPEG4 video frames into native ones if the source container "
                                        "provides neither timestamps nor a number of frames per second.\n"));
 
-  std::vector<video_frame_t> frames;
-  mpeg4::p2::find_frame_types(packet->data->get_buffer(), packet->data->get_size(), frames, m_config_data);
+  std::vector<mtx::mpeg4_p2::video_frame_t> frames;
+  mtx::mpeg4_p2::find_frame_types(packet->data->get_buffer(), packet->data->get_size(), frames, m_config_data);
 
   for (auto &frame : frames) {
     if (!frame.is_coded) {
@@ -138,22 +138,22 @@ mpeg4_p2_video_packetizer_c::process_non_native(packet_cptr packet) {
       continue;
     }
 
-    if (FRAME_TYPE_I == frame.type)
+    if (mtx::mpeg4_p2::FRAME_TYPE_I == frame.type)
       ++m_statistics.m_num_i_frames;
-    else if (FRAME_TYPE_P == frame.type)
+    else if (mtx::mpeg4_p2::FRAME_TYPE_P == frame.type)
       ++m_statistics.m_num_p_frames;
     else
       ++m_statistics.m_num_b_frames;
 
     // Maybe we can flush queued frames now. But only if we don't have
     // a B frame.
-    if (FRAME_TYPE_B != frame.type)
+    if (mtx::mpeg4_p2::FRAME_TYPE_B != frame.type)
       flush_frames(false);
 
     frame.data      = (unsigned char *)safememdup(packet->data->get_buffer() + frame.pos, frame.size);
     frame.timestamp = -1;
 
-    if (FRAME_TYPE_B == frame.type)
+    if (mtx::mpeg4_p2::FRAME_TYPE_B == frame.type)
       m_b_frames.push_back(frame);
     else
       m_ref_frames.push_back(frame);
@@ -169,7 +169,7 @@ mpeg4_p2_video_packetizer_c::extract_config_data(packet_cptr &packet) {
   if (m_ti.m_private_data)
     return;
 
-  m_ti.m_private_data = memory_cptr{mpeg4::p2::parse_config_data(packet->data->get_buffer(), packet->data->get_size(), m_config_data)};
+  m_ti.m_private_data = memory_cptr{mtx::mpeg4_p2::parse_config_data(packet->data->get_buffer(), packet->data->get_size(), m_config_data)};
   if (!m_ti.m_private_data)
     mxerror_tid(m_ti.m_fname, m_ti.m_id, Y("Could not find the codec configuration data in the first MPEG-4 part 2 video frame. This track cannot be stored in native mode.\n"));
 
@@ -270,7 +270,7 @@ mpeg4_p2_video_packetizer_c::flush_frames(bool end_of_file) {
     return;
 
   if (m_ref_frames.size() == 1) {
-    video_frame_t &frame = m_ref_frames.front();
+    auto &frame = m_ref_frames.front();
 
     // The first frame in the file. Only apply the timestamp, nothing else.
     if (-1 == frame.timestamp) {
@@ -280,14 +280,14 @@ mpeg4_p2_video_packetizer_c::flush_frames(bool end_of_file) {
     return;
   }
 
-  video_frame_t &bref_frame = m_ref_frames.front();
-  video_frame_t &fref_frame = m_ref_frames.back();
+  auto &bref_frame = m_ref_frames.front();
+  auto &fref_frame = m_ref_frames.back();
 
   for (auto &frame : m_b_frames)
     get_next_timestamp_and_duration(frame.timestamp, frame.duration);
   get_next_timestamp_and_duration(fref_frame.timestamp, fref_frame.duration);
 
-  add_packet(new packet_t(memory_c::take_ownership(fref_frame.data, fref_frame.size), fref_frame.timestamp, fref_frame.duration, FRAME_TYPE_P == fref_frame.type ? bref_frame.timestamp : VFT_IFRAME));
+  add_packet(new packet_t(memory_c::take_ownership(fref_frame.data, fref_frame.size), fref_frame.timestamp, fref_frame.duration, mtx::mpeg4_p2::FRAME_TYPE_P == fref_frame.type ? bref_frame.timestamp : VFT_IFRAME));
   for (auto &frame : m_b_frames)
     add_packet(new packet_t(memory_c::take_ownership(frame.data, frame.size), frame.timestamp, frame.duration, bref_frame.timestamp, fref_frame.timestamp));
 
@@ -315,7 +315,7 @@ mpeg4_p2_video_packetizer_c::extract_aspect_ratio(const unsigned char *buffer,
   }
 
   uint32_t num, den;
-  if (mpeg4::p2::extract_par(buffer, size, num, den)) {
+  if (mtx::mpeg4_p2::extract_par(buffer, size, num, den)) {
     m_aspect_ratio_extracted = true;
     set_video_aspect_ratio((double)m_hvideo_pixel_width / (double)m_hvideo_pixel_height * (double)num / (double)den, false, OPTION_SOURCE_BITSTREAM);
 
@@ -342,7 +342,7 @@ mpeg4_p2_video_packetizer_c::extract_size(const unsigned char *buffer,
 
   uint32_t xtr_width, xtr_height;
 
-  if (mpeg4::p2::extract_size(buffer, size, xtr_width, xtr_height)) {
+  if (mtx::mpeg4_p2::extract_size(buffer, size, xtr_width, xtr_height)) {
     m_size_extracted = true;
 
     if (!m_reader->m_appending && ((xtr_width != static_cast<uint32_t>(m_hvideo_pixel_width)) || (xtr_height != static_cast<uint32_t>(m_hvideo_pixel_height)))) {

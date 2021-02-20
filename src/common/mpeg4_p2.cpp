@@ -15,31 +15,26 @@
 #include "common/common_pch.h"
 
 #include "common/bit_reader.h"
+#include "common/debugging.h"
 #include "common/endian.h"
 #include "common/math.h"
 #include "common/mm_io.h"
 #include "common/mm_mem_io.h"
 #include "common/mpeg4_p2.h"
 
-namespace mpeg4 {
-  namespace p2 {
-    static bool find_vol_header(mtx::bits::reader_c &bits);
-    static bool parse_vol_header(const unsigned char *buffer, int buffer_size, config_data_t &config_data);
-    static bool extract_par_internal(const unsigned char *buffer, int buffer_size, uint32_t &par_num, uint32_t &par_den);
-    static void parse_frame(video_frame_t &frame, const unsigned char *buffer, const mpeg4::p2::config_data_t &config_data);
-  }
-}
+namespace mtx::mpeg4_p2 {
 
-mpeg4::p2::config_data_t::config_data_t()
-  : m_time_increment_bits(0)
-  , m_width(0)
-  , m_height(0)
-  , m_width_height_found(false)
-{
-}
+namespace {
 
-static bool
-mpeg4::p2::find_vol_header(mtx::bits::reader_c &bits) {
+debugging_option_c s_debug{"mpeg4_p2"};
+
+bool find_vol_header(mtx::bits::reader_c &bits);
+bool parse_vol_header(const unsigned char *buffer, int buffer_size, config_data_t &config_data);
+bool extract_par_internal(const unsigned char *buffer, int buffer_size, uint32_t &par_num, uint32_t &par_den);
+void parse_frame(video_frame_t &frame, const unsigned char *buffer, const config_data_t &config_data);
+
+bool
+find_vol_header(mtx::bits::reader_c &bits) {
   uint32_t marker;
 
   while (!bits.eof()) {
@@ -62,10 +57,10 @@ mpeg4::p2::find_vol_header(mtx::bits::reader_c &bits) {
   return false;
 }
 
-static bool
-mpeg4::p2::parse_vol_header(const unsigned char *buffer,
-                            int buffer_size,
-                            mpeg4::p2::config_data_t &config_data) {
+bool
+parse_vol_header(unsigned char const *buffer,
+                 int buffer_size,
+                 config_data_t &config_data) {
   mtx::bits::reader_c bits(buffer, buffer_size);
 
   if (!find_vol_header(bits))
@@ -129,43 +124,11 @@ mpeg4::p2::parse_vol_header(const unsigned char *buffer,
   return true;
 }
 
-/** Extract the widht and height from a MPEG4 video frame
-
-   This function searches a buffer containing a MPEG4 video frame
-   for the width and height.
-
-   \param buffer The buffer containing the MPEG4 video frame.
-   \param buffer_size The size of the buffer in bytes.
-   \param width The width, if found, is stored in this variable.
-   \param height The height, if found, is stored in this variable.
-
-   \return \c true if width and height were found and \c false
-     otherwise.
-*/
 bool
-mpeg4::p2::extract_size(const unsigned char *buffer,
-                        int buffer_size,
-                        uint32_t &width,
-                        uint32_t &height) {
-  try {
-    mpeg4::p2::config_data_t config_data;
-    if (!parse_vol_header(buffer, buffer_size, config_data) || !config_data.m_width_height_found)
-      return false;
-
-    width  = config_data.m_width;
-    height = config_data.m_height;
-
-    return true;
-  } catch (...) {
-    return false;
-  }
-}
-
-static bool
-mpeg4::p2::extract_par_internal(const unsigned char *buffer,
-                                int buffer_size,
-                                uint32_t &par_num,
-                                uint32_t &par_den) {
+extract_par_internal(unsigned char const *buffer,
+                     int buffer_size,
+                     uint32_t &par_num,
+                     uint32_t &par_den) {
   const uint32_t ar_nums[16] = {0, 1, 12, 10, 16, 40, 0, 0, 0, 0,  0,  0,  0,  0, 0, 0};
   const uint32_t ar_dens[16] = {1, 1, 11, 11, 11, 33, 1, 1, 1, 1,  1,  1,  1,  1, 1, 1};
   uint32_t aspect_ratio_info, num, den;
@@ -205,6 +168,65 @@ mpeg4::p2::extract_par_internal(const unsigned char *buffer,
   return false;
 }
 
+void
+parse_frame(video_frame_t &frame,
+            unsigned char const *buffer,
+            config_data_t const &config_data) {
+  static const frame_type_e s_frame_type_map[4] = { FRAME_TYPE_I, FRAME_TYPE_P, FRAME_TYPE_B, FRAME_TYPE_P };
+
+  mtx::bits::reader_c bc(&buffer[ frame.pos + 4 ], frame.size);
+
+  frame.type = s_frame_type_map[ bc.get_bits(2) ];
+
+  while (bc.get_bit())
+    ;                           // modulo time base
+  bc.skip_bits(1 + config_data.m_time_increment_bits + 1); // marker, vop time increment, marker
+
+  frame.is_coded = bc.get_bit();
+}
+
+} // anonymous namespace
+
+config_data_t::config_data_t()
+  : m_time_increment_bits(0)
+  , m_width(0)
+  , m_height(0)
+  , m_width_height_found(false)
+{
+}
+
+/** Extract the widht and height from a MPEG4 video frame
+
+   This function searches a buffer containing a MPEG4 video frame
+   for the width and height.
+
+   \param buffer The buffer containing the MPEG4 video frame.
+   \param buffer_size The size of the buffer in bytes.
+   \param width The width, if found, is stored in this variable.
+   \param height The height, if found, is stored in this variable.
+
+   \return \c true if width and height were found and \c false
+     otherwise.
+*/
+bool
+extract_size(unsigned char const *buffer,
+             int buffer_size,
+             uint32_t &width,
+             uint32_t &height) {
+  try {
+    config_data_t config_data;
+    if (!parse_vol_header(buffer, buffer_size, config_data) || !config_data.m_width_height_found)
+      return false;
+
+    width  = config_data.m_width;
+    height = config_data.m_height;
+
+    return true;
+  } catch (...) {
+    return false;
+  }
+}
+
 /** Extract the pixel aspect ratio from a MPEG4 video frame
 
    This function searches a buffer containing a MPEG4 video frame
@@ -220,32 +242,15 @@ mpeg4::p2::extract_par_internal(const unsigned char *buffer,
      otherwise.
 */
 bool
-mpeg4::p2::extract_par(const unsigned char *buffer,
-                       int buffer_size,
-                       uint32_t &par_num,
-                       uint32_t &par_den) {
+extract_par(unsigned char const *buffer,
+            int buffer_size,
+            uint32_t &par_num,
+            uint32_t &par_den) {
   try {
     return extract_par_internal(buffer, buffer_size, par_num, par_den);
   } catch (...) {
     return false;
   }
-}
-
-static void
-mpeg4::p2::parse_frame(video_frame_t &frame,
-                       const unsigned char *buffer,
-                       const mpeg4::p2::config_data_t &config_data) {
-  static const frame_type_e s_frame_type_map[4] = { FRAME_TYPE_I, FRAME_TYPE_P, FRAME_TYPE_B, FRAME_TYPE_P };
-
-  mtx::bits::reader_c bc(&buffer[ frame.pos + 4 ], frame.size);
-
-  frame.type = s_frame_type_map[ bc.get_bits(2) ];
-
-  while (bc.get_bit())
-    ;                           // modulo time base
-  bc.skip_bits(1 + config_data.m_time_increment_bits + 1); // marker, vop time increment, marker
-
-  frame.is_coded = bc.get_bit();
 }
 
 /** Find frame boundaries and frame types in a packed video frame
@@ -263,10 +268,10 @@ mpeg4::p2::parse_frame(video_frame_t &frame,
      a dummy frame) then \a frames will contain no elements.
 */
 void
-mpeg4::p2::find_frame_types(const unsigned char *buffer,
-                            int buffer_size,
-                            std::vector<video_frame_t> &frames,
-                            const mpeg4::p2::config_data_t &config_data) {
+find_frame_types(unsigned char const *buffer,
+                 int buffer_size,
+                 std::vector<video_frame_t> &frames,
+                 config_data_t const &config_data) {
   frames.clear();
   mxdebug_if(s_debug, fmt::format("\nmpeg4_frames: start search in {0} bytes\n", buffer_size));
 
@@ -339,9 +344,9 @@ mpeg4::p2::find_frame_types(const unsigned char *buffer,
      a memory_c object otherwise. This object has to be deleted manually.
 */
 memory_cptr
-mpeg4::p2::parse_config_data(const unsigned char *buffer,
-                             int buffer_size,
-                             mpeg4::p2::config_data_t &config_data) {
+parse_config_data(unsigned char const *buffer,
+                  int buffer_size,
+                  config_data_t &config_data) {
   if (5 > buffer_size)
     return nullptr;
 
@@ -378,7 +383,7 @@ mpeg4::p2::parse_config_data(const unsigned char *buffer,
 
   if (-1 != vol_offset)
     try {
-      mpeg4::p2::config_data_t cfg_data;
+      config_data_t cfg_data;
       if (parse_vol_header(&buffer[ vol_offset ], buffer_size - vol_offset, cfg_data))
         config_data.m_time_increment_bits = cfg_data.m_time_increment_bits;
 
@@ -417,7 +422,7 @@ mpeg4::p2::parse_config_data(const unsigned char *buffer,
    \return true if the FourCC refers to a MPEG-4 part 2 video codec.
 */
 bool
-mpeg4::p2::is_fourcc(const void *fourcc) {
+is_fourcc(void const *fourcc) {
   static const char *mpeg4_p2_fourccs[] = {
     "MP42", "DIV2", "DIVX", "XVID", "DX50", "FMP4", "DXGM",
     nullptr
@@ -438,7 +443,7 @@ mpeg4::p2::is_fourcc(const void *fourcc) {
    \return true if the FourCC refers to a MPEG-4 part 2 video codec.
 */
 bool
-mpeg4::p2::is_v3_fourcc(const void *fourcc) {
+is_v3_fourcc(void const *fourcc) {
   static const char *mpeg4_p2_v3_fourccs[] = {
     "DIV3", "MPG3", "MP43",
     "AP41", // Angel Potion
@@ -451,3 +456,5 @@ mpeg4::p2::is_v3_fourcc(const void *fourcc) {
       return true;
   return false;
 }
+
+} // namespace mtx::mpeg4_p2

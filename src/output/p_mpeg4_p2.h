@@ -46,12 +46,12 @@ protected:
     }
   };
 
-  std::deque<video_frame_t> m_ref_frames, m_b_frames;
+  std::deque<mtx::mpeg4_p2::video_frame_t> m_ref_frames, m_b_frames;
   std::deque<timestamp_duration_t> m_available_timestamps;
   int64_t m_timestamps_generated, m_previous_timestamp;
   bool m_aspect_ratio_extracted, m_input_is_native, m_output_is_native;
   bool m_size_extracted;
-  mpeg4::p2::config_data_t m_config_data;
+  mtx::mpeg4_p2::config_data_t m_config_data;
   statistics_t m_statistics;
 
 public:

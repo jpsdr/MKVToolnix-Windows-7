@@ -16,6 +16,8 @@
 
 #include "common/common_pch.h"
 
+namespace mtx::mpeg4_p2 {
+
 /** Start code for a MPEG-4 part 2 (?) video object plain */
 #define MPEGVIDEO_VOP_START_CODE                  0x000001b6
 #define MPEGVIDEO_VOL_START_CODE                  0x00000120
@@ -115,22 +117,20 @@ struct video_frame_t {
   }
 };
 
-namespace mpeg4 {
-  namespace p2 {
-    struct config_data_t {
-      int m_time_increment_bits;
-      int m_width, m_height;
-      bool m_width_height_found;
+struct config_data_t {
+  int m_time_increment_bits;
+  int m_width, m_height;
+  bool m_width_height_found;
 
-      config_data_t();
-    };
+  config_data_t();
+};
 
-    bool is_fourcc(const void *fourcc);
-    bool is_v3_fourcc(const void *fourcc);
+bool is_fourcc(const void *fourcc);
+bool is_v3_fourcc(const void *fourcc);
 
-    bool extract_par(const unsigned char *buffer, int buffer_size, uint32_t &par_num, uint32_t &par_den);
-    bool extract_size(const unsigned char *buffer, int buffer_size, uint32_t &width, uint32_t &height);
-    void find_frame_types(const unsigned char *buffer, int buffer_size, std::vector<video_frame_t> &frames, const config_data_t &config_data);
-    memory_cptr parse_config_data(const unsigned char *buffer, int buffer_size, config_data_t &config_data);
-  }
+bool extract_par(const unsigned char *buffer, int buffer_size, uint32_t &par_num, uint32_t &par_den);
+bool extract_size(const unsigned char *buffer, int buffer_size, uint32_t &width, uint32_t &height);
+void find_frame_types(const unsigned char *buffer, int buffer_size, std::vector<video_frame_t> &frames, const config_data_t &config_data);
+memory_cptr parse_config_data(const unsigned char *buffer, int buffer_size, config_data_t &config_data);
+
 }
