@@ -103,9 +103,6 @@ constexpr uint32_t calc_fourcc(char a, char b, char c, char d) {
 }
 }
 
-#define isblanktab(c) (((c) == ' ')  || ((c) == '\t'))
-#define iscr(c)       (((c) == '\n') || ((c) == '\r'))
-
 #define TIMESTAMP_SCALE 1000000
 
 void mxrun_before_exit(std::function<void()> function);

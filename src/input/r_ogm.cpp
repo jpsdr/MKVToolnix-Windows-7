@@ -1307,7 +1307,7 @@ ogm_s_text_demuxer_c::process_page(int64_t granulepos) {
 
     get_duration_and_len(op, duration, duration_len);
 
-    if (((op.bytes - 1 - duration_len) > 2) || ((op.packet[duration_len + 1] != ' ') && (op.packet[duration_len + 1] != 0) && !iscr(op.packet[duration_len + 1]))) {
+    if (((op.bytes - 1 - duration_len) > 2) || ((op.packet[duration_len + 1] != ' ') && (op.packet[duration_len + 1] != 0) && !mtx::string::is_newline(op.packet[duration_len + 1]))) {
       auto mem = memory_c::borrow(&op.packet[duration_len + 1], op.bytes - 1 - duration_len);
       reader->m_reader_packetizers[ptzr]->process(new packet_t(mem, granulepos * 1000000, (int64_t)duration * 1000000));
     }

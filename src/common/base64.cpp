@@ -47,6 +47,7 @@
 
 #include "common/base64.h"
 #include "common/error.h"
+#include "common/strings/editing.h"
 
 namespace mtx::base64 {
 
@@ -120,7 +121,7 @@ decode(std::string const &src) {
       } else if (c == '=')
         pad++;
 
-      else if (!isblanktab(c) && !iscr(c))
+      else if (!mtx::string::is_blank_or_tab(c) && !mtx::string::is_newline(c))
         throw mtx::base64::invalid_data_x{};
     }
 

@@ -87,7 +87,7 @@ strip_back(std::string &s,
   auto c  = s.c_str();
   int idx = 0, len = s.length();
 
-  while ((idx < len) && (!c[len - idx - 1] || isblanktab(c[len - idx - 1]) || (newlines && iscr(c[len - idx - 1]))))
+  while ((idx < len) && (!c[len - idx - 1] || mtx::string::is_blank_or_tab(c[len - idx - 1]) || (newlines && mtx::string::is_newline(c[len - idx - 1]))))
     ++idx;
 
   if (idx > 0)
@@ -100,7 +100,7 @@ strip(std::string &s,
   auto c  = s.c_str();
   int idx = 0, len = s.length();
 
-  while ((idx < len) && (!c[idx] || isblanktab(c[idx]) || (newlines && iscr(c[idx]))))
+  while ((idx < len) && (!c[idx] || mtx::string::is_blank_or_tab(c[idx]) || (newlines && mtx::string::is_newline(c[idx]))))
     ++idx;
 
   if (idx > 0)
@@ -131,7 +131,7 @@ shrink_whitespace(std::string &s) {
   size_t i                     = 0;
   bool previous_was_whitespace = false;
   while (s.length() > i) {
-    if (!isblanktab(s[i])) {
+    if (!mtx::string::is_blank_or_tab(s[i])) {
       previous_was_whitespace = false;
       ++i;
       continue;

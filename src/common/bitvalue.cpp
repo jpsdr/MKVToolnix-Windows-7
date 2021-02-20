@@ -53,7 +53,7 @@ value_c::value_c(std::string s,
   unsigned int i;
   for (i = 0; i < len; i++) {
     // Space or tab?
-    if (isblanktab(s[i]))
+    if (mtx::string::is_blank_or_tab(s[i]))
       continue;
 
     // Skip hyphens and curly braces. Makes copy & paste a bit easier.

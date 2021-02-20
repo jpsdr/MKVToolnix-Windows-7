@@ -19,6 +19,9 @@
 
 namespace mtx::string {
 
+constexpr auto is_blank_or_tab(char c) { return (c == ' ')   || (c == '\t'); }
+constexpr auto is_newline(char c)      { return (c == '\n')  || (c == '\r'); }
+
 enum class line_ending_style_e {
   cr_lf,
   lf,
