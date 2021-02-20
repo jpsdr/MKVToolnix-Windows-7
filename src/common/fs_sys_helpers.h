@@ -37,14 +37,14 @@ void unset_environment_variable(std::string const &key);
 
 void set_environment_variable(const std::string &key, const std::string &value);
 
-#define WINDOWS_VERSION_UNKNOWN      0x00000000
-#define WINDOWS_VERSION_2000         0x00050000
-#define WINDOWS_VERSION_XP           0x00050001
-#define WINDOWS_VERSION_SERVER2003   0x00050002
-#define WINDOWS_VERSION_VISTA        0x00060000
-#define WINDOWS_VERSION_SERVER2008   0x00060000
-#define WINDOWS_VERSION_SERVER2008R2 0x00060001
-#define WINDOWS_VERSION_7            0x00060001
+constexpr auto WINDOWS_VERSION_UNKNOWN      = 0x00000000;
+constexpr auto WINDOWS_VERSION_2000         = 0x00050000;
+constexpr auto WINDOWS_VERSION_XP           = 0x00050001;
+constexpr auto WINDOWS_VERSION_SERVER2003   = 0x00050002;
+constexpr auto WINDOWS_VERSION_VISTA        = 0x00060000;
+constexpr auto WINDOWS_VERSION_SERVER2008   = 0x00060000;
+constexpr auto WINDOWS_VERSION_SERVER2008R2 = 0x00060001;
+constexpr auto WINDOWS_VERSION_7            = 0x00060001;
 
 unsigned int get_windows_version();
 std::string format_windows_message(uint64_t message_id);
