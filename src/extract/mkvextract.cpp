@@ -30,8 +30,6 @@
 
 using namespace libmatroska;
 
-#define NAME "mkvextract"
-
 enum operation_mode_e {
   MODE_TRACKS,
   MODE_TAGS,
@@ -102,7 +100,7 @@ show_element(EbmlElement *l,
   level_buffer[0]     = '|';
   level_buffer[level] = 0;
 
-  mxinfo(fmt::format("({0}) {1}+ {2}", NAME, level_buffer, info));
+  mxinfo(fmt::format("(mkvextract) {0}+ {1}", level_buffer, info));
   if (l)
     mxinfo(fmt::format(Y(" at {0}"), l->GetElementPosition()));
   mxinfo("\n");
@@ -110,7 +108,7 @@ show_element(EbmlElement *l,
 
 void
 show_error(const std::string &error) {
-  mxerror(fmt::format("({0}) {1}\n", NAME, error));
+  mxerror(fmt::format("(mkvextract) {0}\n", error));
 }
 
 static void

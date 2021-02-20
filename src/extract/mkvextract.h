@@ -24,10 +24,6 @@
 #include "extract/options.h"
 #include "librmff/librmff.h"
 
-#define in_parent(p)                                                                     \
-  (   !p->IsFiniteSize()                                                                 \
-   || (in.getFilePointer() < (p->GetElementPosition() + p->HeadSize() + p->GetSize())))
-
 // Helper functions in mkvextract.cpp
 void show_element(libebml::EbmlElement *l, int level, const std::string &message);
 void show_error(const std::string &error);
