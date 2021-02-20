@@ -89,11 +89,6 @@ using namespace std::string_literals;
                  "the command line used and which operating system you are " \
                  "using. Thank you.")
 
-
-#define MXMSG_ERROR    5
-#define MXMSG_WARNING 10
-#define MXMSG_INFO    15
-
 namespace mtx {
 constexpr uint32_t calc_fourcc(char a, char b, char c, char d) {
   return (static_cast<uint32_t>(a) << 24)
@@ -103,7 +98,7 @@ constexpr uint32_t calc_fourcc(char a, char b, char c, char d) {
 }
 }
 
-#define TIMESTAMP_SCALE 1000000
+constexpr auto TIMESTAMP_SCALE = 1'000'000;
 
 void mxrun_before_exit(std::function<void()> function);
 [[noreturn]]

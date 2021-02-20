@@ -23,6 +23,10 @@
 #include "common/locale.h"
 #include "common/mm_io.h"
 
+constexpr auto MXMSG_ERROR   =  5;
+constexpr auto MXMSG_WARNING = 10;
+constexpr auto MXMSG_INFO    = 15;
+
 using mxmsg_handler_t = std::function<void(unsigned int level, std::string const &)>;
 void set_mxmsg_handler(unsigned int level, mxmsg_handler_t const &handler);
 
