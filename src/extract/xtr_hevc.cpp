@@ -56,7 +56,7 @@ xtr_hevc_c::unwrap_write_hevcc(bool skip_prefix_sei) {
 
       auto nal_size      = get_uint_be(&buf[pos], 2);
       auto nal_unit_type = (buf[pos + 2] >> 1) & 0x3f;
-      auto skip_this_nal = skip_prefix_sei && (HEVC_NALU_TYPE_PREFIX_SEI == nal_unit_type);
+      auto skip_this_nal = skip_prefix_sei && (mtx::hevc::NALU_TYPE_PREFIX_SEI == nal_unit_type);
 
       mxdebug_if(m_debug, fmt::format("unwrap_write_hevcc:     pos {0} nal_size {1} type 0x{2:02x} skip_this_nal {3}\n", pos, nal_size, static_cast<unsigned int>(nal_unit_type), skip_this_nal));
 
@@ -89,7 +89,7 @@ xtr_hevc_c::write_nal(binary *data,
   }
 
   auto nal_unit_type   = (data[pos] >> 1) & 0x3f;
-  auto start_code_size = m_first_nalu || mtx::included_in(nal_unit_type, HEVC_NALU_TYPE_VIDEO_PARAM, HEVC_NALU_TYPE_SEQ_PARAM, HEVC_NALU_TYPE_PIC_PARAM) ? 4 : 3;
+  auto start_code_size = m_first_nalu || mtx::included_in(nal_unit_type, mtx::hevc::NALU_TYPE_VIDEO_PARAM, mtx::hevc::NALU_TYPE_SEQ_PARAM, mtx::hevc::NALU_TYPE_PIC_PARAM) ? 4 : 3;
   m_first_nalu         = false;
 
   m_out->write(ms_start_code + (4 - start_code_size), start_code_size);
@@ -110,8 +110,8 @@ xtr_hevc_c::check_for_parameter_sets_in_first_frame(nal_unit_list_t const &nal_u
   for (auto const &nal_unit : nal_units)
     nalu_types_found[nal_unit.second] = true;
 
-  auto have_all_parameter_sets = nalu_types_found[HEVC_NALU_TYPE_VIDEO_PARAM] && nalu_types_found[HEVC_NALU_TYPE_SEQ_PARAM] && nalu_types_found[HEVC_NALU_TYPE_PIC_PARAM];
-  auto have_prefix_sei         = nalu_types_found[HEVC_NALU_TYPE_PREFIX_SEI];
+  auto have_all_parameter_sets = nalu_types_found[mtx::hevc::NALU_TYPE_VIDEO_PARAM] && nalu_types_found[mtx::hevc::NALU_TYPE_SEQ_PARAM] && nalu_types_found[mtx::hevc::NALU_TYPE_PIC_PARAM];
+  auto have_prefix_sei         = nalu_types_found[mtx::hevc::NALU_TYPE_PREFIX_SEI];
 
   if (!have_all_parameter_sets)
     unwrap_write_hevcc(have_prefix_sei);

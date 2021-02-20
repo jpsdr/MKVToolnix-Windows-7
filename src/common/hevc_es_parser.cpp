@@ -269,16 +269,16 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     return;
   }
 
-  bool is_i_slice =  (HEVC_SLICE_TYPE_I == si.type);
-  bool is_b_slice =  (HEVC_SLICE_TYPE_B == si.type);
+  bool is_i_slice = (SLICE_TYPE_I == si.type);
+  bool is_b_slice = (SLICE_TYPE_B == si.type);
 
   m_incomplete_frame.m_si       =  si;
   m_incomplete_frame.m_keyframe =  m_recovery_point_valid
                                 || (   is_i_slice
                                     && (   (m_debug_keyframe_detection && !m_b_frames_since_keyframe)
-                                        || (HEVC_NALU_TYPE_IDR_W_RADL == si.nalu_type)
-                                        || (HEVC_NALU_TYPE_IDR_N_LP   == si.nalu_type)
-                                        || (HEVC_NALU_TYPE_CRA_NUT    == si.nalu_type)));
+                                        || (NALU_TYPE_IDR_W_RADL == si.nalu_type)
+                                        || (NALU_TYPE_IDR_N_LP   == si.nalu_type)
+                                        || (NALU_TYPE_CRA_NUT    == si.nalu_type)));
   m_incomplete_frame.m_position = nalu_pos;
   m_recovery_point_valid        = false;
 
@@ -477,52 +477,52 @@ es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
   ++m_stats.num_nalus_by_type[std::min(type, 63)];
 
   switch (type) {
-    case HEVC_NALU_TYPE_VIDEO_PARAM:
+    case NALU_TYPE_VIDEO_PARAM:
       flush_incomplete_frame();
       handle_vps_nalu(nalu);
       break;
 
-    case HEVC_NALU_TYPE_SEQ_PARAM:
+    case NALU_TYPE_SEQ_PARAM:
       flush_incomplete_frame();
       handle_sps_nalu(nalu);
       break;
 
-    case HEVC_NALU_TYPE_PIC_PARAM:
+    case NALU_TYPE_PIC_PARAM:
       flush_incomplete_frame();
       handle_pps_nalu(nalu);
       break;
 
-    case HEVC_NALU_TYPE_PREFIX_SEI:
+    case NALU_TYPE_PREFIX_SEI:
       flush_incomplete_frame();
       handle_sei_nalu(nalu);
       break;
 
-    case HEVC_NALU_TYPE_END_OF_SEQ:
-    case HEVC_NALU_TYPE_END_OF_STREAM:
-    case HEVC_NALU_TYPE_ACCESS_UNIT:
+    case NALU_TYPE_END_OF_SEQ:
+    case NALU_TYPE_END_OF_STREAM:
+    case NALU_TYPE_ACCESS_UNIT:
       flush_incomplete_frame();
       break;
 
-    case HEVC_NALU_TYPE_FILLER_DATA:
+    case NALU_TYPE_FILLER_DATA:
       // Skip these.
       break;
 
-    case HEVC_NALU_TYPE_TRAIL_N:
-    case HEVC_NALU_TYPE_TRAIL_R:
-    case HEVC_NALU_TYPE_TSA_N:
-    case HEVC_NALU_TYPE_TSA_R:
-    case HEVC_NALU_TYPE_STSA_N:
-    case HEVC_NALU_TYPE_STSA_R:
-    case HEVC_NALU_TYPE_RADL_N:
-    case HEVC_NALU_TYPE_RADL_R:
-    case HEVC_NALU_TYPE_RASL_N:
-    case HEVC_NALU_TYPE_RASL_R:
-    case HEVC_NALU_TYPE_BLA_W_LP:
-    case HEVC_NALU_TYPE_BLA_W_RADL:
-    case HEVC_NALU_TYPE_BLA_N_LP:
-    case HEVC_NALU_TYPE_IDR_W_RADL:
-    case HEVC_NALU_TYPE_IDR_N_LP:
-    case HEVC_NALU_TYPE_CRA_NUT:
+    case NALU_TYPE_TRAIL_N:
+    case NALU_TYPE_TRAIL_R:
+    case NALU_TYPE_TSA_N:
+    case NALU_TYPE_TSA_R:
+    case NALU_TYPE_STSA_N:
+    case NALU_TYPE_STSA_R:
+    case NALU_TYPE_RADL_N:
+    case NALU_TYPE_RADL_R:
+    case NALU_TYPE_RASL_N:
+    case NALU_TYPE_RASL_R:
+    case NALU_TYPE_BLA_W_LP:
+    case NALU_TYPE_BLA_W_RADL:
+    case NALU_TYPE_BLA_N_LP:
+    case NALU_TYPE_IDR_W_RADL:
+    case NALU_TYPE_IDR_N_LP:
+    case NALU_TYPE_CRA_NUT:
       if (!m_hevcc_ready && !m_vps_info_list.empty() && !m_sps_info_list.empty() && !m_pps_info_list.empty()) {
         m_hevcc_ready = true;
         flush_unhandled_nalus();
@@ -627,7 +627,7 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
       if (sps.separate_colour_plane_flag == 1)
         r.get_bits(1);    // colour_plane_id
 
-      if ( (si.nalu_type != HEVC_NALU_TYPE_IDR_W_RADL) && (si.nalu_type != HEVC_NALU_TYPE_IDR_N_LP) ) {
+      if ( (si.nalu_type != NALU_TYPE_IDR_W_RADL) && (si.nalu_type != NALU_TYPE_IDR_N_LP) ) {
         si.pic_order_cnt_lsb = r.get_bits(sps.log2_max_pic_order_cnt_lsb); // slice_pic_order_cnt_lsb
       }
 
@@ -717,7 +717,7 @@ es_parser_c::calculate_frame_order() {
       break;
     }
 
-    if ((HEVC_NALU_TYPE_IDR_W_RADL == idr.type) || (HEVC_NALU_TYPE_IDR_N_LP == idr.type)) {
+    if ((NALU_TYPE_IDR_W_RADL == idr.type) || (NALU_TYPE_IDR_N_LP == idr.type)) {
       frame_itr->m_presentation_order = 0;
       prev_pic_order_cnt_lsb = prev_pic_order_cnt_msb = 0;
     } else {
@@ -734,7 +734,7 @@ es_parser_c::calculate_frame_order() {
 
       frame_itr->m_presentation_order = poc_lsb + poc_msb;
 
-      if ((HEVC_NALU_TYPE_RADL_N != idr.type) && (HEVC_NALU_TYPE_RADL_R != idr.type) && (HEVC_NALU_TYPE_RASL_N != idr.type) && (HEVC_NALU_TYPE_RASL_R != idr.type)) {
+      if ((NALU_TYPE_RADL_N != idr.type) && (NALU_TYPE_RADL_R != idr.type) && (NALU_TYPE_RASL_N != idr.type) && (NALU_TYPE_RASL_R != idr.type)) {
         prev_pic_order_cnt_lsb = poc_lsb;
         prev_pic_order_cnt_msb = poc_msb;
       }
@@ -996,70 +996,70 @@ es_parser_c::init_nalu_names() {
     return;
 
   ms_nalu_names_by_type = std::unordered_map<int, std::string>{
-    { HEVC_NALU_TYPE_TRAIL_N,       "trail_n"       },
-    { HEVC_NALU_TYPE_TRAIL_R,       "trail_r"       },
-    { HEVC_NALU_TYPE_TSA_N,         "tsa_n"         },
-    { HEVC_NALU_TYPE_TSA_R,         "tsa_r"         },
-    { HEVC_NALU_TYPE_STSA_N,        "stsa_n"        },
-    { HEVC_NALU_TYPE_STSA_R,        "stsa_r"        },
-    { HEVC_NALU_TYPE_RADL_N,        "radl_n"        },
-    { HEVC_NALU_TYPE_RADL_R,        "radl_r"        },
-    { HEVC_NALU_TYPE_RASL_N,        "rasl_n"        },
-    { HEVC_NALU_TYPE_RASL_R,        "rasl_r"        },
-    { HEVC_NALU_TYPE_RSV_VCL_N10,   "rsv_vcl_n10"   },
-    { HEVC_NALU_TYPE_RSV_VCL_N12,   "rsv_vcl_n12"   },
-    { HEVC_NALU_TYPE_RSV_VCL_N14,   "rsv_vcl_n14"   },
-    { HEVC_NALU_TYPE_RSV_VCL_R11,   "rsv_vcl_r11"   },
-    { HEVC_NALU_TYPE_RSV_VCL_R13,   "rsv_vcl_r13"   },
-    { HEVC_NALU_TYPE_RSV_VCL_R15,   "rsv_vcl_r15"   },
-    { HEVC_NALU_TYPE_BLA_W_LP,      "bla_w_lp"      },
-    { HEVC_NALU_TYPE_BLA_W_RADL,    "bla_w_radl"    },
-    { HEVC_NALU_TYPE_BLA_N_LP,      "bla_n_lp"      },
-    { HEVC_NALU_TYPE_IDR_W_RADL,    "idr_w_radl"    },
-    { HEVC_NALU_TYPE_IDR_N_LP,      "idr_n_lp"      },
-    { HEVC_NALU_TYPE_CRA_NUT,       "cra_nut"       },
-    { HEVC_NALU_TYPE_RSV_RAP_VCL22, "rsv_rap_vcl22" },
-    { HEVC_NALU_TYPE_RSV_RAP_VCL23, "rsv_rap_vcl23" },
-    { HEVC_NALU_TYPE_RSV_VCL24,     "rsv_vcl24"     },
-    { HEVC_NALU_TYPE_RSV_VCL25,     "rsv_vcl25"     },
-    { HEVC_NALU_TYPE_RSV_VCL26,     "rsv_vcl26"     },
-    { HEVC_NALU_TYPE_RSV_VCL27,     "rsv_vcl27"     },
-    { HEVC_NALU_TYPE_RSV_VCL28,     "rsv_vcl28"     },
-    { HEVC_NALU_TYPE_RSV_VCL29,     "rsv_vcl29"     },
-    { HEVC_NALU_TYPE_RSV_VCL30,     "rsv_vcl30"     },
-    { HEVC_NALU_TYPE_RSV_VCL31,     "rsv_vcl31"     },
-    { HEVC_NALU_TYPE_VIDEO_PARAM,   "video_param"   },
-    { HEVC_NALU_TYPE_SEQ_PARAM,     "seq_param"     },
-    { HEVC_NALU_TYPE_PIC_PARAM,     "pic_param"     },
-    { HEVC_NALU_TYPE_ACCESS_UNIT,   "access_unit"   },
-    { HEVC_NALU_TYPE_END_OF_SEQ,    "end_of_seq"    },
-    { HEVC_NALU_TYPE_END_OF_STREAM, "end_of_stream" },
-    { HEVC_NALU_TYPE_FILLER_DATA,   "filler_data"   },
-    { HEVC_NALU_TYPE_PREFIX_SEI,    "prefix_sei"    },
-    { HEVC_NALU_TYPE_SUFFIX_SEI,    "suffix_sei"    },
-    { HEVC_NALU_TYPE_RSV_NVCL41,    "rsv_nvcl41"    },
-    { HEVC_NALU_TYPE_RSV_NVCL42,    "rsv_nvcl42"    },
-    { HEVC_NALU_TYPE_RSV_NVCL43,    "rsv_nvcl43"    },
-    { HEVC_NALU_TYPE_RSV_NVCL44,    "rsv_nvcl44"    },
-    { HEVC_NALU_TYPE_RSV_NVCL45,    "rsv_nvcl45"    },
-    { HEVC_NALU_TYPE_RSV_NVCL46,    "rsv_nvcl46"    },
-    { HEVC_NALU_TYPE_RSV_NVCL47,    "rsv_nvcl47"    },
-    { HEVC_NALU_TYPE_UNSPEC48,      "unspec48"      },
-    { HEVC_NALU_TYPE_UNSPEC49,      "unspec49"      },
-    { HEVC_NALU_TYPE_UNSPEC50,      "unspec50"      },
-    { HEVC_NALU_TYPE_UNSPEC51,      "unspec51"      },
-    { HEVC_NALU_TYPE_UNSPEC52,      "unspec52"      },
-    { HEVC_NALU_TYPE_UNSPEC53,      "unspec53"      },
-    { HEVC_NALU_TYPE_UNSPEC54,      "unspec54"      },
-    { HEVC_NALU_TYPE_UNSPEC55,      "unspec55"      },
-    { HEVC_NALU_TYPE_UNSPEC56,      "unspec56"      },
-    { HEVC_NALU_TYPE_UNSPEC57,      "unspec57"      },
-    { HEVC_NALU_TYPE_UNSPEC58,      "unspec58"      },
-    { HEVC_NALU_TYPE_UNSPEC59,      "unspec59"      },
-    { HEVC_NALU_TYPE_UNSPEC60,      "unspec60"      },
-    { HEVC_NALU_TYPE_UNSPEC61,      "unspec61"      },
-    { HEVC_NALU_TYPE_UNSPEC62,      "unspec62"      },
-    { HEVC_NALU_TYPE_UNSPEC63,      "unspec63"      },
+    { NALU_TYPE_TRAIL_N,       "trail_n"       },
+    { NALU_TYPE_TRAIL_R,       "trail_r"       },
+    { NALU_TYPE_TSA_N,         "tsa_n"         },
+    { NALU_TYPE_TSA_R,         "tsa_r"         },
+    { NALU_TYPE_STSA_N,        "stsa_n"        },
+    { NALU_TYPE_STSA_R,        "stsa_r"        },
+    { NALU_TYPE_RADL_N,        "radl_n"        },
+    { NALU_TYPE_RADL_R,        "radl_r"        },
+    { NALU_TYPE_RASL_N,        "rasl_n"        },
+    { NALU_TYPE_RASL_R,        "rasl_r"        },
+    { NALU_TYPE_RSV_VCL_N10,   "rsv_vcl_n10"   },
+    { NALU_TYPE_RSV_VCL_N12,   "rsv_vcl_n12"   },
+    { NALU_TYPE_RSV_VCL_N14,   "rsv_vcl_n14"   },
+    { NALU_TYPE_RSV_VCL_R11,   "rsv_vcl_r11"   },
+    { NALU_TYPE_RSV_VCL_R13,   "rsv_vcl_r13"   },
+    { NALU_TYPE_RSV_VCL_R15,   "rsv_vcl_r15"   },
+    { NALU_TYPE_BLA_W_LP,      "bla_w_lp"      },
+    { NALU_TYPE_BLA_W_RADL,    "bla_w_radl"    },
+    { NALU_TYPE_BLA_N_LP,      "bla_n_lp"      },
+    { NALU_TYPE_IDR_W_RADL,    "idr_w_radl"    },
+    { NALU_TYPE_IDR_N_LP,      "idr_n_lp"      },
+    { NALU_TYPE_CRA_NUT,       "cra_nut"       },
+    { NALU_TYPE_RSV_RAP_VCL22, "rsv_rap_vcl22" },
+    { NALU_TYPE_RSV_RAP_VCL23, "rsv_rap_vcl23" },
+    { NALU_TYPE_RSV_VCL24,     "rsv_vcl24"     },
+    { NALU_TYPE_RSV_VCL25,     "rsv_vcl25"     },
+    { NALU_TYPE_RSV_VCL26,     "rsv_vcl26"     },
+    { NALU_TYPE_RSV_VCL27,     "rsv_vcl27"     },
+    { NALU_TYPE_RSV_VCL28,     "rsv_vcl28"     },
+    { NALU_TYPE_RSV_VCL29,     "rsv_vcl29"     },
+    { NALU_TYPE_RSV_VCL30,     "rsv_vcl30"     },
+    { NALU_TYPE_RSV_VCL31,     "rsv_vcl31"     },
+    { NALU_TYPE_VIDEO_PARAM,   "video_param"   },
+    { NALU_TYPE_SEQ_PARAM,     "seq_param"     },
+    { NALU_TYPE_PIC_PARAM,     "pic_param"     },
+    { NALU_TYPE_ACCESS_UNIT,   "access_unit"   },
+    { NALU_TYPE_END_OF_SEQ,    "end_of_seq"    },
+    { NALU_TYPE_END_OF_STREAM, "end_of_stream" },
+    { NALU_TYPE_FILLER_DATA,   "filler_data"   },
+    { NALU_TYPE_PREFIX_SEI,    "prefix_sei"    },
+    { NALU_TYPE_SUFFIX_SEI,    "suffix_sei"    },
+    { NALU_TYPE_RSV_NVCL41,    "rsv_nvcl41"    },
+    { NALU_TYPE_RSV_NVCL42,    "rsv_nvcl42"    },
+    { NALU_TYPE_RSV_NVCL43,    "rsv_nvcl43"    },
+    { NALU_TYPE_RSV_NVCL44,    "rsv_nvcl44"    },
+    { NALU_TYPE_RSV_NVCL45,    "rsv_nvcl45"    },
+    { NALU_TYPE_RSV_NVCL46,    "rsv_nvcl46"    },
+    { NALU_TYPE_RSV_NVCL47,    "rsv_nvcl47"    },
+    { NALU_TYPE_UNSPEC48,      "unspec48"      },
+    { NALU_TYPE_UNSPEC49,      "unspec49"      },
+    { NALU_TYPE_UNSPEC50,      "unspec50"      },
+    { NALU_TYPE_UNSPEC51,      "unspec51"      },
+    { NALU_TYPE_UNSPEC52,      "unspec52"      },
+    { NALU_TYPE_UNSPEC53,      "unspec53"      },
+    { NALU_TYPE_UNSPEC54,      "unspec54"      },
+    { NALU_TYPE_UNSPEC55,      "unspec55"      },
+    { NALU_TYPE_UNSPEC56,      "unspec56"      },
+    { NALU_TYPE_UNSPEC57,      "unspec57"      },
+    { NALU_TYPE_UNSPEC58,      "unspec58"      },
+    { NALU_TYPE_UNSPEC59,      "unspec59"      },
+    { NALU_TYPE_UNSPEC60,      "unspec60"      },
+    { NALU_TYPE_UNSPEC61,      "unspec61"      },
+    { NALU_TYPE_UNSPEC62,      "unspec62"      },
+    { NALU_TYPE_UNSPEC63,      "unspec63"      },
   };
 }
 

@@ -354,7 +354,7 @@ parse_vui_parameters(std::size_t indent,
     unsigned int aspect_ratio_idc;
 
     v(indent, "aspect_ratio_idc", aspect_ratio_idc = r.get_bits(8));
-    if (aspect_ratio_idc == HEVC_EXTENDED_SAR) {
+    if (aspect_ratio_idc == mtx::hevc::EXTENDED_SAR) {
       v(indent, "sar_width",  r.get_bits(16));
       v(indent, "sar_height", r.get_bits(16));
     }
@@ -630,10 +630,10 @@ parse_hevcc(mtx::bits::reader_c &r) {
   for (auto array_idx = 0u; array_idx < num_arrays; ++array_idx) {
     auto byte           = r.get_bits(8);
     auto type           = byte & 0x3f;
-    auto type_name      = type == HEVC_NALU_TYPE_VIDEO_PARAM ? "video parameter set"
-                        : type == HEVC_NALU_TYPE_SEQ_PARAM   ? "sequence parameter set"
-                        : type == HEVC_NALU_TYPE_PIC_PARAM   ? "picture parameter set"
-                        : type == HEVC_NALU_TYPE_PREFIX_SEI  ? "supplemental enhancement information"
+    auto type_name      = type == mtx::hevc::NALU_TYPE_VIDEO_PARAM ? "video parameter set"
+                        : type == mtx::hevc::NALU_TYPE_SEQ_PARAM   ? "sequence parameter set"
+                        : type == mtx::hevc::NALU_TYPE_PIC_PARAM   ? "picture parameter set"
+                        : type == mtx::hevc::NALU_TYPE_PREFIX_SEI  ? "supplemental enhancement information"
                         :                                      "unknown";
     auto nal_unit_count = r.get_bits(16);
 
@@ -656,7 +656,7 @@ parse_hevcc(mtx::bits::reader_c &r) {
 
       mtx::bits::reader_c nalu_r{data->get_buffer(), data->get_size()};
 
-      if (type == HEVC_NALU_TYPE_SEQ_PARAM)
+      if (type == mtx::hevc::NALU_TYPE_SEQ_PARAM)
         parse_sps(nalu_r);
     }
   }

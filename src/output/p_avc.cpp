@@ -229,14 +229,14 @@ avc_video_packetizer_c::process_nalus(memory_c &data)
     auto const nalu_type = ptr[idx + m_nalu_size_len_dst] & 0x1f;
 
     if (   (static_cast<int>(nalu_size) == m_nalu_size_len_dst) // empty NALU?
-        || mtx::included_in(nalu_type, NALU_TYPE_FILLER_DATA, NALU_TYPE_ACCESS_UNIT)) {
+        || mtx::included_in(nalu_type, mtx::avc::NALU_TYPE_FILLER_DATA, mtx::avc::NALU_TYPE_ACCESS_UNIT)) {
       memory_c::splice(data, idx, nalu_size);
       total_size -= nalu_size;
       ptr         = data.get_buffer();
       continue;
     }
 
-    if (   (nalu_type == NALU_TYPE_SEQ_PARAM)
+    if (   (nalu_type == mtx::avc::NALU_TYPE_SEQ_PARAM)
         && m_ti.m_fix_bitstream_frame_rate
         && (-1 != m_track_default_duration)) {
       mxdebug_if(m_debug_fix_bistream_timing_info, fmt::format("fix_bitstream_timing_info [NALU]: m_track_default_duration {0}\n", m_track_default_duration));

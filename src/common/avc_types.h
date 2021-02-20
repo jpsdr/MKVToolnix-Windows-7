@@ -16,36 +16,36 @@
 
 #include "common/common_pch.h"
 
-#define NALU_START_CODE 0x00000001
-
-#define NALU_TYPE_NON_IDR_SLICE  0x01
-#define NALU_TYPE_DP_A_SLICE     0x02
-#define NALU_TYPE_DP_B_SLICE     0x03
-#define NALU_TYPE_DP_C_SLICE     0x04
-#define NALU_TYPE_IDR_SLICE      0x05
-#define NALU_TYPE_SEI            0x06
-#define NALU_TYPE_SEQ_PARAM      0x07
-#define NALU_TYPE_PIC_PARAM      0x08
-#define NALU_TYPE_ACCESS_UNIT    0x09
-#define NALU_TYPE_END_OF_SEQ     0x0a
-#define NALU_TYPE_END_OF_STREAM  0x0b
-#define NALU_TYPE_FILLER_DATA    0x0c
-
-#define AVC_SLICE_TYPE_P   0
-#define AVC_SLICE_TYPE_B   1
-#define AVC_SLICE_TYPE_I   2
-#define AVC_SLICE_TYPE_SP  3
-#define AVC_SLICE_TYPE_SI  4
-#define AVC_SLICE_TYPE2_P  5
-#define AVC_SLICE_TYPE2_B  6
-#define AVC_SLICE_TYPE2_I  7
-#define AVC_SLICE_TYPE2_SP 8
-#define AVC_SLICE_TYPE2_SI 9
-
-#define AVC_EXTENDED_SAR        0xff
-#define AVC_NUM_PREDEFINED_PARS   17
-
 namespace mtx::avc {
+
+constexpr auto NALU_START_CODE         = 0x00000001;
+
+constexpr auto NALU_TYPE_NON_IDR_SLICE = 0x01;
+constexpr auto NALU_TYPE_DP_A_SLICE    = 0x02;
+constexpr auto NALU_TYPE_DP_B_SLICE    = 0x03;
+constexpr auto NALU_TYPE_DP_C_SLICE    = 0x04;
+constexpr auto NALU_TYPE_IDR_SLICE     = 0x05;
+constexpr auto NALU_TYPE_SEI           = 0x06;
+constexpr auto NALU_TYPE_SEQ_PARAM     = 0x07;
+constexpr auto NALU_TYPE_PIC_PARAM     = 0x08;
+constexpr auto NALU_TYPE_ACCESS_UNIT   = 0x09;
+constexpr auto NALU_TYPE_END_OF_SEQ    = 0x0a;
+constexpr auto NALU_TYPE_END_OF_STREAM = 0x0b;
+constexpr auto NALU_TYPE_FILLER_DATA   = 0x0c;
+
+constexpr auto SLICE_TYPE_P            = 0;
+constexpr auto SLICE_TYPE_B            = 1;
+constexpr auto SLICE_TYPE_I            = 2;
+constexpr auto SLICE_TYPE_SP           = 3;
+constexpr auto SLICE_TYPE_SI           = 4;
+constexpr auto SLICE_TYPE2_P           = 5;
+constexpr auto SLICE_TYPE2_B           = 6;
+constexpr auto SLICE_TYPE2_I           = 7;
+constexpr auto SLICE_TYPE2_SP          = 8;
+constexpr auto SLICE_TYPE2_SI          = 9;
+
+constexpr auto EXTENDED_SAR            = 0xff;
+constexpr auto NUM_PREDEFINED_PARS     = 17;
 
 struct timing_info_t {
   unsigned int num_units_in_tick, time_scale;

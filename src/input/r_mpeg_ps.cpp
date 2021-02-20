@@ -511,7 +511,7 @@ mpeg_ps_reader_c::new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id,
     }
 
     marker = get_uint32_be(buffer.get_buffer());
-    if (NALU_START_CODE == marker) {
+    if (mtx::avc::NALU_START_CODE == marker) {
       m_in->restore_pos();
       new_stream_v_avc(id, buf, length, track);
       return;
@@ -531,23 +531,23 @@ mpeg_ps_reader_c::new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id,
           int type = marker & 0x1f;
 
           switch (type) {
-            case NALU_TYPE_SEQ_PARAM:
+            case mtx::avc::NALU_TYPE_SEQ_PARAM:
               avc_seq_param_found   = true;
               break;
 
-            case NALU_TYPE_PIC_PARAM:
+            case mtx::avc::NALU_TYPE_PIC_PARAM:
               avc_pic_param_found   = true;
               break;
 
-            case NALU_TYPE_NON_IDR_SLICE:
-            case NALU_TYPE_DP_A_SLICE:
-            case NALU_TYPE_DP_B_SLICE:
-            case NALU_TYPE_DP_C_SLICE:
-            case NALU_TYPE_IDR_SLICE:
+            case mtx::avc::NALU_TYPE_NON_IDR_SLICE:
+            case mtx::avc::NALU_TYPE_DP_A_SLICE:
+            case mtx::avc::NALU_TYPE_DP_B_SLICE:
+            case mtx::avc::NALU_TYPE_DP_C_SLICE:
+            case mtx::avc::NALU_TYPE_IDR_SLICE:
               avc_slice_found       = true;
               break;
 
-            case NALU_TYPE_ACCESS_UNIT:
+            case mtx::avc::NALU_TYPE_ACCESS_UNIT:
               avc_access_unit_found = true;
               break;
           }

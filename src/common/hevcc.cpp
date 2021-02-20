@@ -180,13 +180,13 @@ hevcc_c::parse_sei_list() {
   mtx::bits::writer_c w{};
 
   w.put_bits(1, 0); // forbidden_zero_bit
-  w.put_bits(6, HEVC_NALU_TYPE_PREFIX_SEI); // nal_unit_type
+  w.put_bits(6, NALU_TYPE_PREFIX_SEI); // nal_unit_type
   w.put_bits(6, 0); // nuh_reserved_zero_6bits
   w.put_bits(3, 1); // nuh_temporal_id_plus1
 
   for (iter = m_user_data.begin(); iter != m_user_data.end(); ++iter) {
     int payload_size = iter->second.size();
-    w.put_bits(8, HEVC_SEI_USER_DATA_UNREGISTERED);
+    w.put_bits(8, SEI_USER_DATA_UNREGISTERED);
     while (payload_size >= 255) {
       w.put_bits(8, 255);
       payload_size -= 255;
@@ -352,13 +352,13 @@ hevcc_c::pack() {
   w.put_bits(8, num_arrays);
 
   if (m_vps_list.size())
-    write_list(m_vps_list, HEVC_NALU_TYPE_VIDEO_PARAM);
+    write_list(m_vps_list, NALU_TYPE_VIDEO_PARAM);
   if (m_sps_list.size())
-    write_list(m_sps_list, HEVC_NALU_TYPE_SEQ_PARAM);
+    write_list(m_sps_list, NALU_TYPE_SEQ_PARAM);
   if (m_pps_list.size())
-    write_list(m_pps_list, HEVC_NALU_TYPE_PIC_PARAM);
+    write_list(m_pps_list, NALU_TYPE_PIC_PARAM);
   if (m_sei_list.size())
-    write_list(m_sei_list, HEVC_NALU_TYPE_PREFIX_SEI);
+    write_list(m_sei_list, NALU_TYPE_PREFIX_SEI);
 
   return w.get_buffer();
 }
@@ -437,10 +437,10 @@ hevcc_c::unpack(memory_cptr const &mem) {
     while (num_arrays > 0) {
       auto type           = byte_reader.read_uint8() & 0x3F;
       auto nal_unit_count = byte_reader.read_uint16_be();
-      auto &list          = type == HEVC_NALU_TYPE_VIDEO_PARAM ? hevcc.m_vps_list
-                          : type == HEVC_NALU_TYPE_SEQ_PARAM   ? hevcc.m_sps_list
-                          : type == HEVC_NALU_TYPE_PIC_PARAM   ? hevcc.m_pps_list
-                          :                                      hevcc.m_sei_list;
+      auto &list          = type == NALU_TYPE_VIDEO_PARAM ? hevcc.m_vps_list
+                          : type == NALU_TYPE_SEQ_PARAM   ? hevcc.m_sps_list
+                          : type == NALU_TYPE_PIC_PARAM   ? hevcc.m_pps_list
+                          :                                 hevcc.m_sei_list;
 
       while (nal_unit_count) {
         auto size = byte_reader.read_uint16_be();

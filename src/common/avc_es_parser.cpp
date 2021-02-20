@@ -309,12 +309,12 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     return;
   }
 
-  bool is_i_slice =  (AVC_SLICE_TYPE_I   == si.type)
-                  || (AVC_SLICE_TYPE2_I  == si.type)
-                  || (AVC_SLICE_TYPE_SI  == si.type)
-                  || (AVC_SLICE_TYPE2_SI == si.type);
-  bool is_b_slice =  (AVC_SLICE_TYPE_B   == si.type)
-                  || (AVC_SLICE_TYPE2_B  == si.type);
+  bool is_i_slice =  (SLICE_TYPE_I   == si.type)
+                  || (SLICE_TYPE2_I  == si.type)
+                  || (SLICE_TYPE_SI  == si.type)
+                  || (SLICE_TYPE2_SI == si.type);
+  bool is_b_slice =  (SLICE_TYPE_B   == si.type)
+                  || (SLICE_TYPE2_B  == si.type);
 
   m_incomplete_frame.m_si       =  si;
   m_incomplete_frame.m_keyframe =  m_recovery_point_valid
@@ -705,10 +705,10 @@ es_parser_c::calculate_frame_order() {
 
   m_simple_picture_order      = false;
 
-  if (   (   (AVC_SLICE_TYPE_I   != idr.type)
-          && (AVC_SLICE_TYPE_SI  != idr.type)
-          && (AVC_SLICE_TYPE2_I  != idr.type)
-          && (AVC_SLICE_TYPE2_SI != idr.type))
+  if (   (   (SLICE_TYPE_I   != idr.type)
+          && (SLICE_TYPE_SI  != idr.type)
+          && (SLICE_TYPE2_I  != idr.type)
+          && (SLICE_TYPE2_SI != idr.type))
       || (0 == idr.nal_ref_idc)
       || (0 != sps.pic_order_cnt_type)) {
     m_simple_picture_order = true;

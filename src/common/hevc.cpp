@@ -32,7 +32,7 @@ namespace mtx::hevc {
 
 static const struct {
   int numerator, denominator;
-} s_predefined_pars[HEVC_NUM_PREDEFINED_PARS] = {
+} s_predefined_pars[NUM_PREDEFINED_PARS] = {
   {   0,  0 },
   {   1,  1 },
   {  12, 11 },
@@ -358,7 +358,7 @@ vui_parameters_copy(mtx::bits::reader_c &r,
 
     sps.ar_found = true;
 
-    if (HEVC_EXTENDED_SAR == ar_type) {
+    if (EXTENDED_SAR == ar_type) {
       sps.par_num = r.get_bits(16); // sar_width
       sps.par_den = r.get_bits(16); // sar_height
 
@@ -367,7 +367,7 @@ vui_parameters_copy(mtx::bits::reader_c &r,
         w.put_bits(16, sps.par_num);
         w.put_bits(16, sps.par_den);
       }
-    } else if (HEVC_NUM_PREDEFINED_PARS >= ar_type) {
+    } else if (NUM_PREDEFINED_PARS >= ar_type) {
       sps.par_num = s_predefined_pars[ar_type].numerator;
       sps.par_den = s_predefined_pars[ar_type].denominator;
     }
@@ -504,7 +504,7 @@ parse_vps(memory_cptr const &buffer,
   vps.clear();
 
   w.copy_bits(1, r);            // forbidden_zero_bit
-  if (w.copy_bits(6, r) != HEVC_NALU_TYPE_VIDEO_PARAM)  // nal_unit_type
+  if (w.copy_bits(6, r) != NALU_TYPE_VIDEO_PARAM)  // nal_unit_type
     return false;
   w.copy_bits(6, r);            // nuh_reserved_zero_6bits
   w.copy_bits(3, r);            // nuh_temporal_id_plus1
@@ -582,7 +582,7 @@ parse_sps(memory_cptr const &buffer,
   sps.ar_found = false;
 
   w.copy_bits(1, r);            // forbidden_zero_bit
-  if (w.copy_bits(6, r) != HEVC_NALU_TYPE_SEQ_PARAM)  // nal_unit_type
+  if (w.copy_bits(6, r) != NALU_TYPE_SEQ_PARAM)  // nal_unit_type
     return {};
   w.copy_bits(6, r);            // nuh_reserved_zero_6bits
   w.copy_bits(3, r);            // nuh_temporal_id_plus1
@@ -711,7 +711,7 @@ parse_pps(memory_cptr const &buffer,
     pps.clear();
 
     r.skip_bits(1);                                // forbidden_zero_bit
-    if (r.get_bits(6) != HEVC_NALU_TYPE_PIC_PARAM) // nal_unit_type
+    if (r.get_bits(6) != NALU_TYPE_PIC_PARAM) // nal_unit_type
       return false;
     r.skip_bits(6);             // nuh_reserved_zero_6bits
     r.skip_bits(3);             // nuh_temporal_id_plus1
@@ -744,7 +744,7 @@ parse_sei(memory_cptr const &buffer,
     unsigned int payload_size = 0;
 
     r.skip_bits(1);                                 // forbidden_zero_bit
-    if (r.get_bits(6) != HEVC_NALU_TYPE_PREFIX_SEI) // nal_unit_type
+    if (r.get_bits(6) != NALU_TYPE_PREFIX_SEI) // nal_unit_type
       return false;
     r.skip_bits(6);             // nuh_reserved_zero_6bits
     r.skip_bits(3);             // nuh_temporal_id_plus1
@@ -797,7 +797,7 @@ handle_sei_payload(mm_mem_io_c &byte_reader,
   uint64 file_pos = byte_reader.getFilePointer();
 
   uuid.resize(16);
-  if (sei_payload_type == HEVC_SEI_USER_DATA_UNREGISTERED) {
+  if (sei_payload_type == SEI_USER_DATA_UNREGISTERED) {
     if (sei_payload_size >= 16) {
       byte_reader.read(&uuid[0], 16); // uuid
 

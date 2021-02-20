@@ -15,108 +15,108 @@
 
 #include "common/common_pch.h"
 
-#define NALU_START_CODE 0x00000001
+namespace mtx::hevc {
+
+constexpr auto NALU_START_CODE                          = 0x00000001;
 
 // VCL NALs
-#define HEVC_NALU_TYPE_TRAIL_N        0
-#define HEVC_NALU_TYPE_TRAIL_R        1
-#define HEVC_NALU_TYPE_TSA_N          2
-#define HEVC_NALU_TYPE_TSA_R          3
-#define HEVC_NALU_TYPE_STSA_N         4
-#define HEVC_NALU_TYPE_STSA_R         5
-#define HEVC_NALU_TYPE_RADL_N         6
-#define HEVC_NALU_TYPE_RADL_R         7
-#define HEVC_NALU_TYPE_RASL_N         8
-#define HEVC_NALU_TYPE_RASL_R         9
-#define HEVC_NALU_TYPE_RSV_VCL_N10    10
-#define HEVC_NALU_TYPE_RSV_VCL_N12    12
-#define HEVC_NALU_TYPE_RSV_VCL_N14    14
-#define HEVC_NALU_TYPE_RSV_VCL_R11    11
-#define HEVC_NALU_TYPE_RSV_VCL_R13    13
-#define HEVC_NALU_TYPE_RSV_VCL_R15    15
-#define HEVC_NALU_TYPE_BLA_W_LP       16
-#define HEVC_NALU_TYPE_BLA_W_RADL     17
-#define HEVC_NALU_TYPE_BLA_N_LP       18
-#define HEVC_NALU_TYPE_IDR_W_RADL     19
-#define HEVC_NALU_TYPE_IDR_N_LP       20
-#define HEVC_NALU_TYPE_CRA_NUT        21
-#define HEVC_NALU_TYPE_RSV_RAP_VCL22  22
-#define HEVC_NALU_TYPE_RSV_RAP_VCL23  23
-#define HEVC_NALU_TYPE_RSV_VCL24      24
-#define HEVC_NALU_TYPE_RSV_VCL25      25
-#define HEVC_NALU_TYPE_RSV_VCL26      26
-#define HEVC_NALU_TYPE_RSV_VCL27      27
-#define HEVC_NALU_TYPE_RSV_VCL28      28
-#define HEVC_NALU_TYPE_RSV_VCL29      29
-#define HEVC_NALU_TYPE_RSV_VCL30      30
-#define HEVC_NALU_TYPE_RSV_VCL31      31
+constexpr auto NALU_TYPE_TRAIL_N                        = 0;
+constexpr auto NALU_TYPE_TRAIL_R                        = 1;
+constexpr auto NALU_TYPE_TSA_N                          = 2;
+constexpr auto NALU_TYPE_TSA_R                          = 3;
+constexpr auto NALU_TYPE_STSA_N                         = 4;
+constexpr auto NALU_TYPE_STSA_R                         = 5;
+constexpr auto NALU_TYPE_RADL_N                         = 6;
+constexpr auto NALU_TYPE_RADL_R                         = 7;
+constexpr auto NALU_TYPE_RASL_N                         = 8;
+constexpr auto NALU_TYPE_RASL_R                         = 9;
+constexpr auto NALU_TYPE_RSV_VCL_N10                    = 10;
+constexpr auto NALU_TYPE_RSV_VCL_N12                    = 12;
+constexpr auto NALU_TYPE_RSV_VCL_N14                    = 14;
+constexpr auto NALU_TYPE_RSV_VCL_R11                    = 11;
+constexpr auto NALU_TYPE_RSV_VCL_R13                    = 13;
+constexpr auto NALU_TYPE_RSV_VCL_R15                    = 15;
+constexpr auto NALU_TYPE_BLA_W_LP                       = 16;
+constexpr auto NALU_TYPE_BLA_W_RADL                     = 17;
+constexpr auto NALU_TYPE_BLA_N_LP                       = 18;
+constexpr auto NALU_TYPE_IDR_W_RADL                     = 19;
+constexpr auto NALU_TYPE_IDR_N_LP                       = 20;
+constexpr auto NALU_TYPE_CRA_NUT                        = 21;
+constexpr auto NALU_TYPE_RSV_RAP_VCL22                  = 22;
+constexpr auto NALU_TYPE_RSV_RAP_VCL23                  = 23;
+constexpr auto NALU_TYPE_RSV_VCL24                      = 24;
+constexpr auto NALU_TYPE_RSV_VCL25                      = 25;
+constexpr auto NALU_TYPE_RSV_VCL26                      = 26;
+constexpr auto NALU_TYPE_RSV_VCL27                      = 27;
+constexpr auto NALU_TYPE_RSV_VCL28                      = 28;
+constexpr auto NALU_TYPE_RSV_VCL29                      = 29;
+constexpr auto NALU_TYPE_RSV_VCL30                      = 30;
+constexpr auto NALU_TYPE_RSV_VCL31                      = 31;
 
 //Non-VCL NALs
-#define HEVC_NALU_TYPE_VIDEO_PARAM    32
-#define HEVC_NALU_TYPE_SEQ_PARAM      33
-#define HEVC_NALU_TYPE_PIC_PARAM      34
-#define HEVC_NALU_TYPE_ACCESS_UNIT    35
-#define HEVC_NALU_TYPE_END_OF_SEQ     36
-#define HEVC_NALU_TYPE_END_OF_STREAM  37
-#define HEVC_NALU_TYPE_FILLER_DATA    38
-#define HEVC_NALU_TYPE_PREFIX_SEI     39
-#define HEVC_NALU_TYPE_SUFFIX_SEI     40
-#define HEVC_NALU_TYPE_RSV_NVCL41     41
-#define HEVC_NALU_TYPE_RSV_NVCL42     42
-#define HEVC_NALU_TYPE_RSV_NVCL43     43
-#define HEVC_NALU_TYPE_RSV_NVCL44     44
-#define HEVC_NALU_TYPE_RSV_NVCL45     45
-#define HEVC_NALU_TYPE_RSV_NVCL46     46
-#define HEVC_NALU_TYPE_RSV_NVCL47     47
-#define HEVC_NALU_TYPE_UNSPEC48       48
-#define HEVC_NALU_TYPE_UNSPEC49       49
-#define HEVC_NALU_TYPE_UNSPEC50       50
-#define HEVC_NALU_TYPE_UNSPEC51       51
-#define HEVC_NALU_TYPE_UNSPEC52       52
-#define HEVC_NALU_TYPE_UNSPEC53       53
-#define HEVC_NALU_TYPE_UNSPEC54       54
-#define HEVC_NALU_TYPE_UNSPEC55       55
-#define HEVC_NALU_TYPE_UNSPEC56       56
-#define HEVC_NALU_TYPE_UNSPEC57       57
-#define HEVC_NALU_TYPE_UNSPEC58       58
-#define HEVC_NALU_TYPE_UNSPEC59       59
-#define HEVC_NALU_TYPE_UNSPEC60       60
-#define HEVC_NALU_TYPE_UNSPEC61       61
-#define HEVC_NALU_TYPE_UNSPEC62       62
-#define HEVC_NALU_TYPE_UNSPEC63       63
+constexpr auto NALU_TYPE_VIDEO_PARAM                    = 32;
+constexpr auto NALU_TYPE_SEQ_PARAM                      = 33;
+constexpr auto NALU_TYPE_PIC_PARAM                      = 34;
+constexpr auto NALU_TYPE_ACCESS_UNIT                    = 35;
+constexpr auto NALU_TYPE_END_OF_SEQ                     = 36;
+constexpr auto NALU_TYPE_END_OF_STREAM                  = 37;
+constexpr auto NALU_TYPE_FILLER_DATA                    = 38;
+constexpr auto NALU_TYPE_PREFIX_SEI                     = 39;
+constexpr auto NALU_TYPE_SUFFIX_SEI                     = 40;
+constexpr auto NALU_TYPE_RSV_NVCL41                     = 41;
+constexpr auto NALU_TYPE_RSV_NVCL42                     = 42;
+constexpr auto NALU_TYPE_RSV_NVCL43                     = 43;
+constexpr auto NALU_TYPE_RSV_NVCL44                     = 44;
+constexpr auto NALU_TYPE_RSV_NVCL45                     = 45;
+constexpr auto NALU_TYPE_RSV_NVCL46                     = 46;
+constexpr auto NALU_TYPE_RSV_NVCL47                     = 47;
+constexpr auto NALU_TYPE_UNSPEC48                       = 48;
+constexpr auto NALU_TYPE_UNSPEC49                       = 49;
+constexpr auto NALU_TYPE_UNSPEC50                       = 50;
+constexpr auto NALU_TYPE_UNSPEC51                       = 51;
+constexpr auto NALU_TYPE_UNSPEC52                       = 52;
+constexpr auto NALU_TYPE_UNSPEC53                       = 53;
+constexpr auto NALU_TYPE_UNSPEC54                       = 54;
+constexpr auto NALU_TYPE_UNSPEC55                       = 55;
+constexpr auto NALU_TYPE_UNSPEC56                       = 56;
+constexpr auto NALU_TYPE_UNSPEC57                       = 57;
+constexpr auto NALU_TYPE_UNSPEC58                       = 58;
+constexpr auto NALU_TYPE_UNSPEC59                       = 59;
+constexpr auto NALU_TYPE_UNSPEC60                       = 60;
+constexpr auto NALU_TYPE_UNSPEC61                       = 61;
+constexpr auto NALU_TYPE_UNSPEC62                       = 62;
+constexpr auto NALU_TYPE_UNSPEC63                       = 63;
 
-#define HEVC_SEI_BUFFERING_PERIOD                      0
-#define HEVC_SEI_PICTURE_TIMING                        1
-#define HEVC_SEI_PAN_SCAN_RECT                         2
-#define HEVC_SEI_FILLER_PAYLOAD                        3
-#define HEVC_SEI_USER_DATA_REGISTERED_ITU_T_T35        4
-#define HEVC_SEI_USER_DATA_UNREGISTERED                5
-#define HEVC_SEI_RECOVERY_POINT                        6
-#define HEVC_SEI_SCENE_INFO                            9
-#define HEVC_SEI_FULL_FRAME_SNAPSHOT                   15
-#define HEVC_SEI_PROGRESSIVE_REFINEMENT_SEGMENT_START  16
-#define HEVC_SEI_PROGRESSIVE_REFINEMENT_SEGMENT_END    17
-#define HEVC_SEI_FILM_GRAIN_CHARACTERISTICS            19
-#define HEVC_SEI_POST_FILTER_HINT                      22
-#define HEVC_SEI_TONE_MAPPING_INFO                     23
-#define HEVC_SEI_FRAME_PACKING                         45
-#define HEVC_SEI_DISPLAY_ORIENTATION                   47
-#define HEVC_SEI_SOP_DESCRIPTION                       128
-#define HEVC_SEI_ACTIVE_PARAMETER_SETS                 129
-#define HEVC_SEI_DECODING_UNIT_INFO                    130
-#define HEVC_SEI_TEMPORAL_LEVEL0_INDEX                 131
-#define HEVC_SEI_DECODED_PICTURE_HASH                  132
-#define HEVC_SEI_SCALABLE_NESTING                      133
-#define HEVC_SEI_REGION_REFRESH_INFO                   134
+constexpr auto SEI_BUFFERING_PERIOD                     = 0;
+constexpr auto SEI_PICTURE_TIMING                       = 1;
+constexpr auto SEI_PAN_SCAN_RECT                        = 2;
+constexpr auto SEI_FILLER_PAYLOAD                       = 3;
+constexpr auto SEI_USER_DATA_REGISTERED_ITU_T_T35       = 4;
+constexpr auto SEI_USER_DATA_UNREGISTERED               = 5;
+constexpr auto SEI_RECOVERY_POINT                       = 6;
+constexpr auto SEI_SCENE_INFO                           = 9;
+constexpr auto SEI_FULL_FRAME_SNAPSHOT                  = 15;
+constexpr auto SEI_PROGRESSIVE_REFINEMENT_SEGMENT_START = 16;
+constexpr auto SEI_PROGRESSIVE_REFINEMENT_SEGMENT_END   = 17;
+constexpr auto SEI_FILM_GRAIN_CHARACTERISTICS           = 19;
+constexpr auto SEI_POST_FILTER_HINT                     = 22;
+constexpr auto SEI_TONE_MAPPING_INFO                    = 23;
+constexpr auto SEI_FRAME_PACKING                        = 45;
+constexpr auto SEI_DISPLAY_ORIENTATION                  = 47;
+constexpr auto SEI_SOP_DESCRIPTION                      = 128;
+constexpr auto SEI_ACTIVE_PARAMETER_SETS                = 129;
+constexpr auto SEI_DECODING_UNIT_INFO                   = 130;
+constexpr auto SEI_TEMPORAL_LEVEL0_INDEX                = 131;
+constexpr auto SEI_DECODED_PICTURE_HASH                 = 132;
+constexpr auto SEI_SCALABLE_NESTING                     = 133;
+constexpr auto SEI_REGION_REFRESH_INFO                  = 134;
 
-#define HEVC_SLICE_TYPE_P   0
-#define HEVC_SLICE_TYPE_B   1
-#define HEVC_SLICE_TYPE_I   2
+constexpr auto SLICE_TYPE_P                             = 0;
+constexpr auto SLICE_TYPE_B                             = 1;
+constexpr auto SLICE_TYPE_I                             = 2;
 
-#define HEVC_EXTENDED_SAR        0xff
-#define HEVC_NUM_PREDEFINED_PARS   17
-
-namespace mtx::hevc {
+constexpr auto EXTENDED_SAR                             = 0xff;
+constexpr auto NUM_PREDEFINED_PARS                      = 17;
 
 struct frame_t;
 struct par_extraction_t;

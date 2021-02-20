@@ -39,7 +39,7 @@ static auto s_debug_remove_bistream_ar_info   = debugging_option_c{"avc_parser|r
 
 static const struct {
   int numerator, denominator;
-} s_predefined_pars[AVC_NUM_PREDEFINED_PARS] = {
+} s_predefined_pars[NUM_PREDEFINED_PARS] = {
   {   0,  0 },
   {   1,  1 },
   {  12, 11 },
@@ -362,7 +362,7 @@ parse_sps(memory_cptr const &buffer,
 
       sps.ar_found = true;
 
-      if (AVC_EXTENDED_SAR == ar_type) {
+      if (EXTENDED_SAR == ar_type) {
         sps.par_num = r.get_bits(16);
         sps.par_den = r.get_bits(16);
 
@@ -371,7 +371,7 @@ parse_sps(memory_cptr const &buffer,
           w.put_bits(16, sps.par_den);
         }
 
-      } else if (AVC_NUM_PREDEFINED_PARS >= ar_type) {
+      } else if (NUM_PREDEFINED_PARS >= ar_type) {
         sps.par_num = s_predefined_pars[ar_type].numerator;
         sps.par_den = s_predefined_pars[ar_type].denominator;
 

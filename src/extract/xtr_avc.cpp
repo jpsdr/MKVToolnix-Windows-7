@@ -70,22 +70,22 @@ xtr_avc_c::need_to_write_access_unit_delimiter(unsigned char *buffer,
 
     mxdebug_if(m_debug_access_unit_delimiters, fmt::format(" type {0}\n", static_cast<unsigned int>(type)));
 
-    if (type == NALU_TYPE_SEQ_PARAM) {
+    if (type == mtx::avc::NALU_TYPE_SEQ_PARAM) {
       m_parser.handle_sps_nalu(nalu);
       continue;
     }
 
-    if (type == NALU_TYPE_PIC_PARAM) {
+    if (type == mtx::avc::NALU_TYPE_PIC_PARAM) {
       m_parser.handle_pps_nalu(nalu);
       continue;
     }
 
-    if (type == NALU_TYPE_ACCESS_UNIT) {
+    if (type == mtx::avc::NALU_TYPE_ACCESS_UNIT) {
       have_aud = true;
       continue;
     }
 
-    if (!mtx::included_in(type, NALU_TYPE_IDR_SLICE, NALU_TYPE_NON_IDR_SLICE, NALU_TYPE_DP_A_SLICE, NALU_TYPE_DP_B_SLICE, NALU_TYPE_DP_C_SLICE))
+    if (!mtx::included_in(type, mtx::avc::NALU_TYPE_IDR_SLICE, mtx::avc::NALU_TYPE_NON_IDR_SLICE, mtx::avc::NALU_TYPE_DP_A_SLICE, mtx::avc::NALU_TYPE_DP_B_SLICE, mtx::avc::NALU_TYPE_DP_C_SLICE))
       continue;
 
     if (have_aud) {
@@ -93,7 +93,7 @@ xtr_avc_c::need_to_write_access_unit_delimiter(unsigned char *buffer,
       return false;
     }
 
-    if (type != NALU_TYPE_IDR_SLICE) {
+    if (type != mtx::avc::NALU_TYPE_IDR_SLICE) {
       m_previous_idr_pic_id.reset();
       return false;
     }
