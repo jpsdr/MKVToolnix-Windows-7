@@ -72,7 +72,6 @@ protected:
 };
 
 #define YT(s) translatable_string_c(s)
-#define TSV(...) std::vector<translatable_string_c>{__VA_ARGS__}
 
 inline std::ostream &
 operator <<(std::ostream &out,

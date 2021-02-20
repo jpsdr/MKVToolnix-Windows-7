@@ -62,10 +62,11 @@ extract_cli_parser_c::init_parser() {
 
   add_separator();
 
-  add_information(TSV(YT("The first argument must be the name of source file."),
-                      YT("All other arguments either switch to a certain extraction mode, change options for the currently active mode or specify what to extract into which file."),
-                      YT("Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass."),
-                      YT("Most options can only be used in certain modes with a few options applying to all modes.")));
+  add_information(std::vector<translatable_string_c>{
+      YT("The first argument must be the name of source file."),
+      YT("All other arguments either switch to a certain extraction mode, change options for the currently active mode or specify what to extract into which file."),
+      YT("Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass."),
+      YT("Most options can only be used in certain modes with a few options applying to all modes.") });
 
   add_section_header(YT("Global options"));
   OPT("f|parse-fully", set_parse_fully, YT("Parse the whole file instead of relying on the index."));
