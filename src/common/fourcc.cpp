@@ -18,11 +18,20 @@
 #include "common/endian.h"
 #include "common/fourcc.h"
 
-static uint32_t
+namespace {
+
+uint32_t
 val(uint32_t value,
     fourcc_c::byte_order_e byte_order) {
   return fourcc_c::byte_order_e::big_endian == byte_order ? value : mtx::bytes::swap_32(value);
 }
+
+char
+printable_char(unsigned char c) {
+  return (32 <= c) && (127 > c) ? static_cast<char>(c) : '?';
+}
+
+} // anonymous namespace
 
 fourcc_c::fourcc_c()
   : m_value{}
@@ -129,23 +138,19 @@ fourcc_c::str()
   return std::string{buffer, 4};
 }
 
-#define C(idx) ((32 <= buffer[idx]) && (127 > buffer[idx]) ? static_cast<char>(buffer[idx]) : '?')
-
 std::string
 fourcc_c::description()
   const {
   unsigned char buffer[4];
   put_uint32_be(buffer, m_value);
 
-  auto result = fmt::format("0x{0:08x} \"{1}{2}{3}{4}\"", m_value, C(0), C(1), C(2), C(3));
+  auto result = fmt::format("0x{0:08x} \"{1}{2}{3}{4}\"", m_value, printable_char(buffer[0]), printable_char(buffer[1]), printable_char(buffer[2]), printable_char(buffer[3]));
   auto codec  = codec_c::look_up(*this);
   if (codec.valid())
     result += fmt::format(": {0}", codec.get_name());
 
   return result;
 }
-
-#undef C
 
 fourcc_c::operator bool()
   const {
