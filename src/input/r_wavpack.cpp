@@ -26,7 +26,7 @@
 
 bool
 wavpack_reader_c::probe_file() {
-  if (m_in->read(&header, sizeof(wavpack_header_t)) != sizeof(wavpack_header_t))
+  if (m_in->read(&header, sizeof(mtx::wavpack::header_t)) != sizeof(mtx::wavpack::header_t))
     return false;
 
   if (memcmp(header.ck_id, "wvpk", 4) != 0)
@@ -39,26 +39,26 @@ wavpack_reader_c::probe_file() {
 void
 wavpack_reader_c::read_headers() {
   try {
-    int packet_size = wv_parse_frame(*m_in, header, meta, true, true);
+    int packet_size = mtx::wavpack::parse_frame(*m_in, header, meta, true, true);
     if (0 > packet_size)
       mxerror_fn(m_ti.m_fname, Y("The file header was not read correctly.\n"));
   } catch (...) {
     throw mtx::input::open_x();
   }
 
-  m_in->setFilePointer(m_in->getFilePointer() - sizeof(wavpack_header_t));
+  m_in->setFilePointer(m_in->getFilePointer() - sizeof(mtx::wavpack::header_t));
 
   // correction file if applies
   meta.has_correction = false;
 
   try {
-    if (header.flags & WV_HYBRID_FLAG) {
+    if (header.flags & mtx::wavpack::HYBRID_FLAG) {
       m_in_correc = mm_file_io_c::open(m_ti.m_fname + "c");
-      int packet_size = wv_parse_frame(*m_in_correc, header_correc, meta_correc, true, true);
+      int packet_size = mtx::wavpack::parse_frame(*m_in_correc, header_correc, meta_correc, true, true);
       if (0 > packet_size)
         mxerror_fn(m_ti.m_fname, Y("The correction file header was not read correctly.\n"));
 
-      m_in_correc->setFilePointer(m_in_correc->getFilePointer() - sizeof(wavpack_header_t));
+      m_in_correc->setFilePointer(m_in_correc->getFilePointer() - sizeof(mtx::wavpack::header_t));
       meta.has_correction = true;
     }
   } catch (...) {
@@ -89,8 +89,8 @@ wavpack_reader_c::create_packetizer(int64_t) {
 file_status_e
 wavpack_reader_c::read(generic_packetizer_c *,
                        bool) {
-  wavpack_header_t dummy_header, dummy_header_correc;
-  wavpack_meta_t dummy_meta;
+  mtx::wavpack::header_t dummy_header, dummy_header_correc;
+  mtx::wavpack::meta_t dummy_meta;
   uint64_t initial_position = m_in->getFilePointer();
   uint8_t *chunk, *databuffer;
 
@@ -101,7 +101,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
   dummy_meta.channel_count = 0;
   while (dummy_meta.channel_count < meta.channel_count) {
     extra_frames_number++;
-    block_size = wv_parse_frame(*m_in, dummy_header, dummy_meta, false, false);
+    block_size = mtx::wavpack::parse_frame(*m_in, dummy_header, dummy_meta, false, false);
     if (-1 == block_size)
       return flush_packetizers();
     data_size += block_size;
@@ -124,8 +124,8 @@ wavpack_reader_c::read(generic_packetizer_c *,
   dummy_meta.channel_count = 0;
   databuffer               = &chunk[4];
   while (dummy_meta.channel_count < meta.channel_count) {
-    block_size = wv_parse_frame(*m_in, dummy_header, dummy_meta, false, false);
-    put_uint32_le(databuffer, dummy_header.flags & ~WV_HAS_CHECKSUM);
+    block_size = mtx::wavpack::parse_frame(*m_in, dummy_header, dummy_meta, false, false);
+    put_uint32_le(databuffer, dummy_header.flags & ~mtx::wavpack::HAS_CHECKSUM);
     databuffer += 4;
     put_uint32_le(databuffer, dummy_header.crc);
     databuffer += 4;
@@ -140,7 +140,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
     // If the WavPack block contains a trailing checksum (added for WavPack 5) then delete it here because it's
     // useless without the included 32-byte WavPack header. This also applies to the correction block below.
 
-    truncate_bytes = (dummy_header.flags & WV_HAS_CHECKSUM) ? wv_checksum_byte_count (databuffer, block_size) : 0;
+    truncate_bytes = (dummy_header.flags & mtx::wavpack::HAS_CHECKSUM) ? mtx::wavpack::checksum_byte_count (databuffer, block_size) : 0;
     if (2 < meta.channel_count)
       put_uint32_le(databuffer - 4, block_size - truncate_bytes);
     databuffer += block_size - truncate_bytes;
@@ -164,7 +164,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
 
     while (dummy_meta.channel_count < meta_correc.channel_count) {
       extra_frames_number++;
-      block_size = wv_parse_frame(*m_in_correc, dummy_header_correc, dummy_meta, false, false);
+      block_size = mtx::wavpack::parse_frame(*m_in_correc, dummy_header_correc, dummy_meta, false, false);
       if (-1 == block_size)
         return flush_packetizers();
       data_size += block_size;
@@ -198,7 +198,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
   databuffer               = chunk_correc;
 
   while (dummy_meta.channel_count < meta_correc.channel_count) {
-    block_size = wv_parse_frame(*m_in_correc, dummy_header_correc, dummy_meta, false, false);
+    block_size = mtx::wavpack::parse_frame(*m_in_correc, dummy_header_correc, dummy_meta, false, false);
     put_uint32_le(databuffer, dummy_header_correc.crc);
     databuffer += 4;
     if (2 < meta_correc.channel_count) {
@@ -208,7 +208,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
     }
     if (m_in_correc->read(databuffer, block_size) != static_cast<size_t>(block_size))
       m_in_correc.reset();
-    truncate_bytes = (dummy_header_correc.flags & WV_HAS_CHECKSUM) ? wv_checksum_byte_count (databuffer, block_size) : 0;
+    truncate_bytes = (dummy_header_correc.flags & mtx::wavpack::HAS_CHECKSUM) ? mtx::wavpack::checksum_byte_count (databuffer, block_size) : 0;
     if (2 < meta_correc.channel_count)
       put_uint32_le(databuffer - 4, block_size - truncate_bytes);
     databuffer += block_size - truncate_bytes;

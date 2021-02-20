@@ -26,7 +26,7 @@ private:
   bool m_has_correction;
 
 public:
-  wavpack_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, wavpack_meta_t &meta);
+  wavpack_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, mtx::wavpack::meta_t &meta);
 
   virtual int process(packet_cptr packet);
   virtual void set_headers();

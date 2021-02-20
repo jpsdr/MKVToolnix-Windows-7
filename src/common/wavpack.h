@@ -18,12 +18,14 @@
 
 #include "common/mm_io.h"
 
+namespace mtx::wavpack {
+
 /* All integers are little endian. */
 
 #if defined(COMP_MSC)
 #pragma pack(push,1)
 #endif
-struct PACKED_STRUCTURE wavpack_header_t {
+struct PACKED_STRUCTURE header_t {
   char ck_id [4];         // "wvpk"
   uint32_t ck_size;       // size of entire frame (minus 8, of course)
   uint16_t version;       // maximum of 0x410 as of 2016-07-03
@@ -39,47 +41,49 @@ struct PACKED_STRUCTURE wavpack_header_t {
 #pragma pack(pop)
 #endif
 
-struct wavpack_meta_t {
+struct meta_t {
   int channel_count;
   int bits_per_sample;
   uint32_t sample_rate;
   uint32_t samples_per_block;
   bool has_correction;
 
-  wavpack_meta_t();
+  meta_t();
 };
 
 // or-values for "flags"
 
-#define WV_BYTES_STORED    3    // 1-4 bytes/sample
-#define WV_MONO_FLAG       4    // not stereo
-#define WV_HYBRID_FLAG     8    // hybrid mode
-#define WV_JOINT_STEREO    0x10 // joint stereo
-#define WV_CROSS_DECORR    0x20 // no-delay cross decorrelation
-#define WV_HYBRID_SHAPE    0x40 // noise shape (hybrid mode only)
-#define WV_FLOAT_DATA      0x80 // ieee 32-bit floating point data
+constexpr auto BYTES_STORED   = 3;          // 1-4 bytes/sample
+constexpr auto MONO_FLAG      = 4;          // not stereo
+constexpr auto HYBRID_FLAG    = 8;          // hybrid mode
+constexpr auto JOINT_STEREO   = 0x10;       // joint stereo
+constexpr auto CROSS_DECORR   = 0x20;       // no-delay cross decorrelation
+constexpr auto HYBRID_SHAPE   = 0x40;       // noise shape (hybrid mode only)
+constexpr auto FLOAT_DATA     = 0x80;       // ieee 32-bit floating point data
 
-#define WV_INT32_DATA      0x100  // special extended int handling
-#define WV_HYBRID_BITRATE  0x200  // bitrate noise (hybrid mode only)
-#define WV_HYBRID_BALANCE  0x400  // balance noise (hybrid stereo mode only)
+constexpr auto INT32_DATA     = 0x100;      // special extended int handling
+constexpr auto HYBRID_BITRATE = 0x200;      // bitrate noise (hybrid mode only)
+constexpr auto HYBRID_BALANCE = 0x400;      // balance noise (hybrid stereo mode only)
 
-#define WV_INITIAL_BLOCK   0x800   // initial block of multichannel segment
-#define WV_FINAL_BLOCK     0x1000  // final block of multichannel segment
+constexpr auto INITIAL_BLOCK  = 0x800;      // initial block of multichannel segment
+constexpr auto FINAL_BLOCK    = 0x1000;     // final block of multichannel segment
 
-#define WV_SHIFT_LSB      13
-#define WV_SHIFT_MASK     (0x1fL << WV_SHIFT_LSB)
+constexpr auto SHIFT_LSB      = 13;
+constexpr auto SHIFT_MASK     = (0x1fL << SHIFT_LSB);
 
-#define WV_MAG_LSB        18
-#define WV_MAG_MASK       (0x1fL << WV_MAG_LSB)
+constexpr auto MAG_LSB        = 18;
+constexpr auto MAG_MASK       = (0x1fL << MAG_LSB);
 
-#define WV_SRATE_LSB      23
-#define WV_SRATE_MASK     (0xfL << WV_SRATE_LSB)
+constexpr auto SRATE_LSB      = 23;
+constexpr auto SRATE_MASK     = (0xfL << SRATE_LSB);
 
-#define WV_NEW_SHAPING    0x20000000  // use IIR filter for negative shaping
+constexpr auto NEW_SHAPING    = 0x20000000; // use IIR filter for negative shaping
 
 // Introduced in WavPack 5.0:
-#define WV_HAS_CHECKSUM  0x10000000      // block contains a trailing checksum
-#define WV_DSD_FLAG      0x80000000      // block is encoded DSD (1-bit PCM)
+constexpr auto HAS_CHECKSUM   = 0x10000000; // block contains a trailing checksum
+constexpr auto DSD_FLAG       = 0x80000000; // block is encoded DSD (1-bit PCM)
 
-int32_t wv_parse_frame(mm_io_c &mm_io, wavpack_header_t &header, wavpack_meta_t &meta, bool read_blocked_frames, bool keep_initial_position);
-int wv_checksum_byte_count(unsigned char const *buffer, int bcount);
+int32_t parse_frame(mm_io_c &mm_io, header_t &header, meta_t &meta, bool read_blocked_frames, bool keep_initial_position);
+int checksum_byte_count(unsigned char const *buffer, int bcount);
+
+} // namespace mtx::wavpack

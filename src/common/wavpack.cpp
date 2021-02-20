@@ -20,24 +20,28 @@
 #include "common/endian.h"
 #include "common/wavpack.h"
 
-#define ID_DSD_BLOCK            0x0e
-#define ID_OPTIONAL_DATA        0x20
-#define ID_UNIQUE               0x3f
-#define ID_ODD_SIZE             0x40
-#define ID_LARGE                0x80
+namespace mtx::wavpack {
 
-#define ID_BLOCK_CHECKSUM       (ID_OPTIONAL_DATA | 0xf)
-#define ID_SAMPLE_RATE          (ID_OPTIONAL_DATA | 0x7)
+constexpr auto ID_DSD_BLOCK      = 0x0e;
+constexpr auto ID_OPTIONAL_DATA  = 0x20;
+constexpr auto ID_UNIQUE         = 0x3f;
+constexpr auto ID_ODD_SIZE       = 0x40;
+constexpr auto ID_LARGE          = 0x80;
+
+constexpr auto ID_BLOCK_CHECKSUM = (ID_OPTIONAL_DATA | 0xf);
+constexpr auto ID_SAMPLE_RATE    = (ID_OPTIONAL_DATA | 0x7);
 
 namespace {
 debugging_option_c s_debug{"wavpack"};
-}
 
-const uint32_t sample_rates [] = {
+constexpr uint32_t s_sample_rates [] = {
    6000,  8000,  9600, 11025, 12000, 16000, 22050,
-  24000, 32000, 44100, 48000, 64000, 88200, 96000, 192000 };
+  24000, 32000, 44100, 48000, 64000, 88200, 96000, 192000
+};
 
-wavpack_meta_t::wavpack_meta_t()
+} // anonymous namespace
+
+meta_t::meta_t()
   : channel_count(0)
   , bits_per_sample(0)
   , sample_rate(0)
@@ -48,7 +52,7 @@ wavpack_meta_t::wavpack_meta_t()
 
 static int32_t
 read_next_header(mm_io_c &in,
-                 wavpack_header_t *wphdr) {
+                 header_t *wphdr) {
   char buffer[sizeof(*wphdr)], *sp = buffer + sizeof(*wphdr), *ep = sp;
   uint32_t bytes_skipped = 0;
   int bleft;
@@ -82,12 +86,12 @@ read_next_header(mm_io_c &in,
 // Given a WavPack block (complete, but not including the 32-byte header), parse the metadata
 // blocks to the end and return the number of bytes used by the trailing block checksum if one
 // is found, otherwise return zero. This is the number of bytes that can be deleted from the
-// end of the block to erase the checksum. Also, the WV_HAS_CHECKSUM bit in the header flags
+// end of the block to erase the checksum. Also, the HAS_CHECKSUM bit in the header flags
 // must be reset.
 
 int
-wv_checksum_byte_count(unsigned char const *buffer,
-                       int bcount) {
+checksum_byte_count(unsigned char const *buffer,
+                    int bcount) {
   while (bcount >= 2) {
     auto meta_id = *buffer++;
     auto c1      = *buffer++;
@@ -125,8 +129,8 @@ wv_checksum_byte_count(unsigned char const *buffer,
 // contained there, or zero if no such block is found.
 
 static int
-wv_get_non_standard_rate(unsigned char const *buffer,
-                         int bcount) {
+get_non_standard_rate(unsigned char const *buffer,
+                      int bcount) {
   while (bcount >= 2) {
     auto meta_id  = *buffer++;
     auto c1       = *buffer++;
@@ -176,8 +180,8 @@ wv_get_non_standard_rate(unsigned char const *buffer,
 // bit sample rate.
 
 static int
-wv_get_dsd_rate_shifter(unsigned char const *buffer,
-                        int bcount) {
+get_dsd_rate_shifter(unsigned char const *buffer,
+                     int bcount) {
   while (bcount >= 2) {
     auto meta_id  = *buffer++;
     auto c1       = *buffer++;
@@ -211,11 +215,11 @@ wv_get_dsd_rate_shifter(unsigned char const *buffer,
 }
 
 int32_t
-wv_parse_frame(mm_io_c &in,
-               wavpack_header_t &wphdr,
-               wavpack_meta_t &meta,
-               bool read_blocked_frames,
-               bool keep_initial_position) {
+parse_frame(mm_io_c &in,
+            header_t &wphdr,
+            meta_t &meta,
+            bool read_blocked_frames,
+            bool keep_initial_position) {
   uint32_t bcount, ck_size{};
   uint64_t first_data_pos = in.getFilePointer();
   bool can_leave = !read_blocked_frames;
@@ -234,69 +238,71 @@ wv_parse_frame(mm_io_c &in,
 
     if (block_samples) {
       auto flags          = get_uint32_le(&wphdr.flags);
-      meta.channel_count += (flags & WV_MONO_FLAG) ? 1 : 2;
-      if (flags & WV_INITIAL_BLOCK)  {
+      meta.channel_count += (flags & MONO_FLAG) ? 1 : 2;
+      if (flags & INITIAL_BLOCK)  {
         int non_standard_rate = 0, dsd_rate_shifter = 0;
 
-        meta.sample_rate = (flags & WV_SRATE_MASK) >> WV_SRATE_LSB;
+        meta.sample_rate = (flags & SRATE_MASK) >> SRATE_LSB;
 
         // For non-standard sample rates or DSD audio files, we must read and parse the block
         // to actually determine the sample rate. Note that for correction files this will
         // silently fail, but that doesn't seem to cause trouble. An optimization would be to
         // do this only on the very first block of the file since it can't change after that.
 
-        if (meta.sample_rate == 15 || flags & WV_DSD_FLAG) {
-          auto adjusted_block_size = ck_size - sizeof(wavpack_header_t) + 8;
+        if (meta.sample_rate == 15 || flags & DSD_FLAG) {
+          auto adjusted_block_size = ck_size - sizeof(header_t) + 8;
           auto buffer              = memory_c::alloc(adjusted_block_size);
 
           if (in.read(buffer, adjusted_block_size) != static_cast<unsigned int>(adjusted_block_size))
             return -1;
 
           if (meta.sample_rate == 15)
-            non_standard_rate = wv_get_non_standard_rate(buffer->get_buffer(), adjusted_block_size);
+            non_standard_rate = get_non_standard_rate(buffer->get_buffer(), adjusted_block_size);
 
-          if (flags & WV_DSD_FLAG)
-            dsd_rate_shifter = wv_get_dsd_rate_shifter(buffer->get_buffer(), adjusted_block_size);
+          if (flags & DSD_FLAG)
+            dsd_rate_shifter = get_dsd_rate_shifter(buffer->get_buffer(), adjusted_block_size);
 
           in.skip(-adjusted_block_size);
         }
 
         if (meta.sample_rate < 15)
-          meta.sample_rate = sample_rates[meta.sample_rate];
+          meta.sample_rate = s_sample_rates[meta.sample_rate];
         else if (non_standard_rate)
           meta.sample_rate = non_standard_rate;
 
-        if (flags & WV_DSD_FLAG)
+        if (flags & DSD_FLAG)
           meta.sample_rate <<= dsd_rate_shifter;
 
-        if (flags & WV_INT32_DATA || flags & WV_FLOAT_DATA)
+        if (flags & INT32_DATA || flags & FLOAT_DATA)
           meta.bits_per_sample = 32;
         else
-          meta.bits_per_sample = ((flags & WV_BYTES_STORED) + 1) << 3;
+          meta.bits_per_sample = ((flags & BYTES_STORED) + 1) << 3;
 
         meta.samples_per_block = block_samples;
 
         first_data_pos = in.getFilePointer();
-        meta.channel_count = (flags & WV_MONO_FLAG) ? 1 : 2;
-        if (flags & WV_FINAL_BLOCK) {
+        meta.channel_count = (flags & MONO_FLAG) ? 1 : 2;
+        if (flags & FINAL_BLOCK) {
           can_leave = true;
-          mxdebug_if(s_debug, fmt::format("wavpack_reader: {0} block: {1}, {2} bytes\n", flags & WV_MONO_FLAG   ? "mono"   : "stereo", flags & WV_HYBRID_FLAG ? "hybrid" : "lossless", ck_size + 8));
+          mxdebug_if(s_debug, fmt::format("reader: {0} block: {1}, {2} bytes\n", flags & MONO_FLAG   ? "mono"   : "stereo", flags & HYBRID_FLAG ? "hybrid" : "lossless", ck_size + 8));
         }
       } else {
-        if (flags & WV_FINAL_BLOCK) {
+        if (flags & FINAL_BLOCK) {
           can_leave = true;
-          mxdebug_if(s_debug, fmt::format("wavpack_reader: {0} chans, mode: {1}, {2} bytes\n", meta.channel_count, flags & WV_HYBRID_FLAG ? "hybrid" : "lossless", ck_size + 8));
+          mxdebug_if(s_debug, fmt::format("reader: {0} chans, mode: {1}, {2} bytes\n", meta.channel_count, flags & HYBRID_FLAG ? "hybrid" : "lossless", ck_size + 8));
         }
       }
     } else
-      mxwarn(Y("wavpack_reader: non-audio block found\n"));
+      mxwarn(Y("reader: non-audio block found\n"));
     if (!can_leave) {
-      in.skip(ck_size - sizeof(wavpack_header_t) + 8);
+      in.skip(ck_size - sizeof(header_t) + 8);
     }
   } while (!can_leave);
 
   if (keep_initial_position)
     in.setFilePointer(first_data_pos);
 
-  return ck_size - sizeof(wavpack_header_t) + 8;
+  return ck_size - sizeof(header_t) + 8;
 }
+
+} // namespace mtx::wavpack

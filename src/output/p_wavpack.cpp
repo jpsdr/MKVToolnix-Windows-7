@@ -26,7 +26,7 @@ using namespace libmatroska;
 
 wavpack_packetizer_c::wavpack_packetizer_c(generic_reader_c *p_reader,
                                            track_info_c &p_ti,
-                                           wavpack_meta_t &meta)
+                                           mtx::wavpack::meta_t &meta)
   : generic_packetizer_c(p_reader, p_ti)
   , m_channels(meta.channel_count)
   , m_sample_rate(meta.sample_rate)

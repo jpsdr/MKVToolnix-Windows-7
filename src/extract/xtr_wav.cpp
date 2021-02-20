@@ -230,8 +230,8 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
     // because the original 32-byte header is gone (which is included in the checksum) and they will probably be wrong
     // if we write them here because we are creating new headers. This also applies to the correction blocks below.
 
-    truncate_bytes = (get_uint32_le(&wv_header[24]) & WV_HAS_CHECKSUM) ? wv_checksum_byte_count(mybuffer + 16, block_size) : 0;
-    put_uint32_le(&wv_header[24], get_uint32_le(&wv_header[24]) & ~WV_HAS_CHECKSUM);
+    truncate_bytes = (get_uint32_le(&wv_header[24]) & mtx::wavpack::HAS_CHECKSUM) ? mtx::wavpack::checksum_byte_count(mybuffer + 16, block_size) : 0;
+    put_uint32_le(&wv_header[24], get_uint32_le(&wv_header[24]) & ~mtx::wavpack::HAS_CHECKSUM);
 
     put_uint32_le(&wv_header[4], block_size + 24 - truncate_bytes);  // ck_size
     m_out->write(wv_header, 32);
@@ -244,8 +244,8 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
       block_size = get_uint32_le(&mybuffer[8]);
       memcpy(&wv_header[24], mybuffer, 8);
 
-      truncate_bytes = (get_uint32_le(&wv_header[24]) & WV_HAS_CHECKSUM) ? wv_checksum_byte_count (mybuffer + 12, block_size) : 0;
-      put_uint32_le(&wv_header[24], get_uint32_le(&wv_header[24]) & ~WV_HAS_CHECKSUM);
+      truncate_bytes = (get_uint32_le(&wv_header[24]) & mtx::wavpack::HAS_CHECKSUM) ? mtx::wavpack::checksum_byte_count (mybuffer + 12, block_size) : 0;
+      put_uint32_le(&wv_header[24], get_uint32_le(&wv_header[24]) & ~mtx::wavpack::HAS_CHECKSUM);
 
       put_uint32_le(&wv_header[4], block_size + 24 - truncate_bytes);
       m_out->write(wv_header, 32);
@@ -259,8 +259,8 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
     }
 
   } else {
-    truncate_bytes = (get_uint32_le(&wv_header[24]) & WV_HAS_CHECKSUM) ? wv_checksum_byte_count (mybuffer + 12, data_size - 12) : 0;
-    put_uint32_le (&wv_header[24], get_uint32_le(&wv_header[24]) & ~WV_HAS_CHECKSUM);
+    truncate_bytes = (get_uint32_le(&wv_header[24]) & mtx::wavpack::HAS_CHECKSUM) ? mtx::wavpack::checksum_byte_count (mybuffer + 12, data_size - 12) : 0;
+    put_uint32_le (&wv_header[24], get_uint32_le(&wv_header[24]) & ~mtx::wavpack::HAS_CHECKSUM);
 
     put_uint32_le(&wv_header[4], data_size + 12 - truncate_bytes); // ck_size
     m_out->write(wv_header, 32);
@@ -290,8 +290,8 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
         memcpy(&wv_header[24], &flags[flags_index++], 4); // flags
         memcpy(&wv_header[28], mybuffer, 4); // crc
 
-        truncate_bytes = (get_uint32_le(&wv_header[24]) & WV_HAS_CHECKSUM) ? wv_checksum_byte_count (mybuffer + 8, block_size) : 0;
-        put_uint32_le (&wv_header[24], get_uint32_le(&wv_header[24]) & ~WV_HAS_CHECKSUM);
+        truncate_bytes = (get_uint32_le(&wv_header[24]) & mtx::wavpack::HAS_CHECKSUM) ? mtx::wavpack::checksum_byte_count (mybuffer + 8, block_size) : 0;
+        put_uint32_le (&wv_header[24], get_uint32_le(&wv_header[24]) & ~mtx::wavpack::HAS_CHECKSUM);
 
         put_uint32_le(&wv_header[4], block_size + 24 - truncate_bytes); // ck_size
         m_corr_out->write(wv_header, 32);
@@ -302,7 +302,7 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
       }
 
     } else {
-      truncate_bytes = truncate_bytes ? wv_checksum_byte_count (mybuffer + 4, data_size - 4) : 0;
+      truncate_bytes = truncate_bytes ? mtx::wavpack::checksum_byte_count (mybuffer + 4, data_size - 4) : 0;
       put_uint32_le(&wv_header[4], data_size + 20 - truncate_bytes); // ck_size
       memcpy(&wv_header[28], mybuffer, 4); // crc
       m_corr_out->write(wv_header, 32);

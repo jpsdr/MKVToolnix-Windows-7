@@ -22,8 +22,8 @@
 class wavpack_reader_c: public generic_reader_c {
 private:
   mm_io_cptr m_in_correc;
-  wavpack_header_t header, header_correc;
-  wavpack_meta_t meta, meta_correc;
+  mtx::wavpack::header_t header, header_correc;
+  mtx::wavpack::meta_t meta, meta_correc;
 
 public:
   virtual mtx::file_type_e get_format_type() const {
