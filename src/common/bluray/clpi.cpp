@@ -166,12 +166,12 @@ parser_c::parse_header(mtx::bits::reader_c &bc) {
 
   uint32_t magic = bc.get_bits(32);
   mxdebug_if(m_debug, fmt::format("File magic 1: 0x{0:08x}\n", magic));
-  if (CLPI_FILE_MAGIC != magic)
+  if (FILE_MAGIC != magic)
     throw false;
 
   magic = bc.get_bits(32);
   mxdebug_if(m_debug, fmt::format("File magic 2: 0x{0:08x}\n", magic));
-  if ((CLPI_FILE_MAGIC2A != magic) && (CLPI_FILE_MAGIC2B != magic) && (CLPI_FILE_MAGIC2C != magic))
+  if ((FILE_MAGIC2A != magic) && (FILE_MAGIC2B != magic) && (FILE_MAGIC2C != magic))
     throw false;
 
   m_sequence_info_start             = bc.get_bits(32);

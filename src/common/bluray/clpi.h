@@ -22,12 +22,12 @@ namespace mtx::bits {
 class reader_c;
 }
 
-#define CLPI_FILE_MAGIC   FOURCC('H', 'D', 'M', 'V')
-#define CLPI_FILE_MAGIC2A FOURCC('0', '2', '0', '0')
-#define CLPI_FILE_MAGIC2B FOURCC('0', '1', '0', '0')
-#define CLPI_FILE_MAGIC2C FOURCC('0', '3', '0', '0')
-
 namespace mtx::bluray::clpi {
+
+constexpr auto FILE_MAGIC   = mtx::calc_fourcc('H', 'D', 'M', 'V');
+constexpr auto FILE_MAGIC2A = mtx::calc_fourcc('0', '2', '0', '0');
+constexpr auto FILE_MAGIC2B = mtx::calc_fourcc('0', '1', '0', '0');
+constexpr auto FILE_MAGIC2C = mtx::calc_fourcc('0', '3', '0', '0');
 
 struct program_stream_t {
   uint16_t pid;
