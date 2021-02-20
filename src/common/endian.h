@@ -15,7 +15,6 @@
 
 #include "common/common_pch.h"
 
-#define get_fourcc(b) get_uint32_be(b)
 uint16_t get_uint16_le(const void *buf);
 uint32_t get_uint24_le(const void *buf);
 uint32_t get_uint32_le(const void *buf);

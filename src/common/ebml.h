@@ -20,8 +20,6 @@
 
 #include <matroska/KaxTracks.h>
 
-#define can_be_cast(c, e) (dynamic_cast<c *>(e))
-
 int64_t kt_get_default_duration(libmatroska::KaxTrackEntry &track);
 int64_t kt_get_number(libmatroska::KaxTrackEntry &track);
 int64_t kt_get_uid(libmatroska::KaxTrackEntry &track);

@@ -25,8 +25,6 @@
 #include "common/ebml.h"
 #include "common/translation.h"
 
-#define NO_CONTAINER EbmlId(static_cast<uint32_t>(0), 0)
-
 class property_element_c {
 public:
   enum ebml_type_e { EBMLT_SKIP, EBMLT_BOOL, EBMLT_BINARY, EBMLT_FLOAT, EBMLT_INT, EBMLT_UINT, EBMLT_STRING, EBMLT_USTRING, EBMLT_DATE };
