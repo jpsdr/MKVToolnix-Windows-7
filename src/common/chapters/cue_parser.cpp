@@ -156,12 +156,25 @@ create_simple_tag(cue_parser_args_t &a,
   return simple;
 }
 
-#define create_tag1(v1, text) \
-  if (v1 != "") \
-    tag->PushElement(*create_simple_tag(a, text, v1));
-#define create_tag2(v1, v2, text) \
-  if (((v1) != "" ? (v1) : (v2)) != "") \
-    tag->PushElement(*create_simple_tag(a, text, ((v1) != "" ? (v1) : (v2))));
+static void
+create_tag1(cue_parser_args_t &a,
+            KaxTag &tag,
+            std::string const &v1,
+            char const *text) {
+  if (!v1.empty())
+    tag.PushElement(*create_simple_tag(a, text, v1));
+}
+
+static void
+create_tag2(cue_parser_args_t &a,
+            KaxTag &tag,
+            std::string const &v1,
+            std::string const &v2,
+            char const *text) {
+  auto const &v = v1.empty() ? v2 : v1;
+  if (!v.empty())
+    tag.PushElement(*create_simple_tag(a, text, v));
+}
 
 static void
 add_tag_for_cue_entry(cue_parser_args_t &a,
@@ -175,24 +188,25 @@ add_tag_for_cue_entry(cue_parser_args_t &a,
 
   auto tag      = new KaxTag;
   auto &targets = GetChild<KaxTagTargets>(*tag);
+
   GetChild<KaxTagChapterUID>(targets).SetValue(cuid);
   GetChild<KaxTagTargetTypeValue>(targets).SetValue(mtx::tags::Track);
   GetChild<KaxTagTargetType>(targets).SetValue("track");
 
-  create_tag1(a.title, "TITLE");
+  create_tag1(a, *tag, a.title, "TITLE");
   tag->PushElement(*create_simple_tag(a, "PART_NUMBER", fmt::to_string(a.num)));
-  create_tag2(a.performer, a.global_performer, "ARTIST");
-  create_tag2(a.date, a.global_date, "DATE_RELEASED");
-  create_tag2(a.genre, a.global_genre, "GENRE");
-  create_tag1(a.isrc, "ISRC");
-  create_tag1(a.flags, "CDAUDIO_TRACK_FLAGS");
+  create_tag2(a, *tag, a.performer, a.global_performer, "ARTIST");
+  create_tag2(a, *tag, a.date, a.global_date, "DATE_RELEASED");
+  create_tag2(a, *tag, a.genre, a.global_genre, "GENRE");
+  create_tag1(a, *tag, a.isrc, "ISRC");
+  create_tag1(a, *tag, a.flags, "CDAUDIO_TRACK_FLAGS");
 
   size_t i;
   for (i = 0; i < a.global_comment.size(); i++)
-    create_tag1(a.global_comment[i], "COMMENT");
+    create_tag1(a, *tag, a.global_comment[i], "COMMENT");
 
   for (i = 0; i < a.comment.size(); i++)
-    create_tag1(a.comment[i], "COMMENT");
+    create_tag1(a, *tag, a.comment[i], "COMMENT");
 
   if (FindChild<KaxTagSimple>(tag))
     (*tags)->PushElement(*tag);
@@ -215,15 +229,15 @@ add_tag_for_global_cue_settings(cue_parser_args_t &a,
   GetChild<KaxTagTargetTypeValue>(targets).SetValue(mtx::tags::Album);
   GetChild<KaxTagTargetType>(targets).SetValue("ALBUM");
 
-  create_tag1(a.global_performer, "ARTIST");
-  create_tag1(a.global_title,     "TITLE");
-  create_tag1(a.global_date,      "DATE_RELEASED");
-  create_tag1(a.global_disc_id,   "DISCID");
-  create_tag1(a.global_catalog,   "CATALOG_NUMBER");
+  create_tag1(a, *tag, a.global_performer, "ARTIST");
+  create_tag1(a, *tag, a.global_title,     "TITLE");
+  create_tag1(a, *tag, a.global_date,      "DATE_RELEASED");
+  create_tag1(a, *tag, a.global_disc_id,   "DISCID");
+  create_tag1(a, *tag, a.global_catalog,   "CATALOG_NUMBER");
 
   size_t i;
   for (i = 0; i < a.global_rem.size(); i++)
-    create_tag1(a.global_rem[i], "COMMENT");
+    create_tag1(a, *tag, a.global_rem[i], "COMMENT");
 
   if (FindChild<KaxTagSimple>(tag))
     (*tags)->PushElement(*tag);
@@ -245,7 +259,7 @@ add_subchapters_for_index_entries(cue_parser_args_t &a) {
     GetChild<KaxChapterUID>(*atom).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
     GetChild<KaxChapterTimeStart>(*atom).SetValue(a.start_indices[i] - a.offset);
     GetChild<KaxChapterFlagHidden>(*atom).SetValue(1);
-    GetChild<KaxChapterPhysicalEquiv>(*atom).SetValue(CHAPTER_PHYSEQUIV_INDEX);
+    GetChild<KaxChapterPhysicalEquiv>(*atom).SetValue(mtx::chapters::PHYSEQUIV_INDEX);
 
     auto &display = GetChild<KaxChapterDisplay>(*atom);
     GetChild<KaxChapterString>(display).SetValueUTF8(fmt::format("INDEX {0:02}", i + offset));
@@ -270,7 +284,7 @@ add_elements_for_cue_entry(cue_parser_args_t &a,
   }
 
   a.atom = &GetFirstOrNextChild<KaxChapterAtom>(*a.edition, a.atom);
-  GetChild<KaxChapterPhysicalEquiv>(*a.atom).SetValue(CHAPTER_PHYSEQUIV_TRACK);
+  GetChild<KaxChapterPhysicalEquiv>(*a.atom).SetValue(mtx::chapters::PHYSEQUIV_TRACK);
 
   auto cuid = create_unique_number(UNIQUE_CHAPTER_IDS);
   GetChild<KaxChapterUID>(*a.atom).SetValue(cuid);

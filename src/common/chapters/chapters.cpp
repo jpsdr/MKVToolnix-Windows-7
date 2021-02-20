@@ -54,9 +54,9 @@ std::string g_default_country;
 
 translatable_string_c g_chapter_generation_name_template{YT("Chapter <NUM:2>")};
 
-#define SIMCHAP_RE_TIMESTAMP_LINE "^\\s*CHAPTER\\d+\\s*=\\s*(\\d+)\\s*:\\s*(\\d+)\\s*:\\s*(\\d+)\\s*[\\.,]\\s*(\\d+)"
-#define SIMCHAP_RE_TIMESTAMP      "^\\s*CHAPTER\\d+\\s*=(.*)"
-#define SIMCHAP_RE_NAME_LINE      "^\\s*CHAPTER\\d+NAME\\s*=(.*)"
+constexpr auto SIMCHAP_RE_TIMESTAMP_LINE = "^\\s*CHAPTER\\d+\\s*=\\s*(\\d+)\\s*:\\s*(\\d+)\\s*:\\s*(\\d+)\\s*[\\.,]\\s*(\\d+)";
+constexpr auto SIMCHAP_RE_TIMESTAMP      = "^\\s*CHAPTER\\d+\\s*=(.*)";
+constexpr auto SIMCHAP_RE_NAME_LINE      = "^\\s*CHAPTER\\d+NAME\\s*=(.*)";
 
 /** \brief Throw a special chapter parser exception.
 
@@ -485,26 +485,22 @@ remove_elements_unsupported_by_webm(EbmlMaster &master) {
   static std::unordered_map<uint32_t, bool> s_supported_elements, s_readd_with_defaults;
 
   if (s_supported_elements.empty()) {
-#define add(ref) s_supported_elements[ EBML_ID_VALUE(EBML_ID(ref)) ] = true;
-    add(KaxChapters);
-    add(KaxEditionEntry);
-    add(KaxChapterAtom);
-    add(KaxChapterUID);
-    add(KaxChapterStringUID);
-    add(KaxChapterTimeStart);
-    add(KaxChapterTimeEnd);
-    add(KaxChapterDisplay);
-    add(KaxChapterString);
-    add(KaxChapterLanguage);
-    add(KaxChapterCountry);
-#undef add
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxChapters))            ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxEditionEntry))        ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxChapterAtom))         ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxChapterUID))          ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxChapterStringUID))    ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxChapterTimeStart))    ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxChapterTimeEnd))      ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxChapterDisplay))      ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxChapterString))       ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxChapterLanguage))     ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxChapterCountry))      ] = true;
 
-#define add(ref) s_readd_with_defaults[ EBML_ID_VALUE(EBML_ID(ref)) ] = true;
-    add(KaxEditionFlagDefault);
-    add(KaxEditionFlagHidden);
-    add(KaxChapterFlagEnabled);
-    add(KaxChapterFlagHidden);
-#undef add
+    s_readd_with_defaults[ EBML_ID_VALUE(EBML_ID(KaxEditionFlagDefault)) ] = true;
+    s_readd_with_defaults[ EBML_ID_VALUE(EBML_ID(KaxEditionFlagHidden))  ] = true;
+    s_readd_with_defaults[ EBML_ID_VALUE(EBML_ID(KaxChapterFlagEnabled)) ] = true;
+    s_readd_with_defaults[ EBML_ID_VALUE(EBML_ID(KaxChapterFlagHidden))  ] = true;
   }
 
   auto idx = 0u;

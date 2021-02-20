@@ -13,27 +13,31 @@
 
 #pragma once
 
+namespace mtx::chapters {
+
 // see http://www.matroska.org/technical/specs/index.html#physical
-#define CHAPTER_PHYSEQUIV_SET          70
-#define CHAPTER_PHYSEQUIV_PACKAGE      70
+constexpr auto PHYSEQUIV_SET       = 70;
+constexpr auto PHYSEQUIV_PACKAGE   = 70;
 
-#define CHAPTER_PHYSEQUIV_CD           60
-#define CHAPTER_PHYSEQUIV_12INCH       60
-#define CHAPTER_PHYSEQUIV_10INCH       60
-#define CHAPTER_PHYSEQUIV_7INCH        60
-#define CHAPTER_PHYSEQUIV_TAPE         60
-#define CHAPTER_PHYSEQUIV_MINIDISC     60
-#define CHAPTER_PHYSEQUIV_DAT          60
-#define CHAPTER_PHYSEQUIV_DVD          60
-#define CHAPTER_PHYSEQUIV_VHS          60
-#define CHAPTER_PHYSEQUIV_LASERDISC    60
+constexpr auto PHYSEQUIV_CD        = 60;
+constexpr auto PHYSEQUIV_12INCH    = 60;
+constexpr auto PHYSEQUIV_10INCH    = 60;
+constexpr auto PHYSEQUIV_7INCH     = 60;
+constexpr auto PHYSEQUIV_TAPE      = 60;
+constexpr auto PHYSEQUIV_MINIDISC  = 60;
+constexpr auto PHYSEQUIV_DAT       = 60;
+constexpr auto PHYSEQUIV_DVD       = 60;
+constexpr auto PHYSEQUIV_VHS       = 60;
+constexpr auto PHYSEQUIV_LASERDISC = 60;
 
-#define CHAPTER_PHYSEQUIV_SIDE         50
+constexpr auto PHYSEQUIV_SIDE      = 50;
 
-#define CHAPTER_PHYSEQUIV_LAYER        40
+constexpr auto PHYSEQUIV_LAYER     = 40;
 
-#define CHAPTER_PHYSEQUIV_SESSION      30
+constexpr auto PHYSEQUIV_SESSION   = 30;
 
-#define CHAPTER_PHYSEQUIV_TRACK        20
+constexpr auto PHYSEQUIV_TRACK     = 20;
 
-#define CHAPTER_PHYSEQUIV_INDEX        10
+constexpr auto PHYSEQUIV_INDEX     = 10;
+
+}
