@@ -48,14 +48,14 @@ xtr_mpeg1_2_video_c::handle_frame(xtr_frame_t &f) {
 
     if (4 <= size) {
       uint32_t marker = get_uint32_be(buf);
-      seq_hdr_found   = MPEGVIDEO_SEQUENCE_HEADER_START_CODE == marker;
+      seq_hdr_found   = mtx::mpeg1_2::SEQUENCE_HEADER_START_CODE == marker;
 
       if (seq_hdr_found && (8 <= size)) {
         size_t end_pos = 7;
         marker         = get_uint32_be(&buf[4]);
         while (   ((end_pos + 1) < size)
-               && (   (0x00000100               != (marker & 0xffffff00))
-                   || (MPEGVIDEO_EXT_START_CODE == marker))) {
+               && (   (0x00000100                             != (marker & 0xffffff00))
+                   || (mtx::mpeg1_2::EXT_START_CODE == marker))) {
           ++end_pos;
           marker = (marker << 8) | buf[end_pos];
         }

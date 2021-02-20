@@ -1729,7 +1729,7 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
     create_hevc_video_packetizer(t, nti);
 
   else if (t->codec.is(codec_c::type_e::V_MPEG4_P2)) {
-    bool is_native = IS_MPEG4_L2_CODECID(t->codec_id);
+    bool is_native = (t->codec_id == MKV_V_MPEG4_SP) || (t->codec_id == MKV_V_MPEG4_AP) || (t->codec_id == MKV_V_MPEG4_ASP);
     set_track_packetizer(t, new mpeg4_p2_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height, is_native));
     show_packetizer_info(t->tnum, t->ptzr_ptr);
 

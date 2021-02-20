@@ -20,8 +20,8 @@
 #include "common/error.h"
 #include "common/id_info.h"
 #include "common/mp3.h"
+#include "common/mpeg.h"
 #include "common/mpeg1_2.h"
-#include "common/mpeg4_p2.h"
 #include "common/path.h"
 #include "common/regex.h"
 #include "common/strings/formatting.h"
@@ -45,7 +45,7 @@ mpeg_ps_reader_c::probe_file() {
   if (m_in->read(buf, 4) != 4)
     return false;
 
-  if (get_uint32_be(buf) == MPEGVIDEO_PACKET_START_CODE)
+  if (get_uint32_be(buf) == mtx::mpeg1_2::PACKET_START_CODE)
     return true;
 
   m_in->setFilePointer(0);
@@ -67,10 +67,10 @@ mpeg_ps_reader_c::probe_file() {
     ++offset;
     code = (code << 8) | base[offset];
 
-    if (code == MPEGVIDEO_SYSTEM_HEADER_START_CODE)
+    if (code == mtx::mpeg1_2::SYSTEM_HEADER_START_CODE)
       system_header_start_code_found = true;
 
-    else if (code == MPEGVIDEO_PACKET_START_CODE)
+    else if (code == mtx::mpeg1_2::PACKET_START_CODE)
       packet_start_code_found = true;
   }
 
@@ -98,7 +98,7 @@ mpeg_ps_reader_c::read_headers() {
       uint16_t pes_packet_length;
 
       switch (header) {
-        case MPEGVIDEO_PACKET_START_CODE:
+        case mtx::mpeg1_2::PACKET_START_CODE:
           mxdebug_if(m_debug_headers, fmt::format("mpeg_ps: packet start at {0}\n", m_in->getFilePointer() - 4));
 
           if (-1 == version) {
@@ -119,7 +119,7 @@ mpeg_ps_reader_c::read_headers() {
           header = m_in->read_uint32_be();
           break;
 
-        case MPEGVIDEO_SYSTEM_HEADER_START_CODE:
+        case mtx::mpeg1_2::SYSTEM_HEADER_START_CODE:
           mxdebug_if(m_debug_headers, fmt::format("mpeg_ps: system header start code at {0}\n", m_in->getFilePointer() - 4));
 
           m_in->skip(2 * 4);   // system header
@@ -132,17 +132,17 @@ mpeg_ps_reader_c::read_headers() {
           header = m_in->read_uint32_be();
           break;
 
-        case MPEGVIDEO_MPEG_PROGRAM_END_CODE:
+        case mtx::mpeg1_2::MPEG_PROGRAM_END_CODE:
           done = !resync_stream(header);
           break;
 
-        case MPEGVIDEO_PROGRAM_STREAM_MAP_START_CODE:
+        case mtx::mpeg1_2::PROGRAM_STREAM_MAP_START_CODE:
           parse_program_stream_map();
           done = !resync_stream(header);
           break;
 
         default:
-          if (!mpeg_is_start_code(header)) {
+          if (!mtx::mpeg::is_start_code(header)) {
             mxdebug_if(m_debug_headers, fmt::format("mpeg_ps: unknown header 0x{0:08x} at {1}\n", header, m_in->getFilePointer() - 4));
             done = !resync_stream(header);
             break;
@@ -321,7 +321,7 @@ mpeg_ps_reader_c::parse_packet(mpeg_ps_id_t id,
     int64_t pos = m_in->getFilePointer();
     m_in->skip(packet.m_length);
     uint32_t header = m_in->read_uint32_be();
-    if (mpeg_is_start_code(header))
+    if (mtx::mpeg::is_start_code(header))
       m_in->setFilePointer(pos + packet.m_length);
 
     else {
@@ -553,14 +553,14 @@ mpeg_ps_reader_c::new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id,
           }
         }
 
-        if (mpeg_is_start_code(marker)) {
+        if (mtx::mpeg::is_start_code(marker)) {
           // MPEG-1 or -2
           switch (marker & 0xffffffff) {
-            case MPEGVIDEO_SEQUENCE_HEADER_START_CODE:
+            case mtx::mpeg1_2::SEQUENCE_HEADER_START_CODE:
               mpeg_12_seqhdr_found  = true;
               break;
 
-            case MPEGVIDEO_PICTURE_START_CODE:
+            case mtx::mpeg1_2::PICTURE_START_CODE:
               mpeg_12_picture_found = true;
               break;
           }
@@ -1099,7 +1099,7 @@ mpeg_ps_reader_c::find_next_packet(mpeg_ps_id_t &id,
         return false;
 
       switch (header) {
-        case MPEGVIDEO_PACKET_START_CODE:
+        case mtx::mpeg1_2::PACKET_START_CODE:
           if (-1 == version) {
             byte = m_in->read_uint8();
             if ((byte & 0xc0) != 0)
@@ -1118,7 +1118,7 @@ mpeg_ps_reader_c::find_next_packet(mpeg_ps_id_t &id,
           header = m_in->read_uint32_be();
           break;
 
-        case MPEGVIDEO_SYSTEM_HEADER_START_CODE:
+        case mtx::mpeg1_2::SYSTEM_HEADER_START_CODE:
           m_in->skip(2 * 4);   // system header
           byte = m_in->read_uint8();
           while ((byte & 0x80) == 0x80) {
@@ -1129,19 +1129,19 @@ mpeg_ps_reader_c::find_next_packet(mpeg_ps_id_t &id,
           header = m_in->read_uint32_be();
           break;
 
-        case MPEGVIDEO_MPEG_PROGRAM_END_CODE:
+        case mtx::mpeg1_2::MPEG_PROGRAM_END_CODE:
           if (!resync_stream(header))
             return false;
           break;
 
-        case MPEGVIDEO_PROGRAM_STREAM_MAP_START_CODE:
+        case mtx::mpeg1_2::PROGRAM_STREAM_MAP_START_CODE:
           parse_program_stream_map();
           if (!resync_stream(header))
             return false;
           break;
 
         default:
-          if (!mpeg_is_start_code(header)) {
+          if (!mtx::mpeg::is_start_code(header)) {
             if (!resync_stream(header))
               return false;
             continue;
@@ -1181,7 +1181,7 @@ mpeg_ps_reader_c::resync_stream(uint32_t &header) {
     while (1) {
       header <<= 8;
       header  |= m_in->read_uint8();
-      if (mpeg_is_start_code(header))
+      if (mtx::mpeg::is_start_code(header))
         break;
     }
 

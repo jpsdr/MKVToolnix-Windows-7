@@ -48,7 +48,7 @@ extract_fps_idx(unsigned char const *buffer,
   }
   auto marker = get_uint32_be(buffer);
   int idx     = 4;
-  while ((idx < buffer_size) && (marker != MPEGVIDEO_SEQUENCE_HEADER_START_CODE)) {
+  while ((idx < buffer_size) && (marker != SEQUENCE_HEADER_START_CODE)) {
     marker <<= 8;
     marker |= buffer[idx];
     idx++;
@@ -89,7 +89,7 @@ extract_ar(unsigned char const *buffer,
   }
   marker = get_uint32_be(buffer);
   idx = 4;
-  while ((idx < buffer_size) && (marker != MPEGVIDEO_SEQUENCE_HEADER_START_CODE)) {
+  while ((idx < buffer_size) && (marker != SEQUENCE_HEADER_START_CODE)) {
     marker <<= 8;
     marker |= buffer[idx];
     idx++;
@@ -107,16 +107,16 @@ extract_ar(unsigned char const *buffer,
   }
 
   switch (buffer[idx] & 0xf0) {
-    case MPEGVIDEO_AR_1_1:
+    case AR_1_1:
       ar = 1.0;
       break;
-    case MPEGVIDEO_AR_4_3:
+    case AR_4_3:
       ar = 4.0 / 3.0;
       break;
-    case MPEGVIDEO_AR_16_9:
+    case AR_16_9:
       ar = 16.0 / 9.0;
       break;
-    case MPEGVIDEO_AR_2_21:
+    case AR_2_21:
       ar = 2.21;
       break;
     default:
@@ -138,16 +138,16 @@ double
 get_fps(int idx) {
   static const int s_fps[8] = {0, 24, 25, 0, 30, 50, 0, 60};
 
-  return ((idx < 1) || (idx > 8)) ?    -1.0
-    : MPEGVIDEO_FPS_23_976 == idx ? 24000.0 / 1001.0
-    : MPEGVIDEO_FPS_29_97  == idx ? 30000.0 / 1001.0
-    : MPEGVIDEO_FPS_59_94  == idx ? 60000.0 / 1001.0
-    :                               s_fps[idx - 1];
+  return ((idx < 1) || (idx > 8)) ?             -1.0
+      : FPS_23_976 == idx         ? 24000.0 / 1001.0
+      : FPS_29_97  == idx         ? 30000.0 / 1001.0
+      : FPS_59_94  == idx         ? 60000.0 / 1001.0
+      :                             s_fps[idx - 1];
 }
 
 bool
 is_fourcc(uint32_t fourcc) {
-  return (MPEGVIDEO_FOURCC_MPEG1 == fourcc) || (MPEGVIDEO_FOURCC_MPEG2 == fourcc);
+  return (FOURCC_MPEG1 == fourcc) || (FOURCC_MPEG2 == fourcc);
 }
 
 } // namespace mtx::mpeg1_2

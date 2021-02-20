@@ -88,16 +88,16 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
 
   memory_cptr new_seq_hdr;
   auto seq_hdr_copier = [&chunk_type, &seq_hdr_found, &buf, &start_code_pos, &pos, &new_seq_hdr, &size](bool at_end) {
-    if ((MPEGVIDEO_SEQUENCE_HEADER_START_CODE != chunk_type) && (MPEGVIDEO_EXT_START_CODE != chunk_type))
+    if ((mtx::mpeg1_2::SEQUENCE_HEADER_START_CODE != chunk_type) && (mtx::mpeg1_2::EXT_START_CODE != chunk_type))
       return;
 
     // sequence extension and sequence display extension only
-    if (   (MPEGVIDEO_EXT_START_CODE       == chunk_type)
+    if (   (mtx::mpeg1_2::EXT_START_CODE   == chunk_type)
         && ((buf[start_code_pos+4] & 0xf0) != 0x10)
         && ((buf[start_code_pos+4] & 0xf0) != 0x20))
       return;
 
-    if (MPEGVIDEO_SEQUENCE_HEADER_START_CODE == chunk_type)
+    if (mtx::mpeg1_2::SEQUENCE_HEADER_START_CODE == chunk_type)
       seq_hdr_found = true;
 
     else if (!seq_hdr_found)
@@ -120,13 +120,13 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
   };
 
   while (pos < size) {
-    if ((MPEGVIDEO_SLICE_START_CODE_LOWER <= marker) && (MPEGVIDEO_SLICE_START_CODE_UPPER >= marker)) {
+    if ((mtx::mpeg1_2::SLICE_START_CODE_LOWER <= marker) && (mtx::mpeg1_2::SLICE_START_CODE_UPPER >= marker)) {
       mxdebug_if(m_debug_stuffing_removal, fmt::format("  Slice start code at {0}\n", pos - 4));
 
       // mid_remover();
       seq_hdr_copier(false);
 
-      chunk_type     = MPEGVIDEO_SLICE_START_CODE_LOWER;
+      chunk_type     = mtx::mpeg1_2::SLICE_START_CODE_LOWER;
       stuffing_start = 0;
       start_code_pos = pos - 4;
 
@@ -140,7 +140,7 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
       stuffing_start = 0;
       start_code_pos = pos - 4;
 
-    } else if ((MPEGVIDEO_SLICE_START_CODE_LOWER == chunk_type) && !stuffing_start && (marker == 0x00000000)) {
+    } else if ((mtx::mpeg1_2::SLICE_START_CODE_LOWER == chunk_type) && !stuffing_start && (marker == 0x00000000)) {
       mxdebug_if(m_debug_stuffing_removal, fmt::format("    Start at {0}\n", pos - 3));
 
       stuffing_start = pos - 3;

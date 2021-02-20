@@ -18,37 +18,20 @@
 
 namespace mtx::mpeg4_p2 {
 
-/** Start code for a MPEG-4 part 2 (?) video object plain */
-#define MPEGVIDEO_VOP_START_CODE                  0x000001b6
-#define MPEGVIDEO_VOL_START_CODE                  0x00000120
-/** Start code for a MPEG-4 part 2 group of pictures */
-#define MPEGVIDEO_GOP_START_CODE                  0x000001b3
-#define MPEGVIDEO_SYSTEM_HEADER_START_CODE        0x000001bb
-#define MPEGVIDEO_PROGRAM_STREAM_MAP_START_CODE   0x000001bc
-#define MPEGVIDEO_MPEG_PROGRAM_END_CODE           0x000001b9
-#define MPEGVIDEO_EXT_START_CODE                  0x000001b5
-#define MPEGVIDEO_PICTURE_START_CODE              0x00000100
-#define MPEGVIDEO_FIRST_SLICE_START_CODE          0x00000101
-#define MPEGVIDEO_LAST_SLICE_START_CODE           0x000001af
+// Start code for a MPEG-4 part 2 (?) video object plain
+constexpr auto VOP_START_CODE                = 0x000001b6u;
+constexpr auto VOL_START_CODE                = 0x00000120u;
+// Start code for a MPEG-4 part 2 group of pictures
+constexpr auto GOP_START_CODE                = 0x000001b3u;
+constexpr auto SLICE_START_CODE_LOWER        = 0x00000101u;
+constexpr auto SLICE_START_CODE_UPPER        = 0x000001afu;
 
-/** Start code for a MPEG-4 part 2 visual object sequence start marker */
-#define MPEGVIDEO_VOS_START_CODE                  0x000001b0
-/** Start code for a MPEG-4 part 2 visual object sequence end marker */
-#define MPEGVIDEO_VOS_END_CODE                    0x000001b1
-/** Start code for a MPEG-4 part 2 visual object marker */
-#define MPEGVIDEO_VISUAL_OBJECT_START_CODE        0x000001b5
-
-#define MPEGVIDEO_START_CODE_PREFIX               0x000001
-
-#define mpeg_is_start_code(v) ((((v) >> 8) & 0xffffff) == MPEGVIDEO_START_CODE_PREFIX)
-
-#define IS_MPEG4_L2_FOURCC(s) \
-  (!strncasecmp((s), "MP42", 4) || !strncasecmp((s), "DIV2", 4) || \
-   !strncasecmp((s), "DIVX", 4) || !strncasecmp((s), "XVID", 4) || \
-   !strncasecmp((s), "DX5", 3))
-#define IS_MPEG4_L2_CODECID(s) \
-  (((s) == MKV_V_MPEG4_SP) || ((s) == MKV_V_MPEG4_AP) || \
-   ((s) == MKV_V_MPEG4_ASP))
+// Start code for a MPEG-4 part 2 visual object sequence start marker
+constexpr auto VOS_START_CODE                = 0x000001b0u;
+// Start code for a MPEG-4 part 2 visual object sequence end marker
+constexpr auto VOS_END_CODE                  = 0x000001b1u;
+// Start code for a MPEG-4 part 2 visual object marker
+constexpr auto VISUAL_OBJECT_START_CODE      = 0x000001b5u;
 
 enum mpeg_video_type_e {
   MPEG_VIDEO_NONE = 0,
@@ -63,7 +46,6 @@ enum frame_type_e {
   FRAME_TYPE_P,
   FRAME_TYPE_B
 };
-#define FRAME_TYPE_TO_CHAR(t) (FRAME_TYPE_I == (t) ? 'I' : FRAME_TYPE_P == (t) ? 'P' : 'B')
 
 /** Pointers to MPEG4 video frames and their data
 

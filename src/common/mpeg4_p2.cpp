@@ -20,6 +20,7 @@
 #include "common/math.h"
 #include "common/mm_io.h"
 #include "common/mm_mem_io.h"
+#include "common/mpeg.h"
 #include "common/mpeg4_p2.h"
 
 namespace mtx::mpeg4_p2 {
@@ -292,7 +293,7 @@ find_frame_types(unsigned char const *buffer,
       }
 
       mxdebug_if(s_debug, fmt::format("mpeg4_frames:   found start code at {0}: 0x{1:02x}\n", bytes.getFilePointer() - 4, marker & 0xff));
-      if (marker == MPEGVIDEO_VOP_START_CODE) {
+      if (marker == VOP_START_CODE) {
         if (frame_found) {
           frame.size = bytes.getFilePointer() - 4 - frame.pos;
           parse_frame(frame, buffer, config_data);
@@ -321,8 +322,10 @@ find_frame_types(unsigned char const *buffer,
   if (s_debug) {
     auto info = fmt::format("mpeg4_frames:   summary: found {0} frames ", frames.size());
     std::vector<video_frame_t>::iterator fit;
-    for (fit = frames.begin(); fit < frames.end(); fit++)
-      info += fmt::format("'{0}' (size {1} coded {3} at {2}) ", FRAME_TYPE_TO_CHAR(fit->type),  fit->size, fit->pos, fit->is_coded);
+    for (fit = frames.begin(); fit < frames.end(); fit++) {
+      auto frame_type = FRAME_TYPE_I == fit->type ? 'I' : FRAME_TYPE_P == fit->type ? 'P' : 'B';
+      info += fmt::format("'{0}' (size {1} coded {3} at {2}) ", frame_type, fit->size, fit->pos, fit->is_coded);
+    }
     mxdebug(info + "\n");
   }
 }
@@ -362,17 +365,17 @@ parse_config_data(unsigned char const *buffer,
   while (p < end) {
     marker = (marker << 8) | *p;
     ++p;
-    if (!mpeg_is_start_code(marker))
+    if (!mtx::mpeg::is_start_code(marker))
       continue;
 
     mxdebug_if(s_debug, fmt::format("mpeg4_config_data:   found start code at {0}: 0x{1:02x}\n", static_cast<unsigned int>(p - buffer - 4), marker & 0xff));
-    if (MPEGVIDEO_VOS_START_CODE == marker)
+    if (VOS_START_CODE == marker)
       vos_offset = p - 4 - buffer;
 
-    else if (MPEGVIDEO_VOL_START_CODE == marker)
+    else if (VOL_START_CODE == marker)
       vol_offset = p - 4 - buffer;
 
-    else if ((MPEGVIDEO_VOP_START_CODE == marker) || (MPEGVIDEO_GOP_START_CODE == marker)) {
+    else if ((VOP_START_CODE == marker) || (GOP_START_CODE == marker)) {
       size = p - 4 - buffer;
       break;
     }
@@ -394,14 +397,14 @@ parse_config_data(unsigned char const *buffer,
   if (-1 == vos_offset) {
     mem                = memory_c::alloc(size + 5);
     unsigned char *dst = mem->get_buffer();
-    put_uint32_be(dst, MPEGVIDEO_VOS_START_CODE);
+    put_uint32_be(dst, VOS_START_CODE);
     dst[4] = 0xf5;
     memcpy(dst + 5, buffer, size);
 
   } else {
     mem                = memory_c::alloc(size);
     unsigned char *dst = mem->get_buffer();
-    put_uint32_be(dst, MPEGVIDEO_VOS_START_CODE);
+    put_uint32_be(dst, VOS_START_CODE);
     if (3 >= buffer[vos_offset + 4])
       dst[4] = 0xf5;
     else

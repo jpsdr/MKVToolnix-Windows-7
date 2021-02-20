@@ -16,6 +16,12 @@
 
 namespace mtx::mpeg {
 
+constexpr auto START_CODE_PREFIX = 0x000001u;
+
+constexpr auto is_start_code(uint32_t v) {
+  return ((v >> 8) & 0xffffff) == START_CODE_PREFIX;
+}
+
 class nalu_size_length_x: public mtx::exception {
 protected:
   std::size_t m_required_length;

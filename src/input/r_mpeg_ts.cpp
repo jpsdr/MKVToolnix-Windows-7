@@ -1851,7 +1851,7 @@ reader_c::parse_pes(track_c &track) {
   auto has_dts = false;
   auto to_skip = 0u;
 
-  if (mtx::included_in(pes_header->stream_id, MPEGVIDEO_PRIVATE_STREAM_2)) {
+  if (mtx::included_in(pes_header->stream_id, mtx::mpeg1_2::PRIVATE_STREAM_2)) {
     to_skip = 6;
     track.pes_payload_read->remove(to_skip);
 

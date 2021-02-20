@@ -20,7 +20,7 @@
 #include "common/endian.h"
 #include "common/error.h"
 #include "common/mm_io_x.h"
-#include "common/mpeg4_p2.h"
+#include "common/mpeg.h"
 #include "common/id_info.h"
 #include "input/r_mpeg_es.h"
 #include "merge/input_x.h"
@@ -53,11 +53,11 @@ mpeg_es_reader_c::probe_file() {
 
   // MPEG PS starts with 0x000001ba.
   uint32_t value = get_uint32_be(buf);
-  if (MPEGVIDEO_PACKET_START_CODE == value)
+  if (mtx::mpeg1_2::PACKET_START_CODE == value)
     return 0;
 
   auto num_slice_start_codes_found = 0u;
-  auto start_code_at_beginning     = mpeg_is_start_code(value);
+  auto start_code_at_beginning     = mtx::mpeg::is_start_code(value);
   auto gop_start_code_found        = false;
   auto sequence_start_code_found   = false;
   auto ext_start_code_found        = false;
@@ -68,22 +68,22 @@ mpeg_es_reader_c::probe_file() {
   // Let's look for a MPEG ES start code inside the first 1 MB.
   int i;
   for (i = 4; i < num_read - 1; i++) {
-    if (mpeg_is_start_code(value)) {
+    if (mtx::mpeg::is_start_code(value)) {
       mxdebug_if(debug, fmt::format("mpeg_es_detection: start code found; fourth byte: 0x{0:02x}\n", value & 0xff));
 
-      if (MPEGVIDEO_SEQUENCE_HEADER_START_CODE == value)
+      if (mtx::mpeg1_2::SEQUENCE_HEADER_START_CODE == value)
         sequence_start_code_found = true;
 
-      else if (MPEGVIDEO_PICTURE_START_CODE == value)
+      else if (mtx::mpeg1_2::PICTURE_START_CODE == value)
         picture_start_code_found = true;
 
-      else if (MPEGVIDEO_GROUP_OF_PICTURES_START_CODE == value)
+      else if (mtx::mpeg1_2::GROUP_OF_PICTURES_START_CODE == value)
         gop_start_code_found = true;
 
-      else if (MPEGVIDEO_EXT_START_CODE == value)
+      else if (mtx::mpeg1_2::EXT_START_CODE == value)
         ext_start_code_found = true;
 
-      else if ((MPEGVIDEO_FIRST_SLICE_START_CODE <= value) && (MPEGVIDEO_LAST_SLICE_START_CODE >= value))
+      else if ((mtx::mpeg1_2::SLICE_START_CODE_LOWER <= value) && (mtx::mpeg1_2::SLICE_START_CODE_UPPER >= value))
         ++num_slice_start_codes_found;
 
       ok = sequence_start_code_found
