@@ -56,5 +56,3 @@ void mxwarn_tid(const std::string &file_name, int64_t track_id, const std::strin
 
 void mxerror_fn(const std::string &file_name, const std::string &error);
 void mxerror_tid(const std::string &file_name, int64_t track_id, const std::string &error);
-
-std::string fourcc_to_string(uint32_t fourcc);

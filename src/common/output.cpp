@@ -260,15 +260,3 @@ set_cc_stdio(const std::string &charset) {
   g_cc_stdio      = charset_converter_c::init(charset);
   g_mm_stdio->set_string_output_converter(g_cc_stdio);
 }
-
-std::string
-fourcc_to_string(uint32_t fourcc) {
-  unsigned char buffer[4], idx;
-
-  put_uint32_be(buffer, fourcc);
-  for (idx = 0; 4 > idx; ++idx)
-    if (buffer[idx] < ' ')
-      buffer[idx] = ' ';
-
-  return std::string(reinterpret_cast<char *>(buffer), 4);
-}
