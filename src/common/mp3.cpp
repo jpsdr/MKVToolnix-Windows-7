@@ -12,6 +12,7 @@
 */
 
 #include "common/common_pch.h"
+#include "common/debugging.h"
 #include "common/mp3.h"
 
 // Synch word for a frame is 0xFFE0 (first 11 bits must be set)
@@ -252,6 +253,8 @@ find_consecutive_mp3_headers(const unsigned char *buf,
                              int size,
                              int num,
                              mp3_header_t *header_found) {
+  static debugging_option_c s_debug{"find_consecutive_mp3_headers"};
+
   int i, pos, base, offset;
   mp3_header_t mp3header, new_header;
 
@@ -263,7 +266,7 @@ find_consecutive_mp3_headers(const unsigned char *buf,
       return -1;
     if (decode_mp3_header(&buf[base + pos], &mp3header) && !mp3header.is_tag)
       break;
-    mxverb(4, fmt::format("mp3_reader: Found tag at {0} size {1}\n", base + pos , mp3header.framesize));
+    mxdebug_if(s_debug, fmt::format("find_consecutive_mp3_headers: Found tag at {0} size {1}\n", base + pos , mp3header.framesize));
     base += mp3header.framesize;
   } while (true);
 
@@ -275,7 +278,7 @@ find_consecutive_mp3_headers(const unsigned char *buf,
   base += pos;
 
   do {
-    mxverb(4, fmt::format("find_cons_mp3_h: starting with base at {0}\n", base));
+    mxdebug_if(s_debug, fmt::format("find_consecutive_mp3_headers: starting with base at {0}\n", base));
     offset = mp3header.framesize;
     for (i = 0; i < (num - 1); i++) {
       if ((size - base - offset) < 4)
@@ -286,7 +289,7 @@ find_consecutive_mp3_headers(const unsigned char *buf,
             && (new_header.layer              == mp3header.layer)
             && (new_header.channels           == mp3header.channels)
             && (new_header.sampling_frequency == mp3header.sampling_frequency)) {
-          mxverb(4, fmt::format("find_cons_mp3_h: found good header {0}\n", i));
+          mxdebug_if(s_debug, fmt::format("find_consecutive_mp3_headers: found good header {0}\n", i));
           offset += new_header.framesize;
           continue;
         } else

@@ -45,9 +45,9 @@ compressor_c::~compressor_c() {
   if (0 == items)
     return;
 
-  mxverb(2,
-         fmt::format("compression: Overall stats: raw size: {0}, compressed size: {1}, items: {2}, ratio: {3:.2f}%, avg bytes per item: {4}\n",
-                     raw_size, compressed_size, items, compressed_size * 100.0 / raw_size, compressed_size / items));
+  mxdebug_if(m_debug,
+             fmt::format("compression: Overall stats: raw size: {0}, compressed size: {1}, items: {2}, ratio: {3:.2f}%, avg bytes per item: {4}\n",
+                         raw_size, compressed_size, items, compressed_size * 100.0 / raw_size, compressed_size / items));
 }
 
 void

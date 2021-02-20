@@ -17,6 +17,7 @@
 
 #include "common/ape.h"
 #include "common/codec.h"
+#include "common/debugging.h"
 #include "common/endian.h"
 #include "common/error.h"
 #include "common/id3.h"
@@ -26,6 +27,10 @@
 #include "merge/input_x.h"
 #include "merge/output_control.h"
 #include "output/p_tta.h"
+
+namespace {
+debugging_option_c s_debug{"tta_reader"};
+}
 
 bool
 tta_reader_c::probe_file() {
@@ -64,11 +69,11 @@ tta_reader_c::read_headers() {
       seek_points.push_back(seek_point);
     } while (seek_sum < m_size);
 
-    mxverb(2,
-           fmt::format("tta: ch {0} bps {1} sr {2} dl {3} seek_sum {4} size {5} num {6}\n",
-                       get_uint16_le(&header.channels),    get_uint16_le(&header.bits_per_sample),
-                       get_uint32_le(&header.sample_rate), get_uint32_le(&header.data_length),
-                       seek_sum, m_size, seek_points.size()));
+    mxdebug_if(s_debug,
+               fmt::format("tta: ch {0} bps {1} sr {2} dl {3} seek_sum {4} size {5} num {6}\n",
+                           get_uint16_le(&header.channels),    get_uint16_le(&header.bits_per_sample),
+                           get_uint32_le(&header.sample_rate), get_uint32_le(&header.data_length),
+                           seek_sum, m_size, seek_points.size()));
 
     if (seek_sum != m_size)
       mxerror_fn(m_ti.m_fname, Y("The seek table in this TTA file seems to be broken.\n"));
@@ -107,7 +112,7 @@ tta_reader_c::read(generic_packetizer_c *,
 
   if (seek_points.size() <= pos) {
     double samples_left = (double)get_uint32_le(&header.data_length) - (seek_points.size() - 1) * TTA_FRAME_TIME * get_uint32_le(&header.sample_rate);
-    mxverb(2, fmt::format("tta: samples_left {0}\n", samples_left));
+    mxdebug_if(s_debug, fmt::format("tta: samples_left {0}\n", samples_left));
 
     PTZR0->process(new packet_t(mem, -1, std::llround(samples_left * 1000000000.0 / get_uint32_le(&header.sample_rate))));
   } else

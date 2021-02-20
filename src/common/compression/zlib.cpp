@@ -56,7 +56,7 @@ zlib_compressor_c::do_decompress(unsigned char const *buffer,
   dst->resize(d_stream.total_out);
   inflateEnd(&d_stream);
 
-  mxverb(3, fmt::format("zlib_compressor_c: Decompression from {0} to {1}, {2}%\n", size, dst->get_size(), dst->get_size() * 100 / size));
+  mxdebug_if(m_debug, fmt::format("zlib_compressor_c: Decompression from {0} to {1}, {2}%\n", size, dst->get_size(), dst->get_size() * 100 / size));
 
   return dst;
 }
@@ -94,7 +94,7 @@ zlib_compressor_c::do_compress(unsigned char const *buffer,
   dst->resize(c_stream.total_out);
   deflateEnd(&c_stream);
 
-  mxverb(3, fmt::format("zlib_compressor_c: Compression from {0} to {1}, {2}%\n", size, dst->get_size(), dst->get_size() * 100 / size));
+  mxdebug_if(m_debug, fmt::format("zlib_compressor_c: Compression from {0} to {1}, {2}%\n", size, dst->get_size(), dst->get_size() * 100 / size));
 
   return dst;
 }

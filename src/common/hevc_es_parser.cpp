@@ -62,10 +62,6 @@ frame_t::clear() {
 }
 
 es_parser_c::es_parser_c()
-  : m_debug_keyframe_detection(debugging_c::requested("hevc_parser|hevc_keyframe_detection"))
-  , m_debug_nalu_types(        debugging_c::requested("hevc_parser|hevc_nalu_types"))
-  , m_debug_timestamps(        debugging_c::requested("hevc_parser|hevc_timestamps"))
-  , m_debug_sps_info(          debugging_c::requested("hevc_parser|hevc_sps|hevc_sps_info"))
 {
   if (debugging_c::requested("hevc_statistics"))
     init_nalu_names();
@@ -318,7 +314,7 @@ es_parser_c::handle_vps_nalu(memory_cptr const &nalu) {
     m_hevcc_changed = true;
 
   } else if (m_vps_info_list[i].checksum != vps_info.checksum) {
-    mxverb(2, fmt::format("hevc: VPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", vps_info.id, m_vps_info_list[i].checksum, vps_info.checksum));
+    mxdebug_if(m_debug_parameter_sets, fmt::format("hevc: VPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", vps_info.id, m_vps_info_list[i].checksum, vps_info.checksum));
 
     m_vps_info_list[i] = vps_info;
     m_vps_list[i]      = nalu;
@@ -378,7 +374,7 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
     m_hevcc_changed = true;
 
   } else if (m_sps_info_list[i].checksum != sps_info.checksum) {
-    mxverb(2, fmt::format("hevc: SPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", sps_info.id, m_sps_info_list[i].checksum, sps_info.checksum));
+    mxdebug_if(m_debug_parameter_sets, fmt::format("hevc: SPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", sps_info.id, m_sps_info_list[i].checksum, sps_info.checksum));
 
     cleanup();
 
@@ -449,7 +445,7 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
     m_hevcc_changed = true;
 
   } else if (m_pps_info_list[i].checksum != pps_info.checksum) {
-    mxverb(2, fmt::format("hevc: PPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", pps_info.id, m_pps_info_list[i].checksum, pps_info.checksum));
+    mxdebug_if(m_debug_parameter_sets, fmt::format("hevc: PPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", pps_info.id, m_pps_info_list[i].checksum, pps_info.checksum));
 
     if (m_pps_info_list[i].sps_id != pps_info.sps_id)
       cleanup();
@@ -586,7 +582,7 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
       if (m_pps_info_list[pps_idx].id == si.pps_id)
         break;
     if (m_pps_info_list.size() == pps_idx) {
-      mxverb(3, fmt::format("slice parser error: PPS not found: {0}\n", si.pps_id));
+      mxdebug_if(m_debug_parameter_sets, fmt::format("slice parser error: PPS not found: {0}\n", si.pps_id));
       return false;
     }
 

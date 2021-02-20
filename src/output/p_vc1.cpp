@@ -66,10 +66,6 @@ vc1_video_packetizer_c::set_headers() {
       int display_width  = m_seqhdr.display_width;
       int display_height = m_seqhdr.display_height;
 
-      mxverb(2,
-             fmt::format("vc1: display width {0} height {1} aspect_ratio_flag {2} ar_num {3} ar_den {4}\n",
-                         m_seqhdr.display_width, m_seqhdr.display_height, m_seqhdr.aspect_ratio_flag, m_seqhdr.aspect_ratio_width, m_seqhdr.aspect_ratio_height));
-
       set_video_display_dimensions(display_width, display_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
 
     } else

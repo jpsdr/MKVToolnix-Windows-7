@@ -240,27 +240,6 @@ mxerror_tid(const std::string &file_name,
 }
 
 void
-mxverb_fn(unsigned int level,
-          const std::string &file_name,
-          const std::string &message) {
-  if (verbose < level)
-    return;
-
-  mxinfo(fmt::format(Y("'{0}': {1}"), file_name, message));
-}
-
-void
-mxverb_tid(unsigned int level,
-           const std::string &file_name,
-           int64_t track_id,
-           const std::string &message) {
-  if (verbose < level)
-    return;
-
-  mxinfo(fmt::format(Y("'{0}' track {1}: {2}"), file_name, track_id, message));
-}
-
-void
 init_common_output(bool no_charset_detection) {
   if (no_charset_detection)
     set_cc_stdio("UTF-8");

@@ -15,12 +15,17 @@
 #include "common/common_pch.h"
 
 #include "common/bit_reader.h"
+#include "common/debugging.h"
 #include "common/endian.h"
 #include "common/memory_slice_cursor.h"
 #include "common/strings/formatting.h"
 #include "common/vc1.h"
 
 namespace mtx::vc1 {
+
+namespace {
+debugging_option_c s_debug{"vc1"};
+}
 
 sequence_header_t::sequence_header_t() {
   memset(this, 0, sizeof(sequence_header_t));
@@ -432,9 +437,7 @@ es_parser_c::handle_frame_packet(memory_cptr packet) {
   m_current_frame->data->take_ownership();
 
   if (!m_timestamps.empty())
-    mxverb(2,
-           fmt::format("es_parser_c::handle_frame_packet: next provided timestamp {0} next calculated timestamp {1}\n",
-                       mtx::string::format_timestamp(m_timestamps.front()), mtx::string::format_timestamp(peek_next_calculated_timestamp())));
+    mxdebug_if(s_debug, fmt::format("es_parser_c::handle_frame_packet: next provided timestamp {0} next calculated timestamp {1}\n", mtx::string::format_timestamp(m_timestamps.front()), mtx::string::format_timestamp(peek_next_calculated_timestamp())));
 
 }
 
@@ -551,9 +554,7 @@ es_parser_c::get_next_timestamp() {
                         - m_num_repeated_fields                     * m_default_duration / 2;
 
   if (is_timestamp_available()) {
-    mxverb(3,
-           fmt::format("\nes_parser_c::get_next_timestamp(): provided timestamp available; original next {0}, provided {1}\n",
-                       mtx::string::format_timestamp(next_timestamp), mtx::string::format_timestamp(m_timestamps.front())));
+    mxdebug_if(s_debug, fmt::format("\nes_parser_c::get_next_timestamp(): provided timestamp available; original next {0}, provided {1}\n", mtx::string::format_timestamp(next_timestamp), mtx::string::format_timestamp(m_timestamps.front())));
 
     next_timestamp         = m_timestamps.front();
     m_previous_timestamp   = m_timestamps.front();

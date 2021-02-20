@@ -48,10 +48,6 @@ void mxinfo(const std::wstring &info);
 void mxwarn(const std::string &warning);
 void mxerror(const std::string &error);
 
-#define mxverb(level, message)        \
-  if (verbose >= level)               \
-    mxinfo(message);
-
 void mxinfo_fn(const std::string &file_name, const std::string &info);
 void mxinfo_tid(const std::string &file_name, int64_t track_id, const std::string &info);
 
@@ -60,8 +56,5 @@ void mxwarn_tid(const std::string &file_name, int64_t track_id, const std::strin
 
 void mxerror_fn(const std::string &file_name, const std::string &error);
 void mxerror_tid(const std::string &file_name, int64_t track_id, const std::string &error);
-
-void mxverb_fn(unsigned int level, const std::string &file_name, const std::string &message);
-void mxverb_tid(unsigned int level, const std::string &file_name, int64_t track_id, const std::string &message);
 
 std::string fourcc_to_string(uint32_t fourcc);

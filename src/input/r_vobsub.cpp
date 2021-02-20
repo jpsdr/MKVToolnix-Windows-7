@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/codec.h"
+#include "common/debugging.h"
 #include "common/hacks.h"
 #include "common/id_info.h"
 #include "common/iso639.h"
@@ -32,6 +33,9 @@
 #include "merge/output_control.h"
 #include "output/p_vobsub.h"
 
+namespace {
+debugging_option_c s_debug{"vobsub_reader"};
+}
 
 #define hexvalue(c) (  isdigit(c)        ? (c) - '0' \
                      : tolower(c) == 'a' ? 10        \
@@ -95,10 +99,8 @@ vobsub_reader_c::~vobsub_reader_c() {
   uint32_t i;
 
   for (i = 0; i < tracks.size(); i++) {
-    mxverb(2,
-           fmt::format("r_vobsub track {0} SPU size: {1}, overall size: {2}, overhead: {3} ({4:.3f}%)\n",
-                       i, tracks[i]->spu_size, tracks[i]->spu_size + tracks[i]->overhead, tracks[i]->overhead,
-                       100.0 * tracks[i]->overhead / (tracks[i]->overhead + tracks[i]->spu_size)));
+    mxdebug_if(s_debug, fmt::format("r_vobsub track {0} SPU size: {1}, overall size: {2}, overhead: {3} ({4:.3f}%)\n",
+                                    i, tracks[i]->spu_size, tracks[i]->spu_size + tracks[i]->overhead, tracks[i]->overhead, 100.0 * tracks[i]->overhead / (tracks[i]->overhead + tracks[i]->spu_size)));
     delete tracks[i];
   }
 }
@@ -176,7 +178,7 @@ vobsub_reader_c::parse_headers() {
         else {
           tracks.push_back(track);
           if (sort_required) {
-            mxverb(2, fmt::format("vobsub_reader: Sorting track {0}\n", tracks.size()));
+            mxdebug_if(s_debug, fmt::format("vobsub_reader: Sorting track {0}\n", tracks.size()));
             std::stable_sort(track->entries.begin(), track->entries.end());
           }
         }
@@ -288,7 +290,7 @@ vobsub_reader_c::parse_headers() {
     else {
       tracks.push_back(track);
       if (sort_required) {
-        mxverb(2, fmt::format("vobsub_reader: Sorting track {0}\n", tracks.size()));
+        mxdebug_if(s_debug, fmt::format("vobsub_reader: Sorting track {0}\n", tracks.size()));
         std::stable_sort(track->entries.begin(), track->entries.end());
       }
     }
@@ -321,7 +323,10 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
   auto duration = mtx::spu::get_duration(buf, size);
   if (!duration.valid()) {
     duration = timestamp_c::ns(default_duration);
-    mxverb(2, fmt::format("vobsub_reader: Could not extract the duration for a SPU packet (timestamp: {0}).", mtx::string::format_timestamp(timestamp, 3)));
+    std::string dbg;
+
+    if (s_debug)
+      dbg = fmt::format("vobsub_reader: Could not extract the duration for a SPU packet (timestamp: {0}).", mtx::string::format_timestamp(timestamp, 3));
 
     int dcsq  =                   get_uint16_be(&buf[2]);
     int dcsq2 = dcsq + 3 < size ? get_uint16_be(&buf[dcsq + 2]) : -1;
@@ -375,11 +380,13 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
         buf[dcsq2 + 3] = (uint8_t)(dcsq2);
         buf[dcsq2 + 4] = 0x02;                       // stop display command
         buf[dcsq2 + 5] = 0xff;                       // end command
-        mxverb(2, fmt::format(" Added Stop Display cmd (SP_DCSQ_STM=0x{0:04x})", stm));
+
+        if (s_debug)
+          dbg += fmt::format(" Added Stop Display cmd (SP_DCSQ_STM=0x{0:04x})", stm);
       }
     }
 
-    mxverb(2, fmt::format("\n"));
+    mxdebug_if(s_debug, dbg + "\n");
   }
 
   if (duration.valid())
@@ -420,9 +427,9 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
   while (1) {
     if (spu_len_valid && ((dst_size >= spu_len) || (m_sub_file->getFilePointer() >= extraction_end_pos))) {
       if (dst_size != spu_len)
-        mxverb(3,
-               fmt::format("r_vobsub.cpp: stddeliver spu_len different from dst_size; pts {4} spu_len {0} dst_size {1} curpos {2} endpos {3}\n",
-                           spu_len, dst_size, m_sub_file->getFilePointer(), extraction_end_pos, mtx::string::format_timestamp(pts)));
+        mxdebug_if(s_debug,
+                   fmt::format("r_vobsub.cpp: stddeliver spu_len different from dst_size; pts {4} spu_len {0} dst_size {1} curpos {2} endpos {3}\n",
+                               spu_len, dst_size, m_sub_file->getFilePointer(), extraction_end_pos, mtx::string::format_timestamp(pts)));
       if (2 < dst_size)
         put_uint16_be(dst_buf, dst_size);
 
@@ -532,9 +539,9 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
             track->aid = packet_aid;
           else if (track->aid != packet_aid) {
             // The packet does not belong to the current subtitle stream.
-            mxverb(3,
-                   fmt::format("vobsub_reader: skipping sub packet with aid {0} (wanted aid: {1}) with size {2} at {3}\n",
-                               packet_aid, track->aid, packet_size, m_sub_file->getFilePointer() - extraction_start_pos));
+            mxdebug_if(s_debug,
+                       fmt::format("vobsub_reader: skipping sub packet with aid {0} (wanted aid: {1}) with size {2} at {3}\n",
+                                   packet_aid, track->aid, packet_size, m_sub_file->getFilePointer() - extraction_start_pos));
             m_sub_file->skip(packet_size);
             idx = len;
             break;
@@ -548,7 +555,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
           } else
             dst_buf = (unsigned char *)saferealloc(dst_buf, dst_size + packet_size);
 
-          mxverb(3, fmt::format("vobsub_reader: sub packet data: aid: {0}, pts: {1}, packet_size: {2}\n", track->aid, mtx::string::format_timestamp(pts, 3), packet_size));
+          mxdebug_if(s_debug, fmt::format("vobsub_reader: sub packet data: aid: {0}, pts: {1}, packet_size: {2}\n", track->aid, mtx::string::format_timestamp(pts, 3), packet_size));
           if (m_sub_file->read(&dst_buf[dst_size], packet_size) != packet_size) {
             mxwarn(Y("vobsub_reader: sub file read failure"));
             return deliver();

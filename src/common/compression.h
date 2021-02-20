@@ -52,13 +52,15 @@ using compressor_ptr = std::shared_ptr<compressor_c>;
 
 class compressor_c {
 protected:
-  compression_method_e method;
-  int64_t raw_size, compressed_size, items;
+  compression_method_e method{COMPRESSION_UNSPECIFIED};
+  int64_t raw_size{}, compressed_size{}, items{};
+  debugging_option_c m_debug{"compressor|compression"};
 
 public:
-  compressor_c(compression_method_e n_method):
-    method(n_method), raw_size(0), compressed_size(0), items(0) {
-  };
+  compressor_c(compression_method_e method_)
+    : method{method_}
+  {
+  }
 
   virtual ~compressor_c();
 

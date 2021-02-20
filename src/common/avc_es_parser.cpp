@@ -61,6 +61,7 @@ es_parser_c::es_parser_c()
   , m_debug_timestamps{        "avc_parser|avc_timestamps"}
   , m_debug_sps_info{          "avc_parser|avc_sps|avc_sps_info"}
   , m_debug_sps_pps_changes{   "avc_parser|avc_sps_pps_changes"}
+  , m_debug_errors{            "avc_parser|avc_errors"}
 {
   if (m_debug_nalu_types || debugging_c::requested("avc_statistics"))
     init_nalu_names();
@@ -576,7 +577,7 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
     ++m_stats.num_slices_by_type[9 < si.type ? 10 : si.type];
 
     if (9 < si.type) {
-      mxverb(3, fmt::format("slice parser error: 9 < si.type: {0}\n", si.type));
+      mxdebug_if(m_debug_errors, fmt::format("slice parser error: 9 < si.type: {0}\n", si.type));
       return false;
     }
 
@@ -587,7 +588,7 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
       if (m_pps_info_list[pps_idx].id == si.pps_id)
         break;
     if (m_pps_info_list.size() == pps_idx) {
-      mxverb(3, fmt::format("slice parser error: PPS not found: {0}\n", si.pps_id));
+      mxdebug_if(m_debug_errors, fmt::format("slice parser error: PPS not found: {0}\n", si.pps_id));
       return false;
     }
 

@@ -16,6 +16,7 @@
 #include <cctype>
 
 #include "common/common_pch.h"
+#include "common/debugging.h"
 #include "common/endian.h"
 #include "common/wavpack.h"
 
@@ -27,6 +28,10 @@
 
 #define ID_BLOCK_CHECKSUM       (ID_OPTIONAL_DATA | 0xf)
 #define ID_SAMPLE_RATE          (ID_OPTIONAL_DATA | 0x7)
+
+namespace {
+debugging_option_c s_debug{"wavpack"};
+}
 
 const uint32_t sample_rates [] = {
    6000,  8000,  9600, 11025, 12000, 16000, 22050,
@@ -275,20 +280,12 @@ wv_parse_frame(mm_io_c &in,
         meta.channel_count = (flags & WV_MONO_FLAG) ? 1 : 2;
         if (flags & WV_FINAL_BLOCK) {
           can_leave = true;
-          mxverb(3,
-                 fmt::format("wavpack_reader: {0} block: {1}, {2} bytes\n",
-                             flags & WV_MONO_FLAG   ? "mono"   : "stereo",
-                             flags & WV_HYBRID_FLAG ? "hybrid" : "lossless",
-                             ck_size + 8));
+          mxdebug_if(s_debug, fmt::format("wavpack_reader: {0} block: {1}, {2} bytes\n", flags & WV_MONO_FLAG   ? "mono"   : "stereo", flags & WV_HYBRID_FLAG ? "hybrid" : "lossless", ck_size + 8));
         }
       } else {
         if (flags & WV_FINAL_BLOCK) {
           can_leave = true;
-          mxverb(2,
-                 fmt::format("wavpack_reader: {0} chans, mode: {1}, {2} bytes\n",
-                             meta.channel_count,
-                             flags & WV_HYBRID_FLAG ? "hybrid" : "lossless",
-                             ck_size + 8));
+          mxdebug_if(s_debug, fmt::format("wavpack_reader: {0} chans, mode: {1}, {2} bytes\n", meta.channel_count, flags & WV_HYBRID_FLAG ? "hybrid" : "lossless", ck_size + 8));
         }
       }
     } else

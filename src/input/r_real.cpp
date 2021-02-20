@@ -17,6 +17,7 @@
 
 #include "common/bit_reader.h"
 #include "common/codec.h"
+#include "common/debugging.h"
 #include "common/ebml.h"
 #include "common/endian.h"
 #include "common/error.h"
@@ -32,6 +33,10 @@
 #include "output/p_generic_video.h"
 
 using namespace libmatroska;
+
+namespace {
+debugging_option_c s_debug{"real_reader"};
+}
 
 /*
    Description of the RealMedia file format:
@@ -221,7 +226,7 @@ real_reader_c::parse_headers() {
         ok = false;
       }
 
-      mxverb(2, fmt::format("real_reader: extra_data_size: {0}\n", dmx->extra_data->get_size()));
+      mxdebug_if(s_debug, fmt::format("real_reader: extra_data_size: {0}\n", dmx->extra_data->get_size()));
 
       if (ok) {
         dmx->private_data = memory_c::clone(ts_data, ts_size);
@@ -259,7 +264,7 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
   if ((dmx->extra_data) && (4 < dmx->extra_data->get_size())) {
     const unsigned char *extra_data = dmx->extra_data->get_buffer();
     uint32_t extra_len              = get_uint32_be(extra_data);
-    mxverb(2, fmt::format("real_reader: extra_len: {0}\n", extra_len));
+    mxdebug_if(s_debug, fmt::format("real_reader: extra_len: {0}\n", extra_len));
 
     if ((4 + extra_len) <= dmx->extra_data->get_size()) {
       auto parsed_audio_config = mtx::aac::parse_audio_specific_config(&extra_data[4 + 1], extra_len - 1);
@@ -268,9 +273,7 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
 
       audio_config = *parsed_audio_config;
 
-      mxverb(2,
-             fmt::format("real_reader: 1. profile: {0}, channels: {1}, sample_rate: {2}, output_sample_rate: {3}, sbr: {4}\n",
-                         audio_config.profile, audio_config.channels, audio_config.sample_rate, audio_config.output_sample_rate, audio_config.sbr));
+      mxdebug_if(s_debug, fmt::format("real_reader: 1. profile: {0}, channels: {1}, sample_rate: {2}, output_sample_rate: {3}, sbr: {4}\n", audio_config.profile, audio_config.channels, audio_config.sample_rate, audio_config.output_sample_rate, audio_config.sbr));
 
       if (audio_config.sbr)
         audio_config.profile = AAC_PROFILE_SBR;
@@ -306,9 +309,7 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
        || (mtx::includes(m_ti.m_all_aac_is_sbr, -1)  && !m_ti.m_all_aac_is_sbr[-1])))
     audio_config.profile = detected_profile;
 
-  mxverb(2,
-         fmt::format("real_reader: 2. profile: {0}, channels: {1}, sample_rate: {2}, output_sample_rate: {3}, sbr: {4}\n",
-                     audio_config.profile, audio_config.channels, audio_config.sample_rate, audio_config.output_sample_rate, audio_config.sbr));
+  mxdebug_if(s_debug, fmt::format("real_reader: 2. profile: {0}, channels: {1}, sample_rate: {2}, output_sample_rate: {3}, sbr: {4}\n", audio_config.profile, audio_config.channels, audio_config.sample_rate, audio_config.output_sample_rate, audio_config.sbr));
 
   dmx->is_aac = true;
   dmx->ptzr   = add_packetizer(new aac_packetizer_c(this, m_ti, audio_config, aac_packetizer_c::headerless));
@@ -471,7 +472,7 @@ real_reader_c::queue_one_audio_frame(real_demuxer_cptr dmx,
 
   dmx->last_timestamp = timestamp;
 
-  mxverb_tid(2, m_ti.m_fname, dmx->track->id, fmt::format("enqueueing one length {0} timestamp {1} flags 0x{2:08x}\n", mem->get_size(), timestamp, flags));
+  mxdebug_if(s_debug, fmt::format("'{0}' track {1}: enqueueing one length {2} timestamp {3} flags 0x{4:08x}\n", m_ti.m_fname, dmx->track->id, mem->get_size(), timestamp, flags));
 }
 
 void
@@ -503,9 +504,7 @@ real_reader_c::deliver_audio_frames(real_demuxer_cptr dmx,
 
   for (i = 0; i < dmx->segments.size(); i++) {
     rv_segment_cptr segment = dmx->segments[i];
-    mxverb_tid(2, m_ti.m_fname, dmx->track->id,
-               fmt::format("delivering audio length {0} timestamp {1} flags 0x{2:08x} duration {3}\n",
-                           segment->data->get_size(), dmx->last_timestamp, segment->flags, duration));
+    mxdebug_if(s_debug, fmt::format("'{0}' track {1}: delivering audio length {2} timestamp {3} flags 0x{4:08x} duration {5}\n", m_ti.m_fname, dmx->track->id, segment->data->get_size(), dmx->last_timestamp, segment->flags, duration));
 
     PTZR(dmx->ptzr)->process(new packet_t(segment->data, dmx->last_timestamp, duration,
                                           (segment->flags & RMFF_FRAME_FLAG_KEYFRAME) == RMFF_FRAME_FLAG_KEYFRAME ? -1 : dmx->ref_timestamp));
@@ -528,7 +527,7 @@ real_reader_c::deliver_aac_frames(real_demuxer_cptr dmx,
   }
 
   int num_sub_packets = chunk[1] >> 4;
-  mxverb(2, fmt::format("real_reader: num_sub_packets = {0}\n", num_sub_packets));
+  mxdebug_if(s_debug, fmt::format("real_reader: num_sub_packets = {0}\n", num_sub_packets));
   if ((2 + num_sub_packets * 2) > length) {
     mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(Y("Short AAC audio packet (length: {0} < {1})\n"), length, 2 + num_sub_packets * 2));
     return;
@@ -539,7 +538,7 @@ real_reader_c::deliver_aac_frames(real_demuxer_cptr dmx,
     int sub_length  = get_uint16_be(&chunk[2 + i * 2]);
     len_check      += sub_length;
 
-    mxverb(2, fmt::format("real_reader: {0}: length {1}\n", i, sub_length));
+    mxdebug_if(s_debug, fmt::format("real_reader: {0}: length {1}\n", i, sub_length));
   }
 
   if (len_check != length) {

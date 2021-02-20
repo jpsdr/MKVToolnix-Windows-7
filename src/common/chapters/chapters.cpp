@@ -22,6 +22,7 @@
 #include "common/chapters/chapters.h"
 #include "common/chapters/dvd.h"
 #include "common/construct.h"
+#include "common/debugging.h"
 #include "common/ebml.h"
 #include "common/error.h"
 #include "common/iso3166.h"
@@ -41,6 +42,10 @@
 using namespace libmatroska;
 
 namespace mtx::chapters {
+
+namespace {
+debugging_option_c s_debug{"chapters|chapter_parser"};
+}
 
 /** The default language for all chapter entries that don't have their own. */
 mtx::bcp47::language_c g_default_language;
@@ -623,9 +628,7 @@ remove_entries(int64_t min_ts,
     if (entries[i].remove && (entries[i].start < min_ts) && (entries[i].end > min_ts))
       entries[i].spans = true;
 
-    mxverb(3,
-           fmt::format("remove_chapters: entries[{0}]: remove {1} spans {2} start {3} end {4}\n",
-                       i, entries[i].remove, entries[i].spans, entries[i].start, entries[i].end));
+    mxdebug_if(s_debug, fmt::format("remove_chapters: entries[{0}]: remove {1} spans {2} start {3} end {4}\n", i, entries[i].remove, entries[i].spans, entries[i].start, entries[i].end));
 
     // Spanning entries must be kept, and their start timestamp must be
     // adjusted. Entries that are to be deleted will be deleted later and
@@ -697,7 +700,7 @@ merge_entries(EbmlMaster &master) {
     int64_t start_ts = get_start(*atom, 0);
     int64_t end_ts   = get_end(*atom);
 
-    mxverb(3, fmt::format("chapters: merge_entries: looking for {0} with {1}, {2}\n", uid, start_ts, end_ts));
+    mxdebug_if(s_debug, fmt::format("chapters: merge_entries: looking for {0} with {1}, {2}\n", uid, start_ts, end_ts));
 
     // Now iterate over all remaining atoms and find those with the same
     // UID.
@@ -746,7 +749,7 @@ merge_entries(EbmlMaster &master) {
           ++merge_child_idx;
       }
 
-      mxverb(3, fmt::format("chapters: merge_entries:   found one at {0} with {1}, {2}; merged to {3}, {4}\n", merge_idx, merge_start_ts, merge_end_ts, start_ts, end_ts));
+      mxdebug_if(s_debug, fmt::format("chapters: merge_entries:   found one at {0} with {1}, {2}; merged to {3}, {4}\n", merge_idx, merge_start_ts, merge_end_ts, start_ts, end_ts));
 
       // Finally remove the entry itself.
       delete master[merge_idx];

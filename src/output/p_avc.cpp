@@ -153,8 +153,6 @@ avc_video_packetizer_c::setup_nalu_size_len_change() {
   m_max_nalu_size     = 1ll << (8 * m_nalu_size_len_dst);
 
   set_codec_private(m_ti.m_private_data);
-
-  mxverb(2, fmt::format("mpeg4_p10: Adjusting NALU size length from {0} to {1}\n", m_nalu_size_len_src, m_nalu_size_len_dst));
 }
 
 void

@@ -100,8 +100,6 @@ write_changes(options_cptr &options,
       if (id_to_write != l1_element.Generic().GlobalId)
         continue;
 
-      mxverb(2, fmt::format(Y("Element {0} is written.\n"), l1_element.Generic().DebugName));
-
       auto result = l1_element.ListSize() ? analyzer->update_element(&l1_element, target->write_elements_set_to_default_value(), target->add_mandatory_elements_if_missing())
                   :                         analyzer->remove_elements(EbmlId(l1_element));
       if (kax_analyzer_c::uer_success != result)

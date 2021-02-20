@@ -170,8 +170,6 @@ qtmp4_reader_c::probe_file() {
     if (1 == atom_size)
       atom_size = m_in->read_uint64_be();
 
-    mxverb(3, fmt::format("Quicktime/MP4 reader: Atom: '{0}': {1}\n", atom, atom_size));
-
     if (   (atom == "moov")
         || (atom == "ftyp")
         || (atom == "mdat")

@@ -109,7 +109,7 @@ avi_reader_c::~avi_reader_c() {
   if (m_avi)
     AVI_close(m_avi);
 
-  mxverb(2, fmt::format("avi_reader_c: Dropped video frames: {0}\n", m_dropped_video_frames));
+  mxdebug_if(m_debug, fmt::format("avi_reader_c: Dropped video frames: {0}\n", m_dropped_video_frames));
 }
 
 void
@@ -193,26 +193,26 @@ void
 avi_reader_c::create_video_packetizer() {
   size_t i;
 
-  mxverb_tid(4, m_ti.m_fname, 0, "frame sizes:\n");
+  mxdebug_if(m_debug, fmt::format("'{0}' track {1}: frame sizes:\n", m_ti.m_fname, 0));
 
   for (i = 0; i < m_max_video_frames; i++) {
     m_bytes_to_process += AVI_frame_size(m_avi, i);
-    mxverb(4, fmt::format("  {0}: {1}\n", i, AVI_frame_size(m_avi, i)));
+    mxdebug_if(m_debug, fmt::format("  {0}: {1}\n", i, AVI_frame_size(m_avi, i)));
   }
 
   if (m_avi->bitmap_info_header) {
     m_ti.m_private_data = memory_c::clone(m_avi->bitmap_info_header, sizeof(alBITMAPINFOHEADER) + m_avi->extradata_size);
 
-    mxverb(4, fmt::format("track extra data size: {0}\n", m_ti.m_private_data->get_size() - sizeof(alBITMAPINFOHEADER)));
+    mxdebug_if(m_debug, fmt::format("track extra data size: {0}\n", m_ti.m_private_data->get_size() - sizeof(alBITMAPINFOHEADER)));
 
     if (sizeof(alBITMAPINFOHEADER) < m_ti.m_private_data->get_size())
-      mxverb(4, fmt::format("  {0}\n", mtx::string::to_hex(m_ti.m_private_data->get_buffer() + sizeof(alBITMAPINFOHEADER), m_ti.m_private_data->get_size() - sizeof(alBITMAPINFOHEADER))));
+      mxdebug_if(m_debug, fmt::format("  {0}\n", mtx::string::to_hex(m_ti.m_private_data->get_buffer() + sizeof(alBITMAPINFOHEADER), m_ti.m_private_data->get_size() - sizeof(alBITMAPINFOHEADER))));
   }
 
   const char *codec = AVI_video_compressor(m_avi);
-  if (mpeg4::p2::is_v3_fourcc(codec))
+  if (mtx::mpeg4_p2::is_v3_fourcc(codec))
     m_divx_type = DIVX_TYPE_V3;
-  else if (mpeg4::p2::is_fourcc(codec))
+  else if (mtx::mpeg4_p2::is_fourcc(codec))
     m_divx_type = DIVX_TYPE_MPEG4;
 
   if (mtx::includes(m_ti.m_default_durations, 0))
@@ -228,7 +228,7 @@ avi_reader_c::create_video_packetizer() {
   else if (mtx::avc::is_avc_fourcc(codec) && !mtx::hacks::is_engaged(mtx::hacks::ALLOW_AVC_IN_VFW_MODE))
     create_mpeg4_p10_packetizer();
 
-  else if (mpeg1_2::is_fourcc(get_uint32_le(codec)))
+  else if (mtx::mpeg1_2::is_fourcc(get_uint32_le(codec)))
     create_mpeg1_2_packetizer();
 
   else if (FOURCC('V', 'P', '8', '0') == get_uint32_be(codec))
@@ -854,7 +854,7 @@ avi_reader_c::extended_identify_mpeg4_l2(mtx::id::info_c &info) {
   AVI_read_frame(m_avi, reinterpret_cast<char *>(buffer), &dummy_key);
 
   uint32_t par_num, par_den;
-  if (mpeg4::p2::extract_par(buffer, size, par_num, par_den)) {
+  if (mtx::mpeg4_p2::extract_par(buffer, size, par_num, par_den)) {
     auto aspect_ratio = static_cast<double>(m_video_width) * par_num / m_video_height / par_den;
 
     int disp_width, disp_height;

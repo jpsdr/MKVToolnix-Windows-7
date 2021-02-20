@@ -71,7 +71,7 @@ private:
   uint64_t m_bytes_to_process{}, m_bytes_processed{};
   bool m_video_track_ok{};
 
-  debugging_option_c m_debug_aspect_ratio{"avi|avi_aspect_ratio"};
+  debugging_option_c m_debug_aspect_ratio{"avi|avi_aspect_ratio"}, m_debug{"avi|avi_reader"};
 
 public:
   virtual ~avi_reader_c();

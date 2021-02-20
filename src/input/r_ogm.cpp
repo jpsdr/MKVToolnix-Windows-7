@@ -988,10 +988,6 @@ ogm_a_aac_demuxer_c::initialize() {
     audio_config.sample_rate = get_uint64_le(&sth->samples_per_unit);
     audio_config.profile     = AAC_PROFILE_LC;
   }
-
-  mxverb(2,
-         fmt::format("ogm_reader: {0}/{1}: profile {2}, channels {3}, sample_rate {4}, sbr {5}, output_sample_rate {6}\n",
-                     m_ti.m_id, m_ti.m_fname, audio_config.profile, audio_config.channels, audio_config.sample_rate, audio_config.sbr, audio_config.output_sample_rate));
 }
 
 generic_packetizer_c *
@@ -1400,7 +1396,7 @@ ogm_v_mscomp_demuxer_c::create_packetizer() {
   int height          = get_uint32_le(&sth->sh.video.height);
 
   generic_packetizer_c *ptzr_obj;
-  if (mpeg4::p2::is_fourcc(sth->subtype))
+  if (mtx::mpeg4_p2::is_fourcc(sth->subtype))
     ptzr_obj = new mpeg4_p2_video_packetizer_c(reader, m_ti, fps, width, height, false);
   else
     ptzr_obj = new video_for_windows_packetizer_c(reader, m_ti, fps, width, height);
@@ -1499,7 +1495,7 @@ ogm_v_theora_demuxer_c::create_packetizer() {
 }
 
 void
-ogm_v_theora_demuxer_c::process_page(int64_t granulepos) {
+ogm_v_theora_demuxer_c::process_page([[maybe_unused]] int64_t granulepos) {
   ogg_packet op;
 
   while (ogg_stream_packetout(&os, &op) == 1) {
@@ -1519,10 +1515,6 @@ ogm_v_theora_demuxer_c::process_page(int64_t granulepos) {
     ++units_processed;
 
     reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes), timestamp, duration, bref, VFT_NOBFRAME));
-
-    mxverb(3,
-           fmt::format("Theora track {0} kfgshift {1} granulepos 0x{2:08x} {3:08x}{4}\n",
-                       track_id, theora.kfgshift, granulepos >> 32, granulepos & 0xffffffff, is_keyframe ? " key" : ""));
   }
 }
 

@@ -16,6 +16,7 @@
 #include <cstring>
 
 #include "common/codec.h"
+#include "common/debugging.h"
 #include "common/endian.h"
 #include "common/error.h"
 #include "common/mm_io_x.h"
@@ -26,6 +27,10 @@
 #include "merge/file_status.h"
 #include "mpegparser/M2VParser.h"
 #include "output/p_mpeg1_2.h"
+
+namespace {
+debugging_option_c s_debug{"mpeg_es_reader"};
+}
 
 #define READ_SIZE 1024 * 1024
 
@@ -136,7 +141,7 @@ mpeg_es_reader_c::read_headers() {
       dwidth = (int)(height * aspect_ratio);
     dheight = height;
 
-    mxverb(2, fmt::format("mpeg_es_reader: version {0} width {1} height {2} FPS {3} AR {4}\n", version, width, height, frame_rate, aspect_ratio));
+    mxdebug_if(s_debug, fmt::format("mpeg_es_reader: version {0} width {1} height {2} FPS {3} AR {4}\n", version, width, height, frame_rate, aspect_ratio));
 
   } catch (mtx::mm_io::exception &) {
     throw mtx::input::open_x();

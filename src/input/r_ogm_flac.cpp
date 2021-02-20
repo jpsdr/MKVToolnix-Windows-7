@@ -17,10 +17,15 @@
 
 #include <FLAC/stream_decoder.h>
 
+#include "common/debugging.h"
 #include "common/mm_file_io.h"
 #include "output/p_flac.h"
 #include "input/r_ogm.h"
 #include "input/r_ogm_flac.h"
+
+namespace {
+debugging_option_c s_debug{"ogg_flac"};
+}
 
 #define BUFFER_SIZE 4096
 
@@ -51,7 +56,7 @@ fhe_read_cb(const FLAC__StreamDecoder *,
   *bytes = op.bytes - offset;
 
   fhe->num_packets++;
-  mxverb(2, fmt::format("flac_header_extraction: read packet number {0} with {1} bytes and offset {2}\n", fhe->num_packets, op.bytes, offset));
+  mxdebug_if(s_debug, fmt::format("flac_header_extraction: read packet number {0} with {1} bytes and offset {2}\n", fhe->num_packets, op.bytes, offset));
 
   return FLAC__STREAM_DECODER_READ_STATUS_CONTINUE;
 }
@@ -61,7 +66,7 @@ fhe_write_cb(const FLAC__StreamDecoder *,
              const FLAC__Frame *,
              const FLAC__int32 * const [],
              void *client_data) {
-  mxverb(2, "flac_header_extraction: write cb\n");
+  mxdebug_if(s_debug, "flac_header_extraction: write cb\n");
 
   ((flac_header_extractor_c *)client_data)->done = true;
   return FLAC__STREAM_DECODER_WRITE_STATUS_CONTINUE;
@@ -75,7 +80,7 @@ fhe_metadata_cb(const FLAC__StreamDecoder *,
   flac_header_extractor_c *fhe = (flac_header_extractor_c *)client_data;
   fhe->num_header_packets      = fhe->num_packets;
 
-  mxverb(2, "flac_header_extraction: metadata cb\n");
+  mxdebug_if(s_debug, "flac_header_extraction: metadata cb\n");
 
   switch (metadata->type) {
     case FLAC__METADATA_TYPE_STREAMINFO:
@@ -84,22 +89,22 @@ fhe_metadata_cb(const FLAC__StreamDecoder *,
       fhe->bits_per_sample = metadata->data.stream_info.bits_per_sample;
       fhe->metadata_parsed = true;
 
-      mxverb(2, fmt::format("flac_header_extraction: STREAMINFO block ({0} bytes):\n", metadata->length));
-      mxverb(2, fmt::format("flac_header_extraction:   sample_rate: {0} Hz\n",         metadata->data.stream_info.sample_rate));
-      mxverb(2, fmt::format("flac_header_extraction:   channels: {0}\n",               metadata->data.stream_info.channels));
-      mxverb(2, fmt::format("flac_header_extraction:   bits_per_sample: {0}\n",        metadata->data.stream_info.bits_per_sample));
+      mxdebug_if(s_debug, fmt::format("flac_header_extraction: STREAMINFO block ({0} bytes):\n", metadata->length));
+      mxdebug_if(s_debug, fmt::format("flac_header_extraction:   sample_rate: {0} Hz\n",         metadata->data.stream_info.sample_rate));
+      mxdebug_if(s_debug, fmt::format("flac_header_extraction:   channels: {0}\n",               metadata->data.stream_info.channels));
+      mxdebug_if(s_debug, fmt::format("flac_header_extraction:   bits_per_sample: {0}\n",        metadata->data.stream_info.bits_per_sample));
       break;
 
     default:
-      mxverb(2,
-             fmt::format("{0} ({1}) block ({2} bytes)\n",
-                           metadata->type == FLAC__METADATA_TYPE_PADDING        ? "PADDING"
-                         : metadata->type == FLAC__METADATA_TYPE_APPLICATION    ? "APPLICATION"
-                         : metadata->type == FLAC__METADATA_TYPE_SEEKTABLE      ? "SEEKTABLE"
-                         : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "VORBIS COMMENT"
-                         : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "CUESHEET"
-                         :                                                        "UNDEFINED",
-                         metadata->type, metadata->length));
+      mxdebug_if(s_debug,
+                 fmt::format("{0} ({1}) block ({2} bytes)\n",
+                               metadata->type == FLAC__METADATA_TYPE_PADDING        ? "PADDING"
+                             : metadata->type == FLAC__METADATA_TYPE_APPLICATION    ? "APPLICATION"
+                             : metadata->type == FLAC__METADATA_TYPE_SEEKTABLE      ? "SEEKTABLE"
+                             : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "VORBIS COMMENT"
+                             : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "CUESHEET"
+                             :                                                        "UNDEFINED",
+                             metadata->type, metadata->length));
       break;
   }
 }
@@ -109,7 +114,7 @@ fhe_error_cb(const FLAC__StreamDecoder *,
              FLAC__StreamDecoderErrorStatus status,
              void *client_data) {
   ((flac_header_extractor_c *)client_data)->done = true;
-  mxverb(2, fmt::format("flac_header_extraction: error ({0})\n", static_cast<int>(status)));
+  mxdebug_if(s_debug, fmt::format("flac_header_extraction: error ({0})\n", static_cast<int>(status)));
 }
 
 flac_header_extractor_c::flac_header_extractor_c(const std::string &file_name,
@@ -147,15 +152,15 @@ flac_header_extractor_c::~flac_header_extractor_c() {
 
 bool
 flac_header_extractor_c::extract() {
-  mxverb(2, "flac_header_extraction: extract\n");
+  mxdebug_if(s_debug, "flac_header_extraction: extract\n");
   if (!read_page()) {
-    mxverb(2, "flac_header_extraction: read_page() failed.\n");
+    mxdebug_if(s_debug, "flac_header_extraction: read_page() failed.\n");
     return false;
   }
 
   int result = (int)FLAC__stream_decoder_process_until_end_of_stream(decoder);
 
-  mxverb(2, fmt::format("flac_header_extraction: extract, result: {0}, mdp: {1}, num_header_packets: {2}\n", result, metadata_parsed, num_header_packets));
+  mxdebug_if(s_debug, fmt::format("flac_header_extraction: extract, result: {0}, mdp: {1}, num_header_packets: {2}\n", result, metadata_parsed, num_header_packets));
 
   return metadata_parsed;
 }

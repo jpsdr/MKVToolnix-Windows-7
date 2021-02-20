@@ -14,8 +14,13 @@
 
 #include "common/common_pch.h"
 
+#include "common/debugging.h"
 #include "common/endian.h"
 #include "common/mpeg1_2.h"
+
+namespace {
+debugging_option_c s_debug{"mpeg1_2"};
+}
 
 /** \brief Extract the FPS from a MPEG video sequence header
 
@@ -34,9 +39,9 @@
 int
 mpeg1_2::extract_fps_idx(const unsigned char *buffer,
                          int buffer_size) {
-  mxverb(3, fmt::format("mpeg_video_fps: start search in {0} bytes\n", buffer_size));
+  mxdebug_if(s_debug, fmt::format("mpeg_video_fps: start search in {0} bytes\n", buffer_size));
   if (buffer_size < 8) {
-    mxverb(3, "mpeg_video_fps: sequence header too small\n");
+    mxdebug_if(s_debug, "mpeg_video_fps: sequence header too small\n");
     return -1;
   }
   auto marker = get_uint32_be(buffer);
@@ -48,11 +53,11 @@ mpeg1_2::extract_fps_idx(const unsigned char *buffer,
   }
 
   if ((idx + 3) >= buffer_size) {
-    mxverb(3, "mpeg_video_fps: no full sequence header start code found\n");
+    mxdebug_if(s_debug, "mpeg_video_fps: no full sequence header start code found\n");
     return -1;
   }
 
-  mxverb(3, fmt::format("mpeg_video_fps: found sequence header start code at {0}\n", idx - 4));
+  mxdebug_if(s_debug, fmt::format("mpeg_video_fps: found sequence header start code at {0}\n", idx - 4));
 
   return buffer[idx + 3] & 0x0f;
 }
@@ -75,9 +80,9 @@ mpeg1_2::extract_ar(const unsigned char *buffer,
   uint32_t marker;
   int idx;
 
-  mxverb(3, fmt::format("mpeg_video_ar: start search in {0} bytes\n", buffer_size));
+  mxdebug_if(s_debug, fmt::format("mpeg_video_ar: start search in {0} bytes\n", buffer_size));
   if (buffer_size < 8) {
-    mxverb(3, "mpeg_video_ar: sequence header too small\n");
+    mxdebug_if(s_debug, "mpeg_video_ar: sequence header too small\n");
     return false;
   }
   marker = get_uint32_be(buffer);
@@ -88,14 +93,14 @@ mpeg1_2::extract_ar(const unsigned char *buffer,
     idx++;
   }
   if (idx >= buffer_size) {
-    mxverb(3, "mpeg_video_ar: no sequence header start code found\n");
+    mxdebug_if(s_debug, "mpeg_video_ar: no sequence header start code found\n");
     return false;
   }
 
-  mxverb(3, fmt::format("mpeg_video_ar: found sequence header start code at {0}\n", idx - 4));
+  mxdebug_if(s_debug, fmt::format("mpeg_video_ar: found sequence header start code at {0}\n", idx - 4));
   idx += 3;                     // width and height
   if (idx >= buffer_size) {
-    mxverb(3, "mpeg_video_ar: sequence header too small\n");
+    mxdebug_if(s_debug, "mpeg_video_ar: sequence header too small\n");
     return false;
   }
 

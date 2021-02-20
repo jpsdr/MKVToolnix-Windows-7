@@ -137,8 +137,6 @@ hevc_video_packetizer_c::setup_nalu_size_len_change() {
   p.max_nalu_size       = 1ll << (8 * p.nalu_size_len_dst);
 
   set_codec_private(m_ti.m_private_data);
-
-  mxverb(2, fmt::format("HEVC: Adjusting NALU size length from {0} to {1}\n", p.nalu_size_len_src, p.nalu_size_len_dst));
 }
 
 void

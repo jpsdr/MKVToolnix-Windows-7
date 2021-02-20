@@ -248,7 +248,6 @@ mpeg4_p2_video_packetizer_c::generate_timestamp_and_duration() {
     m_previous_timestamp = (int64_t)(m_previous_timestamp + 1000000000.0 / m_fps);
     m_available_timestamps.push_back(timestamp_duration_t(m_previous_timestamp, (int64_t)(1000000000.0 / m_fps)));
 
-    mxverb(3, fmt::format("mpeg4_p2::flush_frames(): Needed new timestamp {0}\n", m_previous_timestamp));
     ++m_statistics.m_num_generated_timestamps;
   }
 }

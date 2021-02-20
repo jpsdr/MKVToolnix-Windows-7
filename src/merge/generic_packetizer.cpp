@@ -26,6 +26,7 @@
 
 #include "common/compression.h"
 #include "common/container.h"
+#include "common/debugging.h"
 #include "common/ebml.h"
 #include "common/hacks.h"
 #include "common/strings/formatting.h"
@@ -51,6 +52,10 @@ using namespace libmatroska;
     :                                       -2
 
 // ---------------------------------------------------------------------
+
+namespace {
+debugging_option_c s_debug{"generic_packetizer"};
+}
 
 static std::unordered_map<std::string, bool> s_experimental_status_warning_shown;
 std::vector<generic_packetizer_c *> ptzrs_in_header_order;
@@ -1526,9 +1531,7 @@ generic_packetizer_c::apply_factory_once(packet_cptr &packet) {
 
   packet->factory_applied      = true;
 
-  mxverb(4,
-         fmt::format("apply_factory_once(): source {0} t {1} tbf {2} at {3}\n",
-                     packet->source->get_source_track_num(), packet->timestamp, packet->timestamp_before_factory, packet->assigned_timestamp));
+  mxdebug_if(s_debug, fmt::format("apply_factory_once(): source {0} t {1} tbf {2} at {3}\n", packet->source->get_source_track_num(), packet->timestamp, packet->timestamp_before_factory, packet->assigned_timestamp));
 
   m_max_timestamp_seen           = std::max(m_max_timestamp_seen, packet->assigned_timestamp + packet->duration);
   m_reader->m_max_timestamp_seen = std::max(m_max_timestamp_seen, m_reader->m_max_timestamp_seen);
@@ -1643,13 +1646,14 @@ generic_packetizer_c::apply_factory_full_queueing(packet_cptr_di &p_start) {
 void
 generic_packetizer_c::force_duration_on_last_packet() {
   if (m_packet_queue.empty()) {
-    mxverb_tid(3, m_ti.m_fname, m_ti.m_id, "force_duration_on_last_packet: packet queue is empty\n");
+    mxdebug_if(s_debug, fmt::format("'{0}' track {1}: force_duration_on_last_packet: packet queue is empty\n", m_ti.m_fname, m_ti.m_id));
     return;
   }
+
   packet_cptr &packet        = m_packet_queue.back();
   packet->duration_mandatory = true;
-  mxverb_tid(3, m_ti.m_fname, m_ti.m_id,
-             fmt::format("force_duration_on_last_packet: forcing at {0} with {1:.3f}ms\n", mtx::string::format_timestamp(packet->timestamp), packet->duration / 1000.0));
+
+  mxdebug_if(s_debug, fmt::format("'{0}' track {1}: force_duration_on_last_packet: forcing at {2} with {3:.3f}ms\n", m_ti.m_fname, m_ti.m_id, mtx::string::format_timestamp(packet->timestamp), packet->duration / 1000.0));
 }
 
 int64_t
