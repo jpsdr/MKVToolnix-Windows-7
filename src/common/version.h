@@ -20,10 +20,10 @@
 #include "common/date_time_fwd.h"
 #include "common/xml/xml.h"
 
-#define MTX_VERSION_CHECK_URL "https://mkvtoolnix.download/latest-release.xml"
-#define MTX_RELEASES_INFO_URL "https://mkvtoolnix.download/releases.xml"
-#define MTX_DOWNLOAD_URL      "https://mkvtoolnix.download/downloads.html"
-#define MTX_NEWS_URL          "https://mkvtoolnix.download/doc/NEWS.md"
+constexpr auto MTX_VERSION_CHECK_URL = "https://mkvtoolnix.download/latest-release.xml";
+constexpr auto MTX_RELEASES_INFO_URL = "https://mkvtoolnix.download/releases.xml";
+constexpr auto MTX_DOWNLOAD_URL      = "https://mkvtoolnix.download/downloads.html";
+constexpr auto MTX_NEWS_URL          = "https://mkvtoolnix.download/doc/NEWS.md";
 
 struct version_number_t: boost::totally_ordered<version_number_t> {
   std::vector<unsigned int> parts;
