@@ -17,7 +17,10 @@
 #include "common/bit_reader.h"
 #include "common/kate.h"
 
-static int32_t
+namespace mtx::kate {
+
+namespace {
+int32_t
 get_bits32_le(mtx::bits::reader_c &bc) {
   int32_t v = 0;
 
@@ -28,16 +31,18 @@ get_bits32_le(mtx::bits::reader_c &bc) {
   return v;
 }
 
+} // anonymous namespace
+
 void
-kate_parse_identification_header(const unsigned char *buffer,
-                                 int size,
-                                 kate_identification_header_t &header) {
+parse_identification_header(unsigned char const *buffer,
+                            int size,
+                            identification_header_t &header) {
   mtx::bits::reader_c bc(buffer, size);
   int i;
 
   header.headertype = bc.get_bits(8);
-  if (KATE_HEADERTYPE_IDENTIFICATION != header.headertype)
-    throw mtx::kate::header_parsing_x(fmt::format(Y("Wrong header type: 0x{0:02x} != 0x{1:02x}"), header.headertype, KATE_HEADERTYPE_IDENTIFICATION));
+  if (HEADERTYPE_IDENTIFICATION != header.headertype)
+    throw mtx::kate::header_parsing_x(fmt::format(Y("Wrong header type: 0x{0:02x} != 0x{1:02x}"), header.headertype, HEADERTYPE_IDENTIFICATION));
 
   for (i = 0; 7 > i; ++i)
     header.kate_string[i] = bc.get_bits(8);
@@ -84,3 +89,5 @@ kate_parse_identification_header(const unsigned char *buffer,
   header.language = read_string16();
   header.category = read_string16();
 }
+
+} // namespace mtx::kate

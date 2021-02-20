@@ -23,7 +23,7 @@ class kate_packetizer_c: public generic_packetizer_c {
 private:
   std::vector<memory_cptr> m_headers;
 
-  kate_identification_header_t m_kate_id;
+  mtx::kate::identification_header_t m_kate_id;
 
   int64_t m_previous_timestamp;
 

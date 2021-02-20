@@ -256,7 +256,7 @@ public:
 
 class ogm_s_kate_demuxer_c: public ogm_demuxer_c {
 public:
-  kate_identification_header_t kate;
+  mtx::kate::identification_header_t kate;
 
 public:
   ogm_s_kate_demuxer_c(ogm_reader_c *p_reader);
@@ -1662,7 +1662,7 @@ void
 ogm_s_kate_demuxer_c::initialize() {
   try {
     memory_cptr &mem = packet_data[0];
-    kate_parse_identification_header(mem->get_buffer(), mem->get_size(), kate);
+    mtx::kate::parse_identification_header(mem->get_buffer(), mem->get_size(), kate);
 
     if (!language.is_valid())
       language = mtx::bcp47::language_c::parse(kate.language);

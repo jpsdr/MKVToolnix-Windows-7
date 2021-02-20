@@ -34,7 +34,7 @@ kate_packetizer_c::kate_packetizer_c(generic_reader_c *reader,
   // the number of headers to expect is stored in the first header
   auto blocks = unlace_memory_xiph(m_ti.m_private_data);
 
-  kate_parse_identification_header(blocks[0]->get_buffer(), blocks[0]->get_size(), m_kate_id);
+  parse_identification_header(blocks[0]->get_buffer(), blocks[0]->get_size(), m_kate_id);
   if (blocks.size() != m_kate_id.nheaders)
     throw false;
 

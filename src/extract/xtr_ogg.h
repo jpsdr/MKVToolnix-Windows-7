@@ -77,7 +77,7 @@ public:
 
 class xtr_oggkate_c: public xtr_oggbase_c {
 private:
-  kate_identification_header_t m_kate_id_header;
+  mtx::kate::identification_header_t m_kate_id_header;
 
 public:
   xtr_oggkate_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec);
