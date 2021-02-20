@@ -127,7 +127,7 @@ create_audio_specific_config(audio_config_t const &audio_config) {
 
   if (audio_config.sbr) {
     w.put_bits(11, mtx::aac::SYNC_EXTENSION_TYPE);
-    write_object_type(MP4AOT_SBR);
+    write_object_type(mtx::mp4::AUDIO_OBJECT_TYPE_SBR);
     w.put_bits(1, 1);           // sbr_present_flag
     write_sampling_frequency(audio_config.output_sample_rate ? audio_config.output_sample_rate : audio_config.sample_rate * 2);
   }
@@ -976,22 +976,22 @@ header_c::read_ga_specific_config() {
 
   // Frame length in samples; see ISO/IEC 14496-3:2005, section
   // 4.5.1.1 "GASpecificConfig()" in 4.5 "Overall data structure".
-  if (!mtx::included_in<int>(object_type, MP4AOT_SBR, MP4AOT_ER_AAC_LD))
+  if (!mtx::included_in<int>(object_type, mtx::mp4::AUDIO_OBJECT_TYPE_SBR, mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_LD))
     config.samples_per_frame = frame_length_flag ? 960 : 1024;
-  else if (MP4AOT_ER_AAC_LD == object_type)
+  else if (mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_LD == object_type)
     config.samples_per_frame = frame_length_flag ? 480 :  512;
 
   if (!config.channels)
     read_program_config_element();
 
-  if ((MP4AOT_AAC_SCALABLE == object_type) || (MP4AOT_ER_AAC_SCALABLE == object_type))
+  if ((mtx::mp4::AUDIO_OBJECT_TYPE_AAC_SCALABLE == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_SCALABLE == object_type))
     m_bc->skip_bits(3);         // layer_nr
 
   if (extension_flag) {
-    if (MP4AOT_ER_BSAC == object_type)
+    if (mtx::mp4::AUDIO_OBJECT_TYPE_ER_BSAC == object_type)
       m_bc->skip_bits(5 + 11);    // num_of_sub_frame, layer_length
 
-    if ((MP4AOT_ER_AAC_LC == object_type) || (MP4AOT_ER_AAC_LTP == object_type) || (MP4AOT_ER_AAC_SCALABLE == object_type) || (MP4AOT_ER_AAC_LD == object_type))
+    if ((mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_LC == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_LTP == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_SCALABLE == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_LD == object_type))
       m_bc->skip_bits(1 + 1 + 1); // aac_section_data_resilience_flag, aac_scalefactor_data_resilience_flag, aac_spectral_data_resilience_flag
 
     m_bc->skip_bit();             // extension_flag3
@@ -1128,8 +1128,8 @@ header_c::parse_audio_specific_config(mtx::bits::reader_c &bc,
     if (channel_config < 8)
       config.channels = s_aac_channel_configuration[channel_config];
 
-    if (   (MP4AOT_SBR == object_type)
-        || (    (MP4AOT_PS == object_type)
+    if (   (mtx::mp4::AUDIO_OBJECT_TYPE_SBR == object_type)
+        || (    (mtx::mp4::AUDIO_OBJECT_TYPE_PS == object_type)
             && !(    (m_bc->peek_bits(3) & 0x03)
                  && !(m_bc->peek_bits(9) & 0x3f)))) {
       config.sbr                = true;
@@ -1138,21 +1138,21 @@ header_c::parse_audio_specific_config(mtx::bits::reader_c &bc,
       object_type               = read_object_type();
     }
 
-    if (   (MP4AOT_AAC_MAIN == object_type) || (MP4AOT_AAC_LC    == object_type) || (MP4AOT_AAC_SSR    == object_type) || (MP4AOT_AAC_LTP         == object_type) || (MP4AOT_AAC_SCALABLE == object_type)
-        || (MP4AOT_TWINVQ   == object_type) || (MP4AOT_ER_AAC_LC == object_type) || (MP4AOT_ER_AAC_LTP == object_type) || (MP4AOT_ER_AAC_SCALABLE == object_type) || (MP4AOT_ER_TWINVQ    == object_type)
-        || (MP4AOT_ER_BSAC  == object_type) || (MP4AOT_ER_AAC_LD == object_type))
+    if (   (mtx::mp4::AUDIO_OBJECT_TYPE_AAC_MAIN == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_AAC_LC    == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_AAC_SSR    == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_AAC_LTP         == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_AAC_SCALABLE == object_type)
+        || (mtx::mp4::AUDIO_OBJECT_TYPE_TWINVQ   == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_LC == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_LTP == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_SCALABLE == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_ER_TWINVQ    == object_type)
+        || (mtx::mp4::AUDIO_OBJECT_TYPE_ER_BSAC  == object_type) || (mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_LD == object_type))
       read_ga_specific_config();
 
-    else if (MP4AOT_ER_AAC_ELD == object_type)
+    else if (mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_ELD == object_type)
       read_eld_specific_config();
 
-    else if (MP4AOT_ER_CELP)
+    else if (mtx::mp4::AUDIO_OBJECT_TYPE_ER_CELP)
       read_er_celp_specific_config();
 
     else
       throw unsupported_feature_x{fmt::format("AAC object type {0} in audio-specific config", object_type)};
 
-    if ((MP4AOT_ER_AAC_LC == object_type) || ((MP4AOT_ER_AAC_LTP <= object_type) && (MP4AOT_ER_PARAM >= object_type))) {
+    if ((mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_LC == object_type) || ((mtx::mp4::AUDIO_OBJECT_TYPE_ER_AAC_LTP <= object_type) && (mtx::mp4::AUDIO_OBJECT_TYPE_ER_PARAM >= object_type))) {
       int ep_config = m_bc->get_bits(2);
       if ((2 == ep_config) || (3 == ep_config))
         read_error_protection_specific_config();
@@ -1161,7 +1161,7 @@ header_c::parse_audio_specific_config(mtx::bits::reader_c &bc,
     }
 
     if (   look_for_sync_extension
-        && (MP4AOT_SBR != extension_object_type)
+        && (mtx::mp4::AUDIO_OBJECT_TYPE_SBR != extension_object_type)
         && (m_bc->get_remaining_bits() >= 16)) {
 
       auto prior_position     = m_bc->get_bit_position();
@@ -1169,7 +1169,7 @@ header_c::parse_audio_specific_config(mtx::bits::reader_c &bc,
 
       if (mtx::aac::SYNC_EXTENSION_TYPE == sync_extension_type) {
         extension_object_type = read_object_type();
-        if (MP4AOT_SBR == extension_object_type) {
+        if (mtx::mp4::AUDIO_OBJECT_TYPE_SBR == extension_object_type) {
           config.sbr = m_bc->get_bit();
           if (config.sbr)
             config.output_sample_rate = read_sample_rate();

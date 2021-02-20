@@ -138,25 +138,25 @@ read_qtmp4_atom(mm_io_c *read_from,
 
 static std::string
 displayable_esds_tag_name(uint8_t tag) {
-  return MP4DT_O                 == tag ? "O"
-       : MP4DT_IO                == tag ? "IO"
-       : MP4DT_ES                == tag ? "ES"
-       : MP4DT_DEC_CONFIG        == tag ? "DEC_CONFIG"
-       : MP4DT_DEC_SPECIFIC      == tag ? "DEC_SPECIFIC"
-       : MP4DT_SL_CONFIG         == tag ? "SL_CONFIG"
-       : MP4DT_CONTENT_ID        == tag ? "CONTENT_ID"
-       : MP4DT_SUPPL_CONTENT_ID  == tag ? "SUPPL_CONTENT_ID"
-       : MP4DT_IP_PTR            == tag ? "IP_PTR"
-       : MP4DT_IPMP_PTR          == tag ? "IPMP_PTR"
-       : MP4DT_IPMP              == tag ? "IPMP"
-       : MP4DT_REGISTRATION      == tag ? "REGISTRATION"
-       : MP4DT_ESID_INC          == tag ? "ESID_INC"
-       : MP4DT_ESID_REF          == tag ? "ESID_REF"
-       : MP4DT_FILE_IO           == tag ? "FILE_IO"
-       : MP4DT_FILE_O            == tag ? "FILE_O"
-       : MP4DT_EXT_PROFILE_LEVEL == tag ? "EXT_PROFILE_LEVEL"
-       : MP4DT_TAGS_START        == tag ? "TAGS_START"
-       : MP4DT_TAGS_END          == tag ? "TAGS_END"
+  return mtx::mp4::DESCRIPTOR_TYPE_O                 == tag ? "O"
+       : mtx::mp4::DESCRIPTOR_TYPE_IO                == tag ? "IO"
+       : mtx::mp4::DESCRIPTOR_TYPE_ES                == tag ? "ES"
+       : mtx::mp4::DESCRIPTOR_TYPE_DEC_CONFIG        == tag ? "DEC_CONFIG"
+       : mtx::mp4::DESCRIPTOR_TYPE_DEC_SPECIFIC      == tag ? "DEC_SPECIFIC"
+       : mtx::mp4::DESCRIPTOR_TYPE_SL_CONFIG         == tag ? "SL_CONFIG"
+       : mtx::mp4::DESCRIPTOR_TYPE_CONTENT_ID        == tag ? "CONTENT_ID"
+       : mtx::mp4::DESCRIPTOR_TYPE_SUPPL_CONTENT_ID  == tag ? "SUPPL_CONTENT_ID"
+       : mtx::mp4::DESCRIPTOR_TYPE_IP_PTR            == tag ? "IP_PTR"
+       : mtx::mp4::DESCRIPTOR_TYPE_IPMP_PTR          == tag ? "IPMP_PTR"
+       : mtx::mp4::DESCRIPTOR_TYPE_IPMP              == tag ? "IPMP"
+       : mtx::mp4::DESCRIPTOR_TYPE_REGISTRATION      == tag ? "REGISTRATION"
+       : mtx::mp4::DESCRIPTOR_TYPE_ESID_INC          == tag ? "ESID_INC"
+       : mtx::mp4::DESCRIPTOR_TYPE_ESID_REF          == tag ? "ESID_REF"
+       : mtx::mp4::DESCRIPTOR_TYPE_FILE_IO           == tag ? "FILE_IO"
+       : mtx::mp4::DESCRIPTOR_TYPE_FILE_O            == tag ? "FILE_O"
+       : mtx::mp4::DESCRIPTOR_TYPE_EXT_PROFILE_LEVEL == tag ? "EXT_PROFILE_LEVEL"
+       : mtx::mp4::DESCRIPTOR_TYPE_TAGS_START        == tag ? "TAGS_START"
+       : mtx::mp4::DESCRIPTOR_TYPE_TAGS_END          == tag ? "TAGS_END"
        :                                  "unknown";
 }
 
@@ -1072,7 +1072,7 @@ qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
 
     try {
       auto type = m_in->read_uint32_be();
-      if (!mtx::included_in<int>(type, MP4ADT_BMP, MP4ADT_JPEG, MP4ADT_PNG))
+      if (!mtx::included_in<int>(type, mtx::mp4::ATOM_DATA_TYPE_BMP, mtx::mp4::ATOM_DATA_TYPE_JPEG, mtx::mp4::ATOM_DATA_TYPE_PNG))
         return;
 
       m_in->skip(4);
@@ -1083,8 +1083,8 @@ qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
 
       auto attachment          = std::make_shared<attachment_t>();
 
-      attachment->name         = fmt::format("cover.{}", type == MP4ADT_PNG ? "png" : type == MP4ADT_BMP ? "bmp" : "jpg");
-      attachment->mime_type    = fmt::format("image/{}", type == MP4ADT_PNG ? "png" : type == MP4ADT_BMP ? "bmp" : "jpeg");
+      attachment->name         = fmt::format("cover.{}", type == mtx::mp4::ATOM_DATA_TYPE_PNG ? "png" : type == mtx::mp4::ATOM_DATA_TYPE_BMP ? "bmp" : "jpg");
+      attachment->mime_type    = fmt::format("image/{}", type == mtx::mp4::ATOM_DATA_TYPE_PNG ? "png" : type == mtx::mp4::ATOM_DATA_TYPE_BMP ? "bmp" : "jpeg");
       attachment->data         = m_in->read(data_size);
       attachment->ui_id        = m_attachment_id++;
       attachment->to_all_files = ATTACH_MODE_TO_ALL_FILES == attach_mode;
@@ -1721,9 +1721,9 @@ qtmp4_reader_c::create_video_packetizer_mpeg4_p2(qtmp4_demuxer_c &dmx) {
 
 void
 qtmp4_reader_c::create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx) {
-  int version = !dmx.esds_parsed                              ? (dmx.fourcc.value() & 0xff) - '0'
-              : dmx.esds.object_type_id == MP4OTI_MPEG1Visual ? 1
-              :                                                 2;
+  int version = !dmx.esds_parsed                                             ? (dmx.fourcc.value() & 0xff) - '0'
+              : dmx.esds.object_type_id == mtx::mp4::OBJECT_TYPE_MPEG1Visual ? 1
+              :                                                                2;
   dmx.ptzr    = add_packetizer(new mpeg1_2_video_packetizer_c(this, m_ti, version, -1.0, dmx.v_width, dmx.v_height, 0, 0, false));
 
   show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
@@ -3173,7 +3173,7 @@ qtmp4_demuxer_c::parse_esds_atom(mm_io_c &io,
 
   mxdebug_if(m_debug_headers, fmt::format("{0}esds: version: {1}, flags: {2}\n", space(lsp + 1), static_cast<unsigned int>(esds.version), esds.flags));
 
-  if (MP4DT_ES == tag) {
+  if (mtx::mp4::DESCRIPTOR_TYPE_ES == tag) {
     auto len             = io.read_mp4_descriptor_len();
     esds.esid            = io.read_uint16_be();
     esds.stream_priority = io.read_uint8();
@@ -3187,7 +3187,7 @@ qtmp4_demuxer_c::parse_esds_atom(mm_io_c &io,
   tag = io.read_uint8();
   mxdebug_if(m_debug_headers, fmt::format("{0}tag is 0x{1:02x} ({2}).\n", space(lsp + 1), static_cast<unsigned int>(tag), displayable_esds_tag_name(tag)));
 
-  if (MP4DT_DEC_CONFIG != tag)
+  if (mtx::mp4::DESCRIPTOR_TYPE_DEC_CONFIG != tag)
     return false;
 
   auto len                = io.read_mp4_descriptor_len();
@@ -3213,7 +3213,7 @@ qtmp4_demuxer_c::parse_esds_atom(mm_io_c &io,
   tag = io.read_uint8();
   mxdebug_if(m_debug_headers, fmt::format("{0}tag is 0x{1:02x} ({2}).\n", space(lsp + 1), static_cast<unsigned int>(tag), displayable_esds_tag_name(tag)));
 
-  if (MP4DT_DEC_SPECIFIC == tag) {
+  if (mtx::mp4::DESCRIPTOR_TYPE_DEC_SPECIFIC == tag) {
     len = io.read_mp4_descriptor_len();
     if (!len)
       throw mtx::input::header_parsing_x();
@@ -3235,7 +3235,7 @@ qtmp4_demuxer_c::parse_esds_atom(mm_io_c &io,
 
   }
 
-  if (MP4DT_SL_CONFIG == tag) {
+  if (mtx::mp4::DESCRIPTOR_TYPE_SL_CONFIG == tag) {
     len = io.read_mp4_descriptor_len();
     if (!len)
       throw mtx::input::header_parsing_x{};

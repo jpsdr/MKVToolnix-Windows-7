@@ -216,26 +216,26 @@ TEST(Codec, LookUpFourCC) {
 }
 
 TEST(Codec, LookUpObjectTypeId) {
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG2AudioMain).is(codec_c::type_e::A_AAC));
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG2AudioLowComplexity).is(codec_c::type_e::A_AAC));
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG2AudioScaleableSamplingRate).is(codec_c::type_e::A_AAC));
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG2AudioPart3).is(codec_c::type_e::A_MP3));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG2AudioMain).is(codec_c::type_e::A_AAC));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG2AudioLowComplexity).is(codec_c::type_e::A_AAC));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG2AudioScaleableSamplingRate).is(codec_c::type_e::A_AAC));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG2AudioPart3).is(codec_c::type_e::A_MP3));
 
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG1Audio).is(codec_c::type_e::A_MP2));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG1Audio).is(codec_c::type_e::A_MP2));
 
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_DTS).is(codec_c::type_e::A_DTS));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_DTS).is(codec_c::type_e::A_DTS));
 
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG4Visual).is(codec_c::type_e::V_MPEG4_P2));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG4Visual).is(codec_c::type_e::V_MPEG4_P2));
 
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG2VisualSimple).is(codec_c::type_e::V_MPEG12));
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG2VisualMain).is(codec_c::type_e::V_MPEG12));
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG2VisualSNR).is(codec_c::type_e::V_MPEG12));
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG2VisualSpatial).is(codec_c::type_e::V_MPEG12));
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG2VisualHigh).is(codec_c::type_e::V_MPEG12));
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG2Visual422).is(codec_c::type_e::V_MPEG12));
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_MPEG1Visual).is(codec_c::type_e::V_MPEG12));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG2VisualSimple).is(codec_c::type_e::V_MPEG12));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG2VisualMain).is(codec_c::type_e::V_MPEG12));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG2VisualSNR).is(codec_c::type_e::V_MPEG12));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG2VisualSpatial).is(codec_c::type_e::V_MPEG12));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG2VisualHigh).is(codec_c::type_e::V_MPEG12));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG2Visual422).is(codec_c::type_e::V_MPEG12));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_MPEG1Visual).is(codec_c::type_e::V_MPEG12));
 
-  EXPECT_TRUE(codec_c::look_up_object_type_id(MP4OTI_VOBSUB).is(codec_c::type_e::S_VOBSUB));
+  EXPECT_TRUE(codec_c::look_up_object_type_id(mtx::mp4::OBJECT_TYPE_VOBSUB).is(codec_c::type_e::S_VOBSUB));
 }
 
 TEST(Codec, LookUpOverloading) {

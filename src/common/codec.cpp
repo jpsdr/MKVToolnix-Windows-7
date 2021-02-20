@@ -312,24 +312,24 @@ codec_c::look_up_audio_format(uint16_t audio_format) {
 
 codec_c const
 codec_c::look_up_object_type_id(unsigned int object_type_id) {
-  return look_up(  (   (MP4OTI_MPEG4Audio                      == object_type_id)
-                    || (MP4OTI_MPEG2AudioMain                  == object_type_id)
-                    || (MP4OTI_MPEG2AudioLowComplexity         == object_type_id)
-                    || (MP4OTI_MPEG2AudioScaleableSamplingRate == object_type_id)) ? type_e::A_AAC
-                 : MP4OTI_MPEG1Audio                           == object_type_id   ? type_e::A_MP2
-                 : MP4OTI_MPEG2AudioPart3                      == object_type_id   ? type_e::A_MP3
-                 : MP4OTI_DTS                                  == object_type_id   ? type_e::A_DTS
-                 : MP4OTI_VORBIS                               == object_type_id   ? type_e::A_VORBIS
-                 : (   (MP4OTI_MPEG2VisualSimple               == object_type_id)
-                    || (MP4OTI_MPEG2VisualMain                 == object_type_id)
-                    || (MP4OTI_MPEG2VisualSNR                  == object_type_id)
-                    || (MP4OTI_MPEG2VisualSpatial              == object_type_id)
-                    || (MP4OTI_MPEG2VisualHigh                 == object_type_id)
-                    || (MP4OTI_MPEG2Visual422                  == object_type_id)
-                    || (MP4OTI_MPEG1Visual                     == object_type_id)) ? type_e::V_MPEG12
-                 : MP4OTI_MPEG4Visual                          == object_type_id   ? type_e::V_MPEG4_P2
-                 : MP4OTI_VOBSUB                               == object_type_id   ? type_e::S_VOBSUB
-                 :                                                                   type_e::UNKNOWN);
+  return look_up(  (   (mtx::mp4::OBJECT_TYPE_MPEG4Audio                      == object_type_id)
+                    || (mtx::mp4::OBJECT_TYPE_MPEG2AudioMain                  == object_type_id)
+                    || (mtx::mp4::OBJECT_TYPE_MPEG2AudioLowComplexity         == object_type_id)
+                    || (mtx::mp4::OBJECT_TYPE_MPEG2AudioScaleableSamplingRate == object_type_id)) ? type_e::A_AAC
+                 : mtx::mp4::OBJECT_TYPE_MPEG1Audio                           == object_type_id   ? type_e::A_MP2
+                 : mtx::mp4::OBJECT_TYPE_MPEG2AudioPart3                      == object_type_id   ? type_e::A_MP3
+                 : mtx::mp4::OBJECT_TYPE_DTS                                  == object_type_id   ? type_e::A_DTS
+                 : mtx::mp4::OBJECT_TYPE_VORBIS                               == object_type_id   ? type_e::A_VORBIS
+                 : (   (mtx::mp4::OBJECT_TYPE_MPEG2VisualSimple               == object_type_id)
+                    || (mtx::mp4::OBJECT_TYPE_MPEG2VisualMain                 == object_type_id)
+                    || (mtx::mp4::OBJECT_TYPE_MPEG2VisualSNR                  == object_type_id)
+                    || (mtx::mp4::OBJECT_TYPE_MPEG2VisualSpatial              == object_type_id)
+                    || (mtx::mp4::OBJECT_TYPE_MPEG2VisualHigh                 == object_type_id)
+                    || (mtx::mp4::OBJECT_TYPE_MPEG2Visual422                  == object_type_id)
+                    || (mtx::mp4::OBJECT_TYPE_MPEG1Visual                     == object_type_id)) ? type_e::V_MPEG12
+                 : mtx::mp4::OBJECT_TYPE_MPEG4Visual                          == object_type_id   ? type_e::V_MPEG4_P2
+                 : mtx::mp4::OBJECT_TYPE_VOBSUB                               == object_type_id   ? type_e::S_VOBSUB
+                 :                                                                                  type_e::UNKNOWN);
 }
 
 bool
