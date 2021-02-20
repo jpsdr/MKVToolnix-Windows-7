@@ -439,14 +439,16 @@ kax_analyzer_c::read_element(kax_analyzer_data_c const &element_data) {
   return e;
 }
 
-#define call_and_validate(function_call, hook_name)               \
-  function_call;                                                  \
-  debug_dump_elements_maybe(hook_name);                           \
-  validate_data_structures(hook_name);                            \
-  if (analyzer_debugging_requested("verify"))                     \
-    verify_data_structures_against_file(hook_name);               \
-  if (debugging_c::requested("kax_analyzer_" hook_name "_break")) \
-    return uer_success;
+bool
+kax_analyzer_c::validate_and_break(std::string const &hook_name) {
+  debug_dump_elements_maybe(hook_name);
+  validate_data_structures(hook_name);
+
+  if (analyzer_debugging_requested("verify"))
+    verify_data_structures_against_file(hook_name);
+
+  return debugging_c::requested(fmt::format("kax_analyzer_{0}_break", hook_name));
+}
 
 kax_analyzer_c::update_element_result_e
 kax_analyzer_c::update_element(ebml_element_cptr const &e,
@@ -468,15 +470,40 @@ kax_analyzer_c::update_element(EbmlElement *e,
 
     placement_strategy_e strategy = get_placement_strategy_for(e);
 
-    call_and_validate({},                                         "update_element_0");
-    call_and_validate(fix_unknown_size_for_last_level1_element(), "update_element_0_1");
-    call_and_validate(overwrite_all_instances(EbmlId(*e)),        "update_element_1");
-    call_and_validate(merge_void_elements(),                      "update_element_2");
-    call_and_validate(write_element(e, write_defaults, strategy), "update_element_3");
-    call_and_validate(remove_from_meta_seeks(EbmlId(*e)),         "update_element_4");
-    call_and_validate(merge_void_elements(),                      "update_element_5");
-    call_and_validate(add_to_meta_seek(e),                        "update_element_6");
-    call_and_validate(merge_void_elements(),                      "update_element_7");
+    if (validate_and_break("update_element_0"))
+      return uer_success;
+
+    fix_unknown_size_for_last_level1_element();
+    if (validate_and_break("update_element_1"))
+      return uer_success;
+
+    overwrite_all_instances(EbmlId(*e));
+    if (validate_and_break("update_element_2"))
+      return uer_success;
+
+    merge_void_elements();
+    if (validate_and_break("update_element_3"))
+      return uer_success;
+
+    write_element(e, write_defaults, strategy);
+    if (validate_and_break("update_element_4"))
+      return uer_success;
+
+    remove_from_meta_seeks(EbmlId(*e));
+    if (validate_and_break("update_element_5"))
+      return uer_success;
+
+    merge_void_elements();
+    if (validate_and_break("update_element_6"))
+      return uer_success;
+
+    add_to_meta_seek(e);
+    if (validate_and_break("update_element_7"))
+      return uer_success;
+
+    merge_void_elements();
+    if (validate_and_break("update_element_8"))
+      return uer_success;
 
   } catch (kax_analyzer_c::update_element_result_e result) {
     debug_dump_elements_maybe("update_element_exception");
@@ -495,12 +522,28 @@ kax_analyzer_c::remove_elements(EbmlId const &id) {
   try {
     reopen_file_for_writing();
 
-    call_and_validate({},                                         "remove_elements_0");
-    call_and_validate(fix_unknown_size_for_last_level1_element(), "remove_elements_1");
-    call_and_validate(overwrite_all_instances(id),                "remove_elements_2");
-    call_and_validate(merge_void_elements(),                      "remove_elements_3");
-    call_and_validate(remove_from_meta_seeks(id),                 "remove_elements_4");
-    call_and_validate(merge_void_elements(),                      "remove_elements_5");
+    if (validate_and_break("remove_elements_0"))
+      return uer_success;
+
+    fix_unknown_size_for_last_level1_element();
+    if (validate_and_break("remove_elements_1"))
+      return uer_success;
+
+    overwrite_all_instances(id);
+    if (validate_and_break("remove_elements_2"))
+      return uer_success;
+
+    merge_void_elements();
+    if (validate_and_break("remove_elements_3"))
+      return uer_success;
+
+    remove_from_meta_seeks(id);
+    if (validate_and_break("remove_elements_4"))
+      return uer_success;
+
+    merge_void_elements();
+    if (validate_and_break("remove_elements_5"))
+      return uer_success;
 
   } catch (kax_analyzer_c::update_element_result_e result) {
     debug_dump_elements_maybe("update_element_exception");

@@ -204,6 +204,7 @@ protected:
   virtual bool analyzer_debugging_requested(const std::string &section);
   virtual void debug_dump_elements();
   virtual void debug_dump_elements_maybe(const std::string &hook_name);
+  virtual bool validate_and_break(std::string const &hook_name);
   virtual void validate_data_structures(const std::string &hook_name);
   virtual void verify_data_structures_against_file(const std::string &hook_name);
 
