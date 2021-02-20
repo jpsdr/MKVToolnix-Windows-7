@@ -30,9 +30,9 @@
 
 namespace {
 debugging_option_c s_debug{"mpeg_es_reader"};
-}
 
-#define READ_SIZE 1024 * 1024
+constexpr auto READ_SIZE = 1024 * 1024;
+}
 
 bool
 mpeg_es_reader_c::probe_file() {

@@ -65,15 +65,15 @@
 
 // This is ISO/IEC 13818-1.
 
-#define TS_PACKET_SIZE     188
-#define TS_MAX_PACKET_SIZE 204
-
-#define TS_PAT_PID         0x0000
-#define TS_SDT_PID         0x0011
-
-#define TS_SDT_TID         0x42
-
 namespace mtx::mpeg_ts {
+
+constexpr auto TS_PACKET_SIZE     = 188;
+constexpr auto TS_MAX_PACKET_SIZE = 204;
+
+constexpr auto TS_PAT_PID         = 0x0000;
+constexpr auto TS_SDT_PID         = 0x0011;
+
+constexpr auto TS_SDT_TID         = 0x42;
 
 int reader_c::potential_packet_sizes[] = { 188, 192, 204, 0 };
 
