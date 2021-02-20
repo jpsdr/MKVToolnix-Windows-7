@@ -88,7 +88,7 @@ int const transmission_bitrates[32] = {
   // [22] 1411200 is actually 1234800 for 14-bit DTS-CD audio
 };
 
-#define SPEAKER_PAIR_ALL_2 0xae66
+constexpr auto SPEAKER_PAIR_ALL_2 = 0xae66;
 
 unsigned int
 count_channels_for_mask(unsigned int mask) {
