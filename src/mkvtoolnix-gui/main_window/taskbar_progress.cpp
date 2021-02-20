@@ -2,7 +2,6 @@
 
 #if defined(SYS_WINDOWS)
 
-#include <QSysInfo>
 #include <QWinTaskbarButton>
 #include <QWinTaskbarProgress>
 
@@ -17,9 +16,6 @@ TaskbarProgress::TaskbarProgress(QWidget *parent)
   : QObject{parent}
   , m_button{}
 {
-  if (QSysInfo::WV_WINDOWS7 > QSysInfo::WindowsVersion)
-    return;
-
   m_button   = new QWinTaskbarButton{this};
   auto model = MainWindow::get()->jobTool()->model();
 

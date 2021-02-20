@@ -40,10 +40,9 @@ set_process_priority(int priority) {
     { HIGH_PRIORITY_CLASS,         THREAD_PRIORITY_HIGHEST      },
   };
 
-  // If the lowest priority should be used and we're on Vista or later
-  // then use background priority. This also selects a lower I/O
-  // priority.
-  if ((-2 == priority) && (mtx::sys::get_windows_version() >= WINDOWS_VERSION_VISTA)) {
+  // If the lowest priority should be used use background
+  // priority. This also selects a lower I/O priority.
+  if (-2 == priority) {
     SetPriorityClass(GetCurrentProcess(), PROCESS_MODE_BACKGROUND_BEGIN);
     SetThreadPriority(GetCurrentThread(), THREAD_MODE_BACKGROUND_BEGIN);
     return;

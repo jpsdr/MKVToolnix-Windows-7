@@ -302,9 +302,7 @@ get_local_charset() {
 std::string
 get_local_console_charset() {
 #if defined(SYS_WINDOWS)
-  if (mtx::sys::get_windows_version() >= WINDOWS_VERSION_VISTA)
-    return fmt::format("CP{0}", GetACP());
-  return fmt::format("CP{0}", GetOEMCP());
+  return fmt::format("CP{0}", GetACP());
 #else
   return get_local_charset();
 #endif
