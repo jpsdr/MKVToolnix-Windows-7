@@ -108,24 +108,35 @@
 
 using namespace libmatroska;
 
-#define MTX_WRITING_APP_VER(major, minor, patchlevel, errata) ((major << 24) | (minor << 16) | (patchlevel << 8) | (errata))
+namespace {
+unsigned int
+writing_app_ver(unsigned int major,
+                unsigned int minor,
+                unsigned int patchlevel,
+                unsigned int errata) {
+  return (major << 24) | (minor << 16) | (patchlevel << 8) | errata;
+}
 
-#define MAP_TRACK_TYPE(c) (  (c) == 'a' ? track_audio   \
-                           : (c) == 'b' ? track_buttons \
-                           : (c) == 'v' ? track_video   \
-                           :              track_subtitle)
-#define MAP_TRACK_TYPE_STRING(c) (  (c) == '?' ? Y("unknown")   \
-                                  : (c) == 'a' ? Y("audio")     \
-                                  : (c) == 'b' ? Y("buttons")   \
-                                  : (c) == 'v' ? Y("video")     \
-                                  :              Y("subtitle"))
+auto
+map_track_type(char c) {
+  return c == 'a' ? track_audio
+       : c == 'b' ? track_buttons
+       : c == 'v' ? track_video
+       :            track_subtitle;
+}
 
-#define in_parent(p) \
-  (!p->IsFiniteSize() || (m_in->getFilePointer() < (p->GetElementPosition() + p->HeadSize() + p->GetSize())))
+auto
+map_track_type_string(char c) {
+  return c == '?' ? Y("unknown")
+       : c == 'a' ? Y("audio")
+       : c == 'b' ? Y("buttons")
+       : c == 'v' ? Y("video")
+       :            Y("subtitle");
+}
 
-#define is_ebmlvoid(e) (Is<EbmlVoid>(e))
+constexpr auto MAGIC_MKV = 0x1a45dfa3;
 
-#define MAGIC_MKV 0x1a45dfa3
+} // anonymous namespace
 
 void
 kax_track_t::handle_packetizer_display_dimensions() {
@@ -472,7 +483,7 @@ kax_reader_c::verify_vorbis_audio_track(kax_track_t *t) {
   // are used and add up to too large a value. The result is the
   // usual "timestamp < m_last_timestamp" message.
   // Workaround: do not use durations for such m_tracks.
-  if ((m_writing_app == "mkvmerge") && (-1 != m_writing_app_ver) && (MTX_WRITING_APP_VER(7, 0, 0, 0) > m_writing_app_ver))
+  if ((m_writing_app == "mkvmerge") && (-1 != m_writing_app_ver) && (writing_app_ver(7, 0, 0, 0) > m_writing_app_ver))
     t->ignore_duration_hack = true;
 
   handle_vorbis_comments(*t);
@@ -1578,7 +1589,9 @@ kax_reader_c::read_headers_internal() {
       if (cluster)              // we've found the first cluster, so get out
         break;
 
-      if (!in_parent(l0))
+      auto in_parent = !l0->IsFiniteSize() || (m_in->getFilePointer() < (l0->GetElementPosition() + l0->HeadSize() + l0->GetSize()));
+
+      if (!in_parent)
         break;
 
       l1->SkipData(*m_es, EBML_CONTEXT(l1));
@@ -1622,7 +1635,7 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   passthrough_packetizer_c *ptzr;
 
-  mxinfo_tid(m_ti.m_fname, t->tnum, fmt::format(Y("Using the generic output module for track type '{0}'.\n"), MAP_TRACK_TYPE_STRING(t->type)));
+  mxinfo_tid(m_ti.m_fname, t->tnum, fmt::format(Y("Using the generic output module for track type '{0}'.\n"), map_track_type_string(t->type)));
 
   ptzr                      = new passthrough_packetizer_c(this, nti);
   t->ptzr                   = add_packetizer(ptzr);
@@ -1630,7 +1643,7 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
   t->passthrough            = true;
   m_ptzr_to_track_map[ptzr] = t;
 
-  ptzr->set_track_type(MAP_TRACK_TYPE(t->type));
+  ptzr->set_track_type(map_track_type(t->type));
   ptzr->set_codec_id(t->codec_id);
   ptzr->set_codec_private(t->private_data);
   ptzr->set_codec_name(t->codec_name);
@@ -1871,7 +1884,7 @@ kax_reader_c::create_av1_video_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   if (   (m_writing_app     == "mkvmerge")
       && (m_writing_app_ver != -1)
-      && (m_writing_app_ver <= MTX_WRITING_APP_VER(28, 0, 0, 0))) {
+      && (m_writing_app_ver <= writing_app_ver(28, 0, 0, 0))) {
     // mkvmerge 28.0.0 created invalid av1C CodecPrivate data. Let's rebuild it.
     nti.m_private_data.reset();
   }
