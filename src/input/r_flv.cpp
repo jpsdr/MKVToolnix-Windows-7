@@ -30,7 +30,7 @@
 #include "output/p_mp3.h"
 #include "output/p_video_for_windows.h"
 
-#define FLV_DETECT_SIZE 1 * 1024 * 1024
+constexpr auto FLV_DETECT_SIZE = 1024 * 1024;
 
 flv_header_t::flv_header_t()
   : signature{ 0, 0, 0 }
