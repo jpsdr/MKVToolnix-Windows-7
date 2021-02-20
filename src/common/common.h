@@ -83,8 +83,8 @@ using namespace std::string_literals;
 #define Y(s)                            gettext(u8##s)
 #define NY(s_singular, s_plural, count) ngettext(u8##s_singular, u8##s_plural, count)
 
-#define BUGMSG Y("This should not have happened. Please contact the author " \
-                 "Moritz Bunkus <moritz@bunkus.org> with this error/warning " \
+#define BUGMSG Y("This should not have happened. Please file an issue at " \
+                 "https://mkvtoolnix.download/issues with this error/warning " \
                  "message, a description of what you were trying to do, " \
                  "the command line used and which operating system you are " \
                  "using. Thank you.")
