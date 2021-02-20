@@ -16,13 +16,14 @@
 
 #include "common/common_pch.h"
 
-#define DIRAC_SYNC_WORD            0x42424344 // 'BBCD'
-#define DIRAC_UNIT_SEQUENCE_HEADER 0x00
-#define DIRAC_UNIT_END_OF_SEQUENCE 0x10
-#define DIRAC_UNIT_AUXILIARY_DATA  0x20
-#define DIRAC_UNIT_PADDING         0x30
-
 namespace mtx::dirac {
+
+constexpr auto SYNC_WORD            = 0x42424344; // 'BBCD'
+constexpr auto UNIT_SEQUENCE_HEADER = 0x00;
+constexpr auto UNIT_END_OF_SEQUENCE = 0x10;
+constexpr auto UNIT_AUXILIARY_DATA  = 0x20;
+constexpr auto UNIT_PADDING         = 0x30;
+
 inline bool is_auxiliary_data(int type) {
   return (type & 0xf8) == 0x20;
 }

@@ -19,9 +19,9 @@
 #include "common/endian.h"
 #include "common/memory_slice_cursor.h"
 
-#define MAX_STANDARD_VIDEO_FORMAT 23
-
 namespace mtx::dirac {
+
+constexpr auto MAX_STANDARD_VIDEO_FORMAT = 23;
 
 sequence_header_t::sequence_header_t() {
   memset(this, 0, sizeof(sequence_header_t));
@@ -238,7 +238,7 @@ es_parser_c::add_bytes(unsigned char *buffer,
     uint32_t marker = (1 << 24) | ((unsigned int)cursor.get_char() << 16) | ((unsigned int)cursor.get_char() << 8) | (unsigned int)cursor.get_char();
 
     while (true) {
-      if (DIRAC_SYNC_WORD == marker) {
+      if (SYNC_WORD == marker) {
         if (!previous_found) {
           previous_found = true;
           previous_pos   = cursor.get_position() - 4;
@@ -292,7 +292,7 @@ void
 es_parser_c::flush() {
   if (m_unparsed_buffer && (4 <= m_unparsed_buffer->get_size())) {
     uint32_t marker = get_uint32_be(m_unparsed_buffer->get_buffer());
-    if (DIRAC_SYNC_WORD == marker)
+    if (SYNC_WORD == marker)
       handle_unit(memory_c::clone(m_unparsed_buffer->get_buffer(), m_unparsed_buffer->get_size()));
   }
 
@@ -305,16 +305,16 @@ void
 es_parser_c::handle_unit(memory_cptr packet) {
   unsigned char type = packet->get_buffer()[4];
 
-  if (DIRAC_UNIT_SEQUENCE_HEADER == type)
+  if (UNIT_SEQUENCE_HEADER == type)
     handle_sequence_header_unit(packet);
 
   else if (is_auxiliary_data(type))
     handle_auxiliary_data_unit(packet);
 
-  else if (DIRAC_UNIT_PADDING == type)
+  else if (UNIT_PADDING == type)
     handle_padding_unit(packet);
 
-  else if (DIRAC_UNIT_END_OF_SEQUENCE == type)
+  else if (UNIT_END_OF_SEQUENCE == type)
     handle_end_of_sequence_unit(packet);
 
   else if (is_picture(type))
@@ -409,7 +409,7 @@ es_parser_c::combine_extra_data_with_packet() {
     memcpy(ptr, mem->get_buffer(), mem->get_size());
     ptr += mem->get_size();
 
-    if (DIRAC_UNIT_SEQUENCE_HEADER == mem->get_buffer()[4])
+    if (UNIT_SEQUENCE_HEADER == mem->get_buffer()[4])
       m_current_frame->contains_sequence_header = true;
   }
 

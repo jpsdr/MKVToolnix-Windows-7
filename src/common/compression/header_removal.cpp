@@ -144,7 +144,7 @@ mpeg4_p10_compressor_c::mpeg4_p10_compressor_c() {
 
 dirac_compressor_c::dirac_compressor_c() {
   memory_cptr bytes = memory_c::alloc(4);
-  put_uint32_be(bytes->get_buffer(), DIRAC_SYNC_WORD);
+  put_uint32_be(bytes->get_buffer(), mtx::dirac::SYNC_WORD);
   set_bytes(bytes);
 }
 

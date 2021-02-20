@@ -24,7 +24,7 @@
 #include "output/p_dirac.h"
 
 
-#define READ_SIZE 1024 * 1024
+constexpr auto READ_SIZE = 1024 * 1024;
 
 bool
 dirac_es_reader_c::probe_file() {
@@ -34,7 +34,7 @@ dirac_es_reader_c::probe_file() {
     return false;
 
   uint32_t marker = get_uint32_be(m_buffer->get_buffer());
-  if (DIRAC_SYNC_WORD != marker)
+  if (mtx::dirac::SYNC_WORD != marker)
     return 0;
 
   mtx::dirac::es_parser_c parser;
