@@ -103,12 +103,12 @@ frame_c::decode_header(unsigned char const *buffer,
   unsigned char swapped_buffer[18];
   std::unique_ptr<mtx::bits::reader_c> r;
 
-  if (get_uint16_le(buffer) == AC3_SYNC_WORD) {
+  if (get_uint16_le(buffer) == SYNC_WORD) {
     // byte-swapped
     mtx::bytes::swap_buffer(buffer, swapped_buffer, 18, 2);
     r.reset(new mtx::bits::reader_c(swapped_buffer, 18));
 
-  } else if (get_uint16_be(buffer) == AC3_SYNC_WORD)
+  } else if (get_uint16_be(buffer) == SYNC_WORD)
     r.reset(new mtx::bits::reader_c(buffer, 18));
 
   else
@@ -138,7 +138,7 @@ frame_c::decode_header_type_eac3(mtx::bits::reader_c &bc) {
 
   m_frame_type = bc.get_bits(2);
 
-  if (EAC3_FRAME_TYPE_RESERVED == m_frame_type)
+  if (FRAME_TYPE_RESERVED == m_frame_type)
     return false;
 
   m_sub_stream_id = bc.get_bits(3);
@@ -171,7 +171,7 @@ frame_c::decode_header_type_eac3(mtx::bits::reader_c &bc) {
       bc.skip_bits(8);          // compr2
   }
 
-  if ((m_frame_type == EAC3_FRAME_TYPE_DEPENDENT) && bc.get_bit()) { // chanmape
+  if ((m_frame_type == FRAME_TYPE_DEPENDENT) && bc.get_bit()) { // chanmape
     auto chanmap     = bc.get_bits(16);
     m_channel_layout = 0;
 
@@ -271,7 +271,7 @@ frame_c::decode_header_type_ac3(mtx::bits::reader_c &bc) {
   m_bytes                                  = frame_sizes[frmsizecod][fscod] << 1;
 
   m_samples                                = 1536;
-  m_frame_type                             = EAC3_FRAME_TYPE_INDEPENDENT;
+  m_frame_type                             = FRAME_TYPE_INDEPENDENT;
 
   if (bc.get_bit())           // compre
     bc.skip_bits(8);          // compr
@@ -354,10 +354,10 @@ frame_c::to_string(bool verbose)
     return fmt::format("position {0} BS ID {1} size {2} E-AC-3 {3}", m_stream_position, m_bs_id, m_bytes, is_eac3());
 
   const std::string &frame_type = !is_eac3()                                  ? "---"
-                                : m_frame_type == EAC3_FRAME_TYPE_INDEPENDENT ? "independent"
-                                : m_frame_type == EAC3_FRAME_TYPE_DEPENDENT   ? "dependent"
-                                : m_frame_type == EAC3_FRAME_TYPE_AC3_CONVERT ? "AC-3 convert"
-                                : m_frame_type == EAC3_FRAME_TYPE_RESERVED    ? "reserved"
+                                : m_frame_type == FRAME_TYPE_INDEPENDENT ? "independent"
+                                : m_frame_type == FRAME_TYPE_DEPENDENT   ? "dependent"
+                                : m_frame_type == FRAME_TYPE_AC3_CONVERT ? "AC-3 convert"
+                                : m_frame_type == FRAME_TYPE_RESERVED    ? "reserved"
                                 :                                               "unknown";
 
   auto output = fmt::format("position {0} size {2} garbage {1} BS ID {3} E-AC-3 {14} sample rate {4} bit rate {5} channels {6} (effective layout 0x{15:08x}) flags {7} samples {8} type {9} ({12}) "
@@ -448,7 +448,7 @@ parser_c::parse(bool end_of_stream) {
     frame_c frame;
     unsigned char const *buffer_to_decode;
 
-    if (get_uint16_le(&buffer[position]) == AC3_SYNC_WORD) {
+    if (get_uint16_le(&buffer[position]) == SYNC_WORD) {
       mtx::bytes::swap_buffer(&buffer[position], swapped_buffer, 18, 2);
       buffer_to_decode = swapped_buffer;
 
@@ -469,7 +469,7 @@ parser_c::parse(bool end_of_stream) {
 
     frame.m_stream_position = m_parsed_stream_position + position;
 
-    if (!m_current_frame.m_valid || (EAC3_FRAME_TYPE_DEPENDENT != frame.m_frame_type)) {
+    if (!m_current_frame.m_valid || (FRAME_TYPE_DEPENDENT != frame.m_frame_type)) {
       if (m_current_frame.m_valid)
         m_frames.push_back(m_current_frame);
 
@@ -564,7 +564,7 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
    The license here is the GPL v2.
  */
 
-#define CRC16_POLY ((1 << 0) | (1 << 2) | (1 << 15) | (1 << 16))
+constexpr auto CRC16_POLY = (1 << 0) | (1 << 2) | (1 << 15) | (1 << 16);
 
 static unsigned int
 mul_poly(unsigned int a,
@@ -691,7 +691,7 @@ remove_dialog_normalization_gain_impl(unsigned char *buf,
   crcrsv_byte       &= 0xfe;
 
   auto crc2 = calculate_crc2(buf, frame.m_bytes);
-  if (crc2 == AC3_SYNC_WORD) {
+  if (crc2 == SYNC_WORD) {
     crcrsv_byte |= 0x01;
     crc2         = calculate_crc2(buf, frame.m_bytes);
   }

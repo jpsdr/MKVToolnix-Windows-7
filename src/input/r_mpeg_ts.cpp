@@ -2133,7 +2133,7 @@ reader_c::determine_track_type_by_pes_content(track_c &track) {
     track.type  = pid_type_e::audio;
     track.codec = codec_c::look_up(codec_c::type_e::A_AAC);
 
-  } else if ((size >= 2) && (get_uint16_be(buffer) == AC3_SYNC_WORD)) {
+  } else if ((size >= 2) && (get_uint16_be(buffer) == mtx::ac3::SYNC_WORD)) {
     track.type  = pid_type_e::audio;
     track.codec = codec_c::look_up(codec_c::type_e::A_AC3);
   }

@@ -17,28 +17,6 @@
 
 #include "common/byte_buffer.h"
 
-#define AC3_SYNC_WORD           0x0b77
-
-#define AC3_CHANNEL                  0
-#define AC3_MONO                     1
-#define AC3_STEREO                   2
-#define AC3_3F                       3
-#define AC3_2F1R                     4
-#define AC3_3F1R                     5
-#define AC3_2F2R                     6
-#define AC3_3F2R                     7
-#define AC3_CHANNEL1                 8
-#define AC3_CHANNEL2                 9
-#define AC3_DOLBY                   10
-#define AC3_CHANNEL_MASK            15
-
-#define AC3_LFE                     16
-
-#define EAC3_FRAME_TYPE_INDEPENDENT  0
-#define EAC3_FRAME_TYPE_DEPENDENT    1
-#define EAC3_FRAME_TYPE_AC3_CONVERT  2
-#define EAC3_FRAME_TYPE_RESERVED     3
-
 class codec_c;
 
 namespace mtx {
@@ -48,6 +26,13 @@ class reader_c;
 }
 
 namespace ac3 {
+
+constexpr auto SYNC_WORD              = 0x0b77;
+
+constexpr auto FRAME_TYPE_INDEPENDENT = 0;
+constexpr auto FRAME_TYPE_DEPENDENT   = 1;
+constexpr auto FRAME_TYPE_AC3_CONVERT = 2;
+constexpr auto FRAME_TYPE_RESERVED    = 3;
 
 class frame_c {
 public:

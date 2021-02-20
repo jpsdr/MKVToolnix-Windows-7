@@ -156,7 +156,7 @@ dts_compressor_c::dts_compressor_c() {
 
 ac3_compressor_c::ac3_compressor_c() {
   memory_cptr bytes = memory_c::alloc(2);
-  put_uint16_be(bytes->get_buffer(), AC3_SYNC_WORD);
+  put_uint16_be(bytes->get_buffer(), mtx::ac3::SYNC_WORD);
   set_bytes(bytes);
 }
 
