@@ -74,7 +74,7 @@ xtr_webvtt_c::handle_frame(xtr_frame_t &f) {
   }
 
   auto content = mtx::string::chomp(mtx::string::normalize_line_endings(f.frame->to_string())) + "\n";
-  content      = webvtt_parser_c::adjust_embedded_timestamps(content, timestamp_c::ns(f.timestamp));
+  content      = mtx::webvtt::parser_c::adjust_embedded_timestamps(content, timestamp_c::ns(f.timestamp));
   content      = fmt::format("\n{0}{1}{2} --> {3}{4}\n{5}",
                              local_blocks, label,
                              mtx::string::format_timestamp(f.timestamp, 3), mtx::string::format_timestamp(f.timestamp + f.duration, 3),

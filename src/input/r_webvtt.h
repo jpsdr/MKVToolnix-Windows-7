@@ -20,7 +20,7 @@
 
 class webvtt_reader_c: public generic_reader_c {
 private:
-  webvtt_parser_cptr m_parser;
+  mtx::webvtt::parser_cptr m_parser;
   int64_t m_bytes_to_process{}, m_bytes_processed{};
 
 public:

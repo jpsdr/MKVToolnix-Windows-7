@@ -17,7 +17,9 @@
 
 #include "common/timestamp.h"
 
-class webvtt_parser_c {
+namespace mtx::webvtt {
+
+class parser_c {
 public:
   struct cue_t {
     timestamp_c m_start, m_duration;
@@ -30,8 +32,8 @@ private:
   std::unique_ptr<impl_t> m;
 
 public:
-  webvtt_parser_c();
-  ~webvtt_parser_c();
+  parser_c();
+  ~parser_c();
 
   void add_line(std::string const &line);
   void add_joined_lines(std::string const &joined_lines);
@@ -54,4 +56,6 @@ protected:
 public:
   static std::string adjust_embedded_timestamps(std::string const &text, timestamp_c const &offset);
 };
-using webvtt_parser_cptr = std::shared_ptr<webvtt_parser_c>;
+using parser_cptr = std::shared_ptr<parser_c>;
+
+} // namespace mtx::webvtt

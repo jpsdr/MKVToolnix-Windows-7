@@ -36,7 +36,7 @@ webvtt_reader_c::parse_file() {
   auto size    = m_in->get_size() - m_in->getFilePointer();
   auto content = m_in->read(size);
 
-  m_parser     = std::make_shared<webvtt_parser_c>();
+  m_parser     = std::make_shared<mtx::webvtt::parser_c>();
 
   m_parser->add_joined_lines(*content);
   m_parser->flush();
