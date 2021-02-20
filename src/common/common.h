@@ -111,7 +111,6 @@ constexpr uint32_t calc_fourcc(char a, char b, char c, char d) {
 void mxrun_before_exit(std::function<void()> function);
 [[noreturn]]
 void mxexit(int code = -1);
-void set_process_priority(int priority);
 
 extern unsigned int verbose;
 

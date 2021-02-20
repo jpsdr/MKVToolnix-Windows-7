@@ -13,6 +13,7 @@
 #include "common/common_pch.h"
 
 #include "common/command_line.h"
+#include "common/fs_sys_helpers.h"
 #include "common/kax_info.h"
 #include "common/version.h"
 #include "info/info_cli_parser.h"
@@ -30,7 +31,7 @@ main(int argc,
 
   auto options = info_cli_parser_c(mtx::cli::args_in_utf8(argc, argv)).run();
 
-  set_process_priority(-1);
+  mtx::sys::set_process_priority(-1);
 
   if (options.m_file_name.empty())
     mxerror(Y("No file name given.\n"));

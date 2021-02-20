@@ -16,6 +16,8 @@
 
 namespace mtx::sys {
 
+void set_process_priority(int priority);
+
 int64_t get_current_time_millis();
 
 int system(std::string const &command);

@@ -30,6 +30,24 @@
 
 namespace mtx::sys {
 
+void
+set_process_priority(int priority) {
+  static const int s_nice_levels[5] = { 19, 2, 0, -2, -5 };
+
+  // Avoid a compiler warning due to glibc having flagged 'nice' with
+  // 'warn if return value is ignored'.
+  if (!nice(s_nice_levels[priority + 2])) {
+  }
+
+#if defined(HAVE_SYSCALL) && defined(SYS_ioprio_set)
+  if (-2 == priority)
+    syscall(SYS_ioprio_set,
+            1,        // IOPRIO_WHO_PROCESS
+            0,        // current process/thread
+            3 << 13); // I/O class 'idle'
+#endif
+}
+
 int64_t
 get_current_time_millis() {
   struct timeval tv;

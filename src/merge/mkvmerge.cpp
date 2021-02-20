@@ -1666,7 +1666,7 @@ parse_arg_priority(const std::string &arg) {
   int i;
   for (i = 0; 5 > i; ++i)
     if ((arg == s_process_priorities[i])) {
-      set_process_priority(i - 2);
+      mtx::sys::set_process_priority(i - 2);
       return;
     }
 

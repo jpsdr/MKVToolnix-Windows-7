@@ -28,6 +28,31 @@
 
 namespace mtx::sys {
 
+void
+set_process_priority(int priority) {
+  static const struct {
+    int priority_class, thread_priority;
+  } s_priority_classes[5] = {
+    { IDLE_PRIORITY_CLASS,         THREAD_PRIORITY_IDLE         },
+    { BELOW_NORMAL_PRIORITY_CLASS, THREAD_PRIORITY_BELOW_NORMAL },
+    { NORMAL_PRIORITY_CLASS,       THREAD_PRIORITY_NORMAL       },
+    { ABOVE_NORMAL_PRIORITY_CLASS, THREAD_PRIORITY_ABOVE_NORMAL },
+    { HIGH_PRIORITY_CLASS,         THREAD_PRIORITY_HIGHEST      },
+  };
+
+  // If the lowest priority should be used and we're on Vista or later
+  // then use background priority. This also selects a lower I/O
+  // priority.
+  if ((-2 == priority) && (mtx::sys::get_windows_version() >= WINDOWS_VERSION_VISTA)) {
+    SetPriorityClass(GetCurrentProcess(), PROCESS_MODE_BACKGROUND_BEGIN);
+    SetThreadPriority(GetCurrentThread(), THREAD_MODE_BACKGROUND_BEGIN);
+    return;
+  }
+
+  SetPriorityClass(GetCurrentProcess(), s_priority_classes[priority + 2].priority_class);
+  SetThreadPriority(GetCurrentThread(), s_priority_classes[priority + 2].thread_priority);
+}
+
 int64_t
 get_current_time_millis() {
   struct _timeb tb;

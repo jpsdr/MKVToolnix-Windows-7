@@ -17,6 +17,7 @@
 
 #include "common/chapters/chapters.h"
 #include "common/command_line.h"
+#include "common/fs_sys_helpers.h"
 #include "common/list_utils.h"
 #include "common/mm_io_x.h"
 #include "common/mm_proxy_io.h"
@@ -116,7 +117,7 @@ static void
 setup(char **argv) {
   mtx_common_init("mkvextract", argv[0]);
 
-  set_process_priority(-1);
+  mtx::sys::set_process_priority(-1);
 
   verbose                  = 0;
   mtx::cli::g_version_info = get_version_info("mkvextract", vif_full);
