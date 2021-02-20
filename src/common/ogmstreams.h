@@ -13,6 +13,8 @@
 
 #pragma once
 
+namespace mtx::ogm {
+
 /*
    Taken from http://tobias.everwicked.com/packfmt.htm
 
@@ -98,7 +100,7 @@ struct PACKED_STRUCTURE stream_header {
 
 };
 
-struct PACKED_STRUCTURE vp8_ogg_header_t {
+struct PACKED_STRUCTURE vp8_header_t {
   uint8_t header_id;            // VP8 Ogg header mapping ID 0x4f
   uint32_t id;                  // VP8 Ogg mapping ID 0x56503830 ("VP80")
   uint8_t header_type;          // VP8 stream info header type 0x01
@@ -116,9 +118,11 @@ struct PACKED_STRUCTURE vp8_ogg_header_t {
 #endif
 
 /// Some defines from OggDS
-#define PACKET_TYPE_HEADER       0x01
-#define PACKET_TYPE_COMMENT      0x03
-#define PACKET_TYPE_BITS         0x07
-#define PACKET_LEN_BITS01        0xc0
-#define PACKET_LEN_BITS2         0x02
-#define PACKET_IS_SYNCPOINT      0x08
+constexpr auto PACKET_TYPE_HEADER  = 0x01;
+constexpr auto PACKET_TYPE_COMMENT = 0x03;
+constexpr auto PACKET_TYPE_BITS    = 0x07;
+constexpr auto PACKET_LEN_BITS01   = 0xc0;
+constexpr auto PACKET_LEN_BITS2    = 0x02;
+constexpr auto PACKET_IS_SYNCPOINT = 0x08;
+
+} // namespace mtx::ogm

@@ -234,7 +234,7 @@ public:
 
 class ogm_v_vp8_demuxer_c: public ogm_demuxer_c {
 public:
-  vp8_ogg_header_t vp8_header;
+  mtx::ogm::vp8_header_t vp8_header;
   unsigned int pixel_width, pixel_height;
   int64_t frame_rate_num, frame_rate_den;
   int64_t frames_since_granulepos_change;
@@ -470,13 +470,13 @@ ogm_reader_c::handle_new_stream(ogg_page *og) {
     dmx = new ogm_a_flac_demuxer_c(this, 0x7f == op.packet[0] ? ofm_post_1_1_1 : ofm_pre_1_1_1);
 #endif
 
-  } else if ((static_cast<size_t>(op.bytes) >= sizeof(vp8_ogg_header_t)) && (0x4f == op.packet[0]) && (get_uint32_be(&op.packet[1]) == 0x56503830))
+  } else if ((static_cast<size_t>(op.bytes) >= sizeof(mtx::ogm::vp8_header_t)) && (0x4f == op.packet[0]) && (get_uint32_be(&op.packet[1]) == 0x56503830))
     dmx = new ogm_v_vp8_demuxer_c(this, op);
 
-  else if (((*op.packet & PACKET_TYPE_BITS ) == PACKET_TYPE_HEADER) && (op.bytes >= ((int)sizeof(stream_header) + 1))) {
+  else if (((*op.packet & mtx::ogm::PACKET_TYPE_BITS ) == mtx::ogm::PACKET_TYPE_HEADER) && (op.bytes >= ((int)sizeof(mtx::ogm::stream_header) + 1))) {
     // The new stream headers introduced by OggDS (see ogmstreams.h).
 
-    stream_header *sth = (stream_header *)(op.packet + 1);
+    auto sth = reinterpret_cast<mtx::ogm::stream_header *>(op.packet + 1);
     char buf[5];
     buf[4] = 0;
 
@@ -896,8 +896,8 @@ void
 ogm_demuxer_c::get_duration_and_len(ogg_packet &op,
                                     int64_t &duration,
                                     int &duration_len) {
-  duration_len  = (*op.packet & PACKET_LEN_BITS01) >> 6;
-  duration_len |= (*op.packet & PACKET_LEN_BITS2)  << 1;
+  duration_len  = (*op.packet & mtx::ogm::PACKET_LEN_BITS01) >> 6;
+  duration_len |= (*op.packet & mtx::ogm::PACKET_LEN_BITS2)  << 1;
 
   duration      = 0;
 
@@ -917,7 +917,7 @@ ogm_demuxer_c::process_page(int64_t /* granulepos */) {
   while (ogg_stream_packetout(&os, &op) == 1) {
     eos |= op.e_o_s;
 
-    if (((*op.packet & 3) == PACKET_TYPE_HEADER) || ((*op.packet & 3) == PACKET_TYPE_COMMENT))
+    if (((*op.packet & 3) == mtx::ogm::PACKET_TYPE_HEADER) || ((*op.packet & 3) == mtx::ogm::PACKET_TYPE_COMMENT))
       continue;
 
     int64_t duration;
@@ -973,9 +973,9 @@ void
 ogm_a_aac_demuxer_c::initialize() {
   std::optional<mtx::aac::audio_config_t> parsed_audio_config;
 
-  if (packet_data[0]->get_size() >= (sizeof(stream_header) + 5))
-    parsed_audio_config = mtx::aac::parse_audio_specific_config(packet_data[0]->get_buffer() + sizeof(stream_header) + 5,
-                                                                packet_data[0]->get_size()   - sizeof(stream_header) - 5);
+  if (packet_data[0]->get_size() >= (sizeof(mtx::ogm::stream_header) + 5))
+    parsed_audio_config = mtx::aac::parse_audio_specific_config(packet_data[0]->get_buffer() + sizeof(mtx::ogm::stream_header) + 5,
+                                                                packet_data[0]->get_size()   - sizeof(mtx::ogm::stream_header) - 5);
 
   if (parsed_audio_config) {
     audio_config = *parsed_audio_config;
@@ -983,7 +983,7 @@ ogm_a_aac_demuxer_c::initialize() {
       audio_config.profile = mtx::aac::PROFILE_SBR;
 
   } else {
-    auto sth                 = reinterpret_cast<stream_header *>(&packet_data[0]->get_buffer()[1]);
+    auto sth                 = reinterpret_cast<mtx::ogm::stream_header *>(&packet_data[0]->get_buffer()[1]);
     audio_config.channels    = get_uint16_le(&sth->sh.audio.channels);
     audio_config.sample_rate = get_uint64_le(&sth->samples_per_unit);
     audio_config.profile     = mtx::aac::PROFILE_LC;
@@ -1011,7 +1011,7 @@ ogm_a_ac3_demuxer_c::ogm_a_ac3_demuxer_c(ogm_reader_c *p_reader)
 
 void
 ogm_a_ac3_demuxer_c::initialize() {
-  auto sth    = reinterpret_cast<stream_header *>(packet_data[0]->get_buffer() + 1);
+  auto sth    = reinterpret_cast<mtx::ogm::stream_header *>(packet_data[0]->get_buffer() + 1);
   channels    = get_uint16_le(&sth->sh.audio.channels);
   sample_rate = get_uint64_le(&sth->samples_per_unit);
 }
@@ -1035,7 +1035,7 @@ ogm_a_mp3_demuxer_c::ogm_a_mp3_demuxer_c(ogm_reader_c *p_reader)
 
 void
 ogm_a_mp3_demuxer_c::initialize() {
-  auto sth    = reinterpret_cast<stream_header *>(packet_data[0]->get_buffer() + 1);
+  auto sth    = reinterpret_cast<mtx::ogm::stream_header *>(packet_data[0]->get_buffer() + 1);
   channels    = get_uint16_le(&sth->sh.audio.channels);
   sample_rate = get_uint64_le(&sth->samples_per_unit);
 }
@@ -1059,7 +1059,7 @@ ogm_a_pcm_demuxer_c::ogm_a_pcm_demuxer_c(ogm_reader_c *p_reader)
 
 void
 ogm_a_pcm_demuxer_c::initialize() {
-  auto sth        = reinterpret_cast<stream_header *>(packet_data[0]->get_buffer() + 1);
+  auto sth        = reinterpret_cast<mtx::ogm::stream_header *>(packet_data[0]->get_buffer() + 1);
   channels        = get_uint16_le(&sth->sh.audio.channels);
   sample_rate     = get_uint64_le(&sth->samples_per_unit);
   bits_per_sample = get_uint16_le(&sth->bits_per_sample);
@@ -1122,7 +1122,7 @@ ogm_a_vorbis_demuxer_c::process_page(int64_t /* granulepos */) {
   while (ogg_stream_packetout(&os, &op) == 1) {
     eos |= op.e_o_s;
 
-    if (((*op.packet & 3) == PACKET_TYPE_HEADER) || ((*op.packet & 3) == PACKET_TYPE_COMMENT))
+    if (((*op.packet & 3) == mtx::ogm::PACKET_TYPE_HEADER) || ((*op.packet & 3) == mtx::ogm::PACKET_TYPE_COMMENT))
       continue;
 
     reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes)));
@@ -1302,7 +1302,7 @@ ogm_s_text_demuxer_c::process_page(int64_t granulepos) {
   while (ogg_stream_packetout(&os, &op) == 1) {
     eos |= op.e_o_s;
 
-    if (((*op.packet & 3) == PACKET_TYPE_HEADER) || ((*op.packet & 3) == PACKET_TYPE_COMMENT))
+    if (((*op.packet & 3) == mtx::ogm::PACKET_TYPE_HEADER) || ((*op.packet & 3) == mtx::ogm::PACKET_TYPE_COMMENT))
       continue;
 
     get_duration_and_len(op, duration, duration_len);
@@ -1325,7 +1325,7 @@ ogm_v_avc_demuxer_c::ogm_v_avc_demuxer_c(ogm_reader_c *p_reader)
 
 generic_packetizer_c *
 ogm_v_avc_demuxer_c::create_packetizer() {
-  stream_header *sth          = (stream_header *)&packet_data[0]->get_buffer()[1];
+  auto sth                    = reinterpret_cast<mtx::ogm::stream_header *>(&packet_data[0]->get_buffer()[1]);
   generic_packetizer_c *vptzr = new avc_es_video_packetizer_c(reader, m_ti);
 
   vptzr->set_video_pixel_dimensions(get_uint32_le(&sth->sh.video.width), get_uint32_le(&sth->sh.video.height));
@@ -1338,7 +1338,7 @@ ogm_v_avc_demuxer_c::create_packetizer() {
 std::pair<unsigned int, unsigned int>
 ogm_v_avc_demuxer_c::get_pixel_dimensions()
   const {
-  auto sth = reinterpret_cast<stream_header *>(&packet_data[0]->get_buffer()[1]);
+  auto sth = reinterpret_cast<mtx::ogm::stream_header *>(&packet_data[0]->get_buffer()[1]);
   return { get_uint32_le(&sth->sh.video.width), get_uint32_le(&sth->sh.video.height) };
 }
 
@@ -1353,7 +1353,7 @@ ogm_v_mscomp_demuxer_c::ogm_v_mscomp_demuxer_c(ogm_reader_c *p_reader)
 
 std::string
 ogm_v_mscomp_demuxer_c::get_codec() {
-  stream_header *sth = (stream_header *)(packet_data[0]->get_buffer() + 1);
+  auto sth = reinterpret_cast<mtx::ogm::stream_header *>(packet_data[0]->get_buffer() + 1);
   char fourcc[5];
 
   memcpy(fourcc, sth->subtype, 4);
@@ -1364,8 +1364,8 @@ ogm_v_mscomp_demuxer_c::get_codec() {
 
 void
 ogm_v_mscomp_demuxer_c::initialize() {
-  stream_header *sth = (stream_header *)(packet_data[0]->get_buffer() + 1);
-  codec              = codec_c::look_up(get_codec());
+  auto sth = reinterpret_cast<mtx::ogm::stream_header *>(packet_data[0]->get_buffer() + 1);
+  codec    = codec_c::look_up(get_codec());
 
   if (0 > g_video_fps)
     g_video_fps = 10000000.0 / get_uint64_le(&sth->time_unit);
@@ -1376,7 +1376,7 @@ ogm_v_mscomp_demuxer_c::initialize() {
 generic_packetizer_c *
 ogm_v_mscomp_demuxer_c::create_packetizer() {
   alBITMAPINFOHEADER bih;
-  stream_header *sth = (stream_header *)&packet_data[0]->get_buffer()[1];
+  auto sth = reinterpret_cast<mtx::ogm::stream_header *>(&packet_data[0]->get_buffer()[1]);
 
   // AVI compatibility mode. Fill in the values we've got and guess
   // the others.
@@ -1409,7 +1409,7 @@ ogm_v_mscomp_demuxer_c::create_packetizer() {
 std::pair<unsigned int, unsigned int>
 ogm_v_mscomp_demuxer_c::get_pixel_dimensions()
   const {
-  stream_header *sth = reinterpret_cast<stream_header *>(&packet_data[0]->get_buffer()[1]);
+  auto sth = reinterpret_cast<mtx::ogm::stream_header *>(&packet_data[0]->get_buffer()[1]);
 
   return { get_uint32_le(&sth->sh.video.width), get_uint32_le(&sth->sh.video.height) };
 }
@@ -1423,7 +1423,7 @@ ogm_v_mscomp_demuxer_c::process_page(int64_t granulepos) {
   while (ogg_stream_packetout(&os, &op) == 1) {
     eos |= op.e_o_s;
 
-    if (((*op.packet & 3) == PACKET_TYPE_HEADER) || ((*op.packet & 3) == PACKET_TYPE_COMMENT))
+    if (((*op.packet & 3) == mtx::ogm::PACKET_TYPE_HEADER) || ((*op.packet & 3) == mtx::ogm::PACKET_TYPE_COMMENT))
       continue;
 
     int duration_len;
@@ -1452,7 +1452,7 @@ ogm_v_mscomp_demuxer_c::process_page(int64_t granulepos) {
     int64_t timestamp = (last_granulepos + frames_since_granulepos_change) * default_duration;
     ++frames_since_granulepos_change;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(frame.mem, timestamp, frame.duration, frame.flags & PACKET_IS_SYNCPOINT ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC));
+    reader->m_reader_packetizers[ptzr]->process(new packet_t(frame.mem, timestamp, frame.duration, frame.flags & mtx::ogm::PACKET_IS_SYNCPOINT ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC));
 
     units_processed += duration;
   }
@@ -1543,7 +1543,7 @@ ogm_v_vp8_demuxer_c::ogm_v_vp8_demuxer_c(ogm_reader_c *p_reader,
 {
   codec = codec_c::look_up(codec_c::type_e::V_VP8);
 
-  memcpy(&vp8_header, op.packet, sizeof(vp8_ogg_header_t));
+  memcpy(&vp8_header, op.packet, sizeof(mtx::ogm::vp8_header_t));
 }
 
 void
@@ -1637,7 +1637,7 @@ ogm_v_vp8_demuxer_c::get_pixel_dimensions()
 
 bool
 ogm_v_vp8_demuxer_c::is_header_packet(ogg_packet &op) {
-  if (   (static_cast<std::size_t>(op.bytes) >= sizeof(vp8_ogg_header_t))
+  if (   (static_cast<std::size_t>(op.bytes) >= sizeof(mtx::ogm::vp8_header_t))
       && (op.packet[0]                 == 0x4f)
       && (get_uint32_be(&op.packet[1]) == 0x56503830))
     return true;
