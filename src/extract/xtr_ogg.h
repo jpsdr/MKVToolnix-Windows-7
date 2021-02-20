@@ -95,7 +95,7 @@ protected:
 
 class xtr_oggtheora_c: public xtr_oggbase_c {
 private:
-  theora_identification_header_t m_theora_header;
+  mtx::theora::identification_header_t m_theora_header;
   int64_t m_keyframe_number, m_non_keyframe_number;
 
 public:

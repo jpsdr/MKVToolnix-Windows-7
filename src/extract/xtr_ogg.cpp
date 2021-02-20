@@ -330,7 +330,7 @@ xtr_oggtheora_c::create_file(xtr_base_c *master,
 
 void
 xtr_oggtheora_c::header_packets_unlaced(std::vector<memory_cptr> &header_packets) {
-  theora_parse_identification_header(header_packets[0]->get_buffer(), header_packets[0]->get_size(), m_theora_header);
+  mtx::theora::parse_identification_header(header_packets[0]->get_buffer(), header_packets[0]->get_size(), m_theora_header);
 }
 
 void

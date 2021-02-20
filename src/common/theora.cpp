@@ -18,16 +18,18 @@
 #include "common/bit_reader.h"
 #include "common/theora.h"
 
+namespace mtx::theora {
+
 void
-theora_parse_identification_header(unsigned char *buffer,
-                                   int size,
-                                   theora_identification_header_t &header) {
+parse_identification_header(unsigned char *buffer,
+                            int size,
+                            identification_header_t &header) {
   mtx::bits::reader_c bc(buffer, size);
   int i;
 
   header.headertype = bc.get_bits(8);
-  if (THEORA_HEADERTYPE_IDENTIFICATION != header.headertype)
-    throw mtx::theora::header_parsing_x(fmt::format(Y("Wrong header type: 0x{0:02x} != 0x{1:02x}"), header.headertype, THEORA_HEADERTYPE_IDENTIFICATION));
+  if (HEADERTYPE_IDENTIFICATION != header.headertype)
+    throw mtx::theora::header_parsing_x(fmt::format(Y("Wrong header type: 0x{0:02x} != 0x{1:02x}"), header.headertype, HEADERTYPE_IDENTIFICATION));
 
   for (i = 0; 6 > i; ++i)
     header.theora_string[i] = bc.get_bits(8);
@@ -72,3 +74,5 @@ theora_parse_identification_header(unsigned char *buffer,
     }
   }
 }
+
+} // namespace mtx:theora

@@ -17,27 +17,25 @@
 
 #include "common/error.h"
 
-#define THEORA_HEADERTYPE_IDENTIFICATION 0x80
-#define THEORA_HEADERTYPE_COMMENT        0x81
-#define THEORA_HEADERTYPE_SETUP          0x82
+namespace mtx::theora {
 
-namespace mtx {
-  namespace theora {
-    class header_parsing_x: public mtx::exception {
-    protected:
-      std::string m_message;
-    public:
-      header_parsing_x(const std::string &message) : m_message{message} { }
-      virtual ~header_parsing_x() throw() { }
+constexpr auto HEADERTYPE_IDENTIFICATION = 0x80;
+constexpr auto HEADERTYPE_COMMENT        = 0x81;
+constexpr auto HEADERTYPE_SETUP          = 0x82;
 
-      virtual const char *what() const throw() {
-        return m_message.c_str();
-      }
-    };
+class header_parsing_x: public mtx::exception {
+protected:
+  std::string m_message;
+public:
+  header_parsing_x(const std::string &message) : m_message{message} { }
+  virtual ~header_parsing_x() throw() { }
+
+  virtual const char *what() const throw() {
+    return m_message.c_str();
   }
-}
+};
 
-struct theora_identification_header_t {
+struct identification_header_t {
   uint8_t headertype{};
   char theora_string[6]{};
 
@@ -70,4 +68,6 @@ struct theora_identification_header_t {
   int display_width{}, display_height{};
 };
 
-void theora_parse_identification_header(unsigned char *buffer, int size, theora_identification_header_t &header);
+void parse_identification_header(unsigned char *buffer, int size, identification_header_t &header);
+
+} // namespace mtx::theora

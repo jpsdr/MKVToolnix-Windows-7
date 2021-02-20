@@ -216,7 +216,7 @@ public:
 
 class ogm_v_theora_demuxer_c: public ogm_demuxer_c {
 public:
-  theora_identification_header_t theora;
+  mtx::theora::identification_header_t theora;
 
 public:
   ogm_v_theora_demuxer_c(ogm_reader_c *p_reader);
@@ -1473,7 +1473,7 @@ void
 ogm_v_theora_demuxer_c::initialize() {
   try {
     memory_cptr &mem = packet_data[0];
-    theora_parse_identification_header(mem->get_buffer(), mem->get_size(), theora);
+    mtx::theora::parse_identification_header(mem->get_buffer(), mem->get_size(), theora);
 
     display_width  = theora.display_width;
     display_height = theora.display_height;
@@ -1507,10 +1507,10 @@ ogm_v_theora_demuxer_c::process_page([[maybe_unused]] int64_t granulepos) {
 
     // Zero-length frames are 'repeat previous frame' markers and
     // cannot be I frames.
-    bool is_keyframe = (0 != op.bytes) && (0x00 == (op.packet[0] & 0x40));
+    bool is_keyframe  = (0 != op.bytes) && (0x00 == (op.packet[0] & 0x40));
     int64_t timestamp = (int64_t)(1000000000.0 * units_processed * theora.frd / theora.frn);
-    int64_t duration = (int64_t)(1000000000.0 *                   theora.frd / theora.frn);
-    int64_t bref     = is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC;
+    int64_t duration  = (int64_t)(1000000000.0 *                   theora.frd / theora.frn);
+    int64_t bref      = is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC;
 
     ++units_processed;
 

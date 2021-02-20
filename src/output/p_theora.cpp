@@ -56,12 +56,12 @@ theora_video_packetizer_c::extract_aspect_ratio() {
   auto packets = unlace_memory_xiph(m_ti.m_private_data);
 
   for (auto &packet : packets) {
-    if ((0 == packet->get_size()) || (THEORA_HEADERTYPE_IDENTIFICATION != packet->get_buffer()[0]))
+    if ((0 == packet->get_size()) || (mtx::theora::HEADERTYPE_IDENTIFICATION != packet->get_buffer()[0]))
       continue;
 
     try {
-      theora_identification_header_t theora;
-      theora_parse_identification_header(packet->get_buffer(), packet->get_size(), theora);
+      mtx::theora::identification_header_t theora;
+      mtx::theora::parse_identification_header(packet->get_buffer(), packet->get_size(), theora);
 
       if ((0 == theora.display_width) || (0 == theora.display_height))
         return;
