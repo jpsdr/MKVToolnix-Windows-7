@@ -28,7 +28,7 @@
 
 #include "common/terminal.h"
 
-#define DEFAULT_TERMINAL_COLUMNS 80
+constexpr auto DEFAULT_TERMINAL_COLUMNS = 80;
 
 int
 get_terminal_columns() {
