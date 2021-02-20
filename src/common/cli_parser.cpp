@@ -18,11 +18,11 @@
 #include "common/strings/formatting.h"
 #include "common/translation.h"
 
-#define INDENT_COLUMN_OPTION_NAME         2
-#define INDENT_COLUMN_OPTION_DESCRIPTION 30
-#define INDENT_COLUMN_SECTION_HEADER      1
-
 namespace mtx::cli {
+
+constexpr auto INDENT_COLUMN_OPTION_NAME        =  2;
+constexpr auto INDENT_COLUMN_OPTION_DESCRIPTION = 30;
+constexpr auto INDENT_COLUMN_SECTION_HEADER     =  1;
 
 parser_c::option_t::option_t()
   : m_needs_arg{}
@@ -171,10 +171,12 @@ parser_c::add_separator() {
   m_options.emplace_back(parser_c::option_t::ot_information, translatable_string_c(""));
 }
 
-#define OPT(name, description) add_option(name, std::bind(&parser_c::dummy_callback, this), description)
-
 void
 parser_c::add_common_options() {
+  auto OPT = [this](char const *name, translatable_string_c const &description) {
+    add_option(name, std::bind(&parser_c::dummy_callback, this), description);
+  };
+
   OPT("v|verbose",                      YT("Increase verbosity."));
   OPT("q|quiet",                        YT("Suppress status output."));
   OPT("ui-language=<code>",             YT("Force the translations for 'code' to be used."));
@@ -187,8 +189,6 @@ parser_c::add_common_options() {
   OPT("h|help",                         YT("Show this help."));
   OPT("V|version",                      YT("Show version information."));
 }
-
-#undef OPT
 
 void
 parser_c::set_usage() {

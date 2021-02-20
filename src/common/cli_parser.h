@@ -14,9 +14,9 @@
 
 #include "common/translation.h"
 
-#define INDENT_DEFAULT -1
-
 namespace mtx::cli {
+
+constexpr auto INDENT_DEFAULT = -1;
 
 using parser_cb_t = std::function<void(void)>;
 
