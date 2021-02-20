@@ -37,7 +37,7 @@ dirac_es_reader_c::probe_file() {
   if (DIRAC_SYNC_WORD != marker)
     return 0;
 
-  dirac::es_parser_c parser;
+  mtx::dirac::es_parser_c parser;
   parser.add_bytes(m_buffer->get_buffer(), num_read);
 
   return parser.is_sequence_header_available();
@@ -51,7 +51,7 @@ dirac_es_reader_c::dirac_es_reader_c()
 void
 dirac_es_reader_c::read_headers() {
   try {
-    dirac::es_parser_c parser;
+    mtx::dirac::es_parser_c parser;
 
     int num_read = m_in->read(m_buffer->get_buffer(), READ_SIZE);
     parser.add_bytes(m_buffer->get_buffer(), num_read);

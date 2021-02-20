@@ -104,7 +104,7 @@ dirac_video_packetizer_c::flush_impl() {
 void
 dirac_video_packetizer_c::flush_frames() {
   while (m_parser.is_frame_available()) {
-    dirac::frame_cptr frame = m_parser.get_frame();
+    mtx::dirac::frame_cptr frame = m_parser.get_frame();
 
     add_packet(new packet_t(frame->data, frame->timestamp, frame->duration, frame->contains_sequence_header ? -1 : m_previous_timestamp));
 

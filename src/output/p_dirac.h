@@ -20,9 +20,9 @@
 
 class dirac_video_packetizer_c: public generic_packetizer_c {
 protected:
-  dirac::es_parser_c m_parser;
+  mtx::dirac::es_parser_c m_parser;
 
-  dirac::sequence_header_t m_seqhdr;
+  mtx::dirac::sequence_header_t m_seqhdr;
   bool m_headers_found;
 
   int64_t m_previous_timestamp;

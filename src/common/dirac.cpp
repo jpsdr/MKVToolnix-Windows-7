@@ -21,11 +21,13 @@
 
 #define MAX_STANDARD_VIDEO_FORMAT 23
 
-dirac::sequence_header_t::sequence_header_t() {
-  memset(this, 0, sizeof(dirac::sequence_header_t));
+namespace mtx::dirac {
+
+sequence_header_t::sequence_header_t() {
+  memset(this, 0, sizeof(sequence_header_t));
 }
 
-dirac::frame_t::frame_t()
+frame_t::frame_t()
   : timestamp{-1}
   , duration{}
   , contains_sequence_header{}
@@ -33,7 +35,7 @@ dirac::frame_t::frame_t()
 }
 
 void
-dirac::frame_t::init() {
+frame_t::init() {
   data.reset();
   timestamp                = -1;
   duration                 = 0;
@@ -55,9 +57,9 @@ read_uint(mtx::bits::reader_c &bc) {
 }
 
 bool
-dirac::parse_sequence_header(const unsigned char *buf,
-                             int size,
-                             dirac::sequence_header_t &seqhdr) {
+parse_sequence_header(const unsigned char *buf,
+                      int size,
+                      sequence_header_t &seqhdr) {
   struct standard_video_format {
     unsigned int pixel_width;
     unsigned int pixel_height;
@@ -125,7 +127,7 @@ dirac::parse_sequence_header(const unsigned char *buf,
 
   try {
     mtx::bits::reader_c bc(buf, size);
-    dirac::sequence_header_t hdr;
+    sequence_header_t hdr;
 
     bc.skip_bits((4 + 1 + 4 + 4) * 8); // Marker, type, next offset, previous offset
 
@@ -196,7 +198,7 @@ dirac::parse_sequence_header(const unsigned char *buf,
       hdr.top_offset   = read_uint(bc);
     }
 
-    memcpy(&seqhdr, &hdr, sizeof(dirac::sequence_header_t));
+    memcpy(&seqhdr, &hdr, sizeof(sequence_header_t));
 
     return true;
   } catch (...) {
@@ -208,7 +210,7 @@ dirac::parse_sequence_header(const unsigned char *buf,
 //  -------------------------------------------------
 //
 
-dirac::es_parser_c::es_parser_c()
+es_parser_c::es_parser_c()
   : m_stream_pos{}
   , m_seqhdr_found{}
   , m_previous_timestamp{}
@@ -220,8 +222,8 @@ dirac::es_parser_c::es_parser_c()
 }
 
 void
-dirac::es_parser_c::add_bytes(unsigned char *buffer,
-                              size_t size) {
+es_parser_c::add_bytes(unsigned char *buffer,
+                       size_t size) {
   mtx::mem::slice_cursor_c cursor;
 
   bool previous_found         = false;
@@ -287,7 +289,7 @@ dirac::es_parser_c::add_bytes(unsigned char *buffer,
 }
 
 void
-dirac::es_parser_c::flush() {
+es_parser_c::flush() {
   if (m_unparsed_buffer && (4 <= m_unparsed_buffer->get_size())) {
     uint32_t marker = get_uint32_be(m_unparsed_buffer->get_buffer());
     if (DIRAC_SYNC_WORD == marker)
@@ -300,13 +302,13 @@ dirac::es_parser_c::flush() {
 }
 
 void
-dirac::es_parser_c::handle_unit(memory_cptr packet) {
+es_parser_c::handle_unit(memory_cptr packet) {
   unsigned char type = packet->get_buffer()[4];
 
   if (DIRAC_UNIT_SEQUENCE_HEADER == type)
     handle_sequence_header_unit(packet);
 
-  else if (dirac::is_auxiliary_data(type))
+  else if (is_auxiliary_data(type))
     handle_auxiliary_data_unit(packet);
 
   else if (DIRAC_UNIT_PADDING == type)
@@ -315,7 +317,7 @@ dirac::es_parser_c::handle_unit(memory_cptr packet) {
   else if (DIRAC_UNIT_END_OF_SEQUENCE == type)
     handle_end_of_sequence_unit(packet);
 
-  else if (dirac::is_picture(type))
+  else if (is_picture(type))
     handle_picture_unit(packet);
 
   else
@@ -323,18 +325,18 @@ dirac::es_parser_c::handle_unit(memory_cptr packet) {
 }
 
 void
-dirac::es_parser_c::handle_auxiliary_data_unit(memory_cptr packet) {
+es_parser_c::handle_auxiliary_data_unit(memory_cptr packet) {
   add_pre_frame_extra_data(packet);
 }
 
 void
-dirac::es_parser_c::handle_end_of_sequence_unit(memory_cptr packet) {
+es_parser_c::handle_end_of_sequence_unit(memory_cptr packet) {
   add_post_frame_extra_data(packet);
   flush_frame();
 }
 
 void
-dirac::es_parser_c::handle_picture_unit(memory_cptr packet) {
+es_parser_c::handle_picture_unit(memory_cptr packet) {
   flush_frame();
 
   if (!m_seqhdr_found)
@@ -346,18 +348,18 @@ dirac::es_parser_c::handle_picture_unit(memory_cptr packet) {
 }
 
 void
-dirac::es_parser_c::handle_sequence_header_unit(memory_cptr packet) {
+es_parser_c::handle_sequence_header_unit(memory_cptr packet) {
   flush_frame();
 
   add_pre_frame_extra_data(packet);
 
-  dirac::sequence_header_t seqhdr;
-  if (!dirac::parse_sequence_header(packet->get_buffer(), packet->get_size(), seqhdr))
+  sequence_header_t seqhdr;
+  if (!parse_sequence_header(packet->get_buffer(), packet->get_size(), seqhdr))
     return;
 
   m_seqhdr_changed = !m_seqhdr_found || (packet->get_size() != m_raw_seqhdr->get_size()) || memcmp(packet->get_buffer(), m_raw_seqhdr->get_buffer(), packet->get_size());
 
-  memcpy(&m_seqhdr, &seqhdr, sizeof(dirac::sequence_header_t));
+  memcpy(&m_seqhdr, &seqhdr, sizeof(sequence_header_t));
   m_raw_seqhdr   = memory_cptr(packet->clone());
   m_seqhdr_found = true;
 
@@ -366,17 +368,17 @@ dirac::es_parser_c::handle_sequence_header_unit(memory_cptr packet) {
 }
 
 void
-dirac::es_parser_c::handle_padding_unit(memory_cptr) {
+es_parser_c::handle_padding_unit(memory_cptr) {
   // Intentionally do nothing.
 }
 
 void
-dirac::es_parser_c::handle_unknown_unit(memory_cptr packet) {
+es_parser_c::handle_unknown_unit(memory_cptr packet) {
   add_post_frame_extra_data(packet);
 }
 
 void
-dirac::es_parser_c::flush_frame() {
+es_parser_c::flush_frame() {
   if (!m_current_frame)
     return;
 
@@ -392,7 +394,7 @@ dirac::es_parser_c::flush_frame() {
 }
 
 void
-dirac::es_parser_c::combine_extra_data_with_packet() {
+es_parser_c::combine_extra_data_with_packet() {
   int extra_size = 0;
 
   for (auto &mem : m_pre_frame_extra_data)
@@ -426,7 +428,7 @@ dirac::es_parser_c::combine_extra_data_with_packet() {
 }
 
 int64_t
-dirac::es_parser_c::get_next_timestamp() {
+es_parser_c::get_next_timestamp() {
   if (!m_timestamps.empty()) {
     m_previous_timestamp   = m_timestamps.front();
     m_num_timestamps       = 0;
@@ -439,16 +441,18 @@ dirac::es_parser_c::get_next_timestamp() {
 }
 
 int64_t
-dirac::es_parser_c::peek_next_calculated_timestamp() {
+es_parser_c::peek_next_calculated_timestamp() {
   return m_previous_timestamp + m_num_timestamps * m_default_duration;
 }
 
 void
-dirac::es_parser_c::add_pre_frame_extra_data(memory_cptr packet) {
+es_parser_c::add_pre_frame_extra_data(memory_cptr packet) {
   m_pre_frame_extra_data.push_back(memory_cptr(packet->clone()));
 }
 
 void
-dirac::es_parser_c::add_post_frame_extra_data(memory_cptr packet) {
+es_parser_c::add_post_frame_extra_data(memory_cptr packet) {
   m_post_frame_extra_data.push_back(memory_cptr(packet->clone()));
 }
+
+} // namespace mtx::dirac

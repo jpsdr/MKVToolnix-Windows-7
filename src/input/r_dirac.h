@@ -20,7 +20,7 @@
 
 class dirac_es_reader_c: public generic_reader_c {
 private:
-  dirac::sequence_header_t m_seqhdr;
+  mtx::dirac::sequence_header_t m_seqhdr;
   memory_cptr m_raw_seqhdr;
 
   memory_cptr m_buffer;

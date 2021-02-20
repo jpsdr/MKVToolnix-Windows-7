@@ -21,10 +21,10 @@
 static bool g_opt_checksum         = false;
 static bool g_opt_sequence_headers = false;
 
-class dirac_info_c: public dirac::es_parser_c {
+class dirac_info_c: public mtx::dirac::es_parser_c {
 public:
   dirac_info_c()
-    : dirac::es_parser_c() {
+    : mtx::dirac::es_parser_c() {
   }
 
   virtual ~dirac_info_c() {
@@ -38,7 +38,7 @@ protected:
   virtual void handle_sequence_header_unit(memory_cptr packet);
   virtual void handle_unknown_unit(memory_cptr packet);
 
-  virtual void dump_sequence_header(dirac::sequence_header_t &seqhdr);
+  virtual void dump_sequence_header(mtx::dirac::sequence_header_t &seqhdr);
 
   virtual std::string create_checksum_info(memory_cptr packet);
 };
@@ -72,7 +72,7 @@ dirac_info_c::handle_sequence_header_unit(memory_cptr packet) {
   std::string checksum = create_checksum_info(packet);
   mxinfo(fmt::format(Y("Sequence header at {0} size {1}{2}\n" ),m_stream_pos, packet->get_size(), checksum));
 
-  m_seqhdr_found = dirac::parse_sequence_header(packet->get_buffer(), packet->get_size(), m_seqhdr);
+  m_seqhdr_found = mtx::dirac::parse_sequence_header(packet->get_buffer(), packet->get_size(), m_seqhdr);
 
   if (g_opt_sequence_headers) {
     if (m_seqhdr_found)
@@ -97,7 +97,7 @@ dirac_info_c::create_checksum_info(memory_cptr packet) {
 }
 
 void
-dirac_info_c::dump_sequence_header(dirac::sequence_header_t &seqhdr) {
+dirac_info_c::dump_sequence_header(mtx::dirac::sequence_header_t &seqhdr) {
   mxinfo(fmt::format(Y("  Sequence header dump:\n"
                        "    major_version:            {0}\n"
                        "    minor_version:            {1}\n"
