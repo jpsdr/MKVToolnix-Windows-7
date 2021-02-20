@@ -91,45 +91,6 @@ get_chapter_index(int idx,
   return -1;
 }
 
-#define print_if_global(name, format) _print_if_global(out, name, format, tuid, tags)
-static void
-_print_if_global(mm_io_c &out,
-                 const char *name,
-                 const char *format,
-                 int64_t tuid,
-                 KaxTags &tags) {
-  std::string global = get_global_tag(name, tuid, tags);
-  if (!global.empty())
-    out.puts(fmt::format(format, global));
-}
-
-#define print_if_available(name, format) \
-  _print_if_available(out, name, format, tuid, tags, *tag)
-static void
-_print_if_available(mm_io_c &out,
-                    const char *name,
-                    const char *format,
-                    int64_t tuid,
-                    KaxTags &tags,
-                    KaxTag &tag) {
-  std::string value = mtx::tags::get_simple_value(name, tag);
-  if (!value.empty() && (value != get_global_tag(name, tuid, tags)))
-    out.puts(fmt::format(format, value));
-}
-
-static void
-print_comments(const char *prefix,
-               KaxTag &tag,
-               mm_io_c &out) {
-  size_t i;
-
-  for (i = 0; i < tag.ListSize(); i++)
-    if (Is<KaxTagSimple>(tag[i])
-        && (   (mtx::tags::get_simple_name(*static_cast<KaxTagSimple *>(tag[i])) == "COMMENT")
-            || (mtx::tags::get_simple_name(*static_cast<KaxTagSimple *>(tag[i])) == "COMMENTS")))
-      out.puts(fmt::format("{0}REM \"{1}\"\n", prefix, mtx::tags::get_simple_value(*static_cast<KaxTagSimple *>(tag[i]))));
-}
-
 void
 write_cuesheet(std::string file_name,
                KaxChapters &chapters,
@@ -138,6 +99,28 @@ write_cuesheet(std::string file_name,
                mm_io_c &out) {
   if (chapters.ListSize() == 0)
     return;
+
+  KaxTag *tag{};
+
+  auto print_if_global = [&out, &tags, &tuid](char const *name, char const *format) {
+    auto global = get_global_tag(name, tuid, tags);
+    if (!global.empty())
+      out.puts(fmt::format(format, global));
+  };
+
+  auto print_if_available = [&out, &tags, &tag, &tuid](char const *name, char const *format) {
+    auto value = mtx::tags::get_simple_value(name, *tag);
+    if (!value.empty() && (value != get_global_tag(name, tuid, tags)))
+      out.puts(fmt::format(format, value));
+  };
+
+  auto print_comments = [&out, &tag](char const *prefix) {
+    for (auto simple : *tag)
+      if (Is<KaxTagSimple>(simple)
+          && (   (mtx::tags::get_simple_name(*static_cast<KaxTagSimple *>(simple)) == "COMMENT")
+              || (mtx::tags::get_simple_name(*static_cast<KaxTagSimple *>(simple)) == "COMMENTS")))
+        out.puts(fmt::format("{0}REM \"{1}\"\n", prefix, mtx::tags::get_simple_value(*static_cast<KaxTagSimple *>(simple))));
+  };
 
   if (mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA))
     file_name = "no-variable-data";
@@ -152,9 +135,9 @@ write_cuesheet(std::string file_name,
   print_if_global("DATE_RELEASED",  "REM DATE \"{0}\"\n"); // 0.9.7 and newer
   print_if_global("DISCID",         "REM DISCID {0}\n");
 
-  KaxTag *tag = find_tag_for_track(-1, tuid, 0, tags);
+  tag = find_tag_for_track(-1, tuid, 0, tags);
   if (tag)
-    print_comments("", *tag, out);
+    print_comments("");
 
   out.puts(fmt::format("FILE \"{0}\" WAVE\n", file_name));
 
@@ -189,7 +172,7 @@ write_cuesheet(std::string file_name,
     // 0.9.7 and newer:
     print_if_available("DATE_RELEASED", "    REM DATE \"{0}\"\n");
     print_if_available("GENRE",         "    REM GENRE \"{0}\"\n");
-    print_comments("    ", *tag, out);
+    print_comments("    ");
   }
 }
 
