@@ -27,9 +27,6 @@
 #include "common/flac.h"
 #include "output/p_flac.h"
 
-#define FLAC_BLOCK_TYPE_HEADERS 0
-#define FLAC_BLOCK_TYPE_DATA    1
-
 struct flac_block_t {
   int64_t filepos;
   unsigned int type, len;

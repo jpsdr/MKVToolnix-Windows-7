@@ -26,8 +26,6 @@
 #include "merge/file_status.h"
 #include "merge/output_control.h"
 
-#define BUFFER_SIZE 4096
-
 #if defined(HAVE_FLAC_FORMAT_H)
 
 bool
@@ -50,13 +48,13 @@ flac_reader_c::read_headers() {
   try {
     uint32_t block_size = 0;
 
-    for (current_block = blocks.begin(); (current_block != blocks.end()) && (FLAC_BLOCK_TYPE_HEADERS == current_block->type); current_block++)
+    for (current_block = blocks.begin(); (current_block != blocks.end()) && (mtx::flac::BLOCK_TYPE_HEADERS == current_block->type); current_block++)
       block_size += current_block->len;
 
     m_header = memory_c::alloc(block_size);
 
     block_size         = 0;
-    for (current_block = blocks.begin(); (current_block != blocks.end()) && (FLAC_BLOCK_TYPE_HEADERS == current_block->type); current_block++) {
+    for (current_block = blocks.begin(); (current_block != blocks.end()) && (mtx::flac::BLOCK_TYPE_HEADERS == current_block->type); current_block++) {
       m_in->setFilePointer(current_block->filepos + tag_size_start);
       if (m_in->read(m_header->get_buffer() + block_size, current_block->len) != current_block->len)
         mxerror(Y("flac_reader: Could not read a header packet.\n"));
@@ -109,7 +107,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
 
   FLAC__stream_decoder_get_decode_position(m_flac_decoder.get(), &u);
 
-  block.type    = FLAC_BLOCK_TYPE_HEADERS;
+  block.type    = mtx::flac::BLOCK_TYPE_HEADERS;
   block.filepos = 0;
   block.len     = u;
   old_pos       = u;
@@ -130,7 +128,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
     }
 
     if (FLAC__stream_decoder_get_decode_position(m_flac_decoder.get(), &u) && (u != old_pos)) {
-      block.type    = FLAC_BLOCK_TYPE_DATA;
+      block.type    = mtx::flac::BLOCK_TYPE_DATA;
       block.filepos = old_pos;
       block.len     = u - old_pos;
       old_pos       = u;
@@ -150,7 +148,7 @@ flac_reader_c::parse_file(bool for_identification_only) {
   else
     mxinfo("\n");
 
-  if ((blocks.size() == 0) || (blocks[0].type != FLAC_BLOCK_TYPE_HEADERS))
+  if ((blocks.size() == 0) || (blocks[0].type != mtx::flac::BLOCK_TYPE_HEADERS))
     mxerror(Y("flac_reader: Could not read all header packets.\n"));
 
   m_in->setFilePointer(tag_size_start);

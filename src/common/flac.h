@@ -22,11 +22,14 @@
 
 namespace mtx::flac {
 
-#define FLAC_HEADER_STREAM_INFO      1
-#define FLAC_HEADER_VORBIS_COMMENTS  2
-#define FLAC_HEADER_CUESHEET         4
-#define FLAC_HEADER_APPLICATION      8
-#define FLAC_HEADER_SEEKTABLE       16
+constexpr auto HEADER_STREAM_INFO     = 1;
+constexpr auto HEADER_VORBIS_COMMENTS = 2;
+constexpr auto HEADER_CUESHEET        = 4;
+constexpr auto HEADER_APPLICATION     = 8;
+constexpr auto HEADER_SEEKTABLE       = 16;
+
+constexpr auto BLOCK_TYPE_HEADERS     = 0;
+constexpr auto BLOCK_TYPE_DATA        = 1;
 
 class decoder_deleter_c {
 public:

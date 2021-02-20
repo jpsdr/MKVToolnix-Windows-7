@@ -244,8 +244,6 @@ get_num_samples(unsigned char const *mem,
   }
 }
 
-#define FPFX "flac_decode_headers: "
-
 struct header_extractor_t {
   unsigned char const *mem;
   unsigned int size;
@@ -318,30 +316,30 @@ decode_headers(unsigned char const *mem,
   decoder  = FLAC__stream_decoder_new();
 
   if (!decoder)
-    mxerror(FPFX "FLAC__stream_decoder_new() failed.\n");
+    mxerror("flac_decode_headers: FLAC__stream_decoder_new() failed.\n");
   if (!FLAC__stream_decoder_set_metadata_respond_all(decoder))
-    mxerror(FPFX "Could not set metadata_respond_all.\n");
+    mxerror("flac_decode_headers: Could not set metadata_respond_all.\n");
   if (FLAC__stream_decoder_init_stream(decoder, read_cb, nullptr, nullptr, nullptr, nullptr, write_cb, metadata_cb, error_cb, &fhe) != FLAC__STREAM_DECODER_INIT_STATUS_OK)
-    mxerror(FPFX "Could not initialize the FLAC decoder.\n");
+    mxerror("flac_decode_headers: Could not initialize the FLAC decoder.\n");
 
   FLAC__stream_decoder_process_until_end_of_stream(decoder);
 
   result = 0;
   if (fhe.stream_info_found)
-    result |= FLAC_HEADER_STREAM_INFO;
+    result |= HEADER_STREAM_INFO;
 
   va_start(ap, num_elements);
   for (i = 0; i < num_elements; ++i) {
     int type;
 
     type = va_arg(ap, int);
-    if (type != FLAC_HEADER_STREAM_INFO)
+    if (type != HEADER_STREAM_INFO)
       continue;
 
     FLAC__StreamMetadata_StreamInfo *stream_info;
 
     stream_info = va_arg(ap, FLAC__StreamMetadata_StreamInfo *);
-    if (result & FLAC_HEADER_STREAM_INFO)
+    if (result & HEADER_STREAM_INFO)
       memcpy(stream_info, &fhe.stream_info, sizeof(FLAC__StreamMetadata_StreamInfo));
 
     break;
