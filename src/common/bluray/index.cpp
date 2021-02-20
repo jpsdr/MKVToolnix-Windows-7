@@ -175,13 +175,13 @@ parser_c::parse_header() {
   auto magic = p->m_bc->get_bits(32);
   mxdebug_if(p->m_debug, fmt::format("File magic 1: 0x{0:08x}\n", magic));
 
-  if (magic != FOURCC('I', 'N', 'D', 'X'))
+  if (magic != mtx::calc_fourcc('I', 'N', 'D', 'X'))
     throw false;
 
   magic = p->m_bc->get_bits(32);
   mxdebug_if(p->m_debug, fmt::format("File magic 2: 0x{0:08x}\n", magic));
 
-  if (!mtx::included_in(magic, FOURCC('0', '1', '0', '0'), FOURCC('0', '2', '0', '0'), FOURCC('0', '3', '0', '0')))
+  if (!mtx::included_in(magic, mtx::calc_fourcc('0', '1', '0', '0'), mtx::calc_fourcc('0', '2', '0', '0'), mtx::calc_fourcc('0', '3', '0', '0')))
     throw false;
 
   p->m_index_start = p->m_bc->get_bits(32);

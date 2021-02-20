@@ -133,7 +133,7 @@ inline bool is_marker(uint32_t value) {
 }
 
 inline bool is_fourcc(uint32_t value) {
-  return FOURCC('W', 'V', 'C', '1') == value;
+  return mtx::calc_fourcc('W', 'V', 'C', '1') == value;
 }
 
 inline bool is_fourcc(const char *value) {

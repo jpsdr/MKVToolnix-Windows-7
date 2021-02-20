@@ -55,7 +55,7 @@ extern long AVI_errno;
 
 #define AVI_MAX_AUDIO_CHUNK_SIZE (10 * 1024 * 1024)
 
-#define GAB2_TAG                 FOURCC('G', 'A', 'B', '2')
+#define GAB2_TAG                 mtx::calc_fourcc('G', 'A', 'B', '2')
 #define GAB2_ID_LANGUAGE         0x0000
 #define GAB2_ID_LANGUAGE_UNICODE 0x0002
 #define GAB2_ID_SUBTITLES        0x0004
@@ -231,7 +231,7 @@ avi_reader_c::create_video_packetizer() {
   else if (mtx::mpeg1_2::is_fourcc(get_uint32_le(codec)))
     create_mpeg1_2_packetizer();
 
-  else if (FOURCC('V', 'P', '8', '0') == get_uint32_be(codec))
+  else if (mtx::calc_fourcc('V', 'P', '8', '0') == get_uint32_be(codec))
     create_vp8_packetizer();
 
   else

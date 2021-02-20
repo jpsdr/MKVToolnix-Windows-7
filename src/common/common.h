@@ -94,12 +94,15 @@ using namespace std::string_literals;
 #define MXMSG_WARNING 10
 #define MXMSG_INFO    15
 
-#if !defined(FOURCC)
-#define FOURCC(a, b, c, d) (uint32_t)((((unsigned char)a) << 24) + \
-                                      (((unsigned char)b) << 16) + \
-                                      (((unsigned char)c) <<  8) + \
-                                       ((unsigned char)d))
-#endif
+namespace mtx {
+constexpr uint32_t calc_fourcc(char a, char b, char c, char d) {
+  return (static_cast<uint32_t>(a) << 24)
+       + (static_cast<uint32_t>(b) << 16)
+       + (static_cast<uint32_t>(c) <<  8)
+       +  static_cast<uint32_t>(d);
+}
+}
+
 #define isblanktab(c) (((c) == ' ')  || ((c) == '\t'))
 #define iscr(c)       (((c) == '\n') || ((c) == '\r'))
 

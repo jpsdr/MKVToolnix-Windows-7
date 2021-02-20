@@ -161,7 +161,7 @@ find_mp3_header(const unsigned char *buf,
       header |= buf[i + pos];
     }
 
-    if (header == FOURCC('R', 'I', 'F', 'F'))
+    if (header == mtx::calc_fourcc('R', 'I', 'F', 'F'))
       continue;
 
     if ((header & 0xffe00000) != 0xffe00000)

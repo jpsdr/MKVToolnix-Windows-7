@@ -123,7 +123,7 @@ xtr_alac_c::create_file(xtr_base_c *master,
     auto acli = mtx::caf::channel_layout_info_t();
 
     put_uint32_be(&acli.channel_layout_info_size, 24);                         // = sizeof(ALACChannelLayoutInfo)
-    put_uint32_be(&acli.channel_layout_info_id,   FOURCC('c', 'h', 'a', 'n')); // = 'chan'
+    put_uint32_be(&acli.channel_layout_info_id,   mtx::calc_fourcc('c', 'h', 'a', 'n')); // = 'chan'
     put_uint32_be(&acli.channel_layout_tag,       alo.channel_layout_tag);
     m_out->write(&acli, sizeof(acli));
   }
