@@ -54,7 +54,9 @@
 #include "output/p_vorbis.h"
 #include "output/p_vpx.h"
 
-#define BUFFER_SIZE 4096
+namespace {
+constexpr auto BUFFER_SIZE = 4096;
+}
 
 struct ogm_frame_t {
   memory_cptr mem;

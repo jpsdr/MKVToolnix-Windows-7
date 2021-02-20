@@ -25,9 +25,9 @@
 
 namespace {
 debugging_option_c s_debug{"ogg_flac"};
-}
 
-#define BUFFER_SIZE 4096
+constexpr auto BUFFER_SIZE = 4096;
+}
 
 static FLAC__StreamDecoderReadStatus
 fhe_read_cb(const FLAC__StreamDecoder *,
