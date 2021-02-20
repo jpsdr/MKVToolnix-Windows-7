@@ -24,7 +24,7 @@ private:
   memory_cptr m_chunk;
   std::vector<uint32_t> seek_points;
   unsigned int pos;
-  tta_file_header_t header;
+  mtx::tta::file_header_t header;
 
 public:
   virtual mtx::file_type_e get_format_type() const {

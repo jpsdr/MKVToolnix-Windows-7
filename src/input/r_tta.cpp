@@ -51,7 +51,7 @@ tta_reader_c::read_headers() {
       mxerror_fn(m_ti.m_fname, fmt::format(Y("tta_reader: tag_size < 0 in the c'tor. {0}\n"), BUGMSG));
     m_size -= tag_size;
 
-    if (m_in->read(&header, sizeof(tta_file_header_t)) != sizeof(tta_file_header_t))
+    if (m_in->read(&header, sizeof(mtx::tta::file_header_t)) != sizeof(mtx::tta::file_header_t))
       mxerror_fn(m_ti.m_fname, Y("The file header is too short.\n"));
 
     if (g_identifying)
@@ -111,7 +111,7 @@ tta_reader_c::read(generic_packetizer_c *,
   pos++;
 
   if (seek_points.size() <= pos) {
-    double samples_left = (double)get_uint32_le(&header.data_length) - (seek_points.size() - 1) * TTA_FRAME_TIME * get_uint32_le(&header.sample_rate);
+    double samples_left = (double)get_uint32_le(&header.data_length) - (seek_points.size() - 1) * mtx::tta::FRAME_TIME * get_uint32_le(&header.sample_rate);
     mxdebug_if(s_debug, fmt::format("tta: samples_left {0}\n", samples_left));
 
     PTZR0->process(new packet_t(mem, -1, std::llround(samples_left * 1000000000.0 / get_uint32_le(&header.sample_rate))));

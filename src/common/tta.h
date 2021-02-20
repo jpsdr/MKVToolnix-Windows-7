@@ -15,14 +15,16 @@
 
 #include "common/common_pch.h"
 
+namespace mtx::tta {
+
 /* All integers are little endian. */
 
-#define TTA_FRAME_TIME 1.04489795918367346939
+constexpr auto FRAME_TIME = 1.04489795918367346939;
 
 #if defined(COMP_MSC)
 #pragma pack(push,1)
 #endif
-struct PACKED_STRUCTURE tta_file_header_t {
+struct PACKED_STRUCTURE file_header_t {
   char signature[4];            /* TTA1 */
   uint16_t audio_format;        /* 1 for 32 bits per sample, 3 otherwise? */
   uint16_t channels;
@@ -34,3 +36,5 @@ struct PACKED_STRUCTURE tta_file_header_t {
 #if defined(COMP_MSC)
 #pragma pack(pop)
 #endif
+
+} // namespace mtx::tta
