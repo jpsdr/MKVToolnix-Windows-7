@@ -53,12 +53,10 @@ extern "C" {
 extern long AVI_errno;
 }
 
-#define AVI_MAX_AUDIO_CHUNK_SIZE (10 * 1024 * 1024)
+constexpr auto AVI_MAX_AUDIO_CHUNK_SIZE = (10 * 1024 * 1024);
 
-#define GAB2_TAG                 mtx::calc_fourcc('G', 'A', 'B', '2')
-#define GAB2_ID_LANGUAGE         0x0000
-#define GAB2_ID_LANGUAGE_UNICODE 0x0002
-#define GAB2_ID_SUBTITLES        0x0004
+constexpr auto GAB2_TAG                 = mtx::calc_fourcc('G', 'A', 'B', '2');
+constexpr auto GAB2_ID_SUBTITLES        = 0x0004;
 
 bool
 avi_reader_c::probe_file() {
