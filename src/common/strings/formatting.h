@@ -23,7 +23,7 @@
 
 namespace mtx::string {
 
-#define WRAP_AT_TERMINAL_WIDTH -1
+constexpr auto WRAP_AT_TERMINAL_WIDTH = -1;
 
 std::string format_timestamp(int64_t timestamp, unsigned int precision = 9);
 std::string format_timestamp(int64_t timestamp, std::string const &format);

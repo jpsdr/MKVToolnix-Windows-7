@@ -305,21 +305,19 @@ remove_elements_unsupported_by_webm(EbmlMaster &master) {
   static auto s_supported_elements = std::map<uint32, bool>{};
 
   if (s_supported_elements.empty()) {
-#define add(ref) s_supported_elements[ EBML_ID_VALUE(EBML_ID(ref)) ] = true;
-    add(KaxTags);
-    add(KaxTag);
-    add(KaxTagTargets);
-    add(KaxTagTargetTypeValue);
-    add(KaxTagTargetType);
-    add(KaxTagTrackUID);
-    add(KaxTagSimple);
-    add(KaxTagName);
-    add(KaxTagLangue);
-    add(KaxTagLanguageIETF);
-    add(KaxTagDefault);
-    add(KaxTagString);
-    add(KaxTagBinary);
-#undef add
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTags))               ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTag))                ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTagTargets))         ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTagTargetTypeValue)) ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTagTargetType))      ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTagTrackUID))        ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTagSimple))          ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTagName))            ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTagLangue))          ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTagLanguageIETF))    ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTagDefault))         ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTagString))          ] = true;
+    s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTagBinary))          ] = true;
   }
 
   auto is_simple = Is<KaxTagSimple>(master);
