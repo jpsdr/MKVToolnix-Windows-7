@@ -254,11 +254,11 @@ mpeg1_2_video_packetizer_c::flush_impl() {
 void
 mpeg1_2_video_packetizer_c::extract_fps(const unsigned char *buffer,
                                         int size) {
-  int idx = mpeg1_2::extract_fps_idx(buffer, size);
+  int idx = mtx::mpeg1_2::extract_fps_idx(buffer, size);
   if (0 > idx)
     return;
 
-  m_fps = mpeg1_2::get_fps(idx);
+  m_fps = mtx::mpeg1_2::get_fps(idx);
   if (0 < m_fps) {
     set_track_default_duration((int64_t)(1000000000.0 / m_fps));
     rerender_track_headers();
@@ -274,7 +274,7 @@ mpeg1_2_video_packetizer_c::extract_aspect_ratio(const unsigned char *buffer,
   if (display_dimensions_or_aspect_ratio_set())
     return;
 
-  if (!mpeg1_2::extract_ar(buffer, size, ar))
+  if (!mtx::mpeg1_2::extract_ar(buffer, size, ar))
     return;
 
   set_video_display_dimensions((0 >= ar) || (1 == ar) ? m_width : (int)(m_height * ar), m_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);

@@ -58,7 +58,7 @@
 #define MPEGVIDEO_FOURCC_MPEG1  0x10000001
 #define MPEGVIDEO_FOURCC_MPEG2  0x10000002
 
-namespace mpeg1_2 {
+namespace mtx::mpeg1_2 {
 
 int extract_fps_idx(const unsigned char *buffer, int buffer_size);
 double get_fps(int idx);

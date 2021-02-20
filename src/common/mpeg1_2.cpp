@@ -18,6 +18,8 @@
 #include "common/endian.h"
 #include "common/mpeg1_2.h"
 
+namespace mtx::mpeg1_2 {
+
 namespace {
 debugging_option_c s_debug{"mpeg1_2"};
 }
@@ -37,8 +39,8 @@ debugging_option_c s_debug{"mpeg1_2"};
      if the buffer was too small.
 */
 int
-mpeg1_2::extract_fps_idx(const unsigned char *buffer,
-                         int buffer_size) {
+extract_fps_idx(unsigned char const *buffer,
+                int buffer_size) {
   mxdebug_if(s_debug, fmt::format("mpeg_video_fps: start search in {0} bytes\n", buffer_size));
   if (buffer_size < 8) {
     mxdebug_if(s_debug, "mpeg_video_fps: sequence header too small\n");
@@ -74,9 +76,9 @@ mpeg1_2::extract_fps_idx(const unsigned char *buffer,
    \return \c true if a MPEG sequence header was found and \c false otherwise.
 */
 bool
-mpeg1_2::extract_ar(const unsigned char *buffer,
-                    int buffer_size,
-                    double &ar) {
+extract_ar(unsigned char const *buffer,
+           int buffer_size,
+           double &ar) {
   uint32_t marker;
   int idx;
 
@@ -133,7 +135,7 @@ mpeg1_2::extract_ar(const unsigned char *buffer,
      invalid.
 */
 double
-mpeg1_2::get_fps(int idx) {
+get_fps(int idx) {
   static const int s_fps[8] = {0, 24, 25, 0, 30, 50, 0, 60};
 
   return ((idx < 1) || (idx > 8)) ?    -1.0
@@ -144,6 +146,8 @@ mpeg1_2::get_fps(int idx) {
 }
 
 bool
-mpeg1_2::is_fourcc(uint32_t fourcc) {
+is_fourcc(uint32_t fourcc) {
   return (MPEGVIDEO_FOURCC_MPEG1 == fourcc) || (MPEGVIDEO_FOURCC_MPEG2 == fourcc);
 }
+
+} // namespace mtx::mpeg1_2
