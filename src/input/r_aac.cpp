@@ -74,11 +74,11 @@ aac_reader_c::read_headers() {
     int detected_profile = m_aacheader.config.profile;
 
     if (24000 >= m_aacheader.config.sample_rate)
-      m_aacheader.config.profile = AAC_PROFILE_SBR;
+      m_aacheader.config.profile = mtx::aac::PROFILE_SBR;
 
     if (   (mtx::includes(m_ti.m_all_aac_is_sbr,  0) && m_ti.m_all_aac_is_sbr[ 0])
         || (mtx::includes(m_ti.m_all_aac_is_sbr, -1) && m_ti.m_all_aac_is_sbr[-1]))
-      m_aacheader.config.profile = AAC_PROFILE_SBR;
+      m_aacheader.config.profile = mtx::aac::PROFILE_SBR;
 
     if (   (mtx::includes(m_ti.m_all_aac_is_sbr,  0) && !m_ti.m_all_aac_is_sbr[ 0])
         || (mtx::includes(m_ti.m_all_aac_is_sbr, -1) && !m_ti.m_all_aac_is_sbr[-1]))
@@ -124,7 +124,7 @@ aac_reader_c::read(generic_packetizer_c *,
 void
 aac_reader_c::identify() {
   auto info = mtx::id::info_c{};
-  info.add(mtx::id::aac_is_sbr,                      AAC_PROFILE_SBR == m_aacheader.config.profile ? "true"s : "unknown"s);
+  info.add(mtx::id::aac_is_sbr,                      mtx::aac::PROFILE_SBR == m_aacheader.config.profile ? "true"s : "unknown"s);
   info.add(mtx::id::audio_channels,                  m_aacheader.config.channels);
   info.add(mtx::id::audio_sampling_frequency,        m_aacheader.config.sample_rate);
   info.add(mtx::id::audio_output_sampling_frequency, m_aacheader.config.output_sample_rate);

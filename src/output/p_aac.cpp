@@ -81,8 +81,8 @@ aac_packetizer_c::set_headers() {
   set_audio_channels(m_config.channels);
   set_track_default_duration(m_packet_duration);
 
-  if (m_config.sbr || (m_config.profile == AAC_PROFILE_SBR)) {
-    m_config.profile            = AAC_PROFILE_LC;
+  if (m_config.sbr || (m_config.profile == mtx::aac::PROFILE_SBR)) {
+    m_config.profile            = mtx::aac::PROFILE_LC;
     m_config.sbr                = true;
     m_config.output_sample_rate = std::max<unsigned int>(m_config.sample_rate * 2, m_config.output_sample_rate);
 

@@ -980,13 +980,13 @@ ogm_a_aac_demuxer_c::initialize() {
   if (parsed_audio_config) {
     audio_config = *parsed_audio_config;
     if (audio_config.sbr)
-      audio_config.profile = AAC_PROFILE_SBR;
+      audio_config.profile = mtx::aac::PROFILE_SBR;
 
   } else {
     auto sth                 = reinterpret_cast<stream_header *>(&packet_data[0]->get_buffer()[1]);
     audio_config.channels    = get_uint16_le(&sth->sh.audio.channels);
     audio_config.sample_rate = get_uint64_le(&sth->samples_per_unit);
-    audio_config.profile     = AAC_PROFILE_LC;
+    audio_config.profile     = mtx::aac::PROFILE_LC;
   }
 }
 

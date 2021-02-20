@@ -58,7 +58,7 @@ xtr_aac_c::create_file(xtr_base_c *master,
       mtx::bits::reader_c r{audio_config->ga_specific_config->get_buffer(), audio_config->ga_specific_config->get_size()};
       mtx::bits::writer_c w{};
 
-      w.put_bits(3, AAC_ID_PCE);
+      w.put_bits(3, mtx::aac::ID_PCE);
 
       r.skip_bits(1);           // frame_length_flag
       if (r.get_bit())          // depends_on_core_coder
@@ -133,7 +133,7 @@ xtr_aac_c::handle_program_config_element(xtr_frame_t &f) {
 
   auto id_syn_ele = mtx::bits::reader_c{*f.frame}.get_bits(3);
 
-  if (id_syn_ele == AAC_ID_PCE) {
+  if (id_syn_ele == mtx::aac::ID_PCE) {
     mxdebug(fmt::format("Program config element already present in first packet\n"));
     m_program_config_element.reset();
 

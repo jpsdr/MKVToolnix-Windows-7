@@ -276,7 +276,7 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
       mxdebug_if(s_debug, fmt::format("real_reader: 1. profile: {0}, channels: {1}, sample_rate: {2}, output_sample_rate: {3}, sbr: {4}\n", audio_config.profile, audio_config.channels, audio_config.sample_rate, audio_config.output_sample_rate, audio_config.sbr));
 
       if (audio_config.sbr)
-        audio_config.profile = AAC_PROFILE_SBR;
+        audio_config.profile = mtx::aac::PROFILE_SBR;
 
       profile_detected = true;
     }
@@ -297,11 +297,11 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
 
   auto detected_profile = audio_config.profile;
   if (audio_config.sbr)
-    audio_config.profile = AAC_PROFILE_SBR;
+    audio_config.profile = mtx::aac::PROFILE_SBR;
 
   if (   (mtx::includes(m_ti.m_all_aac_is_sbr, tid) && m_ti.m_all_aac_is_sbr[tid])
       || (mtx::includes(m_ti.m_all_aac_is_sbr, -1)  && m_ti.m_all_aac_is_sbr[-1]))
-    audio_config.profile = AAC_PROFILE_SBR;
+    audio_config.profile = mtx::aac::PROFILE_SBR;
 
   if (profile_detected
       &&
@@ -316,7 +316,7 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
 
   show_packetizer_info(tid, PTZR(dmx->ptzr));
 
-  if (AAC_PROFILE_SBR == audio_config.profile)
+  if (mtx::aac::PROFILE_SBR == audio_config.profile)
     PTZR(dmx->ptzr)->set_audio_output_sampling_freq(audio_config.output_sample_rate);
 
   // AAC packetizers might need the timestamp of the first packet in order

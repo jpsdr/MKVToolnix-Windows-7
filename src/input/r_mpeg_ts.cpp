@@ -2129,7 +2129,7 @@ reader_c::determine_track_type_by_pes_content(track_c &track) {
     mxdebug(fmt::format("PID {0}: attempting type detection from content for with size {1}; first four bytes: {2}\n", track.pid, size, data));
   }
 
-  if ((size >= 3) && ((get_uint24_be(buffer) & AAC_ADTS_SYNC_WORD_MASK) == AAC_ADTS_SYNC_WORD)) {
+  if ((size >= 3) && ((get_uint24_be(buffer) & mtx::aac::ADTS_SYNC_WORD_MASK) == mtx::aac::ADTS_SYNC_WORD)) {
     track.type  = pid_type_e::audio;
     track.codec = codec_c::look_up(codec_c::type_e::A_AAC);
 
@@ -2314,7 +2314,7 @@ reader_c::create_aac_audio_packetizer(track_ptr const &track) {
   track->ptzr         = add_packetizer(aac_packetizer);
   track->converter    = std::make_shared<aac_framing_packet_converter_c>(PTZR(track->ptzr), track->m_aac_multiplex_type);
 
-  if (AAC_PROFILE_SBR == track->m_aac_frame.m_header.config.profile)
+  if (mtx::aac::PROFILE_SBR == track->m_aac_frame.m_header.config.profile)
     aac_packetizer->set_audio_output_sampling_freq(track->m_aac_frame.m_header.config.sample_rate * 2);
 }
 

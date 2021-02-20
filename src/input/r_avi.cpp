@@ -540,11 +540,11 @@ avi_reader_c::create_aac_packetizer(int aid,
     audio_config.channels             = AVI_audio_channels(m_avi);
     audio_config.sample_rate          = AVI_audio_rate(m_avi);
     if (44100 > audio_config.sample_rate) {
-      audio_config.profile            = AAC_PROFILE_SBR;
+      audio_config.profile            = mtx::aac::PROFILE_SBR;
       audio_config.output_sample_rate = audio_config.sample_rate * 2;
       audio_config.sbr                = true;
     } else {
-      audio_config.profile            = AAC_PROFILE_MAIN;
+      audio_config.profile            = mtx::aac::PROFILE_MAIN;
       audio_config.output_sample_rate = audio_config.sample_rate;
       audio_config.sbr                = false;
     }
@@ -559,7 +559,7 @@ avi_reader_c::create_aac_packetizer(int aid,
     audio_config = *parsed_audio_config;
 
     if (audio_config.sbr)
-      audio_config.profile = AAC_PROFILE_SBR;
+      audio_config.profile = mtx::aac::PROFILE_SBR;
   }
 
   demuxer.m_samples_per_second = audio_config.sample_rate;

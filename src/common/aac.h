@@ -20,34 +20,34 @@
 #include "common/byte_buffer.h"
 #include "common/timestamp.h"
 
-#define AAC_ID_MPEG4 0
-#define AAC_ID_MPEG2 1
-
-#define AAC_PROFILE_MAIN 0
-#define AAC_PROFILE_LC   1
-#define AAC_PROFILE_SSR  2
-#define AAC_PROFILE_LTP  3
-#define AAC_PROFILE_SBR  4
-
-#define AAC_SYNC_EXTENSION_TYPE 0x02b7
-
-#define AAC_MAX_PRIVATE_DATA_SIZE 5
-
-#define AAC_ADTS_SYNC_WORD       0xfff000
-#define AAC_ADTS_SYNC_WORD_MASK  0xfff000 // first 12 of 24 bits
-
-#define AAC_LOAS_SYNC_WORD       0x56e000 // 0x2b7
-#define AAC_LOAS_SYNC_WORD_MASK  0xffe000 // first 11 of 24 bits
-#define AAC_LOAS_FRAME_SIZE_MASK 0x001fff // last 13 of 24 bits
-
-#define AAC_ID_PCE               0x05 // Table 4.71 "Syntactic elements"
-
 namespace mtx::bits {
 class reader_c;
 class writer_c;
 }
 
 namespace mtx::aac {
+
+constexpr auto ID_MPEG4              = 0;
+constexpr auto ID_MPEG2              = 1;
+
+constexpr auto PROFILE_MAIN          = 0;
+constexpr auto PROFILE_LC            = 1;
+constexpr auto PROFILE_SSR           = 2;
+constexpr auto PROFILE_LTP           = 3;
+constexpr auto PROFILE_SBR           = 4;
+
+constexpr auto SYNC_EXTENSION_TYPE   = 0x02b7;
+
+constexpr auto MAX_PRIVATE_DATA_SIZE = 5;
+
+constexpr auto ADTS_SYNC_WORD        = 0xfff000;
+constexpr auto ADTS_SYNC_WORD_MASK   = 0xfff000; // first 12 of 24 bits
+
+constexpr auto LOAS_SYNC_WORD        = 0x56e000; // 0x2b7
+constexpr auto LOAS_SYNC_WORD_MASK   = 0xffe000; // first 11 of 24 bits
+constexpr auto LOAS_FRAME_SIZE_MASK  = 0x001fff; // last 13 of 24 bits
+
+constexpr auto ID_PCE                = 0x05; // Table 4.71 "Syntactic elements"
 
 struct audio_config_t {
   unsigned int profile{}, sample_rate{}, output_sample_rate{}, channels{}, samples_per_frame{1024};

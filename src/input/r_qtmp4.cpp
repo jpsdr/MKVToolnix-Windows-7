@@ -2930,7 +2930,7 @@ void
 qtmp4_demuxer_c::parse_aac_esds_decoder_config() {
   if (!esds.decoder_config || (2 > esds.decoder_config->get_size())) {
     a_aac_audio_config                     = mtx::aac::audio_config_t{};
-    a_aac_audio_config->profile            = AAC_PROFILE_MAIN;
+    a_aac_audio_config->profile            = mtx::aac::PROFILE_MAIN;
     a_aac_audio_config->sample_rate        = a_samplerate;
     a_aac_audio_config->output_sample_rate = a_samplerate;
     a_aac_audio_config->channels           = a_channels;

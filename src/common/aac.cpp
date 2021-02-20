@@ -59,23 +59,23 @@ parse_codec_id(const std::string &codec_id,
     return false;
 
   if (codec_id[10] == '2')
-    id = AAC_ID_MPEG2;
+    id = mtx::aac::ID_MPEG2;
   else if (codec_id[10] == '4')
-    id = AAC_ID_MPEG4;
+    id = mtx::aac::ID_MPEG4;
   else
     return false;
 
   sprofile = codec_id.substr(12);
   if (sprofile == "MAIN")
-    profile = AAC_PROFILE_MAIN;
+    profile = mtx::aac::PROFILE_MAIN;
   else if (sprofile == "LC")
-    profile = AAC_PROFILE_LC;
+    profile = mtx::aac::PROFILE_LC;
   else if (sprofile == "SSR")
-    profile = AAC_PROFILE_SSR;
+    profile = mtx::aac::PROFILE_SSR;
   else if (sprofile == "LTP")
-    profile = AAC_PROFILE_LTP;
+    profile = mtx::aac::PROFILE_LTP;
   else if (sprofile == "LC/SBR")
-    profile = AAC_PROFILE_SBR;
+    profile = mtx::aac::PROFILE_SBR;
   else
     return false;
 
@@ -126,7 +126,7 @@ create_audio_specific_config(audio_config_t const &audio_config) {
     w.byte_align();
 
   if (audio_config.sbr) {
-    w.put_bits(11, AAC_SYNC_EXTENSION_TYPE);
+    w.put_bits(11, mtx::aac::SYNC_EXTENSION_TYPE);
     write_object_type(MP4AOT_SBR);
     w.put_bits(1, 1);           // sbr_present_flag
     write_sampling_frequency(audio_config.output_sample_rate ? audio_config.output_sample_rate : audio_config.sample_rate * 2);
@@ -603,7 +603,7 @@ parser_c::decode_adts_header(unsigned char const *buffer,
       return { failure, 1 };
 
     auto data_start_position = bc.get_bit_position();
-    if (bc.get_bits(3) == AAC_ID_PCE)
+    if (bc.get_bits(3) == mtx::aac::ID_PCE)
       frame.m_header.parse_program_config_element(bc);
     bc.set_bit_position(data_start_position);
 
@@ -631,10 +631,10 @@ parser_c::decode_loas_latm_header(unsigned char const *buffer,
       return { need_more_data, 0 };
 
     auto value = get_uint24_be(buffer);
-    if ((value & AAC_LOAS_SYNC_WORD_MASK) != AAC_LOAS_SYNC_WORD)
+    if ((value & mtx::aac::LOAS_SYNC_WORD_MASK) != mtx::aac::LOAS_SYNC_WORD)
       return { failure, 1 };
 
-    auto loas_frame_size = value & AAC_LOAS_FRAME_SIZE_MASK;
+    auto loas_frame_size = value & mtx::aac::LOAS_FRAME_SIZE_MASK;
     auto loas_frame_end  = loas_frame_size + 3;
     if (loas_frame_end > buffer_size)
       return { need_more_data, 0 };
@@ -813,18 +813,18 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
     // Speeding up checks by using shortcuts here instead of going
     // through the parser for each byte position: check for supported
     // header types (ADTS and LOAS/LATM).
-    if (   ((value & AAC_ADTS_SYNC_WORD_MASK) != AAC_ADTS_SYNC_WORD)
-        && ((value & AAC_LOAS_SYNC_WORD_MASK) != AAC_LOAS_SYNC_WORD))
+    if (   ((value & mtx::aac::ADTS_SYNC_WORD_MASK) != mtx::aac::ADTS_SYNC_WORD)
+        && ((value & mtx::aac::LOAS_SYNC_WORD_MASK) != mtx::aac::LOAS_SYNC_WORD))
       continue;
 
-    if ((value & AAC_LOAS_SYNC_WORD_MASK) == AAC_LOAS_SYNC_WORD) {
+    if ((value & mtx::aac::LOAS_SYNC_WORD_MASK) == mtx::aac::LOAS_SYNC_WORD) {
       // Check for second LOAS header right after the current one.
-      auto loas_frame_size = value & AAC_LOAS_FRAME_SIZE_MASK;
+      auto loas_frame_size = value & mtx::aac::LOAS_FRAME_SIZE_MASK;
       if (!loas_frame_size || ((base + loas_frame_size + 3 + 3) > buffer_size))
         continue;
 
       value = get_uint24_be(&buffer[base + 3 + loas_frame_size]);
-      if ((value & AAC_LOAS_SYNC_WORD_MASK) != AAC_LOAS_SYNC_WORD)
+      if ((value & mtx::aac::LOAS_SYNC_WORD_MASK) != mtx::aac::LOAS_SYNC_WORD)
         continue;
 
     } else {
@@ -839,7 +839,7 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
         continue;
 
       value = get_uint24_be(&buffer[base + adts_frame_size]);
-      if ((value & AAC_ADTS_SYNC_WORD_MASK) != AAC_ADTS_SYNC_WORD)
+      if ((value & mtx::aac::ADTS_SYNC_WORD_MASK) != mtx::aac::ADTS_SYNC_WORD)
         continue;
     }
 
@@ -1167,7 +1167,7 @@ header_c::parse_audio_specific_config(mtx::bits::reader_c &bc,
       auto prior_position     = m_bc->get_bit_position();
       int sync_extension_type = m_bc->get_bits(11);
 
-      if (AAC_SYNC_EXTENSION_TYPE == sync_extension_type) {
+      if (mtx::aac::SYNC_EXTENSION_TYPE == sync_extension_type) {
         extension_object_type = read_object_type();
         if (MP4AOT_SBR == extension_object_type) {
           config.sbr = m_bc->get_bit();

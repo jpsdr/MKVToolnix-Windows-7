@@ -1785,7 +1785,7 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
 
   audio_config.sample_rate = t->a_sfreq;
   audio_config.channels    = t->a_channels;
-  int detected_profile     = AAC_PROFILE_MAIN;
+  int detected_profile     = mtx::aac::PROFILE_MAIN;
 
   if (!t->ms_compat) {
     if (t->private_data && (2 <= t->private_data->get_size())) {
@@ -1796,7 +1796,7 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
       audio_config           = *parsed_audio_config;
       detected_profile       = audio_config.profile;
       if (audio_config.sbr)
-        audio_config.profile = AAC_PROFILE_SBR;
+        audio_config.profile = mtx::aac::PROFILE_SBR;
 
     } else {
       int id = 0, profile = 0;
@@ -1813,11 +1813,11 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
     audio_config           = *parsed_audio_config;
     detected_profile       = audio_config.profile;
     if (audio_config.sbr)
-      audio_config.profile = AAC_PROFILE_SBR;
+      audio_config.profile = mtx::aac::PROFILE_SBR;
   }
 
   if ((mtx::includes(m_ti.m_all_aac_is_sbr, t->tnum) &&  m_ti.m_all_aac_is_sbr[t->tnum]) || (mtx::includes(m_ti.m_all_aac_is_sbr, -1) &&  m_ti.m_all_aac_is_sbr[-1]))
-    audio_config.profile = AAC_PROFILE_SBR;
+    audio_config.profile = mtx::aac::PROFILE_SBR;
 
   if ((mtx::includes(m_ti.m_all_aac_is_sbr, t->tnum) && !m_ti.m_all_aac_is_sbr[t->tnum]) || (mtx::includes(m_ti.m_all_aac_is_sbr, -1) && !m_ti.m_all_aac_is_sbr[-1]))
     audio_config.profile = detected_profile;

@@ -495,7 +495,7 @@ flv_reader_c::process_audio_tag_sound_format(flv_track_cptr &track,
                fmt::format("  AAC sub type: sequence header (profile: {0}, channels: {1}, s_rate: {2}, out_s_rate: {3}, sbr {4})\n",
                            audio_config->profile, audio_config->channels, audio_config->sample_rate, audio_config->output_sample_rate, audio_config->sbr));
 
-    track->m_a_profile     = audio_config->sbr ? AAC_PROFILE_SBR : audio_config->profile;
+    track->m_a_profile     = audio_config->sbr ? mtx::aac::PROFILE_SBR : audio_config->profile;
     track->m_a_channels    = audio_config->channels;
     track->m_a_sample_rate = audio_config->sample_rate;
     m_tag.m_data_size      = 0;
