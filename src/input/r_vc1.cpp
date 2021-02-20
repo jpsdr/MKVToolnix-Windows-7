@@ -34,7 +34,7 @@ vc1_es_reader_c::probe_file() {
     return false;
 
   uint32_t marker = get_uint32_be(m_buffer->get_buffer());
-  if ((VC1_MARKER_SEQHDR != marker) && (VC1_MARKER_ENTRYPOINT != marker) && (VC1_MARKER_FRAME != marker))
+  if ((mtx::vc1::MARKER_SEQHDR != marker) && (mtx::vc1::MARKER_ENTRYPOINT != marker) && (mtx::vc1::MARKER_FRAME != marker))
     return false;
 
   mtx::vc1::es_parser_c parser;

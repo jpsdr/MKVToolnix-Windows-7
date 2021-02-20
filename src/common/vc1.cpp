@@ -95,7 +95,7 @@ parse_sequence_header(const unsigned char *buf,
     bc.skip_bits(32);           // Marker
     hdr.profile = bc.get_bits(2);
 
-    if (VC1_PROFILE_ADVANCED != hdr.profile)
+    if (PROFILE_ADVANCED != hdr.profile)
       return false;
 
     hdr.level              = bc.get_bits(3);
@@ -370,27 +370,27 @@ es_parser_c::handle_packet(memory_cptr packet) {
   uint32_t marker = get_uint32_be(packet->get_buffer());
 
   switch (marker) {
-    case VC1_MARKER_SEQHDR:
+    case MARKER_SEQHDR:
       handle_sequence_header_packet(packet);
       break;
 
-    case VC1_MARKER_ENTRYPOINT:
+    case MARKER_ENTRYPOINT:
       handle_entrypoint_packet(packet);
       break;
 
-    case VC1_MARKER_FRAME:
+    case MARKER_FRAME:
       handle_frame_packet(packet);
       break;
 
-    case VC1_MARKER_SLICE:
+    case MARKER_SLICE:
       handle_slice_packet(packet);
       break;
 
-    case VC1_MARKER_FIELD:
+    case MARKER_FIELD:
       handle_field_packet(packet);
       break;
 
-    case VC1_MARKER_ENDOFSEQ:
+    case MARKER_ENDOFSEQ:
       handle_end_of_sequence_packet(packet);
       break;
 
@@ -526,7 +526,7 @@ es_parser_c::combine_extra_data_with_packet() {
     memcpy(ptr, mem->get_buffer(), mem->get_size());
     ptr += mem->get_size();
 
-    if (get_uint32_be(mem->get_buffer()) == VC1_MARKER_ENTRYPOINT)
+    if (get_uint32_be(mem->get_buffer()) == MARKER_ENTRYPOINT)
       m_current_frame->contains_entry_point = true;
   }
 
@@ -537,7 +537,7 @@ es_parser_c::combine_extra_data_with_packet() {
     memcpy(ptr, mem->get_buffer(), mem->get_size());
     ptr += mem->get_size();
 
-    if (VC1_MARKER_FIELD == get_uint32_be(mem->get_buffer()))
+    if (MARKER_FIELD == get_uint32_be(mem->get_buffer()))
       m_current_frame->contains_field = true;
   }
 

@@ -20,19 +20,19 @@
 
 #include "common/vc1_fwd.h"
 
-#define VC1_PROFILE_SIMPLE    0x00000000
-#define VC1_PROFILE_MAIN      0x00000001
-#define VC1_PROFILE_COMPLEX   0x00000002
-#define VC1_PROFILE_ADVANCED  0x00000003
-
-#define VC1_MARKER_ENDOFSEQ   0x0000010a
-#define VC1_MARKER_SLICE      0x0000010b
-#define VC1_MARKER_FIELD      0x0000010c
-#define VC1_MARKER_FRAME      0x0000010d
-#define VC1_MARKER_ENTRYPOINT 0x0000010e
-#define VC1_MARKER_SEQHDR     0x0000010f
-
 namespace mtx::vc1 {
+
+constexpr auto PROFILE_SIMPLE    = 0x00000000;
+constexpr auto PROFILE_MAIN      = 0x00000001;
+constexpr auto PROFILE_COMPLEX   = 0x00000002;
+constexpr auto PROFILE_ADVANCED  = 0x00000003;
+
+constexpr auto MARKER_ENDOFSEQ   = 0x0000010a;
+constexpr auto MARKER_SLICE      = 0x0000010b;
+constexpr auto MARKER_FIELD      = 0x0000010c;
+constexpr auto MARKER_FRAME      = 0x0000010d;
+constexpr auto MARKER_ENTRYPOINT = 0x0000010e;
+constexpr auto MARKER_SEQHDR     = 0x0000010f;
 
 enum frame_type_e {
   FRAME_TYPE_I,
