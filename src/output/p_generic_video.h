@@ -17,9 +17,9 @@
 
 #include "merge/generic_packetizer.h"
 
-#define VFT_IFRAME          -1
-#define VFT_PFRAMEAUTOMATIC -2
-#define VFT_NOBFRAME        -1
+constexpr auto VFT_IFRAME          = -1;
+constexpr auto VFT_PFRAMEAUTOMATIC = -2;
+constexpr auto VFT_NOBFRAME        = -1;
 
 class generic_video_packetizer_c: public generic_packetizer_c {
 protected:
