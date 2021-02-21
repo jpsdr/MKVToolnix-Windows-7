@@ -205,7 +205,7 @@ wav_reader_c::create_demuxer() {
 
 void
 wav_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('a', 0) || (NPTZR() != 0) || !m_demuxer)
+  if (!demuxing_requested('a', 0) || !m_reader_packetizers.empty() || !m_demuxer)
     return;
 
   add_packetizer(m_demuxer->create_packetizer());

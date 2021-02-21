@@ -138,7 +138,7 @@ vobsub_reader_c::create_packetizer(int64_t tid) {
   }
 
   m_ti.m_language.clear();
-  show_packetizer_info(tid, PTZR(track->ptzr));
+  show_packetizer_info(tid, ptzr(track->ptzr));
 }
 
 void
@@ -308,13 +308,13 @@ vobsub_reader_c::parse_headers() {
   }
 }
 
-#define deliver() deliver_packet(dst_buf, dst_size, timestamp, duration, PTZR(track->ptzr));
+#define deliver() deliver_packet(dst_buf, dst_size, timestamp, duration, &ptzr(track->ptzr));
 int
 vobsub_reader_c::deliver_packet(unsigned char *buf,
                                 int size,
                                 int64_t timestamp,
                                 int64_t default_duration,
-                                generic_packetizer_c *ptzr) {
+                                generic_packetizer_c *packetizer) {
   if (!buf || (0 == size)) {
     safefree(buf);
     return -1;
@@ -390,7 +390,7 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
   }
 
   if (duration.valid())
-    ptzr->process(new packet_t(memory_c::take_ownership(buf, size), timestamp, duration.to_ns()));
+    packetizer->process(new packet_t(memory_c::take_ownership(buf, size), timestamp, duration.to_ns()));
   else
     safefree(buf);
 
@@ -601,13 +601,13 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
 }
 
 file_status_e
-vobsub_reader_c::read(generic_packetizer_c *ptzr,
+vobsub_reader_c::read(generic_packetizer_c *packetizer,
                       bool) {
   vobsub_track_c *track = nullptr;
   uint32_t id;
 
   for (id = 0; id < tracks.size(); ++id)
-    if ((-1 != tracks[id]->ptzr) && (PTZR(tracks[id]->ptzr) == ptzr)) {
+    if ((-1 != tracks[id]->ptzr) && (&ptzr(tracks[id]->ptzr) == packetizer)) {
       track = tracks[id];
       break;
     }
@@ -653,7 +653,7 @@ file_status_e
 vobsub_reader_c::flush_packetizers() {
   for (auto track : tracks)
     if (track->ptzr != -1)
-      PTZR(track->ptzr)->flush();
+      ptzr(track->ptzr).flush();
 
   return FILE_STATUS_DONE;
 }

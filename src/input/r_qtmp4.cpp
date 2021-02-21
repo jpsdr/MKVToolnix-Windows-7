@@ -401,7 +401,7 @@ qtmp4_reader_c::handle_audio_encoder_delay(qtmp4_demuxer_c &dmx) {
   if ((0 == m_audio_encoder_delay_samples) || (0 == dmx.a_samplerate) || (-1 == dmx.ptzr))
     return;
 
-  PTZR(dmx.ptzr)->m_ti.m_tcsync.displacement -= (m_audio_encoder_delay_samples * 1000000000ll) / dmx.a_samplerate;
+  ptzr(dmx.ptzr).m_ti.m_tcsync.displacement -= (m_audio_encoder_delay_samples * 1000000000ll) / dmx.a_samplerate;
   m_audio_encoder_delay_samples               = 0;
 }
 
@@ -1588,14 +1588,14 @@ qtmp4_reader_c::handle_trak_atom(qtmp4_demuxer_c &dmx,
 }
 
 file_status_e
-qtmp4_reader_c::read(generic_packetizer_c *ptzr,
+qtmp4_reader_c::read(generic_packetizer_c *packetizer,
                      bool) {
   size_t dmx_idx;
 
   for (dmx_idx = 0; dmx_idx < m_demuxers.size(); ++dmx_idx) {
     auto &dmx = *m_demuxers[dmx_idx];
 
-    if ((-1 == dmx.ptzr) || (PTZR(dmx.ptzr) != ptzr))
+    if ((-1 == dmx.ptzr) || (&ptzr(dmx.ptzr) != packetizer))
       continue;
 
     if (dmx.pos < dmx.m_index.size())
@@ -1634,7 +1634,7 @@ qtmp4_reader_c::read(generic_packetizer_c *ptzr,
   }
 
   auto duration = dmx.m_use_frame_rate_for_duration ? *dmx.m_use_frame_rate_for_duration : index.duration;
-  PTZR(dmx.ptzr)->process(new packet_t(buffer, index.timestamp, duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
+  ptzr(dmx.ptzr).process(new packet_t(buffer, index.timestamp, duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
   ++dmx.pos;
 
   m_bytes_processed += index.size;
@@ -1681,7 +1681,7 @@ qtmp4_reader_c::create_audio_packetizer_ac3(qtmp4_demuxer_c &dmx) {
   }
 
   dmx.ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, dmx.m_ac3_header.m_sample_rate, dmx.m_ac3_header.m_channels, dmx.m_ac3_header.m_bs_id));
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 
   return true;
 }
@@ -1690,7 +1690,7 @@ bool
 qtmp4_reader_c::create_audio_packetizer_alac(qtmp4_demuxer_c &dmx) {
   auto magic_cookie = memory_c::clone(dmx.stsd->get_buffer() + dmx.stsd_non_priv_struct_size + 12, dmx.stsd->get_size() - dmx.stsd_non_priv_struct_size - 12);
   dmx.ptzr          = add_packetizer(new alac_packetizer_c(this, m_ti, magic_cookie, dmx.a_samplerate, dmx.a_channels));
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 
   return true;
 }
@@ -1698,7 +1698,7 @@ qtmp4_reader_c::create_audio_packetizer_alac(qtmp4_demuxer_c &dmx) {
 bool
 qtmp4_reader_c::create_audio_packetizer_dts(qtmp4_demuxer_c &dmx) {
   dmx.ptzr = add_packetizer(new dts_packetizer_c(this, m_ti, dmx.m_dts_header));
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 
   return true;
 }
@@ -1708,7 +1708,7 @@ qtmp4_reader_c::create_video_packetizer_svq1(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = create_bitmap_info_header(dmx, "SVQ1");
   dmx.ptzr            = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, 0.0, dmx.v_width, dmx.v_height));
 
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
@@ -1716,7 +1716,7 @@ qtmp4_reader_c::create_video_packetizer_mpeg4_p2(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = create_bitmap_info_header(dmx, "DIVX");
   dmx.ptzr            = add_packetizer(new mpeg4_p2_video_packetizer_c(this, m_ti, 0.0, dmx.v_width, dmx.v_height, false));
 
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
@@ -1726,7 +1726,7 @@ qtmp4_reader_c::create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx) {
               :                                                                2;
   dmx.ptzr    = add_packetizer(new mpeg1_2_video_packetizer_c(this, m_ti, version, -1.0, dmx.v_width, dmx.v_height, 0, 0, false));
 
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
@@ -1735,9 +1735,9 @@ qtmp4_reader_c::create_video_packetizer_av1(qtmp4_demuxer_c &dmx) {
   dmx.ptzr            = add_packetizer(new av1_video_packetizer_c(this, m_ti));
 
   if (dmx.frame_rate)
-    PTZR(dmx.ptzr)->set_track_default_duration(boost::rational_cast<int64_t>(int64_rational_c{dmx.frame_rate.denominator() * 1'000'000'000ll, dmx.frame_rate.numerator()}));
+    ptzr(dmx.ptzr).set_track_default_duration(boost::rational_cast<int64_t>(int64_rational_c{dmx.frame_rate.denominator() * 1'000'000'000ll, dmx.frame_rate.numerator()}));
 
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
@@ -1745,7 +1745,7 @@ qtmp4_reader_c::create_video_packetizer_avc(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.priv.size() ? dmx.priv[0] : memory_cptr{};
   dmx.ptzr            = add_packetizer(new avc_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
 
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
@@ -1753,35 +1753,35 @@ qtmp4_reader_c::create_video_packetizer_mpegh_p2_es(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.priv.size() && dmx.priv[0]->get_size() ? dmx.priv[0] : memory_cptr{};
   dmx.ptzr            = add_packetizer(new hevc_es_video_packetizer_c(this, m_ti));
 
-  PTZR(dmx.ptzr)->set_video_pixel_dimensions(dmx.v_width, dmx.v_height);
+  ptzr(dmx.ptzr).set_video_pixel_dimensions(dmx.v_width, dmx.v_height);
 
   if (dmx.frame_rate.numerator()) {
     auto duration = boost::rational_cast<int64_t>(int64_rational_c{dmx.frame_rate.denominator(), dmx.frame_rate.numerator()} * 1'000'000'000ll);
-    PTZR(dmx.ptzr)->set_track_default_duration(duration);
+    ptzr(dmx.ptzr).set_track_default_duration(duration);
   }
 
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
 qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.priv.size() && dmx.priv[0]->get_size() ? dmx.priv[0] : memory_cptr{};
-  auto ptzr           = new hevc_video_packetizer_c(this, m_ti, 0.0, dmx.v_width, dmx.v_height);
-  dmx.ptzr            = add_packetizer(ptzr);
+  auto packetizer     = new hevc_video_packetizer_c(this, m_ti, 0.0, dmx.v_width, dmx.v_height);
+  dmx.ptzr            = add_packetizer(packetizer);
 
   // rederive_timestamp_order() makes use of m_htrack_default_duration, so we set it early here
   if (dmx.frame_rate.numerator()) {
     auto duration = boost::rational_cast<int64_t>(int64_rational_c{dmx.frame_rate.denominator(), dmx.frame_rate.numerator()} * 1'000'000'000ll);
-    ptzr->set_track_default_duration(duration);
+    packetizer->set_track_default_duration(duration);
   }
 
   if (dmx.raw_frame_offset_table.empty()) {
     mxdebug_if(m_debug_headers, fmt::format("HEVC/h.265 track {0} doesn't have a CTTS atom; enabling re-ordering of timestamps\n", dmx.id));
 
-    ptzr->rederive_timestamp_order();
+    packetizer->rederive_timestamp_order();
   }
 
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
@@ -1789,7 +1789,7 @@ qtmp4_reader_c::create_video_packetizer_prores(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = memory_c::clone(dmx.fourcc.str());
   dmx.ptzr            = add_packetizer(new prores_video_packetizer_c(this, m_ti, boost::rational_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
 
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
@@ -1797,7 +1797,7 @@ qtmp4_reader_c::create_video_packetizer_standard(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.stsd;
   dmx.ptzr            = add_packetizer(new quicktime_video_packetizer_c(this, m_ti, dmx.v_width, dmx.v_height));
 
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
@@ -1805,14 +1805,14 @@ qtmp4_reader_c::create_video_packetizer_vpx(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.priv.size() && dmx.priv[0]->get_size() ? dmx.priv[0] : memory_cptr{};
   dmx.ptzr            = add_packetizer(new vpx_video_packetizer_c{this, m_ti, dmx.codec.get_type()});
 
-  PTZR(dmx.ptzr)->set_video_pixel_dimensions(dmx.v_width, dmx.v_height);
+  ptzr(dmx.ptzr).set_video_pixel_dimensions(dmx.v_width, dmx.v_height);
 
   if (dmx.frame_rate.numerator()) {
     auto duration = boost::rational_cast<int64_t>(int64_rational_c{dmx.frame_rate.denominator(), dmx.frame_rate.numerator()} * 1'000'000'000ll);
-    PTZR(dmx.ptzr)->set_track_default_duration(duration);
+    ptzr(dmx.ptzr).set_track_default_duration(duration);
   }
 
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
@@ -1820,47 +1820,47 @@ qtmp4_reader_c::create_audio_packetizer_aac(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.esds.decoder_config;
   dmx.ptzr            = add_packetizer(new aac_packetizer_c(this, m_ti, *dmx.a_aac_audio_config, aac_packetizer_c::headerless));
 
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
 qtmp4_reader_c::create_audio_packetizer_mp3(qtmp4_demuxer_c &dmx) {
   dmx.ptzr = add_packetizer(new mp3_packetizer_c(this, m_ti, dmx.a_samplerate, dmx.a_channels, true));
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
 qtmp4_reader_c::create_audio_packetizer_opus(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.priv[0];
   dmx.ptzr            = add_packetizer(new opus_packetizer_c{this, m_ti});
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
 qtmp4_reader_c::create_audio_packetizer_pcm(qtmp4_demuxer_c &dmx) {
   dmx.ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, static_cast<int32_t>(dmx.a_samplerate), dmx.a_channels, dmx.a_bitdepth, dmx.m_pcm_format));
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
 qtmp4_reader_c::create_audio_packetizer_vorbis(qtmp4_demuxer_c &dmx) {
   dmx.ptzr = add_packetizer(new vorbis_packetizer_c(this, m_ti, dmx.priv));
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void
 qtmp4_reader_c::create_audio_packetizer_passthrough(qtmp4_demuxer_c &dmx) {
-  passthrough_packetizer_c *ptzr = new passthrough_packetizer_c(this, m_ti);
-  dmx.ptzr                      = add_packetizer(ptzr);
+  auto packetizer = new passthrough_packetizer_c(this, m_ti);
+  dmx.ptzr        = add_packetizer(packetizer);
 
-  ptzr->set_track_type(track_audio);
-  ptzr->set_codec_id(MKV_A_QUICKTIME);
-  ptzr->set_codec_private(dmx.stsd);
-  ptzr->set_audio_sampling_freq(dmx.a_samplerate);
-  ptzr->set_audio_channels(dmx.a_channels);
-  ptzr->prevent_lacing();
+  packetizer->set_track_type(track_audio);
+  packetizer->set_codec_id(MKV_A_QUICKTIME);
+  packetizer->set_codec_private(dmx.stsd);
+  packetizer->set_audio_sampling_freq(dmx.a_samplerate);
+  packetizer->set_audio_channels(dmx.a_channels);
+  packetizer->prevent_lacing();
 
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, *packetizer);
 }
 
 void
@@ -1888,7 +1888,7 @@ qtmp4_reader_c::create_subtitles_packetizer_vobsub(qtmp4_demuxer_c &dmx) {
 
   m_ti.m_private_data = memory_c::clone(idx_str);
   dmx.ptzr = add_packetizer(new vobsub_packetizer_c(this, m_ti));
-  show_packetizer_info(dmx.id, PTZR(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
 
 void

@@ -68,7 +68,7 @@ public:
   virtual FLAC__bool flac_eof_cb();
 
 protected:
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   virtual bool parse_file(bool for_identification_only);
   virtual void handle_picture_metadata(FLAC__StreamMetadata const *metadata);

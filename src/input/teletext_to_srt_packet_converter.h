@@ -47,8 +47,8 @@ protected:
     generic_packetizer_c *m_ptzr{};
     int m_magazine;
 
-    track_data_t(generic_packetizer_c *ptzr)
-      : m_ptzr{ptzr}
+    track_data_t(generic_packetizer_c *packetizer)
+      : m_ptzr{packetizer}
       , m_magazine{-1}
     {
     }
@@ -77,7 +77,7 @@ public:
   virtual void flush() override;
 
   virtual void override_encoding(int page, std::string const &iso639_alpha_3_code);
-  virtual void demux_page(int page, generic_packetizer_c *ptzr);
+  virtual void demux_page(int page, generic_packetizer_c *packetizer);
 
 protected:
   void process_ttx_packet();

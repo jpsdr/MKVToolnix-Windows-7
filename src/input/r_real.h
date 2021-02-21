@@ -104,7 +104,7 @@ public:
   virtual bool probe_file() override;
 
 protected:
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   virtual void parse_headers();
   virtual real_demuxer_cptr find_demuxer(unsigned int id);

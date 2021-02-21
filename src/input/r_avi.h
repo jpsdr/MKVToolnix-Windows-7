@@ -92,7 +92,7 @@ public:
 
 protected:
   virtual void add_audio_demuxer(int aid);
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
   virtual file_status_e read_video();
   virtual file_status_e read_audio(avi_demuxer_t &demuxer);
   virtual file_status_e read_subtitles(avi_subs_demuxer_t &demuxer);
@@ -112,7 +112,7 @@ protected:
   virtual void create_vp8_packetizer();
   virtual void create_video_packetizer();
 
-  virtual void set_avc_nal_size_size(avc_es_video_packetizer_c *ptzr);
+  virtual void set_avc_nal_size_size(avc_es_video_packetizer_c *packetizer);
 
   void extended_identify_mpeg4_l2(mtx::id::info_c &info);
 

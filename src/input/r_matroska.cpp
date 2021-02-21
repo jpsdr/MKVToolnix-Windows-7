@@ -331,7 +331,7 @@ kax_reader_c::init_l1_position_storage(deferred_positions_t &storage) {
 bool
 kax_reader_c::packets_available() {
   for (auto &track : m_tracks)
-    if ((-1 != track->ptzr) && !PTZR(track->ptzr)->packet_available())
+    if ((-1 != track->ptzr) && !ptzr(track->ptzr).packet_available())
       return false;
 
   return !m_tracks.empty();
@@ -1633,31 +1633,29 @@ kax_reader_c::process_global_tags() {
 void
 kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
-  passthrough_packetizer_c *ptzr;
-
   mxinfo_tid(m_ti.m_fname, t->tnum, fmt::format(Y("Using the generic output module for track type '{0}'.\n"), map_track_type_string(t->type)));
 
-  ptzr                      = new passthrough_packetizer_c(this, nti);
-  t->ptzr                   = add_packetizer(ptzr);
-  t->ptzr_ptr               = ptzr;
-  t->passthrough            = true;
-  m_ptzr_to_track_map[ptzr] = t;
+  auto packetizer                 = new passthrough_packetizer_c(this, nti);
+  t->ptzr                         = add_packetizer(packetizer);
+  t->ptzr_ptr                     = packetizer;
+  t->passthrough                  = true;
+  m_ptzr_to_track_map[packetizer] = t;
 
-  ptzr->set_track_type(map_track_type(t->type));
-  ptzr->set_codec_id(t->codec_id);
-  ptzr->set_codec_private(t->private_data);
-  ptzr->set_codec_name(t->codec_name);
+  packetizer->set_track_type(map_track_type(t->type));
+  packetizer->set_codec_id(t->codec_id);
+  packetizer->set_codec_private(t->private_data);
+  packetizer->set_codec_name(t->codec_name);
 
   if (0.0 < t->v_frate)
-    ptzr->set_track_default_duration(1000000000.0 / t->v_frate);
+    packetizer->set_track_default_duration(1000000000.0 / t->v_frate);
   if (t->seek_pre_roll.valid())
-    ptzr->set_track_seek_pre_roll(t->seek_pre_roll);
+    packetizer->set_track_seek_pre_roll(t->seek_pre_roll);
 
   t->handle_packetizer_block_addition_mapping();
 
   if ('v' == t->type) {
-    ptzr->set_video_pixel_width(t->v_width);
-    ptzr->set_video_pixel_height(t->v_height);
+    packetizer->set_video_pixel_width(t->v_width);
+    packetizer->set_video_pixel_height(t->v_height);
 
     t->handle_packetizer_display_dimensions();
     t->handle_packetizer_pixel_cropping();
@@ -1665,16 +1663,16 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
     t->handle_packetizer_field_order();
     t->handle_packetizer_stereo_mode();
 
-    if (CUE_STRATEGY_UNSPECIFIED == ptzr->get_cue_creation())
-      ptzr->set_cue_creation(CUE_STRATEGY_IFRAMES);
+    if (CUE_STRATEGY_UNSPECIFIED == packetizer->get_cue_creation())
+      packetizer->set_cue_creation(CUE_STRATEGY_IFRAMES);
 
   } else if ('a' == t->type) {
-    ptzr->set_audio_sampling_freq(t->a_sfreq);
-    ptzr->set_audio_channels(t->a_channels);
+    packetizer->set_audio_sampling_freq(t->a_sfreq);
+    packetizer->set_audio_channels(t->a_channels);
     if (0 != t->a_bps)
-      ptzr->set_audio_bit_depth(t->a_bps);
+      packetizer->set_audio_bit_depth(t->a_bps);
     if (0.0 != t->a_osfreq)
-      ptzr->set_audio_output_sampling_freq(t->a_osfreq);
+      packetizer->set_audio_output_sampling_freq(t->a_osfreq);
 
   } else {
     // Nothing to do for subs, I guess.
@@ -1687,42 +1685,42 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
   if (m_appending)
     return;
 
-  if (!PTZR(t->ptzr)->m_ti.m_default_track.has_value()) {
+  if (!ptzr(t->ptzr).m_ti.m_default_track.has_value()) {
     if (t->default_track)
-      PTZR(t->ptzr)->set_as_default_track(t->type == 'v' ? DEFTRACK_TYPE_VIDEO : t->type == 'a' ? DEFTRACK_TYPE_AUDIO : DEFTRACK_TYPE_SUBS, DEFAULT_TRACK_PRIORITY_FROM_SOURCE);
+      ptzr(t->ptzr).set_as_default_track(t->type == 'v' ? DEFTRACK_TYPE_VIDEO : t->type == 'a' ? DEFTRACK_TYPE_AUDIO : DEFTRACK_TYPE_SUBS, DEFAULT_TRACK_PRIORITY_FROM_SOURCE);
     else
-      PTZR(t->ptzr)->m_ti.m_default_track = false;
+      ptzr(t->ptzr).m_ti.m_default_track = false;
   }
 
-  if (t->forced_track && !PTZR(t->ptzr)->m_ti.m_forced_track.has_value())
-    PTZR(t->ptzr)->set_track_forced_flag(true);
+  if (t->forced_track && !ptzr(t->ptzr).m_ti.m_forced_track.has_value())
+    ptzr(t->ptzr).set_track_forced_flag(true);
 
-  if (t->hearing_impaired_flag.has_value() && !PTZR(t->ptzr)->m_ti.m_hearing_impaired_flag.has_value())
-    PTZR(t->ptzr)->set_hearing_impaired_flag(*t->hearing_impaired_flag);
+  if (t->hearing_impaired_flag.has_value() && !ptzr(t->ptzr).m_ti.m_hearing_impaired_flag.has_value())
+    ptzr(t->ptzr).set_hearing_impaired_flag(*t->hearing_impaired_flag);
 
-  if (t->visual_impaired_flag.has_value() && !PTZR(t->ptzr)->m_ti.m_visual_impaired_flag.has_value())
-    PTZR(t->ptzr)->set_visual_impaired_flag(*t->visual_impaired_flag);
+  if (t->visual_impaired_flag.has_value() && !ptzr(t->ptzr).m_ti.m_visual_impaired_flag.has_value())
+    ptzr(t->ptzr).set_visual_impaired_flag(*t->visual_impaired_flag);
 
-  if (t->text_descriptions_flag.has_value() && !PTZR(t->ptzr)->m_ti.m_text_descriptions_flag.has_value())
-    PTZR(t->ptzr)->set_text_descriptions_flag(*t->text_descriptions_flag);
+  if (t->text_descriptions_flag.has_value() && !ptzr(t->ptzr).m_ti.m_text_descriptions_flag.has_value())
+    ptzr(t->ptzr).set_text_descriptions_flag(*t->text_descriptions_flag);
 
-  if (t->original_flag.has_value() && !PTZR(t->ptzr)->m_ti.m_original_flag.has_value())
-    PTZR(t->ptzr)->set_original_flag(*t->original_flag);
+  if (t->original_flag.has_value() && !ptzr(t->ptzr).m_ti.m_original_flag.has_value())
+    ptzr(t->ptzr).set_original_flag(*t->original_flag);
 
-  if (t->commentary_flag.has_value() && !PTZR(t->ptzr)->m_ti.m_commentary_flag.has_value())
-    PTZR(t->ptzr)->set_commentary_flag(*t->commentary_flag);
+  if (t->commentary_flag.has_value() && !ptzr(t->ptzr).m_ti.m_commentary_flag.has_value())
+    ptzr(t->ptzr).set_commentary_flag(*t->commentary_flag);
 
-  if (!PTZR(t->ptzr)->m_ti.m_enabled_track.has_value())
-    PTZR(t->ptzr)->set_track_enabled_flag(static_cast<bool>(t->enabled_track));
+  if (!ptzr(t->ptzr).m_ti.m_enabled_track.has_value())
+    ptzr(t->ptzr).set_track_enabled_flag(static_cast<bool>(t->enabled_track));
 
-  if ((0 != t->track_uid) && !PTZR(t->ptzr)->set_uid(t->track_uid))
+  if ((0 != t->track_uid) && !ptzr(t->ptzr).set_uid(t->track_uid))
     mxwarn_fn(m_ti.m_fname, fmt::format(Y("Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"), t->track_uid));
 
-  PTZR(t->ptzr)->set_codec_name(t->codec_name);
-  PTZR(t->ptzr)->set_source_id(t->source_id);
+  ptzr(t->ptzr).set_codec_name(t->codec_name);
+  ptzr(t->ptzr).set_source_id(t->source_id);
 
   if ((t->type == 'a') && (0 != t->a_bps))
-    PTZR(t->ptzr)->set_audio_bit_depth(t->a_bps);
+    ptzr(t->ptzr).set_audio_bit_depth(t->a_bps);
 
   t->handle_packetizer_block_addition_mapping();
 }
@@ -1736,7 +1734,7 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
   else if (t->codec.is(codec_c::type_e::V_MPEG12)) {
     int version = t->codec_id[6] - '0';
     set_track_packetizer(t, new mpeg1_2_video_packetizer_c(this, nti, version, t->v_frate, t->v_width, t->v_height, t->v_dwidth, t->v_dheight, true));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else if (t->codec.is(codec_c::type_e::V_MPEGH_P2))
     create_hevc_video_packetizer(t, nti);
@@ -1744,18 +1742,18 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
   else if (t->codec.is(codec_c::type_e::V_MPEG4_P2)) {
     bool is_native = (t->codec_id == MKV_V_MPEG4_SP) || (t->codec_id == MKV_V_MPEG4_AP) || (t->codec_id == MKV_V_MPEG4_ASP);
     set_track_packetizer(t, new mpeg4_p2_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height, is_native));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else if (t->codec.is(codec_c::type_e::V_MPEG4_P10))
     create_avc_video_packetizer(t, nti);
 
   else if (t->codec.is(codec_c::type_e::V_THEORA)) {
     set_track_packetizer(t, new theora_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else if (t->codec.is(codec_c::type_e::V_DIRAC)) {
     set_track_packetizer(t, new dirac_video_packetizer_c(this, nti));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else if (t->codec.is(codec_c::type_e::V_AV1))
     create_av1_video_packetizer(t, nti);
@@ -1765,7 +1763,7 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
 
   else if (t->codec.is(codec_c::type_e::V_VP8) || t->codec.is(codec_c::type_e::V_VP9)) {
     set_track_packetizer(t, new vpx_video_packetizer_c(this, nti, t->codec.get_type()));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
     t->handle_packetizer_pixel_dimensions();
     t->handle_packetizer_default_duration();
 
@@ -1774,11 +1772,11 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
 
   else if (t->ms_compat) {
     set_track_packetizer(t, new video_for_windows_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else {
     set_track_packetizer(t, new generic_video_packetizer_c(this, nti, t->codec_id.c_str(), t->v_frate, t->v_width, t->v_height));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
   }
 
   t->handle_packetizer_display_dimensions();
@@ -1836,7 +1834,7 @@ kax_reader_c::create_aac_audio_packetizer(kax_track_t *t,
     audio_config.profile = detected_profile;
 
   set_track_packetizer(t, new aac_packetizer_c(this, nti, audio_config, aac_packetizer_c::headerless));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
@@ -1848,21 +1846,21 @@ kax_reader_c::create_ac3_audio_packetizer(kax_track_t *t,
                     :                                  0;
 
   set_track_packetizer(t, new ac3_packetizer_c(this, nti, t->a_sfreq, t->a_channels, bsid));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
 kax_reader_c::create_alac_audio_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   set_track_packetizer(t, new alac_packetizer_c(this, nti, t->private_data, t->a_sfreq, t->a_channels));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
 kax_reader_c::create_dts_audio_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   set_track_packetizer(t, new dts_packetizer_c(this, nti, t->dts_header));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 #if defined(HAVE_FLAC_FORMAT_H)
@@ -1874,7 +1872,7 @@ kax_reader_c::create_flac_audio_packetizer(kax_track_t *t,
   unsigned int offset = t->ms_compat ? sizeof(alWAVEFORMATEX) : 0u;
   set_track_packetizer(t, new flac_packetizer_c(this, nti, t->private_data->get_buffer() + offset, t->private_data->get_size() - offset));
 
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 #endif  // HAVE_FLAC_FORMAT_H
@@ -1890,7 +1888,7 @@ kax_reader_c::create_av1_video_packetizer(kax_track_t *t,
   }
 
   set_track_packetizer(t, new av1_video_packetizer_c(this, nti));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
   t->handle_packetizer_pixel_dimensions();
   t->handle_packetizer_default_duration();
 }
@@ -1898,12 +1896,12 @@ kax_reader_c::create_av1_video_packetizer(kax_track_t *t,
 void
 kax_reader_c::create_hevc_es_video_packetizer(kax_track_t *t,
                                               track_info_c &nti) {
-  hevc_es_video_packetizer_c *ptzr = new hevc_es_video_packetizer_c(this, nti);
-  set_track_packetizer(t, ptzr);
+  auto packetizer = new hevc_es_video_packetizer_c(this, nti);
+  set_track_packetizer(t, packetizer);
 
-  ptzr->set_video_pixel_dimensions(t->v_width, t->v_height);
+  packetizer->set_video_pixel_dimensions(t->v_width, t->v_height);
 
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
@@ -1915,21 +1913,21 @@ kax_reader_c::create_hevc_video_packetizer(kax_track_t *t,
   }
 
   set_track_packetizer(t, new hevc_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
 kax_reader_c::create_mp3_audio_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   set_track_packetizer(t, new mp3_packetizer_c(this, nti, t->a_sfreq, t->a_channels, true));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
 kax_reader_c::create_opus_audio_packetizer(kax_track_t *t,
                                            track_info_c &nti) {
   set_track_packetizer(t, new opus_packetizer_c(this, nti));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   if (!m_opus_experimental_warning_shown && (t->codec_id == std::string{MKV_A_OPUS} + "/EXPERIMENTAL")) {
     mxwarn(fmt::format(Y("'{0}': You're copying an Opus track that was written in experimental mode. "
@@ -1948,7 +1946,7 @@ kax_reader_c::create_pcm_audio_packetizer(kax_track_t *t,
             : t->codec_id == MKV_A_PCM_BE    ? pcm_packetizer_c::big_endian_integer
             :                                  pcm_packetizer_c::little_endian_integer;
   set_track_packetizer(t, new pcm_packetizer_c(this, nti, t->a_sfreq, t->a_channels, t->a_bps, type));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
@@ -1956,21 +1954,21 @@ kax_reader_c::create_truehd_audio_packetizer(kax_track_t *t,
                                              track_info_c &nti) {
   nti.m_private_data.reset();
   set_track_packetizer(t, new truehd_packetizer_c(this, nti, t->codec.is(codec_c::type_e::A_TRUEHD) ? mtx::truehd::frame_t::truehd : mtx::truehd::frame_t::mlp, t->a_sfreq, t->a_channels));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
 kax_reader_c::create_tta_audio_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   set_track_packetizer(t, new tta_packetizer_c(this, nti, t->a_channels, t->a_bps, t->a_sfreq));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
 kax_reader_c::create_vorbis_audio_packetizer(kax_track_t *t,
                                              track_info_c &nti) {
   set_track_packetizer(t, new vorbis_packetizer_c(this, nti, t->headers));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
@@ -1989,7 +1987,7 @@ kax_reader_c::create_wavpack_audio_packetizer(kax_track_t *t,
 
   set_track_packetizer(t, new wavpack_packetizer_c(this, nti, meta));
 
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
@@ -2052,7 +2050,7 @@ kax_reader_c::create_dvbsub_subtitle_packetizer(kax_track_t &t,
   }
 
   set_track_packetizer(&t, new dvbsub_packetizer_c(this, nti, t.private_data));
-  show_packetizer_info(t.tnum, t.ptzr_ptr);
+  show_packetizer_info(t.tnum, *t.ptzr_ptr);
   t.sub_type = 'p';
 }
 
@@ -2061,7 +2059,7 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
                                          track_info_c &nti) {
   if (t->codec.is(codec_c::type_e::S_VOBSUB)) {
     set_track_packetizer(t, new vobsub_packetizer_c(this, nti));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
     t->sub_type = 'v';
 
@@ -2070,7 +2068,7 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
 
   else if (t->codec.is(codec_c::type_e::S_WEBVTT)) {
     set_track_packetizer(t, new webvtt_packetizer_c(this, nti));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
     t->sub_type = 't';
 
@@ -2079,23 +2077,23 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
 
     auto recoding_requested = mtx::includes(m_ti.m_sub_charsets, t->tnum) || mtx::includes(m_ti.m_sub_charsets, t->tnum);
     set_track_packetizer(t, new textsubs_packetizer_c(this, nti, new_codec_id.c_str(), recoding_requested));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
     t->sub_type = 't';
 
   } else if (t->codec.is(codec_c::type_e::S_KATE)) {
     set_track_packetizer(t, new kate_packetizer_c(this, nti));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
     t->sub_type = 'k';
 
   } else if (t->codec.is(codec_c::type_e::S_HDMV_PGS)) {
     set_track_packetizer(t, new hdmv_pgs_packetizer_c(this, nti));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
     t->sub_type = 'p';
 
   } else if (t->codec.is(codec_c::type_e::S_HDMV_TEXTST)) {
     set_track_packetizer(t, new hdmv_textst_packetizer_c(this, nti, t->private_data));
-    show_packetizer_info(t->tnum, t->ptzr_ptr);
+    show_packetizer_info(t->tnum, *t->ptzr_ptr);
     t->sub_type = 'p';
 
   } else
@@ -2115,7 +2113,7 @@ kax_reader_c::create_button_packetizer(kax_track_t *t,
   t->sub_type = 'b';
 
   set_track_packetizer(t, new vobbtn_packetizer_c(this, nti, t->v_width, t->v_height));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
@@ -2166,7 +2164,7 @@ kax_reader_c::create_packetizer(int64_t tid) {
   }
 
   set_packetizer_headers(t);
-  m_ptzr_to_track_map[ PTZR(t->ptzr) ] = t;
+  m_ptzr_to_track_map[ &ptzr(t->ptzr) ] = t;
 }
 
 void
@@ -2192,7 +2190,7 @@ kax_reader_c::create_avc_es_video_packetizer(kax_track_t *t,
 
   ptzr->set_video_pixel_dimensions(t->v_width, t->v_height);
 
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
@@ -2204,14 +2202,14 @@ kax_reader_c::create_avc_video_packetizer(kax_track_t *t,
   }
 
   set_track_packetizer(t, new avc_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
 kax_reader_c::create_prores_video_packetizer(kax_track_t &t,
                                              track_info_c &nti) {
   set_track_packetizer(&t, new prores_video_packetizer_c{this, nti, t.v_frate, static_cast<int>(t.v_width), static_cast<int>(t.v_height)});
-  show_packetizer_info(t.tnum, t.ptzr_ptr);
+  show_packetizer_info(t.tnum, *t.ptzr_ptr);
 }
 
 void
@@ -2226,7 +2224,7 @@ kax_reader_c::create_vc1_video_packetizer(kax_track_t *t,
   }
 
   set_track_packetizer(t, new vc1_video_packetizer_c(this, nti));
-  show_packetizer_info(t->tnum, t->ptzr_ptr);
+  show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   if (t->private_data && (sizeof(alBITMAPINFOHEADER) < t->private_data->get_size()))
     t->ptzr_ptr->process(new packet_t(memory_c::borrow(t->private_data->get_buffer() + sizeof(alBITMAPINFOHEADER), t->private_data->get_size() - sizeof(alBITMAPINFOHEADER))));
@@ -2419,7 +2417,7 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
       packet->key_flag         = key_flag;
       packet->discardable_flag = discardable_flag;
 
-      static_cast<passthrough_packetizer_c *>(PTZR(block_track->ptzr))->process(packet);
+      ptzr(block_track->ptzr).process(packet);
     }
 
   } else if (-1 != block_track->ptzr) {
@@ -2433,7 +2431,7 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
       packet->key_flag         = key_flag;
       packet->discardable_flag = discardable_flag;
 
-      PTZR(block_track->ptzr)->process(packet);
+      ptzr(block_track->ptzr).process(packet);
     }
   }
 
@@ -2547,7 +2545,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
 
       process_block_group_common(block_group, packet.get(), *block_track);
 
-      static_cast<passthrough_packetizer_c *>(PTZR(block_track->ptzr))->process(packet);
+      ptzr(block_track->ptzr).process(packet);
     }
 
     return;
@@ -2570,7 +2568,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
 
     process_block_group_common(block_group, packet.get(), *block_track);
 
-    PTZR(block_track->ptzr)->process(packet);
+    ptzr(block_track->ptzr).process(packet);
   }
 
   block_track->previous_timestamp  = m_last_timestamp;
@@ -2583,7 +2581,7 @@ kax_reader_c::set_headers() {
 
   for (auto &track : m_tracks)
     if ((-1 != track->ptzr) && track->passthrough)
-      PTZR(track->ptzr)->get_track_entry()->EnableLacing(track->lacing_flag);
+      ptzr(track->ptzr).get_track_entry()->EnableLacing(track->lacing_flag);
 }
 
 void
@@ -2846,9 +2844,9 @@ kax_reader_c::add_available_track_ids() {
 
 void
 kax_reader_c::set_track_packetizer(kax_track_t *t,
-                                   generic_packetizer_c *ptzr) {
-  t->ptzr     = add_packetizer(ptzr);
-  t->ptzr_ptr = PTZR(t->ptzr);
+                                   generic_packetizer_c *packetizer) {
+  t->ptzr     = add_packetizer(packetizer);
+  t->ptzr_ptr = packetizer;
 }
 
 void

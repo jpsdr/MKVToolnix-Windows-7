@@ -1080,8 +1080,8 @@ check_split_support() {
   for (auto &ptzr_cont : g_packetizers) {
     std::string error_message;
 
-    auto &ptzr  = *ptzr_cont.packetizer;
-    auto result = ptzr.can_be_split(error_message);
+    auto &packetizer = *ptzr_cont.packetizer;
+    auto result      = packetizer.can_be_split(error_message);
 
     if (CAN_SPLIT_YES == result)
       continue;
@@ -1089,7 +1089,7 @@ check_split_support() {
     if (error_message.empty())
       error_message = Y("Splitting tracks of this type is not supported.");
 
-    mxerror(fmt::format(Y("The track ID {0} from the file '{1}' cannot be split. {2}\n"), ptzr.m_ti.m_id, ptzr.m_ti.m_fname, error_message));
+    mxerror(fmt::format(Y("The track ID {0} from the file '{1}' cannot be split. {2}\n"), packetizer.m_ti.m_id, packetizer.m_ti.m_fname, error_message));
   }
 }
 

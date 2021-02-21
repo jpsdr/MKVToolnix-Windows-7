@@ -102,13 +102,13 @@ truehd_reader_c::create_packetizer(int64_t tid) {
 
   if (0 == tid) {
     m_truehd_ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, m_header->m_codec, m_header->m_sampling_rate, m_header->m_channels));
-    show_packetizer_info(0, PTZR(m_truehd_ptzr));
-    m_converter.set_packetizer(PTZR(m_truehd_ptzr));
+    show_packetizer_info(0, ptzr(m_truehd_ptzr));
+    m_converter.set_packetizer(&ptzr(m_truehd_ptzr));
 
   } else if ((1 == tid) && m_ac3_header.m_valid) {
     m_ac3_ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, m_ac3_header.m_sample_rate, m_ac3_header.m_channels, m_ac3_header.m_bs_id));
-    show_packetizer_info(m_ti.m_id, PTZR(m_ac3_ptzr));
-    m_converter.set_ac3_packetizer(PTZR(m_ac3_ptzr));
+    show_packetizer_info(m_ti.m_id, ptzr(m_ac3_ptzr));
+    m_converter.set_ac3_packetizer(&ptzr(m_ac3_ptzr));
 
   }
 }

@@ -152,14 +152,14 @@ mpeg_es_reader_c::read_headers() {
 void
 mpeg_es_reader_c::create_packetizer(int64_t) {
   generic_packetizer_c *m2vpacketizer;
-  if (!demuxing_requested('v', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('v', 0) || !m_reader_packetizers.empty())
     return;
 
   m2vpacketizer = new mpeg1_2_video_packetizer_c(this, m_ti, version, frame_rate, width, height, dwidth, dheight, false);
   add_packetizer(m2vpacketizer);
   m2vpacketizer->set_video_interlaced_flag(interlaced);
 
-  show_packetizer_info(0, m2vpacketizer);
+  show_packetizer_info(0, *m2vpacketizer);
 }
 
 file_status_e
@@ -174,7 +174,7 @@ mpeg_es_reader_c::read(generic_packetizer_c *,
 
   if (0 < num_read) {
     chunk->set_size(num_read);
-    PTZR0->process(new packet_t(chunk));
+    ptzr(0).process(new packet_t(chunk));
   }
 
   return bytes_to_read > num_read ? flush_packetizers() : FILE_STATUS_MOREDATA;

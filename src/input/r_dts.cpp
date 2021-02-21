@@ -106,11 +106,11 @@ dts_reader_c::decode_buffer(size_t length) {
 
 void
 dts_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('a', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('a', 0) || !m_reader_packetizers.empty())
     return;
 
   add_packetizer(new dts_packetizer_c(this, m_ti, m_dtsheader));
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 
   if (m_debug)
     m_dtsheader.print();
@@ -137,7 +137,7 @@ dts_reader_c::read(generic_packetizer_c *,
 
   int num_to_output = decode_buffer(num_read);
 
-  PTZR0->process(new packet_t(memory_c::borrow(m_buf[m_cur_buf], num_to_output)));
+  ptzr(0).process(new packet_t(memory_c::borrow(m_buf[m_cur_buf], num_to_output)));
 
   if (m_in->eof() || (num_read < bytes_to_read))
     return flush_packetizers();

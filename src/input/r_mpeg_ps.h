@@ -230,7 +230,7 @@ public:
   virtual bool probe_file() override;
 
 private:
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   virtual void new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
   virtual void new_stream_v_mpeg_1_2(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);

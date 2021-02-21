@@ -66,11 +66,11 @@ ac3_reader_c::read_headers() {
 
 void
 ac3_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('a', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('a', 0) || !m_reader_packetizers.empty())
     return;
 
   add_packetizer(new ac3_packetizer_c(this, m_ti, m_ac3header.m_sample_rate, m_ac3header.m_channels, m_ac3header.m_bs_id));
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 }
 
 file_status_e
@@ -81,7 +81,7 @@ ac3_reader_c::read(generic_packetizer_c *,
   int num_read             = m_in->read(m_chunk->get_buffer(), read_len);
 
   if (0 < num_read)
-    PTZR0->process(new packet_t(memory_c::borrow(m_chunk->get_buffer(), num_read)));
+    ptzr(0).process(new packet_t(memory_c::borrow(m_chunk->get_buffer(), num_read)));
 
   return (0 != num_read) && (0 < (remaining_bytes - num_read)) ? FILE_STATUS_MOREDATA : flush_packetizers();
 }

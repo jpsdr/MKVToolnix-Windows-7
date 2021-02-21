@@ -36,7 +36,7 @@ public:
   virtual bool probe_file() override;
 
 protected:
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   static memory_cptr read_segment(mm_io_c &in);
 };

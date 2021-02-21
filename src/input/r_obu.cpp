@@ -48,15 +48,15 @@ obu_reader_c::read_headers() {
 
 void
 obu_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('v', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('v', 0) || !m_reader_packetizers.empty())
     return;
 
-  auto ptzr = new av1_video_packetizer_c{this, m_ti};
-  ptzr->set_is_unframed();
+  auto packetizer = new av1_video_packetizer_c{this, m_ti};
+  packetizer->set_is_unframed();
 
-  add_packetizer(ptzr);
+  add_packetizer(packetizer);
 
-  show_packetizer_info(0, ptzr);
+  show_packetizer_info(0, *packetizer);
 }
 
 file_status_e
@@ -69,7 +69,7 @@ obu_reader_c::read(generic_packetizer_c *,
 
     m_in->read(m_buffer, to_read);
 
-    PTZR0->process(new packet_t{memory_c::borrow(m_buffer->get_buffer(), to_read)});
+    ptzr(0).process(new packet_t{memory_c::borrow(m_buffer->get_buffer(), to_read)});
 
     if (to_read == m_buffer->get_size())
       return FILE_STATUS_MOREDATA;

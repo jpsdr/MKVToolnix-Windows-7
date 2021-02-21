@@ -23,7 +23,7 @@ protected:
   mtx::aac::parser_c m_parser;
 
 public:
-  aac_framing_packet_converter_c(generic_packetizer_c *ptzr, mtx::aac::parser_c::multiplex_type_e multiplex_type);
+  aac_framing_packet_converter_c(generic_packetizer_c *packetizer, mtx::aac::parser_c::multiplex_type_e multiplex_type);
   virtual ~aac_framing_packet_converter_c() {};
 
   virtual bool convert(packet_cptr const &packet);

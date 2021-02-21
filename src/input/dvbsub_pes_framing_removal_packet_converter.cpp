@@ -18,8 +18,8 @@
 #include "input/dvbsub_pes_framing_removal_packet_converter.h"
 #include "merge/generic_packetizer.h"
 
-dvbsub_pes_framing_removal_packet_converter_c::dvbsub_pes_framing_removal_packet_converter_c(generic_packetizer_c *ptzr)
-  : packet_converter_c{ptzr}
+dvbsub_pes_framing_removal_packet_converter_c::dvbsub_pes_framing_removal_packet_converter_c(generic_packetizer_c *packetizer)
+  : packet_converter_c{packetizer}
 {
 }
 

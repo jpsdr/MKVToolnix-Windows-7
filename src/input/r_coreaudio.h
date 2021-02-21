@@ -68,7 +68,7 @@ public:
   virtual bool probe_file() override;
 
 protected:
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   void scan_chunks();
   coreaudio_chunk_itr find_chunk(std::string const &type, bool throw_on_error, coreaudio_chunk_itr start);

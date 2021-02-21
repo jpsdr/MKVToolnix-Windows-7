@@ -73,7 +73,7 @@ generic_packetizer_c *
 wav_ac3acm_demuxer_c::create_packetizer() {
   m_ptzr = new ac3_packetizer_c(m_reader, m_ti, m_ac3header.m_sample_rate, m_ac3header.m_channels, m_ac3header.m_bs_id);
 
-  m_reader->show_packetizer_info(0, m_ptzr);
+  m_reader->show_packetizer_info(0, *m_ptzr);
 
   return m_ptzr;
 }

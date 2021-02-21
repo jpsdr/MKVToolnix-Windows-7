@@ -366,7 +366,7 @@ void
 flv_reader_c::create_v_avc_packetizer(flv_track_cptr &track) {
   m_ti.m_private_data = track->m_private_data;
   track->m_ptzr       = add_packetizer(new avc_video_packetizer_c(this, m_ti, track->m_v_frame_rate, track->m_v_width, track->m_v_height));
-  show_packetizer_info(m_video_track_idx, PTZR(track->m_ptzr));
+  show_packetizer_info(m_video_track_idx, ptzr(track->m_ptzr));
 }
 
 void
@@ -385,7 +385,7 @@ flv_reader_c::create_v_generic_packetizer(flv_track_cptr &track) {
   m_ti.m_private_data = memory_c::clone(&bih, sizeof(bih));
 
   track->m_ptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, track->m_v_frame_rate, track->m_v_width, track->m_v_height));
-  show_packetizer_info(m_video_track_idx, PTZR(track->m_ptzr));
+  show_packetizer_info(m_video_track_idx, ptzr(track->m_ptzr));
 }
 
 void
@@ -397,13 +397,13 @@ flv_reader_c::create_a_aac_packetizer(flv_track_cptr &track) {
   audio_config.channels    = track->m_a_channels;
   track->m_ptzr            = add_packetizer(new aac_packetizer_c(this, m_ti, audio_config, aac_packetizer_c::headerless));
 
-  show_packetizer_info(m_audio_track_idx, PTZR(track->m_ptzr));
+  show_packetizer_info(m_audio_track_idx, ptzr(track->m_ptzr));
 }
 
 void
 flv_reader_c::create_a_mp3_packetizer(flv_track_cptr &track) {
   track->m_ptzr = add_packetizer(new mp3_packetizer_c(this, m_ti, track->m_a_sample_rate, track->m_a_channels, true));
-  show_packetizer_info(m_audio_track_idx, PTZR(track->m_ptzr));
+  show_packetizer_info(m_audio_track_idx, ptzr(track->m_ptzr));
 }
 
 void
@@ -805,7 +805,7 @@ flv_reader_c::read(generic_packetizer_c *,
     if (track->m_extra_data)
       packet->codec_state = track->m_extra_data;
 
-    PTZR(track->m_ptzr)->process(packet);
+    ptzr(track->m_ptzr).process(packet);
   }
 
   track->m_payload.reset();

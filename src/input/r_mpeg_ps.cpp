@@ -1212,23 +1212,23 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
   if ('a' == track->type) {
     if (track->codec.is(codec_c::type_e::A_MP3)) {
       track->ptzr = add_packetizer(new mp3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, true));
-      show_packetizer_info(id, PTZR(track->ptzr));
+      show_packetizer_info(id, ptzr(track->ptzr));
 
     } else if (track->codec.is(codec_c::type_e::A_AC3)) {
       track->ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bsid));
-      show_packetizer_info(id, PTZR(track->ptzr));
+      show_packetizer_info(id, ptzr(track->ptzr));
 
     } else if (track->codec.is(codec_c::type_e::A_DTS)) {
       track->ptzr = add_packetizer(new dts_packetizer_c(this, m_ti, track->dts_header));
-      show_packetizer_info(id, PTZR(track->ptzr));
+      show_packetizer_info(id, ptzr(track->ptzr));
 
     } else if (track->codec.is(codec_c::type_e::A_TRUEHD)) {
       track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, mtx::truehd::frame_t::truehd, track->a_sample_rate, track->a_channels));
-      show_packetizer_info(id, PTZR(track->ptzr));
+      show_packetizer_info(id, ptzr(track->ptzr));
 
     } else if (track->codec.is(codec_c::type_e::A_PCM)) {
       track->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bits_per_sample, pcm_packetizer_c::big_endian_integer));
-      show_packetizer_info(id, PTZR(track->ptzr));
+      show_packetizer_info(id, ptzr(track->ptzr));
 
     } else
       mxerror(fmt::format(Y("mpeg_ps_reader: Should not have happened #1. {0}"), BUGMSG));
@@ -1240,26 +1240,26 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
       m2vpacketizer       = new mpeg1_2_video_packetizer_c(this, m_ti, track->v_version, track->v_frame_rate, track->v_width, track->v_height,
                                                            track->v_dwidth, track->v_dheight, false);
       track->ptzr         = add_packetizer(m2vpacketizer);
-      show_packetizer_info(id, PTZR(track->ptzr));
+      show_packetizer_info(id, ptzr(track->ptzr));
       m2vpacketizer->set_video_interlaced_flag(track->v_interlaced);
 
     } else if (track->codec.is(codec_c::type_e::V_MPEG4_P10)) {
       track->ptzr = add_packetizer(new avc_es_video_packetizer_c(this, m_ti));
-      PTZR(track->ptzr)->set_video_pixel_dimensions(track->v_width, track->v_height);
-      show_packetizer_info(id, PTZR(track->ptzr));
+      ptzr(track->ptzr).set_video_pixel_dimensions(track->v_width, track->v_height);
+      show_packetizer_info(id, ptzr(track->ptzr));
 
     } else if (track->codec.is(codec_c::type_e::V_VC1)) {
       track->ptzr = add_packetizer(new vc1_video_packetizer_c(this, m_ti));
-      show_packetizer_info(id, PTZR(track->ptzr));
+      show_packetizer_info(id, ptzr(track->ptzr));
 
     } else
       mxerror(fmt::format(Y("mpeg_ps_reader: Should not have happened #2. {0}"), BUGMSG));
   }
 
   if (-1 != track->timestamp_offset)
-    PTZR(track->ptzr)->m_ti.m_tcsync.displacement += track->timestamp_offset;
+    ptzr(track->ptzr).m_ti.m_tcsync.displacement += track->timestamp_offset;
 
-  m_ptzr_to_track_map[ PTZR(track->ptzr) ] = track;
+  m_ptzr_to_track_map[ &ptzr(track->ptzr) ] = track;
 }
 
 void
@@ -1334,7 +1334,7 @@ mpeg_ps_reader_c::read(generic_packetizer_c *requested_ptzr,
             track->multiple_timestamps_packet_extension = new multiple_timestamps_packet_extension_c;
           }
 
-          PTZR(track->ptzr)->process(new_packet);
+          ptzr(track->ptzr).process(new_packet);
           track->buffer_usage = 0;
         }
 
@@ -1358,7 +1358,7 @@ mpeg_ps_reader_c::read(generic_packetizer_c *requested_ptzr,
           return finish();
         }
 
-        PTZR(track->ptzr)->process(new packet_t(buf, timestamp));
+        ptzr(track->ptzr).process(new packet_t(buf, timestamp));
       }
 
       return FILE_STATUS_MOREDATA;
@@ -1379,7 +1379,7 @@ mpeg_ps_reader_c::finish() {
 
   for (auto &track : tracks)
     if (0 < track->buffer_usage)
-      PTZR(track->ptzr)->process(new packet_t(memory_c::clone(track->buffer, track->buffer_usage)));
+      ptzr(track->ptzr).process(new packet_t(memory_c::clone(track->buffer, track->buffer_usage)));
 
   file_done = true;
 

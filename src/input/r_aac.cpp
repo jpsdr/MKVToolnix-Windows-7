@@ -93,13 +93,13 @@ aac_reader_c::read_headers() {
 
 void
 aac_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('a', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('a', 0) || !m_reader_packetizers.empty())
     return;
 
   auto aacpacketizer = new aac_packetizer_c(this, m_ti, m_aacheader.config, aac_packetizer_c::headerless);
   add_packetizer(aacpacketizer);
 
-  show_packetizer_info(0, aacpacketizer);
+  show_packetizer_info(0, *aacpacketizer);
 }
 
 file_status_e
@@ -114,7 +114,7 @@ aac_reader_c::read(generic_packetizer_c *,
 
     while (m_parser.frames_available()) {
       auto frame = m_parser.get_frame();
-      PTZR0->process(std::make_shared<packet_t>(frame.m_data));
+      ptzr(0).process(std::make_shared<packet_t>(frame.m_data));
     }
   }
 

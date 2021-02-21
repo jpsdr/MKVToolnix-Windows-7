@@ -33,10 +33,6 @@ constexpr auto DEFTRACK_TYPE_AUDIO = 0;
 constexpr auto DEFTRACK_TYPE_VIDEO = 1;
 constexpr auto DEFTRACK_TYPE_SUBS  = 2;
 
-#define PTZR(i) m_reader_packetizers[i].get()
-#define PTZR0   PTZR(0)
-#define NPTZR() m_reader_packetizers.size()
-
 class generic_reader_c {
 public:
   track_info_c m_ti;
@@ -78,8 +74,8 @@ public:
   virtual void set_probe_range_info(probe_range_info_t const &info);
   virtual void set_track_info(track_info_c const &info);
   virtual void read_headers() = 0;
-  virtual file_status_e read_next(generic_packetizer_c *ptzr, bool force = false);
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) = 0;
+  virtual file_status_e read_next(generic_packetizer_c *packetizer, bool force = false);
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) = 0;
   virtual void read_all();
   virtual int64_t get_progress();
   virtual int64_t get_maximum_progress();
@@ -91,7 +87,7 @@ public:
     create_packetizer(0);
   }
 
-  virtual int add_packetizer(generic_packetizer_c *ptzr);
+  virtual int add_packetizer(generic_packetizer_c *packetizer);
   virtual size_t get_num_packetizers() const;
   virtual generic_packetizer_c *find_packetizer_by_id(int64_t id) const;
   virtual void set_timestamp_offset(int64_t offset);
@@ -114,7 +110,7 @@ public:
   }
 
   virtual file_status_e flush_packetizer(int num);
-  virtual file_status_e flush_packetizer(generic_packetizer_c *ptzr);
+  virtual file_status_e flush_packetizer(generic_packetizer_c *packetizer);
   virtual file_status_e flush_packetizers();
 
   virtual attach_mode_e attachment_requested(int64_t id);
@@ -124,7 +120,7 @@ public:
   virtual int64_t calculate_probe_range(int64_t file_size, int64_t fixed_minimum) const;
   virtual bool probe_file() = 0;
 
-  virtual void show_packetizer_info(int64_t track_id, generic_packetizer_c *packetizer);
+  virtual void show_packetizer_info(int64_t track_id, generic_packetizer_c const &packetizer);
 
 public:
   static void set_probe_range_percentage(int64_rational_c const &probe_range_percentage);
@@ -147,4 +143,6 @@ protected:
   virtual void display_identification_results_as_text();
 
   virtual void add_track_tags_to_identification(libmatroska::KaxTags const &tags, mtx::id::info_c &info);
+
+  virtual generic_packetizer_c &ptzr(int64_t track_idx);
 };

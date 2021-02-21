@@ -56,7 +56,7 @@ vobbtn_reader_c::create_packetizer(int64_t tid) {
     return;
 
   add_packetizer(new vobbtn_packetizer_c(this, m_ti, width, height));
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 }
 
 file_status_e
@@ -74,7 +74,7 @@ vobbtn_reader_c::read(generic_packetizer_c *,
   if (0 >= nread)
     return flush_packetizers();
 
-  PTZR0->process(new packet_t(memory_c::borrow(chunk, nread)));
+  ptzr(0).process(new packet_t(memory_c::borrow(chunk, nread)));
   return FILE_STATUS_MOREDATA;
 }
 

@@ -46,7 +46,7 @@ webvtt_reader_c::parse_file() {
 
 void
 webvtt_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('s', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('s', 0) || !m_reader_packetizers.empty())
     return;
 
   parse_file();
@@ -55,7 +55,7 @@ webvtt_reader_c::create_packetizer(int64_t) {
 
   add_packetizer(new webvtt_packetizer_c(this, m_ti));
 
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 }
 
 file_status_e
@@ -74,7 +74,7 @@ webvtt_reader_c::read(generic_packetizer_c *,
 
   m_bytes_processed += cue->m_content->get_size();
 
-  PTZR0->process(packet);
+  ptzr(0).process(packet);
 
   return FILE_STATUS_MOREDATA;
 }

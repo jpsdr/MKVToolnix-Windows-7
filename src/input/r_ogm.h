@@ -111,7 +111,7 @@ public:
 
 private:
   virtual ogm_demuxer_cptr find_demuxer(int serialno);
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
   virtual int read_page(ogg_page *);
   virtual void handle_new_stream(ogg_page *);
   virtual void handle_new_stream_and_packets(ogg_page *);

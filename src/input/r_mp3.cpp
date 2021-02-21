@@ -68,11 +68,11 @@ mp3_reader_c::read_headers() {
 
 void
 mp3_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('a', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('a', 0) || !m_reader_packetizers.empty())
     return;
 
   add_packetizer(new mp3_packetizer_c(this, m_ti, m_mp3header.sampling_frequency, m_mp3header.channels, false));
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 }
 
 file_status_e
@@ -82,7 +82,7 @@ mp3_reader_c::read(generic_packetizer_c *,
   if (0 >= nread)
     return flush_packetizers();
 
-  PTZR0->process(new packet_t(memory_c::borrow(m_chunk->get_buffer(), nread)));
+  ptzr(0).process(new packet_t(memory_c::borrow(m_chunk->get_buffer(), nread)));
 
   return FILE_STATUS_MOREDATA;
 }

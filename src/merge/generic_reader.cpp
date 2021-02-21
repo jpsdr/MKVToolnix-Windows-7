@@ -61,10 +61,10 @@ generic_reader_c::read_all() {
 }
 
 file_status_e
-generic_reader_c::read_next(generic_packetizer_c *ptzr,
+generic_reader_c::read_next(generic_packetizer_c *packetizer,
                             bool force) {
   auto prior_progrss = get_progress();
-  auto result        = read(ptzr, force);
+  auto result        = read(packetizer, force);
   auto new_progress  = get_progress();
 
   add_to_progress(new_progress - prior_progrss);
@@ -108,14 +108,14 @@ generic_reader_c::attachment_requested(int64_t id) {
 }
 
 int
-generic_reader_c::add_packetizer(generic_packetizer_c *ptzr) {
-  if (outputting_webm() && !ptzr->is_compatible_with(OC_WEBM))
-    mxerror(fmt::format(Y("The codec type '{0}' cannot be used in a WebM compliant file.\n"), ptzr->get_format_name()));
+generic_reader_c::add_packetizer(generic_packetizer_c *packetizer) {
+  if (outputting_webm() && !packetizer->is_compatible_with(OC_WEBM))
+    mxerror(fmt::format(Y("The codec type '{0}' cannot be used in a WebM compliant file.\n"), packetizer->get_format_name()));
 
-  m_reader_packetizers.emplace_back(ptzr);
-  m_used_track_ids.push_back(ptzr->m_ti.m_id);
+  m_reader_packetizers.emplace_back(packetizer);
+  m_used_track_ids.push_back(packetizer->m_ti.m_id);
   if (!m_appending)
-    add_packetizer_globally(ptzr);
+    add_packetizer_globally(packetizer);
 
   return m_reader_packetizers.size() - 1;
 }
@@ -209,12 +209,12 @@ generic_reader_c::get_queued_bytes()
 
 file_status_e
 generic_reader_c::flush_packetizer(int num) {
-  return flush_packetizer(PTZR(num));
+  return flush_packetizer(&ptzr(num));
 }
 
 file_status_e
-generic_reader_c::flush_packetizer(generic_packetizer_c *ptzr) {
-  ptzr->flush();
+generic_reader_c::flush_packetizer(generic_packetizer_c *packetizer) {
+  packetizer->flush();
 
   return FILE_STATUS_DONE;
 }
@@ -515,6 +515,11 @@ generic_reader_c::show_demuxer_info() {
 
 void
 generic_reader_c::show_packetizer_info(int64_t track_id,
-                                       generic_packetizer_c *packetizer) {
-  mxinfo_tid(m_ti.m_fname, track_id, fmt::format(Y("Using the output module for the format '{0}'.\n"), packetizer->get_format_name()));
+                                       generic_packetizer_c const &packetizer) {
+  mxinfo_tid(m_ti.m_fname, track_id, fmt::format(Y("Using the output module for the format '{0}'.\n"), packetizer.get_format_name()));
+}
+
+generic_packetizer_c &
+generic_reader_c::ptzr(int64_t track_idx) {
+  return *m_reader_packetizers[track_idx];
 }

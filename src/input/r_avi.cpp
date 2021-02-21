@@ -236,7 +236,7 @@ avi_reader_c::create_video_packetizer() {
     create_standard_video_packetizer();
 
   if (m_video_display_width)
-    PTZR(m_vptzr)->set_video_display_dimensions(m_video_display_width, m_video_display_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_CONTAINER);
+    ptzr(m_vptzr).set_video_display_dimensions(m_video_display_width, m_video_display_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_CONTAINER);
 }
 
 void
@@ -320,14 +320,14 @@ avi_reader_c::create_mpeg1_2_packetizer() {
   m_vptzr                = add_packetizer(new mpeg1_2_video_packetizer_c(this, m_ti, m2v_parser->GetMPEGVersion(), seq_hdr.frameRate,
                                                                          seq_hdr.width, seq_hdr.height, display_width, seq_hdr.height, false));
 
-  show_packetizer_info(0, PTZR(m_vptzr));
+  show_packetizer_info(0, ptzr(m_vptzr));
 }
 
 void
 avi_reader_c::create_mpeg4_p2_packetizer() {
   m_vptzr = add_packetizer(new mpeg4_p2_video_packetizer_c(this, m_ti, m_fps, m_video_width, m_video_height, false));
 
-  show_packetizer_info(0, PTZR(m_vptzr));
+  show_packetizer_info(0, ptzr(m_vptzr));
 }
 
 void
@@ -349,7 +349,7 @@ avi_reader_c::create_mpeg4_p10_packetizer() {
 
     set_avc_nal_size_size(ptzr);
 
-    show_packetizer_info(0, ptzr);
+    show_packetizer_info(0, *ptzr);
 
   } catch (...) {
     mxerror_tid(m_ti.m_fname, 0, Y("Could not extract the decoder specific config data (AVCC) from this AVC/H.264 track.\n"));
@@ -361,18 +361,18 @@ avi_reader_c::create_vp8_packetizer() {
   m_ti.m_private_data.reset();
   m_vptzr = add_packetizer(new vpx_video_packetizer_c(this, m_ti, codec_c::type_e::V_VP8));
 
-  PTZR(m_vptzr)->set_track_default_duration(1000000000ll / m_fps);
-  PTZR(m_vptzr)->set_video_pixel_width(m_video_width);
-  PTZR(m_vptzr)->set_video_pixel_height(m_video_height);
+  ptzr(m_vptzr).set_track_default_duration(1000000000ll / m_fps);
+  ptzr(m_vptzr).set_video_pixel_width(m_video_width);
+  ptzr(m_vptzr).set_video_pixel_height(m_video_height);
 
-  show_packetizer_info(0, PTZR(m_vptzr));
+  show_packetizer_info(0, ptzr(m_vptzr));
 }
 
 void
 avi_reader_c::create_standard_video_packetizer() {
   m_vptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, m_fps, m_video_width, m_video_height));
 
-  show_packetizer_info(0, PTZR(m_vptzr));
+  show_packetizer_info(0, ptzr(m_vptzr));
 }
 
 void
@@ -419,7 +419,7 @@ avi_reader_c::create_srt_packetizer(int idx) {
   auto need_recoding = demuxer.m_text_io->get_byte_order_mark() == byte_order_mark_e::none;
   demuxer.m_ptzr     = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, need_recoding));
 
-  show_packetizer_info(id, PTZR(demuxer.m_ptzr));
+  show_packetizer_info(id, ptzr(demuxer.m_ptzr));
 }
 
 void
@@ -442,7 +442,7 @@ avi_reader_c::create_ssa_packetizer(int idx) {
   m_ti.m_private_data = memory_c::clone(parser->get_global());
   demuxer.m_ptzr      = add_packetizer(new textsubs_packetizer_c(this, m_ti, parser->is_ass() ?  MKV_S_TEXTASS : MKV_S_TEXTSSA));
 
-  show_packetizer_info(id, PTZR(demuxer.m_ptzr));
+  show_packetizer_info(id, ptzr(demuxer.m_ptzr));
 }
 
 void
@@ -511,7 +511,7 @@ avi_reader_c::add_audio_demuxer(int aid) {
 
   packetizer->enable_avi_audio_sync(true);
 
-  show_packetizer_info(aid + 1, packetizer);
+  show_packetizer_info(aid + 1, *packetizer);
 
   demuxer.m_ptzr = add_packetizer(packetizer);
 
@@ -663,8 +663,8 @@ avi_reader_c::create_vorbis_packetizer(int aid) {
 }
 
 void
-avi_reader_c::set_avc_nal_size_size(avc_es_video_packetizer_c *ptzr) {
-  m_avc_nal_size_size = ptzr->get_nalu_size_length();
+avi_reader_c::set_avc_nal_size_size(avc_es_video_packetizer_c *packetizer) {
+  m_avc_nal_size_size = packetizer->get_nalu_size_length();
 
   for (int i = 0; i < static_cast<int>(m_max_video_frames); ++i) {
     int size = AVI_frame_size(m_avi, i);
@@ -741,7 +741,7 @@ avi_reader_c::read_video() {
   // AVC with framed packets (without NALU start codes but with length fields)
   // or non-AVC video track?
   if (0 >= m_avc_nal_size_size)
-    PTZR(m_vptzr)->process(new packet_t(chunk, timestamp, duration, key ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
+    ptzr(m_vptzr).process(new packet_t(chunk, timestamp, duration, key ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
 
   else {
     // AVC video track without NALU start codes. Re-frame with NALU start codes.
@@ -759,7 +759,7 @@ avi_reader_c::read_video() {
       memcpy(nalu->get_buffer() + 4, chunk->get_buffer() + offset, nalu_size);
       offset += nalu_size;
 
-      PTZR(m_vptzr)->process(new packet_t(nalu, timestamp, duration, key ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
+      ptzr(m_vptzr).process(new packet_t(nalu, timestamp, duration, key ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
     }
   }
 
@@ -796,7 +796,7 @@ avi_reader_c::read_audio(avi_demuxer_t &demuxer) {
     if (!size)
       continue;
 
-    PTZR(demuxer.m_ptzr)->process(new packet_t(chunk));
+    ptzr(demuxer.m_ptzr).process(new packet_t(chunk));
 
     m_bytes_processed += size;
 
@@ -807,23 +807,23 @@ avi_reader_c::read_audio(avi_demuxer_t &demuxer) {
 file_status_e
 avi_reader_c::read_subtitles(avi_subs_demuxer_t &demuxer) {
   if (!demuxer.m_subs->empty())
-    demuxer.m_subs->process(PTZR(demuxer.m_ptzr));
+    demuxer.m_subs->process(&ptzr(demuxer.m_ptzr));
 
   return demuxer.m_subs->empty() ? flush_packetizer(demuxer.m_ptzr) : FILE_STATUS_MOREDATA;
 }
 
 file_status_e
-avi_reader_c::read(generic_packetizer_c *ptzr,
+avi_reader_c::read(generic_packetizer_c *packetizer,
                    bool) {
-  if ((-1 != m_vptzr) && (PTZR(m_vptzr) == ptzr))
+  if ((-1 != m_vptzr) && (&ptzr(m_vptzr) == packetizer))
     return read_video();
 
   for (auto &demuxer : m_audio_demuxers)
-    if ((-1 != demuxer.m_ptzr) && (PTZR(demuxer.m_ptzr) == ptzr))
+    if ((-1 != demuxer.m_ptzr) && (&ptzr(demuxer.m_ptzr) == packetizer))
       return read_audio(demuxer);
 
   for (auto &subs_demuxer : m_subtitle_demuxers)
-    if ((-1 != subs_demuxer.m_ptzr) && (PTZR(subs_demuxer.m_ptzr) == ptzr))
+    if ((-1 != subs_demuxer.m_ptzr) && (&ptzr(subs_demuxer.m_ptzr) == packetizer))
       return read_subtitles(subs_demuxer);
 
   return flush_packetizers();

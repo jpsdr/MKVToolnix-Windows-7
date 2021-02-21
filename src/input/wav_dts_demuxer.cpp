@@ -53,7 +53,7 @@ wav_dts_demuxer_c::create_packetizer() {
   // .wav with DTS are always filled up with other stuff to match the bitrate.
   static_cast<dts_packetizer_c *>(m_ptzr)->set_skipping_is_normal(true);
 
-  m_reader->show_packetizer_info(0, m_ptzr);
+  m_reader->show_packetizer_info(0, *m_ptzr);
 
   return m_ptzr;
 }

@@ -40,7 +40,7 @@ public:
   virtual bool probe_file() override;
 
 protected:
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   static bool read_frame(M2VParser &parser, mm_io_c &in, int64_t max_size = -1);
 };

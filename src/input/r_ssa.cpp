@@ -49,12 +49,12 @@ ssa_reader_c::read_headers() {
 
 void
 ssa_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('s', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('s', 0) || !m_reader_packetizers.empty())
     return;
 
   m_ti.m_private_data = memory_c::clone(m_subs->get_global());
   add_packetizer(new textsubs_packetizer_c(this, m_ti, m_subs->is_ass() ?  MKV_S_TEXTASS : MKV_S_TEXTSSA));
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 }
 
 file_status_e
@@ -62,7 +62,7 @@ ssa_reader_c::read(generic_packetizer_c *,
                    bool) {
   if (!m_subs->empty()) {
     m_bytes_processed += m_subs->get_next_byte_size();
-    m_subs->process((textsubs_packetizer_c *)PTZR0);
+    m_subs->process(static_cast<textsubs_packetizer_c *>(&ptzr(0)));
   }
 
   return m_subs->empty() ? flush_packetizers() : FILE_STATUS_MOREDATA;

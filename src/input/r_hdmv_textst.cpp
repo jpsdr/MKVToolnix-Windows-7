@@ -71,12 +71,12 @@ hdmv_textst_reader_c::read_headers() {
 
 void
 hdmv_textst_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('s', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('s', 0) || !m_reader_packetizers.empty())
     return;
 
   add_packetizer(new hdmv_textst_packetizer_c(this, m_ti, m_dialog_style_segment));
 
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 }
 
 file_status_e
@@ -92,7 +92,7 @@ hdmv_textst_reader_c::read(generic_packetizer_c *,
     auto end    = mtx::hdmv_textst::get_timestamp(&buf[8]);
     auto packet = std::make_shared<packet_t>(segment, std::min(start, end).to_ns(), (start - end).abs().to_ns());
 
-    PTZR0->process(packet);
+    ptzr(0).process(packet);
 
   } catch (...) {
     return flush_packetizers();

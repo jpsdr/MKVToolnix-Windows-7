@@ -481,7 +481,7 @@ public:
   static int detect_packet_size(mm_io_c &in, uint64_t size);
 
 private:
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   void read_headers_for_file(std::size_t file_num);
 

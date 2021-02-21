@@ -73,7 +73,7 @@ public:
   static chunks_t scan_chunks(mm_io_c &in);
 
 protected:
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   virtual int decode_buffer(size_t length);
 };

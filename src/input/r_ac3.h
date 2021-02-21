@@ -41,7 +41,7 @@ public:
   virtual bool probe_file() override;
 
 protected:
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   static int find_valid_headers(mm_io_c &in, int64_t probe_range, int num_headers);
 };

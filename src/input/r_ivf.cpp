@@ -58,7 +58,7 @@ ivf_reader_c::add_available_track_ids() {
 
 void
 ivf_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('v', 0) || (NPTZR() != 0) || !m_ok)
+  if (!demuxing_requested('v', 0) || !m_reader_packetizers.empty() || !m_ok)
     return;
 
   if (m_codec.is(codec_c::type_e::V_AV1))
@@ -67,14 +67,14 @@ ivf_reader_c::create_packetizer(int64_t) {
   else if (m_codec.is(codec_c::type_e::V_VP8) || m_codec.is(codec_c::type_e::V_VP9))
     create_vpx_packetizer();
 
-  auto packetizer = PTZR0;
+  auto &packetizer = ptzr(0);
 
-  packetizer->set_video_pixel_width(m_width);
-  packetizer->set_video_pixel_height(m_height);
+  packetizer.set_video_pixel_width(m_width);
+  packetizer.set_video_pixel_height(m_height);
 
   auto default_duration = 1000000000ll * m_frame_rate_den / m_frame_rate_num;
   if (default_duration >= 1000000)
-    packetizer->set_track_default_duration(default_duration);
+    packetizer.set_track_default_duration(default_duration);
 
   show_packetizer_info(0, packetizer);
 }
@@ -119,7 +119,7 @@ ivf_reader_c::read(generic_packetizer_c *,
 
   mxdebug_if(m_debug, fmt::format("key {4} header.ts {0} num {1} den {2} res {3}\n", get_uint64_le(&header.timestamp), m_frame_rate_num, m_frame_rate_den, timestamp, ivf::is_keyframe(buffer, m_codec.get_type())));
 
-  PTZR0->process(new packet_t(buffer, timestamp));
+  ptzr(0).process(new packet_t(buffer, timestamp));
 
   return FILE_STATUS_MOREDATA;
 }

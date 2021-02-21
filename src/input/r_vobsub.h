@@ -84,11 +84,11 @@ public:
   virtual bool probe_file() override;
 
 protected:
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   virtual void parse_headers();
   virtual file_status_e flush_packetizers();
-  virtual int deliver_packet(unsigned char *buf, int size, int64_t timestamp, int64_t default_duration, generic_packetizer_c *ptzr);
+  virtual int deliver_packet(unsigned char *buf, int size, int64_t timestamp, int64_t default_duration, generic_packetizer_c *packetizer);
 
   virtual int extract_one_spu_packet(int64_t track_id);
 };

@@ -2297,14 +2297,14 @@ reader_c::create_packetizer(int64_t id) {
     create_dvbsub_subtitles_packetizer(track);
 
   if (-1 != track->ptzr) {
-    auto ptzr                 = PTZR(track->ptzr);
-    m_ptzr_to_track_map[ptzr] = track;
+    auto &packetizer                 = ptzr(track->ptzr);
+    m_ptzr_to_track_map[&packetizer] = track;
 
-    m_files[track->m_file_num]->m_packetizers.push_back(ptzr);
+    m_files[track->m_file_num]->m_packetizers.push_back(&packetizer);
 
     track->set_packetizer_source_id();
 
-    show_packetizer_info(id, ptzr);
+    show_packetizer_info(id, packetizer);
   }
 }
 
@@ -2312,7 +2312,7 @@ void
 reader_c::create_aac_audio_packetizer(track_ptr const &track) {
   auto aac_packetizer = new aac_packetizer_c(this, m_ti, track->m_aac_frame.m_header.config, aac_packetizer_c::headerless);
   track->ptzr         = add_packetizer(aac_packetizer);
-  track->converter    = std::make_shared<aac_framing_packet_converter_c>(PTZR(track->ptzr), track->m_aac_multiplex_type);
+  track->converter    = std::make_shared<aac_framing_packet_converter_c>(&ptzr(track->ptzr), track->m_aac_multiplex_type);
 
   if (mtx::aac::PROFILE_SBR == track->m_aac_frame.m_header.config.profile)
     aac_packetizer->set_audio_output_sampling_freq(track->m_aac_frame.m_header.config.sample_rate * 2);
@@ -2323,7 +2323,7 @@ reader_c::create_ac3_audio_packetizer(track_ptr const &track) {
   track->ptzr = add_packetizer(new ac3_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bsid));
 
   if (track->converter)
-    dynamic_cast<truehd_ac3_splitting_packet_converter_c &>(*track->converter).set_ac3_packetizer(PTZR(track->ptzr));
+    dynamic_cast<truehd_ac3_splitting_packet_converter_c &>(*track->converter).set_ac3_packetizer(&ptzr(track->ptzr));
 }
 
 void
@@ -2331,7 +2331,7 @@ reader_c::create_pcm_audio_packetizer(track_ptr const &track) {
   track->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bits_per_sample, pcm_packetizer_c::big_endian_integer));
 
   if (track->converter)
-    track->converter->set_packetizer(PTZR(track->ptzr));
+    track->converter->set_packetizer(&ptzr(track->ptzr));
 }
 
 void
@@ -2339,7 +2339,7 @@ reader_c::create_truehd_audio_packetizer(track_ptr const &track) {
   track->ptzr = add_packetizer(new truehd_packetizer_c(this, m_ti, mtx::truehd::frame_t::truehd, track->a_sample_rate, track->a_channels));
 
   if (track->converter)
-    dynamic_cast<truehd_ac3_splitting_packet_converter_c &>(*track->converter).set_packetizer(PTZR(track->ptzr));
+    dynamic_cast<truehd_ac3_splitting_packet_converter_c &>(*track->converter).set_packetizer(&ptzr(track->ptzr));
 }
 
 void
@@ -2390,14 +2390,14 @@ reader_c::create_srt_subtitles_packetizer(track_ptr const &track) {
 
   auto &converter         = dynamic_cast<teletext_to_srt_packet_converter_c &>(*track->converter);
 
-  converter.demux_page(*track->m_ttx_wanted_page, PTZR(track->ptzr));
+  converter.demux_page(*track->m_ttx_wanted_page, &ptzr(track->ptzr));
   converter.override_encoding(*track->m_ttx_wanted_page, track->language.get_iso639_alpha_3_code());
 }
 
 void
 reader_c::create_dvbsub_subtitles_packetizer(track_ptr const &track) {
   track->ptzr = add_packetizer(new dvbsub_packetizer_c{this, m_ti, track->m_codec_private_data});
-  track->converter.reset(new dvbsub_pes_framing_removal_packet_converter_c{PTZR(track->ptzr)});
+  track->converter.reset(new dvbsub_pes_framing_removal_packet_converter_c{&ptzr(track->ptzr)});
 }
 
 void
@@ -2445,7 +2445,7 @@ reader_c::finish() {
       track->converter->flush();
 
     if (-1 != track->ptzr)
-      PTZR(track->ptzr)->flush();
+      ptzr(track->ptzr).flush();
   }
 
   file().m_file_done = true;

@@ -42,12 +42,12 @@ srt_reader_c::read_headers() {
 
 void
 srt_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('s', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('s', 0) || !m_reader_packetizers.empty())
     return;
 
   add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, m_need_recoding));
 
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 }
 
 file_status_e
@@ -55,7 +55,7 @@ srt_reader_c::read(generic_packetizer_c *,
                    bool) {
   if (!m_subs->empty()) {
     m_bytes_processed += m_subs->get_next_byte_size();
-    m_subs->process(PTZR0);
+    m_subs->process(&ptzr(0));
   }
 
   return m_subs->empty() ? flush_packetizers() : FILE_STATUS_MOREDATA;

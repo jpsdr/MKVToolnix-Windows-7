@@ -76,14 +76,14 @@ wavpack_reader_c::read_headers() {
 
 void
 wavpack_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('a', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('a', 0) || !m_reader_packetizers.empty())
     return;
 
   m_ti.m_private_data = memory_c::alloc(sizeof(uint16_t));
   put_uint16_le(m_ti.m_private_data->get_buffer(), header.version);
   add_packetizer(new wavpack_packetizer_c(this, m_ti, meta));
 
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 }
 
 file_status_e
@@ -151,7 +151,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
 
   // find the if there is a correction file data corresponding
   if (!m_in_correc) {
-    PTZR0->process(packet);
+    ptzr(0).process(packet);
     return FILE_STATUS_MOREDATA;
   }
 
@@ -180,7 +180,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
   } while (dummy_header_correc.block_samples < dummy_header.block_samples);
 
   if (dummy_header_correc.block_samples != dummy_header.block_samples) {
-    PTZR0->process(packet);
+    ptzr(0).process(packet);
     return FILE_STATUS_MOREDATA;
   }
 
@@ -218,7 +218,7 @@ wavpack_reader_c::read(generic_packetizer_c *,
   mem->resize(data_size);
   packet->data_adds.push_back(mem);
 
-  PTZR0->process(packet);
+  ptzr(0).process(packet);
 
   return FILE_STATUS_MOREDATA;
 }

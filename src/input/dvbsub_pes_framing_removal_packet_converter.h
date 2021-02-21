@@ -22,7 +22,7 @@ protected:
   packet_cptr m_packet;
 
 public:
-  dvbsub_pes_framing_removal_packet_converter_c(generic_packetizer_c *ptzr);
+  dvbsub_pes_framing_removal_packet_converter_c(generic_packetizer_c *packetizer);
   virtual ~dvbsub_pes_framing_removal_packet_converter_c();
 
   virtual void flush() override;

@@ -90,11 +90,11 @@ tta_reader_c::read_headers() {
 
 void
 tta_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('a', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('a', 0) || !m_reader_packetizers.empty())
     return;
 
   add_packetizer(new tta_packetizer_c(this, m_ti, get_uint16_le(&header.channels), get_uint16_le(&header.bits_per_sample), get_uint32_le(&header.sample_rate)));
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 }
 
 file_status_e
@@ -114,9 +114,9 @@ tta_reader_c::read(generic_packetizer_c *,
     double samples_left = (double)get_uint32_le(&header.data_length) - (seek_points.size() - 1) * mtx::tta::FRAME_TIME * get_uint32_le(&header.sample_rate);
     mxdebug_if(s_debug, fmt::format("tta: samples_left {0}\n", samples_left));
 
-    PTZR0->process(new packet_t(mem, -1, std::llround(samples_left * 1000000000.0 / get_uint32_le(&header.sample_rate))));
+    ptzr(0).process(new packet_t(mem, -1, std::llround(samples_left * 1000000000.0 / get_uint32_le(&header.sample_rate))));
   } else
-    PTZR0->process(new packet_t(mem));
+    ptzr(0).process(new packet_t(mem));
 
   return seek_points.size() <= pos ? flush_packetizers() : FILE_STATUS_MOREDATA;
 }

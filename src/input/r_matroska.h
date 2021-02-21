@@ -254,10 +254,10 @@ public:
   virtual bool probe_file() override;
 
 protected:
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
   virtual file_status_e finish_file();
 
-  virtual void set_track_packetizer(kax_track_t *t, generic_packetizer_c *ptzr);
+  virtual void set_track_packetizer(kax_track_t *t, generic_packetizer_c *packetizer);
   virtual void init_passthrough_packetizer(kax_track_t *t, track_info_c &nti);
   virtual void set_packetizer_headers(kax_track_t *t);
   virtual void read_first_frames(kax_track_t *t, unsigned num_wanted = 1);

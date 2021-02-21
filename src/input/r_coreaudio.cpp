@@ -112,7 +112,7 @@ coreaudio_reader_c::dump_headers()
 
 void
 coreaudio_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('a', 0) || (NPTZR() != 0) || ! m_supported)
+  if (!demuxing_requested('a', 0) || !m_reader_packetizers.empty() || ! m_supported)
     return;
 
   if (m_codec.is(codec_c::type_e::A_ALAC))
@@ -120,7 +120,7 @@ coreaudio_reader_c::create_packetizer(int64_t) {
   else
     assert(false);
 
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 }
 
 generic_packetizer_c *
@@ -140,7 +140,7 @@ coreaudio_reader_c::read(generic_packetizer_c *,
     if (m_in->read(mem, m_current_packet->m_size) != m_current_packet->m_size)
       throw false;
 
-    PTZR0->process(new packet_t(mem, m_current_packet->m_timestamp * m_frames_to_timestamp, m_current_packet->m_duration * m_frames_to_timestamp));
+    ptzr(0).process(new packet_t(mem, m_current_packet->m_timestamp * m_frames_to_timestamp, m_current_packet->m_duration * m_frames_to_timestamp));
 
     ++m_current_packet;
 

@@ -161,7 +161,7 @@ usf_reader_c::create_packetizer(int64_t tid) {
   m_ti.m_private_data = memory_c::clone(m_private_data);
   m_ti.m_language     = track->m_language;
   track->m_ptzr       = add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUSF));
-  show_packetizer_info(tid, PTZR(track->m_ptzr));
+  show_packetizer_info(tid, ptzr(track->m_ptzr));
 }
 
 void
@@ -173,9 +173,9 @@ usf_reader_c::create_packetizers() {
 }
 
 file_status_e
-usf_reader_c::read(generic_packetizer_c *ptzr,
+usf_reader_c::read(generic_packetizer_c *read_packetizer,
                    bool) {
-  auto track_itr = std::find_if(m_tracks.begin(), m_tracks.end(), [this, ptzr](auto &tr) { return (-1 != tr->m_ptzr) && (PTZR(tr->m_ptzr) == ptzr); });
+  auto track_itr = std::find_if(m_tracks.begin(), m_tracks.end(), [this, read_packetizer](auto &tr) { return (-1 != tr->m_ptzr) && (&ptzr(tr->m_ptzr) == read_packetizer); });
   if (track_itr == m_tracks.end())
     return FILE_STATUS_DONE;
 
@@ -185,7 +185,7 @@ usf_reader_c::read(generic_packetizer_c *ptzr,
     return flush_packetizer(track->m_ptzr);
 
   auto &entry = *track->m_current_entry;
-  PTZR(track->m_ptzr)->process(new packet_t(memory_c::clone(entry.m_text), entry.m_start, entry.m_end - entry.m_start));
+  ptzr(track->m_ptzr).process(new packet_t(memory_c::clone(entry.m_text), entry.m_start, entry.m_end - entry.m_start));
   ++track->m_current_entry;
 
   m_bytes_processed += entry.m_text.size();

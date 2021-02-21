@@ -156,7 +156,7 @@ public:
   }
 
 protected:
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   bool process_tag(bool skip_payload = false);
   bool process_script_tag();

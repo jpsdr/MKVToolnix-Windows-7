@@ -68,11 +68,11 @@ flac_reader_c::read_headers() {
 
 void
 flac_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('a', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('a', 0) || !m_reader_packetizers.empty())
     return;
 
   add_packetizer(new flac_packetizer_c(this, m_ti, m_header->get_buffer(), m_header->get_size()));
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 }
 
 bool
@@ -170,7 +170,7 @@ flac_reader_c::read(generic_packetizer_c *,
     return flush_packetizers();
 
   unsigned int samples_here = mtx::flac::get_num_samples(buf->get_buffer(), current_block->len, stream_info);
-  PTZR0->process(new packet_t(buf, samples * 1000000000 / sample_rate));
+  ptzr(0).process(new packet_t(buf, samples * 1000000000 / sample_rate));
 
   samples += samples_here;
   current_block++;

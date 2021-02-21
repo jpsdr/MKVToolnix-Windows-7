@@ -66,13 +66,13 @@ hevc_es_reader_c::read_headers() {
 
 void
 hevc_es_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('v', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('v', 0) || !m_reader_packetizers.empty())
     return;
 
   add_packetizer(new hevc_es_video_packetizer_c(this, m_ti));
-  PTZR0->set_video_pixel_dimensions(m_width, m_height);
+  ptzr(0).set_video_pixel_dimensions(m_width, m_height);
 
-  show_packetizer_info(0, PTZR0);
+  show_packetizer_info(0, ptzr(0));
 }
 
 file_status_e
@@ -83,7 +83,7 @@ hevc_es_reader_c::read(generic_packetizer_c *,
 
   int num_read = m_in->read(m_buffer->get_buffer(), m_buffer->get_size());
   if (0 < num_read)
-    PTZR0->process(new packet_t(memory_c::borrow(m_buffer->get_buffer(), num_read)));
+    ptzr(0).process(new packet_t(memory_c::borrow(m_buffer->get_buffer(), num_read)));
 
   return (0 != num_read) && (m_in->getFilePointer() < m_size) ? FILE_STATUS_MOREDATA : flush_packetizers();
 }

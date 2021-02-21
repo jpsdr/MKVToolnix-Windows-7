@@ -178,8 +178,8 @@ teletext_to_srt_packet_converter_c::override_encoding(int page,
 
 void
 teletext_to_srt_packet_converter_c::demux_page(int page,
-                                               generic_packetizer_c *ptzr) {
-  m_track_data.emplace(page, std::make_shared<track_data_t>(ptzr));
+                                               generic_packetizer_c *packetizer) {
+  m_track_data.emplace(page, std::make_shared<track_data_t>(packetizer));
   m_track_data[page]->m_page_data.page = page;
 }
 

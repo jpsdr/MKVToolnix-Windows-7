@@ -99,7 +99,7 @@ public:
 protected:
   type_e determine_type();
 
-  virtual file_status_e read(generic_packetizer_c *ptzr, bool force = false) override;
+  virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   std::optional<std::size_t> find_chunk(const char *id, int start_idx = 0, bool allow_empty = true);
 

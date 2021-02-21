@@ -24,8 +24,8 @@ protected:
   generic_packetizer_c *m_ptzr;
 
 public:
-  packet_converter_c(generic_packetizer_c *ptzr)
-    : m_ptzr{ptzr}
+  packet_converter_c(generic_packetizer_c *packetizer)
+    : m_ptzr{packetizer}
   {}
 
   virtual ~packet_converter_c() {}
@@ -33,8 +33,8 @@ public:
   virtual bool convert(packet_cptr const &packet) = 0;
   virtual void flush() {}
 
-  virtual void set_packetizer(generic_packetizer_c *ptzr) {
-    m_ptzr = ptzr;
+  virtual void set_packetizer(generic_packetizer_c *packetizer) {
+    m_ptzr = packetizer;
   }
 };
 using packet_converter_cptr = std::shared_ptr<packet_converter_c>;

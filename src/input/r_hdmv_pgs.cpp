@@ -42,14 +42,14 @@ hdmv_pgs_reader_c::read_headers() {
 
 void
 hdmv_pgs_reader_c::create_packetizer(int64_t) {
-  if (!demuxing_requested('s', 0) || (NPTZR() != 0))
+  if (!demuxing_requested('s', 0) || !m_reader_packetizers.empty())
     return;
 
-  hdmv_pgs_packetizer_c *ptzr = new hdmv_pgs_packetizer_c(this, m_ti);
-  ptzr->set_aggregate_packets(true);
-  add_packetizer(ptzr);
+  auto packetizer = new hdmv_pgs_packetizer_c(this, m_ti);
+  packetizer->set_aggregate_packets(true);
+  add_packetizer(packetizer);
 
-  show_packetizer_info(0, ptzr);
+  show_packetizer_info(0, *packetizer);
 }
 
 file_status_e
@@ -78,7 +78,7 @@ hdmv_pgs_reader_c::read(generic_packetizer_c *,
     if (m_debug)
       mxinfo(fmt::format("hdmv_pgs_reader_c::read(): type {0:02x} size {1} at {2}\n", static_cast<unsigned int>(frame->get_buffer()[0]), segment_size, m_in->getFilePointer() - 10 - 3));
 
-    PTZR0->process(new packet_t(frame, timestamp));
+    ptzr(0).process(new packet_t(frame, timestamp));
 
   } catch (...) {
     if (m_debug)

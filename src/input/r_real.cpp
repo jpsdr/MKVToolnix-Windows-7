@@ -245,13 +245,13 @@ real_reader_c::create_video_packetizer(real_demuxer_cptr dmx) {
   if (strcmp(dmx->fourcc, "RV40"))
     dmx->rv_dimensions = true;
 
-  show_packetizer_info(dmx->track->id, PTZR(dmx->ptzr));
+  show_packetizer_info(dmx->track->id, ptzr(dmx->ptzr));
 }
 
 void
 real_reader_c::create_dnet_audio_packetizer(real_demuxer_cptr dmx) {
   dmx->ptzr = add_packetizer(new ac3_bs_packetizer_c(this, m_ti, dmx->samples_per_second, dmx->channels, dmx->bsid));
-  show_packetizer_info(dmx->track->id, PTZR(dmx->ptzr));
+  show_packetizer_info(dmx->track->id, ptzr(dmx->ptzr));
 }
 
 void
@@ -314,10 +314,10 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
   dmx->is_aac = true;
   dmx->ptzr   = add_packetizer(new aac_packetizer_c(this, m_ti, audio_config, aac_packetizer_c::headerless));
 
-  show_packetizer_info(tid, PTZR(dmx->ptzr));
+  show_packetizer_info(tid, ptzr(dmx->ptzr));
 
   if (mtx::aac::PROFILE_SBR == audio_config.profile)
-    PTZR(dmx->ptzr)->set_audio_output_sampling_freq(audio_config.output_sample_rate);
+    ptzr(dmx->ptzr).set_audio_output_sampling_freq(audio_config.output_sample_rate);
 
   // AAC packetizers might need the timestamp of the first packet in order
   // to fill in stuff. Let's misuse ref_timestamp for that.
@@ -339,7 +339,7 @@ real_reader_c::create_audio_packetizer(real_demuxer_cptr dmx) {
     m_ti.m_private_data = dmx->private_data;
     dmx->ptzr           = add_packetizer(new ra_packetizer_c(this, m_ti, dmx->samples_per_second, dmx->channels, dmx->bits_per_sample, get_uint32_be(dmx->fourcc)));
 
-    show_packetizer_info(dmx->track->id, PTZR(dmx->ptzr));
+    show_packetizer_info(dmx->track->id, ptzr(dmx->ptzr));
   }
 }
 
@@ -444,7 +444,7 @@ real_reader_c::read(generic_packetizer_c *,
     // packetizer adjust its data accordingly.
     if (dmx->first_frame) {
       dmx->ref_timestamp = timestamp;
-      PTZR(dmx->ptzr)->set_displacement_maybe(timestamp);
+      ptzr(dmx->ptzr).set_displacement_maybe(timestamp);
     }
 
     deliver_aac_frames(dmx, *mem);
@@ -506,7 +506,7 @@ real_reader_c::deliver_audio_frames(real_demuxer_cptr dmx,
     rv_segment_cptr segment = dmx->segments[i];
     mxdebug_if(s_debug, fmt::format("'{0}' track {1}: delivering audio length {2} timestamp {3} flags 0x{4:08x} duration {5}\n", m_ti.m_fname, dmx->track->id, segment->data->get_size(), dmx->last_timestamp, segment->flags, duration));
 
-    PTZR(dmx->ptzr)->process(new packet_t(segment->data, dmx->last_timestamp, duration,
+    ptzr(dmx->ptzr).process(new packet_t(segment->data, dmx->last_timestamp, duration,
                                           (segment->flags & RMFF_FRAME_FLAG_KEYFRAME) == RMFF_FRAME_FLAG_KEYFRAME ? -1 : dmx->ref_timestamp));
     if ((segment->flags & 2) == 2)
       dmx->ref_timestamp = dmx->last_timestamp;
@@ -549,7 +549,7 @@ real_reader_c::deliver_aac_frames(real_demuxer_cptr dmx,
   int data_idx = 2 + num_sub_packets * 2;
   for (i = 0; i < num_sub_packets; i++) {
     int sub_length = get_uint16_be(&chunk[2 + i * 2]);
-    PTZR(dmx->ptzr)->process(new packet_t(memory_c::borrow(&chunk[data_idx], sub_length)));
+    ptzr(dmx->ptzr).process(new packet_t(memory_c::borrow(&chunk[data_idx], sub_length)));
     data_idx += sub_length;
   }
 }
@@ -598,7 +598,7 @@ real_reader_c::assemble_video_packet(real_demuxer_cptr dmx,
                                              0,
                                              (assembled->flags & RMFF_FRAME_FLAG_KEYFRAME) == RMFF_FRAME_FLAG_KEYFRAME ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC,
                                              VFT_NOBFRAME);
-    PTZR(dmx->ptzr)->process(packet);
+    ptzr(dmx->ptzr).process(packet);
 
     assembled->allocated_by_rmff = 0;
     rmff_release_frame(assembled);
@@ -703,7 +703,7 @@ real_reader_c::set_dimensions(real_demuxer_cptr dmx,
 
     }
 
-    auto video = GetChild<KaxTrackVideo>(*PTZR(dmx->ptzr)->get_track_entry());
+    auto video = GetChild<KaxTrackVideo>(*ptzr(dmx->ptzr).get_track_entry());
     GetChild<KaxVideoPixelWidth>(video).SetValue(width);
     GetChild<KaxVideoPixelHeight>(video).SetValue(height);
 
