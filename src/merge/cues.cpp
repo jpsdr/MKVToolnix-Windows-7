@@ -119,7 +119,7 @@ cues_c::write(mm_io_c &out,
       GetChild<KaxCueRelativePosition>(positions).SetValue(point.relative_position);
 
     if (point.duration)
-      GetChild<KaxCueDuration>(positions).SetValue(ROUND_TIMESTAMP_SCALE(point.duration) / g_timestamp_scale);
+      GetChild<KaxCueDuration>(positions).SetValue(round_timestamp_scale(point.duration) / g_timestamp_scale);
 
     g_doc_type_version_handler->render(kc_point, out);
   }
@@ -274,7 +274,7 @@ cues_c::calculate_point_size(cue_point_t const &point)
     point_size += EBML_ID_LENGTH(EBML_ID(KaxCueRelativePosition)) + 1 + calculate_bytes_for_uint(point.relative_position);
 
   if (point.duration)
-    point_size += EBML_ID_LENGTH(EBML_ID(KaxCueDuration)) + 1 + calculate_bytes_for_uint(ROUND_TIMESTAMP_SCALE(point.duration) / g_timestamp_scale);
+    point_size += EBML_ID_LENGTH(EBML_ID(KaxCueDuration)) + 1 + calculate_bytes_for_uint(round_timestamp_scale(point.duration) / g_timestamp_scale);
 
   return point_size;
 }

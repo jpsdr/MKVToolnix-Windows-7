@@ -329,21 +329,21 @@ cluster_helper_c::set_duration(render_groups_c *rg) {
     block_duration += rg->m_durations[i];
   mxdebug_if(m->debug_duration,
              fmt::format("cluster_helper::set_duration: block_duration {0} rounded duration {1} def_duration {2} use_durations {3} rg->m_duration_mandatory {4}\n",
-                         block_duration, ROUND_TIMESTAMP_SCALE(block_duration), def_duration, g_use_durations ? 1 : 0, rg->m_duration_mandatory ? 1 : 0));
+                         block_duration, round_timestamp_scale(block_duration), def_duration, g_use_durations ? 1 : 0, rg->m_duration_mandatory ? 1 : 0));
 
   if (rg->m_duration_mandatory) {
     if (   (0 == block_duration)
         || (   (0 < block_duration)
-            && (ROUND_TIMESTAMP_SCALE(block_duration) != ROUND_TIMESTAMP_SCALE(static_cast<int64_t>(rg->m_durations.size()) * def_duration)))) {
+            && (round_timestamp_scale(block_duration) != round_timestamp_scale(static_cast<int64_t>(rg->m_durations.size()) * def_duration)))) {
       auto rounding_error = rg->m_source->get_track_type() == track_subtitle ? rg->m_first_timestamp_rounding_error.value_or(0) : 0;
-      group->set_block_duration(ROUND_TIMESTAMP_SCALE(block_duration + rounding_error));
+      group->set_block_duration(round_timestamp_scale(block_duration + rounding_error));
     }
 
   } else if (   (   g_use_durations
                  || (0 < def_duration))
              && (0 < block_duration)
-             && (ROUND_TIMESTAMP_SCALE(block_duration) != ROUND_TIMESTAMP_SCALE(rg->m_durations.size() * def_duration)))
-    group->set_block_duration(ROUND_TIMESTAMP_SCALE(block_duration));
+             && (round_timestamp_scale(block_duration) != round_timestamp_scale(rg->m_durations.size() * def_duration)))
+    group->set_block_duration(round_timestamp_scale(block_duration));
 }
 
 bool
@@ -367,19 +367,19 @@ cluster_helper_c::must_duration_be_set(render_groups_c *rg,
     if (   (   (0 == block_duration)
             && ((0 != group_size) || (new_packet->duration_mandatory && new_packet->has_duration())))
         || (   (0 < block_duration)
-            && (ROUND_TIMESTAMP_SCALE(block_duration) != ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration)))) {
+            && (round_timestamp_scale(block_duration) != round_timestamp_scale((group_size + 1) * def_duration)))) {
       // if (!rg)
       //   mxinfo(fmt::format("YOYO 1 np mand {0} blodu {1} defdur {2} bloduRND {3} defdurRND {4} groupsize {5} ts {6}\n", new_packet->duration_mandatory, block_duration, (group_size + 1) * def_duration,
-      //          ROUND_TIMESTAMP_SCALE(block_duration), ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration), group_size, mtx::string::format_timestamp(new_packet->assigned_timestamp)));
+      //          round_timestamp_scale(block_duration), round_timestamp_scale((group_size + 1) * def_duration), group_size, mtx::string::format_timestamp(new_packet->assigned_timestamp)));
       return true;
     }
 
   } else if (   (   g_use_durations
                  || (0 < def_duration))
              && (0 < block_duration)
-             && (ROUND_TIMESTAMP_SCALE(block_duration) != ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration))) {
+             && (round_timestamp_scale(block_duration) != round_timestamp_scale((group_size + 1) * def_duration))) {
     // if (!rg)
-    //   mxinfo(fmt::format("YOYO 1 np blodu {0} defdur {1} bloduRND {2} defdurRND {3} ts {4}\n", block_duration, def_duration, ROUND_TIMESTAMP_SCALE(block_duration), ROUND_TIMESTAMP_SCALE((group_size + 1) * def_duration),
+    //   mxinfo(fmt::format("YOYO 1 np blodu {0} defdur {1} bloduRND {2} defdurRND {3} ts {4}\n", block_duration, def_duration, round_timestamp_scale(block_duration), round_timestamp_scale((group_size + 1) * def_duration),
     //          mtx::string::format_timestamp(new_packet->assigned_timestamp)));
     return true;
   }

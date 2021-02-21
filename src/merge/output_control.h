@@ -211,3 +211,8 @@ void add_split_points_from_remainig_chapter_numbers();
 #if defined(SYS_UNIX) || defined(SYS_APPLE)
 void sighandler(int signum);
 #endif
+
+inline auto
+round_timestamp_scale(int64_t a) {
+  return std::llround(static_cast<double>(a) / g_timestamp_scale) * static_cast<int64_t>(g_timestamp_scale);
+}

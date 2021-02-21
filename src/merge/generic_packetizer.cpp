@@ -1438,15 +1438,17 @@ generic_packetizer_c::add_packet(packet_cptr pack) {
     m_deferred_packets.push_back(pack);
 }
 
-#define ADJUST_TIMESTAMP(x) boost::rational_cast<int64_t>(m_ti.m_tcsync.factor * (x + m_correction_timestamp_offset + m_append_timestamp_offset)) + m_ti.m_tcsync.displacement
-
 void
 generic_packetizer_c::add_packet2(packet_cptr pack) {
-  pack->timestamp   = ADJUST_TIMESTAMP(pack->timestamp);
+  auto adjust_timestamp = [this](int64_t x) {
+    return boost::rational_cast<int64_t>(m_ti.m_tcsync.factor * (x + m_correction_timestamp_offset + m_append_timestamp_offset)) + m_ti.m_tcsync.displacement;
+  };
+
+  pack->timestamp = adjust_timestamp(pack->timestamp);
   if (pack->has_bref())
-    pack->bref     = ADJUST_TIMESTAMP(pack->bref);
+    pack->bref = adjust_timestamp(pack->bref);
   if (pack->has_fref())
-    pack->fref     = ADJUST_TIMESTAMP(pack->fref);
+    pack->fref = adjust_timestamp(pack->fref);
   if (pack->has_duration()) {
     pack->duration = boost::rational_cast<int64_t>(m_ti.m_tcsync.factor * pack->duration);
     if (pack->has_discard_padding())
@@ -1487,7 +1489,7 @@ generic_packetizer_c::add_packet2(packet_cptr pack) {
   }
 
   m_safety_last_timestamp        = pack->timestamp;
-  m_safety_last_duration        = pack->duration;
+  m_safety_last_duration         = pack->duration;
   pack->timestamp_before_factory = pack->timestamp;
 
   m_packet_queue.push_back(pack);

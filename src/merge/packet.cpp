@@ -23,14 +23,14 @@ packet_t::normalize_timestamps() {
   // Normalize the timestamps according to the timestamp scale.
   unmodified_assigned_timestamp = assigned_timestamp;
   unmodified_duration           = duration;
-  timestamp                     = ROUND_TIMESTAMP_SCALE(timestamp);
-  assigned_timestamp            = ROUND_TIMESTAMP_SCALE(assigned_timestamp);
+  timestamp                     = round_timestamp_scale(timestamp);
+  assigned_timestamp            = round_timestamp_scale(assigned_timestamp);
   if (has_duration())
-    duration                    = ROUND_TIMESTAMP_SCALE(duration);
+    duration                    = round_timestamp_scale(duration);
   if (has_bref())
-    bref                        = ROUND_TIMESTAMP_SCALE(bref);
+    bref                        = round_timestamp_scale(bref);
   if (has_fref())
-    fref                        = ROUND_TIMESTAMP_SCALE(fref);
+    fref                        = round_timestamp_scale(fref);
 }
 
 void

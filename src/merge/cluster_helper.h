@@ -26,8 +26,6 @@
 #include "common/timestamp.h"
 #include "merge/libmatroska_extensions.h"
 
-#define ROUND_TIMESTAMP_SCALE(a) (std::llround(static_cast<double>(a) / static_cast<double>(g_timestamp_scale)) * static_cast<int64_t>(g_timestamp_scale))
-
 class generic_packetizer_c;
 class render_groups_c;
 class packet_t;
