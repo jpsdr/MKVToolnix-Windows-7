@@ -216,9 +216,9 @@ addSegmentUIDFromFileToLineEdit(QWidget &parent,
 }
 
 #if defined(SYS_APPLE)
-# define OS_SPECIFIC_ELIDE_POSITION Qt::ElideRight
+constexpr auto OS_SPECIFIC_ELIDE_POSITION = Qt::ElideRight;
 #else
-# define OS_SPECIFIC_ELIDE_POSITION Qt::ElideMiddle
+constexpr auto OS_SPECIFIC_ELIDE_POSITION = Qt::ElideMiddle;
 #endif
 
 void

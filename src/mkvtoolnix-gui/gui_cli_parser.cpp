@@ -36,8 +36,6 @@ GuiCliParser::GuiCliParser(std::vector<std::string> const &args)
 GuiCliParser::~GuiCliParser() {
 }
 
-#define OPT(spec, func, description) add_option(spec, std::bind(&GuiCliParser::func, this), description)
-
 void
 GuiCliParser::initParser() {
   add_information(YT("mkvtoolnix-gui [options] [file names]"));
@@ -56,23 +54,21 @@ GuiCliParser::initParser() {
 
   add_section_header(YT("Options"));
 
-  OPT("multiplex|merge", setMergeMode,    fmt::format("{0} {1}", YT("All following file names will be added as source files to the current multiplex settings."), YT("This is the default mode.")));
-  OPT("info",            setInfoMode,     YT("All following file names will be opened in the info tool."));
-  OPT("edit-chapters",   setChaptersMode, YT("All following file names will be opened in the chapter editor."));
-  OPT("edit-headers",    setHeadersMode,  YT("All following file names will be opened in the header editor."));
-  OPT("activate",        raiseAndActivate, "");
+  add_option("multiplex|merge", std::bind(&GuiCliParser::setMergeMode,     this), fmt::format("{0} {1}", YT("All following file names will be added as source files to the current multiplex settings."), YT("This is the default mode.")));
+  add_option("info",            std::bind(&GuiCliParser::setInfoMode,      this), YT("All following file names will be opened in the info tool."));
+  add_option("edit-chapters",   std::bind(&GuiCliParser::setChaptersMode,  this), YT("All following file names will be opened in the chapter editor."));
+  add_option("edit-headers",    std::bind(&GuiCliParser::setHeadersMode,   this), YT("All following file names will be opened in the header editor."));
+  add_option("activate",        std::bind(&GuiCliParser::raiseAndActivate, this), {});
 
   add_section_header(YT("Global options"));
 
-  OPT("h|help",        displayHelp,     YT("Show this help."));
-  OPT("V|version",     displayVersion,  YT("Show version information."));
-  OPT("debug=option",  enableDebugging, {});
-  OPT("engage=hack",   enableHack,      {});
+  add_option("h|help",       std::bind(&GuiCliParser::displayHelp,     this), YT("Show this help."));
+  add_option("V|version",    std::bind(&GuiCliParser::displayVersion,  this), YT("Show version information."));
+  add_option("debug=option", std::bind(&GuiCliParser::enableDebugging, this), {});
+  add_option("engage=hack",  std::bind(&GuiCliParser::enableHack,      this), {});
 
   add_hook(mtx::cli::parser_c::ht_unknown_option, std::bind(&GuiCliParser::handleFileNameArg, this));
 }
-
-#undef OPT
 
 void
 GuiCliParser::raiseAndActivate() {

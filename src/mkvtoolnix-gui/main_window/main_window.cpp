@@ -43,8 +43,6 @@
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
-#define GET_P static_cast<MainWindowPrivate *>(get()->p_ptr.get())
-
 namespace mtx::gui {
 
 MainWindow *s_mainWindow = nullptr;
@@ -346,32 +344,32 @@ MainWindow::get() {
 
 Ui::MainWindow *
 MainWindow::getUi() {
-  return GET_P->ui.get();
+  return static_cast<MainWindowPrivate *>(get()->p_ptr.get())->ui.get();
 }
 
 Merge::Tool *
 MainWindow::mergeTool() {
-  return GET_P->toolMerge;
+  return static_cast<MainWindowPrivate *>(get()->p_ptr.get())->toolMerge;
 }
 
 Info::Tool *
 MainWindow::infoTool() {
-  return GET_P->toolInfo;
+  return static_cast<MainWindowPrivate *>(get()->p_ptr.get())->toolInfo;
 }
 
 HeaderEditor::Tool *
 MainWindow::headerEditorTool() {
-  return GET_P->toolHeaderEditor;
+  return static_cast<MainWindowPrivate *>(get()->p_ptr.get())->toolHeaderEditor;
 }
 
 ChapterEditor::Tool *
 MainWindow::chapterEditorTool() {
-  return GET_P->toolChapterEditor;
+  return static_cast<MainWindowPrivate *>(get()->p_ptr.get())->toolChapterEditor;
 }
 
 Jobs::Tool *
 MainWindow::jobTool() {
-  return GET_P->toolJobs;
+  return static_cast<MainWindowPrivate *>(get()->p_ptr.get())->toolJobs;
 }
 
 WatchJobs::Tab *
@@ -381,7 +379,7 @@ MainWindow::watchCurrentJobTab() {
 
 WatchJobs::Tool *
 MainWindow::watchJobTool() {
-  return GET_P->watchJobTool;
+  return static_cast<MainWindowPrivate *>(get()->p_ptr.get())->watchJobTool;
 }
 
 void

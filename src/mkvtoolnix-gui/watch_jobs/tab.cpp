@@ -24,8 +24,8 @@
 #include "mkvtoolnix-gui/watch_jobs/tab.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
-#define MTX_RUN_PROGRAM_CONFIGURATION_ADDRESS   "mtxRunProgramConfigurationAddress"
-#define MTX_RUN_PROGRAM_CONFIGURATION_CONDITION "mtxRunProgramConfigurationCondition"
+constexpr auto MTX_RUN_PROGRAM_CONFIGURATION_ADDRESS   = "mtxRunProgramConfigurationAddress";
+constexpr auto MTX_RUN_PROGRAM_CONFIGURATION_CONDITION = "mtxRunProgramConfigurationCondition";
 
 using namespace mtx::gui;
 
