@@ -16,8 +16,6 @@
 
 #include "propedit/change.h"
 
-#define INVALID_TRACK_TYPE static_cast<track_type>(0)
-
 class kax_analyzer_c;
 
 class target_c {

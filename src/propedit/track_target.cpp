@@ -21,7 +21,7 @@ track_target_c::track_target_c(std::string const &spec)
   : target_c()
   , m_selection_mode{track_target_c::sm_undefined}
   , m_selection_param{}
-  , m_selection_track_type{INVALID_TRACK_TYPE}
+  , m_selection_track_type{static_cast<track_type>(0)}
 {
   m_spec = spec;
 }
@@ -42,7 +42,7 @@ track_target_c::operator ==(target_c const &cmp)
 
 void
 track_target_c::validate() {
-  if (INVALID_TRACK_TYPE == m_track_type)
+  if (static_cast<track_type>(0) == m_track_type)
     return;
 
   for (auto &change : m_changes)
@@ -198,7 +198,7 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
     return;
   }
 
-  mxerror(fmt::format(Y("No track corresponding to the edit specification '{0}' was found. {1}\n"), m_spec, FILE_NOT_MODIFIED));
+  mxerror(fmt::format(Y("No track corresponding to the edit specification '{0}' was found. {1}\n"), m_spec, Y("The file has not been modified.")));
 }
 
 void
@@ -222,9 +222,9 @@ track_target_c::parse_spec(std::string const &spec) {
                            : 'v' == prefix[0] ? track_video
                            : 's' == prefix[0] ? track_subtitle
                            : 'b' == prefix[0] ? track_buttons
-                           :                    INVALID_TRACK_TYPE;
+                           :                    static_cast<track_type>(0);
 
-    if (INVALID_TRACK_TYPE == m_selection_track_type)
+    if (static_cast<track_type>(0) == m_selection_track_type)
       throw false;
   }
 }

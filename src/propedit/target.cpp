@@ -31,7 +31,7 @@ target_c::target_c()
   , m_master{}
   , m_sub_master{}
   , m_track_uid{}
-  , m_track_type{INVALID_TRACK_TYPE}
+  , m_track_type{static_cast<track_type>(0)}
   , m_analyzer{}
 {
 }

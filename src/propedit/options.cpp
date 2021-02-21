@@ -183,7 +183,7 @@ read_element(kax_analyzer_c *analyzer,
     e = analyzer->read_element(index);
 
   if (require_existance && (!e || !dynamic_cast<T *>(e.get())))
-    mxerror(fmt::format(Y("Modification of properties in the section '{0}' was requested, but no corresponding level 1 element was found in the file. {1}\n"), category, FILE_NOT_MODIFIED));
+    mxerror(fmt::format(Y("Modification of properties in the section '{0}' was requested, but no corresponding level 1 element was found in the file. {1}\n"), category, Y("The file has not been modified.")));
 
   return e;
 }

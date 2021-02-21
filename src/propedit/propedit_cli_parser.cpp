@@ -208,45 +208,38 @@ propedit_cli_parser_c::disable_language_ietf() {
   mtx::bcp47::language_c::disable();
 }
 
-#define OPT(spec, func, description) add_option(spec, std::bind(&propedit_cli_parser_c::func, this), description)
-
 void
 propedit_cli_parser_c::init_parser() {
   add_information(YT("mkvpropedit [options] <file> <actions>"));
 
   add_section_header(YT("Options"));
-  OPT("l|list-property-names",      list_property_names, YT("List all valid property names and exit"));
-  OPT("p|parse-mode=<mode>",        set_parse_mode,      YT("Sets the Matroska parser mode to 'fast' (default) or 'full'"));
+  add_option("l|list-property-names", std::bind(&propedit_cli_parser_c::list_property_names, this), YT("List all valid property names and exit"));
+  add_option("p|parse-mode=<mode>",   std::bind(&propedit_cli_parser_c::set_parse_mode,      this), YT("Sets the Matroska parser mode to 'fast' (default) or 'full'"));
 
   add_section_header(YT("Actions for handling properties"));
-  OPT("e|edit=<selector>",          add_target,          YT("Sets the Matroska file section that all following add/set/delete "
-                                                            "actions operate on (see below and man page for syntax)"));
-  OPT("a|add=<name=value>",         add_change,          YT("Adds a property with the value even if such a property already "
-                                                            "exists"));
-  OPT("s|set=<name=value>",         add_change,          YT("Sets a property to the value if it exists and add it otherwise"));
-  OPT("d|delete=<name>",            add_change,          YT("Delete all occurrences of a property"));
+  add_option("e|edit=<selector>",  std::bind(&propedit_cli_parser_c::add_target, this), YT("Sets the Matroska file section that all following add/set/delete actions operate on (see below and man page for syntax)"));
+  add_option("a|add=<name=value>", std::bind(&propedit_cli_parser_c::add_change, this), YT("Adds a property with the value even if such a property already exists"));
+  add_option("s|set=<name=value>", std::bind(&propedit_cli_parser_c::add_change, this), YT("Sets a property to the value if it exists and add it otherwise"));
+  add_option("d|delete=<name>",    std::bind(&propedit_cli_parser_c::add_change, this), YT("Delete all occurrences of a property"));
 
   add_section_header(YT("Actions for handling tags and chapters"));
-  OPT("t|tags=<selector:filename>", add_tags,            YT("Add or replace tags in the file with the ones from 'filename' "
-                                                            "or remove them if 'filename' is empty "
-                                                            "(see below and man page for syntax)"));
-  OPT("c|chapters=<filename>",      add_chapters,        YT("Add or replace chapters in the file with the ones from 'filename' "
-                                                            "or remove them if 'filename' is empty"));
-  OPT("add-track-statistics-tags",    handle_track_statistics_tags, YT("Calculate statistics for all tracks and add new/update existing tags for them"));
-  OPT("delete-track-statistics-tags", handle_track_statistics_tags, YT("Delete all existing track statistics tags"));
+  add_option("t|tags=<selector:filename>",   std::bind(&propedit_cli_parser_c::add_tags,                     this), YT("Add or replace tags in the file with the ones from 'filename' or remove them if 'filename' is empty (see below and man page for syntax)"));
+  add_option("c|chapters=<filename>",        std::bind(&propedit_cli_parser_c::add_chapters,                 this), YT("Add or replace chapters in the file with the ones from 'filename' or remove them if 'filename' is empty"));
+  add_option("add-track-statistics-tags",    std::bind(&propedit_cli_parser_c::handle_track_statistics_tags, this), YT("Calculate statistics for all tracks and add new/update existing tags for them"));
+  add_option("delete-track-statistics-tags", std::bind(&propedit_cli_parser_c::handle_track_statistics_tags, this), YT("Delete all existing track statistics tags"));
 
   add_section_header(YT("Actions for handling attachments"));
-  OPT("add-attachment=<filename>",                         add_attachment,             YT("Add the file 'filename' as a new attachment"));
-  OPT("replace-attachment=<attachment-selector:filename>", replace_attachment,         YT("Replace an attachment with the file 'filename'"));
-  OPT("update-attachment=<attachment-selector>",           replace_attachment,         YT("Update an attachment's properties"));
-  OPT("delete-attachment=<attachment-selector>",           delete_attachment,          YT("Delete one or more attachments"));
-  OPT("attachment-name=<name>",                            set_attachment_name,        YT("Set the name to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
-  OPT("attachment-description=<description>",              set_attachment_description, YT("Set the description to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
-  OPT("attachment-mime-type=<mime-type>",                  set_attachment_mime_type,   YT("Set the MIME type to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
-  OPT("attachment-uid=<uid>",                              set_attachment_uid,         YT("Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
+  add_option("add-attachment=<filename>",                         std::bind(&propedit_cli_parser_c::add_attachment,             this), YT("Add the file 'filename' as a new attachment"));
+  add_option("replace-attachment=<attachment-selector:filename>", std::bind(&propedit_cli_parser_c::replace_attachment,         this), YT("Replace an attachment with the file 'filename'"));
+  add_option("update-attachment=<attachment-selector>",           std::bind(&propedit_cli_parser_c::replace_attachment,         this), YT("Update an attachment's properties"));
+  add_option("delete-attachment=<attachment-selector>",           std::bind(&propedit_cli_parser_c::delete_attachment,          this), YT("Delete one or more attachments"));
+  add_option("attachment-name=<name>",                            std::bind(&propedit_cli_parser_c::set_attachment_name,        this), YT("Set the name to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
+  add_option("attachment-description=<description>",              std::bind(&propedit_cli_parser_c::set_attachment_description, this), YT("Set the description to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
+  add_option("attachment-mime-type=<mime-type>",                  std::bind(&propedit_cli_parser_c::set_attachment_mime_type,   this), YT("Set the MIME type to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
+  add_option("attachment-uid=<uid>",                              std::bind(&propedit_cli_parser_c::set_attachment_uid,         this), YT("Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
 
   add_section_header(YT("Other options"));
-  OPT("disable-language-ietf", disable_language_ietf, YT("Do not change LanguageIETF track header elements when the 'language' property is changed."));
+  add_option("disable-language-ietf", std::bind(&propedit_cli_parser_c::disable_language_ietf, this), YT("Do not change LanguageIETF track header elements when the 'language' property is changed."));
   add_common_options();
 
   add_separator();
@@ -276,8 +269,6 @@ propedit_cli_parser_c::init_parser() {
 
   add_hook(mtx::cli::parser_c::ht_unknown_option, std::bind(&propedit_cli_parser_c::set_file_name, this));
 }
-
-#undef OPT
 
 void
 propedit_cli_parser_c::validate() {
