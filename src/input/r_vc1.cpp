@@ -24,7 +24,7 @@
 #include "output/p_vc1.h"
 
 
-#define READ_SIZE 20 * 1024 * 1024
+constexpr auto READ_SIZE = 20 * 1024 * 1024;
 
 bool
 vc1_es_reader_c::probe_file() {

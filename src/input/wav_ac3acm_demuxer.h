@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-#define AC3ACM_READ_SIZE 100000
+constexpr auto AC3ACM_READ_SIZE = 100000;
 
 class wav_ac3acm_demuxer_c: public wav_demuxer_c {
 protected:

@@ -70,7 +70,7 @@
 
 using namespace libmatroska;
 
-#define MAX_INTERLEAVING_BADNESS 0.4
+constexpr auto MAX_INTERLEAVING_BADNESS = 0.4;
 
 namespace mtx {
 
@@ -98,9 +98,9 @@ public:
 }
 
 static void
-print_atom_too_small_error_size(std::string const &name,
-                                qt_atom_t const &atom,
-                                std::size_t actual_size) {
+print_atom_too_small_error(std::string const &name,
+                           qt_atom_t const &atom,
+                           std::size_t actual_size) {
   mxerror(fmt::format(Y("Quicktime/MP4 reader: '{0}' atom is too small. Expected size: >= {1}. Actual size: {2}.\n"), name, actual_size, atom.size));
 }
 
@@ -208,8 +208,6 @@ qtmp4_reader_c::read_atom(mm_io_c *read_from,
   return read_qtmp4_atom(read_from ? read_from : m_in.get(), exit_on_error);
 }
 
-#define skip_atom() m_in->setFilePointer(atom.pos + atom.size)
-
 bool
 qtmp4_reader_c::resync_to_top_level_atom(uint64_t start_pos) {
   static std::vector<std::string> const s_top_level_atoms{ "ftyp", "pdin", "moov", "moof", "mfra", "mdat", "free", "skip" };
@@ -286,18 +284,18 @@ qtmp4_reader_c::parse_headers() {
         if (!headers_parsed)
           handle_moov_atom(atom.to_parent(), 0);
         else
-          skip_atom();
+          m_in->setFilePointer(atom.pos + atom.size);
         headers_parsed = true;
 
       } else if (atom.fourcc == "mdat") {
-        skip_atom();
+        m_in->setFilePointer(atom.pos + atom.size);
         mdat_found = true;
 
       } else if (atom.fourcc == "moof") {
         handle_moof_atom(atom.to_parent(), 0, atom);
 
       } else if (atom.fourcc.human_readable())
-        skip_atom();
+        m_in->setFilePointer(atom.pos + atom.size);
 
       else if (!resync_to_top_level_atom(atom.pos))
         break;
@@ -405,12 +403,6 @@ qtmp4_reader_c::handle_audio_encoder_delay(qtmp4_demuxer_c &dmx) {
   m_audio_encoder_delay_samples               = 0;
 }
 
-#define print_basic_atom_info() \
-  mxdebug_if(m_debug_headers, fmt::format("{0}'{1}' atom, size {2}, at {3}–{4}\n", space(2 * level + 1), atom.fourcc, atom.size, atom.pos, atom.pos + atom.size));
-
-#define print_atom_too_small_error(name, type) \
-  print_atom_too_small_error_size(name, atom, sizeof(type));
-
 void
 qtmp4_reader_c::process_atom(qt_atom_t const &parent,
                              int level,
@@ -426,7 +418,7 @@ qtmp4_reader_c::process_atom(qt_atom_t const &parent,
 
     handler(atom);
 
-    skip_atom();
+    m_in->setFilePointer(atom.pos + atom.size);
     parent_size -= atom.size;
   }
 }
@@ -624,7 +616,7 @@ qtmp4_reader_c::handle_hdlr_atom(qtmp4_demuxer_c &dmx,
   hdlr_atom_t hdlr;
 
   if (sizeof(hdlr_atom_t) > atom.size)
-    print_atom_too_small_error("hdlr", hdlr_atom_t);
+    print_atom_too_small_error("hdlr", atom, sizeof(hdlr_atom_t));
 
   if (m_in->read(&hdlr, sizeof(hdlr_atom_t)) != sizeof(hdlr_atom_t))
     throw mtx::input::header_parsing_x();
@@ -647,7 +639,7 @@ qtmp4_reader_c::handle_mdhd_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t atom,
                                  int level) {
   if (1 > atom.size)
-    print_atom_too_small_error("mdhd", mdhd_atom_t);
+    print_atom_too_small_error("mdhd", atom, sizeof(mdhd_atom_t));
 
   int version = m_in->read_uint8();
 
@@ -655,7 +647,7 @@ qtmp4_reader_c::handle_mdhd_atom(qtmp4_demuxer_c &dmx,
     mdhd_atom_t mdhd;
 
     if (sizeof(mdhd_atom_t) > atom.size)
-      print_atom_too_small_error("mdhd", mdhd_atom_t);
+      print_atom_too_small_error("mdhd", atom, sizeof(mdhd_atom_t));
     if (m_in->read(&mdhd.flags, sizeof(mdhd_atom_t) - 1) != (sizeof(mdhd_atom_t) - 1))
       throw mtx::input::header_parsing_x();
 
@@ -667,7 +659,7 @@ qtmp4_reader_c::handle_mdhd_atom(qtmp4_demuxer_c &dmx,
     mdhd64_atom_t mdhd;
 
     if (sizeof(mdhd64_atom_t) > atom.size)
-      print_atom_too_small_error("mdhd", mdhd64_atom_t);
+      print_atom_too_small_error("mdhd", atom, sizeof(mdhd64_atom_t));
     if (m_in->read(&mdhd.flags, sizeof(mdhd64_atom_t) - 1) != (sizeof(mdhd64_atom_t) - 1))
       throw mtx::input::header_parsing_x();
 
@@ -940,7 +932,7 @@ qtmp4_reader_c::handle_mvhd_atom(qt_atom_t atom,
   mvhd_atom_t mvhd;
 
   if (sizeof(mvhd_atom_t) > (atom.size - atom.hsize))
-    print_atom_too_small_error("mvhd", mvhd_atom_t);
+    print_atom_too_small_error("mvhd", atom, sizeof(mvhd_atom_t));
   if (m_in->read(&mvhd, sizeof(mvhd_atom_t)) != sizeof(mvhd_atom_t))
     throw mtx::input::header_parsing_x();
 
@@ -1509,13 +1501,13 @@ qtmp4_reader_c::handle_tkhd_atom(qtmp4_demuxer_c &dmx,
                                  qt_atom_t atom,
                                  int level) {
   if (atom.size < 1)
-    print_atom_too_small_error_size("tkhd", atom, 1);
+    print_atom_too_small_error("tkhd", atom, 1);
 
   auto version       = m_in->read_uint8();
   auto expected_size = 4u + 2 * (version == 1 ? 8 : 4) + 4 + 4 + (version == 1 ? 8 : 4) + 2 * 4 + 3 * 2 + 2 + 9 * 4 + 2 * 4;
 
   if (atom.size < expected_size)
-    print_atom_too_small_error_size("tkhd", atom, expected_size);
+    print_atom_too_small_error("tkhd", atom, expected_size);
 
   m_in->skip(3                              // flags
              + 2 * (version == 1 ? 8 : 4)); // creation_time, modification_time

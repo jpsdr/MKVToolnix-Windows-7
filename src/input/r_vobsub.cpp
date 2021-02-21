@@ -35,16 +35,24 @@
 
 namespace {
 debugging_option_c s_debug{"vobsub_reader"};
+
+auto
+hexvalue(char c) {
+  return isdigit(c)        ? (c) - '0'
+       : tolower(c) == 'a' ? 10
+       : tolower(c) == 'b' ? 11
+       : tolower(c) == 'c' ? 12
+       : tolower(c) == 'd' ? 13
+       : tolower(c) == 'e' ? 14
+       :                     15;
 }
 
-#define hexvalue(c) (  isdigit(c)        ? (c) - '0' \
-                     : tolower(c) == 'a' ? 10        \
-                     : tolower(c) == 'b' ? 11        \
-                     : tolower(c) == 'c' ? 12        \
-                     : tolower(c) == 'd' ? 13        \
-                     : tolower(c) == 'e' ? 14        \
-                     :                     15)
-#define ishexdigit(s) (isdigit(s) || strchr("abcdefABCDEF", s))
+auto
+ishexdigit(char s) {
+  return isdigit(s) || strchr("abcdefABCDEF", s);
+}
+
+} // anonymous namespace
 
 const std::string vobsub_reader_c::id_string("# VobSub index file, v");
 
@@ -308,7 +316,6 @@ vobsub_reader_c::parse_headers() {
   }
 }
 
-#define deliver() deliver_packet(dst_buf, dst_size, timestamp, duration, &ptzr(track->ptzr));
 int
 vobsub_reader_c::deliver_packet(unsigned char *buf,
                                 int size,
@@ -407,6 +414,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
   unsigned char buf[5];
 
   vobsub_track_c *track         = tracks[track_id];
+  auto &packetizer              = ptzr(track->ptzr);
   int64_t timestamp             = track->entries[track->idx].timestamp;
   int64_t duration              = track->entries[track->idx].duration;
   uint64_t extraction_start_pos = track->entries[track->idx].position;
@@ -420,6 +428,10 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
   bool spu_len_valid            = false;
 
   m_bytes_processed            += extraction_end_pos - extraction_start_pos;
+
+  auto deliver                  = [this, &dst_buf, &dst_size, &timestamp, &duration, &packetizer]() {
+    return deliver_packet(dst_buf, dst_size, timestamp, duration, &packetizer);
+  };
 
   m_sub_file->setFilePointer(extraction_start_pos);
   track->packet_num++;

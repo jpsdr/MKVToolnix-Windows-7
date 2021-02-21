@@ -24,23 +24,23 @@
 #include "output/p_pcm.h"
 #include "output/p_video_for_windows.h"
 
-#define QTMP4_TFHD_BASE_DATA_OFFSET        0x000001
-#define QTMP4_TFHD_SAMPLE_DESCRIPTION_ID   0x000002
-#define QTMP4_TFHD_DEFAULT_DURATION        0x000008
-#define QTMP4_TFHD_DEFAULT_SIZE            0x000010
-#define QTMP4_TFHD_DEFAULT_FLAGS           0x000020
-#define QTMP4_TFHD_DURATION_IS_EMPTY       0x010000
-#define QTMP4_TFHD_DEFAULT_BASE_IS_MOOF    0x020000
+constexpr auto QTMP4_TFHD_BASE_DATA_OFFSET        = 0x000001;
+constexpr auto QTMP4_TFHD_SAMPLE_DESCRIPTION_ID   = 0x000002;
+constexpr auto QTMP4_TFHD_DEFAULT_DURATION        = 0x000008;
+constexpr auto QTMP4_TFHD_DEFAULT_SIZE            = 0x000010;
+constexpr auto QTMP4_TFHD_DEFAULT_FLAGS           = 0x000020;
+constexpr auto QTMP4_TFHD_DURATION_IS_EMPTY       = 0x010000;
+constexpr auto QTMP4_TFHD_DEFAULT_BASE_IS_MOOF    = 0x020000;
 
-#define QTMP4_TRUN_DATA_OFFSET             0x000001
-#define QTMP4_TRUN_FIRST_SAMPLE_FLAGS      0x000004
-#define QTMP4_TRUN_SAMPLE_DURATION         0x000100
-#define QTMP4_TRUN_SAMPLE_SIZE             0x000200
-#define QTMP4_TRUN_SAMPLE_FLAGS            0x000400
-#define QTMP4_TRUN_SAMPLE_CTS_OFFSET       0x000800
+constexpr auto QTMP4_TRUN_DATA_OFFSET             = 0x000001;
+constexpr auto QTMP4_TRUN_FIRST_SAMPLE_FLAGS      = 0x000004;
+constexpr auto QTMP4_TRUN_SAMPLE_DURATION         = 0x000100;
+constexpr auto QTMP4_TRUN_SAMPLE_SIZE             = 0x000200;
+constexpr auto QTMP4_TRUN_SAMPLE_FLAGS            = 0x000400;
+constexpr auto QTMP4_TRUN_SAMPLE_CTS_OFFSET       = 0x000800;
 
-#define QTMP4_FRAG_SAMPLE_FLAG_IS_NON_SYNC 0x00010000
-#define QTMP4_FRAG_SAMPLE_FLAG_DEPENDS_YES 0x01000000
+constexpr auto QTMP4_FRAG_SAMPLE_FLAG_IS_NON_SYNC = 0x00010000;
+constexpr auto QTMP4_FRAG_SAMPLE_FLAG_DEPENDS_YES = 0x01000000;
 
 struct qt_durmap_t {
   uint32_t number;

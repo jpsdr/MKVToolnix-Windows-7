@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-#define DTS_READ_SIZE 65536
+constexpr auto DTS_READ_SIZE = 65536;
 
 class wav_dts_demuxer_c: public wav_demuxer_c {
 private:

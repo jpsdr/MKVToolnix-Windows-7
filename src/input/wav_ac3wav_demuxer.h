@@ -15,9 +15,9 @@
 
 #include "common/common_pch.h"
 
-#define AC3WAV_BLOCK_SIZE   6144
-#define AC3WAV_SYNC_WORD1 0xf872
-#define AC3WAV_SYNC_WORD2 0x4e1f
+constexpr auto AC3WAV_BLOCK_SIZE = 6144;
+constexpr auto AC3WAV_SYNC_WORD1 = 0xf872;
+constexpr auto AC3WAV_SYNC_WORD2 = 0x4e1f;
 
 // Structure of AC-3-in-WAV:
 //
