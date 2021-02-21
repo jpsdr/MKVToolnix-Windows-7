@@ -209,14 +209,6 @@ FindChild(libebml::EbmlElement const *e) {
   return static_cast<A *>(m->FindFirstElt(EBML_INFO(A)));
 }
 
-#if !defined(HAVE_EBML_FINDNEXTCHILD)
-template <typename A> A*
-FindNextChild(libebml::EbmlMaster &Master,
-              A const  &PastElt) {
-  return static_cast<A *>(Master.FindNextElt(PastElt, false));
-}
-#endif  // !HAVE_EBML_FINDNEXTCHILD
-
 template<typename A> A &
 GetChild(libebml::EbmlMaster *m) {
   return GetChild<A>(*m);
