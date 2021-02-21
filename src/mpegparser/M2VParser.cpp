@@ -25,7 +25,7 @@
 #include "common/output.h"
 #include "M2VParser.h"
 
-#define BUFF_SIZE 2*1024*1024
+constexpr auto BUFF_SIZE = 2 * 1024 * 1024;
 
 MPEGFrame::MPEGFrame(binary *n_data, uint32_t n_size, bool n_bCopy):
   size(n_size), bCopy(n_bCopy) {

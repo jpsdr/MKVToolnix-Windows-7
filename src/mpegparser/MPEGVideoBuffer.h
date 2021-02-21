@@ -27,11 +27,11 @@
 #include "Types.h"
 #include "CircBuffer.h"
 
-#define MPEG_VIDEO_PICTURE_START_CODE  0x00
-#define MPEG_VIDEO_SEQUENCE_START_CODE  0xb3
-#define MPEG_VIDEO_EXT_START_CODE  0xb5
-#define MPEG_VIDEO_GOP_START_CODE  0xb8
-#define MPEG_VIDEO_USER_START_CODE  0xb2
+constexpr auto MPEG_VIDEO_PICTURE_START_CODE  = 0x00;
+constexpr auto MPEG_VIDEO_SEQUENCE_START_CODE = 0xb3;
+constexpr auto MPEG_VIDEO_EXT_START_CODE      = 0xb5;
+constexpr auto MPEG_VIDEO_GOP_START_CODE      = 0xb8;
+constexpr auto MPEG_VIDEO_USER_START_CODE     = 0xb2;
 
 enum MPEG2BufferState_e {
   MPEG2_BUFFER_STATE_NEED_MORE_DATA,
@@ -40,9 +40,9 @@ enum MPEG2BufferState_e {
   MPEG2_BUFFER_INVALID
 };
 
-#define MPEG2_I_FRAME 1
-#define MPEG2_P_FRAME 2
-#define MPEG2_B_FRAME 3
+constexpr auto MPEG2_I_FRAME = 1;
+constexpr auto MPEG2_P_FRAME = 2;
+constexpr auto MPEG2_B_FRAME = 3;
 
 struct MPEG2SequenceHeader {
   uint32_t width;
@@ -66,9 +66,9 @@ struct MPEG2GOPHeader {
   MPEG2GOPHeader();
 };
 
-#define MPEG2_PICTURE_TYPE_FRAME  0x03
-#define MPEG2_PICTURE_TYPE_TOP_FIELD  0x01
-#define MPEG2_PICTURE_TYPE_BOTTOM_FIELD  0x02
+constexpr auto MPEG2_PICTURE_TYPE_FRAME        = 0x03;
+constexpr auto MPEG2_PICTURE_TYPE_TOP_FIELD    = 0x01;
+constexpr auto MPEG2_PICTURE_TYPE_BOTTOM_FIELD = 0x02;
 
 struct MPEG2PictureHeader {
   uint32_t temporalReference;
