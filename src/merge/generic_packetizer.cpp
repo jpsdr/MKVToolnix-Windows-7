@@ -41,20 +41,26 @@
 
 using namespace libmatroska;
 
-#define TRACK_TYPE_TO_DEFTRACK_TYPE(track_type)      \
-  (  track_audio == track_type ? DEFTRACK_TYPE_AUDIO \
-   : track_video == track_type ? DEFTRACK_TYPE_VIDEO \
-   :                             DEFTRACK_TYPE_SUBS)
-
-#define LOOKUP_TRACK_ID(container)                    \
-      mtx::includes(container, m_ti.m_id) ? m_ti.m_id \
-    : mtx::includes(container, -1)        ? -1        \
-    :                                       -2
-
-// ---------------------------------------------------------------------
-
 namespace {
+
+constexpr auto
+track_type_to_deftrack_type(int type) {
+  return track_audio == type ? DEFTRACK_TYPE_AUDIO
+       : track_video == type ? DEFTRACK_TYPE_VIDEO
+       :                       DEFTRACK_TYPE_SUBS;
+}
+
+template<typename T>
+auto
+lookup_track_id(T const &container,
+                int64_t track_id) {
+  return mtx::includes(container, track_id) ? track_id
+       : mtx::includes(container, -1)       ? -1
+       :                                      -2;
+}
+
 debugging_option_c s_debug{"generic_packetizer"};
+
 }
 
 static std::unordered_map<std::string, bool> s_experimental_status_warning_shown;
@@ -178,7 +184,7 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
 
   // Let's see if the user has specified an aspect ratio or display dimensions
   // for this track.
-  int i = LOOKUP_TRACK_ID(m_ti.m_display_properties);
+  int i = lookup_track_id(m_ti.m_display_properties, m_ti.m_id);
   if (-2 != i) {
     display_properties_t &dprop = m_ti.m_display_properties[i];
     if (0 > dprop.aspect_ratio) {
@@ -203,107 +209,107 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
     m_ti.m_fourcc = m_ti.m_all_fourccs[-1];
 
   // Let's see if the user has specified cropping parameters for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_pixel_crop_list);
+  i = lookup_track_id(m_ti.m_pixel_crop_list, m_ti.m_id);
   if (-2 != i)
     set_video_pixel_cropping(m_ti.m_pixel_crop_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified colour matrix for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_colour_matrix_coeff_list);
+  i = lookup_track_id(m_ti.m_colour_matrix_coeff_list, m_ti.m_id);
   if (-2 != i)
     set_video_colour_matrix(m_ti.m_colour_matrix_coeff_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified bits per channel parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_bits_per_channel_list);
+  i = lookup_track_id(m_ti.m_bits_per_channel_list, m_ti.m_id);
   if (-2 != i)
     set_video_bits_per_channel(m_ti.m_bits_per_channel_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified chroma subsampling parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_chroma_subsample_list);
+  i = lookup_track_id(m_ti.m_chroma_subsample_list, m_ti.m_id);
   if (-2 != i)
     set_video_chroma_subsample(m_ti.m_chroma_subsample_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified Cb subsampling parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_cb_subsample_list);
+  i = lookup_track_id(m_ti.m_cb_subsample_list, m_ti.m_id);
   if (-2 != i)
     set_video_cb_subsample(m_ti.m_cb_subsample_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified chroma siting parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_chroma_siting_list);
+  i = lookup_track_id(m_ti.m_chroma_siting_list, m_ti.m_id);
   if (-2 != i)
     set_video_chroma_siting(m_ti.m_chroma_siting_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified colour range parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_colour_range_list);
+  i = lookup_track_id(m_ti.m_colour_range_list, m_ti.m_id);
   if (-2 != i)
     set_video_colour_range(m_ti.m_colour_range_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified colour transfer characteristics parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_colour_transfer_list);
+  i = lookup_track_id(m_ti.m_colour_transfer_list, m_ti.m_id);
   if (-2 != i)
     set_video_colour_transfer_character(m_ti.m_colour_transfer_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified colour primaries parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_colour_primaries_list);
+  i = lookup_track_id(m_ti.m_colour_primaries_list, m_ti.m_id);
   if (-2 != i)
     set_video_colour_primaries(m_ti.m_colour_primaries_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified max content light parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_max_cll_list);
+  i = lookup_track_id(m_ti.m_max_cll_list, m_ti.m_id);
   if (-2 != i)
     set_video_max_cll(m_ti.m_max_cll_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified max frame light parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_max_fall_list);
+  i = lookup_track_id(m_ti.m_max_fall_list, m_ti.m_id);
   if (-2 != i)
     set_video_max_fall(m_ti.m_max_fall_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified chromaticity coordinates parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_chroma_coordinates_list);
+  i = lookup_track_id(m_ti.m_chroma_coordinates_list, m_ti.m_id);
   if (-2 != i)
     set_video_chroma_coordinates(m_ti.m_chroma_coordinates_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified white colour coordinates parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_white_coordinates_list);
+  i = lookup_track_id(m_ti.m_white_coordinates_list, m_ti.m_id);
   if (-2 != i)
     set_video_white_colour_coordinates(m_ti.m_white_coordinates_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified max luminance parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_max_luminance_list);
+  i = lookup_track_id(m_ti.m_max_luminance_list, m_ti.m_id);
   if (-2 != i)
     set_video_max_luminance(m_ti.m_max_luminance_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified min luminance parameter for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_min_luminance_list);
+  i = lookup_track_id(m_ti.m_min_luminance_list, m_ti.m_id);
   if (-2 != i)
     set_video_min_luminance(m_ti.m_min_luminance_list[i], OPTION_SOURCE_COMMAND_LINE);
 
-  i = LOOKUP_TRACK_ID(m_ti.m_projection_type_list);
+  i = lookup_track_id(m_ti.m_projection_type_list, m_ti.m_id);
   if (-2 != i)
     set_video_projection_type(m_ti.m_projection_type_list[i], OPTION_SOURCE_COMMAND_LINE);
 
-  i = LOOKUP_TRACK_ID(m_ti.m_projection_private_list);
+  i = lookup_track_id(m_ti.m_projection_private_list, m_ti.m_id);
   if (-2 != i)
     set_video_projection_private(m_ti.m_projection_private_list[i], OPTION_SOURCE_COMMAND_LINE);
 
-  i = LOOKUP_TRACK_ID(m_ti.m_projection_pose_yaw_list);
+  i = lookup_track_id(m_ti.m_projection_pose_yaw_list, m_ti.m_id);
   if (-2 != i)
     set_video_projection_pose_yaw(m_ti.m_projection_pose_yaw_list[i], OPTION_SOURCE_COMMAND_LINE);
 
-  i = LOOKUP_TRACK_ID(m_ti.m_projection_pose_pitch_list);
+  i = lookup_track_id(m_ti.m_projection_pose_pitch_list, m_ti.m_id);
   if (-2 != i)
     set_video_projection_pose_pitch(m_ti.m_projection_pose_pitch_list[i], OPTION_SOURCE_COMMAND_LINE);
 
-  i = LOOKUP_TRACK_ID(m_ti.m_projection_pose_roll_list);
+  i = lookup_track_id(m_ti.m_projection_pose_roll_list, m_ti.m_id);
   if (-2 != i)
     set_video_projection_pose_roll(m_ti.m_projection_pose_roll_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified a field order for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_field_order_list);
+  i = lookup_track_id(m_ti.m_field_order_list, m_ti.m_id);
   if (-2 != i)
     set_video_field_order(m_ti.m_field_order_list[m_ti.m_id], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified a stereo mode for this track.
-  i = LOOKUP_TRACK_ID(m_ti.m_stereo_mode_list);
+  i = lookup_track_id(m_ti.m_stereo_mode_list, m_ti.m_id);
   if (-2 != i)
     set_video_stereo_mode(m_ti.m_stereo_mode_list[m_ti.m_id], OPTION_SOURCE_COMMAND_LINE);
 
@@ -1066,7 +1072,7 @@ generic_packetizer_c::set_headers() {
   if (-1.0 != m_htrack_default_duration)
     GetChild<KaxTrackDefaultDuration>(m_track_entry).SetValue(m_htrack_default_duration);
 
-  idx = TRACK_TYPE_TO_DEFTRACK_TYPE(m_htrack_type);
+  idx = track_type_to_deftrack_type(m_htrack_type);
 
   if (!m_ti.m_default_track.has_value())
     set_as_default_track(idx, DEFAULT_TRACK_PRIORITY_FROM_TYPE);
@@ -1372,7 +1378,7 @@ generic_packetizer_c::apply_block_addition_mappings() {
 
 void
 generic_packetizer_c::fix_headers() {
-  GetChild<KaxTrackFlagDefault>(m_track_entry).SetValue(g_default_tracks[TRACK_TYPE_TO_DEFTRACK_TYPE(m_htrack_type)] == m_hserialno ? 1 : 0);
+  GetChild<KaxTrackFlagDefault>(m_track_entry).SetValue(g_default_tracks[track_type_to_deftrack_type(m_htrack_type)] == m_hserialno ? 1 : 0);
 
   m_track_entry->SetGlobalTimecodeScale((int64_t)g_timestamp_scale);
 }
