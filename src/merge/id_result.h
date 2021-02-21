@@ -17,14 +17,14 @@
 
 #include "common/id_info.h"
 
-#define ID_RESULT_TRACK_AUDIO     "audio"
-#define ID_RESULT_TRACK_VIDEO     "video"
-#define ID_RESULT_TRACK_SUBTITLES "subtitles"
-#define ID_RESULT_TRACK_BUTTONS   "buttons"
-#define ID_RESULT_TRACK_UNKNOWN   "unknown"
-#define ID_RESULT_CHAPTERS        "chapters"
-#define ID_RESULT_TAGS            "tags"
-#define ID_RESULT_GLOBAL_TAGS_ID  -1
+constexpr auto ID_RESULT_TRACK_AUDIO     = "audio";
+constexpr auto ID_RESULT_TRACK_VIDEO     = "video";
+constexpr auto ID_RESULT_TRACK_SUBTITLES = "subtitles";
+constexpr auto ID_RESULT_TRACK_BUTTONS   = "buttons";
+constexpr auto ID_RESULT_TRACK_UNKNOWN   = "unknown";
+constexpr auto ID_RESULT_CHAPTERS        = "chapters";
+constexpr auto ID_RESULT_TAGS            = "tags";
+constexpr auto ID_RESULT_GLOBAL_TAGS_ID  = -1;
 
 // When bumping the schema version:
 // • increase `ID_JSON_FORMAT_VERSION` here
@@ -33,7 +33,7 @@
 //   1. `id`
 //   2. `properties` → `identification_format_version` → `minimum` and `maximum`
 // • adjust the link in `doc/man/mkvmerge.xml`
-#define ID_JSON_FORMAT_VERSION    14
+constexpr auto ID_JSON_FORMAT_VERSION = 14;
 
 struct id_result_t {
   int64_t id;
