@@ -506,3 +506,15 @@ generic_reader_c::add_track_tags_to_identification(libmatroska::KaxTags const &t
     }
   }
 }
+
+void
+generic_reader_c::show_demuxer_info() {
+  if (verbose)
+    mxinfo_fn(m_ti.m_fname, fmt::format(Y("Using the demultiplexer for the format '{0}'.\n"), get_format_name()));
+}
+
+void
+generic_reader_c::show_packetizer_info(int64_t track_id,
+                                       generic_packetizer_c *packetizer) {
+  mxinfo_tid(m_ti.m_fname, track_id, fmt::format(Y("Using the output module for the format '{0}'.\n"), packetizer->get_format_name()));
+}

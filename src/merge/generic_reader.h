@@ -29,19 +29,13 @@
 
 class generic_packetizer_c;
 
-#define DEFTRACK_TYPE_AUDIO 0
-#define DEFTRACK_TYPE_VIDEO 1
-#define DEFTRACK_TYPE_SUBS  2
+constexpr auto DEFTRACK_TYPE_AUDIO = 0;
+constexpr auto DEFTRACK_TYPE_VIDEO = 1;
+constexpr auto DEFTRACK_TYPE_SUBS  = 2;
 
 #define PTZR(i) m_reader_packetizers[i].get()
 #define PTZR0   PTZR(0)
 #define NPTZR() m_reader_packetizers.size()
-
-#define show_demuxer_info() \
-  if (verbose) \
-    mxinfo_fn(m_ti.m_fname, fmt::format(Y("Using the demultiplexer for the format '{0}'.\n"), get_format_name()));
-#define show_packetizer_info(track_id, packetizer) \
-  mxinfo_tid(m_ti.m_fname, track_id, fmt::format(Y("Using the output module for the format '{0}'.\n"), packetizer->get_format_name()));
 
 class generic_reader_c {
 public:
@@ -130,10 +124,14 @@ public:
   virtual int64_t calculate_probe_range(int64_t file_size, int64_t fixed_minimum) const;
   virtual bool probe_file() = 0;
 
+  virtual void show_packetizer_info(int64_t track_id, generic_packetizer_c *packetizer);
+
 public:
   static void set_probe_range_percentage(int64_rational_c const &probe_range_percentage);
 
 protected:
+  virtual void show_demuxer_info();
+
   virtual bool demuxing_requested(char type, int64_t id, mtx::bcp47::language_c const &language = {}) const;
 
   virtual void id_result_container(mtx::id::verbose_info_t const &verbose_info = mtx::id::verbose_info_t{});

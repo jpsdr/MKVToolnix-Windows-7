@@ -39,7 +39,7 @@ generic_packetizer_c *
 wav_pcm_demuxer_c::create_packetizer() {
   m_ptzr = new pcm_packetizer_c(m_reader, m_ti, get_sampling_frequency(), get_channels(), get_bits_per_sample(), m_ieee_float ? pcm_packetizer_c::ieee_float : pcm_packetizer_c::little_endian_integer);
 
-  show_packetizer_info(0, m_ptzr);
+  m_reader->show_packetizer_info(0, m_ptzr);
 
   return m_ptzr;
 }

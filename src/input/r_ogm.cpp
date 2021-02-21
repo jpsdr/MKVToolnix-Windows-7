@@ -998,7 +998,7 @@ ogm_a_aac_demuxer_c::create_packetizer() {
   if (audio_config.sbr)
     ptzr_obj->set_audio_output_sampling_freq(audio_config.output_sample_rate);
 
-  show_packetizer_info(m_ti.m_id, ptzr_obj);
+  reader->show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
 }
@@ -1022,7 +1022,7 @@ generic_packetizer_c *
 ogm_a_ac3_demuxer_c::create_packetizer() {
   auto ptzr_obj = new ac3_packetizer_c(reader, m_ti, sample_rate, channels, 0);
 
-  show_packetizer_info(m_ti.m_id, ptzr_obj);
+  reader->show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
 }
@@ -1046,7 +1046,7 @@ generic_packetizer_c *
 ogm_a_mp3_demuxer_c::create_packetizer() {
   auto ptzr_obj = new mp3_packetizer_c(reader, m_ti, sample_rate, channels, true);
 
-  show_packetizer_info(m_ti.m_id, ptzr_obj);
+  reader->show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
 }
@@ -1071,7 +1071,7 @@ generic_packetizer_c *
 ogm_a_pcm_demuxer_c::create_packetizer() {
   auto ptzr_obj = new pcm_packetizer_c(reader, m_ti, sample_rate, channels, bits_per_sample);
 
-  show_packetizer_info(m_ti.m_id, ptzr_obj);
+  reader->show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
 }
@@ -1112,7 +1112,7 @@ generic_packetizer_c *
 ogm_a_vorbis_demuxer_c::create_packetizer() {
   auto ptzr_obj = new vorbis_packetizer_c(reader, m_ti, packet_data);
 
-  show_packetizer_info(m_ti.m_id, ptzr_obj);
+  reader->show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
 }
@@ -1145,7 +1145,7 @@ ogm_a_opus_demuxer_c::create_packetizer() {
   m_ti.m_private_data = packet_data[0];
   auto ptzr_obj       = new opus_packetizer_c(reader, m_ti);
 
-  show_packetizer_info(m_ti.m_id, ptzr_obj);
+  reader->show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
 }
@@ -1288,7 +1288,7 @@ generic_packetizer_c *
 ogm_s_text_demuxer_c::create_packetizer() {
   auto ptzr_obj = new textsubs_packetizer_c(reader, m_ti, MKV_S_TEXTUTF8, true);
 
-  show_packetizer_info(m_ti.m_id, ptzr_obj);
+  reader->show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
 }
@@ -1332,7 +1332,7 @@ ogm_v_avc_demuxer_c::create_packetizer() {
 
   vptzr->set_video_pixel_dimensions(get_uint32_le(&sth->sh.video.width), get_uint32_le(&sth->sh.video.height));
 
-  show_packetizer_info(m_ti.m_id, vptzr);
+  reader->show_packetizer_info(m_ti.m_id, vptzr);
 
   return vptzr;
 }
@@ -1403,7 +1403,7 @@ ogm_v_mscomp_demuxer_c::create_packetizer() {
   else
     ptzr_obj = new video_for_windows_packetizer_c(reader, m_ti, fps, width, height);
 
-  show_packetizer_info(m_ti.m_id, ptzr_obj);
+  reader->show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
 }
@@ -1491,7 +1491,7 @@ ogm_v_theora_demuxer_c::create_packetizer() {
   double                fps      = (double)theora.frn / (double)theora.frd;
   generic_packetizer_c *ptzr_obj = new theora_video_packetizer_c(reader, m_ti, fps, theora.fmbw, theora.fmbh);
 
-  show_packetizer_info(m_ti.m_id, ptzr_obj);
+  reader->show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
 }
@@ -1583,7 +1583,7 @@ ogm_v_vp8_demuxer_c::create_packetizer() {
   ptzr_obj->set_video_display_dimensions(display_width, display_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
   ptzr_obj->set_track_default_duration(default_duration);
 
-  show_packetizer_info(m_ti.m_id, ptzr_obj);
+  reader->show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
 }
@@ -1679,7 +1679,7 @@ ogm_s_kate_demuxer_c::create_packetizer() {
   m_ti.m_private_data = lace_memory_xiph(packet_data);
   auto ptzr_obj       = new kate_packetizer_c(reader, m_ti);
 
-  show_packetizer_info(m_ti.m_id, ptzr_obj);
+  reader->show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
 }

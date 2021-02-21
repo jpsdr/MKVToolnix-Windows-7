@@ -284,7 +284,7 @@ ogm_a_flac_demuxer_c::create_packetizer() {
   generic_packetizer_c *ptzr_obj = new flac_packetizer_c(reader, m_ti, buf, size);
   safefree(buf);
 
-  show_packetizer_info(m_ti.m_id, ptzr_obj);
+  reader->show_packetizer_info(m_ti.m_id, ptzr_obj);
 
   return ptzr_obj;
 }
