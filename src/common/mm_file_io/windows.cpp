@@ -30,6 +30,7 @@
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/mm_file_io_p.h"
+#include "common/path.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
@@ -191,4 +192,51 @@ mm_file_io_c::truncate(int64_t pos) {
   restore_pos();
 
   return -1;
+}
+
+void
+mm_file_io_c::prepare_path(std::string const &path) {
+  auto normalized_path = path;
+
+  for (auto &c : normalized_path)
+    if (c == '/')
+      c = '\\';
+
+  auto directory = mtx::fs::to_path(normalized_path).parent_path();
+
+  if (directory.empty() || std::filesystem::exists(directory))
+    return;
+
+  auto is_unc = normalized_path.substr(0, 2) == "\\\\"s;
+
+  std::vector<std::filesystem::path> to_check;
+
+  // path                   | is_unc | parent_path        | parent_path.parent_path | to_check
+  // -----------------------+--------+--------------------+-------------------------+----------------------
+  // E:\moo\cow             | false  | E:\moo             | E:\                     | E:\moo\cow
+  // E:\moo                 | false  | E:\                | E:\                     | E:\moo
+  // E:\                    | false  | E:\                | E:\                     |
+  // \\server\share\moo\cow | true   | \\server\share\moo | \\server\share          | \\sever\share\moo\cow
+  // \\server\share\moo     | true   | \\server\share     | \\server                | \\sever\share\moo
+  // \\server\share         | true   | \\server           | \                       |
+  // \\server               | true   | \                  | \                       |
+
+  while (   !directory.empty()
+         && (directory.parent_path() != directory)
+         && (   !is_unc
+             || (directory.parent_path().parent_path() != "\\"s))) {
+    to_check.emplace_back(directory);
+    directory = directory.parent_path();
+  }
+
+  for (auto itr = to_check.rbegin(), end = to_check.rend(); itr != end; ++itr) {
+    if (std::filesystem::exists(*itr))
+      continue;
+
+    std::error_code error_code;
+    std::filesystem::create_directory(*itr, error_code);
+
+    if (error_code)
+      throw mtx::mm_io::create_directory_x(path, mtx::mm_io::make_error_code());
+  }
 }

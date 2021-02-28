@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* all programs, only on Windows: fixed checking existence of & creating
+  directories with UNC paths such as `\\server\share\folder\file.mkv`. Fixes
+  #3041.
+
+
 # Version 54.0.0 "F Maj Pixie" 2021-02-26
 
 ## New features and enhancements

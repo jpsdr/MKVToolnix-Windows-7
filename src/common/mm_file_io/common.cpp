@@ -16,7 +16,6 @@
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/mm_file_io_p.h"
-#include "common/path.h"
 
 bool mm_file_io_private_c::ms_flush_on_close = false;
 
@@ -29,18 +28,6 @@ mm_file_io_c::mm_file_io_c(std::string const &path,
 mm_file_io_c::mm_file_io_c(mm_file_io_private_c &p)
   : mm_io_c{p}
 {
-}
-
-void
-mm_file_io_c::prepare_path(const std::string &path) {
-  auto directory = mtx::fs::to_path(path).parent_path();
-  if (directory.empty() || std::filesystem::exists(directory))
-    return;
-
-  std::error_code error_code;
-  std::filesystem::create_directories(directory, error_code);
-  if (error_code)
-    throw mtx::mm_io::create_directory_x(path, mtx::mm_io::make_error_code());
 }
 
 memory_cptr
