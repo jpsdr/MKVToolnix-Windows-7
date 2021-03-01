@@ -242,8 +242,8 @@ Tab::defaultFileNameForSaving(QString const &ext) {
   auto &p = *p_func();
 
   return !p.config.m_destination.isEmpty() ? QFileInfo{p.config.m_destination         }.completeBaseName() + ext
-      : !p.config.m_files.isEmpty()        ? QFileInfo{p.config.m_files[0]->m_fileName}.completeBaseName() + ext
-      :                                      QString{};
+       : !p.config.m_files.isEmpty()       ? QFileInfo{p.config.m_files[0]->m_fileName}.completeBaseName() + ext
+       :                                     QString{};
 }
 
 QString
