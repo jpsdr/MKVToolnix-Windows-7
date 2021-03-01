@@ -7,6 +7,9 @@
   #3041.
 * MKVToolNix GUI, only on Windows: fixed the GUI hanging when trying to browse
   for files on drives that don't actually exist. Fixes #3046.
+* all programs, only on Windows: implemented several workarounds for bugs in
+  `std::filesystem` wrt. UNC paths. The effect of those bugs was that Blu-rays
+  and DVDs couldn't be added from UNC paths. Fixes #3037.
 
 
 # Version 54.0.0 "F Maj Pixie" 2021-02-26
