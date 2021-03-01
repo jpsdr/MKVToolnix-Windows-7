@@ -131,7 +131,6 @@ public Q_SLOTS:
   virtual void onDisplayWidthChanged(QString newValue);
   virtual void onDisplayHeightChanged(QString newValue);
   virtual void onStereoscopyChanged(int newValue);
-  virtual void onNaluSizeLengthChanged(int newValue);
   virtual void onCroppingChanged(QString newValue);
   virtual void onAacIsSBRChanged(int newValue);
   virtual void onReduceAudioToCoreChanged(bool newValue);

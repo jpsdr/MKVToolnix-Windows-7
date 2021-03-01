@@ -274,9 +274,6 @@ set_usage() {
   usage_text += Y("  --fix-bitstream-timing-information <TID[:bool]>\n"
                   "                           Adjust the frame/field rate stored in the video\n"
                   "                           bitstream to match the track's default duration.\n");
-  usage_text += Y("  --nalu-size-length <TID:n>\n"
-                  "                           Force the NALU size length to n bytes with\n"
-                  "                           2 <= n <= 4 with 4 being the default.\n");
   usage_text +=   "\n";
   usage_text += Y(" Options that only apply to video tracks:\n");
   usage_text += Y("  -f, --fourcc <FOURCC>    Forces the FourCC to the specified value.\n"
@@ -1558,37 +1555,6 @@ parse_arg_default_duration(const std::string &s,
 
   ti.m_default_durations[id].first  = default_duration;
   ti.m_default_durations[id].second = mtx::regex::match(parts[1], mtx::regex::jp::Regex{".*i$"});
-}
-
-/** \brief Parse the argument for \c --nalu-size-length
-
-   The argument must consist of a track ID and the NALU size length
-   separated by a colon. The NALU size length must be an integer
-   between 2 and 4 inclusively.
-*/
-static void
-parse_arg_nalu_size_length(const std::string &s,
-                           track_info_c &ti) {
-  static bool s_nalu_size_length_3_warning_printed = false;
-
-  auto parts = mtx::string::split(s, ":");
-  if (parts.size() != 2)
-    mxerror(fmt::format(Y("'{0}' is not a valid pair of track ID and NALU size length in '--nalu-size-length {0}'.\n"), s));
-
-  int64_t id = 0;
-  if (!mtx::string::parse_number(parts[0], id))
-    mxerror(fmt::format(Y("'{0}' is not a valid track ID in '--nalu-size-length {1}'.\n"), parts[0], s));
-
-  int64_t nalu_size_length;
-  if (!mtx::string::parse_number(parts[1], nalu_size_length) || (2 > nalu_size_length) || (4 < nalu_size_length))
-    mxerror(fmt::format(Y("The NALU size length must be a number between 2 and 4 inclusively in '--nalu-size-length {0}'.\n"), s));
-
-  if ((3 == nalu_size_length) && !s_nalu_size_length_3_warning_printed) {
-    s_nalu_size_length_3_warning_printed = true;
-    mxwarn(Y("Using a NALU size length of 3 bytes might result in tracks that won't be decodable with certain AVC/H.264 codecs.\n"));
-  }
-
-  ti.m_nalu_size_lengths[id] = nalu_size_length;
 }
 
 static void
@@ -2889,10 +2855,8 @@ parse_args(std::vector<std::string> args) {
       sit++;
 
     } else if (this_arg == "--nalu-size-length") {
-      if (no_next_arg)
-        mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
-
-      parse_arg_nalu_size_length(next_arg, *ti);
+      // Option was removed. Recognize it for not breaking existing
+      // applications.
       sit++;
 
     } else if (this_arg == "--fix-bitstream-timing-information") {

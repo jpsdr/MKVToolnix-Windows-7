@@ -1643,17 +1643,6 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry id="mkvmerge.description.nalu_size_length">
-     <term><option>--nalu-size-length</option> <parameter>TID:n</parameter></term>
-     <listitem>
-      <para>
-       Forces the <abbrev>NALU</abbrev> size length to <parameter>n</parameter> bytes.  This parameter is only used if the AVC/H.264
-       elementary stream packetizer is used.  If left out it defaults to 4 bytes, but there are files that contain frames or slices that are
-       all smaller than 65536 bytes.  For such files you can use this parameter and decrease the size to 2.
-      </para>
-     </listitem>
-    </varlistentry>
-
     <varlistentry id="mkvmerge.description.compression">
      <term><option>--compression</option> <parameter>TID:n</parameter></term>
      <listitem>

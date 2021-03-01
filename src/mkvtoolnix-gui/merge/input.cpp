@@ -62,7 +62,7 @@ Tab::setupControlLists() {
                   << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
                   << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->defaultDurationLabel << p.ui->defaultDuration << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps
                   << p.ui->videoPropertiesBox << p.ui->setAspectRatio << p.ui->aspectRatio << p.ui->setDisplayWidthHeight << p.ui->displayWidth << p.ui->displayDimensionsXLabel << p.ui->displayHeight << p.ui->stereoscopyLabel
-                  << p.ui->stereoscopy << p.ui->naluSizeLengthLabel << p.ui->naluSizeLength << p.ui->croppingLabel << p.ui->cropping << p.ui->cuesLabel << p.ui->cues
+                  << p.ui->stereoscopy << p.ui->croppingLabel << p.ui->cropping << p.ui->cuesLabel << p.ui->cues
                   << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo;
 
   p.subtitleControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
@@ -84,9 +84,9 @@ Tab::setupControlLists() {
                      << p.ui->videoPropertiesBox << p.ui->setAspectRatio << p.ui->aspectRatio << p.ui->setDisplayWidthHeight << p.ui->displayWidth << p.ui->displayDimensionsXLabel << p.ui->displayHeight << p.ui->stereoscopyLabel
                      << p.ui->stereoscopy << p.ui->croppingLabel << p.ui->cropping << p.ui->audioPropertiesBox << p.ui->aacIsSBR << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet
                      << p.ui->miscellaneousBox << p.ui->cuesLabel << p.ui->cues << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions
-                     << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain << p.ui->naluSizeLengthLabel << p.ui->naluSizeLength;
+                     << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain;
 
-  p.comboBoxControls << p.ui->muxThis << p.ui->defaultTrackFlag << p.ui->forcedTrackFlag << p.ui->compression << p.ui->cues << p.ui->stereoscopy << p.ui->naluSizeLength << p.ui->aacIsSBR << p.ui->subtitleCharacterSet
+  p.comboBoxControls << p.ui->muxThis << p.ui->defaultTrackFlag << p.ui->forcedTrackFlag << p.ui->compression << p.ui->cues << p.ui->stereoscopy << p.ui->aacIsSBR << p.ui->subtitleCharacterSet
                      << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlag<< p.ui->originalFlag << p.ui->commentaryFlag;
 
   p.notIfAppendingControls << p.ui->trackLanguageLabel       << p.ui->trackLanguage           << p.ui->trackNameLabel              << p.ui->trackName          << p.ui->defaultTrackFlagLabel     << p.ui->defaultTrackFlag
@@ -95,7 +95,7 @@ Tab::setupControlLists() {
                            << p.ui->compressionLabel         << p.ui->compression             << p.ui->trackTagsLabel              << p.ui->trackTags          << p.ui->browseTrackTags
                            << p.ui->defaultDurationLabel     << p.ui->defaultDuration         << p.ui->fixBitstreamTimingInfo      << p.ui->setAspectRatio     << p.ui->setDisplayWidthHeight     << p.ui->aspectRatio
                            << p.ui->displayWidth             << p.ui->displayDimensionsXLabel << p.ui->displayHeight               << p.ui->stereoscopyLabel   << p.ui->stereoscopy
-                           << p.ui->naluSizeLengthLabel      << p.ui->naluSizeLength          << p.ui->croppingLabel               << p.ui->cropping           << p.ui->aacIsSBR
+                           << p.ui->croppingLabel            << p.ui->cropping                << p.ui->aacIsSBR
                            << p.ui->cuesLabel                << p.ui->cues                    << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions;
 }
 
@@ -241,10 +241,6 @@ Tab::setupInputControls() {
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
     p.ui->stereoscopy->addItem(QString{}, idx + 1);
 
-  // NALU size length
-  for (auto idx = 0; idx < 3; ++idx)
-    p.ui->naluSizeLength->addItem(QString{}, idx * 2);
-
   for (auto idx = 0; idx < 3; ++idx)
     p.ui->defaultTrackFlag->addItem(QString{}, idx);
 
@@ -379,7 +375,6 @@ Tab::setupInputControls() {
   connect(p.ui->moveTracksDown,                &QPushButton::clicked,                                                  this,                       &Tab::onMoveTracksDown);
   connect(p.ui->moveTracksUp,                  &QPushButton::clicked,                                                  this,                       &Tab::onMoveTracksUp);
   connect(p.ui->muxThis,                       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onMuxThisChanged);
-  connect(p.ui->naluSizeLength,                static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onNaluSizeLengthChanged);
   connect(p.ui->reduceToAudioCore,             &QCheckBox::toggled,                                                    this,                       &Tab::onReduceAudioToCoreChanged);
   connect(p.ui->removeDialogNormalizationGain, &QCheckBox::toggled,                                                    this,                       &Tab::onRemoveDialogNormalizationGainChanged);
   connect(p.ui->setAspectRatio,                &QPushButton::clicked,                                                  this,                       &Tab::onSetAspectRatio);
@@ -528,12 +523,6 @@ Tab::setupInputToolTips() {
                    Q("%1 %2")
                    .arg(QY("Sets the stereo mode of the video track to this value."))
                    .arg(QY("If left empty then the track's original stereo mode will be kept or, if it didn't have one, none will be set at all.")));
-  Util::setToolTip(p.ui->naluSizeLength,
-                   Q("<p>%1 %2 %3</p><p>%4</p>")
-                   .arg(QYH("Forces the NALU size length to a certain number of bytes."))
-                   .arg(QYH("It defaults to 4 bytes, but there are files which do not contain a frame or slice that is bigger than 65535 bytes."))
-                   .arg(QYH("For such files you can use this parameter and decrease the size to 2."))
-                   .arg(QYH("This parameter is only effective for AVC/H.264 and HEVC/H.265 elementary streams read from AVC/H.264 ES or HEVC/H.265 ES files, AVIs or Matroska files created with '--engage allow_avc_in_vwf_mode'.")));
   Util::setToolTip(p.ui->aacIsSBR,
                    Q("%1 %2 %3")
                    .arg(QY("This track contains SBR AAC/HE-AAC/AAC+ data."))
@@ -752,7 +741,6 @@ Tab::setInputControlValues(Track *track) {
   Util::setComboBoxIndexIf(p.ui->compression,          [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == static_cast<unsigned int>(track->m_compression)); });
   Util::setComboBoxIndexIf(p.ui->cues,                 [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_cues);                                   });
   Util::setComboBoxIndexIf(p.ui->stereoscopy,          [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_stereoscopy);                            });
-  Util::setComboBoxIndexIf(p.ui->naluSizeLength,       [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_naluSizeLength);                         });
   Util::setComboBoxIndexIf(p.ui->aacIsSBR,             [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);                               });
 
   p.ui->trackLanguage->setLanguage(track->m_language);
@@ -1168,16 +1156,6 @@ Tab::onStereoscopyChanged(int newValue) {
 }
 
 void
-Tab::onNaluSizeLengthChanged(int newValue) {
-  auto data = p_func()->ui->naluSizeLength->itemData(newValue);
-  if (!data.isValid())
-    return;
-  newValue = data.toInt();
-
-  withSelectedTracks([&newValue](auto &track) { track.m_naluSizeLength = newValue; }, true);
-}
-
-void
 Tab::onCroppingChanged(QString newValue) {
   withSelectedTracks([&newValue](auto &track) { track.m_cropping = newValue; }, true);
 }
@@ -1525,7 +1503,6 @@ Tab::retranslateInputUI() {
   for (auto &comboBox : std::vector<QComboBox *>{p.ui->muxThis, p.ui->forcedTrackFlag, p.ui->hearingImpairedFlag, p.ui->visualImpairedFlag, p.ui->textDescriptionsFlag, p.ui->originalFlag, p.ui->commentaryFlag})
     Util::setComboBoxTexts(comboBox, QStringList{} << QY("Yes") << QY("No"));
 
-  Util::setComboBoxTexts(p.ui->naluSizeLength,   QStringList{} << QY("Don't change")            << QY("Force 2 bytes")        << QY("Force 4 bytes"));
   Util::setComboBoxTexts(p.ui->defaultTrackFlag, QStringList{} << QY("Determine automatically") << QY("Yes")                  << QY("No"));
   Util::setComboBoxTexts(p.ui->compression,      QStringList{} << QY("Determine automatically") << QY("No extra compression") << Q("zlib"));
   Util::setComboBoxTexts(p.ui->cues,             QStringList{} << QY("Determine automatically") << QY("Only for I frames")    << QY("For all frames") << QY("No cues"));

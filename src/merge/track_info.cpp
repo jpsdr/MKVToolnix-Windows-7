@@ -33,7 +33,6 @@ track_info_c::track_info_c()
   , m_reset_timestamps{}
   , m_cues{CUE_STRATEGY_UNSPECIFIED}
   , m_compression{COMPRESSION_UNSPECIFIED}
-  , m_nalu_size_length{}
   , m_no_chapters{}
   , m_no_global_tags{}
   , m_avi_audio_sync_enabled{}
@@ -189,9 +188,6 @@ track_info_c::operator =(const track_info_c &src) {
 
   m_field_order_list                 = src.m_field_order_list;
   m_field_order                      = src.m_field_order;
-
-  m_nalu_size_lengths                = src.m_nalu_size_lengths;
-  m_nalu_size_length                 = src.m_nalu_size_length;
 
   m_attach_mode_list                 = src.m_attach_mode_list;
 

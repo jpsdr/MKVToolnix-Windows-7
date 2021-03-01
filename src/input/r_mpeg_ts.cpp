@@ -248,15 +248,8 @@ track_c::new_stream_v_mpeg_1_2(bool end_of_detection) {
 
 int
 track_c::new_stream_v_avc(bool end_of_detection) {
-  if (!m_avc_parser) {
+  if (!m_avc_parser)
     m_avc_parser = std::make_shared<mtx::avc::es_parser_c>();
-    m_avc_parser->ignore_nalu_size_length_errors();
-
-    if (mtx::includes(reader.m_ti.m_nalu_size_lengths, reader.m_tracks.size()))
-      m_avc_parser->set_nalu_size_length(reader.m_ti.m_nalu_size_lengths[0]);
-    else if (mtx::includes(reader.m_ti.m_nalu_size_lengths, -1))
-      m_avc_parser->set_nalu_size_length(reader.m_ti.m_nalu_size_lengths[-1]);
-  }
 
   mxdebug_if(m_debug_headers, fmt::format("new_stream_v_avc: packet size: {0}\n", pes_payload_read->get_size()));
 

@@ -29,7 +29,6 @@ hevc_es_reader_c::probe_file() {
   bool first = true;
 
   mtx::hevc::es_parser_c parser;
-  parser.ignore_nalu_size_length_errors();
   parser.set_nalu_size_length(4);
 
   for (i = 0; 50 > i; ++i) {

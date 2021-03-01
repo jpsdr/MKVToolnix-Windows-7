@@ -696,12 +696,6 @@ mpeg_ps_reader_c::new_stream_v_avc(mpeg_ps_id_t id,
                                    mpeg_ps_track_ptr &track) {
   mtx::avc::es_parser_c parser;
 
-  parser.ignore_nalu_size_length_errors();
-  if (mtx::includes(m_ti.m_nalu_size_lengths, tracks.size()))
-    parser.set_nalu_size_length(m_ti.m_nalu_size_lengths[0]);
-  else if (mtx::includes(m_ti.m_nalu_size_lengths, -1))
-    parser.set_nalu_size_length(m_ti.m_nalu_size_lengths[-1]);
-
   parser.add_bytes(buf, length);
 
   while (!parser.headers_parsed() && (m_probe_range >= m_in->getFilePointer())) {

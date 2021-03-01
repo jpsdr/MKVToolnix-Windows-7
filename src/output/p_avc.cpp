@@ -36,7 +36,8 @@ avc_video_packetizer_c(generic_reader_c *p_reader,
 {
   m_relaxed_timestamp_checking = true;
 
-  setup_nalu_size_len_change();
+  if (5 <= m_ti.m_private_data->get_size())
+    m_nalu_size_len = (m_ti.m_private_data->get_buffer()[4] & 0x03) + 1;
 
   set_codec_private(m_ti.m_private_data);
 }
@@ -111,9 +112,6 @@ avc_video_packetizer_c::process(packet_cptr packet) {
 
   m_ref_timestamp = packet->timestamp;
 
-  if (m_nalu_size_len_dst && (m_nalu_size_len_dst != m_nalu_size_len_src))
-    change_nalu_size_len(packet);
-
   process_nalus(*packet->data);
 
   add_packet(packet);
@@ -137,98 +135,24 @@ avc_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
 }
 
 void
-avc_video_packetizer_c::setup_nalu_size_len_change() {
-  if (!m_ti.m_private_data || (5 > m_ti.m_private_data->get_size()))
-    return;
-
-  auto private_data   = m_ti.m_private_data->get_buffer();
-  m_nalu_size_len_src = (private_data[4] & 0x03) + 1;
-  m_nalu_size_len_dst = m_nalu_size_len_src;
-
-  if (!m_ti.m_nalu_size_length || (m_ti.m_nalu_size_length == m_nalu_size_len_src))
-    return;
-
-  m_nalu_size_len_dst = m_ti.m_nalu_size_length;
-  private_data[4]     = (private_data[4] & 0xfc) | (m_nalu_size_len_dst - 1);
-  m_max_nalu_size     = 1ll << (8 * m_nalu_size_len_dst);
-
-  set_codec_private(m_ti.m_private_data);
-}
-
-void
-avc_video_packetizer_c::change_nalu_size_len(packet_cptr packet) {
-  unsigned char *src = packet->data->get_buffer();
-  int size           = packet->data->get_size();
-
-  if (!src || !size)
-    return;
-
-  std::vector<int> nalu_sizes;
-
-  int src_pos = 0;
-
-  // Find all NALU sizes in this packet.
-  while (src_pos < size) {
-    if ((size - src_pos) < m_nalu_size_len_src)
-      break;
-
-    int nalu_size = get_uint_be(&src[src_pos], m_nalu_size_len_src);
-    nalu_size     = std::min<int>(nalu_size, size - src_pos - m_nalu_size_len_src);
-
-    if (nalu_size > m_max_nalu_size)
-      mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("The chosen NALU size length of {0} is too small. Try using '4'.\n"), m_nalu_size_len_dst));
-
-    src_pos += m_nalu_size_len_src + nalu_size;
-
-    nalu_sizes.push_back(nalu_size);
-  }
-
-  // Allocate memory if the new NALU size length is greater
-  // than the previous one. Otherwise reuse the existing memory.
-  if (m_nalu_size_len_dst > m_nalu_size_len_src) {
-    int new_size = size + nalu_sizes.size() * (m_nalu_size_len_dst - m_nalu_size_len_src);
-    packet->data = memory_c::alloc(new_size);
-  }
-
-  // Copy the NALUs and write the new sized length field.
-  unsigned char *dst = packet->data->get_buffer();
-  src_pos            = 0;
-  int dst_pos        = 0;
-
-  size_t i;
-  for (i = 0; nalu_sizes.size() > i; ++i) {
-    int nalu_size = nalu_sizes[i];
-
-    put_uint_be(&dst[dst_pos], nalu_size, m_nalu_size_len_dst);
-
-    memmove(&dst[dst_pos + m_nalu_size_len_dst], &src[src_pos + m_nalu_size_len_src], nalu_size);
-
-    src_pos += m_nalu_size_len_src + nalu_size;
-    dst_pos += m_nalu_size_len_dst + nalu_size;
-  }
-
-  packet->data->set_size(dst_pos);
-}
-
-void
 avc_video_packetizer_c::process_nalus(memory_c &data)
   const {
   auto ptr        = data.get_buffer();
   auto total_size = data.get_size();
   auto idx        = 0u;
 
-  while ((idx + m_nalu_size_len_dst) < total_size) {
-    auto nalu_size = get_uint_be(&ptr[idx], m_nalu_size_len_dst) + m_nalu_size_len_dst;
+  while ((idx + m_nalu_size_len) < total_size) {
+    auto nalu_size = get_uint_be(&ptr[idx], m_nalu_size_len) + m_nalu_size_len;
 
     if ((idx + nalu_size) > total_size)
       break;
 
-    if (static_cast<int>(nalu_size) < m_nalu_size_len_dst)
+    if (static_cast<int>(nalu_size) < m_nalu_size_len)
       break;
 
-    auto const nalu_type = ptr[idx + m_nalu_size_len_dst] & 0x1f;
+    auto const nalu_type = ptr[idx + m_nalu_size_len] & 0x1f;
 
-    if (   (static_cast<int>(nalu_size) == m_nalu_size_len_dst) // empty NALU?
+    if (   (static_cast<int>(nalu_size) == m_nalu_size_len) // empty NALU?
         || mtx::included_in(nalu_type, mtx::avc::NALU_TYPE_FILLER_DATA, mtx::avc::NALU_TYPE_ACCESS_UNIT)) {
       memory_c::splice(data, idx, nalu_size);
       total_size -= nalu_size;
@@ -242,19 +166,19 @@ avc_video_packetizer_c::process_nalus(memory_c &data)
       mxdebug_if(m_debug_fix_bistream_timing_info, fmt::format("fix_bitstream_timing_info [NALU]: m_track_default_duration {0}\n", m_track_default_duration));
 
       mtx::avc::sps_info_t sps_info;
-      auto parsed_nalu = mtx::avc::parse_sps(mtx::mpeg::nalu_to_rbsp(memory_c::clone(&ptr[idx + m_nalu_size_len_dst], nalu_size - m_nalu_size_len_dst)), sps_info, true, true, m_track_default_duration);
+      auto parsed_nalu = mtx::avc::parse_sps(mtx::mpeg::nalu_to_rbsp(memory_c::clone(&ptr[idx + m_nalu_size_len], nalu_size - m_nalu_size_len)), sps_info, true, true, m_track_default_duration);
 
       if (parsed_nalu) {
         parsed_nalu = mtx::mpeg::rbsp_to_nalu(parsed_nalu);
 
-        memory_c::splice(data, idx + m_nalu_size_len_dst, nalu_size - m_nalu_size_len_dst, *parsed_nalu);
+        memory_c::splice(data, idx + m_nalu_size_len, nalu_size - m_nalu_size_len, *parsed_nalu);
 
         total_size = data.get_size();
         ptr        = data.get_buffer();
 
-        put_uint_be(&ptr[idx], parsed_nalu->get_size(), m_nalu_size_len_dst);
+        put_uint_be(&ptr[idx], parsed_nalu->get_size(), m_nalu_size_len);
 
-        idx += parsed_nalu->get_size() + m_nalu_size_len_dst;
+        idx += parsed_nalu->get_size() + m_nalu_size_len;
         continue;
       }
     }
@@ -263,6 +187,6 @@ avc_video_packetizer_c::process_nalus(memory_c &data)
   }
 
   // empty NALU at the end?
-  if (total_size == (idx + m_nalu_size_len_dst))
+  if (total_size == (idx + m_nalu_size_len))
     data.set_size(idx);
 }

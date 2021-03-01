@@ -745,6 +745,44 @@
                       <string>Video properties</string>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_7">
+                      <item row="1" column="0">
+                       <widget class="QRadioButton" name="setDisplayWidthHeight">
+                        <property name="text">
+                         <string>Display width/height:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="1">
+                       <widget class="QLineEdit" name="cropping">
+                        <property name="clearButtonEnabled">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="5" column="0">
+                       <widget class="QLabel" name="stereoscopyLabel">
+                        <property name="text">
+                         <string>Stereoscopy:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="5" column="1">
+                       <widget class="QComboBox" name="stereoscopy"/>
+                      </item>
+                      <item row="3" column="0">
+                       <widget class="QLabel" name="croppingLabel">
+                        <property name="text">
+                         <string>Cropping:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="0">
+                       <widget class="QRadioButton" name="setAspectRatio">
+                        <property name="text">
+                         <string>Set aspect ratio:</string>
+                        </property>
+                       </widget>
+                      </item>
                       <item row="1" column="1">
                        <layout class="QHBoxLayout" name="horizontalLayout_14">
                         <item>
@@ -769,26 +807,6 @@
                          </widget>
                         </item>
                        </layout>
-                      </item>
-                      <item row="5" column="1">
-                       <widget class="QComboBox" name="stereoscopy"/>
-                      </item>
-                      <item row="7" column="0">
-                       <widget class="QLabel" name="naluSizeLengthLabel">
-                        <property name="mouseTracking">
-                         <bool>false</bool>
-                        </property>
-                        <property name="text">
-                         <string>NALU size length:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="0" column="0">
-                       <widget class="QRadioButton" name="setAspectRatio">
-                        <property name="text">
-                         <string>Set aspect ratio:</string>
-                        </property>
-                       </widget>
                       </item>
                       <item row="0" column="1">
                        <widget class="QComboBox" name="aspectRatio">
@@ -841,37 +859,6 @@
                          </property>
                         </item>
                        </widget>
-                      </item>
-                      <item row="1" column="0">
-                       <widget class="QRadioButton" name="setDisplayWidthHeight">
-                        <property name="text">
-                         <string>Display width/height:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="1">
-                       <widget class="QLineEdit" name="cropping">
-                        <property name="clearButtonEnabled">
-                         <bool>true</bool>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="3" column="0">
-                       <widget class="QLabel" name="croppingLabel">
-                        <property name="text">
-                         <string>Cropping:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="5" column="0">
-                       <widget class="QLabel" name="stereoscopyLabel">
-                        <property name="text">
-                         <string>Stereoscopy:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="7" column="1">
-                       <widget class="QComboBox" name="naluSizeLength"/>
                       </item>
                      </layout>
                     </widget>
@@ -2081,7 +2068,6 @@
   <tabstop>displayHeight</tabstop>
   <tabstop>cropping</tabstop>
   <tabstop>stereoscopy</tabstop>
-  <tabstop>naluSizeLength</tabstop>
   <tabstop>aacIsSBR</tabstop>
   <tabstop>reduceToAudioCore</tabstop>
   <tabstop>removeDialogNormalizationGain</tabstop>

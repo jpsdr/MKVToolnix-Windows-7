@@ -3360,7 +3360,6 @@ qtmp4_demuxer_c::check_for_hevc_video_annex_b_bitstream() {
   auto probe_size = 128 * 1024;
   while (probe_size <= (1024 * 1024)) {
     mtx::hevc::es_parser_c parser;
-    parser.ignore_nalu_size_length_errors();
 
     buf = read_first_bytes(probe_size);
     if (!buf)
@@ -3501,7 +3500,6 @@ qtmp4_demuxer_c::derive_track_params_from_avc_bitstream() {
 
   mtx::avc::es_parser_c parser;
 
-  parser.ignore_nalu_size_length_errors();
   parser.add_bytes(mem->get_buffer(), mem->get_size());
   parser.flush();
 

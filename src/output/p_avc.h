@@ -19,7 +19,7 @@
 
 class avc_video_packetizer_c: public generic_video_packetizer_c {
 protected:
-  int m_nalu_size_len_src{}, m_nalu_size_len_dst{};
+  int m_nalu_size_len{};
   int64_t m_max_nalu_size{}, m_track_default_duration{-1};
   debugging_option_c m_debug_fix_bistream_timing_info;
 
@@ -36,7 +36,5 @@ public:
 
 protected:
   virtual void extract_aspect_ratio();
-  virtual void setup_nalu_size_len_change();
-  virtual void change_nalu_size_len(packet_cptr packet);
   virtual void process_nalus(memory_c &data) const;
 };

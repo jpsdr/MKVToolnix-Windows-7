@@ -35,9 +35,6 @@ hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reade
 {
   m_relaxed_timestamp_checking = true;
 
-  if (0 != m_ti.m_nalu_size_length)
-    m_parser.set_nalu_size_length(m_ti.m_nalu_size_length);
-
   set_track_type(track_video);
 
   set_codec_id(MKV_V_MPEGH_HEVC);
@@ -90,13 +87,6 @@ hevc_es_video_packetizer_c::process(packet_cptr packet) {
       m_parser.add_timestamp(packet->timestamp);
     m_parser.add_bytes(packet->data->get_buffer(), packet->data->get_size());
     flush_frames();
-
-  } catch (mtx::mpeg::nalu_size_length_x &error) {
-    mxerror_tid(m_ti.m_fname, m_ti.m_id,
-                fmt::format(Y("This HEVC contains frames that are too big for the current maximum NALU size. "
-                              "You have to re-run mkvmerge and set the maximum NALU size to {0} for this track "
-                              "(command line parameter '--nalu-size-length {1}:{0}').\n"),
-                            error.get_required_length(), m_ti.m_id));
 
   } catch (mtx::exception &error) {
     mxerror_tid(m_ti.m_fname, m_ti.m_id,

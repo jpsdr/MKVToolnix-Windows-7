@@ -372,9 +372,6 @@ public:
   std::map<int64_t, std::pair<int64_t, bool>> m_default_durations; // As given on the command line
   std::map<int64_t, int> m_max_blockadd_ids; // As given on the command line
 
-  std::map<int64_t, int> m_nalu_size_lengths;
-  int m_nalu_size_length;
-
   item_selector_c<attach_mode_e> m_attach_mode_list; // As given on the command line
 
   std::map<int64_t, bool> m_reduce_to_core, m_remove_dialog_normalization_gain;

@@ -103,7 +103,7 @@ protected:
   bool m_have_incomplete_frame;
   std::deque<std::pair<memory_cptr, uint64_t>> m_unhandled_nalus;
 
-  bool m_ignore_nalu_size_length_errors, m_discard_actual_frames, m_simple_picture_order, m_first_cleanup, m_all_i_slices_are_key_frames;
+  bool m_discard_actual_frames, m_simple_picture_order, m_first_cleanup, m_all_i_slices_are_key_frames;
 
   debugging_option_c m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timestamps, m_debug_sps_info, m_debug_sps_pps_changes, m_debug_errors;
   static std::map<int, std::string> ms_nalu_names_by_type;
@@ -201,10 +201,6 @@ public:
 
   int get_nalu_size_length() const {
     return m_nalu_size_length;
-  }
-
-  void ignore_nalu_size_length_errors() {
-    m_ignore_nalu_size_length_errors = true;
   }
 
   void discard_actual_frames(bool discard = true);

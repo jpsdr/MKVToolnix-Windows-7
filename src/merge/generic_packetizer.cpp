@@ -331,12 +331,6 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   else if (mtx::includes(m_ti.m_max_blockadd_ids, -1))
     m_htrack_max_add_block_ids = m_ti.m_max_blockadd_ids[-1];
 
-  // Let's see if the user has specified a NALU size length for this track.
-  if (mtx::includes(m_ti.m_nalu_size_lengths, m_ti.m_id))
-    m_ti.m_nalu_size_length = m_ti.m_nalu_size_lengths[m_ti.m_id];
-  else if (mtx::includes(m_ti.m_nalu_size_lengths, -1))
-    m_ti.m_nalu_size_length = m_ti.m_nalu_size_lengths[-1];
-
   // Let's see if the user has specified a compression scheme for this track.
   if (COMPRESSION_UNSPECIFIED != m_ti.m_compression)
     m_hcompression = m_ti.m_compression;

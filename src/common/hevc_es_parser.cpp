@@ -263,7 +263,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     memory_c &mem = *(m_incomplete_frame.m_data.get());
     int offset    = mem.get_size();
     mem.resize(offset + m_nalu_size_length + nalu->get_size());
-    mtx::mpeg::write_nalu_size(mem.get_buffer() + offset, nalu->get_size(), m_nalu_size_length, m_ignore_nalu_size_length_errors);
+    mtx::mpeg::write_nalu_size(mem.get_buffer() + offset, nalu->get_size(), m_nalu_size_length);
     memcpy(mem.get_buffer() + offset + m_nalu_size_length, nalu->get_buffer(), nalu->get_size());
 
     return;
@@ -896,7 +896,7 @@ es_parser_c::cleanup() {
 memory_cptr
 es_parser_c::create_nalu_with_size(const memory_cptr &src,
                                    bool add_extra_data) {
-  auto nalu = mtx::mpeg::create_nalu_with_size(src, m_nalu_size_length, add_extra_data ? m_extra_data : std::vector<memory_cptr>{} );
+  auto nalu = mtx::mpeg::create_nalu_with_size(src, m_nalu_size_length, add_extra_data ? m_extra_data : std::vector<memory_cptr>{});
 
   if (add_extra_data)
     m_extra_data.clear();

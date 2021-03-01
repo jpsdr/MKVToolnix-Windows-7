@@ -76,16 +76,7 @@ rbsp_to_nalu(memory_cptr const &buffer) {
 void
 write_nalu_size(unsigned char *buffer,
                 std::size_t size,
-                std::size_t nalu_size_length,
-                bool ignore_nalu_size_length_errors) {
-  if (!ignore_nalu_size_length_errors && (size >= (1llu << (nalu_size_length * 8)))) {
-    auto required_bytes = nalu_size_length + 1;
-    while (size >= (1u << (required_bytes * 8)))
-      ++required_bytes;
-
-    throw nalu_size_length_x{required_bytes};
-  }
-
+                std::size_t nalu_size_length) {
   put_uint_be(buffer, size, nalu_size_length);
 }
 
