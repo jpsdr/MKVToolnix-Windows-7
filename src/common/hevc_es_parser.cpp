@@ -864,7 +864,7 @@ es_parser_c::cleanup() {
     return;
 
   if (m_discard_actual_frames) {
-    m_stats.num_frames_discarded    += m_frames.size();
+    m_stats.num_frames_discarded     += m_frames.size();
     m_stats.num_timestamps_discarded += m_provided_timestamps.size();
 
     m_frames.clear();
