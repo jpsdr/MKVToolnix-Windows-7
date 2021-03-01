@@ -5,6 +5,8 @@
 * all programs, only on Windows: fixed checking existence of & creating
   directories with UNC paths such as `\\server\share\folder\file.mkv`. Fixes
   #3041.
+* MKVToolNix GUI, only on Windows: fixed the GUI hanging when trying to browse
+  for files on drives that don't actually exist. Fixes #3046.
 
 
 # Version 54.0.0 "F Maj Pixie" 2021-02-26
