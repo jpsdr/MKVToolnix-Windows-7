@@ -9,17 +9,15 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#pragma once
-
 #include "common/common_pch.h"
+
+#include "common/path.h"
 
 namespace mtx::fs {
 
-std::filesystem::path to_path(std::string const &name);
-std::filesystem::path to_path(std::wstring const &name);
-
-// Compatibility functions due to bugs in gcc/libstdc++ on Windows:
-bool is_absolute(std::filesystem::path const &p);
-std::filesystem::path absolute(std::filesystem::path const &p);
+std::filesystem::path
+absolute(std::filesystem::path const &p) {
+  return is_absolute(p) ? p : std::filesystem::absolute(p);
+}
 
 } // namespace mtx::fs

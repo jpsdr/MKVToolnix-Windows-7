@@ -98,7 +98,7 @@ file_target_c::file_target_c(std::filesystem::path file_name)
   : target_c()                  // Don't use initializer-list syntax due to a bug in gcc < 4.8
   , m_file_name{std::move(file_name)}
 {
-  if (!m_file_name.is_absolute())
+  if (!mtx::fs::is_absolute(m_file_name))
     m_file_name = std::filesystem::temp_directory_path() / m_file_name;
 
   if (std::filesystem::exists(m_file_name)) {

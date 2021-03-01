@@ -57,7 +57,7 @@ parse_bdmt_xml(std::filesystem::path const &file_name) {
       auto ok               = false;
 
       if (thumbnail.m_file_name.is_relative())
-        thumbnail.m_file_name = (std::filesystem::absolute(file_name).parent_path() / thumbnail.m_file_name).lexically_normal();
+        thumbnail.m_file_name = (mtx::fs::absolute(file_name).parent_path() / thumbnail.m_file_name).lexically_normal();
 
       mtx::regex::jp::VecNum matches;
 

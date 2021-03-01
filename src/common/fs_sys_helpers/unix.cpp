@@ -110,21 +110,20 @@ get_current_exe_path([[maybe_unused]] std::string const &argv0) {
       break;
   }
 
-  return std::filesystem::absolute(mtx::fs::to_path(file_name)).parent_path();
+  return mtx::fs::absolute(mtx::fs::to_path(file_name)).parent_path();
 
 #else // SYS_APPLE
   auto exe = mtx::fs::to_path("/proc/self/exe");
   if (std::filesystem::exists(exe)) {
     auto exe_path = std::filesystem::read_symlink(exe);
 
-    // only make absolute if needed, to avoid crash in case the current dir is deleted (as std::filesystem::absolute calls std::filesystem::current_path here)
-    return (exe_path.is_absolute() ? exe_path : std::filesystem::absolute(exe_path)).parent_path();
+    return mtx::fs::absolute(exe_path).parent_path();
   }
 
   if (argv0.empty())
     return std::filesystem::current_path();
 
-  exe = std::filesystem::absolute(argv0);
+  exe = mtx::fs::absolute(argv0);
   if (std::filesystem::exists(exe))
     return exe.parent_path();
 

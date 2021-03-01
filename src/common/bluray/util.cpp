@@ -15,6 +15,7 @@
 
 #include "common/bluray/util.h"
 #include "common/debugging.h"
+#include "common/path.h"
 
 namespace mtx::bluray {
 
@@ -24,7 +25,7 @@ std::filesystem::path
 find_base_dir_impl(std::filesystem::path const &file_name) {
   static debugging_option_c s_debug{"bluray_find_base_dir"};
 
-  auto dir = std::filesystem::absolute(file_name);
+  auto dir = mtx::fs::absolute(file_name);
   if (!std::filesystem::is_directory(dir))
     dir = dir.parent_path();
 

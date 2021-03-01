@@ -35,7 +35,7 @@ QString
 sanitizeDirectory(QString const &directory,
                   bool withFileName) {
   auto dir     = to_utf8(directory.isEmpty() || (directory == Q(".")) ? QStandardPaths::writableLocation(QStandardPaths::MoviesLocation) : directory);
-  auto oldPath = std::filesystem::absolute(mtx::fs::to_path(dir));
+  auto oldPath = mtx::fs::absolute(mtx::fs::to_path(dir));
   auto newPath = oldPath;
   auto ec      = std::error_code{};
 
