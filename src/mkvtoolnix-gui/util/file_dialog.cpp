@@ -39,7 +39,7 @@ sanitizeDirectory(QString const &directory,
   auto newPath = oldPath;
   auto ec      = std::error_code{};
 
-  while (   !(std::filesystem::exists(newPath, ec) && std::filesystem::is_directory(newPath, ec))
+  while (   !std::filesystem::is_directory(newPath, ec)
          && !newPath.parent_path().empty()
          && (newPath.parent_path() != newPath))
     newPath = newPath.parent_path();

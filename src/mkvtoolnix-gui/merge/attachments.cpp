@@ -567,7 +567,7 @@ Tab::addAttachmentsFromIdentifiedBluray(mtx::bluray::disc_library::info_t const 
     fileName = thumbnail.m_file_name;
   }
 
-  if (fileName.empty() || !std::filesystem::exists(fileName))
+  if (fileName.empty() || !std::filesystem::is_regular_file(fileName))
     return;
 
   auto attachment = prepareFileForAttaching(Q(fileName.u8string()), true);

@@ -132,7 +132,7 @@ locate_and_parse(std::filesystem::path const &location) {
     return {};
 
   auto disc_library_dir = base_dir / "META" / "DL";
-  if (!std::filesystem::exists(disc_library_dir) || !std::filesystem::is_directory(disc_library_dir))
+  if (!std::filesystem::is_directory(disc_library_dir))
     return {};
 
   mxdebug_if(debug, fmt::format("found DL directory at {}\n", disc_library_dir));
@@ -170,7 +170,7 @@ locate_and_parse_for_language(std::filesystem::path const &location,
     return {};
 
   auto disc_library_file = base_dir / "META" / "DL" / fmt::format("bdmt_{}.xml", language);
-  if (!std::filesystem::exists(disc_library_file))
+  if (!std::filesystem::is_regular_file(disc_library_file))
     return {};
 
   mxdebug_if(debug, fmt::format("found DL file for language {} at {}\n", language, disc_library_file));

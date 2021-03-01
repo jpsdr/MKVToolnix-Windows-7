@@ -258,7 +258,7 @@ extract_cli_parser_c::set_cli_mode() {
 
     mxdebug_if(m_debug, fmt::format("set_cli_mode: new mode is single\n"));
 
-  } else if (std::filesystem::exists(mtx::fs::to_path(m_current_arg))) {
+  } else if (std::filesystem::is_regular_file(mtx::fs::to_path(m_current_arg))) {
     m_cli_type            = cli_type_e::multiple;
     m_options.m_file_name = m_current_arg;
 

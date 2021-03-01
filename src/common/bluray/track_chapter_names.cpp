@@ -70,7 +70,7 @@ locate_and_parse_for_title(std::filesystem::path const &location,
     return {};
 
   auto track_chapter_names_dir = base_dir / "META" / "TN";
-  if (!std::filesystem::exists(track_chapter_names_dir) || !std::filesystem::is_directory(track_chapter_names_dir))
+  if (!std::filesystem::is_directory(track_chapter_names_dir))
     return {};
 
   mxdebug_if(debug, fmt::format("found TN directory at {}\n", track_chapter_names_dir));

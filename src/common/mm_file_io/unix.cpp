@@ -84,7 +84,7 @@ mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
 void
 mm_file_io_c::prepare_path(const std::string &path) {
   auto directory = mtx::fs::to_path(path).parent_path();
-  if (directory.empty() || std::filesystem::exists(directory))
+  if (directory.empty() || std::filesystem::is_directory(directory))
     return;
 
   std::error_code error_code;

@@ -58,7 +58,7 @@ find_other_file_impl(std::filesystem::path const &reference_file_name,
     return {};
 
   auto file_name = base_dir / other_file_name;
-  if (std::filesystem::exists(file_name))
+  if (std::filesystem::is_regular_file(file_name))
     return file_name;
 
   return {};

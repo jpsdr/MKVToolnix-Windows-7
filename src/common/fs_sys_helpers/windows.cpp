@@ -169,7 +169,7 @@ get_current_exe_path(std::string const &) {
 bool
 is_installed() {
   auto file_to_test = get_installation_path() / "data" / "portable-app";
-  return !std::filesystem::exists(file_to_test);
+  return !std::filesystem::is_regular_file(file_to_test);
 }
 
 uint64_t

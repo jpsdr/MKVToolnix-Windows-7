@@ -902,7 +902,7 @@ Settings::exeWithPath(QString const &exe) {
 #endif  // SYS_WINDOWS
 
   for (auto const &potentialExe : potentialExes)
-    if (std::filesystem::exists(potentialExe))
+    if (std::filesystem::is_regular_file(potentialExe))
       return QDir::toNativeSeparators(to_qs(potentialExe.u8string()));
 
   auto location = QStandardPaths::findExecutable(to_qs(program.u8string()));

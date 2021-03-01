@@ -204,7 +204,7 @@ mm_file_io_c::prepare_path(std::string const &path) {
 
   auto directory = mtx::fs::to_path(normalized_path).parent_path();
 
-  if (directory.empty() || std::filesystem::exists(directory))
+  if (directory.empty() || std::filesystem::is_directory(directory))
     return;
 
   auto is_unc = normalized_path.substr(0, 2) == "\\\\"s;
@@ -230,7 +230,7 @@ mm_file_io_c::prepare_path(std::string const &path) {
   }
 
   for (auto itr = to_check.rbegin(), end = to_check.rend(); itr != end; ++itr) {
-    if (std::filesystem::exists(*itr))
+    if (std::filesystem::is_directory(*itr))
       continue;
 
     std::error_code error_code;

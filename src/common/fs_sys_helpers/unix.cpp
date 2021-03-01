@@ -66,7 +66,7 @@ get_application_data_folder() {
   // If $HOME/.mkvtoolnix exists already then keep using it to avoid
   // losing existing user configuration.
   auto old_default_folder = mtx::fs::to_path(home) / ".mkvtoolnix";
-  if (std::filesystem::exists(old_default_folder))
+  if (std::filesystem::is_directory(old_default_folder))
     return old_default_folder;
 
   // If XDG_CONFIG_HOME is set then use that folder.
@@ -114,7 +114,7 @@ get_current_exe_path([[maybe_unused]] std::string const &argv0) {
 
 #else // SYS_APPLE
   auto exe = mtx::fs::to_path("/proc/self/exe");
-  if (std::filesystem::exists(exe)) {
+  if (std::filesystem::is_regular_file(exe)) {
     auto exe_path = std::filesystem::read_symlink(exe);
 
     return mtx::fs::absolute(exe_path).parent_path();
@@ -124,7 +124,7 @@ get_current_exe_path([[maybe_unused]] std::string const &argv0) {
     return std::filesystem::current_path();
 
   exe = mtx::fs::absolute(argv0);
-  if (std::filesystem::exists(exe))
+  if (std::filesystem::is_regular_file(exe))
     return exe.parent_path();
 
   return std::filesystem::current_path();

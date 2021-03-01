@@ -136,10 +136,9 @@ maybe_parse_dvd(std::string const &file_name,
   if (mtx::regex::match(cleaned_file_name, mtx::regex::jp::Regex{"\\.(bup|ifo|vob)$", "i"}))
     dvd_dir = dvd_dir.parent_path();
 
-  else if (   !std::filesystem::exists(dvd_dir)
-           || !std::filesystem::is_directory(dvd_dir)
-           || (   !std::filesystem::exists(dvd_dir / "VIDEO_TS.IFO")
-               && !std::filesystem::exists(dvd_dir / "VIDEO_TS" / "VIDEO_TS.IFO")))
+  else if (   !std::filesystem::is_directory(dvd_dir)
+           || (   !std::filesystem::is_regular_file(dvd_dir / "VIDEO_TS.IFO")
+               && !std::filesystem::is_regular_file(dvd_dir / "VIDEO_TS" / "VIDEO_TS.IFO")))
     return {};
 
   auto titles_and_timestamps = parse_dvd(dvd_dir.u8string());

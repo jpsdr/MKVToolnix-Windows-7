@@ -101,7 +101,7 @@ file_target_c::file_target_c(std::filesystem::path file_name)
   if (!mtx::fs::is_absolute(m_file_name))
     m_file_name = std::filesystem::temp_directory_path() / m_file_name;
 
-  if (std::filesystem::exists(m_file_name)) {
+  if (std::filesystem::is_regular_file(m_file_name)) {
     std::error_code ec;
     std::filesystem::remove(m_file_name, ec);
   }
@@ -110,7 +110,7 @@ file_target_c::file_target_c(std::filesystem::path file_name)
 void
 file_target_c::log_line(std::string const &message) {
   try {
-    mm_text_io_c out(std::make_shared<mm_file_io_c>(m_file_name.u8string(), std::filesystem::exists(m_file_name) ? MODE_WRITE : MODE_CREATE));
+    mm_text_io_c out(std::make_shared<mm_file_io_c>(m_file_name.u8string(), std::filesystem::is_regular_file(m_file_name) ? MODE_WRITE : MODE_CREATE));
     out.setFilePointer(0, libebml::seek_end);
     out.puts(format_line(message));
   } catch (mtx::mm_io::exception &ex) {
