@@ -1,7 +1,6 @@
 #include "common/common_pch.h"
 
 #include <QClipboard>
-#include <QDebug>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QFileInfo>
@@ -439,8 +438,6 @@ Tool::dropEvent(QDropEvent *event) {
     auto fileNames    = p.filesDDHandler.fileNames();
     auto mouseButtons = event->mouseButtons();
 
-    qDebug() << "dropEvent with files" << fileNames;
-
     QTimer::singleShot(0, this, [this, fileNames, mouseButtons]() {
       handleDroppedFiles(fileNames, mouseButtons);
     });
@@ -458,8 +455,6 @@ Tool::handleDroppedFiles(QStringList const &fileNames,
       openConfigFile(fileName);
     else
       mediaFiles << fileName;
-
-  qDebug() << "handleDroppedFiles mediaFiles" << mediaFiles;
 
   if (!mediaFiles.isEmpty())
     identifyMultipleFiles(mediaFiles, mouseButtons);
@@ -523,8 +518,6 @@ Tool::fileNamesFromClipboard()
     if (auto match = fileUriRE.match(line); match.hasMatch())
       fileNames << match.captured(1);
   }
-
-  qDebug() << fileNames;
 
   return fileNames;
 }
@@ -607,8 +600,6 @@ void
 Tool::handleIdentifiedSourceFiles(IdentificationPack &pack) {
   auto &p = *p_func();
 
-  qDebug() << "handling identified source files";
-
   if (pack.m_identifiedFiles.isEmpty())
     return;
 
@@ -687,8 +678,6 @@ Tool::handleIdentifiedSourceFiles(IdentificationPack &pack) {
 
 void
 Tool::handleIdentifiedFiles(IdentificationPack identifiedFiles) {
-  qDebug() << "handling identified files";
-
   addMergeTabIfNoneOpen();
 
   handleIdentifiedNonSourceFiles(identifiedFiles);
