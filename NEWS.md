@@ -10,6 +10,11 @@
 * all programs, only on Windows: implemented several workarounds for bugs in
   `std::filesystem` wrt. UNC paths. The effect of those bugs was that Blu-rays
   and DVDs couldn't be added from UNC paths. Fixes #3037.
+* MKVToolNix GUI: multiplexer: the user can now configure what to do when
+  using the "Add source files" button independently of the setting for what
+  happens when files are dragged & dropped onto the GUI. The same options are
+  available, but they're distinct settings, allowing for different use
+  cases. Fixes #3035.
 
 
 # Version 54.0.0 "F Maj Pixie" 2021-02-26
