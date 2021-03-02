@@ -13,7 +13,8 @@ namespace mtx::gui::Merge {
 using namespace mtx::gui;
 
 AddingAppendingFilesDialog::AddingAppendingFilesDialog(QWidget *parent,
-                                                       Tab &tab)
+                                                       Tab &tab,
+                                                       Mode mode)
   : QDialog{parent}
   , ui{new Ui::AddingAppendingFilesDialog}
 {
@@ -22,6 +23,12 @@ AddingAppendingFilesDialog::AddingAppendingFilesDialog(QWidget *parent,
 
   ui->rbAdd->setChecked(true);
   ui->cbFileName->setEnabled(false);
+
+  if (mode == AddSourceFiles) {
+    setWindowTitle(QY("Adding multiple files via 'Add source files'"));
+    ui->lTitle->setText(QY("Adding multiple files via 'Add source files'"));
+    ui->lQuestion->setText(QY("What do you want to do with the files?"));
+  }
 
   for (auto const &file : tab.sourceFiles()) {
     auto info = QFileInfo{file->m_fileName};

@@ -606,35 +606,41 @@ Tool::handleIdentifiedSourceFiles(IdentificationPack &pack) {
   auto identifiedSourceFiles = pack.sourceFiles();
   auto tab                   = tabForAddingOrAppending(pack.m_tabId);
 
-  if (   (   (identifiedSourceFiles.count() == 1)
-          && tab->isEmpty())
-      || (pack.m_addMode == IdentificationPack::AddMode::Append)) {
+  if (   (pack.m_addMode == IdentificationPack::AddMode::Append)
+      || (   (identifiedSourceFiles.count() == 1)
+          && (   tab->isEmpty()
+              || (pack.m_addMode == IdentificationPack::AddMode::Add)))) {
     tab->addOrAppendIdentifiedFiles(identifiedSourceFiles, pack.m_sourceFileIdx, pack.m_addMode);
     return;
   }
 
   auto &settings                            = Util::Settings::get();
 
-  auto decision                             = settings.m_mergeAddingAppendingFilesPolicy;
+  auto isDragAndDrop                        = pack.m_addMode == IdentificationPack::AddMode::UserChoice;
+  auto &policySetting                       = isDragAndDrop ? settings.m_mergeDragAndDropFilesPolicy : settings.m_mergeAddingAppendingFilesPolicy;
+  auto decision                             = policySetting;
   auto fileModelIdx                         = QModelIndex{};
   auto alwaysCreateNewSettingsForVideoFiles = settings.m_mergeAlwaysCreateNewSettingsForVideoFiles;
 
   if (   (Util::Settings::MergeAddingAppendingFilesPolicy::Ask == decision)
       || ((pack.m_mouseButtons & Qt::RightButton)              == Qt::RightButton)) {
-    AddingAppendingFilesDialog dlg{this, *tab};
-    dlg.setDefaults(settings.m_mergeLastAddingAppendingDecision, p.lastAddAppendFileNum[tab], settings.m_mergeAlwaysCreateNewSettingsForVideoFiles);
+    auto &lastDecisionSetting = isDragAndDrop ? settings.m_mergeLastDragAndDropFilesDecision : settings.m_mergeLastAddingAppendingDecision;
+    auto mode                 = isDragAndDrop ? AddingAppendingFilesDialog::DragAndDrop : AddingAppendingFilesDialog::AddSourceFiles;
+
+    AddingAppendingFilesDialog dlg{this, *tab, mode};
+    dlg.setDefaults(lastDecisionSetting, p.lastAddAppendFileNum[tab], settings.m_mergeAlwaysCreateNewSettingsForVideoFiles);
     if (!dlg.exec())
       return;
 
-    decision                                    = dlg.decision();
-    alwaysCreateNewSettingsForVideoFiles        = dlg.alwaysCreateNewSettingsForVideoFiles();
-    fileModelIdx                                = tab->fileModelIndexForFileNum(dlg.fileNum());
+    decision                             = dlg.decision();
+    alwaysCreateNewSettingsForVideoFiles = dlg.alwaysCreateNewSettingsForVideoFiles();
+    fileModelIdx                         = tab->fileModelIndexForFileNum(dlg.fileNum());
 
-    settings.m_mergeLastAddingAppendingDecision = decision;
-    p.lastAddAppendFileNum[tab]                 = dlg.fileNum();
+    lastDecisionSetting                  = decision;
+    p.lastAddAppendFileNum[tab]          = dlg.fileNum();
 
     if (dlg.alwaysUseThisDecision()) {
-      settings.m_mergeAddingAppendingFilesPolicy           = decision;
+      policySetting                                        = decision;
       settings.m_mergeAlwaysCreateNewSettingsForVideoFiles = alwaysCreateNewSettingsForVideoFiles;
     }
 
@@ -654,6 +660,9 @@ Tool::handleIdentifiedSourceFiles(IdentificationPack &pack) {
       auto tabToUse = tab->isEmpty() ? tab : appendNewTab();
       tabToUse->addOrAppendIdentifiedFiles({ identifiedSourceFile }, {}, IdentificationPack::AddMode::Add);
     }
+
+    if (identifiedSourceFiles.isEmpty())
+      return;
   }
 
   if (Util::Settings::MergeAddingAppendingFilesPolicy::AddAdditionalParts == decision)

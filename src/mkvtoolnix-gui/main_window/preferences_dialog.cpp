@@ -701,16 +701,21 @@ PreferencesDialog::setupEnableMuxingTracksByLanguage() {
 
 void
 PreferencesDialog::setupMergeAddingAppendingFilesPolicy() {
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Always ask the user"),                                           static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Ask));
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Add all files to the current multiplex settings"),               static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Add));
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Create one new multiplex settings tab and add all files there"), static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew));
-  ui->cbMAddingAppendingFilesPolicy->addItem(QY("Create one new multiplex settings tab for each file"),           static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew));
+  auto setup = [](QComboBox &cb, Util::Settings::MergeAddingAppendingFilesPolicy policy) {
+    cb.addItem(QY("Always ask the user"),                                           static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Ask));
+    cb.addItem(QY("Add all files to the current multiplex settings"),               static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::Add));
+    cb.addItem(QY("Create one new multiplex settings tab and add all files there"), static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddToNew));
+    cb.addItem(QY("Create one new multiplex settings tab for each file"),           static_cast<int>(Util::Settings::MergeAddingAppendingFilesPolicy::AddEachToNew));
 
-  Util::setComboBoxIndexIf(ui->cbMAddingAppendingFilesPolicy, [this](QString const &, QVariant const &data) {
-    return data.isValid() && (static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(data.toInt()) == m_cfg.m_mergeAddingAppendingFilesPolicy);
-  });
+    Util::setComboBoxIndexIf(&cb, [policy](QString const &, QVariant const &data) {
+      return data.isValid() && (static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(data.toInt()) == policy);
+    });
 
-  Util::fixComboBoxViewWidth(*ui->cbMAddingAppendingFilesPolicy);
+    Util::fixComboBoxViewWidth(cb);
+  };
+
+  setup(*ui->cbMAddingAppendingFilesPolicy, m_cfg.m_mergeAddingAppendingFilesPolicy);
+  setup(*ui->cbMDragAndDropFilesPolicy,     m_cfg.m_mergeDragAndDropFilesPolicy);
 
   ui->cbMAlwaysCreateSettingsForVideoFiles->setChecked(m_cfg.m_mergeAlwaysCreateNewSettingsForVideoFiles);
 }
@@ -910,6 +915,7 @@ PreferencesDialog::save() {
   m_cfg.m_disableDefaultTrackForSubtitles               = ui->cbMDisableDefaultTrackForSubtitles->isChecked();
   m_cfg.m_mergeEnableDialogNormGainRemoval              = ui->cbMEnableDialogNormGainRemoval->isChecked();
   m_cfg.m_mergeAddingAppendingFilesPolicy               = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
+  m_cfg.m_mergeDragAndDropFilesPolicy                   = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMDragAndDropFilesPolicy->currentData().toInt());
   m_cfg.m_mergeAlwaysCreateNewSettingsForVideoFiles     = ui->cbMAlwaysCreateSettingsForVideoFiles->isChecked();
   m_cfg.m_mergeAlwaysShowOutputFileControls             = ui->cbMAlwaysShowOutputFileControls->isChecked();
   m_cfg.m_mergeWarnMissingAudioTrack                    = static_cast<Util::Settings::MergeMissingAudioTrackPolicy>(ui->cbMWarnMissingAudioTrack->currentData().toInt());

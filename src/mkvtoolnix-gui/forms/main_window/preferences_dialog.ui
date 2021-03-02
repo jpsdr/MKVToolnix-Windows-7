@@ -518,23 +518,43 @@
         <item>
          <widget class="QGroupBox" name="groupBox_23">
           <property name="title">
-           <string>Adding multiple files</string>
+           <string>Adding files</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_43">
            <item>
             <layout class="QGridLayout" name="gridLayout_10">
+             <item row="0" column="1">
+              <widget class="QComboBox" name="cbMAddingAppendingFilesPolicy">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_13">
                <property name="text">
-                <string>When a&amp;dding multiple files:</string>
+                <string>When adding m&amp;ultiple files via &quot;add source files&quot;:</string>
                </property>
                <property name="buddy">
                 <cstring>cbMAddingAppendingFilesPolicy</cstring>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QComboBox" name="cbMAddingAppendingFilesPolicy">
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_23">
+               <property name="text">
+                <string>When adding files via &amp;drag &amp;&amp; drop/copy &amp;&amp; paste:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbMDragAndDropFilesPolicy</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="cbMDragAndDropFilesPolicy">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -2220,6 +2240,7 @@
   <tabstop>leMMediaInfoExe</tabstop>
   <tabstop>pbMBrowseMediaInfoExe</tabstop>
   <tabstop>cbMAddingAppendingFilesPolicy</tabstop>
+  <tabstop>cbMDragAndDropFilesPolicy</tabstop>
   <tabstop>cbMAlwaysCreateSettingsForVideoFiles</tabstop>
   <tabstop>cbMAlwaysShowOutputFileControls</tabstop>
   <tabstop>rbMTrackPropertiesLayoutHorizontalScrollArea</tabstop>

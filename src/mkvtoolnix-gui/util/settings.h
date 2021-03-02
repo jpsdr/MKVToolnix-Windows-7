@@ -166,7 +166,7 @@ public:
   bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_autoClearFileTitle, m_disableCompressionForAllTrackTypes, m_disableDefaultTrackForSubtitles, m_mergeAlwaysShowOutputFileControls, m_dropLastChapterFromBlurayPlaylist;
   bool m_mergeEnableDialogNormGainRemoval, m_mergeAddBlurayCovers;
   ClearMergeSettingsAction m_clearMergeSettings;
-  MergeAddingAppendingFilesPolicy m_mergeAddingAppendingFilesPolicy, m_mergeLastAddingAppendingDecision;
+  MergeAddingAppendingFilesPolicy m_mergeDragAndDropFilesPolicy, m_mergeLastDragAndDropFilesDecision, m_mergeAddingAppendingFilesPolicy, m_mergeLastAddingAppendingDecision;
   bool m_mergeAlwaysCreateNewSettingsForVideoFiles;
   HeaderEditorDroppedFilesPolicy m_headerEditorDroppedFilesPolicy;
   bool m_headerEditorDateTimeInUTC;

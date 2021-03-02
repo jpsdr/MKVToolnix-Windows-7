@@ -302,6 +302,19 @@ Settings::convertOldSettings() {
     reg->remove(s_valOftenUsedCountriesOnly);
   }
   reg->endGroup();
+
+  // After v54: the setting mergeAddingAppendingFilesPolicy which was
+  // only used for dragging & dropping in < v54 but for both dragging
+  // & dropping and using the "add source files" button in v54 is
+  // split up into two settings afterwards.
+  reg->beginGroup(s_grpSettings);
+  if (!reg->value(s_valMergeDragAndDropFilesPolicy).isValid()) {
+    reg->setValue(s_valMergeDragAndDropFilesPolicy,       reg->value(s_valMergeAddingAppendingFilesPolicy));
+    reg->setValue(s_valMergeLastDragAndDropFilesDecision, reg->value(s_valMergeLastAddingAppendingDecision));
+    reg->remove(s_valMergeAddingAppendingFilesPolicy);
+    reg->remove(s_valMergeLastAddingAppendingDecision);
+  }
+  reg->endGroup();
 }
 
 void
@@ -358,6 +371,8 @@ Settings::load() {
   m_mergeTrackPropertiesLayout                = static_cast<TrackPropertiesLayout>(reg.value(s_valMergeTrackPropertiesLayout,                 static_cast<int>(TrackPropertiesLayout::HorizontalScrollArea)).toInt());
   m_mergeAddingAppendingFilesPolicy           = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeAddingAppendingFilesPolicy,  static_cast<int>(MergeAddingAppendingFilesPolicy::Ask)).toInt());
   m_mergeLastAddingAppendingDecision          = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeLastAddingAppendingDecision, static_cast<int>(MergeAddingAppendingFilesPolicy::Add)).toInt());
+  m_mergeDragAndDropFilesPolicy               = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeDragAndDropFilesPolicy,      static_cast<int>(MergeAddingAppendingFilesPolicy::Ask)).toInt());
+  m_mergeLastDragAndDropFilesDecision         = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeLastDragAndDropFilesDecision, static_cast<int>(MergeAddingAppendingFilesPolicy::Add)).toInt());
   m_mergeWarnMissingAudioTrack                = static_cast<MergeMissingAudioTrackPolicy>(reg.value(s_valMergeWarnMissingAudioTrack,          static_cast<int>(MergeMissingAudioTrackPolicy::IfAudioTrackPresent)).toInt());
   m_headerEditorDroppedFilesPolicy            = static_cast<HeaderEditorDroppedFilesPolicy>(reg.value(s_valHeaderEditorDroppedFilesPolicy,    static_cast<int>(HeaderEditorDroppedFilesPolicy::Ask)).toInt());
   m_headerEditorDateTimeInUTC                 = reg.value(s_valHeaderEditorDateTimeInUTC).toBool();
@@ -720,6 +735,8 @@ Settings::save()
   reg.setValue(s_valMergeTrackPropertiesLayout,         static_cast<int>(m_mergeTrackPropertiesLayout));
   reg.setValue(s_valMergeAddingAppendingFilesPolicy,    static_cast<int>(m_mergeAddingAppendingFilesPolicy));
   reg.setValue(s_valMergeLastAddingAppendingDecision,   static_cast<int>(m_mergeLastAddingAppendingDecision));
+  reg.setValue(s_valMergeDragAndDropFilesPolicy,        static_cast<int>(m_mergeDragAndDropFilesPolicy));
+  reg.setValue(s_valMergeLastDragAndDropFilesDecision,  static_cast<int>(m_mergeLastDragAndDropFilesDecision));
   reg.setValue(s_valMergeWarnMissingAudioTrack,         static_cast<int>(m_mergeWarnMissingAudioTrack));
   reg.setValue(s_valHeaderEditorDroppedFilesPolicy,     static_cast<int>(m_headerEditorDroppedFilesPolicy));
   reg.setValue(s_valHeaderEditorDateTimeInUTC,          m_headerEditorDateTimeInUTC);

@@ -21,7 +21,13 @@ protected:
   std::unique_ptr<Ui::AddingAppendingFilesDialog> ui;
 
 public:
-  explicit AddingAppendingFilesDialog(QWidget *parent, Tab &tab);
+  enum Mode {
+    DragAndDrop,
+    AddSourceFiles,
+  };
+
+public:
+  explicit AddingAppendingFilesDialog(QWidget *parent, Tab &tab, Mode mode);
   ~AddingAppendingFilesDialog();
 
   void setDefaults(Util::Settings::MergeAddingAppendingFilesPolicy decision, int fileNum, bool alwaysCreateNewSettingsForVideoFiles);
