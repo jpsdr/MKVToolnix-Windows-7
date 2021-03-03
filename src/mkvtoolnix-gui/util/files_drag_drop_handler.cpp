@@ -55,8 +55,10 @@ FilesDragDropHandler::handle(QDropEvent *event,
     else if (isDrop && (Mode::Remember == p->m_mode))
       p->m_fileNames << QDir::toNativeSeparators(url.toLocalFile());
 
-  if (Mode::Remember == p->m_mode)
+  if (Mode::Remember == p->m_mode) {
     event->acceptProposedAction();
+    event->setDropAction(Qt::CopyAction);
+  }
 
   return true;
 }

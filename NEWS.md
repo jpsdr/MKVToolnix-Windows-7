@@ -25,6 +25,11 @@
   (such as `.` or `(` and `)`; configurable in the preferences). This prevents
   the regular expression becoming too big for the regular expression library
   to handle when many languages are enabled. Fixes #3048.
+* MKVToolNix GUI: only on Windows: when dragging & dropping files from other
+  applications to MKVToolNix GUI the GUI will force the drop action to be a
+  copy action, no matter which keys were pressed by the users. This prevents
+  Windows Explorer from deleting the dragged file when the user presses shift
+  while dropping the file onto MKVToolNix GUI.
 
 ## Other changes
 
