@@ -65,7 +65,7 @@ target_c::get_default_logger() {
 #endif // SYS_WINDOWS
   }
 
-  auto spec = mtx::string::split(var, ":");
+  auto spec = mtx::string::split(var, ":", 2);
 
   if (spec[0] == "file") {
     auto file = (spec.size() > 1) && !spec[1].empty() ? spec[1] : "mkvtoolnix-debug.txt"s;
