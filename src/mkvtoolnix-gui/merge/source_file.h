@@ -71,11 +71,6 @@ public:
 
 protected:
   virtual mtx::bcp47::language_c deriveLanguageFromFileName();
-  virtual QRegularExpression regexForDerivingLanguageFromFileName();
-
-public:
-  static QString defaultRegexForDerivingLanguageFromFileName();
-  static void setupFromPreferences();
 };
 
 }

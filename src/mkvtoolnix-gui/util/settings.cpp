@@ -19,7 +19,6 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
 #include "mkvtoolnix-gui/merge/enums.h"
-#include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/font.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -238,16 +237,10 @@ Settings::convertOldSettings() {
 
   reg->endGroup();
 
-  // Replace default track name recognition regex valid up to 36.0.0
-  // with new default one. Empty value will be replaced with actual
-  // new default later.
+  // v55 uses boundary chars instead of a whole regex.
   reg->beginGroup(s_grpSettings);
   reg->beginGroup(s_grpDerivingTrackLanguagesFromFileNames);
-  auto val = reg->value(s_valCustomRegex).toString();
-
-  if (   (writtenByVersion <= version_number_t{"36"})
-      && (val == Q("[[({.+=#-](<ISO_639_1_CODES>|<ISO_639_2_CODES>|<LANGUAGE_NAMES>)[])}.+=#-]")))
-    reg->remove(s_valCustomRegex);
+  reg->remove("customRegex");
   reg->endGroup();
   reg->endGroup();
 
@@ -478,9 +471,6 @@ Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
       if (!language.alpha_2_code.empty())
         m_recognizedTrackLanguagesInFileNames << Q(language.alpha_3_code);
 
-  if (m_regexForDerivingTrackLanguagesFromFileNames.isEmpty())
-    m_regexForDerivingTrackLanguagesFromFileNames = mtx::gui::Merge::SourceFile::defaultRegexForDerivingLanguageFromFileName();
-
   if (ToParentOfFirstInputFile == m_outputFileNamePolicy) {
     m_outputFileNamePolicy = ToRelativeOfFirstInputFile;
     m_relativeOutputDir.setPath(Q(".."));
@@ -534,7 +524,7 @@ Settings::loadDerivingTrackLanguagesSettings(QSettings &reg) {
   m_deriveAudioTrackLanguageFromFileNamePolicy    = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value(s_valAudioPolicy,    static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
   m_deriveVideoTrackLanguageFromFileNamePolicy    = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value(s_valVideoPolicy,    static_cast<int>(DeriveLanguageFromFileNamePolicy::Never)).toInt());
   m_deriveSubtitleTrackLanguageFromFileNamePolicy = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value(s_valSubtitlePolicy, static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
-  m_regexForDerivingTrackLanguagesFromFileNames   = reg.value(s_valCustomRegex).toString();
+  m_boundaryCharsForDerivingTrackLanguagesFromFileNames = reg.value(s_valBoundaryChars,                                          defaultBoundaryCharsForDerivingLanguageFromFileName()).toString();
   m_recognizedTrackLanguagesInFileNames           = reg.value(s_valRecognizedTrackLanguagesInFileNames).toStringList();
 
   reg.endGroup();
@@ -826,7 +816,7 @@ Settings::saveDerivingTrackLanguagesSettings(QSettings &reg)
   reg.setValue(s_valAudioPolicy,                         static_cast<int>(m_deriveAudioTrackLanguageFromFileNamePolicy));
   reg.setValue(s_valVideoPolicy,                         static_cast<int>(m_deriveVideoTrackLanguageFromFileNamePolicy));
   reg.setValue(s_valSubtitlePolicy,                      static_cast<int>(m_deriveSubtitleTrackLanguageFromFileNamePolicy));
-  reg.setValue(s_valCustomRegex,                         m_regexForDerivingTrackLanguagesFromFileNames);
+  reg.setValue(s_valBoundaryChars,                       m_boundaryCharsForDerivingTrackLanguagesFromFileNames);
   reg.setValue(s_valRecognizedTrackLanguagesInFileNames, m_recognizedTrackLanguagesInFileNames);
 
   reg.endGroup();
@@ -1066,6 +1056,11 @@ Settings::determineMediaInfoExePath() {
       return QDir::toNativeSeparators(exe);
 
   return {};
+}
+
+QString
+Settings::defaultBoundaryCharsForDerivingLanguageFromFileName() {
+  return Q("[](){}.+=#");
 }
 
 }

@@ -71,7 +71,7 @@ public Q_SLOTS:
   void setSendersTabTitleForRunProgramWidget();
   void adjustPlaylistControls();
   void adjustRemoveOldJobsControls();
-  void revertDeriveTrackLanguageFromFileNameRegex();
+  void revertDeriveTrackLanguageFromFileNameChars();
   void setupCommonLanguages(bool withISO639_3);
 
   void enableOftendUsedLanguagesOnly();

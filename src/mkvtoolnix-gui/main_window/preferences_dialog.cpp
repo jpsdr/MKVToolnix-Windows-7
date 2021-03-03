@@ -401,14 +401,11 @@ PreferencesDialog::setupToolTips() {
                    .arg(QYH("When the user adds such a file the track's language input is set to the language property from the source file."))
                    .arg(QYH("If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."))
                    .arg(QYH("Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und').")));
-  Util::setToolTip(ui->leMDeriveTrackLanguageCustomRegex,
-                   Q("<p>%1 %2 %3</p><p>%4</p><p>%5</p>")
-                   .arg(QYH("A regular expression is used for matching the file name against a list of recognized languages limited by characters such as '.' or '['…']'."))
-                   .arg(QYH("The expression must contain at least one pair of capturing parenthesis."))
-                   .arg(QYH("The first non-empty capturing parenthesis will be used as the language."))
-                   .arg(QYH("The following placeholders can be used to match the list of recognized languages: '<ISO_639_1_CODES>', '<ISO_639_2_CODES>' and '<LANGUAGE_NAMES>'."))
-                   .arg(QYH("Only English language names are supported.")));
-  Util::setToolTip(ui->pbMDeriveTrackLanguageRevertCustomRegex, QY("Revert the regular expression to its default value."));
+  Util::setToolTip(ui->leMDeriveTrackLanguageBoundaryChars,
+                   Q("<p>%1 %2</p>")
+                   .arg(QYH("When deriving the track language from the file name, the file name is split into parts on the characters in this list."))
+                   .arg(QYH("Each part is then matched against the list of languages selected below to determine whether or not to use it as the track language.")));
+  Util::setToolTip(ui->pbMDeriveTrackLanguageRevertBoundaryChars, QY("Revert the entry to its default value."));
   ui->tbMDeriveTrackLanguageRecognizedLanguages->setToolTips(QY("Only the languages in the 'selected' list on the right will be recognized as track languages in file names."));
 
   Util::setToolTip(ui->ldwMDefaultAudioTrackLanguage,
@@ -525,7 +522,7 @@ PreferencesDialog::setupConnections() {
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllSubtitleTracks, &QLabel::setEnabled);
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->tbMEnableMuxingTracksByLanguage,  &QLabel::setEnabled);
 
-  connect(ui->pbMDeriveTrackLanguageRevertCustomRegex,    &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveTrackLanguageFromFileNameRegex);
+  connect(ui->pbMDeriveTrackLanguageRevertBoundaryChars,  &QPushButton::clicked,                                         this,                                 &PreferencesDialog::revertDeriveTrackLanguageFromFileNameChars);
 
   connect(ui->cbGuiRemoveJobs,                            &QCheckBox::toggled,                                           ui->cbGuiJobRemovalPolicy,            &QComboBox::setEnabled);
   connect(ui->cbGuiRemoveJobsOnExit,                      &QCheckBox::toggled,                                           ui->cbGuiJobRemovalOnExitPolicy,      &QComboBox::setEnabled);
@@ -817,7 +814,7 @@ PreferencesDialog::setupDerivingTrackLanguagesFromFileName() {
   setupComboBox(*ui->cbMDeriveVideoTrackLanguageFromFileName,    m_cfg.m_deriveVideoTrackLanguageFromFileNamePolicy);
   setupComboBox(*ui->cbMDeriveSubtitleTrackLanguageFromFileName, m_cfg.m_deriveSubtitleTrackLanguageFromFileNamePolicy);
 
-  ui->leMDeriveTrackLanguageCustomRegex->setText(m_cfg.m_regexForDerivingTrackLanguagesFromFileNames);
+  ui->leMDeriveTrackLanguageBoundaryChars->setText(m_cfg.m_boundaryCharsForDerivingTrackLanguagesFromFileNames);
 }
 
 void
@@ -933,7 +930,7 @@ PreferencesDialog::save() {
   m_cfg.m_deriveAudioTrackLanguageFromFileNamePolicy    = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveAudioTrackLanguageFromFileName   ->currentData().toInt());
   m_cfg.m_deriveVideoTrackLanguageFromFileNamePolicy    = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveVideoTrackLanguageFromFileName   ->currentData().toInt());
   m_cfg.m_deriveSubtitleTrackLanguageFromFileNamePolicy = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveSubtitleTrackLanguageFromFileName->currentData().toInt());
-  m_cfg.m_regexForDerivingTrackLanguagesFromFileNames   = ui->leMDeriveTrackLanguageCustomRegex->text();
+  m_cfg.m_boundaryCharsForDerivingTrackLanguagesFromFileNames = ui->leMDeriveTrackLanguageBoundaryChars->text();
   m_cfg.m_recognizedTrackLanguagesInFileNames           = ui->tbMDeriveTrackLanguageRecognizedLanguages->selectedItemValues();
 
   m_cfg.m_scanForPlaylistsPolicy                        = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
@@ -1138,8 +1135,8 @@ PreferencesDialog::showPage(Page page) {
 }
 
 void
-PreferencesDialog::revertDeriveTrackLanguageFromFileNameRegex() {
-  ui->leMDeriveTrackLanguageCustomRegex->setText(mtx::gui::Merge::SourceFile::defaultRegexForDerivingLanguageFromFileName());
+PreferencesDialog::revertDeriveTrackLanguageFromFileNameChars() {
+  ui->leMDeriveTrackLanguageBoundaryChars->setText(Util::Settings::defaultBoundaryCharsForDerivingLanguageFromFileName());
 }
 
 bool
@@ -1149,18 +1146,10 @@ PreferencesDialog::verifyDeriveTrackLanguageSettings() {
       && (static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveSubtitleTrackLanguageFromFileName->currentData().toInt()) == Util::Settings::DeriveLanguageFromFileNamePolicy::Never))
     return true;
 
-  auto pattern = ui->leMDeriveTrackLanguageCustomRegex->text();
-  if (pattern.isEmpty())
-    return true;
-
-  auto regex = QRegularExpression{pattern};
-  if (!regex.isValid()) {
-    showPage(Page::DeriveTrackLanguage);
-    ui->leMDeriveTrackLanguageCustomRegex->setFocus();
-
+  if (ui->leMDeriveTrackLanguageBoundaryChars->text().isEmpty()) {
     Util::MessageBox::critical(this)
       ->title(QY("Invalid settings"))
-      .text(QY("The regular expression for deriving the track language from file names is invalid: %1").arg(regex.errorString()))
+      .text(QY("The list of boundary characters for deriving the track language from file names must not be empty."))
       .exec();
 
     return false;

@@ -151,7 +151,7 @@ public:
   mtx::bcp47::language_c m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage, m_defaultChapterLanguage;
   SetDefaultLanguagePolicy m_whenToSetDefaultLanguage;
   DeriveLanguageFromFileNamePolicy m_deriveAudioTrackLanguageFromFileNamePolicy, m_deriveVideoTrackLanguageFromFileNamePolicy, m_deriveSubtitleTrackLanguageFromFileNamePolicy;
-  QString m_regexForDerivingTrackLanguagesFromFileNames;
+  QString m_boundaryCharsForDerivingTrackLanguagesFromFileNames;
   QStringList m_recognizedTrackLanguagesInFileNames, m_mergePredefinedSplitSizes, m_mergePredefinedSplitDurations;
   QStringList m_mergePredefinedVideoTrackNames, m_mergePredefinedAudioTrackNames, m_mergePredefinedSubtitleTrackNames;
   QString m_chapterNameTemplate, m_defaultChapterCountry, m_ceTextFileCharacterSet, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
@@ -275,9 +275,9 @@ public:
 
   static QString cacheDirLocation(QString const &subDir);
   static QString prepareCacheDir(QString const &subDir);
-};
 
-// extern Settings g_settings;
+  static QString defaultBoundaryCharsForDerivingLanguageFromFileName();
+};
 
 }
 

@@ -19,6 +19,12 @@
   languages" and "enabling items by language" always included all the ISO
   639-3 languages, even if those weren't enabled in the "often-used languages"
   pane. Fixes #3047.
+* MKVToolNix GUI: multiplexer: deriving the track language from file names
+  doesn't use one big regular expression of all enabled languages
+  anymore. Instead, the file name is split into parts on a list of characters
+  (such as `.` or `(` and `)`; configurable in the preferences). This prevents
+  the regular expression becoming too big for the regular expression library
+  to handle when many languages are enabled. Fixes #3048.
 
 ## Other changes
 

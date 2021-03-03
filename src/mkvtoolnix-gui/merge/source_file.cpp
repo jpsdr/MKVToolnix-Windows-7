@@ -17,8 +17,6 @@ namespace mtx::gui::Merge {
 
 namespace {
 
-QString s_iso639_1CodesPattern, s_iso639_2CodesPattern, s_languageNamesPattern;
-
 template<typename T>
 void
 fixAssociationsFor(char const *group,
@@ -35,49 +33,6 @@ fixAssociationsFor(char const *group,
   }
 
   l.settings.endGroup();
-}
-
-void
-setupLanguageDerivationSubPatterns() {
-  if (!s_iso639_1CodesPattern.isEmpty())
-    return;
-
-  QStringList codes1List, codes2List, namesList;
-  QRegularExpression languageNameCleaner{Q(" *[\\(,].*")}, splitter{Q(" *; *")};
-
-  auto &cfg = Util::Settings::get();
-
-  for (auto const &language : mtx::iso639::g_languages) {
-    if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(language.alpha_3_code)))
-      continue;
-
-    if (!language.alpha_2_code.empty())
-      codes1List << Q(language.alpha_2_code);
-
-    if (!language.alpha_3_code.empty())
-      codes2List << Q(language.alpha_3_code);
-    if (!language.terminology_abbrev.empty())
-      codes2List << Q(language.terminology_abbrev);
-
-    for (auto name : Q(language.english_name).split(splitter)) {
-      if (name.isEmpty())
-        continue;
-      name.remove(languageNameCleaner);
-      namesList  << QRegularExpression::escape(name);
-    }
-  }
-
-  s_iso639_1CodesPattern = codes1List.join(Q("|"));
-  s_iso639_2CodesPattern = codes2List.join(Q("|"));
-  s_languageNamesPattern = namesList .join(Q("|"));
-}
-
-QString
-replaceLanguageSubPatterns(QString pattern) {
-  return pattern
-    .replace(Q("<ISO_639_1_CODES>"), s_iso639_1CodesPattern)
-    .replace(Q("<ISO_639_2_CODES>"), s_iso639_2CodesPattern)
-    .replace(Q("<LANGUAGE_NAMES>"),  s_languageNamesPattern);
 }
 
 }
@@ -398,22 +353,6 @@ SourceFile::setupProgramMapFromProperties() {
   }
 }
 
-QString
-SourceFile::defaultRegexForDerivingLanguageFromFileName() {
-  return Q("(?:^|[[({.+=#-])(<ISO_639_1_CODES>|<ISO_639_2_CODES>|<LANGUAGE_NAMES>)[])}.+=#-]");
-}
-
-QRegularExpression
-SourceFile::regexForDerivingLanguageFromFileName() {
-  setupLanguageDerivationSubPatterns();
-
-  auto &cfg    = Util::Settings::get();
-  auto pattern = !cfg.m_regexForDerivingTrackLanguagesFromFileNames.isEmpty() ? cfg.m_regexForDerivingTrackLanguagesFromFileNames : defaultRegexForDerivingLanguageFromFileName();
-  pattern      = Q(".*") + pattern;
-
-  return QRegularExpression{replaceLanguageSubPatterns(pattern), QRegularExpression::CaseInsensitiveOption};
-}
-
 mtx::bcp47::language_c
 SourceFile::deriveLanguageFromFileName() {
   auto &cfg     = Util::Settings::get();
@@ -425,70 +364,61 @@ SourceFile::deriveLanguageFromFileName() {
     qDebug() << "found season/episode code; only using postfix:" << fileName;
   }
 
-  auto regex = regexForDerivingLanguageFromFileName();
-  if (!regex.isValid()) {
-    qDebug() << "regex for deriving language from file name is invalid:" << regex;
-  }
+  QStringList escapedChars;
 
-  matches = regex.match(fileName);
+  for (auto c : cfg.m_boundaryCharsForDerivingTrackLanguagesFromFileNames)
+    escapedChars << QRegularExpression::escape(c);
 
-  if (!matches.hasMatch()) {
+  auto splitRE     = QRegularExpression{Q("(?:%1)+").arg(escapedChars.join(Q("|")))};
+  auto allCaptures = fileName.split(splitRE);
+
+  if (allCaptures.size() < 2) {
     qDebug() << "language could not be derived: no match found";
     return {};
   }
 
-  QString language;
-  QRegularExpression languageNameCleaner{Q(" *[\\(,].*")}, splitter{Q(" *; *")};
-  auto allCaptures = matches.capturedTexts();
+  allCaptures.removeLast();
 
-  for (int captureIdx = 1, numCaptures = allCaptures.size(); captureIdx < numCaptures; ++captureIdx) {
-    auto &capture = allCaptures[captureIdx];
+  qDebug() << "potential matches:" << allCaptures;
+
+  QRegularExpression languageNameCleaner{Q(" *[\\(,].*")}, splitter{Q(" *; *")};
+
+  for (auto captureItr = allCaptures.rbegin(), captureEnd = allCaptures.rend(); captureItr != captureEnd; ++captureItr) {
+    auto &capture = *captureItr;
 
     if (capture.isEmpty())
       continue;
 
     qDebug() << "language derivation match:" << capture;
 
-    auto languageOpt = mtx::iso639::look_up(to_utf8(capture.toLower()));
-    if (languageOpt)
-      language = Q(languageOpt->alpha_3_code);
-
-    else {
-      for (auto const &languageElt : mtx::iso639::g_languages) {
-        if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(languageElt.alpha_3_code)))
-          continue;
-
-        for (auto name : Q(languageElt.english_name).split(splitter)) {
-          name.remove(languageNameCleaner);
-          if (name != capture)
-            continue;
-
-          language = Q(languageElt.alpha_3_code);
-        }
-
-        if (!language.isEmpty())
-          break;
-      }
-
-      if (language.isEmpty())
+    auto languageOpt = mtx::iso639::look_up(to_utf8(capture));
+    if (languageOpt) {
+      if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(languageOpt->alpha_3_code)))
         continue;
+
+      qDebug() << "derived language via code lookup:" << Q(languageOpt->alpha_3_code);
+
+      return mtx::bcp47::language_c::parse(to_utf8(Q(languageOpt->alpha_3_code)));
     }
 
-    qDebug() << "derived language:" << language;
+    for (auto const &languageElt : mtx::iso639::g_languages) {
+      if (!cfg.m_recognizedTrackLanguagesInFileNames.contains(Q(languageElt.alpha_3_code)))
+        continue;
 
-    return mtx::bcp47::language_c::parse(to_utf8(language));
+      for (auto name : Q(languageElt.english_name).split(splitter)) {
+        name.remove(languageNameCleaner);
+        if (name.toLower() == capture) {
+          qDebug() << "derived language via name:" << Q(languageElt.alpha_3_code);
+
+          return mtx::bcp47::language_c::parse(to_utf8(Q(languageElt.alpha_3_code)));
+        }
+      }
+    }
   }
 
   qDebug() << "language could not be derived: match found but no mapping to language:" << matches.capturedTexts();
 
   return {};
-}
-
-void
-SourceFile::setupFromPreferences() {
-  s_iso639_1CodesPattern.clear();
-  s_iso639_2CodesPattern.clear();
-  s_languageNamesPattern.clear();
 }
 
 }
