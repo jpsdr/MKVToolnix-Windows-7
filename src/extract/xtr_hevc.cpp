@@ -29,7 +29,8 @@ xtr_hevc_c::create_file(xtr_base_c *master,
   if (m_decoded_codec_private->get_size() < 23)
     mxerror(fmt::format(Y("Track {0} CodecPrivate is too small.\n"), m_tid));
 
-  m_decoded_codec_private->take_ownership();
+  m_parser.normalize_parameter_sets();
+  m_parser.set_hevcc(m_decoded_codec_private);
 
   m_nal_size_size = 1 + (m_decoded_codec_private->get_buffer()[21] & 3);
 }
@@ -101,41 +102,31 @@ xtr_hevc_c::write_nal(binary *data,
 }
 
 void
-xtr_hevc_c::check_for_parameter_sets_in_first_frame(nal_unit_list_t const &nal_units) {
-  if (!m_check_for_parameter_sets_in_first_frame)
-    return;
+xtr_hevc_c::handle_frame(xtr_frame_t &f) {
+  if (f.keyframe)
+    m_parser.set_next_i_slice_is_key_frame();
 
-  std::unordered_map<unsigned int, bool> nalu_types_found;
+  m_parser.add_bytes_framed(f.frame, m_nal_size_size);
 
-  for (auto const &nal_unit : nal_units)
-    nalu_types_found[nal_unit.second] = true;
-
-  auto have_all_parameter_sets = nalu_types_found[mtx::hevc::NALU_TYPE_VIDEO_PARAM] && nalu_types_found[mtx::hevc::NALU_TYPE_SEQ_PARAM] && nalu_types_found[mtx::hevc::NALU_TYPE_PIC_PARAM];
-  auto have_prefix_sei         = nalu_types_found[mtx::hevc::NALU_TYPE_PREFIX_SEI];
-
-  if (!have_all_parameter_sets)
-    unwrap_write_hevcc(have_prefix_sei);
-
-  m_check_for_parameter_sets_in_first_frame = false;
+  flush_frames();
 }
 
 void
-xtr_hevc_c::handle_frame(xtr_frame_t &f) {
-  auto nal_units = find_nal_units(f.frame->get_buffer(), f.frame->get_size());
+xtr_hevc_c::flush_frames() {
+  while (m_parser.frame_available()) {
+    std::size_t pos{};
 
-  check_for_parameter_sets_in_first_frame(nal_units);
+    auto frame  = m_parser.get_frame();
+    auto buffer = frame.m_data->get_buffer();
+    auto size   = frame.m_data->get_size();
 
-  for (auto const &nal_unit : nal_units) {
-    auto &mem = *nal_unit.first;
-    auto pos  = static_cast<size_t>(0);
-
-    write_nal(mem.get_buffer(), pos, mem.get_size(), m_nal_size_size);
+    while (pos < size)
+      write_nal(buffer, pos, size, m_nal_size_size);
   }
 }
 
-unsigned char
-xtr_hevc_c::get_nalu_type(unsigned char const *buffer,
-                          std::size_t size)
-  const {
-  return size > 0 ? (buffer[0] >> 1) & 0x3f : 0;
+void
+xtr_hevc_c::finish_track() {
+  m_parser.flush();
+  flush_frames();
 }

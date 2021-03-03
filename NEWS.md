@@ -56,6 +56,9 @@
 * mkvmerge, mkvpropedit: tags: mkvmerge will no longer set the "target type"
   for track statistics tags (earlier it used `MOVIE`). The "target type value"
   will still be set to `50`. Fixes #3074.
+* mkvextract: HEVC/H.265: mkvextract will now normalize the placement of VPS,
+  SPS and PPS NALUs. Each key frame is prefixed with exactly one copy of the
+  currently active parameter sets.
 
 ## Build system changes
 

@@ -13,14 +13,16 @@
 
 #include "common/common_pch.h"
 
+#include "common/hevc_es_parser.h"
 #include "extract/xtr_base.h"
 #include "extract/xtr_avc.h"
 
 class xtr_hevc_c: public xtr_avc_c {
 protected:
-  bool m_first_nalu{true}, m_check_for_parameter_sets_in_first_frame{true};
   memory_cptr m_decoded_codec_private;
   debugging_option_c m_debug{"xtr_hevc|hevc"};
+  bool m_first_nalu{true};
+  mtx::hevc::es_parser_c m_parser;
 
 public:
   xtr_hevc_c(const std::string &codec_id, int64_t tid, track_spec_t &tspec) : xtr_avc_c(codec_id, tid, tspec) { }
@@ -33,8 +35,9 @@ public:
   virtual void handle_frame(xtr_frame_t &f) override;
   virtual bool write_nal(binary *data, size_t &pos, size_t data_size, size_t write_nal_size_size) override;
 
+  virtual void finish_track() override;
+
 protected:
+  virtual void flush_frames();
   virtual void unwrap_write_hevcc(bool skip_prefix_sei);
-  virtual void check_for_parameter_sets_in_first_frame(nal_unit_list_t const &nal_units);
-  virtual unsigned char get_nalu_type(unsigned char const *buffer, std::size_t size) const override;
 };
