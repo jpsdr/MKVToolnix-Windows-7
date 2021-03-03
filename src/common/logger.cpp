@@ -52,32 +52,34 @@ target_c::format_line(std::string const &message) {
 
 target_c &
 target_c::get_default_logger() {
-  if (!s_default_logger) {
-    auto var = mtx::sys::get_environment_variable("MTX_LOGGER");
+  if (s_default_logger)
+    return *s_default_logger;
 
-    if (var.empty()) {
+  auto var = mtx::sys::get_environment_variable("MTX_LOGGER");
+
+  if (var.empty()) {
 #if defined(SYS_WINDOWS)
-      var = "debug";
+    var = "debug";
 #else
-      var = "stderr";
+    var = "stderr";
 #endif // SYS_WINDOWS
-    }
+  }
 
-    auto spec = mtx::string::split(var, ":");
+  auto spec = mtx::string::split(var, ":");
 
-    if (spec[0] == "file") {
-      auto file = (spec.size() > 1) && !spec[1].empty() ? spec[1] : "mkvtoolnix-debug.log"s;
+  if (spec[0] == "file") {
+    auto file = (spec.size() > 1) && !spec[1].empty() ? spec[1] : "mkvtoolnix-debug.txt"s;
 
-      set_default_logger(target_cptr{new file_target_c{mtx::fs::to_path(file)}});
+    set_default_logger(target_cptr{new file_target_c{mtx::fs::to_path(file)}});
 
 #if defined(SYS_WINDOWS)
-    } else if (spec[0] == "debug") {
-      set_default_logger(target_cptr{new windows_debug_target_c{}});
+  } else if (spec[0] == "debug") {
+    set_default_logger(target_cptr{new windows_debug_target_c{}});
 #endif // SYS_WINDOWS
 
-    } else
-      set_default_logger(target_cptr{new stderr_target_c{}});
-}
+  } else
+    set_default_logger(target_cptr{new stderr_target_c{}});
+
   return *s_default_logger;
 }
 
