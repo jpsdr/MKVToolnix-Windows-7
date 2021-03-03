@@ -115,6 +115,18 @@ gatherScreenInfo(QStringList &info) {
 }
 
 void
+gatherEnvironmentVariables(QStringList &info) {
+  info << Q("") << Q("## Environment variables") << Q("");
+
+  auto keys = QStringList{} << Q("QT_AUTO_SCREEN_SCALE_FACTOR") << Q("QT_SCALE_FACTOR") << Q("QT_SCREEN_SCALE_FACTORS") << Q("QT_DEVICE_PIXEL_RATIO")
+                            << Q("MTX_LOGGER")                  << Q("MTX_DEBUG")       << Q("MKVTOOLNIX_DEBUG")        << Q("MKVMERGE_DEBUG");
+  keys.sort();
+
+  for (auto const &name : keys)
+    info << Q("* `%1=%2`").arg(name).arg(Q(mtx::sys::get_environment_variable(to_utf8(name))));
+}
+
+void
 gatherQtInfo(QStringList &info) {
   info << Q("") << Q("# Qt") << Q("");
 
@@ -129,11 +141,6 @@ gatherQtInfo(QStringList &info) {
   info << Q("* Compiler: unknown");
 #endif
 
-  info << Q("") << Q("## Environment variables") << Q("");
-
-  auto keys = QStringList{} << Q("QT_AUTO_SCREEN_SCALE_FACTOR") << Q("QT_SCALE_FACTOR") << Q("QT_SCREEN_SCALE_FACTORS") << Q("QT_DEVICE_PIXEL_RATIO");
-  for (auto const &name : keys)
-    info << Q("* `%1=%2`").arg(name).arg(Q(mtx::sys::get_environment_variable(to_utf8(name))));
 }
 
 } // anonymous namespace
@@ -148,6 +155,8 @@ gatherSystemInformation() {
 
   gatherOperatingSystemInfo(info);
   gatherScreenInfo(info);
+  gatherEnvironmentVariables(info);
+
   gatherQtInfo(info);
 
   return info.join(Q("\n"));
