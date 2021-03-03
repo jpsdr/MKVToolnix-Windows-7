@@ -23,6 +23,10 @@
   happens when files are dragged & dropped onto the GUI. The same options are
   available, but they're distinct settings, allowing for different use
   cases. Fixes #3035.
+* MKVToolNix GUI: preferences: the language lists for "deriving track
+  languages" and "enabling items by language" always included all the ISO
+  639-3 languages, even if those weren't enabled in the "often-used languages"
+  pane. Fixes #3047.
 
 
 # Version 54.0.0 "F Maj Pixie" 2021-02-26

@@ -581,10 +581,14 @@ PreferencesDialog::setupJobRemovalPolicy() {
 void
 PreferencesDialog::setupCommonLanguages(bool withISO639_3) {
   auto &allLanguages = withISO639_3 ? App::iso639Languages() : App::iso639_2Languages();
+  auto languageItems = QList<Util::SideBySideMultiSelect::Item>::fromVector(Util::stdVectorToQVector<Util::SideBySideMultiSelect::Item>(allLanguages));
 
-  ui->tbOftenUsedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(Util::stdVectorToQVector<Util::SideBySideMultiSelect::Item>(allLanguages)), m_cfg.m_oftenUsedLanguages);
+  ui->tbOftenUsedLanguages->setItems(languageItems, m_cfg.m_oftenUsedLanguages);
   ui->cbOftenUsedLanguagesOnly->setChecked(m_cfg.m_oftenUsedLanguagesOnly && !m_cfg.m_oftenUsedLanguages.isEmpty());
   enableOftendUsedLanguagesOnly();
+
+  ui->tbMEnableMuxingTracksByLanguage->setItems(languageItems, m_cfg.m_enableMuxingTracksByTheseLanguages);
+  ui->tbMDeriveTrackLanguageRecognizedLanguages->setItems(languageItems, m_cfg.m_recognizedTrackLanguagesInFileNames);
 }
 
 void
@@ -694,9 +698,6 @@ PreferencesDialog::setupEnableMuxingTracksByLanguage() {
   ui->cbMEnableMuxingAllVideoTracks->setChecked(m_cfg.m_enableMuxingAllVideoTracks);
   ui->cbMEnableMuxingAllAudioTracks->setChecked(m_cfg.m_enableMuxingAllAudioTracks);
   ui->cbMEnableMuxingAllSubtitleTracks->setChecked(m_cfg.m_enableMuxingAllSubtitleTracks);
-
-  auto &allLanguages = App::iso639Languages();
-  ui->tbMEnableMuxingTracksByLanguage->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(Util::stdVectorToQVector<Util::SideBySideMultiSelect::Item>(allLanguages)), m_cfg.m_enableMuxingTracksByTheseLanguages);
 }
 
 void
@@ -817,9 +818,6 @@ PreferencesDialog::setupDerivingTrackLanguagesFromFileName() {
   setupComboBox(*ui->cbMDeriveSubtitleTrackLanguageFromFileName, m_cfg.m_deriveSubtitleTrackLanguageFromFileNamePolicy);
 
   ui->leMDeriveTrackLanguageCustomRegex->setText(m_cfg.m_regexForDerivingTrackLanguagesFromFileNames);
-
-  ui->tbMDeriveTrackLanguageRecognizedLanguages->setItems(QList<Util::SideBySideMultiSelect::Item>::fromVector(Util::stdVectorToQVector<Util::SideBySideMultiSelect::Item>(App::iso639Languages())),
-                                                          m_cfg.m_recognizedTrackLanguagesInFileNames);
 }
 
 void
