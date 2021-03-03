@@ -107,6 +107,11 @@ es_parser_c::discard_actual_frames(bool discard) {
 }
 
 void
+es_parser_c::normalize_parameter_sets(bool normalize) {
+  m_normalize_parameter_sets = normalize;
+}
+
+void
 es_parser_c::add_bytes(unsigned char *buffer,
                        size_t size) {
   mtx::mem::slice_cursor_c cursor;
@@ -227,6 +232,25 @@ es_parser_c::add_timestamp(int64_t timestamp) {
 }
 
 void
+es_parser_c::add_parameter_sets_to_extra_data() {
+  std::vector<memory_cptr> old_extra_data;
+
+  for (auto const &data : m_extra_data)
+    if (old_extra_data.empty() || (*data != *old_extra_data.back()))
+      old_extra_data.emplace_back(data);
+
+  m_extra_data.clear();
+  m_extra_data.reserve(m_vps_list.size() + m_sps_list.size() + m_pps_list.size() + old_extra_data.size());
+
+  auto create_nalu_and_add = [this](memory_cptr const &nalu) { m_extra_data.push_back(create_nalu_with_size(nalu)); };
+
+  std::for_each(m_vps_list.begin(),     m_vps_list.end(),     create_nalu_and_add);
+  std::for_each(m_sps_list.begin(),     m_sps_list.end(),     create_nalu_and_add);
+  std::for_each(m_pps_list.begin(),     m_pps_list.end(),     create_nalu_and_add);
+  std::copy(    old_extra_data.begin(), old_extra_data.end(), std::back_inserter(m_extra_data));
+}
+
+void
 es_parser_c::flush_incomplete_frame() {
   if (!m_have_incomplete_frame || !m_hevcc_ready)
     return;
@@ -287,6 +311,9 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     m_b_frames_since_keyframe = false;
     cleanup();
 
+    if (m_normalize_parameter_sets)
+      add_parameter_sets_to_extra_data();
+
   } else
     m_b_frames_since_keyframe |= is_b_slice;
 
@@ -344,7 +371,8 @@ es_parser_c::handle_vps_nalu(memory_cptr const &nalu) {
     m_codec_private.vps_data_id                = vps_info.id;
   }
 
-  m_extra_data.push_back(create_nalu_with_size(nalu));
+  if (!m_normalize_parameter_sets)
+    m_extra_data.push_back(create_nalu_with_size(nalu));
 }
 
 void
@@ -386,7 +414,8 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
   } else
     use_sps_info = false;
 
-  m_extra_data.push_back(create_nalu_with_size(parsed_nalu));
+  if (!m_normalize_parameter_sets)
+    m_extra_data.push_back(create_nalu_with_size(parsed_nalu));
 
   // Update codec private if needed
   if (-1 == m_codec_private.sps_data_id)
@@ -450,7 +479,8 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
     m_hevcc_changed    = true;
   }
 
-  m_extra_data.push_back(create_nalu_with_size(nalu));
+  if (!m_normalize_parameter_sets)
+    m_extra_data.push_back(create_nalu_with_size(nalu));
 }
 
 void

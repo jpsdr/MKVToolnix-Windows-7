@@ -81,7 +81,7 @@ protected:
   bool m_have_incomplete_frame{};
   std::deque<std::pair<memory_cptr, uint64_t>> m_unhandled_nalus;
 
-  bool m_simple_picture_order{}, m_discard_actual_frames{};
+  bool m_simple_picture_order{}, m_discard_actual_frames{}, m_normalize_parameter_sets{};
 
   debugging_option_c m_debug_keyframe_detection{"hevc_parser|hevc_keyframe_detection"}, m_debug_nalu_types{"hevc_parser|hevc_nalu_types"}, m_debug_timestamps{"hevc_parser|hevc_timestamps"}, m_debug_sps_info{"hevc_parser|hevc_sps|hevc_sps_info"}, m_debug_parameter_sets{"hevc_parser|hevc_parameter_sets"};
   static std::unordered_map<int, std::string> ms_nalu_names_by_type;
@@ -175,6 +175,7 @@ public:
   }
 
   void discard_actual_frames(bool discard = true);
+  void normalize_parameter_sets(bool normalize = true);
 
   int get_num_skipped_frames() const {
     return m_num_skipped_frames;
@@ -218,6 +219,7 @@ protected:
   void calculate_frame_order();
   void calculate_frame_timestamps();
   void calculate_frame_references_and_update_stats();
+  void add_parameter_sets_to_extra_data();
   static void init_nalu_names();
 };
 
