@@ -308,6 +308,8 @@ es_parser_c::handle_vps_nalu(memory_cptr const &nalu) {
     if (m_vps_info_list[i].id == vps_info.id)
       break;
 
+  auto update_codec_private = false;
+
   if (m_vps_info_list.size() == i) {
     m_vps_list.push_back(nalu);
     m_vps_info_list.push_back(vps_info);
@@ -321,22 +323,15 @@ es_parser_c::handle_vps_nalu(memory_cptr const &nalu) {
     m_hevcc_changed    = true;
 
     // Update codec private if needed
-    if (m_codec_private.vps_data_id == (int) vps_info.id) {
-      m_codec_private.profile_space              = vps_info.profile_space;
-      m_codec_private.tier_flag                  = vps_info.tier_flag;
-      m_codec_private.profile_idc                = vps_info.profile_idc;
-      m_codec_private.profile_compatibility_flag = vps_info.profile_compatibility_flag;
-      m_codec_private.progressive_source_flag    = vps_info.progressive_source_flag;
-      m_codec_private.interlaced_source_flag     = vps_info.interlaced_source_flag;
-      m_codec_private.non_packed_constraint_flag = vps_info.non_packed_constraint_flag;
-      m_codec_private.frame_only_constraint_flag = vps_info.frame_only_constraint_flag;
-      m_codec_private.level_idc                  = vps_info.level_idc;
-      m_codec_private.vps_data_id                = vps_info.id;
-    }
+    if (m_codec_private.vps_data_id == (int) vps_info.id)
+      update_codec_private = true;
   }
 
   // Update codec private if needed
-  if (-1 == m_codec_private.vps_data_id) {
+  if (-1 == m_codec_private.vps_data_id)
+    update_codec_private = true;
+
+  if (update_codec_private) {
     m_codec_private.profile_space              = vps_info.profile_space;
     m_codec_private.tier_flag                  = vps_info.tier_flag;
     m_codec_private.profile_idc                = vps_info.profile_idc;
@@ -367,7 +362,9 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
     if (m_sps_info_list[i].id == sps_info.id)
       break;
 
-  bool use_sps_info = true;
+  auto use_sps_info         = true;
+  auto update_codec_private = false;
+
   if (m_sps_info_list.size() == i) {
     m_sps_list.push_back(parsed_nalu);
     m_sps_info_list.push_back(sps_info);
@@ -383,21 +380,19 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
     m_hevcc_changed    = true;
 
     // Update codec private if needed
-    if (m_codec_private.sps_data_id == (int) sps_info.id) {
-      m_codec_private.min_spatial_segmentation_idc = sps_info.min_spatial_segmentation_idc;
-      m_codec_private.chroma_format_idc = sps_info.chroma_format_idc;
-      m_codec_private.bit_depth_luma_minus8 = sps_info.bit_depth_luma_minus8;
-      m_codec_private.bit_depth_chroma_minus8 = sps_info.bit_depth_chroma_minus8;
-      m_codec_private.max_sub_layers_minus1 = sps_info.max_sub_layers_minus1;
-      m_codec_private.temporal_id_nesting_flag = sps_info.temporal_id_nesting_flag;
-    }
+    if (m_codec_private.sps_data_id == (int) sps_info.id)
+      update_codec_private = true;
+
   } else
     use_sps_info = false;
 
   m_extra_data.push_back(create_nalu_with_size(parsed_nalu));
 
   // Update codec private if needed
-  if (-1 == m_codec_private.sps_data_id) {
+  if (-1 == m_codec_private.sps_data_id)
+    update_codec_private = true;
+
+  if (update_codec_private) {
     m_codec_private.min_spatial_segmentation_idc = sps_info.min_spatial_segmentation_idc;
     m_codec_private.chroma_format_idc = sps_info.chroma_format_idc;
     m_codec_private.bit_depth_luma_minus8 = sps_info.bit_depth_luma_minus8;
