@@ -1,13 +1,5 @@
 # Version ?
 
-## Important notes
-
-* mkvmerge, MKVToolNix GUI multiplexer: the functionality for changing the
-  length of the NALU "size" field for AVC/h.264 and HEVC/h.265 tracks has been
-  removed. The corresponding command-line option will continue to be
-  recognized by mkvmerge as not to break existing third-party applications,
-  but it won't actually do anything.
-
 ## Bug fixes
 
 * all programs, only on Windows: fixed checking existence of & creating
@@ -27,6 +19,14 @@
   languages" and "enabling items by language" always included all the ISO
   639-3 languages, even if those weren't enabled in the "often-used languages"
   pane. Fixes #3047.
+
+## Other changes
+
+* mkvmerge, MKVToolNix GUI multiplexer: the functionality for changing the
+  length of the NALU "size" field for AVC/h.264 and HEVC/h.265 tracks has been
+  removed. The corresponding command-line option will continue to be
+  recognized by mkvmerge as not to break existing third-party applications,
+  but it won't actually do anything.
 
 
 # Version 54.0.0 "F Maj Pixie" 2021-02-26
