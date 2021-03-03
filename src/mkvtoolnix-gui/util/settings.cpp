@@ -521,11 +521,11 @@ Settings::loadDerivingTrackLanguagesSettings(QSettings &reg) {
   reg.beginGroup(s_grpSettings);
   reg.beginGroup(s_grpDerivingTrackLanguagesFromFileNames);
 
-  m_deriveAudioTrackLanguageFromFileNamePolicy    = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value(s_valAudioPolicy,    static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
-  m_deriveVideoTrackLanguageFromFileNamePolicy    = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value(s_valVideoPolicy,    static_cast<int>(DeriveLanguageFromFileNamePolicy::Never)).toInt());
-  m_deriveSubtitleTrackLanguageFromFileNamePolicy = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value(s_valSubtitlePolicy, static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
-  m_boundaryCharsForDerivingTrackLanguagesFromFileNames = reg.value(s_valBoundaryChars,                                          defaultBoundaryCharsForDerivingLanguageFromFileName()).toString();
-  m_recognizedTrackLanguagesInFileNames           = reg.value(s_valRecognizedTrackLanguagesInFileNames).toStringList();
+  m_deriveAudioTrackLanguageFromFileNamePolicy          = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value(s_valAudioPolicy,    static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
+  m_deriveVideoTrackLanguageFromFileNamePolicy          = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value(s_valVideoPolicy,    static_cast<int>(DeriveLanguageFromFileNamePolicy::Never)).toInt());
+  m_deriveSubtitleTrackLanguageFromFileNamePolicy       = static_cast<DeriveLanguageFromFileNamePolicy>(reg.value(s_valSubtitlePolicy, static_cast<int>(DeriveLanguageFromFileNamePolicy::IfAbsentOrUndetermined)).toInt());
+  m_boundaryCharsForDerivingTrackLanguagesFromFileNames = reg.value(s_valBoundaryChars,                                                defaultBoundaryCharsForDerivingLanguageFromFileName()).toString();
+  m_recognizedTrackLanguagesInFileNames                 = reg.value(s_valRecognizedTrackLanguagesInFileNames).toStringList();
 
   reg.endGroup();
   reg.endGroup();

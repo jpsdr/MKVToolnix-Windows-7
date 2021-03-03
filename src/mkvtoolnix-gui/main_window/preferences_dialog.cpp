@@ -866,115 +866,115 @@ PreferencesDialog::setupFontAndScaling() {
 void
 PreferencesDialog::save() {
   // GUI page:
-  m_cfg.m_uiLocale                                      = ui->cbGuiInterfaceLanguage->currentData().toString();
-  m_cfg.m_tabPosition                                   = static_cast<QTabWidget::TabPosition>(ui->cbGuiTabPositions->currentData().toInt());
-  m_cfg.m_bcp47LanguageEditingMode                      = static_cast<Util::Settings::BCP47LanguageEditingMode>(ui->cbGuiBCP47LanguageEditingMode->currentData().toInt());
-  m_cfg.m_uiFontFamily                                  = ui->fcbGuiFontFamily->currentFont().family();
-  m_cfg.m_uiFontPointSize                               = ui->sbGuiFontPointSize->value();
-  m_cfg.m_uiStayOnTop                                   = ui->cbGuiStayOnTop->isChecked();
-  m_cfg.m_uiDisableHighDPIScaling                       = ui->cbGuiDisableHighDPIScaling->isChecked();
-  m_cfg.m_uiDisableDarkStyleSheet                       = ui->cbGuiDisableDarkStyleSheet->isChecked();
-  m_cfg.m_uiDisableToolTips                             = ui->cbGuiDisableToolTips->isChecked();
-  m_cfg.m_checkForUpdates                               = ui->cbGuiCheckForUpdates->isChecked();
-  m_cfg.m_showToolSelector                              = ui->cbGuiShowToolSelector->isChecked();
-  m_cfg.m_showMoveUpDownButtons                         = ui->cbGuiShowMoveUpDownButtons->isChecked();
-  m_cfg.m_elideTabHeaderLabels                          = ui->cbGuiElideTabHeaderLabels->isChecked();
-  m_cfg.m_warnBeforeClosingModifiedTabs                 = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();
-  m_cfg.m_warnBeforeAbortingJobs                        = ui->cbGuiWarnBeforeAbortingJobs->isChecked();
-  m_cfg.m_warnBeforeOverwriting                         = ui->cbGuiWarnBeforeOverwriting->isChecked();
-  m_cfg.m_useDefaultJobDescription                      = ui->cbGuiUseDefaultJobDescription->isChecked();
-  m_cfg.m_showOutputOfAllJobs                           = ui->cbGuiShowOutputOfAllJobs->isChecked();
-  m_cfg.m_switchToJobOutputAfterStarting                = ui->cbGuiSwitchToJobOutputAfterStarting->isChecked();
-  m_cfg.m_resetJobWarningErrorCountersOnExit            = ui->cbGuiResetJobWarningErrorCountersOnExit->isChecked();
-  m_cfg.m_removeOutputFileOnJobFailure                  = ui->cbGuiRemoveOutputFileOnJobFailure->isChecked();
-  auto idx                                              = !ui->cbGuiRemoveJobs      ->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy      ->currentIndex() + 1;
-  auto idxOnExit                                        = !ui->cbGuiRemoveJobsOnExit->isChecked() ? 0 : ui->cbGuiJobRemovalOnExitPolicy->currentIndex() + 1;
-  m_cfg.m_jobRemovalPolicy                              = static_cast<Util::Settings::JobRemovalPolicy>(idx);
-  m_cfg.m_jobRemovalOnExitPolicy                        = static_cast<Util::Settings::JobRemovalPolicy>(idxOnExit);
-  m_cfg.m_removeOldJobs                                 = ui->cbGuiRemoveOldJobs->isChecked();
-  m_cfg.m_removeOldJobsDays                             = ui->sbGuiRemoveOldJobsDays->value();
-  m_cfg.m_maximumConcurrentJobs                         = ui->sbGuiMaximumConcurrentJobs->value();
+  m_cfg.m_uiLocale                                            = ui->cbGuiInterfaceLanguage->currentData().toString();
+  m_cfg.m_tabPosition                                         = static_cast<QTabWidget::TabPosition>(ui->cbGuiTabPositions->currentData().toInt());
+  m_cfg.m_bcp47LanguageEditingMode                            = static_cast<Util::Settings::BCP47LanguageEditingMode>(ui->cbGuiBCP47LanguageEditingMode->currentData().toInt());
+  m_cfg.m_uiFontFamily                                        = ui->fcbGuiFontFamily->currentFont().family();
+  m_cfg.m_uiFontPointSize                                     = ui->sbGuiFontPointSize->value();
+  m_cfg.m_uiStayOnTop                                         = ui->cbGuiStayOnTop->isChecked();
+  m_cfg.m_uiDisableHighDPIScaling                             = ui->cbGuiDisableHighDPIScaling->isChecked();
+  m_cfg.m_uiDisableDarkStyleSheet                             = ui->cbGuiDisableDarkStyleSheet->isChecked();
+  m_cfg.m_uiDisableToolTips                                   = ui->cbGuiDisableToolTips->isChecked();
+  m_cfg.m_checkForUpdates                                     = ui->cbGuiCheckForUpdates->isChecked();
+  m_cfg.m_showToolSelector                                    = ui->cbGuiShowToolSelector->isChecked();
+  m_cfg.m_showMoveUpDownButtons                               = ui->cbGuiShowMoveUpDownButtons->isChecked();
+  m_cfg.m_elideTabHeaderLabels                                = ui->cbGuiElideTabHeaderLabels->isChecked();
+  m_cfg.m_warnBeforeClosingModifiedTabs                       = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();
+  m_cfg.m_warnBeforeAbortingJobs                              = ui->cbGuiWarnBeforeAbortingJobs->isChecked();
+  m_cfg.m_warnBeforeOverwriting                               = ui->cbGuiWarnBeforeOverwriting->isChecked();
+  m_cfg.m_useDefaultJobDescription                            = ui->cbGuiUseDefaultJobDescription->isChecked();
+  m_cfg.m_showOutputOfAllJobs                                 = ui->cbGuiShowOutputOfAllJobs->isChecked();
+  m_cfg.m_switchToJobOutputAfterStarting                      = ui->cbGuiSwitchToJobOutputAfterStarting->isChecked();
+  m_cfg.m_resetJobWarningErrorCountersOnExit                  = ui->cbGuiResetJobWarningErrorCountersOnExit->isChecked();
+  m_cfg.m_removeOutputFileOnJobFailure                        = ui->cbGuiRemoveOutputFileOnJobFailure->isChecked();
+  auto idx                                                    = !ui->cbGuiRemoveJobs      ->isChecked() ? 0 : ui->cbGuiJobRemovalPolicy      ->currentIndex() + 1;
+  auto idxOnExit                                              = !ui->cbGuiRemoveJobsOnExit->isChecked() ? 0 : ui->cbGuiJobRemovalOnExitPolicy->currentIndex() + 1;
+  m_cfg.m_jobRemovalPolicy                                    = static_cast<Util::Settings::JobRemovalPolicy>(idx);
+  m_cfg.m_jobRemovalOnExitPolicy                              = static_cast<Util::Settings::JobRemovalPolicy>(idxOnExit);
+  m_cfg.m_removeOldJobs                                       = ui->cbGuiRemoveOldJobs->isChecked();
+  m_cfg.m_removeOldJobsDays                                   = ui->sbGuiRemoveOldJobsDays->value();
+  m_cfg.m_maximumConcurrentJobs                               = ui->sbGuiMaximumConcurrentJobs->value();
 
-  m_cfg.m_chapterNameTemplate                           = ui->leCENameTemplate->text();
-  m_cfg.m_ceTextFileCharacterSet                        = ui->cbCETextFileCharacterSet->currentData().toString();
-  m_cfg.m_defaultChapterLanguage                        = ui->ldwCEDefaultLanguage->language();
-  m_cfg.m_defaultChapterCountry                         = ui->cbCEDefaultCountry->currentData().toString();
-  m_cfg.m_dropLastChapterFromBlurayPlaylist             = ui->cbCEDropLastFromBlurayPlaylist->isChecked();
+  m_cfg.m_chapterNameTemplate                                 = ui->leCENameTemplate->text();
+  m_cfg.m_ceTextFileCharacterSet                              = ui->cbCETextFileCharacterSet->currentData().toString();
+  m_cfg.m_defaultChapterLanguage                              = ui->ldwCEDefaultLanguage->language();
+  m_cfg.m_defaultChapterCountry                               = ui->cbCEDefaultCountry->currentData().toString();
+  m_cfg.m_dropLastChapterFromBlurayPlaylist                   = ui->cbCEDropLastFromBlurayPlaylist->isChecked();
 
   // Merge page:
-  m_cfg.m_mediaInfoExe                                  = ui->leMMediaInfoExe->text();
-  m_cfg.m_autoSetFileTitle                              = ui->cbMAutoSetFileTitle->isChecked();
-  m_cfg.m_autoClearFileTitle                            = ui->cbMAutoClearFileTitle->isChecked();
-  m_cfg.m_setAudioDelayFromFileName                     = ui->cbMSetAudioDelayFromFileName->isChecked();
-  m_cfg.m_disableCompressionForAllTrackTypes            = ui->cbMDisableCompressionForAllTrackTypes->isChecked();
-  m_cfg.m_disableDefaultTrackForSubtitles               = ui->cbMDisableDefaultTrackForSubtitles->isChecked();
-  m_cfg.m_mergeEnableDialogNormGainRemoval              = ui->cbMEnableDialogNormGainRemoval->isChecked();
-  m_cfg.m_mergeAddingAppendingFilesPolicy               = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
-  m_cfg.m_mergeDragAndDropFilesPolicy                   = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMDragAndDropFilesPolicy->currentData().toInt());
-  m_cfg.m_mergeAlwaysCreateNewSettingsForVideoFiles     = ui->cbMAlwaysCreateSettingsForVideoFiles->isChecked();
-  m_cfg.m_mergeAlwaysShowOutputFileControls             = ui->cbMAlwaysShowOutputFileControls->isChecked();
-  m_cfg.m_mergeWarnMissingAudioTrack                    = static_cast<Util::Settings::MergeMissingAudioTrackPolicy>(ui->cbMWarnMissingAudioTrack->currentData().toInt());
-  m_cfg.m_mergeTrackPropertiesLayout                    = ui->rbMTrackPropertiesLayoutHorizontalScrollArea->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalScrollArea
-                                                        : ui->rbMTrackPropertiesLayoutHorizontalTwoColumns->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalTwoColumns
-                                                        :                                                                 Util::Settings::TrackPropertiesLayout::VerticalTabWidget;
-  m_cfg.m_clearMergeSettings                            = static_cast<Util::Settings::ClearMergeSettingsAction>(ui->cbMClearMergeSettings->currentIndex());
-  m_cfg.m_defaultAudioTrackLanguage                     = ui->ldwMDefaultAudioTrackLanguage->language();
-  m_cfg.m_defaultVideoTrackLanguage                     = ui->ldwMDefaultVideoTrackLanguage->language();
-  m_cfg.m_defaultSubtitleTrackLanguage                  = ui->ldwMDefaultSubtitleTrackLanguage->language();
-  m_cfg.m_whenToSetDefaultLanguage                      = static_cast<Util::Settings::SetDefaultLanguagePolicy>(ui->cbMWhenToSetDefaultLanguage->currentData().toInt());
-  m_cfg.m_defaultSubtitleCharset                        = ui->cbMDefaultSubtitleCharset->currentData().toString();
-  m_cfg.m_priority                                      = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());
-  m_cfg.m_defaultAdditionalMergeOptions                 = ui->leMDefaultAdditionalCommandLineOptions->text();
-  m_cfg.m_probeRangePercentage                          = ui->cbMProbeRangePercentage->value();
+  m_cfg.m_mediaInfoExe                                        = ui->leMMediaInfoExe->text();
+  m_cfg.m_autoSetFileTitle                                    = ui->cbMAutoSetFileTitle->isChecked();
+  m_cfg.m_autoClearFileTitle                                  = ui->cbMAutoClearFileTitle->isChecked();
+  m_cfg.m_setAudioDelayFromFileName                           = ui->cbMSetAudioDelayFromFileName->isChecked();
+  m_cfg.m_disableCompressionForAllTrackTypes                  = ui->cbMDisableCompressionForAllTrackTypes->isChecked();
+  m_cfg.m_disableDefaultTrackForSubtitles                     = ui->cbMDisableDefaultTrackForSubtitles->isChecked();
+  m_cfg.m_mergeEnableDialogNormGainRemoval                    = ui->cbMEnableDialogNormGainRemoval->isChecked();
+  m_cfg.m_mergeAddingAppendingFilesPolicy                     = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
+  m_cfg.m_mergeDragAndDropFilesPolicy                         = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMDragAndDropFilesPolicy->currentData().toInt());
+  m_cfg.m_mergeAlwaysCreateNewSettingsForVideoFiles           = ui->cbMAlwaysCreateSettingsForVideoFiles->isChecked();
+  m_cfg.m_mergeAlwaysShowOutputFileControls                   = ui->cbMAlwaysShowOutputFileControls->isChecked();
+  m_cfg.m_mergeWarnMissingAudioTrack                          = static_cast<Util::Settings::MergeMissingAudioTrackPolicy>(ui->cbMWarnMissingAudioTrack->currentData().toInt());
+  m_cfg.m_mergeTrackPropertiesLayout                          = ui->rbMTrackPropertiesLayoutHorizontalScrollArea->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalScrollArea
+                                                              : ui->rbMTrackPropertiesLayoutHorizontalTwoColumns->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalTwoColumns
+                                                              :                                                                 Util::Settings::TrackPropertiesLayout::VerticalTabWidget;
+  m_cfg.m_clearMergeSettings                                  = static_cast<Util::Settings::ClearMergeSettingsAction>(ui->cbMClearMergeSettings->currentIndex());
+  m_cfg.m_defaultAudioTrackLanguage                           = ui->ldwMDefaultAudioTrackLanguage->language();
+  m_cfg.m_defaultVideoTrackLanguage                           = ui->ldwMDefaultVideoTrackLanguage->language();
+  m_cfg.m_defaultSubtitleTrackLanguage                        = ui->ldwMDefaultSubtitleTrackLanguage->language();
+  m_cfg.m_whenToSetDefaultLanguage                            = static_cast<Util::Settings::SetDefaultLanguagePolicy>(ui->cbMWhenToSetDefaultLanguage->currentData().toInt());
+  m_cfg.m_defaultSubtitleCharset                              = ui->cbMDefaultSubtitleCharset->currentData().toString();
+  m_cfg.m_priority                                            = static_cast<Util::Settings::ProcessPriority>(ui->cbMProcessPriority->currentData().toInt());
+  m_cfg.m_defaultAdditionalMergeOptions                       = ui->leMDefaultAdditionalCommandLineOptions->text();
+  m_cfg.m_probeRangePercentage                                = ui->cbMProbeRangePercentage->value();
 
-  m_cfg.m_deriveAudioTrackLanguageFromFileNamePolicy    = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveAudioTrackLanguageFromFileName   ->currentData().toInt());
-  m_cfg.m_deriveVideoTrackLanguageFromFileNamePolicy    = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveVideoTrackLanguageFromFileName   ->currentData().toInt());
-  m_cfg.m_deriveSubtitleTrackLanguageFromFileNamePolicy = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveSubtitleTrackLanguageFromFileName->currentData().toInt());
+  m_cfg.m_deriveAudioTrackLanguageFromFileNamePolicy          = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveAudioTrackLanguageFromFileName   ->currentData().toInt());
+  m_cfg.m_deriveVideoTrackLanguageFromFileNamePolicy          = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveVideoTrackLanguageFromFileName   ->currentData().toInt());
+  m_cfg.m_deriveSubtitleTrackLanguageFromFileNamePolicy       = static_cast<Util::Settings::DeriveLanguageFromFileNamePolicy>(ui->cbMDeriveSubtitleTrackLanguageFromFileName->currentData().toInt());
   m_cfg.m_boundaryCharsForDerivingTrackLanguagesFromFileNames = ui->leMDeriveTrackLanguageBoundaryChars->text();
-  m_cfg.m_recognizedTrackLanguagesInFileNames           = ui->tbMDeriveTrackLanguageRecognizedLanguages->selectedItemValues();
+  m_cfg.m_recognizedTrackLanguagesInFileNames                 = ui->tbMDeriveTrackLanguageRecognizedLanguages->selectedItemValues();
 
-  m_cfg.m_scanForPlaylistsPolicy                        = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
-  m_cfg.m_minimumPlaylistDuration                       = ui->sbMMinPlaylistDuration->value();
-  m_cfg.m_mergeAddBlurayCovers                          = ui->cbMAddBlurayCovers->isChecked();
+  m_cfg.m_scanForPlaylistsPolicy                              = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
+  m_cfg.m_minimumPlaylistDuration                             = ui->sbMMinPlaylistDuration->value();
+  m_cfg.m_mergeAddBlurayCovers                                = ui->cbMAddBlurayCovers->isChecked();
 
-  m_cfg.m_outputFileNamePolicy                          = !ui->cbMAutoSetOutputFileName->isChecked()   ? Util::Settings::DontSetOutputFileName
-                                                        : ui->rbMAutoSetRelativeDirectory->isChecked() ? Util::Settings::ToRelativeOfFirstInputFile
-                                                        : ui->rbMAutoSetFixedDirectory->isChecked()    ? Util::Settings::ToFixedDirectory
-                                                        : ui->rbMAutoSetPreviousDirectory->isChecked() ? Util::Settings::ToPreviousDirectory
-                                                        :                                                Util::Settings::ToSameAsFirstInputFile;
-  m_cfg.m_autoDestinationOnlyForVideoFiles              = ui->cbMAutoDestinationOnlyForVideoFiles->isChecked();
-  m_cfg.m_mergeSetDestinationFromTitle                  = ui->cbMSetDestinationFromTitle->isChecked();
+  m_cfg.m_outputFileNamePolicy                                = !ui->cbMAutoSetOutputFileName->isChecked()   ? Util::Settings::DontSetOutputFileName
+                                                              : ui->rbMAutoSetRelativeDirectory->isChecked() ? Util::Settings::ToRelativeOfFirstInputFile
+                                                              : ui->rbMAutoSetFixedDirectory->isChecked()    ? Util::Settings::ToFixedDirectory
+                                                              : ui->rbMAutoSetPreviousDirectory->isChecked() ? Util::Settings::ToPreviousDirectory
+                                                              :                                                Util::Settings::ToSameAsFirstInputFile;
+  m_cfg.m_autoDestinationOnlyForVideoFiles                    = ui->cbMAutoDestinationOnlyForVideoFiles->isChecked();
+  m_cfg.m_mergeSetDestinationFromTitle                        = ui->cbMSetDestinationFromTitle->isChecked();
   m_cfg.m_relativeOutputDir.setPath(ui->cbMAutoSetRelativeDirectory->currentText());
   m_cfg.m_fixedOutputDir.setPath(ui->cbMAutoSetFixedDirectory->currentText());
-  m_cfg.m_uniqueOutputFileNames                         = ui->cbMUniqueOutputFileNames->isChecked();
-  m_cfg.m_autoClearOutputFileName                       = ui->cbMAutoClearOutputFileName->isChecked();
+  m_cfg.m_uniqueOutputFileNames                               = ui->cbMUniqueOutputFileNames->isChecked();
+  m_cfg.m_autoClearOutputFileName                             = ui->cbMAutoClearOutputFileName->isChecked();
 
   m_cfg.m_mergeLastFixedOutputDirs.add(QDir::toNativeSeparators(m_cfg.m_fixedOutputDir.path()));
   m_cfg.m_mergeLastRelativeOutputDirs.add(QDir::toNativeSeparators(m_cfg.m_relativeOutputDir.path()));
   m_cfg.m_mergeLastOutputDirs.setItems(ui->lwMRecentDestinationDirectories->items());
 
-  m_cfg.m_enableMuxingTracksByLanguage                  = ui->cbMEnableMuxingTracksByLanguage->isChecked();
-  m_cfg.m_enableMuxingAllVideoTracks                    = ui->cbMEnableMuxingAllVideoTracks->isChecked();
-  m_cfg.m_enableMuxingAllAudioTracks                    = ui->cbMEnableMuxingAllAudioTracks->isChecked();
-  m_cfg.m_enableMuxingAllSubtitleTracks                 = ui->cbMEnableMuxingAllSubtitleTracks->isChecked();
-  m_cfg.m_enableMuxingTracksByTheseLanguages            = ui->tbMEnableMuxingTracksByLanguage->selectedItemValues();
+  m_cfg.m_enableMuxingTracksByLanguage                        = ui->cbMEnableMuxingTracksByLanguage->isChecked();
+  m_cfg.m_enableMuxingAllVideoTracks                          = ui->cbMEnableMuxingAllVideoTracks->isChecked();
+  m_cfg.m_enableMuxingAllAudioTracks                          = ui->cbMEnableMuxingAllAudioTracks->isChecked();
+  m_cfg.m_enableMuxingAllSubtitleTracks                       = ui->cbMEnableMuxingAllSubtitleTracks->isChecked();
+  m_cfg.m_enableMuxingTracksByTheseLanguages                  = ui->tbMEnableMuxingTracksByLanguage->selectedItemValues();
 
   // Often used selections page:
-  m_cfg.m_oftenUsedLanguages                            = ui->tbOftenUsedLanguages->selectedItemValues();
-  m_cfg.m_oftenUsedRegions                              = ui->tbOftenUsedRegions->selectedItemValues();
-  m_cfg.m_oftenUsedCharacterSets                        = ui->tbOftenUsedCharacterSets->selectedItemValues();
+  m_cfg.m_oftenUsedLanguages                                  = ui->tbOftenUsedLanguages->selectedItemValues();
+  m_cfg.m_oftenUsedRegions                                    = ui->tbOftenUsedRegions->selectedItemValues();
+  m_cfg.m_oftenUsedCharacterSets                              = ui->tbOftenUsedCharacterSets->selectedItemValues();
 
-  m_cfg.m_oftenUsedLanguagesOnly                        = ui->cbOftenUsedLanguagesOnly    ->isChecked() && !m_cfg.m_oftenUsedLanguages    .isEmpty();
-  m_cfg.m_oftenUsedRegionsOnly                          = ui->cbOftenUsedRegionsOnly      ->isChecked() && !m_cfg.m_oftenUsedRegions      .isEmpty();
-  m_cfg.m_oftenUsedCharacterSetsOnly                    = ui->cbOftenUsedCharacterSetsOnly->isChecked() && !m_cfg.m_oftenUsedCharacterSets.isEmpty();
-  m_cfg.m_useISO639_3Languages                          = ui->cbUseISO639_3Languages      ->isChecked();
+  m_cfg.m_oftenUsedLanguagesOnly                              = ui->cbOftenUsedLanguagesOnly    ->isChecked() && !m_cfg.m_oftenUsedLanguages    .isEmpty();
+  m_cfg.m_oftenUsedRegionsOnly                                = ui->cbOftenUsedRegionsOnly      ->isChecked() && !m_cfg.m_oftenUsedRegions      .isEmpty();
+  m_cfg.m_oftenUsedCharacterSetsOnly                          = ui->cbOftenUsedCharacterSetsOnly->isChecked() && !m_cfg.m_oftenUsedCharacterSets.isEmpty();
+  m_cfg.m_useISO639_3Languages                                = ui->cbUseISO639_3Languages      ->isChecked();
 
   // Info tool page
-  m_cfg.m_defaultInfoJobSettings                        = ui->wIDefaultJobSettings->settings();
+  m_cfg.m_defaultInfoJobSettings                              = ui->wIDefaultJobSettings->settings();
 
   // Header editor page
-  m_cfg.m_headerEditorDroppedFilesPolicy                = static_cast<Util::Settings::HeaderEditorDroppedFilesPolicy>(ui->cbHEDroppedFilesPolicy->currentData().toInt());
-  m_cfg.m_headerEditorDateTimeInUTC                     = ui->cbHEDateTimeInUTC->isChecked();
+  m_cfg.m_headerEditorDroppedFilesPolicy                      = static_cast<Util::Settings::HeaderEditorDroppedFilesPolicy>(ui->cbHEDroppedFilesPolicy->currentData().toInt());
+  m_cfg.m_headerEditorDateTimeInUTC                           = ui->cbHEDateTimeInUTC->isChecked();
 
   // Run programs page:
   m_cfg.m_runProgramConfigurations.clear();
