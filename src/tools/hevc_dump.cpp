@@ -16,14 +16,18 @@
 #include "common/mm_file_io.h"
 #include "common/version.h"
 
+static bool s_is_framed{};
+
 static void
 show_help() {
   mxinfo("hevc_dump [options] input_file_name\n"
          "\n"
          "General options:\n"
          "\n"
-         "  -h, --help             This help text\n"
-         "  -V, --version          Print version information\n");
+         "  -f, --framed   Source is NALUs-with-size-fields as found in MP4 & Matroska\n"
+         "                 files instead of an ITU-T H.265 Annex B bitstream.\n"
+         "  -h, --help     This help text\n"
+         "  -V, --version  Print version information\n");
   mxexit();
 }
 
@@ -43,6 +47,9 @@ parse_args(std::vector<std::string> &args) {
 
     else if ((arg == "-V") || (arg == "--version"))
       show_version();
+
+    else if ((arg == "-f") || (arg == "--framed"))
+      s_is_framed = true;
 
     else if (!file_name.empty())
       mxerror(Y("More than one source file was given.\n"));
@@ -99,6 +106,28 @@ parse_file(const std::string &file_name) {
   }
 }
 
+static void
+parse_file_framed(std::string const &file_name) {
+  mm_file_io_c in{file_name};
+  auto file_size = static_cast<uint64_t>(in.get_size());
+
+  uint64_t pos{};
+
+  while ((pos + 5) < file_size) {
+    auto nalu_size = in.read_uint32_be();
+    auto nalu_type = (in.read_uint8() >> 1) & 0x3f;
+
+    if (!nalu_size)
+      return;
+
+    mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2} at {3}\n", nalu_type, mtx::hevc::es_parser_c::get_nalu_type_name(nalu_type), nalu_size, pos));
+
+    pos += nalu_size + 4;
+
+    in.setFilePointer(pos);
+  }
+}
+
 int
 main(int argc,
      char **argv) {
@@ -111,7 +140,11 @@ main(int argc,
   auto file_name = parse_args(args);
 
   try {
-    parse_file(file_name);
+    if (s_is_framed)
+      parse_file_framed(file_name);
+    else
+      parse_file(file_name);
+
   } catch (mtx::mm_io::exception &) {
     mxerror(Y("File not found\n"));
   }
