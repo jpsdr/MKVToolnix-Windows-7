@@ -44,7 +44,8 @@ constexpr unsigned int KEEP_LAST_CHAPTER_IN_MPLS    = 19;
 constexpr unsigned int KEEP_TRACK_STATISTICS_TAGS   = 20;
 constexpr unsigned int ALL_I_SLICES_ARE_KEY_FRAMES  = 21;
 constexpr unsigned int APPEND_AND_SPLIT_FLAC        = 22;
-constexpr unsigned int MAX_IDX                      = 22;
+constexpr unsigned int DONT_NORMALIZE_PARAMETER_SETS = 23;
+constexpr unsigned int MAX_IDX                      = 23;
 }
 
 struct hack_t {

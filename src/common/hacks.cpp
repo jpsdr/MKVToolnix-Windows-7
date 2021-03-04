@@ -63,6 +63,8 @@ get_list() {
                                                            Y("This option forces mkvmerge to treat all of those I slices as key frames.") });
   hacks.emplace_back("append_and_split_flac",        svec{ Y("Enable appending and splitting FLAC tracks."),
                                                            Y("The resulting tracks will be broken: the official FLAC tools will not be able to decode them and seeking will not work as expected.") });
+  hacks.emplace_back("dont_normalize_parameter_sets", svec{ Y("Normally the HEVC/H.265 code in mkvmerge and mkvextract normalizes parameter sets by prefixing all key frames with all currently active parameter sets and removes duplicates that might already be present."),
+                                                            Y("If this hack is enabled, the code will leave the parameter sets as they are.") });
   hacks.emplace_back("cow",                          svec{ Y("No help available.") });
 
 

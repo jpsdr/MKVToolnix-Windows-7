@@ -12,9 +12,18 @@
 #include "common/common_pch.h"
 
 #include "common/endian.h"
+#include "common/hacks.h"
 #include "common/hevc.h"
 #include "common/list_utils.h"
 #include "extract/xtr_hevc.h"
+
+xtr_hevc_c::xtr_hevc_c(std::string const &codec_id,
+                       int64_t tid,
+                       track_spec_t &tspec)
+  : xtr_avc_c{codec_id, tid, tspec}
+  , m_normalize_parameter_sets{!mtx::hacks::is_engaged(mtx::hacks::DONT_NORMALIZE_PARAMETER_SETS)}
+{
+}
 
 void
 xtr_hevc_c::create_file(xtr_base_c *master,
@@ -29,7 +38,7 @@ xtr_hevc_c::create_file(xtr_base_c *master,
   if (m_decoded_codec_private->get_size() < 23)
     mxerror(fmt::format(Y("Track {0} CodecPrivate is too small.\n"), m_tid));
 
-  m_parser.normalize_parameter_sets();
+  m_parser.normalize_parameter_sets(m_normalize_parameter_sets);
   m_parser.set_hevcc(m_decoded_codec_private);
 
   m_nal_size_size = 1 + (m_decoded_codec_private->get_buffer()[21] & 3);
@@ -103,6 +112,14 @@ xtr_hevc_c::write_nal(binary *data,
 
 void
 xtr_hevc_c::handle_frame(xtr_frame_t &f) {
+  if (   m_first_nalu
+      && !m_normalize_parameter_sets
+      && (f.frame->get_size() > static_cast<size_t>(m_nal_size_size))) {
+    auto nal_unit_type = (f.frame->get_buffer()[m_nal_size_size + 1] >> 1) & 0x3f;
+    if (!mtx::included_in(nal_unit_type, mtx::hevc::NALU_TYPE_VIDEO_PARAM, mtx::hevc::NALU_TYPE_SEQ_PARAM, mtx::hevc::NALU_TYPE_PIC_PARAM))
+      unwrap_write_hevcc(nal_unit_type == mtx::hevc::NALU_TYPE_PREFIX_SEI);
+  }
+
   if (f.keyframe)
     m_parser.set_next_i_slice_is_key_frame();
 
