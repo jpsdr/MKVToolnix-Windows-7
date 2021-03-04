@@ -1761,16 +1761,9 @@ qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx) {
   auto packetizer     = new hevc_video_packetizer_c(this, m_ti, 0.0, dmx.v_width, dmx.v_height);
   dmx.ptzr            = add_packetizer(packetizer);
 
-  // rederive_timestamp_order() makes use of m_htrack_default_duration, so we set it early here
   if (dmx.frame_rate.numerator()) {
     auto duration = boost::rational_cast<int64_t>(int64_rational_c{dmx.frame_rate.denominator(), dmx.frame_rate.numerator()} * 1'000'000'000ll);
     packetizer->set_track_default_duration(duration);
-  }
-
-  if (dmx.raw_frame_offset_table.empty()) {
-    mxdebug_if(m_debug_headers, fmt::format("HEVC/H.265 track {0} doesn't have a CTTS atom; enabling re-ordering of timestamps\n", dmx.id));
-
-    packetizer->rederive_timestamp_order();
   }
 
   show_packetizer_info(dmx.id, ptzr(dmx.ptzr));

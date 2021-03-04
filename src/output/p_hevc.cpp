@@ -27,8 +27,7 @@ class hevc_video_packetizer_private_c {
 public:
   int nalu_size_len{};
   int64_t max_nalu_size{};
-  bool rederive_timestamp_order{};
-  std::unique_ptr<mtx::hevc::es_parser_c> parser;
+  mtx::hevc::es_parser_c parser;
 };
 
 hevc_video_packetizer_c::
@@ -40,12 +39,18 @@ hevc_video_packetizer_c(generic_reader_c *p_reader,
   : generic_video_packetizer_c{p_reader, p_ti, MKV_V_MPEGH_HEVC, fps, width, height}
   , p_ptr{new hevc_video_packetizer_private_c}
 {
+  auto &p = *p_func();
+
   m_relaxed_timestamp_checking = true;
 
   if (23 <= m_ti.m_private_data->get_size())
     p_ptr->nalu_size_len = (m_ti.m_private_data->get_buffer()[21] & 0x03) + 1;
 
   set_codec_private(m_ti.m_private_data);
+
+  p.parser.normalize_parameter_sets();
+  p.parser.set_hevcc(m_hcodec_private);
+  p.parser.set_container_default_duration(m_htrack_default_duration);
 }
 
 void
@@ -84,19 +89,15 @@ int
 hevc_video_packetizer_c::process(packet_cptr packet) {
   auto &p = *p_func();
 
-  if (p.rederive_timestamp_order) {
-    process_rederiving_timestamp_order(*packet);
-    return FILE_STATUS_MOREDATA;
-  }
+  if (packet->is_key_frame() && (VFT_PFRAMEAUTOMATIC != packet->bref))
+    p.parser.set_next_i_slice_is_key_frame();
 
-  if (VFT_PFRAMEAUTOMATIC == packet->bref) {
-    packet->fref = -1;
-    packet->bref = m_ref_timestamp;
-  }
+  if (packet->has_timestamp())
+    p.parser.add_timestamp(packet->timestamp);
 
-  m_ref_timestamp = packet->timestamp;
+  p.parser.add_bytes_framed(packet->data, p.nalu_size_len);
 
-  add_packet(packet);
+  flush_frames();
 
   return FILE_STATUS_MOREDATA;
 }
@@ -117,42 +118,10 @@ hevc_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
 }
 
 void
-hevc_video_packetizer_c::rederive_timestamp_order() {
-  auto &p = *p_func();
-
-  if (p.rederive_timestamp_order)
-    return;
-
-  p.rederive_timestamp_order = true;
-  p.parser.reset(new mtx::hevc::es_parser_c);
-
-  p.parser->set_hevcc(m_hcodec_private);
-  p.parser->set_container_default_duration(m_htrack_default_duration);
-}
-
-void
-hevc_video_packetizer_c::process_rederiving_timestamp_order(packet_t &packet) {
-  auto &p = *p_func();
-
-  if (packet.is_key_frame() && (VFT_PFRAMEAUTOMATIC != packet.bref))
-    p.parser->set_next_i_slice_is_key_frame();
-
-  if (packet.has_timestamp())
-    p.parser->add_timestamp(packet.timestamp);
-
-  p.parser->add_bytes_framed(packet.data, p.nalu_size_len);
-
-  flush_frames();
-}
-
-void
 hevc_video_packetizer_c::flush_impl() {
   auto &p = *p_func();
 
-  if (!p.rederive_timestamp_order)
-    return;
-
-  p.parser->flush();
+  p.parser.flush();
   flush_frames();
 }
 
@@ -160,11 +129,8 @@ void
 hevc_video_packetizer_c::flush_frames() {
   auto &p = *p_func();
 
-  if (!p.rederive_timestamp_order)
-    return;
-
-  while (p.parser->frame_available()) {
-    auto frame = p.parser->get_frame();
+  while (p.parser.frame_available()) {
+    auto frame = p.parser.get_frame();
     add_packet(new packet_t(frame.m_data, frame.m_start,
                             frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration,
                             frame.m_keyframe            ? -1                          : frame.m_start + frame.m_ref1));

@@ -39,6 +39,7 @@ hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reade
 
   set_codec_id(MKV_V_MPEGH_HEVC);
 
+  m_parser.normalize_parameter_sets();
   m_parser.set_keep_ar_info(false);
 
   // If no external timestamp file has been specified then mkvmerge

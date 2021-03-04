@@ -36,12 +36,8 @@ public:
     return YT("HEVC/H.265");
   }
 
-  virtual void rederive_timestamp_order();
-
 protected:
   virtual void extract_aspect_ratio();
-
-  virtual void process_rederiving_timestamp_order(packet_t &packet);
 
   virtual void flush_impl() override;
   virtual void flush_frames();
