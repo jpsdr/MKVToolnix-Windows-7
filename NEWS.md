@@ -5,28 +5,13 @@
 * all programs, only on Windows: fixed checking existence of & creating
   directories with UNC paths such as `\\server\share\folder\file.mkv`. Fixes
   #3041.
+* all programs, only on Windows: implemented several workarounds for bugs in
+  `std::filesystem` wrt. UNC paths. The effect of those bugs was that Blu-rays
+  and DVDs couldn't be added from UNC paths. Fixes #3037.
 * MKVToolNix GUI, only on Windows: fixed the GUI hanging when trying to browse
   for files on drives that don't actually exist. Fixes #3046.
 * MKVToolNix GUI, only on Windows: the GUI did not remember UNC paths as the
   "most recently used source directory" properly.
-* all programs, only on Windows: implemented several workarounds for bugs in
-  `std::filesystem` wrt. UNC paths. The effect of those bugs was that Blu-rays
-  and DVDs couldn't be added from UNC paths. Fixes #3037.
-* MKVToolNix GUI: multiplexer: the user can now configure what to do when
-  using the "Add source files" button independently of the setting for what
-  happens when files are dragged & dropped onto the GUI. The same options are
-  available, but they're distinct settings, allowing for different use
-  cases. Fixes #3035.
-* MKVToolNix GUI: preferences: the language lists for "deriving track
-  languages" and "enabling items by language" always included all the ISO
-  639-3 languages, even if those weren't enabled in the "often-used languages"
-  pane. Fixes #3047.
-* MKVToolNix GUI: multiplexer: deriving the track language from file names
-  doesn't use one big regular expression of all enabled languages
-  anymore. Instead, the file name is split into parts on a list of characters
-  (such as `.` or `(` and `)`; configurable in the preferences). This prevents
-  the regular expression becoming too big for the regular expression library
-  to handle when many languages are enabled. Fixes #3048.
 * MKVToolNix GUI: only on Windows: when dragging & dropping files from other
   applications to MKVToolNix GUI the GUI will force the drop action to be a
   copy action, no matter which keys were pressed by the users. This prevents
@@ -36,6 +21,21 @@
   file name to save to (e.g. when browsing for the destination file name in
   the multiplexer or saving an attachment in the header editor) non-ASCII
   characters in the default file name were mangled. Fixes #3049.
+* MKVToolNix GUI: multiplexer: the user can now configure what to do when
+  using the "Add source files" button independently of the setting for what
+  happens when files are dragged & dropped onto the GUI. The same options are
+  available, but they're distinct settings, allowing for different use
+  cases. Fixes #3035.
+* MKVToolNix GUI: multiplexer: deriving the track language from file names
+  doesn't use one big regular expression of all enabled languages
+  anymore. Instead, the file name is split into parts on a list of characters
+  (such as `.` or `(` and `)`; configurable in the preferences). This prevents
+  the regular expression becoming too big for the regular expression library
+  to handle when many languages are enabled. Fixes #3048.
+* MKVToolNix GUI: preferences: the language lists for "deriving track
+  languages" and "enabling items by language" always included all the ISO
+  639-3 languages, even if those weren't enabled in the "often-used languages"
+  pane. Fixes #3047.
 
 ## Other changes
 
