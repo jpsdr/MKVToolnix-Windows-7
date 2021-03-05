@@ -91,7 +91,7 @@
   find parts of Blu-ray file structures).
 * mkvextract: AAC: fixed wrong channel mask field in the ADTS headers for 7.1
   channel layouts. Fix by Tom Yan. Fixes #2636.
-* mkvextract: H.265/HEVC extraction: if the first frame starts with the
+* mkvextract: HEVC/H.265 extraction: if the first frame starts with the
   parameter sets (SPS, PPS & VPS), the ones from CodecPrivate aren't written
   and the ones from the first frame are kept. Fixes #3031.
 * mkvmerge: fixed the calculation of chapter timestamps read from NTSC
@@ -130,7 +130,7 @@
 * mkvmerge: AVI reader: added support for reading the video aspect ratio from
   the video properties header (`vprp` chunk) if present and setting the
   display dimensions accordingly. Implements #2993.
-* mkvmerge: MP4 reader: for H.264/AVC tracks that don't have an
+* mkvmerge: MP4 reader: for AVC/H.264 tracks that don't have an
   `AVCConfigurationBox` (`avcC` atom) in their sample description (`stsd`)
   atom or whose `avcC` atom contains no content `mkvmerge` will now re-derive
   the `AVCConfigurationBox` from the bitstream. Implements #2995.
@@ -191,7 +191,7 @@
 
 ## Bug fixes
 
-* mkvextract: H.265/HEVC extraction: the code for skipping extraction of
+* mkvextract: HEVC/H.265 extraction: the code for skipping extraction of
   prefix SEI NALUs in the first frame was skipping two bytes too few,
   resulting in broken processing of all following bytes. Patch by Mike Chen.
 * libEBML: the optional, bundled version of libEBML was updated to v1.4.1.
@@ -227,11 +227,11 @@
 * mkvmerge: DTS reader: fixed handling of buffers with an odd length when
   byte-swapped DTS is detected so that mkvmerge doesn't abort with a failed
   assertion. Found by fuzzying.
-* mkvmerge: H.264/AVC and H.265/HEVC elementary stream readers: mkvmerge will
+* mkvmerge: AVC/H.264 and HEVC/H.265 elementary stream readers: mkvmerge will
   no longer claim to recognize data that looks like AVC or HEVC but with
   invalid video width/height values as that lead to failed assertions in
   libEBML later. Found by fuzzying.
-* mkvmerge: H.265/HEVC parser: fixed mkvmerge aborting after uncaught
+* mkvmerge: HEVC/H.265 parser: fixed mkvmerge aborting after uncaught
   exceptions due to certain data constellations found by fuzzying.
 * mkvmerge: IVF reader: fixed mkvmerge crashing with a "division by zero"
   error due to certain data conditions. Found by fuzzying.
@@ -432,7 +432,7 @@
   errors such as the destination having run out of space. Fixes #2843.
 * mkvmerge: DTS: fixed wrong channel count for DTS tracks with XCh
   extensions. Fixes #2715.
-* mkvmerge: MPEG TS reader: fixed detecting H.264/AVC and H.265/HEVC tracks
+* mkvmerge: MPEG TS reader: fixed detecting AVC/H.264 and HEVC/H.265 tracks
   that consist of only a single frame. Part of the fix of #2849.
 * mkvmerge: MPEG TS reader: fixed handling of unbounded PES sizes for tracks
   that consist of only a single PES packet. Part of the fix of #2849.
@@ -559,8 +559,8 @@
   now fix referencing tag chapter UID targets to have the same values. Fixes
   #2804.
 * mkvmerge: MP4 reader: fixed a crash that could potentially happen while
-  trying to identify H.265/HEVC tracks.
-* mkvmerge: MP4 reader: when reading H.265/HEVC tracks without a frame offset
+  trying to identify HEVC/H.265 tracks.
+* mkvmerge: MP4 reader: when reading HEVC/H.265 tracks without a frame offset
   table (`ctts` atom) present, mkvmerge did not parse the `hevcC` structure
   correctly in certain cases, causing no video frames to be output at all or
   the output not being playable. This fixes #2782, a bug introduced in v45.
@@ -611,12 +611,12 @@
 
 ## Bug fixes
 
-* mkvmerge: H.265/HEVC packetizer: fixed changing the NALU size length, it was
+* mkvmerge: HEVC/H.265 packetizer: fixed changing the NALU size length, it was
   using the wrong offset into the `hevcC` structure.
 * mkvmerge: MP4 reader: fixed calculating the duration of video tracks that
   only contain a single frame. Fixes #2747.
 * mkvmerge: MP4 reader: if there's no frame offset table (`ctts` atom) present
-  for H.265/HEVC video tracks, mkvmerge will determine the timestamp order
+  for HEVC/H.265 video tracks, mkvmerge will determine the timestamp order
   itself instead of relying on the timestamps in the MP4 being in the
   presentation order required by Matroska. Fixes #2777.
 * mkvpropedit: Windows: mkvpropedit wasn't caching when reading the file to
@@ -950,8 +950,8 @@
 
 ## New features and enhancements
 
-* mkvmerge: mkvmerge now allows appending AV1, VP8, VP9, H.264/AVC and
-  H.265/HEVC tracks whose pixel dimensions differ. Implements #2582.
+* mkvmerge: mkvmerge now allows appending AV1, VP8, VP9, AVC/H.264 and
+  HEVC/H.265 tracks whose pixel dimensions differ. Implements #2582.
 
 ## Bug fixes
 
@@ -2450,7 +2450,7 @@
   and tags" list view showing the currently selected character set for that
   track. Implements #1873.
 * mkvmerge: added an --engage option "all_i_slices_are_key_frames" for
-  treating all I slices of an H.264/AVC stream as key frames in pathological
+  treating all I slices of an AVC/H.264 stream as key frames in pathological
   streams that lack real key frames. Implements #1876.
 * GUI: running programs after jobs: added a new variable
   \<MTX_INSTALLATION_DIRECTORY\> for the directory the MKVToolNix GUI executable
@@ -3161,8 +3161,8 @@
   into a single entry instead of resulting in multiple entries. 2. The calculation of a
   packet's duration was wrong in certain situations. Part of the fix for #1623.
 * mkvextract: bug fix: fixed the duplication of VPS, SPS, PPS and SEI NALUs when
-  extracting H.265/HEVC tracks. See #1076 and #1621.
-* mkvmerge: bug fix: reverted the patch by Vladimír Pilný that made the H.265/HEVC not
+  extracting HEVC/H.265 tracks. See #1076 and #1621.
+* mkvmerge: bug fix: reverted the patch by Vladimír Pilný that made the HEVC/H.265 not
   store SEI NALUs with the frames during muxing. It was supposed to prevent having the
   SEI NALUs present twice when extracting HEVC due to some SEI information also being
   stored in the codec private data, but it dropped a lot of other SEI NALUs irrevocably.
@@ -3386,12 +3386,12 @@
   media_time is -1, second entry's segment_duration is != 0) weren't handled
   properly resulting in key frame flags being assigned to the wrong frames. Fixes
   #1547.
-* mkvmerge: bug fix: the H.265/HEVC code was writing SEI NALUs twice. This had already
+* mkvmerge: bug fix: the HEVC/H.265 code was writing SEI NALUs twice. This had already
   been mentioned in #1076 but never fixed. Patch by Vladimír Pilný.
-* mkvmerge: bug fix: the H.265/HEVC code wasn't converting slice NALUs to RBSP form
+* mkvmerge: bug fix: the HEVC/H.265 code wasn't converting slice NALUs to RBSP form
   before parsing it resulting in wrongly timestamped frames under certain
   conditions. This is a similar fix to the issues reported in #918 and #1548.
-* mkvmerge: bug fix: the H.264/AVC code wasn't converting slice NALUs to RBSP form
+* mkvmerge: bug fix: the AVC/H.264 code wasn't converting slice NALUs to RBSP form
   before parsing it resulting in wrongly timestamped frames under certain
   conditions. Fixes #918 and #1548.
 * mkvmerge: bug fix: the MP4 reader can now understand the 'random access point'
@@ -4326,7 +4326,7 @@
   probably others like #1145 or #1099.
 * MKVToolNix GUI: merge tool bug fix: fixed the column headers on the "attachments"
   tab.
-* mkvmerge: bug fix: The calculation of the width and height of H.265/HEVC video
+* mkvmerge: bug fix: The calculation of the width and height of HEVC/H.265 video
   tracks did not take the conformance window (cropping) into account. Fixes #1152.
 * mkvmerge: bug fix: Fixed the value of the DocTypeVersion header field if any of the
   Matroska elements CodecDelay, DiscardPadding or SeekPreRoll is used. This is the
@@ -4534,7 +4534,7 @@
   files. Implements #996.
 * all: enhancement: improved exception messages that can occur when reading damaged
   Matroska files to make it clearer for the user what's happening. See #1089.
-* mkvmerge: new feature: Added support for reading H.265/HEVC video tracks from MPEG
+* mkvmerge: new feature: Added support for reading HEVC/H.265 video tracks from MPEG
   transport streams. Implements #995.
 
 ## Bug fixes
@@ -4546,7 +4546,7 @@
 * all: bug fix: Re-wrote the whole checksum calculation code. This lead to a fix for the
   Adler-32 checksum algorithm that was triggered under certain circumstances.
   Adler-32 is used in mkvinfo's output (e.g. in summary mode or if checksums are
-  activated), in the H.265/HEVC bitstream and TrueAudio (TTA) file headers.
+  activated), in the HEVC/H.265 bitstream and TrueAudio (TTA) file headers.
 * mkvmerge: bug fix: fixed handling of HE-AACv2 with object type "parametric
   stereo".
 * mkvinfo: bug fix: track statistics: the duration (and therefore the estimated
@@ -4803,7 +4803,7 @@
 
 ## New features and enhancements
 
-* mkvmerge, mkvextract: new feature: added support for H.265/HEVC by merging the
+* mkvmerge, mkvextract: new feature: added support for HEVC/H.265 by merging the
   patches from DivX/Rovi Corp. So far HEVC is only supported as elementary streams and
   read from other Matroska files.
 * mkvmerge: enhancements: AVI reader: audio chunks with obvious wrong size
@@ -4908,7 +4908,7 @@
   "pre-skip" to the Matroska elements "track seek pre-roll" and "codec delay".
   Remuxing Matroska files with Opus created with earlier versions of MKVToolNix is
   enough to fix such a file.
-* mkvmerge: bug fix: fixing the bitstream timing information of H.264/AVC writes
+* mkvmerge: bug fix: fixing the bitstream timing information of AVC/H.264 writes
   clean values for 25000/1001 frames per second video (e.g. de-telecined PAL @
   29.97).
 * mmg: bug fix: fixed a crash in during drag & drop operations in mmg's chapter editor.
@@ -4951,7 +4951,7 @@
 
 ## New features and enhancements
 
-* mkvmerge: enhancement: filler NALUs will now be removed from framed H.264/AVC
+* mkvmerge: enhancement: filler NALUs will now be removed from framed AVC/H.264
   tracks (such as the ones read from Matroska/MP4 files) just like they have already
   been when handling unframed tracks.
 * mkvextract: new feature: implemented support for extracting VP9 tracks into IVF
@@ -6064,7 +6064,7 @@
   second and all following appended tracks to be compressed all the same.
 * mkvextract: bug fix: Errors such as 'file does not exist' did not cause mkvextract to
   quit. Instead it continued and exited with the result code 0.
-* mkvmerge: bug fix: Certain frames in certain H.264/AVC raw tracks were handled
+* mkvmerge: bug fix: Certain frames in certain AVC/H.264 raw tracks were handled
   wrong, e.g. files created by x264 versions starting with revision 1665. The
   situation occurred if an IDR slice comes immedtiately after a non-IDR slice and the
   IDR slice has its frame_num and pic_order_count_lsb fields set to 0.
@@ -6341,7 +6341,7 @@
 * mkvmerge, mkvextract: enhancement: Improved the error resilience when dealing
   with damaged Matroska files. When a damaged part is encountered reading will
   continue at the next cluster.
-* mkvmerge: enhancement: Some Matroska files contain H.264/AVC tracks lacking
+* mkvmerge: enhancement: Some Matroska files contain AVC/H.264 tracks lacking
   their CodecPrivate element (e.g. files created by gstreamer's muxer). For such
   tracks the CodecPrivate element (the AVCC) is re-created from the bitstream. Fix
   for bug 470.

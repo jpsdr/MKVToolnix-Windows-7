@@ -59,7 +59,7 @@ get_list() {
                                                            Y("mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."),
                                                            Y("Enabling this option causes mkvmerge to keep that last entry.") });
   hacks.emplace_back("keep_track_statistics_tags",   svec{ Y("Don't remove track statistics tags when reading Matroska files, no matter if new ones are created or not.") });
-  hacks.emplace_back("all_i_slices_are_key_frames",  svec{ Y("Some H.264/AVC tracks contain I slices but lack real key frames."),
+  hacks.emplace_back("all_i_slices_are_key_frames",  svec{ Y("Some AVC/H.264 tracks contain I slices but lack real key frames."),
                                                            Y("This option forces mkvmerge to treat all of those I slices as key frames.") });
   hacks.emplace_back("append_and_split_flac",        svec{ Y("Enable appending and splitting FLAC tracks."),
                                                            Y("The resulting tracks will be broken: the official FLAC tools will not be able to decode them and seeking will not work as expected.") });
