@@ -27,7 +27,7 @@ class hevc_video_packetizer_private_c {
 public:
   int nalu_size_len{};
   int64_t max_nalu_size{};
-  mtx::hevc::es_parser_c parser;
+  std::shared_ptr<mtx::hevc::es_parser_c> parser{new mtx::hevc::es_parser_c};
 };
 
 hevc_video_packetizer_c::
@@ -48,9 +48,9 @@ hevc_video_packetizer_c(generic_reader_c *p_reader,
 
   set_codec_private(m_ti.m_private_data);
 
-  p.parser.normalize_parameter_sets(!mtx::hacks::is_engaged(mtx::hacks::DONT_NORMALIZE_PARAMETER_SETS));
-  p.parser.set_hevcc(m_hcodec_private);
-  p.parser.set_container_default_duration(m_htrack_default_duration);
+  p.parser->normalize_parameter_sets(!mtx::hacks::is_engaged(mtx::hacks::DONT_NORMALIZE_PARAMETER_SETS));
+  p.parser->set_hevcc(m_hcodec_private);
+  p.parser->set_container_default_duration(m_htrack_default_duration);
 }
 
 void
@@ -90,12 +90,12 @@ hevc_video_packetizer_c::process(packet_cptr packet) {
   auto &p = *p_func();
 
   if (packet->is_key_frame() && (VFT_PFRAMEAUTOMATIC != packet->bref))
-    p.parser.set_next_i_slice_is_key_frame();
+    p.parser->set_next_i_slice_is_key_frame();
 
   if (packet->has_timestamp())
-    p.parser.add_timestamp(packet->timestamp);
+    p.parser->add_timestamp(packet->timestamp);
 
-  p.parser.add_bytes_framed(packet->data, p.nalu_size_len);
+  p.parser->add_bytes_framed(packet->data, p.nalu_size_len);
 
   flush_frames();
 
@@ -118,10 +118,21 @@ hevc_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
 }
 
 void
+hevc_video_packetizer_c::connect(generic_packetizer_c *src,
+                                 int64_t append_timestamp_offset) {
+  auto &p = *p_func();
+
+  generic_packetizer_c::connect(src, append_timestamp_offset);
+
+  if (2 == m_connected_to)
+    p.parser = static_cast<hevc_video_packetizer_c *>(src)->p_func()->parser;
+}
+
+void
 hevc_video_packetizer_c::flush_impl() {
   auto &p = *p_func();
 
-  p.parser.flush();
+  p.parser->flush();
   flush_frames();
 }
 
@@ -129,8 +140,8 @@ void
 hevc_video_packetizer_c::flush_frames() {
   auto &p = *p_func();
 
-  while (p.parser.frame_available()) {
-    auto frame = p.parser.get_frame();
+  while (p.parser->frame_available()) {
+    auto frame = p.parser->get_frame();
     add_packet(new packet_t(frame.m_data, frame.m_start,
                             frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration,
                             frame.m_keyframe            ? -1                          : frame.m_start + frame.m_ref1));

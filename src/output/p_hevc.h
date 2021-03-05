@@ -37,6 +37,8 @@ public:
   }
 
 protected:
+  virtual void connect(generic_packetizer_c *src, int64_t append_timestamp_offset = -1) override;
+
   virtual void extract_aspect_ratio();
 
   virtual void flush_impl() override;
