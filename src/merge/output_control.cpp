@@ -1570,7 +1570,7 @@ insert_chapter_name_in_output_file_name(std::filesystem::path const &original_fi
 
   // auto chapter_name  = get_current_chapter_name();
   auto cleaned_chapter_name = mtx::regex::replace(chapter_name, s_invalid_char_re, "g", "-");
-  auto new_file_name        = original_file_name.parent_path() / mtx::regex::replace(original_file_name.filename().u8string(), mtx::regex::jp::Regex{"%c"s}, "g", cleaned_chapter_name);
+  auto new_file_name        = original_file_name.parent_path() / mtx::fs::to_path(mtx::regex::replace(original_file_name.filename().u8string(), mtx::regex::jp::Regex{"%c"s}, "g", cleaned_chapter_name));
 
   mxdebug_if(s_debug_splitting_chapters, fmt::format("insert_chapter_name_in_output_file_name: cleaned name {0} old {1} new {2}\n", cleaned_chapter_name, original_file_name.u8string(), new_file_name.u8string()));
 

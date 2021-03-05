@@ -8,6 +8,8 @@
 * all programs, only on Windows: implemented several workarounds for bugs in
   `std::filesystem` wrt. UNC paths. The effect of those bugs was that Blu-rays
   and DVDs couldn't be added from UNC paths. Fixes #3037.
+* mkvmerge, only on Windows: fixed non-ASCII characters getting mangled in the
+  destination file name when splitting is active.
 * MKVToolNix GUI, only on Windows: fixed the GUI hanging when trying to browse
   for files on drives that don't actually exist. Fixes #3046.
 * MKVToolNix GUI, only on Windows: the GUI did not remember UNC paths as the
