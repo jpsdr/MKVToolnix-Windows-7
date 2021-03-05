@@ -7,6 +7,8 @@
   #3041.
 * MKVToolNix GUI, only on Windows: fixed the GUI hanging when trying to browse
   for files on drives that don't actually exist. Fixes #3046.
+* MKVToolNix GUI, only on Windows: the GUI did not remember UNC paths as the
+  "most recently used source directory" properly.
 * all programs, only on Windows: implemented several workarounds for bugs in
   `std::filesystem` wrt. UNC paths. The effect of those bugs was that Blu-rays
   and DVDs couldn't be added from UNC paths. Fixes #3037.
