@@ -32,6 +32,10 @@
   copy action, no matter which keys were pressed by the users. This prevents
   Windows Explorer from deleting the dragged file when the user presses shift
   while dropping the file onto MKVToolNix GUI.
+* MKVToolNix GUI, only on Windows: when using the file dialog for selecting a
+  file name to save to (e.g. when browsing for the destination file name in
+  the multiplexer or saving an attachment in the header editor) non-ASCII
+  characters in the default file name were mangled. Fixes #3049.
 
 ## Other changes
 
