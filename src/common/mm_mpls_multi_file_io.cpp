@@ -58,9 +58,9 @@ mm_mpls_multi_file_io_c::open_multi(mm_io_c &in) {
   std::vector<std::filesystem::path> file_names;
 
   for (auto const &item : mpls_parser->get_playlist().items) {
-    auto file = mtx::bluray::find_other_file(mtx::fs::to_path(in.get_file_name()), mtx::fs::to_path("STREAM") / fmt::format("{0}.{1}", item.clip_id, balg::to_lower_copy(item.codec_id)));
+    auto file = mtx::bluray::find_other_file(mtx::fs::to_path(in.get_file_name()), mtx::fs::to_path("STREAM") / mtx::fs::to_path(fmt::format("{0}.{1}", item.clip_id, balg::to_lower_copy(item.codec_id))));
     if (file.empty())
-      file = mtx::bluray::find_other_file(mtx::fs::to_path(in.get_file_name()), mtx::fs::to_path("STREAM") / fmt::format("{0}.{1}", item.clip_id, "m2ts"));
+      file = mtx::bluray::find_other_file(mtx::fs::to_path(in.get_file_name()), mtx::fs::to_path("STREAM") / mtx::fs::to_path(fmt::format("{0}.{1}", item.clip_id, "m2ts")));
 
     if (!file.empty())
       file_names.push_back(file);

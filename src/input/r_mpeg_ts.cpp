@@ -2502,7 +2502,7 @@ reader_c::parse_clip_info_file(std::size_t file_idx) {
 
   mxdebug_if(m_debug_clpi, fmt::format("find_clip_info_file: Searching for CLPI corresponding to {0}\n", source_file.u8string()));
 
-  auto clpi_file = mtx::bluray::find_other_file(source_file, mtx::fs::to_path("CLIPINF") / fmt::format("{0}.clpi", source_file.stem().u8string()));
+  auto clpi_file = mtx::bluray::find_other_file(source_file, mtx::fs::to_path("CLIPINF") / mtx::fs::to_path(fmt::format("{0}.clpi", source_file.stem().u8string())));
 
   mxdebug_if(m_debug_clpi, fmt::format("reader_c::find_clip_info_file: CLPI file: {0}\n", !clpi_file.empty() ? clpi_file.u8string() : "not found"));
 
@@ -2646,7 +2646,7 @@ reader_c::add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in) {
       continue;
 
     auto &item = sub_path.items.front();
-    auto m2ts  = mtx::bluray::find_other_file(mtx::fs::to_path(source_file), mtx::fs::to_path("STREAM") / fmt::format("{0}.m2ts", mtx::fs::to_path(item.clpi_file_name).stem().u8string()));
+    auto m2ts  = mtx::bluray::find_other_file(mtx::fs::to_path(source_file), mtx::fs::to_path("STREAM") / mtx::fs::to_path(fmt::format("{0}.m2ts", mtx::fs::to_path(item.clpi_file_name).stem().u8string())));
 
     mxdebug_if(m_debug_mpls, fmt::format("add_external_files_from_mpls: M2TS for sub_path {0}: {1}\n", sub_path_idx - 1, !m2ts.empty() ? m2ts.u8string() : "not found"));
 
