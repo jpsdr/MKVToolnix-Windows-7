@@ -101,7 +101,7 @@ file_target_c::file_target_c(std::filesystem::path file_name)
   , m_file_name{std::move(file_name)}
 {
   if (!mtx::fs::is_absolute(m_file_name))
-    m_file_name = std::filesystem::temp_directory_path() / m_file_name;
+    m_file_name = std::filesystem::temp_directory_path() / mtx::fs::to_path(m_file_name);
 
   if (std::filesystem::is_regular_file(m_file_name)) {
     std::error_code ec;
