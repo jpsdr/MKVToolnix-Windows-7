@@ -166,8 +166,8 @@ TEST(FourCC, StringificationAsDescription) {
   EXPECT_EQ("0x1f207e7f \"? ~?\"",                      fourcc_c{0x1f207e7f}.description());
 
   EXPECT_EQ("0x63766964 \"cvid\": Cinepak",             fourcc_c{"cvid"}.description());
-  EXPECT_EQ("0x78323634 \"x264\": MPEG-4p10/AVC/H.264", fourcc_c{"x264"}.description());
-  EXPECT_EQ("0x58323634 \"X264\": MPEG-4p10/AVC/H.264", fourcc_c{"X264"}.description());
+  EXPECT_EQ("0x78323634 \"x264\": AVC/H.264/MPEG-4p10", fourcc_c{"x264"}.description());
+  EXPECT_EQ("0x58323634 \"X264\": AVC/H.264/MPEG-4p10", fourcc_c{"X264"}.description());
 
   EXPECT_EQ("0x00000000 \"????\": Uncompressed",        fourcc_c{0x00000000u}.description());
 }
