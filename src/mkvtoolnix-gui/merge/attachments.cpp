@@ -329,6 +329,7 @@ Tab::onAttachmentSelectionChanged() {
   p.ui->moveAttachmentsDown->setEnabled(!!numRows);
 
   if (!numRows) {
+    setAttachmentControlValues(nullptr);
     enableAttachmentControls(false);
     return;
   }
