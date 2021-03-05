@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2021-03-03 15:35+0100\n"
-"PO-Revision-Date: 2021-02-20 21:45+0000\n"
+"PO-Revision-Date: 2021-03-03 18:14+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/es/)\n"
@@ -781,9 +781,9 @@ msgid ""
 "                           HD extensions instead of copying both the core\n"
 "                           and the extensions.\n"
 msgstr ""
-"  --reduce-to-core <TID>   Únicamente conserva el core de la pistas de audio\n"
-"                           que soporten extensiones HD en vez de copiar ambos,\n"
-"                           el core y las extensiones.\n"
+"  --reduce-to-core <TID>   Únicamente conserva el núcleo de la pistas\n"
+"                           de audio que admitan extensiones HD en vez de copiar\n"
+"                           ambos, el núcleo y las extensiones.\n"
 
 #: src/merge/mkvmerge.cpp:267
 #, no-c-format
@@ -1729,9 +1729,9 @@ msgid "&Automatically set the destination file name"
 msgstr "Establece &automáticamente el nombre de salida del archivo"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1890
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Boundary characters:"
-msgstr "&Conjunto de caracteres:"
+msgstr "&Caracteres delimitadores:"
 
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:169
 #, no-c-format
@@ -3431,21 +3431,21 @@ msgid "Adding chapter files"
 msgstr "Añadiendo archivos de capítulos"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1855
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Adding files"
-msgstr "Añadiendo archivos de etiquetas"
+msgstr "Añadir archivos"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:164
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:165
 #, no-c-format
 msgid "Adding files via drag & drop or copy & paste"
-msgstr ""
+msgstr "Añadir archivos mediante arrastrar y soltar o copiar y pegar"
 
 #: src/mkvtoolnix-gui/merge/adding_appending_files_dialog.cpp:28
 #: src/mkvtoolnix-gui/merge/adding_appending_files_dialog.cpp:29
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Adding multiple files via 'Add source files'"
-msgstr "Añadiendo varios archivos"
+msgstr "Añadir múltiples archivos mediante 'Añadir archivos origen'"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:740
 #, no-c-format
@@ -5902,7 +5902,7 @@ msgstr "Descartar la última entrada del playlist del &Bluray si se acerca al fi
 #: src/mkvtoolnix-gui/merge/input.cpp:533
 #, no-c-format
 msgid "Drops all HD extensions from an audio track and keeps only its lossy core."
-msgstr "Elimina todas las extensiones HD de una pista de audio y conserva sólo su core lossy."
+msgstr "Elimina todas las extensiones HD de una pista de audio y conserva sólo su núcleo con pérdidas."
 
 #: src/common/qt_kax_analyzer.cpp:101
 #: src/propedit/propedit.cpp:65
@@ -5986,7 +5986,7 @@ msgstr "Cada archivo creado contiene un segmento, y cada segmento tiene un únic
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:407
 #, no-c-format
 msgid "Each part is then matched against the list of languages selected below to determine whether or not to use it as the track language."
-msgstr ""
+msgstr "Cada parte se compara con la lista de idiomas seleccionada y así determinar si se usa o no como idioma de la pista."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:305
 #, no-c-format
@@ -10065,7 +10065,7 @@ msgstr "Redirige todos los mensajes de ese archivo."
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1820
 #, no-c-format
 msgid "Reduce to core"
-msgstr "Reducir al core"
+msgstr "Reducir al núcleo"
 
 #: src/common/kax_element_names.cpp:255
 #, no-c-format
@@ -10252,9 +10252,9 @@ msgid "Resyncing successful at position {0}.\n"
 msgstr "Resincronización con éxito en la posición {0}.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:408
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Revert the entry to its default value."
-msgstr "Revertir la expresión regular a su valor por defecto."
+msgstr "Reestablecer la entrada a su valor predeterminado."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:791
 #, no-c-format
@@ -12443,9 +12443,9 @@ msgid "The line {0} of the timestamp file '{1}' does not contain a valid floatin
 msgstr "La línea {0} del archivo del código de tiempo '{1}' no contiene un número decimal válido.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1152
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The list of boundary characters for deriving the track language from file names must not be empty."
-msgstr "La lista de idiomas reconocidos de pista en los nombres de los archivos no puede estar vacía."
+msgstr "La lista de caracteres delimitadores, utilizada para deducir el idioma de la pista, a partir de los nombres de archivos, no debe estar vacía."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1164
 #, no-c-format
@@ -13429,9 +13429,9 @@ msgid "This should REALLY not have happened. The space reserved for the first me
 msgstr "REALMENTE esto no debería haber ocurrido. El espacio reservado para el primer elemento meta seek es demasiado pequeño. {0}\n"
 
 #: src/common/common.h:77
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "This should not have happened. Please file an issue at https://mkvtoolnix.download/issues with this error/warning message, a description of what you were trying to do, the command line used and which operating system you are using. Thank you."
-msgstr "Esto no debería haber ocurrido. Por favor, contacta con el autor, Moritz Bunkus <moritz@bunkus.org>, con un mensaje de este error/aviso, una descripción de lo que intentabas hacer, la línea de comandos utilizada y el sistema operativo que estás usando. Gracias."
+msgstr "Esto no debería haber ocurrido. Por favor, reporte el problema en https://mkvtoolnix.download/issues con este mensaje de error/advertencia, una descripción de lo que estaba intentando hacer, la línea de comandos usada y qué sistema operativo utiliza. Gracias."
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:329
 #, no-c-format
@@ -14482,14 +14482,14 @@ msgid "What do you want to do with the files you've dragged & dropped here?"
 msgstr "¿Qué quiere hacer con estos archivos que has arrastrado y soltado aquí?"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:166
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "What do you want to do with the files you've dragged & dropped or copied & pasted here?"
-msgstr "¿Qué quiere hacer con estos archivos que has arrastrado y soltado aquí?"
+msgstr "¿Qué desea hacer con los archivos que ha arrastrado y soltado o copiado y pegado aquí?"
 
 #: src/mkvtoolnix-gui/merge/adding_appending_files_dialog.cpp:30
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "What do you want to do with the files?"
-msgstr "¿Seguro que quiere sobrescribir el archivo?"
+msgstr "¿Qué desea hacer con los archivos?"
 
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
 #, no-c-format
@@ -14519,12 +14519,12 @@ msgstr "Cuando un archivo es añadido su nombre es analizado."
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1857
 #, no-c-format
 msgid "When adding files via &drag && drop/copy && paste:"
-msgstr ""
+msgstr "Al añadir archivos mediante &arrastrar && soltar/copiar && pegar:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1856
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "When adding m&ultiple files via \"add source files\":"
-msgstr "Al aña&dir varios archivos:"
+msgstr "Al añadir m&últiples archivos mediante \"añadir archivos origen\":"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:468
 #, no-c-format
@@ -14539,7 +14539,7 @@ msgstr "Al unir: un capítulo se crea al inicio y cada vez que se una un archivo
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:406
 #, no-c-format
 msgid "When deriving the track language from the file name, the file name is split into parts on the characters in this list."
-msgstr ""
+msgstr "Al deducir el idioma de la pista a partir del nombre del archivo, este se divide en partes de los caracteres de esta lista."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:314
 #, no-c-format
@@ -15534,9 +15534,9 @@ msgid "raw data"
 msgstr "Información en bruto (datos no editados)"
 
 #: src/common/wavpack.cpp:296
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "reader: non-audio block found\n"
-msgstr "wavpack_reader: No se encontró bloque de audio\n"
+msgstr "lector: encontrado un bloque que no es audio\n"
 
 #: src/input/r_real.cpp:200
 #, no-c-format
