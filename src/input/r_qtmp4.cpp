@@ -1768,7 +1768,7 @@ qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx) {
   }
 
   if (dmx.raw_frame_offset_table.empty()) {
-    mxdebug_if(m_debug_headers, fmt::format("HEVC/h.265 track {0} doesn't have a CTTS atom; enabling re-ordering of timestamps\n", dmx.id));
+    mxdebug_if(m_debug_headers, fmt::format("HEVC/H.265 track {0} doesn't have a CTTS atom; enabling re-ordering of timestamps\n", dmx.id));
 
     packetizer->rederive_timestamp_order();
   }

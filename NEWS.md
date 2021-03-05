@@ -40,7 +40,7 @@
 ## Other changes
 
 * mkvmerge, MKVToolNix GUI multiplexer: the functionality for changing the
-  length of the NALU "size" field for AVC/h.264 and HEVC/h.265 tracks has been
+  length of the NALU "size" field for AVC/H.264 and HEVC/H.265 tracks has been
   removed. The corresponding command-line option will continue to be
   recognized by mkvmerge as not to break existing third-party applications,
   but it won't actually do anything.
@@ -91,7 +91,7 @@
   find parts of Blu-ray file structures).
 * mkvextract: AAC: fixed wrong channel mask field in the ADTS headers for 7.1
   channel layouts. Fix by Tom Yan. Fixes #2636.
-* mkvextract: h.265/HEVC extraction: if the first frame starts with the
+* mkvextract: H.265/HEVC extraction: if the first frame starts with the
   parameter sets (SPS, PPS & VPS), the ones from CodecPrivate aren't written
   and the ones from the first frame are kept. Fixes #3031.
 * mkvmerge: fixed the calculation of chapter timestamps read from NTSC
@@ -130,7 +130,7 @@
 * mkvmerge: AVI reader: added support for reading the video aspect ratio from
   the video properties header (`vprp` chunk) if present and setting the
   display dimensions accordingly. Implements #2993.
-* mkvmerge: MP4 reader: for h.264/AVC tracks that don't have an
+* mkvmerge: MP4 reader: for H.264/AVC tracks that don't have an
   `AVCConfigurationBox` (`avcC` atom) in their sample description (`stsd`)
   atom or whose `avcC` atom contains no content `mkvmerge` will now re-derive
   the `AVCConfigurationBox` from the bitstream. Implements #2995.
@@ -191,7 +191,7 @@
 
 ## Bug fixes
 
-* mkvextract: h.265/HEVC extraction: the code for skipping extraction of
+* mkvextract: H.265/HEVC extraction: the code for skipping extraction of
   prefix SEI NALUs in the first frame was skipping two bytes too few,
   resulting in broken processing of all following bytes. Patch by Mike Chen.
 * libEBML: the optional, bundled version of libEBML was updated to v1.4.1.
@@ -227,11 +227,11 @@
 * mkvmerge: DTS reader: fixed handling of buffers with an odd length when
   byte-swapped DTS is detected so that mkvmerge doesn't abort with a failed
   assertion. Found by fuzzying.
-* mkvmerge: h.264/AVC and h.265/HEVC elementary stream readers: mkvmerge will
+* mkvmerge: H.264/AVC and H.265/HEVC elementary stream readers: mkvmerge will
   no longer claim to recognize data that looks like AVC or HEVC but with
   invalid video width/height values as that lead to failed assertions in
   libEBML later. Found by fuzzying.
-* mkvmerge: h.265/HEVC parser: fixed mkvmerge aborting after uncaught
+* mkvmerge: H.265/HEVC parser: fixed mkvmerge aborting after uncaught
   exceptions due to certain data constellations found by fuzzying.
 * mkvmerge: IVF reader: fixed mkvmerge crashing with a "division by zero"
   error due to certain data conditions. Found by fuzzying.
@@ -432,7 +432,7 @@
   errors such as the destination having run out of space. Fixes #2843.
 * mkvmerge: DTS: fixed wrong channel count for DTS tracks with XCh
   extensions. Fixes #2715.
-* mkvmerge: MPEG TS reader: fixed detecting h.264/AVC and h.265/HEVC tracks
+* mkvmerge: MPEG TS reader: fixed detecting H.264/AVC and H.265/HEVC tracks
   that consist of only a single frame. Part of the fix of #2849.
 * mkvmerge: MPEG TS reader: fixed handling of unbounded PES sizes for tracks
   that consist of only a single PES packet. Part of the fix of #2849.
@@ -673,11 +673,11 @@
 
 ## Bug fixes
 
-* mkvmerge: AVC/h.264 parser: the order of the NALUs before each key frame was
+* mkvmerge: AVC/H.264 parser: the order of the NALUs before each key frame was
   sometimes wrong: mkvmerge wrote SPS & PPS after SEI NALUs. Now SPS & PPS
   NALUs are always written before the other NALUs. Patch by Torsten
   Hauska. Part of the implementation of #2709 and part of the fix of #2250.
-* mkvmerge: AVC/h.264 parser: when additional SPS or PPS NALUs (with IDs that
+* mkvmerge: AVC/H.264 parser: when additional SPS or PPS NALUs (with IDs that
   haven't been seen so far) are found mid-stream, mkvmerge will prepend all
   following key frames with all current valid SPS & PPS NALUs (just like when
   SPS & PPS NALUs are overwritten mid-stream). Part of the fix of #2250.
