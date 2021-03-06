@@ -12,8 +12,19 @@
 #include "common/common_pch.h"
 
 #include "common/path.h"
+#include "common/strings/utf8.h"
 
 namespace mtx::fs {
+
+std::filesystem::path
+to_path(std::string const &name) {
+  return std::filesystem::path{to_wide(name)};
+}
+
+std::filesystem::path
+to_path(std::wstring const &name) {
+  return std::filesystem::path{name};
+}
 
 bool
 is_absolute(std::filesystem::path const &p) {
