@@ -31,4 +31,10 @@ is_absolute(std::filesystem::path const &p) {
   return p.is_absolute();
 }
 
+void
+create_directories(std::filesystem::path const &path,
+                   std::error_code &error_code) {
+  std::filesystem::create_directories(path, error_code);
+}
+
 } // namespace mtx::fs
