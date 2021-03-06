@@ -376,7 +376,7 @@ Tab::setDestination(QString const &newValue) {
   }
 
 #if defined(SYS_WINDOWS)
-  if (!newValue.contains(QRegularExpression{Q("^[a-zA-Z]:[\\\\/]|^\\\\\\\\.+\\.+")}))
+  if (!newValue.contains(QRegularExpression{Q(R"(^[a-zA-Z]:[\\/]|^(?:\\\\|//).+[\\/].+)")}))
     return;
 #endif
 
