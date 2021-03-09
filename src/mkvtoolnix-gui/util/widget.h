@@ -5,6 +5,7 @@
 #include <QDialogButtonBox>
 
 class QComboBox;
+class QGroupBox;
 class QIcon;
 class QLineEdit;
 class QPushButton;
@@ -39,5 +40,7 @@ void enableChildren(QObject *parent, bool enable);
 void addSegmentUIDFromFileToLineEdit(QWidget &parent, QLineEdit &lineEdit, bool append);
 
 void setupTabWidgetHeaders(QTabWidget &tabWidget);
+
+void autoGroupBoxGridLayout(QGroupBox &box, unsigned int numColumns);
 
 }

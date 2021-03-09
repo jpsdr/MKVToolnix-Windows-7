@@ -152,6 +152,8 @@ Tab::setupHorizontalScrollAreaInputLayout() {
   p.ui->propertiesColumn2->updateGeometry();
 
   p.ui->propertiesStack->setCurrentIndex(0);
+
+  Util::autoGroupBoxGridLayout(*p.ui->generalOptionsBox, 1);
 }
 
 void
@@ -179,6 +181,8 @@ Tab::setupHorizontalTwoColumnsInputLayout() {
   moveTo(p.ui->propertiesColumn2, 1, p.ui->audioPropertiesBox);
   moveTo(p.ui->propertiesColumn2, 2, p.ui->subtitleAndChapterPropertiesBox);
   moveTo(p.ui->propertiesColumn2, 3, p.ui->miscellaneousBox);
+
+  Util::autoGroupBoxGridLayout(*p.ui->generalOptionsBox, 1);
 }
 
 void
@@ -208,6 +212,8 @@ Tab::setupVerticalTabWidgetInputLayout() {
 
   p.ui->propertiesColumn1->updateGeometry();
   p.ui->propertiesColumn2->updateGeometry();
+
+  Util::autoGroupBoxGridLayout(*p.ui->generalOptionsBox, 2);
 }
 
 void

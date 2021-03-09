@@ -3,6 +3,9 @@
 #include <QAbstractItemView>
 #include <QCheckBox>
 #include <QComboBox>
+#include <QDebug>
+#include <QGridLayout>
+#include <QGroupBox>
 #include <QIcon>
 #include <QLineEdit>
 #include <QList>
@@ -227,6 +230,46 @@ setupTabWidgetHeaders(QTabWidget &tabWidget) {
 
   tabWidget.setTabPosition(Util::Settings::get().m_tabPosition);
   tabWidget.setElideMode(cfg.m_elideTabHeaderLabels ? OS_SPECIFIC_ELIDE_POSITION : Qt::ElideNone);
+}
+
+void
+autoGroupBoxGridLayout(QGroupBox &box,
+                       unsigned int numColumns) {
+  auto previousLayout = dynamic_cast<QGridLayout *>(box.layout());
+  if (!previousLayout) {
+    qDebug() << "autoGroupBoxGridLayout: current layout is not a grid layout?";
+    return;
+  }
+
+  QVector<QObject *> entries;
+  auto numPreviousColumns = previousLayout->columnCount();
+  auto numPreviousRows    = previousLayout->rowCount();
+
+  for (auto column = 0; column < numPreviousColumns; column += 2) {
+    for (auto row = 0; row < numPreviousRows; ++row) {
+      for (auto offset = 0; offset < 2; ++offset) {
+        auto item = previousLayout->itemAtPosition(row, column + offset);
+        if (item && item->widget())
+          entries << item->widget();
+      }
+    }
+  }
+
+  auto newLayout = new QGridLayout;
+  auto numRows   = ((entries.size() / 2) + numColumns - 1) / numColumns;
+  auto position  = 0;
+
+
+  for (auto entry : entries) {
+    auto column = ((position / 2 / numRows) * 2) + (position % 2);
+    auto row    = (position / 2) % numRows;
+
+    newLayout->addWidget(static_cast<QWidget *>(entry), row, column);
+    ++position;
+  }
+
+  delete previousLayout;
+  box.setLayout(newLayout);
 }
 
 }

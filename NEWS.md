@@ -1,3 +1,13 @@
+# Version ?
+
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: when using the "tab widget below the files &
+  tracks" layout option for the track properties the elements in the "general
+  options" tab will use six rows à four columns instead of twelve rows à two
+  columns, greatly reducing the required height. Implements #3062.
+
+
 # Version 55.0.0 "Waiting For Space" 2021-03-06
 
 ## Bug fixes
