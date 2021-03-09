@@ -858,4 +858,19 @@ Tool::identifier() {
   return MainWindow::mergeTool()->p_func()->identifier->worker();
 }
 
+void
+Tool::setupHorizontalScrollAreaInputLayout() {
+  forEachTab([](Tab &tab) { tab.setupHorizontalScrollAreaInputLayout(); });
+}
+
+void
+Tool::setupHorizontalTwoColumnsInputLayout() {
+  forEachTab([](Tab &tab) { tab.setupHorizontalTwoColumnsInputLayout(); });
+}
+
+void
+Tool::setupVerticalTabWidgetInputLayout() {
+  forEachTab([](Tab &tab) { tab.setupVerticalTabWidgetInputLayout(); });
+}
+
 }

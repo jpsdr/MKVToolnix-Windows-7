@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>838</width>
-    <height>653</height>
+    <height>680</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -165,6 +165,13 @@
             <widget class="QCheckBox" name="cbGuiCheckForUpdates">
              <property name="text">
               <string>Check online for available &amp;updates</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbGuiShowDebuggingMenu">
+             <property name="text">
+              <string>Show debu&amp;gging menu</string>
              </property>
             </widget>
            </item>
@@ -886,7 +893,7 @@
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultAudioTrackLanguage" native="true">
+               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultAudioTrackLanguage">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -896,7 +903,7 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultSubtitleTrackLanguage" native="true">
+               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultSubtitleTrackLanguage">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -906,7 +913,7 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultVideoTrackLanguage" native="true">
+               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwMDefaultVideoTrackLanguage">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -1783,7 +1790,7 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwCEDefaultLanguage" native="true">
+            <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwCEDefaultLanguage">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -2168,6 +2175,12 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>mtx::gui::Util::LanguageDisplayWidget</class>
+   <extends>QFrame</extends>
+   <header>mkvtoolnix-gui/util/language_display_widget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>mtx::gui::Util::CharacterSetComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/character_set_combo_box.h</header>
@@ -2201,11 +2214,6 @@
    <header>mkvtoolnix-gui/util/string_list_configuration_widget.h</header>
    <container>1</container>
   </customwidget>
-  <customwidget>
-   <class>mtx::gui::Util::LanguageDisplayWidget</class>
-   <extends>QWidget</extends>
-   <header>mkvtoolnix-gui/util/language_display_widget.h</header>
-  </customwidget>
  </customwidgets>
  <tabstops>
   <tabstop>pageSelector</tabstop>
@@ -2217,6 +2225,7 @@
   <tabstop>cbGuiDisableDarkStyleSheet</tabstop>
   <tabstop>cbGuiDisableToolTips</tabstop>
   <tabstop>cbGuiCheckForUpdates</tabstop>
+  <tabstop>cbGuiShowDebuggingMenu</tabstop>
   <tabstop>cbGuiTabPositions</tabstop>
   <tabstop>cbGuiBCP47LanguageEditingMode</tabstop>
   <tabstop>cbGuiElideTabHeaderLabels</tabstop>

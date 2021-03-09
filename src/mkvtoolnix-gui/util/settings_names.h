@@ -108,6 +108,7 @@ char const * const s_valRemoveOutputFileOnJobFailure              = "removeOutpu
 char const * const s_valResetJobWarningErrorCountersOnExit        = "resetJobWarningErrorCountersOnExit";
 char const * const s_valScanForPlaylistsPolicy                    = "scanForPlaylistsPolicy";
 char const * const s_valSetAudioDelayFromFileName                 = "setAudioDelayFromFileName";
+char const * const s_valShowDebuggingMenu                         = "showDebuggingMenu";
 char const * const s_valShowMoveUpDownButtons                     = "showMoveUpDownButtons";
 char const * const s_valShowOutputOfAllJobs                       = "showOutputOfAllJobs";
 char const * const s_valShowToolSelector                          = "showToolSelector";

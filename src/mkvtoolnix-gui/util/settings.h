@@ -211,6 +211,8 @@ public:
 
   BCP47LanguageEditingMode m_bcp47LanguageEditingMode;
 
+  bool m_showDebuggingMenu;
+
 public:
   Settings();
   void load();

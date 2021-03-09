@@ -221,6 +221,10 @@ public Q_SLOTS:
 
   virtual void signalRemovalOfThisTab();
 
+  virtual void setupHorizontalScrollAreaInputLayout();
+  virtual void setupHorizontalTwoColumnsInputLayout();
+  virtual void setupVerticalTabWidgetInputLayout();
+
 protected:
   virtual void setupAttachmentsControls();
   virtual void setupControlLists();
@@ -266,10 +270,6 @@ protected:
   virtual void moveSourceFilesUpOrDown(bool up);
   virtual void moveTracksUpOrDown(bool up);
   virtual void moveAttachmentsUpOrDown(bool up);
-
-  virtual void setupHorizontalScrollAreaInputLayout();
-  virtual void setupHorizontalTwoColumnsInputLayout();
-  virtual void setupVerticalTabWidgetInputLayout();
 
   virtual void moveOutputFileNameToGlobal();
   virtual void moveOutputFileNameToOutputTab();

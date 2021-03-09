@@ -84,6 +84,7 @@ public Q_SLOTS:
   virtual void showSystemInformation();
   virtual void setToolSelectorVisibility();
   virtual void setStayOnTopStatus();
+  virtual void showOrHideDebuggingMenu();
   virtual void raiseAndActivate();
 
 #if defined(HAVE_UPDATE_CHECK)
@@ -124,6 +125,7 @@ protected:
   virtual void setupToolSelector();
   virtual void setupHelpURLs();
   virtual void setupAuxiliaryWidgets();
+  virtual void setupDebuggingMenu();
   virtual QWidget *createNotImplementedWidget();
 
   virtual void showEvent(QShowEvent *event);

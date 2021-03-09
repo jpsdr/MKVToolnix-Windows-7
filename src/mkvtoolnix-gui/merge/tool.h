@@ -85,6 +85,10 @@ public Q_SLOTS:
   virtual void hideScanningDirectoryDialog();
   virtual void handleDroppedFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
 
+  virtual void setupHorizontalScrollAreaInputLayout();
+  virtual void setupHorizontalTwoColumnsInputLayout();
+  virtual void setupVerticalTabWidgetInputLayout();
+
 protected:
   virtual void setupFileIdentificationThread();
 

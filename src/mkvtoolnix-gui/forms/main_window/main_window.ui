@@ -262,6 +262,20 @@
     <addaction name="separator"/>
     <addaction name="actionInfoCloseAll"/>
    </widget>
+   <widget class="QMenu" name="menuDebugging">
+    <property name="title">
+     <string notr="true">&amp;Debugging</string>
+    </property>
+    <widget class="QMenu" name="menuDebuggingMerge">
+     <property name="title">
+      <string notr="true">&amp;Multiplexer</string>
+     </property>
+     <addaction name="actionDbgMergeInputSetupHorizontalScrollAreaInputLayout"/>
+     <addaction name="actionDbgMergeInputSetupHorizontalTwoColumnsInputLayout"/>
+     <addaction name="actionDbgMergeInputSetupVerticalTabWidgetInputLayout"/>
+    </widget>
+    <addaction name="menuDebuggingMerge"/>
+   </widget>
    <addaction name="menuGUI"/>
    <addaction name="menuMerge"/>
    <addaction name="menuInfo"/>
@@ -271,6 +285,7 @@
    <addaction name="menuJobOutput"/>
    <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuDebugging"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionMergeNew">
@@ -946,6 +961,21 @@
   <action name="actionMergeAddFilesFromClipboard">
    <property name="text">
     <string>Add files from clip&amp;board</string>
+   </property>
+  </action>
+  <action name="actionDbgMergeInputSetupHorizontalScrollAreaInputLayout">
+   <property name="text">
+    <string notr="true">Input: setupHorizontal&amp;ScrollAreaInputLayout</string>
+   </property>
+  </action>
+  <action name="actionDbgMergeInputSetupHorizontalTwoColumnsInputLayout">
+   <property name="text">
+    <string notr="true">Input: setupHorizontal&amp;TwoColumnsInputLayout</string>
+   </property>
+  </action>
+  <action name="actionDbgMergeInputSetupVerticalTabWidgetInputLayout">
+   <property name="text">
+    <string notr="true">Input: setup&amp;VerticalTabWidgetInputLayout</string>
    </property>
   </action>
  </widget>

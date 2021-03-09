@@ -422,6 +422,8 @@ Settings::load() {
   m_uiFontPointSize                           = reg.value(s_valUiFontPointSize,                                                                defaultFont.pointSize()).toInt();
   m_uiStayOnTop                               = reg.value(s_valUiStayOnTop,                                                                    false).toBool();
 
+  m_showDebuggingMenu                         = reg.value(s_valShowDebuggingMenu,                                                              false).toBool();
+
   reg.beginGroup(s_grpUpdates);
   m_checkForUpdates                           = reg.value(s_valCheckForUpdates,                                                                true).toBool();
   m_lastUpdateCheck                           = reg.value(s_valLastUpdateCheck,                                                                QDateTime{}).toDateTime();
@@ -778,6 +780,8 @@ Settings::save()
   reg.setValue(s_valUiStayOnTop,                               m_uiStayOnTop);
 
   reg.setValue(s_valMediaInfoExe,                              m_mediaInfoExe);
+
+  reg.setValue(s_valShowDebuggingMenu,                         m_showDebuggingMenu);
 
   reg.beginGroup(s_grpUpdates);
   reg.setValue(s_valCheckForUpdates,                           m_checkForUpdates);

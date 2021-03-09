@@ -88,6 +88,7 @@ MainWindow::MainWindow(QWidget *parent)
   setupAuxiliaryWidgets();
   setupToolSelector();
   setupHelpURLs();
+  setupDebuggingMenu();
 
   // Setup window properties.
   setWindowIcon(Util::loadIcon(Q("mkvtoolnix-gui.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
@@ -225,10 +226,23 @@ MainWindow::setupConnections() {
   // Auxiliary actions:
   connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::setToolSelectorVisibility);
   connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::setStayOnTopStatus);
+  connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::showOrHideDebuggingMenu);
   connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::reinitializeLanguageLists);
   connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::setupAppearance);
 
   connect(app,                                    &App::toolRequested,                                    this,                 &MainWindow::switchToTool);
+}
+
+void
+MainWindow::setupDebuggingMenu() {
+  auto &p   = *p_func();
+  auto tool = mergeTool();
+
+  connect(p.ui->actionDbgMergeInputSetupHorizontalScrollAreaInputLayout, &QAction::triggered, tool, &Merge::Tool::setupHorizontalScrollAreaInputLayout);
+  connect(p.ui->actionDbgMergeInputSetupHorizontalTwoColumnsInputLayout, &QAction::triggered, tool, &Merge::Tool::setupHorizontalTwoColumnsInputLayout);
+  connect(p.ui->actionDbgMergeInputSetupVerticalTabWidgetInputLayout,    &QAction::triggered, tool, &Merge::Tool::setupVerticalTabWidgetInputLayout);
+
+  showOrHideDebuggingMenu();
 }
 
 void
@@ -281,6 +295,16 @@ MainWindow::setupHelpURLs() {
   p->helpURLs[p->ui->actionHelpWebSite]               = "https://mkvtoolnix.download/";
   p->helpURLs[p->ui->actionHelpReportBug]             = "https://gitlab.com/mbunkus/mkvtoolnix/issues/";
   p->helpURLs[p->ui->actionHelpForumSubReddit]        = "https://www.reddit.com/r/mkvtoolnix/";
+}
+
+void
+MainWindow::showOrHideDebuggingMenu() {
+  auto &p = *p_func();
+
+  if (Util::Settings::get().m_showDebuggingMenu)
+    p.ui->menuBar->addMenu(p.ui->menuDebugging);
+  else
+    p.ui->menuBar->removeAction(p.ui->menuDebugging->menuAction());
 }
 
 void

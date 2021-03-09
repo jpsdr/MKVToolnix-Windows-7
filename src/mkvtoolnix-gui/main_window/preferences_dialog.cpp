@@ -52,6 +52,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   // GUI page
   ui->cbGuiDisableToolTips->setChecked(m_cfg.m_uiDisableToolTips);
   ui->cbGuiCheckForUpdates->setChecked(m_cfg.m_checkForUpdates);
+  ui->cbGuiShowDebuggingMenu->setChecked(m_cfg.m_showDebuggingMenu);
   ui->cbGuiShowToolSelector->setChecked(m_cfg.m_showToolSelector);
   ui->cbGuiShowMoveUpDownButtons->setChecked(m_cfg.m_showMoveUpDownButtons);
   ui->cbGuiElideTabHeaderLabels->setChecked(m_cfg.m_elideTabHeaderLabels);
@@ -876,6 +877,7 @@ PreferencesDialog::save() {
   m_cfg.m_uiDisableDarkStyleSheet                             = ui->cbGuiDisableDarkStyleSheet->isChecked();
   m_cfg.m_uiDisableToolTips                                   = ui->cbGuiDisableToolTips->isChecked();
   m_cfg.m_checkForUpdates                                     = ui->cbGuiCheckForUpdates->isChecked();
+  m_cfg.m_showDebuggingMenu                                   = ui->cbGuiShowDebuggingMenu->isChecked();
   m_cfg.m_showToolSelector                                    = ui->cbGuiShowToolSelector->isChecked();
   m_cfg.m_showMoveUpDownButtons                               = ui->cbGuiShowMoveUpDownButtons->isChecked();
   m_cfg.m_elideTabHeaderLabels                                = ui->cbGuiElideTabHeaderLabels->isChecked();
