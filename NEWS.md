@@ -14,6 +14,9 @@
   multiplex ceased to work until the user did certain other things (such as
   switching to a different tool & back to the multiplexer or opening the
   multiplexer menu). This started with v54. Fixes #3051.
+* mkvinfo: when compiled with newer versions of the `fmt` library, certain
+  numbers were not output correctly (e.g. a track's audio sampling frequency
+  of 48000 might be output as 48).
 
 
 # Version 55.0.0 "Waiting For Space" 2021-03-06

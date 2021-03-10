@@ -86,12 +86,19 @@ using namespace mtx::kax_info;
 
 namespace {
 
+mtx::regex::jp::Regex s_normalize_fmt_double_output_re{"\\.0*$|(\\.[0-9]*[1-9])0*$"};
+
+std::string
+normalize_fmt_double_output_formatter(mtx::regex::jp::NumSub const &match) {
+  return match.size() > 1 ? match[1] : ""s;
+}
+
 template<typename T>
 std::string
 normalize_fmt_double_output(T value) {
   // Some fmt library versions output a trailing ".0" even if the
   // decimal part is zero, others don't. Normalize to not include it.
-  return mtx::regex::replace(fmt::format("{}", value), mtx::regex::jp::Regex{"\\.?0*$"}, "", "");
+  return mtx::regex::replace(fmt::format("{}", value), s_normalize_fmt_double_output_re, "", normalize_fmt_double_output_formatter);
 }
 
 }
