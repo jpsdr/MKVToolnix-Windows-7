@@ -29,15 +29,15 @@ public:
   mm_read_buffer_io_c(mm_io_cptr const &in, std::size_t buffer_size = 1 << 17);
   virtual ~mm_read_buffer_io_c();
 
-  virtual uint64 getFilePointer();
-  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning);
-  virtual int64_t get_size();
-  virtual bool eof();
-  virtual void clear_eof();
+  virtual uint64 getFilePointer() override;
+  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning) override;
+  virtual int64_t get_size() override;
+  virtual bool eof() override;
+  virtual void clear_eof() override;
   virtual void enable_buffering(bool enable);
   virtual void set_buffer_size(std::size_t new_buffer_size = 1 << 17);
 
 protected:
-  virtual uint32 _read(void *buffer, size_t size);
-  virtual size_t _write(const void *buffer, size_t size);
+  virtual uint32 _read(void *buffer, size_t size) override;
+  virtual size_t _write(const void *buffer, size_t size) override;
 };

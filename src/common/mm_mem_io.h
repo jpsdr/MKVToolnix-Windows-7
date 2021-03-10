@@ -28,11 +28,11 @@ public:
   mm_mem_io_c(memory_c const &mem);
   virtual ~mm_mem_io_c();
 
-  virtual uint64 getFilePointer();
-  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning);
-  virtual void close();
-  virtual bool eof();
-  virtual std::string get_file_name() const;
+  virtual uint64 getFilePointer() override;
+  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning) override;
+  virtual void close() override;
+  virtual bool eof() override;
+  virtual std::string get_file_name() const override;
   virtual void set_file_name(const std::string &file_name);
 
   virtual unsigned char *get_buffer() const;
@@ -41,7 +41,7 @@ public:
   virtual std::string get_content() const;
 
 protected:
-  virtual uint32 _read(void *buffer, size_t size);
-  virtual size_t _write(const void *buffer, size_t size);
+  virtual uint32 _read(void *buffer, size_t size) override;
+  virtual size_t _write(const void *buffer, size_t size) override;
   void close_mem_io();
 };

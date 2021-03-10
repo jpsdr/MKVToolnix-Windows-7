@@ -32,12 +32,12 @@ public:
   mm_multi_file_io_c(std::vector<std::filesystem::path> const &file_names, std::string const &display_file_name);
   virtual ~mm_multi_file_io_c();
 
-  virtual uint64 getFilePointer();
-  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning);
-  virtual void close();
-  virtual bool eof();
+  virtual uint64 getFilePointer() override;
+  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning) override;
+  virtual void close() override;
+  virtual bool eof() override;
 
-  virtual std::string get_file_name() const;
+  virtual std::string get_file_name() const override;
   virtual std::vector<std::filesystem::path> get_file_names();
   virtual void create_verbose_identification_info(mtx::id::info_c &info);
   virtual void display_other_file_info();
@@ -46,8 +46,8 @@ public:
   static mm_io_cptr open_multi(const std::string &display_file_name, bool single_only = false);
 
 protected:
-  virtual uint32 _read(void *buffer, size_t size);
-  virtual size_t _write(const void *buffer, size_t size);
+  virtual uint32 _read(void *buffer, size_t size) override;
+  virtual size_t _write(const void *buffer, size_t size) override;
 
   void close_multi_file_io();
 };

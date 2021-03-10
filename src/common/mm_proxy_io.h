@@ -26,17 +26,17 @@ public:
   mm_proxy_io_c(mm_io_cptr const &proxy_io);
   virtual ~mm_proxy_io_c();
 
-  virtual void setFilePointer(int64 offset, libebml::seek_mode mode=libebml::seek_beginning);
-  virtual uint64 getFilePointer();
-  virtual void clear_eof();
-  virtual bool eof();
-  virtual void close();
-  virtual std::string get_file_name() const;
+  virtual void setFilePointer(int64 offset, libebml::seek_mode mode=libebml::seek_beginning) override;
+  virtual uint64 getFilePointer() override;
+  virtual void clear_eof() override;
+  virtual bool eof() override;
+  virtual void close() override;
+  virtual std::string get_file_name() const override;
   virtual mm_io_c *get_proxied() const;
 
 protected:
-  virtual uint32 _read(void *buffer, size_t size);
-  virtual size_t _write(const void *buffer, size_t size);
+  virtual uint32 _read(void *buffer, size_t size) override;
+  virtual size_t _write(const void *buffer, size_t size) override;
 
   void close_proxy_io();
 };

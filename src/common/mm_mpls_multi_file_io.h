@@ -29,7 +29,7 @@ public:
   mm_mpls_multi_file_io_c(std::vector<std::filesystem::path> const &file_names, std::string const &display_file_name, mtx::bluray::mpls::parser_cptr const &mpls_parser);
   virtual ~mm_mpls_multi_file_io_c();
 
-  virtual std::string get_file_name() const;
+  virtual std::string get_file_name() const override;
   std::vector<std::filesystem::path> const &get_file_names() const;
   mtx::bluray::mpls::parser_c const &get_mpls_parser() const;
 
