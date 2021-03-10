@@ -18,6 +18,10 @@
   numbers were not output correctly (e.g. a track's audio sampling frequency
   of 48000 might be output as 48).
 
+## Build system changes
+
+* The bundled `fmt` library was updated to v7.1.3.
+
 
 # Version 55.0.0 "Waiting For Space" 2021-03-06
 

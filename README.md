@@ -484,7 +484,7 @@ A beefed-up tab widget class for Qt extracted from the Qt Creator project
 
 Small, safe and fast formatting library
 
-  * Copyright: 2012–2019 by Victor Zverovich
+  * Copyright: 2012–present by Victor Zverovich
   * License: BSD (see `doc/licenses/fmt-BSD.txt`)
   * URL: http://fmtlib.net/latest/
   * Corresponding files: `lib/fmt/*`
