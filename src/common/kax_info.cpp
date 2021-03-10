@@ -368,7 +368,7 @@ kax_info_c::format_element_value_default(EbmlElement &e) {
     return {};
 
   if (dynamic_cast<EbmlFloat *>(&e))
-    return fmt::to_string(static_cast<EbmlFloat &>(e).GetValue());
+    return normalize_fmt_double_output(static_cast<EbmlFloat &>(e).GetValue());
 
   throw std::invalid_argument{"format_element_value: unsupported EbmlElement type"};
 }
