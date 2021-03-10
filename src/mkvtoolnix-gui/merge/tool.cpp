@@ -154,7 +154,7 @@ void
 Tool::enableMenuActions() {
   auto mwUi   = MainWindow::getUi();
   auto tab    = currentTab();
-  auto hasTab = tab && tab->isEnabled();
+  auto hasTab = !!tab;
 
   mwUi->actionMergeSave->setEnabled(hasTab);
   mwUi->actionMergeSaveAs->setEnabled(hasTab);

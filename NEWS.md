@@ -7,6 +7,14 @@
   options" tab will use six rows à four columns instead of twelve rows à two
   columns, greatly reducing the required height. Implements #3062.
 
+## Bug fixes
+
+* MKVToolNix GUI: multiplexer: under certain circumstances keyboard shortcuts
+  such as `Ctrl+W` for closing the active tab or `Ctrl+R` for starting to
+  multiplex ceased to work until the user did certain other things (such as
+  switching to a different tool & back to the multiplexer or opening the
+  multiplexer menu). This started with v54. Fixes #3051.
+
 
 # Version 55.0.0 "Waiting For Space" 2021-03-06
 
