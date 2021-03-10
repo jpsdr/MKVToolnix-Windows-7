@@ -37,7 +37,7 @@ kax_reference_block_c::UpdateSize(bool bSaveDefault,
 
 bool
 kax_block_group_c::add_frame(const KaxTrackEntry &track,
-                             uint64 timestamp,
+                             uint64_t timestamp,
                              DataBuffer &buffer,
                              int64_t past_block,
                              int64_t forw_block,
@@ -75,7 +75,7 @@ kax_block_group_c::add_frame(const KaxTrackEntry &track,
 
 bool
 kax_block_blob_c::add_frame_auto(const KaxTrackEntry &track,
-                                 uint64 timestamp,
+                                 uint64_t timestamp,
                                  DataBuffer &buffer,
                                  LacingType lacing,
                                  int64_t past_block,

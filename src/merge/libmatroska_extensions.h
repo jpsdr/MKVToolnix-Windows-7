@@ -63,7 +63,7 @@ public:
   kax_block_group_c(): libmatroska::KaxBlockGroup() {
   }
 
-  bool add_frame(const libmatroska::KaxTrackEntry &track, uint64 timestamp, libmatroska::DataBuffer &buffer, int64_t past_block, int64_t forw_block, libmatroska::LacingType lacing);
+  bool add_frame(const libmatroska::KaxTrackEntry &track, uint64_t timestamp, libmatroska::DataBuffer &buffer, int64_t past_block, int64_t forw_block, libmatroska::LacingType lacing);
 };
 
 class kax_block_blob_c: public libmatroska::KaxBlockBlob {
@@ -71,7 +71,7 @@ public:
   kax_block_blob_c(libmatroska::BlockBlobType type): libmatroska::KaxBlockBlob(type) {
   }
 
-  bool add_frame_auto(const libmatroska::KaxTrackEntry &track, uint64 timestamp, libmatroska::DataBuffer &buffer, libmatroska::LacingType lacing,
+  bool add_frame_auto(const libmatroska::KaxTrackEntry &track, uint64_t timestamp, libmatroska::DataBuffer &buffer, libmatroska::LacingType lacing,
                       int64_t past_block, int64_t forw_block, std::optional<bool> key_flag, std::optional<bool> discardable_flag);
   void set_block_duration(uint64_t time_length);
   bool replace_simple_by_group();

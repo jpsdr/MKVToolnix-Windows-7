@@ -38,7 +38,7 @@ mm_read_buffer_io_c::~mm_read_buffer_io_c() {
   close();
 }
 
-uint64
+uint64_t
 mm_read_buffer_io_c::getFilePointer() {
   auto p = p_func();
 
@@ -46,7 +46,7 @@ mm_read_buffer_io_c::getFilePointer() {
 }
 
 void
-mm_read_buffer_io_c::setFilePointer(int64 offset,
+mm_read_buffer_io_c::setFilePointer(int64_t offset,
                                     libebml::seek_mode mode) {
   auto p = p_func();
 
@@ -107,7 +107,7 @@ mm_read_buffer_io_c::get_size() {
   return p_func()->proxy_io->get_size();
 }
 
-uint32
+uint32_t
 mm_read_buffer_io_c::_read(void *buffer,
                            size_t size) {
   auto p = p_func();

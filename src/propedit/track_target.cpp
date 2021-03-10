@@ -124,7 +124,7 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
     return;
   }
 
-  std::map<uint8, unsigned int> num_tracks_by_type;
+  std::map<uint8_t, unsigned int> num_tracks_by_type;
   unsigned int num_tracks_total = 0;
 
   if (!track_headers_cp)
@@ -141,10 +141,10 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
     assert(track);
 
     KaxTrackType *kax_track_type     = dynamic_cast<KaxTrackType *>(FindChild<KaxTrackType>(track));
-    track_type this_track_type       = !kax_track_type ? track_video : static_cast<track_type>(uint8(*kax_track_type));
+    track_type this_track_type       = !kax_track_type ? track_video : static_cast<track_type>(uint8_t(*kax_track_type));
 
     KaxTrackUID *kax_track_uid       = dynamic_cast<KaxTrackUID *>(FindChild<KaxTrackUID>(track));
-    uint64_t track_uid               = !kax_track_uid ? 0 : uint64(*kax_track_uid);
+    uint64_t track_uid               = !kax_track_uid ? 0 : uint64_t(*kax_track_uid);
 
     KaxTrackNumber *kax_track_number = dynamic_cast<KaxTrackNumber *>(FindChild<KaxTrackNumber>(track));
 
@@ -153,7 +153,7 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
 
     bool track_matches = sm_by_uid      == m_selection_mode ? m_selection_param == track_uid
                        : sm_by_position == m_selection_mode ? m_selection_param == num_tracks_total
-                       : sm_by_number   == m_selection_mode ? kax_track_number  && (m_selection_param == uint64(*kax_track_number))
+                       : sm_by_number   == m_selection_mode ? kax_track_number  && (m_selection_param == uint64_t(*kax_track_number))
                        :                                      (this_track_type == m_selection_track_type) && (m_selection_param == num_tracks_by_type[this_track_type]);
 
     if (!track_matches)

@@ -37,12 +37,12 @@ mm_proxy_io_c::~mm_proxy_io_c() {
 }
 
 void
-mm_proxy_io_c::setFilePointer(int64 offset,
+mm_proxy_io_c::setFilePointer(int64_t offset,
                               libebml::seek_mode mode) {
   return p_func()->proxy_io->setFilePointer(offset, mode);
 }
 
-uint64
+uint64_t
 mm_proxy_io_c::getFilePointer() {
   return p_func()->proxy_io->getFilePointer();
 }
@@ -79,7 +79,7 @@ mm_proxy_io_c::close_proxy_io() {
   p_func()->proxy_io.reset();
 }
 
-uint32
+uint32_t
 mm_proxy_io_c::_read(void *buffer,
                      size_t size) {
   return p_func()->proxy_io->read(buffer, size);

@@ -81,7 +81,7 @@ mm_io_c::getline2(std::string &s,
 }
 
 bool
-mm_io_c::setFilePointer2(int64 offset,
+mm_io_c::setFilePointer2(int64_t offset,
                          libebml::seek_mode mode) {
   try {
     setFilePointer(offset, mode);
@@ -380,7 +380,7 @@ mm_io_c::write(const memory_cptr &buffer,
 }
 
 void
-mm_io_c::skip(int64 num_bytes) {
+mm_io_c::skip(int64_t num_bytes) {
   uint64_t pos = getFilePointer();
   setFilePointer(pos + num_bytes);
   if ((pos + num_bytes) != getFilePointer())

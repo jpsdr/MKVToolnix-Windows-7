@@ -794,7 +794,7 @@ handle_sei_payload(mm_mem_io_c &byte_reader,
                    unsigned int sei_payload_size,
                    user_data_t &user_data) {
   std::vector<unsigned char> uuid;
-  uint64 file_pos = byte_reader.getFilePointer();
+  uint64_t file_pos = byte_reader.getFilePointer();
 
   uuid.resize(16);
   if (sei_payload_type == SEI_USER_DATA_UNREGISTERED) {

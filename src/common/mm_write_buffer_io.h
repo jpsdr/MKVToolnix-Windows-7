@@ -29,8 +29,8 @@ public:
   mm_write_buffer_io_c(mm_io_cptr const &out, std::size_t buffer_size);
   virtual ~mm_write_buffer_io_c();
 
-  virtual uint64 getFilePointer() override;
-  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning) override;
+  virtual uint64_t getFilePointer() override;
+  virtual void setFilePointer(int64_t offset, libebml::seek_mode mode = libebml::seek_beginning) override;
   virtual void flush() override;
   virtual void close() override;
   virtual void discard_buffer();
@@ -38,7 +38,7 @@ public:
   static mm_io_cptr open(const std::string &file_name, size_t buffer_size);
 
 protected:
-  virtual uint32 _read(void *buffer, size_t size) override;
+  virtual uint32_t _read(void *buffer, size_t size) override;
   virtual size_t _write(const void *buffer, size_t size) override;
   void flush_buffer();
   void close_write_buffer_io();

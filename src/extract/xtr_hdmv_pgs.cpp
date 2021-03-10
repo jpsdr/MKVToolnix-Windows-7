@@ -36,7 +36,7 @@ xtr_hdmv_pgs_c::handle_frame(xtr_frame_t &f) {
   uint64_t pts     = (f.timestamp * 9) / 100000;
 
   put_uint16_be(&sup_header[0], mtx::hdmv_pgs::FILE_MAGIC);
-  put_uint32_be(&sup_header[2], (uint32)pts);
+  put_uint32_be(&sup_header[2], (uint32_t)pts);
   put_uint32_be(&sup_header[6], 0);
 
   mxdebug_if(m_debug, fmt::format("frame size {0}\n", frame_size));

@@ -31,13 +31,13 @@ mm_null_io_c::mm_null_io_c(mm_null_io_private_c &p)
 {
 }
 
-uint64
+uint64_t
 mm_null_io_c::getFilePointer() {
   return p_func()->pos;
 }
 
 void
-mm_null_io_c::setFilePointer(int64 offset,
+mm_null_io_c::setFilePointer(int64_t offset,
                              libebml::seek_mode mode) {
   auto p = p_func();
 
@@ -46,7 +46,7 @@ mm_null_io_c::setFilePointer(int64 offset,
          :                                   p->pos + offset;
 }
 
-uint32
+uint32_t
 mm_null_io_c::_read(void *buffer,
                     size_t size) {
   std::memset(buffer, 0, size);

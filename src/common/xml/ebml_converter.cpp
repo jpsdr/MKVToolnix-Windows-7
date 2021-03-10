@@ -442,7 +442,7 @@ ebml_converter_c::verify_and_create_element(EbmlMaster &parent,
   auto debug_name = get_debug_name(name);
   auto &context   = EBML_CONTEXT(&parent);
   bool found      = false;
-  EbmlId id(static_cast<uint32>(0), 0);
+  EbmlId id(static_cast<uint32_t>(0), 0);
   size_t i;
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)

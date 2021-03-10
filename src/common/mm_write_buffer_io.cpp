@@ -45,13 +45,13 @@ mm_write_buffer_io_c::open(const std::string &file_name,
   return std::make_shared<mm_write_buffer_io_c>(std::make_shared<mm_file_io_c>(file_name, MODE_CREATE), buffer_size);
 }
 
-uint64
+uint64_t
 mm_write_buffer_io_c::getFilePointer() {
   return mm_proxy_io_c::getFilePointer() + p_func()->fill;
 }
 
 void
-mm_write_buffer_io_c::setFilePointer(int64 offset,
+mm_write_buffer_io_c::setFilePointer(int64_t offset,
                                      libebml::seek_mode mode) {
   int64_t new_pos
     = libebml::seek_beginning == mode ? offset
@@ -88,7 +88,7 @@ mm_write_buffer_io_c::close_write_buffer_io() {
   mm_proxy_io_c::close();
 }
 
-uint32
+uint32_t
 mm_write_buffer_io_c::_read(void *buffer,
                             size_t size) {
   flush_buffer();

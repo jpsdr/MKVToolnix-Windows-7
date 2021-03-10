@@ -92,20 +92,20 @@ mm_file_io_c::close() {
   p->file_name.clear();
 }
 
-uint64
+uint64_t
 mm_file_io_c::get_real_file_pointer() {
   auto p    = p_func();
   LONG high = 0;
   DWORD low = SetFilePointer(p->file, 0, &high, FILE_CURRENT);
 
   if ((low == INVALID_SET_FILE_POINTER) && (GetLastError() != NO_ERROR))
-    return (uint64)-1;
+    return (uint64_t)-1;
 
-  return (((uint64)high) << 32) | (uint64)low;
+  return (((uint64_t)high) << 32) | (uint64_t)low;
 }
 
 void
-mm_file_io_c::setFilePointer(int64 offset,
+mm_file_io_c::setFilePointer(int64_t offset,
                              libebml::seek_mode mode) {
   auto p       = p_func();
   DWORD method = libebml::seek_beginning == mode ? FILE_BEGIN
@@ -122,7 +122,7 @@ mm_file_io_c::setFilePointer(int64 offset,
   p->current_position = (int64_t)low + ((int64_t)high << 32);
 }
 
-uint32
+uint32_t
 mm_file_io_c::_read(void *buffer,
                     size_t size) {
   auto p = p_func();

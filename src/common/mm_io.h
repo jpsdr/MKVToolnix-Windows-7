@@ -34,11 +34,11 @@ public:
   mm_io_c();
   virtual ~mm_io_c();
 
-  virtual uint64 getFilePointer() override = 0;
-  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning) override = 0;
-  virtual bool setFilePointer2(int64 offset, libebml::seek_mode mode = libebml::seek_beginning);
+  virtual uint64_t getFilePointer() override = 0;
+  virtual void setFilePointer(int64_t offset, libebml::seek_mode mode = libebml::seek_beginning) override = 0;
+  virtual bool setFilePointer2(int64_t offset, libebml::seek_mode mode = libebml::seek_beginning);
   virtual memory_cptr read(size_t size);
-  virtual uint32 read(void *buffer, size_t size) override;
+  virtual uint32_t read(void *buffer, size_t size) override;
   virtual uint32_t read(std::string &buffer, size_t size, size_t offset = 0);
   virtual uint32_t read(memory_cptr &buffer, size_t size, int offset = 0);
   virtual unsigned char read_uint8();
@@ -61,7 +61,7 @@ public:
   virtual int write_uint32_be(uint32_t value);
   virtual int write_uint64_be(uint64_t value);
   virtual int write_double(double value);
-  virtual void skip(int64 numbytes);
+  virtual void skip(int64_t numbytes);
   virtual size_t write(const void *buffer, size_t size) override;
   virtual size_t write(std::string const &buffer);
   virtual size_t write(const memory_cptr &buffer, size_t size = UINT_MAX, size_t offset = 0);
@@ -96,6 +96,6 @@ public:
   }
 
 protected:
-  virtual uint32 _read(void *buffer, size_t size) = 0;
+  virtual uint32_t _read(void *buffer, size_t size) = 0;
   virtual size_t _write(const void *buffer, size_t size) = 0;
 };

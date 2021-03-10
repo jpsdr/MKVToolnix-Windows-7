@@ -68,7 +68,7 @@ mm_file_io_c::slurp(std::string const &file_name) {
   return content;
 }
 
-uint64
+uint64_t
 mm_file_io_c::getFilePointer() {
   return p_func()->current_position;
 }

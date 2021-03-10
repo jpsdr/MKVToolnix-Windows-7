@@ -242,7 +242,7 @@ bool
 attachment_target_c::matches_by_uid_name_or_mime_type(KaxAttached &att) {
   if (st_uid == m_selector_type) {
     auto file_uid = FindChild<KaxFileUID>(att);
-    auto uid      = file_uid ? uint64(*file_uid) : static_cast<uint64_t>(0);
+    auto uid      = file_uid ? uint64_t(*file_uid) : static_cast<uint64_t>(0);
     return uid == m_selector_num_arg;
   }
 

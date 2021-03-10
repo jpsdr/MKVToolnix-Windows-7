@@ -273,7 +273,7 @@ hevcc_c::pack() {
 
   mtx::bits::writer_c w;
 
-  auto write_list = [&w](std::vector<memory_cptr> const &list, uint8 nal_unit_type) {
+  auto write_list = [&w](std::vector<memory_cptr> const &list, uint8_t nal_unit_type) {
     w.put_bits(1, 1);
     w.put_bits(1, 0);
     w.put_bits(6, nal_unit_type);

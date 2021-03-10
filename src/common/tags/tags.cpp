@@ -302,7 +302,7 @@ set_target_type(KaxTag &tag,
 
 void
 remove_elements_unsupported_by_webm(EbmlMaster &master) {
-  static auto s_supported_elements = std::map<uint32, bool>{};
+  static auto s_supported_elements = std::map<uint32_t, bool>{};
 
   if (s_supported_elements.empty()) {
     s_supported_elements[ EBML_ID_VALUE(EBML_ID(KaxTags))               ] = true;

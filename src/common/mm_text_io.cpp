@@ -264,7 +264,7 @@ mm_text_io_c::getline(std::optional<std::size_t> max_chars) {
 }
 
 void
-mm_text_io_c::setFilePointer(int64 offset,
+mm_text_io_c::setFilePointer(int64_t offset,
                              libebml::seek_mode mode) {
   mm_proxy_io_c::setFilePointer(((0 == offset) && (libebml::seek_beginning == mode)) ? p_func()->bom_len : offset, mode);
 }

@@ -21,17 +21,17 @@
    Class for reading from stdin & writing to stdout.
 */
 
-uint64
+uint64_t
 mm_stdio_c::getFilePointer() {
   return 0;
 }
 
 void
-mm_stdio_c::setFilePointer(int64,
+mm_stdio_c::setFilePointer(int64_t,
                            libebml::seek_mode) {
 }
 
-uint32
+uint32_t
 mm_stdio_c::_read(void *buffer,
                   size_t size) {
   return fread(buffer, 1, size, stdin);

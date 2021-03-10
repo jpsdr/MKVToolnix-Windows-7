@@ -19,8 +19,8 @@ class mm_stdio_c: public mm_io_c {
 public:
   mm_stdio_c() = default;
 
-  virtual uint64 getFilePointer();
-  virtual void setFilePointer(int64 offset, libebml::seek_mode mode=libebml::seek_beginning);
+  virtual uint64_t getFilePointer();
+  virtual void setFilePointer(int64_t offset, libebml::seek_mode mode=libebml::seek_beginning);
   virtual void close();
   virtual bool eof() {
     return false;
@@ -36,6 +36,6 @@ public:
 #endif
 
 protected:
-  virtual uint32 _read(void *buffer, size_t size);
+  virtual uint32_t _read(void *buffer, size_t size);
   virtual size_t _write(const void *buffer, size_t size);
 };

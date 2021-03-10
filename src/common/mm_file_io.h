@@ -26,11 +26,11 @@ public:
   mm_file_io_c(const std::string &path, const open_mode mode = MODE_READ);
   virtual ~mm_file_io_c();
 
-  virtual uint64 getFilePointer() override;
+  virtual uint64_t getFilePointer() override;
 #if defined(SYS_WINDOWS)
-  virtual uint64 get_real_file_pointer();
+  virtual uint64_t get_real_file_pointer();
 #endif
-  virtual void setFilePointer(int64 offset, libebml::seek_mode mode = libebml::seek_beginning) override;
+  virtual void setFilePointer(int64_t offset, libebml::seek_mode mode = libebml::seek_beginning) override;
   virtual void close() override;
   virtual bool eof() override;
   virtual void clear_eof() override;
@@ -47,6 +47,6 @@ public:
   static void enable_flushing_on_close(bool enable);
 
 protected:
-  virtual uint32 _read(void *buffer, size_t size) override;
+  virtual uint32_t _read(void *buffer, size_t size) override;
   virtual size_t _write(const void *buffer, size_t size) override;
 };

@@ -81,7 +81,7 @@ mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
 }
 
 void
-mm_file_io_c::setFilePointer(int64 offset,
+mm_file_io_c::setFilePointer(int64_t offset,
                              libebml::seek_mode mode) {
   auto p     = p_func();
   int whence = mode == libebml::seek_beginning ? SEEK_SET
@@ -108,7 +108,7 @@ mm_file_io_c::_write(const void *buffer,
   return bwritten;
 }
 
-uint32
+uint32_t
 mm_file_io_c::_read(void *buffer,
                     size_t size) {
   auto p        = p_func();

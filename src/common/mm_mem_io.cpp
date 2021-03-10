@@ -48,13 +48,13 @@ mm_mem_io_c::~mm_mem_io_c() {
   close_mem_io();
 }
 
-uint64
+uint64_t
 mm_mem_io_c::getFilePointer() {
   return p_func()->pos;
 }
 
 void
-mm_mem_io_c::setFilePointer(int64 offset,
+mm_mem_io_c::setFilePointer(int64_t offset,
                             libebml::seek_mode mode) {
   auto p = p_func();
 
@@ -72,7 +72,7 @@ mm_mem_io_c::setFilePointer(int64 offset,
     throw mtx::mm_io::seek_x{mtx::mm_io::make_error_code()};
 }
 
-uint32
+uint32_t
 mm_mem_io_c::_read(void *buffer,
                    size_t size) {
   auto p        = p_func();
