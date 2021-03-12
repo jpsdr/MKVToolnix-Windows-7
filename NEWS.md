@@ -17,6 +17,9 @@
 * mkvinfo: when compiled with newer versions of the `fmt` library, certain
   numbers were not output correctly (e.g. a track's audio sampling frequency
   of 48000 might be output as 48).
+* MKVToolNix GUI: multiplexer: deriving the track language from the file name
+  will match languages case insensitively again (like versions prior to
+  v55). Fixes #3068.
 
 ## Build system changes
 

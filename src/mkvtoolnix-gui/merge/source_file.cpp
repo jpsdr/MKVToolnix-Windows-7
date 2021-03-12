@@ -356,8 +356,8 @@ SourceFile::setupProgramMapFromProperties() {
 mtx::bcp47::language_c
 SourceFile::deriveLanguageFromFileName() {
   auto &cfg     = Util::Settings::get();
-  auto fileName = QFileInfo{m_fileName}.fileName();
-  auto matches  = QRegularExpression{Q("s\\d+e\\d{2,}(.+)"), QRegularExpression::CaseInsensitiveOption}.match(fileName);
+  auto fileName = QFileInfo{m_fileName}.fileName().toLower();
+  auto matches  = QRegularExpression{Q("s\\d+e\\d{2,}(.+)")}.match(fileName);
 
   if (matches.hasMatch()) {
     fileName = matches.captured(1);
