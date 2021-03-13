@@ -13,8 +13,8 @@ class Library < Target
   def create_specific_static
     file "#{@target}.a" => @objects do |t|
       FileUtils.rm_f t.name
-      runq "ar", t.name, "#{c(:AR)} rc #{t.name} #{@objects.join(" ")}"
-      runq "ranlib", t.name, "#{c(:RANLIB)} #{t.name}"
+      runq "ar", t.name, "#{c(:AR)} crS #{t.name} #{@objects.join(" ")}"
+      runq "ranlib", t.name, "#{c(:RANLIB)} #{$flags[:ranlib]} #{t.name}"
     end
   end
 

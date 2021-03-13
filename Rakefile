@@ -181,12 +181,15 @@ def setup_globals
 
   mocflags                 = $building_for[:macos] ? "-DSYS_APPLE" : $building_for[:windows] ? "-DSYS_WINDOWS" : ""
 
+  ranlibflags              = $building_for[:macos] ? "-no_warning_for_no_symbols" : ""
+
   $flags                   = {
     :cflags                => cflags,
     :cxxflags              => cxxflags,
     :ldflags               => ldflags,
     :windres               => windres,
     :moc                   => mocflags,
+    :ranlib                => ranlibflags,
   }
 
   setup_macos_specifics if $building_for[:macos]
