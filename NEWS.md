@@ -30,6 +30,9 @@
   of the fix of #3069.
 * mkvmerge: tags: when the option `--disable-language-ietf` is used,
   `TagLanguageIETF` elements won't be written. Fixes #3070.
+* MKVToolNix GUI: chapter editor: the editor will no longer create empty
+  `ChapterCountry` elements when adding a chapter name with no default country
+  selected in the preferences. Fixes #3072.
 
 ## Build system changes
 

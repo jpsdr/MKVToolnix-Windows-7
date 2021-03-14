@@ -84,7 +84,8 @@ NameModel::addNew() {
 
   GetChild<KaxChapterString>(display).SetValueUTF8(Y("<Unnamed>"));
   mtx::chapters::set_languages_in_display(*display, cfg.m_defaultChapterLanguage);
-  GetChild<KaxChapterCountry>(display).SetValue(to_utf8(cfg.m_defaultChapterCountry));
+  if (!cfg.m_defaultChapterCountry.isEmpty())
+    GetChild<KaxChapterCountry>(display).SetValue(to_utf8(cfg.m_defaultChapterCountry));
 
   m_chapter->PushElement(*display);
   append(*display);
