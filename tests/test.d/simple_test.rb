@@ -114,7 +114,7 @@ class SimpleTest
 
   def test_merge file, *args
     options                      = args.extract_options!
-    full_command_line            = [ options[:args], file ].flatten.join(' ')
+    full_command_line            = [ options[:args], file, options[:post_args] || [] ].flatten.join(' ')
     options[:name]             ||= full_command_line
     options[:result_type]      ||= :hash
     options[:no_variable_data]   = true unless options.key?(:no_variable_data)
@@ -158,7 +158,7 @@ class SimpleTest
 
   def test_info file, *args
     options             = args.extract_options!
-    full_command_line   = [ options[:args], file ].flatten.join(' ')
+    full_command_line   = [ options[:args], file, options[:post_args] || [] ].flatten.join(' ')
     options[:name]    ||= full_command_line
     @blocks[:tests] << {
       :name  => full_command_line,
@@ -172,7 +172,7 @@ class SimpleTest
 
   def test_merge_unsupported file, *args
     options             = args.extract_options!
-    full_command_line   = [ options[:args], file ].flatten.join(' ')
+    full_command_line   = [ options[:args], file, options[:post_args] || [] ].flatten.join(' ')
     options[:name]    ||= full_command_line
     @blocks[:tests] << {
       :name  => full_command_line,
