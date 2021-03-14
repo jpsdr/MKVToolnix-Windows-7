@@ -85,26 +85,37 @@ ebml_tags_converter_c::fix_ebml(EbmlMaster &root)
 void
 ebml_tags_converter_c::fix_tag(KaxTag &tag)
   const {
-  for (auto child : tag)
+  auto have_simple_tag = false;
+
+  for (auto child : tag) {
     if (dynamic_cast<KaxTag *>(child))
       fix_tag(*static_cast<KaxTag *>(child));
 
-  auto simple = FindChild<KaxTagSimple>(tag);
-  if (!simple)
-    throw conversion_x{ Y("<Tag> is missing the <Simple> child.") };
+    else if (dynamic_cast<KaxTagSimple *>(child)) {
+      fix_simple_tag(*static_cast<KaxTagSimple *>(child));
+      have_simple_tag = true;
+    }
+  }
 
-  if (!FindChild<KaxTagName>(simple))
+  if (!have_simple_tag)
+    throw conversion_x{ Y("<Tag> is missing the <Simple> child.") };
+}
+
+void
+ebml_tags_converter_c::fix_simple_tag(KaxTagSimple &simple_tag)
+  const {
+  if (!FindChild<KaxTagName>(simple_tag))
     throw conversion_x{ Y("<Simple> is missing the <Name> child.") };
 
-  auto string = FindChild<KaxTagString>(*simple);
-  auto binary = FindChild<KaxTagBinary>(*simple);
+  auto string = FindChild<KaxTagString>(simple_tag);
+  auto binary = FindChild<KaxTagBinary>(simple_tag);
   if (string && binary)
     throw conversion_x{ Y("Only one of <String> and <Binary> may be used beneath <Simple> but not both at the same time.") };
-  if (!string && !binary && !FindChild<KaxTagSimple>(*simple))
+  if (!string && !binary && !FindChild<KaxTagSimple>(simple_tag))
     throw conversion_x{ Y("<Simple> must contain either a <String> or a <Binary> child.") };
 
-  auto tlanguage_ietf  = FindChild<KaxTagLanguageIETF>(simple);
-  auto tlanguage       = FindChild<KaxTagLangue>(simple);
+  auto tlanguage_ietf  = FindChild<KaxTagLanguageIETF>(simple_tag);
+  auto tlanguage       = FindChild<KaxTagLangue>(simple_tag);
   auto value_to_parse  = tlanguage_ietf ? tlanguage_ietf->GetValue()
                        : tlanguage      ? tlanguage->GetValue()
                        :                  "eng"s;
@@ -115,7 +126,7 @@ ebml_tags_converter_c::fix_tag(KaxTag &tag)
 
   if (!tlanguage_ietf && !mtx::bcp47::language_c::is_disabled()) {
     tlanguage_ietf = new KaxTagLanguageIETF;
-    simple->PushElement(*tlanguage_ietf);
+    simple_tag.PushElement(*tlanguage_ietf);
   }
 
   if (tlanguage_ietf)
@@ -124,7 +135,7 @@ ebml_tags_converter_c::fix_tag(KaxTag &tag)
   if (parsed_language.has_valid_iso639_2_code()) {
     if (!tlanguage) {
       tlanguage = new KaxTagLangue;
-      simple->PushElement(*tlanguage);
+      simple_tag.PushElement(*tlanguage);
     }
 
     tlanguage->SetValue(parsed_language.get_iso639_alpha_3_code());

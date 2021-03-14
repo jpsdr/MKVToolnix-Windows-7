@@ -30,6 +30,7 @@ public:
 protected:
   virtual void fix_ebml(libebml::EbmlMaster &root) const;
   virtual void fix_tag(libmatroska::KaxTag &tag) const;
+  virtual void fix_simple_tag(libmatroska::KaxTagSimple &simple_tag) const;
 
   void setup_maps();
 

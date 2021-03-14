@@ -37,6 +37,9 @@
   track statistics tags it creates, making the effective language
   "undetermined" due to `und` being the default value for the legacy tag
   language element. Fixes #3073.
+* mkvmerge: tags: the XML tag parser will now validate all `<Simple>` children
+  of `<Tag>` elements, not just the first for each `<Tag>`. Part of the fix of
+  #3071.
 
 ## Build system changes
 
