@@ -80,3 +80,34 @@ compare_languages(*([ [ "ger", nil ] ] * 7))
 
 test_merge src2, :keep_tmp => true, :args => "--disable-language-ietf --no-audio --chapter-language de-latn-ch --generate-chapters interval:10s"
 compare_languages(*([ [ "ger", nil ] ] * 7))
+
+
+# simple chapters
+test_merge src1, :keep_tmp => true, :args => "--chapters #{chaps1}", :post_args => "--disable-language-ietf"
+compare_languages(*([ [ "eng", nil ] ] * 5))
+
+test_merge src1, :keep_tmp => true, :args => "--chapter-language de --chapters #{chaps1}", :post_args => "--disable-language-ietf"
+compare_languages(*([ [ "ger", nil] ] * 5))
+
+test_merge src1, :keep_tmp => true, :args => "--chapter-language de-latn-ch --chapters #{chaps1}", :post_args => "--disable-language-ietf"
+compare_languages(*([ [ "ger", nil ] ] * 5))
+
+# XML chapters
+test_merge src1, :keep_tmp => true, :args => "--chapters #{chaps2}", :post_args => "--disable-language-ietf"
+compare_languages(*([ [ "eng", nil ] ] * 3 + [ [ "ger", nil ] ] * 3))
+
+test_merge src1, :keep_tmp => true, :args => "--chapter-language de --chapters #{chaps2}", :post_args => "--disable-language-ietf"
+compare_languages(*([ [ "eng", nil ] ] * 3 + [ [ "ger", nil ] ] * 3))
+
+test_merge src1, :keep_tmp => true, :args => "--chapter-language de-latn-ch --chapters #{chaps2}", :post_args => "--disable-language-ietf"
+compare_languages(*([ [ "eng", nil ] ] * 3 + [ [ "ger", nil ] ] * 3))
+
+# chapter generation
+test_merge src2, :keep_tmp => true, :args => "--no-audio --generate-chapters interval:10s", :post_args => "--disable-language-ietf"
+compare_languages(*([ [ "eng", nil ] ] * 7))
+
+test_merge src2, :keep_tmp => true, :args => "--no-audio --chapter-language de --generate-chapters interval:10s", :post_args => "--disable-language-ietf"
+compare_languages(*([ [ "ger", nil ] ] * 7))
+
+test_merge src2, :keep_tmp => true, :args => "--no-audio --chapter-language de-latn-ch --generate-chapters interval:10s", :post_args => "--disable-language-ietf"
+compare_languages(*([ [ "ger", nil ] ] * 7))

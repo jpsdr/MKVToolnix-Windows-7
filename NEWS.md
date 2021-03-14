@@ -20,6 +20,10 @@
 * MKVToolNix GUI: multiplexer: deriving the track language from the file name
   will match languages case insensitively again (like versions prior to
   v55). Fixes #3068.
+* mkvmerge: chapters: `ChapLanguageIETF` elements were still created when the
+  option `--disable-language-ietf` was given after an option leading to the
+  creation of chapters. Now the position doesn't matter anymore. Part of the
+  fix of #3069.
 
 ## Build system changes
 

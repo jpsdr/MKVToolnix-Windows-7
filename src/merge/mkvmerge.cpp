@@ -2206,7 +2206,9 @@ parse_args(std::vector<std::string> args) {
       random_c::init(seed);
 
       ++sit;
-    }
+
+    } else if (this_arg == "--disable-language-ietf")
+      mtx::bcp47::language_c::disable();
   }
 
   if (g_outfile.empty()) {
@@ -2236,8 +2238,7 @@ parse_args(std::vector<std::string> args) {
       continue;
     }
 
-    if (   (this_arg == "-w")
-        || (this_arg == "--webm"))
+    if (mtx::included_in(this_arg, "-w", "--webm", "--disable-language-ietf"))
       continue;
 
     // Global options
@@ -2326,9 +2327,6 @@ parse_args(std::vector<std::string> args) {
 
     else if (this_arg == "--disable-track-statistics-tags")
       g_no_track_statistics_tags = true;
-
-    else if (this_arg == "--disable-language-ietf")
-      mtx::bcp47::language_c::disable();
 
     else if (this_arg == "--attachment-description") {
       if (no_next_arg)

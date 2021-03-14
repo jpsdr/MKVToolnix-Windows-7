@@ -58,3 +58,22 @@ test_merge tmp,  :keep_tmp => true, :args => "--disable-language-ietf --language
 compare_languages tmp,        false, [ "ger", "de-Latn-DE" ]
 compare_languages "#{tmp}-2", false, [ "ger", nil ]
 compare_languages "#{tmp}-3",        [ "spa", nil ]
+
+unlink_tmp_files
+
+test_merge src1, :keep_tmp => true, :post_args => "--disable-language-ietf"
+compare_languages ["und", nil]
+
+test_merge src1, :keep_tmp => true
+compare_languages ["und", "und"]
+
+test_merge src1, :keep_tmp => true, :args => "--language 0:de-latn-de", :post_args => "--disable-language-ietf"
+compare_languages [ "ger", nil ]
+
+test_merge src1, :keep_tmp => true, :args => "--language 0:de-latn-de"
+test_merge tmp,  :keep_tmp => true, :post_args => "--disable-language-ietf", :output => "#{tmp}-2"
+test_merge tmp,  :keep_tmp => true, :args => "--language 0:es-MX", :post_args => "--disable-language-ietf", :output => "#{tmp}-3"
+
+compare_languages tmp,        false, [ "ger", "de-Latn-DE" ]
+compare_languages "#{tmp}-2", false, [ "ger", nil ]
+compare_languages "#{tmp}-3",        [ "spa", nil ]
