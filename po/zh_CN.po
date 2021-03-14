@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-03-09 21:22+0100\n"
+"POT-Creation-Date: 2021-03-14 21:31+0100\n"
 "PO-Revision-Date: 2020-09-02 18:12+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -414,8 +414,8 @@ msgstr "  --disable-lacing         不使用紧缩。\n"
 #: src/merge/mkvmerge.cpp:141
 #, no-c-format
 msgid ""
-"  --disable-language-ietf  Do not write LanguageIETF track header and\n"
-"                           ChapLanguageIETF chapter elements.\n"
+"  --disable-language-ietf  Do not write IETF BCP 47 language elements in\n"
+"                           track headers, chapters and tags.\n"
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:139
@@ -1148,65 +1148,65 @@ msgstr "  X:  以十六进制显示的二进制值\n"
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
 msgstr "  [ <文件1> <文件2> ]      与“<文件1> + <文件2>”相同。\n"
 
-#: src/common/kax_info.cpp:388
+#: src/common/kax_info.cpp:395
 #, no-c-format
 msgid " (FourCC: {0})"
 msgstr " (FourCC: {0})"
 
-#: src/common/kax_info.cpp:397
+#: src/common/kax_info.cpp:404
 #, no-c-format
 msgid " (H.264 profile: {0} @L{1}.{2})"
 msgstr " (H.264 档次: {0} @L{1}.{2})"
 
-#: src/common/kax_info.cpp:416
+#: src/common/kax_info.cpp:423
 #, no-c-format
 msgid " (HEVC profile: {0} @L{1}.{2})"
 msgstr " (HEVC 档次: {0} @L{1}.{2})"
 
-#: src/common/kax_info.cpp:463
-#: src/common/kax_info.cpp:605
-#: src/common/kax_info.cpp:899
-#: src/common/kax_info.cpp:1044
+#: src/common/kax_info.cpp:470
+#: src/common/kax_info.cpp:612
+#: src/common/kax_info.cpp:906
+#: src/common/kax_info.cpp:1051
 #, no-c-format
 msgid " (adler: 0x{0:08x})"
 msgstr " (adler: 0x{0:08x})"
 
-#: src/common/kax_info.cpp:730
+#: src/common/kax_info.cpp:737
 #, no-c-format
 msgid " (aspect ratio)"
 msgstr " (宽高比)"
 
-#: src/common/kax_info.cpp:728
+#: src/common/kax_info.cpp:735
 #, no-c-format
 msgid " (centimeters)"
 msgstr " (厘米)"
 
-#: src/common/kax_info.cpp:758
+#: src/common/kax_info.cpp:765
 #, no-c-format
 msgid " (fixed)"
 msgstr " (固定尺寸)"
 
-#: src/common/kax_info.cpp:392
+#: src/common/kax_info.cpp:399
 #, no-c-format
 msgid " (format tag: 0x{0:04x})"
 msgstr " (格式标识: 0x{0:04x})"
 
-#: src/common/kax_info.cpp:756
+#: src/common/kax_info.cpp:763
 #, no-c-format
 msgid " (free resizing)"
 msgstr " (自由缩放)"
 
-#: src/common/kax_info.cpp:729
+#: src/common/kax_info.cpp:736
 #, no-c-format
 msgid " (inches)"
 msgstr " (英寸)"
 
-#: src/common/kax_info.cpp:757
+#: src/common/kax_info.cpp:764
 #, no-c-format
 msgid " (keep aspect ratio)"
 msgstr " (保持宽高比)"
 
-#: src/common/kax_info.cpp:727
+#: src/common/kax_info.cpp:734
 #, no-c-format
 msgid " (pixels)"
 msgstr " (像素)"
@@ -1266,18 +1266,18 @@ msgstr " 其他选项: \n"
 msgid " Segment info handling:\n"
 msgstr " 剪辑信息处理:\n"
 
-#: src/common/kax_info.cpp:288
+#: src/common/kax_info.cpp:295
 #, no-c-format
 msgid " at 0x{0:x}"
 msgstr " 位于 0x{0:x}"
 
-#: src/common/kax_info.cpp:288
+#: src/common/kax_info.cpp:295
 #: src/extract/mkvextract.cpp:105
 #, no-c-format
 msgid " at {0}"
 msgstr " (位置 {0})"
 
-#: src/common/kax_info.cpp:298
+#: src/common/kax_info.cpp:305
 #, no-c-format
 msgid " data size {0}"
 msgstr "数据大小 {0}"
@@ -1302,12 +1302,12 @@ msgid " second"
 msgid_plural " seconds"
 msgstr[0] " 秒"
 
-#: src/common/kax_info.cpp:294
+#: src/common/kax_info.cpp:301
 #, no-c-format
 msgid " size is unknown"
 msgstr " 大小未知"
 
-#: src/common/kax_info.cpp:292
+#: src/common/kax_info.cpp:299
 #, no-c-format
 msgid " size {0}"
 msgstr " 大小 {0}"
@@ -2275,32 +2275,32 @@ msgstr "何时设置语言(&W):"
 msgid "&Window"
 msgstr "窗口(&W)"
 
-#: src/merge/mkvmerge.cpp:2525
+#: src/merge/mkvmerge.cpp:2523
 #, no-c-format
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' 缺少宽高比。\n"
 
-#: src/merge/mkvmerge.cpp:2532
+#: src/merge/mkvmerge.cpp:2530
 #, no-c-format
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr "'--aspect-ratio-factor' 缺少宽高比系数。\n"
 
-#: src/merge/mkvmerge.cpp:2335
+#: src/merge/mkvmerge.cpp:2333
 #, no-c-format
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "'--attachment-description' 缺少描述。\n"
 
-#: src/merge/mkvmerge.cpp:2344
+#: src/merge/mkvmerge.cpp:2342
 #, no-c-format
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "'--attachment-mime-type' 缺少 MIME 类型。\n"
 
-#: src/merge/mkvmerge.cpp:2354
+#: src/merge/mkvmerge.cpp:2352
 #, no-c-format
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' 缺少名称。\n"
 
-#: src/merge/mkvmerge.cpp:2390
+#: src/merge/mkvmerge.cpp:2388
 #, no-c-format
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "'--chapter-charset' 缺少字符集。\n"
@@ -2315,7 +2315,7 @@ msgstr "'--chapter-charset {0}': '--chapter-charset' 只能使用一次。\n"
 msgid "'--chapter-charset' must be given before '--chapters' in '--chapter-charset {0}'.\n"
 msgstr "'--chapter-charset {0}': '--chapter-charset' 必须使用在 '--chapters' 之前。\n"
 
-#: src/merge/mkvmerge.cpp:2383
+#: src/merge/mkvmerge.cpp:2381
 #, no-c-format
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "'--chapter-language' 缺少语言。\n"
@@ -2330,12 +2330,12 @@ msgstr "'--chapter-language {0}': '--chapter-language' 只能使用一次。\n"
 msgid "'--chapter-language' must be given before '--chapters' in '--chapter-language {0}'.\n"
 msgstr "'--chapter-language {0}': '--chapter-language' 必须使用在 '--chapters' 之前。\n"
 
-#: src/merge/mkvmerge.cpp:2414
+#: src/merge/mkvmerge.cpp:2412
 #, no-c-format
 msgid "'--chapters' lacks the file name.\n"
 msgstr "'--chapters' 缺少文件名。\n"
 
-#: src/merge/mkvmerge.cpp:2307
+#: src/merge/mkvmerge.cpp:2308
 #, no-c-format
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length' 缺少长度。\n"
@@ -2345,22 +2345,22 @@ msgstr "'--cluster-length' 缺少长度。\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' 缺少参数。\n"
 
-#: src/merge/mkvmerge.cpp:2546
+#: src/merge/mkvmerge.cpp:2544
 #, no-c-format
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' 缺少裁剪参数。\n"
 
-#: src/merge/mkvmerge.cpp:2404
+#: src/merge/mkvmerge.cpp:2402
 #, no-c-format
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "'--cue-chapter-name-format' 缺少格式。\n"
 
-#: src/merge/mkvmerge.cpp:2407
+#: src/merge/mkvmerge.cpp:2405
 #, no-c-format
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format' 必须使用在 '--chapters' 之前。\n"
 
-#: src/merge/mkvmerge.cpp:2539
+#: src/merge/mkvmerge.cpp:2537
 #, no-c-format
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' 缺少尺寸。\n"
@@ -2370,7 +2370,7 @@ msgstr "'--display-dimensions' 缺少尺寸。\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' 缺少参数。\n"
 
-#: src/merge/mkvmerge.cpp:2423
+#: src/merge/mkvmerge.cpp:2421
 #, no-c-format
 msgid "'--generate-chapters' lacks the mode.\n"
 msgstr "'--generate-chapters' 缺“模式”参数。\n"
@@ -2380,42 +2380,42 @@ msgstr "'--generate-chapters' 缺“模式”参数。\n"
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
 msgstr "'--generate-chapters-name-template' 缺名称模板。\n"
 
-#: src/merge/mkvmerge.cpp:2374
+#: src/merge/mkvmerge.cpp:2372
 #, no-c-format
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' 缺少文件名。\n"
 
-#: src/merge/mkvmerge.cpp:2897
+#: src/merge/mkvmerge.cpp:2895
 #, no-c-format
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "'--link' 仅在与 '--split' 同时使用时生效。\n"
 
-#: src/merge/mkvmerge.cpp:2293
+#: src/merge/mkvmerge.cpp:2294
 #, no-c-format
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "“--link-to-next”缺少下一剪辑的 UID。\n"
 
-#: src/merge/mkvmerge.cpp:2286
+#: src/merge/mkvmerge.cpp:2287
 #, no-c-format
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "“--link-to-previous”缺少前一剪辑的 UID。\n"
 
-#: src/merge/mkvmerge.cpp:2300
+#: src/merge/mkvmerge.cpp:2301
 #, no-c-format
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "“--segment-uid”缺少剪辑 UID。\n"
 
-#: src/merge/mkvmerge.cpp:2430
+#: src/merge/mkvmerge.cpp:2428
 #, no-c-format
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "'--segmentinfo' 缺少文件名。\n"
 
-#: src/merge/mkvmerge.cpp:2267
+#: src/merge/mkvmerge.cpp:2268
 #, no-c-format
 msgid "'--split' lacks the size.\n"
 msgstr "'--split' 缺少大小。\n"
 
-#: src/merge/mkvmerge.cpp:2274
+#: src/merge/mkvmerge.cpp:2275
 #, no-c-format
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' 缺少文件数量。\n"
@@ -2425,12 +2425,12 @@ msgstr "'--split-max-files' 缺少文件数量。\n"
 msgid "'--timestamp-scale' was used more than once.\n"
 msgstr "'--timestamp-scale' 只能使用一次。\n"
 
-#: src/merge/mkvmerge.cpp:2259
+#: src/merge/mkvmerge.cpp:2260
 #, no-c-format
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' 缺少标题。\n"
 
-#: src/merge/mkvmerge.cpp:2831
+#: src/merge/mkvmerge.cpp:2829
 #, no-c-format
 msgid "'--track-order' may only be given once.\n"
 msgstr "'--track-order' 只能使用一次。\n"
@@ -2502,13 +2502,13 @@ msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Addition
 msgstr ""
 
 #: src/common/xml/ebml_chapters_converter.cpp:151
-#: src/common/xml/ebml_tags_converter.cpp:114
+#: src/common/xml/ebml_tags_converter.cpp:125
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
 msgstr ""
 
 #: src/common/xml/ebml_chapters_converter.cpp:173
-#: src/common/xml/ebml_tags_converter.cpp:136
+#: src/common/xml/ebml_tags_converter.cpp:147
 #, no-c-format
 msgid "'{0}' is not a valid ISO 639-2 language code."
 msgstr "「{0}」不是有效的 ISO 639-2 语言代码。"
@@ -2608,87 +2608,87 @@ msgstr "「{0}」缺少文件名。\n"
 #: src/merge/mkvmerge.cpp:2070
 #: src/merge/mkvmerge.cpp:2135
 #: src/merge/mkvmerge.cpp:2201
-#: src/merge/mkvmerge.cpp:2246
-#: src/merge/mkvmerge.cpp:2445
-#: src/merge/mkvmerge.cpp:2459
-#: src/merge/mkvmerge.cpp:2693
-#: src/merge/mkvmerge.cpp:2707
-#: src/merge/mkvmerge.cpp:2714
-#: src/merge/mkvmerge.cpp:2721
-#: src/merge/mkvmerge.cpp:2728
-#: src/merge/mkvmerge.cpp:2735
-#: src/merge/mkvmerge.cpp:2742
-#: src/merge/mkvmerge.cpp:2749
-#: src/merge/mkvmerge.cpp:2756
-#: src/merge/mkvmerge.cpp:2763
-#: src/merge/mkvmerge.cpp:2770
-#: src/merge/mkvmerge.cpp:2777
-#: src/merge/mkvmerge.cpp:2784
-#: src/merge/mkvmerge.cpp:2798
-#: src/merge/mkvmerge.cpp:2805
-#: src/merge/mkvmerge.cpp:2812
-#: src/merge/mkvmerge.cpp:2820
-#: src/merge/mkvmerge.cpp:2828
-#: src/merge/mkvmerge.cpp:2838
-#: src/merge/mkvmerge.cpp:2845
-#: src/merge/mkvmerge.cpp:2852
-#: src/merge/mkvmerge.cpp:2864
-#: src/merge/mkvmerge.cpp:2871
-#: src/merge/mkvmerge.cpp:2878
+#: src/merge/mkvmerge.cpp:2247
+#: src/merge/mkvmerge.cpp:2443
+#: src/merge/mkvmerge.cpp:2457
+#: src/merge/mkvmerge.cpp:2691
+#: src/merge/mkvmerge.cpp:2705
+#: src/merge/mkvmerge.cpp:2712
+#: src/merge/mkvmerge.cpp:2719
+#: src/merge/mkvmerge.cpp:2726
+#: src/merge/mkvmerge.cpp:2733
+#: src/merge/mkvmerge.cpp:2740
+#: src/merge/mkvmerge.cpp:2747
+#: src/merge/mkvmerge.cpp:2754
+#: src/merge/mkvmerge.cpp:2761
+#: src/merge/mkvmerge.cpp:2768
+#: src/merge/mkvmerge.cpp:2775
+#: src/merge/mkvmerge.cpp:2782
+#: src/merge/mkvmerge.cpp:2796
+#: src/merge/mkvmerge.cpp:2803
+#: src/merge/mkvmerge.cpp:2810
+#: src/merge/mkvmerge.cpp:2818
+#: src/merge/mkvmerge.cpp:2826
+#: src/merge/mkvmerge.cpp:2836
+#: src/merge/mkvmerge.cpp:2843
+#: src/merge/mkvmerge.cpp:2850
+#: src/merge/mkvmerge.cpp:2862
+#: src/merge/mkvmerge.cpp:2869
+#: src/merge/mkvmerge.cpp:2876
 #, no-c-format
 msgid "'{0}' lacks its argument.\n"
 msgstr "「{0}」缺少参数。\n"
 
-#: src/merge/mkvmerge.cpp:2518
+#: src/merge/mkvmerge.cpp:2516
 #, no-c-format
 msgid "'{0}' lacks the FourCC.\n"
 msgstr "「{0}」缺少 FourCC 值。\n"
 
-#: src/merge/mkvmerge.cpp:2397
-#: src/merge/mkvmerge.cpp:2700
+#: src/merge/mkvmerge.cpp:2395
+#: src/merge/mkvmerge.cpp:2698
 #, no-c-format
 msgid "'{0}' lacks the delay.\n"
 msgstr "「{0}」缺少延迟数值。\n"
 
-#: src/merge/mkvmerge.cpp:2364
+#: src/merge/mkvmerge.cpp:2362
 #, no-c-format
 msgid "'{0}' lacks the file name.\n"
 msgstr "「{0}」缺少附件文件名。\n"
 
-#: src/merge/mkvmerge.cpp:2553
-#: src/merge/mkvmerge.cpp:2560
-#: src/merge/mkvmerge.cpp:2567
-#: src/merge/mkvmerge.cpp:2574
-#: src/merge/mkvmerge.cpp:2581
-#: src/merge/mkvmerge.cpp:2588
-#: src/merge/mkvmerge.cpp:2595
-#: src/merge/mkvmerge.cpp:2602
-#: src/merge/mkvmerge.cpp:2609
-#: src/merge/mkvmerge.cpp:2616
-#: src/merge/mkvmerge.cpp:2623
-#: src/merge/mkvmerge.cpp:2630
-#: src/merge/mkvmerge.cpp:2637
-#: src/merge/mkvmerge.cpp:2644
-#: src/merge/mkvmerge.cpp:2651
-#: src/merge/mkvmerge.cpp:2658
-#: src/merge/mkvmerge.cpp:2665
-#: src/merge/mkvmerge.cpp:2672
-#: src/merge/mkvmerge.cpp:2679
-#: src/merge/mkvmerge.cpp:2686
+#: src/merge/mkvmerge.cpp:2551
+#: src/merge/mkvmerge.cpp:2558
+#: src/merge/mkvmerge.cpp:2565
+#: src/merge/mkvmerge.cpp:2572
+#: src/merge/mkvmerge.cpp:2579
+#: src/merge/mkvmerge.cpp:2586
+#: src/merge/mkvmerge.cpp:2593
+#: src/merge/mkvmerge.cpp:2600
+#: src/merge/mkvmerge.cpp:2607
+#: src/merge/mkvmerge.cpp:2614
+#: src/merge/mkvmerge.cpp:2621
+#: src/merge/mkvmerge.cpp:2628
+#: src/merge/mkvmerge.cpp:2635
+#: src/merge/mkvmerge.cpp:2642
+#: src/merge/mkvmerge.cpp:2649
+#: src/merge/mkvmerge.cpp:2656
+#: src/merge/mkvmerge.cpp:2663
+#: src/merge/mkvmerge.cpp:2670
+#: src/merge/mkvmerge.cpp:2677
+#: src/merge/mkvmerge.cpp:2684
 #, no-c-format
 msgid "'{0}' lacks the parameter.\n"
 msgstr "「{0}」缺少参数。\n"
 
-#: src/merge/mkvmerge.cpp:2791
+#: src/merge/mkvmerge.cpp:2789
 #, no-c-format
 msgid "'{0}' lacks the track ID.\n"
 msgstr "「{0}」缺少轨道 ID。\n"
 
-#: src/merge/mkvmerge.cpp:2483
-#: src/merge/mkvmerge.cpp:2490
-#: src/merge/mkvmerge.cpp:2497
-#: src/merge/mkvmerge.cpp:2504
-#: src/merge/mkvmerge.cpp:2511
+#: src/merge/mkvmerge.cpp:2481
+#: src/merge/mkvmerge.cpp:2488
+#: src/merge/mkvmerge.cpp:2495
+#: src/merge/mkvmerge.cpp:2502
+#: src/merge/mkvmerge.cpp:2509
 #, no-c-format
 msgid "'{0}' lacks the track numbers.\n"
 msgstr "「{0}」缺少轨道编号。\n"
@@ -2717,12 +2717,12 @@ msgstr "‘{0}’: 您正在复制一条在实验模式下写入的 Opus 轨道�
 msgid "'{0}': {1}"
 msgstr "「{0}」: {1}"
 
-#: src/common/kax_info.cpp:275
+#: src/common/kax_info.cpp:282
 #, no-c-format
 msgid "(Known element, but invalid at this position: {0}; ID: 0x{1} size: {2})"
 msgstr "(已知元素，但在当前位置无效: {0}; ID: 0x{1} 大小: {2})"
 
-#: src/common/kax_info.cpp:270
+#: src/common/kax_info.cpp:277
 #, no-c-format
 msgid "(Unknown element: {0}; ID: 0x{1} size: {2})"
 msgstr "(未知元素: {0}；ID: 0x{1} 大小: {2})"
@@ -2757,14 +2757,14 @@ msgstr "，描述「{0}」"
 msgid ", file name '{0}'"
 msgstr "，文件名「{0}」"
 
-#: src/common/kax_info.cpp:946
-#: src/common/kax_info.cpp:1066
+#: src/common/kax_info.cpp:953
+#: src/common/kax_info.cpp:1073
 #, no-c-format
 msgid ", position 0x{0:x}"
 msgstr ", 位置 0x{0:x}"
 
-#: src/common/kax_info.cpp:946
-#: src/common/kax_info.cpp:1066
+#: src/common/kax_info.cpp:953
+#: src/common/kax_info.cpp:1073
 #, no-c-format
 msgid ", position {0}"
 msgstr "，位置 {0}"
@@ -2789,7 +2789,7 @@ msgstr "--- 任务“%1”(启动时间 %2) 的警告消息 ---"
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify'. These are usually simply numbered starting from 0 (e.g. '2')."
 msgstr "1. 数字形式的附件 ID，与「mkvmerge --identify」所列出的附件编号一致。通常从 0 开始依次递增 (如「2」)。"
 
-#: src/common/kax_info.cpp:767
+#: src/common/kax_info.cpp:774
 #, no-c-format
 msgid "1: all frames"
 msgstr "1: 所有帧"
@@ -2799,7 +2799,7 @@ msgstr "1: 所有帧"
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
 msgstr "2. 带有前缀「=」的数字，表示附件的唯一 ID (UID)，即「mkvmerge --identify」所列出的 UID。通常看起来像随机数 (如「128975986723」)。"
 
-#: src/common/kax_info.cpp:769
+#: src/common/kax_info.cpp:776
 #, no-c-format
 msgid "2: codec private data"
 msgstr "2: 编码格式私有数据"
@@ -2837,17 +2837,17 @@ msgstr "<不更改>"
 msgid "<No destination file>"
 msgstr "<无输出文件>"
 
-#: src/common/xml/ebml_tags_converter.cpp:97
+#: src/common/xml/ebml_tags_converter.cpp:108
 #, no-c-format
 msgid "<Simple> is missing the <Name> child."
 msgstr "<Simple> 缺少 <Name> 子元素。"
 
-#: src/common/xml/ebml_tags_converter.cpp:104
+#: src/common/xml/ebml_tags_converter.cpp:115
 #, no-c-format
 msgid "<Simple> must contain either a <String> or a <Binary> child."
 msgstr "<Simple> 必须包含 <String> 或 <Binary> 子元素。"
 
-#: src/common/xml/ebml_tags_converter.cpp:94
+#: src/common/xml/ebml_tags_converter.cpp:101
 #, no-c-format
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> 缺少 <Simple> 子元素。"
@@ -3630,7 +3630,7 @@ msgstr "下一剪辑对应的已转义文件名。"
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "上一剪辑对应的已转义文件名。"
 
-#: src/merge/mkvmerge.cpp:3121
+#: src/merge/mkvmerge.cpp:3119
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "写入输出文件时发生异常。"
@@ -3687,7 +3687,7 @@ msgstr "追加媒体文件"
 msgid "Append to an e&xisting source file"
 msgstr "追加到现有输入文件(&X)"
 
-#: src/merge/output_control.cpp:1896
+#: src/merge/output_control.cpp:1900
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "正在将文件 {1} (「{2}」) 中的轨道 {0} 追加合并到第 {4} 个文件 (「{5}」) 的轨道 {3}。\n"
@@ -3859,7 +3859,7 @@ msgstr "最后一个文件被移除时，自动清空输出文件名(&C)"
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "最后一个文件被移除时，自动清空文件标题(&R)"
 
-#: src/merge/mkvmerge.cpp:2219
+#: src/merge/mkvmerge.cpp:2221
 #, no-c-format
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr "根据输出文件扩展名自动启用 WebM 兼容模式。\n"
@@ -4214,8 +4214,8 @@ msgstr "无法将 CodecID 为「{1}」的轨道 {0} 写入文件「{2}」，因�
 msgid "Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already being written to the same file.\n"
 msgstr "无法将 CodecID 为「{1}」的轨道 {0} 写入文件「{2}」，因为 CodecID 为「{4}」的轨道 {3} 已被写入同一个文件。\n"
 
-#: src/common/kax_info.cpp:1319
-#: src/common/kax_info.cpp:1323
+#: src/common/kax_info.cpp:1326
+#: src/common/kax_info.cpp:1330
 #: src/extract/tracks.cpp:564
 #: src/mkvtoolnix-gui/util/kax_info.cpp:209
 #, no-c-format
@@ -4822,7 +4822,7 @@ msgstr "无法从该 MPEG-1/2 轨道提取序列头。\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "找不到音频轨道 {0} 的索引 (avilib 错误消息: {1})。跳过此轨道。\n"
 
-#: src/merge/output_control.cpp:1822
+#: src/merge/output_control.cpp:1826
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "追加合并时找不到 gptzr。 {0}\n"
@@ -5168,7 +5168,7 @@ msgstr "轨道位置索引"
 msgid "Cues"
 msgstr "cue"
 
-#: src/common/kax_info.cpp:554
+#: src/common/kax_info.cpp:561
 #, no-c-format
 msgid "Cues (subentries will be skipped)"
 msgstr "索引 (子条目将被跳过)"
@@ -5724,7 +5724,7 @@ msgstr "不再显示此消息。"
 msgid "Don't stop processing at the first cluster."
 msgstr "不要在第一个簇的位置停止处理。"
 
-#: src/merge/mkvmerge.cpp:3012
+#: src/merge/mkvmerge.cpp:3010
 #, no-c-format
 msgid "Done scanning playlists.\n"
 msgstr "扫描播放列表完成。\n"
@@ -6124,7 +6124,7 @@ msgstr "写入 Matroska 文件出错"
 msgid "Error:"
 msgstr "错误:"
 
-#: src/common/kax_info.cpp:1290
+#: src/common/kax_info.cpp:1297
 #, no-c-format
 msgid "Error: Couldn't open source file {0} ({1})."
 msgstr "错误: 无法打开输入文件 {0} ({1})。"
@@ -6134,7 +6134,7 @@ msgstr "错误: 无法打开输入文件 {0} ({1})。"
 msgid "Error: No EBML head found."
 msgstr "错误: 未找到 EBML 头。"
 
-#: src/merge/mkvmerge.cpp:2213
+#: src/merge/mkvmerge.cpp:2215
 #, no-c-format
 msgid ""
 "Error: no destination file name was given.\n"
@@ -6197,7 +6197,7 @@ msgstr "示例: 01:00:00 (一小时以后) 或 1800s (1800 秒以后)。"
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "示例: 01:00:00,01:30:00 (一小时以后、一小时三十分钟以后) 或 180s,300s,00:10:00 (三分钟、五分钟、十分钟以后)。"
 
-#: src/merge/mkvmerge.cpp:3121
+#: src/merge/mkvmerge.cpp:3119
 #, no-c-format
 msgid "Exception details:"
 msgstr "异常详情:"
@@ -6650,8 +6650,8 @@ msgstr "帧率"
 msgid "Frame size #%1: %2"
 msgstr "帧尺寸 #%1: %2"
 
-#: src/common/kax_info.cpp:906
-#: src/common/kax_info.cpp:1051
+#: src/common/kax_info.cpp:913
+#: src/common/kax_info.cpp:1058
 #, no-c-format
 msgid "Frame with size {0}{1}{2}"
 msgstr "大小为 {0}{1}{2} 的帧"
@@ -6661,8 +6661,8 @@ msgstr "大小为 {0}{1}{2} 的帧"
 msgid "Frames/fields:"
 msgstr "帧/场:"
 
-#: src/common/kax_info.cpp:905
-#: src/common/kax_info.cpp:1050
+#: src/common/kax_info.cpp:912
+#: src/common/kax_info.cpp:1057
 #, no-c-format
 msgid "Frame{0}{1}"
 msgstr "帧{0}{1}"
@@ -7447,7 +7447,7 @@ msgid "Invalid change spec ({2}) in '{0} {1}'.\n"
 msgstr "'{0} {1}' 中的更改方式 ({2}) 无效。\n"
 
 #: src/merge/mkvmerge.cpp:1117
-#: src/merge/mkvmerge.cpp:3046
+#: src/merge/mkvmerge.cpp:3044
 #, no-c-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
 msgstr "'--split {1}' 中用于 '--split' 的章节编号「{0}」无效: {2}\n"
@@ -8020,7 +8020,7 @@ msgstr "最低优先级"
 msgid "M&ore actions"
 msgstr "更多操作(&O)"
 
-#: src/common/kax_info.cpp:826
+#: src/common/kax_info.cpp:833
 #, no-c-format
 msgid "MD5"
 msgstr "MD5"
@@ -8349,12 +8349,12 @@ msgstr "要求修改段落「{0}」中的属性，但文件中未发现对应的
 msgid "More"
 msgstr "更多"
 
-#: src/merge/mkvmerge.cpp:2347
+#: src/merge/mkvmerge.cpp:2345
 #, no-c-format
 msgid "More than one MIME type was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "单个附件被指定了多于一个的 MIME 类型。「{0}」将被丢弃，并用「{1}」代替。\n"
 
-#: src/merge/mkvmerge.cpp:2338
+#: src/merge/mkvmerge.cpp:2336
 #, no-c-format
 msgid "More than one description was given for a single attachment.\n"
 msgstr "单个附件被指定了多于一个的描述。\n"
@@ -8364,7 +8364,7 @@ msgstr "单个附件被指定了多于一个的描述。\n"
 msgid "More than one file name has been given ('{0}' and '{1}').\n"
 msgstr "指定了多余一个的文件名 (「{0}」与「{1}」)。\n"
 
-#: src/merge/mkvmerge.cpp:2357
+#: src/merge/mkvmerge.cpp:2355
 #, no-c-format
 msgid "More than one name was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "单个附件被指定了多于一个的名称。「{0}」将被丢弃，并用「{1}」代替。\n"
@@ -8418,7 +8418,7 @@ msgstr "混流应用程序"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "混流到目录“%2”中的文件“%1”"
 
-#: src/merge/mkvmerge.cpp:3127
+#: src/merge/mkvmerge.cpp:3125
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "混流耗时 {0}。\n"
@@ -8557,7 +8557,7 @@ msgstr "初始帧中未发现 AC-3 头；此轨道将被跳过。\n"
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "初始帧中未发现 DTS 头; 该轨道将被跳过。\n"
 
-#: src/common/kax_info.cpp:1226
+#: src/common/kax_info.cpp:1233
 #, no-c-format
 msgid "No EBML head found."
 msgstr "未找到 EBML 头。"
@@ -8713,7 +8713,7 @@ msgstr "文件「{0}」中找不到剪辑 UID。"
 msgid "No segment/level 0 element found."
 msgstr "未发现剪辑/0 级元素。"
 
-#: src/merge/mkvmerge.cpp:2900
+#: src/merge/mkvmerge.cpp:2898
 #, no-c-format
 msgid "No source files were given.\n"
 msgstr "没有指定输入文件。\n"
@@ -9019,7 +9019,7 @@ msgstr "仅允许有一个输出文件。\n"
 msgid "Only one instance of <{0}> is allowed beneath <{1}> at position {2}."
 msgstr "<{1}> 下仅允许存在一个 <{0}> 实例，位于 {2}。"
 
-#: src/common/xml/ebml_tags_converter.cpp:102
+#: src/common/xml/ebml_tags_converter.cpp:113
 #, no-c-format
 msgid "Only one of <String> and <Binary> may be used beneath <Simple> but not both at the same time."
 msgstr "<Simple> 下只能使用 <String> 与 <Binary> 中的一项，而不能同时使用。"
@@ -9074,7 +9074,7 @@ msgstr "只有语言在此列表中的轨道将默认用于复制。"
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
 msgstr "只支持 v7 和更高版本的 VobSub 文件。如果您的文件是旧版本，请到 http://sourceforge.net/projects/guliverkli/ 下载 VSConv 程序将这些文件转换为 v7 文件。\n"
 
-#: src/merge/mkvmerge.cpp:3048
+#: src/merge/mkvmerge.cpp:3046
 #, no-c-format
 msgid "Only {0} chapter found in source files & chapter files."
 msgid_plural "Only {0} chapters found in source files & chapter files."
@@ -9291,7 +9291,7 @@ msgstr "解析整个文件，而不是仅依照索引。"
 msgid "Parser error:"
 msgstr ""
 
-#: src/common/kax_info.cpp:619
+#: src/common/kax_info.cpp:626
 #, no-c-format
 msgid "Parsing file"
 msgstr "正在解析文件"
@@ -9598,7 +9598,7 @@ msgstr "进度: [{0}{1}] {2}%"
 
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
-#: src/merge/mkvmerge.cpp:2916
+#: src/merge/mkvmerge.cpp:2914
 #: src/merge/output_control.cpp:363
 #: src/propedit/tag_target.cpp:352
 #: src/propedit/tag_target.cpp:365
@@ -9795,7 +9795,7 @@ msgstr "Quicktime/MP4 读取器: 轨道 {0} 缺少一些数据。头部单元损
 msgid "RIFF CDXA"
 msgstr "RIFF CDXA"
 
-#: src/common/kax_info.cpp:816
+#: src/common/kax_info.cpp:823
 #, no-c-format
 msgid "RSA"
 msgstr "RSA"
@@ -10164,7 +10164,7 @@ msgstr "停止任务队列(&T)"
 msgid "S&ystem information"
 msgstr "系统信息(&Y)"
 
-#: src/common/kax_info.cpp:825
+#: src/common/kax_info.cpp:832
 #, no-c-format
 msgid "SHA1-160"
 msgstr "SHA1-160"
@@ -10313,7 +10313,7 @@ msgstr "正在扫描目录"
 msgid "Scanning playlists"
 msgstr "播放列表扫描"
 
-#: src/merge/mkvmerge.cpp:2972
+#: src/merge/mkvmerge.cpp:2970
 #, no-c-format
 msgid "Scanning {0} files in {1} playlist.\n"
 msgid_plural "Scanning {0} files in {1} playlists.\n"
@@ -10355,7 +10355,7 @@ msgstr "定位条目"
 msgid "Seek head"
 msgstr "定位头"
 
-#: src/common/kax_info.cpp:548
+#: src/common/kax_info.cpp:555
 #, no-c-format
 msgid "Seek head (subentries will be skipped)"
 msgstr "定位头 (子条目将被跳过)"
@@ -11011,7 +11011,7 @@ msgstr[0] "手动启动任务(&M)"
 msgid "Started at:"
 msgstr "启动时间:"
 
-#: src/common/kax_info.cpp:1196
+#: src/common/kax_info.cpp:1203
 #, no-c-format
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr "轨道编号 {0} 的统计信息: 区块数量: {1}；大小: {2} 字节；时长: {3} 秒；近似码率: {4} bps\n"
@@ -11446,17 +11446,17 @@ msgstr "XML 剪辑信息文件「{0}」存在错误: {1}\n"
 msgid "The XML segmentinfo file '{0}' could not be read.\n"
 msgstr "XML 剪辑信息文件「{0}」无法读取。\n"
 
-#: src/common/xml/ebml_tags_converter.cpp:159
+#: src/common/xml/ebml_tags_converter.cpp:170
 #, no-c-format
 msgid "The XML tag file '{0}' contains an error at position {2}: {1}\n"
 msgstr "XML 标签文件「{0}」存在错误，位于 {2}: {1}\n"
 
-#: src/common/xml/ebml_tags_converter.cpp:162
+#: src/common/xml/ebml_tags_converter.cpp:173
 #, no-c-format
 msgid "The XML tag file '{0}' contains an error: {1}\n"
 msgstr "XML 标签文件「{0}」存在错误: {1}\n"
 
-#: src/common/xml/ebml_tags_converter.cpp:156
+#: src/common/xml/ebml_tags_converter.cpp:167
 #, no-c-format
 msgid "The XML tag file '{0}' could not be read.\n"
 msgstr "XML 标签文件「{0}」无法读取。\n"
@@ -11616,7 +11616,7 @@ msgstr "配置已保存。"
 msgid "The correction file header was not read correctly.\n"
 msgstr "校正文件头部未能正确读取。\n"
 
-#: src/merge/output_control.cpp:1622
+#: src/merge/output_control.cpp:1624
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "正在写入 cue 条目 (索引)...\n"
@@ -11735,7 +11735,7 @@ msgstr "两条轨道的显示宽度不同: {0} 与 {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "缺点是混流耗时更长，因为 mkvmerge 在退出前需要等待所有数据写入存储设备。"
 
-#: src/merge/mkvmerge.cpp:3121
+#: src/merge/mkvmerge.cpp:3119
 #, no-c-format
 msgid "The drive may be full."
 msgstr "磁盘可能已满。"
@@ -11880,7 +11880,7 @@ msgstr "文件「{0}」无法以读取模式打开: {1}。"
 msgid "The file '{0}' could not be opened for reading: {1}.\n"
 msgstr "文件「{0}」无法以读取模式打开: {1}。\n"
 
-#: src/common/kax_info.cpp:1306
+#: src/common/kax_info.cpp:1313
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}."
 msgstr "文件「{0}」无法以写入模式打开: {1}."
@@ -11904,7 +11904,7 @@ msgstr "文件「{0}」无法以写入模式打开: {1}。\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "文件「{0}」无法打开或解析。"
 
-#: src/merge/output_control.cpp:1584
+#: src/merge/output_control.cpp:1586
 #, no-c-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
 msgstr "文件「{0}」无法重命名为「{1}」。\n"
@@ -11924,7 +11924,7 @@ msgstr "文件「{0}」类型不支持 ({1})。\n"
 msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "文件「{0}」不是 Matroska 文件或无法找到。\n"
 
-#: src/merge/output_control.cpp:1582
+#: src/merge/output_control.cpp:1584
 #, no-c-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
 msgstr "文件「{0}」已重命名为「{1}」。\n"
@@ -12435,7 +12435,7 @@ msgstr "此参数指定的数字将被解读为输出文件中的 Matroska 区�
 msgid "The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."
 msgstr "视频仅允许 VP8/VP9 编码格式，音频仅允许 Vorbis/Opus 编码格式。"
 
-#: src/merge/mkvmerge.cpp:2454
+#: src/merge/mkvmerge.cpp:2452
 #, no-c-format
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "选项 '--meta-seek-size' 已不受支持。请阅读 mkvmerge 的文档，尤其是《Matroska 文件布局》一段。\n"
@@ -12808,7 +12808,7 @@ msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once.
 msgstr "文件 {1} (「{2}」) 中的轨道 {0} 被追加到多于一条的轨道。'--append-to' 的参数无效。\n"
 
 #: src/merge/mkvmerge.cpp:2009
-#: src/merge/mkvmerge.cpp:2939
+#: src/merge/mkvmerge.cpp:2937
 #, no-c-format
 msgid "The type of file '{0}' could not be recognized.\n"
 msgstr "文件「{0}」的类型无法识别。\n"
@@ -13077,7 +13077,7 @@ msgstr "此文件的时间戳行中含有坐标信息。Matroska SRT 字幕格�
 msgid "This file could not be opened or parsed.\n"
 msgstr "文件无法打开或解析。\n"
 
-#: src/common/kax_info.cpp:1226
+#: src/common/kax_info.cpp:1233
 #, no-c-format
 msgid "This file is probably not a Matroska file."
 msgstr "文件可能不是 Matroska 文件。"
@@ -13253,7 +13253,7 @@ msgstr "「{0}」中的元素为必要元素，无法删除。{1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "该属性唯一。不可以将更多实例添加到「{0}」。{1}\n"
 
-#: src/merge/output_control.cpp:1735
+#: src/merge/output_control.cpp:1739
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "这 *真的* 不该发生。为首个元定位元素预留的空间过小。需要的空间: {0}. {1}\n"
@@ -13527,7 +13527,7 @@ msgstr "轨道 {0}: 字幕编号 {1} 缺少时长。视作 1 秒处理。\n"
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "轨道 {0}: AAC 信息无法解析。\n"
 
-#: src/common/kax_info.cpp:656
+#: src/common/kax_info.cpp:663
 #, no-c-format
 msgid "Track {0}: {1}, codec ID: {2}{3}{4}{5}\n"
 msgstr "轨道 {0}: {1}，编码格式 ID: {2}{3}{4}{5}\n"
@@ -13636,8 +13636,8 @@ msgstr "未定"
 msgid "Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "单场帧后出现预期外的完整帧。尝试混流前请先修复 MPEG2 视频流。\n"
 
-#: src/common/kax_info.cpp:411
-#: src/common/kax_info.cpp:420
+#: src/common/kax_info.cpp:418
+#: src/common/kax_info.cpp:427
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:171
 #: src/mkvtoolnix-gui/jobs/job.cpp:276
 #, no-c-format
@@ -13659,7 +13659,7 @@ msgstr "「{0}」的章节文件格式未知。它不含支持的章节格式。
 msgid "Unknown content encoding type {0} for track {1}.\n"
 msgstr "轨道 {1} 的内容编码类型 {0} 未知。\n"
 
-#: src/common/kax_info.cpp:1250
+#: src/common/kax_info.cpp:1257
 #, no-c-format
 msgid "Unknown element"
 msgstr "未知元素"
@@ -14517,7 +14517,7 @@ msgstr "错误的 Kate 版本: {0}.{1} > {2}.x"
 msgid "Wrong Theora version: {0}.{1}.{2} != 3.2.x"
 msgstr "错误的 Theora 版本: {0}.{1}.{2} != 3.2.x"
 
-#: src/merge/mkvmerge.cpp:2277
+#: src/merge/mkvmerge.cpp:2278
 #, no-c-format
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "'--split-max-files' 参数错误。\n"
@@ -14707,14 +14707,14 @@ msgstr "浮雕式 (绿/品红)"
 msgid "attachments [options] [AID1:out1 [AID2:out2 ...]]"
 msgstr "attachments [选项] [AID1:输出1 [AID2:输出2 ...]]"
 
-#: src/common/kax_info.cpp:658
-#: src/common/kax_info.cpp:834
+#: src/common/kax_info.cpp:665
+#: src/common/kax_info.cpp:841
 #: src/input/r_matroska.cpp:131
 #, no-c-format
 msgid "audio"
 msgstr "音频"
 
-#: src/common/kax_info.cpp:627
+#: src/common/kax_info.cpp:634
 #, no-c-format
 msgid "bits per sample: {0}"
 msgstr "采样深度: {0}"
@@ -14729,24 +14729,24 @@ msgstr "双眼同块 (左先)"
 msgid "both eyes laced in one block (right first)"
 msgstr "双眼同块 (右先)"
 
-#: src/common/kax_info.cpp:741
+#: src/common/kax_info.cpp:748
 #, no-c-format
 msgid "bottom field displayed first, bottom field stored first"
 msgstr "底场先显示，底场先存储"
 
-#: src/common/kax_info.cpp:742
+#: src/common/kax_info.cpp:749
 #, no-c-format
 msgid "bottom field displayed first, top field stored first"
 msgstr "底场先显示，顶场先存储"
 
-#: src/common/kax_info.cpp:661
-#: src/common/kax_info.cpp:837
+#: src/common/kax_info.cpp:668
+#: src/common/kax_info.cpp:844
 #: src/input/r_matroska.cpp:132
 #, no-c-format
 msgid "buttons"
 msgstr "按钮"
 
-#: src/common/kax_info.cpp:626
+#: src/common/kax_info.cpp:633
 #, no-c-format
 msgid "channels: {0}"
 msgstr "声道数: {0}"
@@ -14776,7 +14776,7 @@ msgstr "列交错 (左先)"
 msgid "column interleaved (right first)"
 msgstr "列交错 (右先)"
 
-#: src/common/kax_info.cpp:782
+#: src/common/kax_info.cpp:789
 #, no-c-format
 msgid "compression"
 msgstr "压缩"
@@ -14786,7 +14786,7 @@ msgstr "压缩"
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: file_num 未找到。 {0}\n"
 
-#: src/common/kax_info.cpp:716
+#: src/common/kax_info.cpp:723
 #, no-c-format
 msgid "cubemap"
 msgstr "立方面（cubemap）"
@@ -14801,7 +14801,7 @@ msgstr "cues [选项] [TID1:输出1 [TID2:输出2 ...]]"
 msgid "cuesheet [options] out.cue"
 msgstr "cuesheet [选项] 输出.cue"
 
-#: src/common/kax_info.cpp:647
+#: src/common/kax_info.cpp:654
 #, no-c-format
 msgid "default duration: {0:.3f}ms ({1:.3f} frames/fields per second for a video track)"
 msgstr "默认帧时长: {0:.3f}毫秒 (对于视频轨道为 {1:.3f} 帧/场每秒)"
@@ -14811,27 +14811,27 @@ msgstr "默认帧时长: {0:.3f}毫秒 (对于视频轨道为 {1:.3f} 帧/场每
 msgid "deflateInit() failed. Result: {0}\n"
 msgstr "deflateInit() 失败。结果: {0}\n"
 
-#: src/common/kax_info.cpp:1014
+#: src/common/kax_info.cpp:1021
 #, no-c-format
 msgid "discardable, "
 msgstr "可丢弃，"
 
-#: src/common/kax_info.cpp:632
+#: src/common/kax_info.cpp:639
 #, no-c-format
 msgid "display height: {0}"
 msgstr "显示高度: {0}"
 
-#: src/common/kax_info.cpp:631
+#: src/common/kax_info.cpp:638
 #, no-c-format
 msgid "display width: {0}"
 msgstr "显示宽度: {0}"
 
-#: src/common/kax_info.cpp:783
+#: src/common/kax_info.cpp:790
 #, no-c-format
 msgid "encryption"
 msgstr "加密"
 
-#: src/common/kax_info.cpp:715
+#: src/common/kax_info.cpp:722
 #, no-c-format
 msgid "equirectangular"
 msgstr "等距圆柱（equirectangular）"
@@ -14911,7 +14911,7 @@ msgstr "字幕文件不包含字节顺序标记 (BOM) 且编码与系统当前�
 msgid "generic video"
 msgstr "常规视频"
 
-#: src/common/kax_info.cpp:794
+#: src/common/kax_info.cpp:801
 #, no-c-format
 msgid "header removal"
 msgstr "除头"
@@ -14926,7 +14926,7 @@ msgstr "inflateInit() 失败。结果: {0}\n"
 msgid "invalid language tag '{0}': {1}"
 msgstr "'{0} {1}' 中的轨道 ID 或语言代码无效。\n"
 
-#: src/common/kax_info.cpp:1012
+#: src/common/kax_info.cpp:1019
 #, no-c-format
 msgid "key, "
 msgstr "关键帧，"
@@ -14936,17 +14936,17 @@ msgstr "关键帧，"
 msgid "language"
 msgstr "语言"
 
-#: src/common/kax_info.cpp:638
+#: src/common/kax_info.cpp:645
 #, fuzzy, no-c-format
 msgid "language (IETF BCP 47): {0}"
 msgstr "标签语言 (IETF)"
 
-#: src/common/kax_info.cpp:637
+#: src/common/kax_info.cpp:644
 #, no-c-format
 msgid "language: {0}"
 msgstr "语言: {0}"
 
-#: src/common/kax_info.cpp:457
+#: src/common/kax_info.cpp:464
 #, no-c-format
 msgid "length {0}, data: {1}"
 msgstr "长度 {0}，数据: {1}"
@@ -15077,7 +15077,7 @@ msgstr "文件 {0} 第 {1} 行调用的 memory.cpp/safememdup(): malloc() 对 {2
 msgid "memory.cpp/saferealloc() called from file {0}, line {1}: realloc() returned nullptr for a size of {2} bytes.\n"
 msgstr "文件 {0} 第 {1} 行调用的 memory.cpp/saferealloc() : realloc() 对 {2} 字节的大小返回了 null 指针。\n"
 
-#: src/common/kax_info.cpp:717
+#: src/common/kax_info.cpp:724
 #, no-c-format
 msgid "mesh"
 msgstr "网状（mesh）"
@@ -15234,7 +15234,7 @@ msgstr "mkvmerge 支持两种章节格式: OGM 风格的文本格式和全功能
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmerge 被 SIGINT 中断 (按了 Ctrl+C？)\n"
 
-#: src/common/kax_info.cpp:583
+#: src/common/kax_info.cpp:590
 #, no-c-format
 msgid "mkvmerge/mkvextract track ID: {0}"
 msgstr "mkvmerge/mkvextract 轨道 ID: {0}"
@@ -15279,7 +15279,7 @@ msgstr "mpeg_ps_reader: 不该发生 #1。 {0}"
 msgid "mpeg_ps_reader: Should not have happened #2. {0}"
 msgstr "mpeg_ps_reader: 不该发生 #2。 {0}"
 
-#: src/common/kax_info.cpp:802
+#: src/common/kax_info.cpp:809
 #, no-c-format
 msgid "no encryption"
 msgstr "未加密"
@@ -15294,12 +15294,12 @@ msgstr "无错误发生"
 msgid "no language selected"
 msgstr ""
 
-#: src/common/kax_info.cpp:815
+#: src/common/kax_info.cpp:822
 #, no-c-format
 msgid "no signature algorithm"
 msgstr "未使用签名算法"
 
-#: src/common/kax_info.cpp:824
+#: src/common/kax_info.cpp:831
 #, no-c-format
 msgid "no signature hash algorithm"
 msgstr "未使用签名散列算法"
@@ -15320,7 +15320,7 @@ msgstr "ogg_sync_buffer 失败\n"
 msgid "or"
 msgstr "或"
 
-#: src/common/kax_info.cpp:625
+#: src/common/kax_info.cpp:632
 #, no-c-format
 msgid "output sampling freq: {0}"
 msgstr "输出采样率: {0}"
@@ -15330,37 +15330,37 @@ msgstr "输出采样率: {0}"
 msgid "passthrough"
 msgstr "呈递"
 
-#: src/common/kax_info.cpp:636
+#: src/common/kax_info.cpp:643
 #, no-c-format
 msgid "pixel crop bottom: {0}"
 msgstr "下边裁剪像素: {0}"
 
-#: src/common/kax_info.cpp:633
+#: src/common/kax_info.cpp:640
 #, no-c-format
 msgid "pixel crop left: {0}"
 msgstr "左边裁剪像素: {0}"
 
-#: src/common/kax_info.cpp:635
+#: src/common/kax_info.cpp:642
 #, no-c-format
 msgid "pixel crop right: {0}"
 msgstr "右边裁剪像素: {0}"
 
-#: src/common/kax_info.cpp:634
+#: src/common/kax_info.cpp:641
 #, no-c-format
 msgid "pixel crop top: {0}"
 msgstr "上边裁剪像素: {0}"
 
-#: src/common/kax_info.cpp:630
+#: src/common/kax_info.cpp:637
 #, no-c-format
 msgid "pixel height: {0}"
 msgstr "像素高度: {0}"
 
-#: src/common/kax_info.cpp:629
+#: src/common/kax_info.cpp:636
 #, no-c-format
 msgid "pixel width: {0}"
 msgstr "像素宽度: {0}"
 
-#: src/common/kax_info.cpp:738
+#: src/common/kax_info.cpp:745
 #, no-c-format
 msgid "progressive"
 msgstr "逐行扫描"
@@ -15385,12 +15385,12 @@ msgstr "real_reader: 无法为轨道 id {0} (描述信息长度: {1}) 找到 Rea
 msgid "real_reader: Only audio header versions 3, 4 and 5 are supported. Track ID {0} uses version {1} and will be skipped.\n"
 msgstr "real_reader: 仅支持第 3、4、5 版的音频头。轨道 ID {0} 所用版本为 {1}，将被跳过。\n"
 
-#: src/common/kax_info.cpp:714
+#: src/common/kax_info.cpp:721
 #, no-c-format
 msgid "rectangular"
 msgstr "方形（rectangular）"
 
-#: src/common/kax_info.cpp:771
+#: src/common/kax_info.cpp:778
 #, no-c-format
 msgid "rest: unknown"
 msgstr "其他: 未知"
@@ -15405,7 +15405,7 @@ msgstr "行交错 (左先)"
 msgid "row interleaved (right first)"
 msgstr "行交错 (右先)"
 
-#: src/common/kax_info.cpp:624
+#: src/common/kax_info.cpp:631
 #, no-c-format
 msgid "sampling freq: {0}"
 msgstr "采样率: {0}"
@@ -15420,13 +15420,13 @@ msgstr "并行 (左先)"
 msgid "side by side (right first)"
 msgstr "并行 (右先)"
 
-#: src/common/kax_info.cpp:479
+#: src/common/kax_info.cpp:486
 #, no-c-format
 msgid "size unknown"
 msgstr "大小未知"
 
-#: src/common/kax_info.cpp:478
-#: src/common/kax_info.cpp:842
+#: src/common/kax_info.cpp:485
+#: src/common/kax_info.cpp:849
 #, no-c-format
 msgid "size {0}"
 msgstr "大小 {0}"
@@ -15441,8 +15441,8 @@ msgstr "ssa_reader: 无效格式。“[Events]”段中未找到“Format”行�
 msgid "subtitle"
 msgstr "字幕"
 
-#: src/common/kax_info.cpp:660
-#: src/common/kax_info.cpp:836
+#: src/common/kax_info.cpp:667
+#: src/common/kax_info.cpp:843
 #, no-c-format
 msgid "subtitles"
 msgstr "字幕"
@@ -15457,7 +15457,7 @@ msgstr "tags [选项] 输出.xml"
 msgid "text subtitles"
 msgstr "文本字幕"
 
-#: src/merge/mkvmerge.cpp:2822
+#: src/merge/mkvmerge.cpp:2820
 #, no-c-format
 msgid "timestamps"
 msgstr "时间戳"
@@ -15477,22 +15477,22 @@ msgstr "上下 (左先)"
 msgid "top bottom (right first)"
 msgstr "上下 (右先)"
 
-#: src/common/kax_info.cpp:743
+#: src/common/kax_info.cpp:750
 #, no-c-format
 msgid "top field displayed first, bottom field stored first"
 msgstr "顶场先显示，底场先存储"
 
-#: src/common/kax_info.cpp:739
+#: src/common/kax_info.cpp:746
 #, no-c-format
 msgid "top field displayed first, top field stored first"
 msgstr "顶场先显示，顶场先存储"
 
-#: src/merge/mkvmerge.cpp:2814
+#: src/merge/mkvmerge.cpp:2812
 #, no-c-format
 msgid "track name"
 msgstr "轨道名称"
 
-#: src/common/kax_info.cpp:881
+#: src/common/kax_info.cpp:888
 #, no-c-format
 msgid "track number {0}, {1} frame(s), timestamp {2}"
 msgstr "轨道编号 {0}, {1} 帧, 时间戳 {2}"
@@ -15509,16 +15509,16 @@ msgstr "tta_reader: c’tor 中 tag_size < 0。 {0}\n"
 
 #: src/common/file_types.cpp:113
 #: src/common/fs_sys_helpers/windows.cpp:191
-#: src/common/kax_info.cpp:662
-#: src/common/kax_info.cpp:718
-#: src/common/kax_info.cpp:744
-#: src/common/kax_info.cpp:773
-#: src/common/kax_info.cpp:784
-#: src/common/kax_info.cpp:795
-#: src/common/kax_info.cpp:808
-#: src/common/kax_info.cpp:817
-#: src/common/kax_info.cpp:827
-#: src/common/kax_info.cpp:838
+#: src/common/kax_info.cpp:669
+#: src/common/kax_info.cpp:725
+#: src/common/kax_info.cpp:751
+#: src/common/kax_info.cpp:780
+#: src/common/kax_info.cpp:791
+#: src/common/kax_info.cpp:802
+#: src/common/kax_info.cpp:815
+#: src/common/kax_info.cpp:824
+#: src/common/kax_info.cpp:834
+#: src/common/kax_info.cpp:845
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:130
 #: src/input/r_matroska.cpp:2818
@@ -15542,13 +15542,13 @@ msgstr "未知，格式标识 0x{0:04x}"
 msgid "unnamed"
 msgstr "未命名"
 
-#: src/common/kax_info.cpp:740
+#: src/common/kax_info.cpp:747
 #, no-c-format
 msgid "unspecified"
 msgstr "未指定"
 
-#: src/common/kax_info.cpp:659
-#: src/common/kax_info.cpp:835
+#: src/common/kax_info.cpp:666
+#: src/common/kax_info.cpp:842
 #: src/input/r_matroska.cpp:133
 #, no-c-format
 msgid "video"
@@ -15564,12 +15564,12 @@ msgstr "vobsub_reader: 字幕文件读取失败"
 msgid "x"
 msgstr "x"
 
-#: src/common/kax_info.cpp:830
+#: src/common/kax_info.cpp:837
 #, no-c-format
 msgid "{0} (track ID for mkvmerge & mkvextract: {1})"
 msgstr "{0} (mkvmerge & mkvextract 的轨道 ID: {1})"
 
-#: src/common/kax_info.cpp:847
+#: src/common/kax_info.cpp:854
 #, no-c-format
 msgid "{0} ({1:.3f} frames/fields per second for a video track)"
 msgstr "{0} (对应视频轨的 {1:.3f} 帧/场每秒)"
@@ -15580,17 +15580,17 @@ msgid "{0} byte"
 msgid_plural "{0} bytes"
 msgstr[0] "{0} 字节"
 
-#: src/common/kax_info.cpp:951
+#: src/common/kax_info.cpp:958
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"
 msgstr "{0} 帧, {1} 轨, 时间戳 {2}, 时长 {3}, 大小 {4}, adler 0x{5:08x}{6}{7}\n"
 
-#: src/common/kax_info.cpp:1070
+#: src/common/kax_info.cpp:1077
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}\n"
 msgstr "{0} 帧, {1} 轨, 时间戳 {2}, 大小 {3}, adler 0x{4:08x}{5}\n"
 
-#: src/common/kax_info.cpp:961
+#: src/common/kax_info.cpp:968
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"
 msgstr "{0} 帧, {1} 轨, 时间戳 {2}, 大小 {3}, adler 0x{4:08x}{5}{6}\n"
@@ -15670,7 +15670,7 @@ msgstr "{0}:「{1} {2}」中缺少除数。\n"
 msgid "{0}: missing track ID in '{1} {2}'.\n"
 msgstr "{0}:「{1} {2}」中缺少轨道 ID。\n"
 
-#: src/common/kax_info.cpp:1016
+#: src/common/kax_info.cpp:1023
 #, no-c-format
 msgid "{0}track number {1}, {2} frame(s), timestamp {3}"
 msgstr "{0}轨道编号 {1}, {2} 帧, 时间戳 {3}"

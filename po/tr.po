@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-03-09 21:22+0100\n"
+"POT-Creation-Date: 2021-03-14 21:31+0100\n"
 "PO-Revision-Date: 2021-03-10 17:22+0000\n"
 "Last-Translator: BouRock\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -433,10 +433,10 @@ msgid "  --disable-lacing         Do not use lacing.\n"
 msgstr "  --disable-lacing         Bağlama kullanma.\n"
 
 #: src/merge/mkvmerge.cpp:141
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"  --disable-language-ietf  Do not write LanguageIETF track header and\n"
-"                           ChapLanguageIETF chapter elements.\n"
+"  --disable-language-ietf  Do not write IETF BCP 47 language elements in\n"
+"                           track headers, chapters and tags.\n"
 msgstr ""
 "  --disable-language-ietf  LanguageIETF iz üstbilgisini ve ChapLanguageIETF\n"
 "                            bölüm öğelerini yazma.\n"
@@ -1198,65 +1198,65 @@ msgstr "  X:  onaltılık içinde ikilik\n"
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
 msgstr "  [ <file1> <file2> ],      \"<file1> + <file2>\" ile Aynı.\n"
 
-#: src/common/kax_info.cpp:388
+#: src/common/kax_info.cpp:395
 #, no-c-format
 msgid " (FourCC: {0})"
 msgstr " (FourCC: {0})"
 
-#: src/common/kax_info.cpp:397
+#: src/common/kax_info.cpp:404
 #, no-c-format
 msgid " (H.264 profile: {0} @L{1}.{2})"
 msgstr " (H.264 profili: {0} @L{1}.{2})"
 
-#: src/common/kax_info.cpp:416
+#: src/common/kax_info.cpp:423
 #, no-c-format
 msgid " (HEVC profile: {0} @L{1}.{2})"
 msgstr " (HEVC profili: {0} @L{1}.{2})"
 
-#: src/common/kax_info.cpp:463
-#: src/common/kax_info.cpp:605
-#: src/common/kax_info.cpp:899
-#: src/common/kax_info.cpp:1044
+#: src/common/kax_info.cpp:470
+#: src/common/kax_info.cpp:612
+#: src/common/kax_info.cpp:906
+#: src/common/kax_info.cpp:1051
 #, no-c-format
 msgid " (adler: 0x{0:08x})"
 msgstr " (adler: 0x{0:08x})"
 
-#: src/common/kax_info.cpp:730
+#: src/common/kax_info.cpp:737
 #, no-c-format
 msgid " (aspect ratio)"
 msgstr " (en-boy oranı)"
 
-#: src/common/kax_info.cpp:728
+#: src/common/kax_info.cpp:735
 #, no-c-format
 msgid " (centimeters)"
 msgstr " (santimetre)"
 
-#: src/common/kax_info.cpp:758
+#: src/common/kax_info.cpp:765
 #, no-c-format
 msgid " (fixed)"
 msgstr " (sabit)"
 
-#: src/common/kax_info.cpp:392
+#: src/common/kax_info.cpp:399
 #, no-c-format
 msgid " (format tag: 0x{0:04x})"
 msgstr " (biçim etiketi: 0x{0:04x})"
 
-#: src/common/kax_info.cpp:756
+#: src/common/kax_info.cpp:763
 #, no-c-format
 msgid " (free resizing)"
 msgstr " (serbest yen.boyutlandırma)"
 
-#: src/common/kax_info.cpp:729
+#: src/common/kax_info.cpp:736
 #, no-c-format
 msgid " (inches)"
 msgstr " (inç)"
 
-#: src/common/kax_info.cpp:757
+#: src/common/kax_info.cpp:764
 #, no-c-format
 msgid " (keep aspect ratio)"
 msgstr " (en-boy oranını tut)"
 
-#: src/common/kax_info.cpp:727
+#: src/common/kax_info.cpp:734
 #, no-c-format
 msgid " (pixels)"
 msgstr " (piksel)"
@@ -1316,18 +1316,18 @@ msgstr " Diğer seçenekler:\n"
 msgid " Segment info handling:\n"
 msgstr " Parça bilgisi işleme:\n"
 
-#: src/common/kax_info.cpp:288
+#: src/common/kax_info.cpp:295
 #, no-c-format
 msgid " at 0x{0:x}"
 msgstr " bulunma yeri 0x{0:x}"
 
-#: src/common/kax_info.cpp:288
+#: src/common/kax_info.cpp:295
 #: src/extract/mkvextract.cpp:105
 #, no-c-format
 msgid " at {0}"
 msgstr " bulunma yeri {0}"
 
-#: src/common/kax_info.cpp:298
+#: src/common/kax_info.cpp:305
 #, no-c-format
 msgid " data size {0}"
 msgstr " veri boyutu {0}"
@@ -1354,12 +1354,12 @@ msgid_plural " seconds"
 msgstr[0] " saniye"
 msgstr[1] " saniye"
 
-#: src/common/kax_info.cpp:294
+#: src/common/kax_info.cpp:301
 #, no-c-format
 msgid " size is unknown"
 msgstr " boyut bilinmiyor"
 
-#: src/common/kax_info.cpp:292
+#: src/common/kax_info.cpp:299
 #, no-c-format
 msgid " size {0}"
 msgstr " boyut {0}"
@@ -2339,32 +2339,32 @@ msgstr "Dilin ayarlanacağı &zaman:"
 msgid "&Window"
 msgstr "&Pencere"
 
-#: src/merge/mkvmerge.cpp:2525
+#: src/merge/mkvmerge.cpp:2523
 #, no-c-format
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' en-boy oranına ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2532
+#: src/merge/mkvmerge.cpp:2530
 #, no-c-format
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr "'--aspect-ratio-factor' en-boy oranı etkenine ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2335
+#: src/merge/mkvmerge.cpp:2333
 #, no-c-format
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "'--attachment-description' açıklamaya ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2344
+#: src/merge/mkvmerge.cpp:2342
 #, no-c-format
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "'--attachment-mime-type' MIME türüne ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2354
+#: src/merge/mkvmerge.cpp:2352
 #, no-c-format
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' isime ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2390
+#: src/merge/mkvmerge.cpp:2388
 #, no-c-format
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "'--chapter-charset' karakter kümesine ihtiyacı olur.\n"
@@ -2379,7 +2379,7 @@ msgstr "'--chapter-charset' sadece bir defa '--chapter-charset {0}' içinde veri
 msgid "'--chapter-charset' must be given before '--chapters' in '--chapter-charset {0}'.\n"
 msgstr "'--chapter-charset', '--chapter-charset {0}' içinde '--chapters' dan önce verilmek zorundadır.\n"
 
-#: src/merge/mkvmerge.cpp:2383
+#: src/merge/mkvmerge.cpp:2381
 #, no-c-format
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "'--chapter-language' dile ihtiyacı olur.\n"
@@ -2394,12 +2394,12 @@ msgstr "'--chapter-language' sadece bir defa '--chapter-language {0}' içinde ve
 msgid "'--chapter-language' must be given before '--chapters' in '--chapter-language {0}'.\n"
 msgstr "'--chapter-language', '--chapter-language {0}' içinde '--chapters' dan önce verilmek zorundadır.\n"
 
-#: src/merge/mkvmerge.cpp:2414
+#: src/merge/mkvmerge.cpp:2412
 #, no-c-format
 msgid "'--chapters' lacks the file name.\n"
 msgstr "'--chapters' dosya adına ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2307
+#: src/merge/mkvmerge.cpp:2308
 #, no-c-format
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length' uzunluğa ihtiyacı olur.\n"
@@ -2409,22 +2409,22 @@ msgstr "'--cluster-length' uzunluğa ihtiyacı olur.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' bağımsız değişkeni eksik.\n"
 
-#: src/merge/mkvmerge.cpp:2546
+#: src/merge/mkvmerge.cpp:2544
 #, no-c-format
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' kırpma parametrelerine ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2404
+#: src/merge/mkvmerge.cpp:2402
 #, no-c-format
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "'--cue-chapter-name-format' biçime ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2407
+#: src/merge/mkvmerge.cpp:2405
 #, no-c-format
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format', '--chapters' dan önce verilmek zorundadır.\n"
 
-#: src/merge/mkvmerge.cpp:2539
+#: src/merge/mkvmerge.cpp:2537
 #, no-c-format
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' boyutlara ihtiyacı olur.\n"
@@ -2434,7 +2434,7 @@ msgstr "'--display-dimensions' boyutlara ihtiyacı olur.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' bağımsız değişkenine ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2423
+#: src/merge/mkvmerge.cpp:2421
 #, no-c-format
 msgid "'--generate-chapters' lacks the mode.\n"
 msgstr "'--generate-chapters' kipe ihtiyacı olur.\n"
@@ -2444,42 +2444,42 @@ msgstr "'--generate-chapters' kipe ihtiyacı olur.\n"
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
 msgstr "'--generate-chapters-name-template' isim şablonuna ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2374
+#: src/merge/mkvmerge.cpp:2372
 #, no-c-format
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' dosya adına ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2897
+#: src/merge/mkvmerge.cpp:2895
 #, no-c-format
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "'--link' sadece '--split' ile olan birleşimde faydalıdır.\n"
 
-#: src/merge/mkvmerge.cpp:2293
+#: src/merge/mkvmerge.cpp:2294
 #, no-c-format
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "'--link-to-next' sonraki UID'ye ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2286
+#: src/merge/mkvmerge.cpp:2287
 #, no-c-format
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' önceki UID'ye ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2300
+#: src/merge/mkvmerge.cpp:2301
 #, no-c-format
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "'--segment-uid' parça UID'ye ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2430
+#: src/merge/mkvmerge.cpp:2428
 #, no-c-format
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "'--segmentinfo' dosya adına ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2267
+#: src/merge/mkvmerge.cpp:2268
 #, no-c-format
 msgid "'--split' lacks the size.\n"
 msgstr "'--split' boyuta ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2274
+#: src/merge/mkvmerge.cpp:2275
 #, no-c-format
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' dosya sayısına ihtiyacı olur.\n"
@@ -2489,12 +2489,12 @@ msgstr "'--split-max-files' dosya sayısına ihtiyacı olur.\n"
 msgid "'--timestamp-scale' was used more than once.\n"
 msgstr "'--timestamp-scale' birden fazla kullanıldı.\n"
 
-#: src/merge/mkvmerge.cpp:2259
+#: src/merge/mkvmerge.cpp:2260
 #, no-c-format
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' başlığa ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2831
+#: src/merge/mkvmerge.cpp:2829
 #, no-c-format
 msgid "'--track-order' may only be given once.\n"
 msgstr "'--track-order' sadece bir defa verilebilir.\n"
@@ -2566,13 +2566,13 @@ msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Addition
 msgstr "'{0}', '{1}' içinde geçerli bir IETF BCP 47/RFC 5646 dil etiketi değil. Ayrıştırıcıdan gelen ilave bilgiler: {2}\n"
 
 #: src/common/xml/ebml_chapters_converter.cpp:151
-#: src/common/xml/ebml_tags_converter.cpp:114
+#: src/common/xml/ebml_tags_converter.cpp:125
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
 msgstr "'{0}', geçerli bir IETF BCP 47/RFC 5646 dil etiketi değil. Ayrıştırıcıdan gelen ilave bilgiler: {1}"
 
 #: src/common/xml/ebml_chapters_converter.cpp:173
-#: src/common/xml/ebml_tags_converter.cpp:136
+#: src/common/xml/ebml_tags_converter.cpp:147
 #, no-c-format
 msgid "'{0}' is not a valid ISO 639-2 language code."
 msgstr "'{0}', geçerli ISO 639-2 dil kodu değil."
@@ -2672,87 +2672,87 @@ msgstr "'{0}', bir dosya adına ihtiyacı olur.\n"
 #: src/merge/mkvmerge.cpp:2070
 #: src/merge/mkvmerge.cpp:2135
 #: src/merge/mkvmerge.cpp:2201
-#: src/merge/mkvmerge.cpp:2246
-#: src/merge/mkvmerge.cpp:2445
-#: src/merge/mkvmerge.cpp:2459
-#: src/merge/mkvmerge.cpp:2693
-#: src/merge/mkvmerge.cpp:2707
-#: src/merge/mkvmerge.cpp:2714
-#: src/merge/mkvmerge.cpp:2721
-#: src/merge/mkvmerge.cpp:2728
-#: src/merge/mkvmerge.cpp:2735
-#: src/merge/mkvmerge.cpp:2742
-#: src/merge/mkvmerge.cpp:2749
-#: src/merge/mkvmerge.cpp:2756
-#: src/merge/mkvmerge.cpp:2763
-#: src/merge/mkvmerge.cpp:2770
-#: src/merge/mkvmerge.cpp:2777
-#: src/merge/mkvmerge.cpp:2784
-#: src/merge/mkvmerge.cpp:2798
-#: src/merge/mkvmerge.cpp:2805
-#: src/merge/mkvmerge.cpp:2812
-#: src/merge/mkvmerge.cpp:2820
-#: src/merge/mkvmerge.cpp:2828
-#: src/merge/mkvmerge.cpp:2838
-#: src/merge/mkvmerge.cpp:2845
-#: src/merge/mkvmerge.cpp:2852
-#: src/merge/mkvmerge.cpp:2864
-#: src/merge/mkvmerge.cpp:2871
-#: src/merge/mkvmerge.cpp:2878
+#: src/merge/mkvmerge.cpp:2247
+#: src/merge/mkvmerge.cpp:2443
+#: src/merge/mkvmerge.cpp:2457
+#: src/merge/mkvmerge.cpp:2691
+#: src/merge/mkvmerge.cpp:2705
+#: src/merge/mkvmerge.cpp:2712
+#: src/merge/mkvmerge.cpp:2719
+#: src/merge/mkvmerge.cpp:2726
+#: src/merge/mkvmerge.cpp:2733
+#: src/merge/mkvmerge.cpp:2740
+#: src/merge/mkvmerge.cpp:2747
+#: src/merge/mkvmerge.cpp:2754
+#: src/merge/mkvmerge.cpp:2761
+#: src/merge/mkvmerge.cpp:2768
+#: src/merge/mkvmerge.cpp:2775
+#: src/merge/mkvmerge.cpp:2782
+#: src/merge/mkvmerge.cpp:2796
+#: src/merge/mkvmerge.cpp:2803
+#: src/merge/mkvmerge.cpp:2810
+#: src/merge/mkvmerge.cpp:2818
+#: src/merge/mkvmerge.cpp:2826
+#: src/merge/mkvmerge.cpp:2836
+#: src/merge/mkvmerge.cpp:2843
+#: src/merge/mkvmerge.cpp:2850
+#: src/merge/mkvmerge.cpp:2862
+#: src/merge/mkvmerge.cpp:2869
+#: src/merge/mkvmerge.cpp:2876
 #, no-c-format
 msgid "'{0}' lacks its argument.\n"
 msgstr "'{0}', bağımsız değişkene ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2518
+#: src/merge/mkvmerge.cpp:2516
 #, no-c-format
 msgid "'{0}' lacks the FourCC.\n"
 msgstr "'{0}', FourCC'ye ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2397
-#: src/merge/mkvmerge.cpp:2700
+#: src/merge/mkvmerge.cpp:2395
+#: src/merge/mkvmerge.cpp:2698
 #, no-c-format
 msgid "'{0}' lacks the delay.\n"
 msgstr "'{0}', gecikmeye ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2364
+#: src/merge/mkvmerge.cpp:2362
 #, no-c-format
 msgid "'{0}' lacks the file name.\n"
 msgstr "'{0}', dosya adına ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2553
-#: src/merge/mkvmerge.cpp:2560
-#: src/merge/mkvmerge.cpp:2567
-#: src/merge/mkvmerge.cpp:2574
-#: src/merge/mkvmerge.cpp:2581
-#: src/merge/mkvmerge.cpp:2588
-#: src/merge/mkvmerge.cpp:2595
-#: src/merge/mkvmerge.cpp:2602
-#: src/merge/mkvmerge.cpp:2609
-#: src/merge/mkvmerge.cpp:2616
-#: src/merge/mkvmerge.cpp:2623
-#: src/merge/mkvmerge.cpp:2630
-#: src/merge/mkvmerge.cpp:2637
-#: src/merge/mkvmerge.cpp:2644
-#: src/merge/mkvmerge.cpp:2651
-#: src/merge/mkvmerge.cpp:2658
-#: src/merge/mkvmerge.cpp:2665
-#: src/merge/mkvmerge.cpp:2672
-#: src/merge/mkvmerge.cpp:2679
-#: src/merge/mkvmerge.cpp:2686
+#: src/merge/mkvmerge.cpp:2551
+#: src/merge/mkvmerge.cpp:2558
+#: src/merge/mkvmerge.cpp:2565
+#: src/merge/mkvmerge.cpp:2572
+#: src/merge/mkvmerge.cpp:2579
+#: src/merge/mkvmerge.cpp:2586
+#: src/merge/mkvmerge.cpp:2593
+#: src/merge/mkvmerge.cpp:2600
+#: src/merge/mkvmerge.cpp:2607
+#: src/merge/mkvmerge.cpp:2614
+#: src/merge/mkvmerge.cpp:2621
+#: src/merge/mkvmerge.cpp:2628
+#: src/merge/mkvmerge.cpp:2635
+#: src/merge/mkvmerge.cpp:2642
+#: src/merge/mkvmerge.cpp:2649
+#: src/merge/mkvmerge.cpp:2656
+#: src/merge/mkvmerge.cpp:2663
+#: src/merge/mkvmerge.cpp:2670
+#: src/merge/mkvmerge.cpp:2677
+#: src/merge/mkvmerge.cpp:2684
 #, no-c-format
 msgid "'{0}' lacks the parameter.\n"
 msgstr "'{0}', parametreye ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2791
+#: src/merge/mkvmerge.cpp:2789
 #, no-c-format
 msgid "'{0}' lacks the track ID.\n"
 msgstr "'{0}', iz ID'sine ihtiyacı olur.\n"
 
-#: src/merge/mkvmerge.cpp:2483
-#: src/merge/mkvmerge.cpp:2490
-#: src/merge/mkvmerge.cpp:2497
-#: src/merge/mkvmerge.cpp:2504
-#: src/merge/mkvmerge.cpp:2511
+#: src/merge/mkvmerge.cpp:2481
+#: src/merge/mkvmerge.cpp:2488
+#: src/merge/mkvmerge.cpp:2495
+#: src/merge/mkvmerge.cpp:2502
+#: src/merge/mkvmerge.cpp:2509
 #, no-c-format
 msgid "'{0}' lacks the track numbers.\n"
 msgstr "'{0}', iz numaralarına ihtiyacı olur.\n"
@@ -2781,12 +2781,12 @@ msgstr "'{0}': Deneysel kipte yazılmış bir Opus izini kopyalıyorsunuz. Ortay
 msgid "'{0}': {1}"
 msgstr "'{0}': {1}"
 
-#: src/common/kax_info.cpp:275
+#: src/common/kax_info.cpp:282
 #, no-c-format
 msgid "(Known element, but invalid at this position: {0}; ID: 0x{1} size: {2})"
 msgstr "(Bilinmeyen öğe, ancak bu konumda geçersiz: {0}; ID: 0x{1} boyut: {2})"
 
-#: src/common/kax_info.cpp:270
+#: src/common/kax_info.cpp:277
 #, no-c-format
 msgid "(Unknown element: {0}; ID: 0x{1} size: {2})"
 msgstr "(Bilinmeyen öğe: {0}; ID: 0x{1} boyut: {2})"
@@ -2821,14 +2821,14 @@ msgstr ", tanımı '{0}'"
 msgid ", file name '{0}'"
 msgstr ", dosya adı '{0}'"
 
-#: src/common/kax_info.cpp:946
-#: src/common/kax_info.cpp:1066
+#: src/common/kax_info.cpp:953
+#: src/common/kax_info.cpp:1073
 #, no-c-format
 msgid ", position 0x{0:x}"
 msgstr ", konum 0x{0:x}"
 
-#: src/common/kax_info.cpp:946
-#: src/common/kax_info.cpp:1066
+#: src/common/kax_info.cpp:953
+#: src/common/kax_info.cpp:1073
 #, no-c-format
 msgid ", position {0}"
 msgstr ", konum {0}"
@@ -2853,7 +2853,7 @@ msgstr "--- '%1' işi tarafından verilen %2 zamanındaki uyarılar ---"
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify'. These are usually simply numbered starting from 0 (e.g. '2')."
 msgstr "1. 'mkvmerge --identify' tarafından listelenen bir ek kimliği olarak yorumlanacak bir sayı. Bunlar genellikle sadece 0'dan itibaren numaralandırılır (örn. '2')."
 
-#: src/common/kax_info.cpp:767
+#: src/common/kax_info.cpp:774
 #, no-c-format
 msgid "1: all frames"
 msgstr "1: tüm kareler"
@@ -2863,7 +2863,7 @@ msgstr "1: tüm kareler"
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
 msgstr "2. 'mkvmerge --identify' tarafından listelenen ekin benzersiz kimliği (UID) olarak yorumlanacak '=' öneki olan bir sayı. Bunlar genellikle rastgele görünen sayılardır (örn. '128975986723')."
 
-#: src/common/kax_info.cpp:769
+#: src/common/kax_info.cpp:776
 #, no-c-format
 msgid "2: codec private data"
 msgstr "2: kodek özel verisi"
@@ -2901,17 +2901,17 @@ msgstr "<Değiştirmeyin>"
 msgid "<No destination file>"
 msgstr "<Hedef dosya yok>"
 
-#: src/common/xml/ebml_tags_converter.cpp:97
+#: src/common/xml/ebml_tags_converter.cpp:108
 #, no-c-format
 msgid "<Simple> is missing the <Name> child."
 msgstr "<Simple> öğesinin <Name> alt öğesi eksik."
 
-#: src/common/xml/ebml_tags_converter.cpp:104
+#: src/common/xml/ebml_tags_converter.cpp:115
 #, no-c-format
 msgid "<Simple> must contain either a <String> or a <Binary> child."
 msgstr "<Simple>, ya <String> ya da <Binary> alt öğesi içermek zorundadır."
 
-#: src/common/xml/ebml_tags_converter.cpp:94
+#: src/common/xml/ebml_tags_converter.cpp:101
 #, no-c-format
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> öğesinin <Simple> alt öğesi eksik."
@@ -3695,7 +3695,7 @@ msgstr "Sonraki parçayla ilgili olarak gözden kaçan dosya adı."
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "Önceki parçayla ilgili olarak gözden kaçan dosya adı."
 
-#: src/merge/mkvmerge.cpp:3121
+#: src/merge/mkvmerge.cpp:3119
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "Hedef dosya yazılırken bir istisna meydana geldi."
@@ -3752,7 +3752,7 @@ msgstr "Ortam dosyalarını ilave et"
 msgid "Append to an e&xisting source file"
 msgstr "Mevcut bir kaynak dosyaya ila&ve et"
 
-#: src/merge/output_control.cpp:1896
+#: src/merge/output_control.cpp:1900
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "{4} ('{5}') nolu dosyadan {3}. ize ilave edilen, {1} ('{2}') nolu dosyadan {0}. iz.\n"
@@ -3922,7 +3922,7 @@ msgstr "Son dosya kaldırıldığında hedef dosya adını otomatik olarak &temi
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "Son dosya kaldırıldığında dosya başlığını otomatik olarak temi&zle"
 
-#: src/merge/mkvmerge.cpp:2219
+#: src/merge/mkvmerge.cpp:2221
 #, no-c-format
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr "Hedef dosya adı uzantısından dolayı otomatik olarak WebM uyum kipi etkinleştirilir.\n"
@@ -4277,8 +4277,8 @@ msgstr "KodekID '{1}' ile olan iz {0}, '{2}' dosyasına yazılamaz çünkü Kode
 msgid "Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already being written to the same file.\n"
 msgstr "KodekID '{1}' ile olan iz {0}, '{2}' dosyasına yazılamaz çünkü KodekID '{4}' ile olan iz {3} zaten aynı dosyaya yazılmış.\n"
 
-#: src/common/kax_info.cpp:1319
-#: src/common/kax_info.cpp:1323
+#: src/common/kax_info.cpp:1326
+#: src/common/kax_info.cpp:1330
 #: src/extract/tracks.cpp:564
 #: src/mkvtoolnix-gui/util/kax_info.cpp:209
 #, no-c-format
@@ -4886,7 +4886,7 @@ msgstr "Bu MPEG-1/2 izinden sıralı üstbilgi çıkartılamadı.\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "Ses izi {0} için bir indeks bulunamadı (avilib hata iletisi: {1}). İz atlanıyor.\n"
 
-#: src/merge/output_control.cpp:1822
+#: src/merge/output_control.cpp:1826
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "İlave edilirken gptzr bulunamadı. {0}\n"
@@ -5232,7 +5232,7 @@ msgstr "Cue iz konumları"
 msgid "Cues"
 msgstr "Cue'lar"
 
-#: src/common/kax_info.cpp:554
+#: src/common/kax_info.cpp:561
 #, no-c-format
 msgid "Cues (subentries will be skipped)"
 msgstr "Cue'lar (alt girişler atlanacaktır)"
@@ -5788,7 +5788,7 @@ msgstr "Bu iletiyi tekrar gösterme."
 msgid "Don't stop processing at the first cluster."
 msgstr "İlk kümede işlemeyi durdurma."
 
-#: src/merge/mkvmerge.cpp:3012
+#: src/merge/mkvmerge.cpp:3010
 #, no-c-format
 msgid "Done scanning playlists.\n"
 msgstr "Oynatma listelerini tarama bitti.\n"
@@ -6188,7 +6188,7 @@ msgstr "Matroska dosyası yazma hatası"
 msgid "Error:"
 msgstr "Hata:"
 
-#: src/common/kax_info.cpp:1290
+#: src/common/kax_info.cpp:1297
 #, no-c-format
 msgid "Error: Couldn't open source file {0} ({1})."
 msgstr "Hata: Kaynak dosya {0} ({1}) açılamadı."
@@ -6198,7 +6198,7 @@ msgstr "Hata: Kaynak dosya {0} ({1}) açılamadı."
 msgid "Error: No EBML head found."
 msgstr "Hata: Bulunan EBML başı yok."
 
-#: src/merge/mkvmerge.cpp:2213
+#: src/merge/mkvmerge.cpp:2215
 #, no-c-format
 msgid ""
 "Error: no destination file name was given.\n"
@@ -6261,7 +6261,7 @@ msgstr "Örnekler: 01:00:00 (bir saat sonra) ya da 1800s (1800 saniye sonra)."
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "Örnekler: 01:00:00,01:30:00 (bir saat sonra ve bir saat otuz dakika sonra) ya da 180s,300s,00:10:00 (üç, beş ve on dakika sonra)."
 
-#: src/merge/mkvmerge.cpp:3121
+#: src/merge/mkvmerge.cpp:3119
 #, no-c-format
 msgid "Exception details:"
 msgstr "İstisna ayrıntıları:"
@@ -6714,8 +6714,8 @@ msgstr "Kare oranı"
 msgid "Frame size #%1: %2"
 msgstr "Kare boyutu #%1: %2"
 
-#: src/common/kax_info.cpp:906
-#: src/common/kax_info.cpp:1051
+#: src/common/kax_info.cpp:913
+#: src/common/kax_info.cpp:1058
 #, no-c-format
 msgid "Frame with size {0}{1}{2}"
 msgstr "Boyutu {0}{1}{2} olan kare"
@@ -6725,8 +6725,8 @@ msgstr "Boyutu {0}{1}{2} olan kare"
 msgid "Frames/fields:"
 msgstr "Kareler/alanlar:"
 
-#: src/common/kax_info.cpp:905
-#: src/common/kax_info.cpp:1050
+#: src/common/kax_info.cpp:912
+#: src/common/kax_info.cpp:1057
 #, no-c-format
 msgid "Frame{0}{1}"
 msgstr "Kare{0}{1}"
@@ -7512,7 +7512,7 @@ msgid "Invalid change spec ({2}) in '{0} {1}'.\n"
 msgstr "'{0} {1}' içinde geçersiz değiştirme belirtisi ({2}).\n"
 
 #: src/merge/mkvmerge.cpp:1117
-#: src/merge/mkvmerge.cpp:3046
+#: src/merge/mkvmerge.cpp:3044
 #, no-c-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
 msgstr "'--split {1}' içinde '--split' için geçersiz karakter numarası '{0}': {2}\n"
@@ -8086,7 +8086,7 @@ msgstr "En düşük öncelik"
 msgid "M&ore actions"
 msgstr "Daha f&azla eylem"
 
-#: src/common/kax_info.cpp:826
+#: src/common/kax_info.cpp:833
 #, no-c-format
 msgid "MD5"
 msgstr "MD5"
@@ -8415,12 +8415,12 @@ msgstr "'{0}' bölümünde tercihlerin değişikliği istendi, ancak dosyada ilg
 msgid "More"
 msgstr "Daha Fazla"
 
-#: src/merge/mkvmerge.cpp:2347
+#: src/merge/mkvmerge.cpp:2345
 #, no-c-format
 msgid "More than one MIME type was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Tek bir ek için birden fazla MIME türü verildi. '{0}' göz ardı edilecektir ve bunun yerine '{1}' kullanılacaktır.\n"
 
-#: src/merge/mkvmerge.cpp:2338
+#: src/merge/mkvmerge.cpp:2336
 #, no-c-format
 msgid "More than one description was given for a single attachment.\n"
 msgstr "Tek bir ek için birden fazla tanım verildi.\n"
@@ -8430,7 +8430,7 @@ msgstr "Tek bir ek için birden fazla tanım verildi.\n"
 msgid "More than one file name has been given ('{0}' and '{1}').\n"
 msgstr "Birden fazla dosya adı verilmiş ('{0}' ve '{1}').\n"
 
-#: src/merge/mkvmerge.cpp:2357
+#: src/merge/mkvmerge.cpp:2355
 #, no-c-format
 msgid "More than one name was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Tek bir ek için birden fazla isim verildi. '{0}' göz ardı edilecektir ve bunun yerine '{1}' kullanılacaktır.\n"
@@ -8484,7 +8484,7 @@ msgstr "Çoklama uygulaması"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "\"%2\" dizininde \"%1\" dosyasına çoklama"
 
-#: src/merge/mkvmerge.cpp:3127
+#: src/merge/mkvmerge.cpp:3125
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "Çoklama {0} sürdü.\n"
@@ -8623,7 +8623,7 @@ msgstr "İlk karede bulunan AC-3 üstbilgisi yok; iz atlanacaktır.\n"
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "İlk karede bulunan DTS üstbilgisi yok; iz atlanacaktır.\n"
 
-#: src/common/kax_info.cpp:1226
+#: src/common/kax_info.cpp:1233
 #, no-c-format
 msgid "No EBML head found."
 msgstr "Bulunan EBML başı yok."
@@ -8779,7 +8779,7 @@ msgstr "Parça UID'si '{0}' dosyasında bulunamadı."
 msgid "No segment/level 0 element found."
 msgstr "Bulunan parça/seviye 0 öğesi yok."
 
-#: src/merge/mkvmerge.cpp:2900
+#: src/merge/mkvmerge.cpp:2898
 #, no-c-format
 msgid "No source files were given.\n"
 msgstr "Verilmiş kaynak dosyalar yok.\n"
@@ -9085,7 +9085,7 @@ msgstr "Sadece bir hedef dosyaya izin verildi.\n"
 msgid "Only one instance of <{0}> is allowed beneath <{1}> at position {2}."
 msgstr "{2} konumunda <{1}> altında <{0}> öğesinin sadece bir benzerine izin veriilr."
 
-#: src/common/xml/ebml_tags_converter.cpp:102
+#: src/common/xml/ebml_tags_converter.cpp:113
 #, no-c-format
 msgid "Only one of <String> and <Binary> may be used beneath <Simple> but not both at the same time."
 msgstr ""
@@ -9140,7 +9140,7 @@ msgstr "Sadece bu listede bir dili olan izler varsayılan olarak kopyalanması i
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
 msgstr "Sadece v7 ve daha yeni VobSub dosyaları desteklenir. Eğer daha eski sürüme sahipseniz, bu dosyaları v7 dosyalarına dönüştürmek için o zaman http://sourceforge.net/projects/guliverkli/ adresinden VSConv yardımcı uygulamasını kullanın.\n"
 
-#: src/merge/mkvmerge.cpp:3048
+#: src/merge/mkvmerge.cpp:3046
 #, no-c-format
 msgid "Only {0} chapter found in source files & chapter files."
 msgid_plural "Only {0} chapters found in source files & chapter files."
@@ -9362,7 +9362,7 @@ msgstr "İndekse güvenmek yerine bütün dosyayı ayrıştırın."
 msgid "Parser error:"
 msgstr "Ayrıştırıcı hatası:"
 
-#: src/common/kax_info.cpp:619
+#: src/common/kax_info.cpp:626
 #, no-c-format
 msgid "Parsing file"
 msgstr "Dosya ayrıştırılıyor"
@@ -9672,7 +9672,7 @@ msgstr "İlerleme: [{0}{1}] {2}%"
 
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
-#: src/merge/mkvmerge.cpp:2916
+#: src/merge/mkvmerge.cpp:2914
 #: src/merge/output_control.cpp:363
 #: src/propedit/tag_target.cpp:352
 #: src/propedit/tag_target.cpp:365
@@ -9869,7 +9869,7 @@ msgstr "Quicktime/MP4 okuyucusu: İz {0} bazı verisi eksik. Bozuk üstbilgi ato
 msgid "RIFF CDXA"
 msgstr "RIFF CDXA"
 
-#: src/common/kax_info.cpp:816
+#: src/common/kax_info.cpp:823
 #, no-c-format
 msgid "RSA"
 msgstr "RSA"
@@ -10238,7 +10238,7 @@ msgstr "İş kuyruğunu &durdur"
 msgid "S&ystem information"
 msgstr "S&istem bilgileri"
 
-#: src/common/kax_info.cpp:825
+#: src/common/kax_info.cpp:832
 #, no-c-format
 msgid "SHA1-160"
 msgstr "SHA1-160"
@@ -10387,7 +10387,7 @@ msgstr "Dizin tarama"
 msgid "Scanning playlists"
 msgstr "Oynatma listeleri tarama"
 
-#: src/merge/mkvmerge.cpp:2972
+#: src/merge/mkvmerge.cpp:2970
 #, no-c-format
 msgid "Scanning {0} files in {1} playlist.\n"
 msgid_plural "Scanning {0} files in {1} playlists.\n"
@@ -10430,7 +10430,7 @@ msgstr "Arama girişi"
 msgid "Seek head"
 msgstr "Arama başı"
 
-#: src/common/kax_info.cpp:548
+#: src/common/kax_info.cpp:555
 #, no-c-format
 msgid "Seek head (subentries will be skipped)"
 msgstr "Arama başı (alt girişler atlanacaktır)"
@@ -11089,7 +11089,7 @@ msgstr[1] "İşleri el ile &başlat"
 msgid "Started at:"
 msgstr "Başlama:"
 
-#: src/common/kax_info.cpp:1196
+#: src/common/kax_info.cpp:1203
 #, no-c-format
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr "İz numarası {0}: blok sayısı: {1}; bayt olarak boyut: {2}; saniye olarak süre: {3}; bit/saniye olarak yaklaşık bit oranı: {4} için istatistikler\n"
@@ -11525,17 +11525,17 @@ msgstr "XML parça bilgisi dosyası '{0}' bir hata içeriyor: {1}\n"
 msgid "The XML segmentinfo file '{0}' could not be read.\n"
 msgstr "XML parça bilgisi dosyası '{0}' okunamadı.\n"
 
-#: src/common/xml/ebml_tags_converter.cpp:159
+#: src/common/xml/ebml_tags_converter.cpp:170
 #, no-c-format
 msgid "The XML tag file '{0}' contains an error at position {2}: {1}\n"
 msgstr "XML etiket dosyası '{0}', {2} konumunda bir hata içeriyor: {1}\n"
 
-#: src/common/xml/ebml_tags_converter.cpp:162
+#: src/common/xml/ebml_tags_converter.cpp:173
 #, no-c-format
 msgid "The XML tag file '{0}' contains an error: {1}\n"
 msgstr "XMl etiket dosyası '{0}' bir hata içeriyor: {1}\n"
 
-#: src/common/xml/ebml_tags_converter.cpp:156
+#: src/common/xml/ebml_tags_converter.cpp:167
 #, no-c-format
 msgid "The XML tag file '{0}' could not be read.\n"
 msgstr "XMl etiket dosyası '{0}' okunamadı.\n"
@@ -11695,7 +11695,7 @@ msgstr "Yapılandırma kaydedildi."
 msgid "The correction file header was not read correctly.\n"
 msgstr "Düzeltme dosya üstbilgisi doğru olarak okunmadı.\n"
 
-#: src/merge/output_control.cpp:1622
+#: src/merge/output_control.cpp:1624
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Cue girişleri (indeks) yazılıyor...\n"
@@ -11815,7 +11815,7 @@ msgstr "İki izin görüntü genişliği farklı: {0} ve {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "Olumsuz tarafı, uygulamadan çıkmadan önce mkvmerge, tüm veriler depolamaya yazılana kadar bekleyeceğinden çoklamanın daha uzun sürmesidir."
 
-#: src/merge/mkvmerge.cpp:3121
+#: src/merge/mkvmerge.cpp:3119
 #, no-c-format
 msgid "The drive may be full."
 msgstr "Sürücü dolu olabilir."
@@ -11960,7 +11960,7 @@ msgstr "'{0}' dosyası okumak için açılamadı: {1}."
 msgid "The file '{0}' could not be opened for reading: {1}.\n"
 msgstr "'{0}' dosyası okumak için açılamadı: {1}.\n"
 
-#: src/common/kax_info.cpp:1306
+#: src/common/kax_info.cpp:1313
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}."
 msgstr "'{0}' dosyası yazmak için açılamadı: {1}."
@@ -11984,7 +11984,7 @@ msgstr "'{0}' dosyası yazmak için açılamadı: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "'{0}' dosyası açılamadı veya ayrıştırılamadı."
 
-#: src/merge/output_control.cpp:1584
+#: src/merge/output_control.cpp:1586
 #, no-c-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
 msgstr "'{0}' dosyasının adı '{1}' olarak yeniden adlandırılamadı.\n"
@@ -12004,7 +12004,7 @@ msgstr "'{0}' dosyası desteklenmeyen bir dosya türü ({1}).\n"
 msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "'{0}' dosyası bir Matroska dosyası değil ya da bulunamadı.\n"
 
-#: src/merge/output_control.cpp:1582
+#: src/merge/output_control.cpp:1584
 #, no-c-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
 msgstr "'{0}' dosyasının adı '{1}' olarak yeniden adlandırıldı.\n"
@@ -12515,7 +12515,7 @@ msgstr "Bu bağımsız değişken ile verilen sayılar çıktıdaki Matroska blo
 msgid "The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."
 msgstr "Sadece izin verilen kodekler VP8/VP9 görüntü ve Vorbis/Opus ses izleridir."
 
-#: src/merge/mkvmerge.cpp:2454
+#: src/merge/mkvmerge.cpp:2452
 #, no-c-format
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "'--meta-seek-size' seçeneği artık desteklenmiyor. Lütfen mkvmerge'ün belgelerini okuyun, özellikle de MATROSKA DOSYA DÜZENİ hakkındaki bölümü.\n"
@@ -12885,7 +12885,7 @@ msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once.
 msgstr "{1} ('{2}') nolu dosyadan {0} izi, birden fazla ilave edildi. '--append-to' için bağımsız değişken geçersizdi.\n"
 
 #: src/merge/mkvmerge.cpp:2009
-#: src/merge/mkvmerge.cpp:2939
+#: src/merge/mkvmerge.cpp:2937
 #, no-c-format
 msgid "The type of file '{0}' could not be recognized.\n"
 msgstr "'{0}' dosyasının türü tanınamadı.\n"
@@ -13155,7 +13155,7 @@ msgstr "Bu dosya zaman damgası satırlarında koordinatlar içeriyor. Bu tür k
 msgid "This file could not be opened or parsed.\n"
 msgstr "Bu dosya açılamadı veya ayrıştırılamadı.\n"
 
-#: src/common/kax_info.cpp:1226
+#: src/common/kax_info.cpp:1233
 #, no-c-format
 msgid "This file is probably not a Matroska file."
 msgstr "Bu dosya muhtemelen bir Matroska dosyası değil."
@@ -13331,7 +13331,7 @@ msgstr "Bu özellik zorunlu ve '{0}' içinde silinemez. {1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Bu özellik benzersiz. Daha fazla benzerleri '{0}' içinde eklenemez. {1}\n"
 
-#: src/merge/output_control.cpp:1735
+#: src/merge/output_control.cpp:1739
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "Bu GERÇEKTEN olmamalıydı. İlk üst arama öğesi için ayrılan alan çok küçüktü. Gereken boyut: {0}. {1}\n"
@@ -13605,7 +13605,7 @@ msgstr "İz {0}: Altyazı giriş sayısı {1} eksik süreli. Süre 1s farzediliy
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "İz {0}: AAC bilgisi ayrıştırılamadı.\n"
 
-#: src/common/kax_info.cpp:656
+#: src/common/kax_info.cpp:663
 #, no-c-format
 msgid "Track {0}: {1}, codec ID: {2}{3}{4}{5}\n"
 msgstr "İz {0}: {1}, kodek ID: {2}{3}{4}{5}\n"
@@ -13716,8 +13716,8 @@ msgstr "Belirsiz"
 msgid "Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Tek alan karesinden sonra beklenmedik resim karesi. Çoklamak için denemeden önce MPEG2 görüntü akışını düzeltin.\n"
 
-#: src/common/kax_info.cpp:411
-#: src/common/kax_info.cpp:420
+#: src/common/kax_info.cpp:418
+#: src/common/kax_info.cpp:427
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:171
 #: src/mkvtoolnix-gui/jobs/job.cpp:276
 #, no-c-format
@@ -13739,7 +13739,7 @@ msgstr "'{0}' içinde bilinmeyen bölüm dosyası biçimi. Desteklenen bölüm b
 msgid "Unknown content encoding type {0} for track {1}.\n"
 msgstr "{1} izi için bilinmeyen içerik kodlama türü {0}.\n"
 
-#: src/common/kax_info.cpp:1250
+#: src/common/kax_info.cpp:1257
 #, no-c-format
 msgid "Unknown element"
 msgstr "Bilinmeyen öğe"
@@ -14597,7 +14597,7 @@ msgstr "Yanlış Kate sürümü: {0}.{1} > {2}.x"
 msgid "Wrong Theora version: {0}.{1}.{2} != 3.2.x"
 msgstr "Yanlış Theora sürümü: {0}.{1}.{2} != 3.2.x"
 
-#: src/merge/mkvmerge.cpp:2277
+#: src/merge/mkvmerge.cpp:2278
 #, no-c-format
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "'--split-max-files' için yanlış bağımsız değişken.\n"
@@ -14787,14 +14787,14 @@ msgstr "kabartmalı (yeşil/morumsu)"
 msgid "attachments [options] [AID1:out1 [AID2:out2 ...]]"
 msgstr "attachments [seçenekler] [AID1:out1 [AID2:out2 ...]]"
 
-#: src/common/kax_info.cpp:658
-#: src/common/kax_info.cpp:834
+#: src/common/kax_info.cpp:665
+#: src/common/kax_info.cpp:841
 #: src/input/r_matroska.cpp:131
 #, no-c-format
 msgid "audio"
 msgstr "ses"
 
-#: src/common/kax_info.cpp:627
+#: src/common/kax_info.cpp:634
 #, no-c-format
 msgid "bits per sample: {0}"
 msgstr "örnek başına bit: {0}"
@@ -14809,24 +14809,24 @@ msgstr "her iki göz bir bloğa bağlı (önce sol)"
 msgid "both eyes laced in one block (right first)"
 msgstr "her iki göz bir bloğa bağlı (önce sağ)"
 
-#: src/common/kax_info.cpp:741
+#: src/common/kax_info.cpp:748
 #, no-c-format
 msgid "bottom field displayed first, bottom field stored first"
 msgstr "önce alt alan görüntülenir, önce alt alan saklanır"
 
-#: src/common/kax_info.cpp:742
+#: src/common/kax_info.cpp:749
 #, no-c-format
 msgid "bottom field displayed first, top field stored first"
 msgstr "önce alt alan görüntülenir, önce üst alan saklanır"
 
-#: src/common/kax_info.cpp:661
-#: src/common/kax_info.cpp:837
+#: src/common/kax_info.cpp:668
+#: src/common/kax_info.cpp:844
 #: src/input/r_matroska.cpp:132
 #, no-c-format
 msgid "buttons"
 msgstr "butonlar"
 
-#: src/common/kax_info.cpp:626
+#: src/common/kax_info.cpp:633
 #, no-c-format
 msgid "channels: {0}"
 msgstr "kanal: {0}"
@@ -14856,7 +14856,7 @@ msgstr "araya ekli sütun (önce sol)"
 msgid "column interleaved (right first)"
 msgstr "araya ekli sütun (önce sağ)"
 
-#: src/common/kax_info.cpp:782
+#: src/common/kax_info.cpp:789
 #, no-c-format
 msgid "compression"
 msgstr "sıkıştırma"
@@ -14866,7 +14866,7 @@ msgstr "sıkıştırma"
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: file_num bulunamadı. {0}\n"
 
-#: src/common/kax_info.cpp:716
+#: src/common/kax_info.cpp:723
 #, no-c-format
 msgid "cubemap"
 msgstr ""
@@ -14881,7 +14881,7 @@ msgstr "cues [seçenekler] [TID1:out1 [TID2:out2 ...]]"
 msgid "cuesheet [options] out.cue"
 msgstr "cuesheet [seçenekler] out.cue"
 
-#: src/common/kax_info.cpp:647
+#: src/common/kax_info.cpp:654
 #, no-c-format
 msgid "default duration: {0:.3f}ms ({1:.3f} frames/fields per second for a video track)"
 msgstr "varsayılan süre: {0:.3f}ms (görüntü izi için saniye başına {1:.3f} kare/alan)"
@@ -14891,27 +14891,27 @@ msgstr "varsayılan süre: {0:.3f}ms (görüntü izi için saniye başına {1:.3
 msgid "deflateInit() failed. Result: {0}\n"
 msgstr "deflateInit() başarısız oldu. Sonuç: {0}\n"
 
-#: src/common/kax_info.cpp:1014
+#: src/common/kax_info.cpp:1021
 #, no-c-format
 msgid "discardable, "
 msgstr "gözden çıkarılabilir,"
 
-#: src/common/kax_info.cpp:632
+#: src/common/kax_info.cpp:639
 #, no-c-format
 msgid "display height: {0}"
 msgstr "görüntüleme yüksekliği: {0}"
 
-#: src/common/kax_info.cpp:631
+#: src/common/kax_info.cpp:638
 #, no-c-format
 msgid "display width: {0}"
 msgstr "görüntüleme genişliği: {0}"
 
-#: src/common/kax_info.cpp:783
+#: src/common/kax_info.cpp:790
 #, no-c-format
 msgid "encryption"
 msgstr "şifreleme"
 
-#: src/common/kax_info.cpp:715
+#: src/common/kax_info.cpp:722
 #, no-c-format
 msgid "equirectangular"
 msgstr ""
@@ -14991,7 +14991,7 @@ msgstr "bir bayt sırası işaretçisi (BOM) kullanmayan ve sistemin şu anki ka
 msgid "generic video"
 msgstr "kapsamlı görüntü"
 
-#: src/common/kax_info.cpp:794
+#: src/common/kax_info.cpp:801
 #, no-c-format
 msgid "header removal"
 msgstr "üstbilgi kaldırma"
@@ -15006,7 +15006,7 @@ msgstr "inflateInit() başarısız. Sonuç: {0}\n"
 msgid "invalid language tag '{0}': {1}"
 msgstr "geçersiz dil etiketi '{0}': {1}"
 
-#: src/common/kax_info.cpp:1012
+#: src/common/kax_info.cpp:1019
 #, no-c-format
 msgid "key, "
 msgstr "anahtar, "
@@ -15016,17 +15016,17 @@ msgstr "anahtar, "
 msgid "language"
 msgstr "dil"
 
-#: src/common/kax_info.cpp:638
+#: src/common/kax_info.cpp:645
 #, no-c-format
 msgid "language (IETF BCP 47): {0}"
 msgstr "dil (IETF BCP 47): {0}"
 
-#: src/common/kax_info.cpp:637
+#: src/common/kax_info.cpp:644
 #, no-c-format
 msgid "language: {0}"
 msgstr "dil: {0}"
 
-#: src/common/kax_info.cpp:457
+#: src/common/kax_info.cpp:464
 #, no-c-format
 msgid "length {0}, data: {1}"
 msgstr "uzunluk {0}, veri: {1}"
@@ -15157,7 +15157,7 @@ msgstr "memory.cpp/safememdup() {0} dosyasından çağırıldı, satır {1}: mal
 msgid "memory.cpp/saferealloc() called from file {0}, line {1}: realloc() returned nullptr for a size of {2} bytes.\n"
 msgstr "memory.cpp/saferealloc() {0} dosyasından çağırıldı, satır {1}: realloc() {2} baytlık boyut için nullptr döndürdü.\n"
 
-#: src/common/kax_info.cpp:717
+#: src/common/kax_info.cpp:724
 #, no-c-format
 msgid "mesh"
 msgstr ""
@@ -15314,7 +15314,7 @@ msgstr "mkvmerge iki bölüm biçimini destekler: Metin biçimi gibi olan OGM ve
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmerge'ün SIGINT tarafından çalışması kesildi (Ctrl+C?)\n"
 
-#: src/common/kax_info.cpp:583
+#: src/common/kax_info.cpp:590
 #, no-c-format
 msgid "mkvmerge/mkvextract track ID: {0}"
 msgstr "mkvmerge/mkvextract iz ID: {0}"
@@ -15359,7 +15359,7 @@ msgstr "mpeg_ps_reader: Olmamalıydı #1. {0}"
 msgid "mpeg_ps_reader: Should not have happened #2. {0}"
 msgstr "mpeg_ps_reader: Olmamalıydı #2. {0}"
 
-#: src/common/kax_info.cpp:802
+#: src/common/kax_info.cpp:809
 #, no-c-format
 msgid "no encryption"
 msgstr "şifreleme yok"
@@ -15374,12 +15374,12 @@ msgstr "hata yok"
 msgid "no language selected"
 msgstr "seçilen dil yok"
 
-#: src/common/kax_info.cpp:815
+#: src/common/kax_info.cpp:822
 #, no-c-format
 msgid "no signature algorithm"
 msgstr "imza algoritması yok"
 
-#: src/common/kax_info.cpp:824
+#: src/common/kax_info.cpp:831
 #, no-c-format
 msgid "no signature hash algorithm"
 msgstr "imza adresleme algoritması yok"
@@ -15400,7 +15400,7 @@ msgstr "ogg_sync_buffer başarısız\n"
 msgid "or"
 msgstr "veya"
 
-#: src/common/kax_info.cpp:625
+#: src/common/kax_info.cpp:632
 #, no-c-format
 msgid "output sampling freq: {0}"
 msgstr "çıktı örnekleme aralığı: {0}"
@@ -15410,37 +15410,37 @@ msgstr "çıktı örnekleme aralığı: {0}"
 msgid "passthrough"
 msgstr "içinden geçen"
 
-#: src/common/kax_info.cpp:636
+#: src/common/kax_info.cpp:643
 #, no-c-format
 msgid "pixel crop bottom: {0}"
 msgstr "piksel kırpma en alt: {0}"
 
-#: src/common/kax_info.cpp:633
+#: src/common/kax_info.cpp:640
 #, no-c-format
 msgid "pixel crop left: {0}"
 msgstr "piksel kırpma sol: {0}"
 
-#: src/common/kax_info.cpp:635
+#: src/common/kax_info.cpp:642
 #, no-c-format
 msgid "pixel crop right: {0}"
 msgstr "piksel kırpma sağ: {0}"
 
-#: src/common/kax_info.cpp:634
+#: src/common/kax_info.cpp:641
 #, no-c-format
 msgid "pixel crop top: {0}"
 msgstr "piksel kırpma en üst: {0}"
 
-#: src/common/kax_info.cpp:630
+#: src/common/kax_info.cpp:637
 #, no-c-format
 msgid "pixel height: {0}"
 msgstr "piksel yüksekliği: {0}"
 
-#: src/common/kax_info.cpp:629
+#: src/common/kax_info.cpp:636
 #, no-c-format
 msgid "pixel width: {0}"
 msgstr "piksel genişliği: {0}"
 
-#: src/common/kax_info.cpp:738
+#: src/common/kax_info.cpp:745
 #, no-c-format
 msgid "progressive"
 msgstr "aşamalı"
@@ -15465,12 +15465,12 @@ msgstr "real_okuyucusu: id {0} için RealAudio FourCC bulunamadı (açıklama uz
 msgid "real_reader: Only audio header versions 3, 4 and 5 are supported. Track ID {0} uses version {1} and will be skipped.\n"
 msgstr "real_okuyucusu: Sadece ses üstbilgisi sürümleri 3, 4 ve 5 desteklenir. İz ID {0}, sürüm {1} kullanıyor ve atlanacaktır.\n"
 
-#: src/common/kax_info.cpp:714
+#: src/common/kax_info.cpp:721
 #, no-c-format
 msgid "rectangular"
 msgstr ""
 
-#: src/common/kax_info.cpp:771
+#: src/common/kax_info.cpp:778
 #, no-c-format
 msgid "rest: unknown"
 msgstr "kalan: bilinmiyor"
@@ -15485,7 +15485,7 @@ msgstr "araya ekli satır (önce sol)"
 msgid "row interleaved (right first)"
 msgstr "araya ekli satır (önce sağ)"
 
-#: src/common/kax_info.cpp:624
+#: src/common/kax_info.cpp:631
 #, no-c-format
 msgid "sampling freq: {0}"
 msgstr "örnekleme sıklığı: {0}"
@@ -15500,13 +15500,13 @@ msgstr "yan yana (önce sol)"
 msgid "side by side (right first)"
 msgstr "yan yana (önce sağ)"
 
-#: src/common/kax_info.cpp:479
+#: src/common/kax_info.cpp:486
 #, no-c-format
 msgid "size unknown"
 msgstr "boyut bilinmiyor"
 
-#: src/common/kax_info.cpp:478
-#: src/common/kax_info.cpp:842
+#: src/common/kax_info.cpp:485
+#: src/common/kax_info.cpp:849
 #, no-c-format
 msgid "size {0}"
 msgstr "boyut {0}"
@@ -15521,8 +15521,8 @@ msgstr "ssa_okuyucusu: Geçersiz biçim. \"[Olaylar]\" bölümünde \"Biçim\" s
 msgid "subtitle"
 msgstr "altyazı"
 
-#: src/common/kax_info.cpp:660
-#: src/common/kax_info.cpp:836
+#: src/common/kax_info.cpp:667
+#: src/common/kax_info.cpp:843
 #, no-c-format
 msgid "subtitles"
 msgstr "altyazı"
@@ -15537,7 +15537,7 @@ msgstr "tags [seçenekler] out.xml"
 msgid "text subtitles"
 msgstr "metin altyazıları"
 
-#: src/merge/mkvmerge.cpp:2822
+#: src/merge/mkvmerge.cpp:2820
 #, no-c-format
 msgid "timestamps"
 msgstr "zaman damgaları"
@@ -15557,22 +15557,22 @@ msgstr "üst alt (önce sol)"
 msgid "top bottom (right first)"
 msgstr "üst alt (önce sağ)"
 
-#: src/common/kax_info.cpp:743
+#: src/common/kax_info.cpp:750
 #, no-c-format
 msgid "top field displayed first, bottom field stored first"
 msgstr "önce üst alan görüntülenir, önce alt alan saklanır"
 
-#: src/common/kax_info.cpp:739
+#: src/common/kax_info.cpp:746
 #, no-c-format
 msgid "top field displayed first, top field stored first"
 msgstr "önce üst alan görüntülenir, önce üst alan saklanır"
 
-#: src/merge/mkvmerge.cpp:2814
+#: src/merge/mkvmerge.cpp:2812
 #, no-c-format
 msgid "track name"
 msgstr "iz adı"
 
-#: src/common/kax_info.cpp:881
+#: src/common/kax_info.cpp:888
 #, no-c-format
 msgid "track number {0}, {1} frame(s), timestamp {2}"
 msgstr "{0} iz numarası, {1} kare, zaman damgası {2}"
@@ -15589,16 +15589,16 @@ msgstr "tta_reader: c'tor içinde tag_size < 0. {0}\n"
 
 #: src/common/file_types.cpp:113
 #: src/common/fs_sys_helpers/windows.cpp:191
-#: src/common/kax_info.cpp:662
-#: src/common/kax_info.cpp:718
-#: src/common/kax_info.cpp:744
-#: src/common/kax_info.cpp:773
-#: src/common/kax_info.cpp:784
-#: src/common/kax_info.cpp:795
-#: src/common/kax_info.cpp:808
-#: src/common/kax_info.cpp:817
-#: src/common/kax_info.cpp:827
-#: src/common/kax_info.cpp:838
+#: src/common/kax_info.cpp:669
+#: src/common/kax_info.cpp:725
+#: src/common/kax_info.cpp:751
+#: src/common/kax_info.cpp:780
+#: src/common/kax_info.cpp:791
+#: src/common/kax_info.cpp:802
+#: src/common/kax_info.cpp:815
+#: src/common/kax_info.cpp:824
+#: src/common/kax_info.cpp:834
+#: src/common/kax_info.cpp:845
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:130
 #: src/input/r_matroska.cpp:2818
@@ -15622,13 +15622,13 @@ msgstr "bilinmiyor, biçim etiketi: 0x{0:04x}"
 msgid "unnamed"
 msgstr "adlandırılmamış"
 
-#: src/common/kax_info.cpp:740
+#: src/common/kax_info.cpp:747
 #, no-c-format
 msgid "unspecified"
 msgstr "belirtilmemiş"
 
-#: src/common/kax_info.cpp:659
-#: src/common/kax_info.cpp:835
+#: src/common/kax_info.cpp:666
+#: src/common/kax_info.cpp:842
 #: src/input/r_matroska.cpp:133
 #, no-c-format
 msgid "video"
@@ -15644,12 +15644,12 @@ msgstr "vobsub_reader: sub dosyası okuma başarısız"
 msgid "x"
 msgstr "x"
 
-#: src/common/kax_info.cpp:830
+#: src/common/kax_info.cpp:837
 #, no-c-format
 msgid "{0} (track ID for mkvmerge & mkvextract: {1})"
 msgstr "{0} (mkvmerge ve mkvextract için iz ID: {1})"
 
-#: src/common/kax_info.cpp:847
+#: src/common/kax_info.cpp:854
 #, no-c-format
 msgid "{0} ({1:.3f} frames/fields per second for a video track)"
 msgstr "{0} (görüntü izi için saniye başına {1:.3f} kare/alan)"
@@ -15661,21 +15661,21 @@ msgid_plural "{0} bytes"
 msgstr[0] "{0} bayt"
 msgstr[1] "{0} bayt"
 
-#: src/common/kax_info.cpp:951
+#: src/common/kax_info.cpp:958
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"
 msgstr ""
 "{0} kare, iz {1}, zaman damgası {2}, süre {3}, boyut {4}, adler 0x{5:08x}{6}{7}\n"
 "\n"
 
-#: src/common/kax_info.cpp:1070
+#: src/common/kax_info.cpp:1077
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}\n"
 msgstr ""
 "{0} kare, iz {1}, zaman damgası {2}, boyut {3}, adler, adler 0x{4:08x}{5}\n"
 "\n"
 
-#: src/common/kax_info.cpp:961
+#: src/common/kax_info.cpp:968
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"
 msgstr "{0} kare, iz {1}, zaman damgası {2}, boyut {3}, adler 0x{4:08x}{5}{6}\n"
@@ -15757,7 +15757,7 @@ msgstr "{0}: '{1} {2}' içinde eksik bölen.\n"
 msgid "{0}: missing track ID in '{1} {2}'.\n"
 msgstr "{0}: '{1} {2}' içinde eksik iz ID.\n"
 
-#: src/common/kax_info.cpp:1016
+#: src/common/kax_info.cpp:1023
 #, no-c-format
 msgid "{0}track number {1}, {2} frame(s), timestamp {3}"
 msgstr "{0} iz numarası {1}, {2} kare, zaman damgası {3}"

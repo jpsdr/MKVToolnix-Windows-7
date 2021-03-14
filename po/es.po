@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-03-09 21:22+0100\n"
+"POT-Creation-Date: 2021-03-14 21:31+0100\n"
 "PO-Revision-Date: 2021-03-03 18:14+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -462,10 +462,10 @@ msgid "  --disable-lacing         Do not use lacing.\n"
 msgstr "  --disable-lacing         No usa atadura.\n"
 
 #: src/merge/mkvmerge.cpp:141
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"  --disable-language-ietf  Do not write LanguageIETF track header and\n"
-"                           ChapLanguageIETF chapter elements.\n"
+"  --disable-language-ietf  Do not write IETF BCP 47 language elements in\n"
+"                           track headers, chapters and tags.\n"
 msgstr ""
 "  --disable-language-ietf  No escribe la cabecera de pista LanguageIETF \n"
 "                           ni los elementos de capítulo ChapLanguageIETF.\n"
@@ -1284,65 +1284,65 @@ msgstr "  X:  binario en hex\n"
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
 msgstr "  [ <archivo1> <archivo2> ] Lo mismo que \"<archivo1> + <archivo2>\".\n"
 
-#: src/common/kax_info.cpp:388
+#: src/common/kax_info.cpp:395
 #, no-c-format
 msgid " (FourCC: {0})"
 msgstr " (FourCC: {0})"
 
-#: src/common/kax_info.cpp:397
+#: src/common/kax_info.cpp:404
 #, no-c-format
 msgid " (H.264 profile: {0} @L{1}.{2})"
 msgstr " (Perfil H.264: {0} @L{1}.{2})"
 
-#: src/common/kax_info.cpp:416
+#: src/common/kax_info.cpp:423
 #, no-c-format
 msgid " (HEVC profile: {0} @L{1}.{2})"
 msgstr " (Perfil HEVC: {0} @L{1}.{2})"
 
-#: src/common/kax_info.cpp:463
-#: src/common/kax_info.cpp:605
-#: src/common/kax_info.cpp:899
-#: src/common/kax_info.cpp:1044
+#: src/common/kax_info.cpp:470
+#: src/common/kax_info.cpp:612
+#: src/common/kax_info.cpp:906
+#: src/common/kax_info.cpp:1051
 #, no-c-format
 msgid " (adler: 0x{0:08x})"
 msgstr " (adler: 0x{0:08x})"
 
-#: src/common/kax_info.cpp:730
+#: src/common/kax_info.cpp:737
 #, no-c-format
 msgid " (aspect ratio)"
 msgstr " (relación de aspecto)"
 
-#: src/common/kax_info.cpp:728
+#: src/common/kax_info.cpp:735
 #, no-c-format
 msgid " (centimeters)"
 msgstr " (centímetros)"
 
-#: src/common/kax_info.cpp:758
+#: src/common/kax_info.cpp:765
 #, no-c-format
 msgid " (fixed)"
 msgstr " (fijado)"
 
-#: src/common/kax_info.cpp:392
+#: src/common/kax_info.cpp:399
 #, no-c-format
 msgid " (format tag: 0x{0:04x})"
 msgstr " (Formato de la etiqueta: 0x{0:04x})"
 
-#: src/common/kax_info.cpp:756
+#: src/common/kax_info.cpp:763
 #, no-c-format
 msgid " (free resizing)"
 msgstr " (redimensionamiento libre)"
 
-#: src/common/kax_info.cpp:729
+#: src/common/kax_info.cpp:736
 #, no-c-format
 msgid " (inches)"
 msgstr " (pulgadas)"
 
-#: src/common/kax_info.cpp:757
+#: src/common/kax_info.cpp:764
 #, no-c-format
 msgid " (keep aspect ratio)"
 msgstr " (mantener relación de aspecto)"
 
-#: src/common/kax_info.cpp:727
+#: src/common/kax_info.cpp:734
 #, no-c-format
 msgid " (pixels)"
 msgstr " (píxeles)"
@@ -1402,18 +1402,18 @@ msgstr " Otras opciones:\n"
 msgid " Segment info handling:\n"
 msgstr " Información acerca de la manipulación del segmento:\n"
 
-#: src/common/kax_info.cpp:288
+#: src/common/kax_info.cpp:295
 #, no-c-format
 msgid " at 0x{0:x}"
 msgstr " al 0x{0:x}"
 
-#: src/common/kax_info.cpp:288
+#: src/common/kax_info.cpp:295
 #: src/extract/mkvextract.cpp:105
 #, no-c-format
 msgid " at {0}"
 msgstr " al {0}"
 
-#: src/common/kax_info.cpp:298
+#: src/common/kax_info.cpp:305
 #, no-c-format
 msgid " data size {0}"
 msgstr " Tamaño de datos {0}"
@@ -1440,12 +1440,12 @@ msgid_plural " seconds"
 msgstr[0] " segundo"
 msgstr[1] " segundos"
 
-#: src/common/kax_info.cpp:294
+#: src/common/kax_info.cpp:301
 #, no-c-format
 msgid " size is unknown"
 msgstr " el tamaño es desconocido"
 
-#: src/common/kax_info.cpp:292
+#: src/common/kax_info.cpp:299
 #, no-c-format
 msgid " size {0}"
 msgstr " tamaño {0}"
@@ -2425,32 +2425,32 @@ msgstr "&Cuando se establezca el idioma:"
 msgid "&Window"
 msgstr "&Ventana"
 
-#: src/merge/mkvmerge.cpp:2525
+#: src/merge/mkvmerge.cpp:2523
 #, no-c-format
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' carece de la relación de aspecto.\n"
 
-#: src/merge/mkvmerge.cpp:2532
+#: src/merge/mkvmerge.cpp:2530
 #, no-c-format
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr "'--aspect-ratio-factor' carece del factor de relación de aspecto.\n"
 
-#: src/merge/mkvmerge.cpp:2335
+#: src/merge/mkvmerge.cpp:2333
 #, no-c-format
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "'--attachment-description' carece de la descripción.\n"
 
-#: src/merge/mkvmerge.cpp:2344
+#: src/merge/mkvmerge.cpp:2342
 #, no-c-format
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "'--attachment-mime-type' carece del tipo MIME.\n"
 
-#: src/merge/mkvmerge.cpp:2354
+#: src/merge/mkvmerge.cpp:2352
 #, no-c-format
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' carece del nombre.\n"
 
-#: src/merge/mkvmerge.cpp:2390
+#: src/merge/mkvmerge.cpp:2388
 #, no-c-format
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "'--chapter-charset' carece de la codificación de caracteres.\n"
@@ -2465,7 +2465,7 @@ msgstr "'--chapter-charset' solo puede darse una vez en '--chapter-charset {0}'.
 msgid "'--chapter-charset' must be given before '--chapters' in '--chapter-charset {0}'.\n"
 msgstr "'--chapter-charset' debe ser asignado antes de '--chapters' en '--chapter-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:2383
+#: src/merge/mkvmerge.cpp:2381
 #, no-c-format
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "'--chapter-language' carece de idioma.\n"
@@ -2480,12 +2480,12 @@ msgstr "'--chapter-language' solo puede darse una vez en '--chapter-language {0}
 msgid "'--chapter-language' must be given before '--chapters' in '--chapter-language {0}'.\n"
 msgstr "'--chapter-language' debe ser asignado antes de '--chapters' en '--chapter-language {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:2414
+#: src/merge/mkvmerge.cpp:2412
 #, no-c-format
 msgid "'--chapters' lacks the file name.\n"
 msgstr "'--chapters' carece de un nombre de archivo.\n"
 
-#: src/merge/mkvmerge.cpp:2307
+#: src/merge/mkvmerge.cpp:2308
 #, no-c-format
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length' carece de extensión.\n"
@@ -2495,22 +2495,22 @@ msgstr "'--cluster-length' carece de extensión.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' está ausente su argumento .\n"
 
-#: src/merge/mkvmerge.cpp:2546
+#: src/merge/mkvmerge.cpp:2544
 #, no-c-format
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' carece de los parámetros de recorte (crop).\n"
 
-#: src/merge/mkvmerge.cpp:2404
+#: src/merge/mkvmerge.cpp:2402
 #, no-c-format
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "'--cue-chapter-name-format' carece del formato.\n"
 
-#: src/merge/mkvmerge.cpp:2407
+#: src/merge/mkvmerge.cpp:2405
 #, no-c-format
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format' debe ser asignado antes de '--chapters'.\n"
 
-#: src/merge/mkvmerge.cpp:2539
+#: src/merge/mkvmerge.cpp:2537
 #, no-c-format
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' carece de las dimensiones.\n"
@@ -2520,7 +2520,7 @@ msgstr "'--display-dimensions' carece de las dimensiones.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' carece de su argumento.\n"
 
-#: src/merge/mkvmerge.cpp:2423
+#: src/merge/mkvmerge.cpp:2421
 #, no-c-format
 msgid "'--generate-chapters' lacks the mode.\n"
 msgstr "'--generate-chapters' carece de modo.\n"
@@ -2530,42 +2530,42 @@ msgstr "'--generate-chapters' carece de modo.\n"
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
 msgstr "'--generate-chapters-name-template' carece del nombre de plantilla.\n"
 
-#: src/merge/mkvmerge.cpp:2374
+#: src/merge/mkvmerge.cpp:2372
 #, no-c-format
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' carece de un nombre de archivo.\n"
 
-#: src/merge/mkvmerge.cpp:2897
+#: src/merge/mkvmerge.cpp:2895
 #, no-c-format
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "'--link' sólo es útil en combinación con '--split'.\n"
 
-#: src/merge/mkvmerge.cpp:2293
+#: src/merge/mkvmerge.cpp:2294
 #, no-c-format
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "'--link-to-next' carece del próximo UID.\n"
 
-#: src/merge/mkvmerge.cpp:2286
+#: src/merge/mkvmerge.cpp:2287
 #, no-c-format
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' carece del previo UID.\n"
 
-#: src/merge/mkvmerge.cpp:2300
+#: src/merge/mkvmerge.cpp:2301
 #, no-c-format
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "'--segment-uid' carece del UID del segmento.\n"
 
-#: src/merge/mkvmerge.cpp:2430
+#: src/merge/mkvmerge.cpp:2428
 #, no-c-format
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "'--segmentinfo' carece de un nombre de archivo.\n"
 
-#: src/merge/mkvmerge.cpp:2267
+#: src/merge/mkvmerge.cpp:2268
 #, no-c-format
 msgid "'--split' lacks the size.\n"
 msgstr "'--split' carece del tamaño.\n"
 
-#: src/merge/mkvmerge.cpp:2274
+#: src/merge/mkvmerge.cpp:2275
 #, no-c-format
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' carece del número de archivos.\n"
@@ -2575,12 +2575,12 @@ msgstr "'--split-max-files' carece del número de archivos.\n"
 msgid "'--timestamp-scale' was used more than once.\n"
 msgstr "'--timestamp-scale' fue usado más de una vez.\n"
 
-#: src/merge/mkvmerge.cpp:2259
+#: src/merge/mkvmerge.cpp:2260
 #, no-c-format
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' carece de título.\n"
 
-#: src/merge/mkvmerge.cpp:2831
+#: src/merge/mkvmerge.cpp:2829
 #, no-c-format
 msgid "'--track-order' may only be given once.\n"
 msgstr "'--track-order' solo puede darse una vez.\n"
@@ -2652,13 +2652,13 @@ msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Addition
 msgstr "'{0}' no es una etiqueta válida de idioma IETF BCP 47/RFC 5646 en '{1}'. Más información del analizador: {2}\n"
 
 #: src/common/xml/ebml_chapters_converter.cpp:151
-#: src/common/xml/ebml_tags_converter.cpp:114
+#: src/common/xml/ebml_tags_converter.cpp:125
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
 msgstr "'{0}' no es una etiqueta válida de idioma IETF BCP 47/RFC 5646. Más información del analizador: {1}"
 
 #: src/common/xml/ebml_chapters_converter.cpp:173
-#: src/common/xml/ebml_tags_converter.cpp:136
+#: src/common/xml/ebml_tags_converter.cpp:147
 #, no-c-format
 msgid "'{0}' is not a valid ISO 639-2 language code."
 msgstr "'{0}' no es un código de idioma ISO 639-2."
@@ -2758,87 +2758,87 @@ msgstr "'{0}' carece de un nombre de archivo.\n"
 #: src/merge/mkvmerge.cpp:2070
 #: src/merge/mkvmerge.cpp:2135
 #: src/merge/mkvmerge.cpp:2201
-#: src/merge/mkvmerge.cpp:2246
-#: src/merge/mkvmerge.cpp:2445
-#: src/merge/mkvmerge.cpp:2459
-#: src/merge/mkvmerge.cpp:2693
-#: src/merge/mkvmerge.cpp:2707
-#: src/merge/mkvmerge.cpp:2714
-#: src/merge/mkvmerge.cpp:2721
-#: src/merge/mkvmerge.cpp:2728
-#: src/merge/mkvmerge.cpp:2735
-#: src/merge/mkvmerge.cpp:2742
-#: src/merge/mkvmerge.cpp:2749
-#: src/merge/mkvmerge.cpp:2756
-#: src/merge/mkvmerge.cpp:2763
-#: src/merge/mkvmerge.cpp:2770
-#: src/merge/mkvmerge.cpp:2777
-#: src/merge/mkvmerge.cpp:2784
-#: src/merge/mkvmerge.cpp:2798
-#: src/merge/mkvmerge.cpp:2805
-#: src/merge/mkvmerge.cpp:2812
-#: src/merge/mkvmerge.cpp:2820
-#: src/merge/mkvmerge.cpp:2828
-#: src/merge/mkvmerge.cpp:2838
-#: src/merge/mkvmerge.cpp:2845
-#: src/merge/mkvmerge.cpp:2852
-#: src/merge/mkvmerge.cpp:2864
-#: src/merge/mkvmerge.cpp:2871
-#: src/merge/mkvmerge.cpp:2878
+#: src/merge/mkvmerge.cpp:2247
+#: src/merge/mkvmerge.cpp:2443
+#: src/merge/mkvmerge.cpp:2457
+#: src/merge/mkvmerge.cpp:2691
+#: src/merge/mkvmerge.cpp:2705
+#: src/merge/mkvmerge.cpp:2712
+#: src/merge/mkvmerge.cpp:2719
+#: src/merge/mkvmerge.cpp:2726
+#: src/merge/mkvmerge.cpp:2733
+#: src/merge/mkvmerge.cpp:2740
+#: src/merge/mkvmerge.cpp:2747
+#: src/merge/mkvmerge.cpp:2754
+#: src/merge/mkvmerge.cpp:2761
+#: src/merge/mkvmerge.cpp:2768
+#: src/merge/mkvmerge.cpp:2775
+#: src/merge/mkvmerge.cpp:2782
+#: src/merge/mkvmerge.cpp:2796
+#: src/merge/mkvmerge.cpp:2803
+#: src/merge/mkvmerge.cpp:2810
+#: src/merge/mkvmerge.cpp:2818
+#: src/merge/mkvmerge.cpp:2826
+#: src/merge/mkvmerge.cpp:2836
+#: src/merge/mkvmerge.cpp:2843
+#: src/merge/mkvmerge.cpp:2850
+#: src/merge/mkvmerge.cpp:2862
+#: src/merge/mkvmerge.cpp:2869
+#: src/merge/mkvmerge.cpp:2876
 #, no-c-format
 msgid "'{0}' lacks its argument.\n"
 msgstr "'{0}' carece de argumento.\n"
 
-#: src/merge/mkvmerge.cpp:2518
+#: src/merge/mkvmerge.cpp:2516
 #, no-c-format
 msgid "'{0}' lacks the FourCC.\n"
 msgstr "'{0}' carece del FourCC.\n"
 
-#: src/merge/mkvmerge.cpp:2397
-#: src/merge/mkvmerge.cpp:2700
+#: src/merge/mkvmerge.cpp:2395
+#: src/merge/mkvmerge.cpp:2698
 #, no-c-format
 msgid "'{0}' lacks the delay.\n"
 msgstr "'{0}' carece de desfase (delay).\n"
 
-#: src/merge/mkvmerge.cpp:2364
+#: src/merge/mkvmerge.cpp:2362
 #, no-c-format
 msgid "'{0}' lacks the file name.\n"
 msgstr "'{0}' carece de un nombre de archivo.\n"
 
-#: src/merge/mkvmerge.cpp:2553
-#: src/merge/mkvmerge.cpp:2560
-#: src/merge/mkvmerge.cpp:2567
-#: src/merge/mkvmerge.cpp:2574
-#: src/merge/mkvmerge.cpp:2581
-#: src/merge/mkvmerge.cpp:2588
-#: src/merge/mkvmerge.cpp:2595
-#: src/merge/mkvmerge.cpp:2602
-#: src/merge/mkvmerge.cpp:2609
-#: src/merge/mkvmerge.cpp:2616
-#: src/merge/mkvmerge.cpp:2623
-#: src/merge/mkvmerge.cpp:2630
-#: src/merge/mkvmerge.cpp:2637
-#: src/merge/mkvmerge.cpp:2644
-#: src/merge/mkvmerge.cpp:2651
-#: src/merge/mkvmerge.cpp:2658
-#: src/merge/mkvmerge.cpp:2665
-#: src/merge/mkvmerge.cpp:2672
-#: src/merge/mkvmerge.cpp:2679
-#: src/merge/mkvmerge.cpp:2686
+#: src/merge/mkvmerge.cpp:2551
+#: src/merge/mkvmerge.cpp:2558
+#: src/merge/mkvmerge.cpp:2565
+#: src/merge/mkvmerge.cpp:2572
+#: src/merge/mkvmerge.cpp:2579
+#: src/merge/mkvmerge.cpp:2586
+#: src/merge/mkvmerge.cpp:2593
+#: src/merge/mkvmerge.cpp:2600
+#: src/merge/mkvmerge.cpp:2607
+#: src/merge/mkvmerge.cpp:2614
+#: src/merge/mkvmerge.cpp:2621
+#: src/merge/mkvmerge.cpp:2628
+#: src/merge/mkvmerge.cpp:2635
+#: src/merge/mkvmerge.cpp:2642
+#: src/merge/mkvmerge.cpp:2649
+#: src/merge/mkvmerge.cpp:2656
+#: src/merge/mkvmerge.cpp:2663
+#: src/merge/mkvmerge.cpp:2670
+#: src/merge/mkvmerge.cpp:2677
+#: src/merge/mkvmerge.cpp:2684
 #, no-c-format
 msgid "'{0}' lacks the parameter.\n"
 msgstr "'{0}' carece de parámetro.\n"
 
-#: src/merge/mkvmerge.cpp:2791
+#: src/merge/mkvmerge.cpp:2789
 #, no-c-format
 msgid "'{0}' lacks the track ID.\n"
 msgstr "'{0}' carece del ID de pista.\n"
 
-#: src/merge/mkvmerge.cpp:2483
-#: src/merge/mkvmerge.cpp:2490
-#: src/merge/mkvmerge.cpp:2497
-#: src/merge/mkvmerge.cpp:2504
-#: src/merge/mkvmerge.cpp:2511
+#: src/merge/mkvmerge.cpp:2481
+#: src/merge/mkvmerge.cpp:2488
+#: src/merge/mkvmerge.cpp:2495
+#: src/merge/mkvmerge.cpp:2502
+#: src/merge/mkvmerge.cpp:2509
 #, no-c-format
 msgid "'{0}' lacks the track numbers.\n"
 msgstr "'{0}' carece de los números de pista.\n"
@@ -2867,12 +2867,12 @@ msgstr "'{0}': Está copiando una pista Opus escrita en modo experimental. La pi
 msgid "'{0}': {1}"
 msgstr "'{0}': {1}"
 
-#: src/common/kax_info.cpp:275
+#: src/common/kax_info.cpp:282
 #, no-c-format
 msgid "(Known element, but invalid at this position: {0}; ID: 0x{1} size: {2})"
 msgstr "(Elemento conocido, pero inválido en esta posición: {0}; ID: 0x{1} tamaño: {2})"
 
-#: src/common/kax_info.cpp:270
+#: src/common/kax_info.cpp:277
 #, no-c-format
 msgid "(Unknown element: {0}; ID: 0x{1} size: {2})"
 msgstr "(Elemento desconocido: {0}; ID: 0x{1} tamaño: {2})"
@@ -2907,14 +2907,14 @@ msgstr ", descripción '{0}'"
 msgid ", file name '{0}'"
 msgstr ", nombre de archivo '{0}'"
 
-#: src/common/kax_info.cpp:946
-#: src/common/kax_info.cpp:1066
+#: src/common/kax_info.cpp:953
+#: src/common/kax_info.cpp:1073
 #, no-c-format
 msgid ", position 0x{0:x}"
 msgstr ", posición 0x{0:x}"
 
-#: src/common/kax_info.cpp:946
-#: src/common/kax_info.cpp:1066
+#: src/common/kax_info.cpp:953
+#: src/common/kax_info.cpp:1073
 #, no-c-format
 msgid ", position {0}"
 msgstr ", posición {0}"
@@ -2939,7 +2939,7 @@ msgstr "--- Advertencias generadas por la tarea '%1' iniciada en %2 ---"
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify'. These are usually simply numbered starting from 0 (e.g. '2')."
 msgstr "1. Un número que será interpretado como un ID de un archivo adjunto listado por 'mkvmerge --identify'. Normalmente, son números que empiezan desde 0 (p.e. '2')."
 
-#: src/common/kax_info.cpp:767
+#: src/common/kax_info.cpp:774
 #, no-c-format
 msgid "1: all frames"
 msgstr "1: todos los fotogramas"
@@ -2949,7 +2949,7 @@ msgstr "1: todos los fotogramas"
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
 msgstr "2. Un número con el prefijo '=' que será interpretado como un UID (IDentificador Único) del archivo adjunto listado por  'mkvmerge --identify'. Normalmente, son números aleatorios. (p.e. '128975986723')."
 
-#: src/common/kax_info.cpp:769
+#: src/common/kax_info.cpp:776
 #, no-c-format
 msgid "2: codec private data"
 msgstr "2: datos particulares del códec"
@@ -2987,17 +2987,17 @@ msgstr "<No cambiar>"
 msgid "<No destination file>"
 msgstr "<Ningún archivo salida>"
 
-#: src/common/xml/ebml_tags_converter.cpp:97
+#: src/common/xml/ebml_tags_converter.cpp:108
 #, no-c-format
 msgid "<Simple> is missing the <Name> child."
 msgstr "<Simple> está ausente el <Name> secundario."
 
-#: src/common/xml/ebml_tags_converter.cpp:104
+#: src/common/xml/ebml_tags_converter.cpp:115
 #, no-c-format
 msgid "<Simple> must contain either a <String> or a <Binary> child."
 msgstr "<Simple> debe contener o un <String> o un <Binary> secundario."
 
-#: src/common/xml/ebml_tags_converter.cpp:94
+#: src/common/xml/ebml_tags_converter.cpp:101
 #, no-c-format
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> está ausente el <Simple> secundario."
@@ -3781,7 +3781,7 @@ msgstr "Un nombre de archivo a evitar relativo al siguiente segmento."
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "Un nombre de archivo a evitar relativo al segmento anterior."
 
-#: src/merge/mkvmerge.cpp:3121
+#: src/merge/mkvmerge.cpp:3119
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "Ha ocurrido una excepción cuando se estaba escribiendo el archivo de salida."
@@ -3838,7 +3838,7 @@ msgstr "Unir archivos multimedia"
 msgid "Append to an e&xisting source file"
 msgstr "Unir a un archivo de origen e&xistente"
 
-#: src/merge/output_control.cpp:1896
+#: src/merge/output_control.cpp:1900
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Uniendo la pista {0} del archivo n.º {1} ('{2}') a la pista {3} del archivo n.º {4} ('{5}').\n"
@@ -4008,7 +4008,7 @@ msgstr "&Limpiar el nombre del archivo cuando se elimine el último archivo"
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "Limpia&r el título del archivo tras eliminar el último archivo"
 
-#: src/merge/mkvmerge.cpp:2219
+#: src/merge/mkvmerge.cpp:2221
 #, no-c-format
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr "Habilitar automáticamente el modo WebM, según la extensión del archivo de salida.\n"
@@ -4363,8 +4363,8 @@ msgstr "No se puede escribir la pista {0} con la ID de códec '{1}' en el archiv
 msgid "Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already being written to the same file.\n"
 msgstr "No se puede escribir la pista {0} con la ID de códec '{1}' en el archivo '{2}' porque la pista {3} con ID del códec '{4}' ya está siendo escrita en el mismo archivo.\n"
 
-#: src/common/kax_info.cpp:1319
-#: src/common/kax_info.cpp:1323
+#: src/common/kax_info.cpp:1326
+#: src/common/kax_info.cpp:1330
 #: src/extract/tracks.cpp:564
 #: src/mkvtoolnix-gui/util/kax_info.cpp:209
 #, no-c-format
@@ -4972,7 +4972,7 @@ msgstr "No se pudo extraer la cabecera de la secuencia de esta pista MPEG-1/2.\n
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "No se pudo encontrar un índice para la pista de audio {0} (mensaje de error avilib: {1}). Pista omitida.\n"
 
-#: src/merge/output_control.cpp:1822
+#: src/merge/output_control.cpp:1826
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "No se pudo encontrar gptz al unir. {0}\n"
@@ -5318,7 +5318,7 @@ msgstr "Posiciones de pista del cue"
 msgid "Cues"
 msgstr "Cues"
 
-#: src/common/kax_info.cpp:554
+#: src/common/kax_info.cpp:561
 #, no-c-format
 msgid "Cues (subentries will be skipped)"
 msgstr "Cues (los subregistros serán omitidos)"
@@ -5874,7 +5874,7 @@ msgstr "No volver a mostrar este mensaje."
 msgid "Don't stop processing at the first cluster."
 msgstr "No detener el proceso en el primer clúster."
 
-#: src/merge/mkvmerge.cpp:3012
+#: src/merge/mkvmerge.cpp:3010
 #, no-c-format
 msgid "Done scanning playlists.\n"
 msgstr "Realiza análisis de playlists.\n"
@@ -6274,7 +6274,7 @@ msgstr "Error escribiendo el archivo Matroska"
 msgid "Error:"
 msgstr "Error:"
 
-#: src/common/kax_info.cpp:1290
+#: src/common/kax_info.cpp:1297
 #, no-c-format
 msgid "Error: Couldn't open source file {0} ({1})."
 msgstr "Error: No se pudo abrir el archivo de origen {0} ({1})."
@@ -6284,7 +6284,7 @@ msgstr "Error: No se pudo abrir el archivo de origen {0} ({1})."
 msgid "Error: No EBML head found."
 msgstr "Error: No se encontró la cabecera de EBML."
 
-#: src/merge/mkvmerge.cpp:2213
+#: src/merge/mkvmerge.cpp:2215
 #, no-c-format
 msgid ""
 "Error: no destination file name was given.\n"
@@ -6347,7 +6347,7 @@ msgstr "Ejemplos: 01:00:00 (después de una hora) o 1800s (después de 1800 segu
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "Ejemplos: 01:00:00,01:30:00 (después de una hora y después de una hora y treinta minutos) o 180s,300s,00:10:00 (después de tres, cinco o diez minutos)."
 
-#: src/merge/mkvmerge.cpp:3121
+#: src/merge/mkvmerge.cpp:3119
 #, no-c-format
 msgid "Exception details:"
 msgstr "Detalles de la excepción:"
@@ -6800,8 +6800,8 @@ msgstr "Tasa de fotogramas"
 msgid "Frame size #%1: %2"
 msgstr "Tamaño fotograma #%1: %2"
 
-#: src/common/kax_info.cpp:906
-#: src/common/kax_info.cpp:1051
+#: src/common/kax_info.cpp:913
+#: src/common/kax_info.cpp:1058
 #, no-c-format
 msgid "Frame with size {0}{1}{2}"
 msgstr "Fotograma con tamaño {0}{1}{2}"
@@ -6811,8 +6811,8 @@ msgstr "Fotograma con tamaño {0}{1}{2}"
 msgid "Frames/fields:"
 msgstr "Fotogramas/campos:"
 
-#: src/common/kax_info.cpp:905
-#: src/common/kax_info.cpp:1050
+#: src/common/kax_info.cpp:912
+#: src/common/kax_info.cpp:1057
 #, no-c-format
 msgid "Frame{0}{1}"
 msgstr "Fotograma{0}{1}"
@@ -7600,7 +7600,7 @@ msgid "Invalid change spec ({2}) in '{0} {1}'.\n"
 msgstr "No es válido el cambio de especificaciones ({2}) en '{0} {1}'.\n"
 
 #: src/merge/mkvmerge.cpp:1117
-#: src/merge/mkvmerge.cpp:3046
+#: src/merge/mkvmerge.cpp:3044
 #, no-c-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
 msgstr "Incorrecto el número del capítulo '{0}' para '--split' en '--split {1}': {2}\n"
@@ -8174,7 +8174,7 @@ msgstr "La más baja prioridad"
 msgid "M&ore actions"
 msgstr "Más acci&ones"
 
-#: src/common/kax_info.cpp:826
+#: src/common/kax_info.cpp:833
 #, no-c-format
 msgid "MD5"
 msgstr "MD5"
@@ -8503,12 +8503,12 @@ msgstr "Fue requerida la modificación de propiedades en la sección '{0}', pero
 msgid "More"
 msgstr "Más"
 
-#: src/merge/mkvmerge.cpp:2347
+#: src/merge/mkvmerge.cpp:2345
 #, no-c-format
 msgid "More than one MIME type was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Más de un tipo MIME fue asignado por un único archivo adjunto.  '{0}' será descartado y '{1}' utilizado en su lugar.\n"
 
-#: src/merge/mkvmerge.cpp:2338
+#: src/merge/mkvmerge.cpp:2336
 #, no-c-format
 msgid "More than one description was given for a single attachment.\n"
 msgstr "Más de una descripción fue dada para un único archivo adjunto.\n"
@@ -8518,7 +8518,7 @@ msgstr "Más de una descripción fue dada para un único archivo adjunto.\n"
 msgid "More than one file name has been given ('{0}' and '{1}').\n"
 msgstr "Mas de un nombre de archivo ha sido asignado ('{0}' and '{1}').\n"
 
-#: src/merge/mkvmerge.cpp:2357
+#: src/merge/mkvmerge.cpp:2355
 #, no-c-format
 msgid "More than one name was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Más de un nombre fue asignado para un unico archivo adjunto.  '{0}' será descartado y '{1}' utilizado en su lugar.\n"
@@ -8572,7 +8572,7 @@ msgstr "Aplicación de multiplexado"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Multiplexando el archivo \"%1\" en el directorio \"%2\""
 
-#: src/merge/mkvmerge.cpp:3127
+#: src/merge/mkvmerge.cpp:3125
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "El multiplexado tardó {0}.\n"
@@ -8711,7 +8711,7 @@ msgstr "No se encontró ninguna cabecera AC-3 en el primero fotograma (frame): l
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "No se encontró ninguna cabecera DTS en el primer fotograma: la pista se omitirá.\n"
 
-#: src/common/kax_info.cpp:1226
+#: src/common/kax_info.cpp:1233
 #, no-c-format
 msgid "No EBML head found."
 msgstr "No se encontró ninguna cabecera EBML."
@@ -8867,7 +8867,7 @@ msgstr "No se pudo encontrar ningún segmento UID en el archivo '{0}'."
 msgid "No segment/level 0 element found."
 msgstr "No se encontró ningún elemento del segmento/nivel 0."
 
-#: src/merge/mkvmerge.cpp:2900
+#: src/merge/mkvmerge.cpp:2898
 #, no-c-format
 msgid "No source files were given.\n"
 msgstr "No se proporcionaron archivos de origen.\n"
@@ -9173,7 +9173,7 @@ msgstr "Solo está permitido un archivo de salida.\n"
 msgid "Only one instance of <{0}> is allowed beneath <{1}> at position {2}."
 msgstr "Solo una instancia de <{0}> se permite por debajo de <{1}> en la posición {2}.."
 
-#: src/common/xml/ebml_tags_converter.cpp:102
+#: src/common/xml/ebml_tags_converter.cpp:113
 #, no-c-format
 msgid "Only one of <String> and <Binary> may be used beneath <Simple> but not both at the same time."
 msgstr "Solo un <String> y<Binary> puede ser usado por debajo de <Simple>, no ambos a la vez."
@@ -9228,7 +9228,7 @@ msgstr "Por defecto, sólo las pistas con un idioma de la lista serán configura
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
 msgstr "Solo v7 y los archivos VobSub más actuales son compatibles. Si tienes una versión antigua, usa la herramienta VSConv, que puede descargar en http://sourceforge.net/projects/guliverkli/ y así convertir estos archivos al formato v7.\n"
 
-#: src/merge/mkvmerge.cpp:3048
+#: src/merge/mkvmerge.cpp:3046
 #, no-c-format
 msgid "Only {0} chapter found in source files & chapter files."
 msgid_plural "Only {0} chapters found in source files & chapter files."
@@ -9450,7 +9450,7 @@ msgstr "Analizar el archivo completo en lugar de confiar en el índice."
 msgid "Parser error:"
 msgstr "Error del analizador:"
 
-#: src/common/kax_info.cpp:619
+#: src/common/kax_info.cpp:626
 #, no-c-format
 msgid "Parsing file"
 msgstr "Analizando archivo"
@@ -9761,7 +9761,7 @@ msgstr "Progreso: [{0}{1}] {2}%"
 
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
-#: src/merge/mkvmerge.cpp:2916
+#: src/merge/mkvmerge.cpp:2914
 #: src/merge/output_control.cpp:363
 #: src/propedit/tag_target.cpp:352
 #: src/propedit/tag_target.cpp:365
@@ -9958,7 +9958,7 @@ msgstr "Lector de Quicktime/MP4: La pista {0} tiene ausente alguna información.
 msgid "RIFF CDXA"
 msgstr "RIFF CDXA"
 
-#: src/common/kax_info.cpp:816
+#: src/common/kax_info.cpp:823
 #, no-c-format
 msgid "RSA"
 msgstr "RSA"
@@ -10327,7 +10327,7 @@ msgstr "&Detener la lista de tareas"
 msgid "S&ystem information"
 msgstr "Información del s&istema"
 
-#: src/common/kax_info.cpp:825
+#: src/common/kax_info.cpp:832
 #, no-c-format
 msgid "SHA1-160"
 msgstr "SHA1-160"
@@ -10476,7 +10476,7 @@ msgstr "Analizando directorio"
 msgid "Scanning playlists"
 msgstr "Analizando playlists"
 
-#: src/merge/mkvmerge.cpp:2972
+#: src/merge/mkvmerge.cpp:2970
 #, no-c-format
 msgid "Scanning {0} files in {1} playlist.\n"
 msgid_plural "Scanning {0} files in {1} playlists.\n"
@@ -10519,7 +10519,7 @@ msgstr "Buscar registro"
 msgid "Seek head"
 msgstr "Buscar cabecera"
 
-#: src/common/kax_info.cpp:548
+#: src/common/kax_info.cpp:555
 #, no-c-format
 msgid "Seek head (subentries will be skipped)"
 msgstr "Buscar cabecera (los sub-registros serán omitidos)"
@@ -11178,7 +11178,7 @@ msgstr[1] "Iniciar tareas &manualmente"
 msgid "Started at:"
 msgstr "Iniciado:"
 
-#: src/common/kax_info.cpp:1196
+#: src/common/kax_info.cpp:1203
 #, no-c-format
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr "Estadísticas para la pista número {0}: número de bloques: {1}; tamaño en bytes: {2}; duración en segundos: {3}; bitrate aproximado en bits/segundo: {4}\n"
@@ -11614,17 +11614,17 @@ msgstr "El archivo de información del segmento XML '{0}' contiene un error: {1}
 msgid "The XML segmentinfo file '{0}' could not be read.\n"
 msgstr "El archivo de información del segmento XML '{0}' no fue posible leer.\n"
 
-#: src/common/xml/ebml_tags_converter.cpp:159
+#: src/common/xml/ebml_tags_converter.cpp:170
 #, no-c-format
 msgid "The XML tag file '{0}' contains an error at position {2}: {1}\n"
 msgstr "El archivo de etiquetas XML '{0}' contiene un error en la posición {2}: {1}\n"
 
-#: src/common/xml/ebml_tags_converter.cpp:162
+#: src/common/xml/ebml_tags_converter.cpp:173
 #, no-c-format
 msgid "The XML tag file '{0}' contains an error: {1}\n"
 msgstr "El archivo de etiquetas XML '{0}' contiene un error: {1}\n"
 
-#: src/common/xml/ebml_tags_converter.cpp:156
+#: src/common/xml/ebml_tags_converter.cpp:167
 #, no-c-format
 msgid "The XML tag file '{0}' could not be read.\n"
 msgstr "El archivo de etiqueta XML '{0}' no fue posible leer.\n"
@@ -11784,7 +11784,7 @@ msgstr "Configuración guardada."
 msgid "The correction file header was not read correctly.\n"
 msgstr "La cabecera del archivo de corrección no fue posible leer correctamente.\n"
 
-#: src/merge/output_control.cpp:1622
+#: src/merge/output_control.cpp:1624
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Los registros del cue (el índice) están siendo escritos...\n"
@@ -11904,7 +11904,7 @@ msgstr "La anchura de visualización de las dos pistas es diferente: {0} and {1}
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "La desventaja es que el multiplexado tardará más, ya que mkvmerge esperará hasta que todos los datos se hayan escrito para guardarlos antes de salir."
 
-#: src/merge/mkvmerge.cpp:3121
+#: src/merge/mkvmerge.cpp:3119
 #, no-c-format
 msgid "The drive may be full."
 msgstr "El disco podría estar lleno."
@@ -12049,7 +12049,7 @@ msgstr "El archivo '{0}' no se pudo abrir para su lectura: {1}."
 msgid "The file '{0}' could not be opened for reading: {1}.\n"
 msgstr "El archivo '{0}' no se pudo abrir para su lectura: {1}.\n"
 
-#: src/common/kax_info.cpp:1306
+#: src/common/kax_info.cpp:1313
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}."
 msgstr "El archivo '{0}' no pudo abrirse para su escritura: {1}."
@@ -12073,7 +12073,7 @@ msgstr "El archivo '{0}' no fue posible abrir para su escritura: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "El archivo '{0}' no se pudo abrir o analizar."
 
-#: src/merge/output_control.cpp:1584
+#: src/merge/output_control.cpp:1586
 #, no-c-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
 msgstr "El archivo '{0}' no se pudo renombrar a '{1}'.\n"
@@ -12093,7 +12093,7 @@ msgstr "El archivo {0} es un tipo de archivo incompatible ({1}).\n"
 msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "El archivo '{0}' no es un archivo Matroska o no pudo ser encontrado.\n"
 
-#: src/merge/output_control.cpp:1582
+#: src/merge/output_control.cpp:1584
 #, no-c-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
 msgstr "El archivo '{0}' se renombró a '{1}'.\n"
@@ -12604,7 +12604,7 @@ msgstr "Lo números dados con este argumento son interpretados en base al numero
 msgid "The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."
 msgstr "Los únicos códecs permitidos para pistas de vídeo y audio son VP8/VP9 y Vorbis/Opus, respectivamente."
 
-#: src/merge/mkvmerge.cpp:2454
+#: src/merge/mkvmerge.cpp:2452
 #, no-c-format
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "La opción '--meta-seek-size' ya no es compatible. Por favor, consulte la documentación de mkvmerge, especialmente la sección acerca de MATROSKA FILE LAYOUT.\n"
@@ -12977,7 +12977,7 @@ msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once.
 msgstr "La pista {0} del archivo n.º {1} ('{2}') puede ser unida más de una vez. El argumento para '--append-to' no es válido.\n"
 
 #: src/merge/mkvmerge.cpp:2009
-#: src/merge/mkvmerge.cpp:2939
+#: src/merge/mkvmerge.cpp:2937
 #, no-c-format
 msgid "The type of file '{0}' could not be recognized.\n"
 msgstr "No se pudo reconocer el tipo de archivo '{0}'.\n"
@@ -13247,7 +13247,7 @@ msgstr "Este archivo contiene las coordenadas en las líneas del código de tiem
 msgid "This file could not be opened or parsed.\n"
 msgstr "Este archivo no fue posible abrir o analizado.\n"
 
-#: src/common/kax_info.cpp:1226
+#: src/common/kax_info.cpp:1233
 #, no-c-format
 msgid "This file is probably not a Matroska file."
 msgstr "Este archivo probablemente no es un archivo Mastroska."
@@ -13423,7 +13423,7 @@ msgstr "Esta propiedad es obligatoria y no puede ser eliminada en '{0}'. {1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Esta propiedad es única. No pueden ser añadidos más instancias en '{0}'. {1}\n"
 
-#: src/merge/output_control.cpp:1735
+#: src/merge/output_control.cpp:1739
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "REALMENTE esto no debería haber ocurrido. El espacio reservado para el primer elemento de meta seek es demasiado pequeño. Tamaño necesario: {0}. {1}\n"
@@ -13697,7 +13697,7 @@ msgstr "Pista {0}: Subtítulo con número de registro {1} carece de duración. A
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "Pista {0}: La información AAC no ha podido ser analizada.\n"
 
-#: src/common/kax_info.cpp:656
+#: src/common/kax_info.cpp:663
 #, no-c-format
 msgid "Track {0}: {1}, codec ID: {2}{3}{4}{5}\n"
 msgstr "La pista {0}: {1}, el CodecID: {2}{3}{4}{5}\n"
@@ -13806,8 +13806,8 @@ msgstr "Indeterminado"
 msgid "Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Fotograma de imagen inesperado después de un fotograma de un único campo. Fija el archivo del vídeo MPEG2 antes de intentar multiplexarlo.\n"
 
-#: src/common/kax_info.cpp:411
-#: src/common/kax_info.cpp:420
+#: src/common/kax_info.cpp:418
+#: src/common/kax_info.cpp:427
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:171
 #: src/mkvtoolnix-gui/jobs/job.cpp:276
 #, no-c-format
@@ -13829,7 +13829,7 @@ msgstr "Formato del archivo de capítulos desconocido en '{0}'. No contiene ning
 msgid "Unknown content encoding type {0} for track {1}.\n"
 msgstr "Contenido codificado de tipo desconocido {0} para la pista {1}.\n"
 
-#: src/common/kax_info.cpp:1250
+#: src/common/kax_info.cpp:1257
 #, no-c-format
 msgid "Unknown element"
 msgstr "Elemento desconocido"
@@ -14687,7 +14687,7 @@ msgstr "Version errónea de Kate: {0}.{1} > {2}.x"
 msgid "Wrong Theora version: {0}.{1}.{2} != 3.2.x"
 msgstr "Version errónea de Theora: {0}.{1}.{2} != 3.2.x"
 
-#: src/merge/mkvmerge.cpp:2277
+#: src/merge/mkvmerge.cpp:2278
 #, no-c-format
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "Argumento erróneo para  '--split-max-files'.\n"
@@ -14877,14 +14877,14 @@ msgstr "Anaglifo (verde/magenta)"
 msgid "attachments [options] [AID1:out1 [AID2:out2 ...]]"
 msgstr "attachments [opciones] [AID1:salida1 [AID2:salida2 ...]]"
 
-#: src/common/kax_info.cpp:658
-#: src/common/kax_info.cpp:834
+#: src/common/kax_info.cpp:665
+#: src/common/kax_info.cpp:841
 #: src/input/r_matroska.cpp:131
 #, no-c-format
 msgid "audio"
 msgstr "Audio"
 
-#: src/common/kax_info.cpp:627
+#: src/common/kax_info.cpp:634
 #, no-c-format
 msgid "bits per sample: {0}"
 msgstr "bits por muestra: {0}"
@@ -14899,24 +14899,24 @@ msgstr "Ambos ojos mezclados en un bloque (el izquierdo primero)"
 msgid "both eyes laced in one block (right first)"
 msgstr "Ambos ojos mezclados en un bloque (el derecho primero)"
 
-#: src/common/kax_info.cpp:741
+#: src/common/kax_info.cpp:748
 #, no-c-format
 msgid "bottom field displayed first, bottom field stored first"
 msgstr "campo inferior mostrado primerao, campo inferior almacenado primero"
 
-#: src/common/kax_info.cpp:742
+#: src/common/kax_info.cpp:749
 #, no-c-format
 msgid "bottom field displayed first, top field stored first"
 msgstr "campo inferior mostrado primero, campo superior almacenado primero"
 
-#: src/common/kax_info.cpp:661
-#: src/common/kax_info.cpp:837
+#: src/common/kax_info.cpp:668
+#: src/common/kax_info.cpp:844
 #: src/input/r_matroska.cpp:132
 #, no-c-format
 msgid "buttons"
 msgstr "botones"
 
-#: src/common/kax_info.cpp:626
+#: src/common/kax_info.cpp:633
 #, no-c-format
 msgid "channels: {0}"
 msgstr "canales: {0}"
@@ -14946,7 +14946,7 @@ msgstr "Columna intercalada (izquierda primero)"
 msgid "column interleaved (right first)"
 msgstr "Columna intercalada (derecha primero)"
 
-#: src/common/kax_info.cpp:782
+#: src/common/kax_info.cpp:789
 #, no-c-format
 msgid "compression"
 msgstr "compresión"
@@ -14956,7 +14956,7 @@ msgstr "compresión"
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: file_num no se encuentra. {0}\n"
 
-#: src/common/kax_info.cpp:716
+#: src/common/kax_info.cpp:723
 #, no-c-format
 msgid "cubemap"
 msgstr "mapeo cúbico"
@@ -14971,7 +14971,7 @@ msgstr "cues <archivo> [opciones] [TID1:salida1 [TID2:salida2 ...]]"
 msgid "cuesheet [options] out.cue"
 msgstr "cuesheet [opciones] salida.cue"
 
-#: src/common/kax_info.cpp:647
+#: src/common/kax_info.cpp:654
 #, no-c-format
 msgid "default duration: {0:.3f}ms ({1:.3f} frames/fields per second for a video track)"
 msgstr "Duración por defecto: {0:.3f}ms ({1:.3f} fotogramas/campos por segundo para una pista de vídeo)"
@@ -14981,27 +14981,27 @@ msgstr "Duración por defecto: {0:.3f}ms ({1:.3f} fotogramas/campos por segundo 
 msgid "deflateInit() failed. Result: {0}\n"
 msgstr "deflateInit() ha fallado. Resultado: {0}\n"
 
-#: src/common/kax_info.cpp:1014
+#: src/common/kax_info.cpp:1021
 #, no-c-format
 msgid "discardable, "
 msgstr "descartable, "
 
-#: src/common/kax_info.cpp:632
+#: src/common/kax_info.cpp:639
 #, no-c-format
 msgid "display height: {0}"
 msgstr "altura de visualización: {0}"
 
-#: src/common/kax_info.cpp:631
+#: src/common/kax_info.cpp:638
 #, no-c-format
 msgid "display width: {0}"
 msgstr "anchura de visualización: {0}"
 
-#: src/common/kax_info.cpp:783
+#: src/common/kax_info.cpp:790
 #, no-c-format
 msgid "encryption"
 msgstr "cifrado"
 
-#: src/common/kax_info.cpp:715
+#: src/common/kax_info.cpp:722
 #, no-c-format
 msgid "equirectangular"
 msgstr "equirectangular"
@@ -15081,7 +15081,7 @@ msgstr "para archivos de subtítulos no usar marcas de orden por byte (BOM) y qu
 msgid "generic video"
 msgstr "vídeo genérico"
 
-#: src/common/kax_info.cpp:794
+#: src/common/kax_info.cpp:801
 #, no-c-format
 msgid "header removal"
 msgstr "Cabecera eliminada"
@@ -15096,7 +15096,7 @@ msgstr "inflateInit() ha fallado. Resultado: {0}\n"
 msgid "invalid language tag '{0}': {1}"
 msgstr "Etiqueta de idioma incorrecta '{0}': {1}"
 
-#: src/common/kax_info.cpp:1012
+#: src/common/kax_info.cpp:1019
 #, no-c-format
 msgid "key, "
 msgstr "clave, "
@@ -15106,17 +15106,17 @@ msgstr "clave, "
 msgid "language"
 msgstr "idioma"
 
-#: src/common/kax_info.cpp:638
+#: src/common/kax_info.cpp:645
 #, no-c-format
 msgid "language (IETF BCP 47): {0}"
 msgstr "idioma (IETF BCP 47): {0}"
 
-#: src/common/kax_info.cpp:637
+#: src/common/kax_info.cpp:644
 #, no-c-format
 msgid "language: {0}"
 msgstr "idioma: {0}"
 
-#: src/common/kax_info.cpp:457
+#: src/common/kax_info.cpp:464
 #, no-c-format
 msgid "length {0}, data: {1}"
 msgstr "Extensión {0}, datos: {1}"
@@ -15247,7 +15247,7 @@ msgstr "memory.cpp/safememdup() llamada desde el archivo {0}, línea {1}: malloc
 msgid "memory.cpp/saferealloc() called from file {0}, line {1}: realloc() returned nullptr for a size of {2} bytes.\n"
 msgstr "memory.cpp/saferealloc() llamada desde el archivo {0}, línea {1}: realloc() returned nullptr por un tamaño de {2} bytes.\n"
 
-#: src/common/kax_info.cpp:717
+#: src/common/kax_info.cpp:724
 #, no-c-format
 msgid "mesh"
 msgstr "malla"
@@ -15402,7 +15402,7 @@ msgstr "mkvmerge admite dos formatos de capítulos: El OGM como formato de texto
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmerge fue interrumpido por un SIGINT (señales de inteligencia) (¿Ctrl+C?)\n"
 
-#: src/common/kax_info.cpp:583
+#: src/common/kax_info.cpp:590
 #, no-c-format
 msgid "mkvmerge/mkvextract track ID: {0}"
 msgstr "ID de pista de mkvmerge/mkvextract: {0}"
@@ -15447,7 +15447,7 @@ msgstr "mpeg_ps_reader: No tendria que haber ocurrido #1. {0}"
 msgid "mpeg_ps_reader: Should not have happened #2. {0}"
 msgstr "mpeg_ps_reader: No tendria que haber ocurrido #2. {0}"
 
-#: src/common/kax_info.cpp:802
+#: src/common/kax_info.cpp:809
 #, no-c-format
 msgid "no encryption"
 msgstr "ningún cifrado"
@@ -15462,12 +15462,12 @@ msgstr "ningún error"
 msgid "no language selected"
 msgstr "ningún idioma seleccionado"
 
-#: src/common/kax_info.cpp:815
+#: src/common/kax_info.cpp:822
 #, no-c-format
 msgid "no signature algorithm"
 msgstr "ninguna firma algorítmica"
 
-#: src/common/kax_info.cpp:824
+#: src/common/kax_info.cpp:831
 #, no-c-format
 msgid "no signature hash algorithm"
 msgstr "ninguna firma con algoritmo hash"
@@ -15488,7 +15488,7 @@ msgstr "ogg_sync_buffer ha fallado\n"
 msgid "or"
 msgstr "o"
 
-#: src/common/kax_info.cpp:625
+#: src/common/kax_info.cpp:632
 #, no-c-format
 msgid "output sampling freq: {0}"
 msgstr "frecuencia de muestreo de salida: {0}"
@@ -15498,37 +15498,37 @@ msgstr "frecuencia de muestreo de salida: {0}"
 msgid "passthrough"
 msgstr "atajo"
 
-#: src/common/kax_info.cpp:636
+#: src/common/kax_info.cpp:643
 #, no-c-format
 msgid "pixel crop bottom: {0}"
 msgstr "recorte inferior en píxeles: {0}"
 
-#: src/common/kax_info.cpp:633
+#: src/common/kax_info.cpp:640
 #, no-c-format
 msgid "pixel crop left: {0}"
 msgstr "recorte izquierdo en píxeles: {0}"
 
-#: src/common/kax_info.cpp:635
+#: src/common/kax_info.cpp:642
 #, no-c-format
 msgid "pixel crop right: {0}"
 msgstr "recorte derecho en píxeles: {0}"
 
-#: src/common/kax_info.cpp:634
+#: src/common/kax_info.cpp:641
 #, no-c-format
 msgid "pixel crop top: {0}"
 msgstr "recorte superior en píxeles: {0}"
 
-#: src/common/kax_info.cpp:630
+#: src/common/kax_info.cpp:637
 #, no-c-format
 msgid "pixel height: {0}"
 msgstr "altura de píxeles: {0}"
 
-#: src/common/kax_info.cpp:629
+#: src/common/kax_info.cpp:636
 #, no-c-format
 msgid "pixel width: {0}"
 msgstr "anchura en píxeles: {0}"
 
-#: src/common/kax_info.cpp:738
+#: src/common/kax_info.cpp:745
 #, no-c-format
 msgid "progressive"
 msgstr "progresivo"
@@ -15553,12 +15553,12 @@ msgstr "real_reader: No se encuentra el FourCC de RealAudio para el ID {0} (desc
 msgid "real_reader: Only audio header versions 3, 4 and 5 are supported. Track ID {0} uses version {1} and will be skipped.\n"
 msgstr "real_reader: Solo las versiones 3, 4 y 5 de las cabeceras de  audio son compatibles. El ID de la pista {0} usa una versión {1} y se omitirá.\n"
 
-#: src/common/kax_info.cpp:714
+#: src/common/kax_info.cpp:721
 #, no-c-format
 msgid "rectangular"
 msgstr "rectangular"
 
-#: src/common/kax_info.cpp:771
+#: src/common/kax_info.cpp:778
 #, no-c-format
 msgid "rest: unknown"
 msgstr "interrupción desconocida"
@@ -15573,7 +15573,7 @@ msgstr "Fila intercalada (izquierda primero)"
 msgid "row interleaved (right first)"
 msgstr "Fila intercalada (derecha primero)"
 
-#: src/common/kax_info.cpp:624
+#: src/common/kax_info.cpp:631
 #, no-c-format
 msgid "sampling freq: {0}"
 msgstr "frecuencia de muestreo: {0}"
@@ -15588,13 +15588,13 @@ msgstr "Lado por lado (izquierda primero)"
 msgid "side by side (right first)"
 msgstr "Lado por lado (derecha primero)"
 
-#: src/common/kax_info.cpp:479
+#: src/common/kax_info.cpp:486
 #, no-c-format
 msgid "size unknown"
 msgstr "tamaño desconocido"
 
-#: src/common/kax_info.cpp:478
-#: src/common/kax_info.cpp:842
+#: src/common/kax_info.cpp:485
+#: src/common/kax_info.cpp:849
 #, no-c-format
 msgid "size {0}"
 msgstr "tamaño {0}"
@@ -15609,8 +15609,8 @@ msgstr "ssa_reader: Formato no válido. No se encuentra la línea \"Format\" en 
 msgid "subtitle"
 msgstr "subtítulo"
 
-#: src/common/kax_info.cpp:660
-#: src/common/kax_info.cpp:836
+#: src/common/kax_info.cpp:667
+#: src/common/kax_info.cpp:843
 #, no-c-format
 msgid "subtitles"
 msgstr "Subtítulos"
@@ -15625,7 +15625,7 @@ msgstr "tags [opciones] salida.xml"
 msgid "text subtitles"
 msgstr "Subtítulos de texto"
 
-#: src/merge/mkvmerge.cpp:2822
+#: src/merge/mkvmerge.cpp:2820
 #, no-c-format
 msgid "timestamps"
 msgstr "códigos de tiempo"
@@ -15645,22 +15645,22 @@ msgstr "Arriba abajo (izquierda primero)"
 msgid "top bottom (right first)"
 msgstr "Arriba abajo (derecha primero)"
 
-#: src/common/kax_info.cpp:743
+#: src/common/kax_info.cpp:750
 #, no-c-format
 msgid "top field displayed first, bottom field stored first"
 msgstr "campo superior mostrado primerao, campo inferior almacenado primero"
 
-#: src/common/kax_info.cpp:739
+#: src/common/kax_info.cpp:746
 #, no-c-format
 msgid "top field displayed first, top field stored first"
 msgstr "campo superior mostrado primerao, campo superior almacenado primero"
 
-#: src/merge/mkvmerge.cpp:2814
+#: src/merge/mkvmerge.cpp:2812
 #, no-c-format
 msgid "track name"
 msgstr "nombre de la pista"
 
-#: src/common/kax_info.cpp:881
+#: src/common/kax_info.cpp:888
 #, no-c-format
 msgid "track number {0}, {1} frame(s), timestamp {2}"
 msgstr "pista número {0}, {1} cuadro(s), marca de tiempo {2}"
@@ -15677,16 +15677,16 @@ msgstr "tta_reader: tamaño_etiqueta < 0 en el c'tor. {0}\n"
 
 #: src/common/file_types.cpp:113
 #: src/common/fs_sys_helpers/windows.cpp:191
-#: src/common/kax_info.cpp:662
-#: src/common/kax_info.cpp:718
-#: src/common/kax_info.cpp:744
-#: src/common/kax_info.cpp:773
-#: src/common/kax_info.cpp:784
-#: src/common/kax_info.cpp:795
-#: src/common/kax_info.cpp:808
-#: src/common/kax_info.cpp:817
-#: src/common/kax_info.cpp:827
-#: src/common/kax_info.cpp:838
+#: src/common/kax_info.cpp:669
+#: src/common/kax_info.cpp:725
+#: src/common/kax_info.cpp:751
+#: src/common/kax_info.cpp:780
+#: src/common/kax_info.cpp:791
+#: src/common/kax_info.cpp:802
+#: src/common/kax_info.cpp:815
+#: src/common/kax_info.cpp:824
+#: src/common/kax_info.cpp:834
+#: src/common/kax_info.cpp:845
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:130
 #: src/input/r_matroska.cpp:2818
@@ -15710,13 +15710,13 @@ msgstr "Desconocido, formato de la etiqueta 0x{0:04x}"
 msgid "unnamed"
 msgstr "sin nombre"
 
-#: src/common/kax_info.cpp:740
+#: src/common/kax_info.cpp:747
 #, no-c-format
 msgid "unspecified"
 msgstr "indeterminado"
 
-#: src/common/kax_info.cpp:659
-#: src/common/kax_info.cpp:835
+#: src/common/kax_info.cpp:666
+#: src/common/kax_info.cpp:842
 #: src/input/r_matroska.cpp:133
 #, no-c-format
 msgid "video"
@@ -15732,12 +15732,12 @@ msgstr "vobsub_reader: fallo de lectura del archivo de subtítulos"
 msgid "x"
 msgstr "x"
 
-#: src/common/kax_info.cpp:830
+#: src/common/kax_info.cpp:837
 #, no-c-format
 msgid "{0} (track ID for mkvmerge & mkvextract: {1})"
 msgstr "{0} (ID de pista para mkvmerge y mkvextract: {1})"
 
-#: src/common/kax_info.cpp:847
+#: src/common/kax_info.cpp:854
 #, no-c-format
 msgid "{0} ({1:.3f} frames/fields per second for a video track)"
 msgstr "{0} ({1:.3f} cuadros por segundo para una pista de vídeo)"
@@ -15749,17 +15749,17 @@ msgid_plural "{0} bytes"
 msgstr[0] "{0} byte"
 msgstr[1] "{0} bytes"
 
-#: src/common/kax_info.cpp:951
+#: src/common/kax_info.cpp:958
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"
 msgstr "Cuadro {0}, pista {1}, marca de tiempo {2}, duración {3}, tamaño {4}, adler 0x{5:08x}{6}{7}\n"
 
-#: src/common/kax_info.cpp:1070
+#: src/common/kax_info.cpp:1077
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}\n"
 msgstr "Cuadro {0}, pista {1}, marca de tiempo {2}, tamaño {3}, adler 0x{4:08x}{5}\n"
 
-#: src/common/kax_info.cpp:961
+#: src/common/kax_info.cpp:968
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"
 msgstr "Cuadro {0}, pista {1}, marca de tiempo {2}, tamaño {3}, adler 0x{4:08x}{5}{6}\n"
@@ -15841,7 +15841,7 @@ msgstr "{0}: divisor ausente en '{1} {2}'.\n"
 msgid "{0}: missing track ID in '{1} {2}'.\n"
 msgstr "{0}: ID de pista ausente en '{1} {2}'.\n"
 
-#: src/common/kax_info.cpp:1016
+#: src/common/kax_info.cpp:1023
 #, no-c-format
 msgid "{0}track number {1}, {2} frame(s), timestamp {3}"
 msgstr "Pista de {0} número {1}, {2} cuadro(s), marca de tiempo {3}"

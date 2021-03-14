@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-03-09 21:22+0100\n"
+"POT-Creation-Date: 2021-03-14 21:31+0100\n"
 "PO-Revision-Date: 2021-01-21 15:28+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/moritz-"
@@ -435,8 +435,8 @@ msgstr "  --disable-lacing         Ne koristi uvezivanje.\n"
 #: src/merge/mkvmerge.cpp:141
 #, no-c-format
 msgid ""
-"  --disable-language-ietf  Do not write LanguageIETF track header and\n"
-"                           ChapLanguageIETF chapter elements.\n"
+"  --disable-language-ietf  Do not write IETF BCP 47 language elements in\n"
+"                           track headers, chapters and tags.\n"
 msgstr ""
 
 #: src/merge/mkvmerge.cpp:139
@@ -1187,65 +1187,65 @@ msgstr "  X:  binarni heksadecimalni\n"
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
 msgstr "  [ <file1> <file2> ]      Isto kao \"<file1> + <file2>\".\n"
 
-#: src/common/kax_info.cpp:388
+#: src/common/kax_info.cpp:395
 #, no-c-format
 msgid " (FourCC: {0})"
 msgstr " (FourCC: {0})"
 
-#: src/common/kax_info.cpp:397
+#: src/common/kax_info.cpp:404
 #, no-c-format
 msgid " (H.264 profile: {0} @L{1}.{2})"
 msgstr " (H.264 profil: {0} @L{1}.{2})"
 
-#: src/common/kax_info.cpp:416
+#: src/common/kax_info.cpp:423
 #, no-c-format
 msgid " (HEVC profile: {0} @L{1}.{2})"
 msgstr " (HEVC profil: {0} @L{1}.{2})"
 
-#: src/common/kax_info.cpp:463
-#: src/common/kax_info.cpp:605
-#: src/common/kax_info.cpp:899
-#: src/common/kax_info.cpp:1044
+#: src/common/kax_info.cpp:470
+#: src/common/kax_info.cpp:612
+#: src/common/kax_info.cpp:906
+#: src/common/kax_info.cpp:1051
 #, no-c-format
 msgid " (adler: 0x{0:08x})"
 msgstr " (adler: 0x{0:08x})"
 
-#: src/common/kax_info.cpp:730
+#: src/common/kax_info.cpp:737
 #, no-c-format
 msgid " (aspect ratio)"
 msgstr " (format slike)"
 
-#: src/common/kax_info.cpp:728
+#: src/common/kax_info.cpp:735
 #, no-c-format
 msgid " (centimeters)"
 msgstr " (centimetri)"
 
-#: src/common/kax_info.cpp:758
+#: src/common/kax_info.cpp:765
 #, no-c-format
 msgid " (fixed)"
 msgstr " (fixed)"
 
-#: src/common/kax_info.cpp:392
+#: src/common/kax_info.cpp:399
 #, no-c-format
 msgid " (format tag: 0x{0:04x})"
 msgstr " (tag formata: 0x{0:04x})"
 
-#: src/common/kax_info.cpp:756
+#: src/common/kax_info.cpp:763
 #, no-c-format
 msgid " (free resizing)"
 msgstr " (proizvoljna promena veličine)"
 
-#: src/common/kax_info.cpp:729
+#: src/common/kax_info.cpp:736
 #, no-c-format
 msgid " (inches)"
 msgstr " (inči)"
 
-#: src/common/kax_info.cpp:757
+#: src/common/kax_info.cpp:764
 #, no-c-format
 msgid " (keep aspect ratio)"
 msgstr " (sačuvaj format slike)"
 
-#: src/common/kax_info.cpp:727
+#: src/common/kax_info.cpp:734
 #, no-c-format
 msgid " (pixels)"
 msgstr " (pikseli)"
@@ -1305,18 +1305,18 @@ msgstr " Druge opcije:\n"
 msgid " Segment info handling:\n"
 msgstr " Rukovanje informacijom o segmentu:\n"
 
-#: src/common/kax_info.cpp:288
+#: src/common/kax_info.cpp:295
 #, no-c-format
 msgid " at 0x{0:x}"
 msgstr " at 0x{0:x}"
 
-#: src/common/kax_info.cpp:288
+#: src/common/kax_info.cpp:295
 #: src/extract/mkvextract.cpp:105
 #, no-c-format
 msgid " at {0}"
 msgstr " at {0}"
 
-#: src/common/kax_info.cpp:298
+#: src/common/kax_info.cpp:305
 #, fuzzy, no-c-format
 msgid " data size {0}"
 msgstr " veličina {0}"
@@ -1345,12 +1345,12 @@ msgstr[0] " sekund"
 msgstr[1] " sekunde"
 msgstr[2] " sekundi"
 
-#: src/common/kax_info.cpp:294
+#: src/common/kax_info.cpp:301
 #, no-c-format
 msgid " size is unknown"
 msgstr " veličina je nepoznata"
 
-#: src/common/kax_info.cpp:292
+#: src/common/kax_info.cpp:299
 #, no-c-format
 msgid " size {0}"
 msgstr " veličina {0}"
@@ -2342,32 +2342,32 @@ msgstr "&Postavi jezik:"
 msgid "&Window"
 msgstr "&Prozor"
 
-#: src/merge/mkvmerge.cpp:2525
+#: src/merge/mkvmerge.cpp:2523
 #, no-c-format
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' nije naveden format slike.\n"
 
-#: src/merge/mkvmerge.cpp:2532
+#: src/merge/mkvmerge.cpp:2530
 #, no-c-format
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr "'--aspect-ratio-factor' nije naveden faktor formata slike.\n"
 
-#: src/merge/mkvmerge.cpp:2335
+#: src/merge/mkvmerge.cpp:2333
 #, no-c-format
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "'--attachment-description' nije naveden opis.\n"
 
-#: src/merge/mkvmerge.cpp:2344
+#: src/merge/mkvmerge.cpp:2342
 #, no-c-format
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "'--attachment-mime-type' nije naveden MIME tip.\n"
 
-#: src/merge/mkvmerge.cpp:2354
+#: src/merge/mkvmerge.cpp:2352
 #, no-c-format
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' nije navedno ime.\n"
 
-#: src/merge/mkvmerge.cpp:2390
+#: src/merge/mkvmerge.cpp:2388
 #, no-c-format
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "'--chapter-charset' nije naveden skup znakova.\n"
@@ -2382,7 +2382,7 @@ msgstr "'--chapter-charset' može biti navedeno samo jednom u '--chapter-charset
 msgid "'--chapter-charset' must be given before '--chapters' in '--chapter-charset {0}'.\n"
 msgstr "'--chapter-charset' mora biti navedeno ispred '--chapters' u '--chapter-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:2383
+#: src/merge/mkvmerge.cpp:2381
 #, no-c-format
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "'--chapter-language' nije naveden jezik.\n"
@@ -2397,12 +2397,12 @@ msgstr "'--chapter-language' može biti navedeno samo jednom u '--chapter-langua
 msgid "'--chapter-language' must be given before '--chapters' in '--chapter-language {0}'.\n"
 msgstr "'--chapter-language' mora biti navedeno ispred '--chapters' u '--chapter-language {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:2414
+#: src/merge/mkvmerge.cpp:2412
 #, no-c-format
 msgid "'--chapters' lacks the file name.\n"
 msgstr "'--chapters' nije navedeno ime fajla.\n"
 
-#: src/merge/mkvmerge.cpp:2307
+#: src/merge/mkvmerge.cpp:2308
 #, no-c-format
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length' nije navedena dužina.\n"
@@ -2412,22 +2412,22 @@ msgstr "'--cluster-length' nije navedena dužina.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' nije naveden argument.\n"
 
-#: src/merge/mkvmerge.cpp:2546
+#: src/merge/mkvmerge.cpp:2544
 #, no-c-format
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' nije naveden parametar za podrezivanje.\n"
 
-#: src/merge/mkvmerge.cpp:2404
+#: src/merge/mkvmerge.cpp:2402
 #, no-c-format
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "'--cue-chapter-name-format' nije naveden format.\n"
 
-#: src/merge/mkvmerge.cpp:2407
+#: src/merge/mkvmerge.cpp:2405
 #, no-c-format
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format' mora biti navedeno ispred parametra '--chapters'.\n"
 
-#: src/merge/mkvmerge.cpp:2539
+#: src/merge/mkvmerge.cpp:2537
 #, no-c-format
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' nisu navedene dimenzije.\n"
@@ -2437,7 +2437,7 @@ msgstr "'--display-dimensions' nisu navedene dimenzije.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' nije naveden argument.\n"
 
-#: src/merge/mkvmerge.cpp:2423
+#: src/merge/mkvmerge.cpp:2421
 #, no-c-format
 msgid "'--generate-chapters' lacks the mode.\n"
 msgstr "'--generate-chapters' nije naveden način.\n"
@@ -2447,42 +2447,42 @@ msgstr "'--generate-chapters' nije naveden način.\n"
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
 msgstr "'--generate-chapters-name-template' nije naveden obrazac za ime.\n"
 
-#: src/merge/mkvmerge.cpp:2374
+#: src/merge/mkvmerge.cpp:2372
 #, no-c-format
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' nije navedeno ime fajla.\n"
 
-#: src/merge/mkvmerge.cpp:2897
+#: src/merge/mkvmerge.cpp:2895
 #, no-c-format
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "'--link' samo ima smisla u kombinaciji sa '--split'.\n"
 
-#: src/merge/mkvmerge.cpp:2293
+#: src/merge/mkvmerge.cpp:2294
 #, no-c-format
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "'--link-to-next' nije naveden sledeći UID.\n"
 
-#: src/merge/mkvmerge.cpp:2286
+#: src/merge/mkvmerge.cpp:2287
 #, no-c-format
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' nije naveden prethodni UID.\n"
 
-#: src/merge/mkvmerge.cpp:2300
+#: src/merge/mkvmerge.cpp:2301
 #, no-c-format
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "'--segment-uid' nije naveden segment UID.\n"
 
-#: src/merge/mkvmerge.cpp:2430
+#: src/merge/mkvmerge.cpp:2428
 #, no-c-format
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "'--segmentinfo' nije navedeno ime fajla.\n"
 
-#: src/merge/mkvmerge.cpp:2267
+#: src/merge/mkvmerge.cpp:2268
 #, no-c-format
 msgid "'--split' lacks the size.\n"
 msgstr "'--split' nije navedena veličina.\n"
 
-#: src/merge/mkvmerge.cpp:2274
+#: src/merge/mkvmerge.cpp:2275
 #, no-c-format
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' nije naveden broj fajlova.\n"
@@ -2492,12 +2492,12 @@ msgstr "'--split-max-files' nije naveden broj fajlova.\n"
 msgid "'--timestamp-scale' was used more than once.\n"
 msgstr "'--timestamp-scale' je korišćen više od jednog puta.\n"
 
-#: src/merge/mkvmerge.cpp:2259
+#: src/merge/mkvmerge.cpp:2260
 #, no-c-format
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' nije naveden naslov.\n"
 
-#: src/merge/mkvmerge.cpp:2831
+#: src/merge/mkvmerge.cpp:2829
 #, no-c-format
 msgid "'--track-order' may only be given once.\n"
 msgstr "'--track-order' može biti naveden samo jednom.\n"
@@ -2569,13 +2569,13 @@ msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Addition
 msgstr ""
 
 #: src/common/xml/ebml_chapters_converter.cpp:151
-#: src/common/xml/ebml_tags_converter.cpp:114
+#: src/common/xml/ebml_tags_converter.cpp:125
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
 msgstr ""
 
 #: src/common/xml/ebml_chapters_converter.cpp:173
-#: src/common/xml/ebml_tags_converter.cpp:136
+#: src/common/xml/ebml_tags_converter.cpp:147
 #, no-c-format
 msgid "'{0}' is not a valid ISO 639-2 language code."
 msgstr "'{0}' nije važeći ISO 639-2 jezički kod."
@@ -2675,87 +2675,87 @@ msgstr "'{0}' nedostaje ime fajla.\n"
 #: src/merge/mkvmerge.cpp:2070
 #: src/merge/mkvmerge.cpp:2135
 #: src/merge/mkvmerge.cpp:2201
-#: src/merge/mkvmerge.cpp:2246
-#: src/merge/mkvmerge.cpp:2445
-#: src/merge/mkvmerge.cpp:2459
-#: src/merge/mkvmerge.cpp:2693
-#: src/merge/mkvmerge.cpp:2707
-#: src/merge/mkvmerge.cpp:2714
-#: src/merge/mkvmerge.cpp:2721
-#: src/merge/mkvmerge.cpp:2728
-#: src/merge/mkvmerge.cpp:2735
-#: src/merge/mkvmerge.cpp:2742
-#: src/merge/mkvmerge.cpp:2749
-#: src/merge/mkvmerge.cpp:2756
-#: src/merge/mkvmerge.cpp:2763
-#: src/merge/mkvmerge.cpp:2770
-#: src/merge/mkvmerge.cpp:2777
-#: src/merge/mkvmerge.cpp:2784
-#: src/merge/mkvmerge.cpp:2798
-#: src/merge/mkvmerge.cpp:2805
-#: src/merge/mkvmerge.cpp:2812
-#: src/merge/mkvmerge.cpp:2820
-#: src/merge/mkvmerge.cpp:2828
-#: src/merge/mkvmerge.cpp:2838
-#: src/merge/mkvmerge.cpp:2845
-#: src/merge/mkvmerge.cpp:2852
-#: src/merge/mkvmerge.cpp:2864
-#: src/merge/mkvmerge.cpp:2871
-#: src/merge/mkvmerge.cpp:2878
+#: src/merge/mkvmerge.cpp:2247
+#: src/merge/mkvmerge.cpp:2443
+#: src/merge/mkvmerge.cpp:2457
+#: src/merge/mkvmerge.cpp:2691
+#: src/merge/mkvmerge.cpp:2705
+#: src/merge/mkvmerge.cpp:2712
+#: src/merge/mkvmerge.cpp:2719
+#: src/merge/mkvmerge.cpp:2726
+#: src/merge/mkvmerge.cpp:2733
+#: src/merge/mkvmerge.cpp:2740
+#: src/merge/mkvmerge.cpp:2747
+#: src/merge/mkvmerge.cpp:2754
+#: src/merge/mkvmerge.cpp:2761
+#: src/merge/mkvmerge.cpp:2768
+#: src/merge/mkvmerge.cpp:2775
+#: src/merge/mkvmerge.cpp:2782
+#: src/merge/mkvmerge.cpp:2796
+#: src/merge/mkvmerge.cpp:2803
+#: src/merge/mkvmerge.cpp:2810
+#: src/merge/mkvmerge.cpp:2818
+#: src/merge/mkvmerge.cpp:2826
+#: src/merge/mkvmerge.cpp:2836
+#: src/merge/mkvmerge.cpp:2843
+#: src/merge/mkvmerge.cpp:2850
+#: src/merge/mkvmerge.cpp:2862
+#: src/merge/mkvmerge.cpp:2869
+#: src/merge/mkvmerge.cpp:2876
 #, no-c-format
 msgid "'{0}' lacks its argument.\n"
 msgstr "'{0}' nedostaje njegov argument.\n"
 
-#: src/merge/mkvmerge.cpp:2518
+#: src/merge/mkvmerge.cpp:2516
 #, no-c-format
 msgid "'{0}' lacks the FourCC.\n"
 msgstr "'{0}' nedostaje FourCC.\n"
 
-#: src/merge/mkvmerge.cpp:2397
-#: src/merge/mkvmerge.cpp:2700
+#: src/merge/mkvmerge.cpp:2395
+#: src/merge/mkvmerge.cpp:2698
 #, no-c-format
 msgid "'{0}' lacks the delay.\n"
 msgstr "'{0}' nedostaje kašnjenje.\n"
 
-#: src/merge/mkvmerge.cpp:2364
+#: src/merge/mkvmerge.cpp:2362
 #, no-c-format
 msgid "'{0}' lacks the file name.\n"
 msgstr "'{0}' nedostaje ime fajla.\n"
 
-#: src/merge/mkvmerge.cpp:2553
-#: src/merge/mkvmerge.cpp:2560
-#: src/merge/mkvmerge.cpp:2567
-#: src/merge/mkvmerge.cpp:2574
-#: src/merge/mkvmerge.cpp:2581
-#: src/merge/mkvmerge.cpp:2588
-#: src/merge/mkvmerge.cpp:2595
-#: src/merge/mkvmerge.cpp:2602
-#: src/merge/mkvmerge.cpp:2609
-#: src/merge/mkvmerge.cpp:2616
-#: src/merge/mkvmerge.cpp:2623
-#: src/merge/mkvmerge.cpp:2630
-#: src/merge/mkvmerge.cpp:2637
-#: src/merge/mkvmerge.cpp:2644
-#: src/merge/mkvmerge.cpp:2651
-#: src/merge/mkvmerge.cpp:2658
-#: src/merge/mkvmerge.cpp:2665
-#: src/merge/mkvmerge.cpp:2672
-#: src/merge/mkvmerge.cpp:2679
-#: src/merge/mkvmerge.cpp:2686
+#: src/merge/mkvmerge.cpp:2551
+#: src/merge/mkvmerge.cpp:2558
+#: src/merge/mkvmerge.cpp:2565
+#: src/merge/mkvmerge.cpp:2572
+#: src/merge/mkvmerge.cpp:2579
+#: src/merge/mkvmerge.cpp:2586
+#: src/merge/mkvmerge.cpp:2593
+#: src/merge/mkvmerge.cpp:2600
+#: src/merge/mkvmerge.cpp:2607
+#: src/merge/mkvmerge.cpp:2614
+#: src/merge/mkvmerge.cpp:2621
+#: src/merge/mkvmerge.cpp:2628
+#: src/merge/mkvmerge.cpp:2635
+#: src/merge/mkvmerge.cpp:2642
+#: src/merge/mkvmerge.cpp:2649
+#: src/merge/mkvmerge.cpp:2656
+#: src/merge/mkvmerge.cpp:2663
+#: src/merge/mkvmerge.cpp:2670
+#: src/merge/mkvmerge.cpp:2677
+#: src/merge/mkvmerge.cpp:2684
 #, no-c-format
 msgid "'{0}' lacks the parameter.\n"
 msgstr "'{0}' nedostaje parametar.\n"
 
-#: src/merge/mkvmerge.cpp:2791
+#: src/merge/mkvmerge.cpp:2789
 #, no-c-format
 msgid "'{0}' lacks the track ID.\n"
 msgstr "'{0}' nedostaje track ID.\n"
 
-#: src/merge/mkvmerge.cpp:2483
-#: src/merge/mkvmerge.cpp:2490
-#: src/merge/mkvmerge.cpp:2497
-#: src/merge/mkvmerge.cpp:2504
-#: src/merge/mkvmerge.cpp:2511
+#: src/merge/mkvmerge.cpp:2481
+#: src/merge/mkvmerge.cpp:2488
+#: src/merge/mkvmerge.cpp:2495
+#: src/merge/mkvmerge.cpp:2502
+#: src/merge/mkvmerge.cpp:2509
 #, no-c-format
 msgid "'{0}' lacks the track numbers.\n"
 msgstr "'{0}' nedostaju brojevi staze.\n"
@@ -2784,12 +2784,12 @@ msgstr "'{0}': Kopirate Opus stazu koja je zapisana u eksperimentalnom režimu. 
 msgid "'{0}': {1}"
 msgstr "'{0}': {1}"
 
-#: src/common/kax_info.cpp:275
+#: src/common/kax_info.cpp:282
 #, no-c-format
 msgid "(Known element, but invalid at this position: {0}; ID: 0x{1} size: {2})"
 msgstr "(Poznat element, ali nevažeći na ovoj poziciji: {0}; ID: 0x{1} veličina: {2})"
 
-#: src/common/kax_info.cpp:270
+#: src/common/kax_info.cpp:277
 #, no-c-format
 msgid "(Unknown element: {0}; ID: 0x{1} size: {2})"
 msgstr "(Nepoznat element: {0}; ID: 0x{1} veličina: {2})"
@@ -2824,14 +2824,14 @@ msgstr ", opis '{0}'"
 msgid ", file name '{0}'"
 msgstr ", ime fajla '{0}'"
 
-#: src/common/kax_info.cpp:946
-#: src/common/kax_info.cpp:1066
+#: src/common/kax_info.cpp:953
+#: src/common/kax_info.cpp:1073
 #, no-c-format
 msgid ", position 0x{0:x}"
 msgstr ", pozicija 0x{0:x}"
 
-#: src/common/kax_info.cpp:946
-#: src/common/kax_info.cpp:1066
+#: src/common/kax_info.cpp:953
+#: src/common/kax_info.cpp:1073
 #, no-c-format
 msgid ", position {0}"
 msgstr ", pozicija {0}"
@@ -2856,7 +2856,7 @@ msgstr "--- Upozorenja emitovana od zadatka '%1' započela u %2 ---"
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify'. These are usually simply numbered starting from 0 (e.g. '2')."
 msgstr "1. Broj koji će biti protumačen kao ID priloga kao što je navedeno sa 'mkvmerge --identify'. Oni su obično jednostavno numerisani polazeći od 0 (npr. '2')."
 
-#: src/common/kax_info.cpp:767
+#: src/common/kax_info.cpp:774
 #, no-c-format
 msgid "1: all frames"
 msgstr "1: sve slike"
@@ -2866,7 +2866,7 @@ msgstr "1: sve slike"
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
 msgstr "2. Broj sa prefiksom '=', koji će biti protumačen kao jedinstven ID priloga (UID) kao što je navedeno sa 'mkvmerge --identify'. Oni obično izgledaju kao nasumice izabrani brojevi (npr. '128975986723')."
 
-#: src/common/kax_info.cpp:769
+#: src/common/kax_info.cpp:776
 #, no-c-format
 msgid "2: codec private data"
 msgstr "2: lični podaci kodeka"
@@ -2904,17 +2904,17 @@ msgstr "<Ne menjaj>"
 msgid "<No destination file>"
 msgstr "<Nema odredišnog fajla>"
 
-#: src/common/xml/ebml_tags_converter.cpp:97
+#: src/common/xml/ebml_tags_converter.cpp:108
 #, no-c-format
 msgid "<Simple> is missing the <Name> child."
 msgstr "U <Simple> nedostaje dečji element <Name>."
 
-#: src/common/xml/ebml_tags_converter.cpp:104
+#: src/common/xml/ebml_tags_converter.cpp:115
 #, no-c-format
 msgid "<Simple> must contain either a <String> or a <Binary> child."
 msgstr "<Simple> mora da sadrži ili <String> ili <Binary> element."
 
-#: src/common/xml/ebml_tags_converter.cpp:94
+#: src/common/xml/ebml_tags_converter.cpp:101
 #, no-c-format
 msgid "<Tag> is missing the <Simple> child."
 msgstr "<Tag> nedostaje dečji element <Simple>."
@@ -3699,7 +3699,7 @@ msgstr "Ime fajla u kome se nalazi sledeći segment."
 msgid "An escaped filename corresponding to the previous segment."
 msgstr "Ime fajla u kome se nalazi prethodni segment."
 
-#: src/merge/mkvmerge.cpp:3121
+#: src/merge/mkvmerge.cpp:3119
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "Desilo se odstupanje prilikom zapisivanja odredišnog fajla."
@@ -3756,7 +3756,7 @@ msgstr "Spoji media fajlove"
 msgid "Append to an e&xisting source file"
 msgstr "Spoji sa p&ostojećim izvornim fajlom"
 
-#: src/merge/output_control.cpp:1896
+#: src/merge/output_control.cpp:1900
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Spajam stazu {0} iz fajla broj {1} ('{2}') u stazu {3} iz fajla broj {4} ('{5}').\n"
@@ -3926,7 +3926,7 @@ msgstr "Izbriši naziv odredišnog fajla kada se ukloni poslednji fajl"
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "Izbriši naslov izlaznog fajla kada se ukloni poslednji fajl"
 
-#: src/merge/mkvmerge.cpp:2219
+#: src/merge/mkvmerge.cpp:2221
 #, no-c-format
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr "Automatsko uključivanje WebM usaglašenog režima usled ekstenzije odredišnog fajla.\n"
@@ -4281,8 +4281,8 @@ msgstr "Ne mogu da zapišem stazu {0} sa CodecID '{1}' u fajl '{2}' zato što je
 msgid "Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already being written to the same file.\n"
 msgstr "Ne mogu da zapišem stazu {0} sa CodecID '{1}' u fajl '{2}' zato što je staza {3} sa CodecID '{4}' već zapisana u isti fajl.\n"
 
-#: src/common/kax_info.cpp:1319
-#: src/common/kax_info.cpp:1323
+#: src/common/kax_info.cpp:1326
+#: src/common/kax_info.cpp:1330
 #: src/extract/tracks.cpp:564
 #: src/mkvtoolnix-gui/util/kax_info.cpp:209
 #, no-c-format
@@ -4891,7 +4891,7 @@ msgstr "Ne mogu da izvučem zaglavlje sekvence iz ove MPEG-1/2 staze.\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "Ne mogu da pronađem indeks za audio stazu {0} (avilib poruka o grešci: {1}). Preskačem stazu.\n"
 
-#: src/merge/output_control.cpp:1822
+#: src/merge/output_control.cpp:1826
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "Ne mogu da nađem gptzr dok spajam. {0}\n"
@@ -5237,7 +5237,7 @@ msgstr "Pozicije Cue staze"
 msgid "Cues"
 msgstr ""
 
-#: src/common/kax_info.cpp:554
+#: src/common/kax_info.cpp:561
 #, no-c-format
 msgid "Cues (subentries will be skipped)"
 msgstr "Cues (pod-unosi će biti preskočeni)"
@@ -5793,7 +5793,7 @@ msgstr "Ne prikazuj ponovo ovu poruku."
 msgid "Don't stop processing at the first cluster."
 msgstr "Stani kod prvog klastera"
 
-#: src/merge/mkvmerge.cpp:3012
+#: src/merge/mkvmerge.cpp:3010
 #, no-c-format
 msgid "Done scanning playlists.\n"
 msgstr "Završeno skeniranje plejlisti.\n"
@@ -6196,7 +6196,7 @@ msgstr "Greška prilikom pisanja Matroska fajla"
 msgid "Error:"
 msgstr "Greška:"
 
-#: src/common/kax_info.cpp:1290
+#: src/common/kax_info.cpp:1297
 #, no-c-format
 msgid "Error: Couldn't open source file {0} ({1})."
 msgstr "Greška: Ne mogu da otvorim izvorni fajl {0} ({1})."
@@ -6206,7 +6206,7 @@ msgstr "Greška: Ne mogu da otvorim izvorni fajl {0} ({1})."
 msgid "Error: No EBML head found."
 msgstr "Greška: Nije nađena EBML glava."
 
-#: src/merge/mkvmerge.cpp:2213
+#: src/merge/mkvmerge.cpp:2215
 #, no-c-format
 msgid ""
 "Error: no destination file name was given.\n"
@@ -6269,7 +6269,7 @@ msgstr "Primeri: 01:00:00 (posle jednog sata) ili 1800s (posle 1800 sekundi)."
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "Primeri: 01:00:00,01:30:00 (posle jednog sata i posle jednog sata i trideset minuta) ili 180s,300s,00:10:00 (posle tri, pet i deset minuta)."
 
-#: src/merge/mkvmerge.cpp:3121
+#: src/merge/mkvmerge.cpp:3119
 #, no-c-format
 msgid "Exception details:"
 msgstr "Detalji odstupanja:"
@@ -6722,8 +6722,8 @@ msgstr "Broj slika u sekundi"
 msgid "Frame size #%1: %2"
 msgstr " veličina {0}"
 
-#: src/common/kax_info.cpp:906
-#: src/common/kax_info.cpp:1051
+#: src/common/kax_info.cpp:913
+#: src/common/kax_info.cpp:1058
 #, no-c-format
 msgid "Frame with size {0}{1}{2}"
 msgstr "Slika sa veličinom {0}{1}{2}"
@@ -6733,8 +6733,8 @@ msgstr "Slika sa veličinom {0}{1}{2}"
 msgid "Frames/fields:"
 msgstr "Slike/poluslike:"
 
-#: src/common/kax_info.cpp:905
-#: src/common/kax_info.cpp:1050
+#: src/common/kax_info.cpp:912
+#: src/common/kax_info.cpp:1057
 #, fuzzy, no-c-format
 msgid "Frame{0}{1}"
 msgstr "Slika sa veličinom {0}{1}{2}"
@@ -7521,7 +7521,7 @@ msgid "Invalid change spec ({2}) in '{0} {1}'.\n"
 msgstr "Nevažeća promena ({2}) in '{0} {1}'.\n"
 
 #: src/merge/mkvmerge.cpp:1117
-#: src/merge/mkvmerge.cpp:3046
+#: src/merge/mkvmerge.cpp:3044
 #, no-c-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
 msgstr "Nevažeći broj poglavlja '{0}' za '--split' u '--split {1}': {2}\n"
@@ -8096,7 +8096,7 @@ msgstr "Najniži prioritet"
 msgid "M&ore actions"
 msgstr "&Dodatne radnje"
 
-#: src/common/kax_info.cpp:826
+#: src/common/kax_info.cpp:833
 #, no-c-format
 msgid "MD5"
 msgstr "MD5"
@@ -8431,12 +8431,12 @@ msgstr "Zahtevana je izmena svojstava u sekciji '{0}' ali nije nađen odgovaraju
 msgid "More"
 msgstr "Još"
 
-#: src/merge/mkvmerge.cpp:2347
+#: src/merge/mkvmerge.cpp:2345
 #, no-c-format
 msgid "More than one MIME type was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Navedeno je više od jednog MIME tipa za prilog. '{0}' će biti odbačen a '{1}' korišćeno umesto njega.\n"
 
-#: src/merge/mkvmerge.cpp:2338
+#: src/merge/mkvmerge.cpp:2336
 #, no-c-format
 msgid "More than one description was given for a single attachment.\n"
 msgstr "Navedeno je više od jednog opisa za prilog.\n"
@@ -8446,7 +8446,7 @@ msgstr "Navedeno je više od jednog opisa za prilog.\n"
 msgid "More than one file name has been given ('{0}' and '{1}').\n"
 msgstr "Navedeno je više od jednog imena fajla ('{0}' and '{1}').\n"
 
-#: src/merge/mkvmerge.cpp:2357
+#: src/merge/mkvmerge.cpp:2355
 #, no-c-format
 msgid "More than one name was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Navedeno je više od jednog imena za prilog. '{0}' će biti odbačen a '{1}' korišćeno umesto njega.\n"
@@ -8500,7 +8500,7 @@ msgstr "Multiplekser aplikacija"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Multipleksiram u fajl \"%1\" u direktorijumu \"%2\""
 
-#: src/merge/mkvmerge.cpp:3127
+#: src/merge/mkvmerge.cpp:3125
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "Multipleksiranje je trajalo {0}.\n"
@@ -8639,7 +8639,7 @@ msgstr "Nije pronađeno AC-3 zaglavlje u prvom okviru; staza će biti preskočen
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Nije pronađeno DTS zaglavlje u prvom okviru; staza će biti preskočena.\n"
 
-#: src/common/kax_info.cpp:1226
+#: src/common/kax_info.cpp:1233
 #, no-c-format
 msgid "No EBML head found."
 msgstr "EBML glava nije nađena."
@@ -8795,7 +8795,7 @@ msgstr "U fajlu '{0}' nije pronađen Segment UID."
 msgid "No segment/level 0 element found."
 msgstr "Nije pronađen segment/level 0 element."
 
-#: src/merge/mkvmerge.cpp:2900
+#: src/merge/mkvmerge.cpp:2898
 #, no-c-format
 msgid "No source files were given.\n"
 msgstr "Nisu navedeni izvorni fajlovi.\n"
@@ -9101,7 +9101,7 @@ msgstr "Samo jedan odredišni fajl je dozvoljen.\n"
 msgid "Only one instance of <{0}> is allowed beneath <{1}> at position {2}."
 msgstr "Samo jedna instanca <{0}> je dozvoljena ispod <{1}> na poziciji {2}."
 
-#: src/common/xml/ebml_tags_converter.cpp:102
+#: src/common/xml/ebml_tags_converter.cpp:113
 #, no-c-format
 msgid "Only one of <String> and <Binary> may be used beneath <Simple> but not both at the same time."
 msgstr "Samo jedan od <String> i <Binary> može biti korišćen ispod <Simple>, ali ne oba u isto vreme."
@@ -9156,7 +9156,7 @@ msgstr "Samo će staze sa jezikom sa ove liste moći da se kopiraju podrazumevan
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
 msgstr "Samo v7 i novije verzije VobSub fajlova su podržane. Ako imate stariju verziju onda upotrebite VSConv pomoćni program sa http://sourceforge.net/projects/guliverkli/ da konvertujete ove fajlove u v7 fajlove.\n"
 
-#: src/merge/mkvmerge.cpp:3048
+#: src/merge/mkvmerge.cpp:3046
 #, no-c-format
 msgid "Only {0} chapter found in source files & chapter files."
 msgid_plural "Only {0} chapters found in source files & chapter files."
@@ -9383,7 +9383,7 @@ msgstr "Raščlani ceo fajl umesto oslanjanja na indeks."
 msgid "Parser error:"
 msgstr ""
 
-#: src/common/kax_info.cpp:619
+#: src/common/kax_info.cpp:626
 #, no-c-format
 msgid "Parsing file"
 msgstr "Raščlanjujem fajl"
@@ -9697,7 +9697,7 @@ msgstr "Progres: [{0}{1}] {2}%"
 
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
-#: src/merge/mkvmerge.cpp:2916
+#: src/merge/mkvmerge.cpp:2914
 #: src/merge/output_control.cpp:363
 #: src/propedit/tag_target.cpp:352
 #: src/propedit/tag_target.cpp:365
@@ -9894,7 +9894,7 @@ msgstr "Quicktime/MP4 čitač: Stazi {0} nedostaju neki podaci. Atomi iz zaglavl
 msgid "RIFF CDXA"
 msgstr "RIFF CDXA"
 
-#: src/common/kax_info.cpp:816
+#: src/common/kax_info.cpp:823
 #, no-c-format
 msgid "RSA"
 msgstr "RSA"
@@ -10263,7 +10263,7 @@ msgstr "Zaustavi o&bradu"
 msgid "S&ystem information"
 msgstr "&Informacija o sistemu"
 
-#: src/common/kax_info.cpp:825
+#: src/common/kax_info.cpp:832
 #, no-c-format
 msgid "SHA1-160"
 msgstr "SHA1-160"
@@ -10412,7 +10412,7 @@ msgstr "Skeniram direktorijum"
 msgid "Scanning playlists"
 msgstr "Skeniranje plejlisti"
 
-#: src/merge/mkvmerge.cpp:2972
+#: src/merge/mkvmerge.cpp:2970
 #, no-c-format
 msgid "Scanning {0} files in {1} playlist.\n"
 msgid_plural "Scanning {0} files in {1} playlists.\n"
@@ -10456,7 +10456,7 @@ msgstr "Seek entry"
 msgid "Seek head"
 msgstr "Seek head"
 
-#: src/common/kax_info.cpp:548
+#: src/common/kax_info.cpp:555
 #, no-c-format
 msgid "Seek head (subentries will be skipped)"
 msgstr "Seek head (podelementi će biti preskočeni)"
@@ -11121,7 +11121,7 @@ msgstr[2] "Započni zadatke &ručno"
 msgid "Started at:"
 msgstr "Započeo u:"
 
-#: src/common/kax_info.cpp:1196
+#: src/common/kax_info.cpp:1203
 #, no-c-format
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr "Statistika za stazu broj {0}: broj blokova: {1}; veličina u bajtovima: {2}; trajanje u sekundama: {3}; približan bitski protok u bitovima po sekundi: {4}\n"
@@ -11558,17 +11558,17 @@ msgstr "XML segmentinfo fajl '{0}' sadrži grešku: {1}\n"
 msgid "The XML segmentinfo file '{0}' could not be read.\n"
 msgstr "XML segmentinfo fajl '{0}' ne može biti pročitan.\n"
 
-#: src/common/xml/ebml_tags_converter.cpp:159
+#: src/common/xml/ebml_tags_converter.cpp:170
 #, no-c-format
 msgid "The XML tag file '{0}' contains an error at position {2}: {1}\n"
 msgstr "XML tag fajl '{0}' sadrži grešku na poziciji: {2}: {1}\n"
 
-#: src/common/xml/ebml_tags_converter.cpp:162
+#: src/common/xml/ebml_tags_converter.cpp:173
 #, no-c-format
 msgid "The XML tag file '{0}' contains an error: {1}\n"
 msgstr "XML tag fajl '{0}' sadrži grešku: {1}\n"
 
-#: src/common/xml/ebml_tags_converter.cpp:156
+#: src/common/xml/ebml_tags_converter.cpp:167
 #, no-c-format
 msgid "The XML tag file '{0}' could not be read.\n"
 msgstr "XML tag fajl '{0}' ne može biti pročitan.\n"
@@ -11738,7 +11738,7 @@ msgstr "Konfiguracija je sačuvana."
 msgid "The correction file header was not read correctly.\n"
 msgstr "Ispravka zaglavlja fajla nije pravilno pročitana.\n"
 
-#: src/merge/output_control.cpp:1622
+#: src/merge/output_control.cpp:1624
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Zapisuju se cue unosi (indeks)...\n"
@@ -11859,7 +11859,7 @@ msgstr "Širina slike dve staze je različita: {0} and {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "Mana je u tome da će multipleksiranje trajati duže jer će mkvmerge čekati sve dok svi podaci ne budu zapisani na skladišni uredjaj pre izlaska."
 
-#: src/merge/mkvmerge.cpp:3121
+#: src/merge/mkvmerge.cpp:3119
 #, no-c-format
 msgid "The drive may be full."
 msgstr "Disk je možda pun."
@@ -12004,7 +12004,7 @@ msgstr "Fajl '{0}' ne može biti otvoren za čitanje: {1}."
 msgid "The file '{0}' could not be opened for reading: {1}.\n"
 msgstr "Fajl '{0}' ne može biti otvoren za čitanje: {1}.\n"
 
-#: src/common/kax_info.cpp:1306
+#: src/common/kax_info.cpp:1313
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}."
 msgstr "Fajl '{0}' ne može biti otvoren za zapisivanje: {1}."
@@ -12028,7 +12028,7 @@ msgstr "Fajl '{0}' ne može biti otvoren za zapisivanje: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "Fajl '{0}' ne može da se otvori ili raščlani."
 
-#: src/merge/output_control.cpp:1584
+#: src/merge/output_control.cpp:1586
 #, fuzzy, no-c-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
 msgstr "Fajl '{0}' ne može biti otvoren za čitanje: {1}.\n"
@@ -12048,7 +12048,7 @@ msgstr "Fajl '{0}' nije podrzan tip fajla ({1}).\n"
 msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "Fajl '{0}' ne može biti biti priložen zato što ne postoji ili ne može biti pročitan.\n"
 
-#: src/merge/output_control.cpp:1582
+#: src/merge/output_control.cpp:1584
 #, fuzzy, no-c-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
 msgstr "Fajl '{0}' ne može biti otvoren za čitanje: {1}.\n"
@@ -12559,7 +12559,7 @@ msgstr "Brojevi dati sa ovim argumentom se tumače na bazi broja Matroska blokov
 msgid "The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."
 msgstr "Jedini dozvoljeni kodeci su VP8/VP9 video i Vorbis/Opus audio staze."
 
-#: src/merge/mkvmerge.cpp:2454
+#: src/merge/mkvmerge.cpp:2452
 #, no-c-format
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "Parametar '--meta-seek-size' više nije podržan. Molim vas pročitajte mkvmerge dokumentaciju, naročito sekciju o strukturi Matroska fajlova.\n"
@@ -12932,7 +12932,7 @@ msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once.
 msgstr "Staza {0} iz fajla broj {1} ('{2}') treba da se spoji više od jednog puta. Argument za '--append-to' nije bio ispravan.\n"
 
 #: src/merge/mkvmerge.cpp:2009
-#: src/merge/mkvmerge.cpp:2939
+#: src/merge/mkvmerge.cpp:2937
 #, no-c-format
 msgid "The type of file '{0}' could not be recognized.\n"
 msgstr "Tip fajla '{0}' ne može biti prepoznat.\n"
@@ -13203,7 +13203,7 @@ msgstr "Ovaj fajl sadrži koordinate u linijama vremenskih oznaka. Takve koordin
 msgid "This file could not be opened or parsed.\n"
 msgstr "Ovaj fajl ne može biti otvoren ili raščlanjen.\n"
 
-#: src/common/kax_info.cpp:1226
+#: src/common/kax_info.cpp:1233
 #, no-c-format
 msgid "This file is probably not a Matroska file."
 msgstr "Ovaj fajl verovatno nije Matroska fajl."
@@ -13379,7 +13379,7 @@ msgstr "Ovo svojstvo je obavezno i ne može biti obrisano iz '{0}'. {1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Ovo svojstvo je jedinstveno. Ne može se dodati više instanci u '{0}'. {1}\n"
 
-#: src/merge/output_control.cpp:1735
+#: src/merge/output_control.cpp:1739
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "Ovo STVARNO nije trebalo da se desi. Prostor rezervisan za prvi meta seek element je previše mali. Potrebna veličina: {0}. {1}\n"
@@ -13653,7 +13653,7 @@ msgstr "Staza {0}: Titlu sa brojem {1} nedostaje trajanje. Pretpostavljam trajan
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "Staza {0}: AAC informacija ne može biti raščlanjena.\n"
 
-#: src/common/kax_info.cpp:656
+#: src/common/kax_info.cpp:663
 #, no-c-format
 msgid "Track {0}: {1}, codec ID: {2}{3}{4}{5}\n"
 msgstr "Staza {0}: {1}, codec ID: {2}{3}{4}{5}\n"
@@ -13762,8 +13762,8 @@ msgstr ""
 msgid "Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Neočekivana slika nakon jedne poluslike. Popravite MPEG2 video potok pre nego što pokušate da ga multipleksirate.\n"
 
-#: src/common/kax_info.cpp:411
-#: src/common/kax_info.cpp:420
+#: src/common/kax_info.cpp:418
+#: src/common/kax_info.cpp:427
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:171
 #: src/mkvtoolnix-gui/jobs/job.cpp:276
 #, no-c-format
@@ -13785,7 +13785,7 @@ msgstr "Nepoznat format fajla sa poglavljima '{0}'. On ne sadrži podržan forma
 msgid "Unknown content encoding type {0} for track {1}.\n"
 msgstr "Nepoznat tip kodovanja sadržaja {0} za stazu {1}.\n"
 
-#: src/common/kax_info.cpp:1250
+#: src/common/kax_info.cpp:1257
 #, no-c-format
 msgid "Unknown element"
 msgstr "Nepoznat element"
@@ -14643,7 +14643,7 @@ msgstr "Pogrešna Kate verzija: {0}.{1} > {2}.x"
 msgid "Wrong Theora version: {0}.{1}.{2} != 3.2.x"
 msgstr "Pogrešna Theora verzija: {0}.{1}.{2} != 3.2.x"
 
-#: src/merge/mkvmerge.cpp:2277
+#: src/merge/mkvmerge.cpp:2278
 #, no-c-format
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "Pogrešan argument u '--split-max-files'.\n"
@@ -14833,14 +14833,14 @@ msgstr "anaglif (zelena/magenta)"
 msgid "attachments [options] [AID1:out1 [AID2:out2 ...]]"
 msgstr "attachments [opcije] [AID1:out1 [AID2:out2 ...]]"
 
-#: src/common/kax_info.cpp:658
-#: src/common/kax_info.cpp:834
+#: src/common/kax_info.cpp:665
+#: src/common/kax_info.cpp:841
 #: src/input/r_matroska.cpp:131
 #, no-c-format
 msgid "audio"
 msgstr "audio"
 
-#: src/common/kax_info.cpp:627
+#: src/common/kax_info.cpp:634
 #, no-c-format
 msgid "bits per sample: {0}"
 msgstr "bitova po uzorku: {0}"
@@ -14855,24 +14855,24 @@ msgstr "oba oka povezana u bloku (levo prvo)"
 msgid "both eyes laced in one block (right first)"
 msgstr "oba oka povezana u bloku (desno prvo)"
 
-#: src/common/kax_info.cpp:741
+#: src/common/kax_info.cpp:748
 #, no-c-format
 msgid "bottom field displayed first, bottom field stored first"
 msgstr ""
 
-#: src/common/kax_info.cpp:742
+#: src/common/kax_info.cpp:749
 #, no-c-format
 msgid "bottom field displayed first, top field stored first"
 msgstr ""
 
-#: src/common/kax_info.cpp:661
-#: src/common/kax_info.cpp:837
+#: src/common/kax_info.cpp:668
+#: src/common/kax_info.cpp:844
 #: src/input/r_matroska.cpp:132
 #, no-c-format
 msgid "buttons"
 msgstr "dugmad"
 
-#: src/common/kax_info.cpp:626
+#: src/common/kax_info.cpp:633
 #, no-c-format
 msgid "channels: {0}"
 msgstr "kanali: {0}"
@@ -14902,7 +14902,7 @@ msgstr "isprepletan stub (levo prvo)"
 msgid "column interleaved (right first)"
 msgstr "isprepletan stub (desno prvo)"
 
-#: src/common/kax_info.cpp:782
+#: src/common/kax_info.cpp:789
 #, no-c-format
 msgid "compression"
 msgstr "kompresija"
@@ -14912,7 +14912,7 @@ msgstr "kompresija"
 msgid "create_track_number: file_num not found. {0}\n"
 msgstr "create_track_number: file_num nije nađen. {0}\n"
 
-#: src/common/kax_info.cpp:716
+#: src/common/kax_info.cpp:723
 #, no-c-format
 msgid "cubemap"
 msgstr ""
@@ -14927,7 +14927,7 @@ msgstr "cues [opcije] [TID1:out1 [TID2:out2 ...]]"
 msgid "cuesheet [options] out.cue"
 msgstr ""
 
-#: src/common/kax_info.cpp:647
+#: src/common/kax_info.cpp:654
 #, no-c-format
 msgid "default duration: {0:.3f}ms ({1:.3f} frames/fields per second for a video track)"
 msgstr "podrazumevano trajanje: {0:.3f}ms ({1:.3f} slika/poluslika u sekundi za video stazu)"
@@ -14937,27 +14937,27 @@ msgstr "podrazumevano trajanje: {0:.3f}ms ({1:.3f} slika/poluslika u sekundi za 
 msgid "deflateInit() failed. Result: {0}\n"
 msgstr "deflateInit() failed. Result: {0}\n"
 
-#: src/common/kax_info.cpp:1014
+#: src/common/kax_info.cpp:1021
 #, no-c-format
 msgid "discardable, "
 msgstr "discardable, "
 
-#: src/common/kax_info.cpp:632
+#: src/common/kax_info.cpp:639
 #, no-c-format
 msgid "display height: {0}"
 msgstr "visina prikaza: {0}"
 
-#: src/common/kax_info.cpp:631
+#: src/common/kax_info.cpp:638
 #, no-c-format
 msgid "display width: {0}"
 msgstr "širina prikaza: {0}"
 
-#: src/common/kax_info.cpp:783
+#: src/common/kax_info.cpp:790
 #, no-c-format
 msgid "encryption"
 msgstr "šifrovanje"
 
-#: src/common/kax_info.cpp:715
+#: src/common/kax_info.cpp:722
 #, no-c-format
 msgid "equirectangular"
 msgstr ""
@@ -15037,7 +15037,7 @@ msgstr "za titlove koji ne koriste marker za redosled bajtova (BOM) i koji nisu 
 msgid "generic video"
 msgstr "generički video"
 
-#: src/common/kax_info.cpp:794
+#: src/common/kax_info.cpp:801
 #, no-c-format
 msgid "header removal"
 msgstr "uklanjanje zaglavlja"
@@ -15052,7 +15052,7 @@ msgstr "inflateInit() failed. Result: {0}\n"
 msgid "invalid language tag '{0}': {1}"
 msgstr "Nevažeća jezička oznaka '{0}': {1}"
 
-#: src/common/kax_info.cpp:1012
+#: src/common/kax_info.cpp:1019
 #, no-c-format
 msgid "key, "
 msgstr "ključ, "
@@ -15062,17 +15062,17 @@ msgstr "ključ, "
 msgid "language"
 msgstr "Jezik"
 
-#: src/common/kax_info.cpp:638
+#: src/common/kax_info.cpp:645
 #, no-c-format
 msgid "language (IETF BCP 47): {0}"
 msgstr "jezik (IETF BCP 47): {0}"
 
-#: src/common/kax_info.cpp:637
+#: src/common/kax_info.cpp:644
 #, no-c-format
 msgid "language: {0}"
 msgstr "jezik: {0}"
 
-#: src/common/kax_info.cpp:457
+#: src/common/kax_info.cpp:464
 #, no-c-format
 msgid "length {0}, data: {1}"
 msgstr "dužina {0}, podaci: {1}"
@@ -15203,7 +15203,7 @@ msgstr "memory.cpp/safememdup() called from file {0}, line {1}: malloc() returne
 msgid "memory.cpp/saferealloc() called from file {0}, line {1}: realloc() returned nullptr for a size of {2} bytes.\n"
 msgstr "memory.cpp/saferealloc() called from file {0}, line {1}: realloc() returned nullptr for a size of {2} bytes.\n"
 
-#: src/common/kax_info.cpp:717
+#: src/common/kax_info.cpp:724
 #, no-c-format
 msgid "mesh"
 msgstr "mesh"
@@ -15360,7 +15360,7 @@ msgstr "mkvmerge podržava dva formata poglavlja: tekstualni poput OGM formata i
 msgid "mkvmerge was interrupted by a SIGINT (Ctrl+C?)\n"
 msgstr "mkvmerge je prekinut od strane SIGINT (Ctrl+C?)\n"
 
-#: src/common/kax_info.cpp:583
+#: src/common/kax_info.cpp:590
 #, no-c-format
 msgid "mkvmerge/mkvextract track ID: {0}"
 msgstr "mkvmerge/mkvextract track ID: {0}"
@@ -15405,7 +15405,7 @@ msgstr "mpeg_ps_reader: Nije trebalo da se desi #1. {0}"
 msgid "mpeg_ps_reader: Should not have happened #2. {0}"
 msgstr "mpeg_ps_reader: Nije trebalo da se desi #2. {0}"
 
-#: src/common/kax_info.cpp:802
+#: src/common/kax_info.cpp:809
 #, no-c-format
 msgid "no encryption"
 msgstr "nema šifrovanja"
@@ -15420,12 +15420,12 @@ msgstr "bez greške"
 msgid "no language selected"
 msgstr ""
 
-#: src/common/kax_info.cpp:815
+#: src/common/kax_info.cpp:822
 #, no-c-format
 msgid "no signature algorithm"
 msgstr "bez potpisa algoritam"
 
-#: src/common/kax_info.cpp:824
+#: src/common/kax_info.cpp:831
 #, no-c-format
 msgid "no signature hash algorithm"
 msgstr "bez potpisa hash algoritam"
@@ -15446,7 +15446,7 @@ msgstr "ogg_sync_buffer nije uspeo\n"
 msgid "or"
 msgstr "ili"
 
-#: src/common/kax_info.cpp:625
+#: src/common/kax_info.cpp:632
 #, no-c-format
 msgid "output sampling freq: {0}"
 msgstr "izlazna frekvencija uzorkovanja: {0}"
@@ -15456,37 +15456,37 @@ msgstr "izlazna frekvencija uzorkovanja: {0}"
 msgid "passthrough"
 msgstr "prolaz"
 
-#: src/common/kax_info.cpp:636
+#: src/common/kax_info.cpp:643
 #, no-c-format
 msgid "pixel crop bottom: {0}"
 msgstr "podrezivanje piksela dole: {0}"
 
-#: src/common/kax_info.cpp:633
+#: src/common/kax_info.cpp:640
 #, no-c-format
 msgid "pixel crop left: {0}"
 msgstr "podrezivanje piksela levo: {0}"
 
-#: src/common/kax_info.cpp:635
+#: src/common/kax_info.cpp:642
 #, no-c-format
 msgid "pixel crop right: {0}"
 msgstr "podrezivanje piksela desno: {0}"
 
-#: src/common/kax_info.cpp:634
+#: src/common/kax_info.cpp:641
 #, no-c-format
 msgid "pixel crop top: {0}"
 msgstr "podrezivanje piksela gore: {0}"
 
-#: src/common/kax_info.cpp:630
+#: src/common/kax_info.cpp:637
 #, no-c-format
 msgid "pixel height: {0}"
 msgstr "visina u pikselima: {0}"
 
-#: src/common/kax_info.cpp:629
+#: src/common/kax_info.cpp:636
 #, no-c-format
 msgid "pixel width: {0}"
 msgstr "širina u pikselima: {0}"
 
-#: src/common/kax_info.cpp:738
+#: src/common/kax_info.cpp:745
 #, no-c-format
 msgid "progressive"
 msgstr "progressive"
@@ -15511,12 +15511,12 @@ msgstr "real_reader: Ne mogu da nađem RealAudio FourCC za id {0} (dužina opisa
 msgid "real_reader: Only audio header versions 3, 4 and 5 are supported. Track ID {0} uses version {1} and will be skipped.\n"
 msgstr "real_reader: Podržane su samo verzije 3, 4 i 5 audio zaglavlja. Track ID {0} koristi verziju {1} i biće preskočen.\n"
 
-#: src/common/kax_info.cpp:714
+#: src/common/kax_info.cpp:721
 #, no-c-format
 msgid "rectangular"
 msgstr ""
 
-#: src/common/kax_info.cpp:771
+#: src/common/kax_info.cpp:778
 #, no-c-format
 msgid "rest: unknown"
 msgstr "ostalo: nepoznato"
@@ -15531,7 +15531,7 @@ msgstr "isprepletan red (levo prvo)"
 msgid "row interleaved (right first)"
 msgstr "isprepletan red (desno prvo)"
 
-#: src/common/kax_info.cpp:624
+#: src/common/kax_info.cpp:631
 #, no-c-format
 msgid "sampling freq: {0}"
 msgstr "učestalost uzorkovanja: {0}"
@@ -15546,13 +15546,13 @@ msgstr "jedna pored druge (levo prvo)"
 msgid "side by side (right first)"
 msgstr "jedna pored druge (desno prvo)"
 
-#: src/common/kax_info.cpp:479
+#: src/common/kax_info.cpp:486
 #, no-c-format
 msgid "size unknown"
 msgstr "veličina je nepoznata"
 
-#: src/common/kax_info.cpp:478
-#: src/common/kax_info.cpp:842
+#: src/common/kax_info.cpp:485
+#: src/common/kax_info.cpp:849
 #, no-c-format
 msgid "size {0}"
 msgstr "veličina {0}"
@@ -15567,8 +15567,8 @@ msgstr "ssa_reader: Nevažeći format. Ne mogu naći \"Format\" liniju u \"[Even
 msgid "subtitle"
 msgstr "titl"
 
-#: src/common/kax_info.cpp:660
-#: src/common/kax_info.cpp:836
+#: src/common/kax_info.cpp:667
+#: src/common/kax_info.cpp:843
 #, no-c-format
 msgid "subtitles"
 msgstr "titlovi"
@@ -15583,7 +15583,7 @@ msgstr "tags [options] out.xml"
 msgid "text subtitles"
 msgstr "tekstualni titlovi"
 
-#: src/merge/mkvmerge.cpp:2822
+#: src/merge/mkvmerge.cpp:2820
 #, no-c-format
 msgid "timestamps"
 msgstr "vremenske oznake"
@@ -15603,22 +15603,22 @@ msgstr "od vrha do dna (levo prvo)"
 msgid "top bottom (right first)"
 msgstr "od vrha do dna (desno prvo)"
 
-#: src/common/kax_info.cpp:743
+#: src/common/kax_info.cpp:750
 #, no-c-format
 msgid "top field displayed first, bottom field stored first"
 msgstr ""
 
-#: src/common/kax_info.cpp:739
+#: src/common/kax_info.cpp:746
 #, no-c-format
 msgid "top field displayed first, top field stored first"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2814
+#: src/merge/mkvmerge.cpp:2812
 #, no-c-format
 msgid "track name"
 msgstr "ime staze"
 
-#: src/common/kax_info.cpp:881
+#: src/common/kax_info.cpp:888
 #, no-c-format
 msgid "track number {0}, {1} frame(s), timestamp {2}"
 msgstr "staza broj {0}, {1} slika(e), vremenska oznaka {2}"
@@ -15635,16 +15635,16 @@ msgstr "tta_reader: tag_size < 0 in the c'tor. {0}\n"
 
 #: src/common/file_types.cpp:113
 #: src/common/fs_sys_helpers/windows.cpp:191
-#: src/common/kax_info.cpp:662
-#: src/common/kax_info.cpp:718
-#: src/common/kax_info.cpp:744
-#: src/common/kax_info.cpp:773
-#: src/common/kax_info.cpp:784
-#: src/common/kax_info.cpp:795
-#: src/common/kax_info.cpp:808
-#: src/common/kax_info.cpp:817
-#: src/common/kax_info.cpp:827
-#: src/common/kax_info.cpp:838
+#: src/common/kax_info.cpp:669
+#: src/common/kax_info.cpp:725
+#: src/common/kax_info.cpp:751
+#: src/common/kax_info.cpp:780
+#: src/common/kax_info.cpp:791
+#: src/common/kax_info.cpp:802
+#: src/common/kax_info.cpp:815
+#: src/common/kax_info.cpp:824
+#: src/common/kax_info.cpp:834
+#: src/common/kax_info.cpp:845
 #: src/common/stereo_mode.cpp:69
 #: src/input/r_matroska.cpp:130
 #: src/input/r_matroska.cpp:2818
@@ -15668,13 +15668,13 @@ msgstr "nepoznato, tag formata 0x{0:04x}"
 msgid "unnamed"
 msgstr "neimenovano"
 
-#: src/common/kax_info.cpp:740
+#: src/common/kax_info.cpp:747
 #, no-c-format
 msgid "unspecified"
 msgstr ""
 
-#: src/common/kax_info.cpp:659
-#: src/common/kax_info.cpp:835
+#: src/common/kax_info.cpp:666
+#: src/common/kax_info.cpp:842
 #: src/input/r_matroska.cpp:133
 #, no-c-format
 msgid "video"
@@ -15690,12 +15690,12 @@ msgstr "vobsub_reader: neuspešno pročitan sub fajl"
 msgid "x"
 msgstr "x"
 
-#: src/common/kax_info.cpp:830
+#: src/common/kax_info.cpp:837
 #, no-c-format
 msgid "{0} (track ID for mkvmerge & mkvextract: {1})"
 msgstr "{0} (ID  staze za mkvmerge i mkvextract: {1})"
 
-#: src/common/kax_info.cpp:847
+#: src/common/kax_info.cpp:854
 #, no-c-format
 msgid "{0} ({1:.3f} frames/fields per second for a video track)"
 msgstr "{0} ({1:.3f} slika/poluslika u sekundi za video stazu)"
@@ -15708,17 +15708,17 @@ msgstr[0] "{0} bajt"
 msgstr[1] "{0} bajta"
 msgstr[2] "{0} bajtova"
 
-#: src/common/kax_info.cpp:951
+#: src/common/kax_info.cpp:958
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"
 msgstr "{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"
 
-#: src/common/kax_info.cpp:1070
+#: src/common/kax_info.cpp:1077
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}\n"
 msgstr "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}\n"
 
-#: src/common/kax_info.cpp:961
+#: src/common/kax_info.cpp:968
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"
 msgstr "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"
@@ -15802,7 +15802,7 @@ msgstr "{0}: missing divisor in '{1} {2}'.\n"
 msgid "{0}: missing track ID in '{1} {2}'.\n"
 msgstr "{0}: missing track ID in '{1} {2}'.\n"
 
-#: src/common/kax_info.cpp:1016
+#: src/common/kax_info.cpp:1023
 #, no-c-format
 msgid "{0}track number {1}, {2} frame(s), timestamp {3}"
 msgstr "{0}track number {1}, {2} frame(s), timestamp {3}"
