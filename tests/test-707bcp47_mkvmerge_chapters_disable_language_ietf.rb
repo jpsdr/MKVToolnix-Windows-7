@@ -50,6 +50,7 @@ src1   = "data/subtitles/srt/vde-utf-8-bom.srt"
 src2   = "data/avi/v.avi"
 chaps1 = "data/chapters/shortchaps-utf8.txt"
 chaps2 = "data/chapters/uk-and-gb.xml"
+chaps3 = "data/chapters/uk-and-gb-chaplanguageietf.xml"
 
 # simple chapters
 test_merge src1, :keep_tmp => true, :args => "--disable-language-ietf --chapters #{chaps1}"
@@ -81,6 +82,9 @@ compare_languages(*([ [ "ger", nil ] ] * 7))
 test_merge src2, :keep_tmp => true, :args => "--disable-language-ietf --no-audio --chapter-language de-latn-ch --generate-chapters interval:10s"
 compare_languages(*([ [ "ger", nil ] ] * 7))
 
+test_merge src1, :keep_tmp => true, :args => "--disable-language-ietf --chapters #{chaps3}"
+compare_languages(*([ [ "eng", nil ] ] * 3 + [ [ "ger", nil ] ] * 3))
+
 
 # simple chapters
 test_merge src1, :keep_tmp => true, :args => "--chapters #{chaps1}", :post_args => "--disable-language-ietf"
@@ -111,3 +115,6 @@ compare_languages(*([ [ "ger", nil ] ] * 7))
 
 test_merge src2, :keep_tmp => true, :args => "--no-audio --chapter-language de-latn-ch --generate-chapters interval:10s", :post_args => "--disable-language-ietf"
 compare_languages(*([ [ "ger", nil ] ] * 7))
+
+test_merge src1, :keep_tmp => true, :args => "--chapters #{chaps3}", :post_args => "--disable-language-ietf"
+compare_languages(*([ [ "eng", nil ] ] * 3 + [ [ "ger", nil ] ] * 3))

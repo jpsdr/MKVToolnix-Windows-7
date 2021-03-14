@@ -24,6 +24,10 @@
   option `--disable-language-ietf` was given after an option leading to the
   creation of chapters. Now the position doesn't matter anymore. Part of the
   fix of #3069.
+* mkvmerge: chapters: when the option `--disable-language-ietf` is used,
+  `ChapLanguageIETF` elements won't be written even when sources are read
+  (Matroska files or XML chapters files) that do contain those elements. Part
+  of the fix of #3069.
 
 ## Build system changes
 

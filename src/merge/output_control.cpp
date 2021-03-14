@@ -1438,6 +1438,8 @@ add_chapters_for_current_part() {
   if (!g_cluster_helper->splitting()) {
     s_chapters_in_this_file = clone(g_kax_chapters);
     mtx::chapters::merge_entries(*s_chapters_in_this_file);
+    if (mtx::bcp47::language_c::is_disabled())
+      remove_ietf_language_elements(*s_chapters_in_this_file);
     sort_ebml_master(s_chapters_in_this_file.get());
     return;
   }

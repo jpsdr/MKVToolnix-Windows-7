@@ -625,6 +625,29 @@ remove_master_from_parent_if_empty_or_only_defaults(EbmlMaster *parent,
   return true;
 }
 
+void
+remove_ietf_language_elements(libebml::EbmlMaster &master) {
+  auto idx = 0u;
+
+  while (idx < master.ListSize()) {
+    auto e = master[idx];
+
+    if (   dynamic_cast<KaxLanguageIETF *>(e)
+        || dynamic_cast<KaxChapLanguageIETF *>(e)
+        || dynamic_cast<KaxTagLanguageIETF *>(e)) {
+      delete e;
+      master.Remove(idx);
+      continue;
+    }
+
+    if (dynamic_cast<EbmlMaster *>(e))
+      remove_ietf_language_elements(*static_cast<EbmlMaster *>(e));
+
+    ++idx;
+  }
+}
+
+
 static bool
 must_be_present_in_master_by_id(EbmlId const &id) {
   static debugging_option_c s_debug{"must_be_present_in_master"};
