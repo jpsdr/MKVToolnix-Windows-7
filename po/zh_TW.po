@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2021-03-09 21:22+0100\n"
-"PO-Revision-Date: 2021-03-03 14:38+0000\n"
-"Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
+"PO-Revision-Date: 2021-03-11 19:37+0000\n"
+"Last-Translator: 超有愛 <chunkai.mao@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -320,15 +320,15 @@ msgstr ""
 "                           命令列中字串的字元集\n"
 
 #: src/merge/mkvmerge.cpp:251
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --commentary-flag <TID[:bool]>\n"
 "                           Sets the \"commentary\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --forced-track <TID[:bool]>\n"
-"                           為此軌設定“強制軌”標記，\n"
-"                           如果此布林值為 0 則強制不呈現。\n"
+"  --commentary-flag <TID[:bool]>\n"
+"                           為指定軌道設定 \"註釋\" 標記\n"
+"                           或是當布林值為 0 時強制不顯示。\n"
 
 #: src/merge/mkvmerge.cpp:359
 #, no-c-format
@@ -397,15 +397,15 @@ msgstr ""
 "                           除非被 --language 選項覆蓋。\n"
 
 #: src/merge/mkvmerge.cpp:233
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --default-track <TID[:bool]>\n"
 "                           Sets the \"default track\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
 "  --default-track <TID[:bool]>\n"
-"                           為此軌設定“預設軌”標記，\n"
-"                           如果該布林值為 0 則強制不呈現。\n"
+"                           為指定軌道設定 \"預設軌\" 標記\n"
+"                           或是當布林值為 0 時強制不顯示。\n"
 
 #: src/merge/mkvmerge.cpp:389
 #, no-c-format
@@ -490,15 +490,15 @@ msgstr ""
 "                           更新所有快取資料到儲存空間。\n"
 
 #: src/merge/mkvmerge.cpp:236
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --forced-track <TID[:bool]>\n"
 "                           Sets the \"forced display\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
 "  --forced-track <TID[:bool]>\n"
-"                           為此軌設定“強制軌”標記，\n"
-"                           如果此布林值為 0 則強制不呈現。\n"
+"                           為指定軌道設定 \"強制顯示\" 標記\n"
+"                           或是當布林值為 0 時強制不顯示。\n"
 
 #: src/merge/mkvmerge.cpp:111
 #, no-c-format
@@ -528,15 +528,15 @@ msgid "  --global-tags <file>     Read global tags from an XML file.\n"
 msgstr "  --global-tags <file>     從指定的 XML 檔案讀取全域標籤。\n"
 
 #: src/merge/mkvmerge.cpp:239
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --hearing-impaired-flag <TID[:bool]>\n"
 "                           Sets the \"hearing impaired\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --forced-track <TID[:bool]>\n"
-"                           為此軌設定“強制軌”標記，\n"
-"                           如果此布林值為 0 則強制不呈現。\n"
+"  --hearing-impaired-flag <TID[:bool]>\n"
+"                           為指定軌道設定 \"聽覺障礙\" 標記\n"
+"                           或是當布林值為 0 時強制不顯示。\n"
 
 #: src/merge/mkvmerge.cpp:260
 #, no-c-format
@@ -638,15 +638,15 @@ msgid "  --no-global-tags         Don't keep global tags from the source file.\n
 msgstr "  --no-global-tags         不要保留此原始檔案中的全域標籤。\n"
 
 #: src/merge/mkvmerge.cpp:248
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --original-flag <TID[:bool]>\n"
 "                           Sets the \"original language\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --forced-track <TID[:bool]>\n"
-"                           為此軌設定“強制軌”標記，\n"
-"                           如果此布林值為 0 則強制不呈現。\n"
+"  --original-flag <TID[:bool]>\n"
+"                           為指定軌道設定 \"原始語言\" 標記\n"
+"                           或是當布林值為 0 時強制不顯示。\n"
 
 #: src/merge/mkvmerge.cpp:382
 #, no-c-format
@@ -847,15 +847,15 @@ msgstr ""
 "                           為 UTF-8。\n"
 
 #: src/merge/mkvmerge.cpp:245
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --text-descriptions-flag <TID[:bool]>\n"
 "                           Sets the \"text descriptions\" flag for this track\n"
 "                           or forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --default-track <TID[:bool]>\n"
-"                           為此軌設定“預設軌”標記，\n"
-"                           如果該布林值為 0 則強制不呈現。\n"
+"  --text-descriptions-flag <TID[:bool]>\n"
+"                           為指定軌道設定 \"文字說明\" 標記\n"
+"                           或是當布林值為 0 時強制不顯示。\n"
 
 #: src/merge/mkvmerge.cpp:133
 #, no-c-format
@@ -904,15 +904,15 @@ msgid "  --ui-language <code>     Force the translations for 'code' to be used.\
 msgstr "  --ui-language <code>     強制使用 'code' 代表的翻譯版本。\n"
 
 #: src/merge/mkvmerge.cpp:242
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --visual-impaired-flag <TID[:bool]>\n"
 "                           Sets the \"visual impaired\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --forced-track <TID[:bool]>\n"
-"                           為此軌設定“強制軌”標記，\n"
-"                           如果此布林值為 0 則強制不呈現。\n"
+"  --visual-impaired-flag <TID[:bool]>\n"
+"                           為指定軌道設定 \"視覺障礙\" 標記\n"
+"                           或是當布林值為 0 時強制不顯示。\n"
 
 #: src/merge/mkvmerge.cpp:332
 #, no-c-format
@@ -1345,18 +1345,18 @@ msgstr " 大小 {0}"
 #: src/common/property_element.cpp:133
 #, no-c-format
 msgid "\"Commentary\" flag"
-msgstr "\"評論\" 標記"
+msgstr "\"註釋\" 標記"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1803
 #, no-c-format
 msgid "\"Commentary\" flag:"
-msgstr "\"評論\" 標記:"
+msgstr "\"註釋\" 標記:"
 
 #: src/common/kax_element_names.cpp:206
 #: src/common/property_element.cpp:134
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Default track\" flag"
-msgstr "\"預設軌\" 標記:"
+msgstr "\"預設軌\" 標記"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:280
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1797
@@ -1371,76 +1371,76 @@ msgid "\"Determine automatically\" is a good choice for almost all situations."
 msgstr "在幾乎所有情況下， \"自動判定\" 是個合適的選擇。"
 
 #: src/common/kax_element_names.cpp:191
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Enabled\" flag"
-msgstr "啟用"
+msgstr "\"啟用\" 標記"
 
 #: src/common/kax_element_names.cpp:207
 #: src/common/property_element.cpp:136
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Forced display\" flag"
-msgstr "'強制軌' 標記"
+msgstr "\"強制顯示\" 標記"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:281
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1798
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:82
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Forced display\" flag:"
-msgstr "'強制軌' 標記"
+msgstr "\"強制顯示\" 標記:"
 
 #: src/common/kax_element_names.cpp:214
 #: src/common/property_element.cpp:137
 #, no-c-format
 msgid "\"Hearing impaired\" flag"
-msgstr ""
+msgstr "\"聽覺障礙\" 標記"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1799
 #, no-c-format
 msgid "\"Hearing impaired\" flag:"
-msgstr ""
+msgstr "\"聽覺障礙\" 標記:"
 
 #: src/common/kax_element_names.cpp:205
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Lacing\" flag"
-msgstr "緊縮標記"
+msgstr "\"緊縮\" 標記"
 
 #: src/common/kax_element_names.cpp:217
 #: src/common/property_element.cpp:138
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Original language\" flag"
-msgstr "原始數值:"
+msgstr "\"原始語言\" 標記"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1802
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Original language\" flag:"
-msgstr "原始數值:"
+msgstr "\"原始語言\" 標記:"
 
 #: src/common/kax_element_names.cpp:216
 #: src/common/property_element.cpp:139
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Text descriptions\" flag"
-msgstr "檔案描述"
+msgstr "\"文字說明\" 標記"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1801
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Text descriptions\" flag:"
-msgstr "檔案描述"
+msgstr "\"文字說明\" 標記:"
 
 #: src/common/property_element.cpp:135
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Track enabled\" flag"
-msgstr "'可用軌' 標記"
+msgstr "\"啟用軌\" 標記"
 
 #: src/common/kax_element_names.cpp:215
 #: src/common/property_element.cpp:140
 #, no-c-format
 msgid "\"Visual impaired\" flag"
-msgstr ""
+msgstr "\"視覺障礙\" 標記"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1800
 #, no-c-format
 msgid "\"Visual impaired\" flag:"
-msgstr ""
+msgstr "\"視覺障礙\" 標記:"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:124
 #: src/mkvtoolnix-gui/merge/track_model.cpp:715
@@ -1614,9 +1614,9 @@ msgid "&Automatically set the destination file name"
 msgstr "自動設定輸出檔名(&A)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1898
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Boundary characters:"
-msgstr "字元集(&C)："
+msgstr "界限字元(&B):"
 
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:169
 #, no-c-format
@@ -3309,21 +3309,21 @@ msgid "Adding chapter files"
 msgstr "加入章節檔案"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1863
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Adding files"
-msgstr "加入標籤檔案"
+msgstr "加入檔案"
 
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:164
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:165
 #, no-c-format
 msgid "Adding files via drag & drop or copy & paste"
-msgstr ""
+msgstr "透過拖放或複製貼上加入檔案"
 
 #: src/mkvtoolnix-gui/merge/adding_appending_files_dialog.cpp:28
 #: src/mkvtoolnix-gui/merge/adding_appending_files_dialog.cpp:29
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Adding multiple files via 'Add source files'"
-msgstr "加入多個檔案"
+msgstr "透過 '加入原始檔案' 加入多個檔案"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:740
 #, no-c-format
@@ -4162,39 +4162,39 @@ msgid "Calculate statistics for all tracks and add new/update existing tags for 
 msgstr "計算所有軌道的統計資訊，並為其加入新的/更新現有的標籤"
 
 #: src/common/property_element.cpp:136
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Can be set for tracks containing onscreen text or foreign-language dialog."
-msgstr "對於包含螢幕文字或外語對話的軌道，請使用此選項。"
+msgstr "可以為包含螢幕上的文字或外語對話設定軌道，則可以啟用此設定。"
 
 #: src/common/property_element.cpp:133
 #: src/mkvtoolnix-gui/merge/input.cpp:477
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Can be set if the track contains commentary."
-msgstr "設定軌道是否可用。"
+msgstr "如果軌道包含註釋，則可以啟用此設定。"
 
 #: src/common/property_element.cpp:139
 #: src/mkvtoolnix-gui/merge/input.cpp:475
 #, no-c-format
 msgid "Can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."
-msgstr ""
+msgstr "如果軌道包含適用於透過視覺障礙使用者通過文字轉換語音系統播放影片的文字說明內容，則可以啟用此設定。"
 
 #: src/common/property_element.cpp:138
 #: src/mkvtoolnix-gui/merge/input.cpp:476
 #, no-c-format
 msgid "Can be set if the track is in the content's original language (not a translation)."
-msgstr ""
+msgstr "如果軌道的內容是原始語言（並非翻譯），則可以啟用此設定。"
 
 #: src/common/property_element.cpp:137
 #: src/mkvtoolnix-gui/merge/input.cpp:473
 #, no-c-format
 msgid "Can be set if the track is suitable for users with hearing impairments."
-msgstr ""
+msgstr "如果軌道適合有聽力障礙的使用者，則可以啟用此設定。"
 
 #: src/common/property_element.cpp:140
 #: src/mkvtoolnix-gui/merge/input.cpp:474
 #, no-c-format
 msgid "Can be set if the track is suitable for users with visual impairments."
-msgstr ""
+msgstr "如果軌道適合有視覺障礙的使用者，則可以啟用此設定。"
 
 #: src/common/qt_kax_analyzer.cpp:34
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:255
@@ -8179,9 +8179,9 @@ msgid "Malformed codec id '{0}'.\n"
 msgstr "不正常的編碼器 id '{0}' 。\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:471
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Mark this track as \"forced display\"."
-msgstr "將此軌道標記為 '強制' 。"
+msgstr "以 \"強制顯示\" 標記此軌道。"
 
 #: src/common/file_types.cpp:91
 #, no-c-format
@@ -14349,9 +14349,9 @@ msgid "What do you want to do with the files you've dragged & dropped or copied 
 msgstr "想要如何處理托放在這裡的檔案？"
 
 #: src/mkvtoolnix-gui/merge/adding_appending_files_dialog.cpp:30
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "What do you want to do with the files?"
-msgstr "是否覆蓋該檔案？"
+msgstr "想要如何處理這些檔案？"
 
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
 #, no-c-format
@@ -14384,9 +14384,9 @@ msgid "When adding files via &drag && drop/copy && paste:"
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1864
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "When adding m&ultiple files via \"add source files\":"
-msgstr "當拖曳檔案時(&D)："
+msgstr "透過 '加入原始檔案' 加入多個檔案時:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:469
 #, no-c-format
@@ -15398,9 +15398,9 @@ msgid "raw data"
 msgstr "原始資料"
 
 #: src/common/wavpack.cpp:296
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "reader: non-audio block found\n"
-msgstr "wavpack_reader: 未發現音訊區塊\n"
+msgstr "reader: 找到無音效區塊\n"
 
 #: src/input/r_real.cpp:200
 #, no-c-format
