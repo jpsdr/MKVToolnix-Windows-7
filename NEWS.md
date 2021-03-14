@@ -33,6 +33,10 @@
 * MKVToolNix GUI: chapter editor: the editor will no longer create empty
   `ChapterCountry` elements when adding a chapter name with no default country
   selected in the preferences. Fixes #3072.
+* mkvmerge: tags: mkvmerge will no longer write language elements for the
+  track statistics tags it creates, making the effective language
+  "undetermined" due to `und` being the default value for the legacy tag
+  language element. Fixes #3073.
 
 ## Build system changes
 

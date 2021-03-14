@@ -52,7 +52,7 @@ std::string get_simple_value(const libmatroska::KaxTagSimple &tag);
 void set_simple_name(libmatroska::KaxTagSimple &tag, const std::string &name);
 void set_simple_value(libmatroska::KaxTagSimple &tag, const std::string &value);
 void set_simple(libmatroska::KaxTagSimple &tag, const std::string &name, const std::string &value);
-void set_simple(libmatroska::KaxTag &tag, std::string const &name, std::string const &value, mtx::bcp47::language_c const &language = mtx::bcp47::language_c::parse("eng"));
+void set_simple(libmatroska::KaxTag &tag, std::string const &name, std::string const &value, mtx::bcp47::language_c const &language = {});
 void set_target_type(libmatroska::KaxTag &tag, target_type_e target_type_value, std::string const &target_type);
 
 int count_simple(libebml::EbmlMaster &master);
