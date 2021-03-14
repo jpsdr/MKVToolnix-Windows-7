@@ -40,6 +40,9 @@
 * mkvmerge: tags: the XML tag parser will now validate all `<Simple>` children
   of `<Tag>` elements, not just the first for each `<Tag>`. Part of the fix of
   #3071.
+* mkvmerge: tags: the XML tag parser now uses the spec-compliant `und`
+  ("undetermined") as the default language for `<Simple>` tags instead of
+  `eng`. Part of the fix of #3071.
 
 ## Build system changes
 

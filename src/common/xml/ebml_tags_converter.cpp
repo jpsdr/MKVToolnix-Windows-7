@@ -118,7 +118,7 @@ ebml_tags_converter_c::fix_simple_tag(KaxTagSimple &simple_tag)
   auto tlanguage       = FindChild<KaxTagLangue>(simple_tag);
   auto value_to_parse  = tlanguage_ietf ? tlanguage_ietf->GetValue()
                        : tlanguage      ? tlanguage->GetValue()
-                       :                  "eng"s;
+                       :                  "und"s;
   auto parsed_language = mtx::bcp47::language_c::parse(value_to_parse);
 
   if (!parsed_language.is_valid())
