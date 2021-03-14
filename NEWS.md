@@ -28,6 +28,8 @@
   `ChapLanguageIETF` elements won't be written even when sources are read
   (Matroska files or XML chapters files) that do contain those elements. Part
   of the fix of #3069.
+* mkvmerge: tags: when the option `--disable-language-ietf` is used,
+  `TagLanguageIETF` elements won't be written. Fixes #3070.
 
 ## Build system changes
 

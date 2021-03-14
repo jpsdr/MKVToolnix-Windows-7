@@ -287,7 +287,8 @@ set_simple(KaxTag &tag,
   if (language.has_valid_iso639_2_code())
     GetChild<KaxTagLangue>(k_simple_tag).SetValue(language.get_iso639_alpha_3_code());
 
-  GetChild<KaxTagLanguageIETF>(k_simple_tag).SetValue(language.format());
+  if (!mtx::bcp47::language_c::is_disabled())
+    GetChild<KaxTagLanguageIETF>(k_simple_tag).SetValue(language.format());
 }
 
 void

@@ -138,8 +138,8 @@ set_usage() {
   usage_text += Y("  --disable-lacing         Do not use lacing.\n");
   usage_text += Y("  --disable-track-statistics-tags\n"
                   "                           Do not write tags with track statistics.\n");
-  usage_text += Y("  --disable-language-ietf  Do not write LanguageIETF track header and\n"
-                  "                           ChapLanguageIETF chapter elements.\n");
+  usage_text += Y("  --disable-language-ietf  Do not write IETF BCP 47 language elements in\n"
+                  "                           track headers, chapters and tags.\n");
   usage_text +=   "\n";
   usage_text += Y(" File splitting, linking, appending and concatenating (more global options):\n");
   usage_text += Y("  --split <d[K,M,G]|HH:MM:SS|s>\n"
