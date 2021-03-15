@@ -813,7 +813,9 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
       if (p->analyzer->is_webm())
         mtx::chapters::remove_elements_unsupported_by_webm(*chapters);
 
-      result = p->analyzer->update_element(chapters, !p->analyzer->is_webm(), false);
+      remove_mandatory_elements_set_to_their_default(*chapters);
+
+      result = p->analyzer->update_element(chapters, false, false);
 
     } else
       result = p->analyzer->remove_elements(EBML_ID(KaxChapters));
