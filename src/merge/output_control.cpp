@@ -1713,6 +1713,7 @@ finish_file(bool last_file,
     fix_mandatory_elements(tags_here);
     if (mtx::bcp47::language_c::is_disabled())
       remove_ietf_language_elements(*tags_here);
+    remove_mandatory_elements_set_to_their_default(*tags_here);
     tags_here->UpdateSize();
     g_doc_type_version_handler->render(*tags_here, *s_out, true);
 

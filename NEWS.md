@@ -6,6 +6,9 @@
   tracks" layout option for the track properties the elements in the "general
   options" tab will use six rows à four columns instead of twelve rows à two
   columns, greatly reducing the required height. Implements #3062.
+* mkvmerge: tags: mkvmerge will no longer write tag elements that are
+  mandatory and set to their default value (e.g. "tag language" set to `und` =
+  undetermined).
 
 ## Bug fixes
 
