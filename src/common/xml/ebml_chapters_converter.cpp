@@ -72,10 +72,6 @@ ebml_chapters_converter_c::fix_xml(document_cptr &doc)
   result = doc->select_nodes("//ChapterDisplay[not(ChapterString)]");
   for (auto &atom : result)
     atom.node().append_child("ChapterString");
-
-  result = doc->select_nodes("//ChapterDisplay[not(ChapterLanguage)]");
-  for (auto &atom : result)
-    atom.node().append_child("ChapterLanguage").append_child(pugi::node_pcdata).set_value("eng");
 }
 
 void
@@ -159,12 +155,15 @@ ebml_chapters_converter_c::fix_display(KaxChapterDisplay &display)
     clanguage_ietf->SetValue(parsed_language.format());
 
   if (parsed_language.has_valid_iso639_2_code()) {
-    if (!clanguage) {
+    auto code = parsed_language.get_iso639_alpha_3_code();
+
+    if ((code != "eng"s) && !clanguage) {
       clanguage = new KaxChapterLanguage;
       display.PushElement(*clanguage);
     }
 
-    clanguage->SetValue(parsed_language.get_iso639_alpha_3_code());
+    if (clanguage)
+      clanguage->SetValue(code);
 
   } else if (clanguage) {
     auto language_opt = mtx::iso639::look_up(clanguage->GetValue());

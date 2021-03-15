@@ -13,6 +13,9 @@
   will no longer write chapter elements that are mandatory and set to their
   default value (e.g. "chapter language" set to `eng` = English or "Chapter
   flag enabled" = 1).
+* mkvextract: chapters: mkvextract will no longer add a `ChapterLanguage`
+  element set to `eng` to the generated XML content if the source file doesn't
+  contain such an element.
 
 ## Bug fixes
 
