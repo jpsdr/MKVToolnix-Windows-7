@@ -20,6 +20,7 @@
 
 namespace libmatroska {
 class KaxTags;
+class KaxTag;
 }
 
 class track_statistics_c {
@@ -93,4 +94,7 @@ public:
   }
 
   void create_tags(libmatroska::KaxTags &tags, std::string const &writing_app, std::optional<mtx::date_time::point_t> const &writing_date) const;
+
+protected:
+  libmatroska::KaxTag *find_or_create_tag(libmatroska::KaxTags &tags) const;
 };

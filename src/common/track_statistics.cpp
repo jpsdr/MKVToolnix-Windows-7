@@ -11,6 +11,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/construct.h"
 #include "common/date_time.h"
 #include "common/strings/formatting.h"
 #include "common/tags/tags.h"
@@ -30,7 +31,7 @@ track_statistics_c::create_tags(libmatroska::KaxTags &tags,
   mtx::tags::remove_simple_tags_for<libmatroska::KaxTagTrackUID>(tags, m_track_uid, "NUMBER_OF_FRAMES");
   mtx::tags::remove_simple_tags_for<libmatroska::KaxTagTrackUID>(tags, m_track_uid, "NUMBER_OF_BYTES");
 
-  auto tag = mtx::tags::find_tag_for<libmatroska::KaxTagTrackUID>(tags, m_track_uid, mtx::tags::Movie, true, "MOVIE");
+  auto tag = find_or_create_tag(tags);
 
   mtx::tags::set_simple(*tag, "BPS",              fmt::to_string(bps ? *bps : 0));
   mtx::tags::set_simple(*tag, "DURATION",         mtx::string::format_timestamp(duration ? *duration : 0));
@@ -50,4 +51,40 @@ track_statistics_c::create_tags(libmatroska::KaxTags &tags,
   }
 
   mtx::tags::set_simple(*tag, "_STATISTICS_TAGS", mtx::string::join(names, " "));
+}
+
+libmatroska::KaxTag *
+track_statistics_c::find_or_create_tag(libmatroska::KaxTags &tags)
+  const {
+  for (auto &element : tags) {
+    auto tag = dynamic_cast<libmatroska::KaxTag *>(element);
+    if (!tag)
+      continue;
+
+    auto targets = FindChild<libmatroska::KaxTagTargets>(*tag);
+    if (!targets)
+      continue;
+
+    auto actual_target_type_value = static_cast<mtx::tags::target_type_e>(FindChildValue<libmatroska::KaxTagTargetTypeValue>(*targets, 0ull));
+    auto actual_id                = FindChildValue<libmatroska::KaxTagTrackUID>(*targets, 0ull);
+    auto actual_target_type       = FindChild<libmatroska::KaxTagTargetType>(*targets);
+
+    if (   (actual_target_type_value != mtx::tags::Movie)
+        || (actual_id                != m_track_uid))
+      continue;
+
+    if (!actual_target_type)
+      GetChild<libmatroska::KaxTagTargetType>(targets).SetValue("MOVIE"s);
+
+    return tag;
+  }
+
+  using namespace mtx::construct;
+
+  auto tag = cons<libmatroska::KaxTag>(cons<libmatroska::KaxTagTargets>(new libmatroska::KaxTagTargetTypeValue, mtx::tags::Movie,
+                                                                        new libmatroska::KaxTagTrackUID,        m_track_uid,
+                                                                        new libmatroska::KaxTagTargetType,      "MOVIE"s));
+  tags.PushElement(*tag);
+
+  return tag;
 }
