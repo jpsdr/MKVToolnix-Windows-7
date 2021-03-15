@@ -9,6 +9,9 @@
 * mkvmerge: tags: mkvmerge will no longer write tag elements that are
   mandatory and set to their default value (e.g. "tag language" set to `und` =
   undetermined).
+* mkvmerge: chapters: mkvmerge will no longer write chapter elements that are
+  mandatory and set to their default value (e.g. "chapter language" set to
+  `eng` = English or "Chapter flag enabled" = 1).
 
 ## Bug fixes
 
