@@ -647,6 +647,34 @@ remove_ietf_language_elements(libebml::EbmlMaster &master) {
   }
 }
 
+void
+remove_mandatory_elements_set_to_their_default(libebml::EbmlMaster &master) {
+  auto idx = 0u;
+
+  while (idx < master.ListSize()) {
+    auto child = master[idx];
+
+    if (dynamic_cast<libebml::EbmlMaster *>(child)) {
+      remove_mandatory_elements_set_to_their_default(*static_cast<libebml::EbmlMaster *>(child));
+      ++idx;
+      continue;
+    }
+
+    if (!child->IsDefaultValue()) {
+      ++idx;
+      continue;
+    }
+
+    auto semantic = find_ebml_semantic(KaxSegment::ClassInfos, libebml::EbmlId(*child));
+
+    if (!semantic || !semantic->IsMandatory())
+      ++idx;
+    else {
+      delete child;
+      master.Remove(idx);
+    }
+  }
+}
 
 static bool
 must_be_present_in_master_by_id(EbmlId const &id) {

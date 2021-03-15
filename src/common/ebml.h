@@ -410,6 +410,7 @@ void remove_voids_from_master(libebml::EbmlElement *element);
 void move_children(libebml::EbmlMaster &source, libebml::EbmlMaster &destination);
 bool remove_master_from_parent_if_empty_or_only_defaults(libebml::EbmlMaster *parent, libebml::EbmlMaster *child, std::unordered_map<libebml::EbmlMaster *, bool> &handled);
 void remove_ietf_language_elements(libebml::EbmlMaster &master);
+void remove_mandatory_elements_set_to_their_default(libebml::EbmlMaster &master);
 
 const libebml::EbmlCallbacks *find_ebml_callbacks(const libebml::EbmlCallbacks &base, const libebml::EbmlId &id);
 const libebml::EbmlCallbacks *find_ebml_callbacks(const libebml::EbmlCallbacks &base, const char *debug_name);
