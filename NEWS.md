@@ -49,6 +49,9 @@
 * mkvmerge: tags: the XML tag parser now uses the spec-compliant `und`
   ("undetermined") as the default language for `<Simple>` tags instead of
   `eng`. Part of the fix of #3071.
+* mkvmerge, mkvpropedit: tags: mkvmerge will no longer set the "target type"
+  for track statistics tags (earlier it used `MOVIE`). The "target type value"
+  will still be set to `50`. Fixes #3074.
 
 ## Build system changes
 

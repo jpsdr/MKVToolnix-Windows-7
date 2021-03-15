@@ -69,21 +69,16 @@ track_statistics_c::find_or_create_tag(libmatroska::KaxTags &tags)
     auto actual_id                = FindChildValue<libmatroska::KaxTagTrackUID>(*targets, 0ull);
     auto actual_target_type       = FindChild<libmatroska::KaxTagTargetType>(*targets);
 
-    if (   (actual_target_type_value != mtx::tags::Movie)
-        || (actual_id                != m_track_uid))
-      continue;
-
-    if (!actual_target_type)
-      GetChild<libmatroska::KaxTagTargetType>(targets).SetValue("MOVIE"s);
-
-    return tag;
+    if (   (actual_target_type_value == mtx::tags::Movie)
+        && (actual_id                == m_track_uid)
+        && !actual_target_type)
+      return tag;
   }
 
   using namespace mtx::construct;
 
   auto tag = cons<libmatroska::KaxTag>(cons<libmatroska::KaxTagTargets>(new libmatroska::KaxTagTargetTypeValue, mtx::tags::Movie,
-                                                                        new libmatroska::KaxTagTrackUID,        m_track_uid,
-                                                                        new libmatroska::KaxTagTargetType,      "MOVIE"s));
+                                                                        new libmatroska::KaxTagTrackUID,        m_track_uid));
   tags.PushElement(*tag);
 
   return tag;
