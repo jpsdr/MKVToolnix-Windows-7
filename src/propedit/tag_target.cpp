@@ -69,7 +69,7 @@ tag_target_c::validate() {
 
 void
 tag_target_c::parse_tags_spec(const std::string &spec) {
-  m_spec                         = spec;
+  m_spec     = spec;
   auto parts = mtx::string::split(spec, ":", 2);
 
   if (2 != parts.size())
@@ -85,7 +85,7 @@ tag_target_c::parse_tags_spec(const std::string &spec) {
 
   else if (parts[0] == "track") {
     m_operation_mode = tom_track;
-    parts                = mtx::string::split(parts[1], ":", 2);
+    parts            = mtx::string::split(parts[1], ":", 2);
     parse_spec(balg::to_lower_copy(parts[0]));
 
   } else
@@ -373,7 +373,7 @@ tag_target_c::account_all_clusters() {
 void
 tag_target_c::create_track_statistics_tags() {
   auto no_variable_data = mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA);
-  auto writing_app      = no_variable_data ? "no_variable_data"                                   : get_version_info("mkvpropedit", static_cast<version_info_flags_e>(vif_full | vif_untranslated));
+  auto writing_app      = no_variable_data ? "no_variable_data"        : get_version_info("mkvpropedit", static_cast<version_info_flags_e>(vif_full | vif_untranslated));
   auto writing_date     = no_variable_data ? mtx::date_time::point_t{} : std::chrono::system_clock::now();
 
   auto track_numbers    = std::vector<uint64_t>{};
