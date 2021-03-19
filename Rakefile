@@ -260,6 +260,7 @@ def define_default_task
 
   targets << "apps:tools" if $build_tools
   targets << "apps:tools:bluray_dump" if $building_for[:windows]
+  targets << "msix-assets"            if $building_for[:windows] && !c(:CONVERT).empty?
   targets += (c(:ADDITIONAL_TARGETS) || '').split(%r{ +})
 
   # Build the unit tests only if requested
@@ -407,6 +408,12 @@ if $building_for[:windows]
     path = FileTest.directory?("src/#{program}") ? program : program.gsub(/^mkv/, '')
     icon = program == 'mkvinfo' ? 'share/icons/windows/mkvinfo.ico' : 'share/icons/windows/mkvtoolnix-gui.ico'
     file "src/#{path}/resources.o" => [ "src/#{path}/manifest.xml", "src/#{path}/resources.rc", icon ]
+  end
+
+  task 'msix-assets' => 'packaging/windows/msix/assets/StoreLogo.png'
+
+  file 'packaging/windows/msix/assets/StoreLogo.png' => 'packaging/windows/msix/generate_assets.sh' do
+    runq "generate", 'packaging/windows/msix/assets', 'packaging/windows/msix/generate_assets.sh'
   end
 end
 
@@ -977,7 +984,6 @@ task :clean do
     **/*.o
     **/*.pot
     **/*.qm
-    **/manifest.xml
     doc/man/*.1
     doc/man/*.html
     doc/man/*.xsl
@@ -986,7 +992,9 @@ task :clean do
     doc/man/*/*.xml
     doc/man/*/*.xsl
     lib/libebml/ebml/ebml_export.h
+    packaging/windows/msix/assets/*.png
     src/*/qt_resources.cpp
+    src/**/manifest.xml
     src/info/ui/*.h
     src/mkvtoolnix-gui/forms/**/*.h
     src/benchmark/benchmark

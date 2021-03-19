@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4"
+  xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6"
+  xmlns:uap7="http://schemas.microsoft.com/appx/manifest/uap/windows10/7"
+  xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
+  xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+  xmlns:mobile="http://schemas.microsoft.com/appx/manifest/mobile/windows10"
+  xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10"
+  xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
+  xmlns:desktop2="http://schemas.microsoft.com/appx/manifest/desktop/windows10/2"
+  xmlns:desktop3="http://schemas.microsoft.com/appx/manifest/desktop/windows10/3"
+  xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"
+  xmlns:desktop6="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  xmlns:rescap3="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/3"
+  xmlns:rescap6="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/6"
+  xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+  xmlns:com2="http://schemas.microsoft.com/appx/manifest/com/windows10/2"
+  xmlns:com3="http://schemas.microsoft.com/appx/manifest/com/windows10/3"
+  IgnorableNamespaces="uap uap2 uap3 uap4 uap6 uap7 uap8 uap10 mobile iot desktop desktop2 desktop3 desktop5 desktop6 rescap rescap3 rescap6 com com2 com3">
+ <!-- NOTE: The Publisher attr needs to match the code signing certificate. -->
+ <Identity Name="53641MoritzBunkus.MKVToolNix" Publisher="CN=9EB0BE09-3B37-40B3-A7D3-72C693E48634" Version="" ProcessorArchitecture="" />
+ <Properties>
+  <DisplayName>MKVToolNix</DisplayName>
+  <PublisherDisplayName>Moritz Bunkus</PublisherDisplayName>
+  <Description>Creating and working with Matroska files</Description>
+  <Logo>Assets\StoreLogo.png</Logo>
+ </Properties>
+ <Resources>
+  <Resource Language="en-us" />
+ </Resources>
+ <Dependencies>
+  <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17135.0" MaxVersionTested="10.0.18335.0" />
+ </Dependencies>
+ <Capabilities>
+  <rescap:Capability Name="runFullTrust" />
+ </Capabilities>
+ <Applications>
+  <Application Id="MKVToolNixGUI" Executable="mkvtoolnix\mkvtoolnix-gui.exe" EntryPoint="Windows.FullTrustApplication">
+   <uap:VisualElements
+     DisplayName="MKVToolNix"
+     Description="Creating and working with Matroska files"
+     BackgroundColor="transparent"
+     Square150x150Logo="Assets\Square150x150Logo.png"
+     Square44x44Logo="Assets\Square44x44Logo.png">
+    <uap:DefaultTile
+      Wide310x150Logo="Assets\Wide310x150Logo.png"
+      Square310x310Logo="Assets\Square310x310Logo.png"
+      Square71x71Logo="Assets\Square71x71Logo.png">
+     <uap:ShowNameOnTiles>
+      <uap:ShowOn Tile="square150x150Logo" />
+      <uap:ShowOn Tile="wide310x150Logo" />
+      <uap:ShowOn Tile="square310x310Logo" />
+     </uap:ShowNameOnTiles>
+    </uap:DefaultTile>
+   </uap:VisualElements>
+   <Extensions>
+    <!-- MKVToolNix GUI file types: -->
+    <uap3:Extension Category="windows.fileTypeAssociation">
+     <uap3:FileTypeAssociation Name="mtxcfg" Parameters="&quot;%1&quot;" desktop5:ThumbnailTypeOverlay="Assets\Square44x44Logo.png">
+      <uap:DisplayName>MKVToolNix GUI settings</uap:DisplayName>
+      <uap:Logo>Assets\fileicon.png</uap:Logo>
+      <uap:SupportedFileTypes>
+       <uap:FileType ContentType="application/x-mkvtoolnix-gui-settings">.mtxcfg</uap:FileType>
+      </uap:SupportedFileTypes>
+     </uap3:FileTypeAssociation>
+    </uap3:Extension>
+   </Extensions>
+  </Application>
+ </Applications>
+</Package>
