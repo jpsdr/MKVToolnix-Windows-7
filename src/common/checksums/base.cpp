@@ -91,6 +91,36 @@ calculate_as_uint(algorithm_e algorithm,
   return dynamic_cast<uint_result_c &>(*worker).get_result_as_uint();
 }
 
+std::string
+calculate_as_hex_string(algorithm_e algorithm,
+                        memory_c const &buffer,
+                        uint64_t initial_value) {
+  return calculate_as_hex_string(algorithm, buffer.get_buffer(), buffer.get_size(), initial_value);
+}
+
+std::string
+calculate_as_hex_string(algorithm_e algorithm,
+                        void const *buffer,
+                        size_t size,
+                        uint64_t initial_value) {
+  auto worker = for_algorithm(algorithm, initial_value);
+
+  worker->add(buffer, size);
+  worker->finish();
+
+  auto result        = worker->get_result();
+  auto result_size   = result->get_size();
+  auto result_buffer = result->get_buffer();
+
+  std::string hex_string;
+  hex_string.reserve(result_size * 2);
+
+  for (auto idx = 0u; idx < result_size; ++idx)
+    hex_string += fmt::format("{0:02x}", result_buffer[idx]);
+
+  return hex_string;
+}
+
 // ----------------------------------------------------------------------
 
 base_c &

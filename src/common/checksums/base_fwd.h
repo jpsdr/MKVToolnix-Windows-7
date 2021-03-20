@@ -39,5 +39,7 @@ memory_cptr calculate(algorithm_e algorithm, memory_c const &buffer, uint64_t in
 memory_cptr calculate(algorithm_e algorithm, void const *buffer, size_t size, uint64_t initial_value = 0);
 uint64_t calculate_as_uint(algorithm_e algorithm, memory_c const &buffer, uint64_t initial_value = 0);
 uint64_t calculate_as_uint(algorithm_e algorithm, void const *buffer, size_t size, uint64_t initial_value = 0);
+std::string calculate_as_hex_string(algorithm_e algorithm, memory_c const &buffer, uint64_t initial_value = 0);
+std::string calculate_as_hex_string(algorithm_e algorithm, void const *buffer, size_t size, uint64_t initial_value = 0);
 
 } // namespace mtx::checksum
