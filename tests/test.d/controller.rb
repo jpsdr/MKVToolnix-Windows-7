@@ -134,7 +134,9 @@ class Controller
           idx    += 1 unless command[:no_result]
         end
 
-        if (update_failed)
+        if (update_failed && actual_results.include?("failed"))
+          self.add_result class_name, :failed, :message => msg + "  FATAL: cannot update result as test results include 'failed'"
+        elsif (update_failed)
           self.add_result class_name, :passed, :message => msg + "  UPDATING result\n", :checksum => result, :duration => duration
         else
           self.add_result class_name, :failed, :message => msg
