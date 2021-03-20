@@ -10,6 +10,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/checksums/base_fwd.h"
 #include "common/command_line.h"
 #include "common/hevc_es_parser.h"
 #include "common/mm_io_x.h"
@@ -17,6 +18,8 @@
 #include "common/version.h"
 
 static bool s_is_framed{};
+static memory_cptr s_frame;
+static uint64_t s_frame_fill{};
 
 static void
 show_help() {
@@ -65,6 +68,29 @@ parse_args(std::vector<std::string> &args) {
 }
 
 static void
+add_frame_byte(uint8_t byte) {
+  if (!s_frame)
+    s_frame = memory_c::alloc(100'000);
+
+  else if (s_frame->get_size() == s_frame_fill)
+    s_frame->resize(s_frame->get_size() + 100'000);
+
+  s_frame->get_buffer()[s_frame_fill] = byte;
+  ++s_frame_fill;
+}
+
+static std::string
+calc_frame_checksum(uint64_t skip_at_end) {
+  if (skip_at_end >= s_frame_fill)
+    return 0;
+
+  auto checksum = mtx::checksum::calculate_as_hex_string(mtx::checksum::algorithm_e::md5, s_frame->get_buffer(), s_frame_fill - skip_at_end);
+  s_frame_fill  = 0;
+
+  return checksum;
+}
+
+static void
 parse_file(const std::string &file_name) {
   mm_file_io_c in{file_name};
   auto size = static_cast<uint64_t>(in.get_size());
@@ -89,20 +115,30 @@ parse_file(const std::string &file_name) {
       marker_size = 3;
 
     else {
-      marker = (marker << 8) | in.read_uint8();
+      auto byte = in.read_uint8();
+      marker    = (marker << 8) | byte;
+
+      add_frame_byte(byte);
+
       continue;
     }
 
     pos -= marker_size;
 
     if (-1 != previous_pos)
-      mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2} marker size {3} at {4}\n",
-                         previous_type, mtx::hevc::es_parser_c::get_nalu_type_name(previous_type), pos - previous_pos - previous_marker_size, previous_marker_size, previous_pos));
+      mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2} marker size {3} at {4} checksum 0x{5}\n",
+                         previous_type, mtx::hevc::es_parser_c::get_nalu_type_name(previous_type), pos - previous_pos - previous_marker_size, previous_marker_size, previous_pos, calc_frame_checksum(marker_size)));
+    else
+      s_frame_fill = 0;
 
+    auto next_bytes      = in.read_uint32_be();
     previous_pos         = pos;
     previous_marker_size = marker_size;
-    previous_type        = (in.read_uint8() >> 1) & 0x3f;
-    marker               = (1ull << 24) | in.read_uint24_be();
+    previous_type        = (next_bytes >> (24 + 1)) & 0x3f;
+    marker               = (1ull << 24) | (next_bytes & 0x00ff'ffff);
+
+    for (auto idx = 0; idx < 4; ++idx)
+      add_frame_byte(next_bytes >> ((3 - idx) * 8));
   }
 }
 
@@ -120,11 +156,12 @@ parse_file_framed(std::string const &file_name) {
     if (!nalu_size)
       return;
 
-    mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2} at {3}\n", nalu_type, mtx::hevc::es_parser_c::get_nalu_type_name(nalu_type), nalu_size, pos));
+    in.setFilePointer(pos + 4);
+    auto frame = in.read(nalu_size);
+
+    mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2} at {3} checksum 0x{4}\n", nalu_type, mtx::hevc::es_parser_c::get_nalu_type_name(nalu_type), nalu_size, pos, mtx::checksum::calculate_as_hex_string(mtx::checksum::algorithm_e::md5, *frame)));
 
     pos += nalu_size + 4;
-
-    in.setFilePointer(pos);
   }
 }
 
