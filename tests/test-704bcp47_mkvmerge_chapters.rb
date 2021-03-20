@@ -31,7 +31,7 @@ def compare_languages *expected_languages
     (0..tracks.size - 1).each do |idx|
       props = tracks[idx]
 
-      if props[:language] != expected_languages[idx][0]
+      if (props[:language] || "eng") != expected_languages[idx][0]
         fail "track #{idx} actual language #{props[:language]} != expected #{expected_languages[idx][0]}"
       end
 
