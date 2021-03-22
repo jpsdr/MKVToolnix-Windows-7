@@ -22,7 +22,7 @@ namespace mtx::hevc {
 
 struct slice_info_t {
   unsigned char nalu_type{};
-  unsigned char type{};
+  unsigned char slice_type{};
   unsigned char pps_id{};
   bool first_slice_segment_in_pic_flag{};
   unsigned int pic_order_cnt_lsb{};

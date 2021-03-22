@@ -43,13 +43,13 @@ slice_info_t::dump()
   const {
   mxinfo(fmt::format("slice_info dump:\n"
                      "  nalu_type:                  {0}\n"
-                     "  type:                       {1}\n"
+                     "  slice_type:                 {1}\n"
                      "  pps_id:                     {2}\n"
                      "  pic_order_cnt_lsb:          {3}\n"
                      "  sps:                        {4}\n"
                      "  pps:                        {5}\n",
                      static_cast<unsigned int>(nalu_type),
-                     static_cast<unsigned int>(type),
+                     static_cast<unsigned int>(slice_type),
                      static_cast<unsigned int>(pps_id),
                      pic_order_cnt_lsb,
                      sps,
@@ -293,8 +293,8 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     return;
   }
 
-  bool is_i_slice = (SLICE_TYPE_I == si.type);
-  bool is_b_slice = (SLICE_TYPE_B == si.type);
+  bool is_i_slice = (SLICE_TYPE_I == si.slice_type);
+  bool is_b_slice = (SLICE_TYPE_B == si.slice_type);
 
   m_incomplete_frame.m_si       =  si;
   m_incomplete_frame.m_keyframe =  m_recovery_point_valid
@@ -644,7 +644,7 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
       for (i = 0; i < pps.num_extra_slice_header_bits; i++)
         r.get_bits(1);  // slice_reserved_undetermined_flag[i]
 
-      si.type = r.get_unsigned_golomb();  // slice_type
+      si.slice_type = r.get_unsigned_golomb();  // slice_type
 
       if (pps.output_flag_present_flag)
         r.get_bits(1);    // pic_output_flag
@@ -656,7 +656,7 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
         si.pic_order_cnt_lsb = r.get_bits(sps.log2_max_pic_order_cnt_lsb); // slice_pic_order_cnt_lsb
       }
 
-      ++m_stats.num_slices_by_type[1 < si.type ? 2 : si.type];
+      ++m_stats.num_slices_by_type[1 < si.slice_type ? 2 : si.slice_type];
     }
 
     return true;
