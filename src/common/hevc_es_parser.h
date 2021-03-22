@@ -29,6 +29,7 @@ struct slice_info_t {
 
   unsigned int sps{};
   unsigned int pps{};
+  int temporal_id{};
 
   void dump() const;
   void clear();
@@ -55,6 +56,7 @@ protected:
   int64_t m_stream_default_duration{-1}, m_forced_default_duration{-1}, m_container_default_duration{-1};
   int m_frame_number{}, m_num_skipped_frames{};
   bool m_first_keyframe_found{}, m_recovery_point_valid{}, m_b_frames_since_keyframe{}, m_first_cleanup{true};
+  int m_prev_pic_order_cnt_lsb{}, m_prev_pic_order_cnt_msb{};
 
   bool m_par_found{};
   int64_rational_c m_par{};
@@ -83,7 +85,8 @@ protected:
 
   bool m_simple_picture_order{}, m_discard_actual_frames{}, m_normalize_parameter_sets{};
 
-  debugging_option_c m_debug_keyframe_detection{"hevc_parser|hevc_keyframe_detection"}, m_debug_nalu_types{"hevc_parser|hevc_nalu_types"}, m_debug_timestamps{"hevc_parser|hevc_timestamps"}, m_debug_sps_info{"hevc_parser|hevc_sps|hevc_sps_info"}, m_debug_parameter_sets{"hevc_parser|hevc_parameter_sets"};
+  debugging_option_c m_debug_keyframe_detection{"hevc_parser|hevc_keyframe_detection"}, m_debug_nalu_types{"hevc_parser|hevc_nalu_types"}, m_debug_timestamps{"hevc_parser|hevc_timestamps"}, m_debug_sps_info{"hevc_parser|hevc_sps|hevc_sps_info"}, m_debug_parameter_sets{"hevc_parser|hevc_parameter_sets"},
+    m_debug_frame_order{"hevc_parser|hevc_frame_order"};
   static std::unordered_map<int, std::string> ms_nalu_names_by_type;
 
   struct stats_t {

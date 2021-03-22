@@ -25,6 +25,7 @@
 #include "common/hevc.h"
 #include "common/hevc_es_parser.h"
 #include "common/hevcc.h"
+#include "common/list_utils.h"
 #include "common/memory_slice_cursor.h"
 #include "common/strings/formatting.h"
 #include "common/timestamp.h"
@@ -589,10 +590,10 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
 
     si.clear();
 
-    r.get_bits(1);                // forbidden_zero_bit
-    si.nalu_type = r.get_bits(6); // nal_unit_type
-    r.get_bits(6);                // nuh_reserved_zero_6bits
-    r.get_bits(3);                // nuh_temporal_id_plus1
+    r.get_bits(1);                      // forbidden_zero_bit
+    si.nalu_type = r.get_bits(6);       // nal_unit_type
+    r.get_bits(6);                      // nuh_reserved_zero_6bits
+    si.temporal_id = r.get_bits(3) - 1; // nuh_temporal_id_plus1
 
     bool RapPicFlag = (si.nalu_type >= 16 && si.nalu_type <= 23); // RapPicFlag
     si.first_slice_segment_in_pic_flag = r.get_bits(1); // first_slice_segment_in_pic_flag
@@ -721,47 +722,57 @@ es_parser_c::get_most_often_used_duration()
 
 void
 es_parser_c::calculate_frame_order() {
-  auto frames_begin           = m_frames.begin();
-  auto frames_end             = m_frames.end();
-  auto frame_itr              = frames_begin;
+  auto frames_begin      = m_frames.begin();
+  auto frames_end        = m_frames.end();
+  auto frame_itr         = frames_begin;
 
-  auto &idr                   = frame_itr->m_si;
-  auto &sps                   = m_sps_info_list[idr.sps];
+  auto &idr_si           = frame_itr->m_si;
+  auto &sps              = m_sps_info_list[idr_si.sps];
 
-  auto idx                    = 0u;
-  auto prev_pic_order_cnt_msb = 0u;
-  auto prev_pic_order_cnt_lsb = 0u;
+  auto idx               = 0u;
 
-  m_simple_picture_order      = false;
+  m_simple_picture_order = false;
 
   while (frames_end != frame_itr) {
     auto &si = frame_itr->m_si;
 
-    if (si.sps != idr.sps) {
+    if (si.sps != idr_si.sps) {
       m_simple_picture_order = true;
       break;
     }
 
-    if ((NALU_TYPE_IDR_W_RADL == idr.type) || (NALU_TYPE_IDR_N_LP == idr.type)) {
+    if ((NALU_TYPE_IDR_W_RADL == si.nalu_type) || (NALU_TYPE_IDR_N_LP == si.nalu_type)) {
       frame_itr->m_presentation_order = 0;
-      prev_pic_order_cnt_lsb = prev_pic_order_cnt_msb = 0;
-    } else {
-      unsigned int poc_msb;
-      auto max_poc_lsb = 1u << (sps.log2_max_pic_order_cnt_lsb);
-      auto poc_lsb     = si.pic_order_cnt_lsb;
+      mxdebug_if(m_debug_frame_order, fmt::format("frame order: KEY!\n"));
 
-      if (poc_lsb < prev_pic_order_cnt_lsb && (prev_pic_order_cnt_lsb - poc_lsb) >= (max_poc_lsb / 2))
-        poc_msb = prev_pic_order_cnt_msb + max_poc_lsb;
-      else if (poc_lsb > prev_pic_order_cnt_lsb && (poc_lsb - prev_pic_order_cnt_lsb) > (max_poc_lsb / 2))
-        poc_msb = prev_pic_order_cnt_msb - max_poc_lsb;
+    } else {
+      int poc_msb;
+      int max_poc_lsb = 1 << (sps.log2_max_pic_order_cnt_lsb);
+      int poc_lsb     = si.pic_order_cnt_lsb;
+
+      auto condition1 = poc_lsb < m_prev_pic_order_cnt_lsb && (m_prev_pic_order_cnt_lsb - poc_lsb) >= (max_poc_lsb / 2);
+      auto condition2 = poc_lsb > m_prev_pic_order_cnt_lsb && (poc_lsb - m_prev_pic_order_cnt_lsb) >  (max_poc_lsb / 2);
+
+      if (condition1)
+        poc_msb = m_prev_pic_order_cnt_msb + max_poc_lsb;
+      else if (condition2)
+        poc_msb = m_prev_pic_order_cnt_msb - max_poc_lsb;
       else
-        poc_msb = prev_pic_order_cnt_msb;
+        poc_msb = m_prev_pic_order_cnt_msb;
+
+      if (mtx::included_in(si.nalu_type, NALU_TYPE_BLA_W_LP, NALU_TYPE_BLA_W_RADL, NALU_TYPE_BLA_N_LP))
+        poc_msb = 0;
 
       frame_itr->m_presentation_order = poc_lsb + poc_msb;
 
-      if ((NALU_TYPE_RADL_N != idr.type) && (NALU_TYPE_RADL_R != idr.type) && (NALU_TYPE_RASL_N != idr.type) && (NALU_TYPE_RASL_R != idr.type)) {
-        prev_pic_order_cnt_lsb = poc_lsb;
-        prev_pic_order_cnt_msb = poc_msb;
+      mxdebug_if(m_debug_frame_order,
+                 fmt::format("frame order: {0} lsb {1} msb {2} max_poc_lsb {3} prev_lsb {4} prev_msb {5} cond1 {6} cond2 {7} NALsize {8} type {9} ({10})\n",
+                             frame_itr->m_presentation_order, poc_lsb, poc_msb, max_poc_lsb, m_prev_pic_order_cnt_lsb, m_prev_pic_order_cnt_msb, condition1, condition2, frame_itr->m_data->get_size(), static_cast<unsigned int>(si.nalu_type), get_nalu_type_name(si.nalu_type)));
+
+      if (   (frame_itr->m_si.temporal_id == 0)
+          && !mtx::included_in(si.nalu_type, NALU_TYPE_TRAIL_N, NALU_TYPE_TSA_N, NALU_TYPE_STSA_N, NALU_TYPE_RADL_N, NALU_TYPE_RASL_N, NALU_TYPE_RADL_R, NALU_TYPE_RASL_R)) {
+        m_prev_pic_order_cnt_lsb = poc_lsb;
+        m_prev_pic_order_cnt_msb = poc_msb;
       }
     }
 
