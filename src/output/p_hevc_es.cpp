@@ -198,12 +198,10 @@ hevc_es_video_packetizer_c::connect(generic_packetizer_c *src,
 
 connection_result_e
 hevc_es_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
-                                                std::string &error_message) {
+                                           [[maybe_unused]] std::string &error_message) {
   auto *vsrc = dynamic_cast<hevc_es_video_packetizer_c *>(src);
   if (!vsrc)
     return CAN_CONNECT_NO_FORMAT;
-
-  connect_check_codec_private(src);
 
   return CAN_CONNECT_YES;
 }
