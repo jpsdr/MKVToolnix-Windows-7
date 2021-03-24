@@ -29,3 +29,7 @@ AC_SUBST(MINGW_LIBS)
 AC_SUBST(MINGW_GUIAPP)
 AC_SUBST(MINGW_PROCESSOR_ARCH)
 AC_SUBST(EXEEXT)
+
+if test "x$ac_cv_mingw32" = "xyes"; then
+  AC_PATH_PROG(CONVERT, convert)
+fi
