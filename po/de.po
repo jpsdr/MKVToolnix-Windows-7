@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-03-14 21:31+0100\n"
-"PO-Revision-Date: 2021-03-14 21:31+0100\n"
+"POT-Creation-Date: 2021-03-24 20:20+0100\n"
+"PO-Revision-Date: 2021-03-24 20:26+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -2591,13 +2591,13 @@ msgstr "»{0}« ist keine gültige DVD-Titelnummer."
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Additional information from the parser: {2}\n"
 msgstr "'{0}' ist kein gültiger IETF BCP 47-/RFC 5646-Sprach-Tag in '{1}'. Zusätzliche Information vom Parser: {2}\n"
 
-#: src/common/xml/ebml_chapters_converter.cpp:151
+#: src/common/xml/ebml_chapters_converter.cpp:147
 #: src/common/xml/ebml_tags_converter.cpp:125
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
 msgstr "'{0}' ist kein gültiger IETF BCP 47-/RFC 5646-Sprach-Tag. Zusätzliche Information vom Parser: {1}"
 
-#: src/common/xml/ebml_chapters_converter.cpp:173
+#: src/common/xml/ebml_chapters_converter.cpp:172
 #: src/common/xml/ebml_tags_converter.cpp:147
 #, no-c-format
 msgid "'{0}' is not a valid ISO 639-2 language code."
@@ -2613,7 +2613,7 @@ msgstr "»{0}« ist kein gültiges Argument für »--append-mode {0}«.\n"
 msgid "'{0}' is not a valid block additional max in '--blockadd {1}'.\n"
 msgstr "»{0}« ist keine gültiges Argument »--blockadd {1}«.\n"
 
-#: src/common/xml/ebml_chapters_converter.cpp:183
+#: src/common/xml/ebml_chapters_converter.cpp:182
 #, no-c-format
 msgid "'{0}' is not a valid ccTLD country code."
 msgstr "»{0}« ist kein gültiger ccTLD Ländercode."
@@ -2629,7 +2629,7 @@ msgstr "»{0}« ist keine gültige Feldreihenfolge."
 msgid "'{0}' is not a valid file ID in '--track-order {1}'.\n"
 msgstr "»{0}« ist keine gültige Datei-ID in »--track-order {1}«.\n"
 
-#: src/common/hacks.cpp:113
+#: src/common/hacks.cpp:115
 #, no-c-format
 msgid "'{0}' is not a valid hack.\n"
 msgstr "»{0}« ist kein gültiger Hack-Name.\n"
@@ -2899,17 +2899,17 @@ msgstr "2: private Codec-Daten"
 msgid "3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."
 msgstr "3. entweder »name:<Wert>« oder »mime-type:<Wert>«, wodurch dieser Selektor auf alle Dateianhänge zutrifft, deren Name oder MIME-Typ dem angegebenen <Wert> entspricht."
 
-#: src/common/xml/ebml_chapters_converter.cpp:123
+#: src/common/xml/ebml_chapters_converter.cpp:119
 #, no-c-format
 msgid "<ChapterAtom> is missing the <ChapterTimeStart> child."
 msgstr "<ChapterAtom> fehlt das Element <ChapterTimeStart>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:141
+#: src/common/xml/ebml_chapters_converter.cpp:137
 #, no-c-format
 msgid "<ChapterDisplay> is missing the <ChapterString> child."
 msgstr "<ChapterDisplay> fehlt das Element <ChapterString>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:130
+#: src/common/xml/ebml_chapters_converter.cpp:126
 #, no-c-format
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> fehlt das Element <ChapterTrackNumber>."
@@ -3778,7 +3778,7 @@ msgstr "Mediendateien anhängen"
 msgid "Append to an e&xisting source file"
 msgstr "An eine &bestehende Quelldatei anhängen"
 
-#: src/merge/output_control.cpp:1900
+#: src/merge/output_control.cpp:1902
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Spur {0} aus Datei Nummer {1} (»{2}«) wird an Spur {3} aus Datei Nummer {4} (»{5}«) angefügt.\n"
@@ -3803,7 +3803,7 @@ msgstr "Seitenverhältnis-Faktor"
 msgid "Aspect ratio type"
 msgstr "Seitenverhältnis-Art"
 
-#: src/common/xml/ebml_chapters_converter.cpp:109
+#: src/common/xml/ebml_chapters_converter.cpp:105
 #, no-c-format
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "Es wird mindestens ein <ChapterAtom>-Element benötigt."
@@ -4471,7 +4471,7 @@ msgstr "Kapitelmassenänderung"
 msgid "Chapter numbers:"
 msgstr "Kapitelnummern:"
 
-#: src/common/xml/ebml_chapters_converter.cpp:99
+#: src/common/xml/ebml_chapters_converter.cpp:95
 #, no-c-format
 msgid "Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"
 msgstr "Kapitelauswertungsprogramm: Die Edition-UID {0} ist nicht eindeutig und kann nicht wieder benutzt werden. Eine neue UID wird erzeugt.\n"
@@ -4912,7 +4912,7 @@ msgstr "Der Sequenzkopf konnte nicht aus dieser MPEG-1/2-Spur extrahiert werden.
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "Für Audiospur {0} konnte kein Index gefunden werden (Fehlermeldung der Avilib: {1}). Die Spur wird ausgelassen.\n"
 
-#: src/merge/output_control.cpp:1826
+#: src/merge/output_control.cpp:1828
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "»gptzr« konnte beim Anhängen nicht gefunden werden. {0}\n"
@@ -6370,8 +6370,8 @@ msgstr "Daten inklusive der privaten Codec-Konfigurationsdaten roh extrahieren u
 msgid "Extract the data to a raw file."
 msgstr "Daten roh extrahieren und nicht in einen Container einbetten"
 
-#: src/output/p_hevc.cpp:79
-#: src/output/p_hevc_es.cpp:125
+#: src/output/p_hevc.cpp:84
+#: src/output/p_hevc_es.cpp:126
 #, no-c-format
 msgid "Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"
 msgstr "Informationen über das Seitenverhältnis wurden aus den HEVC-Videodaten extrahiert. Die Anzeigeabmessungen wurden auf {0}/{1} gesetzt.\n"
@@ -7276,6 +7276,11 @@ msgstr "Wenn die Quelldatei keine solche Eigenschaft für eine Audiospur enthäl
 #, no-c-format
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
 msgstr "Gibt es keinen solchen Kapiteleintrag, so wird statt dessen der Endzeitstempel des Elternkapitels genommen."
+
+#: src/common/hacks.cpp:67
+#, no-c-format
+msgid "If this hack is enabled, the code will leave the parameter sets as they are."
+msgstr "Wenn dieser Hack aktiviert ist, belässt der Code die Parameter-Sätze so, wie sie sind."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:447
 #, no-c-format
@@ -8644,7 +8649,7 @@ msgstr "Es wurde kein »EBML-Kopf«-Element gefunden."
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Im ersten Block wurde kein AC-3-Kopf gefunden. Die Spur wird ausgelassen.\n"
 
-#: src/input/r_qtmp4.cpp:3442
+#: src/input/r_qtmp4.cpp:3435
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "In den ersten Blöcken wurde kein DTS-Kopf gefunden. Die Spur wird ausgelassen.\n"
@@ -8743,7 +8748,7 @@ msgstr "Zwischen »{0}« und »{1}« wurden keine Dateinamen angegeben.\n"
 msgid "No filename found after the '@'."
 msgstr "Nach dem »@« wurde kein Dateiname angegeben."
 
-#: src/common/hacks.cpp:66
+#: src/common/hacks.cpp:68
 #, no-c-format
 msgid "No help available."
 msgstr "Keine Hilfe verfügbar"
@@ -8825,7 +8830,7 @@ msgstr "In »--{0} {1}« wurde keine Spur-ID angegeben.\n"
 msgid "No track corresponding to the edit specification '{0}' was found. {1}\n"
 msgstr "Es wurde keine Spur gefunden, der zum Bearbeitungsziel »{0}« passt. {1}\n"
 
-#: src/propedit/tag_target.cpp:267
+#: src/propedit/tag_target.cpp:269
 #, no-c-format
 msgid "No track headers were found for which statistics could be calculated.\n"
 msgstr "Es wurden keine Spurkopfdaten gefunden, für die Statistiken berechnet werden könnten.\n"
@@ -8894,6 +8899,11 @@ msgstr "Normalerweise benutzt Mkvmerge 1000000 als Zeitstempelskalierungsfaktor,
 #, no-c-format
 msgid "Normally selected entries in list view can be moved around via drag & drop and with keyboard shortcuts (Ctrl+Up, Ctrl+Down)."
 msgstr "Normalerweise können in Listenansichten ausgewählte Einträge mittels Ziehen & Fallenlassen sowie mit Tastaturkürzeln (Strg+Hoch, Strg+Runter) hin und her geschoben werden."
+
+#: src/common/hacks.cpp:66
+#, no-c-format
+msgid "Normally the HEVC/H.265 code in mkvmerge and mkvextract normalizes parameter sets by prefixing all key frames with all currently active parameter sets and removes duplicates that might already be present."
+msgstr "Standardmäßig normalisiert der HEVC/H.265-Code in mkvmerge und mkvetract die Parameter-Sätze, indem vor Schlüssel-Frames alle in dem Moment aktiven Parameter-Sätz eingefügt & doppelt vorhandene entfernt werden."
 
 #: src/common/bitvalue.cpp:72
 #, no-c-format
@@ -9701,9 +9711,9 @@ msgstr "Fortschritt: [{0}{1}] {2}%"
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2914
 #: src/merge/output_control.cpp:363
-#: src/propedit/tag_target.cpp:352
-#: src/propedit/tag_target.cpp:365
-#: src/propedit/tag_target.cpp:370
+#: src/propedit/tag_target.cpp:354
+#: src/propedit/tag_target.cpp:367
+#: src/propedit/tag_target.cpp:372
 #, no-c-format
 msgid "Progress: {0}%{1}"
 msgstr "Fortschritt: {0}%{1}"
@@ -9766,7 +9776,7 @@ msgstr "QuickTime/MP4"
 msgid "Quicktime/MP4 reader: '{0}' atom is too small. Expected size: >= {1}. Actual size: {2}.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Ein »{0}«-Element ist zu klein. Erwartete Größe: >= {1}. Tatsächliche Größe: {2}.\n"
 
-#: src/input/r_qtmp4.cpp:2369
+#: src/input/r_qtmp4.cpp:2362
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Spuren mit konstanter Sample-Größe und variabler Dauer werden noch nicht unterstützt. Falls Sie eine solche Datei haben, so kontaktieren Sie bitte den Autor.\n"
@@ -9776,13 +9786,13 @@ msgstr "Quicktime-/MP4-Demultiplexer: Spuren mit konstanter Sample-Größe und v
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Der Block Nummer {0}/{1} mit Größe {2} an Position {3} konnte nicht gelesen werden. Abbruch.\n"
 
-#: src/input/r_qtmp4.cpp:2803
-#: src/input/r_qtmp4.cpp:2817
+#: src/input/r_qtmp4.cpp:2796
+#: src/input/r_qtmp4.cpp:2810
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Die erweiterten Kopfdaten für die Audiospur-ID {0} konnten nicht gelesen werden.\n"
 
-#: src/input/r_qtmp4.cpp:2769
+#: src/input/r_qtmp4.cpp:2762
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Die Kopfdaten für die Audiospur-ID {0} konnten nicht gelesen werden.\n"
@@ -9792,7 +9802,7 @@ msgstr "Quicktime-/MP4-Demultiplexer: Die Kopfdaten für die Audiospur-ID {0} ko
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Das Spurbeschreibungselement von Spur-ID {0} konnte nicht gelesen werden.\n"
 
-#: src/input/r_qtmp4.cpp:2851
+#: src/input/r_qtmp4.cpp:2844
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Die Kopfdaten von Videospur-ID {0} konnten nicht gelesen werden.\n"
@@ -9812,17 +9822,17 @@ msgstr "Quicktime-/MP4-Demultiplexer: Es wurde kein »mdat«-Element gefunden, d
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Ungültige Blockgröße {0} an Position {1}\n"
 
-#: src/input/r_qtmp4.cpp:3522
+#: src/input/r_qtmp4.cpp:3515
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Der MPEG4-Teil-10/AVC-Spur {0} fehlen die Codec-Konfigurationsdaten. Die Spur wird ausgelassen.\n"
 
-#: src/input/r_qtmp4.cpp:3545
+#: src/input/r_qtmp4.cpp:3538
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Der MPEG4-Spur {0} fehlt das ESDS-Element bzw. die Codec-Konfigurationsdaten. Die Spur wird ausgelassen.\n"
 
-#: src/input/r_qtmp4.cpp:3529
+#: src/input/r_qtmp4.cpp:3522
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Der MPEGH-Teil-2/HEVC-Spur {0} fehlen die Codec-Konfigurationsdaten. Die Spur wird ausgelassen.\n"
@@ -9842,17 +9852,17 @@ msgstr "Quicktime-/MP4-Demultiplexer: Das Längenfeld im Spurbeschreibungselemen
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Der Zeitstempelskalierungsfaktor ist 0. Dies wird nicht unterstützt.\n"
 
-#: src/input/r_qtmp4.cpp:3460
+#: src/input/r_qtmp4.cpp:3453
 #, no-c-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Der AAC-Spur {0} fehlt das ESDS-Element bzw. die Codec-Konfigurationsdaten. Die Spur wird ausgelassen.\n"
 
-#: src/input/r_qtmp4.cpp:3455
+#: src/input/r_qtmp4.cpp:3448
 #, no-c-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Die Audiospur {0} enthält die nicht unterstützte Objekttyp-ID {1} im ESDS-Element. Die Spur wird ausgelassen.\n"
 
-#: src/input/r_qtmp4.cpp:3539
+#: src/input/r_qtmp4.cpp:3532
 #, no-c-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Der Videospur {0} fehlt das ESDS-Element. Die Spur wird ausgelassen.\n"
@@ -9877,16 +9887,16 @@ msgstr "Quicktime-/MP4-Demultiplexer: Diese Datei enthält komprimierte Kopfelem
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: {0}. Aborting.\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Diese Datei enthält komprimierte Kopfelemente, die nicht dekomprimiert werden konnten. Fehlercode von Zlib: {0}. Abbruch.\n"
 
-#: src/input/r_qtmp4.cpp:2777
-#: src/input/r_qtmp4.cpp:2858
+#: src/input/r_qtmp4.cpp:2770
+#: src/input/r_qtmp4.cpp:2851
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Die Spur-ID {0} hat mehr als einen FourCC-Code. Es wird nur der erste benutzt ({1}) und nicht die eben gefundene ({2}).\n"
 
-#: src/input/r_qtmp4.cpp:3406
-#: src/input/r_qtmp4.cpp:3425
-#: src/input/r_qtmp4.cpp:3473
-#: src/input/r_qtmp4.cpp:3563
+#: src/input/r_qtmp4.cpp:3399
+#: src/input/r_qtmp4.cpp:3418
+#: src/input/r_qtmp4.cpp:3466
+#: src/input/r_qtmp4.cpp:3556
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Quicktime-/MP4-Demultiplexer: Der Spur {0} fehlen Kopfdaten. Beschädigte Datei?\n"
@@ -10372,7 +10382,7 @@ msgstr "In &Matroska- oder WebM-Datei speichern"
 msgid "Saving failed"
 msgstr "Speichern fehlgeschlagen"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:824
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:826
 #, no-c-format
 msgid "Saving the chapters failed."
 msgstr "Das Speichern der Kapitel schlug fehl."
@@ -11515,19 +11525,19 @@ msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated wi
 msgstr "Die Vorbis-Code-Bücher unterscheiden sich. Solche Spuren können nicht aneinandergehängt werden, ohne sie vorher mit identischen Parametern neu zu codieren."
 
 #: src/common/chapters/chapters.cpp:393
-#: src/common/xml/ebml_chapters_converter.cpp:249
+#: src/common/xml/ebml_chapters_converter.cpp:248
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error at position {2}: {1}\n"
 msgstr "Die XML-Kapiteldatei »{0}« enthält einen Fehler an Position {2}: {1}.\n"
 
 #: src/common/chapters/chapters.cpp:395
-#: src/common/xml/ebml_chapters_converter.cpp:252
+#: src/common/xml/ebml_chapters_converter.cpp:251
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
 msgstr "Die XML-Kapiteldatei »{0}« enthält einen Fehler: {1}\n"
 
 #: src/common/chapters/chapters.cpp:391
-#: src/common/xml/ebml_chapters_converter.cpp:246
+#: src/common/xml/ebml_chapters_converter.cpp:245
 #, no-c-format
 msgid "The XML chapter file '{0}' could not be read.\n"
 msgstr "Die XML-Kapiteldatei »{0}« konnte nicht gelesen werden.\n"
@@ -11655,7 +11665,7 @@ msgstr "Die Audio-/Videosynchronisation könnte dadurch beeinträchtigt worden s
 msgid "The changes are written to the file.\n"
 msgstr "Die Veränderungen werden in die Datei zurückgeschrieben.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:897
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:899
 #, no-c-format
 msgid "The chapter UID must be a number if given."
 msgstr "Die Kapitel-UID muss eindeutig sein, falls sie angegeben wird."
@@ -11686,7 +11696,6 @@ msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "Die privaten Codec-Konfigurationsdaten stimmen nicht überein (Längen: {0} und {1})."
 
 #: src/output/p_avc.cpp:130
-#: src/output/p_hevc.cpp:112
 #, no-c-format
 msgid "The codec's private data does not match. Both have the same length ({0}) but different content."
 msgstr "Die privaten Codec-Konfigurationsdaten stimmen nicht überein. Sie haben zwar dieselbe Länge ({0}), aber der Inhalt ist unterschiedlich."
@@ -11722,7 +11731,7 @@ msgstr "Die Konfiguration wurde gespeichert."
 msgid "The correction file header was not read correctly.\n"
 msgstr "Der Dateikopf der Korrekturdatei konnte nicht gelesen werden.\n"
 
-#: src/merge/output_control.cpp:1624
+#: src/merge/output_control.cpp:1625
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Die Cue-Einträge (der Index) werden geschrieben …\n"
@@ -11857,7 +11866,7 @@ msgstr "Die Zeitdauer, nach der eine neue Zieldatei angefangen wird."
 msgid "The edit specifications '{0}' and '{1}' resolve to the same track with the UID {2}.\n"
 msgstr "Die Bearbeitungsziele »{0}« und »{1}« verweisen auf die selbe Spur mit der UID {2}.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:974
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:976
 #, no-c-format
 msgid "The edition UID must be a number if given."
 msgstr "Die Editions-UID muss eindeutig sein, falls sie angegeben wird."
@@ -11871,12 +11880,12 @@ msgstr ""
 "die sie dem ausgewählten Kapitel und darunter\n"
 "zuweisen möchten."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:923
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:925
 #, no-c-format
 msgid "The end time could not be parsed: %1"
 msgstr "Das Format des Entzeipunkts konnte nicht erkannt werden: %1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:926
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:928
 #, no-c-format
 msgid "The end time must be greater than the start time."
 msgstr "Der Endzeitpunkt muss hinter dem Startzeitpunkt liegen."
@@ -12014,7 +12023,7 @@ msgstr "Die Datei »{0}« konnte nicht zum Schreiben geöffnet werden: {1}.\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "Die Datei »{0}« konnte nicht geöffnet oder ausgewertet werden."
 
-#: src/merge/output_control.cpp:1586
+#: src/merge/output_control.cpp:1587
 #, no-c-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
 msgstr "Die Datei »{0}« konnte nicht in »{1}« umbenannt werden.\n"
@@ -12034,7 +12043,7 @@ msgstr "Die Datei »{0}« hat einen nicht unterstützten Typ ({1}).\n"
 msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "Die Datei »{0}« ist keine Matroska-Datei oder konnte nicht gefunden werden.\n"
 
-#: src/merge/output_control.cpp:1584
+#: src/merge/output_control.cpp:1585
 #, no-c-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
 msgstr "Die Datei »{0}« wurde in »{1}« umbenannt.\n"
@@ -12149,7 +12158,7 @@ msgstr "Die Datei wird korrigiert, Teil 3/4 …"
 msgid "The file is being fixed, part 4/4..."
 msgstr "Die Datei wird korrigiert, Teil 4/4 …"
 
-#: src/propedit/tag_target.cpp:351
+#: src/propedit/tag_target.cpp:353
 #, no-c-format
 msgid "The file is read in order to create track statistics.\n"
 msgstr "Die Datei wird gelesen, um Spur-Statistiken zu erstellen.\n"
@@ -12676,12 +12685,12 @@ msgstr "Im zweiten Modus werden Tags extrahiert, in ein XML-Format konvertiert u
 msgid "The seek table in this TTA file seems to be broken.\n"
 msgstr "Die Suchindextabelle in dieser TTA-Datei scheint beschädigt zu sein.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:939
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:941
 #, no-c-format
 msgid "The segment UID could not be parsed: %1"
 msgstr "Das Format der Segment-UID konnte nicht erkant werden: %1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:949
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:951
 #, no-c-format
 msgid "The segment edition UID must be a positive number if given."
 msgstr "Die Segmentausgabe-UID muss eine positive Zahl sein, falls sie angegeben wird."
@@ -12722,7 +12731,7 @@ msgstr "Die Größe des Dateianhanges »{0}« ist 0.\n"
 msgid "The source file '{0}' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr "Die Quelldatei »{0}« konnte nicht geöffnet werden oder aber die Größenabfrage schlug fehl.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:917
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:919
 #, no-c-format
 msgid "The start time could not be parsed: %1"
 msgstr "Das Format des Startzeitpunktes konnte nicht erkannt werden: %1"
@@ -13113,7 +13122,7 @@ msgstr "Diese AVC/H.264-Spur beginnt nicht mit einem Schlüsselbild. Die ersten 
 msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
 msgstr "Die Zeiteinteilungsinformationen in dieser AVC-/H.264-Spur zeigen an, dass es sich um eine variable Bildrate handelt. Allerdings wurden weder Standardbilddauer noch eine externe Zeitstempeldatei angegeben, noch stellt der Quellcontainer Zeitstempel zur Verfügung. Die resultierenden Zeitstempel werden eventuell nutzlos sein.\n"
 
-#: src/output/p_hevc_es.cpp:104
+#: src/output/p_hevc_es.cpp:105
 #, no-c-format
 msgid "This HEVC track does not start with a key frame. The first {0} frames have been skipped.\n"
 msgstr "Diese HEVC/H.265-Spur beginnt nicht mit einem Schlüsselbild. Die ersten {0} Bilder wurden ausgelassen.\n"
@@ -13364,7 +13373,7 @@ msgstr "Diese Eigenschaft ist erforderlich und kann nicht gelöscht werden bei �
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Diese Eigenschaft ist einzigartig. Es können keine weiteren Instanzen davon angelegt werden bei »{0}«. {1}\n"
 
-#: src/merge/output_control.cpp:1739
+#: src/merge/output_control.cpp:1741
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "Dies hätte WIRKLICH nicht passieren dürfen. Der für das erste Meta-Seek-Element reservierte Platz war zu klein. Benötigter Platz: {0}. {1}\n"
@@ -13559,7 +13568,7 @@ msgstr "Spurtyp"
 #: src/extract/xtr_avc.cpp:139
 #: src/extract/xtr_hdmv_textst.cpp:44
 #: src/extract/xtr_hdmv_textst.cpp:63
-#: src/extract/xtr_hevc.cpp:30
+#: src/extract/xtr_hevc.cpp:39
 #, no-c-format
 msgid "Track {0} CodecPrivate is too small.\n"
 msgstr "Spur {0} CodecPrivate ist zu klein.\n"
@@ -13599,7 +13608,7 @@ msgstr "Der Spur {0} mit der CodecID »{1}« fehlt das Element »Bits pro Sekund
 #: src/extract/xtr_avc.cpp:134
 #: src/extract/xtr_avi.cpp:42
 #: src/extract/xtr_hdmv_textst.cpp:39
-#: src/extract/xtr_hevc.cpp:26
+#: src/extract/xtr_hevc.cpp:35
 #: src/extract/xtr_ogg.cpp:40
 #: src/extract/xtr_ogg.cpp:76
 #: src/extract/xtr_rmff.cpp:31
@@ -13623,7 +13632,7 @@ msgid "Track {0}: An USF subtitle entry starting at timestamp {1} is not well-fo
 msgstr "Spur {0}: Ein USF-Untertiteleintrag, der an Zeitstempel {1} anfängt, enthält ungültig formatiertes XML und wird ausgelassen.\n"
 
 #: src/extract/xtr_avc.cpp:44
-#: src/extract/xtr_hevc.cpp:87
+#: src/extract/xtr_hevc.cpp:97
 #, no-c-format
 msgid "Track {0}: NAL too big. Size according to header field: {1}, available bytes in packet: {2}. This NAL is defect and will be skipped.\n"
 msgstr "Spur {0}: NAL zu groß. Größe laut Kopffeld: {1}, verfügbare Byte im Paket: {2}. Diese NAL ist defekt und wird übersprungen.\n"
@@ -13633,7 +13642,7 @@ msgstr "Spur {0}: NAL zu groß. Größe laut Kopffeld: {1}, verfügbare Byte im 
 msgid "Track {0}: Subtitle entry number {1} is missing its duration. Assuming a duration of 1s.\n"
 msgstr "Spur {0}: Dem Untertitelbild Nummer {1} fehlt die Angabe der Dauer. Es wird angenommen, dass es 1s dauert.\n"
 
-#: src/input/r_qtmp4.cpp:2940
+#: src/input/r_qtmp4.cpp:2933
 #, no-c-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "Spur {0}: Die AAC-Codec-Konfigurationsdaten konnten nicht ausgewertet werden.\n"
@@ -13658,7 +13667,7 @@ msgstr "Das Multiplexen von Spuren, deren Sprache sich in dieser Liste befindet,
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr "Spuren mit nicht unterstützten Kodierschemata (Kompression oder Verschlüsselung) können nicht extrahiert werden.\n"
 
-#: src/propedit/tag_target.cpp:260
+#: src/propedit/tag_target.cpp:262
 #, no-c-format
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr "Spuren mit nicht unterstützten Kodierschemata (Kompression oder Verschlüsselung) können nicht verändert werden.\n"
@@ -13979,12 +13988,12 @@ msgstr "VP8/VP9"
 msgid "Valid format codes are:"
 msgstr "Gültige Formatanweisungen sind:"
 
-#: src/common/hacks.cpp:89
+#: src/common/hacks.cpp:91
 #, no-c-format
 msgid "Valid hacks are:\n"
 msgstr "Gültige Hacks sind:\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:865
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:867
 #, no-c-format
 msgid "Validation failed"
 msgstr "Validierung fehlgeschlagen"
@@ -15308,7 +15317,7 @@ msgstr ""
 "Mkvmerge hat nicht auswertbare Daten in dieser AVC-/H.264-Videospur gefunden. Entweder ist die Datei beschädigt, womit Mkvmerge noch nicht gut umgehen kann oder es gibt einen Fehler in Mkvmerge. Die Fehlermeldung dazu lautet:\n"
 "{0}\n"
 
-#: src/output/p_hevc_es.cpp:93
+#: src/output/p_hevc_es.cpp:94
 #, no-c-format
 msgid ""
 "mkvmerge encountered broken or unparsable data in this HEVC video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"

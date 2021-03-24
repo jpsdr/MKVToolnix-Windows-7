@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-03-14 21:31+0100\n"
+"POT-Creation-Date: 2021-03-24 20:20+0100\n"
 "PO-Revision-Date: 2021-03-20 05:26+0000\n"
 "Last-Translator: solokot <solokot@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
@@ -2358,13 +2358,13 @@ msgstr "\"{0}\" не является допустимым номером наз
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Additional information from the parser: {2}\n"
 msgstr "\"{0}\" не является правильным языковым тегом IETF BCP 47/RFC 5646 в \"{1}\". Дополнительная информация от анализатора: {2}\n"
 
-#: src/common/xml/ebml_chapters_converter.cpp:151
+#: src/common/xml/ebml_chapters_converter.cpp:147
 #: src/common/xml/ebml_tags_converter.cpp:125
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
 msgstr "\"{0}\" не является правильным языковым тегом IETF BCP 47/RFC 5646. Дополнительная информация от анализатора: {1}"
 
-#: src/common/xml/ebml_chapters_converter.cpp:173
+#: src/common/xml/ebml_chapters_converter.cpp:172
 #: src/common/xml/ebml_tags_converter.cpp:147
 #, no-c-format
 msgid "'{0}' is not a valid ISO 639-2 language code."
@@ -2380,7 +2380,7 @@ msgstr "\"{0}\" не является правильным режимом доб
 msgid "'{0}' is not a valid block additional max in '--blockadd {1}'.\n"
 msgstr "\"{0}\" не является правильным максимумом дополнительных блоков в \"--blockadd {1}\".\n"
 
-#: src/common/xml/ebml_chapters_converter.cpp:183
+#: src/common/xml/ebml_chapters_converter.cpp:182
 #, no-c-format
 msgid "'{0}' is not a valid ccTLD country code."
 msgstr "\"{0}\" не является правильным ccTLD-кодом страны."
@@ -2396,7 +2396,7 @@ msgstr "\"{0}\" не является допустимым порядком по
 msgid "'{0}' is not a valid file ID in '--track-order {1}'.\n"
 msgstr "\"{0}\" не является правильным идентификатором файла в \"--track-order {1}\".\n"
 
-#: src/common/hacks.cpp:113
+#: src/common/hacks.cpp:115
 #, no-c-format
 msgid "'{0}' is not a valid hack.\n"
 msgstr "\"{0}\" не является правильным хаком.\n"
@@ -2666,17 +2666,17 @@ msgstr "2: внутренние данные кодека"
 msgid "3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."
 msgstr "3. Или же \"name:<значение>\" или \"mime-type:<значение>\"; в данном случае селектор будет применён ко всем вложениям, имена или тип MIME которых соответственно равны <значению>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:123
+#: src/common/xml/ebml_chapters_converter.cpp:119
 #, no-c-format
 msgid "<ChapterAtom> is missing the <ChapterTimeStart> child."
 msgstr "В <ChapterAtom> отсутствует дочерний элемент <ChapterTimeStart>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:141
+#: src/common/xml/ebml_chapters_converter.cpp:137
 #, no-c-format
 msgid "<ChapterDisplay> is missing the <ChapterString> child."
 msgstr "В <ChapterDisplay> отсутствует дочерний элемент <ChapterString>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:130
+#: src/common/xml/ebml_chapters_converter.cpp:126
 #, no-c-format
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "В <ChapterTrack> отсутствует дочерний элемент <ChapterTrackNumber>."
@@ -3547,7 +3547,7 @@ msgstr "Все поддерживаемые медиафайлы"
 msgid "Append to an e&xisting source file"
 msgstr "Добавить к су&ществующему исходному файлу"
 
-#: src/merge/output_control.cpp:1900
+#: src/merge/output_control.cpp:1902
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "Присоединение дорожки {0} из файла № {1} (\"{2}\") к дорожке {3} из файла № {4} (\"{5}\").\n"
@@ -3572,7 +3572,7 @@ msgstr "Множитель соотношения сторон"
 msgid "Aspect ratio type"
 msgstr "Тип отношения сторон"
 
-#: src/common/xml/ebml_chapters_converter.cpp:109
+#: src/common/xml/ebml_chapters_converter.cpp:105
 #, no-c-format
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "Нужен по крайней мере один элемент <ChapterAtom>."
@@ -4242,7 +4242,7 @@ msgstr "Пакетное изменение глав"
 msgid "Chapter numbers:"
 msgstr "Номера глав:"
 
-#: src/common/xml/ebml_chapters_converter.cpp:99
+#: src/common/xml/ebml_chapters_converter.cpp:95
 #, no-c-format
 msgid "Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"
 msgstr "Анализатор глав: UID раздела {0} не является уникальным и не может быть использован повторно. Будет создан новый.\n"
@@ -4685,7 +4685,7 @@ msgstr "Невозможно извлечь заголовок последов�
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "Невозможно найти индекс для звуковой дорожки {0} (сообщение об ошибке avilib: {1}). Дорожка пропущена.\n"
 
-#: src/merge/output_control.cpp:1826
+#: src/merge/output_control.cpp:1828
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "Невозможно обнаружить gptzr при присоединении. {0}\n"
@@ -6143,8 +6143,8 @@ msgstr "Извлечь данные в бесконтейнерном виде (
 msgid "Extract the data to a raw file."
 msgstr "Извлечь данные в бесконтейнерном виде (raw)."
 
-#: src/output/p_hevc.cpp:79
-#: src/output/p_hevc_es.cpp:125
+#: src/output/p_hevc.cpp:84
+#: src/output/p_hevc_es.cpp:126
 #, no-c-format
 msgid "Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"
 msgstr "Извлечь информацию о пропорциях из HEVC-видеофайла и установить размеры экрана на {0}/{1}.\n"
@@ -7051,6 +7051,11 @@ msgstr "Если исходный файл не содержит указани�
 #, no-c-format
 msgid "If there is no such chapter, the parent chapter's end timestamp will be used instead."
 msgstr "Если такой главы нет, вместо неё будет использоваться метка времени конца родительской главы."
+
+#: src/common/hacks.cpp:67
+#, no-c-format
+msgid "If this hack is enabled, the code will leave the parameter sets as they are."
+msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:447
 #, no-c-format
@@ -8421,7 +8426,7 @@ msgstr "Элемент \"заголовок EBML\" не найден."
 msgid "No AC-3 header found in first frame; track will be skipped.\n"
 msgstr "Не найден заголовок AC-3 в первом кадре; дорожка будет пропущена.\n"
 
-#: src/input/r_qtmp4.cpp:3442
+#: src/input/r_qtmp4.cpp:3435
 #, no-c-format
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Не найден заголовок DTS в первых кадрах; дорожка будет пропущена.\n"
@@ -8520,7 +8525,7 @@ msgstr "Нет файлов с именами между \"{0}\" и \"{1}\".\n"
 msgid "No filename found after the '@'."
 msgstr "Не найдено имени файла после \"@\"."
 
-#: src/common/hacks.cpp:66
+#: src/common/hacks.cpp:68
 #, no-c-format
 msgid "No help available."
 msgstr "Справка недоступна."
@@ -8602,7 +8607,7 @@ msgstr "Не указан идентификатор дорожки в \"--{0} {
 msgid "No track corresponding to the edit specification '{0}' was found. {1}\n"
 msgstr "Не найдено дорожки, соответствующей спецификации редактирования \"{0}\". {1}\n"
 
-#: src/propedit/tag_target.cpp:267
+#: src/propedit/tag_target.cpp:269
 #, no-c-format
 msgid "No track headers were found for which statistics could be calculated.\n"
 msgstr "Не найдено никаких заголовков дорожек, для которых могла бы быть вычислена статистика.\n"
@@ -8671,6 +8676,11 @@ msgstr "Обычно mkvmerge будет использовать значени
 #, no-c-format
 msgid "Normally selected entries in list view can be moved around via drag & drop and with keyboard shortcuts (Ctrl+Up, Ctrl+Down)."
 msgstr "Обычно выбранные элементы в списке просмотра можно перемещать с помощью перетаскивания и с помощью сочетаний клавиш (Ctrl+Up, Ctrl+Down)."
+
+#: src/common/hacks.cpp:66
+#, no-c-format
+msgid "Normally the HEVC/H.265 code in mkvmerge and mkvextract normalizes parameter sets by prefixing all key frames with all currently active parameter sets and removes duplicates that might already be present."
+msgstr ""
 
 #: src/common/bitvalue.cpp:72
 #, no-c-format
@@ -9493,9 +9503,9 @@ msgstr "Обработано: [{0}{1}] {2}%"
 #: src/extract/tracks.cpp:559
 #: src/merge/mkvmerge.cpp:2914
 #: src/merge/output_control.cpp:363
-#: src/propedit/tag_target.cpp:352
-#: src/propedit/tag_target.cpp:365
-#: src/propedit/tag_target.cpp:370
+#: src/propedit/tag_target.cpp:354
+#: src/propedit/tag_target.cpp:367
+#: src/propedit/tag_target.cpp:372
 #, no-c-format
 msgid "Progress: {0}%{1}"
 msgstr "Обработано: {0}%{1}"
@@ -9558,7 +9568,7 @@ msgstr "QuickTime/MP4"
 msgid "Quicktime/MP4 reader: '{0}' atom is too small. Expected size: >= {1}. Actual size: {2}.\n"
 msgstr "Считыватель Quicktime/MP4: атом \"{0}\" слишком мал. Ожидаемый размер: >= {1}. Фактический размер: {2}.\n"
 
-#: src/input/r_qtmp4.cpp:2369
+#: src/input/r_qtmp4.cpp:2362
 #, no-c-format
 msgid "Quicktime/MP4 reader: Constant sample size & variable duration not yet supported. Contact the author if you have such a sample file.\n"
 msgstr "Считыватель Quicktime/MP4: постоянный размер семпла и переменная длительность пока не поддерживаются. Если у вас есть образец такого файла, свяжитесь с автором.\n"
@@ -9568,13 +9578,13 @@ msgstr "Считыватель Quicktime/MP4: постоянный размер 
 msgid "Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"
 msgstr "Считыватель Quicktime/MP4: невозможно прочитать участок {0}/{1} с размером {2} из позиции {3}. Прерывание.\n"
 
-#: src/input/r_qtmp4.cpp:2803
-#: src/input/r_qtmp4.cpp:2817
+#: src/input/r_qtmp4.cpp:2796
+#: src/input/r_qtmp4.cpp:2810
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the extended sound description atom for track ID {0}.\n"
 msgstr "Считыватель Quicktime/MP4: невозможно прочитать атом расширенного описания звука для дорожки с идентификатором {0}.\n"
 
-#: src/input/r_qtmp4.cpp:2769
+#: src/input/r_qtmp4.cpp:2762
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the sound description atom for track ID {0}.\n"
 msgstr "Считыватель Quicktime/MP4: невозможно прочитать атом описания звука для дорожки с идентификатором {0}.\n"
@@ -9584,7 +9594,7 @@ msgstr "Считыватель Quicktime/MP4: невозможно прочит�
 msgid "Quicktime/MP4 reader: Could not read the stream description atom for track ID {0}.\n"
 msgstr "Считыватель Quicktime/MP4: невозможно прочитать атом описания потока для дорожки с идентификатором {0}.\n"
 
-#: src/input/r_qtmp4.cpp:2851
+#: src/input/r_qtmp4.cpp:2844
 #, no-c-format
 msgid "Quicktime/MP4 reader: Could not read the video description atom for track ID {0}.\n"
 msgstr "Считыватель Quicktime/MP4: невозможно прочитать атом описания видео для дорожки с идентификатором {0}.\n"
@@ -9604,17 +9614,17 @@ msgstr "Считыватель Quicktime/MP4: не найден атом \"mdat\
 msgid "Quicktime/MP4 reader: Invalid chunk size {0} at {1}.\n"
 msgstr "Считыватель Quicktime/MP4: недопустимый размер участка {0} в {1}.\n"
 
-#: src/input/r_qtmp4.cpp:3522
+#: src/input/r_qtmp4.cpp:3515
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEG4 part 10/AVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Считыватель Quicktime/MP4: дорожка MPEG4 part 10/AVC {0} не имеет конфигурации декодера. Пропускаю эту дорожку.\n"
 
-#: src/input/r_qtmp4.cpp:3545
+#: src/input/r_qtmp4.cpp:3538
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEG4 track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Считыватель Quicktime/MP4: дорожка MPEG4 {0} не имеет атома esds/конфигурации декодера. Пропускаю эту дорожку.\n"
 
-#: src/input/r_qtmp4.cpp:3529
+#: src/input/r_qtmp4.cpp:3522
 #, no-c-format
 msgid "Quicktime/MP4 reader: MPEGH part 2/HEVC track {0} is missing its decoder config. Skipping this track.\n"
 msgstr "Считыватель Quicktime/MP4: дорожка MPEGH part 2/HEVC {0} не имеет конфигурации декодера. Пропускаю эту дорожку.\n"
@@ -9634,17 +9644,17 @@ msgstr "Считыватель Quicktime/MP4: поле \"размер\" слиш
 msgid "Quicktime/MP4 reader: The 'time scale' parameter was 0. This is not supported.\n"
 msgstr "Считыватель Quicktime/MP4: параметр \"масштаб времени\" установлен в 0. Это значение не поддерживается.\n"
 
-#: src/input/r_qtmp4.cpp:3460
+#: src/input/r_qtmp4.cpp:3453
 #, no-c-format
 msgid "Quicktime/MP4 reader: The AAC track {0} is missing the esds atom/the decoder config. Skipping this track.\n"
 msgstr "Считыватель Quicktime/MP4: дорожка AAC {0} не имеет атома esds/конфигурации декодера. Пропускаю эту дорожку.\n"
 
-#: src/input/r_qtmp4.cpp:3455
+#: src/input/r_qtmp4.cpp:3448
 #, no-c-format
 msgid "Quicktime/MP4 reader: The audio track {0} is using an unsupported 'object type id' of {1} in the 'esds' atom. Skipping this track.\n"
 msgstr "Считыватель Quicktime/MP4: звуковая дорожка {0} использует неподдерживаемый \"идентификатор типа объекта\" {1} в атоме \"esds\". Пропускаю эту дорожку.\n"
 
-#: src/input/r_qtmp4.cpp:3539
+#: src/input/r_qtmp4.cpp:3532
 #, no-c-format
 msgid "Quicktime/MP4 reader: The video track {0} is missing the ESDS atom. Skipping this track.\n"
 msgstr "Считыватель Quicktime/MP4: видеодорожка {0} не имеет атома ESDS. Пропускаю эту дорожку.\n"
@@ -9669,16 +9679,16 @@ msgstr "Считыватель Quicktime/MP4: этот файл использу
 msgid "Quicktime/MP4 reader: This file uses compressed headers, but they could not be uncompressed. Error code from zlib: {0}. Aborting.\n"
 msgstr "Считыватель Quicktime/MP4: этот файл использует сжатые заголовки, но они не могут быть распакованы. Код ошибки zlib: {0}. Остановка.\n"
 
-#: src/input/r_qtmp4.cpp:2777
-#: src/input/r_qtmp4.cpp:2858
+#: src/input/r_qtmp4.cpp:2770
+#: src/input/r_qtmp4.cpp:2851
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track ID {0} has more than one FourCC. Only using the first one ({1}) and not this one ({2}).\n"
 msgstr "Считыватель Quicktime/MP4: дорожка с идентификатором {0} имеет более одного FourCC. Использую только первый ({1}), а не этот ({2}).\n"
 
-#: src/input/r_qtmp4.cpp:3406
-#: src/input/r_qtmp4.cpp:3425
-#: src/input/r_qtmp4.cpp:3473
-#: src/input/r_qtmp4.cpp:3563
+#: src/input/r_qtmp4.cpp:3399
+#: src/input/r_qtmp4.cpp:3418
+#: src/input/r_qtmp4.cpp:3466
+#: src/input/r_qtmp4.cpp:3556
 #, no-c-format
 msgid "Quicktime/MP4 reader: Track {0} is missing some data. Broken header atoms?\n"
 msgstr "Считыватель Quicktime/MP4: в дорожке {0} не хватает некоторых данных. Повреждены атомы заголовка?\n"
@@ -10164,7 +10174,7 @@ msgstr "Сохра&нить в файл Matroska или WebM"
 msgid "Saving failed"
 msgstr "Сохранить не удалось."
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:824
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:826
 #, no-c-format
 msgid "Saving the chapters failed."
 msgstr "Сохранить главы не удалось."
@@ -11317,19 +11327,19 @@ msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated wi
 msgstr "Кодовые словари Vorbis отличаются. Такие дорожки не могут быть объединены без перекодирования."
 
 #: src/common/chapters/chapters.cpp:393
-#: src/common/xml/ebml_chapters_converter.cpp:249
+#: src/common/xml/ebml_chapters_converter.cpp:248
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error at position {2}: {1}\n"
 msgstr "XML-файл глав \"{0}\" содержит ошибку в позиции {2}: {1}\n"
 
 #: src/common/chapters/chapters.cpp:395
-#: src/common/xml/ebml_chapters_converter.cpp:252
+#: src/common/xml/ebml_chapters_converter.cpp:251
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
 msgstr "XML-файл глав \"{0}\" содержит ошибку: {1}\n"
 
 #: src/common/chapters/chapters.cpp:391
-#: src/common/xml/ebml_chapters_converter.cpp:246
+#: src/common/xml/ebml_chapters_converter.cpp:245
 #, no-c-format
 msgid "The XML chapter file '{0}' could not be read.\n"
 msgstr "XML-файл глав \"{0}\" не может быть прочитан.\n"
@@ -11457,7 +11467,7 @@ msgstr "Возможна рассинхронизация аудио и виде
 msgid "The changes are written to the file.\n"
 msgstr "Изменения записаны в файл.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:897
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:899
 #, no-c-format
 msgid "The chapter UID must be a number if given."
 msgstr "UID главы, если задан, должен быть числом."
@@ -11488,7 +11498,6 @@ msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "Внутренние данные кодека не совпадают (длины: {0} и {1})."
 
 #: src/output/p_avc.cpp:130
-#: src/output/p_hevc.cpp:112
 #, no-c-format
 msgid "The codec's private data does not match. Both have the same length ({0}) but different content."
 msgstr "Внутренние данные кодека не совпадают. Они имеют одинаковую длину ({0}), но различное содержимое."
@@ -11524,7 +11533,7 @@ msgstr "Конфигурация сохранена."
 msgid "The correction file header was not read correctly.\n"
 msgstr "Заголовок файла коррекции не был прочитан корректно.\n"
 
-#: src/merge/output_control.cpp:1624
+#: src/merge/output_control.cpp:1625
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "Пишутся записи cue (индекс)...\n"
@@ -11661,7 +11670,7 @@ msgstr "Длительность, после которой создаётся �
 msgid "The edit specifications '{0}' and '{1}' resolve to the same track with the UID {2}.\n"
 msgstr "Спецификации редактирования \"{0}\" и \"{1}\" раскладываются в одну и ту же дорожку с UID {2}.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:974
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:976
 #, no-c-format
 msgid "The edition UID must be a number if given."
 msgstr "UID раздела, если задан, должен быть числом."
@@ -11672,12 +11681,12 @@ msgstr "UID раздела, если задан, должен быть числ�
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
 msgstr "Элемент был записан в конце файла, но размер сегмента не мог быть обновлён. Поэтому элемент не будет видим. Процесс будет прерван. Файл был изменён!"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:923
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:925
 #, no-c-format
 msgid "The end time could not be parsed: %1"
 msgstr "Время окончания не может быть проанализировано: %1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:926
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:928
 #, no-c-format
 msgid "The end time must be greater than the start time."
 msgstr "Время окончания должно быть больше времени начала."
@@ -11815,7 +11824,7 @@ msgstr "Файл \"{0}\" не может быть открыт для запис
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "Файл \"{0}\" не может быть открыт или проанализирован."
 
-#: src/merge/output_control.cpp:1586
+#: src/merge/output_control.cpp:1587
 #, no-c-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
 msgstr "Невозможно переименовать файл \"{0}\" на \"{1}\".\n"
@@ -11835,7 +11844,7 @@ msgstr "Файл \"{0}\" имеет неподдерживаемый тип ({1}
 msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "Файл \"{0}\" не является файлом Matroska или не может быть найден.\n"
 
-#: src/merge/output_control.cpp:1584
+#: src/merge/output_control.cpp:1585
 #, no-c-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
 msgstr "Файл \"{0}\" был переименован на \"{1}\".\n"
@@ -11950,7 +11959,7 @@ msgstr "Производится исправление файла, часть 3
 msgid "The file is being fixed, part 4/4..."
 msgstr "Производится исправление файла, часть 4/4..."
 
-#: src/propedit/tag_target.cpp:351
+#: src/propedit/tag_target.cpp:353
 #, no-c-format
 msgid "The file is read in order to create track statistics.\n"
 msgstr "Файл считывается для создания статистики дорожки.\n"
@@ -12477,12 +12486,12 @@ msgstr "Второй режим извлекает теги, преобразу�
 msgid "The seek table in this TTA file seems to be broken.\n"
 msgstr "Похоже, таблица поиска в этом файле TTA повреждена.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:939
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:941
 #, no-c-format
 msgid "The segment UID could not be parsed: %1"
 msgstr "UID сегмента не может быть проанализировано: %1"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:949
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:951
 #, no-c-format
 msgid "The segment edition UID must be a positive number if given."
 msgstr "UID сегмента, если задан, должен быть положительным числом."
@@ -12523,7 +12532,7 @@ msgstr "Размер вложения \"{0}\" равен нулю.\n"
 msgid "The source file '{0}' could not be opened successfully, or retrieving its size by seeking to the end did not work.\n"
 msgstr "Исходный файл \"{0}\" не может быть успешно открыт, или определение его размера при помощи поиска до конца не работает.\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:917
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:919
 #, no-c-format
 msgid "The start time could not be parsed: %1"
 msgstr "Время начала не может быть проанализировано: %1"
@@ -12914,7 +12923,7 @@ msgstr "Эта дорожка AVC/H.264 не начинается с ключе�
 msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
 msgstr "Информация о синхронизации этой дорожки AVC/H.264 указывает на то, что в ней используется переменная частота кадров. Однако, ни стандартная длительность, ни внешний файл с метками времени не были предоставлены, равно как и исходный контейнер, могущий дать аналогичную информацию. Результирующие метки времени могут быть бесполезными.\n"
 
-#: src/output/p_hevc_es.cpp:104
+#: src/output/p_hevc_es.cpp:105
 #, no-c-format
 msgid "This HEVC track does not start with a key frame. The first {0} frames have been skipped.\n"
 msgstr "Эта дорожка HEVC не начинается с ключевого кадра. Первые {0} кадров были пропущены.\n"
@@ -13167,7 +13176,7 @@ msgstr "Это свойство обязательно и не может быт
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "Это свойство уникально. Больше таких не может быть включено в \"{0}\". {1}\n"
 
-#: src/merge/output_control.cpp:1739
+#: src/merge/output_control.cpp:1741
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "Такого НА САМОМ ДЕЛЕ не должно происходить. Пространство, зарезервированное для первого метаэлемента поиска, слишком мало. Необходимо места: {0}. {1}\n"
@@ -13362,7 +13371,7 @@ msgstr "Тип дорожки"
 #: src/extract/xtr_avc.cpp:139
 #: src/extract/xtr_hdmv_textst.cpp:44
 #: src/extract/xtr_hdmv_textst.cpp:63
-#: src/extract/xtr_hevc.cpp:30
+#: src/extract/xtr_hevc.cpp:39
 #, no-c-format
 msgid "Track {0} CodecPrivate is too small.\n"
 msgstr "CodecPrivate дорожки {0} слишком мал.\n"
@@ -13402,7 +13411,7 @@ msgstr "Дорожка {0} с CodecID \"{1}\" не имеет элемента \
 #: src/extract/xtr_avc.cpp:134
 #: src/extract/xtr_avi.cpp:42
 #: src/extract/xtr_hdmv_textst.cpp:39
-#: src/extract/xtr_hevc.cpp:26
+#: src/extract/xtr_hevc.cpp:35
 #: src/extract/xtr_ogg.cpp:40
 #: src/extract/xtr_ogg.cpp:76
 #: src/extract/xtr_rmff.cpp:31
@@ -13426,7 +13435,7 @@ msgid "Track {0}: An USF subtitle entry starting at timestamp {1} is not well-fo
 msgstr "Дорожка {0}: элемент USF-субтитров, начинающийся с метки времени {1} не является правильно отформатированным XML и будет пропущен.\n"
 
 #: src/extract/xtr_avc.cpp:44
-#: src/extract/xtr_hevc.cpp:87
+#: src/extract/xtr_hevc.cpp:97
 #, no-c-format
 msgid "Track {0}: NAL too big. Size according to header field: {1}, available bytes in packet: {2}. This NAL is defect and will be skipped.\n"
 msgstr "Дорожка {0}: NAL слишком велик. Размер согласно заголовку: {1}, байтов в пакете: {2}. Этот NAL повреждён и будет пропущен.\n"
@@ -13436,7 +13445,7 @@ msgstr "Дорожка {0}: NAL слишком велик. Размер согл
 msgid "Track {0}: Subtitle entry number {1} is missing its duration. Assuming a duration of 1s.\n"
 msgstr "Дорожка {0}: для элемента субтитров номер {1} не указана длительность. Будет установлена длительность 1s.\n"
 
-#: src/input/r_qtmp4.cpp:2940
+#: src/input/r_qtmp4.cpp:2933
 #, no-c-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
 msgstr "Дорожка {0}: информация AAC не может быть проанализирована.\n"
@@ -13461,7 +13470,7 @@ msgstr "Дорожки с выбранным в этом списке языко
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be extracted.\n"
 msgstr "Дорожки с неподдерживаемыми схемами кодирования данных (сжатие или шифрование) не могут быть извлечены.\n"
 
-#: src/propedit/tag_target.cpp:260
+#: src/propedit/tag_target.cpp:262
 #, no-c-format
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr "Дорожки с неподдерживаемыми схемами кодирования содержимого (сжатие или шифрование) не могут быть изменены.\n"
@@ -13782,12 +13791,12 @@ msgstr "VP8/VP9"
 msgid "Valid format codes are:"
 msgstr "Допустимыми кодами формата являются:"
 
-#: src/common/hacks.cpp:89
+#: src/common/hacks.cpp:91
 #, no-c-format
 msgid "Valid hacks are:\n"
 msgstr "Действительные трюки:\n"
 
-#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:865
+#: src/mkvtoolnix-gui/chapter_editor/tab.cpp:867
 #, no-c-format
 msgid "Validation failed"
 msgstr "Не удалось проверить"
@@ -15111,7 +15120,7 @@ msgstr ""
 "mkvmerge встретил повреждённые или неанализируемые данные в этой видеодорожке AVC/H.264. У вас или повреждён файл (mkvmerge пока не умеет исправлять повреждения) или это ошибка в самом mkvmerge. Сообщение об ошибке:\n"
 "{0}\n"
 
-#: src/output/p_hevc_es.cpp:93
+#: src/output/p_hevc_es.cpp:94
 #, no-c-format
 msgid ""
 "mkvmerge encountered broken or unparsable data in this HEVC video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"
