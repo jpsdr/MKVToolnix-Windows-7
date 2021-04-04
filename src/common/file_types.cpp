@@ -46,7 +46,7 @@ file_type_t::get_supported() {
   s_supported_file_types.emplace_back(file_type_e::mpeg_ts,     Y("MPEG transport streams"),                          "ts m2ts mts");
   s_supported_file_types.emplace_back(file_type_e::mpeg_es,     Y("MPEG-1/2 video elementary streams"),               "m1v m2v mpv");
   s_supported_file_types.emplace_back(file_type_e::is_unknown,  Y("MPLS Blu-ray playlist"),                           "mpls");
-  s_supported_file_types.emplace_back(file_type_e::matroska,    Y("Matroska audio/video files"),                      "mka mks mkv mk3d webm webmv webma");
+  s_supported_file_types.emplace_back(file_type_e::matroska,    Y("Matroska audio/video files"),                      "mk3d mka mks mkv");
   s_supported_file_types.emplace_back(file_type_e::pgssup,      Y("PGS/SUP subtitles"),                               "sup");
   s_supported_file_types.emplace_back(file_type_e::qtmp4,       Y("QuickTime audio/video files"),                     "mov");
   s_supported_file_types.emplace_back(file_type_e::obu,         Y("AV1 Open Bitstream Units stream"),                 "av1 obu");
