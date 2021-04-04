@@ -36,7 +36,7 @@ file_type_t::get_supported() {
 #if defined(HAVE_FLAC_FORMAT_H)
   s_supported_file_types.emplace_back(file_type_e::flac,        Y("FLAC (Free Lossless Audio Codec)"),                "flac ogg");
 #endif
-  s_supported_file_types.emplace_back(file_type_e::flv,         Y("FLV (Flash Video)"),                               "flv");
+  s_supported_file_types.emplace_back(file_type_e::flv,         Y("FLV (Flash Video)"),                               "f4v flv");
   s_supported_file_types.emplace_back(file_type_e::hdmv_textst, Y("HDMV TextST"),                                     "textst");
   s_supported_file_types.emplace_back(file_type_e::hevc_es,     Y("HEVC/H.265 elementary streams"),                   "265 hevc h265 x265");
   s_supported_file_types.emplace_back(file_type_e::ivf,         Y("IVF (AV1, VP8, VP9)"),                             "ivf");
@@ -62,8 +62,8 @@ file_type_t::get_supported() {
   s_supported_file_types.emplace_back(file_type_e::vobsub,      Y("VobSub subtitles"),                                "idx");
   s_supported_file_types.emplace_back(file_type_e::wav,         Y("WAVE (uncompressed PCM audio)"),                   "wav");
   s_supported_file_types.emplace_back(file_type_e::wavpack4,    Y("WAVPACK v4 audio"),                                "wv");
-  s_supported_file_types.emplace_back(file_type_e::matroska,    Y("WebM audio/video files"),                          "webm webmv webma");
-  s_supported_file_types.emplace_back(file_type_e::webvtt,      Y("WebVTT subtitles"),                                "vtt");
+  s_supported_file_types.emplace_back(file_type_e::matroska,    Y("WebM audio/video files"),                          "weba webm webma webmv");
+  s_supported_file_types.emplace_back(file_type_e::webvtt,      Y("WebVTT subtitles"),                                "vtt webvtt");
 
   return s_supported_file_types;
 }
