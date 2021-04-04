@@ -63,6 +63,8 @@
 * mkvmerge: HEVC/H.265: mkvextract will now normalize the placement of VPS,
   SPS and PPS NALUs. Each key frame is prefixed with exactly one copy of the
   currently active parameter sets.
+* mkvmerge: AAC reader: fixed mkvmerge aborting to read AAC files bigger than
+  2 GB with a message about not being able to allocate memory. Fixes #3059.
 
 ## Build system changes
 
