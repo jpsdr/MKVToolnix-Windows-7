@@ -36,8 +36,9 @@ static std::array<unsigned int, 16> const s_sampling_freq = {
 };
 
 // See ISO/IEC 14496-3, table 1.17 — Channel Configuration
-static std::array<unsigned int, 8> const s_aac_channel_configuration = {
+static std::array<unsigned int, 14> const s_aac_channel_configuration = {
   0, 1, 2, 3, 4, 5, 6, 8,
+  0, 0, 0, 7, 8, 24,            // from Rec. ITU-R BS.1196-7
 };
 
 static debugging_option_c s_debug_parse_data{"aac_parse_audio_specific_config|aac_full"};
@@ -49,6 +50,15 @@ get_sampling_freq_idx(unsigned int sampling_freq) {
       return i;
 
   return 0;                     // should never happen
+}
+
+static unsigned int
+get_channel_configuration(unsigned int channels) {
+  for (auto i = 0u; i < s_aac_channel_configuration.size(); i++)
+    if (channels == s_aac_channel_configuration[i])
+      return i;
+
+  return 0;
 }
 
 bool
@@ -119,7 +129,7 @@ create_audio_specific_config(audio_config_t const &audio_config) {
 
   write_object_type(audio_config.profile + 1);
   write_sampling_frequency(audio_config.sample_rate);
-  w.put_bits(4, audio_config.channels == 8 ? 7 : audio_config.channels);
+  w.put_bits(4, get_channel_configuration(audio_config.channels));
 
   if (audio_config.ga_specific_config && audio_config.ga_specific_config_bit_size) {
     mtx::bits::reader_c r{audio_config.ga_specific_config->get_buffer(), audio_config.ga_specific_config->get_size()};
