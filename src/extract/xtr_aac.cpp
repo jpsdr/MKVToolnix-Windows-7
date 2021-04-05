@@ -50,6 +50,9 @@ xtr_aac_c::create_file(xtr_base_c *master,
     if (!audio_config)
       mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' contains invalid \"codec private\" data for AAC.\n"), m_tid, m_codec_id));
 
+    if ((audio_config->channels == 7) || (audio_config->channels  > 8))
+      mxerror(fmt::format(Y("Track {0}: extraction of AAC audio with a channel count of 7 or more than 8 in its 'audio-specific config' element is not supported.\n"), m_tid));
+
     m_id       = 0;
     m_channels = audio_config->channels == 8 ? 7 : audio_config->channels;
     m_profile  = audio_config->profile;

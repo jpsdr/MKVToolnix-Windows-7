@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* mkvextract: AAC: mkvextract will now abort with an useful error message when
+  the user tries to extract a track whose 'audio-specific config' element in
+  `CodecPrivate` signals a number of channels of 7 or greater than 8 as that
+  isn't supported by the ADTS format.
+
+
 # Version 56.0.0 "Strasbourg / St. Denis" 2021-04-05
 
 ## New features and enhancements
