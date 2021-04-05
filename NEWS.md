@@ -2,10 +2,6 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: multiplexer: when using the "tab widget below the files &
-  tracks" layout option for the track properties the elements in the "general
-  options" tab will use six rows à four columns instead of twelve rows à two
-  columns, greatly reducing the required height. Implements #3062.
 * mkvmerge, mkvpropedit: tags: the programs will no longer write tag elements
   that are mandatory and set to their default value (e.g. "tag language" set
   to `und` = undetermined).
@@ -16,20 +12,15 @@
 * mkvextract: chapters: mkvextract will no longer add a `ChapterLanguage`
   element set to `eng` to the generated XML content if the source file doesn't
   contain such an element.
+* MKVToolNix GUI: multiplexer: when using the "tab widget below the files &
+  tracks" layout option for the track properties the elements in the "general
+  options" tab will use six rows à four columns instead of twelve rows à two
+  columns, greatly reducing the required height. Implements #3062.
 
 ## Bug fixes
 
-* MKVToolNix GUI: multiplexer: under certain circumstances keyboard shortcuts
-  such as `Ctrl+W` for closing the active tab or `Ctrl+R` for starting to
-  multiplex ceased to work until the user did certain other things (such as
-  switching to a different tool & back to the multiplexer or opening the
-  multiplexer menu). This started with v54. Fixes #3051.
-* mkvinfo: when compiled with newer versions of the `fmt` library, certain
-  numbers were not output correctly (e.g. a track's audio sampling frequency
-  of 48000 might be output as 48).
-* MKVToolNix GUI: multiplexer: deriving the track language from the file name
-  will match languages case insensitively again (like versions prior to
-  v55). Fixes #3068.
+* mkvmerge: AAC reader: fixed mkvmerge aborting to read AAC files bigger than
+  2 GB with a message about not being able to allocate memory. Fixes #3059.
 * mkvmerge: chapters: `ChapLanguageIETF` elements were still created when the
   option `--disable-language-ietf` was given after an option leading to the
   creation of chapters. Now the position doesn't matter anymore. Part of the
@@ -40,9 +31,6 @@
   of the fix of #3069.
 * mkvmerge: tags: when the option `--disable-language-ietf` is used,
   `TagLanguageIETF` elements won't be written. Fixes #3070.
-* MKVToolNix GUI: chapter editor: the editor will no longer create empty
-  `ChapterCountry` elements when adding a chapter name with no default country
-  selected in the preferences. Fixes #3072.
 * mkvmerge: tags: mkvmerge will no longer write language elements for the
   track statistics tags it creates, making the effective language
   "undetermined" due to `und` being the default value for the legacy tag
@@ -60,11 +48,20 @@
   placement of VPS, SPS and PPS NALUs. Each key frame is prefixed with exactly
   one copy of the currently active parameter sets. This fixes certain classes
   of bugs related to splitting/appending. Fixes #3034.
-* mkvmerge: HEVC/H.265: mkvextract will now normalize the placement of VPS,
-  SPS and PPS NALUs. Each key frame is prefixed with exactly one copy of the
-  currently active parameter sets.
-* mkvmerge: AAC reader: fixed mkvmerge aborting to read AAC files bigger than
-  2 GB with a message about not being able to allocate memory. Fixes #3059.
+* mkvinfo: when compiled with newer versions of the `fmt` library, certain
+  numbers were not output correctly (e.g. a track's audio sampling frequency
+  of 48000 might be output as 48).
+* MKVToolNix GUI: multiplexer: deriving the track language from the file name
+  will match languages case insensitively again (like versions prior to
+  v55). Fixes #3068.
+* MKVToolNix GUI: multiplexer: under certain circumstances keyboard shortcuts
+  such as `Ctrl+W` for closing the active tab or `Ctrl+R` for starting to
+  multiplex ceased to work until the user did certain other things (such as
+  switching to a different tool & back to the multiplexer or opening the
+  multiplexer menu). This started with v54. Fixes #3051.
+* MKVToolNix GUI: chapter editor: the editor will no longer create empty
+  `ChapterCountry` elements when adding a chapter name with no default country
+  selected in the preferences. Fixes #3072.
 
 ## Build system changes
 
