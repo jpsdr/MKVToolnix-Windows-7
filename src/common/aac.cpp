@@ -13,6 +13,8 @@
 
 #include "common/common_pch.h"
 
+#include <array>
+
 #include "common/aac.h"
 #include "common/aac_x.h"
 #include "common/at_scope_exit.h"
@@ -27,14 +29,14 @@
 namespace mtx::aac {
 
 // See ISO/IEC 14496-3, table 1.16 — Sampling Frequency Index
-static unsigned int const s_sampling_freq[16] = {
+static std::array<unsigned int, 16> const s_sampling_freq = {
   96000, 88200, 64000, 48000, 44100, 32000,
   24000, 22050, 16000, 12000, 11025,  8000,
    7350,     0,     0,     0 // filling
 };
 
 // See ISO/IEC 14496-3, table 1.17 — Channel Configuration
-static unsigned int const s_aac_channel_configuration[8] = {
+static std::array<unsigned int, 8> const s_aac_channel_configuration = {
   0, 1, 2, 3, 4, 5, 6, 8,
 };
 
@@ -42,7 +44,7 @@ static debugging_option_c s_debug_parse_data{"aac_parse_audio_specific_config|aa
 
 unsigned int
 get_sampling_freq_idx(unsigned int sampling_freq) {
-  for (auto i = 0; i < 16; i++)
+  for (auto i = 0u; i < s_sampling_freq.size(); i++)
     if (sampling_freq >= (s_sampling_freq[i] - 1000))
       return i;
 
@@ -1125,7 +1127,7 @@ header_c::parse_audio_specific_config(mtx::bits::reader_c &bc,
     config.profile      = object_type - 1;
     config.sample_rate  = read_sample_rate();
     auto channel_config = m_bc->get_bits(4);
-    if (channel_config < 8)
+    if (channel_config < s_aac_channel_configuration.size())
       config.channels = s_aac_channel_configuration[channel_config];
 
     if (   (mtx::mp4::AUDIO_OBJECT_TYPE_SBR == object_type)
