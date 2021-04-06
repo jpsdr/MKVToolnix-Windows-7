@@ -38,7 +38,7 @@ static std::array<unsigned int, 16> const s_sampling_freq = {
 // See ISO/IEC 14496-3, table 1.17 — Channel Configuration
 static std::array<unsigned int, 21> const s_aac_channel_configuration = {
    0,  1,  2,  3,  4,  5, 6,  8, // from ISO/IEC 14496-3
-   0,  3,  4,  7,  8, 24, 8, 12, // from ISO/IEC 23001-8
+   0,  3,  4,  7,  8, 24, 8, 12, // from Rec. ITU-R BS.1196-7 & ISO/IEC 23008-3:2019
   10, 12, 14, 12, 14,
 };
 
