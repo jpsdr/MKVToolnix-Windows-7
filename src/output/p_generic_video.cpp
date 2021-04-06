@@ -39,6 +39,7 @@ generic_video_packetizer_c::generic_video_packetizer_c(generic_reader_c *p_reade
   , m_frames_output{}
   , m_ref_timestamp{-1}
   , m_duration_shift{}
+  , m_last_pframe{}
 {
   set_track_type(track_video);
 
@@ -86,17 +87,23 @@ generic_video_packetizer_c::process(packet_cptr packet) {
 
   ++m_frames_output;
 
-  if (VFT_IFRAME == packet->bref)
-    // Add a key frame and save its timestamp so that we can reference it later.
-    m_ref_timestamp = packet->timestamp;
+  // Reference the last I or P frame
+  if (VFT_PFRAMEAUTOMATIC == packet->bref)
+    packet->bref = m_ref_timestamp;
 
-  else {
-    // P or B frame. Use our last timestamp if the bref is -2, or the provided
-    // one otherwise. The forward ref is always taken from the reader.
-    if (VFT_PFRAMEAUTOMATIC == packet->bref)
-      packet->bref = m_ref_timestamp;
-    if (VFT_NOBFRAME == packet->fref)
-      m_ref_timestamp = packet->timestamp;
+  // Save timestamp of I or P frame so that we can reference it later
+  if (VFT_NOBFRAME == packet->fref) { // include VFT_PFRAMEAUTOMATIC
+    // if (VFT_PFRAMEAUTOMATIC == packet->bref)
+    //   packet->bref = m_ref_timestamp;
+    // else
+    m_ref_timestamp = packet->timestamp;
+    // Keep track of the latest P frame for potential "broken" B frames
+    if (VFT_IFRAME < packet->bref) // exclude VFT_PFRAMEAUTOMATIC
+      m_last_pframe = packet->timestamp;
+  }
+  // Handle "broken" B frames
+  else if (VFT_IFRAME == packet->bref) { // expect VFT_NOBFRAME < packet->fref
+    packet->bref = m_last_pframe;
   }
 
   add_packet(packet);
