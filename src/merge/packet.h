@@ -71,9 +71,9 @@ struct packet_t {
     , cluster{}
     , ref_priority{}
     , time_factor(1)
-    , timestamp{}
-    , bref{}
-    , fref{}
+    , timestamp(-1)
+    , bref(-1)
+    , fref(-1)
     , duration(-1)
     , assigned_timestamp{}
     , timestamp_before_factory{}
