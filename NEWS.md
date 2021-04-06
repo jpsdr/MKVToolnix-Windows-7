@@ -3,8 +3,8 @@
 ## New features and enhancements
 
 * mkvmerge: AAC: added support for LOAS/LATM files with channel configuration
-  indexes 11–13 (channel counts 6.1, 7.1 & 22.2) according to Rec. ITU-R
-  BS.1196-7. Fixes #3081.
+  indexes 9–21 (e.g. channel count 22.2 for index 13) according to Rec. ITU-R
+  BS.1196-7 & ISO/IEC 23001-8:2016. Fixes #3081.
 
 ## Bug fixes
 
