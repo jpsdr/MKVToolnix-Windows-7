@@ -5,6 +5,7 @@
   xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
   xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
   xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4"
+  xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
   xmlns:uap6="http://schemas.microsoft.com/appx/manifest/uap/windows10/6"
   xmlns:uap7="http://schemas.microsoft.com/appx/manifest/uap/windows10/7"
   xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
@@ -14,6 +15,7 @@
   xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
   xmlns:desktop2="http://schemas.microsoft.com/appx/manifest/desktop/windows10/2"
   xmlns:desktop3="http://schemas.microsoft.com/appx/manifest/desktop/windows10/3"
+  xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
   xmlns:desktop5="http://schemas.microsoft.com/appx/manifest/desktop/windows10/5"
   xmlns:desktop6="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
@@ -41,9 +43,11 @@
   <rescap:Capability Name="runFullTrust" />
  </Capabilities>
  <Applications>
-  <Application Id="MKVToolNixGUI" Executable="mkvtoolnix\mkvtoolnix-gui.exe" EntryPoint="Windows.FullTrustApplication">
+  <Application Id="MKVToolNixGUIExe"
+               Executable="mkvtoolnix\mkvtoolnix-gui.exe"
+               EntryPoint="Windows.FullTrustApplication">
    <uap:VisualElements
-     DisplayName="MKVToolNix"
+     DisplayName="MKVToolNix GUI"
      Description="Creating and working with Matroska files"
      BackgroundColor="transparent"
      Square150x150Logo="Assets\Square150x150Logo.png"
@@ -70,6 +74,117 @@
       </uap:SupportedFileTypes>
      </uap3:FileTypeAssociation>
     </uap3:Extension>
+
+    <uap5:Extension Category="windows.appExecutionAlias" EntryPoint="Windows.FullTrustApplication" Executable="mkvtoolnix\mkvtoolnix-gui.exe">
+     <uap5:AppExecutionAlias>
+      <uap5:ExecutionAlias Alias="mkvtoolnix-gui.exe" />
+     </uap5:AppExecutionAlias>
+    </uap5:Extension>
+   </Extensions>
+  </Application>
+
+  <Application Id="mkvmergeExe"
+               Executable="mkvtoolnix\mkvmerge.exe"
+               EntryPoint="Windows.FullTrustApplication"
+               desktop4:Subsystem="console"
+               desktop4:SupportsMultipleInstances="true">
+   <uap:VisualElements
+     DisplayName="MKV Multiplexer"
+     Description="Creating Matroska files"
+     BackgroundColor="transparent"
+     Square150x150Logo="Assets\Square150x150Logo.png"
+     Square44x44Logo="Assets\Square44x44Logo.png">
+   </uap:VisualElements>
+   <Extensions>
+    <uap5:Extension Category="windows.appExecutionAlias" EntryPoint="Windows.FullTrustApplication" Executable="mkvtoolnix\mkvmerge.exe">
+     <uap5:AppExecutionAlias desktop4:Subsystem="console">
+      <uap5:ExecutionAlias Alias="mkvmerge.exe" />
+     </uap5:AppExecutionAlias>
+    </uap5:Extension>
+   </Extensions>
+  </Application>
+
+  <Application Id="mkvinfoExe"
+               Executable="mkvtoolnix\mkvinfo.exe"
+               EntryPoint="Windows.FullTrustApplication"
+               desktop4:Subsystem="console"
+               desktop4:SupportsMultipleInstances="true">
+   <uap:VisualElements
+     DisplayName="MKV Info Tool"
+     Description="Inspect the structure of Matroska files"
+     BackgroundColor="transparent"
+     Square150x150Logo="Assets\Square150x150Logo.png"
+     Square44x44Logo="Assets\Square44x44Logo.png">
+   </uap:VisualElements>
+   <Extensions>
+    <uap5:Extension Category="windows.appExecutionAlias" EntryPoint="Windows.FullTrustApplication" Executable="mkvtoolnix\mkvinfo.exe">
+     <uap5:AppExecutionAlias desktop4:Subsystem="console">
+      <uap5:ExecutionAlias Alias="mkvinfo.exe" />
+     </uap5:AppExecutionAlias>
+    </uap5:Extension>
+   </Extensions>
+  </Application>
+
+  <Application Id="mkvextractExe"
+               Executable="mkvtoolnix\mkvextract.exe"
+               EntryPoint="Windows.FullTrustApplication"
+               desktop4:Subsystem="console"
+               desktop4:SupportsMultipleInstances="true">
+   <uap:VisualElements
+     DisplayName="MKV Extractor"
+     Description="Extract data from Matroska files"
+     BackgroundColor="transparent"
+     Square150x150Logo="Assets\Square150x150Logo.png"
+     Square44x44Logo="Assets\Square44x44Logo.png">
+   </uap:VisualElements>
+   <Extensions>
+    <uap5:Extension Category="windows.appExecutionAlias" EntryPoint="Windows.FullTrustApplication" Executable="mkvtoolnix\mkvextract.exe">
+     <uap5:AppExecutionAlias desktop4:Subsystem="console">
+      <uap5:ExecutionAlias Alias="mkvextract.exe" />
+     </uap5:AppExecutionAlias>
+    </uap5:Extension>
+   </Extensions>
+  </Application>
+
+  <Application Id="mkvpropeditExe"
+               Executable="mkvtoolnix\mkvpropedit.exe"
+               EntryPoint="Windows.FullTrustApplication"
+               desktop4:Subsystem="console"
+               desktop4:SupportsMultipleInstances="true">
+   <uap:VisualElements
+     DisplayName="MKV Property Editor"
+     Description="Modify elements of Matroska files"
+     BackgroundColor="transparent"
+     Square150x150Logo="Assets\Square150x150Logo.png"
+     Square44x44Logo="Assets\Square44x44Logo.png">
+   </uap:VisualElements>
+   <Extensions>
+    <uap5:Extension Category="windows.appExecutionAlias" EntryPoint="Windows.FullTrustApplication" Executable="mkvtoolnix\mkvpropedit.exe">
+     <uap5:AppExecutionAlias desktop4:Subsystem="console">
+      <uap5:ExecutionAlias Alias="mkvpropedit.exe" />
+     </uap5:AppExecutionAlias>
+    </uap5:Extension>
+   </Extensions>
+  </Application>
+
+  <Application Id="blurayDumpExe"
+               Executable="mkvtoolnix\tools\bluray_dump.exe"
+               EntryPoint="Windows.FullTrustApplication"
+               desktop4:Subsystem="console"
+               desktop4:SupportsMultipleInstances="true">
+   <uap:VisualElements
+     DisplayName="Blu-ray data dumper"
+     Description="Dump data structures from various files on Blu-ray discs"
+     BackgroundColor="transparent"
+     Square150x150Logo="Assets\Square150x150Logo.png"
+     Square44x44Logo="Assets\Square44x44Logo.png">
+   </uap:VisualElements>
+   <Extensions>
+    <uap5:Extension Category="windows.appExecutionAlias" EntryPoint="Windows.FullTrustApplication" Executable="mkvtoolnix\tools\bluray_dump.exe">
+     <uap5:AppExecutionAlias desktop4:Subsystem="console">
+      <uap5:ExecutionAlias Alias="bluray_dump.exe" />
+     </uap5:AppExecutionAlias>
+    </uap5:Extension>
    </Extensions>
   </Application>
  </Applications>
