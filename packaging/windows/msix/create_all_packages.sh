@@ -4,7 +4,8 @@ set -e -x
 
 cd "$(dirname "$(readlink -f "$0")")"
 
-base_dir=/z/home/mosu/files/html/bunkus.org/videotools/mkvtoolnix/windows/releases
+base_dir=${base_dir:-/z/home/mosu/files/html/bunkus.org/videotools/mkvtoolnix/windows/releases}
+archive_dir="${archive_dir:-${base_dir}/${mtxversion}}"
 
 function determine_latest_version {
   ls "${base_dir}" | \
@@ -16,7 +17,7 @@ function determine_latest_version {
 
 mtxversion=$(determine_latest_version)
 
-for file in "${base_dir}/${mtxversion}"/*.7z; do
+for file in "${archive_dir}"/*.7z; do
   ./create_package.sh "$file" --sign
 done
 
