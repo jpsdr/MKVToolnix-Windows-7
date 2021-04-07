@@ -339,7 +339,7 @@ es_parser_c::handle_vps_nalu(memory_cptr const &nalu) {
   auto update_codec_private = false;
 
   if (m_vps_info_list.size() == i) {
-    m_vps_list.push_back(nalu);
+    m_vps_list.push_back(nalu->clone());
     m_vps_info_list.push_back(vps_info);
     m_hevcc_changed = true;
 
@@ -347,7 +347,7 @@ es_parser_c::handle_vps_nalu(memory_cptr const &nalu) {
     mxdebug_if(m_debug_parameter_sets, fmt::format("hevc: VPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", vps_info.id, m_vps_info_list[i].checksum, vps_info.checksum));
 
     m_vps_info_list[i] = vps_info;
-    m_vps_list[i]      = nalu;
+    m_vps_list[i]      = nalu->clone();
     m_hevcc_changed    = true;
 
     // Update codec private if needed
@@ -395,7 +395,7 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
   auto update_codec_private = false;
 
   if (m_sps_info_list.size() == i) {
-    m_sps_list.push_back(parsed_nalu);
+    m_sps_list.push_back(parsed_nalu->clone());
     m_sps_info_list.push_back(sps_info);
     m_hevcc_changed = true;
 
@@ -405,7 +405,7 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
     cleanup();
 
     m_sps_info_list[i] = sps_info;
-    m_sps_list[i]      = parsed_nalu;
+    m_sps_list[i]      = parsed_nalu->clone();
     m_hevcc_changed    = true;
 
     // Update codec private if needed
@@ -465,7 +465,7 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
       break;
 
   if (m_pps_info_list.size() == i) {
-    m_pps_list.push_back(nalu);
+    m_pps_list.push_back(nalu->clone());
     m_pps_info_list.push_back(pps_info);
     m_hevcc_changed = true;
 
@@ -476,7 +476,7 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
       cleanup();
 
     m_pps_info_list[i] = pps_info;
-    m_pps_list[i]      = nalu;
+    m_pps_list[i]      = nalu->clone();
     m_hevcc_changed    = true;
   }
 
