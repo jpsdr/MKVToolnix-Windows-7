@@ -151,8 +151,8 @@ track_c::send_to_packetizer() {
     timestamp_to_use -= std::min(timestamp_to_use, f.m_global_timestamp_offset);
 
   mxdebug_if(m_debug_delivery,
-             fmt::format("send_to_packetizer: PID {0} expected {1} actual {2} timestamp_to_use {3} timestamp_to_check {4} m_timestamp {5} m_previous_timestamp {6} stream_timestamp {7} restriction {8}/{9} ptzr {10} use? {11}\n",
-                         pid, pes_payload_size_to_read, pes_payload_read->get_size() - bytes_to_skip, timestamp_to_use, timestamp_to_check, m_timestamp, m_previous_timestamp, f.m_stream_timestamp, min, max, ptzr, use_packet));
+             fmt::format("send_to_packetizer: PID {0} expected {1} actual {2} timestamp_to_use {3} timestamp_to_check {4} m_timestamp {5} m_previous_timestamp {6} stream_timestamp {7} restriction {8}/{9} min_seen {10} ptzr {11} use? {12}\n",
+                         pid, pes_payload_size_to_read, pes_payload_read->get_size() - bytes_to_skip, timestamp_to_use, timestamp_to_check, m_timestamp, m_previous_timestamp, f.m_stream_timestamp, min, max, f.m_timestamp_restriction_min_seen, ptzr, use_packet));
 
   if (use_packet) {
     process(std::make_shared<packet_t>(memory_c::clone(pes_payload_read->get_buffer() + bytes_to_skip, pes_payload_read->get_size() - bytes_to_skip), timestamp_to_use.to_ns(-1)));
