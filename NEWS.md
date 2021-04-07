@@ -17,6 +17,11 @@
   mid-stream) from certain containers (e.g. Matroska). This bug was introduced
   in release 56.0.0. Fixes #3083.
 
+## Build system changes
+
+* configure: the `--enable-ubsan` option hasn't actually enabled anything
+  since release 39.0.0.
+
 
 # Version 56.0.0 "Strasbourg / St. Denis" 2021-04-05
 
