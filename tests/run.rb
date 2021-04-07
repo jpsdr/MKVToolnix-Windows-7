@@ -41,13 +41,15 @@ def main
       controller.test_date_before = Time.local($1, $2, $3, $4, $5, $6)
     elsif arg =~ /-j(\d+)/
       controller.num_threads = $1.to_i
-    elsif /^ (\d{3}) (?: - (\d{3}) )?$/x.match arg
-      $1.to_i.upto(($2 || $1).to_i) { |idx| controller.add_test_case sprintf("%03d", idx) }
-    elsif %r{^ / (.+) / $}ix.match arg
-      re    = Regexp.new "^T_(\\d+).*(?:#{$1})", Regexp::IGNORECASE
-      tests = controller.results.results.keys.collect { |e| re.match(e) ? $1 : nil }.compact
+    elsif /^ (!)? (\d{1,3}) (?: - (\d{1,3}) )?$/x.match arg
+      method = $1 == '!' ? :exclude_test_case : :add_test_case
+      $2.to_i.upto(($3 || $2).to_i) { |idx| controller.send(method, sprintf("%03d", idx)) }
+    elsif %r{^ (!)? / (.+) / $}ix.match arg
+      method = $1 == '!' ? :exclude_test_case : :add_test_case
+      re     = Regexp.new "^T_(\\d+).*(?:#{$2})", Regexp::IGNORECASE
+      tests  = controller.results.results.keys.collect { |e| re.match(e) ? $1 : nil }.compact
       error_and_exit "No tests matched RE #{re}" if tests.empty?
-      tests.each { |e| controller.add_test_case e }
+      tests.each { |e| controller.send(method, e) }
     elsif ((arg == "-F" || (arg == "--list-failed")))
       controller.list_failed_ids
       exit 0
@@ -62,8 +64,12 @@ Syntax: run.rb [options]
   -u, --update-failed   update the results for tests that fail
   -r, --record-duration update the duration field of the tests run
   -jNUM                 run NUM tests at once (default: number of CPU cores)
-  123                   run test 123 (any number, can be given multiple times)
+  123                   run test 123 (any number; can be given multiple times)
+  123-456               run tests 123 through 456 (any range of numbers; can be given multiple times)
+  !123                  do not run test 123 (any number; can be given multiple times)
+  !123-456              do not run tests 123 through 456 (any range of numbers; can be given multiple times)
   /REGEX/               run tests whose names match REGEX (case insensitive; can be given multiple times)
+  !/REGEX/              do not run tests whose names match REGEX (case insensitive; can be given multiple times)
 EOHELP
       exit 0
     else
