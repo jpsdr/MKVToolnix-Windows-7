@@ -52,3 +52,10 @@ done
 for file in *.scale-100.png; do
   cp ${file} ${file/.scale-100/}
 done
+
+dir=../../../../share/icons/windows/msix
+for program in mkvmerge mkvinfo mkvextract mkvpropedit bluray_dump; do
+  for size in 44 150; do
+    convert ${dir}/${program}.xcf -background transparent -layers flatten -size ${size}x${size} Square${size}x${size}Logo-${program}.png
+  done
+done
