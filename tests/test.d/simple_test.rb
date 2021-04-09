@@ -34,11 +34,20 @@ class SimpleTest
     @commands      = []
     @tmp_num       = 0
     @tmp_num_mutex = Mutex.new
+    @skip          = false
     @blocks        = {
       :setup       => [],
       :tests       => [],
       :cleanup     => [],
     }
+  end
+
+  def skip_if condition
+    @skip = true if condition
+  end
+
+  def skip?
+    @skip
   end
 
   def commands

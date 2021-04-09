@@ -117,6 +117,11 @@ class Controller
       return
     end
 
+    if current_test.methods.include?(:skip?) and current_test.skip?
+      show_message "Skipping '#{class_name}': disabled"
+      return
+    end
+
     show_message "Running '#{class_name}': #{current_test.description}"
 
     start    = Time.now

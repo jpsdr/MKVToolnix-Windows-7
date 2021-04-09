@@ -12,6 +12,8 @@ require_relative "test.d/results.rb"
 require_relative "test.d/test.rb"
 require_relative "test.d/simple_test.rb"
 require_relative "test.d/util.rb"
+require_relative "../rake.d/config.rb"
+require_relative "../rake.d/extensions.rb"
 
 begin
   require "thread"
@@ -21,6 +23,8 @@ end
 def setup
   ENV[ /darwin/i.match(RUBY_PLATFORM) ? 'LANG' : 'LC_ALL' ] = 'en_US.UTF-8'
   ENV['PATH']                                               = "../src:" + ENV['PATH']
+
+  $config = read_build_config
 end
 
 def main
