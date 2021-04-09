@@ -1,3 +1,12 @@
+# Version ?
+
+## New features and enhancements
+
+* MKVToolNix GUI: preferences: switched the order & wording of controls in the
+  "enabling items" panel to make it clearer that certain controls define
+  exceptions. Inspired by 3086.
+
+
 # Version 56.1.0 "My Friend" 2021-04-09
 
 ## New features and enhancements

@@ -518,6 +518,7 @@ PreferencesDialog::setupConnections() {
   connect(ui->pbMBrowseAutoSetFixedDirectory,             &QPushButton::clicked,                                         this,                                 &PreferencesDialog::browseFixedOutputDirectory);
 
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->lMEnableMuxingAllTracksOfType,    &QLabel::setEnabled);
+  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->gbMEnableMuxingExceptions,        &QLabel::setEnabled);
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllVideoTracks,    &QLabel::setEnabled);
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllAudioTracks,    &QLabel::setEnabled);
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllSubtitleTracks, &QLabel::setEnabled);
@@ -688,7 +689,7 @@ PreferencesDialog::setupEnableMuxingTracksByType() {
 
 void
 PreferencesDialog::setupEnableMuxingTracksByLanguage() {
-  auto widgets = QList<QWidget *>{} << ui->lMEnableMuxingAllTracksOfType << ui->cbMEnableMuxingAllVideoTracks << ui->cbMEnableMuxingAllAudioTracks << ui->cbMEnableMuxingAllSubtitleTracks << ui->tbMEnableMuxingTracksByLanguage;
+  auto widgets = QList<QWidget *>{} << ui->lMEnableMuxingAllTracksOfType << ui->gbMEnableMuxingExceptions << ui->cbMEnableMuxingAllVideoTracks << ui->cbMEnableMuxingAllAudioTracks << ui->cbMEnableMuxingAllSubtitleTracks << ui->tbMEnableMuxingTracksByLanguage;
   for (auto const &widget : widgets)
     widget->setEnabled(m_cfg.m_enableMuxingTracksByLanguage);
 
