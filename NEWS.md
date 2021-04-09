@@ -8,14 +8,14 @@
 
 ## Bug fixes
 
-* mkvextract: AAC: mkvextract will now abort with an useful error message when
-  the user tries to extract a track whose 'audio-specific config' element in
-  `CodecPrivate` signals a number of channels of 7 or greater than 8 as that
-  isn't supported by the ADTS format.
 * mkvmerge: HEVC/H.265 parser: fixed invalid memory access that could happen
   when reading certain types of HEVC data (e.g. with changing parameter sets
   mid-stream) from certain containers (e.g. Matroska). This bug was introduced
   in release 56.0.0. Fixes #3083.
+* mkvextract: AAC: mkvextract will now abort with an useful error message when
+  the user tries to extract a track whose 'audio-specific config' element in
+  `CodecPrivate` signals a number of channels of 7 or greater than 8 as that
+  isn't supported by the ADTS format.
 
 ## Build system changes
 
