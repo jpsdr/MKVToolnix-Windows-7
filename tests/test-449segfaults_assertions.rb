@@ -3,6 +3,8 @@
 # T_449segfaults_assertions
 describe "mkvmerge & mkvinfo / segfaults and assertions"
 
+skip_if c?(:USE_ADDRSAN)
+
 dir = "data/segfaults-assertions"
 
 test_merge "#{dir}/1089-1.mkv", :exit_code => :error
