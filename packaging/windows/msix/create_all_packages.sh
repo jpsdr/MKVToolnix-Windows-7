@@ -17,7 +17,7 @@ function determine_latest_version {
 
 mtxversion=$(determine_latest_version)
 
-for file in "${archive_dir}"/*.7z; do
+for file in "${archive_dir}"/${mtxversion}/*.7z; do
   ./create_package.sh "$file" --sign
 done
 
