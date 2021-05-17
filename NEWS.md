@@ -12,6 +12,8 @@
   multiplexer, the source directory will be remembered as the "last open
   directory" again, causing subsequent uses of the "open file" dialog to start
   in the same directory. Fixes #3110.
+* mkvinfo: fixed the position of frames in block groups containing "block
+  duration" elements in summary mode (e.g. for subtitle tracks).
 
 
 # Version 56.1.0 "My Friend" 2021-04-09

@@ -919,6 +919,43 @@ kax_info_c::post_block(EbmlElement &e) {
 
     frame_pos += data.Size();
   }
+
+
+  if (!p->m_show_summary)
+    return;
+
+  std::string position;
+  frame_pos = e.GetElementPosition() + e.ElementSize();
+
+  for (auto size : p->m_frame_sizes)
+    frame_pos -= size;
+
+  for (auto fidx = 0u; fidx < p->m_frame_sizes.size(); fidx++) {
+    if (p->m_show_positions) {
+      position   = fmt::format(p->m_hex_positions ? Y(", position 0x{0:x}") : Y(", position {0}"), frame_pos);
+      frame_pos += p->m_frame_sizes[fidx];
+    }
+
+    if (p->m_block_duration)
+      p->m_out->puts(fmt::format(Y("{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"),
+                                 (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I'),
+                                 p->m_lf_tnum,
+                                 mtx::string::format_timestamp(p->m_lf_timestamp),
+                                 mtx::string::format_timestamp(*p->m_block_duration),
+                                 p->m_frame_sizes[fidx],
+                                 p->m_frame_adlers[fidx],
+                                 p->m_frame_hexdumps[fidx],
+                                 position));
+    else
+      p->m_out->puts(fmt::format(Y("{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"),
+                                 (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I'),
+                                 p->m_lf_tnum,
+                                 mtx::string::format_timestamp(p->m_lf_timestamp),
+                                 p->m_frame_sizes[fidx],
+                                 p->m_frame_adlers[fidx],
+                                 p->m_frame_hexdumps[fidx],
+                                 position));
+  }
 }
 
 bool
@@ -937,44 +974,8 @@ kax_info_c::pre_block_group(EbmlElement &) {
 }
 
 void
-kax_info_c::post_block_group(EbmlElement &e) {
+kax_info_c::post_block_group([[maybe_unused]] EbmlElement &e) {
   auto p = p_func();
-
-  if (p->m_show_summary) {
-    std::string position;
-    std::size_t fidx;
-    auto frame_pos = e.GetElementPosition() + e.ElementSize();
-
-    for (auto size : p->m_frame_sizes)
-      frame_pos -= size;
-
-    for (fidx = 0; fidx < p->m_frame_sizes.size(); fidx++) {
-      if (p->m_show_positions) {
-        position   = fmt::format(p->m_hex_positions ? Y(", position 0x{0:x}") : Y(", position {0}"), frame_pos);
-        frame_pos += p->m_frame_sizes[fidx];
-      }
-
-      if (p->m_block_duration)
-        p->m_out->puts(fmt::format(Y("{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"),
-                                   (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I'),
-                                   p->m_lf_tnum,
-                                   mtx::string::format_timestamp(p->m_lf_timestamp),
-                                   mtx::string::format_timestamp(*p->m_block_duration),
-                                   p->m_frame_sizes[fidx],
-                                   p->m_frame_adlers[fidx],
-                                   p->m_frame_hexdumps[fidx],
-                                   position));
-      else
-        p->m_out->puts(fmt::format(Y("{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"),
-                                   (p->m_num_references >= 2 ? 'B' : p->m_num_references == 1 ? 'P' : 'I'),
-                                   p->m_lf_tnum,
-                                   mtx::string::format_timestamp(p->m_lf_timestamp),
-                                   p->m_frame_sizes[fidx],
-                                   p->m_frame_adlers[fidx],
-                                   p->m_frame_hexdumps[fidx],
-                                   position));
-    }
-  }
 
   auto &tinfo = p->m_track_info[p->m_lf_tnum];
 
