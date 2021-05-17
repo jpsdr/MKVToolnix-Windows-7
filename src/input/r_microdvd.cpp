@@ -29,7 +29,9 @@ microdvd_reader_c::probe_file(mm_io_c &in) {
   auto line_num = 0u;
 
   while (line_num < 20) {
-    line = in.getline(50);
+    if (!in.getline2(line, 50))
+      return;
+
     mtx::string::strip(line);
 
     if (!line.empty())

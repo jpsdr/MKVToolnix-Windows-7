@@ -109,18 +109,26 @@ open_playlist_file(filelist_t &file,
 static debugging_option_c s_debug_probe{"probe_file_format"};
 
 template<typename Treader>
-typename std::enable_if<
-  std::is_base_of<generic_reader_c, Treader>::value,
-  std::unique_ptr<generic_reader_c>
->::type
-do_probe(mm_io_cptr const &io,
-         probe_range_info_t const &probe_range_info = {}) {
+std::unique_ptr<Treader>
+create_and_prepare_reader(mm_io_cptr const &io,
+                          probe_range_info_t const &probe_range_info = {}) {
   auto reader = std::make_unique<Treader>();
 
   io->setFilePointer(0);
   reader->set_file_to_read(io);
   reader->set_probe_range_info(probe_range_info);
 
+  return reader;
+}
+
+template<typename Treader>
+typename std::enable_if<
+  std::is_base_of<generic_reader_c, Treader>::value,
+  std::unique_ptr<generic_reader_c>
+>::type
+do_probe(mm_io_cptr const &io,
+         probe_range_info_t const &probe_range_info = {}) {
+  auto reader    = create_and_prepare_reader<Treader>(io, probe_range_info);
   auto probed_ok = false;
 
   try {
@@ -216,6 +224,16 @@ detect_text_file_formats(filelist_t const &file) {
 
     // Unsupported text subtitle formats
     do_probe<microdvd_reader_c>(text_io);
+
+    // Support empty files for certain types.
+    if ((text_io->get_size() - text_io->get_byte_order_length()) > 1)
+      return {};
+
+    auto extension = mtx::fs::to_path(file.name).extension().u8string().substr(1);
+
+    for (auto type : mtx::file_type_t::by_extension(extension))
+      if (type == mtx::file_type_e::srt)
+        return create_and_prepare_reader<srt_reader_c>(text_io);
 
   } catch (mtx::mm_io::exception &ex) {
     mxerror(fmt::format(Y("The file '{0}' could not be opened for reading: {1}.\n"), file.name, ex));

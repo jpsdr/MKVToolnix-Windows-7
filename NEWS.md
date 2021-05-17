@@ -5,6 +5,9 @@
 * MKVToolNix GUI: preferences: switched the order & wording of controls in the
   "enabling items" panel to make it clearer that certain controls define
   exceptions. Inspired by 3086.
+* mkvmerge: SRT subtitles: mkvmerge now accepts empty text files with the
+  extension `.srt` as SRT subtitle files, enabling the creation of empty SRT
+  tracks. Implements #3089.
 
 ## Bug fixes
 
