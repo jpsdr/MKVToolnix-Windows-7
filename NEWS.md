@@ -6,6 +6,13 @@
   "enabling items" panel to make it clearer that certain controls define
   exceptions. Inspired by 3086.
 
+## Bug fixes
+
+* MKVToolNix GUI: multiplexer: when dragging & dropping files to the
+  multiplexer, the source directory will be remembered as the "last open
+  directory" again, causing subsequent uses of the "open file" dialog to start
+  in the same directory. Fixes #3110.
+
 
 # Version 56.1.0 "My Friend" 2021-04-09
 

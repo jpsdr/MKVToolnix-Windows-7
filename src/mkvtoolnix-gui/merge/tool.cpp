@@ -446,6 +446,13 @@ Tool::dropEvent(QDropEvent *event) {
 void
 Tool::handleDroppedFiles(QStringList const &fileNames,
                          Qt::MouseButtons mouseButtons) {
+  if (fileNames.isEmpty())
+    return;
+
+  Util::Settings::change([&fileNames](Util::Settings &settings) {
+    settings.m_lastOpenDir.setPath(QFileInfo{fileNames[0]}.path());
+  });
+
   auto configExt  = Q(".mtxcfg");
   auto mediaFiles = QStringList{};
 
