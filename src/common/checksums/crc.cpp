@@ -35,7 +35,7 @@ crc_base_c::crc_base_c(type_e type,
                        table_t &table,
                        uint32_t crc)
   : m_type{type}
-  , m_table(table)              // No initializer-list syntax here due to gcc bug 50025.
+  , m_table{table}
   , m_crc{crc}
   , m_xor_result{}
   , m_result_in_le{}

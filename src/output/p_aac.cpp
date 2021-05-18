@@ -26,7 +26,7 @@ aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
                                    mtx::aac::audio_config_t const &config,
                                    mode_e mode)
   : generic_packetizer_c(p_reader, p_ti)
-  , m_config(config)            // Due to a bug in gcc 4.9.x with (…) instead of {…}.
+  , m_config{config}
   , m_mode{mode}
   , m_timestamp_calculator{static_cast<int64_t>(config.sample_rate)}
   , m_packet_duration{}

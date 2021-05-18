@@ -97,7 +97,7 @@ target_c::runtime() {
 // ----------------------------------------------------------------------
 
 file_target_c::file_target_c(std::filesystem::path file_name)
-  : target_c()                  // Don't use initializer-list syntax due to a bug in gcc < 4.8
+  : target_c{}
   , m_file_name{std::move(file_name)}
 {
   if (!mtx::fs::is_absolute(m_file_name))
@@ -122,7 +122,7 @@ file_target_c::log_line(std::string const &message) {
 // ----------------------------------------------------------------------
 
 stderr_target_c::stderr_target_c()
-  : target_c()                  // Don't use initializer-list syntax due to a bug in gcc < 4.8
+  : target_c{}
 {
 }
 
