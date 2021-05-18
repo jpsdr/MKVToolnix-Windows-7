@@ -34,12 +34,6 @@ aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
 {
   set_track_type(track_audio);
 
-  if (m_ti.m_private_data && (0 < m_ti.m_private_data->get_size())) {
-    auto parsed_config = mtx::aac::parse_audio_specific_config(m_ti.m_private_data->get_buffer(), m_ti.m_private_data->get_size());
-    if (parsed_config)
-      m_config = *parsed_config;
-  }
-
   if (!m_config.samples_per_frame)
     m_config.samples_per_frame = 1024;
 
