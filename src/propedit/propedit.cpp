@@ -196,7 +196,6 @@ static
 void setup(char **argv) {
   mtx_common_init("mkvpropedit", argv[0]);
   clear_list_of_unique_numbers(UNIQUE_ALL_IDS);
-  mtx::cli::g_version_info = get_version_info("mkvpropedit", vif_full);
 }
 
 /** \brief Setup and high level program control

@@ -257,27 +257,20 @@ vc1_info_c::dump_frame_header(mtx::vc1::frame_header_t &frame_header) {
 }
 
 static void
-show_help() {
-  mxinfo(Y("vc1parser [options] input_file_name\n"
-           "\n"
-           "Options for output and information control:\n"
-           "\n"
-           "  -c, --checksum         Calculate and output checksums of each unit\n"
-           "  -e, --entrypoints      Show the content of entry point headers\n"
-           "  -f, --frames           Show basic frame header content\n"
-           "  -s, --sequence-headers Show the content of sequence headers\n"
-           "\n"
-           "General options:\n"
-           "\n"
-           "  -h, --help             This help text\n"
-           "  -V, --version          Print version information\n"));
-  mxexit();
-}
-
-static void
-show_version() {
-  mxinfo(get_version_info("vc1parser") + "\n");
-  mxexit();
+setup_help() {
+  mtx::cli::g_usage_text = Y("vc1parser [options] input_file_name\n"
+                             "\n"
+                             "Options for output and information control:\n"
+                             "\n"
+                             "  -c, --checksum         Calculate and output checksums of each unit\n"
+                             "  -e, --entrypoints      Show the content of entry point headers\n"
+                             "  -f, --frames           Show basic frame header content\n"
+                             "  -s, --sequence-headers Show the content of sequence headers\n"
+                             "\n"
+                             "General options:\n"
+                             "\n"
+                             "  -h, --help             This help text\n"
+                             "  -V, --version          Print version information\n");
 }
 
 static std::string
@@ -286,13 +279,7 @@ parse_args(std::vector<std::string> &args) {
 
   std::vector<std::string>::iterator arg = args.begin();
   while (arg != args.end()) {
-    if ((*arg == "-h") || (*arg == "--help"))
-      show_help();
-
-    else if ((*arg == "-V") || (*arg == "--version"))
-      show_version();
-
-    else if ((*arg == "-c") || (*arg == "--checksum"))
+    if ((*arg == "-c") || (*arg == "--checksum"))
       g_opt_checksum = true;
 
     else if ((*arg == "-e") || (*arg == "--entrypoints"))
@@ -349,9 +336,13 @@ int
 main(int argc,
      char **argv) {
   mtx_common_init("vc1parser", argv[0]);
+  setup_help();
 
-  std::vector<std::string> args = mtx::cli::args_in_utf8(argc, argv);
-  std::string file_name    = parse_args(args);
+  auto args = mtx::cli::args_in_utf8(argc, argv);
+  while (mtx::cli::handle_common_args(args, "-r"))
+    ;
+
+  auto file_name = parse_args(args);
 
   try {
     parse_file(file_name);

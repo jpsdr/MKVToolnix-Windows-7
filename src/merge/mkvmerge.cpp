@@ -401,15 +401,14 @@ set_usage() {
                   "explains several details in great length which are not obvious from\n"
                   "this listing.\n");
 
-  mtx::cli::g_version_info = get_version_info("mkvmerge", vif_full);
-  mtx::cli::g_usage_text   = usage_text;
+  mtx::cli::g_usage_text = usage_text;
 }
 
 /** \brief Prints information about what has been compiled into mkvmerge
 */
 static void
 print_capabilities() {
-  mxinfo(fmt::format("VERSION={0}\n", mtx::cli::g_version_info));
+  mxinfo(fmt::format("VERSION={0}\n", get_version_info("mkvmerge", vif_full)));
 #if defined(HAVE_FLAC_FORMAT_H)
   mxinfo("FLAC\n");
 #endif

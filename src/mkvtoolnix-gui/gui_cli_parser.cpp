@@ -135,7 +135,7 @@ void
 GuiCliParser::displayVersion() {
   auto p = p_func();
 
-  mxinfo(fmt::format("{0}\n", mtx::cli::g_version_info));
+  mxinfo(fmt::format("{0}\n", get_version_info("mkvtoolnix-gui", vif_full)));
   p->exitAfterParsing = true;
 }
 

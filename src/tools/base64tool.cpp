@@ -28,14 +28,11 @@
 
 void
 set_usage() {
-  mtx::cli::g_version_info = get_version_info("base64util", vif_full);
-  mtx::cli::g_usage_text   = Y(
-    "base64util <encode|decode> <input> <output> [maxlen]\n"
-    "\n"
-    "  encode - Read from <input>, encode to Base64 and write to <output>.\n"
-    "           Max line length can be specified and is 72 if left out.\n"
-    "  decode - Read from <input>, decode to binary and write to <output>.\n"
-    );
+  mtx::cli::g_usage_text = Y("base64util <encode|decode> <input> <output> [maxlen]\n"
+                             "\n"
+                             "  encode - Read from <input>, encode to Base64 and write to <output>.\n"
+                             "           Max line length can be specified and is 72 if left out.\n"
+                             "  decode - Read from <input>, decode to binary and write to <output>.\n");
 }
 
 int

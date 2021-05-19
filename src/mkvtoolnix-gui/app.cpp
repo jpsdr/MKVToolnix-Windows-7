@@ -67,8 +67,6 @@ App::App(int &argc,
   : QApplication{argc, argv}
   , p_ptr{new AppPrivate{}}
 {
-  mtx::cli::g_version_info = get_version_info("mkvtoolnix-gui", vif_full);
-
   // The routines for handling unique numbers cannot cope with
   // multiple chapters being worked on at the same time as they safe
   // already-used numbers in one static container. So just disable them.

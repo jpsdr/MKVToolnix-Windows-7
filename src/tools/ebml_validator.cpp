@@ -63,27 +63,20 @@ public:
 };
 
 static void
-show_help() {
-  mxinfo(Y("ebml_validor [options] input_file_name\n"
-           "\n"
-           "Options output and information control:\n"
-           "\n"
-           "  -s, --start <value>    Start parsing at file position value\n"
-           "  -e, --end <value>      Stop parsing at file position value\n"
-           "  -m, --master <value>   The EBML ID value (in hex) is a master\n"
-           "  -M, --auto-masters     Use all of Matroska's master elements\n"
-           "\n"
-           "General options:\n"
-           "\n"
-           "  -h, --help             This help text\n"
-           "  -V, --version          Print version information\n"));
-  mxexit();
-}
-
-static void
-show_version() {
-  mxinfo(get_version_info("ebml_validator") + "\n");
-  mxexit();
+setup_help() {
+  mtx::cli::g_usage_text = Y("ebml_validor [options] input_file_name\n"
+                             "\n"
+                             "Options output and information control:\n"
+                             "\n"
+                             "  -s, --start <value>    Start parsing at file position value\n"
+                             "  -e, --end <value>      Stop parsing at file position value\n"
+                             "  -m, --master <value>   The EBML ID value (in hex) is a master\n"
+                             "  -M, --auto-masters     Use all of Matroska's master elements\n"
+                             "\n"
+                             "General options:\n"
+                             "\n"
+                             "  -h, --help             This help text\n"
+                             "  -V, --version          Print version information\n");
 }
 
 static std::string
@@ -92,13 +85,7 @@ parse_args(std::vector<std::string> &args) {
 
   std::vector<std::string>::iterator arg = args.begin();
   while (arg != args.end()) {
-    if ((*arg == "-h") || (*arg == "--help"))
-      show_help();
-
-    else if ((*arg == "-V") || (*arg == "--version"))
-      show_version();
-
-    else if ((*arg == "-s") || (*arg == "--start")) {
+    if ((*arg == "-s") || (*arg == "--start")) {
       ++arg;
       if ((args.end() == arg) || !mtx::string::parse_number(*arg, g_start) || (0 >= g_start))
         mxerror(Y("Missing/wrong arugment to --start\n"));
@@ -370,12 +357,16 @@ int
 main(int argc,
      char **argv) {
   mtx_common_init("ebml_validator", argv[0]);
+  setup_help();
 
   init_element_names();
   init_master_information();
 
-  std::vector<std::string> args = mtx::cli::args_in_utf8(argc, argv);
-  std::string file_name         = parse_args(args);
+  auto args = mtx::cli::args_in_utf8(argc, argv);
+  while (mtx::cli::handle_common_args(args, "-r"))
+    ;
+
+  auto file_name = parse_args(args);
 
   try {
     parse_file(file_name);

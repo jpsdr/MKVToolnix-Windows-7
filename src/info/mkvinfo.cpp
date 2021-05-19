@@ -21,7 +21,6 @@
 void
 setup(char const *argv0) {
   mtx_common_init("mkvinfo", argv0);
-  mtx::cli::g_version_info = get_version_info("mkvinfo", vif_full);
 }
 
 int

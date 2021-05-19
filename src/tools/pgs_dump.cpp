@@ -20,20 +20,13 @@
 #include "common/version.h"
 
 static void
-show_help() {
-  mxinfo("pgs_dump [options] input_file_name\n"
-         "\n"
-         "General options:\n"
-         "\n"
-         "  -h, --help             This help text\n"
-         "  -V, --version          Print version information\n");
-  mxexit();
-}
-
-static void
-show_version() {
-  mxinfo(get_version_info("pgs_dump") + "\n");
-  mxexit();
+setup_help() {
+  mtx::cli::g_usage_text = "pgs_dump [options] input_file_name\n"
+                           "\n"
+                           "General options:\n"
+                           "\n"
+                           "  -h, --help             This help text\n"
+                           "  -V, --version          Print version information\n";
 }
 
 static std::string
@@ -41,13 +34,7 @@ parse_args(std::vector<std::string> &args) {
   std::string file_name;
 
   for (auto & arg: args) {
-    if ((arg == "-h") || (arg == "--help"))
-      show_help();
-
-    else if ((arg == "-V") || (arg == "--version"))
-      show_version();
-
-    else if (!file_name.empty())
+    if (!file_name.empty())
       mxerror(Y("More than one source file was given.\n"));
 
     else
@@ -93,6 +80,7 @@ int
 main(int argc,
      char **argv) {
   mtx_common_init("pgs_dump", argv[0]);
+  setup_help();
 
   auto args = mtx::cli::args_in_utf8(argc, argv);
   while (mtx::cli::handle_common_args(args, "-r"))

@@ -15,29 +15,21 @@
 #include "common/hevc_es_parser.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
-#include "common/version.h"
 
 static bool s_is_framed{};
 static memory_cptr s_frame;
 static uint64_t s_frame_fill{};
 
 static void
-show_help() {
-  mxinfo("hevc_dump [options] input_file_name\n"
-         "\n"
-         "General options:\n"
-         "\n"
-         "  -f, --framed   Source is NALUs-with-size-fields as found in MP4 & Matroska\n"
-         "                 files instead of an ITU-T H.265 Annex B bitstream.\n"
-         "  -h, --help     This help text\n"
-         "  -V, --version  Print version information\n");
-  mxexit();
-}
-
-static void
-show_version() {
-  mxinfo(get_version_info("hevc_dump") + "\n");
-  mxexit();
+setup_help() {
+  mtx::cli::g_usage_text = "hevc_dump [options] input_file_name\n"
+    "\n"
+    "General options:\n"
+    "\n"
+    "  -f, --framed   Source is NALUs-with-size-fields as found in MP4 & Matroska\n"
+    "                 files instead of an ITU-T H.265 Annex B bitstream.\n"
+    "  -h, --help     This help text\n"
+    "  -V, --version  Print version information\n";
 }
 
 static std::string
@@ -45,13 +37,7 @@ parse_args(std::vector<std::string> &args) {
   std::string file_name;
 
   for (auto & arg: args) {
-    if ((arg == "-h") || (arg == "--help"))
-      show_help();
-
-    else if ((arg == "-V") || (arg == "--version"))
-      show_version();
-
-    else if ((arg == "-f") || (arg == "--framed"))
+    if ((arg == "-f") || (arg == "--framed"))
       s_is_framed = true;
 
     else if (!file_name.empty())
@@ -169,6 +155,7 @@ int
 main(int argc,
      char **argv) {
   mtx_common_init("hevc_dump", argv[0]);
+  setup_help();
 
   auto args = mtx::cli::args_in_utf8(argc, argv);
   while (mtx::cli::handle_common_args(args, "-r"))

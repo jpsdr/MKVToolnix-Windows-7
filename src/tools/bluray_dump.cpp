@@ -26,14 +26,13 @@ static void
 setup(char const *argv0) {
   mtx_common_init(s_program_name, argv0);
 
-  mtx::cli::g_version_info = get_version_info("bluray_dump");
-  mtx::cli::g_usage_text   = fmt::format("{0} [options] input_file_name\n"
-                                         "\n"
-                                         "General options:\n"
-                                         "\n"
-                                         "  -h, --help             This help text\n"
-                                         "  -V, --version          Print version information",
-                                         s_program_name);
+  mtx::cli::g_usage_text = fmt::format("{0} [options] input_file_name\n"
+                                       "\n"
+                                       "General options:\n"
+                                       "\n"
+                                       "  -h, --help             This help text\n"
+                                       "  -V, --version          Print version information",
+                                       s_program_name);
 }
 
 static std::string

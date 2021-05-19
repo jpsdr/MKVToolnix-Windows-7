@@ -160,7 +160,7 @@ args_in_utf8(int,
 }
 #endif // !defined(SYS_WINDOWS)
 
-std::string g_usage_text, g_version_info;
+std::string g_usage_text;
 
 /** Handle command line arguments common to all programs
 
@@ -280,7 +280,7 @@ handle_common_args(std::vector<std::string> &args,
   i = 0;
   while (args.size() > i) {
     if ((args[i] == "-V") || (args[i] == "--version")) {
-      mxinfo(fmt::format("{0}\n", g_version_info));
+      mxinfo(fmt::format("{0}\n", get_version_info(get_program_name(), vif_full)));
       mxexit();
 
     } else if ((args[i] == "-v") || (args[i] == "--verbose")) {
@@ -304,7 +304,11 @@ handle_common_args(std::vector<std::string> &args,
 
 void
 display_usage(int exit_code) {
-  mxinfo(fmt::format("{0}\n", g_usage_text));
+  if (!g_usage_text.empty()) {
+    mxinfo(g_usage_text);
+    if (g_usage_text.at(g_usage_text.size() - 1) != '\n')
+      mxinfo("\n");
+  }
   mxexit(exit_code);
 }
 

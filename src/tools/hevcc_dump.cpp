@@ -102,8 +102,7 @@ x(std::size_t width,
 
 static void
 setup() {
-  mtx::cli::g_version_info = get_version_info("hevcc_dump", vif_full);
-  mtx::cli::g_usage_text   =
+  mtx::cli::g_usage_text =
     "hevcc_dump [options] input_file_name position_in_file size\n"
     "\n"
     "General options:\n"

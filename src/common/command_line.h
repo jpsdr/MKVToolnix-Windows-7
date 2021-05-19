@@ -17,7 +17,7 @@
 
 namespace mtx::cli {
 
-extern std::string g_usage_text, g_version_info;
+extern std::string g_usage_text;
 extern bool g_gui_mode, g_abort_on_warnings;
 
 void display_usage(int exit_code = 0);

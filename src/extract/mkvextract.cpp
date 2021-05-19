@@ -117,8 +117,7 @@ setup(char **argv) {
 
   mtx::sys::set_process_priority(-1);
 
-  verbose                  = 0;
-  mtx::cli::g_version_info = get_version_info("mkvextract", vif_full);
+  verbose = 0;
 }
 
 int
