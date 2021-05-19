@@ -1970,6 +1970,9 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
       create_subtitles_packetizer_vobsub(dmx);
   }
 
+  if (packetizer_ok)
+    dmx.set_packetizer_block_addition_mappings();
+
   if (packetizer_ok && (-1 == m_main_dmx))
     m_main_dmx = i;
 }
@@ -2732,6 +2735,11 @@ qtmp4_demuxer_c::set_packetizer_colour_properties() {
 }
 
 void
+qtmp4_demuxer_c::set_packetizer_block_addition_mappings() {
+  m_reader.m_reader_packetizers[ptzr]->set_block_addition_mappings(m_block_addition_mappings);
+}
+
+void
 qtmp4_demuxer_c::handle_stsd_atom(uint64_t atom_size,
                                   int level) {
   if (is_audio()) {
@@ -3046,6 +3054,18 @@ qtmp4_demuxer_c::parse_audio_header_priv_atoms(mm_mem_io_c &mio,
 }
 
 void
+qtmp4_demuxer_c::add_data_as_block_addition(uint32_t atom_type,
+                                            memory_cptr const &data) {
+  block_addition_mapping_t mapping;
+
+  mapping.id_type       = atom_type;
+  mapping.id_value      = 1;
+  mapping.id_extra_data = data;
+
+  m_block_addition_mappings.emplace_back(mapping);
+}
+
+void
 qtmp4_demuxer_c::parse_video_header_priv_atoms(uint64_t atom_size,
                                                int level) {
   auto mem  = stsd->get_buffer() + stsd_non_priv_struct_size;
@@ -3092,6 +3112,9 @@ qtmp4_demuxer_c::parse_video_header_priv_atoms(uint64_t atom_size,
 
       } else if (atom.fourcc == "colr")
         handle_colr_atom(mio.read(atom.size - atom.hsize), level + 2);
+
+      else if (mtx::included_in(atom.fourcc, "dvcC", "dvvC", "hvcE"))
+        add_data_as_block_addition(atom.fourcc.value(), mio.read(atom.size - atom.hsize));
 
       mio.setFilePointer(atom.pos + atom.size);
     }

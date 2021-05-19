@@ -254,6 +254,8 @@ struct qtmp4_demuxer_c {
   int64_rational_c frame_rate;
   std::optional<int64_t> m_use_frame_rate_for_duration;
 
+  std::vector<block_addition_mapping_t> m_block_addition_mappings;
+
   esds_t esds;
   bool esds_parsed;
 
@@ -374,6 +376,8 @@ struct qtmp4_demuxer_c {
 
   void set_packetizer_display_dimensions();
   void set_packetizer_colour_properties();
+  void set_packetizer_block_addition_mappings();
+
 
   std::optional<int64_t> min_timestamp() const;
 
@@ -390,6 +394,7 @@ private:
   void calculate_timestamps_variable_sample_size();
 
   bool parse_esds_atom(mm_io_c &io, int level);
+  void add_data_as_block_addition(uint32_t atom_type, memory_cptr const &data);
 };
 using qtmp4_demuxer_cptr = std::shared_ptr<qtmp4_demuxer_c>;
 
