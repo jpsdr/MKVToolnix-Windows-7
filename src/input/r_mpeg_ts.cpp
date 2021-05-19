@@ -1137,6 +1137,7 @@ reader_c::read_headers_for_file(std::size_t file_num) {
 
       else if (f.m_pat_found && !f.all_pmts_found() && f.m_validate_pmt_crc) {
         f.m_validate_pmt_crc = false;
+        f.m_num_pmts_to_find = 0;
         f.m_pmt_pid_seen.clear();
 
       } else
