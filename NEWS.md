@@ -18,6 +18,11 @@
 * mkvinfo: fixed the position of frames in block groups containing "block
   duration" elements in summary mode (e.g. for subtitle tracks).
 
+## Build system changes
+
+* `configure` will now try to detect `libmagic` via `pkg-config` and fall back
+  to including & linking directly if it cannot be found via `pkg-config`.
+
 
 # Version 56.1.0 "My Friend" 2021-04-09
 
