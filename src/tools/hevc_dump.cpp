@@ -76,11 +76,25 @@ calc_frame_checksum(uint64_t skip_at_end) {
   return checksum;
 }
 
+static mm_file_io_cptr
+open_file(std::string const &file_name) {
+  try {
+    return std::make_shared<mm_file_io_c>(file_name);
+
+  } catch (mtx::mm_io::exception &) {
+    mxerror(Y("File not found\n"));
+  }
+
+  return {};
+}
+
 static void
-parse_file(const std::string &file_name) {
-  mm_file_io_c in{file_name};
-  auto size = static_cast<uint64_t>(in.get_size());
-  if (4 > size)
+parse_file(std::string const &file_name) {
+  auto in_ptr    = open_file(file_name);
+  auto &in       = *in_ptr;
+  auto file_size = static_cast<uint64_t>(in.get_size());
+
+  if (4 > file_size)
     return;
 
   auto marker               = static_cast<uint32_t>((1ull << 24) | in.read_uint24_be());
@@ -91,7 +105,7 @@ parse_file(const std::string &file_name) {
 
   while (true) {
     auto pos = in.getFilePointer();
-    if (pos >= size)
+    if (pos >= file_size)
       break;
 
     if (marker == mtx::hevc::NALU_START_CODE)
@@ -130,7 +144,8 @@ parse_file(const std::string &file_name) {
 
 static void
 parse_file_framed(std::string const &file_name) {
-  mm_file_io_c in{file_name};
+  auto in_ptr    = open_file(file_name);
+  auto &in       = *in_ptr;
   auto file_size = static_cast<uint64_t>(in.get_size());
 
   uint64_t pos{};
@@ -163,15 +178,10 @@ main(int argc,
 
   auto file_name = parse_args(args);
 
-  try {
-    if (s_is_framed)
-      parse_file_framed(file_name);
-    else
-      parse_file(file_name);
-
-  } catch (mtx::mm_io::exception &) {
-    mxerror(Y("File not found\n"));
-  }
+  if (s_is_framed)
+    parse_file_framed(file_name);
+  else
+    parse_file(file_name);
 
   mxexit();
 }
