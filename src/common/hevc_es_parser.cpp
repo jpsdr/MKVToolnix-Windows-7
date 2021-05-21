@@ -520,6 +520,8 @@ es_parser_c::handle_sei_nalu(memory_cptr const &nalu,
 void
 es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
                                   uint64_t nalu_pos) {
+  static debugging_option_c s_debug_discard_access_unit_delimiters{"hevc_discard_access_unit_delimiters"};
+
   if (1 > nalu->get_size())
     return;
 
@@ -557,6 +559,8 @@ es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
 
     case NALU_TYPE_ACCESS_UNIT:
       flush_incomplete_frame();
+      if (!s_debug_discard_access_unit_delimiters)
+        add_nalu_to_extra_data(nalu);
       break;
 
     case NALU_TYPE_FILLER_DATA:

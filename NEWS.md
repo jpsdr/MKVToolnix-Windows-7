@@ -11,6 +11,8 @@
 * mkvmerge: MP4 reader: added support for reading Dolby Vision from MP4 files
   (FourCCs `dvh1` and `dvhe`; configuration records `dvcC`, `dvvC` and `hvcE`
   will be converted into block addition mappings). Implements #2784.
+* mkvmerge, mkvextract: HEVC/H.265: access unit delimiter NALUs will no longer
+  be discarded, neither during muxing nor during extraction.
 
 ## Bug fixes
 
