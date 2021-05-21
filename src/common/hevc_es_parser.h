@@ -48,6 +48,12 @@ struct frame_t {
 
 class es_parser_c {
 protected:
+  enum class extra_data_position_e {
+    pre,
+    initial,
+    dont_store,
+  };
+
   int m_nalu_size_length{4};
 
   bool m_keep_ar_info{true};
@@ -66,10 +72,7 @@ protected:
   int64_t m_max_timestamp{};
   std::map<int64_t, int64_t> m_duration_frequency;
 
-  std::vector<memory_cptr> m_vps_list,
-                           m_sps_list,
-                           m_pps_list,
-                           m_extra_data;
+  std::vector<memory_cptr> m_vps_list, m_sps_list, m_pps_list, m_extra_data_pre, m_extra_data_initial, m_pending_frame_data;
   std::vector<vps_info_t> m_vps_info_list;
   std::vector<sps_info_t> m_sps_info_list;
   std::vector<pps_info_t> m_pps_info_list;
@@ -80,7 +83,6 @@ protected:
   uint64_t m_stream_position{}, m_parsed_position{};
 
   frame_t m_incomplete_frame;
-  bool m_have_incomplete_frame{};
   std::deque<std::pair<memory_cptr, uint64_t>> m_unhandled_nalus;
 
   bool m_simple_picture_order{}, m_discard_actual_frames{}, m_normalize_parameter_sets{};
@@ -209,20 +211,23 @@ public:
 protected:
   bool parse_slice(memory_cptr const &nalu, slice_info_t &si);
   void handle_nalu_internal(memory_cptr const &nalu, uint64_t nalu_pos);
-  void handle_vps_nalu(memory_cptr const &nalu);
-  void handle_sps_nalu(memory_cptr const &nalu);
-  void handle_pps_nalu(memory_cptr const &nalu);
-  void handle_sei_nalu(memory_cptr const &nalu);
+  void handle_vps_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);
+  void handle_sps_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);
+  void handle_pps_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);
+  void handle_sei_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);
   void handle_slice_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
   void cleanup();
   void flush_incomplete_frame();
   void flush_unhandled_nalus();
-  memory_cptr create_nalu_with_size(const memory_cptr &src, bool add_extra_data = false);
   std::vector<int64_t> calculate_provided_timestamps_to_use();
   void calculate_frame_order();
   void calculate_frame_timestamps();
   void calculate_frame_references_and_update_stats();
   void add_parameter_sets_to_extra_data();
+  void add_nalu_to_extra_data(memory_cptr const &nalu, extra_data_position_e position = extra_data_position_e::pre);
+  void add_nalu_to_pending_frame_data(memory_cptr const &nalu);
+  void build_frame_data();
+
   static void init_nalu_names();
 };
 

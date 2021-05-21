@@ -20,6 +20,13 @@
   in the same directory. Fixes #3110.
 * mkvinfo: fixed the position of frames in block groups containing "block
   duration" elements in summary mode (e.g. for subtitle tracks).
+* mkvmerge, mkvextract: HEVC/H.265 parser: fixed issues with ordering &
+  duplication of certain NALUs (parameter set & prefix SEI NALUs). Part of
+  fixing & implementing of #2784, #2818, #3093 and #3113.
+* mkvmerge: HEVC/H.265 parser: several NALU types, notably the Dolby
+  Vision-specific NALUs ("unspecified 62" and "unspecified 63") and suffix SEI
+  NALUs, are now stored with the frame they belong to instead of with the next
+  frame. Part of fixing & implementing #2784, #2818, #3093 and #3113.
 
 ## Build system changes
 

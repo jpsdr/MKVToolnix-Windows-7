@@ -16,7 +16,7 @@
 #include <cmath>
 
 #include "common/bit_reader.h"
-#include "common/checksums/base.h"
+#include "common/checksums/base_fwd.h"
 #include "common/endian.h"
 #include "common/hacks.h"
 #include "common/math.h"
@@ -211,9 +211,9 @@ es_parser_c::flush() {
   }
 
   m_unparsed_buffer.reset();
-  if (m_have_incomplete_frame) {
-    m_frames.push_back(m_incomplete_frame);
-    m_have_incomplete_frame = false;
+  if (!m_pending_frame_data.empty()) {
+    build_frame_data();
+    m_frames.emplace_back(m_incomplete_frame);
   }
 
   cleanup();
@@ -222,8 +222,11 @@ es_parser_c::flush() {
 void
 es_parser_c::clear() {
   m_unparsed_buffer.reset();
-  m_have_incomplete_frame = false;
-  m_parsed_position       = 0;
+  m_extra_data_pre.clear();
+  m_extra_data_initial.clear();
+  m_pending_frame_data.clear();
+
+  m_parsed_position = 0;
 }
 
 void
@@ -234,31 +237,45 @@ es_parser_c::add_timestamp(int64_t timestamp) {
 
 void
 es_parser_c::add_parameter_sets_to_extra_data() {
-  std::vector<memory_cptr> old_extra_data;
+  std::unordered_map<uint32_t, bool> is_in_extra_data;
 
-  for (auto const &data : m_extra_data)
-    if (old_extra_data.empty() || (*data != *old_extra_data.back()))
-      old_extra_data.emplace_back(data);
+  for (auto const &data : m_extra_data_pre) {
+    auto nalu_type = (data->get_buffer()[0] >> 1) & 0x3f;
+    if (mtx::included_in(nalu_type, NALU_TYPE_VIDEO_PARAM, NALU_TYPE_SEQ_PARAM, NALU_TYPE_PIC_PARAM))
+      return;
 
-  m_extra_data.clear();
-  m_extra_data.reserve(m_vps_list.size() + m_sps_list.size() + m_pps_list.size() + old_extra_data.size());
+    is_in_extra_data[mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *data)] = true;
+  }
 
-  auto create_nalu_and_add = [this](memory_cptr const &nalu) { m_extra_data.push_back(create_nalu_with_size(nalu)); };
+  auto old_extra_data = std::move(m_extra_data_pre);
 
-  std::for_each(m_vps_list.begin(),     m_vps_list.end(),     create_nalu_and_add);
-  std::for_each(m_sps_list.begin(),     m_sps_list.end(),     create_nalu_and_add);
-  std::for_each(m_pps_list.begin(),     m_pps_list.end(),     create_nalu_and_add);
-  std::copy(    old_extra_data.begin(), old_extra_data.end(), std::back_inserter(m_extra_data));
+  m_extra_data_pre.clear();
+  m_extra_data_pre.reserve(m_vps_list.size() + m_sps_list.size() + m_pps_list.size() + old_extra_data.size() + m_extra_data_initial.size());
+
+  auto inserter = std::back_inserter(m_extra_data_pre);
+
+  std::copy(m_vps_list.begin(), m_vps_list.end(), inserter);
+  std::copy(m_sps_list.begin(), m_sps_list.end(), inserter);
+  std::copy(m_pps_list.begin(), m_pps_list.end(), inserter);
+
+  for (auto const &data : m_extra_data_initial)
+    if (!is_in_extra_data[mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *data)])
+      inserter = data;
+
+  std::copy(old_extra_data.begin(), old_extra_data.end(), inserter);
+
+  m_extra_data_initial.clear();
 }
 
 void
 es_parser_c::flush_incomplete_frame() {
-  if (!m_have_incomplete_frame || !m_hevcc_ready)
+  if (m_pending_frame_data.empty() || !m_hevcc_ready)
     return;
+
+  build_frame_data();
 
   m_frames.push_back(m_incomplete_frame);
   m_incomplete_frame.clear();
-  m_have_incomplete_frame = false;
 }
 
 void
@@ -267,6 +284,24 @@ es_parser_c::flush_unhandled_nalus() {
     handle_nalu(nalu_with_pos.first, nalu_with_pos.second);
 
   m_unhandled_nalus.clear();
+}
+
+void
+es_parser_c::add_nalu_to_extra_data(memory_cptr const &nalu,
+                                    extra_data_position_e position) {
+  if (position == extra_data_position_e::dont_store)
+    return;
+
+  nalu->take_ownership();
+
+  auto &container = position == extra_data_position_e::pre  ? m_extra_data_pre : m_extra_data_initial;
+  container.push_back(nalu);
+}
+
+void
+es_parser_c::add_nalu_to_pending_frame_data(memory_cptr const &nalu) {
+  nalu->take_ownership();
+  m_pending_frame_data.emplace_back(nalu);
 }
 
 void
@@ -281,16 +316,11 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
   if (!parse_slice(nalu, si))   // no conversion to RBSP; the bit reader takes care of it
     return;
 
-  if (m_have_incomplete_frame && si.first_slice_segment_in_pic_flag)
+  if (!m_pending_frame_data.empty() && si.first_slice_segment_in_pic_flag)
     flush_incomplete_frame();
 
-  if (m_have_incomplete_frame) {
-    memory_c &mem = *(m_incomplete_frame.m_data.get());
-    int offset    = mem.get_size();
-    mem.resize(offset + m_nalu_size_length + nalu->get_size());
-    mtx::mpeg::write_nalu_size(mem.get_buffer() + offset, nalu->get_size(), m_nalu_size_length);
-    memcpy(mem.get_buffer() + offset + m_nalu_size_length, nalu->get_buffer(), nalu->get_size());
-
+  if (!m_pending_frame_data.empty()) {
+    add_nalu_to_pending_frame_data(nalu);
     return;
   }
 
@@ -312,20 +342,17 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     m_b_frames_since_keyframe = false;
     cleanup();
 
-    if (m_normalize_parameter_sets)
-      add_parameter_sets_to_extra_data();
-
   } else
     m_b_frames_since_keyframe |= is_b_slice;
 
-  m_incomplete_frame.m_data = create_nalu_with_size(nalu, true);
-  m_have_incomplete_frame   = true;
+  add_nalu_to_pending_frame_data(nalu);
 
   ++m_frame_number;
 }
 
 void
-es_parser_c::handle_vps_nalu(memory_cptr const &nalu) {
+es_parser_c::handle_vps_nalu(memory_cptr const &nalu,
+                             extra_data_position_e extra_data_position) {
   vps_info_t vps_info;
 
   if (!parse_vps(mpeg::nalu_to_rbsp(nalu), vps_info))
@@ -372,12 +399,12 @@ es_parser_c::handle_vps_nalu(memory_cptr const &nalu) {
     m_codec_private.vps_data_id                = vps_info.id;
   }
 
-  if (!m_normalize_parameter_sets)
-    m_extra_data.push_back(create_nalu_with_size(nalu));
+  add_nalu_to_extra_data(nalu, extra_data_position);
 }
 
 void
-es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
+es_parser_c::handle_sps_nalu(memory_cptr const &nalu,
+                             extra_data_position_e extra_data_position) {
   sps_info_t sps_info;
 
   auto parsed_nalu = parse_sps(mpeg::nalu_to_rbsp(nalu), sps_info, m_vps_info_list, m_keep_ar_info);
@@ -415,8 +442,7 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
   } else
     use_sps_info = false;
 
-  if (!m_normalize_parameter_sets)
-    m_extra_data.push_back(create_nalu_with_size(parsed_nalu));
+  add_nalu_to_extra_data(parsed_nalu, extra_data_position);
 
   // Update codec private if needed
   if (-1 == m_codec_private.sps_data_id)
@@ -453,7 +479,8 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
 }
 
 void
-es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
+es_parser_c::handle_pps_nalu(memory_cptr const &nalu,
+                             extra_data_position_e extra_data_position) {
   pps_info_t pps_info;
 
   if (!parse_pps(mpeg::nalu_to_rbsp(nalu), pps_info))
@@ -480,14 +507,14 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
     m_hevcc_changed    = true;
   }
 
-  if (!m_normalize_parameter_sets)
-    m_extra_data.push_back(create_nalu_with_size(nalu));
+  add_nalu_to_extra_data(nalu, extra_data_position);
 }
 
 void
-es_parser_c::handle_sei_nalu(memory_cptr const &nalu) {
+es_parser_c::handle_sei_nalu(memory_cptr const &nalu,
+                             extra_data_position_e extra_data_position) {
   if (parse_sei(mpeg::nalu_to_rbsp(nalu), m_user_data))
-    m_extra_data.push_back(create_nalu_with_size(nalu));
+    add_nalu_to_extra_data(nalu, extra_data_position);
 }
 
 void
@@ -525,6 +552,9 @@ es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
 
     case NALU_TYPE_END_OF_SEQ:
     case NALU_TYPE_END_OF_STREAM:
+      flush_incomplete_frame();
+      break;
+
     case NALU_TYPE_ACCESS_UNIT:
       flush_incomplete_frame();
       break;
@@ -556,13 +586,28 @@ es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
       handle_slice_nalu(nalu, nalu_pos);
       break;
 
+    case NALU_TYPE_SUFFIX_SEI:
+    case NALU_TYPE_RSV_NVCL45:
+    case NALU_TYPE_RSV_NVCL46:
+    case NALU_TYPE_RSV_NVCL47:
+    case NALU_TYPE_UNSPEC56:
+    case NALU_TYPE_UNSPEC57:
+    case NALU_TYPE_UNSPEC58:
+    case NALU_TYPE_UNSPEC59:
+    case NALU_TYPE_UNSPEC60:
+    case NALU_TYPE_UNSPEC61:
+    case NALU_TYPE_UNSPEC62:
+    case NALU_TYPE_UNSPEC63:
+      add_nalu_to_pending_frame_data(nalu);
+      break;
+
     default:
       flush_incomplete_frame();
       if (!m_hevcc_ready && !m_vps_info_list.empty() && !m_sps_info_list.empty() && !m_pps_info_list.empty()) {
         m_hevcc_ready = true;
         flush_unhandled_nalus();
       }
-      m_extra_data.push_back(create_nalu_with_size(nalu));
+      add_nalu_to_extra_data(nalu);
 
       break;
   }
@@ -663,6 +708,35 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
     return true;
   } catch (...) {
     return false;
+  }
+}
+
+void
+es_parser_c::build_frame_data() {
+  if (m_incomplete_frame.m_keyframe && m_normalize_parameter_sets)
+    add_parameter_sets_to_extra_data();
+
+  auto all_nalus = std::move(m_extra_data_pre);
+  all_nalus.reserve(all_nalus.size() + m_pending_frame_data.size());
+
+  std::copy(m_pending_frame_data.begin(), m_pending_frame_data.end(), std::back_inserter(all_nalus));
+
+  m_extra_data_pre.clear();
+  m_pending_frame_data.clear();
+
+  auto final_size = 0;
+
+  for (auto const &nalu : all_nalus)
+    final_size += m_nalu_size_length + nalu->get_size();
+
+  m_incomplete_frame.m_data = memory_c::alloc(final_size);
+  auto dest                 = m_incomplete_frame.m_data->get_buffer();
+
+  for (auto const &nalu : all_nalus) {
+    mtx::mpeg::write_nalu_size(dest, nalu->get_size(), m_nalu_size_length);
+    std::memcpy(dest + m_nalu_size_length, nalu->get_buffer(), nalu->get_size());
+
+    dest += m_nalu_size_length + nalu->get_size();
   }
 }
 
@@ -930,17 +1004,6 @@ es_parser_c::cleanup() {
 }
 
 memory_cptr
-es_parser_c::create_nalu_with_size(const memory_cptr &src,
-                                   bool add_extra_data) {
-  auto nalu = mtx::mpeg::create_nalu_with_size(src, m_nalu_size_length, add_extra_data ? m_extra_data : std::vector<memory_cptr>{});
-
-  if (add_extra_data)
-    m_extra_data.clear();
-
-  return nalu;
-}
-
-memory_cptr
 es_parser_c::get_hevcc()
   const {
   return hevcc_c{static_cast<unsigned int>(m_nalu_size_length), m_vps_list, m_sps_list, m_pps_list, m_user_data, m_codec_private}.pack();
@@ -951,16 +1014,16 @@ es_parser_c::set_hevcc(memory_cptr const &hevcc_bytes) {
   auto hevcc = hevcc_c::unpack(hevcc_bytes);
 
   for (auto const &nalu : hevcc.m_vps_list)
-    handle_vps_nalu(nalu);
+    handle_vps_nalu(nalu, extra_data_position_e::dont_store);
 
   for (auto const &nalu : hevcc.m_sps_list)
-    handle_sps_nalu(nalu);
+    handle_sps_nalu(nalu, extra_data_position_e::dont_store);
 
   for (auto const &nalu : hevcc.m_pps_list)
-    handle_pps_nalu(nalu);
+    handle_pps_nalu(nalu, extra_data_position_e::dont_store);
 
   for (auto const &nalu : hevcc.m_sei_list)
-    handle_sei_nalu(nalu);
+    handle_sei_nalu(nalu, extra_data_position_e::initial);
 }
 
 bool
