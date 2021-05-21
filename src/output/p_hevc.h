@@ -36,6 +36,8 @@ public:
     return YT("HEVC/H.265");
   }
 
+  virtual void set_source_timestamp_resolution(int64_t resolution);
+
 protected:
   virtual void connect(generic_packetizer_c *src, int64_t append_timestamp_offset = -1) override;
 
@@ -43,4 +45,6 @@ protected:
 
   virtual void flush_impl() override;
   virtual void flush_frames();
+
+  virtual void setup_default_duration();
 };

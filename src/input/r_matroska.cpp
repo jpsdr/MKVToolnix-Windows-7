@@ -1912,7 +1912,10 @@ kax_reader_c::create_hevc_video_packetizer(kax_track_t *t,
     return;
   }
 
-  set_track_packetizer(t, new hevc_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
+  auto ptzr = new hevc_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height);
+  ptzr->set_source_timestamp_resolution(m_tc_scale);
+
+  set_track_packetizer(t, ptzr);
   show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 

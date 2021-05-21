@@ -12,7 +12,7 @@
 
 #include "common/common_pch.h"
 
-#include <cmath>
+#include <cstdlib>
 
 #include "common/codec.h"
 #include "common/endian.h"
@@ -26,7 +26,7 @@
 class hevc_video_packetizer_private_c {
 public:
   int nalu_size_len{};
-  int64_t max_nalu_size{};
+  int64_t max_nalu_size{}, source_timestamp_resolution{1};
   std::shared_ptr<mtx::hevc::es_parser_c> parser{new mtx::hevc::es_parser_c};
 };
 
@@ -50,11 +50,37 @@ hevc_video_packetizer_c(generic_reader_c *p_reader,
 
   p.parser->normalize_parameter_sets(!mtx::hacks::is_engaged(mtx::hacks::DONT_NORMALIZE_PARAMETER_SETS));
   p.parser->set_hevcc(m_hcodec_private);
-  p.parser->set_container_default_duration(m_htrack_default_duration);
+}
+
+void
+hevc_video_packetizer_c::set_source_timestamp_resolution(int64_t resolution) {
+  p_func()->source_timestamp_resolution = resolution;
+}
+
+void
+hevc_video_packetizer_c::setup_default_duration() {
+  auto &p                      = *p_func();
+
+  auto source_default_duration = m_htrack_default_duration > 0 ? m_htrack_default_duration
+                               : m_fps                     > 0 ? static_cast<int64_t>(1'000'000'000 / m_fps)
+                               :                                 0;
+  auto stream_default_duration = p.parser->has_stream_default_duration() ? p.parser->get_stream_default_duration() : 0;
+  auto diff_source_stream      = std::abs(stream_default_duration - source_default_duration);
+  auto output_default_duration = stream_default_duration && !source_default_duration                             ? stream_default_duration
+                               : stream_default_duration && (diff_source_stream < p.source_timestamp_resolution) ? stream_default_duration
+                               :                                                                                   source_default_duration;
+
+  if (source_default_duration > 0)
+    p.parser->set_container_default_duration(source_default_duration);
+
+  if (output_default_duration > 0)
+    set_track_default_duration(output_default_duration);
 }
 
 void
 hevc_video_packetizer_c::set_headers() {
+  setup_default_duration();
+
   if (m_ti.m_private_data && m_ti.m_private_data->get_size())
     extract_aspect_ratio();
 
@@ -136,9 +162,13 @@ hevc_video_packetizer_c::flush_frames() {
   auto &p = *p_func();
 
   while (p.parser->frame_available()) {
-    auto frame = p.parser->get_frame();
-    add_packet(new packet_t(frame.m_data, frame.m_start,
-                            frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration,
-                            frame.m_keyframe            ? -1                          : frame.m_start + frame.m_ref1));
+    auto frame                    = p.parser->get_frame();
+    auto duration                 = frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration;
+    auto diff_to_default_duration = std::abs(duration - m_htrack_default_duration);
+
+    if (diff_to_default_duration < p.source_timestamp_resolution)
+      duration = m_htrack_default_duration;
+
+    add_packet(new packet_t(frame.m_data, frame.m_start, duration, frame.m_keyframe ? -1 : frame.m_start + frame.m_ref1));
   }
 }

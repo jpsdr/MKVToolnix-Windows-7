@@ -29,6 +29,12 @@
   Vision-specific NALUs ("unspecified 62" and "unspecified 63") and suffix SEI
   NALUs, are now stored with the frame they belong to instead of with the next
   frame. Part of fixing & implementing #2784, #2818, #3093 and #3113.
+* mkvmerge: HEVC/H.265 packetizer: fixed setting the track's default duration
+  when reading HEVC/H.265 from Matroska files that don't have a default
+  duration set.
+* mkvmerge: HEVC/H.265 packetizer: fixed the calculation of the duration of
+  frames so that `SimpleBlock` elements can be used again instead of
+  `BlockGroups` with `BlockDuration` elements. Fixes #3114.
 
 ## Build system changes
 
