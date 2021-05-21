@@ -3059,7 +3059,6 @@ qtmp4_demuxer_c::add_data_as_block_addition(uint32_t atom_type,
   block_addition_mapping_t mapping;
 
   mapping.id_type       = atom_type;
-  mapping.id_value      = 1;
   mapping.id_extra_data = data;
 
   m_block_addition_mappings.emplace_back(mapping);
