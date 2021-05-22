@@ -12,6 +12,11 @@ if [[ -z "$1" ]] || [[ ! -f "$1" ]]; then
   exit 1
 fi
 
+if [[ ! -f assets/StoreLogo.png ]]; then
+  echo "Error: the assets don't seem to have been built."
+  exit 1
+fi
+
 makeappx="$(find '/c/Program Files (x86)/Windows Kits/10/bin/' -type f -iname makeappx.exe | grep -i /x64/ | sort | tail -n1)"
 makepri="$(find '/c/Program Files (x86)/Windows Kits/10/bin/' -type f -iname makepri.exe | grep -i /x64/ | sort | tail -n1)"
 signtool="$(find '/c/Program Files (x86)/Windows Kits/10/bin/' -type f -iname signtool.exe | grep -i /x64/ | sort | tail -n1)"
