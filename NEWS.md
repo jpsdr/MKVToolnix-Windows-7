@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* build system: fixed filtering out optimization options when compiling the
+  file `iso639_language_list.cpp` (before only numeric optimization levels
+  were filtered out and only if it wasn't the last option in the list of
+  flags). See #3105 for context.
+
+
 # Version 57.0.0 "Till The End" 2021-05-22
 
 ## New features and enhancements

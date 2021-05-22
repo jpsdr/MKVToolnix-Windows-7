@@ -355,7 +355,7 @@ cxx_compiler = lambda do |*args|
     # Even -O1 causes compilation time & memory usage to skyrocket,
     # possibly exponentially, with the number of entries to
     # emplace_back() into the vector.
-    flags.gsub!(%r{ -O\d+ }, ' -O0 ')
+    flags.gsub!(%r{(^| )-O[^ ]*}, ' -O0')
   end
 
   args = [
