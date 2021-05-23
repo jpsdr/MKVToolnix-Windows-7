@@ -303,8 +303,6 @@ protected:
 
   virtual void enableDisableAllTracks(bool enable);
 
-  virtual void ensureOneDefaultFlagOnly(Track *thisOneHasIt);
-
   virtual QString currentState();
 
   virtual QString mediaInfoLocation();

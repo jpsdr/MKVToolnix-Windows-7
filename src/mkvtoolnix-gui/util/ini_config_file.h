@@ -22,6 +22,7 @@ public:
   virtual void beginGroup(QString const &group) override;
   virtual void endGroup() override;
 
+  virtual void remove(QString const &key) override;
   virtual void setValue(QString const &key, QVariant const &value) override;
   virtual QVariant value(QString const &key, QVariant const &defaultValue = QVariant{}) const override;
 

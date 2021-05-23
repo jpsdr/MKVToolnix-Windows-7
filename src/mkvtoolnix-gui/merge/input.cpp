@@ -247,8 +247,8 @@ Tab::setupInputControls() {
   for (auto idx = 0u, end = stereo_mode_c::max_index(); idx <= end; ++idx)
     p.ui->stereoscopy->addItem(QString{}, idx + 1);
 
-  for (auto idx = 0; idx < 3; ++idx)
-    p.ui->defaultTrackFlag->addItem(QString{}, idx);
+  p.ui->defaultTrackFlag->addItem(QString{}, true);
+  p.ui->defaultTrackFlag->addItem(QString{}, false);
 
   // Originally the "forced display" flag's options where ordered "off,
   // on"; now they're ordered "yes, no" for consistency with other
@@ -462,10 +462,9 @@ Tab::setupInputToolTips() {
   Util::setToolTip(p.ui->trackName, QY("A name for this track that players can display helping the user choose the right track to play, e.g. \"director's comments\"."));
   Util::setToolTip(p.ui->trackLanguage, QY("The language for this track that players can use for automatic track selection and display for the user."));
   Util::setToolTip(p.ui->defaultTrackFlag,
-                   Q("%1 %2 %3")
-                   .arg(QY("Make this track the default track for its type (audio, video, subtitles)."))
-                   .arg(QY("Players should prefer tracks with the default track flag set."))
-                   .arg(QY("If set to 'determine automatically' then mkvmerge will choose one track of each type to have this flag set based on the information in the source files and the order of the tracks.")));
+                   Q("%1 %2")
+                   .arg(QY("Make this track eligible to be played by default."))
+                   .arg(QY("Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language.")));
   Util::setToolTip(p.ui->forcedTrackFlag,
                    Q("%1 %2")
                    .arg(QY("Mark this track as \"forced display\"."))
@@ -737,7 +736,7 @@ Tab::setInputControlValues(Track *track) {
   }
 
   Util::setComboBoxIndexIf(p.ui->muxThis,              [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_muxThis);                                });
-  Util::setComboBoxIndexIf(p.ui->defaultTrackFlag,     [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_defaultTrackFlag);                       });
+  Util::setComboBoxIndexIf(p.ui->defaultTrackFlag,     [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_defaultTrackFlag);                       });
   Util::setComboBoxIndexIf(p.ui->forcedTrackFlag,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_forcedTrackFlag);                        });
   Util::setComboBoxIndexIf(p.ui->hearingImpairedFlag,  [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_hearingImpairedFlag);                    });
   Util::setComboBoxIndexIf(p.ui->visualImpairedFlag,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_visualImpairedFlag);                     });
@@ -880,8 +879,6 @@ Tab::onTrackItemChanged(QStandardItem *item) {
     Util::setComboBoxIndexIf(p.ui->muxThis, [newMuxThis](QString const &, QVariant const &data) { return data.isValid() && (data.toBool() == newMuxThis); });
 
   setOutputFileNameMaybe();
-
-  p.tracksModel->updateEffectiveDefaultTrackFlags();
 }
 
 void
@@ -907,8 +904,6 @@ Tab::onMuxThisChanged(int selected) {
 
   setOutputFileNameMaybe();
 
-  p.tracksModel->updateEffectiveDefaultTrackFlags();
-
   auto tracks = selectedTracks();
   if (1 == tracks.count())
     Util::setComboBoxIndexIf(p.ui->muxThis, [&tracks](QString const &, QVariant const &eltData) { return eltData.isValid() && (eltData.toBool() == tracks[0]->m_muxThis); });
@@ -927,10 +922,8 @@ Tab::toggleMuxThisForSelectedTracks() {
       allEnabled = false;
   }, false, p.ui->muxThis);
 
-  if (!tracksSelected) {
-    p.tracksModel->updateEffectiveDefaultTrackFlags();
+  if (!tracksSelected)
     return;
-  }
 
   auto newEnabled = !allEnabled;
   QList<Track *> appendedTracks;
@@ -947,8 +940,6 @@ Tab::toggleMuxThisForSelectedTracks() {
   }
 
   Util::setComboBoxIndexIf(p.ui->muxThis, [newEnabled](auto const &, auto const &data) { return data.isValid() && (data.toBool() == newEnabled); });
-
-  p.tracksModel->updateEffectiveDefaultTrackFlags();
 }
 
 void
@@ -964,15 +955,9 @@ Tab::onDefaultTrackFlagChanged(int newValue) {
   if (!data.isValid())
     return;
 
-  newValue = data.toInt();
+  newValue = data.toBool();
 
-  withSelectedTracks([this, newValue](auto &track) {
-    track.m_defaultTrackFlag = newValue;
-    if (1 == newValue)
-      this->ensureOneDefaultFlagOnly(&track);
-  }, true);
-
-  p.tracksModel->updateEffectiveDefaultTrackFlags();
+  withSelectedTracks([newValue](auto &track) { track.m_defaultTrackFlag = newValue; }, true);
 }
 
 void
@@ -1313,23 +1298,13 @@ void
 Tab::setDefaultsFromSettingsForAddedFiles(QVector<SourceFilePtr> const &files) {
   auto &cfg = Util::Settings::get();
 
-  auto defaultFlagSet = QHash<TrackType, bool>{};
-  for (auto const &track : p_func()->config.m_tracks)
-    if (track->m_defaultTrackFlag == 1)
-      defaultFlagSet[track->m_type] = true;
-
   for (auto const &file : files)
     for (auto const &track : file->m_tracks) {
       if (cfg.m_disableCompressionForAllTrackTypes)
         track->m_compression = TrackCompression::None;
 
       if (cfg.m_disableDefaultTrackForSubtitles && track->isSubtitles())
-        track->m_defaultTrackFlag = 2;
-
-      else if (track->m_defaultTrackFlagWasSet && !defaultFlagSet[track->m_type]) {
-        track->m_defaultTrackFlag     = 1;
-        defaultFlagSet[track->m_type] = true;
-      }
+        track->m_defaultTrackFlag = false;
     }
 }
 
@@ -1509,7 +1484,7 @@ Tab::retranslateInputUI() {
   for (auto &comboBox : std::vector<QComboBox *>{p.ui->muxThis, p.ui->forcedTrackFlag, p.ui->hearingImpairedFlag, p.ui->visualImpairedFlag, p.ui->textDescriptionsFlag, p.ui->originalFlag, p.ui->commentaryFlag})
     Util::setComboBoxTexts(comboBox, QStringList{} << QY("Yes") << QY("No"));
 
-  Util::setComboBoxTexts(p.ui->defaultTrackFlag, QStringList{} << QY("Determine automatically") << QY("Yes")                  << QY("No"));
+  Util::setComboBoxTexts(p.ui->defaultTrackFlag, QStringList{}                                  << QY("Yes")                  << QY("No"));
   Util::setComboBoxTexts(p.ui->compression,      QStringList{} << QY("Determine automatically") << QY("No extra compression") << Q("zlib"));
   Util::setComboBoxTexts(p.ui->cues,             QStringList{} << QY("Determine automatically") << QY("Only for I frames")    << QY("For all frames") << QY("No cues"));
   Util::setComboBoxTexts(p.ui->aacIsSBR,         QStringList{} << QY("Determine automatically") << QY("Yes")                  << QY("No"));
@@ -1811,22 +1786,6 @@ Tab::enableDisableAllTracks(bool enable) {
 
   auto base = p.ui->muxThis->itemData(0).isValid() ? 0 : 1;
   p.ui->muxThis->setCurrentIndex(base + (enable ? 0 : 1));
-}
-
-void
-Tab::ensureOneDefaultFlagOnly(Track *thisOneHasIt) {
-  auto &p        = *p_func();
-  auto selection = selectedTracks();
-  for (auto const &track : p.config.m_tracks)
-    if (   (track->m_defaultTrackFlag == 1)
-        && (track->m_type             == thisOneHasIt->m_type)
-        && (track                     != thisOneHasIt)) {
-      track->m_defaultTrackFlag = 0;
-      if ((selection.count() == 1) && (selection[0] == track))
-        p.ui->defaultTrackFlag->setCurrentIndex(0);
-    }
-
-  p.tracksModel->updateEffectiveDefaultTrackFlags();
 }
 
 void

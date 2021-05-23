@@ -45,6 +45,11 @@ IniConfigFile::endGroup() {
 }
 
 void
+IniConfigFile::remove(QString const &key) {
+  m_settings->remove(key);
+}
+
+void
 IniConfigFile::setValue(QString const &key,
                         QVariant const &value) {
   m_settings->setValue(key, value);

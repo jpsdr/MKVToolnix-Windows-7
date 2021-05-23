@@ -22,7 +22,7 @@ protected:
   QString m_fileName;
 
 public:
-  static unsigned int const MtxCfgVersion = 2;
+  static unsigned int const MtxCfgVersion = 3;
 
 public:
   ConfigFile(QString const &fileName);
@@ -37,6 +37,7 @@ public:
   virtual void beginGroup(QString const &group) = 0;
   virtual void endGroup() = 0;
 
+  virtual void remove(QString const &key) = 0;
   virtual void setValue(QString const &key, QVariant const &value) = 0;
   virtual QVariant value(QString const &key, QVariant const &defaultValue = QVariant{}) const = 0;
 

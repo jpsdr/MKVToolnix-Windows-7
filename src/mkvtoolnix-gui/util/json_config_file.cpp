@@ -137,6 +137,11 @@ JsonConfigFile::endGroup() {
 }
 
 void
+JsonConfigFile::remove(QString const &key) {
+  m_currentGroup.top()->m_data.remove(key);
+}
+
+void
 JsonConfigFile::setValue(QString const &key,
                          QVariant const &value) {
   m_currentGroup.top()->m_data.insert(key, value);

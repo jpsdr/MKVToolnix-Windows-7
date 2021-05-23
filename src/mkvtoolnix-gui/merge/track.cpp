@@ -143,8 +143,8 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   m_originalFlagWasSet         = m_originalFlag;
   m_commentaryFlag             = m_properties.value(Q(mtx::id::flag_commentary)).toBool();
   m_commentaryFlagWasSet       = m_commentaryFlag;
-  m_defaultTrackFlagWasSet     = m_properties.value("default_track").toBool();
-  m_defaultTrackFlagWasPresent = m_properties.contains("default_track");
+  m_defaultTrackFlag           = m_properties.contains("default_track") ? m_properties.value("default_track").toBool() : true;
+  m_defaultTrackFlagWasSet     = m_defaultTrackFlag;
   m_name                       = m_properties.value("track_name").toString();
   m_nameWasPresent             = !m_name.isEmpty();
   m_cropping                   = m_properties.value("cropping").toString();
@@ -234,7 +234,6 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("muxThis",                       m_muxThis);
   settings.setValue("setAspectRatio",                m_setAspectRatio);
   settings.setValue("defaultTrackFlagWasSet",        m_defaultTrackFlagWasSet);
-  settings.setValue("defaultTrackFlagWasPresent",    m_defaultTrackFlagWasPresent);
   settings.setValue("forcedTrackFlagWasSet",         m_forcedTrackFlagWasSet);
   settings.setValue("aacSbrWasDetected",             m_aacSbrWasDetected);
   settings.setValue("nameWasPresent",                m_nameWasPresent);
@@ -289,7 +288,6 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_muxThis                       = l.settings.value("muxThis").toBool();
   m_setAspectRatio                = l.settings.value("setAspectRatio").toBool();
   m_defaultTrackFlagWasSet        = l.settings.value("defaultTrackFlagWasSet").toBool();
-  m_defaultTrackFlagWasPresent    = l.settings.value("defaultTrackFlagWasPresent").toBool() || m_defaultTrackFlagWasSet;
   m_forcedTrackFlagWasSet         = l.settings.value("forcedTrackFlagWasSet").toBool();
   m_aacSbrWasDetected             = l.settings.value("aacSbrWasDetected").toBool();
   m_name                          = l.settings.value("name").toString();
@@ -308,7 +306,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_cropping                      = l.settings.value("cropping").toString();
   m_characterSet                  = l.settings.value("characterSet").toString();
   m_additionalOptions             = l.settings.value("additionalOptions").toString();
-  m_defaultTrackFlag              = l.settings.value("defaultTrackFlag").toInt();
+  m_defaultTrackFlag              = l.settings.value("defaultTrackFlag").toBool();
   m_forcedTrackFlag               = l.settings.value("forcedTrackFlag").toInt();
   m_stereoscopy                   = l.settings.value("stereoscopy").toInt();
   m_cues                          = l.settings.value("cues").toInt();
@@ -411,8 +409,8 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     if (!m_name.isEmpty() || m_nameWasPresent)
       opt.options << Q("--track-name") << Q("%1:%2").arg(sid).arg(m_name);
 
-    if (0 != m_defaultTrackFlag)
-      opt.options << Q("--default-track") << Q("%1:%2").arg(sid).arg(m_defaultTrackFlag == 1 ? Q("yes") : Q("no"));
+    if (m_defaultTrackFlagWasSet != m_defaultTrackFlag)
+      opt.options << Q("--default-track") << Q("%1:%2").arg(sid).arg(m_defaultTrackFlag ? Q("yes") : Q("no"));
 
     if (m_forcedTrackFlagWasSet != !!m_forcedTrackFlag)
       opt.options << Q("--forced-track") << Q("%1:%2").arg(sid).arg(m_forcedTrackFlag == 1 ? Q("yes") : Q("no"));

@@ -115,6 +115,7 @@ protected:
 
   virtual void fixOlderVersions(Util::ConfigFile &settings);
   virtual void fixOldVersion1(Util::ConfigFile &settings);
+  virtual void fixOldVersion2(Util::ConfigFile &settings);
 
   virtual void setSettingsVersion(Util::ConfigFile &settings, unsigned int version) const;
 

@@ -313,6 +313,9 @@ MuxConfig::fixOlderVersions(Util::ConfigFile &settings) {
 
   if (version < 2)
     fixOldVersion1(settings);
+
+  if (version < 3)
+    fixOldVersion2(settings);
 }
 
 void
@@ -329,6 +332,56 @@ MuxConfig::fixOldVersion1(Util::ConfigFile &settings) {
   settings.endGroup();
 
   setSettingsVersion(settings, 2);
+}
+
+void
+MuxConfig::fixOldVersion2(Util::ConfigFile &settings) {
+  // Starting with MKVToolNix v58/settings file version 3, the
+  // "default track" track flags only have two options ("yes"/"no")
+  // instead of three ("determine automatically"/"yes"/"no").
+  //
+  // Additionally the "defaultTrackFlagWasSet" and
+  // "defaultTrackFlagWasPresent" settings have been merged into
+  // "defaultTrackFlagWasSet".
+
+  settings.beginGroup("input");
+  settings.beginGroup("files");
+
+  int numberOfFiles = std::max(settings.value("numberOfEntries").toInt(), 0);
+
+  for (int fileIdx = 0; fileIdx < numberOfFiles; ++fileIdx) {
+    settings.beginGroup(QString::number(fileIdx));
+    settings.beginGroup("tracks");
+
+    int numberOfTracks = std::max(settings.value("numberOfEntries").toInt(), 0);
+    for (int trackIdx = 0; trackIdx < numberOfTracks; ++trackIdx) {
+      settings.beginGroup(QString::number(trackIdx));
+
+      auto defaultTrackFlag = settings.value("defaultTrackFlag", 0).toInt();
+      settings.setValue("defaultTrackFlag", defaultTrackFlag < 2 ? true : false);
+
+      auto wasSet     = settings.value("defaultTrackFlagWasSet",     false).toBool();
+      auto wasPresent = settings.value("defaultTrackFlagWasPresent", false).toBool();
+
+      settings.setValue("defaultTrackFlagWasSet", wasPresent ? wasSet : true);
+      settings.remove("defaultTrackFlagWasPresent");
+
+      settings.endGroup();
+    }
+
+    settings.endGroup();
+    settings.endGroup();
+  }
+
+
+  auto nameTemplate = settings.value("chapterGenerationNameTemplate").toString();
+  if (nameTemplate.isEmpty())
+    settings.setValue("chapterGenerationNameTemplate", "Chapter <NUM:2>");
+
+  settings.endGroup();
+  settings.endGroup();
+
+  setSettingsVersion(settings, 3);
 }
 
 void

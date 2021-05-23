@@ -50,7 +50,7 @@ TrackModel::retranslateUi() {
     { QY("Language"),                Q("language")         },
     { QY("Name"),                    Q("name")             },
     { QY("ID"),                      Q("id")               },
-    { QY("Default track in output"), Q("defaultTrackFlag") },
+    { QY("Default track"),           Q("defaultTrackFlag") },
     { QY("Forced display"),          Q("forcedTrackFlag")  },
     { QY("Character set"),           Q("characterSet")     },
     { QY("Properties"),              Q("properties")       },
@@ -112,8 +112,8 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[LanguageColumn]        ->setText(track->isAppended() ? QString{} : Q(track->m_language.format()));
   items[NameColumn]            ->setText(track->isAppended() ? QString{} : track->m_name);
   items[IDColumn]              ->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
-  items[DefaultTrackFlagColumn]->setText(!track->m_effectiveDefaultTrackFlag ? Q("") : *track->m_effectiveDefaultTrackFlag ? QY("Yes") : QY("No"));
-  items[ForcedTrackFlagColumn] ->setText(!track->isRegular()                 ? Q("") : track->m_forcedTrackFlag            ? QY("Yes") : QY("No"));
+  items[DefaultTrackFlagColumn]->setText(track->m_defaultTrackFlag ? QY("Yes") : QY("No"));
+  items[ForcedTrackFlagColumn] ->setText(!track->isRegular() ? Q("") : track->m_forcedTrackFlag ? QY("Yes") : QY("No"));
   items[CharacterSetColumn]    ->setText(!track->m_file->isTextSubtitleContainer() ? QString{} : track->m_characterSet);
   items[PropertiesColumn]      ->setText(summarizeProperties(*track));
   items[SourceFileColumn]      ->setText(fileInfo.fileName());
@@ -485,8 +485,6 @@ TrackModel::updateTrackLists() {
     log_it(fmt::format("### AFTER drag & drop ###\n"));
     MuxConfig::debugDumpSpecificTrackList(*m_tracks);
   }
-
-  updateEffectiveDefaultTrackFlags();
 }
 
 bool
@@ -636,74 +634,6 @@ TrackModel::moveTracksUpOrDown(QList<Track *> tracks,
   }
 
   updateTrackLists();
-}
-
-void
-TrackModel::updateEffectiveDefaultTrackFlags() {
-  if (!m_tracks)
-    return;
-
-  auto isSet                = QHash<TrackType, bool>{};
-  auto regularEnabledTracks = QList<Track *>{};
-
-  std::copy_if(m_tracks->begin(), m_tracks->end(), std::back_inserter(regularEnabledTracks),
-               [](Track const *track) { return track->isRegular() && track->m_muxThis; });
-
-  // Step one: reset all flags to undefined. Do this for all tracks,
-  // not just for regular & enabled ones.
-  for (auto &track : *m_tracks)
-    if (track->m_muxThis)
-      track->m_effectiveDefaultTrackFlag = std::nullopt;
-    else
-      track->m_effectiveDefaultTrackFlag = false;
-
-  // Step two: check for explicitly set flags (set to yes/no). These
-  // take precedence over everything else.
-  for (auto &track : regularEnabledTracks) {
-    if (isSet[track->m_type] || (2 == track->m_defaultTrackFlag))
-      track->m_effectiveDefaultTrackFlag = false;
-
-    else if (1 == track->m_defaultTrackFlag) {
-      isSet[track->m_type]               = true;
-      track->m_effectiveDefaultTrackFlag = true;
-    }
-  }
-
-  // Step three: for tracks without explicit settings (determine
-  // automatically) see if there are tracks which have their default
-  // track flag set their source container. If it was set to "no" keep
-  // it that way. For "yes" make sure not to set it to "yes" for
-  // others, too.
-  for (auto &track : regularEnabledTracks) {
-    if (track->m_effectiveDefaultTrackFlag || !track->m_defaultTrackFlagWasPresent)
-      continue;
-
-    if (!track->m_defaultTrackFlagWasSet)
-      track->m_effectiveDefaultTrackFlag = false;
-
-    else if (!isSet[track->m_type]) {
-      isSet[track->m_type]               = true;
-      track->m_effectiveDefaultTrackFlag = true;
-    }
-  }
-
-  // Step four: for track types for which no default track has been
-  // set yet the first track of its type will have it set. This has
-  // the lowest precedence.
-  for (auto &track : regularEnabledTracks) {
-    if (track->m_effectiveDefaultTrackFlag)
-      continue;
-
-    if (!isSet[track->m_type]) {
-      isSet[track->m_type]               = true;
-      track->m_effectiveDefaultTrackFlag = true;
-
-    } else
-      track->m_effectiveDefaultTrackFlag = false;
-  }
-
-  for (auto &track : *m_tracks)
-    trackUpdated(track);
 }
 
 QString
