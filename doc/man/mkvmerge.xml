@@ -1388,10 +1388,13 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      <listitem>
       <para>
        Sets the &amp;default track&amp; flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) if the
-       optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  If the user does not
-       explicitly select a track, the player should prefer the track that has his &amp;default track&amp; flag set. Only one track of each
-       kind (audio, video, subtitles, buttons) can have his &amp;default track&amp; flag set.  If the user wants no track to have the
-       default track flag set then he has to set <parameter>bool</parameter> to <constant>0</constant> for all tracks.
+       optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present. The flag will be set if the
+       source container doesn't provide that information and the user doesn't specify it via this option.
+      </para>
+
+      <para>
+       If the user does not explicitly select a track during playback, the player should select one of the tracks that has its &amp;default
+       track&amp; flag set, taking user preferences such as their preferred language into account.
       </para>
 
       <para>
