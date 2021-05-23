@@ -56,9 +56,6 @@ xtr_rmff_c::create_file(xtr_base_c *master,
 
 void
 xtr_rmff_c::handle_frame(xtr_frame_t &f) {
-  if (f.references_valid)
-    f.keyframe = (0 == f.bref);
-
   rmff_frame_t *rmff_frame = rmff_allocate_frame(f.frame->get_size(), f.frame->get_buffer());
   if (!rmff_frame)
     mxerror(Y("Memory for a RealAudio/RealVideo frame could not be allocated.\n"));

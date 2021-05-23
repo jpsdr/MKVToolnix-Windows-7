@@ -85,9 +85,6 @@ xtr_avi_c::create_file(xtr_base_c *master,
 
 void
 xtr_avi_c::handle_frame(xtr_frame_t &f) {
-  if (f.references_valid)
-    f.keyframe = (0 == f.bref);
-
   AVI_write_frame(m_avi, (char *)f.frame->get_buffer(), f.frame->get_size(), f.keyframe);
 
   if (((double)f.duration / 1000000.0 - (1000.0 / m_fps)) >= 1.5) {

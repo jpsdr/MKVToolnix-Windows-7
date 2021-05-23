@@ -299,7 +299,7 @@ handle_blockgroup(KaxBlockGroup &blockgroup,
 
     auto &data = block->GetBuffer(i);
     auto frame = memory_c::borrow(data.Buffer(), data.Size());
-    auto f     = xtr_frame_t{frame, kadditions, this_timestamp, this_duration, bref, fref, false, false, true, discard_padding};
+    auto f     = xtr_frame_t{frame, kadditions, this_timestamp, this_duration, bref, fref, (!bref && !fref), false, discard_padding};
     extractor.decode_and_handle_frame(f);
 
     max_timestamp = std::max(max_timestamp, this_timestamp);
@@ -340,7 +340,7 @@ handle_simpleblock(KaxSimpleBlock &simpleblock,
 
     auto &data = simpleblock.GetBuffer(i);
     auto frame = memory_c::borrow(data.Buffer(), data.Size());
-    auto f     = xtr_frame_t{frame, nullptr, this_timestamp, this_duration, -1, -1, simpleblock.IsKeyframe(), simpleblock.IsDiscardable(), false, timestamp_c::ns(0)};
+    auto f     = xtr_frame_t{frame, nullptr, this_timestamp, this_duration, 0, 0, simpleblock.IsKeyframe(), simpleblock.IsDiscardable(), timestamp_c::ns(0)};
     extractor.decode_and_handle_frame(f);
 
     max_timestamp = std::max(max_timestamp, this_timestamp);
