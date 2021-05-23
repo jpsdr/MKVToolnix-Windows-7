@@ -63,9 +63,9 @@ generic_video_packetizer_c::set_headers() {
 // Semantics:
 // bref == -1: I frame, no references
 // bref == -2: P or B frame, use timestamp of last I / P frame as the bref
-// bref > 0:   P or B frame, use this bref as the backward reference
+// bref >= 0:  P or B frame, use this bref as the backward reference
 //             (absolute reference, not relative!)
-// fref == 0:  P frame, no forward reference
+// fref == -1: I or P frame, no forward reference
 // fref > 0:   B frame with given forward reference (absolute reference,
 //             not relative!)
 int
