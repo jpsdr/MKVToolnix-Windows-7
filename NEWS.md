@@ -30,6 +30,8 @@
   file `iso639_language_list.cpp` (before only numeric optimization levels
   were filtered out and only if it wasn't the last option in the list of
   flags). See #3105 for context.
+* mkvmerge, mkvextract: fixed key frame handling for `BlockGroup` elements
+  with a forward reference but no backward references. Patches by Tom Yan.
 
 
 # Version 57.0.0 "Till The End" 2021-05-22
