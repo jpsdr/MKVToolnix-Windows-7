@@ -1,5 +1,29 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge, MKVToolNix GUI's multiplexer: the handling of the "default track"
+  flag has been changed to match the recent changes to the Matroska
+  specifications. The new semantics are that if it is set, it is supposed to
+  signal to the player that this track is eligible for being played by
+  default, potentially taking other factors such as user preferences regarding
+  languages into account.
+
+  This implies that more than one track of each type can have this flag
+  set. For example, a Blu-ray disc with three audio tracks might have
+  the main audio in both English and Japanese, whereas the third audio
+  track contains the director's comments. In such a case the first two
+  tracks should have the "default track" flag set, the third one
+  shouldn't.
+
+  Earlier `mkvmerge` was enforcing that only one track of each type could have
+  the flag set. This restriction has been removed, both in `mkvmerge` and in
+  the GUI's multiplexer.
+
+  `mkvpropedit` and the GUI's header editor are unaffected as they've always
+  allowed to set the flag on as many tracks as the user wanted.
+
+
 ## Bug fixes
 
 * build system: fixed filtering out optimization options when compiling the
