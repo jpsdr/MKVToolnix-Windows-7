@@ -228,6 +228,8 @@ protected:
   void add_nalu_to_pending_frame_data(memory_cptr const &nalu);
   void build_frame_data();
 
+  void maybe_dump_raw_data(unsigned char const *buffer, std::size_t size);
+
   static void init_nalu_names();
 };
 

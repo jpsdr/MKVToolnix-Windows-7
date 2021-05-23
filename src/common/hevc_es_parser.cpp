@@ -21,6 +21,7 @@
 #include "common/hacks.h"
 #include "common/math.h"
 #include "common/mm_io.h"
+#include "common/mm_file_io.h"
 #include "common/mpeg.h"
 #include "common/hevc.h"
 #include "common/hevc_es_parser.h"
@@ -113,8 +114,25 @@ es_parser_c::normalize_parameter_sets(bool normalize) {
 }
 
 void
+es_parser_c::maybe_dump_raw_data(unsigned char const *buffer,
+                                 std::size_t size) {
+  static debugging_option_c s_dump_raw_data{"hevc_es_parser_dump_raw_data"};
+
+  if (!s_dump_raw_data)
+    return;
+
+  auto file_name = fmt::format("hevc_raw_data-{0:p}", static_cast<void *>(this));
+  mm_file_io_c out{file_name, std::filesystem::is_regular_file(file_name) ? MODE_WRITE : MODE_CREATE};
+
+  out.setFilePointer(0, libebml::seek_end);
+  out.write(buffer, size);
+}
+
+void
 es_parser_c::add_bytes(unsigned char *buffer,
                        size_t size) {
+  maybe_dump_raw_data(buffer, size);
+
   mtx::mem::slice_cursor_c cursor;
   int marker_size              = 0;
   int previous_marker_size     = 0;
@@ -180,6 +198,8 @@ void
 es_parser_c::add_bytes_framed(unsigned char *buffer,
                               size_t buffer_size,
                               size_t nalu_size_length) {
+  maybe_dump_raw_data(buffer, buffer_size);
+
   auto pos = buffer;
   auto end = buffer + buffer_size;
 
