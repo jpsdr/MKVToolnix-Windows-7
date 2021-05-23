@@ -1421,6 +1421,7 @@ generic_packetizer_c::add_packet(packet_cptr pack) {
 
   pack->source = this;
 
+  // Although this is no longer triggered by "broken" B frames, it does not seem sensical at all
   if ((0 > pack->bref) && (0 <= pack->fref))
     std::swap(pack->bref, pack->fref);
 
