@@ -108,7 +108,7 @@ show_nalu(uint32_t type,
                      mtx::hevc::es_parser_c::get_nalu_type_name(type),
                      size,
                      s_portable_format ? ""s : marker_size ? fmt::format(" marker size {0}", *marker_size) : ""s,
-                     s_portable_format ? ""s : fmt::format("at {0} ", position),
+                     s_portable_format ? ""s : fmt::format(" at {0}", position),
                      checksum));
 }
 
