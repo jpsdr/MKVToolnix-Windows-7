@@ -83,7 +83,6 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_htrack_default_duration{-1}
   , m_htrack_default_duration_indicates_fields{}
   , m_default_duration_forced{true}
-  , m_default_track_warning_printed{}
   , m_huid{}
   , m_htrack_max_add_block_ids{-1}
   , m_haudio_sampling_freq{-1.0}
@@ -490,6 +489,13 @@ generic_packetizer_c::get_track_default_duration()
 }
 
 void
+generic_packetizer_c::set_track_default_flag(bool default_track) {
+  m_ti.m_default_track = default_track;
+  if (m_track_entry)
+    GetChild<KaxTrackFlagDefault>(m_track_entry).SetValue(default_track ? 1 : 0);
+}
+
+void
 generic_packetizer_c::set_track_forced_flag(bool forced_track) {
   m_ti.m_forced_track = forced_track;
   if (m_track_entry)
@@ -664,22 +670,6 @@ generic_packetizer_c::set_video_aspect_ratio(double aspect_ratio,
   m_ti.m_display_dimensions_source = source;
   m_ti.m_display_dimensions_given  = false;
   m_ti.m_aspect_ratio_given        = true;
-}
-
-void
-generic_packetizer_c::set_as_default_track(int type,
-                                           int priority) {
-  if (g_default_tracks_priority[type] < priority) {
-    g_default_tracks_priority[type] = priority;
-    g_default_tracks[type]          = m_hserialno;
-
-  } else if (   (DEFAULT_TRACK_PRIORITY_CMDLINE == priority)
-             && (g_default_tracks[type] != m_hserialno)
-             && !m_default_track_warning_printed) {
-    mxwarn(fmt::format(Y("Another default track for {0} tracks has already been set. The \"default track\" flag for track {1} of '{2}' will not be set.\n"),
-                       DEFTRACK_TYPE_AUDIO == type ? "audio" : DEFTRACK_TYPE_VIDEO == type ? "video" : "subtitle", m_ti.m_id, m_ti.m_fname));
-    m_default_track_warning_printed = true;
-  }
 }
 
 void
@@ -1068,13 +1058,6 @@ generic_packetizer_c::set_headers() {
 
   idx = track_type_to_deftrack_type(m_htrack_type);
 
-  if (!m_ti.m_default_track.has_value())
-    set_as_default_track(idx, DEFAULT_TRACK_PRIORITY_FROM_TYPE);
-  else if (m_ti.m_default_track.value())
-    set_as_default_track(idx, DEFAULT_TRACK_PRIORITY_CMDLINE);
-  else if (g_default_tracks[idx] == m_hserialno)
-    g_default_tracks[idx] = 0;
-
   auto iso639_alpha_3_code = m_ti.m_language.has_valid_iso639_2_code() ? m_ti.m_language.get_iso639_alpha_3_code() : g_default_language.has_valid_iso639_2_code() ? g_default_language.get_iso639_alpha_3_code() : "und"s;
   auto language            = m_ti.m_language.is_valid()                ? m_ti.m_language                           : g_default_language;
   GetChild<KaxTrackLanguage>(m_track_entry).SetValue(iso639_alpha_3_code);
@@ -1083,6 +1066,9 @@ generic_packetizer_c::set_headers() {
 
   if (!m_ti.m_track_name.empty())
     GetChild<KaxTrackName>(m_track_entry).SetValueUTF8(m_ti.m_track_name);
+
+  if (m_ti.m_default_track.has_value())
+    GetChild<KaxTrackFlagDefault>(m_track_entry).SetValue(m_ti.m_default_track.value() ? 1 : 0);
 
   if (m_ti.m_forced_track.has_value())
     GetChild<KaxTrackFlagForced>(m_track_entry).SetValue(m_ti.m_forced_track.value() ? 1 : 0);
@@ -1372,8 +1358,6 @@ generic_packetizer_c::apply_block_addition_mappings() {
 
 void
 generic_packetizer_c::fix_headers() {
-  GetChild<KaxTrackFlagDefault>(m_track_entry).SetValue(g_default_tracks[track_type_to_deftrack_type(m_htrack_type)] == m_hserialno ? 1 : 0);
-
   m_track_entry->SetGlobalTimecodeScale((int64_t)g_timestamp_scale);
 }
 

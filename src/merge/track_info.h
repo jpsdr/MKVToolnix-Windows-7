@@ -47,13 +47,6 @@ struct timestamp_sync_t {
   int64_rational_c factor{1, 1};
 };
 
-enum default_track_priority_e {
-  DEFAULT_TRACK_PRIOIRTY_NONE        =   0,
-  DEFAULT_TRACK_PRIORITY_FROM_TYPE   =  10,
-  DEFAULT_TRACK_PRIORITY_FROM_SOURCE =  50,
-  DEFAULT_TRACK_PRIORITY_CMDLINE     = 255
-};
-
 struct display_properties_t {
   double aspect_ratio;
   bool ar_factor;

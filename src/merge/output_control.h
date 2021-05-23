@@ -171,7 +171,6 @@ extern int64_t g_file_sizes;
 
 extern int64_t g_max_ns_per_cluster;
 extern int g_max_blocks_per_cluster;
-extern int g_default_tracks[3], g_default_tracks_priority[3];
 
 extern int g_split_max_num_files;
 extern std::unordered_map<unsigned int, int> g_splitting_by_chapter_numbers;

@@ -123,8 +123,6 @@ double g_timestamp_scale                                      = TIMESTAMP_SCALE;
 timestamp_scale_mode_e g_timestamp_scale_mode                 = timestamp_scale_mode_e{TIMESTAMP_SCALE_MODE_NORMAL};
 
 double g_video_fps                                            = -1.0;
-int g_default_tracks[3]                                       = { 0, 0, 0, };
-int g_default_tracks_priority[3]                              = { 0, 0, 0, };
 
 bool g_identifying                                            = false;
 identification_output_format_e g_identification_output_format = identification_output_format_e::text;

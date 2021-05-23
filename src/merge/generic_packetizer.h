@@ -74,7 +74,6 @@ protected:
   int64_t m_htrack_default_duration;
   bool m_htrack_default_duration_indicates_fields;
   bool m_default_duration_forced;
-  bool m_default_track_warning_printed;
   uint64_t m_huid;
   int m_htrack_max_add_block_ids;
   timestamp_c m_seek_pre_roll, m_codec_delay;
@@ -207,6 +206,7 @@ public:
   virtual void set_track_default_duration(int64_t default_duration, bool force = false);
   virtual void set_track_max_additionals(int max_add_block_ids);
   virtual int64_t get_track_default_duration() const;
+  virtual void set_track_default_flag(bool default_track);
   virtual void set_track_forced_flag(bool forced_track);
   virtual void set_track_enabled_flag(bool enabled_track);
   virtual void set_track_seek_pre_roll(timestamp_c const &seek_pre_roll);
@@ -260,8 +260,6 @@ public:
   virtual void set_video_stereo_mode_impl(libebml::EbmlMaster &video, stereo_mode_c::mode stereo_mode);
 
   virtual void set_block_addition_mappings(std::vector<block_addition_mapping_t> const &mappings);
-
-  virtual void set_as_default_track(int type, int priority);
 
   virtual void set_tag_track_uid();
 
