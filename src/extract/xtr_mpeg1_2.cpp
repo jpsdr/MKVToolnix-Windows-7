@@ -39,9 +39,6 @@ void
 xtr_mpeg1_2_video_c::handle_frame(xtr_frame_t &f) {
   binary *buf = (binary *)f.frame->get_buffer();
 
-  if (f.references_valid)
-    f.keyframe = (0 == f.bref);
-
   if (f.keyframe && m_seq_hdr) {
     bool seq_hdr_found = false;
     size_t size        = f.frame->get_size();
