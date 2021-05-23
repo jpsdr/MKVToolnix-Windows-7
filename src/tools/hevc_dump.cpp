@@ -16,7 +16,7 @@
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 
-static bool s_is_framed{};
+static bool s_is_framed{}, s_portable_format{};
 static memory_cptr s_frame;
 static uint64_t s_frame_fill{};
 
@@ -26,10 +26,16 @@ setup_help() {
     "\n"
     "General options:\n"
     "\n"
-    "  -f, --framed   Source is NALUs-with-size-fields as found in MP4 & Matroska\n"
-    "                 files instead of an ITU-T H.265 Annex B bitstream.\n"
-    "  -h, --help     This help text\n"
-    "  -V, --version  Print version information\n";
+    "  -f, --framed           Source is ISO/IEC 14496-15 bitstream (NALUs prefixed\n"
+    "                         with size field) instead of an ITU-T H.265 Annex B\n"
+    "                         bitstream.\n"
+    "  -p, --portable-format  Output a format that's comparable with e.g. 'diff'\n"
+    "                         between the ISO/IEC 14496-15 bitstream and ITU-T H.265\n"
+    "                         Annex B bitsream variants by not outputting the NALU's\n"
+    "                         position (both modes) nor the marker size (Annex B\n"
+    "                         mode).\n"
+    "  -h, --help             This help text\n"
+    "  -V, --version          Print version information\n";
 }
 
 static std::string
@@ -39,6 +45,9 @@ parse_args(std::vector<std::string> &args) {
   for (auto & arg: args) {
     if ((arg == "-f") || (arg == "--framed"))
       s_is_framed = true;
+
+    else if ((arg == "-p") || (arg == "--portable-format"))
+      s_portable_format = true;
 
     else if (!file_name.empty())
       mxerror(Y("More than one source file was given.\n"));
@@ -89,6 +98,21 @@ open_file(std::string const &file_name) {
 }
 
 static void
+show_nalu(uint32_t type,
+          uint64_t size,
+          uint64_t position,
+          std::string const &checksum,
+          std::optional<uint64_t> marker_size = std::nullopt) {
+  mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2}{3}{4} checksum 0x{5}\n",
+                     type,
+                     mtx::hevc::es_parser_c::get_nalu_type_name(type),
+                     size,
+                     s_portable_format ? ""s : marker_size ? fmt::format(" marker size {0}", *marker_size) : ""s,
+                     s_portable_format ? ""s : fmt::format("at {0} ", position),
+                     checksum));
+}
+
+static void
 parse_file(std::string const &file_name) {
   auto in_ptr    = open_file(file_name);
   auto &in       = *in_ptr;
@@ -126,8 +150,7 @@ parse_file(std::string const &file_name) {
     pos -= marker_size;
 
     if (-1 != previous_pos)
-      mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2} marker size {3} at {4} checksum 0x{5}\n",
-                         previous_type, mtx::hevc::es_parser_c::get_nalu_type_name(previous_type), pos - previous_pos - previous_marker_size, previous_marker_size, previous_pos, calc_frame_checksum(marker_size)));
+      show_nalu( previous_type, pos - previous_pos - previous_marker_size, previous_pos, calc_frame_checksum(marker_size), previous_marker_size);
     else
       s_frame_fill = 0;
 
@@ -160,7 +183,7 @@ parse_file_framed(std::string const &file_name) {
     in.setFilePointer(pos + 4);
     auto frame = in.read(nalu_size);
 
-    mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2} at {3} checksum 0x{4}\n", nalu_type, mtx::hevc::es_parser_c::get_nalu_type_name(nalu_type), nalu_size, pos, mtx::checksum::calculate_as_hex_string(mtx::checksum::algorithm_e::md5, *frame)));
+    show_nalu(nalu_type, nalu_size, pos, mtx::checksum::calculate_as_hex_string(mtx::checksum::algorithm_e::md5, *frame));
 
     pos += nalu_size + 4;
   }
