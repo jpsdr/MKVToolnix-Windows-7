@@ -41,7 +41,7 @@ info_cli_parser_c::init_parser() {
   add_option("s|summary",       std::bind(&info_cli_parser_c::set_summary,             this), YT("Only show summaries of the contents, not each element."));
   add_option("t|track-info",    std::bind(&info_cli_parser_c::set_track_info,          this), YT("Show statistics for each track in verbose mode."));
   add_option("x|hexdump",       std::bind(&info_cli_parser_c::set_hexdump,             this), YT("Show the first 16 bytes of each frame as a hex dump."));
-  add_option("X|full-hexdump",  std::bind(&info_cli_parser_c::set_full_hexdump,        this), YT("Show all bytes of each frame as a hex dump."));
+  add_option("X|full-hexdump",  std::bind(&info_cli_parser_c::set_full_hexdump,        this), YT("Show all bytes of each frame and other binary elements as a hex dump."));
   add_option("z|size",          std::bind(&info_cli_parser_c::set_size,                this), YT("Show the size of each element including its header."));
 
   add_common_options();

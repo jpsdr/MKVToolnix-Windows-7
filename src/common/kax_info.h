@@ -81,7 +81,7 @@ public:
   std::string create_hexdump(unsigned char const *buf, int size);
   std::string create_codec_dependent_private_info(libmatroska::KaxCodecPrivate &c_priv, char track_type, std::string const &codec_id);
   std::string create_text_representation(libebml::EbmlElement &e);
-  std::string format_binary(libebml::EbmlBinary &bin, std::size_t max_len = 16);
+  std::string format_binary(libebml::EbmlBinary &bin);
   std::string format_binary_as_hex(libebml::EbmlElement &e);
   std::string format_element_size(libebml::EbmlElement &e);
   std::string format_element_value(libebml::EbmlElement &e);

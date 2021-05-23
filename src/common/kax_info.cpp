@@ -457,16 +457,16 @@ kax_info_c::read_master(EbmlMaster *m,
 }
 
 std::string
-kax_info_c::format_binary(EbmlBinary &bin,
-                          std::size_t max_len) {
-  auto len     = std::min(max_len, static_cast<std::size_t>(bin.GetSize()));
+kax_info_c::format_binary(EbmlBinary &bin) {
+  auto &p      = *p_func();
+  auto len     = std::min<std::size_t>(p.m_hexdump_max_size, bin.GetSize());
   auto const b = bin.GetBuffer();
   auto result  = fmt::format(Y("length {0}, data: {1}"), bin.GetSize(), mtx::string::to_hex(b, len));
 
   if (len < bin.GetSize())
     result += u8"…";
 
-  if (p_func()->m_calc_checksums)
+  if (p.m_calc_checksums)
     result += fmt::format(Y(" (adler: 0x{0:08x})"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, bin.GetBuffer(), bin.GetSize()));
 
   mtx::string::strip(result);
