@@ -150,7 +150,7 @@ parse_file(std::string const &file_name) {
     pos -= marker_size;
 
     if (-1 != previous_pos)
-      show_nalu( previous_type, pos - previous_pos - previous_marker_size, previous_pos, calc_frame_checksum(marker_size), previous_marker_size);
+      show_nalu(previous_type, pos - previous_pos - previous_marker_size, previous_pos, calc_frame_checksum(marker_size), previous_marker_size);
     else
       s_frame_fill = 0;
 
@@ -163,6 +163,9 @@ parse_file(std::string const &file_name) {
     for (auto idx = 0; idx < 4; ++idx)
       add_frame_byte(next_bytes >> ((3 - idx) * 8));
   }
+
+  if (-1 != previous_pos)
+    show_nalu(previous_type, in.getFilePointer() - previous_pos - previous_marker_size, previous_pos, calc_frame_checksum(0), previous_marker_size);
 }
 
 static void
