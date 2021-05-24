@@ -20,6 +20,7 @@
 class hevc_es_reader_c: public generic_reader_c {
 private:
   int m_width{}, m_height{};
+  int64_t m_default_duration{};
 
   memory_cptr m_buffer{memory_c::alloc(1024 * 1024)};
 

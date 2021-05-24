@@ -49,6 +49,9 @@ hevc_es_reader_c::probe_file() {
     m_width  = parser.get_width();
     m_height = parser.get_height();
 
+    if (parser.has_stream_default_duration())
+      m_default_duration = parser.get_stream_default_duration();
+
     if ((0 >= m_width) || (0 >= m_height))
       return false;
 
@@ -92,6 +95,7 @@ hevc_es_reader_c::identify() {
   auto info = mtx::id::info_c{};
   info.add(mtx::id::packetizer,       mtx::id::mpegh_p2_es_video);
   info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", m_width, m_height));
+  info.add(mtx::id::default_duration, m_default_duration);
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_MPEGH_P2, "HEVC"), info.get());

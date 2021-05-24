@@ -23,6 +23,7 @@ protected:
   static debugging_option_c ms_debug;
 
   int m_width{}, m_height{};
+  int64_t m_default_duration{};
 
   memory_cptr m_buffer{memory_c::alloc(1024 * 1024)};
 
