@@ -113,7 +113,7 @@ check_qt5() {
 
   dnl compile test program
   AC_LANG_PUSH(C++)
-  AC_CACHE_VAL(am_cv_qt_compilation, [
+  AC_CACHE_VAL(am_cv_qt5_compilation, [
     run_qt_test=1
     while true; do
       ac_save_CXXFLAGS="$CXXFLAGS"
@@ -136,12 +136,12 @@ int ai = 0;
 char **ac = 0;
 Config app(ai,ac);
 return 0;
-        ], [ am_cv_qt_compilation=1 ], [ am_cv_qt_compilation=0 ])
+        ], [ am_cv_qt5_compilation=1 ], [ am_cv_qt5_compilation=0 ])
 
       CXXFLAGS="$ac_save_CXXFLAGS"
       LIBS="$ac_save_LIBS"
 
-      if test x"$am_cv_qt_compilation" = x1; then
+      if test x"$am_cv_qt5_compilation" = x1; then
         break
 
       elif test x"$run_qt_test" = "x1"; then
@@ -158,7 +158,7 @@ return 0;
 
   rm -f src/mkvtoolnix-gui/static_plugins.cpp
 
-  if ! test x"$am_cv_qt_compilation" = x1; then
+  if ! test x"$am_cv_qt5_compilation" = x1; then
     AC_MSG_CHECKING(for Qt 5)
     AC_MSG_RESULT(no: test program could not be compiled)
     return

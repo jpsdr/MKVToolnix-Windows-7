@@ -110,23 +110,62 @@ EOT
   AC_PATH_PROG(RCC, rcc,, [$qt_searchpath])
   AC_PATH_PROG(UIC, uic,, [$qt_searchpath])
 
-  AC_MSG_CHECKING(for Qt 6)
-
   if test x"$MOC" = x; then
+    AC_MSG_CHECKING(for Qt 6)
     AC_MSG_RESULT(no: could not find the moc executable)
+    return
 
   elif test x"$RCC" = x; then
+    AC_MSG_CHECKING(for Qt 6)
     AC_MSG_RESULT(no: could not find the rcc executable)
+    return
 
   elif test x"$UIC" = x; then
+    AC_MSG_CHECKING(for Qt 6)
     AC_MSG_RESULT(no: could not find the uic executable)
-
-  else
-    AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
-    AC_MSG_RESULT(yes)
-    have_qt6=yes
-    USE_QT=yes
+    return
   fi
+
+  dnl compile test program
+  AC_LANG_PUSH(C++)
+  AC_CACHE_VAL(am_cv_qt6_compilation, [
+    ac_save_CXXFLAGS="$CXXFLAGS"
+    ac_save_LIBS="$LIBS"
+    CXXFLAGS="$STD_CXX $CXXFLAGS $QT_CFLAGS -fPIC"
+    LIBS="$LDFLAGS $QT_LIBS"
+    unset ac_cv_qt_compilation
+
+    AC_TRY_LINK([
+#include <QtCore>
+#include <QCoreApplication>
+class Config : public QCoreApplication {
+public:
+Config(int &argc, char **argv);
+};
+Config::Config(int &argc, char **argv)
+: QCoreApplication(argc,argv) {setApplicationName("config");}
+      ], [
+int ai = 0;
+char **ac = 0;
+Config app(ai,ac);
+return 0;
+      ], [ am_cv_qt6_compilation=1 ], [ am_cv_qt6_compilation=0 ])
+
+    CXXFLAGS="$ac_save_CXXFLAGS"
+    LIBS="$ac_save_LIBS"
+  ])
+  AC_LANG_POP()
+
+  if test x"$am_cv_qt6_compilation" != x1; then
+    AC_MSG_CHECKING(for Qt 6)
+    AC_MSG_RESULT(no: could not compile a test program)
+    return
+  fi
+
+  AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
+  AC_MSG_RESULT(yes)
+  have_qt6=yes
+  USE_QT=yes
 }
 
 AC_ARG_ENABLE([qt6],
@@ -145,7 +184,7 @@ else
   unset qmake_dir qt_bindir qt_libdir qt_searchpath
 
   if test $have_qt6 != yes; then
-    unset QT_CFLAGS QT_LIBS
+    unset QT_CFLAGS QT_LIBS LCONVERT MOC RCC UIC ac_cv_path_LCONVERT ac_cv_path_MOC ac_cv_path_RCC ac_cv_path_UIC
   fi
 fi
 
