@@ -15,8 +15,7 @@ AC_ARG_WITH([qt_pkg_config],
   AC_HELP_STRING([--without-qt-pkg-config], [do not use pkg-config for detecting Qt; instead rely on QT_CFLAGS/QT_LIBS being set correctly already]),
   [ with_qt_pkg_config=${withval} ], [ with_qt_pkg_config=yes ])
 
-if test x"$enable_qt" = "xyes" -a \
-  '(' x"$enable_gui" = x"yes" -o x"$enable_gui" = "x" ')'; then
+if test x"$enable_qt" = "xyes"; then
   if test x"$enable_static_qt" = "xyes"; then
     AC_DEFINE(HAVE_STATIC_QT,,[define if building against a static Qt library])
     QT_PKG_CONFIG_STATIC=--static
