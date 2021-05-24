@@ -74,13 +74,13 @@ private:
   QRect m_hoverRect;
   int m_hoverIndex{-1};
   int m_currentIndex{-1};
-  QList<FancyTab*> m_tabs;
+  QVector<std::shared_ptr<FancyTab>> m_tabs;
   QTimer m_triggerTimer;
   std::unique_ptr<QStyle> m_style;
 
 public:
   FancyTabBar(QWidget *parent = nullptr);
-  ~FancyTabBar();
+  virtual ~FancyTabBar();
 
   bool event(QEvent *event);
 

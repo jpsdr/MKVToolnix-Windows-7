@@ -326,7 +326,7 @@ void
 FancyTabBar::insertTab(int index,
                        QIcon const &icon,
                        QString const &label) {
-  auto tab    = new FancyTab(this);
+  auto tab    = std::make_shared<FancyTab>(this);
   tab->m_icon = icon;
   tab->m_text = label;
   m_tabs.insert(index, tab);
@@ -334,8 +334,7 @@ FancyTabBar::insertTab(int index,
 
 void
 FancyTabBar::removeTab(int index) {
-  auto tab = m_tabs.takeAt(index);
-  delete tab;
+  m_tabs.removeAt(index);
 }
 
 void
