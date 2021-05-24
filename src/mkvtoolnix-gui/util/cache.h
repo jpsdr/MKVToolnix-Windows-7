@@ -5,7 +5,7 @@
 #include <QHash>
 #include <QVariant>
 
-class QMutex;
+#include "common/qt6_compat/mutex.h"
 
 namespace mtx::gui::Util {
 
@@ -28,7 +28,7 @@ public:
 private:
   static QString cacheDirLocation(QString const &category);
   static QString cacheFileName(QString const &category, QString const &key);
-  static QMutex &cacheDirMutex();
+  static MtxQRecursiveMutex &cacheDirMutex();
   static QString currentVersionString();
 };
 

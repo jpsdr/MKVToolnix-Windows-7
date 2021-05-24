@@ -4,7 +4,6 @@
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QMutex>
 #include <QMutexLocker>
 
 #include "common/checksums/base_fwd.h"
@@ -32,12 +31,12 @@ Cache::currentVersionString() {
   return Q(get_current_version().to_string());
 }
 
-QMutex &
+MtxQRecursiveMutex &
 Cache::cacheDirMutex() {
-  static std::unique_ptr<QMutex> s_mutex;
+  static std::unique_ptr<MtxQRecursiveMutex> s_mutex;
 
   if (!s_mutex)
-    s_mutex.reset(new QMutex{QMutex::Recursive});
+    s_mutex.reset(new MtxQRecursiveMutex{MTX_QT_RECURSIVE_MUTEX_INIT});
 
   return *s_mutex;
 }

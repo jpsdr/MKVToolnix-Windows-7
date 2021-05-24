@@ -26,7 +26,7 @@ namespace mtx::gui::Jobs {
 
 Model::Model(QObject *parent)
   : QStandardItemModel{parent}
-  , m_mutex{QMutex::Recursive}
+  , m_mutex{MTX_QT_RECURSIVE_MUTEX_INIT}
   , m_warningsIcon{Q(":/icons/16x16/dialog-warning.png")}
   , m_errorsIcon{Q(":/icons/16x16/dialog-error.png")}
   , m_started{}

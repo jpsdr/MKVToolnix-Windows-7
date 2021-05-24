@@ -2,10 +2,10 @@
 
 #include "common/common_pch.h"
 
+#include <QtContainerFwd>
 #include <QRegularExpression>
 
 class QString;
-class QStringList;
 
 namespace mtx::gui::Util {
 

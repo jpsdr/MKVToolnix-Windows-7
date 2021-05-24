@@ -31,13 +31,13 @@ addToMaps(SourceFile *oldFile,
 
   fileMap[oldFile] = newFile;
 
-  for (auto idx = 0, end = oldFile->m_tracks.size(); idx < end; ++idx)
+  for (int idx = 0, end = oldFile->m_tracks.size(); idx < end; ++idx)
     trackMap[ oldFile->m_tracks[idx].get() ] = newFile->m_tracks[idx].get();
 
-  for (auto idx = 0, end = oldFile->m_additionalParts.size(); idx < end; ++idx)
+  for (int idx = 0, end = oldFile->m_additionalParts.size(); idx < end; ++idx)
     addToMaps(oldFile->m_additionalParts[idx].get(), newFile->m_additionalParts[idx].get(), fileMap, trackMap);
 
-  for (auto idx = 0, end = oldFile->m_appendedFiles.size(); idx < end; ++idx)
+  for (int idx = 0, end = oldFile->m_appendedFiles.size(); idx < end; ++idx)
     addToMaps(oldFile->m_appendedFiles[idx].get(), newFile->m_appendedFiles[idx].get(), fileMap, trackMap);
 }
 
@@ -54,7 +54,7 @@ fixMappings(SourceFile *oldFile,
     Q_ASSERT(!!newFile->m_appendedTo);
   }
 
-  for (auto idx = 0, end = oldFile->m_tracks.size(); idx < end; ++idx) {
+  for (int idx = 0, end = oldFile->m_tracks.size(); idx < end; ++idx) {
     auto oldTrack = oldFile->m_tracks[idx].get();
     auto newTrack = trackMap[oldTrack];
 
@@ -745,7 +745,7 @@ MuxConfig::buildMkvmergeOptions()
 
   auto additionalOptions = Q(mtx::string::strip_copy(to_utf8(m_additionalOptions)));
   if (!additionalOptions.isEmpty())
-    options += additionalOptions.split(QRegExp{" +"});
+    options += additionalOptions.split(QRegularExpression{" +"});
 
   auto fileNumbers  = buildFileNumbers();
   options          += buildTrackOrder(fileNumbers);
@@ -776,10 +776,10 @@ MuxConfig::debugDumpFileList()
     auto const &file = *m_files[idx];
     log_it(fmt::format("{0}/{1} {2}\n", idx, num, to_utf8(QFileInfo{file.m_fileName}.fileName())));
 
-    for (auto addIdx = 0, addNum = file.m_additionalParts.count(); addIdx < addNum; ++addIdx)
+    for (int addIdx = 0, addNum = file.m_additionalParts.count(); addIdx < addNum; ++addIdx)
       log_it(fmt::format("  = {0}/{1} {2}\n", addIdx, addNum, to_utf8(QFileInfo{file.m_additionalParts[addIdx]->m_fileName}.fileName())));
 
-    for (auto appIdx = 0, appNum = file.m_appendedFiles.count(); appIdx < appNum; ++appIdx)
+    for (int appIdx = 0, appNum = file.m_appendedFiles.count(); appIdx < appNum; ++appIdx)
       log_it(fmt::format("  + {0}/{1} {2}\n", appIdx, appNum, to_utf8(QFileInfo{file.m_appendedFiles[appIdx]->m_fileName}.fileName())));
   }
 }
@@ -795,11 +795,11 @@ MuxConfig::debugDumpSpecificTrackList(QList<Track *> const &tracks) {
   auto num = tracks.count();
   log_it(fmt::format("// Dumping track list with {0} entries\n", num));
 
-  for (auto idx = 0; idx < num; ++idx) {
+  for (int idx = 0; idx < num; ++idx) {
     auto const &track = *tracks[idx];
     log_it(fmt::format("{0}/{1} {2} {3} from {4}\n", idx, num, track.nameForType(), track.m_codec, to_utf8(QFileInfo{track.m_file->m_fileName}.fileName())));
 
-    for (auto appIdx = 0, appNum = track.m_appendedTracks.count(); appIdx < appNum; ++appIdx) {
+    for (int appIdx = 0, appNum = track.m_appendedTracks.count(); appIdx < appNum; ++appIdx) {
       auto const &appTrack = *track.m_appendedTracks[appIdx];
       log_it(fmt::format("  {0}/{1} {2} {3} from {4}\n", appIdx, appNum, appTrack.nameForType(), appTrack.m_codec, to_utf8(QFileInfo{appTrack.m_file->m_fileName}.fileName())));
     }

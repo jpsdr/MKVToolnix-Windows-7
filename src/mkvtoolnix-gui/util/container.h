@@ -2,8 +2,6 @@
 
 #include "common/common_pch.h"
 
-class QStringList;
-
 namespace mtx::gui::Util {
 
 // Container stuff

@@ -435,7 +435,7 @@ Tool::dropEvent(QDropEvent *event) {
 
   if (p.filesDDHandler.handle(event, true)) {
     auto fileNames    = p.filesDDHandler.fileNames();
-    auto mouseButtons = event->mouseButtons();
+    auto mouseButtons = mtxMouseButtonsFor(event);
 
     QTimer::singleShot(0, this, [this, fileNames, mouseButtons]() {
       handleDroppedFiles(fileNames, mouseButtons);

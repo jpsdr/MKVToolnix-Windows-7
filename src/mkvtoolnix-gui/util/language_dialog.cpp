@@ -132,10 +132,10 @@ LanguageDialog::createGridLayoutFromComponentWidgetList() {
   auto layout = new QGridLayout;
   layout->setContentsMargins(0, 0, 0, 0);
 
-  for (auto rowIdx = 0, numRows = p.componentWidgets.size(); rowIdx < numRows; ++rowIdx) {
+  for (int rowIdx = 0, numRows = p.componentWidgets.size(); rowIdx < numRows; ++rowIdx) {
     auto &row = p.componentWidgets[rowIdx];
 
-    for (auto columnIdx = 0, numColumns = row.size(); columnIdx < numColumns; ++columnIdx)
+    for (int columnIdx = 0, numColumns = row.size(); columnIdx < numColumns; ++columnIdx)
       if (row[columnIdx])
         layout->addWidget(row[columnIdx], rowIdx, columnIdx, 1, 1);
   }

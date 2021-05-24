@@ -512,7 +512,7 @@ MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
     App::instance()->initializeLocale();
 
   if (dlg.uiLocaleChanged() || dlg.probeRangePercentageChanged())
-    QtConcurrent::run(Util::FileIdentifier::cleanAllCacheFiles);
+    [[maybe_unused]] auto future = QtConcurrent::run(Util::FileIdentifier::cleanAllCacheFiles);
 
   Q_EMIT preferencesChanged();
 }
@@ -764,7 +764,7 @@ void
 MainWindow::runCacheCleanupOncePerVersion()
   const {
   Util::Settings::runOncePerVersion(Q("cacheCleanup"), []() {
-    QtConcurrent::run(Util::Cache::cleanOldCacheFiles);
+    [[maybe_unused]] auto future = QtConcurrent::run(Util::Cache::cleanOldCacheFiles);
   });
 }
 

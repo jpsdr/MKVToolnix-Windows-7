@@ -18,9 +18,8 @@
 #include <QObject>
 
 #include "common/kax_info.h"
+#include "common/qt6_compat/mutex.h"
 #include "mkvtoolnix-gui/util/runnable.h"
-
-class QMutex;
 
 namespace mtx::gui::Util {
 
@@ -50,7 +49,7 @@ public:
   virtual result_e open_and_process_file() override;
   virtual result_e process_file() override;
 
-  virtual QMutex &mutex();
+  virtual MtxQRecursiveMutex &mutex();
 
   void disableFrameInfo();
 

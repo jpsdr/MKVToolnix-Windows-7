@@ -391,8 +391,8 @@ Tab::setDestination(QString const &newValue) {
   if (p.config.m_destination == newValue)
     return;
 
-  auto numRemovedChars = newValue.size()                - std::min(p.config.m_destination.size(), newValue.size());
-  auto newPosition     = p.ui->output->cursorPosition() - std::min(numRemovedChars, p.ui->output->cursorPosition());
+  auto numRemovedChars = newValue.size()                - std::min<int>(p.config.m_destination.size(), newValue.size());
+  auto newPosition     = p.ui->output->cursorPosition() - std::min<int>(numRemovedChars, p.ui->output->cursorPosition());
 
   p.ui->output->setText(p.config.m_destination);
   p.ui->output->setCursorPosition(newPosition);

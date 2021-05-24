@@ -1,6 +1,28 @@
 #include "common/common_pch.h"
 
-#include <QMediaPlayer>
+#include <Qt>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+# include <QMediaPlayer>
+
+#else  // Qt < 6
+# include <QUrl>
+
+// Fake Media Player class as Qt 6.1 hasn't re-added the media framework yet.
+class QMediaPlayer {
+public:
+  static constexpr int PlayingState = 1;
+
+  void setMedia(QUrl const &) {}
+  void setVolume(int) {}
+
+  int state() const { return 0; }
+
+  void play() {}
+  void stop() {}
+};
+
+#endif  // Qt < 6
 
 #include "mkvtoolnix-gui/util/media_player.h"
 

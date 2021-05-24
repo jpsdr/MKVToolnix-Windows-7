@@ -37,7 +37,7 @@ setDisplayableAndSymbolicColumnNames(QStandardItemModel &model,
 void
 setSymbolicColumnNames(QAbstractItemModel &model,
                        QStringList const &names) {
-  for (auto column = 0, numColumns = std::min(model.columnCount(), names.count()); column < numColumns; ++column)
+  for (auto column = 0, numColumns = std::min<int>(model.columnCount(), names.count()); column < numColumns; ++column)
     model.setHeaderData(column, Qt::Horizontal, names[column], Util::SymbolicNameRole);
 }
 

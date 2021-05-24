@@ -5,6 +5,7 @@
 #include "common/id_info.h"
 #include "common/iso639.h"
 #include "common/list_utils.h"
+#include "common/qt6_compat/meta_type.h"
 #include "common/strings/editing.h"
 #include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/merge/mkvmerge_option_builder.h"
@@ -104,11 +105,11 @@ Track::isPropertySet(QString const &property)
 
   auto var = m_properties.value(property);
 
-  return var.isNull()                            ? false
-       : !var.isValid()                          ? false
-       : var.canConvert(QMetaType::QVariantList) ? !var.toList().isEmpty()
-       : var.canConvert(QMetaType::QString)      ? !var.toString().isEmpty()
-       :                                           true;
+  return var.isNull()                                         ? false
+       : !var.isValid()                                       ? false
+       : mtxCanConvertVariantTo(var, QMetaType::QVariantList) ? !var.toList().isEmpty()
+       : mtxCanConvertVariantTo(var, QMetaType::QString)      ? !var.toString().isEmpty()
+       :                                                        true;
 }
 
 void
@@ -148,7 +149,7 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   m_name                       = m_properties.value("track_name").toString();
   m_nameWasPresent             = !m_name.isEmpty();
   m_cropping                   = m_properties.value("cropping").toString();
-  m_aacSbrWasDetected          = m_properties.value("aac_is_sbr").toString().contains(QRegExp{"1|true"});
+  m_aacSbrWasDetected          = m_properties.value("aac_is_sbr").toString().contains(QRegularExpression{"1|true"});
   m_stereoscopy                = m_properties.contains("stereo_mode") ? m_properties.value("stereo_mode").toUInt() + 1 : 0;
   auto encoding                = m_properties.value(Q("encoding")).toString();
   m_characterSet               = !encoding.isEmpty()   ? encoding
@@ -183,10 +184,11 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   if (language.is_valid())
     m_language = language;
 
-  QRegExp re_displayDimensions{"^(\\d+)x(\\d+)$"};
-  if (-1 != re_displayDimensions.indexIn(m_properties.value("display_dimensions").toString())) {
-    m_displayWidth  = re_displayDimensions.cap(1);
-    m_displayHeight = re_displayDimensions.cap(2);
+  QRegularExpression re_displayDimensions{"^(\\d+)x(\\d+)$"};
+  auto matches = re_displayDimensions.match(m_properties.value("display_dimensions").toString());
+  if (matches.hasMatch()) {
+    m_displayWidth  = matches.captured(1);
+    m_displayHeight = matches.captured(2);
   }
 
   if (canRemoveDialogNormalizationGain() && settings.m_mergeEnableDialogNormGainRemoval)
@@ -211,10 +213,10 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
 QString
 Track::extractAudioDelayFromFileName()
   const {
-  QRegExp re{"delay\\s+(-?\\d+)", Qt::CaseInsensitive};
-  if (-1 == re.indexIn(m_file->m_fileName))
-    return "";
-  return re.cap(1);
+  auto matches = QRegularExpression{"delay\\s+(-?\\d+)", QRegularExpression::CaseInsensitiveOption}.match(m_file->m_fileName);
+  if (matches.hasMatch())
+    return matches.captured(1);
+  return "";
 }
 
 void
@@ -450,7 +452,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     opt.options << Q("--sync") << Q("%1:%2").arg(sid).arg(MuxConfig::formatDelayAndStretchBy(m_delay, m_stretchBy));
 
   if (!m_defaultDuration.isEmpty()) {
-    auto unit = m_defaultDuration.contains(QRegExp{"\\d$"}) ? Q("fps") : Q("");
+    auto unit = m_defaultDuration.contains(QRegularExpression{"\\d$"}) ? Q("fps") : Q("");
     opt.options << Q("--default-duration") << Q("%1:%2%3").arg(sid).arg(m_defaultDuration).arg(unit);
   }
 
@@ -462,7 +464,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
 
   auto additionalOptions = Q(mtx::string::strip_copy(to_utf8(m_additionalOptions)));
   if (!additionalOptions.isEmpty())
-    opt.options += additionalOptions.replace(Q("<TID>"), sid).split(QRegExp{" +"});
+    opt.options += additionalOptions.replace(Q("<TID>"), sid).split(QRegularExpression{" +"});
 }
 
 QString

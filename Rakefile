@@ -179,7 +179,8 @@ def setup_globals
   windres                  = ""
   windres                 += " -DMINGW_PROCESSOR_ARCH_AMD64=1" if c(:MINGW_PROCESSOR_ARCH) == 'amd64'
 
-  mocflags                 = $building_for[:macos] ? "-DSYS_APPLE" : $building_for[:windows] ? "-DSYS_WINDOWS" : ""
+  mocflags                 = c(:QT_CFLAGS).gsub(%r{ +}, '').split(' ').select { |opt| %r{^-[DI]}.match(opt) }.join(' ')
+  mocflags                += $building_for[:macos] ? "-DSYS_APPLE" : $building_for[:windows] ? "-DSYS_WINDOWS" : ""
 
   ranlibflags              = $building_for[:macos] ? "-no_warning_for_no_symbols" : ""
 
@@ -477,7 +478,7 @@ rule '.h' => '.ui' do |t|
 end
 
 rule '.moc' => '.h' do |t|
-  runq "moc", t.source, "#{c(:MOC)} #{c(:QT_CFLAGS)} #{$system_includes} #{$flags[:moc]} -nw #{t.source} > #{t.name}"
+  runq "moc", t.source, "#{c(:MOC)} #{$system_includes} #{$flags[:moc]} -nw #{t.source} > #{t.name}"
 end
 
 rule '.moco' => '.moc' do |t|

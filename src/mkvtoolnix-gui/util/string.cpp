@@ -44,16 +44,16 @@ escapeShellUnix(QString const &source) {
   if (source.isEmpty())
     return Q("\"\"");
 
-  if (!source.contains(QRegExp{"[^\\w%+,\\-./:=@]"}))
+  if (!source.contains(QRegularExpression{"[^\\w%+,\\-./:=@]"}))
     return source;
 
   auto copy = source;
   // ' -> '\''
-  copy.replace(QRegExp{"'"}, Q("'\\''"));
+  copy.replace(QRegularExpression{"'"}, Q("'\\''"));
 
   copy = Q("'%1'").arg(copy);
-  copy.replace(QRegExp{"^''"}, Q(""));
-  copy.replace(QRegExp{"''$"}, Q(""));
+  copy.replace(QRegularExpression{"^''"}, Q(""));
+  copy.replace(QRegularExpression{"''$"}, Q(""));
 
   return copy;
 }
@@ -142,7 +142,7 @@ escapeShellWindows(QString const &source) {
 
   copy += QChar{'"'};
 
-  copy.replace(QRegExp{"([()%!^\"<>&|])"}, Q("^\\1"));
+  copy.replace(QRegularExpression{"([()%!^\"<>&|])"}, Q("^\\1"));
 
   return copy;
 }
@@ -251,7 +251,6 @@ itemFlagsToString(Qt::ItemFlags const &flags) {
   if (flags & Qt::ItemIsDropEnabled)    items << "IsDropEnabled";
   if (flags & Qt::ItemIsUserCheckable)  items << "IsUserCheckable";
   if (flags & Qt::ItemIsEnabled)        items << "IsEnabled";
-  if (flags & Qt::ItemIsTristate)       items << "IsTristate";
   if (flags & Qt::ItemNeverHasChildren) items << "NeverHasChildren";
 
   return items.join(Q("|"));

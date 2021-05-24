@@ -5,9 +5,8 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 
+#include <QtContainerFwd>
 #include <QString>
-
-class QStringList;
 
 namespace mtx::gui {
 

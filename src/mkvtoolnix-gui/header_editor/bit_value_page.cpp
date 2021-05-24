@@ -86,7 +86,7 @@ BitValuePage::valueToBitvalue()
   auto cleanedText = m_leValue->text().replace(QRegularExpression{Q("[^0-9a-fA-F]")}, Q(""));
   auto bitLength   = m_bitLength ? m_bitLength : ((cleanedText.length() + 1) / 2) * 8;
 
-  return { to_utf8(cleanedText), bitLength };
+  return { to_utf8(cleanedText), static_cast<unsigned int>(bitLength) };
 }
 
 }

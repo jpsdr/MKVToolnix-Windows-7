@@ -1,7 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QtGlobal>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QTemporaryFile>
 
 #include "common/qt.h"
@@ -34,7 +34,7 @@ Process::run() {
 QStringList
 Process::output()
   const {
-  return m_output.split(QRegExp{ "\r?\n" });
+  return m_output.split(QRegularExpression{ "\r?\n" });
 }
 
 QProcess const &

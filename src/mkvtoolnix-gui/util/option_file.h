@@ -4,7 +4,6 @@
 
 class QFile;
 class QString;
-class QStringList;
 class QTemporaryFile;
 
 namespace mtx::gui::Util {

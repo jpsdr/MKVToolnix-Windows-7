@@ -21,6 +21,7 @@
 #include "common/kax_element_names.h"
 #include "common/kax_info.h"
 #include "common/qt.h"
+#include "common/qt6_compat/library_info.h"
 #include "common/unique_numbers.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
@@ -372,7 +373,7 @@ App::initializeLocale(QString const &requestedLocale) {
 
     auto translator = std::make_unique<QTranslator>();
     auto paths      = QStringList{} << Q("%1/locale/libqt").arg(applicationDirPath())
-                                    << QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+                                    << mtxQLibrarylocation(QLibraryInfo::TranslationsPath);
 
     for (auto const &path : paths)
       if (translator->load(Q("qt_%1").arg(locale), path))

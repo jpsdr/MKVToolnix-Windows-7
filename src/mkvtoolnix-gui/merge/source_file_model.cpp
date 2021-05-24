@@ -618,9 +618,9 @@ SourceFileModel::dropSourceFiles(QMimeData const *data,
       Q_ASSERT(parentFile);
 
       if (sourceFile->isAdditionalPart())
-        row = std::min(row, parentFile->m_additionalParts.size());
+        row = std::min<int>(row, parentFile->m_additionalParts.size());
       else
-        row = std::max(row, parentFile->m_additionalParts.size());
+        row = std::max<int>(row, parentFile->m_additionalParts.size());
 
       if ((sourceParent == parent) && (sourceIdx.row() < row))
         --row;
