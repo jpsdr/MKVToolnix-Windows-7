@@ -11,6 +11,7 @@
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "mkvtoolnix-gui/util/string.h"
 
 #include <QDir>
 #include <QFile>
@@ -745,7 +746,7 @@ MuxConfig::buildMkvmergeOptions()
 
   auto additionalOptions = Q(mtx::string::strip_copy(to_utf8(m_additionalOptions)));
   if (!additionalOptions.isEmpty())
-    options += additionalOptions.split(QRegularExpression{" +"});
+    options += Util::unescapeSplit(additionalOptions, Util::EscapeShellUnix);
 
   auto fileNumbers  = buildFileNumbers();
   options          += buildTrackOrder(fileNumbers);
