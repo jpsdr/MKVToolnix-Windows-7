@@ -58,7 +58,7 @@ TOP_DIR="${TOP_DIR%/*}/../.."
 cd "${TOP_DIR}"
 TOP_DIR="${PWD}"
 RELEASE_VERSION=0
-QTVERSION="5.11.1"
+QTVERSION="latest"
 APP="mkvtoolnix-gui"
 APP_DIR="${TOP_DIR}/appimage/${APP}.AppDir"
 
