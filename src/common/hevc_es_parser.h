@@ -17,6 +17,7 @@
 
 #include "common/hevc_types.h"
 #include "common/math_fwd.h"
+#include "common/dovi_meta.h"
 
 namespace mtx::hevc {
 
@@ -78,6 +79,8 @@ protected:
   std::vector<pps_info_t> m_pps_info_list;
   user_data_t m_user_data;
   codec_private_t m_codec_private;
+
+  mtx::dovi::dovi_rpu_data_header_t m_dovi_rpu_data_header;
 
   memory_cptr m_unparsed_buffer;
   uint64_t m_stream_position{}, m_parsed_position{};
@@ -208,6 +211,19 @@ public:
 
   static std::string get_nalu_type_name(int type);
 
+  bool has_dovi_rpu_header() const {
+    return m_dovi_rpu_data_header.rpu_nal_prefix == 25;
+  }
+
+  mtx::dovi::dovi_rpu_data_header_t get_dovi_rpu_header() const {
+    return m_dovi_rpu_data_header;
+  }
+
+  vui_info_t get_vui_info() const {
+    assert(!m_sps_info_list.empty());
+    return m_sps_info_list.front().vui;
+  }
+
 protected:
   bool parse_slice(memory_cptr const &nalu, slice_info_t &si);
   void handle_nalu_internal(memory_cptr const &nalu, uint64_t nalu_pos);
@@ -215,6 +231,7 @@ protected:
   void handle_sps_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);
   void handle_pps_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);
   void handle_sei_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);
+  void handle_unspec62_nalu(memory_cptr const &nalu);
   void handle_slice_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
   void cleanup();
   void flush_incomplete_frame();

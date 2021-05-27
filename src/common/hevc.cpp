@@ -381,13 +381,18 @@ vui_parameters_copy(mtx::bits::reader_c &r,
   if (w.copy_bits(1, r) == 1)   // overscan_info_present_flag
     w.copy_bits(1, r);          // overscan_appropriate_flag
   if (w.copy_bits(1, r) == 1) { // video_signal_type_present_flag
-    w.copy_bits(4, r);          // video_format, video_full_range_flag
-    if (w.copy_bits(1, r) == 1) // color_desc_present_flag
-      w.copy_bits(24, r);       // colour_primaries, transfer_characteristics, matrix_coefficients
+    w.copy_bits(3, r);          // video_format
+
+    sps.vui.video_full_range_flag = w.copy_bits(1, r);      // video_full_range_flag
+    if (w.copy_bits(1, r) == 1) {                           // color_desc_present_flag
+      sps.vui.colour_primaries = w.copy_bits(8, r);         // colour_primaries
+      sps.vui.transfer_characteristics = w.copy_bits(8, r); // transfer_characteristics
+      sps.vui.matrix_coefficients = w.copy_bits(8, r);      // matrix_coefficients
+    }
   }
   if (w.copy_bits(1, r) == 1) { // chroma_loc_info_present_flag
-    w.copy_unsigned_golomb(r);               // chroma_sample_loc_type_top_field
-    w.copy_unsigned_golomb(r);               // chroma_sample_loc_type_bottom_field
+    sps.vui.chroma_sample_loc_type_top_field = w.copy_unsigned_golomb(r); // chroma_sample_loc_type_top_field
+    sps.vui.chroma_sample_loc_type_bottom_field = w.copy_unsigned_golomb(r); // chroma_sample_loc_type_bottom_field
   }
   w.copy_bits(1, r);            // neutral_chroma_indication_flag
   sps.field_seq_flag = w.copy_bits(1, r);
@@ -931,6 +936,87 @@ hevcc_to_nalus(const unsigned char *buffer,
   }
 
   return memory_cptr{};
+}
+
+bool
+parse_dovi_rpu(memory_cptr const &buffer, mtx::dovi::dovi_rpu_data_header_t &hdr) {
+  try {
+    mtx::bits::reader_c r(buffer->get_buffer(), buffer->get_size());
+    mm_mem_io_c byte_reader{*buffer};
+
+    r.skip_bits(1);             // forbidden_zero_bit
+
+    if (r.get_bits(6) != NALU_TYPE_UNSPEC62) // nal_unit_type
+      return false;
+
+    r.skip_bits(6);             // nuh_reserved_zero_6bits
+    r.skip_bits(3);             // nuh_temporal_id_plus1
+
+    byte_reader.skip(2);        // skip the nalu header
+
+    hdr.rpu_nal_prefix = r.get_bits(8);
+
+    if (hdr.rpu_nal_prefix == 25) {
+      hdr.rpu_type   = r.get_bits(6);
+      hdr.rpu_format = r.get_bits(11);
+
+      if (hdr.rpu_type == 2) {
+        hdr.vdr_rpu_profile           = r.get_bits(4);
+        hdr.vdr_rpu_level             = r.get_bits(4);
+        hdr.vdr_seq_info_present_flag = r.get_bit();
+
+        if (hdr.vdr_seq_info_present_flag) {
+          hdr.chroma_resampling_explicit_filter_flag = r.get_bit();
+          hdr.coefficient_data_type                  = r.get_bits(2);
+
+          if (hdr.coefficient_data_type == 0)
+            hdr.coefficient_log2_denom = r.get_unsigned_golomb();
+
+          hdr.vdr_rpu_normalized_idc   = r.get_bits(2);
+          hdr.bl_video_full_range_flag = r.get_bit();
+
+          if ((hdr.rpu_format & 0x700) == 0) {
+            hdr.bl_bit_depth_minus8               = r.get_unsigned_golomb();
+            hdr.el_bit_depth_minus8               = r.get_unsigned_golomb();
+            hdr.vdr_bit_depth_minus_8             = r.get_unsigned_golomb();
+            hdr.spatial_resampling_filter_flag    = r.get_bit();
+            hdr.reserved_zero_3bits               = r.get_bits(3);
+            hdr.el_spatial_resampling_filter_flag = r.get_bit();
+            hdr.disable_residual_flag             = r.get_bit();
+          }
+        }
+
+        hdr.vdr_dm_metadata_present_flag = r.get_bit();
+        hdr.use_prev_vdr_rpu_flag        = r.get_bit();
+
+        if (hdr.use_prev_vdr_rpu_flag)
+          hdr.prev_vdr_rpu_id = r.get_unsigned_golomb();
+
+        else {
+          hdr.vdr_rpu_id                = r.get_unsigned_golomb();
+          hdr.mapping_color_space       = r.get_unsigned_golomb();
+          hdr.mapping_chroma_format_idc = r.get_unsigned_golomb();
+
+          for (int cmp = 0; cmp < 3; ++cmp) {
+            auto num_pivots_minus2 = r.get_unsigned_golomb();
+
+            for (uint64_t pivot_idx = 0; pivot_idx < num_pivots_minus2 + 2; pivot_idx++)
+              r.skip_bits(hdr.bl_bit_depth_minus8 + 8); // pred_pivot_value[cmp][pivot_idx]
+          }
+
+          if ((hdr.rpu_format & 0x700) && !hdr.disable_residual_flag)
+            r.skip_bits(3); // nlq_method_idc
+
+          hdr.num_x_partitions_minus1 = r.get_unsigned_golomb();
+          hdr.num_y_partitions_minus1 = r.get_unsigned_golomb();
+        }
+      }
+    }
+
+    return true;
+  } catch (...) {
+    return false;
+  }
 }
 
 }                              // namespace mtx::hevc

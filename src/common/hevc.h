@@ -15,6 +15,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/dovi_meta.h"
 #include "common/hevc_types.h"
 
 namespace mtx::hevc {
@@ -32,6 +33,8 @@ memory_cptr parse_sps(memory_cptr const &buffer, sps_info_t &sps, std::vector<vp
 bool parse_pps(memory_cptr const &buffer, pps_info_t &pps);
 bool parse_sei(memory_cptr const &buffer, user_data_t &user_data);
 bool handle_sei_payload(mm_mem_io_c &byte_reader, unsigned int sei_payload_type, unsigned int sei_payload_size, user_data_t &user_data);
+
+bool parse_dovi_rpu(memory_cptr const &buffer, mtx::dovi::dovi_rpu_data_header_t &dovi_rpu_data_header);
 
 par_extraction_t extract_par(memory_cptr const &buffer);
 bool is_fourcc(const char *fourcc);

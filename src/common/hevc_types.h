@@ -239,6 +239,16 @@ struct short_term_ref_pic_set_t {
   void clear();
 };
 
+struct vui_info_t {
+  unsigned int video_full_range_flag{};
+  unsigned int colour_primaries{};
+  unsigned int transfer_characteristics{};
+  unsigned int matrix_coefficients{};
+
+  unsigned int chroma_sample_loc_type_top_field{};
+  unsigned int chroma_sample_loc_type_bottom_field{};
+};
+
 struct sps_info_t {
   unsigned int id{};
   unsigned int vps_id{};
@@ -262,6 +272,7 @@ struct sps_info_t {
   bool vui_present{}, ar_found{}, field_seq_flag{};
   unsigned int par_num{}, par_den{};
   unsigned int min_spatial_segmentation_idc{};
+  vui_info_t vui{};
 
   // timing_info:
   bool timing_info_present{};

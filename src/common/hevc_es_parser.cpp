@@ -538,6 +538,12 @@ es_parser_c::handle_sei_nalu(memory_cptr const &nalu,
 }
 
 void
+es_parser_c::handle_unspec62_nalu(memory_cptr const &nalu) {
+  if (parse_dovi_rpu(mpeg::nalu_to_rbsp(nalu), m_dovi_rpu_data_header))
+    add_nalu_to_pending_frame_data(nalu);
+}
+
+void
 es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
                                   uint64_t nalu_pos) {
   static debugging_option_c s_debug_discard_access_unit_delimiters{"hevc_discard_access_unit_delimiters"};
@@ -587,6 +593,10 @@ es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
       // Skip these.
       break;
 
+    case NALU_TYPE_UNSPEC62:
+      handle_unspec62_nalu(nalu);
+      break;
+
     case NALU_TYPE_TRAIL_N:
     case NALU_TYPE_TRAIL_R:
     case NALU_TYPE_TSA_N:
@@ -620,7 +630,6 @@ es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
     case NALU_TYPE_UNSPEC59:
     case NALU_TYPE_UNSPEC60:
     case NALU_TYPE_UNSPEC61:
-    case NALU_TYPE_UNSPEC62:
     case NALU_TYPE_UNSPEC63:
       add_nalu_to_pending_frame_data(nalu);
       break;
