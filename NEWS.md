@@ -37,6 +37,13 @@
   flags). See #3105 for context.
 * mkvmerge, mkvextract: fixed key frame handling for `BlockGroup` elements
   with a forward reference but no backward references. Patches by Tom Yan.
+* mkvmerge, mkvpropedit, MKVToolNix GUI's chapter editor: the programs will no
+  longer omit writing mandatory elements set to their default value if other
+  elements of the same type are present in the same master. This affects
+  mostly the "chapter language" element which may occur multiple times within
+  the same "chapter display" master. If it does occur multiple times and one
+  of them is set to "English" (which is that element's default value), that
+  element will now be written, too. Part of the fix of #3120.
 
 ## Build system changes
 

@@ -13,6 +13,8 @@
 
 #include "common/common_pch.h"
 
+#include <unordered_set>
+
 #include <ebml/EbmlFloat.h>
 #include <ebml/EbmlSInteger.h>
 #include <ebml/EbmlString.h>
@@ -649,30 +651,52 @@ remove_ietf_language_elements(libebml::EbmlMaster &master) {
 
 void
 remove_mandatory_elements_set_to_their_default(libebml::EbmlMaster &master) {
-  auto idx = 0u;
+  std::unordered_map<uint32_t, unsigned int> num_elements_by_type;
+  std::unordered_set<libebml::EbmlElement *> elements_to_remove;
 
-  while (idx < master.ListSize()) {
+  for (int idx = 0, num_elements = master.ListSize(); idx < num_elements; ++idx) {
     auto child = master[idx];
 
     if (dynamic_cast<libebml::EbmlMaster *>(child)) {
       remove_mandatory_elements_set_to_their_default(*static_cast<libebml::EbmlMaster *>(child));
-      ++idx;
       continue;
     }
 
-    if (!child->IsDefaultValue()) {
-      ++idx;
+    ++num_elements_by_type[ EbmlId(*child).GetValue() ];
+
+    if (!child->IsDefaultValue())
       continue;
-    }
 
     auto semantic = find_ebml_semantic(KaxSegment::ClassInfos, libebml::EbmlId(*child));
 
     if (!semantic || !semantic->IsMandatory())
+      continue;
+
+    elements_to_remove.insert(child);
+  }
+
+  // Don't remove elements if there is more than one of them in the
+  // same master. For example, ChapterLanguage is mandatory with
+  // default "eng", but it is also multiple. If a single
+  // <ChapterDisplay> contains two ChapterLanguage, one of them being
+  // "eng", then that one must not be removed; otherwise information
+  // is lost.
+
+  int idx = 0;
+  while (idx < static_cast<int>(master.ListSize())) {
+    auto child = master[idx];
+
+    if (elements_to_remove.find(child) == elements_to_remove.end()) {
       ++idx;
-    else {
+      continue;
+    }
+
+    if (num_elements_by_type[ EbmlId(*child).GetValue() ] == 1) {
       delete child;
       master.Remove(idx);
-    }
+
+    } else
+      ++idx;
   }
 }
 
