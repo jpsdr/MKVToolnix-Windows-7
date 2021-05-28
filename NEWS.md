@@ -44,6 +44,10 @@
   the same "chapter display" master. If it does occur multiple times and one
   of them is set to "English" (which is that element's default value), that
   element will now be written, too. Part of the fix of #3120.
+* mkvmerge, mkvpropedit, MKVToolNix GUI's chapter editor: fixed reading
+  OGM-style chapter files with timestamps that don't have exactly three
+  decimal places. Any number of decimal places between one and nine is now
+  supported for nanosecond precision. Fixes #3121.
 
 ## Build system changes
 

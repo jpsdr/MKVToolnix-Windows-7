@@ -54,7 +54,7 @@ std::string g_default_country;
 
 translatable_string_c g_chapter_generation_name_template{YT("Chapter <NUM:2>")};
 
-constexpr auto SIMCHAP_RE_TIMESTAMP_LINE = "^\\s*CHAPTER\\d+\\s*=\\s*(\\d+)\\s*:\\s*(\\d+)\\s*:\\s*(\\d+)\\s*[\\.,]\\s*(\\d+)";
+constexpr auto SIMCHAP_RE_TIMESTAMP_LINE = "^\\s*CHAPTER\\d+\\s*=\\s*(\\d+)\\s*:\\s*(\\d+)\\s*:\\s*(\\d+)\\s*[\\.,]\\s*(\\d{1,9})";
 constexpr auto SIMCHAP_RE_TIMESTAMP      = "^\\s*CHAPTER\\d+\\s*=(.*)";
 constexpr auto SIMCHAP_RE_NAME_LINE      = "^\\s*CHAPTER\\d+NAME\\s*=(.*)";
 
@@ -161,14 +161,6 @@ parse_simple(mm_text_io_c *in,
   int64_t start            = 0;
   charset_converter_cptr cc_utf8;
 
-  // The core now uses ns precision timestamps.
-  if (0 < min_ts)
-    min_ts /= 1000000;
-  if (0 < max_ts)
-    max_ts /= 1000000;
-  if (0 < offset)
-    offset /= 1000000;
-
   bool do_convert = in->get_byte_order_mark() == byte_order_mark_e::none;
   if (do_convert)
     cc_utf8 = charset_converter_c::init(charset);
@@ -193,18 +185,21 @@ parse_simple(mm_text_io_c *in,
       if (!mtx::regex::match(line, matches, timestamp_line_re))
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
 
-      int64_t hour = 0, minute = 0, second = 0, msecs = 0;
+      int64_t hour = 0, minute = 0, second = 0, nsecs = 0;
       mtx::string::parse_number(matches[0][1], hour);
       mtx::string::parse_number(matches[0][2], minute);
       mtx::string::parse_number(matches[0][3], second);
-      mtx::string::parse_number(matches[0][4], msecs);
+      mtx::string::parse_number(matches[0][4], nsecs);
 
       if (59 < minute)
         chapter_error(fmt::format(Y("Invalid minute: {0}"), minute));
       if (59 < second)
         chapter_error(fmt::format(Y("Invalid second: {0}"), second));
 
-      start = msecs + second * 1000 + minute * 1000 * 60 + hour * 1000 * 60 * 60;
+      for (int idx = matches[0][4].length(); idx < 9; ++idx)
+        nsecs *= 10;
+
+      start = nsecs + (second + minute * 60 + hour * 60 * 60) * 1'000'000'000;
       mode  = 1;
 
       if (!mtx::regex::match(line, matches, timestamp_re))
@@ -216,7 +211,7 @@ parse_simple(mm_text_io_c *in,
 
       auto name = matches[0][1];
       if (name.empty())
-        name = format_name_template(g_chapter_generation_name_template.get_translated(), num + 1, timestamp_c::ms(start));
+        name = format_name_template(g_chapter_generation_name_template.get_translated(), num + 1, timestamp_c::ns(start));
 
       mode = 0;
 
@@ -226,7 +221,7 @@ parse_simple(mm_text_io_c *in,
 
         atom = &GetFirstOrNextChild<KaxChapterAtom>(*edition, atom);
         GetChild<KaxChapterUID>(*atom).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
-        GetChild<KaxChapterTimeStart>(*atom).SetValue((start - offset) * 1000000);
+        GetChild<KaxChapterTimeStart>(*atom).SetValue(start - offset);
 
         auto &display = GetChild<KaxChapterDisplay>(*atom);
 
