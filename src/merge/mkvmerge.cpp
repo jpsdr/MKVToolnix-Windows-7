@@ -1781,12 +1781,17 @@ static void
 parse_arg_chapters(const std::string &param,
                    const std::string &arg,
                    track_info_c &ti) {
+  static debugging_option_c s_debug{"dump_chapters_after_parsing"};
+
   if (g_chapter_file_name != "")
     mxerror(fmt::format(Y("Only one chapter file allowed in '{0} {1}'.\n"), param, arg));
 
   auto format         = mtx::chapters::format_e::xml;
   g_chapter_file_name = arg;
   g_kax_chapters      = mtx::chapters::parse(g_chapter_file_name, 0, -1, 0, g_chapter_language, g_chapter_charset, false, &format, &g_tags_from_cue_chapters);
+
+  if (s_debug)
+    dump_ebml_elements(g_kax_chapters.get());
 
   auto sync = ti.m_timestamp_syncs.find(track_info_c::chapter_track_id);
   if (sync == ti.m_timestamp_syncs.end())
