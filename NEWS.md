@@ -55,6 +55,8 @@
   supported for nanosecond precision. Fixes #3121.
 * MKVToolNix GUI: chapter editor: added/fixed support for "chapter display"
   elements with multiple languages or countries. Part of the fix of #3120.
+* mkvmerge: MP4 reader: fixed an issue with timestamps overflowing when the
+  file's or the track's time scale is large. Fixes #3124.
 
 ## Build system changes
 

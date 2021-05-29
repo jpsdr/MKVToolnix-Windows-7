@@ -20,6 +20,8 @@
 #include <cstring>
 #include <unordered_map>
 
+#include <boost/multiprecision/cpp_int.hpp>
+
 #include "avilib.h"
 #include "common/aac.h"
 #include "common/alac.h"
@@ -2195,7 +2197,11 @@ qtmp4_demuxer_c::to_nsecs(int64_t value,
   if (!actual_time_scale)
     return 0;
 
-  return boost::rational_cast<int64_t>(int64_rational_c{value, actual_time_scale} * int64_rational_c{1'000'000'000ll, 1});
+  auto value128  = static_cast<boost::multiprecision::int128_t>(value);
+  value128      *= 1'000'000'000ll;
+  value128      /= actual_time_scale;
+
+  return static_cast<int64_t>(value128);
 }
 
 void
