@@ -93,6 +93,12 @@ operator <<(std::ostream &out,
   return out;
 }
 
+inline bool
+operator<(language_c const &a,
+          language_c const &b) {
+  return a.format() < b.format();
+}
+
 } // namespace mtx::bcp47
 
 namespace std {
