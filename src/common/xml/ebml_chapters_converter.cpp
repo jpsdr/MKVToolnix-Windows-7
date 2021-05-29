@@ -160,16 +160,7 @@ ebml_chapters_converter_c::fix_display_languages(libmatroska::KaxChapterDisplay 
   if (ietf_languages.empty())
     ietf_languages.emplace_back(mtx::bcp47::language_c::parse("eng"));
 
-  DeleteChildren<libmatroska::KaxChapLanguageIETF>(display);
-  DeleteChildren<libmatroska::KaxChapterLanguage>(display);
-
-  for (auto const &language : ietf_languages) {
-    if (language.has_valid_iso639_code())
-      AddEmptyChild<libmatroska::KaxChapterLanguage>(display).SetValue(language.get_iso639_alpha_3_code());
-
-    if (!mtx::bcp47::language_c::is_disabled())
-      AddEmptyChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(language.format());
-  }
+  mtx::chapters::set_languages_in_display(display, ietf_languages);
 }
 
 void

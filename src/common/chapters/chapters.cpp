@@ -1202,20 +1202,33 @@ create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editio
 
 void
 set_languages_in_display(libmatroska::KaxChapterDisplay &display,
+                         std::vector<mtx::bcp47::language_c> const &parsed_languages) {
+  DeleteChildren<libmatroska::KaxChapLanguageIETF>(display);
+  DeleteChildren<libmatroska::KaxChapterLanguage>(display);
+
+  for (auto const &parsed_language : parsed_languages) {
+    if (!parsed_language.is_valid())
+      continue;
+
+    if (parsed_language.has_valid_iso639_2_code())
+      AddEmptyChild<libmatroska::KaxChapterLanguage>(display).SetValue(parsed_language.get_iso639_alpha_3_code());
+
+    if (!mtx::bcp47::language_c::is_disabled())
+      AddEmptyChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(parsed_language.format());
+  }
+}
+
+void
+set_languages_in_display(libmatroska::KaxChapterDisplay &display,
                          mtx::bcp47::language_c const &parsed_language) {
-  if (!parsed_language.is_valid())
-    return;
-
-  GetChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(parsed_language.format());
-
-  if (parsed_language.has_valid_iso639_2_code())
-    GetChild<libmatroska::KaxChapterLanguage>(display).SetValue(parsed_language.get_iso639_alpha_3_code());
+  if (parsed_language.is_valid())
+    set_languages_in_display(display, std::vector<mtx::bcp47::language_c>{ parsed_language });
 }
 
 void
 set_languages_in_display(libmatroska::KaxChapterDisplay &display,
                          std::string const &language) {
-  set_languages_in_display(display, mtx::bcp47::language_c::parse(language));
+  set_languages_in_display(display, std::vector<mtx::bcp47::language_c>{ mtx::bcp47::language_c::parse(language) });
 }
 
 mtx::bcp47::language_c
