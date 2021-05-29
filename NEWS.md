@@ -44,6 +44,10 @@
   the same "chapter display" master. If it does occur multiple times and one
   of them is set to "English" (which is that element's default value), that
   element will now be written, too. Part of the fix of #3120.
+* mkvmerge, mkvpropedit, MKVToolNix GUI's chapter editor: when parsing chapter
+  files IETF & legacy language elements will now be properly generated
+  depending on which exist already, especially when there's more than one
+  language in a "chapter display" element. Part of the fix of #3120.
 * mkvmerge, mkvpropedit, MKVToolNix GUI's chapter editor: fixed reading
   OGM-style chapter files with timestamps that don't have exactly three
   decimal places. Any number of decimal places between one and nine is now
