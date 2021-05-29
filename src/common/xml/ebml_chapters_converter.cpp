@@ -175,19 +175,18 @@ ebml_chapters_converter_c::fix_display_languages(libmatroska::KaxChapterDisplay 
 void
 ebml_chapters_converter_c::fix_display_countries(libmatroska::KaxChapterDisplay &display)
   const {
-  auto ccountry = FindChild<KaxChapterCountry>(display);
-  if (!ccountry)
-    return;
+  for (auto const &child : display)
+    if (auto kax_country = dynamic_cast<libmatroska::KaxChapterCountry *>(child); kax_country) {
+      auto country     = kax_country->GetValue();
+      auto country_opt = mtx::iso3166::look_up_cctld(country);
+      if (!country_opt)
+        throw conversion_x{fmt::format(Y("'{0}' is not a valid ccTLD country code."), country)};
 
-  auto country     = ccountry->GetValue();
-  auto country_opt = mtx::iso3166::look_up_cctld(country);
-  if (!country_opt)
-    throw conversion_x{fmt::format(Y("'{0}' is not a valid ccTLD country code."), country)};
+      auto cctld = mtx::string::to_lower_ascii(country_opt->alpha_2_code);
 
-  auto cctld = mtx::string::to_lower_ascii(country_opt->alpha_2_code);
-
-  if (country != cctld)
-    ccountry->SetValue(cctld);
+      if (country != cctld)
+        kax_country->SetValue(cctld);
+    }
 }
 
 void
