@@ -119,7 +119,7 @@ public:
     style_with_addresses = 0x02,
     style_with_indexes   = 0x04,
 
-    style_default        = style_with_addresses | style_with_indexes,
+    style_default        = style_with_addresses | style_with_indexes | style_with_values,
   };
 
 private:
