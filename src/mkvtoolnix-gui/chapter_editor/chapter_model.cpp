@@ -9,6 +9,7 @@
 #include "common/strings/formatting.h"
 #include "common/unique_numbers.h"
 #include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
+#include "mkvtoolnix-gui/chapter_editor/name_model.h"
 #include "mkvtoolnix-gui/util/model.h"
 
 using namespace libmatroska;
@@ -176,15 +177,19 @@ ChapterModel::reset() {
 QString
 ChapterModel::chapterNameForLanguage(KaxChapterAtom &chapter,
                                      std::string const &language) {
-  for (auto const &element : chapter) {
-    auto kDisplay = dynamic_cast<KaxChapterDisplay *>(element);
+  for (auto const &child : chapter) {
+    auto kDisplay = dynamic_cast<KaxChapterDisplay *>(child);
     if (!kDisplay)
       continue;
 
+    auto lists = NameModel::effectiveLanguagesAndCountriesForDisplay(*kDisplay);
+
     auto actualLanguage = mtx::chapters::get_language_from_display(*kDisplay, "eng"s);
     if (   language.empty()
-        || (language == actualLanguage.get_language())
-        || (language == actualLanguage.get_iso639_alpha_3_code()))
+        || (std::find_if(lists.languageCodes.begin(), lists.languageCodes.end(), [&language](auto const &actualLanguage) {
+              return (language == actualLanguage.get_language())
+                  || (language == actualLanguage.get_iso639_alpha_3_code());
+            }) != lists.languageCodes.end()))
       return Q(FindChildValue<KaxChapterString>(kDisplay));
   }
 

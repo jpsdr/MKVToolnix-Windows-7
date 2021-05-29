@@ -22,11 +22,13 @@ class TabPrivate {
   QMenu *copyToOtherTabMenu;
   QList<QWidget *> nameWidgets;
 
-  bool ignoreChapterSelectionChanges{};
+  bool ignoreChapterSelectionChanges{}, ignoreChapterNameChanges{};
 
   QString savedState;
 
   timestamp_c fileEndTimestamp;
+
+  QVector<std::tuple<QBoxLayout *, QWidget *, QPushButton *>> languageControls, countryControls;
 
   explicit TabPrivate(Tab &tab, QString const &pFileName);
 };

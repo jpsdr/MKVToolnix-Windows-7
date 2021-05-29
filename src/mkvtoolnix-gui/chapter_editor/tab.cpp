@@ -47,7 +47,41 @@
 using namespace libmatroska;
 using namespace mtx::gui;
 
+namespace mtx::bcp47 {
+
+uint
+qHash(language_c const &language) {
+  return qHash(Q(language.format()));
+}
+
+}
+
 namespace mtx::gui::ChapterEditor {
+
+namespace {
+
+bool
+removeLanguageOrCountryControlRow(QVector<std::tuple<QBoxLayout *, QWidget *, QPushButton *>> &controls,
+                                  QObject *sender) {
+  for (int idx = 0, numControls = controls.size(); idx < numControls; ++idx) {
+    auto &[layout, widget, button] = controls[idx];
+
+    if (button != sender)
+      continue;
+
+    delete layout;
+    delete widget;
+    delete button;
+
+    controls.removeAt(idx);
+
+    return true;
+  }
+
+  return false;
+}
+
+}
 
 TabPrivate::TabPrivate(Tab &tab,
                        QString const &pFileName)
@@ -113,19 +147,19 @@ Tab::setupUi() {
 
   p->ui->elements->acceptDroppedFiles(true);
 
-  p->ui->cbChNameCountry->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+  p->ui->cbChNameCountry1->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+  p->ui->cbChNameCountry1->setWithAlphaCodesOnly(true);
+  p->ui->cbChNameCountry1->setup(true);
+  Util::fixComboBoxViewWidth(*p->ui->cbChNameCountry1);
 
-  p->ui->ldwChNameLanguage->enableClearingLanguage(true);
-  p->ui->cbChNameCountry->setWithAlphaCodesOnly(true);
-  p->ui->cbChNameCountry->setup(true);
+  p->languageControls.push_back({ nullptr, p->ui->ldwChNameLanguage1, p->ui->pbChNameLanguageAdd });
+  p->countryControls .push_back({ nullptr, p->ui->cbChNameCountry1,   p->ui->pbChNameCountryAdd });
 
   p->nameWidgets << p->ui->pbChRemoveName
                  << p->ui->lChName         << p->ui->leChName
-                 << p->ui->lChNameLanguage << p->ui->ldwChNameLanguage
-                 << p->ui->lChNameCountry  << p->ui->cbChNameCountry;
+                 << p->ui->lChNameLanguage << p->ui->lChNameCountry;
 
   Util::fixScrollAreaBackground(p->ui->scrollArea);
-  Util::fixComboBoxViewWidth(*p->ui->cbChNameCountry);
   Util::HeaderViewManager::create(*p->ui->elements,  "ChapterEditor::Elements")    .setDefaultSizes({ { Q("editionChapter"), 200 }, { Q("start"),    130 }, { Q("end"), 130 } });
   Util::HeaderViewManager::create(*p->ui->tvChNames, "ChapterEditor::ChapterNames").setDefaultSizes({ { Q("name"),           200 }, { Q("language"), 150 } });
 
@@ -149,11 +183,13 @@ Tab::setupUi() {
   connect(p->ui->elements->selectionModel(),  &QItemSelectionModel::selectionChanged,                                 this,                    &Tab::chapterSelectionChanged);
   connect(p->ui->tvChNames->selectionModel(), &QItemSelectionModel::selectionChanged,                                 this,                    &Tab::nameSelectionChanged);
   connect(p->ui->leChName,                    &QLineEdit::textEdited,                                                 this,                    &Tab::chapterNameEdited);
-  connect(p->ui->ldwChNameLanguage,           &Util::LanguageDisplayWidget::languageChanged,                          this,                    &Tab::chapterNameLanguageChanged);
-  connect(p->ui->cbChNameCountry,             static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                    &Tab::chapterNameCountryChanged);
+  connect(p->ui->ldwChNameLanguage1,          &Util::LanguageDisplayWidget::languageChanged,                          this,                    &Tab::chapterNameLanguageChanged);
+  connect(p->ui->cbChNameCountry1,            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                    &Tab::chapterNameCountryChanged);
   connect(p->ui->pbChAddName,                 &QPushButton::clicked,                                                  this,                    &Tab::addChapterName);
   connect(p->ui->pbChRemoveName,              &QPushButton::clicked,                                                  this,                    &Tab::removeChapterName);
   connect(p->ui->pbBrowseSegmentUID,          &QPushButton::clicked,                                                  this,                    &Tab::addSegmentUIDFromFile);
+  connect(p->ui->pbChNameLanguageAdd,         &QPushButton::clicked,                                                  this,                    &Tab::addChapterNameLanguage);
+  connect(p->ui->pbChNameCountryAdd,          &QPushButton::clicked,                                                  this,                    &Tab::addChapterNameCountry);
 
   connect(p->expandAllAction,                 &QAction::triggered,                                                    this,                    &Tab::expandAll);
   connect(p->collapseAllAction,               &QAction::triggered,                                                    this,                    &Tab::collapseAll);
@@ -168,7 +204,7 @@ Tab::setupUi() {
   connect(p->generateSubChaptersAction,       &QAction::triggered,                                                    this,                    &Tab::generateSubChapters);
   connect(p->renumberSubChaptersAction,       &QAction::triggered,                                                    this,                    &Tab::renumberSubChapters);
 
-  connect(mw,                                 &MainWindow::preferencesChanged,                                        p->ui->cbChNameCountry,  &Util::ComboBoxBase::reInitialize);
+  connect(mw,                                 &MainWindow::preferencesChanged,                                        p->ui->cbChNameCountry1, &Util::ComboBoxBase::reInitialize);
 
   for (auto &lineEdit : findChildren<Util::BasicLineEdit *>()) {
     lineEdit->acceptDroppedFiles(false).setTextToDroppedFileName(false);
@@ -445,6 +481,7 @@ Tab::loadFromChapterFile(QString const &fileName,
 
   try {
     chapters = mtx::chapters::parse(to_utf8(fileName), 0, -1, 0, {}, to_utf8(Util::Settings::get().m_ceTextFileCharacterSet), true, &format);
+    // log_it(ebml_dumper_c::dump_to_string(chapters.get()));
 
   } catch (mtx::mm_io::exception &ex) {
     error = Q(ex.what());
@@ -1119,20 +1156,62 @@ Tab::chapterSelectionChanged(QItemSelection const &selected,
 
 bool
 Tab::setNameControlsFromStorage(QModelIndex const &idx) {
-  auto p       = p_func();
-  auto display = p->nameModel->displayFromIndex(idx);
+  auto &p      = *p_func();
+  auto display = p.nameModel->displayFromIndex(idx);
 
   if (!display)
     return false;
 
-  auto language = mtx::chapters::get_language_from_display(*display, "eng"s);
+  // qDebug() << "setNameControlsFromStorage start";
 
-  p->ui->leChName->setText(Q(GetChildValue<KaxChapterString>(display)));
-  p->ui->ldwChNameLanguage->setAdditionalLanguages(usedNameLanguages());
-  p->ui->ldwChNameLanguage->setLanguage(language);
-  p->ui->cbChNameCountry->setAdditionalItems(usedNameCountryCodes())
+  // log_it(ebml_dumper_c::dump_to_string(display));
+
+  p.ignoreChapterNameChanges = true;
+
+  p.ui->leChName->setText(Q(GetChildValue<KaxChapterString>(display)));
+
+  auto lists             = NameModel::effectiveLanguagesAndCountriesForDisplay(*display);
+  auto usedLanguageCodes = usedNameLanguages();
+  auto usedCountryCodes  = usedNameCountryCodes();
+
+  // qDebug() << lists.languageNames << usedCountryCodes;
+
+  std::sort(lists.languageCodes.begin(), lists.languageCodes.end(), [](auto const &a, auto const &b) { return a.format_long() < b.format_long(); });
+  lists.countryCodes.sort();
+
+  for (int languageIdx = 1, numLanguages = p.languageControls.size(); languageIdx < numLanguages; ++languageIdx) {
+    auto &[layout, language, button] = p.languageControls[languageIdx];
+    delete layout;
+    delete language;
+    delete button;
+  }
+
+  for (int countryIdx = 1, numCountries = p.countryControls.size(); countryIdx < numCountries; ++countryIdx) {
+    auto &[layout, country, button] = p.countryControls[countryIdx];
+    delete layout;
+    delete country;
+    delete button;
+  }
+
+  p.languageControls.remove(1, p.languageControls.size() - 1);
+  p.countryControls .remove(1, p.countryControls .size() - 1);
+
+  p.ui->ldwChNameLanguage1->setAdditionalLanguages(usedLanguageCodes);
+  p.ui->ldwChNameLanguage1->setLanguage(lists.languageCodes.isEmpty() ? mtx::bcp47::language_c{} : lists.languageCodes[0]);
+
+  p.ui->cbChNameCountry1->setAdditionalItems(usedCountryCodes)
     .reInitializeIfNecessary()
-    .setCurrentByData(Q(FindChildValue<KaxChapterCountry>(display)));
+    .setCurrentByData(lists.countryCodes.isEmpty() ? QString{} : lists.countryCodes[0]);
+
+  for (int languageIdx = 1, numLanguages = lists.languageCodes.size(); languageIdx < numLanguages; ++languageIdx)
+    addOneChapterNameLanguage(lists.languageCodes[languageIdx], usedLanguageCodes);
+
+  for (int countryIdx = 1, numCountries = lists.countryCodes.size(); countryIdx < numCountries; ++countryIdx)
+    addOneChapterNameCountry(lists.countryCodes[countryIdx], usedCountryCodes);
+
+  p.ignoreChapterNameChanges = false;
+
+  // qDebug() << "setNameControlsFromStorage end";
 
   return true;
 }
@@ -1182,29 +1261,75 @@ Tab::chapterNameEdited(QString const &text) {
 }
 
 void
-Tab::chapterNameLanguageChanged(mtx::bcp47::language_c const &language) {
-  auto p = p_func();
+Tab::chapterNameLanguageChanged() {
+  auto &p = *p_func();
 
-  withSelectedName([p, &language](QModelIndex const &idx, KaxChapterDisplay &display) {
-    mtx::chapters::set_languages_in_display(display, language);
-    p->nameModel->updateRow(idx.row());
+  // qDebug() << "chapterNameLanguageChanged start";
+
+  if (p.ignoreChapterNameChanges) {
+    // qDebug() << "chapterNameLanguageChanged ignoring";
+    return;
+  }
+
+  QSet<mtx::bcp47::language_c> uniqueLanguageCodes;
+
+  for (auto const &control : p.languageControls) {
+    auto languageCode = static_cast<mtx::gui::Util::LanguageDisplayWidget *>(std::get<1>(control))->language();
+    if (languageCode.is_valid())
+      uniqueLanguageCodes << languageCode;
+  }
+
+  auto languageCodes = uniqueLanguageCodes.values();
+  std::sort(languageCodes.begin(), languageCodes.end());
+
+  withSelectedName([&p, &languageCodes](QModelIndex const &idx, KaxChapterDisplay &display) {
+    DeleteChildren<KaxChapterLanguage>(display);
+    DeleteChildren<KaxChapLanguageIETF>(display);
+
+    for (auto const &languageCode : languageCodes) {
+      AddEmptyChild<KaxChapLanguageIETF>(display).SetValue(languageCode.format());
+      if (languageCode.has_valid_iso639_code())
+        AddEmptyChild<KaxChapterLanguage>(display).SetValue(languageCode.get_iso639_alpha_3_code());
+    }
+
+    p.nameModel->updateRow(idx.row());
   });
+
+  // qDebug() << "chapterNameLanguageChanged end";
 }
 
 void
-Tab::chapterNameCountryChanged(int index) {
-  auto p = p_func();
+Tab::chapterNameCountryChanged() {
+  auto &p = *p_func();
 
-  if (0 > index)
+  // qDebug() << "chapterNameCountryChanged start";
+
+  if (p.ignoreChapterNameChanges) {
+    // qDebug() << "chapterNameCountryChanged ignoring";
     return;
+  }
 
-  withSelectedName([p, index](QModelIndex const &idx, KaxChapterDisplay &display) {
-    if (0 == index)
-      DeleteChildren<KaxChapterCountry>(display);
-    else
-      GetChild<KaxChapterCountry>(display).SetValue(to_utf8(p->ui->cbChNameCountry->currentData().toString()));
-    p->nameModel->updateRow(idx.row());
+  QSet<QString> uniqueCountryCodes;
+
+  for (auto const &control : p.countryControls) {
+    auto countryCode = static_cast<QComboBox *>(std::get<1>(control))->currentData().toString();
+    if (!countryCode.isEmpty())
+      uniqueCountryCodes << countryCode;
+  }
+
+  auto countryCodes = uniqueCountryCodes.values();
+  countryCodes.sort();
+
+  withSelectedName([&p, &countryCodes](QModelIndex const &idx, KaxChapterDisplay &display) {
+    DeleteChildren<KaxChapterCountry>(display);
+
+    for (auto const &countryCode : countryCodes)
+      AddEmptyChild<KaxChapterCountry>(display).SetValue(to_utf8(countryCode));
+
+    p.nameModel->updateRow(idx.row());
   });
+
+  // qDebug() << "chapterNameCountryChanged end";
 }
 
 void
@@ -1224,10 +1349,106 @@ Tab::removeChapterName() {
 }
 
 void
+Tab::addChapterNameLanguage() {
+  addOneChapterNameLanguage({}, usedNameLanguages());
+}
+
+void
+Tab::addOneChapterNameLanguage(mtx::bcp47::language_c const &languageCode,
+                               QStringList const &usedLanguageCodes) {
+  auto &p           = *p_func();
+
+  auto language     = new mtx::gui::Util::LanguageDisplayWidget{p.ui->wChNameLanguages};
+  auto removeButton = new QPushButton{p.ui->wChNameLanguages};
+  auto layout       = new QHBoxLayout;
+
+  language->setAdditionalLanguages(usedLanguageCodes);
+  language->setLanguage(languageCode);
+
+  QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+  language->setSizePolicy(sizePolicy);
+
+  QIcon removeIcon;
+  removeIcon.addFile(QString::fromUtf8(":/icons/16x16/list-remove.png"), QSize(), QIcon::Normal, QIcon::Off);
+
+  removeButton->setIcon(removeIcon);
+
+  layout->addWidget(language);
+  layout->addWidget(removeButton);
+
+  static_cast<QBoxLayout *>(p.ui->wChNameLanguages->layout())->addLayout(layout);
+
+  p.languageControls.push_back({ layout, language, removeButton });
+
+  connect(language,     &Util::LanguageDisplayWidget::languageChanged, this, &Tab::chapterNameLanguageChanged);
+  connect(removeButton, &QPushButton::clicked,                         this, &Tab::removeChapterNameLanguageOrCountry);
+}
+
+void
+Tab::addChapterNameCountry() {
+  addOneChapterNameCountry({}, usedNameCountryCodes());
+}
+
+void
+Tab::addOneChapterNameCountry(QString const &countryCode,
+                              QStringList const &usedCountryCodes) {
+  auto &p           = *p_func();
+
+  auto country      = new mtx::gui::Util::CountryComboBox{p.ui->wChNameCountries};
+  auto removeButton = new QPushButton{p.ui->wChNameCountries};
+  auto layout       = new QHBoxLayout;
+
+  country->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+  country->setWithAlphaCodesOnly(true);
+  country->setup(true);
+  Util::fixComboBoxViewWidth(*country);
+
+  country->setAdditionalItems(usedCountryCodes)
+    .reInitializeIfNecessary()
+    .setCurrentByData(countryCode);
+
+  QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+  country->setSizePolicy(sizePolicy);
+
+  QIcon removeIcon;
+  removeIcon.addFile(QString::fromUtf8(":/icons/16x16/list-remove.png"), QSize(), QIcon::Normal, QIcon::Off);
+
+  removeButton->setIcon(removeIcon);
+
+  layout->addWidget(country);
+  layout->addWidget(removeButton);
+
+  static_cast<QBoxLayout *>(p.ui->wChNameCountries->layout())->addLayout(layout);
+
+  p.countryControls.push_back({ layout, country, removeButton });
+
+  connect(country,           static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,    &Tab::chapterNameCountryChanged);
+  connect(removeButton,      &QPushButton::clicked,                                                  this,    &Tab::removeChapterNameLanguageOrCountry);
+  connect(MainWindow::get(), &MainWindow::preferencesChanged,                                        country, &Util::ComboBoxBase::reInitialize);
+}
+
+void
+Tab::removeChapterNameLanguageOrCountry() {
+  auto &p = *p_func();
+
+  if (removeLanguageOrCountryControlRow(p.languageControls, sender()))
+    chapterNameLanguageChanged();
+
+  else if (removeLanguageOrCountryControlRow(p.countryControls, sender()))
+    chapterNameCountryChanged();
+}
+
+void
 Tab::enableNameWidgets(bool enable) {
   auto p = p_func();
 
   for (auto const &widget : p->nameWidgets)
+    widget->setEnabled(enable);
+
+  for (auto const &widget : p->ui->wChNameLanguages->findChildren<QWidget *>())
+    widget->setEnabled(enable);
+
+  for (auto const &widget : p->ui->wChNameCountries->findChildren<QWidget *>())
     widget->setEnabled(enable);
 }
 
@@ -1782,9 +2003,12 @@ Tab::changeChapterName(QModelIndex const &parentIdx,
     if (!kDisplay)
       continue;
 
-    auto language = mtx::chapters::get_language_from_display(*kDisplay, "eng"s);
+    auto lists = NameModel::effectiveLanguagesAndCountriesForDisplay(*kDisplay);
+
     if (   (RenumberSubChaptersParametersDialog::NameMatch::All == nameMatchingMode)
-        || (language                                            == languageOfNamesToReplace))
+        || (std::find_if(lists.languageCodes.begin(), lists.languageCodes.end(), [&languageOfNamesToReplace](auto const &actualLanguage) {
+              return (languageOfNamesToReplace == actualLanguage);
+            }) != lists.languageCodes.end()))
       GetChild<KaxChapterString>(*kDisplay).SetValue(name);
   }
 
@@ -2106,9 +2330,9 @@ Tab::usedNameLanguages(QStandardItem *rootItem) {
   if (!rootItem)
     rootItem = p->chapterModel->invisibleRootItem();
 
-  auto names = QSet<QString>{};
+  auto languages = QSet<QString>{};
 
-  std::function<void(QStandardItem *)> collector = [p, &collector, &names](auto *currentItem) {
+  std::function<void(QStandardItem *)> collector = [p, &collector, &languages](auto *currentItem) {
     if (!currentItem)
       return;
 
@@ -2119,7 +2343,9 @@ Tab::usedNameLanguages(QStandardItem *rootItem) {
         if (!kDisplay)
           continue;
 
-        names << Q(mtx::chapters::get_language_from_display(*kDisplay, "eng"s).format());
+        auto lists = NameModel::effectiveLanguagesAndCountriesForDisplay(*static_cast<libmatroska::KaxChapterDisplay *>(kDisplay));
+        for (auto const &languageCodeHere : lists.languageCodes)
+          languages << Q(languageCodeHere.format());
       }
 
     for (int row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)
@@ -2128,7 +2354,7 @@ Tab::usedNameLanguages(QStandardItem *rootItem) {
 
   collector(rootItem);
 
-  return names.values();
+  return languages.values();
 }
 
 QStringList
@@ -2151,9 +2377,9 @@ Tab::usedNameCountryCodes(QStandardItem *rootItem) {
         if (!kDisplay)
           continue;
 
-        auto kCountry = FindChild<KaxChapterCountry>(*kDisplay);
-        if (kCountry)
-          countryCodes << Q(*kCountry);
+        auto lists = NameModel::effectiveLanguagesAndCountriesForDisplay(*static_cast<libmatroska::KaxChapterDisplay *>(kDisplay));
+        for (auto const &countryCodeHere : lists.countryCodes)
+          countryCodes << countryCodeHere;
       }
 
     for (int row = 0, numRows = currentItem->rowCount(); row < numRows; ++row)

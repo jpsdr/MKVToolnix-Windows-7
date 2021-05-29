@@ -13,6 +13,7 @@
 #include "mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.h"
 #include "mkvtoolnix-gui/types.h"
 
+class QComboBox;
 class QItemSelection;
 
 namespace libebml {
@@ -25,6 +26,10 @@ class language_c;
 
 namespace mtx::bluray::mpls {
 struct chapter_t;
+}
+
+namespace mtx::gui::Util {
+class CountryComboBox;
 }
 
 namespace mtx::gui::ChapterEditor {
@@ -118,10 +123,13 @@ public Q_SLOTS:
 
   virtual void nameSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
   virtual void chapterNameEdited(QString const &text);
-  virtual void chapterNameLanguageChanged(mtx::bcp47::language_c const &language);
-  virtual void chapterNameCountryChanged(int index);
+  virtual void chapterNameLanguageChanged();
+  virtual void chapterNameCountryChanged();
   virtual void addChapterName();
+  virtual void addChapterNameLanguage();
+  virtual void addChapterNameCountry();
   virtual void removeChapterName();
+  virtual void removeChapterNameLanguageOrCountry();
 
   virtual void showChapterContextMenu(QPoint const &pos);
 
@@ -207,6 +215,9 @@ protected:
   bool focusNextChapterAtom(FocusElementType toFocus);
   bool focusNextChapterName();
   void focusNextChapterElement(bool keepSameControl);
+
+  void addOneChapterNameLanguage(mtx::bcp47::language_c const &languageCode, QStringList const &usedLanguageCodes);
+  void addOneChapterNameCountry(QString const &countryCode, QStringList const &usedCountryCodes);
 
   static QString formatEbmlBinary(EbmlBinary *binary);
 };

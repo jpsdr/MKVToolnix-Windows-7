@@ -53,6 +53,8 @@
   OGM-style chapter files with timestamps that don't have exactly three
   decimal places. Any number of decimal places between one and nine is now
   supported for nanosecond precision. Fixes #3121.
+* MKVToolNix GUI: chapter editor: added/fixed support for "chapter display"
+  elements with multiple languages or countries. Part of the fix of #3120.
 
 ## Build system changes
 

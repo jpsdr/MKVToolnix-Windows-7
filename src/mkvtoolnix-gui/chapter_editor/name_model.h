@@ -7,11 +7,16 @@
 
 #include <matroska/KaxChapters.h>
 
-// class QAbstractItemView;
+#include "common/bcp47.h"
 
 Q_DECLARE_METATYPE(libmatroska::KaxChapterDisplay *)
 
 namespace mtx::gui::ChapterEditor {
+
+struct LanguagesAndCountries {
+  QList<mtx::bcp47::language_c> languageCodes;
+  QStringList languageNames, countryCodes, countryNames;
+};
 
 class NameModel: public QStandardItemModel {
   Q_OBJECT
@@ -42,6 +47,9 @@ public:
 
   virtual bool canDropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, QModelIndex const &parent) const override;
   virtual bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) override;
+
+public:
+  static LanguagesAndCountries effectiveLanguagesAndCountriesForDisplay(libmatroska::KaxChapterDisplay &display);
 
 protected:
   void setRowText(QList<QStandardItem *> const &rowItems);

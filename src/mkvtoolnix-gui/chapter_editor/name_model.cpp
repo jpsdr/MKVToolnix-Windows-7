@@ -24,9 +24,9 @@ NameModel::~NameModel() {
 void
 NameModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
-    { QY("Name"),     Q("name")     },
-    { QY("Language"), Q("language") },
-    { QY("Country"),  Q("country")  },
+    { QY("Name"),      Q("name")     },
+    { QY("Languages"), Q("language") },
+    { QY("Countries"), Q("country")  },
   });
 }
 
@@ -45,13 +45,55 @@ NameModel::displayFromIndex(QModelIndex const &idx) {
   return displayFromItem(itemFromIndex(idx));
 }
 
+LanguagesAndCountries
+NameModel::effectiveLanguagesAndCountriesForDisplay(libmatroska::KaxChapterDisplay &display) {
+  LanguagesAndCountries lists;
+  QList<mtx::bcp47::language_c> legacyLanguageCodes;
+  QStringList legacyLanguageNames;
+
+  for (auto const &child : display) {
+    if (auto kIetfLanguage = dynamic_cast<libmatroska::KaxChapLanguageIETF const *>(child); kIetfLanguage) {
+      auto language = mtx::bcp47::language_c::parse(kIetfLanguage->GetValue());
+      lists.languageCodes << language;
+      lists.languageNames << Q(language.format_long());
+
+    } else if (auto kLegacyLanguage = dynamic_cast<libmatroska::KaxChapterLanguage const *>(child); kLegacyLanguage) {
+      auto language = mtx::bcp47::language_c::parse(kLegacyLanguage->GetValue());
+      legacyLanguageCodes << language;
+      legacyLanguageNames << Q(language.format_long());
+
+    } else if (auto kCountry = dynamic_cast<libmatroska::KaxChapterCountry const *>(child); kCountry) {
+      auto countryCode = Q(kCountry->GetValue());
+      lists.countryCodes << countryCode;
+      lists.countryNames << App::descriptionForRegion(countryCode);
+    }
+  }
+
+  if (lists.languageCodes.isEmpty()) {
+    lists.languageCodes = std::move(legacyLanguageCodes);
+    lists.languageNames = std::move(legacyLanguageNames);
+  }
+
+  if (lists.languageCodes.isEmpty()) {
+    auto eng = mtx::bcp47::language_c::parse("eng");
+    lists.languageCodes << eng;
+    lists.languageNames << Q(eng.format_long());
+  }
+
+  return lists;
+}
+
 void
 NameModel::setRowText(QList<QStandardItem *> const &rowItems) {
   auto &display = *displayFromItem(rowItems[0]);
+  auto lists    = effectiveLanguagesAndCountriesForDisplay(display);
+
+  lists.languageNames.sort();
+  lists.countryNames.sort();
 
   rowItems[0]->setText(Q(GetChildValue<KaxChapterString>(display)));
-  rowItems[1]->setText(Q(mtx::chapters::get_language_from_display(display, "eng"s).format_long()));
-  rowItems[2]->setText(App::descriptionForRegion(Q(FindChildValue<KaxChapterCountry>(display, ""s))));
+  rowItems[1]->setText(lists.languageNames.join(Q("; ")));
+  rowItems[2]->setText(lists.countryNames.join(Q("; ")));
 }
 
 QList<QStandardItem *>

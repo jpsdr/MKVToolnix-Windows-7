@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>702</width>
-    <height>552</height>
+    <width>911</width>
+    <height>670</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -265,40 +265,13 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>456</width>
-             <height>440</height>
+             <width>544</width>
+             <height>558</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
              <layout class="QGridLayout" name="gridLayout_3">
-              <item row="0" column="0">
-               <widget class="QLabel" name="lChStart">
-                <property name="text">
-                 <string>&amp;Start &amp;&amp; end:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>leChStart</cstring>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayout_2">
-                <item>
-                 <widget class="mtx::gui::Util::BasicLineEdit" name="leChStart"/>
-                </item>
-                <item>
-                 <widget class="mtx::gui::Util::BasicLineEdit" name="leChEnd"/>
-                </item>
-               </layout>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="lChFlags">
-                <property name="text">
-                 <string>Flags:</string>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout">
                 <item>
@@ -330,15 +303,25 @@
                 </item>
                </layout>
               </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="lChUid">
+              <item row="1" column="0">
+               <widget class="QLabel" name="lChFlags">
                 <property name="text">
-                 <string>&amp;UID:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>leChUid</cstring>
+                 <string>Flags:</string>
                 </property>
                </widget>
+              </item>
+              <item row="0" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_2">
+                <item>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="leChStart"/>
+                </item>
+                <item>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="leChEnd"/>
+                </item>
+               </layout>
+              </item>
+              <item row="4" column="1">
+               <widget class="mtx::gui::Util::BasicLineEdit" name="leChSegmentEditionUid"/>
               </item>
               <item row="2" column="1">
                <widget class="mtx::gui::Util::BasicLineEdit" name="leChUid"/>
@@ -353,6 +336,16 @@
                 </property>
                </widget>
               </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="lChStart">
+                <property name="text">
+                 <string>&amp;Start &amp;&amp; end:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>leChStart</cstring>
+                </property>
+               </widget>
+              </item>
               <item row="4" column="0">
                <widget class="QLabel" name="lChSegmentEditionUid">
                 <property name="text">
@@ -363,8 +356,15 @@
                 </property>
                </widget>
               </item>
-              <item row="4" column="1">
-               <widget class="mtx::gui::Util::BasicLineEdit" name="leChSegmentEditionUid"/>
+              <item row="2" column="0">
+               <widget class="QLabel" name="lChUid">
+                <property name="text">
+                 <string>&amp;UID:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>leChUid</cstring>
+                </property>
+               </widget>
               </item>
               <item row="3" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -391,7 +391,7 @@
               <property name="title">
                <string>Names</string>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_4">
+              <layout class="QVBoxLayout" name="verticalLayout_8">
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_3">
                  <item>
@@ -466,43 +466,113 @@
                  <item row="1" column="0">
                   <widget class="QLabel" name="lChNameLanguage">
                    <property name="text">
-                    <string>Language:</string>
+                    <string>Languages:</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>ldwChNameLanguage1</cstring>
                    </property>
                   </widget>
                  </item>
                  <item row="1" column="1">
-                  <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwChNameLanguage"/>
+                  <widget class="QWidget" name="wChNameLanguages" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_4">
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_6">
+                      <item>
+                       <widget class="mtx::gui::Util::LanguageDisplayWidget" name="ldwChNameLanguage1" native="true">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="pbChNameLanguageAdd">
+                        <property name="text">
+                         <string notr="true"/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="../../qt_resources.qrc">
+                          <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </widget>
                  </item>
                  <item row="2" column="0">
                   <widget class="QLabel" name="lChNameCountry">
                    <property name="text">
-                    <string>&amp;Country:</string>
+                    <string>&amp;Countries:</string>
                    </property>
                    <property name="buddy">
-                    <cstring>cbChNameCountry</cstring>
+                    <cstring>cbChNameCountry1</cstring>
                    </property>
                   </widget>
                  </item>
                  <item row="2" column="1">
-                  <widget class="mtx::gui::Util::CountryComboBox" name="cbChNameCountry"/>
+                  <widget class="QWidget" name="wChNameCountries" native="true">
+                   <layout class="QVBoxLayout" name="verticalLayout_6">
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="rightMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
+                    <item>
+                     <layout class="QHBoxLayout" name="horizontalLayout_7">
+                      <item>
+                       <widget class="mtx::gui::Util::CountryComboBox" name="cbChNameCountry1">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="pbChNameCountryAdd">
+                        <property name="text">
+                         <string notr="true"/>
+                        </property>
+                        <property name="icon">
+                         <iconset resource="../../qt_resources.qrc">
+                          <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </widget>
                  </item>
                 </layout>
                </item>
               </layout>
              </widget>
-            </item>
-            <item>
-             <spacer name="verticalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>13</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
@@ -532,14 +602,14 @@
    <header>mkvtoolnix-gui/util/elide_label.h</header>
   </customwidget>
   <customwidget>
-   <class>mtx::gui::Util::LanguageDisplayWidget</class>
-   <extends>QForm</extends>
-   <header>mkvtoolnix-gui/util/language_display_widget.h</header>
-  </customwidget>
-  <customwidget>
    <class>mtx::gui::Util::CountryComboBox</class>
    <extends>QComboBox</extends>
    <header>mkvtoolnix-gui/util/country_combo_box.h</header>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::LanguageDisplayWidget</class>
+   <extends>QWidget</extends>
+   <header>mkvtoolnix-gui/util/language_display_widget.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
@@ -561,8 +631,8 @@
   <tabstop>pbChAddName</tabstop>
   <tabstop>pbChRemoveName</tabstop>
   <tabstop>leChName</tabstop>
-  <tabstop>ldwChNameLanguage</tabstop>
-  <tabstop>cbChNameCountry</tabstop>
+  <tabstop>ldwChNameLanguage1</tabstop>
+  <tabstop>cbChNameCountry1</tabstop>
  </tabstops>
  <resources>
   <include location="../../qt_resources.qrc"/>
