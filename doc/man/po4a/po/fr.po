@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2021-05-23 17:51+0200\n"
-"PO-Revision-Date: 2021-04-10 06:22+0000\n"
+"PO-Revision-Date: 2021-05-24 07:15+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -41,10 +41,8 @@ msgstr "57.0.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2021-03-06"
 msgid "2021-05-22"
-msgstr "06-03-2021"
+msgstr "22-05-2021"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -2798,15 +2796,13 @@ msgstr "<option>--default-track</option> <parameter>TID<optional>:bool</optional
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1390
-#, fuzzy
-#| msgid "Sets the &amp;visual impaired&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is suitable for users with visual impairments."
 msgid "Sets the &amp;default track&amp; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present. The flag will be set if the source container doesn't provide that information and the user doesn't specify it via this option."
-msgstr "Pose le signal « Malvoyant » pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif <parameter>bool</parameter> est défini à <constant>1</constant> ou s'il n'est pas présent. Ce signal peut être posé si la piste est adaptée aux utilisateurs malvoyants."
+msgstr "Pose le signal « Piste par défaut » pour la piste donnée (voir section <link linkend=\"mkvmerge.track_ids\">ID de piste</link>) si l'argument facultatif <parameter>bool</parameter> est défini à <constant>1</constant> ou s'il n'est pas présent. Ce drapeau sera défini si le conteneur de la source ne fournit pas cette information et si l'utilisateur ne le spécifie pas via cette option."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1396
 msgid "If the user does not explicitly select a track during playback, the player should select one of the tracks that has its &amp;default track&amp; flag set, taking user preferences such as their preferred language into account."
-msgstr ""
+msgstr "Si l'utilisateur ne sélectionne pas explicitement une piste lors de la lecture, le lecteur devrait sélectionner une des pistes avec le signal « Piste par défaut » posé, prenant en compte les préférences utilisateurs telle que la langue préférée."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1407
@@ -3818,7 +3814,7 @@ msgstr "$ mkvmerge -o with-lang-codes.mkv --language 2:ger --language 3:dut --de
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2518
 msgid "If you do not see the language or default track flags that you've specified in &mkvinfo;'s output then please read the section about <link linkend=\"mkvmerge.default_values\">default values</link>."
-msgstr "Si la langue ou les drapeaux de piste par défaut spécifiés dans la sortie de &mkvinfo; ne sont pas visibles, merci de lire la section relatives aux <link linkend=\"mkvmerge.default_values\"> valeurs par défaut</link>."
+msgstr "Si les signaux de langue ou de « Piste par défaut » spécifiés dans la sortie de &mkvinfo; ne sont pas visibles, merci de lire la section relative aux <link linkend=\"mkvmerge.default_values\"> valeurs par défaut</link>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2523
@@ -4108,7 +4104,7 @@ msgstr "Valeurs par défaut"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2812
 msgid "The &matroska; specification states that some elements have a default value. Usually an element is not written to the file if its value is equal to its default value in order to save space. The elements that the user might miss in &mkvinfo;'s output are the <parameter>language</parameter> and the <parameter>default track flag</parameter> elements.  The default value for the <parameter>language</parameter> is English ('<literal>eng</literal>'), and the default value for the <parameter>default track flag</parameter> is <parameter>true</parameter>. Therefore if you used <option>--language 0:eng</option> for a track then it will not show up in &mkvinfo;'s output."
-msgstr "La  spécification &matroska; établit que quelques éléments ont une valeur par défaut. Habituellement un élément n'est pas écrit vers le fichier si sa valeur est égal à la valeur par défaut afin de gagne de l'espace. Les éléments que l'utilisateur pourraient manquer dans la sortie de &mkvinfo; sont les éléments <parameter>langue</parameter> et le <parameter>signal de piste par défaut</parameter>. La valeur par défaut de la <parameter>language</parameter> est English ('<literal>eng</literal>'), et la valeur par défaut du <parameter>signal de piste par défaut</parameter> est <parameter>true</parameter>. Par conséquent, si <option>--language 0:eng</option> est utilisé pour une piste, alors il ne sera pas affiché dans la sortie de &mkvinfo;."
+msgstr "La  spécification &matroska; dicte que quelques éléments possèdent une valeur par défaut. Habituellement un élément n'est pas écrit vers le fichier si sa valeur est égale à la valeur par défaut afin de gagner de l'espace. Les éléments que l'utilisateur pourraient manquer dans la sortie de &mkvinfo; sont les éléments <parameter>langue</parameter> et le <parameter>signal de piste par défaut</parameter>. La valeur par défaut de la <parameter>language</parameter> est English ('<literal>eng</literal>'), et la valeur par défaut du <parameter>signal de piste par défaut</parameter> est <parameter>true</parameter>. Par conséquent, si <option>--language 0:eng</option> est utilisé pour une piste, alors il ne sera pas affiché dans la sortie de &mkvinfo;."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2824
@@ -4811,7 +4807,7 @@ msgstr "<command>mkvpropedit</command> <arg>options</arg> <arg choice=\"req\">so
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:61
 msgid "This program analyses an existing &matroska; file and modifies some of its properties. Then it writes those modifications to the existing file. Among the properties that can be changed are the segment information elements (e.g. the title) and the track headers (e.g. the language code, 'default track' flag or the name)."
-msgstr "Ce logiciel analyse un fichier &matroska; existant et modifie quelques unes de ses propriétés. Ensuite, il écrit ces modifications dans le fichier existant. Parmi les propriétés qui peuvent être modifiées figurent les éléments d'informations de segment (par ex. le titre) et les entêtes de piste (par ex. le code langue, le signal « piste par défaut » ou le nom)."
+msgstr "Ce logiciel analyse un fichier &matroska; existant et modifie quelques unes de ses propriétés. Ensuite, il écrit ces modifications dans le fichier existant. Parmi les propriétés qui peuvent être modifiées figurent les éléments d'informations de segment (par ex. le titre) et les entêtes de piste (par ex. le code langue, le signal « Piste par défaut » ou le nom)."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:67
@@ -5123,7 +5119,7 @@ msgstr "Entêtes de piste"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvpropedit.xml:527
 msgid "Track headers can be selected with a slightly more complex selector. All variations start with '<literal>track:</literal>'. The track header properties include elements like the language code, 'default track' flag or the track's name."
-msgstr "Les entêtes de pistes peuvent être sélectionnées avec un sélecteur un peu plus complexe. Toutes les variations débutent avec '<literal>track:</literal>'. Les propriétés d'entête de piste comprennent des éléments comme le code langue, le signal « piste par défaut » ou le nom de piste."
+msgstr "Les entêtes de pistes peuvent être sélectionnées avec un sélecteur un peu plus complexe. Toutes les variations débutent avec '<literal>track:</literal>'. Les propriétés d'entête de piste comprennent des éléments comme le code langue, le signal « Piste par défaut » ou le nom de piste."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:533
@@ -5225,7 +5221,7 @@ msgstr "$ mkvpropedit movie.mkv --edit info --set \"title=The movie\" --edit tra
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:650
 msgid "The second example removes the 'default track flag' from the first subtitle track and sets it for the second one. Note that &mkvpropedit;, unlike &mkvmerge;, does not set the 'default track flag' of other tracks to '0' if it is set to '1' for a different track automatically."
-msgstr "Le deuxième exemple retire le signal « Piste par défaut » de la 1ère piste de sous-titres et le définit pour la 2nde. Noter que &mkvpropedit;, à la différence de &mkvmerge;, ne définit pas le signal « Piste par défaut » des autres pistes à « 0 » s'il est définit automatiquement à « 1 » pour une autres piste."
+msgstr "Le deuxième exemple retire le signal « Piste par défaut » de la 1ère piste de sous-titres et le définit pour la 2nde. Noter que &mkvpropedit;, à la différence de &mkvmerge;, ne définit pas le signal « Piste par défaut » des autres pistes à « 0 » s'il est définit automatiquement à « 1 » pour une autres piste."
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:655
