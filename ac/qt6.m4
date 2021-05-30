@@ -163,6 +163,7 @@ return 0;
   fi
 
   AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
+  AC_MSG_CHECKING(for Qt 6)
   AC_MSG_RESULT(yes)
   have_qt6=yes
   USE_QT=yes
