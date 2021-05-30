@@ -1804,6 +1804,8 @@ Tab::moveSourceFilesUpOrDown(bool up) {
 
   if (focus)
     focus->setFocus();
+
+  p.ui->files->scrollToFirstSelected();
 }
 
 void
@@ -1832,6 +1834,8 @@ Tab::moveTracksUpOrDown(bool up) {
 
   if (focus)
     focus->setFocus();
+
+  p.ui->tracks->scrollToFirstSelected();
 }
 
 void

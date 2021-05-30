@@ -27,6 +27,10 @@
 * mkvmerge: AVC/H.264 & HEVC/H.265 identification: added the stream's pixel
   dimensions (AVC only; were present for HEVC already) & default
   duration. Implements #3116.
+* MKVToolNix GUI: when moving list entries up & down with the optional buttons
+  or the keyboard shortcuts (instead of using drag & drop), the GUI ensures
+  that the top-most selected entry remains visible after the move. Implements
+  #3123.
 
 
 ## Bug fixes

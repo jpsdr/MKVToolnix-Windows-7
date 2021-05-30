@@ -325,6 +325,8 @@ Tool::moveJobsUpOrDown(bool up) {
 
   if (focus)
     focus->setFocus();
+
+  ui->jobs->scrollToFirstSelected();
 }
 
 void

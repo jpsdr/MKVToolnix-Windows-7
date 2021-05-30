@@ -448,11 +448,14 @@ Tab::setupAttachmentsToolTips() {
 
 void
 Tab::moveAttachmentsUpOrDown(bool up) {
+  auto &p          = *p_func();
   auto attachments = selectedAttachments();
 
-  p_func()->attachmentsModel->moveAttachmentsUpOrDown(attachments, up);
+  p.attachmentsModel->moveAttachmentsUpOrDown(attachments, up);
 
   selectAttachments(attachments);
+
+  p.ui->attachments->scrollToFirstSelected();
 }
 
 void

@@ -41,6 +41,7 @@ Q_SIGNALS:
 
 public Q_SLOTS:
   void toggleSelectionOfCurrentItem();
+  void scrollToFirstSelected();
 
 protected:
   virtual void dragEnterEvent(QDragEnterEvent *event) override;

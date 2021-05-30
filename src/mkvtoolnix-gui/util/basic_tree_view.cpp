@@ -2,11 +2,13 @@
 
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
+#include <QStandardItemModel>
 
 #include "common/list_utils.h"
 #include "common/qt6_compat/event.h"
 #include "mkvtoolnix-gui/util/basic_tree_view.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
+#include "mkvtoolnix-gui/util/model.h"
 
 namespace mtx::gui::Util {
 
@@ -120,6 +122,40 @@ BasicTreeView::keyPressEvent(QKeyEvent *event) {
 
   else
     QTreeView::keyPressEvent(event);
+}
+
+void
+BasicTreeView::scrollToFirstSelected() {
+  QModelIndex firstSelected;
+  std::pair<int, int> firstSelectedRows;
+
+  Util::withSelectedIndexes(this, [&firstSelected, &firstSelectedRows](auto const &idx) {
+    auto thisRows = idx.parent().isValid() ? std::make_pair(idx.parent().row(), idx.row()) : std::make_pair(idx.row(), 0);
+
+    if (!firstSelected.isValid() || (thisRows < firstSelectedRows)) {
+      firstSelected     = idx;
+      firstSelectedRows = thisRows;
+    }
+  });
+
+  if (!firstSelected.isValid())
+    return;
+
+  scrollTo(firstSelected);
+
+  if (firstSelected.parent().isValid())
+    firstSelected = firstSelected.row() > 1 ? firstSelected.sibling(firstSelected.row() - 1, 0) : firstSelected.parent();
+
+  else if (firstSelected.row() > 0) {
+    firstSelected = firstSelected.sibling(firstSelected.row() - 1, 0);
+    auto item     = dynamic_cast<QStandardItemModel const &>(*firstSelected.model()).itemFromIndex(firstSelected);
+
+    if (item && (item->rowCount() > 0))
+      firstSelected = item->child(item->rowCount() - 1)->index();
+  }
+
+  if (firstSelected.isValid())
+    scrollTo(firstSelected);
 }
 
 }
