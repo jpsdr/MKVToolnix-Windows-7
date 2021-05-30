@@ -17,15 +17,18 @@ if test x"$enable_magic" = xyes; then
     use_magic=yes
 
   else
+    magic_mingw_libs=""
+    if test "x$ac_cv_mingw32" = "xyes"; then
+      magic_mingw_libs="-lshlwapi"
+    fi
+
     AC_CHECK_LIB(magic, magic_open, [ magic_found=yes ], [ magic_found=no ], [-lz $GNURX_LIBS $magic_mingw_libs])
-    AC_CHECK_HEADERS([magic.h])
 
-    if test "x$magic_found" = "xyes" -a "x$ac_cv_header_magic_h" = "xyes" ; then
-      magic_mingw_libs=""
-      if test "x$ac_cv_mingw32" = "xyes"; then
-        magic_mingw_libs="-lshlwapi"
-      fi
+    if test "x$magic_found" = "xyes"; then
+      AC_CHECK_HEADERS([magic.h])
+    fi
 
+    if test "x$ac_cv_header_magic_h" = "xyes" ; then
       MAGIC_LIBS="-lmagic -lz $GNURX_LIBS $magic_mingw_libs"
       use_magic=yes
     fi
