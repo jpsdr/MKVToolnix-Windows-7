@@ -61,6 +61,9 @@
   elements with multiple languages or countries. Part of the fix of #3120.
 * mkvmerge: MP4 reader: fixed an issue with timestamps overflowing when the
   file's or the track's time scale is large. Fixes #3124.
+* build system: when libmagic was detected via `pkg-config`, MKVToolNix was
+  actually compiled without support for libmagic due to a preprocessor symbol
+  not being defined.
 
 ## Build system changes
 
