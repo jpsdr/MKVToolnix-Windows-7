@@ -17,10 +17,10 @@ BuildRequires: rubygem-drake
 %if 0%{?rhel} <= 7
 BuildRequires: devtoolset-9-gcc-c++, boost169-devel
 %else
-BuildRequires: boost-devel >= 1.60.0
+BuildRequires: boost-devel >= 1.66.0
 %endif
 %else
-BuildRequires: boost-devel >= 1.60.0
+BuildRequires: boost-devel >= 1.66.0
 %endif
 
 %if 0%{?suse_version}
