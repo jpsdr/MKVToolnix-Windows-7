@@ -25,9 +25,6 @@ kax_content_encoding_t::kax_content_encoding_t()
   , type{}
   , scope(CONTENT_ENCODING_SCOPE_BLOCK)
   , comp_algo{}
-  , enc_algo{}
-  , sig_algo{}
-  , sig_hash_algo{}
 {
 }
 
@@ -67,16 +64,6 @@ content_decoder_c::initialize(KaxTrackEntry &ktentry) {
     if (ce_comp) {
       enc.comp_algo     = FindChildValue<KaxContentCompAlgo    >(ce_comp);
       enc.comp_settings = FindChildValue<KaxContentCompSettings>(ce_comp);
-    }
-
-    auto ce_enc = FindChild<KaxContentEncryption>(kcenc);
-    if (ce_enc) {
-      enc.enc_algo      = FindChildValue<KaxContentEncAlgo    >(ce_enc);
-      enc.enc_keyid     = FindChildValue<KaxContentEncKeyID   >(ce_enc);
-      enc.sig_algo      = FindChildValue<KaxContentSigAlgo    >(ce_enc);
-      enc.sig_hash_algo = FindChildValue<KaxContentSigHashAlgo>(ce_enc);
-      enc.sig_keyid     = FindChildValue<KaxContentSigKeyID   >(ce_enc);
-      enc.signature     = FindChildValue<KaxContentSignature  >(ce_enc);
     }
 
     if (1 == enc.type) {
