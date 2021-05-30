@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2021-05-29 23:01+0200\n"
-"PO-Revision-Date: 2021-04-10 06:18+0000\n"
+"PO-Revision-Date: 2021-05-30 07:16+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -392,7 +392,7 @@ msgid ""
 "                           Force the default duration of a track to X.\n"
 "                           X can be a floating point number or a fraction.\n"
 msgstr ""
-"  --default-duration <TID:Xs|ms|us|ns|tps>\n"
+"  --default-duration \n"
 "                           Remplace la durée par défaut d'une piste par X.\n"
 "                           X peut être un nombre décimal ou une fraction.\n"
 
@@ -1758,9 +1758,9 @@ msgid "&Copy command line to clipboard"
 msgstr "&Copier la ligne de commande dans le presse-papiers"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:582
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Countries:"
-msgstr "&Pays :"
+msgstr "&Pays  :"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:496
 #, no-c-format
@@ -4970,7 +4970,7 @@ msgid "Could not write to the destination file: {0} ({1})\n"
 msgstr "Impossible d'écrire vers le fichier destination : {0} ({1})\n"
 
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:29
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Countries"
 msgstr "Pays"
 
@@ -6090,7 +6090,7 @@ msgstr "Saisir la taille de coupure prédéfinie"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:748
 #, no-c-format
 msgid "Enter predefined track name"
-msgstr "Saisir le nom de piste par défaut"
+msgstr "Saisir le nom de piste prédéfinie"
 
 #: src/mkvtoolnix-gui/merge/mux_config.cpp:283
 #, no-c-format
@@ -7081,7 +7081,7 @@ msgstr "Si désactivé, l'interface graphique permettra de saisir une descriptio
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
 #, no-c-format
 msgid "If enabled, all subtitle tracks will have their \"default track\" flag set to \"no\" when they're added."
-msgstr "Si activé, toutes les pistes de sous-titres verront leur signal « Piste par défaut » défini à « Non » lors de leur ajout."
+msgstr "Si activé, toutes les pistes de sous-titres verront leur signal « Piste par défaut » défini à « Non » lors de leur ajout."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:252
 #, no-c-format
@@ -7971,14 +7971,14 @@ msgid "Language:"
 msgstr "Langue :"
 
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:28
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Languages"
-msgstr "&Langues"
+msgstr "Langues"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:581
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Languages:"
-msgstr "Langue :"
+msgstr "Langues :"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1844
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1877
@@ -8218,7 +8218,7 @@ msgstr "Nombre ma&ximal de tâches simultanées :"
 #: src/mkvtoolnix-gui/merge/input.cpp:466
 #, no-c-format
 msgid "Make this track eligible to be played by default."
-msgstr ""
+msgstr "Ceci rend cette piste capable d'être lue par défaut."
 
 #: src/input/r_matroska.cpp:1801
 #: src/input/r_matroska.cpp:1818
@@ -9449,9 +9449,9 @@ msgid "Play audio file '%1'"
 msgstr "Jouer le fichier audio « %1 »"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:467
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language."
-msgstr "Les lecteurs multimédia devraient préférer les pistes avec le signal « Piste par défaut » posé."
+msgstr "Les lecteurs préfèrent les pistes avec le signal « Piste par défaut » posé tandis que les préférences utilisateurs, telle que la langue de la piste, sont prises en compte."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:322
 #, no-c-format
@@ -9488,7 +9488,7 @@ msgstr "Merci de saisir la nouvelle taille de coupure prédéfinie."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:748
 #, no-c-format
 msgid "Please enter the new predefined track name."
-msgstr "Merci de saisir le nouveau nom de piste par défaut."
+msgstr "Merci de saisir le nouveau nom de piste prédéfinie."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:759
 #, no-c-format
@@ -10771,9 +10771,9 @@ msgid "Show a &summary line with statistics for each track at the end"
 msgstr "Afficher une ligne de ré&sumé à la fin avec des statistiques pour chaque piste"
 
 #: src/info/info_cli_parser.cpp:44
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Show all bytes of each frame and other binary elements as a hex dump."
-msgstr "Afficher tous les octets des éléments de trames et CodecPrivate en listages hex"
+msgstr "Affiche tous les octets de chaque trame et autres éléments binaires en listage hex."
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
 #, no-c-format
@@ -13105,7 +13105,7 @@ msgstr "Cette piste AVC/H.264 ne débute pas par une trame-clé. Les {0} premiè
 #: src/output/p_avc_es.cpp:118
 #, no-c-format
 msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
-msgstr "L'information de temps de cette piste AVC/H.264 indique l'utilisation d'une fréquence de trame variable. Toutefois, aucune durée par défaut ni aucun horodatage externe n'est donné, et le conteneur source ne fournit aucun horodatage. Il se pourrait que les horodatages résultants ne soient pas pertinents.\n"
+msgstr "L'information de temps de cette piste AVC/H.264 indique l'utilisation d'une fréquence de trame variable. Toutefois, aucune durée par défaut ni aucun horodatage externe n'est donné, et le conteneur source ne fournit aucun horodatage. Il se pourrait que les horodatages résultants ne soient pas utilisables.\n"
 
 #: src/output/p_hevc_es.cpp:105
 #, no-c-format
