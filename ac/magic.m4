@@ -9,19 +9,20 @@ AC_ARG_ENABLE([magic],
 use_magic=no
 
 if test x"$enable_magic" = xyes; then
+  magic_mingw_libs=""
+  if test "x$ac_cv_mingw32" = "xyes"; then
+    magic_mingw_libs="-lshlwapi"
+  fi
+
   PKG_CHECK_EXISTS([libmagic],[libmagic_pkgfound=yes],[libmagic_pkgfound=no])
+
   if test x"$libmagic_pkgfound" = xyes; then
     PKG_CHECK_MODULES([MAGIC],[libmagic],[libmagic_pkgfound=yes],[libmagic_pkgfound=no])
-    MAGIC_LIBS="`$PKG_CONFIG --libs libmagic`"
+    MAGIC_LIBS="`$PKG_CONFIG --libs libmagic` $magic_mingw_libs"
     AC_DEFINE(HAVE_MAGIC_H, 1, [Define to 1 if you have the <magic.h> header file.])
     use_magic=yes
 
   else
-    magic_mingw_libs=""
-    if test "x$ac_cv_mingw32" = "xyes"; then
-      magic_mingw_libs="-lshlwapi"
-    fi
-
     AC_CHECK_LIB(magic, magic_open, [ magic_found=yes ], [ magic_found=no ], [-lz $GNURX_LIBS $magic_mingw_libs])
 
     if test "x$magic_found" = "xyes"; then
