@@ -330,6 +330,7 @@ Settings::load() {
   m_probeRangePercentage                      = reg.value(s_valProbeRangePercentage,                                                           0.3).toDouble();
   m_tabPosition                               = static_cast<QTabWidget::TabPosition>(reg.value(s_valTabPosition,                               static_cast<int>(QTabWidget::North)).toInt());
   m_elideTabHeaderLabels                      = reg.value(s_valElideTabHeaderLabels,                                                           defaultElideTabHeaderLabels).toBool();
+  m_useLegacyFontMIMETypes                    = reg.value(s_valUseLegacyFontMIMETypes,                                                         false).toBool();
   m_lastOpenDir                               = QDir{reg.value(s_valLastOpenDir).toString()};
   m_lastOutputDir                             = QDir{reg.value(s_valLastOutputDir).toString()};
   m_lastConfigDir                             = QDir{reg.value(s_valLastConfigDir).toString()};
@@ -691,6 +692,7 @@ Settings::save()
   reg.setValue(s_valProbeRangePercentage,                      m_probeRangePercentage);
   reg.setValue(s_valTabPosition,                               static_cast<int>(m_tabPosition));
   reg.setValue(s_valElideTabHeaderLabels,                      m_elideTabHeaderLabels);
+  reg.setValue(s_valUseLegacyFontMIMETypes,                    m_useLegacyFontMIMETypes);
   reg.setValue(s_valLastOpenDir,                               m_lastOpenDir.path());
   reg.setValue(s_valLastOutputDir,                             m_lastOutputDir.path());
   reg.setValue(s_valLastConfigDir,                             m_lastConfigDir.path());

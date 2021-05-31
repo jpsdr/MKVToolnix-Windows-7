@@ -1,10 +1,10 @@
 #include "common/common_pch.h"
 
-#include "common/mime.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/merge/attachment.h"
 #include "mkvtoolnix-gui/util/config_file.h"
+#include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
 #include <QFileInfo>
@@ -45,7 +45,7 @@ Attachment::loadSettings(MuxConfig::Loader &l) {
 
 void
 Attachment::guessMIMEType() {
-  m_MIMEType = to_qs(mtx::mime::guess_type(to_utf8(m_fileName), true));
+  m_MIMEType = Util::detectMIMEType(m_fileName);
 }
 
 void

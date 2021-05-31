@@ -14,6 +14,7 @@
 #include "mkvtoolnix-gui/forms/header_editor/tab.h"
 #include "mkvtoolnix-gui/header_editor/attached_file_page.h"
 #include "mkvtoolnix-gui/header_editor/tab.h"
+#include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -225,7 +226,7 @@ AttachedFilePage::replaceContent(bool deriveNameAndMimeType) {
   if (!deriveNameAndMimeType)
     return;
 
-  auto mimeType = Q(mtx::mime::guess_type(to_utf8(fileName), true));
+  auto mimeType = Util::detectMIMEType(fileName);
 
   ui->name->setText(fileInfo.fileName());
   ui->mimeType->setEditText(mimeType);

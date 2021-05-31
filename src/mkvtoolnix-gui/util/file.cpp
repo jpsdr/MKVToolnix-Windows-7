@@ -9,10 +9,12 @@
 #include <QRegularExpression>
 #include <QUrl>
 
+#include "common/mime.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/file.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
 
 namespace mtx::gui::Util {
@@ -121,6 +123,24 @@ replaceDirectoriesByContainedFiles(QStringList const &namesToCheck) {
   }
 
   return fileNames;
+}
+
+QString
+detectMIMEType(QString const &fileName) {
+  static QHash<QString, QString> s_legacyFontTypes;
+
+  auto mimeType = Q(mtx::mime::guess_type(to_utf8(fileName), true));
+
+  if (!Util::Settings::get().m_useLegacyFontMIMETypes)
+    return mimeType;
+
+  if (s_legacyFontTypes.isEmpty()) {
+    s_legacyFontTypes[Q("font/otf")]  = Q("application/vnd.ms-opentype");
+    s_legacyFontTypes[Q("font/sfnt")] = Q("application/x-truetype-font");
+    s_legacyFontTypes[Q("font/ttf")]  = Q("application/x-truetype-font");
+  }
+
+  return s_legacyFontTypes.contains(mimeType) ? s_legacyFontTypes[mimeType] : mimeType;
 }
 
 }

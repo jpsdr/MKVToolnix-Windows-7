@@ -56,6 +56,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbGuiShowToolSelector->setChecked(m_cfg.m_showToolSelector);
   ui->cbGuiShowMoveUpDownButtons->setChecked(m_cfg.m_showMoveUpDownButtons);
   ui->cbGuiElideTabHeaderLabels->setChecked(m_cfg.m_elideTabHeaderLabels);
+  ui->cbGuiUseLegacyFontMIMETypes->setChecked(m_cfg.m_useLegacyFontMIMETypes);
   ui->cbGuiWarnBeforeClosingModifiedTabs->setChecked(m_cfg.m_warnBeforeClosingModifiedTabs);
   ui->cbGuiWarnBeforeAbortingJobs->setChecked(m_cfg.m_warnBeforeAbortingJobs);
   ui->cbGuiWarnBeforeOverwriting->setChecked(m_cfg.m_warnBeforeOverwriting);
@@ -279,6 +280,11 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("If checked, additional buttons for moving selected entries up and down will be shown next to several list views.")));
 
   Util::setToolTip(ui->cbGuiElideTabHeaderLabels, QY("If enabled, the names of tab headers will be shortened so that all tab headers fit into the window's width."));
+
+  Util::setToolTip(ui->cbGuiUseLegacyFontMIMETypes,
+                   Q("%1 %2")
+                   .arg(QY("If enabled, the GUI will use legacy MIME types when detecting the MIME type of font attachments instead of the current standard MIME types."))
+                   .arg(QY("This mostly affects TrueType fonts for which the legacy MIME type ('application/x-truetype-font') might be more widely supported than the standard MIME types ('font/sfnt' and 'font/ttf').")));
 
   Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled, the program will ask for confirmation before overwriting files and jobs."));
 
@@ -886,6 +892,7 @@ PreferencesDialog::save() {
   m_cfg.m_showToolSelector                                    = ui->cbGuiShowToolSelector->isChecked();
   m_cfg.m_showMoveUpDownButtons                               = ui->cbGuiShowMoveUpDownButtons->isChecked();
   m_cfg.m_elideTabHeaderLabels                                = ui->cbGuiElideTabHeaderLabels->isChecked();
+  m_cfg.m_useLegacyFontMIMETypes                              = ui->cbGuiUseLegacyFontMIMETypes->isChecked();
   m_cfg.m_warnBeforeClosingModifiedTabs                       = ui->cbGuiWarnBeforeClosingModifiedTabs->isChecked();
   m_cfg.m_warnBeforeAbortingJobs                              = ui->cbGuiWarnBeforeAbortingJobs->isChecked();
   m_cfg.m_warnBeforeOverwriting                               = ui->cbGuiWarnBeforeOverwriting->isChecked();

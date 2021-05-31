@@ -31,6 +31,9 @@
   or the keyboard shortcuts (instead of using drag & drop), the GUI ensures
   that the top-most selected entry remains visible after the move. Implements
   #3123.
+* MKVToolNix GUI: added an option in the preference to use legacy MIME types
+  for font attachments instead of the current standard ones
+  (e.g. 'application/x-truetype-font' instead of 'font/sfnt' and 'font/ttf').
 
 
 ## Bug fixes

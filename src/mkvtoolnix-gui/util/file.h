@@ -22,4 +22,6 @@ QString replaceInvalidFileNameCharacters(QString fileName);
 
 QStringList replaceDirectoriesByContainedFiles(QStringList const &namesToCheck);
 
+QString detectMIMEType(QString const &fileName);
+
 }

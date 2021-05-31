@@ -127,6 +127,7 @@ char const * const s_valUiLocale                                  = "uiLocale";
 char const * const s_valUniqueOutputFileNames                     = "uniqueOutputFileNames";
 char const * const s_valUseDefaultJobDescription                  = "useDefaultJobDescription";
 char const * const s_valUseISO639_3Languages                      = "useISO639_3Languages";
+char const * const s_valUseLegacyFontMIMETypes                    = "useLegacyFontMIMETypes";
 char const * const s_valVerbosity                                 = "verbosity";
 char const * const s_valVideoPolicy                               = "videoPolicy";
 char const * const s_valVolume                                    = "volume";
