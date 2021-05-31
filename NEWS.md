@@ -95,6 +95,20 @@
 * Boost's multi-precision library is now required.
 * Boost v1.66 or newer is now required.
 
+## Other changes
+
+* The Windows build is now using an updated version of the
+  `file`/`magic` library for MIME type detection of attachments. This
+  affects fonts whose MIME types will now be the current standard MIME
+  types (e.g. `font/sfnt` or `font/ttf` for TrueType fonts). As this
+  might pose problematic with older players that only support the
+  legacy MIME type (e.g. `application/x-truetype-font`), a new option
+  was added in the GUI's preferences to use the legacy MIME types
+  instead of the current standard ones. This is off by default.
+  Builds for other operating systems have already been using newer
+  versions of the `file`/`magic` library for a long time.
+
+
 # Version 57.0.0 "Till The End" 2021-05-22
 
 ## New features and enhancements
