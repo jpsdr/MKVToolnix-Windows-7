@@ -122,9 +122,8 @@ create_dovi_configuration_record(dovi_rpu_data_header_t const &hdr,
         conf.dv_profile = 7;
       else
         conf.dv_profile = 4;
-    }
 
-    else
+    } else
       conf.dv_profile = 8;
   }
 
@@ -136,41 +135,40 @@ create_dovi_configuration_record(dovi_rpu_data_header_t const &hdr,
 
   conf.el_present_flag  = 0;
 
-  if (conf.dv_profile == 4) {
+  if (conf.dv_profile == 4)
     conf.dv_bl_signal_compatibility_id = 2;
 
-  } else if (conf.dv_profile == 5) {
+  else if (conf.dv_profile == 5)
     conf.dv_bl_signal_compatibility_id = 0;
 
-  } else if (conf.dv_profile == 8) {
+  else if (conf.dv_profile == 8) {
     auto trc = vui.transfer_characteristics;
 
     // WCG
     if (vui.colour_primaries == 9 && vui.matrix_coefficients == 9) {
-      if (trc == 16) {                     // ST2084, HDR10 base layer
+      if (trc == 16)                       // ST2084, HDR10 base layer
         conf.dv_bl_signal_compatibility_id = 1;
-      } else if (trc == 14 || trc == 18) { // ARIB STD-B67, HLG base layer
+      else if ((trc == 14) || (trc == 18)) // ARIB STD-B67, HLG base layer
         conf.dv_bl_signal_compatibility_id = 4;
-      } else {                             // undefined
+      else                                 // undefined
         conf.dv_bl_signal_compatibility_id = 0;
-      }
-    } else {                               // BT.709, BT.1886, SDR
+
+    } else                                 // BT.709, BT.1886, SDR
       conf.dv_bl_signal_compatibility_id = 2;
-    }
-  } else if (conf.dv_profile == 7) {
+
+  } else if (conf.dv_profile == 7)
     conf.dv_bl_signal_compatibility_id = 6;
 
-  } else if (conf.dv_profile == 9) {
+  else if (conf.dv_profile == 9)
     conf.dv_bl_signal_compatibility_id = 2;
-  }
 
   // Profile 4 is necessarily SDR with an enhancement-layer
   // It's possible that the first guess was wrong, so correct it
-  if (has_el && conf.dv_bl_signal_compatibility_id == 2 && conf.dv_profile != 4)
+  if (has_el && (conf.dv_bl_signal_compatibility_id == 2) && (conf.dv_profile != 4))
     conf.dv_profile = 4;
 
   // Set EL present for profile 4 and 7
-  if (conf.dv_profile == 4 || conf.dv_profile == 7) {
+  if ((conf.dv_profile == 4) || (conf.dv_profile == 7)) {
     conf.el_present_flag = 1;
   }
 
@@ -181,9 +179,6 @@ uint8_t
 calculate_dovi_level(unsigned int width,
                      unsigned int height,
                      uint64_t duration) {
-  auto frame_rate = 1'000'000'000ull / duration;
-  auto pps        = frame_rate * (width * height);
-
   constexpr auto level1     =    22'118'400ull;
   constexpr auto level2     =    27'648'000ull;
   constexpr auto level3     =    49'766'400ull;
@@ -197,36 +192,23 @@ calculate_dovi_level(unsigned int width,
   constexpr auto level12    = 1'990'656'000ull;
   constexpr auto level13    = 3'981'312'000ull;
 
-  uint8_t level = 0;
-  if (pps <= level1) {
-    level = 1;
-  } else if (pps <= level2) {
-    level = 2;
-  } else if (pps <= level3) {
-    level = 3;
-  } else if (pps <= level4) {
-    level = 4;
-  } else if (pps <= level5) {
-    level = 5;
-  } else if (pps <= level6) {
-    level = 6;
-  } else if (pps <= level7) {
-    level = 7;
-  } else if (pps <= level8) {
-    level = 8;
-  } else if (pps <= level9) {
-    level = 9;
-  } else if (pps <= level10_11) {
-    if (width <= 3840) {
-      level = 10;
-    } else if (width > 3840) {
-      level = 11;
-    }
-  } else if (pps <= level12) {
-    level = 12;
-  } else if (pps <= level13) {
-    level = 13;
-  }
+  auto frame_rate           = 1'000'000'000ull / duration;
+  auto pps                  = frame_rate * (width * height);
+
+  uint8_t level             = pps <= level1                          ?  1
+                            : pps <= level2                          ?  2
+                            : pps <= level3                          ?  3
+                            : pps <= level4                          ?  4
+                            : pps <= level5                          ?  5
+                            : pps <= level6                          ?  6
+                            : pps <= level7                          ?  7
+                            : pps <= level8                          ?  8
+                            : pps <= level9                          ?  9
+                            : (pps <= level10_11) && (width <= 3840) ? 10
+                            : pps <= level10_11                      ? 11
+                            : pps <= level12                         ? 12
+                            : pps <= level13                         ? 13
+                            :                                           0;
 
   return level;
 }
@@ -234,13 +216,9 @@ calculate_dovi_level(unsigned int width,
 block_addition_mapping_t
 create_dovi_block_addition_mapping(dovi_decoder_configuration_record_t const &dovi_conf) {
   block_addition_mapping_t mapping;
-  mapping.id_name = "Dolby Vision configuration";
 
-  if (dovi_conf.dv_profile > 7) {
-    mapping.id_type = fourcc_c{"dvvC"}.value();
-  } else {
-    mapping.id_type = fourcc_c{"dvcC"}.value();
-  }
+  mapping.id_name = "Dolby Vision configuration";
+  mapping.id_type = dovi_conf.dv_profile > 7 ? fourcc_c{"dvvC"}.value() : fourcc_c{"dvcC"}.value();
 
   mtx::bits::writer_c w{};
 

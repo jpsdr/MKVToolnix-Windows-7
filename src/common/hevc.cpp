@@ -385,13 +385,13 @@ vui_parameters_copy(mtx::bits::reader_c &r,
 
     sps.vui.video_full_range_flag = w.copy_bits(1, r);      // video_full_range_flag
     if (w.copy_bits(1, r) == 1) {                           // color_desc_present_flag
-      sps.vui.colour_primaries = w.copy_bits(8, r);         // colour_primaries
+      sps.vui.colour_primaries         = w.copy_bits(8, r); // colour_primaries
       sps.vui.transfer_characteristics = w.copy_bits(8, r); // transfer_characteristics
-      sps.vui.matrix_coefficients = w.copy_bits(8, r);      // matrix_coefficients
+      sps.vui.matrix_coefficients      = w.copy_bits(8, r); // matrix_coefficients
     }
   }
   if (w.copy_bits(1, r) == 1) { // chroma_loc_info_present_flag
-    sps.vui.chroma_sample_loc_type_top_field = w.copy_unsigned_golomb(r); // chroma_sample_loc_type_top_field
+    sps.vui.chroma_sample_loc_type_top_field    = w.copy_unsigned_golomb(r); // chroma_sample_loc_type_top_field
     sps.vui.chroma_sample_loc_type_bottom_field = w.copy_unsigned_golomb(r); // chroma_sample_loc_type_bottom_field
   }
   w.copy_bits(1, r);            // neutral_chroma_indication_flag

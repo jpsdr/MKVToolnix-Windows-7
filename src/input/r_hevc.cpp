@@ -58,12 +58,7 @@ hevc_es_reader_c::probe_file() {
     if (m_block_addition_mappings.empty() && parser.has_dovi_rpu_header()) {
       auto hdr                = parser.get_dovi_rpu_header();
       auto vui                = parser.get_vui_info();
-
-      int64_t duration;
-      if (parser.has_stream_default_duration())
-        duration = m_default_duration;
-      else
-        duration = parser.get_most_often_used_duration();
+      auto duration           = parser.has_stream_default_duration() ? m_default_duration : parser.get_most_often_used_duration();
 
       auto dovi_config_record = create_dovi_configuration_record(hdr, m_width, m_height, vui, duration);
 
