@@ -7,10 +7,12 @@ URL: https://mkvtoolnix.download/
 Version: 57.0.0
 Release: 1
 Summary: Tools to create, alter and inspect Matroska files
-Source: %{name}-%{version}.tar.xz
-Requires: hicolor-icon-theme
+Source0: %{name}-%{version}.tar.xz
+Group: Applications/Multimedia
+License: GPLv2
 
 BuildRequires: desktop-file-utils, fdupes, file-devel, flac, flac-devel, glibc-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, cmark-devel, po4a, libdvdread-devel, pcre2-devel, pcre2
+BuildRequires: gettext-devel, qt5-qtbase-devel, qt5-qtmultimedia-devel, libxslt, docbook-style-xsl, gtest-devel, fmt-devel
 
 %if 0%{?rhel}
 BuildRequires: rubygem-drake
@@ -23,35 +25,30 @@ BuildRequires: boost-devel >= 1.66.0
 BuildRequires: boost-devel >= 1.66.0
 %endif
 
-%if 0%{?suse_version}
-BuildRequires: gettext-tools libqt5-qtbase-devel, libqt5-qtmultimedia-devel, libxslt-tools, docbook-xsl-stylesheets, googletest-devel, ruby2.5-rubygem-rake-12_0, gcc-c++
-%else
-BuildRequires: gettext-devel, qt5-qtbase-devel, qt5-qtmultimedia-devel, libxslt, docbook-style-xsl, gtest-devel, fmt-devel
-%endif
-
 %if 0%{?fedora}
-BuildRequires: gcc-c++ >= 7, rubypick, pugixml-devel, rubygem-drake, json-devel >= 2
-%endif
-
-%if 0%{?suse_version}
-Group: Productivity/Multimedia/Other
-License: GPL-2.0
-%else
-Group: Applications/Multimedia
-License: GPLv2
+BuildRequires: gcc-c++ >= 7, rubypick, pugixml-devel, rubygem-drake, json-devel >= 2, libappstream-glib
 %endif
 
 %description
-Tools to create and manipulate Matroska files (extensions .mkv and
-.mka), a new container format for audio and video files. Includes
-command line tools mkvextract, mkvinfo, mkvmerge, mkvpropedit and a
-graphical frontend for them, mkvmerge-gui.
+Mkvtoolnix is a set of utilities to mux and demux audio, video and subtitle
+streams into and from Matroska containers.
 
-Authors:
---------
-    Moritz Bunkus <moritz@bunkus.org>
+
+%package gui
+Summary: Qt-based graphical interface for Matroska container manipulation
+Requires: %{name} = %{version}-%{release}
+Requires: hicolor-icon-theme
+
+%description gui
+Mkvtoolnix is a set of utilities to mux and demux audio, video and subtitle
+streams into and from Matroska containers.
+
+This package contains the Qt graphical interface for these utilities.
+
+Requires: hicolor-icon-theme
 
 %prep
+# %{gpgverify} --keyring='%{S:2}' --signature='%{S:1}' --data='%{S:0}'
 %setup
 
 export CFLAGS="%{optflags}"
@@ -65,41 +62,41 @@ export CPPFLAGS="${CPPFLAGS} -I/usr/include/boost169"
 export CONFIGURE_ARGS="--with-boost-libdir=/usr/lib64/boost169"
 %endif
 
-%if 0%{?suse_version}
-export CC=/usr/bin/gcc-7
-export CXX=/usr/bin/g++-7
-%endif
-
 %configure \
-  --enable-optimization \
+  --disable-optimization \
   --enable-debug \
+  --with-tools \
   "$CONFIGURE_ARGS"
 
 %build
-%if 0%{?suse_version}
-rake
-%else
+# if [[ -f ~/mtx-rpm-compiled.tar.gz ]]; then
+#   tar xzf ~/mtx-rpm-compiled.tar.gz
+# fi
+
 drake
-%endif
+
+# tar czf ~/mtx-rpm-compiled-$(date '+%%Y%%m%%d%%H%%M%%S').tar .
 
 %check
-%if 0%{?suse_version}
-rake tests:run_unit
-%else
 drake tests:run_unit
-%endif
 
 %install
-%if 0%{?suse_version}
-rake DESTDIR=$RPM_BUILD_ROOT install
-strip ${RPM_BUILD_ROOT}/usr/bin/*
-%else
-drake DESTDIR=$RPM_BUILD_ROOT install
-%endif
+drake DESTDIR=$RPM_BUILD_ROOT TOOLS=1 install
+desktop-file-validate %{buildroot}%{_datadir}/applications/org.bunkus.mkvtoolnix-gui.desktop
+if test `lsb_release -is` = Fedora; then
+  appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/org.bunkus.mkvtoolnix-gui.appdata.xml
+fi
 
-for f in mkvtoolnix-gui; do
-  desktop-file-validate %{buildroot}%{_datadir}/applications/org.bunkus.$f.desktop
-done
+install -pm 755 src/tools/{bluray_dump,ebml_validator,hevcc_dump,hevc_dump} $RPM_BUILD_ROOT%{_bindir}
+
+%find_lang %{name}
+%find_lang mkvextract --with-man
+%find_lang mkvmerge --with-man
+%find_lang mkvpropedit --with-man
+%find_lang mkvinfo --with-man
+cat mkv{extract,info,merge,propedit}.lang >> mkvtoolnix.lang
+
+%find_lang mkvtoolnix-gui --with-man
 
 %fdupes -s %buildroot/%_mandir
 %fdupes -s %buildroot/%_prefix
@@ -122,56 +119,36 @@ fi
 gtk-update-icon-cache %{_datadir}/icons/hicolor     &> /dev/null || true
 update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
 
-%files
-%defattr (-,root,root)
-%doc AUTHORS COPYING README.md NEWS.md
-%{_bindir}/*
-%{_datadir}/applications/*.desktop
-%{_datadir}/icons/hicolor/*/*/*.png
-%{_datadir}/metainfo/*.xml
-%{_datadir}/mime/packages/*.xml
-%lang(bg) %{_datadir}/locale/bg/*/*.mo
-%lang(ca) %{_datadir}/locale/ca/*/*.mo
-%lang(cs) %{_datadir}/locale/cs/*/*.mo
-%lang(de) %{_datadir}/locale/de/*/*.mo
-%lang(es) %{_datadir}/locale/es/*/*.mo
-%lang(eu) %{_datadir}/locale/eu/*/*.mo
-%lang(fr) %{_datadir}/locale/fr/*/*.mo
-%lang(it) %{_datadir}/locale/it/*/*.mo
-%lang(ja) %{_datadir}/locale/ja/*/*.mo
-%lang(ko) %{_datadir}/locale/ko/*/*.mo
-%lang(lt) %{_datadir}/locale/lt/*/*.mo
-%lang(nl) %{_datadir}/locale/nl/*/*.mo
-%lang(pl) %{_datadir}/locale/pl/*/*.mo
-%lang(pt) %{_datadir}/locale/pt/*/*.mo
-%lang(pt_BR) %{_datadir}/locale/pt_BR/*/*.mo
-%lang(ro) %{_datadir}/locale/ro/*/*.mo
-%lang(ru) %{_datadir}/locale/ru/*/*.mo
-%lang(sr_RS) %{_datadir}/locale/sr_RS/*/*.mo
-%lang(sr_RS@latin) %{_datadir}/locale/sr_RS@latin/*/*.mo
-%lang(sv) %{_datadir}/locale/sv/*/*.mo
-%lang(tr) %{_datadir}/locale/tr/*/*.mo
-%lang(uk) %{_datadir}/locale/uk/*/*.mo
-%lang(zh_CN) %{_datadir}/locale/zh_CN/*/*.mo
-%lang(zh_TW) %{_datadir}/locale/zh_TW/*/*.mo
-%{_datadir}/man/man1/*
-%{_datadir}/man/bg
-%{_datadir}/man/ca
-%{_datadir}/man/de
-%{_datadir}/man/es
-%{_datadir}/man/fr
-%{_datadir}/man/it
-%{_datadir}/man/ja
-%{_datadir}/man/ko
-%{_datadir}/man/nl
-%{_datadir}/man/pl
-%{_datadir}/man/ru
-%{_datadir}/man/uk
-%{_datadir}/man/zh_CN
-%{_datadir}/man/zh_TW
+
+%files -f %{name}.lang
+%license COPYING
+%doc AUTHORS README.md NEWS.md
+%{_bindir}/bluray_dump
+%{_bindir}/ebml_validator
+%{_bindir}/hevc_dump
+%{_bindir}/hevcc_dump
+%{_bindir}/mkvextract
+%{_bindir}/mkvinfo
+%{_bindir}/mkvmerge
+%{_bindir}/mkvpropedit
+%{_mandir}/man1/mkvextract.1*
+%{_mandir}/man1/mkvinfo.1*
+%{_mandir}/man1/mkvmerge.1*
+%{_mandir}/man1/mkvpropedit.1*
+
+%files gui -f mkvtoolnix-gui.lang
+%{_bindir}/mkvtoolnix-gui
+%{_mandir}/man1/mkvtoolnix-gui.1*
+%{_datadir}/applications/org.bunkus.mkvtoolnix-gui.desktop
+%{_metainfodir}/org.bunkus.mkvtoolnix-gui.appdata.xml
+%{_datadir}/icons/hicolor/*/apps/*.png
+%{_datadir}/mime/packages/org.bunkus.mkvtoolnix-gui.xml
 %{_datadir}/mkvtoolnix
 
 %changelog -n mkvtoolnix
+* Wed Jun 02 2021 Moritz Bunkus <moritz@bunkus.org> 57.0.0-1
+- Split package into non-GUI (mkvtoolnix) & GUI (mkvtoolnix-gui)
+
 * Sat May 22 2021 Moritz Bunkus <moritz@bunkus.org> 57.0.0-1
 - New version
 
