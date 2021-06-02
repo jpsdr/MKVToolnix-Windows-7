@@ -34,6 +34,9 @@
 * MKVToolNix GUI: added an option in the preference to use legacy MIME types
   for font attachments instead of the current standard ones
   (e.g. 'application/x-truetype-font' instead of 'font/sfnt' and 'font/ttf').
+* mkvmerge, mkvextract: HEVC/H.265: added support for reading single-layer
+  Dolby Vision from Annex B type bitstreams (elementary streams, MPEG
+  transport streams). Patch by quietvoid. Implements #3113.
 
 
 ## Bug fixes
