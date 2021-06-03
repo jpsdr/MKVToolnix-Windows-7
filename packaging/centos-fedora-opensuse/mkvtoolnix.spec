@@ -11,13 +11,36 @@ Source0: %{name}-%{version}.tar.xz
 Group: Applications/Multimedia
 License: GPLv2
 
-BuildRequires: desktop-file-utils, fdupes, file-devel, flac, flac-devel, glibc-devel, libogg-devel, libstdc++-devel, libvorbis-devel, make, pkgconfig, zlib-devel, cmark-devel, po4a, libdvdread-devel, pcre2-devel, pcre2
-BuildRequires: gettext-devel, qt5-qtbase-devel, qt5-qtmultimedia-devel, libxslt, docbook-style-xsl, gtest-devel, fmt-devel
+BuildRequires: cmark-devel
+BuildRequires: desktop-file-utils
+BuildRequires: docbook-style-xsl
+BuildRequires: fdupes
+BuildRequires: file-devel
+BuildRequires: flac
+BuildRequires: flac-devel
+BuildRequires: fmt-devel
+BuildRequires: gettext-devel
+BuildRequires: glibc-devel
+BuildRequires: gtest-devel
+BuildRequires: libdvdread-devel
+BuildRequires: libogg-devel
+BuildRequires: libstdc++-devel
+BuildRequires: libvorbis-devel
+BuildRequires: libxslt
+BuildRequires: make
+BuildRequires: pcre2
+BuildRequires: pcre2-devel
+BuildRequires: pkgconfig
+BuildRequires: po4a
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtmultimedia-devel
+BuildRequires: zlib-devel
+BuildRequires: rubygem-drake
 
 %if 0%{?rhel}
-BuildRequires: rubygem-drake
 %if 0%{?rhel} <= 7
-BuildRequires: devtoolset-9-gcc-c++, boost169-devel
+BuildRequires: boost169-devel
+BuildRequires: devtoolset-9-gcc-c++
 %else
 BuildRequires: boost-devel >= 1.66.0
 %endif
@@ -26,7 +49,11 @@ BuildRequires: boost-devel >= 1.66.0
 %endif
 
 %if 0%{?fedora}
-BuildRequires: gcc-c++ >= 7, rubypick, pugixml-devel, rubygem-drake, json-devel >= 2, libappstream-glib
+BuildRequires: gcc-c++ >= 7
+BuildRequires: json-devel >= 2
+BuildRequires: libappstream-glib
+BuildRequires: pugixml-devel
+BuildRequires: rubypick
 %endif
 
 %description
