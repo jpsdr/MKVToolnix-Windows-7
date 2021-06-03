@@ -93,6 +93,7 @@ export CONFIGURE_ARGS="--with-boost-libdir=/usr/lib64/boost169"
   --disable-optimization \
   --enable-debug \
   --with-tools \
+  --disable-qt6 \
   "$CONFIGURE_ARGS"
 
 %build
