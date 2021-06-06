@@ -40,9 +40,10 @@ BuildRequires: rubygem-drake
 %if 0%{?rhel}
 %if 0%{?rhel} <= 7
 BuildRequires: boost169-devel
-BuildRequires: devtoolset-9-gcc-c++
+BuildRequires: devtoolset-10-gcc-c++
 %else
 BuildRequires: boost-devel >= 1.66.0
+BuildRequires: gcc-toolset-10-gcc-c++
 %endif
 %else
 BuildRequires: boost-devel >= 1.66.0
@@ -83,10 +84,14 @@ export CXXFLAGS="%{optflags}"
 unset CONFIGURE_ARGS
 
 %if 0%{?rhel} && 0%{?rhel} <= 7
-export CC=/opt/rh/devtoolset-9/root/bin/gcc
-export CXX=/opt/rh/devtoolset-9/root/bin/g++
+export CC=/opt/rh/devtoolset-10/root/bin/gcc
+export CXX=/opt/rh/devtoolset-10/root/bin/g++
 export CPPFLAGS="${CPPFLAGS} -I/usr/include/boost169"
 export CONFIGURE_ARGS="--with-boost-libdir=/usr/lib64/boost169"
+%endif
+%if 0%{?rhel} && 0%{?rhel} >= 8
+export CC=/opt/rh/gcc-toolset-10/root/bin/gcc
+export CXX=/opt/rh/gcc-toolset-10/root/bin/g++
 %endif
 
 %configure \
