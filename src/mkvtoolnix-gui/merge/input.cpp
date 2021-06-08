@@ -73,7 +73,8 @@ Tab::setupControlLists() {
                      << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet << p.ui->cuesLabel << p.ui->cues
                      << p.ui->propertiesLabel << p.ui->generalOptionsBox;
 
-  p.chapterControls << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet << p.ui->propertiesLabel << p.ui->generalOptionsBox;
+  p.chapterControls << p.ui->timestampsAndDefaultDurationBox << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy
+                    << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet << p.ui->propertiesLabel << p.ui->generalOptionsBox;
 
   p.allInputControls << p.ui->muxThisLabel << p.ui->muxThis << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag
                      << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
@@ -480,15 +481,17 @@ Tab::setupInputToolTips() {
                    .arg(QY("If set to 'determine automatically' then mkvmerge will decide whether or not to compress and which algorithm to use based on the track type."))
                    .arg(QY("Currently only certain subtitle formats are compressed with the zlib algorithm.")));
   Util::setToolTip(p.ui->delay,
-                   Q("%1 %2 %3")
-                   .arg(QY("Delay this track's timestamps by a couple of ms."))
-                   .arg(QY("The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."))
-                   .arg(QY("This works with all track types.")));
+                   Q("<p>%1 %2 %3</p><p>%4</p>")
+                   .arg(QYH("Delay this track's timestamps by a couple of ms."))
+                   .arg(QYH("The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."))
+                   .arg(QYH("This works with all track types."))
+                   .arg(QYH("This option can also be used for chapters.")));
   Util::setToolTip(p.ui->stretchBy,
-                   Q("<p>%1 %2</p><p>%3</p>")
+                   Q("<p>%1 %2</p><p>%3</p><p>%4</p>")
                    .arg(QYH("Multiply this track's timestamps with a factor."))
                    .arg(QYH("The value can be given either as a floating point number (e.g. 12.345) or a fraction of numbers (e.g. 123/456.78)."))
-                   .arg(QYH("This works well for video and subtitle tracks but should not be used with audio tracks.")));
+                   .arg(QYH("This works well for video and subtitle tracks but should not be used with audio tracks."))
+                   .arg(QYH("This option can also be used for chapters.")));
   Util::setToolTip(p.ui->defaultDuration,
                    Q("%1 %2 %3 %4")
                    .arg(QY("Forces the default duration or number of frames per second for a track."))

@@ -37,6 +37,8 @@
 * mkvmerge, mkvextract: HEVC/H.265: added support for reading single-layer
   Dolby Vision from Annex B type bitstreams (elementary streams, MPEG
   transport streams). Patch by quietvoid. Implements #3113.
+* MKVToolNix GUI: multiplexer: the "delay" and "sync" options can now be used
+  for chapters in source files, too. Implements #3129.
 
 
 ## Bug fixes

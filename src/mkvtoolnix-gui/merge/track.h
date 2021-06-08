@@ -74,6 +74,8 @@ public:
 
   virtual QString nameForType() const;
 
+  virtual int mkvmergeTrackId() const;
+
   virtual std::string debugInfo() const;
 
   void buildMkvmergeOptions(MkvmergeOptionBuilder &opt) const;

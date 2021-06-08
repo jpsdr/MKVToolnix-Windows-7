@@ -365,8 +365,14 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
   if (!m_muxThis || (m_appendedTo && !m_appendedTo->m_muxThis))
     return;
 
-  auto sid = QString::number(m_id);
+  auto sid = QString::number(mkvmergeTrackId());
   opt.enabledTrackIds[m_type] << sid;
+
+  if (isTags() || isGlobalTags() || isAttachment())
+    return;
+
+  if (!m_delay.isEmpty() || !m_stretchBy.isEmpty())
+    opt.options << Q("--sync") << Q("%1:%2").arg(sid).arg(MuxConfig::formatDelayAndStretchBy(m_delay, m_stretchBy));
 
   if (isAudio()) {
     if (m_aacSbrWasDetected || (0 != m_aacIsSBR))
@@ -395,8 +401,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
 
     return;
 
-  } else if (isTags() || isGlobalTags() || isAttachment())
-    return;
+  }
 
   if (!m_appendedTo) {
     opt.options << Q("--language") << Q("%1:%2").arg(sid).arg(Q(m_language.format()));
@@ -447,9 +452,6 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     if (m_compression != TrackCompression::Default)
       opt.options << Q("--compression") << Q("%1:%2").arg(sid).arg(TrackCompression::None == m_compression ? Q("none") : Q("zlib"));
   }
-
-  if (!m_delay.isEmpty() || !m_stretchBy.isEmpty())
-    opt.options << Q("--sync") << Q("%1:%2").arg(sid).arg(MuxConfig::formatDelayAndStretchBy(m_delay, m_stretchBy));
 
   if (!m_defaultDuration.isEmpty()) {
     auto unit = m_defaultDuration.contains(QRegularExpression{"\\d$"}) ? Q("fps") : Q("");
@@ -522,6 +524,15 @@ Track::canSetAacToSbr()
   return isAudio()
       && m_codec.contains(QRegularExpression{Q("aac"), QRegularExpression::CaseInsensitiveOption})
       && mtx::included_in(m_file->m_type, mtx::file_type_e::aac, mtx::file_type_e::matroska, mtx::file_type_e::real);
+}
+
+int
+Track::mkvmergeTrackId()
+  const {
+  if (isChapters())
+    return -2;
+
+  return m_id;
 }
 
 }
