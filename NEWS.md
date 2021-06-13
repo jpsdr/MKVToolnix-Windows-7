@@ -22,11 +22,16 @@
 
   `mkvpropedit` and the GUI's header editor are unaffected as they've always
   allowed to set the flag on as many tracks as the user wanted.
-* mkvinfo: the option `-X`/`--full-hexdump` now affects all binary elements,
-  not just the frame data in `SimpleBlock` and `BlockGroup` elements.
 * mkvmerge: AVC/H.264 & HEVC/H.265 identification: added the stream's pixel
   dimensions (AVC only; were present for HEVC already) & default
   duration. Implements #3116.
+* mkvmerge, mkvextract: HEVC/H.265: added support for reading single-layer
+  Dolby Vision from Annex B type bitstreams (elementary streams, MPEG
+  transport streams). Patch by quietvoid. Implements #3113.
+* mkvinfo: the option `-X`/`--full-hexdump` now affects all binary elements,
+  not just the frame data in `SimpleBlock` and `BlockGroup` elements.
+* MKVToolNix GUI: multiplexer: the "delay" and "sync" options can now be used
+  for chapters in source files, too. Implements #3129.
 * MKVToolNix GUI: when moving list entries up & down with the optional buttons
   or the keyboard shortcuts (instead of using drag & drop), the GUI ensures
   that the top-most selected entry remains visible after the move. Implements
@@ -34,11 +39,6 @@
 * MKVToolNix GUI: added an option in the preference to use legacy MIME types
   for font attachments instead of the current standard ones
   (e.g. 'application/x-truetype-font' instead of 'font/sfnt' and 'font/ttf').
-* mkvmerge, mkvextract: HEVC/H.265: added support for reading single-layer
-  Dolby Vision from Annex B type bitstreams (elementary streams, MPEG
-  transport streams). Patch by quietvoid. Implements #3113.
-* MKVToolNix GUI: multiplexer: the "delay" and "sync" options can now be used
-  for chapters in source files, too. Implements #3129.
 
 
 ## Bug fixes
@@ -47,6 +47,11 @@
   file `iso639_language_list.cpp` (before only numeric optimization levels
   were filtered out and only if it wasn't the last option in the list of
   flags). See #3105 for context.
+* build system: when libmagic was detected via `pkg-config`, MKVToolNix was
+  actually compiled without support for libmagic due to a preprocessor symbol
+  not being defined.
+* mkvmerge: MP4 reader: fixed an issue with timestamps overflowing when the
+  file's or the track's time scale is large. Fixes #3124.
 * mkvmerge, mkvextract: fixed key frame handling for `BlockGroup` elements
   with a forward reference but no backward references. Patches by Tom Yan.
 * mkvmerge, mkvpropedit, MKVToolNix GUI's chapter editor: the programs will no
@@ -67,11 +72,6 @@
   supported for nanosecond precision. Fixes #3121.
 * MKVToolNix GUI: chapter editor: added/fixed support for "chapter display"
   elements with multiple languages or countries. Part of the fix of #3120.
-* mkvmerge: MP4 reader: fixed an issue with timestamps overflowing when the
-  file's or the track's time scale is large. Fixes #3124.
-* build system: when libmagic was detected via `pkg-config`, MKVToolNix was
-  actually compiled without support for libmagic due to a preprocessor symbol
-  not being defined.
 
 ## Build system changes
 
