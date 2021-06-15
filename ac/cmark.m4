@@ -2,7 +2,7 @@ dnl
 dnl Check for cmark
 dnl
 
-if test x"$USE_QT" = xyes; then
+if test x"$BUILD_GUI" = xyes; then
   PKG_CHECK_EXISTS([libcmark],[cmark_found=yes],[cmark_found=no])
   if test x"$cmark_found" = xyes; then
     PKG_CHECK_MODULES([libcmark],[libcmark],[cmark_found=yes])

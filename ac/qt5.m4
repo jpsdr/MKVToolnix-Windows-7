@@ -83,6 +83,8 @@ check_qt5() {
       with_qt_pkg_config_modules="$with_qt_pkg_config_modules,"
     fi
 
+    orig_with_qt_pkg_config_modules="$with_qt_pkg_config_modules,"
+
     with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5Core,Qt5Gui,Qt5Widgets,Qt5Multimedia,Qt5Network,Qt5Concurrent"
 
     if test x"$MINGW" = x1; then
@@ -109,6 +111,7 @@ check_qt5() {
     with_qt_pkg_config_modules="`echo "$with_qt_pkg_config_modules" | sed -e 's/,/ /g'`"
     QT_CFLAGS="`$PKG_CONFIG --cflags $with_qt_pkg_config_modules $QT_PKG_CONFIG_STATIC`"
     QT_LIBS="`$PKG_CONFIG --libs $with_qt_pkg_config_modules $QT_PKG_CONFIG_STATIC`"
+    QT_LIBS_NON_GUI="`$PKG_CONFIG --libs $orig_with_qt_pkg_config_modules,Qt5Core $QT_PKG_CONFIG_STATIC`"
   fi
 
   dnl compile test program
@@ -226,7 +229,6 @@ EOF
     AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
     AC_MSG_RESULT(yes)
     have_qt5=yes
-    USE_QT=yes
   else
     AC_MSG_RESULT(no: $problem)
   fi
@@ -234,11 +236,11 @@ EOF
   unset problem
 }
 
-AC_ARG_ENABLE([qt],
-  AC_HELP_STRING([--enable-qt],[compile the Qt-based MKVToolNix GUI qith Qt 5 (yes)]),
-  [],[enable_qt=yes])
+AC_ARG_ENABLE([qt5],
+  AC_HELP_STRING([--enable-qt5],[compile with Qt 5 (yes if Qt 6 is not found)]),
+  [],[enable_qt5=yes])
 AC_ARG_ENABLE([static_qt],
-  AC_HELP_STRING([--enable-static-qt],[link to static versions of the Qt library (no)]))
+  AC_HELP_STRING([--enable-static-qt],[link to static versions of the Qt 5 library (no)]))
 AC_ARG_WITH([qt_pkg_config_modules],
   AC_HELP_STRING([--with-qt-pkg-config-modules=modules],[gather include/link flags for additional Qt 5 modules from pkg-config]))
 AC_ARG_WITH([qt_pkg_config],
@@ -251,29 +253,10 @@ if test x"$have_qt6" = "xyes"; then
   AC_MSG_CHECKING(for Qt 5)
   AC_MSG_RESULT(no: already using Qt 6)
 
-elif test x"$enable_qt" != xyes; then
+elif test x"$enable_qt5" != xyes; then
   AC_MSG_CHECKING(for Qt 5)
   AC_MSG_RESULT(no: disabled by user request)
 
 else
   check_qt5
-
-  if test $have_qt5 != yes; then
-    unset QT_CFLAGS QT_LIBS
-  fi
 fi
-
-if test x"$have_qt6" = "xyes"; then
-  opt_features_yes="$opt_features_yes\n   * MKVToolNix GUI (with Qt 6)"
-
-elif test x"$have_qt5" = "xyes" ; then
-  opt_features_yes="$opt_features_yes\n   * MKVToolNix GUI (with Qt 5)"
-
-else
-  opt_features_no="$opt_features_no\n   * MKVToolNix GUI"
-  unset MOC QT_CXXFLAGS QT_INCPATH QT_LDFLAGS QT_LIBS RCC UIC
-fi
-
-AC_SUBST(QT_CFLAGS)
-AC_SUBST(QT_LIBS)
-AC_SUBST(USE_QT)

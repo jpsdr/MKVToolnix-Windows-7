@@ -71,7 +71,7 @@ def setup_globals
     :windows => %r{mingw}i.match(c(:host)),
   }
 
-  $build_mkvtoolnix_gui  ||=  c?(:USE_QT)
+  $build_mkvtoolnix_gui  ||=  c?(:BUILD_GUI)
   $build_tools           ||=  c?(:BUILD_TOOLS)
 
   $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit}
@@ -130,6 +130,7 @@ def setup_globals
   cflags_common            = "-Wall -Wno-comment -Wfatal-errors #{c(:WLOGICAL_OP)} #{c(:WNO_MISMATCHED_TAGS)} #{c(:WNO_SELF_ASSIGN)} #{c(:QUNUSED_ARGUMENTS)}"
   cflags_common           += " #{c(:WNO_INCONSISTENT_MISSING_OVERRIDE)} #{c(:WNO_POTENTIALLY_EVALUATED_EXPRESSION)}"
   cflags_common           += " #{c(:OPTIMIZATION_CFLAGS)} -D_FILE_OFFSET_BITS=64"
+  cflags_common           += " -DQT_NO_KEYWORDS"
   cflags_common           += " -DMTX_LOCALE_DIR=\\\"#{c(:localedir)}\\\" -DMTX_PKG_DATA_DIR=\\\"#{c(:pkgdatadir)}\\\" -DMTX_DOC_DIR=\\\"#{c(:docdir)}\\\""
   cflags_common           += determine_stack_protector_flags
   cflags_common           += determine_optimization_cflags
@@ -143,9 +144,8 @@ def setup_globals
   cflags_common           += " #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:PUGIXML_CFLAGS)} #{c(:CMARK_CFLAGS)} #{c(:DVDREAD_CFLAGS)} #{c(:PCRE2_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:USER_CPPFLAGS)}"
   cflags_common           += " -mno-ms-bitfields -DWINVER=0x0601 -D_WIN32_WINNT=0x0601 " if $building_for[:windows] # 0x0601 = Windows 7/Server 2008 R2
   cflags_common           += " -march=i686"                                              if $building_for[:windows] && /i686/.match(c(:host))
-  cflags_common           += " -fPIC "                                                   if c?(:USE_QT) && !$building_for[:windows]
-  cflags_common           += " -DQT_STATICPLUGIN"                                        if c?(:USE_QT) &&  $building_for[:windows]
-  cflags_common           += " -DQT_NO_KEYWORDS"                                         if c?(:USE_QT)
+  cflags_common           += " -fPIC "                                                   if !$building_for[:windows]
+  cflags_common           += " -DQT_STATICPLUGIN"                                        if  $building_for[:windows]
   cflags_common           += " -DUSE_DRMINGW -I#{c(:DRMINGW_PATH)}/include"              if c?(:USE_DRMINGW) &&  $building_for[:windows]
   cflags_common           += " -DMTX_APPIMAGE"                                           if c?(:APPIMAGE_BUILD) && !$building_for[:windows]
 
@@ -899,7 +899,7 @@ end
 desc "Install all applications and support files"
 targets  = [ "install:programs", "install:manpages", "install:translations:programs" ]
 targets += [ "install:translations:manpages" ] if c?(:PO4A_WORKS)
-targets += [ "install:shared" ]                if c?(:USE_QT)
+targets += [ "install:shared" ]                if c?(:BUILD_GUI)
 task :install => targets
 
 namespace :install do
@@ -915,7 +915,7 @@ namespace :install do
   task :shared do
     install_dir :desktopdir, :mimepackagesdir
     install_data :mimepackagesdir, FileList[ "#{$source_dir}/share/mime/*.xml" ]
-    if c?(:USE_QT)
+    if c?(:BUILD_GUI)
       install_dir :appdatadir
       install_data :desktopdir, "#{$source_dir}/share/desktop/org.bunkus.mkvtoolnix-gui.desktop"
       install_data :appdatadir, "#{$source_dir}/share/metainfo/org.bunkus.mkvtoolnix-gui.appdata.xml"
@@ -931,7 +931,7 @@ namespace :install do
       install_data "#{dest_dir}/", FileList[ "#{dir}/*" ].to_a.select { |file| wanted_apps[ file.gsub(/.*\//, '') ] }
     end
 
-    if c?(:USE_QT)
+    if c?(:BUILD_GUI)
       sounds_dir ="#{c(:pkgdatadir)}/sounds"
 
       install_dir  sounds_dir
@@ -1072,7 +1072,7 @@ $common_libs = [
   "-lstdc++",
 ]
 
-$common_libs += [:cmark]   if c?(:USE_QT)
+$common_libs += [:cmark]   if c?(:BUILD_GUI)
 $common_libs += [:dvdread] if c?(:USE_DVDREAD)
 $common_libs += [:exchndl] if c?(:USE_DRMINGW) && $building_for[:windows]
 if !$libmtxcommon_as_dll
@@ -1100,7 +1100,7 @@ $common_libs += [ :CoreFoundation ] if $building_for[:macos]
   Library.
     new("#{[ lib[:dir] ].flatten.first}/lib#{lib[:name]}").
     sources([ lib[:dir] ].flatten, :type => :dir, :except => lib[:except]).
-    only_if(c?(:USE_QT) && (lib[:name] == 'mtxcommon')).
+    only_if(lib[:name] == 'mtxcommon').
     qt_dependencies_and_sources("common").
     end_if.
     only_if($libmtxcommon_as_dll && (lib[:name] == 'mtxcommon')).

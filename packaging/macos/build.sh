@@ -448,7 +448,7 @@ function build_configured_mkvtoolnix {
 
   ./configure ${args}
 
-  grep -q 'USE_QT.*yes' build-config
+  grep -q 'BUILD_GUI.*yes' build-config
 }
 
 function build_mkvtoolnix {
