@@ -17,6 +17,9 @@
 
   You can still chose not to build MKVToolNix GUI, though. A new option has
   been added to `configure` for this purpose: `--disable-gui`.
+* `configure`: the option `--enable-appimage` has been removed. The location
+  of the relevant directories within an AppImage is now detected
+  automatically.
 
 # Version 58.0.0 "Supper's Ready" 2021-06-13
 

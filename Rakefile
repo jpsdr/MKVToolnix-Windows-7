@@ -147,7 +147,6 @@ def setup_globals
   cflags_common           += " -fPIC "                                                   if !$building_for[:windows]
   cflags_common           += " -DQT_STATICPLUGIN"                                        if  $building_for[:windows]
   cflags_common           += " -DUSE_DRMINGW -I#{c(:DRMINGW_PATH)}/include"              if c?(:USE_DRMINGW) &&  $building_for[:windows]
-  cflags_common           += " -DMTX_APPIMAGE"                                           if c?(:APPIMAGE_BUILD) && !$building_for[:windows]
 
   cflags                   = "#{cflags_common} #{c(:USER_CFLAGS)}"
 

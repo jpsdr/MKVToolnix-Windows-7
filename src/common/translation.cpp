@@ -419,13 +419,12 @@ init_locales(std::string locale) {
 
   translation_c::set_active_translation(chosen_locale);
 
-#  if defined(MTX_APPIMAGE)
-  locale_dir = (mtx::sys::get_installation_path() / ".." / "share" / "locale").u8string();
-#  elif defined(SYS_APPLE)
+#  if defined(SYS_APPLE)
   locale_dir = (mtx::sys::get_installation_path() / "locale").u8string();
 #  else
-  locale_dir = MTX_LOCALE_DIR;
-#  endif  // MTX_APPIMAGE
+  auto appimage_locale_dir = mtx::sys::get_installation_path() / ".." / "share" / "locale";
+  locale_dir               = std::filesystem::is_directory(appimage_locale_dir) ? appimage_locale_dir.u8string() : std::string{MTX_LOCALE_DIR};
+#  endif  // SYS_APPLE
 
 # endif  // SYS_WINDOWS
 
