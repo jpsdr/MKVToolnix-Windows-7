@@ -170,9 +170,6 @@ built. These include:
   Matroska content that is compressed with either of these libs. The
   aforementioned zlib is what every program supports.
 
-- [libMagic](http://www.darwinsys.com/file/) from the "file" package
-  for automatic content type detection
-
 - [po4a](https://po4a.alioth.debian.org/) for building the translated
   man pages
 

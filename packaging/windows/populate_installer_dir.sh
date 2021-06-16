@@ -55,7 +55,7 @@ function create_directories {
 
   cd ${tgt_dir}
   rm -rf *
-  mkdir -p examples data/sounds doc/licenses locale/libqt share/misc
+  mkdir -p examples data/sounds doc/licenses locale/libqt
 
   print -- " done"
 }
@@ -134,7 +134,6 @@ function copy_files {
   mkdir ${tgt_dir}/tools
   cp src/tools/bluray_dump.exe ${tgt_dir}/tools/
 
-  cp ${mxe_usr_dir}/share/misc/magic.mgc ${tgt_dir}/share/misc/
   cp share/sounds/* ${tgt_dir}/data/sounds/
   touch ${tgt_dir}/data/portable-app
 

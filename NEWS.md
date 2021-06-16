@@ -7,6 +7,10 @@
   impact is the MIME types of TrueType & OpenType fonts are now detected
   correctly. Fixes #3137.
 
+## Build system changes
+
+* The `magic` library is not used anymore.
+
 
 # Version 58.0.0 "Supper's Ready" 2021-06-13
 

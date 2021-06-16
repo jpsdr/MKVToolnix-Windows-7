@@ -193,13 +193,6 @@ fi
 
 delete_blacklisted
 
-mkdir ./share/file
-if [[ -f /etc/centos-release ]]; then
-  cp /usr/share/misc/magic.mgc ./share/file
-else
-  cp /usr/share/file/magic.mgc ./share/file
-fi
-
 cd ..
 
 cp ./usr/share/icons/hicolor/256x256/apps/mkvtoolnix-gui.png .

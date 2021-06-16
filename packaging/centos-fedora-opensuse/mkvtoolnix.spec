@@ -15,7 +15,6 @@ BuildRequires: cmark-devel
 BuildRequires: desktop-file-utils
 BuildRequires: docbook-style-xsl
 BuildRequires: fdupes
-BuildRequires: file-devel
 BuildRequires: flac
 BuildRequires: flac-devel
 BuildRequires: fmt-devel

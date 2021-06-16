@@ -1060,7 +1060,6 @@ end
 
 # libraries required for all programs via mtxcommon
 $common_libs = [
-  :magic,
   :flac,
   :z,
   :pugixml,

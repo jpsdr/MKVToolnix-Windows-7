@@ -211,9 +211,11 @@ Section "Program files" SEC01
   Delete "$INSTDIR\locale\uk\LC_MESSAGES\wxstd.mo"
   Delete "$INSTDIR\locale\zh_CN\LC_MESSAGES\wxstd.mo"
   Delete "$INSTDIR\locale\zh_TW\LC_MESSAGES\wxstd.mo"
+  Delete "$INSTDIR\share\misc\magic.mgc"
   RMDir /r "$INSTDIR\doc\guide"
   RMDir /r "$INSTDIR\doc\images"
   RMDir /r "$INSTDIR\locale\rs"
+  RMDir    "$INSTDIR\share\misc"
 
   # The docs have been moved to locale specific subfolders.
   Delete "$INSTDIR\doc\mkvextract.html"
