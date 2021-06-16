@@ -159,7 +159,6 @@ Section "Program files" SEC01
   File /r "../doc"
   File /r "../examples"
   File /r "../locale"
-  File /r "../share"
   File /r "../tools"
 
   ; Both if Qt is linked shared and if Dr. MinGW is used:
@@ -216,6 +215,7 @@ Section "Program files" SEC01
   RMDir /r "$INSTDIR\doc\images"
   RMDir /r "$INSTDIR\locale\rs"
   RMDir    "$INSTDIR\share\misc"
+  RMDir    "$INSTDIR\share"
 
   # The docs have been moved to locale specific subfolders.
   Delete "$INSTDIR\doc\mkvextract.html"
