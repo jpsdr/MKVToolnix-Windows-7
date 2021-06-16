@@ -34,7 +34,7 @@ database() {
 
 std::string
 guess_type_for_data(memory_c const &data) {
-  auto type = database().mimeTypeForData(QByteArray{reinterpret_cast<char const *>(data.get_buffer()), static_cast<qsizetype>(data.get_size())});
+  auto type = database().mimeTypeForData(QByteArray{reinterpret_cast<char const *>(data.get_buffer()), static_cast<int>(data.get_size())});
 
   return to_utf8(type.name());
 }
