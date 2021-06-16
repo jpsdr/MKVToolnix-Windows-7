@@ -129,7 +129,7 @@ QString
 detectMIMEType(QString const &fileName) {
   static QHash<QString, QString> s_legacyFontTypes;
 
-  auto mimeType = Q(mtx::mime::guess_type(to_utf8(fileName), true));
+  auto mimeType = Q(mtx::mime::guess_type_for_file(to_utf8(fileName)));
 
   if (!Util::Settings::get().m_useLegacyFontMIMETypes)
     return mimeType;

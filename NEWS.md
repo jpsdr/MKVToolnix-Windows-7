@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge, mkvpropedit, MKVToolNix GUI's multiplexer & header editor: MIME
+  type detection is now done using Qt instead of the `magic` library. The main
+  impact is the MIME types of TrueType & OpenType fonts are now detected
+  correctly. Fixes #3137.
+
+
 # Version 58.0.0 "Supper's Ready" 2021-06-13
 
 ## New features and enhancements

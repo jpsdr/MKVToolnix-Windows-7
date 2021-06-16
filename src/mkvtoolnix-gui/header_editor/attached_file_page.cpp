@@ -57,8 +57,8 @@ AttachedFilePage::retranslateUi() {
 
 void
 AttachedFilePage::init() {
-  for (auto &mimeType : mtx::mime::g_types)
-    ui->mimeType->addItem(Q(mimeType.name), Q(mimeType.name));
+  for (auto const &name : mtx::mime::sorted_type_names())
+    ui->mimeType->addItem(Q(name), Q(name));
 
   ui->mimeType->lineEdit()->setClearButtonEnabled(true);
 

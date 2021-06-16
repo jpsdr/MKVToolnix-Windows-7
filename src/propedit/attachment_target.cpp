@@ -182,7 +182,7 @@ attachment_target_c::execute() {
 
 void
 attachment_target_c::execute_add() {
-  auto mime_type   = m_options.m_mime_type                          ? *m_options.m_mime_type   : mtx::mime::guess_type(m_file_name, true);
+  auto mime_type   = m_options.m_mime_type                          ? *m_options.m_mime_type   : mtx::mime::guess_type_for_file(m_file_name);
   auto file_name   = m_options.m_name && !m_options.m_name->empty() ? *m_options.m_name        : mtx::fs::to_path(m_file_name).filename().u8string();
   auto description = m_options.m_description                        ? *m_options.m_description : ""s;
   auto uid         = m_options.m_uid                                ? *m_options.m_uid         : create_unique_number(UNIQUE_ATTACHMENT_IDS);
@@ -321,7 +321,7 @@ attachment_target_c::replace_attachment_values(KaxAttached &att) {
   }
 
   if (m_options.m_mime_type) {
-    auto mime_type = m_options.m_mime_type->empty() ? mtx::mime::guess_type(m_file_name, true) : *m_options.m_mime_type;
+    auto mime_type = m_options.m_mime_type->empty() ? mtx::mime::guess_type_for_file(m_file_name) : *m_options.m_mime_type;
     GetChild<KaxMimeType>(att).SetValue(mime_type);
   }
 

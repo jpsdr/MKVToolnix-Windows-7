@@ -15,14 +15,12 @@
 
 namespace mtx::mime {
 
-struct type_t {
-  std::string const name;
-  std::vector<std::string> const extensions;
-};
+std::string guess_type_for_data(memory_c const &data);
+std::string guess_type_for_data(std::string const &data);
+std::string guess_type_for_file(std::string const &file_name);
 
-extern std::vector<type_t> const g_types;
+std::string primary_file_extension_for_type(std::string const &type_name);
 
-std::string guess_type(std::string ext, bool is_file);
-std::string primary_file_extension_for_type(std::string const &type);
+std::vector<std::string> sorted_type_names();
 
 }
