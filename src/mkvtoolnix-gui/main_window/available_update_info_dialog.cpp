@@ -59,7 +59,7 @@ AvailableUpdateInfoDialog::setChangeLogContent(QString const &content) {
 
   html << Q("<h1>%1 [<a href=\"%2\">%3</a>]</h1>")
     .arg(QY("MKVToolNix news & changes").toHtmlEscaped())
-    .arg(to_qs(MTX_NEWS_URL).toHtmlEscaped())
+    .arg(UpdateChecker::newsURL().toHtmlEscaped())
     .arg(QY("Read full NEWS.md file online").toHtmlEscaped());
 
   html << content;
@@ -195,7 +195,7 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
       break;
   }
 
-  html << Q("<p><a href=\"%1\">%2</a></h1>").arg(MTX_NEWS_URL).arg(QY("Read full NEWS.md file online"));
+  html << Q("<p><a href=\"%1\">%2</a></h1>").arg(UpdateChecker::newsURL()).arg(QY("Read full NEWS.md file online"));
 
   setChangeLogContent(html.join(Q("\n")));
 }

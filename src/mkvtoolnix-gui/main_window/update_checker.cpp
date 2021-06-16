@@ -57,21 +57,26 @@ UpdateChecker::start() {
   qDebug() << "UpdateChecker::start: checkStarted emitted";
 
   auto &manager = App::instance()->networkAccessManager();
-  auto urls     = QVector<std::string>{ MTX_VERSION_CHECK_URL };
+  auto urls     = QStringList{};
+  auto addUrl   = [&urls](QString const &url, std::string const &debugging_option_name) {
+    std::string forced_url;
+    if (!debugging_c::requested(debugging_option_name, &forced_url) || forced_url.empty())
+      urls << url;
+    else
+      urls << Q(forced_url);
+  };
 
-  debugging_c::requested("version_check_url", &urls[0]);
+  addUrl(versionCheckURL(), "version_check_url");
 
-  if (p->m_retrieveReleasesInfo) {
-    urls << MTX_RELEASES_INFO_URL;
-    debugging_c::requested("releases_info_url", &urls[1]);
-  }
+  if (p->m_retrieveReleasesInfo)
+    addUrl(releasesInfoURL(), "releases_info_url");
 
   connect(&manager, &Util::NetworkAccessManager::downloadFinished, this, &UpdateChecker::handleDownloadedContent);
 
   qDebug() << "UpdateChecker::start: URL list built";
 
   for (auto const &url : urls)
-    p->m_tokens.push_back(manager.download(QUrl{Q("%1.gz").arg(Q(url))}));
+    p->m_tokens.push_back(manager.download(QUrl{Q("%1.gz").arg(url)}));
 
   qDebug() << "UpdateChecker::start: startup done";
 }
@@ -139,6 +144,26 @@ UpdateChecker::parseXml(QByteArray const &content) {
   }
 
   return {};
+}
+
+QString
+UpdateChecker::versionCheckURL() {
+  return Q("https://mkvtoolnix.download/latest-release.xml");
+}
+
+QString
+UpdateChecker::releasesInfoURL() {
+  return Q("https://mkvtoolnix.download/releases.xml");
+}
+
+QString
+UpdateChecker::downloadURL() {
+  return Q("https://mkvtoolnix.download/downloads.html");
+}
+
+QString
+UpdateChecker::newsURL() {
+  return Q("https://mkvtoolnix.download/doc/NEWS.md");
 }
 
 }

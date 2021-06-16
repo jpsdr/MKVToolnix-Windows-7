@@ -44,6 +44,12 @@ public Q_SLOTS:
   void handleDownloadedContent(quint64 token, QByteArray const &content);
   void start();
 
+public:
+  static QString versionCheckURL();
+  static QString releasesInfoURL();
+  static QString downloadURL();
+  static QString newsURL();
+
 protected:
   mtx::xml::document_cptr parseXml(QByteArray const &content);
 };
