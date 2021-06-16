@@ -197,7 +197,7 @@ function copy_files {
     }
   }
 
-  xargs -n 1 -P $(nproc) -d '\n' -i zsh -c '{}' < ${commands}
+  xargs -P $(nproc) -d '\n' '-I{}' zsh -c '{}' < ${commands}
 
   rm -f ${commands}
 
