@@ -12,7 +12,7 @@
 #include <boost/version.hpp>
 #include <cmark.h>
 #if defined(HAVE_DVDREAD)
-# include <dvdread/version.h>
+# include <dvdread/dvd_reader.h>
 #endif
 #include <ebml/EbmlVersion.h>
 #if defined(HAVE_FLAC_FORMAT_H)
@@ -167,7 +167,7 @@ gatherCompilerAndLibraryInfo(QStringList &info) {
   info << Q("* Boost: %1.%2.%3").arg(BOOST_VERSION / 100'000).arg((BOOST_VERSION / 100) % 1'000).arg(BOOST_VERSION % 100);
   info << Q("* cmark: %1").arg(Q(CMARK_VERSION_STRING));
 #if defined(HAVE_DVDREAD)
-  info << Q("* dvdread: %1.%2.%3").arg(DVDREAD_VERSION_MAJOR).arg(DVDREAD_VERSION_MINOR).arg(DVDREAD_VERSION_MICRO);
+  info << Q("* dvdread: %1.%2.%3").arg(DVDREAD_VERSION / 10'000).arg((DVDREAD_VERSION / 100) % 100).arg(DVDREAD_VERSION % 100);
 #endif
   info << Q("* EBML: %1").arg(Q(libebml::EbmlCodeVersion));
 #if defined(HAVE_FLAC_FORMAT_H)
