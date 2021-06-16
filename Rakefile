@@ -1181,7 +1181,7 @@ if $build_mkvtoolnix_gui
     qt_dependencies_and_sources("mkvtoolnix-gui").
     sources("src/mkvtoolnix-gui/qt_resources.cpp").
     sources("src/mkvtoolnix-gui/resources.o", :if => $building_for[:windows]).
-    libraries($common_libs - [ :qt_non_gui ], :qt).
+    libraries($common_libs - [ :qt_non_gui ], :qt, :vorbis, :ogg).
     libraries("-mwindows", :powrprof, :if => $building_for[:windows]).
     libraries("-framework IOKit", :if => $building_for[:macos]).
     libraries($custom_libs).

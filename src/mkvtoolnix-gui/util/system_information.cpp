@@ -9,6 +9,23 @@
 #include <QStringList>
 #include <QSysInfo>
 
+#include <boost/version.hpp>
+#include <cmark.h>
+#if defined(HAVE_DVDREAD)
+# include <dvdread/version.h>
+#endif
+#include <ebml/EbmlVersion.h>
+#if defined(HAVE_FLAC_FORMAT_H)
+# include <FLAC/format.h>
+#endif
+#include <jpcre2/jpcre2.hpp>
+#include <nlohmann/json.hpp>
+#include <matroska/KaxVersion.h>
+#include <pcre2.h>
+#include <pugixml.hpp>
+#include <vorbis/codec.h>
+#include <zlib.h>
+
 #include "common/fs_sys_helpers.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
@@ -133,6 +150,11 @@ gatherQtInfo(QStringList &info) {
 
   info << Q("* Version: %1.%2.%3").arg((QT_VERSION >> 16) & 0xff).arg((QT_VERSION >> 8) & 0xff).arg(QT_VERSION & 0xff);
   info << Q("* Build ABI: %1").arg(QSysInfo::buildAbi());
+}
+
+void
+gatherCompilerAndLibraryInfo(QStringList &info) {
+  info << Q("") << Q("# Compiler and libraries") << Q("");
 
 #if defined(__clang__)
   info << Q("* Compiler: clang++ %1.%2.%3").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__);
@@ -142,6 +164,23 @@ gatherQtInfo(QStringList &info) {
   info << Q("* Compiler: unknown");
 #endif
 
+  info << Q("* Boost: %1.%2.%3").arg(BOOST_VERSION / 100'000).arg((BOOST_VERSION / 100) % 1'000).arg(BOOST_VERSION % 100);
+  info << Q("* cmark: %1").arg(Q(CMARK_VERSION_STRING));
+#if defined(HAVE_DVDREAD)
+  info << Q("* dvdread: %1.%2.%3").arg(DVDREAD_VERSION_MAJOR).arg(DVDREAD_VERSION_MINOR).arg(DVDREAD_VERSION_MICRO);
+#endif
+  info << Q("* EBML: %1").arg(Q(libebml::EbmlCodeVersion));
+#if defined(HAVE_FLAC_FORMAT_H)
+  info << Q("* FLAC: %1").arg(Q(FLAC__VERSION_STRING));
+#endif
+  info << Q("* fmt: %1.%2.%3").arg(FMT_VERSION / 10'000).arg((FMT_VERSION / 100) % 100).arg(FMT_VERSION % 100);
+  info << Q("* JPCRE2: %1.%2.%3").arg(JPCRE2_VERSION / 10'000).arg((JPCRE2_VERSION / 100) % 100).arg(JPCRE2_VERSION % 100);
+  info << Q("* Matroska: %1").arg(Q(libmatroska::KaxCodeVersion));
+  info << Q("* nlohmann-json: %1.%2.%3").arg(NLOHMANN_JSON_VERSION_MAJOR).arg(NLOHMANN_JSON_VERSION_MINOR).arg(NLOHMANN_JSON_VERSION_PATCH);
+  info << Q("* PCRE2: %1.%2").arg(PCRE2_MAJOR).arg(PCRE2_MINOR);
+  info << Q("* pugixml: %1.%2.%3").arg((PUGIXML_VERSION / 1'000) % 10).arg((PUGIXML_VERSION / 10) % 10).arg(PUGIXML_VERSION % 10);
+  info << Q("* Vorbis: %1").arg(Q(vorbis_version_string()));
+  info << Q("* zlib: %1").arg(Q(ZLIB_VERSION));
 }
 
 } // anonymous namespace
@@ -159,6 +198,8 @@ gatherSystemInformation() {
   gatherEnvironmentVariables(info);
 
   gatherQtInfo(info);
+
+  gatherCompilerAndLibraryInfo(info);
 
   return info.join(Q("\n"));
 }
