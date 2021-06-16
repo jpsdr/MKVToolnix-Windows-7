@@ -54,7 +54,7 @@ MXE_USE_CCACHE =
 MXE_PLUGIN_DIRS += plugins/gcc9
 JOBS = ${PARALLEL}
 
-MKVTOOLNIX_DEPENDENCIES=gettext libiconv zlib boost file flac lzo ogg pthreads vorbis cmark libdvdread
+MKVTOOLNIX_DEPENDENCIES=gettext libiconv zlib boost file flac ogg pthreads vorbis cmark libdvdread
 MKVTOOLNIX_DEPENDENCIES+=qtbase qttranslations qtwinextras
 
 LOCAL_PKG_LIST=\$(MKVTOOLNIX_DEPENDENCIES)

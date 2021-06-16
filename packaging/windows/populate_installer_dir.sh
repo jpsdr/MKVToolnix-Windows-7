@@ -81,7 +81,7 @@ function copy_dlls {
   rm -f plugins/platforms/{qminimal,qoffscreen}.dll
 
   # copy basic DLLs
-  cp ${dll_src_dir}/lib{bz2,crypto-,gnurx-,harfbuzz-0,pcre-1,pcre2-16,png16-,ssl-}*.dll .
+  cp ${dll_src_dir}/lib{crypto-,gnurx-,harfbuzz-0,pcre-1,pcre2-16,png16-,ssl-}*.dll .
 
   # copy dependencies
   ${script_dir}/copy_dll_dependencies.rb *.exe **/*.dll
