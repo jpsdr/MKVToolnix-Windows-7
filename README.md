@@ -143,6 +143,10 @@ These libraries are:
 - [nlohmann's JSON](https://github.com/nlohmann/json) — JSON for
   Modern C++
 
+- [Qt](http://www.qt.io/) v5.9.0 or newer — a cross-platform library
+  including a UI toolkit. The library is needed for all programs, even
+  if you decide not to build MKVToolNix GUI.
+
 - [pugixml](http://pugixml.org/) — light-weight, simple and fast XML
   parser for C++ with XPath support
 
@@ -153,9 +157,6 @@ These libraries are:
 
 Other libraries are optional and only limit the features that are
 built. These include:
-
-- [Qt](http://www.qt.io/) v5.9.0 or newer — a cross-platform GUI
-  toolkit. You need this if you want to use the MKVToolNix GUI.
 
 - [cmark](https://github.com/commonmark/cmark) — the CommonMark
   parsing and rendering library in C is required when building the Qt

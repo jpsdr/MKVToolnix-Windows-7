@@ -10,7 +10,13 @@
 ## Build system changes
 
 * The `magic` library is not used anymore.
+* The Qt library is now required for building all applications, even the
+  command-line ones, as they use Qt's MIME type detection capabilities. In
+  turn this means that you cannot disable the Qt usage anymore; either Qt5 or
+  Qt 6 is required.
 
+  You can still chose not to build MKVToolNix GUI, though. A new option has
+  been added to `configure` for this purpose: `--disable-gui`.
 
 # Version 58.0.0 "Supper's Ready" 2021-06-13
 
