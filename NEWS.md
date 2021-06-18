@@ -6,6 +6,14 @@
   type detection is now done using Qt instead of the `magic` library. The main
   impact is the MIME types of TrueType & OpenType fonts are now detected
   correctly. Fixes #3137.
+* MKVToolNix GUI: only on 64-bit Windows: under certain conditions, the 64-bit
+  Windows binaries crashed when opening dialog windows. Even though the
+  underlying bug hasn't been identified, the investigation showed that
+  building it with newer versions than 10.2.0 of the mingw/gcc cross-compiler
+  enabled the crashes, while binaries built with 10.2.0 were fine. This
+  affected v57 and v58 which were built with gcc versions 10.3.0 and 11.1.0
+  respectively. For the time being I've switched back to building Windows
+  binaries with gcc 10.2.0. Fixes #3132 & #3133.
 
 ## Build system changes
 
