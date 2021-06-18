@@ -159,8 +159,8 @@ Other libraries are optional and only limit the features that are
 built. These include:
 
 - [cmark](https://github.com/commonmark/cmark) — the CommonMark
-  parsing and rendering library in C is required when building the Qt
-  GUIs.
+  parsing and rendering library in C is required when building
+  MKVToolNix GUI.
 
 - [libFLAC](http://downloads.xiph.org/releases/flac/) for FLAC
   support (Free Lossless Audio Codec)
