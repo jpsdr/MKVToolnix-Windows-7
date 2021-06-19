@@ -23,6 +23,11 @@
   binaries with gcc 10.2.0. Fixes #3132 & #3133.
 * mkvmerge: WebVTT parser: the parser now accepts timestamps with hours
   larger than 99. Part of #3139.
+* MKVToolNix GUI: multiplexer: when adding files to the multiplexer by running
+  the GUI's executable with file names as command line arguments, the source
+  directory will be remembered as the "last open directory" again, causing
+  subsequent uses of the "open file" dialog to start in the same directory.
+
 
 ## Build system changes
 

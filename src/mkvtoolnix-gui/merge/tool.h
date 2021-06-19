@@ -66,10 +66,12 @@ public Q_SLOTS:
   virtual void tabTitleChanged();
 
   virtual void identifyMultipleFiles(QStringList const &fileNamesToIdentify, Qt::MouseButtons mouseButtons);
-  virtual void identifyMultipleFilesFromCommandLine(QStringList const &fileNames);
   virtual void handleIdentifiedFiles(IdentificationPack pack);
   virtual void handleIdentifiedNonSourceFiles(IdentificationPack &pack);
   virtual void handleIdentifiedSourceFiles(IdentificationPack &sourceFiles);
+
+  virtual void handleExternallyAddedFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
+  virtual void handleFilesFromCommandLine(QStringList const &fileNames);
 
   virtual void openMultipleConfigFilesFromCommandLine(QStringList const &fileNames);
 
@@ -83,7 +85,6 @@ public Q_SLOTS:
   virtual void selectScanPlaylistPolicy(SourceFilePtr const &sourceFile, QFileInfoList const &files);
   virtual void selectPlaylistToAdd(QVector<SourceFilePtr> const &identifiedPlaylists);
   virtual void hideScanningDirectoryDialog();
-  virtual void handleDroppedFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
 
   virtual void setupHorizontalScrollAreaInputLayout();
   virtual void setupHorizontalTwoColumnsInputLayout();

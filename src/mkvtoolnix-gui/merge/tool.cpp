@@ -129,7 +129,7 @@ Tool::setupActions() {
   connect(mw,                                         &MainWindow::preferencesChanged,   this, [&p]() { Util::setupTabWidgetHeaders(*p.ui->merges); });
   connect(mw,                                         &MainWindow::preferencesChanged,   this, &Tool::retranslateUi);
 
-  connect(App::instance(),                            &App::addingFilesToMergeRequested, this, &Tool::identifyMultipleFilesFromCommandLine);
+  connect(App::instance(),                            &App::addingFilesToMergeRequested, this, &Tool::handleFilesFromCommandLine);
   connect(App::instance(),                            &App::openConfigFilesRequested,    this, &Tool::openMultipleConfigFilesFromCommandLine);
 }
 
@@ -438,14 +438,14 @@ Tool::dropEvent(QDropEvent *event) {
     auto mouseButtons = mtxMouseButtonsFor(event);
 
     QTimer::singleShot(0, this, [this, fileNames, mouseButtons]() {
-      handleDroppedFiles(fileNames, mouseButtons);
+      handleExternallyAddedFiles(fileNames, mouseButtons);
     });
   }
 }
 
 void
-Tool::handleDroppedFiles(QStringList const &fileNames,
-                         Qt::MouseButtons mouseButtons) {
+Tool::handleExternallyAddedFiles(QStringList const &fileNames,
+                                 Qt::MouseButtons mouseButtons) {
   if (fileNames.isEmpty())
     return;
 
@@ -467,9 +467,9 @@ Tool::handleDroppedFiles(QStringList const &fileNames,
 }
 
 void
-Tool::identifyMultipleFilesFromCommandLine(QStringList const &fileNames) {
+Tool::handleFilesFromCommandLine(QStringList const &fileNames) {
   MainWindow::get()->switchToTool(this);
-  identifyMultipleFiles(fileNames, Qt::NoButton);
+  handleExternallyAddedFiles(fileNames, Qt::NoButton);
 }
 
 void
