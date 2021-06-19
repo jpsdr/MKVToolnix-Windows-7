@@ -20,7 +20,7 @@
 
 namespace mtx::webvtt {
 
-constexpr auto RE_TIMESTAMP = "((?:\\d{2}:)?\\d{2}:\\d{2}\\.\\d{3})";
+constexpr auto RE_TIMESTAMP = "((?:\\d+:)?\\d{2}:\\d{2}\\.\\d{3})";
 
 struct parser_c::impl_t {
 public:
@@ -30,7 +30,7 @@ public:
   unsigned int current_cue_number{}, total_number_of_cues{}, total_number_of_bytes{};
   debugging_option_c debug{"parser"};
 
-  mtx::regex::jp::Regex timestamp_line_re{fmt::format("^{0} --> {0}(?: ([^\\n]+))?$", RE_TIMESTAMP), "S"};
+  mtx::regex::jp::Regex timestamp_line_re{fmt::format("^[ \\t]*{0}[ \\t]+-->[ \\t]+{0}(?:[ \\t]+([^\\n]+))?$", RE_TIMESTAMP), "S"};
 };
 
 parser_c::parser_c()

@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: WebVTT parser: the parser now follows the specs' rules for parsing
+  timestamps more closely by being more lenient: it allows arbitrary number of
+  spaces & tabs at the start of the line & around the arrow; it allows any
+  number of digits for the hours. Part of #3139.
+
 ## Bug fixes
 
 * mkvmerge, mkvpropedit, MKVToolNix GUI's multiplexer & header editor: MIME
@@ -14,6 +21,8 @@
   affected v57 and v58 which were built with gcc versions 10.3.0 and 11.1.0
   respectively. For the time being I've switched back to building Windows
   binaries with gcc 10.2.0. Fixes #3132 & #3133.
+* mkvmerge: WebVTT parser: the parser now accepts timestamps with hours
+  larger than 99. Part of #3139.
 
 ## Build system changes
 
