@@ -296,7 +296,7 @@
          <widget class="QWidget" name="page">
           <layout class="QVBoxLayout" name="verticalLayout_7">
            <item>
-            <widget class="QTreeWidget" name="discLibrary">
+            <widget class="mtx::gui::Merge::DiscLibraryInformationWidget" name="discLibrary">
              <property name="editTriggers">
               <set>QAbstractItemView::NoEditTriggers</set>
              </property>
@@ -369,6 +369,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>mtx::gui::Merge::DiscLibraryInformationWidget</class>
+   <extends>QTreeWidget</extends>
+   <header>mkvtoolnix-gui/merge/disc_library_information_widget.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>scannedFiles</tabstop>
   <tabstop>tracks</tabstop>
