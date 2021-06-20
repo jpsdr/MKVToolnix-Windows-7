@@ -39,15 +39,6 @@ fixAssociationsFor(char const *group,
 
 SourceFile::SourceFile(QString const &fileName)
   : m_fileName{QDir::toNativeSeparators(fileName)}
-  , m_type{mtx::file_type_e::is_unknown}
-  , m_appended{}
-  , m_additionalPart{}
-  , m_isPlaylist{}
-  , m_appendedTo{}
-  , m_playlistDuration{}
-  , m_playlistSize{}
-  , m_playlistChapters{}
-  , m_probeRangePercentage{0.3}
 {
 
 }

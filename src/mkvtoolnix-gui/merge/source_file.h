@@ -32,13 +32,13 @@ public:
   QList<SourceFilePtr> m_additionalParts, m_appendedFiles;
   QList<QFileInfo> m_playlistFiles;
 
-  mtx::file_type_e m_type;
-  bool m_appended, m_additionalPart, m_isPlaylist, m_dontScanForOtherPlaylists;
-  SourceFile *m_appendedTo;
+  mtx::file_type_e m_type{mtx::file_type_e::is_unknown};
+  bool m_appended{}, m_additionalPart{}, m_isPlaylist{}, m_dontScanForOtherPlaylists{};
+  SourceFile *m_appendedTo{};
 
-  uint64_t m_playlistDuration, m_playlistSize, m_playlistChapters;
+  uint64_t m_playlistDuration{}, m_playlistSize{}, m_playlistChapters{};
 
-  double m_probeRangePercentage;
+  double m_probeRangePercentage{0.3};
 
   std::optional<mtx::bluray::disc_library::info_t> m_discLibraryInfoToAdd;
 
