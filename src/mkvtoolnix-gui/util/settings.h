@@ -35,6 +35,7 @@ public:
     Max,
     Default = ExecuteProgram,
   };
+  Q_ENUM(RunProgramType);
 
   enum RunProgramForEvent {
     RunNever                         = 0x00,
@@ -43,7 +44,7 @@ public:
     RunAfterJobCompletesWithErrors   = 0x04,
     RunAfterJobCompletesWithWarnings = 0x08,
   };
-
+  Q_ENUM(RunProgramForEvent);
   Q_DECLARE_FLAGS(RunProgramForEvents, RunProgramForEvent)
 
   enum ProcessPriority {
@@ -53,12 +54,14 @@ public:
     HighPriority,
     HighestPriority,
   };
+  Q_ENUM(ProcessPriority);
 
   enum ScanForPlaylistsPolicy {
     AskBeforeScanning = 0,
     AlwaysScan,
     NeverScan,
   };
+  Q_ENUM(ScanForPlaylistsPolicy);
 
   enum OutputFileNamePolicy {
     DontSetOutputFileName = 0,
@@ -68,17 +71,20 @@ public:
     ToSameAsFirstInputFile,
     ToRelativeOfFirstInputFile,
   };
+  Q_ENUM(OutputFileNamePolicy);
 
   enum class SetDefaultLanguagePolicy {
     OnlyIfAbsent = 0,
     IfAbsentOrUndetermined,
   };
+  Q_ENUM(SetDefaultLanguagePolicy);
 
   enum class DeriveLanguageFromFileNamePolicy {
     Never = 0,
     OnlyIfAbsent,
     IfAbsentOrUndetermined,
   };
+  Q_ENUM(DeriveLanguageFromFileNamePolicy);
 
   enum class JobRemovalPolicy {
     Never,
@@ -86,6 +92,7 @@ public:
     IfWarningsFound,
     Always,
   };
+  Q_ENUM(JobRemovalPolicy);
 
   enum class ClearMergeSettingsAction {
     None,
@@ -93,6 +100,7 @@ public:
     RemoveInputFiles,
     CloseSettings,
   };
+  Q_ENUM(ClearMergeSettingsAction);
 
   enum class MergeAddingAppendingFilesPolicy {
     Ask,
@@ -102,29 +110,34 @@ public:
     Append,
     AddAdditionalParts,
   };
+  Q_ENUM(MergeAddingAppendingFilesPolicy);
 
   enum class HeaderEditorDroppedFilesPolicy {
     Ask,
     Open,
     AddAttachments,
   };
+  Q_ENUM(HeaderEditorDroppedFilesPolicy);
 
   enum class TrackPropertiesLayout {
     HorizontalScrollArea,
     HorizontalTwoColumns,
     VerticalTabWidget,
   };
+  Q_ENUM(TrackPropertiesLayout);
 
   enum class MergeMissingAudioTrackPolicy {
     Never,
     IfAudioTrackPresent,
     Always,
   };
+  Q_ENUM(MergeMissingAudioTrackPolicy);
 
   enum class BCP47LanguageEditingMode {
     FreeForm,
     Components,
   };
+  Q_ENUM(BCP47LanguageEditingMode);
 
   class RunProgramConfig {
   public:
