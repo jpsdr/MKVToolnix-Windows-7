@@ -206,16 +206,6 @@ Settings::convertOldSettings() {
   }
   reg->endGroup();
 
-  // mergeAlwaysAddDroppedFiles → mergeAddingAppendingFilesPolicy
-  reg->beginGroup(s_grpSettings);
-  auto mergeAlwaysAddDroppedFiles = reg->value(s_valMergeAlwaysAddDroppedFiles);
-
-  if (mergeAlwaysAddDroppedFiles.isValid())
-    reg->setValue(s_valMergeAddingAppendingFilesPolicy, static_cast<int>(MergeAddingAppendingFilesPolicy::Add));
-
-  reg->remove(s_valMergeAlwaysAddDroppedFiles);
-  reg->endGroup();
-
   // defaultTrackLanguage → defaultAudioTrackLanguage, defaultVideoTrackLanguage, defaultSubtitleTrackLanguage;
   reg->beginGroup(s_grpSettings);
 
@@ -302,8 +292,11 @@ Settings::convertOldSettings() {
   // split up into two settings afterwards.
   reg->beginGroup(s_grpSettings);
   if (!reg->value(s_valMergeDragAndDropFilesPolicy).isValid()) {
-    reg->setValue(s_valMergeDragAndDropFilesPolicy,       reg->value(s_valMergeAddingAppendingFilesPolicy));
-    reg->setValue(s_valMergeLastDragAndDropFilesDecision, reg->value(s_valMergeLastAddingAppendingDecision));
+    if (reg->value(s_valMergeAddingAppendingFilesPolicy).isValid())
+      reg->setValue(s_valMergeDragAndDropFilesPolicy,       reg->value(s_valMergeAddingAppendingFilesPolicy));
+    if (reg->value(s_valMergeLastAddingAppendingDecision).isValid())
+      reg->setValue(s_valMergeLastDragAndDropFilesDecision, reg->value(s_valMergeLastAddingAppendingDecision));
+
     reg->remove(s_valMergeAddingAppendingFilesPolicy);
     reg->remove(s_valMergeLastAddingAppendingDecision);
   }

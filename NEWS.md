@@ -35,6 +35,10 @@
   list was missing its icons. Additionally it contained text even for things
   that aren't regular tracks and therefore do not actually have that flag
   (e.g. chapters or tags). Fixes #3144.
+* MKVToolNix GUI: multiplexer: the default for the dialog asking the user what
+  to do with dragged & dropped files if they've never seen the dialog is back
+  to adding the files to the current multiplex settings instead of "add as
+  additional parts" which was an unintentional default.
 
 
 ## Build system changes
