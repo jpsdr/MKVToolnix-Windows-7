@@ -6,6 +6,10 @@
   timestamps more closely by being more lenient: it allows arbitrary number of
   spaces & tabs at the start of the line & around the arrow; it allows any
   number of digits for the hours. Part of #3139.
+* MKVToolNix GUI: multiplexer: when adding a Blu-ray playlist without scanning
+  for other playlists the GUI will now look for disc library information & let
+  the user select which one to use if there's more than one entry. Implements
+  #3143.
 
 ## Bug fixes
 

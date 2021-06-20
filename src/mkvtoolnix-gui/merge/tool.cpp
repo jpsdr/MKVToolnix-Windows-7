@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QProgressDialog>
 
+#include "common/bluray/util.h"
 #include "common/path.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
@@ -18,6 +19,7 @@
 #include "mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.h"
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/file_identification_pack.h"
+#include "mkvtoolnix-gui/merge/select_disc_library_information_dialog.h"
 #include "mkvtoolnix-gui/merge/select_playlist_dialog.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/merge/tab.h"
@@ -30,6 +32,15 @@
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
+
+namespace std::filesystem {
+
+uint
+qHash(std::filesystem::path const &path) {
+  return qHash(Q(path));
+}
+
+}
 
 namespace mtx::gui::Merge {
 
@@ -582,6 +593,49 @@ Tool::nextPreviousWindowActionTexts()
 }
 
 void
+Tool::retrieveDiscInformationForPlaylists(QVector<SourceFilePtr> &sourceFiles) {
+  QHash<std::filesystem::path, mtx::bluray::disc_library::info_t> infoByBaseDir;
+
+  for (auto const &sourceFile : sourceFiles) {
+    if (!sourceFile->isPlaylist() || sourceFile->m_discLibraryInfoSelected)
+      continue;
+
+    auto baseDir = mtx::bluray::find_base_dir(mtx::fs::to_path(sourceFile->m_fileName));
+
+    if (infoByBaseDir.contains(baseDir))
+      continue;
+
+    auto discLibrary = mtx::bluray::disc_library::locate_and_parse(mtx::fs::to_path(sourceFile->m_fileName));
+
+    if (!discLibrary || discLibrary->m_infos_by_language.empty()) {
+      infoByBaseDir.insert(baseDir, {});
+      continue;
+    }
+
+    if (discLibrary->m_infos_by_language.size() == 1) {
+      auto &info = discLibrary->m_infos_by_language.begin()->second;
+
+      infoByBaseDir.insert(baseDir, info);
+      sourceFile->m_discLibraryInfoToAdd = info;
+
+      continue;
+    }
+
+    SelectDiscLibraryInformationDialog dlg{this, *discLibrary};
+
+    if (dlg.exec() != QDialog::Accepted)
+      continue;
+
+    auto info = dlg.selectedInfo();
+    if (!info)
+      continue;
+
+    infoByBaseDir.insert(baseDir, *info);
+    sourceFile->m_discLibraryInfoToAdd = info;
+  }
+}
+
+void
 Tool::handleIdentifiedNonSourceFiles(IdentificationPack &pack) {
   QVector<IdentificationPack::IdentifiedFile> sourceFiles;
 
@@ -611,6 +665,8 @@ Tool::handleIdentifiedSourceFiles(IdentificationPack &pack) {
 
   auto identifiedSourceFiles = pack.sourceFiles();
   auto tab                   = tabForAddingOrAppending(pack.m_tabId);
+
+  retrieveDiscInformationForPlaylists(identifiedSourceFiles);
 
   if (   (pack.m_addMode == IdentificationPack::AddMode::Append)
       || (   (identifiedSourceFiles.count() == 1)

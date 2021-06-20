@@ -43,6 +43,7 @@ FORMS += \
     forms/merge/ask_scan_for_playlists_dialog.ui \
     forms/merge/command_line_dialog.ui \
     forms/merge/executable_location_dialog.ui \
+    forms/merge/select_disc_library_information_dialog.ui \
     forms/merge/select_playlist_dialog.ui \
     forms/merge/tab.ui \
     forms/merge/tool.ui \

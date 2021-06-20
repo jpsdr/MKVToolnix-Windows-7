@@ -107,6 +107,8 @@ protected:
   virtual void dragMoveEvent(QDragMoveEvent *event) override;
   virtual void dropEvent(QDropEvent *event) override;
 
+  virtual void retrieveDiscInformationForPlaylists(QVector<SourceFilePtr> &sourceFiles);
+
 public:
   static FileIdentificationWorker &identifier();
 };

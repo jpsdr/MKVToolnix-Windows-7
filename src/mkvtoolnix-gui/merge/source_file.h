@@ -41,6 +41,7 @@ public:
   double m_probeRangePercentage{0.3};
 
   std::optional<mtx::bluray::disc_library::info_t> m_discLibraryInfoToAdd;
+  bool m_discLibraryInfoSelected{};
 
 public:
   explicit SourceFile(QString const &fileName = QString{""});

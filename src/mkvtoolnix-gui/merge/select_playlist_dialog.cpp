@@ -287,9 +287,12 @@ SelectPlaylistDialog::select() {
 
   auto discLibraryInfo = ui->discLibrary->selectedInfo();
 
-  if (discLibraryInfo)
-    for (auto &sourceFile : selectedSourceFiles)
+  for (auto &sourceFile : selectedSourceFiles) {
+    sourceFile->m_discLibraryInfoSelected = true;
+
+    if (discLibraryInfo)
       sourceFile->m_discLibraryInfoToAdd = *discLibraryInfo;
+  }
 
   return selectedSourceFiles;
 }
