@@ -40,12 +40,6 @@ fixAssociationsFor(char const *group,
 SourceFile::SourceFile(QString const &fileName)
   : m_fileName{QDir::toNativeSeparators(fileName)}
 {
-
-}
-
-SourceFile::SourceFile(SourceFile const &other)
-{
-  *this = other;
 }
 
 SourceFile::~SourceFile() {
