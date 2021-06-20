@@ -112,8 +112,8 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[LanguageColumn]        ->setText(track->isAppended() ? QString{} : Q(track->m_language.format()));
   items[NameColumn]            ->setText(track->isAppended() ? QString{} : track->m_name);
   items[IDColumn]              ->setText(-1 == track->m_id ? Q("") : QString::number(track->m_id));
-  items[DefaultTrackFlagColumn]->setText(track->m_defaultTrackFlag ? QY("Yes") : QY("No"));
-  items[ForcedTrackFlagColumn] ->setText(!track->isRegular() ? Q("") : track->m_forcedTrackFlag ? QY("Yes") : QY("No"));
+  items[DefaultTrackFlagColumn]->setText(!track->isRegular() ? Q("") : track->m_defaultTrackFlag ? QY("Yes") : QY("No"));
+  items[ForcedTrackFlagColumn] ->setText(!track->isRegular() ? Q("") : track->m_forcedTrackFlag  ? QY("Yes") : QY("No"));
   items[CharacterSetColumn]    ->setText(!track->m_file->isTextSubtitleContainer() ? QString{} : track->m_characterSet);
   items[PropertiesColumn]      ->setText(summarizeProperties(*track));
   items[SourceFileColumn]      ->setText(fileInfo.fileName());
@@ -133,9 +133,9 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
                               : track->isTags()       ? m_tagsIcon
                               : track->isGlobalTags() ? m_tagsIcon
                               :                         m_genericIcon);
-  items[MuxThisColumn]         ->setIcon(track->m_muxThis                                                                    ? MainWindow::yesIcon() : MainWindow::noIcon());
-  items[DefaultTrackFlagColumn]->setIcon(!track->m_effectiveDefaultTrackFlag ? QIcon{} : *track->m_effectiveDefaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon());
-  items[ForcedTrackFlagColumn] ->setIcon(!track->isRegular()                 ? QIcon{} : track->m_forcedTrackFlag            ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items[MuxThisColumn]         ->setIcon(track->m_muxThis                                          ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items[DefaultTrackFlagColumn]->setIcon(!track->isRegular() ? QIcon{} : track->m_defaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items[ForcedTrackFlagColumn] ->setIcon(!track->isRegular() ? QIcon{} : track->m_forcedTrackFlag  ? MainWindow::yesIcon() : MainWindow::noIcon());
 
   items[IDColumn]   ->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
   items[DelayColumn]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);

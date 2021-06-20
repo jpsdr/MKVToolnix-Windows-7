@@ -31,6 +31,10 @@
   the GUI's executable with file names as command line arguments, the source
   directory will be remembered as the "last open directory" again, causing
   subsequent uses of the "open file" dialog to start in the same directory.
+* MKVToolNix GUI: multiplexer: the "default track flag" column in the track
+  list was missing its icons. Additionally it contained text even for things
+  that aren't regular tracks and therefore do not actually have that flag
+  (e.g. chapters or tags). Fixes #3144.
 
 
 ## Build system changes
