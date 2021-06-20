@@ -88,7 +88,7 @@ getSaveFileName(QWidget *parent,
                 QFileDialog::Options options) {
   auto defaultName = sanitizeDirectory(dir, true);
   if (!defaultFileName.isEmpty())
-    defaultName = QDir::toNativeSeparators(Q((mtx::fs::to_path(to_utf8(dir)) / mtx::fs::to_path(to_utf8(defaultFileName))).u8string()));
+    defaultName = QDir::toNativeSeparators(Q(mtx::fs::to_path(dir) / mtx::fs::to_path(defaultFileName)));
 
   auto result = QDir::toNativeSeparators(QFileDialog::getSaveFileName(parent, caption, defaultName, filter, selectedFilter, options & QFileDialog::DontUseCustomDirectoryIcons));
 

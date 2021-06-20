@@ -13,10 +13,22 @@
 
 #include "common/common_pch.h"
 
+#include <QString>
+
 namespace mtx::fs {
 
 std::filesystem::path to_path(std::string const &name);
 std::filesystem::path to_path(std::wstring const &name);
+
+inline std::filesystem::path
+to_path(char const *name) {
+  return to_path(std::string{name});
+}
+
+inline std::filesystem::path
+to_path(QString const &name) {
+  return to_path(name.toStdWString());
+}
 
 // Compatibility functions due to bugs in gcc/libstdc++ on Windows:
 bool is_absolute(std::filesystem::path const &p);

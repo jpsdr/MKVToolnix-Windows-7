@@ -69,6 +69,11 @@ to_qs(::libebml::UTFstring *s) {
   return to_qs(*s);
 }
 
+inline QString
+to_qs(std::filesystem::path const &source) {
+  return to_qs(source.u8string());
+}
+
 inline std::string
 to_utf8(QString const &source) {
   return std::string{ source.toUtf8().data() };

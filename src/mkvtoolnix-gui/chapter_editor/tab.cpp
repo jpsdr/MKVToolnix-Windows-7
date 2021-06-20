@@ -620,7 +620,7 @@ Tab::loadFromDVD([[maybe_unused]] QString const &fileName,
   auto chapters     = ChaptersPtr{};
   auto error        = QString{};
 
-  auto dvdDirectory = mtx::fs::to_path(to_utf8(fileName)).parent_path();
+  auto dvdDirectory = mtx::fs::to_path(fileName).parent_path();
 
   try {
     auto titlesAndTimestamps = mtx::chapters::parse_dvd(dvdDirectory.u8string());

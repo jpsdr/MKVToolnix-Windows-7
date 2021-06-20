@@ -839,7 +839,7 @@ Tool::selectPlaylistToAdd(QVector<SourceFilePtr> const &identifiedPlaylists) {
   if (identifiedPlaylists.isEmpty())
     return;
 
-  auto discLibrary = mtx::bluray::disc_library::locate_and_parse(mtx::fs::to_path(to_utf8(identifiedPlaylists[0]->m_fileName)));
+  auto discLibrary = mtx::bluray::disc_library::locate_and_parse(mtx::fs::to_path(identifiedPlaylists[0]->m_fileName));
 
   if ((identifiedPlaylists.size() == 1) && (!discLibrary || (discLibrary->m_infos_by_language.size() <= 1))) {
     if (discLibrary && (discLibrary->m_infos_by_language.size() == 1))
