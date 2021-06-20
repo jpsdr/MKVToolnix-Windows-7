@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-06-08 21:45+0200\n"
+"POT-Creation-Date: 2021-06-20 13:50+0200\n"
 "PO-Revision-Date: 2021-01-21 15:28+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/moritz-"
@@ -1590,7 +1590,7 @@ msgstr "&Prekini zadatke"
 msgid "&Acknowledge warnings and errors"
 msgstr "Potvrdi upozorenja &i greške"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:310
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:213
 #, no-c-format
 msgid "&Add"
 msgstr "&Dodaj"
@@ -1702,7 +1702,7 @@ msgstr "&Zatvori"
 msgid "&Close file"
 msgstr "&Zatvori fajl"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:288
+#: src/mkvtoolnix-gui/merge/tool.cpp:299
 #, no-c-format
 msgid "&Close settings"
 msgstr "&Zatvori postavke"
@@ -1733,7 +1733,7 @@ msgstr "&Komandna linija:"
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "Sabij početne i krajnje vremenske oznake pod-poglavlja u početne i krajnje vremenske oznake njihovog roditelja"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:782
+#: src/mkvtoolnix-gui/merge/tool.cpp:838
 #, fuzzy, no-c-format
 msgid "&Continue identification"
 msgstr "Šifrovanje sadržaja"
@@ -1786,6 +1786,11 @@ msgstr[2] "Onemogući izabrane priloge"
 #, no-c-format
 msgid "&Don't scan, just add the file"
 msgstr "&Ne skeniraj, samo dodaj fajl"
+
+#: src/mkvtoolnix-gui/merge/select_disc_library_information_dialog.cpp:24
+#, fuzzy, no-c-format
+msgid "&Don't use information"
+msgstr "&Informacija o sistemu"
 
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:168
 #, no-c-format
@@ -2004,7 +2009,7 @@ msgstr "&Sledeća kartica"
 msgid "&Next job output tab"
 msgstr "&Sledeća kartica"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:579
+#: src/mkvtoolnix-gui/merge/tool.cpp:590
 #, no-c-format
 msgid "&Next multiplex settings"
 msgstr "&Sledeća kartica"
@@ -2102,7 +2107,7 @@ msgstr "&Prethodna kartica"
 msgid "&Previous job output tab"
 msgstr "&Prethodna kartica"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:580
+#: src/mkvtoolnix-gui/merge/tool.cpp:591
 #, no-c-format
 msgid "&Previous multiplex settings"
 msgstr "&Prethodna kartica"
@@ -2295,6 +2300,11 @@ msgstr "&Tip:"
 #, no-c-format
 msgid "&UID:"
 msgstr "&UID:"
+
+#: src/mkvtoolnix-gui/merge/select_disc_library_information_dialog.cpp:23
+#, fuzzy, no-c-format
+msgid "&Use information"
+msgstr "&Informacija o sistemu"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:666
 #, no-c-format
@@ -3343,7 +3353,7 @@ msgstr "Dodaj fajl 'filename' kao novi prilog"
 msgid "Add to job &queue"
 msgstr "&Dodaj na listu zadataka"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:732
+#: src/mkvtoolnix-gui/merge/tool.cpp:788
 #, no-c-format
 msgid "Adding chapter files"
 msgstr "Dodavanje poglavlja"
@@ -3365,12 +3375,12 @@ msgstr ""
 msgid "Adding multiple files via 'Add source files'"
 msgstr "Dodavanje tagova"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:747
+#: src/mkvtoolnix-gui/merge/tool.cpp:803
 #, no-c-format
 msgid "Adding segment info files"
 msgstr "Dodavanje segment info fajlova"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:762
+#: src/mkvtoolnix-gui/merge/tool.cpp:818
 #, no-c-format
 msgid "Adding tag files"
 msgstr "Dodavanje tagova"
@@ -3523,7 +3533,7 @@ msgstr "Sve stavke"
 #: src/mkvtoolnix-gui/merge/tab.cpp:222
 #: src/mkvtoolnix-gui/merge/tab.cpp:272
 #: src/mkvtoolnix-gui/merge/tab.cpp:335
-#: src/mkvtoolnix-gui/merge/tool.cpp:242
+#: src/mkvtoolnix-gui/merge/tool.cpp:253
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:50
 #: src/mkvtoolnix-gui/util/widget.cpp:190
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:395
@@ -4240,8 +4250,8 @@ msgstr ""
 #: src/mkvtoolnix-gui/jobs/tool.cpp:623
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:459
 #: src/mkvtoolnix-gui/merge/tab.cpp:497
-#: src/mkvtoolnix-gui/merge/tool.cpp:289
-#: src/mkvtoolnix-gui/merge/tool.cpp:826
+#: src/mkvtoolnix-gui/merge/tool.cpp:300
+#: src/mkvtoolnix-gui/merge/tool.cpp:882
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:198
 #, no-c-format
 msgid "Cancel"
@@ -4545,7 +4555,7 @@ msgid "Chapter translate edition UID"
 msgstr "Chapter Translate Edition UID: {0}"
 
 #: src/common/kax_element_names.cpp:279
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:305
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1859
 #: src/mkvtoolnix-gui/merge/track.cpp:479
 #: src/propedit/options.cpp:215
@@ -4628,7 +4638,7 @@ msgstr "Zatvori trenutne postavke"
 msgid "Close modified file"
 msgstr "Zatvori izmenjeni fajl"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:286
+#: src/mkvtoolnix-gui/merge/tool.cpp:297
 #, no-c-format
 msgid "Close modified settings"
 msgstr "Zatvori izmenjene postavke"
@@ -4663,7 +4673,7 @@ msgstr "Prethodna veličina klastera"
 msgid "Cluster timestamp"
 msgstr "Vremenska oznaka klastera"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:318
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:319
 #: src/mkvtoolnix-gui/merge/track_model.cpp:47
 #, no-c-format
 msgid "Codec"
@@ -4968,7 +4978,9 @@ msgstr "Ne mogu da zapišem u odredišni fajl: {0} ({1})\n"
 msgid "Countries"
 msgstr "Država"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:329
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:73
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:330
+#: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:128
 #, no-c-format
 msgid "Cover image"
 msgstr "Slika omota"
@@ -5551,7 +5563,7 @@ msgstr "Ime odredišnog fajla"
 msgid "Destination file:"
 msgstr "Odredišni fajl:"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:308
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:309
 #, no-c-format
 msgid "Details"
 msgstr "Detalji"
@@ -5580,7 +5592,7 @@ msgstr "&Onemogući sve priloge"
 msgid "Dirac"
 msgstr "Dirac"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:323
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:93
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:67
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
@@ -5640,6 +5652,11 @@ msgstr "Onemogućen"
 #, no-c-format
 msgid "Disables lacing for all tracks."
 msgstr "Onemogućava uvezivanje za sve staze."
+
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:69
+#, fuzzy, no-c-format
+msgid "Disc library information selection"
+msgstr "Izaberite informaciju iz biblioteke diska"
 
 #: src/common/kax_element_names.cpp:267
 #, no-c-format
@@ -5821,12 +5838,12 @@ msgstr "Zbog određene strukture fajla, ova situacija se ne može ispraviti auto
 
 #: src/common/kax_element_names.cpp:87
 #: src/common/kax_element_names.cpp:265
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
 #, no-c-format
 msgid "Duration"
 msgstr "Trajanje"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:309
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:310
 #: src/mkvtoolnix-gui/merge/output.cpp:268
 #, no-c-format
 msgid "Duration:"
@@ -6498,8 +6515,8 @@ msgid "File has not been modified"
 msgstr "Fajl nije izmenjen"
 
 #: src/common/kax_element_names.cpp:244
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:308
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:325
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:42
 #, no-c-format
 msgid "File name"
@@ -6966,7 +6983,7 @@ msgstr ""
 msgid "How chroma is sited vertically."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:321
 #: src/mkvtoolnix-gui/merge/track_model.cpp:52
 #, no-c-format
 msgid "ID"
@@ -7423,17 +7440,17 @@ msgstr "Informacija"
 msgid "Input too long: {0} > {1}"
 msgstr "Ulazni podaci su predugački: {0} > {1}"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:736
+#: src/mkvtoolnix-gui/merge/tool.cpp:792
 #, no-c-format
 msgid "Instead such a file must be set via the 'chapter file' option on the 'output' tab."
 msgstr "Umesto toga, takav fajl mora biti učitan preko opcije 'fajl sa poglavljima' u kartici 'izlaz'."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:766
+#: src/mkvtoolnix-gui/merge/tool.cpp:822
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
 msgstr "Umesto toga, takav fajl mora biti učitan preko opcije 'globalni tagovi' u kartici 'izlaz'."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:751
+#: src/mkvtoolnix-gui/merge/tool.cpp:807
 #, no-c-format
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr "Umesto toga, takav fajl mora biti učitan preko opcije 'segment info' u kartici 'izlaz'."
@@ -7940,9 +7957,11 @@ msgstr "Lace number"
 
 #: src/common/kax_element_names.cpp:208
 #: src/common/property_element.cpp:145
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:317
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:75
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:318
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:332
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:154
+#: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:126
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:213
 #, no-c-format
@@ -8127,7 +8146,7 @@ msgid "MKVToolNix &web site"
 msgstr "MKVToolNix &web stranica"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:222
-#: src/mkvtoolnix-gui/merge/tool.cpp:242
+#: src/mkvtoolnix-gui/merge/tool.cpp:253
 #, no-c-format
 msgid "MKVToolNix GUI config files"
 msgstr "MKVToolNix GUI kofiguracioni fajlovi"
@@ -8698,7 +8717,7 @@ msgstr "Nisu nađene cue informacije.\n"
 msgid "No destination file name specified, will use attachment name.\n"
 msgstr "Nije navedeno ime odredišnog fajla, koristiću ime priloga.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:332
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:333
 #, no-c-format
 msgid "No disc library information was found."
 msgstr ""
@@ -9005,7 +9024,7 @@ msgstr "Nothing to do.\n"
 msgid "Nu&mber of entries to create:"
 msgstr "&Broj stavki za pravljenje:"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:312
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
 #, no-c-format
 msgid "Number of chapters:"
 msgstr "Broj poglavlja:"
@@ -9229,7 +9248,7 @@ msgstr[2] "Otvori fajlove sa &MediaInfo"
 msgid "Open files in chapter editor"
 msgstr "Otvori fajlove u uredniku poglavlja"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:242
+#: src/mkvtoolnix-gui/merge/tool.cpp:253
 #, no-c-format
 msgid "Open settings file"
 msgstr "Otvori fajl sa podešavanjima"
@@ -9291,7 +9310,7 @@ msgid "Opus (in Ogg) audio files"
 msgstr "Opus (u Ogg) audio fajlovi"
 
 #: src/common/kax_element_names.cpp:166
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:325
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:326
 #, no-c-format
 msgid "Order"
 msgstr ""
@@ -9468,7 +9487,7 @@ msgstr "Pusti audio fajl '%1'"
 msgid "Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language."
 msgstr "Plejeri bi trebalo da preferiraju staze koje su obeležene sa 'default'."
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:321
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:322
 #, no-c-format
 msgid "Playlist items:"
 msgstr "Stavke u plejlisti:"
@@ -10409,13 +10428,13 @@ msgstr "Snimanje izmenjenih zaglavlja staze nije uspelo."
 msgid "Scan directory for other playlists"
 msgstr "Skeniraj direktorijum za ostale plejliste"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:303
 #, no-c-format
 msgid "Scanned Files"
 msgstr "Skenirani fajlovi"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:826
-#: src/mkvtoolnix-gui/merge/tool.cpp:831
+#: src/mkvtoolnix-gui/merge/tool.cpp:882
+#: src/mkvtoolnix-gui/merge/tool.cpp:887
 #, no-c-format
 msgid "Scanning directory"
 msgstr "Skeniram direktorijum"
@@ -10592,7 +10611,8 @@ msgstr "Izaberite odredišni direktorijum"
 msgid "Select destination file name"
 msgstr "Izaberite ime odredišnog fajla"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:326
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:70
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:327
 #, no-c-format
 msgid "Select disc library information to use"
 msgstr "Izaberite informaciju iz biblioteke diska"
@@ -10604,12 +10624,12 @@ msgstr "Izaberite informaciju iz biblioteke diska"
 msgid "Select executable"
 msgstr "Izaberi izvršni fajl"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:300
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:301
 #, no-c-format
 msgid "Select file to add"
 msgstr "Izaberite fajl za dodavanje"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:301
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
 #, fuzzy, no-c-format
 msgid "Select one or more playlists to add"
 msgstr "Izaberite plejlistu za dodavanje"
@@ -10948,18 +10968,20 @@ msgstr "Prosti raščlanjivač poglavlja: {0}\n"
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Detektovana jedna poluslika pre GOP zaglavlja. Popravite MPEG2 video potok pre nego što pokušate da ga multipleksujete.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:304
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:328
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:72
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:305
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:329
 #: src/mkvtoolnix-gui/info/model.cpp:89
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:94
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:68
+#: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:129
 #, no-c-format
 msgid "Size"
 msgstr "Veličina"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:175
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:224
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:311
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:312
 #: src/mkvtoolnix-gui/merge/output.cpp:260
 #, no-c-format
 msgid "Size:"
@@ -11448,9 +11470,9 @@ msgstr "Program može da vam pomogne da započnete vaše buduće multipleks post
 msgid "The GUI can scan these files, present the results including duration and number of tracks of each playlist found and let you choose which one to add."
 msgstr "Program može da skenira ove fajlove, prikaže rezultate uključujući trajanje i broj staza u svakoj pronađenoj plejlisti i ponudi vam da izaberete koju od njih da doda."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:737
-#: src/mkvtoolnix-gui/merge/tool.cpp:752
-#: src/mkvtoolnix-gui/merge/tool.cpp:767
+#: src/mkvtoolnix-gui/merge/tool.cpp:793
+#: src/mkvtoolnix-gui/merge/tool.cpp:808
+#: src/mkvtoolnix-gui/merge/tool.cpp:823
 #, no-c-format
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
 msgstr "Program će naziv prevučenog fajla uneti u odgovarajuće polje menjajući bilo koji naziv koji je možda postavljen ranije."
@@ -11939,17 +11961,17 @@ msgstr "Fajl »%1« je izmenjen. Da li zaista želite da zatvorite? Sve izmene �
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "Fajl »%1« je izmenjen. Da li zaista želite da ga otvorite ponovo? Sve izmene će biti izgubljene."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:734
+#: src/mkvtoolnix-gui/merge/tool.cpp:790
 #, no-c-format
 msgid "The file '%1' contains chapters."
 msgstr "Fajl '%1' sadrži poglavlja."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:749
+#: src/mkvtoolnix-gui/merge/tool.cpp:805
 #, no-c-format
 msgid "The file '%1' contains segment information."
 msgstr "Fajl '%1' sadrži segment informaciju."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:764
+#: src/mkvtoolnix-gui/merge/tool.cpp:820
 #, no-c-format
 msgid "The file '%1' contains tags."
 msgstr "Fajl '%1' sadrži tagove."
@@ -12339,7 +12361,7 @@ msgstr "Visina dve staze se razlikuje: {0} and {1}"
 msgid "The horizontal layout with two fixed columns results in a wider window while the vertical tab widget layout results in a higher window."
 msgstr "Horizontalni raspored sa dve fiksne kolone dovodi do šireg prozora dok vertikalni raspored sa karticama dovodi do višeg prozora."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:256
+#: src/mkvtoolnix-gui/merge/tool.cpp:267
 #, no-c-format
 msgid "The job has been added to the job queue."
 msgstr "Zadatak je dodat na listu zadataka."
@@ -12467,7 +12489,7 @@ msgstr "Mkvmerge izvršni fajl je pronađen, ali nije mogao da se izvrši."
 msgid "The mkvmerge executable was not found."
 msgstr "Mkvmerge izvršni fajl nije pronađen."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:287
+#: src/mkvtoolnix-gui/merge/tool.cpp:298
 #, no-c-format
 msgid "The multiplex settings creating \"%1\" have been modified. Do you really want to close? All changes will be lost."
 msgstr "Multipleks postavke koje kreiraju \"%1\" su izmenjene. Da li zaista želite da zatvorite? Sve izmene će biti izgubljene."
@@ -13111,9 +13133,9 @@ msgstr "Ovo su retko korišćene opcije koje kontrolišu izlaznu strukturu koju 
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "Ove opcije su namenjene razvoju programa. One nisu zvanično podržane i mogu se menjati od izdanja do izdanja."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:735
-#: src/mkvtoolnix-gui/merge/tool.cpp:750
-#: src/mkvtoolnix-gui/merge/tool.cpp:765
+#: src/mkvtoolnix-gui/merge/tool.cpp:791
+#: src/mkvtoolnix-gui/merge/tool.cpp:806
+#: src/mkvtoolnix-gui/merge/tool.cpp:821
 #, no-c-format
 msgid "These aren't treated like other source files in MKVToolNix."
 msgstr "Takvi fajlovi nisu tretirani kao drugi izvorni fajlovi u MKVToolNix-u."
@@ -13501,7 +13523,9 @@ msgstr "Vremenske oznake:"
 
 #: src/common/kax_element_names.cpp:98
 #: src/common/property_element.cpp:118
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:330
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:74
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
+#: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:127
 #, no-c-format
 msgid "Title"
 msgstr "Naslov"
@@ -13706,7 +13730,7 @@ msgstr "Staze sa nepodržanim šemama kodiranja (kompresija ili šifrovanje) ne 
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr "Staze sa nepodržanim šemama kodiranja (kompresija ili šifrovanje) ne mogu da se izmene.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:315
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:316
 #, no-c-format
 msgid "Tracks:"
 msgstr "Staze:"
@@ -13728,7 +13752,7 @@ msgid "Two files multiplexed with the same settings and this switch activated wi
 msgstr "Dva fajla multipleksirana sa istim podešavanjem i sa uključenim ovim parametrom će biti identična."
 
 #: src/common/kax_element_names.cpp:168
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:319
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:152
 #: src/mkvtoolnix-gui/jobs/model.cpp:53
 #: src/mkvtoolnix-gui/merge/track_model.cpp:48

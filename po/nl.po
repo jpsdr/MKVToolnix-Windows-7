@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-06-08 21:45+0200\n"
+"POT-Creation-Date: 2021-06-20 13:50+0200\n"
 "PO-Revision-Date: 2021-05-07 14:31+0000\n"
 "Last-Translator: rctgamer3 <rctgamer3+transifex@hotmail.com>\n"
 "Language-Team: \n"
@@ -1594,7 +1594,7 @@ msgstr "Taken &afbreken"
 msgid "&Acknowledge warnings and errors"
 msgstr "&Aanvaard waarschuwingen en fouten"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:310
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:213
 #, no-c-format
 msgid "&Add"
 msgstr "&Toevoegen"
@@ -1706,7 +1706,7 @@ msgstr "&Sluiten"
 msgid "&Close file"
 msgstr "&Sluit bestand"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:288
+#: src/mkvtoolnix-gui/merge/tool.cpp:299
 #, fuzzy, no-c-format
 msgid "&Close settings"
 msgstr "Codec instellingen"
@@ -1737,7 +1737,7 @@ msgstr "Toon de &commando regel"
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "Vernauwen begin en einde tijd &codes van sub hoofdstukken van de bijbehorende start en einde tijdcodes"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:782
+#: src/mkvtoolnix-gui/merge/tool.cpp:838
 #, fuzzy, no-c-format
 msgid "&Continue identification"
 msgstr "Inhoud encryptie"
@@ -1789,6 +1789,11 @@ msgstr[1] "Ve&rwijder geselecteerde bijlage"
 #, no-c-format
 msgid "&Don't scan, just add the file"
 msgstr "Niet scannen, bestan&d gewoon toevoegen"
+
+#: src/mkvtoolnix-gui/merge/select_disc_library_information_dialog.cpp:24
+#, fuzzy, no-c-format
+msgid "&Don't use information"
+msgstr "S&ysteem informatie"
 
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:168
 #, no-c-format
@@ -2006,7 +2011,7 @@ msgstr "Volge&nde informatie tabblad"
 msgid "&Next job output tab"
 msgstr "Volge&nde uitvoertaak tabblad"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:579
+#: src/mkvtoolnix-gui/merge/tool.cpp:590
 #, no-c-format
 msgid "&Next multiplex settings"
 msgstr "Volge&nde samenvoeg instelling"
@@ -2104,7 +2109,7 @@ msgstr "Vorige informatie tabblad"
 msgid "&Previous job output tab"
 msgstr "Vorig taak uitvoer tabblad"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:580
+#: src/mkvtoolnix-gui/merge/tool.cpp:591
 #, no-c-format
 msgid "&Previous multiplex settings"
 msgstr "Vorige samenvoeg instelingen"
@@ -2293,6 +2298,11 @@ msgstr "&Type:"
 #, no-c-format
 msgid "&UID:"
 msgstr "U&ID:"
+
+#: src/mkvtoolnix-gui/merge/select_disc_library_information_dialog.cpp:23
+#, fuzzy, no-c-format
+msgid "&Use information"
+msgstr "S&ysteem informatie"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:666
 #, no-c-format
@@ -3340,7 +3350,7 @@ msgstr "Voeg het bestand 'filename' toe als een nieuwe bijlage"
 msgid "Add to job &queue"
 msgstr "Voeg toe aan taak &wachtrij"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:732
+#: src/mkvtoolnix-gui/merge/tool.cpp:788
 #, no-c-format
 msgid "Adding chapter files"
 msgstr "Toevoegen hoofdstuk(ken) bestand(en)"
@@ -3362,12 +3372,12 @@ msgstr ""
 msgid "Adding multiple files via 'Add source files'"
 msgstr "Toevoegen markering bestanden"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:747
+#: src/mkvtoolnix-gui/merge/tool.cpp:803
 #, no-c-format
 msgid "Adding segment info files"
 msgstr "Toevoegen segment info bestanden"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:762
+#: src/mkvtoolnix-gui/merge/tool.cpp:818
 #, no-c-format
 msgid "Adding tag files"
 msgstr "Toevoegen markering bestanden"
@@ -3520,7 +3530,7 @@ msgstr "Alle ingangen"
 #: src/mkvtoolnix-gui/merge/tab.cpp:222
 #: src/mkvtoolnix-gui/merge/tab.cpp:272
 #: src/mkvtoolnix-gui/merge/tab.cpp:335
-#: src/mkvtoolnix-gui/merge/tool.cpp:242
+#: src/mkvtoolnix-gui/merge/tool.cpp:253
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:50
 #: src/mkvtoolnix-gui/util/widget.cpp:190
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:395
@@ -4237,8 +4247,8 @@ msgstr ""
 #: src/mkvtoolnix-gui/jobs/tool.cpp:623
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:459
 #: src/mkvtoolnix-gui/merge/tab.cpp:497
-#: src/mkvtoolnix-gui/merge/tool.cpp:289
-#: src/mkvtoolnix-gui/merge/tool.cpp:826
+#: src/mkvtoolnix-gui/merge/tool.cpp:300
+#: src/mkvtoolnix-gui/merge/tool.cpp:882
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:198
 #, no-c-format
 msgid "Cancel"
@@ -4542,7 +4552,7 @@ msgid "Chapter translate edition UID"
 msgstr "Hoofdstuk vertaal editie UID"
 
 #: src/common/kax_element_names.cpp:279
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:305
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1859
 #: src/mkvtoolnix-gui/merge/track.cpp:479
 #: src/propedit/options.cpp:215
@@ -4624,7 +4634,7 @@ msgstr "Sluit huidige instellingen"
 msgid "Close modified file"
 msgstr "Sluit gewijzigd bestand"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:286
+#: src/mkvtoolnix-gui/merge/tool.cpp:297
 #, fuzzy, no-c-format
 msgid "Close modified settings"
 msgstr "Sluit gewijzigd bestand"
@@ -4659,7 +4669,7 @@ msgstr "Vorige cluster grootte"
 msgid "Cluster timestamp"
 msgstr "Cluster tijd code"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:318
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:319
 #: src/mkvtoolnix-gui/merge/track_model.cpp:47
 #, no-c-format
 msgid "Codec"
@@ -4964,7 +4974,9 @@ msgstr "Kon niet schrijven naar het doelbestand: {0} ({1})\n"
 msgid "Countries"
 msgstr "Land"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:329
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:73
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:330
+#: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:128
 #, no-c-format
 msgid "Cover image"
 msgstr ""
@@ -5547,7 +5559,7 @@ msgstr "Bestemmingsbestanden naam"
 msgid "Destination file:"
 msgstr "Bestemmingsbestand:"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:308
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:309
 #, no-c-format
 msgid "Details"
 msgstr "Details"
@@ -5576,7 +5588,7 @@ msgstr "Alle bijlagen uit&zetten"
 msgid "Dirac"
 msgstr "Dirac"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:323
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:93
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:67
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
@@ -5636,6 +5648,11 @@ msgstr "Uitgezet"
 #, no-c-format
 msgid "Disables lacing for all tracks."
 msgstr "Zet aaneensluiten uit voor alle sporen."
+
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:69
+#, no-c-format
+msgid "Disc library information selection"
+msgstr ""
 
 #: src/common/kax_element_names.cpp:267
 #, no-c-format
@@ -5817,12 +5834,12 @@ msgstr "Door de specifieke structuur van het bestand, kan deze situatie niet aut
 
 #: src/common/kax_element_names.cpp:87
 #: src/common/kax_element_names.cpp:265
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
 #, no-c-format
 msgid "Duration"
 msgstr "Duur"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:309
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:310
 #: src/mkvtoolnix-gui/merge/output.cpp:268
 #, no-c-format
 msgid "Duration:"
@@ -6494,8 +6511,8 @@ msgid "File has not been modified"
 msgstr "Het bestand is niet veranderd."
 
 #: src/common/kax_element_names.cpp:244
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:308
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:325
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:42
 #, no-c-format
 msgid "File name"
@@ -6961,7 +6978,7 @@ msgstr "Hoe kleurintensiteit (chroma) horizontaal is geplaatst."
 msgid "How chroma is sited vertically."
 msgstr "Hoe kleurintensiteit (chroma) verticaal is geplaatst."
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:321
 #: src/mkvtoolnix-gui/merge/track_model.cpp:52
 #, no-c-format
 msgid "ID"
@@ -7418,17 +7435,17 @@ msgstr "Iinformatie"
 msgid "Input too long: {0} > {1}"
 msgstr "Invoer te lang: {0} > {1}"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:736
+#: src/mkvtoolnix-gui/merge/tool.cpp:792
 #, no-c-format
 msgid "Instead such a file must be set via the 'chapter file' option on the 'output' tab."
 msgstr "In plaats daarvan, een dergelijk bestand moet worden ingesteld via de 'hoofdstuk bestand' optie op het tabblad 'uitvoer'."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:766
+#: src/mkvtoolnix-gui/merge/tool.cpp:822
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
 msgstr "In plaats daarvan, een dergelijk bestand moet worden ingesteld via de 'globale markering' optie op het tabblad 'uitvoer'."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:751
+#: src/mkvtoolnix-gui/merge/tool.cpp:807
 #, no-c-format
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr "In plaats daarvan, een dergelijk bestand moet worden ingesteld via de 'segment info' optie op het tabblad 'uitvoer'."
@@ -7935,9 +7952,11 @@ msgstr "Aankoppel nummer"
 
 #: src/common/kax_element_names.cpp:208
 #: src/common/property_element.cpp:145
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:317
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:75
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:318
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:332
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:154
+#: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:126
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:213
 #, no-c-format
@@ -8121,7 +8140,7 @@ msgid "MKVToolNix &web site"
 msgstr "MKVToolNix &website"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:222
-#: src/mkvtoolnix-gui/merge/tool.cpp:242
+#: src/mkvtoolnix-gui/merge/tool.cpp:253
 #, no-c-format
 msgid "MKVToolNix GUI config files"
 msgstr "MKVToolNix GUI configuratie bestanden"
@@ -8686,7 +8705,7 @@ msgstr "Er werden geen cues werden.\n"
 msgid "No destination file name specified, will use attachment name.\n"
 msgstr "Geen uitvoernaam opgegeven, zal bijlage naam gebruiken.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:332
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:333
 #, no-c-format
 msgid "No disc library information was found."
 msgstr ""
@@ -8993,7 +9012,7 @@ msgstr "Niets te doen.\n"
 msgid "Nu&mber of entries to create:"
 msgstr "Aantal te creëren ingaven:"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:312
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
 #, no-c-format
 msgid "Number of chapters:"
 msgstr "Aantal hoofdstukken:"
@@ -9214,7 +9233,7 @@ msgstr[1] "Open in &MediaInfo"
 msgid "Open files in chapter editor"
 msgstr "Open bestanden in hoofdstuk bewerker"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:242
+#: src/mkvtoolnix-gui/merge/tool.cpp:253
 #, no-c-format
 msgid "Open settings file"
 msgstr "Open instelling bestand"
@@ -9274,7 +9293,7 @@ msgid "Opus (in Ogg) audio files"
 msgstr "Opus (in Ogg) audio bestanden"
 
 #: src/common/kax_element_names.cpp:166
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:325
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:326
 #, no-c-format
 msgid "Order"
 msgstr "Gesorteerd"
@@ -9451,7 +9470,7 @@ msgstr "Afspelen audiobestand '%1'"
 msgid "Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language."
 msgstr "Af spelers zouden sporen prefereren als de standaard markering is gezet."
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:321
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:322
 #, no-c-format
 msgid "Playlist items:"
 msgstr "Afspeellijst items:"
@@ -10389,13 +10408,13 @@ msgstr "Opslaan van de gewijzigde informatie segmentkop mislukt."
 msgid "Scan directory for other playlists"
 msgstr "Scan map op andere afspeellijst(en)"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:303
 #, no-c-format
 msgid "Scanned Files"
 msgstr "Gescande bestanden"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:826
-#: src/mkvtoolnix-gui/merge/tool.cpp:831
+#: src/mkvtoolnix-gui/merge/tool.cpp:882
+#: src/mkvtoolnix-gui/merge/tool.cpp:887
 #, no-c-format
 msgid "Scanning directory"
 msgstr "Map scannen"
@@ -10570,7 +10589,8 @@ msgstr "Selecteer bestemming map"
 msgid "Select destination file name"
 msgstr "Selecteer bestemming bestandsnaam"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:326
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:70
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:327
 #, no-c-format
 msgid "Select disc library information to use"
 msgstr ""
@@ -10582,12 +10602,12 @@ msgstr ""
 msgid "Select executable"
 msgstr "Selecteer programma"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:300
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:301
 #, no-c-format
 msgid "Select file to add"
 msgstr "Selecteer toe te voegen bestand"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:301
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
 #, fuzzy, no-c-format
 msgid "Select one or more playlists to add"
 msgstr "Selecteer toe te voegen bestand"
@@ -10926,18 +10946,20 @@ msgstr "Simpele hoofdstuk ontleder: {0}\n"
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Enkel veld beeld vóór GOP beginblok ontdekt. Herstel de MPEG2 video stroom voor je een poging het te vermenigvuldigen.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:304
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:328
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:72
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:305
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:329
 #: src/mkvtoolnix-gui/info/model.cpp:89
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:94
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:68
+#: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:129
 #, no-c-format
 msgid "Size"
 msgstr "Grootte"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:175
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:224
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:311
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:312
 #: src/mkvtoolnix-gui/merge/output.cpp:260
 #, no-c-format
 msgid "Size:"
@@ -11423,9 +11445,9 @@ msgstr "De GUI kan u helpen te starten bij uw volgende samenvoeg instellingen na
 msgid "The GUI can scan these files, present the results including duration and number of tracks of each playlist found and let you choose which one to add."
 msgstr "De grafische interface kan deze bestanden scannen, resultaten tonen inclusief duur en het aantal sporen van elke afspeellijst die wordt gevonden en laat je kiezen welke te voegen."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:737
-#: src/mkvtoolnix-gui/merge/tool.cpp:752
-#: src/mkvtoolnix-gui/merge/tool.cpp:767
+#: src/mkvtoolnix-gui/merge/tool.cpp:793
+#: src/mkvtoolnix-gui/merge/tool.cpp:808
+#: src/mkvtoolnix-gui/merge/tool.cpp:823
 #, no-c-format
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
 msgstr "De GUI zal bestandsnaam de gevallen bestandsnaam plaatsen in die besturing, iedere bestandsnaam vervangen die eerder was ingesteld."
@@ -11903,17 +11925,17 @@ msgstr "Het bestand \"%1\" is veranderd. Wil je het echt sluiten? Alle veranderi
 msgid "The file \"%1\" has been modified. Do you really want to reload it? All changes will be lost."
 msgstr "Het bestand \"%1\" is veranderd. Wil je het echt opnieuw inladen? Alle veranderingen gaan verloren."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:734
+#: src/mkvtoolnix-gui/merge/tool.cpp:790
 #, no-c-format
 msgid "The file '%1' contains chapters."
 msgstr "Het bestand '%1' hoofdstukken."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:749
+#: src/mkvtoolnix-gui/merge/tool.cpp:805
 #, no-c-format
 msgid "The file '%1' contains segment information."
 msgstr "Het bestand '%1' bevat segment informatie."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:764
+#: src/mkvtoolnix-gui/merge/tool.cpp:820
 #, no-c-format
 msgid "The file '%1' contains tags."
 msgstr "Het bestand '%1' bevat markeringen."
@@ -12303,7 +12325,7 @@ msgstr "De hoogte van de twee sporen verschillen: {0} en {1}"
 msgid "The horizontal layout with two fixed columns results in a wider window while the vertical tab widget layout results in a higher window."
 msgstr "De horizontale indeling met twee vaste kolommen resulteert in een breder venster terwijl de verticale tab widget indeling resulteert in een hogere venster."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:256
+#: src/mkvtoolnix-gui/merge/tool.cpp:267
 #, no-c-format
 msgid "The job has been added to the job queue."
 msgstr "De taak is toegevoegd aan de taak wachtrij."
@@ -12431,7 +12453,7 @@ msgstr "Het mkvmerge programma is gevonden, maare kon niet wroden uitgevoerd."
 msgid "The mkvmerge executable was not found."
 msgstr "Mkvmerge programma niet gevonden"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:287
+#: src/mkvtoolnix-gui/merge/tool.cpp:298
 #, fuzzy, no-c-format
 msgid "The multiplex settings creating \"%1\" have been modified. Do you really want to close? All changes will be lost."
 msgstr "Het bestand \"%1\" is veranderd. Wil je het echt sluiten? Alle veranderingen gaan verloren."
@@ -13077,9 +13099,9 @@ msgstr "Deze worden minder vaak gebruikt die de uitvoer structuur controleert di
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "Deze opties zijn bedoeld voor ontwikkeling. Ze worden officieel niet ondersteund en kunnen veranderen van versie tot versie."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:735
-#: src/mkvtoolnix-gui/merge/tool.cpp:750
-#: src/mkvtoolnix-gui/merge/tool.cpp:765
+#: src/mkvtoolnix-gui/merge/tool.cpp:791
+#: src/mkvtoolnix-gui/merge/tool.cpp:806
+#: src/mkvtoolnix-gui/merge/tool.cpp:821
 #, no-c-format
 msgid "These aren't treated like other source files in MKVToolNix."
 msgstr "Deze worden niet behandeld zoals andere bron bestanden in MKVToolNix."
@@ -13466,7 +13488,9 @@ msgstr "Tijd codes:"
 
 #: src/common/kax_element_names.cpp:98
 #: src/common/property_element.cpp:118
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:330
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:74
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
+#: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:127
 #, no-c-format
 msgid "Title"
 msgstr "Titel"
@@ -13671,7 +13695,7 @@ msgstr "Sporen met niet ondersteunde codeer schema's (compressie of versleutelin
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr "Sporen met niet ondersteunde codeer schema's (compressie of versleuteling) kunnen niet veranderd worden.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:315
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:316
 #, no-c-format
 msgid "Tracks:"
 msgstr "Sporen:"
@@ -13693,7 +13717,7 @@ msgid "Two files multiplexed with the same settings and this switch activated wi
 msgstr "Twee bestanden samengevoegd met dezelfde instellingen en met deze schakelaar geactiveerd zullen ze identiek zijn."
 
 #: src/common/kax_element_names.cpp:168
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:319
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:152
 #: src/mkvtoolnix-gui/jobs/model.cpp:53
 #: src/mkvtoolnix-gui/merge/track_model.cpp:48

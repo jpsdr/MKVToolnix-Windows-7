@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-06-08 21:45+0200\n"
+"POT-Creation-Date: 2021-06-20 13:50+0200\n"
 "PO-Revision-Date: 2021-06-09 06:47+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
@@ -1604,7 +1604,7 @@ msgstr "&Abandonner les tâches"
 msgid "&Acknowledge warnings and errors"
 msgstr "&Acquitter les avertissements et erreurs"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:310
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:213
 #, no-c-format
 msgid "&Add"
 msgstr "&Ajouter…"
@@ -1716,7 +1716,7 @@ msgstr "&Fermer"
 msgid "&Close file"
 msgstr "&Fermer le fichier"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:288
+#: src/mkvtoolnix-gui/merge/tool.cpp:299
 #, no-c-format
 msgid "&Close settings"
 msgstr "&Fermer les paramètres"
@@ -1747,7 +1747,7 @@ msgstr "Ligne de &commande :"
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "&Contraindre les horodatages de début et de fin des sous-chapitres à ceux de leur parent"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:782
+#: src/mkvtoolnix-gui/merge/tool.cpp:838
 #, no-c-format
 msgid "&Continue identification"
 msgstr "&Continuer l'identification"
@@ -1799,6 +1799,11 @@ msgstr[1] "&Désactiver les pièces jointes sélectionnées"
 #, no-c-format
 msgid "&Don't scan, just add the file"
 msgstr "&Ne pas examiner, juste ajouter le fichier"
+
+#: src/mkvtoolnix-gui/merge/select_disc_library_information_dialog.cpp:24
+#, fuzzy, no-c-format
+msgid "&Don't use information"
+msgstr "Informations s&ystème…"
 
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:168
 #, no-c-format
@@ -2016,7 +2021,7 @@ msgstr "Onglet d'informations &suivant"
 msgid "&Next job output tab"
 msgstr "Onglet rapport de tâche &suivant"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:579
+#: src/mkvtoolnix-gui/merge/tool.cpp:590
 #, no-c-format
 msgid "&Next multiplex settings"
 msgstr "Paramètres de multiplexage &suivants"
@@ -2114,7 +2119,7 @@ msgstr "Onglet d'informations &précédent"
 msgid "&Previous job output tab"
 msgstr "Onglet rapport de tâche &précédent"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:580
+#: src/mkvtoolnix-gui/merge/tool.cpp:591
 #, no-c-format
 msgid "&Previous multiplex settings"
 msgstr "Paramètres de multiplexage &précédents"
@@ -2303,6 +2308,11 @@ msgstr "&Type :"
 #, no-c-format
 msgid "&UID:"
 msgstr "&UID :"
+
+#: src/mkvtoolnix-gui/merge/select_disc_library_information_dialog.cpp:23
+#, fuzzy, no-c-format
+msgid "&Use information"
+msgstr "Informations s&ystème…"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:666
 #, no-c-format
@@ -3350,7 +3360,7 @@ msgstr "Ajouter le fichier « nom de fichier » comme nouvelle pièce jointe"
 msgid "Add to job &queue"
 msgstr "Ajouter aux tâches en &file d'attente"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:732
+#: src/mkvtoolnix-gui/merge/tool.cpp:788
 #, no-c-format
 msgid "Adding chapter files"
 msgstr "Ajout des fichiers de chapitres"
@@ -3372,12 +3382,12 @@ msgstr "Ajout de fichiers glissés-déposés ou copiés-collés"
 msgid "Adding multiple files via 'Add source files'"
 msgstr "Ajout de fichiers multiples via « Ajouter des fichiers source »"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:747
+#: src/mkvtoolnix-gui/merge/tool.cpp:803
 #, no-c-format
 msgid "Adding segment info files"
 msgstr "Ajout des fichiers d'informations de segment"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:762
+#: src/mkvtoolnix-gui/merge/tool.cpp:818
 #, no-c-format
 msgid "Adding tag files"
 msgstr "Ajout des fichiers de balises"
@@ -3530,7 +3540,7 @@ msgstr "Toutes les entrées"
 #: src/mkvtoolnix-gui/merge/tab.cpp:222
 #: src/mkvtoolnix-gui/merge/tab.cpp:272
 #: src/mkvtoolnix-gui/merge/tab.cpp:335
-#: src/mkvtoolnix-gui/merge/tool.cpp:242
+#: src/mkvtoolnix-gui/merge/tool.cpp:253
 #: src/mkvtoolnix-gui/util/file_type_filter.cpp:50
 #: src/mkvtoolnix-gui/util/widget.cpp:190
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:395
@@ -4247,8 +4257,8 @@ msgstr "Peut être posé si la piste est adaptée aux malvoyants."
 #: src/mkvtoolnix-gui/jobs/tool.cpp:623
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:459
 #: src/mkvtoolnix-gui/merge/tab.cpp:497
-#: src/mkvtoolnix-gui/merge/tool.cpp:289
-#: src/mkvtoolnix-gui/merge/tool.cpp:826
+#: src/mkvtoolnix-gui/merge/tool.cpp:300
+#: src/mkvtoolnix-gui/merge/tool.cpp:882
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:198
 #, no-c-format
 msgid "Cancel"
@@ -4552,7 +4562,7 @@ msgid "Chapter translate edition UID"
 msgstr "UID d'édition de traduction des chapitres"
 
 #: src/common/kax_element_names.cpp:279
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:305
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1859
 #: src/mkvtoolnix-gui/merge/track.cpp:479
 #: src/propedit/options.cpp:215
@@ -4634,7 +4644,7 @@ msgstr "Fermer les paramètres actuels"
 msgid "Close modified file"
 msgstr "Confirmation de fermeture du fichier modifié"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:286
+#: src/mkvtoolnix-gui/merge/tool.cpp:297
 #, no-c-format
 msgid "Close modified settings"
 msgstr "Ferme les paramètres modifiés"
@@ -4669,7 +4679,7 @@ msgstr "Taille de grappe précédente"
 msgid "Cluster timestamp"
 msgstr "Horodatage de la grappe"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:318
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:319
 #: src/mkvtoolnix-gui/merge/track_model.cpp:47
 #, no-c-format
 msgid "Codec"
@@ -4974,7 +4984,9 @@ msgstr "Impossible d'écrire vers le fichier destination : {0} ({1})\n"
 msgid "Countries"
 msgstr "Pays"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:329
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:73
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:330
+#: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:128
 #, no-c-format
 msgid "Cover image"
 msgstr "Jaquette"
@@ -5557,7 +5569,7 @@ msgstr "Nom du fichier destination"
 msgid "Destination file:"
 msgstr "Fichier de destination :"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:308
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:309
 #, no-c-format
 msgid "Details"
 msgstr "Détails"
@@ -5586,7 +5598,7 @@ msgstr "Dé&sactiver toutes les pièces jointes"
 msgid "Dirac"
 msgstr "Dirac"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:323
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:93
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:67
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:45
@@ -5646,6 +5658,11 @@ msgstr "Désactivé"
 #, no-c-format
 msgid "Disables lacing for all tracks."
 msgstr "Désactive le laçage pour toutes les pistes."
+
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:69
+#, fuzzy, no-c-format
+msgid "Disc library information selection"
+msgstr "Aucune information de disque n'a été trouvée."
 
 #: src/common/kax_element_names.cpp:267
 #, no-c-format
@@ -5827,12 +5844,12 @@ msgstr "Du fait de la structure particulière du fichier, cette situation ne peu
 
 #: src/common/kax_element_names.cpp:87
 #: src/common/kax_element_names.cpp:265
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
 #, no-c-format
 msgid "Duration"
 msgstr "Durée"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:309
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:310
 #: src/mkvtoolnix-gui/merge/output.cpp:268
 #, no-c-format
 msgid "Duration:"
@@ -6501,8 +6518,8 @@ msgid "File has not been modified"
 msgstr "Aucune modification de fichier"
 
 #: src/common/kax_element_names.cpp:244
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:308
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:325
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:42
 #, no-c-format
 msgid "File name"
@@ -6968,7 +6985,7 @@ msgstr "Comment la chroma est située horizontalement."
 msgid "How chroma is sited vertically."
 msgstr "Comment la chroma est située verticalement."
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:321
 #: src/mkvtoolnix-gui/merge/track_model.cpp:52
 #, no-c-format
 msgid "ID"
@@ -7425,17 +7442,17 @@ msgstr "Informations"
 msgid "Input too long: {0} > {1}"
 msgstr "Entrée trop longue : {0} > {1}"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:736
+#: src/mkvtoolnix-gui/merge/tool.cpp:792
 #, no-c-format
 msgid "Instead such a file must be set via the 'chapter file' option on the 'output' tab."
 msgstr "Ce fichier doit plutôt être défini via l'option « Fichier de chapitrage » de l'onglet « Cible »."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:766
+#: src/mkvtoolnix-gui/merge/tool.cpp:822
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
 msgstr "Ce fichier doit plutôt être défini via l'option « Balises globales » de l'onglet « Cible »"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:751
+#: src/mkvtoolnix-gui/merge/tool.cpp:807
 #, no-c-format
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr "Ce fichier doit plutôt être défini via l'option « Informations de segment » de l'onglet « Cible »"
@@ -7942,9 +7959,11 @@ msgstr "Numéro de lacet"
 
 #: src/common/kax_element_names.cpp:208
 #: src/common/property_element.cpp:145
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:317
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:75
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:318
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:332
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:154
+#: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:126
 #: src/mkvtoolnix-gui/merge/track_model.cpp:50
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:213
 #, no-c-format
@@ -8128,7 +8147,7 @@ msgid "MKVToolNix &web site"
 msgstr "Site &Web de MKVToolNix…"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:222
-#: src/mkvtoolnix-gui/merge/tool.cpp:242
+#: src/mkvtoolnix-gui/merge/tool.cpp:253
 #, no-c-format
 msgid "MKVToolNix GUI config files"
 msgstr "Fichiers de configuration de MKVToolNix GUI"
@@ -8693,7 +8712,7 @@ msgstr "Aucune donnée CUE n'a été trouvée.\n"
 msgid "No destination file name specified, will use attachment name.\n"
 msgstr "Aucun nom de fichier destination spécifié, utilisation du nom de pièce jointe.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:332
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:333
 #, no-c-format
 msgid "No disc library information was found."
 msgstr "Aucune information de disque n'a été trouvée."
@@ -9000,7 +9019,7 @@ msgstr "Rien à faire.\n"
 msgid "Nu&mber of entries to create:"
 msgstr "No&mbre d'entrées à créer :"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:312
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
 #, no-c-format
 msgid "Number of chapters:"
 msgstr "Nombre de chapitres :"
@@ -9221,7 +9240,7 @@ msgstr[1] "Ouvrir les fichiers dans &MediaInfo"
 msgid "Open files in chapter editor"
 msgstr "Ouvrir des fichiers dans l'éditeur de chapitres"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:242
+#: src/mkvtoolnix-gui/merge/tool.cpp:253
 #, no-c-format
 msgid "Open settings file"
 msgstr "Ouvrir le fichier de paramètres"
@@ -9281,7 +9300,7 @@ msgid "Opus (in Ogg) audio files"
 msgstr "Fichiers audio Opus (dans Ogg)"
 
 #: src/common/kax_element_names.cpp:166
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:325
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:326
 #, no-c-format
 msgid "Order"
 msgstr "Ordre"
@@ -9458,7 +9477,7 @@ msgstr "Jouer le fichier audio « %1 »"
 msgid "Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language."
 msgstr "Les lecteurs préfèrent les pistes avec le signal « Piste par défaut » posé tandis que les préférences utilisateurs, telle que la langue de la piste, sont prises en compte."
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:321
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:322
 #, no-c-format
 msgid "Playlist items:"
 msgstr "Éléments de la liste de lecture :"
@@ -10395,13 +10414,13 @@ msgstr "L'enregistrement des entêtes de piste modifiés a échoué."
 msgid "Scan directory for other playlists"
 msgstr "Recherche d'autres listes de lecture dans le dossier"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:303
 #, no-c-format
 msgid "Scanned Files"
 msgstr "Fichiers examinés"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:826
-#: src/mkvtoolnix-gui/merge/tool.cpp:831
+#: src/mkvtoolnix-gui/merge/tool.cpp:882
+#: src/mkvtoolnix-gui/merge/tool.cpp:887
 #, no-c-format
 msgid "Scanning directory"
 msgstr "Examen du dossier"
@@ -10576,7 +10595,8 @@ msgstr "Sélectionner le dossier destination"
 msgid "Select destination file name"
 msgstr "Sélectionner le nom de fichier destination"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:326
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:70
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:327
 #, no-c-format
 msgid "Select disc library information to use"
 msgstr "Sélectionner les infos de disque à utiliser"
@@ -10588,12 +10608,12 @@ msgstr "Sélectionner les infos de disque à utiliser"
 msgid "Select executable"
 msgstr "Sélectionner le fichier exécutable"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:300
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:301
 #, no-c-format
 msgid "Select file to add"
 msgstr "Sélectionner le fichier à ajouter"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:301
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
 #, no-c-format
 msgid "Select one or more playlists to add"
 msgstr "Sélectionner une ou plusieurs listes de lecture à ajouter"
@@ -10929,18 +10949,20 @@ msgstr "Analyse de chapitres simple : {0}\n"
 msgid "Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "Trame à champ unique détectée avant un entête de groupe d'images. Corriger le flux vidéo MPEG-2 avant de tenter de le multiplexer.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:304
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:328
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:72
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:305
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:329
 #: src/mkvtoolnix-gui/info/model.cpp:89
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:94
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:68
+#: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:129
 #, no-c-format
 msgid "Size"
 msgstr "Taille"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:175
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:224
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:311
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:312
 #: src/mkvtoolnix-gui/merge/output.cpp:260
 #, no-c-format
 msgid "Size:"
@@ -11426,9 +11448,9 @@ msgstr "L'interface peut aider à lancer les paramètres de multiplexage suivant
 msgid "The GUI can scan these files, present the results including duration and number of tracks of each playlist found and let you choose which one to add."
 msgstr "L'interface peut examiner ces fichiers, présenter un compte rendu avec la durée et le nombre de pistes de chaque liste de lecture trouvée dans laquelle il est possible de choisir celle à ajouter."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:737
-#: src/mkvtoolnix-gui/merge/tool.cpp:752
-#: src/mkvtoolnix-gui/merge/tool.cpp:767
+#: src/mkvtoolnix-gui/merge/tool.cpp:793
+#: src/mkvtoolnix-gui/merge/tool.cpp:808
+#: src/mkvtoolnix-gui/merge/tool.cpp:823
 #, no-c-format
 msgid "The GUI will enter the dropped file's file name into that control replacing any file name which might have been set earlier."
 msgstr "Le nom du fichier déposé sera affiché dans ce contrôle en remplacement de tout nom de fichier qui y figurait précédemment."
@@ -11912,17 +11934,17 @@ msgstr ""
 "Faut-il vraiment le recharger ?\n"
 "(Toutes les modifications seront perdues.)"
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:734
+#: src/mkvtoolnix-gui/merge/tool.cpp:790
 #, no-c-format
 msgid "The file '%1' contains chapters."
 msgstr "Le fichier « %1 » contient des chapitres."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:749
+#: src/mkvtoolnix-gui/merge/tool.cpp:805
 #, no-c-format
 msgid "The file '%1' contains segment information."
 msgstr "Le fichier « %1 » contient des informations de segments."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:764
+#: src/mkvtoolnix-gui/merge/tool.cpp:820
 #, no-c-format
 msgid "The file '%1' contains tags."
 msgstr "Le fichier « %1 » contient des balises."
@@ -12312,7 +12334,7 @@ msgstr "Les hauteurs des deux pistes sont différentes : {0} et {1}."
 msgid "The horizontal layout with two fixed columns results in a wider window while the vertical tab widget layout results in a higher window."
 msgstr "La disposition horizontale avec 2 colonnes fixes élargit la fenêtre tandis que la disposition verticale du widget d'onglets augmente sa hauteur."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:256
+#: src/mkvtoolnix-gui/merge/tool.cpp:267
 #, no-c-format
 msgid "The job has been added to the job queue."
 msgstr "La tâche a été ajoutée à la file d'attente."
@@ -12440,7 +12462,7 @@ msgstr "L'exécutable mkvmerge a été trouvé, mais n'a pas pu être lancé."
 msgid "The mkvmerge executable was not found."
 msgstr "L'exécutable de mkvmerge n'a pas été trouvé."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:287
+#: src/mkvtoolnix-gui/merge/tool.cpp:298
 #, no-c-format
 msgid "The multiplex settings creating \"%1\" have been modified. Do you really want to close? All changes will be lost."
 msgstr "Les paramètres de multiplexage ayant créés « %1 » ont été modifiés. Faut-il vraiment fermer ? Toutes les modifications seront perdues."
@@ -13084,9 +13106,9 @@ msgstr "Ce sont des options moins fréquemment utilisées qui contrôlent la str
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "Ce sont des options prévues pour le développement. Elles ne sont pas officiellement gérées et peuvent changer d'une version à l'autre."
 
-#: src/mkvtoolnix-gui/merge/tool.cpp:735
-#: src/mkvtoolnix-gui/merge/tool.cpp:750
-#: src/mkvtoolnix-gui/merge/tool.cpp:765
+#: src/mkvtoolnix-gui/merge/tool.cpp:791
+#: src/mkvtoolnix-gui/merge/tool.cpp:806
+#: src/mkvtoolnix-gui/merge/tool.cpp:821
 #, no-c-format
 msgid "These aren't treated like other source files in MKVToolNix."
 msgstr "Ceux-ci ne sont pas traités comme les autres fichiers source dans MKVToolNix."
@@ -13473,7 +13495,9 @@ msgstr "Horodatages :"
 
 #: src/common/kax_element_names.cpp:98
 #: src/common/property_element.cpp:118
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:330
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:74
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
+#: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:127
 #, no-c-format
 msgid "Title"
 msgstr "Titre"
@@ -13678,7 +13702,7 @@ msgstr "Les pistes avec schémas d'encodage de données non gérés (compression
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr "Les pistes avec des schémas d'encodage de contenu non pris en charge (compression ou chiffrement) ne peuvent pas être modifiées.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:315
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:316
 #, no-c-format
 msgid "Tracks:"
 msgstr "Pistes :"
@@ -13700,7 +13724,7 @@ msgid "Two files multiplexed with the same settings and this switch activated wi
 msgstr "Deux fichiers multiplexés avec les mêmes paramètres et cette option activée seront identiques."
 
 #: src/common/kax_element_names.cpp:168
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:319
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:152
 #: src/mkvtoolnix-gui/jobs/model.cpp:53
 #: src/mkvtoolnix-gui/merge/track_model.cpp:48
