@@ -18,7 +18,7 @@ TimeValuePage::TimeValuePage(Tab &parent,
                              EbmlCallbacks const &callbacks,
                              translatable_string_c const &title,
                              translatable_string_c const &description)
-  : ValuePage{parent, topLevelPage, master, callbacks, ValueType::String, title, description}
+  : ValuePage{parent, topLevelPage, master, callbacks, ValueType::Timestamp, title, description}
 {
   connect(MainWindow::get(), &MainWindow::preferencesChanged, this, &TimeValuePage::showInRequestedTimeSpec);
 }

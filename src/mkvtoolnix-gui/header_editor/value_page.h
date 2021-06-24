@@ -23,6 +23,7 @@ public:
     Float,
     Binary,
     Bool,
+    Timestamp,
   };
 
 public:
