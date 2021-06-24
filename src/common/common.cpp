@@ -32,6 +32,7 @@
 #include "common/iso639.h"
 #include "common/iso3166.h"
 #include "common/iso15924.h"
+#include "common/logger.h"
 #include "common/mm_file_io.h"
 #include "common/mm_stdio.h"
 #include "common/random.h"
@@ -122,6 +123,7 @@ mtx_common_init(std::string const &program_name,
   ExcHndlInit();
 #endif
 
+  mtx::log::init();
   random_c::init();
 
   g_cc_local_utf8 = charset_converter_c::init("");

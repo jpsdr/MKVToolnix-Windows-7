@@ -18,6 +18,8 @@
 #include <sstream>
 #include <typeinfo>
 
+#include <QDateTime>
+
 #include <ebml/EbmlDummy.h>
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlSubHead.h>
@@ -362,7 +364,7 @@ kax_info_c::format_element_value_default(EbmlElement &e) {
     return format_binary(static_cast<EbmlBinary &>(e));
 
   if (dynamic_cast<EbmlDate *>(&e))
-    return mtx::date_time::format_epoch_time(static_cast<EbmlDate &>(e).GetEpochDate(), "%a %b %d %H:%M:%S %Y UTC", mtx::date_time::epoch_timezone_e::UTC);
+    return mtx::date_time::format(QDateTime::fromSecsSinceEpoch(static_cast<EbmlDate &>(e).GetEpochDate(), Qt::UTC), "%Y-%m-%d %H:%M:%S UTC");
 
   if (dynamic_cast<EbmlMaster *>(&e))
     return {};

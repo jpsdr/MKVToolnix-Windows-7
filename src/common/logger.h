@@ -72,6 +72,8 @@ operator <<(target_c &logger,
   return logger;
 }
 
+void init();
+
 }
 
 #define log_current_location() mtx::log::target_c::get_default_logger() << fmt::format("Current file, line, function: {0}:{1} in {2}", __FILE__, __LINE__, __PRETTY_FUNCTION__)

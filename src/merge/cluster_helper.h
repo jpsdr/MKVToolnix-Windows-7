@@ -17,11 +17,12 @@
 
 #include <cmath>
 
+#include <QDateTime>
+
 #include <matroska/KaxBlock.h>
 #include <matroska/KaxCluster.h>
 
 #include "common/bcp47.h"
-#include "common/date_time_fwd.h"
 #include "common/split_point.h"
 #include "common/timestamp.h"
 #include "merge/libmatroska_extensions.h"
@@ -73,7 +74,7 @@ public:
   void discard_queued_packets();
   bool is_splitting_and_processed_fully() const;
 
-  void create_tags_for_track_statistics(libmatroska::KaxTags &tags, std::string const &writing_app, mtx::date_time::point_t const &writing_date);
+  void create_tags_for_track_statistics(libmatroska::KaxTags &tags, std::string const &writing_app, QDateTime const &writing_date);
 
   void register_new_packetizer(generic_packetizer_c &ptzr);
 

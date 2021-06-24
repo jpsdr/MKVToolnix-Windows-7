@@ -18,6 +18,8 @@
 #include <ebml/EbmlUnicodeString.h>
 #include <matroska/KaxSegment.h>
 
+#include <QDateTime>
+
 #include "common/bcp47.h"
 #include "common/date_time.h"
 #include "common/ebml.h"
@@ -206,17 +208,10 @@ change_c::parse_date_time() {
                         Y("The letter 'Z' can be used instead of the time zone's offset from UTC to indicate UTC aka Zulu time."),
                         Y("The file has not been modified.")));
 
-  std::tm time_info{};
+  QDate date(year, month, day);
+  QTime time(hours, minutes, seconds);
 
-  time_info.tm_sec        = seconds;
-  time_info.tm_min        = minutes;
-  time_info.tm_hour       = hours;
-  time_info.tm_mday       = day;
-  time_info.tm_mon        = month - 1;
-  time_info.tm_year       = year - 1900;
-  time_info.tm_isdst      = -1;
-
-  m_ui_value              = mtx::date_time::tm_to_time_t(time_info, mtx::date_time::epoch_timezone_e::UTC);
+  m_ui_value              = QDateTime{date, time, Qt::UTC}.toSecsSinceEpoch();
 
   auto tz_offset_minutes  = (offset_hours * 60 + offset_minutes) * offset_mult;
   m_ui_value             -= tz_offset_minutes * 60;

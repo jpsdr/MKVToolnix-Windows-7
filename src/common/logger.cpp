@@ -13,6 +13,8 @@
 #include <ctime>
 #include <iostream>
 
+#include <QDateTime>
+
 #include "common/date_time.h"
 #include "common/logger.h"
 #if defined(SYS_WINDOWS)
@@ -30,7 +32,7 @@ namespace mtx::log {
 
 target_cptr target_c::s_default_logger;
 
-static auto s_program_start_time = std::chrono::system_clock::now();
+static QDateTime s_program_start_time;
 
 target_c::target_c()
   : m_log_start{mtx::sys::get_current_time_millis()}
@@ -39,10 +41,8 @@ target_c::target_c()
 
 std::string
 target_c::format_line(std::string const &message) {
-  auto now       = std::chrono::system_clock::now();
-  auto diff      = now - s_program_start_time;
-  auto timestamp = mtx::date_time::format_time_point(now, "%Y-%m-%d %H:%M:%S", mtx::date_time::epoch_timezone_e::local);
-  auto line      = fmt::format("[mtx] {0} +{1}ms {2}", timestamp, std::chrono::duration_cast<std::chrono::milliseconds>(diff).count(), message);
+  auto timestamp = mtx::date_time::format(QDateTime::currentDateTime(), "%Y-%m-%d %H:%M:%S");
+  auto line      = fmt::format("[mtx] {0} +{1}ms {2}", timestamp, runtime(), message);
 
   if (message.size() && (message[message.size() - 1] != '\n'))
     line += "\n";
@@ -90,8 +90,7 @@ target_c::set_default_logger(target_cptr const &logger) {
 
 int64_t
 target_c::runtime() {
-  auto diff = std::chrono::system_clock::now() - s_program_start_time;
-  return std::chrono::duration_cast<std::chrono::milliseconds>(diff).count();
+  return s_program_start_time.msecsTo(QDateTime::currentDateTime());
 }
 
 // ----------------------------------------------------------------------
@@ -129,6 +128,13 @@ stderr_target_c::stderr_target_c()
 void
 stderr_target_c::log_line(std::string const &message) {
   std::cerr << message;
+}
+
+// ----------------------------------------------------------------------
+
+void
+init() {
+  s_program_start_time = QDateTime::currentDateTime();
 }
 
 }

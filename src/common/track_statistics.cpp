@@ -20,7 +20,7 @@
 void
 track_statistics_c::create_tags(libmatroska::KaxTags &tags,
                                 std::string const &writing_app,
-                                std::optional<mtx::date_time::point_t> const &writing_date)
+                                std::optional<QDateTime> const &writing_date)
   const {
   auto bps      = get_bits_per_second();
   auto duration = get_duration();
@@ -46,7 +46,7 @@ track_statistics_c::create_tags(libmatroska::KaxTags &tags,
   mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_APP", writing_app);
 
   if (writing_date) {
-    auto writing_date_str = mtx::date_time::format_time_point(*writing_date, "%Y-%m-%d %H:%M:%S", mtx::date_time::epoch_timezone_e::UTC);
+    auto writing_date_str = mtx::date_time::format(writing_date->toUTC(), "%Y-%m-%d %H:%M:%S");
     mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_DATE_UTC", writing_date_str);
   }
 

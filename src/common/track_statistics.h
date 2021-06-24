@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/date_time_fwd.h"
+#include <QDateTime>
 
 namespace libmatroska {
 class KaxTags;
@@ -93,7 +93,7 @@ public:
                        bps                          ? *bps                          : -1);
   }
 
-  void create_tags(libmatroska::KaxTags &tags, std::string const &writing_app, std::optional<mtx::date_time::point_t> const &writing_date) const;
+  void create_tags(libmatroska::KaxTags &tags, std::string const &writing_app, std::optional<QDateTime> const &writing_date) const;
 
 protected:
   libmatroska::KaxTag *find_or_create_tag(libmatroska::KaxTags &tags) const;

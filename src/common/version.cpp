@@ -199,11 +199,12 @@ get_default_segment_info_data(std::string const &application) {
   if (!mtx::hacks::is_engaged(mtx::hacks::NO_VARIABLE_DATA)) {
     data.muxing_app   = fmt::format("libebml v{0} + libmatroska v{1}", libebml::EbmlCodeVersion, libmatroska::KaxCodeVersion);
     data.writing_app  = get_version_info(application, static_cast<version_info_flags_e>(vif_full | vif_untranslated));
-    data.writing_date = std::chrono::system_clock::now();
+    data.writing_date = QDateTime::currentDateTimeUtc();
 
   } else {
     data.muxing_app   = "no_variable_data";
     data.writing_app  = "no_variable_data";
+    data.writing_date = QDateTime::fromSecsSinceEpoch(0, Qt::UTC);
   }
 
   return data;

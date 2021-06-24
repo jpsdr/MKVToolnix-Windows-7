@@ -16,6 +16,8 @@
 
 #include <cmath>
 
+#include <QDateTime>
+
 #include <ebml/EbmlContexts.h>
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlStream.h>
@@ -2718,8 +2720,9 @@ kax_reader_c::identify() {
   info.set(mtx::id::muxing_application,  m_muxing_app);
   info.set(mtx::id::writing_application, m_raw_writing_app);
   if (m_muxing_date_epoch) {
-    info.add(mtx::id::date_utc,   mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch.value(), mtx::date_time::epoch_timezone_e::UTC));
-    info.add(mtx::id::date_local, mtx::date_time::format_epoch_time_iso_8601(m_muxing_date_epoch.value(), mtx::date_time::epoch_timezone_e::local));
+    auto timestamp = QDateTime::fromSecsSinceEpoch(m_muxing_date_epoch.value(), Qt::UTC);
+    info.add(mtx::id::date_utc,   mtx::date_time::format_iso_8601(timestamp));
+    info.add(mtx::id::date_local, mtx::date_time::format_iso_8601(timestamp.toLocalTime()));
   }
 
   id_result_container(info.get());

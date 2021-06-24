@@ -39,6 +39,9 @@
   to do with dragged & dropped files if they've never seen the dialog is back
   to adding the files to the current multiplex settings instead of "add as
   additional parts" which was an unintentional default.
+* mkvmerge, mkvinfo, MKVToolNix GUI's info tool: only on Windows: displaying
+  dates before 1970-01-01 00:00:00 UTC or after 2038-01-19 03:14:08 UTC was
+  broken. Note that the header editor was not affected. Fixes #3148.
 
 
 ## Build system changes

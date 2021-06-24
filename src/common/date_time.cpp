@@ -11,111 +11,72 @@
 
 #include "common/common_pch.h"
 
-#include <mutex>
-#include <time.h>
-#if defined(SYS_WINDOWS)
-# include <windows.h>
-#endif
+#include <QDateTime>
+#include <QTimeZone>
 
 #include "common/date_time.h"
 
 namespace mtx::date_time {
 
-std::optional<std::tm>
-time_t_to_tm(std::time_t time,
-             epoch_timezone_e timezone) {
-  static std::mutex s_mutex;
-  std::lock_guard<std::mutex> lock{s_mutex};
-
-  auto tm = timezone == epoch_timezone_e::UTC ? std::gmtime(&time) : std::localtime(&time);
-  if (tm)
-    return *tm;
-
-  return {};
-}
-
-std::time_t
-tm_to_time_t(std::tm time_info,
-             epoch_timezone_e timezone) {
-  if (timezone == epoch_timezone_e::local)
-    return std::mktime(&time_info);
-
-#if defined(SYS_WINDOWS)
-  return ::_mkgmtime(&time_info);
-#else
-  return ::timegm(&time_info);
-#endif
-}
-
-
 std::string
-format_epoch_time(time_t const epoch_time,
-                  std::string format_string,
-                  epoch_timezone_e timezone) {
-  auto time_info = time_t_to_tm(epoch_time, timezone);
-  if (!time_info)
+format(QDateTime const &timestamp,
+       std::string const &format_string) {
+  if (!timestamp.isValid())
     return {};
 
-#if defined(SYS_WINDOWS)
-  // std::strftime on MSVC does not conform to C++11/POSIX with
-  // respect to the %z format modifier. Its output is usually the time
-  // zone name, not its offset. See
-  // https://msdn.microsoft.com/en-us/library/fe06s4ak.aspx
-  TIME_ZONE_INFORMATION time_zone_info{};
+  std::string output;
+  auto is_format_char   = false;
+  auto date             = timestamp.date();
+  auto time             = timestamp.time();
+  auto time_zone_offset = timestamp.timeZone().offsetFromUtc(timestamp.toLocalTime());
 
-  auto result = GetTimeZoneInformation(&time_zone_info);
-  auto bias   = -1 * (time_zone_info.Bias + (result == TIME_ZONE_ID_DAYLIGHT ? time_zone_info.DaylightBias : 0));
-  auto offset = fmt::format("{0}{1:02}{2:02}", bias >= 0 ? '+' : '-', std::abs(bias) / 60, std::abs(bias) % 60);
+  for (auto const &c : format_string) {
+    if (!is_format_char && (c == '%'))
+      is_format_char = true;
 
-  boost::replace_all(format_string, "%z", offset);
-#endif
+    else if (!is_format_char)
+      output += c;
 
-  format_string += 'z';
+    else {
+      is_format_char = false;
 
-  std::string buffer;
-  buffer.resize(format_string.size());
+      if (c == 'Y')
+        output += fmt::format("{0:04d}", date.year());
 
-  while (true) {
-    auto len = std::strftime(&buffer[0], buffer.size(), format_string.c_str(), &*time_info);
-    if (len) {
-      buffer.resize(len - 1);
-      break;
+      else if (c == 'm')
+        output += fmt::format("{0:02d}", date.month());
+
+      else if (c == 'd')
+        output += fmt::format("{0:02d}", date.day());
+
+      else if (c == 'H')
+        output += fmt::format("{0:02d}", time.hour());
+
+      else if (c == 'M')
+        output += fmt::format("{0:02d}", time.minute());
+
+      else if (c == 'S')
+        output += fmt::format("{0:02d}", time.second());
+
+      else if (c == 'f')
+        output += fmt::format("{0:03d}", time.msec());
+
+      else if (c == 'z')
+        output += fmt::format("{0}{1:02d}:{2:02d}", time_zone_offset < 0 ? '-' : '+', std::abs(time_zone_offset) / 3600, (std::abs(time_zone_offset) / 60) % 60);
+
+      else
+        output += c;
     }
 
-    buffer.resize(buffer.size() * 2);
   }
 
-  return buffer;
+  return output;
 }
 
 std::string
-format_epoch_time_iso_8601(std::time_t const epoch_time,
-                           epoch_timezone_e timezone) {
-  if (timezone == epoch_timezone_e::UTC)
-    return format_epoch_time(epoch_time, "%Y-%m-%dT%H:%M:%SZ", timezone);
-
-  auto result = format_epoch_time(epoch_time, "%Y-%m-%dT%H:%M:%S%z", timezone);
-  if (result.length() >= 2)
-    result.insert(result.length() - 2, ":");
-
-  return result;
-}
-
-std::string
-format_time_point(point_t const &time_point,
-                  std::string const &format_string,
-                  epoch_timezone_e timezone) {
-  auto epoch_time = std::chrono::system_clock::to_time_t(time_point);
-  auto time_info  = time_t_to_tm(epoch_time, timezone);
-  if (!time_info)
-    return {};
-
-  auto ms           = std::chrono::duration_cast<std::chrono::milliseconds>(time_point.time_since_epoch()).count() % 1'000;
-  auto fixed_format = format_string;
-
-  boost::replace_all(fixed_format, "%f", fmt::format("{0:03d}", ms));
-
-  return format_epoch_time(epoch_time, fixed_format, timezone);
+format_iso_8601(QDateTime const &timestamp) {
+  auto zone_specifier = timestamp.timeSpec() == Qt::UTC ? "Z"s : "%z";
+  return format(timestamp, "%Y-%m-%dT%H:%M:%S"s + zone_specifier);
 }
 
 }

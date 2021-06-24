@@ -735,8 +735,8 @@ cluster_helper_c::dump_split_points()
 void
 cluster_helper_c::create_tags_for_track_statistics(KaxTags &tags,
                                                    std::string const &writing_app,
-                                                   mtx::date_time::point_t const &writing_date) {
-  std::optional<mtx::date_time::point_t> actual_writing_date;
+                                                   QDateTime const &writing_date) {
+  std::optional<QDateTime> actual_writing_date;
   if (g_write_date)
     actual_writing_date = writing_date;
 
