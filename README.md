@@ -127,7 +127,7 @@ distribution instead of relying on the bundled versions.
 These libraries are:
 
 - [fmt](http://fmtlib.net/) — a small, safe and fast formatting
-  library. Version 3 or later is required.
+  library. Version 6.1.0 or later is required.
 
 - [JPCRE2](https://github.com/jpcre2/jpcre2/) — C++ wrapper for the
   PCRE2 library. Version 10.32.1 or newer is required.
