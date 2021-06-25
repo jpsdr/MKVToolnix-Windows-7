@@ -57,6 +57,7 @@
 * `configure`: the option `--enable-appimage` has been removed. The location
   of the relevant directories within an AppImage is now detected
   automatically.
+* The bundled `fmt` library was updated to v8.0.0.
 
 
 # Version 58.0.0 "Supper's Ready" 2021-06-13

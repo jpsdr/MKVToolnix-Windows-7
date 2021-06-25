@@ -1083,7 +1083,7 @@ end
 $common_libs += [ :CoreFoundation ] if $building_for[:macos]
 
 [ { :name => 'avi',         :dir => 'lib/avilib-0.6.10'                                                              },
-  { :name => 'fmt',         :dir => 'lib/fmt/src'                                                                    },
+  { :name => 'fmt',         :dir => 'lib/fmt/src',  :except => [ 'fmt.cc']                                           },
   { :name => 'rmff',        :dir => 'lib/librmff'                                                                    },
   { :name => 'pugixml',     :dir => 'lib/pugixml/src'                                                                },
   { :name => 'mpegparser',  :dir => 'src/mpegparser'                                                                 },
