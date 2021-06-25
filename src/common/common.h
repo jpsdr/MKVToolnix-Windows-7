@@ -16,6 +16,8 @@
 #undef min
 #undef max
 
+#include "common/os.h"
+
 #include <algorithm>
 #include <cassert>
 #include <cstdint>
@@ -32,9 +34,11 @@
 
 #include <stdint.h>
 
+#if !defined(HAVE_FMT_V8) || !HAVE_FMT_V8
 // Don't support user-defined literals in fmt as they aren't used by
-// MKVToolNix and produce a compiler warning in -Wpedantic
-#define FMT_USE_USER_DEFINED_LITERALS 0
+// MKVToolNix and produce a compiler warning in -Wpedantic with fmt < v8
+#  define FMT_USE_USER_DEFINED_LITERALS 0
+#endif
 
 #include <fmt/format.h>
 #include <fmt/ostream.h>
@@ -45,8 +49,6 @@
 namespace balg = boost::algorithm;
 
 using namespace std::string_literals;
-
-#include "common/os.h"
 
 #include <ebml/c/libebml_t.h>
 #undef min

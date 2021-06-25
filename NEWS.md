@@ -42,6 +42,7 @@
 * mkvmerge, mkvinfo, MKVToolNix GUI's info tool: only on Windows: displaying
   dates before 1970-01-01 00:00:00 UTC or after 2038-01-19 03:14:08 UTC was
   broken. Note that the header editor was not affected. Fixes #3148.
+* build system: fixed compilation with fmt v8. Fixes #3151.
 
 
 ## Build system changes
