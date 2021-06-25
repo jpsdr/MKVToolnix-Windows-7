@@ -14,6 +14,18 @@
 
 namespace mtx::gui::Merge {
 
+namespace {
+
+int
+insertPriorityForTrack(Track const &track) {
+  return track.isVideo()     ? 0
+       : track.isAudio()     ? 1
+       : track.isSubtitles() ? 2
+       :                       3;
+}
+
+} // anonymous namespace
+
 TrackModel::TrackModel(QObject *parent)
   : QStandardItemModel{parent}
   , m_tracks{}
@@ -241,6 +253,31 @@ TrackModel::appendTracks(SourceFile *fileToAppendTo,
     Q_ASSERT(row != -1);
     item(row)->appendRow(createRow(newTrack));
   }
+}
+
+bool
+TrackModel::addTrackSortedByType(TrackPtr const &track) {
+  auto newTrackPrio = insertPriorityForTrack(*track);
+
+  for (int idx = 0, numTracks = m_tracks->size(); idx < numTracks; ++idx) {
+    auto existingTrackPrio = insertPriorityForTrack(*m_tracks->at(idx));
+
+    if (existingTrackPrio <= newTrackPrio)
+      continue;
+
+    invisibleRootItem()->insertRow(idx, createRow(track.get()));
+
+    return true;
+  }
+
+  return false;
+}
+
+void
+TrackModel::addTrackAtAppropriatePlace(TrackPtr const &track,
+                                       bool sortByType) {
+  if (!sortByType || !addTrackSortedByType(track))
+    addTracks({ track });
 }
 
 void

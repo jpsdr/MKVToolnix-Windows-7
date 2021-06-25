@@ -51,6 +51,7 @@ public:
 
   virtual void setTracks(QList<Track *> &tracks);
   virtual void addTracks(QList<TrackPtr> const &tracks);
+  virtual void addTrackAtAppropriatePlace(TrackPtr const &track, bool sortByType);
   virtual void appendTracks(SourceFile *fileToAppendTo, QList<TrackPtr> const &tracks);
   virtual void appendTracks(SourceFile *fileToAppendTo, QList<Track *> const &tracks);
   virtual void removeTrack(Track *trackToBeRemoved);
@@ -83,6 +84,8 @@ protected:
   bool hasUnsetTrackRole(QModelIndex const &idx = QModelIndex{});
 
   void sortTracks(QList<Track *> &tracks, bool reverse = false);
+
+  bool addTrackSortedByType(TrackPtr const &track);
 
   static QString summarizeProperties(Track const &track);
   static QString programInfoFor(Track const &track);

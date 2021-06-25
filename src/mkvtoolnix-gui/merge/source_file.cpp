@@ -127,6 +127,18 @@ SourceFile::hasRegularTrack()
 }
 
 bool
+SourceFile::hasAudioTrack()
+  const {
+  return m_tracks.end() != std::find_if(m_tracks.begin(), m_tracks.end(), [](TrackPtr const &track) { return track->isAudio(); });
+}
+
+bool
+SourceFile::hasSubtitlesTrack()
+  const {
+  return m_tracks.end() != std::find_if(m_tracks.begin(), m_tracks.end(), [](TrackPtr const &track) { return track->isSubtitles(); });
+}
+
+bool
 SourceFile::hasVideoTrack()
   const {
   return m_tracks.end() != std::find_if(m_tracks.begin(), m_tracks.end(), [](TrackPtr const &track) { return track->isVideo(); });

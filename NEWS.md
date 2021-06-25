@@ -10,6 +10,11 @@
   for other playlists the GUI will now look for disc library information & let
   the user select which one to use if there's more than one entry. Implements
   #3143.
+* MKVToolNix GUI: multiplexer: added an option for sorting files & tracks by
+  track types when adding them to multiplex settings. The order is: video
+  first followed by audio, subtitles and other types. Files & tracks can still
+  be reordered manually later. This option is enabled by default. Implements
+  #2366.
 
 ## Bug fixes
 

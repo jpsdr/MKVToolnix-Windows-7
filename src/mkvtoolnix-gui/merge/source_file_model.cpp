@@ -16,8 +16,21 @@
 #include "mkvtoolnix-gui/merge/track_model.h"
 #include "mkvtoolnix-gui/util/container.h"
 #include "mkvtoolnix-gui/util/model.h"
+#include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx::gui::Merge {
+
+namespace {
+
+int
+insertPriorityForSourceFile(SourceFile const &file) {
+  return file.hasVideoTrack()     ? 0
+       : file.hasAudioTrack()     ? 1
+       : file.hasSubtitlesTrack() ? 2
+       :                            3;
+}
+
+} // anonymous namespace
 
 SourceFileModel::SourceFileModel(QObject *parent)
   : QStandardItemModel{parent}
@@ -248,11 +261,47 @@ SourceFileModel::addOrAppendFilesAndTracks(QVector<SourceFilePtr> const &files,
     addFilesAndTracks(files);
 }
 
+bool
+SourceFileModel::addFileSortedByType(SourceFilePtr const &file) {
+  auto newFilePrio = insertPriorityForSourceFile(*file);
+
+  for (int idx = 0, numFiles = m_sourceFiles->size(); idx < numFiles; ++idx) {
+    auto existingFilePrio = insertPriorityForSourceFile(*m_sourceFiles->at(idx));
+
+    if (existingFilePrio <= newFilePrio)
+      continue;
+
+    m_sourceFileMap[reinterpret_cast<quint64>(file.get())] = file;
+    auto row                                               = createRow(file.get());
+
+    invisibleRootItem()->insertRow(idx, row);
+    m_sourceFiles->insert(idx, file);
+
+    return true;
+  }
+
+  return false;
+}
+
+void
+SourceFileModel::addFileAtAppropriatePlace(SourceFilePtr const &file,
+                                           bool sortByType) {
+  if (sortByType && addFileSortedByType(file))
+    return;
+
+  createAndAppendRow(invisibleRootItem(), file);
+  *m_sourceFiles << file;
+}
+
 void
 SourceFileModel::addFilesAndTracks(QVector<SourceFilePtr> const &files) {
+  auto sortByType = Util::Settings::get().m_mergeSortFilesTracksByTypeWhenAdding;
+
   for (auto const &file : files) {
-    createAndAppendRow(invisibleRootItem(), file);
-    *m_sourceFiles << file;
+    addFileAtAppropriatePlace(file, sortByType);
+
+    for (auto const &track : file->m_tracks)
+      m_tracksModel->addTrackAtAppropriatePlace(track, sortByType);
 
     if (file->m_additionalParts.isEmpty())
       continue;
@@ -263,7 +312,6 @@ SourceFileModel::addFilesAndTracks(QVector<SourceFilePtr> const &files) {
       createAndAppendRow(itemToAddTo, additionalPart, row++);
   }
 
-  m_tracksModel->addTracks(              std::accumulate(files.begin(), files.end(), QList<TrackPtr>{}, [](QList<TrackPtr> &accu, SourceFilePtr const &file) { return accu << file->m_tracks;        }));
   m_attachedFilesModel->addAttachedFiles(std::accumulate(files.begin(), files.end(), QList<TrackPtr>{}, [](QList<TrackPtr> &accu, SourceFilePtr const &file) { return accu << file->m_attachedFiles; }));
 }
 

@@ -58,6 +58,8 @@ public:
   virtual bool isAdditionalPart() const;
   virtual bool isPlaylist() const;
   virtual bool hasRegularTrack() const;
+  virtual bool hasAudioTrack() const;
+  virtual bool hasSubtitlesTrack() const;
   virtual bool hasVideoTrack() const;
 
   virtual void saveSettings(Util::ConfigFile &settings) const;

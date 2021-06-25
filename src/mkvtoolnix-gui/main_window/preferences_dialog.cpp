@@ -87,6 +87,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   // Merge page
   if (!m_cfg.m_mediaInfoExe.isEmpty())
     ui->leMMediaInfoExe->setText(QDir::toNativeSeparators(m_cfg.m_mediaInfoExe));
+  ui->cbMSortFilesTracksByTypeWhenAdding->setChecked(m_cfg.m_mergeSortFilesTracksByTypeWhenAdding);
   ui->cbMAutoSetFileTitle->setChecked(m_cfg.m_autoSetFileTitle);
   ui->cbMAutoClearFileTitle->setChecked(m_cfg.m_autoClearFileTitle);
   ui->cbMSetAudioDelayFromFileName->setChecked(m_cfg.m_setAudioDelayFromFileName);
@@ -358,6 +359,15 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("File types such as MPEG program and transport streams (.vob, .m2ts) require parsing a certain amount of data in order to detect all tracks contained in the file."))
                    .arg(QY("This amount is 0.3% of the source file's size or 10 MB, whichever is higher."))
                    .arg(QY("If tracks are known to be present but not found, the percentage to probe can be changed here.")));
+
+  Util::setToolTip(ui->cbMSortFilesTracksByTypeWhenAdding,
+                   Q("<p>%1 %2</p><p>%3 %4</p><p>%5</p><p>%6</p>")
+                   .arg(QY("If enabled, files and tracks will be sorted by track types when they're added to multiplex settings."))
+                   .arg(QY("The order is: video first followed by audio, subtitles and other types."))
+                   .arg(QY("For example, a file containing audio tracks but no video tracks will be inserted before the first file that contains neither video nor audio tracks."))
+                   .arg(QY("Similarly an audio track will be inserted before the first track that's neither a video nor an audio track."))
+                   .arg(QY("If disabled, files and tracks will be inserted after all existing files and tracks."))
+                   .arg(QY("This only determines the initial order which can still be changed manually later.")));
 
   Util::setToolTip(ui->cbMAlwaysShowOutputFileControls,
                    Q("%1 %2")
@@ -926,6 +936,7 @@ PreferencesDialog::save() {
   m_cfg.m_mergeAddingAppendingFilesPolicy                     = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
   m_cfg.m_mergeDragAndDropFilesPolicy                         = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMDragAndDropFilesPolicy->currentData().toInt());
   m_cfg.m_mergeAlwaysCreateNewSettingsForVideoFiles           = ui->cbMAlwaysCreateSettingsForVideoFiles->isChecked();
+  m_cfg.m_mergeSortFilesTracksByTypeWhenAdding                = ui->cbMSortFilesTracksByTypeWhenAdding->isChecked();
   m_cfg.m_mergeAlwaysShowOutputFileControls                   = ui->cbMAlwaysShowOutputFileControls->isChecked();
   m_cfg.m_mergeWarnMissingAudioTrack                          = static_cast<Util::Settings::MergeMissingAudioTrackPolicy>(ui->cbMWarnMissingAudioTrack->currentData().toInt());
   m_cfg.m_mergeTrackPropertiesLayout                          = ui->rbMTrackPropertiesLayoutHorizontalScrollArea->isChecked() ? Util::Settings::TrackPropertiesLayout::HorizontalScrollArea
