@@ -54,6 +54,10 @@
   dates before 1970-01-01 00:00:00 UTC or after 2038-01-19 03:14:08 UTC was
   broken. Note that the header editor was not affected. Fixes #3148.
 * build system: fixed compilation with fmt v8. Fixes #3151.
+* mkvmerge: SRT subtitle reader: characters that aren't valid according to the
+  assumed encoding of the file will now be replaced by the Unicode
+  "Replacement Character" U+FFFD instead of keeping the invalid characters,
+  potentially violating the Matroska specs.
 
 
 ## Build system changes

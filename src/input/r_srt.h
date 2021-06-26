@@ -22,7 +22,6 @@ class srt_reader_c: public generic_reader_c {
 private:
   srt_parser_cptr m_subs;
   int64_t m_bytes_to_process{}, m_bytes_processed{};
-  bool m_need_recoding{};
   std::optional<std::string> m_encoding;
 
 public:

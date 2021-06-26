@@ -33,14 +33,16 @@ struct sub_t {
 };
 
 class subtitles_c {
-private:
+protected:
   std::deque<sub_t> entries;
   std::deque<sub_t>::iterator current;
+  charset_converter_cptr m_cc_utf8;
+  bool m_try_utf8{}, m_invalid_utf8_warned{};
+  std::string m_file_name;
+  int64_t m_track_id{};
 
 public:
-  subtitles_c() {
-    current = entries.end();
-  }
+  subtitles_c(std::string const &file_name, int64_t track_id);
   void add(int64_t start, int64_t end, unsigned int number, const std::string &subs) {
     entries.push_back(sub_t(start, end, number, subs));
   }
@@ -71,6 +73,9 @@ public:
       return 0;
     return current->subs.length();
   }
+
+  void set_charset_converter(charset_converter_cptr const &cc_utf8);
+  std::string recode(std::string const &s, uint32_t replacement_marker = 0xfffdu);
 };
 using subtitles_cptr = std::shared_ptr<subtitles_c>;
 
@@ -85,13 +90,11 @@ public:
 
 protected:
   mm_text_io_cptr m_io;
-  const std::string &m_file_name;
-  int64_t m_tid;
   bool m_coordinates_warning_shown;
   debugging_option_c m_debug{"srt_parser"};
 
 public:
-  srt_parser_c(mm_text_io_cptr const &io, const std::string &file_name, int64_t tid);
+  srt_parser_c(mm_text_io_cptr const &io, const std::string &file_name, int64_t track_id);
   void parse();
 
 public:
@@ -113,11 +116,8 @@ public:
 protected:
   generic_reader_c &m_reader;
   mm_text_io_cptr m_io;
-  const std::string &m_file_name;
-  int64_t m_tid;
-  charset_converter_cptr m_cc_utf8;
   std::vector<std::string> m_format;
-  bool m_is_ass, m_try_utf8{}, m_invalid_utf8_warned{};
+  bool m_is_ass;
   std::string m_global;
   int64_t m_attachment_id;
 
@@ -125,14 +125,12 @@ public:
   std::vector<attachment_t> m_attachments;
 
 public:
-  ssa_parser_c(generic_reader_c &reader, mm_text_io_cptr const &io, const std::string &file_name, int64_t tid);
+  ssa_parser_c(generic_reader_c &reader, mm_text_io_cptr const &io, const std::string &file_name, int64_t track_id);
   void parse();
 
   bool is_ass() {
     return m_is_ass;
   }
-
-  void set_charset_converter(charset_converter_cptr const &cc_utf8);
 
   std::string get_global() {
     return m_global;
@@ -148,7 +146,6 @@ public:
 protected:
   int64_t parse_time(std::string &time);
   std::string get_element(const char *index, std::vector<std::string> &fields);
-  std::string recode(std::string const &s, uint32_t replacement_marker = 0xfffdu);
   void add_attachment_maybe(std::string &name, std::string &data_uu, ssa_section_e section);
   void decode_chars(unsigned char const *in, unsigned char *out, size_t bytes_in);
 };

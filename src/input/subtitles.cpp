@@ -29,6 +29,46 @@
 
 // ------------------------------------------------------------
 
+subtitles_c::subtitles_c(std::string const &file_name,
+                         int64_t track_id)
+  : current{entries.end()}
+  , m_cc_utf8{charset_converter_c::init("UTF-8")}
+  , m_invalid_utf8_warned{g_identifying}
+  , m_file_name{file_name}
+  , m_track_id{track_id}
+{
+}
+
+void
+subtitles_c::set_charset_converter(charset_converter_cptr const &cc_utf8) {
+  if (cc_utf8)
+    m_cc_utf8 = cc_utf8;
+
+  else {
+    m_cc_utf8  = g_cc_local_utf8;
+    m_try_utf8 = true;
+  }
+}
+
+std::string
+subtitles_c::recode(std::string const &s,
+                     uint32_t replacement_marker) {
+  if (m_try_utf8 && !mtx::utf8::is_valid(s))
+    m_try_utf8 = false;
+
+  auto recoded = m_try_utf8 ? s : m_cc_utf8->utf8(s);
+
+  if (mtx::utf8::is_valid(recoded))
+    return recoded;
+
+  if (!m_invalid_utf8_warned) {
+    m_invalid_utf8_warned = true;
+    mxwarn_tid(m_file_name, m_track_id, fmt::format(Y("This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n")));
+  }
+
+  return mtx::utf8::fix_invalid(recoded, replacement_marker);
+}
+
 void
 subtitles_c::process(generic_packetizer_c *p) {
   if (empty() || (entries.end() == current))
@@ -78,10 +118,9 @@ srt_parser_c::probe(mm_text_io_c &io) {
 
 srt_parser_c::srt_parser_c(mm_text_io_cptr const &io,
                            const std::string &file_name,
-                           int64_t tid)
-  : m_io(io)
-  , m_file_name(file_name)
-  , m_tid(tid)
+                           int64_t track_id)
+  : subtitles_c{file_name, track_id}
+  , m_io(io)
   , m_coordinates_warning_shown(false)
 {
 }
@@ -109,6 +148,8 @@ srt_parser_c::parse() {
     if (!m_io->getline2(s))
       break;
 
+    s = recode(s);
+
     line_number++;
     mtx::string::strip_back(s);
 
@@ -128,7 +169,7 @@ srt_parser_c::parse() {
 
     if (STATE_INITIAL == state) {
       if (!number_re.match(s)) {
-        mxwarn_tid(m_file_name, m_tid, fmt::format(Y("Error in line {0}: expected subtitle number and found some text.\n"), line_number));
+        mxwarn_tid(m_file_name, m_track_id, fmt::format(Y("Error in line {0}: expected subtitle number and found some text.\n"), line_number));
         break;
       }
       state = STATE_TIME;
@@ -137,7 +178,7 @@ srt_parser_c::parse() {
     } else if (STATE_TIME == state) {
       mtx::regex::jp::VecNum matches;
       if (!mtx::regex::match(s, matches, timestamp_re)) {
-        mxwarn_tid(m_file_name, m_tid, fmt::format(Y("Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"), line_number));
+        mxwarn_tid(m_file_name, m_track_id, fmt::format(Y("Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"), line_number));
         break;
       }
 
@@ -168,7 +209,7 @@ srt_parser_c::parse() {
       int64_t e_neg = neg_calculator(9);
 
       if (coordinates_re.match(s) && !m_coordinates_warning_shown) {
-        mxwarn_tid(m_file_name, m_tid,
+        mxwarn_tid(m_file_name, m_track_id,
                    Y("This file contains coordinates in the timestamp lines. "
                      "Such coordinates are not supported by the Matroska SRT subtitle format. "
                      "The coordinates will be removed automatically.\n"));
@@ -199,7 +240,7 @@ srt_parser_c::parse() {
       end    = ((e_h * 60 * 60 + e_min * 60 + e_sec) * 1'000'000'000ll + e_ns) * e_neg;
 
       if (0 > start) {
-        mxwarn_tid(m_file_name, m_tid,
+        mxwarn_tid(m_file_name, m_track_id,
                    fmt::format(Y("Line {0}: Negative timestamp encountered. The entry will be adjusted to start from 00:00:00.000.\n"), line_number));
         end   -= start;
         start  = 0;
@@ -212,7 +253,7 @@ srt_parser_c::parse() {
       // of this function, but warn the user that the original order is being
       // changed.
       if (!timestamp_warning_printed && (start < previous_start)) {
-        mxwarn_tid(m_file_name, m_tid, fmt::format(Y("Warning in line {0}: The start timestamp is smaller than that of the previous entry. "
+        mxwarn_tid(m_file_name, m_track_id, fmt::format(Y("Warning in line {0}: The start timestamp is smaller than that of the previous entry. "
                                                      "All entries from this file will be sorted by their start time.\n"), line_number));
         timestamp_warning_printed = true;
       }
@@ -286,28 +327,14 @@ ssa_parser_c::probe(mm_text_io_c &io) {
 ssa_parser_c::ssa_parser_c(generic_reader_c &reader,
                            mm_text_io_cptr const &io,
                            const std::string &file_name,
-                           int64_t tid)
-  : m_reader(reader)
+                           int64_t track_id)
+  : subtitles_c{file_name, track_id}
+  , m_reader(reader)
   , m_io(io)
-  , m_file_name(file_name)
-  , m_tid(tid)
-  , m_cc_utf8(charset_converter_c::init("UTF-8"))
   , m_is_ass(false)
   , m_attachment_id(0)
 {
 }
-
-void
-ssa_parser_c::set_charset_converter(charset_converter_cptr const &cc_utf8) {
-  if (cc_utf8)
-    m_cc_utf8 = cc_utf8;
-
-  else {
-    m_cc_utf8  = g_cc_local_utf8;
-    m_try_utf8 = true;
-  }
-}
-
 
 void
 ssa_parser_c::parse() {
@@ -332,6 +359,7 @@ ssa_parser_c::parse() {
     if (!m_io->getline2(line))
       break;
 
+    line               = recode(line);
     bool add_to_global = true;
 
     // A normal line. Let's see if this file is ASS and not SSA.
@@ -395,7 +423,7 @@ ssa_parser_c::parse() {
         if (   (0     > start)
             || (0     > end)
             || (start > end)) {
-          mxwarn_tid(m_file_name, m_tid, fmt::format(Y("SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"), orig_line));
+          mxwarn_tid(m_file_name, m_track_id, fmt::format(Y("SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"), orig_line));
           continue;
         }
 
@@ -413,7 +441,7 @@ ssa_parser_c::parse() {
           + get_element("MarginR", fields)          + comma
           + get_element("MarginV", fields)          + comma
           + get_element("Effect", fields)           + comma
-          + recode(get_element("Text", fields));
+          + get_element("Text", fields);
 
         add(start, end, num, line);
         num++;
@@ -500,25 +528,6 @@ ssa_parser_c::parse_time(std::string &stime) {
   return (tds * 10 + ts * 1000 + tm * 60 * 1000 + th * 60 * 60 * 1000) * 1000000;
 }
 
-std::string
-ssa_parser_c::recode(std::string const &s,
-                     uint32_t replacement_marker) {
-  if (m_try_utf8 && !mtx::utf8::is_valid(s))
-    m_try_utf8 = false;
-
-  auto recoded = m_try_utf8 ? s : m_cc_utf8->utf8(s);
-
-  if (mtx::utf8::is_valid(recoded))
-    return recoded;
-
-  if (!m_invalid_utf8_warned) {
-    m_invalid_utf8_warned = true;
-    mxwarn_tid(m_file_name, m_tid, fmt::format(Y("This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n")));
-  }
-
-  return mtx::utf8::fix_invalid(recoded, replacement_marker);
-}
-
 void
 ssa_parser_c::add_attachment_maybe(std::string &name,
                                    std::string &data_uu,
@@ -550,7 +559,7 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
     short_name.erase(0, pos + 1);
 
   attachment.ui_id        = m_attachment_id;
-  attachment.name         = recode(name, static_cast<uint32_t>('_'));
+  attachment.name         = name;
   attachment.description  = fmt::format(SSA_SECTION_FONTS == section ? Y("Imported font from {0}") : Y("Imported picture from {0}"), short_name);
   attachment.to_all_files = true;
   attachment.source_file  = m_file_name;

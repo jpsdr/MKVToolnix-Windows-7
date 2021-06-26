@@ -28,12 +28,17 @@ srt_reader_c::probe_file() {
 
 void
 srt_reader_c::read_headers() {
-  auto text_in    = std::static_pointer_cast<mm_text_io_c>(m_in);
-  m_need_recoding = text_in->get_byte_order_mark() == byte_order_mark_e::none;
-  m_encoding      = text_in->get_encoding();
-  m_subs          = std::make_shared<srt_parser_c>(text_in, m_ti.m_fname, 0);
+  auto text_in = std::static_pointer_cast<mm_text_io_c>(m_in);
+  auto cc_utf8 = text_in->get_byte_order_mark() != byte_order_mark_e::none ? charset_converter_c::init("UTF-8")
+               : mtx::includes(m_ti.m_sub_charsets,  0)                    ? charset_converter_c::init(m_ti.m_sub_charsets[ 0])
+               : mtx::includes(m_ti.m_sub_charsets, -1)                    ? charset_converter_c::init(m_ti.m_sub_charsets[-1])
+               :                                                             charset_converter_cptr{};
+  m_encoding   = text_in->get_encoding();
+  m_subs       = std::make_shared<srt_parser_c>(text_in, m_ti.m_fname, 0);
 
   show_demuxer_info();
+
+  m_subs->set_charset_converter(cc_utf8);
 
   m_subs->parse();
 
@@ -45,7 +50,7 @@ srt_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('s', 0) || !m_reader_packetizers.empty())
     return;
 
-  add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8, m_need_recoding));
+  add_packetizer(new textsubs_packetizer_c(this, m_ti, MKV_S_TEXTUTF8));
 
   show_packetizer_info(0, ptzr(0));
 }
