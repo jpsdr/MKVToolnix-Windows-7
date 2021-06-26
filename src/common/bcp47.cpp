@@ -13,16 +13,17 @@
 
 #include "common/common_pch.h"
 
+#include <fmt/ranges.h>
+
 #include "common/bcp47.h"
 #include "common/bcp47_re.h"
 #include "common/iana_language_subtag_registry.h"
 #include "common/iso639.h"
 #include "common/iso3166.h"
 #include "common/iso15924.h"
+#include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
-
-#include <fmt/ranges.h>
 
 namespace mtx::bcp47 {
 
@@ -178,7 +179,7 @@ language_c::parse_region(std::string const &code) {
     return true;
   }
 
-  auto normalized_code = mtx::regex::replace(code, mtx::regex::jp::Regex{"^0+"}, "", "");
+  auto normalized_code = to_utf8(Q(code).replace(QRegularExpression{"^0+"}, {}));
   if (normalized_code.empty())
     normalized_code = "0";
 
@@ -245,54 +246,54 @@ language_c
 language_c::parse(std::string const &language) {
   init_re();
 
-  mtx::regex::jp::VecNum matches;
   language_c l;
   auto language_lower = mtx::string::to_lower_ascii(language);
+  auto matches        = s_bcp47_re->match(Q(language_lower));
 
-  if (!mtx::regex::match(language_lower, matches, *s_bcp47_re) || (matches[0].size() != 11)) {
+  if (!matches.hasMatch()) {
     l.m_parser_error = Y("The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags.");
     return l;
   }
 
   // global private use
-  if (!matches[0][10].empty()) {
-    l.m_private_use = mtx::string::split(matches[0][10].substr(1), "-");
+  if (matches.capturedLength(10)) {
+    l.m_private_use = mtx::string::split(to_utf8(matches.captured(10)).substr(1), "-");
     l.m_valid       = true;
     return l;
   }
 
-  if (!matches[0][1].empty() && !l.parse_language(matches[0][1]))
+  if (matches.capturedLength(1) && !l.parse_language(to_utf8(matches.captured(1))))
     return l;
 
-  if (!matches[0][2].empty() && !l.parse_extlangs_or_variants(matches[0][2], true))
+  if (matches.capturedLength(2) && !l.parse_extlangs_or_variants(to_utf8(matches.captured(2)), true))
     return l;
 
-  if (!matches[0][3].empty()) {
+  if (matches.capturedLength(3)) {
     l.m_parser_error = Y("Four-letter language codes are reserved for future use and not supported.");
     return l;
   }
 
-  if (!matches[0][4].empty()) {
+  if (matches.capturedLength(4)) {
     l.m_parser_error = Y("Five- to eight-letter language codes are currently not supported.");
     return l;
   }
 
-  if (!matches[0][5].empty() && !l.parse_script(matches[0][5]))
+  if (matches.capturedLength(5) && !l.parse_script(to_utf8(matches.captured(5))))
     return l;
 
-  if (!matches[0][6].empty() && !l.parse_region(matches[0][6]))
+  if (matches.capturedLength(6) && !l.parse_region(to_utf8(matches.captured(6))))
     return l;
 
-  if (!matches[0][7].empty() && !l.parse_extlangs_or_variants(matches[0][7], false))
+  if (matches.capturedLength(7) && !l.parse_extlangs_or_variants(to_utf8(matches.captured(7)), false))
     return l;
 
-  if (!matches[0][8].empty()) {
+  if (matches.capturedLength(8)) {
     l.m_parser_error = Y("Language tag extensions are currently not supported.");
     return l;
   }
 
-  if (!matches[0][9].empty())
-    l.m_private_use = mtx::string::split(matches[0][9].substr(1), "-");
+  if (matches.capturedLength(9))
+    l.m_private_use = mtx::string::split(to_utf8(matches.captured(9)).substr(1), "-");
 
   l.m_valid = true;
 

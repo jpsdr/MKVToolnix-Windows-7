@@ -15,10 +15,10 @@
 
 #include "common/common_pch.h"
 
-#include "common/regex.h"
+#include <QRegularExpression>
 
 namespace mtx::bcp47 {
 
-extern std::optional<mtx::regex::jp::Regex> s_bcp47_re;
+extern std::optional<QRegularExpression> s_bcp47_re;
 
 }

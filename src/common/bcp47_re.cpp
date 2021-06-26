@@ -13,11 +13,13 @@
 
 #include "common/common_pch.h"
 
-#include "common/regex.h"
+#include <QRegularExpression>
+
+#include "common/qt.h"
 
 namespace mtx::bcp47 {
 
-std::optional<mtx::regex::jp::Regex> s_bcp47_re;
+std::optional<QRegularExpression> s_bcp47_re;
 
 void
 init_re() {
@@ -126,8 +128,8 @@ init_re() {
     ")"
     "$"s;
 
-  auto re_cleaned = mtx::regex::replace(re_stringified, mtx::regex::jp::Regex{" +|\n+"}, "g", "");
-  s_bcp47_re      = mtx::regex::jp::Regex{ re_cleaned, "S" };
+  auto re_cleaned = Q(re_stringified).replace(QRegularExpression{" +|\n+"}, {});
+  s_bcp47_re      = QRegularExpression{ re_cleaned };
 }
 
 } // namespace mtx::bcp47
