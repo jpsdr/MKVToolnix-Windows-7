@@ -350,6 +350,7 @@ Settings::load() {
   m_mergeAddBlurayCovers                      = reg.value(s_valMergeAddBlurayCovers,                                                           true).toBool();
   m_mergeAlwaysCreateNewSettingsForVideoFiles = reg.value(s_valMergeAlwaysCreateNewSettingsForVideoFiles).toBool();
   m_mergeSortFilesTracksByTypeWhenAdding      = reg.value(s_valMergeSortFilesTracksByTypeWhenAdding,                                           true).toBool();
+  m_mergeReconstructSequencesWhenAdding       = reg.value(s_valMergeReconstructSequencesWhenAdding,                                            true).toBool();
   m_mergeAlwaysShowOutputFileControls         = reg.value(s_valMergeAlwaysShowOutputFileControls,                                              true).toBool();
   m_mergePredefinedVideoTrackNames            = reg.value(s_valMergePredefinedVideoTrackNames).toStringList();
   m_mergePredefinedAudioTrackNames            = reg.value(s_valMergePredefinedAudioTrackNames).toStringList();
@@ -713,6 +714,7 @@ Settings::save()
   reg.setValue(s_valMergeAddBlurayCovers,                      m_mergeAddBlurayCovers);
   reg.setValue(s_valMergeAlwaysCreateNewSettingsForVideoFiles, m_mergeAlwaysCreateNewSettingsForVideoFiles);
   reg.setValue(s_valMergeSortFilesTracksByTypeWhenAdding,      m_mergeSortFilesTracksByTypeWhenAdding);
+  reg.setValue(s_valMergeReconstructSequencesWhenAdding,       m_mergeReconstructSequencesWhenAdding);
   reg.setValue(s_valMergeAlwaysShowOutputFileControls,         m_mergeAlwaysShowOutputFileControls);
   reg.setValue(s_valMergePredefinedVideoTrackNames,            m_mergePredefinedVideoTrackNames);
   reg.setValue(s_valMergePredefinedAudioTrackNames,            m_mergePredefinedAudioTrackNames);

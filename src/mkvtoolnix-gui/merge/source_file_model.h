@@ -62,8 +62,8 @@ public Q_SLOTS:
 
 protected:
   virtual void addFilesAndTracks(QVector<SourceFilePtr> const &files);
-  virtual void addFileAtAppropriatePlace(SourceFilePtr const &file, bool sortByType);
-  virtual bool addFileSortedByType(SourceFilePtr const &file);
+  virtual QModelIndex addFileAtAppropriatePlace(SourceFilePtr const &file, bool sortByType);
+  virtual QModelIndex addFileSortedByType(SourceFilePtr const &file);
   virtual void appendFilesAndTracks(QVector<SourceFilePtr> const &files, QModelIndex const &fileToAddToIdx);
 
   void setItemsFromSourceFile(QList<QStandardItem *> const &items, SourceFile *sourceFile) const;

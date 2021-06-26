@@ -82,6 +82,7 @@ char const * const s_valMergePredefinedSplitSizes                 = "mergePredef
 char const * const s_valMergePredefinedSubtitleTrackNames         = "mergePredefinedSubttitleTrackNames";
 char const * const s_valMergePredefinedTrackNames                 = "mergePredefinedTrackNames";
 char const * const s_valMergePredefinedVideoTrackNames            = "mergePredefinedVideoTrackNames";
+char const * const s_valMergeReconstructSequencesWhenAdding       = "mergeReconstructSequencesWhenAdding";
 char const * const s_valMergeSetDestinationFromTitle              = "mergeSetDestinationFromTitle";
 char const * const s_valMergeSortFilesTracksByTypeWhenAdding      = "mergeSortFilesTracksByTypeWhenAdding";
 char const * const s_valMergeTrackPropertiesLayout                = "mergeTrackPropertiesLayout";

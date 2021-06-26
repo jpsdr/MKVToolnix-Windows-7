@@ -181,7 +181,7 @@ public:
   bool m_mergeEnableDialogNormGainRemoval, m_mergeAddBlurayCovers;
   ClearMergeSettingsAction m_clearMergeSettings;
   MergeAddingAppendingFilesPolicy m_mergeDragAndDropFilesPolicy, m_mergeLastDragAndDropFilesDecision, m_mergeAddingAppendingFilesPolicy, m_mergeLastAddingAppendingDecision;
-  bool m_mergeAlwaysCreateNewSettingsForVideoFiles, m_mergeSortFilesTracksByTypeWhenAdding;
+  bool m_mergeAlwaysCreateNewSettingsForVideoFiles, m_mergeSortFilesTracksByTypeWhenAdding, m_mergeReconstructSequencesWhenAdding;
   HeaderEditorDroppedFilesPolicy m_headerEditorDroppedFilesPolicy;
   bool m_headerEditorDateTimeInUTC;
   TrackPropertiesLayout m_mergeTrackPropertiesLayout;
