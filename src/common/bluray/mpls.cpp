@@ -14,13 +14,15 @@
 
 #include <vector>
 
+#include <QRegularExpression>
+
 #include "common/bluray/mpls.h"
 #include "common/bluray/track_chapter_names.h"
 #include "common/debugging.h"
 #include "common/hacks.h"
 #include "common/list_utils.h"
 #include "common/path.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/formatting.h"
 
 namespace mtx::bluray::mpls {
@@ -491,11 +493,11 @@ parser_c::read_string(unsigned int length) {
 
 void
 parser_c::read_chapter_names(std::string const &base_file_name) {
-  mtx::regex::jp::VecNum matches;
-  if (!mtx::regex::match(base_file_name, matches, mtx::regex::jp::Regex{"(.{5})\\.mpls$"}))
+  auto matches = QRegularExpression{"(.{5})\\.mpls$"}.match(Q(base_file_name));
+  if (!matches.hasMatch())
     return;
 
-  auto all_names = mtx::bluray::track_chapter_names::locate_and_parse_for_title(mtx::fs::to_path(base_file_name), matches[0][1]);
+  auto all_names = mtx::bluray::track_chapter_names::locate_and_parse_for_title(mtx::fs::to_path(base_file_name), to_utf8(matches.captured(1)));
 
   for (auto chapter_idx = 0, num_chapters = static_cast<int>(m_chapters.size()); chapter_idx < num_chapters; ++chapter_idx)
     for (auto const &[language, names] : all_names)

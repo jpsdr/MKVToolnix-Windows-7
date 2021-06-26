@@ -24,12 +24,14 @@
 # include <windows.h>
 #endif
 
+#include <QRegularExpression>
+
 #include "common/memory.h"
 #include "common/mm_io.h"
 #include "common/mm_mem_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/parsing.h"
 #ifdef SYS_WINDOWS
 # include "common/fs_sys_helpers.h"
@@ -83,7 +85,7 @@ charset_converter_c::init(const std::string &charset,
 
 bool
 charset_converter_c::is_utf8_charset_name(const std::string &charset) {
-  return mtx::regex::match(charset, mtx::regex::jp::Regex{"^utf-?8$", "i"});
+  return Q(charset).contains(QRegularExpression{"^utf-?8$", QRegularExpression::CaseInsensitiveOption});
 }
 
 void

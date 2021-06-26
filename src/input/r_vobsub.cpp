@@ -13,6 +13,8 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include "common/codec.h"
 #include "common/debugging.h"
 #include "common/hacks.h"
@@ -23,7 +25,7 @@
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/spu.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -176,9 +178,9 @@ vobsub_reader_c::parse_headers() {
     if ((line.length() == 0) || (line[0] == '#'))
       continue;
 
-    mtx::regex::jp::VecNum matches;
-    if (mtx::regex::match(line, matches, mtx::regex::jp::Regex{"^id: *([a-z]+)", "i"})) {
-      language = mtx::bcp47::language_c::parse(balg::to_lower_copy(matches[0][1]));
+    auto matches = QRegularExpression{"^id: *([a-z]+)", QRegularExpression::CaseInsensitiveOption}.match(Q(line));
+    if (matches.hasMatch()) {
+      language = mtx::bcp47::language_c::parse(to_utf8(matches.captured(1).toLower()));
 
       if (track) {
         if (track->entries.empty())

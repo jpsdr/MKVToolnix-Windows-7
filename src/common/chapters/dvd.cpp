@@ -19,11 +19,13 @@
 #include <dvdread/ifo_read.h>
 #include <dvdread/ifo_print.h>
 
+#include <QRegularExpression>
+
 #include "common/at_scope_exit.h"
 #include "common/chapters/chapters.h"
 #include "common/chapters/dvd.h"
 #include "common/path.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/parsing.h"
 #include "common/timestamp.h"
 
@@ -122,18 +124,18 @@ maybe_parse_dvd(std::string const &file_name,
                 mtx::bcp47::language_c const &language) {
   auto title             = 1u;
   auto cleaned_file_name = file_name;
-  mtx::regex::jp::VecNum matches;
+  auto matches           = QRegularExpression{"(.+):([0-9]+)$"}.match(Q(cleaned_file_name));
 
-  if (mtx::regex::match(cleaned_file_name, matches, mtx::regex::jp::Regex{"(.+):([0-9]+)$"})) {
-    cleaned_file_name = matches[0][1];
+  if (matches.hasMatch()) {
+    cleaned_file_name = to_utf8(matches.captured(1));
 
-    if (!mtx::string::parse_number(matches[0][2], title) || (title < 1))
-      throw parser_x{fmt::format(Y("'{0}' is not a valid DVD title number."), matches[0][2])};
+    if (!mtx::string::parse_number(to_utf8(matches.captured(2)), title) || (title < 1))
+      throw parser_x{fmt::format(Y("'{0}' is not a valid DVD title number."), to_utf8(matches.captured(2)))};
   }
 
   auto dvd_dir = mtx::fs::to_path(cleaned_file_name);
 
-  if (mtx::regex::match(cleaned_file_name, mtx::regex::jp::Regex{"\\.(bup|ifo|vob)$", "i"}))
+  if (Q(cleaned_file_name).contains(QRegularExpression{"\\.(bup|ifo|vob)$", QRegularExpression::CaseInsensitiveOption}))
     dvd_dir = dvd_dir.parent_path();
 
   else if (   !std::filesystem::is_directory(dvd_dir)

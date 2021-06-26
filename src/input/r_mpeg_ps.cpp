@@ -13,6 +13,8 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include "common/ac3.h"
 #include "common/bit_reader.h"
 #include "common/debugging.h"
@@ -23,7 +25,7 @@
 #include "common/mpeg.h"
 #include "common/mpeg1_2.h"
 #include "common/path.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "common/truehd.h"
 #include "input/r_mpeg_ps.h"
@@ -82,7 +84,7 @@ mpeg_ps_reader_c::read_headers() {
   try {
     uint8_t byte;
 
-    if (!m_ti.m_disable_multi_file && mtx::regex::match(mtx::fs::to_path(m_ti.m_fname).filename().u8string(), mtx::regex::jp::Regex{"^vts_\\d+_\\d+", "i"})) {
+    if (!m_ti.m_disable_multi_file && Q(mtx::fs::to_path(m_ti.m_fname).filename()).contains(QRegularExpression{"^vts_\\d+_\\d+", QRegularExpression::CaseInsensitiveOption})) {
       m_in.reset();               // Close the source file first before opening it a second time.
       m_in = mm_multi_file_io_c::open_multi(m_ti.m_fname, false);
     }

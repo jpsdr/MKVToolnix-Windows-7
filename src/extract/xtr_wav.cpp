@@ -13,6 +13,8 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include <matroska/KaxBlock.h>
 
 #include "avilib.h"
@@ -24,7 +26,7 @@
 #include "common/mm_io_x.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_write_buffer_io.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/w64.h"
 #include "extract/xtr_wav.h"
 
@@ -40,7 +42,7 @@ xtr_wav_c::create_file(xtr_base_c *master,
                        libmatroska::KaxTrackEntry &track) {
   init_content_decoder(track);
 
-  m_w64_requested = mtx::regex::match(get_file_name().u8string(), mtx::regex::jp::Regex{"\\.[wW]64$"});
+  m_w64_requested = Q(get_file_name()).contains(QRegularExpression{"\\.[wW]64$"});
   m_channels      = kt_get_a_channels(track);
   m_sfreq         = kt_get_a_sfreq(track);
   m_bps           = kt_get_a_bps(track);

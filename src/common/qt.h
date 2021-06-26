@@ -84,11 +84,6 @@ to_wide(QString const &source) {
   return source.toStdWString();
 }
 
-inline void
-mxinfo(QString const &s) {
-  mxinfo(to_utf8(s));
-}
-
 inline std::ostream &
 operator <<(std::ostream &out,
             QString const &string) {
