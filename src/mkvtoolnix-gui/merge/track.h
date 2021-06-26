@@ -2,6 +2,7 @@
 
 #include "common/common_pch.h"
 
+#include <QColor>
 #include <QString>
 #include <QVariant>
 
@@ -40,6 +41,8 @@ public:
 
   int64_t m_size{};
   QString m_attachmentDescription;
+
+  QColor m_color;
 
 public:
   explicit Track(SourceFile *file = nullptr, TrackType = TrackType::Audio);

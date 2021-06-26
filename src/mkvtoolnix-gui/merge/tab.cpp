@@ -117,6 +117,8 @@ Tab::Tab(QWidget *parent)
 
   p.savedState = currentState();
   p.emptyState = p.savedState;
+
+  p.ui->files->setIconSize({ 28, 16 });
 }
 
 Tab::~Tab() {

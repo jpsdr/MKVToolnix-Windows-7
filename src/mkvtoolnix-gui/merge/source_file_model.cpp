@@ -6,9 +6,12 @@
 #include <QFileInfo>
 #include <QItemSelectionModel>
 #include <QMimeData>
+#include <QPainter>
+#include <QPixmap>
 #include <QRegularExpression>
 
 #include "common/logger.h"
+#include "common/random.h"
 #include "common/sorting.h"
 #include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/mime_types.h"
@@ -22,6 +25,26 @@
 namespace mtx::gui::Merge {
 
 namespace {
+
+QIcon
+createSourceIndicatorIcon(QString const &iconName,
+                          QColor const &color) {
+  QPixmap combinedPixmap{28, 16};
+  combinedPixmap.fill(Qt::transparent);
+
+  QPainter painter{&combinedPixmap};
+
+  painter.drawPixmap(0, 0, QPixmap{Q(":/icons/16x16/%1.png").arg(iconName)});
+
+  painter.setPen(color);
+  painter.setBrush(color);
+  painter.drawRect(20, 2, 8, 12);
+
+  QIcon combinedIcon;
+  combinedIcon.addPixmap(combinedPixmap);
+
+  return combinedIcon;
+}
 
 struct SequencedFileNameData {
   QString prefix, suffix;
@@ -67,6 +90,8 @@ SourceFileModel::SourceFileModel(QObject *parent)
   m_additionalPartIcon.addFile(":/icons/16x16/distribute-horizontal-margin.png");
   m_addedIcon.addFile(":/icons/16x16/distribute-horizontal-x.png");
   m_normalIcon.addFile(":/icons/16x16/distribute-vertical-page.png");
+
+  initializeColors();
 }
 
 SourceFileModel::~SourceFileModel() {
@@ -125,10 +150,14 @@ SourceFileModel::setSourceFiles(QList<SourceFilePtr> &sourceFiles) {
   removeRows(0, rowCount());
   m_sourceFileMap.clear();
 
+  initializeColors();
+
   m_sourceFiles = &sourceFiles;
   auto row      = 0u;
 
   for (auto const &file : *m_sourceFiles) {
+    assignColor(*file);
+
     createAndAppendRow(invisibleRootItem(), file);
 
     auto rowItem  = item(row);
@@ -148,7 +177,7 @@ QList<QStandardItem *>
 SourceFileModel::createRow(SourceFile *sourceFile)
   const {
   auto items = QList<QStandardItem *>{};
-  for (int idx = 0; idx < 4; ++idx)
+  for (int idx = 0; idx < columnCount(); ++idx)
     items << new QStandardItem{};
 
   setItemsFromSourceFile(items, sourceFile);
@@ -168,9 +197,10 @@ SourceFileModel::setItemsFromSourceFile(QList<QStandardItem *> const &items,
   items[3]->setText(QDir::toNativeSeparators(info.path()));
 
   items[0]->setData(reinterpret_cast<quint64>(sourceFile), Util::SourceFileRole);
-  items[0]->setIcon(  sourceFile->isAdditionalPart() ? m_additionalPartIcon
-                    : sourceFile->isAppended()       ? m_addedIcon
-                    :                                  m_normalIcon);
+  items[0]->setIcon(createSourceIndicatorIcon(  sourceFile->isAdditionalPart() ? Q("distribute-horizontal-margin")
+                                              : sourceFile->isAppended()       ? Q("distribute-horizontal-x")
+                                              :                                  Q("distribute-vertical-page"),
+                                              sourceFile->m_color));
 
   items[2]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
@@ -278,6 +308,9 @@ SourceFileModel::addOrAppendFilesAndTracks(QVector<SourceFilePtr> const &files,
   if (files.isEmpty())
     return;
 
+  for (auto const &file : files)
+    assignColor(*file);
+
   if (append)
     appendFilesAndTracks(files, fileToAddToIdx);
   else
@@ -373,6 +406,8 @@ SourceFileModel::addFilesAndTracks(QVector<SourceFilePtr> const &files) {
 
 void
 SourceFileModel::removeFile(SourceFile *fileToBeRemoved) {
+  m_availableColors.prepend(fileToBeRemoved->m_color);
+
   m_sourceFileMap.remove(reinterpret_cast<quint64>(fileToBeRemoved));
 
   if (fileToBeRemoved->isAdditionalPart()) {
@@ -876,6 +911,42 @@ SourceFileModel::moveSourceFilesUpOrDown(QList<SourceFile *> files,
   }
 
   updateSourceFileLists();
+}
+
+void
+SourceFileModel::initializeColors() {
+  auto step = 64;
+
+  m_availableColors.clear();
+  m_availableColors.reserve(6 * (256 / step));
+
+  for (int value = 255; value > 0; value -= step) {
+    m_availableColors << QColor{0,     value, 0};
+    m_availableColors << QColor{0,     0,     value};
+    m_availableColors << QColor{value, 0,     0};
+    m_availableColors << QColor{value, value, 0};
+    m_availableColors << QColor{value, 0,     value};
+    m_availableColors << QColor{0,     value, value};
+  }
+}
+
+void
+SourceFileModel::assignColor(SourceFile &file) {
+  if (m_availableColors.isEmpty())
+    m_availableColors << QColor{random_c::generate_8bits(), random_c::generate_8bits(), random_c::generate_8bits()};
+
+  file.m_color = m_availableColors.front();
+
+  for (auto const &track : file.m_tracks)
+    track->m_color = file.m_color;
+
+  m_availableColors.removeFirst();
+
+  for (auto const &additionalPart : file.m_additionalParts)
+    assignColor(*additionalPart);
+
+  for (auto const &appendedFile : file.m_appendedFiles)
+    assignColor(*appendedFile);
 }
 
 }

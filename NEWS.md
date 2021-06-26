@@ -21,6 +21,8 @@
   file will be added while the second and following file names will be
   appended to the first one. This option is enabled by default. Implements
   #2866.
+* MKVToolNix GUI: multiplexer: added small colored boxes for each file & track
+  in order to indicate from which file each track is read.
 
 ## Bug fixes
 

@@ -16,6 +16,14 @@ namespace mtx::gui::Merge {
 
 namespace {
 
+QIcon
+createSourceIndicatorIcon(QColor const &color) {
+  QPixmap pixmap{8, 12};
+  pixmap.fill(color);
+
+  return pixmap;
+}
+
 int
 insertPriorityForTrack(Track const &track) {
   return track.isVideo()     ? 0
@@ -133,7 +141,7 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
   items[ProgramColumn]         ->setText(programInfoFor(*track));
   items[DelayColumn]           ->setText(track->m_delay);
 
-  items[CodecColumn]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
+  items[CodecColumn]->setIcon(createSourceIndicatorIcon(track->m_color));
   items[CodecColumn]->setCheckable(true);
   items[CodecColumn]->setCheckState(track->m_muxThis ? Qt::Checked : Qt::Unchecked);
 
@@ -151,6 +159,8 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
 
   items[IDColumn]   ->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
   items[DelayColumn]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+
+  items[0]->setData(QVariant::fromValue(reinterpret_cast<qulonglong>(track)), Util::TrackRole);
 
   Util::setItemForegroundColorDisabled(items, !track->m_muxThis);
 }
