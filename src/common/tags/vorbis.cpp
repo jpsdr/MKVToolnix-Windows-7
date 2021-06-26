@@ -182,7 +182,7 @@ from_vorbis_comments(vorbis_comments_t const &vorbis_comments) {
     mxdebug_if(s_debug, fmt::format("from_vorbis_comments: parsing {}={}\n", vorbis_full_key, mtx::string::elide_string(value, 40)));
 
     auto key_name_language                  = mtx::string::split(vorbis_full_key, "-", 2);
-    auto vorbis_key                         = mtx::regex::replace(balg::to_upper_copy(key_name_language[0]), mtx::regex::jp::Regex{" +"}, "g", "");
+    auto vorbis_key                         = to_utf8(Q(key_name_language[0]).toUpper().replace(QRegularExpression{" +"}, ""));
     auto const &[matroska_key, target_type] = s_vorbis_to_matroska[vorbis_key];
 
     if (vorbis_key == "TITLE") {

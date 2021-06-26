@@ -43,4 +43,5 @@ public:
 
 protected:
   virtual void process_one_packet(packet_cptr const &packet);
+  virtual std::string recode(std::string subs);
 };

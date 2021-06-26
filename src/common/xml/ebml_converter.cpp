@@ -267,7 +267,7 @@ ebml_converter_c::parse_binary(parser_context_t &ctx) {
     format = "base64";
 
   if (format == "hex") {
-    auto hex_content = mtx::regex::replace(content, mtx::regex::jp::Regex{"(0x|\\s|\\r|\\n)+", "i"}, "g", "");
+    auto hex_content = to_utf8(Q(content).replace(QRegularExpression{"(0x|\\s|\\r|\\n)+", QRegularExpression::CaseInsensitiveOption}, {}));
     if (Q(hex_content).contains(QRegularExpression{"[^0-9a-f]", QRegularExpression::CaseInsensitiveOption}))
       throw malformed_data_x{ ctx.name, ctx.node.offset_debug(), Y("Non-hex digits encountered.") };
 

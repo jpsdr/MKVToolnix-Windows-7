@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include "common/list_utils.h"
+#include "common/regex.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 

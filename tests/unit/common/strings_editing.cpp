@@ -89,7 +89,7 @@ TEST(StringsEditing, SplittingByStringPatternAtEnd) {
 }
 
 TEST(StringsEditing, SplittingRegexByStringEmptyPattern) {
-  auto r = mtx::string::split("This, and that, is stuff."s, mtx::regex::jp::Regex{""s});
+  auto r = mtx::string::split("This, and that, is stuff."s, QRegularExpression{""});
 
   ASSERT_EQ(27,  r.size());
   EXPECT_EQ("",  r[0]);
@@ -122,14 +122,14 @@ TEST(StringsEditing, SplittingRegexByStringEmptyPattern) {
 }
 
 TEST(StringsEditing, SplittingRegexByStringEmptyText) {
-  auto r = mtx::string::split(""s, mtx::regex::jp::Regex{","s});
+  auto r = mtx::string::split(""s, QRegularExpression{","});
 
   ASSERT_EQ(1,   r.size());
   EXPECT_EQ(""s, r[0]);
 }
 
 TEST(StringsEditing, SplittingRegexByStringOneCharPattern) {
-  auto r = mtx::string::split("This, and that, is stuff."s, mtx::regex::jp::Regex{","s});
+  auto r = mtx::string::split("This, and that, is stuff."s, QRegularExpression{","});
 
   ASSERT_EQ(3,             r.size());
   EXPECT_EQ("This"s,       r[0]);
@@ -138,7 +138,7 @@ TEST(StringsEditing, SplittingRegexByStringOneCharPattern) {
 }
 
 TEST(StringsEditing, SplittingRegexByStringTwoCharsPattern) {
-  auto r = mtx::string::split("This,  and that,    is stuff."s, mtx::regex::jp::Regex{", *"s});
+  auto r = mtx::string::split("This,  and that,    is stuff."s, QRegularExpression{", *"});
 
   ASSERT_EQ(3,            r.size());
   EXPECT_EQ("This"s,      r[0]);
@@ -147,7 +147,7 @@ TEST(StringsEditing, SplittingRegexByStringTwoCharsPattern) {
 }
 
 TEST(StringsEditing, SplittingRegexByStringLimit2) {
-  auto r = mtx::string::split("This,  and that,   is stuff."s, mtx::regex::jp::Regex{", *"s}, 2);
+  auto r = mtx::string::split("This,  and that,   is stuff."s, QRegularExpression{", *"}, 2);
 
   ASSERT_EQ(2,                        r.size());
   EXPECT_EQ("This"s,                  r[0]);
@@ -155,14 +155,14 @@ TEST(StringsEditing, SplittingRegexByStringLimit2) {
 }
 
 TEST(StringsEditing, SplittingRegexByStringLimit1) {
-  auto r = mtx::string::split("This,  and that,   is stuff."s, mtx::regex::jp::Regex{", *"s}, 1);
+  auto r = mtx::string::split("This,  and that,   is stuff."s, QRegularExpression{", *"}, 1);
 
   ASSERT_EQ(1,                               r.size());
   EXPECT_EQ("This,  and that,   is stuff."s, r[0]);
 }
 
 TEST(StringsEditing, SplittingRegexByStringPatternAtStart) {
-  auto r = mtx::string::split(",This, and that, is stuff."s, mtx::regex::jp::Regex{", *"s});
+  auto r = mtx::string::split(",This, and that, is stuff."s, QRegularExpression{", *"});
 
   ASSERT_EQ(4,            r.size());
   EXPECT_EQ(""s,          r[0]);
@@ -172,13 +172,28 @@ TEST(StringsEditing, SplittingRegexByStringPatternAtStart) {
 }
 
 TEST(StringsEditing, SplittingRegexByStringPatternAtEnd) {
-  auto r = mtx::string::split("This, and that, is stuff.,"s, mtx::regex::jp::Regex{", *"s});
+  auto r = mtx::string::split("This, and that, is stuff.,"s, QRegularExpression{", *"});
 
   ASSERT_EQ(4,            r.size());
   EXPECT_EQ("This"s,      r[0]);
   EXPECT_EQ("and that"s,  r[1]);
   EXPECT_EQ("is stuff."s, r[2]);
   EXPECT_EQ(""s,          r[3]);
+}
+
+TEST(StringsEditing, ReplacingRegex) {
+  QRegularExpression re{"\\.0*$|(\\.[0-9]*[1-9])0*$"};
+  auto repl = [](QRegularExpressionMatch const &match) {
+    return match.captured(1);
+  };
+
+  EXPECT_EQ("48000",          mtx::string::replace("48000.",           re, repl));
+  EXPECT_EQ("48000",          mtx::string::replace("48000.0",          re, repl));
+  EXPECT_EQ("48000",          mtx::string::replace("48000.000",        re, repl));
+  EXPECT_EQ("48000.0012",     mtx::string::replace("48000.0012",       re, repl));
+  EXPECT_EQ("48000.0012",     mtx::string::replace("48000.001200",     re, repl));
+  EXPECT_EQ("48000.00120034", mtx::string::replace("48000.00120034",   re, repl));
+  EXPECT_EQ("48000.00120034", mtx::string::replace("48000.0012003400", re, repl));
 }
 
 }

@@ -14,13 +14,15 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include "common/endian.h"
 #include "common/error.h"
 #include "common/fs_sys_helpers.h"
 #include "common/mm_io.h"
 #include "common/mm_io_p.h"
 #include "common/mm_io_x.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 
@@ -426,7 +428,7 @@ mm_io_c::write_bom(const std::string &charset_) {
   if (p->string_output_converter && !charset_converter_c::is_utf8_charset_name(p->string_output_converter->get_charset()))
     return false;
 
-  auto charset = mtx::regex::replace(balg::to_lower_copy(charset_), mtx::regex::jp::Regex{"[^a-z0-9]+"}, "g", "");
+  auto charset = to_utf8(Q(charset_).toLower().replace(QRegularExpression{"[^a-z0-9]+"}, {}));
   if (charset == "utf8") {
     bom_len = 3;
     bom     = utf8_bom;

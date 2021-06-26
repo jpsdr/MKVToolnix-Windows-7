@@ -13,39 +13,37 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include "common/memory.h"
+#include "common/qt.h"
 #include "common/strings/editing.h"
 
 namespace mtx::string {
 
 std::vector<std::string>
 split(std::string const &text,
-      mtx::regex::jp::Regex const &pattern,
+      QRegularExpression const &pattern,
       std::size_t max) {
   if (text.empty())
     return { text };
 
   std::vector<std::string> results;
-  jpcre2::VecOff match_start, match_end;
 
-  if (!mtx::regex::match(text, match_start, match_end, pattern, "g"))
-    return {};
+  int copiedUpTo = 0;
+  auto text_q    = Q(text);
+  auto itr       = pattern.globalMatch(text_q);
 
-  if (match_start.size() != match_end.size())
-    return {};
+  while (itr.hasNext() && ((results.size() + 1) < max)) {
+    auto match = itr.next();
+    auto start = match.capturedStart(0);
+    auto end   = match.capturedEnd(0);
 
-  std::size_t previous_match_end = 0, idx = 0;
-  auto const num_matches = match_start.size();
-
-  while (   (idx < num_matches)
-         && ((results.size() + 1) < max)) {
-    results.emplace_back(text.substr(previous_match_end, match_start[idx] - previous_match_end));
-    previous_match_end = match_end[idx];
-    ++idx;
+    results.push_back(to_utf8(text_q.mid(copiedUpTo, start - copiedUpTo)));
+    copiedUpTo = end;
   }
 
-  if (previous_match_end <= text.size())
-    results.emplace_back(text.substr(std::min(previous_match_end, text.size() - 1), text.size() - previous_match_end));
+  results.push_back(to_utf8(text_q.mid(copiedUpTo)));
 
   return results;
 }
@@ -167,31 +165,74 @@ get_displayable(std::string const &src) {
 std::string
 normalize_line_endings(std::string const &str,
                        line_ending_style_e line_ending_style) {
-  static std::optional<mtx::regex::jp::Regex> s_cr_lf_re, s_cr_re, s_lf_re;
+  static std::optional<QRegularExpression> s_cr_lf_re, s_cr_re, s_lf_re;
 
   if (!s_cr_lf_re) {
-    s_cr_lf_re = mtx::regex::jp::Regex{"\r\n", "S"};
-    s_cr_re    = mtx::regex::jp::Regex{"\r",   "S"};
-    s_lf_re    = mtx::regex::jp::Regex{"\n",   "S"};
+    s_cr_lf_re = QRegularExpression{"\r\n"};
+    s_cr_re    = QRegularExpression{"\r"};
+    s_lf_re    = QRegularExpression{"\n"};
   }
 
-  auto result = mtx::regex::replace(str,    *s_cr_lf_re, "g", "\n");
-  result      = mtx::regex::replace(result, *s_cr_re,    "g", "\n");
+  auto result = Q(str).replace(*s_cr_lf_re, "\n");
+  result      = result.replace(*s_cr_re,    "\n");
 
   if (line_ending_style_e::lf == line_ending_style)
-    return result;
+    return to_utf8(result);
 
-  return mtx::regex::replace(result, *s_lf_re, "g", "\r\n");
+  return to_utf8(result.replace(*s_lf_re, "\r\n"));
 }
 
 std::string
 chomp(std::string const &str) {
-  static std::optional<mtx::regex::jp::Regex> s_trailing_lf_re;
+  static std::optional<QRegularExpression> s_trailing_lf_re;
 
   if (!s_trailing_lf_re)
-    s_trailing_lf_re = mtx::regex::jp::Regex{"[\r\n]+$", "S"};
+    s_trailing_lf_re = QRegularExpression{"[\r\n]+$"};
 
-  return mtx::regex::replace(str, *s_trailing_lf_re, "g", "");
+  return to_utf8(Q(str).replace(*s_trailing_lf_re, {}));
+}
+
+QString
+replace(QString const &original,
+        QRegularExpression const &regex,
+        std::function<QString(QRegularExpressionMatch const &)> replacement) {
+  QString result;
+  int copiedUpTo = 0;
+
+  result.reserve(original.size());
+
+  auto itr = regex.globalMatch(original);
+
+  while (itr.hasNext()) {
+    auto match = itr.next();
+    auto start = match.capturedStart(0);
+    auto end   = match.capturedEnd(0);
+
+    if (start > copiedUpTo)
+      result += original.mid(copiedUpTo, start - copiedUpTo);
+
+    result     += replacement(match);
+    copiedUpTo  = end;
+  }
+
+  if (copiedUpTo < original.size())
+    result += original.mid(copiedUpTo);
+
+  return result;
+}
+
+std::string
+replace(std::string const &original,
+        QRegularExpression const &regex,
+        std::function<QString(QRegularExpressionMatch const &)> replacement) {
+  return to_utf8(replace(Q(original), regex, replacement));
+}
+
+std::string
+replace(char const *original,
+        QRegularExpression const &regex,
+        std::function<QString(QRegularExpressionMatch const &)> replacement) {
+  return to_utf8(replace(Q(original), regex, replacement));
 }
 
 } // mtx::string
