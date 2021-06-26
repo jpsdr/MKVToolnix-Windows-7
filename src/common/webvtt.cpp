@@ -13,7 +13,8 @@
 
 #include "common/common_pch.h"
 
-#include "common/regex.h"
+#include "common/qt.h"
+#include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/webvtt.h"
@@ -30,7 +31,7 @@ public:
   unsigned int current_cue_number{}, total_number_of_cues{}, total_number_of_bytes{};
   debugging_option_c debug{"parser"};
 
-  mtx::regex::jp::Regex timestamp_line_re{fmt::format("^[ \\t]*{0}[ \\t]+-->[ \\t]+{0}(?:[ \\t]+([^\\n]+))?$", RE_TIMESTAMP), "S"};
+  QRegularExpression timestamp_line_re{Q(fmt::format("^[ \\t]*{0}[ \\t]+-->[ \\t]+{0}(?:[ \\t]+([^\\n]+))?$", RE_TIMESTAMP))};
 };
 
 parser_c::parser_c()
@@ -79,18 +80,25 @@ parser_c::add_block() {
   if (m->current_block.empty())
     return;
 
-  mtx::regex::jp::VecNum matches;
   std::string label, additional;
   auto timestamp_line = -1;
+  auto is_other       = false;
+  QRegularExpressionMatch matches;
 
-  if (mtx::regex::match(m->current_block[0], matches, m->timestamp_line_re))
+  if (matches = m->timestamp_line_re.match(Q(m->current_block[0])); matches.hasMatch())
     timestamp_line = 0;
 
-  else if ((m->current_block.size() > 1) && mtx::regex::match(m->current_block[1], matches, m->timestamp_line_re)) {
+  else if (m->current_block.size() <= 1)
+    is_other = true;
+
+  else if (matches = m->timestamp_line_re.match(Q(m->current_block[1])); matches.hasMatch()) {
     timestamp_line = 1;
     label          = std::move(m->current_block[0]);
 
-  } else {
+  } else
+    is_other = true;
+
+  if (is_other) {
     auto content = mtx::string::join(m->current_block, "\n");
     (m->parsing_global_data ? m->global_blocks : m->local_blocks).emplace_back(std::move(content));
 
@@ -102,8 +110,8 @@ parser_c::add_block() {
   m->parsing_global_data = false;
 
   timestamp_c start, end;
-  mtx::string::parse_timestamp(matches[0][1], start);
-  mtx::string::parse_timestamp(matches[0][2], end);
+  mtx::string::parse_timestamp(to_utf8(matches.captured(1)), start);
+  mtx::string::parse_timestamp(to_utf8(matches.captured(2)), end);
 
   auto content       = mtx::string::join(m->current_block.begin() + timestamp_line + 1, m->current_block.end(), "\n");
   content            = adjust_embedded_timestamps(content, start.negate());
@@ -111,7 +119,7 @@ parser_c::add_block() {
   cue->m_start       = start;
   cue->m_duration    = end - start;
   cue->m_content     = memory_c::clone(content);
-  auto settings_list = matches[0][3];
+  auto settings_list = to_utf8(matches.captured(3));
 
   if (! (label.empty() && settings_list.empty() && m->local_blocks.empty())) {
     additional = settings_list + "\n" + label + "\n" + mtx::string::join(m->local_blocks, "\n");
@@ -120,9 +128,9 @@ parser_c::add_block() {
 
   mxdebug_if(m->debug,
              fmt::format("label «{0}» start «{1}» end «{2}» settings list «{3}» additional «{4}» content «{5}»\n",
-                         label, matches[0][1], matches[0][2], matches[0][3],
-                         mtx::regex::replace(additional, mtx::regex::jp::Regex{"\n+"}, "g", "–"),
-                         mtx::regex::replace(content,    mtx::regex::jp::Regex{"\n+"}, "g", "–")));
+                         label, to_utf8(matches.captured(1)), to_utf8(matches.captured(2)), to_utf8(matches.captured(3)),
+                         to_utf8(Q(additional).replace(QRegularExpression{"\n+"}, "–")),
+                         to_utf8(Q(content)   .replace(QRegularExpression{"\n+"}, "–"))));
 
   m->local_blocks.clear();
   m->current_block.clear();
@@ -178,15 +186,15 @@ parser_c::get_total_number_of_bytes()
 std::string
 parser_c::adjust_embedded_timestamps(std::string const &text,
                                             timestamp_c const &offset) {
-  static std::optional<mtx::regex::jp::Regex> s_embedded_timestamp_re;
+  static std::optional<QRegularExpression> s_embedded_timestamp_re;
 
   if (!s_embedded_timestamp_re)
-    s_embedded_timestamp_re = mtx::regex::jp::Regex{fmt::format("<{0}>", RE_TIMESTAMP), "S"};
+    s_embedded_timestamp_re = QRegularExpression{Q(fmt::format("<{0}>", RE_TIMESTAMP))};
 
-  return mtx::regex::replace(text, *s_embedded_timestamp_re, "g", [&offset](auto const &match) -> std::string {
+  return mtx::string::replace(text, *s_embedded_timestamp_re, [&offset](auto const &match) {
     timestamp_c timestamp;
-    mtx::string::parse_timestamp(match[1], timestamp);
-    return fmt::format("<{0}>", mtx::string::format_timestamp(timestamp + offset, 3));
+    mtx::string::parse_timestamp(to_utf8(match.captured(1)), timestamp);
+    return Q(fmt::format("<{0}>", mtx::string::format_timestamp(timestamp + offset, 3)));
   });
 }
 

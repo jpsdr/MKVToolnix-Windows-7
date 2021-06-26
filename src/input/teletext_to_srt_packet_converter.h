@@ -65,7 +65,7 @@ protected:
   std::unordered_map<int, track_data_cptr> m_track_data;
   track_data_t *m_current_track{};
 
-  mtx::regex::jp::Regex m_page_re1, m_page_re2, m_page_re3;
+  QRegularExpression m_page_re1, m_page_re2, m_page_re3;
 
   debugging_option_c m_debug, m_debug_packet, m_debug_conversion;
 

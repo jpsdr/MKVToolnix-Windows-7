@@ -74,7 +74,7 @@
 #include "common/mm_proxy_io.h"
 #include "common/mm_read_buffer_io.h"
 #include "common/mm_write_buffer_io.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/stereo_mode.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
@@ -88,11 +88,11 @@ using namespace mtx::kax_info;
 
 namespace {
 
-mtx::regex::jp::Regex s_normalize_fmt_double_output_re{"\\.0*$|(\\.[0-9]*[1-9])0*$"};
+QRegularExpression s_normalize_fmt_double_output_re{"\\.0*$|(\\.[0-9]*[1-9])0*$"};
 
-std::string
-normalize_fmt_double_output_formatter(mtx::regex::jp::NumSub const &match) {
-  return match.size() > 1 ? match[1] : ""s;
+QString
+normalize_fmt_double_output_formatter(QRegularExpressionMatch const &match) {
+  return match.capturedLength(1) ? match.captured(1) : QString{};
 }
 
 template<typename T>
@@ -100,7 +100,7 @@ std::string
 normalize_fmt_double_output(T value) {
   // Some fmt library versions output a trailing ".0" even if the
   // decimal part is zero, others don't. Normalize to not include it.
-  return mtx::regex::replace(fmt::format("{}", value), s_normalize_fmt_double_output_re, "", normalize_fmt_double_output_formatter);
+  return mtx::string::replace(fmt::format("{}", value), s_normalize_fmt_double_output_re, normalize_fmt_double_output_formatter);
 }
 
 }

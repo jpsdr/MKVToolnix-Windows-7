@@ -15,11 +15,14 @@
 
 #include <sstream>
 
+#include <QRegularExpression>
+
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
-#include "common/regex.h"
+#include "common/qt.h"
+#include "common/strings/editing.h"
 #include "common/xml/xml.h"
 
 namespace mtx::xml {
@@ -71,24 +74,21 @@ load_file(std::string const &file_name,
     throw mtx::mm_io::end_of_file_x{};
 
   if (byte_order_mark_e::none == in.get_byte_order_mark()) {
-    mtx::regex::jp::Regex encoding_re{
-      "^\\s*"             // ignore leading whitespace
-      "<\\?xml"           // XML declaration start
-      "[^\\?]+?"          // skip to encoding, but don't go beyond XML declaration
-      "encoding\\s*=\\s*" // encoding attribute
-      "\"([^\"]+)\"",     // attribute value
-      "i"};
+    QRegularExpression encoding_re{
+      "("
+      "^[ \\t]*"                // ignore leading whitespace
+      "<\\?xml"                 // XML declaration start
+      "[^?]+?"                  // skip to encoding, but don't go beyond XML declaration
+      "encoding[ \\t]*=[ \\t]*" // encoding attribute
+      "\")([^\"]+)",            // attribute value
+      QRegularExpression::CaseInsensitiveOption};
 
     // Extract the old encoding, replace the string with "UTF-8" so
     // that pugixml doesn't recode, and recode to UTF-8.
-    std::string encoding;
-    content = mtx::regex::replace(content, encoding_re, "", [&encoding](auto const &match) {
-      encoding = match[1];
-      return "UTF-8"s;
-    });
+    if (auto matches = encoding_re.match(Q(content)); matches.hasMatch())
+      content = charset_converter_c::init(to_utf8(matches.captured(2)))->utf8(content);
 
-    if (!encoding.empty())
-      content = charset_converter_c::init(encoding)->utf8(content);
+    content = to_utf8(Q(content).replace(encoding_re, Q("\\1UTF-8")));
   }
 
   std::stringstream scontent(content);

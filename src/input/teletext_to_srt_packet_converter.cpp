@@ -14,7 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/list_utils.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "input/teletext_to_srt_packet_converter.h"
 #include "merge/generic_packetizer.h"
@@ -24,7 +24,7 @@ auto s_merge_allowed_within = timestamp_c::ms(40);
 
 std::string
 displayable_packet_content(memory_c const &mem) {
-  return mtx::regex::replace(mem.to_string(), mtx::regex::jp::Regex{"\\n"}, "g", "\\n");
+  return to_utf8(Q(mem.to_string()).replace(QRegularExpression{"\\n+"}, "\\n"));
 }
 }
 
@@ -481,7 +481,7 @@ teletext_to_srt_packet_converter_c::page_to_string()
   const {
   auto content = mtx::string::join(m_current_track->m_page_data.page_buffer, "\n");
 
-  return mtx::regex::replace(mtx::regex::replace(mtx::regex::replace(content, m_page_re1, "g", "\n"), m_page_re2, "g", " "), m_page_re3, "g", "");
+  return to_utf8(Q(content).replace(m_page_re1, "\n").replace(m_page_re2, " ").replace(m_page_re3, {}));
 }
 
 bool

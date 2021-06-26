@@ -17,6 +17,8 @@
 #include <algorithm>
 #include <cassert>
 
+#include <QRegularExpression>
+
 #include <matroska/KaxChapters.h>
 
 #include "common/chapters/chapters.h"
@@ -32,7 +34,7 @@
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
 #include "common/path.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -82,8 +84,8 @@ chapter_error(const std::string &error) {
 */
 bool
 probe_simple(mm_text_io_c *in) {
-  mtx::regex::jp::Regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE};
-  mtx::regex::jp::Regex name_line_re{     SIMCHAP_RE_NAME_LINE};
+  QRegularExpression timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE};
+  QRegularExpression name_line_re{     SIMCHAP_RE_NAME_LINE};
 
   std::string line;
 
@@ -95,7 +97,7 @@ probe_simple(mm_text_io_c *in) {
     if (line.empty())
       continue;
 
-    if (!mtx::regex::match(line, timestamp_line_re))
+    if (!Q(line).contains(timestamp_line_re))
       return false;
 
     while (in->getline2(line)) {
@@ -103,7 +105,7 @@ probe_simple(mm_text_io_c *in) {
       if (line.empty())
         continue;
 
-      return mtx::regex::match(line, name_line_re);
+      return Q(line).contains(name_line_re);
     }
 
     return false;
@@ -169,47 +171,51 @@ parse_simple(mm_text_io_c *in,
                     : g_default_language.is_valid() ? g_default_language
                     :                                 mtx::bcp47::language_c::parse("eng"s);
 
-  mtx::regex::jp::Regex timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE, "S"};
-  mtx::regex::jp::Regex timestamp_re{     SIMCHAP_RE_TIMESTAMP,      "S"};
-  mtx::regex::jp::Regex name_line_re{     SIMCHAP_RE_NAME_LINE,      "S"};
-  mtx::regex::jp::VecNum matches;
+  QRegularExpression timestamp_line_re{SIMCHAP_RE_TIMESTAMP_LINE};
+  QRegularExpression timestamp_re{     SIMCHAP_RE_TIMESTAMP};
+  QRegularExpression name_line_re{     SIMCHAP_RE_NAME_LINE};
+  QRegularExpressionMatch matches;
 
   std::string line;
 
   while (in->getline2(line)) {
+    if (do_convert)
+      line = cc_utf8->utf8(line);
+
     mtx::string::strip(line);
     if (line.empty())
       continue;
 
     if (0 == mode) {
-      if (!mtx::regex::match(line, matches, timestamp_line_re))
+      matches = timestamp_line_re.match(Q(line));
+      if (!matches.hasMatch())
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
 
       int64_t hour = 0, minute = 0, second = 0, nsecs = 0;
-      mtx::string::parse_number(matches[0][1], hour);
-      mtx::string::parse_number(matches[0][2], minute);
-      mtx::string::parse_number(matches[0][3], second);
-      mtx::string::parse_number(matches[0][4], nsecs);
+      mtx::string::parse_number(to_utf8(matches.captured(1)), hour);
+      mtx::string::parse_number(to_utf8(matches.captured(2)), minute);
+      mtx::string::parse_number(to_utf8(matches.captured(3)), second);
+      mtx::string::parse_number(to_utf8(matches.captured(4)), nsecs);
 
       if (59 < minute)
         chapter_error(fmt::format(Y("Invalid minute: {0}"), minute));
       if (59 < second)
         chapter_error(fmt::format(Y("Invalid second: {0}"), second));
 
-      for (int idx = matches[0][4].length(); idx < 9; ++idx)
+      for (int idx = matches.capturedLength(4); idx < 9; ++idx)
         nsecs *= 10;
 
       start = nsecs + (second + minute * 60 + hour * 60 * 60) * 1'000'000'000;
       mode  = 1;
 
-      if (!mtx::regex::match(line, matches, timestamp_re))
+      if (matches = timestamp_re.match(Q(line)); !matches.hasMatch())
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxx=... line."), line));
 
     } else {
-      if (!mtx::regex::match(line, matches, name_line_re))
+      if (matches = name_line_re.match(Q(line)); !matches.hasMatch())
         chapter_error(fmt::format(Y("'{0}' is not a CHAPTERxxNAME=... line."), line));
 
-      auto name = matches[0][1];
+      auto name = to_utf8(matches.captured(1));
       if (name.empty())
         name = format_name_template(g_chapter_generation_name_template.get_translated(), num + 1, timestamp_c::ns(start));
 
@@ -225,7 +231,7 @@ parse_simple(mm_text_io_c *in,
 
         auto &display = GetChild<KaxChapterDisplay>(*atom);
 
-        GetChild<KaxChapterString>(display).SetValueUTF8(do_convert ? cc_utf8->utf8(name) : name);
+        GetChild<KaxChapterString>(display).SetValueUTF8(name);
         if (use_language.is_valid()) {
           GetChild<KaxChapterLanguage>(display).SetValue(use_language.get_iso639_2_alpha_3_code_or("und"));
           if (!mtx::bcp47::language_c::is_disabled())
@@ -1113,34 +1119,33 @@ format_name_template(std::string const &name_template,
                      timestamp_c const &start_timestamp,
                      std::string const &appended_file_name) {
   auto name                 = name_template;
-  auto number_re            = mtx::regex::jp::Regex{"<NUM(?::(\\d+))?>"};
-  auto timestamp_re         = mtx::regex::jp::Regex{"<START(?::([^>]+))?>"};
-  auto file_name_re         = mtx::regex::jp::Regex{"<FILE_NAME>"};
-  auto file_name_ext_re     = mtx::regex::jp::Regex{"<FILE_NAME_WITH_EXT>"};
+  auto number_re            = QRegularExpression{"<NUM(?::(\\d+))?>"};
+  auto timestamp_re         = QRegularExpression{"<START(?::([^>]+))?>"};
+  auto file_name_re         = QRegularExpression{"<FILE_NAME>"};
+  auto file_name_ext_re     = QRegularExpression{"<FILE_NAME_WITH_EXT>"};
   auto appended_file_name_p = mtx::fs::to_path(appended_file_name);
 
-  name = mtx::regex::replace(name, number_re, "g", [=](auto const &match) {
+  name = mtx::string::replace(name, number_re, [=](auto const &match) {
     auto number_str    = fmt::format("{0}", chapter_number);
     auto wanted_length = 1u;
 
-    if (!match[1].empty() && !mtx::string::parse_number(match[1], wanted_length))
+    if (match.capturedLength(1) && !mtx::string::parse_number(to_utf8(match.captured(1)), wanted_length))
       wanted_length = 1;
 
     if (number_str.length() < wanted_length)
       number_str = std::string(wanted_length - number_str.length(), '0') + number_str;
 
-    return number_str;
+    return Q(number_str);
   });
 
-  name = mtx::regex::replace(name, timestamp_re, "g", [=](auto const &match) {
-    auto format = !match[1].empty() ? match[1] : "%H:%M:%S"s;
-    return mtx::string::format_timestamp(start_timestamp.to_ns(), format);
+  name = mtx::string::replace(name, timestamp_re, [=](auto const &match) {
+    auto format = match.capturedLength(1) ? to_utf8(match.captured(1)) : "%H:%M:%S"s;
+    return Q(mtx::string::format_timestamp(start_timestamp.to_ns(), format));
   });
 
-  name = mtx::regex::replace(name, file_name_re,     "g", appended_file_name_p.stem().u8string());
-  name = mtx::regex::replace(name, file_name_ext_re, "g", appended_file_name_p.filename().u8string());
-
-  return name;
+  return to_utf8(Q(name)
+                 .replace(file_name_re,     Q(appended_file_name_p.stem()))
+                 .replace(file_name_ext_re, Q(appended_file_name_p.filename())));
 }
 
 void
