@@ -3,12 +3,13 @@
 #if defined(HAVE_UPDATE_CHECK)
 
 #include <QDesktopServices>
+#include <QRegularExpression>
 #include <QUrl>
 #include <QUrlQuery>
 
 #include "common/markdown.h"
 #include "common/qt.h"
-#include "common/regex.h"
+#include "common/strings/editing.h"
 #include "mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h"
 #include "mkvtoolnix-gui/main_window/available_update_info_dialog.h"
 
@@ -143,12 +144,12 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
   auto html              = QStringList{};
   auto numReleasesOutput = 0;
   auto releases          = m_releasesInfo->select_nodes("/mkvtoolnix-releases/release[not(@version='HEAD')]");
-  auto reReleased        = mtx::regex::jp::Regex{"^released\\s+v?[\\d\\.]+", "iS"};
-  auto reBug             = mtx::regex::jp::Regex{"(#\\d+)",                  "iS"};
-  auto reNewlines        = mtx::regex::jp::Regex{"\r?\n",                    "iS"};
-  auto bugFormatter      = [](mtx::regex::jp::NumSub const &matches) -> std::string {
-    auto number_str = matches[1].substr(1);
-    return fmt::format("<a href=\"https://gitlab.com/mbunkus/mkvtoolnix/issues/{0}\">#{0}</a>", number_str);
+  auto reReleased        = QRegularExpression{"^released\\s+v?[\\d\\.]+"};
+  auto reBug             = QRegularExpression{"(#\\d+)"};
+  auto reNewlines        = QRegularExpression{"\r?\n"};
+  auto bugFormatter      = [](QRegularExpressionMatch const &matches) {
+    auto number_str = matches.captured(1).mid(1);
+    return Q("<a href=\"https://gitlab.com/mbunkus/mkvtoolnix/issues/%1\">#%1</a>").arg(number_str);
   };
 
   releases.sort();
@@ -163,7 +164,7 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
 
     for (auto change = release.node().child("changes").first_child() ; change ; change = change.next_sibling()) {
       if (   (std::string{change.name()} != "change")
-          || mtx::regex::match(change.child_value(), reReleased))
+          || Q(change.child_value()).contains(reReleased))
         continue;
 
       auto typeQ = Q(change.attribute("type").value()).toHtmlEscaped();
@@ -183,8 +184,8 @@ AvailableUpdateInfoDialog::updateReleasesInfoDisplay() {
         html << Q("<p><ul>");
       }
 
-      auto text = mtx::regex::replace(mtx::regex::replace(mtx::markdown::to_html(change.child_value()), reBug, "g",  bugFormatter), reNewlines, "g", " ");
-      html     << Q("<li>%1</li>").arg(Q(text));
+      auto text = mtx::string::replace(Q(mtx::markdown::to_html(change.child_value())), reBug,  bugFormatter).replace(reNewlines, " ");
+      html     << Q("<li>%1</li>").arg(text);
     }
 
     if (inList)

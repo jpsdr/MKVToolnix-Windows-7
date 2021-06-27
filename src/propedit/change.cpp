@@ -19,6 +19,7 @@
 #include <matroska/KaxSegment.h>
 
 #include <QDateTime>
+#include <QRegularExpression>
 
 #include "common/bcp47.h"
 #include "common/date_time.h"
@@ -26,7 +27,7 @@
 #include "common/iso639.h"
 #include "common/list_utils.h"
 #include "common/output.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 #include "propedit/change.h"
@@ -160,27 +161,27 @@ change_c::parse_binary() {
 
 void
 change_c::parse_date_time() {
-  //                         1        2        3                4        5        6           7  8     9        10
-  mtx::regex::jp::Regex re{"^(\\d{4})-(\\d{2})-(\\d{2})(?:T|\\s)(\\d{2}):(\\d{2}):(\\d{2})\\s*(Z|([+-])(\\d{2}):(\\d{2}))$", "i"};
-  mtx::regex::jp::VecNum matches;
+  //                      1        2        3                4        5        6           7  8     9        10
+  QRegularExpression re{"^(\\d{4})-(\\d{2})-(\\d{2})(?:T|\\s)(\\d{2}):(\\d{2}):(\\d{2})\\s*(Z|([+-])(\\d{2}):(\\d{2}))$", QRegularExpression::CaseInsensitiveOption};
   int64_t year{}, month{}, day{}, hours{}, minutes{}, seconds{};
   int64_t offset_hours{}, offset_minutes{}, offset_mult{1};
 
-  auto valid = mtx::regex::match(m_value, matches, re);
+  auto matches = re.match(Q(m_value));
+  auto valid   = matches.hasMatch();
 
   if (valid)
-    valid = mtx::string::parse_number(matches[0][1], year)
-         && mtx::string::parse_number(matches[0][2], month)
-         && mtx::string::parse_number(matches[0][3], day)
-         && mtx::string::parse_number(matches[0][4], hours)
-         && mtx::string::parse_number(matches[0][5], minutes)
-         && mtx::string::parse_number(matches[0][6], seconds);
+    valid = mtx::string::parse_number(to_utf8(matches.captured(1)), year)
+         && mtx::string::parse_number(to_utf8(matches.captured(2)), month)
+         && mtx::string::parse_number(to_utf8(matches.captured(3)), day)
+         && mtx::string::parse_number(to_utf8(matches.captured(4)), hours)
+         && mtx::string::parse_number(to_utf8(matches.captured(5)), minutes)
+         && mtx::string::parse_number(to_utf8(matches.captured(6)), seconds);
 
-  if (valid && (matches[0][7] != "Z")) {
-    valid = mtx::string::parse_number(matches[0][9],  offset_hours)
-         && mtx::string::parse_number(matches[0][10], offset_minutes);
+  if (valid && (to_utf8(matches.captured(7)) != "Z")) {
+    valid = mtx::string::parse_number(to_utf8(matches.captured(9)),  offset_hours)
+         && mtx::string::parse_number(to_utf8(matches.captured(10)), offset_minutes);
 
-    if (matches[0][8] == "-")
+    if (to_utf8(matches.captured(8)) == "-")
       offset_mult = -1;
   }
 

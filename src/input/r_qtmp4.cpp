@@ -22,6 +22,8 @@
 
 #include <boost/multiprecision/cpp_int.hpp>
 
+#include <QRegularExpression>
+
 #include "avilib.h"
 #include "common/aac.h"
 #include "common/alac.h"
@@ -41,7 +43,7 @@
 #include "common/mm_text_io.h"
 #include "common/mp3.h"
 #include "common/mp4.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/vobsub.h"
@@ -1095,7 +1097,7 @@ qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
 
 void
 qtmp4_reader_c::parse_itunsmpb(std::string data) {
-  data = mtx::regex::replace(data, mtx::regex::jp::Regex("[^0-9da-fA-F]+"), "g", "");
+  data = to_utf8(Q(data).replace(QRegularExpression{"[^0-9da-fA-F]+"}, {}));
 
   if (16 > data.length())
     return;

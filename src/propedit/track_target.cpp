@@ -10,7 +10,9 @@
 
 #include "common/common_pch.h"
 
-#include "common/regex.h"
+#include <QRegularExpression>
+
+#include "common/qt.h"
 #include "common/strings/parsing.h"
 #include "propedit/propedit.h"
 #include "propedit/track_target.h"
@@ -203,14 +205,14 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
 
 void
 track_target_c::parse_spec(std::string const &spec) {
-  static mtx::regex::jp::Regex track_re{"^([absv=@]?)(\\d+)"};
-  mtx::regex::jp::VecNum matches;
+  static QRegularExpression track_re{"^([absv=@]?)(\\d+)"};
 
-  if (!mtx::regex::match(spec, matches, track_re))
+  auto matches = track_re.match(Q(spec));
+  if (!matches.hasMatch())
     throw false;
 
-  std::string prefix = matches[0][1];
-  mtx::string::parse_number(matches[0][2], m_selection_param);
+  std::string prefix = to_utf8(matches.captured(1));
+  mtx::string::parse_number(to_utf8(matches.captured(2)), m_selection_param);
 
   m_selection_mode = prefix.empty() ? sm_by_position
                    : prefix == "="  ? sm_by_uid

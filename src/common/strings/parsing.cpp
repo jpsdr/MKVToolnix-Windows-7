@@ -13,9 +13,10 @@
 
 #include "common/common_pch.h"
 
-#include <iostream>
+#include <QRegularExpression>
+
 #include "common/list_utils.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 
@@ -29,7 +30,7 @@ set_tcp_error(const std::string &error) {
   return false;
 }
 
-static mtx::regex::jp::Regex s_floating_point_number_re{"^(-?)([0-9]+)?(?:\\.([0-9]+))?$"};
+static QRegularExpression s_floating_point_number_re{"^(-?)([0-9]+)?(?:\\.([0-9]+))?$"};
 
 bool
 parse_floating_point_number_as_rational(std::string const &string,
@@ -37,28 +38,28 @@ parse_floating_point_number_as_rational(std::string const &string,
   if (string.empty())
     return false;
 
-  mtx::regex::jp::VecNum matches;
-  if (!mtx::regex::match(string, matches, s_floating_point_number_re))
+  auto matches = s_floating_point_number_re.match(Q(string));
+  if (!matches.hasMatch())
     return false;
 
   int64_t numerator{}, sign{1};
-  if (!matches[0][2].empty() && !parse_number(matches[0][2], numerator))
+  if (matches.capturedLength(2) && !parse_number(to_utf8(matches.captured(2)), numerator))
     return false;
 
-  if (!matches[0][1].empty())
+  if (matches.capturedLength(1))
     sign = -1;
 
-  if (matches[0][3].empty()) {
+  if (!matches.capturedLength(3)) {
     value = int64_rational_c{sign * numerator, 1};
     return true;
   }
 
   int64_t fractional{};
-  if (!parse_number(matches[0][3], fractional))
+  if (!parse_number(to_utf8(matches.captured(3)), fractional))
     return false;
 
   int64_t shift{1};
-  for (auto idx = 0u; idx < matches[0][3].length(); ++idx)
+  for (auto idx = 0u; idx < to_utf8(matches.captured(3)).length(); ++idx)
     shift *= 10;
 
   value = int64_rational_c{sign * (numerator * shift + fractional), shift};
@@ -269,33 +270,33 @@ parse_bool(std::string value) {
 bool
 parse_duration_number_with_unit(const std::string &s,
                                 int64_t &value) {
-  static std::optional<mtx::regex::jp::Regex> re1, re2;
+  static std::optional<QRegularExpression> re1, re2;
 
   if (!re1) {
-    re1 = mtx::regex::jp::Regex{"^(-?\\d+\\.?\\d*)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?$",  "iS"};
-    re2 = mtx::regex::jp::Regex{"^(-?\\d+)/(-?\\d+)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?$", "iS"};
+    re1 = QRegularExpression{"^(-?\\d+\\.?\\d*)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?$",  QRegularExpression::CaseInsensitiveOption};
+    re2 = QRegularExpression{"^(-?\\d+)/(-?\\d+)(h|m|min|s|ms|msec|us|µs|ns|nsec|fps|p|i)?$", QRegularExpression::CaseInsensitiveOption};
   }
 
   std::string unit, s_n, s_d;
   int64_rational_c r{0, 1};
-  mtx::regex::jp::VecNum matches;
+  auto qs = Q(s);
 
-  if (mtx::regex::match(s, matches, *re1)) {
-    if (!parse_number(matches[0][1], r))
+  if (auto matches = re1->match(qs); matches.hasMatch()) {
+    if (!parse_number(to_utf8(matches.captured(1)), r))
       return false;
 
-    if (matches[0].size() > 2)
-      unit = matches[0][2];
+    if (matches.capturedLength(2))
+      unit = to_utf8(matches.captured(2));
 
-  } else if (mtx::regex::match(s, matches, *re2)) {
+  } else if (matches = re2->match(qs); matches.hasMatch()) {
     int64_t n, d;
-    if (!parse_number(matches[0][1], n) || !parse_number(matches[0][2], d))
+    if (!parse_number(to_utf8(matches.captured(1)), n) || !parse_number(to_utf8(matches.captured(2)), d))
       return false;
 
     r = int64_rational_c{n, d};
 
-    if (matches[0].size() > 3)
-      unit = matches[0][3];
+    if (matches.capturedLength(3))
+      unit = to_utf8(matches.captured(3));
 
   } else
     return false;

@@ -14,7 +14,6 @@
 #include "common/iso3166.h"
 #include "common/path.h"
 #include "common/qt.h"
-#include "common/regex.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/jobs/program_runner.h"
@@ -1003,7 +1002,7 @@ Settings::localeToUse(QString const &requestedLocale)
     locale = "";
 
   if (locale.empty()) {
-    locale = mtx::regex::replace(translation_c::get_default_ui_locale(), mtx::regex::jp::Regex{"\\..*"}, "", "");
+    locale = to_utf8(Q(translation_c::get_default_ui_locale()).replace(QRegularExpression{"\\..*"}, {}));
     if (-1 == translation_c::look_up_translation(locale))
       locale = "";
   }

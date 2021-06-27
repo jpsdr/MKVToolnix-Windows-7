@@ -13,17 +13,19 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include "common/mm_io_x.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "input/r_microdvd.h"
 #include "merge/id_result.h"
 
 void
 microdvd_reader_c::probe_file(mm_io_c &in) {
-  mtx::regex::jp::Regex re("^\\{\\d+?\\}\\{\\d+?\\}.+$");
+  QRegularExpression re("^\\{\\d+?\\}\\{\\d+?\\}.+$");
 
   std::string line;
   auto line_num = 0u;
@@ -40,6 +42,6 @@ microdvd_reader_c::probe_file(mm_io_c &in) {
     ++line_num;
   }
 
-  if (mtx::regex::match(line, re))
+  if (Q(line).contains(re))
     id_result_container_unsupported(in.get_file_name(), mtx::file_type_t::get_name(mtx::file_type_e::microdvd));
 }

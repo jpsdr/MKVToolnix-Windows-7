@@ -14,10 +14,12 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "merge/timestamp_factory.h"
@@ -40,11 +42,11 @@ timestamp_factory_c::create(std::string const &file_name,
   int version = -1;
   bool ok     = in->getline2(line);
   if (ok) {
-    auto format_line_re = mtx::regex::jp::Regex{"^# *time(?:code|stamp) *format v(\\d+).*"};
-    mtx::regex::jp::VecNum matches;
+    auto format_line_re = QRegularExpression{"^# *time(?:code|stamp) *format v(\\d+).*"};
+    auto matches        = format_line_re.match(Q(line));
 
-    if (mtx::regex::match(line, matches, format_line_re))
-      ok = mtx::string::parse_number(matches[0][1], version);
+    if (matches.hasMatch())
+      ok = mtx::string::parse_number(to_utf8(matches.captured(1)), version);
     else
       ok = false;
   }

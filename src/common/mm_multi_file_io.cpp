@@ -13,7 +13,7 @@
 
 #include "common/common_pch.h"
 
-#include <sstream>
+#include <QRegularExpression>
 
 #include "common/id_info.h"
 #include "common/mm_io_x.h"
@@ -22,7 +22,7 @@
 #include "common/mm_multi_file_io_p.h"
 #include "common/output.h"
 #include "common/path.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 
@@ -196,19 +196,20 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
   auto first_file_name = mtx::fs::absolute(mtx::fs::to_path(display_file_name));
   auto base_name       = mtx::fs::to_path(first_file_name).stem().u8string();
   auto extension       = balg::to_lower_copy(mtx::fs::to_path(first_file_name).extension().u8string());
-  mtx::regex::jp::Regex file_name_re{"(.+[_\\-])(\\d+)$"};
-  mtx::regex::jp::VecNum matches;
 
-  if (!mtx::regex::match(base_name, matches, file_name_re) || single_only) {
+  QRegularExpression file_name_re{"(.+[_\\-])(\\d+)$"};
+  auto matches = file_name_re.match(Q(base_name));
+
+  if (!matches.hasMatch() || single_only) {
     std::vector<std::filesystem::path> file_names;
     file_names.push_back(first_file_name);
     return mm_io_cptr(new mm_multi_file_io_c(file_names, display_file_name));
   }
 
   int start_number = 1;
-  mtx::string::parse_number(matches[0][2], start_number);
+  mtx::string::parse_number(to_utf8(matches.captured(2)), start_number);
 
-  base_name = balg::to_lower_copy(matches[0][1]);
+  base_name = to_utf8(matches.captured(1).toLower());
 
   std::vector<std::pair<int, std::filesystem::path>> paths;
   paths.emplace_back(start_number, first_file_name);
@@ -219,12 +220,13 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
         || !balg::iequals(itr->path().extension().u8string(), extension))
       continue;
 
-    auto stem          = itr->path().stem().u8string();
+    auto stem          = itr->path().stem();
     int current_number = 0;
+    matches            = file_name_re.match(Q(stem));
 
-    if (   !mtx::regex::match(stem, matches, file_name_re)
-        || !balg::iequals(matches[0][1], base_name)
-        || !mtx::string::parse_number(matches[0][2], current_number)
+    if (   !matches.hasMatch()
+        || (to_utf8(matches.captured(1).toLower()) != base_name)
+        || !mtx::string::parse_number(to_utf8(matches.captured(2)), current_number)
         || (current_number <= start_number))
       continue;
 

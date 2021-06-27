@@ -15,7 +15,9 @@
 
 #include "common/common_pch.h"
 
-#include "common/regex.h"
+#include <QRegularExpression>
+
+#include "common/qt.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
 
@@ -64,7 +66,7 @@ public:
   natural_element_c(StrT const &content)
     : m_content{content}
   {
-    m_is_numeric = mtx::string::parse_number(m_content, m_number);
+    m_is_numeric = mtx::string::parse_number(to_utf8(m_content), m_number);
   }
 
   bool
@@ -88,20 +90,19 @@ template<typename StrT>
 class natural_string_c {
 private:
   StrT m_original;
-  std::vector<natural_element_c<std::string> > m_parts;
+  std::vector<natural_element_c<QString> > m_parts;
 
 public:
   natural_string_c(StrT const &original)
     : m_original{original}
   {
-    static mtx::regex::jp::Regex re{"(\\D+|\\d+)"};
-    mtx::regex::jp::VecNum matches;
+    static QRegularExpression re{"(\\D+|\\d+)"};
 
-    auto utf8 = to_utf8(m_original);
+    auto qs  = Q(m_original);
+    auto itr = re.globalMatch(qs);
 
-    if (mtx::regex::match(utf8, matches, re, "g"))
-      for (auto const &match : matches)
-        m_parts.emplace_back(match[1]);
+    while (itr.hasNext())
+      m_parts.emplace_back(itr.next().captured(1));
   }
 
   StrT const &

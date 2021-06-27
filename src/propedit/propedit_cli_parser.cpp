@@ -13,9 +13,11 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include "common/bcp47.h"
 #include "common/ebml.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/translation.h"
@@ -180,7 +182,7 @@ propedit_cli_parser_c::list_property_names_for_table(const std::vector<property_
 
   auto max_name_len = std::accumulate(table.begin(), table.end(), 0u, [](size_t a, const property_element_c &e) { return std::max(a, e.m_name.length()); });
 
-  static mtx::regex::jp::Regex s_newline_re{"[ \\t]*\\n[ \\t]*"};
+  static QRegularExpression s_newline_re{"[ \\t]*\\n[ \\t]*"};
   std::string indent_string = std::string(max_name_len, ' ') + " |    | ";
 
   mxinfo("\n");
@@ -191,9 +193,7 @@ propedit_cli_parser_c::list_property_names_for_table(const std::vector<property_
       continue;
 
     auto name        = fmt::format("{0:<{1}} | {2:<2} |", property.m_name, max_name_len, ebml_type_map[property.m_type]);
-    auto description = property.m_title.get_translated()
-                     + ": "
-                     + mtx::regex::replace(property.m_description.get_translated(), s_newline_re, "g", " ");
+    auto description = fmt::format("{0}: {1}", property.m_title.get_translated(), to_utf8(Q(property.m_description.get_translated()).replace(s_newline_re, " ")));
     mxinfo(mtx::string::format_paragraph(description, max_name_len + 8, name, indent_string));
   }
 }

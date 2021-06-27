@@ -13,11 +13,13 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include "common/endian.h"
 #include "common/mime.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
@@ -102,8 +104,8 @@ srt_parser_c::probe(mm_text_io_c &io) {
       return false;
 
     s = io.getline(100);
-    mtx::regex::jp::Regex timestamp_re(SRT_RE_TIMESTAMP_LINE);
-    if (!timestamp_re.match(s))
+    QRegularExpression timestamp_re{SRT_RE_TIMESTAMP_LINE};
+    if (!Q(s).contains(timestamp_re))
       return false;
 
     s = io.getline();
@@ -127,9 +129,9 @@ srt_parser_c::srt_parser_c(mm_text_io_cptr const &io,
 
 void
 srt_parser_c::parse() {
-  mtx::regex::jp::Regex timestamp_re(SRT_RE_TIMESTAMP_LINE, "S");
-  mtx::regex::jp::Regex number_re("^\\d+$", "S");
-  mtx::regex::jp::Regex coordinates_re(SRT_RE_COORDINATES, "S");
+  QRegularExpression timestamp_re{SRT_RE_TIMESTAMP_LINE};
+  QRegularExpression number_re{"^\\d+$"};
+  QRegularExpression coordinates_re{SRT_RE_COORDINATES};
 
   int64_t start                  = 0;
   int64_t end                    = 0;
@@ -168,7 +170,7 @@ srt_parser_c::parse() {
     }
 
     if (STATE_INITIAL == state) {
-      if (!number_re.match(s)) {
+      if (!Q(s).contains(number_re)) {
         mxwarn_tid(m_file_name, m_track_id, fmt::format(Y("Error in line {0}: expected subtitle number and found some text.\n"), line_number));
         break;
       }
@@ -176,8 +178,8 @@ srt_parser_c::parse() {
       mtx::string::parse_number(s, subtitle_number);
 
     } else if (STATE_TIME == state) {
-      mtx::regex::jp::VecNum matches;
-      if (!mtx::regex::match(s, matches, timestamp_re)) {
+      auto matches = timestamp_re.match(Q(s));
+      if (!matches.hasMatch()) {
         mxwarn_tid(m_file_name, m_track_id, fmt::format(Y("Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"), line_number));
         break;
       }
@@ -187,20 +189,20 @@ srt_parser_c::parse() {
       //      1       2         3    4          5   6                  7   8
       // "\\s*(-?)\\s*(\\d+):\\s(-?)*(\\d+):\\s*(-?)(\\d+)(?:[,\\.]\\s*(-?)(\\d+))?"
 
-      mtx::string::parse_number(matches[0][ 2], s_h);
-      mtx::string::parse_number(matches[0][ 4], s_min);
-      mtx::string::parse_number(matches[0][ 6], s_sec);
-      mtx::string::parse_number(matches[0][10], e_h);
-      mtx::string::parse_number(matches[0][12], e_min);
-      mtx::string::parse_number(matches[0][14], e_sec);
+      mtx::string::parse_number(to_utf8(matches.captured( 2)), s_h);
+      mtx::string::parse_number(to_utf8(matches.captured( 4)), s_min);
+      mtx::string::parse_number(to_utf8(matches.captured( 6)), s_sec);
+      mtx::string::parse_number(to_utf8(matches.captured(10)), e_h);
+      mtx::string::parse_number(to_utf8(matches.captured(12)), e_min);
+      mtx::string::parse_number(to_utf8(matches.captured(14)), e_sec);
 
-      std::string s_rest = matches[0][ 8];
-      std::string e_rest = matches[0][16];
+      std::string s_rest = to_utf8(matches.captured( 8));
+      std::string e_rest = to_utf8(matches.captured(16));
 
       auto neg_calculator = [&matches](auto start_idx) -> auto {
         int64_t neg = 1;
         for (auto idx = 0; idx < 4; ++idx)
-          if (matches[0][start_idx + (idx * 2)] == "-")
+          if (matches.captured(start_idx + (idx * 2)) == Q("-"))
             neg *= -1;
         return neg;
       };
@@ -208,7 +210,7 @@ srt_parser_c::parse() {
       int64_t s_neg = neg_calculator(1);
       int64_t e_neg = neg_calculator(9);
 
-      if (coordinates_re.match(s) && !m_coordinates_warning_shown) {
+      if (Q(s).contains(coordinates_re) && !m_coordinates_warning_shown) {
         mxwarn_tid(m_file_name, m_track_id,
                    Y("This file contains coordinates in the timestamp lines. "
                      "Such coordinates are not supported by the Matroska SRT subtitle format. "
@@ -268,7 +270,7 @@ srt_parser_c::parse() {
         subtitles += "\n";
       subtitles += s;
 
-    } else if (number_re.match(s)) {
+    } else if (Q(s).contains(number_re)) {
       state = STATE_TIME;
       mtx::string::parse_number(s, subtitle_number);
 
@@ -291,9 +293,9 @@ srt_parser_c::parse() {
 
 bool
 ssa_parser_c::probe(mm_text_io_c &io) {
-  mtx::regex::jp::Regex script_info_re("^\\s*\\[script\\s+info\\]",   "i");
-  mtx::regex::jp::Regex styles_re(     "^\\s*\\[V4\\+?\\s+Styles\\]", "i");
-  mtx::regex::jp::Regex comment_re(    "^\\s*$|^\\s*[!;]",            "i");
+  QRegularExpression script_info_re{"^\\s*\\[script\\s+info\\]",   QRegularExpression::CaseInsensitiveOption};
+  QRegularExpression styles_re{     "^\\s*\\[V4\\+?\\s+Styles\\]", QRegularExpression::CaseInsensitiveOption};
+  QRegularExpression comment_re{    "^\\s*$|^\\s*[!;]",            QRegularExpression::CaseInsensitiveOption};
 
   try {
     int line_number = 0;
@@ -307,12 +309,13 @@ ssa_parser_c::probe(mm_text_io_c &io) {
       if (100 < line_number)
         return false;
 
+      auto qline = Q(line);
       // Skip comments and empty lines.
-      if (comment_re.match(line))
+      if (qline.contains(comment_re))
         continue;
 
       // This is the line mkvmerge is looking for: positive match.
-      if (script_info_re.match(line) || styles_re.match(line))
+      if (qline.contains(script_info_re) || qline.contains(styles_re))
         return true;
 
       // Neither a wanted line nor an empty one/a comment: negative result.
@@ -338,12 +341,12 @@ ssa_parser_c::ssa_parser_c(generic_reader_c &reader,
 
 void
 ssa_parser_c::parse() {
-  mtx::regex::jp::Regex sec_styles_ass_re("^\\s*\\[V4\\+\\s+Styles\\]", "iS");
-  mtx::regex::jp::Regex sec_styles_re(    "^\\s*\\[V4\\s+Styles\\]",    "iS");
-  mtx::regex::jp::Regex sec_info_re(      "^\\s*\\[Script\\s+Info\\]",  "iS");
-  mtx::regex::jp::Regex sec_events_re(    "^\\s*\\[Events\\]",          "iS");
-  mtx::regex::jp::Regex sec_graphics_re(  "^\\s*\\[Graphics\\]",        "iS");
-  mtx::regex::jp::Regex sec_fonts_re(     "^\\s*\\[Fonts\\]",           "iS");
+  QRegularExpression sec_styles_ass_re{"^\\s*\\[V4\\+\\s+Styles\\]", QRegularExpression::CaseInsensitiveOption};
+  QRegularExpression sec_styles_re{    "^\\s*\\[V4\\s+Styles\\]",    QRegularExpression::CaseInsensitiveOption};
+  QRegularExpression sec_info_re{      "^\\s*\\[Script\\s+Info\\]",  QRegularExpression::CaseInsensitiveOption};
+  QRegularExpression sec_events_re{    "^\\s*\\[Events\\]",          QRegularExpression::CaseInsensitiveOption};
+  QRegularExpression sec_graphics_re{  "^\\s*\\[Graphics\\]",        QRegularExpression::CaseInsensitiveOption};
+  QRegularExpression sec_fonts_re{     "^\\s*\\[Fonts\\]",           QRegularExpression::CaseInsensitiveOption};
 
   int num                        = 0;
   ssa_section_e section          = SSA_SECTION_NONE;
@@ -360,30 +363,31 @@ ssa_parser_c::parse() {
       break;
 
     line               = recode(line);
+    auto qline         = Q(line);
     bool add_to_global = true;
 
     // A normal line. Let's see if this file is ASS and not SSA.
     if (!strcasecmp(line.c_str(), "ScriptType: v4.00+"))
       m_is_ass = true;
 
-    else if (sec_styles_ass_re.match(line)) {
+    else if (qline.contains(sec_styles_ass_re)) {
       m_is_ass = true;
       section  = SSA_SECTION_V4STYLES;
 
-    } else if (sec_styles_re.match(line))
+    } else if (qline.contains(sec_styles_re))
       section = SSA_SECTION_V4STYLES;
 
-    else if (sec_info_re.match(line))
+    else if (qline.contains(sec_info_re))
       section = SSA_SECTION_INFO;
 
-    else if (sec_events_re.match(line))
+    else if (qline.contains(sec_events_re))
       section = SSA_SECTION_EVENTS;
 
-    else if (sec_graphics_re.match(line)) {
+    else if (qline.contains(sec_graphics_re)) {
       section       = SSA_SECTION_GRAPHICS;
       add_to_global = false;
 
-    } else if (sec_fonts_re.match(line)) {
+    } else if (qline.contains(sec_fonts_re)) {
       section       = SSA_SECTION_FONTS;
       add_to_global = false;
 

@@ -13,13 +13,15 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include <ebml/EbmlVersion.h>
 #include <matroska/KaxVersion.h>
 
 #include "common/debugging.h"
 #include "common/hacks.h"
 #include "common/mkvtoolnix_version.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/version.h"
@@ -42,21 +44,22 @@ version_number_t::version_number_t(const std::string &s)
   // * Optional build number that can have two forms:
   //   - " build nnn"
   //   - "-buildYYYYMMDD-nnn" (date is ignored)
-  static mtx::regex::jp::Regex s_version_number_re("^(?:mkv[a-z]+\\s+v)?" // Optional prefix mkv... v
-                                                   "((?:\\d+\\.)*)(\\d+)" // An arbitrary number of digitss separated by dots; $1 & $2
-                                                   "(?:"                  // Optional build number including its prefix
-                                                     "(?:\\s*build\\s*"   //   Build number prefix: either " build " or...
-                                                     "|-build\\d{8}-)"    //   ... "-buildYYYYMMDD-"
-                                                     "(\\d+)"             //   The build number itself; $3
-                                                   ")?$"
-                                                   );
+  static QRegularExpression s_version_number_re{
+    "^(?:mkv[a-z]+[ \\t]+v)?"  // Optional prefix mkv... v
+    "((?:\\d+\\.)*)(\\d+)"     // An arbitrary number of digitss separated by dots; $1 & $2
+    "(?:"                      // Optional build number including its prefix
+      "(?:[ \\t]*build[ \\t]*" //   Build number prefix: either " build " or...
+       "|-build\\d{8}-)"       //   ... "-buildYYYYMMDD-"
+      "(\\d+)"                 //   The build number itself; $3
+    ")?$"
+  };
 
-  mtx::regex::jp::VecNum matches;
-  if (!mtx::regex::match(s, matches, s_version_number_re))
+  auto matches = s_version_number_re.match(Q(s));
+  if (!matches.hasMatch())
     return;
 
   valid          = true;
-  auto str_parts = mtx::string::split(matches[0][1] + matches[0][2], ".");
+  auto str_parts = mtx::string::split(to_utf8(matches.captured(1)) + to_utf8(matches.captured(2)), ".");
 
   for (auto const &str_part : str_parts) {
     parts.push_back(0);
@@ -66,7 +69,7 @@ version_number_t::version_number_t(const std::string &s)
     }
   }
 
-  if (!matches[0][3].empty() && !mtx::string::parse_number(matches[0][3], build))
+  if (matches.capturedLength(3) && !mtx::string::parse_number(to_utf8(matches.captured(3)), build))
     valid = false;
 
   if (parts.empty())

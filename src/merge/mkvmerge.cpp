@@ -56,7 +56,6 @@
 #include "common/mm_mpls_multi_file_io.h"
 #include "common/qt.h"
 #include "common/random.h"
-#include "common/regex.h"
 #include "common/segmentinfo.h"
 #include "common/split_arg_parsing.h"
 #include "common/strings/formatting.h"
@@ -1067,8 +1066,8 @@ static void
 parse_arg_split_timestamps(const std::string &arg) {
   std::string s = arg;
 
-  if (Q(s).contains(QRegularExpression{"^time(?:stamps|codes):", QRegularExpression::CaseInsensitiveOption}))
-    s = mtx::regex::replace(s, mtx::regex::jp::Regex{"^.*?:"}, "", "");
+  if (auto qs = Q(s); qs.contains(QRegularExpression{"^time(?:stamps|codes):", QRegularExpression::CaseInsensitiveOption}))
+    s = to_utf8(qs.replace(QRegularExpression{"^.*?:"}, {}));
 
   auto timestamps = mtx::string::split(s, ",");
   for (auto &timestamp : timestamps) {

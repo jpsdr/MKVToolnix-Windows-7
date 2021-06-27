@@ -31,6 +31,11 @@ to_qs(char const source) {
 }
 
 inline QString
+to_qs(QString const &source) {
+  return source;
+}
+
+inline QString
 to_qs(char const *source) {
   return QString{source};
 }

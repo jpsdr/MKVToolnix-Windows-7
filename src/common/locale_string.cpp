@@ -13,20 +13,22 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include "common/locale_string.h"
-#include "common/regex.h"
+#include "common/qt.h"
 
 locale_string_c::locale_string_c(std::string locale_string) {
-  mtx::regex::jp::Regex locale_re{"^([[:alpha:]]+)?(_[[:alpha:]]+)?(\\.[^@]+)?(@.+)?"};
-  mtx::regex::jp::VecNum matches;
+  QRegularExpression locale_re{"^([[:alpha:]]+)?(_[[:alpha:]]+)?(\\.[^@]+)?(@.+)?"};
+  auto matches = locale_re.match(Q(locale_string));
 
-  if (!mtx::regex::match(locale_string, matches, locale_re))
+  if (!matches.hasMatch())
     throw mtx::locale_string_format_x(locale_string);
 
-  m_language  = matches[0][1];
-  m_territory = matches[0][2];
-  m_codeset   = matches[0][3];
-  m_modifier  = matches[0][4];
+  m_language  = to_utf8(matches.captured(1));
+  m_territory = to_utf8(matches.captured(2));
+  m_codeset   = to_utf8(matches.captured(3));
+  m_modifier  = to_utf8(matches.captured(4));
 
   if (!m_territory.empty())
     m_territory.erase(0, 1);

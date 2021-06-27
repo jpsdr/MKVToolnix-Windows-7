@@ -6,10 +6,10 @@
 #include <QFile>
 #include <QMutex>
 #include <QMutexLocker>
+#include <QRegularExpression>
 #include <QTimer>
 
 #include "common/qt.h"
-#include "common/regex.h"
 #include "common/timestamp.h"
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
@@ -24,7 +24,7 @@ class FileIdentificationWorkerPrivate {
   QVector<IdentificationPack> m_toIdentify;
   QMutex m_mutex;
   QAtomicInteger<bool> m_abortPlaylistScan;
-  mtx::regex::jp::Regex m_simpleChaptersRE, m_xmlChaptersRE, m_xmlSegmentInfoRE, m_xmlTagsRE;
+  QRegularExpression m_simpleChaptersRE, m_xmlChaptersRE, m_xmlSegmentInfoRE, m_xmlTagsRE;
 
   explicit FileIdentificationWorkerPrivate()
   {
@@ -38,10 +38,10 @@ FileIdentificationWorker::FileIdentificationWorker(QObject *parent)
   , p_ptr{new FileIdentificationWorkerPrivate{}}
 {
   auto p                = p_func();
-  p->m_simpleChaptersRE = mtx::regex::jp::Regex{R"(^CHAPTER\d{2}=[\s\S]*CHAPTER\d{2}NAME=)"};
-  p->m_xmlChaptersRE    = mtx::regex::jp::Regex{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Chapters>)"};
-  p->m_xmlSegmentInfoRE = mtx::regex::jp::Regex{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Info>)"};
-  p->m_xmlTagsRE        = mtx::regex::jp::Regex{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Tags>)"};
+  p->m_simpleChaptersRE = QRegularExpression{R"(^CHAPTER\d{2}=[\s\S]*CHAPTER\d{2}NAME=)"};
+  p->m_xmlChaptersRE    = QRegularExpression{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Chapters>)"};
+  p->m_xmlSegmentInfoRE = QRegularExpression{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Info>)"};
+  p->m_xmlTagsRE        = QRegularExpression{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Tags>)"};
 }
 
 FileIdentificationWorker::~FileIdentificationWorker() {
@@ -167,15 +167,15 @@ FileIdentificationWorker::determineIfFileThatShouldBeSelectedElsewhere(QString c
   if (!file.open(QIODevice::ReadOnly))
     return IdentificationPack::FileType::Regular;
 
-  auto content = std::string{ file.read(1024).data() };
+  auto content = Q(std::string{ file.read(1024).data() });
 
-  if (mtx::regex::match(content, p->m_simpleChaptersRE) || mtx::regex::match(content, p->m_xmlChaptersRE))
+  if (content.contains(p->m_simpleChaptersRE) || content.contains(p->m_xmlChaptersRE))
     return IdentificationPack::FileType::Chapters;
 
-  else if (mtx::regex::match(content, p->m_xmlSegmentInfoRE))
+  else if (content.contains(p->m_xmlSegmentInfoRE))
     return IdentificationPack::FileType::SegmentInfo;
 
-  else if (mtx::regex::match(content, p->m_xmlTagsRE))
+  else if (content.contains(p->m_xmlTagsRE))
     return IdentificationPack::FileType::Tags;
 
   return IdentificationPack::FileType::Regular;

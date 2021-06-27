@@ -23,6 +23,7 @@
 #include <typeinfo>
 
 #include <QDateTime>
+#include <QRegularExpression>
 
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlSubHead.h>
@@ -66,7 +67,7 @@
 #include "common/mm_proxy_io.h"
 #include "common/mm_write_buffer_io.h"
 #include "common/path.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "common/tags/tags.h"
 #include "common/translation.h"
@@ -1236,7 +1237,7 @@ create_output_name() {
   }
 
   // Now search for something like %02d
-  auto converted = mtx::regex::replace(s, mtx::regex::jp::Regex{"%(\\d+)d"}, "g", "{0:$1}");
+  auto converted = to_utf8(Q(s).replace(QRegularExpression{"%(\\d+)d"}, "{0:\\1}"));
   if (converted != s)
     return fmt::format(converted, g_file_num);
 
@@ -1560,9 +1561,9 @@ static void
 insert_chapter_name_in_output_file_name(std::filesystem::path const &original_file_name,
                                         std::string const &chapter_name) {
 #if defined(SYS_WINDOWS)
-  static mtx::regex::jp::Regex s_invalid_char_re{R"([\\/:<>"|?*]+)"};
+  static QRegularExpression s_invalid_char_re{R"([\\/:<>"|?*]+)"};
 #else
-  static mtx::regex::jp::Regex s_invalid_char_re{"/+"};
+  static QRegularExpression s_invalid_char_re{"/+"};
 #endif
 
   // When splitting replace %c in file names with current chapter name.
@@ -1570,10 +1571,10 @@ insert_chapter_name_in_output_file_name(std::filesystem::path const &original_fi
     return;
 
   // auto chapter_name  = get_current_chapter_name();
-  auto cleaned_chapter_name = mtx::regex::replace(chapter_name, s_invalid_char_re, "g", "-");
-  auto new_file_name        = original_file_name.parent_path() / mtx::fs::to_path(mtx::regex::replace(original_file_name.filename().u8string(), mtx::regex::jp::Regex{"%c"s}, "g", cleaned_chapter_name));
+  auto cleaned_chapter_name = Q(chapter_name).replace(s_invalid_char_re, "-");
+  auto new_file_name        = original_file_name.parent_path() / mtx::fs::to_path(Q(original_file_name.filename()).replace(QRegularExpression{"%c"}, cleaned_chapter_name));
 
-  mxdebug_if(s_debug_splitting_chapters, fmt::format("insert_chapter_name_in_output_file_name: cleaned name {0} old {1} new {2}\n", cleaned_chapter_name, original_file_name.u8string(), new_file_name.u8string()));
+  mxdebug_if(s_debug_splitting_chapters, fmt::format("insert_chapter_name_in_output_file_name: cleaned name {0} old {1} new {2}\n", to_utf8(cleaned_chapter_name), original_file_name.u8string(), new_file_name.u8string()));
 
   if (original_file_name == new_file_name)
     return;

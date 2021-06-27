@@ -10,6 +10,8 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
 #include <matroska/KaxAttachments.h>
 
 #include "common/construct.h"
@@ -18,7 +20,7 @@
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/path.h"
-#include "common/regex.h"
+#include "common/qt.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
@@ -123,39 +125,40 @@ attachment_target_c::parse_spec(command_e command,
     return;
   }
 
-  mtx::regex::jp::Regex s_spec_re;
-  mtx::regex::jp::VecNum matches;
+  QRegularExpression s_spec_re;
   auto offset = 0u;
 
   if (ac_replace == m_command) {
-    // captures:                              1   2      3        4                5       6
-    s_spec_re = mtx::regex::jp::Regex{"^(?:(?:(=)?(\\d+):(.+))|(?:(name|mime-type):([^:]+):(.+)))$", "i"};
+    // captures:                           1   2      3        4                5       6
+    s_spec_re = QRegularExpression{"^(?:(?:(=)?(\\d+):(.+))|(?:(name|mime-type):([^:]+):(.+)))$", QRegularExpression::CaseInsensitiveOption};
     offset    = 1;
 
   } else if (mtx::included_in(m_command, ac_delete, ac_update))
-    // captures:                              1   2          3                4
-    s_spec_re = mtx::regex::jp::Regex{"^(?:(?:(=)?(\\d+))|(?:(name|mime-type):(.+)))$", "i"};
+    // captures:                           1   2          3                4
+    s_spec_re = QRegularExpression{"^(?:(?:(=)?(\\d+))|(?:(name|mime-type):(.+)))$", QRegularExpression::CaseInsensitiveOption};
 
   else
     assert(false);
 
-  if (!mtx::regex::match(spec, matches, s_spec_re))
+  auto matches = s_spec_re.match(Q(spec));
+
+  if (!matches.hasMatch())
     throw std::invalid_argument{"generic format error"};
 
-  if (matches[0][3 + offset].empty()) {
+  if (!matches.capturedLength(3 + offset)) {
     // First case: by ID/UID
     if (ac_replace == m_command)
-      m_file_name   = matches[0][3];
-    m_selector_type = matches[0][1] == "=" ? st_uid : st_id;
-    if (!mtx::string::parse_number(matches[0][2], m_selector_num_arg))
+      m_file_name   = to_utf8(matches.captured(3));
+    m_selector_type = to_utf8(matches.captured(1)) == "=" ? st_uid : st_id;
+    if (!mtx::string::parse_number(to_utf8(matches.captured(2)), m_selector_num_arg))
       throw std::invalid_argument{"ID/UID not a number"};
 
   } else {
     // Second case: by name/MIME type
     if (ac_replace == m_command)
-      m_file_name         = matches[0][6];
-    m_selector_type       = balg::to_lower_copy(matches[0][3 + offset]) == "name" ? st_name : st_mime_type;
-    m_selector_string_arg = matches[0][4 + offset];
+      m_file_name         = to_utf8(matches.captured(6));
+    m_selector_type       = to_utf8(matches.captured(3 + offset).toLower()) == "name" ? st_name : st_mime_type;
+    m_selector_string_arg = to_utf8(matches.captured(4 + offset));
 
     if (ac_replace == m_command)
       m_selector_string_arg = unescape_colon(m_selector_string_arg);
