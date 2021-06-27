@@ -27,8 +27,6 @@ BuildRequires: libstdc++-devel
 BuildRequires: libvorbis-devel
 BuildRequires: libxslt
 BuildRequires: make
-BuildRequires: pcre2
-BuildRequires: pcre2-devel
 BuildRequires: pkgconfig
 BuildRequires: po4a
 BuildRequires: qt5-qtbase-devel

@@ -18,10 +18,8 @@
 #if defined(HAVE_FLAC_FORMAT_H)
 # include <FLAC/format.h>
 #endif
-#include <jpcre2/jpcre2.hpp>
 #include <nlohmann/json.hpp>
 #include <matroska/KaxVersion.h>
-#include <pcre2.h>
 #include <pugixml.hpp>
 #include <vorbis/codec.h>
 #include <zlib.h>
@@ -174,10 +172,8 @@ gatherCompilerAndLibraryInfo(QStringList &info) {
   info << Q("* FLAC: %1").arg(Q(FLAC__VERSION_STRING));
 #endif
   info << Q("* fmt: %1.%2.%3").arg(FMT_VERSION / 10'000).arg((FMT_VERSION / 100) % 100).arg(FMT_VERSION % 100);
-  info << Q("* JPCRE2: %1.%2.%3").arg(JPCRE2_VERSION / 10'000).arg((JPCRE2_VERSION / 100) % 100).arg(JPCRE2_VERSION % 100);
   info << Q("* Matroska: %1").arg(Q(libmatroska::KaxCodeVersion));
   info << Q("* nlohmann-json: %1.%2.%3").arg(NLOHMANN_JSON_VERSION_MAJOR).arg(NLOHMANN_JSON_VERSION_MINOR).arg(NLOHMANN_JSON_VERSION_PATCH);
-  info << Q("* PCRE2: %1.%2").arg(PCRE2_MAJOR).arg(PCRE2_MINOR);
   info << Q("* pugixml: %1.%2.%3").arg((PUGIXML_VERSION / 1'000) % 10).arg((PUGIXML_VERSION / 10) % 10).arg(PUGIXML_VERSION % 10);
   info << Q("* Vorbis: %1").arg(Q(vorbis_version_string()));
   info << Q("* zlib: %1").arg(Q(ZLIB_VERSION));

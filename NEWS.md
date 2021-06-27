@@ -76,6 +76,8 @@
   of the relevant directories within an AppImage is now detected
   automatically.
 * The bundled `fmt` library was updated to v8.0.0.
+* The `PCRE2` & `JPCRE2` libraries are not used anymore. The bundled version
+  of `JPCRE2` was removed.
 
 
 # Version 58.0.0 "Supper's Ready" 2021-06-13

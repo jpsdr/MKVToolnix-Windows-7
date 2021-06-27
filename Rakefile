@@ -84,7 +84,6 @@ def setup_globals
   $manpages                << "doc/man/mkvtoolnix-gui.1" if $build_mkvtoolnix_gui
 
   $system_includes         = "-I. -Ilib -Ilib/avilib-0.6.10 -Isrc"
-  $system_includes        += " -Ilib/jpcre2"          if c?(:JPCRE2_INTERNAL)
   $system_includes        += " -Ilib/utf8-cpp/source" if c?(:UTF8CPP_INTERNAL)
   $system_includes        += " -Ilib/pugixml/src"     if c?(:PUGIXML_INTERNAL)
   $system_libdirs          = "-Llib/avilib-0.6.10 -Llib/librmff -Lsrc/common"
@@ -141,7 +140,7 @@ def setup_globals
   cflags_common           += " -Ilib/libebml -Ilib/libmatroska"                          if c?(:EBML_MATROSKA_INTERNAL)
   cflags_common           += " -Ilib/nlohmann-json/include"                              if c?(:NLOHMANN_JSON_INTERNAL)
   cflags_common           += " -Ilib/fmt/include"                                        if c?(:FMT_INTERNAL)
-  cflags_common           += " #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:PUGIXML_CFLAGS)} #{c(:CMARK_CFLAGS)} #{c(:DVDREAD_CFLAGS)} #{c(:PCRE2_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:USER_CPPFLAGS)}"
+  cflags_common           += " #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:PUGIXML_CFLAGS)} #{c(:CMARK_CFLAGS)} #{c(:DVDREAD_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:USER_CPPFLAGS)}"
   cflags_common           += " -mno-ms-bitfields -DWINVER=0x0601 -D_WIN32_WINNT=0x0601 " if $building_for[:windows] # 0x0601 = Windows 7/Server 2008 R2
   cflags_common           += " -march=i686"                                              if $building_for[:windows] && /i686/.match(c(:host))
   cflags_common           += " -fPIC "                                                   if !$building_for[:windows]
@@ -1065,7 +1064,6 @@ $common_libs = [
   :intl,
   :iconv,
   :fmt,
-  :pcre2,
   :stdcppfs,
   :qt_non_gui,
   "-lstdc++",

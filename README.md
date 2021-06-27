@@ -34,7 +34,6 @@ MKVToolNix 58.0.0
     11. [QtWaitingSpinner](#611-qtwaitingspinner)
     12. [Fancy tab widget](#612-fancy-tab-widget)
     13. [fmt](#613-fmt)
-    14. [jpcre2](#614-jpcre2)
 
 -----------------
 
@@ -105,9 +104,6 @@ programs and libraries you absolutely need are:
   [DocBook XSL stylesheets](https://sourceforge.net/projects/docbook/files/docbook-xsl/)
   — for creating man pages from XML documents
 
-- [PCRE2](https://pcre.org/) — the Perl-compatible regular expression
-  library
-
 You also need the `rake` or `drake` build program. I suggest `rake`
 v10.0.0 or newer (this is included with Ruby 2.1) as it offers
 parallel builds out of the box. If you only have an earlier version of
@@ -128,9 +124,6 @@ These libraries are:
 
 - [fmt](http://fmtlib.net/) — a small, safe and fast formatting
   library. Version 6.1.0 or later is required.
-
-- [JPCRE2](https://github.com/jpcre2/jpcre2/) — C++ wrapper for the
-  PCRE2 library. Version 10.32.1 or newer is required.
 
 - [libEBML v1.4.2](http://dl.matroska.org/downloads/libebml/) or later
   and [libMatroska v1.6.3](http://dl.matroska.org/downloads/libmatroska/)
@@ -480,12 +473,3 @@ Small, safe and fast formatting library
   * License: BSD (see `doc/licenses/fmt-BSD.txt`)
   * URL: http://fmtlib.net/latest/
   * Corresponding files: `lib/fmt/*`
-
-## 6.14. jpcre2
-
-C++ wrapper for PCRE2 Library
-
-  * Copyright: 2015–2017 Md Jahidul Hamid
-  * License: BSD (see `doc/licenses/jpcre2-BSD.txt`)
-  * URL: https://github.com/jpcre2/jpcre2/
-  * Corresponding files: `lib/jpcre2/*`
