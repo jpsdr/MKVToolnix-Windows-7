@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QColorDialog>
 #include <QFileDialog>
 #include <QIcon>
 #include <QInputDialog>
@@ -105,6 +106,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbMProbeRangePercentage->setValue(m_cfg.m_probeRangePercentage);
   ui->cbMAddBlurayCovers->setChecked(m_cfg.m_mergeAddBlurayCovers);
 
+  setupFileColorsControls();
   setupProcessPriority();
   setupPlaylistScanningPolicy();
   setupOutputFileNamePolicy();
@@ -896,6 +898,102 @@ PreferencesDialog::setupFontAndScaling() {
 }
 
 void
+PreferencesDialog::setupFileColorsControls() {
+  setupFileColors(m_cfg.m_mergeFileColors);
+
+  enableFileColorsButtons();
+
+  connect(ui->lwMFileColors,                &QListWidget::itemSelectionChanged, this, &PreferencesDialog::enableFileColorsButtons);
+  connect(ui->lwMFileColors,                &QListWidget::itemDoubleClicked,    this, &PreferencesDialog::editFileColor);
+  connect(ui->pbMAddFileColor,              &QPushButton::clicked,              this, &PreferencesDialog::addFileColor);
+  connect(ui->pbMRemoveFileColors,          &QPushButton::clicked,              this, &PreferencesDialog::removeFileColors);
+  connect(ui->pbMEditFileColor,             &QPushButton::clicked,              this, &PreferencesDialog::editSelectedFileColor);
+  connect(ui->pbMRevertFileColorsToDefault, &QPushButton::clicked,              this, &PreferencesDialog::revertFileColorsToDefault);
+}
+
+QListWidgetItem &
+PreferencesDialog::setupFileColorItem(QListWidgetItem &item,
+                                      QColor const &color) {
+  auto luminance  = (0.299 * color.red() + 0.587 * color.green() + 0.114 * color.blue()) / 255.0;
+  auto foreground = luminance > 0.5 ?  0 : 255;
+
+  item.setForeground(QColor{foreground, foreground, foreground});
+  item.setBackground(color);
+  item.setText(Q(fmt::format("0x{0:02x}{1:02x}{2:02x}", color.red(), color.green(), color.blue())));
+
+  return item;
+}
+
+void
+PreferencesDialog::setupFileColors(QVector<QColor> const &colors) {
+  ui->lwMFileColors->clear();
+
+  for (auto const &color : colors)
+    ui->lwMFileColors->addItem(&setupFileColorItem(*new QListWidgetItem, color));
+
+  enableFileColorsButtons();
+}
+
+void
+PreferencesDialog::saveFileColors() {
+  auto &colors = m_cfg.m_mergeFileColors;
+  auto numRows = ui->lwMFileColors->count();
+
+  colors.clear();
+  colors.reserve(numRows);
+
+  for (int row = 0; row < numRows; ++row)
+    colors << ui->lwMFileColors->item(row)->background().color();
+}
+
+void
+PreferencesDialog::enableFileColorsButtons() {
+  auto items = ui->lwMFileColors->selectedItems();
+
+  ui->pbMRemoveFileColors->setEnabled(!items.isEmpty());
+  ui->pbMEditFileColor->setEnabled(items.size() == 1);
+}
+
+void
+PreferencesDialog::addFileColor() {
+  QColorDialog dlg{this};
+
+  if (dlg.exec())
+    ui->lwMFileColors->addItem(&setupFileColorItem(*new QListWidgetItem, dlg.currentColor()));
+}
+
+void
+PreferencesDialog::removeFileColors() {
+  for (auto const &item : ui->lwMFileColors->selectedItems())
+    delete item;
+
+  enableFileColorsButtons();
+}
+
+void
+PreferencesDialog::editFileColor(QListWidgetItem *item) {
+  if (!item)
+    return;
+
+  QColorDialog dlg{item->background().color(), this};
+
+  if (dlg.exec())
+    setupFileColorItem(*item, dlg.currentColor());
+}
+
+void
+PreferencesDialog::editSelectedFileColor() {
+  auto items = ui->lwMFileColors->selectedItems();
+  if (!items.isEmpty())
+    editFileColor(items.first());
+}
+
+void
+PreferencesDialog::revertFileColorsToDefault() {
+  setupFileColors(Util::Settings::defaultFileColors());
+}
+
+void
 PreferencesDialog::save() {
   // GUI page:
   m_cfg.m_uiLocale                                            = ui->cbGuiInterfaceLanguage->currentData().toString();
@@ -1031,6 +1129,8 @@ PreferencesDialog::save() {
   m_cfg.m_mergePredefinedSubtitleTrackNames = ui->lwMPredefinedSubtitleTrackNames->items();
   m_cfg.m_mergePredefinedSplitSizes         = ui->lwMPredefinedSplitSizes->items();
   m_cfg.m_mergePredefinedSplitDurations     = ui->lwMPredefinedSplitDurations->items();
+
+  saveFileColors();
 
   m_cfg.save();
 

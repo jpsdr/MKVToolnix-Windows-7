@@ -22,7 +22,9 @@
   appended to the first one. This option is enabled by default. Implements
   #2866.
 * MKVToolNix GUI: multiplexer: added small colored boxes for each file & track
-  in order to indicate from which file each track is read.
+  in order to indicate from which file each track is read. The colors used can
+  be configured in the preferences → "Multiplexer" page → "File & track
+  colors" section.
 
 ## Bug fixes
 

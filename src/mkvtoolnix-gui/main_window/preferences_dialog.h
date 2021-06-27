@@ -8,6 +8,7 @@
 
 class QItemSelection;
 class QListWidget;
+class QListWidgetItem;
 class QModelIndex;
 
 namespace mtx::gui {
@@ -74,6 +75,13 @@ public Q_SLOTS:
   void revertDeriveTrackLanguageFromFileNameChars();
   void setupCommonLanguages(bool withISO639_3);
 
+  void addFileColor();
+  void removeFileColors();
+  void editSelectedFileColor();
+  void editFileColor(QListWidgetItem *item);
+  void revertFileColorsToDefault();
+  void enableFileColorsButtons();
+
   void enableOftendUsedLanguagesOnly();
   void enableOftendUsedRegionsOnly();
   void enableOftendUsedCharacterSetsOnly();
@@ -107,6 +115,10 @@ protected:
   void setupHeaderEditorDroppedFilesPolicy();
   void setupJobsRunPrograms();
   void setupFontAndScaling();
+  void setupFileColorsControls();
+  void setupFileColors(QVector<QColor> const &colors);
+
+  QListWidgetItem &setupFileColorItem(QListWidgetItem &item, QColor const &color);
 
   void showPage(Page page);
 
@@ -118,6 +130,8 @@ protected:
   bool verifyRunProgramConfigurations();
 
   void rememberCurrentlySelectedPage();
+
+  void saveFileColors();
 };
 
 }

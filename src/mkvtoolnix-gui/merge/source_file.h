@@ -8,7 +8,6 @@
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/track.h"
 
-#include <QColor>
 #include <QFileInfo>
 #include <QList>
 #include <QString>
@@ -44,7 +43,7 @@ public:
   std::optional<mtx::bluray::disc_library::info_t> m_discLibraryInfoToAdd;
   bool m_discLibraryInfoSelected{};
 
-  QColor m_color;
+  int m_colorIndex{};
 
 public:
   explicit SourceFile(QString const &fileName = QString{""});

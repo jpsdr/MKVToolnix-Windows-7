@@ -4,6 +4,7 @@ namespace {
 char const * const s_grpDefaultJobSettings                        = "defaultJobSettings";
 char const * const s_grpDefaults                                  = "defaults";
 char const * const s_grpDerivingTrackLanguagesFromFileNames       = "derivingTrackLanguagesFromFileNames";
+char const * const s_grpFileColors                                = "fileColors";
 char const * const s_grpHeaderViewManager                         = "headerViewManager";
 char const * const s_grpInfo                                      = "info";
 char const * const s_grpRunProgramConfigurations                  = "runProgramConfigurations";
@@ -71,6 +72,7 @@ char const * const s_valMergeAlwaysCreateNewSettingsForVideoFiles = "mergeAlways
 char const * const s_valMergeAlwaysShowOutputFileControls         = "mergeAlwaysShowOutputFileControls";
 char const * const s_valMergeDragAndDropFilesPolicy               = "mergeDragAndDropFilesPolicy";
 char const * const s_valMergeEnableDialogNormGainRemoval          = "mergeEnableDialogNormGainRemoval";
+char const * const s_valMergeFileColors                           = "mergeFileColors";
 char const * const s_valMergeLastAddingAppendingDecision          = "mergeLastAddingAppendingDecision";
 char const * const s_valMergeLastDragAndDropFilesDecision         = "mergeLastDragAndDropFilesDecision";
 char const * const s_valMergeLastFixedOutputDirs                  = "mergeLastFixedOutputDirs";

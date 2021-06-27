@@ -4,7 +4,6 @@
 
 #include "mkvtoolnix-gui/merge/source_file.h"
 
-#include <QColor>
 #include <QStandardItemModel>
 #include <QIcon>
 #include <QList>
@@ -29,7 +28,8 @@ protected:
   TrackModel *m_tracksModel;
   AttachedFileModel *m_attachedFilesModel;
   bool m_nonAppendedSelected, m_appendedSelected, m_additionalPartSelected;
-  QList<QColor> m_availableColors;
+  QVector<int> m_availableColorIndexes;
+  int m_nextColorIndex{};
 
 public:
   SourceFileModel(QObject *parent);
@@ -61,6 +61,7 @@ public:
 public Q_SLOTS:
   void updateSelectionStatus();
   void updateSourceFileLists();
+  void updateFileColors();
 
 protected:
   virtual void addFilesAndTracks(QVector<SourceFilePtr> const &files);
@@ -68,8 +69,8 @@ protected:
   virtual QModelIndex addFileSortedByType(SourceFilePtr const &file);
   virtual void appendFilesAndTracks(QVector<SourceFilePtr> const &files, QModelIndex const &fileToAddToIdx);
 
-  void assignColor(SourceFile &file);
-  void initializeColors();
+  void assignColorIndex(SourceFile &file);
+  void initializeColorIndexes();
 
   void setItemsFromSourceFile(QList<QStandardItem *> const &items, SourceFile *sourceFile) const;
   QList<QStandardItem *> createRow(SourceFile *sourceFile) const;

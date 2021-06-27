@@ -75,6 +75,7 @@ public:
 public Q_SLOTS:
   void updateTrackLists();
   void updateSelectionStatus();
+  void updateTrackColors();
 
 protected:
   QList<QStandardItem *> createRow(Track *track);

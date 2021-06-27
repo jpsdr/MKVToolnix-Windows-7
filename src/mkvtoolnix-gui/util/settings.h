@@ -2,6 +2,7 @@
 
 #include "common/common_pch.h"
 
+#include <QColor>
 #include <QDateTime>
 #include <QDir>
 #include <QString>
@@ -187,6 +188,7 @@ public:
   TrackPropertiesLayout m_mergeTrackPropertiesLayout;
   MergeMissingAudioTrackPolicy m_mergeWarnMissingAudioTrack;
   RecentlyUsedStrings m_mergeLastRelativeOutputDirs{10}, m_mergeLastFixedOutputDirs{10}, m_mergeLastOutputDirs{10};
+  QVector<QColor> m_mergeFileColors;
 
   OutputFileNamePolicy m_outputFileNamePolicy;
   bool m_autoDestinationOnlyForVideoFiles, m_mergeSetDestinationFromTitle;
@@ -246,6 +248,8 @@ public:
   QString lastOpenDirPath() const;
   QString lastConfigDirPath() const;
 
+  QColor nthFileColor(int idx) const;
+
 public Q_SLOTS:
   void storeSplitterSizes();
 
@@ -255,12 +259,14 @@ protected:
   void loadSplitterSizes(QSettings &reg);
   void loadDefaultInfoJobSettings(QSettings &reg);
   void loadRunProgramConfigurations(QSettings &reg);
+  void loadFileColors(QSettings &reg);
 
   void saveDefaults(QSettings &reg) const;
   void saveDerivingTrackLanguagesSettings(QSettings &reg) const;
   void saveSplitterSizes(QSettings &reg) const;
   void saveDefaultInfoJobSettings(QSettings &reg) const;
   void saveRunProgramConfigurations(QSettings &reg) const;
+  void saveFileColors(QSettings &reg) const;
 
   void addDefaultRunProgramConfigurations(QSettings &reg);
   void addDefaultRunProgramConfigurationForType(QSettings &reg, RunProgramType type, std::function<void(RunProgramConfig &)> const &modifier = nullptr);
@@ -293,6 +299,8 @@ public:
   static QString prepareCacheDir(QString const &subDir);
 
   static QString defaultBoundaryCharsForDerivingLanguageFromFileName();
+
+  static QVector<QColor> defaultFileColors();
 };
 
 }
