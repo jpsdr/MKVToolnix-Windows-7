@@ -3,6 +3,7 @@
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/merge/attachment.h"
+#include "mkvtoolnix-gui/util/command_line_options.h"
 #include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/settings.h"
@@ -49,13 +50,13 @@ Attachment::guessMIMEType() {
 }
 
 void
-Attachment::buildMkvmergeOptions(QStringList &opt)
+Attachment::buildMkvmergeOptions(Util::CommandLineOptions &opt)
   const {
   if (!m_description.isEmpty()) opt << Q("--attachment-description") << m_description;
   if (!m_name.isEmpty())        opt << Q("--attachment-name")        << m_name;
   if (!m_MIMEType.isEmpty())    opt << Q("--attachment-mime-type")   << m_MIMEType;
 
-  opt << (ToAllFiles == m_style ? Q("--attach-file") : Q("--attach-file-once")) << m_fileName;
+  opt << (ToAllFiles == m_style ? Q("--attach-file") : Q("--attach-file-once")) << Util::CommandLineOption::fileName(m_fileName);
 }
 
 }

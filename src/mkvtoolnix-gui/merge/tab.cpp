@@ -143,7 +143,9 @@ Tab::title()
 
 void
 Tab::onShowCommandLine() {
-  auto options = (QStringList{} << Util::Settings::get().actualMkvmergeExe()) + updateConfigFromControlValues().buildMkvmergeOptions();
+  auto exe     = Util::Settings::get().actualMkvmergeExe();
+  auto options = updateConfigFromControlValues().buildMkvmergeOptions().setExecutable(exe);
+
   CommandLineDialog{this, options, QY("mkvmerge command line")}.exec();
 }
 
@@ -210,7 +212,7 @@ Tab::onSaveOptionFile() {
   if (fileName.isEmpty())
     return;
 
-  Util::OptionFile::create(fileName, updateConfigFromControlValues().buildMkvmergeOptions());
+  Util::OptionFile::create(fileName, updateConfigFromControlValues().buildMkvmergeOptions().effectiveOptions(Util::EscapeJSON));
   settings.m_lastConfigDir.setPath(QFileInfo{fileName}.path());
   settings.save();
 

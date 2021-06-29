@@ -4,6 +4,7 @@
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
+#include "mkvtoolnix-gui/util/command_line_options.h"
 
 #include <QtContainerFwd>
 #include <QString>
@@ -39,7 +40,7 @@ public:
   virtual void loadSettings(MuxConfig::Loader &l);
   virtual void guessMIMEType();
 
-  void buildMkvmergeOptions(QStringList &options) const;
+  void buildMkvmergeOptions(Util::CommandLineOptions &options) const;
 };
 
 }}

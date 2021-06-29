@@ -12,6 +12,7 @@
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/merge/track.h"
+#include "mkvtoolnix-gui/util/command_line_options.h"
 #include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
@@ -438,7 +439,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
       opt.options << Q("--commentary-flag") << Q("%1:%2").arg(sid).arg(m_commentaryFlag ? Q("yes") : Q("no"));
 
     if (!m_tags.isEmpty())
-      opt.options << Q("--tags") << Q("%1:%2").arg(sid).arg(m_tags);
+      opt.options << Q("--tags") << Util::CommandLineOption::fileName(Q("%1:%2").arg(sid).arg(m_tags));
 
     if (m_setAspectRatio && !m_aspectRatio.isEmpty())
       opt.options << Q("--aspect-ratio") << Q("%1:%2").arg(sid).arg(m_aspectRatio);
@@ -459,14 +460,14 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
   }
 
   if (!m_timestamps.isEmpty())
-    opt.options << Q("--timestamps") << Q("%1:%2").arg(sid).arg(m_timestamps);
+    opt.options << Q("--timestamps") << Util::CommandLineOption::fileName(Q("%1:%2").arg(sid).arg(m_timestamps));
 
   if (m_fixBitstreamTimingInfo)
     opt.options << Q("--fix-bitstream-timing-information") << Q("%1:1").arg(sid);
 
   auto additionalOptions = Q(mtx::string::strip_copy(to_utf8(m_additionalOptions)));
   if (!additionalOptions.isEmpty())
-    opt.options += additionalOptions.replace(Q("<TID>"), sid).split(QRegularExpression{" +"});
+    opt.options << additionalOptions.replace(Q("<TID>"), sid).split(QRegularExpression{" +"});
 }
 
 QString

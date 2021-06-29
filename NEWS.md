@@ -64,6 +64,10 @@
   assumed encoding of the file will now be replaced by the Unicode
   "Replacement Character" U+FFFD instead of keeping the invalid characters,
   potentially violating the Matroska specs.
+* MKVToolNix GUI: multiplexer: the "show command line" dialog will now always
+  use backward slashes for the "Windows (cmd.exe)" mode and forward slashes
+  for the "Linux/Unix shells" mode, regardless of the operating system it's
+  currently running on. Fixes #3155.
 
 
 ## Build system changes

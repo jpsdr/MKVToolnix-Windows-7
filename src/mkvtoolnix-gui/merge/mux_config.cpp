@@ -654,10 +654,10 @@ MuxConfig::buildAppendToMapping(QHash<SourceFile *, unsigned int> const &fileNum
   return appendToMapping.isEmpty() ? QStringList{} : QStringList{} << Q("--append-to") << appendToMapping.join(Q(","));
 }
 
-QStringList
+Util::CommandLineOptions
 MuxConfig::buildMkvmergeOptions()
   const {
-  auto options = QStringList{};
+  auto options   = Util::CommandLineOptions{};
 
   auto &settings = Util::Settings::get();
   auto locale    = settings.localeToUse();
@@ -668,7 +668,7 @@ MuxConfig::buildMkvmergeOptions()
   if (Util::Settings::NormalPriority != settings.m_priority)
     options << Q("--priority") << settings.priorityAsString();
 
-  options << Q("--output") << m_destination;
+  options << Q("--output") << Util::CommandLineOption::fileName(m_destination);
 
   if (m_webmMode)
     options << Q("--webm");
@@ -700,7 +700,7 @@ MuxConfig::buildMkvmergeOptions()
       options << Q("--link");
   }
 
-  auto add = [&options](auto const &arg, auto const &value, std::optional<bool> predicate = {}) {
+  auto add = [&options](QString const &arg, Util::CommandLineOption const &value, std::optional<bool> predicate = {}) {
     if (predicate.value_or(!value.isEmpty()))
       options << arg << value;
   };
@@ -709,7 +709,7 @@ MuxConfig::buildMkvmergeOptions()
   add(Q("--segment-uid"),      m_segmentUIDs);
   add(Q("--link-to-previous"), m_previousSegmentUID);
   add(Q("--link-to-next"),     m_nextSegmentUID);
-  add(Q("--segmentinfo"),      m_segmentInfo);
+  add(Q("--segmentinfo"),      Util::CommandLineOption::fileName(m_segmentInfo));
 
   if (!m_chapters.isEmpty()) {
     add(Q("--chapter-language"),        Q(m_chapterLanguage.format()));
@@ -723,7 +723,7 @@ MuxConfig::buildMkvmergeOptions()
     if (m_chapters.toLower().endsWith(".ifo"))
       chapters += Q(":%1").arg(m_chapterTitleNumber);
 
-    options << Q("--chapters") << chapters;
+    options << Q("--chapters") << Util::CommandLineOption::fileName(chapters);
   }
 
   if (needChapterNameTemplateAndLanguage()) {
@@ -742,17 +742,16 @@ MuxConfig::buildMkvmergeOptions()
       options << Q("interval:%1").arg(m_chapterGenerationInterval);
   }
 
-  add(Q("--global-tags"), m_globalTags);
+  add(Q("--global-tags"), Util::CommandLineOption::fileName(m_globalTags));
 
   auto additionalOptions = Q(mtx::string::strip_copy(to_utf8(m_additionalOptions)));
   if (!additionalOptions.isEmpty())
-    options += Util::unescapeSplit(additionalOptions, Util::EscapeShellUnix);
+    options << Util::unescapeSplit(additionalOptions, Util::EscapeShellUnix);
 
   auto fileNumbers  = buildFileNumbers();
-  options          += buildTrackOrder(fileNumbers);
-  options          += buildAppendToMapping(fileNumbers);
-
-  Util::FileIdentifier::addProbeRangePercentageArg(options, probeRangePercentage);
+  options          << buildTrackOrder(fileNumbers);
+  options          << buildAppendToMapping(fileNumbers);
+  options          << Util::FileIdentifier::probeRangePercentageArgs(probeRangePercentage);
 
   return options;
 }

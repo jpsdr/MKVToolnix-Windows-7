@@ -39,7 +39,7 @@ public:
   virtual QString const &errorText() const;
 
 public:
-  static void addProbeRangePercentageArg(QStringList &args, double probeRangePercentage);
+  static QStringList probeRangePercentageArgs(double probeRangePercentage);
   static void cleanAllCacheFiles();
 
 protected:

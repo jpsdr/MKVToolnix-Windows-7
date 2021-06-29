@@ -281,7 +281,7 @@ SourceFile::findNthOrLastTrackOfType(TrackType type,
 }
 
 void
-SourceFile::buildMkvmergeOptions(QStringList &options)
+SourceFile::buildMkvmergeOptions(Util::CommandLineOptions &options)
   const {
   Q_ASSERT(!isAdditionalPart());
 
@@ -310,12 +310,12 @@ SourceFile::buildMkvmergeOptions(QStringList &options)
   buildTrackIdArg(TrackType::GlobalTags, Q(""),                  Q("--no-global-tags"));
   buildTrackIdArg(TrackType::Chapters,   Q(""),                  Q("--no-chapters"));
 
-  options += opt.options;
+  options << opt.options;
   if (m_appendedTo)
     options << Q("+");
-  options << Q("(") << m_fileName;
+  options << Q("(") << Util::CommandLineOption::fileName(m_fileName);
   for (auto const &additionalPart : m_additionalParts)
-    options << additionalPart->m_fileName;
+    options << Util::CommandLineOption::fileName(additionalPart->m_fileName);
   options << Q(")");
 
   for (auto const &appendedFile : m_appendedFiles)

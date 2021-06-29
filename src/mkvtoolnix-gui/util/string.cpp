@@ -206,12 +206,9 @@ escape(QStringList const &source,
     return escapeJson(source);
 
   auto escaped = QStringList{};
-  auto first   = true;
 
-  for (auto const &string : source) {
-    escaped << escape(string, first && (EscapeShellCmdExeArgument == mode) ? EscapeShellCmdExeProgram : mode);
-    first = false;
-  }
+  for (auto const &string : source)
+    escaped << escape(string, mode);
 
   return escaped;
 }

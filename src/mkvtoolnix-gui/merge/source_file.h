@@ -7,6 +7,7 @@
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
 #include "mkvtoolnix-gui/merge/track.h"
+#include "mkvtoolnix-gui/util/command_line_options.h"
 
 #include <QFileInfo>
 #include <QList>
@@ -72,7 +73,7 @@ public:
 
   virtual Track *findNthOrLastTrackOfType(TrackType type, int nth) const;
 
-  void buildMkvmergeOptions(QStringList &options) const;
+  void buildMkvmergeOptions(Util::CommandLineOptions &options) const;
 
 protected:
   virtual mtx::bcp47::language_c deriveLanguageFromFileName();

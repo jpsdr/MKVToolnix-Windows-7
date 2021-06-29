@@ -13,7 +13,7 @@
 namespace mtx::gui::Merge {
 
 CommandLineDialog::CommandLineDialog(QWidget *parent,
-                                     QStringList const &options,
+                                     Util::CommandLineOptions const &options,
                                      QString const &title)
   : QDialog{parent, Qt::Dialog | Qt::WindowMaximizeButtonHint | Qt::WindowCloseButtonHint}
   , ui{new Ui::CommandLineDialog}
@@ -54,17 +54,7 @@ CommandLineDialog::onEscapeModeChanged(int index) {
             : 2 == index ? Util::EscapeJSON
             :              Util::DontEscape;
 
-  auto opts = m_options;
-
-  if (mtx::included_in(mode, Util::EscapeJSON))
-    opts.removeFirst();
-
-#if defined(SYS_WINDOWS)
-  else if (mode == Util::EscapeShellUnix)
-    opts[0].replace(QChar{'\\'}, QChar{'/'});
-#endif  // SYS_WINDOWS
-
-  ui->commandLine->setPlainText(Util::escape(opts, mode).join(Q(" ")));
+  ui->commandLine->setPlainText(m_options.formatted(mode));
 }
 
 void

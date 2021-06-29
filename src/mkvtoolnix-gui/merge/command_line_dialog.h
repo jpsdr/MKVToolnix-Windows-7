@@ -5,6 +5,8 @@
 #include <QAction>
 #include <QDialog>
 
+#include "mkvtoolnix-gui/util/command_line_options.h"
+
 namespace mtx::gui::Merge {
 
 namespace Ui {
@@ -17,10 +19,10 @@ class CommandLineDialog : public QDialog {
 protected:
   // UI stuff:
   std::unique_ptr<Ui::CommandLineDialog> ui;
-  QStringList const m_options;
+  Util::CommandLineOptions const m_options;
 
 public:
-  explicit CommandLineDialog(QWidget *parent, QStringList const &options, QString const &title);
+  explicit CommandLineDialog(QWidget *parent, Util::CommandLineOptions const &options, QString const &title);
   ~CommandLineDialog();
 
 public Q_SLOTS:

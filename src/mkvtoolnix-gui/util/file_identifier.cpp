@@ -63,8 +63,7 @@ FileIdentifier::identify() {
   auto &cfg = Settings::get();
 
   auto args = QStringList{} << "--output-charset" << "utf-8" << "--identification-format" << "json" << "--identify" << p->m_fileName;
-
-  addProbeRangePercentageArg(args, cfg.m_probeRangePercentage);
+  args     += probeRangePercentageArgs(cfg.m_probeRangePercentage);
 
   if (cfg.m_defaultAdditionalMergeOptions.contains(Q("keep_last_chapter_in_mpls")))
     args << "--engage" << "keep_last_chapter_in_mpls";
@@ -300,22 +299,23 @@ FileIdentifier::parseTrack(QVariantMap const &obj) {
   p->m_file->m_tracks << track;
 }
 
-void
-FileIdentifier::addProbeRangePercentageArg(QStringList &args,
-                                           double probeRangePercentage) {
+QStringList
+FileIdentifier::probeRangePercentageArgs(double probeRangePercentage) {
   if (probeRangePercentage <= 0)
-    return;
+    return {};
 
   auto integerPart = static_cast<unsigned int>(std::round(probeRangePercentage * 100)) / 100;
   auto decimalPart = static_cast<unsigned int>(std::round(probeRangePercentage * 100)) % 100;
 
   if (integerPart >= 100)
-    return;
+    return {};
 
   if (   (integerPart != 0)
       || (   (decimalPart !=  0)
           && (decimalPart != 30)))
-    args << "--probe-range-percentage" << Q(fmt::format("{0}.{1:02}", integerPart, decimalPart));
+    return QStringList{} << "--probe-range-percentage" << Q(fmt::format("{0}.{1:02}", integerPart, decimalPart));
+
+  return {};
 }
 
 QString

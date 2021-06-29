@@ -9,6 +9,7 @@
 #include <QVector>
 
 #include "common/bcp47.h"
+#include "mkvtoolnix-gui/util/command_line_options.h"
 #include "mkvtoolnix-gui/util/config_file.h"
 
 class QTemporaryFile;
@@ -97,7 +98,7 @@ public:
   virtual void reset();
 
   QString toString() const;
-  QStringList buildMkvmergeOptions() const;
+  Util::CommandLineOptions buildMkvmergeOptions() const;
 
   virtual bool hasSourceFileWithTitle() const;
   virtual bool needChapterNameTemplateAndLanguage() const;
