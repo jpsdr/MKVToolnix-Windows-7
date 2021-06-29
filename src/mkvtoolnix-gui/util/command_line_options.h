@@ -3,7 +3,7 @@
 #include "common/common_pch.h"
 
 #include <QString>
-#include <QtContainerFwd>
+#include <QVector>
 
 #include "mkvtoolnix-gui/util/string.h"
 
