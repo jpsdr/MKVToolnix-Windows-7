@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2021-06-27 19:10+0200\n"
-"PO-Revision-Date: 2021-06-26 21:12+0000\n"
+"PO-Revision-Date: 2021-06-28 10:06+0000\n"
 "Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/bg/)\n"
 "Language: bg\n"
@@ -3582,12 +3582,12 @@ msgstr "Празно име на файл не е валидно.\n"
 #: src/common/property_element.cpp:122
 #, no-c-format
 msgid "An escaped filename corresponding to the next segment."
-msgstr ""
+msgstr "Име (с escape-нати специални символи) на файлa за следващия сегмент."
 
 #: src/common/property_element.cpp:121
 #, no-c-format
 msgid "An escaped filename corresponding to the previous segment."
-msgstr ""
+msgstr "Име (с escape-нати специални символи) на файлa за предишния сегмент."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:380
 #, no-c-format
@@ -6372,7 +6372,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2015
 #, no-c-format
 msgid "File && track colors"
-msgstr ""
+msgstr "Цветови връзки файл-пътечка"
 
 #: src/merge/generic_reader.cpp:291
 #, no-c-format
@@ -6539,7 +6539,7 @@ msgstr "За по-задълбочено обяснение за това как
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:370
 #, no-c-format
 msgid "For example, a file containing audio tracks but no video tracks will be inserted before the first file that contains neither video nor audio tracks."
-msgstr ""
+msgstr "Например, файл, съдържащ само аудио пътечки без видео, ще бъде добавен преди файл, нямащ нито аудио, нито видео пътечки."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 #, no-c-format
@@ -6989,14 +6989,14 @@ msgid "If checked, the program will ask for confirmation before closing or reloa
 msgstr "Ако е отбелязано, програмата ще иска потвърждение преди затваряне или презареждане на табове, които са били модифицирани."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:382
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If disabled, all files selected for adding will always be added regardless of their names."
-msgstr "Ако е включено, пътечки от този тип винаги ще бъдат маркирани за копиране, без значение от езика им."
+msgstr "Ако е изключено, всички избрани за добавяне файлове винаги ще се добавят независимо от имената им."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:372
 #, no-c-format
 msgid "If disabled, files and tracks will be inserted after all existing files and tracks."
-msgstr ""
+msgstr "Ако е изключено, новодобавените файлове и пътечки просто ще бъдат сложени най-накрая, след текущите файлове и пътечки."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:295
 #, no-c-format
@@ -7155,7 +7155,7 @@ msgstr "Ако изберете „не“, тогава съответните 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:381
 #, no-c-format
 msgid "If such a sequence is detected, only the first file is added while the second and following files in the sequence are appended to the first one."
-msgstr ""
+msgstr "Ако такава последователност бъде засечена, само първият файл бива добавен, а останалите файлове от поредицата биват добавените като разширение на първия."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:216
 #, no-c-format
@@ -7784,7 +7784,7 @@ msgstr "Игнорира се за XML файлове с епизоди."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:378
 #, no-c-format
 msgid "It tries to detect sequences of names that likely belong to the same movie by splitting the name into three parts: a prefix, a running number and a suffix that doesn't contain digits."
-msgstr ""
+msgstr "Прави се опит да бъдат засечени последователности от имена на файлове, които е вероятно да са от един и също филм. Името на всеки файл се разделя на 3 части: представка, число, наставка без цифри."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1904
 #, no-c-format
@@ -8512,7 +8512,7 @@ msgstr "Имена"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:379
 #, no-c-format
 msgid "Names are considered to be in sequence when the previous file name's prefix & suffix match the current file name's prefix & suffix and the running number is incremented by one."
-msgstr ""
+msgstr "Имената биват засечени като последователност, когато представката и наставка от предишния файл съвпадат с тези на текущия файл, а числото е увеличено с единица."
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:73
 #, no-c-format
@@ -10142,9 +10142,9 @@ msgid "Revert the entry to its default value."
 msgstr "Върни записа към стойността му по подразбиране."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2017
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Revert to default colors"
-msgstr "Върни записа към стойността му по подразбиране."
+msgstr "Върни цветовете по подразбиране"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:821
 #, no-c-format
@@ -14456,7 +14456,7 @@ msgstr "Когато се добавя файл, името му се скани
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2005
 #, no-c-format
 msgid "When adding files via &drag && drop/copy && paste:"
-msgstr "При добавяне на файлове с &влачене или поставяне:"
+msgstr "При до&влачване или поставяне на файлове:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2004
 #, no-c-format
