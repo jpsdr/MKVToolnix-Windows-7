@@ -15,7 +15,13 @@ private:
   bool m_isFileName{};
 
 public:
+  CommandLineOption() = default;
+  CommandLineOption(CommandLineOption const &) = default;
+  CommandLineOption(CommandLineOption &&) = default;
   CommandLineOption(QString const &option, bool isFileName = false);
+
+  CommandLineOption &operator =(CommandLineOption const &) = default;
+  CommandLineOption &operator =(CommandLineOption &&) = default;
 
   QString effectiveOption(EscapeMode escapeMode) const;
 
