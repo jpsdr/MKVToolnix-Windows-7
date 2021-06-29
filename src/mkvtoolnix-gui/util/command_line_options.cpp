@@ -15,7 +15,7 @@ CommandLineOption::CommandLineOption(QString const &option,
 }
 
 QString
-CommandLineOption::effectiveOption([[maybe_unused]] Util::EscapeMode escape)
+CommandLineOption::effectiveOption(Util::EscapeMode escape)
   const {
   if (!m_isFileName)
     return m_option;
