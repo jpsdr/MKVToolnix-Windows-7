@@ -48,7 +48,7 @@ public:
 
 public:
   explicit SourceFile(QString const &fileName = QString{""});
-  SourceFile(SourceFile const &other) = default;
+  SourceFile(SourceFile const &other);
   virtual ~SourceFile();
 
   SourceFile &operator =(SourceFile const &other);
