@@ -1066,6 +1066,7 @@ $common_libs = [
   :fmt,
   :stdcppfs,
   :qt_non_gui,
+  :gmp,
   "-lstdc++",
 ]
 

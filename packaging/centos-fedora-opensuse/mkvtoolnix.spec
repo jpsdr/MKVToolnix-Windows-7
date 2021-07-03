@@ -20,6 +20,7 @@ BuildRequires: flac-devel
 BuildRequires: fmt-devel
 BuildRequires: gettext-devel
 BuildRequires: glibc-devel
+BuildRequires: gmp-devel
 BuildRequires: gtest-devel
 BuildRequires: libdvdread-devel
 BuildRequires: libogg-devel
