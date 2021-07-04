@@ -2199,7 +2199,7 @@ qtmp4_demuxer_c::to_nsecs(int64_t value,
   if (!actual_time_scale)
     return 0;
 
-  auto value128  = static_cast<boost::multiprecision::mpz_int>(value);
+  auto value128  = static_cast<mtx_mp_int_t>(value);
   value128      *= 1'000'000'000ll;
   value128      /= actual_time_scale;
 

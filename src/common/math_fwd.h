@@ -20,3 +20,4 @@ namespace mtx::math {
 }
 
 using int64_rational_c = boost::rational<int64_t>;
+using mtx_mp_int_t     = boost::multiprecision::number<boost::multiprecision::gmp_int, boost::multiprecision::et_off>;

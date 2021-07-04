@@ -44,6 +44,7 @@
 #include <fmt/ostream.h>
 
 #include <boost/algorithm/string.hpp>
+#include <boost/multiprecision/gmp.hpp>
 #include <boost/rational.hpp>
 
 namespace balg = boost::algorithm;
