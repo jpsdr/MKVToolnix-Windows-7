@@ -240,6 +240,15 @@ function build_gettext {
     --disable-shared
 }
 
+function build_gmp {
+  build_package gmp \
+    --prefix=${TARGET} \
+    --enable-shared=no \
+    --enable-static \
+    --enable-cxx \
+    --without-readline
+}
+
 function build_pcre2 {
   build_package pcre2 \
     --prefix=${TARGET} \
@@ -641,6 +650,7 @@ if [[ -z $@ ]]; then
   build_gettext
   build_cmark
   build_pcre2
+  build_gmp
   build_boost
   build_qt
   build_configured_mkvtoolnix
