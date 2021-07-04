@@ -15,8 +15,8 @@
 
 #include "common/common_pch.h"
 
-using mtx_mp_rational_t = boost::multiprecision::number<boost::multiprecision::gmp_rational, boost::multiprecision::et_off>;
-using mtx_mp_int_t      = boost::multiprecision::number<boost::multiprecision::gmp_int,      boost::multiprecision::et_off>;
+using mtx_mp_rational_t = boost::multiprecision::number<boost::multiprecision::backends::gmp_rational, boost::multiprecision::et_off>;
+using mtx_mp_int_t      = boost::multiprecision::number<boost::multiprecision::backends::gmp_int,      boost::multiprecision::et_off>;
 
 namespace mtx {
 
@@ -29,11 +29,22 @@ template<typename Tnumerator,
 mtx_mp_rational_t
 rational(Tnumerator &&numerator,
          Tdenominator &&denominator) {
-#if BOOST_VERSION >= 107100
-  return mtx_mp_rational_t{std::forward<Tnumerator>(numerator), std::forward<Tdenominator>(denominator)};
-#else
   return mtx_mp_rational_t{std::forward<Tnumerator>(numerator)} / mtx_mp_rational_t{std::forward<Tdenominator>(denominator)};
-#endif
+}
+
+// A simple static_cast<int64_t>(boost::multiprecision::mpq_rational)
+// fails (yields std::numeric_limits<int64_t>::max()) on certain
+// platforms, especially 32-bit ones. Conversion via
+// boost::multiprecision::int128_t first seems to be a workaround. See
+// https://github.com/boostorg/multiprecision/issues/342
+inline int64_t
+to_int(mtx_mp_rational_t const &value) {
+  return static_cast<int64_t>(static_cast<boost::multiprecision::int128_t>(value));
+}
+
+inline uint64_t
+to_uint(mtx_mp_rational_t const &value) {
+  return static_cast<uint64_t>(static_cast<boost::multiprecision::uint128_t>(value));
 }
 
 namespace math {

@@ -944,7 +944,7 @@ qtmp4_reader_c::handle_mvhd_atom(qt_atom_t atom,
   auto duration = get_uint32_be(&mvhd.duration);
 
   if ((duration != std::numeric_limits<uint32_t>::max()) && (m_time_scale != 0))
-    m_duration = static_cast<uint64_t>(mtx_mp_rational_t{static_cast<int64_t>(duration), m_time_scale} * 1'000'000'000ull);
+    m_duration = mtx::to_uint(mtx::rational(duration, m_time_scale) * 1'000'000'000ull);
 
   mxdebug_if(m_debug_headers, fmt::format("{0}Time scale: {1} duration: {2}\n", space(level * 2 + 1), m_time_scale, m_duration ? mtx::string::format_timestamp(*m_duration) : "—"s));
 }
@@ -1731,7 +1731,7 @@ qtmp4_reader_c::create_video_packetizer_av1(qtmp4_demuxer_c &dmx) {
   dmx.ptzr            = add_packetizer(new av1_video_packetizer_c(this, m_ti));
 
   if (dmx.frame_rate)
-    ptzr(dmx.ptzr).set_track_default_duration(static_cast<int64_t>(mtx_mp_rational_t{boost::multiprecision::denominator(dmx.frame_rate), boost::multiprecision::numerator(dmx.frame_rate)} * 1'000'000'000ll));
+    ptzr(dmx.ptzr).set_track_default_duration(mtx::to_int(mtx_mp_rational_t{boost::multiprecision::denominator(dmx.frame_rate), boost::multiprecision::numerator(dmx.frame_rate)} * 1'000'000'000ll));
 
   show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
@@ -1752,7 +1752,7 @@ qtmp4_reader_c::create_video_packetizer_mpegh_p2_es(qtmp4_demuxer_c &dmx) {
   ptzr(dmx.ptzr).set_video_pixel_dimensions(dmx.v_width, dmx.v_height);
 
   if (boost::multiprecision::numerator(dmx.frame_rate)) {
-    auto duration = static_cast<int64_t>(mtx_mp_rational_t{boost::multiprecision::denominator(dmx.frame_rate), boost::multiprecision::numerator(dmx.frame_rate)} * 1'000'000'000ll);
+    auto duration = mtx::to_int(mtx_mp_rational_t{boost::multiprecision::denominator(dmx.frame_rate), boost::multiprecision::numerator(dmx.frame_rate)} * 1'000'000'000ll);
     ptzr(dmx.ptzr).set_track_default_duration(duration);
   }
 
@@ -1766,7 +1766,7 @@ qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx) {
   dmx.ptzr            = add_packetizer(packetizer);
 
   if (boost::multiprecision::numerator(dmx.frame_rate)) {
-    auto duration = static_cast<int64_t>(mtx_mp_rational_t{boost::multiprecision::denominator(dmx.frame_rate), boost::multiprecision::numerator(dmx.frame_rate)} * 1'000'000'000ll);
+    auto duration = mtx::to_int(mtx_mp_rational_t{boost::multiprecision::denominator(dmx.frame_rate), boost::multiprecision::numerator(dmx.frame_rate)} * 1'000'000'000ll);
     packetizer->set_track_default_duration(duration);
   }
 
@@ -1797,7 +1797,7 @@ qtmp4_reader_c::create_video_packetizer_vpx(qtmp4_demuxer_c &dmx) {
   ptzr(dmx.ptzr).set_video_pixel_dimensions(dmx.v_width, dmx.v_height);
 
   if (boost::multiprecision::numerator(dmx.frame_rate)) {
-    auto duration = static_cast<int64_t>(mtx_mp_rational_t{boost::multiprecision::denominator(dmx.frame_rate), boost::multiprecision::numerator(dmx.frame_rate)} * 1'000'000'000ll);
+    auto duration = mtx::to_int(mtx_mp_rational_t{boost::multiprecision::denominator(dmx.frame_rate), boost::multiprecision::numerator(dmx.frame_rate)} * 1'000'000'000ll);
     ptzr(dmx.ptzr).set_track_default_duration(duration);
   }
 
@@ -2128,7 +2128,7 @@ void
 qtmp4_demuxer_c::calculate_frame_rate() {
   if ((1 == durmap_table.size()) && (0 != durmap_table[0].duration) && ((0 != sample_size) || (0 == frame_offset_table.size()))) {
     // Constant frame_rate. Let's set the default duration.
-    frame_rate = mtx::rational(time_scale, static_cast<int64_t>(durmap_table[0].duration));
+    frame_rate = mtx::rational(time_scale, durmap_table[0].duration);
     mxdebug_if(m_debug_frame_rate, fmt::format("calculate_frame_rate: case 1: {0}/{1}\n", boost::multiprecision::numerator(frame_rate), boost::multiprecision::denominator(frame_rate)));
 
     return;
@@ -2137,7 +2137,7 @@ qtmp4_demuxer_c::calculate_frame_rate() {
   if (('v' == type) && time_scale && global_duration && (sample_table.size() < 2)) {
     frame_rate = mtx::frame_timing::determine_frame_rate(static_cast<uint64_t>(global_duration) * 1'000'000'000ull / static_cast<uint64_t>(time_scale));
     if (frame_rate)
-      m_use_frame_rate_for_duration = static_cast<int64_t>(mtx_mp_rational_t{1'000'000'000ll} / frame_rate);
+      m_use_frame_rate_for_duration = mtx::to_int(mtx_mp_rational_t{1'000'000'000ll} / frame_rate);
 
     mxdebug_if(m_debug_frame_rate,
                fmt::format("calculate_frame_rate: case 2: video track with time scale {0} & duration {1} result: {2}\n",
@@ -2165,7 +2165,7 @@ qtmp4_demuxer_c::calculate_frame_rate() {
 
   if (frame_rate) {
     if ('v' == type)
-      m_use_frame_rate_for_duration = static_cast<int64_t>(mtx_mp_rational_t{1'000'000'000ll} / frame_rate);
+      m_use_frame_rate_for_duration = mtx::to_int(mtx_mp_rational_t{1'000'000'000ll} / frame_rate);
 
     mxdebug_if(m_debug_frame_rate,
                fmt::format("calculate_frame_rate: case 4: duration {0} num_frames {1} frame_duration {2} frame_rate {3}/{4} use_frame_rate_for_duration {5}\n",
@@ -2199,11 +2199,11 @@ qtmp4_demuxer_c::to_nsecs(int64_t value,
   if (!actual_time_scale)
     return 0;
 
-  auto value128  = static_cast<mtx_mp_int_t>(value);
-  value128      *= 1'000'000'000ll;
-  value128      /= actual_time_scale;
+  auto value_mp  = static_cast<mtx_mp_int_t>(value);
+  value_mp      *= 1'000'000'000ll;
+  value_mp      /= actual_time_scale;
 
-  return static_cast<int64_t>(value128);
+  return mtx::to_int(value_mp);
 }
 
 void

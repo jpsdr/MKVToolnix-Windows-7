@@ -92,7 +92,7 @@ uint64_t
 parser_c::get_next_timestamp() {
   auto duration = p->forced_default_duration ? p->forced_default_duration : p->bitstream_default_duration;
 
-  return static_cast<int64_t>(duration * p->frame_number++);
+  return mtx::to_int(duration * p->frame_number++);
 }
 
 uint64_t
@@ -242,7 +242,7 @@ parser_c::parse_timing_info(mtx::bits::reader_c &r) {
                          p->time_scale,
                          p->equal_picture_interval,
                          p->num_ticks_per_picture,
-                         mtx::string::format_timestamp(static_cast<uint64_t>(p->bitstream_default_duration))));
+                         mtx::string::format_timestamp(p->bitstream_default_duration)));
 }
 
 void
@@ -506,7 +506,7 @@ parser_c::get_frame_duration()
   if (!p->sequence_header_obu || !p->time_scale)
     return {};
 
-  return mtx::rational(static_cast<int64_t>(p->num_units_in_display_tick) * 1'000'000'000ll, p->time_scale);
+  return mtx::rational(p->num_units_in_display_tick, p->time_scale) * 1'000'000'000ll;
 }
 
 bool

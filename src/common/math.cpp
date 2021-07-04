@@ -60,8 +60,8 @@ clamp_values_to(mtx_mp_rational_t const &r,
   // 333 / 1000 , clamp = 500, mul = 1/2 = 1/(max/clamp) = clamp/max
 
   auto mult = mtx::rational(max_value, std::max(num, den));
-  den       = static_cast<int64_t>(den * mult);
+  den       = mtx::to_int(den * mult);
 
-  return mtx::rational(static_cast<int64_t>(num * mult), den ? den : 1);
+  return mtx::rational(num * mult, den ? den : 1);
 }
 }

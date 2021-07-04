@@ -262,12 +262,12 @@ avi_reader_c::handle_video_aspect_ratio() {
   auto aspect_ratio = mtx_mp_rational_t{x, y};
 
   if (aspect_ratio >= mtx_mp_rational_t{m_video_width, m_video_height}) {
-    m_video_display_width  = static_cast<int64_t>(aspect_ratio * m_video_height);
+    m_video_display_width  = mtx::to_int(aspect_ratio * m_video_height);
     m_video_display_height = m_video_height;
 
   } else {
     m_video_display_width  = m_video_width;
-    m_video_display_height = static_cast<int64_t>(mtx_mp_rational_t{y, x} * m_video_width);
+    m_video_display_height = mtx::to_int(mtx_mp_rational_t{y, x} * m_video_width);
   }
 
   mxdebug_if(m_debug_aspect_ratio, fmt::format("handle_video_aspect_ratio: frame aspect ratio {0}:{1} pixel dimensions {2}x{3} display dimensions {4}x{5}\n",

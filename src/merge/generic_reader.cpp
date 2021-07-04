@@ -438,7 +438,7 @@ generic_reader_c::calculate_probe_range(int64_t file_size,
   static debugging_option_c s_debug{"probe_range"};
 
   auto factor      = mtx_mp_rational_t{1, 100} * s_probe_range_percentage;
-  auto probe_range = static_cast<int64_t>(factor * file_size);
+  auto probe_range = mtx::to_int(factor * file_size);
   auto to_use      = std::max(fixed_minimum, probe_range);
 
   mxdebug_if(s_debug,

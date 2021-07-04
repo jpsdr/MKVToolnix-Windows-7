@@ -984,10 +984,10 @@ adjust_timestamps(EbmlMaster &master,
     auto end   = FindChild<KaxChapterTimeEnd>(atom);
 
     if (start)
-      start->SetValue(std::max<int64_t>(static_cast<int64_t>(factor * mtx_mp_rational_t{start->GetValue()}) + offset, 0));
+      start->SetValue(std::max<int64_t>(mtx::to_int(factor * mtx_mp_rational_t{start->GetValue()}) + offset, 0));
 
     if (end)
-      end->SetValue(std::max<int64_t>(static_cast<int64_t>(factor * mtx_mp_rational_t{end->GetValue()}) + offset, 0));
+      end->SetValue(std::max<int64_t>(mtx::to_int(factor * mtx_mp_rational_t{end->GetValue()}) + offset, 0));
   }
 
   for (master_idx = 0; master.ListSize() > master_idx; master_idx++) {

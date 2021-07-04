@@ -18,6 +18,7 @@
 #include <ostream>
 #include <sstream>
 
+#include "common/math_fwd.h"
 #include "common/strings/editing.h"
 #include "common/timestamp.h"
 
@@ -44,6 +45,12 @@ format_timestamp(basic_timestamp_c<T> const &timestamp,
   if (!timestamp.valid())
     return "<InvTC>";
   return format_timestamp(timestamp.to_ns(), format);
+}
+
+inline std::string
+format_timestamp(mtx_mp_rational_t const &timestamp,
+                 unsigned int precision = 9) {
+  return format_timestamp(mtx::to_int(timestamp), precision);
 }
 
 std::string format_file_size(int64_t size);
