@@ -19,11 +19,11 @@ namespace mtx::frame_timing {
 
 struct common_frame_rate_t {
   int64_t duration;
-  int64_rational_c frame_rate;
+  mtx_mp_rational_t frame_rate;
 };
 
 extern std::vector<common_frame_rate_t> g_common_frame_rates;
 
-int64_rational_c determine_frame_rate(int64_t duration, int64_t max_difference = 20'000);
+mtx_mp_rational_t determine_frame_rate(int64_t duration, int64_t max_difference = 20'000);
 
 }

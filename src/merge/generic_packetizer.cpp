@@ -122,7 +122,7 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   else if (mtx::includes(m_ti.m_timestamp_syncs, -1))
     m_ti.m_tcsync = m_ti.m_timestamp_syncs[-1];
   if (0 == m_ti.m_tcsync.factor)
-    m_ti.m_tcsync.factor = int64_rational_c{1, 1};
+    m_ti.m_tcsync.factor = mtx_mp_rational_t{1, 1};
 
   // Let's see if the user specified "reset timestamps" for this track.
   m_ti.m_reset_timestamps = mtx::includes(m_ti.m_reset_timestamps_specs, m_ti.m_id) || mtx::includes(m_ti.m_reset_timestamps_specs, -1);

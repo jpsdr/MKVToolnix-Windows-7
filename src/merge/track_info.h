@@ -44,7 +44,7 @@ enum cue_strategy_e {
 
 struct timestamp_sync_t {
   int64_t displacement{};
-  int64_rational_c factor{1, 1};
+  mtx_mp_rational_t factor{1, 1};
 };
 
 struct display_properties_t {

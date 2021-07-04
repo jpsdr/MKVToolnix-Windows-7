@@ -973,7 +973,7 @@ move_by_edition(KaxChapters &dst,
 void
 adjust_timestamps(EbmlMaster &master,
                   int64_t offset,
-                  int64_rational_c const &factor) {
+                  mtx_mp_rational_t const &factor) {
   size_t master_idx;
   for (master_idx = 0; master.ListSize() > master_idx; master_idx++) {
     if (!Is<KaxChapterAtom>(master[master_idx]))
@@ -984,10 +984,10 @@ adjust_timestamps(EbmlMaster &master,
     auto end   = FindChild<KaxChapterTimeEnd>(atom);
 
     if (start)
-      start->SetValue(std::max<int64_t>(boost::rational_cast<int64_t>(factor * int64_rational_c{start->GetValue(), 1}) + offset, 0));
+      start->SetValue(std::max<int64_t>(boost::rational_cast<int64_t>(factor * mtx_mp_rational_t{start->GetValue(), 1}) + offset, 0));
 
     if (end)
-      end->SetValue(std::max<int64_t>(boost::rational_cast<int64_t>(factor * int64_rational_c{end->GetValue(), 1}) + offset, 0));
+      end->SetValue(std::max<int64_t>(boost::rational_cast<int64_t>(factor * mtx_mp_rational_t{end->GetValue(), 1}) + offset, 0));
   }
 
   for (master_idx = 0; master.ListSize() > master_idx; master_idx++) {

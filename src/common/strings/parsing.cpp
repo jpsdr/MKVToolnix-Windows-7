@@ -34,7 +34,7 @@ static QRegularExpression s_floating_point_number_re{"^(-?)([0-9]+)?(?:\\.([0-9]
 
 bool
 parse_floating_point_number_as_rational(std::string const &string,
-                                        int64_rational_c &value) {
+                                        mtx_mp_rational_t &value) {
   if (string.empty())
     return false;
 
@@ -50,7 +50,7 @@ parse_floating_point_number_as_rational(std::string const &string,
     sign = -1;
 
   if (!matches.capturedLength(3)) {
-    value = int64_rational_c{sign * numerator, 1};
+    value = mtx_mp_rational_t{sign * numerator, 1};
     return true;
   }
 
@@ -62,13 +62,13 @@ parse_floating_point_number_as_rational(std::string const &string,
   for (auto idx = 0u; idx < to_utf8(matches.captured(3)).length(); ++idx)
     shift *= 10;
 
-  value = int64_rational_c{sign * (numerator * shift + fractional), shift};
+  value = mtx_mp_rational_t{sign * (numerator * shift + fractional), shift};
   return true;
 }
 
 bool
 parse_number_as_rational(std::string const &string,
-                         int64_rational_c &value) {
+                         mtx_mp_rational_t &value) {
   auto parts = split(string, ".", 2);
 
   while (parts.size() < 2)
@@ -78,8 +78,8 @@ parse_number_as_rational(std::string const &string,
   if (!parts[0].length() || !parse_number(parts[0], num))
     return false;
 
-  auto p1        = int64_rational_c{num, 1},
-    p2           = int64_rational_c{0, 1};
+  auto p1        = mtx_mp_rational_t{num, 1},
+    p2           = mtx_mp_rational_t{0, 1};
   auto const len = parts[1].length();
 
   if (len > 0) {
@@ -91,7 +91,7 @@ parse_number_as_rational(std::string const &string,
     for (auto idx = 0u; idx < len; ++idx)
       den *= 10;
 
-    p2 = int64_rational_c{num, den};
+    p2 = mtx_mp_rational_t{num, den};
   }
 
   value = p1 + p2;
@@ -278,7 +278,7 @@ parse_duration_number_with_unit(const std::string &s,
   }
 
   std::string unit, s_n, s_d;
-  int64_rational_c r{0, 1};
+  mtx_mp_rational_t r{0, 1};
   auto qs = Q(s);
 
   if (auto matches = re1->match(qs); matches.hasMatch()) {
@@ -293,7 +293,7 @@ parse_duration_number_with_unit(const std::string &s,
     if (!parse_number(to_utf8(matches.captured(1)), n) || !parse_number(to_utf8(matches.captured(2)), d))
       return false;
 
-    r = int64_rational_c{n, d};
+    r = mtx_mp_rational_t{n, d};
 
     if (matches.capturedLength(3))
       unit = to_utf8(matches.captured(3));
@@ -305,18 +305,18 @@ parse_duration_number_with_unit(const std::string &s,
 
   if ((unit == "fps") || (unit == "p") || (unit == "i")) {
     if (unit == "i")
-      r *= int64_rational_c{1, 2};
+      r *= mtx_mp_rational_t{1, 2};
 
-    if (int64_rational_c{2396, 100} == r)
-      r = int64_rational_c{24000, 1001};
+    if (mtx_mp_rational_t{2396, 100} == r)
+      r = mtx_mp_rational_t{24000, 1001};
 
-    else if (int64_rational_c{29976, 1000} == r)
-      r = int64_rational_c{30000, 1001};
+    else if (mtx_mp_rational_t{29976, 1000} == r)
+      r = mtx_mp_rational_t{30000, 1001};
 
-    else if (int64_rational_c{5994, 100} == r)
-      r = int64_rational_c{60000, 1001};
+    else if (mtx_mp_rational_t{5994, 100} == r)
+      r = mtx_mp_rational_t{60000, 1001};
 
-    value = boost::rational_cast<int64_t>(int64_rational_c{1000000000ll, 1} / r);
+    value = boost::rational_cast<int64_t>(mtx_mp_rational_t{1000000000ll, 1} / r);
 
     return true;
   }
@@ -336,7 +336,7 @@ parse_duration_number_with_unit(const std::string &s,
   else if (unit != "s")
     return false;
 
-  value = boost::rational_cast<int64_t>(r * int64_rational_c{multiplier, 1});
+  value = boost::rational_cast<int64_t>(r * mtx_mp_rational_t{multiplier, 1});
 
   return true;
 }

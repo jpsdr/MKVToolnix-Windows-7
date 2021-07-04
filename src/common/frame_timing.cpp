@@ -32,7 +32,7 @@ std::vector<common_frame_rate_t> g_common_frame_rates{
   { 1'000'000'000ll * 1'001 / 30'000, { 30'000, 1'001 } }, //  29.97 fps
 };
 
-int64_rational_c
+mtx_mp_rational_t
 determine_frame_rate(int64_t duration,
                      int64_t max_difference) {
   static debugging_option_c s_debug{"determine_frame_rate|fix_bitstream_timing_info"};

@@ -494,7 +494,7 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu,
       && sps_info.ar_found
       && (0 != sps_info.par_den)) {
     m_par_found = true;
-    m_par       = int64_rational_c(sps_info.par_num, sps_info.par_den);
+    m_par       = mtx_mp_rational_t(sps_info.par_num, sps_info.par_den);
   }
 }
 
@@ -1066,7 +1066,7 @@ es_parser_c::has_par_been_found()
   return m_par_found;
 }
 
-int64_rational_c const &
+mtx_mp_rational_t const &
 es_parser_c::get_par()
   const {
   assert(m_hevcc_ready && m_par_found);

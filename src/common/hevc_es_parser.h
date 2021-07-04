@@ -66,7 +66,7 @@ protected:
   int m_prev_pic_order_cnt_lsb{}, m_prev_pic_order_cnt_msb{};
 
   bool m_par_found{};
-  int64_rational_c m_par{};
+  mtx_mp_rational_t m_par{};
 
   std::deque<frame_t> m_frames, m_frames_out;
   std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
@@ -206,7 +206,7 @@ public:
   size_t get_num_frame_slices() const;
 
   bool has_par_been_found() const;
-  int64_rational_c const &get_par() const;
+  mtx_mp_rational_t const &get_par() const;
   std::pair<int64_t, int64_t> const get_display_dimensions(int width = -1, int height = -1) const;
 
   static std::string get_nalu_type_name(int type);

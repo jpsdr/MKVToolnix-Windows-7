@@ -649,7 +649,7 @@ parse_arg_sync(std::string s,
       mtx::string::parse_floating_point_number_as_rational(linear, tcsync.factor);
 
     else {
-      int64_rational_c numerator, denominator;
+      mtx_mp_rational_t numerator, denominator;
       std::string div = linear.substr(idx + 1);
       linear.erase(idx);
       if (   !mtx::string::parse_floating_point_number_as_rational(linear, numerator)
@@ -659,7 +659,7 @@ parse_arg_sync(std::string s,
 
       tcsync.factor = numerator / denominator;
     }
-    if ((tcsync.factor) <= int64_rational_c{0, 1})
+    if ((tcsync.factor) <= mtx_mp_rational_t{0, 1})
       mxerror(fmt::format(Y("Invalid sync option specified in '{0} {1}'. The linear sync value may not be equal to or smaller than zero.\n"), opt, orig));
 
   }
@@ -2075,7 +2075,7 @@ parse_arg_probe_range(std::optional<std::string> next_arg) {
   if (!next_arg)
     mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), "--probe-range-percentage"));
 
-  int64_rational_c probe_range_percentage{0, 1};
+  mtx_mp_rational_t probe_range_percentage{0, 1};
   if (   !mtx::string::parse_number_as_rational(*next_arg, probe_range_percentage)
       || !probe_range_percentage.denominator()
       || (boost::rational_cast<double>(probe_range_percentage) <= 0)

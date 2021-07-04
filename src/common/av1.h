@@ -108,7 +108,7 @@ public:
   void debug_obu_types(memory_c const &buffer);
 
   std::pair<unsigned int, unsigned int> get_pixel_dimensions() const;
-  int64_rational_c get_frame_duration() const;
+  mtx_mp_rational_t get_frame_duration() const;
   bool headers_parsed() const;
   memory_cptr get_av1c() const;
 

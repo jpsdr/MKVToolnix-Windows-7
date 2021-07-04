@@ -500,7 +500,7 @@ parser_c::get_pixel_dimensions()
   return { p->max_frame_width, p->max_frame_height };
 }
 
-int64_rational_c
+mtx_mp_rational_t
 parser_c::get_frame_duration()
   const {
   if (!p->sequence_header_obu || !p->time_scale)

@@ -251,7 +251,7 @@ struct qtmp4_demuxer_c {
   std::vector<qt_index_t> m_index;
   std::vector<qt_fragment_t> m_fragments;
 
-  int64_rational_c frame_rate;
+  mtx_mp_rational_t frame_rate;
   std::optional<int64_t> m_use_frame_rate_for_duration;
 
   std::vector<block_addition_mapping_t> m_block_addition_mappings;

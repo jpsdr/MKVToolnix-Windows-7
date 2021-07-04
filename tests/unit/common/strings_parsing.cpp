@@ -142,7 +142,7 @@ TEST(StringsParsing, ParseDurationNumberWithUnitInvalid) {
 }
 
 TEST(StringsParsing, ParseNumberToRationalInvalidPatterns) {
-  int64_rational_c r;
+  mtx_mp_rational_t r;
 
   EXPECT_FALSE(mtx::string::parse_number("",        r));
   EXPECT_FALSE(mtx::string::parse_number("bad",     r));
@@ -150,31 +150,31 @@ TEST(StringsParsing, ParseNumberToRationalInvalidPatterns) {
 }
 
 TEST(StringsParsing, ParseNumberToRationalValidPatterns) {
-  int64_rational_c r;
+  mtx_mp_rational_t r;
 
   EXPECT_TRUE(mtx::string::parse_number("0", r));
-  EXPECT_EQ(int64_rational_c(0ll, 1ll), r);
+  EXPECT_EQ(mtx_mp_rational_t(0ll, 1ll), r);
 
   EXPECT_TRUE(mtx::string::parse_number("0.0", r));
-  EXPECT_EQ(int64_rational_c(0ll, 1ll), r);
+  EXPECT_EQ(mtx_mp_rational_t(0ll, 1ll), r);
 
   EXPECT_TRUE(mtx::string::parse_number("1", r));
-  EXPECT_EQ(int64_rational_c(1ll, 1ll), r);
+  EXPECT_EQ(mtx_mp_rational_t(1ll, 1ll), r);
 
   EXPECT_TRUE(mtx::string::parse_number("1.", r));
-  EXPECT_EQ(int64_rational_c(1ll, 1ll), r);
+  EXPECT_EQ(mtx_mp_rational_t(1ll, 1ll), r);
 
   EXPECT_TRUE(mtx::string::parse_number("1.0", r));
-  EXPECT_EQ(int64_rational_c(1ll, 1ll), r);
+  EXPECT_EQ(mtx_mp_rational_t(1ll, 1ll), r);
 
   EXPECT_TRUE(mtx::string::parse_number("123456.789", r));
-  EXPECT_EQ(int64_rational_c(123456789ll, 1000ll), r);
+  EXPECT_EQ(mtx_mp_rational_t(123456789ll, 1000ll), r);
 
   EXPECT_TRUE(mtx::string::parse_number("123456.789", r));
-  EXPECT_EQ(int64_rational_c(123456789ll, 1000ll), r);
+  EXPECT_EQ(mtx_mp_rational_t(123456789ll, 1000ll), r);
 
   EXPECT_TRUE(mtx::string::parse_number("123456.789012345", r));
-  EXPECT_EQ(int64_rational_c(123456789012345ll, 1000000000ll), r);
+  EXPECT_EQ(mtx_mp_rational_t(123456789012345ll, 1000000000ll), r);
 }
 
 TEST(StringParsing, ParseTimecodeValidPatternsNumberWithUnit) {
@@ -367,41 +367,41 @@ TEST(StringParsing, ParseTimestampInvalidPatterns) {
 }
 
 TEST(StringParsing, ParseFloatingPointNumberAsRationalValid) {
-  int64_rational_c value;
+  mtx_mp_rational_t value;
 
   EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("12345"s, value));
-  EXPECT_EQ(int64_rational_c(12345, 1), value);
+  EXPECT_EQ(mtx_mp_rational_t(12345, 1), value);
 
   EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("12345.6789"s, value));
-  EXPECT_EQ(int64_rational_c(123456789, 10000), value);
+  EXPECT_EQ(mtx_mp_rational_t(123456789, 10000), value);
 
   EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("12345.001"s, value));
-  EXPECT_EQ(int64_rational_c(12345001, 1000), value);
+  EXPECT_EQ(mtx_mp_rational_t(12345001, 1000), value);
 
   EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("1234.5"s, value));
-  EXPECT_EQ(int64_rational_c(12345, 10), value);
+  EXPECT_EQ(mtx_mp_rational_t(12345, 10), value);
 
   EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational(".5"s, value));
-  EXPECT_EQ(int64_rational_c(5, 10), value);
+  EXPECT_EQ(mtx_mp_rational_t(5, 10), value);
 
   EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("-12345"s, value));
-  EXPECT_EQ(int64_rational_c(-12345, 1), value);
+  EXPECT_EQ(mtx_mp_rational_t(-12345, 1), value);
 
   EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("-12345.6789"s, value));
-  EXPECT_EQ(int64_rational_c(-123456789, 10000), value);
+  EXPECT_EQ(mtx_mp_rational_t(-123456789, 10000), value);
 
   EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("-12345.001"s, value));
-  EXPECT_EQ(int64_rational_c(-12345001, 1000), value);
+  EXPECT_EQ(mtx_mp_rational_t(-12345001, 1000), value);
 
   EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("-1234.5"s, value));
-  EXPECT_EQ(int64_rational_c(-12345, 10), value);
+  EXPECT_EQ(mtx_mp_rational_t(-12345, 10), value);
 
   EXPECT_TRUE(mtx::string::parse_floating_point_number_as_rational("-.5"s, value));
-  EXPECT_EQ(int64_rational_c(-5, 10), value);
+  EXPECT_EQ(mtx_mp_rational_t(-5, 10), value);
 }
 
 TEST(StringParsing, ParseFloatingPointNumberAsRationalInvalid) {
-  int64_rational_c value;
+  mtx_mp_rational_t value;
 
   EXPECT_FALSE(mtx::string::parse_floating_point_number_as_rational(""s,           value));
   EXPECT_FALSE(mtx::string::parse_floating_point_number_as_rational("12345."s,     value));

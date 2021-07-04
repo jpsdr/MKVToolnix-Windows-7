@@ -41,7 +41,7 @@ struct unsigned_checker<true> {
 
 namespace mtx::string {
 
-bool parse_number_as_rational(std::string const &string, int64_rational_c &value);
+bool parse_number_as_rational(std::string const &string, mtx_mp_rational_t &value);
 
 template<typename StrT, typename ValueT>
 bool
@@ -60,7 +60,7 @@ parse_number(StrT const &string,
 template<typename StrT>
 bool
 parse_number(StrT const &string,
-             int64_rational_c &value) {
+             mtx_mp_rational_t &value) {
   return parse_number_as_rational(string, value);
 }
 
@@ -68,7 +68,7 @@ template<typename StrT>
 bool
 parse_number(StrT const &string,
              double &value) {
-  int64_rational_c rational_value;
+  mtx_mp_rational_t rational_value;
   if (!parse_number(string, rational_value))
     return false;
 
@@ -124,7 +124,7 @@ parse_property_to_value(std::string const &s,
 }
 
 bool parse_duration_number_with_unit(const std::string &s, int64_t &value);
-bool parse_floating_point_number_as_rational(std::string const &string, int64_rational_c &value);
+bool parse_floating_point_number_as_rational(std::string const &string, mtx_mp_rational_t &value);
 
 extern std::string timestamp_parser_error;
 extern bool parse_timestamp(const std::string &s, int64_t &timestamp, bool allow_negative = false);

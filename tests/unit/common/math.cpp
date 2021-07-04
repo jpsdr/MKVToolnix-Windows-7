@@ -68,10 +68,10 @@ TEST(Math, ToSigned) {
 }
 
 TEST(Math, ClampValueTo) {
-  EXPECT_EQ((int64_rational_c{     0,      1}), mtx::math::clamp_values_to({          0,       1}, 65535));
-  EXPECT_EQ((int64_rational_c{ 4'711,    815}), mtx::math::clamp_values_to({      4'711,     815}, 65535));
-  EXPECT_EQ((int64_rational_c{65'535, 21'844}), mtx::math::clamp_values_to({  1'000'000, 333'333}, 65535));
-  EXPECT_EQ((int64_rational_c{65'535,      1}), mtx::math::clamp_values_to({999'999'999,       1}, 65535));
+  EXPECT_EQ((mtx_mp_rational_t{     0,      1}), mtx::math::clamp_values_to({          0,       1}, 65535));
+  EXPECT_EQ((mtx_mp_rational_t{ 4'711,    815}), mtx::math::clamp_values_to({      4'711,     815}, 65535));
+  EXPECT_EQ((mtx_mp_rational_t{65'535, 21'844}), mtx::math::clamp_values_to({  1'000'000, 333'333}, 65535));
+  EXPECT_EQ((mtx_mp_rational_t{65'535,      1}), mtx::math::clamp_values_to({999'999'999,       1}, 65535));
 }
 
 }

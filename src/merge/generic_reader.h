@@ -123,7 +123,7 @@ public:
   virtual void show_packetizer_info(int64_t track_id, generic_packetizer_c const &packetizer);
 
 public:
-  static void set_probe_range_percentage(int64_rational_c const &probe_range_percentage);
+  static void set_probe_range_percentage(mtx_mp_rational_t const &probe_range_percentage);
 
 protected:
   virtual void show_demuxer_info();
