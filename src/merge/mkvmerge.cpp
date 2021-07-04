@@ -2077,9 +2077,9 @@ parse_arg_probe_range(std::optional<std::string> next_arg) {
 
   mtx_mp_rational_t probe_range_percentage{0, 1};
   if (   !mtx::string::parse_number_as_rational(*next_arg, probe_range_percentage)
-      || !probe_range_percentage.denominator()
-      || (boost::rational_cast<double>(probe_range_percentage) <= 0)
-      || (boost::rational_cast<double>(probe_range_percentage)  > 100))
+      || !boost::multiprecision::denominator(probe_range_percentage)
+      || (probe_range_percentage <= 0)
+      || (probe_range_percentage  > 100))
     mxerror(fmt::format(Y("The probe range percentage '{0}' is invalid.\n"), *next_arg));
 
   generic_reader_c::set_probe_range_percentage(probe_range_percentage);

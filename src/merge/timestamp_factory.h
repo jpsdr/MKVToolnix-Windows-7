@@ -186,7 +186,7 @@ public:
                                              const std::string &source_name,
                                              int64_t tid)
     : timestamp_factory_c{"", source_name, tid, 1}
-    , m_default_duration{boost::rational_cast<int64_t>(tcsync.factor * default_duration)}
+    , m_default_duration{static_cast<int64_t>(tcsync.factor * default_duration)}
     , m_tcsync{tcsync}
   {
   }

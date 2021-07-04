@@ -46,8 +46,8 @@ xtr_ivf_c::create_file(xtr_base_c *master,
     rate                = mtx_mp_rational_t{1'000'000'000ll, static_cast<int64_t>(default_duration)};
   rate                  = mtx::math::clamp_values_to(rate, std::numeric_limits<uint16_t>::max());
 
-  m_frame_rate_num      = rate.numerator();
-  m_frame_rate_den      = rate.denominator();
+  m_frame_rate_num      = static_cast<uint64_t>(boost::multiprecision::numerator(rate));
+  m_frame_rate_den      = static_cast<uint64_t>(boost::multiprecision::denominator(rate));
 
   mxdebug_if(m_debug, fmt::format("frame rate determination: default duration {0} numerator {1} denominator {2}\n", default_duration, m_frame_rate_num, m_frame_rate_den));
 

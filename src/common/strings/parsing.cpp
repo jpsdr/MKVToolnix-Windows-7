@@ -316,7 +316,7 @@ parse_duration_number_with_unit(const std::string &s,
     else if (mtx_mp_rational_t{5994, 100} == r)
       r = mtx_mp_rational_t{60000, 1001};
 
-    value = boost::rational_cast<int64_t>(mtx_mp_rational_t{1000000000ll, 1} / r);
+    value = static_cast<int64_t>(mtx_mp_rational_t{1000000000ll, r});
 
     return true;
   }
@@ -336,7 +336,7 @@ parse_duration_number_with_unit(const std::string &s,
   else if (unit != "s")
     return false;
 
-  value = boost::rational_cast<int64_t>(r * mtx_mp_rational_t{multiplier, 1});
+  value = static_cast<int64_t>(mtx_mp_rational_t{multiplier} * r);
 
   return true;
 }

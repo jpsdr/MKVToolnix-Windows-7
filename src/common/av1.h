@@ -91,7 +91,7 @@ public:
   parser_c();
   ~parser_c();
 
-  void set_default_duration(boost::rational<uint64_t> default_duration);
+  void set_default_duration(mtx_mp_rational_t default_duration);
   void set_parse_sequence_header_obus_only(bool parse_sequence_header_obus_only);
 
   void parse(unsigned char const *buffer, uint64_t buffer_size);

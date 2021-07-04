@@ -251,13 +251,13 @@ parse_sps(memory_cptr const &buffer,
     auto frame_rate = mtx::frame_timing::determine_frame_rate(duration);
     if (!frame_rate) {
       frame_rate.assign(1'000'000'000ll, duration);
-      if (   (frame_rate.denominator() > std::numeric_limits<uint32_t>::max())
-          || (frame_rate.numerator()   > std::numeric_limits<uint32_t>::max()))
+      if (   (boost::multiprecision::denominator(frame_rate) > std::numeric_limits<uint32_t>::max())
+          || (boost::multiprecision::numerator(frame_rate)   > std::numeric_limits<uint32_t>::max()))
       frame_rate.assign(static_cast<int64_t>(0x80000000), static_cast<int64_t>((duration * 0x80000000) / 1000000000ll));
     }
 
-    num_units_in_tick = frame_rate.denominator();
-    time_scale        = frame_rate.numerator();
+    num_units_in_tick = static_cast<int>(boost::multiprecision::denominator(frame_rate));
+    time_scale        = static_cast<int>(boost::multiprecision::numerator(frame_rate));
   }
 
   mxdebug_if(s_debug_fix_bitstream_timing_info, fmt::format("fix_bitstream_timing_info: duration {0}: units/tick: {1} time_scale: {2}\n", duration, num_units_in_tick, time_scale));

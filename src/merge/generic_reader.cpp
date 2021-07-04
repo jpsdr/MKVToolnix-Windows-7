@@ -438,12 +438,12 @@ generic_reader_c::calculate_probe_range(int64_t file_size,
   static debugging_option_c s_debug{"probe_range"};
 
   auto factor      = mtx_mp_rational_t{1, 100} * s_probe_range_percentage;
-  auto probe_range = boost::rational_cast<int64_t>(factor * file_size);
+  auto probe_range = static_cast<int64_t>(factor * file_size);
   auto to_use      = std::max(fixed_minimum, probe_range);
 
   mxdebug_if(s_debug,
              fmt::format("calculate_probe_range: calculated {0} based on file size {1} fixed minimum {2} percentage {3}/{4} percentage of size {5}\n",
-                         to_use, file_size, fixed_minimum, s_probe_range_percentage.numerator(), s_probe_range_percentage.denominator(), probe_range));
+                         to_use, file_size, fixed_minimum, boost::multiprecision::numerator(s_probe_range_percentage), boost::multiprecision::denominator(s_probe_range_percentage), probe_range));
 
   return to_use;
 }

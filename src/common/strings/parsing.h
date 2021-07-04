@@ -72,7 +72,7 @@ parse_number(StrT const &string,
   if (!parse_number(string, rational_value))
     return false;
 
-  value = boost::rational_cast<double>(rational_value);
+  value = static_cast<double>(rational_value);
 
   return true;
 }
