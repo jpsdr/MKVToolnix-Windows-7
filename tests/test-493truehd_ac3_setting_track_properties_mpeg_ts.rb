@@ -10,4 +10,4 @@ describe "mkvmerge / setting track properties for AC-3 cores embedded in TrueHD 
   "--track-name 2:tracky --track-name 3:tricky",
   "--track-order 0:2,0:3",
   "--track-order 0:3,0:2",
-].each { |args| test_merge "data/ts/blue_planet.ts", :args => "--no-video --atracks 2,3 #{args}" }
+].each { |args| test_merge "data/ts/blue_planet_2mb.ts", :args => "--no-video --atracks 2,3 #{args}" }
