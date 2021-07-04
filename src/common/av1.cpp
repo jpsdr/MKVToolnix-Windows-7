@@ -43,7 +43,7 @@ class parser_private_c {
   frame_t current_frame;
   std::deque<frame_t> frames;
   uint64_t frame_number{}, num_units_in_display_tick{}, time_scale{}, num_ticks_per_picture{};
-  mtx_mp_rational_t forced_default_duration, bitstream_default_duration{1'000'000'000ull, 25};
+  mtx_mp_rational_t forced_default_duration, bitstream_default_duration = mtx::rational(1'000'000'000ull, 25);
 
   memory_cptr sequence_header_obu;
   std::vector<memory_cptr> metadata_obus;
@@ -234,7 +234,7 @@ parser_c::parse_timing_info(mtx::bits::reader_c &r) {
     p->num_ticks_per_picture = 1;
 
   if (p->num_units_in_display_tick && p->time_scale && p->num_ticks_per_picture)
-    p->bitstream_default_duration.assign(1'000'000'000ull * p->num_units_in_display_tick * p->num_ticks_per_picture, p->time_scale);
+    p->bitstream_default_duration = mtx::rational(1'000'000'000ull * p->num_units_in_display_tick * p->num_ticks_per_picture, p->time_scale);
 
   mxdebug_if(p->debug_timing_info,
              fmt::format("parse_timing_info: num_units_in_display_tick {0} time_scale {1} equal_picture_interval {2} num_ticks_per_picture {3} bitstream_default_duration {4}\n",
@@ -506,7 +506,7 @@ parser_c::get_frame_duration()
   if (!p->sequence_header_obu || !p->time_scale)
     return {};
 
-  return { static_cast<int64_t>(p->num_units_in_display_tick) * 1'000'000'000ll, static_cast<int64_t>(p->time_scale) };
+  return mtx::rational(static_cast<int64_t>(p->num_units_in_display_tick) * 1'000'000'000ll, p->time_scale);
 }
 
 bool

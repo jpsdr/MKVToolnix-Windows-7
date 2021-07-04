@@ -43,7 +43,7 @@ xtr_ivf_c::create_file(xtr_base_c *master,
   auto default_duration = FindChildValue<libmatroska::KaxTrackDefaultDuration>(track, 1'000'000'000 / 25); // Default to 25 FPS if unknown.
   auto rate             = mtx::frame_timing::determine_frame_rate(default_duration);
   if (!rate)
-    rate                = mtx_mp_rational_t{1'000'000'000ll, static_cast<int64_t>(default_duration)};
+    rate                = mtx::rational(1'000'000'000ll, default_duration);
   rate                  = mtx::math::clamp_values_to(rate, std::numeric_limits<uint16_t>::max());
 
   m_frame_rate_num      = static_cast<uint64_t>(boost::multiprecision::numerator(rate));

@@ -250,10 +250,10 @@ parse_sps(memory_cptr const &buffer,
   else {
     auto frame_rate = mtx::frame_timing::determine_frame_rate(duration);
     if (!frame_rate) {
-      frame_rate.assign(1'000'000'000ll, duration);
+      frame_rate = mtx::rational(1'000'000'000ll, duration);
       if (   (boost::multiprecision::denominator(frame_rate) > std::numeric_limits<uint32_t>::max())
           || (boost::multiprecision::numerator(frame_rate)   > std::numeric_limits<uint32_t>::max()))
-      frame_rate.assign(static_cast<int64_t>(0x80000000), static_cast<int64_t>((duration * 0x80000000) / 1000000000ll));
+        frame_rate = mtx::rational(0x80000000, static_cast<int64_t>((duration * 0x80000000) / 1000000000ll));
     }
 
     num_units_in_tick = static_cast<int>(boost::multiprecision::denominator(frame_rate));

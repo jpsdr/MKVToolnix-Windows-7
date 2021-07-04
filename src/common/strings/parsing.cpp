@@ -50,7 +50,7 @@ parse_floating_point_number_as_rational(std::string const &string,
     sign = -1;
 
   if (!matches.capturedLength(3)) {
-    value = mtx_mp_rational_t{sign * numerator, 1};
+    value = mtx_mp_rational_t{sign * numerator};
     return true;
   }
 
@@ -62,7 +62,7 @@ parse_floating_point_number_as_rational(std::string const &string,
   for (auto idx = 0u; idx < to_utf8(matches.captured(3)).length(); ++idx)
     shift *= 10;
 
-  value = mtx_mp_rational_t{sign * (numerator * shift + fractional), shift};
+  value = mtx::rational(sign * (numerator * shift + fractional), shift);
   return true;
 }
 
@@ -78,8 +78,8 @@ parse_number_as_rational(std::string const &string,
   if (!parts[0].length() || !parse_number(parts[0], num))
     return false;
 
-  auto p1        = mtx_mp_rational_t{num, 1},
-    p2           = mtx_mp_rational_t{0, 1};
+  auto p1        = mtx_mp_rational_t{num},
+    p2           = mtx_mp_rational_t{};
   auto const len = parts[1].length();
 
   if (len > 0) {
@@ -91,7 +91,7 @@ parse_number_as_rational(std::string const &string,
     for (auto idx = 0u; idx < len; ++idx)
       den *= 10;
 
-    p2 = mtx_mp_rational_t{num, den};
+    p2 = mtx::rational(num, den);
   }
 
   value = p1 + p2;
@@ -316,7 +316,7 @@ parse_duration_number_with_unit(const std::string &s,
     else if (mtx_mp_rational_t{5994, 100} == r)
       r = mtx_mp_rational_t{60000, 1001};
 
-    value = static_cast<int64_t>(mtx_mp_rational_t{1000000000ll, r});
+    value = static_cast<int64_t>(mtx::rational(1'000'000'000ll, r));
 
     return true;
   }

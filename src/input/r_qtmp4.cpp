@@ -944,7 +944,7 @@ qtmp4_reader_c::handle_mvhd_atom(qt_atom_t atom,
   auto duration = get_uint32_be(&mvhd.duration);
 
   if ((duration != std::numeric_limits<uint32_t>::max()) && (m_time_scale != 0))
-    m_duration = static_cast<uint64_t>(mtx_mp_rational_t{duration, static_cast<uint64_t>(m_time_scale)} * 1'000'000'000ull);
+    m_duration = static_cast<uint64_t>(mtx_mp_rational_t{static_cast<int64_t>(duration), m_time_scale} * 1'000'000'000ull);
 
   mxdebug_if(m_debug_headers, fmt::format("{0}Time scale: {1} duration: {2}\n", space(level * 2 + 1), m_time_scale, m_duration ? mtx::string::format_timestamp(*m_duration) : "—"s));
 }
@@ -2128,7 +2128,7 @@ void
 qtmp4_demuxer_c::calculate_frame_rate() {
   if ((1 == durmap_table.size()) && (0 != durmap_table[0].duration) && ((0 != sample_size) || (0 == frame_offset_table.size()))) {
     // Constant frame_rate. Let's set the default duration.
-    frame_rate.assign(time_scale, static_cast<int64_t>(durmap_table[0].duration));
+    frame_rate = mtx::rational(time_scale, static_cast<int64_t>(durmap_table[0].duration));
     mxdebug_if(m_debug_frame_rate, fmt::format("calculate_frame_rate: case 1: {0}/{1}\n", boost::multiprecision::numerator(frame_rate), boost::multiprecision::denominator(frame_rate)));
 
     return;
@@ -2185,7 +2185,7 @@ qtmp4_demuxer_c::calculate_frame_rate() {
                                      [](auto const &winner, std::pair<int64_t, int> const &current) { return current.second > winner.second ? current : winner; });
 
   if (most_common.first)
-    frame_rate.assign(static_cast<int64_t>(1000000000ll), to_nsecs(most_common.first));
+    frame_rate = mtx::rational(1000000000ll, to_nsecs(most_common.first));
 
   mxdebug_if(m_debug_frame_rate,
              fmt::format("calculate_frame_rate: case 5: duration {0} num_frames {1} frame_duration {2} most_common.num_occurances {3} most_common.duration {4} frame_rate {5}/{6}\n",
