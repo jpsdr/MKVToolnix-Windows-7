@@ -47,6 +47,18 @@ to_uint(mtx_mp_rational_t const &value) {
   return static_cast<uint64_t>(static_cast<boost::multiprecision::uint128_t>(value));
 }
 
+// Additional conversions that round to the nearest integer away from 0.
+inline int64_t
+to_int_rounded(mtx_mp_rational_t const &value) {
+  auto shift = value >= 0 ? 5 : -5;
+  return static_cast<int64_t>((static_cast<boost::multiprecision::int128_t>(value * 10 + shift)) / 10);
+}
+
+inline uint64_t
+to_uint_rounded(mtx_mp_rational_t const &value) {
+  return static_cast<uint64_t>((static_cast<boost::multiprecision::uint128_t>(value * 10 + 5)) / 10);
+}
+
 namespace math {
 }
 

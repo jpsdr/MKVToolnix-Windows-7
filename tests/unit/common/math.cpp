@@ -74,4 +74,38 @@ TEST(Math, ClampValueTo) {
   EXPECT_EQ((mtx_mp_rational_t{65'535,      1}), mtx::math::clamp_values_to({999'999'999,       1}, 65535));
 }
 
+TEST(Math, ToIntTruncating) {
+  EXPECT_EQ(mtx::to_int(mtx::rational(-0, 3)), -0);
+  EXPECT_EQ(mtx::to_int(mtx::rational(-1, 3)), -0);
+  EXPECT_EQ(mtx::to_int(mtx::rational(-2, 3)), -0);
+  EXPECT_EQ(mtx::to_int(mtx::rational(-3, 3)), -1);
+
+  EXPECT_EQ(mtx::to_int(mtx::rational(0, 3)), 0);
+  EXPECT_EQ(mtx::to_int(mtx::rational(1, 3)), 0);
+  EXPECT_EQ(mtx::to_int(mtx::rational(2, 3)), 0);
+  EXPECT_EQ(mtx::to_int(mtx::rational(3, 3)), 1);
+
+  EXPECT_EQ(mtx::to_uint(mtx::rational(0, 3)), 0);
+  EXPECT_EQ(mtx::to_uint(mtx::rational(1, 3)), 0);
+  EXPECT_EQ(mtx::to_uint(mtx::rational(2, 3)), 0);
+  EXPECT_EQ(mtx::to_uint(mtx::rational(3, 3)), 1);
+}
+
+TEST(Math, ToIntRounding) {
+  EXPECT_EQ(mtx::to_int_rounded(mtx::rational(-0, 3)), -0);
+  EXPECT_EQ(mtx::to_int_rounded(mtx::rational(-1, 3)), -0);
+  EXPECT_EQ(mtx::to_int_rounded(mtx::rational(-2, 3)), -1);
+  EXPECT_EQ(mtx::to_int_rounded(mtx::rational(-3, 3)), -1);
+
+  EXPECT_EQ(mtx::to_int_rounded(mtx::rational(0, 3)), 0);
+  EXPECT_EQ(mtx::to_int_rounded(mtx::rational(1, 3)), 0);
+  EXPECT_EQ(mtx::to_int_rounded(mtx::rational(2, 3)), 1);
+  EXPECT_EQ(mtx::to_int_rounded(mtx::rational(3, 3)), 1);
+
+  EXPECT_EQ(mtx::to_uint_rounded(mtx::rational(0, 3)), 0);
+  EXPECT_EQ(mtx::to_uint_rounded(mtx::rational(1, 3)), 0);
+  EXPECT_EQ(mtx::to_uint_rounded(mtx::rational(2, 3)), 1);
+  EXPECT_EQ(mtx::to_uint_rounded(mtx::rational(3, 3)), 1);
+}
+
 }
