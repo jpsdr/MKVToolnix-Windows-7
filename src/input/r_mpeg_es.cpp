@@ -138,7 +138,7 @@ mpeg_es_reader_c::read_headers() {
     if ((0 >= aspect_ratio) || (1 == aspect_ratio))
       dwidth = width;
     else
-      dwidth = (int)(height * aspect_ratio);
+      dwidth = std::llround(height * aspect_ratio);
     dheight = height;
 
     mxdebug_if(s_debug, fmt::format("mpeg_es_reader: version {0} width {1} height {2} FPS {3} AR {4}\n", version, width, height, frame_rate, aspect_ratio));
