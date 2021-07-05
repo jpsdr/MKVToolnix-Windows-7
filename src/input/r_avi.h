@@ -63,7 +63,7 @@ private:
   int m_vptzr{-1};
   std::vector<avi_demuxer_t> m_audio_demuxers;
   std::vector<avi_subs_demuxer_t> m_subtitle_demuxers;
-  double m_fps{1.0};
+  mtx_mp_rational_t m_default_duration;
   unsigned int m_video_frames_read{}, m_max_video_frames{}, m_dropped_video_frames{};
   unsigned int m_video_width{}, m_video_height{}, m_video_display_width{}, m_video_display_height;
   int m_avc_nal_size_size{-1};

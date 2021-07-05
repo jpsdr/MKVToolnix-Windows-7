@@ -89,7 +89,8 @@ avi_reader_c::read_headers() {
   if (!(m_avi = AVI_open_input_file(m_in.get(), 1)))
     throw mtx::input::invalid_format_x();
 
-  m_fps              = AVI_frame_rate(m_avi);
+  auto frame_rate    = AVI_frame_rate(m_avi);
+  m_default_duration = mtx::rational(1'000'000'000.0, frame_rate ? frame_rate : 25);
   m_max_video_frames = AVI_video_frames(m_avi);
   m_video_width      = std::abs(AVI_video_width(m_avi));
   m_video_height     = std::abs(AVI_video_height(m_avi));
@@ -214,10 +215,10 @@ avi_reader_c::create_video_packetizer() {
     m_divx_type = DIVX_TYPE_MPEG4;
 
   if (mtx::includes(m_ti.m_default_durations, 0))
-    m_fps = 1000000000.0 / m_ti.m_default_durations[0].first;
+    m_default_duration = mtx::rational(m_ti.m_default_durations[0].first, 1);
 
   else if (mtx::includes(m_ti.m_default_durations, -1))
-    m_fps = 1000000000.0 / m_ti.m_default_durations[-1].first;
+    m_default_duration = mtx::rational(m_ti.m_default_durations[-1].first, 1);
 
   m_ti.m_id = 0;                 // ID for the video track.
   if (DIVX_TYPE_MPEG4 == m_divx_type)
@@ -262,12 +263,12 @@ avi_reader_c::handle_video_aspect_ratio() {
   auto aspect_ratio = mtx_mp_rational_t{x, y};
 
   if (aspect_ratio >= mtx_mp_rational_t{m_video_width, m_video_height}) {
-    m_video_display_width  = mtx::to_int(aspect_ratio * m_video_height);
+    m_video_display_width  = mtx::to_int_rounded(aspect_ratio * m_video_height);
     m_video_display_height = m_video_height;
 
   } else {
     m_video_display_width  = m_video_width;
-    m_video_display_height = mtx::to_int(mtx_mp_rational_t{y, x} * m_video_width);
+    m_video_display_height = mtx::to_int_rounded(mtx_mp_rational_t{y, x} * m_video_width);
   }
 
   mxdebug_if(m_debug_aspect_ratio, fmt::format("handle_video_aspect_ratio: frame aspect ratio {0}:{1} pixel dimensions {2}x{3} display dimensions {4}x{5}\n",
@@ -325,7 +326,7 @@ avi_reader_c::create_mpeg1_2_packetizer() {
 
 void
 avi_reader_c::create_mpeg4_p2_packetizer() {
-  m_vptzr = add_packetizer(new mpeg4_p2_video_packetizer_c(this, m_ti, static_cast<int64_t>(1'000'000'000.0 / m_fps), m_video_width, m_video_height, false));
+  m_vptzr = add_packetizer(new mpeg4_p2_video_packetizer_c(this, m_ti, mtx::to_int_rounded(m_default_duration), m_video_width, m_video_height, false));
 
   show_packetizer_info(0, ptzr(m_vptzr));
 }
@@ -338,8 +339,8 @@ avi_reader_c::create_mpeg4_p10_packetizer() {
 
     ptzr->set_video_pixel_dimensions(m_video_width, m_video_height);
 
-    if (0 != m_fps)
-      ptzr->set_container_default_field_duration(1000000000ll / m_fps / 2);
+    if (0 != m_default_duration)
+      ptzr->set_container_default_field_duration(mtx::to_int_rounded(m_default_duration / 2));
 
     if (0 < m_avi->extradata_size) {
       auto avc_extra_nalus = mtx::avc::avcc_to_nalus(reinterpret_cast<unsigned char *>(m_avi->bitmap_info_header + 1), m_avi->extradata_size);
@@ -361,7 +362,7 @@ avi_reader_c::create_vp8_packetizer() {
   m_ti.m_private_data.reset();
   m_vptzr = add_packetizer(new vpx_video_packetizer_c(this, m_ti, codec_c::type_e::V_VP8));
 
-  ptzr(m_vptzr).set_track_default_duration(1000000000ll / m_fps);
+  ptzr(m_vptzr).set_track_default_duration(mtx::to_int_rounded(m_default_duration));
   ptzr(m_vptzr).set_video_pixel_width(m_video_width);
   ptzr(m_vptzr).set_video_pixel_height(m_video_height);
 
@@ -370,7 +371,7 @@ avi_reader_c::create_vp8_packetizer() {
 
 void
 avi_reader_c::create_standard_video_packetizer() {
-  m_vptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, static_cast<int64_t>(1'000'000'000.0 / m_fps), m_video_width, m_video_height));
+  m_vptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, mtx::to_int_rounded(m_default_duration), m_video_width, m_video_height));
 
   show_packetizer_info(0, ptzr(m_vptzr));
 }
@@ -733,8 +734,8 @@ avi_reader_c::read_video() {
     ++m_video_frames_read;
   }
 
-  int64_t timestamp       = static_cast<int64_t>(static_cast<int64_t>(old_video_frames_read)   * 1000000000ll / m_fps);
-  int64_t duration        = static_cast<int64_t>(static_cast<int64_t>(dropped_frames_here + 1) * 1000000000ll / m_fps);
+  auto timestamp          = mtx::to_int_rounded(old_video_frames_read     * m_default_duration);
+  auto duration           = mtx::to_int_rounded((dropped_frames_here + 1) * m_default_duration);
 
   m_dropped_video_frames += dropped_frames_here;
 
@@ -976,7 +977,7 @@ void
 avi_reader_c::debug_dump_video_index() {
   int num_video_frames = AVI_video_frames(m_avi), i;
 
-  mxinfo(fmt::format("AVI video index dump: {0} entries; frame rate: {1}\n", num_video_frames, m_fps));
+  mxinfo(fmt::format("AVI video index dump: {0} entries; default duration: {1}\n", num_video_frames, m_default_duration));
   for (i = 0; num_video_frames > i; ++i) {
     int key = 0;
     AVI_read_frame(m_avi, nullptr, &key);
