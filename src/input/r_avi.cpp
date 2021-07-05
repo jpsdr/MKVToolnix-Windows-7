@@ -317,7 +317,7 @@ avi_reader_c::create_mpeg1_2_packetizer() {
 
   int display_width      = ((0 >= seq_hdr.aspectRatio) || (1 == seq_hdr.aspectRatio)) ? seq_hdr.width : static_cast<int>(seq_hdr.height * seq_hdr.aspectRatio);
 
-  m_vptzr                = add_packetizer(new mpeg1_2_video_packetizer_c(this, m_ti, m2v_parser->GetMPEGVersion(), seq_hdr.frameRate,
+  m_vptzr                = add_packetizer(new mpeg1_2_video_packetizer_c(this, m_ti, m2v_parser->GetMPEGVersion(), static_cast<int64_t>(1'000'000'000.0 / seq_hdr.frameRate),
                                                                          seq_hdr.width, seq_hdr.height, display_width, seq_hdr.height, false));
 
   show_packetizer_info(0, ptzr(m_vptzr));
@@ -325,7 +325,7 @@ avi_reader_c::create_mpeg1_2_packetizer() {
 
 void
 avi_reader_c::create_mpeg4_p2_packetizer() {
-  m_vptzr = add_packetizer(new mpeg4_p2_video_packetizer_c(this, m_ti, m_fps, m_video_width, m_video_height, false));
+  m_vptzr = add_packetizer(new mpeg4_p2_video_packetizer_c(this, m_ti, static_cast<int64_t>(1'000'000'000.0 / m_fps), m_video_width, m_video_height, false));
 
   show_packetizer_info(0, ptzr(m_vptzr));
 }
@@ -370,7 +370,7 @@ avi_reader_c::create_vp8_packetizer() {
 
 void
 avi_reader_c::create_standard_video_packetizer() {
-  m_vptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, m_fps, m_video_width, m_video_height));
+  m_vptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, static_cast<int64_t>(1'000'000'000.0 / m_fps), m_video_width, m_video_height));
 
   show_packetizer_info(0, ptzr(m_vptzr));
 }

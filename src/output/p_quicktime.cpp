@@ -20,7 +20,7 @@ quicktime_video_packetizer_c::quicktime_video_packetizer_c(generic_reader_c *p_r
                                                            track_info_c &p_ti,
                                                            int width,
                                                            int height)
-  : generic_video_packetizer_c{p_reader, p_ti, MKV_V_QUICKTIME, 0.0, width, height}
+  : generic_video_packetizer_c{p_reader, p_ti, MKV_V_QUICKTIME, 0, width, height}
 {
 }
 

@@ -1392,15 +1392,15 @@ ogm_v_mscomp_demuxer_c::create_packetizer() {
 
   m_ti.m_private_data = memory_c::clone(&bih, sizeof(alBITMAPINFOHEADER));
 
-  double fps          = (double)10000000.0 / get_uint64_le(&sth->time_unit);
-  int width           = get_uint32_le(&sth->sh.video.width);
-  int height          = get_uint32_le(&sth->sh.video.height);
+  auto default_duration = get_uint64_le(&sth->time_unit) * 100;
+  int width             = get_uint32_le(&sth->sh.video.width);
+  int height            = get_uint32_le(&sth->sh.video.height);
 
   generic_packetizer_c *ptzr_obj;
   if (mtx::mpeg4_p2::is_fourcc(sth->subtype))
-    ptzr_obj = new mpeg4_p2_video_packetizer_c(reader, m_ti, fps, width, height, false);
+    ptzr_obj = new mpeg4_p2_video_packetizer_c(reader, m_ti, default_duration, width, height, false);
   else
-    ptzr_obj = new video_for_windows_packetizer_c(reader, m_ti, fps, width, height);
+    ptzr_obj = new video_for_windows_packetizer_c(reader, m_ti, default_duration, width, height);
 
   reader->show_packetizer_info(m_ti.m_id, *ptzr_obj);
 
@@ -1488,7 +1488,7 @@ ogm_v_theora_demuxer_c::create_packetizer() {
   m_ti.m_private_data            = lace_memory_xiph(packet_data);
 
   double                fps      = (double)theora.frn / (double)theora.frd;
-  generic_packetizer_c *ptzr_obj = new theora_video_packetizer_c(reader, m_ti, fps, theora.fmbw, theora.fmbh);
+  generic_packetizer_c *ptzr_obj = new theora_video_packetizer_c(reader, m_ti, static_cast<int64_t>(1'000'000'000.0 / fps), theora.fmbw, theora.fmbh);
 
   reader->show_packetizer_info(m_ti.m_id, *ptzr_obj);
 

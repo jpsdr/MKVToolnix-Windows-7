@@ -1233,7 +1233,7 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
     if (track->codec.is(codec_c::type_e::V_MPEG12)) {
       generic_packetizer_c *m2vpacketizer;
 
-      m2vpacketizer       = new mpeg1_2_video_packetizer_c(this, m_ti, track->v_version, track->v_frame_rate, track->v_width, track->v_height,
+      m2vpacketizer       = new mpeg1_2_video_packetizer_c(this, m_ti, track->v_version, static_cast<int64_t>(1'000'000'000.0 / track->v_frame_rate), track->v_width, track->v_height,
                                                            track->v_dwidth, track->v_dheight, false);
       track->ptzr         = add_packetizer(m2vpacketizer);
       show_packetizer_info(id, ptzr(track->ptzr));

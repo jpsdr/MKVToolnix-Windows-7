@@ -1732,7 +1732,7 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
 
   else if (t->codec.is(codec_c::type_e::V_MPEG12)) {
     int version = t->codec_id[6] - '0';
-    set_track_packetizer(t, new mpeg1_2_video_packetizer_c(this, nti, version, t->v_frate, t->v_width, t->v_height, t->v_dwidth, t->v_dheight, true));
+    set_track_packetizer(t, new mpeg1_2_video_packetizer_c(this, nti, version, static_cast<int64_t>(1'000'000'000.0 / t->v_frate), t->v_width, t->v_height, t->v_dwidth, t->v_dheight, true));
     show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else if (t->codec.is(codec_c::type_e::V_MPEGH_P2))
@@ -1740,14 +1740,14 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
 
   else if (t->codec.is(codec_c::type_e::V_MPEG4_P2)) {
     bool is_native = (t->codec_id == MKV_V_MPEG4_SP) || (t->codec_id == MKV_V_MPEG4_AP) || (t->codec_id == MKV_V_MPEG4_ASP);
-    set_track_packetizer(t, new mpeg4_p2_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height, is_native));
+    set_track_packetizer(t, new mpeg4_p2_video_packetizer_c(this, nti, static_cast<int64_t>(1'000'000'000.0 / t->v_frate), t->v_width, t->v_height, is_native));
     show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else if (t->codec.is(codec_c::type_e::V_MPEG4_P10))
     create_avc_video_packetizer(t, nti);
 
   else if (t->codec.is(codec_c::type_e::V_THEORA)) {
-    set_track_packetizer(t, new theora_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
+    set_track_packetizer(t, new theora_video_packetizer_c(this, nti, static_cast<int64_t>(1'000'000'000.0 / t->v_frate), t->v_width, t->v_height));
     show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else if (t->codec.is(codec_c::type_e::V_DIRAC)) {
@@ -1770,7 +1770,7 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
     create_vc1_video_packetizer(t, nti);
 
   else if (t->ms_compat) {
-    set_track_packetizer(t, new video_for_windows_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
+    set_track_packetizer(t, new video_for_windows_packetizer_c(this, nti, static_cast<int64_t>(1'000'000'000.0 / t->v_frate), t->v_width, t->v_height));
     show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else {
@@ -1911,7 +1911,7 @@ kax_reader_c::create_hevc_video_packetizer(kax_track_t *t,
     return;
   }
 
-  auto ptzr = new hevc_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height);
+  auto ptzr = new hevc_video_packetizer_c(this, nti, static_cast<int64_t>(1'000'000'000.0 / t->v_frate), t->v_width, t->v_height);
   ptzr->set_source_timestamp_resolution(m_tc_scale);
 
   set_track_packetizer(t, ptzr);
@@ -2203,14 +2203,14 @@ kax_reader_c::create_avc_video_packetizer(kax_track_t *t,
     return;
   }
 
-  set_track_packetizer(t, new avc_video_packetizer_c(this, nti, t->v_frate, t->v_width, t->v_height));
+  set_track_packetizer(t, new avc_video_packetizer_c(this, nti, t->v_frate ? static_cast<int64_t>(1'000'000'000.0 / t->v_frate) : 0, t->v_width, t->v_height));
   show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
 kax_reader_c::create_prores_video_packetizer(kax_track_t &t,
                                              track_info_c &nti) {
-  set_track_packetizer(&t, new prores_video_packetizer_c{this, nti, t.v_frate, static_cast<int>(t.v_width), static_cast<int>(t.v_height)});
+  set_track_packetizer(&t, new prores_video_packetizer_c{this, nti, static_cast<int64_t>(1'000'000'000.0 / t.v_frate), static_cast<int>(t.v_width), static_cast<int>(t.v_height)});
   show_packetizer_info(t.tnum, *t.ptzr_ptr);
 }
 

@@ -155,7 +155,7 @@ mpeg_es_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('v', 0) || !m_reader_packetizers.empty())
     return;
 
-  m2vpacketizer = new mpeg1_2_video_packetizer_c(this, m_ti, version, frame_rate, width, height, dwidth, dheight, false);
+  m2vpacketizer = new mpeg1_2_video_packetizer_c(this, m_ti, version, static_cast<int64_t>(1'000'000'000.0 / frame_rate), width, height, dwidth, dheight, false);
   add_packetizer(m2vpacketizer);
   m2vpacketizer->set_video_interlaced_flag(interlaced);
 

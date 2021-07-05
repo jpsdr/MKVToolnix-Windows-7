@@ -28,10 +28,10 @@ using namespace libmatroska;
 
 video_for_windows_packetizer_c::video_for_windows_packetizer_c(generic_reader_c *p_reader,
                                                                track_info_c &p_ti,
-                                                               double fps,
+                                                               int64_t default_duration,
                                                                int width,
                                                                int height)
-  : generic_video_packetizer_c{p_reader, p_ti, MKV_V_MSCOMP, fps, width, height}
+  : generic_video_packetizer_c{p_reader, p_ti, MKV_V_MSCOMP, default_duration, width, height}
   , m_rederive_frame_types{debugging_c::requested("rederive_frame_types")}
   , m_codec_type{ct_unknown}
 {

@@ -24,7 +24,7 @@ protected:
   debugging_option_c m_debug_fix_bistream_timing_info;
 
 public:
-  avc_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, double fps, int width, int height);
+  avc_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int64_t default_duration, int width, int height);
   virtual int process(packet_cptr packet);
   virtual void set_headers();
 

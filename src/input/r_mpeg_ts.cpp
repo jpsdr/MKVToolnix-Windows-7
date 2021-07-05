@@ -2339,7 +2339,7 @@ reader_c::create_truehd_audio_packetizer(track_ptr const &track) {
 void
 reader_c::create_mpeg1_2_video_packetizer(track_ptr &track) {
   m_ti.m_private_data = track->m_codec_private_data;
-  auto m2vpacketizer  = new mpeg1_2_video_packetizer_c(this, m_ti, track->v_version, track->v_frame_rate, track->v_width, track->v_height, track->v_dwidth, track->v_dheight, false);
+  auto m2vpacketizer  = new mpeg1_2_video_packetizer_c(this, m_ti, track->v_version, static_cast<int64_t>(1'000'000'000.0 / track->v_frame_rate), track->v_width, track->v_height, track->v_dwidth, track->v_dheight, false);
   track->ptzr         = add_packetizer(m2vpacketizer);
 
   m2vpacketizer->set_video_interlaced_flag(track->v_interlaced);

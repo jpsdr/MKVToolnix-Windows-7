@@ -25,11 +25,11 @@
 mpeg4_p2_video_packetizer_c::
 mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader,
                             track_info_c &p_ti,
-                            double fps,
+                            int64_t default_duration,
                             int width,
                             int height,
                             bool input_is_native)
-  : video_for_windows_packetizer_c(p_reader, p_ti, fps, width, height)
+  : video_for_windows_packetizer_c(p_reader, p_ti, default_duration, width, height)
   , m_timestamps_generated(0)
   , m_previous_timestamp(0)
   , m_aspect_ratio_extracted(false)
@@ -54,10 +54,10 @@ mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader,
       m_timestamp_factory.reset();
 
     if (m_default_duration_forced)
-      m_fps = 1000000000.0 / m_htrack_default_duration;
+      m_default_duration = m_default_duration_forced;
 
-    else if (0.0 != m_fps)
-      m_htrack_default_duration = static_cast<int64_t>(1000000000ll / m_fps);
+    else if (0 != m_default_duration)
+      m_htrack_default_duration = m_default_duration;
 
     m_timestamp_factory_application_mode = TFA_FULL_QUEUEING;
   }
@@ -106,9 +106,8 @@ mpeg4_p2_video_packetizer_c::process_non_native(packet_cptr packet) {
       ++m_timestamps_generated;
     }
 
-  } else if (0.0 == m_fps)
-    mxerror_tid(m_ti.m_fname, m_ti.m_id, Y("Cannot convert non-native MPEG4 video frames into native ones if the source container "
-                                       "provides neither timestamps nor a number of frames per second.\n"));
+  } else if (0 == m_default_duration)
+    mxerror_tid(m_ti.m_fname, m_ti.m_id, Y("Cannot convert non-native MPEG4 video frames into native ones if the source container provides neither timestamps nor a number of frames per second.\n"));
 
   std::vector<mtx::mpeg4_p2::video_frame_t> frames;
   mtx::mpeg4_p2::find_frame_types(packet->data->get_buffer(), packet->data->get_size(), frames, m_config_data);
@@ -239,14 +238,9 @@ mpeg4_p2_video_packetizer_c::process_native(packet_cptr) {
 */
 void
 mpeg4_p2_video_packetizer_c::generate_timestamp_and_duration() {
-  if (0.0 >= m_fps) {
-    // TODO: error
-    mxexit(1);
-  }
-
   if (m_available_timestamps.empty()) {
-    m_previous_timestamp = (int64_t)(m_previous_timestamp + 1000000000.0 / m_fps);
-    m_available_timestamps.push_back(timestamp_duration_t(m_previous_timestamp, (int64_t)(1000000000.0 / m_fps)));
+    m_previous_timestamp = m_previous_timestamp + m_default_duration;
+    m_available_timestamps.emplace_back(m_previous_timestamp, m_default_duration);
 
     ++m_statistics.m_num_generated_timestamps;
   }

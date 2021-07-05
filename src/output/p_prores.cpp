@@ -21,10 +21,10 @@ using namespace libmatroska;
 
 prores_video_packetizer_c::prores_video_packetizer_c(generic_reader_c *reader,
                                                      track_info_c &ti,
-                                                     double fps,
+                                                     int64_t default_duration,
                                                      int width,
                                                      int height)
-  : generic_video_packetizer_c{reader, ti, MKV_V_PRORES, fps, width, height}
+  : generic_video_packetizer_c{reader, ti, MKV_V_PRORES, default_duration, width, height}
 {
 }
 

@@ -55,7 +55,7 @@ protected:
   statistics_t m_statistics;
 
 public:
-  mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, double fps, int width, int height, bool input_is_native);
+  mpeg4_p2_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int64_t default_duration, int width, int height, bool input_is_native);
   virtual ~mpeg4_p2_video_packetizer_c();
 
   virtual int process(packet_cptr packet);

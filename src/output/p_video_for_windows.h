@@ -28,7 +28,7 @@ protected:
   } m_codec_type;
 
 public:
-  video_for_windows_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, double fps, int width, int height);
+  video_for_windows_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int64_t default_duration, int width, int height);
 
   virtual int process(packet_cptr packet) override;
   virtual void set_headers() override;

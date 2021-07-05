@@ -20,7 +20,7 @@
 
 class prores_video_packetizer_c: public generic_video_packetizer_c {
 public:
-  prores_video_packetizer_c(generic_reader_c *reader, track_info_c &ti, double fps, int width, int height);
+  prores_video_packetizer_c(generic_reader_c *reader, track_info_c &ti, int64_t default_duration, int width, int height);
 
   virtual int process(packet_cptr packet) override;
 

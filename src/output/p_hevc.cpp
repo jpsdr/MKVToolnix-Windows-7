@@ -33,10 +33,10 @@ public:
 hevc_video_packetizer_c::
 hevc_video_packetizer_c(generic_reader_c *p_reader,
                         track_info_c &p_ti,
-                        double fps,
+                        int64_t default_duration,
                         int width,
                         int height)
-  : generic_video_packetizer_c{p_reader, p_ti, MKV_V_MPEGH_HEVC, fps, width, height}
+  : generic_video_packetizer_c{p_reader, p_ti, MKV_V_MPEGH_HEVC, default_duration, width, height}
   , p_ptr{new hevc_video_packetizer_private_c}
 {
   auto &p = *p_func();
@@ -62,7 +62,7 @@ hevc_video_packetizer_c::setup_default_duration() {
   auto &p                      = *p_func();
 
   auto source_default_duration = m_htrack_default_duration > 0 ? m_htrack_default_duration
-                               : m_fps                     > 0 ? static_cast<int64_t>(1'000'000'000 / m_fps)
+                               : m_default_duration        > 0 ? m_default_duration
                                :                                 0;
   auto stream_default_duration = p.parser->has_stream_default_duration() ? p.parser->get_stream_default_duration() : 0;
   auto diff_source_stream      = std::abs(stream_default_duration - source_default_duration);

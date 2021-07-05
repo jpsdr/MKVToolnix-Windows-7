@@ -28,7 +28,7 @@ protected:
   debugging_option_c m_debug_stuffing_removal;
 
 public:
-  mpeg1_2_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int version, double fps, int width, int height, int dwidth, int dheight, bool framed);
+  mpeg1_2_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int version, int64_t default_duration, int width, int height, int dwidth, int dheight, bool framed);
   virtual ~mpeg1_2_video_packetizer_c();
 
   virtual int process(packet_cptr packet);

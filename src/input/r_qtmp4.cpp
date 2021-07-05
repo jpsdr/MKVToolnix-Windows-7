@@ -1702,7 +1702,7 @@ qtmp4_reader_c::create_audio_packetizer_dts(qtmp4_demuxer_c &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_svq1(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = create_bitmap_info_header(dmx, "SVQ1");
-  dmx.ptzr            = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, 0.0, dmx.v_width, dmx.v_height));
+  dmx.ptzr            = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, 0, dmx.v_width, dmx.v_height));
 
   show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
@@ -1710,7 +1710,7 @@ qtmp4_reader_c::create_video_packetizer_svq1(qtmp4_demuxer_c &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_mpeg4_p2(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = create_bitmap_info_header(dmx, "DIVX");
-  dmx.ptzr            = add_packetizer(new mpeg4_p2_video_packetizer_c(this, m_ti, 0.0, dmx.v_width, dmx.v_height, false));
+  dmx.ptzr            = add_packetizer(new mpeg4_p2_video_packetizer_c(this, m_ti, 0, dmx.v_width, dmx.v_height, false));
 
   show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
@@ -1720,7 +1720,7 @@ qtmp4_reader_c::create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx) {
   int version = !dmx.esds_parsed                                             ? (dmx.fourcc.value() & 0xff) - '0'
               : dmx.esds.object_type_id == mtx::mp4::OBJECT_TYPE_MPEG1Visual ? 1
               :                                                                2;
-  dmx.ptzr    = add_packetizer(new mpeg1_2_video_packetizer_c(this, m_ti, version, -1.0, dmx.v_width, dmx.v_height, 0, 0, false));
+  dmx.ptzr    = add_packetizer(new mpeg1_2_video_packetizer_c(this, m_ti, version, -1, dmx.v_width, dmx.v_height, 0, 0, false));
 
   show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
@@ -1739,7 +1739,7 @@ qtmp4_reader_c::create_video_packetizer_av1(qtmp4_demuxer_c &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_avc(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.priv.size() ? dmx.priv[0] : memory_cptr{};
-  dmx.ptzr            = add_packetizer(new avc_video_packetizer_c(this, m_ti, static_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
+  dmx.ptzr            = add_packetizer(new avc_video_packetizer_c(this, m_ti, dmx.frame_rate ? static_cast<int64_t>(1'000'000'000.0 / dmx.frame_rate) : 0, dmx.v_width, dmx.v_height));
 
   show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }
@@ -1762,7 +1762,7 @@ qtmp4_reader_c::create_video_packetizer_mpegh_p2_es(qtmp4_demuxer_c &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.priv.size() && dmx.priv[0]->get_size() ? dmx.priv[0] : memory_cptr{};
-  auto packetizer     = new hevc_video_packetizer_c(this, m_ti, 0.0, dmx.v_width, dmx.v_height);
+  auto packetizer     = new hevc_video_packetizer_c(this, m_ti, 0, dmx.v_width, dmx.v_height);
   dmx.ptzr            = add_packetizer(packetizer);
 
   if (boost::multiprecision::numerator(dmx.frame_rate)) {
@@ -1776,7 +1776,7 @@ qtmp4_reader_c::create_video_packetizer_mpegh_p2(qtmp4_demuxer_c &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_prores(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = memory_c::clone(dmx.fourcc.str());
-  dmx.ptzr            = add_packetizer(new prores_video_packetizer_c(this, m_ti, static_cast<double>(dmx.frame_rate), dmx.v_width, dmx.v_height));
+  dmx.ptzr            = add_packetizer(new prores_video_packetizer_c(this, m_ti, static_cast<int64_t>(1'000'000'000.0 / dmx.frame_rate), dmx.v_width, dmx.v_height));
 
   show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
 }

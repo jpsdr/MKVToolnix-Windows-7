@@ -29,14 +29,14 @@ using namespace libmatroska;
 generic_video_packetizer_c::generic_video_packetizer_c(generic_reader_c *p_reader,
                                                        track_info_c &p_ti,
                                                        std::string const &codec_id,
-                                                       double fps,
+                                                       int64_t default_duration,
                                                        int width,
                                                        int height)
   : generic_packetizer_c{p_reader, p_ti}
-  , m_fps{fps}
   , m_width{width}
   , m_height{height}
   , m_frames_output{}
+  , m_default_duration{default_duration}
   , m_ref_timestamp{-1}
   , m_duration_shift{}
   , m_last_pframe{}
@@ -49,8 +49,8 @@ generic_video_packetizer_c::generic_video_packetizer_c(generic_reader_c *p_reade
 
 void
 generic_video_packetizer_c::set_headers() {
-  if (0.0 < m_fps)
-    set_track_default_duration(1000000000.0 / m_fps);
+  if (0 < m_default_duration)
+    set_track_default_duration(m_default_duration);
 
   set_video_pixel_width(m_width);
   set_video_pixel_height(m_height);
@@ -70,20 +70,17 @@ generic_video_packetizer_c::set_headers() {
 //             not relative!)
 int
 generic_video_packetizer_c::process(packet_cptr packet) {
-  if ((0.0 == m_fps) && (-1 == packet->timestamp))
+  if ((0 == m_default_duration) && (-1 == packet->timestamp))
     mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("The FPS is 0.0 but the reader did not provide a timestamp for a packet. {0}\n"), BUGMSG));
 
   if (-1 == packet->timestamp)
-    packet->timestamp = (int64_t)(1000000000.0 * m_frames_output / m_fps) + m_duration_shift;
+    packet->timestamp = m_frames_output * m_default_duration + m_duration_shift;
 
-  if (-1 == packet->duration) {
-    if (0.0 == m_fps)
-      packet->duration = 0;
-    else
-      packet->duration = (int64_t)(1000000000.0 / m_fps);
+  if (-1 == packet->duration)
+    packet->duration = m_default_duration;
 
-  } else if (0.0 != packet->duration)
-    m_duration_shift += packet->duration - (int64_t)(1000000000.0 / m_fps);
+  else if (0 != packet->duration)
+    m_duration_shift += packet->duration - m_default_duration;
 
   ++m_frames_output;
 
