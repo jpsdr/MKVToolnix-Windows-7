@@ -308,11 +308,12 @@ public:
   int ptzr;                         // the actual packetizer instance
 
   timestamp_c m_timestamp, m_previous_timestamp, m_previous_valid_timestamp, m_timestamp_wrap_add, m_subtitle_timestamp_correction;
+  mtx_mp_rational_t m_default_duration;
 
   // video related parameters
   bool v_interlaced;
   int v_version, v_width, v_height, v_dwidth, v_dheight;
-  double v_frame_rate, v_aspect_ratio;
+  double v_aspect_ratio;
   memory_cptr m_codec_private_data;
 
   // audio related parameters
