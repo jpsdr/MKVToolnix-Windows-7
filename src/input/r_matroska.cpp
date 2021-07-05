@@ -1218,8 +1218,11 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
   track->v_stereo_mode  = FindChildValue<KaxVideoStereoMode, stereo_mode_c::mode>(ktvideo, stereo_mode_c::unspecified);
 
   // For older files.
-  track->v_frate        = FindChildValue<KaxVideoFrameRate>(ktvideo, track->v_frate);
+  auto frame_rate       = FindChildValue<KaxVideoFrameRate>(ktvideo);
   track->v_display_unit = FindChildValue<KaxVideoDisplayUnit>(ktvideo);
+
+  if (0 < frame_rate)
+    track->default_duration = static_cast<int64_t>(1'000'000'000 / frame_rate);
 
   if (!track->v_width)
     mxerror(Y("matroska_reader: Pixel width is missing.\n"));
@@ -1365,9 +1368,6 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
       track->language = mtx::bcp47::language_c::parse("und");
 
     track->effective_language = track->language_ietf.is_valid() ? track->language_ietf : track->language;
-
-    if (0 != track->default_duration)
-      track->v_frate = 1000000000.0 / track->default_duration;
 
     track->content_decoder.initialize(*ktentry);
 
@@ -1649,8 +1649,8 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
   packetizer->set_codec_private(t->private_data);
   packetizer->set_codec_name(t->codec_name);
 
-  if (0.0 < t->v_frate)
-    packetizer->set_track_default_duration(1000000000.0 / t->v_frate);
+  if (t->default_duration)
+    packetizer->set_track_default_duration(t->default_duration);
   if (t->seek_pre_roll.valid())
     packetizer->set_track_seek_pre_roll(t->seek_pre_roll);
 
@@ -1732,7 +1732,7 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
 
   else if (t->codec.is(codec_c::type_e::V_MPEG12)) {
     int version = t->codec_id[6] - '0';
-    set_track_packetizer(t, new mpeg1_2_video_packetizer_c(this, nti, version, static_cast<int64_t>(1'000'000'000.0 / t->v_frate), t->v_width, t->v_height, t->v_dwidth, t->v_dheight, true));
+    set_track_packetizer(t, new mpeg1_2_video_packetizer_c(this, nti, version, t->default_duration, t->v_width, t->v_height, t->v_dwidth, t->v_dheight, true));
     show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else if (t->codec.is(codec_c::type_e::V_MPEGH_P2))
@@ -1740,14 +1740,14 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
 
   else if (t->codec.is(codec_c::type_e::V_MPEG4_P2)) {
     bool is_native = (t->codec_id == MKV_V_MPEG4_SP) || (t->codec_id == MKV_V_MPEG4_AP) || (t->codec_id == MKV_V_MPEG4_ASP);
-    set_track_packetizer(t, new mpeg4_p2_video_packetizer_c(this, nti, static_cast<int64_t>(1'000'000'000.0 / t->v_frate), t->v_width, t->v_height, is_native));
+    set_track_packetizer(t, new mpeg4_p2_video_packetizer_c(this, nti, t->default_duration, t->v_width, t->v_height, is_native));
     show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else if (t->codec.is(codec_c::type_e::V_MPEG4_P10))
     create_avc_video_packetizer(t, nti);
 
   else if (t->codec.is(codec_c::type_e::V_THEORA)) {
-    set_track_packetizer(t, new theora_video_packetizer_c(this, nti, static_cast<int64_t>(1'000'000'000.0 / t->v_frate), t->v_width, t->v_height));
+    set_track_packetizer(t, new theora_video_packetizer_c(this, nti, t->default_duration, t->v_width, t->v_height));
     show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else if (t->codec.is(codec_c::type_e::V_DIRAC)) {
@@ -1770,11 +1770,11 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
     create_vc1_video_packetizer(t, nti);
 
   else if (t->ms_compat) {
-    set_track_packetizer(t, new video_for_windows_packetizer_c(this, nti, static_cast<int64_t>(1'000'000'000.0 / t->v_frate), t->v_width, t->v_height));
+    set_track_packetizer(t, new video_for_windows_packetizer_c(this, nti, t->default_duration, t->v_width, t->v_height));
     show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   } else {
-    set_track_packetizer(t, new generic_video_packetizer_c(this, nti, t->codec_id.c_str(), t->v_frate, t->v_width, t->v_height));
+    set_track_packetizer(t, new generic_video_packetizer_c(this, nti, t->codec_id.c_str(), t->default_duration, t->v_width, t->v_height));
     show_packetizer_info(t->tnum, *t->ptzr_ptr);
   }
 
@@ -1911,7 +1911,7 @@ kax_reader_c::create_hevc_video_packetizer(kax_track_t *t,
     return;
   }
 
-  auto ptzr = new hevc_video_packetizer_c(this, nti, static_cast<int64_t>(1'000'000'000.0 / t->v_frate), t->v_width, t->v_height);
+  auto ptzr = new hevc_video_packetizer_c(this, nti, t->default_duration, t->v_width, t->v_height);
   ptzr->set_source_timestamp_resolution(m_tc_scale);
 
   set_track_packetizer(t, ptzr);
@@ -1984,8 +1984,8 @@ kax_reader_c::create_wavpack_audio_packetizer(kax_track_t *t,
   meta.sample_rate     = t->a_sfreq;
   meta.has_correction  = t->max_blockadd_id != 0;
 
-  if (0.0 < t->v_frate)
-    meta.samples_per_block = t->a_sfreq / t->v_frate;
+  if (0 < t->default_duration)
+    meta.samples_per_block = t->a_sfreq * t->default_duration / 1'000'000'000.0;
 
   set_track_packetizer(t, new wavpack_packetizer_c(this, nti, meta));
 
@@ -2203,14 +2203,14 @@ kax_reader_c::create_avc_video_packetizer(kax_track_t *t,
     return;
   }
 
-  set_track_packetizer(t, new avc_video_packetizer_c(this, nti, t->v_frate ? static_cast<int64_t>(1'000'000'000.0 / t->v_frate) : 0, t->v_width, t->v_height));
+  set_track_packetizer(t, new avc_video_packetizer_c(this, nti, t->default_duration, t->v_width, t->v_height));
   show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
 
 void
 kax_reader_c::create_prores_video_packetizer(kax_track_t &t,
                                              track_info_c &nti) {
-  set_track_packetizer(&t, new prores_video_packetizer_c{this, nti, static_cast<int64_t>(1'000'000'000.0 / t.v_frate), static_cast<int>(t.v_width), static_cast<int>(t.v_height)});
+  set_track_packetizer(&t, new prores_video_packetizer_c{this, nti, t.default_duration, static_cast<int>(t.v_width), static_cast<int>(t.v_height)});
   show_packetizer_info(t.tnum, *t.ptzr_ptr);
 }
 
@@ -2381,8 +2381,8 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
     return;
   }
 
-  if (0 != block_track->v_frate)
-    block_duration = 1000000000.0 / block_track->v_frate;
+  if (0 < block_track->default_duration)
+    block_duration = block_track->default_duration;
   int64_t frame_duration = (block_duration == -1) ? 0 : block_duration;
 
   if (block_track->ignore_duration_hack) {
@@ -2491,10 +2491,10 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
   }
 
   auto duration       = FindChild<KaxBlockDuration>(block_group);
-  auto block_duration = duration             ? static_cast<int64_t>(duration->GetValue() * m_tc_scale / block->NumberFrames())
-                      : block_track->v_frate ? static_cast<int64_t>(1000000000.0 / block_track->v_frate)
-                      :                        int64_t{-1};
-  auto frame_duration = -1 == block_duration ? int64_t{0} : block_duration;
+  auto block_duration = duration                      ? static_cast<int64_t>(duration->GetValue() * m_tc_scale / block->NumberFrames())
+                      : block_track->default_duration ? block_track->default_duration
+                      :                                 int64_t{-1};
+  auto frame_duration = -1 == block_duration          ? int64_t{0} : block_duration;
   m_last_timestamp    = block_timestamp;
 
   if (0 < block->NumberFrames())

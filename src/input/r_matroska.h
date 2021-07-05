@@ -55,7 +55,7 @@ struct kax_track_t {
 
   uint32_t max_blockadd_id;
   bool lacing_flag;
-  uint64_t default_duration;
+  int64_t default_duration;
   timestamp_c seek_pre_roll, codec_delay;
 
   // Parameters for video tracks
@@ -73,7 +73,6 @@ struct kax_track_t {
   double v_max_luminance, v_min_luminance;
   int64_t v_field_order;
   stereo_mode_c::mode v_stereo_mode;
-  double v_frate;
   char v_fourcc[5];
   std::optional<uint64_t> v_projection_type;
   memory_cptr v_projection_private;
@@ -152,7 +151,6 @@ struct kax_track_t {
     , v_min_luminance{-1}
     , v_field_order{-1}
     , v_stereo_mode(stereo_mode_c::unspecified)
-    , v_frate(0.0)
     , a_channels(0)
     , a_bps(0)
     , a_formattag(0)
