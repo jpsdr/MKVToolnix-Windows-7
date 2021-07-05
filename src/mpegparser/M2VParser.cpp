@@ -205,9 +205,6 @@ void M2VParser::FlushWaitQueue(){
 }
 
 void M2VParser::StampFrame(MPEGFrame* frame){
-  MediaTime timeunit;
-
-  timeunit = (MediaTime)(1000000000/(m_seqHdr.frameRate*2));
   if (m_timestamps.empty())
     frame->timestamp = previousTimestamp + previousDuration;
   else {
@@ -215,7 +212,7 @@ void M2VParser::StampFrame(MPEGFrame* frame){
     m_timestamps.pop_front();
   }
   previousTimestamp = frame->timestamp;
-  frame->duration = (MediaTime)(frame->duration * timeunit);
+  frame->duration = mtx::to_int(mtx::rational(frame->duration, 1) * 1'000'000'000 / (m_seqHdr.frameRate * 2));
   previousDuration = frame->duration;
 
   frame->stamped = true;

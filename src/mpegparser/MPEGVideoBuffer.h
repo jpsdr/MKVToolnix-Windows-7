@@ -24,6 +24,8 @@
 
 #include "common/common_pch.h"
 
+#include "common/math_fwd.h"
+
 #include "Types.h"
 #include "CircBuffer.h"
 
@@ -45,12 +47,12 @@ constexpr auto MPEG2_P_FRAME = 2;
 constexpr auto MPEG2_B_FRAME = 3;
 
 struct MPEG2SequenceHeader {
-  uint32_t width;
-  uint32_t height;
-  double aspectRatio;
-  double frameRate;
-  uint8_t profileLevelIndication;
-  uint8_t progressiveSequence;
+  uint32_t width{};
+  uint32_t height{};
+  double aspectRatio{};
+  mtx_mp_rational_t frameRate;
+  uint8_t profileLevelIndication{};
+  uint8_t progressiveSequence{};
 
   MPEG2SequenceHeader();
 };

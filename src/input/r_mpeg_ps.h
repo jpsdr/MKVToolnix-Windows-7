@@ -116,7 +116,8 @@ struct mpeg_ps_track_t {
 
   bool v_interlaced;
   int v_version, v_width, v_height, v_dwidth, v_dheight;
-  double v_frame_rate, v_aspect_ratio;
+  mtx_mp_rational_t v_field_duration;
+  double v_aspect_ratio;
 
   int a_channels, a_sample_rate, a_bits_per_sample, a_bsid;
   mtx::dts::header_t dts_header;
@@ -141,7 +142,6 @@ struct mpeg_ps_track_t {
     v_height(0),
     v_dwidth(0),
     v_dheight(0),
-    v_frame_rate(0),
     v_aspect_ratio(0),
     a_channels(0),
     a_sample_rate(0),

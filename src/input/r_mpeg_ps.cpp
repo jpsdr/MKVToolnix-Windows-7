@@ -674,9 +674,9 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
   track->v_version                = m2v_parser->GetMPEGVersion();
   track->v_width                  = seq_hdr.width;
   track->v_height                 = seq_hdr.height;
-  track->v_frame_rate             = seq_hdr.frameRate;
+  track->v_field_duration         = mtx::rational(1'000'000'000, seq_hdr.frameRate * 2);
   track->v_aspect_ratio           = seq_hdr.aspectRatio;
-  track->timestamp_b_frame_offset = 1000000000ll * num_leading_b_fields / (seq_hdr.frameRate * 2);
+  track->timestamp_b_frame_offset = mtx::to_int(track->v_field_duration * num_leading_b_fields);
 
   mxdebug_if(m_debug_timestamps,
              fmt::format("Leading B fields {0} rate {1} progressive? {2} calculated_offset {3} found_i? {4} found_non_b? {5}\n",
@@ -1233,7 +1233,7 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
     if (track->codec.is(codec_c::type_e::V_MPEG12)) {
       generic_packetizer_c *m2vpacketizer;
 
-      m2vpacketizer       = new mpeg1_2_video_packetizer_c(this, m_ti, track->v_version, static_cast<int64_t>(1'000'000'000.0 / track->v_frame_rate), track->v_width, track->v_height,
+      m2vpacketizer       = new mpeg1_2_video_packetizer_c(this, m_ti, track->v_version, mtx::to_int(track->v_field_duration * 2), track->v_width, track->v_height,
                                                            track->v_dwidth, track->v_dheight, false);
       track->ptzr         = add_packetizer(m2vpacketizer);
       show_packetizer_info(id, ptzr(track->ptzr));

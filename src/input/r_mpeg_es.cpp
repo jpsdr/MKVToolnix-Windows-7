@@ -132,7 +132,7 @@ mpeg_es_reader_c::read_headers() {
     interlaced                  = !seq_hdr.progressiveSequence;
     width                       = seq_hdr.width;
     height                      = seq_hdr.height;
-    frame_rate                  = seq_hdr.frameRate;
+    field_duration              = mtx::rational(1'000'000'000, seq_hdr.frameRate * 2);
     aspect_ratio                = seq_hdr.aspectRatio;
 
     if ((0 >= aspect_ratio) || (1 == aspect_ratio))
@@ -141,7 +141,7 @@ mpeg_es_reader_c::read_headers() {
       dwidth = std::llround(height * aspect_ratio);
     dheight = height;
 
-    mxdebug_if(s_debug, fmt::format("mpeg_es_reader: version {0} width {1} height {2} FPS {3} AR {4}\n", version, width, height, frame_rate, aspect_ratio));
+    mxdebug_if(s_debug, fmt::format("mpeg_es_reader: version {0} width {1} height {2} FPS {3} AR {4}\n", version, width, height, seq_hdr.frameRate, aspect_ratio));
 
   } catch (mtx::mm_io::exception &) {
     throw mtx::input::open_x();
@@ -155,7 +155,7 @@ mpeg_es_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('v', 0) || !m_reader_packetizers.empty())
     return;
 
-  m2vpacketizer = new mpeg1_2_video_packetizer_c(this, m_ti, version, static_cast<int64_t>(1'000'000'000.0 / frame_rate), width, height, dwidth, dheight, false);
+  m2vpacketizer = new mpeg1_2_video_packetizer_c(this, m_ti, version, mtx::to_int(field_duration * 2), width, height, dwidth, dheight, false);
   add_packetizer(m2vpacketizer);
   m2vpacketizer->set_video_interlaced_flag(interlaced);
 
