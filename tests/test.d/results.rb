@@ -26,11 +26,13 @@ class Results
   end
 
   def save
-    f = File.new "results.txt", "w"
-    @results.keys.sort.each do |key|
-      f.puts [ key, @results[key][:hash], @results[key][:status], @results[key][:date_added].strftime("%Y%m%d-%H%M%S"), @results[key][:duration] ].collect { |item| item.to_s }.join(":")
+    content = @results.keys.sort.map do |key|
+      [ key, @results[key][:hash], @results[key][:status], @results[key][:date_added].strftime("%Y%m%d-%H%M%S"), @results[key][:duration] ].collect { |item| item.to_s }.join(":")
     end
-    f.close
+
+    content = content.join("\n") + "\n"
+
+    IO.write 'results.txt', content, mode: 'wb'
   end
 
   def exist?(name)
