@@ -26,6 +26,7 @@ def setup
   $is_linux   = !$is_windows && !$is_macos
 
   ENV[ $is_macos ? 'LANG' : 'LC_ALL' ] = 'en_US.UTF-8'
+  ENV['MTX_ALWAYS_USE_UNIX_NEWLINES']  = '1'
   ENV['PATH']                          = "../src:" + ENV['PATH']
 
   $config = read_build_config
