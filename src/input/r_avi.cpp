@@ -854,16 +854,16 @@ avi_reader_c::extended_identify_mpeg4_l2(mtx::id::info_c &info) {
 
   uint32_t par_num, par_den;
   if (mtx::mpeg4_p2::extract_par(buffer, size, par_num, par_den)) {
-    auto aspect_ratio = static_cast<double>(m_video_width) * par_num / m_video_height / par_den;
+    auto aspect_ratio = mtx::rational(m_video_width * par_num, m_video_height * par_den);
 
     int disp_width, disp_height;
-    if (aspect_ratio > (static_cast<double>(m_video_width) / m_video_height)) {
-      disp_width  = std::llround(m_video_height * aspect_ratio);
+    if (aspect_ratio > mtx::rational(m_video_width, m_video_height)) {
+      disp_width  = mtx::to_int_rounded(m_video_height * aspect_ratio);
       disp_height = m_video_height;
 
     } else {
       disp_width  = m_video_width;
-      disp_height = std::llround(m_video_width / aspect_ratio);
+      disp_height = mtx::to_int_rounded(m_video_width / aspect_ratio);
     }
 
     info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", disp_width, disp_height));
