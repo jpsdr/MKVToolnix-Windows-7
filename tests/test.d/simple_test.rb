@@ -324,7 +324,7 @@ class SimpleTest
     puts "COMMAND #{command}" if ENV['DEBUG']
 
     exit_code = 0
-    if !system(command)
+    if !run_bash command
       exit_code = $? >> 8
       self.error "system command failed: #{command} (#{exit_code})" if options[:exit_code] != exit_code
     end

@@ -65,7 +65,10 @@ class Test
     command         << " >/dev/null 2>/dev/null " unless (/>/.match(command))
 
     puts "COMMAND #{command}" if ENV['DEBUG']
-    error "system command failed: #{command} (" + ($? >> 8).to_s + ")" if !system(command) && ((arg.size == 0) || ((arg[0] << 8) != $?))
+
+    result = run_bash command
+
+    error "system command failed: #{command} (" + ($? >> 8).to_s + ")" if !result && ((arg.size == 0) || ((arg[0] << 8) != $?))
   end
 
   def tmp_name_prefix

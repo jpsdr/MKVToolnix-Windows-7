@@ -51,3 +51,15 @@ else
     `md5sum #{name}`.chomp.gsub(/\s+.*/, "")
   end
 end
+
+def run_bash command
+  return system command if !$is_windows
+
+  cmd_file = Tempfile.new
+  cmd_file.write command
+  cmd_file.close
+
+  FileUtils.chmod 0700, cmd_file.path
+
+  system "bash -c #{cmd_file.path}"
+end
