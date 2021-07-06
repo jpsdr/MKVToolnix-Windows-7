@@ -958,8 +958,8 @@ es_parser_c::get_display_dimensions(int width,
   if (0 >= height)
     height = get_height();
 
-  return std::make_pair<int64_t, int64_t>(1 <= m_par ? std::llround(width * static_cast<double>(m_par)) : width,
-                                          1 <= m_par ? height                                           : std::llround(height / static_cast<double>(m_par)));
+  return std::make_pair<int64_t, int64_t>(1 <= m_par ? mtx::to_int_rounded(width * m_par) : width,
+                                          1 <= m_par ? height                             : mtx::to_int_rounded(height / m_par));
 }
 
 size_t
