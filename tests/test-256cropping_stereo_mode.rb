@@ -12,7 +12,7 @@ class T_256cropping_stereo_mode < Test
       "sort -n | " +
       "tr '\n' '-' | " +
       "sed -e 's/-$//'"
-    `#{command}`.chomp
+    capture_bash(command).chomp
   end
 
   def run
@@ -27,4 +27,3 @@ class T_256cropping_stereo_mode < Test
     result
   end
 end
-

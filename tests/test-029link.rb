@@ -19,7 +19,7 @@ class T_029link < Test
     cmd = "../src/mkvinfo #{tmp}#{part} | grep \"Next segment UID:\" " +
       "2> /dev/null"
     @debug_commands << cmd
-    uid = `#{cmd}`.chomp
+    uid = capture_bash(cmd).chomp
     return true if (needs_exact and /#{NextUID}/.match(uid))
     return true if (other_ok and ("" != uid))
     return "" == uid
@@ -34,7 +34,7 @@ class T_029link < Test
     cmd = "../src/mkvinfo #{tmp}#{part} | grep \"Previous segment UID:\" " +
       "2> /dev/null"
     @debug_commands << cmd
-    uid = `#{cmd}`.chomp
+    uid = capture_bash(cmd).chomp
     return true if (needs_exact and /#{PreviousUID}/.match(uid))
     return true if (other_ok and ("" != uid))
     return "" == uid
@@ -92,4 +92,3 @@ class T_029link < Test
     return "all ok"
   end
 end
-

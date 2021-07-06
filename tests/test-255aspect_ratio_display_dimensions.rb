@@ -6,7 +6,7 @@ class T_255aspect_ratio_display_dimensions < Test
   end
 
   def get_display_dimensions file_name
-    JSON.load(`mkvmerge -J "#{file_name}"`)["tracks"][0]["properties"]["display_dimensions"]
+    JSON.load(capture_bash("mkvmerge -J \"#{file_name}\""))["tracks"][0]["properties"]["display_dimensions"]
   end
 
   def run_test_with_args initial_args
