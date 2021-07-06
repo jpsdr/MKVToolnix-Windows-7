@@ -6,9 +6,8 @@ class T_288identify_files_by_amg < Test
   end
 
   def run
-    File.open(tmp, 'w') do |file|
-      file.puts(JSON.load(capture_bash("../src/mkvmerge -J data/mkv/amg_sample.mkv"))["tracks"].size.to_s)
-    end
+    content = JSON.load(capture_bash("../src/mkvmerge -J data/mkv/amg_sample.mkv"))["tracks"].size.to_s
+    IO.write(tmp, content + "\n", mode: 'wb')
     hash_tmp
   end
 end
