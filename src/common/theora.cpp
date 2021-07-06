@@ -13,9 +13,8 @@
 
 #include "common/common_pch.h"
 
-#include <cmath>
-
 #include "common/bit_reader.h"
+#include "common/math_fwd.h"
 #include "common/theora.h"
 
 namespace mtx::theora {
@@ -65,12 +64,12 @@ parse_identification_header(unsigned char *buffer,
   header.pf = bc.get_bits(2);
 
   if ((0 != header.parn) && (0 != header.pard)) {
-    if ((static_cast<double>(header.fmbw) / header.fmbh) < (static_cast<double>(header.parn) / header.pard)) {
-      header.display_width  = std::llround(static_cast<double>(header.fmbw) * header.parn / header.pard);
+    if (mtx::rational(header.fmbw, header.fmbh) < mtx::rational(header.parn, header.pard)) {
+      header.display_width  = mtx::to_int_rounded(mtx::rational(header.fmbw * header.parn, header.pard));
       header.display_height = header.fmbh;
     } else {
       header.display_width  = header.fmbw;
-      header.display_height = std::llround(static_cast<double>(header.fmbh) * header.pard / header.parn);
+      header.display_height = mtx::to_int_rounded(mtx::rational(header.fmbh * header.pard, header.parn));
     }
   }
 }
