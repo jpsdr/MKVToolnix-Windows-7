@@ -146,8 +146,6 @@ flv_track_c::flv_track_c(char type)
   , m_v_height{}
   , m_v_dwidth{}
   , m_v_dheight{}
-  , m_v_frame_rate{}
-  , m_v_aspect_ratio{}
   , m_v_cts_offset{}
   , m_v_frame_type{}
   , m_a_channels{}
@@ -365,7 +363,7 @@ flv_reader_c::create_packetizer(int64_t id) {
 void
 flv_reader_c::create_v_avc_packetizer(flv_track_cptr &track) {
   m_ti.m_private_data = track->m_private_data;
-  track->m_ptzr       = add_packetizer(new avc_video_packetizer_c(this, m_ti, track->m_v_frame_rate ? static_cast<int64_t>(1'000'000'000.0 / track->m_v_frame_rate) : 0, track->m_v_width, track->m_v_height));
+  track->m_ptzr       = add_packetizer(new avc_video_packetizer_c(this, m_ti, track->m_v_frame_rate ? mtx::to_int_rounded(1'000'000'000 / track->m_v_frame_rate) : 0, track->m_v_width, track->m_v_height));
   show_packetizer_info(m_video_track_idx, ptzr(track->m_ptzr));
 }
 
@@ -384,7 +382,7 @@ flv_reader_c::create_v_generic_packetizer(flv_track_cptr &track) {
 
   m_ti.m_private_data = memory_c::clone(&bih, sizeof(bih));
 
-  track->m_ptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, static_cast<int64_t>(1'000'000'000.0 / track->m_v_frame_rate), track->m_v_width, track->m_v_height));
+  track->m_ptzr = add_packetizer(new video_for_windows_packetizer_c(this, m_ti, track->m_v_frame_rate ? mtx::to_int_rounded(1'000'000'000 / track->m_v_frame_rate) : 0, track->m_v_width, track->m_v_height));
   show_packetizer_info(m_video_track_idx, ptzr(track->m_ptzr));
 }
 
@@ -425,7 +423,7 @@ flv_reader_c::new_stream_v_avc(flv_track_cptr &track,
       if (!track->m_v_height)
         track->m_v_height = sps_info.height;
       if (!track->m_v_frame_rate && sps_info.timing_info.num_units_in_tick && sps_info.timing_info.time_scale)
-        track->m_v_frame_rate = sps_info.timing_info.time_scale / sps_info.timing_info.num_units_in_tick;
+        track->m_v_frame_rate = mtx::rational(sps_info.timing_info.time_scale, sps_info.timing_info.num_units_in_tick);
     }
 
     if (!track->m_v_frame_rate)
@@ -682,7 +680,7 @@ flv_reader_c::process_script_tag() {
 
     std::optional<double> number;
 
-    if ((number = parser.get_meta_data_value<double>("framerate"))) {
+    if (number = parser.get_meta_data_value<double>("framerate"); number && *number) {
       m_tracks[m_video_track_idx]->m_v_frame_rate = *number;
       mxdebug_if(m_debug, fmt::format("Video frame rate from meta data: {0}\n", *number));
     }
@@ -798,7 +796,7 @@ flv_reader_c::read(generic_packetizer_c *,
 
     int64_t duration = -1;
     if (track->m_v_frame_rate && track->m_fourcc.equiv("AVC1"))
-      duration = 1000000000ll / track->m_v_frame_rate;
+      duration = mtx::to_int(mtx::rational(1'000'000'000, track->m_v_frame_rate));
 
     auto packet = new packet_t(track->m_payload, track->m_timestamp, duration, 'I' == track->m_v_frame_type ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME);
 

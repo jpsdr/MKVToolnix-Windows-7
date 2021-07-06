@@ -106,7 +106,7 @@ public:
 
   // video related parameters
   unsigned int m_v_version, m_v_width, m_v_height, m_v_dwidth, m_v_dheight;
-  double m_v_frame_rate, m_v_aspect_ratio;
+  mtx_mp_rational_t m_v_frame_rate;
   int64_t m_v_cts_offset;
   char m_v_frame_type;
 
