@@ -16,6 +16,8 @@
 
 #include "common/common_pch.h"
 
+#include "common/math_fwd.h"
+
 namespace mtx::mpeg1_2 {
 
 // MPEG-1/-2 video start codes
@@ -65,7 +67,7 @@ constexpr auto FOURCC_MPEG2                  = 0x10000002u;
 
 int extract_fps_idx(const unsigned char *buffer, int buffer_size);
 double get_fps(int idx);
-bool extract_ar(const unsigned char *buffer, int buffer_size, double &ar);
+std::optional<mtx_mp_rational_t> extract_aspect_ratio(const unsigned char *buffer, int buffer_size);
 bool is_fourcc(uint32_t fourcc);
 
 }

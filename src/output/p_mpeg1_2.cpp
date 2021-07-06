@@ -271,15 +271,15 @@ mpeg1_2_video_packetizer_c::extract_fps(const unsigned char *buffer,
 void
 mpeg1_2_video_packetizer_c::extract_aspect_ratio(const unsigned char *buffer,
                                                  int size) {
-  double ar;
-
   if (display_dimensions_or_aspect_ratio_set())
     return;
 
-  if (!mtx::mpeg1_2::extract_ar(buffer, size, ar))
+  auto aspect_ratio = mtx::mpeg1_2::extract_aspect_ratio(buffer, size);
+
+  if (!aspect_ratio)
     return;
 
-  set_video_display_dimensions((0 >= ar) || (1 == ar) ? m_width : (int)(m_height * ar), m_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
+  set_video_display_dimensions(1 == *aspect_ratio ? m_width : mtx::to_int(m_height * *aspect_ratio), m_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
 
   rerender_track_headers();
   m_aspect_ratio_extracted = true;

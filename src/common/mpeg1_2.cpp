@@ -75,17 +75,16 @@ extract_fps_idx(unsigned char const *buffer,
 
    \return \c true if a MPEG sequence header was found and \c false otherwise.
 */
-bool
-extract_ar(unsigned char const *buffer,
-           int buffer_size,
-           double &ar) {
+std::optional<mtx_mp_rational_t>
+extract_aspect_ratio(unsigned char const *buffer,
+                     int buffer_size) {
   uint32_t marker;
   int idx;
 
   mxdebug_if(s_debug, fmt::format("mpeg_video_ar: start search in {0} bytes\n", buffer_size));
   if (buffer_size < 8) {
     mxdebug_if(s_debug, "mpeg_video_ar: sequence header too small\n");
-    return false;
+    return {};
   }
   marker = get_uint32_be(buffer);
   idx = 4;
@@ -96,33 +95,24 @@ extract_ar(unsigned char const *buffer,
   }
   if (idx >= buffer_size) {
     mxdebug_if(s_debug, "mpeg_video_ar: no sequence header start code found\n");
-    return false;
+    return {};
   }
 
   mxdebug_if(s_debug, fmt::format("mpeg_video_ar: found sequence header start code at {0}\n", idx - 4));
   idx += 3;                     // width and height
   if (idx >= buffer_size) {
     mxdebug_if(s_debug, "mpeg_video_ar: sequence header too small\n");
-    return false;
+    return {};
   }
 
   switch (buffer[idx] & 0xf0) {
-    case AR_1_1:
-      ar = 1.0;
-      break;
-    case AR_4_3:
-      ar = 4.0 / 3.0;
-      break;
-    case AR_16_9:
-      ar = 16.0 / 9.0;
-      break;
-    case AR_2_21:
-      ar = 2.21;
-      break;
-    default:
-      ar = -1.0;
+    case AR_1_1:  return mtx::rational(1, 1);
+    case AR_4_3:  return mtx::rational(4, 3);
+    case AR_16_9: return mtx::rational(16, 9);
+    case AR_2_21: return mtx::rational(221, 100);
   }
-  return true;
+
+  return {};
 }
 
 /** \brief Get the number of frames per second
