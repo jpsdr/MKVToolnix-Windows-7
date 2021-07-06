@@ -24,6 +24,7 @@ private:
   int64_t m_samples_per_block;
   int64_t m_samples_output;
   bool m_has_correction;
+  mtx_mp_rational_t m_sample_duration;
 
 public:
   wavpack_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, mtx::wavpack::meta_t &meta);

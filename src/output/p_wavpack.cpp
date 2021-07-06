@@ -36,6 +36,7 @@ wavpack_packetizer_c::wavpack_packetizer_c(generic_reader_c *p_reader,
   , m_has_correction(meta.has_correction && (0 != m_htrack_max_add_block_ids))
 {
   set_track_type(track_audio);
+  m_sample_duration = mtx::rational(1'000'000'000, m_sample_rate);
 }
 
 void
@@ -58,10 +59,10 @@ wavpack_packetizer_c::process(packet_cptr packet) {
   int64_t samples = get_uint32_le(packet->data->get_buffer());
 
   if (-1 == packet->duration)
-    packet->duration = std::llround(samples * 1000000000 / m_sample_rate);
+    packet->duration = mtx::to_int_rounded(samples * m_sample_duration);
 
   if (-1 == packet->timestamp)
-    packet->timestamp = std::llround((double)m_samples_output * 1000000000 / m_sample_rate);
+    packet->timestamp = mtx::to_int_rounded(m_samples_output * m_sample_duration);
 
   m_samples_output += samples;
   add_packet(packet);
