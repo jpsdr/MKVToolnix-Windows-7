@@ -1,5 +1,7 @@
 #!/usr/bin/ruby -w
 
+skip_if %r{i[0-9]86|armhf}.match(RUBY_PLATFORM)
+
 # T_562segfaults_issue_1780_part_5
 describe "mkvmerge / various test cases for segfaults collected in issue 1780 part 5"
 
