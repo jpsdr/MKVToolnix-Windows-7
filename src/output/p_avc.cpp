@@ -91,10 +91,10 @@ avc_video_packetizer_c::extract_aspect_ratio() {
   if (!result.is_valid() || display_dimensions_or_aspect_ratio_set())
     return;
 
-  auto par = static_cast<double>(result.numerator) / static_cast<double>(result.denominator);
+  auto par = mtx::rational(result.numerator, result.denominator);
 
-  set_video_display_dimensions(1 <= par ? std::llround(m_width * par) : m_width,
-                               1 <= par ? m_height                    : std::llround(m_height / par),
+  set_video_display_dimensions(1 <= par ? mtx::to_int_rounded(m_width * par) : m_width,
+                               1 <= par ? m_height                           : mtx::to_int_rounded(m_height / par),
                                generic_packetizer_c::ddu_pixels,
                                OPTION_SOURCE_BITSTREAM);
 

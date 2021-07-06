@@ -128,7 +128,7 @@ hevc_es_video_packetizer_c::handle_aspect_ratio() {
 
   mxdebug_if(m_debug_aspect_ratio,
              fmt::format("PAR {0} pixel_width/hgith {1}/{2} display_width/height {3}/{4}\n",
-                         static_cast<double>(m_parser.get_par()), m_hvideo_pixel_width, m_hvideo_pixel_height, m_ti.m_display_width, m_ti.m_display_height));
+                         m_parser.get_par(), m_hvideo_pixel_width, m_hvideo_pixel_height, m_ti.m_display_width, m_ti.m_display_height));
 }
 
 void
