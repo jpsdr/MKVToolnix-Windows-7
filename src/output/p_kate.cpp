@@ -38,6 +38,8 @@ kate_packetizer_c::kate_packetizer_c(generic_reader_c *reader,
   if (blocks.size() != m_kate_id.nheaders)
     throw false;
 
+  m_frame_duration = mtx::rational(m_kate_id.gden, m_kate_id.gnum) * 1'000'000'000;
+
   set_language(mtx::bcp47::language_c::parse(m_kate_id.language));
   int i;
   for (i = 0; i < m_kate_id.nheaders; ++i)
@@ -74,11 +76,8 @@ kate_packetizer_c::process(packet_cptr packet) {
   int64_t start_time         = get_uint64_le(packet->data->get_buffer() + 1);
   int64_t duration           = get_uint64_le(packet->data->get_buffer() + 1 + sizeof(int64_t));
 
-  double scaled_timestamp    = start_time * (double)m_kate_id.gden / (double)m_kate_id.gnum;
-  double scaled_duration     = duration   * (double)m_kate_id.gden / (double)m_kate_id.gnum;
-
-  packet->timestamp          = (int64_t)(scaled_timestamp * 1000000000ll);
-  packet->duration           = (int64_t)(scaled_duration  * 1000000000ll);
+  packet->timestamp          = mtx::to_int(start_time * m_frame_duration);
+  packet->duration           = mtx::to_int(duration   * m_frame_duration);
   packet->duration_mandatory = true;
   packet->gap_following      = true;
 

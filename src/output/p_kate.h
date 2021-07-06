@@ -26,6 +26,7 @@ private:
   mtx::kate::identification_header_t m_kate_id;
 
   int64_t m_previous_timestamp;
+  mtx_mp_rational_t m_frame_duration;
 
 public:
   kate_packetizer_c(generic_reader_c *reader, track_info_c &ti);
