@@ -313,7 +313,7 @@ public:
   // video related parameters
   bool v_interlaced;
   int v_version, v_width, v_height, v_dwidth, v_dheight;
-  double v_aspect_ratio;
+  mtx_mp_rational_t v_aspect_ratio;
   memory_cptr m_codec_private_data;
 
   // audio related parameters

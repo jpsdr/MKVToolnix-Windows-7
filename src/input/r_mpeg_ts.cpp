@@ -100,7 +100,6 @@ track_c::track_c(reader_c &p_reader,
   , v_height{}
   , v_dwidth{}
   , v_dheight{}
-  , v_aspect_ratio{}
   , a_channels{}
   , a_sample_rate{}
   , a_bits_per_sample{}
@@ -236,7 +235,7 @@ track_c::new_stream_v_mpeg_1_2(bool end_of_detection) {
   if ((0 >= v_aspect_ratio) || (1 == v_aspect_ratio))
     v_dwidth = v_width;
   else
-    v_dwidth = (int)(v_height * v_aspect_ratio);
+    v_dwidth = mtx::to_int_rounded(v_height * v_aspect_ratio);
   v_dheight  = v_height;
 
   mxdebug_if(m_debug_headers, fmt::format("new_stream_v_mpeg_1_2: width: {0}, height: {1}\n", v_width, v_height));

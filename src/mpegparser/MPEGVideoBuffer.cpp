@@ -135,19 +135,19 @@ void ParseSequenceHeader(MPEGChunk* chunk, MPEG2SequenceHeader & hdr){
   pos+=2;
   switch(pos[0] & 0xF0){
     case 0x10:
-      hdr.aspectRatio = 1.0;
+      hdr.aspectRatio = 1;
       break;
     case 0x20:
-      hdr.aspectRatio = (4.0 / 3.0);
+      hdr.aspectRatio = mtx::rational(4, 3);
       break;
     case 0x30:
-      hdr.aspectRatio = (16.0 / 9.0);
+      hdr.aspectRatio = mtx::rational(16, 9);
       break;
     case 0x40:
-      hdr.aspectRatio = 2.21;
+      hdr.aspectRatio = mtx::rational(221, 100);
       break;
     default:
-      hdr.aspectRatio = -1.0;
+      hdr.aspectRatio = 1;
   }
   switch(pos[0] & 0x0F){
     case 0x01:

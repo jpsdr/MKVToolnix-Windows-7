@@ -49,7 +49,7 @@ constexpr auto MPEG2_B_FRAME = 3;
 struct MPEG2SequenceHeader {
   uint32_t width{};
   uint32_t height{};
-  double aspectRatio{};
+  mtx_mp_rational_t aspectRatio;
   mtx_mp_rational_t frameRate;
   uint8_t profileLevelIndication{};
   uint8_t progressiveSequence{};

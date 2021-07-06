@@ -685,7 +685,7 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
   if ((0 >= track->v_aspect_ratio) || (1 == track->v_aspect_ratio))
     track->v_dwidth = track->v_width;
   else
-    track->v_dwidth = std::llround(track->v_height * track->v_aspect_ratio);
+    track->v_dwidth = mtx::to_int_rounded(track->v_height * track->v_aspect_ratio);
   track->v_dheight  = track->v_height;
 
   track->use_buffer(128000);

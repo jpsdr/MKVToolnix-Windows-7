@@ -23,8 +23,7 @@
 class mpeg_es_reader_c: public generic_reader_c {
 private:
   int version, interlaced, width, height, dwidth, dheight;
-  mtx_mp_rational_t field_duration;
-  double aspect_ratio;
+  mtx_mp_rational_t field_duration, aspect_ratio;
 
 public:
   virtual mtx::file_type_e get_format_type() const {
