@@ -197,6 +197,8 @@ class SimpleTest
   end
 
   def test_ui_locale locale, *args
+    skip_if $is_windows
+
     describe "mkvmerge / UI locale: #{locale}"
 
     @blocks[:tests] << {
