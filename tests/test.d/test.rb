@@ -23,8 +23,8 @@ class Test
   def unlink_tmp_files
     return if (ENV["KEEP_TMPFILES"] == "1")
     re = /^#{self.tmp_name_prefix}/
-    Dir.entries("/tmp").each do |entry|
-      file = "/tmp/#{entry}"
+    Dir.entries($temp_dir).each do |entry|
+      file = "#{$temp_dir}/#{entry}"
       File.unlink(file) if re.match(file) and File.exists?(file)
     end
   end
@@ -59,7 +59,7 @@ class Test
   end
 
   def tmp_name_prefix
-    [ "/tmp/mkvtoolnix-auto-test", $$.to_s, Thread.current[:number] ].join("-") + "-"
+    [ "#{$temp_dir}/mkvtoolnix-auto-test", $$.to_s, Thread.current[:number] ].join("-") + "-"
   end
 
   def tmp_name

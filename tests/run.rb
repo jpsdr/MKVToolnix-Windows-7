@@ -90,5 +90,8 @@ EOHELP
   exit controller.num_failed > 0 ? 1 : 0
 end
 
-setup
-main
+Dir.mktmpdir do |dir|
+  $temp_dir = dir
+  setup
+  main
+end
