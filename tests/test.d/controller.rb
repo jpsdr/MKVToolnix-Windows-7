@@ -18,13 +18,11 @@ class Controller
   end
 
   def get_num_processors
-    case RUBY_PLATFORM
-    when /darwin/
-      np = `/usr/sbin/sysctl -n hw.availcpu`.to_i
-    else
-      np = IO.readlines("/proc/cpuinfo").collect { |line| /^processor\s+:\s+(\d+)/.match(line) ? $1.to_i : 0 }.max + 1
-    end
-    return np > 0 ? np : 1
+    np = case RUBY_PLATFORM
+         when /darwin/ then `/usr/sbin/sysctl -n hw.availcpu`.to_i
+         else               `nproc`.to_i
+         end
+    [ np, 0 ].max + 1
   end
 
   def num_threads=(num)
