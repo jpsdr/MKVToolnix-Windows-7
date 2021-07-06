@@ -96,9 +96,13 @@ mm_io_c::setFilePointer2(int64_t offset,
 size_t
 mm_io_c::puts(const std::string &s) {
 #if defined(SYS_WINDOWS)
-  bool is_windows    = true;
+  static std::optional<bool> s_use_unix_newlines;
+  if (!s_use_unix_newlines.has_value())
+    s_use_unix_newlines = mtx::sys::get_environment_variable("MTX_ALWAYS_USE_UNIX_NEWLINES") == "1";
+
+  bool use_unix_newlines = *s_use_unix_newlines;
 #else
-  bool is_windows    = false;
+  bool use_unix_newlines = true;
 #endif
   size_t num_written = 0;
   const char *cs     = s.c_str();
@@ -106,8 +110,8 @@ mm_io_c::puts(const std::string &s) {
   int cur_pos;
 
   for (cur_pos = 0; cs[cur_pos] != 0; ++cur_pos) {
-    bool keep_char = is_windows || ('\r' != cs[cur_pos]) || ('\n' != cs[cur_pos + 1]);
-    bool insert_cr = is_windows && ('\n' == cs[cur_pos]) && ((0 == cur_pos) || ('\r' != cs[cur_pos - 1]));
+    bool keep_char = !use_unix_newlines || ('\r' != cs[cur_pos]) || ('\n' != cs[cur_pos + 1]);
+    bool insert_cr = !use_unix_newlines && ('\n' == cs[cur_pos]) && ((0 == cur_pos) || ('\r' != cs[cur_pos - 1]));
 
     if (keep_char && !insert_cr)
       continue;
