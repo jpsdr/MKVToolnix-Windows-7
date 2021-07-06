@@ -12,16 +12,15 @@ class Test
     @debug_commands = Array.new
 
     # install md5 handler
-    case RUBY_PLATFORM
-      when /darwin/
-        @md5 = lambda do |name|
-          @debug_commands << "/sbin/md5 #{name}"
-          `/sbin/md5 #{name}`.chomp.gsub(/.*=\s*/, "")
-        end
-      else
-        @md5 = lambda do |name|
-          @debug_commands << "md5sum #{name}"
-          `md5sum #{name}`.chomp.gsub(/\s+.*/, "")
+    if $is_macos
+      @md5 = lambda do |name|
+        @debug_commands << "/sbin/md5 #{name}"
+        `/sbin/md5 #{name}`.chomp.gsub(/.*=\s*/, "")
+      end
+    else
+      @md5 = lambda do |name|
+        @debug_commands << "md5sum #{name}"
+        `md5sum #{name}`.chomp.gsub(/\s+.*/, "")
       end
     end
   end

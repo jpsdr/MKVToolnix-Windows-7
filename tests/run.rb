@@ -21,8 +21,12 @@ rescue
 end
 
 def setup
-  ENV[ /darwin/i.match(RUBY_PLATFORM) ? 'LANG' : 'LC_ALL' ] = 'en_US.UTF-8'
-  ENV['PATH']                                               = "../src:" + ENV['PATH']
+  $is_windows = %r{win|mingw}i.match(RUBY_PLATFORM)
+  $is_macos   = %r{darwin}i.match(RUBY_PLATFORM)
+  $is_linux   = !$is_windows && !$is_macos
+
+  ENV[ $is_macos ? 'LANG' : 'LC_ALL' ] = 'en_US.UTF-8'
+  ENV['PATH']                          = "../src:" + ENV['PATH']
 
   $config = read_build_config
 end

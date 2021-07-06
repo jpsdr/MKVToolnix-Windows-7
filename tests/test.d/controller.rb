@@ -19,8 +19,8 @@ class Controller
 
   def get_num_processors
     np = case RUBY_PLATFORM
-         when /darwin/ then `/usr/sbin/sysctl -n hw.availcpu`.to_i
-         else               `nproc`.to_i
+         when $is_macos then `/usr/sbin/sysctl -n hw.availcpu`.to_i
+         else                `nproc`.to_i
          end
     [ np, 0 ].max + 1
   end

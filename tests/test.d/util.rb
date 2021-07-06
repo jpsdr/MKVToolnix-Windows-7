@@ -42,8 +42,7 @@ class String
 end
 
 # install md5 handler
-case RUBY_PLATFORM
-when /darwin/
+if $is_macos
   def md5 name
     `/sbin/md5 #{name}`.chomp.gsub(/.*=\s*/, "")
   end
