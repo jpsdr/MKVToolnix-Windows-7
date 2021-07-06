@@ -6,7 +6,7 @@ describe "mkvmerge / file concatenation, multi file I/O"
 vob_files = (1..3).map { |i| "data/vob/VTS_01_#{i}.VOB" }
 
 test "additional vob_files listed" do
-  identify_json(vob_files[0])["container"]["properties"]["other_file"].map { |f| f.gsub(%r{.*/}, '') }.join('+')
+  identify_json(vob_files[0])["container"]["properties"]["other_file"].map { |f| f.gsub(%r{.*[/\\]}, '') }.join('+')
 end
 
 # These two must be equal.
