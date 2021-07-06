@@ -41,14 +41,10 @@ class String
   end
 end
 
-# install md5 handler
-if $is_macos
-  def md5 name
-    `/sbin/md5 #{name}`.chomp.gsub(/.*=\s*/, "")
-  end
-else
-  def md5 name
-    `md5sum #{name}`.chomp.gsub(/\s+.*/, "")
+def md5 name
+  case
+  when $is_macos   then `/sbin/md5 #{name}`.chomp.gsub(/.*=\s*/, "")
+  else             `md5sum #{name}`.chomp.gsub(/\s+.*/, "")
   end
 end
 

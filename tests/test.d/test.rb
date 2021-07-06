@@ -10,19 +10,6 @@ class Test
     @tmp_num_mutex  = Mutex.new
     @commands       = Array.new
     @debug_commands = Array.new
-
-    # install md5 handler
-    if $is_macos
-      @md5 = lambda do |name|
-        @debug_commands << "/sbin/md5 #{name}"
-        `/sbin/md5 #{name}`.chomp.gsub(/.*=\s*/, "")
-      end
-    else
-      @md5 = lambda do |name|
-        @debug_commands << "md5sum #{name}"
-        `md5sum #{name}`.chomp.gsub(/\s+.*/, "")
-      end
-    end
   end
 
   def description
@@ -90,7 +77,7 @@ class Test
   end
 
   def hash_file(name)
-    @md5.call name
+    md5 name
   end
 
   def hash_tmp(erase = true)
