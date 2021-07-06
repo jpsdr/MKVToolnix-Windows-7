@@ -21,15 +21,17 @@ rescue
 end
 
 def setup
-  $is_windows = %r{win|mingw}i.match(RUBY_PLATFORM)
-  $is_macos   = %r{darwin}i.match(RUBY_PLATFORM)
-  $is_linux   = !$is_windows && !$is_macos
+  $is_windows                          = %r{win|mingw}i.match(RUBY_PLATFORM)
+  $is_macos                            = %r{darwin}i.match(RUBY_PLATFORM)
+  $is_linux                            = !$is_windows && !$is_macos
+
+  $ui_language_en_us                   = $is_windows ? "English" : "en_US"
 
   ENV[ $is_macos ? 'LANG' : 'LC_ALL' ] = 'en_US.UTF-8'
   ENV['MTX_ALWAYS_USE_UNIX_NEWLINES']  = '1'
   ENV['PATH']                          = "../src:" + ENV['PATH']
 
-  $config = read_build_config
+  $config                              = read_build_config
 end
 
 def main
