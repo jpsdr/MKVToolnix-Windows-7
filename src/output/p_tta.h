@@ -20,7 +20,7 @@
 class tta_packetizer_c: public generic_packetizer_c {
 private:
   int m_channels, m_bits_per_sample, m_sample_rate;
-  int64_t m_samples_output;
+  int64_t m_samples_output, m_samples_per_frame;
 
 public:
   tta_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int channels, int bits_per_sample, int sample_rate);

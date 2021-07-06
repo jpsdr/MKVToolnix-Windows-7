@@ -35,6 +35,8 @@ tta_packetizer_c::tta_packetizer_c(generic_reader_c *p_reader,
 {
   set_track_type(track_audio);
   set_track_default_duration(std::llround(1000000000.0 * mtx::tta::FRAME_TIME));
+
+  m_samples_per_frame = std::llround(m_sample_rate * mtx::tta::FRAME_TIME);
 }
 
 tta_packetizer_c::~tta_packetizer_c() {
@@ -52,13 +54,13 @@ tta_packetizer_c::set_headers() {
 
 int
 tta_packetizer_c::process(packet_cptr packet) {
-  packet->timestamp = std::llround((double)m_samples_output * 1000000000 / m_sample_rate);
+  packet->timestamp = mtx::to_int(mtx::rational(m_samples_output, m_sample_rate) * 1'000'000'000);
   if (-1 == packet->duration) {
     packet->duration  = m_htrack_default_duration;
-    m_samples_output += std::llround(m_sample_rate * mtx::tta::FRAME_TIME);
+    m_samples_output += m_samples_per_frame;
 
   } else
-    m_samples_output += std::llround(packet->duration * m_sample_rate / 1000000000ll);
+    m_samples_output += mtx::to_int(mtx::rational(packet->duration, 1'000'000'000) * m_sample_rate);
 
   add_packet(packet);
 
