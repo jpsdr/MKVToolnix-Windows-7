@@ -29,7 +29,7 @@ class Test
     end
   end
 
-  def run_test
+  def run_test expected_results
     result = nil
     begin
       result = run

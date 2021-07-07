@@ -129,6 +129,7 @@ class SimpleTest
     options[:no_variable_data]   = true unless options.key?(:no_variable_data)
     @blocks[:tests] << {
       :name  => full_command_line,
+      :skip  => options[:skip_if],
       :block => lambda {
         output       = options[:output] || tmp
         _, exit_code = *merge(full_command_line, :exit_code => options[:exit_code], :output => output, :no_variable_data => options[:no_variable_data])
@@ -150,6 +151,7 @@ class SimpleTest
     options[:name]    ||= full_command_line
     @blocks[:tests] << {
       :name  => full_command_line,
+      :skip  => options[:skip_if],
       :block => lambda {
         sys "../src/mkvmerge #{full_command_line} --engage no_variable_data > #{tmp}", :exit_code => options[:exit_code]
 
@@ -175,6 +177,7 @@ class SimpleTest
     options[:name]    ||= full_command_line
     @blocks[:tests] << {
       :name  => full_command_line,
+      :skip  => options[:skip_if],
       :block => lambda {
         output = options[:output] || tmp
         info full_command_line, :exit_code => options[:exit_code], :output => output
@@ -189,6 +192,7 @@ class SimpleTest
     options[:name]    ||= full_command_line
     @blocks[:tests] << {
       :name  => full_command_line,
+      :skip  => options[:skip_if],
       :block => lambda {
         json = identify_json full_command_line, :exit_code => 3
         (json["container"]["recognized"] == true) && (json["container"]["supported"] == false) ? :ok : :bad
@@ -225,13 +229,24 @@ class SimpleTest
     @description || fail("Class #{self.class.name} misses its description")
   end
 
-  def run_test
+  def run_test expected_results
     @blocks[:setup].each(&:call)
 
-    results = @blocks[:tests].collect do |test|
+    results = @blocks[:tests].each_with_index.map do |test, idx|
       result = nil
       begin
-        result = test[:block].call
+        if !test[:skip]
+          result = test[:block].call
+
+        elsif !expected_results || (expected_results.size <= idx)
+          show_message "Test case '#{self.class.name}', sub-test #{idx} '#{test[:name]}': attempting to skip but no expected result known"
+          result = :failed
+
+        else
+          result = expected_results[idx]
+          show_message "Test case '#{self.class.name}', sub-test #{idx} '#{test[:name]}': skipping & using result #{result}"
+        end
+
       rescue RuntimeError => ex
         show_message "Test case '#{self.class.name}', sub-test '#{test[:name]}': #{ex}"
         result = :failed

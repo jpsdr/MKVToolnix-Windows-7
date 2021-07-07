@@ -122,8 +122,10 @@ class Controller
 
     show_message "Running '#{class_name}': #{current_test.description}"
 
+    expected_results = @results.exist?(class_name) ? @results.hash?(class_name).split(/-/) : nil
+
     start    = Time.now
-    result   = current_test.run_test
+    result   = current_test.run_test expected_results
     duration = Time.now - start
 
     if (result)
@@ -131,11 +133,9 @@ class Controller
         self.add_result class_name, :passed, :message => "  NEW test. Storing result '#{result}'.", :checksum => result, :duration => duration
 
       elsif (@results.hash?(class_name) != result)
-        msg =  "  #{class_name} FAILED: checksum is different. Commands:\n"
-
-        expected_results = @results.hash?(class_name).split(/-/)
-        actual_results   = result.split(/-/)
-        idx              = 0
+        msg            =  "  #{class_name} FAILED: checksum is different. Commands:\n"
+        actual_results = result.split(/-/)
+        idx            = 0
 
         current_test.commands.each do |command|
           command = { :command => command } unless command.is_a?(Hash)
