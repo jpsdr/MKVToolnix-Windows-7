@@ -53,13 +53,13 @@ chaps2 = "data/chapters/uk-and-gb.xml"
 chaps3 = "data/chapters/uk-and-gb-chaplanguageietf.xml"
 
 # simple chapters
-test_merge src1, :keep_tmp => true, :args => "--chapters #{chaps1}"
+test_merge src1, :keep_tmp => true, :args => "--chapter-charset utf-8 --chapters #{chaps1}"
 compare_languages(*([ %w{eng en} ] * 5))
 
-test_merge src1, :keep_tmp => true, :args => "--chapter-language de --chapters #{chaps1}"
+test_merge src1, :keep_tmp => true, :args => "--chapter-language de --chapter-charset utf-8 --chapters #{chaps1}"
 compare_languages(*([ %w{ger de} ] * 5))
 
-test_merge src1, :keep_tmp => true, :args => "--chapter-language de-latn-ch --chapters #{chaps1}"
+test_merge src1, :keep_tmp => true, :args => "--chapter-language de-latn-ch --chapter-charset utf-8 --chapters #{chaps1}"
 compare_languages(*([ %w{ger de-Latn-CH} ] * 5))
 
 # XML chapters

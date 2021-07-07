@@ -53,13 +53,13 @@ chaps2 = "data/chapters/uk-and-gb.xml"
 chaps3 = "data/chapters/uk-and-gb-chaplanguageietf.xml"
 
 # simple chapters
-test_merge src1, :keep_tmp => true, :args => "--disable-language-ietf --chapters #{chaps1}"
+test_merge src1, :keep_tmp => true, :args => "--disable-language-ietf --chapter-charset utf-8 --chapters #{chaps1}"
 compare_languages(*([ [ "eng", nil ] ] * 5))
 
-test_merge src1, :keep_tmp => true, :args => "--disable-language-ietf --chapter-language de --chapters #{chaps1}"
+test_merge src1, :keep_tmp => true, :args => "--disable-language-ietf --chapter-language de --chapter-charset utf-8 --chapters #{chaps1}"
 compare_languages(*([ [ "ger", nil] ] * 5))
 
-test_merge src1, :keep_tmp => true, :args => "--disable-language-ietf --chapter-language de-latn-ch --chapters #{chaps1}"
+test_merge src1, :keep_tmp => true, :args => "--disable-language-ietf --chapter-language de-latn-ch --chapter-charset utf-8 --chapters #{chaps1}"
 compare_languages(*([ [ "ger", nil ] ] * 5))
 
 # XML chapters
@@ -87,13 +87,13 @@ compare_languages(*([ [ "eng", nil ] ] * 3 + [ [ "ger", nil ] ] * 3))
 
 
 # simple chapters
-test_merge src1, :keep_tmp => true, :args => "--chapters #{chaps1}", :post_args => "--disable-language-ietf"
+test_merge src1, :keep_tmp => true, :args => "--chapter-charset utf-8 --chapters #{chaps1}", :post_args => "--disable-language-ietf"
 compare_languages(*([ [ "eng", nil ] ] * 5))
 
-test_merge src1, :keep_tmp => true, :args => "--chapter-language de --chapters #{chaps1}", :post_args => "--disable-language-ietf"
+test_merge src1, :keep_tmp => true, :args => "--chapter-language de --chapter-charset utf-8 --chapters #{chaps1}", :post_args => "--disable-language-ietf"
 compare_languages(*([ [ "ger", nil] ] * 5))
 
-test_merge src1, :keep_tmp => true, :args => "--chapter-language de-latn-ch --chapters #{chaps1}", :post_args => "--disable-language-ietf"
+test_merge src1, :keep_tmp => true, :args => "--chapter-language de-latn-ch --chapter-charset utf-8 --chapters #{chaps1}", :post_args => "--disable-language-ietf"
 compare_languages(*([ [ "ger", nil ] ] * 5))
 
 # XML chapters
