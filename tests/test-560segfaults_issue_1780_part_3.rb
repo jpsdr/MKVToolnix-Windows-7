@@ -3,6 +3,8 @@
 # T_560segfaults_issue_1780_part_3
 describe "mkvmerge / various test cases for segfaults collected in issue 1780 part 3"
 
+skip_if $is_windows
+
 dir = "data/segfaults-assertions/issue-1780"
 
 # "MP4 reader: fix access beyond end of vector"

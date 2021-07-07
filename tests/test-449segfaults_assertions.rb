@@ -4,6 +4,7 @@
 describe "mkvmerge & mkvinfo / segfaults and assertions"
 
 skip_if c?(:USE_ADDRSAN)
+skip_if $is_windows
 
 dir = "data/segfaults-assertions"
 
