@@ -1,5 +1,5 @@
 class Controller
-  attr_accessor :test_failed, :test_new, :test_date_after, :teset_date_before, :update_failed, :num_failed, :record_duration
+  attr_accessor :test_failed, :test_new, :test_date_after, :teset_date_before, :update_failed, :num_failed, :record_duration, :show_duration
   attr_reader   :num_threads, :results
 
   def initialize
@@ -11,6 +11,7 @@ class Controller
     @update_failed    = false
     @num_threads      = self.get_num_processors
     @record_duration  = false
+    @show_duration    = false
 
     @tests            = Array.new
     @exclusions       = Array.new
@@ -127,6 +128,8 @@ class Controller
     start    = Time.now
     result   = current_test.run_test expected_results
     duration = Time.now - start
+
+    puts "Finished '#{class_name}' after #{sprintf('%0.3f', duration)}s" if self.show_duration
 
     if (result)
       if (!@results.exist? class_name)

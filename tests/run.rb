@@ -50,6 +50,8 @@ def main
       controller.test_date_after = Time.local($1, $2, $3, $4, $5, $6)
     elsif (arg =~ /-D([0-9]{4})([0-9]{2})([0-9]{2})-([0-9]{2})([0-9]{2})/)
       controller.test_date_before = Time.local($1, $2, $3, $4, $5, $6)
+    elsif ((arg == "-s") or (arg == "--show-duration"))
+      controller.show_duration = true
     elsif arg =~ /-j(\d+)/
       controller.num_threads = $1.to_i
     elsif /^ (!)? (\d{1,4}) (?: - (\d{1,4}) )?$/x.match arg
@@ -74,6 +76,7 @@ Syntax: run.rb [options]
   -DDATE                only run tests added before DATE (YYYYMMDD-HHMM)
   -u, --update-failed   update the results for tests that fail
   -r, --record-duration update the duration field of the tests run
+  -s, --show-duration   show how long each test took to run
   -jNUM                 run NUM tests at once (default: number of CPU cores)
   123                   run test 123 (any number; can be given multiple times)
   12-345                run tests 12 through 345 (any range of numbers; can be given multiple times)
