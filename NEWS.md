@@ -68,6 +68,8 @@
   use backward slashes for the "Windows (cmd.exe)" mode and forward slashes
   for the "Linux/Unix shells" mode, regardless of the operating system it's
   currently running on. Fixes #3155.
+* mkvextract: TTA extraction, only on Windows: fixed removing the temporary
+  file created during extraction.
 
 
 ## Build system changes

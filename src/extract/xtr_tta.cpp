@@ -115,5 +115,6 @@ xtr_tta_c::finish_file() {
   } while (nread == 128000);
 
   m_out.reset();
+  in.reset();
   unlink(m_temp_file_name.c_str());
 }
