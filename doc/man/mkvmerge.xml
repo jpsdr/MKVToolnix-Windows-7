@@ -1007,17 +1007,18 @@ $ mkvmerge -o full.mkv '[' file1.mkv file2.mkv ']'</screen>
      <term><option>=</option></term>
      <listitem>
       <para>
-       Normally &mkvmerge; looks for files in the same directory as an input file that have the same base name and only differ in their
-       running number (e.g. 'VTS_01_1.VOB', 'VTS_01_2.VOB', 'VTS_01_3.VOB' etc) and treats all of those files as if they were concatenated
-       into a single big file. This option, a single '=', causes mkvmerge not to look for those additional files.
+       For certain file types (MPEG program streams = VOBs) &mkvmerge; normally looks for files in the same directory as an input file that
+       have the same base name and only differ in their running number (e.g. 'VTS_01_1.VOB', 'VTS_01_2.VOB', 'VTS_01_3.VOB' etc) and treats
+       all of those files as if they were concatenated into a single big file. This option, a single '=', causes mkvmerge not to look for
+       those additional files.
       </para>
 
       <para>
        The '=' can also be put in front of the next file name. Therefore the following two commands are equivalent:
       </para>
 
-      <screen>$ mkvmerge -o full.mkv = file1.mkv
-$ mkvmerge -o full.mkv =file1.mkv</screen>
+      <screen>$ mkvmerge -o full.mkv = file1.vob
+$ mkvmerge -o full.mkv =file1.vob</screen>
      </listitem>
     </varlistentry>
 
