@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2021-07-10 11:53+0200\n"
-"PO-Revision-Date: 2021-05-26 12:04+0000\n"
+"PO-Revision-Date: 2021-07-10 12:58+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ca/)\n"
 "Language: ca\n"
@@ -38,10 +38,8 @@ msgstr "59.0.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2021-05-22"
 msgid "2021-06-13"
-msgstr "22/05/2021"
+msgstr "13/06/2021"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -2456,8 +2454,8 @@ msgid ""
 "$ mkvmerge -o full.mkv file1.mkv + file2.mkv\n"
 "$ mkvmerge -o full.mkv '[' file1.mkv file2.mkv ']'"
 msgstr ""
-"$ mkvmerge -o tot.mkv fitxer_1.mkv + fitxer_2.mkv\n"
-"$ mkvmerge -o tot.mkv '[' fitxer_1.mkv fitxer_2.mkv ']'"
+"$ mkvmerge -o complet.mkv fitxer_1.mkv + fitxer_2.mkv\n"
+"$ mkvmerge -o complet.mkv '[' fitxer_1.mkv fitxer_2.mkv ']'"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1007
@@ -2466,10 +2464,8 @@ msgstr "<option>=</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1010
-#, fuzzy
-#| msgid "Normally &mkvmerge; looks for files in the same directory as an input file that have the same base name and only differ in their running number (e.g. 'VTS_01_1.VOB', 'VTS_01_2.VOB', 'VTS_01_3.VOB' etc) and treats all of those files as if they were concatenated into a single big file. This option, a single '=', causes mkvmerge not to look for those additional files."
 msgid "For certain file types (MPEG program streams = VOBs) &mkvmerge; normally looks for files in the same directory as an input file that have the same base name and only differ in their running number (e.g. 'VTS_01_1.VOB', 'VTS_01_2.VOB', 'VTS_01_3.VOB' etc) and treats all of those files as if they were concatenated into a single big file. This option, a single '=', causes mkvmerge not to look for those additional files."
-msgstr "En general, el &mkvmerge; cerca els fitxers en el mateix directori com a fitxer d'entrada que tenen el mateix nom base i que només es diferencien en el seu número d'ordre d'execució (p. ex., «VTS_01_1.VOB», «VTS_01_2.VOB», «VTS_01_3.VOB», etc.) i els tractarà tots com si estiguessin concatenats (units) en un únic gran fitxer. Aquesta opció, un únic «=», fa que el mkvmerge no cerqui aquests fitxers addicionals."
+msgstr "Per a certs tipus de fitxers (els fluxos de programes MPEG = VOB) el &mkvmerge; normalment cercarà els fitxers en el mateix directori que un fitxer d'entrada que tingui el mateix nom base i només difereixen en el seu número d'execució (p. ex., «VTS_01_1.VOB», «VTS_01_2.VOB», «VTS_01_3.VOB», etc.) i els tractarà tots com si estiguessin concatenats (units) en un únic gran fitxer. Aquesta opció, un únic «=», fa que el mkvmerge no cerqui aquests fitxers addicionals."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1017
@@ -2478,16 +2474,13 @@ msgstr "El signe «=» també es pot posar davant del nom de fitxer següent. Pe
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><screen>
 #: doc/man/mkvmerge.xml:1020
-#, fuzzy, no-wrap
-#| msgid ""
-#| "$ mkvmerge -o full.mkv = file1.mkv\n"
-#| "$ mkvmerge -o full.mkv =file1.mkv"
+#, no-wrap
 msgid ""
 "$ mkvmerge -o full.mkv = file1.vob\n"
 "$ mkvmerge -o full.mkv =file1.vob"
 msgstr ""
-"$ mkvmerge -o complet.mkv = fitxer_1.mkv\n"
-"$ mkvmerge -o complet.mkv =fitxer_1.mkv"
+"$ mkvmerge -o complet.mkv = fitxer_1.vob\n"
+"$ mkvmerge -o complet.mkv =fitxer_1.vob"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1026
