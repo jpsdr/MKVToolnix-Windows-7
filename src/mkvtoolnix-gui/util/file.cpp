@@ -135,9 +135,10 @@ detectMIMEType(QString const &fileName) {
     return mimeType;
 
   if (s_legacyFontTypes.isEmpty()) {
-    s_legacyFontTypes[Q("font/otf")]  = Q("application/vnd.ms-opentype");
-    s_legacyFontTypes[Q("font/sfnt")] = Q("application/x-truetype-font");
-    s_legacyFontTypes[Q("font/ttf")]  = Q("application/x-truetype-font");
+    s_legacyFontTypes[Q("font/otf")]        = Q("application/vnd.ms-opentype");
+    s_legacyFontTypes[Q("font/sfnt")]       = Q("application/x-truetype-font");
+    s_legacyFontTypes[Q("font/ttf")]        = Q("application/x-truetype-font");
+    s_legacyFontTypes[Q("font/collection")] = Q("application/x-truetype-font");
   }
 
   return s_legacyFontTypes.contains(mimeType) ? s_legacyFontTypes[mimeType] : mimeType;

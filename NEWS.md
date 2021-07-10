@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: multiplexer: when the option "use legacy MIME types for font
+  attachments" is enabled, the GUI will now use `application/x-truetype-font`
+  for font collection files.
+
+
 # Version 59.0.0 "Shining Star" 2021-07-10
 
 ## New features and enhancements
