@@ -30,10 +30,22 @@
 
 ## Bug fixes
 
+* build system: fixed compilation with fmt v8. Fixes #3151.
+* mkvmerge: SRT subtitle reader: characters that aren't valid according to the
+  assumed encoding of the file will now be replaced by the Unicode
+  "Replacement Character" U+FFFD instead of keeping the invalid characters,
+  potentially violating the Matroska specs.
+* mkvmerge: WebVTT parser: the parser now accepts timestamps with hours
+  larger than 99. Part of #3139.
+* mkvextract: TTA extraction, only on Windows: fixed removing the temporary
+  file created during extraction.
 * mkvmerge, mkvpropedit, MKVToolNix GUI's multiplexer & header editor: MIME
   type detection is now done using Qt instead of the `magic` library. The main
   impact is the MIME types of TrueType & OpenType fonts are now detected
   correctly. Fixes #3137.
+* mkvmerge, mkvinfo, MKVToolNix GUI's info tool: only on Windows: displaying
+  dates before 1970-01-01 00:00:00 UTC or after 2038-01-19 03:14:08 UTC was
+  broken. Note that the header editor was not affected. Fixes #3148.
 * MKVToolNix GUI: only on 64-bit Windows: under certain conditions, the 64-bit
   Windows binaries crashed when opening dialog windows. Even though the
   underlying bug hasn't been identified, the investigation showed that
@@ -42,8 +54,6 @@
   affected v57 and v58 which were built with gcc versions 10.3.0 and 11.1.0
   respectively. For the time being I've switched back to building Windows
   binaries with gcc 10.2.0. Fixes #3132 & #3133.
-* mkvmerge: WebVTT parser: the parser now accepts timestamps with hours
-  larger than 99. Part of #3139.
 * MKVToolNix GUI: multiplexer: when adding files to the multiplexer by running
   the GUI's executable with file names as command line arguments, the source
   directory will be remembered as the "last open directory" again, causing
@@ -56,25 +66,14 @@
   to do with dragged & dropped files if they've never seen the dialog is back
   to adding the files to the current multiplex settings instead of "add as
   additional parts" which was an unintentional default.
-* mkvmerge, mkvinfo, MKVToolNix GUI's info tool: only on Windows: displaying
-  dates before 1970-01-01 00:00:00 UTC or after 2038-01-19 03:14:08 UTC was
-  broken. Note that the header editor was not affected. Fixes #3148.
-* build system: fixed compilation with fmt v8. Fixes #3151.
-* mkvmerge: SRT subtitle reader: characters that aren't valid according to the
-  assumed encoding of the file will now be replaced by the Unicode
-  "Replacement Character" U+FFFD instead of keeping the invalid characters,
-  potentially violating the Matroska specs.
 * MKVToolNix GUI: multiplexer: the "show command line" dialog will now always
   use backward slashes for the "Windows (cmd.exe)" mode and forward slashes
   for the "Linux/Unix shells" mode, regardless of the operating system it's
   currently running on. Fixes #3155.
-* mkvextract: TTA extraction, only on Windows: fixed removing the temporary
-  file created during extraction.
 
 
 ## Build system changes
 
-* The `magic` library is not used anymore.
 * The Qt library is now required for building all applications, even the
   command-line ones, as they use Qt's MIME type detection capabilities. In
   turn this means that you cannot disable the Qt usage anymore; either Qt5 or
@@ -82,14 +81,15 @@
 
   You can still chose not to build MKVToolNix GUI, though. A new option has
   been added to `configure` for this purpose: `--disable-gui`.
+* The `gmp` library is now required.
+* The `magic` library is not used anymore.
+* The `PCRE2` & `JPCRE2` libraries are not used anymore. The bundled version
+  of `JPCRE2` was removed.
+* Boost's "rational" library is not used anymore.
 * `configure`: the option `--enable-appimage` has been removed. The location
   of the relevant directories within an AppImage is now detected
   automatically.
 * The bundled `fmt` library was updated to v8.0.0.
-* The `PCRE2` & `JPCRE2` libraries are not used anymore. The bundled version
-  of `JPCRE2` was removed.
-* The `gmp` library is now required.
-* Boost's "rational" library is not used anymore.
 
 
 # Version 58.0.0 "Supper's Ready" 2021-06-13
