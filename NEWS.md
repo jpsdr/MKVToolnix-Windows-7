@@ -71,7 +71,6 @@
   for the "Linux/Unix shells" mode, regardless of the operating system it's
   currently running on. Fixes #3155.
 
-
 ## Build system changes
 
 * The Qt library is now required for building all applications, even the
