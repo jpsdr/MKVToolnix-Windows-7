@@ -1,4 +1,4 @@
-# Version ?
+# Version 59.0.0 "Shining Star" 2021-07-10
 
 ## New features and enhancements
 
