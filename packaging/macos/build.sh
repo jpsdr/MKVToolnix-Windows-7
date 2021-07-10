@@ -584,7 +584,7 @@ EOF
 
   for plugin (audio mediaservice platforms playlistformats styles) cp -v -R ${TARGET}/plugins/${plugin} ${dmgmac}/
 
-  ${SCRIPT_PATH}/fix_library_paths.sh ${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvinfo,mkvtoolnix-gui}
+  ${SCRIPT_PATH}/fix_library_paths.sh ${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvmerge,mkvinfo,mkvextract,mkvpropedit,mkvtoolnix-gui}
 
   if [[ -n ${SIGNATURE_IDENTITY} ]]; then
     typeset -a non_executables
