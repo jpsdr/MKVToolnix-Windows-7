@@ -164,7 +164,7 @@ def setup_globals
   ldflags                  = ""
   ldflags                 += determine_stack_protector_flags
   ldflags                 += " -pg"                                     if c?(:USE_PROFILING)
-  ldflags                 += " -fuse-ld=lld"                            if is_clang? && !c(:LLVM_LLD).empty?
+  ldflags                 += " -fuse-ld=lld"                            if is_clang? && !c(:LLVM_LLD).empty? && !$building_for[:macos]
   ldflags                 += " -Llib/libebml/src -Llib/libmatroska/src" if c?(:EBML_MATROSKA_INTERNAL)
   ldflags                 += " -Llib/fmt/src"                           if c?(:FMT_INTERNAL)
   ldflags                 += " #{c(:EXTRA_LDFLAGS)} #{c(:USER_LDFLAGS)} #{c(:LDFLAGS_RPATHS)} #{c(:BOOST_LDFLAGS)}"
