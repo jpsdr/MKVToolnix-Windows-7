@@ -24,6 +24,20 @@ def create_iso3166_country_list_file
     ]
   end
 
+  user_assigned = [ 'AA', 'ZZ' ] \
+    + ('M'..'Z').map { |letter| "Q#{letter}" } \
+    + ('A'..'Z').map { |letter| "X#{letter}" }
+
+  user_assigned.each do |alpha_2|
+    rows << [
+      '"' + alpha_2 + '"s',
+      '""s',
+      '  0',
+      'u8"User-assigned"s',
+      '""s',
+    ]
+  end
+
   header = <<EOT
 /*
    mkvmerge -- utility for splicing together matroska files

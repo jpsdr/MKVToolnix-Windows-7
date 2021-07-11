@@ -9,6 +9,9 @@
   & variant subtags against their allowed prefixes when the whole tag contains
   more than just the exact prefix (e.g. a country code as in `de-CH-1996`
   instead of just `de-1996`, both of which are valid).
+* all: IETF BCP 47/RFC 5646 language tags: implemented support for Alpha 2
+  country codes of the "user-defined" category: `AA`, `QM`–`QZ`, `XA`–`XZ` and
+  `ZZ`.
 
 
 # Version 59.0.0 "Shining Star" 2021-07-10

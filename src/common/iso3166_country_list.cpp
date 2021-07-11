@@ -25,7 +25,7 @@ std::vector<region_t> g_regions;
 
 void
 init() {
-  g_regions.reserve(280);
+  g_regions.reserve(322);
 
   g_regions.emplace_back(""s,   ""s,      2, u8"Africa"s,                                       ""s                                                      );
   g_regions.emplace_back(""s,   ""s,     19, u8"Americas"s,                                     ""s                                                      );
@@ -58,6 +58,7 @@ init() {
   g_regions.emplace_back(""s,   ""s,    145, u8"Western Asia"s,                                 ""s                                                      );
   g_regions.emplace_back(""s,   ""s,    155, u8"Western Europe"s,                               ""s                                                      );
   g_regions.emplace_back(""s,   ""s,      1, u8"World"s,                                        ""s                                                      );
+  g_regions.emplace_back("AA"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
   g_regions.emplace_back("AD"s, "AND"s,  20, u8"Andorra"s,                                      u8"Principality of Andorra"s                             );
   g_regions.emplace_back("AE"s, "ARE"s, 784, u8"United Arab Emirates"s,                         u8""s                                                    );
   g_regions.emplace_back("AF"s, "AFG"s,   4, u8"Afghanistan"s,                                  u8"Islamic Republic of Afghanistan"s                     );
@@ -245,6 +246,20 @@ init() {
   g_regions.emplace_back("PW"s, "PLW"s, 585, u8"Palau"s,                                        u8"Republic of Palau"s                                   );
   g_regions.emplace_back("PY"s, "PRY"s, 600, u8"Paraguay"s,                                     u8"Republic of Paraguay"s                                );
   g_regions.emplace_back("QA"s, "QAT"s, 634, u8"Qatar"s,                                        u8"State of Qatar"s                                      );
+  g_regions.emplace_back("QM"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QN"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QO"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QP"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QQ"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QR"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QS"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QT"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QU"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QV"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QW"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QX"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QY"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("QZ"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
   g_regions.emplace_back("RE"s, "REU"s, 638, u8"Réunion"s,                                      u8""s                                                    );
   g_regions.emplace_back("RO"s, "ROU"s, 642, u8"Romania"s,                                      u8""s                                                    );
   g_regions.emplace_back("RS"s, "SRB"s, 688, u8"Serbia"s,                                       u8"Republic of Serbia"s                                  );
@@ -302,11 +317,38 @@ init() {
   g_regions.emplace_back("VU"s, "VUT"s, 548, u8"Vanuatu"s,                                      u8"Republic of Vanuatu"s                                 );
   g_regions.emplace_back("WF"s, "WLF"s, 876, u8"Wallis and Futuna"s,                            u8""s                                                    );
   g_regions.emplace_back("WS"s, "WSM"s, 882, u8"Samoa"s,                                        u8"Independent State of Samoa"s                          );
+  g_regions.emplace_back("XA"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XB"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XC"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XD"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XE"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XF"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XG"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XH"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XI"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XJ"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XK"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XL"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XM"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XN"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XO"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XP"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XQ"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XR"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XS"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XT"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XU"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XV"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XW"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XX"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XY"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
+  g_regions.emplace_back("XZ"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
   g_regions.emplace_back("YE"s, "YEM"s, 887, u8"Yemen"s,                                        u8"Republic of Yemen"s                                   );
   g_regions.emplace_back("YT"s, "MYT"s, 175, u8"Mayotte"s,                                      u8""s                                                    );
   g_regions.emplace_back("ZA"s, "ZAF"s, 710, u8"South Africa"s,                                 u8"Republic of South Africa"s                            );
   g_regions.emplace_back("ZM"s, "ZMB"s, 894, u8"Zambia"s,                                       u8"Republic of Zambia"s                                  );
   g_regions.emplace_back("ZW"s, "ZWE"s, 716, u8"Zimbabwe"s,                                     u8"Republic of Zimbabwe"s                                );
+  g_regions.emplace_back("ZZ"s, ""s,      0, u8"User-assigned"s,                                ""s                                                      );
 }
 
 } // namespace mtx::iso3166

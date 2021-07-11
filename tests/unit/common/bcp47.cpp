@@ -27,13 +27,14 @@ TEST(BCP47LanguageTags, ParsingValidUNM49) {
 }
 
 TEST(BCP47LanguageTags, ParsingInvalid) {
-  EXPECT_FALSE(mtx::bcp47::language_c::parse("zyx-Latn-CH-x-weeee").is_valid());  // invalid (zyx not ISO 639 code).is_valid())
-  EXPECT_FALSE(mtx::bcp47::language_c::parse("ger-muku-CH-x-weeee").is_valid());  // invalid (muku not a script).is_valid())
-  EXPECT_FALSE(mtx::bcp47::language_c::parse("ger-777").is_valid());              // invalid (777 not a region code).is_valid())
-  EXPECT_FALSE(mtx::bcp47::language_c::parse("zh-min").is_valid());               // invalid (min not allowed with zh).is_valid())
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("zyx-Latn-CH-x-weeee").is_valid());  // invalid (zyx not ISO 639 code)
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("ger-muku-CH-x-weeee").is_valid());  // invalid (muku not a script)
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("ger-777").is_valid());              // invalid (777 not a region code)
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("zh-min").is_valid());               // invalid (min not allowed with zh)
   EXPECT_FALSE(mtx::bcp47::language_c::parse("gonzo").is_valid());                // invalid
-  EXPECT_FALSE(mtx::bcp47::language_c::parse("de-aao-Latn-DZ").is_valid());       // invalid (aoo not valid with de).is_valid())
-  EXPECT_FALSE(mtx::bcp47::language_c::parse("de-ekavsk").is_valid());            // invalid (ekavsk not valid with de).is_valid())
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("de-aao-Latn-DZ").is_valid());       // invalid (aoo not valid with de)
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("de-ekavsk").is_valid());            // invalid (ekavsk not valid with de)
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("es-0").is_valid());                 // invalid (no such region)
 }
 
 TEST(BCP47LanguageTags, Formatting) {
@@ -231,9 +232,9 @@ TEST(BCP47LanguageTags, RFC4646AppendixBValid) {
 
   // Private use registry values:
   EXPECT_TRUE(mtx::bcp47::language_c::parse("x-whatever").is_valid()); // (private use using the singleton 'x')
-  // EXPECT_TRUE(mtx::bcp47::language_c::parse("qaa-Qaaa-QM-x-southern").is_valid()); // (all private tags)
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("qaa-Qaaa-QM-x-southern").is_valid()); // (all private tags)
   EXPECT_TRUE(mtx::bcp47::language_c::parse("de-Qaaa").is_valid()); // (German, with a private script)
-  // EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Latn-QM").is_valid()); // (Serbian, Latin-script, private region)
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Latn-QM").is_valid()); // (Serbian, Latin-script, private region)
   EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Qaaa-SR").is_valid()); // (Serbian, private script, for Serbia) [MKVToolNix: original used CS = Sebia & Montenegro, a country that doesn't exist anymore]
 
   // Tags that use extensions (examples ONLY: extensions MUST be defined by revision or update to this document or by RFC):
