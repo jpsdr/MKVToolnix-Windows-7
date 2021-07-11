@@ -106,10 +106,13 @@ EOT
   QT_CFLAGS="`$ac_cv_path_EGREP '^DEFINES *=' "$qmake_dir/Makefile" | sed 's/^DEFINES *= *//'`"
   QT_CFLAGS="$QT_CFLAGS `$ac_cv_path_EGREP '^CXXFLAGS *=' "$qmake_dir/Makefile" | sed -e 's/^CXXFLAGS *= *//' -e 's/-pipe//g' -e 's/-O.//g' -e 's/ -W[[^ ]]*//g' -e 's/-std=[[^ ]]*//g' -e 's/\$(DEFINES)//g'`"
   QT_CFLAGS="$QT_CFLAGS `$ac_cv_path_EGREP '^INCPATH *=' "$qmake_dir/Makefile" | sed -e 's/^INCPATH *= *//' -e 's:-I[[^/]][[^ ]]*::g'`"
+  QT_CFLAGS="`echo $QT_CFLAGS | sed -e 's/\$(EXPORT_ARCH_ARGS)//'`"
   QT_LIBS="`$ac_cv_path_EGREP '^LFLAGS *=' "$qmake_dir/Makefile" | sed -e 's/^LFLAGS *= *//' -e 's/-Wl,-O[[^ ]]*//g'`"
   QT_LIBS="$QT_LIBS `$ac_cv_path_EGREP '^LIBS *=' "$qmake_dir/Makefile" | sed -e 's/^LIBS *= *//' -e 's/\$(SUBLIBS)//g' -e 's:-L[[^/]][[^ ]]*::g'`"
+  QT_LIBS="`echo $QT_LIBS | sed -e 's/\$(EXPORT_ARCH_ARGS)//'`"
   QT_LIBS_NON_GUI="`$ac_cv_path_EGREP '^LFLAGS *=' "$qmake_dir/Makefile.non_gui" | sed -e 's/^LFLAGS *= *//' -e 's/-Wl,-O[[^ ]]*//g'`"
   QT_LIBS_NON_GUI="$QT_LIBS_NON_GUI `$ac_cv_path_EGREP '^LIBS *=' "$qmake_dir/Makefile.non_gui" | sed -e 's/^LIBS *= *//' -e 's/\$(SUBLIBS)//g' -e 's:-L[[^/]][[^ ]]*::g'`"
+  QT_LIBS_NON_GUI="`echo $QT_LIBS_NON_GUI | sed -e 's/\$(EXPORT_ARCH_ARGS)//'`"
 
   rm -rf "$qmake_dir"
 
