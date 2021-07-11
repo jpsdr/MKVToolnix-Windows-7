@@ -12,6 +12,9 @@
 * all: IETF BCP 47/RFC 5646 language tags: implemented support for Alpha 2
   country codes of the "user-defined" category: `AA`, `QM`–`QZ`, `XA`–`XZ` and
   `ZZ`.
+* MKVToolNix GUI: multiplexer: fixed escaping the `mkvmerge` argument in the
+  "Show command-line options" dialog for the "Windows (cmd.exe)" mode. Fixes
+  #3164.
 
 
 # Version 59.0.0 "Shining Star" 2021-07-10

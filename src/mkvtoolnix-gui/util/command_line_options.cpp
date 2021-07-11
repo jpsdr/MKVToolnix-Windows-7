@@ -103,12 +103,17 @@ CommandLineOptions::formatted(Util::EscapeMode escapeMode)
   for (auto const &option : m_options)
     options << option.effectiveOption(escapeMode);
 
-  if (!m_executable.isEmpty() && (escapeMode != EscapeJSON)) {
+  auto escapedOptions = Util::escape(options, escapeMode);
+
+  if (escapeMode == EscapeJSON)
+    return Util::escape(options, escapeMode).join(QString{});
+
+  if (!m_executable.isEmpty()) {
     auto exeMode = escapeMode == EscapeShellCmdExeArgument ? EscapeShellCmdExeProgram : escapeMode;
-    options.prepend(Util::escape(Util::CommandLineOption::fileName(m_executable).effectiveOption(exeMode), exeMode));
+    escapedOptions.prepend(Util::escape(Util::CommandLineOption::fileName(m_executable).effectiveOption(exeMode), exeMode));
   }
 
-  return Util::escape(options, escapeMode).join(QChar{' '});
+  return escapedOptions.join(QChar{' '});
 }
 
 } // namespace mtx::gui::Util
