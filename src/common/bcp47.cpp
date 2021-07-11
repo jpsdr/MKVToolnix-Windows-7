@@ -27,6 +27,35 @@
 
 namespace mtx::bcp47 {
 
+namespace {
+
+bool
+component_matches(std::string const &base,
+                  std::string const &other) {
+  return other.empty() || balg::iequals(base, other);
+}
+
+bool
+components_match(std::vector<std::string> const &base,
+                 std::vector<std::string> const &other) {
+  for (auto const &one_other : other) {
+    auto matches = false;
+
+    for (auto const &one_base : base)
+      if (balg::iequals(one_base, one_other)) {
+        matches = true;
+        break;
+      }
+
+    if (!matches)
+      return false;
+  }
+
+  return true;
+}
+
+} // anonymous namespace
+
 bool language_c::ms_disabled = false;
 
 void
@@ -216,28 +245,43 @@ language_c::parse_extlangs_or_variants(std::string const &str,
       return false;
     }
 
-    if (!entry->prefixes.empty()) {
-      auto ok = false;
-
-      for (auto const &prefix : entry->prefixes)
-        if (current_str == mtx::string::to_lower_ascii(prefix)) {
-          ok = true;
-          break;
-        }
-
-      if (!ok) {
-        auto message   = is_extlangs ? Y("The extended language subtag '{}' must only be used with one of the following prefixes: {}.")
-                       :               Y("The variant '{}' must only be used with one of the following prefixes: {}.");
-        m_parser_error = fmt::format(message, code, fmt::join(entry->prefixes, ", "));
-        return false;
-      }
-    }
-
     if (is_extlangs)
       m_extended_language_subtags.push_back(entry->code);
     else
       m_variants.push_back(entry->code);
   }
+
+  return true;
+}
+
+bool
+language_c::validate_one_extlang_or_variant(std::string const &code,
+                                            bool is_extlang) {
+  auto entry = is_extlang ? mtx::iana::language_subtag_registry::look_up_extlang(code)
+             :              mtx::iana::language_subtag_registry::look_up_variant(code);
+
+  if (!entry)                   // Should not happen as the parsing checks this already.
+    return false;
+
+  if (entry->prefixes.empty())
+    return true;
+
+  for (auto const &prefix : entry->prefixes)
+    if (matches(parse(prefix)))
+      return true;
+
+  auto message   = is_extlang ? Y("The extended language subtag '{}' must only be used with one of the following prefixes: {}.")
+                 :              Y("The variant '{}' must only be used with one of the following prefixes: {}.");
+  m_parser_error = fmt::format(message, code, fmt::join(entry->prefixes, ", "));
+  return false;
+}
+
+bool
+language_c::validate_extlangs_or_variants(std::vector<std::string> const &codes,
+                                          bool is_extlangs) {
+  for (auto const &code : codes)
+    if (!validate_one_extlang_or_variant(code, is_extlangs))
+      return false;
 
   return true;
 }
@@ -294,6 +338,10 @@ language_c::parse(std::string const &language) {
 
   if (matches.capturedLength(9))
     l.m_private_use = mtx::string::split(to_utf8(matches.captured(9)).substr(1), "-");
+
+  if (   !l.validate_extlangs_or_variants(l.m_extended_language_subtags, true)
+      || !l.validate_extlangs_or_variants(l.m_variants,                  false))
+    return l;
 
   l.m_valid = true;
 
@@ -442,6 +490,33 @@ bool
 language_c::operator !=(language_c const &other)
   const noexcept {
   return format() != other.format();
+}
+
+bool
+language_c::matches(language_c const &other)
+  const noexcept {
+  if (!component_matches(m_language, other.m_language))
+    return false;
+
+  if (!components_match(m_extended_language_subtags, other.m_extended_language_subtags))
+    return false;
+
+  if (!component_matches(m_script, other.m_script))
+    return false;
+
+  if (!component_matches(m_region, other.m_region))
+    return false;
+
+  if (!components_match(m_variants, other.m_variants))
+    return false;
+
+  if (!components_match(m_extensions, other.m_extensions))
+    return false;
+
+  if (!components_match(m_private_use, other.m_private_use))
+    return false;
+
+  return true;
 }
 
 void

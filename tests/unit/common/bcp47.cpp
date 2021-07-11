@@ -173,4 +173,79 @@ TEST(BCP47LanguageTags, DifferenceBetweenISO639_2And639_3) {
   EXPECT_FALSE(mtx::bcp47::language_c::parse("cmn").has_valid_iso639_2_code());
 }
 
+TEST(BCP47LanguageTags, PrefixValidation) {
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sl-rozaj-biske").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de-CH-1996").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Cyrl-ekavsk").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Cyrl-SR-ekavsk").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sl-rozaj-biske").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("en-GB-scotland").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("zh-Latn-CN-pinyin").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("ja-Latn-hepburn-heploc").is_valid());
+
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("sr-biske").is_valid());
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("tr-rozaj").is_valid());
+}
+
+TEST(BCP47LanguageTags, RFC4646AppendixBValid) {
+  // Simple language subtag:
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de").is_valid()); // (German)
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("fr").is_valid()); // (French)
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("ja").is_valid()); // (Japanese)
+  // [MKVToolNix: deactivated as grandfathered entries are currently not supported]
+  // EXPECT_TRUE(mtx::bcp47::language_c::parse("i-enochian").is_valid()); // (example of a grandfathered tag)
+
+  // Language subtag plus Script subtag:
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("zh-Hant").is_valid()); // (Chinese written using the Traditional Chinese script)
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("zh-Hans").is_valid()); // (Chinese written using the Simplified Chinese script)
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Cyrl").is_valid()); // (Serbian written using the Cyrillic script)
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Latn").is_valid()); // (Serbian written using the Latin script)
+
+  // Language-Script-Region:
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("zh-Hans-CN").is_valid()); // (Chinese written using the Simplified script as used in mainland China)
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Latn-SR").is_valid()); // (Serbian written using the Latin script as used in Serbia) [MKVToolNix: original was CS = Serbian & Montenegro, but that country doesn't exist anymore, and neither does the code.]
+
+  // Language-Variant:
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sl-rozaj").is_valid()); // (Resian dialect of Slovenian
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sl-nedis").is_valid()); // (Nadiza dialect of Slovenian)
+
+  // Language-Region-Variant:
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de-CH-1901").is_valid()); // (German as used in Switzerland using the 1901 variant [orthography])
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sl-IT-nedis").is_valid()); // (Slovenian as used in Italy, Nadiza dialect)
+
+  // Language-Script-Region-Variant:
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sl-Latn-IT-nedis").is_valid()); // (Nadiza dialect of Slovenian written using the Latin script as used in Italy.  Note that this tag is NOT RECOMMENDED because subtag 'sl' has a Suppress-Script value of 'Latn')
+
+  // Language-Region:
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de-DE").is_valid()); // (German for Germany)
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("en-US").is_valid()); // (English as used in the United States)
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("es-419").is_valid()); // (Spanish appropriate for the Latin America and Caribbean region using the UN region code)
+
+  // Private use subtags:
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de-CH-x-phonebk").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("az-Arab-x-AZE-derbend").is_valid());
+
+  // Extended language subtags (examples ONLY: extended languages MUST be defined by revision or update to this document):
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("zh-mnp").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("zh-mnp-nan-Hant-CN").is_valid());
+
+  // Private use registry values:
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("x-whatever").is_valid()); // (private use using the singleton 'x')
+  // EXPECT_TRUE(mtx::bcp47::language_c::parse("qaa-Qaaa-QM-x-southern").is_valid()); // (all private tags)
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de-Qaaa").is_valid()); // (German, with a private script)
+  // EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Latn-QM").is_valid()); // (Serbian, Latin-script, private region)
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Qaaa-SR").is_valid()); // (Serbian, private script, for Serbia) [MKVToolNix: original used CS = Sebia & Montenegro, a country that doesn't exist anymore]
+
+  // Tags that use extensions (examples ONLY: extensions MUST be defined by revision or update to this document or by RFC):
+  // EXPECT_TRUE(mtx::bcp47::language_c::parse("en-US-u-islamCal").is_valid());
+  // EXPECT_TRUE(mtx::bcp47::language_c::parse("zh-CN-a-myExt-x-private").is_valid());
+  // EXPECT_TRUE(mtx::bcp47::language_c::parse("en-a-myExt-b-another").is_valid());
+}
+
+TEST(BCP47LanguageTags, RFC4646AppendixBInvalid) {
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("de-419-DE").is_valid()); // (two region tags)
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("a-DE").is_valid()); // (use of a single-character subtag in primary position; note that there are a few grandfathered tags that start with "i-" that are valid)
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("ar-a-aaa-b-bbb-a-ccc").is_valid()); // (two extensions with same single-letter prefix)
+}
+
 }

@@ -52,6 +52,8 @@ public:
   bool operator ==(language_c const &other) const noexcept;
   bool operator !=(language_c const &other) const noexcept;
 
+  bool matches(language_c const &other) const noexcept;
+
   language_c &set_valid(bool valid);
   language_c &set_language(std::string const &language);
   language_c &set_extended_language_subtags(std::vector<std::string> const &extended_language_subtags);
@@ -76,6 +78,9 @@ protected:
   bool parse_script(std::string const &code);
   bool parse_region(std::string const &code);
   bool parse_extlangs_or_variants(std::string const &str, bool is_extlangs);
+
+  bool validate_extlangs_or_variants(std::vector<std::string> const &codes, bool is_extlangs);
+  bool validate_one_extlang_or_variant(std::string const &code, bool is_extlang);
 
 public:
   static language_c parse(std::string const &language);
