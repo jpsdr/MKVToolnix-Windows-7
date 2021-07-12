@@ -6,6 +6,8 @@
 
 #include "common/bcp47.h"
 
+class QLabel;
+
 namespace mtx::gui::Util {
 
 namespace Ui {
@@ -35,6 +37,9 @@ public:
 
   void setLanguage(mtx::bcp47::language_c const &language);
   mtx::bcp47::language_c language() const;
+
+  void registerBuddyLabel(QLabel &buddy);
+  virtual bool eventFilter(QObject *watched, QEvent *event) override;
 
 public Q_SLOTS:
   void retranslateUi();

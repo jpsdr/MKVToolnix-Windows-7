@@ -1,6 +1,8 @@
 #include "common/common_pch.h"
 
+#include <QLabel>
 #include <QPushButton>
+#include <QShortcutEvent>
 
 #include "common/bcp47.h"
 #include "common/iana_language_subtag_registry.h"
@@ -219,6 +221,36 @@ LanguageDisplayWidget::updateToolTip() {
           << Q("</table>");
 
   p.ui->lLanguage->setToolTip(content.join(QString{}));
+}
+
+void
+LanguageDisplayWidget::registerBuddyLabel(QLabel &buddy) {
+  buddy.installEventFilter(this);
+}
+
+bool
+LanguageDisplayWidget::eventFilter(QObject *watched,
+                                   QEvent *event) {
+  auto &p = *p_func();
+
+  if (   !event
+      || !dynamic_cast<QLabel *>(watched)
+      || (event->type() != QEvent::Shortcut))
+    return QWidget::eventFilter(watched, event);
+
+  auto mnemonic   = QKeySequence::mnemonic(static_cast<QLabel *>(watched)->text());
+  auto pressedKey = static_cast<QShortcutEvent *>(event)->key();
+
+  if (mnemonic.isEmpty() || (mnemonic != pressedKey))
+    return QWidget::eventFilter(watched, event);
+
+  event->ignore();
+
+  p.ui->pbEdit->setFocus();
+
+  editLanguage();
+
+  return true;
 }
 
 }

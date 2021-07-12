@@ -27,7 +27,6 @@
 #include <QTreeView>
 #include <QInputDialog>
 #include <QMessageBox>
-#include <QShortcutEvent>
 #include <QString>
 #include <QTimer>
 
@@ -121,7 +120,7 @@ Tab::Tab(QWidget *parent)
 
   p.ui->files->setIconSize({ 28, 16 });
 
-  p.ui->trackLanguageLabel->installEventFilter(this);
+  p.ui->trackLanguage->registerBuddyLabel(*p.ui->trackLanguageLabel);
 }
 
 Tab::~Tab() {
@@ -604,40 +603,6 @@ Tab::sourceFiles() {
 QModelIndex
 Tab::fileModelIndexForFileNum(unsigned int num) {
   return p_func()->filesModel->index(num, 0);
-}
-
-std::optional<bool>
-Tab::filterShortcutEventForTrackLanguageLabel(QObject *watched,
-                                              QEvent *event) {
-  auto &p = *p_func();
-
-  if (   !event
-      || (watched       != p.ui->trackLanguageLabel)
-      || (event->type() != QEvent::Shortcut))
-    return {};
-
-  auto mnemonic   = QKeySequence::mnemonic(p.ui->trackLanguageLabel->text());
-  auto pressedKey = static_cast<QShortcutEvent *>(event)->key();
-
-  if (mnemonic.isEmpty() || (mnemonic != pressedKey))
-    return {};
-
-  event->ignore();
-
-  p.ui->trackLanguage->editLanguage();
-
-  return true;
-}
-
-bool
-Tab::eventFilter(QObject *watched,
-                 QEvent *event) {
-  auto result = filterShortcutEventForTrackLanguageLabel(watched, event);
-
-  if (result.has_value())
-    return *result;
-
-  return QWidget::eventFilter(watched, event);
 }
 
 }
