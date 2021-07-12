@@ -1,5 +1,10 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: pressing the keyboard shortcut for the track's
+  "Language" label (Alt+L for English) will now open the language dialog.
+
 ## Bug fixes
 
 * MKVToolNix GUI: multiplexer: when the option "use legacy MIME types for font

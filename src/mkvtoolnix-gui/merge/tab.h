@@ -62,6 +62,8 @@ public:
   virtual void addOrAppendIdentifiedFiles(QVector<SourceFilePtr> const &identifiedFiles, QModelIndex const &fileModelIdx, IdentificationPack::AddMode addMode);
   virtual void addIdentifiedFilesAsAdditionalParts(QVector<SourceFilePtr> const &identifiedFiles, QModelIndex const &fileModelIdx);
 
+  virtual bool eventFilter(QObject *watched, QEvent *event) override;
+
 Q_SIGNALS:
   void removeThisTab();
   void titleChanged();
@@ -310,6 +312,8 @@ protected:
 
   virtual void addSegmentUIDFromFile(QLineEdit &lineEdit, bool append);
   virtual void addDataFromIdentifiedBlurayFiles(QVector<SourceFilePtr> const &files);
+
+  virtual std::optional<bool> filterShortcutEventForTrackLanguageLabel(QObject *watched, QEvent *event);
 };
 
 }
