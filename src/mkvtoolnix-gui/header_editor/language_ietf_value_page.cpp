@@ -2,6 +2,7 @@
 
 #include <QAbstractItemView>
 #include <QComboBox>
+#include <QLabel>
 
 #include "common/iso639.h"
 #include "common/qt.h"
@@ -37,6 +38,8 @@ LanguageIETFValuePage::createInputControl() {
 
   m_ldwValue->setLanguage(parsedLanguage);
 
+  m_ldwValue->registerBuddyLabel(*m_lValueLabel);
+
   return m_ldwValue;
 }
 
@@ -66,6 +69,14 @@ LanguageIETFValuePage::validateValue()
 void
 LanguageIETFValuePage::copyValueToElement() {
   static_cast<EbmlString *>(m_element)->SetValue(to_utf8(currentValueAsString()));
+}
+
+void
+LanguageIETFValuePage::retranslateUi() {
+  ValuePage::retranslateUi();
+
+  if (m_lValueLabel)
+    m_lValueLabel->setText(QY("New &value:"));
 }
 
 }

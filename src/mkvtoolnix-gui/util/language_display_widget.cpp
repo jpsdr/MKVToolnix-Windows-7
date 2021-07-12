@@ -226,6 +226,7 @@ LanguageDisplayWidget::updateToolTip() {
 void
 LanguageDisplayWidget::registerBuddyLabel(QLabel &buddy) {
   buddy.installEventFilter(this);
+  buddy.setBuddy(this);
 }
 
 bool

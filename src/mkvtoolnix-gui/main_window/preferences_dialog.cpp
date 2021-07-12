@@ -99,8 +99,11 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbMAlwaysShowOutputFileControls->setChecked(m_cfg.m_mergeAlwaysShowOutputFileControls);
   ui->cbMClearMergeSettings->setCurrentIndex(static_cast<int>(m_cfg.m_clearMergeSettings));
   ui->ldwMDefaultAudioTrackLanguage->setLanguage(m_cfg.m_defaultAudioTrackLanguage);
+  ui->ldwMDefaultAudioTrackLanguage->registerBuddyLabel(*ui->lDefaultAudioTrackLanguage);
   ui->ldwMDefaultVideoTrackLanguage->setLanguage(m_cfg.m_defaultVideoTrackLanguage);
+  ui->ldwMDefaultVideoTrackLanguage->registerBuddyLabel(*ui->lDefaultVideoTrackLanguage);
   ui->ldwMDefaultSubtitleTrackLanguage->setLanguage(m_cfg.m_defaultSubtitleTrackLanguage);
+  ui->ldwMDefaultSubtitleTrackLanguage->registerBuddyLabel(*ui->lDefaultSubtitleTrackLanguage);
   ui->cbMDefaultSubtitleCharset->setAdditionalItems(m_cfg.m_defaultSubtitleCharset).setup(true, QY("– No selection by default –")).setCurrentByData(m_cfg.m_defaultSubtitleCharset);
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
   ui->cbMProbeRangePercentage->setValue(m_cfg.m_probeRangePercentage);

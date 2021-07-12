@@ -56,6 +56,8 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
 
   m_ui->sbNumberOfEntries->setFocus();
 
+  m_ui->ldwLanguage->registerBuddyLabel(*m_ui->lLanguage);
+
   adjustSize();
 
   connect(m_ui->leStartTimestamp, &QLineEdit::textChanged,     this, &GenerateSubChaptersParametersDialog::verifyStartTimestamp);
