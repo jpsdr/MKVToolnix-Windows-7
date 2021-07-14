@@ -11,9 +11,10 @@
   attachments" is enabled, the GUI will now use `application/x-truetype-font`
   for font collection files.
 * all: IETF BCP 47/RFC 5646 language tags: fixed validating extended language
-  & variant subtags against their allowed prefixes when the whole tag contains
-  more than just the exact prefix (e.g. a country code as in `de-CH-1996`
-  instead of just `de-1996`, both of which are valid).
+  & variant subtags against their allowed prefixes (e.g. a valid tag with a
+  country code as in `de-CH-1996` is recognized as valid while two generally
+  known variants that aren't allowed together as in `de-1901-1996` is
+  recognized as invalid).
 * all: IETF BCP 47/RFC 5646 language tags: implemented support for Alpha 2
   country codes of the "user-defined" category: `AA`, `QM`–`QZ`, `XA`–`XZ` and
   `ZZ`.

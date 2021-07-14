@@ -175,17 +175,48 @@ TEST(BCP47LanguageTags, DifferenceBetweenISO639_2And639_3) {
 }
 
 TEST(BCP47LanguageTags, PrefixValidation) {
-  EXPECT_TRUE(mtx::bcp47::language_c::parse("sl-rozaj-biske").is_valid());
   EXPECT_TRUE(mtx::bcp47::language_c::parse("de-CH-1996").is_valid());
   EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Cyrl-ekavsk").is_valid());
   EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Cyrl-SR-ekavsk").is_valid());
-  EXPECT_TRUE(mtx::bcp47::language_c::parse("sl-rozaj-biske").is_valid());
   EXPECT_TRUE(mtx::bcp47::language_c::parse("en-GB-scotland").is_valid());
   EXPECT_TRUE(mtx::bcp47::language_c::parse("zh-Latn-CN-pinyin").is_valid());
-  EXPECT_TRUE(mtx::bcp47::language_c::parse("ja-Latn-hepburn-heploc").is_valid());
 
   EXPECT_FALSE(mtx::bcp47::language_c::parse("sr-biske").is_valid());
   EXPECT_FALSE(mtx::bcp47::language_c::parse("tr-rozaj").is_valid());
+
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sl-rozaj").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sl-rozaj-biske").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sl-rozaj-1994").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sl-rozaj-biske-1994").is_valid());
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("sl-1994").is_valid());
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("sl-biske-rozaj").is_valid());
+
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de-1901").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de-1996").is_valid());
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("de-1901-1996").is_valid());
+
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("zh-cmn").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("zh-yue").is_valid());
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("zh-cmn-yue").is_valid());
+
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("hy-arevela").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("hy-arevmda").is_valid());
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("hy-arevela-arevmda").is_valid());
+
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("ja-Latn-hepburn").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("ja-Latn-hepburn-heploc").is_valid());
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("ja-Latn-heploc").is_valid());
+
+}
+
+TEST(BCP47LanguageTags, RFC4646AssortedValid) {
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de-1996").is_valid()); // section 3.1
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de-Latg-1996").is_valid()); // section 3.1
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de-CH-1996").is_valid()); // section 3.1
+}
+
+TEST(BCP47LanguageTags, RFC4646AssortedInvalid) {
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("fr-1996").is_valid()); // section 3.1
 }
 
 TEST(BCP47LanguageTags, RFC4646AppendixBValid) {
@@ -228,7 +259,7 @@ TEST(BCP47LanguageTags, RFC4646AppendixBValid) {
 
   // Extended language subtags (examples ONLY: extended languages MUST be defined by revision or update to this document):
   EXPECT_TRUE(mtx::bcp47::language_c::parse("zh-mnp").is_valid());
-  EXPECT_TRUE(mtx::bcp47::language_c::parse("zh-mnp-nan-Hant-CN").is_valid());
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("zh-mnp-nan-Hant-CN").is_valid()); // invalid as 'nan' must only be used with prefix 'zh'
 
   // Private use registry values:
   EXPECT_TRUE(mtx::bcp47::language_c::parse("x-whatever").is_valid()); // (private use using the singleton 'x')

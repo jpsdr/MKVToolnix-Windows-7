@@ -27,35 +27,6 @@
 
 namespace mtx::bcp47 {
 
-namespace {
-
-bool
-component_matches(std::string const &base,
-                  std::string const &other) {
-  return other.empty() || balg::iequals(base, other);
-}
-
-bool
-components_match(std::vector<std::string> const &base,
-                 std::vector<std::string> const &other) {
-  for (auto const &one_other : other) {
-    auto matches = false;
-
-    for (auto const &one_base : base)
-      if (balg::iequals(one_base, one_other)) {
-        matches = true;
-        break;
-      }
-
-    if (!matches)
-      return false;
-  }
-
-  return true;
-}
-
-} // anonymous namespace
-
 bool language_c::ms_disabled = false;
 
 void
@@ -255,32 +226,73 @@ language_c::parse_extlangs_or_variants(std::string const &str,
 }
 
 bool
-language_c::validate_one_extlang_or_variant(std::string const &code,
-                                            bool is_extlang) {
-  auto entry = is_extlang ? mtx::iana::language_subtag_registry::look_up_extlang(code)
-             :              mtx::iana::language_subtag_registry::look_up_variant(code);
-
-  if (!entry)                   // Should not happen as the parsing checks this already.
+language_c::matches_prefix(language_c const &prefix,
+                           std::size_t extlang_or_variant_index,
+                           bool is_extlang)
+  const noexcept {
+  if (   ( is_extlang && !m_extended_language_subtags.empty() && (extlang_or_variant_index > (prefix.m_extended_language_subtags.size())))
+      || (!is_extlang && !m_variants                 .empty() && (extlang_or_variant_index > (prefix.m_variants                 .size()))))
     return false;
 
-  if (entry->prefixes.empty())
+  std::vector<std::string> this_relevant_parts;
+
+  if (!prefix.m_language.empty())
+    this_relevant_parts.emplace_back(m_language);
+
+  for (auto const &extlang : m_extended_language_subtags)
+    this_relevant_parts.emplace_back(extlang);
+
+  if (!prefix.m_script.empty())
+    this_relevant_parts.emplace_back(m_script);
+
+  if (!prefix.m_region.empty())
+    this_relevant_parts.emplace_back(m_region);
+
+  for (auto const &variant : m_variants)
+    this_relevant_parts.emplace_back(variant);
+
+  auto this_relevant_formatted = mtx::string::join(this_relevant_parts, "-");
+  auto prefix_formatted        = prefix.format() + "-";
+
+  if (this_relevant_formatted.size() < prefix_formatted.size())
+    return false;
+
+  this_relevant_formatted.resize(prefix_formatted.size());
+
+  return balg::iequals(prefix_formatted, this_relevant_formatted);
+}
+
+bool
+language_c::validate_one_extlang_or_variant(std::size_t extlang_or_variant_index,
+                                            bool is_extlang) {
+  auto const &extlang_or_variant_code = is_extlang ? m_extended_language_subtags[extlang_or_variant_index]
+                                      :              m_variants[extlang_or_variant_index];
+  auto extlang_or_variant             = is_extlang ? mtx::iana::language_subtag_registry::look_up_extlang(extlang_or_variant_code)
+                                      :              mtx::iana::language_subtag_registry::look_up_variant(extlang_or_variant_code);
+
+  if (!extlang_or_variant)                   // Should not happen as the parsing checks this already.
+    return false;
+
+  if (extlang_or_variant->prefixes.empty())
     return true;
 
-  for (auto const &prefix : entry->prefixes)
-    if (matches(parse(prefix)))
+  for (auto const &prefix : extlang_or_variant->prefixes)
+    if (matches_prefix(parse(prefix), extlang_or_variant_index, is_extlang))
       return true;
 
   auto message   = is_extlang ? Y("The extended language subtag '{}' must only be used with one of the following prefixes: {}.")
                  :              Y("The variant '{}' must only be used with one of the following prefixes: {}.");
-  m_parser_error = fmt::format(message, code, fmt::join(entry->prefixes, ", "));
+  m_parser_error = fmt::format(message, extlang_or_variant_code, fmt::join(extlang_or_variant->prefixes, ", "));
+
   return false;
 }
 
 bool
-language_c::validate_extlangs_or_variants(std::vector<std::string> const &codes,
-                                          bool is_extlangs) {
-  for (auto const &code : codes)
-    if (!validate_one_extlang_or_variant(code, is_extlangs))
+language_c::validate_extlangs_or_variants(bool is_extlangs) {
+  auto const &extlangs_or_variants = is_extlangs ? m_extended_language_subtags : m_variants;
+
+  for (int idx = 0, num_entries = extlangs_or_variants.size(); idx < num_entries; ++idx)
+    if (!validate_one_extlang_or_variant(idx, is_extlangs))
       return false;
 
   return true;
@@ -339,8 +351,8 @@ language_c::parse(std::string const &language) {
   if (matches.capturedLength(9))
     l.m_private_use = mtx::string::split(to_utf8(matches.captured(9)).substr(1), "-");
 
-  if (   !l.validate_extlangs_or_variants(l.m_extended_language_subtags, true)
-      || !l.validate_extlangs_or_variants(l.m_variants,                  false))
+  if (   !l.validate_extlangs_or_variants(true)
+      || !l.validate_extlangs_or_variants(false))
     return l;
 
   l.m_valid = true;
@@ -490,33 +502,6 @@ bool
 language_c::operator !=(language_c const &other)
   const noexcept {
   return format() != other.format();
-}
-
-bool
-language_c::matches(language_c const &other)
-  const noexcept {
-  if (!component_matches(m_language, other.m_language))
-    return false;
-
-  if (!components_match(m_extended_language_subtags, other.m_extended_language_subtags))
-    return false;
-
-  if (!component_matches(m_script, other.m_script))
-    return false;
-
-  if (!component_matches(m_region, other.m_region))
-    return false;
-
-  if (!components_match(m_variants, other.m_variants))
-    return false;
-
-  if (!components_match(m_extensions, other.m_extensions))
-    return false;
-
-  if (!components_match(m_private_use, other.m_private_use))
-    return false;
-
-  return true;
 }
 
 void
