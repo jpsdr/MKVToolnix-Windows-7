@@ -4,6 +4,8 @@
 
 * MKVToolNix GUI: multiplexer: pressing the keyboard shortcut for the track's
   "Language" label (Alt+L for English) will now open the language dialog.
+* all: updated the list of ISO 639-3 language codes with the latest official
+  changes.
 
 ## Bug fixes
 
