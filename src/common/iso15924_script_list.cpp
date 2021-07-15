@@ -25,7 +25,7 @@ std::vector<script_t> g_scripts;
 
 void
 init() {
-  g_scripts.reserve(203);
+  g_scripts.reserve(210);
 
   g_scripts.emplace_back("Adlm"s, 166, u8"Adlam"s                                                                                          );
   g_scripts.emplace_back("Afak"s, 439, u8"Afaka"s                                                                                          );
@@ -158,8 +158,11 @@ init() {
   g_scripts.emplace_back("Orya"s, 327, u8"Oriya (Odia)"s                                                                                   );
   g_scripts.emplace_back("Osge"s, 219, u8"Osage"s                                                                                          );
   g_scripts.emplace_back("Osma"s, 260, u8"Osmanya"s                                                                                        );
+  g_scripts.emplace_back("Ougr"s, 143, u8"Old Uyghur"s                                                                                     );
   g_scripts.emplace_back("Palm"s, 126, u8"Palmyrene"s                                                                                      );
   g_scripts.emplace_back("Pauc"s, 263, u8"Pau Cin Hau"s                                                                                    );
+  g_scripts.emplace_back("Pcun"s,  15, u8"Proto-Cuneiform"s                                                                                );
+  g_scripts.emplace_back("Pelm"s,  16, u8"Proto-Elamite"s                                                                                  );
   g_scripts.emplace_back("Perm"s, 227, u8"Old Permic"s                                                                                     );
   g_scripts.emplace_back("Phag"s, 331, u8"Phags-pa"s                                                                                       );
   g_scripts.emplace_back("Phli"s, 131, u8"Inscriptional Pahlavi"s                                                                          );
@@ -169,8 +172,10 @@ init() {
   g_scripts.emplace_back("Piqd"s, 293, u8"Klingon (KLI pIqaD)"s                                                                            );
   g_scripts.emplace_back("Plrd"s, 282, u8"Miao (Pollard)"s                                                                                 );
   g_scripts.emplace_back("Prti"s, 130, u8"Inscriptional Parthian"s                                                                         );
+  g_scripts.emplace_back("Psin"s, 103, u8"Proto-Sinaitic"s                                                                                 );
   g_scripts.emplace_back("Qaaa"s, 900, u8"Reserved for private use (start)"s                                                               );
   g_scripts.emplace_back("Qabx"s, 949, u8"Reserved for private use (end)"s                                                                 );
+  g_scripts.emplace_back("Ranj"s, 303, u8"Ranjana"s                                                                                        );
   g_scripts.emplace_back("Rjng"s, 363, u8"Rejang (Redjang, Kaganga)"s                                                                      );
   g_scripts.emplace_back("Rohg"s, 167, u8"Hanifi Rohingya"s                                                                                );
   g_scripts.emplace_back("Roro"s, 620, u8"Rongorongo"s                                                                                     );
@@ -211,10 +216,12 @@ init() {
   g_scripts.emplace_back("Thai"s, 352, u8"Thai"s                                                                                           );
   g_scripts.emplace_back("Tibt"s, 330, u8"Tibetan"s                                                                                        );
   g_scripts.emplace_back("Tirh"s, 326, u8"Tirhuta"s                                                                                        );
+  g_scripts.emplace_back("Tnsa"s, 275, u8"Tangsa"s                                                                                         );
   g_scripts.emplace_back("Toto"s, 294, u8"Toto"s                                                                                           );
   g_scripts.emplace_back("Ugar"s,  40, u8"Ugaritic"s                                                                                       );
   g_scripts.emplace_back("Vaii"s, 470, u8"Vai"s                                                                                            );
   g_scripts.emplace_back("Visp"s, 280, u8"Visible Speech"s                                                                                 );
+  g_scripts.emplace_back("Vith"s, 228, u8"Vithkuqi"s                                                                                       );
   g_scripts.emplace_back("Wara"s, 262, u8"Warang Citi (Varang Kshiti)"s                                                                    );
   g_scripts.emplace_back("Wcho"s, 283, u8"Wancho"s                                                                                         );
   g_scripts.emplace_back("Wole"s, 480, u8"Woleai"s                                                                                         );
