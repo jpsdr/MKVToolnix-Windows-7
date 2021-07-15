@@ -26,6 +26,12 @@
 * mkvmerge, mkvextract: HEVC/H.265 parser: fixed the programs aborting when
   parsing VPS or SPS NALUs with invalid content due to unhandled
   exceptions. Fixes #3162.
+* all: IETF BCP 47/RFC 5646 language tags: when looking up a language for a
+  two- or three-letter code, the programs will no longer compare that code
+  with language names as that was unintended, ambiguous (e.g. the code "Ga"
+  could be interpreted as the 639-2 alpha-2 code for "Irish" or as the name of
+  the language called "Ga") and only worked with languages whose name was at
+  most three letters long.
 
 
 # Version 59.0.0 "Shining Star" 2021-07-10

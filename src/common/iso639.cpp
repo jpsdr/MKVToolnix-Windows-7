@@ -61,7 +61,7 @@ list_languages() {
 */
 std::optional<language_t>
 look_up(std::string const &s,
-        bool allow_short_english_name) {
+        bool also_look_up_by_name) {
   if (s.empty())
     return {};
 
@@ -74,6 +74,9 @@ look_up(std::string const &s,
   if (lang_code != g_languages.end())
     return *lang_code;
 
+  if (!also_look_up_by_name)
+    return {};
+
   for (auto const &language : g_languages) {
     auto const &english_name = language.english_name;
     auto s_lower             = balg::to_lower_copy(s);
@@ -85,9 +88,6 @@ look_up(std::string const &s,
       if (balg::to_lower_copy(name) == s_lower)
         return language;
   }
-
-  if (!allow_short_english_name)
-    return {};
 
   for (auto const &language : g_languages) {
     auto names = mtx::string::split(language.english_name, ";");

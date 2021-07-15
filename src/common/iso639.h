@@ -20,7 +20,7 @@
 namespace mtx::iso639 {
 
 void init();
-std::optional<language_t> look_up(std::string const &s, bool allow_short_english_names = false);
+std::optional<language_t> look_up(std::string const &s, bool also_look_up_by_name = false);
 void list_languages();
 
 } // namespace mtx::iso639
