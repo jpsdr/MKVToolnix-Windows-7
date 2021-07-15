@@ -23,6 +23,9 @@
 * MKVToolNix GUI: multiplexer: fixed escaping the `mkvmerge` argument in the
   "Show command-line options" dialog for the "Windows (cmd.exe)" mode. Fixes
   #3164.
+* mkvmerge, mkvextract: HEVC/H.265 parser: fixed the programs aborting when
+  parsing VPS or SPS NALUs with invalid content due to unhandled
+  exceptions. Fixes #3162.
 
 
 # Version 59.0.0 "Shining Star" 2021-07-10

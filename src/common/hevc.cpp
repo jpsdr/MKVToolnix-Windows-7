@@ -498,9 +498,9 @@ vps_info_t::clear() {
   *this = vps_info_t{};
 }
 
-bool
-parse_vps(memory_cptr const &buffer,
-          vps_info_t &vps) {
+static bool
+parse_vps_internal(memory_cptr const &buffer,
+                   vps_info_t &vps) {
   auto size = buffer->get_size();
   mtx::bits::reader_c r(buffer->get_buffer(), size);
   mtx::bits::writer_c w{};
@@ -569,11 +569,22 @@ parse_vps(memory_cptr const &buffer,
   return true;
 }
 
-memory_cptr
-parse_sps(memory_cptr const &buffer,
-          sps_info_t &sps,
-          std::vector<vps_info_t> &m_vps_info_list,
-          bool keep_ar_info) {
+bool
+parse_vps(memory_cptr const &buffer,
+          vps_info_t &vps) {
+  try {
+    return parse_vps_internal(buffer, vps);
+  } catch (mtx::mm_io::exception &) {
+  }
+
+  return false;
+}
+
+static memory_cptr
+parse_sps_internal(memory_cptr const &buffer,
+                   sps_info_t &sps,
+                   std::vector<vps_info_t> &vps_info_list,
+                   bool keep_ar_info) {
   auto size = buffer->get_size();
   mtx::bits::reader_c r(buffer->get_buffer(), size);
   mtx::bits::writer_c w{};
@@ -597,15 +608,15 @@ parse_sps(memory_cptr const &buffer,
   sps.temporal_id_nesting_flag = w.copy_bits(1, r); // sps_temporal_id_nesting_flag
 
   size_t vps_idx;
-  for (vps_idx = 0; m_vps_info_list.size() > vps_idx; ++vps_idx)
-    if (m_vps_info_list[vps_idx].id == sps.vps_id)
+  for (vps_idx = 0; vps_info_list.size() > vps_idx; ++vps_idx)
+    if (vps_info_list[vps_idx].id == sps.vps_id)
       break;
-  if (m_vps_info_list.size() == vps_idx)
+  if (vps_info_list.size() == vps_idx)
     return {};
 
   sps.vps = vps_idx;
 
-  auto &vps = m_vps_info_list[vps_idx];
+  auto &vps = vps_info_list[vps_idx];
 
   profile_tier_copy(r, w, vps, sps.max_sub_layers_minus1);  // profile_tier_level(sps_max_sub_layers_minus1)
 
@@ -705,6 +716,19 @@ parse_sps(memory_cptr const &buffer,
   }
 
   return new_sps;
+}
+
+memory_cptr
+parse_sps(memory_cptr const &buffer,
+          sps_info_t &sps,
+          std::vector<vps_info_t> &vps_info_list,
+          bool keep_ar_info) {
+  try {
+    return parse_sps_internal(buffer, sps, vps_info_list, keep_ar_info);
+  } catch (mtx::mm_io::exception &) {
+  }
+
+  return {};
 }
 
 bool
