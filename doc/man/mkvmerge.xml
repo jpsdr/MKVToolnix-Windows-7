@@ -2676,12 +2676,16 @@ Track ID 1: audio (A_MPEG/L3)</screen>
       linkend="mkvmerge.description.redirect_output"><option>--redirect-output</option></link> then the default charset is UTF-8. This can
       be changed with <link linkend="mkvmerge.description.output_charset"><option>--output-charset</option></link>.
      </para>
+    </listitem>
 
+    <listitem>
      <para>
       If the output is redirected with <command>cmd.exe</command> itself, e.g. with <literal>mkvinfo file.mkv &gt; info.txt</literal>, then
       the charset is always UTF-8 and cannot be changed.
      </para>
+    </listitem>
 
+    <listitem>
      <para>
       Otherwise (when writing directly to the console) the Windows function <function>WriteConsoleW()</function> is used and the option
       <link linkend="mkvmerge.description.output_charset"><option>--output-charset</option></link> is ignored. The console should be able to
