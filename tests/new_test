@@ -7,9 +7,9 @@ fi
 
 name="${${1%.rb}//-/_}"
 max_num=(test*(.On[1]))
-let next_num=${max_num[1][6,8]}+1
+let next_num=${max_num[1][6,9]}+1
 
-new_file="test-${next_num}${name}.rb"
+new_file="test-$(printf '%04d' ${next_num})${name}.rb"
 
 cat > "$new_file" <<EOF
 #!/usr/bin/ruby -w
