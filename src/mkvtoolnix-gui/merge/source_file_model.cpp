@@ -96,10 +96,6 @@ SourceFileModel::SourceFileModel(QObject *parent)
   , m_appendedSelected{}
   , m_additionalPartSelected{}
 {
-  m_additionalPartIcon.addFile(":/icons/16x16/distribute-horizontal-margin.png");
-  m_addedIcon.addFile(":/icons/16x16/distribute-horizontal-x.png");
-  m_normalIcon.addFile(":/icons/16x16/distribute-vertical-page.png");
-
   initializeColorIndexes();
 
   connect(MainWindow::get(), &MainWindow::preferencesChanged, this, &SourceFileModel::updateFileColors);

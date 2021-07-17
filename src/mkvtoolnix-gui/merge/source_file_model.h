@@ -5,7 +5,6 @@
 #include "mkvtoolnix-gui/merge/source_file.h"
 
 #include <QStandardItemModel>
-#include <QIcon>
 #include <QList>
 #include <QSet>
 #include <QVector>
@@ -24,7 +23,6 @@ class SourceFileModel : public QStandardItemModel {
 protected:
   QList<SourceFilePtr> *m_sourceFiles;
   QHash<quint64, SourceFilePtr> m_sourceFileMap;
-  QIcon m_additionalPartIcon, m_addedIcon, m_normalIcon;
   TrackModel *m_tracksModel;
   AttachedFileModel *m_attachedFilesModel;
   bool m_nonAppendedSelected, m_appendedSelected, m_additionalPartSelected;
