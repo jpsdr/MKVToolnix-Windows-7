@@ -88,6 +88,7 @@ char const * const s_valMergeReconstructSequencesWhenAdding       = "mergeRecons
 char const * const s_valMergeSetDestinationFromTitle              = "mergeSetDestinationFromTitle";
 char const * const s_valMergeSortFilesTracksByTypeWhenAdding      = "mergeSortFilesTracksByTypeWhenAdding";
 char const * const s_valMergeTrackPropertiesLayout                = "mergeTrackPropertiesLayout";
+char const * const s_valMergeUseFileAndTrackColors                = "mergeUseFileAndTrackColors";
 char const * const s_valMergeUseVerticalInputLayout               = "mergeUseVerticalInputLayout";
 char const * const s_valMergeWarnMissingAudioTrack                = "mergeWarnMissingAudioTrack";
 char const * const s_valMinimumPlaylistDuration                   = "minimumPlaylistDuration";

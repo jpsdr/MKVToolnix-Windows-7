@@ -188,6 +188,7 @@ public:
   TrackPropertiesLayout m_mergeTrackPropertiesLayout;
   MergeMissingAudioTrackPolicy m_mergeWarnMissingAudioTrack;
   RecentlyUsedStrings m_mergeLastRelativeOutputDirs{10}, m_mergeLastFixedOutputDirs{10}, m_mergeLastOutputDirs{10};
+  bool m_mergeUseFileAndTrackColors;
   QVector<QColor> m_mergeFileColors;
 
   OutputFileNamePolicy m_outputFileNamePolicy;

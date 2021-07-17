@@ -398,6 +398,12 @@ PreferencesDialog::setupToolTips() {
                      .arg(QYH("The other two layouts available are: in two fixed columns to the right or in a tab widget below the files and tracks lists."))
                      .arg(QYH("The horizontal layout with two fixed columns results in a wider window while the vertical tab widget layout results in a higher window.")));
 
+  Util::setToolTip(ui->cbMUseFileAndTrackColors,
+                   Q("<p>%1 %2</p>")
+                   .arg(QYH("If enabled, small colored boxes will be shown in the file and track lists as a visual clue to help associating tracks with the files they come from."))
+                   .arg(QYH("If there are more entries than configured colors, random colors will be used temporarily.")));
+
+
   Util::setToolTip(ui->cbMClearMergeSettings,
                    Q("<p>%1</p><ol><li>%2 %3</li><li>%4 %5</li><li>%6</li></ol>")
                    .arg(QYH("The GUI can help you start your next multiplex settings after having started a job or having added a one to the job queue."))
@@ -902,11 +908,13 @@ PreferencesDialog::setupFontAndScaling() {
 
 void
 PreferencesDialog::setupFileColorsControls() {
+  ui->cbMUseFileAndTrackColors->setChecked(m_cfg.m_mergeUseFileAndTrackColors);
   setupFileColors(m_cfg.m_mergeFileColors);
 
-  enableFileColorsButtons();
+  enableFileColorsControls();
 
-  connect(ui->lwMFileColors,                &QListWidget::itemSelectionChanged, this, &PreferencesDialog::enableFileColorsButtons);
+  connect(ui->cbMUseFileAndTrackColors,     &QCheckBox::toggled,                this, &PreferencesDialog::enableFileColorsControls);
+  connect(ui->lwMFileColors,                &QListWidget::itemSelectionChanged, this, &PreferencesDialog::enableFileColorsControls);
   connect(ui->lwMFileColors,                &QListWidget::itemDoubleClicked,    this, &PreferencesDialog::editFileColor);
   connect(ui->pbMAddFileColor,              &QPushButton::clicked,              this, &PreferencesDialog::addFileColor);
   connect(ui->pbMRemoveFileColors,          &QPushButton::clicked,              this, &PreferencesDialog::removeFileColors);
@@ -934,7 +942,7 @@ PreferencesDialog::setupFileColors(QVector<QColor> const &colors) {
   for (auto const &color : colors)
     ui->lwMFileColors->addItem(&setupFileColorItem(*new QListWidgetItem, color));
 
-  enableFileColorsButtons();
+  enableFileColorsControls();
 }
 
 void
@@ -947,14 +955,20 @@ PreferencesDialog::saveFileColors() {
 
   for (int row = 0; row < numRows; ++row)
     colors << ui->lwMFileColors->item(row)->background().color();
+
+  m_cfg.m_mergeUseFileAndTrackColors = ui->cbMUseFileAndTrackColors->isChecked();
 }
 
 void
-PreferencesDialog::enableFileColorsButtons() {
-  auto items = ui->lwMFileColors->selectedItems();
+PreferencesDialog::enableFileColorsControls() {
+  auto useColors = ui->cbMUseFileAndTrackColors->isChecked();
+  auto items     = ui->lwMFileColors->selectedItems();
 
-  ui->pbMRemoveFileColors->setEnabled(!items.isEmpty());
-  ui->pbMEditFileColor->setEnabled(items.size() == 1);
+  ui->lwMFileColors->setEnabled(useColors);
+  ui->pbMAddFileColor->setEnabled(useColors);
+  ui->pbMRevertFileColorsToDefault->setEnabled(useColors);
+  ui->pbMRemoveFileColors->setEnabled(useColors && !items.isEmpty());
+  ui->pbMEditFileColor->setEnabled(useColors && (items.size() == 1));
 }
 
 void
@@ -970,7 +984,7 @@ PreferencesDialog::removeFileColors() {
   for (auto const &item : ui->lwMFileColors->selectedItems())
     delete item;
 
-  enableFileColorsButtons();
+  enableFileColorsControls();
 }
 
 void

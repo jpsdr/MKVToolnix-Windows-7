@@ -31,14 +31,19 @@ createSourceIndicatorIcon(SourceFile &sourceFile) {
   auto iconName = sourceFile.isAdditionalPart() ? Q("distribute-horizontal-margin")
                 : sourceFile.isAppended()       ? Q("distribute-horizontal-x")
                 :                                 Q("distribute-vertical-page");
-  auto color    = Util::Settings::get().nthFileColor(sourceFile.m_colorIndex);
+  iconName      = Q(":/icons/16x16/%1.png").arg(iconName);
+
+  if (!Util::Settings::get().m_mergeUseFileAndTrackColors)
+    return QIcon{iconName};
+
+  auto color = Util::Settings::get().nthFileColor(sourceFile.m_colorIndex);
 
   QPixmap combinedPixmap{28, 16};
   combinedPixmap.fill(Qt::transparent);
 
   QPainter painter{&combinedPixmap};
 
-  painter.drawPixmap(0, 0, QPixmap{Q(":/icons/16x16/%1.png").arg(iconName)});
+  painter.drawPixmap(0, 0, QPixmap{iconName});
 
   painter.setPen(color);
   painter.setBrush(color);

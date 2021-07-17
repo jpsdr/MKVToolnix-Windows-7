@@ -18,6 +18,9 @@ namespace {
 
 QIcon
 createSourceIndicatorIcon(Track &track) {
+  if (!Util::Settings::get().m_mergeUseFileAndTrackColors)
+    return {};
+
   QPixmap pixmap{8, 12};
   pixmap.fill(Util::Settings::get().nthFileColor(track.m_colorIndex));
 

@@ -598,6 +598,9 @@ Settings::loadRunProgramConfigurations(QSettings &reg) {
 void
 Settings::loadFileColors(QSettings &reg) {
   reg.beginGroup(s_grpSettings);
+
+  m_mergeUseFileAndTrackColors = reg.value(s_valMergeUseFileAndTrackColors, true).toBool();
+
   reg.beginGroup(s_grpFileColors);
 
   auto childKeys = reg.childKeys();
@@ -917,6 +920,9 @@ void
 Settings::saveFileColors(QSettings &reg)
   const {
   reg.beginGroup(s_grpSettings);
+
+  reg.setValue(s_valMergeUseFileAndTrackColors, m_mergeUseFileAndTrackColors);
+
   reg.remove(s_grpFileColors);
 
   reg.beginGroup(s_grpFileColors);

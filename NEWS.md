@@ -6,6 +6,8 @@
   "Language" label (Alt+L for English) will now open the language dialog.
 * all: IETF BCP 47/RFC 5646 language tags: updated the various lists of valid
   subtags from the official specs.
+* MKVToolNix GUI: multiplexer: added an option in the preferences for turning
+  off the colored boxes indicating which file each track belongs to.
 
 ## Bug fixes
 

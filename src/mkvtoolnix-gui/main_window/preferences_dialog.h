@@ -80,7 +80,7 @@ public Q_SLOTS:
   void editSelectedFileColor();
   void editFileColor(QListWidgetItem *item);
   void revertFileColorsToDefault();
-  void enableFileColorsButtons();
+  void enableFileColorsControls();
 
   void enableOftendUsedLanguagesOnly();
   void enableOftendUsedRegionsOnly();
