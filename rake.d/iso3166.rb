@@ -1,40 +1,87 @@
 def create_iso3166_country_list_file
-  cpp_file_name = "src/common/iso3166_country_list.cpp"
-  iso3166_1     = JSON.parse(IO.readlines("/usr/share/iso-codes/json/iso_3166-1.json").join(''))
-  rows          = iso3166_1["3166-1"].
-    map do |entry|
-    [ entry["alpha_2"].upcase.to_cpp_string,
-      entry["alpha_3"].upcase.to_cpp_string,
-      sprintf('%03s', entry["numeric"].gsub(%r{^0+}, '')),
-      entry["name"].to_u8_cpp_string,
-      (entry["official_name"] || '').to_u8_cpp_string,
-    ]
+  official_names = Hash[ *
+    JSON.
+    parse(IO.read("/usr/share/iso-codes/json/iso_3166-1.json")) \
+    ["3166-1"].
+    map { |entry| [ entry["alpha_3"].downcase, entry["official_name"] ] }.
+    flatten
+  ]
+
+  content = Mtx::OnlineFile.download("https://unstats.un.org/unsd/methodology/m49/overview/", "m49_list.txt")
+  content = parse_html_extract_table_data(content, %r{^.*?<table[^>]+downloadTableEN[^>]*>})
+  headers = Hash[ *
+    content.
+    shift.
+    each_with_index.
+    map { |text, idx| [ idx, text.downcase.gsub(%r{[^a-z0-9]+}, '_').gsub(%r{^_|_$}, '') ] }.
+    flatten
+  ]
+
+  countries_regions = {}
+
+  maybe_add = lambda do|row, type|
+    code = row["#{type}_code"].to_i
+    name = row["#{type}_name"]
+
+    return if name.blank? || countries_regions[code]
+
+    countries_regions[code] = {
+      :number        => code,
+      :alpha_2_code  => "",
+      :alpha_3_code  => "",
+      :name          => name,
+      :official_name => "",
+    }
   end
 
-  entries = Mtx::IANALanguageSubtagRegistry.fetch_registry
-  entries["region"].
-    select { |region| %r{^\d+$}.match(region[:subtag]) }.
-    each do |region|
-
-    rows << [
-      '""s', '""s',
-      sprintf('%03s', region[:subtag].gsub(%r{^0+}, '')),
-      region[:description].to_u8_cpp_string,
-      '""s',
+  content.
+    map do |row|
+    Hash[ *
+      row.
+      each_with_index.
+      map { |text, idx| [ headers[idx], text ] }.
+      flatten
     ]
+  end.
+    each do |row|
+
+    %w{global region sub_region intermediate_region}.each { |type| maybe_add.call(row, type) }
+
+    code = row["m49_code"].to_i
+
+    countries_regions[code] = {
+      :number        => code,
+      :alpha_2_code  => row["iso_alpha2_code"],
+      :alpha_3_code  => row["iso_alpha3_code"],
+      :name          => row["country_or_area"],
+      :official_name => official_names[row["iso_alpha3_code"].downcase] || "",
+    }
   end
 
   user_assigned = [ 'AA', 'ZZ' ] \
     + ('M'..'Z').map { |letter| "Q#{letter}" } \
     + ('A'..'Z').map { |letter| "X#{letter}" }
 
-  user_assigned.each do |alpha_2|
-    rows << [
-      '"' + alpha_2 + '"s',
-      '""s',
-      '  0',
-      'u8"User-assigned"s',
-      '""s',
+  content  = countries_regions.values
+  content +=
+    user_assigned.
+    map do |code|
+    {
+      :number        => 0,
+      :alpha_2_code  => code,
+      :alpha_3_code  => "",
+      :name          => "User-assigned",
+      :official_name => "",
+    }
+  end
+
+  rows = content.
+    map do |entry|
+    [ entry[:alpha_2_code].upcase.to_cpp_string,
+      entry[:alpha_3_code].upcase.to_cpp_string,
+      sprintf('%3d', entry[:number]),
+      entry[:name].to_u8_cpp_string,
+      entry[:official_name].empty? ? '""s' : entry[:official_name].to_u8_cpp_string,
     ]
   end
 
@@ -76,8 +123,9 @@ EOT
 } // namespace mtx::iso3166
 EOT
 
-  rows    = rows.sort_by { |row| [ row[0], row[1], row[3] ].join('::') }
-  content = header + format_table(rows, :column_suffix => ',', :row_prefix => "  g_regions.emplace_back(", :row_suffix => ");").join("\n") + "\n" + footer
+  rows          = rows.sort_by { |row| [ row[0], row[1], row[3] ].join('::') }
+  content       = header + format_table(rows, :column_suffix => ',', :row_prefix => "  g_regions.emplace_back(", :row_suffix => ");").join("\n") + "\n" + footer
+  cpp_file_name = "src/common/iso3166_country_list.cpp"
 
   runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }
 end

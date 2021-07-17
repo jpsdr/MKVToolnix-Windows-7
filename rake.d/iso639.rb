@@ -1,29 +1,11 @@
 def create_iso639_language_list_file
-  content = Mtx::OnlineFile.download("https://www.loc.gov/standards/iso639-2/php/code_list.php", "iso-639-2.html").
-    force_encoding("ASCII-8BIT")
-  if %r{<meta[^>]+charset="?([a-z0-9-]+)}im.match(content)
-    content = content.force_encoding($1).encode("UTF-8")
-  else
-    content = content.force_encoding("UTF-8")
-  end
-
-  content = content.
-    gsub(%r{<!--.*?-->}, '').                        # remove comments
-    gsub(%r{>[ \t\r\n]+<}, '><').                    # completely remove whitespace between tags
-    gsub(%r{[ \t\r\n]+}, ' ').                       # compress consecutive white space
-    gsub(%r{^.*?<table[^>]+>.*?<table[^>]+>}im, ''). # keep second table
-    gsub(%r{</table>.*}i, '').                       # drop stuff after second table
-    gsub(%r{^<tr.*?</tr>}i, '').                     # drop the table heading
-    gsub(%r{</tr><tr[^>]*>}i, '<row-sep>').          # convert consecutive table row end+start to line separators to split on later
-    gsub(%r{</td><td[^>]*>}i, '<col-sep>').          # convert consecutive table column end+start to column separators to split on later
-    gsub(%r{</?t[rd][^>]*>}i, '').                   # remove remaining table row/data tags
-    gsub(%r{&nbsp;}i, '').                           # ignore non-blanking spaces
-    split(%r{<row-sep>}).                            # split rows
-    map { |row| row.split(%r{<col-sep>}) }           # split each row into columns
+  content = Mtx::OnlineFile.download("https://www.loc.gov/standards/iso639-2/php/code_list.php", "iso-639-2.html")
 
   entries_by_alpha_3 = {}
 
-  content.each do |row|
+  parse_html_extract_table_data(content, %r{^.*?<table[^>]+>.*?<table[^>]+>}im).
+    drop(1).
+    each do |row|
     if %r{^([a-z]{3}) *\(([bt])\)<.*?>([a-z]{3})}.match(row[0].downcase)
       alpha_3_b = $2 == 'b' ? $1 : $3
       alpha_3_t = $2 == 'b' ? $3 : $1

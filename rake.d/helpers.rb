@@ -381,6 +381,34 @@ def add_qrc_dependencies *qrcs
   end
 end
 
+def parse_html_extract_table_data content, find_table_re
+  require "cgi"
+
+  content = content.force_encoding("ASCII-8BIT")
+
+  if %r{<meta[^>]+charset="?([a-z0-9-]+)}im.match(content)
+    content = content.force_encoding($1).encode("UTF-8")
+  else
+    content = content.force_encoding("UTF-8")
+  end
+
+  return content.
+    gsub(%r{<!--.*?-->},                  '').                # remove comments
+    gsub(%r{>[ \t\r\n]+<},                '><').              # completely remove whitespace between tags
+    gsub(%r{[ \t\r\n]+},                  ' ').               # compress consecutive white space
+    gsub(find_table_re,                   '').                # drop stuff before relevant table
+    gsub(%r{</table>.*}i,                 '').                # drop stuff after relevant table
+    gsub(%r{(/?<[^ >]+)[^>]*>},           '\1>').             # remove attributes
+    gsub(%r{</?t(head|body|foot(er)?)>}i, '').                # remove thead/tbody/tfoot tags
+    gsub(%r{<(/?)th}i,                    '<\1td').           # convert <th> tags to <td>
+    gsub(%r{</tr><tr>}i,                  '<row-sep>').       # convert consecutive table row end+start to line separators to split on later
+    gsub(%r{</td><td>}i,                  '<col-sep>').       # convert consecutive table column end+start to column separators to split on later
+    gsub(%r{</?t[rd][^>]*>}i,             '').                # remove remaining table row/data tags
+    gsub(%r{&nbsp;}i,                     '').                # ignore non-blanking spaces
+    split(%r{<row-sep>}).                                     # split rows
+    map { |row| CGI::unescapeHTML(row).split(%r{<col-sep>}) } # split each row into columns
+end
+
 class Rake::Task
   def mo_all_prerequisites
     todo   = [name]
