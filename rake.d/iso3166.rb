@@ -7,17 +7,66 @@ def create_iso3166_country_list_file
     flatten
   ]
 
-  content = Mtx::OnlineFile.download("https://unstats.un.org/unsd/methodology/m49/overview/", "m49_list.txt")
-  content = parse_html_extract_table_data(content, %r{^.*?<table[^>]+downloadTableEN[^>]*>})
-  headers = Hash[ *
-    content.
+  countries_regions = {}
+  iso3166_content   = Mtx::OnlineFile.download("https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes")
+
+  parse_html_extract_table_data(iso3166_content, %r{^.*?<table[^>]*>}i).
+    drop(2).
+    reject { |row| row.length < 8 }.
+    each do |row|
+
+    row = row.map do |column|
+      column.
+        gsub(%r{<style>.*?</style>}, '').
+        gsub(%r{<a><img></a>},       ', ').
+        gsub(%r{<img>},              '').
+        gsub(%r{>_<},                '><').
+        gsub(%r{<[^>]+>},            '').
+        gsub(%r{ },                  '').
+        gsub(%r{^, +},               '').
+        gsub(%r{[[:space:]]+},       ' ').
+        gsub(%r{^ +| +$},            '')
+    end
+
+    # 0 ["Albania",
+    # 1  "The Republic of Albania",
+    # 2  "UN member state ",
+    # 3  "AL",
+    # 4  "ALB",
+    # 5  "008",
+    # 6  "ISO 3166-2:AL",
+    # 7  ".al"],
+
+    m49_code = row[5].to_i
+    name     = row[0].
+      gsub(%r{ *\[.*?\]},       '').
+      gsub(%r{ *\(the?\)$}i,    '').
+      gsub(%r{(,.+?),([^,]+)$}, '\1 and\2')
+    official_name = row[1].
+      gsub(%r{ *\[.*?\]},       '').
+      gsub(%r{ *\(.*?\)$}i,     '').
+      gsub(%r{^The +},          '')
+
+    countries_regions[m49_code] = {
+      :number        => m49_code,
+      :alpha_2_code  => row[3],
+      :alpha_3_code  => row[4],
+      :name          => name,
+      :official_name => name == official_name ? "" : official_name,
+    }
+  end
+
+  # pp(countries_regions); exit 42
+
+  m49_content = Mtx::OnlineFile.download("https://unstats.un.org/unsd/methodology/m49/overview/", "m49_list.txt")
+  m49_data    = parse_html_extract_table_data(m49_content, %r{^.*?<table[^>]+downloadTableEN[^>]*>}i)
+  headers     = Hash[ *
+    m49_data.
     shift.
     each_with_index.
     map { |text, idx| [ idx, text.downcase.gsub(%r{[^a-z0-9]+}, '_').gsub(%r{^_|_$}, '') ] }.
     flatten
   ]
-
-  countries_regions = {}
 
   maybe_add = lambda do|row, type|
     code = row["#{type}_code"].to_i
@@ -34,7 +83,7 @@ def create_iso3166_country_list_file
     }
   end
 
-  content.
+  m49_data.
     map do |row|
     Hash[ *
       row.
@@ -49,12 +98,12 @@ def create_iso3166_country_list_file
 
     code = row["m49_code"].to_i
 
-    countries_regions[code] = {
+    countries_regions[code] ||= {
       :number        => code,
       :alpha_2_code  => row["iso_alpha2_code"],
       :alpha_3_code  => row["iso_alpha3_code"],
       :name          => row["country_or_area"],
-      :official_name => official_names[row["iso_alpha3_code"].downcase] || "",
+      :official_name => "",
     }
   end
 
@@ -62,8 +111,8 @@ def create_iso3166_country_list_file
     + ('M'..'Z').map { |letter| "Q#{letter}" } \
     + ('A'..'Z').map { |letter| "X#{letter}" }
 
-  content  = countries_regions.values
-  content +=
+  entries  = countries_regions.values
+  entries +=
     user_assigned.
     map do |code|
     {
@@ -75,13 +124,13 @@ def create_iso3166_country_list_file
     }
   end
 
-  rows = content.
+  rows = entries.
     map do |entry|
     [ entry[:alpha_2_code].upcase.to_cpp_string,
       entry[:alpha_3_code].upcase.to_cpp_string,
       sprintf('%3d', entry[:number]),
       entry[:name].to_u8_cpp_string,
-      entry[:official_name].empty? ? '""s' : entry[:official_name].to_u8_cpp_string,
+      entry[:official_name].to_u8_cpp_string,
     ]
   end
 
