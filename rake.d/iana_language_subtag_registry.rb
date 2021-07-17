@@ -1,18 +1,10 @@
 module Mtx::IANALanguageSubtagRegistry
-  @@registry_mutex      = Mutex.new
-  @@registry            = nil
-  @@registry_downloaded = false
-  @@registry_file       = "language-subtag-registry"
+  @@registry_mutex = Mutex.new
+  @@registry       = nil
 
   def self.fetch_registry
     @@registry_mutex.synchronize {
       return @@registry if @@registry
-
-      if !FileTest.exists?(@@registry_file)
-        url = "https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry"
-        runq "wget", url, "wget --quiet -O #{@@registry_file} #{url}"
-        @@registry_downloaded = true
-      end
 
       @@registry = {}
       entry      = {}
@@ -27,7 +19,8 @@ module Mtx::IANALanguageSubtagRegistry
         entry = {}
       end
 
-      IO.readlines(@@registry_file).
+      Mtx::OnlineFile.download("https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry").
+        split(%r{\n+}).
         map(&:chomp).
         each do |line|
 
@@ -125,8 +118,4 @@ EOT
   def self.create_cpp
     do_create_cpp(self.fetch_registry)
   end
-
-  END {
-    File.unlink(@@registry_file) if @@registry_downloaded && FileTest.exists?(@@registry_file)
-  }
 end

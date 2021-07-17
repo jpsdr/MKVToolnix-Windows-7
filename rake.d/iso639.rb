@@ -1,19 +1,6 @@
 def create_iso639_language_list_file
-  list_2_file     = "iso-639-2.html"
-  list_3_file     = "iso-639-3.tab"
-  list_downloaded = false
-
-  if !FileTest.exists?(list_2_file) || !FileTest.exists?(list_3_file)
-    url = "https://www.loc.gov/standards/iso639-2/php/code_list.php"
-    runq "wget", url, "wget --quiet -O #{list_2_file} #{url}"
-
-    url = "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab"
-    runq "wget", url, "wget --quiet -O #{list_3_file} #{url}"
-
-    list_downloaded = true
-  end
-
-  content = IO.read("iso-639-2.html").force_encoding("ASCII-8BIT")
+  content = Mtx::OnlineFile.download("https://www.loc.gov/standards/iso639-2/php/code_list.php", "iso-639-2.html").
+    force_encoding("ASCII-8BIT")
   if %r{<meta[^>]+charset="?([a-z0-9-]+)}im.match(content)
     content = content.force_encoding($1).encode("UTF-8")
   else
@@ -55,7 +42,10 @@ def create_iso639_language_list_file
     }
   end
 
-  lines   = IO.readlines(list_3_file).map(&:chomp)
+  lines = Mtx::OnlineFile.download("https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab").
+    split(%r{\n+}).
+    map(&:chomp)
+
   headers = Hash[ *
     lines.
     shift.
@@ -154,8 +144,4 @@ EOT
   cpp_file_name = "src/common/iso639_language_list.cpp"
 
   runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }
-
-ensure
-  File.unlink(list_2_file) if list_downloaded && FileTest.exists?(list_2_file)
-  File.unlink(list_3_file) if list_downloaded && FileTest.exists?(list_3_file)
 end

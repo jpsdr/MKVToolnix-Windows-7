@@ -1,19 +1,9 @@
 def create_iso15924_script_list_file
-  txt_files     = []
-  zip_file      = "iso15924.txt.zip"
-  url           = "https://unicode.org/iso15924/#{zip_file}"
-  cpp_file_name = "src/common/iso15924_script_list.cpp"
+  content = Mtx::OnlineFile.download("https://unicode.org/iso15924/iso15924.txt.zip")
 
-  File.unlink(zip_file) if FileTest.exists?(zip_file)
-
-  runq "wget", url, "wget --quiet -O #{zip_file} #{url}"
-  runq "unzip", zip_file, "unzip -o -q #{zip_file}"
-
-  txt_files = FileList["iso15924*.txt"].to_a
-
-  raise "No text file found in download" if txt_files.empty?
-
-  rows = IO.readlines(txt_files[0]).
+  rows = content.
+    force_encoding("UTF-8").
+    split(%r{\n+}).
     map(&:chomp).
     reject { |line| %r{^#}.match(line) }.
     select { |line| %r{;.*;.*;}.match(line) }.
@@ -62,12 +52,8 @@ EOT
 } // namespace mtx::iso15924
 EOT
 
-  content = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_scripts.emplace_back(", :row_suffix => ");").join("\n") + "\n" + footer
+  content       = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_scripts.emplace_back(", :row_suffix => ");").join("\n") + "\n" + footer
+  cpp_file_name = "src/common/iso15924_script_list.cpp"
 
   runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }
-
-ensure
-  (txt_files + [ zip_file ]).each do |file_name|
-    File.unlink(file_name) if FileTest.exists?(file_name)
-  end
 end
