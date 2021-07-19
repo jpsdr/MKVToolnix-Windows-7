@@ -45,6 +45,7 @@
 #include "mkvtoolnix-gui/header_editor/unsigned_integer_value_page.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/basic_tree_view.h"
+#include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/model.h"
@@ -792,12 +793,12 @@ Tab::createAttachmentFromFile(QString const &fileName) {
   if (!content)
     return {};
 
-  auto mimeType   = mtx::mime::guess_type_for_file(to_utf8(fileName));
+  auto mimeType   = Util::detectMIMEType(fileName);
   auto uid        = create_unique_number(UNIQUE_ATTACHMENT_IDS);
   auto fileData   = new KaxFileData;
   auto attachment = KaxAttachedPtr{
     mtx::construct::cons<KaxAttached>(new KaxFileName, to_wide(QFileInfo{fileName}.fileName()),
-                                      new KaxMimeType, mimeType,
+                                      new KaxMimeType, to_utf8(mimeType),
                                       new KaxFileUID,  uid)
   };
 

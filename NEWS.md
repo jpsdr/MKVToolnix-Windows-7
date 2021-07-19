@@ -34,6 +34,9 @@
   could be interpreted as the 639-2 alpha-2 code for "Irish" or as the name of
   the language called "Ga") and only worked with languages whose name was at
   most three letters long.
+* MKVToolNix GUI: header editor: the header editor will now honor the "use
+  legacy MIME types when adding font attachments" setting when adding new
+  attachments.
 
 
 # Version 59.0.0 "Shining Star" 2021-07-10
