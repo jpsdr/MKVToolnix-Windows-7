@@ -1,12 +1,4 @@
 def create_iso3166_country_list_file
-  official_names = Hash[ *
-    JSON.
-    parse(IO.read("/usr/share/iso-codes/json/iso_3166-1.json")) \
-    ["3166-1"].
-    map { |entry| [ entry["alpha_3"].downcase, entry["official_name"] ] }.
-    flatten
-  ]
-
   countries_regions = {}
   iso3166_content   = Mtx::OnlineFile.download("https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes")
 
