@@ -6,6 +6,7 @@ def create_iso15924_script_list_file
     split(%r{\n+}).
     map(&:chomp).
     reject { |line| %r{^#}.match(line) }.
+    reject { |line| %r{^Qa(a|b[a-x])}.match(line) }.
     select { |line| %r{;.*;.*;}.match(line) }.
     map    { |line| line.split(';') }.
     map    { |line| [
@@ -13,6 +14,14 @@ def create_iso15924_script_list_file
       sprintf('%03s', line[1].gsub(%r{^0}, '')),
       line[2].to_u8_cpp_string,
     ] }
+
+  rows += (0..49).map do |idx|
+    [
+      sprintf('"Qa%s%s"s', ('a'.ord + (idx / 26)).chr, ('a'.ord + (idx % 26)).chr),
+      (900 + idx).to_s,
+      'u8"Reserved for private use"s',
+    ]
+  end
 
   header = <<EOT
 /*
