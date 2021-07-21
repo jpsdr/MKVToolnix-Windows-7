@@ -8,6 +8,8 @@
   subtags from the official specs.
 * MKVToolNix GUI: multiplexer: added an option in the preferences for turning
   off the colored boxes indicating which file each track belongs to.
+* all: IETF BCP 47/RFC 5646: added support for language families from ISO
+  639-5 that aren't part of 639-2.
 
 ## Bug fixes
 

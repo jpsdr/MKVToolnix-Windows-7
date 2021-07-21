@@ -64,6 +64,23 @@ def create_iso639_language_list_file
     }
   end
 
+  content = Mtx::OnlineFile.download("https://en.wikipedia.org/wiki/List_of_ISO_639-5_codes")
+
+  parse_html_extract_table_data(content, %r{^.*?<table[^>]+>}im).
+    drop(1).
+    each do |row|
+    alpha_3 = row[1]
+
+    entries_by_alpha_3[alpha_3] ||= {
+      "name"           => row[3].gsub(%r{<[^>]+>}, ''),
+      "bibliographic"  => nil,
+      "alpha_2"        => nil,
+      "alpha_3"        => alpha_3,
+      "alpha_3_to_use" => alpha_3,
+      "has_639_2"      => false,
+    }
+  end
+
   rows = entries_by_alpha_3.
     values.
     map do |entry|
