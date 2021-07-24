@@ -372,9 +372,9 @@ SourceFileModel::addFilesAndTracks(QVector<SourceFilePtr> const &files) {
   auto filesToProcess       = files;
 
   if (reconstructSequences)
-    std::sort(filesToProcess.begin(), filesToProcess.end(), [](auto const &a, auto const &b) {
-        return a->m_fileName < b->m_fileName;
-      });
+    mtx::sort::by(filesToProcess.begin(), filesToProcess.end(), [](auto const &file) {
+      return mtx::sort::natural_string_c(file->m_fileName);
+    });
 
   for (auto const &file : filesToProcess) {
     auto sequenceData = analyzeFileNameForSequenceData(file->m_fileName);

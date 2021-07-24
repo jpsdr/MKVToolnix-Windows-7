@@ -39,6 +39,10 @@
 * MKVToolNix GUI: header editor: the header editor will now honor the "use
   legacy MIME types when adding font attachments" setting when adding new
   attachments.
+* MKVToolNix GUI: multiplexer: when adding multiple files at once, the GUI
+  will sort file names with numbers the way a human would expect it to. For
+  example, `1.mp4`, `9.aac`, `10.srt`, `11.srt` are now sorted exactly that
+  order instead of `1.mp4`, `10.srt`, `11.srt`, `9.aac`.
 
 
 # Version 59.0.0 "Shining Star" 2021-07-10
