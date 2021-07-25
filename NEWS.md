@@ -43,6 +43,9 @@
   will sort file names with numbers the way a human would expect it to. For
   example, `1.mp4`, `9.aac`, `10.srt`, `11.srt` are now sorted exactly that
   order instead of `1.mp4`, `10.srt`, `11.srt`, `9.aac`.
+* mkvmerge: HEVC/H.265: appending Matroska files with HEVC tracks might lead
+  to the loss of the first couple of frames from each of the second and all
+  following files. Fixes #3170.
 
 
 # Version 59.0.0 "Shining Star" 2021-07-10

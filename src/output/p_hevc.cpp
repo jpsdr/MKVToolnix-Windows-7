@@ -145,7 +145,7 @@ hevc_video_packetizer_c::connect(generic_packetizer_c *src,
 
   generic_packetizer_c::connect(src, append_timestamp_offset);
 
-  if (2 == m_connected_to)
+  if (1 == m_connected_to)
     p.parser = static_cast<hevc_video_packetizer_c *>(src)->p_func()->parser;
 }
 
