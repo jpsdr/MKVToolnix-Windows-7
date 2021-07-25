@@ -1103,9 +1103,22 @@ es_parser_c::get_num_frame_slices()
 void
 es_parser_c::dump_info()
   const {
+  auto dump_ps = [](std::string const &type, std::vector<memory_cptr> const &buffers) {
+    mxinfo(fmt::format("Dumping {0}:\n", type));
+    for (int idx = 0, num_entries = buffers.size(); idx < num_entries; ++idx)
+      mxinfo(fmt::format("  {0} size {1} adler32 0x{2:08x}\n", idx, buffers[idx]->get_size(), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *buffers[idx])));
+  };
+
+  dump_ps("m_vps",                m_vps_list);
+  dump_ps("m_sps",                m_sps_list);
+  dump_ps("m_pps_list",           m_pps_list);
+  dump_ps("m_extra_data_pre",     m_extra_data_pre);
+  dump_ps("m_extra_data_initial", m_extra_data_initial);
+  dump_ps("m_pending_frame_data", m_pending_frame_data);
+
   mxinfo("Dumping m_frames_out:\n");
   for (auto &frame : m_frames_out) {
-    mxinfo(fmt::format("size {0} key {1} start {2} end {3} ref1 {4} adler32 0x{5:08x}\n",
+    mxinfo(fmt::format("  size {0} key {1} start {2} end {3} ref1 {4} adler32 0x{5:08x}\n",
                        frame.m_data->get_size(),
                        frame.m_keyframe,
                        mtx::string::format_timestamp(frame.m_start),
