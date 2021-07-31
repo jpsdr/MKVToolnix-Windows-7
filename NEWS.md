@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: deriving track languages from file names: the
+  default list of boundary characters now includes `-`. Part of the
+  implementation of #3173.
+
 ## Build system changes
 
 * all: `std::codecvt_utf8` is now used instead of Boost's

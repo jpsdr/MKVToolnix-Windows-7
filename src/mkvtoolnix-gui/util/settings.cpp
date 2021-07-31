@@ -303,6 +303,16 @@ Settings::convertOldSettings() {
     reg->remove(s_valMergeLastAddingAppendingDecision);
   }
   reg->endGroup();
+
+  // After v60: boundary characters for detecting track languages have changed.
+  if (writtenByVersion <= version_number_t{"60.0.0.2"}) {
+    reg->beginGroup(s_grpSettings);
+    reg->beginGroup(s_grpDerivingTrackLanguagesFromFileNames);
+    if (reg->value(s_valBoundaryChars) == Q("[](){}.+=#"))
+      reg->setValue(s_valBoundaryChars, defaultBoundaryCharsForDerivingLanguageFromFileName());
+    reg->endGroup();
+    reg->endGroup();
+  }
 }
 
 void
@@ -1110,7 +1120,7 @@ Settings::determineMediaInfoExePath() {
 
 QString
 Settings::defaultBoundaryCharsForDerivingLanguageFromFileName() {
-  return Q("[](){}.+=#");
+  return Q("[](){}.+-=#");
 }
 
 QVector<QColor>
