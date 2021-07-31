@@ -373,7 +373,7 @@ SourceFile::deriveLanguageFromFileName() {
   // least two components & don't start with x-. As BCP 47 tags
   // contain '-' characters, don't split by them.
   for (auto c : cfg.m_boundaryCharsForDerivingTrackLanguagesFromFileNames)
-    if (c != L'-')
+    if (c != QChar{'-'})
       escapedChars << QRegularExpression::escape(c);
 
   QRegularExpression bcp47Re{Q("^[^x][a-z]+-"), QRegularExpression::CaseInsensitiveOption};
