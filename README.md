@@ -22,18 +22,17 @@ MKVToolNix 60.0.0
 5. [Code of Conduct](#5-code-of-conduct)
 6. [Included third-party components and their licenses](#6-included-third-party-components-and-their-licenses)
     1. [avilib](#61-avilib)
-    2. [Boost's utf8_codecvt_facet](#62-boosts-utf8_codecvt_facet)
-    3. [libEBML](#63-libebml)
-    4. [libMatroska](#64-libmatroska)
-    5. [librmff](#65-librmff)
-    6. [nlohmann's JSON](#66-nlohmanns-json)
-    7. [pugixml](#67-pugixml)
-    8. [utf8-cpp](#68-utf8-cpp)
-    9. [Oxygen icons and sound files](#69-oxygen-icons-and-sound-files)
-    10. [MKVToolNix icons](#610-mkvtoolnix-icons)
-    11. [QtWaitingSpinner](#611-qtwaitingspinner)
-    12. [Fancy tab widget](#612-fancy-tab-widget)
-    13. [fmt](#613-fmt)
+    2. [libEBML](#63-libebml)
+    3. [libMatroska](#64-libmatroska)
+    4. [librmff](#65-librmff)
+    5. [nlohmann's JSON](#66-nlohmanns-json)
+    6. [pugixml](#67-pugixml)
+    7. [utf8-cpp](#68-utf8-cpp)
+    8. [Oxygen icons and sound files](#69-oxygen-icons-and-sound-files)
+    9. [MKVToolNix icons](#610-mkvtoolnix-icons)
+    10. [QtWaitingSpinner](#611-qtwaitingspinner)
+    11. [Fancy tab widget](#612-fancy-tab-widget)
+    12. [fmt](#613-fmt)
 
 -----------------
 
@@ -345,20 +344,7 @@ package.
   * URL: the `transcode` project doesn't seem to have a home page anymore
   * Corresponding files: `lib/avilib-0.6.10/*`
 
-## 6.2. Boost's utf8_codecvt_facet
-
-A class, `utf8_codecvt_facet`, derived from `std::codecvt<wchar_t, char>`,
-which can be used to convert utf8 data in files into `wchar_t` strings
-in the application.
-
-  * Copyright:
-    * 2001 Ronald Garcia, Indiana University (garcia@osl.iu.edu)
-    * Andrew Lumsdaine, Indiana University (lums@osl.iu.edu)
-  * License: Boost Software License - Version 1.0 (see `doc/licenses/Boost-1.0.txt`)
-  * URL: http://www.boost.org
-  * Corresponding files: `lib/boost/*`
-
-## 6.3. libEBML
+## 6.2. libEBML
 
 A C++ library to parse EBML files
 
@@ -367,7 +353,7 @@ A C++ library to parse EBML files
   * URL: http://www.matroska.org/
   * Corresponding files: `lib/libebml/*`
 
-## 6.4. libMatroska
+## 6.3. libMatroska
 
 A C++ library to parse Matroska files
 
@@ -376,7 +362,7 @@ A C++ library to parse Matroska files
   * URL: http://www.matroska.org/
   * Corresponding files: `lib/libmatroska/*`
 
-## 6.5. librmff
+## 6.4. librmff
 
 librmff is short for 'RealMedia file format access library'. It aims
 at providing the programmer an easy way to read and write RealMedia
@@ -387,7 +373,7 @@ files.
   * URL: https://www.bunkus.org/videotools/librmff/index.html
   * Corresponding files: `lib/librmff/*`
 
-## 6.6. nlohmann's JSON
+## 6.5. nlohmann's JSON
 
 JSON for Modern C++
 
@@ -396,7 +382,7 @@ JSON for Modern C++
   * URL: https://github.com/nlohmann/json
   * Corresponding files: `lib/nlohmann-json/*`
 
-## 6.7. pugixml
+## 6.6. pugixml
 
 An XML processing library
 
@@ -405,7 +391,7 @@ An XML processing library
   * URL: http://pugixml.org/
   * Corresponding files: `lib/pugixml/*`
 
-## 6.8. utf8-cpp
+## 6.7. utf8-cpp
 
 UTF-8 with C++ in a Portable Way
 
@@ -414,7 +400,7 @@ UTF-8 with C++ in a Portable Way
   * URL: http://utfcpp.sourceforge.net/
   * Corresponding files: `lib/utf8-cpp/*`
 
-## 6.9. Oxygen icons and sound files
+## 6.8. Oxygen icons and sound files
 
 Most of the icons included in this package originate from the Oxygen
 Project. These include all files in the `share/icons` sub-directory
@@ -435,7 +421,7 @@ from the Oxygen project.
     * `share/icons/*` (except for `share/icons/*/mkv*`)
     * `share/sounds/*`
 
-## 6.10. MKVToolNix icons
+## 6.9. MKVToolNix icons
 
   * Copyright:
     * 2011 Alexandr Grigorcea <cahr.gr@gmail.com>
@@ -444,7 +430,7 @@ from the Oxygen project.
   * License: Creative Commons Attribution 3.0 Unported (CC BY 3.0) (see `doc/licenses/CC-BY-3.0.txt`)
   * Corresponding files: `share/icons/*/mkv*`
 
-## 6.11. QtWaitingSpinner
+## 6.10. QtWaitingSpinner
 
 A highly configurable, custom Qt widget for showing "waiting" or
 "loading" spinner icons in Qt applications
@@ -457,7 +443,7 @@ A highly configurable, custom Qt widget for showing "waiting" or
   * URL: https://github.com/snowwlex/QtWaitingSpinner
   * Corresponding files: `src/mkvtoolnix-gui/util/waiting_spinning_widget.{h,cpp}`
 
-## 6.12. Fancy tab widget
+## 6.11. Fancy tab widget
 
 A beefed-up tab widget class for Qt extracted from the Qt Creator project
 
@@ -465,7 +451,7 @@ A beefed-up tab widget class for Qt extracted from the Qt Creator project
   * License: GNU General Public License v2 (see `COPYING`)
   * Corresponding files: `src/mkvtoolnix-gui/util/fancy_tab_widget.{h,cpp}`
 
-## 6.13. fmt
+## 6.12. fmt
 
 Small, safe and fast formatting library
 

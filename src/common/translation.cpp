@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include <clocale>
+#include <codecvt>
 #include <cstdlib>
 #if HAVE_NL_LANGINFO
 # include <langinfo.h>
@@ -26,7 +27,6 @@
 #include "common/iso639.h"
 #include "common/locale_string.h"
 #include "common/qt.h"
-#include "common/utf8_codecvt_facet.h"
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 #include "common/strings/utf8.h"
@@ -317,12 +317,7 @@ translatable_string_c::join(std::vector<std::string> const &strings)
 
 void
 translation_c::initialize_std_locale() {
-#if defined(SYS_WINDOWS)
-  // Boost's path class uses wide chars on Windows for path
-  // names. Tell that all narrow strings are encoded in UTF-8.
-  std::locale utf8_locale(std::locale(), new mtx::utf8_codecvt_facet);
-  std::locale::global(utf8_locale);
-#endif
+  std::locale::global(std::locale{ std::locale(), new std::codecvt_utf8<wchar_t> });
 }
 
 // ------------------------------------------------------------
@@ -413,9 +408,6 @@ init_locales(std::string locale) {
 
   if (chosen_locale.empty())
     mxerror(Y("The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"));
-
-  std::locale utf8_locale(std::locale(), new mtx::utf8_codecvt_facet);
-  std::locale::global(utf8_locale);
 
   translation_c::set_active_translation(chosen_locale);
 

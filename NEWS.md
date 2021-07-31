@@ -1,3 +1,12 @@
+# Version ?
+
+## Build system changes
+
+* all: `std::codecvt_utf8` is now used instead of Boost's
+  `utf8_codecvt_facet`. The bundled copy the latter in `lib/boost` has
+  therefore been removed.
+
+
 # Version 60.0.0 "Are We Copies?" 2021-07-31
 
 ## New features and enhancements
