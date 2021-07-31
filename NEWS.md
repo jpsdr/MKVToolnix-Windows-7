@@ -1,4 +1,4 @@
-# Version ?
+# Version 60.0.0 "Are We Copies?" 2021-07-31
 
 ## New features and enhancements
 
