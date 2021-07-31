@@ -369,6 +369,42 @@ SourceFile::deriveLanguageFromFileName() {
 
   QStringList escapedChars;
 
+  // First try to detect full BCP 47 language tags if they contain at
+  // least two components & don't start with x-. As BCP 47 tags
+  // contain '-' characters, don't split by them.
+  for (auto c : cfg.m_boundaryCharsForDerivingTrackLanguagesFromFileNames)
+    if (c != L'-')
+      escapedChars << QRegularExpression::escape(c);
+
+  QRegularExpression bcp47Re{Q("^[^x][a-z]+-"), QRegularExpression::CaseInsensitiveOption};
+
+  if (!escapedChars.isEmpty()) {
+    auto splitRE     = QRegularExpression{Q("(?:%1)+").arg(escapedChars.join(Q("|")))};
+    auto allCaptures = fileName.split(splitRE);
+
+    for (auto captureItr = allCaptures.rbegin(), captureEnd = allCaptures.rend(); captureItr != captureEnd; ++captureItr) {
+      auto &capture = *captureItr;
+
+      if (capture.isEmpty())
+        continue;
+
+      qDebug() << "language derivation match (BCP 47):" << capture;
+
+      if (!capture.contains(bcp47Re))
+        continue;
+
+      auto tag = mtx::bcp47::language_c::parse(to_utf8(capture));
+      if (tag.is_valid()) {
+        qDebug() << "derived BCP 47 language tag";
+        return tag;
+      }
+    }
+  }
+
+  // No full BCP 47 language tag found. Now look for languages only
+  // with the full set of boundary characters.
+  escapedChars.clear();
+
   for (auto c : cfg.m_boundaryCharsForDerivingTrackLanguagesFromFileNames)
     escapedChars << QRegularExpression::escape(c);
 

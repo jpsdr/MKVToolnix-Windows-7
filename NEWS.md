@@ -5,6 +5,9 @@
 * MKVToolNix GUI: multiplexer: deriving track languages from file names: the
   default list of boundary characters now includes `-`. Part of the
   implementation of #3173.
+* MKVToolNix GUI: multiplexer: deriving track languages from file names: the
+  GUI can now detect full BCP 47/RFC 5646 language tags in file names. Part of
+  the implementation of #3173.
 
 ## Build system changes
 
