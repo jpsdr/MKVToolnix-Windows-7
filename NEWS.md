@@ -2,50 +2,50 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: multiplexer: pressing the keyboard shortcut for the track's
-  "Language" label (Alt+L for English) will now open the language dialog.
+* all: IETF BCP 47/RFC 5646 language tags: added support for language families
+  from ISO 639-5 that aren't part of 639-2.
+* all: IETF BCP 47/RFC 5646 language tags: implemented support for Alpha 2
+  country codes of the "user-defined" category: `AA`, `QM`–`QZ`, `XA`–`XZ` and
+  `ZZ`.
 * all: IETF BCP 47/RFC 5646 language tags: updated the various lists of valid
   subtags from the official specs.
+* MKVToolNix GUI: multiplexer: pressing the keyboard shortcut for the track's
+  "Language" label (Alt+L for English) will now open the language dialog.
 * MKVToolNix GUI: multiplexer: added an option in the preferences for turning
   off the colored boxes indicating which file each track belongs to.
-* all: IETF BCP 47/RFC 5646: added support for language families from ISO
-  639-5 that aren't part of 639-2.
 
 ## Bug fixes
 
-* MKVToolNix GUI: multiplexer: when the option "use legacy MIME types for font
-  attachments" is enabled, the GUI will now use `application/x-truetype-font`
-  for font collection files.
 * all: IETF BCP 47/RFC 5646 language tags: fixed validating extended language
   & variant subtags against their allowed prefixes (e.g. a valid tag with a
   country code as in `de-CH-1996` is recognized as valid while two generally
   known variants that aren't allowed together as in `de-1901-1996` is
   recognized as invalid).
-* all: IETF BCP 47/RFC 5646 language tags: implemented support for Alpha 2
-  country codes of the "user-defined" category: `AA`, `QM`–`QZ`, `XA`–`XZ` and
-  `ZZ`.
-* MKVToolNix GUI: multiplexer: fixed escaping the `mkvmerge` argument in the
-  "Show command-line options" dialog for the "Windows (cmd.exe)" mode. Fixes
-  #3164.
-* mkvmerge, mkvextract: HEVC/H.265 parser: fixed the programs aborting when
-  parsing VPS or SPS NALUs with invalid content due to unhandled
-  exceptions. Fixes #3162.
 * all: IETF BCP 47/RFC 5646 language tags: when looking up a language for a
   two- or three-letter code, the programs will no longer compare that code
   with language names as that was unintended, ambiguous (e.g. the code "Ga"
   could be interpreted as the 639-2 alpha-2 code for "Irish" or as the name of
   the language called "Ga") and only worked with languages whose name was at
   most three letters long.
-* MKVToolNix GUI: header editor: the header editor will now honor the "use
-  legacy MIME types when adding font attachments" setting when adding new
-  attachments.
+* mkvmerge: HEVC/H.265: appending Matroska files with HEVC tracks might lead
+  to the loss of the first couple of frames from each of the second and all
+  following files. Fixes #3170.
+* mkvmerge, mkvextract: HEVC/H.265 parser: fixed the programs aborting when
+  parsing VPS or SPS NALUs with invalid content due to unhandled
+  exceptions. Fixes #3162.
+* MKVToolNix GUI: multiplexer: when the option "use legacy MIME types for font
+  attachments" is enabled, the GUI will now use `application/x-truetype-font`
+  for font collection files.
+* MKVToolNix GUI: multiplexer: fixed escaping the `mkvmerge` argument in the
+  "Show command-line options" dialog for the "Windows (cmd.exe)" mode. Fixes
+  #3164.
 * MKVToolNix GUI: multiplexer: when adding multiple files at once, the GUI
   will sort file names with numbers the way a human would expect it to. For
   example, `1.mp4`, `9.aac`, `10.srt`, `11.srt` are now sorted exactly that
   order instead of `1.mp4`, `10.srt`, `11.srt`, `9.aac`.
-* mkvmerge: HEVC/H.265: appending Matroska files with HEVC tracks might lead
-  to the loss of the first couple of frames from each of the second and all
-  following files. Fixes #3170.
+* MKVToolNix GUI: header editor: the header editor will now honor the "use
+  legacy MIME types when adding font attachments" setting when adding new
+  attachments.
 
 
 # Version 59.0.0 "Shining Star" 2021-07-10
