@@ -9,6 +9,17 @@
   GUI can now detect full BCP 47/RFC 5646 language tags in file names. Part of
   the implementation of #3173.
 
+## Bug fixes
+
+* mkvmerge, MKVToolNix GUI's chapter editor: BCP 47/RFC 5646 language tags:
+  when BCP 47 language tags are used with a language code that isn't part of
+  ISO 639-2, the programs will now write a legacy language element set to
+  `und` ("undetermined") instead of not writing such an element at all or
+  writing one with an invalid code. Fixes #3174.
+* mkvmerge, MKVToolNix GUI's chapter editor: BCP 47/RFC 5646 language tags:
+  the programs will ensure that the legacy and IETF language elements written
+  will be unique within the scope of the same "chapter display" element.
+
 ## Build system changes
 
 * all: `std::codecvt_utf8` is now used instead of Boost's

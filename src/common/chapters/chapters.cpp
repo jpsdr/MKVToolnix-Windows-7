@@ -1208,6 +1208,8 @@ create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editio
 void
 set_languages_in_display(libmatroska::KaxChapterDisplay &display,
                          std::vector<mtx::bcp47::language_c> const &parsed_languages) {
+  std::unordered_map<std::string, bool> legacy_codes_seen, ietf_tags_seen;
+
   DeleteChildren<libmatroska::KaxChapLanguageIETF>(display);
   DeleteChildren<libmatroska::KaxChapterLanguage>(display);
 
@@ -1215,11 +1217,22 @@ set_languages_in_display(libmatroska::KaxChapterDisplay &display,
     if (!parsed_language.is_valid())
       continue;
 
-    if (parsed_language.has_valid_iso639_2_code())
-      AddEmptyChild<libmatroska::KaxChapterLanguage>(display).SetValue(parsed_language.get_iso639_alpha_3_code());
+    auto legacy_code = parsed_language.has_valid_iso639_2_code() ? parsed_language.get_iso639_alpha_3_code() : "und"s;
 
-    if (!mtx::bcp47::language_c::is_disabled())
-      AddEmptyChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(parsed_language.format());
+    if (!legacy_codes_seen[legacy_code]) {
+      AddEmptyChild<libmatroska::KaxChapterLanguage>(display).SetValue(legacy_code);
+      legacy_codes_seen[legacy_code] = true;
+    }
+
+    if (mtx::bcp47::language_c::is_disabled())
+      continue;
+
+    auto ietf_tag = parsed_language.format();
+
+    if (!ietf_tags_seen[ietf_tag]) {
+      AddEmptyChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(ietf_tag);
+      ietf_tags_seen[ietf_tag] = true;
+    }
   }
 }
 

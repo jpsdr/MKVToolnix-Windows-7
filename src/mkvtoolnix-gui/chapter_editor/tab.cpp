@@ -1271,26 +1271,18 @@ Tab::chapterNameLanguageChanged() {
     return;
   }
 
-  QSet<mtx::bcp47::language_c> uniqueLanguageCodes;
+  std::vector<mtx::bcp47::language_c> languageCodes;
 
   for (auto const &control : p.languageControls) {
     auto languageCode = static_cast<mtx::gui::Util::LanguageDisplayWidget *>(std::get<1>(control))->language();
     if (languageCode.is_valid())
-      uniqueLanguageCodes << languageCode;
+      languageCodes.emplace_back(languageCode);
   }
 
-  auto languageCodes = uniqueLanguageCodes.values();
   std::sort(languageCodes.begin(), languageCodes.end());
 
   withSelectedName([&p, &languageCodes](QModelIndex const &idx, KaxChapterDisplay &display) {
-    DeleteChildren<KaxChapterLanguage>(display);
-    DeleteChildren<KaxChapLanguageIETF>(display);
-
-    for (auto const &languageCode : languageCodes) {
-      AddEmptyChild<KaxChapLanguageIETF>(display).SetValue(languageCode.format());
-      if (languageCode.has_valid_iso639_code())
-        AddEmptyChild<KaxChapterLanguage>(display).SetValue(languageCode.get_iso639_alpha_3_code());
-    }
+    mtx::chapters::set_languages_in_display(display, languageCodes);
 
     p.nameModel->updateRow(idx.row());
   });
