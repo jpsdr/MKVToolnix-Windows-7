@@ -71,9 +71,9 @@ public:
 
   virtual void parse(mm_io_c &) {
   }
-  virtual bool get_next(packet_cptr &packet) {
+  virtual bool get_next(packet_t &packet) {
     // No gap is following!
-    packet->assigned_timestamp = packet->timestamp;
+    packet.assigned_timestamp = packet.timestamp;
     return false;
   }
   virtual double get_default_duration(double proposal) {
@@ -113,7 +113,7 @@ public:
   }
 
   virtual void parse(mm_io_c &in);
-  virtual bool get_next(packet_cptr &packet);
+  virtual bool get_next(packet_t &packet) override;
   virtual double get_default_duration(double proposal) {
     return 0.0 != m_default_fps ? 1000000000.0 / m_default_fps : proposal;
   }
@@ -143,7 +143,7 @@ public:
   }
 
   virtual void parse(mm_io_c &in);
-  virtual bool get_next(packet_cptr &packet);
+  virtual bool get_next(packet_t &packet);
   virtual double get_default_duration(double proposal) {
     return m_default_duration != 0 ? m_default_duration : proposal;
   }
@@ -169,7 +169,7 @@ public:
   {
   }
   virtual void parse(mm_io_c &in);
-  virtual bool get_next(packet_cptr &packet);
+  virtual bool get_next(packet_t &packet) override;
   virtual bool contains_gap() {
     return true;
   }
@@ -194,7 +194,7 @@ public:
   virtual ~forced_default_duration_timestamp_factory_c() {
   }
 
-  virtual bool get_next(packet_cptr &packet);
+  virtual bool get_next(packet_t &packet) override;
   virtual double get_default_duration(double) {
     return m_default_duration;
   }

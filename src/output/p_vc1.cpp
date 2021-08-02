@@ -147,7 +147,7 @@ void
 vc1_video_packetizer_c::flush_frames() {
   while (m_parser.is_frame_available()) {
     auto frame = m_parser.get_frame();
-    add_packet(new packet_t(frame->data, frame->timestamp, frame->duration, frame->is_key() ? -1 : m_previous_timestamp));
+    add_packet(std::make_shared<packet_t>(frame->data, frame->timestamp, frame->duration, frame->is_key() ? -1 : m_previous_timestamp));
 
     m_previous_timestamp = frame->timestamp;
   }

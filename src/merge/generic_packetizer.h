@@ -122,11 +122,8 @@ public:
 
   virtual file_status_e read(bool force);
 
-  inline void add_packet(packet_t *packet) {
-    add_packet(packet_cptr(packet));
-  }
-  virtual void add_packet(packet_cptr packet);
-  virtual void add_packet2(packet_cptr pack);
+  virtual void add_packet(packet_cptr const &packet);
+  virtual void add_packet2(packet_cptr const &pack);
   virtual void process_deferred_packets();
 
   virtual packet_cptr get_packet();
@@ -283,7 +280,7 @@ public:
   virtual void set_displacement_maybe(int64_t displacement);
 
   virtual void apply_factory();
-  virtual void apply_factory_once(packet_cptr &packet);
+  virtual void apply_factory_once(packet_cptr const &packet);
   virtual void apply_factory_short_queueing(packet_cptr_di &p_start);
   virtual void apply_factory_full_queueing(packet_cptr_di &p_start);
 

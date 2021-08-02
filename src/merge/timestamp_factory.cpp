@@ -175,16 +175,16 @@ timestamp_factory_v1_c::parse(mm_io_c &in) {
 }
 
 bool
-timestamp_factory_v1_c::get_next(packet_cptr &packet) {
-  packet->assigned_timestamp = get_at(m_frameno);
-  if (!m_preserve_duration || (0 >= packet->duration))
-    packet->duration = get_at(m_frameno + 1) - packet->assigned_timestamp;
+timestamp_factory_v1_c::get_next(packet_t &packet) {
+  packet.assigned_timestamp = get_at(m_frameno);
+  if (!m_preserve_duration || (0 >= packet.duration))
+    packet.duration = get_at(m_frameno + 1) - packet.assigned_timestamp;
 
   m_frameno++;
   if ((m_frameno > m_ranges[m_current_range].end_frame) && (m_current_range < (m_ranges.size() - 1)))
     m_current_range++;
 
-  mxdebug_if(m_debug, fmt::format("ext_timestamps v1: tc {0} dur {1} for {2}\n", packet->assigned_timestamp, packet->duration, m_frameno - 1));
+  mxdebug_if(m_debug, fmt::format("ext_timestamps v1: tc {0} dur {1} for {2}\n", packet.assigned_timestamp, packet.duration, m_frameno - 1));
 
   return false;
 }
@@ -267,7 +267,7 @@ timestamp_factory_v2_c::parse(mm_io_c &in) {
 }
 
 bool
-timestamp_factory_v2_c::get_next(packet_cptr &packet) {
+timestamp_factory_v2_c::get_next(packet_t &packet) {
   if ((static_cast<size_t>(m_frameno) >= m_timestamps.size()) && !m_warning_printed) {
     mxwarn_tid(m_source_name, m_tid,
                fmt::format(Y("The number of external timestamps {0} is smaller than the number of frames in this track. "
@@ -276,22 +276,22 @@ timestamp_factory_v2_c::get_next(packet_cptr &packet) {
     m_warning_printed = true;
 
     if (m_timestamps.empty()) {
-      packet->assigned_timestamp = 0;
-      if (!m_preserve_duration || (0 >= packet->duration))
-        packet->duration = 0;
+      packet.assigned_timestamp = 0;
+      if (!m_preserve_duration || (0 >= packet.duration))
+        packet.duration = 0;
 
     } else {
-      packet->assigned_timestamp = m_timestamps.back();
-      if (!m_preserve_duration || (0 >= packet->duration))
-        packet->duration = m_timestamps.back();
+      packet.assigned_timestamp = m_timestamps.back();
+      if (!m_preserve_duration || (0 >= packet.duration))
+        packet.duration = m_timestamps.back();
     }
 
     return false;
   }
 
-  packet->assigned_timestamp = m_timestamps[m_frameno];
-  if (!m_preserve_duration || (0 >= packet->duration))
-    packet->duration = m_durations[m_frameno];
+  packet.assigned_timestamp = m_timestamps[m_frameno];
+  if (!m_preserve_duration || (0 >= packet.duration))
+    packet.duration = m_durations[m_frameno];
   m_frameno++;
 
   return false;
@@ -379,7 +379,7 @@ timestamp_factory_v3_c::parse(mm_io_c &in) {
 }
 
 bool
-timestamp_factory_v3_c::get_next(packet_cptr &packet) {
+timestamp_factory_v3_c::get_next(packet_t &packet) {
   bool result = false;
 
   if (m_durations[m_current_duration].is_gap) {
@@ -394,13 +394,13 @@ timestamp_factory_v3_c::get_next(packet_cptr &packet) {
     // yes, there is a gap before this frame
   }
 
-  packet->assigned_timestamp = m_current_offset + m_current_timestamp;
+  packet.assigned_timestamp = m_current_offset + m_current_timestamp;
   // If default_fps is 0 then the duration is unchanged, usefull for audio.
-  if (m_durations[m_current_duration].fps && (!m_preserve_duration || (0 >= packet->duration)))
-    packet->duration = (int64_t)(1000000000.0 / m_durations[m_current_duration].fps);
+  if (m_durations[m_current_duration].fps && (!m_preserve_duration || (0 >= packet.duration)))
+    packet.duration = (int64_t)(1000000000.0 / m_durations[m_current_duration].fps);
 
-  packet->duration   /= packet->time_factor;
-  m_current_timestamp += packet->duration;
+  packet.duration   /= packet.time_factor;
+  m_current_timestamp += packet.duration;
 
   if (m_current_timestamp >= m_durations[m_current_duration].duration) {
     m_current_offset   += m_durations[m_current_duration].duration;
@@ -408,15 +408,15 @@ timestamp_factory_v3_c::get_next(packet_cptr &packet) {
     m_current_duration++;
   }
 
-  mxdebug_if(m_debug, fmt::format("ext_timestamps v3: tc {0} dur {1}\n", packet->assigned_timestamp, packet->duration));
+  mxdebug_if(m_debug, fmt::format("ext_timestamps v3: tc {0} dur {1}\n", packet.assigned_timestamp, packet.duration));
 
   return result;
 }
 
 bool
-forced_default_duration_timestamp_factory_c::get_next(packet_cptr &packet) {
-  packet->assigned_timestamp = m_frameno * m_default_duration + m_tcsync.displacement;
-  packet->duration           = m_default_duration;
+forced_default_duration_timestamp_factory_c::get_next(packet_t &packet) {
+  packet.assigned_timestamp = m_frameno * m_default_duration + m_tcsync.displacement;
+  packet.duration           = m_default_duration;
   ++m_frameno;
 
   return false;

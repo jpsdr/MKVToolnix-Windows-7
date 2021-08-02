@@ -1385,7 +1385,7 @@ generic_packetizer_c::account_enqueued_bytes(packet_t &packet,
 }
 
 void
-generic_packetizer_c::add_packet(packet_cptr pack) {
+generic_packetizer_c::add_packet(packet_cptr const &pack) {
   if ((0 == m_num_packets) && m_ti.m_reset_timestamps)
     m_ti.m_tcsync.displacement = -pack->timestamp;
 
@@ -1418,7 +1418,7 @@ generic_packetizer_c::add_packet(packet_cptr pack) {
 }
 
 void
-generic_packetizer_c::add_packet2(packet_cptr pack) {
+generic_packetizer_c::add_packet2(packet_cptr const &pack) {
   auto adjust_timestamp = [this](int64_t x) {
     return mtx::to_int(m_ti.m_tcsync.factor * (x + m_correction_timestamp_offset + m_append_timestamp_offset)) + m_ti.m_tcsync.displacement;
   };
@@ -1509,12 +1509,12 @@ generic_packetizer_c::get_packet() {
 }
 
 void
-generic_packetizer_c::apply_factory_once(packet_cptr &packet) {
+generic_packetizer_c::apply_factory_once(packet_cptr const &packet) {
   if (!m_timestamp_factory) {
     packet->assigned_timestamp = packet->timestamp;
     packet->gap_following      = false;
   } else
-    packet->gap_following      = m_timestamp_factory->get_next(packet);
+    packet->gap_following      = m_timestamp_factory->get_next(*packet);
 
   packet->factory_applied      = true;
 
