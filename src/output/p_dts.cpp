@@ -124,7 +124,7 @@ dts_packetizer_c::set_headers() {
   generic_packetizer_c::set_headers();
 }
 
-int
+void
 dts_packetizer_c::process_impl(packet_cptr const &packet) {
   m_timestamp_calculator.add_timestamp(packet, m_stream_position);
   m_discard_padding.add_maybe(packet->discard_padding, m_stream_position);
@@ -134,8 +134,6 @@ dts_packetizer_c::process_impl(packet_cptr const &packet) {
 
   queue_available_packets(false);
   process_available_packets();
-
-  return FILE_STATUS_MOREDATA;
 }
 
 void

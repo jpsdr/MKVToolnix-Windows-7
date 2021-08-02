@@ -38,7 +38,7 @@ public:
 
 protected:
   virtual void check_fourcc();
-  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void process_impl(packet_cptr const &packet) override;
   virtual void rederive_frame_type(packet_cptr const &packet);
   virtual void rederive_frame_type_div3(packet_cptr const &packet);
   virtual void rederive_frame_type_mpeg4_p2(packet_cptr const &packet);

@@ -78,7 +78,7 @@ textsubs_packetizer_c::set_line_ending_style(mtx::string::line_ending_style_e li
   m_line_ending_style = line_ending_style;
 }
 
-int
+void
 textsubs_packetizer_c::process_impl(packet_cptr const &packet) {
   if (m_buffered_packet) {
     m_buffered_packet->duration = packet->timestamp - m_buffered_packet->timestamp;
@@ -92,7 +92,7 @@ textsubs_packetizer_c::process_impl(packet_cptr const &packet) {
   mtx::string::strip_back(subs);
 
   if (subs.empty())
-    return FILE_STATUS_MOREDATA;
+    return;
 
   packet->data = memory_c::clone(subs);
 
@@ -105,8 +105,6 @@ textsubs_packetizer_c::process_impl(packet_cptr const &packet) {
     m_buffered_packet = packet;
     m_buffered_packet->data->take_ownership();
   }
-
-  return FILE_STATUS_MOREDATA;
 }
 
 std::string

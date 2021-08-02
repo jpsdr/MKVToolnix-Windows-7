@@ -52,7 +52,7 @@ tta_packetizer_c::set_headers() {
   generic_packetizer_c::set_headers();
 }
 
-int
+void
 tta_packetizer_c::process_impl(packet_cptr const &packet) {
   packet->timestamp = mtx::to_int(mtx::rational(m_samples_output, m_sample_rate) * 1'000'000'000);
   if (-1 == packet->duration) {
@@ -63,8 +63,6 @@ tta_packetizer_c::process_impl(packet_cptr const &packet) {
     m_samples_output += mtx::to_int(mtx::rational(packet->duration, 1'000'000'000) * m_sample_rate);
 
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

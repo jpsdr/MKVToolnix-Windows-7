@@ -30,11 +30,9 @@ passthrough_packetizer_c::set_headers() {
   generic_packetizer_c::set_headers();
 }
 
-int
+void
 passthrough_packetizer_c::process_impl(packet_cptr const &packet) {
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

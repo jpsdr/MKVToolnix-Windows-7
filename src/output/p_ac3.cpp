@@ -106,7 +106,7 @@ ac3_packetizer_c::set_headers() {
   generic_packetizer_c::set_headers();
 }
 
-int
+void
 ac3_packetizer_c::process_impl(packet_cptr const &packet) {
   // mxinfo(fmt::format("tc {0} size {1}\n", mtx::string::format_timestamp(packet->timestamp), packet->data->get_size()));
 
@@ -117,8 +117,6 @@ ac3_packetizer_c::process_impl(packet_cptr const &packet) {
   add_to_buffer(packet->data->get_buffer(), packet->data->get_size());
 
   flush_packets();
-
-  return FILE_STATUS_MOREDATA;
 }
 
 void

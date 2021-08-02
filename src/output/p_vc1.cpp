@@ -105,7 +105,7 @@ vc1_video_packetizer_c::add_timestamps_to_parser(packet_cptr const &packet) {
   }
 }
 
-int
+void
 vc1_video_packetizer_c::process_impl(packet_cptr const &packet) {
   add_timestamps_to_parser(packet);
 
@@ -115,8 +115,6 @@ vc1_video_packetizer_c::process_impl(packet_cptr const &packet) {
     headers_found();
 
   flush_frames();
-
-  return FILE_STATUS_MOREDATA;
 }
 
 void

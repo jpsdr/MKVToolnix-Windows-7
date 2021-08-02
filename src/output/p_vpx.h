@@ -37,6 +37,6 @@ public:
   virtual bool is_compatible_with(output_compatibility_e compatibility);
 
 protected:
-  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void process_impl(packet_cptr const &packet) override;
   virtual void vp9_determine_codec_private(memory_c const &mem);
 };

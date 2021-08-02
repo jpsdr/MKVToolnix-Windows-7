@@ -111,7 +111,7 @@ hevc_video_packetizer_c::extract_aspect_ratio() {
                          m_ti.m_display_width, m_ti.m_display_height));
 }
 
-int
+void
 hevc_video_packetizer_c::process_impl(packet_cptr const &packet) {
   auto &p = *p_func();
 
@@ -124,8 +124,6 @@ hevc_video_packetizer_c::process_impl(packet_cptr const &packet) {
   p.parser->add_bytes_framed(packet->data, p.nalu_size_len);
 
   flush_frames();
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

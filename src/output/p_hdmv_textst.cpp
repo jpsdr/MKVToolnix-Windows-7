@@ -48,10 +48,10 @@ hdmv_textst_packetizer_c::set_headers() {
   m_track_entry->EnableLacing(false);
 }
 
-int
+void
 hdmv_textst_packetizer_c::process_impl(packet_cptr const &packet) {
   if ((packet->data->get_size() < 13) || (static_cast<mtx::hdmv_textst::segment_type_e>(packet->data->get_buffer()[0]) != mtx::hdmv_textst::dialog_presentation_segment))
-    return FILE_STATUS_MOREDATA;
+    return;
 
   auto buf       = packet->data->get_buffer();
   auto start_pts = timestamp_c::mpeg((static_cast<int64_t>(buf[3] & 1) << 32) | get_uint32_be(&buf[4]));
@@ -68,8 +68,6 @@ hdmv_textst_packetizer_c::process_impl(packet_cptr const &packet) {
   packet->force_key_frame();
 
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

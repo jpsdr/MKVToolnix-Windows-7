@@ -81,7 +81,7 @@ hevc_es_video_packetizer_c::add_extra_data(memory_cptr data) {
   m_parser.add_bytes(data->get_buffer(), data->get_size());
 }
 
-int
+void
 hevc_es_video_packetizer_c::process_impl(packet_cptr const &packet) {
   try {
     if (packet->has_timestamp())
@@ -95,8 +95,6 @@ hevc_es_video_packetizer_c::process_impl(packet_cptr const &packet) {
                               "Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. "
                               "The error message was:\n{0}\n"), error.error()));
   }
-
-  return FILE_STATUS_MOREDATA;
 }
 
 void

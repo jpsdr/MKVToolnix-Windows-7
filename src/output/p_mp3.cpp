@@ -175,15 +175,13 @@ mp3_packetizer_c::set_headers() {
   generic_packetizer_c::set_headers();
 }
 
-int
+void
 mp3_packetizer_c::process_impl(packet_cptr const &packet) {
   m_timestamp_calculator.add_timestamp(packet);
   m_discard_padding.add_maybe(packet->discard_padding);
   m_byte_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
   flush_packets();
-
-  return FILE_STATUS_MOREDATA;
 }
 
 void

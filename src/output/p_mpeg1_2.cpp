@@ -180,7 +180,7 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
   m_seq_hdr = new_seq_hdr;
 }
 
-int
+void
 mpeg1_2_video_packetizer_c::process_impl(packet_cptr const &packet) {
   if (0 >= m_default_duration)
     extract_fps(packet->data->get_buffer(), packet->data->get_size());
@@ -188,25 +188,28 @@ mpeg1_2_video_packetizer_c::process_impl(packet_cptr const &packet) {
   if (!m_aspect_ratio_extracted)
     extract_aspect_ratio(packet->data->get_buffer(), packet->data->get_size());
 
-  return m_framed ? process_framed(packet) : process_unframed(packet);
+  if (m_framed)
+    process_framed(packet);
+  else
+    process_unframed(packet);
 }
 
-int
+void
 mpeg1_2_video_packetizer_c::process_framed(packet_cptr const &packet) {
   if (0 == packet->data->get_size())
-    return FILE_STATUS_MOREDATA;
+    return;
 
   if (4 <= packet->data->get_size())
     remove_stuffing_bytes_and_handle_sequence_headers(packet);
 
-  return generic_video_packetizer_c::process_impl(packet);
+  generic_video_packetizer_c::process_impl(packet);
 }
 
-int
+void
 mpeg1_2_video_packetizer_c::process_unframed(packet_cptr const &packet) {
   int state = m_parser.GetState();
   if ((MPV_PARSER_STATE_EOS == state) || (MPV_PARSER_STATE_ERROR == state))
-    return FILE_STATUS_DONE;
+    return;
 
   auto old_memory = packet->data;
   auto data_ptr   = old_memory->get_buffer();
@@ -240,8 +243,6 @@ mpeg1_2_video_packetizer_c::process_unframed(packet_cptr const &packet) {
       state       = m_parser.GetState();
     }
   } while (0 < new_bytes);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 void

@@ -44,7 +44,7 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
 protected:
-  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void process_impl(packet_cptr const &packet) override;
   virtual void adjust_header_values(mtx::truehd::frame_cptr const &frame);
 
   virtual void flush_impl();

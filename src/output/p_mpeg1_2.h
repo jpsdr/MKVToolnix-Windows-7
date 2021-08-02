@@ -36,11 +36,11 @@ public:
   }
 
 protected:
-  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void process_impl(packet_cptr const &packet) override;
   virtual void extract_fps(const unsigned char *buffer, int size);
   virtual void extract_aspect_ratio(const unsigned char *buffer, int size);
-  virtual int process_framed(packet_cptr const &packet);
-  virtual int process_unframed(packet_cptr const &packet);
+  virtual void process_framed(packet_cptr const &packet);
+  virtual void process_unframed(packet_cptr const &packet);
   virtual void remove_stuffing_bytes_and_handle_sequence_headers(packet_cptr const &packet);
   virtual void flush_impl();
 };

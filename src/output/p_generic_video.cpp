@@ -68,7 +68,7 @@ generic_video_packetizer_c::set_headers() {
 // fref == -1: I or P frame, no forward reference
 // fref > 0:   B frame with given forward reference (absolute reference,
 //             not relative!)
-int
+void
 generic_video_packetizer_c::process_impl(packet_cptr const &packet) {
   if ((0 == m_default_duration) && (-1 == packet->timestamp))
     mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("The FPS is 0.0 but the reader did not provide a timestamp for a packet. {0}\n"), BUGMSG));
@@ -104,8 +104,6 @@ generic_video_packetizer_c::process_impl(packet_cptr const &packet) {
   }
 
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

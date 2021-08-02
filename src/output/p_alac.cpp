@@ -44,10 +44,9 @@ alac_packetizer_c::alac_packetizer_c(generic_reader_c *p_reader,
 alac_packetizer_c::~alac_packetizer_c() {
 }
 
-int
+void
 alac_packetizer_c::process_impl(packet_cptr const &packet) {
   add_packet(packet);
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

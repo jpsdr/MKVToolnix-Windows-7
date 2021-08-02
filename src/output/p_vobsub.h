@@ -32,6 +32,6 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) override;
 
 protected:
-  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void process_impl(packet_cptr const &packet) override;
   virtual void after_packet_timestamped(packet_t &packet) override;
 };

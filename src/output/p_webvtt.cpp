@@ -28,12 +28,11 @@ webvtt_packetizer_c::webvtt_packetizer_c(generic_reader_c *p_reader,
 webvtt_packetizer_c::~webvtt_packetizer_c() {
 }
 
-int
+void
 webvtt_packetizer_c::process_impl(packet_cptr const &packet) {
   for (auto &addition : packet->data_adds)
     addition = memory_c::clone(mtx::string::normalize_line_endings(addition->to_string()));
-
-  return textsubs_packetizer_c::process_impl(packet);
+  textsubs_packetizer_c::process_impl(packet);
 }
 
 connection_result_e

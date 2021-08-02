@@ -47,8 +47,8 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
 protected:
-  virtual int process_impl(packet_cptr const &packet) override;
-  virtual int process_packaged(packet_cptr const &packet);
+  virtual void process_impl(packet_cptr const &packet) override;
+  virtual void process_packaged(packet_cptr const &packet);
   virtual void flush_impl();
   virtual void flush_packets();
   virtual int64_t size_to_samples(int64_t size) const;

@@ -53,11 +53,9 @@ ra_packetizer_c::set_headers() {
   m_track_entry->EnableLacing(false);
 }
 
-int
+void
 ra_packetizer_c::process_impl(packet_cptr const &packet) {
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

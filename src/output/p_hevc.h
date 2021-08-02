@@ -38,7 +38,7 @@ public:
   virtual void set_source_timestamp_resolution(int64_t resolution);
 
 protected:
-  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void process_impl(packet_cptr const &packet) override;
   virtual void connect(generic_packetizer_c *src, int64_t append_timestamp_offset = -1) override;
 
   virtual void extract_aspect_ratio();

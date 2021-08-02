@@ -75,7 +75,7 @@ vorbis_packetizer_c::set_headers() {
   generic_packetizer_c::set_headers();
 }
 
-int
+void
 vorbis_packetizer_c::process_impl(packet_cptr const &packet) {
   ogg_packet op;
 
@@ -110,8 +110,6 @@ vorbis_packetizer_c::process_impl(packet_cptr const &packet) {
   packet->timestamp       = chosen_timestamp;
 
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

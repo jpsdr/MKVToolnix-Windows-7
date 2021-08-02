@@ -49,7 +49,7 @@ opus_packetizer_c::set_headers() {
   generic_packetizer_c::set_headers();
 }
 
-int
+void
 opus_packetizer_c::process_impl(packet_cptr const &packet) {
   try {
     auto toc = mtx::opus::toc_t::decode(packet->data);
@@ -72,8 +72,6 @@ opus_packetizer_c::process_impl(packet_cptr const &packet) {
   } catch (mtx::opus::exception &ex) {
     mxdebug_if(m_debug, fmt::format("Exception: {0}\n", ex.what()));
   }
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

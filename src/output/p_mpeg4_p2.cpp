@@ -78,22 +78,25 @@ mpeg4_p2_video_packetizer_c::~mpeg4_p2_video_packetizer_c() {
                      m_statistics.m_num_generated_timestamps, m_statistics.m_num_dropped_timestamps));
 }
 
-int
+void
 mpeg4_p2_video_packetizer_c::process_impl(packet_cptr const &packet) {
   extract_size(packet->data->get_buffer(), packet->data->get_size());
   extract_aspect_ratio(packet->data->get_buffer(), packet->data->get_size());
 
-  int result = m_input_is_native == m_output_is_native ? video_for_windows_packetizer_c::process_impl(packet)
-             : m_input_is_native                       ?                     process_native(packet)
-             :                                                               process_non_native(packet);
+  if (m_input_is_native == m_output_is_native)
+    video_for_windows_packetizer_c::process_impl(packet);
+
+  else if (m_input_is_native)
+    process_native(packet);
+
+  else
+    process_non_native(packet);
 
   ++m_frames_output;
-
-  return result;
 }
 
-int
-mpeg4_p2_video_packetizer_c::process_non_native(packet_cptr packet) {
+void
+mpeg4_p2_video_packetizer_c::process_non_native(packet_cptr const &packet) {
   extract_config_data(packet);
 
   // Add a timestamp and a duration if they've been given.
@@ -159,12 +162,10 @@ mpeg4_p2_video_packetizer_c::process_non_native(packet_cptr packet) {
   }
 
   m_previous_timestamp = m_available_timestamps.back().m_timestamp;
-
-  return FILE_STATUS_MOREDATA;
 }
 
 void
-mpeg4_p2_video_packetizer_c::extract_config_data(packet_cptr &packet) {
+mpeg4_p2_video_packetizer_c::extract_config_data(packet_cptr const &packet) {
   if (m_ti.m_private_data)
     return;
 
@@ -211,10 +212,9 @@ mpeg4_p2_video_packetizer_c::fix_codec_string() {
   }
 }
 
-int
-mpeg4_p2_video_packetizer_c::process_native(packet_cptr) {
+void
+mpeg4_p2_video_packetizer_c::process_native(packet_cptr const &) {
   // Not implemented yet.
-  return FILE_STATUS_MOREDATA;
 }
 
 /** \brief Handle frame sequences in which too few timestamps are available

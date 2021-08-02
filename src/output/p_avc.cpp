@@ -103,7 +103,7 @@ avc_video_packetizer_c::extract_aspect_ratio() {
                          m_ti.m_display_width, m_ti.m_display_height));
 }
 
-int
+void
 avc_video_packetizer_c::process_impl(packet_cptr const &packet) {
   if (VFT_PFRAMEAUTOMATIC == packet->bref) {
     packet->fref = -1;
@@ -115,8 +115,6 @@ avc_video_packetizer_c::process_impl(packet_cptr const &packet) {
   process_nalus(*packet->data);
 
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

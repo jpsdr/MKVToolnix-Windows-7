@@ -46,12 +46,10 @@ vobsub_packetizer_c::set_headers() {
   m_track_entry->EnableLacing(false);
 }
 
-int
+void
 vobsub_packetizer_c::process_impl(packet_cptr const &packet) {
   packet->duration_mandatory = true;
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

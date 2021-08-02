@@ -100,7 +100,7 @@ vpx_video_packetizer_c::vp9_determine_codec_private(memory_c const &mem) {
   rerender_track_headers();
 }
 
-int
+void
 vpx_video_packetizer_c::process_impl(packet_cptr const &packet) {
   vp9_determine_codec_private(*packet->data);
 
@@ -108,8 +108,6 @@ vpx_video_packetizer_c::process_impl(packet_cptr const &packet) {
   m_previous_timestamp = packet->timestamp;
 
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

@@ -36,7 +36,7 @@ theora_video_packetizer_c::set_headers() {
   generic_video_packetizer_c::set_headers();
 }
 
-int
+void
 theora_video_packetizer_c::process_impl(packet_cptr const &packet) {
   if (packet->data->get_size() && (0x00 == (packet->data->get_buffer()[0] & 0x40)))
     packet->bref = VFT_IFRAME;
@@ -44,8 +44,7 @@ theora_video_packetizer_c::process_impl(packet_cptr const &packet) {
     packet->bref = VFT_PFRAMEAUTOMATIC;
 
   packet->fref   = VFT_NOBFRAME;
-
-  return generic_video_packetizer_c::process_impl(packet);
+  generic_video_packetizer_c::process_impl(packet);
 }
 
 void

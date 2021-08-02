@@ -86,7 +86,7 @@ av1_video_packetizer_c::set_header_parameters() {
     m_parser.get_next_frame();
 }
 
-int
+void
 av1_video_packetizer_c::process_impl(packet_cptr const &packet) {
   m_parser.debug_obu_types(*packet->data);
 
@@ -98,8 +98,6 @@ av1_video_packetizer_c::process_impl(packet_cptr const &packet) {
     process_framed(packet);
   else
     process_unframed();
-
-  return FILE_STATUS_MOREDATA;
 }
 
 void

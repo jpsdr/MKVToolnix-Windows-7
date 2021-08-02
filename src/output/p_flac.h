@@ -41,7 +41,7 @@ public:
   virtual split_result_e can_be_split(std::string &error_message) override;
 
 protected:
-  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void process_impl(packet_cptr const &packet) override;
 };
 
 #endif  // HAVE_FLAC_STREAM_DECODER_H

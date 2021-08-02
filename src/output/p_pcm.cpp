@@ -89,7 +89,7 @@ pcm_packetizer_c::size_to_samples(int64_t size)
   return (size * 8) / (m_channels * m_bits_per_sample);
 }
 
-int
+void
 pcm_packetizer_c::process_impl(packet_cptr const &packet) {
   if (packet->has_timestamp() && (packet->data->get_size() >= m_min_packet_size))
     return process_packaged(packet);
@@ -97,8 +97,6 @@ pcm_packetizer_c::process_impl(packet_cptr const &packet) {
   m_buffer.add(packet->data->get_buffer(), packet->data->get_size());
 
   flush_packets();
-
-  return FILE_STATUS_MOREDATA;
 }
 
 void
@@ -115,7 +113,7 @@ pcm_packetizer_c::flush_packets() {
   }
 }
 
-int
+void
 pcm_packetizer_c::process_packaged(packet_cptr const &packet) {
   auto buffer_size = m_buffer.get_size();
 
@@ -156,8 +154,6 @@ pcm_packetizer_c::process_packaged(packet_cptr const &packet) {
   byte_swap_data(*packet->data);
 
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 void

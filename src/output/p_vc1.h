@@ -41,6 +41,6 @@ protected:
   virtual void flush_impl();
   virtual void flush_frames();
   virtual void headers_found();
-  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void process_impl(packet_cptr const &packet) override;
   virtual void add_timestamps_to_parser(packet_cptr const &packet);
 };

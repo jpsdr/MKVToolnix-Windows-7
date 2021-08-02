@@ -45,7 +45,7 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
 protected:
-  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void process_impl(packet_cptr const &packet) override;
   virtual memory_cptr get_mp3_packet(mp3_header_t *mp3header);
 
   virtual void handle_garbage(int64_t bytes);

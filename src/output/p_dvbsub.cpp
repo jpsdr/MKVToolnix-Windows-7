@@ -43,14 +43,12 @@ dvbsub_packetizer_c::set_headers() {
   m_track_entry->EnableLacing(false);
 }
 
-int
+void
 dvbsub_packetizer_c::process_impl(packet_cptr const &packet) {
   packet->duration_mandatory = packet->duration >= 0;
   packet->force_key_frame();
 
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

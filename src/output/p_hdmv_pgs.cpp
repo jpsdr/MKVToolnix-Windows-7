@@ -45,13 +45,13 @@ hdmv_pgs_packetizer_c::set_headers() {
   m_track_entry->EnableLacing(false);
 }
 
-int
+void
 hdmv_pgs_packetizer_c::process_impl(packet_cptr const &packet) {
   packet->force_key_frame();
 
   if (!m_aggregate_packets) {
     dump_and_add_packet(packet);
-    return FILE_STATUS_MOREDATA;
+    return;
   }
 
   if (!m_aggregated) {
@@ -66,8 +66,6 @@ hdmv_pgs_packetizer_c::process_impl(packet_cptr const &packet) {
     dump_and_add_packet(m_aggregated);
     m_aggregated.reset();
   }
-
-  return FILE_STATUS_MOREDATA;
 }
 
 void

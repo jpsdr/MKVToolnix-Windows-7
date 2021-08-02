@@ -68,7 +68,7 @@ dirac_video_packetizer_c::set_headers() {
   m_track_entry->EnableLacing(false);
 }
 
-int
+void
 dirac_video_packetizer_c::process_impl(packet_cptr const &packet) {
   if (-1 != packet->timestamp)
     m_parser.add_timestamp(packet->timestamp);
@@ -79,8 +79,6 @@ dirac_video_packetizer_c::process_impl(packet_cptr const &packet) {
     headers_found();
 
   flush_frames();
-
-  return FILE_STATUS_MOREDATA;
 }
 
 void

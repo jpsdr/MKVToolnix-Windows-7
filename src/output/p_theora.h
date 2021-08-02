@@ -27,6 +27,6 @@ public:
   }
 
 protected:
-  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void process_impl(packet_cptr const &packet) override;
   virtual void extract_aspect_ratio();
 };

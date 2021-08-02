@@ -66,12 +66,11 @@ video_for_windows_packetizer_c::set_headers() {
   check_fourcc();
 }
 
-int
+void
 video_for_windows_packetizer_c::process_impl(packet_cptr const &packet) {
   if (m_rederive_frame_types)
     rederive_frame_type(packet);
-
-  return generic_video_packetizer_c::process_impl(packet);
+  generic_video_packetizer_c::process_impl(packet);
 }
 
 void

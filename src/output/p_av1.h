@@ -40,7 +40,7 @@ protected:
   virtual void flush_impl() override;
   virtual void flush_frames();
 
-  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void process_impl(packet_cptr const &packet) override;
   virtual void process_framed(packet_cptr packet);
   virtual void process_unframed();
 

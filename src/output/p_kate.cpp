@@ -57,7 +57,7 @@ kate_packetizer_c::set_headers() {
   generic_packetizer_c::set_headers();
 }
 
-int
+void
 kate_packetizer_c::process_impl(packet_cptr const &packet) {
   if (packet->data->get_size() < (1 + 3 * sizeof(int64_t))) {
     /* end packet is 1 byte long and has type 0x7f */
@@ -70,7 +70,7 @@ kate_packetizer_c::process_impl(packet_cptr const &packet) {
     } else
       mxwarn_tid(m_ti.m_fname, m_ti.m_id, Y("Kate packet is too small and is being skipped.\n"));
 
-    return FILE_STATUS_MOREDATA;
+    return;
   }
 
   int64_t start_time         = get_uint64_le(packet->data->get_buffer() + 1);
@@ -89,8 +89,6 @@ kate_packetizer_c::process_impl(packet_cptr const &packet) {
   packet->force_key_frame();
 
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e

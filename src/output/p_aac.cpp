@@ -92,8 +92,8 @@ aac_packetizer_c::set_headers() {
   generic_packetizer_c::set_headers();
 }
 
-int
-aac_packetizer_c::process_headerless(packet_cptr packet) {
+void
+aac_packetizer_c::process_headerless(packet_cptr const &packet) {
   handle_parsed_audio_config();
 
   packet->timestamp       = m_timestamp_calculator.get_next_timestamp(m_config.samples_per_frame).to_ns();
@@ -101,22 +101,22 @@ aac_packetizer_c::process_headerless(packet_cptr packet) {
   packet->discard_padding = m_discard_padding.get_next().value_or(timestamp_c{});
 
   add_packet(packet);
-
-  return FILE_STATUS_MOREDATA;
 }
 
-int
+void
 aac_packetizer_c::process_impl(packet_cptr const &packet) {
   m_timestamp_calculator.add_timestamp(packet);
   m_discard_padding.add_maybe(packet->discard_padding);
 
-  if (m_mode == mode_e::headerless)
-    return process_headerless(packet);
+  if (m_mode == mode_e::headerless) {
+    process_headerless(packet);
+    return;
+  }
 
   m_parser.add_bytes(packet->data);
 
   if (!m_parser.headers_parsed())
-    return FILE_STATUS_MOREDATA;
+    return;
 
   while (m_parser.frames_available()) {
     auto frame = m_parser.get_frame();
@@ -126,8 +126,6 @@ aac_packetizer_c::process_impl(packet_cptr const &packet) {
     if (verbose && frame.m_garbage_size)
       mxwarn_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Skipping {0} bytes (no valid AAC header found). This might cause audio/video desynchronisation.\n"), frame.m_garbage_size));
   }
-
-  return FILE_STATUS_MOREDATA;
 }
 
 connection_result_e
