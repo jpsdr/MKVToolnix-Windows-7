@@ -32,7 +32,6 @@ public:
   textsubs_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, const char *codec_id, bool recode = false);
   virtual ~textsubs_packetizer_c();
 
-  virtual int process(packet_cptr packet);
   virtual void set_headers();
   virtual void set_line_ending_style(mtx::string::line_ending_style_e line_ending_style);
 
@@ -42,6 +41,7 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
 protected:
+  virtual int process_impl(packet_cptr const &packet) override;
   virtual void process_one_packet(packet_cptr const &packet);
   virtual std::string recode(std::string subs);
 };

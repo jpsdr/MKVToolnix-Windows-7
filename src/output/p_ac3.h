@@ -36,7 +36,6 @@ public:
   ac3_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int samples_per_sec, int channels, int bsid);
   virtual ~ac3_packetizer_c();
 
-  virtual int process(packet_cptr packet);
   virtual void flush_packets();
   virtual void set_headers();
 
@@ -51,6 +50,7 @@ protected:
   virtual void adjust_header_values(mtx::ac3::frame_c const &ac3_header);
   virtual mtx::ac3::frame_c get_frame();
   virtual void flush_impl();
+  virtual int process_impl(packet_cptr const &packet) override;
   virtual void set_timestamp_and_add_packet(packet_cptr const &packet, uint64_t packet_stream_position);
 };
 

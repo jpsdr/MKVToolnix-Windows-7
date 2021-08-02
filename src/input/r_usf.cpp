@@ -185,7 +185,7 @@ usf_reader_c::read(generic_packetizer_c *read_packetizer,
     return flush_packetizer(track->m_ptzr);
 
   auto &entry = *track->m_current_entry;
-  ptzr(track->m_ptzr).process(new packet_t(memory_c::clone(entry.m_text), entry.m_start, entry.m_end - entry.m_start));
+  ptzr(track->m_ptzr).process(std::make_shared<packet_t>(memory_c::clone(entry.m_text), entry.m_start, entry.m_end - entry.m_start));
   ++track->m_current_entry;
 
   m_bytes_processed += entry.m_text.size();

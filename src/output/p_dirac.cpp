@@ -69,7 +69,7 @@ dirac_video_packetizer_c::set_headers() {
 }
 
 int
-dirac_video_packetizer_c::process(packet_cptr packet) {
+dirac_video_packetizer_c::process_impl(packet_cptr const &packet) {
   if (-1 != packet->timestamp)
     m_parser.add_timestamp(packet->timestamp);
 

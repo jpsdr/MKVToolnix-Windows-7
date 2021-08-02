@@ -31,7 +31,7 @@ passthrough_packetizer_c::set_headers() {
 }
 
 int
-passthrough_packetizer_c::process(packet_cptr packet) {
+passthrough_packetizer_c::process_impl(packet_cptr const &packet) {
   add_packet(packet);
 
   return FILE_STATUS_MOREDATA;

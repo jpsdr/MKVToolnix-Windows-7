@@ -69,7 +69,7 @@ obu_reader_c::read(generic_packetizer_c *,
 
     m_in->read(m_buffer, to_read);
 
-    ptzr(0).process(new packet_t{memory_c::borrow(m_buffer->get_buffer(), to_read)});
+    ptzr(0).process(std::make_shared<packet_t>(memory_c::borrow(m_buffer->get_buffer(), to_read)));
 
     if (to_read == m_buffer->get_size())
       return FILE_STATUS_MOREDATA;

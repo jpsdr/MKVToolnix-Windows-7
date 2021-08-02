@@ -29,7 +29,6 @@ protected:
 public:
   vc1_video_packetizer_c(generic_reader_c *n_reader, track_info_c &n_ti);
 
-  virtual int process(packet_cptr packet);
   virtual void set_headers();
 
   virtual translatable_string_c get_format_name() const {
@@ -42,5 +41,6 @@ protected:
   virtual void flush_impl();
   virtual void flush_frames();
   virtual void headers_found();
-  virtual void add_timestamps_to_parser(packet_cptr &packet);
+  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void add_timestamps_to_parser(packet_cptr const &packet);
 };

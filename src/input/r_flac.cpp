@@ -170,7 +170,7 @@ flac_reader_c::read(generic_packetizer_c *,
     return flush_packetizers();
 
   unsigned int samples_here = mtx::flac::get_num_samples(buf->get_buffer(), current_block->len, stream_info);
-  ptzr(0).process(new packet_t(buf, samples * 1000000000 / sample_rate));
+  ptzr(0).process(std::make_shared<packet_t>(buf, samples * 1000000000 / sample_rate));
 
   samples += samples_here;
   current_block++;

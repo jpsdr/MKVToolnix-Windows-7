@@ -67,15 +67,15 @@ video_for_windows_packetizer_c::set_headers() {
 }
 
 int
-video_for_windows_packetizer_c::process(packet_cptr packet) {
+video_for_windows_packetizer_c::process_impl(packet_cptr const &packet) {
   if (m_rederive_frame_types)
     rederive_frame_type(packet);
 
-  return generic_video_packetizer_c::process(packet);
+  return generic_video_packetizer_c::process_impl(packet);
 }
 
 void
-video_for_windows_packetizer_c::rederive_frame_type(packet_cptr &packet) {
+video_for_windows_packetizer_c::rederive_frame_type(packet_cptr const &packet) {
   switch (m_codec_type) {
     case video_for_windows_packetizer_c::ct_div3:
       rederive_frame_type_div3(packet);
@@ -91,7 +91,7 @@ video_for_windows_packetizer_c::rederive_frame_type(packet_cptr &packet) {
 }
 
 void
-video_for_windows_packetizer_c::rederive_frame_type_div3(packet_cptr &packet) {
+video_for_windows_packetizer_c::rederive_frame_type_div3(packet_cptr const &packet) {
   if (1 >= packet->data->get_size())
     return;
 
@@ -100,7 +100,7 @@ video_for_windows_packetizer_c::rederive_frame_type_div3(packet_cptr &packet) {
 }
 
 void
-video_for_windows_packetizer_c::rederive_frame_type_mpeg4_p2(packet_cptr &packet) {
+video_for_windows_packetizer_c::rederive_frame_type_mpeg4_p2(packet_cptr const &packet) {
   size_t idx, size    = packet->data->get_size();
   unsigned char *data = packet->data->get_buffer();
 

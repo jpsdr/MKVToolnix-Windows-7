@@ -1354,7 +1354,7 @@ mpeg_ps_reader_c::read(generic_packetizer_c *requested_ptzr,
           return finish();
         }
 
-        ptzr(track->ptzr).process(new packet_t(buf, timestamp));
+        ptzr(track->ptzr).process(std::make_shared<packet_t>(buf, timestamp));
       }
 
       return FILE_STATUS_MOREDATA;
@@ -1375,7 +1375,7 @@ mpeg_ps_reader_c::finish() {
 
   for (auto &track : tracks)
     if (0 < track->buffer_usage)
-      ptzr(track->ptzr).process(new packet_t(memory_c::clone(track->buffer, track->buffer_usage)));
+      ptzr(track->ptzr).process(std::make_shared<packet_t>(memory_c::clone(track->buffer, track->buffer_usage)));
 
   file_done = true;
 

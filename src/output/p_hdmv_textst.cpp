@@ -49,7 +49,7 @@ hdmv_textst_packetizer_c::set_headers() {
 }
 
 int
-hdmv_textst_packetizer_c::process(packet_cptr packet) {
+hdmv_textst_packetizer_c::process_impl(packet_cptr const &packet) {
   if ((packet->data->get_size() < 13) || (static_cast<mtx::hdmv_textst::segment_type_e>(packet->data->get_buffer()[0]) != mtx::hdmv_textst::dialog_presentation_segment))
     return FILE_STATUS_MOREDATA;
 

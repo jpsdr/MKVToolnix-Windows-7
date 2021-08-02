@@ -29,11 +29,11 @@ prores_video_packetizer_c::prores_video_packetizer_c(generic_reader_c *reader,
 }
 
 int
-prores_video_packetizer_c::process(packet_cptr packet) {
+prores_video_packetizer_c::process_impl(packet_cptr const &packet) {
   if ((packet->data->get_size() >= 8) && !std::memcmp(packet->data->get_buffer() + 4, "icpf", 4))
     packet->data->set_offset(8);
 
-  return generic_video_packetizer_c::process(packet);
+  return generic_video_packetizer_c::process_impl(packet);
 }
 
 connection_result_e

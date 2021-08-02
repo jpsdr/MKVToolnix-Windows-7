@@ -54,7 +54,7 @@ vobbtn_packetizer_c::set_headers() {
 }
 
 int
-vobbtn_packetizer_c::process(packet_cptr packet) {
+vobbtn_packetizer_c::process_impl(packet_cptr const &packet) {
   uint32_t vobu_start = get_uint32_be(packet->data->get_buffer() + 0x0d);
   uint32_t vobu_end   = get_uint32_be(packet->data->get_buffer() + 0x11);
 

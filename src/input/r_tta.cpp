@@ -114,9 +114,9 @@ tta_reader_c::read(generic_packetizer_c *,
     double samples_left = (double)get_uint32_le(&header.data_length) - (seek_points.size() - 1) * mtx::tta::FRAME_TIME * get_uint32_le(&header.sample_rate);
     mxdebug_if(s_debug, fmt::format("tta: samples_left {0}\n", samples_left));
 
-    ptzr(0).process(new packet_t(mem, -1, std::llround(samples_left * 1000000000.0 / get_uint32_le(&header.sample_rate))));
+    ptzr(0).process(std::make_shared<packet_t>(mem, -1, std::llround(samples_left * 1000000000.0 / get_uint32_le(&header.sample_rate))));
   } else
-    ptzr(0).process(new packet_t(mem));
+    ptzr(0).process(std::make_shared<packet_t>(mem));
 
   return seek_points.size() <= pos ? flush_packetizers() : FILE_STATUS_MOREDATA;
 }

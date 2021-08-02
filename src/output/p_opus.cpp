@@ -50,7 +50,7 @@ opus_packetizer_c::set_headers() {
 }
 
 int
-opus_packetizer_c::process(packet_cptr packet) {
+opus_packetizer_c::process_impl(packet_cptr const &packet) {
   try {
     auto toc = mtx::opus::toc_t::decode(packet->data);
 

@@ -27,7 +27,6 @@ protected:
 
 public:
   hevc_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int64_t default_duration, int width, int height);
-  virtual int process(packet_cptr packet) override;
   virtual void set_headers() override;
 
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) override;
@@ -39,6 +38,7 @@ public:
   virtual void set_source_timestamp_resolution(int64_t resolution);
 
 protected:
+  virtual int process_impl(packet_cptr const &packet) override;
   virtual void connect(generic_packetizer_c *src, int64_t append_timestamp_offset = -1) override;
 
   virtual void extract_aspect_ratio();

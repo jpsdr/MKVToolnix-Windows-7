@@ -79,7 +79,7 @@ textsubs_packetizer_c::set_line_ending_style(mtx::string::line_ending_style_e li
 }
 
 int
-textsubs_packetizer_c::process(packet_cptr packet) {
+textsubs_packetizer_c::process_impl(packet_cptr const &packet) {
   if (m_buffered_packet) {
     m_buffered_packet->duration = packet->timestamp - m_buffered_packet->timestamp;
     process_one_packet(m_buffered_packet);

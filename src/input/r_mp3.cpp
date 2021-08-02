@@ -82,7 +82,7 @@ mp3_reader_c::read(generic_packetizer_c *,
   if (0 >= nread)
     return flush_packetizers();
 
-  ptzr(0).process(new packet_t(memory_c::borrow(m_chunk->get_buffer(), nread)));
+  ptzr(0).process(std::make_shared<packet_t>(memory_c::borrow(m_chunk->get_buffer(), nread)));
 
   return FILE_STATUS_MOREDATA;
 }

@@ -87,7 +87,7 @@ avc_es_reader_c::read(generic_packetizer_c *,
 
   int num_read = m_in->read(m_buffer->get_buffer(), m_buffer->get_size());
   if (0 < num_read)
-    ptzr(0).process(new packet_t(memory_c::borrow(m_buffer->get_buffer(), num_read)));
+    ptzr(0).process(std::make_shared<packet_t>(memory_c::borrow(m_buffer->get_buffer(), num_read)));
 
   return (0 != num_read) && (m_in->getFilePointer() < m_size) ? FILE_STATUS_MOREDATA : flush_packetizers();
 }

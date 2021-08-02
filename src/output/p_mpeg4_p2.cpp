@@ -79,11 +79,11 @@ mpeg4_p2_video_packetizer_c::~mpeg4_p2_video_packetizer_c() {
 }
 
 int
-mpeg4_p2_video_packetizer_c::process(packet_cptr packet) {
+mpeg4_p2_video_packetizer_c::process_impl(packet_cptr const &packet) {
   extract_size(packet->data->get_buffer(), packet->data->get_size());
   extract_aspect_ratio(packet->data->get_buffer(), packet->data->get_size());
 
-  int result = m_input_is_native == m_output_is_native ? video_for_windows_packetizer_c::process(packet)
+  int result = m_input_is_native == m_output_is_native ? video_for_windows_packetizer_c::process_impl(packet)
              : m_input_is_native                       ?                     process_native(packet)
              :                                                               process_non_native(packet);
 

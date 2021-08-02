@@ -174,7 +174,7 @@ mpeg_es_reader_c::read(generic_packetizer_c *,
 
   if (0 < num_read) {
     chunk->set_size(num_read);
-    ptzr(0).process(new packet_t(chunk));
+    ptzr(0).process(std::make_shared<packet_t>(chunk));
   }
 
   return bytes_to_read > num_read ? flush_packetizers() : FILE_STATUS_MOREDATA;

@@ -29,11 +29,11 @@ webvtt_packetizer_c::~webvtt_packetizer_c() {
 }
 
 int
-webvtt_packetizer_c::process(packet_cptr packet) {
+webvtt_packetizer_c::process_impl(packet_cptr const &packet) {
   for (auto &addition : packet->data_adds)
     addition = memory_c::clone(mtx::string::normalize_line_endings(addition->to_string()));
 
-  return textsubs_packetizer_c::process(packet);
+  return textsubs_packetizer_c::process_impl(packet);
 }
 
 connection_result_e

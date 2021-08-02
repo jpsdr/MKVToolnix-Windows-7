@@ -140,7 +140,7 @@ coreaudio_reader_c::read(generic_packetizer_c *,
     if (m_in->read(mem, m_current_packet->m_size) != m_current_packet->m_size)
       throw false;
 
-    ptzr(0).process(new packet_t(mem, m_current_packet->m_timestamp * m_frames_to_timestamp, m_current_packet->m_duration * m_frames_to_timestamp));
+    ptzr(0).process(std::make_shared<packet_t>(mem, m_current_packet->m_timestamp * m_frames_to_timestamp, m_current_packet->m_duration * m_frames_to_timestamp));
 
     ++m_current_packet;
 

@@ -506,8 +506,7 @@ real_reader_c::deliver_audio_frames(real_demuxer_cptr dmx,
     rv_segment_cptr segment = dmx->segments[i];
     mxdebug_if(s_debug, fmt::format("'{0}' track {1}: delivering audio length {2} timestamp {3} flags 0x{4:08x} duration {5}\n", m_ti.m_fname, dmx->track->id, segment->data->get_size(), dmx->last_timestamp, segment->flags, duration));
 
-    ptzr(dmx->ptzr).process(new packet_t(segment->data, dmx->last_timestamp, duration,
-                                          (segment->flags & RMFF_FRAME_FLAG_KEYFRAME) == RMFF_FRAME_FLAG_KEYFRAME ? -1 : dmx->ref_timestamp));
+    ptzr(dmx->ptzr).process(std::make_shared<packet_t>(segment->data, dmx->last_timestamp, duration, (segment->flags & RMFF_FRAME_FLAG_KEYFRAME) == RMFF_FRAME_FLAG_KEYFRAME ? -1 : dmx->ref_timestamp));
     if ((segment->flags & 2) == 2)
       dmx->ref_timestamp = dmx->last_timestamp;
   }
@@ -549,7 +548,7 @@ real_reader_c::deliver_aac_frames(real_demuxer_cptr dmx,
   int data_idx = 2 + num_sub_packets * 2;
   for (i = 0; i < num_sub_packets; i++) {
     int sub_length = get_uint16_be(&chunk[2 + i * 2]);
-    ptzr(dmx->ptzr).process(new packet_t(memory_c::borrow(&chunk[data_idx], sub_length)));
+    ptzr(dmx->ptzr).process(std::make_shared<packet_t>(memory_c::borrow(&chunk[data_idx], sub_length)));
     data_idx += sub_length;
   }
 }

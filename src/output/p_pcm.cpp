@@ -90,7 +90,7 @@ pcm_packetizer_c::size_to_samples(int64_t size)
 }
 
 int
-pcm_packetizer_c::process(packet_cptr packet) {
+pcm_packetizer_c::process_impl(packet_cptr const &packet) {
   if (packet->has_timestamp() && (packet->data->get_size() >= m_min_packet_size))
     return process_packaged(packet);
 

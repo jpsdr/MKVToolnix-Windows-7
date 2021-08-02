@@ -76,7 +76,7 @@ vorbis_packetizer_c::set_headers() {
 }
 
 int
-vorbis_packetizer_c::process(packet_cptr packet) {
+vorbis_packetizer_c::process_impl(packet_cptr const &packet) {
   ogg_packet op;
 
   // Remember the very first timestamp we received.

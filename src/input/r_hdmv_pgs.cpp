@@ -78,7 +78,7 @@ hdmv_pgs_reader_c::read(generic_packetizer_c *,
     if (m_debug)
       mxinfo(fmt::format("hdmv_pgs_reader_c::read(): type {0:02x} size {1} at {2}\n", static_cast<unsigned int>(frame->get_buffer()[0]), segment_size, m_in->getFilePointer() - 10 - 3));
 
-    ptzr(0).process(new packet_t(frame, timestamp));
+    ptzr(0).process(std::make_shared<packet_t>(frame, timestamp));
 
   } catch (...) {
     if (m_debug)

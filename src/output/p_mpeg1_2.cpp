@@ -57,7 +57,7 @@ mpeg1_2_video_packetizer_c::~mpeg1_2_video_packetizer_c() {
 }
 
 void
-mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(packet_cptr packet) {
+mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(packet_cptr const &packet) {
   mxdebug_if(m_debug_stuffing_removal, fmt::format("Starting stuff removal, frame size {0}, timestamp {1}\n", packet->data->get_size(), mtx::string::format_timestamp(packet->timestamp)));
 
   auto buf              = packet->data->get_buffer();
@@ -181,7 +181,7 @@ mpeg1_2_video_packetizer_c::remove_stuffing_bytes_and_handle_sequence_headers(pa
 }
 
 int
-mpeg1_2_video_packetizer_c::process(packet_cptr packet) {
+mpeg1_2_video_packetizer_c::process_impl(packet_cptr const &packet) {
   if (0 >= m_default_duration)
     extract_fps(packet->data->get_buffer(), packet->data->get_size());
 
@@ -192,18 +192,18 @@ mpeg1_2_video_packetizer_c::process(packet_cptr packet) {
 }
 
 int
-mpeg1_2_video_packetizer_c::process_framed(packet_cptr packet) {
+mpeg1_2_video_packetizer_c::process_framed(packet_cptr const &packet) {
   if (0 == packet->data->get_size())
     return FILE_STATUS_MOREDATA;
 
   if (4 <= packet->data->get_size())
     remove_stuffing_bytes_and_handle_sequence_headers(packet);
 
-  return generic_video_packetizer_c::process(packet);
+  return generic_video_packetizer_c::process_impl(packet);
 }
 
 int
-mpeg1_2_video_packetizer_c::process_unframed(packet_cptr packet) {
+mpeg1_2_video_packetizer_c::process_unframed(packet_cptr const &packet) {
   int state = m_parser.GetState();
   if ((MPV_PARSER_STATE_EOS == state) || (MPV_PARSER_STATE_ERROR == state))
     return FILE_STATUS_DONE;
@@ -234,7 +234,7 @@ mpeg1_2_video_packetizer_c::process_unframed(packet_cptr packet) {
 
       remove_stuffing_bytes_and_handle_sequence_headers(new_packet);
 
-      generic_video_packetizer_c::process(new_packet);
+      generic_video_packetizer_c::process_impl(new_packet);
 
       frame->data = nullptr;
       state       = m_parser.GetState();
@@ -248,7 +248,7 @@ void
 mpeg1_2_video_packetizer_c::flush_impl() {
   m_parser.SetEOS();
   auto empty = ""s;
-  generic_packetizer_c::process(new packet_t(memory_c::borrow(empty)));
+  generic_packetizer_c::process(std::make_shared<packet_t>(memory_c::borrow(empty)));
 }
 
 void

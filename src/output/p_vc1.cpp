@@ -89,7 +89,7 @@ vc1_video_packetizer_c::set_headers() {
 }
 
 void
-vc1_video_packetizer_c::add_timestamps_to_parser(packet_cptr &packet) {
+vc1_video_packetizer_c::add_timestamps_to_parser(packet_cptr const &packet) {
   if (-1 != packet->timestamp)
     m_parser.add_timestamp(packet->timestamp, 0);
 
@@ -106,7 +106,7 @@ vc1_video_packetizer_c::add_timestamps_to_parser(packet_cptr &packet) {
 }
 
 int
-vc1_video_packetizer_c::process(packet_cptr packet) {
+vc1_video_packetizer_c::process_impl(packet_cptr const &packet) {
   add_timestamps_to_parser(packet);
 
   m_parser.add_bytes(packet->data->get_buffer(), packet->data->get_size());

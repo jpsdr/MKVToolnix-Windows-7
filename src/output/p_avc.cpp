@@ -104,7 +104,7 @@ avc_video_packetizer_c::extract_aspect_ratio() {
 }
 
 int
-avc_video_packetizer_c::process(packet_cptr packet) {
+avc_video_packetizer_c::process_impl(packet_cptr const &packet) {
   if (VFT_PFRAMEAUTOMATIC == packet->bref) {
     packet->fref = -1;
     packet->bref = m_ref_timestamp;

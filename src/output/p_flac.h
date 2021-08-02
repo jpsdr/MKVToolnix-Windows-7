@@ -31,7 +31,6 @@ public:
   flac_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, unsigned char *header, int l_header);
   virtual ~flac_packetizer_c();
 
-  virtual int process(packet_cptr packet);
   virtual void set_headers();
 
   virtual translatable_string_c get_format_name() const {
@@ -40,6 +39,9 @@ public:
 
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) override;
   virtual split_result_e can_be_split(std::string &error_message) override;
+
+protected:
+  virtual int process_impl(packet_cptr const &packet) override;
 };
 
 #endif  // HAVE_FLAC_STREAM_DECODER_H

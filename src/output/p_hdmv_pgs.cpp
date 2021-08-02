@@ -46,7 +46,7 @@ hdmv_pgs_packetizer_c::set_headers() {
 }
 
 int
-hdmv_pgs_packetizer_c::process(packet_cptr packet) {
+hdmv_pgs_packetizer_c::process_impl(packet_cptr const &packet) {
   packet->force_key_frame();
 
   if (!m_aggregate_packets) {

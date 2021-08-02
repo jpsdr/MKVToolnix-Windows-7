@@ -31,17 +31,16 @@ public:
   mpeg1_2_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int version, int64_t default_duration, int width, int height, int dwidth, int dheight, bool framed);
   virtual ~mpeg1_2_video_packetizer_c();
 
-  virtual int process(packet_cptr packet);
-
   virtual translatable_string_c get_format_name() const {
     return YT("MPEG-1/2 video");
   }
 
 protected:
+  virtual int process_impl(packet_cptr const &packet) override;
   virtual void extract_fps(const unsigned char *buffer, int size);
   virtual void extract_aspect_ratio(const unsigned char *buffer, int size);
-  virtual int process_framed(packet_cptr packet);
-  virtual int process_unframed(packet_cptr packet);
-  virtual void remove_stuffing_bytes_and_handle_sequence_headers(packet_cptr packet);
+  virtual int process_framed(packet_cptr const &packet);
+  virtual int process_unframed(packet_cptr const &packet);
+  virtual void remove_stuffing_bytes_and_handle_sequence_headers(packet_cptr const &packet);
   virtual void flush_impl();
 };

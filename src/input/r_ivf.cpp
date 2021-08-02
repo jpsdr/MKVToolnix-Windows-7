@@ -119,7 +119,7 @@ ivf_reader_c::read(generic_packetizer_c *,
 
   mxdebug_if(m_debug, fmt::format("key {4} header.ts {0} num {1} den {2} res {3}\n", get_uint64_le(&header.timestamp), m_frame_rate_num, m_frame_rate_den, timestamp, ivf::is_keyframe(buffer, m_codec.get_type())));
 
-  ptzr(0).process(new packet_t(buffer, timestamp));
+  ptzr(0).process(std::make_shared<packet_t>(buffer, timestamp));
 
   return FILE_STATUS_MOREDATA;
 }

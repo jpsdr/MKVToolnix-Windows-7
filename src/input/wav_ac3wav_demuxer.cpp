@@ -80,7 +80,7 @@ wav_ac3wav_demuxer_c::process(int64_t size) {
 
   long dec_len = decode_buffer(size);
   if (0 < dec_len)
-    m_ptzr->process(new packet_t(memory_c::borrow(m_buf[m_cur_buf]->get_buffer() + 8, dec_len)));
+    m_ptzr->process(std::make_shared<packet_t>(memory_c::borrow(m_buf[m_cur_buf]->get_buffer() + 8, dec_len)));
 }
 
 unsigned int

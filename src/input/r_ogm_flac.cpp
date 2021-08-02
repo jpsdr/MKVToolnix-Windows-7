@@ -218,14 +218,14 @@ ogm_a_flac_demuxer_c::process_page(int64_t granulepos) {
       continue;
 
     for (int i = 0; i < (int)nh_packet_data.size(); i++)
-      reader->m_reader_packetizers[ptzr]->process(new packet_t(nh_packet_data[i]->clone(), 0));
+      reader->m_reader_packetizers[ptzr]->process(std::make_shared<packet_t>(nh_packet_data[i]->clone(), 0));
 
     nh_packet_data.clear();
 
     if (-1 == last_granulepos)
-      reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes), -1));
+      reader->m_reader_packetizers[ptzr]->process(std::make_shared<packet_t>(memory_c::borrow(op.packet, op.bytes), -1));
     else {
-      reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes), last_granulepos * 1000000000 / sample_rate));
+      reader->m_reader_packetizers[ptzr]->process(std::make_shared<packet_t>(memory_c::borrow(op.packet, op.bytes), last_granulepos * 1000000000 / sample_rate));
       last_granulepos = granulepos;
     }
   }

@@ -798,7 +798,7 @@ flv_reader_c::read(generic_packetizer_c *,
     if (track->m_v_frame_rate && track->m_fourcc.equiv("AVC1"))
       duration = mtx::to_int(mtx::rational(1'000'000'000, track->m_v_frame_rate));
 
-    auto packet = new packet_t(track->m_payload, track->m_timestamp, duration, 'I' == track->m_v_frame_type ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME);
+    auto packet = std::make_shared<packet_t>(track->m_payload, track->m_timestamp, duration, 'I' == track->m_v_frame_type ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME);
 
     if (track->m_extra_data)
       packet->codec_state = track->m_extra_data;

@@ -26,11 +26,13 @@ public:
   ra_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int samples_per_sec, int channels, int bits_per_sample, uint32_t fourcc);
   virtual ~ra_packetizer_c();
 
-  virtual int process(packet_cptr packet);
   virtual void set_headers();
 
   virtual translatable_string_c get_format_name() const {
     return YT("RealAudio");
   }
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
+
+protected:
+  virtual int process_impl(packet_cptr const &packet) override;
 };

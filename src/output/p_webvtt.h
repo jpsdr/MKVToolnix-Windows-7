@@ -22,10 +22,11 @@ public:
   webvtt_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
   virtual ~webvtt_packetizer_c();
 
-  virtual int process(packet_cptr packet) override;
-
   virtual translatable_string_c get_format_name() const override {
     return YT("WebVTT subtitles");
   }
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) override;
+
+protected:
+  virtual int process_impl(packet_cptr const &packet) override;
 };

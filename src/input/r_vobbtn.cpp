@@ -74,7 +74,7 @@ vobbtn_reader_c::read(generic_packetizer_c *,
   if (0 >= nread)
     return flush_packetizers();
 
-  ptzr(0).process(new packet_t(memory_c::borrow(chunk, nread)));
+  ptzr(0).process(std::make_shared<packet_t>(memory_c::borrow(chunk, nread)));
   return FILE_STATUS_MOREDATA;
 }
 

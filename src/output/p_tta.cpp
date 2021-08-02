@@ -53,7 +53,7 @@ tta_packetizer_c::set_headers() {
 }
 
 int
-tta_packetizer_c::process(packet_cptr packet) {
+tta_packetizer_c::process_impl(packet_cptr const &packet) {
   packet->timestamp = mtx::to_int(mtx::rational(m_samples_output, m_sample_rate) * 1'000'000'000);
   if (-1 == packet->duration) {
     packet->duration  = m_htrack_default_duration;

@@ -37,7 +37,6 @@ public:
   mp3_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int samples_per_sec, int channels, bool source_is_good);
   virtual ~mp3_packetizer_c();
 
-  virtual int process(packet_cptr packet);
   virtual void set_headers();
 
   virtual translatable_string_c get_format_name() const {
@@ -45,7 +44,8 @@ public:
   }
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
-private:
+protected:
+  virtual int process_impl(packet_cptr const &packet) override;
   virtual memory_cptr get_mp3_packet(mp3_header_t *mp3header);
 
   virtual void handle_garbage(int64_t bytes);

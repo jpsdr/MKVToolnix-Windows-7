@@ -58,7 +58,7 @@ kate_packetizer_c::set_headers() {
 }
 
 int
-kate_packetizer_c::process(packet_cptr packet) {
+kate_packetizer_c::process_impl(packet_cptr const &packet) {
   if (packet->data->get_size() < (1 + 3 * sizeof(int64_t))) {
     /* end packet is 1 byte long and has type 0x7f */
     if ((packet->data->get_size() == 1) && (packet->data->get_buffer()[0] == 0x7f)) {

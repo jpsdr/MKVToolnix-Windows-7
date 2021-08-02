@@ -399,7 +399,7 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
   }
 
   if (duration.valid())
-    packetizer->process(new packet_t(memory_c::take_ownership(buf, size), timestamp, duration.to_ns()));
+    packetizer->process(std::make_shared<packet_t>(memory_c::take_ownership(buf, size), timestamp, duration.to_ns()));
   else
     safefree(buf);
 

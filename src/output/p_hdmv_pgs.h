@@ -28,7 +28,6 @@ public:
   hdmv_pgs_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
   virtual ~hdmv_pgs_packetizer_c();
 
-  virtual int process(packet_cptr packet);
   virtual void set_headers();
   virtual void set_aggregate_packets(bool aggregate_packets) {
     m_aggregate_packets = aggregate_packets;
@@ -40,6 +39,7 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
 protected:
+  virtual int process_impl(packet_cptr const &packet) override;
   void dump_and_add_packet(packet_cptr const &packet);
   void dump_packet(memory_c const &data);
 };

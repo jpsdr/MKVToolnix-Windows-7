@@ -151,10 +151,7 @@ public:
   }
   virtual void set_headers();
   virtual void fix_headers();
-  inline int process(packet_t *packet) {
-    return process(packet_cptr(packet));
-  }
-  virtual int process(packet_cptr packet) = 0;
+  virtual int process(packet_cptr const &packet);
 
   virtual void set_cue_creation(cue_strategy_e create_cue_data) {
     m_ti.m_cues = create_cue_data;
@@ -311,6 +308,7 @@ public:
   virtual void after_file_created();
 
 protected:
+  virtual int process_impl(packet_cptr const &packet) = 0;
   virtual void flush_impl() {
   };
 

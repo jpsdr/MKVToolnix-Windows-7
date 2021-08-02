@@ -25,7 +25,6 @@ protected:
 
 public:
   avc_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int64_t default_duration, int width, int height);
-  virtual int process(packet_cptr packet);
   virtual void set_headers();
 
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
@@ -36,5 +35,6 @@ public:
 
 protected:
   virtual void extract_aspect_ratio();
+  virtual int process_impl(packet_cptr const &packet) override;
   virtual void process_nalus(memory_c &data) const;
 };

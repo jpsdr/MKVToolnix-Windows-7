@@ -54,7 +54,7 @@ ra_packetizer_c::set_headers() {
 }
 
 int
-ra_packetizer_c::process(packet_cptr packet) {
+ra_packetizer_c::process_impl(packet_cptr const &packet) {
   add_packet(packet);
 
   return FILE_STATUS_MOREDATA;

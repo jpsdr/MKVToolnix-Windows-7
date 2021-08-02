@@ -27,7 +27,6 @@ protected:
 public:
   vpx_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, codec_c::type_e p_codec);
 
-  virtual int process(packet_cptr packet);
   virtual void set_headers();
 
   virtual translatable_string_c get_format_name() const {
@@ -38,5 +37,6 @@ public:
   virtual bool is_compatible_with(output_compatibility_e compatibility);
 
 protected:
+  virtual int process_impl(packet_cptr const &packet) override;
   virtual void vp9_determine_codec_private(memory_c const &mem);
 };

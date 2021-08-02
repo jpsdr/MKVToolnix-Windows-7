@@ -34,7 +34,6 @@ public:
   truehd_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, mtx::truehd::frame_t::codec_e codec, int sampling_rate, int channels);
   virtual ~truehd_packetizer_c();
 
-  virtual int process(packet_cptr packet);
   virtual void process_framed(mtx::truehd::frame_cptr const &frame, std::optional<int64_t> provided_timestamp = {});
   virtual void set_headers();
 
@@ -45,6 +44,7 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
 protected:
+  virtual int process_impl(packet_cptr const &packet) override;
   virtual void adjust_header_values(mtx::truehd::frame_cptr const &frame);
 
   virtual void flush_impl();

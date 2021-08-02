@@ -82,7 +82,7 @@ truehd_packetizer_c::process_framed(mtx::truehd::frame_cptr const &frame,
 }
 
 int
-truehd_packetizer_c::process(packet_cptr packet) {
+truehd_packetizer_c::process_impl(packet_cptr const &packet) {
   m_timestamp_calculator.add_timestamp(packet);
   m_discard_padding.add_maybe(packet->discard_padding);
 

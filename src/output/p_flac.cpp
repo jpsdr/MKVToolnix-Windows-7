@@ -67,7 +67,7 @@ flac_packetizer_c::set_headers() {
 }
 
 int
-flac_packetizer_c::process(packet_cptr packet) {
+flac_packetizer_c::process_impl(packet_cptr const &packet) {
   m_num_packets++;
 
   packet->duration = mtx::flac::get_num_samples(packet->data->get_buffer(), packet->data->get_size(), m_stream_info);

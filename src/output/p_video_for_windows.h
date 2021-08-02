@@ -30,7 +30,6 @@ protected:
 public:
   video_for_windows_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int64_t default_duration, int width, int height);
 
-  virtual int process(packet_cptr packet) override;
   virtual void set_headers() override;
 
   virtual translatable_string_c get_format_name() const override {
@@ -39,7 +38,8 @@ public:
 
 protected:
   virtual void check_fourcc();
-  virtual void rederive_frame_type(packet_cptr &packet);
-  virtual void rederive_frame_type_div3(packet_cptr &packet);
-  virtual void rederive_frame_type_mpeg4_p2(packet_cptr &packet);
+  virtual int process_impl(packet_cptr const &packet) override;
+  virtual void rederive_frame_type(packet_cptr const &packet);
+  virtual void rederive_frame_type_div3(packet_cptr const &packet);
+  virtual void rederive_frame_type_mpeg4_p2(packet_cptr const &packet);
 };

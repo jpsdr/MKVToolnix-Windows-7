@@ -1630,7 +1630,7 @@ qtmp4_reader_c::read(generic_packetizer_c *packetizer,
   }
 
   auto duration = dmx.m_use_frame_rate_for_duration ? *dmx.m_use_frame_rate_for_duration : index.duration;
-  ptzr(dmx.ptzr).process(new packet_t(buffer, index.timestamp, duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
+  ptzr(dmx.ptzr).process(std::make_shared<packet_t>(buffer, index.timestamp, duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
   ++dmx.pos;
 
   m_bytes_processed += index.size;

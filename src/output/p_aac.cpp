@@ -106,7 +106,7 @@ aac_packetizer_c::process_headerless(packet_cptr packet) {
 }
 
 int
-aac_packetizer_c::process(packet_cptr packet) {
+aac_packetizer_c::process_impl(packet_cptr const &packet) {
   m_timestamp_calculator.add_timestamp(packet);
   m_discard_padding.add_maybe(packet->discard_padding);
 

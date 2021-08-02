@@ -82,7 +82,7 @@ hevc_es_video_packetizer_c::add_extra_data(memory_cptr data) {
 }
 
 int
-hevc_es_video_packetizer_c::process(packet_cptr packet) {
+hevc_es_video_packetizer_c::process_impl(packet_cptr const &packet) {
   try {
     if (packet->has_timestamp())
       m_parser.add_timestamp(packet->timestamp);

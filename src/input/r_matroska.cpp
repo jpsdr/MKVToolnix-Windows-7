@@ -2229,7 +2229,7 @@ kax_reader_c::create_vc1_video_packetizer(kax_track_t *t,
   show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
   if (t->private_data && (sizeof(alBITMAPINFOHEADER) < t->private_data->get_size()))
-    t->ptzr_ptr->process(new packet_t(memory_c::borrow(t->private_data->get_buffer() + sizeof(alBITMAPINFOHEADER), t->private_data->get_size() - sizeof(alBITMAPINFOHEADER))));
+    t->ptzr_ptr->process(std::make_shared<packet_t>(memory_c::borrow(t->private_data->get_buffer() + sizeof(alBITMAPINFOHEADER), t->private_data->get_size() - sizeof(alBITMAPINFOHEADER))));
 }
 
 void

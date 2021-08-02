@@ -137,7 +137,7 @@ dts_reader_c::read(generic_packetizer_c *,
 
   int num_to_output = decode_buffer(num_read);
 
-  ptzr(0).process(new packet_t(memory_c::borrow(m_buf[m_cur_buf], num_to_output)));
+  ptzr(0).process(std::make_shared<packet_t>(memory_c::borrow(m_buf[m_cur_buf], num_to_output)));
 
   if (m_in->eof() || (num_read < bytes_to_read))
     return flush_packetizers();

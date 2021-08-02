@@ -125,7 +125,7 @@ dts_packetizer_c::set_headers() {
 }
 
 int
-dts_packetizer_c::process(packet_cptr packet) {
+dts_packetizer_c::process_impl(packet_cptr const &packet) {
   m_timestamp_calculator.add_timestamp(packet, m_stream_position);
   m_discard_padding.add_maybe(packet->discard_padding, m_stream_position);
   m_stream_position += packet->data->get_size();

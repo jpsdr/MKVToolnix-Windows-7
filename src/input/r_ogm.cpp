@@ -926,7 +926,7 @@ ogm_demuxer_c::process_page(int64_t /* granulepos */) {
     get_duration_and_len(op, duration, duration_len);
 
     auto mem = memory_c::borrow(&op.packet[duration_len + 1], op.bytes - 1 - duration_len);
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(mem));
+    reader->m_reader_packetizers[ptzr]->process(std::make_shared<packet_t>(mem));
     units_processed += op.bytes - 1;
   }
 }
@@ -1126,7 +1126,7 @@ ogm_a_vorbis_demuxer_c::process_page(int64_t /* granulepos */) {
     if (((*op.packet & 3) == mtx::ogm::PACKET_TYPE_HEADER) || ((*op.packet & 3) == mtx::ogm::PACKET_TYPE_COMMENT))
       continue;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes)));
+    reader->m_reader_packetizers[ptzr]->process(std::make_shared<packet_t>(memory_c::borrow(op.packet, op.bytes)));
   }
 }
 
@@ -1310,7 +1310,7 @@ ogm_s_text_demuxer_c::process_page(int64_t granulepos) {
 
     if (((op.bytes - 1 - duration_len) > 2) || ((op.packet[duration_len + 1] != ' ') && (op.packet[duration_len + 1] != 0) && !mtx::string::is_newline(op.packet[duration_len + 1]))) {
       auto mem = memory_c::borrow(&op.packet[duration_len + 1], op.bytes - 1 - duration_len);
-      reader->m_reader_packetizers[ptzr]->process(new packet_t(mem, granulepos * 1000000, (int64_t)duration * 1000000));
+      reader->m_reader_packetizers[ptzr]->process(std::make_shared<packet_t>(mem, granulepos * 1000000, (int64_t)duration * 1000000));
     }
   }
 }
@@ -1453,7 +1453,7 @@ ogm_v_mscomp_demuxer_c::process_page(int64_t granulepos) {
     int64_t timestamp = (last_granulepos + frames_since_granulepos_change) * default_duration;
     ++frames_since_granulepos_change;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(frame.mem, timestamp, frame.duration, frame.flags & mtx::ogm::PACKET_IS_SYNCPOINT ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC));
+    reader->m_reader_packetizers[ptzr]->process(std::make_shared<packet_t>(frame.mem, timestamp, frame.duration, frame.flags & mtx::ogm::PACKET_IS_SYNCPOINT ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC));
 
     units_processed += duration;
   }
@@ -1515,7 +1515,7 @@ ogm_v_theora_demuxer_c::process_page([[maybe_unused]] int64_t granulepos) {
 
     ++units_processed;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes), timestamp, duration, bref, VFT_NOBFRAME));
+    reader->m_reader_packetizers[ptzr]->process(std::make_shared<packet_t>(memory_c::borrow(op.packet, op.bytes), timestamp, duration, bref, VFT_NOBFRAME));
   }
 }
 
@@ -1621,7 +1621,7 @@ ogm_v_vp8_demuxer_c::process_page(int64_t granulepos) {
 
     ++units_processed;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(data, timestamp, default_duration, bref, VFT_NOBFRAME));
+    reader->m_reader_packetizers[ptzr]->process(std::make_shared<packet_t>(data, timestamp, default_duration, bref, VFT_NOBFRAME));
 
     mxdebug_if(debug,
                fmt::format("VP8 track {0} size {9} #proc {10} frame# {11} fr_num {1} fr_den {2} granulepos 0x{3:08x} {4:08x} pts {5} inv_count {6} distance {7}{8}\n",
@@ -1693,7 +1693,7 @@ ogm_s_kate_demuxer_c::process_page(int64_t /* granulepos */) {
     if ((0 == op.bytes) || (0 != (op.packet[0] & 0x80)))
       continue;
 
-    reader->m_reader_packetizers[ptzr]->process(new packet_t(memory_c::borrow(op.packet, op.bytes)));
+    reader->m_reader_packetizers[ptzr]->process(std::make_shared<packet_t>(memory_c::borrow(op.packet, op.bytes)));
 
     ++units_processed;
 

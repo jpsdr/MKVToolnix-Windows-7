@@ -64,7 +64,7 @@ wav_dts_demuxer_c::process(int64_t size) {
     return;
 
   auto decoded = m_parser.decode(m_read_buffer->get_buffer(), size);
-  m_ptzr->process(new packet_t(decoded));
+  m_ptzr->process(std::make_shared<packet_t>(decoded));
 }
 
 unsigned int

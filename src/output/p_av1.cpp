@@ -87,7 +87,7 @@ av1_video_packetizer_c::set_header_parameters() {
 }
 
 int
-av1_video_packetizer_c::process(packet_cptr packet) {
+av1_video_packetizer_c::process_impl(packet_cptr const &packet) {
   m_parser.debug_obu_types(*packet->data);
 
   m_parser.parse(*packet->data);

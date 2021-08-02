@@ -742,7 +742,7 @@ avi_reader_c::read_video() {
   // AVC with framed packets (without NALU start codes but with length fields)
   // or non-AVC video track?
   if (0 >= m_avc_nal_size_size)
-    ptzr(m_vptzr).process(new packet_t(chunk, timestamp, duration, key ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
+    ptzr(m_vptzr).process(std::make_shared<packet_t>(chunk, timestamp, duration, key ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
 
   else {
     // AVC video track without NALU start codes. Re-frame with NALU start codes.
@@ -760,7 +760,7 @@ avi_reader_c::read_video() {
       memcpy(nalu->get_buffer() + 4, chunk->get_buffer() + offset, nalu_size);
       offset += nalu_size;
 
-      ptzr(m_vptzr).process(new packet_t(nalu, timestamp, duration, key ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
+      ptzr(m_vptzr).process(std::make_shared<packet_t>(nalu, timestamp, duration, key ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
     }
   }
 
@@ -797,7 +797,7 @@ avi_reader_c::read_audio(avi_demuxer_t &demuxer) {
     if (!size)
       continue;
 
-    ptzr(demuxer.m_ptzr).process(new packet_t(chunk));
+    ptzr(demuxer.m_ptzr).process(std::make_shared<packet_t>(chunk));
 
     m_bytes_processed += size;
 

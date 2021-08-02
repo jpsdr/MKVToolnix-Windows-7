@@ -44,7 +44,7 @@ dvbsub_packetizer_c::set_headers() {
 }
 
 int
-dvbsub_packetizer_c::process(packet_cptr packet) {
+dvbsub_packetizer_c::process_impl(packet_cptr const &packet) {
   packet->duration_mandatory = packet->duration >= 0;
   packet->force_key_frame();
 

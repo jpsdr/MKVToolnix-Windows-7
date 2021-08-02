@@ -1786,6 +1786,11 @@ generic_packetizer_c::read(bool force) {
   return m_reader->read_next(this, force);
 }
 
+int
+generic_packetizer_c::process(packet_cptr const &packet) {
+  return process_impl(packet);
+}
+
 void
 generic_packetizer_c::prevent_lacing() {
   m_prevent_lacing = true;

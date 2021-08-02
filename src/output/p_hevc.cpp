@@ -112,7 +112,7 @@ hevc_video_packetizer_c::extract_aspect_ratio() {
 }
 
 int
-hevc_video_packetizer_c::process(packet_cptr packet) {
+hevc_video_packetizer_c::process_impl(packet_cptr const &packet) {
   auto &p = *p_func();
 
   if (packet->is_key_frame() && (VFT_PFRAMEAUTOMATIC != packet->bref))

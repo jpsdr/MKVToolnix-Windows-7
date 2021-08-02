@@ -26,11 +26,13 @@ public:
   tta_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, int channels, int bits_per_sample, int sample_rate);
   virtual ~tta_packetizer_c();
 
-  virtual int process(packet_cptr packet);
   virtual void set_headers();
 
   virtual translatable_string_c get_format_name() const {
     return YT("TTA");
   }
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
+
+protected:
+  virtual int process_impl(packet_cptr const &packet) override;
 };

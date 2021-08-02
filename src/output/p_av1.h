@@ -27,8 +27,6 @@ protected:
 public:
   av1_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
 
-  virtual int process(packet_cptr packet) override;
-
   virtual void set_is_unframed();
 
   virtual translatable_string_c get_format_name() const override {
@@ -42,6 +40,7 @@ protected:
   virtual void flush_impl() override;
   virtual void flush_frames();
 
+  virtual int process_impl(packet_cptr const &packet) override;
   virtual void process_framed(packet_cptr packet);
   virtual void process_unframed();
 
