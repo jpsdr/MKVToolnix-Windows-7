@@ -6,10 +6,15 @@ module Mtx::IANALanguageSubtagRegistry
     @@registry_mutex.synchronize {
       return @@registry if @@registry
 
-      @@registry = {}
-      entry      = {}
-      process    = lambda do
+      shorten_description_for = %w{1959acad abl1943 ao1990 colb1945}
+      @@registry              = {}
+      entry                   = {}
+      process                 = lambda do
         type = entry.delete(:type)
+
+        if shorten_description_for.include? entry[:subtag]
+          entry[:description].gsub!(%r{ +\(.*?\)}, '')
+        end
 
         if type
           @@registry[type] ||= []
@@ -19,6 +24,8 @@ module Mtx::IANALanguageSubtagRegistry
         entry = {}
       end
 
+      current_sym             = nil
+
       Mtx::OnlineFile.download("https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry").
         split(%r{\n+}).
         map(&:chomp).
@@ -26,13 +33,20 @@ module Mtx::IANALanguageSubtagRegistry
 
         if line == '%%'
           process.call
-
-        elsif %r{^(Type|Subtag|Description): *(.+)}i.match(line)
-          entry[$1.downcase.to_sym] = $2
+          current_sym = nil
 
         elsif %r{^Prefix: *(.+)}i.match(line)
           entry[:prefix] ||= []
           entry[:prefix]  << $1
+          current_sym      = nil
+
+        elsif %r{^(.*?): *(.+)}i.match(line)
+          current_sym        = $1.downcase.to_sym
+          entry[current_sym] = $2
+
+        elsif %r{^ +(.+)}.match(line) && current_sym
+          entry[current_sym] += " #{$1}"
+
         end
       end
 
