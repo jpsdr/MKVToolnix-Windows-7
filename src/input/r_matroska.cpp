@@ -96,6 +96,7 @@
 #include "output/p_passthrough.h"
 #include "output/p_pcm.h"
 #include "output/p_prores.h"
+#include "output/p_ssa.h"
 #include "output/p_textsubs.h"
 #include "output/p_theora.h"
 #include "output/p_truehd.h"
@@ -2078,7 +2079,12 @@ kax_reader_c::create_subtitle_packetizer(kax_track_t *t,
     std::string new_codec_id = ((t->codec_id == "S_SSA") || (t->codec_id == "S_ASS")) ? "S_TEXT/"s + std::string(&t->codec_id[2]) : t->codec_id;
 
     auto recoding_requested = mtx::includes(m_ti.m_sub_charsets, t->tnum) || mtx::includes(m_ti.m_sub_charsets, t->tnum);
-    set_track_packetizer(t, new textsubs_packetizer_c(this, nti, new_codec_id.c_str(), recoding_requested));
+
+    if (codec_c::look_up(new_codec_id).get_type() == codec_c::type_e::S_SSA_ASS)
+      set_track_packetizer(t, new ssa_packetizer_c(this, nti, new_codec_id.c_str(), recoding_requested));
+    else
+      set_track_packetizer(t, new textsubs_packetizer_c(this, nti, new_codec_id.c_str(), recoding_requested));
+
     show_packetizer_info(t->tnum, *t->ptzr_ptr);
 
     t->sub_type = 't';

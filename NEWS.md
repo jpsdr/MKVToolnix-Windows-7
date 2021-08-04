@@ -19,6 +19,9 @@
 * mkvmerge, MKVToolNix GUI's chapter editor: BCP 47/RFC 5646 language tags:
   the programs will ensure that the legacy and IETF language elements written
   will be unique within the scope of the same "chapter display" element.
+* mkvmerge: SSA/ASS packetizer: the frame numbers will now be re-calculated
+  when appending SSA/ASS tracks so that frame numbers of appended tracks are
+  always strictly higher than frame numbers of the track they're appended to.
 
 ## Build system changes
 

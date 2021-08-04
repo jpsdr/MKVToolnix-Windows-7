@@ -451,8 +451,6 @@ cluster_helper_c::render() {
     min_cl_timestamp                       = std::min(pack->assigned_timestamp, min_cl_timestamp);
     max_cl_timestamp                       = std::max(pack->assigned_timestamp, max_cl_timestamp);
 
-    DataBuffer *data_buffer                = new DataBuffer((binary *)pack->data->get_buffer(), pack->data->get_size());
-
     KaxTrackEntry &track_entry             = static_cast<KaxTrackEntry &>(*source->get_track_entry());
 
     kax_block_blob_c *previous_block_group = !render_group->m_groups.empty() ? render_group->m_groups.back().get() : nullptr;
@@ -495,6 +493,8 @@ cluster_helper_c::render() {
     for (auto const &extension : pack->extensions)
       if (packet_extension_c::BEFORE_ADDING_TO_CLUSTER_CB == extension->get_type())
         static_cast<before_adding_to_cluster_cb_packet_extension_c *>(extension.get())->get_callback()(pack, timestamp_offset);
+
+    auto data_buffer = new DataBuffer(static_cast<binary *>(pack->data->get_buffer()), pack->data->get_size());
 
     // Now put the packet into the cluster.
     render_group->m_more_data = new_block_group->add_frame_auto(track_entry, pack->assigned_timestamp - timestamp_offset, *data_buffer, lacing_type,

@@ -22,6 +22,7 @@
 #include "input/r_ssa.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
+#include "output/p_ssa.h"
 
 bool
 ssa_reader_c::probe_file() {
@@ -53,7 +54,7 @@ ssa_reader_c::create_packetizer(int64_t) {
     return;
 
   m_ti.m_private_data = memory_c::clone(m_subs->get_global());
-  add_packetizer(new textsubs_packetizer_c(this, m_ti, m_subs->is_ass() ?  MKV_S_TEXTASS : MKV_S_TEXTSSA));
+  add_packetizer(new ssa_packetizer_c(this, m_ti, m_subs->is_ass() ?  MKV_S_TEXTASS : MKV_S_TEXTSSA, false));
   show_packetizer_info(0, ptzr(0));
 }
 
