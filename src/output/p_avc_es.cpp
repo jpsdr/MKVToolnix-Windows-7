@@ -194,7 +194,7 @@ avc_es_video_packetizer_c::get_nalu_size_length()
 
 void
 avc_es_video_packetizer_c::connect(generic_packetizer_c *src,
-                                         int64_t p_append_timestamp_offset) {
+                                   int64_t p_append_timestamp_offset) {
   generic_packetizer_c::connect(src, p_append_timestamp_offset);
 
   if (2 != m_connected_to)
