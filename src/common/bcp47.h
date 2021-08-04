@@ -19,6 +19,10 @@ namespace mtx::bcp47 {
 
 class language_c {
 protected:
+  struct prefix_restrictions_t {
+    bool language{}, extended_language_subtags{}, script{}, region{}, variants{};
+  };
+
   std::string m_language;                               // shortest ISO 639 code or reserved or registered language subtag
   std::vector<std::string> m_extended_language_subtags; // selected ISO 639 codes
   std::string m_script;                                 // ISO 15924 code
@@ -79,7 +83,7 @@ protected:
 
   bool validate_extlangs_or_variants(bool is_extlangs);
   bool validate_one_extlang_or_variant(std::size_t extlang_or_variant_index, bool is_extlang);
-  bool matches_prefix(language_c const &prefix, std::size_t extlang_or_variant_index, bool is_extlang) const noexcept;
+  bool matches_prefix(language_c const &prefix, std::size_t extlang_or_variant_index, bool is_extlang, prefix_restrictions_t const &restrictions) const noexcept;
 
 public:
   static language_c parse(std::string const &language);

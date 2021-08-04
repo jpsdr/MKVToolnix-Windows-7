@@ -22,6 +22,13 @@
 * mkvmerge: SSA/ASS packetizer: the frame numbers will now be re-calculated
   when appending SSA/ASS tracks so that frame numbers of appended tracks are
   always strictly higher than frame numbers of the track they're appended to.
+* all: IETF BCP 47/RFC 5646 language tags: fixed a corner case of wrongfully
+  allowing scripts/variants not listed in any of the entries in the prefix
+  list when the prefix list contains prefixes restricting scripts/variants and
+  a prefix solely with the language at the same time (example: the variant
+  `ekavsk` with its prefixes `sr`, `sr-Cyrl` and `sr-Latn` where
+  e.g. `sr-ekavsk` and `sr-Cyrl-ekavsk` should be allowed but not
+  `sr-Bali-ekavsk`).
 
 ## Build system changes
 

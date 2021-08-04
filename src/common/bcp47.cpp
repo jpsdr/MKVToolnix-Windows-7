@@ -228,10 +228,18 @@ language_c::parse_extlangs_or_variants(std::string const &str,
 bool
 language_c::matches_prefix(language_c const &prefix,
                            std::size_t extlang_or_variant_index,
-                           bool is_extlang)
+                           bool is_extlang,
+                           prefix_restrictions_t const &restrictions)
   const noexcept {
   if (   ( is_extlang && !m_extended_language_subtags.empty() && (extlang_or_variant_index > (prefix.m_extended_language_subtags.size())))
       || (!is_extlang && !m_variants                 .empty() && (extlang_or_variant_index > (prefix.m_variants                 .size()))))
+    return false;
+
+  if (   (restrictions.language                  && prefix.m_language                 .empty() && !m_language                 .empty())
+      || (restrictions.extended_language_subtags && prefix.m_extended_language_subtags.empty() && !m_extended_language_subtags.empty())
+      || (restrictions.script                    && prefix.m_script                   .empty() && !m_script                   .empty())
+      || (restrictions.region                    && prefix.m_region                   .empty() && !m_region                   .empty())
+      || (restrictions.variants                  && prefix.m_variants                 .empty() && !m_variants                 .empty()))
     return false;
 
   std::vector<std::string> this_relevant_parts;
@@ -276,8 +284,27 @@ language_c::validate_one_extlang_or_variant(std::size_t extlang_or_variant_index
   if (extlang_or_variant->prefixes.empty())
     return true;
 
-  for (auto const &prefix : extlang_or_variant->prefixes)
-    if (matches_prefix(parse(prefix), extlang_or_variant_index, is_extlang))
+  prefix_restrictions_t restrictions;
+  std::vector<language_c> parsed_prefixes;
+
+  auto account = [](bool &value, bool is_unset) {
+    if (!value && !is_unset)
+      value = true;
+  };
+
+  for (auto const &prefix : extlang_or_variant->prefixes) {
+    parsed_prefixes.emplace_back(parse(prefix));
+    auto const &tag = parsed_prefixes.back();
+
+    account(restrictions.language,                  tag.m_language.empty());
+    account(restrictions.extended_language_subtags, tag.m_extended_language_subtags.empty());
+    account(restrictions.script,                    tag.m_script.empty());
+    account(restrictions.region,                    tag.m_region.empty());
+    account(restrictions.variants,                  tag.m_variants.empty());
+  }
+
+  for (auto const &parsed_prefix : parsed_prefixes)
+    if (matches_prefix(parsed_prefix, extlang_or_variant_index, is_extlang, restrictions))
       return true;
 
   auto message   = is_extlang ? Y("The extended language subtag '{}' must only be used with one of the following prefixes: {}.")

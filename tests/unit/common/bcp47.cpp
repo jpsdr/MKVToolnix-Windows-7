@@ -280,4 +280,18 @@ TEST(BCP47LanguageTags, RFC4646AppendixBInvalid) {
   EXPECT_FALSE(mtx::bcp47::language_c::parse("ar-a-aaa-b-bbb-a-ccc").is_valid()); // (two extensions with same single-letter prefix)
 }
 
+TEST(BCP47LanguageTags, OnlyCertainScriptsAllowedOrNoScriptAtAll) {
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Bali").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Cyrl").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Latn").is_valid());
+
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-ekavsk").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Cyrl-ekavsk").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Latn-ekavsk").is_valid());
+
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Latn-RS-ekavsk").is_valid());
+
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("sr-Bali-ekavsk").is_valid());
+}
+
 }
