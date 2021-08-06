@@ -4,8 +4,8 @@
 
 #include <QDateTime>
 
-#include "common/qt_kax_analyzer.h"
 #include "mkvtoolnix-gui/header_editor/page_model.h"
+#include "mkvtoolnix-gui/util/kax_analyzer.h"
 
 class QAction;
 class QMenu;
@@ -40,7 +40,7 @@ protected:
   std::unique_ptr<Ui::Tab> ui;
 
   QString m_fileName;
-  std::unique_ptr<QtKaxAnalyzer> m_analyzer;
+  std::unique_ptr<mtx::gui::Util::KaxAnalyzer> m_analyzer;
 
   PageModel *m_model;
   PageBase *m_segmentinfoPage{};

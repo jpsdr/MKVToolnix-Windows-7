@@ -13,15 +13,14 @@
 
 #include "common/common_pch.h"
 
-#if defined(HAVE_QT)
-
 #include <QMessageBox>
 
 #include "common/qt.h"
-#include "common/qt_kax_analyzer.h"
-#include "common/qt_kax_analyzer.h"
+#include "mkvtoolnix-gui/util/kax_analyzer.h"
 
-QtKaxAnalyzer::QtKaxAnalyzer(QWidget *parent,
+namespace mtx::gui::Util {
+
+KaxAnalyzer::KaxAnalyzer(QWidget *parent,
                              QString const &fileName)
   : kax_analyzer_c{to_utf8(fileName)}
   , m_parent{parent}
@@ -29,14 +28,14 @@ QtKaxAnalyzer::QtKaxAnalyzer(QWidget *parent,
 }
 
 void
-QtKaxAnalyzer::show_progress_start(int64_t size) {
+KaxAnalyzer::show_progress_start(int64_t size) {
   m_size           = size;
   m_progressDialog = std::make_unique<QProgressDialog>(QY("The file is being analyzed."), QY("Cancel"), 0, 100, m_parent);
   m_progressDialog->setWindowModality(Qt::WindowModal);
 }
 
 bool
-QtKaxAnalyzer::show_progress_running(int percentage) {
+KaxAnalyzer::show_progress_running(int percentage) {
   if (!m_progressDialog)
     return false;
 
@@ -45,14 +44,14 @@ QtKaxAnalyzer::show_progress_running(int percentage) {
 }
 
 void
-QtKaxAnalyzer::show_progress_done() {
+KaxAnalyzer::show_progress_done() {
   if (m_progressDialog)
     m_progressDialog->setValue(100);
   m_progressDialog.reset();
 }
 
 void
-QtKaxAnalyzer::displayUpdateElementResult(QWidget *parent,
+KaxAnalyzer::displayUpdateElementResult(QWidget *parent,
                                           update_element_result_e result,
                                           QString const &message) {
   switch (result) {
@@ -109,4 +108,4 @@ QtKaxAnalyzer::displayUpdateElementResult(QWidget *parent,
   }
 }
 
-#endif  // HAVE_QT
+}

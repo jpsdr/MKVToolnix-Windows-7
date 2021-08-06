@@ -129,7 +129,7 @@ Tab::load() {
     return;
   }
 
-  m_analyzer = std::make_unique<QtKaxAnalyzer>(this, m_fileName);
+  m_analyzer = std::make_unique<Util::KaxAnalyzer>(this, m_fileName);
   bool ok    = false;
   QString error;
 
@@ -221,7 +221,7 @@ Tab::save() {
     if (segmentinfoModified && m_eSegmentInfo) {
       auto result = m_analyzer->update_element(m_eSegmentInfo, true);
       if (kax_analyzer_c::uer_success != result) {
-        QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified segment information header failed."));
+        Util::KaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified segment information header failed."));
         ok = false;
       }
     }
@@ -229,7 +229,7 @@ Tab::save() {
     if (ok && tracksModified && m_eTracks) {
       auto result = m_analyzer->update_element(m_eTracks, true);
       if (kax_analyzer_c::uer_success != result) {
-        QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified track headers failed."));
+        Util::KaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified track headers failed."));
         ok = false;
       }
     }
@@ -246,7 +246,7 @@ Tab::save() {
       attachments->RemoveAll();
 
       if (kax_analyzer_c::uer_success != result) {
-        QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified attachments failed."));
+        Util::KaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified attachments failed."));
         ok = false;
       }
     }
@@ -255,7 +255,7 @@ Tab::save() {
       auto result = m_analyzer->update_uid_referrals(trackUIDChanges);
 
       if (kax_analyzer_c::uer_success != result) {
-        QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified attachments failed."));
+        Util::KaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified attachments failed."));
         ok = false;
       }
     }

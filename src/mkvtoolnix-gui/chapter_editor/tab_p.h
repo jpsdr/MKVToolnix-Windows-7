@@ -11,7 +11,7 @@ class TabPrivate {
   std::unique_ptr<Ui::Tab> ui;
 
   QString fileName, originalFileName;
-  std::unique_ptr<QtKaxAnalyzer> analyzer;
+  std::unique_ptr<mtx::gui::Util::KaxAnalyzer> analyzer;
   QDateTime fileModificationTime;
 
   ChapterModel *chapterModel;
