@@ -313,6 +313,15 @@ Settings::convertOldSettings() {
     reg->endGroup();
     reg->endGroup();
   }
+
+  // v60 changed default process priority to "lowest", which isn't a
+  // good idea; 60.0.0.18 amended it to "low".
+  if ((writtenByVersion >= version_number_t{"60.0.0.0"}) && (writtenByVersion < version_number_t{"60.0.0.18"})) {
+    reg->beginGroup(s_grpSettings);
+    if (reg->value(s_valPriority).toInt() == static_cast<int>(LowestPriority))
+      reg->setValue(s_valPriority, static_cast<int>(LowPriority));
+    reg->endGroup();
+  }
 }
 
 void
