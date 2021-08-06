@@ -331,7 +331,7 @@ Settings::load() {
   std::optional<QVariant> enableMuxingTracksByTheseTypes;
 
   reg.beginGroup(s_grpSettings);
-  m_priority                                  = static_cast<ProcessPriority>(reg.value(s_valPriority,                                          static_cast<int>(LowestPriority)).toInt());
+  m_priority                                  = static_cast<ProcessPriority>(reg.value(s_valPriority,                                          static_cast<int>(LowPriority)).toInt());
   m_probeRangePercentage                      = reg.value(s_valProbeRangePercentage,                                                           0.3).toDouble();
   m_tabPosition                               = static_cast<QTabWidget::TabPosition>(reg.value(s_valTabPosition,                               static_cast<int>(QTabWidget::North)).toInt());
   m_elideTabHeaderLabels                      = reg.value(s_valElideTabHeaderLabels,                                                           defaultElideTabHeaderLabels).toBool();

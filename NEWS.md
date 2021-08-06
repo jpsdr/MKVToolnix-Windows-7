@@ -8,6 +8,11 @@
 * MKVToolNix GUI: multiplexer: deriving track languages from file names: the
   GUI can now detect full BCP 47/RFC 5646 language tags in file names. Part of
   the implementation of #3173.
+* MKVToolNix GUI: multiplexer: the GUI now defaults to the "lower" process
+  priority setting for new installations in order to leave more room for other
+  applications, especially interactive ones. Up to and including v59 the
+  default was the "normal" process priority. v60 changed that to "lowest",
+  which turned out to be much slower on Windows for no real gain over "lower".
 
 ## Bug fixes
 
