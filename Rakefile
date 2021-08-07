@@ -870,22 +870,22 @@ namespace :dev do
     puts prereqs.map { |p| sprintf("%-#{longest}s => %s", p[0], p[1].sort.join(" ")) }.join("\n")
   end
 
-  desc "Create iso639_language_list.cpp from system ISO code list"
+  desc "Create iso639_language_list.cpp from online ISO code lists"
   task :iso639_list do
     create_iso639_language_list_file
   end
 
-  desc "Create iso3166_country_list.cpp from system ISO code list"
+  desc "Create iso3166_country_list.cpp from online ISO & UN code lists"
   task :iso3166_list do
     create_iso3166_country_list_file
   end
 
-  desc "Create iso15924_script_list.cpp from official script list"
+  desc "Create iso15924_script_list.cpp from online ISO script list"
   task :iso15924_list do
     create_iso15924_script_list_file
   end
 
-  desc "Create iana_language_subtag_registry_list.cpp from official list"
+  desc "Create iana_language_subtag_registry_list.cpp from online IANA registry"
   task :iana_language_subtag_registry_list do
     Mtx::IANALanguageSubtagRegistry.create_cpp
   end
