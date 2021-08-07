@@ -21,6 +21,7 @@
 #include "common/iso639.h"
 #include "common/iso3166.h"
 #include "common/iso15924.h"
+#include "common/list_utils.h"
 #include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -28,6 +29,23 @@
 namespace mtx::bcp47 {
 
 bool language_c::ms_disabled = false;
+
+language_c::extension_t::extension_t(std::string const &singleton_,
+                                     std::vector<std::string> const &extensions_)
+  : singleton{singleton_}
+  , extensions{extensions_}
+{
+}
+
+std::string
+language_c::extension_t::format()
+  const noexcept {
+  if (singleton.empty() || extensions.empty())
+    return {};
+  return fmt::format("{0}-{1}", singleton, mtx::string::join(extensions, "-"));
+}
+
+// ------------------------------------------------------------
 
 void
 language_c::clear()
@@ -105,7 +123,7 @@ language_c::format_internal(bool force)
     output += fmt::format("-{}", mtx::string::to_lower_ascii(variant));
 
   for (auto const &extension : m_extensions)
-    output += fmt::format("-{}", mtx::string::to_lower_ascii(extension));
+    output += fmt::format("-{}", mtx::string::to_lower_ascii(extension.format()));
 
   if (!m_private_use.empty()) {
     if (!output.empty())
@@ -226,6 +244,21 @@ language_c::parse_extlangs_or_variants(std::string const &str,
 }
 
 bool
+language_c::parse_extensions(std::string const &str) {
+  if (str.empty())
+    return true;
+
+  for (auto &part : mtx::string::split(mtx::string::to_lower_ascii(str.substr(1)), "-"s))
+    if (part.size() == 1)
+      m_extensions.emplace_back(part, std::vector<std::string>{});
+
+    else
+      m_extensions.back().extensions.emplace_back(part);
+
+  return validate_extensions();
+}
+
+bool
 language_c::matches_prefix(language_c const &prefix,
                            std::size_t extlang_or_variant_index,
                            bool is_extlang,
@@ -325,6 +358,38 @@ language_c::validate_extlangs_or_variants(bool is_extlangs) {
   return true;
 }
 
+bool
+language_c::validate_extensions() {
+  if (m_extensions.empty())
+    return true;
+
+  if (m_language.empty()) {
+    m_parser_error = Y("Extension subtags must follow at least a primary language subtag.");
+    return false;
+  }
+
+  std::map<std::string, bool> singletons_seen;
+
+  for (auto const &extension : m_extensions) {
+    if (singletons_seen[extension.singleton]) {
+      m_parser_error = Y("Each extension identifier must be used at most once.");
+      return false;
+    }
+
+    singletons_seen[extension.singleton] = true;
+
+    // As of 2021-08-07 the IANA language tag extensions registry at
+    // https://www.iana.org/assignments/language-tag-extensions-registry/language-tag-extensions-registry
+    // only contains the following registered singletons:
+    if (!mtx::included_in(extension.singleton, "t"s, "u"s)) {
+      m_parser_error = fmt::format(Y("The value '{0}' is not a registered IANA language tag identifier."), extension.singleton);
+      return false;
+    }
+  }
+
+  return true;
+}
+
 language_c
 language_c::parse(std::string const &language) {
   init_re();
@@ -370,10 +435,8 @@ language_c::parse(std::string const &language) {
   if (matches.capturedLength(7) && !l.parse_extlangs_or_variants(to_utf8(matches.captured(7)), false))
     return l;
 
-  if (matches.capturedLength(8)) {
-    l.m_parser_error = Y("Language tag extensions are currently not supported.");
+  if (matches.capturedLength(8) && !l.parse_extensions(to_utf8(matches.captured(8))))
     return l;
-  }
 
   if (matches.capturedLength(9))
     l.m_private_use = mtx::string::split(to_utf8(matches.captured(9)).substr(1), "-");
@@ -462,8 +525,26 @@ language_c::set_variants(std::vector<std::string> const &variants) {
 }
 
 language_c &
-language_c::set_extensions(std::vector<std::string> const &extensions) {
-  m_extensions           = mtx::string::to_lower_ascii(extensions);
+language_c::set_extensions(std::vector<extension_t> const &extensions) {
+  m_extensions.clear();
+  m_extensions.reserve(extensions.size());
+
+  for (auto const &extension : extensions)
+    add_extension(extension);
+
+  return *this;
+}
+
+language_c &
+language_c::add_extension(extension_t const &extension) {
+  std::vector<std::string> extensions_lower;
+  extensions_lower.reserve(extension.extensions.size());
+
+  for (auto const &extension_subtag : extension.extensions)
+    extensions_lower.emplace_back(mtx::string::to_lower_ascii(extension_subtag));
+
+  m_extensions.emplace_back(extension_t{ mtx::string::to_lower_ascii(extension.singleton), extensions_lower });
+
   m_formatted_up_to_date = false;
 
   return *this;
@@ -507,7 +588,7 @@ language_c::get_variants()
   return m_variants;
 }
 
-std::vector<std::string> const &
+std::vector<language_c::extension_t> const &
 language_c::get_extensions()
   const noexcept {
   return m_extensions;

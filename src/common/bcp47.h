@@ -18,6 +18,16 @@
 namespace mtx::bcp47 {
 
 class language_c {
+public:
+  struct extension_t {
+    std::string singleton;
+    std::vector<std::string> extensions;
+
+    extension_t(std::string const &singleton_, std::vector<std::string> const &extensions_);
+
+    std::string format() const noexcept;
+  };
+
 protected:
   struct prefix_restrictions_t {
     bool language{}, extended_language_subtags{}, script{}, region{}, variants{};
@@ -28,7 +38,7 @@ protected:
   std::string m_script;                                 // ISO 15924 code
   std::string m_region;                                 // either ISO 3166-1 code or UN M.49 code
   std::vector<std::string> m_variants;                  // registered variants
-  std::vector<std::string> m_extensions;
+  std::vector<extension_t> m_extensions;
   std::vector<std::string> m_private_use;
 
   bool m_valid{false};
@@ -62,25 +72,29 @@ public:
   language_c &set_script(std::string const &script);
   language_c &set_region(std::string const &region);
   language_c &set_variants(std::vector<std::string> const &variants);
-  language_c &set_extensions(std::vector<std::string> const &extensions);
+  language_c &set_extensions(std::vector<extension_t> const &extensions);
   language_c &set_private_use(std::vector<std::string> const &private_use);
+
+  language_c &add_extension(extension_t const &extensions);
 
   std::string const &get_language() const noexcept;
   std::vector<std::string> const &get_extended_language_subtags() const noexcept;
   std::string const &get_script() const noexcept;
   std::string const &get_region() const noexcept;
   std::vector<std::string> const &get_variants() const noexcept;
-  std::vector<std::string> const &get_extensions() const noexcept;
+  std::vector<extension_t> const &get_extensions() const noexcept;
   std::vector<std::string> const &get_private_use() const noexcept;
 
 protected:
   std::string format_internal(bool force) const noexcept;
 
   bool parse_language(std::string const &code);
+  bool parse_extensions(std::string const &str);
   bool parse_script(std::string const &code);
   bool parse_region(std::string const &code);
   bool parse_extlangs_or_variants(std::string const &str, bool is_extlangs);
 
+  bool validate_extensions();
   bool validate_extlangs_or_variants(bool is_extlangs);
   bool validate_one_extlang_or_variant(std::size_t extlang_or_variant_index, bool is_extlang);
   bool matches_prefix(language_c const &prefix, std::size_t extlang_or_variant_index, bool is_extlang, prefix_restrictions_t const &restrictions) const noexcept;
@@ -93,6 +107,13 @@ public:
 };
 
 void init_re();
+
+inline std::ostream &
+operator<<(std::ostream &out,
+           language_c::extension_t const &extension) {
+  out << extension.format();
+  return out;
+}
 
 inline std::ostream &
 operator <<(std::ostream &out,

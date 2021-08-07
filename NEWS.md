@@ -16,6 +16,8 @@
   "lower". The setting will be auto-corrected by the GUI if the settings file
   were saved last with a version between v60.0.0.0 & v60.0.0.17 & "lowest" &
   it is still set to "lowest".
+* mkvmerge: IETF BCP 47/RFC 5646 language tags: implemented support for
+  officially registered IANA language tag extensions.
 
 ## Bug fixes
 

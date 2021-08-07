@@ -78,6 +78,14 @@ TEST(BCP47LanguageTags, Formatting) {
   EXPECT_EQ(""s,            l.format_long());
   EXPECT_EQ(""s,            l.format_long(false));
   EXPECT_EQ("x-weee-wooo"s, l.format_long(true));
+
+  l = mtx::bcp47::language_c{};
+  l.set_language("ja");
+  l.add_extension({ "t"s, { "test"s }});
+  l.add_extension({ "u"s, { "attr"s, "co"s, "phonebk"s, "attr"s, "zz"s, "oooqqq"s }});
+  l.set_valid(true);
+
+  EXPECT_EQ("ja-t-test-u-attr-co-phonebk-attr-zz-oooqqq"s, l.format());
 }
 
 TEST(BCP47LanguageTags, FormattingInvalidWithoutLanguage) {
@@ -292,6 +300,33 @@ TEST(BCP47LanguageTags, OnlyCertainScriptsAllowedOrNoScriptAtAll) {
   EXPECT_TRUE(mtx::bcp47::language_c::parse("sr-Latn-RS-ekavsk").is_valid());
 
   EXPECT_FALSE(mtx::bcp47::language_c::parse("sr-Bali-ekavsk").is_valid());
+}
+
+TEST(BCP47LanguageTags, ExtensionsBasics) {
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("ja-t-test").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("ja-t-abcdefgh").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("ja-t-test-u-attr-co-phonebk").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("ja-t-test-u-attr-co-phonebk-attr-zz-oooqqq").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("ja-u-attr-co-phonebk-t-test").is_valid());
+
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("ja-t").is_valid());                                  // Nothing following the singleton
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("ja-t-u-attr-co-phonebk").is_valid());                // No extension subtag within the t extension
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("ja-t-u-attr-co-phonebk").is_valid());                // No extension subtag within the t extension
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("ja-u-attr-co-phonebk-u-attr-zz-oooqqq").is_valid()); // Singleton occurring multiple times
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("ja-t-z").is_valid());                                // Extension subtag too short
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("ja-t-abcdefghi").is_valid());                        // Extension subtag too long
+
+  EXPECT_FALSE(mtx::bcp47::language_c::parse("ja-a-moo-cow").is_valid());                          // Singleton a is not registered at the moment
+}
+
+TEST(BCP47LanguageTags, ExtensionsRFC6067) {
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("de-DE-u-attr-co-phonebk").is_valid());
+}
+
+TEST(BCP47LanguageTags, ExtensionsRFC6497) {
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("und-Cyrl-t-und-latn-m0-ungegn-2007").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("und-Hebr-t-und-latn-m0-ungegn-1972").is_valid());
+  EXPECT_TRUE(mtx::bcp47::language_c::parse("ja-t-it-m0-xxx-v21a-2007").is_valid());
 }
 
 }
