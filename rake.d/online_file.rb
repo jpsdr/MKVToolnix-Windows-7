@@ -17,8 +17,8 @@ module Mtx::OnlineFile
 
       if %r{\.zip$}.match(file_name)
         require "zip"
-        Zip::ZipFile.open(file_name, :create => false) do |zip_file|
-          return zip_file.read(zip_file.entries.first)
+        Zip::File.open(file_name, :create => false) do |zip_file|
+          return zip_file.entries.reject { |entry| %r{/$}.match entry.name }.first.get_input_stream.read
         end
       end
 
