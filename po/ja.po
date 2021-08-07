@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-07-21 22:34+0200\n"
+"POT-Creation-Date: 2021-08-07 17:11+0200\n"
 "PO-Revision-Date: 2020-09-02 18:12+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Japanese (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ja/)\n"
@@ -1826,7 +1826,7 @@ msgstr "引数のエスケープ(&E)"
 msgid "&Expand all"
 msgstr "全て展開(&E)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:339
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:364
 #, no-c-format
 msgid "&Extended subtags:"
 msgstr ""
@@ -1856,7 +1856,7 @@ msgstr "再ナンバリングする最初のエントリ：(&F)"
 msgid "&Font && size:"
 msgstr "フォントとサイズ(&F)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:333
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:356
 #, no-c-format
 msgid "&Free-form input"
 msgstr ""
@@ -1887,7 +1887,7 @@ msgstr ""
 msgid "&Hidden"
 msgstr "隠し"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:334
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:357
 #, fuzzy, no-c-format
 msgid "&Individually selected components"
 msgstr "選択した添付ファイルを有効化(&E)"
@@ -1922,7 +1922,7 @@ msgstr "置き換えるチャプタ名の言語：(&L)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:195
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1796
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:341
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:359
 #, no-c-format
 msgid "&Language:"
 msgstr "言語：(&L)"
@@ -2097,12 +2097,12 @@ msgstr "ジョブの出力を保存"
 msgid "&Previous multiplex settings"
 msgstr "新しいMUX設定のデフォルト値"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:338
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:361
 #, no-c-format
 msgid "&Private use:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:340
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:358
 #, no-c-format
 msgid "&Region:"
 msgstr ""
@@ -2199,7 +2199,7 @@ msgstr "他のプレイリストがないかディレクトリをスキャン(&S
 msgid "&Scan for other playlists"
 msgstr "他のプレイリストがないかスキャンします(&S)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:336
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:366
 #, fuzzy, no-c-format
 msgid "&Script:"
 msgstr "説明(&D)"
@@ -2289,7 +2289,7 @@ msgstr "セグメント情報"
 msgid "&Validate values"
 msgstr "値を検証(&V)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:342
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:360
 #, no-c-format
 msgid "&Variants:"
 msgstr ""
@@ -2761,7 +2761,7 @@ msgstr "'{0}'トラック{1}：{2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "'{0}'：後続のファイルを同様に処理しています：{1}\n"
 
-#: src/input/r_matroska.cpp:1935
+#: src/input/r_matroska.cpp:1936
 #, fuzzy, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'{0}'：実験的モードでMUXされたOpusのトラックを再MUXしようとしています。出力されるトラックは最終的なモードで上書きされますが、実験的モードでMUXされたトラックからは詳細情報が1つ回復不能になります。エンドトリミングがそれです。これは、デコーダーの出力が元々意図されていたよりも数サンプル多くなる可能性があるということを意味します。もし可能であれば、オリジナルのOpusファイルから再MUXしてください。\n"
@@ -2926,8 +2926,8 @@ msgstr "<未保存のファイル>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "位置{2}において、<{0}>は<{1}>の有効な子要素ではありません。"
 
-#: src/input/r_matroska.cpp:2379
-#: src/input/r_matroska.cpp:2488
+#: src/input/r_matroska.cpp:2385
+#: src/input/r_matroska.cpp:2494
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "トラック番号{1}のタイムスタンプ{0}でブロックが見つかりましが、そのトラック番号のヘッダが見つかりませんでした。このブロックはスキップされます。\n"
@@ -2952,7 +2952,7 @@ msgstr "何フレーム・フィールド後に分割するかの、コンマで
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "保持する内容のタイムコードの範囲の、コンマで区切られたリストです。"
 
-#: src/input/r_matroska.cpp:747
+#: src/input/r_matroska.cpp:748
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr ""
@@ -3048,7 +3048,7 @@ msgid "A&udio file:"
 msgstr "ファイルを追加 (&A)"
 
 #: src/common/file_types.cpp:73
-#: src/output/p_aac.h:47
+#: src/output/p_aac.h:46
 #, no-c-format
 msgid "AAC"
 msgstr "AAC"
@@ -3069,12 +3069,12 @@ msgid "AAC with ADIF headers"
 msgstr "ADIFヘッダつきのAAC"
 
 #: src/common/file_types.cpp:74
-#: src/output/p_ac3.h:44
+#: src/output/p_ac3.h:43
 #, no-c-format
 msgid "AC-3"
 msgstr "AC-3"
 
-#: src/output/p_alac.h:33
+#: src/output/p_alac.h:31
 #, no-c-format
 msgid "ALAC"
 msgstr "ALAC"
@@ -3094,7 +3094,7 @@ msgstr "ALACのプライベートデータが一致しません\n"
 msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "ASCII文字列（日本語やウムラウトなどの特殊な文字は不可です）"
 
-#: src/output/p_av1.h:35
+#: src/output/p_av1.h:33
 #, fuzzy, no-c-format
 msgid "AV1"
 msgstr "AVI"
@@ -3105,12 +3105,12 @@ msgid "AV1 Open Bitstream Units stream"
 msgstr ""
 
 #: src/common/file_types.cpp:76
-#: src/output/p_avc.h:34
+#: src/output/p_avc.h:33
 #, no-c-format
 msgid "AVC/H.264"
 msgstr "AVC/H.264"
 
-#: src/output/p_avc_es.h:40
+#: src/output/p_avc_es.h:39
 #, no-c-format
 msgid "AVC/H.264 (unframed)"
 msgstr "AVC/H.264 (unframed)"
@@ -4234,7 +4234,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/output/p_mpeg4_p2.cpp:110
+#: src/output/p_mpeg4_p2.cpp:113
 #, no-c-format
 msgid "Cannot convert non-native MPEG4 video frames into native ones if the source container provides neither timestamps nor a number of frames per second.\n"
 msgstr "ソースコンテナがタイムコードもfpsも供給しない場合、ネイティブでないMPEG4ビデオをネイティブに変換することはできません。\n"
@@ -4352,7 +4352,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "最初に作成されるエントリのチャプタ番号：(&N)"
 
 #: src/common/chapters/chapters.cpp:57
-#: src/mkvtoolnix-gui/util/settings.cpp:406
+#: src/mkvtoolnix-gui/util/settings.cpp:425
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Chapter <NUM:2>"
@@ -4876,7 +4876,7 @@ msgstr "オーディオトラック{0}のインデックスを見つけられま
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "追加結合時にgptzrを見つけられませんでした。{0}\n"
 
-#: src/output/p_mpeg4_p2.cpp:173
+#: src/output/p_mpeg4_p2.cpp:174
 #, no-c-format
 msgid "Could not find the codec configuration data in the first MPEG-4 part 2 video frame. This track cannot be stored in native mode.\n"
 msgstr "最初のMPEG-4 part 2ビデオフレームのコーデック設定データを見つけられませんでした。このトラックをネイティブモードで格納することはできません。\n"
@@ -4901,7 +4901,7 @@ msgstr "UTF-8から{0}へ変換するためにiconvライブラリを初期化�
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "{0}からUTF-8へ変換するためにiconvライブラリを初期化することができませんでした。UTF-8に変換されない文字列が存在し、そのためMatroskaファイルはMatroskaの仕様から外れてしまうかもしれません（エラー：{1}、{2}）。\n"
 
-#: src/input/r_matroska.cpp:1716
+#: src/input/r_matroska.cpp:1717
 #, fuzzy, no-c-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "matroska_reade：新しいファイルに既に割り当てられているため、トラックUID {0}を保持することができませんでした。\n"
@@ -5266,7 +5266,7 @@ msgid "D&uplicate selected edition or chapter"
 msgstr "選択したエディションまたはチャプターを複製する(&U)"
 
 #: src/common/file_types.cpp:83
-#: src/output/p_dts.h:48
+#: src/output/p_dts.h:47
 #, no-c-format
 msgid "DTS"
 msgstr "DTS"
@@ -5286,7 +5286,7 @@ msgstr "DTS/DTS-HD (Digital Theater System)"
 msgid "DV video format"
 msgstr "DVビデオフォーマット"
 
-#: src/output/p_dvbsub.h:29
+#: src/output/p_dvbsub.h:28
 #, fuzzy, no-c-format
 msgid "DVB subtitles"
 msgstr "HD-DVD字幕"
@@ -5572,7 +5572,7 @@ msgstr "全ての添付ファイルを無効化(&S)"
 
 #: src/common/file_types.cpp:33
 #: src/common/file_types.cpp:82
-#: src/output/p_dirac.h:37
+#: src/output/p_dirac.h:36
 #, no-c-format
 msgid "Dirac"
 msgstr "Dirac"
@@ -5861,6 +5861,11 @@ msgstr "終了(&E)"
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr "チャプタの開始及び終了のタイムコードを拡張し、全てのサブチャプタの最小・最大のタイムコードが含まれるようにします"
 
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:367
+#, fuzzy, no-c-format
+msgid "E&xtensions:"
+msgstr "例外の詳細："
+
 #: src/common/kax_element_names.cpp:82
 #, no-c-format
 msgid "EBML CRC-32"
@@ -5891,6 +5896,11 @@ msgstr "EBMLバージョン：{0}"
 msgid "EBML void"
 msgstr "EBMLヘッダ"
 
+#: src/common/bcp47.cpp:375
+#, no-c-format
+msgid "Each extension identifier must be used at most once."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:198
 #, no-c-format
 msgid "Each file created contains one segment, and each segment has one segment UID."
@@ -5911,8 +5921,8 @@ msgstr "各範囲は、'-'を真ん中に置いた開始点と終了点のフレ
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
 msgstr "各範囲は、'-'を真ん中に置いた開始点と終了点のタイムコードで構成されます、例：'00:01:15-00:03:20'。"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:331
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:332
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:354
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:355
 #, fuzzy, no-c-format
 msgid "Edit language"
 msgstr "タグの言語"
@@ -6341,6 +6351,11 @@ msgstr "チャプタ情報をOGM toolsで使用されるシンプルフォーマ
 msgid "Extended subtags"
 msgstr ""
 
+#: src/common/bcp47.cpp:367
+#, no-c-format
+msgid "Extension subtags must follow at least a primary language subtag."
+msgstr ""
+
 #: src/extract/extract_cli_parser.cpp:82
 #, no-c-format
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -6352,13 +6367,13 @@ msgid "Extract the data to a raw file."
 msgstr "rawファイルへとデータを抽出します。"
 
 #: src/output/p_hevc.cpp:110
-#: src/output/p_hevc_es.cpp:126
+#: src/output/p_hevc_es.cpp:124
 #, no-c-format
 msgid "Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"
 msgstr "HEVCビデオデータからアスペクト比の情報を抽出し、表示解像度を{0}/{1}に設定しました。\n"
 
 #: src/output/p_avc.cpp:102
-#: src/output/p_avc_es.cpp:139
+#: src/output/p_avc_es.cpp:137
 #, no-c-format
 msgid "Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to {0}/{1}.\n"
 msgstr "MPEG-4 layer 10（AVC）ビデオデータからアスペクト比の情報を抽出し、表示解像度を{0}/{1}に設定しました。\n"
@@ -6368,7 +6383,7 @@ msgstr "MPEG-4 layer 10（AVC）ビデオデータからアスペクト比の情
 msgid "Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to {0}/{1}.\n"
 msgstr "MPEG-4 layer 2ビデオデータからアスペクト比の情報を抽出し、表示解像度を{0}/{1}に設定しました。\n"
 
-#: src/output/p_theora.cpp:72
+#: src/output/p_theora.cpp:71
 #, no-c-format
 msgid "Extracted the aspect ratio information from the Theora video headers and set the display dimensions to {0}/{1}.\n"
 msgstr "Theoraビデオヘッダからアスペクト比の情報を抽出し、表示解像度を{0}/{1}に設定しました。\n"
@@ -6394,7 +6409,7 @@ msgid "Extraction tool"
 msgstr "抽出ツール"
 
 #: src/common/file_types.cpp:85
-#: src/output/p_flac.h:38
+#: src/output/p_flac.h:37
 #, no-c-format
 msgid "FLAC"
 msgstr "FLAC"
@@ -6578,7 +6593,7 @@ msgstr "完了日時："
 msgid "First chapter name regardless of its language"
 msgstr "– 言語に関わらず最初のチャプタ名 –"
 
-#: src/common/bcp47.cpp:333
+#: src/common/bcp47.cpp:425
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr ""
@@ -6688,7 +6703,7 @@ msgstr "タイムコードスケール係数を指定された値に強制的に
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "非クローズドGOPで二つめの参照先がないBフレームが少なくとも1つ見つかりました。\n"
 
-#: src/common/bcp47.cpp:328
+#: src/common/bcp47.cpp:420
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr ""
@@ -6858,13 +6873,13 @@ msgstr "CUE参照状態：{0}"
 msgid "HD-DVD subtitles"
 msgstr "HD-DVD字幕"
 
-#: src/output/p_hdmv_pgs.h:38
+#: src/output/p_hdmv_pgs.h:37
 #, no-c-format
 msgid "HDMV PGS"
 msgstr "HDMV PGS"
 
 #: src/common/file_types.cpp:40
-#: src/output/p_hdmv_textst.h:30
+#: src/output/p_hdmv_textst.h:29
 #, fuzzy, no-c-format
 msgid "HDMV TextST"
 msgstr "HDMV PGS"
@@ -6876,12 +6891,12 @@ msgid "HDMV TextST subtitles"
 msgstr "テキスト字幕"
 
 #: src/common/file_types.cpp:88
-#: src/output/p_hevc.h:36
+#: src/output/p_hevc.h:35
 #, no-c-format
 msgid "HEVC/H.265"
 msgstr "HEVC/H.265"
 
-#: src/output/p_hevc_es.h:38
+#: src/output/p_hevc_es.h:37
 #, no-c-format
 msgid "HEVC/H.265 (unframed)"
 msgstr "HEVC/H.265 (unframed)"
@@ -7382,7 +7397,7 @@ msgstr ""
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr "追加結合を行う場合や新しい部分を追加する場合は、どのファイルに対して追加結合や追加を行うのかを選択する必要があります："
 
-#: src/output/p_textsubs.cpp:142
+#: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "終端以降に始まるエントリ（{0}）を無視します。\n"
@@ -7422,7 +7437,7 @@ msgstr "一定間隔：チャプターは一定間隔（例：30秒ごと）に�
 msgid "In the most compact layout the track properties are located to the right of the files and tracks lists in a scrollable single column."
 msgstr "最もコンパクトなレイアウトでは、トラックのプロパティはファイルの右に表示され、トラックはスクロール可能な1つの列に列挙されます。"
 
-#: src/input/r_real.cpp:545
+#: src/input/r_real.cpp:544
 #, no-c-format
 msgid "Inconsistent AAC audio packet (length: {0} != {1})\n"
 msgstr "矛盾したAACオーディオパケットです（length: {0} != {1}）\n"
@@ -7955,7 +7970,7 @@ msgstr "ジョブとジョブの出力"
 msgid "Jobs to execute:"
 msgstr "実行予定のジョブ："
 
-#: src/output/p_kate.h:39
+#: src/output/p_kate.h:38
 #, no-c-format
 msgid "Kate"
 msgstr "Kate（カラオケテキスト）"
@@ -8012,11 +8027,6 @@ msgstr "タグの言語 (IETF)"
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:53
 #, no-c-format
 msgid "Language selected below"
-msgstr ""
-
-#: src/common/bcp47.cpp:347
-#, no-c-format
-msgid "Language tag extensions are currently not supported."
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:278
@@ -8231,7 +8241,7 @@ msgid "MPEG transport streams"
 msgstr "MPEGトランスポートストリーム"
 
 #: src/common/file_types.cpp:93
-#: src/output/p_mp3.h:44
+#: src/output/p_mp3.h:43
 #, no-c-format
 msgid "MPEG-1/2 Audio Layer II/III"
 msgstr ""
@@ -8241,7 +8251,7 @@ msgstr ""
 msgid "MPEG-1/2 Audio Layer II/III elementary streams"
 msgstr "MPEGビデオエレメンタリストリーム"
 
-#: src/output/p_mpeg1_2.h:37
+#: src/output/p_mpeg1_2.h:35
 #, fuzzy, no-c-format
 msgid "MPEG-1/2 video"
 msgstr "MPEG-1/2"
@@ -8256,7 +8266,7 @@ msgstr "MPEGビデオエレメンタリストリーム"
 msgid "MPEG-1/2 video elementary streams"
 msgstr "MPEGビデオエレメンタリストリーム"
 
-#: src/output/p_mpeg4_p2.h:64
+#: src/output/p_mpeg4_p2.h:62
 #, no-c-format
 msgid "MPEG-4"
 msgstr "MPEG-4"
@@ -8276,13 +8286,13 @@ msgstr "ファイルの最大分割数："
 msgid "Make this track eligible to be played by default."
 msgstr ""
 
-#: src/input/r_matroska.cpp:1804
-#: src/input/r_matroska.cpp:1821
+#: src/input/r_matroska.cpp:1805
+#: src/input/r_matroska.cpp:1822
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "無効な形式のAACコーデック初期化データが見つかりました。\n"
 
-#: src/input/r_matroska.cpp:1814
+#: src/input/r_matroska.cpp:1815
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "無効な形式のコーデックID '{0}'です。\n"
@@ -8765,7 +8775,7 @@ msgstr "出力ファイル名が指定されなかったので、添付ファイ
 msgid "No disc library information was found."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:363
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:377
 #, fuzzy, no-c-format
 msgid "No error was found."
 msgstr "キューが見つかりませんでした。\n"
@@ -9332,7 +9342,7 @@ msgstr "オプション"
 msgid "Options:"
 msgstr "オプション："
 
-#: src/output/p_opus.h:37
+#: src/output/p_opus.h:36
 #, no-c-format
 msgid "Opus"
 msgstr "Opus"
@@ -9413,7 +9423,7 @@ msgstr "出力サンプル周波数：{0}"
 msgid "Overwrite existing file"
 msgstr "既存のファイルを上書き"
 
-#: src/output/p_pcm.h:46
+#: src/output/p_pcm.h:45
 #, no-c-format
 msgid "PCM"
 msgstr "PCM"
@@ -9443,7 +9453,7 @@ msgstr "パケット番号{0}は無効なFLACヘッダを含んでいるため�
 msgid "Parse the whole file instead of relying on the index."
 msgstr "インデックスを信頼する代わりにファイルの全体を解析します。"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:346
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:370
 #, no-c-format
 msgid "Parser error:"
 msgstr ""
@@ -9696,7 +9706,7 @@ msgstr ""
 msgid "Private use"
 msgstr ""
 
-#: src/output/p_prores.h:28
+#: src/output/p_prores.h:26
 #, no-c-format
 msgid "ProRes video"
 msgstr ""
@@ -10006,7 +10016,7 @@ msgstr "指定されたファイルから追加のコマンドラインオプシ
 msgid "Real output sampling frequency in Hz."
 msgstr "実際の出力サンプリング周波数（Hz単位）です。"
 
-#: src/output/p_realaudio.h:33
+#: src/output/p_realaudio.h:32
 #, no-c-format
 msgid "RealAudio"
 msgstr "RealAudio"
@@ -10352,6 +10362,7 @@ msgid "SSA/ASS subtitles"
 msgstr "SSA/ASS字幕"
 
 #: src/common/file_types.cpp:57
+#: src/output/p_ssa.h:28
 #, no-c-format
 msgid "SSA/ASS text subtitles"
 msgstr "SSA/ASSテキスト字幕"
@@ -10815,12 +10826,12 @@ msgstr "設定"
 msgid "Settings for saving output to a text file"
 msgstr ""
 
-#: src/input/r_real.cpp:525
+#: src/input/r_real.cpp:524
 #, no-c-format
 msgid "Short AAC audio packet (length: {0} < 2)\n"
 msgstr "短いAACオーディオパケットです（長さ：{0} < 2）\n"
 
-#: src/input/r_real.cpp:532
+#: src/input/r_real.cpp:531
 #, no-c-format
 msgid "Short AAC audio packet (length: {0} < {1})\n"
 msgstr "短いAACオーディオパケットです（長さ：{0} < {1}）\n"
@@ -11193,7 +11204,7 @@ msgstr "開始日時："
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr "トラック番号{0}の統計情報: ブロックの数: {1}；サイズ（バイト）: {2}; 持続時間（秒）: {3}; おおよそのビットレート（ビット/秒）: {4}\n"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:344
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:368
 #: src/mkvtoolnix-gui/jobs/model.cpp:50
 #, no-c-format
 msgid "Status"
@@ -11201,7 +11212,7 @@ msgstr "ステータス"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:207
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:160
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:345
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:369
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:289
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:182
 #, no-c-format
@@ -11305,7 +11316,7 @@ msgid "System information"
 msgstr "システム情報"
 
 #: src/common/file_types.cpp:105
-#: src/output/p_tta.h:33
+#: src/output/p_tta.h:32
 #, no-c-format
 msgid "TTA"
 msgstr "TTA"
@@ -11445,7 +11456,7 @@ msgstr ".idxファイルが言語を示す'id: ...'の行を含んでいませ�
 msgid "The AAC file '{0}' contains invalid header data: the sampling frequency or the number of channels is 0.\n"
 msgstr ""
 
-#: src/output/p_aac.cpp:143
+#: src/output/p_aac.cpp:141
 #, no-c-format
 msgid "The AAC profiles are different: {0} and {1}"
 msgstr "AACプロファイルが異なっています：{0}と{1}"
@@ -11570,12 +11581,12 @@ msgstr "Theora判別ヘッダが解析できませんでした（{0}）。\n"
 msgid "The UID must not be left empty."
 msgstr "UIDを空白のままにすることはできません。"
 
-#: src/input/r_matroska.cpp:746
+#: src/input/r_matroska.cpp:747
 #, no-c-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr ""
 
-#: src/output/p_vorbis.cpp:128
+#: src/output/p_vorbis.cpp:126
 #, no-c-format
 msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated without re-encoding."
 msgstr "Vorbisコードブックが異なっています。そのようなトラックは再エンコードしないと連結することはできません。"
@@ -11759,7 +11770,7 @@ msgstr "コーデックタイプ'{0}'はWebMの規格に準拠したファイル
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "コーデックのプライベートデータが一致しません（長さ：{0}と{1}）。"
 
-#: src/output/p_avc.cpp:130
+#: src/output/p_avc.cpp:128
 #, no-c-format
 msgid "The codec's private data does not match. Both have the same length ({0}) but different content."
 msgstr "コーデックのプライベートデータが一致しません。両者は長さは同じですが（{0}）内容が異なります。"
@@ -11955,7 +11966,7 @@ msgstr "終了時間は開始のタイムコードよりも大きい必要があ
 msgid "The entries in the 'selected' list on the right will be shown at the top of all the drop-down boxes with countries and regions in the program."
 msgstr "ここで選択した国はプログラムの全ての文字セットドロップダウンボックスで一番上に表示されます。"
 
-#: src/common/bcp47.cpp:283
+#: src/common/bcp47.cpp:343
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr ""
@@ -12251,8 +12262,8 @@ msgstr "ファイルもしくはディレクトリが見つかりませんでし
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1612
-#: src/input/r_matroska.cpp:2348
+#: src/input/r_matroska.cpp:1613
+#: src/input/r_matroska.cpp:2354
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "ファイルはこれ以上処理されません。"
@@ -12422,12 +12433,12 @@ msgstr "ここで選択した言語は、ソースファイルにそのような
 msgid "The language set here is also used when chapters are generated."
 msgstr "ここ指定した言語はチャプタ生成の際にも使用されます。"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:349
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:363
 #, fuzzy, no-c-format
 msgid "The language tag is not valid."
 msgstr "空のファイル名は無効です。\n"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:349
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:363
 #, fuzzy, no-c-format
 msgid "The language tag is valid."
 msgstr "検出範囲の割合'{0}'は無効です。\n"
@@ -12467,7 +12478,7 @@ msgstr "デフォルトで設定するトラックの言語"
 msgid "The list of recognized track languages in file names must not be empty."
 msgstr ""
 
-#: src/common/translation.cpp:415
+#: src/common/translation.cpp:410
 #, no-c-format
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
 msgstr "ロケールを正しく設定することができませんでした。環境変数LANG・LC_ALL・LC_MESSAGESを確認してください。\n"
@@ -12760,7 +12771,7 @@ msgstr "セグメントUIDを解析できませんでした：%1"
 msgid "The segment edition UID must be a positive number if given."
 msgstr "指定する場合は、セグメントエディションUIDは正の数である必要があります。"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:354
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:368
 #, no-c-format
 msgid "The selected language code '%1' is not an ISO 639-2 code. Players that only support the legacy Matroska language elements but not the IETF BCP 47 language elements will therefore display a different language such as 'und' (undetermined)."
 msgstr ""
@@ -13012,32 +13023,37 @@ msgstr "ユーザーはどのプレイリストを実際に追加するかを選
 msgid "The value '{0}' is not a number.\n"
 msgstr "値「{0}」は数字ではありません。\n"
 
-#: src/common/bcp47.cpp:159
+#: src/common/bcp47.cpp:385
+#, fuzzy, no-c-format
+msgid "The value '{0}' is not a registered IANA language tag identifier."
+msgstr "'{0}'は有効なISO 639-2言語コードではありません。"
+
+#: src/common/bcp47.cpp:177
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid ISO 15924 script code."
 msgstr "'{0}'は有効なISO 639-2言語コードではありません。"
 
-#: src/common/bcp47.cpp:173
+#: src/common/bcp47.cpp:191
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid ISO 3166-1 country code."
 msgstr "'{0}'は有効なccTLD国コードではありません。"
 
-#: src/common/bcp47.cpp:146
+#: src/common/bcp47.cpp:164
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid ISO 639 language code."
 msgstr "'{0}'は有効なISO 639-2言語コードではありません。"
 
-#: src/common/bcp47.cpp:191
+#: src/common/bcp47.cpp:209
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid UN M.49 country number code."
 msgstr "'{0}'は有効なccTLD国コードではありません。"
 
-#: src/common/bcp47.cpp:213
+#: src/common/bcp47.cpp:231
 #, no-c-format
 msgid "The value '{}' is not part of the IANA Language Subtag Registry for extended language subtags."
 msgstr ""
 
-#: src/common/bcp47.cpp:214
+#: src/common/bcp47.cpp:232
 #, no-c-format
 msgid "The value '{}' is not part of the IANA Language Subtag Registry for language variants."
 msgstr ""
@@ -13059,7 +13075,7 @@ msgstr "値は浮動小数点数（例：12.345）または整数値の分数（
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "値は負の数でも構いませんが、この計算後にタイムスタンプが負であるフレームは全て削除されることに注意してください。"
 
-#: src/common/bcp47.cpp:310
+#: src/common/bcp47.cpp:402
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr ""
@@ -13075,7 +13091,7 @@ msgstr "この値はトラックのヘッダーに格納されるのみです。
 msgid "The values will be available for easy selection in the multiplexer."
 msgstr ""
 
-#: src/common/bcp47.cpp:284
+#: src/common/bcp47.cpp:344
 #, no-c-format
 msgid "The variant '{}' must only be used with one of the following prefixes: {}."
 msgstr ""
@@ -13095,7 +13111,7 @@ msgstr ""
 msgid "The width of the two tracks is different: {0} and {1}"
 msgstr "2つのトラック間で横解像度が異なっています：{0}と{1}"
 
-#: src/output/p_theora.h:27
+#: src/output/p_theora.h:26
 #, no-c-format
 msgid "Theora"
 msgstr "Theora"
@@ -13177,17 +13193,17 @@ msgstr "このAACトラックは有効なヘッダを含んでいません。AAC
 msgid "This AC-3 track contains {0} bytes of non-AC-3 data at the beginning. This corresponds to a delay of {1}ms. This delay will be used instead of the non-AC-3 data.\n"
 msgstr "このAC-3トラックは{0}バイトのAC-3ではないデータを含んでいます。これは{1}ミリ秒のディレイに相当します。AC-3ではないデータの代わりにこのディレイが使用されます。\n"
 
-#: src/output/p_avc_es.cpp:108
+#: src/output/p_avc_es.cpp:106
 #, no-c-format
 msgid "This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"
 msgstr "このAVC/H.264トラックはキーフレームで始まっていません。最初の{0}フレームはスキップされました。\n"
 
-#: src/output/p_avc_es.cpp:118
+#: src/output/p_avc_es.cpp:116
 #, no-c-format
 msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
 msgstr "このAVC・H.264トラックのタイミング情報は、可変フレームレートを使用していることを示しています。しかし、そのためのデフォルトの継続時間や外部んぼタイムコードファイルが提供されておらず、ソースコンテナもタイムコードを提供していません。その結果生成されるタイムコードは役に立たない可能性があります。\n"
 
-#: src/output/p_hevc_es.cpp:105
+#: src/output/p_hevc_es.cpp:103
 #, no-c-format
 msgid "This HEVC track does not start with a key frame. The first {0} frames have been skipped.\n"
 msgstr "このHEVCトラックはキーフレームで始まっていません。最初の{0}フレームはスキップされました。\n"
@@ -13474,7 +13490,7 @@ msgid "This template will be used for new chapter entries."
 msgstr "このテンプレートは新しいチャプタエントリに使用されます。"
 
 #: src/input/subtitles.cpp:68
-#: src/output/p_textsubs.cpp:130
+#: src/output/p_textsubs.cpp:128
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr ""
@@ -13487,8 +13503,8 @@ msgstr "このトラックにはSBR AAC/HE-AAC/AAC+が含まれています。"
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1612
-#: src/input/r_matroska.cpp:2348
+#: src/input/r_matroska.cpp:1613
+#: src/input/r_matroska.cpp:2354
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "これは通常ファイル構造が損傷していることを意味します。"
@@ -13660,7 +13676,7 @@ msgstr "トラック{0}のCodecPrivateが小さすぎます。\n"
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr "トラック{0}は未知もしくはサポートされていない圧縮アルゴリズム（{1}）で圧縮されています。\n"
 
-#: src/input/r_matroska.cpp:1281
+#: src/input/r_matroska.cpp:1282
 #, no-c-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "トラック{0}には、Matroskaの仕様上は必須のトラックUID要素がありません。ファイルにタグが含まれている場合、そのタグは壊れている可能性があります。\n"
@@ -13765,7 +13781,7 @@ msgid "Tracks:"
 msgstr "トラック："
 
 #: src/common/file_types.cpp:104
-#: src/output/p_truehd.h:42
+#: src/output/p_truehd.h:41
 #, no-c-format
 msgid "TrueHD"
 msgstr "TrueHD"
@@ -13952,7 +13968,7 @@ msgstr "サポートされていないMPEGバージョンです：0x{0:02x}（�
 msgid "Unsupported file format"
 msgstr "サポートされていないフォーマット"
 
-#: src/input/r_matroska.cpp:2164
+#: src/input/r_matroska.cpp:2170
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "このトラックはサポートされているトラックタイプではありません。\n"
@@ -14049,7 +14065,7 @@ msgstr "最初に見つかったチャプタ名ではなく、指定した言語
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "フォーマット'{0}'のデマルチプレクサを使用しています。\n"
 
-#: src/input/r_matroska.cpp:1639
+#: src/input/r_matroska.cpp:1640
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "トラックタイプ'{0}'の一般的出力モジュールを使用しています。\n"
@@ -14065,7 +14081,7 @@ msgid "Using the track with the ID {0} from the file '{1}' as the reference for 
 msgstr "ファイル「{1}」のID {0}のトラックをチャプタ生成のリファレンスとして使用します。\n"
 
 #: src/common/file_types.cpp:107
-#: src/output/p_vc1.h:36
+#: src/output/p_vc1.h:35
 #, no-c-format
 msgid "VC-1"
 msgstr "VC-1"
@@ -14075,7 +14091,7 @@ msgstr "VC-1"
 msgid "VC-1 elementary streams"
 msgstr "VC-1エレメンタリストリーム"
 
-#: src/output/p_vpx.h:34
+#: src/output/p_vpx.h:33
 #, no-c-format
 msgid "VP8/VP9"
 msgstr "VP8/VP9"
@@ -14145,7 +14161,7 @@ msgstr "Cue relative position: {0}"
 msgid "Vertical chroma subsample"
 msgstr "サンプルあたりビット数：{0}"
 
-#: src/output/p_video_for_windows.h:37
+#: src/output/p_video_for_windows.h:36
 #, no-c-format
 msgid "VfW compatible video"
 msgstr "VfW互換ビデオ"
@@ -14216,7 +14232,7 @@ msgstr "横解像度（ピクセル）"
 msgid "Video interlaced flag"
 msgstr "ビデオインターレース化フラグ"
 
-#: src/input/r_real.cpp:587
+#: src/input/r_real.cpp:586
 #, no-c-format
 msgid "Video packet assembly failed. Error code: {0} ({1})\n"
 msgstr "ビデオパケットアセンブリが落ちました。エラーコード：{0}（{1}）\n"
@@ -14400,7 +14416,7 @@ msgid "Visible"
 msgstr ""
 
 #: src/common/file_types.cpp:108
-#: src/output/p_vobbtn.h:35
+#: src/output/p_vobbtn.h:34
 #, no-c-format
 msgid "VobBtn"
 msgstr "VobBtn"
@@ -14411,7 +14427,7 @@ msgid "VobButtons"
 msgstr "VobButton"
 
 #: src/common/file_types.cpp:109
-#: src/output/p_vobsub.h:30
+#: src/output/p_vobsub.h:29
 #, no-c-format
 msgid "VobSub"
 msgstr "VobSub"
@@ -14421,7 +14437,7 @@ msgstr "VobSub"
 msgid "VobSub subtitles"
 msgstr "VobSub字幕"
 
-#: src/output/p_vorbis.h:54
+#: src/output/p_vorbis.h:53
 #, no-c-format
 msgid "Vorbis"
 msgstr "Vorbis"
@@ -14446,7 +14462,7 @@ msgstr "WAVPACK"
 msgid "WAVPACK v4 audio"
 msgstr "WAVPACK v4オーディオ"
 
-#: src/output/p_wavpack.h:36
+#: src/output/p_wavpack.h:35
 #, no-c-format
 msgid "WAVPACK4"
 msgstr "WAVPACK4"
@@ -14483,7 +14499,7 @@ msgstr "{0}行目で警告：開始時間のタイムコードが前のエント
 msgid "Warning:"
 msgstr "警告："
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:354
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:368
 #, fuzzy, no-c-format
 msgid "Warning: %1"
 msgstr "警告："
@@ -14518,7 +14534,7 @@ msgstr "WebMファイル"
 #: src/common/file_types.cpp:66
 #: src/common/file_types.cpp:112
 #: src/extract/xtr_webvtt.h:31
-#: src/output/p_webvtt.h:28
+#: src/output/p_webvtt.h:26
 #, no-c-format
 msgid "WebVTT subtitles"
 msgstr "WebVTT字幕"
@@ -14899,7 +14915,7 @@ msgstr "時間「HH」の数は省略することができます。"
 msgid "Zlib decompression failed. Result: {0}\n"
 msgstr "Zlib展開が失敗しました。結果：{0}\n"
 
-#: src/output/p_ac3.cpp:239
+#: src/output/p_ac3.cpp:237
 #, no-c-format
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer(): テストされていないコードです('size'が奇数)。mkvmergeがクラッシュしたり、出力されたファイルのオーディオトラックが完全で正しいものでなかった場合、作者 Moritz Bunkus に moritz@bunkus.org 宛で連絡をお願いします。\n"
@@ -14921,7 +14937,7 @@ msgstr "mkvextract attachments <入力ファイル名> [オプション] [AID1:�
 
 #: src/common/kax_info.cpp:667
 #: src/common/kax_info.cpp:843
-#: src/input/r_matroska.cpp:134
+#: src/input/r_matroska.cpp:135
 #, no-c-format
 msgid "audio"
 msgstr "オーディオ"
@@ -14953,7 +14969,7 @@ msgstr ""
 
 #: src/common/kax_info.cpp:670
 #: src/common/kax_info.cpp:846
-#: src/input/r_matroska.cpp:135
+#: src/input/r_matroska.cpp:136
 #, no-c-format
 msgid "buttons"
 msgstr "ボタン"
@@ -15120,7 +15136,7 @@ msgstr "mkvmergeが文字セットを正しく検出できない、チャプタ�
 msgid "for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)"
 msgstr "字幕ファイルがバイトオーダーマーク（BOM）を使用せず、またシステムの現在の文字セット（%1エンコードされてもいない場合"
 
-#: src/output/p_generic_video.h:36
+#: src/output/p_generic_video.h:35
 #, no-c-format
 msgid "generic video"
 msgstr "generic video"
@@ -15170,108 +15186,108 @@ msgstr "長さ {0}、データ：{1}"
 msgid "line {0}: The 'delay' timestamp could not be parsed.\n"
 msgstr "{0}行目：'delay'タイムスタンプを解析できませんでした。\n"
 
-#: src/input/r_matroska.cpp:417
+#: src/input/r_matroska.cpp:418
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader：（トラック{0}、MS互換モード）Matroskaによるとサンプル当たり{1}ビットですが、WAVEFORMATEXによると{2}ビットです。\n"
 
-#: src/input/r_matroska.cpp:408
+#: src/input/r_matroska.cpp:409
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader：（トラック{0}、MS互換モード）Matroskaによると{1}チャンネルありますが、WAVEFORMATEXによると{2}チャンネルです。\n"
 
-#: src/input/r_matroska.cpp:399
+#: src/input/r_matroska.cpp:400
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, but WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_reader：（トラック{0}、MS互換モード）Matroskaによると1秒当たり{1}サンプルですが、WAVEFORMATEXによると{2}サンプルです。\n"
 
-#: src/input/r_matroska.cpp:620
+#: src/input/r_matroska.cpp:621
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader：（トラック{0}、MS互換モード）Matroskaによるとビデオの縦解像度は{1}ですが、BITMAPINFOHEADERによると{2}です。\n"
 
-#: src/input/r_matroska.cpp:611
+#: src/input/r_matroska.cpp:612
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_reader：（トラック{0}、MS互換モード）Matroskaによるとビデオの横解像度は{1}ですが、BITMAPINFOHEADERによると{2}です。\n"
 
-#: src/input/r_matroska.cpp:1549
-#: src/input/r_matroska.cpp:1554
+#: src/input/r_matroska.cpp:1550
+#: src/input/r_matroska.cpp:1555
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_reader：セグメントが見つかりませんでした。\n"
 
-#: src/input/r_matroska.cpp:1230
+#: src/input/r_matroska.cpp:1231
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_reader：ピクセルの高さがありません。\n"
 
-#: src/input/r_matroska.cpp:1228
+#: src/input/r_matroska.cpp:1229
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_reader：ピクセルの幅がありません。\n"
 
-#: src/input/r_matroska.cpp:780
+#: src/input/r_matroska.cpp:781
 #, no-c-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr "matroska_reader：トラック{1}のコーデックID '{0}'は未知のものです。\n"
 
-#: src/input/r_matroska.cpp:432
-#: src/input/r_matroska.cpp:478
-#: src/input/r_matroska.cpp:501
-#: src/input/r_matroska.cpp:684
-#: src/input/r_matroska.cpp:694
-#: src/input/r_matroska.cpp:715
+#: src/input/r_matroska.cpp:433
+#: src/input/r_matroska.cpp:479
+#: src/input/r_matroska.cpp:502
+#: src/input/r_matroska.cpp:685
+#: src/input/r_matroska.cpp:695
+#: src/input/r_matroska.cpp:716
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader：トラック{0}のコーデックIDは'{1}'ですが、プライベートコーデックデータに有効なヘッダが含まれていません。\n"
 
-#: src/input/r_matroska.cpp:599
+#: src/input/r_matroska.cpp:600
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_reader：トラック{0}のコーデックIDは'{1}'ですが、BITMAPINFOHEADER構造が存在していません。よって使用されているビデオコーデックを識別するFourCCがありません。\n"
 
-#: src/input/r_matroska.cpp:377
+#: src/input/r_matroska.cpp:378
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_reader：トラック{0}のコーデックIDは'{1}'ですが、WAVEFORMATEX構造が存在していません。よって使用されているオーディオコーデックを識別するフォーマットIDがありません。\n"
 
-#: src/input/r_matroska.cpp:639
+#: src/input/r_matroska.cpp:640
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr "matroska_reader：トラック{0}のコーデックIDは'{1}'ですが、コーデックプライベートヘッダがありません。\n"
 
-#: src/input/r_matroska.cpp:733
+#: src/input/r_matroska.cpp:734
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_reader：トラック{0}のコーデックIDは'{1}'ですが、プライベートデータが見つかりませんでした。\n"
 
-#: src/input/r_matroska.cpp:671
+#: src/input/r_matroska.cpp:672
 #, no-c-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr "matroska_reader：トラック{0}の高さが設定されませんでした。\n"
 
-#: src/input/r_matroska.cpp:665
+#: src/input/r_matroska.cpp:666
 #, no-c-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_reader：トラック{0}の幅が設定されませんでした。\n"
 
-#: src/input/r_matroska.cpp:818
+#: src/input/r_matroska.cpp:819
 #, no-c-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr "matroska_reader：トラック{0}はOKのようです。\n"
 
-#: src/input/r_matroska.cpp:469
+#: src/input/r_matroska.cpp:470
 #, no-c-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_reader：mkvmergeはFLACをサポートしてコンパイルされていません。トラック{0}を無視します。\n"
 
-#: src/input/r_matroska.cpp:1538
+#: src/input/r_matroska.cpp:1539
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_reader：EBMLヘッドが見つかりませんでした。\n"
 
-#: src/input/r_matroska.cpp:813
+#: src/input/r_matroska.cpp:814
 #, fuzzy, no-c-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr "matroska_reader：トラック{0}のデマルチプレクサタイプが未知のものです：'{1}'\n"
@@ -15539,7 +15555,7 @@ msgstr "または"
 msgid "output sampling freq: {0}"
 msgstr "出力サンプル周波数：{0}"
 
-#: src/output/p_passthrough.h:28
+#: src/output/p_passthrough.h:27
 #, no-c-format
 msgid "passthrough"
 msgstr "パススルー"
@@ -15650,7 +15666,7 @@ msgstr " サイズ {0}"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_reader：無効なフォーマットです。\"[Events]\"セクションで\"Format\"行を見つけることができませんでした。"
 
-#: src/input/r_matroska.cpp:137
+#: src/input/r_matroska.cpp:138
 #, no-c-format
 msgid "subtitle"
 msgstr "字幕"
@@ -15666,7 +15682,7 @@ msgstr "字幕"
 msgid "tags [options] out.xml"
 msgstr ""
 
-#: src/output/p_textsubs.h:40
+#: src/output/p_textsubs.h:39
 #, no-c-format
 msgid "text subtitles"
 msgstr "テキスト字幕"
@@ -15734,8 +15750,8 @@ msgstr "tta_reader：c'tor内でtag_sizeが負になりました。 {0}\n"
 #: src/common/kax_info.cpp:836
 #: src/common/kax_info.cpp:847
 #: src/common/stereo_mode.cpp:69
-#: src/input/r_matroska.cpp:133
-#: src/input/r_matroska.cpp:2821
+#: src/input/r_matroska.cpp:134
+#: src/input/r_matroska.cpp:2827
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -15746,7 +15762,7 @@ msgstr "tta_reader：c'tor内でtag_sizeが負になりました。 {0}\n"
 msgid "unknown"
 msgstr "未知"
 
-#: src/input/r_matroska.cpp:2804
+#: src/input/r_matroska.cpp:2810
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "未知、フォーマットタグ 0x{0:04x}"
@@ -15763,7 +15779,7 @@ msgstr ""
 
 #: src/common/kax_info.cpp:668
 #: src/common/kax_info.cpp:844
-#: src/input/r_matroska.cpp:136
+#: src/input/r_matroska.cpp:137
 #, no-c-format
 msgid "video"
 msgstr "ビデオ"
@@ -15853,8 +15869,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: 例外が発生しました (メッセージ: {1}; タイプ: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1611
-#: src/input/r_matroska.cpp:2347
+#: src/input/r_matroska.cpp:1612
+#: src/input/r_matroska.cpp:2353
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: 未知の例外が発生しました。"

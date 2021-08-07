@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-07-21 22:34+0200\n"
+"POT-Creation-Date: 2021-08-07 17:11+0200\n"
 "PO-Revision-Date: 2020-09-02 18:12+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -1817,7 +1817,7 @@ msgstr "이스케이프 인수(&E):"
 msgid "&Expand all"
 msgstr "모두 확장(&E)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:339
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:364
 #, no-c-format
 msgid "&Extended subtags:"
 msgstr ""
@@ -1847,7 +1847,7 @@ msgstr "다시 번호를 매길 처음 항목(&F):"
 msgid "&Font && size:"
 msgstr "글꼴 && 크기(&F):"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:333
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:356
 #, no-c-format
 msgid "&Free-form input"
 msgstr ""
@@ -1878,7 +1878,7 @@ msgstr "16진수 덤프(&H):"
 msgid "&Hidden"
 msgstr "숨김(&H)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:334
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:357
 #, fuzzy, no-c-format
 msgid "&Individually selected components"
 msgstr "선택한 첨부 파일 사용(&E)"
@@ -1913,7 +1913,7 @@ msgstr "교체할 챕터 이름의 언어(&L):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:195
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1796
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:341
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:359
 #, no-c-format
 msgid "&Language:"
 msgstr "언어(&L):"
@@ -2088,12 +2088,12 @@ msgstr "이전 다음 작업 출력 탭(&P)"
 msgid "&Previous multiplex settings"
 msgstr "이전 합치기 설정(&P)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:338
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:361
 #, no-c-format
 msgid "&Private use:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:340
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:358
 #, no-c-format
 msgid "&Region:"
 msgstr ""
@@ -2190,7 +2190,7 @@ msgstr "다른 재생목록에 대해 폴더 검색(&S):"
 msgid "&Scan for other playlists"
 msgstr "다른 재생목록 검사하기(&S)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:336
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:366
 #, fuzzy, no-c-format
 msgid "&Script:"
 msgstr "설명(&D):"
@@ -2280,7 +2280,7 @@ msgstr "세그먼트 정보"
 msgid "&Validate values"
 msgstr "값 검증(&V)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:342
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:360
 #, no-c-format
 msgid "&Variants:"
 msgstr ""
@@ -2752,7 +2752,7 @@ msgstr "'{0}' 트랙 {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "'{0}': 후속 파일을 마찬가지로 처리: {1}\n"
 
-#: src/input/r_matroska.cpp:1935
+#: src/input/r_matroska.cpp:1936
 #, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "'{0}': 실험적 모드에서 기록되었던 Opus 트랙을 복사 중입니다. 그 결과로 나오는 트랙은 최종 모드로 기록이 될 것이지만 하나의 세부 항목(끝부분 잘라내기)은 실험적 모드에서 기록된 트랙에서 복원할 수 없습니다. 다시 말해서 디코더가 원래 의도한 것보다 몇 개의 샘플을 더 출력하게 됩니다. 그래서 가능하면 원래의 Opus에서 다시 합치기를 하세요.\n"
@@ -2917,8 +2917,8 @@ msgstr "<미저장 파일>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "위치 {2}에서 <{0}>은 <{1}>의 유효한 자식 요소가 아닙니다."
 
-#: src/input/r_matroska.cpp:2379
-#: src/input/r_matroska.cpp:2488
+#: src/input/r_matroska.cpp:2385
+#: src/input/r_matroska.cpp:2494
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "트랙 번호 {1}에 대한 타임스탬프 {0}의 블록을 찾았지만, 그 트랙 번호의 헤더는 찾지 못했습니다. 이 블록은 건너 뜁니다.\n"
@@ -2943,7 +2943,7 @@ msgstr "분할할 다음 프레임/필드 번호룰 쉼표로 구분하여 열�
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "유지할 내용의 타임코드 범위를 쉼표로 구분하여 열거하여 지정합니다."
 
-#: src/input/r_matroska.cpp:747
+#: src/input/r_matroska.cpp:748
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr "너비, 높이와 컬러 팔레트용 기본 설정값과 기본 인덱스가 대신 사용됩니다."
@@ -3039,7 +3039,7 @@ msgid "A&udio file:"
 msgstr "오디오 파일(&U):"
 
 #: src/common/file_types.cpp:73
-#: src/output/p_aac.h:47
+#: src/output/p_aac.h:46
 #, no-c-format
 msgid "AAC"
 msgstr "AAC"
@@ -3060,12 +3060,12 @@ msgid "AAC with ADIF headers"
 msgstr "ADIF 헤더를 포함한 AAC"
 
 #: src/common/file_types.cpp:74
-#: src/output/p_ac3.h:44
+#: src/output/p_ac3.h:43
 #, no-c-format
 msgid "AC-3"
 msgstr "AC-3"
 
-#: src/output/p_alac.h:33
+#: src/output/p_alac.h:31
 #, no-c-format
 msgid "ALAC"
 msgstr "ALAC"
@@ -3085,7 +3085,7 @@ msgstr "ALAC 개인 데이터 크기가 일치하지 않습니다\n"
 msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "아스키 문자열 (움라우트같은 특수 문자 아님)"
 
-#: src/output/p_av1.h:35
+#: src/output/p_av1.h:33
 #, no-c-format
 msgid "AV1"
 msgstr "AV1"
@@ -3096,12 +3096,12 @@ msgid "AV1 Open Bitstream Units stream"
 msgstr ""
 
 #: src/common/file_types.cpp:76
-#: src/output/p_avc.h:34
+#: src/output/p_avc.h:33
 #, no-c-format
 msgid "AVC/H.264"
 msgstr "AVC/H.264"
 
-#: src/output/p_avc_es.h:40
+#: src/output/p_avc_es.h:39
 #, no-c-format
 msgid "AVC/H.264 (unframed)"
 msgstr "AVC/H.264 (비프레임 형식)"
@@ -4225,7 +4225,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "취소"
 
-#: src/output/p_mpeg4_p2.cpp:110
+#: src/output/p_mpeg4_p2.cpp:113
 #, no-c-format
 msgid "Cannot convert non-native MPEG4 video frames into native ones if the source container provides neither timestamps nor a number of frames per second.\n"
 msgstr "소스 컨테이너가 타임코드도 fps(초당 프레임)도 둘다 공급하지 않으면 Non-native MPEG4 비디오 프레임을 Native로 변환할 수 없습니다.\n"
@@ -4343,7 +4343,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "최초 만든 항목의 챕터 번호(&N):"
 
 #: src/common/chapters/chapters.cpp:57
-#: src/mkvtoolnix-gui/util/settings.cpp:406
+#: src/mkvtoolnix-gui/util/settings.cpp:425
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "챕터 <NUM:2>"
@@ -4867,7 +4867,7 @@ msgstr "오디오 트랙 {0}의 인덱스를 찾을 수 없습니다 (avilib 오
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "결합시에 gptzr을 찾을 수 없습니다. {0}\n"
 
-#: src/output/p_mpeg4_p2.cpp:173
+#: src/output/p_mpeg4_p2.cpp:174
 #, no-c-format
 msgid "Could not find the codec configuration data in the first MPEG-4 part 2 video frame. This track cannot be stored in native mode.\n"
 msgstr "최초의 MPEG-4 part 2 비디오 프레임 코덱 구성 데이터를 찾을 수 없습니다. 이 트랙을 Native 모드로 저장할 수 없습니다.\n"
@@ -4892,7 +4892,7 @@ msgstr "UTF-8에서 {0}로 변환에 필요한 iconv 라이브러리를 초기�
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "{0}에서 UTF-8로 변환에 필요한 iconv 라이브러리를 초기화할 수 없습니다. 몇몇 문자열은 UTF-8로 변환하지 못할 것이고 결과로 나오는 Matroska 파일은 Matroska 스펙을 준수하지 못할 수 있습니다. (오류: {1}, {2}).\n"
 
-#: src/input/r_matroska.cpp:1716
+#: src/input/r_matroska.cpp:1717
 #, fuzzy, no-c-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "matroska_리더: 새 파일에 이미 할당되었기 때문에, 트랙UID {0}를 유지할 수 없습니다.\n"
@@ -5257,7 +5257,7 @@ msgid "D&uplicate selected edition or chapter"
 msgstr "선택한 에디션이나 챕터 복제(&U)"
 
 #: src/common/file_types.cpp:83
-#: src/output/p_dts.h:48
+#: src/output/p_dts.h:47
 #, no-c-format
 msgid "DTS"
 msgstr "DTS"
@@ -5277,7 +5277,7 @@ msgstr "DTS/DTS-HD [디지털 시어터 시스템](Digital Theater System)"
 msgid "DV video format"
 msgstr "DV 비디오 형식"
 
-#: src/output/p_dvbsub.h:29
+#: src/output/p_dvbsub.h:28
 #, no-c-format
 msgid "DVB subtitles"
 msgstr "DVB 자막"
@@ -5563,7 +5563,7 @@ msgstr "모든 첨부 파일 사용 안 함(&S)"
 
 #: src/common/file_types.cpp:33
 #: src/common/file_types.cpp:82
-#: src/output/p_dirac.h:37
+#: src/output/p_dirac.h:36
 #, no-c-format
 msgid "Dirac"
 msgstr "Dirac"
@@ -5850,6 +5850,11 @@ msgstr "종료(&X)"
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr "모든 하위 챕터의 최소/최대 타임스탬프를 포함하도록 챕터의 시작과 끝 타임스탬프 확장(&X)"
 
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:367
+#, fuzzy, no-c-format
+msgid "E&xtensions:"
+msgstr "예외 세부 사항:"
+
 #: src/common/kax_element_names.cpp:82
 #, no-c-format
 msgid "EBML CRC-32"
@@ -5880,6 +5885,11 @@ msgstr "EBML 버전"
 msgid "EBML void"
 msgstr "EBML 없음"
 
+#: src/common/bcp47.cpp:375
+#, no-c-format
+msgid "Each extension identifier must be used at most once."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:198
 #, no-c-format
 msgid "Each file created contains one segment, and each segment has one segment UID."
@@ -5900,8 +5910,8 @@ msgstr "각 범위는 '-'을 중앙에 두고 시작과 끝 프레임/필드 번
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
 msgstr "각 범위는 '-'를 중앙에 두고 시작과 끝의 타임코드로 구성됩니다. 예) '00:01:15-00:03:20'"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:331
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:332
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:354
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:355
 #, fuzzy, no-c-format
 msgid "Edit language"
 msgstr "태그 언어"
@@ -6330,6 +6340,11 @@ msgstr "챕터 정보를 OGM tools에서 사용되는 단순 형식(CHAPTER01=..
 msgid "Extended subtags"
 msgstr ""
 
+#: src/common/bcp47.cpp:367
+#, no-c-format
+msgid "Extension subtags must follow at least a primary language subtag."
+msgstr ""
+
 #: src/extract/extract_cli_parser.cpp:82
 #, no-c-format
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -6341,13 +6356,13 @@ msgid "Extract the data to a raw file."
 msgstr "raw(원시) 파일과 데이터를 추출합니다."
 
 #: src/output/p_hevc.cpp:110
-#: src/output/p_hevc_es.cpp:126
+#: src/output/p_hevc_es.cpp:124
 #, no-c-format
 msgid "Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"
 msgstr "HEVC 비디오 데이터에서 화면 비율 정보를 추출하고 화면 크기를 {0}/{1}로 설정했습니다.\n"
 
 #: src/output/p_avc.cpp:102
-#: src/output/p_avc_es.cpp:139
+#: src/output/p_avc_es.cpp:137
 #, no-c-format
 msgid "Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to {0}/{1}.\n"
 msgstr "MPEG-4 layer 10 (AVC) 비디오 데이터에서 비율 정보를 추출하여 화면 해상도를 {0}/{1}로 설정했습니다.\n"
@@ -6357,7 +6372,7 @@ msgstr "MPEG-4 layer 10 (AVC) 비디오 데이터에서 비율 정보를 추출�
 msgid "Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to {0}/{1}.\n"
 msgstr "MPEG-4 layer 2 비디오 데이터에서 비율 정보를 추출하여 화면 해상도를 {0}/{1}로 설정했습니다.\n"
 
-#: src/output/p_theora.cpp:72
+#: src/output/p_theora.cpp:71
 #, no-c-format
 msgid "Extracted the aspect ratio information from the Theora video headers and set the display dimensions to {0}/{1}.\n"
 msgstr "Theora 비디오 헤더에서 화면 비율 정보를 추출하여 화면 해상도를 {0}/{1}로 설정했습니다.\n"
@@ -6383,7 +6398,7 @@ msgid "Extraction tool"
 msgstr "추출 도구"
 
 #: src/common/file_types.cpp:85
-#: src/output/p_flac.h:38
+#: src/output/p_flac.h:37
 #, no-c-format
 msgid "FLAC"
 msgstr "FLAC"
@@ -6567,7 +6582,7 @@ msgstr "완료:"
 msgid "First chapter name regardless of its language"
 msgstr "– 그 언어와 관계 없이 처음 챕터 이름 –"
 
-#: src/common/bcp47.cpp:333
+#: src/common/bcp47.cpp:425
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr ""
@@ -6677,7 +6692,7 @@ msgstr "타임코드 스케일 인수를 주어진 값으로 사용하도록 합
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Non Closed GOP에서 두번째 참조 없는 B 프레임을 적어도 한 개 찾았습니다.\n"
 
-#: src/common/bcp47.cpp:328
+#: src/common/bcp47.cpp:420
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr ""
@@ -6847,13 +6862,13 @@ msgstr "녹색 좌표 y"
 msgid "HD-DVD subtitles"
 msgstr "HD-DVD 자막"
 
-#: src/output/p_hdmv_pgs.h:38
+#: src/output/p_hdmv_pgs.h:37
 #, no-c-format
 msgid "HDMV PGS"
 msgstr "HDMV PGS"
 
 #: src/common/file_types.cpp:40
-#: src/output/p_hdmv_textst.h:30
+#: src/output/p_hdmv_textst.h:29
 #, no-c-format
 msgid "HDMV TextST"
 msgstr "HDMV TextST"
@@ -6865,12 +6880,12 @@ msgid "HDMV TextST subtitles"
 msgstr "HDMV TextST 자막"
 
 #: src/common/file_types.cpp:88
-#: src/output/p_hevc.h:36
+#: src/output/p_hevc.h:35
 #, no-c-format
 msgid "HEVC/H.265"
 msgstr "HEVC/H.265"
 
-#: src/output/p_hevc_es.h:38
+#: src/output/p_hevc_es.h:37
 #, no-c-format
 msgid "HEVC/H.265 (unframed)"
 msgstr "HEVC/H.265 (비프레임 형식)"
@@ -7371,7 +7386,7 @@ msgstr ""
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr "그것을 추가적인 부분으로 결합하거나 추가하고 싶으면 결합하거나 추가할 소스 파일을 선택해야 합니다:"
 
-#: src/output/p_textsubs.cpp:142
+#: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "종료 이후에 시작하는 항목({0})을 무시합니다.\n"
@@ -7411,7 +7426,7 @@ msgstr "고정 간격으로: 예를 들어 매 30초마다 고정 간격으로 �
 msgid "In the most compact layout the track properties are located to the right of the files and tracks lists in a scrollable single column."
 msgstr "가장 작은 레이아웃에서 트랙 속성은 스크롤 가능한 단일 세로줄의 파일과 트랙 목록 오른편에 위치해 있습니다."
 
-#: src/input/r_real.cpp:545
+#: src/input/r_real.cpp:544
 #, no-c-format
 msgid "Inconsistent AAC audio packet (length: {0} != {1})\n"
 msgstr "내용이 다른 AAC 오디오 패킷 (길이: {0} != {1})\n"
@@ -7944,7 +7959,7 @@ msgstr "작업과 작업 출력"
 msgid "Jobs to execute:"
 msgstr "실행 작업:"
 
-#: src/output/p_kate.h:39
+#: src/output/p_kate.h:38
 #, no-c-format
 msgid "Kate"
 msgstr "Kate (가라오케 텍스트)"
@@ -8001,11 +8016,6 @@ msgstr "태그 언어 (IETF)"
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:53
 #, no-c-format
 msgid "Language selected below"
-msgstr ""
-
-#: src/common/bcp47.cpp:347
-#, no-c-format
-msgid "Language tag extensions are currently not supported."
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:278
@@ -8220,7 +8230,7 @@ msgid "MPEG transport streams"
 msgstr "MPEG 전송 스트림"
 
 #: src/common/file_types.cpp:93
-#: src/output/p_mp3.h:44
+#: src/output/p_mp3.h:43
 #, no-c-format
 msgid "MPEG-1/2 Audio Layer II/III"
 msgstr ""
@@ -8230,7 +8240,7 @@ msgstr ""
 msgid "MPEG-1/2 Audio Layer II/III elementary streams"
 msgstr "MPEG 비디오 엘러멘터리 스트림"
 
-#: src/output/p_mpeg1_2.h:37
+#: src/output/p_mpeg1_2.h:35
 #, fuzzy, no-c-format
 msgid "MPEG-1/2 video"
 msgstr "MPEG-1/2"
@@ -8245,7 +8255,7 @@ msgstr "MPEG 비디오 엘러멘터리 스트림"
 msgid "MPEG-1/2 video elementary streams"
 msgstr "MPEG 비디오 엘러멘터리 스트림"
 
-#: src/output/p_mpeg4_p2.h:64
+#: src/output/p_mpeg4_p2.h:62
 #, no-c-format
 msgid "MPEG-4"
 msgstr "MPEG-4"
@@ -8265,13 +8275,13 @@ msgstr "최대 파일 개수:"
 msgid "Make this track eligible to be played by default."
 msgstr ""
 
-#: src/input/r_matroska.cpp:1804
-#: src/input/r_matroska.cpp:1821
+#: src/input/r_matroska.cpp:1805
+#: src/input/r_matroska.cpp:1822
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "잘못된 형식의 AAC 코덱 초기화 데이터를 찾았습니다.\n"
 
-#: src/input/r_matroska.cpp:1814
+#: src/input/r_matroska.cpp:1815
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "잘못된 형식의 코덱 ID '{0}'입니다.\n"
@@ -8748,7 +8758,7 @@ msgstr "대상 파일 이름이 지정되지 않았기 때문에, 대신 첨부 
 msgid "No disc library information was found."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:363
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:377
 #, fuzzy, no-c-format
 msgid "No error was found."
 msgstr "큐를 찾을 수 없습니다.\n"
@@ -9315,7 +9325,7 @@ msgstr "옵션"
 msgid "Options:"
 msgstr "옵션:"
 
-#: src/output/p_opus.h:37
+#: src/output/p_opus.h:36
 #, no-c-format
 msgid "Opus"
 msgstr "Opus"
@@ -9396,7 +9406,7 @@ msgstr "출력 샘플링 주파수"
 msgid "Overwrite existing file"
 msgstr "기존 파일 덮어쓰기"
 
-#: src/output/p_pcm.h:46
+#: src/output/p_pcm.h:45
 #, no-c-format
 msgid "PCM"
 msgstr "PCM"
@@ -9426,7 +9436,7 @@ msgstr "패킷 번호 {0}는 잘못된 FLAC 헤더가 포함되어 있기 때문
 msgid "Parse the whole file instead of relying on the index."
 msgstr "인덱스를 신뢰하는 대신에 파일의 전체를 분석합니다."
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:346
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:370
 #, no-c-format
 msgid "Parser error:"
 msgstr ""
@@ -9680,7 +9690,7 @@ msgstr "특정 투사에만 적용되는 전용 데이터."
 msgid "Private use"
 msgstr ""
 
-#: src/output/p_prores.h:28
+#: src/output/p_prores.h:26
 #, no-c-format
 msgid "ProRes video"
 msgstr ""
@@ -9990,7 +10000,7 @@ msgstr "지정한 JSON 파일에서 추가 명령행 옵션을 읽습니다 (man
 msgid "Real output sampling frequency in Hz."
 msgstr "실제 출력 샘플링 주파수(Hz단위)입니다."
 
-#: src/output/p_realaudio.h:33
+#: src/output/p_realaudio.h:32
 #, no-c-format
 msgid "RealAudio"
 msgstr "RealAudio"
@@ -10336,6 +10346,7 @@ msgid "SSA/ASS subtitles"
 msgstr "SSA/ASS 자막"
 
 #: src/common/file_types.cpp:57
+#: src/output/p_ssa.h:28
 #, no-c-format
 msgid "SSA/ASS text subtitles"
 msgstr "SSA/ASS 텍스트 자막"
@@ -10800,12 +10811,12 @@ msgstr "설정"
 msgid "Settings for saving output to a text file"
 msgstr "출력을 텍스트 파일로 저장시의 설정"
 
-#: src/input/r_real.cpp:525
+#: src/input/r_real.cpp:524
 #, no-c-format
 msgid "Short AAC audio packet (length: {0} < 2)\n"
 msgstr "짧은 AAC 오디오 패킷 (길이: {0} < 2)\n"
 
-#: src/input/r_real.cpp:532
+#: src/input/r_real.cpp:531
 #, no-c-format
 msgid "Short AAC audio packet (length: {0} < {1})\n"
 msgstr "짧은 AAC 오디오 패킷 (길이: {0} < {1})\n"
@@ -11178,7 +11189,7 @@ msgstr "시작:"
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr "트랙 번호 {0} 통계: 블록 수: {1}; 크기(바이트): {2}; 재생 시간(초): {3}; 비트 전송률[근사치](비트/초): {4}\n"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:344
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:368
 #: src/mkvtoolnix-gui/jobs/model.cpp:50
 #, no-c-format
 msgid "Status"
@@ -11186,7 +11197,7 @@ msgstr "상태"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:207
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:160
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:345
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:369
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:289
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:182
 #, no-c-format
@@ -11290,7 +11301,7 @@ msgid "System information"
 msgstr "세그먼트 정보"
 
 #: src/common/file_types.cpp:105
-#: src/output/p_tta.h:33
+#: src/output/p_tta.h:32
 #, no-c-format
 msgid "TTA"
 msgstr "TTA"
@@ -11430,7 +11441,7 @@ msgstr "이 .idx 파일은 언어를 나타내는 'id: ...'행이 포함되어 �
 msgid "The AAC file '{0}' contains invalid header data: the sampling frequency or the number of channels is 0.\n"
 msgstr "'{0}' AAC 파일에 무효한 헤더 데이터가 있습니다: 샘플링 주파수 또는 채널의 번호가 0입니다.\n"
 
-#: src/output/p_aac.cpp:143
+#: src/output/p_aac.cpp:141
 #, no-c-format
 msgid "The AAC profiles are different: {0} and {1}"
 msgstr "AAC 프로필이 서로 다름: {0} - {1}"
@@ -11555,12 +11566,12 @@ msgstr "Theora 식별 헤더를 분석할 수 없습니다 ({0}).\n"
 msgid "The UID must not be left empty."
 msgstr "UID 항목은 비어 있으면 안 됩니다."
 
-#: src/input/r_matroska.cpp:746
+#: src/input/r_matroska.cpp:747
 #, no-c-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr "{0} VobSub 자막 트랙은 CodecPrivate 요소에서 그 인덱스를 포함하지 않습니다."
 
-#: src/output/p_vorbis.cpp:128
+#: src/output/p_vorbis.cpp:126
 #, no-c-format
 msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated without re-encoding."
 msgstr "Vorbis 코드북이 다릅니다. 재인코딩 없이 그런 트랙을 연결할 수 없습니다."
@@ -11736,7 +11747,7 @@ msgstr "코덱 유형 '{0}'는 표준 WebM 준수(호환) 파일에서는 사용
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "코덱 개인 데이터가 일치하지 않습니다 (길이: {0} - {1})."
 
-#: src/output/p_avc.cpp:130
+#: src/output/p_avc.cpp:128
 #, no-c-format
 msgid "The codec's private data does not match. Both have the same length ({0}) but different content."
 msgstr "코덱 개인 데이터가 일치하지 않습니다. 서로 길이는 같지만 ({0}) 내용이 다릅니다."
@@ -11932,7 +11943,7 @@ msgstr "종료 시간은 시작 시간보다 더 커야 합니다."
 msgid "The entries in the 'selected' list on the right will be shown at the top of all the drop-down boxes with countries and regions in the program."
 msgstr "오른쪽에서 '선택한' 목록의 나라들은 모든 국가 드롭 다운 상자의 맨 위쪽에 나타납니다."
 
-#: src/common/bcp47.cpp:283
+#: src/common/bcp47.cpp:343
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr ""
@@ -12228,8 +12239,8 @@ msgstr "파일 또는 폴더를 찾지 못했습니다"
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1612
-#: src/input/r_matroska.cpp:2348
+#: src/input/r_matroska.cpp:1613
+#: src/input/r_matroska.cpp:2354
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "이 파일은 더 이상 처리하지 않습니다."
@@ -12399,12 +12410,12 @@ msgstr "여기에서 선택한 언어는 해당 소스 파일에 그런 속성�
 msgid "The language set here is also used when chapters are generated."
 msgstr "여기에서 설정한 언어는 챕터를 만들어 낼 때에도 사용합니다."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:349
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:363
 #, fuzzy, no-c-format
 msgid "The language tag is not valid."
 msgstr "빈 파일 이름이 잘못되었습니다.\n"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:349
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:363
 #, fuzzy, no-c-format
 msgid "The language tag is valid."
 msgstr "조사 범위 '{0}' 퍼센트는 무효합니다.\n"
@@ -12444,7 +12455,7 @@ msgstr "파일명에서 트랙 언어 얻는 중"
 msgid "The list of recognized track languages in file names must not be empty."
 msgstr ""
 
-#: src/common/translation.cpp:415
+#: src/common/translation.cpp:410
 #, no-c-format
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
 msgstr "로케일을 올바르게 설정할 수 없습니다. LANG, LC_ALL, LC_MESSAGES 환경 변수를 확인하세요.\n"
@@ -12737,7 +12748,7 @@ msgstr "세그먼트 UID를 분석할 수 없습니다: %1"
 msgid "The segment edition UID must be a positive number if given."
 msgstr "주어진 세그먼트 에디션 UID는 양수여야 합니다."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:354
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:368
 #, no-c-format
 msgid "The selected language code '%1' is not an ISO 639-2 code. Players that only support the legacy Matroska language elements but not the IETF BCP 47 language elements will therefore display a different language such as 'und' (undetermined)."
 msgstr ""
@@ -12989,32 +13000,37 @@ msgstr "사용자는 실제로 추가할 재생목록을 선택할 수 있습니
 msgid "The value '{0}' is not a number.\n"
 msgstr "'{0}' 값은 숫자가 아닙니다.\n"
 
-#: src/common/bcp47.cpp:159
+#: src/common/bcp47.cpp:385
+#, fuzzy, no-c-format
+msgid "The value '{0}' is not a registered IANA language tag identifier."
+msgstr "'{0}'는 유효한 ISO 639-2 언어 코드가 아닙니다."
+
+#: src/common/bcp47.cpp:177
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid ISO 15924 script code."
 msgstr "'{0}'는 유효한 ISO 639-2 언어 코드가 아닙니다."
 
-#: src/common/bcp47.cpp:173
+#: src/common/bcp47.cpp:191
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid ISO 3166-1 country code."
 msgstr "'{0}'는 유효한 ccTLD 국가 코드가 아닙니다."
 
-#: src/common/bcp47.cpp:146
+#: src/common/bcp47.cpp:164
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid ISO 639 language code."
 msgstr "'{0}'는 유효한 ISO 639-2 언어 코드가 아닙니다."
 
-#: src/common/bcp47.cpp:191
+#: src/common/bcp47.cpp:209
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid UN M.49 country number code."
 msgstr "'{0}'는 유효한 ccTLD 국가 코드가 아닙니다."
 
-#: src/common/bcp47.cpp:213
+#: src/common/bcp47.cpp:231
 #, no-c-format
 msgid "The value '{}' is not part of the IANA Language Subtag Registry for extended language subtags."
 msgstr ""
 
-#: src/common/bcp47.cpp:214
+#: src/common/bcp47.cpp:232
 #, no-c-format
 msgid "The value '{}' is not part of the IANA Language Subtag Registry for language variants."
 msgstr ""
@@ -13036,7 +13052,7 @@ msgstr "값은 12.345같은 부동 소수점 수나 123/456같은 정수값의 �
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "값은 음수가 될 수 있지만 이 계산 이후에 타임스탬프가 음수인 프레임은 빠진다는 것을 명심하세요."
 
-#: src/common/bcp47.cpp:310
+#: src/common/bcp47.cpp:402
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr ""
@@ -13052,7 +13068,7 @@ msgstr "값은 트랙 헤더에만 저장됩니다."
 msgid "The values will be available for easy selection in the multiplexer."
 msgstr ""
 
-#: src/common/bcp47.cpp:284
+#: src/common/bcp47.cpp:344
 #, no-c-format
 msgid "The variant '{}' must only be used with one of the following prefixes: {}."
 msgstr ""
@@ -13072,7 +13088,7 @@ msgstr "mkvmerge (%1)와 GUI (%2)의 버전이 다릅니다."
 msgid "The width of the two tracks is different: {0} and {1}"
 msgstr "2개의 트랙이 가로(너비) 해상도가 서로 다름: {0} - {1}"
 
-#: src/output/p_theora.h:27
+#: src/output/p_theora.h:26
 #, no-c-format
 msgid "Theora"
 msgstr "Theora"
@@ -13154,17 +13170,17 @@ msgstr "이 AAC 트랙은 유효한 헤더가 포함되어 있지 않습니다. 
 msgid "This AC-3 track contains {0} bytes of non-AC-3 data at the beginning. This corresponds to a delay of {1}ms. This delay will be used instead of the non-AC-3 data.\n"
 msgstr "이 AC-3 트랙은 {0} 바이트의 AC-3가 아닌 데이터를 첫 부분에 포함하고 있습니다. 이것은 {1}ms의 지연 시간과 일치합니다. 이 지연 시간은 AC-3가 아닌 데이터 대신 사용됩니다.\n"
 
-#: src/output/p_avc_es.cpp:108
+#: src/output/p_avc_es.cpp:106
 #, no-c-format
 msgid "This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"
 msgstr "이 AVC/H.264 트랙이 키프레임에서 시작하지 않습니다. 첫 번째 {0}프레임은 건너 뜁니다.\n"
 
-#: src/output/p_avc_es.cpp:118
+#: src/output/p_avc_es.cpp:116
 #, no-c-format
 msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
 msgstr "이 AVC/H.264 트랙의 타이밍 정보는 해당 트랙이 가변 프레임 레이트를 사용하고 있음을 나타냅니다. 그러나, 기본 재생 시간이나 외부 타임코드 파일이 제공되지는 않고, 소스 컨테이너도 타임코드를 제공하지 않습니다. 결과로 나오는 타임코드는 그다지 유용하지 않습니다.\n"
 
-#: src/output/p_hevc_es.cpp:105
+#: src/output/p_hevc_es.cpp:103
 #, no-c-format
 msgid "This HEVC track does not start with a key frame. The first {0} frames have been skipped.\n"
 msgstr "이 HEVC 트랙은 키프레임으로 시작하지 않습니다. 첫번째 {0} 프레임은 건너뜁니다.\n"
@@ -13451,7 +13467,7 @@ msgid "This template will be used for new chapter entries."
 msgstr "이 템플릿은 새 챕터 항목에 사용합니다."
 
 #: src/input/subtitles.cpp:68
-#: src/output/p_textsubs.cpp:130
+#: src/output/p_textsubs.cpp:128
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr ""
@@ -13464,8 +13480,8 @@ msgstr "이 트랙에는 SBR AAC/HE-AAC/AAC+ 데이터가 포함되어 있습니
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1612
-#: src/input/r_matroska.cpp:2348
+#: src/input/r_matroska.cpp:1613
+#: src/input/r_matroska.cpp:2354
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "이것은 대게 손상된 파일 구조를 나타냅니다."
@@ -13637,7 +13653,7 @@ msgstr "트랙 {0} CodecPrivate가 너무 작습니다.\n"
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr "트랙 {0}은 알 수 없거나 지원되지 않는 압축 알고리즘 ({1})으로 압축되었습니다.\n"
 
-#: src/input/r_matroska.cpp:1281
+#: src/input/r_matroska.cpp:1282
 #, no-c-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "{0} 트랙에 Matroska 규격에 의거해 있어야 하는 트랙 UID 요소가 누락되어 있습니다. 파일에 태그가 포함되어 있다면 그 태그가 깨진 것 같습니다.\n"
@@ -13742,7 +13758,7 @@ msgid "Tracks:"
 msgstr "트랙:"
 
 #: src/common/file_types.cpp:104
-#: src/output/p_truehd.h:42
+#: src/output/p_truehd.h:41
 #, no-c-format
 msgid "TrueHD"
 msgstr "TrueHD"
@@ -13929,7 +13945,7 @@ msgstr "지원되지 않는 MPEG_버전: 0x{0:02x}(패킷 {1}, 타임코드 {2})
 msgid "Unsupported file format"
 msgstr "미지원 파일 형식"
 
-#: src/input/r_matroska.cpp:2164
+#: src/input/r_matroska.cpp:2170
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "이 트랙은 지원되지 않는 트랙 유형입니다.\n"
@@ -14026,7 +14042,7 @@ msgstr "추출시 발견한 첫 번째 챕터 이름 대신 지정한 언어의 
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr " '{0}'용 디멀티플렉서를 사용 중입니다.\n"
 
-#: src/input/r_matroska.cpp:1639
+#: src/input/r_matroska.cpp:1640
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "트랙 형식 '{0}'용 일반 출력 모듈을 사용 중입니다.\n"
@@ -14042,7 +14058,7 @@ msgid "Using the track with the ID {0} from the file '{1}' as the reference for 
 msgstr "챕터 생성시 '{1}' 파일에서 {0} ID가 있는 트랙을 참고하여 사용 중입니다.\n"
 
 #: src/common/file_types.cpp:107
-#: src/output/p_vc1.h:36
+#: src/output/p_vc1.h:35
 #, no-c-format
 msgid "VC-1"
 msgstr "VC-1"
@@ -14052,7 +14068,7 @@ msgstr "VC-1"
 msgid "VC-1 elementary streams"
 msgstr "VC-1 엘러멘터리 스트림"
 
-#: src/output/p_vpx.h:34
+#: src/output/p_vpx.h:33
 #, no-c-format
 msgid "VP8/VP9"
 msgstr "VP8/VP9"
@@ -14122,7 +14138,7 @@ msgstr "수직 크로마 위치선정"
 msgid "Vertical chroma subsample"
 msgstr "수직 크로마 서브샘플"
 
-#: src/output/p_video_for_windows.h:37
+#: src/output/p_video_for_windows.h:36
 #, no-c-format
 msgid "VfW compatible video"
 msgstr "VfW 호환 비디오"
@@ -14193,7 +14209,7 @@ msgstr "비디오 필드 순서"
 msgid "Video interlaced flag"
 msgstr "비디오 인터레이스 플래그"
 
-#: src/input/r_real.cpp:587
+#: src/input/r_real.cpp:586
 #, no-c-format
 msgid "Video packet assembly failed. Error code: {0} ({1})\n"
 msgstr "비디오 패킷 어셈블리에 실패하였습니다. 오류 코드: {0} ({1})\n"
@@ -14377,7 +14393,7 @@ msgid "Visible"
 msgstr "보이는"
 
 #: src/common/file_types.cpp:108
-#: src/output/p_vobbtn.h:35
+#: src/output/p_vobbtn.h:34
 #, no-c-format
 msgid "VobBtn"
 msgstr "VobBtn"
@@ -14388,7 +14404,7 @@ msgid "VobButtons"
 msgstr "VobButton"
 
 #: src/common/file_types.cpp:109
-#: src/output/p_vobsub.h:30
+#: src/output/p_vobsub.h:29
 #, no-c-format
 msgid "VobSub"
 msgstr "VobSub"
@@ -14398,7 +14414,7 @@ msgstr "VobSub"
 msgid "VobSub subtitles"
 msgstr "VobSub 자막"
 
-#: src/output/p_vorbis.h:54
+#: src/output/p_vorbis.h:53
 #, no-c-format
 msgid "Vorbis"
 msgstr "Vorbis"
@@ -14423,7 +14439,7 @@ msgstr "WAVPACK"
 msgid "WAVPACK v4 audio"
 msgstr "WAVPACK v4 오디오"
 
-#: src/output/p_wavpack.h:36
+#: src/output/p_wavpack.h:35
 #, no-c-format
 msgid "WAVPACK4"
 msgstr "WAVPACK4"
@@ -14460,7 +14476,7 @@ msgstr "{0}번째 경고: 시작 시간 타임코드가 이전 항목의 타임�
 msgid "Warning:"
 msgstr "경고:"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:354
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:368
 #, fuzzy, no-c-format
 msgid "Warning: %1"
 msgstr "경고:"
@@ -14495,7 +14511,7 @@ msgstr "WebM 파일"
 #: src/common/file_types.cpp:66
 #: src/common/file_types.cpp:112
 #: src/extract/xtr_webvtt.h:31
-#: src/output/p_webvtt.h:28
+#: src/output/p_webvtt.h:26
 #, no-c-format
 msgid "WebVTT subtitles"
 msgstr "WebVTT 자막"
@@ -14876,7 +14892,7 @@ msgstr "시간 숫자 'HH'를 빠뜨린 것 같습니다."
 msgid "Zlib decompression failed. Result: {0}\n"
 msgstr "Zlib 압축 해제에 실패했습니다. 결과: {0}\n"
 
-#: src/output/p_ac3.cpp:239
+#: src/output/p_ac3.cpp:237
 #, no-c-format
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "ac3_bs_packetizer::add_to_buffer(): 테스트되지 않은 코드 ('size'가 홀수). 만약 mkvmerge가 충돌하거나 출력 파일의 오디오 트랙이 완전하고 올바르게 포함되지 않는 경우, 제작자 Moritz Bunkus <moritz@bunkus.org>에게 문의하십시오.\n"
@@ -14898,7 +14914,7 @@ msgstr "attachments [옵션] [AID1:출력1 [AID2:출력2 ...]]"
 
 #: src/common/kax_info.cpp:667
 #: src/common/kax_info.cpp:843
-#: src/input/r_matroska.cpp:134
+#: src/input/r_matroska.cpp:135
 #, no-c-format
 msgid "audio"
 msgstr "오디오"
@@ -14930,7 +14946,7 @@ msgstr "하단 필드 먼저 출력, 상단 필드 먼저 저장"
 
 #: src/common/kax_info.cpp:670
 #: src/common/kax_info.cpp:846
-#: src/input/r_matroska.cpp:135
+#: src/input/r_matroska.cpp:136
 #, no-c-format
 msgid "buttons"
 msgstr "버튼"
@@ -15095,7 +15111,7 @@ msgstr "챕터 정보가 있는 파일(OGM, MP4같은) 파일에 대해 mkvmerge
 msgid "for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)"
 msgstr "바이트 순서 표식(BOM)을 사용하지 않고 시스템의 현재 문자셋(%1)으로 인코딩되지 않은 자막 파일에 대해서"
 
-#: src/output/p_generic_video.h:36
+#: src/output/p_generic_video.h:35
 #, no-c-format
 msgid "generic video"
 msgstr "일반적인 비디오"
@@ -15145,108 +15161,108 @@ msgstr "길이 {0}, 데이터: {1}"
 msgid "line {0}: The 'delay' timestamp could not be parsed.\n"
 msgstr "{0}번째 행: 'delay'타임 스탬프를 해석할 수 없습니다.\n"
 
-#: src/input/r_matroska.cpp:417
+#: src/input/r_matroska.cpp:418
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_리더: (트랙 {0}, MS 호환 모드) Matroska에 따르면 샘플 당 {1}비트지만, WAVEFORMATEX에 따르면 {2}비트입니다.\n"
 
-#: src/input/r_matroska.cpp:408
+#: src/input/r_matroska.cpp:409
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_리더: (트랙 {0}, MS 호환 모드) Matroska에 따르면 {1}채널이지만, WAVEFORMATEX에 따르면 {2}채널입니다.\n"
 
-#: src/input/r_matroska.cpp:399
+#: src/input/r_matroska.cpp:400
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, but WAVEFORMATEX says that there are {2}.\n"
 msgstr "matroska_리더: (트랙 {0}, MS 호환 모드) Matroska에 따르면 초당 {1}샘플이지만, WAVEFORMATEX에 따르면 {2}샘플입니다.\n"
 
-#: src/input/r_matroska.cpp:620
+#: src/input/r_matroska.cpp:621
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_리더: (트랙 {0}, MS 호환 모드) Matroska에 따르면 비디오 세로(높이) 해상도는 {1}이지만, BITMAPINFOHEADER에 따르면 {2}입니다.\n"
 
-#: src/input/r_matroska.cpp:611
+#: src/input/r_matroska.cpp:612
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "matroska_리더: (트랙 {0}, MS 호환 모드) Matroska에 따르면 비디오 가로(너비) 해상도는 {1}이지만, BITMAPINFOHEADER에 따르면 {2}입니다.\n"
 
-#: src/input/r_matroska.cpp:1549
-#: src/input/r_matroska.cpp:1554
+#: src/input/r_matroska.cpp:1550
+#: src/input/r_matroska.cpp:1555
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "matroska_리더: 세그먼트를 찾지 못했습니다.\n"
 
-#: src/input/r_matroska.cpp:1230
+#: src/input/r_matroska.cpp:1231
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "matroska_리더: 픽셀의 높이가 누락되어 있습니다.\n"
 
-#: src/input/r_matroska.cpp:1228
+#: src/input/r_matroska.cpp:1229
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "matroska_리더: 픽셀 너비가 누락되어 있습니다.\n"
 
-#: src/input/r_matroska.cpp:780
+#: src/input/r_matroska.cpp:781
 #, no-c-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr "matroska_리더: 트랙 {1}의 코덱ID '{0}'는 알 수 없습니다.\n"
 
-#: src/input/r_matroska.cpp:432
-#: src/input/r_matroska.cpp:478
-#: src/input/r_matroska.cpp:501
-#: src/input/r_matroska.cpp:684
-#: src/input/r_matroska.cpp:694
-#: src/input/r_matroska.cpp:715
+#: src/input/r_matroska.cpp:433
+#: src/input/r_matroska.cpp:479
+#: src/input/r_matroska.cpp:502
+#: src/input/r_matroska.cpp:685
+#: src/input/r_matroska.cpp:695
+#: src/input/r_matroska.cpp:716
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr "matroska_reader: 트랙 {0}의 코덱ID는 '{1}'이지만, 개인 코덱 데이터에 유효한 헤더가 포함되어 있지 않습니다.\n"
 
-#: src/input/r_matroska.cpp:599
+#: src/input/r_matroska.cpp:600
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "matroska_리더: 트랙 {0}코덱ID는 '{1}'이지만, BITMAPINFOHEADER 구조가 존재하지 않습니다. 따라서 사용되는 비디오 코덱을 식별하는 FourCC가 없습니다.\n"
 
-#: src/input/r_matroska.cpp:377
+#: src/input/r_matroska.cpp:378
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "matroska_리더: 트랙 {0}코덱ID는 '{1}'이지만, WAVEFORMATEX 구조가 존재하지 않습니다. 따라서 사용되는 오디오 코덱을 식별하는 형식 ID가 없습니다.\n"
 
-#: src/input/r_matroska.cpp:639
+#: src/input/r_matroska.cpp:640
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr "matroska_리더: 트랙 {0}코덱ID는 '{1}'이지만, 코덱 개인 헤더가 없습니다.\n"
 
-#: src/input/r_matroska.cpp:733
+#: src/input/r_matroska.cpp:734
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "matroska_리더: 트랙 {0}코덱ID는 '{1}'이지만, 개인 데이터를 찾지 못했습니다.\n"
 
-#: src/input/r_matroska.cpp:671
+#: src/input/r_matroska.cpp:672
 #, no-c-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr "matroska_리더: 트랙 {0}높이가 설정되지 않았습니다.\n"
 
-#: src/input/r_matroska.cpp:665
+#: src/input/r_matroska.cpp:666
 #, no-c-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "matroska_리더: 트랙 {0}너비가 설정되지 않았습니다.\n"
 
-#: src/input/r_matroska.cpp:818
+#: src/input/r_matroska.cpp:819
 #, no-c-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr "matroska_리더: 트랙 {0}는 OK 인것 같습니다.\n"
 
-#: src/input/r_matroska.cpp:469
+#: src/input/r_matroska.cpp:470
 #, no-c-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "matroska_리더: mkvmerge는 FLAC 지원 없이 컴파일되었습니다.  {0} 트랙을 무시합니다.\n"
 
-#: src/input/r_matroska.cpp:1538
+#: src/input/r_matroska.cpp:1539
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "matroska_리더: EBML 헤드를 찾지 못했습니다.\n"
 
-#: src/input/r_matroska.cpp:813
+#: src/input/r_matroska.cpp:814
 #, no-c-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr "matroska_리더: 알 수 없는 {0} 트랙용 디멀티플렉서 형식: '{1}'\n"
@@ -15514,7 +15530,7 @@ msgstr "또는"
 msgid "output sampling freq: {0}"
 msgstr "출력 샘플 주파수: {0}"
 
-#: src/output/p_passthrough.h:28
+#: src/output/p_passthrough.h:27
 #, no-c-format
 msgid "passthrough"
 msgstr "통과"
@@ -15625,7 +15641,7 @@ msgstr "크기 {0}"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "ssa_리더: 잘못된 형식입니다. \"[Events]\"섹션에서 \"Format\" 행을 찾을 수 없습니다."
 
-#: src/input/r_matroska.cpp:137
+#: src/input/r_matroska.cpp:138
 #, no-c-format
 msgid "subtitle"
 msgstr "자막"
@@ -15641,7 +15657,7 @@ msgstr "자막"
 msgid "tags [options] out.xml"
 msgstr "tags [옵션] out.xml"
 
-#: src/output/p_textsubs.h:40
+#: src/output/p_textsubs.h:39
 #, no-c-format
 msgid "text subtitles"
 msgstr "텍스트 자막"
@@ -15709,8 +15725,8 @@ msgstr "tta_리더: c'tor에서 tag_size가 0보다 작습니다. {0}\n"
 #: src/common/kax_info.cpp:836
 #: src/common/kax_info.cpp:847
 #: src/common/stereo_mode.cpp:69
-#: src/input/r_matroska.cpp:133
-#: src/input/r_matroska.cpp:2821
+#: src/input/r_matroska.cpp:134
+#: src/input/r_matroska.cpp:2827
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -15721,7 +15737,7 @@ msgstr "tta_리더: c'tor에서 tag_size가 0보다 작습니다. {0}\n"
 msgid "unknown"
 msgstr "알 수 없음"
 
-#: src/input/r_matroska.cpp:2804
+#: src/input/r_matroska.cpp:2810
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "알 수 없는 형식 태그 0x{0:04x}"
@@ -15738,7 +15754,7 @@ msgstr "미지정됨"
 
 #: src/common/kax_info.cpp:668
 #: src/common/kax_info.cpp:844
-#: src/input/r_matroska.cpp:136
+#: src/input/r_matroska.cpp:137
 #, no-c-format
 msgid "video"
 msgstr "비디오"
@@ -15828,8 +15844,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: 예외 사항 발생 (메시지: {1}; 형식: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1611
-#: src/input/r_matroska.cpp:2347
+#: src/input/r_matroska.cpp:1612
+#: src/input/r_matroska.cpp:2353
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: 알 수 없는 예외 사항 발생."

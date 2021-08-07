@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-07-21 22:34+0200\n"
+"POT-Creation-Date: 2021-08-07 17:11+0200\n"
 "PO-Revision-Date: 2021-06-26 19:58+0000\n"
 "Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>\n"
 "Language-Team: Serbian (Serbia) (http://www.transifex.com/moritz-bunkus/"
@@ -1863,7 +1863,7 @@ msgstr "Аргум&енти истицања за:"
 msgid "&Expand all"
 msgstr "&Рашири све"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:339
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:364
 #, no-c-format
 msgid "&Extended subtags:"
 msgstr ""
@@ -1893,7 +1893,7 @@ msgstr "Прва ставка код додељивања нових броје�
 msgid "&Font && size:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:333
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:356
 #, no-c-format
 msgid "&Free-form input"
 msgstr ""
@@ -1924,7 +1924,7 @@ msgstr ""
 msgid "&Hidden"
 msgstr "&Скривено"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:334
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:357
 #, fuzzy, no-c-format
 msgid "&Individually selected components"
 msgstr "Уклони елеменат"
@@ -1959,7 +1959,7 @@ msgstr "&Језик назива поглавља за замену:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:195
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1796
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:341
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:359
 #, no-c-format
 msgid "&Language:"
 msgstr "&Језик:"
@@ -2134,12 +2134,12 @@ msgstr "Сачувај извештај радње"
 msgid "&Previous multiplex settings"
 msgstr "Подразумевано за уносе новог поглавља:"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:338
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:361
 #, no-c-format
 msgid "&Private use:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:340
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:358
 #, no-c-format
 msgid "&Region:"
 msgstr ""
@@ -2242,7 +2242,7 @@ msgstr "Тра&жи у директоријуму и друге плеј-лис�
 msgid "&Scan for other playlists"
 msgstr "Тражи и друге плеј-&листе"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:336
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:366
 #, fuzzy, no-c-format
 msgid "&Script:"
 msgstr "&Опис:"
@@ -2334,7 +2334,7 @@ msgstr "Подаци о одељку"
 msgid "&Validate values"
 msgstr "&Потврди вредности"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:342
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:360
 #, no-c-format
 msgid "&Variants:"
 msgstr ""
@@ -2808,7 +2808,7 @@ msgstr "„{0}“ запис {1}: {2}"
 msgid "'{0}': Processing the following files as well: {1}\n"
 msgstr "„{0}“: Обрађујем и наредне датотеке: {1}\n"
 
-#: src/input/r_matroska.cpp:1935
+#: src/input/r_matroska.cpp:1936
 #, fuzzy, no-c-format
 msgid "'{0}': You're copying an Opus track that was written in experimental mode. The resulting track will be written in final mode, but one detail cannot be recovered from a track written in experimental mode: the end trimming. This means that a decoder might output a few samples more than originally intended. You should re-multiplex from the original Opus file if possible.\n"
 msgstr "„{0}“: Покушавате поново да сједините Опус-запис претходно сједињаван у огледном режиму. Добијени запис ће бити уписан у завршном режиму, али један детаљ не може да се опорави из записа сједињеног у огледном режиму: скраћивање на крају. Ово значи да декодер може да избаци неколико узорака више него што је испрва намеравано. Ако је то могуће, наново сједињујете из изворне Опус-датотеке.\n"
@@ -2973,8 +2973,8 @@ msgstr "<несачувана датотека>"
 msgid "<{0}> is not a valid child element of <{1}> at position {2}."
 msgstr "<{0}> није ваљан под-елеменат <{1}>, на месту {2}."
 
-#: src/input/r_matroska.cpp:2379
-#: src/input/r_matroska.cpp:2488
+#: src/input/r_matroska.cpp:2385
+#: src/input/r_matroska.cpp:2494
 #, no-c-format
 msgid "A block was found at timestamp {0} for track number {1}. However, no headers were found for that track number. The block will be skipped.\n"
 msgstr "Пронађен је блок на временској ознаци {0} за запис {1}, међутим, нису нађена заглавља за запис са тим бројем. Изоставићу овај блок.\n"
@@ -2999,7 +2999,7 @@ msgstr "Зарезом-одвојена листа бројева кадрова
 msgid "A comma-separated list of timestamp ranges of content to keep."
 msgstr "Зарезом-одвојена листа опсега временских ознака садржаја за чување."
 
-#: src/input/r_matroska.cpp:747
+#: src/input/r_matroska.cpp:748
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
 msgstr ""
@@ -3097,7 +3097,7 @@ msgid "A&udio file:"
 msgstr "&Додај датотеке"
 
 #: src/common/file_types.cpp:73
-#: src/output/p_aac.h:47
+#: src/output/p_aac.h:46
 #, no-c-format
 msgid "AAC"
 msgstr "Аак"
@@ -3118,12 +3118,12 @@ msgid "AAC with ADIF headers"
 msgstr "Аак са АДИФ заглављима"
 
 #: src/common/file_types.cpp:74
-#: src/output/p_ac3.h:44
+#: src/output/p_ac3.h:43
 #, no-c-format
 msgid "AC-3"
 msgstr "Ак3 (енг. „AC-3“)"
 
-#: src/output/p_alac.h:33
+#: src/output/p_alac.h:31
 #, no-c-format
 msgid "ALAC"
 msgstr "Алак"
@@ -3143,7 +3143,7 @@ msgstr "Не слаже се величина Алак-приватних под
 msgid "ASCII string (no special chars like Umlaute etc.)"
 msgstr "АСКИ ниска (без посебних знакова као „Umlaute“, итд.)"
 
-#: src/output/p_av1.h:35
+#: src/output/p_av1.h:33
 #, fuzzy, no-c-format
 msgid "AV1"
 msgstr "Ави"
@@ -3154,12 +3154,12 @@ msgid "AV1 Open Bitstream Units stream"
 msgstr ""
 
 #: src/common/file_types.cpp:76
-#: src/output/p_avc.h:34
+#: src/output/p_avc.h:33
 #, no-c-format
 msgid "AVC/H.264"
 msgstr "Авк/Х.264"
 
-#: src/output/p_avc_es.h:40
+#: src/output/p_avc_es.h:39
 #, fuzzy, no-c-format
 msgid "AVC/H.264 (unframed)"
 msgstr "Авк/Х.264 (без кадрова)"
@@ -4283,7 +4283,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Поништи"
 
-#: src/output/p_mpeg4_p2.cpp:110
+#: src/output/p_mpeg4_p2.cpp:113
 #, no-c-format
 msgid "Cannot convert non-native MPEG4 video frames into native ones if the source container provides neither timestamps nor a number of frames per second.\n"
 msgstr "Не могу да прекодирам незваничне у чисте МПЕГ4 кадрове уколико изворишни сандук не нуди ни временске ознаке, ни број кадрова по секунди (КпС).\n"
@@ -4401,7 +4401,7 @@ msgid "Chapter &number of first created entry:"
 msgstr "&Број поглавља првоствореног уноса:"
 
 #: src/common/chapters/chapters.cpp:57
-#: src/mkvtoolnix-gui/util/settings.cpp:406
+#: src/mkvtoolnix-gui/util/settings.cpp:425
 #, no-c-format
 msgid "Chapter <NUM:2>"
 msgstr "Поглавље <NUM:2>"
@@ -4927,7 +4927,7 @@ msgstr "Не могу да нађем индекс звучног записа {
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "Не налазим „gptzr“ при придруживању. {0}\n"
 
-#: src/output/p_mpeg4_p2.cpp:173
+#: src/output/p_mpeg4_p2.cpp:174
 #, no-c-format
 msgid "Could not find the codec configuration data in the first MPEG-4 part 2 video frame. This track cannot be stored in native mode.\n"
 msgstr "Не могу да пронађем податке подешавања кодека у првом  Мпег4-одељак2 видео-кадру. Овај запис се не може сачувати у свом природном режиму.\n"
@@ -4952,7 +4952,7 @@ msgstr "Не могу да покренем „iconv“ програм за пр
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
 msgstr "Не могу да покренем „iconv“ програм за прекодирање  из {0} у УТФ-8. Неке ниске неће бити прекодиране у УТФ-8, а исходишна матрошка-датотека можда неће бити сагласна са матрошка-спецификацијама (грешка: {1}, {2}).\n"
 
-#: src/input/r_matroska.cpp:1716
+#: src/input/r_matroska.cpp:1717
 #, fuzzy, no-c-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
 msgstr "„matroska_reader“: Задршка ЈИБ-записа {0} није могућа јер је он намењен за употребу у новој датотеци.\n"
@@ -5317,7 +5317,7 @@ msgid "D&uplicate selected edition or chapter"
 msgstr "&Удвостручи одабрано издање или поглавље"
 
 #: src/common/file_types.cpp:83
-#: src/output/p_dts.h:48
+#: src/output/p_dts.h:47
 #, no-c-format
 msgid "DTS"
 msgstr "ДТС"
@@ -5337,7 +5337,7 @@ msgstr "ДТС/ДТС-ХД (Дигитални Театарски Систем)"
 msgid "DV video format"
 msgstr "Дв-видео"
 
-#: src/output/p_dvbsub.h:29
+#: src/output/p_dvbsub.h:28
 #, fuzzy, no-c-format
 msgid "DVB subtitles"
 msgstr "Хд-Двд поднаписи"
@@ -5623,7 +5623,7 @@ msgstr "Одабери &све записе"
 
 #: src/common/file_types.cpp:33
 #: src/common/file_types.cpp:82
-#: src/output/p_dirac.h:37
+#: src/output/p_dirac.h:36
 #, no-c-format
 msgid "Dirac"
 msgstr "Дирак"
@@ -5910,6 +5910,11 @@ msgstr "&Изађи"
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr "Ра&шири почетне и крајње временске ознаке поглавља тако да се обухвате све почетне и крајње временске ознаке његових потпоглавља"
 
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:367
+#, fuzzy, no-c-format
+msgid "E&xtensions:"
+msgstr "Подаци за изузетак:"
+
 #: src/common/kax_element_names.cpp:82
 #, no-c-format
 msgid "EBML CRC-32"
@@ -5940,6 +5945,11 @@ msgstr "EBML верзија"
 msgid "EBML void"
 msgstr "EBML празнина"
 
+#: src/common/bcp47.cpp:375
+#, no-c-format
+msgid "Each extension identifier must be used at most once."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:198
 #, no-c-format
 msgid "Each file created contains one segment, and each segment has one segment UID."
@@ -5960,8 +5970,8 @@ msgstr "Сваки опсег је одређен почетним и крајњ
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
 msgstr "Сваки опсег је одређен почетном и крајњом временском ознаком са цртицом („-“)у средини, као нпр. „00:01:15-00:03:20“."
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:331
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:332
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:354
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:355
 #, fuzzy, no-c-format
 msgid "Edit language"
 msgstr "Језик"
@@ -6390,6 +6400,11 @@ msgstr "Издваја податке поглавља у простом обл�
 msgid "Extended subtags"
 msgstr ""
 
+#: src/common/bcp47.cpp:367
+#, no-c-format
+msgid "Extension subtags must follow at least a primary language subtag."
+msgstr ""
+
 #: src/extract/extract_cli_parser.cpp:82
 #, no-c-format
 msgid "Extract the data to a raw file including the CodecPrivate as a header."
@@ -6401,13 +6416,13 @@ msgid "Extract the data to a raw file."
 msgstr "Издвој податке у основну датотеку (енг. „raw“)."
 
 #: src/output/p_hevc.cpp:110
-#: src/output/p_hevc_es.cpp:126
+#: src/output/p_hevc_es.cpp:124
 #, no-c-format
 msgid "Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"
 msgstr "Издвојен податак о пропорцији слике из Хевк-видео података и постављена величина приказа на {0}/{1}.\n"
 
 #: src/output/p_avc.cpp:102
-#: src/output/p_avc_es.cpp:139
+#: src/output/p_avc_es.cpp:137
 #, no-c-format
 msgid "Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to {0}/{1}.\n"
 msgstr "Издвојен податак о пропорцији слике из Мпег4-слој10 (Авк) видео-података и постављена величина приказа на {0}/{1}.\n"
@@ -6417,7 +6432,7 @@ msgstr "Издвојен податак о пропорцији слике из 
 msgid "Extracted the aspect ratio information from the MPEG4 layer 2 video data and set the display dimensions to {0}/{1}.\n"
 msgstr "Издвојен податак о пропорцији слике из Мпег4-слој2 видео-података и постављена величина приказа на {0}/{1}.\n"
 
-#: src/output/p_theora.cpp:72
+#: src/output/p_theora.cpp:71
 #, no-c-format
 msgid "Extracted the aspect ratio information from the Theora video headers and set the display dimensions to {0}/{1}.\n"
 msgstr "Издвојен податак о пропорцији слике из заглавља Теора-видеа и постављена величина приказа на {0}/{1}.\n"
@@ -6443,7 +6458,7 @@ msgid "Extraction tool"
 msgstr "Мкв-&издвојница"
 
 #: src/common/file_types.cpp:85
-#: src/output/p_flac.h:38
+#: src/output/p_flac.h:37
 #, no-c-format
 msgid "FLAC"
 msgstr "Флак"
@@ -6627,7 +6642,7 @@ msgstr "Завршено у:"
 msgid "First chapter name regardless of its language"
 msgstr "— назив првог поглавља независно од њ. језичких поставки —"
 
-#: src/common/bcp47.cpp:333
+#: src/common/bcp47.cpp:425
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr ""
@@ -6737,7 +6752,7 @@ msgstr "Присиљава вредност чиниоца временских 
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Нађена је барем један Б-кадар без другог указивача у отвореној „групи слика“ (енг. „GOP“).\n"
 
-#: src/common/bcp47.cpp:328
+#: src/common/bcp47.cpp:420
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr ""
@@ -6909,13 +6924,13 @@ msgstr "Кју-указивач стања кодека: {0}"
 msgid "HD-DVD subtitles"
 msgstr "Хд-Двд поднаписи"
 
-#: src/output/p_hdmv_pgs.h:38
+#: src/output/p_hdmv_pgs.h:37
 #, no-c-format
 msgid "HDMV PGS"
 msgstr "Хдмв Пгс"
 
 #: src/common/file_types.cpp:40
-#: src/output/p_hdmv_textst.h:30
+#: src/output/p_hdmv_textst.h:29
 #, fuzzy, no-c-format
 msgid "HDMV TextST"
 msgstr "Хдмв Пгс"
@@ -6927,12 +6942,12 @@ msgid "HDMV TextST subtitles"
 msgstr "текст-поднаписи"
 
 #: src/common/file_types.cpp:88
-#: src/output/p_hevc.h:36
+#: src/output/p_hevc.h:35
 #, no-c-format
 msgid "HEVC/H.265"
 msgstr "Хевк/Х.265"
 
-#: src/output/p_hevc_es.h:38
+#: src/output/p_hevc_es.h:37
 #, fuzzy, no-c-format
 msgid "HEVC/H.265 (unframed)"
 msgstr "Хевк/Х.265 (без кадрова)"
@@ -7433,7 +7448,7 @@ msgstr ""
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr "Да бисте их придружили или додали као прилепке, одаберите којој улазној датотеци желите да их придружите или прилепите:"
 
-#: src/output/p_textsubs.cpp:142
+#: src/output/p_textsubs.cpp:140
 #, no-c-format
 msgid "Ignoring an entry which starts after it ends ({0}).\n"
 msgstr "Занемарујем унос чији је почетак после њ. краја ({0}).\n"
@@ -7473,7 +7488,7 @@ msgstr ""
 msgid "In the most compact layout the track properties are located to the right of the files and tracks lists in a scrollable single column."
 msgstr ""
 
-#: src/input/r_real.cpp:545
+#: src/input/r_real.cpp:544
 #, no-c-format
 msgid "Inconsistent AAC audio packet (length: {0} != {1})\n"
 msgstr "Недоследан Аак-звучни пакет (дужина: {0} != {1})\n"
@@ -8006,7 +8021,7 @@ msgstr "Радње и њихов исход"
 msgid "Jobs to execute:"
 msgstr "Радња за извршење:"
 
-#: src/output/p_kate.h:39
+#: src/output/p_kate.h:38
 #, no-c-format
 msgid "Kate"
 msgstr "Кејт"
@@ -8063,11 +8078,6 @@ msgstr "Превод поглавља"
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:53
 #, no-c-format
 msgid "Language selected below"
-msgstr ""
-
-#: src/common/bcp47.cpp:347
-#, no-c-format
-msgid "Language tag extensions are currently not supported."
 msgstr ""
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:278
@@ -8284,7 +8294,7 @@ msgid "MPEG transport streams"
 msgstr "Мпег-ток за пренос"
 
 #: src/common/file_types.cpp:93
-#: src/output/p_mp3.h:44
+#: src/output/p_mp3.h:43
 #, no-c-format
 msgid "MPEG-1/2 Audio Layer II/III"
 msgstr ""
@@ -8294,7 +8304,7 @@ msgstr ""
 msgid "MPEG-1/2 Audio Layer II/III elementary streams"
 msgstr "Основни мпег-видео токови"
 
-#: src/output/p_mpeg1_2.h:37
+#: src/output/p_mpeg1_2.h:35
 #, fuzzy, no-c-format
 msgid "MPEG-1/2 video"
 msgstr "Мпег-1/2"
@@ -8309,7 +8319,7 @@ msgstr "Основни мпег-видео ток"
 msgid "MPEG-1/2 video elementary streams"
 msgstr "Основни мпег-видео токови"
 
-#: src/output/p_mpeg4_p2.h:64
+#: src/output/p_mpeg4_p2.h:62
 #, no-c-format
 msgid "MPEG-4"
 msgstr "Мпег-4"
@@ -8329,13 +8339,13 @@ msgstr "Највећи број датотека:"
 msgid "Make this track eligible to be played by default."
 msgstr ""
 
-#: src/input/r_matroska.cpp:1804
-#: src/input/r_matroska.cpp:1821
+#: src/input/r_matroska.cpp:1805
+#: src/input/r_matroska.cpp:1822
 #, no-c-format
 msgid "Malformed AAC codec initialization data found.\n"
 msgstr "Пронађени су неправилни подаци за отварање Аак-кодека.\n"
 
-#: src/input/r_matroska.cpp:1814
+#: src/input/r_matroska.cpp:1815
 #, no-c-format
 msgid "Malformed codec id '{0}'.\n"
 msgstr "Неправилан ИБ-кодека „{0}“.\n"
@@ -8818,7 +8828,7 @@ msgstr "Није названа излазна датотека, па ћу да 
 msgid "No disc library information was found."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:363
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:377
 #, fuzzy, no-c-format
 msgid "No error was found."
 msgstr "Нема нађених кју-података.\n"
@@ -9395,7 +9405,7 @@ msgstr "Опције"
 msgid "Options:"
 msgstr "Опције:"
 
-#: src/output/p_opus.h:37
+#: src/output/p_opus.h:36
 #, no-c-format
 msgid "Opus"
 msgstr "Опус"
@@ -9476,7 +9486,7 @@ msgstr "Излазна учестаност узорковања: {0}"
 msgid "Overwrite existing file"
 msgstr "Отвори датотеку поставки"
 
-#: src/output/p_pcm.h:46
+#: src/output/p_pcm.h:45
 #, no-c-format
 msgid "PCM"
 msgstr "ИКМ (енг. „PCM“)"
@@ -9506,7 +9516,7 @@ msgstr "Изоставио сам пакет број {0} јер није сад
 msgid "Parse the whole file instead of relying on the index."
 msgstr "Не ослањај се на индекс већ рашчлани целу датотеку."
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:346
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:370
 #, no-c-format
 msgid "Parser error:"
 msgstr ""
@@ -9764,7 +9774,7 @@ msgstr ""
 msgid "Private use"
 msgstr ""
 
-#: src/output/p_prores.h:28
+#: src/output/p_prores.h:26
 #, no-c-format
 msgid "ProRes video"
 msgstr "ProRes видео"
@@ -10076,7 +10086,7 @@ msgstr "Чита допунске опције за линију наредбе 
 msgid "Real output sampling frequency in Hz."
 msgstr "Стварна излазна учестаност узорковања (у херцима)."
 
-#: src/output/p_realaudio.h:33
+#: src/output/p_realaudio.h:32
 #, no-c-format
 msgid "RealAudio"
 msgstr "Рил-аудијо"
@@ -10422,6 +10432,7 @@ msgid "SSA/ASS subtitles"
 msgstr "Сса/Асс поднаписи"
 
 #: src/common/file_types.cpp:57
+#: src/output/p_ssa.h:28
 #, no-c-format
 msgid "SSA/ASS text subtitles"
 msgstr "Сса/Асс текст. поднаписи"
@@ -10890,12 +10901,12 @@ msgstr "Поставке"
 msgid "Settings for saving output to a text file"
 msgstr ""
 
-#: src/input/r_real.cpp:525
+#: src/input/r_real.cpp:524
 #, no-c-format
 msgid "Short AAC audio packet (length: {0} < 2)\n"
 msgstr "Кратак Аак-звучни пакет (дужина: {0} < 2)\n"
 
-#: src/input/r_real.cpp:532
+#: src/input/r_real.cpp:531
 #, no-c-format
 msgid "Short AAC audio packet (length: {0} < {1})\n"
 msgstr "Кратак Аак-звучни пакет (дужина: {0} < {1})\n"
@@ -11272,7 +11283,7 @@ msgstr "Започето у:"
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr "Подаци за запис број {0}: број блокова: {1}; величина у бајтовима: {2}; трајање у секундама: {3}; приближан битски-ток у бита/секунди: {4}\n"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:344
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:368
 #: src/mkvtoolnix-gui/jobs/model.cpp:50
 #, no-c-format
 msgid "Status"
@@ -11280,7 +11291,7 @@ msgstr "Стање"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:207
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:160
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:345
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:369
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:289
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:182
 #, no-c-format
@@ -11384,7 +11395,7 @@ msgid "System information"
 msgstr "Подаци о одељку"
 
 #: src/common/file_types.cpp:105
-#: src/output/p_tta.h:33
+#: src/output/p_tta.h:32
 #, no-c-format
 msgid "TTA"
 msgstr "Тта"
@@ -11526,7 +11537,7 @@ msgstr "У „.idx“-датотеци нема линије „id: ...“ ко�
 msgid "The AAC file '{0}' contains invalid header data: the sampling frequency or the number of channels is 0.\n"
 msgstr ""
 
-#: src/output/p_aac.cpp:143
+#: src/output/p_aac.cpp:141
 #, no-c-format
 msgid "The AAC profiles are different: {0} and {1}"
 msgstr "Различити Аак-профили: {0} спрам {1}"
@@ -11651,12 +11662,12 @@ msgstr "Не може да се рашчлани заглавље теора-у�
 msgid "The UID must not be left empty."
 msgstr ""
 
-#: src/input/r_matroska.cpp:746
+#: src/input/r_matroska.cpp:747
 #, no-c-format
 msgid "The VobSub subtitle track {0} does not contain its index in the CodecPrivate element."
 msgstr ""
 
-#: src/output/p_vorbis.cpp:128
+#: src/output/p_vorbis.cpp:126
 #, fuzzy, no-c-format
 msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated without re-encoding."
 msgstr "Ворбис кодне-књиге се разликују и, као такве, не могу се придруживати једна другој без додатног прекодирања"
@@ -11842,7 +11853,7 @@ msgstr "Врста кодека „{0}“ је неупотребљива у В�
 msgid "The codec's private data does not match (lengths: {0} and {1})."
 msgstr "Кодек-приватни подаци се не слажу (дужине: {0} и {1})."
 
-#: src/output/p_avc.cpp:130
+#: src/output/p_avc.cpp:128
 #, no-c-format
 msgid "The codec's private data does not match. Both have the same length ({0}) but different content."
 msgstr "Кодек-приватни подаци се не слажу. Оба су исте дужине ({0}) али различитог садржаја."
@@ -12040,7 +12051,7 @@ msgstr "Време свршетка мора да буде након време
 msgid "The entries in the 'selected' list on the right will be shown at the top of all the drop-down boxes with countries and regions in the program."
 msgstr "Овде одабране земље ће се приказивати на врху падајуће листе доступних земаља у програму."
 
-#: src/common/bcp47.cpp:283
+#: src/common/bcp47.cpp:343
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr ""
@@ -12336,8 +12347,8 @@ msgstr "Датотека или директоријум нису пронађе
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
 #: src/common/kax_file.cpp:72
-#: src/input/r_matroska.cpp:1612
-#: src/input/r_matroska.cpp:2348
+#: src/input/r_matroska.cpp:1613
+#: src/input/r_matroska.cpp:2354
 #, no-c-format
 msgid "The file will not be processed further."
 msgstr "Надаље, нећу обрађивати ову датотеку."
@@ -12507,12 +12518,12 @@ msgstr "Уколико изворна датотека записа не сад�
 msgid "The language set here is also used when chapters are generated."
 msgstr "Дозвољене су ознаке али не и поглавља."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:349
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:363
 #, fuzzy, no-c-format
 msgid "The language tag is not valid."
 msgstr "Није дозвољено одсуство назива датотеке.\n"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:349
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:363
 #, fuzzy, no-c-format
 msgid "The language tag is valid."
 msgstr "У „{1}“ није ваљан аргумент „{0}“: „{2}“ није ваљан ИБ-записа.\n"
@@ -12552,7 +12563,7 @@ msgstr "Подразумевани &језик записа је:"
 msgid "The list of recognized track languages in file names must not be empty."
 msgstr ""
 
-#: src/common/translation.cpp:415
+#: src/common/translation.cpp:410
 #, no-c-format
 msgid "The locale could not be set properly. Check the LANG, LC_ALL and LC_MESSAGES environment variables.\n"
 msgstr "Не могу ваљано да поставим језичке поставке. Проверите променљиве окружења „LANG“, „LC_ALL“ и „LC_MESSAGES“.\n"
@@ -12847,7 +12858,7 @@ msgstr "Не може да се рашчлани ЈИБ одељка: %1"
 msgid "The segment edition UID must be a positive number if given."
 msgstr "Ако се даје ЈИБ-одељка издања, он мора да буде позитиван број."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:354
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:368
 #, no-c-format
 msgid "The selected language code '%1' is not an ISO 639-2 code. Players that only support the legacy Matroska language elements but not the IETF BCP 47 language elements will therefore display a different language such as 'und' (undetermined)."
 msgstr ""
@@ -13099,32 +13110,37 @@ msgstr "Онда можете да одаберете коју плеј-лист
 msgid "The value '{0}' is not a number.\n"
 msgstr "Не могу да читам ИксМЛ-датотеку ознака „{0}“.\n"
 
-#: src/common/bcp47.cpp:159
+#: src/common/bcp47.cpp:385
+#, fuzzy, no-c-format
+msgid "The value '{0}' is not a registered IANA language tag identifier."
+msgstr "„{0}“ није ваљан ИСО639-2 језички код."
+
+#: src/common/bcp47.cpp:177
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid ISO 15924 script code."
 msgstr "„{0}“ није ваљан ИСО639-2 језички код."
 
-#: src/common/bcp47.cpp:173
+#: src/common/bcp47.cpp:191
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid ISO 3166-1 country code."
 msgstr "„{0}“ није ваљан „ccTLD“ кôд земље (Највиши домен држав. кодова)."
 
-#: src/common/bcp47.cpp:146
+#: src/common/bcp47.cpp:164
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid ISO 639 language code."
 msgstr "„{0}“ није ваљан ИСО639-2 језички код."
 
-#: src/common/bcp47.cpp:191
+#: src/common/bcp47.cpp:209
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid UN M.49 country number code."
 msgstr "„{0}“ није ваљан „ccTLD“ кôд земље (Највиши домен држав. кодова)."
 
-#: src/common/bcp47.cpp:213
+#: src/common/bcp47.cpp:231
 #, no-c-format
 msgid "The value '{}' is not part of the IANA Language Subtag Registry for extended language subtags."
 msgstr ""
 
-#: src/common/bcp47.cpp:214
+#: src/common/bcp47.cpp:232
 #, no-c-format
 msgid "The value '{}' is not part of the IANA Language Subtag Registry for language variants."
 msgstr ""
@@ -13146,7 +13162,7 @@ msgstr "Вредност може да се зада и као број са п�
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "Вредност може да буде и негативна, али, водите рачуна, јер било који кадар са негативном временском ознаком биће одбачен након овог прорачуна."
 
-#: src/common/bcp47.cpp:310
+#: src/common/bcp47.cpp:402
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr ""
@@ -13162,7 +13178,7 @@ msgstr "Ове вредности се сачуване само у заглав
 msgid "The values will be available for easy selection in the multiplexer."
 msgstr ""
 
-#: src/common/bcp47.cpp:284
+#: src/common/bcp47.cpp:344
 #, no-c-format
 msgid "The variant '{}' must only be used with one of the following prefixes: {}."
 msgstr ""
@@ -13182,7 +13198,7 @@ msgstr ""
 msgid "The width of the two tracks is different: {0} and {1}"
 msgstr "Ова два записа су различитих ширина: {0} спрам {1}"
 
-#: src/output/p_theora.h:27
+#: src/output/p_theora.h:26
 #, no-c-format
 msgid "Theora"
 msgstr "Теора"
@@ -13264,17 +13280,17 @@ msgstr "Овај Аак-запис не садржи ваљана заглављ
 msgid "This AC-3 track contains {0} bytes of non-AC-3 data at the beginning. This corresponds to a delay of {1}ms. This delay will be used instead of the non-AC-3 data.\n"
 msgstr "На свом почетку, овај Ак3-запис садржи {0} бајтова који нису Ак3-подаци, а што одговара кашњењу од {1} мс. Употребиће се ово кашњење уместо бајтова који нису Ак3-подаци.\n"
 
-#: src/output/p_avc_es.cpp:108
+#: src/output/p_avc_es.cpp:106
 #, no-c-format
 msgid "This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"
 msgstr "Овај Авк/Х.264-запис не почиње кључним кадром. Изоставићу почетних {0} кадрова.\n"
 
-#: src/output/p_avc_es.cpp:118
+#: src/output/p_avc_es.cpp:116
 #, no-c-format
 msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
 msgstr "Временски податак овог Авк/Х.264 записа указује да он употребљава променљиви број КпС. Ипак, за њега нису дати ни подаци о основном трајању ни спољна датотека са временским ознакама, а ни изворни сандук не садржи временске ознаке. Добијене временске ознаке можда неће бити употребљиве.\n"
 
-#: src/output/p_hevc_es.cpp:105
+#: src/output/p_hevc_es.cpp:103
 #, no-c-format
 msgid "This HEVC track does not start with a key frame. The first {0} frames have been skipped.\n"
 msgstr "Овај Хевк-запис не почиње кључним кадром. Изоставићу почетних {0} кадрова.\n"
@@ -13563,7 +13579,7 @@ msgid "This template will be used for new chapter entries."
 msgstr "Ова мустра ће да се употребљава у новоствараним уносима поглавља."
 
 #: src/input/subtitles.cpp:68
-#: src/output/p_textsubs.cpp:130
+#: src/output/p_textsubs.cpp:128
 #, no-c-format
 msgid "This text subtitle track contains invalid 8-bit characters outside valid multi-byte UTF-8 sequences. Please specify the correct encoding for this track.\n"
 msgstr ""
@@ -13576,8 +13592,8 @@ msgstr "Овај запис садржи Сбр Аак/Хе-Аак/Аак+ по�
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
 #: src/common/kax_file.cpp:71
-#: src/input/r_matroska.cpp:1612
-#: src/input/r_matroska.cpp:2348
+#: src/input/r_matroska.cpp:1613
+#: src/input/r_matroska.cpp:2354
 #, no-c-format
 msgid "This usually indicates a damaged file structure."
 msgstr "Ово обично указује на оштећење устројства датотеке."
@@ -13749,7 +13765,7 @@ msgstr "„Кодек_приватно“ у запису {0} је премал�
 msgid "Track {0} has been compressed with an unknown/unsupported compression algorithm ({1}).\n"
 msgstr "За запис {0} је употребљен непознат/неподржан алгоритам сажимања ({1}).\n"
 
-#: src/input/r_matroska.cpp:1281
+#: src/input/r_matroska.cpp:1282
 #, no-c-format
 msgid "Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"
 msgstr "Запис {0} нема свој елеменат ЈИБ-записа чије је присуство по матрошка-спецификацији обавезно. Ако ова датотека садржи ознаке онда оне могу да буду оштећене.\n"
@@ -13854,7 +13870,7 @@ msgid "Tracks:"
 msgstr "Записи:"
 
 #: src/common/file_types.cpp:104
-#: src/output/p_truehd.h:42
+#: src/output/p_truehd.h:41
 #, no-c-format
 msgid "TrueHD"
 msgstr "Тру-ХД"
@@ -14041,7 +14057,7 @@ msgstr "Неподржан Мпег mpeg_version: 0x{0:02x} у пакету {1} 
 msgid "Unsupported file format"
 msgstr "Неподржана врста датотеке"
 
-#: src/input/r_matroska.cpp:2164
+#: src/input/r_matroska.cpp:2170
 #, no-c-format
 msgid "Unsupported track type for this track.\n"
 msgstr "Неподржана врста за овај запис.\n"
@@ -14138,7 +14154,7 @@ msgstr ""
 msgid "Using the demultiplexer for the format '{0}'.\n"
 msgstr "Употребљавам демултиплексер за формат „{0}“.\n"
 
-#: src/input/r_matroska.cpp:1639
+#: src/input/r_matroska.cpp:1640
 #, no-c-format
 msgid "Using the generic output module for track type '{0}'.\n"
 msgstr "Употребљавам општи изл. модул за врсту записа „{0}“.\n"
@@ -14154,7 +14170,7 @@ msgid "Using the track with the ID {0} from the file '{1}' as the reference for 
 msgstr ""
 
 #: src/common/file_types.cpp:107
-#: src/output/p_vc1.h:36
+#: src/output/p_vc1.h:35
 #, no-c-format
 msgid "VC-1"
 msgstr "ВК1"
@@ -14164,7 +14180,7 @@ msgstr "ВК1"
 msgid "VC-1 elementary streams"
 msgstr "ВК1-основни токови"
 
-#: src/output/p_vpx.h:34
+#: src/output/p_vpx.h:33
 #, no-c-format
 msgid "VP8/VP9"
 msgstr "Вп8/Вп9"
@@ -14234,7 +14250,7 @@ msgstr "Кју-односни положај: {0}"
 msgid "Vertical chroma subsample"
 msgstr "битова по узорку: {0}"
 
-#: src/output/p_video_for_windows.h:37
+#: src/output/p_video_for_windows.h:36
 #, no-c-format
 msgid "VfW compatible video"
 msgstr "Вфв сагласан видео"
@@ -14305,7 +14321,7 @@ msgstr "Ширина"
 msgid "Video interlaced flag"
 msgstr "Белег „испреплитан видео“"
 
-#: src/input/r_real.cpp:587
+#: src/input/r_real.cpp:586
 #, no-c-format
 msgid "Video packet assembly failed. Error code: {0} ({1})\n"
 msgstr "Sastavljanje video paketa nije uspelo. Kod greške: {0} ({1})\n"
@@ -14489,7 +14505,7 @@ msgid "Visible"
 msgstr ""
 
 #: src/common/file_types.cpp:108
-#: src/output/p_vobbtn.h:35
+#: src/output/p_vobbtn.h:34
 #, fuzzy, no-c-format
 msgid "VobBtn"
 msgstr "Воб-дугме"
@@ -14500,7 +14516,7 @@ msgid "VobButtons"
 msgstr "Воб-дугмад"
 
 #: src/common/file_types.cpp:109
-#: src/output/p_vobsub.h:30
+#: src/output/p_vobsub.h:29
 #, no-c-format
 msgid "VobSub"
 msgstr "Воб-суб"
@@ -14510,7 +14526,7 @@ msgstr "Воб-суб"
 msgid "VobSub subtitles"
 msgstr "Воб-суб поднаписи"
 
-#: src/output/p_vorbis.h:54
+#: src/output/p_vorbis.h:53
 #, no-c-format
 msgid "Vorbis"
 msgstr "Ворбис"
@@ -14535,7 +14551,7 @@ msgstr "Вав-пак"
 msgid "WAVPACK v4 audio"
 msgstr "Вав-пак звук изд.4"
 
-#: src/output/p_wavpack.h:36
+#: src/output/p_wavpack.h:35
 #, no-c-format
 msgid "WAVPACK4"
 msgstr "Вав-пак4"
@@ -14572,7 +14588,7 @@ msgstr "Упозорење — линија {0}: Почетна временск
 msgid "Warning:"
 msgstr "Упозорење:"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:354
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:368
 #, no-c-format
 msgid "Warning: %1"
 msgstr "Упозорење: %1"
@@ -14607,7 +14623,7 @@ msgstr "ВебМ-датотеке"
 #: src/common/file_types.cpp:66
 #: src/common/file_types.cpp:112
 #: src/extract/xtr_webvtt.h:31
-#: src/output/p_webvtt.h:28
+#: src/output/p_webvtt.h:26
 #, fuzzy, no-c-format
 msgid "WebVTT subtitles"
 msgstr "Срт поднаписи"
@@ -14988,7 +15004,7 @@ msgstr "Број сати („ЧЧ“) можете да изоставите."
 msgid "Zlib decompression failed. Result: {0}\n"
 msgstr "Није успело Злиб-сажимање. Исход: {0}\n"
 
-#: src/output/p_ac3.cpp:239
+#: src/output/p_ac3.cpp:237
 #, no-c-format
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
 msgstr "„ac3_bs_packetizer::add_to_buffer()“: Непроверен код („size“ је чудно). Ако Мкв-спојница непредвиђено прекине рад, или ако исходишна датотека не садржи потпун и ваљан звучни запис, обавестите творца програма, Морица Бункуса, системом е-поште на moritz@bunkus.org.\n"
@@ -15010,7 +15026,7 @@ msgstr "mkvextract attachments <ул_назив> [опције] [ПИБ1:изл1
 
 #: src/common/kax_info.cpp:667
 #: src/common/kax_info.cpp:843
-#: src/input/r_matroska.cpp:134
+#: src/input/r_matroska.cpp:135
 #, no-c-format
 msgid "audio"
 msgstr "звук"
@@ -15042,7 +15058,7 @@ msgstr ""
 
 #: src/common/kax_info.cpp:670
 #: src/common/kax_info.cpp:846
-#: src/input/r_matroska.cpp:135
+#: src/input/r_matroska.cpp:136
 #, no-c-format
 msgid "buttons"
 msgstr "дугмад"
@@ -15207,7 +15223,7 @@ msgstr "за датотеке података поглавља (нпр. Огм,
 msgid "for subtitle files that do not use a byte order marker (BOM) and that are not encoded in the system's current character set (%1)"
 msgstr "за датотеке поднаписа који не употребљавају ознаку редоследа бајтова (енг. „BOM“), а који нису кодирани текућом кодном страном (%1) на систему"
 
-#: src/output/p_generic_video.h:36
+#: src/output/p_generic_video.h:35
 #, no-c-format
 msgid "generic video"
 msgstr ""
@@ -15257,108 +15273,108 @@ msgstr "дужина {0}, подаци: {1}"
 msgid "line {0}: The 'delay' timestamp could not be parsed.\n"
 msgstr "линија {0}: Не могу да рашчланим временску ознаку за кашњење.\n"
 
-#: src/input/r_matroska.cpp:417
+#: src/input/r_matroska.cpp:418
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "„matroska_reader“: (МС-сагласан режим, запис {0}) По Матрошки, постоји {1} бита по узорку, а по „WAVEFORMATEX“, њих је {2}.\n"
 
-#: src/input/r_matroska.cpp:408
+#: src/input/r_matroska.cpp:409
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, but the WAVEFORMATEX says that there are {2}.\n"
 msgstr "„matroska_reader“: (МС-сагласан режим, запис {0}) По Матрошки, постоји {1} канала, а по „WAVEFORMATEX“, њих је {2}.\n"
 
-#: src/input/r_matroska.cpp:399
+#: src/input/r_matroska.cpp:400
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, but WAVEFORMATEX says that there are {2}.\n"
 msgstr "„matroska_reader“: (МС-сагласан режим, запис {0}) По Матрошки, постоји {1} узорака по секунди, а по „WAVEFORMATEX“, њих је {2}.\n"
 
-#: src/input/r_matroska.cpp:620
+#: src/input/r_matroska.cpp:621
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "„matroska_reader“: (МС-сагласан режим, запис {0}) По Матрошки, висина видеа је {1}, а по „BITMAPINFOHEADER“, она је {2}.\n"
 
-#: src/input/r_matroska.cpp:611
+#: src/input/r_matroska.cpp:612
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
 msgstr "„matroska_reader“: (МС-сагласан режим, запис {0}) По Матрошки, ширина видеа је {1}, а по „BITMAPINFOHEADER“, она је {2}.\n"
 
-#: src/input/r_matroska.cpp:1549
-#: src/input/r_matroska.cpp:1554
+#: src/input/r_matroska.cpp:1550
+#: src/input/r_matroska.cpp:1555
 #, no-c-format
 msgid "matroska_reader: No segment found.\n"
 msgstr "„matroska_reader“: Нема пронађеног одељка.\n"
 
-#: src/input/r_matroska.cpp:1230
+#: src/input/r_matroska.cpp:1231
 #, no-c-format
 msgid "matroska_reader: Pixel height is missing.\n"
 msgstr "„matroska_reader“: Недостаје висина (у пикселима).\n"
 
-#: src/input/r_matroska.cpp:1228
+#: src/input/r_matroska.cpp:1229
 #, no-c-format
 msgid "matroska_reader: Pixel width is missing.\n"
 msgstr "„matroska_reader“: Недостаје ширина (у пикселима).\n"
 
-#: src/input/r_matroska.cpp:780
+#: src/input/r_matroska.cpp:781
 #, no-c-format
 msgid "matroska_reader: The CodecID '{0}' for track {1} is unknown.\n"
 msgstr "„matroska_reader“: Није познат ИБ-кодека „{0}“ (запис {1}).\n"
 
-#: src/input/r_matroska.cpp:432
-#: src/input/r_matroska.cpp:478
-#: src/input/r_matroska.cpp:501
-#: src/input/r_matroska.cpp:684
-#: src/input/r_matroska.cpp:694
-#: src/input/r_matroska.cpp:715
+#: src/input/r_matroska.cpp:433
+#: src/input/r_matroska.cpp:479
+#: src/input/r_matroska.cpp:502
+#: src/input/r_matroska.cpp:685
+#: src/input/r_matroska.cpp:695
+#: src/input/r_matroska.cpp:716
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"
 msgstr "„matroska_reader“: За запис {0}, ИБ-кодека је „{1}“, али у овим приватним подацима нема ваљаног заглавља.\n"
 
-#: src/input/r_matroska.cpp:599
+#: src/input/r_matroska.cpp:600
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no BITMAPINFOHEADER struct present. Therefore we don't have a FourCC to identify the video codec used.\n"
 msgstr "„matroska_reader“: За запис {0}, ИБ-кодека је „{1}“, али не постоји „BITMAPINFOHEADER“-устројство. Зато нема Фоур-ЦЦ за одређивање употребљеног видео-кодера.\n"
 
-#: src/input/r_matroska.cpp:377
+#: src/input/r_matroska.cpp:378
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no WAVEFORMATEX struct present. Therefore we don't have a format ID to identify the audio codec used.\n"
 msgstr "„matroska_reader“: За запис {0}, ИБ-кодека је „{1}“, али не постоји „WAVEFORMATEX“-устројство. Зато нема ИБ-формата за одређивање употребљеног звучног-кодера.\n"
 
-#: src/input/r_matroska.cpp:639
+#: src/input/r_matroska.cpp:640
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no codec private headers.\n"
 msgstr "„matroska_reader“: За запис {0}, ИБ-кодека је „{1}“, али нема приватних заглавља кодека.\n"
 
-#: src/input/r_matroska.cpp:733
+#: src/input/r_matroska.cpp:734
 #, no-c-format
 msgid "matroska_reader: The CodecID for track {0} is '{1}', but there was no private data found.\n"
 msgstr "„matroska_reader“: За запис {0}, ИБ-кодека је „{1}“, али нема приватних података.\n"
 
-#: src/input/r_matroska.cpp:671
+#: src/input/r_matroska.cpp:672
 #, no-c-format
 msgid "matroska_reader: The height for track {0} was not set.\n"
 msgstr "„matroska_reader“: За запис {0} није постављена висина.\n"
 
-#: src/input/r_matroska.cpp:665
+#: src/input/r_matroska.cpp:666
 #, no-c-format
 msgid "matroska_reader: The width for track {0} was not set.\n"
 msgstr "„matroska_reader“: За запис {0} није постављена ширина.\n"
 
-#: src/input/r_matroska.cpp:818
+#: src/input/r_matroska.cpp:819
 #, no-c-format
 msgid "matroska_reader: Track {0} seems to be ok.\n"
 msgstr "„matroska_reader“: Изгледа да је запис {0} ваљан.\n"
 
-#: src/input/r_matroska.cpp:469
+#: src/input/r_matroska.cpp:470
 #, no-c-format
 msgid "matroska_reader: mkvmerge was not compiled with FLAC support. Ignoring track {0}.\n"
 msgstr "„matroska_reader“: Код превођења програмског кода Мкв-спојнице није укључена подршка за Флак-кодек. Занемарићу запис {0}.\n"
 
-#: src/input/r_matroska.cpp:1538
+#: src/input/r_matroska.cpp:1539
 #, no-c-format
 msgid "matroska_reader: no EBML head found.\n"
 msgstr "„matroska_reader“: нема ЕБМЛ-заглавља.\n"
 
-#: src/input/r_matroska.cpp:813
+#: src/input/r_matroska.cpp:814
 #, fuzzy, no-c-format
 msgid "matroska_reader: unknown demultiplexer type for track {0}: '{1}'\n"
 msgstr "„matroska_reader“: непозната врста демуксера за запис {0}: „{1}“\n"
@@ -15636,7 +15652,7 @@ msgstr "или"
 msgid "output sampling freq: {0}"
 msgstr "уч. узорковања на излазу: {0}"
 
-#: src/output/p_passthrough.h:28
+#: src/output/p_passthrough.h:27
 #, no-c-format
 msgid "passthrough"
 msgstr "пролаз"
@@ -15747,7 +15763,7 @@ msgstr " величина {0}"
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
 msgstr "„ssa_reader“: Формат није ваљан. Не могу да нађем линију „Format“ у одељку „[Events]“."
 
-#: src/input/r_matroska.cpp:137
+#: src/input/r_matroska.cpp:138
 #, no-c-format
 msgid "subtitle"
 msgstr "поднапис"
@@ -15763,7 +15779,7 @@ msgstr "поднаписи"
 msgid "tags [options] out.xml"
 msgstr ""
 
-#: src/output/p_textsubs.h:40
+#: src/output/p_textsubs.h:39
 #, no-c-format
 msgid "text subtitles"
 msgstr "текст-поднаписи"
@@ -15831,8 +15847,8 @@ msgstr "„tta_reader“: „tag_size“ < 0 у овом „c'tor.“ {0}\n"
 #: src/common/kax_info.cpp:836
 #: src/common/kax_info.cpp:847
 #: src/common/stereo_mode.cpp:69
-#: src/input/r_matroska.cpp:133
-#: src/input/r_matroska.cpp:2821
+#: src/input/r_matroska.cpp:134
+#: src/input/r_matroska.cpp:2827
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:118
 #: src/mkvtoolnix-gui/info/model.cpp:120
 #: src/mkvtoolnix-gui/info/model.cpp:121
@@ -15843,7 +15859,7 @@ msgstr "„tta_reader“: „tag_size“ < 0 у овом „c'tor.“ {0}\n"
 msgid "unknown"
 msgstr "непознато"
 
-#: src/input/r_matroska.cpp:2804
+#: src/input/r_matroska.cpp:2810
 #, no-c-format
 msgid "unknown, format tag 0x{0:04x}"
 msgstr "непознато, облик ознаке 0x{0:04x}"
@@ -15860,7 +15876,7 @@ msgstr ""
 
 #: src/common/kax_info.cpp:668
 #: src/common/kax_info.cpp:844
-#: src/input/r_matroska.cpp:136
+#: src/input/r_matroska.cpp:137
 #, no-c-format
 msgid "video"
 msgstr "видео"
@@ -15962,8 +15978,8 @@ msgid "{0}: an exception occurred (message: {1}; type: {2})."
 msgstr "{0}: десио се изузетак (порука: {1}; врста: {2})."
 
 #: src/common/kax_file.cpp:70
-#: src/input/r_matroska.cpp:1611
-#: src/input/r_matroska.cpp:2347
+#: src/input/r_matroska.cpp:1612
+#: src/input/r_matroska.cpp:2353
 #, no-c-format
 msgid "{0}: an unknown exception occurred."
 msgstr "{0}: десио се непознат изузетак."
