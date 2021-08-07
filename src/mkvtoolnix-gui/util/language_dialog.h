@@ -48,6 +48,7 @@ public Q_SLOTS:
 
   void addExtendedSubtagRowAndUpdateLayout();
   void addVariantRowAndUpdateLayout();
+  void addExtensionRowAndUpdateLayout();
   void addPrivateUseRowAndUpdateLayout();
 
   void removeRowForClickedButton();
@@ -83,6 +84,7 @@ protected:
   QWidget *addRowItem(QString const &type, std::function<QWidget *(int)> const &createWidget);
   QWidget *addExtendedSubtagRow();
   QWidget *addVariantRow();
+  QWidget *addExtensionRow();
   QWidget *addPrivateUseRow();
 
   int componentGridRowForWidget(QWidget *widget);

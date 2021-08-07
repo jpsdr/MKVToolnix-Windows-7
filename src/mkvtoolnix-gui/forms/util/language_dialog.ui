@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>779</width>
-    <height>478</height>
+    <width>801</width>
+    <height>513</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -100,8 +100,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>711</width>
-             <height>192</height>
+             <width>733</width>
+             <height>227</height>
             </rect>
            </property>
            <property name="autoFillBackground">
@@ -120,69 +120,8 @@
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item row="5" column="2">
-             <widget class="QPushButton" name="pbAddPrivateUse">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../../qt_resources.qrc">
-                <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="lScript">
-              <property name="text">
-               <string>&amp;Script:</string>
-              </property>
-              <property name="buddy">
-               <cstring>cbScript</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="mtx::gui::Util::CountryComboBox" name="cbRegion"/>
-            </item>
-            <item row="4" column="2">
-             <widget class="QPushButton" name="pbAddVariant">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../../qt_resources.qrc">
-                <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="lPrivateUse">
-              <property name="text">
-               <string>&amp;Private use:</string>
-              </property>
-              <property name="buddy">
-               <cstring>lePrivateUse1</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="lExtendedSubtags">
-              <property name="text">
-               <string>&amp;Extended subtags:</string>
-              </property>
-              <property name="buddy">
-               <cstring>cbExtendedSubtag1</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QComboBox" name="cbVariant1"/>
-            </item>
-            <item row="1" column="1">
-             <widget class="QComboBox" name="cbExtendedSubtag1"/>
-            </item>
-            <item row="5" column="1">
-             <widget class="QLineEdit" name="lePrivateUse1"/>
+            <item row="2" column="1">
+             <widget class="QComboBox" name="cbScript"/>
             </item>
             <item row="3" column="0">
              <widget class="QLabel" name="lRegion">
@@ -204,34 +143,10 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QComboBox" name="cbScript"/>
-            </item>
             <item row="0" column="1">
              <widget class="mtx::gui::Util::LanguageComboBox" name="cbLanguage"/>
             </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="lVariants">
-              <property name="text">
-               <string>&amp;Variants:</string>
-              </property>
-              <property name="buddy">
-               <cstring>cbVariant1</cstring>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QPushButton" name="pbAddExtendedSubtag">
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="../../qt_resources.qrc">
-                <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="1">
+            <item row="7" column="1">
              <spacer name="verticalSpacer_2">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -246,6 +161,115 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item row="4" column="1">
+             <widget class="QComboBox" name="cbVariant1"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="lVariants">
+              <property name="text">
+               <string>&amp;Variants:</string>
+              </property>
+              <property name="buddy">
+               <cstring>cbVariant1</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="mtx::gui::Util::CountryComboBox" name="cbRegion"/>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="lPrivateUse">
+              <property name="text">
+               <string>&amp;Private use:</string>
+              </property>
+              <property name="buddy">
+               <cstring>lePrivateUse1</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="pbAddExtendedSubtag">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../qt_resources.qrc">
+                <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QPushButton" name="pbAddVariant">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../qt_resources.qrc">
+                <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="lExtendedSubtags">
+              <property name="text">
+               <string>&amp;Extended subtags:</string>
+              </property>
+              <property name="buddy">
+               <cstring>cbExtendedSubtag1</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="cbExtendedSubtag1"/>
+            </item>
+            <item row="6" column="1">
+             <widget class="QLineEdit" name="lePrivateUse1"/>
+            </item>
+            <item row="6" column="2">
+             <widget class="QPushButton" name="pbAddPrivateUse">
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../qt_resources.qrc">
+                <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="lScript">
+              <property name="text">
+               <string>&amp;Script:</string>
+              </property>
+              <property name="buddy">
+               <cstring>cbScript</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="lExtensions">
+              <property name="text">
+               <string>E&amp;xtensions:</string>
+              </property>
+              <property name="buddy">
+               <cstring>leExtension1</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QLineEdit" name="leExtension1"/>
+            </item>
+            <item row="5" column="2">
+             <widget class="QPushButton" name="pbAddExtension">
+              <property name="text">
+               <string notr="true"/>
+              </property>
+              <property name="icon">
+               <iconset resource="../../qt_resources.qrc">
+                <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
@@ -378,6 +402,8 @@
   <tabstop>cbRegion</tabstop>
   <tabstop>cbVariant1</tabstop>
   <tabstop>pbAddVariant</tabstop>
+  <tabstop>leExtension1</tabstop>
+  <tabstop>pbAddExtension</tabstop>
   <tabstop>lePrivateUse1</tabstop>
   <tabstop>pbAddPrivateUse</tabstop>
  </tabstops>

@@ -16,6 +16,7 @@
 #include "common/iso15924.h"
 #include "common/qt.h"
 #include "common/sorting.h"
+#include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/forms/util/language_dialog.h"
 #include "mkvtoolnix-gui/util/container.h"
 #include "mkvtoolnix-gui/util/language_combo_box.h"
@@ -27,6 +28,7 @@ namespace mtx::gui::Util {
 
 char const * const s_cbExtendedSubtag = "cbExtendedSubtag";
 char const * const s_cbVariant        = "cbVariant";
+char const * const s_leExtension      = "leExtension";
 char const * const s_lePrivateUse     = "lePrivateUse";
 
 // ------------------------------------------------------------
@@ -52,6 +54,16 @@ setupComboBoxFromList(QComboBox &comboBox,
     comboBox.addItem(Q("%1 (%2)").arg(item.first).arg(item.second), item.second);
 
   comboBox.blockSignals(false);
+}
+
+std::vector<std::string>
+partiallyFormatExtensions(mtx::bcp47::language_c const &tag) {
+  std::vector<std::string> formatted;
+
+  for (auto const &extension : tag.get_extensions())
+    formatted.emplace_back(extension.format());
+
+  return formatted;
 }
 
 }
@@ -120,6 +132,7 @@ LanguageDialog::createInitialComponentWidgetList() {
   p.componentWidgets.push_back({ p.ui->lScript,          p.ui->cbScript });
   p.componentWidgets.push_back({ p.ui->lRegion,          p.ui->cbRegion });
   p.componentWidgets.push_back({ p.ui->lVariants,        p.ui->cbVariant1,        p.ui->pbAddVariant });
+  p.componentWidgets.push_back({ p.ui->lExtensions,      p.ui->leExtension1,      p.ui->pbAddExtension });
   p.componentWidgets.push_back({ p.ui->lPrivateUse,      p.ui->lePrivateUse1,     p.ui->pbAddPrivateUse });
 }
 
@@ -225,7 +238,7 @@ LanguageDialog::allComponentWidgets() {
     p.ui->cbRegion,
   };
 
-  auto reStr = Q("^(%1|%2|%3)").arg(Q(s_cbExtendedSubtag)).arg(Q(s_cbVariant)).arg(Q(s_lePrivateUse));
+  auto reStr = Q("^(%1|%2|%3|%4)").arg(Q(s_cbExtendedSubtag)).arg(Q(s_cbVariant)).arg(Q(s_leExtension)).arg(Q(s_lePrivateUse));
   widgets += allComponentWidgetsMatchingName(QRegularExpression{reStr});
 
   return widgets;
@@ -266,6 +279,7 @@ LanguageDialog::setupConnections() {
 
   connect(p.ui->pbAddExtendedSubtag,  &QPushButton::clicked,               this,     &LanguageDialog::addExtendedSubtagRowAndUpdateLayout);
   connect(p.ui->pbAddVariant,         &QPushButton::clicked,               this,     &LanguageDialog::addVariantRowAndUpdateLayout);
+  connect(p.ui->pbAddExtension,       &QPushButton::clicked,               this,     &LanguageDialog::addExtensionRowAndUpdateLayout);
   connect(p.ui->pbAddPrivateUse,      &QPushButton::clicked,               this,     &LanguageDialog::addPrivateUseRowAndUpdateLayout);
 }
 
@@ -432,6 +446,16 @@ LanguageDialog::addVariantRow() {
 }
 
 QWidget *
+LanguageDialog::addExtensionRow() {
+  return addRowItem(Q(s_leExtension), [this](int newIdx) {
+    auto lineEdit = new QLineEdit{p_func()->ui->sawComponents};
+    lineEdit->setObjectName(Q("%1%2").arg(Q(s_leExtension)).arg(newIdx));
+
+    return lineEdit;
+  });
+}
+
+QWidget *
 LanguageDialog::addPrivateUseRow() {
   return addRowItem(Q(s_lePrivateUse), [this](int newIdx) {
     auto lineEdit = new QLineEdit{p_func()->ui->sawComponents};
@@ -450,6 +474,12 @@ LanguageDialog::addExtendedSubtagRowAndUpdateLayout() {
 void
 LanguageDialog::addVariantRowAndUpdateLayout() {
   addVariantRow();
+  createGridLayoutFromComponentWidgetList();
+}
+
+void
+LanguageDialog::addExtensionRowAndUpdateLayout() {
+  addExtensionRow();
   createGridLayoutFromComponentWidgetList();
 }
 
@@ -514,6 +544,7 @@ LanguageDialog::setMultipleWidgetsTexts(QString const &objectNamePrefix,
   auto numWidgets   = widgets.size();
   auto numValues    = values.size();
   auto isVariant    = objectNamePrefix.contains(Q("Variant"));
+  auto isExtension  = objectNamePrefix.contains(Q("Extension"));
   auto isPrivateUse = objectNamePrefix.contains(Q("PrivateUse"));
 
   if (!numWidgets)
@@ -526,6 +557,7 @@ LanguageDialog::setMultipleWidgetsTexts(QString const &objectNamePrefix,
 
   for (auto idx = 1u; idx < numValues; ++idx) {
     auto widget = static_cast<QWidget *>(  isVariant    ? addVariantRow()
+                                         : isExtension  ? addExtensionRow()
                                          : isPrivateUse ? addPrivateUseRow()
                                          :                addExtendedSubtagRow());
     setWidgetText(*widget, Q(values[idx]));
@@ -549,6 +581,7 @@ LanguageDialog::setComponentsFromLanguageTag(mtx::bcp47::language_c const &tag) 
 
   setMultipleWidgetsTexts(Q(s_cbExtendedSubtag), tag.get_extended_language_subtags());
   setMultipleWidgetsTexts(Q(s_cbVariant),        tag.get_variants());
+  setMultipleWidgetsTexts(Q(s_leExtension),      partiallyFormatExtensions(tag));
   setMultipleWidgetsTexts(Q(s_lePrivateUse),     tag.get_private_use());
 }
 
@@ -580,6 +613,21 @@ LanguageDialog::languageTagFromComponents() {
   }
 
   tag.set_variants(strings);
+
+  strings.clear();
+
+  for (auto lineEdit : allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(Q(s_leExtension)) })) {
+    auto text = dynamic_cast<QLineEdit &>(*lineEdit).text();
+    if (!text.isEmpty())
+      strings.emplace_back(to_utf8(text));
+  }
+
+  if (!strings.empty()) {
+    auto dummyTag = mtx::bcp47::language_c::parse(fmt::format("de-{0}", mtx::string::join(strings, "-")));
+    tag.set_extensions(dummyTag.get_extensions());
+
+  } else
+    tag.set_extensions({});
 
   strings.clear();
 
