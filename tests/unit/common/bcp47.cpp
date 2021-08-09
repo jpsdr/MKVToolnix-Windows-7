@@ -329,4 +329,9 @@ TEST(BCP47LanguageTags, ExtensionsRFC6497) {
   EXPECT_TRUE(mtx::bcp47::language_c::parse("ja-t-it-m0-xxx-v21a-2007").is_valid());
 }
 
+TEST(BCP47LanguageTags, ExtensionsFormatting) {
+  EXPECT_EQ("ja-t-test-u-attr-co-phonebk"s, mtx::bcp47::language_c::parse("ja-T-Test-U-AttR-CO-phoNEbk").format());
+  EXPECT_EQ("ja-t-test-u-attr-co-phonebk"s, mtx::bcp47::language_c::parse("ja-U-AttR-CO-phoNEbk-T-Test").format());
+}
+
 }
