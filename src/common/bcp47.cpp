@@ -31,14 +31,14 @@ namespace mtx::bcp47 {
 bool
 operator <(language_c::extension_t const &a,
            language_c::extension_t const &b) {
-  return mtx::string::to_lower_ascii(a.singleton) < mtx::string::to_lower_ascii(b.singleton);
+  return mtx::string::to_lower_ascii(a.identifier) < mtx::string::to_lower_ascii(b.identifier);
 }
 
 bool language_c::ms_disabled = false;
 
-language_c::extension_t::extension_t(std::string const &singleton_,
+language_c::extension_t::extension_t(std::string const &identifier_,
                                      std::vector<std::string> const &extensions_)
-  : singleton{singleton_}
+  : identifier{identifier_}
   , extensions{extensions_}
 {
 }
@@ -46,9 +46,9 @@ language_c::extension_t::extension_t(std::string const &singleton_,
 std::string
 language_c::extension_t::format()
   const noexcept {
-  if (singleton.empty() || extensions.empty())
+  if (identifier.empty() || extensions.empty())
     return {};
-  return fmt::format("{0}-{1}", singleton, mtx::string::join(extensions, "-"));
+  return fmt::format("{0}-{1}", identifier, mtx::string::join(extensions, "-"));
 }
 
 // ------------------------------------------------------------
@@ -376,21 +376,21 @@ language_c::validate_extensions() {
     return false;
   }
 
-  std::map<std::string, bool> singletons_seen;
+  std::map<std::string, bool> identifiers_seen;
 
   for (auto const &extension : m_extensions) {
-    if (singletons_seen[extension.singleton]) {
+    if (identifiers_seen[extension.identifier]) {
       m_parser_error = Y("Each extension identifier must be used at most once.");
       return false;
     }
 
-    singletons_seen[extension.singleton] = true;
+    identifiers_seen[extension.identifier] = true;
 
     // As of 2021-08-07 the IANA language tag extensions registry at
     // https://www.iana.org/assignments/language-tag-extensions-registry/language-tag-extensions-registry
-    // only contains the following registered singletons:
-    if (!mtx::included_in(extension.singleton, "t"s, "u"s)) {
-      m_parser_error = fmt::format(Y("The value '{0}' is not a registered IANA language tag identifier."), extension.singleton);
+    // only contains the following registered identifiers:
+    if (!mtx::included_in(extension.identifier, "t"s, "u"s)) {
+      m_parser_error = fmt::format(Y("The value '{0}' is not a registered IANA language tag identifier."), extension.identifier);
       return false;
     }
   }
@@ -551,7 +551,7 @@ language_c::add_extension(extension_t const &extension) {
   for (auto const &extension_subtag : extension.extensions)
     extensions_lower.emplace_back(mtx::string::to_lower_ascii(extension_subtag));
 
-  auto cleaned_extension = extension_t{ mtx::string::to_lower_ascii(extension.singleton), extensions_lower };
+  auto cleaned_extension = extension_t{ mtx::string::to_lower_ascii(extension.identifier), extensions_lower };
   m_extensions.insert(std::lower_bound(m_extensions.begin(), m_extensions.end(), cleaned_extension), cleaned_extension);
 
   m_formatted_up_to_date = false;

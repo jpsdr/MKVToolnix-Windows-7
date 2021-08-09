@@ -20,10 +20,10 @@ namespace mtx::bcp47 {
 class language_c {
 public:
   struct extension_t {
-    std::string singleton;
+    std::string identifier;
     std::vector<std::string> extensions;
 
-    extension_t(std::string const &singleton_, std::vector<std::string> const &extensions_);
+    extension_t(std::string const &identifier_, std::vector<std::string> const &extensions_);
 
     std::string format() const noexcept;
   };
