@@ -15,8 +15,6 @@
 
 #include "common/common_pch.h"
 
-#if defined(HAVE_QT)
-
 #include <QProgressDialog>
 
 #include "common/kax_analyzer.h"
@@ -42,4 +40,3 @@ public:
 };
 
 }
-#endif  // HAVE_QT
