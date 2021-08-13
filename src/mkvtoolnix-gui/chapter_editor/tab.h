@@ -7,10 +7,10 @@
 
 #include "common/bcp47.h"
 #include "common/qt.h"
-#include "common/qt_kax_analyzer.h"
 #include "common/timestamp.h"
 #include "mkvtoolnix-gui/chapter_editor/chapter_model.h"
 #include "mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.h"
+#include "mkvtoolnix-gui/util/kax_analyzer.h"
 #include "mkvtoolnix-gui/types.h"
 
 class QComboBox;

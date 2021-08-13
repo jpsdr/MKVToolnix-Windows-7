@@ -359,7 +359,7 @@ Tool::removeChaptersFromExistingMatroskaFile() {
   if (fileName.isEmpty())
     return;
 
-  auto analyzer = std::make_unique<QtKaxAnalyzer>(this, fileName);
+  auto analyzer = std::make_unique<Util::KaxAnalyzer>(this, fileName);
 
   if (!analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).process()) {
     auto text = Q("%1 %2")
@@ -378,7 +378,7 @@ Tool::removeChaptersFromExistingMatroskaFile() {
   auto result = analyzer->remove_elements(EBML_ID(libmatroska::KaxChapters));
 
   if (kax_analyzer_c::uer_success != result) {
-    QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Removing the chapters failed."));
+    Util::KaxAnalyzer::displayUpdateElementResult(this, result, QY("Removing the chapters failed."));
 
   } else
     Util::MessageBox::information(this)->title(QY("Removing chapters from existing Matroska file")).text(QY("All chapters have been removed from the file '%1'.").arg(fileName)).exec();

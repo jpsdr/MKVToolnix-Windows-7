@@ -397,7 +397,7 @@ Tab::LoadResult
 Tab::loadFromMatroskaFile(QString const &fileName,
                           bool append) {
   auto p        = p_func();
-  auto analyzer = std::make_unique<QtKaxAnalyzer>(this, fileName);
+  auto analyzer = std::make_unique<Util::KaxAnalyzer>(this, fileName);
 
   if (!analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).set_open_mode(MODE_READ).process()) {
     auto text = Q("%1 %2")
@@ -830,7 +830,7 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
     }
 
     if (doRequireNewFileName || (QFileInfo{newFileName}.lastModified() != p->fileModificationTime)) {
-      p->analyzer = std::make_unique<QtKaxAnalyzer>(this, newFileName);
+      p->analyzer = std::make_unique<Util::KaxAnalyzer>(this, newFileName);
       if (!p->analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).process()) {
         auto text = Q("%1 %2")
           .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(newFileName))
@@ -860,7 +860,7 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
     p->analyzer->close_file();
 
     if (kax_analyzer_c::uer_success != result) {
-      QtKaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the chapters failed."));
+      Util::KaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the chapters failed."));
       return false;
     }
 

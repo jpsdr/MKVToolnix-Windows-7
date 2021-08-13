@@ -6,9 +6,9 @@
 #include <QList>
 
 #include "common/ebml.h"
-#include "common/qt_kax_analyzer.h"
 #include "common/translation.h"
 #include "mkvtoolnix-gui/header_editor/tab.h"
+#include "mkvtoolnix-gui/util/kax_analyzer.h"
 
 namespace mtx::gui::HeaderEditor {
 
