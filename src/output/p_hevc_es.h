@@ -6,7 +6,7 @@
    see the file COPYING for details
    or visit https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
-   class definition for the  HEVC ES video output module
+   class definition for the HEVC ES video output module
 
 */
 
@@ -15,19 +15,16 @@
 #include "common/common_pch.h"
 
 #include "common/hevc_es_parser.h"
-#include "merge/generic_packetizer.h"
+#include "output/p_avc_hevc_es.h"
 
-class hevc_es_video_packetizer_c: public generic_packetizer_c {
+class hevc_es_video_packetizer_c: public avc_hevc_es_video_packetizer_c {
 protected:
   mtx::hevc::es_parser_c m_parser;
-  int64_t m_default_duration_for_interlaced_content;
-  bool m_first_frame, m_set_display_dimensions, m_debug_timestamps, m_debug_aspect_ratio;
 
 public:
   hevc_es_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
 
   virtual void add_extra_data(memory_cptr data);
-  virtual void set_headers();
   virtual void set_container_default_field_duration(int64_t default_duration);
   virtual unsigned int get_nalu_size_length() const;
 

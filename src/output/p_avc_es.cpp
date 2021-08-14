@@ -29,49 +29,15 @@ using namespace libmatroska;
 avc_es_video_packetizer_c::
 avc_es_video_packetizer_c(generic_reader_c *p_reader,
                           track_info_c &p_ti)
-  : generic_packetizer_c(p_reader, p_ti)
-  , m_default_duration_for_interlaced_content(-1)
-  , m_first_frame(true)
-  , m_set_display_dimensions(false)
-  , m_debug_timestamps{   "avc_es|avc_es_timestamps"}
-  , m_debug_aspect_ratio{"avc_es|avc_es_aspect_ratio"}
+  : avc_hevc_es_video_packetizer_c{p_reader, p_ti, "avc"}
 {
-  m_relaxed_timestamp_checking = true;
-
-  set_track_type(track_video);
-
   set_codec_id(MKV_V_MPEG4_AVC);
 
   m_parser.set_keep_ar_info(false);
   m_parser.set_fix_bitstream_frame_rate(static_cast<bool>(m_ti.m_fix_bitstream_frame_rate));
 
-  // If no external timestamp file has been specified then mkvmerge
-  // might have created a factory due to the --default-duration
-  // command line argument. This factory must be disabled for the AVC
-  // packetizer because it takes care of handling the default
-  // duration/FPS itself.
-  if (m_ti.m_ext_timestamps.empty())
-    m_timestamp_factory.reset();
-
-  int64_t factory_default_duration;
-  if (m_timestamp_factory && (-1 != (factory_default_duration = m_timestamp_factory->get_default_duration(-1)))) {
-    m_parser.force_default_duration(factory_default_duration);
-    set_track_default_duration(factory_default_duration);
-    m_default_duration_forced = true;
-    mxdebug_if(m_debug_timestamps, fmt::format("Forcing default duration due to timestamp factory to {0}\n", m_htrack_default_duration));
-
-  } else if (m_default_duration_forced && (-1 != m_htrack_default_duration)) {
-    m_default_duration_for_interlaced_content = m_htrack_default_duration / 2;
-    m_parser.force_default_duration(m_default_duration_for_interlaced_content);
-    mxdebug_if(m_debug_timestamps, fmt::format("Forcing default duration due to --default-duration to {0}\n", m_htrack_default_duration));
-  }
-}
-
-void
-avc_es_video_packetizer_c::set_headers() {
-  generic_packetizer_c::set_headers();
-
-  m_track_entry->EnableLacing(false);
+  if (m_parser_default_duration_to_force)
+    m_parser.force_default_duration(*m_parser_default_duration_to_force);
 }
 
 void
