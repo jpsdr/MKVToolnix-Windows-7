@@ -102,7 +102,7 @@ struct pps_info_t {
 struct slice_info_t {
   unsigned char nalu_type{};
   unsigned char nal_ref_idc{};
-  unsigned char type{};
+  unsigned char slice_type{};
   unsigned char pps_id{};
   unsigned int frame_num{};
   bool field_pic_flag{}, bottom_field_flag{};

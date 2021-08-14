@@ -308,12 +308,12 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     return;
   }
 
-  bool is_i_slice =  (SLICE_TYPE_I   == si.type)
-                  || (SLICE_TYPE2_I  == si.type)
-                  || (SLICE_TYPE_SI  == si.type)
-                  || (SLICE_TYPE2_SI == si.type);
-  bool is_b_slice =  (SLICE_TYPE_B   == si.type)
-                  || (SLICE_TYPE2_B  == si.type);
+  bool is_i_slice =  (SLICE_TYPE_I   == si.slice_type)
+                  || (SLICE_TYPE2_I  == si.slice_type)
+                  || (SLICE_TYPE_SI  == si.slice_type)
+                  || (SLICE_TYPE2_SI == si.slice_type);
+  bool is_b_slice =  (SLICE_TYPE_B   == si.slice_type)
+                  || (SLICE_TYPE2_B  == si.slice_type);
 
   m_incomplete_frame.m_si       =  si;
   m_incomplete_frame.m_keyframe =  m_recovery_point_valid
@@ -571,12 +571,12 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
       return false;
 
     si.first_mb_in_slice = r.get_unsigned_golomb(); // first_mb_in_slice
-    si.type              = r.get_unsigned_golomb(); // slice_type
+    si.slice_type        = r.get_unsigned_golomb(); // slice_type
 
-    ++m_stats.num_slices_by_type[9 < si.type ? 10 : si.type];
+    ++m_stats.num_slices_by_type[9 < si.slice_type ? 10 : si.slice_type];
 
-    if (9 < si.type) {
-      mxdebug_if(m_debug_errors, fmt::format("slice parser error: 9 < si.type: {0}\n", si.type));
+    if (9 < si.slice_type) {
+      mxdebug_if(m_debug_errors, fmt::format("slice parser error: 9 < si.slice_type: {0}\n", si.slice_type));
       return false;
     }
 
@@ -704,10 +704,10 @@ es_parser_c::calculate_frame_order() {
 
   m_simple_picture_order      = false;
 
-  if (   (   (SLICE_TYPE_I   != idr.type)
-          && (SLICE_TYPE_SI  != idr.type)
-          && (SLICE_TYPE2_I  != idr.type)
-          && (SLICE_TYPE2_SI != idr.type))
+  if (   (   (SLICE_TYPE_I   != idr.slice_type)
+          && (SLICE_TYPE_SI  != idr.slice_type)
+          && (SLICE_TYPE2_I  != idr.slice_type)
+          && (SLICE_TYPE2_SI != idr.slice_type))
       || (0 == idr.nal_ref_idc)
       || (0 != sps.pic_order_cnt_type)) {
     m_simple_picture_order = true;

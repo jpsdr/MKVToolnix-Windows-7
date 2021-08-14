@@ -192,7 +192,7 @@ slice_info_t::dump()
   mxinfo(fmt::format("slice_info dump:\n"
                      "  nalu_type:                  {0}\n"
                      "  nal_ref_idc:                {1}\n"
-                     "  type:                       {2}\n"
+                     "  slice_type:                 {2}\n"
                      "  pps_id:                     {3}\n"
                      "  frame_num:                  {4}\n"
                      "  field_pic_flag:             {5}\n"
@@ -206,7 +206,7 @@ slice_info_t::dump()
                      "  pps:                        {13}\n",
                      static_cast<unsigned int>(nalu_type),
                      static_cast<unsigned int>(nal_ref_idc),
-                     static_cast<unsigned int>(type),
+                     static_cast<unsigned int>(slice_type),
                      static_cast<unsigned int>(pps_id),
                      frame_num,
                      field_pic_flag,
