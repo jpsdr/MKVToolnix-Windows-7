@@ -118,7 +118,6 @@ constexpr auto SLICE_TYPE_I                             = 2;
 constexpr auto EXTENDED_SAR                             = 0xff;
 constexpr auto NUM_PREDEFINED_PARS                      = 17;
 
-struct frame_t;
 struct par_extraction_t;
 
 /*

@@ -35,11 +35,6 @@ namespace mtx::hevc {
 
 std::unordered_map<int, std::string> es_parser_c::ms_nalu_names_by_type;
 
-void
-frame_t::clear() {
-  *this = frame_t{};
-}
-
 es_parser_c::es_parser_c()
 {
   if (debugging_c::requested("hevc_statistics"))
@@ -924,7 +919,7 @@ es_parser_c::calculate_frame_timestamps() {
   auto provided_timestamps_to_use = calculate_provided_timestamps_to_use();
 
   if (!m_simple_picture_order)
-    std::sort(m_frames.begin(), m_frames.end(), [](const frame_t &f1, const frame_t &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
+    std::sort(m_frames.begin(), m_frames.end(), [](auto const &f1, auto const &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
 
   auto frames_begin           = m_frames.begin();
   auto frames_end             = m_frames.end();
@@ -953,12 +948,12 @@ es_parser_c::calculate_frame_timestamps() {
 
   mxdebug_if(m_debug_timestamps,
              fmt::format("CLEANUP frames <pres_ord dec_ord has_prov_ts tc dur>: {0}\n",
-                         std::accumulate(m_frames.begin(), m_frames.end(), ""s, [](std::string const &accu, frame_t const &frame) {
+                         std::accumulate(m_frames.begin(), m_frames.end(), ""s, [](auto const &accu, auto const &frame) {
                            return accu + fmt::format(" <{0} {1} {2} {3} {4}>", frame.m_presentation_order, frame.m_decode_order, frame.m_has_provided_timestamp, frame.m_start, frame.m_end - frame.m_start);
                          })));
 
   if (!m_simple_picture_order)
-    std::sort(m_frames.begin(), m_frames.end(), [](const frame_t &f1, const frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
+    std::sort(m_frames.begin(), m_frames.end(), [](auto const &f1, auto const &f2) { return f1.m_decode_order < f2.m_decode_order; });
 }
 
 void

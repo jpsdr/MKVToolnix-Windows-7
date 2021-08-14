@@ -22,57 +22,6 @@
 
 namespace mtx::avc {
 
-struct frame_t {
-  memory_cptr m_data;
-  int64_t m_start, m_end, m_ref1, m_ref2;
-  uint64_t m_position;
-  bool m_keyframe, m_has_provided_timestamp;
-  mtx::avc_hevc::slice_info_t m_si;
-  int m_presentation_order, m_decode_order;
-  char m_type;
-  bool m_order_calculated;
-
-  frame_t() {
-    clear();
-  }
-
-  frame_t(frame_t const &) = default;
-  frame_t &operator =(frame_t const &) = default;
-
-  void clear() {
-    m_start                  = 0;
-    m_end                    = 0;
-    m_ref1                   = 0;
-    m_ref2                   = 0;
-    m_position               = 0;
-    m_keyframe               = false;
-    m_has_provided_timestamp = false;
-    m_presentation_order     = 0;
-    m_decode_order           = 0;
-    m_type                   = '?';
-    m_order_calculated       = false;
-    m_data.reset();
-
-    m_si.clear();
-  }
-
-  bool is_i_frame() const {
-    return 'I' == m_type;
-  }
-
-  bool is_p_frame() const {
-    return 'P' == m_type;
-  }
-
-  bool is_b_frame() const {
-    return 'B' == m_type;
-  }
-
-  bool is_discardable() const {
-    return m_si.nal_ref_idc == 0;
-  }
-};
-
 class es_parser_c {
 protected:
   int m_nalu_size_length;
@@ -88,7 +37,7 @@ protected:
   bool m_par_found;
   mtx_mp_rational_t m_par;
 
-  std::deque<frame_t> m_frames, m_frames_out;
+  std::deque<mtx::avc_hevc::frame_t> m_frames, m_frames_out;
   std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
   int64_t m_max_timestamp, m_previous_i_p_start;
   std::map<int64_t, int64_t> m_duration_frequency;
@@ -100,7 +49,7 @@ protected:
   memory_cptr m_unparsed_buffer;
   uint64_t m_stream_position, m_parsed_position;
 
-  frame_t m_incomplete_frame;
+  mtx::avc_hevc::frame_t m_incomplete_frame;
   bool m_have_incomplete_frame;
   std::deque<std::pair<memory_cptr, uint64_t>> m_unhandled_nalus;
 
@@ -165,10 +114,10 @@ public:
     return !m_frames_out.empty();
   }
 
-  frame_t get_frame() {
+  mtx::avc_hevc::frame_t get_frame() {
     assert(!m_frames_out.empty());
 
-    frame_t frame(*m_frames_out.begin());
+    auto frame = *m_frames_out.begin();
     m_frames_out.erase(m_frames_out.begin(), m_frames_out.begin() + 1);
 
     return frame;

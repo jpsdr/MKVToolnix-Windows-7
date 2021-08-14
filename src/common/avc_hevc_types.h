@@ -17,6 +17,7 @@
 namespace mtx::avc_hevc {
 
 struct slice_info_t {
+public:
   // Fields common to AVC & HEVC:
   unsigned char nalu_type{};
   unsigned char slice_type{};
@@ -38,8 +39,31 @@ struct slice_info_t {
   bool first_slice_segment_in_pic_flag{};
   int temporal_id{};
 
+public:
   void dump() const;
   void clear();
+};
+
+struct frame_t {
+public:
+  // Fields common to AVC & HEVC:
+  memory_cptr m_data;
+  int64_t m_start{}, m_end{}, m_ref1{}, m_ref2{};
+  uint64_t m_position{};
+  bool m_keyframe{}, m_has_provided_timestamp{};
+  mtx::avc_hevc::slice_info_t m_si{};
+  int m_presentation_order{}, m_decode_order{};
+
+  // AVC-specific fields:
+  char m_type{'?'};
+  bool m_order_calculated{};
+
+public:
+  void clear();
+  bool is_i_frame() const;
+  bool is_p_frame() const;
+  bool is_b_frame() const;
+  bool is_discardable() const;
 };
 
 }

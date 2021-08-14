@@ -62,4 +62,35 @@ slice_info_t::clear() {
   *this = slice_info_t{};
 }
 
+// ------------------------------------------------------------
+
+void
+frame_t::clear() {
+  *this = frame_t{};
+}
+
+bool
+frame_t::is_i_frame()
+  const {
+  return 'I' == m_type;
+}
+
+bool
+frame_t::is_p_frame()
+  const {
+  return 'P' == m_type;
+}
+
+bool
+frame_t::is_b_frame()
+  const {
+  return 'B' == m_type;
+}
+
+bool
+frame_t::is_discardable()
+  const {
+  return m_si.nal_ref_idc == 0;
+}
+
 }

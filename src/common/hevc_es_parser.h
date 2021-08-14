@@ -22,17 +22,6 @@
 
 namespace mtx::hevc {
 
-struct frame_t {
-  memory_cptr m_data{};
-  int64_t m_start{}, m_end{}, m_ref1{}, m_ref2{};
-  uint64_t m_position{};
-  bool m_keyframe{}, m_has_provided_timestamp{};
-  mtx::avc_hevc::slice_info_t m_si{};
-  int m_presentation_order{}, m_decode_order{};
-
-  void clear();
-};
-
 class es_parser_c {
 protected:
   enum class extra_data_position_e {
@@ -54,7 +43,7 @@ protected:
   bool m_par_found{};
   mtx_mp_rational_t m_par{};
 
-  std::deque<frame_t> m_frames, m_frames_out;
+  std::deque<mtx::avc_hevc::frame_t> m_frames, m_frames_out;
   std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
   int64_t m_max_timestamp{};
   std::map<int64_t, int64_t> m_duration_frequency;
@@ -71,7 +60,7 @@ protected:
   memory_cptr m_unparsed_buffer;
   uint64_t m_stream_position{}, m_parsed_position{};
 
-  frame_t m_incomplete_frame;
+  mtx::avc_hevc::frame_t m_incomplete_frame;
   std::deque<std::pair<memory_cptr, uint64_t>> m_unhandled_nalus;
 
   bool m_simple_picture_order{}, m_discard_actual_frames{}, m_normalize_parameter_sets{};
@@ -128,10 +117,10 @@ public:
     return !m_frames_out.empty();
   }
 
-  frame_t get_frame() {
+  mtx::avc_hevc::frame_t get_frame() {
     assert(!m_frames_out.empty());
 
-    frame_t frame(*m_frames_out.begin());
+    auto frame = *m_frames_out.begin();
     m_frames_out.erase(m_frames_out.begin(), m_frames_out.begin() + 1);
 
     return frame;

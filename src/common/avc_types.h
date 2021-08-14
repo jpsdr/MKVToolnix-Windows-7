@@ -107,7 +107,6 @@ struct par_extraction_t {
   bool is_valid() const;
 };
 
-struct frame_t;
 class es_parser_c;
 using es_parser_cptr = std::shared_ptr<es_parser_c>;
 

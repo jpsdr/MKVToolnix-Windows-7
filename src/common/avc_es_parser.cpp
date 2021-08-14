@@ -805,7 +805,7 @@ es_parser_c::calculate_frame_timestamps_and_references() {
   auto provided_timestamps_to_use                = calculate_provided_timestamps_to_use();
 
   if (!m_simple_picture_order && !s_debug_force_simple_picture_order)
-    std::sort(m_frames.begin(), m_frames.end(), [](const frame_t &f1, const frame_t &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
+    std::sort(m_frames.begin(), m_frames.end(), [](auto const &f1, auto const &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
 
   auto frames_begin            = m_frames.begin();
   auto frames_end              = m_frames.end();
@@ -862,7 +862,7 @@ es_parser_c::calculate_frame_timestamps_and_references() {
     mxdebug_if(m_debug_timestamps, fmt::format("  type {0} TS {1} ref1 {2} ref2 {3} decode_order {4}\n", frame.m_type, mtx::string::format_timestamp(frame.m_start), frame.m_ref1, frame.m_ref2, frame.m_decode_order));
 
   if (!m_simple_picture_order)
-    std::sort(m_frames.begin(), m_frames.end(), [](const frame_t &f1, const frame_t &f2) { return f1.m_decode_order < f2.m_decode_order; });
+    std::sort(m_frames.begin(), m_frames.end(), [](auto const &f1, auto const &f2) { return f1.m_decode_order < f2.m_decode_order; });
 }
 
 void
