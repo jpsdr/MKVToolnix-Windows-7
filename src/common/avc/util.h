@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/avc_types.h"
+#include "common/avc/types.h"
 
 namespace mtx::avc {
 

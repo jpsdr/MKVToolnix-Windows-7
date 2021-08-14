@@ -14,8 +14,8 @@
 
 #include "common/common_pch.h"
 
-#include "common/avcc.h"
-#include "common/avc_es_parser.h"
+#include "common/avc/avcc.h"
+#include "common/avc/es_parser.h"
 #include "common/bit_reader.h"
 #include "common/byte_buffer.h"
 #include "common/checksums/base.h"

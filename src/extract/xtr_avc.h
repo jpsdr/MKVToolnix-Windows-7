@@ -14,7 +14,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/avc_es_parser.h"
+#include "common/avc/es_parser.h"
 #include "common/debugging.h"
 #include "extract/xtr_base.h"
 

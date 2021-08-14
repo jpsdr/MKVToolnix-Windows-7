@@ -17,9 +17,9 @@
 #include <cmath>
 #include <unordered_map>
 
-#include "common/avc.h"
-#include "common/avc_es_parser.h"
-#include "common/avcc.h"
+#include "common/avc/avcc.h"
+#include "common/avc/es_parser.h"
+#include "common/avc/util.h"
 #include "common/bit_reader.h"
 #include "common/bit_writer.h"
 #include "common/byte_buffer.h"

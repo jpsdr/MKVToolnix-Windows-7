@@ -17,7 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/aac.h"
-#include "common/avc_es_parser.h"
+#include "common/avc/es_parser.h"
 #include "common/byte_buffer.h"
 #include "common/codec.h"
 #include "common/endian.h"

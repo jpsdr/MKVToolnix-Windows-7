@@ -12,8 +12,8 @@
 
 #include "common/common_pch.h"
 
-#include "common/avc.h"
-#include "common/avcc.h"
+#include "common/avc/avcc.h"
+#include "common/avc/util.h"
 #include "common/endian.h"
 #include "common/mm_io_x.h"
 #include "common/mm_mem_io.h"

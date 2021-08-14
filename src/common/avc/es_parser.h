@@ -16,7 +16,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/avc.h"
+#include "common/avc/util.h"
 #include "common/avc_hevc/types.h"
 #include "common/avc_hevc/es_parser.h"
 #include "common/math_fwd.h"

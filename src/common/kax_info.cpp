@@ -52,8 +52,8 @@
 
 #include "avilib.h"
 #include "common/at_scope_exit.h"
-#include "common/avc.h"
-#include "common/avcc.h"
+#include "common/avc/avcc.h"
+#include "common/avc/util.h"
 #include "common/chapters/chapters.h"
 #include "common/checksums/base.h"
 #include "common/codec.h"

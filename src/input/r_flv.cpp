@@ -15,8 +15,8 @@
 
 #include "avilib.h"
 #include "common/amf.h"
-#include "common/avc_es_parser.h"
-#include "common/avcc.h"
+#include "common/avc/avcc.h"
+#include "common/avc/es_parser.h"
 #include "common/bit_reader.h"
 #include "common/codec.h"
 #include "common/endian.h"

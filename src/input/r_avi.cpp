@@ -18,7 +18,7 @@
 
 #include "avilib.h"
 #include "common/aac.h"
-#include "common/avc.h"
+#include "common/avc/util.h"
 #include "common/codec.h"
 #include "common/endian.h"
 #include "common/error.h"
