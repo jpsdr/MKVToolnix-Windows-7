@@ -19,6 +19,7 @@
 static bool s_is_framed{}, s_portable_format{};
 static memory_cptr s_frame;
 static uint64_t s_frame_fill{};
+static std::unique_ptr<mtx::hevc::es_parser_c> s_parser;
 
 static void
 setup_help() {
@@ -105,7 +106,7 @@ show_nalu(uint32_t type,
           std::optional<uint64_t> marker_size = std::nullopt) {
   mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2}{3}{4} checksum 0x{5}\n",
                      type,
-                     mtx::hevc::es_parser_c::get_nalu_type_name(type),
+                     s_parser->get_nalu_type_name(type),
                      size,
                      s_portable_format ? ""s : marker_size ? fmt::format(" marker size {0}", *marker_size) : ""s,
                      s_portable_format ? ""s : fmt::format(" at {0}", position),
@@ -197,6 +198,8 @@ main(int argc,
      char **argv) {
   mtx_common_init("hevc_dump", argv[0]);
   setup_help();
+
+  s_parser = std::make_unique<mtx::hevc::es_parser_c>();
 
   auto args = mtx::cli::args_in_utf8(argc, argv);
   while (mtx::cli::handle_common_args(args, "-r"))

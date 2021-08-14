@@ -29,38 +29,8 @@
 
 namespace mtx::avc {
 
-std::map<int, std::string> es_parser_c::ms_nalu_names_by_type;
-
 es_parser_c::es_parser_c()
-  : m_nalu_size_length(4)
-  , m_keep_ar_info(true)
-  , m_fix_bitstream_frame_rate(false)
-  , m_avcc_ready(false)
-  , m_avcc_changed(false)
-  , m_stream_default_duration(-1)
-  , m_forced_default_duration(-1)
-  , m_container_default_duration(-1)
-  , m_frame_number(0)
-  , m_num_skipped_frames(0)
-  , m_first_keyframe_found(false)
-  , m_recovery_point_valid(false)
-  , m_b_frames_since_keyframe(false)
-  , m_par_found(false)
-  , m_max_timestamp(0)
-  , m_previous_i_p_start{}
-  , m_stream_position(0)
-  , m_parsed_position(0)
-  , m_have_incomplete_frame(false)
-  , m_discard_actual_frames(false)
-  , m_simple_picture_order{}
-  , m_first_cleanup{true}
-  , m_all_i_slices_are_key_frames{mtx::hacks::is_engaged(mtx::hacks::ALL_I_SLICES_ARE_KEY_FRAMES)}
-  , m_debug_keyframe_detection{"avc_parser|avc_keyframe_detection"}
-  , m_debug_nalu_types{        "avc_parser|avc_nalu_types"}
-  , m_debug_timestamps{        "avc_parser|avc_timestamps"}
-  , m_debug_sps_info{          "avc_parser|avc_sps|avc_sps_info"}
-  , m_debug_sps_pps_changes{   "avc_parser|avc_sps_pps_changes"}
-  , m_debug_errors{            "avc_parser|avc_errors"}
+  : mtx::avc_hevc::es_parser_c{"avc"s, 11, 13}
 {
   if (m_debug_nalu_types || debugging_c::requested("avc_statistics"))
     init_nalu_names();
@@ -96,15 +66,10 @@ es_parser_c::~es_parser_c() {
 bool
 es_parser_c::headers_parsed()
   const {
-  return m_avcc_ready
+  return m_configuration_record_ready
       && !m_sps_info_list.empty()
       && (m_sps_info_list.front().width  > 0)
       && (m_sps_info_list.front().height > 0);
-}
-
-void
-es_parser_c::discard_actual_frames(bool discard) {
-  m_discard_actual_frames = discard;
 }
 
 void
@@ -196,12 +161,6 @@ es_parser_c::clear() {
   m_parsed_position       = 0;
 }
 
-void
-es_parser_c::add_timestamp(int64_t timestamp) {
-  m_provided_timestamps.emplace_back(timestamp, m_stream_position);
-  ++m_stats.num_timestamps_in;
-}
-
 bool
 es_parser_c::flush_decision(mtx::avc_hevc::slice_info_t &si,
                             mtx::avc_hevc::slice_info_t &ref) {
@@ -242,20 +201,12 @@ es_parser_c::flush_decision(mtx::avc_hevc::slice_info_t &si,
 
 void
 es_parser_c::flush_incomplete_frame() {
-  if (!m_have_incomplete_frame || !m_avcc_ready)
+  if (!m_have_incomplete_frame || !m_configuration_record_ready)
     return;
 
   m_frames.push_back(m_incomplete_frame);
   m_incomplete_frame.clear();
   m_have_incomplete_frame = false;
-}
-
-void
-es_parser_c::flush_unhandled_nalus() {
-  for (auto const &nalu_with_pos : m_unhandled_nalus)
-    handle_nalu(nalu_with_pos.first, nalu_with_pos.second);
-
-  m_unhandled_nalus.clear();
 }
 
 void
@@ -283,7 +234,7 @@ es_parser_c::add_sps_and_pps_to_extra_data() {
 void
 es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
                                uint64_t nalu_pos) {
-  if (!m_avcc_ready) {
+  if (!m_configuration_record_ready) {
     m_unhandled_nalus.emplace_back(nalu, nalu_pos);
     return;
   }
@@ -344,7 +295,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     if (!si.field_pic_flag || !m_current_key_frame_bottom_field || (*m_current_key_frame_bottom_field == si.bottom_field_flag)) {
       cleanup();
 
-      if (m_avcc_changed)
+      if (m_configuration_record_changed)
         add_sps_and_pps_to_extra_data();
     }
 
@@ -386,8 +337,8 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
     m_sps_list.push_back(parsed_nalu);
     m_sps_info_list.push_back(sps_info);
 
-    if (m_avcc_ready)
-      m_avcc_changed = true;
+    if (m_configuration_record_ready)
+      m_configuration_record_changed = true;
 
   } else if (m_sps_info_list[i].checksum != sps_info.checksum) {
     mxdebug_if(m_debug_sps_pps_changes, fmt::format("mpeg4::p10: SPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", sps_info.id, m_sps_info_list[i].checksum, sps_info.checksum));
@@ -397,8 +348,8 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
     m_sps_info_list[i] = sps_info;
     m_sps_list[i]      = parsed_nalu;
 
-    if (m_avcc_ready)
-      m_avcc_changed = true;
+    if (m_configuration_record_ready)
+      m_configuration_record_changed = true;
 
   } else
     use_sps_info = false;
@@ -441,8 +392,8 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
     m_pps_list.push_back(nalu);
     m_pps_info_list.push_back(pps_info);
 
-    if (m_avcc_ready)
-      m_avcc_changed = true;
+    if (m_configuration_record_ready)
+      m_configuration_record_changed = true;
 
   } else if (m_pps_info_list[i].checksum != pps_info.checksum) {
     mxdebug_if(m_debug_sps_pps_changes, fmt::format("mpeg4::p10: PPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", pps_info.id, m_pps_info_list[i].checksum, pps_info.checksum));
@@ -453,8 +404,8 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
     m_pps_info_list[i] = pps_info;
     m_pps_list[i]      = nalu;
 
-    if (m_avcc_ready)
-      m_avcc_changed = true;
+    if (m_configuration_record_ready)
+      m_configuration_record_changed = true;
   }
 
   m_extra_data.push_back(create_nalu_with_size(nalu));
@@ -531,8 +482,8 @@ es_parser_c::handle_nalu(memory_cptr const &nalu,
     case NALU_TYPE_DP_B_SLICE:
     case NALU_TYPE_DP_C_SLICE:
     case NALU_TYPE_IDR_SLICE:
-      if (!m_avcc_ready && !m_sps_info_list.empty() && !m_pps_info_list.empty()) {
-        m_avcc_ready = true;
+      if (!m_configuration_record_ready && !m_sps_info_list.empty() && !m_pps_info_list.empty()) {
+        m_configuration_record_ready = true;
         flush_unhandled_nalus();
       }
       handle_slice_nalu(nalu, nalu_pos);
@@ -540,8 +491,8 @@ es_parser_c::handle_nalu(memory_cptr const &nalu,
 
     default:
       flush_incomplete_frame();
-      if (!m_avcc_ready && !m_sps_info_list.empty() && !m_pps_info_list.empty()) {
-        m_avcc_ready = true;
+      if (!m_configuration_record_ready && !m_sps_info_list.empty() && !m_pps_info_list.empty()) {
+        m_configuration_record_ready = true;
         flush_unhandled_nalus();
       }
       m_extra_data.push_back(create_nalu_with_size(nalu));
@@ -645,49 +596,6 @@ es_parser_c::duration_for(unsigned int sps,
   return duration * (field_pic_flag ? 1 : 2);
 }
 
-int64_t
-es_parser_c::get_most_often_used_duration()
-  const {
-  int64_t const s_common_default_durations[] = {
-    1000000000ll / 50,
-    1000000000ll / 25,
-    1000000000ll / 60,
-    1000000000ll / 30,
-    1000000000ll * 1001 / 48000,
-    1000000000ll * 1001 / 24000,
-    1000000000ll * 1001 / 60000,
-    1000000000ll * 1001 / 30000,
-  };
-
-  auto most_often = m_duration_frequency.begin();
-  for (auto current = m_duration_frequency.begin(); m_duration_frequency.end() != current; ++current)
-    if (current->second > most_often->second)
-      most_often = current;
-
-  // No duration at all!? No frame?
-  if (m_duration_frequency.end() == most_often) {
-    mxdebug_if(m_debug_timestamps, fmt::format("Duration frequency: none found, using 25 FPS\n"));
-    return 1000000000ll / 25;
-  }
-
-  auto best = std::make_pair(most_often->first, std::numeric_limits<uint64_t>::max());
-
-  for (auto common_default_duration : s_common_default_durations) {
-    uint64_t diff = std::abs(most_often->first - common_default_duration);
-    if ((diff < 20000) && (diff < best.second))
-      best = std::make_pair(common_default_duration, diff);
-  }
-
-  mxdebug_if(m_debug_timestamps,
-             fmt::format("Duration frequency. Result: {0}, diff {1}. Best before adjustment: {2}. All: {3}\n",
-                         best.first, best.second, most_often->first,
-                         std::accumulate(m_duration_frequency.begin(), m_duration_frequency.end(), ""s, [](auto const &accu, auto const &pair) {
-                           return accu + fmt::format(" <{0} {1}>", pair.first, pair.second);
-                         })));
-
-  return best.first;
-}
-
 void
 es_parser_c::calculate_frame_order() {
   auto frames_begin           = m_frames.begin();
@@ -745,58 +653,6 @@ es_parser_c::calculate_frame_order() {
       prev_pic_order_cnt_msb = pic_order_cnt_msb;
     }
   }
-}
-
-std::vector<int64_t>
-es_parser_c::calculate_provided_timestamps_to_use() {
-  auto frame_idx                     = 0u;
-  auto provided_timestamps_idx       = 0u;
-  auto const num_frames              = m_frames.size();
-  auto const num_provided_timestamps = m_provided_timestamps.size();
-
-  std::vector<int64_t> provided_timestamps_to_use;
-  provided_timestamps_to_use.reserve(num_frames);
-
-  while (   (frame_idx               < num_frames)
-         && (provided_timestamps_idx < num_provided_timestamps)) {
-    timestamp_c timestamp_to_use;
-    auto &frame = m_frames[frame_idx];
-
-    while (   (provided_timestamps_idx < num_provided_timestamps)
-           && (frame.m_position >= m_provided_timestamps[provided_timestamps_idx].second)) {
-      timestamp_to_use = timestamp_c::ns(m_provided_timestamps[provided_timestamps_idx].first);
-      ++provided_timestamps_idx;
-    }
-
-    if (timestamp_to_use.valid()) {
-      provided_timestamps_to_use.emplace_back(timestamp_to_use.to_ns());
-      frame.m_has_provided_timestamp = true;
-    }
-
-    ++frame_idx;
-  }
-
-  mxdebug_if(m_debug_timestamps,
-             fmt::format("cleanup; num frames {0} num provided timestamps available {1} num provided timestamps to use {2}\n"
-                         "  frames:\n{3}"
-                         "  provided timestamps (available):\n{4}"
-                         "  provided timestamps (to use):\n{5}",
-                         num_frames, num_provided_timestamps, provided_timestamps_to_use.size(),
-                         std::accumulate(m_frames.begin(), m_frames.end(), std::string{}, [](auto const &str, auto const &frame) {
-                           return str + fmt::format("    pos {0} size {1} type {2}\n", frame.m_position, frame.m_data->get_size(), frame.m_type);
-                         }),
-                         std::accumulate(m_provided_timestamps.begin(), m_provided_timestamps.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
-                           return str + fmt::format("    pos {0} timestamp {1}\n", provided_timestamp.second, mtx::string::format_timestamp(provided_timestamp.first));
-                         }),
-                         std::accumulate(provided_timestamps_to_use.begin(), provided_timestamps_to_use.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
-                           return str + fmt::format("    timestamp {0}\n", mtx::string::format_timestamp(provided_timestamp));
-                         })));
-
-  m_provided_timestamps.erase(m_provided_timestamps.begin(), m_provided_timestamps.begin() + provided_timestamps_idx);
-
-  std::sort(provided_timestamps_to_use.begin(), provided_timestamps_to_use.end());
-
-  return provided_timestamps_to_use;
 }
 
 void
@@ -882,38 +738,9 @@ es_parser_c::update_frame_stats() {
 }
 
 void
-es_parser_c::cleanup() {
-  auto num_frames = m_frames.size();
-  if (!num_frames)
-    return;
-
-  if (m_discard_actual_frames) {
-    m_stats.num_frames_discarded    += m_frames.size();
-    m_stats.num_timestamps_discarded += m_provided_timestamps.size();
-
-    m_frames.clear();
-    m_provided_timestamps.clear();
-
-    return;
-  }
-
-  calculate_frame_order();
+es_parser_c::calculate_frame_timestamps_references_and_update_stats() {
   calculate_frame_timestamps_and_references();
   update_frame_stats();
-
-  if (m_first_cleanup && !m_frames.front().m_keyframe) {
-    // Drop all frames before the first key frames as they cannot be
-    // decoded anyway.
-    m_stats.num_frames_discarded += m_frames.size();
-    m_frames.clear();
-
-    return;
-  }
-
-  m_first_cleanup         = false;
-  m_stats.num_frames_out += m_frames.size();
-  m_frames_out.insert(m_frames_out.end(), m_frames.begin(), m_frames.end());
-  m_frames.clear();
 }
 
 memory_cptr
@@ -933,47 +760,6 @@ es_parser_c::get_avcc()
   return avcc_c{static_cast<unsigned int>(m_nalu_size_length), m_sps_list, m_pps_list}.pack();
 }
 
-bool
-es_parser_c::has_par_been_found()
-  const {
-  assert(m_avcc_ready);
-  return m_par_found;
-}
-
-mtx_mp_rational_t const &
-es_parser_c::get_par()
-  const {
-  assert(m_avcc_ready && m_par_found);
-  return m_par;
-}
-
-std::pair<int64_t, int64_t> const
-es_parser_c::get_display_dimensions(int width,
-                                    int height)
-  const {
-  assert(m_avcc_ready && m_par_found);
-
-  if (0 >= width)
-    width = get_width();
-  if (0 >= height)
-    height = get_height();
-
-  return std::make_pair<int64_t, int64_t>(1 <= m_par ? mtx::to_int_rounded(width * m_par) : width,
-                                          1 <= m_par ? height                             : mtx::to_int_rounded(height / m_par));
-}
-
-size_t
-es_parser_c::get_num_field_slices()
-  const {
-  return m_stats.num_field_slices;
-}
-
-size_t
-es_parser_c::get_num_frame_slices()
-  const {
-  return m_stats.num_frame_slices;
-}
-
 void
 es_parser_c::dump_info()
   const {
@@ -989,16 +775,9 @@ es_parser_c::dump_info()
   }
 }
 
-std::string
-es_parser_c::get_nalu_type_name(int type) {
-  init_nalu_names();
-
-  auto name = ms_nalu_names_by_type.find(type);
-  return (ms_nalu_names_by_type.end() == name) ? "unknown" : name->second;
-}
-
 void
-es_parser_c::init_nalu_names() {
+es_parser_c::init_nalu_names()
+  const {
   if (!ms_nalu_names_by_type.empty())
     return;
 
