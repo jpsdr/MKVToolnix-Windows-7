@@ -17,7 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/avc.h"
-#include "common/avc_hevc_types.h"
+#include "common/avc_hevc/types.h"
 #include "common/math_fwd.h"
 
 namespace mtx::avc {

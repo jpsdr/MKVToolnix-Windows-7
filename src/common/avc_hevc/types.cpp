@@ -12,7 +12,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/avc_hevc_types.h"
+#include "common/avc_hevc/types.h"
 
 namespace mtx::avc_hevc {
 

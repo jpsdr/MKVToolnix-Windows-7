@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/avc_hevc_types.h"
+#include "common/avc_hevc/types.h"
 #include "common/hevc_types.h"
 #include "common/math_fwd.h"
 #include "common/dovi_meta.h"
