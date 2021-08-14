@@ -120,7 +120,6 @@ constexpr auto NUM_PREDEFINED_PARS                      = 17;
 
 struct frame_t;
 struct par_extraction_t;
-struct slice_info_t;
 
 /*
 Bytes                                    Bits

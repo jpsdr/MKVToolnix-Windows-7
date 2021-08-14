@@ -36,29 +36,6 @@ namespace mtx::hevc {
 std::unordered_map<int, std::string> es_parser_c::ms_nalu_names_by_type;
 
 void
-slice_info_t::clear() {
-  *this = slice_info_t{};
-}
-
-void
-slice_info_t::dump()
-  const {
-  mxinfo(fmt::format("slice_info dump:\n"
-                     "  nalu_type:                  {0}\n"
-                     "  slice_type:                 {1}\n"
-                     "  pps_id:                     {2}\n"
-                     "  pic_order_cnt_lsb:          {3}\n"
-                     "  sps:                        {4}\n"
-                     "  pps:                        {5}\n",
-                     static_cast<unsigned int>(nalu_type),
-                     static_cast<unsigned int>(slice_type),
-                     static_cast<unsigned int>(pps_id),
-                     pic_order_cnt_lsb,
-                     sps,
-                     pps));
-}
-
-void
 frame_t::clear() {
   *this = frame_t{};
 }
@@ -332,7 +309,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     return;
   }
 
-  slice_info_t si;
+  mtx::avc_hevc::slice_info_t si;
   if (!parse_slice(nalu, si))   // no conversion to RBSP; the bit reader takes care of it
     return;
 
@@ -659,7 +636,7 @@ es_parser_c::handle_nalu(memory_cptr const &nalu,
 
 bool
 es_parser_c::parse_slice(memory_cptr const &nalu,
-                         slice_info_t &si) {
+                         mtx::avc_hevc::slice_info_t &si) {
   try {
     mtx::bits::reader_c r(nalu->get_buffer(), nalu->get_size());
     r.enable_rbsp_mode();
@@ -774,7 +751,7 @@ es_parser_c::build_frame_data() {
 }
 
 int64_t
-es_parser_c::duration_for(slice_info_t const &si)
+es_parser_c::duration_for(mtx::avc_hevc::slice_info_t const &si)
   const {
   int64_t duration = -1 != m_forced_default_duration                                                  ? m_forced_default_duration * 2
                    : (m_sps_info_list.size() > si.sps) && m_sps_info_list[si.sps].timing_info_valid() ? m_sps_info_list[si.sps].default_duration()

@@ -17,6 +17,7 @@
 #include "common/common_pch.h"
 
 #include "common/avc.h"
+#include "common/avc_hevc_types.h"
 #include "common/math_fwd.h"
 
 namespace mtx::avc {
@@ -26,7 +27,7 @@ struct frame_t {
   int64_t m_start, m_end, m_ref1, m_ref2;
   uint64_t m_position;
   bool m_keyframe, m_has_provided_timestamp;
-  slice_info_t m_si;
+  mtx::avc_hevc::slice_info_t m_si;
   int m_presentation_order, m_decode_order;
   char m_type;
   bool m_order_calculated;
@@ -222,7 +223,7 @@ public:
   }
 
   int64_t duration_for(unsigned int sps, bool field_pic_flag) const;
-  int64_t duration_for(slice_info_t const &si) const {
+  int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const {
     return duration_for(si.sps, si.field_pic_flag);
   }
   int64_t get_most_often_used_duration() const;
@@ -234,13 +235,13 @@ public:
   mtx_mp_rational_t const &get_par() const;
   std::pair<int64_t, int64_t> const get_display_dimensions(int width = -1, int height = -1) const;
 
-  bool parse_slice(memory_cptr const &nalu, slice_info_t &si);
+  bool parse_slice(memory_cptr const &nalu, mtx::avc_hevc::slice_info_t &si);
   void handle_sps_nalu(memory_cptr const &nalu);
   void handle_pps_nalu(memory_cptr const &nalu);
   void handle_sei_nalu(memory_cptr const &nalu);
   void handle_slice_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
   void cleanup();
-  bool flush_decision(slice_info_t &si, slice_info_t &ref);
+  bool flush_decision(mtx::avc_hevc::slice_info_t &si, mtx::avc_hevc::slice_info_t &ref);
   void flush_incomplete_frame();
   void flush_unhandled_nalus();
   void add_sps_and_pps_to_extra_data();

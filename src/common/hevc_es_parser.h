@@ -15,33 +15,19 @@
 
 #include "common/common_pch.h"
 
+#include "common/avc_hevc_types.h"
 #include "common/hevc_types.h"
 #include "common/math_fwd.h"
 #include "common/dovi_meta.h"
 
 namespace mtx::hevc {
 
-struct slice_info_t {
-  unsigned char nalu_type{};
-  unsigned char slice_type{};
-  unsigned char pps_id{};
-  bool first_slice_segment_in_pic_flag{};
-  unsigned int pic_order_cnt_lsb{};
-
-  unsigned int sps{};
-  unsigned int pps{};
-  int temporal_id{};
-
-  void dump() const;
-  void clear();
-};
-
 struct frame_t {
   memory_cptr m_data{};
   int64_t m_start{}, m_end{}, m_ref1{}, m_ref2{};
   uint64_t m_position{};
   bool m_keyframe{}, m_has_provided_timestamp{};
-  slice_info_t m_si{};
+  mtx::avc_hevc::slice_info_t m_si{};
   int m_presentation_order{}, m_decode_order{};
 
   void clear();
@@ -199,7 +185,7 @@ public:
     return m_stream_default_duration;
   }
 
-  int64_t duration_for(slice_info_t const &si) const;
+  int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const;
   int64_t get_most_often_used_duration() const;
 
   size_t get_num_field_slices() const;
@@ -225,7 +211,7 @@ public:
   }
 
 protected:
-  bool parse_slice(memory_cptr const &nalu, slice_info_t &si);
+  bool parse_slice(memory_cptr const &nalu, mtx::avc_hevc::slice_info_t &si);
   void handle_nalu_internal(memory_cptr const &nalu, uint64_t nalu_pos);
   void handle_vps_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);
   void handle_sps_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);

@@ -203,8 +203,8 @@ es_parser_c::add_timestamp(int64_t timestamp) {
 }
 
 bool
-es_parser_c::flush_decision(slice_info_t &si,
-                            slice_info_t &ref) {
+es_parser_c::flush_decision(mtx::avc_hevc::slice_info_t &si,
+                            mtx::avc_hevc::slice_info_t &ref) {
 
   if (NALU_TYPE_IDR_SLICE == si.nalu_type) {
     if (0 != si.first_mb_in_slice)
@@ -288,7 +288,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     return;
   }
 
-  slice_info_t si;
+  mtx::avc_hevc::slice_info_t si;
   if (!parse_slice(nalu, si))   // no conversion to RBSP; the bit reader takes care of it
     return;
 
@@ -555,12 +555,12 @@ es_parser_c::handle_nalu(memory_cptr const &nalu,
 
 bool
 es_parser_c::parse_slice(memory_cptr const &nalu,
-                         slice_info_t &si) {
+                         mtx::avc_hevc::slice_info_t &si) {
   try {
     mtx::bits::reader_c r(nalu->get_buffer(), nalu->get_size());
     r.enable_rbsp_mode();
 
-    si = slice_info_t{};
+    si.clear();
 
     r.skip_bit();                   // forbidden_zero_bit
     si.nal_ref_idc = r.get_bits(2); // nal_ref_idc

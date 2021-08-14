@@ -186,40 +186,6 @@ pps_info_t::dump() {
                      checksum));
 }
 
-void
-slice_info_t::dump()
-  const {
-  mxinfo(fmt::format("slice_info dump:\n"
-                     "  nalu_type:                  {0}\n"
-                     "  nal_ref_idc:                {1}\n"
-                     "  slice_type:                 {2}\n"
-                     "  pps_id:                     {3}\n"
-                     "  frame_num:                  {4}\n"
-                     "  field_pic_flag:             {5}\n"
-                     "  bottom_field_flag:          {6}\n"
-                     "  idr_pic_id:                 {7}\n"
-                     "  pic_order_cnt_lsb:          {8}\n"
-                     "  delta_pic_order_cnt_bottom: {9}\n"
-                     "  delta_pic_order_cnt:        {10}\n"
-                     "  first_mb_in_slice:          {11}\n"
-                     "  sps:                        {12}\n"
-                     "  pps:                        {13}\n",
-                     static_cast<unsigned int>(nalu_type),
-                     static_cast<unsigned int>(nal_ref_idc),
-                     static_cast<unsigned int>(slice_type),
-                     static_cast<unsigned int>(pps_id),
-                     frame_num,
-                     field_pic_flag,
-                     bottom_field_flag,
-                     idr_pic_id,
-                     pic_order_cnt_lsb,
-                     delta_pic_order_cnt_bottom,
-                     delta_pic_order_cnt[0] << 8 | delta_pic_order_cnt[1],
-                     first_mb_in_slice,
-                     sps,
-                     pps));
-}
-
 memory_cptr
 parse_sps(memory_cptr const &buffer,
           sps_info_t &sps,
