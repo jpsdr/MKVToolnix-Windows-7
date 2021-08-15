@@ -640,7 +640,7 @@ avcc_to_nalus(const unsigned char *buffer,
         if (element_size != mem.read(copy_buffer->get_buffer() + 4, element_size))
           throw false;
 
-        put_uint32_be(copy_buffer->get_buffer(), NALU_START_CODE);
+        put_uint32_be(copy_buffer->get_buffer(), mtx::avc_hevc::NALU_START_CODE);
         nalus.add(copy_buffer->get_buffer(), element_size + 4);
       }
     }

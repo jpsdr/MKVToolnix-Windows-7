@@ -17,8 +17,6 @@
 
 namespace mtx::hevc {
 
-constexpr auto NALU_START_CODE                          = 0x00000001;
-
 // VCL NALs
 constexpr auto NALU_TYPE_TRAIL_N                        = 0;
 constexpr auto NALU_TYPE_TRAIL_R                        = 1;

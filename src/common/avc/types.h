@@ -18,8 +18,6 @@
 
 namespace mtx::avc {
 
-constexpr auto NALU_START_CODE         = 0x00000001;
-
 constexpr auto NALU_TYPE_NON_IDR_SLICE = 0x01;
 constexpr auto NALU_TYPE_DP_A_SLICE    = 0x02;
 constexpr auto NALU_TYPE_DP_B_SLICE    = 0x03;

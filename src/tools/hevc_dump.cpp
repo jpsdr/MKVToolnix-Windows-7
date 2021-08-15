@@ -133,10 +133,10 @@ parse_file(std::string const &file_name) {
     if (pos >= file_size)
       break;
 
-    if (marker == mtx::hevc::NALU_START_CODE)
+    if (marker == mtx::avc_hevc::NALU_START_CODE)
       marker_size = 4;
 
-    else if ((marker & 0x00ffffff) == mtx::hevc::NALU_START_CODE)
+    else if ((marker & 0x00ffffff) == mtx::avc_hevc::NALU_START_CODE)
       marker_size = 3;
 
     else {

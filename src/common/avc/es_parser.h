@@ -43,7 +43,6 @@ public:
   es_parser_c();
   ~es_parser_c();
 
-
   bool has_timing_info() const {
     return !m_sps_info_list.empty() && m_sps_info_list[0].timing_info_valid();
   }
@@ -56,11 +55,6 @@ public:
 
   void set_fix_bitstream_frame_rate(bool fix) {
     m_fix_bitstream_frame_rate = fix;
-  }
-
-  void add_bytes(unsigned char *buf, size_t size);
-  void add_bytes(memory_cptr &buf) {
-    add_bytes(buf->get_buffer(), buf->get_size());
   }
 
   virtual void flush() override;

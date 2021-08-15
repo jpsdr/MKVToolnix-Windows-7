@@ -13,6 +13,10 @@
 #include "common/common_pch.h"
 
 #include "common/avc_hevc/es_parser.h"
+#include "common/endian.h"
+#include "common/memory_slice_cursor.h"
+#include "common/mm_file_io.h"
+#include "common/mpeg.h"
 #include "common/strings/formatting.h"
 
 namespace mtx::avc_hevc {
@@ -22,7 +26,8 @@ std::unordered_map<int, std::string> es_parser_c::ms_nalu_names_by_type;
 es_parser_c::es_parser_c(std::string const &debug_type,
                          std::size_t num_slice_types,
                          std::size_t num_nalu_types)
-  : m_debug_keyframe_detection{fmt::format("{0}_parser|{0}_keyframe_detection", debug_type, debug_type)}
+  : m_debug_type{debug_type}
+  , m_debug_keyframe_detection{fmt::format("{0}_parser|{0}_keyframe_detection", debug_type, debug_type)}
   , m_debug_nalu_types{        fmt::format("{0}_parser|{0}_nalu_types",         debug_type, debug_type)}
   , m_debug_timestamps{        fmt::format("{0}_parser|{0}_timestamps",         debug_type, debug_type)}
   , m_debug_sps_info{          fmt::format("{0}_parser|{0}_sps|{0}_sps_info",   debug_type, debug_type, debug_type)}
@@ -38,69 +43,129 @@ es_parser_c::discard_actual_frames(bool discard) {
   m_discard_actual_frames = discard;
 }
 
-// void
-// es_parser_c::add_bytes(unsigned char *buffer,
-//                        size_t size) {
-//   mtx::mem::slice_cursor_c cursor;
-//   int marker_size              = 0;
-//   int previous_marker_size     = 0;
-//   int previous_pos             = -1;
-//   uint64_t previous_parsed_pos = m_parsed_position;
+void
+es_parser_c::set_next_i_slice_is_key_frame() {
+  m_recovery_point_valid = true;
+}
 
-//   if (m_unparsed_buffer && (0 != m_unparsed_buffer->get_size()))
-//     cursor.add_slice(m_unparsed_buffer);
-//   cursor.add_slice(buffer, size);
+void
+es_parser_c::maybe_dump_raw_data(unsigned char const *buffer,
+                                 std::size_t size) {
+  static debugging_option_c s_dump_raw_data{fmt::format("{0}_es_parser_dump_raw_data", m_debug_type)};
 
-//   if (3 <= cursor.get_remaining_size()) {
-//     uint32_t marker =                               1 << 24
-//                     | (unsigned int)cursor.get_char() << 16
-//                     | (unsigned int)cursor.get_char() <<  8
-//                     | (unsigned int)cursor.get_char();
+  if (!s_dump_raw_data)
+    return;
 
-//     while (true) {
-//       if (NALU_START_CODE == marker)
-//         marker_size = 4;
-//       else if (NALU_START_CODE == (marker & 0x00ffffff))
-//         marker_size = 3;
+  auto file_name = fmt::format("{0}_raw_data-{1:p}", m_debug_type, static_cast<void *>(this));
+  mm_file_io_c out{file_name, std::filesystem::is_regular_file(file_name) ? MODE_WRITE : MODE_CREATE};
 
-//       if (0 != marker_size) {
-//         if (-1 != previous_pos) {
-//           int new_size = cursor.get_position() - marker_size - previous_pos - previous_marker_size;
-//           auto nalu = memory_c::alloc(new_size);
-//           cursor.copy(nalu->get_buffer(), previous_pos + previous_marker_size, new_size);
-//           m_parsed_position = previous_parsed_pos + previous_pos;
+  out.setFilePointer(0, libebml::seek_end);
+  out.write(buffer, size);
+}
 
-//           mtx::mpeg::remove_trailing_zero_bytes(*nalu);
-//           if (nalu->get_size())
-//             handle_nalu(nalu, m_parsed_position);
-//         }
-//         previous_pos         = cursor.get_position() - marker_size;
-//         previous_marker_size = marker_size;
-//         marker_size          = 0;
-//       }
+void
+es_parser_c::add_bytes(memory_cptr const &buf) {
+  add_bytes(buf->get_buffer(), buf->get_size());
+}
 
-//       if (!cursor.char_available())
-//         break;
+void
+es_parser_c::add_bytes(unsigned char *buffer,
+                       std::size_t size) {
+  maybe_dump_raw_data(buffer, size);
 
-//       marker <<= 8;
-//       marker  |= (unsigned int)cursor.get_char();
-//     }
-//   }
+  mtx::mem::slice_cursor_c cursor;
+  int marker_size              = 0;
+  int previous_marker_size     = 0;
+  int previous_pos             = -1;
+  uint64_t previous_parsed_pos = m_parsed_position;
 
-//   if (-1 == previous_pos)
-//     previous_pos = 0;
+  if (m_unparsed_buffer && (0 != m_unparsed_buffer->get_size()))
+    cursor.add_slice(m_unparsed_buffer);
+  cursor.add_slice(buffer, size);
 
-//   m_stream_position += size;
-//   m_parsed_position  = previous_parsed_pos + previous_pos;
+  if (3 <= cursor.get_remaining_size()) {
+    uint32_t marker =                               1 << 24
+                    | (unsigned int)cursor.get_char() << 16
+                    | (unsigned int)cursor.get_char() <<  8
+                    | (unsigned int)cursor.get_char();
 
-//   int new_size = cursor.get_size() - previous_pos;
-//   if (0 != new_size) {
-//     m_unparsed_buffer = memory_c::alloc(new_size);
-//     cursor.copy(m_unparsed_buffer->get_buffer(), previous_pos, new_size);
+    while (true) {
+      if (NALU_START_CODE == marker)
+        marker_size = 4;
+      else if (NALU_START_CODE == (marker & 0x00ffffff))
+        marker_size = 3;
 
-//   } else
-//     m_unparsed_buffer.reset();
-// }
+      if (0 != marker_size) {
+        if (-1 != previous_pos) {
+          int new_size = cursor.get_position() - marker_size - previous_pos - previous_marker_size;
+          auto nalu = memory_c::alloc(new_size);
+          cursor.copy(nalu->get_buffer(), previous_pos + previous_marker_size, new_size);
+          m_parsed_position = previous_parsed_pos + previous_pos;
+
+          mtx::mpeg::remove_trailing_zero_bytes(*nalu);
+          if (nalu->get_size())
+            handle_nalu(nalu, m_parsed_position);
+        }
+        previous_pos         = cursor.get_position() - marker_size;
+        previous_marker_size = marker_size;
+        marker_size          = 0;
+      }
+
+      if (!cursor.char_available())
+        break;
+
+      marker <<= 8;
+      marker  |= (unsigned int)cursor.get_char();
+    }
+  }
+
+  if (-1 == previous_pos)
+    previous_pos = 0;
+
+  m_stream_position += size;
+  m_parsed_position  = previous_parsed_pos + previous_pos;
+
+  int new_size = cursor.get_size() - previous_pos;
+  if (0 != new_size) {
+    m_unparsed_buffer = memory_c::alloc(new_size);
+    cursor.copy(m_unparsed_buffer->get_buffer(), previous_pos, new_size);
+
+  } else
+    m_unparsed_buffer.reset();
+}
+
+void
+es_parser_c::add_bytes_framed(memory_cptr const &buf,
+                              std::size_t nalu_size_length) {
+  add_bytes_framed(buf->get_buffer(), buf->get_size(), nalu_size_length);
+}
+
+void
+es_parser_c::add_bytes_framed(unsigned char *buffer,
+                              std::size_t buffer_size,
+                              std::size_t nalu_size_length) {
+  maybe_dump_raw_data(buffer, buffer_size);
+
+  auto pos = buffer;
+  auto end = buffer + buffer_size;
+
+  while ((pos + nalu_size_length) <= end) {
+    auto nalu_size     = get_uint_be(pos, nalu_size_length);
+    pos               += nalu_size_length;
+    m_stream_position += nalu_size_length;
+
+    if (!nalu_size)
+      continue;
+
+    if ((pos + nalu_size) > end)
+      return;
+
+    handle_nalu(memory_c::borrow(pos, nalu_size), m_stream_position);
+
+    pos               += nalu_size;
+    m_stream_position += nalu_size;
+  }
+}
 
 void
 es_parser_c::force_default_duration(int64_t default_duration) {

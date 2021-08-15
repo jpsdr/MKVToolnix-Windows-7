@@ -16,6 +16,8 @@
 
 namespace mtx::avc_hevc {
 
+constexpr auto NALU_START_CODE = 0x00000001;
+
 struct slice_info_t {
 public:
   // Fields common to AVC & HEVC:

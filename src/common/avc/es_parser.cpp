@@ -22,8 +22,6 @@
 #include "common/endian.h"
 #include "common/frame_timing.h"
 #include "common/hacks.h"
-#include "common/memory_slice_cursor.h"
-#include "common/mm_io.h"
 #include "common/mpeg.h"
 #include "common/strings/formatting.h"
 
@@ -73,74 +71,10 @@ es_parser_c::headers_parsed()
 }
 
 void
-es_parser_c::add_bytes(unsigned char *buffer,
-                       size_t size) {
-  mtx::mem::slice_cursor_c cursor;
-  int marker_size              = 0;
-  int previous_marker_size     = 0;
-  int previous_pos             = -1;
-  uint64_t previous_parsed_pos = m_parsed_position;
-
-  if (m_unparsed_buffer && (0 != m_unparsed_buffer->get_size()))
-    cursor.add_slice(m_unparsed_buffer);
-  cursor.add_slice(buffer, size);
-
-  if (3 <= cursor.get_remaining_size()) {
-    uint32_t marker =                               1 << 24
-                    | (unsigned int)cursor.get_char() << 16
-                    | (unsigned int)cursor.get_char() <<  8
-                    | (unsigned int)cursor.get_char();
-
-    while (true) {
-      if (NALU_START_CODE == marker)
-        marker_size = 4;
-      else if (NALU_START_CODE == (marker & 0x00ffffff))
-        marker_size = 3;
-
-      if (0 != marker_size) {
-        if (-1 != previous_pos) {
-          int new_size = cursor.get_position() - marker_size - previous_pos - previous_marker_size;
-          auto nalu = memory_c::alloc(new_size);
-          cursor.copy(nalu->get_buffer(), previous_pos + previous_marker_size, new_size);
-          m_parsed_position = previous_parsed_pos + previous_pos;
-
-          mtx::mpeg::remove_trailing_zero_bytes(*nalu);
-          if (nalu->get_size())
-            handle_nalu(nalu, m_parsed_position);
-        }
-        previous_pos         = cursor.get_position() - marker_size;
-        previous_marker_size = marker_size;
-        marker_size          = 0;
-      }
-
-      if (!cursor.char_available())
-        break;
-
-      marker <<= 8;
-      marker  |= (unsigned int)cursor.get_char();
-    }
-  }
-
-  if (-1 == previous_pos)
-    previous_pos = 0;
-
-  m_stream_position += size;
-  m_parsed_position  = previous_parsed_pos + previous_pos;
-
-  int new_size = cursor.get_size() - previous_pos;
-  if (0 != new_size) {
-    m_unparsed_buffer = memory_c::alloc(new_size);
-    cursor.copy(m_unparsed_buffer->get_buffer(), previous_pos, new_size);
-
-  } else
-    m_unparsed_buffer.reset();
-}
-
-void
 es_parser_c::flush() {
   if (m_unparsed_buffer && (5 <= m_unparsed_buffer->get_size())) {
     m_parsed_position += m_unparsed_buffer->get_size();
-    int marker_size = get_uint32_be(m_unparsed_buffer->get_buffer()) == NALU_START_CODE ? 4 : 3;
+    int marker_size = get_uint32_be(m_unparsed_buffer->get_buffer()) == mtx::avc_hevc::NALU_START_CODE ? 4 : 3;
     auto nalu_size  = m_unparsed_buffer->get_size() - marker_size;
     handle_nalu(memory_c::clone(m_unparsed_buffer->get_buffer() + marker_size, nalu_size), m_parsed_position - nalu_size);
   }

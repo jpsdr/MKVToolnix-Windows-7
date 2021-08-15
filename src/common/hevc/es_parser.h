@@ -50,20 +50,6 @@ public:
   es_parser_c();
   ~es_parser_c();
 
-  void set_next_i_slice_is_key_frame() {
-    m_recovery_point_valid = true;
-  }
-
-  void add_bytes(unsigned char *buf, size_t size);
-  void add_bytes(memory_cptr &buf) {
-    add_bytes(buf->get_buffer(), buf->get_size());
-  }
-
-  void add_bytes_framed(unsigned char *buf, size_t buffer_size, size_t nalu_size_length);
-  void add_bytes_framed(memory_cptr &buf, size_t nalu_size_length) {
-    add_bytes_framed(buf->get_buffer(), buf->get_size(), nalu_size_length);
-  }
-
   virtual void flush() override;
   virtual void clear() override;
 
@@ -121,8 +107,6 @@ protected:
   void add_nalu_to_extra_data(memory_cptr const &nalu, extra_data_position_e position = extra_data_position_e::pre);
   void add_nalu_to_pending_frame_data(memory_cptr const &nalu);
   void build_frame_data();
-
-  void maybe_dump_raw_data(unsigned char const *buffer, std::size_t size);
 
   virtual void init_nalu_names() const override;
 };

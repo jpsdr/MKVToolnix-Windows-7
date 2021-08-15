@@ -50,6 +50,7 @@ protected:
 
   bool m_first_cleanup{true}, m_simple_picture_order{}, m_discard_actual_frames{};
 
+  std::string const m_debug_type;
   debugging_option_c m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timestamps, m_debug_sps_info;
 
   static std::unordered_map<int, std::string> ms_nalu_names_by_type;
@@ -70,6 +71,12 @@ protected:
   virtual ~es_parser_c();
 
 public:
+  void add_bytes(unsigned char *buf, std::size_t size);
+  void add_bytes(memory_cptr const &buf);
+
+  void add_bytes_framed(unsigned char *buf, std::size_t buffer_size, std::size_t nalu_size_length);
+  void add_bytes_framed(memory_cptr const &buf, std::size_t nalu_size_length);
+
   void force_default_duration(int64_t default_duration);
   bool is_default_duration_forced() const;
   void set_container_default_duration(int64_t default_duration);
@@ -77,6 +84,8 @@ public:
   int64_t get_stream_default_duration() const;
 
   void set_keep_ar_info(bool keep);
+
+  void set_next_i_slice_is_key_frame();
 
   void set_nalu_size_length(int nalu_size_length);
   int get_nalu_size_length() const;
@@ -105,6 +114,8 @@ public:
   std::vector<int64_t> calculate_provided_timestamps_to_use();
 
   void cleanup();
+
+  void maybe_dump_raw_data(unsigned char const *buffer, std::size_t size);
 
   virtual void flush() = 0;
   virtual void clear() = 0;
