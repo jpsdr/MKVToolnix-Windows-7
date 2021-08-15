@@ -14,7 +14,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/hevc.h"
+#include "common/hevc/util.h"
 #include "merge/generic_reader.h"
 #include "merge/block_addition_mapping.h"
 

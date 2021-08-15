@@ -17,7 +17,7 @@
 
 #include "common/avc_hevc/types.h"
 #include "common/avc_hevc/es_parser.h"
-#include "common/hevc_types.h"
+#include "common/hevc/types.h"
 #include "common/math_fwd.h"
 #include "common/dovi_meta.h"
 

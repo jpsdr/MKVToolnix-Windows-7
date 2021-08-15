@@ -14,7 +14,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/hevc_es_parser.h"
+#include "common/hevc/es_parser.h"
 #include "output/p_avc_hevc_es.h"
 
 class hevc_es_video_packetizer_c: public avc_hevc_es_video_packetizer_c {

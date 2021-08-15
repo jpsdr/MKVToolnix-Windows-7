@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 #include "merge/block_addition_mapping.h"
-#include "common/hevc_types.h"
+#include "common/hevc/types.h"
 
 namespace mtx::dovi {
 

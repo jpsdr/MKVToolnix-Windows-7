@@ -12,7 +12,7 @@
 
 #include "common/bit_reader.h"
 #include "common/command_line.h"
-#include "common/hevc.h"
+#include "common/hevc/util.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/mpeg.h"

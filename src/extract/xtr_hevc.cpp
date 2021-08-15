@@ -13,7 +13,7 @@
 
 #include "common/endian.h"
 #include "common/hacks.h"
-#include "common/hevc.h"
+#include "common/hevc/util.h"
 #include "common/list_utils.h"
 #include "extract/xtr_hevc.h"
 

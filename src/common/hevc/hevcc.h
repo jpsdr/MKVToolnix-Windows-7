@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/hevc_types.h"
+#include "common/hevc/types.h"
 
 namespace mtx::hevc {
 

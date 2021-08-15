@@ -12,7 +12,7 @@
 
 #include "common/checksums/base_fwd.h"
 #include "common/command_line.h"
-#include "common/hevc_es_parser.h"
+#include "common/hevc/es_parser.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 

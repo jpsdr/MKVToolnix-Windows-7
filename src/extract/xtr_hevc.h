@@ -13,7 +13,7 @@
 
 #include "common/common_pch.h"
 
-#include "common/hevc_es_parser.h"
+#include "common/hevc/es_parser.h"
 #include "extract/xtr_base.h"
 #include "extract/xtr_avc.h"
 
