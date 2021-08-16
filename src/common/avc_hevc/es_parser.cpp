@@ -325,21 +325,21 @@ es_parser_c::calculate_provided_timestamps_to_use() {
     ++frame_idx;
   }
 
-  mxdebug_if(m_debug_timestamps,
-             fmt::format("cleanup; num frames {0} num provided timestamps available {1} num provided timestamps to use {2}\n"
-                         "  frames:\n{3}"
-                         "  provided timestamps (available):\n{4}"
-                         "  provided timestamps (to use):\n{5}",
-                         num_frames, num_provided_timestamps, provided_timestamps_to_use.size(),
-                         std::accumulate(m_frames.begin(), m_frames.end(), std::string{}, [](auto const &str, auto const &frame) {
-                           return str + fmt::format("    pos {0} size {1} type {2}\n", frame.m_position, frame.m_data->get_size(), frame.m_type);
-                         }),
-                         std::accumulate(m_provided_timestamps.begin(), m_provided_timestamps.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
-                           return str + fmt::format("    pos {0} timestamp {1}\n", provided_timestamp.second, mtx::string::format_timestamp(provided_timestamp.first));
-                         }),
-                         std::accumulate(provided_timestamps_to_use.begin(), provided_timestamps_to_use.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
-                           return str + fmt::format("    timestamp {0}\n", mtx::string::format_timestamp(provided_timestamp));
-                         })));
+  // mxdebug_if(m_debug_timestamps,
+  //            fmt::format("cleanup; num frames {0} num provided timestamps available {1} num provided timestamps to use {2}\n"
+  //                        "  frames:\n{3}"
+  //                        "  provided timestamps (available):\n{4}"
+  //                        "  provided timestamps (to use):\n{5}",
+  //                        num_frames, num_provided_timestamps, provided_timestamps_to_use.size(),
+  //                        std::accumulate(m_frames.begin(), m_frames.end(), std::string{}, [](auto const &str, auto const &frame) {
+  //                          return str + fmt::format("    pos {0} size {1} type {2}\n", frame.m_position, frame.m_data->get_size(), frame.m_type);
+  //                        }),
+  //                        std::accumulate(m_provided_timestamps.begin(), m_provided_timestamps.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
+  //                          return str + fmt::format("    pos {0} timestamp {1}\n", provided_timestamp.second, mtx::string::format_timestamp(provided_timestamp.first));
+  //                        }),
+  //                        std::accumulate(provided_timestamps_to_use.begin(), provided_timestamps_to_use.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
+  //                          return str + fmt::format("    timestamp {0}\n", mtx::string::format_timestamp(provided_timestamp));
+  //                        })));
 
   m_provided_timestamps.erase(m_provided_timestamps.begin(), m_provided_timestamps.begin() + provided_timestamps_idx);
 

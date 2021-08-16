@@ -719,11 +719,12 @@ es_parser_c::calculate_frame_timestamps(std::vector<int64_t> const &provided_tim
 
   m_max_timestamp = m_frames.back().m_end;
 
-  mxdebug_if(m_debug_timestamps,
-             fmt::format("CLEANUP frames <pres_ord dec_ord has_prov_ts tc dur>: {0}\n",
-                         std::accumulate(m_frames.begin(), m_frames.end(), ""s, [](auto const &accu, auto const &frame) {
-                           return accu + fmt::format(" <{0} {1} {2} {3} {4}>", frame.m_presentation_order, frame.m_decode_order, frame.m_has_provided_timestamp, frame.m_start, frame.m_end - frame.m_start);
-                         })));
+  // mxdebug_if(m_debug_timestamps,
+  //            fmt::format("CLEANUP frames <pres_ord dec_ord has_prov_ts tc dur>: {0}\n",
+  //                        std::accumulate(m_frames.begin(), m_frames.end(), ""s, [](auto const &accu, auto const &frame) {
+  //                          return accu + fmt::format(" <{0} {1} {2} {3} {4}>", frame.m_presentation_order, frame.m_decode_order, frame.m_has_provided_timestamp, frame.m_start, frame.m_end - frame.m_start);
+  //                        })));
+}
 
 void
 es_parser_c::calculate_frame_references() {
