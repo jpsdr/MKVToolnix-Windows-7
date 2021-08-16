@@ -39,6 +39,9 @@
   `ekavsk` with its prefixes `sr`, `sr-Cyrl` and `sr-Latn` where
   e.g. `sr-ekavsk` and `sr-Cyrl-ekavsk` should be allowed but not
   `sr-Bali-ekavsk`).
+* mkvinfo, MKVToolNix GUI's info tool: in summary mode the frame type was
+  reported wrong for `BlockGroup` elements in which the `ReferenceBlock`
+  elements were located behind the `Block` element.
 
 ## Build system changes
 

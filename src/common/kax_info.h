@@ -116,6 +116,7 @@ protected:
   void init_custom_element_value_formatters_and_processors();
 
   void show_element(libebml::EbmlElement *l, int level, std::string const &info, std::optional<int64_t> position = {}, std::optional<int64_t> size = {});
+  void show_frame_summary(libebml::EbmlElement &e);
 
   void add_track(std::shared_ptr<kax_info::track_t> const &t);
   kax_info::track_t *find_track(int tnum);
