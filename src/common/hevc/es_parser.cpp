@@ -198,6 +198,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
                                         || (NALU_TYPE_IDR_W_RADL == si.nalu_type)
                                         || (NALU_TYPE_IDR_N_LP   == si.nalu_type)
                                         || (NALU_TYPE_CRA_NUT    == si.nalu_type)));
+  m_incomplete_frame.m_type     = m_incomplete_frame.m_keyframe ? 'I' : is_b_slice ? 'B' : 'P';
   m_incomplete_frame.m_position = nalu_pos;
   m_recovery_point_valid        = false;
 
@@ -692,12 +693,7 @@ es_parser_c::calculate_frame_order() {
 }
 
 void
-es_parser_c::calculate_frame_timestamps() {
-  auto provided_timestamps_to_use = calculate_provided_timestamps_to_use();
-
-  if (!m_simple_picture_order)
-    std::sort(m_frames.begin(), m_frames.end(), [](auto const &f1, auto const &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
-
+es_parser_c::calculate_frame_timestamps(std::vector<int64_t> const &provided_timestamps_to_use) {
   auto frames_begin           = m_frames.begin();
   auto frames_end             = m_frames.end();
   auto previous_frame_itr     = frames_begin;
@@ -729,31 +725,61 @@ es_parser_c::calculate_frame_timestamps() {
                            return accu + fmt::format(" <{0} {1} {2} {3} {4}>", frame.m_presentation_order, frame.m_decode_order, frame.m_has_provided_timestamp, frame.m_start, frame.m_end - frame.m_start);
                          })));
 
-  if (!m_simple_picture_order)
-    std::sort(m_frames.begin(), m_frames.end(), [](auto const &f1, auto const &f2) { return f1.m_decode_order < f2.m_decode_order; });
+void
+es_parser_c::calculate_frame_references() {
+  for (auto frame_itr = m_frames.begin(), frames_end = m_frames.end(); frames_end != frame_itr; ++frame_itr) {
+    if (frame_itr->is_i_frame()) {
+      m_previous_i_p_start = frame_itr->m_start;
+      continue;
+    }
+
+    frame_itr->m_ref1 = m_previous_i_p_start - frame_itr->m_start;
+
+    if (frame_itr->is_p_frame()) {
+      m_previous_i_p_start = frame_itr->m_start;
+      continue;
+    }
+
+    auto next_i_p_frame_itr = frame_itr + 1;
+
+    while ((frames_end != next_i_p_frame_itr) && next_i_p_frame_itr->is_b_frame())
+      ++next_i_p_frame_itr;
+
+    auto forward_ref_start = frames_end != next_i_p_frame_itr ? next_i_p_frame_itr->m_start : m_max_timestamp;
+    frame_itr->m_ref2      = forward_ref_start - frame_itr->m_start;
+  }
 }
 
 void
-es_parser_c::calculate_frame_references_and_update_stats() {
-  auto frames_begin       = m_frames.begin();
-  auto frames_end         = m_frames.end();
-  auto previous_frame_itr = frames_begin;
+es_parser_c::update_frame_stats() {
+  mxdebug_if(m_debug_timestamps, fmt::format("DECODE order dump\n"));
 
-  for (auto frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
-    if (frames_begin != frame_itr)
-      frame_itr->m_ref1 = previous_frame_itr->m_start - frame_itr->m_start;
+  for (auto &frame : m_frames) {
+    mxdebug_if(m_debug_timestamps, fmt::format("  type {0} TS {1} size {2} pos 0x{3:x} ref1 {4} ref2 {5}\n", frame.m_type, mtx::string::format_timestamp(frame.m_start), frame.m_data->get_size(), frame.m_position, frame.m_ref1, frame.m_ref2));
 
-    previous_frame_itr = frame_itr;
-    m_duration_frequency[frame_itr->m_end - frame_itr->m_start]++;
+    ++m_duration_frequency[frame.m_end - frame.m_start];
 
-    ++m_stats.num_field_slices;
+    if (frame.m_si.field_pic_flag)
+      ++m_stats.num_field_slices;
+    else
+      ++m_stats.num_frame_slices;
   }
 }
 
 void
 es_parser_c::calculate_frame_timestamps_references_and_update_stats() {
-  calculate_frame_timestamps();
-  calculate_frame_references_and_update_stats();
+  auto provided_timestamps_to_use = calculate_provided_timestamps_to_use();
+
+  if (!m_simple_picture_order)
+    std::sort(m_frames.begin(), m_frames.end(), [](auto const &f1, auto const &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
+
+  calculate_frame_timestamps(provided_timestamps_to_use);
+  calculate_frame_references();
+
+  if (!m_simple_picture_order)
+    std::sort(m_frames.begin(), m_frames.end(), [](auto const &f1, auto const &f2) { return f1.m_decode_order < f2.m_decode_order; });
+
+  update_frame_stats();
 }
 
 memory_cptr

@@ -65,6 +65,7 @@ public:
   bool is_i_frame() const;
   bool is_p_frame() const;
   bool is_b_frame() const;
+  bool is_key_frame() const;
   bool is_discardable() const;
 };
 

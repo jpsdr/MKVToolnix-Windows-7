@@ -109,8 +109,8 @@ constexpr auto SEI_DECODED_PICTURE_HASH                 = 132;
 constexpr auto SEI_SCALABLE_NESTING                     = 133;
 constexpr auto SEI_REGION_REFRESH_INFO                  = 134;
 
-constexpr auto SLICE_TYPE_P                             = 0;
-constexpr auto SLICE_TYPE_B                             = 1;
+constexpr auto SLICE_TYPE_B                             = 0;
+constexpr auto SLICE_TYPE_P                             = 1;
 constexpr auto SLICE_TYPE_I                             = 2;
 
 constexpr auto EXTENDED_SAR                             = 0xff;

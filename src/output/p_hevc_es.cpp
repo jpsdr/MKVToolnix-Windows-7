@@ -130,7 +130,8 @@ hevc_es_video_packetizer_c::flush_frames() {
     auto frame = m_parser.get_frame();
     add_packet(std::make_shared<packet_t>(frame.m_data, frame.m_start,
                                           frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration,
-                                          frame.m_keyframe            ? -1                          : frame.m_start + frame.m_ref1));
+                                           frame.is_key_frame()       ? -1                          : frame.m_start + frame.m_ref1,
+                                          !frame.is_b_frame()         ? -1                          : frame.m_start + frame.m_ref2));
   }
 }
 

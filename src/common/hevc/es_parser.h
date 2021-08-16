@@ -101,8 +101,9 @@ protected:
   void flush_incomplete_frame();
   virtual void calculate_frame_order() override;
   virtual void calculate_frame_timestamps_references_and_update_stats() override;
-  void calculate_frame_timestamps();
-  void calculate_frame_references_and_update_stats();
+  void calculate_frame_timestamps(std::vector<int64_t> const &provided_timestamps_to_use);
+  void calculate_frame_references();
+  void update_frame_stats();
   void add_parameter_sets_to_extra_data();
   void add_nalu_to_extra_data(memory_cptr const &nalu, extra_data_position_e position = extra_data_position_e::pre);
   void add_nalu_to_pending_frame_data(memory_cptr const &nalu);

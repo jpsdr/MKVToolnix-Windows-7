@@ -36,7 +36,7 @@ protected:
   std::deque<frame_t> m_frames, m_frames_out;
 
   std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
-  int64_t m_max_timestamp{};
+  int64_t m_max_timestamp{}, m_previous_i_p_start{};
   std::map<int64_t, int64_t> m_duration_frequency;
 
   std::vector<memory_cptr> m_sps_list, m_pps_list, m_vps_list;

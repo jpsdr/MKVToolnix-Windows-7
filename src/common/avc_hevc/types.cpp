@@ -88,6 +88,12 @@ frame_t::is_b_frame()
 }
 
 bool
+frame_t::is_key_frame()
+  const {
+  return m_keyframe;
+}
+
+bool
 frame_t::is_discardable()
   const {
   return m_si.nal_ref_idc == 0;

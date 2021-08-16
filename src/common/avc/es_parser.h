@@ -29,8 +29,6 @@ protected:
 
   std::optional<bool> m_current_key_frame_bottom_field;
 
-  int64_t m_previous_i_p_start{};
-
   std::vector<memory_cptr> m_extra_data;
   std::vector<sps_info_t> m_sps_info_list;
   std::vector<pps_info_t> m_pps_info_list;
