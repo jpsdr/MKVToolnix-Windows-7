@@ -54,6 +54,9 @@ def main
       controller.show_duration = true
     elsif arg =~ /-j(\d+)/
       controller.num_threads = $1.to_i
+    elsif /^ (!)? test-(\d{4}) .* \.rb $/x.match arg
+      method = $1 == '!' ? :exclude_test_case : :add_test_case
+      controller.send(method, $2)
     elsif /^ (!)? (\d{1,4}) (?: - (\d{1,4}) )?$/x.match arg
       method = $1 == '!' ? :exclude_test_case : :add_test_case
       $2.to_i.upto(($3 || $2).to_i) { |idx| controller.send(method, sprintf("%04d", idx)) }
