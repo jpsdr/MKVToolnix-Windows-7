@@ -125,8 +125,12 @@ public:
   virtual int get_width() const = 0;
   virtual int get_height() const = 0;
 
+  virtual int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const = 0;
+
   virtual void calculate_frame_order() = 0;
-  virtual void calculate_frame_timestamps_references_and_update_stats() = 0;
+  void calculate_frame_timestamps(std::vector<int64_t> const &provided_timestamps_to_use);
+  void calculate_frame_references();
+  void update_frame_stats();
 
   virtual void init_nalu_names() const = 0;
 

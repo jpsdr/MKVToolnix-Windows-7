@@ -74,7 +74,7 @@ public:
 
   void dump_info() const;
 
-  int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const;
+  virtual int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const override;
 
   bool has_dovi_rpu_header() const {
     return m_dovi_rpu_data_header.rpu_nal_prefix == 25;
@@ -100,10 +100,6 @@ protected:
   void handle_slice_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
   void flush_incomplete_frame();
   virtual void calculate_frame_order() override;
-  virtual void calculate_frame_timestamps_references_and_update_stats() override;
-  void calculate_frame_timestamps(std::vector<int64_t> const &provided_timestamps_to_use);
-  void calculate_frame_references();
-  void update_frame_stats();
   void add_parameter_sets_to_extra_data();
   void add_nalu_to_extra_data(memory_cptr const &nalu, extra_data_position_e position = extra_data_position_e::pre);
   void add_nalu_to_pending_frame_data(memory_cptr const &nalu);

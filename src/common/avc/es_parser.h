@@ -76,10 +76,7 @@ public:
 
   void dump_info() const;
 
-  int64_t duration_for(unsigned int sps, bool field_pic_flag) const;
-  int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const {
-    return duration_for(si.sps, si.field_pic_flag);
-  }
+  virtual int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const override;
 
   bool parse_slice(memory_cptr const &nalu, mtx::avc_hevc::slice_info_t &si);
   void handle_sps_nalu(memory_cptr const &nalu);
@@ -92,10 +89,9 @@ protected:
   void flush_incomplete_frame();
   void add_sps_and_pps_to_extra_data();
   memory_cptr create_nalu_with_size(const memory_cptr &src, bool add_extra_data = false);
+
+  int64_t duration_for_impl(unsigned int sps, bool field_pic_flag) const;
   virtual void calculate_frame_order() override;
-  virtual void calculate_frame_timestamps_references_and_update_stats() override;
-  void calculate_frame_timestamps_and_references();
-  void update_frame_stats();
 
   virtual void init_nalu_names() const override;
 

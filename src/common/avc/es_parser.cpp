@@ -255,7 +255,7 @@ void
 es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
   sps_info_t sps_info;
 
-  auto parsed_nalu = parse_sps(mtx::mpeg::nalu_to_rbsp(nalu), sps_info, m_keep_ar_info, m_fix_bitstream_frame_rate, duration_for(0, true));
+  auto parsed_nalu = parse_sps(mtx::mpeg::nalu_to_rbsp(nalu), sps_info, m_keep_ar_info, m_fix_bitstream_frame_rate, duration_for_impl(0, true));
   if (!parsed_nalu)
     return;
 
@@ -519,8 +519,14 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
 }
 
 int64_t
-es_parser_c::duration_for(unsigned int sps,
-                          bool field_pic_flag)
+es_parser_c::duration_for(mtx::avc_hevc::slice_info_t const &si)
+  const {
+  return duration_for_impl(si.sps, si.field_pic_flag);
+}
+
+int64_t
+es_parser_c::duration_for_impl(unsigned int sps,
+                               bool field_pic_flag)
   const {
   int64_t duration = -1 != m_forced_default_duration                                            ? m_forced_default_duration
                    : (m_sps_info_list.size() > sps) && m_sps_info_list[sps].timing_info_valid() ? m_sps_info_list[sps].timing_info.default_duration()
@@ -587,94 +593,6 @@ es_parser_c::calculate_frame_order() {
       prev_pic_order_cnt_msb = pic_order_cnt_msb;
     }
   }
-}
-
-void
-es_parser_c::calculate_frame_timestamps_and_references() {
-  static auto s_debug_force_simple_picture_order = debugging_option_c{"avc_parser_force_simple_picture_order"};
-  auto provided_timestamps_to_use                = calculate_provided_timestamps_to_use();
-
-  if (!m_simple_picture_order && !s_debug_force_simple_picture_order)
-    std::sort(m_frames.begin(), m_frames.end(), [](auto const &f1, auto const &f2) { return f1.m_presentation_order < f2.m_presentation_order; });
-
-  auto frames_begin            = m_frames.begin();
-  auto frames_end              = m_frames.end();
-  auto frame_itr               = frames_begin;
-  auto previous_frame_itr      = frames_begin;
-  auto provided_timestamps_itr = provided_timestamps_to_use.begin();
-
-  while (frames_end != frame_itr) {
-    if (frame_itr->m_has_provided_timestamp) {
-      frame_itr->m_start = *provided_timestamps_itr;
-      ++provided_timestamps_itr;
-
-      if (frames_begin != frame_itr)
-        previous_frame_itr->m_end = frame_itr->m_start;
-
-    } else {
-      frame_itr->m_start = frames_begin == frame_itr ? m_max_timestamp : previous_frame_itr->m_end;
-      ++m_stats.num_timestamps_generated;
-    }
-
-    frame_itr->m_end = frame_itr->m_start + duration_for(frame_itr->m_si);
-
-    previous_frame_itr = frame_itr;
-    ++frame_itr;
-  }
-
-  m_max_timestamp = m_frames.back().m_end;
-
-  for (frame_itr = frames_begin; frames_end != frame_itr; ++frame_itr) {
-    if (frame_itr->is_i_frame()) {
-      m_previous_i_p_start = frame_itr->m_start;
-      continue;
-    }
-
-    frame_itr->m_ref1 = m_previous_i_p_start - frame_itr->m_start;
-
-    if (frame_itr->is_p_frame()) {
-      m_previous_i_p_start = frame_itr->m_start;
-      continue;
-    }
-
-    auto next_i_p_frame_itr = frame_itr + 1;
-
-    while ((frames_end != next_i_p_frame_itr) && next_i_p_frame_itr->is_b_frame())
-      ++next_i_p_frame_itr;
-
-    auto forward_ref_start = frames_end != next_i_p_frame_itr ? next_i_p_frame_itr->m_start : m_max_timestamp;
-    frame_itr->m_ref2      = forward_ref_start - frame_itr->m_start;
-  }
-
-  mxdebug_if(m_debug_timestamps, fmt::format("PRESENTATION order dump\n"));
-
-  for (auto &frame : m_frames)
-    mxdebug_if(m_debug_timestamps, fmt::format("  type {0} TS {1} ref1 {2} ref2 {3} decode_order {4}\n", frame.m_type, mtx::string::format_timestamp(frame.m_start), frame.m_ref1, frame.m_ref2, frame.m_decode_order));
-
-  if (!m_simple_picture_order)
-    std::sort(m_frames.begin(), m_frames.end(), [](auto const &f1, auto const &f2) { return f1.m_decode_order < f2.m_decode_order; });
-}
-
-void
-es_parser_c::update_frame_stats() {
-  mxdebug_if(m_debug_timestamps, fmt::format("DECODE order dump\n"));
-
-  for (auto &frame : m_frames) {
-    mxdebug_if(m_debug_timestamps, fmt::format("  type {0} TS {1} ref1 {2} ref2 {3}\n", frame.m_type, mtx::string::format_timestamp(frame.m_start), frame.m_ref1, frame.m_ref2));
-
-    m_duration_frequency[frame.m_end - frame.m_start]++;
-
-    if (frame.m_si.field_pic_flag)
-      ++m_stats.num_field_slices;
-    else
-      ++m_stats.num_frame_slices;
-  }
-}
-
-void
-es_parser_c::calculate_frame_timestamps_references_and_update_stats() {
-  calculate_frame_timestamps_and_references();
-  update_frame_stats();
 }
 
 memory_cptr
