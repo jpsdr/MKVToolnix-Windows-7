@@ -22,8 +22,10 @@
 avc_hevc_es_video_packetizer_c::
 avc_hevc_es_video_packetizer_c(generic_reader_c *p_reader,
                                track_info_c &p_ti,
-                               std::string const &p_debug_type)
+                               std::string const &p_debug_type,
+                               std::unique_ptr<mtx::avc_hevc::es_parser_c> &&parser_base)
   : generic_packetizer_c{p_reader, p_ti}
+  , m_parser_base{std::move(parser_base)}
   , m_debug_timestamps{  fmt::format("{0}_es|{0}_es_timestamps",   p_debug_type)}
   , m_debug_aspect_ratio{fmt::format("{0}_es|{0}_es_aspect_ratio", p_debug_type)}
 {
@@ -51,6 +53,11 @@ avc_hevc_es_video_packetizer_c(generic_reader_c *p_reader,
     m_parser_default_duration_to_force        = m_default_duration_for_interlaced_content;
     mxdebug_if(m_debug_timestamps, fmt::format("Forcing default duration due to --default-duration to {0}\n", m_htrack_default_duration));
   }
+
+  m_parser_base->set_keep_ar_info(false);
+
+  if (m_parser_default_duration_to_force)
+    m_parser_base->force_default_duration(*m_parser_default_duration_to_force);
 }
 
 void
@@ -59,3 +66,41 @@ avc_hevc_es_video_packetizer_c::set_headers() {
 
   m_track_entry->EnableLacing(false);
 }
+
+void
+avc_hevc_es_video_packetizer_c::set_container_default_field_duration(int64_t default_duration) {
+  m_parser_base->set_container_default_duration(default_duration);
+}
+
+unsigned int
+avc_hevc_es_video_packetizer_c::get_nalu_size_length()
+  const {
+  return m_parser_base->get_nalu_size_length();
+}
+
+void
+avc_hevc_es_video_packetizer_c::add_extra_data(memory_cptr const &data) {
+  m_parser_base->add_bytes(data->get_buffer(), data->get_size());
+}
+
+void
+avc_hevc_es_video_packetizer_c::flush_impl() {
+  m_parser_base->flush();
+  flush_frames();
+}
+
+// void
+// hevc_es_video_packetizer_c::flush_frames() {
+//   while (m_parser_base->frame_available()) {
+//     if (m_first_frame) {
+//       handle_delayed_headers();
+//       m_first_frame = false;
+//     }
+
+//     auto frame = m_parser_base->get_frame();
+//     add_packet(std::make_shared<packet_t>(frame.m_data, frame.m_start,
+//                                           frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration,
+//                                            frame.is_key_frame()       ? -1                          : frame.m_start + frame.m_ref1,
+//                                           !frame.is_b_frame()         ? -1                          : frame.m_start + frame.m_ref2));
+//   }
+// }

@@ -68,9 +68,10 @@ protected:
 
 protected:
   es_parser_c(std::string const &debug_type, std::size_t num_slice_types, std::size_t num_nalu_types);
-  virtual ~es_parser_c();
 
 public:
+  virtual ~es_parser_c();
+
   void add_bytes(unsigned char *buf, std::size_t size);
   void add_bytes(memory_cptr const &buf);
 

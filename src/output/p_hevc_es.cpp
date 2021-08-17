@@ -26,25 +26,12 @@ using namespace libmatroska;
 
 hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reader,
                                                        track_info_c &p_ti)
-  : avc_hevc_es_video_packetizer_c{p_reader, p_ti, "hevc"}
+  : avc_hevc_es_video_packetizer_c{p_reader, p_ti, "hevc", std::unique_ptr<mtx::avc_hevc::es_parser_c>(new mtx::hevc::es_parser_c)}
+  , m_parser{static_cast<mtx::hevc::es_parser_c &>(*m_parser_base)}
 {
   set_codec_id(MKV_V_MPEGH_HEVC);
 
   m_parser.normalize_parameter_sets(!mtx::hacks::is_engaged(mtx::hacks::DONT_NORMALIZE_PARAMETER_SETS));
-  m_parser.set_keep_ar_info(false);
-
-  if (m_parser_default_duration_to_force)
-    m_parser.force_default_duration(*m_parser_default_duration_to_force);
-}
-
-void
-hevc_es_video_packetizer_c::set_container_default_field_duration(int64_t default_duration) {
-  m_parser.set_container_default_duration(default_duration);
-}
-
-void
-hevc_es_video_packetizer_c::add_extra_data(memory_cptr data) {
-  m_parser.add_bytes(data->get_buffer(), data->get_size());
 }
 
 void
@@ -114,31 +101,19 @@ hevc_es_video_packetizer_c::handle_actual_default_duration() {
 }
 
 void
-hevc_es_video_packetizer_c::flush_impl() {
-  m_parser.flush();
-  flush_frames();
-}
-
-void
 hevc_es_video_packetizer_c::flush_frames() {
-  while (m_parser.frame_available()) {
+  while (m_parser_base->frame_available()) {
     if (m_first_frame) {
       handle_delayed_headers();
       m_first_frame = false;
     }
 
-    auto frame = m_parser.get_frame();
+    auto frame = m_parser_base->get_frame();
     add_packet(std::make_shared<packet_t>(frame.m_data, frame.m_start,
                                           frame.m_end > frame.m_start ? frame.m_end - frame.m_start : m_htrack_default_duration,
                                            frame.is_key_frame()       ? -1                          : frame.m_start + frame.m_ref1,
                                           !frame.is_b_frame()         ? -1                          : frame.m_start + frame.m_ref2));
   }
-}
-
-unsigned int
-hevc_es_video_packetizer_c::get_nalu_size_length()
-  const {
-  return m_parser.get_nalu_size_length();
 }
 
 void

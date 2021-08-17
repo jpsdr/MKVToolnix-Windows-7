@@ -19,16 +19,12 @@
 
 class hevc_es_video_packetizer_c: public avc_hevc_es_video_packetizer_c {
 protected:
-  mtx::hevc::es_parser_c m_parser;
+  mtx::hevc::es_parser_c &m_parser;
 
 public:
   hevc_es_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
 
-  virtual void add_extra_data(memory_cptr data);
-  virtual void set_container_default_field_duration(int64_t default_duration);
-  virtual unsigned int get_nalu_size_length() const;
-
-  virtual void flush_frames();
+  virtual void flush_frames() override;
 
   virtual translatable_string_c get_format_name() const {
     return YT("HEVC/H.265 (unframed)");
@@ -42,5 +38,4 @@ protected:
   virtual void handle_delayed_headers();
   virtual void handle_aspect_ratio();
   virtual void handle_actual_default_duration();
-  virtual void flush_impl();
 };

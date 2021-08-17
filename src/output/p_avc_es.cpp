@@ -29,25 +29,12 @@ using namespace libmatroska;
 avc_es_video_packetizer_c::
 avc_es_video_packetizer_c(generic_reader_c *p_reader,
                           track_info_c &p_ti)
-  : avc_hevc_es_video_packetizer_c{p_reader, p_ti, "avc"}
+  : avc_hevc_es_video_packetizer_c{p_reader, p_ti, "avc", std::unique_ptr<mtx::avc_hevc::es_parser_c>(new mtx::avc::es_parser_c)}
+  , m_parser{static_cast<mtx::avc::es_parser_c &>(*m_parser_base)}
 {
   set_codec_id(MKV_V_MPEG4_AVC);
 
-  m_parser.set_keep_ar_info(false);
   m_parser.set_fix_bitstream_frame_rate(static_cast<bool>(m_ti.m_fix_bitstream_frame_rate));
-
-  if (m_parser_default_duration_to_force)
-    m_parser.force_default_duration(*m_parser_default_duration_to_force);
-}
-
-void
-avc_es_video_packetizer_c::set_container_default_field_duration(int64_t default_duration) {
-  m_parser.set_container_default_duration(default_duration);
-}
-
-void
-avc_es_video_packetizer_c::add_extra_data(memory_cptr data) {
-  m_parser.add_bytes(data->get_buffer(), data->get_size());
 }
 
 void
@@ -127,12 +114,6 @@ avc_es_video_packetizer_c::handle_actual_default_duration() {
 }
 
 void
-avc_es_video_packetizer_c::flush_impl() {
-  m_parser.flush();
-  flush_frames();
-}
-
-void
 avc_es_video_packetizer_c::flush_frames() {
   while (m_parser.frame_available()) {
     if (m_first_frame) {
@@ -150,12 +131,6 @@ avc_es_video_packetizer_c::flush_frames() {
 
     add_packet(packet);
   }
-}
-
-unsigned int
-avc_es_video_packetizer_c::get_nalu_size_length()
-  const {
-  return m_parser.get_nalu_size_length();
 }
 
 void
