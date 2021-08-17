@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 17.12.2018\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-08-07 17:11+0200\n"
+"POT-Creation-Date: 2021-08-17 23:40+0200\n"
 "PO-Revision-Date: 2021-08-07 17:52+0000\n"
 "Last-Translator: ROBERTO BORIOTTI <roberto.boriotti@canon-europe.com>\n"
 "Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -1228,7 +1228,7 @@ msgstr " (Profilo HVEC: {0} @L{1}.{2})"
 #: src/common/kax_info.cpp:472
 #: src/common/kax_info.cpp:614
 #: src/common/kax_info.cpp:908
-#: src/common/kax_info.cpp:1054
+#: src/common/kax_info.cpp:1058
 #, no-c-format
 msgid " (adler: 0x{0:08x})"
 msgstr " (adler: 0x{0:08x})"
@@ -2850,14 +2850,14 @@ msgstr ", descrizione '{0}'"
 msgid ", file name '{0}'"
 msgstr ", nome file '{0}'"
 
-#: src/common/kax_info.cpp:937
-#: src/common/kax_info.cpp:1076
+#: src/common/kax_info.cpp:938
+#: src/common/kax_info.cpp:1080
 #, no-c-format
 msgid ", position 0x{0:x}"
 msgstr ", posizione 0x{0:x}"
 
-#: src/common/kax_info.cpp:937
-#: src/common/kax_info.cpp:1076
+#: src/common/kax_info.cpp:938
+#: src/common/kax_info.cpp:1080
 #, no-c-format
 msgid ", position {0}"
 msgstr ", posizione {0}"
@@ -3150,7 +3150,7 @@ msgstr "Flusso AV1 Open Bitstream Units"
 msgid "AVC/H.264"
 msgstr "AVC/H.264"
 
-#: src/output/p_avc_es.h:39
+#: src/output/p_avc_es.h:29
 #, no-c-format
 msgid "AVC/H.264 (unframed)"
 msgstr "AVC/H.264 (senza frame)"
@@ -3736,7 +3736,7 @@ msgstr "Un esempio: 'movie.001.mp4', 'movie.002.mp4' e 'movie.003.mp4'"
 msgid "An exception occurred when writing the destination file."
 msgstr "Si è verificata una eccezione durante la scrittura del file destinazione."
 
-#: src/common/qt_kax_analyzer.cpp:108
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:107
 #: src/propedit/propedit.cpp:72
 #, no-c-format
 msgid "An unknown error occurred. The file has been modified."
@@ -4258,7 +4258,6 @@ msgstr "Può essere impostato se la traccia è adatta a utenti con problemi di u
 msgid "Can be set if the track is suitable for users with visual impairments."
 msgstr "Può essere impostato se la traccia è adatta ad utenti con disabilità visive."
 
-#: src/common/qt_kax_analyzer.cpp:34
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:255
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:278
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:897
@@ -4269,6 +4268,7 @@ msgstr "Può essere impostato se la traccia è adatta ad utenti con disabilità 
 #: src/mkvtoolnix-gui/merge/tab.cpp:504
 #: src/mkvtoolnix-gui/merge/tool.cpp:300
 #: src/mkvtoolnix-gui/merge/tool.cpp:882
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:33
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:198
 #, no-c-format
 msgid "Cancel"
@@ -4303,8 +4303,8 @@ msgstr "Impossibile scrivere la traccia {0} con l'ID Codec '{1}' nel file '{2}',
 msgid "Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already being written to the same file.\n"
 msgstr "Impossibile scrivere la traccia {0} con l'ID Codec '{1}' nel file '{2}', poiché la traccia {3} con l'ID codec '{4}' è già stata scritta nello stesso file.\n"
 
-#: src/common/kax_info.cpp:1329
 #: src/common/kax_info.cpp:1333
+#: src/common/kax_info.cpp:1337
 #: src/extract/tracks.cpp:564
 #: src/mkvtoolnix-gui/util/kax_info.cpp:209
 #, no-c-format
@@ -5858,7 +5858,7 @@ msgstr "Tralascia l'ultima attività importata dalla scaletta &Blu-ray se è vic
 msgid "Drops all HD extensions from an audio track and keeps only its lossy core."
 msgstr "Scarta tutte le estensioni HD da una traccia audio e mantiene solo il nucleo con perdita."
 
-#: src/common/qt_kax_analyzer.cpp:101
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:100
 #: src/propedit/propedit.cpp:65
 #, no-c-format
 msgid "Due to the particular structure of the file this situation cannot be fixed automatically."
@@ -5937,7 +5937,7 @@ msgstr "Versione EBML"
 msgid "EBML void"
 msgstr "Voce EBML"
 
-#: src/common/bcp47.cpp:375
+#: src/common/bcp47.cpp:383
 #, no-c-format
 msgid "Each extension identifier must be used at most once."
 msgstr "Ciascun identificatore di estensione deve essere usato al massimo una volta."
@@ -6208,8 +6208,8 @@ msgstr "Errore nell'analisi del capitolo in '{0}': alcuni elementi fondamentali 
 msgid "Error parsing the tags in '{0}': some mandatory elements are missing.\n"
 msgstr "Errore nell'analisi dei tag in '{0}': alcuni elementi fondamentali sono mancanti.\n"
 
-#: src/common/qt_kax_analyzer.cpp:81
 #: src/mkvtoolnix-gui/info/tab.cpp:196
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:80
 #, no-c-format
 msgid "Error reading Matroska file"
 msgstr "Errore nella lettura del file Matroska"
@@ -6219,12 +6219,12 @@ msgstr "Errore nella lettura del file Matroska"
 msgid "Error reading from the file '{0}'.\n"
 msgstr "Errore nella lettura dal file '{0}'.\n"
 
-#: src/common/qt_kax_analyzer.cpp:63
-#: src/common/qt_kax_analyzer.cpp:69
-#: src/common/qt_kax_analyzer.cpp:89
-#: src/common/qt_kax_analyzer.cpp:97
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:272
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:277
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:62
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:68
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:88
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:96
 #, no-c-format
 msgid "Error writing Matroska file"
 msgstr "Errore nella scrittura del file Matroska"
@@ -6238,7 +6238,7 @@ msgstr "Errore nella scrittura del file Matroska"
 msgid "Error:"
 msgstr "Errore:"
 
-#: src/common/kax_info.cpp:1300
+#: src/common/kax_info.cpp:1304
 #, no-c-format
 msgid "Error: Couldn't open source file {0} ({1})."
 msgstr "Errore: impossibile aprire il file sorgente {0} ({1})."
@@ -6389,7 +6389,7 @@ msgstr "Esporta le informazioni capitolo in un formato semplice usato negli stru
 msgid "Extended subtags"
 msgstr "Sub tag estese"
 
-#: src/common/bcp47.cpp:367
+#: src/common/bcp47.cpp:375
 #, no-c-format
 msgid "Extension subtags must follow at least a primary language subtag."
 msgstr "I sottotag dell'estensione devono seguire almeno un sottotag della lingua principale."
@@ -6405,13 +6405,11 @@ msgid "Extract the data to a raw file."
 msgstr "Estrai i dati in file RAW."
 
 #: src/output/p_hevc.cpp:110
-#: src/output/p_hevc_es.cpp:124
 #, no-c-format
 msgid "Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"
 msgstr "Estratte informazioni rapporto di aspetto dai dati video HEVC e impostata la dimensione schermo a {0}/{1}.\n"
 
 #: src/output/p_avc.cpp:102
-#: src/output/p_avc_es.cpp:137
 #, no-c-format
 msgid "Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to {0}/{1}.\n"
 msgstr "Estrae le informazioni sul rapporto d'aspetto dai dati video MPEG-4 Layer 10 (AVC) e imposta la dimensione di visualizzazione a {0}/{1}.\n"
@@ -6425,6 +6423,11 @@ msgstr "Estrae le informazioni sul rapporto d'aspetto dai dati video MPEG-4 Laye
 #, no-c-format
 msgid "Extracted the aspect ratio information from the Theora video headers and set the display dimensions to {0}/{1}.\n"
 msgstr "Estrae le informazioni sul rapporto d'aspetto dalle intestazioni video Theora e imposta la dimensione di visualizzazione a {0}/{1}.\n"
+
+#: src/output/p_avc_hevc_es.cpp:162
+#, fuzzy, no-c-format
+msgid "Extracted the aspect ratio information from the video bitstream and set the display dimensions to {0}/{1}.\n"
+msgstr "Estratte informazioni rapporto di aspetto dai dati video HEVC e impostata la dimensione schermo a {0}/{1}.\n"
 
 #: src/extract/extract_cli_parser.cpp:139
 #, no-c-format
@@ -6601,7 +6604,7 @@ msgstr "Analisi file non riuscita"
 msgid "File size"
 msgstr "Dimensione file"
 
-#: src/common/qt_kax_analyzer.cpp:75
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:74
 #, no-c-format
 msgid "File structure warning"
 msgstr "Avvertenza struttura file"
@@ -6631,7 +6634,7 @@ msgstr "Completato il:"
 msgid "First chapter name regardless of its language"
 msgstr "Il primo nome capitolo indipendentemente dalla sua lingua"
 
-#: src/common/bcp47.cpp:425
+#: src/common/bcp47.cpp:433
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr "I codici lingua da cinque a otto lettere non sono attualmente supportati."
@@ -6741,7 +6744,7 @@ msgstr "Forza il fattore di scala timestamp ad un valore definito."
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Trovato almeno un frame B senza secondo riferimento in un GOP non chiuso.\n"
 
-#: src/common/bcp47.cpp:420
+#: src/common/bcp47.cpp:428
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr "I codici lingua di quattro lettere sono riservati per uso futuro e non sono supportati."
@@ -6785,7 +6788,7 @@ msgid "Frame size #%1: %2"
 msgstr "Dimensione #%1: %2"
 
 #: src/common/kax_info.cpp:915
-#: src/common/kax_info.cpp:1061
+#: src/common/kax_info.cpp:1065
 #, no-c-format
 msgid "Frame with size {0}{1}{2}"
 msgstr "Frame con dimensione {0}{1}{2}"
@@ -6796,7 +6799,7 @@ msgid "Frames/fields:"
 msgstr "Frame/campi:"
 
 #: src/common/kax_info.cpp:914
-#: src/common/kax_info.cpp:1060
+#: src/common/kax_info.cpp:1064
 #, no-c-format
 msgid "Frame{0}{1}"
 msgstr "Frame {0}{1}"
@@ -6935,7 +6938,7 @@ msgstr "Sottotitoli HDMV TextTS"
 msgid "HEVC/H.265"
 msgstr "HEVC/H.265"
 
-#: src/output/p_hevc_es.h:37
+#: src/output/p_hevc_es.h:28
 #, no-c-format
 msgid "HEVC/H.265 (unframed)"
 msgstr "HEVC/H.265 (senza frame)"
@@ -7554,7 +7557,7 @@ msgstr "Interlacciato"
 msgid "Internal bug: tracks.cpp SSA #1. {0}"
 msgstr "Errore interno: tracks.cpp SSA #1. {0}"
 
-#: src/common/qt_kax_analyzer.cpp:108
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:107
 #, no-c-format
 msgid "Internal program error"
 msgstr "Errore interno programma"
@@ -8753,7 +8756,7 @@ msgstr "Nessuna intestazione AC-3 rilevata nel primo frame. La traccia verrà ig
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Nessuna intestazione DTS rilevata nel primo frame. La traccia verrà ignorata.\n"
 
-#: src/common/kax_info.cpp:1236
+#: src/common/kax_info.cpp:1240
 #, no-c-format
 msgid "No EBML head found."
 msgstr "Nessuna intestazione EBML trovata."
@@ -9664,13 +9667,13 @@ msgstr "Posizione:"
 msgid "Possible causes are that the program does not exist or that you're not allowed to access it or its directory."
 msgstr "Le possibili cause sono o che il programma non esiste o che non sei autorizzato ad accedere ad esso o alla sua cartella."
 
-#: src/common/qt_kax_analyzer.cpp:85
-#: src/common/qt_kax_analyzer.cpp:93
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:405
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:837
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:367
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:148
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:84
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:92
 #: src/propedit/propedit.cpp:53
 #: src/propedit/propedit.cpp:59
 #, no-c-format
@@ -11244,7 +11247,7 @@ msgstr[1] "Avvia &manualmente le attività"
 msgid "Started at:"
 msgstr "Avviato alle:"
 
-#: src/common/kax_info.cpp:1206
+#: src/common/kax_info.cpp:1210
 #, no-c-format
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr "Statistiche traccia numero {0}, numero blocchi: {1}, dimensione in byte: {2}, durata in secondi: {3}, bitrate approssimativo in bit/secondo: {4}\n"
@@ -11601,7 +11604,7 @@ msgstr "Il file MP4 '{0}' contiene capitoli in un formato non riconosciuto. Ques
 msgid "The Matroska container format can store the display width/height for a video track."
 msgstr "Il formato contenitore Matroska può memorizzare la larghezza/altezza schermo di una traccia video."
 
-#: src/common/qt_kax_analyzer.cpp:76
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:75
 #, no-c-format
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the element. Please use your favorite player to check this file."
 msgstr "Il file Matroska è stato modificato, ma l'elemento meta seek non può essere aggiornato. Questo significa che il player avrà difficoltà a trovare l'elemento. Usa il tuo player preferito per controllare questo file."
@@ -11611,7 +11614,7 @@ msgstr "Il file Matroska è stato modificato, ma l'elemento meta seek non può e
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file."
 msgstr "Il file Matroska è stato modificato, ma l'elemento meta seek non può essere aggiornato. Questo significa che il player avrà difficoltà a trovare l'elemento. Usa il tuo player preferito per controllare questo file."
 
-#: src/common/qt_kax_analyzer.cpp:100
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:99
 #: src/propedit/propedit.cpp:64
 #, no-c-format
 msgid "The Matroska file's last element is set to an unknown size."
@@ -11984,7 +11987,7 @@ msgstr "Le specifiche di modifica '{0}' e '{1}' si riferiscono alla stessa tracc
 msgid "The edition UID must be a number if given."
 msgstr "L'UID edizione deve essere un numero se fornito."
 
-#: src/common/qt_kax_analyzer.cpp:64
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:63
 #: src/propedit/propedit.cpp:39
 #, no-c-format
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
@@ -12005,7 +12008,12 @@ msgstr "Il tempo finale deve essere maggiore del timestamp iniziale."
 msgid "The entries in the 'selected' list on the right will be shown at the top of all the drop-down boxes with countries and regions in the program."
 msgstr "Le voci nell'elenco 'selezionati' a destra verranno visualizzate nella parte superiore di tutte le caselle a discesa con i paesi e le regioni nel programma."
 
-#: src/common/bcp47.cpp:343
+#: src/output/p_avc_hevc_es.cpp:98
+#, no-c-format
+msgid "The error message was:"
+msgstr ""
+
+#: src/common/bcp47.cpp:351
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr "Il sub tag esteso lingua \"{}\" deve essere usato solo con uno dei seguenti prefissi: {}."
@@ -12109,7 +12117,7 @@ msgstr "Il file '{0}' non può essere aperto per la lettura: {1}."
 msgid "The file '{0}' could not be opened for reading: {1}.\n"
 msgstr "Il file '{0}' non può essere aperto per la lettura: {1}.\n"
 
-#: src/common/kax_info.cpp:1316
+#: src/common/kax_info.cpp:1320
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}."
 msgstr "Il file '{0}' non può essere aperto in scrittura: {1}."
@@ -12169,7 +12177,7 @@ msgstr "Il file '{0}' è stato creato come file W64 invece che WAV poiché essen
 msgid "The file (%1) is too big (%2)."
 msgstr "Il file (%1) è troppo grande (%2)."
 
-#: src/common/qt_kax_analyzer.cpp:102
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:101
 #: src/propedit/propedit.cpp:66
 #, no-c-format
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
@@ -12186,13 +12194,13 @@ msgstr "Il contenuto del file non corrisponde al suo formato e non è stato rico
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
 msgstr "Il file non può essere aperto per la lettura, o non c'erano abbastanza dati per analizzare le sue intestazioni."
 
-#: src/common/qt_kax_analyzer.cpp:84
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:83
 #: src/propedit/propedit.cpp:52
 #, no-c-format
 msgid "The file could not be opened for reading."
 msgstr "Il file non può essere aperto in lettura."
 
-#: src/common/qt_kax_analyzer.cpp:92
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:91
 #: src/propedit/propedit.cpp:58
 #, no-c-format
 msgid "The file could not be opened for writing."
@@ -12209,7 +12217,7 @@ msgstr "Il file non contiene alcun ID di traccia {0}.\n"
 msgid "The file has been saved successfully."
 msgstr "Il file è stato correttamente salvato."
 
-#: src/common/qt_kax_analyzer.cpp:104
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:103
 #: src/propedit/change.cpp:114
 #: src/propedit/change.cpp:127
 #: src/propedit/change.cpp:133
@@ -12242,7 +12250,7 @@ msgstr "L'intestazione del file non è stata letta correttamente.\n"
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "Le intestazioni del file non possono essere analizzate, ad esempio perché sono incompleti, non validi o danneggiati."
 
-#: src/common/qt_kax_analyzer.cpp:34
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:33
 #: src/propedit/propedit.cpp:141
 #, no-c-format
 msgid "The file is being analyzed."
@@ -12539,7 +12547,7 @@ msgstr ""
 "Numero massimo di frame che un riproduttore deve poter mettere in cache durante la riproduzione.\n"
 "Se impostato a 0, il sistema pseudo cache non verrà usato."
 
-#: src/common/qt_kax_analyzer.cpp:70
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:69
 #: src/propedit/propedit.cpp:43
 #, no-c-format
 msgid "The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
@@ -12711,7 +12719,7 @@ msgstr "Il precedente UID era già stato usato in '{0} {1}'.\n"
 msgid "The probe range percentage '{0}' is invalid.\n"
 msgstr "La percentuale di analisi '{0}' non è valida.\n"
 
-#: src/common/qt_kax_analyzer.cpp:103
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:102
 #: src/propedit/propedit.cpp:67
 #, no-c-format
 msgid "The process will be aborted."
@@ -13071,37 +13079,37 @@ msgstr "L'utente può quindi selezionare quale scaletta aggiungere."
 msgid "The value '{0}' is not a number.\n"
 msgstr "Il valore '{0}' non è un numero.\n"
 
-#: src/common/bcp47.cpp:385
+#: src/common/bcp47.cpp:393
 #, no-c-format
 msgid "The value '{0}' is not a registered IANA language tag identifier."
 msgstr "Il valore '{0}' non è un identificatore tag lingua IANA registrato."
 
-#: src/common/bcp47.cpp:177
+#: src/common/bcp47.cpp:183
 #, no-c-format
 msgid "The value '{}' is not a valid ISO 15924 script code."
 msgstr "Il valore '{}' non è codice script ISO 15924 valido."
 
-#: src/common/bcp47.cpp:191
+#: src/common/bcp47.cpp:197
 #, no-c-format
 msgid "The value '{}' is not a valid ISO 3166-1 country code."
 msgstr "Il valore '{}' non è codice nazione ISO 3166-1 valido."
 
-#: src/common/bcp47.cpp:164
+#: src/common/bcp47.cpp:170
 #, no-c-format
 msgid "The value '{}' is not a valid ISO 639 language code."
 msgstr "Il valore '{}' non è codice lingua ISO 639 valido."
 
-#: src/common/bcp47.cpp:209
+#: src/common/bcp47.cpp:215
 #, no-c-format
 msgid "The value '{}' is not a valid UN M.49 country number code."
 msgstr "Il valore '{}' non è codice numero nazione UN M.49 valido."
 
-#: src/common/bcp47.cpp:231
+#: src/common/bcp47.cpp:237
 #, no-c-format
 msgid "The value '{}' is not part of the IANA Language Subtag Registry for extended language subtags."
 msgstr "Il valore \"{}\" non fa parte dell'elenco dei sub tag lingua IANA per i sub tag estesi lingua."
 
-#: src/common/bcp47.cpp:232
+#: src/common/bcp47.cpp:238
 #, no-c-format
 msgid "The value '{}' is not part of the IANA Language Subtag Registry for language variants."
 msgstr "Il valore \"{}\" non fa parte dell'elenco dei sub tag lingua IANA per le varianti lingua."
@@ -13123,7 +13131,7 @@ msgstr "Il valore può essere indicato sia come numero in virgola mobile (ad ese
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "Il valore può essere negativo, ma tieni a mente che ogni frame che ha data/ora negative dopo questo calcolo sarà scartato."
 
-#: src/common/bcp47.cpp:402
+#: src/common/bcp47.cpp:410
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr "Il valore non è conforme alla struttura generale dei tag lingua IETF BCP 47 / RFC 5646."
@@ -13139,7 +13147,7 @@ msgstr "I valori sono memorizzati nell'intestazione traccia."
 msgid "The values will be available for easy selection in the multiplexer."
 msgstr "I valori saranno disponibili per una facile selezione nel multiplexer."
 
-#: src/common/bcp47.cpp:344
+#: src/common/bcp47.cpp:352
 #, no-c-format
 msgid "The variant '{}' must only be used with one of the following prefixes: {}."
 msgstr "La variante \"{}\" deve essere usata solo con uno dei seguenti prefissi: {}."
@@ -13241,20 +13249,15 @@ msgstr "Questa traccia AAC non contiene intestazioni valide. Impossibile analizz
 msgid "This AC-3 track contains {0} bytes of non-AC-3 data at the beginning. This corresponds to a delay of {1}ms. This delay will be used instead of the non-AC-3 data.\n"
 msgstr "Questa traccia AC-3 contiene all'inizio {0} byte di dati non AC-3. Questo corrisponde ad un ritardo di {1} ms. Questo ritardo verrà usato al posto dei dati non AC-3.\n"
 
-#: src/output/p_avc_es.cpp:106
+#: src/output/p_avc_hevc_es.cpp:139
 #, no-c-format
 msgid "This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"
 msgstr "Questa traccia AVC/H.264 non inizia con un frame chiave. I primi {0} frame sono stati ignorati.\n"
 
-#: src/output/p_avc_es.cpp:116
+#: src/output/p_avc_es.cpp:42
 #, no-c-format
 msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
 msgstr "Questa informazione di termporizzazione della traccia AVC/H.264 indica che usa un frame rate variabile. Non avendo indicato una durata predefinita o un file esterno di marche temporali, il contenitore sorgente non contiene marche temporali. La marca temporale risultante potrebbe non essere utilizzabile.\n"
-
-#: src/output/p_hevc_es.cpp:103
-#, no-c-format
-msgid "This HEVC track does not start with a key frame. The first {0} frames have been skipped.\n"
-msgstr "Questa traccia HEVC non inizia con un frame chiave. I primi {0} frame sono stati ignorati.\n"
 
 #: src/output/p_mp3.cpp:60
 #, no-c-format
@@ -13326,7 +13329,7 @@ msgstr "Questo file contiene coordinate nelle linee timestamp. Tali coordinate n
 msgid "This file could not be opened or parsed.\n"
 msgstr "Il file non può essere aperto o analizzato.\n"
 
-#: src/common/kax_info.cpp:1236
+#: src/common/kax_info.cpp:1240
 #, no-c-format
 msgid "This file is probably not a Matroska file."
 msgstr "Questo file probabilmente non un file Matroska."
@@ -13934,7 +13937,7 @@ msgstr "Formato file capitolo sconosciuto in '{0}'. Non contiene un formato capi
 msgid "Unknown content encoding type {0} for track {1}.\n"
 msgstr "Tipo codifica contenuto sconosciuto {0} per la traccia {1}.\n"
 
-#: src/common/kax_info.cpp:1260
+#: src/common/kax_info.cpp:1264
 #, no-c-format
 msgid "Unknown element"
 msgstr "Elemento sconosciuto"
@@ -15091,7 +15094,7 @@ msgstr "durata predefinita: {0:.3f}ms ({1:.3f} frame/campi per secondo per una t
 msgid "deflateInit() failed. Result: {0}\n"
 msgstr "deflateInit() non riuscita. Risultato: {0}\n"
 
-#: src/common/kax_info.cpp:1024
+#: src/common/kax_info.cpp:1028
 #, no-c-format
 msgid "discardable, "
 msgstr "scartabile, "
@@ -15208,7 +15211,7 @@ msgstr "inflateInit() non riuscita. Risultato: {0}\n"
 msgid "invalid language tag '{0}': {1}"
 msgstr "tag lingua non valido '{0}' :{1}"
 
-#: src/common/kax_info.cpp:1022
+#: src/common/kax_info.cpp:1026
 #, no-c-format
 msgid "key, "
 msgstr "chiave, "
@@ -15470,23 +15473,10 @@ msgstr "linea di comando mkvmerge"
 msgid "mkvmerge does not distinguish between those two and simply counts the number of blocks."
 msgstr "mkvmerge non distingue tra questi due semplici contatori il numero di blocchi."
 
-#: src/output/p_avc_es.cpp:97
+#: src/output/p_avc_hevc_es.cpp:97
 #, no-c-format
-msgid ""
-"mkvmerge encountered broken or unparsable data in this AVC/H.264 video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"
-"{0}\n"
+msgid "mkvmerge encountered broken or unparsable data in this video track."
 msgstr ""
-"mkvmerge ha incontrato dati corrotti o non analizzabili in questa traccia video AVC/H.264. Potrebbe essere o il file danneggiato (a cui mkvmerge non può ancora far fronte) o c'è un bug in mkvmerge. Il messaggio d'errore era:\n"
-"{0}\n"
-
-#: src/output/p_hevc_es.cpp:94
-#, no-c-format
-msgid ""
-"mkvmerge encountered broken or unparsable data in this HEVC video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"
-"{0}\n"
-msgstr ""
-"mkvmerge ha incontrato dati corrotti o non analizzabili in questa traccia video HEVC. Potrebbe essere o il file danneggiato (a cui mkvmerge non può ancora far fronte) o c'è un bug in mkvmerge. Il messaggio d'errore era:\n"
-"{0}\n"
 
 #: src/input/r_ogm.cpp:462
 #, no-c-format
@@ -15863,17 +15853,17 @@ msgid_plural "{0} bytes"
 msgstr[0] "{0} byte"
 msgstr[1] "{0} byte"
 
-#: src/common/kax_info.cpp:942
+#: src/common/kax_info.cpp:943
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"
 msgstr "Frame {0}, traccia {1}, data/ora {2}, durata {3}, dimensione {4}, adler 0x{5:08x}{6}{7}\n"
 
-#: src/common/kax_info.cpp:1080
+#: src/common/kax_info.cpp:1084
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}\n"
 msgstr "Frame {0}, traccia {1}, data/ora {2}, dimensione {3}, adler 0x{4:08x}{5}\n"
 
-#: src/common/kax_info.cpp:952
+#: src/common/kax_info.cpp:953
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"
 msgstr "Frame {0}, traccia {1}, data/ora {2}, dimensione {3}, adler 0x{4:08x}{5}{6}\n"
@@ -15955,7 +15945,7 @@ msgstr "{0}: divisore mancante in '{1} {2}'.\n"
 msgid "{0}: missing track ID in '{1} {2}'.\n"
 msgstr "{0}: ID traccia mancante in '{1} {2}'.\n"
 
-#: src/common/kax_info.cpp:1026
+#: src/common/kax_info.cpp:1030
 #, no-c-format
 msgid "{0}track number {1}, {2} frame(s), timestamp {3}"
 msgstr "{0} traccia numero {1}, {2} frame, data/ora {3}"
@@ -17007,6 +16997,13 @@ msgstr "-- Imposta a nessuno –"
 #~ "per questa traccia (parametro linea di comando: '--nalu-size-length {1}:"
 #~ "{0}').\n"
 
+#~ msgid ""
+#~ "This HEVC track does not start with a key frame. The first {0} frames "
+#~ "have been skipped.\n"
+#~ msgstr ""
+#~ "Questa traccia HEVC non inizia con un frame chiave. I primi {0} frame "
+#~ "sono stati ignorati.\n"
+
 #~ msgid "This only works with (E-)AC-3 audio tracks."
 #~ msgstr "Questo funziona solo con le tracce audio DTS."
 
@@ -17161,6 +17158,29 @@ msgstr "-- Imposta a nessuno –"
 
 #~ msgid "mkvextract tags <inname> [options]"
 #~ msgstr "mkvextract tags <inname> [opzioni]"
+
+#~ msgid ""
+#~ "mkvmerge encountered broken or unparsable data in this AVC/H.264 video "
+#~ "track. Either your file is damaged (which mkvmerge cannot cope with yet) "
+#~ "or this is a bug in mkvmerge itself. The error message was:\n"
+#~ "{0}\n"
+#~ msgstr ""
+#~ "mkvmerge ha incontrato dati corrotti o non analizzabili in questa traccia "
+#~ "video AVC/H.264. Potrebbe essere o il file danneggiato (a cui mkvmerge "
+#~ "non può ancora far fronte) o c'è un bug in mkvmerge. Il messaggio "
+#~ "d'errore era:\n"
+#~ "{0}\n"
+
+#~ msgid ""
+#~ "mkvmerge encountered broken or unparsable data in this HEVC video track. "
+#~ "Either your file is damaged (which mkvmerge cannot cope with yet) or this "
+#~ "is a bug in mkvmerge itself. The error message was:\n"
+#~ "{0}\n"
+#~ msgstr ""
+#~ "mkvmerge ha incontrato dati corrotti o non analizzabili in questa traccia "
+#~ "video HEVC. Potrebbe essere o il file danneggiato (a cui mkvmerge non può "
+#~ "ancora far fronte) o c'è un bug in mkvmerge. Il messaggio d'errore era:\n"
+#~ "{0}\n"
 
 #~ msgid "never scan for other playlists"
 #~ msgstr "non analizzare mai per altre playlist"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-08-07 17:11+0200\n"
+"POT-Creation-Date: 2021-08-17 23:40+0200\n"
 "PO-Revision-Date: 2021-05-07 14:31+0000\n"
 "Last-Translator: rctgamer3 <rctgamer3+transifex@hotmail.com>\n"
 "Language-Team: \n"
@@ -1217,7 +1217,7 @@ msgstr " (HEVC profiel: {0} @L{1}.{2})"
 #: src/common/kax_info.cpp:472
 #: src/common/kax_info.cpp:614
 #: src/common/kax_info.cpp:908
-#: src/common/kax_info.cpp:1054
+#: src/common/kax_info.cpp:1058
 #, no-c-format
 msgid " (adler: 0x{0:08x})"
 msgstr " (adler: 0x{0:08x})"
@@ -2835,14 +2835,14 @@ msgstr ", beschrijving '{0}'"
 msgid ", file name '{0}'"
 msgstr ", bestandsnaam '{0}'"
 
-#: src/common/kax_info.cpp:937
-#: src/common/kax_info.cpp:1076
+#: src/common/kax_info.cpp:938
+#: src/common/kax_info.cpp:1080
 #, no-c-format
 msgid ", position 0x{0:x}"
 msgstr ", positie 0x{0:x}"
 
-#: src/common/kax_info.cpp:937
-#: src/common/kax_info.cpp:1076
+#: src/common/kax_info.cpp:938
+#: src/common/kax_info.cpp:1080
 #, no-c-format
 msgid ", position {0}"
 msgstr ", positie {0}"
@@ -3133,7 +3133,7 @@ msgstr "AV1 Bitstream Units-stream openen"
 msgid "AVC/H.264"
 msgstr "AVC/H.264"
 
-#: src/output/p_avc_es.h:39
+#: src/output/p_avc_es.h:29
 #, no-c-format
 msgid "AVC/H.264 (unframed)"
 msgstr "AVC/H.264 (niet ingelijst)"
@@ -3719,7 +3719,7 @@ msgstr ""
 msgid "An exception occurred when writing the destination file."
 msgstr "Er is een uitzondering opgetreden bij het schrijven van het doelbestand."
 
-#: src/common/qt_kax_analyzer.cpp:108
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:107
 #: src/propedit/propedit.cpp:72
 #, no-c-format
 msgid "An unknown error occurred. The file has been modified."
@@ -4241,7 +4241,6 @@ msgstr ""
 msgid "Can be set if the track is suitable for users with visual impairments."
 msgstr ""
 
-#: src/common/qt_kax_analyzer.cpp:34
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:255
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:278
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:897
@@ -4252,6 +4251,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/tab.cpp:504
 #: src/mkvtoolnix-gui/merge/tool.cpp:300
 #: src/mkvtoolnix-gui/merge/tool.cpp:882
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:33
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:198
 #, no-c-format
 msgid "Cancel"
@@ -4286,8 +4286,8 @@ msgstr "Kan spoor niet schrijven {0} met het CodecID '{1}' naar het bestand '{2}
 msgid "Cannot write track {0} with the CodecID '{1}' to the file '{2}' because track {3} with the CodecID '{4}' is already being written to the same file.\n"
 msgstr "Kan spoor niet schrijven {0} met het CodecID '{1}' naar bestand '{2}' omdat spoor {3} met het CodecID '{4}' al naar hetzelfde bestand wordt geschreven.\n"
 
-#: src/common/kax_info.cpp:1329
 #: src/common/kax_info.cpp:1333
+#: src/common/kax_info.cpp:1337
 #: src/extract/tracks.cpp:564
 #: src/mkvtoolnix-gui/util/kax_info.cpp:209
 #, no-c-format
@@ -5839,7 +5839,7 @@ msgstr "Plaats laatste invoer uit geïmporteerde &Blu-ray afspeellijsten in de b
 msgid "Drops all HD extensions from an audio track and keeps only its lossy core."
 msgstr "Hiermee worden alle HD-uitbreidingen van een audiospoor verwijderd en blijft alleen de losse kern behouden."
 
-#: src/common/qt_kax_analyzer.cpp:101
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:100
 #: src/propedit/propedit.cpp:65
 #, no-c-format
 msgid "Due to the particular structure of the file this situation cannot be fixed automatically."
@@ -5918,7 +5918,7 @@ msgstr "EBML versie"
 msgid "EBML void"
 msgstr "EBML leegte"
 
-#: src/common/bcp47.cpp:375
+#: src/common/bcp47.cpp:383
 #, no-c-format
 msgid "Each extension identifier must be used at most once."
 msgstr ""
@@ -6192,8 +6192,8 @@ msgstr "Fout bij ontleden van hoofdstukken '{0}': sommige verplichte elementen o
 msgid "Error parsing the tags in '{0}': some mandatory elements are missing.\n"
 msgstr "Fout bij ontleden van markeringen '{0}': sommige verplichte elementen ontbreken.\n"
 
-#: src/common/qt_kax_analyzer.cpp:81
 #: src/mkvtoolnix-gui/info/tab.cpp:196
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:80
 #, no-c-format
 msgid "Error reading Matroska file"
 msgstr "Fout bij lezen Matroska bestand"
@@ -6203,12 +6203,12 @@ msgstr "Fout bij lezen Matroska bestand"
 msgid "Error reading from the file '{0}'.\n"
 msgstr "Fout bij lezen van bestand: '{0}'.\n"
 
-#: src/common/qt_kax_analyzer.cpp:63
-#: src/common/qt_kax_analyzer.cpp:69
-#: src/common/qt_kax_analyzer.cpp:89
-#: src/common/qt_kax_analyzer.cpp:97
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:272
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:277
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:62
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:68
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:88
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:96
 #, no-c-format
 msgid "Error writing Matroska file"
 msgstr "Fout bij schrijven MATROSKA bestand"
@@ -6222,7 +6222,7 @@ msgstr "Fout bij schrijven MATROSKA bestand"
 msgid "Error:"
 msgstr "Fout:"
 
-#: src/common/kax_info.cpp:1300
+#: src/common/kax_info.cpp:1304
 #, no-c-format
 msgid "Error: Couldn't open source file {0} ({1})."
 msgstr "Fout: Kon bronbestand niet openen {0} ({1})."
@@ -6373,7 +6373,7 @@ msgstr "Exporteert de hoofdstuk informatie in simpel format gebruikt in OGM hulp
 msgid "Extended subtags"
 msgstr ""
 
-#: src/common/bcp47.cpp:367
+#: src/common/bcp47.cpp:375
 #, no-c-format
 msgid "Extension subtags must follow at least a primary language subtag."
 msgstr ""
@@ -6389,13 +6389,11 @@ msgid "Extract the data to a raw file."
 msgstr "Extract de data naar een raw bestand."
 
 #: src/output/p_hevc.cpp:110
-#: src/output/p_hevc_es.cpp:124
 #, no-c-format
 msgid "Extracted the aspect ratio information from the HEVC video data and set the display dimensions to {0}/{1}.\n"
 msgstr "Haal de beeldverhouding informatie uit de HEVC video data en zet scherm afmetingen naar {0}/{1}.\n"
 
 #: src/output/p_avc.cpp:102
-#: src/output/p_avc_es.cpp:137
 #, no-c-format
 msgid "Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to {0}/{1}.\n"
 msgstr "Haal de beeldverhouding informatie uit de MPEG-4 layer 10 (AVC) video data en zet de scherm afmetingen naar {0}/{1}.\n"
@@ -6409,6 +6407,11 @@ msgstr "Haal de beeldverhouding informatie uit de MPEG4 layer 2 video data en ze
 #, no-c-format
 msgid "Extracted the aspect ratio information from the Theora video headers and set the display dimensions to {0}/{1}.\n"
 msgstr "Haal de beeldverhouding informatie uit de Theora video beginblokken en zet de scherm afmetingen naar {0}/{1}.\n"
+
+#: src/output/p_avc_hevc_es.cpp:162
+#, fuzzy, no-c-format
+msgid "Extracted the aspect ratio information from the video bitstream and set the display dimensions to {0}/{1}.\n"
+msgstr "Haal de beeldverhouding informatie uit de HEVC video data en zet scherm afmetingen naar {0}/{1}.\n"
 
 #: src/extract/extract_cli_parser.cpp:139
 #, no-c-format
@@ -6585,7 +6588,7 @@ msgstr "Bestand ontcijferen niet gelukt"
 msgid "File size"
 msgstr "Bestand grootte"
 
-#: src/common/qt_kax_analyzer.cpp:75
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:74
 #, no-c-format
 msgid "File structure warning"
 msgstr "Bestand structuur waarschuwing"
@@ -6615,7 +6618,7 @@ msgstr "Voltooid op:"
 msgid "First chapter name regardless of its language"
 msgstr "– Eerste hoofdstuknaam ongeacht hun taal –"
 
-#: src/common/bcp47.cpp:425
+#: src/common/bcp47.cpp:433
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr ""
@@ -6725,7 +6728,7 @@ msgstr "Forceert de tijd code schaal factor naar de gegeven waarden."
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Gevonden ten minste één B beeldje zonder tweede referentie in een niet gesloten GOP.\n"
 
-#: src/common/bcp47.cpp:420
+#: src/common/bcp47.cpp:428
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr ""
@@ -6769,7 +6772,7 @@ msgid "Frame size #%1: %2"
 msgstr "Beeld grootte #%1: %2"
 
 #: src/common/kax_info.cpp:915
-#: src/common/kax_info.cpp:1061
+#: src/common/kax_info.cpp:1065
 #, no-c-format
 msgid "Frame with size {0}{1}{2}"
 msgstr "Beeld met grootte {0}{1}{2}"
@@ -6780,7 +6783,7 @@ msgid "Frames/fields:"
 msgstr "Beelden/velden:"
 
 #: src/common/kax_info.cpp:914
-#: src/common/kax_info.cpp:1060
+#: src/common/kax_info.cpp:1064
 #, no-c-format
 msgid "Frame{0}{1}"
 msgstr "Beeld{0}{1}"
@@ -6919,7 +6922,7 @@ msgstr "HDMV TextST ondertiteling"
 msgid "HEVC/H.265"
 msgstr "HEVC/H.265"
 
-#: src/output/p_hevc_es.h:37
+#: src/output/p_hevc_es.h:28
 #, no-c-format
 msgid "HEVC/H.265 (unframed)"
 msgstr "AVC/H.265 (niet ingelijst)"
@@ -7538,7 +7541,7 @@ msgstr "Aaneengeregen"
 msgid "Internal bug: tracks.cpp SSA #1. {0}"
 msgstr "Interne bug: tracks.cpp SSA #1. {0}"
 
-#: src/common/qt_kax_analyzer.cpp:108
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:107
 #, no-c-format
 msgid "Internal program error"
 msgstr "Interne programma fout"
@@ -8737,7 +8740,7 @@ msgstr "Geen AC-3 beginblok gevonden in het eerste beeld; spoor wordt overgeslag
 msgid "No DTS header found in first frames; track will be skipped.\n"
 msgstr "Geen DTS beginblok gevonden in het eerste beeld; spoor wordt overgeslagen.\n"
 
-#: src/common/kax_info.cpp:1236
+#: src/common/kax_info.cpp:1240
 #, no-c-format
 msgid "No EBML head found."
 msgstr "Geen EBML beginblok gevonden."
@@ -9648,13 +9651,13 @@ msgstr "Positie:"
 msgid "Possible causes are that the program does not exist or that you're not allowed to access it or its directory."
 msgstr "Mogelijke oorzaken zijn dat het programma niet bestaat of dat je geen toestemming hebt om het of haar map te openen."
 
-#: src/common/qt_kax_analyzer.cpp:85
-#: src/common/qt_kax_analyzer.cpp:93
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:405
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:837
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:367
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:126
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:148
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:84
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:92
 #: src/propedit/propedit.cpp:53
 #: src/propedit/propedit.cpp:59
 #, no-c-format
@@ -11231,7 +11234,7 @@ msgstr[1] "Start taken hand&matig"
 msgid "Started at:"
 msgstr "Gestart op:"
 
-#: src/common/kax_info.cpp:1206
+#: src/common/kax_info.cpp:1210
 #, no-c-format
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr "Statistieken voor spoornummer {0}: aantal blokken: {1}; grootte in bytes: {2}; tijdsinconden{3}; verwachtte bit snelheid in bits/seconde(n): {4}\n"
@@ -11588,7 +11591,7 @@ msgstr "Het MP4 bestand '{0}' bevat hoofdstukken die waarvan het indeling niet w
 msgid "The Matroska container format can store the display width/height for a video track."
 msgstr "De Matroska inhoudsformaat kan het scherm breedte / hoogte voor een video-nummer opslaan."
 
-#: src/common/qt_kax_analyzer.cpp:76
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:75
 #, no-c-format
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the element. Please use your favorite player to check this file."
 msgstr "Het Matroska bestand is veranderd, maar de meta zoek data kon niet opgewaardeerd worden. Dit betekend, dat af spelers moeite kunnen hebben dit element te vinden. Gebruik je favoriete af speler en controleer dit bestand."
@@ -11598,7 +11601,7 @@ msgstr "Het Matroska bestand is veranderd, maar de meta zoek data kon niet opgew
 msgid "The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file."
 msgstr "Het Matroska bestand is veranderd, maar de meta zoek data kon niet opgewaardeerd worden. Dit betekend, dat af spelers moeite kunnen hebben dit element te vinden. Gebruik je favoriete af speler en controleer dit bestand."
 
-#: src/common/qt_kax_analyzer.cpp:100
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:99
 #: src/propedit/propedit.cpp:64
 #, no-c-format
 msgid "The Matroska file's last element is set to an unknown size."
@@ -11971,7 +11974,7 @@ msgstr "De bewerk specificaties '{0}' en '{1}' herleiden naar hetzelfde spoor me
 msgid "The edition UID must be a number if given."
 msgstr "De editie UID moet gezet worden met een cijfer indien gegeven."
 
-#: src/common/qt_kax_analyzer.cpp:64
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:63
 #: src/propedit/propedit.cpp:39
 #, no-c-format
 msgid "The element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
@@ -11992,7 +11995,12 @@ msgstr "De eindtijd moet groter zijn dan de begintijd."
 msgid "The entries in the 'selected' list on the right will be shown at the top of all the drop-down boxes with countries and regions in the program."
 msgstr "De landen die hier wordt gekozen, zal bovenaan worden getoond in de landen uitklaplijst van het programma."
 
-#: src/common/bcp47.cpp:343
+#: src/output/p_avc_hevc_es.cpp:98
+#, no-c-format
+msgid "The error message was:"
+msgstr ""
+
+#: src/common/bcp47.cpp:351
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr ""
@@ -12096,7 +12104,7 @@ msgstr "Het bestand '{0}' kon voor lezen niet geopend worden: ({1})."
 msgid "The file '{0}' could not be opened for reading: {1}.\n"
 msgstr "Het bestand '{0}' kon voor lezen niet geopend worden: ({1}).\n"
 
-#: src/common/kax_info.cpp:1316
+#: src/common/kax_info.cpp:1320
 #, no-c-format
 msgid "The file '{0}' could not be opened for writing: {1}."
 msgstr "Het bestand '{0}' kon voor schrijven niet geopend worden: {1}."
@@ -12156,7 +12164,7 @@ msgstr "Het bestand '{0}' is geschreven als een W64-bestand in plaats van WAV, o
 msgid "The file (%1) is too big (%2)."
 msgstr "Het bestand (%1) is te groot (%2)."
 
-#: src/common/qt_kax_analyzer.cpp:102
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:101
 #: src/propedit/propedit.cpp:66
 #, no-c-format
 msgid "The file can be fixed by multiplexing it with mkvmerge again."
@@ -12173,13 +12181,13 @@ msgstr "De bestandsinhoud komt niet met het type overeen en is niet herkend."
 msgid "The file could not be opened for reading, or there was not enough data to parse its headers."
 msgstr "Het bestand kon voor schrijven en lezen niet geopend worden, of er was onvoldoende data om de beginblokken te ontleden."
 
-#: src/common/qt_kax_analyzer.cpp:84
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:83
 #: src/propedit/propedit.cpp:52
 #, no-c-format
 msgid "The file could not be opened for reading."
 msgstr "Het bestand kon voor lezen niet geopend worden."
 
-#: src/common/qt_kax_analyzer.cpp:92
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:91
 #: src/propedit/propedit.cpp:58
 #, no-c-format
 msgid "The file could not be opened for writing."
@@ -12196,7 +12204,7 @@ msgstr "Het i bestand bevat geen spoor ID {0}.\n"
 msgid "The file has been saved successfully."
 msgstr "Het bestand is succesvol opgeslagen."
 
-#: src/common/qt_kax_analyzer.cpp:104
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:103
 #: src/propedit/change.cpp:114
 #: src/propedit/change.cpp:127
 #: src/propedit/change.cpp:133
@@ -12229,7 +12237,7 @@ msgstr "De bestandskop is niet correct ingelezen.\n"
 msgid "The file headers could not be parsed, e.g. because they're incomplete, invalid or damaged."
 msgstr "De bestandsbeginblokken konden niet ontleed worden: b.v. doordat ze incompleet zijn, ongeldig of beschadigd."
 
-#: src/common/qt_kax_analyzer.cpp:34
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:33
 #: src/propedit/propedit.cpp:141
 #, no-c-format
 msgid "The file is being analyzed."
@@ -12524,7 +12532,7 @@ msgstr "Het maximaal aantal bestanden dat wordt gecreëerd zelfs wanneer het laa
 msgid "The maximum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."
 msgstr "Het maximum aantal beelden dat een speler vooraf zou moeten kunnen opslaan gedurende het afspelen. Indien ingesteld op 0, is het pseudo-voorschrijf systeem niet in gebruik."
 
-#: src/common/qt_kax_analyzer.cpp:70
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:69
 #: src/propedit/propedit.cpp:43
 #, no-c-format
 msgid "The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
@@ -12693,7 +12701,7 @@ msgstr "Het vorige UID was al opgegeven in '{0} {1}'.\n"
 msgid "The probe range percentage '{0}' is invalid.\n"
 msgstr "Het bereikpercentage van sonde '{0}' is ongeldig.\n"
 
-#: src/common/qt_kax_analyzer.cpp:103
+#: src/mkvtoolnix-gui/util/kax_analyzer.cpp:102
 #: src/propedit/propedit.cpp:67
 #, no-c-format
 msgid "The process will be aborted."
@@ -13051,37 +13059,37 @@ msgstr "De gebruiker kan vervolgens selecteren welke afspeellijst eigenlijk toe 
 msgid "The value '{0}' is not a number.\n"
 msgstr "De waarde '{0}' is géén getal.\n"
 
-#: src/common/bcp47.cpp:385
+#: src/common/bcp47.cpp:393
 #, fuzzy, no-c-format
 msgid "The value '{0}' is not a registered IANA language tag identifier."
 msgstr "'{0}' is geen geldige ISO 639-2 taal code."
 
-#: src/common/bcp47.cpp:177
+#: src/common/bcp47.cpp:183
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid ISO 15924 script code."
 msgstr "'{0}' is geen geldige ISO 639-2 taal code."
 
-#: src/common/bcp47.cpp:191
+#: src/common/bcp47.cpp:197
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid ISO 3166-1 country code."
 msgstr "'{0}' is geen geldig ccTLD land code."
 
-#: src/common/bcp47.cpp:164
+#: src/common/bcp47.cpp:170
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid ISO 639 language code."
 msgstr "'{0}' is geen geldige ISO 639-2 taal code."
 
-#: src/common/bcp47.cpp:209
+#: src/common/bcp47.cpp:215
 #, fuzzy, no-c-format
 msgid "The value '{}' is not a valid UN M.49 country number code."
 msgstr "'{0}' is geen geldig ccTLD land code."
 
-#: src/common/bcp47.cpp:231
+#: src/common/bcp47.cpp:237
 #, no-c-format
 msgid "The value '{}' is not part of the IANA Language Subtag Registry for extended language subtags."
 msgstr ""
 
-#: src/common/bcp47.cpp:232
+#: src/common/bcp47.cpp:238
 #, no-c-format
 msgid "The value '{}' is not part of the IANA Language Subtag Registry for language variants."
 msgstr ""
@@ -13103,7 +13111,7 @@ msgstr "De waarde kan ingegeven worden als een veranderbaar getal (b.v. 12.345) 
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "De waarde kan negatief zijn, maar onthoudt dat enig beeld met deze waarde (negatief) na berekening wordt weggelaten."
 
-#: src/common/bcp47.cpp:402
+#: src/common/bcp47.cpp:410
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr ""
@@ -13119,7 +13127,7 @@ msgstr "De waarden worden alléén opgeslagen in de spoor beginblokken."
 msgid "The values will be available for easy selection in the multiplexer."
 msgstr "De waarden zijn beschikbaar voor eenvoudige selectie in de samenvoeger."
 
-#: src/common/bcp47.cpp:344
+#: src/common/bcp47.cpp:352
 #, no-c-format
 msgid "The variant '{}' must only be used with one of the following prefixes: {}."
 msgstr ""
@@ -13221,20 +13229,15 @@ msgstr "Dit AAC spoor bevat geen geldige beginblokken. Kon de AAC informatie nie
 msgid "This AC-3 track contains {0} bytes of non-AC-3 data at the beginning. This corresponds to a delay of {1}ms. This delay will be used instead of the non-AC-3 data.\n"
 msgstr "Dit AC-3 spoor bevat {0} bytes aan niet-AC-3 data aan het begin. Wat leidt tot een vertraging van {1}ms. Deze vertraging zal worden gebruikt i.p.v. de niet-AC-3 data.\n"
 
-#: src/output/p_avc_es.cpp:106
+#: src/output/p_avc_hevc_es.cpp:139
 #, no-c-format
 msgid "This AVC/H.264 track does not start with a key frame. The first {0} frames have been skipped.\n"
 msgstr "Dit AVC/H.264 spoor start niet met het sleutel beeld. Het eerste {0} beeld is overgeslagen.\n"
 
-#: src/output/p_avc_es.cpp:116
+#: src/output/p_avc_es.cpp:42
 #, no-c-format
 msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
 msgstr "Dit AVC/H.264 spoor tijd informatie geeft aan, dat er een variabele beeld duur is gebruikt. Hoewel er geen standaard duur noch een externe tijdcode voor het bestand is voorzien en de bron inhoud ook niet voorziet in tijd codes. Kunnen de resulterende tijdcodes mogelijk niet effectief zijn.\n"
-
-#: src/output/p_hevc_es.cpp:103
-#, no-c-format
-msgid "This HEVC track does not start with a key frame. The first {0} frames have been skipped.\n"
-msgstr "Dit HEVC spoor start niet met het sleutel beeld. Het eerste {0} beeld is overgeslagen.\n"
 
 #: src/output/p_mp3.cpp:60
 #, no-c-format
@@ -13306,7 +13309,7 @@ msgstr "Dit bestand bevat coördinaten in de tijd code regels. Zulke coördinate
 msgid "This file could not be opened or parsed.\n"
 msgstr "Dit bestand kon niet geopend of ontleed worden.\n"
 
-#: src/common/kax_info.cpp:1236
+#: src/common/kax_info.cpp:1240
 #, no-c-format
 msgid "This file is probably not a Matroska file."
 msgstr "Dit is waarschijnlijk géén Matroska bestand."
@@ -13911,7 +13914,7 @@ msgstr "Onbekend hoofdstuk formaat in '{0}'. Het bevat geen ondersteund hoofdstu
 msgid "Unknown content encoding type {0} for track {1}.\n"
 msgstr "Onbekend inhoud codeer type {0} voor spoor {1}.\n"
 
-#: src/common/kax_info.cpp:1260
+#: src/common/kax_info.cpp:1264
 #, no-c-format
 msgid "Unknown element"
 msgstr "Onbekend element"
@@ -15068,7 +15071,7 @@ msgstr "standaard duur: {0:.3f}ms ({1:.3f} beelden/velden per seconde voor een v
 msgid "deflateInit() failed. Result: {0}\n"
 msgstr "deflateInit() mislukt. Resultaat: {0}\n"
 
-#: src/common/kax_info.cpp:1024
+#: src/common/kax_info.cpp:1028
 #, no-c-format
 msgid "discardable, "
 msgstr "afwijsbaar, "
@@ -15183,7 +15186,7 @@ msgstr "inflateInit() mislukt. Resultaat: {0}\n"
 msgid "invalid language tag '{0}': {1}"
 msgstr "Ongeldig spoor ID taal code in '{0} {1}'.\n"
 
-#: src/common/kax_info.cpp:1022
+#: src/common/kax_info.cpp:1026
 #, no-c-format
 msgid "key, "
 msgstr "sleutel, "
@@ -15445,23 +15448,10 @@ msgstr "mkvmerge commando regel"
 msgid "mkvmerge does not distinguish between those two and simply counts the number of blocks."
 msgstr "mkvmerge maakt geen onderscheid tussen die twee en telt eenvoudig het aantal blokken."
 
-#: src/output/p_avc_es.cpp:97
+#: src/output/p_avc_hevc_es.cpp:97
 #, no-c-format
-msgid ""
-"mkvmerge encountered broken or unparsable data in this AVC/H.264 video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"
-"{0}\n"
+msgid "mkvmerge encountered broken or unparsable data in this video track."
 msgstr ""
-"mkvmerge kwam een gebroken of een on-ontleedbare data tegen in dit AVC/H.264 video spoor. Of je bestandsnaam is beschadigd (waarmee mkvmerge nog niet mee overweg kan) of dit is een fout (bug) in mkvmerge zelf. Het fout bericht was:\n"
-"{0}\n"
-
-#: src/output/p_hevc_es.cpp:94
-#, no-c-format
-msgid ""
-"mkvmerge encountered broken or unparsable data in this HEVC video track. Either your file is damaged (which mkvmerge cannot cope with yet) or this is a bug in mkvmerge itself. The error message was:\n"
-"{0}\n"
-msgstr ""
-"mkvmerge kwam een gebroken of een on-ontleedbare data tegen in dit HEVC video spoor. Of je bestandsnaam is beschadigd (waarmee mkvmerge nog niet mee overweg kan) of dit is een fout (bug) in mkvmerge zelf. Het fout bericht was:\n"
-"{0}\n"
 
 #: src/input/r_ogm.cpp:462
 #, no-c-format
@@ -15838,17 +15828,17 @@ msgid_plural "{0} bytes"
 msgstr[0] "{0} bytes"
 msgstr[1] "{0} byte"
 
-#: src/common/kax_info.cpp:942
+#: src/common/kax_info.cpp:943
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, duration {3}, size {4}, adler 0x{5:08x}{6}{7}\n"
 msgstr "{0} beeld, spoor {1}, tijd code {2}, duur {3}, grootte {4}, adler 0x{5:08x}{6}{7}\n"
 
-#: src/common/kax_info.cpp:1080
+#: src/common/kax_info.cpp:1084
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}\n"
 msgstr "{0} beeld, spoor {1}, tijd code {2}, grootte {3}, adler 0x{4:08x}{5}\n"
 
-#: src/common/kax_info.cpp:952
+#: src/common/kax_info.cpp:953
 #, no-c-format
 msgid "{0} frame, track {1}, timestamp {2}, size {3}, adler 0x{4:08x}{5}{6}\n"
 msgstr "{0} beeld, spoor {1}, tijd code {2}, grootte {3}, adler 0x{4:08x}{5}{6}\n"
@@ -15930,7 +15920,7 @@ msgstr "{0}: missend deler in '{1} {2}'.\n"
 msgid "{0}: missing track ID in '{1} {2}'.\n"
 msgstr "{0}: ontbrekend spoor ID in '{1} {2}'.\n"
 
-#: src/common/kax_info.cpp:1026
+#: src/common/kax_info.cpp:1030
 #, no-c-format
 msgid "{0}track number {1}, {2} frame(s), timestamp {3}"
 msgstr "{0} spoor nummer {1}, {2} be(e)ld(en), tijd code{3})"
@@ -16946,6 +16936,13 @@ msgstr "– Zet naar niets –"
 #~ "grootte wijzigen naar {0} voor dit spoor (commando regel paramaters '--"
 #~ "nalu-size-length {1}:{0}').\n"
 
+#~ msgid ""
+#~ "This HEVC track does not start with a key frame. The first {0} frames "
+#~ "have been skipped.\n"
+#~ msgstr ""
+#~ "Dit HEVC spoor start niet met het sleutel beeld. Het eerste {0} beeld is "
+#~ "overgeslagen.\n"
+
 #~ msgid "This only works with (E-)AC-3 audio tracks."
 #~ msgstr "Dit werkt alléén met DTS audio sporen."
 
@@ -17099,6 +17096,30 @@ msgstr "– Zet naar niets –"
 
 #~ msgid "mkvextract tags <inname> [options]"
 #~ msgstr "mkvextract markeringen <inname> [opties]"
+
+#~ msgid ""
+#~ "mkvmerge encountered broken or unparsable data in this AVC/H.264 video "
+#~ "track. Either your file is damaged (which mkvmerge cannot cope with yet) "
+#~ "or this is a bug in mkvmerge itself. The error message was:\n"
+#~ "{0}\n"
+#~ msgstr ""
+#~ "mkvmerge kwam een gebroken of een on-ontleedbare data tegen in dit AVC/"
+#~ "H.264 video spoor. Of je bestandsnaam is beschadigd (waarmee mkvmerge nog "
+#~ "niet mee overweg kan) of dit is een fout (bug) in mkvmerge zelf. Het fout "
+#~ "bericht was:\n"
+#~ "{0}\n"
+
+#~ msgid ""
+#~ "mkvmerge encountered broken or unparsable data in this HEVC video track. "
+#~ "Either your file is damaged (which mkvmerge cannot cope with yet) or this "
+#~ "is a bug in mkvmerge itself. The error message was:\n"
+#~ "{0}\n"
+#~ msgstr ""
+#~ "mkvmerge kwam een gebroken of een on-ontleedbare data tegen in dit HEVC "
+#~ "video spoor. Of je bestandsnaam is beschadigd (waarmee mkvmerge nog niet "
+#~ "mee overweg kan) of dit is een fout (bug) in mkvmerge zelf. Het fout "
+#~ "bericht was:\n"
+#~ "{0}\n"
 
 #~ msgid "never scan for other playlists"
 #~ msgstr "Nooit naar andere afspeellijsten scannen"
