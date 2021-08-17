@@ -35,8 +35,17 @@ public:
   virtual void set_container_default_field_duration(int64_t default_duration);
   virtual unsigned int get_nalu_size_length() const;
 
-  virtual void flush_frames() = 0;
+  virtual void connect(generic_packetizer_c *src, int64_t p_append_timestamp_offset) override;
 
 protected:
+  virtual void process_impl(packet_cptr const &packet) override;
+
   virtual void flush_impl() override;
+  virtual void flush_frames();
+
+  virtual void check_if_default_duration_available() const;
+
+  virtual void handle_delayed_headers();
+  virtual void handle_aspect_ratio();
+  virtual void handle_actual_default_duration();
 };

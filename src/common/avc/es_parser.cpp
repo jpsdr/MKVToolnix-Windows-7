@@ -608,9 +608,20 @@ es_parser_c::create_nalu_with_size(const memory_cptr &src,
 }
 
 memory_cptr
-es_parser_c::get_avcc()
+es_parser_c::get_configuration_record()
   const {
   return avcc_c{static_cast<unsigned int>(m_nalu_size_length), m_sps_list, m_pps_list}.pack();
+}
+
+void
+es_parser_c::set_configuration_record(memory_cptr const &bytes) {
+  auto avcc = avcc_c::unpack(bytes);
+
+  for (auto const &nalu : avcc.m_sps_list)
+    handle_sps_nalu(nalu); // TODO: , extra_data_position_e::dont_store);
+
+  for (auto const &nalu : avcc.m_pps_list)
+    handle_pps_nalu(nalu); // TODO: , extra_data_position_e::dont_store);
 }
 
 void

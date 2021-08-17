@@ -3395,7 +3395,7 @@ qtmp4_demuxer_c::check_for_hevc_video_annex_b_bitstream() {
     }
 
     priv.clear();
-    priv.emplace_back(parser.get_hevcc());
+    priv.emplace_back(parser.get_configuration_record());
 
     break;
   }
@@ -3527,7 +3527,7 @@ qtmp4_demuxer_c::derive_track_params_from_avc_bitstream() {
   parser.flush();
 
   if (parser.headers_parsed())
-    priv.emplace_back(parser.get_avcc());
+    priv.emplace_back(parser.get_configuration_record());
 
   mxdebug_if(m_debug_headers, fmt::format("derive_track_params_from_avc_bitstream: avcC derived? size {0} bytes\n", !priv.empty() && priv[0] ? priv[0]->get_size() : 0));
 

@@ -694,14 +694,14 @@ es_parser_c::calculate_frame_order() {
 }
 
 memory_cptr
-es_parser_c::get_hevcc()
+es_parser_c::get_configuration_record()
   const {
   return hevcc_c{static_cast<unsigned int>(m_nalu_size_length), m_vps_list, m_sps_list, m_pps_list, m_user_data, m_codec_private}.pack();
 }
 
 void
-es_parser_c::set_hevcc(memory_cptr const &hevcc_bytes) {
-  auto hevcc = hevcc_c::unpack(hevcc_bytes);
+es_parser_c::set_configuration_record(memory_cptr const &bytes) {
+  auto hevcc = hevcc_c::unpack(bytes);
 
   for (auto const &nalu : hevcc.m_vps_list)
     handle_vps_nalu(nalu, extra_data_position_e::dont_store);

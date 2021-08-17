@@ -53,8 +53,8 @@ public:
   virtual void flush() override;
   virtual void clear() override;
 
-  void set_hevcc(memory_cptr const &hevcc_bytes);
-  memory_cptr get_hevcc() const;
+  virtual void set_configuration_record(memory_cptr const &bytes) override;
+  virtual memory_cptr get_configuration_record() const override;
 
   virtual int get_width() const override {
     assert(!m_sps_info_list.empty());

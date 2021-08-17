@@ -123,6 +123,8 @@ public:
 
   virtual void handle_nalu(memory_cptr const &nalu, uint64_t nalu_pos) = 0;
 
+  virtual void set_configuration_record(memory_cptr const &bytes) = 0;
+  virtual memory_cptr get_configuration_record() const = 0;
   virtual int get_width() const = 0;
   virtual int get_height() const = 0;
 

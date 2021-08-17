@@ -24,18 +24,9 @@ protected:
 public:
   hevc_es_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
 
-  virtual void flush_frames() override;
-
-  virtual translatable_string_c get_format_name() const {
+  virtual translatable_string_c get_format_name() const override {
     return YT("HEVC/H.265 (unframed)");
   };
 
-  virtual void connect(generic_packetizer_c *src, int64_t p_append_timestamp_offset = -1);
-  virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
-
-protected:
-  virtual void process_impl(packet_cptr const &packet) override;
-  virtual void handle_delayed_headers();
-  virtual void handle_aspect_ratio();
-  virtual void handle_actual_default_duration();
+  virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) override;
 };

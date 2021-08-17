@@ -25,18 +25,12 @@ protected:
 public:
   avc_es_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
 
-  virtual void flush_frames() override;
-
-  virtual translatable_string_c get_format_name() const {
+  virtual translatable_string_c get_format_name() const override {
     return YT("AVC/H.264 (unframed)");
   };
 
-  virtual void connect(generic_packetizer_c *src, int64_t p_append_timestamp_offset = -1);
-  virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
+  virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) override;
 
 protected:
-  virtual void process_impl(packet_cptr const &packet) override;
-  virtual void handle_delayed_headers();
-  virtual void handle_aspect_ratio();
-  virtual void handle_actual_default_duration();
+  virtual void check_if_default_duration_available() const override;
 };
