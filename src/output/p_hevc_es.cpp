@@ -12,17 +12,11 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxTracks.h>
-
 #include "common/codec.h"
 #include "common/hacks.h"
-#include "common/hevc/util.h"
-#include "common/mpeg.h"
+#include "common/hevc/es_parser.h"
 #include "merge/connection_checks.h"
-#include "merge/output_control.h"
 #include "output/p_hevc_es.h"
-
-using namespace libmatroska;
 
 hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reader,
                                                        track_info_c &p_ti)
