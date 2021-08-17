@@ -93,10 +93,10 @@ frame_t::is_key_frame()
   return m_keyframe;
 }
 
-bool
+std::optional<bool>
 frame_t::is_discardable()
   const {
-  return m_si.nal_ref_idc == 0;
+  return m_discardable;
 }
 
 }

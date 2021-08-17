@@ -126,7 +126,7 @@ avc_es_video_packetizer_c::flush_frames() {
     auto packet              = std::make_shared<packet_t>(frame.m_data, frame.m_start, duration,
                                                           frame.is_i_frame()  ? -1 : frame.m_start + frame.m_ref1,
                                                           !frame.is_b_frame() ? -1 : frame.m_start + frame.m_ref2);
-    packet->key_flag         = frame.m_keyframe;
+    packet->key_flag         = frame.is_key_frame();
     packet->discardable_flag = frame.is_discardable();
 
     add_packet(packet);

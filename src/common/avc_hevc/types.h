@@ -53,6 +53,7 @@ public:
   int64_t m_start{}, m_end{}, m_ref1{}, m_ref2{};
   uint64_t m_position{};
   bool m_keyframe{}, m_has_provided_timestamp{};
+  std::optional<bool> m_discardable;
   mtx::avc_hevc::slice_info_t m_si{};
   int m_presentation_order{}, m_decode_order{};
 
@@ -66,7 +67,7 @@ public:
   bool is_p_frame() const;
   bool is_b_frame() const;
   bool is_key_frame() const;
-  bool is_discardable() const;
+  std::optional<bool> is_discardable() const;
 };
 
 }

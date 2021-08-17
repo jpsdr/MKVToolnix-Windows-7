@@ -191,16 +191,17 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
   bool is_i_slice = (SLICE_TYPE_I == si.slice_type);
   bool is_b_slice = (SLICE_TYPE_B == si.slice_type);
 
-  m_incomplete_frame.m_si       =  si;
-  m_incomplete_frame.m_keyframe =  m_recovery_point_valid
-                                || (   is_i_slice
-                                    && (   (m_debug_keyframe_detection && !m_b_frames_since_keyframe)
-                                        || (NALU_TYPE_IDR_W_RADL == si.nalu_type)
-                                        || (NALU_TYPE_IDR_N_LP   == si.nalu_type)
-                                        || (NALU_TYPE_CRA_NUT    == si.nalu_type)));
-  m_incomplete_frame.m_type     = m_incomplete_frame.m_keyframe ? 'I' : is_b_slice ? 'B' : 'P';
-  m_incomplete_frame.m_position = nalu_pos;
-  m_recovery_point_valid        = false;
+  m_incomplete_frame.m_si          =  si;
+  m_incomplete_frame.m_keyframe    =  m_recovery_point_valid
+                                   || (   is_i_slice
+                                       && (   (m_debug_keyframe_detection && !m_b_frames_since_keyframe)
+                                           || (NALU_TYPE_IDR_W_RADL == si.nalu_type)
+                                           || (NALU_TYPE_IDR_N_LP   == si.nalu_type)
+                                           || (NALU_TYPE_CRA_NUT    == si.nalu_type)));
+  m_incomplete_frame.m_type        =  m_incomplete_frame.m_keyframe ? 'I' : is_b_slice ? 'B' : 'P';
+  m_incomplete_frame.m_discardable =  m_incomplete_frame.m_type == 'B';
+  m_incomplete_frame.m_position    =  nalu_pos;
+  m_recovery_point_valid           =  false;
 
   if (m_incomplete_frame.m_keyframe) {
     m_first_keyframe_found    = true;

@@ -200,15 +200,16 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
   bool is_b_slice =  (SLICE_TYPE_B   == si.slice_type)
                   || (SLICE_TYPE2_B  == si.slice_type);
 
-  m_incomplete_frame.m_si       =  si;
-  m_incomplete_frame.m_keyframe =  m_recovery_point_valid
-                                || (   is_i_slice
-                                    && (NALU_TYPE_IDR_SLICE == si.nalu_type))
-                                || (   is_i_slice
-                                    && m_all_i_slices_are_key_frames);
-  m_incomplete_frame.m_type     =  m_incomplete_frame.m_keyframe ? 'I' : is_b_slice ? 'B' : 'P';
-  m_incomplete_frame.m_position =  nalu_pos;
-  m_recovery_point_valid        =  false;
+  m_incomplete_frame.m_si          =  si;
+  m_incomplete_frame.m_discardable =  si.nal_ref_idc == 0;
+  m_incomplete_frame.m_keyframe    =  m_recovery_point_valid
+                                   || (   is_i_slice
+                                       && (NALU_TYPE_IDR_SLICE == si.nalu_type))
+                                   || (   is_i_slice
+                                       && m_all_i_slices_are_key_frames);
+  m_incomplete_frame.m_type        =  m_incomplete_frame.m_keyframe ? 'I' : is_b_slice ? 'B' : 'P';
+  m_incomplete_frame.m_position    =  nalu_pos;
+  m_recovery_point_valid           =  false;
 
   if (m_incomplete_frame.m_keyframe) {
     mxdebug_if(m_debug_keyframe_detection,
