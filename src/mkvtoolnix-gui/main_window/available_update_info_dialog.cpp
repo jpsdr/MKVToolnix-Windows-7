@@ -112,23 +112,39 @@ AvailableUpdateInfoDialog::updateStatusDisplay() {
 QString
 AvailableUpdateInfoDialog::formattedVersionHeading(pugi::xpath_node const &release) {
   auto versionStrQ = Q(std::string{release.node().attribute("version").value()}).toHtmlEscaped();
+  auto song        = Q(release.node().attribute("codename").value());
+  auto album       = Q(release.node().attribute("codename-album").value());
   auto artist      = Q(release.node().attribute("codename-artist").value());
-  auto codename    = Q(release.node().attribute("codename").value());
 
-  if (codename.isEmpty() || artist.isEmpty())
+  if (song.isEmpty() || artist.isEmpty())
     return QY("Version %1").arg(versionStrQ);
 
-  auto codenameQ = codename.toHtmlEscaped();
-  auto url       = QUrl{Q("https://www.youtube.com/results")};
-  auto query     = QUrlQuery{};
+  QString links;
+  auto songQ  = song.toHtmlEscaped();
+  auto urlBase    = Q("https://www.youtube.com/results");
+  auto urlSong    = QUrl{urlBase};
+  auto querySong  = QUrlQuery{};
 
-  query.addQueryItem(Q("search_query"), Q("%1 %2").arg(artist).arg(codename));
-  url.setQuery(query);
+  querySong.addQueryItem(Q("search_query"), Q("%1 %2").arg(artist).arg(song));
+  urlSong.setQuery(querySong);
 
-  return Q("%1 [<a href=\"%2\">%3</a>]")
-    .arg(QY("Version %1 \"%2\"").arg(versionStrQ).arg(codenameQ))
-    .arg(url.toString(QUrl::FullyEncoded))
-    .arg(QY("Listen on YouTube").toHtmlEscaped());
+  if (!album.isEmpty() && (song.toLower() != album.toLower())) {
+    auto urlAlbum    = QUrl{urlBase};
+    auto queryAlbum  = QUrlQuery{};
+
+    queryAlbum.addQueryItem(Q("search_query"), Q("%1 %2").arg(artist).arg(album));
+    urlAlbum.setQuery(queryAlbum);
+
+    links = QY("Listen to <a href=\"%1\">song</a> or <a href=\"%2\">album</a> on YouTube")
+      .arg(urlSong .toString(QUrl::FullyEncoded))
+      .arg(urlAlbum.toString(QUrl::FullyEncoded));
+
+  } else
+    links = QY("Listen to <a href=\"%1\">song</a> on YouTube").arg(urlSong.toString(QUrl::FullyEncoded));
+
+  return Q("%1 [%2]")
+    .arg(QY("Version %1 \"%2\"").arg(versionStrQ).arg(songQ))
+    .arg(links);
 }
 
 void
