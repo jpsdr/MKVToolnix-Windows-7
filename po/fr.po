@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnixgui\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2021-08-21 16:33+0200\n"
-"PO-Revision-Date: 2021-08-08 14:16+0000\n"
+"PO-Revision-Date: 2021-08-18 07:32+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -486,8 +486,8 @@ msgid ""
 "                           bitstream to match the track's default duration.\n"
 msgstr ""
 "  --fix-bitstream-timing-information <TID[:bool]>\n"
-"                           Ajuste la fréquence de trame ou de champ stockée\n"
-"                           dans le flux vidéo sur la durée par défaut de la piste.\n"
+"                           Ajuste la fréquence de trame/champ stockée\n"
+"                           dans le flux binaire vidéo pour correspondre à la durée par défaut de la piste.\n"
 
 #: src/merge/mkvmerge.cpp:387
 #, no-c-format
@@ -3743,7 +3743,7 @@ msgstr "Un nombre entier non signé était attendu."
 #: src/common/hacks.cpp:38
 #, no-c-format
 msgid "Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs."
-msgstr "Analyse les flux MPEG-4, place chaque trame dans un bloc Matroska, utilise un horodatage correct (I P B B = 0 120 40 80), utilise les identifiants de codec V_MPEG4/ISO/…"
+msgstr "Analyse les flux binaires MPEG-4, place chaque trame dans un bloc Matroska, utilise un horodatage correct (I P B B = 0 120 40 80), utilise les identifiants de codec V_MPEG4/ISO/…"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:247
 #: src/mkvtoolnix-gui/merge/output.cpp:248
@@ -6416,9 +6416,9 @@ msgid "Extracted the aspect ratio information from the Theora video headers and 
 msgstr "Ratio d'aspect extrait des entêtes vidéoTheora extraite et dimensions à l'écran réglées sur {0}/{1}.\n"
 
 #: src/output/p_avc_hevc_es.cpp:162
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extracted the aspect ratio information from the video bitstream and set the display dimensions to {0}/{1}.\n"
-msgstr "Ratio d'aspect extrait des données vidéo HEVC et dimensions à l'écran réglées sur {0}/{1}.\n"
+msgstr "Informations de ratio d'aspect ratio extraites du flux binaire vidéo et dimensions d'affichage définies à {0}/{1}.\n"
 
 #: src/extract/extract_cli_parser.cpp:139
 #, no-c-format
@@ -6633,7 +6633,7 @@ msgstr "Les codes de langues de cinq à huit lettres ne sont pas actuellement g�
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1814
 #, no-c-format
 msgid "Fix bitstream timing info"
-msgstr "Corriger les informations de temps du flux de données"
+msgstr "Corriger les informations temporelles du flux binaire de données"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:176
 #, no-c-format
@@ -8976,12 +8976,12 @@ msgstr "Les tâches effectuées restent normalement dans la file d'attente, mêm
 #: src/mkvtoolnix-gui/merge/input.cpp:503
 #, no-c-format
 msgid "Normally mkvmerge does not change the timing information (frame/field rate) stored in the video bitstream."
-msgstr "mkvmerge ne modifie pas normalement l'information de temps (fréquence de trame ou de champ) contenue dans le flux vidéo."
+msgstr "Normalement, mkvmerge ne modifie pas l'information temporelle (fréquence de trame/champ) contenue dans le flux binaire vidéo."
 
 #: src/common/hacks.cpp:50
 #, no-c-format
 msgid "Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."
-msgstr "mkvmerge conserve normalement l'information de ratio d'aspect des flux vidéo MPEG-4 et la place dans le conteneur."
+msgstr "Normalement, mkvmerge conserve l'information de ratio d'aspect des flux binaires vidéo MPEG-4 et la place dans le conteneur."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:358
 #, no-c-format
@@ -12006,7 +12006,7 @@ msgstr "Les entrées dans la liste « Sélection » à droite seront affichées 
 #: src/output/p_avc_hevc_es.cpp:98
 #, no-c-format
 msgid "The error message was:"
-msgstr ""
+msgstr "Le message d'erreur était :"
 
 #: src/common/bcp47.cpp:351
 #, no-c-format
@@ -12016,7 +12016,7 @@ msgstr "La sous-balise étendue de langue « {} » doit seulement être utilis
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
 msgid "The extracted values for video width and height from the MPEG4 layer 2 video data bitstream differ from what the values in the source container. The ones from the video data bitstream ({0}x{1}) will be used.\n"
-msgstr "La largeur et la hauteur vidéo extraites du flux de données vidéo MPEG-4 couche 2 diffèrent de celles du conteneur source. Celles du flux de données vidéo ({0}x{1}) seront utilisées.\n"
+msgstr "La largeur et la hauteur vidéo extraites du flux binaire vidéo MPEG-4 couche 2 diffèrent de celles du conteneur source. Celles du flux binaire vidéo ({0}x{1}) seront utilisées.\n"
 
 #: src/extract/extract_cli_parser.cpp:117
 #, no-c-format
@@ -13249,7 +13249,7 @@ msgstr "Cette piste AVC/H.264 ne débute pas par une trame-clé. Les {0} premiè
 #: src/output/p_avc_es.cpp:42
 #, no-c-format
 msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
-msgstr "L'information de temps de cette piste AVC/H.264 indique l'utilisation d'une fréquence de trame variable. Toutefois, aucune durée par défaut ni aucun horodatage externe n'est donné, et le conteneur source ne fournit aucun horodatage. Il se pourrait que les horodatages résultants ne soient pas utilisables.\n"
+msgstr "L'information temporelle de cette piste AVC/H.264 indique l'utilisation d'une fréquence de trame variable. Toutefois, aucune durée par défaut ni aucun horodatage externe n'est donné, et le conteneur source ne fournit aucun horodatage. Il se pourrait que les horodatages résultants ne soient pas utilisables.\n"
 
 #: src/output/p_mp3.cpp:60
 #, no-c-format
@@ -13456,7 +13456,7 @@ msgstr "Cette option peut aussi être utilisée pour les chapitres."
 #: src/common/hacks.cpp:51
 #, no-c-format
 msgid "This option causes mkvmerge to remove the aspect ratio information from the bitstream."
-msgstr "Cette option conduit mkvmerge à retirer l'information de ratio d'aspect du flux de données."
+msgstr "Cette option conduit mkvmerge à retirer l'information de ratio d'aspect du flux binaire."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:221
 #, no-c-format
@@ -15463,7 +15463,7 @@ msgstr "mkvmerge ne distingue pas les deux et compte simplement le nombre de blo
 #: src/output/p_avc_hevc_es.cpp:97
 #, no-c-format
 msgid "mkvmerge encountered broken or unparsable data in this video track."
-msgstr ""
+msgstr "mkvmerge a rencontré des données défectueuses ou non lisibles dans cette piste vidéo."
 
 #: src/input/r_ogm.cpp:462
 #, no-c-format
