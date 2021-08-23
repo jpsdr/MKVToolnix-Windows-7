@@ -50,12 +50,12 @@ es_parser_c::~es_parser_c() {
     "unknown"
   };
 
-  mxdebug("mpeg4::p10: Number of NALUs by type:\n");
+  mxdebug("avc: Number of NALUs by type:\n");
   for (int i = 0, size = m_stats.num_nalus_by_type.size(); i < size; ++i)
     if (0 != m_stats.num_nalus_by_type[i])
       mxdebug(fmt::format("  {0}: {1}\n", get_nalu_type_name(i + 1), m_stats.num_nalus_by_type[i]));
 
-  mxdebug("mpeg4::p10: Number of slices by type:\n");
+  mxdebug("avc: Number of slices by type:\n");
   for (int i = 0, size = m_stats.num_slices_by_type.size(); i < size; ++i)
     if (0 != m_stats.num_slices_by_type[i])
       mxdebug(fmt::format("  {0}: {1}\n", s_slice_type_names[i], m_stats.num_slices_by_type[i]));
@@ -145,7 +145,7 @@ es_parser_c::flush_incomplete_frame() {
 
 void
 es_parser_c::add_sps_and_pps_to_extra_data() {
-  mxdebug_if(m_debug_sps_pps_changes, fmt::format("mpeg4::p10: adding all SPS & PPS before key frame due to changes from AVCC\n"));
+  mxdebug_if(m_debug_sps_pps_changes, fmt::format("avc: adding all SPS & PPS before key frame due to changes from AVCC\n"));
 
   m_extra_data.erase(std::remove_if(m_extra_data.begin(), m_extra_data.end(), [this](memory_cptr const &nalu) -> bool {
     if (nalu->get_size() < static_cast<std::size_t>(m_nalu_size_length + 1))
@@ -276,7 +276,7 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
       m_configuration_record_changed = true;
 
   } else if (m_sps_info_list[i].checksum != sps_info.checksum) {
-    mxdebug_if(m_debug_sps_pps_changes, fmt::format("mpeg4::p10: SPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", sps_info.id, m_sps_info_list[i].checksum, sps_info.checksum));
+    mxdebug_if(m_debug_sps_pps_changes, fmt::format("avc: SPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", sps_info.id, m_sps_info_list[i].checksum, sps_info.checksum));
 
     cleanup();
 
@@ -331,7 +331,7 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
       m_configuration_record_changed = true;
 
   } else if (m_pps_info_list[i].checksum != pps_info.checksum) {
-    mxdebug_if(m_debug_sps_pps_changes, fmt::format("mpeg4::p10: PPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", pps_info.id, m_pps_info_list[i].checksum, pps_info.checksum));
+    mxdebug_if(m_debug_sps_pps_changes, fmt::format("avc: PPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", pps_info.id, m_pps_info_list[i].checksum, pps_info.checksum));
 
     if (m_pps_info_list[i].sps_id != pps_info.sps_id)
       cleanup();
