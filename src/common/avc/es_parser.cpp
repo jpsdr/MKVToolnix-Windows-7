@@ -95,6 +95,38 @@ es_parser_c::clear() {
   m_parsed_position       = 0;
 }
 
+void
+es_parser_c::flush_incomplete_frame() {
+  if (!m_have_incomplete_frame || !m_configuration_record_ready)
+    return;
+
+  m_frames.push_back(m_incomplete_frame);
+  m_incomplete_frame.clear();
+  m_have_incomplete_frame = false;
+}
+
+void
+es_parser_c::add_sps_and_pps_to_extra_data() {
+  mxdebug_if(m_debug_sps_pps_changes, fmt::format("avc: adding all SPS & PPS before key frame due to changes from AVCC\n"));
+
+  m_extra_data.erase(std::remove_if(m_extra_data.begin(), m_extra_data.end(), [this](memory_cptr const &nalu) -> bool {
+    if (nalu->get_size() < static_cast<std::size_t>(m_nalu_size_length + 1))
+      return true;
+
+    auto const type = *(nalu->get_buffer() + m_nalu_size_length) & 0x1f;
+    return (type == NALU_TYPE_SEQ_PARAM) || (type == NALU_TYPE_PIC_PARAM);
+  }), m_extra_data.end());
+
+  std::vector<memory_cptr> tmp;
+  tmp.reserve(m_extra_data.size() + m_sps_list.size() + m_pps_list.size());
+
+  std::transform(m_sps_list.begin(), m_sps_list.end(), std::back_inserter(tmp), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
+  std::transform(m_pps_list.begin(), m_pps_list.end(), std::back_inserter(tmp), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
+  tmp.insert(tmp.end(), m_extra_data.begin(), m_extra_data.end());
+
+  m_extra_data = std::move(tmp);
+}
+
 bool
 es_parser_c::flush_decision(mtx::avc_hevc::slice_info_t &si,
                             mtx::avc_hevc::slice_info_t &ref) {
@@ -131,38 +163,6 @@ es_parser_c::flush_decision(mtx::avc_hevc::slice_info_t &si,
   }
 
   return false;
-}
-
-void
-es_parser_c::flush_incomplete_frame() {
-  if (!m_have_incomplete_frame || !m_configuration_record_ready)
-    return;
-
-  m_frames.push_back(m_incomplete_frame);
-  m_incomplete_frame.clear();
-  m_have_incomplete_frame = false;
-}
-
-void
-es_parser_c::add_sps_and_pps_to_extra_data() {
-  mxdebug_if(m_debug_sps_pps_changes, fmt::format("avc: adding all SPS & PPS before key frame due to changes from AVCC\n"));
-
-  m_extra_data.erase(std::remove_if(m_extra_data.begin(), m_extra_data.end(), [this](memory_cptr const &nalu) -> bool {
-    if (nalu->get_size() < static_cast<std::size_t>(m_nalu_size_length + 1))
-      return true;
-
-    auto const type = *(nalu->get_buffer() + m_nalu_size_length) & 0x1f;
-    return (type == NALU_TYPE_SEQ_PARAM) || (type == NALU_TYPE_PIC_PARAM);
-  }), m_extra_data.end());
-
-  std::vector<memory_cptr> tmp;
-  tmp.reserve(m_extra_data.size() + m_sps_list.size() + m_pps_list.size());
-
-  std::transform(m_sps_list.begin(), m_sps_list.end(), std::back_inserter(tmp), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
-  std::transform(m_pps_list.begin(), m_pps_list.end(), std::back_inserter(tmp), [this](memory_cptr const &nalu) { return create_nalu_with_size(nalu); });
-  tmp.insert(tmp.end(), m_extra_data.begin(), m_extra_data.end());
-
-  m_extra_data = std::move(tmp);
 }
 
 void

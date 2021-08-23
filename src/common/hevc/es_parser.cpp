@@ -108,6 +108,17 @@ es_parser_c::clear() {
 }
 
 void
+es_parser_c::flush_incomplete_frame() {
+  if (m_pending_frame_data.empty() || !m_configuration_record_ready)
+    return;
+
+  build_frame_data();
+
+  m_frames.push_back(m_incomplete_frame);
+  m_incomplete_frame.clear();
+}
+
+void
 es_parser_c::add_parameter_sets_to_extra_data() {
   std::unordered_map<uint32_t, bool> is_in_extra_data;
 
@@ -137,17 +148,6 @@ es_parser_c::add_parameter_sets_to_extra_data() {
   std::copy(old_extra_data.begin(), old_extra_data.end(), inserter);
 
   m_extra_data_initial.clear();
-}
-
-void
-es_parser_c::flush_incomplete_frame() {
-  if (m_pending_frame_data.empty() || !m_configuration_record_ready)
-    return;
-
-  build_frame_data();
-
-  m_frames.push_back(m_incomplete_frame);
-  m_incomplete_frame.clear();
 }
 
 void
