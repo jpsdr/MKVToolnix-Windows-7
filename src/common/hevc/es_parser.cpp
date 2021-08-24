@@ -36,33 +36,8 @@ namespace mtx::hevc {
 es_parser_c::es_parser_c()
   : mtx::avc_hevc::es_parser_c{"hevc"s, 3, 64}
 {
-  if (debugging_c::requested("hevc_statistics"))
+  if (m_debug_statistics)
     init_nalu_names();
-}
-
-es_parser_c::~es_parser_c() {
-  mxdebug_if(m_debug_timestamps, fmt::format("stream_position {0} parsed_position {1}\n", m_stream_position, m_parsed_position));
-
-  if (!debugging_c::requested("hevc_statistics"))
-    return;
-
-  mxdebug(fmt::format("HEVC statistics: #frames: out {0} discarded {1} #timestamps: in {2} generated {3} discarded {4} num_fields: {5} num_frames: {6}\n",
-                      m_stats.num_frames_out, m_stats.num_frames_discarded, m_stats.num_timestamps_in, m_stats.num_timestamps_generated, m_stats.num_timestamps_discarded,
-                      m_stats.num_field_slices, m_stats.num_frame_slices));
-
-  static const char *s_type_names[] = {
-    "B",  "P",  "I", "unknown"
-  };
-
-  mxdebug("hevc: Number of NALUs by type:\n");
-  for (int i = 0, size = m_stats.num_nalus_by_type.size(); i < size; ++i)
-    if (0 != m_stats.num_nalus_by_type[i])
-      mxdebug(fmt::format("  {0}: {1}\n", get_nalu_type_name(i), m_stats.num_nalus_by_type[i]));
-
-  mxdebug("hevc: Number of slices by type:\n");
-  for (int i = 0; 2 >= i; ++i)
-    if (0 != m_stats.num_slices_by_type[i])
-      mxdebug(fmt::format("  {0}: {1}\n", s_type_names[i], m_stats.num_slices_by_type[i]));
 }
 
 bool
@@ -148,18 +123,6 @@ es_parser_c::add_parameter_sets_to_extra_data() {
   std::copy(old_extra_data.begin(), old_extra_data.end(), inserter);
 
   m_extra_data_initial.clear();
-}
-
-void
-es_parser_c::add_nalu_to_extra_data(memory_cptr const &nalu,
-                                    extra_data_position_e position) {
-  if (position == extra_data_position_e::dont_store)
-    return;
-
-  nalu->take_ownership();
-
-  auto &container = position == extra_data_position_e::pre  ? m_extra_data_pre : m_extra_data_initial;
-  container.push_back(nalu);
 }
 
 void
@@ -717,34 +680,6 @@ es_parser_c::set_configuration_record(memory_cptr const &bytes) {
 }
 
 void
-es_parser_c::dump_info()
-  const {
-  auto dump_ps = [](std::string const &type, std::vector<memory_cptr> const &buffers) {
-    mxinfo(fmt::format("Dumping {0}:\n", type));
-    for (int idx = 0, num_entries = buffers.size(); idx < num_entries; ++idx)
-      mxinfo(fmt::format("  {0} size {1} adler32 0x{2:08x}\n", idx, buffers[idx]->get_size(), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *buffers[idx])));
-  };
-
-  dump_ps("m_vps",                m_vps_list);
-  dump_ps("m_sps",                m_sps_list);
-  dump_ps("m_pps_list",           m_pps_list);
-  dump_ps("m_extra_data_pre",     m_extra_data_pre);
-  dump_ps("m_extra_data_initial", m_extra_data_initial);
-  dump_ps("m_pending_frame_data", m_pending_frame_data);
-
-  mxinfo("Dumping m_frames_out:\n");
-  for (auto &frame : m_frames_out) {
-    mxinfo(fmt::format("  size {0} key {1} start {2} end {3} ref1 {4} adler32 0x{5:08x}\n",
-                       frame.m_data->get_size(),
-                       frame.m_keyframe,
-                       mtx::string::format_timestamp(frame.m_start),
-                       mtx::string::format_timestamp(frame.m_end),
-                       mtx::string::format_timestamp(frame.m_ref1),
-                       mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *frame.m_data)));
-  }
-}
-
-void
 es_parser_c::init_nalu_names()
   const {
   if (!ms_nalu_names_by_type.empty())
@@ -816,6 +751,11 @@ es_parser_c::init_nalu_names()
     { NALU_TYPE_UNSPEC62,      "unspec62"      },
     { NALU_TYPE_UNSPEC63,      "unspec63"      },
   };
+
+  ms_slice_names_by_type[0] = "B";
+  ms_slice_names_by_type[1] = "P";
+  ms_slice_names_by_type[2] = "I";
+  ms_slice_names_by_type[3] = "unknown";
 }
 
 }                              // namespace mtx::hevc

@@ -20,6 +20,13 @@
 namespace mtx::avc_hevc {
 
 class es_parser_c {
+public:
+  enum class extra_data_position_e {
+    pre,
+    initial,
+    dont_store,
+  };
+
 protected:
   int m_nalu_size_length{4};
 
@@ -33,6 +40,7 @@ protected:
   bool m_par_found{};
   mtx_mp_rational_t m_par{};
 
+  std::vector<memory_cptr> m_extra_data_pre, m_extra_data_initial, m_pending_frame_data;
   std::deque<frame_t> m_frames, m_frames_out;
 
   std::deque<std::pair<int64_t, uint64_t>> m_provided_timestamps;
@@ -51,9 +59,9 @@ protected:
   bool m_first_cleanup{true}, m_simple_picture_order{}, m_discard_actual_frames{};
 
   std::string const m_debug_type;
-  debugging_option_c m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timestamps, m_debug_sps_info;
+  debugging_option_c m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timestamps, m_debug_sps_info, m_debug_statistics;
 
-  static std::unordered_map<int, std::string> ms_nalu_names_by_type;
+  static std::unordered_map<int, std::string> ms_nalu_names_by_type, ms_slice_names_by_type;
 
   struct stats_t {
     std::vector<int> num_slices_by_type, num_nalus_by_type;
@@ -137,8 +145,14 @@ public:
 
   virtual void init_nalu_names() const = 0;
 
+  void dump_info() const;
+
+protected:
+  void add_nalu_to_extra_data(memory_cptr const &nalu, extra_data_position_e position = extra_data_position_e::pre);
+  void debug_dump_statistics() const;
+
 public:
-  std::string get_nalu_type_name(int type);
+  std::string get_nalu_type_name(int type) const;
 };
 
 }

@@ -25,15 +25,8 @@ namespace mtx::hevc {
 
 class es_parser_c: public mtx::avc_hevc::es_parser_c {
 protected:
-  enum class extra_data_position_e {
-    pre,
-    initial,
-    dont_store,
-  };
-
   int m_prev_pic_order_cnt_lsb{}, m_prev_pic_order_cnt_msb{};
 
-  std::vector<memory_cptr> m_extra_data_pre, m_extra_data_initial, m_pending_frame_data;
   std::vector<vps_info_t> m_vps_info_list;
   std::vector<sps_info_t> m_sps_info_list;
   std::vector<pps_info_t> m_pps_info_list;
@@ -48,7 +41,6 @@ protected:
 
 public:
   es_parser_c();
-  ~es_parser_c();
 
   virtual void flush() override;
   virtual void clear() override;
@@ -71,8 +63,6 @@ public:
   bool headers_parsed() const;
 
   void normalize_parameter_sets(bool normalize = true);
-
-  void dump_info() const;
 
   virtual int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const override;
 
@@ -101,7 +91,6 @@ protected:
   void flush_incomplete_frame();
   virtual void calculate_frame_order() override;
   void add_parameter_sets_to_extra_data();
-  void add_nalu_to_extra_data(memory_cptr const &nalu, extra_data_position_e position = extra_data_position_e::pre);
   void add_nalu_to_pending_frame_data(memory_cptr const &nalu);
   void build_frame_data();
 

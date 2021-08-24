@@ -29,7 +29,6 @@ protected:
 
   std::optional<bool> m_current_key_frame_bottom_field;
 
-  std::vector<memory_cptr> m_extra_data;
   std::vector<sps_info_t> m_sps_info_list;
   std::vector<pps_info_t> m_pps_info_list;
 
@@ -39,7 +38,6 @@ protected:
 
 public:
   es_parser_c();
-  ~es_parser_c();
 
   bool has_timing_info() const {
     return !m_sps_info_list.empty() && m_sps_info_list[0].timing_info_valid();
@@ -74,8 +72,6 @@ public:
   virtual void handle_nalu(memory_cptr const &nalu, uint64_t nalu_pos) override;
 
   bool headers_parsed() const;
-
-  void dump_info() const;
 
   virtual int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const override;
 
