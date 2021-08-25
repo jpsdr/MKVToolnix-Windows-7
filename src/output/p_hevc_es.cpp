@@ -25,7 +25,7 @@ hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reade
 {
   set_codec_id(MKV_V_MPEGH_HEVC);
 
-  m_parser.normalize_parameter_sets(!mtx::hacks::is_engaged(mtx::hacks::DONT_NORMALIZE_PARAMETER_SETS));
+  m_parser.set_normalize_parameter_sets(!mtx::hacks::is_engaged(mtx::hacks::DONT_NORMALIZE_PARAMETER_SETS));
 }
 
 connection_result_e

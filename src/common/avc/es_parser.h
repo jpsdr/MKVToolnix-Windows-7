@@ -89,9 +89,9 @@ protected:
 
   int64_t duration_for_impl(unsigned int sps, bool field_pic_flag) const;
   virtual void calculate_frame_order() override;
+  virtual bool does_nalu_get_included_in_extra_data(memory_c const &nalu) const override;
 
   virtual void init_nalu_names() const override;
-
 };
 
 }

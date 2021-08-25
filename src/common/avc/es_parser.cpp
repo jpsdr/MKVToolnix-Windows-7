@@ -21,6 +21,7 @@
 #include "common/endian.h"
 #include "common/frame_timing.h"
 #include "common/hacks.h"
+#include "common/list_utils.h"
 #include "common/mpeg.h"
 #include "common/strings/formatting.h"
 
@@ -75,6 +76,13 @@ es_parser_c::flush_incomplete_frame() {
   m_frames.push_back(m_incomplete_frame);
   m_incomplete_frame.clear();
   m_have_incomplete_frame = false;
+}
+
+bool
+es_parser_c::does_nalu_get_included_in_extra_data(memory_c const &nalu)
+  const {
+  auto nalu_type = (nalu.get_buffer())[0] & 0x1f;
+  return mtx::included_in(nalu_type, NALU_TYPE_SEQ_PARAM, NALU_TYPE_PIC_PARAM);
 }
 
 void

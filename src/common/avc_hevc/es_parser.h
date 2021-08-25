@@ -56,7 +56,7 @@ protected:
 
   std::deque<std::pair<memory_cptr, uint64_t>> m_unhandled_nalus;
 
-  bool m_first_cleanup{true}, m_simple_picture_order{}, m_discard_actual_frames{};
+  bool m_first_cleanup{true}, m_simple_picture_order{}, m_discard_actual_frames{}, m_normalize_parameter_sets{};
 
   std::string const m_debug_type;
   debugging_option_c m_debug_keyframe_detection, m_debug_nalu_types, m_debug_timestamps, m_debug_sps_info, m_debug_statistics;
@@ -95,6 +95,8 @@ public:
   void set_keep_ar_info(bool keep);
 
   void set_next_i_slice_is_key_frame();
+
+  void set_normalize_parameter_sets(bool normalize = true);
 
   void set_nalu_size_length(int nalu_size_length);
   int get_nalu_size_length() const;
@@ -149,6 +151,12 @@ public:
 
 protected:
   void add_nalu_to_extra_data(memory_cptr const &nalu, extra_data_position_e position = extra_data_position_e::pre);
+  void add_nalu_to_pending_frame_data(memory_cptr const &nalu);
+  void add_parameter_sets_to_extra_data();
+  void build_frame_data();
+
+  virtual bool does_nalu_get_included_in_extra_data(memory_c const &nalu) const = 0;
+
   void debug_dump_statistics() const;
 
 public:

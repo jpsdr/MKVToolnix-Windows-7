@@ -48,7 +48,7 @@ hevc_video_packetizer_c(generic_reader_c *p_reader,
 
   set_codec_private(m_ti.m_private_data);
 
-  p.parser->normalize_parameter_sets(!mtx::hacks::is_engaged(mtx::hacks::DONT_NORMALIZE_PARAMETER_SETS));
+  p.parser->set_normalize_parameter_sets(!mtx::hacks::is_engaged(mtx::hacks::DONT_NORMALIZE_PARAMETER_SETS));
   p.parser->set_configuration_record(m_hcodec_private);
 }
 

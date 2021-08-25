@@ -35,8 +35,6 @@ protected:
 
   mtx::dovi::dovi_rpu_data_header_t m_dovi_rpu_data_header;
 
-  bool m_normalize_parameter_sets{};
-
   debugging_option_c m_debug_parameter_sets{"hevc_parser|hevc_parameter_sets"}, m_debug_frame_order{"hevc_parser|hevc_frame_order"};
 
 public:
@@ -61,8 +59,6 @@ public:
   virtual void handle_nalu(memory_cptr const &nalu, uint64_t nalu_pos) override;
 
   bool headers_parsed() const;
-
-  void normalize_parameter_sets(bool normalize = true);
 
   virtual int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const override;
 
@@ -90,9 +86,7 @@ protected:
   void handle_slice_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
   void flush_incomplete_frame();
   virtual void calculate_frame_order() override;
-  void add_parameter_sets_to_extra_data();
-  void add_nalu_to_pending_frame_data(memory_cptr const &nalu);
-  void build_frame_data();
+  virtual bool does_nalu_get_included_in_extra_data(memory_c const &nalu) const override;
 
   virtual void init_nalu_names() const override;
 };

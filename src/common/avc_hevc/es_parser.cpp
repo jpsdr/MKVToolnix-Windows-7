@@ -52,6 +52,11 @@ es_parser_c::set_next_i_slice_is_key_frame() {
 }
 
 void
+es_parser_c::set_normalize_parameter_sets(bool normalize) {
+  m_normalize_parameter_sets = normalize;
+}
+
+void
 es_parser_c::maybe_dump_raw_data(unsigned char const *buffer,
                                  std::size_t size) {
   static debugging_option_c s_dump_raw_data{fmt::format("{0}_es_parser_dump_raw_data", m_debug_type)};
@@ -252,6 +257,72 @@ es_parser_c::add_nalu_to_extra_data(memory_cptr const &nalu,
 
   auto &container = position == extra_data_position_e::pre  ? m_extra_data_pre : m_extra_data_initial;
   container.push_back(nalu);
+}
+
+void
+es_parser_c::add_nalu_to_pending_frame_data(memory_cptr const &nalu) {
+  nalu->take_ownership();
+  m_pending_frame_data.emplace_back(nalu);
+}
+
+void
+es_parser_c::add_parameter_sets_to_extra_data() {
+  std::unordered_map<uint32_t, bool> is_in_extra_data;
+
+  for (auto const &data : m_extra_data_pre) {
+    if (does_nalu_get_included_in_extra_data(*data))
+      return;
+
+    is_in_extra_data[mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *data)] = true;
+  }
+
+  auto old_extra_data = std::move(m_extra_data_pre);
+
+  m_extra_data_pre.clear();
+  m_extra_data_pre.reserve(m_vps_list.size() + m_sps_list.size() + m_pps_list.size() + old_extra_data.size() + m_extra_data_initial.size());
+
+  auto inserter = std::back_inserter(m_extra_data_pre);
+
+  std::copy(m_vps_list.begin(), m_vps_list.end(), inserter);
+  std::copy(m_sps_list.begin(), m_sps_list.end(), inserter);
+  std::copy(m_pps_list.begin(), m_pps_list.end(), inserter);
+
+  for (auto const &data : m_extra_data_initial)
+    if (!is_in_extra_data[mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *data)])
+      inserter = data;
+
+  std::copy(old_extra_data.begin(), old_extra_data.end(), inserter);
+
+  m_extra_data_initial.clear();
+}
+
+void
+es_parser_c::build_frame_data() {
+  if (m_incomplete_frame.m_keyframe && m_normalize_parameter_sets)
+    add_parameter_sets_to_extra_data();
+
+  auto all_nalus = std::move(m_extra_data_pre);
+  all_nalus.reserve(all_nalus.size() + m_pending_frame_data.size());
+
+  std::copy(m_pending_frame_data.begin(), m_pending_frame_data.end(), std::back_inserter(all_nalus));
+
+  m_extra_data_pre.clear();
+  m_pending_frame_data.clear();
+
+  auto final_size = 0;
+
+  for (auto const &nalu : all_nalus)
+    final_size += m_nalu_size_length + nalu->get_size();
+
+  m_incomplete_frame.m_data = memory_c::alloc(final_size);
+  auto dest                 = m_incomplete_frame.m_data->get_buffer();
+
+  for (auto const &nalu : all_nalus) {
+    mtx::mpeg::write_nalu_size(dest, nalu->get_size(), m_nalu_size_length);
+    std::memcpy(dest + m_nalu_size_length, nalu->get_buffer(), nalu->get_size());
+
+    dest += m_nalu_size_length + nalu->get_size();
+  }
 }
 
 void
