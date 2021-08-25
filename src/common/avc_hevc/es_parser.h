@@ -152,6 +152,7 @@ public:
 protected:
   void add_nalu_to_extra_data(memory_cptr const &nalu, extra_data_position_e position = extra_data_position_e::pre);
   void add_nalu_to_pending_frame_data(memory_cptr const &nalu);
+  void add_nalu_to_unhandled_nalus(memory_cptr const &nalu, uint64_t nalu_pos);
   void add_parameter_sets_to_extra_data();
   void build_frame_data();
 

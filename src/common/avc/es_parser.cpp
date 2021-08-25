@@ -148,7 +148,7 @@ void
 es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
                                uint64_t nalu_pos) {
   if (!m_configuration_record_ready) {
-    m_unhandled_nalus.emplace_back(nalu, nalu_pos);
+    add_nalu_to_unhandled_nalus(nalu, nalu_pos);
     return;
   }
 

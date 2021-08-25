@@ -326,6 +326,13 @@ es_parser_c::build_frame_data() {
 }
 
 void
+es_parser_c::add_nalu_to_unhandled_nalus(memory_cptr const &nalu,
+                                         uint64_t nalu_pos) {
+  nalu->take_ownership();
+  m_unhandled_nalus.emplace_back(nalu, nalu_pos);
+}
+
+void
 es_parser_c::flush_unhandled_nalus() {
   for (auto const &nalu_with_pos : m_unhandled_nalus)
     handle_nalu(nalu_with_pos.first, nalu_with_pos.second);
