@@ -1,5 +1,5 @@
 /*
-   hevc_dump - A tool for dumping HEVC structures
+   xvc_dump - A tool for dumping HEVC structures
 
    Distributed under the GPL v2
    see the file COPYING for details
@@ -10,31 +10,45 @@
 
 #include "common/common_pch.h"
 
+#include <QRegularExpression>
+
+#include "common/avc/es_parser.h"
 #include "common/checksums/base_fwd.h"
 #include "common/command_line.h"
 #include "common/hevc/es_parser.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
+#include "common/qt.h"
 
+enum class codec_type_e {
+  unknown,
+  avc,
+  hevc,
+};
+static codec_type_e s_codec_type{codec_type_e::unknown};
 static bool s_is_framed{}, s_portable_format{};
 static memory_cptr s_frame;
 static uint64_t s_frame_fill{};
-static std::unique_ptr<mtx::hevc::es_parser_c> s_parser;
+static std::unique_ptr<mtx::avc_hevc::es_parser_c> s_parser;
 
 static void
 setup_help() {
-  mtx::cli::g_usage_text = "hevc_dump [options] input_file_name\n"
+  mtx::cli::g_usage_text = "xvc_dump [options] input_file_name\n"
     "\n"
     "General options:\n"
     "\n"
+    "  -4, --h264, --avc      Treat input file as an AVC/H.264 file instead of\n"
+    "                         deriving its type from its file name extension\n"
+    "  -5, --h265, --hevc     Treat input file as an HEVC/H.265 file instead of\n"
+    "                         deriving its type from its file name extension\n"
     "  -f, --framed           Source is ISO/IEC 14496-15 bitstream (NALUs prefixed\n"
-    "                         with size field) instead of an ITU-T H.265 Annex B\n"
-    "                         bitstream.\n"
+    "                         with size field) instead of an ITU-T H.264/H.265\n"
+    "                         Annex B bitstream.\n"
     "  -p, --portable-format  Output a format that's comparable with e.g. 'diff'\n"
-    "                         between the ISO/IEC 14496-15 bitstream and ITU-T H.265\n"
-    "                         Annex B bitsream variants by not outputting the NALU's\n"
-    "                         position (both modes) nor the marker size (Annex B\n"
-    "                         mode).\n"
+    "                         between the ISO/IEC 14496-15 bitstream and ITU-T\n"
+    "                         H.264/H.265 Annex B bitsream variants by not\n"
+    "                         outputting the NALU's position (both modes) nor the\n"
+    "                         marker size (Annex B mode).\n"
     "  -h, --help             This help text\n"
     "  -V, --version          Print version information\n";
 }
@@ -44,7 +58,13 @@ parse_args(std::vector<std::string> &args) {
   std::string file_name;
 
   for (auto & arg: args) {
-    if ((arg == "-f") || (arg == "--framed"))
+    if ((arg == "-4") || (arg == "--h264") || (arg == "--avc"))
+      s_codec_type = codec_type_e::avc;
+
+    else if ((arg == "-5") || (arg == "--h265") || (arg == "--hevc"))
+      s_codec_type = codec_type_e::hevc;
+
+    else if ((arg == "-f") || (arg == "--framed"))
       s_is_framed = true;
 
     else if ((arg == "-p") || (arg == "--portable-format"))
@@ -59,6 +79,19 @@ parse_args(std::vector<std::string> &args) {
 
   if (file_name.empty())
     mxerror(Y("No file name given\n"));
+
+  if (s_codec_type == codec_type_e::unknown) {
+    auto file_name_q = Q(file_name);
+
+    if (file_name_q.contains(QRegularExpression{Q("\\.(avc|[hx]?264)$"), QRegularExpression::CaseInsensitiveOption}))
+      s_codec_type = codec_type_e::avc;
+
+    else if (file_name_q.contains(QRegularExpression{Q("\\.(hevc|[hx]?265)$"), QRegularExpression::CaseInsensitiveOption}))
+      s_codec_type = codec_type_e::hevc;
+
+    else
+      mxerror("The file type could not be derived from the file name's extension. Please specify the corresponding command line option (see 'xvc_dump --help').\n");
+  }
 
   return file_name;
 }
@@ -158,7 +191,7 @@ parse_file(std::string const &file_name) {
     auto next_bytes      = in.read_uint32_be();
     previous_pos         = pos;
     previous_marker_size = marker_size;
-    previous_type        = (next_bytes >> (24 + 1)) & 0x3f;
+    previous_type        = s_codec_type == codec_type_e::avc ? (next_bytes >> 24) & 0x1f : (next_bytes >> (24 + 1)) & 0x3f;
     marker               = (1ull << 24) | (next_bytes & 0x00ff'ffff);
 
     for (auto idx = 0; idx < 4; ++idx)
@@ -179,7 +212,8 @@ parse_file_framed(std::string const &file_name) {
 
   while ((pos + 5) < file_size) {
     auto nalu_size = in.read_uint32_be();
-    auto nalu_type = (in.read_uint8() >> 1) & 0x3f;
+    auto next_byte = in.read_uint8();
+    auto nalu_type = s_codec_type == codec_type_e::avc ? next_byte & 0x1f : (next_byte >> 1) & 0x3f;
 
     if (!nalu_size)
       return;
@@ -196,10 +230,8 @@ parse_file_framed(std::string const &file_name) {
 int
 main(int argc,
      char **argv) {
-  mtx_common_init("hevc_dump", argv[0]);
+  mtx_common_init("xvc_dump", argv[0]);
   setup_help();
-
-  s_parser = std::make_unique<mtx::hevc::es_parser_c>();
 
   auto args = mtx::cli::args_in_utf8(argc, argv);
   while (mtx::cli::handle_common_args(args, "-r"))
@@ -207,10 +239,20 @@ main(int argc,
 
   auto file_name = parse_args(args);
 
+  if (s_codec_type == codec_type_e::avc)
+    s_parser.reset(new mtx::avc::es_parser_c);
+
+  else if (s_codec_type == codec_type_e::hevc)
+    s_parser.reset(new mtx::hevc::es_parser_c);
+
+  s_parser->init_nalu_names();
+
   if (s_is_framed)
     parse_file_framed(file_name);
   else
     parse_file(file_name);
+
+  s_parser.reset();
 
   mxexit();
 }

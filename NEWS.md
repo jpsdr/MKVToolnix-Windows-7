@@ -18,6 +18,8 @@
   it is still set to "lowest".
 * all: IETF BCP 47/RFC 5646 language tags: implemented support for officially
   registered IANA language tag extensions.
+* HEVC dumper tool: the tool has been renamed to `xvc_dump` and extended to be
+  able to dump AVC/H.264 bitstreams, too.
 
 ## Bug fixes
 
