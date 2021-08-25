@@ -25,8 +25,16 @@ enum class codec_type_e {
   avc,
   hevc,
 };
+
+enum class framing_type_e {
+  unknown,
+  iso_14496_15,
+  annex_b,
+};
+
 static codec_type_e s_codec_type{codec_type_e::unknown};
-static bool s_is_framed{}, s_portable_format{};
+static framing_type_e s_framing_type{framing_type_e::unknown};
+static bool s_portable_format{};
 static memory_cptr s_frame;
 static uint64_t s_frame_fill{};
 static std::unique_ptr<mtx::avc_hevc::es_parser_c> s_parser;
@@ -41,9 +49,12 @@ setup_help() {
     "                         deriving its type from its file name extension\n"
     "  -5, --h265, --hevc     Treat input file as an HEVC/H.265 file instead of\n"
     "                         deriving its type from its file name extension\n"
-    "  -f, --framed           Source is ISO/IEC 14496-15 bitstream (NALUs prefixed\n"
-    "                         with size field) instead of an ITU-T H.264/H.265\n"
-    "                         Annex B bitstream.\n"
+    "  -a, --annex-b          Treat input file as an ITU-T H.264/H.265 Annex B\n"
+    "                         bitstream instead of trying to derive the type\n"
+    "                         from the content"
+    "  -i, --iso-14496-15     Treat input file as an ISO/IEC 14496-15 bitstream\n"
+    "                         (NALUs prefixed with a four-byte size field) instead\n"
+    "                         of trying to derive the type from the content"
     "  -p, --portable-format  Output a format that's comparable with e.g. 'diff'\n"
     "                         between the ISO/IEC 14496-15 bitstream and ITU-T\n"
     "                         H.264/H.265 Annex B bitsream variants by not\n"
@@ -51,6 +62,33 @@ setup_help() {
     "                         marker size (Annex B mode).\n"
     "  -h, --help             This help text\n"
     "  -V, --version          Print version information\n";
+}
+
+static framing_type_e
+detect_framing_type(std::string const &file_name) {
+  mm_file_io_c in{file_name, MODE_READ};
+
+  auto marker_or_size = in.read_uint32_be();
+
+  if (marker_or_size == mtx::avc_hevc::NALU_START_CODE)
+    return framing_type_e::annex_b;
+
+  if ((marker_or_size >> 8) != mtx::avc_hevc::NALU_START_CODE)
+    return framing_type_e::iso_14496_15;
+
+  try {
+    int tries = 0;
+    while (tries < 5) {
+      in.setFilePointer(marker_or_size, libebml::seek_current);
+      marker_or_size = in.read_uint32_be();
+    }
+
+    return framing_type_e::iso_14496_15;
+
+  } catch (mtx::mm_io::exception &) {
+  }
+
+  return framing_type_e::annex_b;
 }
 
 static std::string
@@ -64,8 +102,11 @@ parse_args(std::vector<std::string> &args) {
     else if ((arg == "-5") || (arg == "--h265") || (arg == "--hevc"))
       s_codec_type = codec_type_e::hevc;
 
-    else if ((arg == "-f") || (arg == "--framed"))
-      s_is_framed = true;
+    else if ((arg == "-a") || (arg == "--annex-b"))
+      s_framing_type = framing_type_e::annex_b;
+
+    else if ((arg == "-i") || (arg == "--iso-14496-15"))
+      s_framing_type = framing_type_e::iso_14496_15;
 
     else if ((arg == "-p") || (arg == "--portable-format"))
       s_portable_format = true;
@@ -91,6 +132,13 @@ parse_args(std::vector<std::string> &args) {
 
     else
       mxerror("The file type could not be derived from the file name's extension. Please specify the corresponding command line option (see 'xvc_dump --help').\n");
+  }
+
+  if (s_framing_type == framing_type_e::unknown) {
+    s_framing_type = detect_framing_type(file_name);
+
+    if (s_framing_type == framing_type_e::unknown)
+      mxerror("The framing type could not be derived from the file's content. Please specify the corresponding command line option (see 'xvc_dump --help').\n");
   }
 
   return file_name;
@@ -147,10 +195,16 @@ show_nalu(uint32_t type,
 }
 
 static void
-parse_file(std::string const &file_name) {
+parse_file_annex_b(std::string const &file_name) {
   auto in_ptr    = open_file(file_name);
   auto &in       = *in_ptr;
   auto file_size = static_cast<uint64_t>(in.get_size());
+
+  mxinfo(fmt::format("{0}: {1}, ITU-T H.26{2} Annex B, {3} bytes\n",
+                     file_name,
+                     s_codec_type == codec_type_e::avc ? "AVC/H.264" : "HEVC/H.265",
+                     s_codec_type == codec_type_e::avc ? 4           : 5,
+                     file_size));
 
   if (4 > file_size)
     return;
@@ -203,10 +257,12 @@ parse_file(std::string const &file_name) {
 }
 
 static void
-parse_file_framed(std::string const &file_name) {
+parse_file_iso_14496_15(std::string const &file_name) {
   auto in_ptr    = open_file(file_name);
   auto &in       = *in_ptr;
   auto file_size = static_cast<uint64_t>(in.get_size());
+
+  mxinfo(fmt::format("{0}: {1}, ISO/IEC 14496-15, {2} bytes\n", file_name, s_codec_type == codec_type_e::avc ? "AVC/H.264" : "HEVC/H.265", file_size));
 
   uint64_t pos{};
 
@@ -247,10 +303,10 @@ main(int argc,
 
   s_parser->init_nalu_names();
 
-  if (s_is_framed)
-    parse_file_framed(file_name);
+  if (s_framing_type == framing_type_e::iso_14496_15)
+    parse_file_iso_14496_15(file_name);
   else
-    parse_file(file_name);
+    parse_file_annex_b(file_name);
 
   s_parser.reset();
 
