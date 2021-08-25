@@ -165,9 +165,9 @@ es_parser_c::handle_vps_nalu(memory_cptr const &nalu,
   } else if (m_vps_info_list[i].checksum != vps_info.checksum) {
     mxdebug_if(m_debug_parameter_sets, fmt::format("hevc: VPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", vps_info.id, m_vps_info_list[i].checksum, vps_info.checksum));
 
-    m_vps_info_list[i] = vps_info;
-    m_vps_list[i]      = nalu->clone();
-    m_configuration_record_changed    = true;
+    m_vps_info_list[i]             = vps_info;
+    m_vps_list[i]                  = nalu->clone();
+    m_configuration_record_changed = true;
 
     // Update codec private if needed
     if (m_codec_private.vps_data_id == (int) vps_info.id)
@@ -242,12 +242,12 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu,
 
   if (update_codec_private) {
     m_codec_private.min_spatial_segmentation_idc = sps_info.min_spatial_segmentation_idc;
-    m_codec_private.chroma_format_idc = sps_info.chroma_format_idc;
-    m_codec_private.bit_depth_luma_minus8 = sps_info.bit_depth_luma_minus8;
-    m_codec_private.bit_depth_chroma_minus8 = sps_info.bit_depth_chroma_minus8;
-    m_codec_private.max_sub_layers_minus1 = sps_info.max_sub_layers_minus1;
-    m_codec_private.temporal_id_nesting_flag = sps_info.temporal_id_nesting_flag;
-    m_codec_private.sps_data_id = sps_info.id;
+    m_codec_private.chroma_format_idc            = sps_info.chroma_format_idc;
+    m_codec_private.bit_depth_luma_minus8        = sps_info.bit_depth_luma_minus8;
+    m_codec_private.bit_depth_chroma_minus8      = sps_info.bit_depth_chroma_minus8;
+    m_codec_private.max_sub_layers_minus1        = sps_info.max_sub_layers_minus1;
+    m_codec_private.temporal_id_nesting_flag     = sps_info.temporal_id_nesting_flag;
+    m_codec_private.sps_data_id                  = sps_info.id;
   }
 
   if (use_sps_info && m_debug_sps_info)
@@ -294,9 +294,9 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu,
     if (m_pps_info_list[i].sps_id != pps_info.sps_id)
       cleanup();
 
-    m_pps_info_list[i] = pps_info;
-    m_pps_list[i]      = nalu->clone();
-    m_configuration_record_changed    = true;
+    m_pps_info_list[i]             = pps_info;
+    m_pps_list[i]                  = nalu->clone();
+    m_configuration_record_changed = true;
   }
 
   add_nalu_to_extra_data(nalu, extra_data_position);
