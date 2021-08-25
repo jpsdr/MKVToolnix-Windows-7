@@ -334,6 +334,11 @@ es_parser_c::add_nalu_to_unhandled_nalus(memory_cptr const &nalu,
 
 void
 es_parser_c::flush_unhandled_nalus() {
+  if (m_unhandled_nalus.empty())
+    return;
+
+  mxdebug_if(m_debug_nalu_types, fmt::format("flushing {0} unhandled NALUs\n", m_unhandled_nalus.size()));
+
   for (auto const &nalu_with_pos : m_unhandled_nalus)
     handle_nalu(nalu_with_pos.first, nalu_with_pos.second);
 
