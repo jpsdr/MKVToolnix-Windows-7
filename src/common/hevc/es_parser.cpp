@@ -36,8 +36,7 @@ namespace mtx::hevc {
 es_parser_c::es_parser_c()
   : mtx::avc_hevc::es_parser_c{"hevc"s, 3, 64}
 {
-  if (m_debug_statistics)
-    init_nalu_names();
+  init_nalu_names();
 }
 
 bool

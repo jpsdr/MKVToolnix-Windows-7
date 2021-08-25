@@ -30,8 +30,7 @@ namespace mtx::avc {
 es_parser_c::es_parser_c()
   : mtx::avc_hevc::es_parser_c{"avc"s, 11, 13}
 {
-  if (m_debug_statistics)
-    init_nalu_names();
+  init_nalu_names();
 }
 
 bool
