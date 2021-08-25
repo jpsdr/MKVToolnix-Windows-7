@@ -1,5 +1,5 @@
 /*
-   hevc_dump - A tool for dumping HEVC structures
+   pgs_dump - A tool for dumping HEVC structures
 
    Distributed under the GPL v2
    see the file COPYING for details
