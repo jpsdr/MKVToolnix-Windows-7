@@ -336,4 +336,42 @@ TEST(BCP47LanguageTags, ExtensionsFormatting) {
   EXPECT_EQ("ja-t-test-u-attr-co-phonebk"s, language_c::parse("ja-U-AttR-CO-phoNEbk-T-Test").format());
 }
 
+TEST(BCP47LanguageTags, Matching) {
+  EXPECT_FALSE(language_c{}                  .matches(language_c{}));
+  EXPECT_FALSE(language_c{}                  .matches(language_c::parse("es")));
+  EXPECT_FALSE(language_c::parse("es")       .matches(language_c{}));
+
+  EXPECT_TRUE(language_c::parse("es")        .matches(language_c::parse("es")));
+  EXPECT_TRUE(language_c::parse("es-MX")     .matches(language_c::parse("es")));
+  EXPECT_TRUE(language_c::parse("es-Latn-MX").matches(language_c::parse("es")));
+
+  EXPECT_TRUE(language_c::parse("es-MX")     .matches(language_c::parse("es-MX")));
+  EXPECT_TRUE(language_c::parse("es-Latn-MX").matches(language_c::parse("es-Latn-MX")));
+
+  EXPECT_TRUE(language_c::parse("es-Latn-MX").matches(language_c::parse("es-MX")));
+
+  EXPECT_FALSE(language_c::parse("es")       .matches(language_c::parse("es-MX")));
+  EXPECT_FALSE(language_c::parse("es")       .matches(language_c::parse("es-Latn-MX")));
+}
+
+TEST(BCP47LanguageTags, FindBestMatch) {
+  using V = std::vector<language_c>;
+
+  EXPECT_FALSE(language_c{}           .find_best_match({}).is_valid());
+  EXPECT_FALSE(language_c::parse("es").find_best_match({}).is_valid());
+  EXPECT_FALSE(language_c{}           .find_best_match(V{ language_c{} }).is_valid() );
+  EXPECT_FALSE(language_c{}           .find_best_match(V{ language_c::parse("es") }).is_valid() );
+
+  EXPECT_FALSE(language_c::parse("es")   .find_best_match(V{ language_c::parse("de"),    language_c::parse("fr") }).is_valid());
+  EXPECT_FALSE(language_c::parse("es")   .find_best_match(V{ language_c::parse("es-US"), language_c::parse("es-ES") }).is_valid());
+  EXPECT_FALSE(language_c::parse("es-MX").find_best_match(V{ language_c::parse("es-US"), language_c::parse("es-ES") }).is_valid());
+
+  EXPECT_EQ(language_c::parse("es"),      language_c::parse("es")        .find_best_match(V{ language_c::parse("es") }));
+  EXPECT_EQ(language_c::parse("es"),      language_c::parse("es")        .find_best_match(V{ language_c::parse("de"),      language_c::parse("es") }));
+  EXPECT_EQ(language_c::parse("es"),      language_c::parse("es-Latn-MX").find_best_match(V{ language_c::parse("de"),      language_c::parse("es"), language_c::parse("fr") }));
+  EXPECT_EQ(language_c::parse("es"),      language_c::parse("es-Latn-MX").find_best_match(V{ language_c::parse("es-US"),   language_c::parse("es"), language_c::parse("es-ES") }));
+  EXPECT_EQ(language_c::parse("es-MX"),   language_c::parse("es-Latn-MX").find_best_match(V{ language_c::parse("es-US"),   language_c::parse("es"), language_c::parse("es-MX") }));
+  EXPECT_EQ(language_c::parse("es-Latn"), language_c::parse("es-Latn-MX").find_best_match(V{ language_c::parse("es-Latn"), language_c::parse("es"), language_c::parse("es-MX") }));
+}
+
 }

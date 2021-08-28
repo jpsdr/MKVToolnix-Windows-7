@@ -26,6 +26,9 @@ public:
     extension_t(std::string const &identifier_, std::vector<std::string> const &extensions_);
 
     std::string format() const noexcept;
+
+    bool operator ==(extension_t const &other) const noexcept;
+    bool operator !=(extension_t const &other) const noexcept;
   };
 
 protected:
@@ -65,6 +68,9 @@ public:
 
   bool operator ==(language_c const &other) const noexcept;
   bool operator !=(language_c const &other) const noexcept;
+
+  bool matches(language_c const &match) const noexcept;
+  language_c find_best_match(std::vector<language_c> const &potential_matches) const noexcept;
 
   language_c &set_valid(bool valid);
   language_c &set_language(std::string const &language);

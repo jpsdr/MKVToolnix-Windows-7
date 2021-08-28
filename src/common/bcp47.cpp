@@ -51,6 +51,21 @@ language_c::extension_t::format()
   return fmt::format("{0}-{1}", identifier, mtx::string::join(extensions, "-"));
 }
 
+bool
+language_c::extension_t::operator ==(extension_t const &other)
+  const noexcept {
+  if (identifier != other.identifier)
+    return false;
+
+  return extensions == extensions;
+}
+
+bool
+language_c::extension_t::operator !=(extension_t const &other)
+  const noexcept {
+  return !(*this == other);
+}
+
 // ------------------------------------------------------------
 
 void
@@ -619,6 +634,62 @@ bool
 language_c::operator !=(language_c const &other)
   const noexcept {
   return format() != other.format();
+}
+
+bool
+language_c::matches(language_c const &match)
+  const noexcept {
+  if (!is_valid() || !match.is_valid())
+    return false;
+
+  if (!match.m_language.empty() && (m_language != match.m_language))
+    return false;
+
+  if (!match.m_extended_language_subtags.empty() && (m_extended_language_subtags != match.m_extended_language_subtags))
+    return false;
+
+  if (!match.m_script.empty() && (m_script != match.m_script))
+    return false;
+
+  if (!match.m_region.empty() && (m_region != match.m_region))
+    return false;
+
+  if (!match.m_variants.empty() && (m_variants != match.m_variants))
+    return false;
+
+  if (!match.m_extensions.empty() && (m_extensions != match.m_extensions))
+    return false;
+
+  if (!match.m_private_use.empty() && (m_private_use != match.m_private_use))
+    return false;
+
+  return true;
+}
+
+language_c
+language_c::find_best_match(std::vector<language_c> const &potential_matches)
+  const noexcept {
+  language_c best_match;
+  auto num_components_best_match = 0;
+
+  for (auto const &potential_match : potential_matches) {
+    if (!matches(potential_match))
+      continue;
+
+    auto num_components = 1;
+    auto formatted      = potential_match.format();
+
+    for (auto const &chr : formatted)
+      if (chr == '-')
+        ++num_components;
+
+    if (num_components > num_components_best_match) {
+      best_match                = potential_match;
+      num_components_best_match = num_components;
+    }
+  }
+
+  return best_match;
 }
 
 void
