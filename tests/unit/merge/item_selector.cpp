@@ -1,6 +1,5 @@
 #include "common/common_pch.h"
 
-#include "common/bcp47.h"
 #include "merge/item_selector.h"
 
 #include "gtest/gtest.h"
@@ -164,6 +163,35 @@ TEST(ItemSelector, ReversedIDsAndLanguages) {
   EXPECT_TRUE(is.selected(54));
   EXPECT_TRUE(is.selected(54, mtx::bcp47::language_c::parse("fre")));
   EXPECT_FALSE(is.selected(54, mtx::bcp47::language_c::parse("eng")));
+}
+
+TEST(ItemSelector, LanguageMatching) {
+  auto is = item_selector_c<int>{};
+
+  is.add(mtx::bcp47::language_c::parse("en"));
+  is.add(mtx::bcp47::language_c::parse("en-US"));
+  is.add(mtx::bcp47::language_c::parse("en-AU"));
+  is.add(mtx::bcp47::language_c::parse("es"),    1);
+  is.add(mtx::bcp47::language_c::parse("es-ES"), 2);
+  is.add(mtx::bcp47::language_c::parse("es-MX"), 3);
+
+  EXPECT_FALSE(is.selected(42, mtx::bcp47::language_c::parse("de")));
+
+  EXPECT_TRUE(is.selected(42, mtx::bcp47::language_c::parse("en")));
+  EXPECT_TRUE(is.selected(42, mtx::bcp47::language_c::parse("en-US")));
+  EXPECT_TRUE(is.selected(42, mtx::bcp47::language_c::parse("en-AU")));
+
+  EXPECT_TRUE(is.selected(42, mtx::bcp47::language_c::parse("es")));
+  EXPECT_TRUE(is.selected(42, mtx::bcp47::language_c::parse("es-ES")));
+  EXPECT_TRUE(is.selected(42, mtx::bcp47::language_c::parse("es-MX")));
+  EXPECT_TRUE(is.selected(42, mtx::bcp47::language_c::parse("es-US")));
+
+  EXPECT_EQ(0, is.get(42, mtx::bcp47::language_c::parse("de")));
+
+  EXPECT_EQ(1, is.get(42, mtx::bcp47::language_c::parse("es")));
+  EXPECT_EQ(2, is.get(42, mtx::bcp47::language_c::parse("es-ES")));
+  EXPECT_EQ(3, is.get(42, mtx::bcp47::language_c::parse("es-MX")));
+  EXPECT_EQ(1, is.get(42, mtx::bcp47::language_c::parse("es-US")));
 }
 
 }

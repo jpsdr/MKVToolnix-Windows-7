@@ -77,17 +77,19 @@ generic_reader_c::demuxing_requested(char type,
                                      int64_t id,
                                      mtx::bcp47::language_c const &language)
   const {
-  auto const *tracks = 'v' == type ? &m_ti.m_vtracks
-                     : 'a' == type ? &m_ti.m_atracks
-                     : 's' == type ? &m_ti.m_stracks
-                     : 'b' == type ? &m_ti.m_btracks
-                     : 'T' == type ? &m_ti.m_track_tags
-                     :               nullptr;
+  static debugging_option_c s_debug{"demuxing_requested"};
 
-  if (!tracks)
-    mxerror(fmt::format("generic_reader_c::demuxing_requested: {1}", fmt::format(Y("Invalid track type {0}."), type)));
+  auto const &tracks = 'v' == type ? m_ti.m_vtracks
+                     : 'a' == type ? m_ti.m_atracks
+                     : 's' == type ? m_ti.m_stracks
+                     : 'b' == type ? m_ti.m_btracks
+                     :               m_ti.m_track_tags;
 
-  return tracks->selected(id, language);
+  auto result = tracks.selected(id, language);
+
+  mxdebug_if(s_debug, fmt::format("demuxing_requested? {4} type {0} id {1} language {2} item_selector {3}\n", type, id, language, tracks, result ? "yes" : "no"));
+
+  return result;
 }
 
 attach_mode_e

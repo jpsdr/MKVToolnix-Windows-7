@@ -106,7 +106,7 @@ compare_languages "#{tmp}-2", %w{ger de-Latn-DE}, %w{por pt-BR}
 
 test_merge src2, :keep_tmp => true, :args => "--language 0:de-latn-de --language 1:pt-br"
 test_merge tmp,  :keep_tmp => true, :args => "--atracks pt", :output => "#{tmp}-2"
-compare_languages "#{tmp}-2", %w{ger de-Latn-DE}
+compare_languages "#{tmp}-2", %w{ger de-Latn-DE}, %w{por pt-BR}
 
 test_merge src2, :keep_tmp => true, :args => "--language 0:de-latn-de --language 1:pt-br"
 test_merge tmp,  :keep_tmp => true, :args => "--atracks !pt-br", :output => "#{tmp}-2"
@@ -114,4 +114,4 @@ compare_languages "#{tmp}-2", %w{ger de-Latn-DE}
 
 test_merge src2, :keep_tmp => true, :args => "--language 0:de-latn-de --language 1:pt-br"
 test_merge tmp,  :keep_tmp => true, :args => "--atracks !pt", :output => "#{tmp}-2"
-compare_languages "#{tmp}-2", %w{ger de-Latn-DE}, %w{por pt-BR}
+compare_languages "#{tmp}-2", %w{ger de-Latn-DE}

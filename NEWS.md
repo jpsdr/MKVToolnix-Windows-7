@@ -21,6 +21,17 @@
 * HEVC dumper development tool: the tool has been renamed to `xvc_dump` and
   extended to be able to dump AVC/H.264 bitstreams, too. It now also detects
   the type of bitstream framing (ISO 14496-15 vs. ITU-T H.264/H.265 Annex B).
+* mkvmerge: track selection: when using language tags for selecting which
+  tracks to keep, mkvmerge will now use component-based language tag matching
+  instead of comparing them verbatim. This means that only those components
+  (language, region etc.) the user specified will be required to exist and be
+  equal. For example, if a file contains three subtitle tracks with languages
+  `es` (generic Spanish), `es-MX` (Spanish as spoken in Mexico) and `es-ES`
+  (Spanish as spoken in Spain), the user can use `--stracks es` to match all
+  three tracks or be more specific with e.g. `--stracks es-MX` which would
+  only match one track. Similarly inverting the selection with e.g. `--stracks
+  !es` would get rid of all three tracks, not just the one for the generic
+  Spanish.
 
 ## Bug fixes
 

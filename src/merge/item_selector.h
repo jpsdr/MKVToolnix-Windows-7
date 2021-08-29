@@ -32,6 +32,17 @@ public:
   {
   }
 
+  mtx::bcp47::language_c
+  best_language_match(mtx::bcp47::language_c const &language)
+    const {
+    std::vector<mtx::bcp47::language_c> potential_matches;
+
+    for (auto const &pair : m_language_items)
+      potential_matches.emplace_back(pair.first);
+
+    return language.find_best_match(potential_matches);
+  }
+
   bool
   selected(int64_t item,
            mtx::bcp47::language_c const &language_item = {})
@@ -42,8 +53,9 @@ public:
     if (m_items.empty() && m_language_items.empty())
       return !m_reversed;
 
-    auto included = (                            !m_items.empty()          && mtx::includes(m_items, item))
-                 || (language_item.is_valid() && !m_language_items.empty() && mtx::includes(m_language_items, language_item));
+    auto matched_language = best_language_match(language_item);
+    auto included         = (                            !m_items.empty()             && mtx::includes(m_items, item))
+                         || (language_item.is_valid() &&  matched_language.is_valid() && mtx::includes(m_language_items, matched_language));
     return m_reversed ? !included : included;
   }
 
@@ -54,8 +66,13 @@ public:
     if (!selected(item, language_item))
       return m_default_value;
 
-    if (!m_language_items.empty())
-      return language_item.is_valid() && mtx::includes(m_language_items, language_item) ? m_language_items.at(language_item) : m_default_value;
+    if (!m_language_items.empty()) {
+      auto matched_language = best_language_match(language_item);
+      if (matched_language.is_valid() && mtx::includes(m_language_items, matched_language))
+        return m_language_items.at(matched_language);
+
+      return m_default_value;
+    }
 
     return mtx::includes(m_items, item) ? m_items.at(item) : m_default_value;
   }
@@ -89,3 +106,36 @@ public:
     return m_items.empty() && m_language_items.empty();
   }
 };
+
+template<typename T>
+std::ostream &
+operator <<(std::ostream &out,
+            item_selector_c<T> const &selector) {
+  out << "<def:" << selector.m_default_value << " none:" << selector.m_none << " reversed:" << selector.m_reversed << " items:[";
+
+  auto first = true;
+
+  for (auto const &item : selector.m_items) {
+    if (!first)
+      out << " ";
+    first = false;
+
+    out << item.first << ":" << item.second;
+  }
+
+  out << "] lang_items:[";
+
+  first = true;
+
+  for (auto const &item : selector.m_language_items) {
+    if (!first)
+      out << " ";
+    first = false;
+
+    out << item.first << ":" << item.second;
+  }
+
+  out << "]>";
+
+  return out;
+}
