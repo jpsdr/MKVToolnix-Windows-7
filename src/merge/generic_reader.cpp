@@ -162,38 +162,18 @@ void
 generic_reader_c::check_track_ids_and_packetizers() {
   add_available_track_ids();
 
-  size_t r;
-  for (r = 0; m_requested_track_ids.size() > r; ++r) {
-    bool found = false;
-    size_t a;
-    for (a = 0; m_available_track_ids.size() > a; ++a)
-      if (m_requested_track_ids[r] == m_available_track_ids[a]) {
-        found = true;
-        break;
-      }
+  auto const available_ids = std::unordered_set<int64_t>{m_available_track_ids.begin(), m_available_track_ids.end()};
+  auto const not_found     = available_ids.end();
 
-    if (!found)
-      mxwarn_fn(m_ti.m_fname,
-                fmt::format(Y("A track with the ID {0} was requested but not found in the file. The corresponding option will be ignored.\n"),
-                            m_requested_track_ids[r]));
-  }
+  for (auto requested_id : m_requested_track_ids)
+    if (available_ids.find(requested_id) == not_found)
+      mxwarn_fn(m_ti.m_fname, fmt::format(Y("A track with the ID {0} was requested but not found in the file. The corresponding option will be ignored.\n"), requested_id));
 }
 
 void
 generic_reader_c::add_requested_track_id(int64_t id) {
-  if (-1 == id)
-    return;
-
-  bool found = false;
-  size_t i;
-  for (i = 0; i < m_requested_track_ids.size(); i++)
-    if (m_requested_track_ids[i] == id) {
-      found = true;
-      break;
-    }
-
-  if (!found)
-    m_requested_track_ids.push_back(id);
+  if (-1 != id)
+    m_requested_track_ids.insert(id);
 }
 
 int64_t

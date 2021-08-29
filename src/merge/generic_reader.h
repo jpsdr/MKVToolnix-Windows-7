@@ -15,6 +15,8 @@
 
 #include "common/common_pch.h"
 
+#include <unordered_set>
+
 #include "common/file_types.h"
 #include "common/chapters/chapters.h"
 #include "common/math_fwd.h"
@@ -41,7 +43,8 @@ public:
 
   std::vector<std::shared_ptr<generic_packetizer_c>> m_reader_packetizers;
   generic_packetizer_c *m_ptzr_first_packet{};
-  std::vector<int64_t> m_requested_track_ids, m_available_track_ids, m_used_track_ids;
+  std::vector<int64_t> m_available_track_ids, m_used_track_ids;
+  std::unordered_set<int64_t> m_requested_track_ids;
   int64_t m_max_timestamp_seen{};
   mtx::chapters::kax_cptr m_chapters;
   bool m_appending{};
