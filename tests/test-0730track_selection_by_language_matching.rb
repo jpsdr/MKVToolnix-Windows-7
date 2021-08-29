@@ -32,3 +32,4 @@ test_remux src2, %w{!es-MX}, %w{de de-CH es es-ES es-US}
 test_remux src2, %w{es}, %w{es es-ES es-MX es-US}
 test_remux src2, %w{de}, %w{de de-CH}
 test_remux src2, %w{es de}, all_languages
+test_remux src2, %w{!de}, %w{es es-ES es-MX es-US}
