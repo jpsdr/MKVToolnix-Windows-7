@@ -2,25 +2,8 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: multiplexer: deriving track languages from file names: the
-  default list of boundary characters now includes `-`. Part of the
-  implementation of #3173.
-* MKVToolNix GUI: multiplexer: deriving track languages from file names: the
-  GUI can now detect full BCP 47/RFC 5646 language tags in file names. Part of
-  the implementation of #3173.
-* MKVToolNix GUI: multiplexer: the GUI now defaults to the "lower" process
-  priority setting for new installations in order to leave more room for other
-  applications, especially interactive ones. Up to and including v59 the
-  default was the "normal" process priority. v60 changed that to "lowest",
-  which turned out to be much slower on Windows for no real gain over
-  "lower". The setting will be auto-corrected by the GUI if the settings file
-  were saved last with a version between v60.0.0.0 & v60.0.0.17 & "lowest" &
-  it is still set to "lowest".
 * all: IETF BCP 47/RFC 5646 language tags: implemented support for officially
   registered IANA language tag extensions.
-* HEVC dumper development tool: the tool has been renamed to `xvc_dump` and
-  extended to be able to dump AVC/H.264 bitstreams, too. It now also detects
-  the type of bitstream framing (ISO 14496-15 vs. ITU-T H.264/H.265 Annex B).
 * mkvmerge: track selection: when using language tags for selecting which
   tracks to keep, mkvmerge will now use component-based language tag matching
   instead of comparing them verbatim. This means that only those components
@@ -32,9 +15,39 @@
   only match one track. Similarly inverting the selection with e.g. `--stracks
   !es` would get rid of all three tracks, not just the one for the generic
   Spanish.
+* MKVToolNix GUI: multiplexer: deriving track languages from file names: the
+  GUI can now detect full BCP 47/RFC 5646 language tags in file names. Part of
+  the implementation of #3173.
+* MKVToolNix GUI: multiplexer: deriving track languages from file names: the
+  default list of boundary characters now includes `-`. Part of the
+  implementation of #3173.
+* MKVToolNix GUI: multiplexer: the GUI now defaults to the "lower" process
+  priority setting for new installations in order to leave more room for other
+  applications, especially interactive ones. Up to and including v59 the
+  default was the "normal" process priority. v60 changed that to "lowest",
+  which turned out to be much slower on Windows for no real gain over
+  "lower". The setting will be auto-corrected by the GUI if the settings file
+  were saved last with a version between v60.0.0.0 & v60.0.0.17 & "lowest" &
+  it is still set to "lowest".
+* HEVC dumper development tool: the tool has been renamed to `xvc_dump` and
+  extended to be able to dump AVC/H.264 bitstreams, too. It now also detects
+  the type of bitstream framing (ISO 14496-15 vs. ITU-T H.264/H.265 Annex B).
 
 ## Bug fixes
 
+* all: IETF BCP 47/RFC 5646 language tags: fixed a corner case of wrongfully
+  allowing scripts/variants not listed in any of the entries in the prefix
+  list when the prefix list contains prefixes restricting scripts/variants and
+  a prefix solely with the language at the same time (example: the variant
+  `ekavsk` with its prefixes `sr`, `sr-Cyrl` and `sr-Latn` where
+  e.g. `sr-ekavsk` and `sr-Cyrl-ekavsk` should be allowed but not
+  `sr-Bali-ekavsk`).
+* mkvmerge: HEVC/H.265: the frame type of B frames was often wrongfully
+  signalled as P frames instead, both with `BlockGroup` (missing second
+  references) and `SimpleBlock` ("discardable" flag not set) elements.
+* mkvmerge: SSA/ASS packetizer: the frame numbers will now be re-calculated
+  when appending SSA/ASS tracks so that frame numbers of appended tracks are
+  always strictly higher than frame numbers of the track they're appended to.
 * mkvmerge, MKVToolNix GUI's chapter editor: BCP 47/RFC 5646 language tags:
   when BCP 47 language tags are used with a language code that isn't part of
   ISO 639-2, the programs will now write a legacy language element set to
@@ -43,22 +56,9 @@
 * mkvmerge, MKVToolNix GUI's chapter editor: BCP 47/RFC 5646 language tags:
   the programs will ensure that the legacy and IETF language elements written
   will be unique within the scope of the same "chapter display" element.
-* mkvmerge: SSA/ASS packetizer: the frame numbers will now be re-calculated
-  when appending SSA/ASS tracks so that frame numbers of appended tracks are
-  always strictly higher than frame numbers of the track they're appended to.
-* all: IETF BCP 47/RFC 5646 language tags: fixed a corner case of wrongfully
-  allowing scripts/variants not listed in any of the entries in the prefix
-  list when the prefix list contains prefixes restricting scripts/variants and
-  a prefix solely with the language at the same time (example: the variant
-  `ekavsk` with its prefixes `sr`, `sr-Cyrl` and `sr-Latn` where
-  e.g. `sr-ekavsk` and `sr-Cyrl-ekavsk` should be allowed but not
-  `sr-Bali-ekavsk`).
 * mkvinfo, MKVToolNix GUI's info tool: in summary mode the frame type was
   reported wrong for `BlockGroup` elements in which the `ReferenceBlock`
   elements were located behind the `Block` element.
-* mkvmerge: HEVC/H.265: the frame type of B frames was often wrongfully
-  signalled as P frames instead, both with `BlockGroup` (missing second
-  references) and `SimpleBlock` ("discardable" flag not set) elements.
 
 ## Build system changes
 
