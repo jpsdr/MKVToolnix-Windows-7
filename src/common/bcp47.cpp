@@ -96,6 +96,39 @@ language_c::has_valid_iso639_2_code()
   return language_opt && language_opt->is_part_of_iso639_2;
 }
 
+bool
+language_c::has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code()
+  const noexcept {
+  if (!m_valid || (m_region.size() != 2))
+    return false;
+
+  auto code = mtx::string::to_lower_ascii(m_region);
+
+  if (   (code == "aa"s)
+      || (code == "zz"s)
+      || ((code[0] == 'q') && (code[1] >= 'm') && (code[1] <= 'z'))
+      || ((code[0] == 'x') && (code[1] >= 'a') && (code[1] <= 'z')))
+    return false;
+
+  return true;
+}
+
+std::string
+language_c::get_iso3166_1_alpha_2_code()
+  const noexcept {
+  if (has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code())
+    return mtx::string::to_upper_ascii(m_region);
+
+  return {};
+}
+
+std::string
+language_c::get_top_level_domain_country_code()
+  const noexcept {
+  auto code = mtx::string::to_lower_ascii(get_iso3166_1_alpha_2_code());
+  return code == "gb"s ? "uk"s : code;
+}
+
 std::string const &
 language_c::get_error()
   const noexcept {

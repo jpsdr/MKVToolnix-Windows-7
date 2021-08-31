@@ -374,4 +374,24 @@ TEST(BCP47LanguageTags, FindBestMatch) {
   EXPECT_EQ(language_c::parse("es-Latn"), language_c::parse("es-Latn-MX").find_best_match(V{ language_c::parse("es-Latn"), language_c::parse("es"), language_c::parse("es-MX") }));
 }
 
+TEST(BCP47LanguageTags, ISO3166_1_Alpha2Codes) {
+  EXPECT_FALSE(language_c::parse("es").has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code());
+  EXPECT_FALSE(language_c::parse("es-029").has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code());
+  EXPECT_FALSE(language_c::parse("es-AA").has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code());
+  EXPECT_FALSE(language_c::parse("es-QT").has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code());
+  EXPECT_FALSE(language_c::parse("es-XS").has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code());
+  EXPECT_TRUE(language_c::parse("es-ES").has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code());
+  EXPECT_TRUE(language_c::parse("es-724").has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code());
+
+  EXPECT_EQ(""s, language_c::parse("es").get_iso3166_1_alpha_2_code());
+  EXPECT_EQ(""s, language_c::parse("es-029").get_iso3166_1_alpha_2_code());
+  EXPECT_EQ("ES"s, language_c::parse("es-ES").get_iso3166_1_alpha_2_code());
+  EXPECT_EQ("ES"s, language_c::parse("es-724").get_iso3166_1_alpha_2_code());
+  EXPECT_EQ("es"s, language_c::parse("es-ES").get_top_level_domain_country_code());
+  EXPECT_EQ("es"s, language_c::parse("es-724").get_top_level_domain_country_code());
+
+  EXPECT_EQ("GB"s, language_c::parse("en-GB").get_iso3166_1_alpha_2_code());
+  EXPECT_EQ("uk"s, language_c::parse("en-GB").get_top_level_domain_country_code());
+}
+
 }
