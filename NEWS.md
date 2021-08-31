@@ -6,6 +6,8 @@
   frames trying to find the first sync frame. This fixes track detection in
   situations when a TrueHD doesn't start with a sync frame, e.g. when the
   source file's the result of splitting between sync frames.
+* mkvmerge: AVC/H.264 parser: re-added the hack `--engage
+  all_i_slices_are_key_frames` which was accidentally removed in release v61.
 
 
 # Version 61.0.0 "So" 2021-08-30

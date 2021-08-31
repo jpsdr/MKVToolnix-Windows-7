@@ -30,6 +30,8 @@ namespace mtx::avc {
 es_parser_c::es_parser_c()
   : mtx::avc_hevc::es_parser_c{"avc"s, 11, 13}
 {
+  m_all_i_slices_are_key_frames = mtx::hacks::is_engaged(mtx::hacks::ALL_I_SLICES_ARE_KEY_FRAMES);
+
   init_nalu_names();
 }
 
