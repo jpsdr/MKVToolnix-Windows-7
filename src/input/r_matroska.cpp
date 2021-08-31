@@ -509,21 +509,27 @@ kax_reader_c::verify_opus_audio_track(kax_track_t *t) {
 bool
 kax_reader_c::verify_truehd_audio_track(kax_track_t *t) {
   try {
-    read_first_frames(t, 5);
+    int num_frames_to_probe = 5;
 
-    mtx::truehd::parser_c parser;
-    for (auto &frame : t->first_frames_data)
-      parser.add_data(frame->get_buffer(), frame->get_size());
+    while (num_frames_to_probe <= 2000) {
+      read_first_frames(t, num_frames_to_probe);
 
-    while (parser.frame_available()) {
-      auto frame = parser.get_next_frame();
+      mtx::truehd::parser_c parser;
+      for (auto &frame : t->first_frames_data)
+        parser.add_data(frame->get_buffer(), frame->get_size());
 
-      if (frame->is_ac3() || !frame->is_sync())
-        continue;
+      while (parser.frame_available()) {
+        auto frame = parser.get_next_frame();
 
-      t->codec = frame->codec();
+        if (frame->is_ac3() || !frame->is_sync())
+          continue;
 
-      return true;
+        t->codec = frame->codec();
+
+        return true;
+      }
+
+      num_frames_to_probe *= 20;
     }
 
   } catch (...) {

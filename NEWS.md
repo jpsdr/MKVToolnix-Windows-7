@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: Matroska reader, TrueHD: mkvmerge will now probe much more TrueHD
+  frames trying to find the first sync frame. This fixes track detection in
+  situations when a TrueHD doesn't start with a sync frame, e.g. when the
+  source file's the result of splitting between sync frames.
+
+
 # Version 61.0.0 "So" 2021-08-30
 
 ## New features and enhancements
