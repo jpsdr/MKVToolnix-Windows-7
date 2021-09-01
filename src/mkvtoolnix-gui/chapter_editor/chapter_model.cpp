@@ -395,6 +395,8 @@ ChapterModel::allChapters() {
   auto chapters = std::make_shared<KaxChapters>();
   cloneElementsForRetrieval(QModelIndex{}, *chapters);
 
+  mtx::chapters::unify_legacy_and_bcp47_languages_and_countries(*chapters);
+
   return chapters;
 }
 

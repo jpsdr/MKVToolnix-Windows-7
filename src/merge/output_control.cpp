@@ -1125,6 +1125,7 @@ calc_max_chapter_size() {
   // Step 2: Fix the mandatory elements and count the size of all chapters.
   s_max_chapter_size = 0;
   if (g_kax_chapters) {
+    mtx::chapters::unify_legacy_and_bcp47_languages_and_countries(*g_kax_chapters);
     fix_mandatory_elements(g_kax_chapters.get());
     g_kax_chapters->UpdateSize(true);
     s_max_chapter_size += g_kax_chapters->ElementSize();

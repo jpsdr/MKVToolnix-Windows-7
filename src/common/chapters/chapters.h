@@ -108,4 +108,6 @@ void set_languages_in_display(libmatroska::KaxChapterDisplay &display, std::stri
 void set_languages_in_display(libmatroska::KaxChapterDisplay &display, std::vector<mtx::bcp47::language_c> const &parsed_languages);
 mtx::bcp47::language_c get_language_from_display(libmatroska::KaxChapterDisplay &display, std::string const &default_if_missing);
 
+void unify_legacy_and_bcp47_languages_and_countries(libebml::EbmlElement &elt);
+
 }

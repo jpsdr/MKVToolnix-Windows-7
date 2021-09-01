@@ -131,18 +131,14 @@ ebml_chapters_converter_c::fix_atom(KaxChapterAtom &atom)
 }
 
 void
-ebml_chapters_converter_c::fix_display_languages(libmatroska::KaxChapterDisplay &display)
+ebml_chapters_converter_c::fix_display_languages_and_countries(libmatroska::KaxChapterDisplay &display)
   const {
-  std::vector<mtx::bcp47::language_c> ietf_languages, legacy_languages;
-
   for (auto const &child : display)
     if (auto kax_ietf_language = dynamic_cast<libmatroska::KaxChapLanguageIETF *>(child); kax_ietf_language) {
       auto parsed_language = mtx::bcp47::language_c::parse(kax_ietf_language->GetValue());
 
       if (!parsed_language.is_valid())
         throw conversion_x{fmt::format(Y("'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"), kax_ietf_language->GetValue(), parsed_language.get_error())};
-
-      ietf_languages.emplace_back(parsed_language);
 
     } else if (auto kax_legacy_language = dynamic_cast<libmatroska::KaxChapterLanguage *>(child); kax_legacy_language) {
       auto code         = kax_legacy_language->GetValue();
@@ -151,23 +147,7 @@ ebml_chapters_converter_c::fix_display_languages(libmatroska::KaxChapterDisplay 
       if (!language_opt || !language_opt->is_part_of_iso639_2)
         throw conversion_x{fmt::format(Y("'{0}' is not a valid ISO 639-2 language code."), code)};
 
-      legacy_languages.emplace_back(mtx::bcp47::language_c::parse(code));
-    }
-
-  if (ietf_languages.empty())
-    ietf_languages = std::move(legacy_languages);
-
-  if (ietf_languages.empty())
-    ietf_languages.emplace_back(mtx::bcp47::language_c::parse("eng"));
-
-  mtx::chapters::set_languages_in_display(display, ietf_languages);
-}
-
-void
-ebml_chapters_converter_c::fix_display_countries(libmatroska::KaxChapterDisplay &display)
-  const {
-  for (auto const &child : display)
-    if (auto kax_country = dynamic_cast<libmatroska::KaxChapterCountry *>(child); kax_country) {
+    } else if (auto kax_country = dynamic_cast<libmatroska::KaxChapterCountry *>(child); kax_country) {
       auto country     = kax_country->GetValue();
       auto country_opt = mtx::iso3166::look_up_cctld(country);
       if (!country_opt)
@@ -178,6 +158,8 @@ ebml_chapters_converter_c::fix_display_countries(libmatroska::KaxChapterDisplay 
       if (country != cctld)
         kax_country->SetValue(cctld);
     }
+
+  mtx::chapters::unify_legacy_and_bcp47_languages_and_countries(display);
 }
 
 void
@@ -186,8 +168,7 @@ ebml_chapters_converter_c::fix_display(libmatroska::KaxChapterDisplay &display)
   if (!FindChild<KaxChapterString>(display))
     throw conversion_x{Y("<ChapterDisplay> is missing the <ChapterString> child.")};
 
-  fix_display_languages(display);
-  fix_display_countries(display);
+  fix_display_languages_and_countries(display);
 }
 
 void

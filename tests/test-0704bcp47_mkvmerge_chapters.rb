@@ -64,13 +64,13 @@ compare_languages(*([ %w{ger de-Latn-CH} ] * 5))
 
 # XML chapters
 test_merge src1, :keep_tmp => true, :args => "--chapters #{chaps2}"
-compare_languages(*([ [ "eng", "en" ] ] * 3 + [ [ "ger", "de" ] ] * 3))
+compare_languages(*([ [ "eng", "en-GB" ], [ "eng", "en-GB", ], [ "eng", "en-US" ] ] + [ [ "ger", "de-DE" ] ] * 3))
 
 test_merge src1, :keep_tmp => true, :args => "--chapter-language de --chapters #{chaps2}"
-compare_languages(*([ [ "eng", "en" ] ] * 3 + [ [ "ger", "de" ] ] * 3))
+compare_languages(*([ [ "eng", "en-GB" ], [ "eng", "en-GB", ], [ "eng", "en-US" ] ] + [ [ "ger", "de-DE" ] ] * 3))
 
 test_merge src1, :keep_tmp => true, :args => "--chapter-language de-latn-ch --chapters #{chaps2}"
-compare_languages(*([ [ "eng", "en" ] ] * 3 + [ [ "ger", "de" ] ] * 3))
+compare_languages(*([ [ "eng", "en-GB" ], [ "eng", "en-GB", ], [ "eng", "en-US" ] ] + [ [ "ger", "de-DE" ] ] * 3))
 
 # chapter generation
 test_merge src2, :keep_tmp => true, :args => "--no-audio --generate-chapters interval:10s"

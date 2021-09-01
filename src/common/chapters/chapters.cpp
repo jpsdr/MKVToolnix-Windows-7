@@ -21,9 +21,11 @@
 
 #include <matroska/KaxChapters.h>
 
+#include "common/bcp47.h"
 #include "common/chapters/chapters.h"
 #include "common/chapters/dvd.h"
 #include "common/construct.h"
+#include "common/container.h"
 #include "common/debugging.h"
 #include "common/ebml.h"
 #include "common/error.h"
@@ -59,6 +61,107 @@ translatable_string_c g_chapter_generation_name_template{YT("Chapter <NUM:2>")};
 constexpr auto SIMCHAP_RE_TIMESTAMP_LINE = "^\\s*CHAPTER\\d+\\s*=\\s*(\\d+)\\s*:\\s*(\\d+)\\s*:\\s*(\\d+)\\s*[\\.,]\\s*(\\d{1,9})";
 constexpr auto SIMCHAP_RE_TIMESTAMP      = "^\\s*CHAPTER\\d+\\s*=(.*)";
 constexpr auto SIMCHAP_RE_NAME_LINE      = "^\\s*CHAPTER\\d+NAME\\s*=(.*)";
+
+void
+unify_legacy_and_bcp47_languages_and_countries(EbmlElement &elt) {
+  auto master = dynamic_cast<libebml::EbmlMaster *>(&elt);
+  if (!master)
+    return;
+
+  auto display = dynamic_cast<KaxChapterDisplay *>(&elt);
+  if (!display) {
+    for (auto const child : *master)
+      unify_legacy_and_bcp47_languages_and_countries(*child);
+    return;
+  }
+
+  std::vector<std::string> legacy_languages, legacy_countries;
+  std::vector<mtx::bcp47::language_c> bcp47_languages;
+  auto child_idx = 0u;
+
+  while (child_idx < display->ListSize()) {
+    auto remove_child = true;
+    auto *child       = (*display)[child_idx];
+
+    if (dynamic_cast<KaxChapterLanguage *>(child)) {
+      auto legacy_language = static_cast<KaxChapterLanguage &>(*child).GetValue();
+      if (!legacy_language.empty() && !mtx::includes(legacy_languages, legacy_language))
+        legacy_languages.emplace_back(legacy_language);
+
+    } else if (dynamic_cast<KaxChapterCountry *>(child)) {
+      auto legacy_country = static_cast<KaxChapterCountry &>(*child).GetValue();
+      if (!legacy_country.empty() && !mtx::includes(legacy_countries, legacy_country))
+        legacy_countries.emplace_back(legacy_country);
+
+    } else if (dynamic_cast<KaxChapLanguageIETF *>(child)) {
+      auto bcp47_language = mtx::bcp47::language_c::parse(static_cast<KaxChapLanguageIETF &>(*child).GetValue());
+      if (bcp47_language.is_valid() && !mtx::includes(bcp47_languages, bcp47_language))
+        bcp47_languages.emplace_back(bcp47_language);
+
+    } else
+      remove_child = false;
+
+    if (remove_child) {
+      display->Remove(child_idx);
+      delete child;
+
+    } else
+      ++child_idx;
+  }
+
+  if (legacy_languages.empty() && bcp47_languages.empty())
+    legacy_languages.emplace_back("eng"s);
+
+  if (bcp47_languages.empty()) {
+    auto add_maybe = [&bcp47_languages](std::string const &new_bcp47_language_str) {
+      auto new_bcp47_language = mtx::bcp47::language_c::parse(new_bcp47_language_str);
+      if (new_bcp47_language.is_valid() && !mtx::includes(bcp47_languages, new_bcp47_language))
+        bcp47_languages.emplace_back(new_bcp47_language);
+    };
+
+    for (auto const &legacy_language : legacy_languages) {
+      if (legacy_countries.empty())
+        add_maybe(legacy_language);
+
+      else
+        for (auto const &legacy_country : legacy_countries) {
+          auto language_and_region = fmt::format("{0}-{1}", legacy_language, mtx::string::to_lower_ascii(legacy_country) == "uk" ? "gb"s : legacy_country);
+          add_maybe(language_and_region);
+        }
+    }
+  }
+
+  legacy_languages.clear();
+  legacy_countries.clear();
+
+  for (auto const &bcp47_language : bcp47_languages) {
+    auto legacy_language = bcp47_language.get_iso639_2_alpha_3_code_or("und");
+
+    if (!mtx::includes(legacy_languages, legacy_language))
+      legacy_languages.emplace_back(legacy_language);
+
+    auto legacy_country = bcp47_language.get_top_level_domain_country_code();
+
+    if (!legacy_country.empty() && !mtx::includes(legacy_countries, legacy_country))
+      legacy_countries.emplace_back(legacy_country);
+  }
+
+  std::sort(legacy_languages.begin(), legacy_languages.end());
+  std::sort(legacy_countries.begin(), legacy_countries.end());
+  std::sort(bcp47_languages.begin(),  bcp47_languages.end());
+
+  for (auto const &legacy_language : legacy_languages)
+    AddEmptyChild<KaxChapterLanguage>(display).SetValue(legacy_language);
+
+  for (auto const &legacy_country : legacy_countries)
+    AddEmptyChild<KaxChapterCountry>(display).SetValue(legacy_country);
+
+  if (mtx::bcp47::language_c::is_disabled())
+    return;
+
+  for (auto const &bcp47_language : bcp47_languages)
+    AddEmptyChild<KaxChapLanguageIETF>(display).SetValue(bcp47_language.format());
+}
 
 /** \brief Throw a special chapter parser exception.
 
@@ -296,13 +399,20 @@ parse(const std::string &file_name,
       std::unique_ptr<KaxTags> *tags) {
   try {
 #if defined(HAVE_DVDREAD)
-    auto parsed_chapters = maybe_parse_dvd(file_name, language);
-    if (parsed_chapters)
-      return parsed_chapters;
+    auto parsed_dvd_chapters = maybe_parse_dvd(file_name, language);
+    if (parsed_dvd_chapters) {
+      unify_legacy_and_bcp47_languages_and_countries(*parsed_dvd_chapters);
+      return parsed_dvd_chapters;
+    }
 #endif
 
     mm_text_io_c in(std::make_shared<mm_file_io_c>(file_name));
-    return parse(&in, min_ts, max_ts, offset, language, charset, exception_on_error, format, tags);
+    auto parsed_chapters = parse(&in, min_ts, max_ts, offset, language, charset, exception_on_error, format, tags);
+
+    if (parsed_chapters)
+      unify_legacy_and_bcp47_languages_and_countries(*parsed_chapters);
+
+    return parsed_chapters;
 
   } catch (parser_x &e) {
     if (exception_on_error)
@@ -1208,32 +1318,15 @@ create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editio
 void
 set_languages_in_display(libmatroska::KaxChapterDisplay &display,
                          std::vector<mtx::bcp47::language_c> const &parsed_languages) {
-  std::unordered_map<std::string, bool> legacy_codes_seen, ietf_tags_seen;
-
   DeleteChildren<libmatroska::KaxChapLanguageIETF>(display);
   DeleteChildren<libmatroska::KaxChapterLanguage>(display);
+  DeleteChildren<libmatroska::KaxChapterCountry>(display);
 
-  for (auto const &parsed_language : parsed_languages) {
-    if (!parsed_language.is_valid())
-      continue;
+  for (auto const &parsed_language : parsed_languages)
+    if (parsed_language.is_valid())
+      AddEmptyChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(parsed_language.format());
 
-    auto legacy_code = parsed_language.has_valid_iso639_2_code() ? parsed_language.get_iso639_alpha_3_code() : "und"s;
-
-    if (!legacy_codes_seen[legacy_code]) {
-      AddEmptyChild<libmatroska::KaxChapterLanguage>(display).SetValue(legacy_code);
-      legacy_codes_seen[legacy_code] = true;
-    }
-
-    if (mtx::bcp47::language_c::is_disabled())
-      continue;
-
-    auto ietf_tag = parsed_language.format();
-
-    if (!ietf_tags_seen[ietf_tag]) {
-      AddEmptyChild<libmatroska::KaxChapLanguageIETF>(display).SetValue(ietf_tag);
-      ietf_tags_seen[ietf_tag] = true;
-    }
-  }
+  unify_legacy_and_bcp47_languages_and_countries(display);
 }
 
 void

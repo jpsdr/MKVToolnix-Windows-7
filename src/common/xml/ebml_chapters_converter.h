@@ -31,8 +31,7 @@ protected:
   virtual void fix_edition_entry(libmatroska::KaxEditionEntry &eentry) const;
   virtual void fix_atom(libmatroska::KaxChapterAtom &atom) const;
   virtual void fix_display(libmatroska::KaxChapterDisplay &display) const;
-  virtual void fix_display_languages(libmatroska::KaxChapterDisplay &display) const;
-  virtual void fix_display_countries(libmatroska::KaxChapterDisplay &display) const;
+  virtual void fix_display_languages_and_countries(libmatroska::KaxChapterDisplay &display) const;
 
   void setup_maps();
 

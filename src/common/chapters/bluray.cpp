@@ -61,6 +61,7 @@ convert_mpls_chapters_kax_chapters(mtx::bluray::mpls::chapters_t const &mpls_cha
   }
 
   mtx::chapters::align_uids(kax_chapters.get());
+  mtx::chapters::unify_legacy_and_bcp47_languages_and_countries(*kax_chapters);
 
   return kax_chapters;
 }
