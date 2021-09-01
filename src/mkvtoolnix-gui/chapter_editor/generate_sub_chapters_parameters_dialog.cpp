@@ -23,12 +23,11 @@ using namespace mtx::gui;
 GenerateSubChaptersParametersDialog::GenerateSubChaptersParametersDialog(QWidget *parent,
                                                                          int firstChapterNumber,
                                                                          uint64_t startTimestamp,
-                                                                         QStringList const &additionalLanguages,
-                                                                         QStringList const &additionalCountryCodes)
+                                                                         QStringList const &additionalLanguages)
   : QDialog{parent}
   , m_ui{new Ui::GenerateSubChaptersParametersDialog}
 {
-  setupUi(firstChapterNumber, startTimestamp, additionalLanguages, additionalCountryCodes);
+  setupUi(firstChapterNumber, startTimestamp, additionalLanguages);
   retranslateUi();
 }
 
@@ -38,8 +37,7 @@ GenerateSubChaptersParametersDialog::~GenerateSubChaptersParametersDialog() {
 void
 GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
                                              uint64_t startTimestamp,
-                                             QStringList const &additionalLanguages,
-                                             QStringList const &additionalCountryCodes) {
+                                             QStringList const &additionalLanguages) {
   auto &cfg = Util::Settings::get();
 
   m_ui->setupUi(this);
@@ -52,7 +50,6 @@ GenerateSubChaptersParametersDialog::setupUi(int firstChapterNumber,
   m_ui->ldwLanguage->setLanguage(cfg.m_defaultChapterLanguage);
   m_ui->ldwLanguage->enableClearingLanguage(true);
   m_ui->ldwLanguage->setClearTitle(QY("– Set to none –"));
-  m_ui->cbCountry->setAdditionalItems(additionalCountryCodes).setup(true, QY("– Set to none –")).setCurrentByData(cfg.m_defaultChapterCountry);
 
   m_ui->sbNumberOfEntries->setFocus();
 
@@ -108,13 +105,6 @@ mtx::bcp47::language_c
 GenerateSubChaptersParametersDialog::language()
   const {
   return m_ui->ldwLanguage->language();
-}
-
-OptQString
-GenerateSubChaptersParametersDialog::country()
-  const {
-  auto countryStr = m_ui->cbCountry->currentData().toString();
-  return countryStr.isEmpty() ? OptQString{} : OptQString{ countryStr };
 }
 
 void

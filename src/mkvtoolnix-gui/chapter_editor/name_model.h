@@ -13,9 +13,9 @@ Q_DECLARE_METATYPE(libmatroska::KaxChapterDisplay *)
 
 namespace mtx::gui::ChapterEditor {
 
-struct LanguagesAndCountries {
+struct Languages {
   QList<mtx::bcp47::language_c> languageCodes;
-  QStringList languageNames, countryCodes, countryNames;
+  QStringList languageNames;
 };
 
 class NameModel: public QStandardItemModel {
@@ -49,7 +49,7 @@ public:
   virtual bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) override;
 
 public:
-  static LanguagesAndCountries effectiveLanguagesAndCountriesForDisplay(libmatroska::KaxChapterDisplay &display);
+  static Languages effectiveLanguagesForDisplay(libmatroska::KaxChapterDisplay &display);
 
 protected:
   void setRowText(QList<QStandardItem *> const &rowItems);

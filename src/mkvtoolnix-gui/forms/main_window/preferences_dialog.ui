@@ -1972,16 +1972,6 @@
            <string>Defaults for new chapter entries</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>Na&amp;me template:</string>
-             </property>
-             <property name="buddy">
-              <cstring>leCENameTemplate</cstring>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="1">
             <widget class="QLineEdit" name="leCENameTemplate">
              <property name="clearButtonEnabled">
@@ -1989,10 +1979,13 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_10">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_7">
              <property name="text">
-              <string>Language:</string>
+              <string>Na&amp;me template:</string>
+             </property>
+             <property name="buddy">
+              <cstring>leCENameTemplate</cstring>
              </property>
             </widget>
            </item>
@@ -2006,23 +1999,10 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_11">
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_10">
              <property name="text">
-              <string>C&amp;ountry:</string>
-             </property>
-             <property name="buddy">
-              <cstring>cbCEDefaultCountry</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="mtx::gui::Util::CountryComboBox" name="cbCEDefaultCountry">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+              <string>Language:</string>
              </property>
             </widget>
            </item>
@@ -2393,11 +2373,6 @@
    <header>mkvtoolnix-gui/util/character_set_combo_box.h</header>
   </customwidget>
   <customwidget>
-   <class>mtx::gui::Util::CountryComboBox</class>
-   <extends>QComboBox</extends>
-   <header>mkvtoolnix-gui/util/country_combo_box.h</header>
-  </customwidget>
-  <customwidget>
    <class>mtx::gui::Util::BasicTabWidget</class>
    <extends>QTabWidget</extends>
    <header>mkvtoolnix-gui/util/basic_tab_widget.h</header>
@@ -2514,7 +2489,6 @@
   <tabstop>cbCEDropLastFromBlurayPlaylist</tabstop>
   <tabstop>cbCETextFileCharacterSet</tabstop>
   <tabstop>leCENameTemplate</tabstop>
-  <tabstop>cbCEDefaultCountry</tabstop>
   <tabstop>cbGuiSwitchToJobOutputAfterStarting</tabstop>
   <tabstop>cbGuiUseDefaultJobDescription</tabstop>
   <tabstop>cbGuiShowOutputOfAllJobs</tabstop>

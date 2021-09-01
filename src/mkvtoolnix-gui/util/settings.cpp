@@ -530,7 +530,6 @@ Settings::loadDefaults(QSettings &reg) {
   m_defaultSubtitleTrackLanguage       = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultSubtitleTrackLanguage, Q("und")).toString()));
   m_whenToSetDefaultLanguage           = static_cast<SetDefaultLanguagePolicy>(reg.value(s_valWhenToSetDefaultLanguage,     static_cast<int>(SetDefaultLanguagePolicy::IfAbsentOrUndetermined)).toInt());
   m_defaultChapterLanguage             = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultChapterLanguage,       Q("und")).toString()));
-  m_defaultChapterCountry              = reg.value(s_valDefaultChapterCountry).toString();
   m_defaultSubtitleCharset             = reg.value(s_valDefaultSubtitleCharset).toString();
   m_defaultAdditionalMergeOptions      = reg.value(s_valDefaultAdditionalMergeOptions).toString();
   reg.endGroup();               // defaults
@@ -851,7 +850,6 @@ Settings::saveDefaults(QSettings &reg)
   reg.setValue(s_valDefaultSubtitleTrackLanguage,  Q(m_defaultSubtitleTrackLanguage.format()));
   reg.setValue(s_valWhenToSetDefaultLanguage,      static_cast<int>(m_whenToSetDefaultLanguage));
   reg.setValue(s_valDefaultChapterLanguage,        Q(m_defaultChapterLanguage.format()));
-  reg.setValue(s_valDefaultChapterCountry,         m_defaultChapterCountry);
   reg.setValue(s_valDefaultSubtitleCharset,        m_defaultSubtitleCharset);
   reg.setValue(s_valDefaultAdditionalMergeOptions, m_defaultAdditionalMergeOptions);
   reg.endGroup();               // defaults

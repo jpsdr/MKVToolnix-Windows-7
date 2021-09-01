@@ -169,7 +169,7 @@ public:
   QString m_boundaryCharsForDerivingTrackLanguagesFromFileNames;
   QStringList m_recognizedTrackLanguagesInFileNames, m_mergePredefinedSplitSizes, m_mergePredefinedSplitDurations;
   QStringList m_mergePredefinedVideoTrackNames, m_mergePredefinedAudioTrackNames, m_mergePredefinedSubtitleTrackNames;
-  QString m_chapterNameTemplate, m_defaultChapterCountry, m_ceTextFileCharacterSet, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
+  QString m_chapterNameTemplate, m_ceTextFileCharacterSet, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
   QStringList m_oftenUsedLanguages, m_oftenUsedRegions, m_oftenUsedCharacterSets;
   bool m_oftenUsedLanguagesOnly, m_oftenUsedRegionsOnly, m_oftenUsedCharacterSetsOnly;
   bool m_useISO639_3Languages;

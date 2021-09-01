@@ -130,7 +130,6 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbCETextFileCharacterSet->setAdditionalItems(m_cfg.m_ceTextFileCharacterSet).setup(true, QY("Always ask the user")).setCurrentByData(m_cfg.m_ceTextFileCharacterSet);
   ui->leCENameTemplate->setText(m_cfg.m_chapterNameTemplate);
   ui->ldwCEDefaultLanguage->setLanguage(m_cfg.m_defaultChapterLanguage);
-  ui->cbCEDefaultCountry->setWithAlphaCodesOnly(true).setAdditionalItems(m_cfg.m_defaultChapterCountry).setup(true, QY("– No selection by default –")).setCurrentByData(m_cfg.m_defaultChapterCountry);
 
   // Header editor page
   setupHeaderEditorDroppedFilesPolicy();
@@ -310,7 +309,6 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->leCENameTemplate, ChapterEditor::Tool::chapterNameTemplateToolTip());
   Util::setToolTip(ui->ldwCEDefaultLanguage, QY("This is the language that newly added chapter names get assigned automatically."));
-  Util::setToolTip(ui->cbCEDefaultCountry, QY("This is the country that newly added chapter names get assigned automatically."));
   Util::setToolTip(ui->cbCEDropLastFromBlurayPlaylist,
                    Q("%1 %2")
                    .arg(QY("Blu-ray discs often contain a chapter entry very close to the end of the movie."))
@@ -1047,7 +1045,6 @@ PreferencesDialog::save() {
   m_cfg.m_chapterNameTemplate                                 = ui->leCENameTemplate->text();
   m_cfg.m_ceTextFileCharacterSet                              = ui->cbCETextFileCharacterSet->currentData().toString();
   m_cfg.m_defaultChapterLanguage                              = ui->ldwCEDefaultLanguage->language();
-  m_cfg.m_defaultChapterCountry                               = ui->cbCEDefaultCountry->currentData().toString();
   m_cfg.m_dropLastChapterFromBlurayPlaylist                   = ui->cbCEDropLastFromBlurayPlaylist->isChecked();
 
   // Merge page:

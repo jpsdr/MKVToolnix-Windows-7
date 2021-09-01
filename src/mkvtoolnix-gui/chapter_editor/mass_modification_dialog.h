@@ -24,11 +24,10 @@ public:
     Constrict           = 0x0004,
     Expand              = 0x0008,
     SetLanguage         = 0x0010,
-    SetCountry          = 0x0020,
-    Multiply            = 0x0040,
-    SetEndTimestamps    = 0x0080,
-    RemoveEndTimestamps = 0x0100,
-    RemoveNames         = 0x0200,
+    Multiply            = 0x0020,
+    SetEndTimestamps    = 0x0040,
+    RemoveEndTimestamps = 0x0080,
+    RemoveNames         = 0x0100,
   };
   Q_DECLARE_FLAGS(Actions, Action)
 
@@ -37,16 +36,15 @@ private:
   bool m_editionOrChapterSelected;
 
 public:
-  explicit MassModificationDialog(QWidget *parent, bool editionOrChapterSelected, QStringList const &additionalLanguages, QStringList const &additionalCountryCodes);
+  explicit MassModificationDialog(QWidget *parent, bool editionOrChapterSelected, QStringList const &additionalLanguages);
   ~MassModificationDialog();
 
   Actions actions() const;
   int64_t shiftBy() const;
   double multiplyBy() const;
   mtx::bcp47::language_c language() const;
-  QString country() const;
 
-  void setupUi(QStringList const &additionalLanguages, QStringList const &additionalCountryCodes);
+  void setupUi(QStringList const &additionalLanguages);
   void retranslateUi();
 
 public Q_SLOTS:

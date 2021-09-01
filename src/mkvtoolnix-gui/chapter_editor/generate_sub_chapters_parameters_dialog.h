@@ -22,7 +22,7 @@ private:
   std::unique_ptr<Ui::GenerateSubChaptersParametersDialog> m_ui;
 
 public:
-  explicit GenerateSubChaptersParametersDialog(QWidget *parent, int firstChapterNumber, uint64_t startTimestamp, QStringList const &additionalLanguages, QStringList const &additionalCountryCodes);
+  explicit GenerateSubChaptersParametersDialog(QWidget *parent, int firstChapterNumber, uint64_t startTimestamp, QStringList const &additionalLanguages);
   ~GenerateSubChaptersParametersDialog();
 
   int numberOfEntries() const;
@@ -31,13 +31,12 @@ public:
   uint64_t startTimestamp() const;
   QString nameTemplate() const;
   mtx::bcp47::language_c language() const;
-  OptQString country() const;
 
 public Q_SLOTS:
   void verifyStartTimestamp();
 
 protected:
-  void setupUi(int firstChapterNumber, uint64_t startTimestamp, QStringList const &additionalLanguages, QStringList const &additionalCountryCodes);
+  void setupUi(int firstChapterNumber, uint64_t startTimestamp, QStringList const &additionalLanguages);
   void retranslateUi();
 };
 

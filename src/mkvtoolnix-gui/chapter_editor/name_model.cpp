@@ -26,7 +26,6 @@ NameModel::retranslateUi() {
   Util::setDisplayableAndSymbolicColumnNames(*this, {
     { QY("Name"),      Q("name")     },
     { QY("Languages"), Q("language") },
-    { QY("Countries"), Q("country")  },
   });
 }
 
@@ -45,9 +44,9 @@ NameModel::displayFromIndex(QModelIndex const &idx) {
   return displayFromItem(itemFromIndex(idx));
 }
 
-LanguagesAndCountries
-NameModel::effectiveLanguagesAndCountriesForDisplay(libmatroska::KaxChapterDisplay &display) {
-  LanguagesAndCountries lists;
+Languages
+NameModel::effectiveLanguagesForDisplay(libmatroska::KaxChapterDisplay &display) {
+  Languages lists;
   QList<mtx::bcp47::language_c> legacyLanguageCodes;
   QStringList legacyLanguageNames;
 
@@ -62,10 +61,6 @@ NameModel::effectiveLanguagesAndCountriesForDisplay(libmatroska::KaxChapterDispl
       legacyLanguageCodes << language;
       legacyLanguageNames << Q(language.format_long());
 
-    } else if (auto kCountry = dynamic_cast<libmatroska::KaxChapterCountry const *>(child); kCountry) {
-      auto countryCode = Q(kCountry->GetValue());
-      lists.countryCodes << countryCode;
-      lists.countryNames << App::descriptionForRegion(countryCode);
     }
   }
 
@@ -86,20 +81,18 @@ NameModel::effectiveLanguagesAndCountriesForDisplay(libmatroska::KaxChapterDispl
 void
 NameModel::setRowText(QList<QStandardItem *> const &rowItems) {
   auto &display = *displayFromItem(rowItems[0]);
-  auto lists    = effectiveLanguagesAndCountriesForDisplay(display);
+  auto lists    = effectiveLanguagesForDisplay(display);
 
   lists.languageNames.sort();
-  lists.countryNames.sort();
 
   rowItems[0]->setText(Q(GetChildValue<KaxChapterString>(display)));
   rowItems[1]->setText(lists.languageNames.join(Q("; ")));
-  rowItems[2]->setText(lists.countryNames.join(Q("; ")));
 }
 
 QList<QStandardItem *>
 NameModel::itemsForRow(int row) {
   auto rowItems = QList<QStandardItem *>{};
-  for (auto column = 0; 3 > column; ++column)
+  for (auto column = 0; 2 > column; ++column)
     rowItems << item(row, column);
 
   return rowItems;
@@ -126,8 +119,6 @@ NameModel::addNew() {
 
   GetChild<KaxChapterString>(display).SetValueUTF8(Y("<Unnamed>"));
   mtx::chapters::set_languages_in_display(*display, cfg.m_defaultChapterLanguage);
-  if (!cfg.m_defaultChapterCountry.isEmpty())
-    GetChild<KaxChapterCountry>(display).SetValue(to_utf8(cfg.m_defaultChapterCountry));
 
   m_chapter->PushElement(*display);
   append(*display);

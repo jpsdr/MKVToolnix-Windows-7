@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: chapter editor: removed the support for explicitly setting
+  the legacy country elements. Instead the legacy country elements are derived
+  from the region parts of the IETF BCP 47 languages. Part of the
+  implementation of #3193.
+
 ## Bug fixes
 
 * mkvmerge: Matroska reader, TrueHD: mkvmerge will now probe much more TrueHD

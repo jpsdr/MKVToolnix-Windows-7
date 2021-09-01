@@ -28,7 +28,7 @@ class TabPrivate {
 
   timestamp_c fileEndTimestamp;
 
-  QVector<std::tuple<QBoxLayout *, QWidget *, QPushButton *>> languageControls, countryControls;
+  QVector<std::tuple<QBoxLayout *, QWidget *, QPushButton *>> languageControls;
 
   explicit TabPrivate(Tab &tab, QString const &pFileName);
 };

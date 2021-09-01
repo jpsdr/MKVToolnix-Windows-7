@@ -28,10 +28,6 @@ namespace mtx::bluray::mpls {
 struct chapter_t;
 }
 
-namespace mtx::gui::Util {
-class CountryComboBox;
-}
-
 namespace mtx::gui::ChapterEditor {
 
 namespace Ui {
@@ -124,12 +120,10 @@ public Q_SLOTS:
   virtual void nameSelectionChanged(QItemSelection const &selected, QItemSelection const &deselected);
   virtual void chapterNameEdited(QString const &text);
   virtual void chapterNameLanguageChanged();
-  virtual void chapterNameCountryChanged();
   virtual void addChapterName();
   virtual void addChapterNameLanguage();
-  virtual void addChapterNameCountry();
   virtual void removeChapterName();
-  virtual void removeChapterNameLanguageOrCountry();
+  virtual void removeChapterNameLanguage();
 
   virtual void showChapterContextMenu(QPoint const &pos);
 
@@ -178,7 +172,7 @@ protected:
   QModelIndex addEdition(bool before);
   QModelIndex addChapter(bool before);
 
-  ChapterPtr createEmptyChapter(int64_t startTime, int chapterNumber, OptQString const &nameTemplate = OptQString{}, mtx::bcp47::language_c const &language = {}, OptQString const &country = OptQString{});
+  ChapterPtr createEmptyChapter(int64_t startTime, int chapterNumber, std::optional<QString> const &nameTemplate = {}, mtx::bcp47::language_c const &language = {});
 
   void saveAsImpl(bool requireNewFileName, std::function<bool(bool, QString &)> const &worker);
   void saveAsXmlImpl(bool requireNewFileName);
@@ -191,7 +185,6 @@ protected:
   void constrictTimestamps(QStandardItem *item, std::optional<uint64_t> const &constrictStart, std::optional<uint64_t> const &constrictEnd);
   std::pair<std::optional<uint64_t>, std::optional<uint64_t>> expandTimestamps(QStandardItem *item);
   void setLanguages(QStandardItem *item, mtx::bcp47::language_c const &language);
-  void setCountries(QStandardItem *item, QString const &country);
   void setEndTimestamps(QStandardItem *startItem);
   void removeEndTimestamps(QStandardItem *startItem);
   void removeNames(QStandardItem *startItem);
@@ -205,7 +198,6 @@ protected:
 
   QString currentState() const;
   QStringList usedNameLanguages(QStandardItem *parentItem = nullptr);
-  QStringList usedNameCountryCodes(QStandardItem *parentItem = nullptr);
   ChaptersPtr mplsChaptersToMatroskaChapters(std::vector<mtx::bluray::mpls::chapter_t> const &mplsChapters) const;
   QHash<libmatroska::KaxChapterAtom *, ChapterAtomDataPtr> collectChapterAtomDataForEdition(QStandardItem *item);
   QString formatChapterName(QString const &nameTemplate, int chapterNumber, timestamp_c const &startTimestamp) const;
@@ -217,7 +209,6 @@ protected:
   void focusNextChapterElement(bool keepSameControl);
 
   void addOneChapterNameLanguage(mtx::bcp47::language_c const &languageCode, QStringList const &usedLanguageCodes);
-  void addOneChapterNameCountry(QString const &countryCode, QStringList const &usedCountryCodes);
 
   static QString formatEbmlBinary(EbmlBinary *binary);
 };

@@ -33,7 +33,6 @@ char const * const s_valColumnSizes                               = "columnSizes
 char const * const s_valCommandLine                               = "commandLine";
 char const * const s_valDefaultAdditionalMergeOptions             = "defaultAdditionalMergeOptions";
 char const * const s_valDefaultAudioTrackLanguage                 = "defaultAudioTrackLanguage";
-char const * const s_valDefaultChapterCountry                     = "defaultChapterCountry";
 char const * const s_valDefaultChapterLanguage                    = "defaultChapterLanguage";
 char const * const s_valDefaultSubtitleCharset                    = "defaultSubtitleCharset";
 char const * const s_valDefaultSubtitleTrackLanguage              = "defaultSubtitleTrackLanguage";

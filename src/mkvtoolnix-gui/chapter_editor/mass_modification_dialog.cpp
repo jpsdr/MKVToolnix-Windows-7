@@ -20,13 +20,12 @@ using namespace mtx::gui;
 
 MassModificationDialog::MassModificationDialog(QWidget *parent,
                                                bool editionOrChapterSelected,
-                                               QStringList const &additionalLanguages,
-                                               QStringList const &additionalCountryCodes)
+                                               QStringList const &additionalLanguages)
   : QDialog{parent}
   , m_ui{new Ui::MassModificationDialog}
   , m_editionOrChapterSelected{editionOrChapterSelected}
 {
-  setupUi(additionalLanguages, additionalCountryCodes);
+  setupUi(additionalLanguages);
   retranslateUi();
 }
 
@@ -34,19 +33,16 @@ MassModificationDialog::~MassModificationDialog() {
 }
 
 void
-MassModificationDialog::setupUi(QStringList const &additionalLanguages,
-                                QStringList const &additionalCountryCodes) {
+MassModificationDialog::setupUi(QStringList const &additionalLanguages) {
   m_ui->setupUi(this);
 
   m_ui->ldwLanguage->setAdditionalLanguages(additionalLanguages);
-  m_ui->cbCountry->setAdditionalItems(additionalCountryCodes).setup(true, QY("– Set to none –"));
 
   connect(m_ui->cbShift,               &QCheckBox::toggled,                                                          this,                        &MassModificationDialog::verifyOptions);
   connect(m_ui->leShiftBy,             &QLineEdit::textChanged,                                                      this,                        &MassModificationDialog::verifyOptions);
   connect(m_ui->cbMultiply,            &QCheckBox::toggled,                                                          this,                        &MassModificationDialog::verifyOptions);
   connect(m_ui->dsbMultiplyBy,         static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this,                        &MassModificationDialog::verifyOptions);
   connect(m_ui->cbSetLanguage,         &QCheckBox::toggled,                                                          m_ui->ldwLanguage,           &QComboBox::setEnabled);
-  connect(m_ui->cbSetCountry,          &QCheckBox::toggled,                                                          m_ui->cbCountry,             &QComboBox::setEnabled);
   connect(m_ui->cbConstrictExpand,     &QCheckBox::toggled,                                                          m_ui->rbConstrict,           &QRadioButton::setEnabled);
   connect(m_ui->cbConstrictExpand,     &QCheckBox::toggled,                                                          m_ui->rbExpand,              &QRadioButton::setEnabled);
   connect(m_ui->cbSetEndTimestamps,    &QCheckBox::toggled,                                                          m_ui->cbRemoveEndTimestamps, &QRadioButton::setDisabled);
@@ -57,7 +53,6 @@ MassModificationDialog::setupUi(QStringList const &additionalLanguages,
   m_ui->leShiftBy->setEnabled(false);
   m_ui->dsbMultiplyBy->setEnabled(false);
   m_ui->ldwLanguage->setEnabled(false);
-  m_ui->cbCountry->setEnabled(false);
   m_ui->rbConstrict->setEnabled(false);
   m_ui->rbExpand->setEnabled(false);
   m_ui->rbConstrict->setChecked(true);
@@ -97,7 +92,6 @@ MassModificationDialog::actions()
   if (m_ui->cbConstrictExpand->isChecked() && m_ui->rbConstrict->isChecked())               result |= Action::Constrict;
   if (m_ui->cbConstrictExpand->isChecked() && m_ui->rbExpand->isChecked())                  result |= Action::Expand;
   if (m_ui->cbSetLanguage->isChecked())                                                     result |= Action::SetLanguage;
-  if (m_ui->cbSetCountry->isChecked())                                                      result |= Action::SetCountry;
   if (m_ui->cbMultiply->isChecked())                                                        result |= Action::Multiply;
   if (m_ui->cbSetEndTimestamps->isEnabled() && m_ui->cbSetEndTimestamps->isChecked())       result |= Action::SetEndTimestamps;
   if (m_ui->cbRemoveEndTimestamps->isEnabled() && m_ui->cbRemoveEndTimestamps->isChecked()) result |= Action::RemoveEndTimestamps;
@@ -124,12 +118,6 @@ mtx::bcp47::language_c
 MassModificationDialog::language()
   const {
   return m_ui->ldwLanguage->language();
-}
-
-QString
-MassModificationDialog::country()
-  const {
-  return m_ui->cbCountry->currentData().toString();
 }
 
 bool

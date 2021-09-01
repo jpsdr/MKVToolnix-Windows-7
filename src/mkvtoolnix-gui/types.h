@@ -7,4 +7,3 @@
 #include <matroska/KaxSemantic.h>
 
 using ChaptersPtr = std::shared_ptr<libmatroska::KaxChapters>;
-using OptQString  = std::optional<QString>;
