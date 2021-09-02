@@ -30,6 +30,8 @@
 * mkvmerge, mkvpropedit, MKVToolNix GUI's chapter editor: Legacy country
   elements are now created when IETF BCP 47 elements are present & contain a
   region code allowed in legacy country elements. Part of the fix of #3193.
+* mkvmerge: fixed a crash when splitting by chapters is enabled but there are
+  no chapters at all. Part of the fix of #3198.
 
 
 # Version 61.0.0 "So" 2021-08-30

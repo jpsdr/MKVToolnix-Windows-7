@@ -1394,6 +1394,9 @@ add_split_points_from_remainig_chapter_numbers() {
   if (g_splitting_by_chapter_numbers.empty() && !g_splitting_by_all_chapters)
     return;
 
+  if (!g_kax_chapters)
+    return;
+
   std::vector<int64_t> chapter_start_timestamps;
   for (auto element : *g_kax_chapters) {
     auto edition = dynamic_cast<KaxEditionEntry *>(element);
