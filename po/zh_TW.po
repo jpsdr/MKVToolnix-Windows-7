@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2021-09-01 22:48+0200\n"
+"POT-Creation-Date: 2021-09-02 17:19+0200\n"
 "PO-Revision-Date: 2021-05-29 21:17+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -3672,7 +3672,7 @@ msgstr "對應上個剪輯轉義的檔名。"
 msgid "An example: 'movie.001.mp4', 'movie.002.mp4' and 'movie.003.mp4'"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:3125
+#: src/merge/mkvmerge.cpp:3138
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "寫入輸出檔案時發生異常狀況。"
@@ -3724,7 +3724,7 @@ msgstr "附加媒體檔案"
 msgid "Append to an e&xisting source file"
 msgstr "附加至已存在的原始檔案 (&X)"
 
-#: src/merge/output_control.cpp:1902
+#: src/merge/output_control.cpp:1905
 #, no-c-format
 msgid "Appending track {0} from file no. {1} ('{2}') to track {3} from file no. {4} ('{5}').\n"
 msgstr "正在附加合併軌道 {0} 自檔案 {1} ( '{2}' ) 至軌道 {3} 自檔案 {4} ( '{5}' ) 。\n"
@@ -4846,7 +4846,7 @@ msgstr "無法從該 MPEG-1/2 軌道擷取序列表頭。\n"
 msgid "Could not find an index for audio track {0} (avilib error message: {1}). Skipping track.\n"
 msgstr "找不到音訊軌 {0} 的索引 (avilib 錯誤訊息: {1})。正在跳過此軌。\n"
 
-#: src/merge/output_control.cpp:1828
+#: src/merge/output_control.cpp:1831
 #, no-c-format
 msgid "Could not find gptzr when appending. {0}\n"
 msgstr "附加檔案時找不到 gptzr。 {0}\n"
@@ -6238,7 +6238,7 @@ msgstr "例如: 01:00:00 (一小時之後) 或 1800s (1800 秒之後)。"
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "例如: 01:00:00,01:30:00 (一小時之後和一小時三十分之後) 或 180s,300s,00:10:00 (三、五和十分鐘之後)。"
 
-#: src/merge/mkvmerge.cpp:3125
+#: src/merge/mkvmerge.cpp:3138
 #, no-c-format
 msgid "Exception details:"
 msgstr "異常狀況詳細資訊:"
@@ -7551,7 +7551,7 @@ msgid "Invalid change spec ({2}) in '{0} {1}'.\n"
 msgstr "無效的變更規格 ({2})，在 '{0} {1}' 。\n"
 
 #: src/merge/mkvmerge.cpp:1118
-#: src/merge/mkvmerge.cpp:3050
+#: src/merge/mkvmerge.cpp:3065
 #, no-c-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
 msgstr "在 '--split {1}' 中的 '--split' 章節編號 '{0}' 無效: {2}\n"
@@ -8532,7 +8532,7 @@ msgstr "合成應用程式"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "合併到在目錄 \"%2\" 中的檔案 \"%1\""
 
-#: src/merge/mkvmerge.cpp:3131
+#: src/merge/mkvmerge.cpp:3144
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "合併花費時間 {0}。\n"
@@ -9203,7 +9203,7 @@ msgstr "僅在清單中的軌道會預設為複製項目。"
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
 msgstr "只支援 v7 和更高版本的 VobSub 檔。如果使用的是舊版檔，請使用 VSConv 實用程式（可在 http://sourceforge.net/projects/guliverkli/ 獲取）將這些檔轉換為 v7 檔。\n"
 
-#: src/merge/mkvmerge.cpp:3052
+#: src/merge/mkvmerge.cpp:3062
 #, no-c-format
 msgid "Only {0} chapter found in source files & chapter files."
 msgid_plural "Only {0} chapters found in source files & chapter files."
@@ -11753,7 +11753,7 @@ msgstr "此設定檔已儲存。"
 msgid "The correction file header was not read correctly.\n"
 msgstr "校正檔未能正常讀取。\n"
 
-#: src/merge/output_control.cpp:1625
+#: src/merge/output_control.cpp:1628
 #, no-c-format
 msgid "The cue entries (the index) are being written...\n"
 msgstr "正在寫入 cue 項目 (此索引)...\n"
@@ -11872,7 +11872,7 @@ msgstr "兩軌的顯示寬度不同: {0} 與 {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "缺點是合併工具需要更長的時間，因為 mkvmerge 會等到所有資料都寫入存儲後才能結束。"
 
-#: src/merge/mkvmerge.cpp:3125
+#: src/merge/mkvmerge.cpp:3138
 #, no-c-format
 msgid "The drive may be full."
 msgstr "可能硬碟空間已經滿了。"
@@ -12046,7 +12046,7 @@ msgstr "無法開啟檔案 '{0}' 進行寫入: {1}。\n"
 msgid "The file '{0}' could not be opened or parsed."
 msgstr "檔案 '{0}' 無法開啟或解析。"
 
-#: src/merge/output_control.cpp:1587
+#: src/merge/output_control.cpp:1590
 #, no-c-format
 msgid "The file '{0}' could not be renamed to '{1}'.\n"
 msgstr "檔案 '{0}' 無法重新命名為 '{1}'.\n"
@@ -12066,7 +12066,7 @@ msgstr "此檔案 '{0}' 類型不支援 ({1})。\n"
 msgid "The file '{0}' is not a Matroska file or it could not be found.\n"
 msgstr "'{0}' 檔案不是 Matroska 檔，或者找不到該檔。\n"
 
-#: src/merge/output_control.cpp:1585
+#: src/merge/output_control.cpp:1588
 #, no-c-format
 msgid "The file '{0}' was renamed to '{1}'.\n"
 msgstr "檔案 '{0}' 已重新命名為 '{1}'.\n"
@@ -13068,6 +13068,11 @@ msgstr "兩軌寬度不同: {0} 與 {1}"
 msgid "Theora"
 msgstr "Theora"
 
+#: src/merge/mkvmerge.cpp:3063
+#, fuzzy, no-c-format
+msgid "There are no chapters in source files & chapter files."
+msgstr "原始檔案及章節檔案中只有 {0} 個章節。"
+
 #: src/extract/cues.cpp:54
 #, no-c-format
 msgid "There are no cues for track ID {0}.\n"
@@ -13411,7 +13416,7 @@ msgstr "這項屬性在 '{0}' 中是強制的且不能刪除的。{1}\n"
 msgid "This property is unique. More instances cannot be added in '{0}'. {1}\n"
 msgstr "這名稱是唯一的。多數情況下無法被加入到 '{0}' 。{1}\n"
 
-#: src/merge/output_control.cpp:1741
+#: src/merge/output_control.cpp:1744
 #, no-c-format
 msgid "This should REALLY not have happened. The space reserved for the first meta seek element was too small. Size needed: {0}. {1}\n"
 msgstr "這 *真的* 不該發生。為第一個變換定位元件預留的空間過小。需要的大小: {0}. {1}\n"
