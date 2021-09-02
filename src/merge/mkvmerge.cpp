@@ -3038,18 +3038,31 @@ create_append_mappings_for_playlists() {
 
 static void
 check_for_unused_chapter_numbers_while_spliting_by_chapters() {
-  std::optional<unsigned int> smallest_unused_chapter_number;
+  std::optional<unsigned int> smallest_unused_chapter_number, largest_existing_chapter_number;
 
-  for (auto &item : g_splitting_by_chapter_numbers)
+  for (auto &item : g_splitting_by_chapter_numbers) {
+    // 0 == exists but not requested
+    // 1 == requested
+    // 2 == exists and requested
+    if (   (item.second != 1)
+        && (   !largest_existing_chapter_number
+            || (item.first > *largest_existing_chapter_number)))
+      largest_existing_chapter_number = item.first;
+
     if (   (item.second == 1)
         && (   !smallest_unused_chapter_number
             || (item.first < *smallest_unused_chapter_number)))
       smallest_unused_chapter_number = item.first;
+  }
 
-  if (smallest_unused_chapter_number)
-    mxwarn(fmt::format(Y("Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"),
-                       *smallest_unused_chapter_number, s_split_by_chapters_arg,
-                       fmt::format(NY("Only {0} chapter found in source files & chapter files.", "Only {0} chapters found in source files & chapter files.", *smallest_unused_chapter_number), *smallest_unused_chapter_number)));
+  if (!smallest_unused_chapter_number)
+    return;
+
+  auto details = largest_existing_chapter_number
+    ? fmt::format(NY("Only {0} chapter found in source files & chapter files.", "Only {0} chapters found in source files & chapter files.", *largest_existing_chapter_number), *largest_existing_chapter_number)
+    : Y("There are no chapters in source files & chapter files.");
+
+  mxwarn(fmt::format(Y("Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"), *smallest_unused_chapter_number, s_split_by_chapters_arg, details));
 }
 
 /** \brief Global program initialization

@@ -32,6 +32,9 @@
   region code allowed in legacy country elements. Part of the fix of #3193.
 * mkvmerge: fixed a crash when splitting by chapters is enabled but there are
   no chapters at all. Part of the fix of #3198.
+* mkvmerge: the error message when trying to split by a chapter number that
+  doesn't exist contained the wrong number of chapters that actually do
+  exist. Part of the fix of #3198.
 
 
 # Version 61.0.0 "So" 2021-08-30
