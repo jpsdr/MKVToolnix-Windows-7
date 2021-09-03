@@ -40,6 +40,10 @@
   #3176.
 * mkvmerge: AVC ES parser: fixed mkvmerge aborting due to uncaught exception
   when encountering bad SPS data. Part of the fix of #3176.
+* mkvmerge: HEVC ES parser: fixed another issue with frame type
+  recognition. Certain frames were marked as B frames/discardable on the
+  container level even though they could be reference pictures. Now only SLNR
+  pictures (sub-layer non-reference) are marked that way. Fixes #3192.
 
 
 # Version 61.0.0 "So" 2021-08-30
