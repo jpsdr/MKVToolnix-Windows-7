@@ -114,8 +114,10 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     return;
   }
 
+  auto const &sps_info = m_sps_info_list[si.sps];
   auto is_i_slice      = (SLICE_TYPE_I == si.slice_type);
   auto is_slnr_picture = mtx::included_in(si.nalu_type, NALU_TYPE_TRAIL_N, NALU_TYPE_TSA_N, NALU_TYPE_STSA_N, NALU_TYPE_RADL_N, NALU_TYPE_RASL_N, NALU_TYPE_RSV_VCL_N10, NALU_TYPE_RSV_VCL_N12, NALU_TYPE_RSV_VCL_N14);
+  auto is_discardable  = is_slnr_picture && (0 == sps_info.max_sub_layers_minus1);
 
   m_incomplete_frame.m_si          =  si;
   m_incomplete_frame.m_keyframe    =  m_recovery_point_valid
@@ -124,8 +126,8 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
                                            || (NALU_TYPE_IDR_W_RADL == si.nalu_type)
                                            || (NALU_TYPE_IDR_N_LP   == si.nalu_type)
                                            || (NALU_TYPE_CRA_NUT    == si.nalu_type)));
-  m_incomplete_frame.m_type        =  m_incomplete_frame.m_keyframe ? 'I' : is_slnr_picture ? 'B' : 'P';
-  m_incomplete_frame.m_discardable =  m_incomplete_frame.m_type == 'B';
+  m_incomplete_frame.m_type        =  m_incomplete_frame.m_keyframe ? 'I' : is_discardable ? 'B' : 'P';
+  m_incomplete_frame.m_discardable =  is_discardable;
   m_incomplete_frame.m_position    =  nalu_pos;
   m_recovery_point_valid           =  false;
 
@@ -135,7 +137,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     cleanup();
 
   } else
-    m_b_frames_since_keyframe |= m_incomplete_frame.m_type == 'B';
+    m_b_frames_since_keyframe |= is_discardable;
 
   add_nalu_to_pending_frame_data(nalu);
 
