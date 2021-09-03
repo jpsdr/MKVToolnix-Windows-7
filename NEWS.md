@@ -38,6 +38,8 @@
 * mkvmerge: AVI reader: fixed a crash trying to allocate too big of a memory
   chunk due to an integer overflows in check conditions. Part of the fix of
   #3176.
+* mkvmerge: AVC ES parser: fixed mkvmerge aborting due to uncaught exception
+  when encountering bad SPS data. Part of the fix of #3176.
 
 
 # Version 61.0.0 "So" 2021-08-30

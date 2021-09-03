@@ -186,12 +186,12 @@ pps_info_t::dump() {
                      checksum));
 }
 
-memory_cptr
-parse_sps(memory_cptr const &buffer,
-          sps_info_t &sps,
-          bool keep_ar_info,
-          bool fix_bitstream_frame_rate,
-          int64_t duration) {
+static memory_cptr
+parse_sps_impl(memory_cptr const &buffer,
+               sps_info_t &sps,
+               bool keep_ar_info,
+               bool fix_bitstream_frame_rate,
+               int64_t duration) {
   static auto s_high_level_profile_ids = std::unordered_map<unsigned int, bool>{
     {  44, true }, {  83, true }, {  86, true }, { 100, true }, { 110, true }, { 118, true }, { 122, true }, { 128, true }, { 244, true }
   };
@@ -461,6 +461,20 @@ parse_sps(memory_cptr const &buffer,
   sps.checksum = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *new_sps);
 
   return new_sps;
+}
+
+memory_cptr
+parse_sps(memory_cptr const &buffer,
+          sps_info_t &sps,
+          bool keep_ar_info,
+          bool fix_bitstream_frame_rate,
+          int64_t duration) {
+  try {
+    return parse_sps_impl(buffer, sps, keep_ar_info, fix_bitstream_frame_rate, duration);
+
+  } catch (mtx::exception &) {
+    return {};
+  }
 }
 
 bool
