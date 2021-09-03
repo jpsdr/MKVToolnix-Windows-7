@@ -35,6 +35,9 @@
 * mkvmerge: the error message when trying to split by a chapter number that
   doesn't exist contained the wrong number of chapters that actually do
   exist. Part of the fix of #3198.
+* mkvmerge: AVI reader: fixed a crash trying to allocate too big of a memory
+  chunk due to an integer overflows in check conditions. Part of the fix of
+  #3176.
 
 
 # Version 61.0.0 "So" 2021-08-30
