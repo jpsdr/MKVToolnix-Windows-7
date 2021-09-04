@@ -118,8 +118,10 @@ parse_args(std::vector<std::string> &args) {
       file_name = arg;
   }
 
-  if (file_name.empty())
+  if (file_name.empty()) {
+    mxinfo(fmt::format("{0}\n", mtx::cli::g_usage_text));
     mxerror(Y("No file name given\n"));
+  }
 
   if (s_codec_type == codec_type_e::unknown) {
     auto file_name_q = Q(file_name);
