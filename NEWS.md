@@ -44,6 +44,9 @@
   recognition. Certain frames were marked as B frames/discardable on the
   container level even though they could be reference pictures. Now only SLNR
   pictures (sub-layer non-reference) are marked that way. Fixes #3192.
+* mkvmerge: HEVC ES reader: improved file content detection for HEVC ES files
+  with wrong file name extensions (e.g. `.mkv`), which fixes them being
+  mis-detected as something else, e.g. DTS. Fixes #3201.
 
 
 # Version 61.0.0 "So" 2021-08-30

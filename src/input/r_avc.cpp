@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/avc_hevc/util.h"
 #include "common/byte_buffer.h"
 #include "common/codec.h"
 #include "common/error.h"
@@ -27,6 +28,7 @@ debugging_option_c avc_es_reader_c::ms_debug{"avc_reader"};
 
 bool
 avc_es_reader_c::probe_file() {
+  // mxinfo(fmt::format("hevc probe {0}\n", m_probe_range_info.require_headers_at_start));
   int num_read, i;
   bool first = true;
 
@@ -41,6 +43,10 @@ avc_es_reader_c::probe_file() {
     // MPEG TS starts with 0x47.
     if (first && (0x47 == m_buffer->get_buffer()[0]))
       return 0;
+
+    if (first && m_probe_range_info.require_headers_at_start && !mtx::avc_hevc::might_be_avc_or_hevc(*m_buffer))
+      return false;
+
     first = false;
 
     parser.add_bytes(m_buffer->get_buffer(), num_read);

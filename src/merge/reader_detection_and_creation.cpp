@@ -312,6 +312,13 @@ probe_file_format(filelist_t &file) {
   if ((reader = detect_text_file_formats(file)))
     return reader;
 
+  // AVC & HEVC, even though often mis-detected, have a very high
+  // probability of correct detection with headers right at the start.
+  if ((reader = do_probe<avc_es_reader_c>(io, { 0, 0, true })))
+    return reader;
+  if ((reader = do_probe<hevc_es_reader_c>(io, { 0, 0, true })))
+    return reader;
+
   // Try raw audio formats and require eight consecutive frames at the
   // start of the file.
   if ((reader = do_probe<mp3_reader_c>(io, { 128 * 1024, 8, true })))
@@ -366,9 +373,9 @@ probe_file_format(filelist_t &file) {
 
   if ((reader = do_probe<mpeg_es_reader_c>(io)))
     return reader;
-  if ((reader = do_probe<avc_es_reader_c>(io)))
+  if ((reader = do_probe<avc_es_reader_c>(io, { 0, 0, false })))
     return reader;
-  if ((reader = do_probe<hevc_es_reader_c>(io)))
+  if ((reader = do_probe<hevc_es_reader_c>(io, { 0, 0, false })))
     return reader;
 
   // File types which are the same in raw format and in other container formats.
