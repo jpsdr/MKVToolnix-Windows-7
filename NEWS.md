@@ -47,6 +47,11 @@
 * mkvmerge: HEVC ES reader: improved file content detection for HEVC ES files
   with wrong file name extensions (e.g. `.mkv`), which fixes them being
   mis-detected as something else, e.g. DTS. Fixes #3201.
+* mkvmerge: HEVC ES parser: "end of sequence" NALUs are kept now, and no
+  superfluous flushing will be done when one is found. This prevents splitting
+  NALUs into two different Matroska blocks when they should really be part of
+  a single one, also causing problems with erroneous timestamps. Mostly
+  affects DoVi NALUs. Fixes #3202.
 
 
 # Version 61.0.0 "So" 2021-08-30

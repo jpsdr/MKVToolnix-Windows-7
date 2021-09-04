@@ -352,7 +352,6 @@ es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
       handle_sei_nalu(nalu);
       break;
 
-    case NALU_TYPE_END_OF_SEQ:
     case NALU_TYPE_END_OF_STREAM:
       flush_incomplete_frame();
       break;
@@ -394,6 +393,7 @@ es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
       handle_slice_nalu(nalu, nalu_pos);
       break;
 
+    case NALU_TYPE_END_OF_SEQ:
     case NALU_TYPE_SUFFIX_SEI:
     case NALU_TYPE_RSV_NVCL45:
     case NALU_TYPE_RSV_NVCL46:
