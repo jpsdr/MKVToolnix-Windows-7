@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include "common/endian.h"
 #include "common/memory.h"
 
 #include "gtest/gtest.h"
@@ -240,6 +241,31 @@ TEST(Memory, PrependNothing) {
 
   ASSERT_EQ(7,          buffer->get_size());
   ASSERT_EQ("0123456"s, buffer->to_string());
+}
+
+TEST(Memory, OperatorBrackets) {
+  auto buffer1 = memory_c::alloc(4);
+
+  for (unsigned char idx = 0; idx < 4; ++idx)
+    (*buffer1)[idx] = idx + 1;
+
+  ASSERT_EQ(1, (*buffer1)[0]);
+  ASSERT_EQ(2, (*buffer1)[1]);
+  ASSERT_EQ(3, (*buffer1)[2]);
+  ASSERT_EQ(4, (*buffer1)[3]);
+  ASSERT_EQ(0x01020304, get_uint32_be(buffer1->get_buffer()));
+  ASSERT_EQ(0x01020304, get_uint32_be(buffer1->get_buffer()));
+  ASSERT_EQ(0x01020304, get_uint32_be(buffer1->get_buffer()));
+  ASSERT_EQ(0x01020304, get_uint32_be(buffer1->get_buffer()));
+
+  auto buffer2        = memory_c::clone("hello");
+  auto const &buffer3 = *buffer2;
+
+  ASSERT_EQ('h', buffer3[0]);
+  ASSERT_EQ('e', buffer3[1]);
+  ASSERT_EQ('l', buffer3[2]);
+  ASSERT_EQ('l', buffer3[3]);
+  ASSERT_EQ('o', buffer3[4]);
 }
 
 }

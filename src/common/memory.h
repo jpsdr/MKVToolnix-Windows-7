@@ -172,6 +172,14 @@ public:
     return { reinterpret_cast<char const *>(get_buffer()), static_cast<std::string::size_type>(get_size()) };
   }
 
+  unsigned char &operator [](std::size_t idx) noexcept {
+    return m_ptr[m_offset + idx];
+  }
+
+  unsigned char operator [](std::size_t idx) const noexcept {
+    return m_ptr[m_offset + idx];
+  }
+
 public:
   static inline memory_cptr
   take_ownership(void *buffer, std::size_t length) {
