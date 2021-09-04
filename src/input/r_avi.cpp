@@ -752,7 +752,7 @@ avi_reader_c::read_video() {
       auto nalu_size  = get_uint_be(chunk->get_buffer() + offset, m_avc_nal_size_size);
       offset         += m_avc_nal_size_size;
 
-      if ((nalu_size > num_read) || ((offset + nalu_size) > num_read))
+      if ((nalu_size > static_cast<unsigned int>(num_read)) || ((offset + nalu_size) > static_cast<unsigned int>(num_read)))
         break;
 
       memory_cptr nalu = memory_c::alloc(4 + nalu_size);
