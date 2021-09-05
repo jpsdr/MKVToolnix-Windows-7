@@ -50,7 +50,6 @@ m4_include(ac/dvdread.m4)
 m4_include(ac/po4a.m4)
 m4_include(ac/translations.m4)
 m4_include(ac/manpages_translations.m4)
-m4_include(ac/tools.m4)
 
 AC_OUTPUT(build-config)
 

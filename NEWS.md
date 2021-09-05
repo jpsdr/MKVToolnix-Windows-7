@@ -53,6 +53,12 @@
   a single one, also causing problems with erroneous timestamps. Mostly
   affects DoVi NALUs. Fixes #3202.
 
+## Build system changes
+
+* The `tools` sub-directory is now always built. The corresponding `configure`
+  option `--with-tools` has been removed. The `install` target still doesn't
+  install them, though.
+
 
 # Version 61.0.0 "So" 2021-08-30
 

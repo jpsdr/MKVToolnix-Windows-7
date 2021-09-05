@@ -73,7 +73,6 @@ def setup_globals
   }
 
   $build_mkvtoolnix_gui  ||=  c?(:BUILD_GUI)
-  $build_tools           ||=  c?(:BUILD_TOOLS)
 
   $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit}
   $programs                << "mkvtoolnix-gui" if $build_mkvtoolnix_gui
@@ -256,11 +255,10 @@ def define_default_task
   desc "Build everything"
 
   # The applications themselves
-  targets = $applications.clone
+  targets  = $applications.clone
+  targets += $tools.map { |name| "src/tools/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
 
-  targets << "apps:tools" if $build_tools
-  targets << "apps:tools:bluray_dump" if $building_for[:windows]
-  targets << "msix-assets"            if $building_for[:windows] && !c(:CONVERT).empty?
+  targets << "msix-assets" if $building_for[:windows] && !c(:CONVERT).empty?
   targets += (c(:ADDITIONAL_TARGETS) || '').split(%r{ +})
 
   # Build the unit tests only if requested
