@@ -1,5 +1,7 @@
 #include "common/common_pch.h"
 
+#include <functional>
+
 #include "common/list_utils.h"
 
 #include "gtest/gtest.h"
