@@ -2,7 +2,7 @@
 
 #include "merge/item_selector.h"
 
-#include "gtest/gtest.h"
+#include "tests/unit/init.h"
 
 namespace {
 

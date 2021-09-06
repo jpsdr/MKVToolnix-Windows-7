@@ -4,7 +4,7 @@
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 
-#include "gtest/gtest.h"
+#include "tests/unit/init.h"
 
 namespace {
 

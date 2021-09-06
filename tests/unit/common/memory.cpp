@@ -3,7 +3,7 @@
 #include "common/endian.h"
 #include "common/memory.h"
 
-#include "gtest/gtest.h"
+#include "tests/unit/init.h"
 
 namespace {
 

@@ -4,7 +4,7 @@
 
 #include "common/list_utils.h"
 
-#include "gtest/gtest.h"
+#include "tests/unit/init.h"
 
 namespace {
 

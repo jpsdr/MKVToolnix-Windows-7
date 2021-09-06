@@ -1,9 +1,9 @@
 #include "common/common_pch.h"
 
-#include "gtest/gtest.h"
 #include "common/construct.h"
 #include "common/ebml.h"
 
+#include "tests/unit/init.h"
 #include "tests/unit/util.h"
 
 #include <matroska/KaxTracks.h>

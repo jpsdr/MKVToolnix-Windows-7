@@ -13,6 +13,8 @@
 
 #include "common/strings/editing.h"
 #include "common/at_scope_exit.h"
+
+#include "tests/unit/init.h"
 #include "tests/unit/util.h"
 
 namespace mtxut {

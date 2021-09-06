@@ -2,7 +2,7 @@
 
 #include "common/version.h"
 
-#include "gtest/gtest.h"
+#include "tests/unit/init.h"
 
 namespace {
 

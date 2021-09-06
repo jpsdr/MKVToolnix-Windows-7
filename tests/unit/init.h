@@ -11,12 +11,18 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_TESTS_UNIT_INIT_H
-#define MTX_TESTS_UNIT_INIT_H
+#pragma once
 
 #include "common/common_pch.h"
 
-#include "gtest/gtest.h"
+#if defined(SYS_WINDOWS)
+# pragma GCC diagnostic push
+# pragma GCC diagnostic ignored "-Wsign-compare"
+# include "gtest/gtest.h"
+# pragma GCC diagnostic pop
+#else
+# include "gtest/gtest.h"
+#endif
 
 extern bool g_warning_issued;
 
@@ -48,5 +54,3 @@ void init_suite(char const *argv0);
 void init_case();
 
 }
-
-#endif // MTX_TESTS_UNIT_INIT_H

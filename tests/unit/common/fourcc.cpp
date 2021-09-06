@@ -6,7 +6,7 @@
 #include "common/fourcc.h"
 #include "common/mm_mem_io.h"
 
-#include "gtest/gtest.h"
+#include "tests/unit/init.h"
 
 namespace {
 

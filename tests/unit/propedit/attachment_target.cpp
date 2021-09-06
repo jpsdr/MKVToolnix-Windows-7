@@ -7,7 +7,6 @@
 #include "common/unique_numbers.h"
 #include "propedit/attachment_target.h"
 
-#include "gtest/gtest.h"
 #include "tests/unit/init.h"
 #include "tests/unit/util.h"
 

@@ -2,7 +2,6 @@
 
 #include <ebml/EbmlVoid.h>
 
-#include "gtest/gtest.h"
 #include "tests/unit/init.h"
 #include "tests/unit/util.h"
 

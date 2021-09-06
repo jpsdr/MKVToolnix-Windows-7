@@ -2,7 +2,7 @@
 
 #include "common/bcp47.h"
 
-#include "gtest/gtest.h"
+#include "tests/unit/init.h"
 
 namespace {
 

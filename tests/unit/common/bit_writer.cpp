@@ -4,7 +4,7 @@
 #include "common/bit_writer.h"
 #include "common/endian.h"
 
-#include "gtest/gtest.h"
+#include "tests/unit/init.h"
 
 namespace {
 

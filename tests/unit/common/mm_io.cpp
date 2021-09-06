@@ -1,10 +1,10 @@
 #include "common/common_pch.h"
 
-#include "gtest/gtest.h"
-#include "tests/unit/util.h"
-
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
+
+#include "tests/unit/init.h"
+#include "tests/unit/util.h"
 
 namespace {
 

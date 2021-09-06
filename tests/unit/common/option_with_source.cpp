@@ -2,7 +2,7 @@
 
 #include "common/option_with_source.h"
 
-#include "gtest/gtest.h"
+#include "tests/unit/init.h"
 
 namespace {
 

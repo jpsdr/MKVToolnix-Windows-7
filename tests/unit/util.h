@@ -11,14 +11,12 @@
    Written by Moritz Bunkus <moritz@bunkus.org>.
 */
 
-#ifndef MTX_TESTS_UNIT_UTIL_H
-#define MTX_TESTS_UNIT_UTIL_H
+#pragma once
 
 #include "common/common_pch.h"
 
 #include <ebml/EbmlElement.h>
 
-#include "gtest/gtest.h"
 #include "common/strings/formatting.h"
 
 #define ASSERT_EBML_EQ(a, b) ASSERT_PRED_FORMAT2(EbmlEquals, (a), (b))
@@ -73,5 +71,3 @@ operator ==(std::string const &a,
             memory_cptr const &b) {
   return *b == a;
 }
-
-#endif // MTX_TESTS_UNIT_UTIL_H

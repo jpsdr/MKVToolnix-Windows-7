@@ -4,7 +4,7 @@
 #include "merge/packet.h"
 #include "merge/timestamp_calculator.h"
 
-#include "gtest/gtest.h"
+#include "tests/unit/init.h"
 
 namespace {
 

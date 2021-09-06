@@ -4,7 +4,7 @@
 #include "common/fourcc.h"
 #include "common/mp4.h"
 
-#include "gtest/gtest.h"
+#include "tests/unit/init.h"
 
 namespace {
 

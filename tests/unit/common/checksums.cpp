@@ -1,11 +1,11 @@
 #include "common/common_pch.h"
 
-#include "gtest/gtest.h"
-
 #include "common/checksums/base.h"
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+
+#include "tests/unit/init.h"
 #include "tests/unit/util.h"
 
 namespace {
