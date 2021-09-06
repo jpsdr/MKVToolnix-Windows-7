@@ -10,6 +10,12 @@
 #include "common/mm_mem_io.h"
 #include "common/xml/ebml_chapters_converter.h"
 
+#if defined(SYS_WINDOWS)
+# define LINE_ENDING "\r\n"
+#else
+# define LINE_ENDING "\n"
+#endif
+
 namespace {
 
 TEST(EbmlChaptersConverter, ToXmlAndEbmlVoid) {
@@ -19,7 +25,7 @@ TEST(EbmlChaptersConverter, ToXmlAndEbmlVoid) {
 
   ASSERT_NO_THROW(mtx::xml::ebml_chapters_converter_c::write_xml(chapters, mem_io));
 
-  std::string const expected_output("\xEF\xBB\xBF<?xml version=\"1.0\"?>\n<!-- <!DOCTYPE Chapters SYSTEM \"matroskachapters.dtd\"> -->\n<Chapters />\n");
+  std::string const expected_output("\xEF\xBB\xBF<?xml version=\"1.0\"?>" LINE_ENDING "<!-- <!DOCTYPE Chapters SYSTEM \"matroskachapters.dtd\"> -->" LINE_ENDING "<Chapters />" LINE_ENDING "");
   auto actual_output = mem_io.get_content();
 
   ASSERT_EQ(actual_output, expected_output);
