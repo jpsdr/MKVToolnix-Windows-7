@@ -49,7 +49,6 @@ def create_iso639_language_list_file
 
     entry
   end.
-    reject { |entry| !%r{^[CLS]$}.match(entry["language_type"]) }. # Constructed, Living & Special
     each do |entry|
     alpha_3_to_use = entry["part2b"] || entry["id"]
 

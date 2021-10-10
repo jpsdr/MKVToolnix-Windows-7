@@ -2,6 +2,9 @@
 
 ## New features and enhancements
 
+* all: IETF BCP 47/TFC 5646 language tags: all ISO 639 languages are now
+  available, even the ones that aren't of types "Constructed", "Living" or
+  "Special".
 * mkvmerge, mkvpropedit: chapters: both programs will now write elements set
   to their default value, too (e.g. the legacy language element if it's set to
   `eng`). This is done to be more consistent with how MKVToolNix GUI writes
