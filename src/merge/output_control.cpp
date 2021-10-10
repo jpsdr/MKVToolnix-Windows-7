@@ -1445,7 +1445,6 @@ add_chapters_for_current_part() {
     mtx::chapters::merge_entries(*s_chapters_in_this_file);
     if (mtx::bcp47::language_c::is_disabled())
       remove_ietf_language_elements(*s_chapters_in_this_file);
-    remove_mandatory_elements_set_to_their_default(*s_chapters_in_this_file);
     sort_ebml_master(s_chapters_in_this_file.get());
     return;
   }

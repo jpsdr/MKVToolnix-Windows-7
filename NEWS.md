@@ -11,6 +11,10 @@
   whether to skip the affected files or add them anyway. There's now an option
   in the preferences to always skip such files, and it's enabled by
   default. Implements #3213.
+* mkvmerge, mkvpropedit: chapters: both programs will now write elements set
+  to their default value, too (e.g. the legacy language element if it's set to
+  `eng`). This is done to be more consistent with how MKVToolNix GUI writes
+  chapters. Implements #3210.
 
 ## Bug fixes
 
