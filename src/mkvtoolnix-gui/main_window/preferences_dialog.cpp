@@ -108,6 +108,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->leMDefaultAdditionalCommandLineOptions->setText(m_cfg.m_defaultAdditionalMergeOptions);
   ui->cbMProbeRangePercentage->setValue(m_cfg.m_probeRangePercentage);
   ui->cbMAddBlurayCovers->setChecked(m_cfg.m_mergeAddBlurayCovers);
+  ui->cbMAttachmentAlwaysSkipForExistingName->setChecked(m_cfg.m_mergeAttachmentsAlwaysSkipForExistingName);
 
   setupFileColorsControls();
   setupProcessPriority();
@@ -476,6 +477,11 @@ PreferencesDialog::setupToolTips() {
 
   Util::setToolTip(ui->sbMMinPlaylistDuration, QY("Only playlists whose duration are at least this long are considered and offered to the user for selection."));
   Util::setToolTip(ui->cbMAddBlurayCovers, QY("If enabled, the largest cover image of a Blu-ray will be added as an attachment when adding a Blu-ray playlist."));
+  Util::setToolTip(ui->cbMAttachmentAlwaysSkipForExistingName,
+                   Q("<p>%1 %2 %3</p>")
+                   .arg(QY("When adding new files as attachments the GUI will check if there are other attachments with the same name."))
+                   .arg(QY("If one is found, the GUI will ask whether to skip the file or to add it anyway."))
+                   .arg(QY("If enabled, such files will always be skipped without asking.")));
 
   Util::setToolTip(ui->cbMAutoSetOutputFileName,
                    Q("%1 %2")
@@ -1084,6 +1090,7 @@ PreferencesDialog::save() {
   m_cfg.m_scanForPlaylistsPolicy                              = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
   m_cfg.m_minimumPlaylistDuration                             = ui->sbMMinPlaylistDuration->value();
   m_cfg.m_mergeAddBlurayCovers                                = ui->cbMAddBlurayCovers->isChecked();
+  m_cfg.m_mergeAttachmentsAlwaysSkipForExistingName           = ui->cbMAttachmentAlwaysSkipForExistingName->isChecked();
 
   m_cfg.m_outputFileNamePolicy                                = !ui->cbMAutoSetOutputFileName->isChecked()   ? Util::Settings::DontSetOutputFileName
                                                               : ui->rbMAutoSetRelativeDirectory->isChecked() ? Util::Settings::ToRelativeOfFirstInputFile

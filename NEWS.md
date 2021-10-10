@@ -6,6 +6,11 @@
   the legacy country elements. Instead the legacy country elements are derived
   from the region parts of the IETF BCP 47 languages. Part of the
   implementation of #3193.
+* GUI: multiplexer: when adding new files as attachments the GUI checks if
+  there are other attachments with the same name. If so, the GUI would ask
+  whether to skip the affected files or add them anyway. There's now an option
+  in the preferences to always skip such files, and it's enabled by
+  default. Implements #3213.
 
 ## Bug fixes
 

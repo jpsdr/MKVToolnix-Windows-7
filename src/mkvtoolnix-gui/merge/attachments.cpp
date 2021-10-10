@@ -238,20 +238,32 @@ Tab::prepareFileForAttaching(QString const &fileName,
     return {};
   }
 
+  auto &cfg = Util::Settings::get();
+
   if (!alwaysAdd) {
     auto existingFileName = findExistingAttachmentFileName(info.fileName());
     if (existingFileName) {
+      if (cfg.m_mergeAttachmentsAlwaysSkipForExistingName)
+        return {};
+
       auto const answer = Util::MessageBox::question(this)
         ->title(QY("Attachment with same name present"))
         .text(Q("%1 %2")
               .arg(QY("An attachment with the name '%1' is already present.").arg(*existingFileName))
               .arg(QY("Do you really want to add '%1' as another attachment?").arg(QDir::toNativeSeparators(fileName))))
-        .buttonLabel(QMessageBox::Yes, QY("&Add attachment"))
-        .buttonLabel(QMessageBox::No,  QY("&Skip file"))
+        .buttons(QMessageBox::Yes | QMessageBox::No | QMessageBox::NoToAll)
+        .buttonLabel(QMessageBox::Yes,     QY("&Add attachment"))
+        .buttonLabel(QMessageBox::No,      QY("&Skip file"))
+        .buttonLabel(QMessageBox::NoToAll, QY("Always s&kip files"))
         .defaultButton(QMessageBox::No)
         .exec();
 
-      if (answer == QMessageBox::No)
+      if (answer == QMessageBox::NoToAll) {
+        cfg.m_mergeAttachmentsAlwaysSkipForExistingName = true;
+        cfg.save();
+      }
+
+      if (answer != QMessageBox::Yes)
         return {};
     }
   }

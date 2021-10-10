@@ -369,6 +369,7 @@ Settings::load() {
   m_disableDefaultTrackForSubtitles           = reg.value(s_valDisableDefaultTrackForSubtitles,                                                false).toBool();
   m_mergeEnableDialogNormGainRemoval          = reg.value(s_valMergeEnableDialogNormGainRemoval,                                               false).toBool();
   m_mergeAddBlurayCovers                      = reg.value(s_valMergeAddBlurayCovers,                                                           true).toBool();
+  m_mergeAttachmentsAlwaysSkipForExistingName = reg.value(s_valMergeAttachmentsAlwaysSkipForExistingName,                                      true).toBool();
   m_mergeAlwaysCreateNewSettingsForVideoFiles = reg.value(s_valMergeAlwaysCreateNewSettingsForVideoFiles).toBool();
   m_mergeSortFilesTracksByTypeWhenAdding      = reg.value(s_valMergeSortFilesTracksByTypeWhenAdding,                                           true).toBool();
   m_mergeReconstructSequencesWhenAdding       = reg.value(s_valMergeReconstructSequencesWhenAdding,                                            true).toBool();
@@ -757,6 +758,7 @@ Settings::save()
   reg.setValue(s_valDisableDefaultTrackForSubtitles,           m_disableDefaultTrackForSubtitles);
   reg.setValue(s_valMergeEnableDialogNormGainRemoval,          m_mergeEnableDialogNormGainRemoval);
   reg.setValue(s_valMergeAddBlurayCovers,                      m_mergeAddBlurayCovers);
+  reg.setValue(s_valMergeAttachmentsAlwaysSkipForExistingName, m_mergeAttachmentsAlwaysSkipForExistingName);
   reg.setValue(s_valMergeAlwaysCreateNewSettingsForVideoFiles, m_mergeAlwaysCreateNewSettingsForVideoFiles);
   reg.setValue(s_valMergeSortFilesTracksByTypeWhenAdding,      m_mergeSortFilesTracksByTypeWhenAdding);
   reg.setValue(s_valMergeReconstructSequencesWhenAdding,       m_mergeReconstructSequencesWhenAdding);
