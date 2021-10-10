@@ -2,28 +2,50 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: chapter editor: removed the support for explicitly setting
-  the legacy country elements. Instead the legacy country elements are derived
-  from the region parts of the IETF BCP 47 languages. Part of the
-  implementation of #3193.
-* GUI: multiplexer: when adding new files as attachments the GUI checks if
-  there are other attachments with the same name. If so, the GUI would ask
-  whether to skip the affected files or add them anyway. There's now an option
-  in the preferences to always skip such files, and it's enabled by
-  default. Implements #3213.
 * mkvmerge, mkvpropedit: chapters: both programs will now write elements set
   to their default value, too (e.g. the legacy language element if it's set to
   `eng`). This is done to be more consistent with how MKVToolNix GUI writes
   chapters. Implements #3210.
+* MKVToolNix GUI: multiplexer: when adding new files as attachments the GUI
+  checks if there are other attachments with the same name. If so, the GUI
+  would ask whether to skip the affected files or add them anyway. There's now
+  an option in the preferences to always skip such files, and it's enabled by
+  default. Implements #3213.
+* MKVToolNix GUI: chapter editor: removed the support for explicitly setting
+  the legacy country elements. Instead the legacy country elements are derived
+  from the region parts of the IETF BCP 47 languages. Part of the
+  implementation of #3193.
 
 ## Bug fixes
 
+* mkvmerge: fixed a crash when splitting by chapters is enabled but there are
+  no chapters at all. Part of the fix of #3198.
+* mkvmerge: the error message when trying to split by a chapter number that
+  doesn't exist contained the wrong number of chapters that actually do
+  exist. Part of the fix of #3198.
+* mkvmerge: AVC ES parser: fixed mkvmerge aborting due to uncaught exception
+  when encountering bad SPS data. Part of the fix of #3176.
+* mkvmerge: AVC/H.264 parser: re-added the hack `--engage
+  all_i_slices_are_key_frames` which was accidentally removed in release v61.
+* mkvmerge: AVI reader: fixed a crash trying to allocate too big of a memory
+  chunk due to an integer overflows in check conditions. Part of the fix of
+  #3176.
+* mkvmerge: HEVC ES parser: fixed another issue with frame type
+  recognition. Certain frames were marked as B frames/discardable on the
+  container level even though they could be reference pictures. Now only SLNR
+  pictures (sub-layer non-reference) are marked that way. Fixes #3192.
+* mkvmerge: HEVC ES reader: improved file content detection for HEVC ES files
+  with wrong file name extensions (e.g. `.mkv`), which fixes them being
+  mis-detected as something else, e.g. DTS. Fixes #3201.
+* mkvmerge: HEVC ES parser: "end of sequence" NALUs are kept now, and no
+  superfluous flushing will be done when one is found. This prevents splitting
+  NALUs into two different Matroska blocks when they should really be part of
+  a single one, also causing problems with erroneous timestamps. Mostly
+  affects DoVi NALUs. Fixes #3202.
 * mkvmerge: Matroska reader, TrueHD: mkvmerge will now probe much more TrueHD
   frames trying to find the first sync frame. This fixes track detection in
   situations when a TrueHD doesn't start with a sync frame, e.g. when the
   source file's the result of splitting between sync frames.
-* mkvmerge: AVC/H.264 parser: re-added the hack `--engage
-  all_i_slices_are_key_frames` which was accidentally removed in release v61.
 * mkvmerge, MKVToolNix GUI's chapter editor: IETF BCP 47/RFC 5646 language
   tags: when reading chapters from MPLS playlist files, the `ChapLanguageIETF`
   element will now be set to the configured default chapter language, not just
@@ -39,28 +61,6 @@
 * mkvmerge, mkvpropedit, MKVToolNix GUI's chapter editor: Legacy country
   elements are now created when IETF BCP 47 elements are present & contain a
   region code allowed in legacy country elements. Part of the fix of #3193.
-* mkvmerge: fixed a crash when splitting by chapters is enabled but there are
-  no chapters at all. Part of the fix of #3198.
-* mkvmerge: the error message when trying to split by a chapter number that
-  doesn't exist contained the wrong number of chapters that actually do
-  exist. Part of the fix of #3198.
-* mkvmerge: AVI reader: fixed a crash trying to allocate too big of a memory
-  chunk due to an integer overflows in check conditions. Part of the fix of
-  #3176.
-* mkvmerge: AVC ES parser: fixed mkvmerge aborting due to uncaught exception
-  when encountering bad SPS data. Part of the fix of #3176.
-* mkvmerge: HEVC ES parser: fixed another issue with frame type
-  recognition. Certain frames were marked as B frames/discardable on the
-  container level even though they could be reference pictures. Now only SLNR
-  pictures (sub-layer non-reference) are marked that way. Fixes #3192.
-* mkvmerge: HEVC ES reader: improved file content detection for HEVC ES files
-  with wrong file name extensions (e.g. `.mkv`), which fixes them being
-  mis-detected as something else, e.g. DTS. Fixes #3201.
-* mkvmerge: HEVC ES parser: "end of sequence" NALUs are kept now, and no
-  superfluous flushing will be done when one is found. This prevents splitting
-  NALUs into two different Matroska blocks when they should really be part of
-  a single one, also causing problems with erroneous timestamps. Mostly
-  affects DoVi NALUs. Fixes #3202.
 
 ## Build system changes
 
