@@ -1,3 +1,11 @@
+# Version ?
+
+## New features and enhancements
+
+* mkvmerge: AC-3 parser: E-AC-3 with BSID values > 10 and ≤ 15 are recognized
+  now, too. Implements #3211.
+
+
 # Version 62.0.0 "Apollo" 2021-10-10
 
 ## New features and enhancements

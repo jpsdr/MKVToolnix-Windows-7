@@ -71,7 +71,7 @@ frame_c::init() {
 bool
 frame_c::is_eac3()
   const {
-  return (0x10 == m_bs_id) || !m_dependent_frames.empty();
+  return ((10 < m_bs_id) && (16 >= m_bs_id)) || !m_dependent_frames.empty();
 }
 
 codec_c
@@ -121,9 +121,10 @@ frame_c::decode_header(unsigned char const *buffer,
     m_bs_id = r->get_bits(29) & 0x1f;
     r->set_bit_position(16);
 
-    m_valid = 0x10 == m_bs_id ? decode_header_type_eac3(*r)
-            : 0x0c <= m_bs_id ? false
-            :                   decode_header_type_ac3(*r);
+    m_valid = 16 == m_bs_id                    ? decode_header_type_eac3(*r) // original E-AC-3
+            :  8 >= m_bs_id                    ? decode_header_type_ac3(*r)  // regular AC-3
+            : (16 > m_bs_id) && (10 < m_bs_id) ? decode_header_type_eac3(*r) // versions of E-AC-3 backwards-compatible with 0x10
+            :                                  false;
 
   } catch (mtx::mm_io::end_of_file_x &) {
   }
