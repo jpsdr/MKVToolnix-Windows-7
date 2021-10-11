@@ -2674,6 +2674,7 @@ int avi_parse_input_file(avi_t *AVI, int getIndex)
           AVI->video_properties_valid = 1;
           memcpy(&AVI->video_properties, hdrl_data + i + 8, sizeof(alVIDEO_PROPERTIES));
         }
+        i += 8;
       }
       else if((strncasecmp((char *)(hdrl_data+i),"JUNK",4) == 0) ||
               (strncasecmp((char *)(hdrl_data+i),"strn",4) == 0)) {
