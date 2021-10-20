@@ -4,6 +4,11 @@
 
 * mkvmerge: AC-3 parser: E-AC-3 with BSID values > 10 and ≤ 15 are recognized
   now, too. Implements #3211.
+* MKVToolNix GUI: only on Windows: when compiled with Qt ≥ 5.14 and < 6 (which
+  is the case for the officially provided binaries) fractional screen scaling
+  will be enabled. This means that the GUI will be scaled appropriately if
+  Windows is set to 125%, 150% or 175% instead of being too small or too
+  large. Implements #3043.
 
 ## Bug fixes
 

@@ -30,8 +30,14 @@ enableOrDisableHighDPIScaling() {
   auto reg = Util::Settings::registry();
   reg->beginGroup(s_grpSettings);
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-  if (!reg->value(s_valUiDisableHighDPIScaling).toBool())
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+  if (reg->value(s_valUiDisableHighDPIScaling).toBool())
+    return;
+
+  QApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+  QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps,    true);
+# if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
+  QApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
+# endif
 #endif
 }
 
