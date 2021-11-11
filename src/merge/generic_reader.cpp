@@ -85,7 +85,7 @@ generic_reader_c::demuxing_requested(char type,
                      : 'b' == type ? m_ti.m_btracks
                      :               m_ti.m_track_tags;
 
-  auto result = tracks.selected(id, language);
+  auto result = tracks.selected(id, language.is_valid() ? language : mtx::bcp47::language_c::parse("und"));
 
   mxdebug_if(s_debug, fmt::format("demuxing_requested? {4} type {0} id {1} language {2} item_selector {3}\n", type, id, language, tracks, result ? "yes" : "no"));
 

@@ -9,6 +9,12 @@
   will be enabled. This means that the GUI will be scaled appropriately if
   Windows is set to 125%, 150% or 175% instead of being too small or too
   large. Implements #3043.
+* mkvmerge: when using language codes for track selection (e.g. `-a und,en`)
+  all tracks that do not have a language property (due to their container not
+  providing one, e.g. AVIs) will be treated as if they did have one set to
+  `und` ("undetermined") as that is the language the track will have in the
+  Matroska file anyway. Before this change it wasn't possible to match such
+  tracks via language codes.
 
 ## Bug fixes
 
