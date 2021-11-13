@@ -53,8 +53,6 @@ PageModel::appendPage(PageBase *page,
   page->setItems(newItems);
 
   m_pages[pageId] = page;
-  if (!parentIdx.isValid())
-    m_topLevelPages << page;
 }
 
 bool
@@ -65,10 +63,6 @@ PageModel::deletePage(PageBase *page) {
 
   m_pages.remove(pageId);
   delete page;
-
-  auto idx = m_topLevelPages.indexOf(page);
-  if (-1 != idx)
-    m_topLevelPages.removeAt(idx);
 
   return true;
 }
@@ -83,23 +77,36 @@ PageModel::pages()
   return pages;
 }
 
-QList<PageBase *> const &
+QList<PageBase *>
 PageModel::topLevelPages()
   const {
-  return m_topLevelPages;
+  auto rootItem = invisibleRootItem();
+
+  QList<PageBase *> pages;
+  pages.reserve(rootItem->rowCount());
+
+  for (int row = 0, numRows = rootItem->rowCount(); row < numRows; ++row) {
+    auto topLevelItem = rootItem->child(row);
+    auto pageId       = topLevelItem->data(Util::HeaderEditorPageIdRole).value<int>();
+
+    pages << m_pages[pageId];
+  }
+
+  return pages;
 }
 
 QList<PageBase *>
 PageModel::allExpandablePages()
   const {
-  auto pages = m_topLevelPages;
+  auto allTopLevelPages = topLevelPages();
+  auto expandablePages  = allTopLevelPages;
 
-  for (auto const &page : m_topLevelPages)
+  for (auto const &page : allTopLevelPages)
     for (auto const &subPage : page->m_children)
       if (dynamic_cast<TopLevelPage *>(subPage))
-        pages << static_cast<TopLevelPage *>(subPage);
+        expandablePages << static_cast<TopLevelPage *>(subPage);
 
-  return pages;
+  return expandablePages;
 }
 
 void
@@ -110,7 +117,6 @@ PageModel::reset() {
     delete page;
 
   m_pages.clear();
-  m_topLevelPages.clear();
 
   removeRows(0, rowCount());
 
@@ -120,7 +126,7 @@ PageModel::reset() {
 QModelIndex
 PageModel::validate()
   const {
-  for (auto page : m_topLevelPages) {
+  for (auto page : topLevelPages()) {
     auto result = page->validate();
     if (result.isValid())
       return result;

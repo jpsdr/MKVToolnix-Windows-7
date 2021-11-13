@@ -407,8 +407,7 @@ Tab::title()
 
 PageBase *
 Tab::hasBeenModified() {
-  auto &pages = m_model->topLevelPages();
-  for (auto const &page : pages) {
+  for (auto const &page : m_model->topLevelPages()) {
     auto modifiedPage = page->hasBeenModified();
     if (modifiedPage)
       return modifiedPage;
@@ -476,8 +475,7 @@ Tab::determineTrackUIDChanges() {
 
 void
 Tab::doModifications() {
-  auto &pages = m_model->topLevelPages();
-  for (auto const &page : pages)
+  for (auto const &page : m_model->topLevelPages())
     page->doModifications();
 
   pruneEmptyMastersForAllTracks();

@@ -16,7 +16,6 @@ class PageModel: public QStandardItemModel {
   Q_OBJECT
 protected:
   QHash<int, PageBase *> m_pages;
-  QList<PageBase *> m_topLevelPages;
   int m_pageId{};
   QModelIndex m_lastSelectedIdx;
 
@@ -30,7 +29,7 @@ public:
   bool deletePage(PageBase *page);
 
   QList<PageBase *> pages() const;
-  QList<PageBase *> const &topLevelPages() const;
+  QList<PageBase *> topLevelPages() const;
   QList<PageBase *> allExpandablePages() const;
 
   void reset();
