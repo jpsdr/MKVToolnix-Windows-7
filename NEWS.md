@@ -20,6 +20,8 @@
 * MKVToolNix GUI: header editor: a new column has been added to the tree view
   showing the status of the "track enabled" flag. The information is also
   shown on the track overview page on the right. Implements #3228.
+* MKVToolNix GUI: header editor: users can now reorder tracks by dragging &
+  dropping. Implements #3227.
 
 ## Bug fixes
 

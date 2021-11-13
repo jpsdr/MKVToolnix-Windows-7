@@ -48,6 +48,10 @@ public:
 
 Q_SIGNALS:
   void attachmentsReordered();
+  void tracksReordered();
+
+public Q_SLOTS:
+  void rereadTopLevelPageIndexes();
 };
 
 }

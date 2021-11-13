@@ -8,6 +8,7 @@
 #include "mkvtoolnix-gui/header_editor/page_base.h"
 #include "mkvtoolnix-gui/header_editor/page_model.h"
 #include "mkvtoolnix-gui/header_editor/top_level_page.h"
+#include "mkvtoolnix-gui/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/util/model.h"
 
 namespace mtx::gui::HeaderEditor {
@@ -25,6 +26,9 @@ PageModel::~PageModel() {
 PageBase *
 PageModel::selectedPage(QModelIndex const &idx)
   const {
+  if (!idx.isValid())
+    return {};
+
   auto selectedItem = itemFromIndex(idx.sibling(idx.row(), 0));
   if (!selectedItem)
     return {};
@@ -189,20 +193,20 @@ PageModel::canDropMimeData(QMimeData const *data,
   const {
   if (   !data
       || (Qt::MoveAction != action)
-      || !parent.isValid()
       || !m_lastSelectedIdx.isValid()
       || (0 > row))
     return false;
 
   auto draggedPage = selectedPage(m_lastSelectedIdx);
-  if (!draggedPage || !dynamic_cast<AttachedFilePage *>(draggedPage))
-    return false;
+  auto parentPage  = selectedPage(parent);
 
-  auto parentPage = selectedPage(parent);
-  if (!parentPage || !dynamic_cast<AttachmentsPage *>(parentPage))
-    return false;
+  if (dynamic_cast<AttachedFilePage *>(draggedPage))
+    return dynamic_cast<AttachmentsPage *>(parentPage);
 
-  return true;
+  if (dynamic_cast<TrackTypePage *>(draggedPage))
+    return !parentPage && (row > 0) && (row < rowCount());
+
+  return false;
 }
 
 bool
@@ -214,13 +218,30 @@ PageModel::dropMimeData(QMimeData const *data,
   if (!canDropMimeData(data, action, row, column, parent))
     return false;
 
+  auto draggedPage = selectedPage(m_lastSelectedIdx);
+
   auto result = QStandardItemModel::dropMimeData(data, action, row, 0, parent);
 
   Util::requestAllItems(*this);
 
-  Q_EMIT attachmentsReordered();
+  if (dynamic_cast<AttachedFilePage *>(draggedPage))
+    Q_EMIT attachmentsReordered();
+
+  else if (dynamic_cast<TrackTypePage *>(draggedPage))
+    Q_EMIT tracksReordered();
 
   return result;
+}
+
+void
+PageModel::rereadTopLevelPageIndexes() {
+  auto rootItem = invisibleRootItem();
+
+  for (int row = 0, numRows = rootItem->rowCount(); row < numRows; ++row) {
+    auto topLevelItem          = rootItem->child(row);
+    auto pageId                = topLevelItem->data(Util::HeaderEditorPageIdRole).value<int>();
+    m_pages[pageId]->m_pageIdx = topLevelItem->index();
+  }
 }
 
 }

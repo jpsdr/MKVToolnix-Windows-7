@@ -93,6 +93,7 @@ Tab::resetData() {
   m_eTracks.reset();
   m_model->reset();
   m_segmentinfoPage = nullptr;
+  m_tracksReordered = false;
 }
 
 void
@@ -196,7 +197,7 @@ Tab::save() {
       tracksModified      = true;
   }
 
-  if (!segmentinfoModified && !tracksModified && !attachmentsModified) {
+  if (!segmentinfoModified && !tracksModified && !attachmentsModified && !m_tracksReordered) {
     Util::MessageBox::information(this)->title(QY("File has not been modified")).text(QY("The header values have not been modified. There is nothing to save.")).exec();
     return;
   }
@@ -226,7 +227,9 @@ Tab::save() {
       }
     }
 
-    if (ok && tracksModified && m_eTracks) {
+    if (ok && m_eTracks && (tracksModified || m_tracksReordered)) {
+      updateTracksElementToMatchTrackOrder();
+
       auto result = m_analyzer->update_element(m_eTracks, true);
       if (kax_analyzer_c::uer_success != result) {
         Util::KaxAnalyzer::displayUpdateElementResult(this, result, QY("Saving the modified track headers failed."));
@@ -314,6 +317,13 @@ Tab::setupUi() {
   connect(m_replaceAttachmentContentAction,          &QAction::triggered,                              [this]() { replaceAttachmentContent(false); });
   connect(m_replaceAttachmentContentSetValuesAction, &QAction::triggered,                              [this]() { replaceAttachmentContent(true); });
   connect(m_model,                                   &PageModel::attachmentsReordered,                 [this]() { m_attachmentsPage->rereadChildren(*m_model); });
+  connect(m_model,                                   &PageModel::tracksReordered,                      this, &Tab::handleReorderedTracks);
+}
+
+void
+Tab::handleReorderedTracks() {
+  m_tracksReordered = true;
+  m_model->rereadTopLevelPageIndexes();
 }
 
 void
@@ -874,13 +884,15 @@ Tab::isClosingOrReloadingOkIfModified(ModifiedConfirmationMode mode) {
     return true;
 
   auto modifiedPage = hasBeenModified();
-  if (!modifiedPage)
+  if (!modifiedPage && !m_tracksReordered)
     return true;
 
   auto tool = MainWindow::headerEditorTool();
   MainWindow::get()->switchToTool(tool);
   tool->showTab(*this);
-  focusPage(modifiedPage);
+
+  if (modifiedPage)
+    focusPage(modifiedPage);
 
   auto closing  = mode == ModifiedConfirmationMode::Closing;
   auto text     = closing ? QY("The file \"%1\" has been modified. Do you really want to close? All changes will be lost.")
@@ -896,6 +908,17 @@ Tab::isClosingOrReloadingOkIfModified(ModifiedConfirmationMode mode) {
     .exec();
 
   return answer == QMessageBox::Yes;
+}
+
+void
+Tab::updateTracksElementToMatchTrackOrder() {
+  auto &tracks = static_cast<libebml::EbmlMaster &>(*m_eTracks);
+
+  RemoveChildren<libmatroska::KaxTrackEntry>(tracks);
+
+  for (auto page : m_model->topLevelPages())
+    if (dynamic_cast<TrackTypePage *>(page))
+      tracks.PushElement(static_cast<TrackTypePage &>(*page).m_master);
 }
 
 }
