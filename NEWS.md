@@ -17,6 +17,9 @@
   tracks via language codes.
 * MKVToolNix GUI: the spinner in the bottom right corner will now be hidden
   when no jobs are currently running. Implements #3225.
+* MKVToolNix GUI: header editor: a new column has been added to the tree view
+  showing the status of the "track enabled" flag. The information is also
+  shown on the track overview page on the right. Implements #3228.
 
 ## Bug fixes
 

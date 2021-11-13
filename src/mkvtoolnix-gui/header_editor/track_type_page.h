@@ -22,7 +22,7 @@ public:
   uint64_t m_trackIdxMkvmerge, m_trackType, m_trackNumber, m_trackUid;
   QString m_codecId, m_name, m_properties;
   mtx::bcp47::language_c m_language;
-  bool m_defaultTrackFlag, m_forcedTrackFlag;
+  bool m_defaultTrackFlag, m_forcedTrackFlag, m_enabledTrackFlag;
 
 public:
   TrackTypePage(Tab &parent, libebml::EbmlMaster &master, uint64_t trackIdxMkvmerge);

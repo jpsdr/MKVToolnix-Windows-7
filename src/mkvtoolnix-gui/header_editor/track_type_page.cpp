@@ -25,6 +25,7 @@ TrackTypePage::TrackTypePage(Tab &parent,
   , m_name{Q(FindChildValue<KaxTrackName>(m_master))}
   , m_defaultTrackFlag{!!FindChildValue<KaxTrackFlagDefault>(m_master, 1u)}
   , m_forcedTrackFlag{!!FindChildValue<KaxTrackFlagForced>(m_master, 0u)}
+  , m_enabledTrackFlag{!!FindChildValue<KaxTrackFlagEnabled>(m_master, 1u)}
 {
   m_language = mtx::bcp47::language_c::parse(FindChildValue<KaxLanguageIETF>(m_master));
   if (!m_language.is_valid())
@@ -83,6 +84,10 @@ TrackTypePage::retranslateUi() {
   ui->m_lForcedTrackFlag->setText(   m_forcedTrackFlag ? QY("Yes")             : QY("No"));
   ui->m_iForcedTrackFlag->setPixmap((m_forcedTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon()).pixmap({ 16, 16 }));
 
+  ui->m_lEnabledTrackFlagLabel->setText(QY("\"Track enabled\" flag:"));
+  ui->m_lEnabledTrackFlag->setText(   m_enabledTrackFlag ? QY("Yes")             : QY("No"));
+  ui->m_iEnabledTrackFlag->setPixmap((m_enabledTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon()).pixmap({ 16, 16 }));
+
   ui->m_lPropertiesLabel->setText(QY("Properties:"));
   ui->m_lProperties->setText(m_properties);
 }
@@ -98,10 +103,12 @@ TrackTypePage::setItems(QList<QStandardItem *> const &items)
   items.at(4)->setText(QString::number(m_trackUid));
   items.at(5)->setText(m_defaultTrackFlag ? QY("Yes") : QY("No"));
   items.at(6)->setText(m_forcedTrackFlag  ? QY("Yes") : QY("No"));
-  items.at(7)->setText(m_properties);
+  items.at(7)->setText(m_enabledTrackFlag ? QY("Yes") : QY("No"));
+  items.at(8)->setText(m_properties);
 
   items.at(5)->setIcon(m_defaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon());
   items.at(6)->setIcon(m_forcedTrackFlag  ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items.at(7)->setIcon(m_enabledTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon());
 
   items.at(4)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
