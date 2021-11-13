@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QMessageBox>
 #include <QRegularExpression>
+#include <QStackedWidget>
 #include <QStaticText>
 #include <QVBoxLayout>
 #include <QtConcurrent>
@@ -52,6 +53,7 @@ class MainWindowPrivate {
 
   std::unique_ptr<Ui::MainWindow> ui;
   StatusBarProgressWidget *statusBarProgress{};
+  QStackedWidget *queueSpinnerStack{};
   Util::WaitingSpinnerWidget *queueSpinner{};
   Merge::Tool *toolMerge{};
   Info::Tool *toolInfo{};
@@ -174,7 +176,14 @@ MainWindow::setupAuxiliaryWidgets() {
   p->queueSpinner->setRevolutionsPerSecond(1);
   p->queueSpinner->setColor(QColor(0, 0, 0));
 
-  p->ui->statusBar->addPermanentWidget(p->queueSpinner);
+  p->queueSpinnerStack = new QStackedWidget;
+  p->queueSpinnerStack->addWidget(new QWidget);
+  p->queueSpinnerStack->addWidget(p->queueSpinner);
+  p->queueSpinnerStack->widget(0)->resize(p->queueSpinner->size());
+  p->queueSpinnerStack->setMinimumSize(p->queueSpinner->size());
+  p->queueSpinnerStack->setMaximumSize(p->queueSpinner->size());
+
+  p->ui->statusBar->addPermanentWidget(p->queueSpinnerStack);
 }
 
 void
@@ -876,13 +885,17 @@ MainWindow::startStopQueueSpinner(bool start) {
 
   if (start) {
     ++p->spinnerIsSpinning;
-    if (p->spinnerIsSpinning)
+    if (p->spinnerIsSpinning) {
+      p->queueSpinnerStack->setCurrentIndex(1);
       p->queueSpinner->start();
+    }
 
   } else if (p->spinnerIsSpinning > 0) {
     --p->spinnerIsSpinning;
-    if (!p->spinnerIsSpinning)
+    if (!p->spinnerIsSpinning) {
+      p->queueSpinnerStack->setCurrentIndex(0);
       p->queueSpinner->stop();
+    }
   }
 }
 

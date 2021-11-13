@@ -15,6 +15,8 @@
   `und` ("undetermined") as that is the language the track will have in the
   Matroska file anyway. Before this change it wasn't possible to match such
   tracks via language codes.
+* MKVToolNix GUI: the spinner in the bottom right corner will now be hidden
+  when no jobs are currently running. Implements #3225.
 
 ## Bug fixes
 
