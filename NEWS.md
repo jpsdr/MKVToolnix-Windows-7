@@ -4,17 +4,17 @@
 
 * mkvmerge: AC-3 parser: E-AC-3 with BSID values > 10 and ≤ 15 are recognized
   now, too. Implements #3211.
-* MKVToolNix GUI: only on Windows: when compiled with Qt ≥ 5.14 and < 6 (which
-  is the case for the officially provided binaries) fractional screen scaling
-  will be enabled. This means that the GUI will be scaled appropriately if
-  Windows is set to 125%, 150% or 175% instead of being too small or too
-  large. Implements #3043.
 * mkvmerge: when using language codes for track selection (e.g. `-a und,en`)
   all tracks that do not have a language property (due to their container not
   providing one, e.g. AVIs) will be treated as if they did have one set to
   `und` ("undetermined") as that is the language the track will have in the
   Matroska file anyway. Before this change it wasn't possible to match such
   tracks via language codes.
+* MKVToolNix GUI: only on Windows: when compiled with Qt ≥ 5.14 and < 6 (which
+  is the case for the officially provided binaries) fractional screen scaling
+  will be enabled. This means that the GUI will be scaled appropriately if
+  Windows is set to 125%, 150% or 175% instead of being too small or too
+  large. Implements #3043.
 * MKVToolNix GUI: the spinner in the bottom right corner will now be hidden
   when no jobs are currently running. Implements #3225.
 * MKVToolNix GUI: header editor: a new column has been added to the tree view
