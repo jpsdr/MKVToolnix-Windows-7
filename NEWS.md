@@ -1,3 +1,11 @@
+# Version ?
+
+## New features and enhancements
+
+* MKVToolNix GUI: language dialog: when the user switches between the two edit
+  modes, the mode's corresponding first control is automatically focussed.
+
+
 # Version 63.0.0 "Everything" 2021-11-14
 
 ## New features and enhancements

@@ -89,14 +89,11 @@ LanguageDialog::LanguageDialog(QWidget *parent)
 
   p.ui->setupUi(this);
 
-  if (Settings::get().m_bcp47LanguageEditingMode == Settings::BCP47LanguageEditingMode::FreeForm) {
+  if (Settings::get().m_bcp47LanguageEditingMode == Settings::BCP47LanguageEditingMode::FreeForm)
     p.ui->rbFreeForm->setChecked(true);
-    p.ui->leFreeForm->setFocus();
 
-  } else {
+  else
     p.ui->rbComponentSelection->setChecked(true);
-    p.ui->cbLanguage->setFocus();
-  }
 
   createInitialComponentWidgetList();
   createGridLayoutFromComponentWidgetList();
@@ -341,6 +338,8 @@ LanguageDialog::setupFreeFormAndComponentControls() {
 
     connect(p.ui->leFreeForm, &QLineEdit::textChanged, this, &LanguageDialog::updateFromFreeForm);
 
+    p.ui->leFreeForm->setFocus();
+
   } else {
     p.ui->leFreeForm->setEnabled(false);
     Util::enableChildren(p.ui->sawComponents, true);
@@ -349,6 +348,8 @@ LanguageDialog::setupFreeFormAndComponentControls() {
 
     for (auto widget : componentWidgets)
       connectComponentWidgetChange(widget);
+
+    p.ui->cbLanguage->setFocus();
   }
 
   maybeEnableAddExtendedSubtagButton();
