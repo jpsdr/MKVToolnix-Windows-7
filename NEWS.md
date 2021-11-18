@@ -5,6 +5,11 @@
 * MKVToolNix GUI: language dialog: when the user switches between the two edit
   modes, the mode's corresponding first control is automatically focussed.
 
+## Bug fixes
+
+* MKVToolNix: high DPI scaling: fixed the icons in the tool selector having
+  the wrong size for scaling factors other than 100% or 200%. Fixes #3229.
+
 
 # Version 63.0.0 "Everything" 2021-11-14
 

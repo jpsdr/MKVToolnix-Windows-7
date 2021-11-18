@@ -69,7 +69,7 @@ public:
   static void menuGradient(QPainter *painter, QRect const &spanRect, QRect const &clipRect);
   static bool usePixmapCache();
 
-  static void drawIconWithShadow(QIcon const &icon, QRect const &rect, QPainter *p, QIcon::Mode iconMode, int radius = 3, QColor const &color = QColor(0, 0, 0, 130), QPoint const &offset = QPoint(1, -2));
+  static void drawIconWithShadow(QIcon const &icon, QRect const &rect, QPainter *p, QIcon::Mode iconMode, int dipRadius = 3, QColor const &color = QColor(0, 0, 0, 130), QPoint const &dipOffset = QPoint(1, -2));
   static void drawCornerImage(QImage const &img, QPainter *painter, QRect rect, int left = 0, int top = 0, int right = 0, int bottom = 0);
 
   static void tintImage(QImage &img, QColor const &tintColor);
