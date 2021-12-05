@@ -40,7 +40,7 @@ track_statistics_c::create_tags(libmatroska::KaxTags &tags,
 
   if (!m_source_id.empty()) {
     mtx::tags::set_simple(*tag, "SOURCE_ID", m_source_id);
-    names.emplace_back("SOURCE_ID");
+    names.emplace_back("SOURCE_ID"s);
   }
 
   mtx::tags::set_simple(*tag, "_STATISTICS_WRITING_APP", writing_app);
