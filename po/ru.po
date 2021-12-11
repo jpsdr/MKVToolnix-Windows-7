@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2021-11-13 17:46+0100\n"
-"PO-Revision-Date: 2021-11-13 20:42+0000\n"
+"PO-Revision-Date: 2021-11-24 09:48+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
 "Language: ru\n"
@@ -27,7 +27,7 @@ msgid ""
 "The temporary TTA file for track ID {0} is being copied into the final TTA file. This may take some time.\n"
 msgstr ""
 "\n"
-"Временный файл TTA для дорожки с ID {0} копируется в конечный файл TTA. Это может занять некоторое время.\n"
+"Временный файл TTA для дорожки с ИД {0} копируется в конечный файл TTA. Это может занять некоторое время.\n"
 
 #: src/merge/output_control.cpp:268
 #, no-c-format
@@ -703,7 +703,7 @@ msgstr "  --title <title> - Устанавливает название для �
 #: src/merge/mkvmerge.cpp:258
 #, no-c-format
 msgid "  --track-name <TID:name>  Sets the name for a track.\n"
-msgstr "  --track-name <TID:name> - Устанавливает имя для дорожки.\n"
+msgstr "  --track-name <TID:name> - Устанавливает имя дорожки.\n"
 
 #: src/merge/mkvmerge.cpp:126
 #, no-c-format
@@ -1721,7 +1721,7 @@ msgstr "&Очередь заданий"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:182
 #, no-c-format
 msgid "&Language of chapter names to replace:"
-msgstr "&Заменить язык названий глав:"
+msgstr "&Язык названий глав для замены:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:181
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1796
@@ -1903,7 +1903,7 @@ msgstr "&Предыдущие настройки слияния"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:360
 #, no-c-format
 msgid "&Private use:"
-msgstr "&Личное пользование"
+msgstr "&Личное пользование:"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:357
 #, no-c-format
@@ -2433,7 +2433,7 @@ msgstr "\"{0}\" не является правильной парой идент
 #: src/merge/mkvmerge.cpp:1546
 #, no-c-format
 msgid "'{0}' is not a valid pair of track ID and default duration in '--default-duration {0}'.\n"
-msgstr "\"{0}\" не является правильной последовательностью идентификатора дорожки и продолжительности по умолчанию в \"--default-duration {0}\".\n"
+msgstr "\"{0}\" не является правильной последовательностью идентификатора дорожки и длительности по умолчанию в \"--default-duration {0}\".\n"
 
 #: src/merge/mkvmerge.cpp:1638
 #, no-c-format
@@ -2596,7 +2596,7 @@ msgstr "(Известный элемент, но недопустимый в э�
 #: src/common/kax_info.cpp:279
 #, no-c-format
 msgid "(Unknown element: {0}; ID: 0x{1} size: {2})"
-msgstr "(Неизвестный элемент: {0}; ID: 0x{1} размер: {2})"
+msgstr "(Неизвестный элемент: {0}; ИД: 0x{1} размер: {2})"
 
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:202
 #, no-c-format
@@ -3907,7 +3907,7 @@ msgstr "Ошибочный aid {0}\n"
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:170
 #, no-c-format
 msgid "Boolean (yes/no, on/off etc.)"
-msgstr "Логический (да/нет, вкл./выкл. и т.д.)"
+msgstr "Логический (да/нет, вкл./откл. и т.д.)"
 
 #: src/merge/generic_packetizer.cpp:201
 #, no-c-format
@@ -3984,7 +3984,7 @@ msgstr "Страны и регионы"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:643
 #, no-c-format
 msgid "C&reate option file"
-msgstr "&Создать файл конфигурации..."
+msgstr "&Создать файл конфигурации"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:174
 #, no-c-format
@@ -5159,7 +5159,7 @@ msgstr "Дата запуска"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
 #, no-c-format
 msgid "Deactivating this checkbox is a way to disable a configuration temporarily without having to change its parameters."
-msgstr "Выключение этого параметра позволит временно отключить конфигурацию без изменения её параметров."
+msgstr "Отключение этого параметра позволит временно выключить конфигурацию без изменения её параметров."
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:80
 #, no-c-format
@@ -5454,7 +5454,7 @@ msgstr "Запретить использование SimpleBlocks вместо 
 #: src/mkvtoolnix-gui/jobs/job.cpp:275
 #, no-c-format
 msgid "Disabled"
-msgstr "Выключен"
+msgstr "Отключён"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
 #, no-c-format
@@ -5551,7 +5551,7 @@ msgstr "Вы хотите продолжить с риском перезапи�
 #: src/mkvtoolnix-gui/merge/tab.cpp:502
 #, no-c-format
 msgid "Do you want to continue?"
-msgstr "Продолжить?"
+msgstr "Хотите продолжить?"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:621
 #, no-c-format
@@ -6481,7 +6481,7 @@ msgstr "Например, файл, содержащий звуковые дор
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 #, no-c-format
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
-msgstr "Для файлов, которые не будут содержать видеодорожку, но будут иметь хотя бы одну звуковую дорожку, mkvmerge будет автоматически выбирать коэффициент масштаба метки времени таким, что все метки времени и продолжительности имели точность одного семпла."
+msgstr "Для файлов, которые не будут содержать видеодорожку, но будут иметь хотя бы одну звуковую дорожку, mkvmerge будет автоматически выбирать коэффициент масштаба метки времени таким, чтобы все метки времени и длительности имели точность одного семпла."
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:75
 #, no-c-format
@@ -6602,7 +6602,7 @@ msgstr "Ввод в свободной форме"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:225
 #, no-c-format
 msgid "GUI"
-msgstr "GUI"
+msgstr "Графический интерфейс"
 
 #: src/common/kax_element_names.cpp:156
 #, no-c-format
@@ -7119,7 +7119,7 @@ msgstr "Если используется формат OGM и кодировка
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:77
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
-msgstr "Если главы были загружены из файла Matroska, конечная метка времени для самой последней главы будет получена из продолжительности файла."
+msgstr "Если главы были загружены из файла Matroska, конечная метка времени для самой последней главы будет получена из длительности файла."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
 #, no-c-format
@@ -9512,7 +9512,7 @@ msgstr "Стандартные имена звуковых дорожек"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2032
 #, no-c-format
 msgid "Predefined split durations"
-msgstr "Стандартные продолжительности разбиения"
+msgstr "Стандартные длительности разбиения"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2031
 #, no-c-format
@@ -15397,7 +15397,7 @@ msgstr "нет алгоритма хеша подписи"
 #: src/input/r_ogm.cpp:431
 #, no-c-format
 msgid "ogg_stream_init for stream number {0} failed. Will try to continue and ignore this stream.\n"
-msgstr "ogg_stream_init для потока номер {0} окончился неудачно. Попытаюсь продолжать, проигнорировав этот поток.\n"
+msgstr "ogg_stream_init для потока номер {0} окончился неудачно. Попытаюсь продолжить, проигнорировав этот поток.\n"
 
 #: src/input/r_ogm.cpp:341
 #, no-c-format
