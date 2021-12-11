@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2021-09-22 20:30+0200\n"
-"PO-Revision-Date: 2021-09-22 20:42+0000\n"
+"PO-Revision-Date: 2021-11-24 10:33+0000\n"
 "Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
 "Language: ru\n"
@@ -773,12 +773,12 @@ msgstr "relative_position"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:503
 msgid "The relative position in bytes inside the cluster where the <classname>BlockGroup</classname> or <classname>SimpleBlock</classname> element the cue point refers to starts."
-msgstr "Относительное положение в байтах внутри кластера, где начинаются элементы <classname>BlockGroup</classname> или <classname>SimpleBlock</classname>, на который ссылается cue-точка."
+msgstr "Относительное положение в байтах внутри кластера, где начинаются элементы <classname>BlockGroup</classname> или <classname>SimpleBlock</classname>, на которые ссылается cue-точка."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><note><para>
 #: doc/man/mkvextract.xml:507
 msgid "Inside the &matroska; file the <classname>CueRelativePosition</classname> is relative to the cluster's data start offset. The value output by &mkvextract;'s cue extraction mode, however, is relative to the cluster's ID. The absolute position inside the file can be calculated by adding <literal>cluster_position</literal> and <literal>relative_position</literal>."
-msgstr ""
+msgstr "Внутри файла &matroska; <classname>CueRelativePosition</classname> относительно начальному смещению данных кластера. Однако значение, выводимое режимом извлечения метки &mkvextract;, зависит от идентификатора кластера. Абсолютное положение внутри файла можно вычислить добавлением <literal>cluster_position</literal> и <literal>relative_position</literal>."
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvextract.xml:520
@@ -839,7 +839,7 @@ msgstr "Преобразование текстовых файлов и коди
 #: doc/man/mkvinfo.xml:323
 #: doc/man/mkvpropedit.xml:747
 msgid "For an in-depth discussion about how all tools in the MKVToolNix suite handle character set conversions, input/output encoding, command line encoding and console encoding please see the identically-named section in the &mkvmerge; man page."
-msgstr ""
+msgstr "Подробное обсуждение того, как все инструменты пакета MKVToolNix обрабатывают преобразование наборов символов, кодировку ввода / вывода, кодировку командной строки и кодировку консоли, смотрите в разделе с идентичным названием в справочной странице &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvextract.xml:556
@@ -1305,7 +1305,7 @@ msgstr "<option>-a</option>, <option>--all</option>"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:69
 msgid "By default &mkvinfo; stops when it encounters the first cluster.  Additionally it doesn't show certain often occurring elements.  With this option &mkvinfo; will continue processing regardless of the verbosity level and show all elements."
-msgstr ""
+msgstr "По умолчанию &mkvinfo; останавливается, когда встречает первый кластер. Кроме того, он не показывает некоторые часто встречающиеся элементы. С помощью этого параметра &mkvinfo; продолжит обработку независимо от уровня детализации и покажет все элементы."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:76
@@ -1425,7 +1425,7 @@ msgstr "Параметр <link linkend=\"mkvinfo.description.verbose\"><option>-
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:289
 msgid "At level 0 &mkvinfo; will print only the track headers it finds and their types. &mkvinfo; will exit as soon as the headers are parsed completely (more technical: as soon as the first cluster is encountered). In this level the seek head entries and the cues will not be displayed -- even if they're located in front of the track information."
-msgstr ""
+msgstr "На уровне 0 &mkvinfo; напечатает только заголовки найденных треков и их типы. &mkvinfo; завершится, как только заголовки будут полностью проанализированы (более технически: как только будет обнаружен первый кластер). На этом уровне записи заголовка поиска и cues не будут отображаться — даже если они расположены перед информацией о треке."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:295
@@ -1450,7 +1450,7 @@ msgstr "Тот же эффект достигается параметром <op
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:313
 msgid "At level 3 and above &mkvinfo; will print some information that is not directly connected to a &matroska; element. All other elements only print stuff about the elements that were just found. Level 3 adds meta information to ease debugging (read: it's intended for developers only). All lines written by level 3 are enclosed in square brackets to make filtering them out easy."
-msgstr ""
+msgstr "На уровне 3 и выше &mkvinfo; напечатает некоторую информацию, которая не связана напрямую с элементом &matroska;. Все остальные элементы печатают только те элементы, которые были только что найдены. Уровень 3 добавляет метаинформацию для облегчения отладки (читай: предназначена только для разработчиков). Все строки, написанные на уровне 3, заключены в квадратные скобки, чтобы их было легко отфильтровать."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvinfo.xml:332
@@ -1566,7 +1566,7 @@ msgstr "<option>-w</option>, <option>--webm</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:107
 msgid "Create a WebM compliant file. This is also turned on if the output file name's extension is &quot;webm&quot;. This mode enforces several restrictions. The only allowed codecs are VP8, VP9 video and Opus, Vorbis audio tracks. The DocType header item is changed to &quot;webm&quot;."
-msgstr ""
+msgstr "Создайть файл, совместимый с WebM. Это также включено, если расширение имени выходного файла — «webm». В этом режиме есть несколько ограничений. Разрешены только кодеки VP8, видео VP9 и аудиодорожки Opus, Vorbis. Элемент заголовка DocType изменён на «webm»."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:113
@@ -1611,7 +1611,7 @@ msgstr "<option>--segmentinfo</option> <parameter>имя-файла.xml</paramet
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:147
 msgid "Read segment information from an <abbrev>XML</abbrev> file. This file can contain the segment family <abbrev>UID</abbrev>, segment <abbrev>UID</abbrev>, previous and next segment <abbrev>UID</abbrev> elements. An example file and a <abbrev>DTD</abbrev> are included in the MKVToolNix distribution."
-msgstr ""
+msgstr "Прочесть информацию о сегменте из файла <abbrev>XML</abbrev>. Этот файл может содержать <abbrev>UID</abbrev> семейства сегментов, <abbrev>UID</abbrev> сегмента, элементы <abbrev>UID</abbrev> предыдущего и следующего сегмента. Пример файла и <abbrev>DTD</abbrev> включены в дистрибутив MKVToolNix."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:153
@@ -1638,7 +1638,7 @@ msgstr "Если SID начинается с =, то остальное буде
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:171
 msgid "Each file created contains one segment, and each segment has one segment UID. If more segment UIDs are specified than segments are created then the surplus UIDs are ignored. If fewer UIDs are specified than segments are created then random UIDs will be created for them."
-msgstr ""
+msgstr "Каждый созданный файл содержит один сегмент, и каждый сегмент имеет один UID сегмента. Если указано больше UID сегментов, чем создано сегментов, то лишние UID игнорируются. Если указано меньше UID, чем создано сегментов, то для них будут созданы случайные UID."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:181
@@ -1673,7 +1673,7 @@ msgstr "<option>--chapter-charset</option> <parameter>кодировка</parame
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:208
 msgid "Sets the character set that is used for the conversion to UTF-8 for simple chapter files. See the section about <link linkend=\"mkvmerge.text_files_and_charsets\">text files and character sets</link> for an explanation how &mkvmerge; converts between character sets."
-msgstr ""
+msgstr "Устанавливает набор символов, который используется для преобразования в UTF-8 для простых файлов глав. Смотрите раздел о <link linkend=\"mkvmerge.text_files_and_charsets\">текстовых файлах и наборах символов</link>, чтобы узнать, как &mkvmerge; преобразует наборы символов."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:214
@@ -1688,7 +1688,7 @@ msgstr "<option>--chapter-sync</option> <parameter>d<optional>,o<optional>/p</op
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:224
 msgid "Adjust the timestamps of the chapters in the following source file by <parameter>d</parameter> ms. Alternatively you can use the <option>--sync</option> option with the special track ID <constant>-2</constant> (see section <link linkend=\"mkvmerge.track_ids.special_ids\">special track IDs</link>)."
-msgstr ""
+msgstr "Отрегулировать отметки времени глав в следующем исходном файле на <parameter>d</parameter> мс. В качестве альтернативы вы можете использовать параметр <option>--sync</option> со специальным идентификатором дорожки <constant>-2</constant> (сморите раздел «<link linkend=\"mkvmerge.track_ids.special_ids\">Специальные идентификаторы дорожек</link>»)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:230
@@ -1736,7 +1736,7 @@ msgstr "'<literal>when-appending</literal>' – Этот режим создаё
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:260
 msgid "This mode also works with split modes '<literal>parts:</literal>' and '<literal>parts-frames:</literal>'. For these modes one chapter will be generated for each appended timestamp range (those whose start timestamps are prefixed with '<literal>+</literal>')."
-msgstr ""
+msgstr "Этот режим также работает с режимами разделения «<literal>частей:</literal>» и «<literal>частей-кадров:</literal>». Для этих режимов создаётся одна глава для каждого добавленного диапазона временных меток (тех, чьи начальные метки времени имеют префикс «<literal>+</literal>»)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:267
@@ -2350,7 +2350,7 @@ msgstr "<option>--link</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:896
 msgid "Link files to one another when splitting the output file. See the section on <link linkend=\"mkvmerge.file_linking\">file linking</link> below for details."
-msgstr "Связывайте файлы друг с другом при разделении выходного файла. Подробности смотрите в секции о <link linkend=\"mkvmerge.file_linking\">связывание файлов</link> ниже."
+msgstr "Связать файлы друг с другом при разделении выходного файла. Подробности смотрите в секции о <link linkend=\"mkvmerge.file_linking\">связывание файлов</link> ниже."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:903
