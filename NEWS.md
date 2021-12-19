@@ -9,6 +9,9 @@
 
 * MKVToolNix: high DPI scaling: fixed the icons in the tool selector having
   the wrong size for scaling factors other than 100% or 200%. Fixes #3229.
+* mkvmerge: VobSub reader: files containing `id: --` lines to indicate that
+  the track language isn't known were rejected by `mkvmerge`. Now they're
+  accepted, and `und` (undetermined) is used as the language. Fixes #3246.
 
 
 # Version 63.0.0 "Everything" 2021-11-14

@@ -178,9 +178,11 @@ vobsub_reader_c::parse_headers() {
     if ((line.length() == 0) || (line[0] == '#'))
       continue;
 
-    auto matches = QRegularExpression{"^id: *([a-z]+)", QRegularExpression::CaseInsensitiveOption}.match(Q(line));
+    auto matches = QRegularExpression{"^id: *([^,\\n]+)", QRegularExpression::CaseInsensitiveOption}.match(Q(line));
     if (matches.hasMatch()) {
       language = mtx::bcp47::language_c::parse(to_utf8(matches.captured(1).toLower()));
+      if (!language.is_valid())
+        language = mtx::bcp47::language_c::parse("und");
 
       if (track) {
         if (track->entries.empty())
