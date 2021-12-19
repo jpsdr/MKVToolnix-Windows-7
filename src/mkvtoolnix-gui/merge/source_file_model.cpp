@@ -786,10 +786,6 @@ SourceFileModel::sortSourceFiles(QList<SourceFile *> &files,
   for (auto const &file : files)
     rows[file] = indexFromSourceFile(file).row();
 
-  auto totalNumFiles = m_sourceFiles->count();
-  for (auto const &file : *m_sourceFiles)
-    totalNumFiles += file->m_appendedFiles.count() + file->m_additionalParts.count();
-
   std::sort(files.begin(), files.end(), [&rows](SourceFile *a, SourceFile *b) -> bool {
     auto rowA = rows[a];
     auto rowB = rows[b];
