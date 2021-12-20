@@ -41,7 +41,7 @@ BuildRequires: boost169-devel
 BuildRequires: devtoolset-10-gcc-c++
 %else
 BuildRequires: boost-devel >= 1.66.0
-BuildRequires: gcc-toolset-10-gcc-c++
+BuildRequires: gcc-toolset-11-gcc-c++
 %endif
 %else
 BuildRequires: boost-devel >= 1.66.0
@@ -82,15 +82,15 @@ export CXXFLAGS="%{optflags}"
 unset CONFIGURE_ARGS
 
 %if 0%{?rhel} && 0%{?rhel} <= 7
-export CC=/opt/rh/devtoolset-10/root/bin/gcc
-export CXX=/opt/rh/devtoolset-10/root/bin/g++
 export CPPFLAGS="${CPPFLAGS} -I/usr/include/boost169"
 export CONFIGURE_ARGS="--with-boost-libdir=/usr/lib64/boost169"
 %endif
-%if 0%{?rhel} && 0%{?rhel} >= 8
-export CC=/opt/rh/gcc-toolset-10/root/bin/gcc
-export CXX=/opt/rh/gcc-toolset-10/root/bin/g++
-%endif
+for SUB_DIR in gcc-toolset-11 gcc-toolset 10 devtoolset-10; do
+  if test -x /opt/rh/$SUB_DIR/root/bin/gcc; then
+    source /opt/rh/$SUB_DIR/enable
+    break
+  fi
+done
 
 %configure \
   --disable-optimization \
