@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 17.12.2018\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2021-11-13 17:46+0100\n"
-"PO-Revision-Date: 2021-11-14 10:33+0000\n"
+"PO-Revision-Date: 2021-12-21 10:39+0000\n"
 "Last-Translator: ROBERTO BORIOTTI <roberto.boriotti@canon.it>\n"
 "Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/it/)\n"
@@ -494,7 +494,7 @@ msgid ""
 "                           bitstream to match the track's default duration.\n"
 msgstr ""
 "  --fix-bitstream-timing-information <TID[:bool]>\n"
-"                           regola il tasso del frame/campo memorizzato nel flusso\n"
+"                           regola il tasso del fotogramma/campo memorizzato nel flusso\n"
 "                           video per corrispondere alla durata predefinita della traccia.\n"
 
 #: src/merge/mkvmerge.cpp:387
@@ -542,7 +542,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:95
 #, no-c-format
 msgid "  --global-tags <file>     Read global tags from an XML file.\n"
-msgstr "  --global-tags <Datei>    Legge i tag globali da un file XML.\n"
+msgstr "  --global-tags <Datei>    Legge le etichette globali da un file XML.\n"
 
 #: src/merge/mkvmerge.cpp:241
 #, no-c-format
@@ -656,7 +656,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:226
 #, no-c-format
 msgid "  --no-global-tags         Don't keep global tags from the source file.\n"
-msgstr "  --no-global-tags         Non mantiene i tag globali del file sorgente.\n"
+msgstr "  --no-global-tags         Non mantiene le etichette globali del file sorgente.\n"
 
 #: src/merge/mkvmerge.cpp:250
 #, no-c-format
@@ -806,7 +806,7 @@ msgid ""
 "                           etc.\n"
 msgstr ""
 "  --split frames:A[,B...]\n"
-"                           Crea un nuovo file dopo ogni frame/campo A, B\n"
+"                           Crea un nuovo file dopo ogni fotogramma/campo A, B\n"
 "                           ecc.\n"
 
 #: src/merge/mkvmerge.cpp:157
@@ -818,7 +818,7 @@ msgid ""
 msgstr ""
 "  --split parts-frames:start1-end1[,[+]start2-end2,...]\n"
 "                           Come per 'parts:', ma 'startN'/'endN' sono i numeri\n"
-"                           di frame/campo invece che il timestamp.\n"
+"                           di fotogramma/campo invece che data/ora.\n"
 
 #: src/merge/mkvmerge.cpp:153
 #, no-c-format
@@ -1492,7 +1492,7 @@ msgstr "%1 Hz"
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:111
 #, no-c-format
 msgid "%1 automatic, %2 manual, %3 running"
-msgstr "%1 automatico, %2 manuale, %3 in esecuzione"
+msgstr "%1 automatiche, %2 manuali, %3 in esecuzione"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:134
 #: src/mkvtoolnix-gui/merge/track_model.cpp:705
@@ -1899,7 +1899,7 @@ msgstr "&Genera sotto capitoli"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:690
 #, no-c-format
 msgid "&Header editor"
-msgstr "&Editor delle intestazioni"
+msgstr "&Editor intestazioni"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:448
 #, no-c-format
@@ -2080,7 +2080,7 @@ msgstr "Apri imp&ostazioni"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:671
 #, no-c-format
 msgid "&Open supported chapter file format"
-msgstr "Apri f&ormato file capitolo supportati"
+msgstr "Apri f&ormato file capitolo supportato"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:523
 #, no-c-format
@@ -2866,17 +2866,17 @@ msgstr ", posizione {0}"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:328
 #, no-c-format
 msgid "--- Errors emitted by job '%1' started on %2 ---"
-msgstr "--- Errori riportati dall'attività '%1' avviato il %2 ---"
+msgstr "--- Errori riportati dall'attività '%1' avviata il %2 ---"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:346
 #, no-c-format
 msgid "--- Output of job '%1' started on %2 ---"
-msgstr "--- Destinazione dell'attività '%1' avviato il %2 ---"
+msgstr "--- Destinazione dell'attività '%1' avviata il %2 ---"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:327
 #, no-c-format
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
-msgstr "--- Notifiche emesse dall'attività '%1' avviato il %2 ---"
+msgstr "--- Notifiche emesse dall'attività '%1' avviata il %2 ---"
 
 #: src/propedit/propedit_cli_parser.cpp:266
 #, no-c-format
@@ -2978,12 +2978,12 @@ msgstr "Un capitolo che inizia a 0s non è mai considerato per la suddivisione e
 #: src/mkvtoolnix-gui/merge/output.cpp:304
 #, no-c-format
 msgid "A comma-separated list of frame/field number ranges of content to keep."
-msgstr "Un elenco separato da virgole di intervalli di numeri di frame/campi il cui contenuto verrà mantenuto."
+msgstr "Un elenco separato da virgole di intervalli di numeri di fotogrammi/campi il cui contenuto verrà mantenuto."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:321
 #, no-c-format
 msgid "A comma-separated list of frame/field numbers after which to split."
-msgstr "Un elenco di numeri. separato da virgole. di frame/campi dopo cui suddividere."
+msgstr "Un elenco di numeri. separato da virgole. di fotogrammi/campi dopo cui suddividere."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:294
 #, no-c-format
@@ -3347,7 +3347,7 @@ msgstr "Aggiungi &nuova edizione prima"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:230
 #, no-c-format
 msgid "Add new ed&ition after"
-msgstr "Aggiungi nuova e&dizione prima"
+msgstr "Aggiungi nuova e&dizione dopo"
 
 #: src/propedit/propedit_cli_parser.cpp:227
 #, no-c-format
@@ -3457,7 +3457,7 @@ msgstr "Dopo l'attività uscita con &errore o l'utente ha interrotto l'attività
 #: src/mkvtoolnix-gui/merge/output.cpp:168
 #, no-c-format
 msgid "After frame/field numbers"
-msgstr "Dopo numero frame/campo"
+msgstr "Dopo numero fotogramma/campo"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:167
 #, no-c-format
@@ -3472,7 +3472,7 @@ msgstr "Dopo dimensione destinazione"
 #: src/mkvtoolnix-gui/merge/output.cpp:167
 #, no-c-format
 msgid "After specific timestamps"
-msgstr "Dopo specifici timestamp"
+msgstr "Dopo specifici data/ora"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:331
 #, no-c-format
@@ -3772,7 +3772,7 @@ msgstr "Qualsiasi opzione inserita qui verrà aggiunta alla fine della linea di 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:52
 #, no-c-format
 msgid "Any other file name is added as a source file for multiplexing, opened in the chapter editor or in the header editor depending on the current mode."
-msgstr "Qualsiasi altro nome file è aggiunto come file sorgente per il multiplexing, aperto nell'editor dei capitoli o nell'editor delle intestazioni a seconda del modo attuale."
+msgstr "Qualsiasi altro nome file è aggiunto come file sorgente per il multiplexing, aperto nell'editor dei capitoli o nell'editor intestazioni a seconda del modo attuale."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:544
 #, no-c-format
@@ -4171,12 +4171,12 @@ msgstr "L'interfaccia grafica avrà il tema di color scuro se lo schema dei colo
 #: src/mkvtoolnix-gui/merge/output.cpp:168
 #, no-c-format
 msgid "By parts based on frame/field numbers"
-msgstr "In parti in base al numero di frame/campi"
+msgstr "In parti in base al numero di fotogrammi/campi"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:168
 #, no-c-format
 msgid "By parts based on timestamps"
-msgstr "In parti in base al timestamp"
+msgstr "In parti in base a data/ora"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:327
 #, no-c-format
@@ -4430,7 +4430,7 @@ msgstr "Display capitolo"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:236
 #, no-c-format
 msgid "Chapter editor"
-msgstr "Editor &capitolo"
+msgstr "Editor capitolo"
 
 #: src/extract/extract_cli_parser.cpp:106
 #, no-c-format
@@ -5649,7 +5649,7 @@ msgstr "Disabilita flag \"traccia pre&definita\" per le tracce sottotitoli"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1976
 #, no-c-format
 msgid "Disable &tooltips"
-msgstr "Disabilita i tooltip"
+msgstr "Disabili&ta suggerimenti"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2041
 #, no-c-format
@@ -5956,7 +5956,7 @@ msgstr "Ogni parte viene quindi confrontata con l'elenco delle lingue selezionat
 #: src/mkvtoolnix-gui/merge/output.cpp:305
 #, no-c-format
 msgid "Each range consists of a start and end frame/field number with a '-' in the middle, e.g. '157-238'."
-msgstr "Ogni intervallo consiste in un numero iniziale/finale di frame/campo con un '-' nel mezzo, es. '157-238'."
+msgstr "Ogni intervallo consiste in un numero iniziale/finale di fotogramma/campo con un '-' nel mezzo, es. '157-238'."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:296
 #, no-c-format
@@ -6633,7 +6633,7 @@ msgstr "Il file non può essere aggiunto a se stesso. L'argomento per '--append-
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:295
 #, no-c-format
 msgid "Finished at:"
-msgstr "Completato il:"
+msgstr "Completata:"
 
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:51
 #, no-c-format
@@ -6802,7 +6802,7 @@ msgstr "Frame con dimensione {0}{1}{2}"
 #: src/mkvtoolnix-gui/merge/output.cpp:319
 #, no-c-format
 msgid "Frames/fields:"
-msgstr "Frame/campi:"
+msgstr "Fotogrammi/campi:"
 
 #: src/common/kax_info.cpp:914
 #: src/common/kax_info.cpp:1064
@@ -6882,19 +6882,19 @@ msgstr "Controllo globale destinazione"
 #: src/mkvtoolnix-gui/merge/track.cpp:482
 #, no-c-format
 msgid "Global tags"
-msgstr "Tag globali"
+msgstr "Etichette globali"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1838
 #, no-c-format
 msgid "Global tags:"
-msgstr "Tag globali:"
+msgstr "Etichette globali:"
 
 #: src/merge/generic_reader.cpp:300
 #, no-c-format
 msgid "Global tags: {0} entry"
 msgid_plural "Global tags: {0} entries"
-msgstr[0] "Tag globali: {0} elemento"
-msgstr[1] "Tag globali: {0} elementi"
+msgstr[0] "Etichette globali: {0} elemento"
+msgstr[1] "Etichette globali: {0} elementi"
 
 #: src/common/property_element.cpp:188
 #, no-c-format
@@ -7184,7 +7184,7 @@ msgstr "Se abilitato, la rimozione della finestra normalizzazione guadagno verr�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:402
 #, no-c-format
 msgid "If enabled, small colored boxes will be shown in the file and track lists as a visual clue to help associating tracks with the files they come from."
-msgstr "Se abilitata, verranno visualizzate piccole caselle colorate negli elenchi di file e tracce come indicatore visivo per aiutare ad associare le tracce ai file da cui provengono"
+msgstr "Se abilitata, verranno visualizzate piccole caselle colorate negli elenchi di file e tracce come indicatore visivo per aiutare ad associare le tracce ai file da cui provengono."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:484
 #, no-c-format
@@ -7531,7 +7531,7 @@ msgstr "Attività informative"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:234
 #, no-c-format
 msgid "Info tool"
-msgstr "Strumento informativo"
+msgstr "Strumento info"
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:221
 #, no-c-format
@@ -7551,7 +7551,7 @@ msgstr "Invece alcuni file devono essere impostati con l'opzione 'File capitolo'
 #: src/mkvtoolnix-gui/merge/tool.cpp:822
 #, no-c-format
 msgid "Instead such a file must be set via the 'global tags' option on the 'output' tab."
-msgstr "Invece alcuni file devono essere impostati con l'opzione 'Tag globale' nella scheda 'Destinazione'."
+msgstr "Invece alcuni file devono essere impostati con l'opzione 'Etichette globali' nella scheda 'Destinazione'."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:807
 #, no-c-format
@@ -7674,12 +7674,12 @@ msgstr "Trovati dati non valido per codifica Base64."
 #: src/common/split_arg_parsing.cpp:66
 #, no-c-format
 msgid "Invalid end frame/field number for '--split' in '--split {0}' (current part: {1}).\n"
-msgstr "Numero finale per frame/campo non valido per '--split' in '--split {0}' (parte attuale: {1}).\n"
+msgstr "Numero finale per fotogramma/campo non valido per '--split' in '--split {0}' (parte attuale: {1}).\n"
 
 #: src/common/split_arg_parsing.cpp:70
 #, no-c-format
 msgid "Invalid end frame/field number for '--split' in '--split {0}' (current part: {1}). The end number must be bigger than the start number.\n"
-msgstr "Numero finale per frame/campo non valido per '--split' in '--split {0}' (parte attuale: {1}). Il numero finale deve essere maggiore del numero iniziale.\n"
+msgstr "Numero finale per fotogramma/campo non valido per '--split' in '--split {0}' (parte attuale: {1}). Il numero finale deve essere maggiore del numero iniziale.\n"
 
 #: src/common/split_arg_parsing.cpp:63
 #, no-c-format
@@ -7816,12 +7816,12 @@ msgstr "Dimensione suddivisione non valida in '--split {0}'.\n"
 #: src/common/split_arg_parsing.cpp:56
 #, no-c-format
 msgid "Invalid start frame/field number for '--split' in '--split {0}' (current part: {1}).\n"
-msgstr "Numero iniziale per frame/campo non valido per '--split' in '--split {0}' (parte attuale: {1}).\n"
+msgstr "Numero iniziale per fotogramma/campo non valido per '--split' in '--split {0}' (parte attuale: {1}).\n"
 
 #: src/common/split_arg_parsing.cpp:77
 #, no-c-format
 msgid "Invalid start frame/field number for '--split' in '--split {0}' (current part: {1}). The start number must be bigger than or equal to the previous part's end number.\n"
-msgstr "Numero iniziale per frame/campo non valido per '--split' in '--split {0}' (parte attuale: {1}). Il numero iniziale deve essere maggiore o uguale al numero finale della parte precedente.\n"
+msgstr "Numero iniziale per fotogramma/campo non valido per '--split' in '--split {0}' (parte attuale: {1}). Il numero iniziale deve essere maggiore o uguale al numero finale della parte precedente.\n"
 
 #: src/input/r_usf.cpp:214
 #, no-c-format
@@ -8371,7 +8371,7 @@ msgstr "Matroska"
 #: src/mkvtoolnix-gui/util/widget.cpp:189
 #, no-c-format
 msgid "Matroska and WebM files"
-msgstr "File Matroska e WebM"
+msgstr "File Matroska/WebM"
 
 #: src/common/file_types.cpp:49
 #, no-c-format
@@ -8457,7 +8457,7 @@ msgstr "Luminanza massima in candele per metro quadro (cd/m²)."
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1844
 #, no-c-format
 msgid "Maximum number of files:"
-msgstr "Max. numero di file:"
+msgstr "Numero max file:"
 
 #: src/extract/xtr_rmff.cpp:47
 #, no-c-format
@@ -8838,7 +8838,7 @@ msgstr "Nessun errore riscontrato."
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:151
 #, no-c-format
 msgid "No errors yet"
-msgstr "Ancora nessun errore"
+msgstr "Nessun errore"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1491
 #, no-c-format
@@ -8850,7 +8850,7 @@ msgstr "Nessuna compressione extra"
 #: src/mkvtoolnix-gui/forms/info/tool.h:179
 #, no-c-format
 msgid "No file has been opened yet."
-msgstr "Nessun file è ancora stato aperto."
+msgstr "Non è ancora stato aperto nessun file."
 
 #: src/info/mkvinfo.cpp:36
 #: src/propedit/options.cpp:35
@@ -8913,7 +8913,7 @@ msgstr "Non è stata ancora aperta nessuna attività multiplexing."
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:149
 #, no-c-format
 msgid "No output yet"
-msgstr "Ancora nessun risultato"
+msgstr "Nessun risultato"
 
 #: src/common/mm_io_x.cpp:40
 #, no-c-format
@@ -8968,7 +8968,7 @@ msgstr "Nessun numero versione rilevato.\n"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:150
 #, no-c-format
 msgid "No warnings yet"
-msgstr "Ancora nessun avviso"
+msgstr "Nessun avviso"
 
 #: src/merge/mkvmerge.cpp:1360
 #, no-c-format
@@ -9060,7 +9060,7 @@ msgstr "Non scartabile"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:457
 #, no-c-format
 msgid "Not finished yet"
-msgstr "Non ancora completato"
+msgstr "Non completata"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:538
 #, no-c-format
@@ -9072,7 +9072,7 @@ msgstr "Non necessario per le tracce AAC lette da altri formati contenitore come
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:456
 #, no-c-format
 msgid "Not started yet"
-msgstr "Non ancora iniziato"
+msgstr "Non iniziata"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:529
 #, no-c-format
@@ -9312,22 +9312,22 @@ msgstr "Apri flusso Bitstream Units"
 #: src/mkvtoolnix-gui/info/tool.cpp:128
 #, no-c-format
 msgid "Open Matroska or WebM files"
-msgstr "Apri file Matroska o WebM"
+msgstr "Apri file Matroska/WebM"
 
 #: src/mkvtoolnix-gui/forms/header_editor/tool.h:180
 #, no-c-format
 msgid "Open a Matroska or WebM file via the \"header editor\" menu, the button below or drag & drop one here."
-msgstr "Apri un file Matroska o WebM attraverso il menu \"editor intestazioni\", il pulsante sottostante o trascina e rilascia qui."
+msgstr "Apri un file Matroska o WebM dal menu \"Editor intestazioni\", o seleziona il pulsante qui sotto o usa trascina e rilascia qui."
 
 #: src/mkvtoolnix-gui/forms/info/tool.h:180
 #, no-c-format
 msgid "Open a Matroska or WebM file via the \"info tool\" menu, the button below or drag & drop one here."
-msgstr "Apri un file Matroska o WebM attraverso il menu \"strumento info\", il pulsante sottostante o trascina e rilascia qui."
+msgstr "Apri un file Matroska o WebM dal menu \"Strumento info\", o seleziona il pulsante qui sotto o usa trascina e rilascia qui."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:194
 #, no-c-format
 msgid "Open a file via the \"chapter editor\" menu, the buttons below or drag & drop one here."
-msgstr "Apri un file con menu \"editor capitoli\", il pulsante sotto o usando qui il trascinamento e rilascio."
+msgstr "Apri un file dal menu \"Editor capitoli\", o seleziona il pulsante qui sotto o usa trascina/rilascia."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:798
 #, no-c-format
@@ -9598,7 +9598,7 @@ msgstr "Elementi della scaletta:"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:233
 #, no-c-format
 msgid "Playlists & Blu-rays"
-msgstr "Playlist & Blu-ray"
+msgstr "Playlist e Blu-ray"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:58
 #, no-c-format
@@ -10169,12 +10169,12 @@ msgstr "&Ricarica file modificato"
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:294
 #, no-c-format
 msgid "Remaining time for current job:"
-msgstr "Tempo rimanente per l'attività attuale:"
+msgstr "Tempo rimanente attività attuale:"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:297
 #, no-c-format
 msgid "Remaining time for queue:"
-msgstr "Tempo rimanente per la coda:"
+msgstr "Tempo rimanente coda:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:744
 #, no-c-format
@@ -11112,7 +11112,7 @@ msgstr "Ignoro {0} byte iniziali (nessuna intestazione MP3 valida).\n"
 #: src/mkvtoolnix-gui/util/settings.cpp:57
 #, no-c-format
 msgid "Sleep the computer"
-msgstr "Iberna il computer"
+msgstr "Manda il computer in sleep"
 
 #: src/common/kax_element_names.cpp:270
 #, no-c-format
@@ -11258,7 +11258,7 @@ msgstr[1] "Avvia &manualmente le attività"
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291
 #, no-c-format
 msgid "Started at:"
-msgstr "Avviato alle:"
+msgstr "Avviata alle:"
 
 #: src/common/kax_info.cpp:1210
 #, no-c-format
@@ -12899,7 +12899,7 @@ msgstr "La stringa 'all' funziona su tutti i tag."
 #: src/propedit/propedit_cli_parser.cpp:261
 #, no-c-format
 msgid "The string 'global' works on the global tags."
-msgstr "La stringa 'global' funziona sui tag globali."
+msgstr "La stringa 'global' funziona nelle etichette globali."
 
 #: src/propedit/propedit_cli_parser.cpp:254
 #, no-c-format
@@ -14946,7 +14946,7 @@ msgstr "È possibile specificare fino a nove cifre per il numero di nanosecondi 
 #: src/mkvtoolnix-gui/merge/output.cpp:184
 #, no-c-format
 msgid "You can split based on the amount of time passed, based on timestamps, on frame/field numbers or on chapter numbers."
-msgstr "È possibile dividerlo in base alla quantità di tempo trascorso , in base a data/ora , in base ai frame/campi o al numero capitolo."
+msgstr "È possibile dividerlo in base alla quantità di tempo trascorso , in base a data/ora , in base ai fotogrammi/campi o al numero capitolo."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:336
 #, no-c-format
@@ -15107,7 +15107,7 @@ msgstr "cuesheet [options] out.cue"
 #: src/common/kax_info.cpp:656
 #, no-c-format
 msgid "default duration: {0:.3f}ms ({1:.3f} frames/fields per second for a video track)"
-msgstr "durata predefinita: {0:.3f}ms ({1:.3f} frame/campi per secondo per una traccia video)"
+msgstr "durata predefinita: {0:.3f}ms ({1:.3f} fotogrammi/campi per secondo per una traccia video)"
 
 #: src/common/compression/zlib.cpp:75
 #, no-c-format
@@ -15864,7 +15864,7 @@ msgstr "{0} (ID traccia per mkvmerge & mkvextract: {1})"
 #: src/common/kax_info.cpp:856
 #, no-c-format
 msgid "{0} ({1:.3f} frames/fields per second for a video track)"
-msgstr "{0} ({1:.3f} frame/campi per secondo per una traccia video)"
+msgstr "{0} ({1:.3f} fotogrammi/campi per secondo per una traccia video)"
 
 #: src/common/strings/formatting.cpp:259
 #, no-c-format
