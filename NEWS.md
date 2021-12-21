@@ -12,6 +12,9 @@
 * mkvmerge: VobSub reader: files containing `id: --` lines to indicate that
   the track language isn't known were rejected by `mkvmerge`. Now they're
   accepted, and `und` (undetermined) is used as the language. Fixes #3246.
+* MKVToolNix GUI: chapter editor: the "Save to Matroska or WebM file" function
+  was using the wrong standard file dialog (the "open file" one instead of
+  "save"), leading to confusing button names. Fixes #3242.
 
 
 # Version 63.0.0 "Everything" 2021-11-14

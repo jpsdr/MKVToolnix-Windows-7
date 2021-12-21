@@ -802,11 +802,12 @@ Tab::saveToMatroskaImpl(bool requireNewFileName) {
 
     if (doRequireNewFileName) {
       auto defaultFilePath = !p->fileName.isEmpty() ? QFileInfo{p->fileName}.path() : Util::Settings::get().lastOpenDirPath();
-      newFileName          = Util::getOpenFileName(this, QY("Save chapters to Matroska or WebM file"), defaultFilePath,
+      newFileName          = Util::getSaveFileName(this, QY("Save chapters to Matroska or WebM file"), defaultFilePath, {},
                                                    QY("Supported file types") + Q(" (*.mkv *.mka *.mks *.mk3d *.webm);;") +
                                                    QY("Matroska files")       + Q(" (*.mkv *.mka *.mks *.mk3d);;") +
                                                    QY("WebM files")           + Q(" (*.webm);;") +
-                                                   QY("All files")            + Q(" (*)"));
+                                                   QY("All files")            + Q(" (*)"),
+                                                   {}, {}, QFileDialog::DontConfirmOverwrite, QFileDialog::ExistingFile);
 
       if (newFileName.isEmpty())
         return false;

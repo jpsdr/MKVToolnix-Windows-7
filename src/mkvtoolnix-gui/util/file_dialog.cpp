@@ -7,6 +7,7 @@
 #include "common/path.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 
 namespace mtx::gui::Util {
 
@@ -85,20 +86,48 @@ getSaveFileName(QWidget *parent,
                 QString const &filter,
                 QString const &defaultSuffix,
                 QString *selectedFilter,
-                QFileDialog::Options options) {
+                QFileDialog::Options options,
+                QFileDialog::FileMode fileMode) {
   auto defaultName = sanitizeDirectory(dir, true);
   if (!defaultFileName.isEmpty())
     defaultName = QDir::toNativeSeparators(Q(mtx::fs::to_path(dir) / mtx::fs::to_path(defaultFileName)));
 
-  auto result = QDir::toNativeSeparators(QFileDialog::getSaveFileName(parent, caption, defaultName, filter, selectedFilter, options & QFileDialog::DontUseCustomDirectoryIcons));
+  while (true) {
+    QFileDialog dlg{parent, caption, defaultName, filter};
 
-  if (result.isEmpty())
-    return result;
+    dlg.setDefaultSuffix(defaultSuffix);
+    dlg.setOptions(options & QFileDialog::DontUseCustomDirectoryIcons);
+    dlg.setFileMode(fileMode);
+    dlg.setSupportedSchemes({ Q("file") });
+    dlg.setAcceptMode(QFileDialog::AcceptSave);
 
-  if (!defaultSuffix.isEmpty() && QFileInfo{result}.suffix().isEmpty())
-    result += Q(".") + defaultSuffix;
+    if (selectedFilter && !selectedFilter->isEmpty())
+      dlg.selectNameFilter(*selectedFilter);
 
-  return result;
+    if (dlg.exec() != QDialog::Accepted)
+      return {};
+
+    if (selectedFilter)
+      *selectedFilter = dlg.selectedNameFilter();
+
+    auto result = QDir::toNativeSeparators(dlg.selectedFiles().value(0));
+
+    if (result.isEmpty())
+      return result;
+
+    if (!defaultSuffix.isEmpty() && QFileInfo{result}.suffix().isEmpty())
+      result += Q(".") + defaultSuffix;
+
+    if ((fileMode != QFileDialog::ExistingFile) || QFile{result}.exists())
+      return result;
+
+    MessageBox::critical(parent)
+      ->title(QY("Select existing file"))
+      .text(QY("You must select an existing file."))
+      .exec();
+  }
+
+  return {};
 }
 
 QString
