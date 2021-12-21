@@ -239,7 +239,7 @@ def transifex_remove_fuzzy_and_push resource, language
 
   normalize_po po_file
 
-  runq "tx push",  po_file, "tx push -t -f --no-interactive -r mkvtoolnix.#{resource} -l #{language} > /dev/null"
+  runq "tx push",  po_file, "tx push -t -f -r mkvtoolnix.#{resource} -l #{language} > /dev/null"
 
   runq_git po_file, "checkout HEAD -- #{po_file}"
 end
