@@ -386,9 +386,9 @@ JSON for Modern C++
 
 An XML processing library
 
-  * Copyright: 2006–2019 by Arseny Kapoulkine <arseny.kapoulkine@gmail.com>
+  * Copyright: 2006–2020 by Arseny Kapoulkine <arseny.kapoulkine@gmail.com>
   * License: MIT (see `doc/licenses/pugixml-MIT.txt`)
-  * URL: http://pugixml.org/
+  * URL: https://pugixml.org/
   * Corresponding files: `lib/pugixml/*`
 
 ## 6.7. utf8-cpp
