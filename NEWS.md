@@ -24,6 +24,7 @@
 * The bundled `utf8-cpp` library was updated to v3.2 revision b85efd6.
 * The bundled `pugixml` library was updated to v1.11 revision 6a76cac.
 * The bundled `fmt` library was updated to v8.0.1.
+* The bundled `nlohmann-json` library was updated to v3.9.1.
 
 
 # Version 63.0.0 "Everything" 2021-11-14

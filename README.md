@@ -377,7 +377,7 @@ files.
 
 JSON for Modern C++
 
-  * Copyright: 2013-2019 Niels Lohmann
+  * Copyright: 2013-2021 Niels Lohmann
   * License: MIT (see `doc/licenses/nlohmann-json-MIT.txt`)
   * URL: https://github.com/nlohmann/json
   * Corresponding files: `lib/nlohmann-json/*`
