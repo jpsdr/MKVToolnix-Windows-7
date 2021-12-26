@@ -15,6 +15,9 @@
 * MKVToolNix GUI: chapter editor: the "Save to Matroska or WebM file" function
   was using the wrong standard file dialog (the "open file" one instead of
   "save"), leading to confusing button names. Fixes #3242.
+* all: language lists: the entries for "Ancient Greek (to 1453)" and "Modern
+  Greek (1453-)" have been renamed to "Greek (ancient, -1453)" and "Greek
+  (modern, 1453-)" respectively in order to be easier to find.
 
 
 # Version 63.0.0 "Everything" 2021-11-14

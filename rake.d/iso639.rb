@@ -1,4 +1,9 @@
 def create_iso639_language_list_file
+  name_overrides = {
+    "grc" => "Greek (ancient, -1453)",
+    "gre" => "Greek (modern, 1453-)",
+  }
+
   content = Mtx::OnlineFile.download("https://www.loc.gov/standards/iso639-2/php/code_list.php", "iso-639-2.html")
 
   entries_by_alpha_3 = {}
@@ -83,7 +88,8 @@ def create_iso639_language_list_file
   rows = entries_by_alpha_3.
     values.
     map do |entry|
-    [ entry["name"].to_u8_cpp_string,
+    name = name_overrides[ entry["alpha_3_to_use"] ] || entry["name"]
+    [ name.to_u8_cpp_string,
       entry["alpha_3_to_use"].to_cpp_string,
       (entry["alpha_2"] || '').to_cpp_string,
       entry["bibliographic"] ? entry["alpha_3"].to_cpp_string : '""s',

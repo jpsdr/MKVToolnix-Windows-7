@@ -280,7 +280,6 @@ init() {
   g_languages.emplace_back(u8"Anambé"s,                                                     "aan"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Anamgura"s,                                                   "imi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Anasi"s,                                                      "bpo"s,     ""s,   ""s,    false);
-  g_languages.emplace_back(u8"Ancient Greek (to 1453)"s,                                    "grc"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Ancient Hebrew"s,                                             "hbo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ancient Macedonian"s,                                         "xmk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ancient North Arabian"s,                                      "xna"s,     ""s,   ""s,    false);
@@ -2230,6 +2229,8 @@ init() {
   g_languages.emplace_back(u8"Grangali"s,                                                   "nli"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Grass Koiari"s,                                               "kbk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Grebo"s,                                                      "grb"s,     ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Greek (ancient, -1453)"s,                                     "grc"s,     ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Greek (modern, 1453-)"s,                                      "gre"s,     "el"s, "ell"s, true );
   g_languages.emplace_back(u8"Greek Sign Language"s,                                        "gss"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Greek languages"s,                                            "grk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Green Gelao"s,                                                "giq"s,     ""s,   ""s,    false);
@@ -4539,7 +4540,6 @@ init() {
   g_languages.emplace_back(u8"Mocho"s,                                                      "mhc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mocoví"s,                                                     "moc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Modang"s,                                                     "mxd"s,     ""s,   ""s,    false);
-  g_languages.emplace_back(u8"Modern Greek (1453-)"s,                                       "gre"s,     "el"s, "ell"s, true );
   g_languages.emplace_back(u8"Modole"s,                                                     "mqo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Moere"s,                                                      "mvq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mofu-Gudur"s,                                                 "mif"s,     ""s,   ""s,    false);
