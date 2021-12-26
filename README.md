@@ -395,9 +395,9 @@ An XML processing library
 
 UTF-8 with C++ in a Portable Way
 
-  * Copyright: 2006 Nemanja Trifunovic
-  * License: custom (see `doc/licenses/utf8-cpp-custom.txt`)
-  * URL: http://utfcpp.sourceforge.net/
+  * Copyright: 2006-2021 Nemanja Trifunovic
+  * License: Boost Software License 1.0 (see `doc/licenses/Boost-1.0.txt`)
+  * URL: https://github.com/nemtrif/utfcpp/
   * Corresponding files: `lib/utf8-cpp/*`
 
 ## 6.8. Oxygen icons and sound files

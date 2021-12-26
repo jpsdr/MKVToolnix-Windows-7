@@ -19,6 +19,10 @@
   Greek (1453-)" have been renamed to "Greek (ancient, -1453)" and "Greek
   (modern, 1453-)" respectively in order to be easier to find.
 
+## Build system changes
+
+* The bundled `utf8-cpp` library was updated to v3.2 revision b85efd6.
+
 
 # Version 63.0.0 "Everything" 2021-11-14
 
