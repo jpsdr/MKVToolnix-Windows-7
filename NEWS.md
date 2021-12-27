@@ -7,24 +7,25 @@
 
 ## Bug fixes
 
-* MKVToolNix: high DPI scaling: fixed the icons in the tool selector having
-  the wrong size for scaling factors other than 100% or 200%. Fixes #3229.
+* all: language lists: the entries for "Ancient Greek (to 1453)" and "Modern
+  Greek (1453-)" have been renamed to "Greek (ancient, -1453)" and "Greek
+  (modern, 1453-)" respectively in order to be easier to find.
 * mkvmerge: VobSub reader: files containing `id: --` lines to indicate that
   the track language isn't known were rejected by `mkvmerge`. Now they're
   accepted, and `und` (undetermined) is used as the language. Fixes #3246.
 * MKVToolNix GUI: chapter editor: the "Save to Matroska or WebM file" function
   was using the wrong standard file dialog (the "open file" one instead of
   "save"), leading to confusing button names. Fixes #3242.
-* all: language lists: the entries for "Ancient Greek (to 1453)" and "Modern
-  Greek (1453-)" have been renamed to "Greek (ancient, -1453)" and "Greek
-  (modern, 1453-)" respectively in order to be easier to find.
+* MKVToolNix GUI: high DPI scaling: fixed the icons in the tool selector
+  having the wrong size for scaling factors other than 100% or 200%. Fixes
+  #3229.
 
 ## Build system changes
 
-* The bundled `utf8-cpp` library was updated to v3.2 revision b85efd6.
-* The bundled `pugixml` library was updated to v1.11 revision 6a76cac.
 * The bundled `fmt` library was updated to v8.0.1.
 * The bundled `nlohmann-json` library was updated to v3.9.1.
+* The bundled `pugixml` library was updated to v1.11 revision 6a76cac.
+* The bundled `utf8-cpp` library was updated to v3.2 revision b85efd6.
 
 
 # Version 63.0.0 "Everything" 2021-11-14
