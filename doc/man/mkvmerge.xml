@@ -2758,6 +2758,10 @@ Track ID 1: audio (A_MPEG/L3)</screen>
   </para>
 
   <para>
+   The option file's name itself must be specified as a command line argument prefixed with a '<literal>@</literal>' character.
+  </para>
+
+  <para>
    The command line '<command>mkvmerge -o "my file.mkv" -A "a movie.avi" sound.ogg</command>' could be converted into the following
    JSON option file called e.g. '<filename>options.json</filename>':
   </para>
@@ -2771,6 +2775,10 @@ Track ID 1: audio (A_MPEG/L3)</screen>
   "a movie.avi",
   "sound.ogg"
 ]</programlisting>
+
+  <para>
+   The corresponding command would then be '<command>mkvmerge @options.json</command>'.
+  </para>
  </refsect1>
 
  <refsect1 id="mkvmerge.file_linking">
