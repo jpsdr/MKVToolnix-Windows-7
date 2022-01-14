@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: Matroska reader: DVB subtitle tracks with a codec private data
+  size of more than five bytes are accepted now, too. Fixes #3258.
+
+
 # Version 64.0.0 "Willows" 2021-12-27
 
 ## New features and enhancements

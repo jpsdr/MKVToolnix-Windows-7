@@ -685,9 +685,7 @@ kax_reader_c::verify_video_track(kax_track_t *t) {
 
 bool
 kax_reader_c::verify_dvb_subtitle_track(kax_track_t *t) {
-  if (   !t->private_data
-      || (t->private_data->get_size() < 4)
-      || (t->private_data->get_size() > 5)) {
+  if (!t->private_data || (t->private_data->get_size() < 4)) {
     mxwarn(fmt::format(Y("matroska_reader: The CodecID for track {0} is '{1}', but the private codec data does not contain valid headers.\n"), t->tnum, t->codec_id));
     return false;
   }
