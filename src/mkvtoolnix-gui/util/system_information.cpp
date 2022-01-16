@@ -37,6 +37,22 @@ using namespace mtx::gui;
 
 namespace {
 
+QString
+formatPugixmlVersion() {
+  // From pugixml.hpp:
+  //   Define version macro; evaluates to major * 1000 + minor * 10 +
+  //   patch so that it's safe to use in less-than comparisons
+  //
+  //   Note: pugixml used major * 100 + minor * 10 + patch format up
+  //   until 1.9 (which had version identifier 190); starting from
+  //   pugixml 1.10, the minor version number is two digits
+#if PUGIXML_VERSION >= 1000
+  return Q("%1.%2.%3").arg(PUGIXML_VERSION / 1'000).arg((PUGIXML_VERSION / 10) % 100).arg(PUGIXML_VERSION % 10);
+#else
+  return Q("%1.%2.%3").arg(PUGIXML_VERSION / 100).arg((PUGIXML_VERSION / 10) % 10).arg(PUGIXML_VERSION % 10);
+#endif
+}
+
 void
 gatherGeneralInfo(QStringList &info) {
   InstallationChecker checker;
@@ -174,7 +190,7 @@ gatherCompilerAndLibraryInfo(QStringList &info) {
   info << Q("* fmt: %1.%2.%3").arg(FMT_VERSION / 10'000).arg((FMT_VERSION / 100) % 100).arg(FMT_VERSION % 100);
   info << Q("* Matroska: %1").arg(Q(libmatroska::KaxCodeVersion));
   info << Q("* nlohmann-json: %1.%2.%3").arg(NLOHMANN_JSON_VERSION_MAJOR).arg(NLOHMANN_JSON_VERSION_MINOR).arg(NLOHMANN_JSON_VERSION_PATCH);
-  info << Q("* pugixml: %1.%2.%3").arg((PUGIXML_VERSION / 1'000) % 10).arg((PUGIXML_VERSION / 10) % 10).arg(PUGIXML_VERSION % 10);
+  info << Q("* pugixml: %1").arg(formatPugixmlVersion());
   info << Q("* Vorbis: %1").arg(Q(vorbis_version_string()));
   info << Q("* zlib: %1").arg(Q(ZLIB_VERSION));
 }
