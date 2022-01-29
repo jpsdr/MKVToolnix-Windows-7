@@ -25,6 +25,7 @@ public:
   virtual void resetValue() override;
   virtual bool validateValue() const override;
   virtual void copyValueToElement() override;
+  virtual void toggleFlag();
 };
 
 }

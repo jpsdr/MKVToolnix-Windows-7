@@ -34,6 +34,8 @@ Tool::Tool(QWidget *parent,
   // Setup UI controls.
   ui->setupUi(this);
 
+  m_modifyTracksSubmenu.setup(*MainWindow::getUi()->menuHeaderEditorModifyTrack);
+
   MainWindow::get()->registerSubWindowWidget(*this, *ui->editors);
 }
 
@@ -55,6 +57,7 @@ void
 Tool::setupActions() {
   auto mw   = MainWindow::get();
   auto mwUi = MainWindow::getUi();
+  auto &mts = m_modifyTracksSubmenu;
 
   connect(mwUi->actionHeaderEditorOpen,     &QAction::triggered,             this, &Tool::selectFileToOpen);
   connect(mwUi->actionHeaderEditorSave,     &QAction::triggered,             this, &Tool::save);
@@ -63,6 +66,15 @@ Tool::setupActions() {
   connect(mwUi->actionHeaderEditorReload,   &QAction::triggered,             this, &Tool::reload);
   connect(mwUi->actionHeaderEditorClose,    &QAction::triggered,             this, &Tool::closeCurrentTab);
   connect(mwUi->actionHeaderEditorCloseAll, &QAction::triggered,             this, &Tool::closeAllTabs);
+
+  connect(mts.m_toggleTrackEnabledFlag,     &QAction::triggered,             this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleDefaultTrackFlag,     &QAction::triggered,             this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleForcedDisplayFlag,    &QAction::triggered,             this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleCommentaryFlag,       &QAction::triggered,             this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleOriginalFlag,         &QAction::triggered,             this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleHearingImpairedFlag,  &QAction::triggered,             this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleVisualImpairedFlag,   &QAction::triggered,             this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleTextDescriptionsFlag, &QAction::triggered,             this, &Tool::toggleTrackFlag);
 
   connect(ui->openFileButton,               &QPushButton::clicked,           this, &Tool::selectFileToOpen);
 
@@ -86,6 +98,7 @@ void
 Tool::enableMenuActions() {
   auto hasTabs = !!ui->editors->count();
   auto mwUi    = MainWindow::getUi();
+  auto tab     = currentTab();
 
   mwUi->actionHeaderEditorSave->setEnabled(hasTabs);
   mwUi->actionHeaderEditorReload->setEnabled(hasTabs);
@@ -97,6 +110,7 @@ Tool::enableMenuActions() {
   mwUi->menuHeaderEditorAll->setEnabled(hasTabs);
   mwUi->actionHeaderEditorSaveAll->setEnabled(hasTabs);
   mwUi->actionHeaderEditorCloseAll->setEnabled(hasTabs);
+  mwUi->menuHeaderEditorModifyTrack->setEnabled(tab && tab->isTrackSelected());
 }
 
 void
@@ -110,6 +124,8 @@ Tool::retranslateUi() {
   auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? Q("") : App::translate("CloseButton", "Close Tab");
 
   ui->retranslateUi(this);
+
+  m_modifyTracksSubmenu.retranslateUi();
 
   for (auto idx = 0, numTabs = ui->editors->count(); idx < numTabs; ++idx) {
     static_cast<Tab *>(ui->editors->widget(idx))->retranslateUi();
@@ -272,6 +288,15 @@ Tool::nextPreviousWindowActionTexts()
     QY("&Next header editor tab"),
     QY("&Previous header editor tab"),
   };
+}
+
+void
+Tool::toggleTrackFlag() {
+  auto action = dynamic_cast<QAction *>(sender());
+  auto tab    = currentTab();
+
+  if (action && tab)
+    tab->toggleSpecificTrackFlag(action->data().toUInt());
 }
 
 }

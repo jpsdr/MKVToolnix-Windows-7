@@ -1,5 +1,13 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: header editor: added several menu entries & keyboard
+  shortcuts for toggling various track flags of the currently selected track,
+  e.g. `Ctrl+Alt+F D` (that's `Ctrl` and `Alt` with `F` simultaneously
+  followed by `D` without any other key pressed) for toggling the "default
+  track" flag. Part of the implementation of #3253.
+
 ## Bug fixes
 
 * mkvmerge: Matroska reader: DVB subtitle tracks with a codec private data

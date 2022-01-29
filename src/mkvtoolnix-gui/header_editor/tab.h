@@ -6,6 +6,7 @@
 
 #include "mkvtoolnix-gui/header_editor/page_model.h"
 #include "mkvtoolnix-gui/util/kax_analyzer.h"
+#include "mkvtoolnix-gui/util/modify_tracks_submenu.h"
 
 class QAction;
 class QMenu;
@@ -47,9 +48,11 @@ protected:
   AttachmentsPage *m_attachmentsPage{};
   bool m_ignoreSelectionChanges{}, m_tracksReordered{};
 
-  QMenu *m_treeContextMenu;
+  QMenu *m_treeContextMenu, *m_modifySelectedTrackMenu;
   QAction *m_expandAllAction, *m_collapseAllAction, *m_addAttachmentsAction, *m_removeAttachmentAction, *m_removeAllAttachmentsAction, *m_saveAttachmentContentAction;
   QAction *m_replaceAttachmentContentAction, *m_replaceAttachmentContentSetValuesAction;
+
+  mtx::gui::Util::ModifyTracksSubmenu m_modifyTracksSubmenu;
 
   std::shared_ptr<EbmlElement> m_eSegmentInfo, m_eTracks;
 
@@ -67,6 +70,9 @@ public:
   virtual void validate();
   virtual void addAttachment(KaxAttachedPtr const &attachment);
   virtual bool isClosingOrReloadingOkIfModified(ModifiedConfirmationMode mode);
+  virtual void toggleSpecificTrackFlag(unsigned int wantedId);
+  virtual void toggleTrackFlag();
+  virtual bool isTrackSelected();
 
 Q_SIGNALS:
   void removeThisTab();

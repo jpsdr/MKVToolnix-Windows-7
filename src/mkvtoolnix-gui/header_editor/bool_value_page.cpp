@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QCheckBox>
 #include <QComboBox>
 
 #include "common/qt.h"
@@ -62,6 +63,14 @@ BoolValuePage::validateValue()
 void
 BoolValuePage::copyValueToElement() {
   static_cast<EbmlUInteger *>(m_element)->SetValue(m_cbValue->currentIndex());
+}
+
+void
+BoolValuePage::toggleFlag() {
+  if (!m_present && !m_cbAddOrRemove->isChecked())
+    m_cbAddOrRemove->setChecked(true);
+
+  m_cbValue->setCurrentIndex(1 - m_cbValue->currentIndex());
 }
 
 }

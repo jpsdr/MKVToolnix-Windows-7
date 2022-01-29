@@ -4,6 +4,7 @@
 
 #include "mkvtoolnix-gui/main_window/tool_base.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
+#include "mkvtoolnix-gui/util/modify_tracks_submenu.h"
 
 class QDragEnterEvent;
 class QDropEvent;
@@ -25,6 +26,7 @@ protected:
   std::unique_ptr<Ui::Tool> ui;
   QMenu *m_headerEditorMenu;
   mtx::gui::Util::FilesDragDropHandler m_filesDDHandler;
+  mtx::gui::Util::ModifyTracksSubmenu m_modifyTracksSubmenu;
 
 public:
   explicit Tool(QWidget *parent, QMenu *headerEditorMenu);
@@ -53,6 +55,7 @@ public Q_SLOTS:
   virtual void openFilesFromCommandLine(QStringList const &fileNames);
   virtual void enableMenuActions();
   virtual void showTab(Tab &tab);
+  virtual void toggleTrackFlag();
 
 protected:
   virtual void openFile(QString const &fileName);
