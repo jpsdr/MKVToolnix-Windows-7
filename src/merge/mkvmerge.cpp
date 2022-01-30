@@ -387,7 +387,7 @@ set_usage() {
   usage_text += Y("  --flush-on-close         Flushes all cached data to storage when closing\n"
                   "                           a file opened for writing.\n");
   usage_text += Y("  --abort-on-warnings      Aborts the program after the first warning is\n"
-                  "                           emitted.");
+                  "                           emitted.\n");
   usage_text += Y("  --deterministic <seed>   Enables the creation of byte-identical files\n"
                   "                           if the same source files with the same options\n"
                   "                           and the same seed are used.\n");
