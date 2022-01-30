@@ -46,6 +46,7 @@ public:
   virtual bool hasSourceFiles() const;
   virtual bool hasDestinationFileName() const;
   virtual bool hasTitle() const;
+  virtual bool hasSelectedNotAppendedRegularTracks() const;
 
   virtual QString const &fileName() const;
   virtual QString title() const;
@@ -61,6 +62,8 @@ public:
 
   virtual void addOrAppendIdentifiedFiles(QVector<SourceFilePtr> const &identifiedFiles, QModelIndex const &fileModelIdx, IdentificationPack::AddMode addMode);
   virtual void addIdentifiedFilesAsAdditionalParts(QVector<SourceFilePtr> const &identifiedFiles, QModelIndex const &fileModelIdx);
+
+  virtual void toggleSpecificTrackFlag(unsigned int wantedId);
 
 Q_SIGNALS:
   void removeThisTab();

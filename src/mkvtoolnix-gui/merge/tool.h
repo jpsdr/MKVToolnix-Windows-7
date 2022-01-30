@@ -61,6 +61,7 @@ public Q_SLOTS:
   virtual void copyOutputFileNameToTitle();
   virtual void copyTitleToOutputFileName();
   virtual void addFilesFromClipboard();
+  virtual void toggleTrackFlag();
 
   virtual void toolShown() override;
   virtual void tabTitleChanged();

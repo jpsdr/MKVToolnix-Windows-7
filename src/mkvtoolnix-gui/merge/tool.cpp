@@ -29,6 +29,7 @@
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 #include "mkvtoolnix-gui/util/message_box.h"
+#include "mkvtoolnix-gui/util/modify_tracks_submenu.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
@@ -59,6 +60,8 @@ class ToolPrivate {
 
   QHash<Tab *, int> lastAddAppendFileNum;
 
+  mtx::gui::Util::ModifyTracksSubmenu modifyTracksSubmenu;
+
   ToolPrivate(QWidget *p_parent, QMenu *p_mergeMenu);
 };
 
@@ -81,6 +84,9 @@ Tool::Tool(QWidget *parent,
 
   // Setup UI controls.
   p.ui->setupUi(this);
+
+  p.modifyTracksSubmenu.setup(*MainWindow::getUi()->menuMergeModifySelectedTracks);
+  p.modifyTracksSubmenu.m_toggleTrackEnabledFlag->setVisible(false);
 
   setupFileIdentificationThread();
 
@@ -111,6 +117,7 @@ Tool::setupActions() {
   auto &p   = *p_func();
   auto mw   = MainWindow::get();
   auto mwUi = MainWindow::getUi();
+  auto &mts = p.modifyTracksSubmenu;
 
   connect(p.mergeMenu,                                &QMenu::aboutToShow,               this, &Tool::enableMenuActions);
   connect(p.mergeMenu,                                &QMenu::aboutToHide,               this, &Tool::enableCopyMenuActions);
@@ -132,6 +139,14 @@ Tool::setupActions() {
   connect(mwUi->actionMergeCopyOutputFileNameToTitle, &QAction::triggered,               this, &Tool::copyOutputFileNameToTitle);
   connect(mwUi->actionMergeCopyTitleToOutputFileName, &QAction::triggered,               this, &Tool::copyTitleToOutputFileName);
   connect(mwUi->actionMergeAddFilesFromClipboard,     &QAction::triggered,               this, &Tool::addFilesFromClipboard);
+
+  connect(mts.m_toggleDefaultTrackFlag,               &QAction::triggered,               this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleForcedDisplayFlag,              &QAction::triggered,               this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleCommentaryFlag,                 &QAction::triggered,               this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleOriginalFlag,                   &QAction::triggered,               this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleHearingImpairedFlag,            &QAction::triggered,               this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleVisualImpairedFlag,             &QAction::triggered,               this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleTextDescriptionsFlag,           &QAction::triggered,               this, &Tool::toggleTrackFlag);
 
   connect(p.ui->merges,                               &QTabWidget::tabCloseRequested,    this, &Tool::closeTab);
   connect(p.ui->newFileButton,                        &QPushButton::clicked,             this, &Tool::appendNewTab);
@@ -183,6 +198,7 @@ Tool::enableMenuActions() {
   mwUi->actionMergeStartMuxingAll->setEnabled(hasTab);
   mwUi->actionMergeAddAllToJobQueue->setEnabled(hasTab);
   mwUi->actionMergeAddFilesFromClipboard->setEnabled(!fileNamesFromClipboard().isEmpty());
+  mwUi->menuMergeModifySelectedTracks->setEnabled(hasTab && tab->hasSelectedNotAppendedRegularTracks());
 }
 
 void
@@ -215,6 +231,7 @@ Tool::retranslateUi() {
   auto buttonToolTip = Util::Settings::get().m_uiDisableToolTips ? Q("") : App::translate("CloseButton", "Close Tab");
 
   p.ui->retranslateUi(this);
+  p.modifyTracksSubmenu.retranslateUi();
 
   for (auto idx = 0, numTabs = p.ui->merges->count(); idx < numTabs; ++idx) {
     static_cast<Tab *>(p.ui->merges->widget(idx))->retranslateUi();
@@ -934,6 +951,15 @@ Tool::setupHorizontalTwoColumnsInputLayout() {
 void
 Tool::setupVerticalTabWidgetInputLayout() {
   forEachTab([](Tab &tab) { tab.setupVerticalTabWidgetInputLayout(); });
+}
+
+void
+Tool::toggleTrackFlag() {
+  auto action = dynamic_cast<QAction *>(sender());
+  auto tab    = currentTab();
+
+  if (action && tab)
+    tab->toggleSpecificTrackFlag(action->data().toUInt());
 }
 
 }

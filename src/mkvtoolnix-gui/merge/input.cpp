@@ -16,6 +16,8 @@
 #include <QThread>
 #include <QTimer>
 
+#include <matroska/KaxSemantic.h>
+
 #include "common/iso639.h"
 #include "common/logger.h"
 #include "common/qt.h"
@@ -838,6 +840,21 @@ Tab::withSelectedTracks(std::function<void(Track &)> code,
       p.tracksModel->trackUpdated(track);
     }
   }
+}
+
+bool
+Tab::hasSelectedNotAppendedRegularTracks()
+  const {
+  auto &p     = *p_func();
+  auto result = false;
+
+  Util::withSelectedIndexes(p.ui->tracks, [&p, &result](QModelIndex const &idx) {
+    auto track = p.tracksModel->fromIndex(idx);
+    if (track && !track->isAppended() && track->isRegular())
+      result = true;
+  });
+
+  return result;
 }
 
 void
@@ -1974,6 +1991,28 @@ bool
 Tab::hasSourceFiles()
   const {
   return !p_func()->config.m_files.isEmpty();
+}
+
+void
+Tab::toggleSpecificTrackFlag(unsigned int wantedId) {
+  auto &p       = *p_func();
+  auto comboBox = wantedId == libmatroska::KaxTrackFlagDefault    ::ClassInfos.GlobalId.GetValue() ? p.ui->defaultTrackFlag
+                : wantedId == libmatroska::KaxTrackFlagForced     ::ClassInfos.GlobalId.GetValue() ? p.ui->forcedTrackFlag
+                : wantedId == libmatroska::KaxFlagCommentary      ::ClassInfos.GlobalId.GetValue() ? p.ui->commentaryFlag
+                : wantedId == libmatroska::KaxFlagOriginal        ::ClassInfos.GlobalId.GetValue() ? p.ui->originalFlag
+                : wantedId == libmatroska::KaxFlagHearingImpaired ::ClassInfos.GlobalId.GetValue() ? p.ui->hearingImpairedFlag
+                : wantedId == libmatroska::KaxFlagVisualImpaired  ::ClassInfos.GlobalId.GetValue() ? p.ui->visualImpairedFlag
+                : wantedId == libmatroska::KaxFlagTextDescriptions::ClassInfos.GlobalId.GetValue() ? p.ui->textDescriptionsFlag
+                :                                                                                    static_cast<QComboBox *>(nullptr);
+
+  if (!comboBox || !comboBox->isEnabled())
+    return;
+
+  auto newIndex = (comboBox->currentIndex() + 1) % comboBox->count();
+  if (!comboBox->itemData(newIndex).isValid())
+    ++newIndex;
+
+  comboBox->setCurrentIndex(newIndex);
 }
 
 }
