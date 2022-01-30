@@ -301,7 +301,7 @@ Tab::setupUi() {
   ui->elements->setModel(m_model);
   ui->elements->acceptDroppedFiles(true);
 
-  m_modifyTracksSubmenu.setup(*m_modifySelectedTrackMenu);
+  m_modifyTracksSubmenu.setupTrack(*m_modifySelectedTrackMenu);
 
   Util::HeaderViewManager::create(*ui->elements, "HeaderEditor::Elements").setDefaultSizes({ { Q("type"), 250 }, { Q("codec"), 100 }, { Q("language"), 120 }, { Q("properties"), 120 } });
   Util::preventScrollingWithoutFocus(this);

@@ -24,6 +24,7 @@ public:
   enum class Page {
     Gui,
     OftenUsedSelections,
+    LanguagesShortcuts,
     Merge,
     PredefinedValues,
     DefaultValues,
@@ -74,6 +75,12 @@ public Q_SLOTS:
   void adjustRemoveOldJobsControls();
   void revertDeriveTrackLanguageFromFileNameChars();
   void setupCommonLanguages(bool withISO639_3);
+
+  void setupLanguageShortcuts();
+  void enableLanguageShortcutControls();
+  void addLanguageShortcut();
+  void editLanguageShortcut();
+  void removeLanguageShortcuts();
 
   void addFileColor();
   void removeFileColors();
@@ -131,6 +138,7 @@ protected:
 
   void rememberCurrentlySelectedPage();
 
+  void saveLanguageShortcuts();
   void saveFileColors();
 };
 

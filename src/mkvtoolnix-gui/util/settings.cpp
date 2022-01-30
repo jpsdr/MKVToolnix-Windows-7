@@ -349,6 +349,7 @@ Settings::load() {
   m_lastOutputDir                             = QDir{reg.value(s_valLastOutputDir).toString()};
   m_lastConfigDir                             = QDir{reg.value(s_valLastConfigDir).toString()};
 
+  m_languageShortcuts                         = reg.value(s_valLanguageShortcuts).toStringList();
   m_oftenUsedLanguages                        = reg.value(s_valOftenUsedLanguages).toStringList();
   m_oftenUsedRegions                          = reg.value(s_valOftenUsedRegions).toStringList();
   m_oftenUsedCharacterSets                    = reg.value(s_valOftenUsedCharacterSets).toStringList();
@@ -468,6 +469,19 @@ Settings::load() {
 
 void
 Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
+  auto iso639UiLanguage = Q(translation_c::ms_default_iso639_ui_language);
+
+  if (m_languageShortcuts.isEmpty()) {
+    if (!iso639UiLanguage.isEmpty() && !m_oftenUsedLanguages.contains(iso639UiLanguage))
+      m_languageShortcuts << iso639UiLanguage;
+
+    m_languageShortcuts
+      << Q("en")                // English
+      << Q("und")               // undetermined
+      << Q("mul")               // multiple languages
+      << Q("zxx");              // no linguistic content
+  }
+
   if (m_oftenUsedLanguages.isEmpty()) {
     m_oftenUsedLanguages
       << Q("mul")               // multiple languages
@@ -477,8 +491,8 @@ Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
       << Q("und")               // undetermined
       << Q("eng");              // English
 
-    if (!translation_c::ms_default_iso639_ui_language.empty() && !m_oftenUsedLanguages.contains(Q(translation_c::ms_default_iso639_ui_language)))
-      m_oftenUsedLanguages << Q(translation_c::ms_default_iso639_ui_language);
+    if (!iso639UiLanguage.isEmpty() && !m_oftenUsedLanguages.contains(iso639UiLanguage))
+      m_oftenUsedLanguages << iso639UiLanguage;
 
     m_oftenUsedLanguages.sort();
   }
@@ -738,6 +752,7 @@ Settings::save()
   reg.setValue(s_valLastOutputDir,                             m_lastOutputDir.path());
   reg.setValue(s_valLastConfigDir,                             m_lastConfigDir.path());
 
+  reg.setValue(s_valLanguageShortcuts,                         m_languageShortcuts);
   reg.setValue(s_valOftenUsedLanguages,                        m_oftenUsedLanguages);
   reg.setValue(s_valOftenUsedRegions,                          m_oftenUsedRegions);
   reg.setValue(s_valOftenUsedCharacterSets,                    m_oftenUsedCharacterSets);

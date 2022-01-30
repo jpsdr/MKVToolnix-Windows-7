@@ -7,6 +7,12 @@
   selected tracks, e.g. `Ctrl+Alt+F, D` (that's `Ctrl` and `Alt` with `F`
   simultaneously followed by `D` without any other key pressed) for toggling
   the "default track" flag. Part of the implementation of #3253.
+* MKVToolNix GUI: multiplexer: added menu entries & keyboard shortcuts for
+  setting the language of the currently selected tracks to one from a
+  configurable list of languages. The shortcuts used are `Ctrl+Alt+A, 1`
+  through `Ctrl+Alt+A, 0` for the first ten entries of that list (that's
+  `Ctrl` and `Alt` with `A` simultaneously followed by a digit without any
+  other key pressed). Part of the implementation of #3253.
 
 ## Bug fixes
 

@@ -52,7 +52,7 @@ class ToolPrivate {
 
   // UI stuff:
   std::unique_ptr<Ui::Tool> ui;
-  QMenu *mergeMenu{};
+  QMenu *mergeMenu{}, *languageShortcutsMenu{};
   mtx::gui::Util::FilesDragDropHandler filesDDHandler{Util::FilesDragDropHandler::Mode::Remember};
 
   FileIdentificationThread *identifier{};
@@ -85,9 +85,6 @@ Tool::Tool(QWidget *parent,
   // Setup UI controls.
   p.ui->setupUi(this);
 
-  p.modifyTracksSubmenu.setup(*MainWindow::getUi()->menuMergeModifySelectedTracks);
-  p.modifyTracksSubmenu.m_toggleTrackEnabledFlag->setVisible(false);
-
   setupFileIdentificationThread();
 
   MainWindow::get()->registerSubWindowWidget(*this, *p.ui->merges);
@@ -105,11 +102,28 @@ void
 Tool::setupUi() {
   auto &p = *p_func();
 
+  setupModifySelectedTracksMenu();
+
   Util::setupTabWidgetHeaders(*p.ui->merges);
 
   showMergeWidget();
 
   retranslateUi();
+}
+
+void
+Tool::setupModifySelectedTracksMenu() {
+  auto &p                 = *p_func();
+  auto mwUi               = MainWindow::getUi();
+  p.languageShortcutsMenu = new QMenu{this};
+
+  mwUi->menuMergeModifySelectedTracks->addMenu(p.languageShortcutsMenu);
+  mwUi->menuMergeModifySelectedTracks->addSeparator();
+
+  p.modifyTracksSubmenu.setupTrack(*mwUi->menuMergeModifySelectedTracks);
+  p.modifyTracksSubmenu.setupLanguage(*p.languageShortcutsMenu);
+
+  p.modifyTracksSubmenu.m_toggleTrackEnabledFlag->setVisible(false);
 }
 
 void
@@ -119,44 +133,44 @@ Tool::setupActions() {
   auto mwUi = MainWindow::getUi();
   auto &mts = p.modifyTracksSubmenu;
 
-  connect(p.mergeMenu,                                &QMenu::aboutToShow,               this, &Tool::enableMenuActions);
-  connect(p.mergeMenu,                                &QMenu::aboutToHide,               this, &Tool::enableCopyMenuActions);
+  connect(p.mergeMenu,                                &QMenu::aboutToShow,                                 this, &Tool::enableMenuActions);
+  connect(p.mergeMenu,                                &QMenu::aboutToHide,                                 this, &Tool::enableCopyMenuActions);
 
-  connect(mwUi->actionMergeNew,                       &QAction::triggered,               this, &Tool::appendNewTab);
-  connect(mwUi->actionMergeOpen,                      &QAction::triggered,               this, &Tool::openConfig);
-  connect(mwUi->actionMergeClose,                     &QAction::triggered,               this, &Tool::closeCurrentTab);
-  connect(mwUi->actionMergeCloseAll,                  &QAction::triggered,               this, &Tool::closeAllTabs);
-  connect(mwUi->actionMergeSave,                      &QAction::triggered,               this, &Tool::saveConfig);
-  connect(mwUi->actionMergeSaveAll,                   &QAction::triggered,               this, &Tool::saveAllConfigs);
-  connect(mwUi->actionMergeSaveAs,                    &QAction::triggered,               this, &Tool::saveConfigAs);
-  connect(mwUi->actionMergeSaveOptionFile,            &QAction::triggered,               this, &Tool::saveOptionFile);
-  connect(mwUi->actionMergeStartMuxing,               &QAction::triggered,               this, &Tool::startMuxing);
-  connect(mwUi->actionMergeStartMuxingAll,            &QAction::triggered,               this, &Tool::startMuxingAll);
-  connect(mwUi->actionMergeAddToJobQueue,             &QAction::triggered,               this, &Tool::addToJobQueue);
-  connect(mwUi->actionMergeAddAllToJobQueue,          &QAction::triggered,               this, &Tool::addAllToJobQueue);
-  connect(mwUi->actionMergeShowMkvmergeCommandLine,   &QAction::triggered,               this, &Tool::showCommandLine);
-  connect(mwUi->actionMergeCopyFirstFileNameToTitle,  &QAction::triggered,               this, &Tool::copyFirstFileNameToTitle);
-  connect(mwUi->actionMergeCopyOutputFileNameToTitle, &QAction::triggered,               this, &Tool::copyOutputFileNameToTitle);
-  connect(mwUi->actionMergeCopyTitleToOutputFileName, &QAction::triggered,               this, &Tool::copyTitleToOutputFileName);
-  connect(mwUi->actionMergeAddFilesFromClipboard,     &QAction::triggered,               this, &Tool::addFilesFromClipboard);
+  connect(mwUi->actionMergeNew,                       &QAction::triggered,                                 this, &Tool::appendNewTab);
+  connect(mwUi->actionMergeOpen,                      &QAction::triggered,                                 this, &Tool::openConfig);
+  connect(mwUi->actionMergeClose,                     &QAction::triggered,                                 this, &Tool::closeCurrentTab);
+  connect(mwUi->actionMergeCloseAll,                  &QAction::triggered,                                 this, &Tool::closeAllTabs);
+  connect(mwUi->actionMergeSave,                      &QAction::triggered,                                 this, &Tool::saveConfig);
+  connect(mwUi->actionMergeSaveAll,                   &QAction::triggered,                                 this, &Tool::saveAllConfigs);
+  connect(mwUi->actionMergeSaveAs,                    &QAction::triggered,                                 this, &Tool::saveConfigAs);
+  connect(mwUi->actionMergeSaveOptionFile,            &QAction::triggered,                                 this, &Tool::saveOptionFile);
+  connect(mwUi->actionMergeStartMuxing,               &QAction::triggered,                                 this, &Tool::startMuxing);
+  connect(mwUi->actionMergeStartMuxingAll,            &QAction::triggered,                                 this, &Tool::startMuxingAll);
+  connect(mwUi->actionMergeAddToJobQueue,             &QAction::triggered,                                 this, &Tool::addToJobQueue);
+  connect(mwUi->actionMergeAddAllToJobQueue,          &QAction::triggered,                                 this, &Tool::addAllToJobQueue);
+  connect(mwUi->actionMergeShowMkvmergeCommandLine,   &QAction::triggered,                                 this, &Tool::showCommandLine);
+  connect(mwUi->actionMergeCopyFirstFileNameToTitle,  &QAction::triggered,                                 this, &Tool::copyFirstFileNameToTitle);
+  connect(mwUi->actionMergeCopyOutputFileNameToTitle, &QAction::triggered,                                 this, &Tool::copyOutputFileNameToTitle);
+  connect(mwUi->actionMergeCopyTitleToOutputFileName, &QAction::triggered,                                 this, &Tool::copyTitleToOutputFileName);
+  connect(mwUi->actionMergeAddFilesFromClipboard,     &QAction::triggered,                                 this, &Tool::addFilesFromClipboard);
 
-  connect(mts.m_toggleDefaultTrackFlag,               &QAction::triggered,               this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleForcedDisplayFlag,              &QAction::triggered,               this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleCommentaryFlag,                 &QAction::triggered,               this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleOriginalFlag,                   &QAction::triggered,               this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleHearingImpairedFlag,            &QAction::triggered,               this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleVisualImpairedFlag,             &QAction::triggered,               this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleTextDescriptionsFlag,           &QAction::triggered,               this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleDefaultTrackFlag,               &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleForcedDisplayFlag,              &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleCommentaryFlag,                 &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleOriginalFlag,                   &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleHearingImpairedFlag,            &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleVisualImpairedFlag,             &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleTextDescriptionsFlag,           &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(&mts,                                       &Util::ModifyTracksSubmenu::languageChangeRequested, this, &Tool::changeTrackLanguage);
 
-  connect(p.ui->merges,                               &QTabWidget::tabCloseRequested,    this, &Tool::closeTab);
-  connect(p.ui->newFileButton,                        &QPushButton::clicked,             this, &Tool::appendNewTab);
-  connect(p.ui->openFileButton,                       &QPushButton::clicked,             this, &Tool::openConfig);
+  connect(p.ui->merges,                               &QTabWidget::tabCloseRequested,                      this, &Tool::closeTab);
+  connect(p.ui->newFileButton,                        &QPushButton::clicked,                               this, &Tool::appendNewTab);
+  connect(p.ui->openFileButton,                       &QPushButton::clicked,                               this, &Tool::openConfig);
 
-  connect(mw,                                         &MainWindow::preferencesChanged,   this, [&p]() { Util::setupTabWidgetHeaders(*p.ui->merges); });
-  connect(mw,                                         &MainWindow::preferencesChanged,   this, &Tool::retranslateUi);
+  connect(mw,                                         &MainWindow::preferencesChanged,                     this, &Tool::applyPreferences);
 
-  connect(App::instance(),                            &App::addingFilesToMergeRequested, this, &Tool::handleFilesFromCommandLine);
-  connect(App::instance(),                            &App::openConfigFilesRequested,    this, &Tool::openMultipleConfigFilesFromCommandLine);
+  connect(App::instance(),                            &App::addingFilesToMergeRequested,                   this, &Tool::handleFilesFromCommandLine);
+  connect(App::instance(),                            &App::openConfigFilesRequested,                      this, &Tool::openMultipleConfigFilesFromCommandLine);
 }
 
 void
@@ -174,6 +188,15 @@ Tool::setupFileIdentificationThread() {
   connect(&worker, &FileIdentificationWorker::playlistSelectionNeeded,    this, &Tool::selectPlaylistToAdd);
 
   p.identifier->start();
+}
+
+void
+Tool::applyPreferences() {
+  auto &p = *p_func();
+
+  Util::setupTabWidgetHeaders(*p.ui->merges);
+  p.modifyTracksSubmenu.setupLanguage(*p.languageShortcutsMenu);
+  retranslateUi();
 }
 
 void
@@ -239,6 +262,8 @@ Tool::retranslateUi() {
     if (button)
       button->setToolTip(buttonToolTip);
   }
+
+  p.languageShortcutsMenu->setTitle(QY("Set &language"));
 }
 
 Tab *
@@ -960,6 +985,14 @@ Tool::toggleTrackFlag() {
 
   if (action && tab)
     tab->toggleSpecificTrackFlag(action->data().toUInt());
+}
+
+void
+Tool::changeTrackLanguage(QString const &formattedLanguage) {
+  auto tab = currentTab();
+
+  if (tab)
+    tab->changeTrackLanguage(formattedLanguage);
 }
 
 }

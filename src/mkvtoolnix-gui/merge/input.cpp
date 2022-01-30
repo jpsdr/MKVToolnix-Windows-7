@@ -964,7 +964,7 @@ Tab::toggleMuxThisForSelectedTracks() {
 
 void
 Tab::onTrackLanguageChanged(mtx::bcp47::language_c const &newLanguage) {
-  withSelectedTracks([&newLanguage](auto &track) { track.m_language = newLanguage; }, true);
+  withSelectedTracks([&newLanguage](auto &track) { track.m_language = newLanguage; }, true, p_func()->ui->trackLanguage);
 }
 
 void
@@ -2013,6 +2013,19 @@ Tab::toggleSpecificTrackFlag(unsigned int wantedId) {
     ++newIndex;
 
   comboBox->setCurrentIndex(newIndex);
+}
+
+void
+Tab::changeTrackLanguage(QString const &formattedLanguage) {
+  auto &p = *p_func();
+
+  auto language = mtx::bcp47::language_c::parse(to_utf8(formattedLanguage));
+
+  if (!language.is_valid() || !p.ui->trackLanguage->isEnabled())
+    return;
+
+  p.ui->trackLanguage->setLanguage(language);
+  onTrackLanguageChanged(language);
 }
 
 }

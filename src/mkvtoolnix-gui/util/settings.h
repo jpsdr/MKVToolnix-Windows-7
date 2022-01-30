@@ -162,6 +162,7 @@ public:
   using RunProgramConfigPtr  = std::shared_ptr<RunProgramConfig>;
   using RunProgramConfigList = QList<RunProgramConfigPtr>;
 
+  QStringList m_languageShortcuts;
   bool m_useLegacyFontMIMETypes;
   mtx::bcp47::language_c m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage, m_defaultChapterLanguage;
   SetDefaultLanguagePolicy m_whenToSetDefaultLanguage;

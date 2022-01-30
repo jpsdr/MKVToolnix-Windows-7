@@ -22,6 +22,7 @@
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/container.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
+#include "mkvtoolnix-gui/util/language_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/model.h"
 #include "mkvtoolnix-gui/util/side_by_side_multi_select.h"
@@ -67,6 +68,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupBCP47LanguageEditMode();
   setupDerivingTrackLanguagesFromFileName();
   setupWhenToSetDefaultLanguage();
+  setupLanguageShortcuts();
 
   ui->cbGuiUseDefaultJobDescription->setChecked(m_cfg.m_useDefaultJobDescription);
   ui->cbGuiShowOutputOfAllJobs->setChecked(m_cfg.m_showOutputOfAllJobs);
@@ -222,19 +224,20 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
     return item;
   };
 
-  auto pGui      = addItem(Page::Gui,                 nullptr, QY("GUI"),                   "mkvtoolnix-gui");
+  auto pGui      = addItem(Page::Gui,                 nullptr, QY("GUI"),              "mkvtoolnix-gui");
                    addItem(Page::OftenUsedSelections, pGui,    QY("Often used selections"));
-  auto pMerge    = addItem(Page::Merge,               nullptr, QY("Multiplexer"),           "merge");
+                   addItem(Page::LanguagesShortcuts,  pGui,    QY("Language shortcuts"));
+  auto pMerge    = addItem(Page::Merge,               nullptr, QY("Multiplexer"),      "merge");
                    addItem(Page::PredefinedValues,    pMerge,  QY("Predefined values"));
                    addItem(Page::DefaultValues,       pMerge,  QY("Default values"));
                    addItem(Page::DeriveTrackLanguage, pMerge,  QY("Deriving track languages"));
                    addItem(Page::Output,              pMerge,  QY("Destination file name"));
                    addItem(Page::EnablingTracks,      pMerge,  QY("Enabling items"));
                    addItem(Page::Playlists,           pMerge,  QY("Playlists & Blu-rays"));
-                   addItem(Page::Info,                nullptr, QY("Info tool"),             "document-preview-archive");
-                   addItem(Page::HeaderEditor,        nullptr, QY("Header editor"),         "document-edit");
-                   addItem(Page::ChapterEditor,       nullptr, QY("Chapter editor"),        "story-editor");
-  auto pJobs     = addItem(Page::Jobs,                nullptr, QY("Jobs & job queue"),      "view-task");
+                   addItem(Page::Info,                nullptr, QY("Info tool"),        "document-preview-archive");
+                   addItem(Page::HeaderEditor,        nullptr, QY("Header editor"),    "document-edit");
+                   addItem(Page::ChapterEditor,       nullptr, QY("Chapter editor"),   "story-editor");
+  auto pJobs     = addItem(Page::Jobs,                nullptr, QY("Jobs & job queue"), "view-task");
                    addItem(Page::RunPrograms,         pJobs,   QY("Executing actions"));
 
   for (auto row = 0, numRows = model->rowCount(); row < numRows; ++row)
@@ -547,6 +550,12 @@ PreferencesDialog::setupToolTips() {
 void
 PreferencesDialog::setupConnections() {
   connect(ui->cbUseISO639_3Languages,                     &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::setupCommonLanguages);
+
+  connect(ui->lwGuiLanguageShortcuts,                     &QListWidget::itemSelectionChanged,                            this,                                 &PreferencesDialog::enableLanguageShortcutControls);
+  connect(ui->lwGuiLanguageShortcuts,                     &QListWidget::itemDoubleClicked,                               this,                                 &PreferencesDialog::editLanguageShortcut);
+  connect(ui->pbGuiAddLanguageShortcut,                   &QPushButton::clicked,                                         this,                                 &PreferencesDialog::addLanguageShortcut);
+  connect(ui->pbGuiEditLanguageShortcut,                  &QPushButton::clicked,                                         this,                                 &PreferencesDialog::editLanguageShortcut);
+  connect(ui->pbGuiRemoveLanguageShortcuts,               &QPushButton::clicked,                                         this,                                 &PreferencesDialog::removeLanguageShortcuts);
 
   connect(ui->pbMEditDefaultAdditionalCommandLineOptions, &QPushButton::clicked,                                         this,                                 &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
 
@@ -1151,6 +1160,7 @@ PreferencesDialog::save() {
   m_cfg.m_mergePredefinedSplitSizes         = ui->lwMPredefinedSplitSizes->items();
   m_cfg.m_mergePredefinedSplitDurations     = ui->lwMPredefinedSplitDurations->items();
 
+  saveLanguageShortcuts();
   saveFileColors();
 
   m_cfg.save();
@@ -1367,6 +1377,83 @@ void
 PreferencesDialog::reject() {
   rememberCurrentlySelectedPage();
   QDialog::reject();
+}
+
+void
+PreferencesDialog::setupLanguageShortcuts() {
+  for (auto const &formattedLanguage : m_cfg.m_languageShortcuts) {
+    auto language = mtx::bcp47::language_c::parse(to_utf8(formattedLanguage));
+    if (!language.is_valid())
+      continue;
+
+    auto item = new QListWidgetItem{Q(language.format_long())};
+    item->setData(Qt::UserRole, Q(language.format()));
+
+    ui->lwGuiLanguageShortcuts->addItem(item);
+  }
+
+  enableLanguageShortcutControls();
+}
+
+void
+PreferencesDialog::saveLanguageShortcuts() {
+  m_cfg.m_languageShortcuts.clear();
+
+  for (auto row = 0, numItems = ui->lwGuiLanguageShortcuts->count(); row < numItems; ++row)
+    m_cfg.m_languageShortcuts << ui->lwGuiLanguageShortcuts->item(row)->data(Qt::UserRole).toString();
+}
+
+void
+PreferencesDialog::enableLanguageShortcutControls() {
+  auto items = ui->lwGuiLanguageShortcuts->selectedItems();
+
+  ui->pbGuiEditLanguageShortcut->setEnabled(items.size() == 1);
+  ui->pbGuiRemoveLanguageShortcuts->setEnabled(items.size() > 0);
+}
+
+void
+PreferencesDialog::addLanguageShortcut() {
+  mtx::gui::Util::LanguageDialog dlg{this};
+
+  if (!dlg.exec())
+    return;
+
+  auto language = dlg.language();
+  auto item     = new QListWidgetItem{Q(language.format_long())};
+
+  item->setData(Qt::UserRole, Q(language.format()));
+
+  ui->lwGuiLanguageShortcuts->addItem(item);
+}
+
+void
+PreferencesDialog::editLanguageShortcut() {
+  auto items = ui->lwGuiLanguageShortcuts->selectedItems();
+  if (items.isEmpty())
+    return;
+
+  auto item     = items.first();
+  auto language = mtx::bcp47::language_c::parse(to_utf8(item->data(Qt::UserRole).toString()));
+
+  mtx::gui::Util::LanguageDialog dlg{this};
+
+  if (language.is_valid())
+    dlg.setLanguage(language);
+
+  if (!dlg.exec())
+    return;
+
+  language = dlg.language();
+  item->setText(Q(language.format_long()));
+  item->setData(Qt::UserRole, Q(language.format()));
+}
+
+void
+PreferencesDialog::removeLanguageShortcuts() {
+  for (auto const &item : ui->lwGuiLanguageShortcuts->selectedItems())
+    delete item;
+
+  enableLanguageShortcutControls();
 }
 
 }

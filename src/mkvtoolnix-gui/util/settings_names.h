@@ -58,6 +58,7 @@ char const * const s_valHexPositions                              = "hexPosition
 char const * const s_valHiddenColumns                             = "hiddenColumns";
 char const * const s_valJobRemovalOnExitPolicy                    = "jobRemovalOnExitPolicy";
 char const * const s_valJobRemovalPolicy                          = "jobRemovalPolicy";
+char const * const s_valLanguageShortcuts                         = "languageShortcuts";
 char const * const s_valLastConfigDir                             = "lastConfigDir";
 char const * const s_valLastOpenDir                               = "lastOpenDir";
 char const * const s_valLastOutputDir                             = "lastOutputDir";

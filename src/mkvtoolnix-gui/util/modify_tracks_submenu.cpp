@@ -6,12 +6,15 @@
 #include <matroska/KaxSemantic.h>
 
 #include "common/qt.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/util/modify_tracks_submenu.h"
+#include "mkvtoolnix-gui/util/settings.h"
 
 namespace mtx::gui::Util {
 
 void
-ModifyTracksSubmenu::setup(QMenu &subMenu) {
+ModifyTracksSubmenu::setupTrack(QMenu &subMenu) {
   m_toggleTrackEnabledFlag     = new QAction{&subMenu};
   m_toggleDefaultTrackFlag     = new QAction{&subMenu};
   m_toggleForcedDisplayFlag    = new QAction{&subMenu};
@@ -50,7 +53,46 @@ ModifyTracksSubmenu::setup(QMenu &subMenu) {
 }
 
 void
+ModifyTracksSubmenu::setupLanguage(QMenu &subMenu) {
+  subMenu.clear();
+
+  auto idx = 0;
+
+  for (auto const &formattedLanguage : Util::Settings::get().m_languageShortcuts) {
+    auto language = mtx::bcp47::language_c::parse(to_utf8(formattedLanguage));
+    if (!language.is_valid())
+      continue;
+
+    ++idx;
+
+    auto action = new QAction{&subMenu};
+    action->setData(formattedLanguage);
+    action->setText(Q(language.format_long()));
+
+    if (idx <= 10)
+      action->setShortcut(Q("Ctrl+Alt+A, %1").arg(idx % 10));
+
+    subMenu.addAction(action);
+
+    connect(action, &QAction::triggered, this, &ModifyTracksSubmenu::languageChangeTriggered);
+  }
+
+  if (idx)
+    subMenu.addSeparator();
+
+  m_configureLanguages = new QAction{&subMenu};
+  subMenu.addAction(m_configureLanguages);
+
+  connect(m_configureLanguages, &QAction::triggered, this, []() { MainWindow::get()->editPreferencesAndShowPage(PreferencesDialog::Page::LanguagesShortcuts); });
+
+  retranslateUi();
+}
+
+void
 ModifyTracksSubmenu::retranslateUi() {
+  if (m_configureLanguages)
+    m_configureLanguages->setText(QY("&Configure available languages"));
+
   if (!m_toggleTrackEnabledFlag)
     return;
 
@@ -62,6 +104,17 @@ ModifyTracksSubmenu::retranslateUi() {
   m_toggleHearingImpairedFlag ->setText(QY("Toggle \"&hearing impaired\" flag"));
   m_toggleVisualImpairedFlag  ->setText(QY("Toggle \"&visual impaired\" flag"));
   m_toggleTextDescriptionsFlag->setText(QY("Toggle \"&text descriptions\" flag"));
+}
+
+void
+ModifyTracksSubmenu::languageChangeTriggered() {
+  auto action = dynamic_cast<QAction *>(sender());
+  if (!action)
+    return;
+
+  auto language = action->data().toString();
+  if (!language.isEmpty())
+    Q_EMIT languageChangeRequested(language);
 }
 
 }

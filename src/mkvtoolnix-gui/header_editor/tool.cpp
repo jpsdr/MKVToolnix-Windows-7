@@ -34,7 +34,7 @@ Tool::Tool(QWidget *parent,
   // Setup UI controls.
   ui->setupUi(this);
 
-  m_modifyTracksSubmenu.setup(*MainWindow::getUi()->menuHeaderEditorModifyTrack);
+  m_modifyTracksSubmenu.setupTrack(*MainWindow::getUi()->menuHeaderEditorModifyTrack);
 
   MainWindow::get()->registerSubWindowWidget(*this, *ui->editors);
 }

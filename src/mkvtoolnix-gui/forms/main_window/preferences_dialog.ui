@@ -390,6 +390,115 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="pGuiLanguageShortcuts">
+       <layout class="QVBoxLayout" name="verticalLayout_49">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QGroupBox" name="groupBox_26">
+          <property name="title">
+           <string>Language shortcuts</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_18">
+           <item>
+            <widget class="QListWidget" name="lwGuiLanguageShortcuts">
+             <property name="dragEnabled">
+              <bool>true</bool>
+             </property>
+             <property name="dragDropMode">
+              <enum>QAbstractItemView::InternalMove</enum>
+             </property>
+             <property name="defaultDropAction">
+              <enum>Qt::MoveAction</enum>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::ExtendedSelection</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_48">
+             <item>
+              <widget class="QPushButton" name="pbGuiAddLanguageShortcut">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset resource="../../qt_resources.qrc">
+                 <normaloff>:/icons/16x16/list-add.png</normaloff>:/icons/16x16/list-add.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pbGuiEditLanguageShortcut">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset resource="../../qt_resources.qrc">
+                 <normaloff>:/icons/16x16/edit-entry.png</normaloff>:/icons/16x16/edit-entry.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pbGuiRemoveLanguageShortcuts">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset resource="../../qt_resources.qrc">
+                 <normaloff>:/icons/16x16/list-remove.png</normaloff>:/icons/16x16/list-remove.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="pMergeGeneral">
        <layout class="QVBoxLayout" name="verticalLayout_45">
         <property name="leftMargin">
@@ -2441,6 +2550,10 @@
   <tabstop>cbOftenUsedRegionsOnly</tabstop>
   <tabstop>tbOftenUsedCharacterSets</tabstop>
   <tabstop>cbOftenUsedCharacterSetsOnly</tabstop>
+  <tabstop>lwGuiLanguageShortcuts</tabstop>
+  <tabstop>pbGuiAddLanguageShortcut</tabstop>
+  <tabstop>pbGuiEditLanguageShortcut</tabstop>
+  <tabstop>pbGuiRemoveLanguageShortcuts</tabstop>
   <tabstop>cbMClearMergeSettings</tabstop>
   <tabstop>cbMWarnMissingAudioTrack</tabstop>
   <tabstop>cbMProcessPriority</tabstop>

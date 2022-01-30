@@ -38,6 +38,7 @@ public:
   virtual void addMergeTabIfNoneOpen();
 
 public Q_SLOTS:
+  virtual void applyPreferences();
   virtual void retranslateUi();
 
   virtual Tab *appendNewTab();
@@ -62,6 +63,7 @@ public Q_SLOTS:
   virtual void copyTitleToOutputFileName();
   virtual void addFilesFromClipboard();
   virtual void toggleTrackFlag();
+  virtual void changeTrackLanguage(QString const &formattedLanguage);
 
   virtual void toolShown() override;
   virtual void tabTitleChanged();
@@ -92,6 +94,7 @@ public Q_SLOTS:
   virtual void setupVerticalTabWidgetInputLayout();
 
 protected:
+  virtual void setupModifySelectedTracksMenu();
   virtual void setupFileIdentificationThread();
 
   virtual Tab *currentTab();
