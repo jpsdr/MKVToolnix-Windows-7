@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2021-12-21 13:32+0100\n"
-"PO-Revision-Date: 2020-09-02 18:12+0000\n"
-"Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
+"PO-Revision-Date: 2022-01-30 18:30+0000\n"
+"Last-Translator: Vlad Anisimov <uniss@ua.fm>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/uk/)\n"
 "Language: uk\n"
@@ -61,6 +61,8 @@ msgid ""
 "  --abort-on-warnings      Aborts the program after the first warning is\n"
 "                           emitted."
 msgstr ""
+"  --abort-on-warnings      Переривання програми після появи першого\n"
+"                           попередження."
 
 #: src/merge/mkvmerge.cpp:175
 #, no-c-format
@@ -119,9 +121,7 @@ msgstr ""
 msgid ""
 "  --attach-file <file>     Creates a file attachment inside the\n"
 "                           Matroska file.\n"
-msgstr ""
-"  --attach-file <file>     Створює файл-вкладення в\n"
-"                           файлі Matroska.\n"
+msgstr "  --attach-file <file>     Створює файл-вкладення в файлі Matroska.\n"
 
 #: src/merge/mkvmerge.cpp:196
 #, no-c-format
@@ -225,13 +225,13 @@ msgid "  --chapters <file>        Read chapter information from the file.\n"
 msgstr "  --chapters <file>       Читати інформацію про розділи з файлу.\n"
 
 #: src/merge/mkvmerge.cpp:318
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --chroma-siting <TID:hori,vert>\n"
 "                            How chroma is sited horizontally/vertically.\n"
 msgstr ""
-"  --cropping <TID:left,top,right,bottom>\n"
-"                           Встановлює параметри обрізки зображення.\n"
+"  --chroma-siting <TID:hori,vert>\n"
+"                            Як кольоровість розташована горизонтально/вертикально.\n"
 
 #: src/merge/mkvmerge.cpp:309
 #, fuzzy, no-c-format
@@ -263,9 +263,8 @@ msgid ""
 "                           cluster.\n"
 msgstr ""
 "  --cluster-length <n[ms]> Розміщує щонайбільше n блоків даних в кожному кластері.\n"
-"                           Якщо число вказано з суфіксом 'ms', тоді\n"
-"                           розміщується щонайбільше n мілісекунд даних в кожному\n"
-"                           кластері.\n"
+"                           Якщо число вказано з суфіксом 'ms', тоді розміщується\n"
+"                           щонайбільше n мілісекунд даних в кожному кластері.\n"
 
 #: src/merge/mkvmerge.cpp:134
 #, no-c-format
@@ -359,7 +358,7 @@ msgid ""
 "                           Sets the cropping parameters.\n"
 msgstr ""
 "  --cropping <TID:left,top,right,bottom>\n"
-"                           Встановлює параметри обрізки зображення.\n"
+"                           Встановлює параметри обрізання зображення.\n"
 
 #: src/merge/mkvmerge.cpp:108
 #, no-c-format
@@ -613,15 +612,14 @@ msgstr ""
 "                           і т.д.\n"
 
 #: src/merge/mkvmerge.cpp:340
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --min-luminance <TID:float>\n"
 "                           Minimum luminance in candelas per square meter\n"
 "                           (cd/m²).\n"
 msgstr ""
-"  --split frames:A[,B...]\n"
-"                           Створюється новий файл після кожного кадру/поля A, B\n"
-"                           і т.д.\n"
+"  --min-luminance <TID:float>\n"
+"                           Мінімальна яскравість в канделах на квадратний метр (cd/m²).\n"
 
 #: src/merge/mkvmerge.cpp:227
 #, no-c-format
@@ -634,13 +632,13 @@ msgid "  --no-cues                Do not write the cue data (the index).\n"
 msgstr "  --no-cues                Не писати дані cue (індекси).\n"
 
 #: src/merge/mkvmerge.cpp:138
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --no-date                Do not write the 'date' field in the segment\n"
 "                           information headers.\n"
 msgstr ""
-"  = <file>                 Не шукати і не об'єднувати файли з однаковою основною назвою,\n"
-"                           але з різними завершуючими номерами.\n"
+"  --no-date                Не записувати поле 'date' в інформаційний сегмент\n"
+"                           заголовка.\n"
 
 #: src/merge/mkvmerge.cpp:226
 #, no-c-format
@@ -720,13 +718,13 @@ msgstr ""
 "                           вказаної доріжки ('none' або 'zlib').\n"
 
 #: src/merge/mkvmerge.cpp:343
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --projection-type <TID:method>\n"
 "                           Projection method used (0–3).\n"
 msgstr ""
-"  --command-line-charset <charset>\n"
-"                           Набір символів для рядків командного рядка\n"
+"  --projection-type <TID:method>\n"
+"                           Метод проекції, що використовується (0–3).\n"
 
 #: src/merge/mkvmerge.cpp:266
 #, no-c-format
@@ -884,9 +882,9 @@ msgid "  --timestamps <TID:file>  Read the timestamps to be used from a file.\n"
 msgstr "  --timestamps <TID:file> Читати тайм-коди, які будуть використовуватися, з файлу.\n"
 
 #: src/merge/mkvmerge.cpp:94
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "  --title <title>          Title for this destination file.\n"
-msgstr "  --title <title>          Назва (в полі 'title') для цього вихідного файлу.\n"
+msgstr "  --title <title>          Назва для цього файла призначення.\n"
 
 #: src/merge/mkvmerge.cpp:258
 #, no-c-format
@@ -1369,18 +1367,18 @@ msgstr " розмір {0}"
 #: src/common/property_element.cpp:133
 #, no-c-format
 msgid "\"Commentary\" flag"
-msgstr ""
+msgstr "Прапорець \"Коментарій\""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1803
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Commentary\" flag:"
-msgstr "Прапорець \"примусове використання доріжки\":"
+msgstr "Прапорець \"Коментарій\":"
 
 #: src/common/kax_element_names.cpp:206
 #: src/common/property_element.cpp:134
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Default track\" flag"
-msgstr "Прапорець \"типова доріжка\":"
+msgstr "Прапорець \"типова доріжка\""
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:310
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1797
@@ -1395,49 +1393,49 @@ msgid "\"Determine automatically\" is a good choice for almost all situations."
 msgstr "\"Визначати автоматично\" є гарним вибором для майже всіх ситуацій."
 
 #: src/common/kax_element_names.cpp:191
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Enabled\" flag"
-msgstr "Задіяно"
+msgstr "Прапорець \"Дозволено\""
 
 #: src/common/kax_element_names.cpp:207
 #: src/common/property_element.cpp:136
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Forced display\" flag"
-msgstr "прапорець 'Примусові розміри відображення'"
+msgstr "Прапорець \"Примусове відображення\""
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:311
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1798
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:83
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Forced display\" flag:"
-msgstr "прапорець 'Примусові розміри відображення'"
+msgstr "Прапорець \"Примусове відображення\":"
 
 #: src/common/kax_element_names.cpp:214
 #: src/common/property_element.cpp:137
 #, no-c-format
 msgid "\"Hearing impaired\" flag"
-msgstr ""
+msgstr "Прапорець \"Порушення слуху\""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1799
 #, no-c-format
 msgid "\"Hearing impaired\" flag:"
-msgstr ""
+msgstr "Прапорець \"Порушення слуху\":"
 
 #: src/common/kax_element_names.cpp:205
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Lacing\" flag"
-msgstr "Прапорець зшивання"
+msgstr "Прапорець \"Лейсінг\""
 
 #: src/common/kax_element_names.cpp:217
 #: src/common/property_element.cpp:138
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Original language\" flag"
-msgstr "Початкове значення:"
+msgstr "Прапорець \"Оригінальна мова\""
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1802
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "\"Original language\" flag:"
-msgstr "Початкове значення:"
+msgstr "Прапорець \"Оригінальна мова\":"
 
 #: src/common/kax_element_names.cpp:216
 #: src/common/property_element.cpp:139
@@ -2439,7 +2437,7 @@ msgstr "'--command-line-charset' не містить власного аргум
 #: src/merge/mkvmerge.cpp:2550
 #, no-c-format
 msgid "'--cropping' lacks the crop parameters.\n"
-msgstr "'--cropping' не містить параметрів обрізки.\n"
+msgstr "'--cropping' не містить параметрів обрізання.\n"
 
 #: src/merge/mkvmerge.cpp:2408
 #, no-c-format
@@ -3170,7 +3168,7 @@ msgstr "AVI (Audio/Video Interleaved)"
 #: src/common/file_types.cpp:78
 #, no-c-format
 msgid "AVI DV type 1"
-msgstr ""
+msgstr "AVI DV тип 1"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:731
 #, no-c-format
@@ -4003,7 +4001,7 @@ msgstr "Перед розділами"
 #: src/common/kax_element_names.cpp:321
 #, no-c-format
 msgid "Binary"
-msgstr ""
+msgstr "Бінарний"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:169
 #, no-c-format
@@ -4823,9 +4821,9 @@ msgstr "Контейнер"
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:220
 #: src/mkvtoolnix-gui/info/model.cpp:87
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Content"
-msgstr "Контейнер"
+msgstr "Зміст"
 
 #: src/common/kax_element_names.cpp:169
 #, no-c-format
@@ -5062,12 +5060,12 @@ msgstr "Створення файлу не вдалося. Переконайт�
 #: src/merge/mkvmerge.cpp:762
 #, no-c-format
 msgid "Cropping parameters: not given in the form <TID>:<left>,<top>,<right>,<bottom> e.g. 0:10,5,10,5 (argument was '{0}').\n"
-msgstr "Параметри обрізки: не задані у формі <TID>:<зліва>,<згори>,<справа>,<знизу> наприклад, 0:10,5,10,5 (аргумент був '{0}').\n"
+msgstr "Параметри обрізання: не задані у формі <TID>:<left>,<top>,<right>,<bottom> наприклад, 0:10,5,10,5 (аргумент був '{0}').\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1818
 #, no-c-format
 msgid "Cropping:"
-msgstr "Обрізка:"
+msgstr "Обрізання:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:738
 #, no-c-format
@@ -5343,7 +5341,7 @@ msgstr "Номери розділів:"
 #: src/mkvtoolnix-gui/merge/output.cpp:541
 #, no-c-format
 msgid "DVDs"
-msgstr ""
+msgstr "DVD"
 
 #: src/mkvtoolnix-gui/info/model.cpp:90
 #, no-c-format
@@ -5354,7 +5352,7 @@ msgstr ""
 #: src/common/property_element.cpp:119
 #, no-c-format
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:171
 #, fuzzy, no-c-format
@@ -5457,7 +5455,7 @@ msgstr "Значення за замовчуванням для щойно до�
 #: src/mkvtoolnix-gui/merge/track_model.cpp:84
 #, no-c-format
 msgid "Delay"
-msgstr ""
+msgstr "Затримка"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1808
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1874
@@ -5964,9 +5962,9 @@ msgstr "Кожен діапазон складається з тайм-коді�
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:353
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:354
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Edit language"
-msgstr "Мова тегу"
+msgstr "Змінити мову"
 
 #: src/propedit/propedit_cli_parser.cpp:248
 #, no-c-format
@@ -6067,9 +6065,9 @@ msgid "Enable language codes from &ISO 639-3 && 639-5"
 msgstr ""
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:169
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Enabled"
-msgstr "&Задіяно"
+msgstr "Дозволено"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:183
 #, no-c-format
@@ -6325,9 +6323,9 @@ msgid "Exception details:"
 msgstr "Деталі обробки винятку:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2071
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Exceptions"
-msgstr "Деталі обробки винятку:"
+msgstr "Виключення"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1208
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:315
@@ -7061,9 +7059,9 @@ msgid "ISO 639-2 code"
 msgstr "ISO 639-2 код"
 
 #: src/common/iso639.cpp:43
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "ISO 639-3 code"
-msgstr "ISO 639-1 код"
+msgstr "Код згідно ISO 639-3"
 
 #: src/common/file_types.cpp:42
 #: src/common/file_types.cpp:90
@@ -7537,9 +7535,9 @@ msgid "Info tool"
 msgstr "Інформаційний інструмент"
 
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:221
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Information"
-msgstr "Формат відео DV"
+msgstr "Інформація"
 
 #: src/common/bitvalue.cpp:76
 #, no-c-format
@@ -8097,14 +8095,14 @@ msgid "Language:"
 msgstr "Мова:"
 
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:28
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Languages"
-msgstr "&Мови"
+msgstr "Мови"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:537
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Languages:"
-msgstr "Мова:"
+msgstr "Мови:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1980
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2017
@@ -8555,7 +8553,7 @@ msgstr "Пропущено задання початку/закінчення д
 #: src/extract/extract_cli_parser.cpp:51
 #, no-c-format
 msgid "Modes"
-msgstr ""
+msgstr "Режими"
 
 #: src/propedit/options.cpp:186
 #, no-c-format
@@ -8709,7 +8707,7 @@ msgstr "Негативні значення не допускаються."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:845
 #, no-c-format
 msgid "Never"
-msgstr ""
+msgstr "Ніколи"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2080
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
@@ -9090,7 +9088,7 @@ msgstr "Ще не розпочато"
 #: src/mkvtoolnix-gui/merge/input.cpp:529
 #, no-c-format
 msgid "Note also that there are not a lot of players that support the cropping parameters."
-msgstr "Майте на увазі, що не так багато плеєрів підтримують параметри обрізки."
+msgstr "Майте на увазі, що не так багато плеєрів підтримують параметри обрізання."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:328
 #, no-c-format
@@ -9132,7 +9130,7 @@ msgstr "Майте на увазі, що зміст відео не змінює
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:213
 #, no-c-format
 msgid "Note:"
-msgstr ""
+msgstr "Примітка:"
 
 #: src/extract/mkvextract.cpp:163
 #: src/propedit/options.cpp:38
@@ -10587,12 +10585,12 @@ msgstr[2] "Йде сканування {0} файлів у {1} списках в
 #: src/common/kax_element_names.cpp:167
 #, no-c-format
 msgid "Scope"
-msgstr ""
+msgstr "Область застосування"
 
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:217
 #, no-c-format
 msgid "Script"
-msgstr ""
+msgstr "Скріпт"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:104
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:116
@@ -10880,7 +10878,7 @@ msgstr "Встановлюється режим аналізатора Matroska 
 #: src/mkvtoolnix-gui/merge/input.cpp:525
 #, no-c-format
 msgid "Sets the cropping parameters which tell a player to omit a certain number of pixels on the four sides during playback."
-msgstr "Встановлює параметри обрізки, завдяки яким плеєр пропусткає певну кількість пікселів на чотирьох сторонах під час відтворення."
+msgstr "Встановлює параметри обрізання, завдяки яким плеєр пропусткає певну кількість пікселів на чотирьох сторонах під час відтворення."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:480
 #, no-c-format
@@ -11350,7 +11348,7 @@ msgstr "Зупинити &обробку після завершення усі�
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:164
 #, no-c-format
 msgid "Stop at the first cluster"
-msgstr ""
+msgstr "Зупинитися на першому кластері"
 
 #: src/common/hacks.cpp:46
 #, no-c-format
@@ -11641,7 +11639,7 @@ msgstr "MIME-тип не може бути пустим."
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:635
 #, no-c-format
 msgid "The MKVToolNix Code of Conduct"
-msgstr ""
+msgstr "Кодекс поведінки MKVToolNix"
 
 #: src/input/r_qtmp4.cpp:1193
 #, no-c-format
@@ -11777,7 +11775,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/mux_config.cpp:279
 #, no-c-format
 msgid "The application will terminate now."
-msgstr ""
+msgstr "Зараз дію програми буде припинено."
 
 #: src/merge/mkvmerge.cpp:2134
 #, no-c-format
@@ -11880,12 +11878,12 @@ msgstr "Специфічні дані кодеків не співпадають
 #: src/common/property_element.cpp:180
 #, no-c-format
 msgid "The colour primaries of the video."
-msgstr ""
+msgstr "Основні кольори відео."
 
 #: src/common/property_element.cpp:179
 #, no-c-format
 msgid "The colour transfer characteristics of the video."
-msgstr ""
+msgstr "Характеристики передачі кольору відео."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:99
 #, no-c-format
@@ -11946,7 +11944,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/header_editor/time_value_page.cpp:92
 #, no-c-format
 msgid "The date & time shown is in UTC."
-msgstr ""
+msgstr "Дата й час відображаються в UTC."
 
 #: src/mkvtoolnix-gui/header_editor/time_value_page.cpp:92
 #, no-c-format
@@ -11954,9 +11952,9 @@ msgid "The date & time shown is in your local time zone."
 msgstr ""
 
 #: src/common/property_element.cpp:119
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The date the file was created."
-msgstr "Файл опцій був створений."
+msgstr "Дата створення файлу."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:33
 #, no-c-format
@@ -12061,9 +12059,9 @@ msgid "The end time could not be parsed: %1"
 msgstr "Не вдалося проаналізувати час завершення: %1"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:949
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The end time must be greater than the start time."
-msgstr "Час закінчення має перевищувати початок тайм-коду."
+msgstr "Час завершення має бути більшим за час початку."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:527
 #, fuzzy, no-c-format
@@ -12073,7 +12071,7 @@ msgstr "Обрані тут країни будуть відображатися
 #: src/output/p_avc_hevc_es.cpp:98
 #, no-c-format
 msgid "The error message was:"
-msgstr ""
+msgstr "Повідомлення про помилку було таке:"
 
 #: src/common/bcp47.cpp:399
 #, no-c-format
@@ -12543,14 +12541,14 @@ msgid "The language set here is also used when chapters are generated."
 msgstr "Мова, задана тут, також використовується при генеруванні розділів."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:364
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The language tag is not valid."
-msgstr "Не дозволяється залишати назва файлу не вказаною.\n"
+msgstr "Тег мови недійсний."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:364
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The language tag is valid."
-msgstr "Аргумент '{0}' у '{1}' некоректний."
+msgstr "Тег мови дійсний."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:521
 #, fuzzy, no-c-format
@@ -13502,7 +13500,7 @@ msgstr ""
 #: src/mkvtoolnix-gui/merge/input.cpp:526
 #, no-c-format
 msgid "This must be a comma-separated list of four numbers for the cropping to be used at the left, top, right and bottom, e.g. '0,20,0,20'."
-msgstr "Встановлюються параметри обрізки. Має бути задано 4 числа, розділених комамами, для обрізки зліва, згори, справа і знизу відповідно."
+msgstr "Це має бути список із чотирьох цифр, розділених комами, для обрізання зліва, зверху, справа та знизу, напр. \"0,20,0,20\"."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:375
 #, no-c-format
@@ -13970,7 +13968,7 @@ msgstr "Неможливо об'єднати файли"
 #: src/common/iso639.cpp:109
 #, no-c-format
 msgid "Undetermined"
-msgstr ""
+msgstr "Невизначено"
 
 #: src/mpegparser/M2VParser.cpp:244
 #, no-c-format
@@ -14027,9 +14025,9 @@ msgid "Unknown format for the segment UID '{2}' in '{0} {1}'.\n"
 msgstr "Невідомий формат UID сегмента '{2}' в '{0} {1}'.\n"
 
 #: src/merge/mkvmerge.cpp:960
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Unknown format in '{0} {1}'.\n"
-msgstr "Невідомий режим аналізу в '{0} {1}'.\n"
+msgstr "Невідомий формат у '{0} {1}'.\n"
 
 #: src/input/r_vobsub.cpp:610
 #, no-c-format
@@ -14270,9 +14268,9 @@ msgid "Vertical Cb subsample"
 msgstr "Розрядність: {0}"
 
 #: src/common/kax_element_names.cpp:132
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Vertical chroma siting"
-msgstr "Відносне положення Cue: {0}"
+msgstr "Вертикальне розташування кольоровості"
 
 #: src/common/kax_element_names.cpp:128
 #, fuzzy, no-c-format
@@ -14514,24 +14512,24 @@ msgid "Video: transfer characteristics"
 msgstr ""
 
 #: src/common/property_element.cpp:177
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video: vertical chroma siting"
-msgstr "Відносне положення Cue: {0}"
+msgstr "Відео: вертикальне розташування кольоровості"
 
 #: src/common/property_element.cpp:192
 #, no-c-format
 msgid "Video: white point X"
-msgstr ""
+msgstr "Відео: точка білого X"
 
 #: src/common/property_element.cpp:193
 #, no-c-format
 msgid "Video: white point Y"
-msgstr ""
+msgstr "Відео: точка білого Y"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:185
 #, no-c-format
 msgid "Visible"
-msgstr ""
+msgstr "Видимість"
 
 #: src/common/file_types.cpp:108
 #: src/output/p_vobbtn.h:34
@@ -14588,7 +14586,7 @@ msgstr "WAVPACK4"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2004
 #, no-c-format
 msgid "Warn about missing &audio tracks:"
-msgstr ""
+msgstr "Попередження щодо відсутніх &аудіо доріжок:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1988
 #, no-c-format
@@ -14618,9 +14616,9 @@ msgid "Warning:"
 msgstr "Попередження:"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:369
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Warning: %1"
-msgstr "Попередження:"
+msgstr "Попередження: %1"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:1986
 #, no-c-format
@@ -14668,9 +14666,9 @@ msgid "What do you want to do with the files you've dragged & dropped or copied 
 msgstr "Що ви хочете зробити з файлами, що ви перетягнули й опустили тут?"
 
 #: src/mkvtoolnix-gui/merge/adding_appending_files_dialog.cpp:30
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "What do you want to do with the files?"
-msgstr "Ви хочете перезаписати файл?"
+msgstr "Що ви бажаєте зробити з файлами?"
 
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
 #, no-c-format
@@ -14688,9 +14686,9 @@ msgid "When &dropping files:"
 msgstr "При &перетягуванні файлів:"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:303
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "When &finished…"
-msgstr "Дата закінчення"
+msgstr "Коли &завершено..."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:350
 #, no-c-format
@@ -15037,7 +15035,7 @@ msgstr "Ви маєте право не вказувати кількість г
 #: src/mkvtoolnix-gui/util/file_dialog.cpp:126
 #, no-c-format
 msgid "You must select an existing file."
-msgstr ""
+msgstr "Ви повинні обрати існуючий файл."
 
 #: src/common/compression/zlib.cpp:52
 #: src/common/compression/zlib.cpp:90
@@ -15147,7 +15145,7 @@ msgstr "create_track_number: file_num не знайдений. {0}\n"
 #: src/common/kax_info.cpp:725
 #, no-c-format
 msgid "cubemap"
-msgstr ""
+msgstr "cubemap"
 
 #: src/extract/extract_cli_parser.cpp:58
 #, no-c-format
@@ -15290,9 +15288,9 @@ msgid "key, "
 msgstr "ключ, "
 
 #: src/merge/mkvmerge.cpp:1380
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "language"
-msgstr "Мова"
+msgstr "мова"
 
 #: src/common/kax_info.cpp:647
 #, fuzzy, no-c-format
@@ -15637,7 +15635,7 @@ msgstr "без помилок"
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:24
 #, no-c-format
 msgid "no language selected"
-msgstr ""
+msgstr "немає обраної мови"
 
 #: src/common/kax_info.cpp:824
 #, no-c-format
@@ -15706,9 +15704,9 @@ msgid "pixel width: {0}"
 msgstr "ширина пікселя: {0}"
 
 #: src/common/kax_info.cpp:747
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "progressive"
-msgstr "Прогрес виконання"
+msgstr "прогресивний"
 
 #: src/extract/xtr_base.cpp:53
 #, no-c-format
@@ -15733,7 +15731,7 @@ msgstr "real_reader: Тільки заголовки аудіо версій 3, 
 #: src/common/kax_info.cpp:723
 #, no-c-format
 msgid "rectangular"
-msgstr ""
+msgstr "прямокутний"
 
 #: src/common/kax_info.cpp:780
 #, no-c-format
@@ -15883,9 +15881,9 @@ msgid "unknown, format tag 0x{0:04x}"
 msgstr "невідомий, тег форматування 0x{0:04x}"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:826
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "unnamed"
-msgstr "<не названо>"
+msgstr "безіменний"
 
 #: src/common/kax_info.cpp:749
 #, no-c-format
@@ -15924,7 +15922,7 @@ msgstr "Типова тривалість: {0:.3f}мс ({1:.3f} кадрів/п�
 msgid "{0} byte"
 msgid_plural "{0} bytes"
 msgstr[0] "{0} байт"
-msgstr[1] "{0} байти"
+msgstr[1] "{0} байт"
 msgstr[2] "{0} байт"
 
 #: src/common/kax_info.cpp:943
@@ -15946,9 +15944,9 @@ msgstr "{0} кадр, доріжка {1}, тайм-код {2} ({3}), розмі�
 #, no-c-format
 msgid "{0} minute"
 msgid_plural "{0} minutes"
-msgstr[0] "{0} хвилина"
-msgstr[1] "{0} хвилин"
-msgstr[2] "{0} хвилини"
+msgstr[0] "{0} мінута"
+msgstr[1] "{0} мінут"
+msgstr[2] "{0} мінут"
 
 #: src/common/strings/formatting.cpp:249
 #, no-c-format
@@ -15956,7 +15954,7 @@ msgid "{0} second"
 msgid_plural "{0} seconds"
 msgstr[0] "{0} секунда"
 msgstr[1] "{0} секунд"
-msgstr[2] "{0} секунди"
+msgstr[2] "{0} секунд"
 
 #: src/common/strings/formatting.cpp:262
 #, no-c-format
