@@ -238,6 +238,9 @@ set_usage() {
   usage_text += Y("  --forced-track <TID[:bool]>\n"
                   "                           Sets the \"forced display\" flag for this track or\n"
                   "                           forces it not to be present if bool is 0.\n");
+  usage_text += Y("  --track-enabled-flag <TID[:bool]>\n"
+                  "                           Sets the \"track enabled\" flag for this track or\n"
+                  "                           forces it not to be present if bool is 0.\n");
   usage_text += Y("  --hearing-impaired-flag <TID[:bool]>\n"
                   "                           Sets the \"hearing impaired\" flag for this track or\n"
                   "                           forces it not to be present if bool is 0.\n");
@@ -2725,6 +2728,13 @@ parse_args(std::vector<std::string> args) {
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
       parse_arg_boolean_track_option(this_arg, next_arg, ti->m_forced_track_flags);
+      sit++;
+
+    } else if (this_arg == "--track-enabled-flag") {
+      if (no_next_arg)
+        mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
+
+      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_enabled_track_flags);
       sit++;
 
     } else if (this_arg == "--hearing-impaired-flag") {

@@ -16,6 +16,8 @@
 * mkvmerge: MP4 reader: `mkvmerge` will now evaluate the `flags` field of the
   track header atom (`tkhd`) and set the track's "enabled" flag
   accordingly. Implements #3272.
+* mkvmerge: added a new option `--track-enabled-flag` to set or unset the
+  "track enabled" track header flag.
 
 ## Bug fixes
 
