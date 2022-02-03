@@ -24,6 +24,8 @@
 #include "output/p_pcm.h"
 #include "output/p_video_for_windows.h"
 
+constexpr auto QTMP4_TKHD_FLAG_ENABLED            = 0x00000001;
+
 constexpr auto QTMP4_TFHD_BASE_DATA_OFFSET        = 0x000001;
 constexpr auto QTMP4_TFHD_SAMPLE_DESCRIPTION_ID   = 0x000002;
 constexpr auto QTMP4_TFHD_DEFAULT_DURATION        = 0x000008;
@@ -222,7 +224,7 @@ class qtmp4_reader_c;
 struct qtmp4_demuxer_c {
   qtmp4_reader_c &m_reader;
 
-  bool ok{}, m_tables_updated{}, m_timestamps_calculated{};
+  bool ok{}, m_tables_updated{}, m_timestamps_calculated{}, m_enabled{true};
 
   char type;
   uint32_t id, container_id;

@@ -13,6 +13,9 @@
   through `Ctrl+Alt+A, 0` for the first ten entries of that list (that's
   `Ctrl` and `Alt` with `A` simultaneously followed by a digit without any
   other key pressed). Part of the implementation of #3253.
+* mkvmerge: MP4 reader: `mkvmerge` will now evaluate the `flags` field of the
+  track header atom (`tkhd`) and set the track's "enabled" flag
+  accordingly. Implements #3272.
 
 ## Bug fixes
 

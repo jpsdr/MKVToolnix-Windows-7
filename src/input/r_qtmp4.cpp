@@ -1513,8 +1513,9 @@ qtmp4_reader_c::handle_tkhd_atom(qtmp4_demuxer_c &dmx,
   if (atom.size < expected_size)
     print_atom_too_small_error("tkhd", atom, expected_size);
 
-  m_in->skip(3                              // flags
-             + 2 * (version == 1 ? 8 : 4)); // creation_time, modification_time
+  auto flags = m_in->read_uint24_be();
+
+  m_in->skip(2 * (version == 1 ? 8 : 4)); // creation_time, modification_time
 
   dmx.container_id = m_in->read_uint32_be();
 
@@ -1525,6 +1526,7 @@ qtmp4_reader_c::handle_tkhd_atom(qtmp4_demuxer_c &dmx,
              + 2                      // reserved
              + 9 * 4);                // matrix
 
+  dmx.m_enabled            = (flags & QTMP4_TKHD_FLAG_ENABLED) == QTMP4_TKHD_FLAG_ENABLED;
   dmx.v_display_width_flt  = m_in->read_uint32_be();
   dmx.v_display_height_flt = m_in->read_uint32_be();
   dmx.v_width              = dmx.v_display_width_flt  >> 16;
@@ -1974,8 +1976,12 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
       create_subtitles_packetizer_vobsub(dmx);
   }
 
-  if (packetizer_ok)
+  if (packetizer_ok) {
     dmx.set_packetizer_block_addition_mappings();
+
+    if (!m_reader_packetizers[dmx.ptzr]->m_ti.m_enabled_track.has_value())
+      m_reader_packetizers[dmx.ptzr]->set_track_enabled_flag(dmx.m_enabled);
+  }
 
   if (packetizer_ok && (-1 == m_main_dmx))
     m_main_dmx = i;
@@ -2012,6 +2018,7 @@ qtmp4_reader_c::identify() {
     auto info = mtx::id::info_c{};
 
     info.set(mtx::id::number, dmx.container_id);
+    info.set(mtx::id::enabled_track, dmx.m_enabled);
 
     if (dmx.codec.is(codec_c::type_e::V_MPEG4_P10))
       info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_video);
