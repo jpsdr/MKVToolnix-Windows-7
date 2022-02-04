@@ -18,6 +18,8 @@
   accordingly. Implements #3272.
 * mkvmerge: added a new option `--track-enabled-flag` to set or unset the
   "track enabled" track header flag.
+* MKVToolNix GUI: multiplexer: added support for the "track enabled" track
+  header flag.
 
 ## Bug fixes
 

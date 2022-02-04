@@ -122,8 +122,6 @@ Tool::setupModifySelectedTracksMenu() {
 
   p.modifyTracksSubmenu.setupTrack(*mwUi->menuMergeModifySelectedTracks);
   p.modifyTracksSubmenu.setupLanguage(*p.languageShortcutsMenu);
-
-  p.modifyTracksSubmenu.m_toggleTrackEnabledFlag->setVisible(false);
 }
 
 void
@@ -156,6 +154,7 @@ Tool::setupActions() {
 
   connect(mts.m_toggleDefaultTrackFlag,               &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
   connect(mts.m_toggleForcedDisplayFlag,              &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleTrackEnabledFlag,               &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
   connect(mts.m_toggleCommentaryFlag,                 &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
   connect(mts.m_toggleOriginalFlag,                   &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
   connect(mts.m_toggleHearingImpairedFlag,            &QAction::triggered,                                 this, &Tool::toggleTrackFlag);

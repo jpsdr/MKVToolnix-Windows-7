@@ -52,14 +52,14 @@ Tab::setupControlLists() {
   p.typeIndependentControls << p.ui->generalOptionsBox << p.ui->muxThisLabel << p.ui->muxThis << p.ui->miscellaneousBox << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions;
 
   p.audioControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
-                  << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag
+                  << p.ui->trackEnabledFlagLabel << p.ui->trackEnabledFlag << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag
                   << p.ui->originalFlagLabel << p.ui->originalFlag << p.ui->commentaryFlagLabel << p.ui->commentaryFlag
                   << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
                   << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps << p.ui->audioPropertiesBox << p.ui->aacIsSBR << p.ui->aacIsSBRLabel
                   << p.ui->cuesLabel << p.ui->cues << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain;
 
   p.videoControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
-                  << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag
+                  << p.ui->trackEnabledFlagLabel << p.ui->trackEnabledFlag << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag
                   << p.ui->originalFlagLabel << p.ui->originalFlag << p.ui->commentaryFlagLabel << p.ui->commentaryFlag
                   << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
                   << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->defaultDurationLabel << p.ui->defaultDuration << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps
@@ -68,7 +68,7 @@ Tab::setupControlLists() {
                   << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo;
 
   p.subtitleControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
-                     << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlagLabel << p.ui->textDescriptionsFlag
+                     << p.ui->trackEnabledFlagLabel << p.ui->trackEnabledFlag << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlagLabel << p.ui->textDescriptionsFlag
                      << p.ui->originalFlagLabel << p.ui->originalFlag << p.ui->commentaryFlagLabel << p.ui->commentaryFlag
                      << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
                      << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps
@@ -79,7 +79,7 @@ Tab::setupControlLists() {
                     << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet << p.ui->propertiesLabel << p.ui->generalOptionsBox;
 
   p.allInputControls << p.ui->muxThisLabel << p.ui->muxThis << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag
-                     << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
+                     << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag << p.ui->trackEnabledFlagLabel << p.ui->trackEnabledFlag
                      << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlagLabel << p.ui->textDescriptionsFlag
                      << p.ui->originalFlagLabel << p.ui->originalFlag << p.ui->commentaryFlagLabel << p.ui->commentaryFlag
                      << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
@@ -89,10 +89,11 @@ Tab::setupControlLists() {
                      << p.ui->miscellaneousBox << p.ui->cuesLabel << p.ui->cues << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions
                      << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain;
 
-  p.comboBoxControls << p.ui->muxThis << p.ui->defaultTrackFlag << p.ui->forcedTrackFlag << p.ui->compression << p.ui->cues << p.ui->stereoscopy << p.ui->aacIsSBR << p.ui->subtitleCharacterSet
+  p.comboBoxControls << p.ui->muxThis << p.ui->defaultTrackFlag << p.ui->forcedTrackFlag << p.ui->trackEnabledFlag << p.ui->compression << p.ui->cues << p.ui->stereoscopy << p.ui->aacIsSBR << p.ui->subtitleCharacterSet
                      << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlag<< p.ui->originalFlag << p.ui->commentaryFlag;
 
   p.notIfAppendingControls << p.ui->trackLanguageLabel       << p.ui->trackLanguage           << p.ui->trackNameLabel              << p.ui->trackName          << p.ui->defaultTrackFlagLabel     << p.ui->defaultTrackFlag
+                           << p.ui->trackEnabledFlagLabel    << p.ui->trackEnabledFlag
                            << p.ui->forcedTrackFlagLabel     << p.ui->forcedTrackFlag         << p.ui->originalFlagLabel           << p.ui->originalFlag       << p.ui->commentaryFlagLabel       << p.ui->commentaryFlag
                            << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag     << p.ui->visualImpairedFlagLabel     << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlagLabel << p.ui->textDescriptionsFlag
                            << p.ui->compressionLabel         << p.ui->compression             << p.ui->trackTagsLabel              << p.ui->trackTags          << p.ui->browseTrackTags
@@ -260,7 +261,7 @@ Tab::setupInputControls() {
   p.ui->forcedTrackFlag->addItem(QString{}, 0);
   p.ui->forcedTrackFlag->setCurrentIndex(1);
 
-  for (auto &comboBox : std::vector<QComboBox *>{p.ui->muxThis, p.ui->hearingImpairedFlag, p.ui->visualImpairedFlag, p.ui->textDescriptionsFlag, p.ui->originalFlag, p.ui->commentaryFlag})
+  for (auto &comboBox : std::vector<QComboBox *>{p.ui->muxThis, p.ui->trackEnabledFlag, p.ui->hearingImpairedFlag, p.ui->visualImpairedFlag, p.ui->textDescriptionsFlag, p.ui->originalFlag, p.ui->commentaryFlag})
     for (auto idx = 0; idx < 2; ++idx)
       comboBox->addItem(QString{}, idx == 0);
 
@@ -374,6 +375,7 @@ Tab::setupInputControls() {
   connect(p.ui->files->selectionModel(),       &QItemSelectionModel::selectionChanged,                                 this,                       &Tab::enableMoveFilesButtons);
   connect(p.ui->fixBitstreamTimingInfo,        &QCheckBox::toggled,                                                    this,                       &Tab::onFixBitstreamTimingInfoChanged);
   connect(p.ui->forcedTrackFlag,               static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onForcedTrackFlagChanged);
+  connect(p.ui->trackEnabledFlag,              static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onTrackEnabledFlagChanged);
   connect(p.ui->hearingImpairedFlag,           static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onHearingImpairedFlagChanged);
   connect(p.ui->visualImpairedFlag,            static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onVisualImpairedFlagChanged);
   connect(p.ui->textDescriptionsFlag,          static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onTextDescriptionsFlagChanged);
@@ -472,6 +474,10 @@ Tab::setupInputToolTips() {
                    Q("%1 %2")
                    .arg(QY("Mark this track as \"forced display\"."))
                    .arg(QY("Use this for tracks containing onscreen text or foreign-language dialogue.")));
+  Util::setToolTip(p.ui->trackEnabledFlag,
+                   Q("%1 %2")
+                   .arg(QY("Mark this track as \"enabled\" (the default) or \"disabled\"."))
+                   .arg(QY("Players should only consider enabled tracks for playback.")));
   Util::setToolTip(p.ui->hearingImpairedFlag,  QY("Can be set if the track is suitable for users with hearing impairments."));
   Util::setToolTip(p.ui->visualImpairedFlag,   QY("Can be set if the track is suitable for users with visual impairments."));
   Util::setToolTip(p.ui->textDescriptionsFlag, QY("Can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."));
@@ -743,6 +749,7 @@ Tab::setInputControlValues(Track *track) {
   Util::setComboBoxIndexIf(p.ui->muxThis,              [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_muxThis);                                });
   Util::setComboBoxIndexIf(p.ui->defaultTrackFlag,     [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_defaultTrackFlag);                       });
   Util::setComboBoxIndexIf(p.ui->forcedTrackFlag,      [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_forcedTrackFlag);                        });
+  Util::setComboBoxIndexIf(p.ui->trackEnabledFlag,     [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_trackEnabledFlag);                       });
   Util::setComboBoxIndexIf(p.ui->hearingImpairedFlag,  [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_hearingImpairedFlag);                    });
   Util::setComboBoxIndexIf(p.ui->visualImpairedFlag,   [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_visualImpairedFlag);                     });
   Util::setComboBoxIndexIf(p.ui->textDescriptionsFlag, [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == track->m_textDescriptionsFlag);                   });
@@ -991,6 +998,19 @@ Tab::onForcedTrackFlagChanged(int newValue) {
   newValue = data.toInt();
 
   withSelectedTracks([&newValue](auto &track) { track.m_forcedTrackFlag = newValue; }, true);
+}
+
+void
+Tab::onTrackEnabledFlagChanged(int newValue) {
+  auto &p   = *p_func();
+  auto data = p.ui->trackEnabledFlag->itemData(newValue);
+
+  if (!data.isValid())
+    return;
+
+  newValue = data.toInt();
+
+  withSelectedTracks([&newValue](auto &track) { track.m_trackEnabledFlag = newValue; }, true);
 }
 
 void
@@ -1501,7 +1521,7 @@ Tab::retranslateInputUI() {
     if (comboBox->count() && !comboBox->itemData(0).isValid())
       comboBox->setItemText(0, QY("<Do not change>"));
 
-  for (auto &comboBox : std::vector<QComboBox *>{p.ui->muxThis, p.ui->forcedTrackFlag, p.ui->hearingImpairedFlag, p.ui->visualImpairedFlag, p.ui->textDescriptionsFlag, p.ui->originalFlag, p.ui->commentaryFlag})
+  for (auto &comboBox : std::vector<QComboBox *>{p.ui->muxThis, p.ui->forcedTrackFlag, p.ui->trackEnabledFlag, p.ui->hearingImpairedFlag, p.ui->visualImpairedFlag, p.ui->textDescriptionsFlag, p.ui->originalFlag, p.ui->commentaryFlag})
     Util::setComboBoxTexts(comboBox, QStringList{} << QY("Yes") << QY("No"));
 
   Util::setComboBoxTexts(p.ui->defaultTrackFlag, QStringList{}                                  << QY("Yes")                  << QY("No"));
@@ -1998,6 +2018,7 @@ Tab::toggleSpecificTrackFlag(unsigned int wantedId) {
   auto &p       = *p_func();
   auto comboBox = wantedId == libmatroska::KaxTrackFlagDefault    ::ClassInfos.GlobalId.GetValue() ? p.ui->defaultTrackFlag
                 : wantedId == libmatroska::KaxTrackFlagForced     ::ClassInfos.GlobalId.GetValue() ? p.ui->forcedTrackFlag
+                : wantedId == libmatroska::KaxTrackFlagEnabled    ::ClassInfos.GlobalId.GetValue() ? p.ui->trackEnabledFlag
                 : wantedId == libmatroska::KaxFlagCommentary      ::ClassInfos.GlobalId.GetValue() ? p.ui->commentaryFlag
                 : wantedId == libmatroska::KaxFlagOriginal        ::ClassInfos.GlobalId.GetValue() ? p.ui->originalFlag
                 : wantedId == libmatroska::KaxFlagHearingImpaired ::ClassInfos.GlobalId.GetValue() ? p.ui->hearingImpairedFlag

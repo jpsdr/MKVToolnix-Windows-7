@@ -428,6 +428,46 @@
                       <string>General options</string>
                      </property>
                      <layout class="QGridLayout" name="gridLayout_3">
+                      <item row="3" column="0">
+                       <widget class="QLabel" name="defaultTrackFlagLabel">
+                        <property name="text">
+                         <string>&quot;Default track&quot; flag:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="8" column="0">
+                       <widget class="QLabel" name="textDescriptionsFlagLabel">
+                        <property name="text">
+                         <string>&quot;Text descriptions&quot; flag:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1">
+                       <widget class="QComboBox" name="trackName">
+                        <property name="editable">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="5" column="1">
+                       <widget class="QComboBox" name="forcedTrackFlag"/>
+                      </item>
+                      <item row="11" column="1">
+                       <widget class="QComboBox" name="compression"/>
+                      </item>
+                      <item row="10" column="1">
+                       <widget class="QComboBox" name="commentaryFlag"/>
+                      </item>
+                      <item row="5" column="0">
+                       <widget class="QLabel" name="forcedTrackFlagLabel">
+                        <property name="text">
+                         <string>&quot;Forced display&quot; flag:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>forcedTrackFlag</cstring>
+                        </property>
+                       </widget>
+                      </item>
                       <item row="0" column="0">
                        <widget class="QLabel" name="muxThisLabel">
                         <property name="text">
@@ -438,25 +478,18 @@
                         </property>
                        </widget>
                       </item>
+                      <item row="8" column="1">
+                       <widget class="QComboBox" name="textDescriptionsFlag"/>
+                      </item>
+                      <item row="6" column="0">
+                       <widget class="QLabel" name="hearingImpairedFlagLabel">
+                        <property name="text">
+                         <string>&quot;Hearing impaired&quot; flag:</string>
+                        </property>
+                       </widget>
+                      </item>
                       <item row="0" column="1">
                        <widget class="QComboBox" name="muxThis"/>
-                      </item>
-                      <item row="1" column="0">
-                       <widget class="QLabel" name="trackNameLabel">
-                        <property name="text">
-                         <string>Trac&amp;k name:</string>
-                        </property>
-                        <property name="buddy">
-                         <cstring>trackName</cstring>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="1" column="1">
-                       <widget class="QComboBox" name="trackName">
-                        <property name="editable">
-                         <bool>true</bool>
-                        </property>
-                       </widget>
                       </item>
                       <item row="2" column="0">
                        <widget class="QLabel" name="trackLanguageLabel">
@@ -468,100 +501,27 @@
                         </property>
                        </widget>
                       </item>
-                      <item row="2" column="1">
-                       <widget class="mtx::gui::Util::LanguageDisplayWidget" name="trackLanguage"/>
-                      </item>
-                      <item row="3" column="0">
-                       <widget class="QLabel" name="defaultTrackFlagLabel">
-                        <property name="text">
-                         <string>&quot;Default track&quot; flag:</string>
-                        </property>
-                       </widget>
-                      </item>
                       <item row="3" column="1">
                        <widget class="QComboBox" name="defaultTrackFlag"/>
                       </item>
-                      <item row="4" column="0">
-                       <widget class="QLabel" name="forcedTrackFlagLabel">
-                        <property name="text">
-                         <string>&quot;Forced display&quot; flag:</string>
-                        </property>
-                        <property name="buddy">
-                         <cstring>forcedTrackFlag</cstring>
-                        </property>
-                       </widget>
+                      <item row="2" column="1">
+                       <widget class="mtx::gui::Util::LanguageDisplayWidget" name="trackLanguage"/>
                       </item>
-                      <item row="4" column="1">
-                       <widget class="QComboBox" name="forcedTrackFlag"/>
-                      </item>
-                      <item row="5" column="0">
-                       <widget class="QLabel" name="hearingImpairedFlagLabel">
-                        <property name="text">
-                         <string>&quot;Hearing impaired&quot; flag:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="5" column="1">
-                       <widget class="QComboBox" name="hearingImpairedFlag"/>
-                      </item>
-                      <item row="6" column="0">
+                      <item row="7" column="0">
                        <widget class="QLabel" name="visualImpairedFlagLabel">
                         <property name="text">
                          <string>&quot;Visual impaired&quot; flag:</string>
                         </property>
                        </widget>
                       </item>
-                      <item row="6" column="1">
-                       <widget class="QComboBox" name="visualImpairedFlag"/>
-                      </item>
-                      <item row="7" column="0">
-                       <widget class="QLabel" name="textDescriptionsFlagLabel">
-                        <property name="text">
-                         <string>&quot;Text descriptions&quot; flag:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="7" column="1">
-                       <widget class="QComboBox" name="textDescriptionsFlag"/>
-                      </item>
-                      <item row="8" column="0">
+                      <item row="9" column="0">
                        <widget class="QLabel" name="originalFlagLabel">
                         <property name="text">
                          <string>&quot;Original language&quot; flag:</string>
                         </property>
                        </widget>
                       </item>
-                      <item row="8" column="1">
-                       <widget class="QComboBox" name="originalFlag"/>
-                      </item>
-                      <item row="9" column="0">
-                       <widget class="QLabel" name="commentaryFlagLabel">
-                        <property name="text">
-                         <string>&quot;Commentary&quot; flag:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="9" column="1">
-                       <widget class="QComboBox" name="commentaryFlag"/>
-                      </item>
-                      <item row="10" column="0">
-                       <widget class="QLabel" name="compressionLabel">
-                        <property name="text">
-                         <string>Compression:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="10" column="1">
-                       <widget class="QComboBox" name="compression"/>
-                      </item>
-                      <item row="11" column="0">
-                       <widget class="QLabel" name="trackTagsLabel">
-                        <property name="text">
-                         <string>Tags:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item row="11" column="1">
+                      <item row="12" column="1">
                        <widget class="QWidget" name="trackTagsContainer" native="true">
                         <layout class="QHBoxLayout" name="horizontalLayout_11">
                          <property name="leftMargin">
@@ -592,6 +552,56 @@
                          </item>
                         </layout>
                        </widget>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="trackNameLabel">
+                        <property name="text">
+                         <string>Trac&amp;k name:</string>
+                        </property>
+                        <property name="buddy">
+                         <cstring>trackName</cstring>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="9" column="1">
+                       <widget class="QComboBox" name="originalFlag"/>
+                      </item>
+                      <item row="7" column="1">
+                       <widget class="QComboBox" name="visualImpairedFlag"/>
+                      </item>
+                      <item row="12" column="0">
+                       <widget class="QLabel" name="trackTagsLabel">
+                        <property name="text">
+                         <string>Tags:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="11" column="0">
+                       <widget class="QLabel" name="compressionLabel">
+                        <property name="text">
+                         <string>Compression:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="6" column="1">
+                       <widget class="QComboBox" name="hearingImpairedFlag"/>
+                      </item>
+                      <item row="10" column="0">
+                       <widget class="QLabel" name="commentaryFlagLabel">
+                        <property name="text">
+                         <string>&quot;Commentary&quot; flag:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="4" column="0">
+                       <widget class="QLabel" name="trackEnabledFlagLabel">
+                        <property name="text">
+                         <string>&quot;Track enabled&quot; flag:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="4" column="1">
+                       <widget class="QComboBox" name="trackEnabledFlag"/>
                       </item>
                      </layout>
                     </widget>
@@ -2061,6 +2071,7 @@
   <tabstop>trackLanguage</tabstop>
   <tabstop>defaultTrackFlag</tabstop>
   <tabstop>forcedTrackFlag</tabstop>
+  <tabstop>trackEnabledFlag</tabstop>
   <tabstop>hearingImpairedFlag</tabstop>
   <tabstop>visualImpairedFlag</tabstop>
   <tabstop>textDescriptionsFlag</tabstop>

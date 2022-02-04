@@ -135,6 +135,8 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
 
   m_forcedTrackFlag            = m_properties.value(Q(mtx::id::forced_track)).toBool() ? 1 : 0;
   m_forcedTrackFlagWasSet      = m_forcedTrackFlag == 1;
+  m_trackEnabledFlag           = m_properties.value(Q(mtx::id::enabled_track), true).toBool() ? 1 : 0;
+  m_trackEnabledFlagWasSet     = m_trackEnabledFlag == 1;
   m_hearingImpairedFlag        = m_properties.value(Q(mtx::id::flag_hearing_impaired)).toBool();
   m_hearingImpairedFlagWasSet  = m_hearingImpairedFlag;
   m_visualImpairedFlag         = m_properties.value(Q(mtx::id::flag_visual_impaired)).toBool();
@@ -238,6 +240,7 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("setAspectRatio",                m_setAspectRatio);
   settings.setValue("defaultTrackFlagWasSet",        m_defaultTrackFlagWasSet);
   settings.setValue("forcedTrackFlagWasSet",         m_forcedTrackFlagWasSet);
+  settings.setValue("trackEnabledFlagWasSet",        m_trackEnabledFlagWasSet);
   settings.setValue("aacSbrWasDetected",             m_aacSbrWasDetected);
   settings.setValue("nameWasPresent",                m_nameWasPresent);
   settings.setValue("fixBitstreamTimingInfo",        m_fixBitstreamTimingInfo);
@@ -257,6 +260,7 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("additionalOptions",             m_additionalOptions);
   settings.setValue("defaultTrackFlag",              m_defaultTrackFlag);
   settings.setValue("forcedTrackFlag",               m_forcedTrackFlag);
+  settings.setValue("trackEnabledFlag",              m_trackEnabledFlag);
   settings.setValue("stereoscopy",                   m_stereoscopy);
   settings.setValue("cues",                          m_cues);
   settings.setValue("aacIsSBR",                      m_aacIsSBR);
@@ -292,6 +296,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_setAspectRatio                = l.settings.value("setAspectRatio").toBool();
   m_defaultTrackFlagWasSet        = l.settings.value("defaultTrackFlagWasSet").toBool();
   m_forcedTrackFlagWasSet         = l.settings.value("forcedTrackFlagWasSet").toBool();
+  m_trackEnabledFlagWasSet        = l.settings.value("trackEnabledFlagWasSet").toBool();
   m_aacSbrWasDetected             = l.settings.value("aacSbrWasDetected").toBool();
   m_name                          = l.settings.value("name").toString();
   m_nameWasPresent                = l.settings.value("nameWasPresent").toBool();
@@ -311,6 +316,7 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_additionalOptions             = l.settings.value("additionalOptions").toString();
   m_defaultTrackFlag              = l.settings.value("defaultTrackFlag").toBool();
   m_forcedTrackFlag               = l.settings.value("forcedTrackFlag").toInt();
+  m_trackEnabledFlag              = l.settings.value("trackEnabledFlag").toInt();
   m_stereoscopy                   = l.settings.value("stereoscopy").toInt();
   m_cues                          = l.settings.value("cues").toInt();
   m_aacIsSBR                      = l.settings.value("aacIsSBR").toInt();
@@ -422,6 +428,9 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
 
     if (m_forcedTrackFlagWasSet != !!m_forcedTrackFlag)
       opt.options << Q("--forced-track") << Q("%1:%2").arg(sid).arg(m_forcedTrackFlag == 1 ? Q("yes") : Q("no"));
+
+    if (m_trackEnabledFlagWasSet != !!m_trackEnabledFlag)
+      opt.options << Q("--track-enabled-flag") << Q("%1:%2").arg(sid).arg(m_trackEnabledFlag == 1 ? Q("yes") : Q("no"));
 
     if (m_hearingImpairedFlagWasSet != m_hearingImpairedFlag)
       opt.options << Q("--hearing-impaired-flag") << Q("%1:%2").arg(sid).arg(m_hearingImpairedFlag ? Q("yes") : Q("no"));
