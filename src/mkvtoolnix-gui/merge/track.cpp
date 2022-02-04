@@ -424,10 +424,10 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
       opt.options << Q("--track-name") << Q("%1:%2").arg(sid).arg(m_name);
 
     if (m_defaultTrackFlagWasSet != m_defaultTrackFlag)
-      opt.options << Q("--default-track") << Q("%1:%2").arg(sid).arg(m_defaultTrackFlag ? Q("yes") : Q("no"));
+      opt.options << Q("--default-track-flag") << Q("%1:%2").arg(sid).arg(m_defaultTrackFlag ? Q("yes") : Q("no"));
 
     if (m_forcedTrackFlagWasSet != !!m_forcedTrackFlag)
-      opt.options << Q("--forced-track") << Q("%1:%2").arg(sid).arg(m_forcedTrackFlag == 1 ? Q("yes") : Q("no"));
+      opt.options << Q("--forced-display-flag") << Q("%1:%2").arg(sid).arg(m_forcedTrackFlag == 1 ? Q("yes") : Q("no"));
 
     if (m_trackEnabledFlagWasSet != !!m_trackEnabledFlag)
       opt.options << Q("--track-enabled-flag") << Q("%1:%2").arg(sid).arg(m_trackEnabledFlag == 1 ? Q("yes") : Q("no"));

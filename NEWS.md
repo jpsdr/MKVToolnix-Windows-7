@@ -20,6 +20,13 @@
   "track enabled" track header flag.
 * MKVToolNix GUI: multiplexer: added support for the "track enabled" track
   header flag.
+* mkvmerge: the options `--default-track` and `--forced-track` have been
+  renamed to `--default-track-flag` and `--forced-display-flag` respectively
+  for improved consistency with other option names & the wording used in the
+  GUI. However, the old names will be supported and recognized
+  indefinitely. What will remain unchanged is the property names for those
+  flags in mkvmerge's identification output. Existing third-party programs
+  will continue working as they are.
 
 ## Bug fixes
 

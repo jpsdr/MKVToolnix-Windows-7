@@ -232,10 +232,10 @@ set_usage() {
                   "                           'o/p' to fix linear drifts. 'p' defaults to\n"
                   "                           1 if omitted. Both 'o' and 'p' can be\n"
                   "                           floating point numbers.\n");
-  usage_text += Y("  --default-track <TID[:bool]>\n"
+  usage_text += Y("  --default-track-flag <TID[:bool]>\n"
                   "                           Sets the \"default track\" flag for this track or\n"
                   "                           forces it not to be present if bool is 0.\n");
-  usage_text += Y("  --forced-track <TID[:bool]>\n"
+  usage_text += Y("  --forced-display-flag <TID[:bool]>\n"
                   "                           Sets the \"forced display\" flag for this track or\n"
                   "                           forces it not to be present if bool is 0.\n");
   usage_text += Y("  --track-enabled-flag <TID[:bool]>\n"
@@ -1245,7 +1245,7 @@ parse_arg_split(const std::string &arg) {
   }
 }
 
-/** \brief Parse the \c --default-track argument
+/** \brief Parse the \c --default-track-flag argument
 
    The argument must have the form \c TID or \c TID:boolean. The former
    is equivalent to \c TID:1.
@@ -2716,14 +2716,14 @@ parse_args(std::vector<std::string> args) {
       parse_arg_cues(next_arg, *ti);
       sit++;
 
-    } else if (this_arg == "--default-track") {
+    } else if ((this_arg == "--default-track-flag") || (this_arg == "--default-track")) {
       if (no_next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
       parse_arg_boolean_track_option(this_arg, next_arg, ti->m_default_track_flags);
       sit++;
 
-    } else if (this_arg == "--forced-track") {
+    } else if ((this_arg == "--forced-display-flag") || (this_arg == "--forced-track")) {
       if (no_next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
