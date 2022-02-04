@@ -1404,6 +1404,25 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
+    <varlistentry id="mkvmerge.description.track_enabled_flag">
+     <term><option>--track-enabled-flag</option> <parameter>TID<optional>:bool</optional></parameter></term>
+     <listitem>
+      <para>
+       Sets the &quot;track enabled&quot; flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) to the
+       given value <parameter>bool</parameter> (0 or 1; defaults to 1 if not specified).  Tracks are enabled by default if no option is
+       specified for them and the source container doesn't provide this information either.
+      </para>
+
+      <para>
+       Only tracks whose &quot;track enabled&quot; flag is set should be considered for playback.
+      </para>
+
+      <para>
+       This option can be used multiple times for an input file applying to several tracks by selecting different track IDs each time.
+      </para>
+     </listitem>
+    </varlistentry>
+
     <varlistentry id="mkvmerge.description.forced_track">
      <term><option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter></term>
      <listitem>
