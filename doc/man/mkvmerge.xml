@@ -1384,8 +1384,8 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry id="mkvmerge.description.default_track">
-     <term><option>--default-track</option> <parameter>TID<optional>:bool</optional></parameter></term>
+    <varlistentry id="mkvmerge.description.default_track_flag">
+     <term><option>--default-track-flag</option> <parameter>TID<optional>:bool</optional></parameter></term>
      <listitem>
       <para>
        Sets the &quot;default track&quot; flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) if the
@@ -1423,8 +1423,8 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
-    <varlistentry id="mkvmerge.description.forced_track">
-     <term><option>--forced-track</option> <parameter>TID<optional>:bool</optional></parameter></term>
+    <varlistentry id="mkvmerge.description.forced_display_flag">
+     <term><option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter></term>
      <listitem>
       <para>
        Sets the &quot;forced display&quot; flag for the given track (see section <link linkend="mkvmerge.track_ids">track IDs</link>) if the
@@ -2532,7 +2532,7 @@ $ mkvmerge -o MM-complete.mkv MyMovie-with-sound.mkv MyMovie-add-audio.ogg</scre
    and French, and want to have the player display the French ones by default. This can be done with
   </para>
 
-  <screen>$ mkvmerge -o with-lang-codes.mkv --language 2:ger --language 3:dut --default-track 3 without-lang-codes.mkv --language 0:eng english.srt --default-track 0 --language 0:fre french.srt</screen>
+  <screen>$ mkvmerge -o with-lang-codes.mkv --language 2:ger --language 3:dut --default-track-flag 3 without-lang-codes.mkv --language 0:eng english.srt --default-track-flag 0 --language 0:fre french.srt</screen>
 
   <para>
    If you do not see the language or default track flags that you've specified in &mkvinfo;'s output then please read the
