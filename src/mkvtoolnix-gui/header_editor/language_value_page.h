@@ -2,6 +2,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/bcp47.h"
 #include "mkvtoolnix-gui/header_editor/value_page.h"
 
 namespace mtx::gui {
@@ -29,6 +30,8 @@ public:
   virtual void resetValue() override;
   virtual bool validateValue() const override;
   virtual void copyValueToElement() override;
+
+  virtual void setLanguage(mtx::bcp47::language_c const &parsedLanguage);
 };
 
 }}

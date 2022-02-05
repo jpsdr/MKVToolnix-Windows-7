@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QAbstractItemView>
+#include <QCheckBox>
 #include <QComboBox>
 #include <QLabel>
 
@@ -77,6 +78,14 @@ LanguageIETFValuePage::retranslateUi() {
 
   if (m_lValueLabel)
     m_lValueLabel->setText(QY("New &value:"));
+}
+
+void
+LanguageIETFValuePage::setLanguage(mtx::bcp47::language_c const &parsedLanguage) {
+  if (!m_present && !m_cbAddOrRemove->isChecked())
+    m_cbAddOrRemove->setChecked(true);
+
+  m_ldwValue->setLanguage(parsedLanguage);
 }
 
 }

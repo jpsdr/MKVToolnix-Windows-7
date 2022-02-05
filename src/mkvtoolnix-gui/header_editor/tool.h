@@ -24,7 +24,7 @@ class Tool : public ToolBase {
 protected:
   // UI stuff:
   std::unique_ptr<Ui::Tool> ui;
-  QMenu *m_headerEditorMenu;
+  QMenu *m_headerEditorMenu, *m_languageShortcutsMenu{};
   mtx::gui::Util::FilesDragDropHandler m_filesDDHandler;
   mtx::gui::Util::ModifyTracksSubmenu m_modifyTracksSubmenu;
 
@@ -40,6 +40,7 @@ public:
   virtual void dropEvent(QDropEvent *event) override;
 
 public Q_SLOTS:
+  virtual void applyPreferences();
   virtual void retranslateUi();
   virtual void toolShown() override;
   virtual void selectFileToOpen();
@@ -56,8 +57,10 @@ public Q_SLOTS:
   virtual void enableMenuActions();
   virtual void showTab(Tab &tab);
   virtual void toggleTrackFlag();
+  virtual void changeTrackLanguage(QString const &formattedLanguage);
 
 protected:
+  virtual void setupModifyTracksMenu();
   virtual void openFile(QString const &fileName);
   virtual void showHeaderEditorsWidget();
   virtual Tab *currentTab();

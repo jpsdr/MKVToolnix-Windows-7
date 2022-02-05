@@ -67,6 +67,7 @@ Tab::Tab(QWidget *parent,
   , m_model{new PageModel{this}}
   , m_treeContextMenu{new QMenu{this}}
   , m_modifySelectedTrackMenu{new QMenu{this}}
+  , m_languageShortcutsMenu{new QMenu{this}}
   , m_expandAllAction{new QAction{this}}
   , m_collapseAllAction{new QAction{this}}
   , m_addAttachmentsAction{new QAction{this}}
@@ -292,6 +293,8 @@ Tab::save() {
 
 void
 Tab::setupUi() {
+  setupModifyTracksMenu();
+
   Util::Settings::get().handleSplitterSizes(ui->headerEditorSplitter);
 
   auto info = QFileInfo{m_fileName};
@@ -301,36 +304,44 @@ Tab::setupUi() {
   ui->elements->setModel(m_model);
   ui->elements->acceptDroppedFiles(true);
 
-  m_modifyTracksSubmenu.setupTrack(*m_modifySelectedTrackMenu);
-
   Util::HeaderViewManager::create(*ui->elements, "HeaderEditor::Elements").setDefaultSizes({ { Q("type"), 250 }, { Q("codec"), 100 }, { Q("language"), 120 }, { Q("properties"), 120 } });
   Util::preventScrollingWithoutFocus(this);
 
   auto &mts = m_modifyTracksSubmenu;
 
-  connect(ui->elements,                              &Util::BasicTreeView::customContextMenuRequested, this, &Tab::showTreeContextMenu);
-  connect(ui->elements,                              &Util::BasicTreeView::filesDropped,               this, &Tab::handleDroppedFiles);
-  connect(ui->elements,                              &Util::BasicTreeView::deletePressed,              this, &Tab::removeSelectedAttachment);
-  connect(ui->elements,                              &Util::BasicTreeView::insertPressed,              this, &Tab::selectAttachmentsAndAdd);
-  connect(ui->elements->selectionModel(),            &QItemSelectionModel::currentChanged,             this, &Tab::selectionChanged);
-  connect(m_expandAllAction,                         &QAction::triggered,                              this, &Tab::expandAll);
-  connect(m_collapseAllAction,                       &QAction::triggered,                              this, &Tab::collapseAll);
-  connect(m_addAttachmentsAction,                    &QAction::triggered,                              this, &Tab::selectAttachmentsAndAdd);
-  connect(m_removeAttachmentAction,                  &QAction::triggered,                              this, &Tab::removeSelectedAttachment);
-  connect(m_removeAllAttachmentsAction,              &QAction::triggered,                              this, &Tab::removeAllAttachments);
-  connect(m_saveAttachmentContentAction,             &QAction::triggered,                              this, &Tab::saveAttachmentContent);
-  connect(mts.m_toggleTrackEnabledFlag,              &QAction::triggered,                              this, &Tab::toggleTrackFlag);
-  connect(mts.m_toggleDefaultTrackFlag,              &QAction::triggered,                              this, &Tab::toggleTrackFlag);
-  connect(mts.m_toggleForcedDisplayFlag,             &QAction::triggered,                              this, &Tab::toggleTrackFlag);
-  connect(mts.m_toggleCommentaryFlag,                &QAction::triggered,                              this, &Tab::toggleTrackFlag);
-  connect(mts.m_toggleOriginalFlag,                  &QAction::triggered,                              this, &Tab::toggleTrackFlag);
-  connect(mts.m_toggleHearingImpairedFlag,           &QAction::triggered,                              this, &Tab::toggleTrackFlag);
-  connect(mts.m_toggleVisualImpairedFlag,            &QAction::triggered,                              this, &Tab::toggleTrackFlag);
-  connect(mts.m_toggleTextDescriptionsFlag,          &QAction::triggered,                              this, &Tab::toggleTrackFlag);
-  connect(m_replaceAttachmentContentAction,          &QAction::triggered,                              [this]() { replaceAttachmentContent(false); });
-  connect(m_replaceAttachmentContentSetValuesAction, &QAction::triggered,                              [this]() { replaceAttachmentContent(true); });
-  connect(m_model,                                   &PageModel::attachmentsReordered,                 [this]() { m_attachmentsPage->rereadChildren(*m_model); });
-  connect(m_model,                                   &PageModel::tracksReordered,                      this, &Tab::handleReorderedTracks);
+  connect(ui->elements,                              &Util::BasicTreeView::customContextMenuRequested,    this, &Tab::showTreeContextMenu);
+  connect(ui->elements,                              &Util::BasicTreeView::filesDropped,                  this, &Tab::handleDroppedFiles);
+  connect(ui->elements,                              &Util::BasicTreeView::deletePressed,                 this, &Tab::removeSelectedAttachment);
+  connect(ui->elements,                              &Util::BasicTreeView::insertPressed,                 this, &Tab::selectAttachmentsAndAdd);
+  connect(ui->elements->selectionModel(),            &QItemSelectionModel::currentChanged,                this, &Tab::selectionChanged);
+  connect(m_expandAllAction,                         &QAction::triggered,                                 this, &Tab::expandAll);
+  connect(m_collapseAllAction,                       &QAction::triggered,                                 this, &Tab::collapseAll);
+  connect(m_addAttachmentsAction,                    &QAction::triggered,                                 this, &Tab::selectAttachmentsAndAdd);
+  connect(m_removeAttachmentAction,                  &QAction::triggered,                                 this, &Tab::removeSelectedAttachment);
+  connect(m_removeAllAttachmentsAction,              &QAction::triggered,                                 this, &Tab::removeAllAttachments);
+  connect(m_saveAttachmentContentAction,             &QAction::triggered,                                 this, &Tab::saveAttachmentContent);
+  connect(mts.m_toggleTrackEnabledFlag,              &QAction::triggered,                                 this, &Tab::toggleTrackFlag);
+  connect(mts.m_toggleDefaultTrackFlag,              &QAction::triggered,                                 this, &Tab::toggleTrackFlag);
+  connect(mts.m_toggleForcedDisplayFlag,             &QAction::triggered,                                 this, &Tab::toggleTrackFlag);
+  connect(mts.m_toggleCommentaryFlag,                &QAction::triggered,                                 this, &Tab::toggleTrackFlag);
+  connect(mts.m_toggleOriginalFlag,                  &QAction::triggered,                                 this, &Tab::toggleTrackFlag);
+  connect(mts.m_toggleHearingImpairedFlag,           &QAction::triggered,                                 this, &Tab::toggleTrackFlag);
+  connect(mts.m_toggleVisualImpairedFlag,            &QAction::triggered,                                 this, &Tab::toggleTrackFlag);
+  connect(mts.m_toggleTextDescriptionsFlag,          &QAction::triggered,                                 this, &Tab::toggleTrackFlag);
+  connect(&mts,                                      &Util::ModifyTracksSubmenu::languageChangeRequested, this, &Tab::changeTrackLanguage);
+  connect(m_replaceAttachmentContentAction,          &QAction::triggered,                                 [this]() { replaceAttachmentContent(false); });
+  connect(m_replaceAttachmentContentSetValuesAction, &QAction::triggered,                                 [this]() { replaceAttachmentContent(true); });
+  connect(m_model,                                   &PageModel::attachmentsReordered,                    [this]() { m_attachmentsPage->rereadChildren(*m_model); });
+  connect(m_model,                                   &PageModel::tracksReordered,                         this, &Tab::handleReorderedTracks);
+}
+
+void
+Tab::setupModifyTracksMenu() {
+  m_modifySelectedTrackMenu->addMenu(m_languageShortcutsMenu);
+  m_modifySelectedTrackMenu->addSeparator();
+
+  m_modifyTracksSubmenu.setupTrack(*m_modifySelectedTrackMenu);
+  m_modifyTracksSubmenu.setupLanguage(*m_languageShortcutsMenu);
 }
 
 void
@@ -379,6 +390,7 @@ Tab::retranslateUi() {
   m_replaceAttachmentContentAction->setIcon(QIcon{Q(":/icons/16x16/document-open.png")});
 
   m_modifyTracksSubmenu.retranslateUi();
+  m_languageShortcutsMenu->setTitle(QY("Set &language"));
 
   setupToolTips();
 
@@ -955,7 +967,7 @@ Tab::updateTracksElementToMatchTrackOrder() {
 }
 
 void
-Tab::toggleSpecificTrackFlag(unsigned int wantedId) {
+Tab::walkPagesOfSelectedTopLevelNode(std::function<bool(PageBase *)> worker) {
   auto topLevelIdx = ui->elements->selectionModel()->currentIndex();
 
   if (!topLevelIdx.isValid())
@@ -964,19 +976,13 @@ Tab::toggleSpecificTrackFlag(unsigned int wantedId) {
   while (topLevelIdx.parent().isValid())
     topLevelIdx = topLevelIdx.parent();
 
-  if (!dynamic_cast<TrackTypePage *>(m_model->selectedPage(topLevelIdx)))
-    return;
-
   std::function<void(QModelIndex const &)> walkTree;
-  walkTree = [this, wantedId, &walkTree](QModelIndex const &parentIdx) {
+  walkTree = [this, &worker, &walkTree](QModelIndex const &parentIdx) {
     for (auto row = 0, numRows = m_model->rowCount(parentIdx); row < numRows; ++row) {
       auto idx  = m_model->index(row, 0, parentIdx);
-      auto page = dynamic_cast<BoolValuePage *>(m_model->selectedPage(idx));
 
-      if (page && (page->m_callbacks.GlobalId.GetValue() == wantedId)) {
-        page->toggleFlag();
+      if (!worker(m_model->selectedPage(idx)))
         return;
-      }
 
       walkTree(idx);
     }
@@ -986,11 +992,53 @@ Tab::toggleSpecificTrackFlag(unsigned int wantedId) {
 }
 
 void
+Tab::toggleSpecificTrackFlag(unsigned int wantedId) {
+  walkPagesOfSelectedTopLevelNode([wantedId](auto *pageBase) -> bool {
+    auto page = dynamic_cast<BoolValuePage *>(pageBase);
+
+    if (page && (page->m_callbacks.GlobalId.GetValue() == wantedId)) {
+      page->toggleFlag();
+      return false;
+    }
+
+    return true;
+  });
+}
+
+void
 Tab::toggleTrackFlag() {
   auto action = dynamic_cast<QAction *>(sender());
 
   if (action)
     toggleSpecificTrackFlag(action->data().toUInt());
+}
+
+void
+Tab::changeTrackLanguage(QString const &formattedLanguage) {
+  auto language = mtx::bcp47::language_c::parse(to_utf8(formattedLanguage));
+  if (!language.is_valid())
+    return;
+
+  auto languageFound  = false,
+    languageIETFFound = false;
+
+  walkPagesOfSelectedTopLevelNode([&language, &languageFound, &languageIETFFound](auto *pageBase) -> bool {
+    auto languagePage = dynamic_cast<LanguageValuePage *>(pageBase);
+
+    if (languagePage) {
+      languagePage->setLanguage(language);
+      languageFound = true;
+    }
+
+    auto languageIETFPage = dynamic_cast<LanguageIETFValuePage *>(pageBase);
+
+    if (languageIETFPage) {
+      languageIETFPage->setLanguage(language);
+      languageIETFFound = true;
+    }
+
+    return !languageFound || !languageIETFFound;
+  });
 }
 
 }

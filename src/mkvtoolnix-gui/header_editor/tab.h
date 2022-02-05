@@ -48,7 +48,7 @@ protected:
   AttachmentsPage *m_attachmentsPage{};
   bool m_ignoreSelectionChanges{}, m_tracksReordered{};
 
-  QMenu *m_treeContextMenu, *m_modifySelectedTrackMenu;
+  QMenu *m_treeContextMenu, *m_modifySelectedTrackMenu, *m_languageShortcutsMenu;
   QAction *m_expandAllAction, *m_collapseAllAction, *m_addAttachmentsAction, *m_removeAttachmentAction, *m_removeAllAttachmentsAction, *m_saveAttachmentContentAction;
   QAction *m_replaceAttachmentContentAction, *m_replaceAttachmentContentSetValuesAction;
 
@@ -93,9 +93,11 @@ public Q_SLOTS:
   virtual void handleDroppedFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
   virtual void focusPage(PageBase *page);
   virtual void handleReorderedTracks();
+  virtual void changeTrackLanguage(QString const &formattedLanguage);
 
 protected:
   void setupUi();
+  void setupModifyTracksMenu();
   void setupToolTips();
   void handleSegmentInfo(kax_analyzer_data_c const &data);
   void handleTracks(kax_analyzer_data_c const &data);
@@ -115,6 +117,8 @@ protected:
   void pruneEmptyMastersForAllTracks();
 
   void updateTracksElementToMatchTrackOrder();
+
+  void walkPagesOfSelectedTopLevelNode(std::function<bool(PageBase *)> worker);
 
 public:
   static memory_cptr readFileData(QWidget *parent, QString const &fileName);

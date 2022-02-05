@@ -34,8 +34,6 @@ Tool::Tool(QWidget *parent,
   // Setup UI controls.
   ui->setupUi(this);
 
-  m_modifyTracksSubmenu.setupTrack(*MainWindow::getUi()->menuHeaderEditorModifyTrack);
-
   MainWindow::get()->registerSubWindowWidget(*this, *ui->editors);
 }
 
@@ -44,6 +42,8 @@ Tool::~Tool() {
 
 void
 Tool::setupUi() {
+  setupModifyTracksMenu();
+
   Util::setupTabWidgetHeaders(*ui->editors);
 
   showHeaderEditorsWidget();
@@ -59,30 +59,50 @@ Tool::setupActions() {
   auto mwUi = MainWindow::getUi();
   auto &mts = m_modifyTracksSubmenu;
 
-  connect(mwUi->actionHeaderEditorOpen,     &QAction::triggered,             this, &Tool::selectFileToOpen);
-  connect(mwUi->actionHeaderEditorSave,     &QAction::triggered,             this, &Tool::save);
-  connect(mwUi->actionHeaderEditorSaveAll,  &QAction::triggered,             this, &Tool::saveAllTabs);
-  connect(mwUi->actionHeaderEditorValidate, &QAction::triggered,             this, &Tool::validate);
-  connect(mwUi->actionHeaderEditorReload,   &QAction::triggered,             this, &Tool::reload);
-  connect(mwUi->actionHeaderEditorClose,    &QAction::triggered,             this, &Tool::closeCurrentTab);
-  connect(mwUi->actionHeaderEditorCloseAll, &QAction::triggered,             this, &Tool::closeAllTabs);
+  connect(mwUi->actionHeaderEditorOpen,     &QAction::triggered,                                 this, &Tool::selectFileToOpen);
+  connect(mwUi->actionHeaderEditorSave,     &QAction::triggered,                                 this, &Tool::save);
+  connect(mwUi->actionHeaderEditorSaveAll,  &QAction::triggered,                                 this, &Tool::saveAllTabs);
+  connect(mwUi->actionHeaderEditorValidate, &QAction::triggered,                                 this, &Tool::validate);
+  connect(mwUi->actionHeaderEditorReload,   &QAction::triggered,                                 this, &Tool::reload);
+  connect(mwUi->actionHeaderEditorClose,    &QAction::triggered,                                 this, &Tool::closeCurrentTab);
+  connect(mwUi->actionHeaderEditorCloseAll, &QAction::triggered,                                 this, &Tool::closeAllTabs);
 
-  connect(mts.m_toggleTrackEnabledFlag,     &QAction::triggered,             this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleDefaultTrackFlag,     &QAction::triggered,             this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleForcedDisplayFlag,    &QAction::triggered,             this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleCommentaryFlag,       &QAction::triggered,             this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleOriginalFlag,         &QAction::triggered,             this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleHearingImpairedFlag,  &QAction::triggered,             this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleVisualImpairedFlag,   &QAction::triggered,             this, &Tool::toggleTrackFlag);
-  connect(mts.m_toggleTextDescriptionsFlag, &QAction::triggered,             this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleTrackEnabledFlag,     &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleDefaultTrackFlag,     &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleForcedDisplayFlag,    &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleCommentaryFlag,       &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleOriginalFlag,         &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleHearingImpairedFlag,  &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleVisualImpairedFlag,   &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
+  connect(mts.m_toggleTextDescriptionsFlag, &QAction::triggered,                                 this, &Tool::toggleTrackFlag);
 
-  connect(ui->openFileButton,               &QPushButton::clicked,           this, &Tool::selectFileToOpen);
+  connect(&mts,                             &Util::ModifyTracksSubmenu::languageChangeRequested, this, &Tool::changeTrackLanguage);
 
-  connect(m_headerEditorMenu,               &QMenu::aboutToShow,             this, &Tool::enableMenuActions);
-  connect(mw,                               &MainWindow::preferencesChanged, [this]() { Util::setupTabWidgetHeaders(*ui->editors); });
-  connect(mw,                               &MainWindow::preferencesChanged, this, &Tool::retranslateUi);
+  connect(ui->openFileButton,               &QPushButton::clicked,                               this, &Tool::selectFileToOpen);
 
-  connect(App::instance(),                  &App::editingHeadersRequested,   this, &Tool::openFilesFromCommandLine);
+  connect(m_headerEditorMenu,               &QMenu::aboutToShow,                                 this, &Tool::enableMenuActions);
+  connect(mw,                               &MainWindow::preferencesChanged,                     this, &Tool::applyPreferences);
+
+  connect(App::instance(),                  &App::editingHeadersRequested,                       this, &Tool::openFilesFromCommandLine);
+}
+
+void
+Tool::setupModifyTracksMenu() {
+  auto mwUi               = MainWindow::getUi();
+  m_languageShortcutsMenu = new QMenu{this};
+
+  mwUi->menuHeaderEditorModifyTrack->addMenu(m_languageShortcutsMenu);
+  mwUi->menuHeaderEditorModifyTrack->addSeparator();
+
+  m_modifyTracksSubmenu.setupTrack(*mwUi->menuHeaderEditorModifyTrack);
+  m_modifyTracksSubmenu.setupLanguage(*m_languageShortcutsMenu);
+}
+
+void
+Tool::applyPreferences() {
+  Util::setupTabWidgetHeaders(*ui->editors);;
+  m_modifyTracksSubmenu.setupLanguage(*m_languageShortcutsMenu);
+  retranslateUi();
 }
 
 void
@@ -126,6 +146,7 @@ Tool::retranslateUi() {
   ui->retranslateUi(this);
 
   m_modifyTracksSubmenu.retranslateUi();
+  m_languageShortcutsMenu->setTitle(QY("Set &language"));
 
   for (auto idx = 0, numTabs = ui->editors->count(); idx < numTabs; ++idx) {
     static_cast<Tab *>(ui->editors->widget(idx))->retranslateUi();
@@ -297,6 +318,14 @@ Tool::toggleTrackFlag() {
 
   if (action && tab)
     tab->toggleSpecificTrackFlag(action->data().toUInt());
+}
+
+void
+Tool::changeTrackLanguage(QString const &formattedLanguage) {
+  auto tab = currentTab();
+
+  if (tab)
+    tab->changeTrackLanguage(formattedLanguage);
 }
 
 }

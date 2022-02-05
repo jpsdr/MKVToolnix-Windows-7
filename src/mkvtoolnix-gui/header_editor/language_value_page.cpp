@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QAbstractItemView>
+#include <QCheckBox>
 #include <QComboBox>
 
 #include "common/iso639.h"
@@ -72,6 +73,14 @@ LanguageValuePage::validateValue()
 void
 LanguageValuePage::copyValueToElement() {
   static_cast<EbmlString *>(m_element)->SetValue(to_utf8(currentValueAsString()));
+}
+
+void
+LanguageValuePage::setLanguage(mtx::bcp47::language_c const &parsedLanguage) {
+  if (!m_present && !m_cbAddOrRemove->isChecked())
+    m_cbAddOrRemove->setChecked(true);
+
+  m_cbValue->setCurrentByData(QStringList{} << Q(parsedLanguage.get_iso639_2_alpha_3_code_or("und")));
 }
 
 }
