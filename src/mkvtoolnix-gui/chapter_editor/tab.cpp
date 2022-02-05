@@ -904,6 +904,18 @@ Tab::copyControlsToStorageImpl(QModelIndex const &idx) {
   return copyChapterControlsToStorage(p->chapterModel->chapterFromItem(stdItem));
 }
 
+QString
+Tab::fixAndGetTimestampString(QLineEdit &lineEdit) {
+  auto timestampText = lineEdit.text();
+
+  if (timestampText.contains(L',')) {
+    timestampText.replace(L',', L'.');
+    lineEdit.setText(timestampText);
+  }
+
+  return timestampText;
+}
+
 Tab::ValidationResult
 Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
   auto p = p_func();
@@ -936,13 +948,13 @@ Tab::copyChapterControlsToStorage(ChapterPtr const &chapter) {
     DeleteChildren<KaxChapterFlagHidden>(*chapter);
 
   auto startTimestamp = int64_t{};
-  if (!mtx::string::parse_timestamp(to_utf8(p->ui->leChStart->text()), startTimestamp))
+  if (!mtx::string::parse_timestamp(to_utf8(fixAndGetTimestampString(*p->ui->leChStart)), startTimestamp))
     return { false, QY("The start time could not be parsed: %1").arg(Q(mtx::string::timestamp_parser_error)) };
   GetChild<KaxChapterTimeStart>(*chapter).SetValue(startTimestamp);
 
   if (!p->ui->leChEnd->text().isEmpty()) {
     auto endTimestamp = int64_t{};
-    if (!mtx::string::parse_timestamp(to_utf8(p->ui->leChEnd->text()), endTimestamp))
+    if (!mtx::string::parse_timestamp(to_utf8(fixAndGetTimestampString(*p->ui->leChEnd)), endTimestamp))
       return { false, QY("The end time could not be parsed: %1").arg(Q(mtx::string::timestamp_parser_error)) };
 
     if (endTimestamp <= startTimestamp)

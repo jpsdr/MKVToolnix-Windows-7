@@ -15,6 +15,7 @@
 
 class QComboBox;
 class QItemSelection;
+class QLineEdit;
 
 namespace libebml {
 class EbmlBinary;
@@ -209,6 +210,8 @@ protected:
   void focusNextChapterElement(bool keepSameControl);
 
   void addOneChapterNameLanguage(mtx::bcp47::language_c const &languageCode, QStringList const &usedLanguageCodes);
+
+  QString fixAndGetTimestampString(QLineEdit &lineEdit);
 
   static QString formatEbmlBinary(EbmlBinary *binary);
 };

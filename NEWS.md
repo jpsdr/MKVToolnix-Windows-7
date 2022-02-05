@@ -27,6 +27,10 @@
   indefinitely. What will remain unchanged is the property names for those
   flags in mkvmerge's identification output. Existing third-party programs
   will continue working as they are.
+* MKVToolNix GUI: chapter editor: if the user enters commas in start or end
+  timestamps they will automatically be changed to points as the decimal
+  separator, allowing for easier copy & paste from other
+  programs/sources. Implements #3273.
 
 ## Bug fixes
 
