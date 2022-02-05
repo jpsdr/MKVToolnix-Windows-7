@@ -908,8 +908,8 @@ QString
 Tab::fixAndGetTimestampString(QLineEdit &lineEdit) {
   auto timestampText = lineEdit.text();
 
-  if (timestampText.contains(L',')) {
-    timestampText.replace(L',', L'.');
+  if (timestampText.contains(Q(','))) {
+    timestampText.replace(Q(','), Q('.'));
     lineEdit.setText(timestampText);
   }
 
