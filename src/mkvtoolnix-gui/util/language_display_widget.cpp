@@ -37,6 +37,8 @@ LanguageDisplayWidget::LanguageDisplayWidget(QWidget *parent)
   p.ui->lLanguage->setElideMode(Qt::ElideRight);
   p.ui->pbClear->setVisible(false);
 
+  setFocusProxy(p.ui->pbEdit);
+
   updateDisplay();
 
   p.ui->lLanguage->setClickable(true);
@@ -59,6 +61,7 @@ void
 LanguageDisplayWidget::enableClearingLanguage(bool enable) {
   auto &p = *p_func();
 
+  setFocusProxy(enable ? p.ui->pbClear : p.ui->pbEdit);
   p.ui->pbClear->setVisible(enable);
 }
 

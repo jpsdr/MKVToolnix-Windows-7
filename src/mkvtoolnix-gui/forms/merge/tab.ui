@@ -505,7 +505,11 @@
                        <widget class="QComboBox" name="defaultTrackFlag"/>
                       </item>
                       <item row="2" column="1">
-                       <widget class="mtx::gui::Util::LanguageDisplayWidget" name="trackLanguage"/>
+                       <widget class="mtx::gui::Util::LanguageDisplayWidget" name="trackLanguage">
+                        <property name="focusPolicy">
+                         <enum>Qt::TabFocus</enum>
+                        </property>
+                       </widget>
                       </item>
                       <item row="7" column="0">
                        <widget class="QLabel" name="visualImpairedFlagLabel">
@@ -1523,7 +1527,11 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="chapterLanguage"/>
+               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="chapterLanguage">
+                <property name="focusPolicy">
+                 <enum>Qt::TabFocus</enum>
+                </property>
+               </widget>
               </item>
               <item row="3" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_6">
