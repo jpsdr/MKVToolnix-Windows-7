@@ -56,7 +56,7 @@ rm -rf package-${mtxarch}
 mkdir -p package-${mtxarch}
 cd package-${mtxarch}
 
-winpwd="$(echo "$PWD" | sed -Ee 's!^/(.)!\1:!' -e 's!/!\\!g')"
+winpwd="$(echo "$PWD" | sed -Ee 's!^/([a-z])!\1:!i' -e 's!/!\\!g')"
 
 7z x "$1"
 rm -f mkvtoolnix/data/portable-app mkvtoolnix/MKVToolNix.url
@@ -83,7 +83,7 @@ sed -E \
     done
   }
 
-) | sed -Ee 's!^"/(.)!"\1:!'  -e 's!/!\\!g' > mapping.txt
+) | sed -Ee 's!^"/([a-z])!"\1:!i'  -e 's!/!\\!g' > mapping.txt
 
 msix_base="mkvtoolnix-${mtxversion}-${mtxarch}"
 
