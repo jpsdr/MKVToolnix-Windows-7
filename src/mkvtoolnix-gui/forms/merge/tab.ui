@@ -1136,30 +1136,6 @@
               <string>General</string>
              </property>
              <layout class="QGridLayout" name="generalGridLayout">
-              <item row="0" column="0">
-               <widget class="QLabel" name="titleLael">
-                <property name="text">
-                 <string>Fi&amp;le title:</string>
-                </property>
-                <property name="buddy">
-                 <cstring>title</cstring>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLineEdit" name="title">
-                <property name="clearButtonEnabled">
-                 <bool>true</bool>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="outputLabel">
-                <property name="text">
-                 <string>Destination file:</string>
-                </property>
-               </widget>
-              </item>
               <item row="1" column="1">
                <layout class="QHBoxLayout" name="hlOutput">
                 <item>
@@ -1189,14 +1165,46 @@
                 </item>
                </layout>
               </item>
-              <item row="2" column="0">
+              <item row="3" column="0">
                <widget class="QLabel" name="globalTagsLabel">
                 <property name="text">
                  <string>Global tags:</string>
                 </property>
                </widget>
               </item>
-              <item row="2" column="1">
+              <item row="4" column="0">
+               <widget class="QLabel" name="segmentInfoLabel">
+                <property name="text">
+                 <string>Segment info:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <item>
+                 <widget class="mtx::gui::Util::BasicLineEdit" name="segmentInfo"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="browseSegmentInfo">
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../qt_resources.qrc">
+                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="outputLabel">
+                <property name="text">
+                 <string>Destination file:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
                <layout class="QHBoxLayout" name="horizontalLayout_7">
                 <item>
                  <widget class="mtx::gui::Util::BasicLineEdit" name="globalTags"/>
@@ -1214,30 +1222,22 @@
                 </item>
                </layout>
               </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="segmentInfoLabel">
+              <item row="2" column="0">
+               <widget class="QLabel" name="titleLael">
                 <property name="text">
-                 <string>Segment info:</string>
+                 <string>Fi&amp;le title:</string>
+                </property>
+                <property name="buddy">
+                 <cstring>title</cstring>
                 </property>
                </widget>
               </item>
-              <item row="3" column="1">
-               <layout class="QHBoxLayout" name="horizontalLayout_8">
-                <item>
-                 <widget class="mtx::gui::Util::BasicLineEdit" name="segmentInfo"/>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="browseSegmentInfo">
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../../qt_resources.qrc">
-                    <normaloff>:/icons/16x16/document-open.png</normaloff>:/icons/16x16/document-open.png</iconset>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="title">
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
               </item>
              </layout>
             </widget>
@@ -2070,8 +2070,8 @@
   <tabstop>trackName</tabstop>
   <tabstop>trackLanguage</tabstop>
   <tabstop>defaultTrackFlag</tabstop>
-  <tabstop>forcedTrackFlag</tabstop>
   <tabstop>trackEnabledFlag</tabstop>
+  <tabstop>forcedTrackFlag</tabstop>
   <tabstop>hearingImpairedFlag</tabstop>
   <tabstop>visualImpairedFlag</tabstop>
   <tabstop>textDescriptionsFlag</tabstop>
@@ -2100,9 +2100,10 @@
   <tabstop>subtitleCharacterSetPreview</tabstop>
   <tabstop>cues</tabstop>
   <tabstop>additionalTrackOptions</tabstop>
-  <tabstop>title</tabstop>
   <tabstop>output</tabstop>
   <tabstop>browseOutput</tabstop>
+  <tabstop>outputRecentlyUsed</tabstop>
+  <tabstop>title</tabstop>
   <tabstop>globalTags</tabstop>
   <tabstop>browseGlobalTags</tabstop>
   <tabstop>segmentInfo</tabstop>
