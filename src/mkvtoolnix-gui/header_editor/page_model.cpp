@@ -244,4 +244,49 @@ PageModel::rereadTopLevelPageIndexes() {
   }
 }
 
+void
+PageModel::moveElementUpOrDown(QModelIndex const &idx,
+                               bool up) {
+
+  auto page = selectedPage(idx);
+  if (!idx.isValid() || !page)
+    return;
+
+  auto const isTrack    = !!dynamic_cast<TrackTypePage *>(page);
+  auto const lowerLimit = isTrack ? 1 : 0;
+  auto const upperLimit = rowCount(idx.parent()) - (isTrack ? 2 : 1);
+  auto const newRow     = idx.row() + (up ? -1 : 1);
+
+  if (up && (idx.row() <= lowerLimit))
+    return;
+
+  if (!up && (idx.row() >= upperLimit))
+    return;
+
+  auto parentItem = itemFromIndex(idx.parent());
+  if (!parentItem)
+    parentItem = invisibleRootItem();
+
+  auto row = parentItem->takeRow(idx.row());
+  parentItem->insertRow(newRow, row);
+}
+
+QModelIndex
+PageModel::trackOrAttachedFileIndexForSelectedIndex(QModelIndex const &selectedIdx) {
+  auto idx = selectedIdx;
+
+  while (idx.isValid()) {
+    auto page = selectedPage(idx);
+    if (!page)
+      return {};
+
+    if (dynamic_cast<TrackTypePage *>(page) || dynamic_cast<AttachedFilePage *>(page))
+      break;
+
+    idx = idx.parent();
+  }
+
+  return idx;
+}
+
 }

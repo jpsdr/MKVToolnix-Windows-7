@@ -31,6 +31,9 @@
   timestamps they will automatically be changed to points as the decimal
   separator, allowing for easier copy & paste from other
   programs/sources. Implements #3273.
+* MKVToolNix: header editor: the selected track or attached file can now be
+  moved up & down with the keyboard shortcuts `Ctrl+Up` & `Ctrl+Down`
+  respectively. Part of the implementation of #3253.
 
 ## Bug fixes
 

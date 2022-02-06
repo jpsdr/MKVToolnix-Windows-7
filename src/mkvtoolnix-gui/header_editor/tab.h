@@ -94,6 +94,7 @@ public Q_SLOTS:
   virtual void focusPage(PageBase *page);
   virtual void handleReorderedTracks();
   virtual void changeTrackLanguage(QString const &formattedLanguage);
+  virtual void moveElementUpOrDown(bool up);
 
 protected:
   void setupUi();

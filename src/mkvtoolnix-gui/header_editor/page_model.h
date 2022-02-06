@@ -40,11 +40,14 @@ public:
 
   QList<QStandardItem *> itemsForIndex(QModelIndex const &idx);
   QModelIndex indexFromPage(PageBase *page) const;
+  QModelIndex trackOrAttachedFileIndexForSelectedIndex(QModelIndex const &idx);
 
   void rememberLastSelectedIndex(QModelIndex const &idx);
 
   virtual bool canDropMimeData(QMimeData const *data, Qt::DropAction action, int row, int, QModelIndex const &parent) const override;
   virtual bool dropMimeData(QMimeData const *data, Qt::DropAction action, int row, int column, QModelIndex const &parent) override;
+
+  void moveElementUpOrDown(QModelIndex const &idx, bool up);
 
 Q_SIGNALS:
   void attachmentsReordered();

@@ -24,6 +24,7 @@
 #include "common/segmentinfo.h"
 #include "common/strings/formatting.h"
 #include "common/unique_numbers.h"
+#include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/forms/header_editor/tab.h"
 #include "mkvtoolnix-gui/header_editor/action_for_dropped_files_dialog.h"
 #include "mkvtoolnix-gui/header_editor/ascii_string_value_page.h"
@@ -313,6 +314,8 @@ Tab::setupUi() {
   connect(ui->elements,                              &Util::BasicTreeView::filesDropped,                  this, &Tab::handleDroppedFiles);
   connect(ui->elements,                              &Util::BasicTreeView::deletePressed,                 this, &Tab::removeSelectedAttachment);
   connect(ui->elements,                              &Util::BasicTreeView::insertPressed,                 this, &Tab::selectAttachmentsAndAdd);
+  connect(ui->elements,                              &Util::BasicTreeView::ctrlDownPressed,               this, [this]() { moveElementUpOrDown(false); });
+  connect(ui->elements,                              &Util::BasicTreeView::ctrlUpPressed,                 this, [this]() { moveElementUpOrDown(true); });
   connect(ui->elements->selectionModel(),            &QItemSelectionModel::currentChanged,                this, &Tab::selectionChanged);
   connect(m_expandAllAction,                         &QAction::triggered,                                 this, &Tab::expandAll);
   connect(m_collapseAllAction,                       &QAction::triggered,                                 this, &Tab::collapseAll);
@@ -1039,6 +1042,42 @@ Tab::changeTrackLanguage(QString const &formattedLanguage) {
 
     return !languageFound || !languageIETFFound;
   });
+}
+
+void
+Tab::moveElementUpOrDown(bool up) {
+  auto focus        = App::instance()->focusWidget();
+  auto selectedIdx  = ui->elements->selectionModel()->currentIndex();
+  auto selectedPage = m_model->selectedPage(selectedIdx);
+
+  if (!selectedIdx.isValid() || !selectedPage)
+    return;
+
+  auto idxToMove = m_model->trackOrAttachedFileIndexForSelectedIndex(selectedIdx);
+  if (!idxToMove.isValid())
+    return;
+
+  auto wasExpanded = ui->elements->isExpanded(selectedIdx);
+
+  m_model->moveElementUpOrDown(idxToMove, up);
+
+  auto newIdx = m_model->indexFromPage(selectedPage);
+
+  ui->elements->setExpanded(newIdx, wasExpanded);
+
+  auto expandIdx = newIdx.parent();
+
+  while (expandIdx.isValid()) {
+    ui->elements->setExpanded(expandIdx, true);
+    expandIdx = expandIdx.parent();
+  }
+
+  auto selection = QItemSelection{newIdx, newIdx.sibling(newIdx.row(), m_model->columnCount() - 1)};
+  ui->elements->selectionModel()->setCurrentIndex(newIdx, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
+  ui->elements->selectionModel()->select(selection, QItemSelectionModel::ClearAndSelect | QItemSelectionModel::Current);
+
+  if (focus)
+    focus->setFocus();
 }
 
 }
