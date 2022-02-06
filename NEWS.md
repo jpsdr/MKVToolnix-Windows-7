@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: multiplexer: fixed several issues with the tab order of
+  elements in the "properties" pane and the "output" tab. Also fixed the
+  language display widgets (e.g. "track language" in the "properties" pane)
+  never receiving tab focus. Fixes #3274.
+
+
 # Version 65.0.0 "Too Much" 2022-02-06
 
 ## New features and enhancements
