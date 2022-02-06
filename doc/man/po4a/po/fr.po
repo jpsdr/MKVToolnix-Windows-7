@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2022-02-05 16:33+0100\n"
-"PO-Revision-Date: 2022-01-31 09:49+0000\n"
+"PO-Revision-Date: 2022-02-05 19:25+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
@@ -2807,22 +2807,18 @@ msgstr "Si l'utilisateur ne sélectionne pas explicitement une piste lors de la 
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1408
-#, fuzzy
-#| msgid "<option>--original-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--track-enabled-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--original-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--track-enabled-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1411
-#, fuzzy
-#| msgid "Sets the &quot;default track&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present. The flag will be set if the source container doesn't provide that information and the user doesn't specify it via this option."
 msgid "Sets the &quot;track enabled&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) to the given value <parameter>bool</parameter> (0 or 1; defaults to 1 if not specified).  Tracks are enabled by default if no option is specified for them and the source container doesn't provide this information either."
-msgstr "Pose l'indicateur « Piste par défaut » pour la piste donnée (voir section <link linkend=\"mkvmerge.track_ids\">ID de pistes</link>) si l'argument facultatif <parameter>bool</parameter> est défini à <constant>1</constant> ou s'il n'est pas présent. Ce signal sera défini si le conteneur de la source ne fournit pas cette information et si l'utilisateur ne le spécifie pas via cette option."
+msgstr "Définit l'indicateur &quot;piste activée&quot; pour la piste donnée (voir la section <link linkend=\"mkvmerge.track_ids\">ID de piste</link>) à la valeur donnée par <parameter>bool</parameter> (0 ou 1 ; par défaut 1 si non spécifiée). Les pistes sont activées par défaut si aucune option ne leur est spécifiée et que le conteneur source ne fournit pas non plus l'information."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1417
 msgid "Only tracks whose &quot;track enabled&quot; flag is set should be considered for playback."
-msgstr ""
+msgstr "Seules les pistes dont l'indicateur &quot;piste activée&quot; est posé devraient être considérées pour la lecture."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1427
