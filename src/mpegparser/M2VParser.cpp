@@ -128,6 +128,7 @@ M2VParser::M2VParser()
   usePictureFrames = false;
   seqHdrChunk = nullptr;
   gopChunk = nullptr;
+  firstField = nullptr;
   keepSeqHdrsInBitstream = true;
 }
 
@@ -163,6 +164,7 @@ M2VParser::~M2VParser(){
   FlushWaitQueue();
   delete seqHdrChunk;
   delete gopChunk;
+  delete firstField;
   delete mpgBuf;
 }
 
@@ -174,7 +176,7 @@ MediaTime M2VParser::GetFrameDuration(MPEG2PictureHeader picHdr){
     else
       return 3;
   } else {
-    return picHdr.pictureStructure == MPEG2_PICTURE_TYPE_FRAME ? 2 : 1;
+    return 2;
   }
 }
 
@@ -279,17 +281,18 @@ M2VParser::TimestampWaitingFrames() {
   waitQueue.clear();
 }
 
-int32_t M2VParser::PrepareFrame(MPEGChunk* chunk, MediaTime timestamp, MPEG2PictureHeader picHdr){
+int32_t M2VParser::PrepareFrame(MPEGChunk* chunk, MediaTime timestamp, MPEG2PictureHeader picHdr, MPEGChunk* secondField){
   MPEGFrame* outBuf;
   bool bCopy = true;
   binary* pData = chunk->GetPointer();
   uint32_t dataLen = chunk->GetSize();
 
   if ((seqHdrChunk && keepSeqHdrsInBitstream &&
-       (MPEG2_I_FRAME == picHdr.frameType)) || gopChunk) {
+       (MPEG2_I_FRAME == picHdr.frameType)) || gopChunk || secondField) {
     uint32_t pos = 0;
     bCopy = false;
     dataLen +=
+      (secondField ? secondField->GetSize() : 0) +
       (seqHdrChunk && keepSeqHdrsInBitstream && (MPEG2_I_FRAME == picHdr.frameType) ? seqHdrChunk->GetSize() : 0) +
       (gopChunk ? gopChunk->GetSize() : 0);
     pData = (binary *)safemalloc(dataLen);
@@ -307,6 +310,9 @@ int32_t M2VParser::PrepareFrame(MPEGChunk* chunk, MediaTime timestamp, MPEG2Pict
       gopChunk = nullptr;
     }
     memcpy(pData + pos, chunk->GetPointer(), chunk->GetSize());
+    pos += chunk->GetSize();
+    if (secondField)
+      memcpy(pData + pos, secondField->GetPointer(), secondField->GetSize());
   }
 
   outBuf = new MPEGFrame(pData, dataLen, bCopy);
@@ -373,7 +379,12 @@ int32_t M2VParser::FillQueues(){
   bool done = false;
   while(!done){
     MediaTime myTime;
-    MPEGChunk* chunk = chunks.front();
+    MPEGChunk* chunk;
+    if (firstField) {
+      chunk = firstField; // 2. point "chunk" to the leftover we kept
+    } else {
+      chunk = chunks.front();
+    }
     while (chunk->GetType() != MPEG_VIDEO_PICTURE_START_CODE) {
       if (chunk->GetType() == MPEG_VIDEO_GOP_START_CODE) {
         ParseGOPHeader(chunk, m_gopHdr);
@@ -419,18 +430,41 @@ int32_t M2VParser::FillQueues(){
     myTime = gopPts + picHdr.temporalReference;
     invisible = false;
 
+    MPEGChunk* secondField = nullptr;
+    if (picHdr.pictureStructure != MPEG2_PICTURE_TYPE_FRAME) {
+      if (!firstField) {
+        chunks.erase(chunks.begin());
+        if (chunks.empty()) {
+          firstField = chunk; // 1. keep the first field in the parser context
+          return -1;
+        }
+      }
+      firstField = nullptr; // 3. clear the pointer after the above check
+      secondField = chunks.front();
+      MPEG2PictureHeader sfPicHdr;
+      ParsePictureHeader(secondField, sfPicHdr);
+      if (sfPicHdr.pictureStructure == MPEG2_PICTURE_TYPE_FRAME ||
+          sfPicHdr.pictureStructure == picHdr.pictureStructure) {
+        auto error = Y("Single field picture detected. Fix the MPEG2 video stream before attempting to multiplex it.\n");
+        if (throwOnError)
+          throw error;
+        mxerror(error);
+        continue; // dropping the (earlier) field; "secondField" will be the new "chunk"
+      }
+    }
+
     if (myTime > highestPts)
       highestPts = myTime;
 
     switch(picHdr.frameType){
       case MPEG2_I_FRAME:
-        PrepareFrame(chunk, myTime, picHdr);
+        PrepareFrame(chunk, myTime, picHdr, secondField);
         notReachedFirstGOP = false;
         break;
       case MPEG2_P_FRAME:
         if (!refs[1].HasFrameNumber())
           break;
-        PrepareFrame(chunk, myTime, picHdr);
+        PrepareFrame(chunk, myTime, picHdr, secondField);
         break;
       default: //B-frames
         if (!refs[0].HasFrameNumber() || !refs[1].HasFrameNumber()) {
@@ -440,11 +474,13 @@ int32_t M2VParser::FillQueues(){
           }
           invisible = true;
         }
-        PrepareFrame(chunk, myTime, picHdr);
+        PrepareFrame(chunk, myTime, picHdr, secondField);
     }
     frameNum++;
     chunks.erase(chunks.begin());
     delete chunk;
+    if (secondField)
+      delete secondField;
     if (chunks.empty())
       return -1;
   }
