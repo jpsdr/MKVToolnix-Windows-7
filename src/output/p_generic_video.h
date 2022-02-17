@@ -24,7 +24,7 @@ constexpr auto VFT_NOBFRAME        = -1;
 class generic_video_packetizer_c: public generic_packetizer_c {
 protected:
   int m_width, m_height, m_frames_output;
-  int64_t m_default_duration,  m_ref_timestamp, m_duration_shift, m_last_pframe;
+  int64_t m_default_duration,  m_ref_timestamp, m_duration_shift, m_bframe_bref;
 
 public:
   generic_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, std::string const &codec_id, int64_t default_duration, int width, int height);

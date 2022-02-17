@@ -39,7 +39,7 @@ generic_video_packetizer_c::generic_video_packetizer_c(generic_reader_c *p_reade
   , m_default_duration{default_duration}
   , m_ref_timestamp{-1}
   , m_duration_shift{}
-  , m_last_pframe{}
+  , m_bframe_bref{-1}
 {
   set_track_type(track_video);
 
@@ -88,19 +88,15 @@ generic_video_packetizer_c::process_impl(packet_cptr const &packet) {
   if (VFT_PFRAMEAUTOMATIC == packet->bref)
     packet->bref = m_ref_timestamp;
 
-  // Save timestamp of I or P frame so that we can reference it later
-  if (VFT_NOBFRAME == packet->fref) { // include VFT_PFRAMEAUTOMATIC
-    // if (VFT_PFRAMEAUTOMATIC == packet->bref)
-    //   packet->bref = m_ref_timestamp;
-    // else
+  if (VFT_NOBFRAME == packet->fref) {
+    // Save timestamp of the last I or P frame for "broken" B frames
+    m_bframe_bref = m_ref_timestamp;
+    // Save timestamp of I or P frame so that we can reference it later
     m_ref_timestamp = packet->timestamp;
-    // Keep track of the latest P frame for potential "broken" B frames
-    if (VFT_IFRAME < packet->bref) // exclude VFT_PFRAMEAUTOMATIC
-      m_last_pframe = packet->timestamp;
   }
   // Handle "broken" B frames
   else if (VFT_IFRAME == packet->bref) { // expect VFT_NOBFRAME < packet->fref
-    packet->bref = m_last_pframe;
+    packet->bref = m_bframe_bref;
   }
 
   add_packet(packet);
