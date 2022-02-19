@@ -53,7 +53,7 @@ struct packet_t {
   libmatroska::KaxBlockBlob *group;
   libmatroska::KaxBlock *block;
   libmatroska::KaxCluster *cluster;
-  int ref_priority, time_factor;
+  int ref_priority;
   int64_t timestamp, bref, fref, duration, assigned_timestamp;
   int64_t timestamp_before_factory;
   int64_t unmodified_assigned_timestamp, unmodified_duration;
@@ -70,7 +70,6 @@ struct packet_t {
     , block{}
     , cluster{}
     , ref_priority{}
-    , time_factor(1)
     , timestamp(-1)
     , bref(-1)
     , fref(-1)
@@ -98,7 +97,6 @@ struct packet_t {
     , block{}
     , cluster{}
     , ref_priority{}
-    , time_factor(1)
     , timestamp(p_timestamp)
     , bref(p_bref)
     , fref(p_fref)
@@ -126,7 +124,6 @@ struct packet_t {
     , block{}
     , cluster{}
     , ref_priority{}
-    , time_factor(1)
     , timestamp(p_timestamp)
     , bref(p_bref)
     , fref(p_fref)
