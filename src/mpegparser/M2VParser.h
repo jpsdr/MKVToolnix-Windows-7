@@ -95,7 +95,6 @@ private:
   MPEG2SequenceHeader m_seqHdr; //current sequence header
   MPEG2GOPHeader m_gopHdr; //current GOP header
   MediaTime waitExpectedTime;
-  bool      waitSecondField;
   bool      probing;
   bool      b_frame_warning_printed;
   MPEGFrameRef refs[2];
@@ -108,7 +107,6 @@ private:
   MediaTime frameNum;
   MediaTime gopPts;
   MediaTime highestPts;
-  bool usePictureFrames;
   uint8_t mpegVersion;
   MPEG2ParserState_e parserState;
   MPEGVideoBuffer * mpgBuf;

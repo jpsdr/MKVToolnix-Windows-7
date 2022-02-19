@@ -116,7 +116,6 @@ M2VParser::M2VParser()
   waitExpectedTime = 0;
   probing = false;
   b_frame_warning_printed = false;
-  waitSecondField = false;
   m_eos = false;
   mpegVersion = 1;
   needInit = true;
@@ -125,7 +124,6 @@ M2VParser::M2VParser()
   frameNum = 0;
   gopPts = 0;
   highestPts = 0;
-  usePictureFrames = false;
   seqHdrChunk = nullptr;
   gopChunk = nullptr;
   firstField = nullptr;
@@ -193,8 +191,6 @@ MPEG2ParserState_e M2VParser::GetState(){
 }
 
 void M2VParser::FlushWaitQueue(){
-  waitSecondField = false;
-
   for (auto const &frame : waitQueue)
     delete frame;
   while (!buffers.empty()) {
@@ -239,15 +235,6 @@ void M2VParser::UpdateFrame(MPEGFrame* frame){
 
 int32_t M2VParser::OrderFrame(MPEGFrame* frame){
   MPEGFrame *p = frame;
-
-  // mxinfo(fmt::format("picStr {0} frame type {1} qt tc {2}\n", p->timestamp, static_cast<int>(p->pictureStructure), p->frameType));
-
-  if (waitSecondField && (p->pictureStructure == MPEG2_PICTURE_TYPE_FRAME)){
-    auto error = Y("Unexpected picture frame after single field frame. Fix the MPEG2 video stream before attempting to multiplex it.\n");
-    if (throwOnError)
-      throw error;
-    mxerror(error);
-  }
 
   SetFrameRef(p);
   ShoveRef(p);
@@ -395,13 +382,6 @@ int32_t M2VParser::FillQueues(){
           delete gopChunk;
         gopChunk = chunk;
         gopNum++;
-        /* Perform some sanity checks */
-        if(waitSecondField){
-          auto error = Y("Single field frame before GOP header detected. Fix the MPEG2 video stream before attempting to multiplex it.\n");
-          if (throwOnError)
-            throw error;
-          mxerror(error);
-        }
         // There are too many broken videos to do the following so ReferenceBlock will be wrong for broken videos.
         /*
         if(m_gopHdr.closedGOP){
@@ -424,9 +404,6 @@ int32_t M2VParser::FillQueues(){
     MPEG2PictureHeader picHdr;
     ParsePictureHeader(chunk, picHdr);
 
-    if (picHdr.pictureStructure == MPEG2_PICTURE_TYPE_FRAME) {
-      usePictureFrames = true;
-    }
     myTime = gopPts + picHdr.temporalReference;
     invisible = false;
 
