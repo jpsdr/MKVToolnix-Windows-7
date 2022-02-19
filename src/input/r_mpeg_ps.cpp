@@ -608,8 +608,9 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
   m2v_parser->SetProbeMode();
   m2v_parser->WriteData(buf, length);
 
-  int num_leading_b_fields = 0;
-  int state                = m2v_parser->GetState();
+  int num_leading_b_frames           = 0;
+  MediaTime timestamp_b_frame_offset = 0;
+  int state                          = m2v_parser->GetState();
 
   bool found_i_frame       = false;
   bool found_non_b_frame   = false;
@@ -656,7 +657,8 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
         break;
       }
 
-      num_leading_b_fields += MPEG2_PICTURE_TYPE_FRAME == frame->pictureStructure ? 2 : 1;
+      num_leading_b_frames++;
+      timestamp_b_frame_offset += frame->duration;
     }
 
     if (found_i_frame && found_non_b_frame)
@@ -676,11 +678,11 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
   track->v_height                 = seq_hdr.height;
   track->v_field_duration         = mtx::rational(1'000'000'000, seq_hdr.frameRate * 2);
   track->v_aspect_ratio           = seq_hdr.aspectRatio;
-  track->timestamp_b_frame_offset = mtx::to_int(track->v_field_duration * num_leading_b_fields);
+  track->timestamp_b_frame_offset = mtx::to_int(timestamp_b_frame_offset);
 
   mxdebug_if(m_debug_timestamps,
-             fmt::format("Leading B fields {0} rate {1} progressive? {2} calculated_offset {3} found_i? {4} found_non_b? {5}\n",
-                         num_leading_b_fields, seq_hdr.frameRate, !!seq_hdr.progressiveSequence, track->timestamp_b_frame_offset, found_i_frame, found_non_b_frame));
+             fmt::format("Leading B frames {0} rate {1} progressive? {2} offset {3} found_i? {4} found_non_b? {5}\n",
+                         num_leading_b_frames, seq_hdr.frameRate, !!seq_hdr.progressiveSequence, track->timestamp_b_frame_offset, found_i_frame, found_non_b_frame));
 
   if ((0 >= track->v_aspect_ratio) || (1 == track->v_aspect_ratio))
     track->v_dwidth = track->v_width;
