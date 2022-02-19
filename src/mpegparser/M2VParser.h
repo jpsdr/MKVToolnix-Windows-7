@@ -68,12 +68,6 @@ public:
   unsigned int decodingOrder;
   MediaTime refs[2];
   MPEGFrameRef tmpRefs[2];
-  bool stamped;
-  bool invisible;
-  bool rff;
-  bool tff;
-  bool progressive;
-  uint8_t pictureStructure;
   bool bCopy;
   uint64_t frameNumber;
 

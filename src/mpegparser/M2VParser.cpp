@@ -36,8 +36,6 @@ MPEGFrame::MPEGFrame(binary *n_data, uint32_t n_size, bool n_bCopy):
   } else {
     data = n_data;
   }
-  stamped        = false;
-  invisible      = false;
   refs[0]        = -1;
   refs[1]        = -1;
   seqHdrData     = nullptr;
@@ -213,7 +211,6 @@ void M2VParser::StampFrame(MPEGFrame* frame){
   frame->duration = mtx::to_int(mtx::rational(frame->duration, 1) * 1'000'000'000 / (m_seqHdr.frameRate * 2));
   previousDuration = frame->duration;
 
-  frame->stamped = true;
   frameTimestamps[frame->frameNumber] = frame->timestamp;
 
   // update affected ref timestamps
@@ -325,12 +322,7 @@ int32_t M2VParser::PrepareFrame(MPEGChunk* chunk, MediaTime timestamp, MPEG2Pict
 
   outBuf->timestamp = timestamp; // Still the sequence number
 
-  outBuf->invisible = invisible;
   outBuf->duration = GetFrameDuration(picHdr);
-  outBuf->rff = (picHdr.repeatFirstField != 0);
-  outBuf->tff = (picHdr.topFieldFirst != 0);
-  outBuf->progressive = (picHdr.progressive != 0);
-  outBuf->pictureStructure = (uint8_t) picHdr.pictureStructure;
 
   OrderFrame(outBuf);
   return 0;
@@ -405,7 +397,6 @@ int32_t M2VParser::FillQueues(){
     ParsePictureHeader(chunk, picHdr);
 
     myTime = gopPts + picHdr.temporalReference;
-    invisible = false;
 
     MPEGChunk* secondField = nullptr;
     if (picHdr.pictureStructure != MPEG2_PICTURE_TYPE_FRAME) {
@@ -449,7 +440,6 @@ int32_t M2VParser::FillQueues(){
             mxwarn(Y("Found at least one B frame without second reference in a non closed GOP.\n"));
             b_frame_warning_printed = true;
           }
-          invisible = true;
         }
         PrepareFrame(chunk, myTime, picHdr, secondField);
     }
