@@ -13,7 +13,7 @@ check_qt6() {
     AC_MSG_CHECKING(for qmake6)
     AC_MSG_RESULT(using supplied $QMAKE6)
   else
-    AC_PATH_TOOL(QMAKE6, qmake6,, $PATH)
+    AC_CHECK_TOOLS(QMAKE6, [ qmake6 qmake-qt6 qt6-qmake ])
   fi
 
   if test x"$QMAKE6" = x; then
@@ -49,15 +49,6 @@ HEADERS = configure.h
 SOURCES = configure.cpp
 EOT
 
-  cat > "$qmake_dir/configure.pro" <<EOT
-QT = core dbus gui widgets network concurrent
-
-FORMS = configure.ui
-RESOURCES = configure.qrc
-HEADERS = configure.h
-SOURCES = configure.cpp
-EOT
-
   old_wd="$PWD"
   cd "$qmake_dir"
 
@@ -65,11 +56,38 @@ EOT
   result=$?
 
   if test $result = 0; then
-    mv Makefile Makefile.non_gui
+    if test -f Makefile.Release; then
+      mv Makefile.Release Makefile.non_gui
+    else
+      mv Makefile Makefile.non_gui
+    fi
   fi
 
-  "$QMAKE6" -makefile -nocache configure.pro > /dev/null
-  result2=$?
+  MTXDBUS=dbus
+  for MTXTRY in 1 2; do
+    cat > "$qmake_dir/configure.pro" <<EOT
+QT = core $MTXDBUS gui widgets network concurrent
+
+FORMS = configure.ui
+RESOURCES = configure.qrc
+HEADERS = configure.h
+SOURCES = configure.cpp
+EOT
+
+    "$QMAKE6" -makefile -nocache configure.pro > /dev/null
+    result2=$?
+
+    if test $result2 = 0; then
+      if test -f Makefile.Release; then
+        mv Makefile.Release Makefile
+      fi
+      break
+    fi
+
+    unset MTXDBUS
+  done
+
+  unset MTXTRY
 
   "$QMAKE6" -query > "$qmake_dir/configure.properties"
   result3=$?
@@ -99,19 +117,19 @@ EOT
     AC_MSG_RESULT($qmake6_ver)
   fi
 
-  qt_bindir="`$ac_cv_path_EGREP '^QT_INSTALL_BINS:' "$qmake_dir/configure.properties" | sed 's/^QT_INSTALL_BINS://'`"
-  qt_libexecdir="`$ac_cv_path_EGREP '^QT_INSTALL_LIBEXECS:' "$qmake_dir/configure.properties" | sed 's/^QT_INSTALL_LIBEXECS://'`"
+  qt_bindir="`$ac_cv_path_EGREP '^QT_HOST_BINS:' "$qmake_dir/configure.properties" | sed 's/^QT_HOST_BINS://'`"
+  qt_libexecdir="`$ac_cv_path_EGREP '^QT_HOST_LIBEXECS:' "$qmake_dir/configure.properties" | sed 's/^QT_HOST_LIBEXECS://'`"
   qt_searchpath="$qt_libexecdir:$qt_bindir:$PATH"
 
   QT_CFLAGS="`$ac_cv_path_EGREP '^DEFINES *=' "$qmake_dir/Makefile" | sed 's/^DEFINES *= *//'`"
-  QT_CFLAGS="$QT_CFLAGS `$ac_cv_path_EGREP '^CXXFLAGS *=' "$qmake_dir/Makefile" | sed -e 's/^CXXFLAGS *= *//' -e 's/-pipe//g' -e 's/-O.//g' -e 's/ -W[[^ ]]*//g' -e 's/-std=[[^ ]]*//g' -e 's/\$(DEFINES)//g'`"
+  QT_CFLAGS="$QT_CFLAGS `$ac_cv_path_EGREP '^CXXFLAGS *=' "$qmake_dir/Makefile" | sed -e 's/^CXXFLAGS *= *//' -e 's/-pipe//g' -e 's/-O.//g' -e 's/ -f[[a-z]][[^ ]]*//g' -e 's/ -W[[^ ]]*//g' -e 's/-std=[[^ ]]*//g' -e 's/\$([[^)]]*)//g'`"
   QT_CFLAGS="$QT_CFLAGS `$ac_cv_path_EGREP '^INCPATH *=' "$qmake_dir/Makefile" | sed -e 's/^INCPATH *= *//' -e 's:-I[[^/]][[^ ]]*::g'`"
   QT_CFLAGS="`echo $QT_CFLAGS | sed -e 's/\$(EXPORT_ARCH_ARGS)//'`"
-  QT_LIBS="`$ac_cv_path_EGREP '^LFLAGS *=' "$qmake_dir/Makefile" | sed -e 's/^LFLAGS *= *//' -e 's/-Wl,-O[[^ ]]*//g'`"
-  QT_LIBS="$QT_LIBS `$ac_cv_path_EGREP '^LIBS *=' "$qmake_dir/Makefile" | sed -e 's/^LIBS *= *//' -e 's/\$(SUBLIBS)//g' -e 's:-L[[^/]][[^ ]]*::g'`"
+  QT_LIBS="`$ac_cv_path_EGREP '^LFLAGS *=' "$qmake_dir/Makefile" | sed -e 's/^LFLAGS *= *//' -e 's/-Wl,-O[[^ ]]*//g' -e 's/ -f[[a-z]][[^ ]]*//g'`"
+  QT_LIBS="$QT_LIBS `$ac_cv_path_EGREP '^LIBS *=' "$qmake_dir/Makefile" | sed -e 's/^LIBS *= *//' -e 's/\$([[^)]]*)//g' -e 's:-L[[^/]][[^ ]]*::g'`"
   QT_LIBS="`echo $QT_LIBS | sed -e 's/\$(EXPORT_ARCH_ARGS)//'`"
-  QT_LIBS_NON_GUI="`$ac_cv_path_EGREP '^LFLAGS *=' "$qmake_dir/Makefile.non_gui" | sed -e 's/^LFLAGS *= *//' -e 's/-Wl,-O[[^ ]]*//g'`"
-  QT_LIBS_NON_GUI="$QT_LIBS_NON_GUI `$ac_cv_path_EGREP '^LIBS *=' "$qmake_dir/Makefile.non_gui" | sed -e 's/^LIBS *= *//' -e 's/\$(SUBLIBS)//g' -e 's:-L[[^/]][[^ ]]*::g'`"
+  QT_LIBS_NON_GUI="`$ac_cv_path_EGREP '^LFLAGS *=' "$qmake_dir/Makefile.non_gui" | sed -e 's/^LFLAGS *= *//' -e 's/-Wl,-O[[^ ]]*//g' -e 's/ -f[[a-z]][[^ ]]*//g'`"
+  QT_LIBS_NON_GUI="$QT_LIBS_NON_GUI `$ac_cv_path_EGREP '^LIBS *=' "$qmake_dir/Makefile.non_gui" | sed -e 's/^LIBS *= *//' -e 's/\$([[^)]]*)//g' -e 's:-L[[^/]][[^ ]]*::g'`"
   QT_LIBS_NON_GUI="`echo $QT_LIBS_NON_GUI | sed -e 's/\$(EXPORT_ARCH_ARGS)//'`"
 
   rm -rf "$qmake_dir"
