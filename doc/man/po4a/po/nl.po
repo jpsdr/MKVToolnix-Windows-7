@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Nederlands 4.0.0.\n"
-"POT-Creation-Date: 2022-02-12 10:41+0100\n"
+"POT-Creation-Date: 2022-02-20 11:24+0100\n"
 "PO-Revision-Date: 2019-09-10 21:56+0200\n"
 "Last-Translator: Theo Gommans <gommysan@home.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/nl/)\n"
@@ -4805,10 +4805,11 @@ msgstr ""
 "      String (UTF-8 string)\n"
 "      Binary (binary)"
 
-#. type: Content of: <refentry><refsect1><title>
+#. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3176
-msgid "The segment info XML files"
-msgstr "Het segment informatie XML bestanden"
+#: doc/man/mkvpropedit.xml:517
+msgid "Segment information"
+msgstr "Segment informatie"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3179
@@ -5396,11 +5397,6 @@ msgstr "Bewerk selecteurs/kiezers"
 msgid "The <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option sets the &matroska; file section (segment information or a certain track's headers) that all following <link linkend=\"mkvpropedit.description.add\">add</link>, <link linkend=\"mkvpropedit.description.set\">set</link> and <link linkend=\"mkvpropedit.description.delete\">delete</link> actions operate on. This stays valid until the next <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option is found. The argument to this option is called the edit selector."
 msgstr "De optie <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> zet het &matroska; bestand sectie (segment informatie of de bepaalde sporen knoppen) die alle volgen <link linkend=\"mkvpropedit.description.add\">voeg toe</link>, <link linkend=\"mkvpropedit.description.set\">zet</link> en <link linkend=\"mkvpropedit.description.delete\">verwijder</link> acties die er op werken. Dit blijft geldig totdat de volgende optie <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> is gevonden. Het argument naar deze optie wordt genoemd de bewerk selecteur/kiezer."
 
-#. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvpropedit.xml:517
-msgid "Segment information"
-msgstr "Segment informatie"
-
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvpropedit.xml:519
 msgid "The segment information can be selected with one of these three words: '<literal>info</literal>', '<literal>segment_info</literal>' or '<literal>segmentinfo</literal>'. It contains properties like the segment title or the segment <abbrev>UID</abbrev>."
@@ -5860,6 +5856,9 @@ msgstr ""
 #, no-wrap
 msgid ")"
 msgstr ""
+
+#~ msgid "The segment info XML files"
+#~ msgstr "Het segment informatie XML bestanden"
 
 #~| msgid "Sets the 'default' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present.  If the user does not explicitly select a track himself then the player should prefer the track that has his 'default' flag set. Only one track of each kind (audio, video, subtitles, buttons) can have his 'default' flag set.  If the user wants no track to have the default track flag set then he has to set <parameter>bool</parameter> to <constant>0</constant> for all tracks."
 #~ msgid "Sets the &quot;default track&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  If the user does not explicitly select a track, the player should prefer the track that has his &quot;default track&quot; flag set. Only one track of each kind (audio, video, subtitles, buttons) can have his &quot;default track&quot; flag set.  If the user wants no track to have the default track flag set then he has to set <parameter>bool</parameter> to <constant>0</constant> for all tracks."

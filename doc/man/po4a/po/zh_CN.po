@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
-"POT-Creation-Date: 2022-02-12 10:41+0100\n"
+"POT-Creation-Date: 2022-02-20 11:24+0100\n"
 "PO-Revision-Date: 2021-03-24 20:01+0000\n"
 "Last-Translator: 無情天 X <kofzhanganguo@126.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
@@ -4591,10 +4591,11 @@ msgstr ""
 "      String (UTF-8 字符串)\n"
 "      Binary (二进制)"
 
-#. type: Content of: <refentry><refsect1><title>
+#. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:3176
-msgid "The segment info XML files"
-msgstr "剪辑信息 XML 文件"
+#: doc/man/mkvpropedit.xml:517
+msgid "Segment information"
+msgstr "剪辑信息"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:3179
@@ -5160,11 +5161,6 @@ msgstr "编辑选择器"
 msgid "The <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option sets the &matroska; file section (segment information or a certain track's headers) that all following <link linkend=\"mkvpropedit.description.add\">add</link>, <link linkend=\"mkvpropedit.description.set\">set</link> and <link linkend=\"mkvpropedit.description.delete\">delete</link> actions operate on. This stays valid until the next <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option is found. The argument to this option is called the edit selector."
 msgstr "<link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> 选项设置后续的 <link linkend=\"mkvpropedit.description.add\">添加</link>, <link linkend=\"mkvpropedit.description.set\">设置</link> 或 <link linkend=\"mkvpropedit.description.delete\">删除</link> 操作所影响的 &matroska; 文件区域（剪辑信息或者特定轨道的头部）。在出现另一个 <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> 选项之前，此选项将一直有效。此选项的参数就叫做编辑选择器。"
 
-#. type: Content of: <refentry><refsect1><refsect2><title>
-#: doc/man/mkvpropedit.xml:517
-msgid "Segment information"
-msgstr "剪辑信息"
-
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvpropedit.xml:519
 msgid "The segment information can be selected with one of these three words: '<literal>info</literal>', '<literal>segment_info</literal>' or '<literal>segmentinfo</literal>'. It contains properties like the segment title or the segment <abbrev>UID</abbrev>."
@@ -5606,6 +5602,9 @@ msgstr "("
 #, no-wrap
 msgid ")"
 msgstr ")"
+
+#~ msgid "The segment info XML files"
+#~ msgstr "剪辑信息 XML 文件"
 
 #~| msgid "2017-12-17"
 #~ msgid "2021-12-27"
