@@ -90,7 +90,7 @@ one, and increase `JOBS` if you have more than one core):
     make MXE_TARGETS=x86_64-w64-mingw32.static MXE_PLUGIN_DIRS=plugins/gcc9 \
       JOBS=2 \
       gettext libiconv zlib boost file flac lzo ogg pthreads vorbis cmark \
-      libdvdread qtbase qttranslations qtwinextras
+      libdvdread qtbase qttranslations
 
 Append the installation directory to your `PATH` variable:
 

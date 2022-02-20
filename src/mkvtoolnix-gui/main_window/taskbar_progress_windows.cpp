@@ -1,7 +1,9 @@
 #include "common/common_pch.h"
 
-#include <QWinTaskbarButton>
-#include <QWinTaskbarProgress>
+#include <QWindow>
+
+#include <dwmapi.h>
+#include <shobjidl.h>
 
 #include "mkvtoolnix-gui/jobs/model.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
@@ -13,17 +15,41 @@ namespace mtx::gui {
 class TaskbarProgressPrivate {
   friend class TaskbarProgress;
 
-  QWinTaskbarButton *m_button{};
+  ITaskbarList4 *m_taskbarList{};
+  HWND m_handle{};
+  bool m_running{};
 
-  explicit TaskbarProgressPrivate(QWidget *parent)
-    : m_button{new QWinTaskbarButton{parent}}
-  {
-  }
+  explicit TaskbarProgressPrivate();
+
+public:
+  virtual ~TaskbarProgressPrivate();
 };
+
+TaskbarProgressPrivate::TaskbarProgressPrivate()
+{
+  auto hresult = CoCreateInstance(CLSID_TaskbarList, nullptr, CLSCTX_INPROC_SERVER, IID_ITaskbarList4, reinterpret_cast<void **>(&m_taskbarList));
+
+  if (FAILED(hresult)) {
+    m_taskbarList = nullptr;
+    return;
+  }
+
+  if (FAILED(m_taskbarList->HrInit())) {
+    m_taskbarList->Release();
+    m_taskbarList = nullptr;
+  }
+}
+
+TaskbarProgressPrivate::~TaskbarProgressPrivate() {
+  if (m_taskbarList)
+    m_taskbarList->Release();
+}
+
+// ------------------------------------------------------------
 
 TaskbarProgress::TaskbarProgress(QWidget *parent)
   : QObject{parent}
-  , p_ptr{new TaskbarProgressPrivate{parent}}
+  , p_ptr{new TaskbarProgressPrivate}
 {
   auto model = MainWindow::get()->jobTool()->model();
 
@@ -37,26 +63,30 @@ TaskbarProgress::~TaskbarProgress() {
 
 void
 TaskbarProgress::setup() {
-  p_func()->m_button->setWindow(static_cast<MainWindow *>(parent())->windowHandle());
+  p_func()->m_handle = reinterpret_cast<HWND>(static_cast<MainWindow *>(parent())->windowHandle()->winId());
 }
 
 void
 TaskbarProgress::updateTaskbarProgress([[maybe_unused]] int progress,
                                        int totalProgress) {
-  p_func()->m_button->progress()->setValue(totalProgress);
+  auto &p = *p_func();
+
+  if (p.m_taskbarList)
+    p.m_taskbarList->SetProgressValue(p.m_handle, ULONGLONG(totalProgress), 100);
 }
 
 void
 TaskbarProgress::updateTaskbarStatus(Jobs::QueueStatus status) {
   auto &p         = *p_func();
-  auto progress   = p.m_button->progress();
-  auto wasStopped = !progress->isVisible();
-  auto nowStopped = Jobs::QueueStatus::Stopped == status;
+  auto newRunning = Jobs::QueueStatus::Stopped != status;
 
-  if (wasStopped && !nowStopped)
-    progress->reset();
+  if (!p.m_taskbarList || (p.m_running == newRunning))
+    return;
 
-  progress->setVisible(!nowStopped);
+  p.m_running   = newRunning;
+  auto newState = newRunning ? TBPF_NORMAL : TBPF_NOPROGRESS;
+
+  p.m_taskbarList->SetProgressState(p.m_handle, newState);
 }
 
 }

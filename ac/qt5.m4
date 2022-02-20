@@ -92,7 +92,7 @@ check_qt5() {
     fi
 
     if test x"$MINGW" = x1; then
-      with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5WinExtras"
+      with_qt_pkg_config_modules="$with_qt_pkg_config_modules"
     fi
 
     PKG_CHECK_EXISTS([$with_qt_pkg_config_modules],[ok=1],[ok=0])
