@@ -56,10 +56,20 @@ class Array
   def for_target!
     self.flatten!
 
-    self.reject! { |f| %r{(?:/|^)linux[_.]}.match f }   unless $building_for[:linux]
-    self.reject! { |f| %r{(?:/|^)macos[_.]}.match f }   unless $building_for[:macos]
-    self.reject! { |f| %r{(?:/|^)unix[_.]}.match f }    if     $building_for[:windows]
-    self.reject! { |f| %r{(?:/|^)windows[_.]}.match f } unless $building_for[:windows]
+    reject = {
+      :linux   => %w{      macos      windows},
+      :macos   => %w{linux            windows x11},
+      :windows => %w{linux macos unix         x11},
+    }
+
+    reject.each do |os, types|
+      next if !$building_for[os]
+
+      re = '(?:' + types.join('|') + ')'
+      re = %r{(?:/|^)#{re}[_.]|_#{re}\.[a-z]+$}
+
+      self.reject! { |f| re.match f }
+    end
 
     return self
   end
