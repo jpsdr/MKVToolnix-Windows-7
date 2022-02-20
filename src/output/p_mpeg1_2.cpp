@@ -233,7 +233,6 @@ mpeg1_2_video_packetizer_c::process_unframed(packet_cptr const &packet) {
         break;
 
       packet_cptr new_packet  = packet_cptr(new packet_t(memory_c::take_ownership(frame->data, frame->size), frame->timestamp, frame->duration, frame->refs[0], frame->refs[1]));
-      new_packet->time_factor = MPEG2_PICTURE_TYPE_FRAME == frame->pictureStructure ? 1 : 2;
 
       remove_stuffing_bytes_and_handle_sequence_headers(new_packet);
 

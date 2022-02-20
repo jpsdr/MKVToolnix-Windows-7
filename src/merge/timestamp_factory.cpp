@@ -399,7 +399,6 @@ timestamp_factory_v3_c::get_next(packet_t &packet) {
   if (m_durations[m_current_duration].fps && (!m_preserve_duration || (0 >= packet.duration)))
     packet.duration = (int64_t)(1000000000.0 / m_durations[m_current_duration].fps);
 
-  packet.duration   /= packet.time_factor;
   m_current_timestamp += packet.duration;
 
   if (m_current_timestamp >= m_durations[m_current_duration].duration) {

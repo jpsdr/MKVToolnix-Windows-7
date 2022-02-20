@@ -68,12 +68,6 @@ public:
   unsigned int decodingOrder;
   MediaTime refs[2];
   MPEGFrameRef tmpRefs[2];
-  bool stamped;
-  bool invisible;
-  bool rff;
-  bool tff;
-  bool progressive;
-  uint8_t pictureStructure;
   bool bCopy;
   uint64_t frameNumber;
 
@@ -91,11 +85,10 @@ private:
   MediaTime previousTimestamp;
   MediaTime previousDuration;
   //Added to allow reading the header's raw data, contains first found seq hdr.
-  MPEGChunk* seqHdrChunk, *gopChunk;
+  MPEGChunk* seqHdrChunk, *gopChunk, *firstField;
   MPEG2SequenceHeader m_seqHdr; //current sequence header
   MPEG2GOPHeader m_gopHdr; //current GOP header
   MediaTime waitExpectedTime;
-  bool      waitSecondField;
   bool      probing;
   bool      b_frame_warning_printed;
   MPEGFrameRef refs[2];
@@ -108,7 +101,6 @@ private:
   MediaTime frameNum;
   MediaTime gopPts;
   MediaTime highestPts;
-  bool usePictureFrames;
   uint8_t mpegVersion;
   MPEG2ParserState_e parserState;
   MPEGVideoBuffer * mpgBuf;
@@ -126,7 +118,7 @@ private:
   int32_t OrderFrame(MPEGFrame* frame);
   void StampFrame(MPEGFrame* frame);
   void UpdateFrame(MPEGFrame* frame);
-  int32_t PrepareFrame(MPEGChunk* chunk, MediaTime timestamp, MPEG2PictureHeader picHdr);
+  int32_t PrepareFrame(MPEGChunk* chunk, MediaTime timestamp, MPEG2PictureHeader picHdr, MPEGChunk* secondField);
 public:
   M2VParser();
   virtual ~M2VParser();
