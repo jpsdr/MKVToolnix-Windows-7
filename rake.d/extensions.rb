@@ -66,7 +66,7 @@ class Array
       next if !$building_for[os]
 
       re = '(?:' + types.join('|') + ')'
-      re = %r{(?:/|^)#{re}[_.]|_#{re}\.[a-z]+$}
+      re = %r{(?:/|^)#{re}[_.]}
 
       self.reject! { |f| re.match f }
     end
