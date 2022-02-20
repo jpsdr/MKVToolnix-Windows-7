@@ -1,7 +1,5 @@
 #include "common/common_pch.h"
 
-#if defined(SYS_WINDOWS)
-
 #include <QWinTaskbarButton>
 #include <QWinTaskbarProgress>
 
@@ -12,14 +10,24 @@
 
 namespace mtx::gui {
 
+class TaskbarProgressPrivate {
+  friend class TaskbarProgress;
+
+  QWinTaskbarButton *m_button{};
+
+  explicit TaskbarProgressPrivate(QWidget *parent)
+    : m_button{new QWinTaskbarButton{parent}}
+  {
+  }
+};
+
 TaskbarProgress::TaskbarProgress(QWidget *parent)
   : QObject{parent}
-  , m_button{}
+  , p_ptr{new TaskbarProgressPrivate{parent}}
 {
-  m_button   = new QWinTaskbarButton{this};
   auto model = MainWindow::get()->jobTool()->model();
 
-  connect(MainWindow::get(), &MainWindow::windowShown,         this, &TaskbarProgress::setupWindowHandle);
+  connect(MainWindow::get(), &MainWindow::windowShown,         this, &TaskbarProgress::setup);
   connect(model,             &Jobs::Model::progressChanged,    this, &TaskbarProgress::updateTaskbarProgress);
   connect(model,             &Jobs::Model::queueStatusChanged, this, &TaskbarProgress::updateTaskbarStatus);
 }
@@ -28,19 +36,20 @@ TaskbarProgress::~TaskbarProgress() {
 }
 
 void
-TaskbarProgress::setupWindowHandle() {
-  m_button->setWindow(static_cast<MainWindow *>(parent())->windowHandle());
+TaskbarProgress::setup() {
+  p_func()->m_button->setWindow(static_cast<MainWindow *>(parent())->windowHandle());
 }
 
 void
-TaskbarProgress::updateTaskbarProgress(int /* progress */,
+TaskbarProgress::updateTaskbarProgress([[maybe_unused]] int progress,
                                        int totalProgress) {
-  m_button->progress()->setValue(totalProgress);
+  p_func()->m_button->progress()->setValue(totalProgress);
 }
 
 void
 TaskbarProgress::updateTaskbarStatus(Jobs::QueueStatus status) {
-  auto progress  = m_button->progress();
+  auto &p         = *p_func();
+  auto progress   = p.m_button->progress();
   auto wasStopped = !progress->isVisible();
   auto nowStopped = Jobs::QueueStatus::Stopped == status;
 
@@ -51,5 +60,3 @@ TaskbarProgress::updateTaskbarStatus(Jobs::QueueStatus status) {
 }
 
 }
-
-#endif  // SYS_WINDOWS

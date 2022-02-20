@@ -27,9 +27,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/status_bar_progress_widget.h"
-#if defined(SYS_WINDOWS)
-# include "mkvtoolnix-gui/main_window/taskbar_progress.h"
-#endif
+#include "mkvtoolnix-gui/main_window/taskbar_progress.h"
 #include "mkvtoolnix-gui/merge/tool.h"
 #include "mkvtoolnix-gui/util/cache.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
@@ -111,9 +109,7 @@ MainWindow::MainWindow(QWidget *parent)
   p->ui->actionHelpCheckForUpdates->setVisible(false);
 #endif  // HAVE_UPDATE_CHECK
 
-#if defined(SYS_WINDOWS)
   new TaskbarProgress{this};
-#endif
 
   runCacheCleanupOncePerVersion();
 
