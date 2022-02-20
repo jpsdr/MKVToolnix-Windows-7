@@ -96,7 +96,6 @@ private:
   bool m_eos;
   bool notReachedFirstGOP;
   bool keepSeqHdrsInBitstream;
-  bool invisible;
   int32_t   gopNum;
   MediaTime frameNum;
   MediaTime gopPts;
