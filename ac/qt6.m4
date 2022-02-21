@@ -22,6 +22,7 @@ check_qt6() {
     return
   fi
 
+  rm -f src/mkvtoolnix-gui/static_plugins.cpp
   qmake_dir="`mktemp -d`"
 
   touch "$qmake_dir/configure.cpp" "$qmake_dir/configure.h"
@@ -42,8 +43,16 @@ EOT
 </RCC>
 EOT
 
+  qmake_qtplugin_ui=""
+  qmake_qt_ui=""
+
+  if ! test x"$MINGW" = x1; then
+    qmake_qt_ui="dbus multimedia"
+  fi
+
   cat > "$qmake_dir/configure_non_gui.pro" <<EOT
 QT = core
+TARGET = console
 
 HEADERS = configure.h
 SOURCES = configure.cpp
@@ -63,10 +72,9 @@ EOT
     fi
   fi
 
-  MTXDBUS=dbus
-  for MTXTRY in 1 2; do
-    cat > "$qmake_dir/configure.pro" <<EOT
-QT = core $MTXDBUS gui widgets network concurrent
+  cat > "$qmake_dir/configure.pro" <<EOT
+QT = core $qmake_qt_ui gui widgets network concurrent
+QTPLUGIN += $qmake_qtplugin_ui
 
 FORMS = configure.ui
 RESOURCES = configure.qrc
@@ -74,20 +82,17 @@ HEADERS = configure.h
 SOURCES = configure.cpp
 EOT
 
-    "$QMAKE6" -makefile -nocache configure.pro > /dev/null
-    result2=$?
+  "$QMAKE6" -makefile -nocache configure.pro > /dev/null
+  result2=$?
 
-    if test $result2 = 0; then
-      if test -f Makefile.Release; then
-        mv Makefile.Release Makefile
-      fi
-      break
+  if test $result2 = 0; then
+    if test -f Makefile.Release; then
+      mv Makefile.Release Makefile
     fi
-
-    unset MTXDBUS
-  done
-
-  unset MTXTRY
+    if test -f configure_plugin_import.cpp; then
+      cp configure_plugin_import.cpp "$old_wd/src/mkvtoolnix-gui/static_plugins.cpp"
+    fi
+  fi
 
   "$QMAKE6" -query > "$qmake_dir/configure.properties"
   result3=$?
@@ -130,7 +135,7 @@ EOT
   QT_LIBS="`echo $QT_LIBS | sed -e 's/\$(EXPORT_ARCH_ARGS)//'`"
   QT_LIBS_NON_GUI="`$ac_cv_path_EGREP '^LFLAGS *=' "$qmake_dir/Makefile.non_gui" | sed -e 's/^LFLAGS *= *//' -e 's/-Wl,-O[[^ ]]*//g' -e 's/ -f[[a-z]][[^ ]]*//g'`"
   QT_LIBS_NON_GUI="$QT_LIBS_NON_GUI `$ac_cv_path_EGREP '^LIBS *=' "$qmake_dir/Makefile.non_gui" | sed -e 's/^LIBS *= *//' -e 's/\$([[^)]]*)//g' -e 's:-L[[^/]][[^ ]]*::g'`"
-  QT_LIBS_NON_GUI="`echo $QT_LIBS_NON_GUI | sed -e 's/\$(EXPORT_ARCH_ARGS)//'`"
+  QT_LIBS_NON_GUI="`echo $QT_LIBS_NON_GUI | sed -e 's/\$(EXPORT_ARCH_ARGS)//' -e 's/-Wl,-subsystem,windows *//g'`"
 
   rm -rf "$qmake_dir"
 
