@@ -2,10 +2,10 @@
 
 #include <Qt>
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#if HAVE_QMEDIAPLYER
 # include <QMediaPlayer>
 
-#else  // Qt < 6
+#else  // HAVE_QMEDIAPLAYER
 # include <QUrl>
 
 // Fake Media Player class as Qt 6.1 hasn't re-added the media framework yet.
@@ -22,7 +22,7 @@ public:
   void stop() {}
 };
 
-#endif  // Qt < 6
+#endif  // HAVE_QMEDIAPLAYER
 
 #include "mkvtoolnix-gui/util/media_player.h"
 

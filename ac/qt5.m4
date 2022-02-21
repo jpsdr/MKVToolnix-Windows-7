@@ -229,6 +229,7 @@ EOF
   AC_MSG_CHECKING(for Qt 5)
 
   if test x"$problem" = x; then
+    AC_DEFINE(HAVE_QMEDIAPLAYER, 1, [Define to 1 if you have the QMediaPlayer header file.])
     AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
     AC_MSG_RESULT(yes)
     have_qt5=yes

@@ -202,6 +202,13 @@ return 0;
     return
   fi
 
+  AC_LANG_PUSH(C++)
+  ac_save_CXXFLAGS="$CXXFLAGS"
+  CXXFLAGS="$STD_CXX $CXXFLAGS $QT_CFLAGS -fPIC"
+  AC_CHECK_HEADERS([QMediaPlayer])
+  CXXFLAGS="$ac_save_CXXFLAGS"
+  AC_LANG_POP()
+
   AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
   AC_MSG_CHECKING(for Qt 6)
   AC_MSG_RESULT(yes)
