@@ -44,7 +44,7 @@ display_update_element_result(const EbmlCallbacks &callbacks,
       break;
 
     case kax_analyzer_c::uer_error_meta_seek:
-      message += Y("The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding this element. Please use your favorite player to check this file.");
+      message += Y("The Matroska file was modified, but the meta seek entry could not be updated. This means that players might have a hard time finding the element. Please use your favorite player to check this file.");
       break;
 
     case kax_analyzer_c::uer_error_opening_for_reading:
