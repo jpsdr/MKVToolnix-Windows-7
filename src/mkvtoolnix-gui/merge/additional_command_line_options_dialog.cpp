@@ -40,7 +40,7 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
 
   add(Q("--clusters-in-meta-seek"),         false, global, { QY("Tells mkvmerge to create a meta seek element at the end of the file containing all clusters.") });
   add(Q("--deterministic"),                 true,  global, { QY("Enables the creation of byte-identical files if the same source files with the same options and the same seed are used.") });
-  add(Q("--disable-lacing"),                false, global, { QY("Disables lacing for all tracks."), QY("This will increase the file's size, especially if there are many audio tracks."), QY("Use only for testing.") });
+  add(Q("--disable-lacing"),                false, global, { QY("Disables lacing for all tracks."), QY("This will increase the file's size, especially if there are many audio tracks."), QY("Use this only for testing purposes.") });
   add(Q("--disable-track-statistics-tags"), false, global, { QY("Tells mkvmerge not to write tags with statistics for each track.") });
   add(Q("--disable-language-ietf"),         false, global, { QY("Tells mkvmerge not to write LanguageIETF track header elements and ChapLanguageIETF chapter elements.") });
   add(Q("--enable-durations"),              false, global, { QY("Write durations for all blocks."), QY("This will increase file size and does not offer any additional value for players at the moment.") });
