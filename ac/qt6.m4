@@ -45,9 +45,11 @@ EOT
 
   qmake_qtplugin_ui=""
   qmake_qt_ui=""
+  qmake_qt_ui_try=""
 
   if ! test x"$MINGW" = x1; then
-    qmake_qt_ui="dbus multimedia"
+    qmake_qt_ui="dbus"
+    qmake_qt_ui_try="multimedia"
   fi
 
   cat > "$qmake_dir/configure_non_gui.pro" <<EOT
@@ -72,8 +74,11 @@ EOT
     fi
   fi
 
-  cat > "$qmake_dir/configure.pro" <<EOT
-QT = core $qmake_qt_ui gui widgets network concurrent
+  while true; do
+    rm -f Makefile Makefile.Release
+
+    cat > "$qmake_dir/configure.pro" <<EOT
+QT = core $qmake_qt_ui $qmake_qt_ui_try gui widgets network concurrent
 QTPLUGIN += $qmake_qtplugin_ui
 
 FORMS = configure.ui
@@ -82,8 +87,15 @@ HEADERS = configure.h
 SOURCES = configure.cpp
 EOT
 
-  "$QMAKE6" -makefile -nocache configure.pro > /dev/null
-  result2=$?
+    "$QMAKE6" -makefile -nocache configure.pro > /dev/null
+    result2=$?
+
+    if test -z $qmake_qt_ui_try; then
+      break
+    fi
+
+    qmake_qt_ui_try=""
+  done
 
   if test $result2 = 0; then
     if test -f Makefile.Release; then
