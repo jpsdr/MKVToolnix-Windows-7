@@ -30,6 +30,189 @@
 
 namespace mtx::gui::Util {
 
+namespace {
+void
+convert8_1_0DefaultSubtitleCharset(version_number_t const &writtenByVersion) {
+  auto reg = Settings::registry();
+
+  reg->beginGroup(s_grpDefaults);
+  if (   (writtenByVersion == version_number_t{"8.1.0"})
+      && (reg->value(s_valDefaultSubtitleCharset).toString() == Q("ISO-8859-15"))) {
+    // Fix for a bug in versions prior to 8.2.0.
+    reg->remove(s_valDefaultSubtitleCharset);
+  }
+  reg->endGroup();
+}
+
+
+void
+convert8_1_0DefaultTrackLanguage() {
+  auto reg = Settings::registry();
+
+  // defaultTrackLanguage → defaultAudioTrackLanguage, defaultVideoTrackLanguage, defaultSubtitleTrackLanguage;
+  reg->beginGroup(s_grpSettings);
+
+  auto defaultTrackLanguage = reg->value(s_valDefaultTrackLanguage);
+  reg->remove(s_valDefaultTrackLanguage);
+
+  if (defaultTrackLanguage.isValid()) {
+    reg->setValue(s_valDefaultAudioTrackLanguage,    defaultTrackLanguage.toString());
+    reg->setValue(s_valDefaultVideoTrackLanguage,    defaultTrackLanguage.toString());
+    reg->setValue(s_valDefaultSubtitleTrackLanguage, defaultTrackLanguage.toString());
+  }
+
+  // mergeUseVerticalInputLayout → mergeTrackPropertiesLayout
+  auto mergeUseVerticalInputLayout = reg->value(s_valMergeUseVerticalInputLayout);
+  reg->remove(s_valMergeUseVerticalInputLayout);
+
+  if (mergeUseVerticalInputLayout.isValid())
+    reg->setValue(s_valMergeTrackPropertiesLayout, static_cast<int>(mergeUseVerticalInputLayout.toBool() ? Settings::TrackPropertiesLayout::VerticalTabWidget : Settings::TrackPropertiesLayout::HorizontalScrollArea));
+
+  reg->endGroup();
+}
+
+void
+convert37_0_0OftenUsedLanguages(version_number_t const &writtenByVersion) {
+  // Update list of often-used language codes when updating from v37
+  // or earlier due to the change that only often used languages are
+  // shown by default. Unfortunately that list was rather short in
+  // earlier releases, leading to confused users missing their
+  // language.
+  if (writtenByVersion > version_number_t{"37"})
+    return;
+
+  auto reg = Settings::registry();
+
+  reg->beginGroup(s_grpSettings);
+  reg->remove(s_valOftenUsedLanguages);
+  reg->endGroup();
+}
+
+void
+convert40_0_0PredefinedTrackNames() {
+  auto reg = Settings::registry();
+
+  // Predefined track names have been split up into lists for each
+  // track type after v40.
+  reg->beginGroup(s_grpSettings);
+  auto value = reg->value(s_valMergePredefinedTrackNames);
+  if (value.isValid()) {
+    reg->remove(s_valMergePredefinedTrackNames);
+    reg->setValue(s_valMergePredefinedVideoTrackNames,    value.toStringList());
+    reg->setValue(s_valMergePredefinedAudioTrackNames,    value.toStringList());
+    reg->setValue(s_valMergePredefinedSubtitleTrackNames, value.toStringList());
+  }
+  reg->endGroup();
+}
+
+void
+convert46_0_0RunProgramConfigs(version_number_t const &writtenByVersion) {
+  // Update program runner event types: v46 splits "run if job
+  // successful or with warnings" into two separate events.
+  if (writtenByVersion > version_number_t{"45.0.0.26"})
+    return;
+
+  auto reg = Settings::registry();
+
+  reg->beginGroup(s_grpRunProgramConfigurations);
+
+  for (auto const &group : reg->childGroups()) {
+    reg->beginGroup(group);
+    auto forEvents = reg->value(s_valForEvents).toInt();
+    if (forEvents & 2)
+      reg->setValue(s_valForEvents, forEvents | 8);
+    reg->endGroup();
+  }
+
+  reg->endGroup();            // runProgramConfigurations
+}
+
+void
+convert51_0_0OftenUsedCountries() {
+  auto reg = Settings::registry();
+
+  // "Often used countries" was renamed to "often used regions" in
+  // v51.
+  reg->beginGroup(s_grpSettings);
+  if (!reg->value(s_valOftenUsedRegions).isValid()) {
+    reg->setValue(s_valOftenUsedRegions, reg->value(s_valOftenUsedCountries));
+    reg->remove(s_valOftenUsedCountries);
+  }
+  if (!reg->value(s_valOftenUsedRegionsOnly).isValid()) {
+    reg->setValue(s_valOftenUsedRegionsOnly, reg->value(s_valOftenUsedCountriesOnly));
+    reg->remove(s_valOftenUsedCountriesOnly);
+  }
+  reg->endGroup();
+}
+
+void
+convert54_0_0AddingAppendingFilesPolicy() {
+  auto reg = Settings::registry();
+
+  // After v54: the setting mergeAddingAppendingFilesPolicy which was
+  // only used for dragging & dropping in < v54 but for both dragging
+  // & dropping and using the "add source files" button in v54 is
+  // split up into two settings afterwards.
+  reg->beginGroup(s_grpSettings);
+  if (!reg->value(s_valMergeDragAndDropFilesPolicy).isValid()) {
+    if (reg->value(s_valMergeAddingAppendingFilesPolicy).isValid())
+      reg->setValue(s_valMergeDragAndDropFilesPolicy,       reg->value(s_valMergeAddingAppendingFilesPolicy));
+    if (reg->value(s_valMergeLastAddingAppendingDecision).isValid())
+      reg->setValue(s_valMergeLastDragAndDropFilesDecision, reg->value(s_valMergeLastAddingAppendingDecision));
+
+    reg->remove(s_valMergeAddingAppendingFilesPolicy);
+    reg->remove(s_valMergeLastAddingAppendingDecision);
+  }
+  reg->endGroup();
+}
+
+void
+convert55_0_0DerivingTrackLanguagesFromFileNames() {
+  auto reg = Settings::registry();
+
+  // v55 uses boundary chars instead of a whole regex.
+  reg->beginGroup(s_grpSettings);
+  reg->beginGroup(s_grpDerivingTrackLanguagesFromFileNames);
+  reg->remove("customRegex");
+  reg->endGroup();
+  reg->endGroup();
+}
+
+void
+convert60_0_0DerivingTrackLanguagesBoundaryChars(version_number_t const &writtenByVersion) {
+  // After v60: boundary characters for detecting track languages have changed.
+  if (writtenByVersion > version_number_t{"60.0.0.2"})
+    return;
+
+  auto reg = Settings::registry();
+
+  reg->beginGroup(s_grpSettings);
+  reg->beginGroup(s_grpDerivingTrackLanguagesFromFileNames);
+  if (reg->value(s_valBoundaryChars) == Q("[](){}.+=#"))
+    reg->setValue(s_valBoundaryChars, Settings::defaultBoundaryCharsForDerivingLanguageFromFileName());
+  reg->endGroup();
+  reg->endGroup();
+}
+
+void
+convert60_0_0ProcessPriority(version_number_t const &writtenByVersion) {
+  // v60 changed default process priority to "lowest", which isn't a
+  // good idea; 60.0.0.18 amended it to "low".
+  if ((writtenByVersion < version_number_t{"60.0.0.0"}) || (writtenByVersion >= version_number_t{"60.0.0.18"}))
+    return;
+
+  auto reg = Settings::registry();
+
+  reg->beginGroup(s_grpSettings);
+  if (reg->value(s_valPriority).toInt() == static_cast<int>(Settings::LowestPriority))
+    reg->setValue(s_valPriority, static_cast<int>(Settings::LowPriority));
+  reg->endGroup();
+}
+
+}
+
+} // anonymous namespace
+
 QString
 Settings::RunProgramConfig::validate()
   const {
@@ -200,128 +383,16 @@ Settings::convertOldSettings() {
     writtenByVersion = version_number_t{"8.1.0"}; // 8.1.0 was the last version not writing the version number field.
   reg->endGroup();
 
-  reg->beginGroup(s_grpDefaults);
-  if (   (writtenByVersion == version_number_t{"8.1.0"})
-      && (reg->value(s_valDefaultSubtitleCharset).toString() == Q("ISO-8859-15"))) {
-    // Fix for a bug in versions prior to 8.2.0.
-    reg->remove(s_valDefaultSubtitleCharset);
-  }
-  reg->endGroup();
-
-  // defaultTrackLanguage → defaultAudioTrackLanguage, defaultVideoTrackLanguage, defaultSubtitleTrackLanguage;
-  reg->beginGroup(s_grpSettings);
-
-  auto defaultTrackLanguage = reg->value(s_valDefaultTrackLanguage);
-  reg->remove(s_valDefaultTrackLanguage);
-
-  if (defaultTrackLanguage.isValid()) {
-    reg->setValue(s_valDefaultAudioTrackLanguage,    defaultTrackLanguage.toString());
-    reg->setValue(s_valDefaultVideoTrackLanguage,    defaultTrackLanguage.toString());
-    reg->setValue(s_valDefaultSubtitleTrackLanguage, defaultTrackLanguage.toString());
-  }
-
-  // mergeUseVerticalInputLayout → mergeTrackPropertiesLayout
-  auto mergeUseVerticalInputLayout = reg->value(s_valMergeUseVerticalInputLayout);
-  reg->remove(s_valMergeUseVerticalInputLayout);
-
-  if (mergeUseVerticalInputLayout.isValid())
-    reg->setValue(s_valMergeTrackPropertiesLayout, static_cast<int>(mergeUseVerticalInputLayout.toBool() ? TrackPropertiesLayout::VerticalTabWidget : TrackPropertiesLayout::HorizontalScrollArea));
-
-  reg->endGroup();
-
-  // v55 uses boundary chars instead of a whole regex.
-  reg->beginGroup(s_grpSettings);
-  reg->beginGroup(s_grpDerivingTrackLanguagesFromFileNames);
-  reg->remove("customRegex");
-  reg->endGroup();
-  reg->endGroup();
-
-  // Update list of often-used language codes when updating from v37
-  // or earlier due to the change that only often used languages are
-  // shown by default. Unfortunately that list was rather short in
-  // earlier releases, leading to confused users missing their
-  // language.
-  if (writtenByVersion <= version_number_t{"37"}) {
-    reg->beginGroup(s_grpSettings);
-    reg->remove(s_valOftenUsedLanguages);
-    reg->endGroup();
-  }
-
-  // Predefined track names have been split up into lists for each
-  // track type after v40.
-  reg->beginGroup(s_grpSettings);
-  auto value = reg->value(s_valMergePredefinedTrackNames);
-  if (value.isValid()) {
-    reg->remove(s_valMergePredefinedTrackNames);
-    reg->setValue(s_valMergePredefinedVideoTrackNames,    value.toStringList());
-    reg->setValue(s_valMergePredefinedAudioTrackNames,    value.toStringList());
-    reg->setValue(s_valMergePredefinedSubtitleTrackNames, value.toStringList());
-  }
-  reg->endGroup();
-
-  // Update program runner event types: v46 splits "run if job
-  // successful or with warnings" into two separate events.
-  if (writtenByVersion <= version_number_t{"45.0.0.26"}) {
-    reg->beginGroup(s_grpRunProgramConfigurations);
-
-    for (auto const &group : reg->childGroups()) {
-      reg->beginGroup(group);
-      auto forEvents = reg->value(s_valForEvents).toInt();
-      if (forEvents & 2)
-        reg->setValue(s_valForEvents, forEvents | 8);
-      reg->endGroup();
-    }
-
-    reg->endGroup();            // runProgramConfigurations
-  }
-
-  // "Often used countries" was renamed to "often used regions" in
-  // v51.
-  reg->beginGroup(s_grpSettings);
-  if (!reg->value(s_valOftenUsedRegions).isValid()) {
-    reg->setValue(s_valOftenUsedRegions, reg->value(s_valOftenUsedCountries));
-    reg->remove(s_valOftenUsedCountries);
-  }
-  if (!reg->value(s_valOftenUsedRegionsOnly).isValid()) {
-    reg->setValue(s_valOftenUsedRegionsOnly, reg->value(s_valOftenUsedCountriesOnly));
-    reg->remove(s_valOftenUsedCountriesOnly);
-  }
-  reg->endGroup();
-
-  // After v54: the setting mergeAddingAppendingFilesPolicy which was
-  // only used for dragging & dropping in < v54 but for both dragging
-  // & dropping and using the "add source files" button in v54 is
-  // split up into two settings afterwards.
-  reg->beginGroup(s_grpSettings);
-  if (!reg->value(s_valMergeDragAndDropFilesPolicy).isValid()) {
-    if (reg->value(s_valMergeAddingAppendingFilesPolicy).isValid())
-      reg->setValue(s_valMergeDragAndDropFilesPolicy,       reg->value(s_valMergeAddingAppendingFilesPolicy));
-    if (reg->value(s_valMergeLastAddingAppendingDecision).isValid())
-      reg->setValue(s_valMergeLastDragAndDropFilesDecision, reg->value(s_valMergeLastAddingAppendingDecision));
-
-    reg->remove(s_valMergeAddingAppendingFilesPolicy);
-    reg->remove(s_valMergeLastAddingAppendingDecision);
-  }
-  reg->endGroup();
-
-  // After v60: boundary characters for detecting track languages have changed.
-  if (writtenByVersion <= version_number_t{"60.0.0.2"}) {
-    reg->beginGroup(s_grpSettings);
-    reg->beginGroup(s_grpDerivingTrackLanguagesFromFileNames);
-    if (reg->value(s_valBoundaryChars) == Q("[](){}.+=#"))
-      reg->setValue(s_valBoundaryChars, defaultBoundaryCharsForDerivingLanguageFromFileName());
-    reg->endGroup();
-    reg->endGroup();
-  }
-
-  // v60 changed default process priority to "lowest", which isn't a
-  // good idea; 60.0.0.18 amended it to "low".
-  if ((writtenByVersion >= version_number_t{"60.0.0.0"}) && (writtenByVersion < version_number_t{"60.0.0.18"})) {
-    reg->beginGroup(s_grpSettings);
-    if (reg->value(s_valPriority).toInt() == static_cast<int>(LowestPriority))
-      reg->setValue(s_valPriority, static_cast<int>(LowPriority));
-    reg->endGroup();
-  }
+  convert8_1_0DefaultSubtitleCharset(writtenByVersion);
+  convert8_1_0DefaultTrackLanguage();
+  convert37_0_0OftenUsedLanguages(writtenByVersion);
+  convert40_0_0PredefinedTrackNames();
+  convert46_0_0RunProgramConfigs(writtenByVersion);
+  convert51_0_0OftenUsedCountries();
+  convert54_0_0AddingAppendingFilesPolicy();
+  convert55_0_0DerivingTrackLanguagesFromFileNames();
+  convert60_0_0DerivingTrackLanguagesBoundaryChars(writtenByVersion);
+  convert60_0_0ProcessPriority(writtenByVersion);
 }
 
 void
