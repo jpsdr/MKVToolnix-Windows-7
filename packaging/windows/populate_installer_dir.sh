@@ -121,7 +121,7 @@ function copy_drmingw_dlls {
 }
 
 function copy_files {
-  local qt5trdir lang baseqm mo qm
+  local qttrdir customtrdir lang baseqm mo qm
   print -n -- "Copying files…"
 
   cd ${src_dir}
@@ -149,24 +149,35 @@ function copy_files {
     cp ${mo} ${tgt_dir}/locale/${language}/LC_MESSAGES/mkvtoolnix.mo
   done
 
-  local qt5trdir=${mxe_usr_dir}/qt5/translations
-  local qm=''
-  for qm (${qt5trdir}/qt_*.qm) {
-    if [[ ${qm} == *qt_help* ]] continue
+  if grep -q 'QT_LIBS.*qt5' build-config; then
+    qttrdir=${mxe_usr_dir}/qt5/translations
+    customtrdir=po/qt
+  else
+    qttrdir=${mxe_usr_dir}/qt6/translations
+    customtrdir=po/qt6
+  fi
 
-    lang=${${${qm:t}:r}#qt_}
+  if [[ -d ${qttrdir} ]]; then
+    local qm=''
+    for qm (${qttrdir}/qt_*.qm) {
+      if [[ ${qm} == *qt_help* ]] continue
 
-    baseqm=${qt5trdir}/qtbase_${lang}.qm
-    if [[ -f $baseqm ]] qm=$baseqm
-    cp ${qm} ${tgt_dir}/locale/libqt/qt_${lang}.qm
-  }
+      lang=${${${qm:t}:r}#qt_}
 
-  local ts
-  for ts (po/qt/*.ts) {
-    lang=${${${ts:t}:r}#qt_}
+      baseqm=${qttrdir}/qtbase_${lang}.qm
+      if [[ -f $baseqm ]] qm=$baseqm
+      cp ${qm} ${tgt_dir}/locale/libqt/qt_${lang}.qm
+    }
+  fi
 
-    lrelease -qm ${tgt_dir}/locale/libqt/qt_${lang}.qm ${ts} > /dev/null
-  }
+  if [[ -d ${customtrdir} ]]; then
+    local ts
+    for ts (${customtrdir}/*.ts) {
+      lang=${${${ts:t}:r}#qt_}
+
+      lrelease -qm ${tgt_dir}/locale/libqt/qt_${lang}.qm ${ts} > /dev/null
+    }
+  fi
 
   typeset -a translations
   translations=($(awk '/^MANPAGES_TRANSLATIONS/ { gsub(".*= *", "", $0); gsub(" *$", "", $0); print $0 }' build-config))
