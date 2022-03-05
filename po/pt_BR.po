@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: pt-BR\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2022-02-28 21:07+0100\n"
-"PO-Revision-Date: 2022-01-30 21:30+0100\n"
+"PO-Revision-Date: 2022-03-01 03:34+0000\n"
 "Last-Translator: Fúlvio Alves <fga.fulvio@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/pt_BR/)\n"
 "Language: pt_BR\n"
@@ -918,15 +918,15 @@ msgid "  --title <title>          Title for this destination file.\n"
 msgstr "  --title <título>         Título para esse arquivo de destino.\n"
 
 #: src/merge/mkvmerge.cpp:241
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --track-enabled-flag <TID[:bool]>\n"
 "                           Sets the \"track enabled\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --commentary-flag <TID[:bool]>\n"
-"                           Define a flag \"comentário\" para esta faixa ou\n"
-"                           força-a a não estar presente se bool for 0.\n"
+"  --track-enabled-flag <TID[:bool]>\n"
+"                           Define a flag \"faixa ativada\" para esta faixa ou\n"
+"                           força-o a não estar presente se bool for 0.\n"
 
 #: src/merge/mkvmerge.cpp:261
 #, no-c-format
@@ -1504,7 +1504,7 @@ msgstr "Flag \"faixa ativada\""
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:87
 #, no-c-format
 msgid "\"Track enabled\" flag:"
-msgstr "Flag \"Faixa ativada\":"
+msgstr "Flag \"faixa ativada\":"
 
 #: src/common/kax_element_names.cpp:215
 #: src/common/property_element.cpp:140
@@ -1785,9 +1785,9 @@ msgid "&Command line:"
 msgstr "&Linha de comando:"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:94
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Configure available languages"
-msgstr "Procurar por atualizações disponíveis"
+msgstr "&Configurar idiomas disponíveis"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
 #, no-c-format
@@ -8116,9 +8116,9 @@ msgstr "Idioma selecionado abaixo"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2075
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:229
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Language shortcuts"
-msgstr "Idiomas"
+msgstr "Atalhos de idioma"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:308
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2173
@@ -8395,9 +8395,9 @@ msgid "Malformed codec id '{0}'.\n"
 msgstr "ID do codec errôneo '{0}'.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:479
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Mark this track as \"enabled\" (the default) or \"disabled\"."
-msgstr "Marcar esta faixa como \"exibição forçada\"."
+msgstr "Marque esta caixa como \"ativada\" (o padrão) ou \"desativada\"."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:475
 #, no-c-format
@@ -8591,12 +8591,12 @@ msgstr "Modos"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:388
 #, no-c-format
 msgid "Modif&y selected track"
-msgstr ""
+msgstr "Modificar faixa selecionada"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:786
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Modif&y selected tracks"
-msgstr "Faixas silenciosas"
+msgstr "Modificar faixas selecionadas"
 
 #: src/propedit/options.cpp:186
 #, no-c-format
@@ -9642,7 +9642,7 @@ msgstr "Reproduzir arquivo de áudio '%1'"
 #: src/mkvtoolnix-gui/merge/input.cpp:480
 #, no-c-format
 msgid "Players should only consider enabled tracks for playback."
-msgstr ""
+msgstr "Os reprodutores devem considerar apenas as faixas ativadas para reprodução."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:472
 #, no-c-format
@@ -10846,9 +10846,9 @@ msgstr "Seleciona o conjunto de caracteres com a qual um arquivo de legenda ou i
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:396
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:149
 #: src/mkvtoolnix-gui/merge/tool.cpp:265
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Set &language"
-msgstr "Editar idioma"
+msgstr "Definir idioma"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1836
 #, no-c-format
@@ -11141,9 +11141,9 @@ msgid "Simple chapter parser: {0}\n"
 msgstr "Analisador simples de capítulo: {0}\n"
 
 #: src/mpegparser/M2VParser.cpp:416
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Single field picture detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
-msgstr "Quadro com campo único antes do cabeçalho GOP detectado. Conserte o arquivo de vídeo MPEG2 antes de tentar processá-lo.\n"
+msgstr "Imagem de campo único detectada. Corrija o fluxo de vídeo MPEG2 antes de tentar multiplexá-lo.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:73
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
@@ -13704,44 +13704,44 @@ msgid "To all destination files"
 msgstr "Para todos os arquivos de destino"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:103
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&commentary\" flag"
-msgstr "Flag \"comentário\""
+msgstr "Alternar a flag \"&comentário\""
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:100
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&default track\" flag"
-msgstr "Flag \"faixa padrão\""
+msgstr "Alternar a flag \"&faixa padrão\""
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:101
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&forced display\" flag"
-msgstr "Flag \"exibição forçada\""
+msgstr "Alternar a flag \"&exibição forçada\""
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:104
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&hearing impaired\" flag"
-msgstr "Flag \"deficientes auditivos\""
+msgstr "Alternar a flag \"deficientes &auditivos\""
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:102
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&original\" flag"
-msgstr "Valor original:"
+msgstr "Alternar a flag \"&original\""
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:106
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&text descriptions\" flag"
-msgstr "Flag \"descrições em texto\""
+msgstr "Alternar a flag \"&descrições de texto\""
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:105
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&visual impaired\" flag"
-msgstr "Flag \"deficientes visuais\""
+msgstr "Alternar a flag \"deficientes &visuais\""
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:99
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"track &enabled\" flag"
-msgstr "Flag \"faixa ativada\""
+msgstr "Alternar a flag \"&faixa ativada\""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:840
 #, no-c-format
