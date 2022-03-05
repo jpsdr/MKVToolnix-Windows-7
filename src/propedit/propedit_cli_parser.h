@@ -35,6 +35,7 @@ protected:
   void add_change();
   void add_tags();
   void add_chapters();
+  void set_chapter_charset();
   void set_parse_mode();
   void set_file_name();
   void disable_language_ietf();

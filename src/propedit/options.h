@@ -20,7 +20,7 @@
 
 class options_c {
 public:
-  std::string m_file_name;
+  std::string m_file_name, m_chapter_charset;
   std::vector<target_cptr> m_targets;
   bool m_show_progress;
   kax_analyzer_c::parse_mode_e m_parse_mode;

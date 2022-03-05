@@ -106,7 +106,7 @@ options_c::add_tags(std::string const &spec) {
 void
 options_c::add_chapters(const std::string &spec) {
   target_cptr target{new chapter_target_c{}};
-  static_cast<chapter_target_c *>(target.get())->parse_chapter_spec(spec);
+  static_cast<chapter_target_c *>(target.get())->parse_chapter_spec(spec, m_chapter_charset);
   m_targets.push_back(target);
 }
 

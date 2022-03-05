@@ -18,6 +18,7 @@
 class chapter_target_c: public target_c {
 protected:
   mtx::chapters::kax_cptr m_new_chapters;
+  std::string m_charset;
 
 public:
   chapter_target_c();
@@ -27,7 +28,7 @@ public:
 
   virtual bool operator ==(target_c const &cmp) const override;
 
-  virtual void parse_chapter_spec(const std::string &spec);
+  virtual void parse_chapter_spec(std::string const &spec, std::string const &charset);
   virtual void dump_info() const override;
 
   virtual bool has_changes() const override;

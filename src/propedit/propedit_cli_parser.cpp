@@ -70,6 +70,11 @@ propedit_cli_parser_c::add_tags() {
 }
 
 void
+propedit_cli_parser_c::set_chapter_charset() {
+  m_options->m_chapter_charset = m_next_arg;
+}
+
+void
 propedit_cli_parser_c::add_chapters() {
   try {
     m_options->add_chapters(m_next_arg);
@@ -225,6 +230,7 @@ propedit_cli_parser_c::init_parser() {
   add_section_header(YT("Actions for handling tags and chapters"));
   add_option("t|tags=<selector:filename>",   std::bind(&propedit_cli_parser_c::add_tags,                     this), YT("Add or replace tags in the file with the ones from 'filename' or remove them if 'filename' is empty (see below and man page for syntax)"));
   add_option("c|chapters=<filename>",        std::bind(&propedit_cli_parser_c::add_chapters,                 this), YT("Add or replace chapters in the file with the ones from 'filename' or remove them if 'filename' is empty"));
+  add_option("chapter-charset=<charset>",    std::bind(&propedit_cli_parser_c::set_chapter_charset,          this), YT("Set the charset to use when reading chapter files using the simple chapter format"));
   add_option("add-track-statistics-tags",    std::bind(&propedit_cli_parser_c::handle_track_statistics_tags, this), YT("Calculate statistics for all tracks and add new/update existing tags for them"));
   add_option("delete-track-statistics-tags", std::bind(&propedit_cli_parser_c::handle_track_statistics_tags, this), YT("Delete all existing track statistics tags"));
 

@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvpropedit: added a new option `--chapter-charset` allowing the user to
+  specify the character set to use when reading the following chapter
+  file. Implements #3276.
+
 ## Bug fixes
 
 * MKVToolNix GUI: multiplexer: fixed several issues with the tab order of

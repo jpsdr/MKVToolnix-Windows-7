@@ -35,7 +35,7 @@ chapter_target_c::operator ==(target_c const &cmp)
 void
 chapter_target_c::validate() {
   if (!m_file_name.empty() && !m_new_chapters)
-    m_new_chapters = mtx::chapters::parse(m_file_name);
+    m_new_chapters = mtx::chapters::parse(m_file_name, 0, -1, 0, {}, m_charset);
 }
 
 void
@@ -53,8 +53,10 @@ chapter_target_c::has_changes()
 }
 
 void
-chapter_target_c::parse_chapter_spec(std::string const &spec) {
+chapter_target_c::parse_chapter_spec(std::string const &spec,
+                                     std::string const &charset) {
   m_file_name = spec;
+  m_charset   = charset;
 }
 
 void
