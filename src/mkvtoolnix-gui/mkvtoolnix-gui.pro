@@ -35,6 +35,7 @@ FORMS += \
     forms/main_window/available_update_info_dialog.ui \
     forms/main_window/main_window.ui \
     forms/main_window/preferences_dialog.ui \
+    forms/main_window/prefs_language_shortcut_dialog.ui \
     forms/main_window/prefs_run_program_widget.ui \
     forms/main_window/select_character_set_dialog.ui \
     forms/main_window/status_bar_progress_widget.ui \

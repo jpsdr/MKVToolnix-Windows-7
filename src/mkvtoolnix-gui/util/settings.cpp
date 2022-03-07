@@ -209,6 +209,35 @@ convert60_0_0ProcessPriority(version_number_t const &writtenByVersion) {
   reg->endGroup();
 }
 
+void
+convert66_0_0LanguageShortcuts() {
+  auto reg = Settings::registry();
+
+  reg->beginGroup(s_grpSettings);
+  auto value = reg->value(s_valLanguageShortcuts);
+
+  if (!value.isValid()) {
+    reg->endGroup();
+    return;
+  }
+
+  reg->remove(s_valLanguageShortcuts);
+  reg->endGroup();
+
+  reg->beginGroup(s_grpLanguageShortcuts);
+
+  for (auto const &group : reg->childGroups())
+    reg->remove(group);
+
+  auto idx = 0;
+  for (auto const &language : value.toStringList()) {
+    reg->beginGroup(Q("%1").arg(++idx, 4, 10, Q('0')));
+    reg->setValue(s_valLanguage,  language);
+    reg->setValue(s_valTrackName, "");
+    reg->endGroup();
+  }
+
+  reg->endGroup();               // languageShortcuts
 }
 
 } // anonymous namespace
@@ -393,6 +422,7 @@ Settings::convertOldSettings() {
   convert55_0_0DerivingTrackLanguagesFromFileNames();
   convert60_0_0DerivingTrackLanguagesBoundaryChars(writtenByVersion);
   convert60_0_0ProcessPriority(writtenByVersion);
+  convert66_0_0LanguageShortcuts();
 }
 
 void
@@ -420,7 +450,6 @@ Settings::load() {
   m_lastOutputDir                             = QDir{reg.value(s_valLastOutputDir).toString()};
   m_lastConfigDir                             = QDir{reg.value(s_valLastConfigDir).toString()};
 
-  m_languageShortcuts                         = reg.value(s_valLanguageShortcuts).toStringList();
   m_oftenUsedLanguages                        = reg.value(s_valOftenUsedLanguages).toStringList();
   m_oftenUsedRegions                          = reg.value(s_valOftenUsedRegions).toStringList();
   m_oftenUsedCharacterSets                    = reg.value(s_valOftenUsedCharacterSets).toStringList();
@@ -532,6 +561,7 @@ Settings::load() {
   loadDefaultInfoJobSettings(reg);
   loadFileColors(reg);
   loadRunProgramConfigurations(reg);
+  loadLanguageShortcuts(reg);
   addDefaultRunProgramConfigurations(reg);
   setDefaults(enableMuxingTracksByTheseTypes);
 
@@ -544,13 +574,13 @@ Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
 
   if (m_languageShortcuts.isEmpty()) {
     if (!iso639UiLanguage.isEmpty() && !m_oftenUsedLanguages.contains(iso639UiLanguage))
-      m_languageShortcuts << iso639UiLanguage;
+      m_languageShortcuts << LanguageShortcut{ iso639UiLanguage };
 
     m_languageShortcuts
-      << Q("en")                // English
-      << Q("und")               // undetermined
-      << Q("mul")               // multiple languages
-      << Q("zxx");              // no linguistic content
+      << LanguageShortcut { Q("en") }   // English
+      << LanguageShortcut { Q("und") }  // undetermined
+      << LanguageShortcut { Q("mul") }  // multiple languages
+      << LanguageShortcut { Q("zxx") }; // no linguistic content
   }
 
   if (m_oftenUsedLanguages.isEmpty()) {
@@ -700,6 +730,29 @@ Settings::loadRunProgramConfigurations(QSettings &reg) {
 }
 
 void
+Settings::loadLanguageShortcuts(QSettings &reg) {
+  m_languageShortcuts.clear();
+
+  reg.beginGroup(s_grpLanguageShortcuts);
+
+  auto groups = reg.childGroups();
+  groups.sort();
+
+  for (auto const &group : groups) {
+    LanguageShortcut shortcut;
+
+    reg.beginGroup(group);
+    shortcut.m_language  = reg.value(s_valLanguage).toString();
+    shortcut.m_trackName = reg.value(s_valTrackName).toString();
+    reg.endGroup();
+
+    m_languageShortcuts << shortcut;
+  }
+
+  reg.endGroup();               // languageShortcuts
+}
+
+void
 Settings::loadFileColors(QSettings &reg) {
   reg.beginGroup(s_grpSettings);
 
@@ -823,7 +876,6 @@ Settings::save()
   reg.setValue(s_valLastOutputDir,                             m_lastOutputDir.path());
   reg.setValue(s_valLastConfigDir,                             m_lastConfigDir.path());
 
-  reg.setValue(s_valLanguageShortcuts,                         m_languageShortcuts);
   reg.setValue(s_valOftenUsedLanguages,                        m_oftenUsedLanguages);
   reg.setValue(s_valOftenUsedRegions,                          m_oftenUsedRegions);
   reg.setValue(s_valOftenUsedCharacterSets,                    m_oftenUsedCharacterSets);
@@ -927,6 +979,7 @@ Settings::save()
   saveDefaultInfoJobSettings(reg);
   saveFileColors(reg);
   saveRunProgramConfigurations(reg);
+  saveLanguageShortcuts(reg);
 }
 
 void
@@ -1019,6 +1072,25 @@ Settings::saveRunProgramConfigurations(QSettings &reg)
   }
 
   reg.endGroup();               // runProgramConfigurations
+}
+
+void
+Settings::saveLanguageShortcuts(QSettings &reg)
+  const {
+  reg.beginGroup(s_grpLanguageShortcuts);
+
+  for (auto const &group : reg.childGroups())
+    reg.remove(group);
+
+  auto idx = 0;
+  for (auto const &shortcut : m_languageShortcuts) {
+    reg.beginGroup(Q("%1").arg(++idx, 4, 10, Q('0')));
+    reg.setValue(s_valLanguage,  shortcut.m_language);
+    reg.setValue(s_valTrackName, shortcut.m_trackName);
+    reg.endGroup();
+  }
+
+  reg.endGroup();               // languageShortcuts
 }
 
 void

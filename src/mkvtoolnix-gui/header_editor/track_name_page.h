@@ -29,6 +29,8 @@ public:
   virtual bool validateValue() const override;
   virtual void copyValueToElement() override;
 
+  virtual void setString(QString const &value);
+
 public Q_SLOTS:
   virtual void setupPredefinedTrackNames();
 };

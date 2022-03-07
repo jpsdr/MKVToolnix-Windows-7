@@ -336,6 +336,7 @@ Tab::setupUi() {
   connect(m_replaceAttachmentContentSetValuesAction, &QAction::triggered,                                 [this]() { replaceAttachmentContent(true); });
   connect(m_model,                                   &PageModel::attachmentsReordered,                    [this]() { m_attachmentsPage->rereadChildren(*m_model); });
   connect(m_model,                                   &PageModel::tracksReordered,                         this, &Tab::handleReorderedTracks);
+  connect(MainWindow::get(),                         &MainWindow::preferencesChanged,                     [this]() { m_modifyTracksSubmenu.setupLanguage(*m_languageShortcutsMenu); });
 }
 
 void
@@ -1017,7 +1018,8 @@ Tab::toggleTrackFlag() {
 }
 
 void
-Tab::changeTrackLanguage(QString const &formattedLanguage) {
+Tab::changeTrackLanguage(QString const &formattedLanguage,
+                         QString const &trackName) {
   auto language = mtx::bcp47::language_c::parse(to_utf8(formattedLanguage));
   if (!language.is_valid())
     return;
@@ -1041,6 +1043,20 @@ Tab::changeTrackLanguage(QString const &formattedLanguage) {
     }
 
     return !languageFound || !languageIETFFound;
+  });
+
+  if (trackName.isEmpty())
+    return;
+
+  walkPagesOfSelectedTopLevelNode([&trackName](auto *pageBase) -> bool {
+    auto trackNamePage = dynamic_cast<TrackNamePage *>(pageBase);
+
+    if (!trackNamePage)
+      return true;
+
+    trackNamePage->setString(trackName);
+
+    return false;
   });
 }
 

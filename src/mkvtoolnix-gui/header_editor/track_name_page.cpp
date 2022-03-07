@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QCheckBox>
 #include <QComboBox>
 #include <QLineEdit>
 
@@ -80,6 +81,14 @@ TrackNamePage::setupPredefinedTrackNames() {
   m_cbTrackName->clear();
   m_cbTrackName->addItems(list);
   m_cbTrackName->setCurrentText(name);
+}
+
+void
+TrackNamePage::setString(QString const &value) {
+  if (!m_present && !m_cbAddOrRemove->isChecked())
+    m_cbAddOrRemove->setChecked(true);
+
+  m_cbTrackName->setCurrentText(value);
 }
 
 }

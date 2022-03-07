@@ -2037,7 +2037,8 @@ Tab::toggleSpecificTrackFlag(unsigned int wantedId) {
 }
 
 void
-Tab::changeTrackLanguage(QString const &formattedLanguage) {
+Tab::changeTrackLanguage(QString const &formattedLanguage,
+                         QString const &trackName) {
   auto &p = *p_func();
 
   auto language = mtx::bcp47::language_c::parse(to_utf8(formattedLanguage));
@@ -2047,6 +2048,12 @@ Tab::changeTrackLanguage(QString const &formattedLanguage) {
 
   p.ui->trackLanguage->setLanguage(language);
   onTrackLanguageChanged(language);
+
+  if (trackName.isEmpty() || !p.ui->trackName->isEnabled())
+    return;
+
+  p.ui->trackName->setCurrentText(trackName);
+  onTrackNameChanged(trackName);
 }
 
 }

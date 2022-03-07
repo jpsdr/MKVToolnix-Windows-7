@@ -93,7 +93,7 @@ public Q_SLOTS:
   virtual void handleDroppedFiles(QStringList const &fileNames, Qt::MouseButtons mouseButtons);
   virtual void focusPage(PageBase *page);
   virtual void handleReorderedTracks();
-  virtual void changeTrackLanguage(QString const &formattedLanguage);
+  virtual void changeTrackLanguage(QString const &formattedLanguage, QString const &trackName);
   virtual void moveElementUpOrDown(bool up);
 
 protected:

@@ -57,7 +57,7 @@ public Q_SLOTS:
   virtual void enableMenuActions();
   virtual void showTab(Tab &tab);
   virtual void toggleTrackFlag();
-  virtual void changeTrackLanguage(QString const &formattedLanguage);
+  virtual void changeTrackLanguage(QString const &formattedLanguage, QString const &trackName);
 
 protected:
   virtual void setupModifyTracksMenu();

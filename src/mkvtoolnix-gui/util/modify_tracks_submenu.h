@@ -27,7 +27,7 @@ public:
   void retranslateUi();
 
 Q_SIGNALS:
-  void languageChangeRequested(QString const &language);
+  void languageChangeRequested(QString const &language, QString const &trackName);
 
 public Q_SLOTS:
   void languageChangeTriggered();

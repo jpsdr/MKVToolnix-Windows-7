@@ -64,7 +64,7 @@ public:
   virtual void addIdentifiedFilesAsAdditionalParts(QVector<SourceFilePtr> const &identifiedFiles, QModelIndex const &fileModelIdx);
 
   virtual void toggleSpecificTrackFlag(unsigned int wantedId);
-  virtual void changeTrackLanguage(QString const &formattedLanguage);
+  virtual void changeTrackLanguage(QString const &formattedLanguage, QString const &trackName);
 
 Q_SIGNALS:
   void removeThisTab();

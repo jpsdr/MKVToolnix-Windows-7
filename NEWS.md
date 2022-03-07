@@ -5,6 +5,9 @@
 * mkvpropedit: added a new option `--chapter-charset` allowing the user to
   specify the character set to use when reading the following chapter
   file. Implements #3276.
+* MKVToolNix GUI: each language shortcut can now be associated with an
+  optional track name that is set along with the language when the shortcut is
+  used. This is an alternative to the feature requested in #3283.
 
 ## Bug fixes
 

@@ -987,11 +987,12 @@ Tool::toggleTrackFlag() {
 }
 
 void
-Tool::changeTrackLanguage(QString const &formattedLanguage) {
+Tool::changeTrackLanguage(QString const &formattedLanguage,
+                          QString const &trackName) {
   auto tab = currentTab();
 
   if (tab)
-    tab->changeTrackLanguage(formattedLanguage);
+    tab->changeTrackLanguage(formattedLanguage, trackName);
 }
 
 }

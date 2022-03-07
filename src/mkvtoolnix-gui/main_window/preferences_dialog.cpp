@@ -17,6 +17,7 @@
 #include "mkvtoolnix-gui/chapter_editor/tool.h"
 #include "mkvtoolnix-gui/forms/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
+#include "mkvtoolnix-gui/main_window/prefs_language_shortcut_dialog.h"
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
@@ -551,8 +552,8 @@ void
 PreferencesDialog::setupConnections() {
   connect(ui->cbUseISO639_3Languages,                     &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::setupCommonLanguages);
 
-  connect(ui->lwGuiLanguageShortcuts,                     &QListWidget::itemSelectionChanged,                            this,                                 &PreferencesDialog::enableLanguageShortcutControls);
-  connect(ui->lwGuiLanguageShortcuts,                     &QListWidget::itemDoubleClicked,                               this,                                 &PreferencesDialog::editLanguageShortcut);
+  connect(ui->twGuiLanguageShortcuts,                     &QTreeWidget::itemSelectionChanged,                            this,                                 &PreferencesDialog::enableLanguageShortcutControls);
+  connect(ui->twGuiLanguageShortcuts,                     &QTreeWidget::itemDoubleClicked,                               this,                                 &PreferencesDialog::editLanguageShortcut);
   connect(ui->pbGuiAddLanguageShortcut,                   &QPushButton::clicked,                                         this,                                 &PreferencesDialog::addLanguageShortcut);
   connect(ui->pbGuiEditLanguageShortcut,                  &QPushButton::clicked,                                         this,                                 &PreferencesDialog::editLanguageShortcut);
   connect(ui->pbGuiRemoveLanguageShortcuts,               &QPushButton::clicked,                                         this,                                 &PreferencesDialog::removeLanguageShortcuts);
@@ -1381,16 +1382,25 @@ PreferencesDialog::reject() {
 
 void
 PreferencesDialog::setupLanguageShortcuts() {
-  for (auto const &formattedLanguage : m_cfg.m_languageShortcuts) {
-    auto language = mtx::bcp47::language_c::parse(to_utf8(formattedLanguage));
+  for (auto const &shortcut : m_cfg.m_languageShortcuts) {
+    auto language = mtx::bcp47::language_c::parse(to_utf8(shortcut.m_language));
     if (!language.is_valid())
       continue;
 
-    auto item = new QListWidgetItem{Q(language.format_long())};
-    item->setData(Qt::UserRole, Q(language.format()));
+    auto item = new QTreeWidgetItem{};
 
-    ui->lwGuiLanguageShortcuts->addItem(item);
+    item->setText(0, Q(language.format_long()));
+    item->setText(1, shortcut.m_trackName);
+
+    item->setData(0, Qt::UserRole, Q(language.format()));
+    item->setData(1, Qt::UserRole, shortcut.m_trackName);
+
+    item->setFlags(item->flags() & ~Qt::ItemIsDropEnabled);
+
+    ui->twGuiLanguageShortcuts->addTopLevelItem(item);
   }
+
+  Util::resizeViewColumnsToContents(ui->twGuiLanguageShortcuts);
 
   enableLanguageShortcutControls();
 }
@@ -1399,13 +1409,20 @@ void
 PreferencesDialog::saveLanguageShortcuts() {
   m_cfg.m_languageShortcuts.clear();
 
-  for (auto row = 0, numItems = ui->lwGuiLanguageShortcuts->count(); row < numItems; ++row)
-    m_cfg.m_languageShortcuts << ui->lwGuiLanguageShortcuts->item(row)->data(Qt::UserRole).toString();
+  for (auto row = 0, numItems = ui->twGuiLanguageShortcuts->topLevelItemCount(); row < numItems; ++row) {
+    Util::Settings::LanguageShortcut shortcut;
+
+    auto item            = ui->twGuiLanguageShortcuts->topLevelItem(row);
+    shortcut.m_language  = item->data(0, Qt::UserRole).toString();
+    shortcut.m_trackName = item->data(1, Qt::UserRole).toString();
+
+    m_cfg.m_languageShortcuts << shortcut;
+  }
 }
 
 void
 PreferencesDialog::enableLanguageShortcutControls() {
-  auto items = ui->lwGuiLanguageShortcuts->selectedItems();
+  auto items = ui->twGuiLanguageShortcuts->selectedItems();
 
   ui->pbGuiEditLanguageShortcut->setEnabled(items.size() == 1);
   ui->pbGuiRemoveLanguageShortcuts->setEnabled(items.size() > 0);
@@ -1413,44 +1430,59 @@ PreferencesDialog::enableLanguageShortcutControls() {
 
 void
 PreferencesDialog::addLanguageShortcut() {
-  mtx::gui::Util::LanguageDialog dlg{this};
+  mtx::gui::PrefsLanguageShortcutDialog dlg{this, true};
 
   if (!dlg.exec())
     return;
 
-  auto language = dlg.language();
-  auto item     = new QListWidgetItem{Q(language.format_long())};
+  auto language  = dlg.language();
+  auto trackName = dlg.trackName();
+  auto item      = new QTreeWidgetItem;
 
-  item->setData(Qt::UserRole, Q(language.format()));
+  item->setText(0, Q(language.format_long()));
+  item->setText(1, trackName);
 
-  ui->lwGuiLanguageShortcuts->addItem(item);
+  item->setData(0, Qt::UserRole, Q(language.format()));
+  item->setData(1, Qt::UserRole, trackName);
+
+  item->setFlags(item->flags() & ~Qt::ItemIsDropEnabled);
+
+  ui->twGuiLanguageShortcuts->addTopLevelItem(item);
 }
 
 void
 PreferencesDialog::editLanguageShortcut() {
-  auto items = ui->lwGuiLanguageShortcuts->selectedItems();
+  auto items = ui->twGuiLanguageShortcuts->selectedItems();
   if (items.isEmpty())
     return;
 
-  auto item     = items.first();
-  auto language = mtx::bcp47::language_c::parse(to_utf8(item->data(Qt::UserRole).toString()));
+  auto item      = items.first();
+  auto language  = mtx::bcp47::language_c::parse(to_utf8(item->data(0, Qt::UserRole).toString()));
+  auto trackName = item->data(1, Qt::UserRole).toString();
 
-  mtx::gui::Util::LanguageDialog dlg{this};
+  mtx::gui::PrefsLanguageShortcutDialog dlg{this, false};
 
   if (language.is_valid())
     dlg.setLanguage(language);
 
+  dlg.setTrackName(trackName);
+
   if (!dlg.exec())
     return;
 
-  language = dlg.language();
-  item->setText(Q(language.format_long()));
-  item->setData(Qt::UserRole, Q(language.format()));
+  language  = dlg.language();
+  trackName = dlg.trackName();
+
+  item->setText(0, Q(language.format_long()));
+  item->setText(1, trackName);
+
+  item->setData(0, Qt::UserRole, Q(language.format()));
+  item->setData(1, Qt::UserRole, trackName);
 }
 
 void
 PreferencesDialog::removeLanguageShortcuts() {
-  for (auto const &item : ui->lwGuiLanguageShortcuts->selectedItems())
+  for (auto const &item : ui->twGuiLanguageShortcuts->selectedItems())
     delete item;
 
   enableLanguageShortcutControls();

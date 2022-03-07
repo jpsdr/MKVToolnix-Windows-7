@@ -63,7 +63,7 @@ public Q_SLOTS:
   virtual void copyTitleToOutputFileName();
   virtual void addFilesFromClipboard();
   virtual void toggleTrackFlag();
-  virtual void changeTrackLanguage(QString const &formattedLanguage);
+  virtual void changeTrackLanguage(QString const &formattedLanguage, QString const &trackName);
 
   virtual void toolShown() override;
   virtual void tabTitleChanged();

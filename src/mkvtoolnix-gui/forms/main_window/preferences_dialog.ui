@@ -411,7 +411,7 @@
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_18">
            <item>
-            <widget class="QListWidget" name="lwGuiLanguageShortcuts">
+            <widget class="QTreeWidget" name="twGuiLanguageShortcuts">
              <property name="dragEnabled">
               <bool>true</bool>
              </property>
@@ -424,6 +424,22 @@
              <property name="selectionMode">
               <enum>QAbstractItemView::ExtendedSelection</enum>
              </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
+             <property name="rootIsDecorated">
+              <bool>false</bool>
+             </property>
+             <column>
+              <property name="text">
+               <string>Language</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Track name</string>
+              </property>
+             </column>
             </widget>
            </item>
            <item>
@@ -2550,7 +2566,7 @@
   <tabstop>cbOftenUsedRegionsOnly</tabstop>
   <tabstop>tbOftenUsedCharacterSets</tabstop>
   <tabstop>cbOftenUsedCharacterSetsOnly</tabstop>
-  <tabstop>lwGuiLanguageShortcuts</tabstop>
+  <tabstop>twGuiLanguageShortcuts</tabstop>
   <tabstop>pbGuiAddLanguageShortcut</tabstop>
   <tabstop>pbGuiEditLanguageShortcut</tabstop>
   <tabstop>pbGuiRemoveLanguageShortcuts</tabstop>

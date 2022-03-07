@@ -159,10 +159,16 @@ public:
     QString nameForPlayAudioFile() const;
   };
 
+  class LanguageShortcut {
+  public:
+    QString m_language, m_trackName;
+  };
+
   using RunProgramConfigPtr  = std::shared_ptr<RunProgramConfig>;
   using RunProgramConfigList = QList<RunProgramConfigPtr>;
+  using LanguageShortcutList = QVector<LanguageShortcut>;
 
-  QStringList m_languageShortcuts;
+  LanguageShortcutList m_languageShortcuts;
   bool m_useLegacyFontMIMETypes;
   mtx::bcp47::language_c m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage, m_defaultChapterLanguage;
   SetDefaultLanguagePolicy m_whenToSetDefaultLanguage;
@@ -261,6 +267,7 @@ protected:
   void loadSplitterSizes(QSettings &reg);
   void loadDefaultInfoJobSettings(QSettings &reg);
   void loadRunProgramConfigurations(QSettings &reg);
+  void loadLanguageShortcuts(QSettings &reg);
   void loadFileColors(QSettings &reg);
 
   void saveDefaults(QSettings &reg) const;
@@ -268,6 +275,7 @@ protected:
   void saveSplitterSizes(QSettings &reg) const;
   void saveDefaultInfoJobSettings(QSettings &reg) const;
   void saveRunProgramConfigurations(QSettings &reg) const;
+  void saveLanguageShortcuts(QSettings &reg) const;
   void saveFileColors(QSettings &reg) const;
 
   void addDefaultRunProgramConfigurations(QSettings &reg);

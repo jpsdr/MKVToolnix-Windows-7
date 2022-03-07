@@ -56,28 +56,36 @@ void
 ModifyTracksSubmenu::setupLanguage(QMenu &subMenu) {
   subMenu.clear();
 
-  auto idx = 0;
+  auto keyboardShortcutIdx = 0;
+  auto structIdx           = -1;
 
-  for (auto const &formattedLanguage : Util::Settings::get().m_languageShortcuts) {
-    auto language = mtx::bcp47::language_c::parse(to_utf8(formattedLanguage));
+  for (auto const &shortcut : Util::Settings::get().m_languageShortcuts) {
+    ++structIdx;
+
+    auto language = mtx::bcp47::language_c::parse(to_utf8(shortcut.m_language));
     if (!language.is_valid())
       continue;
 
-    ++idx;
+    ++keyboardShortcutIdx;
 
     auto action = new QAction{&subMenu};
-    action->setData(formattedLanguage);
-    action->setText(Q(language.format_long()));
+    auto text   = Q(language.format_long());
 
-    if (idx <= 10)
-      action->setShortcut(Q("Ctrl+Alt+A, %1").arg(idx % 10));
+    if (!shortcut.m_trackName.isEmpty())
+      text = Q("%1; %2: %3").arg(text).arg(QY("track name")).arg(shortcut.m_trackName);
+
+    action->setData(structIdx);
+    action->setText(text);
+
+    if (keyboardShortcutIdx <= 10)
+      action->setShortcut(Q("Ctrl+Alt+A, %1").arg(keyboardShortcutIdx % 10));
 
     subMenu.addAction(action);
 
     connect(action, &QAction::triggered, this, &ModifyTracksSubmenu::languageChangeTriggered);
   }
 
-  if (idx)
+  if (keyboardShortcutIdx)
     subMenu.addSeparator();
 
   m_configureLanguages = new QAction{&subMenu};
@@ -112,9 +120,16 @@ ModifyTracksSubmenu::languageChangeTriggered() {
   if (!action)
     return;
 
-  auto language = action->data().toString();
-  if (!language.isEmpty())
-    Q_EMIT languageChangeRequested(language);
+  auto const &shortcuts = Util::Settings::get().m_languageShortcuts;
+  auto structIdx        = action->data().toInt();
+
+  if ((structIdx < 0) || (structIdx >= shortcuts.size()))
+    return;
+
+  auto const &shortcut = shortcuts.at(structIdx);
+
+  if (!shortcut.m_language.isEmpty())
+    Q_EMIT languageChangeRequested(shortcut.m_language, shortcut.m_trackName);
 }
 
 }
