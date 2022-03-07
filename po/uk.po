@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2022-03-05 14:43+0100\n"
-"PO-Revision-Date: 2022-03-05 09:44+0000\n"
+"PO-Revision-Date: 2022-03-06 15:18+0000\n"
 "Last-Translator: Vlad Anisimov <uniss@ua.fm>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/uk/)\n"
@@ -26,7 +26,7 @@ msgid ""
 "The temporary TTA file for track ID {0} is being copied into the final TTA file. This may take some time.\n"
 msgstr ""
 "\n"
-"Тимчасовий файл TTA для доріжки з ID {0} у цей час копіюється до кінцевого файлу TTA. Це може зайняти деякий час.\n"
+"Тимчасовий файл TTA для доріжки з ID {0} копіюється до кінцевого файлу TTA. Це може зайняти деякий час.\n"
 
 #: src/merge/output_control.cpp:268
 #, no-c-format
@@ -85,8 +85,8 @@ msgid ""
 "                           file.\n"
 msgstr ""
 "  --append-to <SFID1:STID1:DFID1:DTID1,SFID2:STID2:DFID2:DTID2,...>\n"
-"                           Список розділених комою ID файлів і доріжок\n"
-"                           який контролює те, яка доріжка файлу\n"
+"                           Список розділених комою ID файлів і доріжок,\n"
+"                           який контролює яка доріжка файлу\n"
 "                           приєднується до іншої доріжки попереднього\n"
 "                           файлу.\n"
 
@@ -141,7 +141,7 @@ msgid ""
 "                           Description for the following attachment.\n"
 msgstr ""
 "  --attachment-description <desc>\n"
-"                           Опис для вказаного вкладення.\n"
+"                           Опис для наступного вкладення.\n"
 
 #: src/merge/mkvmerge.cpp:190
 #, no-c-format
@@ -150,7 +150,7 @@ msgid ""
 "                           Mime type for the following attachment.\n"
 msgstr ""
 "  --attachment-mime-type <mime type>\n"
-"                           Mime-тип для вказаного вкладення.\n"
+"                           MIME-тип для наступного вкладення.\n"
 
 #: src/merge/mkvmerge.cpp:192
 #, no-c-format
@@ -158,8 +158,8 @@ msgid ""
 "  --attachment-name <name> The name should be stored for the \n"
 "                           following attachment.\n"
 msgstr ""
-"  --attachment-name <name> Ім'я повинно зберігатися для \n"
-"                           вказаного вкладення.\n"
+"  --attachment-name <name> \n"
+"                           Ім'я для наступного вкладення.\n"
 
 #: src/merge/mkvmerge.cpp:259
 #, no-c-format
@@ -168,7 +168,7 @@ msgid ""
 "                           levels for this track.\n"
 msgstr ""
 "  --blockadd <TID:x>       Встановлює максимальну кількість рівнів\n"
-"                           для BlockAdditions вказаної доріжки.\n"
+"                            додаткового блоку для цієї доріжки.\n"
 
 #: src/merge/mkvmerge.cpp:382
 #, no-c-format
@@ -192,12 +192,12 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:100
 #, no-c-format
 msgid "  --chapter-charset <cset> Charset for a simple chapter file.\n"
-msgstr "  --chapter-charset <cset> Набір символів для простого файлу розділу.\n"
+msgstr "  --chapter-charset <cset> Набір символів для простого файлу глави.\n"
 
 #: src/merge/mkvmerge.cpp:99
 #, no-c-format
 msgid "  --chapter-language <lng> Set the 'language' element in chapter entries.\n"
-msgstr "  --chapter-language <lng> Встановити елемент 'language' в описі розділу.\n"
+msgstr "  --chapter-language <lng> Встановити елемент 'language' в описі глави.\n"
 
 #: src/merge/mkvmerge.cpp:101
 #, no-c-format
@@ -220,7 +220,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:98
 #, no-c-format
 msgid "  --chapters <file>        Read chapter information from the file.\n"
-msgstr "  --chapters <file>       Читати інформацію про розділи з файлу.\n"
+msgstr "  --chapters <file>       Читати інформацію про главу з файлу.\n"
 
 #: src/merge/mkvmerge.cpp:321
 #, no-c-format
@@ -328,7 +328,7 @@ msgid ""
 "                           Charset for strings on the command line\n"
 msgstr ""
 "  --command-line-charset <charset>\n"
-"                           Набір символів для рядків командного рядка\n"
+"                           Набір символів для командного рядка\n"
 
 #: src/merge/mkvmerge.cpp:256
 #, no-c-format
@@ -369,8 +369,8 @@ msgid ""
 "                           entries to chapter names.\n"
 msgstr ""
 "  --cue-chapter-name-format <format>\n"
-"                           Шаблон для перетворення записів файлу CUE\n"
-"                           в назви розділів.\n"
+"                           Шаблон для перетворення записів списку CUE\n"
+"                           в назви глав.\n"
 
 #: src/merge/mkvmerge.cpp:262
 #, no-c-format
@@ -380,8 +380,8 @@ msgid ""
 "                           None at all, only for I frames, for all.\n"
 msgstr ""
 "  --cues <TID:none|iframes|all>\n"
-"                           Створює записи cue (індекси) для цього треку:\n"
-"                           Ніяких не створює, лише для I кадрів, для всіх.\n"
+"                           Створює записи cue (індекси) для цієї доріжки:\n"
+"                           жодного | лише для I-кадрів | для всіх.\n"
 
 #: src/merge/mkvmerge.cpp:398
 #, no-c-format
@@ -396,8 +396,9 @@ msgid ""
 "                           X can be a floating point number or a fraction.\n"
 msgstr ""
 "  --default-duration <TID:Xs|ms|us|ns|fps>\n"
-"                           Примусово вказувати типову тривалість доріжки як X.\n"
-"                           X може бути числом з плаваючою точкою або дробом.\n"
+"                           Примусово встановлює тривалість за замовчуванням\n"
+"                           доріжки як X. X може бути числом з плаваючою \n"
+"                           точкою або дробом.\n"
 
 #: src/merge/mkvmerge.cpp:111
 #, no-c-format
@@ -491,7 +492,8 @@ msgid ""
 msgstr ""
 "  --fix-bitstream-timing-information <TID[:bool]>\n"
 "                           Налаштовує швидкість відтворення кадрів/полів, яка\n"
-"                           збережена у відеопотоці, під типову тривалість доріжки.\n"
+"                           збережена у відеопотоці, під тривалість доріжки за \n"
+"                           замовчуванням.\n"
 
 #: src/merge/mkvmerge.cpp:390
 #, no-c-format
@@ -522,7 +524,7 @@ msgid ""
 "                           the mode ('when-appending' or 'interval:<duration>').\n"
 msgstr ""
 "  --generate-chapters <mode>\n"
-"                           Автоматичне генерування розділів відповідно до\n"
+"                           Автоматичне генерування глав відповідно до\n"
 "                           режиму ('when-appending' або 'interval:<duration>').\n"
 
 #: src/merge/mkvmerge.cpp:116
@@ -533,8 +535,8 @@ msgid ""
 "                           (default: 'Chapter <NUM:2>').\n"
 msgstr ""
 "  --generate-chapters-name-template <template>\n"
-"                           Шаблон для назв розділів, що генеруються\n"
-"                           (типово: 'Chapter <NUM:2>').\n"
+"                           Шаблон для назв глав, що генеруються\n"
+"                           (за замовчуванням: 'Chapter <NUM:2>').\n"
 
 #: src/merge/mkvmerge.cpp:95
 #, no-c-format
@@ -559,7 +561,7 @@ msgid ""
 "  --language <TID:lang>    Sets the language for the track (IETF BCP 47/\n"
 "                           RFC 5646 language tag).\n"
 msgstr ""
-"  --language <TID:lang>    Встановлює мову для треку \n"
+"  --language <TID:lang>    Встановлює мову для доріжки\n"
 "                           (тег мови IETF BCP 47/RFC 5646).\n"
 
 #: src/merge/mkvmerge.cpp:167
@@ -633,7 +635,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:227
 #, no-c-format
 msgid "  --no-chapters            Don't keep chapters from the source file.\n"
-msgstr "  --no-chapters            Не брати розділи з вхідного файлу.\n"
+msgstr "  --no-chapters            Не брати глави з вхідного файлу.\n"
 
 #: src/merge/mkvmerge.cpp:137
 #, no-c-format
@@ -685,8 +687,8 @@ msgid ""
 "                           (default: 0.3).\n"
 msgstr ""
 "  --probe-range-percentage <percent>\n"
-"                           Встановлює максимальний розмір для зондування треків \n"
-"                           у відсотках від загального розміру файла для певних \n"
+"                           Встановлює максимальний розмір зондування доріжок\n"
+"                           у відсотках від загального розміру файла для певних\n"
 "                           типів файлів (за замовчуванням: 0.3).\n"
 
 #: src/merge/mkvmerge.cpp:353
@@ -781,7 +783,7 @@ msgid ""
 msgstr ""
 "  --split <d[K,M,G]|HH:MM:SS|s>\n"
 "                           Створюється новий файл після d байт (КБ, МБ, ГБ)\n"
-"                           або після вказаного часу.\n"
+"                           або після певного часу.\n"
 
 #: src/merge/mkvmerge.cpp:163
 #, no-c-format
@@ -791,8 +793,8 @@ msgid ""
 "                           or before chapter numbers A, B etc.\n"
 msgstr ""
 "  --split chapters:all|A[,B...]\n"
-"                           Створюється новий файл перед кожним розділом (при використанні 'all')\n"
-"                           або перед номерами розділів A, B і т.д.\n"
+"                           Створюється новий файл перед кожною главою (при\n"
+"                           використанні 'all') або перед номерами глав A, B і т.д.\n"
 
 #: src/merge/mkvmerge.cpp:160
 #, no-c-format
@@ -837,7 +839,7 @@ msgid ""
 "                           etc.\n"
 msgstr ""
 "  --split timestamps:A[,B...]\n"
-"                           Створюється новий файл після кожного тайм-коду A, B\n"
+"                           Створюється новий файл після кожної мітки часу A, B\n"
 "                           і т.д.\n"
 
 #: src/merge/mkvmerge.cpp:166
@@ -932,8 +934,8 @@ msgid ""
 "  --track-tags <n,m,...>   Copy the tags for tracks n,m etc. Default: copy\n"
 "                           tags for all tracks.\n"
 msgstr ""
-"  --track-tags <n,m,...>   Копіювати теги для доріжок n, m і т.д. Типово: копіювати\n"
-"                           теги для всіх доріжок.\n"
+"  --track-tags <n,m,...>   Копіювати теги для доріжок n, m і т.д.\n"
+"                           За замовчуванням: копіює теги для всіх доріжок.\n"
 
 #: src/merge/mkvmerge.cpp:384
 #, no-c-format
@@ -1028,8 +1030,8 @@ msgid ""
 "                           audio tracks.\n"
 msgstr ""
 "  -a, --audio-tracks <n,m,...>\n"
-"                           Копіювати аудіодоріжки n, m і т.д. Типово: копіювати\n"
-"                           всі звукові доріжки.\n"
+"                           Копіювати аудіодоріжки n, m і т.д. \n"
+"                           За замовчуванням: копіює всі звукові доріжки.\n"
 
 #: src/merge/mkvmerge.cpp:213
 #, no-c-format
@@ -1039,8 +1041,8 @@ msgid ""
 "                           all buttons tracks.\n"
 msgstr ""
 "  -b, --button-tracks <n,m,...>\n"
-"                           Копіювати доріжки кнопок меню DVD n, m і т.д. Типово:\n"
-"                           копіювати всі доріжки кнопок.\n"
+"                           Копіювати доріжки кнопок меню DVD n, m і т.д.\n"
+"                           За замовчуванням: копіює всі доріжки кнопок.\n"
 
 #: src/merge/mkvmerge.cpp:205
 #, no-c-format
@@ -1050,8 +1052,8 @@ msgid ""
 "                           video tracks.\n"
 msgstr ""
 "  -d, --video-tracks <n,m,...>\n"
-"                           Копіювати відео доріжки n, m т.д. Типово: копіювати\n"
-"                           всі відеодоріжки.\n"
+"                           Копіювати відео доріжки n, m т.д.\n"
+"                           За замовчуванням: копіює всі відеодоріжки.\n"
 
 #: src/merge/mkvmerge.cpp:284
 #, no-c-format
@@ -1087,8 +1089,8 @@ msgid ""
 msgstr ""
 "  -m, --attachments <n[:all|first],m[:all|first],...>\n"
 "                           Копіювати вкладення з IDs n, m і т.д. до всіх або\n"
-"                           тільки першого вихідних файлів. Типово: копіювати\n"
-"                           всі вкладення до всіх вихідних файлів.\n"
+"                           тільки першого вихідних файлів. За замовчуванням:\n"
+"                           копіює всі вкладення до всіх вихідних файлів.\n"
 
 #: src/merge/mkvmerge.cpp:92
 #, no-c-format
@@ -1112,8 +1114,8 @@ msgid ""
 "                           all subtitle tracks.\n"
 msgstr ""
 "  -s, --subtitle-tracks <n,m,...>\n"
-"                           Копіювати доріжки субтитрів n, m і т.д. Типово:\n"
-"                           копіювати всі доріжки субтитрів.\n"
+"                           Копіювати доріжки субтитрів n, m і т.д.\n"
+"                           За замовчуванням: копіює всі доріжки субтитрів.\n"
 
 #: src/merge/mkvmerge.cpp:222
 #, no-c-format
@@ -1138,11 +1140,10 @@ msgid ""
 msgstr ""
 "  -y, --sync <TID:d[,o[/p]]>\n"
 "                           Синхронізує і налаштувує мітки часу доріжок з id TID\n"
-"                           на 'd' мс.\n"
-"                           'o/p': Регулює мітки часу шляхом множення на 'o/p'\n"
-"                           для усунення лінійного зсуву. Типово 'p' дорівнює 1,\n"
-"                           якщо не вказано. Обидва 'o' і 'p' можуть бути\n"
-"                           числами з плаваючою комою.\n"
+"                           на 'd' мс. 'o/p': Регулює мітки часу шляхом множення\n"
+"                           на 'o/p' для усунення лінійного зсуву. За\n"
+"                           замовчуванням 'p' дорівнює 1. Обидва 'o' і 'p'\n"
+"                           можуть бути числами з плаваючою комою.\n"
 
 #: src/merge/mkvmerge.cpp:178
 #, no-c-format
@@ -1293,7 +1294,7 @@ msgstr " Підтримка вкладень (більше глобальних 
 #: src/merge/mkvmerge.cpp:97
 #, no-c-format
 msgid " Chapter handling:\n"
-msgstr " Обробка розділів:\n"
+msgstr " Обробка глав:\n"
 
 #: src/merge/mkvmerge.cpp:146
 #, no-c-format
@@ -1405,14 +1406,14 @@ msgstr "Прапорець \"Коментарій\":"
 #: src/common/property_element.cpp:134
 #, no-c-format
 msgid "\"Default track\" flag"
-msgstr "Прапорець \"типова доріжка\""
+msgstr "Прапорець \"доріжка за замовчуванням\""
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:310
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1810
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:79
 #, no-c-format
 msgid "\"Default track\" flag:"
-msgstr "Прапорець \"типова доріжка\":"
+msgstr "Прапорець \"доріжка за замовчуванням\":"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:564
 #, no-c-format
@@ -1514,9 +1515,9 @@ msgstr "%1 автоматично, %2 вручну, %3 працює"
 #, no-c-format
 msgid "%1 bit per sample"
 msgid_plural "%1 bits per sample"
-msgstr[0] "%1 Біт на семпл"
-msgstr[1] "%1 Біти на семпл"
-msgstr[2] "%1 Бітів на семпл"
+msgstr[0] "%1 біт на семпл"
+msgstr[1] "%1 біти на семпл"
+msgstr[2] "%1 бітів на семпл"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:123
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:127
@@ -1597,7 +1598,7 @@ msgstr "%h – години"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:344
 #, no-c-format
 msgid "%m – minutes"
-msgstr "%m – хвилин"
+msgstr "%m – хвилини"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:348
 #, no-c-format
@@ -1613,19 +1614,19 @@ msgstr "%p%"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:346
 #, no-c-format
 msgid "%s – seconds"
-msgstr "%s – секунд"
+msgstr "%s – секунди"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:302
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:197
 #, no-c-format
 msgid "&Abort job"
-msgstr "&Перервати виконання завдання"
+msgstr "&Перервати завдання"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:519
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:463
 #, no-c-format
 msgid "&Abort jobs"
-msgstr "&Перервати виконання завдань"
+msgstr "&Перервати завдань"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:413
 #, no-c-format
@@ -1701,7 +1702,7 @@ msgstr "&Редактор глав"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:182
 #, no-c-format
 msgid "&Chapter number of first created entry:"
-msgstr "&Номер розділу першого створеного запису:"
+msgstr "&Номер глав першого створеного запису:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2170
 #, no-c-format
@@ -1779,7 +1780,7 @@ msgstr "Налаштувати доступні мови"
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
 #, no-c-format
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
-msgstr "Звужувати початкові і кінцеві мітки часу підглав до початкових і кінцевих міток часу їхніх батьків"
+msgstr "Звужувати початкові і кінцеві мітки часу суб-глав до початкових і кінцевих міток часу їхніх батьків"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:879
 #, no-c-format
@@ -1799,7 +1800,7 @@ msgstr "Створити файл без звукової доріжки"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:521
 #, no-c-format
 msgid "&Default"
-msgstr "&Типово"
+msgstr "&За замовчуванням"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:174
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1900
@@ -1815,7 +1816,7 @@ msgstr "Від’єднати вікно"
 #: src/mkvtoolnix-gui/merge/input.cpp:1499
 #, no-c-format
 msgid "&Disable all items"
-msgstr "&Заборонити усі доріжки"
+msgstr "&Вимкнути усі доріжки"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:389
 #, no-c-format
@@ -1858,7 +1859,7 @@ msgstr "Видалити текст у заголовках вкладок аб�
 #: src/mkvtoolnix-gui/merge/input.cpp:1498
 #, no-c-format
 msgid "&Enable all items"
-msgstr "&Дозволити усі доріжки"
+msgstr "&Увімкнути усі доріжки"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:388
 #, no-c-format
@@ -1871,7 +1872,7 @@ msgstr[2] "&Ввімкнути відмічених вкладених файл�
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:525
 #, no-c-format
 msgid "&Enabled"
-msgstr "&Задіяно"
+msgstr "&Увімкнуто"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:119
 #, no-c-format
@@ -1912,7 +1913,7 @@ msgstr "&Перший запис для зміни нумерації:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2050
 #, no-c-format
 msgid "&Font && size:"
-msgstr "&Шрифт && розмір:"
+msgstr "&Шрифт та розмір:"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:356
 #, no-c-format
@@ -1922,7 +1923,7 @@ msgstr "Введення у довільній формі"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:237
 #, no-c-format
 msgid "&Generate sub-chapters"
-msgstr "Ст&ворення підрозділів"
+msgstr "Ст&ворення суб-глав"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:700
 #, no-c-format
@@ -1960,7 +1961,7 @@ msgstr "&Інфо"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1850
 #, no-c-format
 msgid "&Input"
-msgstr "&На вході"
+msgstr "&Вхід"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:443
 #, no-c-format
@@ -1976,7 +1977,7 @@ msgstr "&Черга завдань"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:183
 #, no-c-format
 msgid "&Language of chapter names to replace:"
-msgstr "&Змінити мову для назви розділу:"
+msgstr "&Мова назв глав, які потрібно замінити:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:182
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1815
@@ -1999,7 +2000,7 @@ msgstr "&MIME-тип:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2161
 #, no-c-format
 msgid "&Minimum playlist duration:"
-msgstr "&Мінімальна тривалість списків відтворення:"
+msgstr "&Мінімальна тривалість списку відтворення:"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:159
 #, no-c-format
@@ -2065,7 +2066,7 @@ msgstr "&Кількість записів для зміни нумерації:
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2149
 #, no-c-format
 msgid "&Only enable copying of tracks with specific languages by default"
-msgstr "&Увімкнути копіювання лише доріжок з конкретними мовами за замовчуванням"
+msgstr "&Увімкнути копіювання лише доріжок з певними мовами за замовчуванням"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2069
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2071
@@ -2085,7 +2086,7 @@ msgstr "Використовуйте лише перший вхідний фай
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:771
 #, no-c-format
 msgid "&Open Matroska or WebM file"
-msgstr "&Відкрити Matroska або файл розділу"
+msgstr "&Відкрити файл Matroska або WebM"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:117
 #, no-c-format
@@ -2096,7 +2097,7 @@ msgstr "&Відкрити як нові вкладки в Редакторі з�
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:147
 #, no-c-format
 msgid "&Open folder"
-msgstr "&Відкрити теку"
+msgstr "&Відкрити каталог"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:640
 #: src/mkvtoolnix-gui/forms/merge/tool.h:229
@@ -2183,7 +2184,7 @@ msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
 msgstr[0] "&Видалити вкладення"
 msgstr[1] "&Видалити вкладення"
-msgstr[2] "&Видалити вкладень"
+msgstr[2] "&Видалити вкладення"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
 #, no-c-format
@@ -2196,7 +2197,7 @@ msgid "&Remove file"
 msgid_plural "&Remove files"
 msgstr[0] "&Видалити файл"
 msgstr[1] "&Видалити файли"
-msgstr[2] "&Видалити файлів"
+msgstr[2] "&Видалити файли"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:217
 #, no-c-format
@@ -2214,12 +2215,12 @@ msgstr "&Видаляти завдання з черги після заверш
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:383
 #, no-c-format
 msgid "&Remove selected attachment"
-msgstr "&Видалити виділене вкладення"
+msgstr "&Видалити обране вкладення"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:234
 #, no-c-format
 msgid "&Remove selected edition or chapter"
-msgstr "&Видалити вибрану редакцію або розділ"
+msgstr "&Видалити обрану редакцію або главу"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:202
 #, no-c-format
@@ -2256,12 +2257,12 @@ msgstr "&Зберегти налаштування"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2156
 #, no-c-format
 msgid "&Scan directory for other playlists:"
-msgstr "&Сканувати теку на наявність інших списків відтворення:"
+msgstr "&Сканувати каталог на наявність інших списків відтворення:"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:31
 #, no-c-format
 msgid "&Scan for other playlists"
-msgstr "&Сканувати інші списки відтворення"
+msgstr "&Сканувати на наявність інших списків відтворення"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:366
 #, no-c-format
@@ -2281,7 +2282,7 @@ msgstr "&Вибрати всі елементи"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:184
 #, no-c-format
 msgid "&Skip chapters flagged \"hidden\""
-msgstr "&Пропускати розділи з прапорцем \"приховано\""
+msgstr "&Пропускати глави з прапорцем \"приховано\""
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:256
 #, no-c-format
@@ -2291,12 +2292,12 @@ msgstr "&Пропустити файл"
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 #, no-c-format
 msgid "&Sort chapters by their start and end timestamps"
-msgstr "&Сортувати розділи за їхніми початковими і кінцевими тайм-кодами"
+msgstr "&Сортувати глави за їхніми початковими і кінцевими мітками часу"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:529
 #, no-c-format
 msgid "&Start && end:"
-msgstr "&Початок && кінець:"
+msgstr "&Початок та кінець:"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:214
 #, no-c-format
@@ -2309,7 +2310,7 @@ msgstr[2] "&Розпочати завдання автоматично"
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:183
 #, no-c-format
 msgid "&Start timestamp of first created entry:"
-msgstr "&Стартовий тайм-код першого створеного запису:"
+msgstr "&Початкова мітка часу першого створеного запису:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2126
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2131
@@ -2331,7 +2332,7 @@ msgstr "&Редактор тегів"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1800
 #, no-c-format
 msgid "&Tracks, chapters and tags:"
-msgstr "&Доріжки, розділи, і теги:"
+msgstr "&Доріжки, глави, і теги:"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:334
 #, no-c-format
@@ -2363,7 +2364,7 @@ msgstr "Варіанти:"
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
 #, no-c-format
 msgid "&Verbosity:"
-msgstr "Рівень виводу відлагодження:"
+msgstr "Рівень докладності виводу:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2152
 #: src/mkvtoolnix-gui/merge/input.cpp:1501
@@ -2380,7 +2381,7 @@ msgstr "&Відеодоріжки:"
 #: src/mkvtoolnix-gui/jobs/tool.cpp:407
 #, no-c-format
 msgid "&View output"
-msgstr "&Перегляд вихідної інформації завдання"
+msgstr "&Перегляд виводу"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:340
 #, no-c-format
@@ -2390,7 +2391,7 @@ msgstr "Гучність:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2127
 #, no-c-format
 msgid "&When to set the language:"
-msgstr "&Коли задавати мову:"
+msgstr "&Коли встановлювати мову:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:792
 #, no-c-format
@@ -2400,12 +2401,12 @@ msgstr "Вікно"
 #: src/merge/mkvmerge.cpp:2532
 #, no-c-format
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
-msgstr "'--aspect-ratio' не містить значення співвідношення сторін екрану.\n"
+msgstr "'--aspect-ratio' не містить співвідношення сторін.\n"
 
 #: src/merge/mkvmerge.cpp:2539
 #, no-c-format
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
-msgstr "'--aspect-ratio-factor' не містить коефіцієнту співвідношення сторін екрану.\n"
+msgstr "'--aspect-ratio-factor' не містить коефіцієнту співвідношення сторін.\n"
 
 #: src/merge/mkvmerge.cpp:2342
 #, no-c-format
@@ -2415,7 +2416,7 @@ msgstr "'--attachment-description' не містить опису.\n"
 #: src/merge/mkvmerge.cpp:2351
 #, no-c-format
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
-msgstr "'--attachment-mime-type' не містить MIME-тип.\n"
+msgstr "'--attachment-mime-type' не містить MIME-типу.\n"
 
 #: src/merge/mkvmerge.cpp:2361
 #, no-c-format
@@ -2480,7 +2481,7 @@ msgstr "'--cue-chapter-name-format' не містить формату.\n"
 #: src/merge/mkvmerge.cpp:2414
 #, no-c-format
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
-msgstr "'--cue-chapter-name-format' повинно бути занадано перед '--chapters'.\n"
+msgstr "'--cue-chapter-name-format' повинно бути надано перед '--chapters'.\n"
 
 #: src/merge/mkvmerge.cpp:2546
 #, no-c-format
@@ -2495,12 +2496,12 @@ msgstr "'--engage' не містить власного аргументу.\n"
 #: src/merge/mkvmerge.cpp:2430
 #, no-c-format
 msgid "'--generate-chapters' lacks the mode.\n"
-msgstr "'--generate-chapters' без вказання режиму.\n"
+msgstr "'--generate-chapters' не містить режиму.\n"
 
 #: src/merge/mkvmerge.cpp:2200
 #, no-c-format
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
-msgstr "'--generate-chapters-name-template' без вказання шаблону назви.\n"
+msgstr "'--generate-chapters-name-template' не містить шаблону назви.\n"
 
 #: src/merge/mkvmerge.cpp:2381
 #, no-c-format
@@ -2606,12 +2607,12 @@ msgstr "'{0}' не є ні вірним ISO 639-2, ні ISO 639-1 кодом. П
 #: src/common/chapters/chapters.cpp:315
 #, no-c-format
 msgid "'{0}' is not a CHAPTERxx=... line."
-msgstr "'{0}' не є CHAPTERxx =... лінією."
+msgstr "'{0}' не є рядком CHAPTERxx =..."
 
 #: src/common/chapters/chapters.cpp:319
 #, no-c-format
 msgid "'{0}' is not a CHAPTERxxNAME=... line."
-msgstr "'{0}' не є CHAPTERxxNAME =... лінією."
+msgstr "'{0}' не є рядком CHAPTERxxNAME =..."
 
 #: src/common/chapters/dvd.cpp:133
 #, no-c-format
@@ -2643,7 +2644,7 @@ msgstr "'{0}' не є правильним режимом приєднання �
 #: src/merge/mkvmerge.cpp:1604
 #, no-c-format
 msgid "'{0}' is not a valid block additional max in '--blockadd {1}'.\n"
-msgstr "'{0}' не є допустимим блоком додаткових 'max' в '--blockadd {1}'.\n"
+msgstr "'{0}' не є допустимим max значенням додаткового блоку в '--blockadd {1}'.\n"
 
 #: src/common/xml/ebml_chapters_converter.cpp:154
 #, no-c-format
@@ -2669,7 +2670,7 @@ msgstr "'{0}' не є вірним застосуванням.\n"
 #: src/merge/mkvmerge.cpp:1520
 #, no-c-format
 msgid "'{0}' is not a valid mapping of file and track IDs in '--append-to {1}'.\n"
-msgstr "'{0}' не є коректним відображенням ID файлів і доріжок в '--append-to {1}'.\n"
+msgstr "'{0}' не є коректним розподіленям файлу і ID доріжок в '--append-to {1}'.\n"
 
 #: src/merge/mkvmerge.cpp:1474
 #, no-c-format
@@ -2679,12 +2680,12 @@ msgstr "'{0}' не є вірною парою ID файлу і доріжки в
 #: src/merge/mkvmerge.cpp:1596
 #, no-c-format
 msgid "'{0}' is not a valid pair of track ID and block additional in '--blockadd {0}'.\n"
-msgstr "'{0}' не є допустимою парою ID доріжоки і блоку додаткового в '--blockadd {0}'.\n"
+msgstr "'{0}' не є допустимою парою ID доріжки і додаткового блоку в '--blockadd {0}'.\n"
 
 #: src/merge/mkvmerge.cpp:1549
 #, no-c-format
 msgid "'{0}' is not a valid pair of track ID and default duration in '--default-duration {0}'.\n"
-msgstr "'{0}' не є допустимою парою ID доріжки і типової тривалості в '--default-duration {0}'.\n"
+msgstr "'{0}' не є допустимою парою ID доріжки і тривалості за замовчуванням в '--default-duration {0}'.\n"
 
 #: src/merge/mkvmerge.cpp:1641
 #, no-c-format
@@ -2714,7 +2715,7 @@ msgstr "'{0}' не розпізнається як допустимий числ
 #: src/extract/extract_cli_parser.cpp:159
 #, no-c-format
 msgid "'{0}' is only allowed when extracting chapters.\n"
-msgstr "'{0}' допускається тільки при витяганні розділів.\n"
+msgstr "'{0}' допускається тільки при витягуванні глав.\n"
 
 #: src/extract/extract_cli_parser.cpp:156
 #, no-c-format
@@ -2853,7 +2854,7 @@ msgstr "(Невідомий елемент: {0}; ID: 0x{1} розмір: {2})"
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:202
 #, no-c-format
 msgid "(additional part)"
-msgstr "(додаткові частини)"
+msgstr "(додаткова частина)"
 
 #: src/input/r_flac.cpp:95
 #, no-c-format
@@ -2895,7 +2896,7 @@ msgstr ", позиція {0}"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:328
 #, no-c-format
 msgid "--- Errors emitted by job '%1' started on %2 ---"
-msgstr "--- Помилки, згенеровані під час виконання завдання \"%1\" розпочатого в: %2 ---"
+msgstr "--- Помилки, згенеровані впродовж завдання \"%1\" розпочатого в: %2 ---"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:346
 #, no-c-format
@@ -2905,7 +2906,7 @@ msgstr "--- Звіт про завдання '%1' розпочате в: %2 ---"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:327
 #, no-c-format
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
-msgstr "--- Попередження, згенеровані під час виконання завдання \"%1\" розпочатого в: %2 ---"
+msgstr "--- Попередження, згенеровані впродовж завдання \"%1\" розпочатого в: %2 ---"
 
 #: src/propedit/propedit_cli_parser.cpp:272
 #, no-c-format
@@ -2920,7 +2921,7 @@ msgstr "1: всі кадри"
 #: src/propedit/propedit_cli_parser.cpp:273
 #, no-c-format
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
-msgstr "2. Число з префіксом '=', що буде інтепретуватися як унікальний ID вкладення (UID) як вказано в  'mkvmerge --identify'. Це зазвичай випадково згенеровані числа (наприклад,  '128975986723')."
+msgstr "2. Число з префіксом '=', що буде інтепретуватися як UID вкладення, як вказано в  'mkvmerge --identify'. Це зазвичай випадково згенеровані числа (наприклад,  '128975986723')."
 
 #: src/common/kax_info.cpp:778
 #, no-c-format
@@ -2935,17 +2936,17 @@ msgstr "3. Або 'name:<value>', або 'mime-type:<value>', у випадку 
 #: src/common/xml/ebml_chapters_converter.cpp:119
 #, no-c-format
 msgid "<ChapterAtom> is missing the <ChapterTimeStart> child."
-msgstr "<ChapterAtom> пропускає складову <ChapterTimeStart>."
+msgstr "<ChapterAtom> не має складової <ChapterTimeStart>."
 
 #: src/common/xml/ebml_chapters_converter.cpp:169
 #, no-c-format
 msgid "<ChapterDisplay> is missing the <ChapterString> child."
-msgstr "<ChapterDisplay> пропускає складову <ChapterString>."
+msgstr "<ChapterDisplay> не має складової <ChapterString>."
 
 #: src/common/xml/ebml_chapters_converter.cpp:126
 #, no-c-format
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
-msgstr "<ChapterTrack> пропускає складову <ChapterTrackNumber>."
+msgstr "<ChapterTrack> не має складової <ChapterTrackNumber>."
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:413
 #: src/mkvtoolnix-gui/merge/input.cpp:699
@@ -2963,7 +2964,7 @@ msgstr "<Немає вихідного файлу>"
 #: src/common/xml/ebml_tags_converter.cpp:108
 #, no-c-format
 msgid "<Simple> is missing the <Name> child."
-msgstr "<Simple> пропускає складову <Name>."
+msgstr "<Simple> не має складової <Name>."
 
 #: src/common/xml/ebml_tags_converter.cpp:115
 #, no-c-format
@@ -2973,14 +2974,14 @@ msgstr "<Simple> має містити або <String>, або дочірній 
 #: src/common/xml/ebml_tags_converter.cpp:101
 #, no-c-format
 msgid "<Tag> is missing the <Simple> child."
-msgstr "<Tag> пропускає складову <Simple>."
+msgstr "<Tag> не має складової <Simple>."
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:207
 #: src/mkvtoolnix-gui/chapter_editor/name_model.cpp:120
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:105
 #, no-c-format
 msgid "<Unnamed>"
-msgstr "<Не названо>"
+msgstr "<безіменний>"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:213
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:263
@@ -3002,7 +3003,7 @@ msgstr "Блок був знайдений на позиції {0} для дор
 #: src/mkvtoolnix-gui/merge/output.cpp:338
 #, no-c-format
 msgid "A chapter starting at 0s is never considered for splitting and discarded silently."
-msgstr "Розділ, що починається з 0с, ніколи не враховується при розбитті і пропускається без попереджень."
+msgstr "Глава, що починається з 0с, ніколи не враховується при розділенні і пропускається без попереджень."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:304
 #, no-c-format
@@ -3012,12 +3013,12 @@ msgstr "Список, розділених комою діапазонів но�
 #: src/mkvtoolnix-gui/merge/output.cpp:321
 #, no-c-format
 msgid "A comma-separated list of frame/field numbers after which to split."
-msgstr "Список, розділених комою номерів кадрів/полів, після яких здійснювати розбиття."
+msgstr "Список, розділених комою номерів кадрів/полів, після яких здійснювати розділення."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:294
 #, no-c-format
 msgid "A comma-separated list of timestamp ranges of content to keep."
-msgstr "Список, розділених комою діапазонів тайм-кодів контенту для обробки."
+msgstr "Список, розділених комою діапазонів міток часу контенту для обробки."
 
 #: src/input/r_matroska.cpp:752
 #, no-c-format
@@ -3039,7 +3040,7 @@ msgstr "Зручний для сприйняття людиною рядок, я
 #: src/common/property_element.cpp:144
 #, no-c-format
 msgid "A human-readable track name."
-msgstr "Зручна для сприйняття людиною назва треку."
+msgstr "Зручна для сприйняття людиною назва доріжки."
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:619
 #, no-c-format
@@ -3078,7 +3079,7 @@ msgstr "Доріжка з ID {0} була запитана, але вона не
 #: src/common/property_element.cpp:132
 #, no-c-format
 msgid "A unique ID to identify the Track. This should be kept the same when making a direct stream copy of the Track to another file."
-msgstr "Унікальний ID для ідентифікації Доріжки. Він повинен бути збережений тим самим при безпосередньому копіюванні Доріжки до іншого файлу."
+msgstr "Унікальний ID для ідентифікації доріжки. Він повинен бути збережений тим самим при безпосередньому копіюванні доріжки до іншого файлу."
 
 #: src/common/property_element.cpp:125
 #, no-c-format
@@ -3278,7 +3279,7 @@ msgstr "Дії для опрацювання властивостей"
 #: src/propedit/propedit_cli_parser.cpp:230
 #, no-c-format
 msgid "Actions for handling tags and chapters"
-msgstr "Дії для опрацювання тегів і розділів"
+msgstr "Дії для опрацювання тегів і глав"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2163
 #, no-c-format
@@ -3355,7 +3356,7 @@ msgstr "Додати медіафайли як додаткові частини
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:233
 #, no-c-format
 msgid "Add new &sub-chapter inside"
-msgstr "Додати &підрозділ всередину"
+msgstr "Додати &суб-главу всередину"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:231
 #, no-c-format
@@ -3380,17 +3381,17 @@ msgstr "Додати нову р&едакцію після"
 #: src/propedit/propedit_cli_parser.cpp:232
 #, no-c-format
 msgid "Add or replace chapters in the file with the ones from 'filename' or remove them if 'filename' is empty"
-msgstr "Додати або замінити розділи у файлі тими, що зазначені у 'filename' або видалити їх, якщо у 'filename' порожньо"
+msgstr "Додати або замінити глави у файлі тими, що зазначені у 'filename' або видалити їх, якщо у 'filename' порожньо"
 
 #: src/propedit/propedit_cli_parser.cpp:231
 #, no-c-format
 msgid "Add or replace tags in the file with the ones from 'filename' or remove them if 'filename' is empty (see below and man page for syntax)"
-msgstr "Додати або замінити теги у файлі тими, що зазначені у 'filename' або видалити їх, якщо у 'filename' порожньо (див. нижче або сторінку допомоги щодо синтаксису)"
+msgstr "Додати або замінити теги у файлі тими, що зазначені у 'filename' або видалити їх, якщо у 'filename' порожньо (див. нижче або допомогу щодо синтаксису)"
 
 #: src/propedit/propedit_cli_parser.cpp:238
 #, no-c-format
 msgid "Add the file 'filename' as a new attachment"
-msgstr "Додати файл 'назва файла' як нове вкладення"
+msgstr "Додати файл 'filename' як нове вкладення"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:656
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:762
@@ -3402,7 +3403,7 @@ msgstr "Додати до черги &завдань"
 #: src/mkvtoolnix-gui/merge/tool.cpp:829
 #, no-c-format
 msgid "Adding chapter files"
-msgstr "Додавання файлів розділів"
+msgstr "Додавання файлів глав"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2088
 #, no-c-format
@@ -3419,7 +3420,7 @@ msgstr "Додавання файлів за допомогою перетягу
 #: src/mkvtoolnix-gui/merge/adding_appending_files_dialog.cpp:29
 #, no-c-format
 msgid "Adding multiple files via 'Add source files'"
-msgstr "Додавання кількох файлів через \"Додати вихідні файли\""
+msgstr "Додавання кількох файлів через \"Додати вхідні файли\""
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:844
 #, no-c-format
@@ -3500,7 +3501,7 @@ msgstr "Після цього розміру"
 #: src/mkvtoolnix-gui/merge/output.cpp:167
 #, no-c-format
 msgid "After specific timestamps"
-msgstr "Після тайм-кодів"
+msgstr "Після певних міток часу"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:331
 #, no-c-format
@@ -3544,7 +3545,7 @@ msgstr "Усі назви глав незалежно від їх мови"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:384
 #, no-c-format
 msgid "All chapters have been removed from the file '%1'."
-msgstr "Всі розділи були видалені з файла '%1'."
+msgstr "Всі глави були видалені з файла '%1'."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1903
 #, no-c-format
@@ -3656,7 +3657,7 @@ msgstr "Також якщо мова зазначена як 'невизначе
 #: src/extract/extract_cli_parser.cpp:79
 #, no-c-format
 msgid "Also try to extract the cue sheet from the chapter information and tags for this track."
-msgstr "Крім того, намагатися витягти CUE-лист з інформації розділів і тегів для цієї доріжки."
+msgstr "Крім того, намагатися витягти список CUE з інформації глав і тегів для цієї доріжки."
 
 #: src/input/r_wavpack.cpp:74
 #, no-c-format
@@ -3678,7 +3679,7 @@ msgstr "Зав&жди використовувати дію, обрану вищ
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2175
 #, no-c-format
 msgid "Always &switch to the job output tool after starting one immediately"
-msgstr "Завжди &переходити до розділу \"Вивід завдання\" відразу після запуску завдання"
+msgstr "Завжди &переходити до глави \"Вивід завдання\" відразу після запуску завдання"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2157
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:142
@@ -3830,7 +3831,7 @@ msgstr "Приєднання доріжки {0} з файлу номер {1} ('{
 #: src/merge/output_control.cpp:1035
 #, no-c-format
 msgid "Appending tracks of this type is not supported."
-msgstr "Додавання треків цього типу не підтримується."
+msgstr "Додавання доріжок цього типу не підтримується."
 
 #: src/merge/mkvmerge.cpp:688
 #, no-c-format
@@ -3971,7 +3972,7 @@ msgstr "Аудіодоріжка %1"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1806
 #, no-c-format
 msgid "Audio, subtitle, chapter properties"
-msgstr "Властивості аудіо, субтитрів і розділів"
+msgstr "Властивості аудіо, субтитрів і глав"
 
 #: src/merge/mkvmerge.cpp:426
 #, no-c-format
@@ -4026,7 +4027,7 @@ msgstr "Деталі мовного тегу BCP 47"
 #: src/mkvtoolnix-gui/merge/output.cpp:168
 #, no-c-format
 msgid "Before chapters"
-msgstr "Перед розділами"
+msgstr "Перед главами"
 
 #: src/common/kax_element_names.cpp:321
 #, no-c-format
@@ -4061,27 +4062,27 @@ msgstr "Блок"
 #: src/common/kax_element_names.cpp:181
 #, no-c-format
 msgid "Block addition ID extra data"
-msgstr "Блокувати додаткові дані ідентифікатора додавання"
+msgstr "Екстра дані додаткового блоку"
 
 #: src/common/kax_element_names.cpp:182
 #, no-c-format
 msgid "Block addition ID name"
-msgstr "Блокувати ім'я ідентифікатора додавання"
+msgstr "Ім'я додаткового блоку"
 
 #: src/common/kax_element_names.cpp:183
 #, no-c-format
 msgid "Block addition ID type"
-msgstr "Блокувати тип ідентифікатора додавання"
+msgstr "Тип додаткового блоку"
 
 #: src/common/kax_element_names.cpp:184
 #, no-c-format
 msgid "Block addition ID value"
-msgstr "Блокувати значення ідентифікатора додавання"
+msgstr "Значення додаткового блоку"
 
 #: src/common/kax_element_names.cpp:180
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Block addition mapping"
-msgstr "Додатковий блок"
+msgstr "Розподілення додаткового блоку"
 
 #: src/common/kax_element_names.cpp:261
 #, no-c-format
@@ -4092,7 +4093,7 @@ msgstr "Додатковий блок"
 #: src/common/kax_element_names.cpp:266
 #, no-c-format
 msgid "Block additional ID"
-msgstr "Додатковий ID блоку"
+msgstr "ID додаткового блоку"
 
 #: src/common/kax_element_names.cpp:254
 #, no-c-format
@@ -4143,12 +4144,12 @@ msgstr "Координата Y колірності синього, як виз�
 #: src/common/kax_element_names.cpp:117
 #, no-c-format
 msgid "Blue colour coordinate x"
-msgstr "Координата 'x' синього кольору"
+msgstr "Координата X синього кольору"
 
 #: src/common/kax_element_names.cpp:118
 #, no-c-format
 msgid "Blue colour coordinate y"
-msgstr "Координата 'y' синього кольору"
+msgstr "Координата Y синього кольору"
 
 #: src/input/r_vobsub.cpp:549
 #, no-c-format
@@ -4178,7 +4179,7 @@ msgstr "Знизу"
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:47
 #, no-c-format
 msgid "Button track %1"
-msgstr "Кнопка доріжка %1"
+msgstr "Доріжка кнопок меню %1"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:54
 #: src/mkvtoolnix-gui/merge/track.cpp:487
@@ -4204,7 +4205,7 @@ msgstr "На частини на основі вказаних номерів к
 #: src/mkvtoolnix-gui/merge/output.cpp:168
 #, no-c-format
 msgid "By parts based on timestamps"
-msgstr "На частини на основі вказаних тайм-кодів"
+msgstr "На частини на основі міток часу"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:327
 #, no-c-format
@@ -4245,7 +4246,7 @@ msgstr "Обчислювати &контрольну суму (Adler-32) для 
 #: src/info/info_cli_parser.cpp:37
 #, no-c-format
 msgid "Calculate and display checksums and use verbosity level 4."
-msgstr "Підраховувати і відображати контрольні суми і використовувати рівень докладності 4."
+msgstr "Підраховувати і відображати контрольні суми і використовувати 4-й рівень докладності виводу."
 
 #: src/info/info_cli_parser.cpp:36
 #, no-c-format
@@ -4311,12 +4312,12 @@ msgstr "Відмінити"
 #: src/output/p_mpeg4_p2.cpp:113
 #, no-c-format
 msgid "Cannot convert non-native MPEG4 video frames into native ones if the source container provides neither timestamps nor a number of frames per second.\n"
-msgstr "Не має можливості перетворювати ненативні MPEG4 відео кадри у нативні, якщо вхідний контейнер не забезпечує підтримки ні тайм-кодів, ні кількості кадрів в секунду.\n"
+msgstr "Не має можливості перетворювати ненативні MPEG4 відео кадри у нативні, якщо вхідний контейнер не забезпечує підтримки ні міток часу, ні кількості кадрів за секунду.\n"
 
 #: src/extract/xtr_vobsub.cpp:88
 #, no-c-format
 msgid "Cannot extract tracks of different kinds to the same file. This was requested for the tracks {0} and {1}.\n"
-msgstr "Не вдається витягнути треки різних видів до одного файла. Це стосувалось доріжок {0} і {1}.\n"
+msgstr "Не вдається витягнути доріжки різних видів до одного файла. Це стосувалось доріжок {0} і {1}.\n"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:413
 #: src/mkvtoolnix-gui/merge/tab.cpp:425
@@ -4423,19 +4424,19 @@ msgstr "Канали"
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:181
 #, no-c-format
 msgid "Chapter &number of first created entry:"
-msgstr "Розділ &номер першого створеного запису:"
+msgstr "&Номер глави першого створеного запису:"
 
 #: src/common/chapters/chapters.cpp:59
 #: src/mkvtoolnix-gui/util/settings.cpp:427
 #, no-c-format
 msgid "Chapter <NUM:2>"
-msgstr "Розділ <NUM:2>"
+msgstr "Глава <NUM:2>"
 
 #: src/common/kax_element_names.cpp:286
 #: src/common/kax_element_names.cpp:314
 #, no-c-format
 msgid "Chapter UID"
-msgstr "UID Розділу"
+msgstr "UID глави"
 
 #: src/common/kax_element_names.cpp:285
 #, no-c-format
@@ -4445,7 +4446,7 @@ msgstr "Елемент глави"
 #: src/common/kax_element_names.cpp:301
 #, no-c-format
 msgid "Chapter country"
-msgstr "Країна розділу"
+msgstr "Країна глави"
 
 #: src/common/kax_element_names.cpp:297
 #, no-c-format
@@ -4463,12 +4464,12 @@ msgstr "Редактор глав"
 #: src/extract/extract_cli_parser.cpp:106
 #, no-c-format
 msgid "Chapter extraction"
-msgstr "Витягнення розділів"
+msgstr "Витягнення глав"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1877
 #, no-c-format
 msgid "Chapter file:"
-msgstr "Файл розділу:"
+msgstr "Файл глав:"
 
 #: src/common/kax_element_names.cpp:291
 #, no-c-format
@@ -4488,7 +4489,7 @@ msgstr "Створення глави можливе, лише якщо скоп
 #: src/common/kax_element_names.cpp:299
 #, no-c-format
 msgid "Chapter language"
-msgstr "Мова розділу"
+msgstr "Мова глав"
 
 #: src/common/kax_element_names.cpp:300
 #, no-c-format
@@ -4498,17 +4499,17 @@ msgstr "Мова глави (IETF BCP 47)"
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:203
 #, no-c-format
 msgid "Chapter mass modification"
-msgstr "Масове редагування розділів"
+msgstr "Масове редагування глав"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:332
 #, no-c-format
 msgid "Chapter numbers:"
-msgstr "Номери розділів:"
+msgstr "Номери глав:"
 
 #: src/common/xml/ebml_chapters_converter.cpp:95
 #, no-c-format
 msgid "Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"
-msgstr "Аналізатор розділів: EditionUID {0} не є унікальним і не може бути використаний повторно. Буде створений новий.\n"
+msgstr "Аналізатор глав: EditionUID {0} не є унікальним і не може бути використаний повторно. Буде створений новий.\n"
 
 #: src/common/kax_element_names.cpp:294
 #, no-c-format
@@ -4516,54 +4517,54 @@ msgid "Chapter physical equivalent"
 msgstr "Фізичний еквівалент глави"
 
 #: src/common/kax_element_names.cpp:302
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter process"
-msgstr "Розділи"
+msgstr "Процес глави"
 
 #: src/common/kax_element_names.cpp:303
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter process codec ID"
-msgstr "Кодек перекладу розділів: {0}"
+msgstr "Ідентифікатор кодека процеса глави"
 
 #: src/common/kax_element_names.cpp:305
 #, no-c-format
 msgid "Chapter process command"
-msgstr ""
+msgstr "Команда процеса глави"
 
 #: src/common/kax_element_names.cpp:307
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter process data"
-msgstr "Переклад розділів"
+msgstr "Дані процеса глави"
 
 #: src/common/kax_element_names.cpp:304
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter process private"
-msgstr "Переклад розділів"
+msgstr "Приватний процес глави"
 
 #: src/common/kax_element_names.cpp:306
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter process time"
-msgstr "Переклад розділів"
+msgstr "Час процеса глави"
 
 #: src/common/kax_element_names.cpp:292
 #, no-c-format
 msgid "Chapter segment UID"
-msgstr "UID сегмента розділу"
+msgstr "UID сегмента глави"
 
 #: src/common/kax_element_names.cpp:293
 #, no-c-format
 msgid "Chapter segment edition UID"
-msgstr "UID редакції сегмента розділу"
+msgstr "UID редакції сегмента глави"
 
 #: src/common/kax_element_names.cpp:298
 #, no-c-format
 msgid "Chapter string"
-msgstr "Стрічка розділу"
+msgstr "Рядок глави"
 
 #: src/common/kax_element_names.cpp:287
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter string UID"
-msgstr "Витягнення розділів"
+msgstr "UID рядку глави"
 
 #: src/common/kax_element_names.cpp:289
 #, no-c-format
@@ -4578,7 +4579,7 @@ msgstr "Час початку глави"
 #: src/common/kax_element_names.cpp:295
 #, no-c-format
 msgid "Chapter track"
-msgstr "Доріжка розділу"
+msgstr "Доріжка глав"
 
 #: src/common/kax_element_names.cpp:296
 #, no-c-format
@@ -4588,22 +4589,22 @@ msgstr "Номер доріжки глави"
 #: src/common/kax_element_names.cpp:100
 #, no-c-format
 msgid "Chapter translate"
-msgstr "Переклад розділу"
+msgstr "Переклад глав"
 
 #: src/common/kax_element_names.cpp:103
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter translate ID"
-msgstr "Переклад розділів"
+msgstr "Ідентифікатор перекладу глави"
 
 #: src/common/kax_element_names.cpp:102
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter translate codec"
-msgstr "Кодек перекладу розділів: {0}"
+msgstr "Кодек перекладу глави"
 
 #: src/common/kax_element_names.cpp:101
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter translate edition UID"
-msgstr "UID редакції перекладу розділів: {0}"
+msgstr "UID редакції перекладу глави"
 
 #: src/common/kax_element_names.cpp:279
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
@@ -4612,12 +4613,12 @@ msgstr "UID редакції перекладу розділів: {0}"
 #: src/propedit/options.cpp:215
 #, no-c-format
 msgid "Chapters"
-msgstr "Розділи"
+msgstr "Глави"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1886
 #, no-c-format
 msgid "Chapters in fixed intervals"
-msgstr "Розділи через постійні інтервали"
+msgstr "Глави з постійними інтервалами"
 
 #: src/merge/generic_reader.cpp:294
 #, no-c-format
@@ -4722,7 +4723,7 @@ msgstr "Розмір попереднього кластера"
 #: src/common/kax_element_names.cpp:275
 #, no-c-format
 msgid "Cluster timestamp"
-msgstr "Тайм-код кластера"
+msgstr "Мітка часу кластера"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
 #: src/mkvtoolnix-gui/merge/track_model.cpp:71
@@ -4743,9 +4744,9 @@ msgid "Codec ID:"
 msgstr "ID кодека:"
 
 #: src/common/kax_element_names.cpp:200
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Codec decode all"
-msgstr "Кодек може декодувати пошкодж. дані: {0}"
+msgstr "Кодек декодує все"
 
 #: src/common/kax_element_names.cpp:199
 #, no-c-format
@@ -4795,9 +4796,9 @@ msgid "Colour information"
 msgstr "Інформація про колір"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:623
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Colour mastering meta information"
-msgstr "Помилка при збереженні інформації"
+msgstr "Мета інформація зведення кольору"
 
 #: src/common/kax_element_names.cpp:125
 #, no-c-format
@@ -4884,12 +4885,12 @@ msgstr "Розмір вмісту:"
 #: src/extract/extract_cli_parser.cpp:78
 #, no-c-format
 msgid "Convert text subtitles to this charset (default: UTF-8)."
-msgstr "Конвертувати текстові субтитри до цього набору символів (типово: UTF-8)."
+msgstr "Конвертувати текстові субтитри до цього набору символів (за замовчуванням: UTF-8)."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:782
 #, no-c-format
 msgid "Converting the chapters to XML failed: %1"
-msgstr "Перетворення розділів в XML не вдалося: %1"
+msgstr "Перетворення глав в XML не вдалося: %1"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1813
 #, no-c-format
@@ -4904,12 +4905,12 @@ msgstr "Копіювати до інших вкладок"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:746
 #, no-c-format
 msgid "Copy &destination file's name to file title"
-msgstr "Копіювати назву &вихідного файла до поля \"Заголовок файла\""
+msgstr "Копіювати ім'я &вихідного файла до назви файла"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:742
 #, no-c-format
 msgid "Copy &first source file's name to file title"
-msgstr "Копіювати ім'я &першого вхідного файла до поля \"Заголовок файла\""
+msgstr "Копіювати ім'я &першого вхідного файла до назви файла"
 
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:90
 #, no-c-format
@@ -4919,7 +4920,7 @@ msgstr "Копіювати вкладення"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:750
 #, no-c-format
 msgid "Copy file &title to destination file name"
-msgstr "Копіювати значення &поля \"Заголовок файла\" до назви вихідного файла"
+msgstr "Копіювати назви файла до імені вихідного файла"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:73
 #, no-c-format
@@ -4934,7 +4935,7 @@ msgstr "CoreAudio"
 #: src/input/r_avi.cpp:356
 #, no-c-format
 msgid "Could not extract the decoder specific config data (AVCC) from this AVC/H.264 track.\n"
-msgstr "Неможливо отримати специфічні дані налаштувань декодера (AVCC) з цієї доріжки AVC/H.264.\n"
+msgstr "Неможливо отримати певны дані налаштувань декодера (AVCC) з цієї доріжки AVC/H.264.\n"
 
 #: src/input/r_avi.cpp:312
 #: src/input/r_avi.cpp:317
@@ -5002,7 +5003,7 @@ msgstr "Не вдалося відкрити файл '{0}' для того, щ�
 #: src/extract/tracks.cpp:197
 #, no-c-format
 msgid "Could not open the timestamp file '{0}' for writing ({1}).\n"
-msgstr "Не вдалося відкрити файл тайм-коду '{0}' для запису ({1}).\n"
+msgstr "Не вдалося відкрити файл міток часу '{0}' для запису ({1}).\n"
 
 #: src/common/xml/ebml_converter.cpp:259
 #, no-c-format
@@ -5012,7 +5013,7 @@ msgstr "Не вдалося відкрити/прочитати файл '{0}'."
 #: src/common/chapters/chapters.cpp:420
 #, no-c-format
 msgid "Could not parse the chapters in '{0}': {1}\n"
-msgstr "Не вдалося розібрати розділи у '{0}': {1}\n"
+msgstr "Не вдалося проаналізувати глав у '{0}': {1}\n"
 
 #: src/input/r_ogm_flac.cpp:255
 #, no-c-format
@@ -5039,7 +5040,7 @@ msgstr "Створити сумісний WebM файл"
 #: src/mkvtoolnix-gui/merge/output.cpp:241
 #, no-c-format
 msgid "Create a WebM compliant file."
-msgstr "Створити сумісний WebM файл."
+msgstr "Створює сумісний WebM файл."
 
 #: src/mkvtoolnix-gui/forms/merge/tool.h:226
 #, no-c-format
@@ -5079,7 +5080,7 @@ msgstr "Створити одну нову вкладку налаштувань
 #: src/common/mm_io_x.h:117
 #, no-c-format
 msgid "Creating directory '{0}' failed: {1}"
-msgstr "Помилка при створенні теки '{0}': {1}"
+msgstr "Помилка при створенні каталога '{0}': {1}"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:778
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:203
@@ -5203,7 +5204,7 @@ msgstr "Тривалість Cue"
 #: src/extract/extract_cli_parser.cpp:132
 #, no-c-format
 msgid "Cue extraction"
-msgstr "Витягнення записів cue"
+msgstr "Витягнення записів Cue"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1881
 #, no-c-format
@@ -5218,27 +5219,27 @@ msgstr "Точка Cue"
 #: src/common/kax_element_names.cpp:237
 #, no-c-format
 msgid "Cue ref cluster"
-msgstr "ref кластер Cue"
+msgstr "Опорний кластер cue"
 
 #: src/common/kax_element_names.cpp:239
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Cue ref codec state"
-msgstr "ref стан кодека Cue: {0}"
+msgstr "Стан кодека опорного cue"
 
 #: src/common/kax_element_names.cpp:238
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Cue ref number"
-msgstr "ref номер Cue: {0}"
+msgstr "Номер опорного cue"
 
 #: src/common/kax_element_names.cpp:236
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Cue ref time"
-msgstr "ref час Cue: {0:.3f}s"
+msgstr "Час опорного cue"
 
 #: src/common/kax_element_names.cpp:235
 #, no-c-format
 msgid "Cue reference"
-msgstr "Cue посилання"
+msgstr "Опорний Cue"
 
 #: src/common/kax_element_names.cpp:231
 #, no-c-format
@@ -5273,7 +5274,7 @@ msgstr "Аналізатор Cue-списків: Жодного запису IND
 #: src/common/kax_element_names.cpp:227
 #, no-c-format
 msgid "Cue time"
-msgstr "Час Cue"
+msgstr "Час списку Cue"
 
 #: src/common/kax_element_names.cpp:229
 #, no-c-format
@@ -5283,7 +5284,7 @@ msgstr "Доріжка списку cue"
 #: src/common/kax_element_names.cpp:228
 #, no-c-format
 msgid "Cue track positions"
-msgstr "Позиція Cue треку"
+msgstr "Позиції Cue доріжки"
 
 #: src/common/kax_element_names.cpp:225
 #, no-c-format
@@ -5334,7 +5335,7 @@ msgstr "В даний час тільки певні формати субтит
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:235
 #, no-c-format
 msgid "D&uplicate selected edition or chapter"
-msgstr "&Дублювати вибрану редакцію або розділ"
+msgstr "&Дублювати вибрану редакцію або главу"
 
 #: src/common/file_types.cpp:83
 #: src/output/p_dts.h:47
@@ -5402,7 +5403,7 @@ msgstr "Дата закінчення"
 #: src/mkvtoolnix-gui/jobs/model.cpp:56
 #, no-c-format
 msgid "Date started"
-msgstr "Дата запуску"
+msgstr "Дата початку"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:227
 #, no-c-format
@@ -5412,7 +5413,7 @@ msgstr "Деактивація цього прапорця – це спосіб
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:80
 #, no-c-format
 msgid "Default"
-msgstr "Типово"
+msgstr "За замовчуванням"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2060
 #, no-c-format
@@ -5422,44 +5423,44 @@ msgstr "Режим редагування мови IETF BCP 47 за замовч
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2113
 #, no-c-format
 msgid "Default additional co&mmand line options:"
-msgstr "Типові додаткові пара&метри командного рядка:"
+msgstr "Додаткові пара&метри командного рядка за замовчуванням:"
 
 #: src/common/kax_element_names.cpp:204
 #: src/common/property_element.cpp:143
 #, no-c-format
 msgid "Default duration"
-msgstr "Типова тривалість"
+msgstr "Тривалість за замовчуванням"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1827
 #, no-c-format
 msgid "Default duration/FPS:"
-msgstr "Типова тривалість/кадрів в сек:"
+msgstr "Тривалість (кадрів за сек) за замовчуванням:"
 
 #: src/common/kax_element_names.cpp:324
 #, no-c-format
 msgid "Default language"
-msgstr "Типове значення мови"
+msgstr "Значення мови за замовчуванням"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2122
 #, no-c-format
 msgid "Default subtitle &charset to set:"
-msgstr "Типовий &набір символів субтитрів:"
+msgstr "&Набір символів субтитрів за замовчуванням:"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:167
 #: src/mkvtoolnix-gui/merge/track_model.cpp:77
 #, no-c-format
 msgid "Default track"
-msgstr "Типова доріжка"
+msgstr "Доріжка за замовчуванням"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2123
 #, no-c-format
 msgid "Default track languages to set"
-msgstr "Типові мови доріжок"
+msgstr "Мови доріжок за замовчуванням для встановлення"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:232
 #, no-c-format
 msgid "Default values"
-msgstr "Типові значення"
+msgstr "Значення за замовчуванням"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2164
 #, no-c-format
@@ -5469,12 +5470,12 @@ msgstr "Значення за замовчуванням для виведенн
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2171
 #, no-c-format
 msgid "Defaults for new chapter entries"
-msgstr "Значення за замовчуванням для нових розділів"
+msgstr "Значення за замовчуванням для нових глав"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2112
 #, no-c-format
 msgid "Defaults for new multiplex settings"
-msgstr "Типово для нових налаштувань мультиплексування"
+msgstr "Значення за замовчуванням для нових налаштувань мультиплексування"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2115
 #, no-c-format
@@ -5506,7 +5507,7 @@ msgstr "Затримує мітки часу на декілька мс."
 #: src/mkvtoolnix-gui/merge/input.cpp:493
 #, no-c-format
 msgid "Delay this track's timestamps by a couple of ms."
-msgstr "Затримка мітки цього треку на пару мс."
+msgstr "Затримка міток часу цієї доріжки на декілька мс."
 
 #: src/propedit/propedit_cli_parser.cpp:235
 #, no-c-format
@@ -5516,7 +5517,7 @@ msgstr "Видалити усі існуючі статистичні теги �
 #: src/propedit/propedit_cli_parser.cpp:228
 #, no-c-format
 msgid "Delete all occurrences of a property"
-msgstr "Видалити всі входження параметру"
+msgstr "Видалити всі входження властивості"
 
 #: src/propedit/propedit_cli_parser.cpp:241
 #, no-c-format
@@ -5581,7 +5582,7 @@ msgstr "Опис:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2138
 #, no-c-format
 msgid "Destination directory"
-msgstr "Тека вихідного файла"
+msgstr "Каталог вихідного файла"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1907
 #, no-c-format
@@ -5602,7 +5603,7 @@ msgstr "Назва вихідного файла: %1"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:248
 #, no-c-format
 msgid "Destination file's directory"
-msgstr "Тека вихідного файла"
+msgstr "Каталог вихідного файла"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
 #, no-c-format
@@ -5634,7 +5635,7 @@ msgstr "Визначати автоматично"
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
 #, no-c-format
 msgid "Development hacks"
-msgstr "Опції для розробників"
+msgstr "Хаки для розробників"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:443
 #, no-c-format
@@ -5654,7 +5655,7 @@ msgstr "Dirac"
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:113
 #, no-c-format
 msgid "Directory"
-msgstr "Тека"
+msgstr "Каталог"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2141
 #, no-c-format
@@ -5666,12 +5667,12 @@ msgstr "Каталог відносно до каталогу першого в�
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 #, no-c-format
 msgid "Directory:"
-msgstr "Тека:"
+msgstr "Каталог:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2119
 #, no-c-format
 msgid "Disable \"de&fault track\" flag for subtitle tracks"
-msgstr "Заборонити прапорець \"типова доріжка\" для доріжок субтитрів"
+msgstr "Заборонити прапорець \"доріжка за замовчуванням\" для доріжок субтитрів"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2054
 #, no-c-format
@@ -5681,7 +5682,7 @@ msgstr "Вимкнути підказки"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2120
 #, no-c-format
 msgid "Disable additional lossless c&ompression for all track types"
-msgstr "Вимикати додаткове стиснення без втрат для всіх типів доріжок"
+msgstr "Вимкнути додаткове стиснення без втрат для всіх типів доріжок"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2052
 #, no-c-format
@@ -5839,7 +5840,7 @@ msgstr "Не уникати"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1884
 #, no-c-format
 msgid "Don't generate chapters"
-msgstr "Не генерувати розділів"
+msgstr "Не генерувати глави"
 
 #: src/common/hacks.cpp:61
 #, no-c-format
@@ -5928,7 +5929,7 @@ msgstr "В&ихід"
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
 #, no-c-format
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
-msgstr "Р&озгорнути початковий і кінцевий тайм-код розділів для того, щоб включити мінімальні/максимальні тайм-коди всіх їх підрозділів"
+msgstr "Р&озгорнути початкову і кінцеву мітку часу глав для того, щоб включити мінімальні/максимальні мітки часу всіх їх суб-глав"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:367
 #, no-c-format
@@ -5988,7 +5989,7 @@ msgstr "Кожен діапазон складається з номерів к�
 #: src/mkvtoolnix-gui/merge/output.cpp:296
 #, no-c-format
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
-msgstr "Кожен діапазон складається з тайм-кодів початку і закінчення з '-' посередині, наприклад, '00:01:15-00:03:20'."
+msgstr "Кожен діапазон складається з початкової та кінцевої мітки часу, що з'єднані символом '-', наприклад, '00:01:15-00:03:20'."
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:354
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:355
@@ -6032,7 +6033,7 @@ msgstr "Прапорець редагування замовлений"
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:33
 #, no-c-format
 msgid "Edition/Chapter"
-msgstr "Редакція/Розділ"
+msgstr "Редакція/Глава"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1358
 #, no-c-format
@@ -6042,7 +6043,7 @@ msgstr "Виправте помилку або видаліть конфігур
 #: src/mkvtoolnix-gui/merge/output.cpp:334
 #, no-c-format
 msgid "Either the word 'all' which selects all chapters or a comma-separated list of chapter numbers before which to split."
-msgstr "Або слово 'all', при вказанні якого обираються всі розділи або список розділених комою номерів розділів, перед якими здійснювати розбиття."
+msgstr "Або слово 'all', при вказанні якого обираються всі глави або список розділених комою номерів глав, перед якими здійснювати розділення."
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:224
 #, no-c-format
@@ -6193,7 +6194,7 @@ msgstr "Помилка декодування сторінки Ogg Opus з мі�
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:283
 #, no-c-format
 msgid "Error details: %1."
-msgstr "Деталі обробки винятку: %1."
+msgstr "Подробиці помилки: %1."
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:75
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:152
@@ -6204,7 +6205,7 @@ msgstr "Помилка виконання mkvmerge"
 #: src/input/subtitles.cpp:183
 #, no-c-format
 msgid "Error in line {0}: expected a SRT timestamp line but found something else. Aborting this file.\n"
-msgstr "Помилка в рядку {0}: очікувався тайм-код в SRT, але знайдено було щось інше. Переривання обробки даного файлу.\n"
+msgstr "Помилка в рядку {0}: очікується мітка часу в SRT, але було знайдено щось інше. Оброблення цього файлу перервано.\n"
 
 #: src/input/subtitles.cpp:174
 #, no-c-format
@@ -6223,7 +6224,7 @@ msgstr "Помилка завантаження файла налаштуван�
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:623
 #, no-c-format
 msgid "Error message from the parser: %1"
-msgstr "Повідомлення про помилку від аналізатора розділів %1"
+msgstr "Повідомлення про помилку від аналізатора глав: %1"
 
 #: src/input/r_mpeg_ps.cpp:1082
 #, no-c-format
@@ -6233,7 +6234,7 @@ msgstr "Помилка при обробці пакетів MPEG PS під ча�
 #: src/propedit/chapter_target.cpp:71
 #, no-c-format
 msgid "Error parsing the chapters in '{0}': some mandatory elements are missing.\n"
-msgstr "Помилка при обробці розділів у '{0}': деякі обов'язкові елементи відсутні.\n"
+msgstr "Помилка при обробці глав у '{0}': деякі обов'язкові елементи відсутні.\n"
 
 #: src/merge/mkvmerge.cpp:553
 #: src/propedit/tag_target.cpp:169
@@ -6415,7 +6416,7 @@ msgstr "Час має бути заданий в такому форматі: HH
 #: src/extract/extract_cli_parser.cpp:108
 #, no-c-format
 msgid "Exports the chapter information in the simple format used in OGM tools (CHAPTER01=... CHAPTER01NAME=...)."
-msgstr "Експортувати інформацію розділів в простий формат, що використовується в утилітах OGM (CHAPTER01=... CHAPTER01NAME=...)."
+msgstr "Експортувати інформацію глав в простий формат, що використовується в утилітах OGM (CHAPTER01=... CHAPTER01NAME=...)."
 
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:219
 #, no-c-format
@@ -6501,7 +6502,7 @@ msgstr "FLV (Flash Video)"
 #: src/mkvtoolnix-gui/jobs/job.cpp:273
 #, no-c-format
 msgid "Failed"
-msgstr "Сталася помилка"
+msgstr "Збій"
 
 #: src/extract/xtr_vobsub.cpp:81
 #, no-c-format
@@ -6537,12 +6538,12 @@ msgstr "UID сімейства"
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:173
 #, no-c-format
 msgid "Fi&le name:"
-msgstr "Назва фа&йла:"
+msgstr "Ім'я фа&йла:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1858
 #, no-c-format
 msgid "Fi&le title:"
-msgstr "Заг&оловок файла:"
+msgstr "На&зва файла:"
 
 #: src/common/kax_element_names.cpp:158
 #, no-c-format
@@ -6601,7 +6602,7 @@ msgstr "Файл не був змінений"
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:110
 #, no-c-format
 msgid "File name"
-msgstr "Назва файла"
+msgstr "Ім'я файла"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:517
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
@@ -6609,7 +6610,7 @@ msgstr "Назва файла"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:377
 #, no-c-format
 msgid "File name:"
-msgstr "Назва файла:"
+msgstr "Ім'я файла:"
 
 #: src/mkvtoolnix-gui/main_window/select_character_set_dialog.cpp:46
 #, no-c-format
@@ -6697,7 +6698,7 @@ msgstr "Прапорці:"
 #: src/common/file_types.cpp:86
 #, no-c-format
 msgid "Flash Video"
-msgstr "Flash Video"
+msgstr "Відео Flash"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:168
 #, no-c-format
@@ -6719,7 +6720,7 @@ msgstr "Для всіх кадрів"
 #: src/mkvtoolnix-gui/merge/output.cpp:202
 #, no-c-format
 msgid "For an in-depth explanantion of file/segment linking and this feature please read mkvmerge's documentation."
-msgstr "Щоб дізнатися більше про з'єднання файлів/сегментів і про дану опцію, читайте документацію mkvmerge."
+msgstr "Щоб дізнатися більше про з'єднання файлів/сегментів і про даний параметр, читайте документацію mkvmerge."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:375
 #, no-c-format
@@ -6729,7 +6730,7 @@ msgstr "Наприклад, файл, що містить звукові дор�
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 #, no-c-format
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
-msgstr "Для файлів, які не будуть містити відео доріжку, але будуть хоча б одну звукову доріжку, mkvmerge буде автоматично вибирати коефіцієнт масштабу таймкоду таким, що всі таймкоди і тривалості будуть мати точність одного зразка."
+msgstr "Для файлів, які не будуть містити відео доріжку, але будуть містити хоча б одну звукову доріжку, mkvmerge буде автоматично обирати коефіцієнт масштабу мітки часу таким, щоб всі мітки часу і тривалості будуть мати точність до одного семпла."
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:75
 #, no-c-format
@@ -6765,7 +6766,7 @@ msgstr "Примусово задає використання читачем Ma
 #: src/mkvtoolnix-gui/merge/input.cpp:505
 #, no-c-format
 msgid "Forces the default duration or number of frames per second for a track."
-msgstr "Встановлюється типова тривалість або кількість кадрів за секунду для доріжки."
+msgstr "Встановлюється тривалість за замовчуванням або кількість кадрів за секунду для доріжки."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:63
 #, no-c-format
@@ -6860,12 +6861,12 @@ msgstr "Гамма"
 #: src/common/hacks.cpp:55
 #, no-c-format
 msgid "Garbage at the start of audio tracks in AVI files is normally used for delaying that track."
-msgstr "Сміття на початку аудіодоріжок у файлах AVI, як правило, використовується для затримки, цього треку."
+msgstr "Сміття на початку аудіодоріжок у файлах AVI, як правило, використовується для затримки у цій доріжці."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1851
 #, no-c-format
 msgid "General"
-msgstr "Загальні опції"
+msgstr "Загальні параметри"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2048
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2076
@@ -6883,17 +6884,17 @@ msgstr "Загальні змінні"
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:178
 #, no-c-format
 msgid "Generate sub-chapters"
-msgstr "Створення  підгрозділів"
+msgstr "Створення суб-глав"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:179
 #, no-c-format
 msgid "Generating a number of chapters spaced evenly apart"
-msgstr "Створення низки розділіа, розподілених рівномірно крім"
+msgstr "Створення числа глав, розподілених рівномірно крім"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1882
 #, no-c-format
 msgid "Generating chapters:"
-msgstr "Створення розділів:"
+msgstr "Створення глав:"
 
 #: src/extract/extract_cli_parser.cpp:71
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:64
@@ -6937,12 +6938,12 @@ msgstr "Координата Y колірності зеленого, як ви�
 #: src/common/kax_element_names.cpp:115
 #, no-c-format
 msgid "Green colour coordinate x"
-msgstr "Координата 'x' зеленого кольору"
+msgstr "Координата X зеленого кольору"
 
 #: src/common/kax_element_names.cpp:116
 #, no-c-format
 msgid "Green colour coordinate y"
-msgstr "Координата 'y' зеленого кольору"
+msgstr "Координата Y зеленого кольору"
 
 #: src/common/file_types.cpp:89
 #, no-c-format
@@ -7114,7 +7115,7 @@ msgstr "Якщо номеру початку діапазону передує '
 #: src/mkvtoolnix-gui/merge/output.cpp:299
 #, no-c-format
 msgid "If a range's start timestamp is prefixed with '+' then its content will be written to the same file as the previous range. Otherwise a new file will be created for this range."
-msgstr "Якщо тайм-коду початку діапазону передує '+', то цей контент буде записано до того самого файлу, що й попередній діапазон. В іншому випадку, новий файл буде створено для цього діапазону."
+msgstr "Якщо початковій мітці часу діапазону передує '+', то цей контент буде записано до того самого файлу, що й попередній діапазон. В іншому випадку, новий файл буде створено для цього діапазону."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:315
 #, no-c-format
@@ -7124,7 +7125,7 @@ msgstr "Якщо номер початку пропущено, то викори
 #: src/mkvtoolnix-gui/merge/output.cpp:297
 #, no-c-format
 msgid "If a start timestamp is left out then the previous range's end timestamp is used, or the start of the file if there was no previous range."
-msgstr "Якщо тайм-код початку пропущено, то використовується тайм-код закінчення попереднього діапазону, або початок файлу, якщо попереднього діапазону не було."
+msgstr "Якщо початкову мітку часу пропущено, то використовується кінцева мітка часу попереднього діапазону, або початок файлу, якщо попереднього діапазону не було."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:223
 #, no-c-format
@@ -7212,7 +7213,7 @@ msgstr "Якщо увімкнено, видалення підсилення н�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:405
 #, no-c-format
 msgid "If enabled, small colored boxes will be shown in the file and track lists as a visual clue to help associating tracks with the files they come from."
-msgstr "Якщо увімкнено, у файлі та в списках доріжок відображатимуться невеликі кольорові квадратики як наочна підказка, яка допоможе пов’язувати треки з файлами, з яких вони надходять."
+msgstr "Якщо увімкнено, у файлі та в списках доріжок відображатимуться невеликі кольорові квадратики як наочна підказка, яка допоможе пов’язувати доріжки з файлами, в яких вони знаходяться."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:487
 #, no-c-format
@@ -7371,7 +7372,7 @@ msgstr "Якщо глави були завантажені з файлу Matros
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
 #, no-c-format
 msgid "If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present."
-msgstr "Даний масштабний коефіцієнт тайм-коду знаходиться за межами допустимого діапазону (1 ... 10000000 або -1 для 'точності до семплу, навіть якщо доріжка відео присутня')."
+msgstr "Цей масштабний коефіцієнт мітки часу знаходиться за межами допустимого діапазону (1 ... 10000000 або -1 для точності до семплу, навіть якщо доріжка відео присутня)."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:37
 #, no-c-format
@@ -7516,7 +7517,7 @@ msgstr "На вкладці віджет під файлами та доріжк
 #: src/mkvtoolnix-gui/merge/output.cpp:235
 #, no-c-format
 msgid "In fixed intervals: chapters are created in fixed intervals, e.g. every 30 seconds."
-msgstr "Через постійні інтервали: розділи створюються через фіксовані інтервали, наприклад кожні 30 секунд."
+msgstr "Через постійні інтервали: глави створюються через фіксовані інтервали, наприклад кожні 30 секунд."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:399
 #, no-c-format
@@ -7532,7 +7533,7 @@ msgstr "Несумісний AAC аудіопакет (довжина: {0} != {1
 #: src/merge/mkvmerge.cpp:90
 #, no-c-format
 msgid "Increase verbosity."
-msgstr "Збільшено докладність виводу інформації."
+msgstr "Збільшіть докладність виводу."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:224
 #, no-c-format
@@ -7629,7 +7630,7 @@ msgstr "Зафіксовано некоректний символ Base64"
 #: src/extract/extract_cli_parser.cpp:183
 #, no-c-format
 msgid "Invalid BlockAddition level in argument '{0}'.\n"
-msgstr "Недопустимий рівень BlockAddition в параметрі '{0}'.\n"
+msgstr "Невірний рівень додаткового блоку в аргументі '{0}'.\n"
 
 #: src/common/mm_io_x.h:146
 #, no-c-format
@@ -7672,7 +7673,7 @@ msgstr "Невірна зміна специфікації ({2}) в '{0} {1}'.\n
 #: src/merge/mkvmerge.cpp:3075
 #, no-c-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
-msgstr "Невірний номер розділу '{0}' для '--split' у '--split {1}': {2}\n"
+msgstr "Невірний номер глави '{0}' для '--split' у '--split {1}': {2}\n"
 
 #: src/merge/mkvmerge.cpp:1324
 #, no-c-format
@@ -7854,7 +7855,7 @@ msgstr "Невірне задання номера кадру/поля поча�
 #: src/input/r_usf.cpp:214
 #, no-c-format
 msgid "Invalid start or stop timestamp"
-msgstr "Невірний тайм-код початку або закінчення"
+msgstr "Невірна початкова або кінцева мітка часу"
 
 #: src/common/split_arg_parsing.cpp:53
 #, no-c-format
@@ -7969,10 +7970,7 @@ msgstr "Невидимий"
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:185
 #, no-c-format
 msgid "It cannot be removed because it is a mandatory header field."
-msgstr ""
-"Цей елемент вже присутній у файлі.\n"
-"Він не може бути видалений, тому що є\n"
-"обов'язковим полем заголовка."
+msgstr "Він не може бути видалений, тому що є обов'язковим полем заголовка."
 
 #: src/merge/mkvmerge.cpp:1027
 #, no-c-format
@@ -7983,7 +7981,7 @@ msgstr "Не складається з ID доріжки і значення, в
 #: src/mkvtoolnix-gui/merge/output.cpp:217
 #, no-c-format
 msgid "It is ignored for XML chapter files."
-msgstr "Це ігнорується для XML файлів з роздііами."
+msgstr "Це ігнорується для XML файлів глав."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:383
 #, no-c-format
@@ -8067,7 +8065,7 @@ msgstr "Пакет Kate занадто маленький і тому буде �
 #: src/extract/extract_cli_parser.cpp:80
 #, no-c-format
 msgid "Keep only the BlockAdditions up to this level (default: keep all levels)"
-msgstr "Зберігати тільки BlockAdditions до цього рівня (типове значення: зберігати всі рівні)"
+msgstr "Зберігати додаткові блоки тільки до цього рівня (значення за замовчуванням: зберігати всі рівні)"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:183
 #, no-c-format
@@ -8169,18 +8167,18 @@ msgstr[2] "Довжина: %1 байтів"
 #: src/merge/timestamp_factory.cpp:359
 #, no-c-format
 msgid "Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"
-msgstr "Рядок {0} тайм-код файлу '{1}' містить несумісні дані (наприклад, тривалість або значення Кадрів за сукунду менше нуля).\n"
+msgstr "Рядок {0} мітки часу файлу '{1}' містить несумісні дані (наприклад, тривалість або значення кадрів за секунду менше нуля).\n"
 
 #: src/merge/timestamp_factory.cpp:124
 #, no-c-format
 msgid "Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the start frame number is bigger than the end frame number, or some values are smaller than zero).\n"
-msgstr "Рядок {0} тайм-код файлу '{1}' містить несумісні дані (наприклад, номер кадру початку більше ніж номер кадру кінця, або деякі значення менші за нуль).\n"
+msgstr "Рядок {0} мітки часу файлу '{1}' містить несумісні дані (наприклад, номер кадру початку більший за номер кадру кінця, або деякі значення менші за нуль).\n"
 
 #: src/merge/timestamp_factory.cpp:119
 #: src/merge/timestamp_factory.cpp:352
 #, no-c-format
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
-msgstr "Рядок {0} тайм-код файлу '{1}' не може бути оброблений.\n"
+msgstr "Рядок {0} мітки часу файлу '{1}' не може бути оброблений.\n"
 
 #: src/input/subtitles.cpp:246
 #, no-c-format
@@ -8201,7 +8199,7 @@ msgstr "Рядок {0}: Скоріш за все рядок має бути за
 #: src/input/r_vobsub.cpp:273
 #, no-c-format
 msgid "Line {0}: The line seems to be a subtitle entry but the timestamp was negative even after adding the track delay. Negative timestamps are not supported in Matroska. This entry will be skipped.\n"
-msgstr "Рядок {0}: Скоріш за все рядок має бути записом субтитрів, але тайм-код був від'ємним навіть після додавання затримки. Від'ємні тайм-коди не підтримуються для Matroska. Цей запис буде пропущено.\n"
+msgstr "Рядок {0}: Скоріш за все рядок має бути записом субтитрів, але мітка часу була від'ємною навіть після додавання затримки. Від'ємні мітки часу не підтримуються у Matroska. Цей запис буде пропущено.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1863
 #, no-c-format
@@ -8289,17 +8287,17 @@ msgstr "&Веб-сайт MKVToolNix"
 #: src/mkvtoolnix-gui/merge/tool.cpp:294
 #, no-c-format
 msgid "MKVToolNix GUI config files"
-msgstr "MKVToolNix GUI файл конфігурації"
+msgstr "Файл конфігурації MKVToolNix GUI"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2047
 #, no-c-format
 msgid "MKVToolNix GUI preferences"
-msgstr "Уподобання MKVToolNix GUI"
+msgstr "Налаштування MKVToolNix GUI"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:253
 #, no-c-format
 msgid "MKVToolNix GUI's installation directory"
-msgstr "Директорія, куди інстальовано MKVToolNix GUI"
+msgstr "Каталог встановлення MKVToolNix GUI"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:62
 #, no-c-format
@@ -8330,7 +8328,7 @@ msgstr "MPEG програмні потоки"
 #: src/common/file_types.cpp:96
 #, no-c-format
 msgid "MPEG transport stream"
-msgstr "транспортний потік MPEG"
+msgstr "MPEG транспортний потік"
 
 #: src/common/file_types.cpp:46
 #, no-c-format
@@ -8414,7 +8412,7 @@ msgstr "Matroska"
 #: src/mkvtoolnix-gui/util/widget.cpp:189
 #, no-c-format
 msgid "Matroska and WebM files"
-msgstr "Matroska і WebM файли"
+msgstr "Файли Matroska і WebM"
 
 #: src/common/file_types.cpp:49
 #, no-c-format
@@ -8442,7 +8440,7 @@ msgstr "Максимальна довжина EBML ID"
 #: src/common/kax_element_names.cpp:77
 #, no-c-format
 msgid "Maximum EBML size length"
-msgstr "Максимальна довжина EBML length"
+msgstr "Максимальна довжина розміру EBML"
 
 #: src/common/xml/ebml_converter.cpp:234
 #, no-c-format
@@ -8459,7 +8457,7 @@ msgstr "Максимально дозволене значення: {0}, фак�
 #: src/common/kax_element_names.cpp:211
 #, no-c-format
 msgid "Maximum block additional ID"
-msgstr "Максимальний додатковий ID блоку"
+msgstr "Максимальний ID додаткового блоку"
 
 #: src/common/property_element.cpp:181
 #, no-c-format
@@ -8473,14 +8471,14 @@ msgid "Maximum cache"
 msgstr "Максимальний кеш"
 
 #: src/common/kax_element_names.cpp:136
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Maximum content light"
-msgstr "Обрізка пікселів справа: {0}"
+msgstr "Максимальна яскравість вмісту"
 
 #: src/common/kax_element_names.cpp:137
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Maximum frame light"
-msgstr "Висота в пікселях: {0}"
+msgstr "Максимальне освітлення кадру"
 
 #: src/common/property_element.cpp:182
 #, no-c-format
@@ -8488,9 +8486,9 @@ msgid "Maximum frame-average light level in candelas per square meter (cd/m²)."
 msgstr "Максимальний середній рівень освітлення кадру в канделах на квадратний метр (кд/м²)."
 
 #: src/common/kax_element_names.cpp:121
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Maximum luminance"
-msgstr "Максимальний кеш: {0}"
+msgstr "Максимальна яскравість"
 
 #: src/common/property_element.cpp:194
 #, no-c-format
@@ -8536,9 +8534,9 @@ msgid "Minimum cache"
 msgstr "Мінімальний кеш"
 
 #: src/common/kax_element_names.cpp:122
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Minimum luminance"
-msgstr "Мінімальний кеш: {0}"
+msgstr "Мінімальна яскравість"
 
 #: src/common/property_element.cpp:195
 #, no-c-format
@@ -8570,7 +8568,7 @@ msgstr "Пропущено аргумент до '{0}'.\n"
 #: src/extract/extract_cli_parser.cpp:370
 #, no-c-format
 msgid "Missing destination file name in argument '{0}'.\n"
-msgstr "Відсутня назва вихідного файлу для аргументу '{0}'.\n"
+msgstr "Відсутня ім'я вихідного файлу для аргументу '{0}'.\n"
 
 #: src/common/bitvalue.cpp:87
 #, no-c-format
@@ -8601,7 +8599,7 @@ msgstr "Змінити обрані доріжки"
 #: src/propedit/options.cpp:186
 #, no-c-format
 msgid "Modification of properties in the section '{0}' was requested, but no corresponding level 1 element was found in the file. {1}\n"
-msgstr "Була задана модифікація властивостей у розділі '{0}', але не було знайдено відповідного елементу 1-го  рівня у файлі. {1}\n"
+msgstr "Була задана модифікація властивостей у главі '{0}', але не було знайдено відповідного елементу 1-го рівня у файлі. {1}\n"
 
 #: src/common/kax_element_names.cpp:269
 #, no-c-format
@@ -8846,7 +8844,7 @@ msgstr "Жодних дій ще не додано."
 #: src/merge/output_control.cpp:962
 #, no-c-format
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
-msgstr "Не було задано розподілення для файлу номер {0} ({1}). Натомість, типово буде застосовано розподілення {2}. Будь ласка, прийміть це до уваги, якщо робота mkvmerge перерветься з повідомленням про помилку щодо неприпустимої опції '--append-to'.\n"
+msgstr "Для файлу номер {0} ('{1}') не було надано приєднання розподілення. Натомість, за замовчуванням буде застосовано розподілення {2}. Будь ласка, прийміть це до уваги, якщо робота mkvmerge перерветься з повідомленням про помилку щодо неприпустимого параметра '--append-to'.\n"
 
 #: src/propedit/attachment_target.cpp:209
 #: src/propedit/attachment_target.cpp:220
@@ -8862,12 +8860,12 @@ msgstr "Жодних змін не було зроблено.\n"
 #: src/merge/mkvmerge.cpp:1127
 #, no-c-format
 msgid "No chapter numbers listed after '--split {0}'.\n"
-msgstr "Жодного номера розділу не вказано після '--split {0}'.\n"
+msgstr "Жодного номера глави не вказано після '--split {0}'.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1529
 #, no-c-format
 msgid "No cues"
-msgstr "Без списків cues"
+msgstr "Немає списків cues"
 
 #: src/extract/cues.cpp:116
 #, no-c-format
@@ -9032,7 +9030,7 @@ msgstr "Немає {0}, визначеного у '--{1} {2}'.\n"
 #: src/common/xml/ebml_converter.cpp:272
 #, no-c-format
 msgid "Non-hex digits encountered."
-msgstr "Натраплено на нешістнадцяткові цифри."
+msgstr "Неочікувані не шістнадцяткові цифри."
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:298
 #, no-c-format
@@ -9067,7 +9065,7 @@ msgstr "Зазвичай mkvmerge буде застосовувати додат
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:65
 #, no-c-format
 msgid "Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."
-msgstr "Зазвичай mkvmerge буде використовувати значення 1000000, що означає, що таймкод і тривалість матиме точність 1 мс."
+msgstr "Зазвичай mkvmerge буде використовувати значення 1000000, що означає, що мітка часу і тривалість матиме точність 1 мс."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:289
 #, no-c-format
@@ -9136,7 +9134,7 @@ msgstr "Майте на увазі, що не так багато плеєрів
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:331
 #, no-c-format
 msgid "Note that even if the option is disabled mkvmerge will copy a source file's title property unless a title is manually set by the user."
-msgstr "Майте на увазі, що навіть якщо опція вимкнена mkvmerge буде копіювати права власності вихідного файлу, хіба тільки назва не встановлюється вручну користувачем."
+msgstr "Майте на увазі, що навіть якщо параметр вимкнений mkvmerge буде копіювати права власності вхідного файлу, хіба тільки назва не встановлюється вручну користувачем."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:519
 #: src/mkvtoolnix-gui/merge/input.cpp:525
@@ -9189,7 +9187,7 @@ msgstr "Кільк&ість записів для створення:"
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:314
 #, no-c-format
 msgid "Number of chapters:"
-msgstr "Кількість розділів:"
+msgstr "Кількість глав:"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:197
 #, no-c-format
@@ -9224,7 +9222,7 @@ msgstr "Ogg/OGM аудіо/відео файли"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1885
 #, no-c-format
 msgid "One chapter for each appended file"
-msgstr "Один розділ на кожний файл, що приєднується"
+msgstr "Одна глава на кожний файл, що приєднується"
 
 #: src/propedit/propedit_cli_parser.cpp:282
 #, no-c-format
@@ -9283,7 +9281,7 @@ msgstr "Лише потрібно в деяких ситуаціях:"
 #: src/merge/mkvmerge.cpp:1792
 #, no-c-format
 msgid "Only one chapter file allowed in '{0} {1}'.\n"
-msgstr "Дозволено лише один файл розділу в '{0} {1}'.\n"
+msgstr "Дозволено лише один файл глави в '{0} {1}'.\n"
 
 #: src/merge/mkvmerge.cpp:2193
 #, no-c-format
@@ -9313,7 +9311,7 @@ msgstr "Дозволено лише один вхідний файл.\n"
 #: src/merge/output_control.cpp:943
 #, no-c-format
 msgid "Only partial append mappings were given for the file no. {0} ('{1}'). Either don't specify any mapping (in which case the default mapping will be used) or specify a mapping for all tracks that are to be copied.\n"
-msgstr "Лише часткові розподілення для приєднання були означені для файла номер {0} ({1}). Необхідно, або не задавати ніякого розподілення (тоді буде використовуватись типове розподілення), або задати розподілення для всіх доріжок, які повинні бути скопійовані.\n"
+msgstr "Для файлу номер {0} ('{1}') було надано лише часткове приєднання розподілення. Необхідно, або не задавати ніякого розподілення (тоді буде використовуватись розподілення за замовчуванням), або задати розподілення для всіх доріжок, які будуть скопійовані.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:481
 #, no-c-format
@@ -9361,7 +9359,7 @@ msgstr[2] "У вихідних файлах і файлах глав знайд�
 #: src/common/file_types.cpp:97
 #, no-c-format
 msgid "Open Bitstream Units stream"
-msgstr ""
+msgstr "потік Open Bitstream Units"
 
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:202
 #: src/mkvtoolnix-gui/info/tool.cpp:128
@@ -9469,7 +9467,7 @@ msgstr "Opus"
 #: src/common/file_types.cpp:54
 #, no-c-format
 msgid "Opus (in Ogg) audio files"
-msgstr "Opus (in Ogg) аудіо файли"
+msgstr "Opus (в Ogg) аудіо файли"
 
 #: src/common/kax_element_names.cpp:166
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:327
@@ -9631,7 +9629,7 @@ msgstr "Ширина в пікселях"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:122
 #, no-c-format
 msgid "Play a WAV file with the default application:"
-msgstr "Відтворити файл WAV за допомогою типового додатку:"
+msgstr "Відтворити файл WAV за допомогою додатку за замовчуванням:"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:196
 #: src/mkvtoolnix-gui/util/settings.cpp:78
@@ -9718,12 +9716,12 @@ msgstr "Будь ласка, оберіть файл."
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:82
 #, no-c-format
 msgid "Please select the actions to apply to all editions, chapters and sub-chapters."
-msgstr "Будь ласка, оберіть дії, які будуть застосовуватись до усіх редакцій, розділів і підрозділів."
+msgstr "Будь ласка, оберіть дії, які будуть застосовуватись до усіх редакцій, глав і суб-глав."
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:80
 #, no-c-format
 msgid "Please select the actions to apply to the selected edition or chapter and all of its children."
-msgstr "Будь ласка, оберіть дії, які будуть застосовуватись до обраної редакції чи розділу і усіх дочірніх елементів."
+msgstr "Будь ласка, оберіть дії, які будуть застосовуватись до обраної редакції чи глави і усіх дочірніх елементів."
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:148
 #, no-c-format
@@ -10105,7 +10103,7 @@ msgstr "Необроблені OBU без поля розміру не підт�
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:238
 #, no-c-format
 msgid "Re&number sub-chapters"
-msgstr "Зм&іна нумерації існуючих підрозділів"
+msgstr "Зм&іна нумерації існуючих суб-глав"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:386
 #, no-c-format
@@ -10184,12 +10182,12 @@ msgstr "Координата Y колірності червоного, як в�
 #: src/common/kax_element_names.cpp:113
 #, no-c-format
 msgid "Red colour coordinate x"
-msgstr "Координата 'x' червоного кольору"
+msgstr "Координата X червоного кольору"
 
 #: src/common/kax_element_names.cpp:114
 #, no-c-format
 msgid "Red colour coordinate y"
-msgstr "Координата 'y' червоного кольору"
+msgstr "Координата Y червоного кольору"
 
 #: src/common/cli_parser.cpp:185
 #, no-c-format
@@ -10202,9 +10200,9 @@ msgid "Reduce to core"
 msgstr "Залишити лише ядро"
 
 #: src/common/kax_element_names.cpp:255
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Reference block"
-msgstr "Блок звернення: {0}.{1:06}мс"
+msgstr "Довідковий блок"
 
 #: src/common/kax_element_names.cpp:256
 #, no-c-format
@@ -10235,17 +10233,17 @@ msgstr "Перезавантажити змінений файл"
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:294
 #, no-c-format
 msgid "Remaining time for current job:"
-msgstr "Час, що залишився:"
+msgstr "Час, що залишився на поточне завдання:"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:297
 #, no-c-format
 msgid "Remaining time for queue:"
-msgstr "Час, що залишився:"
+msgstr "Час, що залишився для черги:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:754
 #, no-c-format
 msgid "Remo&ve chapters from existing Matroska file"
-msgstr "Вида&лити розділи з існуючого файлу Matroska"
+msgstr "Вида&лити глави з існуючого файлу Matroska"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:732
 #, no-c-format
@@ -10318,27 +10316,27 @@ msgstr "Видаляє або принаймні мінімізує посиле
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:384
 #, no-c-format
 msgid "Removing chapters from existing Matroska file"
-msgstr "Видалення розділи з існуючого файлу Matroska"
+msgstr "Видалення глав з існуючого файлу Matroska"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:381
 #, no-c-format
 msgid "Removing the chapters failed."
-msgstr "Помилка при видаленні розділів."
+msgstr "Помилка при видаленні глав."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
 #, no-c-format
 msgid "Renumbering existing sub-chapters"
-msgstr "Зміна нумерації існуючих підрозділів"
+msgstr "Зміна нумерації існуючих суб-глав"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:175
 #, no-c-format
 msgid "Renumbering sub-chapters"
-msgstr "Перенумерувати підрозділи"
+msgstr "Перенумерувати суб-глави"
 
 #: src/propedit/propedit_cli_parser.cpp:239
 #, no-c-format
 msgid "Replace an attachment with the file 'filename'"
-msgstr "Замінити вкладення файлом 'назва файла'"
+msgstr "Замінити вкладення файлом 'filename'"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:209
 #, no-c-format
@@ -10408,7 +10406,7 @@ msgstr "Клацніть правою кнопкою миші, щоб побач
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:253
 #, no-c-format
 msgid "Right-click for actions for editions and chapters"
-msgstr "Клацніть правою кнопкою миші, щоб побачити наявні дії над розділами і редакціями"
+msgstr "Клацніть правою кнопкою миші, щоб побачити наявні дії над главами і редакціями"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:408
 #, no-c-format
@@ -10484,7 +10482,7 @@ msgstr "субтитри SRT"
 #: src/common/file_types.cpp:56
 #, no-c-format
 msgid "SRT text subtitles"
-msgstr "SRT текстові субтитри"
+msgstr "текстові субтитри SRT"
 
 #: src/common/file_types.cpp:103
 #, no-c-format
@@ -10495,7 +10493,7 @@ msgstr "субтитри SSA/ASS"
 #: src/output/p_ssa.h:28
 #, no-c-format
 msgid "SSA/ASS text subtitles"
-msgstr "SSA/ASS текстові субтитри"
+msgstr "текстові субтитри SSA/ASS"
 
 #: src/input/subtitles.cpp:430
 #, no-c-format
@@ -10505,12 +10503,12 @@ msgstr "SSA/ASS: наступний рядок буде пропущено, ос
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2139
 #, no-c-format
 msgid "Sa&me directory as the first source file"
-msgstr "Ви&користовувати ту ж теку, що і перший вхідний файл"
+msgstr "Ви&користовувати каталог, що і перший вхідний файл"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:644
 #, no-c-format
 msgid "Sa&ve settings as"
-msgstr "&Зберегти опції мультиплексування як"
+msgstr "&Зберегти параметри мультиплексування як"
 
 #: src/common/kax_element_names.cpp:106
 #, no-c-format
@@ -10545,12 +10543,12 @@ msgstr "Зберегти вкладення"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:766
 #, no-c-format
 msgid "Save chapters as XML"
-msgstr "Зберегти розділи до файлу XML"
+msgstr "Зберегти глави до XML"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:805
 #, no-c-format
 msgid "Save chapters to Matroska or WebM file"
-msgstr "Зберегти розділи до файлу Matroska або WebM"
+msgstr "Зберегти глави до файлу Matroska або WebM"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:395
 #, no-c-format
@@ -10582,7 +10580,7 @@ msgstr "Помилка під час збереження"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:847
 #, no-c-format
 msgid "Saving the chapters failed."
-msgstr "Зберегти розділи не вдалося."
+msgstr "Зберегти глави не вдалося."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:255
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:264
@@ -10603,7 +10601,7 @@ msgstr "Збереження змінених заголовків доріжо�
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
 #, no-c-format
 msgid "Scan directory for other playlists"
-msgstr "Сканування інших списків відтворення теки"
+msgstr "Сканувати каталог на наявність інших списків відтворення"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:304
 #, no-c-format
@@ -10614,7 +10612,7 @@ msgstr "Проскановані файли"
 #: src/mkvtoolnix-gui/merge/tool.cpp:928
 #, no-c-format
 msgid "Scanning directory"
-msgstr "Сканування теки"
+msgstr "Сканування каталога"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2155
 #, no-c-format
@@ -10676,9 +10674,9 @@ msgid "Seek position"
 msgstr "Позиція пошуку"
 
 #: src/common/kax_element_names.cpp:213
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Seek pre-roll"
-msgstr "Запис пошуку "
+msgstr "Пошук до початку перегляду"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:528
 #, no-c-format
@@ -10751,7 +10749,7 @@ msgstr[2] "Виберіть усі елементи з обраних файлі
 #: src/mkvtoolnix-gui/merge/input.cpp:1497
 #, no-c-format
 msgid "Select all tracks of specific &type"
-msgstr "Обрати всі треки специфічного &типу"
+msgstr "Обрати всі доріжки певного &типу"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:254
 #: src/mkvtoolnix-gui/merge/output.cpp:205
@@ -10769,7 +10767,7 @@ msgstr "Оберіть аудіо файл"
 #: src/mkvtoolnix-gui/merge/output.cpp:551
 #, no-c-format
 msgid "Select chapter file"
-msgstr "Оберіть файл розділів"
+msgstr "Оберіть файл глав"
 
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:146
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:147
@@ -10830,7 +10828,7 @@ msgstr "Оберіть файл тегу"
 #: src/mkvtoolnix-gui/merge/input.cpp:1122
 #, no-c-format
 msgid "Select timestamp file"
-msgstr "Оберіть файл тайм-кодів"
+msgstr "Оберіть файл міток часу"
 
 #: src/mkvtoolnix-gui/forms/util/side_by_side_multi_select.h:139
 #, no-c-format
@@ -10850,7 +10848,7 @@ msgstr "Обирається те, як mkvmerge обчислює мітки ч�
 #: src/mkvtoolnix-gui/merge/input.cpp:557
 #, no-c-format
 msgid "Selects the character set a subtitle file or chapter information was written with."
-msgstr "Обирається набір символів, з яким записано файл субтитрів або інформація про розділи."
+msgstr "Обирає набір символів, з яким записано файл субтитрів або інформація про глави."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:396
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:149
@@ -10872,9 +10870,7 @@ msgstr "Встановити ім’я файлу призначення з ім
 #: src/common/property_element.cpp:134
 #, no-c-format
 msgid "Set if that track (audio, video or subs) SHOULD be used if no language found matches the user preference."
-msgstr ""
-"Задавати необхідно, якщо трек (аудіо, відео або субтитрів) ПОВИНЕН\n"
-"бути використаний при умові, що не знайдено жодної мови, яка б співпадала з уподобаннями користувача."
+msgstr "Задавати необхідно, якщо доріжка (аудіо, відео або субтитрів) ПОВИННА бути використана при умові, що не знайдено жодної мови, яка б співпадала з уподобаннями користувача."
 
 #: src/common/property_element.cpp:135
 #, no-c-format
@@ -10899,12 +10895,12 @@ msgstr "Задає UID для використання з параметрами
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:205
 #, no-c-format
 msgid "Set the chapter names' &languages:"
-msgstr "Встановіть назви та мови &розділів:"
+msgstr "Встановіть мову імен глав:"
 
 #: src/propedit/propedit_cli_parser.cpp:233
 #, no-c-format
 msgid "Set the charset to use when reading chapter files using the simple chapter format"
-msgstr ""
+msgstr "Встановлює набір символів для використання під час читання файлів глав за допомогою простого формату глав"
 
 #: src/propedit/propedit_cli_parser.cpp:243
 #, no-c-format
@@ -10924,12 +10920,12 @@ msgstr "Встановлюється певне значення парамет�
 #: src/propedit/propedit_cli_parser.cpp:225
 #, no-c-format
 msgid "Sets the Matroska file section that all following add/set/delete actions operate on (see below and man page for syntax)"
-msgstr "Встановлюється розділ файлу Matroska, над яким усі наступні дії  - приєднання/встановлення/видалення оперують (див. нижче і сторінку допомоги для пояснення синтаксису)"
+msgstr "Встановлюється розділ файлу Matroska, з яким виконуються додавання/встановлення/видалення (див. нижче і документацію і пояснення синтаксису)"
 
 #: src/propedit/propedit_cli_parser.cpp:222
 #, no-c-format
 msgid "Sets the Matroska parser mode to 'fast' (default) or 'full'"
-msgstr "Встановлюється режим аналізатора Matroska як 'fast' (типово) або як 'full'"
+msgstr "Встановлюється режим аналізатора Matroska як 'fast' (за замовчуванням) або як 'full'"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:533
 #, no-c-format
@@ -10939,7 +10935,7 @@ msgstr "Встановлює параметри обрізання, завдяк
 #: src/mkvtoolnix-gui/merge/input.cpp:488
 #, no-c-format
 msgid "Sets the lossless compression algorithm to be used for this track."
-msgstr "Встановлює алгоритм стиснення без втрат, який буде використовуватися для цього треку."
+msgstr "Встановлює алгоритм стиснення без втрат, який буде використовуватися для цієї доріжки."
 
 #: src/common/property_element.cpp:170
 #, no-c-format
@@ -11136,15 +11132,15 @@ msgid "Similarly an audio track will be inserted before the first track that's n
 msgstr "Подібним чином звукова доріжка буде вставлена ​​перед першою доріжкою, яка не є ні відео, ні аудіодоріжкою."
 
 #: src/common/kax_element_names.cpp:318
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Simple"
-msgstr "ПростийБлок"
+msgstr "Простий"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:202
 #: src/mkvtoolnix-gui/merge/output.cpp:547
 #, no-c-format
 msgid "Simple OGM-style chapter files"
-msgstr "Прості файли розділів OGM"
+msgstr "Прості файли глав OGM"
 
 #: src/common/kax_element_names.cpp:272
 #, no-c-format
@@ -11154,7 +11150,7 @@ msgstr "Простий блок"
 #: src/common/chapters/chapters.cpp:172
 #, no-c-format
 msgid "Simple chapter parser: {0}\n"
-msgstr "Простий аналізатор розділу: {0}\n"
+msgstr "Аналізатор простих глав: {0}\n"
 
 #: src/mpegparser/M2VParser.cpp:416
 #, no-c-format
@@ -11245,7 +11241,7 @@ msgstr "Назва вхідного файлу"
 #: src/mkvtoolnix-gui/merge/track_model.cpp:82
 #, no-c-format
 msgid "Source file's directory"
-msgstr "Тека вхідних файлів"
+msgstr "Каталог вхідних файлів"
 
 #: src/common/property_element.cpp:203
 #, no-c-format
@@ -11275,9 +11271,7 @@ msgstr "Визначає мову доріжки."
 #: src/common/property_element.cpp:163
 #, no-c-format
 msgid "Specify the possible modifications to the aspect ratio (0: free resizing, 1: keep aspect ratio, 2: fixed)."
-msgstr ""
-"Вкажіть можливі зміни співвідношення сторін екрану\n"
-"(0: вільна зміна співвідношення, 1: зберігати співвідношення, 2: фіксоване співвідношення)."
+msgstr "Вкажіть можливі зміни співвідношення сторін екрану (0: вільна зміна, 1: тримати, 2: фіксоване)."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1860
 #, no-c-format
@@ -11297,7 +11291,7 @@ msgstr "Розділення доріжок цього типу не підтр�
 #: src/mkvtoolnix-gui/merge/output.cpp:336
 #, no-c-format
 msgid "Splitting will occur right before the first key frame whose timestamp is equal to or bigger than the start timestamp for the chapters whose numbers are listed."
-msgstr "Розбиття буде відбуватись зразу перед першим ключовим кадром, тайм-код якого рівний або більший за початковий тайм-код розділів, чиї номери вказані."
+msgstr "Розділення буде відбуватись перед першим ключовим кадром, мітка часу якого дорівнює або більша за початкову мітку часу глав, чиї номери вказані."
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:736
 #, no-c-format
@@ -11426,7 +11420,7 @@ msgstr "Рядок"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1844
 #, no-c-format
 msgid "Subtitle and chapter properties"
-msgstr "Властивості субтитрів і розділів "
+msgstr "Властивості субтитрів і глав"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:46
 #, no-c-format
@@ -11523,7 +11517,7 @@ msgstr "Теги"
 #: src/mkvtoolnix-gui/merge/output.cpp:245
 #, no-c-format
 msgid "Tags are allowed, but chapters are not."
-msgstr "Теги дозволені, але розділи ні."
+msgstr "Теги дозволені, але глави ні."
 
 #: src/merge/generic_reader.cpp:303
 #, no-c-format
@@ -11633,7 +11627,7 @@ msgstr "Заголовки FLAC не можуть бути проаналізо�
 #: src/output/p_generic_video.cpp:74
 #, no-c-format
 msgid "The FPS is 0.0 but the reader did not provide a timestamp for a packet. {0}\n"
-msgstr "Значення кадрів за секунду є 0.0, але зчитувач не надав тайм-коду для пакета. {0}\n"
+msgstr "Значення кадрів за секунду є 0.0, але зчитувач не надав мітки часу для пакета. {0}\n"
 
 #: src/merge/mkvmerge.cpp:1453
 #, no-c-format
@@ -11745,19 +11739,19 @@ msgstr "Набори кодів Vorbis є різними. Такі доріжк�
 #: src/common/xml/ebml_chapters_converter.cpp:232
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error at position {2}: {1}\n"
-msgstr "XML файл розділів '{0}' містить помилку на позиції {2}: {1}\n"
+msgstr "XML файл глав '{0}' містить помилку на позиції {2}: {1}\n"
 
 #: src/common/chapters/chapters.cpp:506
 #: src/common/xml/ebml_chapters_converter.cpp:235
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
-msgstr "XML файл розділів '{0}' містить помилку: {1}\n"
+msgstr "XML файл глав '{0}' містить помилку: {1}\n"
 
 #: src/common/chapters/chapters.cpp:502
 #: src/common/xml/ebml_chapters_converter.cpp:229
 #, no-c-format
 msgid "The XML chapter file '{0}' could not be read.\n"
-msgstr "XML файл розділів '{0}' не може бути прочитаний.\n"
+msgstr "XML файл глав '{0}' не може бути прочитаний.\n"
 
 #: src/common/xml/ebml_converter.cpp:352
 #, no-c-format
@@ -11885,7 +11879,7 @@ msgstr "Зміни записуються до файлу.\n"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:932
 #, no-c-format
 msgid "The chapter UID must be a number if given."
-msgstr "UID розділу має бути цифрою, якщо заданий."
+msgstr "UID глав має бути цифрою, якщо заданий."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:322
 #, no-c-format
@@ -11956,12 +11950,12 @@ msgstr "Елементи cue (індекс) в процесі запису...\n"
 #: src/extract/tracks.cpp:397
 #, no-c-format
 msgid "The cue sheet for track {0} will be written to '{1}'.\n"
-msgstr "Трек-лист CUE для доріжки {0} буде записаний до '{1}'.\n"
+msgstr "Список cue для доріжки {0} буде записаний до '{1}'.\n"
 
 #: src/extract/cues.cpp:59
 #, no-c-format
 msgid "The cues for track {0} are written to '{1}'.\n"
-msgstr "Елементи CUE для доріжки {0} записуються до '{1}'.\n"
+msgstr "Списки CUE для доріжки {0} записуються до '{1}'.\n"
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:53
 #, no-c-format
@@ -11976,7 +11970,7 @@ msgstr "Поточні налаштування мультиплексуванн
 #: src/merge/generic_packetizer.cpp:1454
 #, no-c-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
-msgstr "Тайм-код поточного пакету є меншим ніж для попереднього пакета. Це зазвичай означає, що вхідний файл являє собою файл Matroska, який не було створено на 100% корректно. Тайм-коди всіх пакетів будуть скореговані на {0} мс, щоб не втратити дані. Даний крок може призвести до розсинхронізації аудіо і відео, але це може бути виправлено за допомогою параметра mkvmerge \"--sync\". Якщо ви вже використовуєте опцію \"--sync\" і все одно отримуєте це попередження, то не хвилюйтеся - це нормально. Якщо ж дана помилка виникає кілька разів, і ви отримаєте це повідомлення більше одного разу для конкретної доріжки, тоді або  вхідний файл некорректно створений, або це помилка mkvmerge. У цьому випадку вам слід зв'язатися з автором Moritz Bunkus <moritz@bunkus.org>.\n"
+msgstr "Мітка часу поточного пакету є меншою ніж для попереднього пакета. Це зазвичай означає, що вхідний файл являє собою файл Matroska, який не було створено на 100% корректно. Мітки часу всіх пакетів будуть скореговані на {0}мс, щоб не втратити дані. Даний крок може призвести до розсинхронізації аудіо і відео, але це може бути виправлено за допомогою параметра mkvmerge \"--sync\". Якщо ви вже використовуєте параметр \"--sync\" і все одно отримуєте це попередження - не хвилюйтеся - це нормально. Якщо ж дана помилка виникає кілька разів і ви отримуєте це повідомлення більше одного разу для певної доріжки, тоді або вхідний файл некоректно створений, або це помилка mkvmerge. У цьому випадку вам слід зв'язатися з автором Moritz Bunkus <moritz@bunkus.org>.\n"
 
 #: src/common/kax_analyzer.cpp:193
 #, no-c-format
@@ -12006,17 +12000,17 @@ msgstr "За замовчуванням є 'файл', а 'track' є альте�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:421
 #, no-c-format
 msgid "The default is to always add all the files to the current multiplex settings."
-msgstr "Типово усі файли завжди додаються до поточних налаштувань мультиплексування."
+msgstr "За замовчуванням усі файли завжди додаються до поточних налаштувань мультиплексування."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:546
 #, no-c-format
 msgid "The default is to ask the user what to do with the dropped files."
-msgstr "Типовим є запитання користувача про те, що робити з файлами, перетягнутими на вікно."
+msgstr "За замовчуванням користувач буде запитаний про те, що робити з файлами, перетягнутими на вікно."
 
 #: src/input/r_usf.cpp:88
 #, no-c-format
 msgid "The default language code '{0}' is not a valid ISO 639-2 language code and will be ignored.\n"
-msgstr "Типовий код мови для '{0}' не є корректним кодом мови ISO 639-2 і буде проігнорований.\n"
+msgstr "Код мови за замовчуванням для '{0}' не є корректним кодом мови ISO 639-2 і буде проігнорований.\n"
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:54
 #, no-c-format
@@ -12050,9 +12044,9 @@ msgstr "Ім’я цільового файлу недійсне, і його п
 #, no-c-format
 msgid "The directory it is located in contains %1 other file with the same extension."
 msgid_plural "The directory it is located in contains %1 other files with the same extension."
-msgstr[0] "Тека, де він знаходиться, містить %1 файл з тим самим розширенням."
-msgstr[1] "Тека, де він знаходиться, містить %1 файли з тим самим розширенням."
-msgstr[2] "Тека, де він знаходиться, містить %1 файлів з тим самим розширенням."
+msgstr[0] "Каталог, де він знаходиться, містить %1 файл з тим самим розширенням."
+msgstr[1] "Каталог, де він знаходиться, містить %1 файли з тим самим розширенням."
+msgstr[2] "Каталог, де він знаходиться, містить %1 файлів з тим самим розширенням."
 
 #: src/merge/connection_checks.h:48
 #, no-c-format
@@ -12145,7 +12139,7 @@ msgstr "Файл \"%1\" був змінений. Ви дійсно хочете 
 #: src/mkvtoolnix-gui/merge/tool.cpp:831
 #, no-c-format
 msgid "The file '%1' contains chapters."
-msgstr "Файл '%1' містить розділи."
+msgstr "Файл '%1' містить глави."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:846
 #, no-c-format
@@ -12406,7 +12400,7 @@ msgstr "Файл номер {0} ('{1}') не приєднується. Аргу�
 #: src/common/mm_io_x.cpp:38
 #, no-c-format
 msgid "The file or directory was not found"
-msgstr "Файл або теку не було знайдено"
+msgstr "Файл або каталог не було знайдено"
 
 #: src/common/kax_file.cpp:60
 #: src/common/kax_file.cpp:66
@@ -12433,7 +12427,7 @@ msgstr "Файл, який ви намагалися відкрити (%1) не 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:374
 #, no-c-format
 msgid "The file you tried to open (%1) does not contain any chapters."
-msgstr "Цей файл (%1) не містить розділів."
+msgstr "Цей файл (%1) не містить глав."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:129
 #, no-c-format
@@ -12455,7 +12449,7 @@ msgstr "Першим аргументом має бути назва вхідн�
 #: src/common/kax_file.cpp:51
 #, no-c-format
 msgid "The first cluster timestamp after the resync is {0}.\n"
-msgstr "Перший тайм-код кластера після повторної синхронізації - {0}.\n"
+msgstr "Першою міткою часу кластера після повторної синхронізації є {0}.\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1904
 #, no-c-format
@@ -12490,7 +12484,7 @@ msgstr "Наступний додаток не може бути запущен�
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:339
 #, no-c-format
 msgid "The format defaults to %H:%M:%S if none is given."
-msgstr "Якщо не задано, то буде використовуватися типовий формат %H:%M:%S."
+msgstr "Якщо не задано, то буде використовуватися формат за замовчуванням %H:%M:%S."
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:67
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:67
@@ -12500,7 +12494,7 @@ msgstr "Якщо не задано, то буде використовувати
 #: src/mkvtoolnix-gui/merge/output.cpp:298
 #, no-c-format
 msgid "The format is either the form 'HH:MM:SS.nnnnnnnnn' or a number followed by one of the units 's', 'ms' or 'us'."
-msgstr "Тайм-коди можуть бути задані або у формі HH:MM:SS.nnnnnnnnn, або як число секунд, що закінчується на 's'."
+msgstr "Мітки часу можуть бути задані або у форматі HH:MM:SS.nnnnnnnnn, або як число секунд, що закінчується на 's'."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:289
 #, no-c-format
@@ -12525,7 +12519,7 @@ msgstr "Згенерована назва вихідного файла міст
 #: src/merge/mkvmerge.cpp:1871
 #, no-c-format
 msgid "The given timestamp scale factor is outside the valid range (1...10000000 or -1 for 'sample precision even if a video track is present').\n"
-msgstr "Даний масштабний коефіцієнт тайм-коду знаходиться за межами допустимого діапазону (1 ... 10000000 або -1 для 'точності до семплу, навіть якщо доріжка відео присутня').\n"
+msgstr "Даний масштабний коефіцієнт мітки часу знаходиться за межами допустимого діапазону (1 ... 10000000 або -1 для 'точності до семплу, навіть якщо доріжка відео присутня').\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:204
 #, no-c-format
@@ -12580,7 +12574,7 @@ msgstr "Вибрана тут мова використовується для �
 #: src/mkvtoolnix-gui/merge/output.cpp:212
 #, no-c-format
 msgid "The language set here is also used when chapters are generated."
-msgstr "Мова, задана тут, також використовується при генеруванні розділів."
+msgstr "Мова, задана тут, також використовується при генеруванні глав."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:364
 #, no-c-format
@@ -12600,7 +12594,7 @@ msgstr "Мови у списку «вибраних» праворуч відо�
 #: src/common/kax_file.cpp:225
 #, no-c-format
 msgid "The last timestamp processed before the error was encountered was {0}.\n"
-msgstr "Останнім опрацьованим тайм-кодом перед тим, як сталася помилка, був {0}.\n"
+msgstr "Останньою опрацьованою міткою часу перед тим, як сталася помилка, була {0}.\n"
 
 #: src/propedit/change.cpp:209
 #, no-c-format
@@ -12610,12 +12604,12 @@ msgstr "Буква «Z» може використовуватися заміс�
 #: src/mkvtoolnix-gui/merge/output.cpp:262
 #, no-c-format
 msgid "The letters 'G', 'M' and 'K' can be used to indicate giga/mega/kilo bytes respectively."
-msgstr "Розмір, після якого буде починатися новий вихідний файл. Символи 'G', 'M' і 'K' можуть використовуватися для задання розміру в гіга/мега/кілобайтах відповідно. Всі одиниці базуються на 1024 (G = 1024^3, M = 1024^2 и K = 1024)."
+msgstr "Символи 'G', 'M' і 'K' можуть використовуватися для задання розміру в гіга/мега/кілобайтах відповідно."
 
 #: src/merge/timestamp_factory.cpp:218
 #, no-c-format
 msgid "The line {0} of the timestamp file '{1}' does not contain a valid floating point number.\n"
-msgstr "Рядок {0} файлу тайм-коду '{1}' не містить корректно задане число з плаваючою комою.\n"
+msgstr "Рядок {0} файлу мітки часу '{1}' не містить корректного числа з плаваючою комою.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1319
 #, no-c-format
@@ -12734,7 +12728,7 @@ msgstr "Число каналів двох звукових доріжок є р
 #: src/merge/timestamp_factory.cpp:273
 #, no-c-format
 msgid "The number of external timestamps {0} is smaller than the number of frames in this track. The remaining frames of this track might not be timestamped the way you intended them to be. mkvmerge might even crash.\n"
-msgstr "Число зовнішніх тайм-кодів {0} менше, ніж кількість кадрів цієї доріжки. Решта кадрів цієї доріжки може не отримати тайм-коди у спосіб, який ви передбачали. Робота mkvmerge може бути аварійно завершена.\n"
+msgstr "Число зовнішніх міток часу {0} менше, ніж кількість кадрів цієї доріжки. Решта кадрів цієї доріжки може не отримати мітки часу у спосіб, який ви передбачали. Робота mkvmerge може бути аварійно завершена.\n"
 
 #: src/common/property_element.cpp:162
 #, no-c-format
@@ -12940,7 +12934,7 @@ msgstr "Файл налаштувань \"%1\" містить неприпуст
 #: src/extract/extract_cli_parser.cpp:126
 #, no-c-format
 msgid "The sixth mode finds the timestamps of all blocks for a track and outputs a timestamp v2 file with these timestamps."
-msgstr "Шостий режим дозволяє шукати тайм-коди всіх блоків для треку і записувати їх до файлу тайм-коду v2."
+msgstr "Шостий режим дозволяє шукати мітки часу всіх блоків для доріжки і записувати їх до файлу міток часу версії 2."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:261
 #, no-c-format
@@ -13011,7 +13005,7 @@ msgstr "Рядки '<FILE_NAME>' і '<FILE_NAME_WITH_EXT>', які працюю�
 #: src/propedit/propedit_cli_parser.cpp:256
 #, no-c-format
 msgid "The strings 'info', 'segment_info' or 'segmentinfo' select the segment information element. This is also the default until the first '--edit' option is found."
-msgstr "Використовуючи конcтрукцію  'info', 'segment_info' або 'segmentinfo', можна вибрати елемент інформації сегмента. Це також типове значення до першого знайденого '--edit'."
+msgstr "Використовуючи конcтрукцію  'info', 'segment_info' або 'segmentinfo', можна вибрати елемент інформації сегмента. Це буде значенням за замовчуванням до першого знайденого '--edit'."
 
 #: src/common/xml/xml.h:127
 #, no-c-format
@@ -13041,17 +13035,17 @@ msgstr "Третій режим дозволяє витягувати вклад
 #: src/merge/timestamp_factory.cpp:69
 #, no-c-format
 msgid "The timestamp file '{0}' contains an unsupported/unrecognized format (version {1}).\n"
-msgstr "Файл тайм-коду '{0}' містить непідтримуваний/нерозпізнаний формат (версія {1}).\n"
+msgstr "Файл міток часу '{0}' містить непідтримуваний/нерозпізнаний формат (версія {1}).\n"
 
 #: src/merge/timestamp_factory.cpp:55
 #, no-c-format
 msgid "The timestamp file '{0}' contains an unsupported/unrecognized format line. The very first line must look like '# timestamp format v1'.\n"
-msgstr "Файл тайм-коду '{0}' містить непідтримуваний/нерозпізнаний рядок форматування. Найперший рядок має бути схожим на такий - '# timestamp format v1'.\n"
+msgstr "Файл міток часу '{0}' містить непідтримуваний/нерозпізнаний рядок форматування. Перший рядок має бути схожим на '# timestamp format v1'.\n"
 
 #: src/merge/timestamp_factory.cpp:38
 #, no-c-format
 msgid "The timestamp file '{0}' could not be opened for reading.\n"
-msgstr "Файл тайм-коду '{0}' не можливо було відкрити для зчитування.\n"
+msgstr "Файл міток часу '{0}' не можливо було відкрити для читання.\n"
 
 #: src/merge/timestamp_factory.cpp:92
 #: src/merge/timestamp_factory.cpp:100
@@ -13059,18 +13053,18 @@ msgstr "Файл тайм-коду '{0}' не можливо було відкр
 #: src/merge/timestamp_factory.cpp:306
 #, no-c-format
 msgid "The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"
-msgstr "Файл тайм-коду '{0}' не містить правильного рядка 'Assume' з заданим типовим числом кадрів за секунду.\n"
+msgstr "Файл міток часу '{0}' не містить правильного рядка 'Assume' з заданим числом кадрів за секунду за замовчуванням.\n"
 
 #: src/merge/timestamp_factory.cpp:341
 #, no-c-format
 msgid "The timestamp file '{0}' does not contain a valid 'Gap' line with the duration of the gap.\n"
-msgstr "Файл тайм-коду '{0}' не містить коректний рядок 'Gap' з тривалістю проміжку.\n"
+msgstr "Файл міток часу '{0}' не містить коректного рядка 'Gap' з тривалістю проміжку.\n"
 
 #: src/merge/timestamp_factory.cpp:245
 #: src/merge/timestamp_factory.cpp:370
 #, no-c-format
 msgid "The timestamp file '{0}' does not contain any valid entry.\n"
-msgstr "Файл тайм-коду '{0}' не містить жодного коректного запису.\n"
+msgstr "Файл міток часу '{0}' не містить жодного коректного запису.\n"
 
 #: src/merge/timestamp_factory.cpp:221
 #, no-c-format
@@ -13091,7 +13085,7 @@ msgstr "Мітки часу, після яких запускається нов
 #: src/input/r_ogm.cpp:560
 #, no-c-format
 msgid "The timestamps for this stream have been reset in the middle of the file. This is not supported. The current packet will be discarded.\n"
-msgstr "Тайм-коди для цього потоку були використані до середини файлу. Дана ситуація не підтримується. Поточний пакет буде відкинутий.\n"
+msgstr "Мітки часу для цього потоку були зкинуті у середині файлу. Дана ситуація не підтримується. Поточний пакет буде відкинутий.\n"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:282
 #, no-c-format
@@ -13116,7 +13110,7 @@ msgstr "Доріжка з ID {0} не містить правильного Code
 #: src/merge/output_control.cpp:1093
 #, no-c-format
 msgid "The track ID {0} from the file '{1}' cannot be split. {2}\n"
-msgstr "Ідентифікатор доріжки {0} з файлу \"{1}\" не можна розділити. {2}\n"
+msgstr "Ідентифікатор доріжки {0} з файлу \"{1}\" не може бути розділеним. {2}\n"
 
 #: src/merge/output_control.cpp:675
 #, no-c-format
@@ -13275,7 +13269,7 @@ msgstr "У вхідних файлах і файлах глав немає гл�
 #: src/extract/cues.cpp:54
 #, no-c-format
 msgid "There are no cues for track ID {0}.\n"
-msgstr "Немає жодних записів cue для доріжки з ID {0}.\n"
+msgstr "Немає списків cue для доріжки з ID {0}.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:513
 #, no-c-format
@@ -13357,7 +13351,7 @@ msgstr "Ця доріжка AVC/H.264 не починається з ключо�
 #: src/output/p_avc_es.cpp:42
 #, no-c-format
 msgid "This AVC/H.264 track's timing information indicates that it uses a variable frame rate. However, no default duration nor an external timestamp file has been provided for it, nor does the source container provide timestamps. The resulting timestamps may not be useful.\n"
-msgstr "Ця інформація синхронізації доріжки AVC/H.264 свідчить про те, що використовується змінна швидкість відтворення. Проте, не було надано ні типової тривалості, ні зовнішнього файлу міток часу, і вхідний контейнер не містить мітки часу. Результуючі мітки часу можуть бути непридатними до використання.\n"
+msgstr "Ця інформація синхронізації доріжки AVC/H.264 свідчить про те, що використовується змінна швидкість відтворення. Проте, не було надано ні тривалості за замовчуванням, ні зовнішнього файлу міток часу, і вхідний контейнер не містить мітки часу. Результуючі мітки часу можуть бути непридатними до використання.\n"
 
 #: src/output/p_mp3.cpp:60
 #, no-c-format
@@ -13367,12 +13361,12 @@ msgstr "Ця доріжка MPEG аудіо містить {0} байт не-MP3
 #: src/input/r_ogm.cpp:840
 #, no-c-format
 msgid "This Ogg/OGM file contains chapter or title information. Unfortunately the charset used to store this information in the file cannot be identified unambiguously. The program assumes that your system's current charset is appropriate. This can be overridden with the '--chapter-charset <charset>' switch.\n"
-msgstr "Цей файл Ogg/OGM містить інформацію розділів або заголовків. На жаль набір символів для збереження цієї інформації у файлі, не може бути ідентифікований однозначно. Програма припускає, що поточний набір символів вашої системи є відповідним. Це може бути скасовано використанням ключа '--chapter-charset <charset>'.\n"
+msgstr "Цей файл Ogg/OGM містить інформацію глав або заголовків. На жаль набір символів для збереження цієї інформації у файлі, не може бути ідентифікований однозначно. Програма припускає, що поточний набір символів вашої системи є відповідним. Це може бути скасовано використанням перемикача '--chapter-charset <charset>'.\n"
 
 #: src/input/r_ogm.cpp:847
 #, no-c-format
 msgid "This Ogg/OGM file contains chapters but they could not be parsed. This can be due to the character set not being set properly for them or due to the entries not matching the expected SRT-style format.\n"
-msgstr "Даний файл Ogg/OGM містить розділи, але вони не могли бути опрацьовані. Причиною можуть бути набір символів розділів, що не встановлений вірно або записи розділів, що не підпадають під формат SRT.\n"
+msgstr "Даний файл Ogg/OGM містить глави, але вони не могли бути проаналізовані. Причиною можуть бути набір символів, що не встановлений вірно або записи, що не підпадають під формат SRT.\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:368
 #, no-c-format
@@ -13422,7 +13416,7 @@ msgstr "У цьому полі зазвичай встановлюється д�
 #: src/input/subtitles.cpp:215
 #, no-c-format
 msgid "This file contains coordinates in the timestamp lines. Such coordinates are not supported by the Matroska SRT subtitle format. The coordinates will be removed automatically.\n"
-msgstr "Цей файл містить координати в рядках тайм-кодів. Такі координати не підтримуються Matroska SRT форматом субтитрів. Координати будуть автоматично видалені.\n"
+msgstr "Цей файл містить координати в рядках міток часу. Такі координати не підтримуються форматом субтитрів Matroska SRT. Координати будуть автоматично видалені.\n"
 
 #: src/extract/mkvextract.cpp:66
 #: src/propedit/propedit.cpp:159
@@ -13483,7 +13477,7 @@ msgstr "Режим за замовчуванням."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:315
 #, no-c-format
 msgid "This is the language that newly added chapter names get assigned automatically."
-msgstr "Це мова, яку щойно додані назви розділів будуть наслідувати автоматично."
+msgstr "Це мова, яку щойно додані назви глав будуть наслідувати автоматично."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:180
 #, no-c-format
@@ -13493,7 +13487,7 @@ msgstr "Цей заголовок плеєр має відображати як 
 #: src/common/hacks.cpp:47
 #, no-c-format
 msgid "This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers."
-msgstr "Дозволяє використовувати елемент CodecState. Це використовується у MPEG-1/-2 відеодоріжках для зберігання заголовків послідовності."
+msgstr "Це використовується у MPEG-1/-2 відеодоріжках для зберігання заголовків послідовності."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:478
 #, no-c-format
@@ -13519,12 +13513,12 @@ msgstr "Цей режим накладає деякі обмеження."
 #: src/extract/extract_cli_parser.cpp:133
 #, no-c-format
 msgid "This mode extracts cue information for some tracks to external text files."
-msgstr "Даний режим витягує деякі доріжки до зовнішніх файлів."
+msgstr "Цей режим витягує інформацію cue для деяких доріжок до зовнішніх текстових файлів."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:339
 #, no-c-format
 msgid "This mode only considers the top-most level of chapters across all edition entries."
-msgstr "Даний режим враховує лише верхній рівень розділів серед усіх записів редакції."
+msgstr "Даний режим враховує лише верхній рівень глав серед усіх записів редакції."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:297
 #, no-c-format
@@ -13590,7 +13584,7 @@ msgstr "Цей параметр запобігає таку поведінку."
 #: src/mkvtoolnix-gui/merge/output.cpp:210
 #, no-c-format
 msgid "This option specifies the language to be associated with chapters if the OGM chapter format is used."
-msgstr "Цей параметр визначає мову, яка буде пов'язаний з розділами, якщо використовується формат розділів OGM."
+msgstr "Цей параметр визначає мову, яка буде пов'язаний з главами, якщо використовується формат глав OGM."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:518
 #, no-c-format
@@ -13646,7 +13640,7 @@ msgstr "Ця доріжка текстових субтитрів містить
 #: src/mkvtoolnix-gui/merge/input.cpp:544
 #, no-c-format
 msgid "This track contains SBR AAC/HE-AAC/AAC+ data."
-msgstr "Цей трек містить SBR AAC/HE-AAC/AAC+дані."
+msgstr "Ця дорыжка містить дані SBR AAC/HE-AAC/AAC+."
 
 #: src/common/kax_file.cpp:59
 #: src/common/kax_file.cpp:65
@@ -13690,29 +13684,29 @@ msgstr "Інтервал часу"
 #: src/extract/extract_cli_parser.cpp:124
 #, no-c-format
 msgid "Timestamp extraction"
-msgstr "Витягування тайм-кодів"
+msgstr "Витягування міток часу"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1829
 #, no-c-format
 msgid "Timestamp file:"
-msgstr "Файл тайм-кодів:"
+msgstr "Файл міток часу:"
 
 #: src/common/kax_element_names.cpp:86
 #: src/common/kax_element_names.cpp:210
 #, no-c-format
 msgid "Timestamp scale"
-msgstr "Масштаб тайм-коду"
+msgstr "Масштаб міток часу"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1804
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1824
 #, no-c-format
 msgid "Timestamps and default duration"
-msgstr "Тайм-коди і типова тривалість"
+msgstr "Мітки часу і тривалість за замовчуванням"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:279
 #, no-c-format
 msgid "Timestamps:"
-msgstr "Тайм-коди:"
+msgstr "Мітки часу:"
 
 #: src/common/kax_element_names.cpp:98
 #: src/common/property_element.cpp:118
@@ -13736,7 +13730,7 @@ msgstr "Перемкнути прапорець \"Коментарій\""
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:100
 #, no-c-format
 msgid "Toggle \"&default track\" flag"
-msgstr "Перемкнути прапорець \"типова доріжка\""
+msgstr "Перемкнути прапорець \"доріжка за замовчуванням\""
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:101
 #, no-c-format
@@ -13915,7 +13909,7 @@ msgstr "Для доріжки {0} з CodecID '{1}' відсутній елеме
 #: src/extract/xtr_textsubs.cpp:370
 #, no-c-format
 msgid "Track {0}: An USF subtitle entry starting at timestamp {1} is not well-formed XML and will be skipped.\n"
-msgstr "Доріжка {0}: запис субтитрів USF, що починається згідно тайм-коду {1}, не є вірно скомпонованим XML і буде пропущений.\n"
+msgstr "Доріжка {0}: запис субтитрів USF, що починається згідно мітки часу {1}, не є вірно скомпонованим XML і буде пропущений.\n"
 
 #: src/extract/xtr_avc.cpp:44
 #: src/extract/xtr_hevc.cpp:97
@@ -13996,14 +13990,12 @@ msgstr "Тип"
 #: src/common/property_element.cpp:158
 #, no-c-format
 msgid "Type of the unit for DisplayWidth/Height (0: pixels, 1: centimeters, 2: inches, 3: aspect ratio)."
-msgstr ""
-"Тип одиниці задання Ширини/Висоти дисплея\n"
-"(0: пікселі, 1: сантиметри, 2: дюйми, 3: співвідношення сторін)."
+msgstr "Одиниці ширини/висоти дисплея (0: пікселі, 1: сантиметри, 2: дюйми, 3: співвідношення сторін)."
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_run_program_widget.h:336
 #, no-c-format
 msgid "Type-specific settings"
-msgstr "Типові налаштування"
+msgstr "Налаштування певного типу"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:304
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:205
@@ -14060,7 +14052,7 @@ msgstr "Невідомий тип аудіо потоку 0x{0:04x}. Потік 
 #: src/common/chapters/chapters.cpp:498
 #, no-c-format
 msgid "Unknown chapter file format in '{0}'. It does not contain a supported chapter format.\n"
-msgstr "Невідомий формат файлу розділу в '{0}'. Він не містить підтриманий формат розділу.\n"
+msgstr "Невідомий формат файлу глав в '{0}'. Він не містить підтриманий формат глав.\n"
 
 #: src/common/content_decoder.cpp:76
 #, no-c-format
@@ -14146,7 +14138,7 @@ msgstr "Беззнаковое ціле число"
 #: src/input/r_vobsub.cpp:479
 #, no-c-format
 msgid "Unsupported MPEG mpeg_version: 0x{0:02x} in packet {1} for timestamp {2}, assuming MPEG2. No further warnings will be printed for this track.\n"
-msgstr "Непідтримуваний MPEG mpeg_version: 0x{0:02x} в пакеті {1} для тайм-коду {2}, можливо що MPEG2. Жодні подальші попередження не будуть відображатися для цієї доріжки.\n"
+msgstr "Непідтримуваний MPEG mpeg_version: 0x{0:02x} в пакеті {1} для мітки часу {2}, можливо що MPEG2. Жодні подальші попередження не будуть відображатися для цієї доріжки.\n"
 
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:164
 #, no-c-format
@@ -14198,7 +14190,7 @@ msgstr "Використовуйте 'сегмент зв'язування' дл
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2142
 #, no-c-format
 msgid "Use fi&xed directory:"
-msgstr "Використовувати &обрану теку:"
+msgstr "Використовувати &обраний каталог:"
 
 #: src/common/hacks.cpp:39
 #, no-c-format
@@ -14515,14 +14507,14 @@ msgid "Video: horizontal chroma siting"
 msgstr "Відео: горизонтальне розташування кольоровості"
 
 #: src/common/property_element.cpp:181
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video: maximum content light"
-msgstr "Обрізка пікселів справа: {0}"
+msgstr "Відео: максимальна яскравість вмісту"
 
 #: src/common/property_element.cpp:182
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video: maximum frame light"
-msgstr "Висота в пікселях: {0}"
+msgstr "Відео: максимальне освітлення кадру"
 
 #: src/common/property_element.cpp:194
 #, no-c-format
@@ -14569,7 +14561,7 @@ msgstr "Відео: поворот навколо вертикальної ос�
 #: src/common/property_element.cpp:201
 #, no-c-format
 msgid "Video: projection-specific data"
-msgstr "Відео: специфічні дані проекції"
+msgstr "Відео: дані певної проекції"
 
 #: src/common/property_element.cpp:179
 #, no-c-format
@@ -14671,7 +14663,7 @@ msgstr "Питати перед &перезаписом існуючих еле�
 #: src/input/subtitles.cpp:258
 #, no-c-format
 msgid "Warning in line {0}: The start timestamp is smaller than that of the previous entry. All entries from this file will be sorted by their start time.\n"
-msgstr "Попередження для рядку {0}: початковий тайм-код менше, ніж для попереднього запису. Усі записи цього файлу будуть відсортовані за часом їх початку.\n"
+msgstr "Попередження для рядку {0}: початкова мітка часу менша, ніж для попереднього запису. Усі записи цього файлу будуть відсортовані за часом їх початку.\n"
 
 #: src/common/output.cpp:142
 #: src/mkvtoolnix-gui/jobs/job.cpp:254
@@ -14783,7 +14775,7 @@ msgstr "Під час додавання вхідних файлів усі до
 #: src/mkvtoolnix-gui/merge/output.cpp:234
 #, no-c-format
 msgid "When appending: one chapter is created at the start and one whenever a file is appended."
-msgstr "При приєднанні: один розділ створюється на початку і ще один - при кожному приєднанні файлу."
+msgstr "При приєднанні: одна глава створюється на початку і ще одна - при кожному приєднанні файлу."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:446
 #, no-c-format
@@ -14823,7 +14815,7 @@ msgstr "Коли запускати:"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:476
 #, no-c-format
 msgid "Whenever the user adds a playlist the program can automatically scan the directory for other playlists and present the user with a detailed list of the playlists found."
-msgstr "Щоразу, коли користувач додає список відтворення, програма може автоматично сканувати теку на наявність інших списків відтворення і надати користувачеві докладний список знайдених списків відтворення."
+msgstr "Щоразу, коли користувач додає список відтворення, програма може автоматично сканувати каталог на наявність інших списків відтворення і надати користувачеві докладний список знайдених списків відтворення."
 
 #: src/common/property_element.cpp:192
 #, no-c-format
@@ -14838,12 +14830,12 @@ msgstr "Координата Y колірності білого, як визн�
 #: src/common/kax_element_names.cpp:119
 #, no-c-format
 msgid "White colour coordinate x"
-msgstr "Координата 'x' білого кольору"
+msgstr "Координата X білого кольору"
 
 #: src/common/kax_element_names.cpp:120
 #, no-c-format
 msgid "White colour coordinate y"
-msgstr "Координата 'y' білого кольору"
+msgstr "Координата Y білого кольору"
 
 #: src/common/property_element.cpp:154
 #, no-c-format
@@ -14957,18 +14949,18 @@ msgstr "Неправильний рядок ідентифікації: '{0:7s}'
 #: src/mkvtoolnix-gui/merge/output.cpp:546
 #, no-c-format
 msgid "XML chapter files"
-msgstr "Файл розділів XML"
+msgstr "XML файли глав"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:471
 #, no-c-format
 msgid "XML segment info files"
-msgstr "Файли інформації сегмента XML"
+msgstr "XML файли інформації сегмента"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1134
 #: src/mkvtoolnix-gui/merge/output.cpp:458
 #, no-c-format
 msgid "XML tag files"
-msgstr "Тег-файли XML"
+msgstr "XML файли тегів"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:175
 #, no-c-format
@@ -15044,7 +15036,7 @@ msgstr "Ви можете вибрати автоматичне видаленн
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:335
 #, no-c-format
 msgid "You can specify a minimum number of places for the chapter number with '<NUM:places>', e.g. '<NUM:3>'."
-msgstr "Ви можете вказати мінімальну кількість місць для номера розділу з '<NUM:places>', Наприклад, '<NUM:3>'."
+msgstr "Ви можете вказати мінімальну кількість місць для номера глави з '<NUM:places>', Наприклад, '<NUM:3>'."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:507
 #, no-c-format
@@ -15059,7 +15051,7 @@ msgstr "Ви можете вказати до дев'яти цифр для чи
 #: src/mkvtoolnix-gui/merge/output.cpp:184
 #, no-c-format
 msgid "You can split based on the amount of time passed, based on timestamps, on frame/field numbers or on chapter numbers."
-msgstr "Ви можете виконувати розбиття на основі часу, що пройшов, тайм-кодів, кількості кадрів/полів чи кількості розділів."
+msgstr "Ви можете виконувати розбиття на основі часу, що пройшов, міток часу, кількості кадрів/полів чи кількості глав."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:339
 #, no-c-format
@@ -15111,7 +15103,7 @@ msgstr "Zlib декомпресія пройшла невдало. Резуль�
 #: src/output/p_ac3.cpp:237
 #, no-c-format
 msgid "ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). If mkvmerge crashes or if the resulting file does not contain the complete and correct audio track, then please contact the author Moritz Bunkus at moritz@bunkus.org.\n"
-msgstr "ac3_bs_packetizer::add_to_buffer(): Неперевірений код ('size' є нестандартним). Якщо робота mkvmerge аварійно принилася або отриманий файл не містить повної і корректної звукової доріжки, то, будь ласка, зв'яжіться з автором Moritz Bunkus через <moritz@bunkus.org>.\n"
+msgstr "ac3_bs_packetizer::add_to_buffer(): Неперевірений код ('size' є непарним). Якщо робота mkvmerge аварійно принилася або отриманий файл не містить повної і корректної звукової доріжки, то, будь ласка, зв'яжіться з автором Moritz Bunkus через <moritz@bunkus.org>.\n"
 
 #: src/common/stereo_mode.cpp:59
 #, no-c-format
@@ -15143,12 +15135,12 @@ msgstr "бітів на семпл: {0}"
 #: src/common/stereo_mode.cpp:62
 #, no-c-format
 msgid "both eyes laced in one block (left first)"
-msgstr "зображення для обидвох очей накладаються в межах одного блоку (спершу ліве)"
+msgstr "обидва зображення накладаються в одному блоку (спершу ліве)"
 
 #: src/common/stereo_mode.cpp:63
 #, no-c-format
 msgid "both eyes laced in one block (right first)"
-msgstr "зображення для обидвох очей накладаються в межах одного блоку (спершу праве)"
+msgstr "обидва зображення накладаються в одному блоку (спершу праве)"
 
 #: src/common/kax_info.cpp:750
 #, no-c-format
@@ -15190,12 +15182,12 @@ msgstr "в шаховому порядку (правий спочатку)"
 #: src/common/stereo_mode.cpp:58
 #, no-c-format
 msgid "column interleaved (left first)"
-msgstr "черезрядково з вертикальним роздільником (лівий спочатку)"
+msgstr "з чередуванням стовбців (лівий спочатку)"
 
 #: src/common/stereo_mode.cpp:57
 #, no-c-format
 msgid "column interleaved (right first)"
-msgstr "черезрядково з вертикальним роздільником (правий спочатку)"
+msgstr "з чередуванням стовбців (правий спочатку)"
 
 #: src/common/kax_info.cpp:791
 #, no-c-format
@@ -15225,7 +15217,7 @@ msgstr "cuesheet [options] out.cue"
 #: src/common/kax_info.cpp:656
 #, no-c-format
 msgid "default duration: {0:.3f}ms ({1:.3f} frames/fields per second for a video track)"
-msgstr "типова тривалість: {0:.3f}мс ({1:.3f} кадрів/полів за секунду для доріжки відео)"
+msgstr "Тривалість за замовчуванням: {0:.3f}мс ({1:.3f} кадрів/полів за секунду для доріжки відео)"
 
 #: src/common/compression/zlib.cpp:75
 #, no-c-format
@@ -15320,7 +15312,7 @@ msgstr "flac_reader: Не вдалося ініціалізувати форму
 #: src/mkvtoolnix-gui/merge/input.cpp:560
 #, no-c-format
 msgid "for files with chapter information (e.g. OGM, MP4) for which mkvmerge does not detect the encoding correctly"
-msgstr "для файлів з інформацією про розділи (наприклад, OGM, MP4), для яких mkvmerge не визначає корректно кодування. "
+msgstr "для файлів з інформацією про глави (наприклад, OGM, MP4), для яких mkvmerge не визначає корректно кодування. "
 
 #: src/mkvtoolnix-gui/merge/input.cpp:559
 #, no-c-format
@@ -15380,27 +15372,27 @@ msgstr "рядок {0}: часова мітка 'delay' не може бути �
 #: src/input/r_matroska.cpp:418
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} bits per sample, but the WAVEFORMATEX says that there are {2}.\n"
-msgstr "matroska_reader: (в MS режимі сумісності для треку {0}) на основі інформації структури Matroska можна сказати, що міститья {1} біт на семпл, але WAVEFORMATEX сповіщає, що їх {2}.\n"
+msgstr "matroska_reader: (в MS режимі сумісності, доріжка {0}) Matroska сповіщає, що міститья {1} біт на семпл, але WAVEFORMATEX сповіщає, що їх {2}.\n"
 
 #: src/input/r_matroska.cpp:409
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} channels, but the WAVEFORMATEX says that there are {2}.\n"
-msgstr "matroska_reader: (в MS режимі сумісності для треку {0}) на основі інформації структури Matroska можна сказати, що є {1} канали(ів), але WAVEFORMATEX сповіщає, що їх {2}.\n"
+msgstr "matroska_reader: (в MS режимі сумісності, доріжка {0}) Matroska сповіщає, що є {1} канали(ів), але WAVEFORMATEX сповіщає, що їх {2}.\n"
 
 #: src/input/r_matroska.cpp:400
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode for track {0}) Matroska says that there are {1} samples per second, but WAVEFORMATEX says that there are {2}.\n"
-msgstr "matroska_reader: (в MS режимі сумісності для треку {0}) на основі інформації структури Matroska можна сказати, що є {1} семплів за секунду (частота дискретизації), але WAVEFORMATEX сповіщає, що їх {2}.\n"
+msgstr "matroska_reader: (в MS режимі сумісності, доріжка {0}) Matroska сповіщає, що є {1} семплів на секунду (частота дискретизації), але WAVEFORMATEX сповіщає, що їх {2}.\n"
 
 #: src/input/r_matroska.cpp:627
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video height is {1}, but the BITMAPINFOHEADER says {2}.\n"
-msgstr "matroska_reader: (в MS режимі сумісності для треку {0}) на основі інформації структури Matroska можна сказати, що висота відео становить {1}, але BITMAPINFOHEADER сповіщає, що висота - {2}.\n"
+msgstr "matroska_reader: (в MS режимі сумісності, доріжка {0}) Matroska сповіщає, що висота відео становить {1}, але BITMAPINFOHEADER сповіщає, що висота дорівнює {2}.\n"
 
 #: src/input/r_matroska.cpp:618
 #, no-c-format
 msgid "matroska_reader: (MS compatibility mode, track {0}) Matroska says video width is {1}, but the BITMAPINFOHEADER says {2}.\n"
-msgstr "matroska_reader: (в MS режимі сумісності для треку {0}) на основі інформації структури Matroska можна сказати, що ширина відео становить {1}, але BITMAPINFOHEADER сповіщає, що ширина - {2}.\n"
+msgstr "matroska_reader: (в MS режимі сумісності, доріжка {0}) Matroska сповіщає, що ширина відео становить {1}, але BITMAPINFOHEADER сповіщає, що ширина дорівнює {2}.\n"
 
 #: src/input/r_matroska.cpp:1554
 #: src/input/r_matroska.cpp:1559
@@ -15516,7 +15508,7 @@ msgstr "значення відсутнє"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:723
 #, no-c-format
 msgid "mkv&merge documentation"
-msgstr "документація mkv&merge"
+msgstr "Документація mkv&merge"
 
 #: src/extract/extract_cli_parser.cpp:104
 #, no-c-format
@@ -15591,12 +15583,12 @@ msgstr "mkvmerge також вмикає це, якщо тип вихідног�
 #: src/mkvtoolnix-gui/merge/output.cpp:232
 #, no-c-format
 msgid "mkvmerge can generate chapters automatically."
-msgstr "mkvmerge може генерувати розділи автоматично."
+msgstr "mkvmerge може генерувати глави автоматично."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:220
 #, no-c-format
 msgid "mkvmerge can read cue sheets for audio CDs and automatically convert them to chapters."
-msgstr "mkvmerge можете прочитати CUE листи для аудіо компакт-дисків і автоматично перетворити їх в розділи."
+msgstr "mkvmerge можете прочитати списки CUE для аудіо компакт-дисків і автоматично перетворити їх в глави."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:152
 #, no-c-format
@@ -15622,7 +15614,7 @@ msgstr "mkvmerge не було скомпільовано з підтримко�
 #: src/common/hacks.cpp:56
 #, no-c-format
 msgid "mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timestamps by it."
-msgstr "Непотрібні дані на початку аудіодоріжки в файлах AVI зазвичай використовуються для зазначення затримки для цієї доріжки. mkvmerge зазвичай розраховує затримку за її присутності і змінює всі тайм-коди доріжки на це значення. Ця опція дає змогу не застосовувати даний алгоритм."
+msgstr "Непотрібні дані на початку аудіодоріжки в файлах AVI зазвичай використовуються для зазначення затримки для цієї доріжки. mkvmerge зазвичай розраховує затримку за її присутності і змінює всі мітки часу доріжки на це значення. Цей параметр дає змогу не застосовувати даний алгоритм."
 
 #: src/common/hacks.cpp:59
 #, no-c-format
@@ -15635,7 +15627,7 @@ msgstr "mkvmerge зазвичай видаляє останній запис, я
 #: src/mkvtoolnix-gui/merge/output.cpp:215
 #, no-c-format
 msgid "mkvmerge supports two chapter formats: The OGM like text format and the full featured XML format."
-msgstr "mkvmerge підтримує два формати розділів: OGM-подібний текстовий формат і повнофункціональний формат XML."
+msgstr "mkvmerge підтримує два формати глав: OGM-подібний текстовий формат і повнофункціональний формат XML."
 
 #: src/merge/output_control.cpp:258
 #, no-c-format
@@ -15806,12 +15798,12 @@ msgstr "залишок: невідомо"
 #: src/common/stereo_mode.cpp:56
 #, no-c-format
 msgid "row interleaved (left first)"
-msgstr "черезрядково з горизонтальним роздільником (лівий спочатку)"
+msgstr "з чередуванням рядків (лівий спочатку)"
 
 #: src/common/stereo_mode.cpp:55
 #, no-c-format
 msgid "row interleaved (right first)"
-msgstr "черезрядково з горизонтальним роздільником (правий спочатку)"
+msgstr "з чередуванням рядків (правий спочатку)"
 
 #: src/common/kax_info.cpp:633
 #, no-c-format
@@ -15868,7 +15860,7 @@ msgstr "текстові субтитри"
 #: src/merge/mkvmerge.cpp:2836
 #, no-c-format
 msgid "timestamps"
-msgstr "тайм-коди"
+msgstr "мітки часу"
 
 #: src/extract/extract_cli_parser.cpp:57
 #, no-c-format
