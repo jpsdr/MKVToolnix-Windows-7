@@ -74,11 +74,11 @@ def setup_globals
 
   $build_mkvtoolnix_gui  ||=  c?(:BUILD_GUI)
 
-  $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit}
+  $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit mkvtoolnix}
   $programs                << "mkvtoolnix-gui" if $build_mkvtoolnix_gui
   $tools                   =  %w{ac3parser base64tool bluray_dump checksum diracparser dts_dump ebml_validator hevcc_dump pgs_dump vc1parser xvc_dump}
 
-  $application_subdirs     =  { "mkvtoolnix-gui" => "mkvtoolnix-gui/" }
+  $application_subdirs     =  { "mkvtoolnix-gui" => "mkvtoolnix-gui/", "mkvtoolnix" => "mkvtoolnix/" }
   $applications            =  $programs.map { |name| "src/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
   $manpages                =  $programs.map { |name| "doc/man/#{name}.1" }
   $manpages                << "doc/man/mkvtoolnix-gui.1" if $build_mkvtoolnix_gui
@@ -1160,6 +1160,19 @@ Application.new("src/mkvpropedit").
   sources("src/propedit/propedit.cpp").
   sources("src/propedit/resources.o", :if => $building_for[:windows]).
   libraries(:mtxpropedit, $common_libs, $custom_libs).
+  create
+
+#
+# mkvtoolnix
+#
+
+Application.new("src/mkvtoolnix/mkvtoolnix").
+  description("Build the mkvtoolnix executable").
+  aliases(:mkvtoolnix).
+  sources("src/mkvtoolnix/mkvtoolnix.cpp").
+  sources("src/mkvtoolnix/resources.o", :if => $building_for[:windows]).
+  libraries($common_libs, $custom_libs).
+  libraries("-mwindows", :powrprof, :if => $building_for[:windows]).
   create
 
 #
