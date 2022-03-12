@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2022-02-20 11:24+0100\n"
-"PO-Revision-Date: 2022-03-05 20:06+0000\n"
+"PO-Revision-Date: 2022-03-12 10:23+0000\n"
 "Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/bg/)\n"
 "Language: bg\n"
@@ -37,7 +37,7 @@ msgstr "65.0.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2022-02-06"
-msgstr ""
+msgstr "06.02.2022"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -2126,7 +2126,7 @@ msgstr "Префиксът „<literal>timestamps:</literal>“ не трябв�
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:655
 msgid "Keeping specific parts by specifying timestamp ranges while discarding others."
-msgstr ""
+msgstr "Запазване частите в посочените времеви диапазони, премахване на останалото."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:659
@@ -2136,17 +2136,17 @@ msgstr "Синтаксис: <option>--split</option> <literal>parts:</literal><p
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:665
 msgid "<code>--split parts:00:01:20-00:02:45,00:05:50-00:10:30</code>"
-msgstr ""
+msgstr "<code>--split parts:00:01:20-00:02:45,00:05:50-00:10:30</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:666
 msgid "<code>--split parts:00:01:20-00:02:45,+00:05:50-00:10:30</code>"
-msgstr ""
+msgstr "<code>--split parts:00:01:20-00:02:45,+00:05:50-00:10:30</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:667
 msgid "<code>--split parts:-00:02:45,00:05:50-</code>"
-msgstr ""
+msgstr "<code>--split parts:-00:02:45,00:05:50-</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:663
@@ -2157,17 +2157,17 @@ msgstr "Примери: <placeholder type=\"orderedlist\" id=\"0\"/>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:672
 msgid "The <literal>parts</literal> mode tells &mkvmerge; to keep certain ranges of timestamps while discarding others. The ranges to keep have to be listed after the <literal>parts:</literal> keyword and be separated by commas. A range itself consists of a start and an end timestamp in the same format the other variations of <parameter>--split</parameter> accept (e.g. both <literal>00:01:20</literal> and <literal>80s</literal> refer to the same timestamp)."
-msgstr ""
+msgstr "Режимът <literal>parts</literal> казва на &mkvmerge; да запази определени диапазони от времеви клейма, премахвайки други. Диапазоните за запазване трябва да бъдат изброени в списък непосредствено след ключовата дума <literal>parts:</literal> и да бъдат разделени със запетайки. Даден диапазон се състои от начално и крайно времево клеймо в същия формат, който и другите варианти на <parameter>--split</parameter> приемат (<literal>00:01:20</literal> и <literal>80s</literal> обозначават едно и също времево клеймо)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:679
 msgid "If a start timestamp is left out then it defaults to the previous range's end timestamp. If there was no previous range then it defaults to the start of the file (see example 3)."
-msgstr ""
+msgstr "Ако начално времево клеймо бъде пропуснато, тогава по подразбиране се взима крайното времево клеймо от предходния диапазон. Ако няма предходен диапазон, тогава по подразбиране се взима началото на файла (виж пример 3)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:684
 msgid "If an end timestamp is left out then it defaults to the end of the source files which basically tells &mkvmerge; to keep the rest (see example 3)."
-msgstr ""
+msgstr "Ако крайно времево клеймо бъде пропуснато, тогава по подразбиране се взима край на файловете източници, т.е. &mkvmerge; запазва всичко до края (виж пример 3)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:689
@@ -2207,17 +2207,17 @@ msgstr "Синтаксис: <option>--split</option> <literal>parts-frames:</lit
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:733
 msgid "<code>--split parts-frames:137-258,548-1211</code>"
-msgstr ""
+msgstr "<code>--split parts-frames:137-258,548-1211</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:734
 msgid "<code>--split parts-frames:733-912,+1592-2730</code>"
-msgstr ""
+msgstr "<code>--split parts-frames:733-912,+1592-2730</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:735
 msgid "<code>--split parts-frames:-430,2512-</code>"
-msgstr ""
+msgstr "<code>--split parts-frames:-430,2512-</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:740
@@ -4022,7 +4022,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2743
 msgid "<link linkend=\"mkvmerge.description.command_line_charset\"><option>--command-line-charset</option></link> for all strings on the command line,"
-msgstr ""
+msgstr "<link linkend=\"mkvmerge.description.command_line_charset\"><option>--command-line-charset</option></link> за целия текст в командния ред,"
 
 #. type: Content of: <refentry><refsect1><refsect2><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2750
@@ -4057,7 +4057,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2784
 msgid "The command line '<command>mkvmerge -o \"my file.mkv\" -A \"a movie.avi\" sound.ogg</command>' could be converted into the following JSON option file called e.g. '<filename>options.json</filename>':"
-msgstr ""
+msgstr "Командата '<command>mkvmerge -o \"моят файл.mkv\" -A \"филмче.avi\" звук.ogg</command>' би могла да бъде преобразувана в следния JSON файл с опции, казващ се примерно '<filename>опции.json</filename>':"
 
 #. type: Content of: <refentry><refsect1><programlisting>
 #: doc/man/mkvmerge.xml:2788
@@ -4073,11 +4073,20 @@ msgid ""
 "  \"sound.ogg\"\n"
 "]"
 msgstr ""
+"[\n"
+"  \"-o\",\n"
+"  \"c:\\\\Matroska\\\\моят файл.mkv\",\n"
+"  \"--title\",\n"
+"  \"#65\",\n"
+"  \"-A\",\n"
+"  \"филмче.avi\",\n"
+"  \"звук.ogg\"\n"
+"]"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2799
 msgid "The corresponding command would then be '<command>mkvmerge @options.json</command>'."
-msgstr ""
+msgstr "Съответстващата команда е '<command>mkvmerge @опции.json</command>'."
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvmerge.xml:2804
