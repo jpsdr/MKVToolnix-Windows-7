@@ -414,6 +414,7 @@ Section Uninstall
   Delete "$INSTDIR\mkvinfo-gui.exe"
   Delete "$INSTDIR\mkvmerge.exe"
   Delete "$INSTDIR\mkvpropedit.exe"
+  Delete "$INSTDIR\mkvtoolnix.exe"
   Delete "$INSTDIR\mkvtoolnix-gui.exe"
   Delete "$INSTDIR\lib*.dll"
   Delete "$INSTDIR\Qt5*.dll"

@@ -128,7 +128,7 @@ function copy_files {
 
   cp -R packaging/windows/installer examples ${tgt_dir}/
   rm -rf ${tgt_dir}/examples/stylesheets
-  cp src/*.exe src/mkvtoolnix-gui/*.exe packaging/windows/installer/*.url ${tgt_dir}/
+  cp src/*.exe src/mkvtoolnix/*.exe src/mkvtoolnix-gui/*.exe packaging/windows/installer/*.url ${tgt_dir}/
   cp share/icons/windows/mkvtoolnix-gui.ico ${tgt_dir}/installer/
 
   mkdir ${tgt_dir}/tools
