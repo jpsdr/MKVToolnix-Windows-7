@@ -277,6 +277,8 @@ ebml_dumper_c::dump_impl(EbmlElement const *element,
   if (m_values)
     m_buffer << " " << to_string(*element);
 
+  m_buffer << fmt::format(" ID 0x{0:x} valueIsSet {1} defaultIsSet {2}", libebml::EbmlId(*element).GetValue(), element->ValueIsSet(), element->DefaultISset());
+
   m_buffer << std::endl;
 
   auto master = dynamic_cast<EbmlMaster const *>(element);
