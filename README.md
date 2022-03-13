@@ -1,4 +1,4 @@
-MKVToolNix 65.0.0
+MKVToolNix 66.0.0
 =================
 
 # Table of contents
