@@ -832,6 +832,9 @@ MuxConfig::needChapterNameTemplateAndLanguage()
     return true;
 #endif  // HAVE_DVDREAD
 
+  if (!m_chapters.isEmpty())
+    return true;
+
   return false;
 }
 
