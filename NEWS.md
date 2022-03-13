@@ -11,13 +11,13 @@
 
 ## Bug fixes
 
+* mkvmerge: Ogg/OGM reader: mkvmerge will no longer abort with an exception
+  when it encounters Vorbis comments that contain data that isn't valid
+  UTF-8. Fixes #3290.
 * MKVToolNix GUI: multiplexer: fixed several issues with the tab order of
   elements in the "properties" pane and the "output" tab. Also fixed the
   language display widgets (e.g. "track language" in the "properties" pane)
   never receiving tab focus. Fixes #3274.
-* mkvmerge: Ogg/OGM reader: mkvmerge will no longer abort with an exception
-  when it encounters Vorbis comments that contain data that isn't valid
-  UTF-8. Fixes #3290.
 * MKVToolNix GUI: multiplexer: the chapter name template will now be passed to
   `mkvmerge` if a chapter file is selected on the "output" tab. Fixes #3295.
 
