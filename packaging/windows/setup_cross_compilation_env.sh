@@ -85,6 +85,7 @@ hash -r
   --with-boost="${INSTALL_DIR}/usr/${HOST}" \\
   ${static_qt} \\
   --with-moc=${qtbin}/moc --with-uic=${qtbin}/uic --with-rcc=${qtbin}/rcc \\
+  --enable-mkvtoolnix \\
   "\$@"
 
 exit \$?

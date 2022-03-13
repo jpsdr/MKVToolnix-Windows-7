@@ -120,10 +120,6 @@ fi
 
 install -pm 755 src/tools/{bluray_dump,ebml_validator,hevcc_dump,xvc_dump} $RPM_BUILD_ROOT%{_bindir}
 
-# Remove files that shouldn't be packaged
-rm %{buildroot}%{_bindir}/mkvtoolnix
-find %{buildroot}%{_mandir} -name mkvtoolnix.1\* -delete
-
 %find_lang %{name}
 %find_lang mkvextract --with-man
 %find_lang mkvmerge --with-man

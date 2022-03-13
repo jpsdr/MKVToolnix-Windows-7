@@ -52,9 +52,6 @@ override_dh_install:
 	rake install DESTDIR=$(CURDIR)/debian/tmp
 	install -m 755 -t $(CURDIR)/debian/tmp/usr/bin $(patsubst %,src/tools/%,bluray_dump ebml_validator hevcc_dump xvc_dump)
 
-	rm $(CURDIR)/debian/tmp/usr/bin/mkvtoolnix
-	find $(CURDIR)/debian/tmp/usr/share/man -name mkvtoolnix.1\* -delete
-
 	dh_install -Xorg.bunkus.mkvtoolnix-gui.xml
 	dh_missing --fail-missing -Xorg.bunkus.mkvtoolnix-gui.xml
 
