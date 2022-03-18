@@ -2,7 +2,7 @@
 
 #include <Qt>
 
-#if HAVE_QMEDIAPLYER
+#if HAVE_QMEDIAPLAYER
 # include <QMediaPlayer>
 
 #else  // HAVE_QMEDIAPLAYER

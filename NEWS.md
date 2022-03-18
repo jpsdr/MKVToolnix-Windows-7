@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: job queue: fixed compiling in the audio player code for the
+  the "play audio" and-of-job action. Fixes #3303.
+
+
 # Version 66.0.0 "Josie" 2022-03-13
 
 ## New features and enhancements
