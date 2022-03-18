@@ -167,7 +167,7 @@ FileIdentificationWorker::determineIfFileThatShouldBeSelectedElsewhere(QString c
   if (!file.open(QIODevice::ReadOnly))
     return IdentificationPack::FileType::Regular;
 
-  auto content = Q(std::string{ file.read(1024).data() });
+  auto content = QString::fromUtf8(file.read(1024 * 10));
 
   if (content.contains(p->m_simpleChaptersRE) || content.contains(p->m_xmlChaptersRE))
     return IdentificationPack::FileType::Chapters;
