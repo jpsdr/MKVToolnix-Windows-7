@@ -21,6 +21,7 @@
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
 #include "common/translation.h"
+#include "propedit/globals.h"
 #include "propedit/propedit_cli_parser.h"
 
 propedit_cli_parser_c::propedit_cli_parser_c(const std::vector<std::string> &args)
@@ -214,12 +215,18 @@ propedit_cli_parser_c::disable_language_ietf() {
 }
 
 void
+propedit_cli_parser_c::enable_legacy_font_mime_types() {
+  g_use_legacy_font_mime_types = true;
+}
+
+void
 propedit_cli_parser_c::init_parser() {
   add_information(YT("mkvpropedit [options] <file> <actions>"));
 
   add_section_header(YT("Options"));
   add_option("l|list-property-names", std::bind(&propedit_cli_parser_c::list_property_names, this), YT("List all valid property names and exit"));
   add_option("p|parse-mode=<mode>",   std::bind(&propedit_cli_parser_c::set_parse_mode,      this), YT("Sets the Matroska parser mode to 'fast' (default) or 'full'"));
+  add_option("enable-legacy-font-mime-types", std::bind(&propedit_cli_parser_c::enable_legacy_font_mime_types, this), YT("Use legacy font MIME types when adding new attachments or replacing existing ones"));
 
   add_section_header(YT("Actions for handling properties"));
   add_option("e|edit=<selector>",  std::bind(&propedit_cli_parser_c::add_target, this), YT("Sets the Matroska file section that all following add/set/delete actions operate on (see below and man page for syntax)"));

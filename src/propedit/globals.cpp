@@ -14,3 +14,4 @@
 
 std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;
 std::unordered_map<uint64_t, uint64_t> g_track_uid_changes;
+bool g_use_legacy_font_mime_types{};

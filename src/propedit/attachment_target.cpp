@@ -26,6 +26,7 @@
 #include "common/strings/utf8.h"
 #include "common/unique_numbers.h"
 #include "propedit/attachment_target.h"
+#include "propedit/globals.h"
 
 using namespace libmatroska;
 
@@ -185,7 +186,7 @@ attachment_target_c::execute() {
 
 void
 attachment_target_c::execute_add() {
-  auto mime_type   = m_options.m_mime_type                          ? *m_options.m_mime_type   : mtx::mime::guess_type_for_file(m_file_name);
+  auto mime_type   = m_options.m_mime_type                          ? *m_options.m_mime_type   : ::mtx::mime::maybe_map_to_legacy_font_mime_type(::mtx::mime::guess_type_for_file(m_file_name), g_use_legacy_font_mime_types);
   auto file_name   = m_options.m_name && !m_options.m_name->empty() ? *m_options.m_name        : mtx::fs::to_path(m_file_name).filename().u8string();
   auto description = m_options.m_description                        ? *m_options.m_description : ""s;
   auto uid         = m_options.m_uid                                ? *m_options.m_uid         : create_unique_number(UNIQUE_ATTACHMENT_IDS);
@@ -323,10 +324,13 @@ attachment_target_c::replace_attachment_values(KaxAttached &att) {
     GetChild<KaxFileName>(att).SetValueUTF8(file_name);
   }
 
-  if (m_options.m_mime_type) {
-    auto mime_type = m_options.m_mime_type->empty() ? mtx::mime::guess_type_for_file(m_file_name) : *m_options.m_mime_type;
-    GetChild<KaxMimeType>(att).SetValue(mime_type);
-  }
+  auto current_mime_type = FindChildValue<KaxMimeType>(att);
+  auto new_mime_type     = !m_options.m_mime_type         ? ::mtx::mime::maybe_map_to_legacy_font_mime_type(current_mime_type, g_use_legacy_font_mime_types)
+                         : m_options.m_mime_type->empty() ? ::mtx::mime::maybe_map_to_legacy_font_mime_type(::mtx::mime::guess_type_for_file(m_file_name), g_use_legacy_font_mime_types)
+                         :                                  *m_options.m_mime_type;
+
+  if (!new_mime_type.empty() && (new_mime_type != current_mime_type))
+    GetChild<KaxMimeType>(att).SetValue(new_mime_type);
 
   if (m_options.m_description) {
     if (m_options.m_description->empty())

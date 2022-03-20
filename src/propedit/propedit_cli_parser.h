@@ -39,6 +39,7 @@ protected:
   void set_parse_mode();
   void set_file_name();
   void disable_language_ietf();
+  void enable_legacy_font_mime_types();
 
   void set_attachment_name();
   void set_attachment_description();
