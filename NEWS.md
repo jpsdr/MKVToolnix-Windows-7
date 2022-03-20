@@ -1,5 +1,17 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge, mkvpropedit: added a new command line option called
+  `--enable-legacy-font-mime-types`. With this option on the two programs will
+  use the same legacy MIME types for fonts whenever new attachments are added
+  (both programs), when reading existing attachments (only `mkvmerge`) or when
+  replacing existing ones (only `mkvpropedit`).
+* MKVToolNix GUI: multiplexer: if the option "use legacy font MIME types" is
+  enabled in the preferences, the new command line option
+  `--enable-legacy-font-mime-types` will be passed to `mkvmerge` in order to
+  have it remap the MIME types of existing attachments, too.
+
 ## Bug fixes
 
 * MKVToolNix GUI: job queue: fixed compiling in the audio player code for the
