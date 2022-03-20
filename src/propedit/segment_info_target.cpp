@@ -14,7 +14,6 @@
 #include <matroska/KaxInfoData.h>
 
 #include "common/output.h"
-#include "propedit/propedit.h"
 #include "propedit/segment_info_target.h"
 
 using namespace libmatroska;

@@ -10,8 +10,6 @@
 
 #pragma once
 
-#include "common/os.h"
-
 #include "common/common_pch.h"
 
 #include "common/doc_type_version_handler.h"

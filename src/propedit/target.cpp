@@ -21,7 +21,6 @@
 #include "common/output.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
-#include "propedit/propedit.h"
 #include "propedit/target.h"
 
 using namespace libmatroska;

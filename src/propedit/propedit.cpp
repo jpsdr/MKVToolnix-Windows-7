@@ -16,17 +16,14 @@
 #include <matroska/KaxTracks.h>
 
 #include "common/command_line.h"
-#include "common/doc_type_version_handler.h"
 #include "common/list_utils.h"
 #include "common/mm_io_x.h"
 #include "common/unique_numbers.h"
 #include "common/version.h"
+#include "propedit/globals.h"
 #include "propedit/propedit_cli_parser.h"
 
 using namespace libmatroska;
-
-std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;
-std::unordered_map<uint64_t, uint64_t> g_track_uid_changes;
 
 static void
 display_update_element_result(const EbmlCallbacks &callbacks,
@@ -75,7 +72,7 @@ display_update_element_result(const EbmlCallbacks &callbacks,
   mxerror(message + "\n");
 }
 
-bool
+static bool
 has_content_been_modified(options_cptr const &options) {
   return mtx::any(options->m_targets, [](target_cptr const &t) { return t->has_content_been_modified(); });
 }

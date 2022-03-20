@@ -16,7 +16,6 @@
 
 #include "propedit/chapter_target.h"
 #include "propedit/options.h"
-#include "propedit/propedit.h"
 #include "propedit/segment_info_target.h"
 #include "propedit/tag_target.h"
 #include "propedit/track_target.h"

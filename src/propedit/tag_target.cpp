@@ -26,7 +26,6 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 #include "common/xml/ebml_tags_converter.h"
-#include "propedit/propedit.h"
 #include "propedit/tag_target.h"
 
 using namespace libmatroska;

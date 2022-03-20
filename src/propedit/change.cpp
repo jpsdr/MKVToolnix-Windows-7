@@ -31,7 +31,7 @@
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 #include "propedit/change.h"
-#include "propedit/propedit.h"
+#include "propedit/globals.h"
 
 change_c::change_c(change_c::change_type_e type,
                    const std::string &name,

@@ -1093,7 +1093,7 @@ $common_libs += [ :CoreFoundation ] if $building_for[:macos]
   { :name => 'mtxoutput',   :dir => 'src/output'                                                                     },
   { :name => 'mtxmerge',    :dir => 'src/merge',    :except => [ 'mkvmerge.cpp' ],                                   },
   { :name => 'mtxextract',  :dir => 'src/extract',  :except => [ 'mkvextract.cpp' ],                                 },
-  { :name => 'mtxpropedit', :dir => 'src/propedit', :except => [ 'mkvpropedit.cpp' ],                                },
+  { :name => 'mtxpropedit', :dir => 'src/propedit', :except => [ 'propedit.cpp' ],                                   },
   { :name => 'ebml',        :dir => 'lib/libebml/src'                                                                },
   { :name => 'matroska',    :dir => 'lib/libmatroska/src'                                                            },
 ].each do |lib|
