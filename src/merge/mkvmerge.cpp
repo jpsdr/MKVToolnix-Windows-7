@@ -2178,12 +2178,15 @@ parse_args(std::vector<std::string> args) {
 
   mxinfo(fmt::format("{0}\n", get_version_info("mkvmerge", vif_full)));
 
+  std::vector<std::string> unhandled_args;
+
   // Now parse options that are needed right at the beginning.
   for (auto sit = args.cbegin(), sit_end = args.cend(); sit != sit_end; sit++) {
     auto const &this_arg = *sit;
     auto sit_next        = sit + 1;
     auto no_next_arg     = sit_next == sit_end;
     auto next_arg        = !no_next_arg ? *sit_next : "";
+    auto num_handled     = 0;
 
     if ((this_arg == "-o") || (this_arg == "--output")) {
       if (no_next_arg)
@@ -2192,32 +2195,41 @@ parse_args(std::vector<std::string> args) {
       if (g_outfile != "")
         mxerror(Y("Only one destination file allowed.\n"));
 
-      g_outfile = next_arg;
-      sit++;
+      g_outfile   = next_arg;
+      num_handled = 2;
 
     } else if (this_arg == "--generate-chapters-name-template") {
       if (no_next_arg)
         mxerror(Y("'--generate-chapters-name-template' lacks the name template.\n"));
 
       mtx::chapters::g_chapter_generation_name_template.override(next_arg);
-      sit++;
+      num_handled = 2;
 
-    } else if ((this_arg == "-w") || (this_arg == "--webm"))
+    } else if ((this_arg == "-w") || (this_arg == "--webm")) {
       set_output_compatibility(OC_WEBM);
+      num_handled = 1;
 
-    else if (this_arg == "--deterministic") {
+    } else if (this_arg == "--deterministic") {
       if (no_next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
       g_deterministic = true;
       g_write_date    = false;
       auto seed       = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, next_arg.c_str(), next_arg.size());
+      num_handled     = 2;
       random_c::init(seed);
 
+
+    } else if (this_arg == "--disable-language-ietf") {
+      mtx::bcp47::language_c::disable();
+      num_handled = 1;
+    }
+
+    if (num_handled == 2)
       ++sit;
 
-    } else if (this_arg == "--disable-language-ietf")
-      mtx::bcp47::language_c::disable();
+    else if (!num_handled)
+      unhandled_args.emplace_back(this_arg);
   }
 
   if (g_outfile.empty()) {
@@ -2235,20 +2247,11 @@ parse_args(std::vector<std::string> args) {
   bool append_next_file = false;
   auto attachment       = std::make_shared<attachment_t>();
 
-  for (auto sit = args.cbegin(), sit_end = args.cend(); sit != sit_end; sit++) {
+  for (auto sit = unhandled_args.cbegin(), sit_end = unhandled_args.cend(); sit != sit_end; sit++) {
     auto const &this_arg = *sit;
     auto sit_next        = sit + 1;
     auto no_next_arg     = sit_next == sit_end;
     auto next_arg        = !no_next_arg ? *sit_next : "";
-
-    // Ignore the options we took care of in the first step.
-    if (mtx::included_in(this_arg, "-o", "--output", "--command-line-charset", "--engage", "--generate-chapters-name-template", "--deterministic")) {
-      sit++;
-      continue;
-    }
-
-    if (mtx::included_in(this_arg, "-w", "--webm", "--disable-language-ietf"))
-      continue;
 
     // Global options
     if ((this_arg == "--priority")) {
