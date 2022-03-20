@@ -127,21 +127,8 @@ replaceDirectoriesByContainedFiles(QStringList const &namesToCheck) {
 
 QString
 detectMIMEType(QString const &fileName) {
-  static QHash<QString, QString> s_legacyFontTypes;
-
-  auto mimeType = Q(mtx::mime::guess_type_for_file(to_utf8(fileName)));
-
-  if (!Util::Settings::get().m_useLegacyFontMIMETypes)
-    return mimeType;
-
-  if (s_legacyFontTypes.isEmpty()) {
-    s_legacyFontTypes[Q("font/otf")]        = Q("application/vnd.ms-opentype");
-    s_legacyFontTypes[Q("font/sfnt")]       = Q("application/x-truetype-font");
-    s_legacyFontTypes[Q("font/ttf")]        = Q("application/x-truetype-font");
-    s_legacyFontTypes[Q("font/collection")] = Q("application/x-truetype-font");
-  }
-
-  return s_legacyFontTypes.contains(mimeType) ? s_legacyFontTypes[mimeType] : mimeType;
+  auto mimeType = ::mtx::mime::guess_type_for_file(to_utf8(fileName));
+  return Q(::mtx::mime::maybe_map_to_legacy_font_mime_type(mimeType, Util::Settings::get().m_useLegacyFontMIMETypes));
 }
 
 }

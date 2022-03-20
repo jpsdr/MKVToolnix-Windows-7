@@ -22,6 +22,7 @@ namespace mtx::mime {
 
 namespace {
 std::unique_ptr<QMimeDatabase> s_database;
+std::unordered_map<std::string, std::string> s_legacy_font_mime_type_mapping;
 
 QMimeDatabase &
 database() {
@@ -78,6 +79,33 @@ sorted_type_names() {
   std::sort(names.begin(), names.end());
 
   return names;
+}
+
+const std::unordered_map<std::string, std::string> &
+legacy_font_mime_type_mapping() {
+  if (s_legacy_font_mime_type_mapping.empty()) {
+    s_legacy_font_mime_type_mapping["font/otf"s]        = "application/vnd.ms-opentype"s;
+    s_legacy_font_mime_type_mapping["font/sfnt"s]       = "application/x-truetype-font"s;
+    s_legacy_font_mime_type_mapping["font/ttf"s]        = "application/x-truetype-font"s;
+    s_legacy_font_mime_type_mapping["font/collection"s] = "application/x-truetype-font"s;
+  }
+
+  return s_legacy_font_mime_type_mapping;
+}
+
+std::string
+maybe_map_to_legacy_font_mime_type(std::string const &mime_type,
+                                   bool do_map) {
+  if (!do_map)
+    return mime_type;
+
+  auto &legacy_map = legacy_font_mime_type_mapping();
+  auto itr         = legacy_map.find(mime_type);
+
+  if (itr != legacy_map.end())
+    return itr->second;
+
+  return mime_type;
 }
 
 }                              // namespace mtx::mime
