@@ -59,6 +59,7 @@
 #include "common/ivf.h"
 #include "common/kax_analyzer.h"
 #include "common/math.h"
+#include "common/mime.h"
 #include "common/mm_io.h"
 #include "common/qt.h"
 #include "common/strings/formatting.h"
@@ -874,7 +875,7 @@ kax_reader_c::handle_attachments(mm_io_c *io,
     auto matt         = std::make_shared<attachment_t>();
     matt->name        = to_utf8(FindChildValue<KaxFileName>(att));
     matt->description = to_utf8(FindChildValue<KaxFileDescription>(att));
-    matt->mime_type   = FindChildValue<KaxMimeType>(att);
+    matt->mime_type   = ::mtx::mime::maybe_map_to_legacy_font_mime_type(FindChildValue<KaxMimeType>(att), g_use_legacy_font_mime_types);
     matt->id          = FindChildValue<KaxFileUID>(att);
     matt->data        = memory_c::clone(static_cast<unsigned char *>(fdata->GetBuffer()), fdata->GetSize());
 

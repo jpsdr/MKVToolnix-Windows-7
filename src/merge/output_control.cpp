@@ -199,7 +199,7 @@ int64_t s_current_progress{};
 
 std::unique_ptr<mtx::doc_type_version_handler_c> g_doc_type_version_handler;
 
-bool g_deterministic{};
+bool g_deterministic{}, g_use_legacy_font_mime_types{};
 
 /** \brief Add a segment family UID to the list if it doesn't exist already.
 

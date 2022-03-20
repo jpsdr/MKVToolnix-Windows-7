@@ -196,6 +196,9 @@ set_usage() {
   usage_text += Y("  --attach-file-once <file>\n"
                   "                           Creates a file attachment inside the\n"
                   "                           first Matroska file written.\n");
+  usage_text += Y("  --enable-legacy-font-mime-types\n"
+                  "                           Use legacy font MIME types when adding new\n"
+                  "                           attachments as well as for existing ones.\n");
   usage_text +=   "\n";
   usage_text += Y(" Options for each source file:\n");
   usage_text += Y("  -a, --audio-tracks <n,m,...>\n"
@@ -421,7 +424,8 @@ print_capabilities() {
 
 static std::string
 guess_mime_type_and_report(std::string file_name) {
-  auto mime_type = mtx::mime::guess_type_for_file(file_name);
+  auto mime_type = ::mtx::mime::guess_type_for_file(file_name);
+  mime_type      = ::mtx::mime::maybe_map_to_legacy_font_mime_type(mime_type, g_use_legacy_font_mime_types);
   if (mime_type != "") {
     mxinfo(fmt::format(Y("Automatic MIME type recognition for '{0}': {1}\n"), file_name, mime_type));
     return mime_type;
@@ -2223,6 +2227,10 @@ parse_args(std::vector<std::string> args) {
     } else if (this_arg == "--disable-language-ietf") {
       mtx::bcp47::language_c::disable();
       num_handled = 1;
+
+    } else if (this_arg == "--enable-legacy-font-mime-types") {
+      g_use_legacy_font_mime_types = true;
+      num_handled                  = 1;
     }
 
     if (num_handled == 2)
