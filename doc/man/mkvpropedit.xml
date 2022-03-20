@@ -355,6 +355,27 @@
      </para>
     </listitem>
    </varlistentry>
+
+   <varlistentry id="mkvpropedit.description.enable_legacy_font_mime_types">
+    <term><option>--enable-legacy-font-mime-types</option></term>
+    <listitem>
+     <para>
+      Enables the use of legacy <abbrev>MIME</abbrev> types for certain types of font attachments. For example,
+      '<literal>application/x-truetype-font</literal>' will be used for TrueType fonts instead of '<literal>fonts/ttf</literal>'.
+     </para>
+
+     <para>
+      This affects both adding new attachments and replacing existing attachments, but only if the new <abbrev>MIME</abbrev> type isn't
+      specified. Other existing attachments aren't changed.
+     </para>
+
+     <para>
+      The affected <abbrev>MIME</abbrev> types are '<literal>font/sfnt</literal>', '<literal>font/ttf</literal>' and
+      '<literal>font/collection</literal>' which are all mapped to '<literal>application/x-truetype-fonts</literal>' and
+      '<literal>font/otf</literal>' which is mapped to '<literal>application/vnd.ms-opentype</literal>'.
+     </para>
+    </listitem>
+   </varlistentry>
   </variablelist>
 
   <para>
