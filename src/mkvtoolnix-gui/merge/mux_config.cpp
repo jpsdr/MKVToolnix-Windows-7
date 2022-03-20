@@ -673,6 +673,16 @@ MuxConfig::buildMkvmergeOptions()
   if (m_webmMode)
     options << Q("--webm");
 
+  if (settings.m_useLegacyFontMIMETypes) {
+    auto haveAttachments = !m_attachments.isEmpty()
+      || (std::find_if(m_files.begin(), m_files.end(), [](auto const &topLevelFile) {
+            return !topLevelFile->m_attachedFiles.isEmpty();
+          }) != m_files.end());
+
+    if (haveAttachments)
+      options << Q("--enable-legacy-font-mime-types");
+  }
+
   auto probeRangePercentage = 0.0;
 
   for (auto const &file : m_files) {
