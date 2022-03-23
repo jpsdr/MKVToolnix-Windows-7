@@ -117,13 +117,6 @@ TEST(BCP47LanguageTags, CodeConversion) {
   EXPECT_TRUE(language_c::parse("de").has_valid_iso639_code());
   EXPECT_TRUE(language_c::parse("deu").has_valid_iso639_code());
   EXPECT_TRUE(language_c::parse("ger").has_valid_iso639_code());
-
-  EXPECT_EQ("ger"s, language_c::parse("de").get_iso639_2_alpha_3_code_or("eng"s));
-  EXPECT_EQ("ger"s, language_c::parse("deu").get_iso639_2_alpha_3_code_or("eng"s));
-  EXPECT_EQ("ger"s, language_c::parse("ger").get_iso639_2_alpha_3_code_or("eng"s));
-
-  EXPECT_EQ("eng"s, language_c::parse("").get_iso639_2_alpha_3_code_or("eng"s));
-  EXPECT_EQ("eng"s, language_c::parse("x-moo").get_iso639_2_alpha_3_code_or("eng"s));
 }
 
 TEST(BCP47LanguageTags, UnorderedMap) {
