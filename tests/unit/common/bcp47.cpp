@@ -394,4 +394,32 @@ TEST(BCP47LanguageTags, ISO3166_1_Alpha2Codes) {
   EXPECT_EQ("uk"s, language_c::parse("en-GB").get_top_level_domain_country_code());
 }
 
+TEST(BCP47LanguageTags, ClosestISO639_2_Alpha3Code) {
+  // default value returned in different cases
+  EXPECT_EQ("und"s, language_c{}.get_closest_iso639_2_alpha_3_code());                          // empty entry
+  EXPECT_EQ("und"s, language_c::parse("moocow").get_closest_iso639_2_alpha_3_code());           // invalid entry
+  EXPECT_EQ("und"s, language_c::parse("x-muh-to-the-kuh").get_closest_iso639_2_alpha_3_code()); // valid but no ISO 639 code
+  EXPECT_EQ("und"s, language_c::parse("aiw").get_closest_iso639_2_alpha_3_code());              // valid but no 639-2 code & not an extlang
+
+  // "Valid, is extlang, prefix is ISO 639 code but not ISO 639-2"
+  // would be another case when "und" should be returned, but as of
+  // 2022-03-23 there's no such entry. All current prefixes for
+  // extlangs do have ISO 639-2 codes.
+
+  // Now some valid cases.
+  EXPECT_EQ("fre"s, language_c::parse("fr-FR").get_closest_iso639_2_alpha_3_code());
+  EXPECT_EQ("ger"s, language_c::parse("de").get_closest_iso639_2_alpha_3_code());
+  EXPECT_EQ("ger"s, language_c::parse("deu").get_closest_iso639_2_alpha_3_code());
+  EXPECT_EQ("ger"s, language_c::parse("ger").get_closest_iso639_2_alpha_3_code());
+
+  // Last the interesting cases: `yue` = "Yue Chinese" doesn't have an
+  // ISO 639-2 code, but it is an extlang with a prefix of `zh` =
+  // "Chinese" for which there is an ISO 639-2 code: `chi`. Similarly
+  // for the other two examples (`bsi` = "British Sign Language" → `sgn` = "Sign
+  // Languages"; `zsm` = "Standard Malay" → `may` = "Malay (macrolanguage)")
+  EXPECT_EQ("chi"s, language_c::parse("yue").get_closest_iso639_2_alpha_3_code());
+  EXPECT_EQ("sgn"s, language_c::parse("bfi").get_closest_iso639_2_alpha_3_code());
+  EXPECT_EQ("may"s, language_c::parse("zsm").get_closest_iso639_2_alpha_3_code());
+}
+
 }

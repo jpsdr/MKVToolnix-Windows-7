@@ -59,6 +59,7 @@ public:
   bool has_valid_iso639_2_code() const noexcept;
   std::string get_iso639_alpha_3_code() const noexcept;
   std::string get_iso639_2_alpha_3_code_or(std::string const &value_if_invalid) const noexcept;
+  std::string get_closest_iso639_2_alpha_3_code() const noexcept;
 
   bool has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code() const noexcept;
   std::string get_iso3166_1_alpha_2_code() const noexcept;
