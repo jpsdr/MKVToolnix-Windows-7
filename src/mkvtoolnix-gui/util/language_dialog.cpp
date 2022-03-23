@@ -365,7 +365,7 @@ LanguageDialog::setStatusFromLanguageTag(mtx::bcp47::language_c const &tag) {
 
   QStringList warnings;
 
-  if (tag.has_valid_iso639_code() && !tag.has_valid_iso639_2_code())
+  if (tag.has_valid_iso639_code() && !tag.has_valid_iso639_2_code() && (tag.get_closest_iso639_2_alpha_3_code() == "und"s))
     warnings << QY("Warning: %1").arg(QY("The selected language code '%1' is not an ISO 639-2 code. Players that only support the legacy Matroska language elements but not the IETF BCP 47 language elements will therefore display a different language such as 'und' (undetermined).").arg(Q(tag.get_language())));
 
   if (!warnings.isEmpty())
