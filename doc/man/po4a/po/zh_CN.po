@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
 "POT-Creation-Date: 2022-03-20 20:02+0100\n"
-"PO-Revision-Date: 2021-03-24 20:01+0000\n"
-"Last-Translator: 無情天 X <kofzhanganguo@126.com>\n"
+"PO-Revision-Date: 2016-02-03 20:53+0000\n"
+"Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2020,2022\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
@@ -36,10 +36,8 @@ msgstr "66.0.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2019-12-06"
 msgid "2022-03-13"
-msgstr "2016-09-11"
+msgstr "2022-03-13"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -138,7 +136,7 @@ msgstr "<productname>&product;</productname> <date>&date;</date>"
 #: doc/man/mkvpropedit.xml:27
 #: doc/man/mkvtoolnix-gui.xml:27
 msgid "Developer"
-msgstr "开发者"
+msgstr "开发人员"
 
 #. type: Content of: <refentry><refentryinfo><authorgroup><author><firstname>
 #: doc/man/mkvextract.xml:28
@@ -1520,13 +1518,13 @@ msgstr "<command>mkvmerge</command> <arg>全局选项</arg> <arg choice=\"req\">
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:67
 msgid "This program takes the input from several media files and joins their streams (all of them or just a selection) into a &matroska; file; see <ulink url=\"https://www.matroska.org/\">the &matroska; website</ulink>."
-msgstr "本程序可读取多个媒体文件并将它们的数据流（全部或部分）合并到 &matroska; 文件中去；参见 <ulink url=\"https://www.matroska.org/\">&matroska; 网站</ulink>。"
+msgstr "本程序以任意数量的媒体文件作为输入文件，并将它们的数据流（全部或部分）合并到 &matroska; 文件中去；参见 <ulink url=\"https://www.matroska.org/\">&matroska; 网站</ulink>。"
 
 #. type: Content of: <refentry><refsect1><important><para>
 #: doc/man/mkvmerge.xml:73
 #: doc/man/mkvmerge.xml:2377
 msgid "The order of command line options is important. Please read the section <link linkend=\"mkvmerge.option_order\">&quot;Option order&quot;</link> if you're new to the program."
-msgstr "命令行选项的顺序很重要。若您对程序还不熟悉，请阅读 <link linkend=\"mkvmerge.option_order\">&quot;选项顺序&quot;</link> 段落。"
+msgstr "命令行选项的顺序很重要。若您对程序还不熟悉，请阅读「<link linkend=\"mkvmerge.option_order\">选项顺序</link>」段落。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:79
@@ -1596,7 +1594,7 @@ msgstr "设置默认语言代码，用于没有使用 <link linkend=\"mkvmerge.d
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:133
 msgid "The default language code is '<literal>und</literal>' for 'undefined'."
-msgstr "默认的语言代码为「<literal>und</literal>」，即「undefined（未定义）」。"
+msgstr "默认的语言代码为「<literal>und</literal>」，即「undefined」（未定义）。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:140
@@ -1611,7 +1609,7 @@ msgstr "<option>--segmentinfo</option> <parameter>文件名.xml</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:147
 msgid "Read segment information from an <abbrev>XML</abbrev> file. This file can contain the segment family <abbrev>UID</abbrev>, segment <abbrev>UID</abbrev>, previous and next segment <abbrev>UID</abbrev> elements. An example file and a <abbrev>DTD</abbrev> are included in the MKVToolNix distribution."
-msgstr "从 <abbrev>XML</abbrev> 文件中读取剪辑信息。此文件可以包含剪辑族的 <abbrev>UID</abbrev>、剪辑的 <abbrev>UID</abbrev>、上一剪辑以及下一剪辑的 <abbrev>UID</abbrev> 元素。示例文件以及 <abbrev>DTD</abbrev> 已包含在 MKVToolNix 发布包中。"
+msgstr "从 <abbrev>XML</abbrev> 文件中读取剪辑信息。此文件可以包含剪辑族的 <abbrev>UID</abbrev>、剪辑的 <abbrev>UID</abbrev>、上一剪辑以及下一剪辑的 <abbrev>UID</abbrev> 元素。示例文件以及 <abbrev>DTD</abbrev> 已包含在 MKVToolNix 套件内。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:153
@@ -1673,7 +1671,7 @@ msgstr "<option>--chapter-charset</option> <parameter>字符集</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:208
 msgid "Sets the character set that is used for the conversion to UTF-8 for simple chapter files. See the section about <link linkend=\"mkvmerge.text_files_and_charsets\">text files and character sets</link> for an explanation how &mkvmerge; converts between character sets."
-msgstr "设置简单章节文件所用的字符集，用以转为 UTF-8。关于 &mkvmerge; 如何在字符集之间转换的说明请参见关于 <link linkend=\"mkvmerge.text_files_and_charsets\"> 文本文件与字符集</link> 的段落。"
+msgstr "设置简单章节文件的字符集，用于将其转换为 UTF-8。关于 &mkvmerge; 如何转换不同字符集的说明，请参见关于<link linkend=\"mkvmerge.text_files_and_charsets\">文本文件与字符集</link>的段落。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:214
@@ -2022,15 +2020,13 @@ msgstr "启用本选项可阻止 &mkvmerge; 写入这些标签或修改现有的
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:549
 #: doc/man/mkvpropedit.xml:387
-#, fuzzy
-#| msgid "<option>--disable-lacing</option>"
 msgid "<option>--disable-language-ietf</option>"
-msgstr "<option>--disable-lacing</option>"
+msgstr "<option>--disable-language-ietf</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:552
 msgid "Normally &mkvmerge; will write the new IETF BCP 47 language elements in addition to the legacy language elements in track headers, chapters and tags. If this option is used, only the legacy elements are written."
-msgstr "通常＆mkvmerge; 除了轨道标题，章节和标签中的旧版语言元素外，还将编写新的IETF BCP 47语言元素。 如果使用此选项，则仅写入旧元素。"
+msgstr "&mkvmerge; 通常会在轨道头部、章节以及标签中同时写入传统语言元素以及全新的 IETF BCP 47 语言元素。若使用此选项，则只会写入传统元素。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:561
@@ -2050,7 +2046,7 @@ msgstr "在给定尺寸或时间之后切割输出文件。请注意，各轨道
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:574
 msgid "At the moment &mkvmerge; supports the following modes:"
-msgstr "目前＆mkvmerge; 支持以下模式："
+msgstr "目前 &mkvmerge; 支持以下模式:"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:580
@@ -2467,10 +2463,8 @@ msgstr "<option>=</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1010
-#, fuzzy
-#| msgid "Normally &mkvmerge; looks for files in the same directory as an input file that have the same base name and only differ in their running number (e.g. 'VTS_01_1.VOB', 'VTS_01_2.VOB', 'VTS_01_3.VOB' etc) and treats all of those files as if they were concatenated into a single big file. This option, a single '=', causes mkvmerge not to look for those additional files."
 msgid "For certain file types (MPEG program streams = VOBs) &mkvmerge; normally looks for files in the same directory as an input file that have the same base name and only differ in their running number (e.g. 'VTS_01_1.VOB', 'VTS_01_2.VOB', 'VTS_01_3.VOB' etc) and treats all of those files as if they were concatenated into a single big file. This option, a single '=', causes mkvmerge not to look for those additional files."
-msgstr "通常情况下 &mkvmerge; 将在输入文件所在的目录中查找基本名称相同，仅在连续的数字方面有差异的文件 (如 'VTS_01_1.VOB'、'VTS_01_2.VOB'、'VTS_01_3.VOB' 等等)，并将所有这些文件作为连接后的单个大文件对待。本选项，单个 '='，可令 mkvmerge 不查找这些额外的文件。"
+msgstr "对特定类型的文件 (MPEG 节目流，即 VOB 文件) &mkvmerge; 通常会去输入文件所在的目录寻找是否存在基本文件名一致、仅编号存在差异的文件 (例如「VTS_01_1.VOB」「VTS_01_2.VOB」「VTS_01_3.VOB」等) 并将所有文件视为互相串联的单个大文件。此选项——单个「=」——要求 mkvmerge 不要去寻找其他文件。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1017
@@ -2479,16 +2473,13 @@ msgstr "'=' 也可以放在下一个文件名的前面。因此以下两条命�
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><screen>
 #: doc/man/mkvmerge.xml:1020
-#, fuzzy, no-wrap
-#| msgid ""
-#| "$ mkvmerge -o full.mkv = file1.mkv\n"
-#| "$ mkvmerge -o full.mkv =file1.mkv"
+#, no-wrap
 msgid ""
 "$ mkvmerge -o full.mkv = file1.vob\n"
 "$ mkvmerge -o full.mkv =file1.vob"
 msgstr ""
-"$ mkvmerge -o 完整.mkv = 文件1.mkv\n"
-"$ mkvmerge -o 完整.mkv =文件1.mkv"
+"$ mkvmerge -o 完整.mkv = 文件1.vob\n"
+"$ mkvmerge -o 完整.mkv =文件1.vob"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1026
@@ -2569,7 +2560,7 @@ msgstr "后面附件的 <abbrev>MIME</abbrev> 类型。将应用到下一个 <li
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1103
 msgid "If no <abbrev>MIME</abbrev> type is given a for an attachment, its type will be detected automatically."
-msgstr ""
+msgstr "如果没有指定附件的 <abbrev>MIME</abbrev> 类型，则会自动侦测其类型。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1109
@@ -2600,27 +2591,25 @@ msgstr "可以使用 &mkvextract; 从 &matroska; 文件中提取附件文件。"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1140
 #: doc/man/mkvpropedit.xml:360
-#, fuzzy
-#| msgid "<option>--enable-durations</option>"
 msgid "<option>--enable-legacy-font-mime-types</option>"
-msgstr "<option>--enable-durations</option>"
+msgstr "<option>--enable-legacy-font-mime-types</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1143
 #: doc/man/mkvpropedit.xml:363
 msgid "Enables the use of legacy <abbrev>MIME</abbrev> types for certain types of font attachments. For example, '<literal>application/x-truetype-font</literal>' will be used for TrueType fonts instead of '<literal>fonts/ttf</literal>'."
-msgstr ""
+msgstr "对于特定类型的字体附件，使用传统的 <abbrev>MIME</abbrev> 类型。例如，TrueType 字体的类型将标注为「<literal>application/x-truetype-font</literal>」而非「<literal>fonts/ttf</literal>」。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1148
 msgid "This affects both new attachments if its <abbrev>MIME</abbrev> type is detected automatically and existing attachments whose stored <abbrev>MIME</abbrev> types will be remapped to the legacy ones."
-msgstr ""
+msgstr "这将同时影响未手动指定 <abbrev>MIME</abbrev> 类型的新附件，以及现有的字体附件，其已存在的 <abbrev>MIME</abbrev> 类型将被重新映射至传统类型。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1153
 #: doc/man/mkvpropedit.xml:373
 msgid "The affected <abbrev>MIME</abbrev> types are '<literal>font/sfnt</literal>', '<literal>font/ttf</literal>' and '<literal>font/collection</literal>' which are all mapped to '<literal>application/x-truetype-fonts</literal>' and '<literal>font/otf</literal>' which is mapped to '<literal>application/vnd.ms-opentype</literal>'."
-msgstr ""
+msgstr "受影响的 <abbrev>MIME</abbrev> 类型如下：「<literal>font/sfnt</literal>」「<literal>font/ttf</literal>」「<literal>font/collection</literal>」将全部映射至「<literal>application/x-truetype-fonts</literal>」，「 <literal>font/otf</literal>」将被映射至「<literal>application/vnd.ms-opentype</literal>」。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:1163
@@ -2827,120 +2816,92 @@ msgstr "默认值为 '<literal>iframes（仅 i 帧）</literal>'（视频及字�
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1413
 msgid "<option>--default-track-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--default-track-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--default-track-flag</option> <parameter>TID<optional>:布尔值</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1416
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &quot;default track&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present. The flag will be set if the source container doesn't provide that information and the user doesn't specify it via this option."
-msgstr "若未给出可选参数 <parameter>bool</parameter>，则为指定轨道 (参见 <link linkend=\"mkvmerge.track_ids\">轨道 ID</link> 段落) 设置“强制轨”标记。播放器必须播放“强制轨”标记为 <constant>1</constant> 的所有轨道。"
+msgstr "若可选参数「<parameter>布尔值</parameter>」已设为 <constant>1</constant> 或不存在该数值，则为指定轨道 (参见「<link linkend=\"mkvmerge.track_ids\">轨道 ID</link>」段落) 设置「默认轨」标记。若输入容器未提供此信息，且用户未通过选项参数指定，即会设置该标记。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1422
 msgid "If the user does not explicitly select a track during playback, the player should select one of the tracks that has its &quot;default track&quot; flag set, taking user preferences such as their preferred language into account."
-msgstr ""
+msgstr "如果用户在播放时不明确选择一条轨道，播放器应选择已设有「默认轨」标记的轨道，同时也应考虑用户偏好设置，例如用户偏好的语言。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1433
-#, fuzzy
-#| msgid "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--track-enabled-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--track-enabled-flag</option> <parameter>TID<optional>:布尔值</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1436
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &quot;track enabled&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) to the given value <parameter>bool</parameter> (0 or 1; defaults to 1 if not specified).  Tracks are enabled by default if no option is specified for them and the source container doesn't provide this information either."
-msgstr "若未给出可选参数 <parameter>bool</parameter>，则为指定轨道 (参见 <link linkend=\"mkvmerge.track_ids\">轨道 ID</link> 段落) 设置“强制轨”标记。播放器必须播放“强制轨”标记为 <constant>1</constant> 的所有轨道。"
+msgstr "将指定轨道的「轨道启用」标记 (参阅「<link linkend=\"mkvmerge.track_ids\">轨道 ID</link>」段落) 设为指定值 <parameter>布尔值</parameter> (0 或1; 若不指定，则默认为 1)。 只要没有特别指定选项值，且输入容器也未提供此类信息，轨道均默认为启用状态。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1442
 msgid "Only tracks whose &quot;track enabled&quot; flag is set should be considered for playback."
-msgstr ""
+msgstr "只有设置了「轨道启用」标记的轨道才应作为播放器考虑播放的对象。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1452
 msgid "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--forced-display-flag</option> <parameter>TID<optional>:布尔值</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1455
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &quot;forced display&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  Use this for tracks containing onscreen text or foreign-language dialogue."
-msgstr "若未给出可选参数 <parameter>bool</parameter>，则为指定轨道 (参见 <link linkend=\"mkvmerge.track_ids\">轨道 ID</link> 段落) 设置“强制轨”标记。播放器必须播放“强制轨”标记为 <constant>1</constant> 的所有轨道。"
+msgstr "若可选参数「 <parameter>布尔值</parameter>」已设为 <constant>1</constant> 或不存在该数值，则为指定轨道设置「强制显示」标记 (参阅「<link linkend=\"mkvmerge.track_ids\">轨道 ID</link>」段落)。 此选项适用于包含屏幕显示文字或外语对白翻译的轨道。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1467
-#, fuzzy
-#| msgid "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--hearing-impaired-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--hearing-impaired-flag</option> <parameter>TID<optional>:布尔值</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1470
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &quot;hearing impaired&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is suitable for users with hearing impairments."
-msgstr "若未给出可选参数 <parameter>bool</parameter>，则为指定轨道 (参见 <link linkend=\"mkvmerge.track_ids\">轨道 ID</link> 段落) 设置“强制轨”标记。播放器必须播放“强制轨”标记为 <constant>1</constant> 的所有轨道。"
+msgstr "若可选参数「<parameter>布尔值</parameter>」已设为 <constant>1</constant> 或不存在该数值，则为指定轨道设置「听觉障碍」标记 (参阅「<link linkend=\"mkvmerge.track_ids\">轨道 ID</link>」段落)。 此标记适用于适合听觉障碍人士使用的轨道。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1482
-#, fuzzy
-#| msgid "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--visual-impaired-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--visual-impaired-flag</option> <parameter>TID<optional>:布尔值</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1485
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &quot;visual impaired&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is suitable for users with visual impairments."
-msgstr "若未给出可选参数 <parameter>bool</parameter>，则为指定轨道 (参见 <link linkend=\"mkvmerge.track_ids\">轨道 ID</link> 段落) 设置“强制轨”标记。播放器必须播放“强制轨”标记为 <constant>1</constant> 的所有轨道。"
+msgstr "若可选参数「<parameter>布尔值</parameter>」已设为 <constant>1</constant> 或不存在该数值，则为指定轨道设置「视觉障碍」标记 (参阅「<link linkend=\"mkvmerge.track_ids\">轨道 ID</link>」段落)。 此标记适用于适合视觉障碍人士使用的轨道。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1497
-#, fuzzy
-#| msgid "<option>--default-track-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--text-descriptions-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--default-track-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--text-descriptions-flag</option> <parameter>TID<optional>:布尔值</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1500
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &quot;text descriptions&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."
-msgstr "若未给出可选参数 <parameter>bool</parameter>，则为指定轨道 (参见 <link linkend=\"mkvmerge.track_ids\">轨道 ID</link> 段落) 设置“强制轨”标记。播放器必须播放“强制轨”标记为 <constant>1</constant> 的所有轨道。"
+msgstr "若可选参数「<parameter>布尔值</parameter>」已设为 <constant>1</constant> 或不存在该数值，则为指定轨道设置「文字描述」标记 (参阅「<link linkend=\"mkvmerge.track_ids\">轨道 ID</link>」段落)。 此标记适用于包含对视频内容的文字描述的轨道，它们适合视觉障碍人士通过文本转语音系统播放。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1513
-#, fuzzy
-#| msgid "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--original-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--original-flag</option> <parameter>TID<optional>:布尔值</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1516
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &quot;original language&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is in the content's original language (not a translation)."
-msgstr "若未给出可选参数 <parameter>bool</parameter>，则为指定轨道 (参见 <link linkend=\"mkvmerge.track_ids\">轨道 ID</link> 段落) 设置“强制轨”标记。播放器必须播放“强制轨”标记为 <constant>1</constant> 的所有轨道。"
+msgstr "若可选参数「<parameter>布尔值</parameter>」已设为 <constant>1</constant> 或不存在该数值，则为指定轨道设置「原始语言」标记 (参阅「<link linkend=\"mkvmerge.track_ids\">轨道 ID</link>」段落)。 此标记适用于与内容原始语言一致 (而非翻译) 的轨道。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1528
-#, fuzzy
-#| msgid "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
 msgid "<option>--commentary-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
-msgstr "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</optional></parameter>"
+msgstr "<option>--commentary-flag</option> <parameter>TID<optional>:布尔值</optional></parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1531
-#, fuzzy
-#| msgid "Sets the 'forced' flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is not present. A player must play all tracks for which this flag is set to <constant>1</constant>."
 msgid "Sets the &quot;commentary&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track contains commentary."
-msgstr "若未给出可选参数 <parameter>bool</parameter>，则为指定轨道 (参见 <link linkend=\"mkvmerge.track_ids\">轨道 ID</link> 段落) 设置“强制轨”标记。播放器必须播放“强制轨”标记为 <constant>1</constant> 的所有轨道。"
+msgstr "若可选参数「<parameter>布尔值</parameter>」已设为 <constant>1</constant> 或不存在该数值，则为指定轨道设置「评论」标记 (参阅「<link linkend=\"mkvmerge.track_ids\">轨道 ID</link>」段落)。 此标记适用于包含评论内容的轨道。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1543
@@ -3169,10 +3130,8 @@ msgstr "将视频轨道的像素裁减参数设为指定数值。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1790
-#, fuzzy
-#| msgid "<option>--colour-matrix</option> <parameter>TID:n</parameter>"
 msgid "<option>--colour-matrix-coefficients</option> <parameter>TID:n</parameter>"
-msgstr "<option>--colour-matrix</option> <parameter>TID:n</parameter>"
+msgstr "<option>--colour-matrix-coefficients</option> <parameter>TID:n</parameter>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1793
@@ -3434,7 +3393,7 @@ msgstr "<option>--sub-charset</option> <parameter>TID:字符集</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2061
 msgid "Sets the character set for the conversion to UTF-8 for UTF-8 subtitles for the given track ID. If not specified the charset will be derived from the current locale settings. Note that a charset is not needed for subtitles read from &matroska; files or from Kate streams, as these are always stored in UTF-8. See the section about <link linkend=\"mkvmerge.text_files_and_charsets\">text files and character sets</link> for an explanation how &mkvmerge; converts between character sets."
-msgstr "为指定轨道 ID 指定所用字符集，用以转为 UTF-8 编码的 UTF-8 字幕。如果未指定字符集，则将根据当前区域设置推算字符集。注意对于从 &matroska; 文件或 Kate 流中读取的字幕不必指定字符集，因为在这些格式中已使用 UTF-8 编码储存。关于 &mkvmerge; 如何在字符集间进行转换的说明请参见关于 <link linkend=\"mkvmerge.text_files_and_charsets\"> 文本文件与字符集</link> 的段落。"
+msgstr "指定轨道 ID 对应的字符集，用于将字幕转换为 UTF-8 编码。如果未指定字符集，则将根据当前区域设置推算字符集。注意，对于从 &matroska; 文件或 Kate 流中读取的字幕不必指定字符集，因为这些字幕总是以 UTF-8 编码存储。关于 &mkvmerge; 如何转换不同字符集的说明，请参见关于<link linkend=\"mkvmerge.text_files_and_charsets\"> 文本文件与字符集</link>的段落。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2076
@@ -3493,10 +3452,8 @@ msgstr "<literal>json</literal> 格式输出机器可读的 JSON 表达式。此
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2124
-#, fuzzy
-#| msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v12.json\"><literal>mkvmerge-identification-output-schema-v12.json</literal></ulink>"
 msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v14.json\"><literal>mkvmerge-identification-output-schema-v14.json</literal></ulink>"
-msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v12.json\"><literal>mkvmerge-identification-output-schema-v12.json</literal></ulink>"
+msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v14.json\"><literal>mkvmerge-identification-output-schema-v14.json</literal></ulink>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2128
@@ -3888,7 +3845,7 @@ msgstr "或许您还想让荷兰语作为默认语言。您还有其他语言的
 #: doc/man/mkvmerge.xml:2560
 #, no-wrap
 msgid "$ mkvmerge -o with-lang-codes.mkv --language 2:ger --language 3:dut --default-track-flag 3 without-lang-codes.mkv --language 0:eng english.srt --default-track-flag 0 --language 0:fre french.srt"
-msgstr "$ mkvmerge -o 含语言代码的.mkv --language 2:ger --language 3:dut --default-track-flag 3 无语言代码的.mkv --language 0:eng 英语.srt --default-track-flag 0 --language 0:fre 法语.srt"
+msgstr "$ mkvmerge -o 含语言代码的文件.mkv --language 2:ger --language 3:dut --default-track-flag 3 无语言代码的文件.mkv --language 0:eng 英文字幕.srt --default-track-flag 0 --language 0:fre 法文字幕.srt"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2563
@@ -4119,7 +4076,7 @@ msgstr "在 JSON 内部转义特殊字符的规则请见官方 JSON 规范 <ulin
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2805
 msgid "The option file's name itself must be specified as a command line argument prefixed with a '<literal>@</literal>' character."
-msgstr ""
+msgstr "选项文件名本身应添加前缀字符「<literal>@</literal>」在命令行参数给出。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2809
@@ -4153,7 +4110,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2824
 msgid "The corresponding command would then be '<command>mkvmerge @options.json</command>'."
-msgstr ""
+msgstr "对应的命令行则为「<command>mkvmerge @选项文件.json</command>」。"
 
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvmerge.xml:2829
@@ -5159,7 +5116,7 @@ msgstr "设置接下来 <option>--add-attachment</option> 或 <option>--replace-
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:368
 msgid "This affects both adding new attachments and replacing existing attachments, but only if the new <abbrev>MIME</abbrev> type isn't specified. Other existing attachments aren't changed."
-msgstr ""
+msgstr "这将同时影响到新增附件与替换现有附件的操作，但仅当用户未指定新版 <abbrev>MIME</abbrev> 类型时才起作用。其他现有的附件不受影响。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:382
@@ -5169,12 +5126,12 @@ msgstr "其他选项："
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:390
 msgid "Normally when the user requests changes to the '<literal>language</literal>' track header property, &mkvpropedit; will apply the same change to the new <classname>LanguageIETF</classname> track header element in addition to the legacy <classname>Language</classname> element. If this option is used, the change is only applied to the legacy <classname>Language</classname> element."
-msgstr ""
+msgstr "通常情况下，当用户要求更改轨道头部属性「<literal>language</literal>」(语言) 时，&mkvpropedit; 会同时更改全新的「<classname>LanguageIETF</classname>」轨道头部元素以及传统的「<classname>Language</classname>」元素。若使用本选项，则只会更改传统的「<classname>Language</classname>」元素。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:396
 msgid "This option does not affect changes requested via the '<literal>language-ietf</literal>' track header property."
-msgstr ""
+msgstr "此选项不影响通过「<literal>language-ietf</literal>」轨道头部属性提出的变更要求。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:425
@@ -5275,7 +5232,7 @@ msgstr "附件选择器"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:620
 msgid "An attachment selector is used with the two actions <link linkend=\"mkvpropedit.description.replace_attachment\"><option>--replace-attachment</option></link> and <link linkend=\"mkvpropedit.description.delete_attachment\"><option>--delete-attachment</option></link>. It can have one of the following four forms:"
-msgstr "附件选择器可与两项操作 <link linkend=\"mkvpropedit.description.replace_attachment\"><option>--replace-attachment</option></link> 及 <link linkend=\"mkvpropedit.description.delete_attachment\"><option>--delete-attachment</option></link> 一起使用。它可以有以下四种格式:"
+msgstr "附件选择器可与「<link linkend=\"mkvpropedit.description.replace_attachment\"><option>--replace-attachment</option></link>」及「<link linkend=\"mkvpropedit.description.delete_attachment\"><option>--delete-attachment</option></link>」这两项操作一起使用。它可以有以下四种格式:"
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:629
@@ -5290,12 +5247,12 @@ msgstr "按附件 UID (唯一 ID) 选择。本格式的选择器为等号 <liter
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:643
 msgid "Selection by attachment name. In this form the selector is the literal word <literal>name:</literal> followed by the existing attachment's name. If this selector is used with <option>--replace-attachment</option> then colons within the name to match must be escaped as <literal>\\c</literal>."
-msgstr "按附件名称选择。本格式的选择器为文字 <literal>name:</literal> 后接现有附件名称。若本选择器与 <option>--replace-attachment</option> 一同使用，则名称中的冒号必须用 <literal>\\c</literal> 转义。"
+msgstr "按附件名称选择。本格式的选择器为纯文本「<literal>name:</literal>」后接现有附件名称。若本选择器与「<option>--replace-attachment</option>」一起使用，则名称中的冒号必须用「<literal>\\c</literal>」转义。"
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:651
 msgid "Selection by MIME type. In this form the selector is the literal word <literal>mime-type:</literal> followed by the existing attachment's MIME type. If this selector is used with <option>--replace-attachment</option> then colons within the MIME type to match must be escaped as <literal>\\c</literal>."
-msgstr "按 MIME 类型选择。本格式的选择器为文字 <literal>mime-type:</literal> 后接现有附件的 MIME 类型。若本选择器与 <option>--replace-attachment</option> 一同使用，则 MIME 类型中的冒号必须用 <literal>\\c</literal> 转义。"
+msgstr "按 MIME 类型选择。本格式的选择器为纯文本「<literal>mime-type:</literal>」后接现有附件的 MIME 类型。若本选择器与「<option>--replace-attachment</option>」一起使用，则 MIME 类型中的冒号必须用「<literal>\\c</literal>」转义。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:662
