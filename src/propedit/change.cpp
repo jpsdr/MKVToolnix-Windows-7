@@ -390,8 +390,8 @@ change_c::make_change_for_language(change_c::change_type_e type,
   if (!language.is_valid())
     throw std::runtime_error{fmt::format(Y("invalid language tag '{0}': {1}"), value, language.get_error())};
 
-  if (language.has_valid_iso639_code() && (name == "language"))
-    changes.push_back(std::make_shared<change_c>(type, "language", language.get_iso639_alpha_3_code()));
+  if (name == "language")
+    changes.push_back(std::make_shared<change_c>(type, "language", language.get_closest_iso639_2_alpha_3_code()));
 
   if ((name == "language-ietf") || !mtx::bcp47::language_c::is_disabled())
     changes.push_back(std::make_shared<change_c>(type, "language-ietf", language.format()));

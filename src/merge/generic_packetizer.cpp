@@ -682,8 +682,7 @@ generic_packetizer_c::set_language(mtx::bcp47::language_c const &language) {
   if (!m_track_entry || !language.is_valid())
     return;
 
-  if (language.has_valid_iso639_2_code())
-    GetChild<KaxTrackLanguage>(m_track_entry).SetValue(language.get_iso639_alpha_3_code());
+  GetChild<KaxTrackLanguage>(m_track_entry).SetValue(language.get_closest_iso639_2_alpha_3_code());
   if (!mtx::bcp47::language_c::is_disabled())
     GetChild<KaxLanguageIETF>(m_track_entry).SetValue(language.format());
 }
@@ -1058,9 +1057,8 @@ generic_packetizer_c::set_headers() {
 
   idx = track_type_to_deftrack_type(m_htrack_type);
 
-  auto iso639_alpha_3_code = m_ti.m_language.has_valid_iso639_2_code() ? m_ti.m_language.get_iso639_alpha_3_code() : g_default_language.has_valid_iso639_2_code() ? g_default_language.get_iso639_alpha_3_code() : "und"s;
-  auto language            = m_ti.m_language.is_valid()                ? m_ti.m_language                           : g_default_language;
-  GetChild<KaxTrackLanguage>(m_track_entry).SetValue(iso639_alpha_3_code);
+  auto language = m_ti.m_language.is_valid() ? m_ti.m_language : g_default_language;
+  GetChild<KaxTrackLanguage>(m_track_entry).SetValue(language.get_closest_iso639_2_alpha_3_code());
   if (!mtx::bcp47::language_c::is_disabled())
     GetChild<KaxLanguageIETF>(m_track_entry).SetValue(language.format());
 

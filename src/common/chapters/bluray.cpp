@@ -50,12 +50,12 @@ convert_mpls_chapters_kax_chapters(mtx::bluray::mpls::chapters_t const &mpls_cha
 
     if (!name.empty())
       atom->PushElement(*mtx::construct::cons<libmatroska::KaxChapterDisplay>(new libmatroska::KaxChapterString,   name,
-                                                                              new libmatroska::KaxChapterLanguage, main_language.get_iso639_2_alpha_3_code_or("und"s)));
+                                                                              new libmatroska::KaxChapterLanguage, main_language.get_closest_iso639_2_alpha_3_code()));
 
     for (auto const &[entry_language, entry_name] : entry.names)
       if ((entry_language != main_language) && !entry_name.empty())
         atom->PushElement(*mtx::construct::cons<libmatroska::KaxChapterDisplay>(new libmatroska::KaxChapterString,   entry_name,
-                                                                                new libmatroska::KaxChapterLanguage, entry_language.get_iso639_2_alpha_3_code_or("und"s)));
+                                                                                new libmatroska::KaxChapterLanguage, entry_language.get_closest_iso639_2_alpha_3_code()));
 
     edition.PushElement(*atom);
   }

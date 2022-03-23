@@ -132,20 +132,12 @@ ebml_tags_converter_c::fix_simple_tag(KaxTagSimple &simple_tag)
   if (tlanguage_ietf)
     tlanguage_ietf->SetValue(parsed_language.format());
 
-  if (parsed_language.has_valid_iso639_2_code()) {
-    if (!tlanguage) {
-      tlanguage = new KaxTagLangue;
-      simple_tag.PushElement(*tlanguage);
-    }
-
-    tlanguage->SetValue(parsed_language.get_iso639_alpha_3_code());
-
-  } else if (tlanguage) {
-    auto language_opt = mtx::iso639::look_up(tlanguage->GetValue());
-
-    if (!language_opt || !language_opt->is_part_of_iso639_2)
-      throw conversion_x{fmt::format(Y("'{0}' is not a valid ISO 639-2 language code."), tlanguage->GetValue())};
+  if (!tlanguage) {
+    tlanguage = new KaxTagLangue;
+    simple_tag.PushElement(*tlanguage);
   }
+
+  tlanguage->SetValue(parsed_language.get_closest_iso639_2_alpha_3_code());
 }
 
 std::shared_ptr<KaxTags>

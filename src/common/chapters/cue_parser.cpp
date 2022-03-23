@@ -292,7 +292,7 @@ add_elements_for_cue_entry(cue_parser_args_t &a,
 
   auto &display = GetChild<KaxChapterDisplay>(*a.atom);
   GetChild<KaxChapterString>(display).SetValue(cue_str_internal_to_utf(a, a.name));
-  GetChild<KaxChapterLanguage>(display).SetValue(a.language.get_iso639_2_alpha_3_code_or("und"));
+  GetChild<KaxChapterLanguage>(display).SetValue(a.language.get_closest_iso639_2_alpha_3_code());
 
   add_subchapters_for_index_entries(a);
 

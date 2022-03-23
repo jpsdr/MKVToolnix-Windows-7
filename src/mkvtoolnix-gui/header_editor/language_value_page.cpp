@@ -80,7 +80,7 @@ LanguageValuePage::setLanguage(mtx::bcp47::language_c const &parsedLanguage) {
   if (!m_present && !m_cbAddOrRemove->isChecked())
     m_cbAddOrRemove->setChecked(true);
 
-  m_cbValue->setCurrentByData(QStringList{} << Q(parsedLanguage.get_iso639_2_alpha_3_code_or("und")));
+  m_cbValue->setCurrentByData(QStringList{} << Q(parsedLanguage.get_closest_iso639_2_alpha_3_code()));
 }
 
 }

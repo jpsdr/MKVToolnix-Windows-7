@@ -135,7 +135,7 @@ unify_legacy_and_bcp47_languages_and_countries(EbmlElement &elt) {
   legacy_countries.clear();
 
   for (auto const &bcp47_language : bcp47_languages) {
-    auto legacy_language = bcp47_language.get_iso639_2_alpha_3_code_or("und");
+    auto legacy_language = bcp47_language.get_closest_iso639_2_alpha_3_code();
 
     if (!mtx::includes(legacy_languages, legacy_language))
       legacy_languages.emplace_back(legacy_language);
@@ -336,7 +336,7 @@ parse_simple(mm_text_io_c *in,
 
         GetChild<KaxChapterString>(display).SetValueUTF8(name);
         if (use_language.is_valid()) {
-          GetChild<KaxChapterLanguage>(display).SetValue(use_language.get_iso639_2_alpha_3_code_or("und"));
+          GetChild<KaxChapterLanguage>(display).SetValue(use_language.get_closest_iso639_2_alpha_3_code());
           if (!mtx::bcp47::language_c::is_disabled())
             GetChild<KaxChapLanguageIETF>(display).SetValue(use_language.format());
           else
@@ -1305,7 +1305,7 @@ create_editions_and_chapters(std::vector<std::vector<timestamp_c>> const &editio
 
       if (!name.empty())
         atom->PushElement(*mtx::construct::cons<libmatroska::KaxChapterDisplay>(new libmatroska::KaxChapterString,    name,
-                                                                                new libmatroska::KaxChapterLanguage,  use_language.get_iso639_2_alpha_3_code_or("und"),
+                                                                                new libmatroska::KaxChapterLanguage,  use_language.get_closest_iso639_2_alpha_3_code(),
                                                                                 new libmatroska::KaxChapLanguageIETF, use_language.format()));
 
       edition->PushElement(*atom);

@@ -576,7 +576,7 @@ LanguageDialog::setComponentsFromLanguageTag(mtx::bcp47::language_c const &tag) 
 
   reinitializeLanguageComboBox();
 
-  setComboBoxTextByData(p.ui->cbLanguage, Q(tag.get_iso639_2_alpha_3_code_or({})));
+  setComboBoxTextByData(p.ui->cbLanguage, Q(tag.get_iso639_alpha_3_code()));
   setComboBoxTextByData(p.ui->cbRegion,   Q(tag.get_region()).toLower());
   setComboBoxTextByData(p.ui->cbScript,   Q(tag.get_script()));
 
