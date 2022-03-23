@@ -11,6 +11,14 @@
   enabled in the preferences, the new command line option
   `--enable-legacy-font-mime-types` will be passed to `mkvmerge` in order to
   have it remap the MIME types of existing attachments, too.
+* all: IETF BCP 47/TFC 5646 language tags: when deriving the legacy language
+  element codes to use a language tag's ISO 639 code is also potentially
+  interpreted as an & its prefix is used as the legacy language code. For
+  example, "Yue Chinese" = `yue` is not part of ISO 639-2. However, there is
+  an extlang subtag `yue` with a valid prefix of `zh` ("Chinese"), and for
+  "Chinese" there is an ISO 639-2 language code: `chi`. In this example the
+  IETF language element would be set to `yue` and the corresponding legacy
+  element to `chi`.  Part of the implementation of #3307.
 
 ## Bug fixes
 
