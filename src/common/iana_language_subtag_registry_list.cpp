@@ -27,7 +27,7 @@ using VS = std::vector<std::string>;
 
 void
 init() {
-  g_extlangs.reserve(245);
+  g_extlangs.reserve(252);
 
   g_extlangs.emplace_back("aao"s, u8"Algerian Saharan Arabic"s,             VS{ "ar"s } );
   g_extlangs.emplace_back("abh"s, u8"Tajiki Arabic"s,                       VS{ "ar"s } );
@@ -46,6 +46,7 @@ init() {
   g_extlangs.emplace_back("afb"s, u8"Gulf Arabic"s,                         VS{ "ar"s } );
   g_extlangs.emplace_back("afg"s, u8"Afghan Sign Language"s,                VS{ "sgn"s });
   g_extlangs.emplace_back("ajp"s, u8"South Levantine Arabic"s,              VS{ "ar"s } );
+  g_extlangs.emplace_back("ajs"s, u8"Algerian Jewish Sign Language"s,       VS{ "sgn"s });
   g_extlangs.emplace_back("apc"s, u8"North Levantine Arabic"s,              VS{ "ar"s } );
   g_extlangs.emplace_back("apd"s, u8"Sudanese Arabic"s,                     VS{ "ar"s } );
   g_extlangs.emplace_back("arb"s, u8"Standard Arabic"s,                     VS{ "ar"s } );
@@ -99,6 +100,7 @@ init() {
   g_extlangs.emplace_back("doq"s, u8"Dominican Sign Language"s,             VS{ "sgn"s });
   g_extlangs.emplace_back("dse"s, u8"Dutch Sign Language"s,                 VS{ "sgn"s });
   g_extlangs.emplace_back("dsl"s, u8"Danish Sign Language"s,                VS{ "sgn"s });
+  g_extlangs.emplace_back("dsz"s, u8"Mardin Sign Language"s,                VS{ "sgn"s });
   g_extlangs.emplace_back("dup"s, u8"Duano"s,                               VS{ "ms"s } );
   g_extlangs.emplace_back("ecs"s, u8"Ecuadorian Sign Language"s,            VS{ "sgn"s });
   g_extlangs.emplace_back("ehs"s, u8"Miyakubo Sign Language"s,              VS{ "sgn"s });
@@ -158,6 +160,7 @@ init() {
   g_extlangs.emplace_back("liw"s, u8"Col"s,                                 VS{ "ms"s } );
   g_extlangs.emplace_back("lls"s, u8"Lithuanian Sign Language"s,            VS{ "sgn"s });
   g_extlangs.emplace_back("lsb"s, u8"Langue des Signes Burundaise"s,        VS{ "sgn"s });
+  g_extlangs.emplace_back("lsc"s, u8"Lengua de señas Albarradas"s,          VS{ "sgn"s });
   g_extlangs.emplace_back("lsg"s, u8"Lyons Sign Language"s,                 VS{ "sgn"s });
   g_extlangs.emplace_back("lsl"s, u8"Latvian Sign Language"s,               VS{ "sgn"s });
   g_extlangs.emplace_back("lsn"s, u8"Tibetan Sign Language"s,               VS{ "sgn"s });
@@ -165,6 +168,7 @@ init() {
   g_extlangs.emplace_back("lsp"s, u8"Lengua de Señas Panameñas"s,           VS{ "sgn"s });
   g_extlangs.emplace_back("lst"s, u8"Trinidad and Tobago Sign Language"s,   VS{ "sgn"s });
   g_extlangs.emplace_back("lsv"s, u8"Sivia Sign Language"s,                 VS{ "sgn"s });
+  g_extlangs.emplace_back("lsw"s, u8"Langue des Signes Seychelloise"s,      VS{ "sgn"s });
   g_extlangs.emplace_back("lsy"s, u8"Mauritian Sign Language"s,             VS{ "sgn"s });
   g_extlangs.emplace_back("ltg"s, u8"Latgalian"s,                           VS{ "lv"s } );
   g_extlangs.emplace_back("lvs"s, u8"Standard Latvian"s,                    VS{ "lv"s } );
@@ -213,10 +217,13 @@ init() {
   g_extlangs.emplace_back("psp"s, u8"Philippine Sign Language"s,            VS{ "sgn"s });
   g_extlangs.emplace_back("psr"s, u8"Portuguese Sign Language"s,            VS{ "sgn"s });
   g_extlangs.emplace_back("pys"s, u8"Lengua de Señas del Paraguay"s,        VS{ "sgn"s });
+  g_extlangs.emplace_back("rib"s, u8"Bribri Sign Language"s,                VS{ "sgn"s });
   g_extlangs.emplace_back("rms"s, u8"Romanian Sign Language"s,              VS{ "sgn"s });
+  g_extlangs.emplace_back("rnb"s, u8"Brunca Sign Language"s,                VS{ "sgn"s });
   g_extlangs.emplace_back("rsi"s, u8"Rennellese Sign Language"s,            VS{ "sgn"s });
   g_extlangs.emplace_back("rsl"s, u8"Russian Sign Language"s,               VS{ "sgn"s });
   g_extlangs.emplace_back("rsm"s, u8"Miriwoong Sign Language"s,             VS{ "sgn"s });
+  g_extlangs.emplace_back("rsn"s, u8"Rwandan Sign Language"s,               VS{ "sgn"s });
   g_extlangs.emplace_back("sdl"s, u8"Saudi Arabian Sign Language"s,         VS{ "sgn"s });
   g_extlangs.emplace_back("sfb"s, u8"French Belgian Sign Language"s,        VS{ "sgn"s });
   g_extlangs.emplace_back("sfs"s, u8"South African Sign Language"s,         VS{ "sgn"s });
@@ -275,7 +282,7 @@ init() {
   g_extlangs.emplace_back("zsl"s, u8"Zambian Sign Language"s,               VS{ "sgn"s });
   g_extlangs.emplace_back("zsm"s, u8"Standard Malay"s,                      VS{ "ms"s } );
 
-  g_variants.reserve(106);
+  g_variants.reserve(108);
 
   g_variants.emplace_back("1606nict"s, u8"Late Middle French (to 1606)"s,                                   VS{ "frm"s }                                                                                                                                                 );
   g_variants.emplace_back("1694acad"s, u8"Early Modern French"s,                                            VS{ "fr"s }                                                                                                                                                  );
@@ -316,6 +323,7 @@ init() {
   g_variants.emplace_back("fonnapa"s,  u8"Americanist Phonetic Notation"s,                                  VS{}                                                                                                                                                         );
   g_variants.emplace_back("fonupa"s,   u8"Uralic Phonetic Alphabet"s,                                       VS{}                                                                                                                                                         );
   g_variants.emplace_back("fonxsamp"s, u8"X-SAMPA transcription"s,                                          VS{}                                                                                                                                                         );
+  g_variants.emplace_back("gallo"s,    u8"Gallo"s,                                                          VS{ "fr"s }                                                                                                                                                  );
   g_variants.emplace_back("gascon"s,   u8"Gascon"s,                                                         VS{ "oc"s }                                                                                                                                                  );
   g_variants.emplace_back("grclass"s,  u8"Classical Occitan orthography"s,                                  VS{ "oc"s, "oc-aranes"s, "oc-auvern"s, "oc-cisaup"s, "oc-creiss"s, "oc-gascon"s, "oc-lemosin"s, "oc-lengadoc"s, "oc-nicard"s, "oc-provenc"s, "oc-vivaraup"s });
   g_variants.emplace_back("grital"s,   u8"Italian-inspired Occitan orthography"s,                           VS{ "oc"s, "oc-cisaup"s, "oc-nicard"s, "oc-provenc"s }                                                                                                       );
@@ -369,6 +377,7 @@ init() {
   g_variants.emplace_back("surmiran"s, u8"Surmiran idiom of Romansh"s,                                      VS{ "rm"s }                                                                                                                                                  );
   g_variants.emplace_back("sursilv"s,  u8"Sursilvan idiom of Romansh"s,                                     VS{ "rm"s }                                                                                                                                                  );
   g_variants.emplace_back("sutsilv"s,  u8"Sutsilvan idiom of Romansh"s,                                     VS{ "rm"s }                                                                                                                                                  );
+  g_variants.emplace_back("synnejyl"s, u8"South Jutish"s,                                                   VS{ "da"s }                                                                                                                                                  );
   g_variants.emplace_back("tarask"s,   u8"Belarusian in Taraskievica orthography"s,                         VS{ "be"s }                                                                                                                                                  );
   g_variants.emplace_back("tongyong"s, u8"Tongyong Pinyin romanization"s,                                   VS{ "zh-Latn"s }                                                                                                                                             );
   g_variants.emplace_back("tunumiit"s, u8"Østgrønlandsk"s,                                                  VS{ "kl"s }                                                                                                                                                  );
