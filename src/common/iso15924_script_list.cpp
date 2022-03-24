@@ -25,7 +25,7 @@ std::vector<script_t> g_scripts;
 
 void
 init() {
-  g_scripts.reserve(258);
+  g_scripts.reserve(261);
 
   g_scripts.emplace_back("Adlm"s, 166, u8"Adlam"s                                                                                          );
   g_scripts.emplace_back("Afak"s, 439, u8"Afaka"s                                                                                          );
@@ -103,6 +103,7 @@ init() {
   g_scripts.emplace_back("Jurc"s, 510, u8"Jurchen"s                                                                                        );
   g_scripts.emplace_back("Kali"s, 357, u8"Kayah Li"s                                                                                       );
   g_scripts.emplace_back("Kana"s, 411, u8"Katakana"s                                                                                       );
+  g_scripts.emplace_back("Kawi"s, 368, u8"Kawi"s                                                                                           );
   g_scripts.emplace_back("Khar"s, 305, u8"Kharoshthi"s                                                                                     );
   g_scripts.emplace_back("Khmr"s, 355, u8"Khmer"s                                                                                          );
   g_scripts.emplace_back("Khoj"s, 322, u8"Khojki"s                                                                                         );
@@ -144,6 +145,7 @@ init() {
   g_scripts.emplace_back("Mtei"s, 337, u8"Meitei Mayek (Meithei, Meetei)"s                                                                 );
   g_scripts.emplace_back("Mult"s, 323, u8"Multani"s                                                                                        );
   g_scripts.emplace_back("Mymr"s, 350, u8"Myanmar (Burmese)"s                                                                              );
+  g_scripts.emplace_back("Nagm"s, 295, u8"Nag Mundari"s                                                                                    );
   g_scripts.emplace_back("Nand"s, 311, u8"Nandinagari"s                                                                                    );
   g_scripts.emplace_back("Narb"s, 106, u8"Old North Arabian (Ancient North Arabian)"s                                                      );
   g_scripts.emplace_back("Nbat"s, 159, u8"Nabataean"s                                                                                      );
@@ -244,6 +246,7 @@ init() {
   g_scripts.emplace_back("Sora"s, 398, u8"Sora Sompeng"s                                                                                   );
   g_scripts.emplace_back("Soyo"s, 329, u8"Soyombo"s                                                                                        );
   g_scripts.emplace_back("Sund"s, 362, u8"Sundanese"s                                                                                      );
+  g_scripts.emplace_back("Sunu"s, 274, u8"Sunuwar"s                                                                                        );
   g_scripts.emplace_back("Sylo"s, 316, u8"Syloti Nagri"s                                                                                   );
   g_scripts.emplace_back("Syrc"s, 135, u8"Syriac"s                                                                                         );
   g_scripts.emplace_back("Syre"s, 138, u8"Syriac (Estrangelo variant)"s                                                                    );
