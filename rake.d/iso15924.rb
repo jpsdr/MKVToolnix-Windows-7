@@ -1,5 +1,5 @@
 def create_iso15924_script_list_file
-  content = Mtx::OnlineFile.download("https://unicode.org/iso15924/iso15924.txt.zip")
+  content = Mtx::OnlineFile.download("https://unicode.org/iso15924/iso15924.txt")
 
   rows = content.
     force_encoding("UTF-8").
