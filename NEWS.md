@@ -21,6 +21,8 @@
   element to `chi`. Part of the implementation of #3307.
 * MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: ISO 639-3 and 639-5
   languages will now be used by default. Part of the implementation of #3307.
+* all: IETF BCP 47/RFC 5646 language tags: grandfathered language tags are now
+  supported. Part of the implementation of #3307.
 
 ## Bug fixes
 

@@ -21,7 +21,7 @@
 
 namespace mtx::iana::language_subtag_registry {
 
-std::vector<entry_t> g_extlangs, g_variants;
+std::vector<entry_t> g_extlangs, g_variants, g_grandfathered;
 
 using VS = std::vector<std::string>;
 
@@ -392,6 +392,35 @@ init() {
   g_variants.emplace_back("vivaraup"s, u8"Vivaro-Alpine"s,                                                  VS{ "oc"s }                                                                                                                                                  );
   g_variants.emplace_back("wadegile"s, u8"Wade-Giles romanization"s,                                        VS{ "zh-Latn"s }                                                                                                                                             );
   g_variants.emplace_back("xsistemo"s, u8"Standard X-system orthographic fallback for spelling Esperanto"s, VS{ "eo"s }                                                                                                                                                  );
+
+  g_grandfathered.reserve(26);
+
+  g_grandfathered.emplace_back("art-lojban"s,  u8"Lojban"s,                                                                                         VS{});
+  g_grandfathered.emplace_back("cel-gaulish"s, u8"Gaulish"s,                                                                                        VS{});
+  g_grandfathered.emplace_back("en-GB-oed"s,   u8"English, Oxford English Dictionary spelling"s,                                                    VS{});
+  g_grandfathered.emplace_back("i-ami"s,       u8"Amis"s,                                                                                           VS{});
+  g_grandfathered.emplace_back("i-bnn"s,       u8"Bunun"s,                                                                                          VS{});
+  g_grandfathered.emplace_back("i-default"s,   u8"Default Language"s,                                                                               VS{});
+  g_grandfathered.emplace_back("i-enochian"s,  u8"Enochian"s,                                                                                       VS{});
+  g_grandfathered.emplace_back("i-hak"s,       u8"Hakka"s,                                                                                          VS{});
+  g_grandfathered.emplace_back("i-klingon"s,   u8"Klingon"s,                                                                                        VS{});
+  g_grandfathered.emplace_back("i-lux"s,       u8"Luxembourgish"s,                                                                                  VS{});
+  g_grandfathered.emplace_back("i-mingo"s,     u8"Mingo"s,                                                                                          VS{});
+  g_grandfathered.emplace_back("i-navajo"s,    u8"Navajo"s,                                                                                         VS{});
+  g_grandfathered.emplace_back("i-pwn"s,       u8"Paiwan"s,                                                                                         VS{});
+  g_grandfathered.emplace_back("i-tao"s,       u8"Tao"s,                                                                                            VS{});
+  g_grandfathered.emplace_back("i-tay"s,       u8"Tayal"s,                                                                                          VS{});
+  g_grandfathered.emplace_back("i-tsu"s,       u8"Tsou"s,                                                                                           VS{});
+  g_grandfathered.emplace_back("no-bok"s,      u8"Norwegian Bokmal"s,                                                                               VS{});
+  g_grandfathered.emplace_back("no-nyn"s,      u8"Norwegian Nynorsk"s,                                                                              VS{});
+  g_grandfathered.emplace_back("sgn-BE-FR"s,   u8"Belgian-French Sign Language"s,                                                                   VS{});
+  g_grandfathered.emplace_back("sgn-BE-NL"s,   u8"Belgian-Flemish Sign Language"s,                                                                  VS{});
+  g_grandfathered.emplace_back("sgn-CH-DE"s,   u8"Swiss German Sign Language"s,                                                                     VS{});
+  g_grandfathered.emplace_back("zh-guoyu"s,    u8"Mandarin or Standard Chinese"s,                                                                   VS{});
+  g_grandfathered.emplace_back("zh-hakka"s,    u8"Hakka"s,                                                                                          VS{});
+  g_grandfathered.emplace_back("zh-min"s,      u8"Min, Fuzhou, Hokkien, Amoy, or Taiwanese"s,                                                       VS{});
+  g_grandfathered.emplace_back("zh-min-nan"s,  u8"Minnan, Hokkien, Amoy, Taiwanese, Southern Min, Southern Fujian, Hoklo, Southern Fukien, Ho-lo"s, VS{});
+  g_grandfathered.emplace_back("zh-xiang"s,    u8"Xiang or Hunanese"s,                                                                              VS{});
 }
 
 } // namespace mtx::iana::language_subtag_registry

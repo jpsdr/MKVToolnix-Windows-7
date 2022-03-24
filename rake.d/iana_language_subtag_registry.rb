@@ -79,9 +79,25 @@ module Mtx::IANALanguageSubtagRegistry
         "\n"
     end
 
+    grandfathered_entry_formatter = lambda do |entry|
+      [ entry[:tag].to_cpp_string,
+        entry[:description].to_u8_cpp_string,
+        'VS{}',
+      ]
+    end
+
+    grandfathered_formatter = lambda do
+      rows = entries["grandfathered"].map(&grandfathered_entry_formatter)
+
+      "  g_grandfathered.reserve(#{entries["grandfathered"].size});\n\n" +
+        format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_grandfathered.emplace_back(", :row_suffix => ");").join("\n") +
+        "\n"
+    end
+
     formatted = [
       formatter.call("extlang", "extlangs"),
       formatter.call("variant", "variants"),
+      grandfathered_formatter.call,
     ]
 
     header = <<EOT
@@ -108,7 +124,7 @@ module Mtx::IANALanguageSubtagRegistry
 
 namespace mtx::iana::language_subtag_registry {
 
-std::vector<entry_t> g_extlangs, g_variants;
+std::vector<entry_t> g_extlangs, g_variants, g_grandfathered;
 
 using VS = std::vector<std::string>;
 

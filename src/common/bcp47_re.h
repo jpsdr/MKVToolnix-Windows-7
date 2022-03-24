@@ -19,6 +19,6 @@
 
 namespace mtx::bcp47 {
 
-extern std::optional<QRegularExpression> s_bcp47_re;
+extern std::optional<QRegularExpression> s_bcp47_re, s_bcp47_grandfathered_re;
 
 }

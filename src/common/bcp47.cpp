@@ -162,6 +162,13 @@ language_c::format_internal(bool force)
   if (!m_valid && !force)
     return {};
 
+  if (!m_grandfathered.empty()) {
+    auto idx = mtx::iana::language_subtag_registry::look_up_grandfathered(m_grandfathered);
+    if (idx)
+      return idx->code;
+    return {};
+  }
+
   auto output = mtx::string::to_lower_ascii(m_language);
 
   for (auto const &subtag : m_extended_language_subtags)
@@ -195,6 +202,13 @@ language_c::format_internal(bool force)
 std::string
 language_c::format_long(bool force)
   const noexcept {
+  if (!m_grandfathered.empty()) {
+    auto idx = mtx::iana::language_subtag_registry::look_up_grandfathered(m_grandfathered);
+    if (idx)
+      return fmt::format("{0} ({1})", idx->description, idx->code);;
+    return {};
+  }
+
   auto formatted = format(force);
 
   if (formatted.empty())
@@ -460,7 +474,15 @@ language_c::parse(std::string const &language) {
 
   language_c l;
   auto language_lower = mtx::string::to_lower_ascii(language);
-  auto matches        = s_bcp47_re->match(Q(language_lower));
+  auto matches        = s_bcp47_grandfathered_re->match(Q(language_lower));
+
+  if (matches.hasMatch()) {
+    l.m_grandfathered = language;
+    l.m_valid         = true;
+    return l;
+  }
+
+  matches = s_bcp47_re->match(Q(language_lower));
 
   if (!matches.hasMatch()) {
     l.m_parser_error = Y("The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags.");
@@ -634,6 +656,14 @@ language_c::set_private_use(std::vector<std::string> const &private_use) {
   return *this;
 }
 
+language_c &
+language_c::set_grandfathered(std::string const &grandfathered) {
+  m_grandfathered        = grandfathered;
+  m_formatted_up_to_date = false;
+
+  return *this;
+}
+
 std::string const &
 language_c::get_language()
   const noexcept {
@@ -674,6 +704,12 @@ std::vector<std::string> const &
 language_c::get_private_use()
   const noexcept {
   return m_private_use;
+}
+
+std::string const &
+language_c::get_grandfathered()
+  const noexcept {
+  return m_grandfathered;
 }
 
 bool

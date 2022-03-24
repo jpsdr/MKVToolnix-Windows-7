@@ -29,10 +29,11 @@ struct entry_t {
   }
 };
 
-extern std::vector<entry_t> g_extlangs, g_variants;
+extern std::vector<entry_t> g_extlangs, g_variants, g_grandfathered;
 
 void init();
 std::optional<entry_t> look_up_extlang(std::string const &s);
 std::optional<entry_t> look_up_variant(std::string const &s);
+std::optional<entry_t> look_up_grandfathered(std::string const &s);
 
 } // namespace mtx::iana::language_subtag_registry

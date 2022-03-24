@@ -43,6 +43,7 @@ protected:
   std::vector<std::string> m_variants;                  // registered variants
   std::vector<extension_t> m_extensions;
   std::vector<std::string> m_private_use;
+  std::string m_grandfathered;
 
   bool m_valid{false};
   std::string m_parser_error;
@@ -84,6 +85,7 @@ public:
   language_c &set_variants(std::vector<std::string> const &variants);
   language_c &set_extensions(std::vector<extension_t> const &extensions);
   language_c &set_private_use(std::vector<std::string> const &private_use);
+  language_c &set_grandfathered(std::string const &grandfathered);
 
   language_c &add_extension(extension_t const &extensions);
 
@@ -94,6 +96,7 @@ public:
   std::vector<std::string> const &get_variants() const noexcept;
   std::vector<extension_t> const &get_extensions() const noexcept;
   std::vector<std::string> const &get_private_use() const noexcept;
+  std::string const &get_grandfathered() const noexcept;
 
 protected:
   std::string format_internal(bool force) const noexcept;

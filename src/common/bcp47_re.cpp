@@ -15,11 +15,13 @@
 
 #include <QRegularExpression>
 
+#include "common/iana_language_subtag_registry.h"
 #include "common/qt.h"
+#include "common/strings/formatting.h"
 
 namespace mtx::bcp47 {
 
-std::optional<QRegularExpression> s_bcp47_re;
+std::optional<QRegularExpression> s_bcp47_re, s_bcp47_grandfathered_re;
 
 void
 init_re() {
@@ -96,40 +98,20 @@ init_re() {
     "      )+"
     "    )"
     "  )"
-    // "  |"
-    // "  ("                       // 11: grandfathered
-    // "    en-GB-oed |"           // irregular, ungrouped
-    // "    i-ami |"
-    // "    i-bnn |"
-    // "    i-default |"
-    // "    i-enochian |"
-    // "    i-hak |"
-    // "    i-klingon |"
-    // "    i-lux |"
-    // "    i-mingo |"
-    // "    i-navajo |"
-    // "    i-pwn |"
-    // "    i-tao |"
-    // "    i-tay |"
-    // "    i-tsu |"
-    // "    sgn-BE-FR |"
-    // "    sgn-BE-NL |"
-    // "    sgn-CH-DE |"
-    // "    art-lojban |"          // regular, ungrouped
-    // "    cel-gaulish |"
-    // "    no-bok |"
-    // "    no-nyn |"
-    // "    zh-guoyu |"
-    // "    zh-hakka |"
-    // "    zh-min |"
-    // "    zh-min-nan |"
-    // "    zh-xiang"
-    // "  )"
     ")"
     "$"s;
 
   auto re_cleaned = Q(re_stringified).replace(QRegularExpression{" +|\n+"}, {});
   s_bcp47_re      = QRegularExpression{ re_cleaned };
+
+
+  std::vector<std::string> grandfathered_list;
+  grandfathered_list.reserve(mtx::iana::language_subtag_registry::g_grandfathered.size());
+
+  for (auto const &entry : mtx::iana::language_subtag_registry::g_grandfathered)
+    grandfathered_list.emplace_back(mtx::string::to_lower_ascii(entry.code));
+
+  s_bcp47_grandfathered_re = QRegularExpression{ Q(fmt::format("^(?:{0})$", mtx::string::join(grandfathered_list, "|"))) };
 }
 
 } // namespace mtx::bcp47

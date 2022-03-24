@@ -49,4 +49,9 @@ look_up_variant(std::string const &s) {
   return look_up_entry(s, g_variants);
 }
 
+std::optional<entry_t>
+look_up_grandfathered(std::string const &s) {
+  return look_up_entry(s, g_grandfathered);
+}
+
 } // namespace mtx::iana::language_subtag_registry

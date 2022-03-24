@@ -32,7 +32,6 @@ TEST(BCP47LanguageTags, ParsingInvalid) {
   EXPECT_FALSE(language_c::parse("zyx-Latn-CH-x-weeee").is_valid());  // invalid (zyx not ISO 639 code)
   EXPECT_FALSE(language_c::parse("ger-muku-CH-x-weeee").is_valid());  // invalid (muku not a script)
   EXPECT_FALSE(language_c::parse("ger-777").is_valid());              // invalid (777 not a region code)
-  EXPECT_FALSE(language_c::parse("zh-min").is_valid());               // invalid (min not allowed with zh)
   EXPECT_FALSE(language_c::parse("gonzo").is_valid());                // invalid
   EXPECT_FALSE(language_c::parse("de-aao-Latn-DZ").is_valid());       // invalid (aoo not valid with de)
   EXPECT_FALSE(language_c::parse("es-0").is_valid());                 // invalid (no such region)
@@ -402,6 +401,26 @@ TEST(BCP47LanguageTags, ClosestISO639_2_Alpha3Code) {
   EXPECT_EQ("chi"s, language_c::parse("yue").get_closest_iso639_2_alpha_3_code());
   EXPECT_EQ("sgn"s, language_c::parse("bfi").get_closest_iso639_2_alpha_3_code());
   EXPECT_EQ("may"s, language_c::parse("zsm").get_closest_iso639_2_alpha_3_code());
+}
+
+TEST(BCP47LanguageTags, Grandfathered) {
+  EXPECT_TRUE(language_c::parse("i-klingon").is_valid());
+  EXPECT_TRUE(language_c::parse("i-KLiNGoN").is_valid());
+  EXPECT_TRUE(language_c::parse("no-NyN").is_valid());
+  EXPECT_TRUE(language_c::parse("sGn-be-FR").is_valid());
+
+  EXPECT_EQ("i-klingon"s, language_c::parse("i-klingon").format());
+  EXPECT_EQ("i-klingon"s, language_c::parse("i-KLiNGoN").format());
+  EXPECT_EQ("no-nyn"s, language_c::parse("no-NyN").format());
+  EXPECT_EQ("sgn-BE-FR"s, language_c::parse("sGn-be-FR").format());
+
+  auto l = language_c{};
+  l.set_valid(true);
+  l.set_language("DE");
+  l.set_grandfathered("i-KLINGON");
+
+  EXPECT_EQ("i-klingon"s, l.format());
+  EXPECT_EQ("i-KLINGON"s, l.get_grandfathered());
 }
 
 }
