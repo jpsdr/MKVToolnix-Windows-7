@@ -105,9 +105,10 @@ protected:
   bool parse_extlangs_or_variants(std::string const &str, bool is_extlangs);
 
   bool validate_extensions();
-  bool validate_extlangs_or_variants(bool is_extlangs);
-  bool validate_one_extlang_or_variant(std::size_t extlang_or_variant_index, bool is_extlang);
-  bool matches_prefix(language_c const &prefix, std::size_t extlang_or_variant_index, bool is_extlang, prefix_restrictions_t const &restrictions) const noexcept;
+  bool validate_extlangs();
+  bool validate_variants();
+  bool validate_one_extlang(std::size_t extlang_index);
+  bool matches_prefix(language_c const &prefix, std::size_t extlang_index, prefix_restrictions_t const &restrictions) const noexcept;
 
 public:
   static language_c parse(std::string const &language);

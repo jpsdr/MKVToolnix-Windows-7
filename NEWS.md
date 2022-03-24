@@ -32,6 +32,11 @@
   enough for files that contain a lot of comments at the start like the
   included `example-chapters-2.xml`. The detection range was extended to 10
   KB. Fixes #3302.
+* all: IETF BCP 47/RFC 5646 language tags: variants aren't validated wrt. to
+  prefixes anymore as BCP 47 doesn't actually pose restrictions on them,
+  saying only that prefixes "are suitable sequences" for use with the
+  variants. What is now verified, though, is that no variant is used multiple
+  times within the same language tag. Part of the implementation/fix of #3307.
 
 
 # Version 66.0.0 "Josie" 2022-03-13
