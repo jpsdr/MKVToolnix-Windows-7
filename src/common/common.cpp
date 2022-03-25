@@ -153,6 +153,7 @@ mtx_common_init(std::string const &program_name,
   mtx::iso639::init();
   mtx::iso3166::init();
   mtx::iso15924::init();
+  mtx::iana::language_subtag_registry::init_preferred_values(); // uses language_c::parse() & must therefore be initialized last
   stereo_mode_c::init();
 }
 

@@ -15,6 +15,10 @@
 
 #include "common/common_pch.h"
 
+namespace mtx::bcp47 {
+class language_c;
+}
+
 namespace mtx::iana::language_subtag_registry {
 
 struct entry_t {
@@ -30,8 +34,10 @@ struct entry_t {
 };
 
 extern std::vector<entry_t> g_extlangs, g_variants, g_grandfathered;
+extern std::vector< std::pair<mtx::bcp47::language_c, mtx::bcp47::language_c> > g_preferred_values;
 
 void init();
+void init_preferred_values();
 std::optional<entry_t> look_up_extlang(std::string const &s);
 std::optional<entry_t> look_up_variant(std::string const &s);
 std::optional<entry_t> look_up_grandfathered(std::string const &s);
