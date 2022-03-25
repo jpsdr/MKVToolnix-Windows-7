@@ -56,48 +56,54 @@ module Mtx::IANALanguageSubtagRegistry
     return @@registry
   end
 
+  def self.format_one_extlang_variant entry
+    if entry[:prefix]
+      prefix = 'VS{ ' + entry[:prefix].sort.map(&:to_cpp_string).join(', ') + ' }'
+    else
+      prefix = 'VS{}'
+    end
+
+    [ entry[:subtag].downcase.to_cpp_string,
+      entry[:description].to_u8_cpp_string,
+      prefix,
+    ]
+  end
+
+  def self.format_extlangs_variants entries, type, name
+    rows = entries[type].map { |entry| self.format_one_extlang_variant entry }
+
+    "  g_#{name}.reserve(#{entries[type].size});\n\n" +
+      format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_#{name}.emplace_back(", :row_suffix => ");").join("\n") +
+      "\n"
+  end
+
+  def self.format_one_grandfathered entry
+    [ entry[:tag].to_cpp_string,
+      entry[:description].to_u8_cpp_string,
+      'VS{}',
+    ]
+  end
+
+  def self.format_grandfathered entries
+    rows = entries["grandfathered"].map { |entry| self.format_one_grandfathered entry }
+
+    "  g_grandfathered.reserve(#{entries["grandfathered"].size});\n\n" +
+      format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_grandfathered.emplace_back(", :row_suffix => ");").join("\n") +
+      "\n"
+  end
+
   def self.do_create_cpp entries
+
+      # e[:pv_type] = self.preferred_value_type(e) } #sprintf("%-25s %-18s %s", , e[:preferred_value], self.preferred_value_type(e).to_s) }
+
+    # pp entries_with_preferred_value; exit 42
+
     cpp_file_name   = "src/common/iana_language_subtag_registry_list.cpp"
-    entry_formatter = lambda do |entry|
-      if entry[:prefix]
-        prefix = 'VS{ ' + entry[:prefix].sort.map(&:to_cpp_string).join(', ') + ' }'
-      else
-        prefix = 'VS{}'
-      end
-
-      [ entry[:subtag].downcase.to_cpp_string,
-        entry[:description].to_u8_cpp_string,
-        prefix,
-      ]
-    end
-
-    formatter = lambda do |type, name|
-      rows = entries[type].map(&entry_formatter)
-
-      "  g_#{name}.reserve(#{entries[type].size});\n\n" +
-        format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_#{name}.emplace_back(", :row_suffix => ");").join("\n") +
-        "\n"
-    end
-
-    grandfathered_entry_formatter = lambda do |entry|
-      [ entry[:tag].to_cpp_string,
-        entry[:description].to_u8_cpp_string,
-        'VS{}',
-      ]
-    end
-
-    grandfathered_formatter = lambda do
-      rows = entries["grandfathered"].map(&grandfathered_entry_formatter)
-
-      "  g_grandfathered.reserve(#{entries["grandfathered"].size});\n\n" +
-        format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_grandfathered.emplace_back(", :row_suffix => ");").join("\n") +
-        "\n"
-    end
 
     formatted = [
-      formatter.call("extlang", "extlangs"),
-      formatter.call("variant", "variants"),
-      grandfathered_formatter.call,
+      self.format_extlangs_variants(entries, "extlang", "extlangs"),
+      self.format_extlangs_variants(entries, "variant", "variants"),
+      self.format_grandfathered(entries),
     ]
 
     header = <<EOT
