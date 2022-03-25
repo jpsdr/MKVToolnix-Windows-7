@@ -138,8 +138,8 @@ language_c::get_error()
 std::string
 language_c::dump()
   const noexcept{
-  return fmt::format("[valid {0} language {1} extended_language_subtags {2} script {3} region {4} variants {5} extensions {6} private_use {7} parser_error {8}]",
-                     m_valid, m_language, m_extended_language_subtags, m_script, m_region, m_variants, m_extensions, m_private_use, m_parser_error);
+  return fmt::format("[valid {0} language {1} extended_language_subtags {2} script {3} region {4} variants {5} extensions {6} private_use {7} grandfathered {8} parser_error {9}]",
+                     m_valid, m_language, m_extended_language_subtags, m_script, m_region, m_variants, m_extensions, m_private_use, m_grandfathered, m_parser_error);
 }
 
 std::string
@@ -749,6 +749,9 @@ language_c::matches(language_c const &match)
     return false;
 
   if (!match.m_private_use.empty() && (m_private_use != match.m_private_use))
+    return false;
+
+  if (!match.m_grandfathered.empty() && (m_grandfathered != match.m_grandfathered))
     return false;
 
   return true;
