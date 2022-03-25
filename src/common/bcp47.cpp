@@ -783,6 +783,79 @@ language_c::find_best_match(std::vector<language_c> const &potential_matches)
   return best_match;
 }
 
+language_c &
+language_c::canonicalize_preferred_values() {
+  auto &preferred_values = mtx::iana::language_subtag_registry::g_preferred_values;
+  auto idx               = std::find_if(preferred_values.begin(), preferred_values.end(),
+                                        [this](auto const &pair) {
+                                          return matches(pair.first);
+                                        });
+
+  if (idx == preferred_values.end())
+    return *this;
+
+  // mxdebug(fmt::format("found one! I am {0} first is {1} second {2}\n", dump(), idx->first.dump(), idx->second.dump()));
+
+  auto const &[match, preferred] = *idx;
+
+  if (!preferred.m_language.empty()) {
+    if (!match.m_language.empty())
+      m_language.clear();
+
+    if (!match.m_extended_language_subtags.empty())
+      m_extended_language_subtags.clear();
+
+    if (!match.m_script.empty())
+      m_script.clear();
+
+    if (!match.m_region.empty())
+      m_region.clear();
+
+    if (!match.m_variants.empty())
+      m_variants.clear();
+
+    if (!match.m_extensions.empty())
+      m_extensions.clear();
+
+    if (!match.m_private_use.empty())
+      m_private_use.clear();
+
+    if (!match.m_grandfathered.empty())
+      m_grandfathered.clear();
+  }
+
+  if (!preferred.m_language.empty())
+    m_language = preferred.m_language;
+
+  if (!preferred.m_extended_language_subtags.empty())
+    m_extended_language_subtags = preferred.m_extended_language_subtags;
+
+  if (!preferred.m_script.empty())
+    m_script = preferred.m_script;
+
+  if (!preferred.m_region.empty())
+    m_region = preferred.m_region;
+
+  if (!preferred.m_variants.empty())
+    m_variants = preferred.m_variants;
+
+  if (!preferred.m_extensions.empty())
+    m_extensions = preferred.m_extensions;
+
+  if (!preferred.m_private_use.empty())
+    m_private_use = preferred.m_private_use;
+
+  if (!preferred.m_grandfathered.empty())
+    m_grandfathered = preferred.m_grandfathered;
+
+  return *this;
+}
+
+language_c &
+language_c::to_canonical_form() {
+  return canonicalize_preferred_values();
+}
+
 void
 language_c::disable() {
   ms_disabled = true;

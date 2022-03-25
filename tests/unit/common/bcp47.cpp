@@ -423,4 +423,26 @@ TEST(BCP47LanguageTags, Grandfathered) {
   EXPECT_EQ("i-KLINGON"s, l.get_grandfathered());
 }
 
+TEST(BCP47LanguageTags, ToCanonicalForm) {
+  // No changes as they're already normalized.
+  EXPECT_EQ("sgn"s, language_c::parse("sgn"s).to_canonical_form().format());
+  EXPECT_EQ("nsi"s, language_c::parse("nsi"s).to_canonical_form().format());
+
+  // No changes as even though they're listed as redundant, they don't have preferred values.
+  EXPECT_EQ("az-Arab"s, language_c::parse("az-Arab"s).to_canonical_form().format());
+
+  // For the following there are changes.
+  EXPECT_EQ("nsi"s,             language_c::parse("sgn-nsi"s).to_canonical_form().format());
+  EXPECT_EQ("ja-Latn-alalc97"s, language_c::parse("ja-Latn-hepburn-heploc"s).to_canonical_form().format());
+  EXPECT_EQ("jbo"s,             language_c::parse("art-lojban"s).to_canonical_form().format());
+  EXPECT_EQ("jsl"s,             language_c::parse("sgn-JP"s).to_canonical_form().format());
+  EXPECT_EQ("cmn"s,             language_c::parse("zh-cmn"s).to_canonical_form().format());
+  EXPECT_EQ("cmn-CN"s,          language_c::parse("zh-cmn-CN"s).to_canonical_form().format());
+  EXPECT_EQ("cmn-Hans"s,        language_c::parse("zh-cmn-Hans"s).to_canonical_form().format());
+  EXPECT_EQ("cmn"s,             language_c::parse("zh-guoyu"s).to_canonical_form().format());
+  EXPECT_EQ("hak"s,             language_c::parse("zh-hakka"s).to_canonical_form().format());
+  EXPECT_EQ("hak"s,             language_c::parse("i-hak"s).to_canonical_form().format());
+  EXPECT_EQ("yue-jyutping"s,    language_c::parse("zh-yue-jyutping"s).to_canonical_form().format());
+}
+
 }

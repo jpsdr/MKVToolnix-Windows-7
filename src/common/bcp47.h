@@ -77,6 +77,8 @@ public:
   bool matches(language_c const &match) const noexcept;
   language_c find_best_match(std::vector<language_c> const &potential_matches) const noexcept;
 
+  language_c &to_canonical_form();
+
   language_c &set_valid(bool valid);
   language_c &set_language(std::string const &language);
   language_c &set_extended_language_subtags(std::vector<std::string> const &extended_language_subtags);
@@ -112,6 +114,8 @@ protected:
   bool validate_variants();
   bool validate_one_extlang(std::size_t extlang_index);
   bool matches_prefix(language_c const &prefix, std::size_t extlang_index, prefix_restrictions_t const &restrictions) const noexcept;
+
+  language_c &canonicalize_preferred_values();
 
 public:
   static language_c parse(std::string const &language);
