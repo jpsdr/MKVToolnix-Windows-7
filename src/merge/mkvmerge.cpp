@@ -2186,27 +2186,30 @@ parse_args(std::vector<std::string> args) {
 
   // Now parse options that are needed right at the beginning.
   for (auto sit = args.cbegin(), sit_end = args.cend(); sit != sit_end; sit++) {
+    std::optional<std::string> next_arg;
+
     auto const &this_arg = *sit;
     auto sit_next        = sit + 1;
-    auto no_next_arg     = sit_next == sit_end;
-    auto next_arg        = !no_next_arg ? *sit_next : "";
     auto num_handled     = 0;
 
+    if (sit_next != sit_end)
+      next_arg = *sit_next;
+
     if ((this_arg == "-o") || (this_arg == "--output")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks a file name.\n"), this_arg));
 
       if (g_outfile != "")
         mxerror(Y("Only one destination file allowed.\n"));
 
-      g_outfile   = next_arg;
+      g_outfile   = *next_arg;
       num_handled = 2;
 
     } else if (this_arg == "--generate-chapters-name-template") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--generate-chapters-name-template' lacks the name template.\n"));
 
-      mtx::chapters::g_chapter_generation_name_template.override(next_arg);
+      mtx::chapters::g_chapter_generation_name_template.override(*next_arg);
       num_handled = 2;
 
     } else if ((this_arg == "-w") || (this_arg == "--webm")) {
@@ -2214,12 +2217,12 @@ parse_args(std::vector<std::string> args) {
       num_handled = 1;
 
     } else if (this_arg == "--deterministic") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
       g_deterministic = true;
       g_write_date    = false;
-      auto seed       = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, next_arg.c_str(), next_arg.size());
+      auto seed       = mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, next_arg->c_str(), next_arg->size());
       num_handled     = 2;
       random_c::init(seed);
 
@@ -2256,17 +2259,19 @@ parse_args(std::vector<std::string> args) {
   auto attachment       = std::make_shared<attachment_t>();
 
   for (auto sit = unhandled_args.cbegin(), sit_end = unhandled_args.cend(); sit != sit_end; sit++) {
+    std::optional<std::string> next_arg;
     auto const &this_arg = *sit;
     auto sit_next        = sit + 1;
-    auto no_next_arg     = sit_next == sit_end;
-    auto next_arg        = !no_next_arg ? *sit_next : "";
+
+    if (sit_next != sit_end)
+      next_arg = *sit_next;
 
     // Global options
     if ((this_arg == "--priority")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_priority(next_arg);
+      parse_arg_priority(*next_arg);
       sit++;
 
     } else if ((this_arg == "-q") || (this_arg == "--quiet"))
@@ -2276,25 +2281,25 @@ parse_args(std::vector<std::string> args) {
       verbose++;
 
     else if (this_arg == "--title") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--title' lacks the title.\n"));
 
-      g_segment_title     = next_arg;
+      g_segment_title     = *next_arg;
       g_segment_title_set = true;
       sit++;
 
     } else if (this_arg == "--split") {
-      if ((no_next_arg) || (next_arg[0] == 0))
+      if (!next_arg || next_arg->empty())
         mxerror(Y("'--split' lacks the size.\n"));
 
-      parse_arg_split(next_arg);
+      parse_arg_split(*next_arg);
       sit++;
 
     } else if (this_arg == "--split-max-files") {
-      if ((no_next_arg) || (next_arg[0] == 0))
+      if (!next_arg || next_arg->empty())
         mxerror(Y("'--split-max-files' lacks the number of files.\n"));
 
-      if (!mtx::string::parse_number(next_arg, g_split_max_num_files) || (2 > g_split_max_num_files))
+      if (!mtx::string::parse_number(*next_arg, g_split_max_num_files) || (2 > g_split_max_num_files))
         mxerror(Y("Wrong argument to '--split-max-files'.\n"));
 
       sit++;
@@ -2303,31 +2308,31 @@ parse_args(std::vector<std::string> args) {
       g_no_linking = false;
 
     } else if (this_arg == "--link-to-previous") {
-      if (no_next_arg || next_arg.empty())
+      if (!next_arg || next_arg->empty())
         mxerror(Y("'--link-to-previous' lacks the previous UID.\n"));
 
-      parse_arg_previous_segment_uid(this_arg, next_arg);
+      parse_arg_previous_segment_uid(this_arg, *next_arg);
       sit++;
 
     } else if (this_arg == "--link-to-next") {
-      if (no_next_arg || next_arg.empty())
+      if (!next_arg || next_arg->empty())
         mxerror(Y("'--link-to-next' lacks the next UID.\n"));
 
-      parse_arg_next_segment_uid(this_arg, next_arg);
+      parse_arg_next_segment_uid(this_arg, *next_arg);
       sit++;
 
     } else if (this_arg == "--segment-uid") {
-      if (no_next_arg || next_arg.empty())
+      if (!next_arg || next_arg->empty())
         mxerror(Y("'--segment-uid' lacks the segment UID.\n"));
 
-      parse_arg_segment_uid(this_arg, next_arg);
+      parse_arg_segment_uid(this_arg, *next_arg);
       sit++;
 
     } else if (this_arg == "--cluster-length") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--cluster-length' lacks the length.\n"));
 
-      parse_arg_cluster_length(next_arg);
+      parse_arg_cluster_length(*next_arg);
       sit++;
 
     } else if (this_arg == "--no-cues")
@@ -2349,105 +2354,105 @@ parse_args(std::vector<std::string> args) {
       g_no_track_statistics_tags = true;
 
     else if (this_arg == "--attachment-description") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--attachment-description' lacks the description.\n"));
 
       if (attachment->description != "")
         mxwarn(Y("More than one description was given for a single attachment.\n"));
-      attachment->description = next_arg;
+      attachment->description = *next_arg;
       sit++;
 
     } else if (this_arg == "--attachment-mime-type") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--attachment-mime-type' lacks the MIME type.\n"));
 
       if (attachment->mime_type != "")
         mxwarn(fmt::format(Y("More than one MIME type was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"),
-                           attachment->mime_type, next_arg));
-      attachment->mime_type = next_arg;
+                           attachment->mime_type, *next_arg));
+      attachment->mime_type = *next_arg;
       sit++;
 
     } else if (this_arg == "--attachment-name") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--attachment-name' lacks the name.\n"));
 
       if (attachment->stored_name != "")
         mxwarn(fmt::format(Y("More than one name was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"),
-                           attachment->stored_name, next_arg));
-      attachment->stored_name = next_arg;
+                           attachment->stored_name, *next_arg));
+      attachment->stored_name = *next_arg;
       sit++;
 
     } else if ((this_arg == "--attach-file") || (this_arg == "--attach-file-once")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the file name.\n"), this_arg));
 
-      parse_arg_attach_file(attachment, next_arg, this_arg == "--attach-file-once");
+      parse_arg_attach_file(attachment, *next_arg, this_arg == "--attach-file-once");
       attachment = std::make_shared<attachment_t>();
       sit++;
 
       inputs_found = true;
 
     } else if (this_arg == "--global-tags") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--global-tags' lacks the file name.\n"));
 
-      parse_and_add_tags(next_arg);
+      parse_and_add_tags(*next_arg);
       sit++;
 
       inputs_found = true;
 
     } else if (this_arg == "--chapter-language") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--chapter-language' lacks the language.\n"));
 
-      parse_arg_chapter_language(next_arg, *ti);
+      parse_arg_chapter_language(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--chapter-charset") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--chapter-charset' lacks the charset.\n"));
 
-      parse_arg_chapter_charset(next_arg, *ti);
+      parse_arg_chapter_charset(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--chapter-sync") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the delay.\n"), this_arg));
 
-      parse_arg_sync(next_arg, this_arg, *ti, track_info_c::chapter_track_id);
+      parse_arg_sync(*next_arg, this_arg, *ti, track_info_c::chapter_track_id);
       sit++;
 
     } else if (this_arg == "--cue-chapter-name-format") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--cue-chapter-name-format' lacks the format.\n"));
 
       if (g_chapter_file_name != "")
         mxerror(Y("'--cue-chapter-name-format' must be given before '--chapters'.\n"));
 
-      mtx::chapters::g_cue_name_format = next_arg;
+      mtx::chapters::g_cue_name_format = *next_arg;
       sit++;
 
     } else if (this_arg == "--chapters") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--chapters' lacks the file name.\n"));
 
-      parse_arg_chapters(this_arg, next_arg, *ti);
+      parse_arg_chapters(this_arg, *next_arg, *ti);
       sit++;
 
       inputs_found = true;
 
     } else if (this_arg == "--generate-chapters") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--generate-chapters' lacks the mode.\n"));
 
-      parse_arg_generate_chapters(next_arg);
+      parse_arg_generate_chapters(*next_arg);
       sit++;
 
     } else if (this_arg == "--segmentinfo") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--segmentinfo' lacks the file name.\n"));
 
-      parse_arg_segmentinfo(this_arg, next_arg);
+      parse_arg_segmentinfo(this_arg, *next_arg);
       sit++;
 
       inputs_found = true;
@@ -2459,10 +2464,10 @@ parse_args(std::vector<std::string> args) {
       ti->m_attach_mode_list.set_none();
 
     else if ((this_arg == "-m") || (this_arg == "--attachments")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_attachments(this_arg, next_arg, *ti);
+      parse_arg_attachments(this_arg, *next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--no-global-tags")
@@ -2473,10 +2478,10 @@ parse_args(std::vector<std::string> args) {
       sit++;
 
     } else if (mtx::included_in(this_arg, "--timecode-scale", "--timestamp-scale")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_timestamp_scale(next_arg);
+      parse_arg_timestamp_scale(*next_arg);
       sit++;
     }
 
@@ -2497,386 +2502,386 @@ parse_args(std::vector<std::string> args) {
       ti->m_track_tags.set_none();
 
     else if ((this_arg == "-a") || (this_arg == "--atracks") || (this_arg == "--audio-tracks")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the track numbers.\n"), this_arg));
 
-      parse_arg_tracks(next_arg, ti->m_atracks, this_arg);
+      parse_arg_tracks(*next_arg, ti->m_atracks, this_arg);
       sit++;
 
     } else if ((this_arg == "-d") || (this_arg == "--vtracks") || (this_arg == "--video-tracks")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the track numbers.\n"), this_arg));
 
-      parse_arg_tracks(next_arg, ti->m_vtracks, this_arg);
+      parse_arg_tracks(*next_arg, ti->m_vtracks, this_arg);
       sit++;
 
     } else if ((this_arg == "-s") || (this_arg == "--stracks") || (this_arg == "--sub-tracks") || (this_arg == "--subtitle-tracks")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the track numbers.\n"), this_arg));
 
-      parse_arg_tracks(next_arg, ti->m_stracks, this_arg);
+      parse_arg_tracks(*next_arg, ti->m_stracks, this_arg);
       sit++;
 
     } else if ((this_arg == "-b") || (this_arg == "--btracks") || (this_arg == "--button-tracks")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the track numbers.\n"), this_arg));
 
-      parse_arg_tracks(next_arg, ti->m_btracks, this_arg);
+      parse_arg_tracks(*next_arg, ti->m_btracks, this_arg);
       sit++;
 
     } else if ((this_arg == "--track-tags")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the track numbers.\n"), this_arg));
 
-      parse_arg_tracks(next_arg, ti->m_track_tags, this_arg);
+      parse_arg_tracks(*next_arg, ti->m_track_tags, this_arg);
       sit++;
 
     } else if ((this_arg == "-f") || (this_arg == "--fourcc")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the FourCC.\n"), this_arg));
 
-      parse_arg_fourcc(next_arg, this_arg, *ti);
+      parse_arg_fourcc(*next_arg, this_arg, *ti);
       sit++;
 
     } else if (this_arg == "--aspect-ratio") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--aspect-ratio' lacks the aspect ratio.\n"));
 
-      parse_arg_aspect_ratio(next_arg, this_arg, false, *ti);
+      parse_arg_aspect_ratio(*next_arg, this_arg, false, *ti);
       sit++;
 
     } else if (this_arg == "--aspect-ratio-factor") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--aspect-ratio-factor' lacks the aspect ratio factor.\n"));
 
-      parse_arg_aspect_ratio(next_arg, this_arg, true, *ti);
+      parse_arg_aspect_ratio(*next_arg, this_arg, true, *ti);
       sit++;
 
     } else if (this_arg == "--display-dimensions") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--display-dimensions' lacks the dimensions.\n"));
 
-      parse_arg_display_dimensions(next_arg, *ti);
+      parse_arg_display_dimensions(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--cropping") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(Y("'--cropping' lacks the crop parameters.\n"));
 
-      parse_arg_cropping(next_arg, *ti);
+      parse_arg_cropping(*next_arg, *ti);
       sit++;
 
     } else if (mtx::included_in(this_arg, "--colour-matrix", "--colour-matrix-coefficients")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_colour_matrix_coefficients(next_arg, *ti);
+      parse_arg_colour_matrix_coefficients(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--colour-bits-per-channel") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_colour_bits_per_channel(next_arg, *ti);
+      parse_arg_colour_bits_per_channel(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--chroma-subsample") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_chroma_subsample(next_arg, *ti);
+      parse_arg_chroma_subsample(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--cb-subsample") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_cb_subsample(next_arg, *ti);
+      parse_arg_cb_subsample(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--chroma-siting") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_chroma_siting(next_arg, *ti);
+      parse_arg_chroma_siting(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--colour-range") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_colour_range(next_arg, *ti);
+      parse_arg_colour_range(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--colour-transfer-characteristics") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_colour_transfer(next_arg, *ti);
+      parse_arg_colour_transfer(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--colour-primaries") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_colour_primaries(next_arg, *ti);
+      parse_arg_colour_primaries(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--max-content-light") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_max_content_light(next_arg, *ti);
+      parse_arg_max_content_light(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--max-frame-light") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_max_frame_light(next_arg, *ti);
+      parse_arg_max_frame_light(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--chromaticity-coordinates") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_chroma_coordinates(next_arg, *ti);
+      parse_arg_chroma_coordinates(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--white-colour-coordinates") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_white_coordinates(next_arg, *ti);
+      parse_arg_white_coordinates(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--max-luminance") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_max_luminance(next_arg, *ti);
+      parse_arg_max_luminance(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--min-luminance") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_min_luminance(next_arg, *ti);
+      parse_arg_min_luminance(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--projection-type") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_projection_type(next_arg, *ti);
+      parse_arg_projection_type(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--projection-private") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_projection_private(next_arg, *ti);
+      parse_arg_projection_private(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--projection-pose-yaw") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_projection_pose_xyz(next_arg, ti->m_projection_pose_yaw_list, "yaw");
+      parse_arg_projection_pose_xyz(*next_arg, ti->m_projection_pose_yaw_list, "yaw");
       sit++;
 
     } else if (this_arg == "--projection-pose-pitch") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_projection_pose_xyz(next_arg, ti->m_projection_pose_pitch_list, "pitch");
+      parse_arg_projection_pose_xyz(*next_arg, ti->m_projection_pose_pitch_list, "pitch");
       sit++;
 
     } else if (this_arg == "--projection-pose-roll") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_projection_pose_xyz(next_arg, ti->m_projection_pose_roll_list, "roll");
+      parse_arg_projection_pose_xyz(*next_arg, ti->m_projection_pose_roll_list, "roll");
       sit++;
 
     } else if (this_arg == "--field-order") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_field_order(next_arg, *ti);
+      parse_arg_field_order(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--stereo-mode") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_stereo_mode(next_arg, *ti);
+      parse_arg_stereo_mode(*next_arg, *ti);
       sit++;
 
     } else if ((this_arg == "-y") || (this_arg == "--sync")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the delay.\n"), this_arg));
 
-      parse_arg_sync(next_arg, this_arg, *ti, std::nullopt);
+      parse_arg_sync(*next_arg, this_arg, *ti, std::nullopt);
       sit++;
 
     } else if (this_arg == "--cues") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_cues(next_arg, *ti);
+      parse_arg_cues(*next_arg, *ti);
       sit++;
 
     } else if ((this_arg == "--default-track-flag") || (this_arg == "--default-track")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_default_track_flags);
+      parse_arg_boolean_track_option(this_arg, *next_arg, ti->m_default_track_flags);
       sit++;
 
     } else if ((this_arg == "--forced-display-flag") || (this_arg == "--forced-track")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_forced_track_flags);
+      parse_arg_boolean_track_option(this_arg, *next_arg, ti->m_forced_track_flags);
       sit++;
 
     } else if (this_arg == "--track-enabled-flag") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_enabled_track_flags);
+      parse_arg_boolean_track_option(this_arg, *next_arg, ti->m_enabled_track_flags);
       sit++;
 
     } else if (this_arg == "--hearing-impaired-flag") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_hearing_impaired_flags);
+      parse_arg_boolean_track_option(this_arg, *next_arg, ti->m_hearing_impaired_flags);
       sit++;
 
     } else if (this_arg == "--visual-impaired-flag") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_visual_impaired_flags);
+      parse_arg_boolean_track_option(this_arg, *next_arg, ti->m_visual_impaired_flags);
       sit++;
 
     } else if (this_arg == "--text-descriptions-flag") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_text_descriptions_flags);
+      parse_arg_boolean_track_option(this_arg, *next_arg, ti->m_text_descriptions_flags);
       sit++;
 
     } else if (this_arg == "--original-flag") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_original_flags);
+      parse_arg_boolean_track_option(this_arg, *next_arg, ti->m_original_flags);
       sit++;
 
     } else if (this_arg == "--commentary-flag") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_commentary_flags);
+      parse_arg_boolean_track_option(this_arg, *next_arg, ti->m_commentary_flags);
       sit++;
 
     } else if (this_arg == "--language") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_language(next_arg, ti->m_languages, fmt::format("--language {0}", next_arg));
+      parse_arg_language(*next_arg, ti->m_languages, fmt::format("--language {0}", *next_arg));
       sit++;
 
     } else if (this_arg == "--default-language") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_default_language(next_arg);
+      parse_arg_default_language(*next_arg);
       sit++;
 
     } else if ((this_arg == "--sub-charset") || (this_arg == "--subtitle-charset")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_sub_charset(next_arg, *ti);
+      parse_arg_sub_charset(*next_arg, *ti);
       sit++;
 
     } else if ((this_arg == "-t") || (this_arg == "--tags")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_tags(next_arg, this_arg, *ti);
+      parse_arg_tags(*next_arg, this_arg, *ti);
       sit++;
 
     } else if (this_arg == "--aac-is-sbr") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the track ID.\n"), this_arg));
 
-      parse_arg_aac_is_sbr(next_arg, *ti);
+      parse_arg_aac_is_sbr(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--compression") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_compression(next_arg, *ti);
+      parse_arg_compression(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--blockadd") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_max_blockadd_id(next_arg, *ti);
+      parse_arg_max_blockadd_id(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--track-name") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      auto [tid, string]     = parse_arg_tid_and_string(next_arg, "track-name", Y("track name"), true);
+      auto [tid, string]     = parse_arg_tid_and_string(*next_arg, "track-name", Y("track name"), true);
       ti->m_track_names[tid] = string;
       sit++;
 
     } else if (mtx::included_in(this_arg, "--timecodes", "--timestamps")) {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      auto [tid, string]            = parse_arg_tid_and_string(next_arg, this_arg.substr(2), Y("timestamps"));
+      auto [tid, string]            = parse_arg_tid_and_string(*next_arg, this_arg.substr(2), Y("timestamps"));
       ti->m_all_ext_timestamps[tid] = string;
       sit++;
 
     } else if (this_arg == "--track-order") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
       if (!g_track_order.empty())
         mxerror(Y("'--track-order' may only be given once.\n"));
 
-      parse_arg_track_order(next_arg);
+      parse_arg_track_order(*next_arg);
       sit++;
 
     } else if (this_arg == "--append-to") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_append_to(next_arg);
+      parse_arg_append_to(*next_arg);
       sit++;
 
     } else if (this_arg == "--append-mode") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_append_mode(next_arg);
+      parse_arg_append_mode(*next_arg);
       sit++;
 
     } else if (this_arg == "--default-duration") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_default_duration(next_arg, *ti);
+      parse_arg_default_duration(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--nalu-size-length") {
@@ -2885,24 +2890,24 @@ parse_args(std::vector<std::string> args) {
       sit++;
 
     } else if (this_arg == "--fix-bitstream-timing-information") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_boolean_track_option(this_arg, next_arg, ti->m_fix_bitstream_frame_rate_flags);
+      parse_arg_boolean_track_option(this_arg, *next_arg, ti->m_fix_bitstream_frame_rate_flags);
       sit++;
 
     } else if (this_arg == "--reduce-to-core") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_reduce_to_core(next_arg, *ti);
+      parse_arg_reduce_to_core(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--remove-dialog-normalization-gain") {
-      if (no_next_arg)
+      if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
-      parse_arg_remove_dialog_normalization_gain(next_arg, *ti);
+      parse_arg_remove_dialog_normalization_gain(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "+")
