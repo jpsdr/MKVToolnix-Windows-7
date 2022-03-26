@@ -85,6 +85,45 @@ def create_iso639_language_list_file
     }
   end
 
+  ("a".."d").each do |letter|
+    alpha_3 = "qa#{letter}"
+    entries_by_alpha_3[alpha_3] = {
+      "name"           => "Reserved for local use: #{alpha_3}",
+      "bibliographic"  => nil,
+      "alpha_2"        => nil,
+      "alpha_3"        => alpha_3,
+      "alpha_3_to_use" => alpha_3,
+      "has_639_2"      => true,
+    }
+  end
+
+  entries_by_alpha_2 = Hash[ *
+    entries_by_alpha_3.
+    values.
+    map { |entry| [ entry["alpha_2"], entry ] }.
+    flatten
+  ]
+
+  Mtx::IANALanguageSubtagRegistry.
+    fetch_registry["language"].
+    reject { |entry| %r{\.\.}.match(entry[:subtag]) }.
+    each do |entry|
+
+    is_alpha_2  = entry[:subtag].length == 2
+    entries_map = is_alpha_2 ? entries_by_alpha_2 : entries_by_alpha_3
+
+    if !entries_map.key?(entry[:subtag])
+      entries_map[entry[:subtag]] = {
+        "name"           => entry[:description],
+        "bibliographic"  => nil,
+        "alpha_2"        => is_alpha_2 ? entry[:subtag] : nil,
+        "alpha_3"        => is_alpha_2 ? nil            : entry[:subtag],
+        "alpha_3_to_use" => entry[:subtag],
+        "has_639_2"      => is_alpha_2,
+      }
+    end
+  end
+
   rows = entries_by_alpha_3.
     values.
     map do |entry|
@@ -94,15 +133,6 @@ def create_iso639_language_list_file
       (entry["alpha_2"] || '').to_cpp_string,
       entry["bibliographic"] ? entry["alpha_3"].to_cpp_string : '""s',
       entry["has_639_2"].to_s,
-    ]
-  end
-
-  rows += ("a".."d").map do |letter|
-    [ %Q{u8"Reserved for local use: qa#{letter}"s},
-      %Q{u8"qa#{letter}"s},
-      '""s',
-      '""s',
-      'true ',
     ]
   end
 

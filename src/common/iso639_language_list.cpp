@@ -25,7 +25,7 @@ std::vector<language_t> g_languages;
 
 void
 init() {
-  g_languages.reserve(8031);
+  g_languages.reserve(8239);
 
   g_languages.emplace_back(u8"'Are'are"s,                                                   "alu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"'Auhelawa"s,                                                  "kud"s,     ""s,   ""s,    false);
@@ -76,6 +76,7 @@ init() {
   g_languages.emplace_back(u8"Adang"s,                                                      "adn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Adangbe"s,                                                    "adq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Adangme"s,                                                    "ada"s,     ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Adap"s,                                                       "adp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Adara"s,                                                      "kad"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Adasen"s,                                                     "tiu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Adele"s,                                                      "ade"s,     ""s,   ""s,    false);
@@ -108,6 +109,7 @@ init() {
   g_languages.emplace_back(u8"Agatu"s,                                                      "agc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Agavotaguerra"s,                                              "avo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Aghem"s,                                                      "agq"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Aghu Tharnggalu"s,                                            "ggr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Aghu"s,                                                       "ahh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Aghu-Tharnggala"s,                                            "gtu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Aghul"s,                                                      "agx"s,     ""s,   ""s,    false);
@@ -201,6 +203,7 @@ init() {
   g_languages.emplace_back(u8"Albanian languages"s,                                         "sqj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Albanian"s,                                                   "alb"s,     "sq"s, "sqi"s, true );
   g_languages.emplace_back(u8"Albarradas Sign Language"s,                                   "lsc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Albay Bicolano"s,                                             "bhk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Alcozauca Mixtec"s,                                           "xta"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Alege"s,                                                      "alf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Alekano"s,                                                    "gah"s,     ""s,   ""s,    false);
@@ -367,6 +370,7 @@ init() {
   g_languages.emplace_back(u8"Araki"s,                                                      "akr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Arakwal"s,                                                    "rkw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Aralle-Tabulahan"s,                                           "atq"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Aramanik"s,                                                   "aam"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Arammba"s,                                                    "stk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Aranadan"s,                                                   "aaf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Aranama-Tamique"s,                                            "xrt"s,     ""s,   ""s,    false);
@@ -404,6 +408,7 @@ init() {
   g_languages.emplace_back(u8"Arikem"s,                                                     "ait"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Arin"s,                                                       "xrn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Aringa"s,                                                     "luc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Arma"s,                                                       "aoh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Armazic"s,                                                    "xrm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Armenian (family)"s,                                          "hyx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Armenian Sign Language"s,                                     "aen"s,     ""s,   ""s,    false);
@@ -424,6 +429,7 @@ init() {
   g_languages.emplace_back(u8"Arvanitika Albanian"s,                                        "aat"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"As"s,                                                         "asz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Asaro'o"s,                                                    "mtv"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Asas"s,                                                       "asd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ashe"s,                                                       "ahs"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ashkun"s,                                                     "ask"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Asho Chin"s,                                                  "csh"s,     ""s,   ""s,    false);
@@ -521,6 +527,7 @@ init() {
   g_languages.emplace_back(u8"Ayautla Mazatec"s,                                            "vmy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ayere"s,                                                      "aye"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ayerrerenge"s,                                                "axe"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Ayi (China)"s,                                                "ayx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ayi (Papua New Guinea)"s,                                     "ayq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ayiwo"s,                                                      "nfl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ayizi"s,                                                      "yyz"s,     ""s,   ""s,    false);
@@ -539,6 +546,7 @@ init() {
   g_languages.emplace_back(u8"Baatonum"s,                                                   "bba"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Baba Malay"s,                                                 "mbf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Baba"s,                                                       "bbw"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Babalia Creole Arabic"s,                                      "bbz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Babango"s,                                                    "bbm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Babanki"s,                                                    "bbk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Babatana"s,                                                   "baa"s,     ""s,   ""s,    false);
@@ -566,6 +574,7 @@ init() {
   g_languages.emplace_back(u8"Baga Kaloum"s,                                                "bqf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Baga Koga"s,                                                  "bgo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Baga Manduri"s,                                               "bmd"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Baga Mboteni"s,                                               "bgm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Baga Pokur"s,                                                 "bcg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Baga Sitemu"s,                                                "bsp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Baga Sobané"s,                                                "bsv"s,     ""s,   ""s,    false);
@@ -616,6 +625,7 @@ init() {
   g_languages.emplace_back(u8"Balanta-Ganja"s,                                              "bjt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Balanta-Kentohe"s,                                            "ble"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Balantak"s,                                                   "blz"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Balau"s,                                                      "blg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Baldemu"s,                                                    "bdn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bali (Democratic Republic of Congo)"s,                        "bcp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bali (Nigeria)"s,                                             "bcn"s,     ""s,   ""s,    false);
@@ -659,6 +669,7 @@ init() {
   g_languages.emplace_back(u8"Bandi"s,                                                      "bza"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bandial"s,                                                    "bqj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bandjalang"s,                                                 "bdy"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Bandjigali"s,                                                 "bjd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bangala"s,                                                    "bxg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bangandu"s,                                                   "bgf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bangba"s,                                                     "bbe"s,     ""s,   ""s,    false);
@@ -697,6 +708,7 @@ init() {
   g_languages.emplace_back(u8"Barapasi"s,                                                   "brp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Baras"s,                                                      "brs"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Barasana-Eduria"s,                                            "bsn"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Barbacoas"s,                                                  "bpb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Barbaram"s,                                                   "vmb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Barbareño"s,                                                  "boi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Barclayville Grebo"s,                                         "gry"s,     ""s,   ""s,    false);
@@ -802,6 +814,7 @@ init() {
   g_languages.emplace_back(u8"Bella Coola"s,                                                "blc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bellari"s,                                                    "brw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Belning"s,                                                    "glb"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Bemba (Democratic Republic of Congo)"s,                       "bmy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bemba (Zambia)"s,                                             "bem"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Bembe"s,                                                      "bmb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ben Tey Dogon"s,                                              "dbt"s,     ""s,   ""s,    false);
@@ -837,12 +850,14 @@ init() {
   g_languages.emplace_back(u8"Betawi"s,                                                     "bew"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bete"s,                                                       "byf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bete-Bendi"s,                                                 "btt"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Beti (Cameroon)"s,                                            "btb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Beti (Côte d'Ivoire)"s,                                       "eot"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Betta Kurumba"s,                                              "xub"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bezhta"s,                                                     "kap"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bhadrawahi"s,                                                 "bhd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bhalay"s,                                                     "bhx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bharia"s,                                                     "bha"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Bhatola"s,                                                    "btl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bhatri"s,                                                     "bgw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bhattiyali"s,                                                 "bht"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bhaya"s,                                                      "bhe"s,     ""s,   ""s,    false);
@@ -879,6 +894,7 @@ init() {
   g_languages.emplace_back(u8"Bihari languages"s,                                           "bih"s,     "bh"s, ""s,    true );
   g_languages.emplace_back(u8"Bijim"s,                                                      "jbm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bijori"s,                                                     "bix"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Bikaru"s,                                                     "bic"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bikol"s,                                                      "bik"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Bikya"s,                                                      "byb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bila"s,                                                       "bip"s,     ""s,   ""s,    false);
@@ -1009,6 +1025,7 @@ init() {
   g_languages.emplace_back(u8"Border Kuna"s,                                                "kvn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Borei"s,                                                      "gai"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Borgu Fulfulde"s,                                             "fue"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Borna (Democratic Republic of Congo)"s,                       "bxx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Boro (Ethiopia)"s,                                            "bwo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Boro (Ghana)"s,                                               "xxb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Borong"s,                                                     "ksr"s,     ""s,   ""s,    false);
@@ -1143,6 +1160,7 @@ init() {
   g_languages.emplace_back(u8"Butmas-Tur"s,                                                 "bnr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Butuanon"s,                                                   "btw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Buwal"s,                                                      "bhs"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Buya"s,                                                       "byy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Buyu"s,                                                       "byi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Buyuan Jinuo"s,                                               "jiy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Bwa"s,                                                        "bww"s,     ""s,   ""s,    false);
@@ -1167,6 +1185,7 @@ init() {
   g_languages.emplace_back(u8"Caddo"s,                                                      "cad"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Caddoan languages"s,                                          "cdd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cafundo Creole"s,                                             "ccd"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Cagua"s,                                                      "cbh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cahuarano"s,                                                  "cah"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cahuilla"s,                                                   "chl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cajamarca Quechua"s,                                          "qvc"s,     ""s,   ""s,    false);
@@ -1181,6 +1200,7 @@ init() {
   g_languages.emplace_back(u8"Callawalla"s,                                                 "caw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Caluyanun"s,                                                  "clu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Caló"s,                                                       "rmq"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Caló"s,                                                       "rmr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cambodian Sign Language"s,                                    "csx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cameroon Mambila"s,                                           "mcu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cameroon Pidgin"s,                                            "wes"s,     ""s,   ""s,    false);
@@ -1216,9 +1236,11 @@ init() {
   g_languages.emplace_back(u8"Cashinahua"s,                                                 "cbs"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Casiguran Dumagat Agta"s,                                     "dgc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Casuarina Coast Asmat"s,                                      "asc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Cataelano Mandaya"s,                                          "mst"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Catalan Sign Language"s,                                      "csc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Catalan"s,                                                    "cat"s,     "ca"s, ""s,    true );
   g_languages.emplace_back(u8"Catawba"s,                                                    "chc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Cauca"s,                                                      "cca"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Caucasian languages"s,                                        "cau"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Cavineña"s,                                                   "cav"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cayubaba"s,                                                   "cyb"s,     ""s,   ""s,    false);
@@ -1295,6 +1317,7 @@ init() {
   g_languages.emplace_back(u8"Chalikha"s,                                                   "tgf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chamacoco"s,                                                  "ceg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chamalal"s,                                                   "cji"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Chamari"s,                                                    "cdg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chambeali"s,                                                  "cdh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chambri"s,                                                    "can"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chamic languages"s,                                           "cmc"s,     ""s,   ""s,    true );
@@ -1307,6 +1330,7 @@ init() {
   g_languages.emplace_back(u8"Chané"s,                                                      "caj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chara"s,                                                      "cra"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chaudangsi"s,                                                 "cdn"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Chaungtha"s,                                                  "ccq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chaura"s,                                                     "crv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chavacano"s,                                                  "cbk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chayahuita"s,                                                 "cbt"s,     ""s,   ""s,    false);
@@ -1342,9 +1366,11 @@ init() {
   g_languages.emplace_back(u8"Chiga"s,                                                      "cgg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chigmecatitlán Mixtec"s,                                      "mii"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chilcotin"s,                                                  "clc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Chilean Quechua"s,                                            "cqu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chilean Sign Language"s,                                      "csg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chilisso"s,                                                   "clh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chiltepec Chinantec"s,                                        "csa"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Chimakum"s,                                                   "cmk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chimalapa Zoque"s,                                            "zoh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chimariko"s,                                                  "cid"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chimborazo Highland Quichua"s,                                "qug"s,     ""s,   ""s,    false);
@@ -1361,6 +1387,7 @@ init() {
   g_languages.emplace_back(u8"Chinook"s,                                                    "chh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chipaya"s,                                                    "cap"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chipewyan"s,                                                  "chp"s,     ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Chipiajes"s,                                                  "cbe"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chippewa"s,                                                   "ciw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chiquihuitlán Mazatec"s,                                      "maq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chiquitano"s,                                                 "cax"s,     ""s,   ""s,    false);
@@ -1385,6 +1412,7 @@ init() {
   g_languages.emplace_back(u8"Chonyi-Dzihana-Kauma"s,                                       "coh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chopi"s,                                                      "cce"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chorasmian"s,                                                 "xco"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Chorotega"s,                                                  "cjr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chortí"s,                                                     "caa"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chothe Naga"s,                                                "nct"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Chrau"s,                                                      "crw"s,     ""s,   ""s,    false);
@@ -1430,6 +1458,7 @@ init() {
   g_languages.emplace_back(u8"Classical Tibetan"s,                                          "xct"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Coahuilteco"s,                                                "xcw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Coast Miwok"s,                                                "csi"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Coastal Kadazan"s,                                            "kzj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Coastal Konjo"s,                                              "kjc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Coatecas Altas Zapotec"s,                                     "zca"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Coatepec Nahuatl"s,                                           "naz"s,     ""s,   ""s,    false);
@@ -1468,6 +1497,8 @@ init() {
   g_languages.emplace_back(u8"Cotabato Manobo"s,                                            "mta"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cotoname"s,                                                   "xcn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cowlitz"s,                                                    "cow"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Coxima"s,                                                     "kox"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Coyaima"s,                                                    "coy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Coyotepec Popoloca"s,                                         "pbf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Coyutla Totonac"s,                                            "toc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cree"s,                                                       "cre"s,     "cr"s, ""s,    true );
@@ -1490,8 +1521,10 @@ init() {
   g_languages.emplace_back(u8"Culina"s,                                                     "cul"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cumanagoto"s,                                                 "cuo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cumbric"s,                                                    "xcb"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Cumeral"s,                                                    "cum"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cun"s,                                                        "cuq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cuneiform Luwian"s,                                           "xlu"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Cung"s,                                                       "cug"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Cupeño"s,                                                     "cup"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Curonian"s,                                                   "xcu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Curripaco"s,                                                  "kpc"s,     ""s,   ""s,    false);
@@ -1543,6 +1576,7 @@ init() {
   g_languages.emplace_back(u8"Dambi"s,                                                      "dac"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dameli"s,                                                     "dml"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dampelas"s,                                                   "dms"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Dan"s,                                                        "daf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dan"s,                                                        "dnj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Danaru"s,                                                     "dnr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Danau"s,                                                      "dnu"s,     ""s,   ""s,    false);
@@ -1561,10 +1595,12 @@ init() {
   g_languages.emplace_back(u8"Darai"s,                                                      "dry"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dargwa"s,                                                     "dar"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Dari"s,                                                       "prs"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Darkhat"s,                                                    "drh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Darkinyung"s,                                                 "xda"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Darlong"s,                                                    "dln"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Darmiya"s,                                                    "drd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Daro-Matu Melanau"s,                                          "dro"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Darwazi"s,                                                    "drw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dass"s,                                                       "dot"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Datooga"s,                                                    "tcc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Daungwurrung"s,                                               "dgw"s,     ""s,   ""s,    false);
@@ -1576,12 +1612,14 @@ init() {
   g_languages.emplace_back(u8"Dawro"s,                                                      "dwr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Day"s,                                                        "dai"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dayi"s,                                                       "dax"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Daza"s,                                                       "dzd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dazaga"s,                                                     "dzg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Deccan"s,                                                     "dcc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dedua"s,                                                      "ded"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Defaka"s,                                                     "afn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Defi Gbe"s,                                                   "gbh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Deg"s,                                                        "mzw"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Degaru"s,                                                     "dgu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Degema"s,                                                     "deg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Degenan"s,                                                    "dge"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Degexit'an"s,                                                 "ing"s,     ""s,   ""s,    false);
@@ -1615,6 +1653,7 @@ init() {
   g_languages.emplace_back(u8"Dhalandji"s,                                                  "dhl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dhangu-Djangu"s,                                              "dhg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dhanki"s,                                                     "dhn"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Dhanwar (India)"s,                                            "dha"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dhanwar (Nepal)"s,                                            "dhw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dhao"s,                                                       "nfa"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dharawal"s,                                                   "tbh"s,     ""s,   ""s,    false);
@@ -1630,6 +1669,7 @@ init() {
   g_languages.emplace_back(u8"Dhundari"s,                                                   "dhd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dhungaloo"s,                                                  "dhx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dhurga"s,                                                     "dhu"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Dhuwal"s,                                                     "duj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dhuwal"s,                                                     "dwu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dhuwaya"s,                                                    "dwy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dia"s,                                                        "dia"s,     ""s,   ""s,    false);
@@ -1653,6 +1693,7 @@ init() {
   g_languages.emplace_back(u8"Dimli (individual language)"s,                                "diq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ding"s,                                                       "diz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dinka"s,                                                      "din"s,     ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Dirari"s,                                                     "dit"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dirasha"s,                                                    "gdl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Diri"s,                                                       "dwa"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Diriku"s,                                                     "diu"s,     ""s,   ""s,    false);
@@ -1675,6 +1716,7 @@ init() {
   g_languages.emplace_back(u8"Djimini Senoufo"s,                                            "dyi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Djinang"s,                                                    "dji"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Djinba"s,                                                     "djb"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Djiwarli"s,                                                   "djl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Djiwarli"s,                                                   "dze"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dobel"s,                                                      "kvo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dobu"s,                                                       "dob"s,     ""s,   ""s,    false);
@@ -1709,6 +1751,7 @@ init() {
   g_languages.emplace_back(u8"Doondo"s,                                                     "dde"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dori'o"s,                                                     "dor"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Doromu-Koki"s,                                                "kqc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Dororo"s,                                                     "drr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dorze"s,                                                      "doz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Doso"s,                                                       "dol"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dotyali"s,                                                    "dty"s,     ""s,   ""s,    false);
@@ -1741,6 +1784,7 @@ init() {
   g_languages.emplace_back(u8"Dungu"s,                                                      "dbv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dupaninan Agta"s,                                             "duo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Dura"s,                                                       "drq"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Durango Nahuatl"s,                                            "nln"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Duri"s,                                                       "mvp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Duriankere"s,                                                 "dbn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Duruma"s,                                                     "dug"s,     ""s,   ""s,    false);
@@ -1803,12 +1847,14 @@ init() {
   g_languages.emplace_back(u8"Eastern Egyptian Bedawi Arabic"s,                             "avl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Eastern Frisian"s,                                            "frs"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Eastern Gorkha Tamang"s,                                      "tge"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Eastern Gurung"s,                                             "ggn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Eastern Highland Chatino"s,                                   "cly"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Eastern Highland Otomi"s,                                     "otm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Eastern Hongshuihe Zhuang"s,                                  "zeh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Eastern Huasteca Nahuatl"s,                                   "nhe"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Eastern Huishui Hmong"s,                                      "hme"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Eastern Karaboro"s,                                           "xrb"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Eastern Karnic"s,                                             "ekc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Eastern Katu"s,                                               "ktv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Eastern Kayah"s,                                              "eky"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Eastern Keres"s,                                              "kee"s,     ""s,   ""s,    false);
@@ -1886,6 +1932,7 @@ init() {
   g_languages.emplace_back(u8"Elkei"s,                                                      "elk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Elotepec Zapotec"s,                                           "zte"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Eloyi"s,                                                      "afo"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Elpaputih"s,                                                  "elp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Elseng"s,                                                     "mrf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Elu"s,                                                        "elu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Elymian"s,                                                    "xly"s,     ""s,   ""s,    false);
@@ -1900,6 +1947,7 @@ init() {
   g_languages.emplace_back(u8"Embu"s,                                                       "ebu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Emerillon"s,                                                  "eme"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Emilian"s,                                                    "egl"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Emok"s,                                                       "emo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Emplawas"s,                                                   "emw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Emumu"s,                                                      "enr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"En"s,                                                         "enc"s,     ""s,   ""s,    false);
@@ -1999,6 +2047,7 @@ init() {
   g_languages.emplace_back(u8"Fijian"s,                                                     "fij"s,     "fj"s, ""s,    true );
   g_languages.emplace_back(u8"Filipino"s,                                                   "fil"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Filomena Mata-Coahuitlán Totonac"s,                           "tlp"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Finallig"s,                                                   "bkb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Finland-Swedish Sign Language"s,                              "fss"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Finnish Sign Language"s,                                      "fse"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Finnish"s,                                                    "fin"s,     "fi"s, ""s,    true );
@@ -2021,6 +2070,7 @@ init() {
   g_languages.emplace_back(u8"Fordata"s,                                                    "frd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Fore"s,                                                       "for"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Forest Enets"s,                                               "enf"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Forest Maninka"s,                                             "myq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Formosan languages"s,                                         "fox"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Fortsenal"s,                                                  "frt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Francisco León Zoque"s,                                       "zos"s,     ""s,   ""s,    false);
@@ -2049,6 +2099,7 @@ init() {
   g_languages.emplace_back(u8"Gabi-Gabi"s,                                                  "gbw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gabri"s,                                                      "gab"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gabrielino-Fernandeño"s,                                      "xgf"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Gabutamon"s,                                                  "gav"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gadang"s,                                                     "gdk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gaddang"s,                                                    "gad"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gaddi"s,                                                      "gbk"s,     ""s,   ""s,    false);
@@ -2099,6 +2150,7 @@ init() {
   g_languages.emplace_back(u8"Ganzi"s,                                                      "gnz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gao"s,                                                        "gga"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gapapaiwa"s,                                                  "pwg"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Garawa"s,                                                     "gbc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Garhwali"s,                                                   "gbm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Garifuna"s,                                                   "cab"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Garig-Ilgar"s,                                                "ilg"s,     ""s,   ""s,    false);
@@ -2124,6 +2176,7 @@ init() {
   g_languages.emplace_back(u8"Gbanu"s,                                                      "gbv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gbanziri"s,                                                   "gbg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gbari"s,                                                      "gby"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Gbati-ri"s,                                                   "gti"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gbaya (Central African Republic)"s,                           "gba"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Gbaya (Sudan)"s,                                              "krs"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gbaya-Bossangoa"s,                                            "gbp"s,     ""s,   ""s,    false);
@@ -2141,9 +2194,11 @@ init() {
   g_languages.emplace_back(u8"Gedaged"s,                                                    "gdd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gedeo"s,                                                      "drs"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Geez"s,                                                       "gez"s,     ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Geji"s,                                                       "gji"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Geji"s,                                                       "gyz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Geko Karen"s,                                                 "ghk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gela"s,                                                       "nlg"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Gelao"s,                                                      "gio"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Geme"s,                                                       "geq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gen"s,                                                        "gej"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gende"s,                                                      "gaf"s,     ""s,   ""s,    false);
@@ -2157,6 +2212,7 @@ init() {
   g_languages.emplace_back(u8"Germanic languages"s,                                         "gem"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Geruma"s,                                                     "gea"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Geser-Gorom"s,                                                "ges"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Gey"s,                                                        "guv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ghadamès"s,                                                   "gha"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ghanaian Pidgin English"s,                                    "gpe"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ghanaian Sign Language"s,                                     "gse"s,     ""s,   ""s,    false);
@@ -2292,6 +2348,7 @@ init() {
   g_languages.emplace_back(u8"Gulay"s,                                                      "gvl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gule"s,                                                       "gly"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gulf Arabic"s,                                                "afb"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Guliguli"s,                                                   "gli"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gumalu"s,                                                     "gmu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gumatj"s,                                                     "gnn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Gumawana"s,                                                   "gvs"s,     ""s,   ""s,    false);
@@ -2475,6 +2532,7 @@ init() {
   g_languages.emplace_back(u8"Horo"s,                                                       "hor"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Horom"s,                                                      "hoe"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Horpa"s,                                                      "ero"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Horuru"s,                                                     "hrr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Hote"s,                                                       "hot"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Hoti"s,                                                       "hti"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Hovongan"s,                                                   "hov"s,     ""s,   ""s,    false);
@@ -2510,6 +2568,7 @@ init() {
   g_languages.emplace_back(u8"Humburi Senni Songhay"s,                                      "hmb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Humene"s,                                                     "huf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Humla"s,                                                      "hut"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Hun-Saare"s,                                                  "dud"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Hunde"s,                                                      "hke"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Hung"s,                                                       "hnu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Hungana"s,                                                    "hum"s,     ""s,   ""s,    false);
@@ -2534,6 +2593,7 @@ init() {
   g_languages.emplace_back(u8"I-Wak"s,                                                      "iwk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Iaai"s,                                                       "iai"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Iamalele"s,                                                   "yml"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Iapama"s,                                                     "iap"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Iatmul"s,                                                     "ian"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Iau"s,                                                        "tmu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ibali Teke"s,                                                 "tek"s,     ""s,   ""s,    false);
@@ -2544,6 +2604,7 @@ init() {
   g_languages.emplace_back(u8"Ibatan"s,                                                     "ivb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Iberian"s,                                                    "xib"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ibibio"s,                                                     "ibb"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Ibilo"s,                                                      "ibi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ibino"s,                                                      "ibn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ibu"s,                                                        "ibu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ibuoro"s,                                                     "ibr"s,     ""s,   ""s,    false);
@@ -2574,6 +2635,7 @@ init() {
   g_languages.emplace_back(u8"Iha Based Pidgin"s,                                           "ihb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Iha"s,                                                        "ihp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ihievbe"s,                                                    "ihi"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Ija-Zuba"s,                                                   "vki"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ijo languages"s,                                              "ijo"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Ik"s,                                                         "ikx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ika"s,                                                        "ikk"s,     ""s,   ""s,    false);
@@ -2601,6 +2663,7 @@ init() {
   g_languages.emplace_back(u8"Ilwana"s,                                                     "mlk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Imbabura Highland Quichua"s,                                  "qvi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Imbongu"s,                                                    "imo"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Imeraguen"s,                                                  "ime"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Imonda"s,                                                     "imn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Imotong"s,                                                    "imt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Imroing"s,                                                    "imr"s,     ""s,   ""s,    false);
@@ -2650,6 +2713,7 @@ init() {
   g_languages.emplace_back(u8"Iranian languages"s,                                          "ira"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Iranun (Malaysia)"s,                                          "ilm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Iranun (Philippines)"s,                                       "ilp"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Iranun"s,                                                     "ill"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Iraqw"s,                                                      "irk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Irarutu"s,                                                    "irh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Iraya"s,                                                      "iry"s,     ""s,   ""s,    false);
@@ -2713,6 +2777,7 @@ init() {
   g_languages.emplace_back(u8"Iyo'wujwa Chorote"s,                                          "crq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Iyojwa'ja Chorote"s,                                          "crt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Izere"s,                                                      "izr"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Izi-Ezaa-Ikwo-Mgbo"s,                                         "izi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Izii"s,                                                       "izz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Izon"s,                                                       "ijc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Izora"s,                                                      "cbo"s,     ""s,   ""s,    false);
@@ -2749,6 +2814,7 @@ init() {
   g_languages.emplace_back(u8"Jara"s,                                                       "jaf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Jarai"s,                                                      "jra"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Jarawa (India)"s,                                             "anq"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Jarawa (Nigeria)"s,                                           "jar"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Jaru"s,                                                       "ddj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Jauja Wanca Quechua"s,                                        "qxw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Jaunsari"s,                                                   "jns"s,     ""s,   ""s,    false);
@@ -2764,6 +2830,7 @@ init() {
   g_languages.emplace_back(u8"Jejueo"s,                                                     "jje"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Jemez"s,                                                      "tow"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Jenaama Bozo"s,                                               "bze"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Jeng"s,                                                       "jeg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Jennu Kurumba"s,                                              "xuj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Jere"s,                                                       "jer"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Jeri Kuo"s,                                                   "jek"s,     ""s,   ""s,    false);
@@ -2809,6 +2876,7 @@ init() {
   g_languages.emplace_back(u8"Judeo-Persian"s,                                              "jpr"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Judeo-Tat"s,                                                  "jdt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Judeo-Tripolitanian Arabic"s,                                 "yud"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Judeo-Tunisian Arabic"s,                                      "ajt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Judeo-Yemeni Arabic"s,                                        "jye"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Jukun Takum"s,                                                "jbu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Jumjum"s,                                                     "jum"s,     ""s,   ""s,    false);
@@ -2836,6 +2904,7 @@ init() {
   g_languages.emplace_back(u8"Kabalai"s,                                                    "kvf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kabardian"s,                                                  "kbd"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Kabatei"s,                                                    "xkp"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kabixí"s,                                                     "xbx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kabiyè"s,                                                     "kbp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kabola"s,                                                     "klz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kabore One"s,                                                 "onk"s,     ""s,   ""s,    false);
@@ -2858,6 +2927,7 @@ init() {
   g_languages.emplace_back(u8"Kadaru"s,                                                     "kdu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kadazan Dusun"s,                                              "dtp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kadiwéu"s,                                                    "kbc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kado"s,                                                       "kdv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kadu"s,                                                       "zkd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kadung"s,                                                     "dkg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kaduo"s,                                                      "ktp"s,     ""s,   ""s,    false);
@@ -2897,7 +2967,9 @@ init() {
   g_languages.emplace_back(u8"Kakabai"s,                                                    "kqf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kakabe"s,                                                     "kke"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kakanda"s,                                                    "kka"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kakauhua"s,                                                   "kbf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kaki Ae"s,                                                    "tbd"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kakihum"s,                                                    "kxe"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kako"s,                                                       "kkj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kakwa"s,                                                      "keo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kala Lagaw Ya"s,                                              "mwp"s,     ""s,   ""s,    false);
@@ -2940,6 +3012,7 @@ init() {
   g_languages.emplace_back(u8"Kamasau"s,                                                    "kms"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kamayo"s,                                                     "kyk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kamayurá"s,                                                   "kay"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kamba (Brazil)"s,                                             "xba"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kamba (Kenya)"s,                                              "kam"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Kambaata"s,                                                   "ktb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kambaira"s,                                                   "kyy"s,     ""s,   ""s,    false);
@@ -3010,6 +3083,7 @@ init() {
   g_languages.emplace_back(u8"Kara-Kalpak"s,                                                "kaa"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Karachay-Balkar"s,                                            "krc"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Karagas"s,                                                    "kim"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Karahawyana"s,                                                "xkh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Karaim"s,                                                     "kdr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Karajarri"s,                                                  "gbd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Karajá"s,                                                     "kpj"s,     ""s,   ""s,    false);
@@ -3050,6 +3124,7 @@ init() {
   g_languages.emplace_back(u8"Karon Dori"s,                                                 "kgw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Karon"s,                                                      "krx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Karore"s,                                                     "xkx"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Karranga"s,                                                   "xrq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Karuwali"s,                                                   "rxw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kasanga"s,                                                    "ccj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kasem"s,                                                      "xsm"s,     ""s,   ""s,    false);
@@ -3059,7 +3134,9 @@ init() {
   g_languages.emplace_back(u8"Kasiguranin"s,                                                "ksn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kaska"s,                                                      "kkz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kaskean"s,                                                    "zsk"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kasseng"s,                                                    "kgc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kasua"s,                                                      "khs"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kataang"s,                                                    "kgd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Katabaga"s,                                                   "ktq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Katawixi"s,                                                   "xat"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Katbol"s,                                                     "tmb"s,     ""s,   ""s,    false);
@@ -3141,6 +3218,7 @@ init() {
   g_languages.emplace_back(u8"Keninjal"s,                                                   "knl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kensiu"s,                                                     "kns"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kenswei Nsei"s,                                               "ndb"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kenuzi-Dongola"s,                                             "kzh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kenyan Sign Language"s,                                       "xki"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kenyang"s,                                                    "ken"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kenyi"s,                                                      "lke"s,     ""s,   ""s,    false);
@@ -3165,6 +3243,7 @@ init() {
   g_languages.emplace_back(u8"Kgalagadi"s,                                                  "xkv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khah"s,                                                       "hkh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khakas"s,                                                     "kjh"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Khalaj [Indo-Iranian]"s,                                      "kjf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khalaj"s,                                                     "klj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khaling"s,                                                    "klr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khamba"s,                                                     "kbg"s,     ""s,   ""s,    false);
@@ -3190,6 +3269,7 @@ init() {
   g_languages.emplace_back(u8"Khinalugh"s,                                                  "kjj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khirwar"s,                                                    "kwx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khisa"s,                                                      "kqm"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Khlor"s,                                                      "llo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khlula"s,                                                     "ykl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khmer"s,                                                      "khm"s,     "km"s, ""s,    true );
   g_languages.emplace_back(u8"Khmu"s,                                                       "kjg"s,     ""s,   ""s,    false);
@@ -3204,6 +3284,7 @@ init() {
   g_languages.emplace_back(u8"Khowar"s,                                                     "khw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khua"s,                                                       "xhv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khuen"s,                                                      "khf"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Khumi Awa Chin"s,                                             "cka"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khumi Chin"s,                                                 "cnk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khunsari"s,                                                   "kfm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Khvarshi"s,                                                   "khv"s,     ""s,   ""s,    false);
@@ -3315,6 +3396,7 @@ init() {
   g_languages.emplace_back(u8"Kola"s,                                                       "kvv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kolbila"s,                                                    "klc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kolibugan Subanon"s,                                          "skn"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kolum So Dogon"s,                                             "dkl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Koluwawa"s,                                                   "klx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kom (Cameroon)"s,                                             "bkm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kom (India)"s,                                                "kmm"s,     ""s,   ""s,    false);
@@ -3396,6 +3478,7 @@ init() {
   g_languages.emplace_back(u8"Kota (India)"s,                                               "kfe"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kota Bangun Kutai Malay"s,                                    "mqg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kota Marudu Talantang"s,                                      "grm"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kota Marudu Tinagas"s,                                        "ktr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kotafon Gbe"s,                                                "kqk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kotava"s,                                                     "avk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Koti"s,                                                       "eko"s,     ""s,   ""s,    false);
@@ -3431,6 +3514,7 @@ init() {
   g_languages.emplace_back(u8"Kreye"s,                                                      "xre"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kriang"s,                                                     "ngt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Krikati-Timbira"s,                                            "xri"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Krim"s,                                                       "krm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Krio"s,                                                       "kri"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kriol"s,                                                      "rop"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Krisa"s,                                                      "ksi"s,     ""s,   ""s,    false);
@@ -3460,6 +3544,7 @@ init() {
   g_languages.emplace_back(u8"Kugama"s,                                                     "kow"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kugbo"s,                                                      "kes"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kugu-Muminh"s,                                                "xmh"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kui (India)"s,                                                "kxu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kui (India)"s,                                                "uki"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kui (Indonesia)"s,                                            "kvd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kuijau"s,                                                     "dkr"s,     ""s,   ""s,    false);
@@ -3483,6 +3568,7 @@ init() {
   g_languages.emplace_back(u8"Kulisusu"s,                                                   "vkl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kullu Pahari"s,                                               "kfx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kulon"s,                                                      "uon"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kulon-Pazeh"s,                                                "uun"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kulung (Nepal)"s,                                             "kle"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kulung (Nigeria)"s,                                           "bbu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kumalu"s,                                                     "ksl"s,     ""s,   ""s,    false);
@@ -3509,6 +3595,7 @@ init() {
   g_languages.emplace_back(u8"Kung-Ekoka"s,                                                 "knw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kungarakany"s,                                                "ggk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kungardutyi"s,                                                "gdt"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kunggara"s,                                                   "kvs"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kunggari"s,                                                   "kgl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kungkari"s,                                                   "lku"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kuni"s,                                                       "kse"s,     ""s,   ""s,    false);
@@ -3570,6 +3657,7 @@ init() {
   g_languages.emplace_back(u8"Kwadi"s,                                                      "kwz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kwaio"s,                                                      "kwd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kwaja"s,                                                      "kdz"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Kwak"s,                                                       "kwq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kwakiutl"s,                                                   "kwk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kwakum"s,                                                     "kwu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Kwalhioqua-Tlatskanai"s,                                      "qwt"s,     ""s,   ""s,    false);
@@ -3647,6 +3735,7 @@ init() {
   g_languages.emplace_back(u8"Laiyolo"s,                                                    "lji"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lak"s,                                                        "lbe"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Laka (Chad)"s,                                                "lap"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Laka (Nigeria)"s,                                             "lak"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lakalei"s,                                                    "lka"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lake Miwok"s,                                                 "lmw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lakha"s,                                                      "lkh"s,     ""s,   ""s,    false);
@@ -3667,6 +3756,7 @@ init() {
   g_languages.emplace_back(u8"Lamaholot"s,                                                  "slp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lamalama"s,                                                   "lby"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lamalera"s,                                                   "lmr"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Lamam"s,                                                      "lmm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lamang"s,                                                     "hia"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lamatuka"s,                                                   "lmq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lamba"s,                                                      "lam"s,     ""s,   ""s,    true );
@@ -3694,6 +3784,7 @@ init() {
   g_languages.emplace_back(u8"Langi"s,                                                      "lag"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Langnian Buyang"s,                                            "yln"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lango (South Sudan)"s,                                        "lgo"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Lango (South Sudan)"s,                                        "lno"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lango (Uganda)"s,                                             "laj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Langobardic"s,                                                "lng"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Langue des signes de Belgique Francophone"s,                  "sfb"s,     ""s,   ""s,    false);
@@ -3776,6 +3867,7 @@ init() {
   g_languages.emplace_back(u8"Lengilu"s,                                                    "lgi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lengo"s,                                                      "lgr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lengola"s,                                                    "lej"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Lengua"s,                                                     "leg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Leningitij"s,                                                 "lnj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lenje"s,                                                      "leh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lenkau"s,                                                     "ler"s,     ""s,   ""s,    false);
@@ -3836,6 +3928,7 @@ init() {
   g_languages.emplace_back(u8"Lingala"s,                                                    "lin"s,     "ln"s, ""s,    true );
   g_languages.emplace_back(u8"Lingao"s,                                                     "onb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lingarak"s,                                                   "lgk"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Lingkhim"s,                                                   "lii"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lingua Franca Nova"s,                                         "lfn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lingua Franca"s,                                              "pml"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lipan Apache"s,                                               "apl"s,     ""s,   ""s,    false);
@@ -3926,6 +4019,7 @@ init() {
   g_languages.emplace_back(u8"Lowland Tarahumara"s,                                         "tac"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Loxicha Zapotec"s,                                            "ztp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lozi"s,                                                       "loz"s,     ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Lua'"s,                                                       "prb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Luang"s,                                                      "lex"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Luba-Katanga"s,                                               "lub"s,     "lu"s, ""s,    true );
   g_languages.emplace_back(u8"Luba-Lulua"s,                                                 "lua"s,     ""s,   ""s,    true );
@@ -3939,12 +4033,14 @@ init() {
   g_languages.emplace_back(u8"Lugbara"s,                                                    "lgg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Luguru"s,                                                     "ruf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Luhu"s,                                                       "lcq"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Lui"s,                                                        "lba"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Luimbi"s,                                                     "lum"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Luiseno"s,                                                    "lui"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Lukpa"s,                                                      "dop"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lule Sami"s,                                                  "smj"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Lule"s,                                                       "ule"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lumba-Yakkha"s,                                               "luu"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Lumbee"s,                                                     "lmz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lumbu"s,                                                      "lup"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lumun"s,                                                      "lmd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Luna"s,                                                       "luj"s,     ""s,   ""s,    false);
@@ -3973,6 +4069,7 @@ init() {
   g_languages.emplace_back(u8"Lycian"s,                                                     "xlc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lydian"s,                                                     "xld"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lyngngam"s,                                                   "lyg"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Lyons Sign Language"s,                                        "lsg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Lyélé"s,                                                      "lee"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Láadan"s,                                                     "ldn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Láá Láá Bwamu"s,                                              "bwj"s,     ""s,   ""s,    false);
@@ -4030,6 +4127,7 @@ init() {
   g_languages.emplace_back(u8"Magɨyi"s,                                                     "gmg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mahali"s,                                                     "mjx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mahasu Pahari"s,                                              "bfz"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Mahei"s,                                                      "mja"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mahican"s,                                                    "mjy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mahongwe"s,                                                   "mhb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mahou"s,                                                      "mxx"s,     ""s,   ""s,    false);
@@ -4085,6 +4183,7 @@ init() {
   g_languages.emplace_back(u8"Malaccan Creole Portuguese"s,                                 "mcm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Malagasy"s,                                                   "mlg"s,     "mg"s, ""s,    true );
   g_languages.emplace_back(u8"Malak Malak"s,                                                "mpb"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Malakhel"s,                                                   "mld"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Malalamai"s,                                                  "mmt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Malango"s,                                                    "mln"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Malankuravan"s,                                               "mjo"s,     ""s,   ""s,    false);
@@ -4114,6 +4213,7 @@ init() {
   g_languages.emplace_back(u8"Malgana"s,                                                    "vml"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Malgbe"s,                                                     "mxf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mali"s,                                                       "gcc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Maligo"s,                                                     "mwj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Malila"s,                                                     "mgq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Malimba"s,                                                    "mzd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Malimpung"s,                                                  "mli"s,     ""s,   ""s,    false);
@@ -4180,6 +4280,7 @@ init() {
   g_languages.emplace_back(u8"Mangbetu"s,                                                   "mdj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mangbutu"s,                                                   "mdk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mangerr"s,                                                    "zme"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Mangetti Dune ǃXung"s,                                        "gfx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mangga Buang"s,                                               "mmo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Manggarai"s,                                                  "mqy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mango"s,                                                      "mge"s,     ""s,   ""s,    false);
@@ -4228,6 +4329,7 @@ init() {
   g_languages.emplace_back(u8"Maragus"s,                                                    "mrs"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Maram Naga"s,                                                 "nma"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Marama"s,                                                     "lrm"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Maramba"s,                                                    "myd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Maranao"s,                                                    "mrw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Maranunggu"s,                                                 "zmr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mararit"s,                                                    "mgb"s,     ""s,   ""s,    false);
@@ -4294,6 +4396,7 @@ init() {
   g_languages.emplace_back(u8"Masimasi"s,                                                   "ism"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Masiwang"s,                                                   "bnf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Maskelynes"s,                                                 "klv"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Maskoy Pidgin"s,                                              "mhh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Maslam"s,                                                     "msv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Masmaje"s,                                                    "mes"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Massalat"s,                                                   "mdg"s,     ""s,   ""s,    false);
@@ -4309,6 +4412,7 @@ init() {
   g_languages.emplace_back(u8"Mato Grosso Arára"s,                                          "axg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mato"s,                                                       "met"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mator"s,                                                      "mtm"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Mator-Taygi-Karagas"s,                                        "ymt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Matsés"s,                                                     "mcf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mattole"s,                                                    "mvb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Matu Chin"s,                                                  "hlt"s,     ""s,   ""s,    false);
@@ -4337,6 +4441,7 @@ init() {
   g_languages.emplace_back(u8"Mayi-Kulan"s,                                                 "xyk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mayi-Thakurti"s,                                              "xyt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mayi-Yapi"s,                                                  "xyj"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Maykulan"s,                                                   "mnt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mayo"s,                                                       "mfy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mayogo"s,                                                     "mdm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mayoyao Ifugao"s,                                             "ifu"s,     ""s,   ""s,    false);
@@ -4391,9 +4496,11 @@ init() {
   g_languages.emplace_back(u8"Mbwela"s,                                                     "mfu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mbyá Guaraní"s,                                               "gun"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Me'en"s,                                                      "mym"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Mea"s,                                                        "meg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Medebur"s,                                                    "mjm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Medefaidrin"s,                                                "dmf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Media Lengua"s,                                               "mue"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Mediak"s,                                                     "mwx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Median"s,                                                     "xme"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mednyj Aleut"s,                                               "mud"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Medumba"s,                                                    "byv"s,     ""s,   ""s,    false);
@@ -4494,6 +4601,7 @@ init() {
   g_languages.emplace_back(u8"Min Nan Chinese"s,                                            "nan"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Min Zhong Chinese"s,                                          "czo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mina (Cameroon)"s,                                            "hna"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Mina (India)"s,                                               "myi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Minaean"s,                                                    "inm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Minang"s,                                                     "xrg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Minangkabau"s,                                                "min"s,     ""s,   ""s,    true );
@@ -4520,6 +4628,7 @@ init() {
   g_languages.emplace_back(u8"Miriwoong Sign Language"s,                                    "rsm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Miriwoong"s,                                                  "mep"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mirning"s,                                                    "gmr"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Mirpur Panjabi"s,                                             "pmu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Miship"s,                                                     "mjs"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Misima-Panaeati"s,                                            "mpx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mising"s,                                                     "mrg"s,     ""s,   ""s,    false);
@@ -4561,6 +4670,7 @@ init() {
   g_languages.emplace_back(u8"Mogum"s,                                                      "mou"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mohave"s,                                                     "mov"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mohawk"s,                                                     "moh"s,     ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Mohegan-Montauk-Narragansett"s,                               "mof"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mohegan-Pequot"s,                                             "xpq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Moi (Congo)"s,                                                "mow"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Moi (Indonesia)"s,                                            "mxn"s,     ""s,   ""s,    false);
@@ -4641,6 +4751,7 @@ init() {
   g_languages.emplace_back(u8"Mortlockese"s,                                                "mrl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Moru"s,                                                       "mgd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mosimo"s,                                                     "mqv"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Mosiro"s,                                                     "mwy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Moskona"s,                                                    "mtj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mossi"s,                                                      "mos"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Mota"s,                                                       "mtt"s,     ""s,   ""s,    false);
@@ -4675,6 +4786,7 @@ init() {
   g_languages.emplace_back(u8"Mubami"s,                                                     "tsx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mubi"s,                                                       "mub"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Muda"s,                                                       "ymd"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Mudbura"s,                                                    "mwd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mudburra"s,                                                   "dmw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mudhili Gadaba"s,                                             "gau"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mudu Koraga"s,                                                "vmd"s,     ""s,   ""s,    false);
@@ -4734,6 +4846,7 @@ init() {
   g_languages.emplace_back(u8"Mussau-Emira"s,                                               "emi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Muthuvan"s,                                                   "muv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Mutu"s,                                                       "tuc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Muya"s,                                                       "mvm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Muyang"s,                                                     "muy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Muyuw"s,                                                      "myw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Muzi"s,                                                       "ymz"s,     ""s,   ""s,    false);
@@ -4828,6 +4941,7 @@ init() {
   g_languages.emplace_back(u8"Nara"s,                                                       "nrb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Narak"s,                                                      "nac"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Narango"s,                                                    "nrg"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Narau"s,                                                      "nxu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nari Nari"s,                                                  "rnr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Narim"s,                                                      "loh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Naro"s,                                                       "nhr"s,     ""s,   ""s,    false);
@@ -4838,7 +4952,9 @@ init() {
   g_languages.emplace_back(u8"Nasal"s,                                                      "nsy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nasarian"s,                                                   "nvh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Naskapi"s,                                                    "nsk"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Natagaimas"s,                                                 "nts"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Natanzi"s,                                                    "ntz"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Nataoran Amis"s,                                              "ais"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Natchez"s,                                                    "ncz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nateni"s,                                                     "ntm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nathembo"s,                                                   "nte"s,     ""s,   ""s,    false);
@@ -4855,6 +4971,7 @@ init() {
   g_languages.emplace_back(u8"Nawathinehena"s,                                              "nwa"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nawdm"s,                                                      "nmz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nawuri"s,                                                     "naw"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Naxi"s,                                                       "nbf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Naxi"s,                                                       "nxq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nayi"s,                                                       "noz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nayini"s,                                                     "nyq"s,     ""s,   ""s,    false);
@@ -4863,6 +4980,7 @@ init() {
   g_languages.emplace_back(u8"Nda'nda'"s,                                                   "nnz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ndai"s,                                                       "gke"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ndaka"s,                                                      "ndk"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Ndaktup"s,                                                    "ncp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ndali"s,                                                      "ndh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ndam"s,                                                       "ndm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ndamba"s,                                                     "ndj"s,     ""s,   ""s,    false);
@@ -4918,6 +5036,7 @@ init() {
   g_languages.emplace_back(u8"Nepalese Sign Language"s,                                     "nsp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nepali (individual language)"s,                               "npi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nepali (macrolanguage)"s,                                     "nep"s,     "ne"s, ""s,    true );
+  g_languages.emplace_back(u8"Nepali Kurux"s,                                               "kxl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nete"s,                                                       "net"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"New Caledonian Javanese"s,                                    "jas"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"New Zealand Sign Language"s,                                  "nzs"s,     ""s,   ""s,    false);
@@ -4952,6 +5071,7 @@ init() {
   g_languages.emplace_back(u8"Ngarigu"s,                                                    "xni"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngarinyin"s,                                                  "ung"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngarinyman"s,                                                 "nbj"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Ngarla"s,                                                     "nlr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngarla"s,                                                     "nrk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngarluma"s,                                                   "nrl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngarrindjeri"s,                                               "nay"s,     ""s,   ""s,    false);
@@ -4987,9 +5107,11 @@ init() {
   g_languages.emplace_back(u8"Ngombale"s,                                                   "nla"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngombe (Central African Republic)"s,                          "nmj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngombe (Democratic Republic of Congo)"s,                      "ngc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Ngong"s,                                                      "nnx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngongo"s,                                                     "noq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngoni (Mozambique)"s,                                         "xnq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngoni (Tanzania)"s,                                           "xnj"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Ngoni"s,                                                      "ngo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngoshie"s,                                                    "nsh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngul"s,                                                       "nlo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngulu"s,                                                      "ngp"s,     ""s,   ""s,    false);
@@ -5000,6 +5122,7 @@ init() {
   g_languages.emplace_back(u8"Ngundi"s,                                                     "ndn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngundu"s,                                                     "nue"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngungwel"s,                                                   "ngz"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Ngura"s,                                                      "nbx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngurimi"s,                                                    "ngq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ngurmbur"s,                                                   "nrx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nguôn"s,                                                      "nuo"s,     ""s,   ""s,    false);
@@ -5022,6 +5145,7 @@ init() {
   g_languages.emplace_back(u8"Nigerian Sign Language"s,                                     "nsi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nihali"s,                                                     "nll"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nii"s,                                                        "nii"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Nijadali"s,                                                   "nad"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Niksek"s,                                                     "gbe"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nila"s,                                                       "nil"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nilamba"s,                                                    "nim"s,     ""s,   ""s,    false);
@@ -5038,6 +5162,7 @@ init() {
   g_languages.emplace_back(u8"Ningera"s,                                                    "nby"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ninggerum"s,                                                  "nxr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ningil"s,                                                     "niz"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Ningye"s,                                                     "nns"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ninia Yali"s,                                                 "nlk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ninzo"s,                                                      "nin"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nipsan"s,                                                     "nps"s,     ""s,   ""s,    false);
@@ -5045,6 +5170,7 @@ init() {
   g_languages.emplace_back(u8"Nisenan"s,                                                    "nsz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nisga'a"s,                                                    "ncg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nisi (China)"s,                                               "yso"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Nisi (India)"s,                                               "dap"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Niuafo'ou"s,                                                  "num"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Niuatoputapu"s,                                               "nkp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Niuean"s,                                                     "niu"s,     ""s,   ""s,    true );
@@ -5086,6 +5212,7 @@ init() {
   g_languages.emplace_back(u8"Nooksack"s,                                                   "nok"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Noon"s,                                                       "snf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Noone"s,                                                      "nhu"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Nootka"s,                                                     "noo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Nopala Chatino"s,                                             "cya"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Noric"s,                                                      "nrc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Norn"s,                                                       "nrn"s,     ""s,   ""s,    false);
@@ -5401,8 +5528,10 @@ init() {
   g_languages.emplace_back(u8"Omagua"s,                                                     "omg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Omaha-Ponca"s,                                                "oma"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Omani Arabic"s,                                               "acx"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Omati"s,                                                      "mgx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ombamba"s,                                                    "mbm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ombo"s,                                                       "oml"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Omejes"s,                                                     "ome"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ometepec Nahuatl"s,                                           "nht"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Omi"s,                                                        "omi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Omok"s,                                                       "omk"s,     ""s,   ""s,    false);
@@ -5506,6 +5635,7 @@ init() {
   g_languages.emplace_back(u8"Pakaásnovos"s,                                                "pav"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pakistan Sign Language"s,                                     "pks"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Paku Karen"s,                                                 "jkp"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Paku Karen"s,                                                 "kpp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Paku"s,                                                       "pku"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pal"s,                                                        "abw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Palaic"s,                                                     "plq"s,     ""s,   ""s,    false);
@@ -5519,8 +5649,11 @@ init() {
   g_languages.emplace_back(u8"Paliyan"s,                                                    "pcf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pallanganmiddang"s,                                           "pmd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Paloor"s,                                                     "fap"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Palpa"s,                                                      "plp"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Palu"s,                                                       "pbz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Palu'e"s,                                                     "ple"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Paluan"s,                                                     "plz"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Palumata"s,                                                   "pmc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Palya Bareli"s,                                               "bpx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pam"s,                                                        "pmn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pambia"s,                                                     "pmb"s,     ""s,   ""s,    false);
@@ -5533,6 +5666,7 @@ init() {
   g_languages.emplace_back(u8"Pana (Central African Republic)"s,                            "pnz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Panamanian Sign Language"s,                                   "lsp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Panamint"s,                                                   "par"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Panang"s,                                                     "pcr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Panao Huánuco Quechua"s,                                      "qxh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Panará"s,                                                     "kre"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Panasuan"s,                                                   "psn"s,     ""s,   ""s,    false);
@@ -5557,6 +5691,7 @@ init() {
   g_languages.emplace_back(u8"Panoan Katukína"s,                                            "knt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Panobo"s,                                                     "pno"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Panyi Bai"s,                                                  "bfc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Pao"s,                                                        "ppa"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Papantla Totonac"s,                                           "top"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Papapana"s,                                                   "ppn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Papar"s,                                                      "dpp"s,     ""s,   ""s,    false);
@@ -5564,6 +5699,7 @@ init() {
   g_languages.emplace_back(u8"Papel"s,                                                      "pbo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Papi"s,                                                       "ppe"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Papiamento"s,                                                 "pap"s,     ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Papitalai"s,                                                  "pat"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Papora"s,                                                     "ppu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Papua New Guinean Sign Language"s,                            "pgz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Papuan Malay"s,                                               "pmy"s,     ""s,   ""s,    false);
@@ -5573,6 +5709,7 @@ init() {
   g_languages.emplace_back(u8"Paraguayan Guaraní"s,                                         "gug"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Paraguayan Sign Language"s,                                   "pys"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Parakanã"s,                                                   "pak"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Paranan"s,                                                    "agp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Paranan"s,                                                    "prf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Paranawát"s,                                                  "paf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Paraujano"s,                                                  "pbg"s,     ""s,   ""s,    false);
@@ -5689,6 +5826,7 @@ init() {
   g_languages.emplace_back(u8"Pinai-Hagahai"s,                                              "pnn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pindiini"s,                                                   "pti"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pingelapese"s,                                                "pif"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Pini"s,                                                       "pii"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pinigura"s,                                                   "pnv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pinjarup"s,                                                   "pnj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pinji"s,                                                      "pic"s,     ""s,   ""s,    false);
@@ -5701,6 +5839,7 @@ init() {
   g_languages.emplace_back(u8"Pirlatapa"s,                                                  "bxi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Piro"s,                                                       "pie"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pirriya"s,                                                    "xpa"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Piru"s,                                                       "ppr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pisabo"s,                                                     "pig"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pisaflores Tepehua"s,                                         "tpp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Piscataway"s,                                                 "psy"s,     ""s,   ""s,    false);
@@ -5737,6 +5876,8 @@ init() {
   g_languages.emplace_back(u8"Pom"s,                                                        "pmo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pomo"s,                                                       "pmm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ponam"s,                                                      "ncc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Ponares"s,                                                    "pod"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Pongyong"s,                                                   "pgy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ponosakan"s,                                                  "pns"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pontic"s,                                                     "pnt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ponyo-Gongwang Naga"s,                                        "npg"s,     ""s,   ""s,    false);
@@ -5759,11 +5900,13 @@ init() {
   g_languages.emplace_back(u8"Poyanáwa"s,                                                   "pyn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Prakrit languages"s,                                          "pra"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Prasuni"s,                                                    "prn"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Pray 3"s,                                                     "pry"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Primitive Irish"s,                                            "pgl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Principense"s,                                                "pre"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Providencia Sign Language"s,                                  "prz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Prussian"s,                                                   "prg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Psikye"s,                                                     "kvj"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Pu Ko"s,                                                      "puk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pu-Xian Chinese"s,                                            "cpx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Puare"s,                                                      "pux"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pudtol Atta"s,                                                "atp"s,     ""s,   ""s,    false);
@@ -5800,6 +5943,7 @@ init() {
   g_languages.emplace_back(u8"Purisimeño"s,                                                 "puy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Puroik"s,                                                     "suv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Puruborá"s,                                                   "pur"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Purum Naga"s,                                                 "puz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Purum"s,                                                      "pub"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Pushto"s,                                                     "pus"s,     "ps"s, ""s,    true );
   g_languages.emplace_back(u8"Putai"s,                                                      "mfl"s,     ""s,   ""s,    false);
@@ -5908,15 +6052,16 @@ init() {
   g_languages.emplace_back(u8"Rendille"s,                                                   "rel"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Rengao"s,                                                     "ren"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Rennell-Bellona"s,                                            "mnv"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Rennellese Sign Language"s,                                   "rsi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Repanbitip"s,                                                 "rpn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Rer Bare"s,                                                   "rer"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Rerau"s,                                                      "rea"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Rerep"s,                                                      "pgk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Reserved for local use"s,                                     "qaa-qtz"s, ""s,   ""s,    true );
-  g_languages.emplace_back(u8"Reserved for local use: qaa"s,                                u8"qaa"s,   ""s,   ""s,    true );
-  g_languages.emplace_back(u8"Reserved for local use: qab"s,                                u8"qab"s,   ""s,   ""s,    true );
-  g_languages.emplace_back(u8"Reserved for local use: qac"s,                                u8"qac"s,   ""s,   ""s,    true );
-  g_languages.emplace_back(u8"Reserved for local use: qad"s,                                u8"qad"s,   ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Reserved for local use: qaa"s,                                "qaa"s,     ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Reserved for local use: qab"s,                                "qab"s,     ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Reserved for local use: qac"s,                                "qac"s,     ""s,   ""s,    true );
+  g_languages.emplace_back(u8"Reserved for local use: qad"s,                                "qad"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Reshe"s,                                                      "res"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Resígaro"s,                                                   "rgr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Retta"s,                                                      "ret"s,     ""s,   ""s,    false);
@@ -5926,6 +6071,7 @@ init() {
   g_languages.emplace_back(u8"Riang Lang"s,                                                 "ril"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Riantana"s,                                                   "ran"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ribun"s,                                                      "rir"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Rien"s,                                                       "rie"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Rigwe"s,                                                      "iri"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Rikbaktsa"s,                                                  "rkb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Rinconada Bikol"s,                                            "bto"s,     ""s,   ""s,    false);
@@ -5971,6 +6117,7 @@ init() {
   g_languages.emplace_back(u8"Ruma"s,                                                       "ruz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Rumai Palaung"s,                                              "rbb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Rumu"s,                                                       "klq"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Runa"s,                                                       "rna"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Rundi"s,                                                      "run"s,     "rn"s, ""s,    true );
   g_languages.emplace_back(u8"Runga"s,                                                      "rou"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Rungtu Chin"s,                                                "rtc"s,     ""s,   ""s,    false);
@@ -6047,6 +6194,7 @@ init() {
   g_languages.emplace_back(u8"Salumá"s,                                                     "slj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Salvadoran Sign Language"s,                                   "esn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sam"s,                                                        "snx"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Sama"s,                                                       "smd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Samaritan Aramaic"s,                                          "sam"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Samaritan"s,                                                  "smp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Samarokena"s,                                                 "tmj"s,     ""s,   ""s,    false);
@@ -6095,16 +6243,19 @@ init() {
   g_languages.emplace_back(u8"San Salvador Kongo"s,                                         "kwy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"San Vicente Coatlán Zapotec"s,                                "zpt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sanaani Arabic"s,                                             "ayn"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Sanapaná"s,                                                   "sap"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sanapaná"s,                                                   "spn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sandawe"s,                                                    "sad"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Sanga (Democratic Republic of Congo)"s,                       "sng"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sanga (Nigeria)"s,                                            "xsn"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Sangab Mandaya"s,                                             "myt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sanggau"s,                                                    "scg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sangil"s,                                                     "snl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sangir"s,                                                     "sxn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sangisari"s,                                                  "sgr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sangkong"s,                                                   "sgk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sanglechi"s,                                                  "sgy"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Sanglechi-Ishkashimi"s,                                       "sgl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sango"s,                                                      "sag"s,     "sg"s, ""s,    true );
   g_languages.emplace_back(u8"Sangtam Naga"s,                                               "nsa"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sangu (Gabon)"s,                                              "snq"s,     ""s,   ""s,    false);
@@ -6115,6 +6266,7 @@ init() {
   g_languages.emplace_back(u8"Sankaran Maninka"s,                                           "msc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sansi"s,                                                      "ssi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sanskrit"s,                                                   "san"s,     "sa"s, ""s,    true );
+  g_languages.emplace_back(u8"Sansu"s,                                                      "sca"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Santa Ana de Tusi Pasco Quechua"s,                            "qxt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Santa Catarina Albarradas Zapotec"s,                          "ztn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Santa Inés Ahuatempan Popoloca"s,                             "pca"s,     ""s,   ""s,    false);
@@ -6137,6 +6289,7 @@ init() {
   g_languages.emplace_back(u8"Sapuan"s,                                                     "spu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sapé"s,                                                       "spc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sar"s,                                                        "mwm"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Sara Dunjo"s,                                                 "koj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sara Kaba Deme"s,                                             "kwg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sara Kaba Náà"s,                                              "kwv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sara Kaba"s,                                                  "sbz"s,     ""s,   ""s,    false);
@@ -6169,6 +6322,7 @@ init() {
   g_languages.emplace_back(u8"Sauria Paharia"s,                                             "mjt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sause"s,                                                      "sao"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sausi"s,                                                      "ssj"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Savara"s,                                                     "svr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Savi"s,                                                       "sdg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Savosavo"s,                                                   "svs"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sawai"s,                                                      "szw"s,     ""s,   ""s,    false);
@@ -6187,6 +6341,7 @@ init() {
   g_languages.emplace_back(u8"Sebat Bet Gurage"s,                                           "sgw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Seberuang"s,                                                  "sbx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sebop"s,                                                      "sib"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Sebuyau"s,                                                    "snb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sechelt"s,                                                    "sec"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Secoya"s,                                                     "sey"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sedang"s,                                                     "sed"s,     ""s,   ""s,    false);
@@ -6219,6 +6374,7 @@ init() {
   g_languages.emplace_back(u8"Selungai Murut"s,                                             "slg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Seluwasan"s,                                                  "sws"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Semai"s,                                                      "sea"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Semandang"s,                                                  "sdm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Semandang"s,                                                  "sdq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Semaq Beri"s,                                                 "szc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sembakung Murut"s,                                            "sbr"s,     ""s,   ""s,    false);
@@ -6304,6 +6460,7 @@ init() {
   g_languages.emplace_back(u8"Shiki"s,                                                      "gua"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Shilluk"s,                                                    "shk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Shina"s,                                                      "scl"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Shinabo"s,                                                    "snh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Shipibo-Conibo"s,                                             "shp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sholaga"s,                                                    "sle"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Shom Peng"s,                                                  "sii"s,     ""s,   ""s,    false);
@@ -6429,6 +6586,7 @@ init() {
   g_languages.emplace_back(u8"Soga"s,                                                       "xog"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sogdian"s,                                                    "sog"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Soi"s,                                                        "soj"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Sok"s,                                                        "skk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sokoro"s,                                                     "sok"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Solano"s,                                                     "xso"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Soli"s,                                                       "sby"s,     ""s,   ""s,    false);
@@ -6443,6 +6601,7 @@ init() {
   g_languages.emplace_back(u8"Somyev"s,                                                     "kgt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sonaga"s,                                                     "ysg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sonde"s,                                                      "shc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Songa"s,                                                      "sgo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Songe"s,                                                      "sop"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Songhai languages"s,                                          "son"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Songlai Chin"s,                                               "csj"s,     ""s,   ""s,    false);
@@ -6490,6 +6649,7 @@ init() {
   g_languages.emplace_back(u8"South Tairora"s,                                              "omw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"South Ucayali Ashéninka"s,                                    "cpy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"South Watut"s,                                                "mcy"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"South Wemale"s,                                               "tlw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"South West Bay"s,                                             "sns"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southeast Ambrym"s,                                           "tvk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southeast Babar"s,                                            "vbb"s,     ""s,   ""s,    false);
@@ -6510,6 +6670,7 @@ init() {
   g_languages.emplace_back(u8"Southern Aymara"s,                                            "ayc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southern Bai"s,                                               "bfs"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southern Balochi"s,                                           "bcc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Southern Betsimisaraka Malagasy"s,                            "bjq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southern Betsimisaraka Malagasy"s,                            "bzc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southern Binukidnon"s,                                        "mtw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southern Birifor"s,                                           "biv"s,     ""s,   ""s,    false);
@@ -6522,6 +6683,7 @@ init() {
   g_languages.emplace_back(u8"Southern Dong"s,                                              "kmc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southern East Cree"s,                                         "crj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southern Ghale"s,                                             "ghe"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Southern Gondi"s,                                             "ggo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southern Grebo"s,                                             "grj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southern Guiyang Hmong"s,                                     "hmy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southern Haida"s,                                             "hax"s,     ""s,   ""s,    false);
@@ -6585,6 +6747,7 @@ init() {
   g_languages.emplace_back(u8"Southwestern Guiyang Hmong"s,                                 "hmg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southwestern Huishui Hmong"s,                                 "hmh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southwestern Nisu"s,                                          "nsv"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Southwestern Tamang"s,                                        "tsf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southwestern Tarahumara"s,                                    "twr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southwestern Tasmanian"s,                                     "xpx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Southwestern Tepehuan"s,                                      "tla"s,     ""s,   ""s,    false);
@@ -6642,6 +6805,7 @@ init() {
   g_languages.emplace_back(u8"Sumbwa"s,                                                     "suw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sumerian"s,                                                   "sux"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Sumi Naga"s,                                                  "nsm"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Sumo-Mayangna"s,                                              "sum"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sumtu Chin"s,                                                 "csv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sunam"s,                                                      "ssk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sundanese"s,                                                  "sun"s,     "su"s, ""s,    true );
@@ -6652,6 +6816,7 @@ init() {
   g_languages.emplace_back(u8"Surbakhal"s,                                                  "sbj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Surgujia"s,                                                   "sgj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Surigaonon"s,                                                 "sgd"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Surigaonon"s,                                                 "sul"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Surjapuri"s,                                                  "sjp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Sursurunga"s,                                                 "sgz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Suruahá"s,                                                    "swx"s,     ""s,   ""s,    false);
@@ -6728,10 +6893,12 @@ init() {
   g_languages.emplace_back(u8"Tai Dam"s,                                                    "blt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tai Do"s,                                                     "tyj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tai Dón"s,                                                    "twh"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tai Hang Tong"s,                                              "thc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tai Hongjin"s,                                                "tiz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tai Laing"s,                                                  "tjl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tai Loi"s,                                                    "tlq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tai Long"s,                                                   "thi"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tai Mène"s,                                                   "tmp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tai Nüa"s,                                                    "tdd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tai Pao"s,                                                    "tpo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tai Thanh"s,                                                  "tmm"s,     ""s,   ""s,    false);
@@ -6755,6 +6922,7 @@ init() {
   g_languages.emplace_back(u8"Takelma"s,                                                    "tkm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Takestani"s,                                                  "tks"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Takia"s,                                                      "tbc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Takpa"s,                                                      "tkk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Takua"s,                                                      "tkz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Takuu"s,                                                      "nho"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Takwane"s,                                                    "tke"s,     ""s,   ""s,    false);
@@ -6770,6 +6938,7 @@ init() {
   g_languages.emplace_back(u8"Talondo'"s,                                                   "tln"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Talossan"s,                                                   "tzl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Talu"s,                                                       "yta"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Talur"s,                                                      "ilw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Talysh"s,                                                     "tly"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tama (Chad)"s,                                                "tma"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tama (Colombia)"s,                                            "ten"s,     ""s,   ""s,    false);
@@ -6783,6 +6952,7 @@ init() {
   g_languages.emplace_back(u8"Tambas"s,                                                     "tdk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tambora"s,                                                    "xxt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tambotalo"s,                                                  "tls"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tambunan Dusun"s,                                             "kzt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tami"s,                                                       "tmy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tamil"s,                                                      "tam"s,     "ta"s, ""s,    true );
   g_languages.emplace_back(u8"Tamki"s,                                                      "tax"s,     ""s,   ""s,    false);
@@ -6800,12 +6970,14 @@ init() {
   g_languages.emplace_back(u8"Tanema"s,                                                     "tnx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tangale"s,                                                    "tan"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tangchangya"s,                                                "tnv"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tangga"s,                                                     "tgg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tanggu"s,                                                     "tgu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tangkhul Naga (India)"s,                                      "nmf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tangkhul Naga (Myanmar)"s,                                    "ntx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tangko"s,                                                     "tkx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tanglang"s,                                                   "ytl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tangoa"s,                                                     "tgp"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tangshewi"s,                                                  "tnf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tanguat"s,                                                    "tbs"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tangut"s,                                                     "txg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tanimbili"s,                                                  "tbe"s,     ""s,   ""s,    false);
@@ -6814,6 +6986,7 @@ init() {
   g_languages.emplace_back(u8"Tanosy Malagasy"s,                                            "txy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tanudan Kalinga"s,                                            "kml"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tanzanian Sign Language"s,                                    "tza"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tapeba"s,                                                     "tbb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tapei"s,                                                      "afp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tapieté"s,                                                    "tpj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tapirapé"s,                                                   "taf"s,     ""s,   ""s,    false);
@@ -6828,6 +7001,7 @@ init() {
   g_languages.emplace_back(u8"Taruma"s,                                                     "tdm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tasawaq"s,                                                    "twq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tase Naga"s,                                                  "nst"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tasmanian"s,                                                  "xtz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tasmate"s,                                                    "tmt"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tataltepec Chatino"s,                                         "cta"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tatana"s,                                                     "txx"s,     ""s,   ""s,    false);
@@ -6854,6 +7028,7 @@ init() {
   g_languages.emplace_back(u8"Tawr Chin"s,                                                  "tcp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tay Boi"s,                                                    "tas"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tay Khang"s,                                                  "tnu"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tayabas Ayta"s,                                               "ayy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tayart Tamajeq"s,                                             "thz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tayo"s,                                                       "cks"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Taznatit"s,                                                   "grr"s,     ""s,   ""s,    false);
@@ -6897,6 +7072,7 @@ init() {
   g_languages.emplace_back(u8"Temiar"s,                                                     "tea"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Temoaya Otomi"s,                                              "ott"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Temoq"s,                                                      "tmo"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tempasuk Dusun"s,                                             "tdu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Temuan"s,                                                     "tmw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ten'edn"s,                                                    "tnz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tena Lowland Quichua"s,                                       "quw"s,     ""s,   ""s,    false);
@@ -6959,12 +7135,14 @@ init() {
   g_languages.emplace_back(u8"Tharaka"s,                                                    "thk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Thawa"s,                                                      "xtv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Thaypan"s,                                                    "typ"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"The"s,                                                        "thx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Thiin"s,                                                      "iin"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tho"s,                                                        "tou"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Thompson"s,                                                   "thp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Thopho"s,                                                     "ytp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Thracian"s,                                                   "txh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Thu Lao"s,                                                    "tyl"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Thudam"s,                                                     "thw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Thulung"s,                                                    "tdh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Thur"s,                                                       "lth"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Thuri"s,                                                      "thu"s,     ""s,   ""s,    false);
@@ -6979,6 +7157,7 @@ init() {
   g_languages.emplace_back(u8"Ticuna"s,                                                     "tca"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tidaá Mixtec"s,                                               "mtx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tidikelt Tamazight"s,                                         "tia"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tidong"s,                                                     "tid"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tidore"s,                                                     "tvo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tiemacèwè Bozo"s,                                             "boo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tiene"s,                                                      "tii"s,     ""s,   ""s,    false);
@@ -7003,8 +7182,10 @@ init() {
   g_languages.emplace_back(u8"Timugon Murut"s,                                              "tih"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tinani"s,                                                     "lbf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tindi"s,                                                      "tin"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tingal"s,                                                     "tie"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tingui-Boto"s,                                                "tgv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tinigua"s,                                                    "tit"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tinoc Kallahan"s,                                             "tne"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tinputz"s,                                                    "tpz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tippera"s,                                                    "tpe"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tira"s,                                                       "tic"s,     ""s,   ""s,    false);
@@ -7070,6 +7251,7 @@ init() {
   g_languages.emplace_back(u8"Tombelala"s,                                                  "ttp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tombonuo"s,                                                   "txa"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tombulu"s,                                                    "tom"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tomedes"s,                                                    "toe"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tomini"s,                                                     "txm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tommo So Dogon"s,                                             "dto"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tomo Kan Dogon"s,                                             "dtm"s,     ""s,   ""s,    false);
@@ -7186,6 +7368,7 @@ init() {
   g_languages.emplace_back(u8"Tumulung Sisaala"s,                                           "sil"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tumzabt"s,                                                    "mzb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tundra Enets"s,                                               "enh"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Tunen"s,                                                      "baz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tunen"s,                                                      "tvu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tungag"s,                                                     "lcm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Tunggare"s,                                                   "trt"s,     ""s,   ""s,    false);
@@ -7317,6 +7500,7 @@ init() {
   g_languages.emplace_back(u8"Unserdeutsch"s,                                               "uln"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Unua"s,                                                       "onu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Unubahe"s,                                                    "unu"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Uokha"s,                                                      "uok"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Upper Chehalis"s,                                             "cjh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Upper Grand Valley Dani"s,                                    "dna"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Upper Guinea Crioulo"s,                                       "pov"s,     ""s,   ""s,    false);
@@ -7327,6 +7511,7 @@ init() {
   g_languages.emplace_back(u8"Upper Sorbian"s,                                              "hsb"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Upper Ta'oih"s,                                               "tth"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Upper Tanana"s,                                               "tau"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Upper Tanudan Kalinga"s,                                      "kgh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Upper Taromi"s,                                               "tov"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Upper Umpqua"s,                                               "xup"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Ura (Papua New Guinea)"s,                                     "uro"s,     ""s,   ""s,    false);
@@ -7377,6 +7562,7 @@ init() {
   g_languages.emplace_back(u8"Uzekwe"s,                                                     "eze"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Vaagri Booli"s,                                               "vaa"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Vafsi"s,                                                      "vaf"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Vaghat-Ya-Bijim-Legeri"s,                                     "bij"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Vaghri"s,                                                     "vgr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Vaghua"s,                                                     "tva"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Vagla"s,                                                      "vag"s,     ""s,   ""s,    false);
@@ -7462,6 +7648,7 @@ init() {
   g_languages.emplace_back(u8"Wae Rana"s,                                                   "wrx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Waffa"s,                                                      "waj"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wagawaga"s,                                                   "wgb"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Wagawaga"s,                                                   "wgw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wagaya"s,                                                     "wga"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wagdi"s,                                                      "wbr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wagi"s,                                                       "fad"s,     ""s,   ""s,    false);
@@ -7500,6 +7687,7 @@ init() {
   g_languages.emplace_back(u8"Wallisian"s,                                                  "wls"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Walloon"s,                                                    "wln"s,     "wa"s, ""s,    true );
   g_languages.emplace_back(u8"Walmajarri"s,                                                 "wmt"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Walo Kumbe Dogon"s,                                           "dwl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Walser"s,                                                     "wae"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Walungge"s,                                                   "ola"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Waluwarra"s,                                                  "wrb"s,     ""s,   ""s,    false);
@@ -7542,10 +7730,12 @@ init() {
   g_languages.emplace_back(u8"War-Jaintia"s,                                                "aml"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wara"s,                                                       "wbf"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Warao"s,                                                      "wba"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Warapu"s,                                                     "wra"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Waray (Australia)"s,                                          "wrz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Waray (Philippines)"s,                                        "war"s,     ""s,   ""s,    true );
   g_languages.emplace_back(u8"Wardaman"s,                                                   "wrr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wardandi"s,                                                   "wxw"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Warduji"s,                                                    "wrd"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Warembori"s,                                                  "wsa"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wares"s,                                                      "wai"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Waris"s,                                                      "wrs"s,     ""s,   ""s,    false);
@@ -7691,12 +7881,14 @@ init() {
   g_languages.emplace_back(u8"Wikalkan"s,                                                   "wik"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wikngenchera"s,                                               "wua"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wilawila"s,                                                   "wil"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Wintu"s,                                                      "wit"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wintu"s,                                                      "wnw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Winyé"s,                                                      "kst"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wipi"s,                                                       "gdr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wiradjuri"s,                                                  "wrh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wiraféd"s,                                                    "wir"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wirangu"s,                                                    "wgu"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Wirangu"s,                                                    "wiw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wiru"s,                                                       "wiu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wiyot"s,                                                      "wiy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Woccon"s,                                                     "xwc"s,     ""s,   ""s,    false);
@@ -7719,6 +7911,7 @@ init() {
   g_languages.emplace_back(u8"Woria"s,                                                      "wor"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Worimi"s,                                                     "kda"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Worodougou"s,                                                 "jud"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Worora"s,                                                     "unp"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Worrorra"s,                                                   "wro"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wotapuri-Katarqalai"s,                                        "wsv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wotjobaluk"s,                                                 "xwt"s,     ""s,   ""s,    false);
@@ -7744,6 +7937,7 @@ init() {
   g_languages.emplace_back(u8"Wutunhua"s,                                                   "wuh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wuvulu-Aua"s,                                                 "wuv"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wuzlam"s,                                                     "udl"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Wyandot"s,                                                    "wya"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wyandot"s,                                                    "wyn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wymysorys"s,                                                  "wym"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Wára"s,                                                       "tci"s,     ""s,   ""s,    false);
@@ -7760,12 +7954,14 @@ init() {
   g_languages.emplace_back(u8"Xerénte"s,                                                    "xer"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Xetá"s,                                                       "xet"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Xhosa"s,                                                      "xho"s,     "xh"s, ""s,    true );
+  g_languages.emplace_back(u8"Xiandao"s,                                                    "xia"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Xiang Chinese"s,                                              "hsn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Xibe"s,                                                       "sjo"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Xicotepec De Juárez Totonac"s,                                "too"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Xinca"s,                                                      "xin"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Xingú Asuriní"s,                                              "asn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Xipaya"s,                                                     "xiy"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Xipináwa"s,                                                   "xip"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Xiri"s,                                                       "xii"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Xiriâna"s,                                                    "xir"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Xishanba Lalo"s,                                              "ywt"s,     ""s,   ""s,    false);
@@ -7820,6 +8016,7 @@ init() {
   g_languages.emplace_back(u8"Yaminahua"s,                                                  "yaa"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yamna"s,                                                      "ymn"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yamongeri"s,                                                  "ymg"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Yamphe"s,                                                     "yma"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yamphu"s,                                                     "ybi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yan-nhangu"s,                                                 "jay"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yan-nhaŋu Sign Language"s,                                    "yhs"s,     ""s,   ""s,    false);
@@ -7832,6 +8029,8 @@ init() {
   g_languages.emplace_back(u8"Yanesha'"s,                                                   "ame"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yang Zhuang"s,                                                "zyg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yangben"s,                                                    "yav"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Yangbye"s,                                                    "ybd"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Yangho"s,                                                     "ynh"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yangkam"s,                                                    "bsx"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yangman"s,                                                    "jng"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yango"s,                                                      "yng"s,     ""s,   ""s,    false);
@@ -7858,6 +8057,7 @@ init() {
   g_languages.emplace_back(u8"Yarluyandi"s,                                                 "yry"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yaroamë"s,                                                    "yro"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yarsun"s,                                                     "yrs"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Yarí"s,                                                       "yri"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yasa"s,                                                       "yko"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yassic"s,                                                     "ysc"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yatay"s,                                                      "yty"s,     ""s,   ""s,    false);
@@ -7891,6 +8091,7 @@ init() {
   g_languages.emplace_back(u8"Yelogu"s,                                                     "ylg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yemba"s,                                                      "ybb"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yemsa"s,                                                      "jnj"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Yendang"s,                                                    "yen"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yendang"s,                                                    "ynq"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yeni"s,                                                       "yei"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yeniche"s,                                                    "yec"s,     ""s,   ""s,    false);
@@ -7902,6 +8103,7 @@ init() {
   g_languages.emplace_back(u8"Yetfa"s,                                                      "yet"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yevanic"s,                                                    "yej"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yeyi"s,                                                       "yey"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Yiddish Sign Language"s,                                      "yds"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yiddish"s,                                                    "yid"s,     "yi"s, ""s,    true );
   g_languages.emplace_back(u8"Yidgha"s,                                                     "ydg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yidiny"s,                                                     "yii"s,     ""s,   ""s,    false);
@@ -7917,6 +8119,7 @@ init() {
   g_languages.emplace_back(u8"Yiningayi"s,                                                  "ygi"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yintale Karen"s,                                              "kvy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yinwum"s,                                                     "yxm"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Yir Yoront"s,                                                 "yiy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yir Yoront"s,                                                 "yyr"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yirandali"s,                                                  "ljw"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yirrk-Mel"s,                                                  "yrm"s,     ""s,   ""s,    false);
@@ -7943,6 +8146,7 @@ init() {
   g_languages.emplace_back(u8"Yoron"s,                                                      "yox"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yorta Yorta"s,                                                "xyy"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yoruba"s,                                                     "yor"s,     "yo"s, ""s,    true );
+  g_languages.emplace_back(u8"Yos"s,                                                        "yos"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yosondúa Mixtec"s,                                            "mpm"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yotti"s,                                                      "yot"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Youjiang Zhuang"s,                                            "zyj"s,     ""s,   ""s,    false);
@@ -7959,6 +8163,7 @@ init() {
   g_languages.emplace_back(u8"Yue Chinese"s,                                                "yue"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yug"s,                                                        "yug"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yugambal"s,                                                   "yub"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Yugh"s,                                                       "yuu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yugoslavian Sign Language"s,                                  "ysl"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yugul"s,                                                      "ygu"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Yuhup"s,                                                      "yab"s,     ""s,   ""s,    false);
@@ -8026,6 +8231,7 @@ init() {
   g_languages.emplace_back(u8"Zimbabwe Sign Language"s,                                     "zib"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Zinza"s,                                                      "zin"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Zire"s,                                                       "sih"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"Ziriya"s,                                                     "zir"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Zizilivakan"s,                                                "ziz"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Zo'é"s,                                                       "pto"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"Zokhuo"s,                                                     "yzk"s,     ""s,   ""s,    false);
@@ -8056,7 +8262,9 @@ init() {
   g_languages.emplace_back(u8"ǁGana"s,                                                      "gnk"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"ǁXegwi"s,                                                     "xeg"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"ǂHua"s,                                                       "huc"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"ǂKxʼauǁʼein"s,                                                "aue"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"ǂUngkue"s,                                                    "gku"s,     ""s,   ""s,    false);
+  g_languages.emplace_back(u8"ǃOǃung"s,                                                     "oun"s,     ""s,   ""s,    false);
   g_languages.emplace_back(u8"ǃXóõ"s,                                                       "nmn"s,     ""s,   ""s,    false);
 }
 
