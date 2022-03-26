@@ -448,6 +448,8 @@ TEST(BCP47LanguageTags, ToCanonicalForm) {
   EXPECT_EQ("hak"s,             language_c::parse("zh-hakka"s).to_canonical_form().format());
   EXPECT_EQ("hak"s,             language_c::parse("i-hak"s).to_canonical_form().format());
   EXPECT_EQ("yue-jyutping"s,    language_c::parse("zh-yue-jyutping"s).to_canonical_form().format());
+  EXPECT_EQ("zh-MM"s,           language_c::parse("zh-BU"s).to_canonical_form().format());
+  EXPECT_EQ("cmn-MM"s,          language_c::parse("zh-cmn-BU"s).to_canonical_form().format());
 }
 
 }
