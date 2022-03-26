@@ -50,6 +50,8 @@ def create_iso15924_script_list_file
         entry[:description],
       ]
     end
+
+    entry_map[idx] << entry.key?(:deprecated)
   end
 
   rows = entries.
@@ -57,6 +59,7 @@ def create_iso15924_script_list_file
       entry[0].to_cpp_string,
       sprintf('%03s', entry[1]),
       entry[2].to_u8_cpp_string,
+      (entry[3] || false).to_s,
     ] }
 
 

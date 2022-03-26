@@ -21,11 +21,13 @@ struct script_t {
   std::string const code;
   unsigned int number;
   std::string const english_name;
+  bool is_deprecated;
 
-  script_t(std::string &&p_code, unsigned int p_number, std::string &&p_english_name)
+  script_t(std::string &&p_code, unsigned int p_number, std::string &&p_english_name, bool p_is_deprecated)
     : code{std::move(p_code)}
     , number{p_number}
     , english_name{std::move(p_english_name)}
+    , is_deprecated{p_is_deprecated}
   {
   }
 };
