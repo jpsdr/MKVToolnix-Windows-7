@@ -67,6 +67,7 @@ module Mtx::IANALanguageSubtagRegistry
     [ entry[:subtag].downcase.to_cpp_string,
       entry[:description].to_u8_cpp_string,
       prefix,
+      entry.key?(:deprecated).to_s,
     ]
   end
 
@@ -82,6 +83,7 @@ module Mtx::IANALanguageSubtagRegistry
     [ entry[:tag].to_cpp_string,
       entry[:description].to_u8_cpp_string,
       'VS{}',
+      'true',
     ]
   end
 

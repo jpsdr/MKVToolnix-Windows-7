@@ -24,11 +24,13 @@ namespace mtx::iana::language_subtag_registry {
 struct entry_t {
   std::string const code, description;
   std::vector<std::string> const prefixes;
+  bool is_deprecated;
 
-  entry_t(std::string &&p_code, std::string &&p_description, std::vector<std::string> &&p_prefixes)
+  entry_t(std::string &&p_code, std::string &&p_description, std::vector<std::string> &&p_prefixes, bool p_is_deprecated)
     : code{std::move(p_code)}
     , description{std::move(p_description)}
     , prefixes{std::move(p_prefixes)}
+    , is_deprecated{p_is_deprecated}
   {
   }
 };
