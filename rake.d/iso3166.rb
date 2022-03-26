@@ -132,15 +132,17 @@ def create_iso3166_country_list_file
       idx    = code
     end
 
-    next if countries_regions.key?(idx)
+    if !countries_regions.key?(idx)
+      countries_regions[idx] = {
+        :number        => number,
+        :alpha_2_code  => code,
+        :alpha_3_code  => "",
+        :name          => entry[:description],
+        :official_name => "",
+      }
+    end
 
-    countries_regions[idx] = {
-      :number        => number,
-      :alpha_2_code  => code,
-      :alpha_3_code  => "",
-      :name          => entry[:description],
-      :official_name => "",
-    }
+    countries_regions[idx][:deprecated] = entry.key?(:deprecated)
   end
 
   rows = countries_regions.
@@ -153,6 +155,7 @@ def create_iso3166_country_list_file
       sprintf('%3d', entry[:number]),
       entry[:name].to_u8_cpp_string,
       entry[:official_name].to_u8_cpp_string,
+      (entry[:deprecated] || false).to_s,
     ]
   end
 

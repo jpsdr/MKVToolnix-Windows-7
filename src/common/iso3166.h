@@ -21,13 +21,15 @@ struct region_t {
   std::string const alpha_2_code, alpha_3_code;
   unsigned int number;
   std::string const name, official_name;
+  bool is_deprecated;
 
-  region_t(std::string &&p_alpha_2_code, std::string &&p_alpha_3_code, unsigned int p_number, std::string &&p_name, std::string &&p_official_name)
+  region_t(std::string &&p_alpha_2_code, std::string &&p_alpha_3_code, unsigned int p_number, std::string &&p_name, std::string &&p_official_name, bool p_is_deprecated)
     : alpha_2_code{std::move(p_alpha_2_code)}
     , alpha_3_code{std::move(p_alpha_3_code)}
     , number{p_number}
     , name{std::move(p_name)}
     , official_name{std::move(p_official_name)}
+    , is_deprecated{p_is_deprecated}
   {
   }
 };
