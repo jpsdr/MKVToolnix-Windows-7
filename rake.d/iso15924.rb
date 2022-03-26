@@ -1,7 +1,7 @@
 def create_iso15924_script_list_file
   content = Mtx::OnlineFile.download("https://unicode.org/iso15924/iso15924.txt")
 
-  rows = content.
+  entries = content.
     force_encoding("UTF-8").
     split(%r{\n+}).
     map(&:chomp).
@@ -10,18 +10,55 @@ def create_iso15924_script_list_file
     select { |line| %r{;.*;.*;}.match(line) }.
     map    { |line| line.split(';') }.
     map    { |line| [
-      (line[0][0..0].upcase + line[0][1..line[0].length].downcase).to_cpp_string,
-      sprintf('%03s', line[1].gsub(%r{^0}, '')),
-      line[2].to_u8_cpp_string,
+      line[0][0..0].upcase + line[0][1..line[0].length].downcase,
+      line[1].gsub(%r{^0}, '').to_i,
+      line[2],
     ] }
 
-  rows += (0..49).map do |idx|
-    [
-      sprintf('"Qa%s%s"s', ('a'.ord + (idx / 26)).chr, ('a'.ord + (idx % 26)).chr),
-      (900 + idx).to_s,
-      'u8"Reserved for private use"s',
+  (0..49).map do |idx|
+    entries << [
+      sprintf('Qa%s%s', ('a'.ord + (idx / 26)).chr, ('a'.ord + (idx % 26)).chr),
+      900 + idx,
+      'Reserved for private use',
     ]
   end
+
+  entry_map = Hash[ *
+    entries.map { |e| [ e[0], e ] }.flatten(1) +
+    entries.map { |e| [ e[1], e ] }.flatten(1)
+  ]
+
+  Mtx::IANALanguageSubtagRegistry.
+    fetch_registry["script"].
+    reject { |entry| %r{\.\.}.match(entry[:subtag]) }.
+    each do |entry|
+
+    if %r{^[0-9]+$}.match(entry[:subtag])
+      number = entry[:subtag].gsub(%r{^0+}, '').to_i
+      code   = ""
+      idx    = number
+    else
+      number = 0
+      code   = entry[:subtag]
+      idx    = code
+    end
+
+    if !entry_map.key?(idx)
+      entry_map[key] = [
+        code,
+        number,
+        entry[:description],
+      ]
+    end
+  end
+
+  rows = entries.
+    map { |entry| [
+      entry[0].to_cpp_string,
+      sprintf('%03s', entry[1]),
+      entry[2].to_u8_cpp_string,
+    ] }
+
 
   header = <<EOT
 /*
