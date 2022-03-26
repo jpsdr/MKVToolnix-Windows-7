@@ -464,6 +464,19 @@ TEST(BCP47LanguageTags, ToCanonicalForm) {
   EXPECT_EQ("cmn-MM"s,          language_c::parse("zh-cmn-BU"s).to_canonical_form().format());
 }
 
+TEST(BCP47LanguageTags, ToExtlangForm) {
+  // No changes as they're already normalized.
+  EXPECT_EQ("sgn"s, language_c::parse("sgn"s).to_extlang_form().format());
+
+  // No changes as even though they're listed as redundant, they don't have preferred values.
+  EXPECT_EQ("az-Arab"s, language_c::parse("az-Arab"s).to_extlang_form().format());
+
+  // For the following there are changes.
+  EXPECT_EQ("sgn-nsi"s,         language_c::parse("nsi"s).to_extlang_form().format());
+  EXPECT_EQ("jbo"s,             language_c::parse("jbo"s).to_extlang_form().format());
+  EXPECT_EQ("zh-yue-jyutping"s, language_c::parse("yue-jyutping"s).to_extlang_form().format());
+}
+
 TEST(BCP47LanguageTags, Cloning) {
   auto l  = language_c::parse("de-DE-1996");
   auto l2 = l.clone();

@@ -79,6 +79,7 @@ public:
   language_c find_best_match(std::vector<language_c> const &potential_matches) const noexcept;
 
   language_c &to_canonical_form();
+  language_c &to_extlang_form();
 
   language_c &set_valid(bool valid);
   language_c &set_language(std::string const &language);

@@ -858,6 +858,27 @@ language_c::to_canonical_form() {
   return canonicalize_preferred_values();
 }
 
+language_c &
+language_c::to_extlang_form() {
+  if (!m_valid)
+    return *this;
+
+  to_canonical_form();
+
+  if (m_language.empty())
+    return *this;
+
+  auto extlang = mtx::iana::language_subtag_registry::look_up_extlang(m_language);
+
+  if (!extlang || extlang->prefixes.empty())
+    return *this;
+
+  m_extended_language_subtags.insert(m_extended_language_subtags.begin(), m_language);
+  m_language = extlang->prefixes[0];
+
+  return *this;
+}
+
 void
 language_c::disable() {
   ms_disabled = true;
