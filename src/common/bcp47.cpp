@@ -842,11 +842,15 @@ language_c::canonicalize_preferred_values() {
        m_grandfathered = preferred.m_grandfathered;
   }
 
+  m_formatted_up_to_date = false;
+
   return *this;
 }
 
 language_c &
 language_c::to_canonical_form() {
+  m_formatted_up_to_date = false;
+
   return canonicalize_preferred_values();
 }
 
