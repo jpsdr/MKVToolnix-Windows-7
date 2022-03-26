@@ -23,6 +23,19 @@
   languages will now be used by default. Part of the implementation of #3307.
 * all: IETF BCP 47/RFC 5646 language tags: grandfathered language tags are now
   supported. Part of the implementation of #3307.
+* all: IETF BCP 47/RFC 5646 language tags: all deprecated subtags from the
+  IANA language subtag registry are now supported. Part of the implementation
+  of #3307.
+* all: IETF BCP 47/RFC 5646 language tags: all lists of valid subtags have
+  been updated from their respective authoritative sources. Part of the
+  implementation of #3307.
+* all: IETF BCP 47/RFC 5646 language tags: all in the IANA language subtag
+  registry are now supported, even those marked as deprecated and of type
+  'grandfathered'. Part of the implementation of #3307.
+* MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: the language editor
+  dialog will now show warnings in several cases: when deprecated tags are
+  used; when the tag's canonical and/or extlang forms differ from the user
+  input. Part of the implementation of #3307.
 
 ## Bug fixes
 
