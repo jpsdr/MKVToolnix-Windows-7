@@ -358,27 +358,76 @@ LanguageDialog::setupFreeFormAndComponentControls() {
     updateFromFreeForm();
 }
 
+QStringList
+LanguageDialog::determineWarningsFor(mtx::bcp47::language_c const &tag) {
+  if (!tag.is_valid())
+    return {};
+
+  QStringList warnings;
+
+  if (tag.has_valid_iso639_code() && !tag.has_valid_iso639_2_code() && (tag.get_closest_iso639_2_alpha_3_code() == "und"s))
+    warnings << QY("The selected language code '%1' is not an ISO 639-2 code. Players that only support the legacy Matroska language elements but not the IETF BCP 47 language elements will therefore display a different language such as 'und' (undetermined).").arg(Q(tag.get_language()));
+
+  if (!tag.get_language().empty()) {
+    auto language = mtx::iso639::look_up(tag.get_language());
+    if (language && language->is_deprecated)
+      warnings << QY("The language '%1' is deprecated.").arg(Q(tag.get_language()));
+  }
+
+  for (auto const &extlang_str : tag.get_extended_language_subtags()) {
+    auto extlang = mtx::iana::language_subtag_registry::look_up_extlang(extlang_str);
+    if (extlang && extlang->is_deprecated)
+      warnings << QY("The extended language subtag '%1' is deprecated.").arg(Q(extlang_str));
+  }
+
+  if (!tag.get_script().empty()) {
+    auto script = mtx::iso15924::look_up(tag.get_script());
+    if (script && script->is_deprecated)
+      warnings << QY("The script '%1' is deprecated.").arg(Q(tag.get_script()));
+  }
+
+  if (!tag.get_region().empty()) {
+    auto region = mtx::iso3166::look_up(tag.get_region());
+    if (region && region->is_deprecated)
+      warnings << QY("The region '%1' is deprecated.").arg(Q(tag.get_region()));
+  }
+
+  for (auto const &variant_str : tag.get_variants()) {
+    auto variant = mtx::iana::language_subtag_registry::look_up_variant(variant_str);
+    if (variant && variant->is_deprecated)
+      warnings << QY("The variant '%1' is deprecated.").arg(Q(variant_str));
+  }
+
+  if (!tag.get_grandfathered().empty())
+    warnings << QY("This language tag is a grandfathered element only supported for historical reasons.");
+
+  return warnings;
+}
+
 void
 LanguageDialog::setStatusFromLanguageTag(mtx::bcp47::language_c const &tag) {
   auto &p         = *p_func();
   auto statusText = tag.is_valid() ? QY("The language tag is valid.") : QY("The language tag is not valid.");
 
-  QStringList warnings;
+  QString warningsText;
+  auto warnings = determineWarningsFor(tag);
 
-  if (tag.has_valid_iso639_code() && !tag.has_valid_iso639_2_code() && (tag.get_closest_iso639_2_alpha_3_code() == "und"s))
-    warnings << QY("Warning: %1").arg(QY("The selected language code '%1' is not an ISO 639-2 code. Players that only support the legacy Matroska language elements but not the IETF BCP 47 language elements will therefore display a different language such as 'und' (undetermined).").arg(Q(tag.get_language())));
+  if (warnings.isEmpty())
+    warningsText = Q(u8"—");
 
-  if (!tag.get_grandfathered().empty())
-    warnings << QY("Warning: %1 %2").arg(QY("This language tag is a grandfathered element only supported for historical reasons.")).arg(QY("It should not be used when creating new files."));
+  else {
+    for (auto const &warning : warnings)
+      warningsText += Q("<li>%1</li>").arg(warning.toHtmlEscaped());
 
-  if (!warnings.isEmpty())
-    statusText += Q(" %1").arg(warnings.join(Q(" ")));
+    warningsText = Q("<ol style=\"margin-left:15px; -qt-list-indent: 0;\">%1</ol>").arg(warningsText);
+  }
 
   p.ui->lStatusOKIcon      ->setVisible( tag.is_valid() &&  warnings.isEmpty());
   p.ui->lStatusWarningsIcon->setVisible( tag.is_valid() && !warnings.isEmpty());
   p.ui->lStatusBadIcon     ->setVisible(!tag.is_valid());
   p.ui->lStatusText        ->setText(statusText);
-  p.ui->lParserError       ->setText(tag.is_valid() ? QY("No error was found.") : Q(tag.get_error()));
+  p.ui->lWarnings          ->setText(warningsText);
+  p.ui->lParserError       ->setText(tag.is_valid() ? Q(u8"—") : Q(tag.get_error()));
 }
 
 int

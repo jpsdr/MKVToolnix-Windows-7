@@ -91,6 +91,8 @@ protected:
   void removeRowItems(QString const &namePrefix);
   void createInitialComponentWidgetList();
   void createGridLayoutFromComponentWidgetList();
+
+  QStringList determineWarningsFor(mtx::bcp47::language_c const &tag);
 };
 
 }
