@@ -408,13 +408,13 @@ LanguageDialog::determineWarningsFor(mtx::bcp47::language_c const &tag) {
     return warnings;
 
   if (canonical_form == extlang_form)
-    warnings << QY("The canonical & extended language subtags forms are different: %1.").arg(Q(canonical_form.format()));
+    warnings << QY("The corresponding canonical & extended language subtags forms are: %1.").arg(Q(canonical_form.format()));
 
   else if (tag != canonical_form)
-    warnings << QY("The canonical form is different: %1.").arg(Q(canonical_form.format()));
+    warnings << QY("The corresponding canonical form is: %1.").arg(Q(canonical_form.format()));
 
   else
-    warnings << QY("The extended language subtags form is different: %1.").arg(Q(extlang_form.format()));
+    warnings << QY("The corresponding extended language subtags form: %1.").arg(Q(extlang_form.format()));
 
   return warnings;
 }
