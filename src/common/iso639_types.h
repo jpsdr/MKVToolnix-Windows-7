@@ -20,14 +20,15 @@ namespace mtx::iso639 {
 
 struct language_t {
   std::string const english_name, alpha_3_code, alpha_2_code, terminology_abbrev;
-  bool is_part_of_iso639_2{};
+  bool is_part_of_iso639_2{}, is_deprecated{};
 
-  language_t(std::string &&p_english_name, std::string &&p_alpha_3_code, std::string &&p_alpha_2_code, std::string &&p_terminology_abbrev, bool p_is_part_of_iso639_2)
+  language_t(std::string &&p_english_name, std::string &&p_alpha_3_code, std::string &&p_alpha_2_code, std::string &&p_terminology_abbrev, bool p_is_part_of_iso639_2, bool p_is_deprecated)
     : english_name{std::move(p_english_name)}
     , alpha_3_code{std::move(p_alpha_3_code)}
     , alpha_2_code{std::move(p_alpha_2_code)}
     , terminology_abbrev{std::move(p_terminology_abbrev)}
     , is_part_of_iso639_2{p_is_part_of_iso639_2}
+    , is_deprecated{p_is_deprecated}
   {
   }
 };

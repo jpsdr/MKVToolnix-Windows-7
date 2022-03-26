@@ -122,6 +122,8 @@ def create_iso639_language_list_file
         "has_639_2"      => is_alpha_2,
       }
     end
+
+    entries_map[entry[:subtag]]["deprecated"] = entry.key?(:deprecated)
   end
 
   rows = entries_by_alpha_3.
@@ -133,6 +135,7 @@ def create_iso639_language_list_file
       (entry["alpha_2"] || '').to_cpp_string,
       entry["bibliographic"] ? entry["alpha_3"].to_cpp_string : '""s',
       entry["has_639_2"].to_s,
+      (entry["deprecated"] || false).to_s,
     ]
   end
 
