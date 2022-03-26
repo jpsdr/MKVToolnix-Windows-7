@@ -37,6 +37,23 @@
 
 namespace mtx::gui {
 
+namespace {
+
+QString
+formatRegionDescription(mtx::iso3166::region_t const &region) {
+  QStringList parts;
+
+  if (!region.alpha_2_code.empty())
+    parts << Q(region.alpha_2_code).toLower();
+
+  if (region.number != 0)
+    parts << Q(fmt::format("{0:03}", region.number));
+
+  return Q("%1 (%2)").arg(Q(region.name)).arg(parts.join(Q("; ")));
+}
+
+} // anonymous namespace
+
 static Iso639LanguageList s_iso639Languages, s_iso639_2Languages, s_commonIso639Languages;
 static RegionList s_regions, s_commonRegions;
 static CharacterSetList s_characterSets, s_commonCharacterSets;
@@ -268,11 +285,9 @@ App::initializeRegions() {
   s_commonRegions.reserve(mtx::iso3166::g_regions.size());
 
   for (auto const &region : mtx::iso3166::g_regions) {
-    auto number       = Q(fmt::format("{0:03}", region.number));
-    auto countryCode  = !region.alpha_2_code.empty() ? Q(region.alpha_2_code).toLower()                              : number;
-    auto countryCodes = !region.alpha_2_code.empty() ? Q("%1; %2").arg(Q(region.alpha_2_code).toLower()).arg(number) : number;
-    auto description  = Q("%1 (%2)").arg(Q(region.name)).arg(countryCodes);
-    auto isCommon     = cfg.m_oftenUsedRegions.indexOf(countryCode) != -1;
+    auto countryCode = !region.alpha_2_code.empty() ? Q(region.alpha_2_code).toLower() : Q(fmt::format("{0:03}", region.number));
+    auto description = formatRegionDescription(region);
+    auto isCommon    = cfg.m_oftenUsedRegions.indexOf(countryCode) != -1;
 
     s_regions.emplace_back(description, countryCode);
     if (isCommon)

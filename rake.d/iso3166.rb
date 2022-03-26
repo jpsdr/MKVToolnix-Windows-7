@@ -39,13 +39,16 @@ def create_iso3166_country_list_file
       gsub(%r{ *\(.*?\)$}i,     '').
       gsub(%r{^The +},          '')
 
-    countries_regions[m49_code] = {
+    entry = {
       :number        => m49_code,
       :alpha_2_code  => row[3],
       :alpha_3_code  => row[4],
       :name          => name,
       :official_name => name == official_name ? "" : official_name,
     }
+
+    countries_regions[row[3]]   = entry
+    countries_regions[m49_code] = entry
   end
 
   # pp(countries_regions); exit 42
@@ -88,26 +91,25 @@ def create_iso3166_country_list_file
 
     %w{global region sub_region intermediate_region}.each { |type| maybe_add.call(row, type) }
 
-    code = row["m49_code"].to_i
-
-    countries_regions[code] ||= {
+    code  = row["m49_code"].to_i
+    entry = {
       :number        => code,
       :alpha_2_code  => row["iso_alpha2_code"],
       :alpha_3_code  => row["iso_alpha3_code"],
       :name          => row["country_or_area"],
       :official_name => "",
     }
+
+    countries_regions[code]                   ||= entry
+    countries_regions[row["iso_alpha2_code"]] ||= entry
   end
 
   user_assigned = [ 'AA', 'ZZ' ] \
     + ('M'..'Z').map { |letter| "Q#{letter}" } \
     + ('A'..'Z').map { |letter| "X#{letter}" }
 
-  entries  = countries_regions.values
-  entries +=
-    user_assigned.
-    map do |code|
-    {
+  user_assigned.each do |code|
+    countries_regions[code] = {
       :number        => 0,
       :alpha_2_code  => code,
       :alpha_3_code  => "",
@@ -116,7 +118,35 @@ def create_iso3166_country_list_file
     }
   end
 
-  rows = entries.
+  Mtx::IANALanguageSubtagRegistry.
+    fetch_registry["region"].
+    reject { |entry| %r{\.\.}.match(entry[:subtag]) }.
+    each do |entry|
+    if %r{^[0-9]+$}.match(entry[:subtag])
+      number = entry[:subtag].gsub(%r{^0+}, '').to_i
+      code   = ""
+      idx    = number
+    else
+      number = 0
+      code   = entry[:subtag]
+      idx    = code
+    end
+
+    next if countries_regions.key?(idx)
+
+    countries_regions[idx] = {
+      :number        => number,
+      :alpha_2_code  => code,
+      :alpha_3_code  => "",
+      :name          => entry[:description],
+      :official_name => "",
+    }
+  end
+
+  rows = countries_regions.
+    values.
+    uniq.
+    sort_by { |entry| [ entry[:alpha_2_code], entry[:alpha_3_code], entry[:number] ] }.
     map do |entry|
     [ entry[:alpha_2_code].upcase.to_cpp_string,
       entry[:alpha_3_code].upcase.to_cpp_string,

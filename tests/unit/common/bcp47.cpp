@@ -28,6 +28,11 @@ TEST(BCP47LanguageTags, ParsingValidUNM49) {
   EXPECT_EQ("es-419"s, language_c::parse("es-419").format());
 }
 
+TEST(BCP47LanguageTags, ParsingValidInRegistryButNotISOLists) {
+  EXPECT_TRUE(language_c::parse("en-003").is_valid());
+  EXPECT_TRUE(language_c::parse("en-BU").is_valid());
+}
+
 TEST(BCP47LanguageTags, ParsingInvalid) {
   EXPECT_FALSE(language_c::parse("zyx-Latn-CH-x-weeee").is_valid());  // invalid (zyx not ISO 639 code)
   EXPECT_FALSE(language_c::parse("ger-muku-CH-x-weeee").is_valid());  // invalid (muku not a script)
