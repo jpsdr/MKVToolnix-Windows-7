@@ -401,6 +401,21 @@ LanguageDialog::determineWarningsFor(mtx::bcp47::language_c const &tag) {
   if (!tag.get_grandfathered().empty())
     warnings << QY("This language tag is a grandfathered element only supported for historical reasons.");
 
+  auto canonical_form = tag.clone().to_canonical_form();
+  auto extlang_form   = tag.clone().to_extlang_form();
+
+  if ((tag == canonical_form) && (tag == extlang_form))
+    return warnings;
+
+  if (canonical_form == extlang_form)
+    warnings << QY("The canonical & extended language subtags forms are different: %1.").arg(Q(canonical_form.format()));
+
+  else if (tag != canonical_form)
+    warnings << QY("The canonical form is different: %1.").arg(Q(canonical_form.format()));
+
+  else
+    warnings << QY("The extended language subtags form is different: %1.").arg(Q(extlang_form.format()));
+
   return warnings;
 }
 
