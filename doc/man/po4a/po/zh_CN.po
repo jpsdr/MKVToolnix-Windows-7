@@ -847,7 +847,7 @@ msgstr "输出文件格式"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:559
 msgid "The decision about the output format is based on the track type, not on the extension used for the output file name. The following track types are supported at the moment:"
-msgstr "输出文件的格式取决于轨道的类型，而不是输出文件名的扩展名。目前支持以下轨道类型："
+msgstr "输出的格式取决于轨道的类型，而不是输出文件名的扩展名。目前支持以下轨道类型:"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:565
@@ -1508,7 +1508,7 @@ msgstr "mkvmerge"
 #. type: Content of: <refentry><refnamediv><refpurpose>
 #: doc/man/mkvmerge.xml:45
 msgid "Merge multimedia streams into a &matroska; file"
-msgstr "将多媒体流合并到 &matroska; 文件中"
+msgstr "将多媒体流合并为 &matroska; 文件"
 
 #. type: Content of: <refentry><refsynopsisdiv><cmdsynopsis>
 #: doc/man/mkvmerge.xml:51
@@ -1593,10 +1593,8 @@ msgstr "设置默认语言代码，用于没有使用 <link linkend=\"mkvmerge.d
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:133
-#, fuzzy
-#| msgid "The default language code is '<literal>und</literal>' for 'undefined'."
 msgid "The default language code is '<literal>und</literal>' for 'undetermined'."
-msgstr "默认的语言代码为「<literal>und</literal>」，即「undefined」（未定义）。"
+msgstr "默认的语言代码为「<literal>und</literal>」，即「undetermined」（未定）。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:140
@@ -2386,7 +2384,7 @@ msgstr "决定追加合并文件时如何计算时间戳。 参数 <parameter>�
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:939
 msgid "When mkvmerge appends a track (called '<literal>track2_1</literal>' from now on) from a second file (called '<literal>file2</literal>') to a track (called '<literal>track1_1</literal>') from the first file (called '<literal>file1</literal>')  then it has to offset all timestamps for '<literal>track2_1</literal>' by an amount.  For '<literal>file</literal>' mode this amount is the highest timestamp encountered in '<literal>file1</literal>' even if that timestamp was from a different track than '<literal>track1_1</literal>'. In track mode the offset is the highest timestamp of '<literal>track1_1</literal>'."
-msgstr "当 mkvmerge 将来自另一文件 (本段中假设为 '<literal>文件2</literal>') 的一条轨道 (假设为 '<literal>轨道2_1</literal>' ) 追加合并到首个文件 (假设为 '<literal>文件1</literal>')的一条轨道 (假设为 '<literal>轨道1_1</literal>') 时，它将为 '<literal>轨道2_1</literal>' 的所有时间戳设定一定量的延时。 对于 '<literal>file（文件）</literal>' 模式此延时量是 '<literal>文件1</literal>' 中遇到的最大时间戳，即使此时间戳不属于轨道 '<literal>轨道1_1</literal>'。而在 track （轨道模式）下此延时为 '<literal>轨道1_1</literal>' 的最大时间戳。"
+msgstr "当 mkvmerge 将第二个文件 (下称「<literal>文件2</literal>」) 中的一条轨道 (「<literal>轨道2_1</literal>」) 追加合并到第一个文件 (「<literal>文件1</literal>」) 的一条轨道 (「<literal>轨道1_1</literal>」) 时，它将为「<literal>轨道2_1</literal>」的所有时间戳设定一定量的延时。 对于「<literal>file</literal>」（文件）模式，此延时量是「<literal>文件1</literal>」中出现的最大时间戳，即使此时间戳不属于轨道「<literal>轨道1_1</literal>」。而在轨道（track）模式下，此延时为「<literal>轨道1_1</literal>」本身的最大时间戳。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:947
@@ -2406,7 +2404,7 @@ msgstr "<option>--append-to</option> <parameter>SFID1:STID1:DFID1:DTID1<optional
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:964
 msgid "This option controls to which track another track is appended.  Each spec contains four IDs: a file ID, a track ID, a second file ID and a second track ID.  The first pair, \"source file ID\" and \"source track ID\", identifies the track that is to be appended.  The second pair, \"destination file ID\" and \"destination track ID\", identifies the track the first one is appended to."
-msgstr "此选项控制要追加合并哪些轨道与哪些轨道。 各指令由四个 ID 组成: 输入文件 ID, 源轨道 ID, 目标文件 ID 和目标轨道 ID。 第一对，\"输入文件 ID\" 与 \"源轨道 ID\"确定要追加合并的轨道。 第二对，\"目标文件 ID\" 与 \"目标轨道 ID\"，确定源轨道要追加合并到的轨道。"
+msgstr "此选项控制将哪一条轨道追加合并到哪一条轨道。 每组指令由四个 ID 组成: 输入文件 ID 及轨道 ID、目标文件 ID 及目标轨道 ID。 第一对，「输入文件 ID」与「输入轨道 ID」确定正要执行追加合并操作的轨道。 第二对，「目标文件 ID」与「目标轨道 ID」，确定输入轨道即将追加合并到的目标轨道。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:970
@@ -2441,7 +2439,7 @@ msgstr "<option>[</option> <parameter>文件1</parameter> <parameter>文件2</pa
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:994
 msgid "If multiple file names are contained in a pair of square brackets then the second and all following files will be appended to the first file named within the brackets."
-msgstr "如果方括号内包含多个文件名，则从第二个文件开始的所有文件都将追加合并到第一个文件后面。"
+msgstr "如果方括号内包含多个文件名，则从第二个文件开始的所有文件都将追加合并到括号中第一个文件后面。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:998
@@ -3978,7 +3976,7 @@ msgstr "字节序标记 (BOM)"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2681
 msgid "Text files that start with a BOM are already encoded in one representation of UTF. &mkvmerge; supports the following five modes: UTF-8, UTF-16 Little and Big Endian, UTF-32 Little and Big Endian. Text files with a BOM are automatically converted to UTF-8. Any of the parameters that would otherwise set the character set for such a file (e.g. <link linkend=\"mkvmerge.description.sub_charset\"><option>--sub-charset</option></link>) is silently ignored."
-msgstr "以 BOM 开头的文本文件已经使用一种 UTF 模式编码。&mkvmerge; 支持以下五种模式: UTF-8、UTF-16 小端序 及 大端序、UTF-32 小端序 及 大端序。含 BOM 的文本文件将被自动转换为 UTF-8。对此类文件设定字符集的参数 (如 <link linkend=\"mkvmerge.description.sub_charset\"><option>--sub-charset</option></link>) 将被直接忽略，无通知。"
+msgstr "以 BOM 开头的文本文件已经使用 UTF 的某一种模式进行编码。&mkvmerge; 支持以下五种模式: UTF-8、UTF-16 小端序 (LE) 及大端序 (BE)、UTF-32 小端序 (LE) 及大端序 (BE)。含 BOM 的文本文件将被自动转换为 UTF-8。任何对此类文件指定字符集的参数 (如 <link linkend=\"mkvmerge.description.sub_charset\"><option>--sub-charset</option></link>) 将被直接忽略，且不输出提示信息。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2689
