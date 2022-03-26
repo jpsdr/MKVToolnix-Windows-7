@@ -91,6 +91,18 @@ TEST(BCP47LanguageTags, Formatting) {
   l.set_valid(true);
 
   EXPECT_EQ("ja-t-test-u-attr-co-phonebk-attr-zz-oooqqq"s, l.format());
+
+  l = language_c{};
+  l.set_language("ja");
+  l.add_extension({ "u"s, { "attr"s, "co"s, "phonebk"s, "attr"s, "zz"s, "oooqqq"s }});
+  l.add_extension({ "t"s, { "test"s }});
+  l.set_valid(true);
+
+  EXPECT_EQ("ja-u-attr-co-phonebk-attr-zz-oooqqq-t-test"s, l.format());
+
+  l.to_canonical_form();
+
+  EXPECT_EQ("ja-t-test-u-attr-co-phonebk-attr-zz-oooqqq"s, l.format());
 }
 
 TEST(BCP47LanguageTags, FormattingInvalidWithoutLanguage) {
@@ -319,7 +331,7 @@ TEST(BCP47LanguageTags, ExtensionsRFC6497) {
 
 TEST(BCP47LanguageTags, ExtensionsFormatting) {
   EXPECT_EQ("ja-t-test-u-attr-co-phonebk"s, language_c::parse("ja-T-Test-U-AttR-CO-phoNEbk").format());
-  EXPECT_EQ("ja-t-test-u-attr-co-phonebk"s, language_c::parse("ja-U-AttR-CO-phoNEbk-T-Test").format());
+  EXPECT_EQ("ja-u-attr-co-phonebk-t-test"s, language_c::parse("ja-U-AttR-CO-phoNEbk-T-Test").format());
 }
 
 TEST(BCP47LanguageTags, Matching) {

@@ -323,8 +323,6 @@ language_c::parse_extensions(std::string const &str) {
     else
       m_extensions.back().extensions.emplace_back(part);
 
-  std::sort(m_extensions.begin(), m_extensions.end());
-
   return validate_extensions();
 }
 
@@ -640,9 +638,7 @@ language_c::add_extension(extension_t const &extension) {
   for (auto const &extension_subtag : extension.extensions)
     extensions_lower.emplace_back(mtx::string::to_lower_ascii(extension_subtag));
 
-  auto cleaned_extension = extension_t{ mtx::string::to_lower_ascii(extension.identifier), extensions_lower };
-  m_extensions.insert(std::lower_bound(m_extensions.begin(), m_extensions.end(), cleaned_extension), cleaned_extension);
-
+  m_extensions.emplace_back(mtx::string::to_lower_ascii(extension.identifier), extensions_lower);
   m_formatted_up_to_date = false;
 
   return *this;
@@ -850,6 +846,8 @@ language_c::canonicalize_preferred_values() {
 language_c &
 language_c::to_canonical_form() {
   m_formatted_up_to_date = false;
+
+  std::sort(m_extensions.begin(), m_extensions.end());
 
   return canonicalize_preferred_values();
 }
