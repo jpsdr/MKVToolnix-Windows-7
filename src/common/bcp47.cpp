@@ -74,6 +74,12 @@ language_c::clear()
   *this = mtx::bcp47::language_c{};
 }
 
+language_c
+language_c::clone()
+  const noexcept {
+  return language_c{*this};
+}
+
 bool
 language_c::is_valid()
   const noexcept {

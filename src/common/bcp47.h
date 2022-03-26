@@ -55,6 +55,7 @@ protected:
 
 public:
   void clear() noexcept;
+  language_c clone() const noexcept;
 
   bool has_valid_iso639_code() const noexcept;
   bool has_valid_iso639_2_code() const noexcept;

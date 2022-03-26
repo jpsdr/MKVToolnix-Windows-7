@@ -464,4 +464,21 @@ TEST(BCP47LanguageTags, ToCanonicalForm) {
   EXPECT_EQ("cmn-MM"s,          language_c::parse("zh-cmn-BU"s).to_canonical_form().format());
 }
 
+TEST(BCP47LanguageTags, Cloning) {
+  auto l  = language_c::parse("de-DE-1996");
+  auto l2 = l.clone();
+
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_TRUE(l2.is_valid());
+  EXPECT_TRUE(l == l2);
+  EXPECT_TRUE(l.format() == l2.format());
+
+  l.set_region("CH");
+
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_TRUE(l2.is_valid());
+  EXPECT_FALSE(l == l2);
+  EXPECT_FALSE(l.format() == l2.format());
+}
+
 }
