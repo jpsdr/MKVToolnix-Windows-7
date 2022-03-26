@@ -7,6 +7,7 @@
 namespace {
 
 using namespace mtx::bcp47;
+using norm_e = mtx::bcp47::normalization_mode_e;
 
 TEST(BCP47LanguageTags, Construction) {
   EXPECT_FALSE(language_c{}.is_valid());
@@ -492,6 +493,39 @@ TEST(BCP47LanguageTags, Cloning) {
   EXPECT_TRUE(l2.is_valid());
   EXPECT_FALSE(l == l2);
   EXPECT_FALSE(l.format() == l2.format());
+}
+
+TEST(BCP47LanguageTags, NormalizationDuringParsing) {
+  EXPECT_EQ("nsi"s,             language_c::parse("nsi"s,                    norm_e::canonical).format());
+  EXPECT_EQ("jbo"s,             language_c::parse("jbo"s,                    norm_e::canonical).format());
+  EXPECT_EQ("yue-jyutping"s,    language_c::parse("yue-jyutping"s,           norm_e::canonical).format());
+
+  EXPECT_EQ("nsi"s,             language_c::parse("nsi"s,                    norm_e::none).format());
+  EXPECT_EQ("jbo"s,             language_c::parse("jbo"s,                    norm_e::none).format());
+  EXPECT_EQ("yue-jyutping"s,    language_c::parse("yue-jyutping"s,           norm_e::none).format());
+
+  EXPECT_EQ("sgn-nsi"s,         language_c::parse("nsi"s,                    norm_e::extlang).format());
+  EXPECT_EQ("jbo"s,             language_c::parse("jbo"s,                    norm_e::extlang).format());
+  EXPECT_EQ("zh-yue-jyutping"s, language_c::parse("yue-jyutping"s,           norm_e::extlang).format());
+
+  EXPECT_EQ("sgn-nsi"s,         language_c::parse("nsi"s,                    norm_e::extlang).format());
+  EXPECT_EQ("jbo"s,             language_c::parse("jbo"s,                    norm_e::extlang).format());
+  EXPECT_EQ("zh-yue-jyutping"s, language_c::parse("yue-jyutping"s,           norm_e::extlang).format());
+
+  EXPECT_EQ("nsi"s,             language_c::parse("sgn-nsi"s,                norm_e::canonical).format());
+  EXPECT_EQ("ja-Latn-alalc97"s, language_c::parse("ja-Latn-hepburn-heploc"s, norm_e::canonical).format());
+
+  EXPECT_EQ("nsi"s,             language_c::parse("nsi"s).format());
+  EXPECT_EQ("jbo"s,             language_c::parse("jbo"s).format());
+  EXPECT_EQ("yue-jyutping"s,    language_c::parse("yue-jyutping"s).format());
+
+  language_c::set_normalization_mode(norm_e::extlang);
+
+  EXPECT_EQ("sgn-nsi"s,         language_c::parse("nsi"s).format());
+  EXPECT_EQ("jbo"s,             language_c::parse("jbo"s).format());
+  EXPECT_EQ("zh-yue-jyutping"s, language_c::parse("yue-jyutping"s).format());
+
+  language_c::set_normalization_mode(norm_e::none);
 }
 
 }

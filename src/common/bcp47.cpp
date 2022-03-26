@@ -28,13 +28,14 @@
 
 namespace mtx::bcp47 {
 
+bool language_c::ms_disabled                           = false;
+normalization_mode_e language_c::ms_normalization_mode = normalization_mode_e::none;
+
 bool
 operator <(language_c::extension_t const &a,
            language_c::extension_t const &b) {
   return mtx::string::to_lower_ascii(a.identifier) < mtx::string::to_lower_ascii(b.identifier);
 }
-
-bool language_c::ms_disabled = false;
 
 language_c::extension_t::extension_t(std::string const &identifier_,
                                      std::vector<std::string> const &extensions_)
@@ -473,7 +474,8 @@ language_c::validate_extensions() {
 }
 
 language_c
-language_c::parse(std::string const &language) {
+language_c::parse(std::string const &language,
+                  normalization_mode_e normalization_mode) {
   init_re();
 
   language_c l;
@@ -483,7 +485,7 @@ language_c::parse(std::string const &language) {
   if (matches.hasMatch()) {
     l.m_grandfathered = language;
     l.m_valid         = true;
-    return l;
+    return l.normalize(normalization_mode);
   }
 
   matches = s_bcp47_re->match(Q(language_lower));
@@ -497,7 +499,7 @@ language_c::parse(std::string const &language) {
   if (matches.capturedLength(10)) {
     l.m_private_use = mtx::string::split(to_utf8(matches.captured(10)).substr(1), "-");
     l.m_valid       = true;
-    return l;
+    return l.normalize(normalization_mode);
   }
 
   if (matches.capturedLength(1) && !l.parse_language(to_utf8(matches.captured(1))))
@@ -536,7 +538,7 @@ language_c::parse(std::string const &language) {
 
   l.m_valid = true;
 
-  return l;
+  return l.normalize(normalization_mode);
 }
 
 std::string
@@ -850,6 +852,17 @@ language_c::canonicalize_preferred_values() {
 }
 
 language_c &
+language_c::normalize(normalization_mode_e normalization_mode) {
+  if (normalization_mode == normalization_mode_e::canonical)
+    return to_canonical_form();
+
+  if (normalization_mode == normalization_mode_e::extlang)
+    return to_extlang_form();
+
+  return *this;
+}
+
+language_c &
 language_c::to_canonical_form() {
   m_formatted_up_to_date = false;
 
@@ -887,6 +900,16 @@ language_c::disable() {
 bool
 language_c::is_disabled() {
   return ms_disabled;
+}
+
+void
+language_c::set_normalization_mode(normalization_mode_e normalization_mode) {
+  ms_normalization_mode = normalization_mode;
+}
+
+normalization_mode_e
+language_c::get_normalization_mode() {
+  return ms_normalization_mode;
 }
 
 } // namespace mtx::bcp47

@@ -17,6 +17,12 @@
 
 namespace mtx::bcp47 {
 
+enum class normalization_mode_e {
+  none,
+  canonical,
+  extlang,
+};
+
 class language_c {
 public:
   struct extension_t {
@@ -52,6 +58,7 @@ protected:
   mutable bool m_formatted_up_to_date{};
 
   static bool ms_disabled;
+  static normalization_mode_e ms_normalization_mode;
 
 public:
   void clear() noexcept;
@@ -78,6 +85,7 @@ public:
   bool matches(language_c const &match) const noexcept;
   language_c find_best_match(std::vector<language_c> const &potential_matches) const noexcept;
 
+  language_c &normalize(normalization_mode_e normalization_mode);
   language_c &to_canonical_form();
   language_c &to_extlang_form();
 
@@ -120,7 +128,10 @@ protected:
   language_c &canonicalize_preferred_values();
 
 public:
-  static language_c parse(std::string const &language);
+  static normalization_mode_e get_normalization_mode();
+  static void set_normalization_mode(normalization_mode_e normalization_mode);
+
+  static language_c parse(std::string const &language, normalization_mode_e normalization_mode = get_normalization_mode());
 
   static void disable();
   static bool is_disabled();
