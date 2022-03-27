@@ -215,6 +215,19 @@ propedit_cli_parser_c::disable_language_ietf() {
 }
 
 void
+propedit_cli_parser_c::set_language_ietf_normalization_mode() {
+  if (m_next_arg.empty())
+    mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), "--normalize-language-ietf"));
+
+  if ((m_next_arg != "canonical"s) && (m_next_arg != "extlang"s))
+    mxerror(fmt::format(Y("'{0}' is not a valid language normalization mode.\n"), m_next_arg));
+
+  auto mode = m_next_arg  == "canonical"s ? mtx::bcp47::normalization_mode_e::canonical : mtx::bcp47::normalization_mode_e::extlang;
+
+  mtx::bcp47::language_c::set_normalization_mode(mode);
+}
+
+void
 propedit_cli_parser_c::enable_legacy_font_mime_types() {
   g_use_legacy_font_mime_types = true;
 }
@@ -252,7 +265,8 @@ propedit_cli_parser_c::init_parser() {
   add_option("attachment-uid=<uid>",                              std::bind(&propedit_cli_parser_c::set_attachment_uid,         this), YT("Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"));
 
   add_section_header(YT("Other options"));
-  add_option("disable-language-ietf", std::bind(&propedit_cli_parser_c::disable_language_ietf, this), YT("Do not change LanguageIETF track header elements when the 'language' property is changed."));
+  add_option("disable-language-ietf",          std::bind(&propedit_cli_parser_c::disable_language_ietf,                this), YT("Do not change LanguageIETF track header elements when the 'language' property is changed."));
+  add_option("normalize-language-ietf=<mode>", std::bind(&propedit_cli_parser_c::set_language_ietf_normalization_mode, this), YT("Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical') or their extended language subtags form (mode 'extlang')"));
   add_common_options();
 
   add_separator();
@@ -281,6 +295,8 @@ propedit_cli_parser_c::init_parser() {
   add_information(YT("3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."), 2);
 
   add_hook(mtx::cli::parser_c::ht_unknown_option, std::bind(&propedit_cli_parser_c::set_file_name, this));
+
+  set_to_parse_first("--normalize-language-ietf");
 }
 
 void
