@@ -211,12 +211,12 @@ LanguageDisplayWidget::updateToolTip() {
 
   content << Q("<b>%1:</b>").arg(QY("BCP 47 language tag details").toHtmlEscaped())
           << Q("<table>")
-          << Q("<tr><td>%1:</td><td>%2</td></tr>") .arg(QY("Language"))       .arg(language      .toHtmlEscaped())
-          << Q("<tr><td>%1:</td><td>%2</td></tr>") .arg(QY("Extended subtag")).arg(extendedSubtag.toHtmlEscaped())
-          << Q("<tr><td>%1:</td><td>%2</td></tr>") .arg(QY("Script"))         .arg(script        .toHtmlEscaped())
-          << Q("<tr><td>%1:</td><td>%2</td></tr>") .arg(QY("Region"))         .arg(region        .toHtmlEscaped())
-          << Q("<tr><td>%1:</td><td>%2</td></tr>") .arg(QY("Variants"))       .arg(variants      .toHtmlEscaped())
-          << Q("<tr><td>%1:</td><td>%2</td></tr>") .arg(QY("Private use"))    .arg(privateUses   .toHtmlEscaped())
+          << Q("<tr><td>%1:</td><td>%2</td></tr>").arg(QY("Language"))                .arg(language      .toHtmlEscaped())
+          << Q("<tr><td>%1:</td><td>%2</td></tr>").arg(QY("Extended language subtag")).arg(extendedSubtag.toHtmlEscaped())
+          << Q("<tr><td>%1:</td><td>%2</td></tr>").arg(QY("Script"))                  .arg(script        .toHtmlEscaped())
+          << Q("<tr><td>%1:</td><td>%2</td></tr>").arg(QY("Region"))                  .arg(region        .toHtmlEscaped())
+          << Q("<tr><td>%1:</td><td>%2</td></tr>").arg(QY("Variants"))                .arg(variants      .toHtmlEscaped())
+          << Q("<tr><td>%1:</td><td>%2</td></tr>").arg(QY("Private use"))             .arg(privateUses   .toHtmlEscaped())
           << Q("</table>");
 
   p.ui->lLanguage->setToolTip(content.join(QString{}));

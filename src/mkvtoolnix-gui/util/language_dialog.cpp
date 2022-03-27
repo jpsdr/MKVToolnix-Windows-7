@@ -178,8 +178,8 @@ LanguageDialog::retranslateUi() {
   p.replaceCanonicalAction->setText(QY("Replace with canonical form once"));
   p.replaceCanonicalAlwaysAction->setText(QY("Always automatically replace with canonical form"));
   p.extlangSectionAction->setText(QY("Extended language subtags form"));
-  p.replaceExtlangAction->setText(QY("Replace with extlang form once"));
-  p.replaceExtlangAlwaysAction->setText(QY("Always automatically replace with extlang form"));
+  p.replaceExtlangAction->setText(QY("Replace with extended language subtags form once"));
+  p.replaceExtlangAlwaysAction->setText(QY("Always automatically replace with extended language subtags form"));
 }
 
 void
