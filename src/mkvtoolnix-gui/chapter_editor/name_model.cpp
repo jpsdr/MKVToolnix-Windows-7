@@ -31,7 +31,7 @@ NameModel::retranslateUi() {
 
 QList<QStandardItem *>
 NameModel::newRowItems() {
-  return QList<QStandardItem *>{} << new QStandardItem{} << new QStandardItem{} << new QStandardItem{};
+  return QList<QStandardItem *>{} << new QStandardItem{} << new QStandardItem{};
 }
 
 KaxChapterDisplay *
