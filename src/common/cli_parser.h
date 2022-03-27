@@ -53,6 +53,7 @@ protected:
   std::map<std::string, option_t> m_option_map;
   std::vector<option_t> m_options;
   std::vector<std::string> m_args;
+  std::unordered_map<std::string, bool> m_parse_first;
 
   std::string m_current_arg, m_next_arg;
 
@@ -71,7 +72,10 @@ protected:
   void add_common_options();
 
   void parse_args();
+  void parse_args_pass(bool first_pass);
   void set_usage();
+  void set_to_parse_first(std::vector<std::string> const &names);
+  void set_to_parse_first(std::string const &name);
 
   void dummy_callback();
 

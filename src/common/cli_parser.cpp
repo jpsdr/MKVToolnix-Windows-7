@@ -95,6 +95,12 @@ parser_c::parse_args() {
 
   run_hooks(parser_c::ht_common_options_parsed);
 
+  parse_args_pass(true);
+  parse_args_pass(false);
+}
+
+void
+parser_c::parse_args_pass(bool first_pass) {
   for (auto sit = m_args.cbegin(), sit_end = m_args.cend(); sit != sit_end; sit++) {
     auto sit_next    = sit + 1;
     auto no_next_arg = sit_next == sit_end;
@@ -111,9 +117,11 @@ parser_c::parse_args() {
         ++sit;
       }
 
-      option.m_callback();
+      if (   ( first_pass &&  m_parse_first[m_current_arg])
+          || (!first_pass && !m_parse_first[m_current_arg]))
+        option.m_callback();
 
-    } else if (!run_hooks(parser_c::ht_unknown_option))
+    } else if (!first_pass && !run_hooks(parser_c::ht_unknown_option))
       mxerror(fmt::format(Y("Unknown option '{0}'.\n"), m_current_arg));
   }
 }
@@ -195,6 +203,17 @@ parser_c::set_usage() {
   mtx::cli::g_usage_text = "";
   for (auto &option : m_options)
     mtx::cli::g_usage_text += option.format_text();
+}
+
+void
+parser_c::set_to_parse_first(std::vector<std::string> const &names) {
+  for (auto const &name : names)
+    m_parse_first[name] = true;
+}
+
+void
+parser_c::set_to_parse_first(std::string const &name) {
+  m_parse_first[name] = true;
 }
 
 void
