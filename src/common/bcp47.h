@@ -39,11 +39,11 @@ public:
 
 protected:
   struct prefix_restrictions_t {
-    bool language{}, extended_language_subtags{}, script{}, region{}, variants{};
+    bool language{}, extended_language_subtag{}, script{}, region{}, variants{};
   };
 
   std::string m_language;                               // shortest ISO 639 code or reserved or registered language subtag
-  std::vector<std::string> m_extended_language_subtags; // selected ISO 639 codes
+  std::string m_extended_language_subtag;               // selected ISO 639 codes
   std::string m_script;                                 // ISO 15924 code
   std::string m_region;                                 // either ISO 3166-1 code or UN M.49 code
   std::vector<std::string> m_variants;                  // registered variants
@@ -91,7 +91,7 @@ public:
 
   language_c &set_valid(bool valid);
   language_c &set_language(std::string const &language);
-  language_c &set_extended_language_subtags(std::vector<std::string> const &extended_language_subtags);
+  language_c &set_extended_language_subtag(std::string const &extended_language_subtag);
   language_c &set_script(std::string const &script);
   language_c &set_region(std::string const &region);
   language_c &set_variants(std::vector<std::string> const &variants);
@@ -102,7 +102,7 @@ public:
   language_c &add_extension(extension_t const &extensions);
 
   std::string const &get_language() const noexcept;
-  std::vector<std::string> const &get_extended_language_subtags() const noexcept;
+  std::string const &get_extended_language_subtag() const noexcept;
   std::string const &get_script() const noexcept;
   std::string const &get_region() const noexcept;
   std::vector<std::string> const &get_variants() const noexcept;
@@ -117,13 +117,13 @@ protected:
   bool parse_extensions(std::string const &str);
   bool parse_script(std::string const &code);
   bool parse_region(std::string const &code);
-  bool parse_extlangs_or_variants(std::string const &str, bool is_extlangs);
+  bool parse_extlang(std::string const &str);
+  bool parse_variants(std::string const &str);
 
   bool validate_extensions();
-  bool validate_extlangs();
+  bool validate_extlang();
   bool validate_variants();
-  bool validate_one_extlang(std::size_t extlang_index);
-  bool matches_prefix(language_c const &prefix, std::size_t extlang_index, prefix_restrictions_t const &restrictions) const noexcept;
+  bool matches_prefix(language_c const &prefix, prefix_restrictions_t const &restrictions) const noexcept;
 
   language_c &canonicalize_preferred_values();
 

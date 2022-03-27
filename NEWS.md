@@ -49,6 +49,9 @@
   preferences to always normalize all language tags to their canonical or
   extlang forms. Can also be enabled from the language editor dialog. Part of
   the implementation of #3307.
+* all: IETF BCP 47/RFC 5646 language tags: reduced the maximum number of
+  extended language subtags that are present in a valid tag from 3 to 1 in
+  compliance with RFC 5646 section 2.2.2. Part of the implementation of #3307.
 
 ## Bug fixes
 

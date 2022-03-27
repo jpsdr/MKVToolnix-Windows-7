@@ -110,7 +110,7 @@ LanguageDialog::LanguageDialog(QWidget *parent)
 
   p.ui->cbLanguage->setup(true);
   p.ui->cbRegion->setup(true);
-  setupExtendedSubtagsComboBox(*p.ui->cbExtendedSubtag1);
+  setupExtendedSubtagComboBox();
   setupScriptComboBox();
   setupVariantComboBox(*p.ui->cbVariant1);
 
@@ -134,13 +134,13 @@ void
 LanguageDialog::createInitialComponentWidgetList() {
   auto &p = *p_func();
 
-  p.componentWidgets.push_back({ p.ui->lLanguage,        p.ui->cbLanguage });
-  p.componentWidgets.push_back({ p.ui->lExtendedSubtags, p.ui->cbExtendedSubtag1, p.ui->pbAddExtendedSubtag });
-  p.componentWidgets.push_back({ p.ui->lScript,          p.ui->cbScript });
-  p.componentWidgets.push_back({ p.ui->lRegion,          p.ui->cbRegion });
-  p.componentWidgets.push_back({ p.ui->lVariants,        p.ui->cbVariant1,        p.ui->pbAddVariant });
-  p.componentWidgets.push_back({ p.ui->lExtensions,      p.ui->leExtension1,      p.ui->pbAddExtension });
-  p.componentWidgets.push_back({ p.ui->lPrivateUse,      p.ui->lePrivateUse1,     p.ui->pbAddPrivateUse });
+  p.componentWidgets.push_back({ p.ui->lLanguage,       p.ui->cbLanguage });
+  p.componentWidgets.push_back({ p.ui->lExtendedSubtag, p.ui->cbExtendedSubtag });
+  p.componentWidgets.push_back({ p.ui->lScript,         p.ui->cbScript });
+  p.componentWidgets.push_back({ p.ui->lRegion,         p.ui->cbRegion });
+  p.componentWidgets.push_back({ p.ui->lVariants,       p.ui->cbVariant1,    p.ui->pbAddVariant });
+  p.componentWidgets.push_back({ p.ui->lExtensions,     p.ui->leExtension1,  p.ui->pbAddExtension });
+  p.componentWidgets.push_back({ p.ui->lPrivateUse,     p.ui->lePrivateUse1, p.ui->pbAddPrivateUse });
 }
 
 void
@@ -342,7 +342,6 @@ LanguageDialog::setupConnections() {
   connect(p.ui->rbFreeForm,               &QRadioButton::clicked,              this,     &LanguageDialog::setupFreeFormAndComponentControls);
   connect(p.ui->rbComponentSelection,     &QRadioButton::clicked,              this,     &LanguageDialog::setupFreeFormAndComponentControls);
 
-  connect(p.ui->pbAddExtendedSubtag,      &QPushButton::clicked,               this,     &LanguageDialog::addExtendedSubtagRowAndUpdateLayout);
   connect(p.ui->pbAddVariant,             &QPushButton::clicked,               this,     &LanguageDialog::addVariantRowAndUpdateLayout);
   connect(p.ui->pbAddExtension,           &QPushButton::clicked,               this,     &LanguageDialog::addExtensionRowAndUpdateLayout);
   connect(p.ui->pbAddPrivateUse,          &QPushButton::clicked,               this,     &LanguageDialog::addPrivateUseRowAndUpdateLayout);
@@ -362,7 +361,9 @@ LanguageDialog::connectComponentWidgetChange(QWidget *widget) {
 }
 
 void
-LanguageDialog::setupExtendedSubtagsComboBox(QComboBox &comboBox) {
+LanguageDialog::setupExtendedSubtagComboBox() {
+  auto &comboBox = *p_func()->ui->cbExtendedSubtag;
+
   setupComboBoxFromList(comboBox, mtx::iana::language_subtag_registry::g_extlangs, [](auto const &subtag) {
     return std::make_pair(Q(subtag.description), Q(subtag.code));
   });
@@ -425,8 +426,6 @@ LanguageDialog::setupFreeFormAndComponentControls() {
     p.ui->cbLanguage->setFocus();
   }
 
-  maybeEnableAddExtendedSubtagButton();
-
   if (p.ui->rbFreeForm->isChecked())
     updateFromFreeForm();
 }
@@ -447,11 +446,9 @@ LanguageDialog::determineWarningsFor(mtx::bcp47::language_c const &tag) {
       warnings << QY("The language '%1' is deprecated.").arg(Q(tag.get_language()));
   }
 
-  for (auto const &extlang_str : tag.get_extended_language_subtags()) {
-    auto extlang = mtx::iana::language_subtag_registry::look_up_extlang(extlang_str);
-    if (extlang && extlang->is_deprecated)
-      warnings << QY("The extended language subtag '%1' is deprecated.").arg(Q(extlang_str));
-  }
+  auto extlang = mtx::iana::language_subtag_registry::look_up_extlang(tag.get_extended_language_subtag());
+  if (extlang && extlang->is_deprecated)
+    warnings << QY("The extended language subtag '%1' is deprecated.").arg(Q(tag.get_extended_language_subtag()));
 
   if (!tag.get_script().empty()) {
     auto script = mtx::iso15924::look_up(tag.get_script());
@@ -557,21 +554,7 @@ LanguageDialog::addRowItem(QString const &type,
 
   p.componentWidgets.insert(newRow, { nullptr, newWidget, newButton });
 
-  maybeEnableAddExtendedSubtagButton();
-
   return newWidget;
-}
-
-QWidget *
-LanguageDialog::addExtendedSubtagRow() {
-  return addRowItem(Q(s_cbExtendedSubtag), [this](int newIdx) {
-    auto comboBox = new QComboBox{p_func()->ui->sawComponents};
-    comboBox->setObjectName(Q("%1%2").arg(Q(s_cbExtendedSubtag)).arg(newIdx));
-
-    setupExtendedSubtagsComboBox(*comboBox);
-
-    return comboBox;
-  });
 }
 
 QWidget *
@@ -604,12 +587,6 @@ LanguageDialog::addPrivateUseRow() {
 
     return lineEdit;
   });
-}
-
-void
-LanguageDialog::addExtendedSubtagRowAndUpdateLayout() {
-  addExtendedSubtagRow();
-  createGridLayoutFromComponentWidgetList();
 }
 
 void
@@ -656,16 +633,6 @@ LanguageDialog::removeRowItems(QString const &namePrefix) {
 
     delete widget;
   }
-
-  maybeEnableAddExtendedSubtagButton();
-}
-
-void
-LanguageDialog::maybeEnableAddExtendedSubtagButton() {
-  auto &p = *p_func();
-
-  auto widgets = allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(Q(s_cbExtendedSubtag)) });
-  p.ui->pbAddExtendedSubtag->setEnabled(p.ui->rbComponentSelection->isChecked() && (widgets.size() < 3));
 }
 
 void
@@ -716,8 +683,10 @@ LanguageDialog::setMultipleWidgetsTexts(QString const &objectNamePrefix,
     auto widget = static_cast<QWidget *>(  isVariant    ? addVariantRow()
                                          : isExtension  ? addExtensionRow()
                                          : isPrivateUse ? addPrivateUseRow()
-                                         :                addExtendedSubtagRow());
-    setWidgetText(*widget, Q(values[idx]));
+                                         :                nullptr);
+
+    if (widget)
+      setWidgetText(*widget, Q(values[idx]));
   }
 
   createGridLayoutFromComponentWidgetList();
@@ -732,14 +701,14 @@ LanguageDialog::setComponentsFromLanguageTag(mtx::bcp47::language_c const &tag) 
 
   reinitializeLanguageComboBox();
 
-  setComboBoxTextByData(p.ui->cbLanguage, Q(tag.get_iso639_alpha_3_code()));
-  setComboBoxTextByData(p.ui->cbRegion,   Q(tag.get_region()).toLower());
-  setComboBoxTextByData(p.ui->cbScript,   Q(tag.get_script()));
+  setComboBoxTextByData(p.ui->cbLanguage,       Q(tag.get_iso639_alpha_3_code()));
+  setComboBoxTextByData(p.ui->cbExtendedSubtag, Q(tag.get_extended_language_subtag()));
+  setComboBoxTextByData(p.ui->cbRegion,         Q(tag.get_region()).toLower());
+  setComboBoxTextByData(p.ui->cbScript,         Q(tag.get_script()));
 
-  setMultipleWidgetsTexts(Q(s_cbExtendedSubtag), tag.get_extended_language_subtags());
-  setMultipleWidgetsTexts(Q(s_cbVariant),        tag.get_variants());
-  setMultipleWidgetsTexts(Q(s_leExtension),      partiallyFormatExtensions(tag));
-  setMultipleWidgetsTexts(Q(s_lePrivateUse),     tag.get_private_use());
+  setMultipleWidgetsTexts(Q(s_cbVariant),    tag.get_variants());
+  setMultipleWidgetsTexts(Q(s_leExtension),  partiallyFormatExtensions(tag));
+  setMultipleWidgetsTexts(Q(s_lePrivateUse), tag.get_private_use());
 }
 
 mtx::bcp47::language_c
@@ -747,21 +716,13 @@ LanguageDialog::languageTagFromComponents() {
   auto &p = *p_func();
 
   mtx::bcp47::language_c tag;
-  std::vector<std::string> strings;
 
   tag.set_language(to_utf8(p.ui->cbLanguage->currentData().toString()));
+  tag.set_extended_language_subtag(to_utf8(p.ui->cbExtendedSubtag->currentData().toString()));
   tag.set_script(to_utf8(p.ui->cbScript->currentData().toString()));
   tag.set_region(to_utf8(p.ui->cbRegion->currentData().toString()));
 
-  for (auto comboBox : allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(Q(s_cbExtendedSubtag)) })) {
-    auto code = dynamic_cast<QComboBox &>(*comboBox).currentData().toString();
-    if (!code.isEmpty())
-      strings.emplace_back(to_utf8(code));
-  }
-
-  tag.set_extended_language_subtags(strings);
-
-  strings.clear();
+  std::vector<std::string> strings;
 
   for (auto comboBox : allComponentWidgetsMatchingName(QRegularExpression{ Q("^%1").arg(Q(s_cbVariant)) })) {
     auto code = dynamic_cast<QComboBox &>(*comboBox).currentData().toString();

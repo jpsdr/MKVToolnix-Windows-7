@@ -145,8 +145,8 @@ language_c::get_error()
 std::string
 language_c::dump()
   const noexcept{
-  return fmt::format("[valid {0} language {1} extended_language_subtags {2} script {3} region {4} variants {5} extensions {6} private_use {7} grandfathered {8} parser_error {9}]",
-                     m_valid, m_language, m_extended_language_subtags, m_script, m_region, m_variants, m_extensions, m_private_use, m_grandfathered, m_parser_error);
+  return fmt::format("[valid {0} language {1} extended_language_subtag {2} script {3} region {4} variants {5} extensions {6} private_use {7} grandfathered {8} parser_error {9}]",
+                     m_valid, m_language, m_extended_language_subtag, m_script, m_region, m_variants, m_extensions, m_private_use, m_grandfathered, m_parser_error);
 }
 
 std::string
@@ -178,8 +178,8 @@ language_c::format_internal(bool force)
 
   auto output = mtx::string::to_lower_ascii(m_language);
 
-  for (auto const &subtag : m_extended_language_subtags)
-    output += fmt::format("-{}", mtx::string::to_lower_ascii(subtag));
+  if (!m_extended_language_subtag.empty())
+    output += fmt::format("-{}", mtx::string::to_lower_ascii(m_extended_language_subtag));
 
   if (!m_script.empty())
     output += fmt::format("-{}{}", mtx::string::to_upper_ascii(m_script.substr(0, 1)), mtx::string::to_lower_ascii(m_script.substr(1)));
@@ -294,25 +294,30 @@ language_c::parse_region(std::string const &code) {
 }
 
 bool
-language_c::parse_extlangs_or_variants(std::string const &str,
-                                       bool is_extlangs) {
-  auto const current_str = mtx::string::to_lower_ascii(format_internal(true));
+language_c::parse_extlang(std::string const &str) {
+  auto entry = mtx::iana::language_subtag_registry::look_up_extlang(str);
 
+  if (!entry) {
+    m_parser_error = fmt::format(Y("The value '{}' is not part of the IANA Language Subtag Registry for extended language subtags."), str);
+    return false;
+  }
+
+  m_extended_language_subtag = entry->code;
+
+  return true;
+}
+
+bool
+language_c::parse_variants(std::string const &str) {
   for (auto const &code : mtx::string::split(str.substr(1), "-")) {
-    auto entry = is_extlangs ? mtx::iana::language_subtag_registry::look_up_extlang(code)
-               :               mtx::iana::language_subtag_registry::look_up_variant(code);
+    auto entry = mtx::iana::language_subtag_registry::look_up_variant(code);
 
     if (!entry) {
-      auto message   = is_extlangs ? Y("The value '{}' is not part of the IANA Language Subtag Registry for extended language subtags.")
-                     :               Y("The value '{}' is not part of the IANA Language Subtag Registry for language variants.");
-      m_parser_error = fmt::format(message, code);
+      m_parser_error = fmt::format(Y("The value '{}' is not part of the IANA Language Subtag Registry for language variants."), code);
       return false;
     }
 
-    if (is_extlangs)
-      m_extended_language_subtags.push_back(entry->code);
-    else
-      m_variants.push_back(entry->code);
+    m_variants.push_back(entry->code);
   }
 
   return true;
@@ -335,17 +340,14 @@ language_c::parse_extensions(std::string const &str) {
 
 bool
 language_c::matches_prefix(language_c const &prefix,
-                           std::size_t extlang_index,
                            prefix_restrictions_t const &restrictions)
   const noexcept {
-  if (!m_extended_language_subtags.empty() && (extlang_index > (prefix.m_extended_language_subtags.size())))
-    return false;
 
-  if (   (restrictions.language                  && prefix.m_language                 .empty() && !m_language                 .empty())
-      || (restrictions.extended_language_subtags && prefix.m_extended_language_subtags.empty() && !m_extended_language_subtags.empty())
-      || (restrictions.script                    && prefix.m_script                   .empty() && !m_script                   .empty())
-      || (restrictions.region                    && prefix.m_region                   .empty() && !m_region                   .empty())
-      || (restrictions.variants                  && prefix.m_variants                 .empty() && !m_variants                 .empty()))
+  if (   (restrictions.language                 && prefix.m_language                .empty() && !m_language                .empty())
+      || (restrictions.extended_language_subtag && prefix.m_extended_language_subtag.empty() && !m_extended_language_subtag.empty())
+      || (restrictions.script                   && prefix.m_script                  .empty() && !m_script                  .empty())
+      || (restrictions.region                   && prefix.m_region                  .empty() && !m_region                  .empty())
+      || (restrictions.variants                 && prefix.m_variants                .empty() && !m_variants                .empty()))
     return false;
 
   std::vector<std::string> this_relevant_parts;
@@ -353,8 +355,8 @@ language_c::matches_prefix(language_c const &prefix,
   if (!prefix.m_language.empty())
     this_relevant_parts.emplace_back(m_language);
 
-  for (auto const &extlang : m_extended_language_subtags)
-    this_relevant_parts.emplace_back(extlang);
+  if (!prefix.m_extended_language_subtag.empty())
+    this_relevant_parts.emplace_back(m_extended_language_subtag);
 
   if (!prefix.m_script.empty())
     this_relevant_parts.emplace_back(m_script);
@@ -362,11 +364,11 @@ language_c::matches_prefix(language_c const &prefix,
   if (!prefix.m_region.empty())
     this_relevant_parts.emplace_back(m_region);
 
-  for (auto const &variant : m_variants)
-    this_relevant_parts.emplace_back(variant);
+  for (int idx = 0, num_variants = std::min<int>(prefix.m_variants.size(), m_variants.size()); idx < num_variants; ++idx)
+    this_relevant_parts.emplace_back(m_variants[idx]);
 
   auto this_relevant_formatted = mtx::string::join(this_relevant_parts, "-");
-  auto prefix_formatted        = prefix.format() + "-";
+  auto prefix_formatted        = prefix.format();
 
   if (this_relevant_formatted.size() < prefix_formatted.size())
     return false;
@@ -377,9 +379,11 @@ language_c::matches_prefix(language_c const &prefix,
 }
 
 bool
-language_c::validate_one_extlang(std::size_t extlang_index) {
-  auto const &extlang_code = m_extended_language_subtags[extlang_index];
-  auto extlang             = mtx::iana::language_subtag_registry::look_up_extlang(extlang_code);
+language_c::validate_extlang() {
+  if (m_extended_language_subtag.empty())
+    return true;
+
+  auto extlang = mtx::iana::language_subtag_registry::look_up_extlang(m_extended_language_subtag);
 
   if (!extlang)                 // Should not happen as the parsing checks this already.
     return false;
@@ -399,30 +403,21 @@ language_c::validate_one_extlang(std::size_t extlang_index) {
     parsed_prefixes.emplace_back(parse(prefix));
     auto const &tag = parsed_prefixes.back();
 
-    account(restrictions.language,                  tag.m_language.empty());
-    account(restrictions.extended_language_subtags, tag.m_extended_language_subtags.empty());
-    account(restrictions.script,                    tag.m_script.empty());
-    account(restrictions.region,                    tag.m_region.empty());
-    account(restrictions.variants,                  tag.m_variants.empty());
+    account(restrictions.language,                 tag.m_language.empty());
+    account(restrictions.extended_language_subtag, tag.m_extended_language_subtag.empty());
+    account(restrictions.script,                   tag.m_script.empty());
+    account(restrictions.region,                   tag.m_region.empty());
+    account(restrictions.variants,                 tag.m_variants.empty());
   }
 
   for (auto const &parsed_prefix : parsed_prefixes)
-    if (matches_prefix(parsed_prefix, extlang_index, restrictions))
+    if (matches_prefix(parsed_prefix, restrictions))
       return true;
 
   auto message   = Y("The extended language subtag '{}' must only be used with one of the following prefixes: {}.");
-  m_parser_error = fmt::format(message, extlang_code, fmt::join(extlang->prefixes, ", "));
+  m_parser_error = fmt::format(message, m_extended_language_subtag, fmt::join(extlang->prefixes, ", "));
 
   return false;
-}
-
-bool
-language_c::validate_extlangs() {
-  for (int idx = 0, num_entries = m_extended_language_subtags.size(); idx < num_entries; ++idx)
-    if (!validate_one_extlang(idx))
-      return false;
-
-  return true;
 }
 
 bool
@@ -505,7 +500,7 @@ language_c::parse(std::string const &language,
   if (matches.capturedLength(1) && !l.parse_language(to_utf8(matches.captured(1))))
     return l;
 
-  if (matches.capturedLength(2) && !l.parse_extlangs_or_variants(to_utf8(matches.captured(2)), true))
+  if (matches.capturedLength(2) && !l.parse_extlang(to_utf8(matches.captured(2))))
     return l;
 
   if (matches.capturedLength(3)) {
@@ -524,7 +519,7 @@ language_c::parse(std::string const &language,
   if (matches.capturedLength(6) && !l.parse_region(to_utf8(matches.captured(6))))
     return l;
 
-  if (matches.capturedLength(7) && !l.parse_extlangs_or_variants(to_utf8(matches.captured(7)), false))
+  if (matches.capturedLength(7) && !l.parse_variants(to_utf8(matches.captured(7))))
     return l;
 
   if (matches.capturedLength(8) && !l.parse_extensions(to_utf8(matches.captured(8))))
@@ -533,7 +528,7 @@ language_c::parse(std::string const &language,
   if (matches.capturedLength(9))
     l.m_private_use = mtx::string::split(to_utf8(matches.captured(9)).substr(1), "-");
 
-  if (!l.validate_extlangs() || !l.validate_variants())
+  if (!l.validate_extlang() || !l.validate_variants())
     return l;
 
   l.m_valid = true;
@@ -596,9 +591,9 @@ language_c::set_language(std::string const &language) {
 }
 
 language_c &
-language_c::set_extended_language_subtags(std::vector<std::string> const &extended_language_subtags) {
-  m_extended_language_subtags = mtx::string::to_lower_ascii(extended_language_subtags);
-  m_formatted_up_to_date      = false;
+language_c::set_extended_language_subtag(std::string const &extended_language_subtag) {
+  m_extended_language_subtag = mtx::string::to_lower_ascii(extended_language_subtag);
+  m_formatted_up_to_date     = false;
 
   return *this;
 }
@@ -674,10 +669,10 @@ language_c::get_language()
   return m_language;
 }
 
-std::vector<std::string> const &
-language_c::get_extended_language_subtags()
+std::string const &
+language_c::get_extended_language_subtag()
   const noexcept {
-  return m_extended_language_subtags;
+  return m_extended_language_subtag;
 }
 
 std::string const &
@@ -737,7 +732,7 @@ language_c::matches(language_c const &match)
   if (!match.m_language.empty() && (m_language != match.m_language))
     return false;
 
-  if (!match.m_extended_language_subtags.empty() && (m_extended_language_subtags != match.m_extended_language_subtags))
+  if (!match.m_extended_language_subtag.empty() && (m_extended_language_subtag != match.m_extended_language_subtag))
     return false;
 
   if (!match.m_script.empty() && (m_script != match.m_script))
@@ -799,8 +794,8 @@ language_c::canonicalize_preferred_values() {
        if (!match.m_language.empty())
          m_language.clear();
 
-       if (!match.m_extended_language_subtags.empty())
-         m_extended_language_subtags.clear();
+       if (!match.m_extended_language_subtag.empty())
+         m_extended_language_subtag.clear();
 
        if (!match.m_script.empty())
          m_script.clear();
@@ -824,8 +819,8 @@ language_c::canonicalize_preferred_values() {
      if (!preferred.m_language.empty())
        m_language = preferred.m_language;
 
-     if (!preferred.m_extended_language_subtags.empty())
-       m_extended_language_subtags = preferred.m_extended_language_subtags;
+     if (!preferred.m_extended_language_subtag.empty())
+       m_extended_language_subtag = preferred.m_extended_language_subtag;
 
      if (!preferred.m_script.empty())
        m_script = preferred.m_script;
@@ -886,8 +881,8 @@ language_c::to_extlang_form() {
   if (!extlang || extlang->prefixes.empty())
     return *this;
 
-  m_extended_language_subtags.insert(m_extended_language_subtags.begin(), m_language);
-  m_language = extlang->prefixes[0];
+  m_extended_language_subtag = m_language;
+  m_language                 = extlang->prefixes[0];
 
   return *this;
 }
