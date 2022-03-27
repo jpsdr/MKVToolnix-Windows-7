@@ -142,6 +142,10 @@ set_usage() {
                   "                           Do not write tags with track statistics.\n");
   usage_text += Y("  --disable-language-ietf  Do not write IETF BCP 47 language elements in\n"
                   "                           track headers, chapters and tags.\n");
+  usage_text += Y("  --normalize-language-ietf <canonical|extlang>\n"
+                  "                           Normalize all IETF BCP 47 language tags to either\n"
+                  "                           their canonical or their extended language subtags\n"
+                  "                           form (default: no normalization).\n");
   usage_text +=   "\n";
   usage_text += Y(" File splitting, linking, appending and concatenating (more global options):\n");
   usage_text += Y("  --split <d[K,M,G]|HH:MM:SS|s>\n"
@@ -2092,6 +2096,19 @@ parse_arg_probe_range(std::optional<std::string> next_arg) {
   generic_reader_c::set_probe_range_percentage(probe_range_percentage);
 }
 
+void
+parse_normalize_language_ietf(std::optional<std::string> const &next_arg) {
+  if (!next_arg || next_arg->empty())
+    mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), "--normalize-language-ietf"));
+
+  if ((*next_arg != "canonical"s) && (*next_arg != "extlang"s))
+    mxerror(fmt::format(Y("'{0}' is not a valid language normalization mode.\n"), *next_arg));
+
+  auto mode = *next_arg  == "canonical"s ? mtx::bcp47::normalization_mode_e::canonical : mtx::bcp47::normalization_mode_e::extlang;
+
+  mtx::bcp47::language_c::set_normalization_mode(mode);
+}
+
 static void
 handle_identification_args(std::vector<std::string> &args) {
   auto identification_command = std::optional<std::string>{};
@@ -2230,6 +2247,10 @@ parse_args(std::vector<std::string> args) {
     } else if (this_arg == "--disable-language-ietf") {
       mtx::bcp47::language_c::disable();
       num_handled = 1;
+
+    } else if (this_arg == "--normalize-language-ietf") {
+      parse_normalize_language_ietf(next_arg);
+      num_handled = 2;
 
     } else if (this_arg == "--enable-legacy-font-mime-types") {
       g_use_legacy_font_mime_types = true;
