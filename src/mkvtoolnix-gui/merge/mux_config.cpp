@@ -668,6 +668,9 @@ MuxConfig::buildMkvmergeOptions()
   if (Util::Settings::NormalPriority != settings.m_priority)
     options << Q("--priority") << settings.priorityAsString();
 
+  if (mtx::bcp47::normalization_mode_e::none != settings.m_bcp47NormalizationMode)
+    options << Q("--normalize-language-ietf") << (mtx::bcp47::normalization_mode_e::canonical == settings.m_bcp47NormalizationMode ? Q("canonical") : Q("extlang"));
+
   options << Q("--output") << Util::CommandLineOption::fileName(m_destination);
 
   if (m_webmMode)

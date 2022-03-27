@@ -91,7 +91,7 @@ ModifyTracksSubmenu::setupLanguage(QMenu &subMenu) {
   m_configureLanguages = new QAction{&subMenu};
   subMenu.addAction(m_configureLanguages);
 
-  connect(m_configureLanguages, &QAction::triggered, this, []() { MainWindow::get()->editPreferencesAndShowPage(PreferencesDialog::Page::LanguagesShortcuts); });
+  connect(m_configureLanguages, &QAction::triggered, this, []() { MainWindow::get()->editPreferencesAndShowPage(PreferencesDialog::Page::Languages); });
 
   retranslateUi();
 }

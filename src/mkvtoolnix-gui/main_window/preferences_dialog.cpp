@@ -67,6 +67,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupInterfaceLanguage();
   setupTabPositions();
   setupBCP47LanguageEditMode();
+  setupBCP47NormalizationMode();
   setupDerivingTrackLanguagesFromFileName();
   setupWhenToSetDefaultLanguage();
   setupLanguageShortcuts();
@@ -227,7 +228,7 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
 
   auto pGui      = addItem(Page::Gui,                 nullptr, QY("GUI"),              "mkvtoolnix-gui");
                    addItem(Page::OftenUsedSelections, pGui,    QY("Often used selections"));
-                   addItem(Page::LanguagesShortcuts,  pGui,    QY("Language shortcuts"));
+                   addItem(Page::Languages,           pGui,    QY("Languages"));
   auto pMerge    = addItem(Page::Merge,               nullptr, QY("Multiplexer"),      "merge");
                    addItem(Page::PredefinedValues,    pMerge,  QY("Predefined values"));
                    addItem(Page::DefaultValues,       pMerge,  QY("Default values"));
@@ -836,6 +837,18 @@ PreferencesDialog::setupBCP47LanguageEditMode() {
 }
 
 void
+PreferencesDialog::setupBCP47NormalizationMode() {
+  ui->cbGuiBCP47NormalizationMode->clear();
+  ui->cbGuiBCP47NormalizationMode->addItem(QY("no normalization"),               static_cast<int>(mtx::bcp47::normalization_mode_e::none));
+  ui->cbGuiBCP47NormalizationMode->addItem(QY("canonical form"),                 static_cast<int>(mtx::bcp47::normalization_mode_e::canonical));
+  ui->cbGuiBCP47NormalizationMode->addItem(QY("extended language subtags form"), static_cast<int>(mtx::bcp47::normalization_mode_e::extlang));
+
+  Util::setComboBoxIndexIf(ui->cbGuiBCP47NormalizationMode, [this](auto const &, auto const &data) {
+    return data.toInt() == static_cast<int>(m_cfg.m_bcp47NormalizationMode);
+  });
+}
+
+void
 PreferencesDialog::setupTabPositions() {
   ui->cbGuiTabPositions->clear();
   ui->cbGuiTabPositions->addItem(QY("Top"),    static_cast<int>(QTabWidget::North));
@@ -1030,6 +1043,7 @@ PreferencesDialog::save() {
   m_cfg.m_uiLocale                                            = ui->cbGuiInterfaceLanguage->currentData().toString();
   m_cfg.m_tabPosition                                         = static_cast<QTabWidget::TabPosition>(ui->cbGuiTabPositions->currentData().toInt());
   m_cfg.m_bcp47LanguageEditingMode                            = static_cast<Util::Settings::BCP47LanguageEditingMode>(ui->cbGuiBCP47LanguageEditingMode->currentData().toInt());
+  m_cfg.m_bcp47NormalizationMode                              = static_cast<mtx::bcp47::normalization_mode_e>(ui->cbGuiBCP47NormalizationMode->currentData().toInt());
   m_cfg.m_uiFontFamily                                        = ui->fcbGuiFontFamily->currentFont().family();
   m_cfg.m_uiFontPointSize                                     = ui->sbGuiFontPointSize->value();
   m_cfg.m_uiStayOnTop                                         = ui->cbGuiStayOnTop->isChecked();

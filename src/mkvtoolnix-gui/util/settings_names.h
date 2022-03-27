@@ -23,6 +23,7 @@ char const * const s_valAutoClearOutputFileName                   = "autoClearOu
 char const * const s_valAutoDestinationOnlyForVideoFiles          = "autoDestinationOnlyForVideoFiles";
 char const * const s_valAutoSetFileTitle                          = "autoSetFileTitle";
 char const * const s_valBCP47LanguageEditingMode                  = "bcp47LanguageEditingMode";
+char const * const s_valBCP47NormalizationMode                    = "bcp47NormalizationMode";
 char const * const s_valBoundaryChars                             = "boundaryChars";
 char const * const s_valCeTextFileCharacterSet                    = "ceTextFileCharacterSet";
 char const * const s_valChapterNameTemplate                       = "chapterNameTemplate";

@@ -54,16 +54,25 @@ public Q_SLOTS:
   void removeRowForClickedButton();
 
   void maybeEnableAddExtendedSubtagButton();
+  void enableNormalizeActions(mtx::bcp47::language_c const &currentLanguage);
+
+  void replaceWithCanonicalForm(bool always);
+  void replaceWithExtlangForm(bool always);
 
   void saveDialogGeometry();
+
+  virtual int exec() override;
 
 Q_SIGNALS:
   void tagValidityChanged(bool isValid);
 
 protected:
   void setupConnections();
+  void setupReplaceNormalizedMenu();
   void setupFreeFormAndComponentControls();
   void connectComponentWidgetChange(QWidget *widget);
+  void decorateReplaceMenuEntries();
+  void changeNormalizationMode(mtx::bcp47::normalization_mode_e mode);
 
   void setupExtendedSubtagsComboBox(QComboBox &comboBox);
   void setupScriptComboBox();

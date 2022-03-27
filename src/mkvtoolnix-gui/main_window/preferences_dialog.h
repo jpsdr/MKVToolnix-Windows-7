@@ -24,7 +24,7 @@ public:
   enum class Page {
     Gui,
     OftenUsedSelections,
-    LanguagesShortcuts,
+    Languages,
     Merge,
     PredefinedValues,
     DefaultValues,
@@ -102,6 +102,7 @@ protected:
   void setupConnections();
 
   void setupBCP47LanguageEditMode();
+  void setupBCP47NormalizationMode();
   void setupInterfaceLanguage();
   void setupTabPositions();
   void setupDerivingTrackLanguagesFromFileName();

@@ -234,6 +234,7 @@ public:
   RunProgramConfigList m_runProgramConfigurations;
 
   BCP47LanguageEditingMode m_bcp47LanguageEditingMode;
+  mtx::bcp47::normalization_mode_e m_bcp47NormalizationMode;
 
   bool m_showDebuggingMenu;
 

@@ -1,9 +1,11 @@
 #include "common/common_pch.h"
 
 #include <QAbstractItemView>
+#include <QAction>
 #include <QComboBox>
 #include <QDialogButtonBox>
 #include <QLineEdit>
+#include <QMenu>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QRegularExpression>
@@ -79,6 +81,10 @@ class LanguageDialogPrivate {
   QString initialISO639Code;
   QStringList additionalISO639Codes;
   QSet<QString> previousAllAdditionalISO639Codes;
+
+  QMenu *replaceNormalizedMenu{};
+  QAction *canonicalSectionAction{}, *replaceCanonicalAction{}, *replaceCanonicalAlwaysAction{};
+  QAction *extlangSectionAction{}, *replaceExtlangAction{}, *replaceExtlangAlwaysAction{};
 };
 
 LanguageDialog::LanguageDialog(QWidget *parent)
@@ -88,6 +94,8 @@ LanguageDialog::LanguageDialog(QWidget *parent)
   auto &p = *p_ptr;
 
   p.ui->setupUi(this);
+
+  setupReplaceNormalizedMenu();
 
   if (Settings::get().m_bcp47LanguageEditingMode == Settings::BCP47LanguageEditingMode::FreeForm)
     p.ui->rbFreeForm->setChecked(true);
@@ -108,6 +116,8 @@ LanguageDialog::LanguageDialog(QWidget *parent)
 
   setupConnections();
   setupFreeFormAndComponentControls();
+
+  retranslateUi();
 
   Util::restoreWidgetGeometry(this);
 }
@@ -160,7 +170,16 @@ LanguageDialog::createGridLayoutFromComponentWidgetList() {
 
 void
 LanguageDialog::retranslateUi() {
-  p_func()->ui->retranslateUi(this);
+  auto &p = *p_func();
+
+  p.ui->retranslateUi(this);
+
+  p.canonicalSectionAction->setText(QY("Canonical form"));
+  p.replaceCanonicalAction->setText(QY("Replace with canonical form once"));
+  p.replaceCanonicalAlwaysAction->setText(QY("Always automatically replace with canonical form"));
+  p.extlangSectionAction->setText(QY("Extended language subtags form"));
+  p.replaceExtlangAction->setText(QY("Replace with extlang form once"));
+  p.replaceExtlangAlwaysAction->setText(QY("Always automatically replace with extlang form"));
 }
 
 void
@@ -168,7 +187,7 @@ LanguageDialog::reinitializeLanguageComboBox() {
   auto &p = *p_func();
 
   auto additionalItems = p.additionalISO639Codes;
-  auto tag             = mtx::bcp47::language_c::parse(to_utf8(p.ui->leFreeForm->text()));
+  auto tag             = mtx::bcp47::language_c::parse(to_utf8(p.ui->leFreeForm->text()), mtx::bcp47::normalization_mode_e::none);
 
   if (!p.initialISO639Code.isEmpty())
     additionalItems << p.initialISO639Code;
@@ -195,7 +214,7 @@ LanguageDialog::setAdditionalLanguages(QStringList const &additionalLanguages) {
   p.additionalISO639Codes.clear();
 
   for (auto const &language : additionalLanguages) {
-    auto parsedLanguage = mtx::bcp47::language_c::parse(to_utf8(language));
+    auto parsedLanguage = mtx::bcp47::language_c::parse(to_utf8(language), mtx::bcp47::normalization_mode_e::none);
 
     if (parsedLanguage.is_valid() && parsedLanguage.has_valid_iso639_code())
       p.additionalISO639Codes << Q(parsedLanguage.get_iso639_alpha_3_code());
@@ -222,7 +241,7 @@ LanguageDialog::setLanguage(mtx::bcp47::language_c const &language) {
 mtx::bcp47::language_c
 LanguageDialog::language()
   const {
-  return mtx::bcp47::language_c::parse(to_utf8(p_func()->ui->leFreeForm->text()));
+  return mtx::bcp47::language_c::parse(to_utf8(p_func()->ui->leFreeForm->text()), mtx::bcp47::normalization_mode_e::none);
 }
 
 QVector<QWidget *>
@@ -262,22 +281,76 @@ LanguageDialog::allComponentWidgetsMatchingName(QRegularExpression const &matche
 }
 
 void
+LanguageDialog::setupReplaceNormalizedMenu() {
+  auto &p = *p_func();
+
+  p.replaceNormalizedMenu        = new QMenu;
+  p.canonicalSectionAction       = new QAction;
+  p.replaceCanonicalAction       = new QAction;
+  p.replaceCanonicalAlwaysAction = new QAction;
+  p.extlangSectionAction         = new QAction;
+  p.replaceExtlangAction         = new QAction;
+  p.replaceExtlangAlwaysAction   = new QAction;
+
+  p.canonicalSectionAction      ->setSeparator(true);
+  p.extlangSectionAction        ->setSeparator(true);
+  p.replaceCanonicalAlwaysAction->setCheckable(true);
+  p.replaceExtlangAlwaysAction  ->setCheckable(true);
+
+  p.replaceNormalizedMenu->addAction(p.canonicalSectionAction);
+  p.replaceNormalizedMenu->addAction(p.replaceCanonicalAction);
+  p.replaceNormalizedMenu->addAction(p.replaceCanonicalAlwaysAction);
+  p.replaceNormalizedMenu->addAction(p.extlangSectionAction);
+  p.replaceNormalizedMenu->addAction(p.replaceExtlangAction);
+  p.replaceNormalizedMenu->addAction(p.replaceExtlangAlwaysAction);
+
+  p.ui->tbReplaceNormalized->setMenu(p.replaceNormalizedMenu);
+
+  decorateReplaceMenuEntries();
+}
+
+void
+LanguageDialog::decorateReplaceMenuEntries() {
+  auto &p        = *p_func();
+  auto &settings = Util::Settings::get();
+
+  p.replaceCanonicalAlwaysAction->setChecked(settings.m_bcp47NormalizationMode == mtx::bcp47::normalization_mode_e::canonical);
+  p.replaceExtlangAlwaysAction  ->setChecked(settings.m_bcp47NormalizationMode == mtx::bcp47::normalization_mode_e::extlang);
+}
+
+void
+LanguageDialog::changeNormalizationMode(mtx::bcp47::normalization_mode_e mode) {
+  auto &settings = Util::Settings::get();
+  settings.m_bcp47NormalizationMode = mode;
+  settings.save();
+
+  mtx::bcp47::language_c::set_normalization_mode(mode);
+
+  decorateReplaceMenuEntries();
+}
+
+void
 LanguageDialog::setupConnections() {
   auto &p       = *p_func();
-  auto okButton = p.ui->buttonBox->button(QDialogButtonBox::Ok);
+  auto okButton = p.ui->bbOkCancel->button(QDialogButtonBox::Ok);
 
-  connect(this,                       &LanguageDialog::tagValidityChanged, okButton, &QPushButton::setEnabled);
-  connect(p.ui->buttonBox,            &QDialogButtonBox::accepted,         this,     &QDialog::accept);
-  connect(p.ui->buttonBox,            &QDialogButtonBox::rejected,         this,     &QDialog::reject);
-  connect(this,                       &QDialog::finished,                  this,     &LanguageDialog::saveDialogGeometry);
+  connect(this,                           &LanguageDialog::tagValidityChanged, okButton, &QPushButton::setEnabled);
+  connect(p.ui->bbOkCancel,               &QDialogButtonBox::accepted,         this,     &QDialog::accept);
+  connect(p.ui->bbOkCancel,               &QDialogButtonBox::rejected,         this,     &QDialog::reject);
+  connect(this,                           &QDialog::finished,                  this,     &LanguageDialog::saveDialogGeometry);
 
-  connect(p.ui->rbFreeForm,           &QRadioButton::clicked,              this,     &LanguageDialog::setupFreeFormAndComponentControls);
-  connect(p.ui->rbComponentSelection, &QRadioButton::clicked,              this,     &LanguageDialog::setupFreeFormAndComponentControls);
+  connect(p.ui->rbFreeForm,               &QRadioButton::clicked,              this,     &LanguageDialog::setupFreeFormAndComponentControls);
+  connect(p.ui->rbComponentSelection,     &QRadioButton::clicked,              this,     &LanguageDialog::setupFreeFormAndComponentControls);
 
-  connect(p.ui->pbAddExtendedSubtag,  &QPushButton::clicked,               this,     &LanguageDialog::addExtendedSubtagRowAndUpdateLayout);
-  connect(p.ui->pbAddVariant,         &QPushButton::clicked,               this,     &LanguageDialog::addVariantRowAndUpdateLayout);
-  connect(p.ui->pbAddExtension,       &QPushButton::clicked,               this,     &LanguageDialog::addExtensionRowAndUpdateLayout);
-  connect(p.ui->pbAddPrivateUse,      &QPushButton::clicked,               this,     &LanguageDialog::addPrivateUseRowAndUpdateLayout);
+  connect(p.ui->pbAddExtendedSubtag,      &QPushButton::clicked,               this,     &LanguageDialog::addExtendedSubtagRowAndUpdateLayout);
+  connect(p.ui->pbAddVariant,             &QPushButton::clicked,               this,     &LanguageDialog::addVariantRowAndUpdateLayout);
+  connect(p.ui->pbAddExtension,           &QPushButton::clicked,               this,     &LanguageDialog::addExtensionRowAndUpdateLayout);
+  connect(p.ui->pbAddPrivateUse,          &QPushButton::clicked,               this,     &LanguageDialog::addPrivateUseRowAndUpdateLayout);
+
+  connect(p.replaceCanonicalAction,       &QAction::triggered,                 [this]() { replaceWithCanonicalForm(false); });
+  connect(p.replaceCanonicalAlwaysAction, &QAction::triggered,                 [this]() { replaceWithCanonicalForm(true);  });
+  connect(p.replaceExtlangAction,         &QAction::triggered,                 [this]() { replaceWithExtlangForm(false);   });
+  connect(p.replaceExtlangAlwaysAction,   &QAction::triggered,                 [this]() { replaceWithExtlangForm(true);    });
 }
 
 void
@@ -596,6 +669,22 @@ LanguageDialog::maybeEnableAddExtendedSubtagButton() {
 }
 
 void
+LanguageDialog::enableNormalizeActions(mtx::bcp47::language_c const &currentLanguage) {
+  auto &p              = *p_func();
+  auto enableCanonical = currentLanguage.is_valid() && (currentLanguage != currentLanguage.clone().to_canonical_form());
+  auto enableExtlang   = currentLanguage.is_valid() && (currentLanguage != currentLanguage.clone().to_extlang_form());
+
+  p.canonicalSectionAction      ->setEnabled(enableCanonical);
+  p.replaceCanonicalAction      ->setEnabled(enableCanonical);
+  p.replaceCanonicalAlwaysAction->setEnabled(enableCanonical);
+  p.extlangSectionAction        ->setEnabled(enableExtlang);
+  p.replaceExtlangAction        ->setEnabled(enableExtlang);
+  p.replaceExtlangAlwaysAction  ->setEnabled(enableExtlang);
+
+  p.ui->tbReplaceNormalized     ->setEnabled(enableCanonical || enableExtlang);
+}
+
+void
 LanguageDialog::setWidgetText(QWidget &widget,
                               QString const &text) {
   if (dynamic_cast<QComboBox *>(&widget))
@@ -691,7 +780,7 @@ LanguageDialog::languageTagFromComponents() {
   }
 
   if (!strings.empty()) {
-    auto dummyTag = mtx::bcp47::language_c::parse(fmt::format("de-{0}", mtx::string::join(strings, "-")));
+    auto dummyTag = mtx::bcp47::language_c::parse(fmt::format("de-{0}", mtx::string::join(strings, "-")), mtx::bcp47::normalization_mode_e::none);
     tag.set_extensions(dummyTag.get_extensions());
 
   } else
@@ -713,11 +802,12 @@ LanguageDialog::languageTagFromComponents() {
 void
 LanguageDialog::updateFromFreeForm() {
   auto &p  = *p_func();
-  auto tag = mtx::bcp47::language_c::parse(to_utf8(p.ui->leFreeForm->text()));
+  auto tag = mtx::bcp47::language_c::parse(to_utf8(p.ui->leFreeForm->text()), mtx::bcp47::normalization_mode_e::none);
 
   setComponentsFromLanguageTag(tag);
 
   setStatusFromLanguageTag(tag);
+  enableNormalizeActions(tag);
 
   Q_EMIT tagValidityChanged(tag.is_valid());
 }
@@ -727,14 +817,70 @@ LanguageDialog::updateFromComponents() {
   auto &p = *p_func();
 
   auto tag         = languageTagFromComponents();
-  auto verifiedTag = mtx::bcp47::language_c::parse(tag.format(true));
+  auto verifiedTag = mtx::bcp47::language_c::parse(tag.format(true), mtx::bcp47::normalization_mode_e::none);
 
   if (verifiedTag.is_valid())
     p.ui->leFreeForm->setText(Q(verifiedTag.format()));
 
   setStatusFromLanguageTag(verifiedTag);
+  enableNormalizeActions(verifiedTag);
 
   Q_EMIT tagValidityChanged(verifiedTag.is_valid());
+}
+
+void
+LanguageDialog::replaceWithCanonicalForm(bool always) {
+  auto currentLanguage = language();
+
+  if (!currentLanguage.is_valid())
+    return;
+
+  auto canonicalForm = currentLanguage.clone().to_canonical_form();
+
+  if (currentLanguage != canonicalForm)
+    setLanguage(canonicalForm);
+
+  if (always)
+    changeNormalizationMode(mtx::bcp47::normalization_mode_e::canonical);
+}
+
+void
+LanguageDialog::replaceWithExtlangForm(bool always) {
+  auto currentLanguage = language();
+
+  if (!currentLanguage.is_valid())
+    return;
+
+  auto extlangForm = currentLanguage.clone().to_extlang_form();
+
+  if (currentLanguage != extlangForm)
+    setLanguage(extlangForm);
+
+  if (always)
+    changeNormalizationMode(mtx::bcp47::normalization_mode_e::extlang);
+}
+
+int
+LanguageDialog::exec() {
+  auto &settings = Util::Settings::get();
+
+  if (settings.m_bcp47NormalizationMode != mtx::bcp47::normalization_mode_e::none) {
+    auto current = language();
+
+    if (auto normalized = current.clone().normalize(settings.m_bcp47NormalizationMode); current.is_valid() && (current != normalized))
+      setLanguage(normalized);
+  }
+
+  auto result = QDialog::exec();
+
+  if (result) {
+    auto current = language();
+
+    if (auto normalized = current.clone().normalize(settings.m_bcp47NormalizationMode); current.is_valid() && (current != normalized))
+      setLanguage(normalized);
+  }
+
+  return result;
 }
 
 }

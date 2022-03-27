@@ -98,6 +98,8 @@ App::App(int &argc,
   Util::Settings::migrateFromRegistry();
   Util::Settings::get().load();
 
+  mtx::bcp47::language_c::set_normalization_mode(Util::Settings::get().m_bcp47NormalizationMode);
+
   setupInstanceCommunicator();
   setupNetworkAccessManager();
 

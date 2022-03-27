@@ -329,13 +329,6 @@
              </widget>
             </item>
             <item>
-             <widget class="QCheckBox" name="cbUseISO639_3Languages">
-              <property name="text">
-               <string>Enable language codes from &amp;ISO 639-3 &amp;&amp; 639-5</string>
-              </property>
-             </widget>
-            </item>
-            <item>
              <widget class="QCheckBox" name="cbOftenUsedLanguagesOnly">
               <property name="text">
                <string>&amp;Only include often used entries in selections</string>
@@ -390,8 +383,8 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="pGuiLanguageShortcuts">
-       <layout class="QVBoxLayout" name="verticalLayout_49">
+      <widget class="QWidget" name="pGuiLanguages">
+       <layout class="QVBoxLayout" name="verticalLayout_52">
         <property name="leftMargin">
          <number>0</number>
         </property>
@@ -404,6 +397,46 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
+        <item>
+         <widget class="QGroupBox" name="groupBox_27">
+          <property name="title">
+           <string>General options</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_49">
+           <item>
+            <layout class="QGridLayout" name="gridLayout_11">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_11">
+               <property name="text">
+                <string>IETF BCP 47 &amp;normalization mode:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbGuiBCP47NormalizationMode</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="cbGuiBCP47NormalizationMode">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbUseISO639_3Languages">
+             <property name="text">
+              <string>Enable language codes from &amp;ISO 639-3 &amp;&amp; 639-5</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
         <item>
          <widget class="QGroupBox" name="groupBox_26">
           <property name="title">

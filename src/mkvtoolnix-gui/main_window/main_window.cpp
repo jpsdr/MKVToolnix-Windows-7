@@ -519,6 +519,8 @@ MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
   if (dlg.uiLocaleChanged() || dlg.probeRangePercentageChanged())
     [[maybe_unused]] auto future = QtConcurrent::run(Util::FileIdentifier::cleanAllCacheFiles);
 
+  mtx::bcp47::language_c::set_normalization_mode(Util::Settings::get().m_bcp47NormalizationMode);
+
   Q_EMIT preferencesChanged();
 }
 

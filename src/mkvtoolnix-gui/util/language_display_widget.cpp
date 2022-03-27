@@ -98,7 +98,7 @@ LanguageDisplayWidget::clearLanguage() {
 
 void
 LanguageDisplayWidget::setLanguage(mtx::bcp47::language_c const &language) {
-  p_func()->language = language;
+  p_func()->language = language.clone().normalize(Util::Settings::get().m_bcp47NormalizationMode);
 
   updateDisplay();
 }
