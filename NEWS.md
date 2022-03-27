@@ -36,6 +36,11 @@
   dialog will now show warnings in several cases: when deprecated tags are
   used; when the tag's canonical and/or extlang forms differ from the user
   input. Part of the implementation of #3307.
+* mkvmerge, mkvpropedit: IETF BCP 47/RFC 5646 language tags: added a command
+  line option `--normalize-language-ietf <mode>` which turns on normalization
+  of IETF BCP 47 language tags to either their canonical (mode `canonical`) or
+  extended language subtags form (mode `extlang`) with no normalization
+  applied by default. Part of the implementation of #3307.
 
 ## Bug fixes
 

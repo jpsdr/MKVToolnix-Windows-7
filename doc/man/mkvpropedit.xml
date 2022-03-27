@@ -398,6 +398,60 @@
     </listitem>
    </varlistentry>
 
+   <varlistentry id="mkvpropedit.description.normalize_language_ietf">
+    <term><option>--normalize-language-ietf</option> <parameter>mode</parameter></term>
+    <listitem>
+     <para>
+      Enables normalizing all IETF BCP 47 language tags to either their canonical form with mode '<literal>canonical</literal>' or to their
+      extended language subtags form with mode '<literal>extlang</literal>'. By default no normalization is applied.
+     </para>
+
+     <para>
+      In the canonical form all subtags for which preferred values exist are replaced by those preferred values. This converts
+      e.g. '<literal>zh-yue-jyutping</literal>' to '<literal>yue-jyutping</literal>' or '<literal>fr-FX</literal>' to '<literal>fr-FR</literal>'.
+     </para>
+
+     <para>
+      For the extended language subtags form the canonical form is built first. Afterwards all primary languages for which an extended
+      language subtag exists are replaced by that extended language subtag and its prefix. This converts
+      e.g. '<literal>yue-jyutping</literal>' back to '<literal>zh-yue-jyutping</literal>' but has no effect on '<literal>fr-FR</literal>' as
+      '<literal>fr</literal>' is not an extended language subtag.
+     </para>
+
+     <para>
+      This normalization is only applied to elements that are actually changed:
+     </para>
+
+     <itemizedlist>
+      <listitem>
+       <para>
+        When editing track headers only those track language elements that are set via edit specifications are affected. Languages of tracks
+        that aren't edit aren't changed. Editing a track but setting only properties other than the language won't affect the language
+        either.
+       </para>
+      </listitem>
+
+      <listitem>
+       <para>
+        When editing chapters all language elements of all chapter elements are affected as existing chapters are always fully replaced.
+       </para>
+      </listitem>
+
+      <listitem>
+       <para>
+        When editing tags only the language elements of the tags that are actually replaced are affected. For example, when you replace
+        global tags then existing track tags aren't affected.
+       </para>
+      </listitem>
+     </itemizedlist>
+
+     <para>
+      The best way to normalize all existing language tags in a file is to remux it with &mkvmerge; and set its
+      '<literal>--normalize-language-ietf</literal>' option to the desired mode.
+     </para>
+    </listitem>
+   </varlistentry>
+
    <varlistentry id="mkvpropedit.description.command_line_charset">
     <term><option>--command-line-charset</option> <parameter>character-set</parameter></term>
     <listitem>

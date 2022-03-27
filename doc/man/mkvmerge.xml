@@ -554,6 +554,28 @@
       </para>
      </listitem>
     </varlistentry>
+
+    <varlistentry id="mkvmerge.description.normalize_language_ietf">
+     <term><option>--normalize-language-ietf</option> <parameter>mode</parameter></term>
+     <listitem>
+      <para>
+       Enables normalizing all IETF BCP 47 language tags to either their canonical form with mode '<literal>canonical</literal>' or to their
+       extended language subtags form with mode '<literal>extlang</literal>'. By default no normalization is applied.
+      </para>
+
+      <para>
+       In the canonical form all subtags for which preferred values exist are replaced by those preferred values. This converts
+       e.g. '<literal>zh-yue-jyutping</literal>' to '<literal>yue-jyutping</literal>' or '<literal>fr-FX</literal>' to '<literal>fr-FR</literal>'.
+      </para>
+
+      <para>
+       For the extended language subtags form the canonical form is built first. Afterwards all primary languages for which an extended
+       language subtag exists are replaced by that extended language subtag and its prefix. This converts
+       e.g. '<literal>yue-jyutping</literal>' back to '<literal>zh-yue-jyutping</literal>' but has no effect on '<literal>fr-FR</literal>'
+       as '<literal>fr</literal>' is not an extended language subtag.
+      </para>
+     </listitem>
+    </varlistentry>
    </variablelist>
   </refsect2>
 
