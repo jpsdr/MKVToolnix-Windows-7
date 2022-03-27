@@ -403,4 +403,134 @@ class SimpleTest
 
     return type_version, type_read_version
   end
+
+  def compare_languages_tracks *expected_languages
+    options = expected_languages.extract_options!
+
+    if expected_languages.first.is_a?(String)
+      file_name     = expected_languages.shift
+      do_unlink_tmp = false
+    else
+      file_name     = tmp
+      do_unlink_tmp = options.key?(:keep_tmp) ? !options[:keep_tmp] : true
+    end
+
+    test "#{expected_languages}" do
+      tracks = identify_json(file_name)["tracks"]
+
+      fail "track number different: actual #{tracks.size} expected #{expected_languages.size}" if tracks.size != expected_languages.size
+
+      (0..tracks.size - 1).each do |idx|
+        props = tracks[idx]["properties"]
+
+        if props["language"] != expected_languages[idx][0]
+          fail "track #{idx} actual language #{props["language"]} != expected #{expected_languages[idx][0]}"
+        end
+
+        if props["language_ietf"] != expected_languages[idx][1]
+          fail "track #{idx} actual language_ietf #{props["language_ietf"]} != expected #{expected_languages[idx][1]}"
+        end
+      end
+
+      "ok"
+    end
+
+    unlink_tmp_files if do_unlink_tmp
+  end
+
+  def compare_languages_chapters *expected_languages
+    options = expected_languages.extract_options!
+
+    if expected_languages.first.is_a?(String)
+      file_name     = expected_languages.shift
+      do_unlink_tmp = false
+    else
+      file_name     = tmp
+      do_unlink_tmp = options.key?(:unlink_tmp) ? options[:unlink_tmp] : true
+    end
+
+    test "#{expected_languages}" do
+      xml, _ = extract(file_name, :mode => :chapters)
+
+      actual_languages = xml.
+        map(&:chomp).
+        join("").
+        split(%r{<ChapterDisplay>}).
+        select { |str| %r{ChapterLanguage}.match(str) }.
+        map do |str|
+
+        legacy = %r{<ChapterLanguage>([^<]+)}.match(str)
+        ietf   = %r{<ChapLanguageIETF>([^<]+)}.match(str)
+
+        [
+          legacy ? legacy[1] : nil,
+          ietf   ? ietf[1]   : nil,
+        ]
+      end
+
+      fail "chapter display number different: actual #{actual_languages.size} expected #{expected_languages.size}" if actual_languages.size != expected_languages.size
+
+      (0..actual_languages.size - 1).each do |idx|
+        if actual_languages[idx][0] != expected_languages[idx][0]
+          fail "chapter display #{idx} actual legacy language #{actual_languages[idx][0]} != expected #{expected_languages[idx][0]}"
+        end
+
+        if actual_languages[idx][1] != expected_languages[idx][1]
+          fail "chapter display #{idx} actual IETF language #{actual_languages[idx][1]} != expected #{expected_languages[idx][1]}"
+        end
+      end
+
+      "ok"
+    end
+
+    unlink_tmp_files if do_unlink_tmp
+  end
+
+  def compare_languages_tags *expected_languages
+    options = expected_languages.extract_options!
+
+    if expected_languages.first.is_a?(String)
+      file_name     = expected_languages.shift
+      do_unlink_tmp = false
+    else
+      file_name     = tmp
+      do_unlink_tmp = options.key?(:unlink_tmp) ? options[:unlink_tmp] : true
+    end
+
+    test "#{expected_languages}" do
+      xml, _ = extract(file_name, :mode => :tags)
+
+      actual_languages = xml.
+        map(&:chomp).
+        join("").
+        split(%r{<Simple>}).
+        select { |str| %r{TagLanguage}.match(str) }.
+        map do |str|
+
+        legacy = %r{<TagLanguage>([^<]+)}.match(str)
+        ietf   = %r{<TagLanguageIETF>([^<]+)}.match(str)
+
+        [
+          legacy ? legacy[1] : nil,
+          ietf   ? ietf[1]   : nil,
+        ]
+      end
+
+      fail "tag simple number different: actual #{actual_languages.size} expected #{expected_languages.size}" if actual_languages.size != expected_languages.size
+
+      (0..actual_languages.size - 1).each do |idx|
+        if actual_languages[idx][0] != expected_languages[idx][0]
+          fail "tag simple #{idx} actual legacy language #{actual_languages[idx][0]} != expected #{expected_languages[idx][0]}"
+        end
+
+        if actual_languages[idx][1] != expected_languages[idx][1]
+          fail "tag simple #{idx} actual IETF language #{actual_languages[idx][1]} != expected #{expected_languages[idx][1]}"
+        end
+      end
+
+      "ok"
+    end
+
+    unlink_tmp_files if do_unlink_tmp
+  end
 end
