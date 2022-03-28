@@ -117,6 +117,8 @@ setup(char **argv) {
 
   mtx::sys::set_process_priority(-1);
 
+  mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::none);
+
   verbose = 0;
 }
 

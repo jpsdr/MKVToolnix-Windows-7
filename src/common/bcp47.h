@@ -21,6 +21,7 @@ enum class normalization_mode_e {
   none,
   canonical,
   extlang,
+  default_mode = canonical,
 };
 
 class language_c {

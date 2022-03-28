@@ -19,6 +19,6 @@ def test0739 expected_languages, normalization_mode = nil
   compare_languages_chapters(*expected_languages)
 end
 
-test0739 [ [ "fre", "fr-FX" ], [ "chi", "zh-yue" ], [ "chi", "yue" ] ]
-test0739 [ [ "fre", "fr-FR" ], [ "chi", "yue" ],    [ "chi", "yue" ] ],    :canonical
+test0739 [ [ "fre", "fr-FX" ], [ "chi", "zh-yue" ], [ "chi", "yue" ] ],    :off
+test0739 [ [ "fre", "fr-FR" ], [ "chi", "yue" ],    [ "chi", "yue" ] ]
 test0739 [ [ "fre", "fr-FR" ], [ "chi", "zh-yue" ], [ "chi", "zh-yue" ] ], :extlang

@@ -194,9 +194,13 @@ EOT
 
 void
 init_preferred_values() {
+  mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::none);
+
 EOT
 
     footer = <<EOT
+
+  mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::default_mode);
 }
 
 } // namespace mtx::iana::language_subtag_registry

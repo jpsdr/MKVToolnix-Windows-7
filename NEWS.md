@@ -39,16 +39,17 @@
 * mkvmerge, mkvpropedit: IETF BCP 47/RFC 5646 language tags: added a command
   line option `--normalize-language-ietf <mode>` which turns on normalization
   of IETF BCP 47 language tags to either their canonical (mode `canonical`) or
-  extended language subtags form (mode `extlang`) with no normalization
-  applied by default. Part of the implementation of #3307.
+  extended language subtags form (mode `extlang`) or turns it off (mode
+  `off`). If the option isn't given, language tags will now be normalized to
+  the canonical form. Part of the implementation of #3307.
 * MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: the language editor now
   has a button to replace the current tag with a normalized form (canonical or
   extlang) if those differ from the current tag. Part of the implementation of
   #3307.
 * MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: added an option in the
   preferences to always normalize all language tags to their canonical or
-  extlang forms. Can also be enabled from the language editor dialog. Part of
-  the implementation of #3307.
+  extlang forms or to turn normalization off. Can also be enabled from the
+  language editor dialog. Part of the implementation of #3307.
 * all: IETF BCP 47/RFC 5646 language tags: reduced the maximum number of
   extended language subtags that are present in a valid tag from 3 to 1 in
   compliance with RFC 5646 section 2.2.2. Part of the implementation of #3307.

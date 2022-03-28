@@ -8,7 +8,7 @@ def test0740 expected_languages, normalization_mode = nil
   src2 = "data/tags/one-tag-fr-FX.xml"
   src3 = "data/tags/ietf-normalization-test.xml"
 
-  test_merge src1, :args => "--tags 0:#{src2}", :keep_tmp => true
+  test_merge src1, :args => "--normalize-language-ietf off --tags 0:#{src2}", :keep_tmp => true
 
   test "propedit #{expected_languages}" do
     normalization_mode = normalization_mode ? "--normalize-language-ietf #{normalization_mode}" : ""
@@ -20,6 +20,6 @@ def test0740 expected_languages, normalization_mode = nil
   compare_languages_tags(*expected_languages)
 end
 
-test0740 [ [ "fre", "fr-FX" ], [ "fre", "fr-FX" ], [ "chi", "zh-yue" ], [ "chi", "yue" ] ]
-test0740 [ [ "fre", "fr-FX" ], [ "fre", "fr-FR" ], [ "chi", "yue" ],    [ "chi", "yue" ] ],    :canonical
+test0740 [ [ "fre", "fr-FX" ], [ "fre", "fr-FX" ], [ "chi", "zh-yue" ], [ "chi", "yue" ] ],    :off
+test0740 [ [ "fre", "fr-FX" ], [ "fre", "fr-FR" ], [ "chi", "yue" ],    [ "chi", "yue" ] ]
 test0740 [ [ "fre", "fr-FX" ], [ "fre", "fr-FR" ], [ "chi", "zh-yue" ], [ "chi", "zh-yue" ] ], :extlang

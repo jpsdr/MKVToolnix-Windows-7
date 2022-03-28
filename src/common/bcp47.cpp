@@ -29,7 +29,7 @@
 namespace mtx::bcp47 {
 
 bool language_c::ms_disabled                           = false;
-normalization_mode_e language_c::ms_normalization_mode = normalization_mode_e::none;
+normalization_mode_e language_c::ms_normalization_mode = normalization_mode_e::default_mode;
 
 bool
 operator <(language_c::extension_t const &a,

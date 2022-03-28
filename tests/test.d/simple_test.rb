@@ -147,7 +147,7 @@ class SimpleTest
   def test_identify file, *args
     options             = args.extract_options!
     options[:format]    = :json if options[:format].nil?
-    full_command_line   = [ "--identification-format", options[:format].to_s, "--identify", options[:args], file ].flatten.join(' ')
+    full_command_line   = [ "--normalize-language-ietf", "off", "--identification-format", options[:format].to_s, "--identify", options[:args], file ].flatten.join(' ')
     options[:name]    ||= full_command_line
     @blocks[:tests] << {
       :name  => full_command_line,
@@ -278,7 +278,7 @@ class SimpleTest
     fail ArgumentError if args.empty?
 
     format  = options[:format] ? options[:format].to_s.downcase.gsub(/_/, '-') : 'text'
-    command = "../src/mkvmerge --identify --identification-format #{format} --engage no_variable_data #{args.first}"
+    command = "../src/mkvmerge --normalize-language-ietf off --identify --identification-format #{format} --engage no_variable_data #{args.first}"
 
     self.sys command, :exit_code => options[:exit_code], :no_result => options[:no_result]
   end
@@ -287,7 +287,7 @@ class SimpleTest
     options = args.extract_options!
     fail ArgumentError if args.empty?
 
-    command = "../src/mkvmerge --identify --identification-format json --engage no_variable_data #{args.first}"
+    command = "../src/mkvmerge --normalize-language-ietf off --identify --identification-format json --engage no_variable_data #{args.first}"
 
     output, _ = self.sys(command, :exit_code => options[:exit_code], :no_result => options[:no_result])
 

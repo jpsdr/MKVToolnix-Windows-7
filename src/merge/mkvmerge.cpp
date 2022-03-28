@@ -142,10 +142,10 @@ set_usage() {
                   "                           Do not write tags with track statistics.\n");
   usage_text += Y("  --disable-language-ietf  Do not write IETF BCP 47 language elements in\n"
                   "                           track headers, chapters and tags.\n");
-  usage_text += Y("  --normalize-language-ietf <canonical|extlang>\n"
+  usage_text += Y("  --normalize-language-ietf <canonical|extlang|off>\n"
                   "                           Normalize all IETF BCP 47 language tags to either\n"
                   "                           their canonical or their extended language subtags\n"
-                  "                           form (default: no normalization).\n");
+                  "                           form or not at all (default: canonical form).\n");
   usage_text +=   "\n";
   usage_text += Y(" File splitting, linking, appending and concatenating (more global options):\n");
   usage_text += Y("  --split <d[K,M,G]|HH:MM:SS|s>\n"
@@ -2101,10 +2101,12 @@ parse_normalize_language_ietf(std::optional<std::string> const &next_arg) {
   if (!next_arg || next_arg->empty())
     mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), "--normalize-language-ietf"));
 
-  if ((*next_arg != "canonical"s) && (*next_arg != "extlang"s))
+  if (!mtx::included_in(*next_arg, "canonical"s, "extlang"s, "no"s, "off"s, "none"s))
     mxerror(fmt::format(Y("'{0}' is not a valid language normalization mode.\n"), *next_arg));
 
-  auto mode = *next_arg  == "canonical"s ? mtx::bcp47::normalization_mode_e::canonical : mtx::bcp47::normalization_mode_e::extlang;
+  auto mode = *next_arg == "canonical"s ? mtx::bcp47::normalization_mode_e::canonical
+            : *next_arg == "extlang"s   ? mtx::bcp47::normalization_mode_e::extlang
+            :                             mtx::bcp47::normalization_mode_e::none;
 
   mtx::bcp47::language_c::set_normalization_mode(mode);
 }
@@ -2124,6 +2126,10 @@ handle_identification_args(std::vector<std::string> &args) {
 
     if (*this_arg_itr == "--probe-range-percentage") {
       parse_arg_probe_range(next_arg);
+      args.erase(this_arg_itr, next_arg_itr + 1);
+
+    } else if (*this_arg_itr == "--normalize-language-ietf") {
+      parse_normalize_language_ietf(*next_arg_itr);
       args.erase(this_arg_itr, next_arg_itr + 1);
 
     } else

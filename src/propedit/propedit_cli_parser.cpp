@@ -17,6 +17,7 @@
 
 #include "common/bcp47.h"
 #include "common/ebml.h"
+#include "common/list_utils.h"
 #include "common/qt.h"
 #include "common/strings/formatting.h"
 #include "common/strings/parsing.h"
@@ -219,10 +220,12 @@ propedit_cli_parser_c::set_language_ietf_normalization_mode() {
   if (m_next_arg.empty())
     mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), "--normalize-language-ietf"));
 
-  if ((m_next_arg != "canonical"s) && (m_next_arg != "extlang"s))
+  if (!mtx::included_in(m_next_arg, "canonical"s, "extlang"s, "no"s, "off"s, "none"s))
     mxerror(fmt::format(Y("'{0}' is not a valid language normalization mode.\n"), m_next_arg));
 
-  auto mode = m_next_arg  == "canonical"s ? mtx::bcp47::normalization_mode_e::canonical : mtx::bcp47::normalization_mode_e::extlang;
+  auto mode = m_next_arg == "canonical"s ? mtx::bcp47::normalization_mode_e::canonical
+            : m_next_arg == "extlang"s   ? mtx::bcp47::normalization_mode_e::extlang
+            :                              mtx::bcp47::normalization_mode_e::none;
 
   mtx::bcp47::language_c::set_normalization_mode(mode);
 }
@@ -266,7 +269,7 @@ propedit_cli_parser_c::init_parser() {
 
   add_section_header(YT("Other options"));
   add_option("disable-language-ietf",          std::bind(&propedit_cli_parser_c::disable_language_ietf,                this), YT("Do not change LanguageIETF track header elements when the 'language' property is changed."));
-  add_option("normalize-language-ietf=<mode>", std::bind(&propedit_cli_parser_c::set_language_ietf_normalization_mode, this), YT("Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical') or their extended language subtags form (mode 'extlang')"));
+  add_option("normalize-language-ietf=<mode>", std::bind(&propedit_cli_parser_c::set_language_ietf_normalization_mode, this), YT("Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical'), their extended language subtags form (mode 'extlang') or not at all (mode 'off')"));
   add_common_options();
 
   add_separator();

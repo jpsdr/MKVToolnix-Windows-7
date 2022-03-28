@@ -5,10 +5,10 @@ describe "mkvmerge / normalize language IETF in tags"
 
 src = "--global-tags data/tags/ietf-normalization-test.xml"
 
-test_merge src, :keep_tmp => true
+test_merge src, :args => "--normalize-language-ietf off", :keep_tmp => true
 compare_languages_tags [ "fre", "fr-FX" ], [ "chi", "zh-yue" ], [ "chi", "yue" ]
 
-test_merge src, :args => "--normalize-language-ietf canonical", :keep_tmp => true
+test_merge src, :keep_tmp => true
 compare_languages_tags [ "fre", "fr-FR" ], [ "chi", "yue" ], [ "chi", "yue" ]
 
 

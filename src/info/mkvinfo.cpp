@@ -12,6 +12,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/bcp47.h"
 #include "common/command_line.h"
 #include "common/fs_sys_helpers.h"
 #include "common/kax_info.h"
@@ -21,6 +22,8 @@
 void
 setup(char const *argv0) {
   mtx_common_init("mkvinfo", argv0);
+
+  mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::none);
 }
 
 int

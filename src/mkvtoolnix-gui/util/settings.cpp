@@ -549,7 +549,7 @@ Settings::load() {
   m_warnBeforeOverwriting                     = reg.value(s_valWarnBeforeOverwriting,                                                          true).toBool();
   m_showMoveUpDownButtons                     = reg.value(s_valShowMoveUpDownButtons,                                                          false).toBool();
   m_bcp47LanguageEditingMode                  = static_cast<BCP47LanguageEditingMode>(reg.value(s_valBCP47LanguageEditingMode,                 static_cast<int>(BCP47LanguageEditingMode::Components)).toInt());
-  m_bcp47NormalizationMode                    = static_cast<mtx::bcp47::normalization_mode_e>(reg.value(s_valBCP47NormalizationMode,           static_cast<int>(mtx::bcp47::normalization_mode_e::none)).toInt());
+  m_bcp47NormalizationMode                    = static_cast<mtx::bcp47::normalization_mode_e>(reg.value(s_valBCP47NormalizationMode,           static_cast<int>(mtx::bcp47::normalization_mode_e::default_mode)).toInt());
 
   m_chapterNameTemplate                       = reg.value(s_valChapterNameTemplate,                                                            QY("Chapter <NUM:2>")).toString();
   m_dropLastChapterFromBlurayPlaylist         = reg.value(s_valDropLastChapterFromBlurayPlaylist,                                              true).toBool();

@@ -427,6 +427,8 @@ init() {
 
 void
 init_preferred_values() {
+  mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::none);
+
   g_preferred_values.reserve(401);
 
   g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ja-Latn-hepburn-heploc"s),   mtx::bcp47::language_c{}.set_variants(VS{"alalc97"s}).set_valid(true));
@@ -831,6 +833,8 @@ init_preferred_values() {
   g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zir"s),                      mtx::bcp47::language_c::parse("scv"s)                                );
   g_preferred_values.emplace_back(mtx::bcp47::language_c{}.set_region("ZR"s).set_valid(true), mtx::bcp47::language_c{}.set_region("CD"s).set_valid(true)           );
 
+
+  mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::default_mode);
 }
 
 } // namespace mtx::iana::language_subtag_registry
