@@ -276,9 +276,9 @@
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="2" column="0">
-       <widget class="QLabel" name="lWarningsLabel">
+       <widget class="QLabel" name="lInfoWarningsLabel">
         <property name="text">
-         <string>Warnings:</string>
+         <string>Information &amp; Warnings:</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -293,18 +293,12 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLabel" name="lWarnings">
+       <widget class="QWidget" name="wInfoWarnings" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
-        </property>
-        <property name="text">
-         <string notr="true">some warnings</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -317,16 +311,6 @@
           </property>
           <property name="pixmap">
            <pixmap resource="../../qt_resources.qrc">:/icons/16x16/dialog-ok-apply.png</pixmap>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="lStatusWarningsIcon">
-          <property name="text">
-           <string notr="true"/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="../../qt_resources.qrc">:/icons/16x16/dialog-warning.png</pixmap>
           </property>
          </widget>
         </item>
@@ -367,6 +351,12 @@
       </item>
       <item row="1" column="1">
        <widget class="QLabel" name="lParserError">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
          <string notr="true">actual error text</string>
         </property>

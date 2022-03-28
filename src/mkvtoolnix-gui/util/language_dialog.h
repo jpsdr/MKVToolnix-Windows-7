@@ -98,7 +98,7 @@ protected:
   void createInitialComponentWidgetList();
   void createGridLayoutFromComponentWidgetList();
 
-  QStringList determineWarningsFor(mtx::bcp47::language_c const &tag);
+  std::pair<QStringList, QStringList> determineInfoAndWarningsFor(mtx::bcp47::language_c const &tag);
 };
 
 }
