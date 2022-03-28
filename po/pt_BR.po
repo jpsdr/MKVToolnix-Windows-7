@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt-BR\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-03-27 19:12+0200\n"
+"POT-Creation-Date: 2022-03-28 18:51+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Fúlvio Alves <fga.fulvio@gmail.com>, 2021-2022\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/pt_BR/)\n"
@@ -682,10 +682,10 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:145
 #, fuzzy, no-c-format
 msgid ""
-"  --normalize-language-ietf <canonical|extlang>\n"
+"  --normalize-language-ietf <canonical|extlang|off>\n"
 "                           Normalize all IETF BCP 47 language tags to either\n"
 "                           their canonical or their extended language subtags\n"
-"                           form (default: no normalization).\n"
+"                           form or not at all (default: canonical form).\n"
 msgstr ""
 "  --probe-range-percentage <porcentagem>\n"
 "                           Define o tamanho máximo para sondar faixas em\n"
@@ -1222,42 +1222,42 @@ msgstr ""
 "  @arquivo-opções.json     Lê as opções adicionais de linha de comando do\n"
 "                           arquivo JSON especificado (veja página man).\n"
 
-#: src/propedit/propedit_cli_parser.cpp:173
+#: src/propedit/propedit_cli_parser.cpp:174
 #, no-c-format
 msgid "  B:  boolean (0 or 1)\n"
 msgstr "  B:  boolean (0 ou 1)\n"
 
-#: src/propedit/propedit_cli_parser.cpp:178
+#: src/propedit/propedit_cli_parser.cpp:179
 #, no-c-format
 msgid "  DT: date & time\n"
 msgstr "  DT: data & hora\n"
 
-#: src/propedit/propedit_cli_parser.cpp:177
+#: src/propedit/propedit_cli_parser.cpp:178
 #, no-c-format
 msgid "  FP: floating point number\n"
 msgstr "  FP: número de ponto flutuante\n"
 
-#: src/propedit/propedit_cli_parser.cpp:174
+#: src/propedit/propedit_cli_parser.cpp:175
 #, no-c-format
 msgid "  S:  string\n"
 msgstr "  S:  string\n"
 
-#: src/propedit/propedit_cli_parser.cpp:171
+#: src/propedit/propedit_cli_parser.cpp:172
 #, no-c-format
 msgid "  SI: signed integer\n"
 msgstr "  SI: inteiro com sinal\n"
 
-#: src/propedit/propedit_cli_parser.cpp:172
+#: src/propedit/propedit_cli_parser.cpp:173
 #, no-c-format
 msgid "  UI: unsigned integer\n"
 msgstr "  UI: inteiro sem sinal\n"
 
-#: src/propedit/propedit_cli_parser.cpp:175
+#: src/propedit/propedit_cli_parser.cpp:176
 #, no-c-format
 msgid "  US: Unicode string\n"
 msgstr "  US: string Unicode\n"
 
-#: src/propedit/propedit_cli_parser.cpp:176
+#: src/propedit/propedit_cli_parser.cpp:177
 #, no-c-format
 msgid "  X:  binary in hex\n"
 msgstr "  X:  binário em hexadecimal\n"
@@ -2434,32 +2434,32 @@ msgstr "&Quando definir o idioma:"
 msgid "&Window"
 msgstr "&Janela"
 
-#: src/merge/mkvmerge.cpp:2569
+#: src/merge/mkvmerge.cpp:2575
 #, no-c-format
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio' precisa de uma relação de aspecto.\n"
 
-#: src/merge/mkvmerge.cpp:2576
+#: src/merge/mkvmerge.cpp:2582
 #, no-c-format
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr "'--aspect-ratio-factor' precisa do fator de relação de aspecto.\n"
 
-#: src/merge/mkvmerge.cpp:2379
+#: src/merge/mkvmerge.cpp:2385
 #, no-c-format
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "'--attachment-description' precisa de uma descrição.\n"
 
-#: src/merge/mkvmerge.cpp:2388
+#: src/merge/mkvmerge.cpp:2394
 #, no-c-format
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "'--attachment-mime-type' precisa do tipo de MIME.\n"
 
-#: src/merge/mkvmerge.cpp:2398
+#: src/merge/mkvmerge.cpp:2404
 #, no-c-format
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name' precisa de um nome.\n"
 
-#: src/merge/mkvmerge.cpp:2434
+#: src/merge/mkvmerge.cpp:2440
 #, no-c-format
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "'--chapter-charset' precisa de um conjunto de caracteres.\n"
@@ -2474,7 +2474,7 @@ msgstr "'--chapter-charset' só pode ser dado uma vez em '--chapter-charset {0}'
 msgid "'--chapter-charset' must be given before '--chapters' in '--chapter-charset {0}'.\n"
 msgstr "'--chapter-charset' deve ser dado antes de '--chapters' em '--chapter-charset {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:2427
+#: src/merge/mkvmerge.cpp:2433
 #, no-c-format
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "'--chapter-language' precisa de um idioma.\n"
@@ -2489,12 +2489,12 @@ msgstr "'--chapter-language' só pode ser dado uma vez em '--chapter-language {0
 msgid "'--chapter-language' must be given before '--chapters' in '--chapter-language {0}'.\n"
 msgstr "'--chapter-language' deve ser dado antes de '--chapters' em '--chapter-language {0}'.\n"
 
-#: src/merge/mkvmerge.cpp:2458
+#: src/merge/mkvmerge.cpp:2464
 #, no-c-format
 msgid "'--chapters' lacks the file name.\n"
 msgstr "'--chapters' precisa de um nome de arquivo.\n"
 
-#: src/merge/mkvmerge.cpp:2354
+#: src/merge/mkvmerge.cpp:2360
 #, no-c-format
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length' precisa de uma extensão.\n"
@@ -2504,22 +2504,22 @@ msgstr "'--cluster-length' precisa de uma extensão.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset' está com o argumento faltando.\n"
 
-#: src/merge/mkvmerge.cpp:2590
+#: src/merge/mkvmerge.cpp:2596
 #, no-c-format
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping' precisa de parâmetros de corte.\n"
 
-#: src/merge/mkvmerge.cpp:2448
+#: src/merge/mkvmerge.cpp:2454
 #, no-c-format
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "'--cue-chapter-name-format' precisa de um formato.\n"
 
-#: src/merge/mkvmerge.cpp:2451
+#: src/merge/mkvmerge.cpp:2457
 #, no-c-format
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format' deve ser dado antes de '--chapters'.\n"
 
-#: src/merge/mkvmerge.cpp:2583
+#: src/merge/mkvmerge.cpp:2589
 #, no-c-format
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions' precisa de dimensões.\n"
@@ -2529,52 +2529,52 @@ msgstr "'--display-dimensions' precisa de dimensões.\n"
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage' precisa de um argumento.\n"
 
-#: src/merge/mkvmerge.cpp:2467
+#: src/merge/mkvmerge.cpp:2473
 #, no-c-format
 msgid "'--generate-chapters' lacks the mode.\n"
 msgstr "'--generate-chapters' precisa de um modo.\n"
 
-#: src/merge/mkvmerge.cpp:2227
+#: src/merge/mkvmerge.cpp:2233
 #, no-c-format
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
 msgstr "'--generate-chapters-name-template' precisa de um modelo de nome.\n"
 
-#: src/merge/mkvmerge.cpp:2418
+#: src/merge/mkvmerge.cpp:2424
 #, no-c-format
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags' precisa de um nome de arquivo.\n"
 
-#: src/merge/mkvmerge.cpp:2948
+#: src/merge/mkvmerge.cpp:2954
 #, no-c-format
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "'--link' só é útil em combinação com '--split'.\n"
 
-#: src/merge/mkvmerge.cpp:2340
+#: src/merge/mkvmerge.cpp:2346
 #, no-c-format
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "'--link-to-next' precisa do próximo UID.\n"
 
-#: src/merge/mkvmerge.cpp:2333
+#: src/merge/mkvmerge.cpp:2339
 #, no-c-format
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous' precisa do UID anterior.\n"
 
-#: src/merge/mkvmerge.cpp:2347
+#: src/merge/mkvmerge.cpp:2353
 #, no-c-format
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "'--segment-uid' precisa do UID de segmento.\n"
 
-#: src/merge/mkvmerge.cpp:2474
+#: src/merge/mkvmerge.cpp:2480
 #, no-c-format
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "'--segmentinfo' precisa de nome de arquivo.\n"
 
-#: src/merge/mkvmerge.cpp:2314
+#: src/merge/mkvmerge.cpp:2320
 #, no-c-format
 msgid "'--split' lacks the size.\n"
 msgstr "'--split' precisa de um tamanho.\n"
 
-#: src/merge/mkvmerge.cpp:2321
+#: src/merge/mkvmerge.cpp:2327
 #, no-c-format
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files' precisa do número de arquivos.\n"
@@ -2584,12 +2584,12 @@ msgstr "'--split-max-files' precisa do número de arquivos.\n"
 msgid "'--timestamp-scale' was used more than once.\n"
 msgstr "'--timestamp-scale' foi usado mais de uma vez.\n"
 
-#: src/merge/mkvmerge.cpp:2306
+#: src/merge/mkvmerge.cpp:2312
 #, no-c-format
 msgid "'--title' lacks the title.\n"
 msgstr "'--title' precisa de um título.\n"
 
-#: src/merge/mkvmerge.cpp:2882
+#: src/merge/mkvmerge.cpp:2888
 #, no-c-format
 msgid "'--track-order' may only be given once.\n"
 msgstr "'--track-order' só pode ser dado uma vez.\n"
@@ -2614,7 +2614,7 @@ msgstr "'-D' e '-d' usados no mesmo arquivo de origem.\n"
 msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "'-S' e '-s' usados no mesmo arquivo de origem.\n"
 
-#: src/merge/mkvmerge.cpp:2190
+#: src/merge/mkvmerge.cpp:2196
 #, no-c-format
 msgid "'{0}' can only be used with a file name. No further options are allowed if this option is used.\n"
 msgstr "'{0}' só pode ser usado com um nome de arquivo. Nenhuma outra opção será aceita se esta opção estiver ativada.\n"
@@ -2703,7 +2703,7 @@ msgid "'{0}' is not a valid hack.\n"
 msgstr "'{0}' não é um hack válido.\n"
 
 #: src/merge/mkvmerge.cpp:2105
-#: src/propedit/propedit_cli_parser.cpp:223
+#: src/propedit/propedit_cli_parser.cpp:224
 #, fuzzy, no-c-format
 msgid "'{0}' is not a valid language normalization mode.\n"
 msgstr "'{0}' não é um código de idioma válido ISO 639-2."
@@ -2763,7 +2763,7 @@ msgstr "'{0}' só é permitido quando há extração de capítulos.\n"
 msgid "'{0}' is only allowed when extracting tracks.\n"
 msgstr "'{0}' só é permitido quando há extração de faixas.\n"
 
-#: src/merge/mkvmerge.cpp:2217
+#: src/merge/mkvmerge.cpp:2223
 #, no-c-format
 msgid "'{0}' lacks a file name.\n"
 msgstr "'{0}' precisa de um nome de arquivo.\n"
@@ -2771,91 +2771,91 @@ msgstr "'{0}' precisa de um nome de arquivo.\n"
 #: src/merge/mkvmerge.cpp:2067
 #: src/merge/mkvmerge.cpp:2087
 #: src/merge/mkvmerge.cpp:2102
-#: src/merge/mkvmerge.cpp:2165
-#: src/merge/mkvmerge.cpp:2238
-#: src/merge/mkvmerge.cpp:2293
-#: src/merge/mkvmerge.cpp:2489
-#: src/merge/mkvmerge.cpp:2503
-#: src/merge/mkvmerge.cpp:2737
-#: src/merge/mkvmerge.cpp:2751
-#: src/merge/mkvmerge.cpp:2758
-#: src/merge/mkvmerge.cpp:2765
-#: src/merge/mkvmerge.cpp:2772
-#: src/merge/mkvmerge.cpp:2779
-#: src/merge/mkvmerge.cpp:2786
-#: src/merge/mkvmerge.cpp:2793
-#: src/merge/mkvmerge.cpp:2800
-#: src/merge/mkvmerge.cpp:2807
-#: src/merge/mkvmerge.cpp:2814
-#: src/merge/mkvmerge.cpp:2821
-#: src/merge/mkvmerge.cpp:2828
-#: src/merge/mkvmerge.cpp:2835
-#: src/merge/mkvmerge.cpp:2849
-#: src/merge/mkvmerge.cpp:2856
-#: src/merge/mkvmerge.cpp:2863
-#: src/merge/mkvmerge.cpp:2871
-#: src/merge/mkvmerge.cpp:2879
-#: src/merge/mkvmerge.cpp:2889
-#: src/merge/mkvmerge.cpp:2896
-#: src/merge/mkvmerge.cpp:2903
-#: src/merge/mkvmerge.cpp:2915
-#: src/merge/mkvmerge.cpp:2922
-#: src/merge/mkvmerge.cpp:2929
-#: src/propedit/propedit_cli_parser.cpp:220
+#: src/merge/mkvmerge.cpp:2171
+#: src/merge/mkvmerge.cpp:2244
+#: src/merge/mkvmerge.cpp:2299
+#: src/merge/mkvmerge.cpp:2495
+#: src/merge/mkvmerge.cpp:2509
+#: src/merge/mkvmerge.cpp:2743
+#: src/merge/mkvmerge.cpp:2757
+#: src/merge/mkvmerge.cpp:2764
+#: src/merge/mkvmerge.cpp:2771
+#: src/merge/mkvmerge.cpp:2778
+#: src/merge/mkvmerge.cpp:2785
+#: src/merge/mkvmerge.cpp:2792
+#: src/merge/mkvmerge.cpp:2799
+#: src/merge/mkvmerge.cpp:2806
+#: src/merge/mkvmerge.cpp:2813
+#: src/merge/mkvmerge.cpp:2820
+#: src/merge/mkvmerge.cpp:2827
+#: src/merge/mkvmerge.cpp:2834
+#: src/merge/mkvmerge.cpp:2841
+#: src/merge/mkvmerge.cpp:2855
+#: src/merge/mkvmerge.cpp:2862
+#: src/merge/mkvmerge.cpp:2869
+#: src/merge/mkvmerge.cpp:2877
+#: src/merge/mkvmerge.cpp:2885
+#: src/merge/mkvmerge.cpp:2895
+#: src/merge/mkvmerge.cpp:2902
+#: src/merge/mkvmerge.cpp:2909
+#: src/merge/mkvmerge.cpp:2921
+#: src/merge/mkvmerge.cpp:2928
+#: src/merge/mkvmerge.cpp:2935
+#: src/propedit/propedit_cli_parser.cpp:221
 #, no-c-format
 msgid "'{0}' lacks its argument.\n"
 msgstr "'{0}' precisa de seu argumento.\n"
 
-#: src/merge/mkvmerge.cpp:2562
+#: src/merge/mkvmerge.cpp:2568
 #, no-c-format
 msgid "'{0}' lacks the FourCC.\n"
 msgstr "'{0}' precisa do FourCC.\n"
 
-#: src/merge/mkvmerge.cpp:2441
-#: src/merge/mkvmerge.cpp:2744
+#: src/merge/mkvmerge.cpp:2447
+#: src/merge/mkvmerge.cpp:2750
 #, no-c-format
 msgid "'{0}' lacks the delay.\n"
 msgstr "'{0}' precisa do atraso.\n"
 
-#: src/merge/mkvmerge.cpp:2408
+#: src/merge/mkvmerge.cpp:2414
 #, no-c-format
 msgid "'{0}' lacks the file name.\n"
 msgstr "'{0}' precisa do nome de arquivo.\n"
 
-#: src/merge/mkvmerge.cpp:2597
-#: src/merge/mkvmerge.cpp:2604
-#: src/merge/mkvmerge.cpp:2611
-#: src/merge/mkvmerge.cpp:2618
-#: src/merge/mkvmerge.cpp:2625
-#: src/merge/mkvmerge.cpp:2632
-#: src/merge/mkvmerge.cpp:2639
-#: src/merge/mkvmerge.cpp:2646
-#: src/merge/mkvmerge.cpp:2653
-#: src/merge/mkvmerge.cpp:2660
-#: src/merge/mkvmerge.cpp:2667
-#: src/merge/mkvmerge.cpp:2674
-#: src/merge/mkvmerge.cpp:2681
-#: src/merge/mkvmerge.cpp:2688
-#: src/merge/mkvmerge.cpp:2695
-#: src/merge/mkvmerge.cpp:2702
-#: src/merge/mkvmerge.cpp:2709
-#: src/merge/mkvmerge.cpp:2716
-#: src/merge/mkvmerge.cpp:2723
-#: src/merge/mkvmerge.cpp:2730
+#: src/merge/mkvmerge.cpp:2603
+#: src/merge/mkvmerge.cpp:2610
+#: src/merge/mkvmerge.cpp:2617
+#: src/merge/mkvmerge.cpp:2624
+#: src/merge/mkvmerge.cpp:2631
+#: src/merge/mkvmerge.cpp:2638
+#: src/merge/mkvmerge.cpp:2645
+#: src/merge/mkvmerge.cpp:2652
+#: src/merge/mkvmerge.cpp:2659
+#: src/merge/mkvmerge.cpp:2666
+#: src/merge/mkvmerge.cpp:2673
+#: src/merge/mkvmerge.cpp:2680
+#: src/merge/mkvmerge.cpp:2687
+#: src/merge/mkvmerge.cpp:2694
+#: src/merge/mkvmerge.cpp:2701
+#: src/merge/mkvmerge.cpp:2708
+#: src/merge/mkvmerge.cpp:2715
+#: src/merge/mkvmerge.cpp:2722
+#: src/merge/mkvmerge.cpp:2729
+#: src/merge/mkvmerge.cpp:2736
 #, no-c-format
 msgid "'{0}' lacks the parameter.\n"
 msgstr "'{0}' precisa do parâmetro.\n"
 
-#: src/merge/mkvmerge.cpp:2842
+#: src/merge/mkvmerge.cpp:2848
 #, no-c-format
 msgid "'{0}' lacks the track ID.\n"
 msgstr "'{0}' precisa do ID da faixa.\n"
 
-#: src/merge/mkvmerge.cpp:2527
-#: src/merge/mkvmerge.cpp:2534
-#: src/merge/mkvmerge.cpp:2541
-#: src/merge/mkvmerge.cpp:2548
-#: src/merge/mkvmerge.cpp:2555
+#: src/merge/mkvmerge.cpp:2533
+#: src/merge/mkvmerge.cpp:2540
+#: src/merge/mkvmerge.cpp:2547
+#: src/merge/mkvmerge.cpp:2554
+#: src/merge/mkvmerge.cpp:2561
 #, no-c-format
 msgid "'{0}' lacks the track numbers.\n"
 msgstr "'{0}' precisa do número das faixas.\n"
@@ -2951,7 +2951,7 @@ msgstr "--- A saída da tarefa '%1' iniciou em %2 ---"
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr "--- Avisos emitidos pela tarefa '%1' iniciaram em %2 ---"
 
-#: src/propedit/propedit_cli_parser.cpp:293
+#: src/propedit/propedit_cli_parser.cpp:296
 #, no-c-format
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify'. These are usually simply numbered starting from 0 (e.g. '2')."
 msgstr "1. Um número que será interpretado como um ID de anexo, conforme listado por 'mkvmerge --identify'. Estes são geralmente numerados a partir de 0 (por exemplo, '2')."
@@ -2961,7 +2961,7 @@ msgstr "1. Um número que será interpretado como um ID de anexo, conforme lista
 msgid "1: all frames"
 msgstr "1: todos os quadros"
 
-#: src/propedit/propedit_cli_parser.cpp:294
+#: src/propedit/propedit_cli_parser.cpp:297
 #, no-c-format
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
 msgstr "2. Um número com o prefixo '=', que será interpretado como o ID exclusivo (UID) do anexo, conforme listado por 'mkvmerge --identify'. Geralmente, esses números são aleatórios (por exemplo, '128975986723')."
@@ -2971,7 +2971,7 @@ msgstr "2. Um número com o prefixo '=', que será interpretado como o ID exclus
 msgid "2: codec private data"
 msgstr "2: dados privados do codec"
 
-#: src/propedit/propedit_cli_parser.cpp:295
+#: src/propedit/propedit_cli_parser.cpp:298
 #, no-c-format
 msgid "3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."
 msgstr "3. Ou 'name: <valor>' ou 'mime-type: <valor>', caso em que o seletor se aplica a todos os anexos cujo nome ou tipo MIME respectivamente seja igual a <valor>."
@@ -3308,17 +3308,17 @@ msgstr "Reconhecer todos &avisos"
 msgid "Actions for &all tabs"
 msgstr "Ações para todas &abas"
 
-#: src/propedit/propedit_cli_parser.cpp:257
+#: src/propedit/propedit_cli_parser.cpp:260
 #, no-c-format
 msgid "Actions for handling attachments"
 msgstr "Ações para manipular anexos"
 
-#: src/propedit/propedit_cli_parser.cpp:244
+#: src/propedit/propedit_cli_parser.cpp:247
 #, no-c-format
 msgid "Actions for handling properties"
 msgstr "Ações para manipular propriedades"
 
-#: src/propedit/propedit_cli_parser.cpp:250
+#: src/propedit/propedit_cli_parser.cpp:253
 #, no-c-format
 msgid "Actions for handling tags and chapters"
 msgstr "Ações para manipular etiquetas e capítulos"
@@ -3425,17 +3425,17 @@ msgstr "Adicionar nova ed&ição após"
 msgid "Add new language shortcut"
 msgstr "Adicionar novo atalho de idioma"
 
-#: src/propedit/propedit_cli_parser.cpp:252
+#: src/propedit/propedit_cli_parser.cpp:255
 #, no-c-format
 msgid "Add or replace chapters in the file with the ones from 'filename' or remove them if 'filename' is empty"
 msgstr "Adiciona ou substitui capítulos do arquivo com os de 'filename' ou remove-os se 'filename' estiver vazio"
 
-#: src/propedit/propedit_cli_parser.cpp:251
+#: src/propedit/propedit_cli_parser.cpp:254
 #, no-c-format
 msgid "Add or replace tags in the file with the ones from 'filename' or remove them if 'filename' is empty (see below and man page for syntax)"
 msgstr "Adiciona ou substitui etiquetas do arquivo com as de 'filename' ou remove-as se 'filename' estiver vazio (veja abaixo e página principal para a sintaxe)"
 
-#: src/propedit/propedit_cli_parser.cpp:258
+#: src/propedit/propedit_cli_parser.cpp:261
 #, no-c-format
 msgid "Add the file 'filename' as a new attachment"
 msgstr "Adiciona o arquivo 'filename' como um novo anexo"
@@ -3500,7 +3500,7 @@ msgstr "Opções adicionais"
 msgid "Additions"
 msgstr "Adições"
 
-#: src/propedit/propedit_cli_parser.cpp:246
+#: src/propedit/propedit_cli_parser.cpp:249
 #, no-c-format
 msgid "Adds a property with the value even if such a property already exists"
 msgstr "Adiciona uma propriedade com o valor mesmo se uma propriedade igual já existir"
@@ -3660,7 +3660,7 @@ msgstr "Todos os nomes de arquivos a seguir serão abertos na ferramenta de info
 msgid "All header values are OK."
 msgstr "Todos os cabeçalhos estão OK."
 
-#: src/propedit/propedit_cli_parser.cpp:164
+#: src/propedit/propedit_cli_parser.cpp:165
 #, no-c-format
 msgid "All known property names and their meaning\n"
 msgstr "Todos os nomes das propriedades conhecidas e seus significados.\n"
@@ -3675,7 +3675,7 @@ msgstr "Todas as ocorrências da string \"<TID>\" serão substituídas pelo ID d
 msgid "All other arguments either switch to a certain extraction mode, change options for the currently active mode or specify what to extract into which file."
 msgstr "Todos os outros argumentos alternam para um determinado modo de extração, alteram as opções para o modo ativo no momento ou especificam o que extrair em qual arquivo."
 
-#: src/propedit/propedit_cli_parser.cpp:289
+#: src/propedit/propedit_cli_parser.cpp:292
 #, no-c-format
 msgid "All other strings work just like the track header selectors (see above)."
 msgstr "Todas as outras strings funcionam como os seletores de cabeçalho da faixa (veja acima)."
@@ -3783,7 +3783,7 @@ msgstr "Sempre usar uma &descrição padrão ao adicionar uma tarefa à fila"
 msgid "Always use full path names even if the application is located in the same directory as the GUI."
 msgstr "Sempre use nomes de caminho completos, mesmo se o aplicativo estiver localizado no mesmo diretório da GUI."
 
-#: src/propedit/propedit_cli_parser.cpp:292
+#: src/propedit/propedit_cli_parser.cpp:295
 #, no-c-format
 msgid "An <attachment-selector> can have three forms:"
 msgstr "Um <attachment-selector> pode ter três formas:"
@@ -3828,7 +3828,7 @@ msgstr "Um nome de arquivo com escape correspondente ao segmento anterior."
 msgid "An example: 'movie.001.mp4', 'movie.002.mp4' and 'movie.003.mp4'"
 msgstr "Um exemplo: 'filme.001.mp4', 'filme.002.mp4' e 'filme.003.mp4'"
 
-#: src/merge/mkvmerge.cpp:3185
+#: src/merge/mkvmerge.cpp:3191
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "Ocorreu uma exceção ao escrever o arquivo de destino."
@@ -3956,7 +3956,7 @@ msgstr "UID do anexo"
 msgid "Attachment extraction"
 msgstr "Extração de anexos"
 
-#: src/propedit/propedit_cli_parser.cpp:291
+#: src/propedit/propedit_cli_parser.cpp:294
 #, no-c-format
 msgid "Attachment selectors"
 msgstr "Seletores de anexo"
@@ -4046,7 +4046,7 @@ msgstr "&Limpar automaticamente o nome de arquivo de destino quando o último ar
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "Limpa&r automaticamente o título do arquivo quando o último arquivo for removido"
 
-#: src/merge/mkvmerge.cpp:2274
+#: src/merge/mkvmerge.cpp:2280
 #, no-c-format
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr "Ativando automaticamente o modo compatibilidade com WebM devido à extensão do nome do arquivo de destino.\n"
@@ -4310,7 +4310,7 @@ msgstr "Calcula e mostra somas de verificação e usa verbosidade nível 4."
 msgid "Calculate and display checksums of frame contents."
 msgstr "Calcula e mostra somas de verificação do conteúdo de quadros."
 
-#: src/propedit/propedit_cli_parser.cpp:254
+#: src/propedit/propedit_cli_parser.cpp:257
 #, no-c-format
 msgid "Calculate statistics for all tracks and add new/update existing tags for them"
 msgstr "Calcula estatísticas para todas as faixas e adiciona novas etiquetas ou atualiza etiquetas existentes para elas"
@@ -5570,17 +5570,17 @@ msgstr "Atrasa os códigos de tempo dos capítulos por alguns ms."
 msgid "Delay this track's timestamps by a couple of ms."
 msgstr "Atrasa os códigos de tempo dessa faixa por alguns ms."
 
-#: src/propedit/propedit_cli_parser.cpp:255
+#: src/propedit/propedit_cli_parser.cpp:258
 #, no-c-format
 msgid "Delete all existing track statistics tags"
 msgstr "Exclui todas as etiquetas de estatísticas das faixas existentes"
 
-#: src/propedit/propedit_cli_parser.cpp:248
+#: src/propedit/propedit_cli_parser.cpp:251
 #, no-c-format
 msgid "Delete all occurrences of a property"
 msgstr "Exclui todas as ocorrências de uma propriedade"
 
-#: src/propedit/propedit_cli_parser.cpp:261
+#: src/propedit/propedit_cli_parser.cpp:264
 #, no-c-format
 msgid "Delete one or more attachments"
 msgstr "Exclui um ou mais anexos"
@@ -5817,7 +5817,7 @@ msgstr "Largura/altura da exibição:"
 msgid "Do not add an entry for the chapters in the meta seek element."
 msgstr "Não adicionar um registro para os capítulos no elemento de metabusca."
 
-#: src/propedit/propedit_cli_parser.cpp:268
+#: src/propedit/propedit_cli_parser.cpp:271
 #, no-c-format
 msgid "Do not change LanguageIETF track header elements when the 'language' property is changed."
 msgstr "Não altere os elementos do cabeçalho da faixa LanguageIETF quando a propriedade 'language' for alterada."
@@ -5918,7 +5918,7 @@ msgstr "Não mostrar essa mensagem também."
 msgid "Don't stop processing at the first cluster."
 msgstr "Não parar de processar no primeiro cluster"
 
-#: src/merge/mkvmerge.cpp:3063
+#: src/merge/mkvmerge.cpp:3069
 #, no-c-format
 msgid "Done scanning playlists.\n"
 msgstr "Concluída varredura por listas de reprodução.\n"
@@ -6063,7 +6063,7 @@ msgstr "Editar idioma"
 msgid "Edit language shortcut"
 msgstr "Editar atalho de idioma"
 
-#: src/propedit/propedit_cli_parser.cpp:275
+#: src/propedit/propedit_cli_parser.cpp:278
 #, no-c-format
 msgid "Edit selectors for properties"
 msgstr "Seletores de edução para propriedades"
@@ -6116,7 +6116,7 @@ msgstr "A palavra 'todos', que seleciona todos os capítulos, ou uma lista separ
 msgid "Element ID:"
 msgstr "ID do elemento:"
 
-#: src/propedit/propedit_cli_parser.cpp:170
+#: src/propedit/propedit_cli_parser.cpp:171
 #, no-c-format
 msgid "Element types:\n"
 msgstr "Tipos de elementos:\n"
@@ -6131,7 +6131,7 @@ msgstr "Visualizador de elemento: %1"
 msgid "Elements"
 msgstr "Elementos"
 
-#: src/propedit/propedit_cli_parser.cpp:195
+#: src/propedit/propedit_cli_parser.cpp:196
 #, no-c-format
 msgid "Elements in the category '{0}' ('--edit {1}'):\n"
 msgstr "Elementos na categoria '{0}' ('--edit {1}'):\n"
@@ -6348,7 +6348,7 @@ msgstr "Erro: Não foi possível abrir o arquivo de origem {0} ({1})."
 msgid "Error: No EBML head found."
 msgstr "Erro: Nenhum cabeçalho EBML encontrado."
 
-#: src/merge/mkvmerge.cpp:2268
+#: src/merge/mkvmerge.cpp:2274
 #, no-c-format
 msgid ""
 "Error: no destination file name was given.\n"
@@ -6411,7 +6411,7 @@ msgstr "Exemplos: 01:00:00 (após uma hora) ou 1800s (após 1800 segundos)."
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "Exemplos: 01:00:00,01:30:00 (após uma hora e após uma hora e trinta minutos) ou 180s,300s,00:10:00 (após três, cinco e dez minutos)."
 
-#: src/merge/mkvmerge.cpp:3185
+#: src/merge/mkvmerge.cpp:3191
 #, no-c-format
 msgid "Exception details:"
 msgstr "Detalhes da exceção:"
@@ -7740,13 +7740,13 @@ msgstr "Opção booleana inválida especificada em '{0} {1}'.\n"
 msgid "Invalid boolean specified in '--aac-is-sbr {0}'.\n"
 msgstr "Opção boolean inválida especificada em '--aac-is-sbr {0}'.\n"
 
-#: src/propedit/propedit_cli_parser.cpp:60
+#: src/propedit/propedit_cli_parser.cpp:61
 #, no-c-format
 msgid "Invalid change spec ({2}) in '{0} {1}'.\n"
 msgstr "Mudança de especificações inválida ({2}) em '{0} {1}'.\n"
 
 #: src/merge/mkvmerge.cpp:1129
-#: src/merge/mkvmerge.cpp:3112
+#: src/merge/mkvmerge.cpp:3118
 #, no-c-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
 msgstr "Número de capítulo inválido '{0}' para '--split' em '--split {1}': {2}\n"
@@ -7896,12 +7896,12 @@ msgstr "Número de segundos inválido: {0} > 59"
 msgid "Invalid second: {0}"
 msgstr "Segundo inválido: {0}"
 
-#: src/propedit/propedit_cli_parser.cpp:48
-#: src/propedit/propedit_cli_parser.cpp:69
-#: src/propedit/propedit_cli_parser.cpp:83
-#: src/propedit/propedit_cli_parser.cpp:117
-#: src/propedit/propedit_cli_parser.cpp:126
-#: src/propedit/propedit_cli_parser.cpp:136
+#: src/propedit/propedit_cli_parser.cpp:49
+#: src/propedit/propedit_cli_parser.cpp:70
+#: src/propedit/propedit_cli_parser.cpp:84
+#: src/propedit/propedit_cli_parser.cpp:118
+#: src/propedit/propedit_cli_parser.cpp:127
+#: src/propedit/propedit_cli_parser.cpp:137
 #, no-c-format
 msgid "Invalid selector in '{0} {1}'.\n"
 msgstr "Seletor inválido em '{0} {1}'.\n"
@@ -8287,7 +8287,7 @@ msgstr "Ligar arquivos"
 msgid "Linux/Unix shells (bash, zsh etc.)"
 msgstr "Shells Linux/Unix (bash, zsh etc.)"
 
-#: src/propedit/propedit_cli_parser.cpp:240
+#: src/propedit/propedit_cli_parser.cpp:243
 #, no-c-format
 msgid "List all valid property names and exit"
 msgstr "Lista todos os nomes de propriedades válidos e sai"
@@ -8682,12 +8682,12 @@ msgstr "Foi requirida uma modificação de propriedades na seção '{0}', mas ne
 msgid "More"
 msgstr "Mais"
 
-#: src/merge/mkvmerge.cpp:2391
+#: src/merge/mkvmerge.cpp:2397
 #, no-c-format
 msgid "More than one MIME type was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Mais de um tipo MIME foi usado em um único anexo. '{0}' será descartado e '{1}' será usado.\n"
 
-#: src/merge/mkvmerge.cpp:2382
+#: src/merge/mkvmerge.cpp:2388
 #, no-c-format
 msgid "More than one description was given for a single attachment.\n"
 msgstr "Mais de uma descrição foi colocada em um mesmo anexo.\n"
@@ -8697,7 +8697,7 @@ msgstr "Mais de uma descrição foi colocada em um mesmo anexo.\n"
 msgid "More than one file name has been given ('{0}' and '{1}').\n"
 msgstr "Mais de um nome de arquivo foi dado ('{0}' e '{1}').\n"
 
-#: src/merge/mkvmerge.cpp:2401
+#: src/merge/mkvmerge.cpp:2407
 #, no-c-format
 msgid "More than one name was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "Mais de um nome foi dado para um único anexo. '{0}' será descartado e '{1}' será usado.\n"
@@ -8751,7 +8751,7 @@ msgstr "Aplicativo de multiplexação"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "Multiplexação para arquivo \"%1\" no diretório \"%2\""
 
-#: src/merge/mkvmerge.cpp:3191
+#: src/merge/mkvmerge.cpp:3197
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "A multiplexação levou {0}.\n"
@@ -8975,7 +8975,7 @@ msgstr "Nenhuma compressão extra"
 msgid "No file has been opened yet."
 msgstr "Nenhum arquivo foi aberto ainda."
 
-#: src/info/mkvinfo.cpp:36
+#: src/info/mkvinfo.cpp:39
 #: src/propedit/options.cpp:34
 #, no-c-format
 msgid "No file name given.\n"
@@ -9053,7 +9053,7 @@ msgstr "Nenhum UID de segmento foi encontrado no arquivo '{0}'."
 msgid "No segment/level 0 element found."
 msgstr "Nenhum elemento de segmento/nível 0 encontrado."
 
-#: src/merge/mkvmerge.cpp:2951
+#: src/merge/mkvmerge.cpp:2957
 #, no-c-format
 msgid "No source files were given.\n"
 msgstr "Nenhum arquivo de origem foi fornecido.\n"
@@ -9113,9 +9113,9 @@ msgstr "Prioridade nor&mal:"
 msgid "Normal priority"
 msgstr "Prioridade normal"
 
-#: src/propedit/propedit_cli_parser.cpp:269
+#: src/propedit/propedit_cli_parser.cpp:272
 #, no-c-format
-msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical') or their extended language subtags form (mode 'extlang')"
+msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical'), their extended language subtags form (mode 'extlang') or not at all (mode 'off')"
 msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
@@ -9249,7 +9249,7 @@ msgstr "Note que o conteúdo do víde não é modificado por essa opção."
 msgid "Note:"
 msgstr "Observação:"
 
-#: src/extract/mkvextract.cpp:163
+#: src/extract/mkvextract.cpp:165
 #: src/propedit/options.cpp:37
 #, no-c-format
 msgid "Nothing to do.\n"
@@ -9300,7 +9300,7 @@ msgstr "Arquivo de áudio/vídeo Ogg/OGM"
 msgid "One chapter for each appended file"
 msgstr "Um capítulo para cada arquivo acrescentado"
 
-#: src/propedit/propedit_cli_parser.cpp:305
+#: src/propedit/propedit_cli_parser.cpp:308
 #, no-c-format
 msgid "One of the options '--attachment-name', '--attachment-description', '--attachment-mime-type' or '--attachment-uid' has been used without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"
 msgstr "Uma das opções '--attachment-name', '--attachment-description', '--attachment-mime-type' ou '--attachment-uid' foi usada sem a seguinte opção '--add-attachment', '--replace-attachment' ou '--update-attachment'.\n"
@@ -9359,7 +9359,7 @@ msgstr "É necessário apenas em certas situações:"
 msgid "Only one chapter file allowed in '{0} {1}'.\n"
 msgstr "Apenas um arquivo de capítulo permitido em '{0} {1}'.\n"
 
-#: src/merge/mkvmerge.cpp:2220
+#: src/merge/mkvmerge.cpp:2226
 #, no-c-format
 msgid "Only one destination file allowed.\n"
 msgstr "Apenas um arquivo de destino permitido.\n"
@@ -9424,7 +9424,7 @@ msgstr "Apenas as faixas com um idioma nesta lista serão definidas para serem c
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
 msgstr "Somente arquivos v7 e  VobSub recentes são suportados. Se você tem uma versão antiga, use o VSConv do site http://sourceforge.net/projects/guliverkli/ para converter esses arquivos para arquivos v7.\n"
 
-#: src/merge/mkvmerge.cpp:3109
+#: src/merge/mkvmerge.cpp:3115
 #, no-c-format
 msgid "Only {0} chapter found in source files & chapter files."
 msgid_plural "Only {0} chapters found in source files & chapter files."
@@ -9519,7 +9519,7 @@ msgstr "Opção"
 
 #: src/info/info_cli_parser.cpp:33
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:56
-#: src/propedit/propedit_cli_parser.cpp:239
+#: src/propedit/propedit_cli_parser.cpp:242
 #, no-c-format
 msgid "Options"
 msgstr "Opções"
@@ -9563,7 +9563,7 @@ msgid "Other files are ignored when they're added."
 msgstr "Outros arquivos são ignorados ao serem adicionados."
 
 #: src/extract/extract_cli_parser.cpp:60
-#: src/propedit/propedit_cli_parser.cpp:267
+#: src/propedit/propedit_cli_parser.cpp:270
 #, no-c-format
 msgid "Other options"
 msgstr "Outras opções"
@@ -9962,7 +9962,7 @@ msgstr "Progresso: [{0}{1}] {2}%"
 
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
-#: src/merge/mkvmerge.cpp:2967
+#: src/merge/mkvmerge.cpp:2973
 #: src/merge/output_control.cpp:364
 #: src/propedit/tag_target.cpp:353
 #: src/propedit/tag_target.cpp:366
@@ -10402,7 +10402,7 @@ msgstr "Renumerando subcapítulos existentes"
 msgid "Renumbering sub-chapters"
 msgstr "Renumerando subcapítulos"
 
-#: src/propedit/propedit_cli_parser.cpp:259
+#: src/propedit/propedit_cli_parser.cpp:262
 #, no-c-format
 msgid "Replace an attachment with the file 'filename'"
 msgstr "Substitui um anexo com o arquivo 'filename'."
@@ -10698,7 +10698,7 @@ msgstr "Analisando diretório"
 msgid "Scanning playlists"
 msgstr "Analisando listas de reprodução"
 
-#: src/merge/mkvmerge.cpp:3023
+#: src/merge/mkvmerge.cpp:3029
 #, no-c-format
 msgid "Scanning {0} files in {1} playlist.\n"
 msgid_plural "Scanning {0} files in {1} playlists.\n"
@@ -10795,8 +10795,8 @@ msgstr "Informações do segmento"
 #: src/common/kax_element_names.cpp:85
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:579
 #: src/propedit/options.cpp:200
-#: src/propedit/propedit_cli_parser.cpp:166
-#: src/propedit/propedit_cli_parser.cpp:276
+#: src/propedit/propedit_cli_parser.cpp:167
+#: src/propedit/propedit_cli_parser.cpp:279
 #, no-c-format
 msgid "Segment information"
 msgstr "Informações do segmento"
@@ -10959,12 +10959,12 @@ msgstr "Define se a faixa é utilizada."
 msgid "Set if the video is interlaced."
 msgstr "Define se o vídeo é entrelaçado."
 
-#: src/propedit/propedit_cli_parser.cpp:264
+#: src/propedit/propedit_cli_parser.cpp:267
 #, no-c-format
 msgid "Set the MIME type to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "Define o tipo MIME a ser usado para a seguinte opção '--add-attachment', '--replace-attachment' ou '--update-attachment'"
 
-#: src/propedit/propedit_cli_parser.cpp:265
+#: src/propedit/propedit_cli_parser.cpp:268
 #, no-c-format
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "Defina o UID a ser usado para a seguinte opção '--add-attachment', '--replace-attachment' ou '--update-attachment'"
@@ -10974,32 +10974,32 @@ msgstr "Defina o UID a ser usado para a seguinte opção '--add-attachment', '--
 msgid "Set the chapter names' &languages:"
 msgstr "Definir os idiomas dos nomes dos capítu&los:"
 
-#: src/propedit/propedit_cli_parser.cpp:253
+#: src/propedit/propedit_cli_parser.cpp:256
 #, no-c-format
 msgid "Set the charset to use when reading chapter files using the simple chapter format"
 msgstr "Define o conjunto de caracteres a ser utilizado ao ler arquivos de capítulos usando o formato de capítulo simples."
 
-#: src/propedit/propedit_cli_parser.cpp:263
+#: src/propedit/propedit_cli_parser.cpp:266
 #, no-c-format
 msgid "Set the description to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "Define a descrição a ser usada para a seguinte opção '--add-attachment', '--replace-attachment' ou '--update-attachment'"
 
-#: src/propedit/propedit_cli_parser.cpp:262
+#: src/propedit/propedit_cli_parser.cpp:265
 #, no-c-format
 msgid "Set the name to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "Define o nome a ser usado para a seguinte opção '--add-attachment', '--replace-attachment' ou '--update-attachment'"
 
-#: src/propedit/propedit_cli_parser.cpp:247
+#: src/propedit/propedit_cli_parser.cpp:250
 #, no-c-format
 msgid "Sets a property to the value if it exists and add it otherwise"
 msgstr "Define uma propriedade ao valor, se existir; caso não exista, será adicionada"
 
-#: src/propedit/propedit_cli_parser.cpp:245
+#: src/propedit/propedit_cli_parser.cpp:248
 #, no-c-format
 msgid "Sets the Matroska file section that all following add/set/delete actions operate on (see below and man page for syntax)"
 msgstr "Define a seção do arquivo Matroska para que todas as seguintes ações de adicionar/definir/excluir funcionem (ver abaixo e a página principal para a sintaxe)."
 
-#: src/propedit/propedit_cli_parser.cpp:241
+#: src/propedit/propedit_cli_parser.cpp:244
 #, no-c-format
 msgid "Sets the Matroska parser mode to 'fast' (default) or 'full'"
 msgstr "Define o modo de análise do Matroska para 'fast' (padrão) ou 'full'"
@@ -11577,7 +11577,7 @@ msgstr "Etiqueta de idioma"
 msgid "Tag language (IETF BCP 47)"
 msgstr "Etiqueta de idioma (IETF BCP 47)"
 
-#: src/propedit/propedit_cli_parser.cpp:286
+#: src/propedit/propedit_cli_parser.cpp:289
 #, no-c-format
 msgid "Tag selectors"
 msgstr "Seletores de etiqueta"
@@ -11887,7 +11887,7 @@ msgstr "A quantidade de pixels para remover nos canais Cr e Cb para cada pixel n
 msgid "The application will terminate now."
 msgstr "O aplicativo será encerrado agora."
 
-#: src/merge/mkvmerge.cpp:2158
+#: src/merge/mkvmerge.cpp:2164
 #, no-c-format
 msgid "The argument '{0}' is not allowed in identification mode.\n"
 msgstr "O argumento '{0}' não é permitido no modo de identificação.\n"
@@ -12151,7 +12151,7 @@ msgstr "A largura de visualização das duas faixas é diferente: {0} e {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr "A desvantagem é que a multiplexação demorará mais, pois o mkvmerge aguardará até que todos os dados tenham sido gravados no armazenamento antes de sair."
 
-#: src/merge/mkvmerge.cpp:3185
+#: src/merge/mkvmerge.cpp:3191
 #, no-c-format
 msgid "The drive may be full."
 msgstr "A unidade pode estar cheia."
@@ -12866,7 +12866,7 @@ msgstr "Os números dados com este argumento são interpretados baseado no núme
 msgid "The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."
 msgstr "Os únicos codecs permitidos são faixas de vídeo VP8/VP9 e de áudio Vorbis/Opus."
 
-#: src/merge/mkvmerge.cpp:2498
+#: src/merge/mkvmerge.cpp:2504
 #, no-c-format
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "A opção '--meta-seek-size' não é mais suportada. Por favor, leia a documentação do mkvmerge, especialmente a seção MATROSKA FILE LAYOUT.\n"
@@ -12886,7 +12886,7 @@ msgstr "As opções inseridas aqui são definidas para todas as novas tarefas de
 msgid "The order is: video first followed by audio, subtitles and other types."
 msgstr "A ordem é: primeiro o vídeo seguido de áudio, legendas e outros tipos."
 
-#: src/propedit/propedit_cli_parser.cpp:273
+#: src/propedit/propedit_cli_parser.cpp:276
 #, no-c-format
 msgid "The order of the various options is not important."
 msgstr "A ordem das diferentes opções não é importante."
@@ -13073,32 +13073,32 @@ msgstr "A string '<NUM>' será substituída pelo número do capítulo."
 msgid "The string '<START>' will be replaced by the chapter's start timestamp."
 msgstr "A string '<START>' será substituída pelo código de tempo do capítulo."
 
-#: src/propedit/propedit_cli_parser.cpp:287
+#: src/propedit/propedit_cli_parser.cpp:290
 #, no-c-format
 msgid "The string 'all' works on all tags."
 msgstr "A string 'all' funciona em todas as etiquetas."
 
-#: src/propedit/propedit_cli_parser.cpp:288
+#: src/propedit/propedit_cli_parser.cpp:291
 #, no-c-format
 msgid "The string 'global' works on the global tags."
 msgstr "A string 'global' funciona em etiquetas globais."
 
-#: src/propedit/propedit_cli_parser.cpp:281
+#: src/propedit/propedit_cli_parser.cpp:284
 #, no-c-format
 msgid "The string 'track:' followed by one of the chars 'a', 'b', 's' or 'v' followed by a number 'n' selects the nth audio, button, subtitle or video track (e.g. '--edit track:a2'). Numbering starts at 1."
 msgstr "A string 'track:' seguida por um dos caracteres 'a', 'b', 's' ou 'v' seguido por um número 'n' seleciona o áudio n, botão n, legenda n ou faixa de vídeo n (ex.: '--edit track:a2'). A numeração começa em 1."
 
-#: src/propedit/propedit_cli_parser.cpp:283
+#: src/propedit/propedit_cli_parser.cpp:286
 #, no-c-format
 msgid "The string 'track:=uid' with 'uid' being a number selects the track whose 'track UID' element equals 'uid'."
 msgstr "A string 'track:=uid', sendo 'uid' um número, seleciona a faixa cujo elemento 'track UID' seja igual a 'uid'."
 
-#: src/propedit/propedit_cli_parser.cpp:284
+#: src/propedit/propedit_cli_parser.cpp:287
 #, no-c-format
 msgid "The string 'track:@number' with 'number' being a number selects the track whose 'track number' element equals 'number'."
 msgstr "A string 'track:@number', sendo 'number' um número, seleciona a faixa cujo elemento 'track number' é igual a 'number'."
 
-#: src/propedit/propedit_cli_parser.cpp:280
+#: src/propedit/propedit_cli_parser.cpp:283
 #, no-c-format
 msgid "The string 'track:n' with 'n' being a number selects the nth track. Numbering starts at 1."
 msgstr "A string 'track:n', sendo 'n' um número, seleciona a n-ésima faixa. A numeração começa em 1."
@@ -13108,7 +13108,7 @@ msgstr "A string 'track:n', sendo 'n' um número, seleciona a n-ésima faixa. A 
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
 msgstr "As strings '<FILE_NAME>' e '<FILE_NAME_WITH_EXT>', que só funcionam ao gerar capítulos para arquivos anexados, serão substituídas pelo nome do arquivo anexado (a anterior deixa de fora a extensão, enquanto a última a inclui)."
 
-#: src/propedit/propedit_cli_parser.cpp:277
+#: src/propedit/propedit_cli_parser.cpp:280
 #, no-c-format
 msgid "The strings 'info', 'segment_info' or 'segmentinfo' select the segment information element. This is also the default until the first '--edit' option is found."
 msgstr "As strings 'info', 'segment_info' ou 'segmentinfo' selecionam o elemento de informações do segmento. Esta é a opção padrão até '--edit' ser encontrada."
@@ -13254,7 +13254,7 @@ msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once.
 msgstr "A faixa {0} do arquivo no. {1} ('{2}') está para ser unida mais de uma vez. O argumento para '--append-to' era inválido.\n"
 
 #: src/merge/mkvmerge.cpp:2026
-#: src/merge/mkvmerge.cpp:2990
+#: src/merge/mkvmerge.cpp:2996
 #, no-c-format
 msgid "The type of file '{0}' could not be recognized.\n"
 msgstr "O tipo de arquivo '{0}' não pode ser reconhecido.\n"
@@ -13269,7 +13269,7 @@ msgstr "O tipo de arquivo '{0}' não é suportado.\n"
 msgid "The user can then select which playlist to actually add."
 msgstr "O usuário pode então selecionar qual lista de reprodução realmente deseja adicionar."
 
-#: src/propedit/propedit_cli_parser.cpp:106
+#: src/propedit/propedit_cli_parser.cpp:107
 #, no-c-format
 msgid "The value '{0}' is not a number.\n"
 msgstr "O valor '{0}' não é um número.\n"
@@ -13372,7 +13372,7 @@ msgstr "A largura das duas faixas é diferente: {0} e {1}"
 msgid "Theora"
 msgstr "Theora"
 
-#: src/merge/mkvmerge.cpp:3110
+#: src/merge/mkvmerge.cpp:3116
 #, no-c-format
 msgid "There are no chapters in source files & chapter files."
 msgstr "Não há capítulos nos arquivos de origem e nos arquivos de capítulos."
@@ -13927,8 +13927,8 @@ msgid "Track extraction"
 msgstr "Extração de faixa"
 
 #: src/propedit/options.cpp:192
-#: src/propedit/propedit_cli_parser.cpp:167
-#: src/propedit/propedit_cli_parser.cpp:279
+#: src/propedit/propedit_cli_parser.cpp:168
+#: src/propedit/propedit_cli_parser.cpp:282
 #, no-c-format
 msgid "Track headers"
 msgstr "Cabeçalhos de faixa"
@@ -14230,7 +14230,7 @@ msgstr "Modo desconhecido '{0}'.\n"
 msgid "Unknown option '{0}'.\n"
 msgstr "Opção desconhecida '{0}'.\n"
 
-#: src/propedit/propedit_cli_parser.cpp:39
+#: src/propedit/propedit_cli_parser.cpp:40
 #, no-c-format
 msgid "Unknown parse mode in '{0} {1}'.\n"
 msgstr "Modo de analisador desconhecido em '{0} {1}'.\n"
@@ -14275,7 +14275,7 @@ msgstr "Formato de arquivo sem suporte"
 msgid "Unsupported track type for this track.\n"
 msgstr "Tipo de faixa não suportado para esta faixa.\n"
 
-#: src/propedit/propedit_cli_parser.cpp:260
+#: src/propedit/propedit_cli_parser.cpp:263
 #, no-c-format
 msgid "Update an attachment's properties"
 msgstr "Atualiza as propriedades de um anexo"
@@ -14327,7 +14327,7 @@ msgstr "Use valores fixos para os elementos que mudam com cada arquivo de outra 
 msgid "Use legac&y MIME types for font attachments"
 msgstr "Usar &tipos MIME legados para anexos de fonte"
 
-#: src/propedit/propedit_cli_parser.cpp:242
+#: src/propedit/propedit_cli_parser.cpp:245
 #, no-c-format
 msgid "Use legacy font MIME types when adding new attachments or replacing existing ones"
 msgstr ""
@@ -15049,7 +15049,7 @@ msgstr "Versão de Kate errada: {0}.{1} > {2}.x"
 msgid "Wrong Theora version: {0}.{1}.{2} != 3.2.x"
 msgstr "Versão de Theora errada: {0}.{1}.{2} != 3.2.x"
 
-#: src/merge/mkvmerge.cpp:2324
+#: src/merge/mkvmerge.cpp:2330
 #, no-c-format
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "Argumento errado para '--split-max-files'.\n"
@@ -15775,7 +15775,7 @@ msgstr "mkvmerge foi interrompido por um SIGINT (Ctrl+C?)\n"
 msgid "mkvmerge/mkvextract track ID: {0}"
 msgstr "ID de faixa do mkvmerge/mkvextract: {0}"
 
-#: src/propedit/propedit_cli_parser.cpp:237
+#: src/propedit/propedit_cli_parser.cpp:240
 #, no-c-format
 msgid "mkvpropedit [options] <file> <actions>"
 msgstr "mkvpropedit [opções] <arquivo> <ações>"
@@ -15998,7 +15998,7 @@ msgstr "tags [opções] saída.xml"
 msgid "text subtitles"
 msgstr "legendas em formato de texto"
 
-#: src/merge/mkvmerge.cpp:2873
+#: src/merge/mkvmerge.cpp:2879
 #, no-c-format
 msgid "timestamps"
 msgstr "códigos de tempo"
@@ -16028,7 +16028,7 @@ msgstr "campo superior exibido primeiro, campo inferior armazenado primeiro"
 msgid "top field displayed first, top field stored first"
 msgstr "campo superior exibido primeiro, campo superior armazenado primeiro"
 
-#: src/merge/mkvmerge.cpp:2865
+#: src/merge/mkvmerge.cpp:2871
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:75
 #, no-c-format
 msgid "track name"

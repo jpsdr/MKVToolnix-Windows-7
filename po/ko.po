@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-03-27 19:12+0200\n"
+"POT-Creation-Date: 2022-03-28 18:51+0200\n"
 "PO-Revision-Date: 2020-09-02 18:12+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -646,10 +646,10 @@ msgstr "  --no-global-tags         소스 파일에서 전역 태그를 유지�
 #: src/merge/mkvmerge.cpp:145
 #, fuzzy, no-c-format
 msgid ""
-"  --normalize-language-ietf <canonical|extlang>\n"
+"  --normalize-language-ietf <canonical|extlang|off>\n"
 "                           Normalize all IETF BCP 47 language tags to either\n"
 "                           their canonical or their extended language subtags\n"
-"                           form (default: no normalization).\n"
+"                           form or not at all (default: canonical form).\n"
 msgstr ""
 "  --probe-range-percentage <퍼센트>\n"
 "                           특정한 파일 형식에 대해 전체 파일 크기의 퍼센트로\n"
@@ -1171,42 +1171,42 @@ msgid ""
 "                           the specified JSON file (see man page).\n"
 msgstr "@옵션-파일.json        지정한 JSON 파일에서 추가 명령행 옵션을 읽습니다 (man page 참고).\n"
 
-#: src/propedit/propedit_cli_parser.cpp:173
+#: src/propedit/propedit_cli_parser.cpp:174
 #, no-c-format
 msgid "  B:  boolean (0 or 1)\n"
 msgstr "  B:  불 방식 (0 또는 1)\n"
 
-#: src/propedit/propedit_cli_parser.cpp:178
+#: src/propedit/propedit_cli_parser.cpp:179
 #, no-c-format
 msgid "  DT: date & time\n"
 msgstr "  DT: 날짜 & 시간\n"
 
-#: src/propedit/propedit_cli_parser.cpp:177
+#: src/propedit/propedit_cli_parser.cpp:178
 #, no-c-format
 msgid "  FP: floating point number\n"
 msgstr "  FP: 부동 소숫점 수\n"
 
-#: src/propedit/propedit_cli_parser.cpp:174
+#: src/propedit/propedit_cli_parser.cpp:175
 #, no-c-format
 msgid "  S:  string\n"
 msgstr "  S:  문자열\n"
 
-#: src/propedit/propedit_cli_parser.cpp:171
+#: src/propedit/propedit_cli_parser.cpp:172
 #, no-c-format
 msgid "  SI: signed integer\n"
 msgstr "  SI: 유부호 정수\n"
 
-#: src/propedit/propedit_cli_parser.cpp:172
+#: src/propedit/propedit_cli_parser.cpp:173
 #, no-c-format
 msgid "  UI: unsigned integer\n"
 msgstr "  UI: 무부호 정수\n"
 
-#: src/propedit/propedit_cli_parser.cpp:175
+#: src/propedit/propedit_cli_parser.cpp:176
 #, no-c-format
 msgid "  US: Unicode string\n"
 msgstr "  US: 유니코드 문자열\n"
 
-#: src/propedit/propedit_cli_parser.cpp:176
+#: src/propedit/propedit_cli_parser.cpp:177
 #, no-c-format
 msgid "  X:  binary in hex\n"
 msgstr "  X:  16진수 바이너리\n"
@@ -2369,32 +2369,32 @@ msgstr "언어 설정시(&W):"
 msgid "&Window"
 msgstr "윈도우(&W)"
 
-#: src/merge/mkvmerge.cpp:2569
+#: src/merge/mkvmerge.cpp:2575
 #, no-c-format
 msgid "'--aspect-ratio' lacks the aspect ratio.\n"
 msgstr "'--aspect-ratio'에 비율이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2576
+#: src/merge/mkvmerge.cpp:2582
 #, no-c-format
 msgid "'--aspect-ratio-factor' lacks the aspect ratio factor.\n"
 msgstr "'--aspect-ratio-factor'에 화면 비율의 계수가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2379
+#: src/merge/mkvmerge.cpp:2385
 #, no-c-format
 msgid "'--attachment-description' lacks the description.\n"
 msgstr "'--attachment-description'에 설명이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2388
+#: src/merge/mkvmerge.cpp:2394
 #, no-c-format
 msgid "'--attachment-mime-type' lacks the MIME type.\n"
 msgstr "'--attachment-mime-type'에 MIME 유형이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2398
+#: src/merge/mkvmerge.cpp:2404
 #, no-c-format
 msgid "'--attachment-name' lacks the name.\n"
 msgstr "'--attachment-name'에 이름이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2434
+#: src/merge/mkvmerge.cpp:2440
 #, no-c-format
 msgid "'--chapter-charset' lacks the charset.\n"
 msgstr "'--chapter-charset'에 문자 인코딩이 지정되어 있지 않습니다.\n"
@@ -2409,7 +2409,7 @@ msgstr "'--chapter-charset'는 '--chapter-charset {0}'에 한 번만 지정할 �
 msgid "'--chapter-charset' must be given before '--chapters' in '--chapter-charset {0}'.\n"
 msgstr "'--chapter-charset {0}'에서 '--chapter-charset'는 '--chapters' 앞에 지정되어야 합니다.\n"
 
-#: src/merge/mkvmerge.cpp:2427
+#: src/merge/mkvmerge.cpp:2433
 #, no-c-format
 msgid "'--chapter-language' lacks the language.\n"
 msgstr "'--chapter-language'에 언어가 지정되어 있지 않습니다.\n"
@@ -2424,12 +2424,12 @@ msgstr "'--chapter-language'는 '--chapter-language {0}'에 한 번만 지정할
 msgid "'--chapter-language' must be given before '--chapters' in '--chapter-language {0}'.\n"
 msgstr "'--chapter-language {0}'에서 '--chapter-language'는 '--chapters' 앞에 지정되어야 합니다.\n"
 
-#: src/merge/mkvmerge.cpp:2458
+#: src/merge/mkvmerge.cpp:2464
 #, no-c-format
 msgid "'--chapters' lacks the file name.\n"
 msgstr "'--chapters'에 파일 이름이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2354
+#: src/merge/mkvmerge.cpp:2360
 #, no-c-format
 msgid "'--cluster-length' lacks the length.\n"
 msgstr "'--cluster-length'에 길이가 지정되어 있지 않습니다.\n"
@@ -2439,22 +2439,22 @@ msgstr "'--cluster-length'에 길이가 지정되어 있지 않습니다.\n"
 msgid "'--command-line-charset' is missing its argument.\n"
 msgstr "'--command-line-charset'는 인수가 누락되어 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2590
+#: src/merge/mkvmerge.cpp:2596
 #, no-c-format
 msgid "'--cropping' lacks the crop parameters.\n"
 msgstr "'--cropping'에 잘라내기 매개변수가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2448
+#: src/merge/mkvmerge.cpp:2454
 #, no-c-format
 msgid "'--cue-chapter-name-format' lacks the format.\n"
 msgstr "'--cue-chapter-name-format'에 형식이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2451
+#: src/merge/mkvmerge.cpp:2457
 #, no-c-format
 msgid "'--cue-chapter-name-format' must be given before '--chapters'.\n"
 msgstr "'--cue-chapter-name-format'는 '--chapters' 앞에 한 번만 지정할 수 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2583
+#: src/merge/mkvmerge.cpp:2589
 #, no-c-format
 msgid "'--display-dimensions' lacks the dimensions.\n"
 msgstr "'--display-dimensions'에 해상도가 지정되어 있지 않습니다.\n"
@@ -2464,52 +2464,52 @@ msgstr "'--display-dimensions'에 해상도가 지정되어 있지 않습니다.
 msgid "'--engage' lacks its argument.\n"
 msgstr "'--engage'에 인수가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2467
+#: src/merge/mkvmerge.cpp:2473
 #, no-c-format
 msgid "'--generate-chapters' lacks the mode.\n"
 msgstr "'--generate-chapters'에 모드가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2227
+#: src/merge/mkvmerge.cpp:2233
 #, no-c-format
 msgid "'--generate-chapters-name-template' lacks the name template.\n"
 msgstr "'--generate-chapters-name-template'에 name template이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2418
+#: src/merge/mkvmerge.cpp:2424
 #, no-c-format
 msgid "'--global-tags' lacks the file name.\n"
 msgstr "'--global-tags'에 파일 이름이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2948
+#: src/merge/mkvmerge.cpp:2954
 #, no-c-format
 msgid "'--link' is only useful in combination with '--split'.\n"
 msgstr "'--link'는 '--split'와 함께 사용시에만 유용합니다.\n"
 
-#: src/merge/mkvmerge.cpp:2340
+#: src/merge/mkvmerge.cpp:2346
 #, no-c-format
 msgid "'--link-to-next' lacks the next UID.\n"
 msgstr "'--link-to-next'에 다음 UID가 없습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2333
+#: src/merge/mkvmerge.cpp:2339
 #, no-c-format
 msgid "'--link-to-previous' lacks the previous UID.\n"
 msgstr "'--link-to-previous'에 이전 UID가 없습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2347
+#: src/merge/mkvmerge.cpp:2353
 #, no-c-format
 msgid "'--segment-uid' lacks the segment UID.\n"
 msgstr "'--segment-uid'에 세그먼트 UID가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2474
+#: src/merge/mkvmerge.cpp:2480
 #, no-c-format
 msgid "'--segmentinfo' lacks the file name.\n"
 msgstr "'--segmentinfo'에 파일 이름이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2314
+#: src/merge/mkvmerge.cpp:2320
 #, no-c-format
 msgid "'--split' lacks the size.\n"
 msgstr "'--split'에 크기가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2321
+#: src/merge/mkvmerge.cpp:2327
 #, no-c-format
 msgid "'--split-max-files' lacks the number of files.\n"
 msgstr "'--split-max-files'에 파일 수가 지정되어 있지 않습니다.\n"
@@ -2519,12 +2519,12 @@ msgstr "'--split-max-files'에 파일 수가 지정되어 있지 않습니다.\n
 msgid "'--timestamp-scale' was used more than once.\n"
 msgstr "'--timestamp-scale'가 두 번 이상 사용되고 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2306
+#: src/merge/mkvmerge.cpp:2312
 #, no-c-format
 msgid "'--title' lacks the title.\n"
 msgstr "'--title'에 제목이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2882
+#: src/merge/mkvmerge.cpp:2888
 #, no-c-format
 msgid "'--track-order' may only be given once.\n"
 msgstr "'--track-order'는 한 번만 지정할 수 있습니다.\n"
@@ -2549,7 +2549,7 @@ msgstr "'-D'와 '-d'는 동일한 소스 파일에서 사용합니다.\n"
 msgid "'-S' and '-s' used on the same source file.\n"
 msgstr "'-S'와 '-s'는 동일한 소스 파일에서 사용합니다.\n"
 
-#: src/merge/mkvmerge.cpp:2190
+#: src/merge/mkvmerge.cpp:2196
 #, no-c-format
 msgid "'{0}' can only be used with a file name. No further options are allowed if this option is used.\n"
 msgstr "'{0}'는 파일 이름을 지정할 때만 사용할 수 있습니다. 이 옵션을 사용할 때 다른 옵션의 사용은 허용되지 않습니다.\n"
@@ -2638,7 +2638,7 @@ msgid "'{0}' is not a valid hack.\n"
 msgstr "'{0}'는 유효한 해킹이 아닙니다.\n"
 
 #: src/merge/mkvmerge.cpp:2105
-#: src/propedit/propedit_cli_parser.cpp:223
+#: src/propedit/propedit_cli_parser.cpp:224
 #, fuzzy, no-c-format
 msgid "'{0}' is not a valid language normalization mode.\n"
 msgstr "'{0}'는 유효한 ISO 639-2 언어 코드가 아닙니다."
@@ -2698,7 +2698,7 @@ msgstr "'{0}'는 챕터 추출 시에만 사용할 수 있습니다.\n"
 msgid "'{0}' is only allowed when extracting tracks.\n"
 msgstr "'{0}'는 트랙 추출 시에만 사용할 수 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2217
+#: src/merge/mkvmerge.cpp:2223
 #, no-c-format
 msgid "'{0}' lacks a file name.\n"
 msgstr "'{0}'에 파일 이름이 지정되어 있지 않습니다.\n"
@@ -2706,91 +2706,91 @@ msgstr "'{0}'에 파일 이름이 지정되어 있지 않습니다.\n"
 #: src/merge/mkvmerge.cpp:2067
 #: src/merge/mkvmerge.cpp:2087
 #: src/merge/mkvmerge.cpp:2102
-#: src/merge/mkvmerge.cpp:2165
-#: src/merge/mkvmerge.cpp:2238
-#: src/merge/mkvmerge.cpp:2293
-#: src/merge/mkvmerge.cpp:2489
-#: src/merge/mkvmerge.cpp:2503
-#: src/merge/mkvmerge.cpp:2737
-#: src/merge/mkvmerge.cpp:2751
-#: src/merge/mkvmerge.cpp:2758
-#: src/merge/mkvmerge.cpp:2765
-#: src/merge/mkvmerge.cpp:2772
-#: src/merge/mkvmerge.cpp:2779
-#: src/merge/mkvmerge.cpp:2786
-#: src/merge/mkvmerge.cpp:2793
-#: src/merge/mkvmerge.cpp:2800
-#: src/merge/mkvmerge.cpp:2807
-#: src/merge/mkvmerge.cpp:2814
-#: src/merge/mkvmerge.cpp:2821
-#: src/merge/mkvmerge.cpp:2828
-#: src/merge/mkvmerge.cpp:2835
-#: src/merge/mkvmerge.cpp:2849
-#: src/merge/mkvmerge.cpp:2856
-#: src/merge/mkvmerge.cpp:2863
-#: src/merge/mkvmerge.cpp:2871
-#: src/merge/mkvmerge.cpp:2879
-#: src/merge/mkvmerge.cpp:2889
-#: src/merge/mkvmerge.cpp:2896
-#: src/merge/mkvmerge.cpp:2903
-#: src/merge/mkvmerge.cpp:2915
-#: src/merge/mkvmerge.cpp:2922
-#: src/merge/mkvmerge.cpp:2929
-#: src/propedit/propedit_cli_parser.cpp:220
+#: src/merge/mkvmerge.cpp:2171
+#: src/merge/mkvmerge.cpp:2244
+#: src/merge/mkvmerge.cpp:2299
+#: src/merge/mkvmerge.cpp:2495
+#: src/merge/mkvmerge.cpp:2509
+#: src/merge/mkvmerge.cpp:2743
+#: src/merge/mkvmerge.cpp:2757
+#: src/merge/mkvmerge.cpp:2764
+#: src/merge/mkvmerge.cpp:2771
+#: src/merge/mkvmerge.cpp:2778
+#: src/merge/mkvmerge.cpp:2785
+#: src/merge/mkvmerge.cpp:2792
+#: src/merge/mkvmerge.cpp:2799
+#: src/merge/mkvmerge.cpp:2806
+#: src/merge/mkvmerge.cpp:2813
+#: src/merge/mkvmerge.cpp:2820
+#: src/merge/mkvmerge.cpp:2827
+#: src/merge/mkvmerge.cpp:2834
+#: src/merge/mkvmerge.cpp:2841
+#: src/merge/mkvmerge.cpp:2855
+#: src/merge/mkvmerge.cpp:2862
+#: src/merge/mkvmerge.cpp:2869
+#: src/merge/mkvmerge.cpp:2877
+#: src/merge/mkvmerge.cpp:2885
+#: src/merge/mkvmerge.cpp:2895
+#: src/merge/mkvmerge.cpp:2902
+#: src/merge/mkvmerge.cpp:2909
+#: src/merge/mkvmerge.cpp:2921
+#: src/merge/mkvmerge.cpp:2928
+#: src/merge/mkvmerge.cpp:2935
+#: src/propedit/propedit_cli_parser.cpp:221
 #, no-c-format
 msgid "'{0}' lacks its argument.\n"
 msgstr "'{0}'에 인수가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2562
+#: src/merge/mkvmerge.cpp:2568
 #, no-c-format
 msgid "'{0}' lacks the FourCC.\n"
 msgstr "'{0}'에 FourCC가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2441
-#: src/merge/mkvmerge.cpp:2744
+#: src/merge/mkvmerge.cpp:2447
+#: src/merge/mkvmerge.cpp:2750
 #, no-c-format
 msgid "'{0}' lacks the delay.\n"
 msgstr "'{0}'에 지연이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2408
+#: src/merge/mkvmerge.cpp:2414
 #, no-c-format
 msgid "'{0}' lacks the file name.\n"
 msgstr "'{0}'에 파일 이름이 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2597
-#: src/merge/mkvmerge.cpp:2604
-#: src/merge/mkvmerge.cpp:2611
-#: src/merge/mkvmerge.cpp:2618
-#: src/merge/mkvmerge.cpp:2625
-#: src/merge/mkvmerge.cpp:2632
-#: src/merge/mkvmerge.cpp:2639
-#: src/merge/mkvmerge.cpp:2646
-#: src/merge/mkvmerge.cpp:2653
-#: src/merge/mkvmerge.cpp:2660
-#: src/merge/mkvmerge.cpp:2667
-#: src/merge/mkvmerge.cpp:2674
-#: src/merge/mkvmerge.cpp:2681
-#: src/merge/mkvmerge.cpp:2688
-#: src/merge/mkvmerge.cpp:2695
-#: src/merge/mkvmerge.cpp:2702
-#: src/merge/mkvmerge.cpp:2709
-#: src/merge/mkvmerge.cpp:2716
-#: src/merge/mkvmerge.cpp:2723
-#: src/merge/mkvmerge.cpp:2730
+#: src/merge/mkvmerge.cpp:2603
+#: src/merge/mkvmerge.cpp:2610
+#: src/merge/mkvmerge.cpp:2617
+#: src/merge/mkvmerge.cpp:2624
+#: src/merge/mkvmerge.cpp:2631
+#: src/merge/mkvmerge.cpp:2638
+#: src/merge/mkvmerge.cpp:2645
+#: src/merge/mkvmerge.cpp:2652
+#: src/merge/mkvmerge.cpp:2659
+#: src/merge/mkvmerge.cpp:2666
+#: src/merge/mkvmerge.cpp:2673
+#: src/merge/mkvmerge.cpp:2680
+#: src/merge/mkvmerge.cpp:2687
+#: src/merge/mkvmerge.cpp:2694
+#: src/merge/mkvmerge.cpp:2701
+#: src/merge/mkvmerge.cpp:2708
+#: src/merge/mkvmerge.cpp:2715
+#: src/merge/mkvmerge.cpp:2722
+#: src/merge/mkvmerge.cpp:2729
+#: src/merge/mkvmerge.cpp:2736
 #, no-c-format
 msgid "'{0}' lacks the parameter.\n"
 msgstr "'{0}'에 변수가 없습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2842
+#: src/merge/mkvmerge.cpp:2848
 #, no-c-format
 msgid "'{0}' lacks the track ID.\n"
 msgstr "'{0}'에 트랙 ID가 지정되어 있지 않습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2527
-#: src/merge/mkvmerge.cpp:2534
-#: src/merge/mkvmerge.cpp:2541
-#: src/merge/mkvmerge.cpp:2548
-#: src/merge/mkvmerge.cpp:2555
+#: src/merge/mkvmerge.cpp:2533
+#: src/merge/mkvmerge.cpp:2540
+#: src/merge/mkvmerge.cpp:2547
+#: src/merge/mkvmerge.cpp:2554
+#: src/merge/mkvmerge.cpp:2561
 #, no-c-format
 msgid "'{0}' lacks the track numbers.\n"
 msgstr "'{0}'은 트랙 번호가 없습니다.\n"
@@ -2886,7 +2886,7 @@ msgstr "--- '%1' 작업의 출력을 %2에 시작했습니다 ---"
 msgid "--- Warnings emitted by job '%1' started on %2 ---"
 msgstr "--- '%1' 작업 중 경고가 %2 에서 시작되었습니다 ---"
 
-#: src/propedit/propedit_cli_parser.cpp:293
+#: src/propedit/propedit_cli_parser.cpp:296
 #, no-c-format
 msgid "1. A number which will be interpreted as an attachment ID as listed by 'mkvmerge --identify'. These are usually simply numbered starting from 0 (e.g. '2')."
 msgstr "1. 'mkvmerge --identify'에 나열된 첨부 파일 ID로 해석되는 숫자.  일반적으로 0부터 시작하여 단순히 번호를 붙입니다 (예: '2')."
@@ -2896,7 +2896,7 @@ msgstr "1. 'mkvmerge --identify'에 나열된 첨부 파일 ID로 해석되는 �
 msgid "1: all frames"
 msgstr "1: 모든 프레임"
 
-#: src/propedit/propedit_cli_parser.cpp:294
+#: src/propedit/propedit_cli_parser.cpp:297
 #, no-c-format
 msgid "2. A number with the prefix '=' which will be interpreted as the attachment's unique ID (UID) as listed by 'mkvmerge --identify'. These are usually random-looking numbers (e.g. '128975986723')."
 msgstr "2. 'mkvmerge --identify'에 나열된 첨부 파일의 고유 ID(UID)로 해석되는 접두어 '='가 있는 숫자. 이들은 보통 무작위로 보이는 숫자입니다 (예: '128975986723')."
@@ -2906,7 +2906,7 @@ msgstr "2. 'mkvmerge --identify'에 나열된 첨부 파일의 고유 ID(UID)로
 msgid "2: codec private data"
 msgstr "2: 코덱 개인 데이터"
 
-#: src/propedit/propedit_cli_parser.cpp:295
+#: src/propedit/propedit_cli_parser.cpp:298
 #, no-c-format
 msgid "3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."
 msgstr "3. 'name:<value>' 또는 'mime-type:<value>' 두 경우 모두, 이름 또는 MIME 유형이 각각 <value>와 동일한 첨부 파일 선택기가 적용됩니다."
@@ -3242,17 +3242,17 @@ msgstr "모든 경고 알리기(&W)"
 msgid "Actions for &all tabs"
 msgstr "모든 탭에 대한 동작(&A)"
 
-#: src/propedit/propedit_cli_parser.cpp:257
+#: src/propedit/propedit_cli_parser.cpp:260
 #, no-c-format
 msgid "Actions for handling attachments"
 msgstr "첨부 파일을 처리하는 동작"
 
-#: src/propedit/propedit_cli_parser.cpp:244
+#: src/propedit/propedit_cli_parser.cpp:247
 #, no-c-format
 msgid "Actions for handling properties"
 msgstr "속성을 처리하는 동작"
 
-#: src/propedit/propedit_cli_parser.cpp:250
+#: src/propedit/propedit_cli_parser.cpp:253
 #, no-c-format
 msgid "Actions for handling tags and chapters"
 msgstr "테그와 챕터를 처리하는 동작"
@@ -3359,17 +3359,17 @@ msgstr "뒤에 새 에디션 추가(&I)"
 msgid "Add new language shortcut"
 msgstr "언어(&L)"
 
-#: src/propedit/propedit_cli_parser.cpp:252
+#: src/propedit/propedit_cli_parser.cpp:255
 #, no-c-format
 msgid "Add or replace chapters in the file with the ones from 'filename' or remove them if 'filename' is empty"
 msgstr "'filename'에서 챕터를 이 파일의 챕터에 추가 또는 대체하거나 'filename'이 빈 경우 챕터를 제거합니다. (구문은 아래의 방법과 man page를 참조하십시오)"
 
-#: src/propedit/propedit_cli_parser.cpp:251
+#: src/propedit/propedit_cli_parser.cpp:254
 #, no-c-format
 msgid "Add or replace tags in the file with the ones from 'filename' or remove them if 'filename' is empty (see below and man page for syntax)"
 msgstr "'filename'에서 태그를 이 파일의 태그에 추가 또는 대체하거나 'filename'이 빈 경우 태그를 제거합니다. (구문은 아래의 방법과 man page를 참조하십시오)"
 
-#: src/propedit/propedit_cli_parser.cpp:258
+#: src/propedit/propedit_cli_parser.cpp:261
 #, no-c-format
 msgid "Add the file 'filename' as a new attachment"
 msgstr "새 첨부 파일로 'filename' 파일 추가"
@@ -3434,7 +3434,7 @@ msgstr "추가 옵션:"
 msgid "Additions"
 msgstr "추가 정보"
 
-#: src/propedit/propedit_cli_parser.cpp:246
+#: src/propedit/propedit_cli_parser.cpp:249
 #, no-c-format
 msgid "Adds a property with the value even if such a property already exists"
 msgstr "해당 속성이 이미 존재하는 경우에도 지정한 값으로 속성을 추가합니다."
@@ -3594,7 +3594,7 @@ msgstr "다음의 모든 파일명을 정보 도구에서 엽니다."
 msgid "All header values are OK."
 msgstr "모든 헤더 값에 이상이 없습니다."
 
-#: src/propedit/propedit_cli_parser.cpp:164
+#: src/propedit/propedit_cli_parser.cpp:165
 #, no-c-format
 msgid "All known property names and their meaning\n"
 msgstr "알려진 모든 속성 이름과 그 의미\n"
@@ -3609,7 +3609,7 @@ msgstr "모든 \"<TID>\" 문자열을 해당 트랙의 트랙 ID로 교체합니
 msgid "All other arguments either switch to a certain extraction mode, change options for the currently active mode or specify what to extract into which file."
 msgstr "다른 모든 인수는 특정 추출 모드로 전환하거나, 현재 활성 모드에 대한 옵션을 변경하거나, 추출할 파일을 지정합니다."
 
-#: src/propedit/propedit_cli_parser.cpp:289
+#: src/propedit/propedit_cli_parser.cpp:292
 #, no-c-format
 msgid "All other strings work just like the track header selectors (see above)."
 msgstr "다른 모든 문자열은 트랙 헤더 선택기와 마찬가지로 작용합니다. (위 참조)"
@@ -3717,7 +3717,7 @@ msgstr "작업을 대기열에 추가시 항상 기본 설명 사용하기(&D)"
 msgid "Always use full path names even if the application is located in the same directory as the GUI."
 msgstr "프로그램이 GUI와 같은 폴더에 있더라도 항상 전체 경로명 사용하기"
 
-#: src/propedit/propedit_cli_parser.cpp:292
+#: src/propedit/propedit_cli_parser.cpp:295
 #, no-c-format
 msgid "An <attachment-selector> can have three forms:"
 msgstr "<attachment-selector>는 3가지 형태를 취할 수 있음:"
@@ -3762,7 +3762,7 @@ msgstr "이전 시그먼트에 해당하는 이스케이프 파일 이름입니�
 msgid "An example: 'movie.001.mp4', 'movie.002.mp4' and 'movie.003.mp4'"
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:3185
+#: src/merge/mkvmerge.cpp:3191
 #, no-c-format
 msgid "An exception occurred when writing the destination file."
 msgstr "대상 파일에 기록할 때 예외가 발생했습니다."
@@ -3890,7 +3890,7 @@ msgstr "첨부 파일 UID"
 msgid "Attachment extraction"
 msgstr "첨부 파일 추출"
 
-#: src/propedit/propedit_cli_parser.cpp:291
+#: src/propedit/propedit_cli_parser.cpp:294
 #, no-c-format
 msgid "Attachment selectors"
 msgstr "첨부 파일 선택기"
@@ -3980,7 +3980,7 @@ msgstr "마지막 파일이 삭제될 때 자동으로 대상 파일명 지우�
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "마지막 파일이 삭제될 때 자동으로 파일 제목 지우기(&R)"
 
-#: src/merge/mkvmerge.cpp:2274
+#: src/merge/mkvmerge.cpp:2280
 #, no-c-format
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr "대상 파일 이름의 확장자에 따라 표준 WebM 호환 모드를 자동으로 활성화합니다.\n"
@@ -4244,7 +4244,7 @@ msgstr "체크섬을 계산하여 표시하고 중복 수준 4를 사용합니�
 msgid "Calculate and display checksums of frame contents."
 msgstr "프레임 내용에 대한 체크섬을 계산하여 표시합니다."
 
-#: src/propedit/propedit_cli_parser.cpp:254
+#: src/propedit/propedit_cli_parser.cpp:257
 #, no-c-format
 msgid "Calculate statistics for all tracks and add new/update existing tags for them"
 msgstr "모든 트랙의 통계를 계산하고, 새로운 태그를 추가하거나 기존의 태그 업데이트"
@@ -5503,17 +5503,17 @@ msgstr "이 트랙의 타임스탬프를 몇 ms 정도 지연시킵니다."
 msgid "Delay this track's timestamps by a couple of ms."
 msgstr "이 트랙의 타임스탬프를 몇 ms 정도 지연시킵니다."
 
-#: src/propedit/propedit_cli_parser.cpp:255
+#: src/propedit/propedit_cli_parser.cpp:258
 #, no-c-format
 msgid "Delete all existing track statistics tags"
 msgstr "기존의 모든 트랙 통계 태그를 삭제합니다"
 
-#: src/propedit/propedit_cli_parser.cpp:248
+#: src/propedit/propedit_cli_parser.cpp:251
 #, no-c-format
 msgid "Delete all occurrences of a property"
 msgstr "존재하는 모든 속성을 삭제합니다"
 
-#: src/propedit/propedit_cli_parser.cpp:261
+#: src/propedit/propedit_cli_parser.cpp:264
 #, no-c-format
 msgid "Delete one or more attachments"
 msgstr "하나 이상의 첨부 파일을 삭제합니다"
@@ -5750,7 +5750,7 @@ msgstr "해상도 (가로 X 세로):"
 msgid "Do not add an entry for the chapters in the meta seek element."
 msgstr "메타 탐색(Meta seek) 요소에 챕터 항목을 추가하지 않습니다."
 
-#: src/propedit/propedit_cli_parser.cpp:268
+#: src/propedit/propedit_cli_parser.cpp:271
 #, no-c-format
 msgid "Do not change LanguageIETF track header elements when the 'language' property is changed."
 msgstr ""
@@ -5851,7 +5851,7 @@ msgstr "이 메시지를 다시 보지 않습니다."
 msgid "Don't stop processing at the first cluster."
 msgstr "첫 클러스터에서 중지"
 
-#: src/merge/mkvmerge.cpp:3063
+#: src/merge/mkvmerge.cpp:3069
 #, no-c-format
 msgid "Done scanning playlists.\n"
 msgstr "재생목록 검색을 완료했습니다.\n"
@@ -5996,7 +5996,7 @@ msgstr "태그 언어"
 msgid "Edit language shortcut"
 msgstr "언어(&L)"
 
-#: src/propedit/propedit_cli_parser.cpp:275
+#: src/propedit/propedit_cli_parser.cpp:278
 #, no-c-format
 msgid "Edit selectors for properties"
 msgstr "속성 선택기 편집"
@@ -6049,7 +6049,7 @@ msgstr "모든 챕터를 선택하는 단어 '전부'나 콤마로 분리한 챕
 msgid "Element ID:"
 msgstr "요소 ID:"
 
-#: src/propedit/propedit_cli_parser.cpp:170
+#: src/propedit/propedit_cli_parser.cpp:171
 #, no-c-format
 msgid "Element types:\n"
 msgstr "요소 유형:\n"
@@ -6064,7 +6064,7 @@ msgstr "요소 뷰어: %1"
 msgid "Elements"
 msgstr "요소"
 
-#: src/propedit/propedit_cli_parser.cpp:195
+#: src/propedit/propedit_cli_parser.cpp:196
 #, no-c-format
 msgid "Elements in the category '{0}' ('--edit {1}'):\n"
 msgstr "카테고리 '{0}'의 요소  ('--edit {1}'):\n"
@@ -6284,7 +6284,7 @@ msgstr "오류: {0} 소스 파일을 열 수 없습니다 ({1})."
 msgid "Error: No EBML head found."
 msgstr "오류: EBML 헤드를 찾지 못했습니다."
 
-#: src/merge/mkvmerge.cpp:2268
+#: src/merge/mkvmerge.cpp:2274
 #, no-c-format
 msgid ""
 "Error: no destination file name was given.\n"
@@ -6347,7 +6347,7 @@ msgstr "예: 01:00:00 (한 시간 이후) 또는 1800s (1800 초 이후)."
 msgid "Examples: 01:00:00,01:30:00 (after one hour and after one hour and thirty minutes) or 180s,300s,00:10:00 (after three, five and ten minutes)."
 msgstr "예: 01:00:00,01:30:00 (한 시간 이후, 한 시간 30분 이후) 또는 180s,300s,00:10:00 (3, 5, 10분)."
 
-#: src/merge/mkvmerge.cpp:3185
+#: src/merge/mkvmerge.cpp:3191
 #, no-c-format
 msgid "Exception details:"
 msgstr "예외 세부 사항:"
@@ -7675,13 +7675,13 @@ msgstr "'{0} {1}'에서 잘못된 동기화 옵션이 지정되었습니다.\n"
 msgid "Invalid boolean specified in '--aac-is-sbr {0}'.\n"
 msgstr "'--aac-is-sbr {0}'에서 잘못된 논리값(boolean)이 지정되었습니다.\n"
 
-#: src/propedit/propedit_cli_parser.cpp:60
+#: src/propedit/propedit_cli_parser.cpp:61
 #, no-c-format
 msgid "Invalid change spec ({2}) in '{0} {1}'.\n"
 msgstr "'{0} {1}'에서 변경 지정({2})이 잘못되었습니다.\n"
 
 #: src/merge/mkvmerge.cpp:1129
-#: src/merge/mkvmerge.cpp:3112
+#: src/merge/mkvmerge.cpp:3118
 #, no-c-format
 msgid "Invalid chapter number '{0}' for '--split' in '--split {1}': {2}\n"
 msgstr "'--split {1}'의 '--split'에 대해 무효한 챕터 번호 '{0}': {2}\n"
@@ -7831,12 +7831,12 @@ msgstr "잘못된 시간(초) 수: {0} > 59"
 msgid "Invalid second: {0}"
 msgstr "잘못된 시간(초): {0}"
 
-#: src/propedit/propedit_cli_parser.cpp:48
-#: src/propedit/propedit_cli_parser.cpp:69
-#: src/propedit/propedit_cli_parser.cpp:83
-#: src/propedit/propedit_cli_parser.cpp:117
-#: src/propedit/propedit_cli_parser.cpp:126
-#: src/propedit/propedit_cli_parser.cpp:136
+#: src/propedit/propedit_cli_parser.cpp:49
+#: src/propedit/propedit_cli_parser.cpp:70
+#: src/propedit/propedit_cli_parser.cpp:84
+#: src/propedit/propedit_cli_parser.cpp:118
+#: src/propedit/propedit_cli_parser.cpp:127
+#: src/propedit/propedit_cli_parser.cpp:137
 #, no-c-format
 msgid "Invalid selector in '{0} {1}'.\n"
 msgstr "'{0} {1}'에서 잘못된 선택이 지정되었습니다.\n"
@@ -8221,7 +8221,7 @@ msgstr "파일 링크"
 msgid "Linux/Unix shells (bash, zsh etc.)"
 msgstr "Linux/Unix 쉡 (bash, zsh 등)"
 
-#: src/propedit/propedit_cli_parser.cpp:240
+#: src/propedit/propedit_cli_parser.cpp:243
 #, no-c-format
 msgid "List all valid property names and exit"
 msgstr "모든 유효한 속성 이름을 열거하고 종료합니다."
@@ -8616,12 +8616,12 @@ msgstr "섹션 '{0}'의 속성 변경을 요청했지만, 파일에서 수준 1 
 msgid "More"
 msgstr "More"
 
-#: src/merge/mkvmerge.cpp:2391
+#: src/merge/mkvmerge.cpp:2397
 #, no-c-format
 msgid "More than one MIME type was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "하나의 첨부 파일에 하나 이상의 MIME 유형이 지정되었습니다. '{0}'는 버리고 대신 '{1}'를 사용합니다.\n"
 
-#: src/merge/mkvmerge.cpp:2382
+#: src/merge/mkvmerge.cpp:2388
 #, no-c-format
 msgid "More than one description was given for a single attachment.\n"
 msgstr "하나의 첨부 파일에 여러개의 설명이 지정되었습니다.\n"
@@ -8631,7 +8631,7 @@ msgstr "하나의 첨부 파일에 여러개의 설명이 지정되었습니다.
 msgid "More than one file name has been given ('{0}' and '{1}').\n"
 msgstr "파일 이름이 하나 이상 지정되었습니다 ('{0}'와 '{1}').\n"
 
-#: src/merge/mkvmerge.cpp:2401
+#: src/merge/mkvmerge.cpp:2407
 #, no-c-format
 msgid "More than one name was given for a single attachment. '{0}' will be discarded and '{1}' used instead.\n"
 msgstr "하나의 첨부 파일에 여러개의 이름이 지정되었습니다. '{0}'는 버리고 대신 '{1}'를 사용합니다.\n"
@@ -8685,7 +8685,7 @@ msgstr "합치기 응용프로그램"
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
 msgstr "\"%1\" 파일을 \"%2\" 폴더에서 합치기"
 
-#: src/merge/mkvmerge.cpp:3191
+#: src/merge/mkvmerge.cpp:3197
 #, no-c-format
 msgid "Multiplexing took {0}.\n"
 msgstr "합치기 작업에 걸린 시간: {0}\n"
@@ -8909,7 +8909,7 @@ msgstr "추가 압축 없음"
 msgid "No file has been opened yet."
 msgstr "아직 연 파일이 없습니다."
 
-#: src/info/mkvinfo.cpp:36
+#: src/info/mkvinfo.cpp:39
 #: src/propedit/options.cpp:34
 #, no-c-format
 msgid "No file name given.\n"
@@ -8987,7 +8987,7 @@ msgstr "파일 '{0}'에서 세그먼트 UID를 찾을 수 없습니다."
 msgid "No segment/level 0 element found."
 msgstr "세그먼트/수준 0 요소를 찾지 못했습니다."
 
-#: src/merge/mkvmerge.cpp:2951
+#: src/merge/mkvmerge.cpp:2957
 #, no-c-format
 msgid "No source files were given.\n"
 msgstr "소스 파일을 지정하지 않았습니다.\n"
@@ -9047,9 +9047,9 @@ msgstr "보통 출력(&M):"
 msgid "Normal priority"
 msgstr "보통 우선순위"
 
-#: src/propedit/propedit_cli_parser.cpp:269
+#: src/propedit/propedit_cli_parser.cpp:272
 #, no-c-format
-msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical') or their extended language subtags form (mode 'extlang')"
+msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical'), their extended language subtags form (mode 'extlang') or not at all (mode 'off')"
 msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
@@ -9183,7 +9183,7 @@ msgstr "주의: 이 옵션으로 비디오 내용물이 변경되지는 않습�
 msgid "Note:"
 msgstr ""
 
-#: src/extract/mkvextract.cpp:163
+#: src/extract/mkvextract.cpp:165
 #: src/propedit/options.cpp:37
 #, no-c-format
 msgid "Nothing to do.\n"
@@ -9234,7 +9234,7 @@ msgstr "Ogg/OGM 오디오/비디오 파일"
 msgid "One chapter for each appended file"
 msgstr "결합한 각 파일마다 한 개의 챕터"
 
-#: src/propedit/propedit_cli_parser.cpp:305
+#: src/propedit/propedit_cli_parser.cpp:308
 #, no-c-format
 msgid "One of the options '--attachment-name', '--attachment-description', '--attachment-mime-type' or '--attachment-uid' has been used without a following '--add-attachment', '--replace-attachment' or '--update-attachment' option.\n"
 msgstr "'--attachment-name', '--attachment-description', '--attachment-mime-type', '--attachment-uid' 옵션 중 하나를 그 뒤에 a following '--add-attachment', '--replace-attachment', '--update-attachment' 옵션을 붙이지 않고 사용했습니다.\n"
@@ -9293,7 +9293,7 @@ msgstr "특정 상황에만 필요:"
 msgid "Only one chapter file allowed in '{0} {1}'.\n"
 msgstr "'{0} {1}'에 챕터 파일은 하나만 지정할 수 있습니다.\n"
 
-#: src/merge/mkvmerge.cpp:2220
+#: src/merge/mkvmerge.cpp:2226
 #, no-c-format
 msgid "Only one destination file allowed.\n"
 msgstr "대상 파일은 하나만 지정할 수 있습니다.\n"
@@ -9358,7 +9358,7 @@ msgstr "기본적으로 이 목록의 언어로 된 트랙만 복사하도록 �
 msgid "Only v7 and newer VobSub files are supported. If you have an older version then use the VSConv utility from http://sourceforge.net/projects/guliverkli/ to convert these files to v7 files.\n"
 msgstr "v7을 포함한 새로운 VobSub 파일만 지원합니다. 만약 이전 버전이 있다면 VSConv 유틸리티(http://sourceforge.net/projects/guliverkli/)를 사용하여 v7 파일로 변환하십시오.\n"
 
-#: src/merge/mkvmerge.cpp:3109
+#: src/merge/mkvmerge.cpp:3115
 #, no-c-format
 msgid "Only {0} chapter found in source files & chapter files."
 msgid_plural "Only {0} chapters found in source files & chapter files."
@@ -9448,7 +9448,7 @@ msgstr "옵션"
 
 #: src/info/info_cli_parser.cpp:33
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:56
-#: src/propedit/propedit_cli_parser.cpp:239
+#: src/propedit/propedit_cli_parser.cpp:242
 #, no-c-format
 msgid "Options"
 msgstr "옵션"
@@ -9492,7 +9492,7 @@ msgid "Other files are ignored when they're added."
 msgstr "다른 파일은 추가될 때 무시됩니다."
 
 #: src/extract/extract_cli_parser.cpp:60
-#: src/propedit/propedit_cli_parser.cpp:267
+#: src/propedit/propedit_cli_parser.cpp:270
 #, no-c-format
 msgid "Other options"
 msgstr "기타 옵션"
@@ -9888,7 +9888,7 @@ msgstr "진행 상태: [{0}{1}] {2}%"
 
 #: src/extract/tracks.cpp:512
 #: src/extract/tracks.cpp:559
-#: src/merge/mkvmerge.cpp:2967
+#: src/merge/mkvmerge.cpp:2973
 #: src/merge/output_control.cpp:364
 #: src/propedit/tag_target.cpp:353
 #: src/propedit/tag_target.cpp:366
@@ -10328,7 +10328,7 @@ msgstr "기존의 하위 챕터 번호 다시 매기는 중"
 msgid "Renumbering sub-chapters"
 msgstr "하위 챕터 번호 다시 매기는 중"
 
-#: src/propedit/propedit_cli_parser.cpp:259
+#: src/propedit/propedit_cli_parser.cpp:262
 #, no-c-format
 msgid "Replace an attachment with the file 'filename'"
 msgstr "'filename'파일의 첨부 파일을 바꿉니다"
@@ -10624,7 +10624,7 @@ msgstr "폴더 검색 중"
 msgid "Scanning playlists"
 msgstr "재생목록 검색 중"
 
-#: src/merge/mkvmerge.cpp:3023
+#: src/merge/mkvmerge.cpp:3029
 #, no-c-format
 msgid "Scanning {0} files in {1} playlist.\n"
 msgid_plural "Scanning {0} files in {1} playlists.\n"
@@ -10720,8 +10720,8 @@ msgstr "세그먼트 정보:"
 #: src/common/kax_element_names.cpp:85
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:579
 #: src/propedit/options.cpp:200
-#: src/propedit/propedit_cli_parser.cpp:166
-#: src/propedit/propedit_cli_parser.cpp:276
+#: src/propedit/propedit_cli_parser.cpp:167
+#: src/propedit/propedit_cli_parser.cpp:279
 #, no-c-format
 msgid "Segment information"
 msgstr "세그먼트 정보"
@@ -10886,12 +10886,12 @@ msgstr "트랙이 사용되는지 여부를 설정합니다."
 msgid "Set if the video is interlaced."
 msgstr "비디오이 인터레이스 여부를 설정합니다."
 
-#: src/propedit/propedit_cli_parser.cpp:264
+#: src/propedit/propedit_cli_parser.cpp:267
 #, no-c-format
 msgid "Set the MIME type to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "다음 '--add-attachment', '--replace-attachment' 또는 '--update-attachment' 옵션에 사용할 MIME 형식을 설정하세요"
 
-#: src/propedit/propedit_cli_parser.cpp:265
+#: src/propedit/propedit_cli_parser.cpp:268
 #, no-c-format
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "다음 '--add-attachment', '--replace-attachment' 또는 '--update-attachment' 옵션에 사용할 UID를 설정하세요"
@@ -10901,32 +10901,32 @@ msgstr "다음 '--add-attachment', '--replace-attachment' 또는 '--update-attac
 msgid "Set the chapter names' &languages:"
 msgstr "챕터 이름의 언어 설정(&L):"
 
-#: src/propedit/propedit_cli_parser.cpp:253
+#: src/propedit/propedit_cli_parser.cpp:256
 #, no-c-format
 msgid "Set the charset to use when reading chapter files using the simple chapter format"
 msgstr ""
 
-#: src/propedit/propedit_cli_parser.cpp:263
+#: src/propedit/propedit_cli_parser.cpp:266
 #, no-c-format
 msgid "Set the description to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "다음 '--add-attachment', '--replace-attachment' 또는 '--update-attachment' 옵션에 사용할 설명을 설정하세요"
 
-#: src/propedit/propedit_cli_parser.cpp:262
+#: src/propedit/propedit_cli_parser.cpp:265
 #, no-c-format
 msgid "Set the name to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "다음 '--add-attachment', '--replace-attachment' 또는 '--update-attachment' 옵션에 사용할 이름을 설정하세요"
 
-#: src/propedit/propedit_cli_parser.cpp:247
+#: src/propedit/propedit_cli_parser.cpp:250
 #, no-c-format
 msgid "Sets a property to the value if it exists and add it otherwise"
 msgstr "속성이 존재하는 경우, 이 값을 설정하고, 존재하지 않으면 추가합니다."
 
-#: src/propedit/propedit_cli_parser.cpp:245
+#: src/propedit/propedit_cli_parser.cpp:248
 #, no-c-format
 msgid "Sets the Matroska file section that all following add/set/delete actions operate on (see below and man page for syntax)"
 msgstr "다음에 오는 모든 add/set/delete 동작이 가동하는 Matroska 파일 섹션을 설정합니다. (구문은 아래의 방법과 man page를 참조하십시오.)"
 
-#: src/propedit/propedit_cli_parser.cpp:241
+#: src/propedit/propedit_cli_parser.cpp:244
 #, no-c-format
 msgid "Sets the Matroska parser mode to 'fast' (default) or 'full'"
 msgstr "Matroska 분석 모드를 'fast'(기본값) 또는 'full'로 설정합니다."
@@ -11502,7 +11502,7 @@ msgstr "태그 언어"
 msgid "Tag language (IETF BCP 47)"
 msgstr "태그 언어 (IETF)"
 
-#: src/propedit/propedit_cli_parser.cpp:286
+#: src/propedit/propedit_cli_parser.cpp:289
 #, no-c-format
 msgid "Tag selectors"
 msgstr "태그 선택기"
@@ -11811,7 +11811,7 @@ msgstr "수직으로 제거되지 않은 모든 픽셀에 대해 Cr 및 Cb 채�
 msgid "The application will terminate now."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:2158
+#: src/merge/mkvmerge.cpp:2164
 #, no-c-format
 msgid "The argument '{0}' is not allowed in identification mode.\n"
 msgstr "인수 '{0}'은 식별 모드에서 허용되어 있지 않습니다.\n"
@@ -12074,7 +12074,7 @@ msgstr "2개의 트랙이 가로(너비) 해상도가 서로 다름: {0} - {1}"
 msgid "The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."
 msgstr ""
 
-#: src/merge/mkvmerge.cpp:3185
+#: src/merge/mkvmerge.cpp:3191
 #, no-c-format
 msgid "The drive may be full."
 msgstr "드라이브가 꽉 찼을지 모릅니다."
@@ -12789,7 +12789,7 @@ msgstr "이 인수에 주어진 숫자는 출력되는 Matroska 블록 수를 �
 msgid "The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."
 msgstr "여기서 사용할 수 있는 코덱은 VP8/VP9과 Vorbis/Opus 오디오 트랙입니다."
 
-#: src/merge/mkvmerge.cpp:2498
+#: src/merge/mkvmerge.cpp:2504
 #, no-c-format
 msgid "The option '--meta-seek-size' is no longer supported. Please read mkvmerge's documentation, especially the section about the MATROSKA FILE LAYOUT.\n"
 msgstr "'--meta-seek-size'옵션은 더 이상 지원되지 않습니다. mkvmerge의 문서, 특히 MATROSKA FILE LAYOUT 섹션을 읽어보십시오.\n"
@@ -12809,7 +12809,7 @@ msgstr "여기에 입력한 옵션은 기본적으로 모든 새로운 합치기
 msgid "The order is: video first followed by audio, subtitles and other types."
 msgstr ""
 
-#: src/propedit/propedit_cli_parser.cpp:273
+#: src/propedit/propedit_cli_parser.cpp:276
 #, no-c-format
 msgid "The order of the various options is not important."
 msgstr "다양한 옵션의 순서는 중요하지 않습니다."
@@ -12996,32 +12996,32 @@ msgstr "'<NUM>' 문자열을 챕터 번호로 교체합니다."
 msgid "The string '<START>' will be replaced by the chapter's start timestamp."
 msgstr "'<START>' 문자열을 챕터의 시작 타임스탬프로 교체합니다."
 
-#: src/propedit/propedit_cli_parser.cpp:287
+#: src/propedit/propedit_cli_parser.cpp:290
 #, no-c-format
 msgid "The string 'all' works on all tags."
 msgstr "문자열 'all'은 모든 태그에 적용됩니다."
 
-#: src/propedit/propedit_cli_parser.cpp:288
+#: src/propedit/propedit_cli_parser.cpp:291
 #, no-c-format
 msgid "The string 'global' works on the global tags."
 msgstr "문자열 'global'은 전역 태그에 적용됩니다."
 
-#: src/propedit/propedit_cli_parser.cpp:281
+#: src/propedit/propedit_cli_parser.cpp:284
 #, no-c-format
 msgid "The string 'track:' followed by one of the chars 'a', 'b', 's' or 'v' followed by a number 'n' selects the nth audio, button, subtitle or video track (e.g. '--edit track:a2'). Numbering starts at 1."
 msgstr "문자열 'track:'뒤에 'a', 'b', 's', 'v', 뒤에 숫자 'n'을 붙여서 n번째 오디오(a), 버튼(b), 자막(s), 비디오(v) 트랙을 선택합니다 (예: '--edit track:a2'). 번호는 1부터 시작합니다."
 
-#: src/propedit/propedit_cli_parser.cpp:283
+#: src/propedit/propedit_cli_parser.cpp:286
 #, no-c-format
 msgid "The string 'track:=uid' with 'uid' being a number selects the track whose 'track UID' element equals 'uid'."
 msgstr "'uid'가 문자열 'track:=uid'에서 'track UID'요소가 'uid'와 같은 트랙을 선택합니다."
 
-#: src/propedit/propedit_cli_parser.cpp:284
+#: src/propedit/propedit_cli_parser.cpp:287
 #, no-c-format
 msgid "The string 'track:@number' with 'number' being a number selects the track whose 'track number' element equals 'number'."
 msgstr "'number' 문자열 'track:@number'에서 'track number'요소가 'number'와 같은 트랙을 선택합니다."
 
-#: src/propedit/propedit_cli_parser.cpp:280
+#: src/propedit/propedit_cli_parser.cpp:283
 #, no-c-format
 msgid "The string 'track:n' with 'n' being a number selects the nth track. Numbering starts at 1."
 msgstr "'n'은 문자열 'track:n'에서 n번째 트랙을 선택합니다. 숫자는 1부터 시작합니다."
@@ -13031,7 +13031,7 @@ msgstr "'n'은 문자열 'track:n'에서 n번째 트랙을 선택합니다. 숫�
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
 msgstr "'<FILE_NAME>'과 '<FILE_NAME_WITH_EXT>' 문자열은 결합하는 파일의 챕터를 만들 때만 동작하는데, 결합하는 파일의 이름으로 대체됩니다 (전자는 확장자 없이, 후자는 확장자를 포함합니다)."
 
-#: src/propedit/propedit_cli_parser.cpp:277
+#: src/propedit/propedit_cli_parser.cpp:280
 #, no-c-format
 msgid "The strings 'info', 'segment_info' or 'segmentinfo' select the segment information element. This is also the default until the first '--edit' option is found."
 msgstr "문자열 'info' 또는 'segment_info' 또는 'segmentinfo'의 세그먼트 정보 요소를 선택합니다. 이것은 또한 첫 번째 '--edit'옵션을 찾을 때까지 기본값 이기도합니다."
@@ -13177,7 +13177,7 @@ msgid "The track {0} from file no. {1} ('{2}') is to be appended more than once.
 msgstr "{1} ('{2}') 파일 번호의 {0} 트랙을 한 번 이상 결합하려고 합니다. '--append-to'의 인수가 잘못되었습니다.\n"
 
 #: src/merge/mkvmerge.cpp:2026
-#: src/merge/mkvmerge.cpp:2990
+#: src/merge/mkvmerge.cpp:2996
 #, no-c-format
 msgid "The type of file '{0}' could not be recognized.\n"
 msgstr " '{0}' 파일의 형식을 인식할 수 없습니다.\n"
@@ -13192,7 +13192,7 @@ msgstr " '{0}' 파일의 형식은 지원되지 않습니다.\n"
 msgid "The user can then select which playlist to actually add."
 msgstr "사용자는 실제로 추가할 재생목록을 선택할 수 있습니다."
 
-#: src/propedit/propedit_cli_parser.cpp:106
+#: src/propedit/propedit_cli_parser.cpp:107
 #, no-c-format
 msgid "The value '{0}' is not a number.\n"
 msgstr "'{0}' 값은 숫자가 아닙니다.\n"
@@ -13295,7 +13295,7 @@ msgstr "2개의 트랙이 가로(너비) 해상도가 서로 다름: {0} - {1}"
 msgid "Theora"
 msgstr "Theora"
 
-#: src/merge/mkvmerge.cpp:3110
+#: src/merge/mkvmerge.cpp:3116
 #, fuzzy, no-c-format
 msgid "There are no chapters in source files & chapter files."
 msgstr "소스 파일과 챕터 파일에서 {0}개의 챕터만 찾았습니다."
@@ -13849,8 +13849,8 @@ msgid "Track extraction"
 msgstr "트랙 추출"
 
 #: src/propedit/options.cpp:192
-#: src/propedit/propedit_cli_parser.cpp:167
-#: src/propedit/propedit_cli_parser.cpp:279
+#: src/propedit/propedit_cli_parser.cpp:168
+#: src/propedit/propedit_cli_parser.cpp:282
 #, no-c-format
 msgid "Track headers"
 msgstr "트랙 헤더"
@@ -14152,7 +14152,7 @@ msgstr "'{0}'는 알 수 없는 모드입니다.\n"
 msgid "Unknown option '{0}'.\n"
 msgstr "'{0}'는 알 수 없는 옵션입니다.\n"
 
-#: src/propedit/propedit_cli_parser.cpp:39
+#: src/propedit/propedit_cli_parser.cpp:40
 #, no-c-format
 msgid "Unknown parse mode in '{0} {1}'.\n"
 msgstr "'{0} {1}'에서 알 수 없는 분석 모드가 지정되었습니다.\n"
@@ -14197,7 +14197,7 @@ msgstr "미지원 파일 형식"
 msgid "Unsupported track type for this track.\n"
 msgstr "이 트랙은 지원되지 않는 트랙 유형입니다.\n"
 
-#: src/propedit/propedit_cli_parser.cpp:260
+#: src/propedit/propedit_cli_parser.cpp:263
 #, no-c-format
 msgid "Update an attachment's properties"
 msgstr "첨부 파일의 속성 업데이트"
@@ -14249,7 +14249,7 @@ msgstr "각 파일에서 다르게 바뀌는 요소(합친 날짜, 세그먼트 
 msgid "Use legac&y MIME types for font attachments"
 msgstr "하나 이상의 첨부 파일을 삭제합니다"
 
-#: src/propedit/propedit_cli_parser.cpp:242
+#: src/propedit/propedit_cli_parser.cpp:245
 #, no-c-format
 msgid "Use legacy font MIME types when adding new attachments or replacing existing ones"
 msgstr ""
@@ -14971,7 +14971,7 @@ msgstr "잘못된 Kate 버전: {0}.{1} > {2}.x"
 msgid "Wrong Theora version: {0}.{1}.{2} != 3.2.x"
 msgstr "잘못된 Theora 버전: {0}.{1}.{2} != 3.2.x"
 
-#: src/merge/mkvmerge.cpp:2324
+#: src/merge/mkvmerge.cpp:2330
 #, no-c-format
 msgid "Wrong argument to '--split-max-files'.\n"
 msgstr "'--split-max-files' 인수가 잘못되었습니다.\n"
@@ -15697,7 +15697,7 @@ msgstr "mkvmerge가 인터럽트 신호 (Ctrl+C?)에 의해 중단되었습니�
 msgid "mkvmerge/mkvextract track ID: {0}"
 msgstr "mkvmerge/mkvextract 트랙 ID: {0}"
 
-#: src/propedit/propedit_cli_parser.cpp:237
+#: src/propedit/propedit_cli_parser.cpp:240
 #, no-c-format
 msgid "mkvpropedit [options] <file> <actions>"
 msgstr "mkvpropedit [옵션] <파일> <동작>"
@@ -15920,7 +15920,7 @@ msgstr "tags [옵션] out.xml"
 msgid "text subtitles"
 msgstr "텍스트 자막"
 
-#: src/merge/mkvmerge.cpp:2873
+#: src/merge/mkvmerge.cpp:2879
 #, no-c-format
 msgid "timestamps"
 msgstr "타임코드"
@@ -15950,7 +15950,7 @@ msgstr "상단 필드 먼저 출력, 하단 필드 먼저 저장"
 msgid "top field displayed first, top field stored first"
 msgstr "상단 필드 먼저 출력, 상단 필드 먼저 저장"
 
-#: src/merge/mkvmerge.cpp:2865
+#: src/merge/mkvmerge.cpp:2871
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:75
 #, no-c-format
 msgid "track name"
