@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: MKVToolNix Italian translation 17.12.2018\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2022-03-27 19:12+0200\n"
-"PO-Revision-Date: 2022-03-27 19:00+0200\n"
+"PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: ROBERTO BORIOTTI <roberto.boriotti@canon.it>, 2021-2022\n"
 "Language-Team: Italian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/it/)\n"
@@ -670,18 +670,17 @@ msgid "  --no-global-tags         Don't keep global tags from the source file.\n
 msgstr "  --no-global-tags         Non mantiene le etichette globali del file sorgente.\n"
 
 #: src/merge/mkvmerge.cpp:145
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --normalize-language-ietf <canonical|extlang>\n"
 "                           Normalize all IETF BCP 47 language tags to either\n"
 "                           their canonical or their extended language subtags\n"
 "                           form (default: no normalization).\n"
 msgstr ""
-"  --probe-range-percentage <percentuale>\n"
-"\n"
-"                           Imposta la dimensione massima per traccia da\n"
-"                           analizzare in percentuale della dimensione totale\n"
-"                           per certi tipi di file (predefinito:0.3).\n"
+"  --normalize-language-ietf <canonical|extlang>\n"
+"                           Normalizza tutti le etichette lingua IETF BCP 47 su entrambi\n"
+"                            i loro sottotag canonici o forma lingua estesa\n"
+"                            (predefinito: nessuna normalizzazione).\n"
 
 #: src/merge/mkvmerge.cpp:260
 #, no-c-format
@@ -1899,9 +1898,9 @@ msgid "&Expand all"
 msgstr "&Espandi tutto"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:391
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Extended language subtag:"
-msgstr "Il modulo sottotag della lingua estesa corrispondente: %1."
+msgstr "&Sottotag lingua estesa:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:698
 #, no-c-format
@@ -2236,7 +2235,7 @@ msgstr "&Rimuovi edizioni o capitoli selezionati"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:399
 #, no-c-format
 msgid "&Replace with normalized form"
-msgstr ""
+msgstr "&Sostituisci con forma normalizzata"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:202
 #, no-c-format
@@ -2687,9 +2686,9 @@ msgstr "'{0}' non è un hack valido.\n"
 
 #: src/merge/mkvmerge.cpp:2105
 #: src/propedit/propedit_cli_parser.cpp:223
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "'{0}' is not a valid language normalization mode.\n"
-msgstr "'{0}' non è un codice lingua ISO 639-2 valido."
+msgstr "'{0}' non è una modalità di normalizzazione lingua valida.\n"
 
 #: src/merge/mkvmerge.cpp:1528
 #, no-c-format
@@ -3725,12 +3724,12 @@ msgstr "Chiedi sempre all'utente"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:179
 #, no-c-format
 msgid "Always automatically replace with canonical form"
-msgstr ""
+msgstr "Sostituisci sempre automaticamente con la forma canonica"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:182
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Always automatically replace with extended language subtags form"
-msgstr "Il modulo sottotag della lingua estesa corrispondente: %1."
+msgstr "Sostituisci sempre automaticamente con la forma sottotag lingua estesi"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2189
 #, no-c-format
@@ -4383,7 +4382,7 @@ msgstr "Impossibile scrivere la traccia {0} con l'ID Codec '{1}' nel file '{2}',
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:177
 #, no-c-format
 msgid "Canonical form"
-msgstr ""
+msgstr "Forma canonica"
 
 #: src/common/kax_info.cpp:1333
 #: src/common/kax_info.cpp:1337
@@ -6472,14 +6471,14 @@ msgid "Exports the chapter information in the simple format used in OGM tools (C
 msgstr "Esporta le informazioni capitolo in un formato semplice usato negli strumenti OGM (CAPITOLO01=... NOMECAPITOLO=...)."
 
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:215
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extended language subtag"
-msgstr "Il modulo sottotag della lingua estesa corrispondente: %1."
+msgstr "Sottotag lingua estesa"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:180
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extended language subtags form"
-msgstr "Il modulo sottotag della lingua estesa corrispondente: %1."
+msgstr "Forma sottotag lingua estesi"
 
 #: src/common/bcp47.cpp:445
 #, no-c-format
@@ -7135,9 +7134,9 @@ msgid "ID"
 msgstr "ID"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2108
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "IETF BCP 47 &normalization mode:"
-msgstr "Modo predefinito modifica lingua IETF BCP 47:"
+msgstr "IETF BCP 47 e modalità normalizzazione:"
 
 #: src/common/iso639.cpp:43
 #, no-c-format
@@ -9103,7 +9102,7 @@ msgstr "Priorità normale"
 #: src/propedit/propedit_cli_parser.cpp:269
 #, no-c-format
 msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical') or their extended language subtags form (mode 'extlang')"
-msgstr ""
+msgstr "Normalizza tutti le etichette lingua IETF BCP 47 degli elementi modificati nella loro forma canonica (modalità 'canonical') o nella loro forma di sottotag di lingua estesa (modalità 'extlang')"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
 #, no-c-format
@@ -10407,12 +10406,12 @@ msgstr "Sostituisci l'allegato con un nuovo file pren&di il nome && il tipo MIME
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:178
 #, no-c-format
 msgid "Replace with canonical form once"
-msgstr ""
+msgstr "Sostituisci con la forma canonica"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:181
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Replace with extended language subtags form once"
-msgstr "Il modulo sottotag della lingua estesa corrispondente: %1."
+msgstr "Sostituisci con i sottotag di lingua estesi"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:721
 #, no-c-format
@@ -15289,7 +15288,7 @@ msgstr "pulsanti"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:843
 #, no-c-format
 msgid "canonical form"
-msgstr ""
+msgstr "forma canonica"
 
 #: src/common/kax_info.cpp:635
 #, no-c-format
@@ -15382,9 +15381,9 @@ msgid "equirectangular"
 msgstr "equi rettangolare"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:844
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "extended language subtags form"
-msgstr "Il modulo sottotag della lingua estesa corrispondente: %1."
+msgstr "forma sottotag lingua estesi"
 
 #: src/merge/output_control.cpp:439
 #, no-c-format
@@ -15834,9 +15833,9 @@ msgid "no language selected"
 msgstr "nessuna lingua selezionata"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:842
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "no normalization"
-msgstr "Informazioni"
+msgstr "nessuna normalizzazione"
 
 #: src/common/kax_info.cpp:824
 #, no-c-format
