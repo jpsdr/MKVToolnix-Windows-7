@@ -85,16 +85,18 @@ def create_iso639_language_list_file
     }
   end
 
-  ("a".."d").each do |letter|
-    alpha_3 = "qa#{letter}"
-    entries_by_alpha_3[alpha_3] = {
-      "name"           => "Reserved for local use: #{alpha_3}",
-      "bibliographic"  => nil,
-      "alpha_2"        => nil,
-      "alpha_3"        => alpha_3,
-      "alpha_3_to_use" => alpha_3,
-      "has_639_2"      => true,
-    }
+  ("a".."t").each do |letter1|
+    ("a".."z").each do |letter2|
+      alpha_3 = "q#{letter1}#{letter2}"
+      entries_by_alpha_3[alpha_3] = {
+        "name"           => "Reserved for local use: #{alpha_3}",
+        "bibliographic"  => nil,
+        "alpha_2"        => nil,
+        "alpha_3"        => alpha_3,
+        "alpha_3_to_use" => alpha_3,
+        "has_639_2"      => true,
+      }
+    end
   end
 
   entries_by_alpha_2 = Hash[ *
