@@ -638,16 +638,17 @@ msgid "  --no-global-tags         Don't keep global tags from the source file.\n
 msgstr "  --no-global-tags         不保留输入文件中的全局标签。\n"
 
 #: src/merge/mkvmerge.cpp:145
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --normalize-language-ietf <canonical|extlang>\n"
 "                           Normalize all IETF BCP 47 language tags to either\n"
 "                           their canonical or their extended language subtags\n"
 "                           form (default: no normalization).\n"
 msgstr ""
-"  --probe-range-percentage <百分比>\n"
-"                           设置对特定文件类型探测轨道的\n"
-"                           最大百分比 (默认值: 0.3)。\n"
+"  --normalize-language-ietf <canonical|extlang>\n"
+"                           将所有语言标签规范化为 IETF BCP 47\n"
+"                           最简式 (canonical) 或扩展语言子标签\n"
+"                           形式 (默认: 不作规范化变换)。\n"
 
 #: src/merge/mkvmerge.cpp:260
 #, no-c-format
@@ -1832,9 +1833,9 @@ msgid "&Expand all"
 msgstr "全部展开(&E)"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:391
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Extended language subtag:"
-msgstr "对应的扩展语言子标签形式为: %1。"
+msgstr "扩展语言子标签(&E):"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:698
 #, no-c-format
@@ -2166,7 +2167,7 @@ msgstr "移除选中的版本或章节(&R)"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:399
 #, no-c-format
 msgid "&Replace with normalized form"
-msgstr ""
+msgstr "替换为规范化形式(&R)"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:202
 #, no-c-format
@@ -2612,9 +2613,9 @@ msgstr "｢{0}｣ 不是有效的 hack。\n"
 
 #: src/merge/mkvmerge.cpp:2105
 #: src/propedit/propedit_cli_parser.cpp:223
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "'{0}' is not a valid language normalization mode.\n"
-msgstr "｢{0}｣ 不是有效的 ISO 639-2 语言编码。"
+msgstr "「{0}」不是有效的语言规范化模式。\n"
 
 #: src/merge/mkvmerge.cpp:1528
 #, no-c-format
@@ -3647,12 +3648,12 @@ msgstr "总是询问用户"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:179
 #, no-c-format
 msgid "Always automatically replace with canonical form"
-msgstr ""
+msgstr "总是自动替换为最简式"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:182
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Always automatically replace with extended language subtags form"
-msgstr "对应的扩展语言子标签形式为: %1。"
+msgstr "总是自动替换为扩展语言子标签形式"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2189
 #, no-c-format
@@ -4307,7 +4308,7 @@ msgstr "无法将 CodecID 为｢{1}｣的轨道 {0} 写入文件｢{2}｣，因�
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:177
 #, no-c-format
 msgid "Canonical form"
-msgstr ""
+msgstr "最简式"
 
 #: src/common/kax_info.cpp:1333
 #: src/common/kax_info.cpp:1337
@@ -6393,14 +6394,14 @@ msgid "Exports the chapter information in the simple format used in OGM tools (C
 msgstr "以 OGM tools 所用的简易格式导出章节信息 (内容类似 CHAPTER01=... CHAPTER01NAME=...)。"
 
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:215
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extended language subtag"
-msgstr "对应的扩展语言子标签形式为: %1。"
+msgstr "扩展语言子标签"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:180
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extended language subtags form"
-msgstr "对应的扩展语言子标签形式为: %1。"
+msgstr "扩展语言子标签形式"
 
 #: src/common/bcp47.cpp:445
 #, no-c-format
@@ -7055,9 +7056,9 @@ msgid "ID"
 msgstr "ID"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2108
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "IETF BCP 47 &normalization mode:"
-msgstr "默认的 IETF BCP 47 语言编辑模式(&M):"
+msgstr "IETF BCP 47 规范化模式(&N):"
 
 #: src/common/iso639.cpp:43
 #, no-c-format
@@ -9022,7 +9023,7 @@ msgstr "常规优先级"
 #: src/propedit/propedit_cli_parser.cpp:269
 #, no-c-format
 msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical') or their extended language subtags form (mode 'extlang')"
-msgstr ""
+msgstr "将所有发生变化的元素的 IETF BCP 47 语言代码规范化为其最简式（「canonical」模式）或其扩展语言子标签形式（「extlang」模式）"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
 #, no-c-format
@@ -10317,12 +10318,12 @@ msgstr "用新文件替换附件，并推断其名称及 MIME 类型(&D)"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:178
 #, no-c-format
 msgid "Replace with canonical form once"
-msgstr ""
+msgstr "仅此次替换为最简式"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:181
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Replace with extended language subtags form once"
-msgstr "对应的扩展语言子标签形式为: %1。"
+msgstr "仅此次替换为扩展语言子标签形式"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:721
 #, no-c-format
@@ -13497,7 +13498,7 @@ msgstr "该功能在同目录下存在较多播放列表且无法快速判断播
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:472
 #, no-c-format
 msgid "This language tag is a grandfathered element only supported for historical reasons."
-msgstr "此语言标签为获准保留的（grandfathered）古老标签，仅为历史因素而支持其输入，建议使用相应的现代标签。"
+msgstr "此语言标签是为向后兼容而保留的（grandfathered）古老标签，仅为历史因素而支持其输入，建议使用更为现代的标签。"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:100
 #, no-c-format
@@ -15178,7 +15179,7 @@ msgstr "按钮"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:843
 #, no-c-format
 msgid "canonical form"
-msgstr ""
+msgstr "最简式"
 
 #: src/common/kax_info.cpp:635
 #, no-c-format
@@ -15271,9 +15272,9 @@ msgid "equirectangular"
 msgstr "等距圆柱（equirectangular）"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:844
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "extended language subtags form"
-msgstr "对应的扩展语言子标签形式为: %1。"
+msgstr "扩展语言子标签形式"
 
 #: src/merge/output_control.cpp:439
 #, no-c-format
@@ -15721,9 +15722,9 @@ msgid "no language selected"
 msgstr "未选择语言"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:842
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "no normalization"
-msgstr "信息"
+msgstr "不作规范化"
 
 #: src/common/kax_info.cpp:824
 #, no-c-format
