@@ -57,6 +57,10 @@ module Mtx::IANALanguageSubtagRegistry
     return @@registry
   end
 
+  def self.fetch_isdcf_languages
+    JSON.parse(Mtx::OnlineFile.download("https://registry.isdcf.com/languages", "isdcf_languages"))["data"]
+  end
+
   def self.format_one_extlang_variant entry
     if entry[:prefix]
       prefix = 'VS{ ' + entry[:prefix].sort.map(&:to_cpp_string).join(', ') + ' }'
@@ -133,7 +137,14 @@ module Mtx::IANALanguageSubtagRegistry
     ]
   end
 
-  def self.format_preferred_values entries
+  def self.format_one_preferred_value_isdcf entry
+    return [
+      self.format_one_preferred_value_construction(:tag, entry["dcncTag"]),
+      self.format_one_preferred_value_construction(:tag, entry["rfc5646Tag"]),
+    ]
+  end
+
+  def self.format_preferred_values entries, isdcf_entries
     rows = entries.
       values.
       map     { |v| v.select { |e| e.key?(:preferred_value) } }.
@@ -142,12 +153,16 @@ module Mtx::IANALanguageSubtagRegistry
       sort_by { |e| [ 10 - e[:original_value].gsub(%r{[^-]+}, '').length, e[:original_value].downcase ] }.
       map     { |e| self.format_one_preferred_value e }
 
+    rows += isdcf_entries.
+      select { |e| %r{^Q[A-Z]{2}$}.match(e["dcncTag"] || "") and !e["rfc5646Tag"].blank? }.
+      map    { |e| self.format_one_preferred_value_isdcf e }
+
     "  g_preferred_values.reserve(#{rows.size});\n\n" +
       format_table(rows, :column_suffix => ',', :row_prefix => "  g_preferred_values.emplace_back(", :row_suffix => ");").join("\n") +
       "\n"
   end
 
-  def self.do_create_cpp entries
+  def self.do_create_cpp entries, isdcf_entries
     cpp_file_name = "src/common/iana_language_subtag_registry_list.cpp"
     formatted     = [
       self.format_extlangs_variants(entries, "extlang", "extlangs"),
@@ -209,13 +224,13 @@ EOT
     content = header +
       formatted.join("\n") +
       middle +
-      self.format_preferred_values(entries) + "\n" +
+      self.format_preferred_values(entries, isdcf_entries) + "\n" +
       footer
 
     runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }
   end
 
   def self.create_cpp
-    do_create_cpp(self.fetch_registry)
+    do_create_cpp(self.fetch_registry, self.fetch_isdcf_languages)
   end
 end

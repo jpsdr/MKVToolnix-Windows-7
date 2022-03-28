@@ -56,6 +56,11 @@
 * all: IETF BCP 47/RFC 5646 language tags: all language codes reserved for
   private/local use (`qaa`–`qtz`) are now supported. Part of the
   implementation of #3307.
+* all: IETF BCP 47/RFC 5646 language tags: Digital Cinema Naming Convention
+  language codes that fall into the IETF BCP 47 range of "private use" tags
+  (`qaa`–`qtz`) are now replaced by their IETF BCP 47 equivalents during
+  normalization (e.g. `QMS` → `cmn-Hans`). Part of the implementation of
+  #3307.
 
 ## Bug fixes
 

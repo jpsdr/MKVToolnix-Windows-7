@@ -429,7 +429,7 @@ void
 init_preferred_values() {
   mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::none);
 
-  g_preferred_values.reserve(401);
+  g_preferred_values.reserve(431);
 
   g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ja-Latn-hepburn-heploc"s),   mtx::bcp47::language_c{}.set_variants(VS{"alalc97"s}).set_valid(true));
   g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("en-GB-oed"s),                mtx::bcp47::language_c::parse("en-GB-oxendict"s)                     );
@@ -832,6 +832,36 @@ init_preferred_values() {
   g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("yuu"s),                      mtx::bcp47::language_c::parse("yug"s)                                );
   g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zir"s),                      mtx::bcp47::language_c::parse("scv"s)                                );
   g_preferred_values.emplace_back(mtx::bcp47::language_c{}.set_region("ZR"s).set_valid(true), mtx::bcp47::language_c{}.set_region("CD"s).set_valid(true)           );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QMS"s),                      mtx::bcp47::language_c::parse("cmn-Hans"s)                           );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QMT"s),                      mtx::bcp47::language_c::parse("cmn-Hant"s)                           );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QTM"s),                      mtx::bcp47::language_c::parse("cmn-TW"s)                             );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QFC"s),                      mtx::bcp47::language_c::parse("fr-CA"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QUC"s),                      mtx::bcp47::language_c::parse("quc"s)                                );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QBP"s),                      mtx::bcp47::language_c::parse("pt-BR"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QUZ"s),                      mtx::bcp47::language_c::parse("quz"s)                                );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QZB"s),                      mtx::bcp47::language_c::parse("quz-BO"s)                             );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QZE"s),                      mtx::bcp47::language_c::parse("quz-EC"s)                             );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QZP"s),                      mtx::bcp47::language_c::parse("quz-PE"s)                             );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSA"s),                      mtx::bcp47::language_c::parse("es-AR"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSB"s),                      mtx::bcp47::language_c::parse("es-BO"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QCL"s),                      mtx::bcp47::language_c::parse("es-CL"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QCO"s),                      mtx::bcp47::language_c::parse("es-CO"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QCA"s),                      mtx::bcp47::language_c::parse("es-CR"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QCU"s),                      mtx::bcp47::language_c::parse("es-CU"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSD"s),                      mtx::bcp47::language_c::parse("es-DO"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSE"s),                      mtx::bcp47::language_c::parse("es-EC"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSL"s),                      mtx::bcp47::language_c::parse("es-SV"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QGU"s),                      mtx::bcp47::language_c::parse("es-GT"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSH"s),                      mtx::bcp47::language_c::parse("es-HN"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSM"s),                      mtx::bcp47::language_c::parse("es-MX"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QNI"s),                      mtx::bcp47::language_c::parse("es-NI"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QPA"s),                      mtx::bcp47::language_c::parse("es-PA"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QPY"s),                      mtx::bcp47::language_c::parse("es-PY"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QPE"s),                      mtx::bcp47::language_c::parse("es-PE"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QPR"s),                      mtx::bcp47::language_c::parse("es-PR"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QUS"s),                      mtx::bcp47::language_c::parse("es-US"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QUY"s),                      mtx::bcp47::language_c::parse("es-UY"s)                              );
+  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QVE"s),                      mtx::bcp47::language_c::parse("es-VE"s)                              );
 
 
   mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::default_mode);

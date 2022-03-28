@@ -559,4 +559,12 @@ TEST(BCP47LanguageTags, NormalizationDuringParsing) {
   language_c::set_normalization_mode(norm_e::none);
 }
 
+TEST(BCP47LanguageTags, NormalizationForDCNCTags) {
+  language_c::set_normalization_mode(norm_e::canonical);
+
+  EXPECT_EQ("cmn-Hans"s,    language_c::parse("QMS"s).format());
+  EXPECT_EQ("cmn-Hant-CN"s, language_c::parse("QMT-CN"s).format());
+  EXPECT_EQ("pt-BR"s,       language_c::parse("QBP"s).format());
+}
+
 }
