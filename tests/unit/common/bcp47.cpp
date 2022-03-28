@@ -10,10 +10,12 @@ using namespace mtx::bcp47;
 using norm_e = mtx::bcp47::normalization_mode_e;
 
 TEST(BCP47LanguageTags, Construction) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_FALSE(language_c{}.is_valid());
 }
 
 TEST(BCP47LanguageTags, ParsingValid) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_TRUE(language_c::parse("de-Latn-CH-x-weeee").is_valid());
   EXPECT_TRUE(language_c::parse("deu-Latn-CH-x-weeee").is_valid());
   EXPECT_TRUE(language_c::parse("ger-Latn-076-x-weeee").is_valid());
@@ -25,16 +27,19 @@ TEST(BCP47LanguageTags, ParsingValid) {
 }
 
 TEST(BCP47LanguageTags, ParsingValidUNM49) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_EQ("es-MX"s,  language_c::parse("es-484").format());
   EXPECT_EQ("es-419"s, language_c::parse("es-419").format());
 }
 
 TEST(BCP47LanguageTags, ParsingValidInRegistryButNotISOLists) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_TRUE(language_c::parse("en-003").is_valid());
   EXPECT_TRUE(language_c::parse("en-BU").is_valid());
 }
 
 TEST(BCP47LanguageTags, ParsingInvalid) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_FALSE(language_c::parse("zyx-Latn-CH-x-weeee").is_valid());  // invalid (zyx not ISO 639 code)
   EXPECT_FALSE(language_c::parse("ger-muku-CH-x-weeee").is_valid());  // invalid (muku not a script)
   EXPECT_FALSE(language_c::parse("ger-777").is_valid());              // invalid (777 not a region code)
@@ -44,6 +49,7 @@ TEST(BCP47LanguageTags, ParsingInvalid) {
 }
 
 TEST(BCP47LanguageTags, Formatting) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_EQ(""s, language_c{}.format());
 
   language_c l;
@@ -107,6 +113,7 @@ TEST(BCP47LanguageTags, Formatting) {
 }
 
 TEST(BCP47LanguageTags, FormattingInvalidWithoutLanguage) {
+  language_c::set_normalization_mode(norm_e::none);
   auto l = language_c{};
 
   l.set_region("FR"s);
@@ -117,6 +124,7 @@ TEST(BCP47LanguageTags, FormattingInvalidWithoutLanguage) {
 }
 
 TEST(BCP47LanguageTags, CodeConversion) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_EQ(""s,    language_c{}.get_iso639_alpha_3_code());
   EXPECT_EQ("ger"s, language_c::parse("de").get_iso639_alpha_3_code());
   EXPECT_EQ("ger"s, language_c::parse("deu").get_iso639_alpha_3_code());
@@ -136,6 +144,7 @@ TEST(BCP47LanguageTags, CodeConversion) {
 }
 
 TEST(BCP47LanguageTags, UnorderedMap) {
+  language_c::set_normalization_mode(norm_e::none);
   std::unordered_map<language_c, int> m;
 
   m[language_c::parse("de-Latn")] = 42;
@@ -144,6 +153,7 @@ TEST(BCP47LanguageTags, UnorderedMap) {
 }
 
 TEST(BCP47LanguageTags, Clearing) {
+  language_c::set_normalization_mode(norm_e::none);
   auto l = language_c::parse("eng");
 
   ASSERT_TRUE(l.has_valid_iso639_code());
@@ -154,6 +164,7 @@ TEST(BCP47LanguageTags, Clearing) {
 }
 
 TEST(BCP47LanguageTags, EqualityOperators) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_TRUE(language_c::parse("ger") == language_c::parse("ger"));
   EXPECT_TRUE(language_c::parse("ger") == language_c::parse("deu"));
   EXPECT_TRUE(language_c::parse("ger") == language_c::parse("de"));
@@ -186,6 +197,7 @@ TEST(BCP47LanguageTags, EqualityOperators) {
 }
 
 TEST(BCP47LanguageTags, DifferenceBetweenISO639_2And639_3) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_TRUE(language_c::parse("de").has_valid_iso639_code());
   EXPECT_TRUE(language_c::parse("de").has_valid_iso639_2_code());
 
@@ -194,6 +206,7 @@ TEST(BCP47LanguageTags, DifferenceBetweenISO639_2And639_3) {
 }
 
 TEST(BCP47LanguageTags, PrefixValidation) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_TRUE(language_c::parse("de-CH-1996").is_valid());
   EXPECT_TRUE(language_c::parse("sr-Cyrl-ekavsk").is_valid());
   EXPECT_TRUE(language_c::parse("sr-Cyrl-SR-ekavsk").is_valid());
@@ -225,12 +238,14 @@ TEST(BCP47LanguageTags, PrefixValidation) {
 }
 
 TEST(BCP47LanguageTags, RFC4646AssortedValid) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_TRUE(language_c::parse("de-1996").is_valid()); // section 3.1
   EXPECT_TRUE(language_c::parse("de-Latg-1996").is_valid()); // section 3.1
   EXPECT_TRUE(language_c::parse("de-CH-1996").is_valid()); // section 3.1
 }
 
 TEST(BCP47LanguageTags, RFC4646AppendixBValid) {
+  language_c::set_normalization_mode(norm_e::none);
   // Simple language subtag:
   EXPECT_TRUE(language_c::parse("de").is_valid()); // (German)
   EXPECT_TRUE(language_c::parse("fr").is_valid()); // (French)
@@ -286,12 +301,14 @@ TEST(BCP47LanguageTags, RFC4646AppendixBValid) {
 }
 
 TEST(BCP47LanguageTags, RFC4646AppendixBInvalid) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_FALSE(language_c::parse("de-419-DE").is_valid()); // (two region tags)
   EXPECT_FALSE(language_c::parse("a-DE").is_valid()); // (use of a single-character subtag in primary position; note that there are a few grandfathered tags that start with "i-" that are valid)
   EXPECT_FALSE(language_c::parse("ar-a-aaa-b-bbb-a-ccc").is_valid()); // (two extensions with same single-letter prefix)
 }
 
 TEST(BCP47LanguageTags, OnlyCertainScriptsAllowedOrNoScriptAtAll) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_TRUE(language_c::parse("sr-Bali").is_valid());
   EXPECT_TRUE(language_c::parse("sr-Cyrl").is_valid());
   EXPECT_TRUE(language_c::parse("sr-Latn").is_valid());
@@ -304,6 +321,7 @@ TEST(BCP47LanguageTags, OnlyCertainScriptsAllowedOrNoScriptAtAll) {
 }
 
 TEST(BCP47LanguageTags, ExtensionsBasics) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_TRUE(language_c::parse("ja-t-test").is_valid());
   EXPECT_TRUE(language_c::parse("ja-t-abcdefgh").is_valid());
   EXPECT_TRUE(language_c::parse("ja-t-test-u-attr-co-phonebk").is_valid());
@@ -321,21 +339,25 @@ TEST(BCP47LanguageTags, ExtensionsBasics) {
 }
 
 TEST(BCP47LanguageTags, ExtensionsRFC6067) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_TRUE(language_c::parse("de-DE-u-attr-co-phonebk").is_valid());
 }
 
 TEST(BCP47LanguageTags, ExtensionsRFC6497) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_TRUE(language_c::parse("und-Cyrl-t-und-latn-m0-ungegn-2007").is_valid());
   EXPECT_TRUE(language_c::parse("und-Hebr-t-und-latn-m0-ungegn-1972").is_valid());
   EXPECT_TRUE(language_c::parse("ja-t-it-m0-xxx-v21a-2007").is_valid());
 }
 
 TEST(BCP47LanguageTags, ExtensionsFormatting) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_EQ("ja-t-test-u-attr-co-phonebk"s, language_c::parse("ja-T-Test-U-AttR-CO-phoNEbk").format());
   EXPECT_EQ("ja-u-attr-co-phonebk-t-test"s, language_c::parse("ja-U-AttR-CO-phoNEbk-T-Test").format());
 }
 
 TEST(BCP47LanguageTags, Matching) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_FALSE(language_c{}                  .matches(language_c{}));
   EXPECT_FALSE(language_c{}                  .matches(language_c::parse("es")));
   EXPECT_FALSE(language_c::parse("es")       .matches(language_c{}));
@@ -354,6 +376,7 @@ TEST(BCP47LanguageTags, Matching) {
 }
 
 TEST(BCP47LanguageTags, FindBestMatch) {
+  language_c::set_normalization_mode(norm_e::none);
   using V = std::vector<language_c>;
 
   EXPECT_FALSE(language_c{}           .find_best_match({}).is_valid());
@@ -374,6 +397,7 @@ TEST(BCP47LanguageTags, FindBestMatch) {
 }
 
 TEST(BCP47LanguageTags, ISO3166_1_Alpha2Codes) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_FALSE(language_c::parse("es").has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code());
   EXPECT_FALSE(language_c::parse("es-029").has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code());
   EXPECT_FALSE(language_c::parse("es-AA").has_valid_iso3166_1_alpha_2_or_top_level_domain_country_code());
@@ -394,6 +418,7 @@ TEST(BCP47LanguageTags, ISO3166_1_Alpha2Codes) {
 }
 
 TEST(BCP47LanguageTags, ClosestISO639_2_Alpha3Code) {
+  language_c::set_normalization_mode(norm_e::none);
   // default value returned in different cases
   EXPECT_EQ("und"s, language_c{}.get_closest_iso639_2_alpha_3_code());                          // empty entry
   EXPECT_EQ("und"s, language_c::parse("moocow").get_closest_iso639_2_alpha_3_code());           // invalid entry
@@ -422,6 +447,7 @@ TEST(BCP47LanguageTags, ClosestISO639_2_Alpha3Code) {
 }
 
 TEST(BCP47LanguageTags, Grandfathered) {
+  language_c::set_normalization_mode(norm_e::none);
   EXPECT_TRUE(language_c::parse("i-klingon").is_valid());
   EXPECT_TRUE(language_c::parse("i-KLiNGoN").is_valid());
   EXPECT_TRUE(language_c::parse("no-NyN").is_valid());
@@ -442,6 +468,7 @@ TEST(BCP47LanguageTags, Grandfathered) {
 }
 
 TEST(BCP47LanguageTags, ToCanonicalForm) {
+  language_c::set_normalization_mode(norm_e::none);
   // No changes as they're already normalized.
   EXPECT_EQ("sgn"s, language_c::parse("sgn"s).to_canonical_form().format());
   EXPECT_EQ("nsi"s, language_c::parse("nsi"s).to_canonical_form().format());
@@ -466,6 +493,7 @@ TEST(BCP47LanguageTags, ToCanonicalForm) {
 }
 
 TEST(BCP47LanguageTags, ToExtlangForm) {
+  language_c::set_normalization_mode(norm_e::none);
   // No changes as they're already normalized.
   EXPECT_EQ("sgn"s, language_c::parse("sgn"s).to_extlang_form().format());
 
@@ -479,6 +507,7 @@ TEST(BCP47LanguageTags, ToExtlangForm) {
 }
 
 TEST(BCP47LanguageTags, Cloning) {
+  language_c::set_normalization_mode(norm_e::none);
   auto l  = language_c::parse("de-DE-1996");
   auto l2 = l.clone();
 
@@ -496,6 +525,8 @@ TEST(BCP47LanguageTags, Cloning) {
 }
 
 TEST(BCP47LanguageTags, NormalizationDuringParsing) {
+  language_c::set_normalization_mode(norm_e::none);
+
   EXPECT_EQ("nsi"s,             language_c::parse("nsi"s,                    norm_e::canonical).format());
   EXPECT_EQ("jbo"s,             language_c::parse("jbo"s,                    norm_e::canonical).format());
   EXPECT_EQ("yue-jyutping"s,    language_c::parse("yue-jyutping"s,           norm_e::canonical).format());
