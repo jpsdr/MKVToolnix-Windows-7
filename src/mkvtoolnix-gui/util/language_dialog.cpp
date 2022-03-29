@@ -435,41 +435,41 @@ LanguageDialog::determineInfoAndWarningsFor(mtx::bcp47::language_c const &tag) {
   if (!tag.is_valid())
     return {};
 
-  QStringList info, warnings;
+  std::pair<QStringList, QStringList> lists;
 
   if (tag.has_valid_iso639_code() && !tag.has_valid_iso639_2_code() && (tag.get_closest_iso639_2_alpha_3_code() == "und"s))
-    warnings << QY("The selected language code '%1' is not an ISO 639-2 code. Players that only support the legacy Matroska language elements but not the IETF BCP 47 language elements will therefore display a different language such as 'und' (undetermined).").arg(Q(tag.get_language()));
+    lists.second << QY("The selected language code '%1' is not an ISO 639-2 code. Players that only support the legacy Matroska language elements but not the IETF BCP 47 language elements will therefore display a different language such as 'und' (undetermined).").arg(Q(tag.get_language()));
 
   if (!tag.get_language().empty()) {
     auto language = mtx::iso639::look_up(tag.get_language());
     if (language && language->is_deprecated)
-      warnings << QY("The language '%1' is deprecated.").arg(Q(tag.get_language()));
+      lists.second << QY("The language '%1' is deprecated.").arg(Q(tag.get_language()));
   }
 
   auto extlang = mtx::iana::language_subtag_registry::look_up_extlang(tag.get_extended_language_subtag());
   if (extlang && extlang->is_deprecated)
-    warnings << QY("The extended language subtag '%1' is deprecated.").arg(Q(tag.get_extended_language_subtag()));
+    lists.second << QY("The extended language subtag '%1' is deprecated.").arg(Q(tag.get_extended_language_subtag()));
 
   if (!tag.get_script().empty()) {
     auto script = mtx::iso15924::look_up(tag.get_script());
     if (script && script->is_deprecated)
-      warnings << QY("The script '%1' is deprecated.").arg(Q(tag.get_script()));
+      lists.second << QY("The script '%1' is deprecated.").arg(Q(tag.get_script()));
   }
 
   if (!tag.get_region().empty()) {
     auto region = mtx::iso3166::look_up(tag.get_region());
     if (region && region->is_deprecated)
-      warnings << QY("The region '%1' is deprecated.").arg(Q(tag.get_region()));
+      lists.second << QY("The region '%1' is deprecated.").arg(Q(tag.get_region()));
   }
 
-  for (auto const &variant_str : tag.get_variants()) {
-    auto variant = mtx::iana::language_subtag_registry::look_up_variant(variant_str);
+  for (auto const &variantStr : tag.get_variants()) {
+    auto variant = mtx::iana::language_subtag_registry::look_up_variant(variantStr);
     if (variant && variant->is_deprecated)
-      warnings << QY("The variant '%1' is deprecated.").arg(Q(variant_str));
+      lists.second << QY("The variant '%1' is deprecated.").arg(Q(variantStr));
   }
 
   if (!tag.get_grandfathered().empty())
-    warnings << QY("This language tag is a grandfathered element only supported for historical reasons.");
+    lists.second << QY("This language tag is a grandfathered element only supported for historical reasons.");
 
   auto const canonical_form    = tag.clone().to_canonical_form();
   auto const extlang_form      = tag.clone().to_extlang_form();
@@ -477,22 +477,23 @@ LanguageDialog::determineInfoAndWarningsFor(mtx::bcp47::language_c const &tag) {
 
   if (   (tag               != canonical_form)
       && (tag               != extlang_form)
-      && (normalizationMode == mtx::bcp47::normalization_mode_e::none)) {
-    info << QY("The corresponding canonical & extended language subtags forms are: %1.").arg(Q(canonical_form.format()));
-    return { info, warnings };
+      && (normalizationMode == mtx::bcp47::normalization_mode_e::none))
+    lists.first << QY("The corresponding canonical & extended language subtags forms are: %1.").arg(Q(canonical_form.format()));
+
+  else {
+    if (tag != canonical_form){
+      auto &typeContainer = normalizationMode == mtx::bcp47::normalization_mode_e::canonical ? lists.second : lists.first;
+      typeContainer << QY("The corresponding canonical form is: %1.").arg(Q(canonical_form.format()));
+    }
+
+    if (tag != extlang_form){
+      auto &typeContainer = normalizationMode == mtx::bcp47::normalization_mode_e::extlang ? lists.second : lists.first;
+      typeContainer << QY("The corresponding extended language subtags form is: %1.").arg(Q(extlang_form.format()));
+    }
   }
 
-  if (tag != canonical_form){
-    auto &typeContainer = normalizationMode == mtx::bcp47::normalization_mode_e::canonical ? warnings : info;
-    typeContainer << QY("The corresponding canonical form is: %1.").arg(Q(canonical_form.format()));
-  }
 
-  if (tag != extlang_form){
-    auto &typeContainer = normalizationMode == mtx::bcp47::normalization_mode_e::extlang ? warnings : info;
-    typeContainer << QY("The corresponding extended language subtags form is: %1.").arg(Q(extlang_form.format()));
-  }
-
-  return { info, warnings };
+  return lists;
 }
 
 void
