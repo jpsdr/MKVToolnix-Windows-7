@@ -111,6 +111,8 @@ public:
   std::vector<std::string> const &get_private_use() const noexcept;
   std::string const &get_grandfathered() const noexcept;
 
+  std::string get_first_variant_not_matching_prefixes() const noexcept;
+
 protected:
   std::string format_internal(bool force) const noexcept;
 
@@ -124,6 +126,7 @@ protected:
   bool validate_extensions();
   bool validate_extlang();
   bool validate_variants();
+  bool validate_prefixes(std::vector<std::string> const &prefixes) const noexcept;
   bool matches_prefix(language_c const &prefix, prefix_restrictions_t const &restrictions) const noexcept;
 
   language_c &canonicalize_preferred_values();

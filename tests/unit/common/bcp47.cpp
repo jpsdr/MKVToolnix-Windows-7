@@ -567,4 +567,76 @@ TEST(BCP47LanguageTags, NormalizationForDCNCTags) {
   EXPECT_EQ("pt-BR"s,       language_c::parse("QBP"s).format());
 }
 
+TEST(BCP47LanguageTags, VariantPrefixValidation) {
+  language_c::set_normalization_mode(norm_e::none);
+
+  auto l = language_c::parse("pt-BR"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes()); // no variant
+
+  l = language_c::parse("da-DK-fonipa"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes()); // variant without prefixes
+
+  l = language_c::parse("de-1996"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes()); // prefixes valid
+
+  l = language_c::parse("de-DE-1996"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes()); // prefixes valid
+
+  l = language_c::parse("fr-1996"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ("1996"s, l.get_first_variant_not_matching_prefixes()); // prefixes invalid: language code doesn't match
+
+  l = language_c::parse("pt-BR-abl1943"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes()); // prefixes invalid
+
+  l = language_c::parse("pt-abl1943"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ("abl1943"s, l.get_first_variant_not_matching_prefixes()); // prefixes invalid: pt-BR is valid, pt isn't
+
+  l = language_c::parse("zh-cmn-Latn-tongyong"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes()); // prefixes valid
+
+  l = language_c::parse("yue-jyutping"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes()); // prefixes valid
+
+  l = language_c::parse("zh-yue-jyutping"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ("jyutping"s, l.get_first_variant_not_matching_prefixes()); // prefixes invalid: yue would be a valid prefix but zh-yue isn't
+
+  l.to_canonical_form();
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes()); // prefixes valid: zh-yue-jyutping canonicals to yue-jyutping & yue is a valid prefix
+
+  l = language_c::parse("cmn-pinyin"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ("pinyin"s, l.get_first_variant_not_matching_prefixes()); // prefixes invalid: missing Latn
+
+  l = language_c::parse("zh-cmn-pinyin"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ("pinyin"s, l.get_first_variant_not_matching_prefixes()); // prefixes invalid: missing Latn
+
+  l = language_c::parse("cmn-Latn-pinyin"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ("pinyin"s, l.get_first_variant_not_matching_prefixes()); // prefixes invalid: only valid for zh-Latn, not cmn-Latn
+
+  l.to_extlang_form();
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes()); // prefixes valid now as extlang form is zh-cmn-Latn-pinyin
+
+  l = language_c::parse("zh-cmn-Latn-pinyin"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes()); // prefixes valid (directly)
+
+  l = language_c::parse("zh-cmn-Hans-pinyin"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ("pinyin"s, l.get_first_variant_not_matching_prefixes()); // prefixes invalid: script not Latn
+}
+
 }

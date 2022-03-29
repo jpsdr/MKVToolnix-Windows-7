@@ -379,16 +379,9 @@ language_c::matches_prefix(language_c const &prefix,
 }
 
 bool
-language_c::validate_extlang() {
-  if (m_extended_language_subtag.empty())
-    return true;
-
-  auto extlang = mtx::iana::language_subtag_registry::look_up_extlang(m_extended_language_subtag);
-
-  if (!extlang)                 // Should not happen as the parsing checks this already.
-    return false;
-
-  if (extlang->prefixes.empty())
+language_c::validate_prefixes(std::vector<std::string> const &prefixes)
+  const noexcept {
+  if (prefixes.empty())
     return true;
 
   prefix_restrictions_t restrictions;
@@ -399,7 +392,7 @@ language_c::validate_extlang() {
       value = true;
   };
 
-  for (auto const &prefix : extlang->prefixes) {
+  for (auto const &prefix : prefixes) {
     parsed_prefixes.emplace_back(parse(prefix));
     auto const &tag = parsed_prefixes.back();
 
@@ -413,6 +406,44 @@ language_c::validate_extlang() {
   for (auto const &parsed_prefix : parsed_prefixes)
     if (matches_prefix(parsed_prefix, restrictions))
       return true;
+
+  return false;
+}
+
+std::string
+language_c::get_first_variant_not_matching_prefixes()
+  const noexcept {
+  if (m_variants.empty())
+    return {};
+
+  for (auto const &variant_str : m_variants) {
+    auto variant = mtx::iana::language_subtag_registry::look_up_variant(variant_str);
+
+    if (!variant)               // Should not happen as the parsing checks this already.
+      continue;
+
+    if (variant->prefixes.empty())
+      continue;
+
+    if (!validate_prefixes(variant->prefixes))
+      return variant_str;
+  }
+
+  return {};
+}
+
+bool
+language_c::validate_extlang() {
+  if (m_extended_language_subtag.empty())
+    return true;
+
+  auto extlang = mtx::iana::language_subtag_registry::look_up_extlang(m_extended_language_subtag);
+
+  if (!extlang)                 // Should not happen as the parsing checks this already.
+    return false;
+
+  if (validate_prefixes(extlang->prefixes))
+    return true;
 
   auto message   = Y("The extended language subtag '{}' must only be used with one of the following prefixes: {}.");
   m_parser_error = fmt::format(message, m_extended_language_subtag, fmt::join(extlang->prefixes, ", "));
