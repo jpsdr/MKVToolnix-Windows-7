@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-03-29 15:28+0200\n"
-"PO-Revision-Date: 2022-03-29 15:30+0200\n"
+"POT-Creation-Date: 2022-03-29 21:15+0200\n"
+"PO-Revision-Date: 2022-03-29 21:17+0200\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -11944,7 +11944,7 @@ msgstr "Die abzuspielende Audiodatei wurde noch nicht festgelegt."
 msgid "The audio/video synchronization may have been lost."
 msgstr "Die Audio-/Videosynchronisation könnte dadurch beeinträchtigt worden sein."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:508
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:487
 #, no-c-format
 msgid "The canonical form does use a suitable prefix."
 msgstr "Die kanonische Form hat einen geeigneten Präfix."
@@ -12020,17 +12020,17 @@ msgstr "Die Konfiguration wurde gespeichert."
 msgid "The correction file header was not read correctly.\n"
 msgstr "Der Dateikopf der Korrekturdatei konnte nicht gelesen werden.\n"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:481
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
 #, no-c-format
 msgid "The corresponding canonical & extended language subtags forms are: %1."
 msgstr "Die entsprechenden kanonischen & Erweiterte-Sprach-Unterelemente-Formen lauten: %1."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:486
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:506
 #, no-c-format
 msgid "The corresponding canonical form is: %1."
 msgstr "Die entsprechende kanonische Form lautet: %1."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:491
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:511
 #, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
 msgstr "Die entsprechende Erweiterte-Sprach-Unterelemente-Form lautet: %1."
@@ -12214,7 +12214,7 @@ msgstr "Das erweiterte Sprach-Unterelement »%1« ist veraltet."
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr "Das erweiterte Sprach-Unterelement »{}« darf nur zusammen mit den folgenden Präfixen benutzt werden: {}."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:511
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:490
 #, no-c-format
 msgid "The extended language subtags form does use a suitable prefix."
 msgstr "Die Erweiterte-Sprach-Unterelemente-Form hat einen geeigneten Präfix."
@@ -12979,7 +12979,7 @@ msgstr "Der Grund ist nicht bekannt."
 msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, day, letter 'T', hours, minutes, seconds and the time zone's offset from UTC; example: 2017-03-28T17:28:00-02:00."
 msgstr "Das erkannte Format ist »YYYY-mm-ddTHH:MM:SS+zz:zz«: Jahr, Monat, Tag, der Buchstabe »T«, Stunden, Minuten, Sekunden und der Abstand der Zeitzone von UTC; Beispiel: 2017-03-28T17:28:00-02:00."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:462
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:466
 #, no-c-format
 msgid "The region '%1' is deprecated."
 msgstr "Die Region »%1« ist veraltet."
@@ -13013,6 +13013,11 @@ msgstr "Die Abtastraten der zwei Audiospuren sind unterschiedlich: {0} und {1}"
 #, no-c-format
 msgid "The script '%1' is deprecated."
 msgstr "Die Schrift »%1« ist veraltet."
+
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:460
+#, no-c-format
+msgid "The script '%1' should not be used for the language '%2' as it is the script the overwhelming majority of documents for this language is written in."
+msgstr "Die Schrift »%1« sollte nicht mit der Sprache »%2« benutzt werden, da sie die Schrift ist, in der die überwältigende Mehrheit der Dokumente dieser Sprache geschrieben ist."
 
 #: src/extract/extract_cli_parser.cpp:91
 #, no-c-format
@@ -13354,12 +13359,12 @@ msgstr "Die Werte werden nur in den Spurkopfdaten gespeichert."
 msgid "The values will be available for easy selection in the multiplexer."
 msgstr "Die Werte werden im Multiplexer zur einfachen Auswahl zur Verfügung gestellt."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:468
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:472
 #, no-c-format
 msgid "The variant '%1' is deprecated."
 msgstr "Die Variante »%1« ist veraltet."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:504
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:483
 #, no-c-format
 msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
 msgstr "Die Variante »%1« wird mit Präfixen benutzt, die für die Variante nicht geeignet sind. Geeignete Präfixe sind: %2."
@@ -13621,7 +13626,7 @@ msgstr "Diese werden z.B. bei MPEG-1/-2-Videospuren zum Speichern der Sequenzkö
 msgid "This is useful for situations like Blu-ray discs on which a multitude of playlists exists in the same directory and where it is not obvious which feature (e.g. main movie, extras etc.) a playlist belongs to."
 msgstr "Dies ist in Situationen nützlich wie Blu-rays, bei denen eine Vielzahl von Abspiellisten im selben Verzeichnis liegt und eine Zuordnung von Abspiellisten zu Features (z.B. Hauptfilm, Extras etc.) nicht ersichtlich ist."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:472
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:495
 #, no-c-format
 msgid "This language tag is a grandfathered element only supported for historical reasons."
 msgstr "Das Sprach-Tag ist ein veraltetes Element mit Bestandsschutz und wird nur aus historischen Gründen unterstüzt."
