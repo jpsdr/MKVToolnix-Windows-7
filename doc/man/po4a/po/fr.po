@@ -2036,28 +2036,26 @@ msgstr "&mkvmerge; écrit normalement les nouveaux éléments de langue IETF BCP
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:559
 #: doc/man/mkvpropedit.xml:402
-#, fuzzy
-#| msgid "<option>--ui-language</option> <parameter>code</parameter>"
 msgid "<option>--normalize-language-ietf</option> <parameter>mode</parameter>"
-msgstr "<option>--ui-language</option> <parameter>code</parameter>"
+msgstr "<option>--normalize-language-ietf</option> <parameter>mode</parameter>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:562
 #: doc/man/mkvpropedit.xml:405
 msgid "Enables normalizing all IETF BCP 47 language tags to either their canonical form with mode '<literal>canonical</literal>', to their extended language subtags form with mode '<literal>extlang</literal>' or turns it off with mode '<literal>off</literal>'. By default normalization to the canonical form is applied."
-msgstr ""
+msgstr "Active la normalisation de toutes les étiquettes de langue IETF BCP 47 soit en leur forme canonique avec le mode '<literal>canonique</literal>', soit en leur forme de sous-étiquettes de langue étendue avec le mode '<literal>extlang</literal>' soit en le désactivant avec le mode '<literal>off</literal>'. Par défaut la normalisation en forme canonique est appliquée."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:568
 #: doc/man/mkvpropedit.xml:411
 msgid "In the canonical form all subtags for which preferred values exist are replaced by those preferred values. This converts e.g. '<literal>zh-yue-jyutping</literal>' to '<literal>yue-jyutping</literal>' or '<literal>fr-FX</literal>' to '<literal>fr-FR</literal>'."
-msgstr ""
+msgstr "Dans la forme canonique, toutes les sous-étiquettes avec des valeurs préférées existantes sont remplacées par ces dernières. Ceci convertit par ex. '<literal>zh-yue-jyutping</literal>' en '<literal>yue-jyutping</literal>' ou '<literal>fr-FX</literal>' en '<literal>fr-FR</literal>'."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:573
 #: doc/man/mkvpropedit.xml:416
 msgid "For the extended language subtags form the canonical form is built first. Afterwards all primary languages for which an extended language subtag exists are replaced by that extended language subtag and its prefix. This converts e.g. '<literal>yue-jyutping</literal>' back to '<literal>zh-yue-jyutping</literal>' but has no effect on '<literal>fr-FR</literal>' as '<literal>fr</literal>' is not an extended language subtag."
-msgstr ""
+msgstr "Pour la forme des sous-étiquettes de langue étendue, la forme canonique est d'abord construite. Ensuite toutes les langues primaires pour lesquelles des étiquettes de langue étendue existent sont remplacées par cette sous-étiquettes de langue étendue et son préfixe. Ceci reconvertit par ex. '<literal>yue-jyutping</literal>' en '<literal>zh-yue-jyutping</literal>' mais n'a pas d'effet sur '<literal>fr-FR</literal>' car '<literal>fr</literal>' n'est pas une sous-étiquette de langue étendue."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:584
@@ -4244,7 +4242,7 @@ msgstr "Le format de chapitres simple"
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2951
 msgid "This format consists of pairs of lines that start with '<literal>CHAPTERxx=</literal>' and '<literal>CHAPTERxxNAME=</literal>' respectively. The first one contains the start timestamp while the second one contains the title. Here's an example:"
-msgstr "Ce format consiste en paires de lignes qui débutent avec « <literal>CHAPTERxx=</literal> » et « <literal>CHAPTERxxNAME=</literal> » respectivement. La première contient l'horodatage de départ tandis que la seconde contient le titre. Voici un exemple :"
+msgstr "Ce format consiste en paires de lignes qui débutent avec '<literal>CHAPTERxx=</literal>' et '<literal>CHAPTERxxNAME=</literal>' respectivement. La première contient l'horodatage de départ tandis que la seconde contient le titre. Voici un exemple :"
 
 #. type: Content of: <refentry><refsect1><refsect2><screen>
 #: doc/man/mkvmerge.xml:2955
@@ -5170,27 +5168,27 @@ msgstr "Cette option n'affecte pas les modifications demandées via la propriét
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:423
 msgid "This normalization is only applied to elements that are actually changed:"
-msgstr ""
+msgstr "Cette normalisation est seulement appliquée aux éléments réellement modifiés :"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:429
 msgid "When editing track headers only those track language elements that are set via edit specifications are affected. Languages of tracks that aren't edited aren't changed. Editing a track but setting only properties other than the language won't affect the language either."
-msgstr ""
+msgstr "En édition des entêtes de pistes, seuls les éléments de langues de pistes définis par d'édition des spécifications sont affectés. Les langues de pistes qui ne sont pas éditées ne sont pas modifiées. Éditer une piste en définissant seulement des propriétés autres que la langue n'affectera pas cette langue non plus."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:437
 msgid "When editing chapters all language elements of all chapter elements are affected as existing chapters are always fully replaced."
-msgstr ""
+msgstr "En édition de chapitres, tous les éléments de langues de tous les éléments de chapitres sont affectés parce que tous  les chapitres existants sont toujours entièrement remplacés."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:443
 msgid "When editing tags only the language elements of the tags that are actually replaced are affected. For example, when you replace global tags then existing track tags aren't affected."
-msgstr ""
+msgstr "En édition d'étiquettes, seuls les éléments de langues des étiquettes réellement remplacés sont affectés. Par exemple, en remplaçant les étiquettes globales les étiquettes de pistes existantes ne sont pas affectées."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:450
 msgid "The best way to normalize all existing language tags in a file is to remux it with &mkvmerge; and set its '<literal>--normalize-language-ietf</literal>' option to the desired mode."
-msgstr ""
+msgstr "La meilleure solution pour normaliser toutes les étiquettes existantes d'un fichier est de le remixer avec &mkvmerge; en définissant son option « <literal>--normalize-language-ietf</literal> » selon le mode souhaité."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:480
