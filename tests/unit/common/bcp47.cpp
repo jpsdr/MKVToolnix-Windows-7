@@ -659,4 +659,14 @@ TEST(BCP47LanguageTags, VariantPrefixValidation) {
   EXPECT_EQ("ijekavsk"s, l.get_first_variant_not_matching_prefixes());
 }
 
+TEST(BCP47LanguageTags, ShouldScriptBeSuppressed) {
+  EXPECT_FALSE(language_c::parse("de").should_script_be_suppressed()); // no script to suppress
+  EXPECT_FALSE(language_c::parse("de-CH").should_script_be_suppressed()); // no script to suppress
+  EXPECT_TRUE(language_c::parse("de-Latn").should_script_be_suppressed());
+  EXPECT_TRUE(language_c::parse("de-Latn-CH").should_script_be_suppressed());
+  EXPECT_TRUE(language_c::parse("de-lATN-CH").should_script_be_suppressed());
+  EXPECT_TRUE(language_c::parse("deu-LAtN-Ch").should_script_be_suppressed());
+  EXPECT_TRUE(language_c::parse("ger-latn-ch").should_script_be_suppressed());
+}
+
 }

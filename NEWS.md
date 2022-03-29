@@ -66,6 +66,9 @@
   variant's list of suitable prefixes. It'll also say if the corresponding
   canonical/extlang forms would have a suitable prefix. Part of the
   implementation of #3307.
+* MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: the language dialog now
+  shows a warning if a script is used with a language for which it should be
+  suppressed. Part of the implementation of #3307.
 
 ## Bug fixes
 

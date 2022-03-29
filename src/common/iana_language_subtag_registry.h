@@ -37,6 +37,7 @@ struct entry_t {
 
 extern std::vector<entry_t> g_extlangs, g_variants, g_grandfathered;
 extern std::vector< std::pair<mtx::bcp47::language_c, mtx::bcp47::language_c> > g_preferred_values;
+extern std::unordered_map<std::string, std::string> g_suppress_scripts;
 
 void init();
 void init_preferred_values();

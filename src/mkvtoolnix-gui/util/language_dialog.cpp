@@ -456,6 +456,10 @@ LanguageDialog::determineInfoAndWarningsFor(mtx::bcp47::language_c const &tag) {
       lists.second << QY("The script '%1' is deprecated.").arg(Q(tag.get_script()));
   }
 
+  if (tag.should_script_be_suppressed())
+    lists.second << QY("The script '%1' should not be used for the language '%2' as it is the script the overwhelming majority of documents for this language is written in.")
+      .arg(Q(tag.get_script())).arg(Q(tag.get_language().empty() ? tag.get_extended_language_subtag() : tag.get_language()));
+
   if (!tag.get_region().empty()) {
     auto region = mtx::iso3166::look_up(tag.get_region());
     if (region && region->is_deprecated)

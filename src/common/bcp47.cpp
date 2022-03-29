@@ -918,6 +918,32 @@ language_c::to_extlang_form() {
   return *this;
 }
 
+bool
+language_c::should_script_be_suppressed()
+  const noexcept {
+  if (m_script.empty())
+    return false;
+
+  auto check = [this](std::string const &code) -> bool {
+    if (code.empty())
+      return false;
+
+    auto language = mtx::iso639::look_up(code);
+    if (!language)
+      return false;
+
+    auto const &suppressions = mtx::iana::language_subtag_registry::g_suppress_scripts;
+    auto itr                 = suppressions.find(language->alpha_3_code);
+
+    if ((itr == suppressions.end()) && !language->alpha_2_code.empty())
+      itr = suppressions.find(language->alpha_2_code);
+
+    return (itr != suppressions.end()) && (mtx::string::to_lower_ascii(itr->second) == mtx::string::to_lower_ascii(m_script));
+  };
+
+  return check(m_language) || check(m_extended_language_subtag);
+}
+
 void
 language_c::disable() {
   ms_disabled = true;

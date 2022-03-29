@@ -112,6 +112,7 @@ public:
   std::string const &get_grandfathered() const noexcept;
 
   std::string get_first_variant_not_matching_prefixes() const noexcept;
+  bool should_script_be_suppressed() const noexcept;
 
 protected:
   std::string format_internal(bool force) const noexcept;

@@ -26,6 +26,7 @@ namespace mtx::iana::language_subtag_registry {
 
 std::vector<entry_t> g_extlangs, g_variants, g_grandfathered;
 std::vector<std::pair<mtx::bcp47::language_c, mtx::bcp47::language_c>> g_preferred_values;
+std::unordered_map<std::string, std::string> g_suppress_scripts;
 
 using VS = std::vector<std::string>;
 
@@ -207,6 +208,19 @@ EOERB
       format_table(rows, :column_suffix => ',', :row_prefix => "  g_preferred_values.emplace_back(", :row_suffix => ");").join("\n")
   end
 
+  def self.format_suppress_scripts entries
+    name = "g_suppress_scripts"
+    rows = (entries["language"] + entries["extlang"]).
+      select { |e| !e[:suppress_script].blank? }.
+      map    { |e| [ e[:tag] || e[:subtag], e[:suppress_script] ] }.
+      sort.
+      uniq.
+      map    { |p| p.map(&:to_cpp_string) }
+
+    "  #{name}.reserve(#{rows.size});\n\n" +
+      format_table(rows, :column_suffix => ",", :row_prefix => "  #{name}.insert_or_assign(", :row_suffix => ");").join("\n")
+  end
+
   def self.do_create_cpp entries, isdcf_entries
     cpp_file_name = "src/common/iana_language_subtag_registry_list.cpp"
 
@@ -214,6 +228,7 @@ EOERB
     content_of[:init] = [
       self.format_extlangs_variants(entries, "extlang", "extlangs"), "",
       self.format_extlangs_variants(entries, "variant", "variants"), "",
+      self.format_suppress_scripts(entries),                         "",
       self.format_grandfathered(entries),
     ].join("\n")
     content_of[:init_preferred_values] = self.format_preferred_values(entries, isdcf_entries)
