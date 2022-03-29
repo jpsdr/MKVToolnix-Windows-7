@@ -54,8 +54,7 @@ public Q_SLOTS:
 
   void enableNormalizeActions(mtx::bcp47::language_c const &currentLanguage);
 
-  void replaceWithCanonicalForm(bool always);
-  void replaceWithExtlangForm(bool always);
+  void replaceWithNormalizedForm(mtx::bcp47::normalization_mode_e mode, bool always);
 
   void saveDialogGeometry();
 

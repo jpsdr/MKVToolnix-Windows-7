@@ -346,10 +346,10 @@ LanguageDialog::setupConnections() {
   connect(p.ui->pbAddExtension,           &QPushButton::clicked,               this,     &LanguageDialog::addExtensionRowAndUpdateLayout);
   connect(p.ui->pbAddPrivateUse,          &QPushButton::clicked,               this,     &LanguageDialog::addPrivateUseRowAndUpdateLayout);
 
-  connect(p.replaceCanonicalAction,       &QAction::triggered,                 [this]() { replaceWithCanonicalForm(false); });
-  connect(p.replaceCanonicalAlwaysAction, &QAction::triggered,                 [this]() { replaceWithCanonicalForm(true);  });
-  connect(p.replaceExtlangAction,         &QAction::triggered,                 [this]() { replaceWithExtlangForm(false);   });
-  connect(p.replaceExtlangAlwaysAction,   &QAction::triggered,                 [this]() { replaceWithExtlangForm(true);    });
+  connect(p.replaceCanonicalAction,       &QAction::triggered,                 [this]() { replaceWithNormalizedForm(mtx::bcp47::normalization_mode_e::canonical, false); });
+  connect(p.replaceCanonicalAlwaysAction, &QAction::triggered,                 [this]() { replaceWithNormalizedForm(mtx::bcp47::normalization_mode_e::canonical, true);  });
+  connect(p.replaceExtlangAction,         &QAction::triggered,                 [this]() { replaceWithNormalizedForm(mtx::bcp47::normalization_mode_e::extlang,   false); });
+  connect(p.replaceExtlangAlwaysAction,   &QAction::triggered,                 [this]() { replaceWithNormalizedForm(mtx::bcp47::normalization_mode_e::extlang,   true);  });
 }
 
 void
@@ -857,35 +857,20 @@ LanguageDialog::updateFromComponents() {
 }
 
 void
-LanguageDialog::replaceWithCanonicalForm(bool always) {
+LanguageDialog::replaceWithNormalizedForm(mtx::bcp47::normalization_mode_e mode,
+                                          bool always) {
   auto currentLanguage = language();
 
   if (!currentLanguage.is_valid())
     return;
 
-  auto canonicalForm = currentLanguage.clone().to_canonical_form();
-
-  if (currentLanguage != canonicalForm)
-    setLanguage(canonicalForm);
-
   if (always)
-    changeNormalizationMode(mtx::bcp47::normalization_mode_e::canonical);
-}
+    changeNormalizationMode(mode);
 
-void
-LanguageDialog::replaceWithExtlangForm(bool always) {
-  auto currentLanguage = language();
+  auto normalizedForm = currentLanguage.clone().normalize(mode);
 
-  if (!currentLanguage.is_valid())
-    return;
-
-  auto extlangForm = currentLanguage.clone().to_extlang_form();
-
-  if (currentLanguage != extlangForm)
-    setLanguage(extlangForm);
-
-  if (always)
-    changeNormalizationMode(mtx::bcp47::normalization_mode_e::extlang);
+  if (currentLanguage != normalizedForm)
+    setLanguage(normalizedForm);
 }
 
 int
