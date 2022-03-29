@@ -468,12 +468,28 @@ LanguageDialog::determineInfoAndWarningsFor(mtx::bcp47::language_c const &tag) {
       lists.second << QY("The variant '%1' is deprecated.").arg(Q(variantStr));
   }
 
-  if (!tag.get_grandfathered().empty())
-    lists.second << QY("This language tag is a grandfathered element only supported for historical reasons.");
-
   auto const canonical_form    = tag.clone().to_canonical_form();
   auto const extlang_form      = tag.clone().to_extlang_form();
   auto const normalizationMode = Util::Settings::get().m_bcp47NormalizationMode;
+  auto const badVariantStr     = tag.get_first_variant_not_matching_prefixes();
+  auto const badVariant        = mtx::iana::language_subtag_registry::look_up_variant(badVariantStr);
+
+  if (badVariant && !badVariant->prefixes.empty()) {
+    QStringList sentences;
+    sentences << QY("The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2.")
+      .arg(Q(badVariantStr)).arg(Q(mtx::string::join(badVariant->prefixes, ", ")));
+
+    if ((canonical_form != tag) && canonical_form.get_first_variant_not_matching_prefixes().empty())
+      sentences << QY("The canonical form does use a suitable prefix.");
+
+    if ((extlang_form != tag) && extlang_form.get_first_variant_not_matching_prefixes().empty())
+      sentences << QY("The extended language subtags form does use a suitable prefix.");
+
+    lists.second << sentences.join(Q(" "));
+
+    if (!tag.get_grandfathered().empty())
+      lists.second << QY("This language tag is a grandfathered element only supported for historical reasons.");
+  }
 
   if (   (tag               != canonical_form)
       && (tag               != extlang_form)
@@ -491,26 +507,6 @@ LanguageDialog::determineInfoAndWarningsFor(mtx::bcp47::language_c const &tag) {
       typeContainer << QY("The corresponding extended language subtags form is: %1.").arg(Q(extlang_form.format()));
     }
   }
-
-  auto badVariantStr = tag.get_first_variant_not_matching_prefixes();
-  if (badVariantStr.empty())
-    return lists;
-
-  auto badVariant = mtx::iana::language_subtag_registry::look_up_variant(badVariantStr);
-  if (!badVariant || badVariant->prefixes.empty())
-    return lists;
-
-  QStringList sentences;
-  sentences << QY("The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2.")
-    .arg(Q(badVariantStr)).arg(Q(mtx::string::join(badVariant->prefixes, ", ")));
-
-  if ((canonical_form != tag) && canonical_form.get_first_variant_not_matching_prefixes().empty())
-    sentences << QY("The canonical form does use a suitable prefix.");
-
-  if ((extlang_form != tag) && extlang_form.get_first_variant_not_matching_prefixes().empty())
-    sentences << QY("The extended language subtags form does use a suitable prefix.");
-
-  lists.second << sentences.join(Q(" "));
 
   return lists;
 }
