@@ -2031,28 +2031,26 @@ msgstr "&mkvmerge; 通常会在轨道头部、章节以及标签中同时写入�
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:559
 #: doc/man/mkvpropedit.xml:402
-#, fuzzy
-#| msgid "<option>--ui-language</option> <parameter>code</parameter>"
 msgid "<option>--normalize-language-ietf</option> <parameter>mode</parameter>"
-msgstr "<option>--ui-language</option> <parameter>语言代码</parameter>"
+msgstr "<option>--normalize-language-ietf</option> <parameter>模式</parameter>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:562
 #: doc/man/mkvpropedit.xml:405
 msgid "Enables normalizing all IETF BCP 47 language tags to either their canonical form with mode '<literal>canonical</literal>', to their extended language subtags form with mode '<literal>extlang</literal>' or turns it off with mode '<literal>off</literal>'. By default normalization to the canonical form is applied."
-msgstr ""
+msgstr "将 IETF BCP 47 语言标签规范化，支持「<literal>canonical</literal>」（最简式）、「<literal>extlang</literal>」（扩展语言子标签形式）以及「<literal>off</literal>」关闭模式。默认（不添加本选项）会规范化至最简式。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:568
 #: doc/man/mkvpropedit.xml:411
 msgid "In the canonical form all subtags for which preferred values exist are replaced by those preferred values. This converts e.g. '<literal>zh-yue-jyutping</literal>' to '<literal>yue-jyutping</literal>' or '<literal>fr-FX</literal>' to '<literal>fr-FR</literal>'."
-msgstr ""
+msgstr "最简式模式下，所有存在推荐值（preferred values）的语言子标签都会被替换为推荐值。依规范会执行下述转换: ｢<literal>zh-yue-jyutping</literal>｣转换为｢<literal>yue-jyutping</literal>｣，｢<literal>fr-FX</literal>｣转换为｢<literal>fr-FR</literal>｣。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:573
 #: doc/man/mkvpropedit.xml:416
 msgid "For the extended language subtags form the canonical form is built first. Afterwards all primary languages for which an extended language subtag exists are replaced by that extended language subtag and its prefix. This converts e.g. '<literal>yue-jyutping</literal>' back to '<literal>zh-yue-jyutping</literal>' but has no effect on '<literal>fr-FR</literal>' as '<literal>fr</literal>' is not an extended language subtag."
-msgstr ""
+msgstr "扩展语言子标签形式在最简式的基础上生成。所有存在扩展语言子标签（extended language subtag）的主要语言（primary language）都被替换为子标签对应的前缀加上该子标签。该规则将｢<literal>yue-jyutping</literal>｣转回传统的｢<literal>zh-yue-jyutping</literal>｣形式，但｢<literal>fr-FR</literal>｣不会发生变化，因为｢<literal>fr</literal>｣不属于扩展语言子标签。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:584
@@ -5162,27 +5160,27 @@ msgstr "此选项不影响通过「<literal>language-ietf</literal>」轨道头�
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:423
 msgid "This normalization is only applied to elements that are actually changed:"
-msgstr ""
+msgstr "此处的规范化规则只对实际发生变化的元素起作用:"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:429
 msgid "When editing track headers only those track language elements that are set via edit specifications are affected. Languages of tracks that aren't edited aren't changed. Editing a track but setting only properties other than the language won't affect the language either."
-msgstr ""
+msgstr "编辑轨道头部字段时，只有通过编辑指令设置轨道语言元素值的轨道会受到影响。未被编辑的轨道的语言不会发生变化。编辑某条轨道但只设置语言以外的属性，也不会改变其语言值。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:437
 msgid "When editing chapters all language elements of all chapter elements are affected as existing chapters are always fully replaced."
-msgstr ""
+msgstr "编辑章节时，所有章节元素的所有语言元素都会受到影响，因为现有的章节会被完全替换为新章节。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:443
 msgid "When editing tags only the language elements of the tags that are actually replaced are affected. For example, when you replace global tags then existing track tags aren't affected."
-msgstr ""
+msgstr "编辑标签时，只有实际被替换的标签的语言元素才会受到影响。例如，当您替换全局标签时，现有的轨道标签不会受到影响。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:450
 msgid "The best way to normalize all existing language tags in a file is to remux it with &mkvmerge; and set its '<literal>--normalize-language-ietf</literal>' option to the desired mode."
-msgstr ""
+msgstr "将某个文件内现有的所有语言标签全部作规范化处理的最佳途径是，使用 &mkvmerge; 将其重新混流，并将程序的「<literal>--normalize-language-ietf</literal>」选项设为所需的模式。"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:480
