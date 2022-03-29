@@ -662,7 +662,7 @@ msgstr ""
 "                           du fichier source.\n"
 
 #: src/merge/mkvmerge.cpp:145
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --normalize-language-ietf <canonical|extlang|off>\n"
 "                           Normalize all IETF BCP 47 language tags to either\n"
@@ -672,7 +672,7 @@ msgstr ""
 "  --normalize-language-ietf <canonical|extlang>\n"
 "                           Normalise toutes les étiquettes de langue IETF BCP 47 soit\n"
 "                           en leur forme canonique soit en leur forme d'étiquettes de langue étendue\n"
-"                           (par défaut : pas de normalisation).\n"
+"                           soit pas du tout (par défaut : forme canonique).\n"
 
 #: src/merge/mkvmerge.cpp:260
 #, no-c-format
@@ -2635,7 +2635,7 @@ msgstr "« {0} » n'est pas un numéro de titre de DVD valide."
 #: src/merge/mkvmerge.cpp:575
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Additional information from the parser: {2}\n"
-msgstr "« {0} » n'est pas une balise de langue IETF BCP 47/RFC 5646 valide dans « {1} ». Informations supplémentaires du parseur : {2}\n"
+msgstr "« {0} » n'est pas une balise de langue IETF BCP 47/RFC 5646 valide dans « {1} ». Informations supplémentaires du parseur : {2}\n"
 
 #: src/common/xml/ebml_chapters_converter.cpp:141
 #: src/common/xml/ebml_tags_converter.cpp:125
@@ -5247,7 +5247,7 @@ msgstr "Extraction CUE"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1881
 #, no-c-format
 msgid "Cue name format:"
-msgstr "Format de nom CUE :"
+msgstr "Format de nom CUE :"
 
 #: src/common/kax_element_names.cpp:226
 #, no-c-format
@@ -5384,7 +5384,7 @@ msgstr "DTS"
 #: src/output/p_dts.cpp:76
 #, no-c-format
 msgid "DTS header information changed! - New format:\n"
-msgstr "Les informations d'entête DTS ont changé ! Nouveau format :\n"
+msgstr "Les informations d'entête DTS ont été modifiés ! Nouveau format :\n"
 
 #: src/common/file_types.cpp:35
 #, no-c-format
@@ -6469,7 +6469,7 @@ msgstr "forme de sous-étiquettes de langue étendue"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:180
 #, no-c-format
 msgid "Extended language subtags form"
-msgstr "Forme étendue de sous-étiquettes de langues"
+msgstr "Forme de sous-étiquettes de langue étendue"
 
 #: src/common/bcp47.cpp:445
 #, no-c-format
@@ -7621,9 +7621,9 @@ msgid "Information"
 msgstr "Informations"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:388
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Information & Warnings:"
-msgstr "Informations"
+msgstr "Informations et avertissements :"
 
 #: src/common/bitvalue.cpp:76
 #, no-c-format
@@ -9096,9 +9096,9 @@ msgid "Normal priority"
 msgstr "Priorité normale"
 
 #: src/propedit/propedit_cli_parser.cpp:272
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical'), their extended language subtags form (mode 'extlang') or not at all (mode 'off')"
-msgstr "Normalise toutes les étiquettes de langue IETF BCP 47 des éléments modifiés soit en leur forme canonique (mode « canonique ») soit en leur forme d'étiquettes de langue étendue (mode « extlang »)"
+msgstr "Normalise toutes les étiquettes de langue IETF BCP 47 des éléments modifiés soit en leur forme canonique (mode « canonique ») soit en leur forme d'étiquettes de langue étendue (mode « extlang ») soit pas du tout (mode « désactivé »)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
 #, no-c-format
@@ -12008,7 +12008,7 @@ msgid "The corresponding canonical form is: %1."
 msgstr "La forme correspondante canonique est : %1."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:492
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
 msgstr "La forme correspondante de sous-étiquettes de langue étendue est : %1."
 
@@ -13017,7 +13017,7 @@ msgstr "Le code langue sélectionné « %1 » n'est pas un code ISO 639-2. Les
 #: src/mkvtoolnix-gui/merge/output.cpp:222
 #, no-c-format
 msgid "The sequence '%p' is replaced by the track's PERFORMER, the sequence '%t' by the track's TITLE, '%n' by the track's number and '%N' by the track's number padded with a leading 0 for track numbers < 10."
-msgstr "La séquence « %p » est remplacée par l'interprète de la piste, « %t » par le titre, « %n » par le numéro de piste et « %N » par le numéro de piste précédé d'un 0 pour les numéros inférieurs à 10."
+msgstr "La séquence '%p' est remplacée par l'interprète de la piste, « %t » par le titre, '%n' par le numéro de piste et « %N » par le numéro de piste précédé d'un 0 pour les numéros inférieurs à 10."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:175
 #, no-c-format
@@ -13093,7 +13093,7 @@ msgstr "La chaîne « track:n », où « n » est un nombre, sélectionne la ni�
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:332
 #, no-c-format
 msgid "The strings '<FILE_NAME>' and '<FILE_NAME_WITH_EXT>', which only work when generating chapters for appended files, will be replaced by the appended file's name (the former leaves the extension out while the latter includes it)."
-msgstr "Les chaînes « <FILE_NAME> » et « <FILE_NAME_WITH_EXT> », qui ne fonctionnent que lors de la génération de chapitres pour des fichiers concaténés, seront remplacées par le nom de ces fichiers (la deuxième chaîne inclue l'extension du fichier, mais pas la première)."
+msgstr "Les chaînes '<FILE_NAME>' et '<FILE_NAME_WITH_EXT>', qui ne fonctionnent que lors de la génération de chapitres pour des fichiers concaténés, seront remplacées par le nom de ces fichiers (la deuxième chaîne inclue l'extension du fichier, mais pas la première)."
 
 #: src/propedit/propedit_cli_parser.cpp:280
 #, no-c-format
