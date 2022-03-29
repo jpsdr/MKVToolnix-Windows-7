@@ -492,6 +492,25 @@ LanguageDialog::determineInfoAndWarningsFor(mtx::bcp47::language_c const &tag) {
     }
   }
 
+  auto badVariantStr = tag.get_first_variant_not_matching_prefixes();
+  if (badVariantStr.empty())
+    return lists;
+
+  auto badVariant = mtx::iana::language_subtag_registry::look_up_variant(badVariantStr);
+  if (!badVariant || badVariant->prefixes.empty())
+    return lists;
+
+  QStringList sentences;
+  sentences << QY("The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2.")
+    .arg(Q(badVariantStr)).arg(Q(mtx::string::join(badVariant->prefixes, ", ")));
+
+  if ((canonical_form != tag) && canonical_form.get_first_variant_not_matching_prefixes().empty())
+    sentences << QY("The canonical form does use a suitable prefix.");
+
+  if ((extlang_form != tag) && extlang_form.get_first_variant_not_matching_prefixes().empty())
+    sentences << QY("The extended language subtags form does use a suitable prefix.");
+
+  lists.second << sentences.join(Q(" "));
 
   return lists;
 }

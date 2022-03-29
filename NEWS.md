@@ -61,6 +61,11 @@
   (`qaa`–`qtz`) are now replaced by their IETF BCP 47 equivalents during
   normalization (e.g. `QMS` → `cmn-Hans`). Part of the implementation of
   #3307.
+* MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: the language dialog now
+  shows a warning if a variant is used with a prefix that isn't in the
+  variant's list of suitable prefixes. It'll also say if the corresponding
+  canonical/extlang forms would have a suitable prefix. Part of the
+  implementation of #3307.
 
 ## Bug fixes
 
