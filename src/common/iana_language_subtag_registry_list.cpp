@@ -863,7 +863,6 @@ init_preferred_values() {
   g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QUY"s),                      mtx::bcp47::language_c::parse("es-UY"s)                              );
   g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QVE"s),                      mtx::bcp47::language_c::parse("es-VE"s)                              );
 
-
   mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::default_mode);
 }
 
