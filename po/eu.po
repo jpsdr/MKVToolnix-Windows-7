@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-03-28 22:02+0200\n"
+"POT-Creation-Date: 2022-03-29 15:28+0200\n"
 "PO-Revision-Date: 2020-04-07 16:55+0000\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -5998,7 +5998,7 @@ msgstr "EBML bertsioa"
 msgid "EBML void"
 msgstr "EBML hutsunea"
 
-#: src/common/bcp47.cpp:453
+#: src/common/bcp47.cpp:484
 #, no-c-format
 msgid "Each extension identifier must be used at most once."
 msgstr ""
@@ -6468,7 +6468,7 @@ msgstr "Probaren maila ehunekoa '{0}' baliogabea da.\n"
 msgid "Extended language subtags form"
 msgstr "Probaren maila ehunekoa '{0}' baliogabea da.\n"
 
-#: src/common/bcp47.cpp:445
+#: src/common/bcp47.cpp:476
 #, no-c-format
 msgid "Extension subtags must follow at least a primary language subtag."
 msgstr ""
@@ -6713,7 +6713,7 @@ msgstr "Amaituta:"
 msgid "First chapter name regardless of its language"
 msgstr "– Lehen atal izena bere hizkuntza axola gabe –"
 
-#: src/common/bcp47.cpp:512
+#: src/common/bcp47.cpp:543
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr ""
@@ -6823,7 +6823,7 @@ msgstr "Denbora-kode eskala ezaugarria emandako balio batera behartzen du."
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "B frame bat aurkitu da bigarren xehetasuna gabe itxi gabeko GOP batean.\n"
 
-#: src/common/bcp47.cpp:507
+#: src/common/bcp47.cpp:538
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr ""
@@ -11939,6 +11939,11 @@ msgstr "Oraindik ez da ezarri irakurtzeko audio agiria."
 msgid "The audio/video synchronization may have been lost."
 msgstr "Audio/bideo aldiberetzeak galdua izan daiteke."
 
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:508
+#, no-c-format
+msgid "The canonical form does use a suitable prefix."
+msgstr ""
+
 #: src/propedit/propedit.cpp:169
 #, no-c-format
 msgid "The changes are written to the file.\n"
@@ -12015,12 +12020,12 @@ msgstr "Zuzenketa agiri idazburua ez da zuzen irakurri.\n"
 msgid "The corresponding canonical & extended language subtags forms are: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:487
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:486
 #, no-c-format
 msgid "The corresponding canonical form is: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:492
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:491
 #, fuzzy, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
 msgstr "Probaren maila ehunekoa '{0}' baliogabea da.\n"
@@ -12196,10 +12201,15 @@ msgstr ""
 msgid "The extended language subtag '%1' is deprecated."
 msgstr "Probaren maila ehunekoa '{0}' baliogabea da.\n"
 
-#: src/common/bcp47.cpp:417
+#: src/common/bcp47.cpp:448
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr ""
+
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:511
+#, fuzzy, no-c-format
+msgid "The extended language subtags form does use a suitable prefix."
+msgstr "Probaren maila ehunekoa '{0}' baliogabea da.\n"
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -12668,12 +12678,12 @@ msgstr "Hemen hautatzen den hizkuntza bideo bideentzat erabiltzen da beren iturb
 msgid "The language set here is also used when chapters are generated."
 msgstr "Hemen ezartzen den hizkuntza atalak sortzen direnean ere erabiltzen da."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, fuzzy, no-c-format
 msgid "The language tag is not valid."
 msgstr "Agiri izen hutsa ez da baliozkoa.\n"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, fuzzy, no-c-format
 msgid "The language tag is valid."
 msgstr "Probaren maila ehunekoa '{0}' baliogabea da.\n"
@@ -13270,7 +13280,7 @@ msgstr "Erabiltzaileak orduan zein irakur zerrenda gehitu hautatu dezake."
 msgid "The value '{0}' is not a number.\n"
 msgstr "'{0}' balioa ez da zenbaki bat.\n"
 
-#: src/common/bcp47.cpp:463
+#: src/common/bcp47.cpp:494
 #, fuzzy, no-c-format
 msgid "The value '{0}' is not a registered IANA language tag identifier."
 msgstr "'{0}' ez da ISO 639-2 hizkuntza kode baliozkoa."
@@ -13322,7 +13332,7 @@ msgstr "Balioa bietan eman daiteke hamarren zenbaki bat bezala (adib. 12.345) ed
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "Balioa negatiboa izan daiteke, baina kontuan izan kalkulo honen ondoren denbora-irarketa negatiboa duten frame guztiak erori egingo direla."
 
-#: src/common/bcp47.cpp:489
+#: src/common/bcp47.cpp:520
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr ""
@@ -13343,7 +13353,12 @@ msgstr ""
 msgid "The variant '%1' is deprecated."
 msgstr "'%1' agiria badago jadanik."
 
-#: src/common/bcp47.cpp:429
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:504
+#, no-c-format
+msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
+msgstr ""
+
+#: src/common/bcp47.cpp:460
 #, no-c-format
 msgid "The variant '{}' occurs more than once."
 msgstr ""

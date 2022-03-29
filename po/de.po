@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-03-28 22:02+0200\n"
-"PO-Revision-Date: 2022-03-28 22:02+0200\n"
+"POT-Creation-Date: 2022-03-29 15:28+0200\n"
+"PO-Revision-Date: 2022-03-29 15:30+0200\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: German <moritz@bunkus.org>\n"
 "Language: de\n"
@@ -6021,7 +6021,7 @@ msgstr "EBML-Version"
 msgid "EBML void"
 msgstr "EBML-Platzhalter"
 
-#: src/common/bcp47.cpp:453
+#: src/common/bcp47.cpp:484
 #, no-c-format
 msgid "Each extension identifier must be used at most once."
 msgstr "Jeder Erweiterungskennung darf nur maximal einmal verwendet werden."
@@ -6488,7 +6488,7 @@ msgstr "Erweiterte-Sprache-Unterelemente"
 msgid "Extended language subtags form"
 msgstr "Erweiterte-Sprach-Unterelemente-Form"
 
-#: src/common/bcp47.cpp:445
+#: src/common/bcp47.cpp:476
 #, no-c-format
 msgid "Extension subtags must follow at least a primary language subtag."
 msgstr "Erweiterungs-Unterelemente müssen mindestens einem Unterelement mit der primären Sprache folgen."
@@ -6733,7 +6733,7 @@ msgstr "Fertiggestellt am:"
 msgid "First chapter name regardless of its language"
 msgstr "Erster Kapitelname unabhängig seiner Sprache"
 
-#: src/common/bcp47.cpp:512
+#: src/common/bcp47.cpp:543
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr "Fünf- bis acht-buchstabige Sprachcodes werden momentan nicht unterstützt."
@@ -6843,7 +6843,7 @@ msgstr "Setzt den Zeitstempelskalierungsfaktor auf den angegebenen Wert."
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Es wurde mindestens ein B-Frame ohne zweites Referenzbild innerhalb einer nicht geschlossenen Bildgruppe gefunden.\n"
 
-#: src/common/bcp47.cpp:507
+#: src/common/bcp47.cpp:538
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr "Vier-buchstabige Sprachcodes sind für zukünftige Nutzung reserviert & werden nicht unterstützt."
@@ -11944,6 +11944,11 @@ msgstr "Die abzuspielende Audiodatei wurde noch nicht festgelegt."
 msgid "The audio/video synchronization may have been lost."
 msgstr "Die Audio-/Videosynchronisation könnte dadurch beeinträchtigt worden sein."
 
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:508
+#, no-c-format
+msgid "The canonical form does use a suitable prefix."
+msgstr "Die kanonische Form hat einen geeigneten Präfix."
+
 #: src/propedit/propedit.cpp:169
 #, no-c-format
 msgid "The changes are written to the file.\n"
@@ -12020,12 +12025,12 @@ msgstr "Der Dateikopf der Korrekturdatei konnte nicht gelesen werden.\n"
 msgid "The corresponding canonical & extended language subtags forms are: %1."
 msgstr "Die entsprechenden kanonischen & Erweiterte-Sprach-Unterelemente-Formen lauten: %1."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:487
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:486
 #, no-c-format
 msgid "The corresponding canonical form is: %1."
 msgstr "Die entsprechende kanonische Form lautet: %1."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:492
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:491
 #, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
 msgstr "Die entsprechende Erweiterte-Sprach-Unterelemente-Form lautet: %1."
@@ -12204,10 +12209,15 @@ msgstr "Die Fehlermeldung war:"
 msgid "The extended language subtag '%1' is deprecated."
 msgstr "Das erweiterte Sprach-Unterelement »%1« ist veraltet."
 
-#: src/common/bcp47.cpp:417
+#: src/common/bcp47.cpp:448
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr "Das erweiterte Sprach-Unterelement »{}« darf nur zusammen mit den folgenden Präfixen benutzt werden: {}."
+
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:511
+#, no-c-format
+msgid "The extended language subtags form does use a suitable prefix."
+msgstr "Die Erweiterte-Sprach-Unterelemente-Form hat einen geeigneten Präfix."
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -12676,12 +12686,12 @@ msgstr "Die hier ausgewählte Sprache wird für Videospuren benutzt, für die ih
 msgid "The language set here is also used when chapters are generated."
 msgstr "Die hier gesetzte Sprache wird auch beim automatischen Erzeugen von Kapiteln genutzt."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, no-c-format
 msgid "The language tag is not valid."
 msgstr "Das Sprach-Tag ist nicht gültig."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, no-c-format
 msgid "The language tag is valid."
 msgstr "Das Sprach-Tag ist gültig."
@@ -13276,7 +13286,7 @@ msgstr "Die Benutzerin bzw. der Benutzer kann anschließend auswählen, welche A
 msgid "The value '{0}' is not a number.\n"
 msgstr "Der Wert »{0}« ist keine Nummer.\n"
 
-#: src/common/bcp47.cpp:463
+#: src/common/bcp47.cpp:494
 #, no-c-format
 msgid "The value '{0}' is not a registered IANA language tag identifier."
 msgstr "Der Wert »{0}« ist keine registrierte IANA-Sprach-Tag-Kennung."
@@ -13328,7 +13338,7 @@ msgstr "Der Wert kann als Fließkommazahl (z.B. 12.345) oder als Bruch aus zwei 
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "Der Wert kann negativ sein, aber beachten Sie, dass alle Frames, deren Zeitstempel nach dieser Berechnung negativ sind, verworfen werden."
 
-#: src/common/bcp47.cpp:489
+#: src/common/bcp47.cpp:520
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr "Der Wert folgt nicht der allgemeinen Struktur von IETF-BCP-47-/RFC-5646-Sprachelemente."
@@ -13349,7 +13359,12 @@ msgstr "Die Werte werden im Multiplexer zur einfachen Auswahl zur Verfügung ges
 msgid "The variant '%1' is deprecated."
 msgstr "Die Variante »%1« ist veraltet."
 
-#: src/common/bcp47.cpp:429
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:504
+#, no-c-format
+msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
+msgstr "Die Variante »%1« wird mit Präfixen benutzt, die für die Variante nicht geeignet sind. Geeignete Präfixe sind: %2."
+
+#: src/common/bcp47.cpp:460
 #, no-c-format
 msgid "The variant '{}' occurs more than once."
 msgstr "Die Variante »{}« taucht mehr als einmal auf."

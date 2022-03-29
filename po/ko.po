@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-03-28 22:02+0200\n"
+"POT-Creation-Date: 2022-03-29 15:28+0200\n"
 "PO-Revision-Date: 2020-09-02 18:12+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -5960,7 +5960,7 @@ msgstr "EBML 버전"
 msgid "EBML void"
 msgstr "EBML 없음"
 
-#: src/common/bcp47.cpp:453
+#: src/common/bcp47.cpp:484
 #, no-c-format
 msgid "Each extension identifier must be used at most once."
 msgstr ""
@@ -6430,7 +6430,7 @@ msgstr "조사 범위 '{0}' 퍼센트는 무효합니다.\n"
 msgid "Extended language subtags form"
 msgstr "조사 범위 '{0}' 퍼센트는 무효합니다.\n"
 
-#: src/common/bcp47.cpp:445
+#: src/common/bcp47.cpp:476
 #, no-c-format
 msgid "Extension subtags must follow at least a primary language subtag."
 msgstr ""
@@ -6675,7 +6675,7 @@ msgstr "완료:"
 msgid "First chapter name regardless of its language"
 msgstr "– 그 언어와 관계 없이 처음 챕터 이름 –"
 
-#: src/common/bcp47.cpp:512
+#: src/common/bcp47.cpp:543
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr ""
@@ -6785,7 +6785,7 @@ msgstr "타임코드 스케일 인수를 주어진 값으로 사용하도록 합
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Non Closed GOP에서 두번째 참조 없는 B 프레임을 적어도 한 개 찾았습니다.\n"
 
-#: src/common/bcp47.cpp:507
+#: src/common/bcp47.cpp:538
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr ""
@@ -11874,6 +11874,11 @@ msgstr "재생할 오디오 파일을 아직 정하지 않았습니다."
 msgid "The audio/video synchronization may have been lost."
 msgstr "오디오/비디오 동기화를 놓쳐 버린 것 같습니다."
 
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:508
+#, no-c-format
+msgid "The canonical form does use a suitable prefix."
+msgstr ""
+
 #: src/propedit/propedit.cpp:169
 #, no-c-format
 msgid "The changes are written to the file.\n"
@@ -11950,12 +11955,12 @@ msgstr "수정한 파일 헤더를 제대로 읽을 수 없습니다.\n"
 msgid "The corresponding canonical & extended language subtags forms are: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:487
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:486
 #, no-c-format
 msgid "The corresponding canonical form is: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:492
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:491
 #, fuzzy, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
 msgstr "조사 범위 '{0}' 퍼센트는 무효합니다.\n"
@@ -12130,10 +12135,15 @@ msgstr ""
 msgid "The extended language subtag '%1' is deprecated."
 msgstr "조사 범위 '{0}' 퍼센트는 무효합니다.\n"
 
-#: src/common/bcp47.cpp:417
+#: src/common/bcp47.cpp:448
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr ""
+
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:511
+#, fuzzy, no-c-format
+msgid "The extended language subtags form does use a suitable prefix."
+msgstr "조사 범위 '{0}' 퍼센트는 무효합니다.\n"
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -12602,12 +12612,12 @@ msgstr "여기에서 선택한 언어는 해당 소스 파일에 그런 속성�
 msgid "The language set here is also used when chapters are generated."
 msgstr "여기에서 설정한 언어는 챕터를 만들어 낼 때에도 사용합니다."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, fuzzy, no-c-format
 msgid "The language tag is not valid."
 msgstr "빈 파일 이름이 잘못되었습니다.\n"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, fuzzy, no-c-format
 msgid "The language tag is valid."
 msgstr "조사 범위 '{0}' 퍼센트는 무효합니다.\n"
@@ -13202,7 +13212,7 @@ msgstr "사용자는 실제로 추가할 재생목록을 선택할 수 있습니
 msgid "The value '{0}' is not a number.\n"
 msgstr "'{0}' 값은 숫자가 아닙니다.\n"
 
-#: src/common/bcp47.cpp:463
+#: src/common/bcp47.cpp:494
 #, fuzzy, no-c-format
 msgid "The value '{0}' is not a registered IANA language tag identifier."
 msgstr "'{0}'는 유효한 ISO 639-2 언어 코드가 아닙니다."
@@ -13254,7 +13264,7 @@ msgstr "값은 12.345같은 부동 소수점 수나 123/456같은 정수값의 �
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "값은 음수가 될 수 있지만 이 계산 이후에 타임스탬프가 음수인 프레임은 빠진다는 것을 명심하세요."
 
-#: src/common/bcp47.cpp:489
+#: src/common/bcp47.cpp:520
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr ""
@@ -13275,7 +13285,12 @@ msgstr ""
 msgid "The variant '%1' is deprecated."
 msgstr "'%1' 파일이 이미 있습니다."
 
-#: src/common/bcp47.cpp:429
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:504
+#, no-c-format
+msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
+msgstr ""
+
+#: src/common/bcp47.cpp:460
 #, no-c-format
 msgid "The variant '{}' occurs more than once."
 msgstr ""

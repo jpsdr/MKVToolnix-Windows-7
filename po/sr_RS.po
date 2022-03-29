@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-03-28 22:02+0200\n"
+"POT-Creation-Date: 2022-03-29 15:28+0200\n"
 "PO-Revision-Date: 2021-06-26 19:58+0000\n"
 "Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>\n"
 "Language-Team: Serbian (Serbia) (http://www.transifex.com/moritz-bunkus/"
@@ -6021,7 +6021,7 @@ msgstr "EBML верзија"
 msgid "EBML void"
 msgstr "EBML празнина"
 
-#: src/common/bcp47.cpp:453
+#: src/common/bcp47.cpp:484
 #, no-c-format
 msgid "Each extension identifier must be used at most once."
 msgstr ""
@@ -6491,7 +6491,7 @@ msgstr "У „{1}“ није ваљан аргумент „{0}“: „{2}“ �
 msgid "Extended language subtags form"
 msgstr "У „{1}“ није ваљан аргумент „{0}“: „{2}“ није ваљан ИБ-записа.\n"
 
-#: src/common/bcp47.cpp:445
+#: src/common/bcp47.cpp:476
 #, no-c-format
 msgid "Extension subtags must follow at least a primary language subtag."
 msgstr ""
@@ -6736,7 +6736,7 @@ msgstr "Завршено у:"
 msgid "First chapter name regardless of its language"
 msgstr "— назив првог поглавља независно од њ. језичких поставки —"
 
-#: src/common/bcp47.cpp:512
+#: src/common/bcp47.cpp:543
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr ""
@@ -6846,7 +6846,7 @@ msgstr "Присиљава вредност чиниоца временских 
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Нађена је барем један Б-кадар без другог указивача у отвореној „групи слика“ (енг. „GOP“).\n"
 
-#: src/common/bcp47.cpp:507
+#: src/common/bcp47.cpp:538
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr ""
@@ -11981,6 +11981,11 @@ msgstr "Створена је датотека опција."
 msgid "The audio/video synchronization may have been lost."
 msgstr ""
 
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:508
+#, no-c-format
+msgid "The canonical form does use a suitable prefix."
+msgstr ""
+
 #: src/propedit/propedit.cpp:169
 #, no-c-format
 msgid "The changes are written to the file.\n"
@@ -12057,12 +12062,12 @@ msgstr "Заглавље датотеке исправки није правил
 msgid "The corresponding canonical & extended language subtags forms are: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:487
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:486
 #, no-c-format
 msgid "The corresponding canonical form is: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:492
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:491
 #, fuzzy, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
 msgstr "У „{1}“ није ваљан аргумент „{0}“: „{2}“ није ваљан ИБ-записа.\n"
@@ -12239,10 +12244,15 @@ msgstr ""
 msgid "The extended language subtag '%1' is deprecated."
 msgstr "У „{1}“ није ваљан аргумент „{0}“: „{2}“ није ваљан ИБ-записа.\n"
 
-#: src/common/bcp47.cpp:417
+#: src/common/bcp47.cpp:448
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr ""
+
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:511
+#, fuzzy, no-c-format
+msgid "The extended language subtags form does use a suitable prefix."
+msgstr "У „{1}“ није ваљан аргумент „{0}“: „{2}“ није ваљан ИБ-записа.\n"
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -12711,12 +12721,12 @@ msgstr "Уколико изворна датотека записа не сад�
 msgid "The language set here is also used when chapters are generated."
 msgstr "Дозвољене су ознаке али не и поглавља."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, fuzzy, no-c-format
 msgid "The language tag is not valid."
 msgstr "Није дозвољено одсуство назива датотеке.\n"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, fuzzy, no-c-format
 msgid "The language tag is valid."
 msgstr "У „{1}“ није ваљан аргумент „{0}“: „{2}“ није ваљан ИБ-записа.\n"
@@ -13313,7 +13323,7 @@ msgstr "Онда можете да одаберете коју плеј-лист
 msgid "The value '{0}' is not a number.\n"
 msgstr "Не могу да читам ИксМЛ-датотеку ознака „{0}“.\n"
 
-#: src/common/bcp47.cpp:463
+#: src/common/bcp47.cpp:494
 #, fuzzy, no-c-format
 msgid "The value '{0}' is not a registered IANA language tag identifier."
 msgstr "„{0}“ није ваљан ИСО639-2 језички код."
@@ -13365,7 +13375,7 @@ msgstr "Вредност може да се зада и као број са п�
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "Вредност може да буде и негативна, али, водите рачуна, јер било који кадар са негативном временском ознаком биће одбачен након овог прорачуна."
 
-#: src/common/bcp47.cpp:489
+#: src/common/bcp47.cpp:520
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr ""
@@ -13386,7 +13396,12 @@ msgstr ""
 msgid "The variant '%1' is deprecated."
 msgstr "У ИксМЛ-датотеци ознака „{0}“ постоји грешка: {1}\n"
 
-#: src/common/bcp47.cpp:429
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:504
+#, no-c-format
+msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
+msgstr ""
+
+#: src/common/bcp47.cpp:460
 #, no-c-format
 msgid "The variant '{}' occurs more than once."
 msgstr ""

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sr_RS@latin\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-03-28 22:02+0200\n"
+"POT-Creation-Date: 2022-03-29 15:28+0200\n"
 "PO-Revision-Date: 2021-01-21 15:28+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Serbian (Latin) (Serbia) (http://www.transifex.com/moritz-"
@@ -5998,7 +5998,7 @@ msgstr "EBML verzija"
 msgid "EBML void"
 msgstr "EBML void"
 
-#: src/common/bcp47.cpp:453
+#: src/common/bcp47.cpp:484
 #, no-c-format
 msgid "Each extension identifier must be used at most once."
 msgstr ""
@@ -6468,7 +6468,7 @@ msgstr "Jezička oznaka je važeća."
 msgid "Extended language subtags form"
 msgstr "Jezička oznaka je važeća."
 
-#: src/common/bcp47.cpp:445
+#: src/common/bcp47.cpp:476
 #, no-c-format
 msgid "Extension subtags must follow at least a primary language subtag."
 msgstr ""
@@ -6713,7 +6713,7 @@ msgstr "Završio u:"
 msgid "First chapter name regardless of its language"
 msgstr "– Prvo ime poglavlja bez obzira na njegov jezik –"
 
-#: src/common/bcp47.cpp:512
+#: src/common/bcp47.cpp:543
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr ""
@@ -6823,7 +6823,7 @@ msgstr "Primorava množitelj vremenske oznake u datu vrednost."
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Nađena bar jedna B slika bez druge reference u otvorenoj GOP.\n"
 
-#: src/common/bcp47.cpp:507
+#: src/common/bcp47.cpp:538
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr ""
@@ -11958,6 +11958,11 @@ msgstr "Konfiguracioni fajl je kreiran."
 msgid "The audio/video synchronization may have been lost."
 msgstr "Audio/Video sinhronizacija je možda izgubljena."
 
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:508
+#, no-c-format
+msgid "The canonical form does use a suitable prefix."
+msgstr ""
+
 #: src/propedit/propedit.cpp:169
 #, no-c-format
 msgid "The changes are written to the file.\n"
@@ -12034,12 +12039,12 @@ msgstr "Ispravka zaglavlja fajla nije pravilno pročitana.\n"
 msgid "The corresponding canonical & extended language subtags forms are: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:487
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:486
 #, no-c-format
 msgid "The corresponding canonical form is: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:492
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:491
 #, fuzzy, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
 msgstr "Jezička oznaka je važeća."
@@ -12216,10 +12221,15 @@ msgstr ""
 msgid "The extended language subtag '%1' is deprecated."
 msgstr "Jezička oznaka je važeća."
 
-#: src/common/bcp47.cpp:417
+#: src/common/bcp47.cpp:448
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr ""
+
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:511
+#, fuzzy, no-c-format
+msgid "The extended language subtags form does use a suitable prefix."
+msgstr "Jezička oznaka je važeća."
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -12688,12 +12698,12 @@ msgstr "Jezik koji je ovde izabran se koristi za video staze kod kojih njihov iz
 msgid "The language set here is also used when chapters are generated."
 msgstr "Jezik koji se ovde izabere takođe se koristi kada se prave poglavlja."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, no-c-format
 msgid "The language tag is not valid."
 msgstr "Jezička oznaka nije važeća."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, no-c-format
 msgid "The language tag is valid."
 msgstr "Jezička oznaka je važeća."
@@ -13288,7 +13298,7 @@ msgstr "Korisnik tada može da izabere koju plejlistu da ustvari doda."
 msgid "The value '{0}' is not a number.\n"
 msgstr "Vrednost '{0}' nije broj.\n"
 
-#: src/common/bcp47.cpp:463
+#: src/common/bcp47.cpp:494
 #, fuzzy, no-c-format
 msgid "The value '{0}' is not a registered IANA language tag identifier."
 msgstr "Vrednost '{}' nije važeći ISO 639 jezički kod."
@@ -13340,7 +13350,7 @@ msgstr "Vrednost može biti data bilo kao broj sa pokretnim zarezom (npr. 12.345
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "Vrednost može biti negativna, ali imajte u vidu da je bilo koja slika čija je vremenska oznaka negativna, odbačena nakon ovog računanja."
 
-#: src/common/bcp47.cpp:489
+#: src/common/bcp47.cpp:520
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr "Vrednost se ne pridržava opšte strukture IETF BCP 47/RFC 5646 jezičkih oznaka."
@@ -13361,7 +13371,12 @@ msgstr "Vrednosti će biti dostupne u multiplekseru radi lakše selekcije."
 msgid "The variant '%1' is deprecated."
 msgstr "Fajl '%1' već postoji."
 
-#: src/common/bcp47.cpp:429
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:504
+#, no-c-format
+msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
+msgstr ""
+
+#: src/common/bcp47.cpp:460
 #, no-c-format
 msgid "The variant '{}' occurs more than once."
 msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-03-28 22:02+0200\n"
+"POT-Creation-Date: 2022-03-29 15:28+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Dian Li <xslidian@gmail.com>, 2020,2022\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -5955,7 +5955,7 @@ msgstr "EBML 版本"
 msgid "EBML void"
 msgstr "EBML 表頭"
 
-#: src/common/bcp47.cpp:453
+#: src/common/bcp47.cpp:484
 #, no-c-format
 msgid "Each extension identifier must be used at most once."
 msgstr "每個擴展標識碼最多必須使用一次。"
@@ -6422,7 +6422,7 @@ msgstr "擃展的子標籤"
 msgid "Extended language subtags form"
 msgstr "擃展的子標籤"
 
-#: src/common/bcp47.cpp:445
+#: src/common/bcp47.cpp:476
 #, no-c-format
 msgid "Extension subtags must follow at least a primary language subtag."
 msgstr "擴展子標籤必須至少遵循主要語言子標籤。"
@@ -6667,7 +6667,7 @@ msgstr "完成時間:"
 msgid "First chapter name regardless of its language"
 msgstr "不限語言，第一章名稱"
 
-#: src/common/bcp47.cpp:512
+#: src/common/bcp47.cpp:543
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr "目前不支援５至８個字母的語言代碼。"
@@ -6777,7 +6777,7 @@ msgstr "強制時間戳記的縮放係數為給定的數值。"
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "在非關閉的 GOP 裡找到最少一個沒有秒數參考的 B 影格。\n"
 
-#: src/common/bcp47.cpp:507
+#: src/common/bcp47.cpp:538
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr "４字母的語言代碼為未來保留使用，但不支援。"
@@ -11862,6 +11862,11 @@ msgstr "要播放的音訊檔尚未設定。"
 msgid "The audio/video synchronization may have been lost."
 msgstr "音訊/視訊可能發生不同步。"
 
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:508
+#, no-c-format
+msgid "The canonical form does use a suitable prefix."
+msgstr ""
+
 #: src/propedit/propedit.cpp:169
 #, no-c-format
 msgid "The changes are written to the file.\n"
@@ -11938,12 +11943,12 @@ msgstr "校正檔未能正常讀取。\n"
 msgid "The corresponding canonical & extended language subtags forms are: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:487
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:486
 #, no-c-format
 msgid "The corresponding canonical form is: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:492
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:491
 #, fuzzy, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
 msgstr "有效的語言標籤。"
@@ -12118,10 +12123,15 @@ msgstr "錯誤訊息是:"
 msgid "The extended language subtag '%1' is deprecated."
 msgstr "有效的語言標籤。"
 
-#: src/common/bcp47.cpp:417
+#: src/common/bcp47.cpp:448
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr "擴展語言標籤的子標籤 '{}' 只能使用下列的首碼: {}."
+
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:511
+#, fuzzy, no-c-format
+msgid "The extended language subtags form does use a suitable prefix."
+msgstr "有效的語言標籤。"
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -12590,12 +12600,12 @@ msgstr "此處選擇的語言用於原始檔案未指定語言屬性，而且無
 msgid "The language set here is also used when chapters are generated."
 msgstr "這裡設定的語言也將在產生章節時使用。"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, no-c-format
 msgid "The language tag is not valid."
 msgstr "無效的語言標籤。"
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, no-c-format
 msgid "The language tag is valid."
 msgstr "有效的語言標籤。"
@@ -13190,7 +13200,7 @@ msgstr "使用者能選擇實際要加入的播放清單。"
 msgid "The value '{0}' is not a number.\n"
 msgstr "值 '{0}' 不是數字。\n"
 
-#: src/common/bcp47.cpp:463
+#: src/common/bcp47.cpp:494
 #, no-c-format
 msgid "The value '{0}' is not a registered IANA language tag identifier."
 msgstr "數值\"{0}\"不是 IANA 語言註冊標記識別碼。"
@@ -13242,7 +13252,7 @@ msgstr "此數值可以用浮點數值 (即 12.345) 或整數的一小部分分�
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "此數值可以是負值，但注意任何畫面的時間戳記為負會在計算後被丟棄。"
 
-#: src/common/bcp47.cpp:489
+#: src/common/bcp47.cpp:520
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr "該值不符合 IETF BCP 47 / RFC 5646 語言標籤的一般結構。"
@@ -13263,7 +13273,12 @@ msgstr "這些數值可在合併工具中輕鬆選擇。"
 msgid "The variant '%1' is deprecated."
 msgstr "檔案 '%1'  已存在。"
 
-#: src/common/bcp47.cpp:429
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:504
+#, no-c-format
+msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
+msgstr ""
+
+#: src/common/bcp47.cpp:460
 #, no-c-format
 msgid "The variant '{}' occurs more than once."
 msgstr ""

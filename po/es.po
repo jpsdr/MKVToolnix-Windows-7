@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-03-28 22:02+0200\n"
+"POT-Creation-Date: 2022-03-29 15:28+0200\n"
 "PO-Revision-Date: 2022-02-28 23:11+0000\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -6080,7 +6080,7 @@ msgstr "Versión de EBML"
 msgid "EBML void"
 msgstr "EBML void"
 
-#: src/common/bcp47.cpp:453
+#: src/common/bcp47.cpp:484
 #, no-c-format
 msgid "Each extension identifier must be used at most once."
 msgstr "Cada identificador de extensión debe usarse una vez como máximo."
@@ -6547,7 +6547,7 @@ msgstr "Subetiquetas extendidas"
 msgid "Extended language subtags form"
 msgstr "Subetiquetas extendidas"
 
-#: src/common/bcp47.cpp:445
+#: src/common/bcp47.cpp:476
 #, no-c-format
 msgid "Extension subtags must follow at least a primary language subtag."
 msgstr "Las subetiquetas de extensión deben seguir como mínimo a un subetiqueta de idioma principal."
@@ -6792,7 +6792,7 @@ msgstr "Finalizado:"
 msgid "First chapter name regardless of its language"
 msgstr "Nombre del primer capítulo sin importar su idioma"
 
-#: src/common/bcp47.cpp:512
+#: src/common/bcp47.cpp:543
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr "Actualmente, no se admiten códigos de idioma de cinco a ocho letras."
@@ -6902,7 +6902,7 @@ msgstr "Fuerza el factor de escala para los códigos de tiempo a un valor dado."
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Se encontró al menos un fotograma B sin una segunda referencia en un GOP no cerrado.\n"
 
-#: src/common/bcp47.cpp:507
+#: src/common/bcp47.cpp:538
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr "No se admiten los códigos de idioma de cuatro letras y están reservados para un uso futuro."
@@ -12005,6 +12005,11 @@ msgstr "El archivo de audio a reproducir aún no ha sido configurado."
 msgid "The audio/video synchronization may have been lost."
 msgstr "La sincronización entre el audio/vídeo puede haberse perdido."
 
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:508
+#, no-c-format
+msgid "The canonical form does use a suitable prefix."
+msgstr ""
+
 #: src/propedit/propedit.cpp:169
 #, no-c-format
 msgid "The changes are written to the file.\n"
@@ -12081,12 +12086,12 @@ msgstr "La cabecera del archivo de corrección no fue posible leer correctamente
 msgid "The corresponding canonical & extended language subtags forms are: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:487
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:486
 #, no-c-format
 msgid "The corresponding canonical form is: %1."
 msgstr ""
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:492
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:491
 #, fuzzy, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
 msgstr "El idioma de etiqueta es correcto."
@@ -12262,10 +12267,15 @@ msgstr "El mensaje de error fue:"
 msgid "The extended language subtag '%1' is deprecated."
 msgstr "El idioma de etiqueta es correcto."
 
-#: src/common/bcp47.cpp:417
+#: src/common/bcp47.cpp:448
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr "La subetiqueta de idioma extendida '{}' sólo se debe usar con uno de los siguientes prefijos: {}."
+
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:511
+#, fuzzy, no-c-format
+msgid "The extended language subtags form does use a suitable prefix."
+msgstr "El idioma de etiqueta es correcto."
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -12734,12 +12744,12 @@ msgstr "El idioma seleccionado aquí se usa para pistas de vídeo cuyo archivo d
 msgid "The language set here is also used when chapters are generated."
 msgstr "El idioma establecido aquí se usa también cuando se generen los capítulos."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, no-c-format
 msgid "The language tag is not valid."
 msgstr "La etiqueta de idioma no es válida."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, no-c-format
 msgid "The language tag is valid."
 msgstr "El idioma de etiqueta es correcto."
@@ -13334,7 +13344,7 @@ msgstr "El usuario puede entonces seleccionar que playlist añadir."
 msgid "The value '{0}' is not a number.\n"
 msgstr "El valor '{0}' no es un número.\n"
 
-#: src/common/bcp47.cpp:463
+#: src/common/bcp47.cpp:494
 #, no-c-format
 msgid "The value '{0}' is not a registered IANA language tag identifier."
 msgstr "El valor '{0}' no está registrado como un identificador de etiqueta de idioma IANA."
@@ -13386,7 +13396,7 @@ msgstr "El valor puede ser asignado como un número flotante (e.g. 12.345) o una
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "El valor puede ser negativo, pero tenga presente que cualquier fotograma cuya marca de tiempo sea negativa, después de este calculo, será omitido."
 
-#: src/common/bcp47.cpp:489
+#: src/common/bcp47.cpp:520
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr "El valor no sigue la estructura general de las etiquetas de idioma IETF BCP 47/RFC 5646."
@@ -13407,7 +13417,12 @@ msgstr "Los valores estarán disponibles para seleccionarlos en el multiplexador
 msgid "The variant '%1' is deprecated."
 msgstr "El archivo '%1' ya existe."
 
-#: src/common/bcp47.cpp:429
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:504
+#, no-c-format
+msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
+msgstr ""
+
+#: src/common/bcp47.cpp:460
 #, no-c-format
 msgid "The variant '{}' occurs more than once."
 msgstr ""

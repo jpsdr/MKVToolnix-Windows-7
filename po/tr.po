@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.8.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-03-28 22:02+0200\n"
+"POT-Creation-Date: 2022-03-29 15:28+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: BouRock, 2016-2022\n"
 "Language-Team: Turkish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -5993,7 +5993,7 @@ msgstr "EBML sürümü"
 msgid "EBML void"
 msgstr "EBML geçersiz"
 
-#: src/common/bcp47.cpp:453
+#: src/common/bcp47.cpp:484
 #, no-c-format
 msgid "Each extension identifier must be used at most once."
 msgstr "Her uzantı tanımlayıcısı en fazla bir kez kullanılmak zorundadır."
@@ -6460,7 +6460,7 @@ msgstr "Karşılık gelen genişletilmiş dil alt etiketleri biçimi: %1."
 msgid "Extended language subtags form"
 msgstr "Karşılık gelen genişletilmiş dil alt etiketleri biçimi: %1."
 
-#: src/common/bcp47.cpp:445
+#: src/common/bcp47.cpp:476
 #, no-c-format
 msgid "Extension subtags must follow at least a primary language subtag."
 msgstr "Uzantı alt etiketleri en azından birincil dil alt etiketini izlemek zorundadır."
@@ -6705,7 +6705,7 @@ msgstr "Bitiş:"
 msgid "First chapter name regardless of its language"
 msgstr "Diline bakılmaksızın ilk bölüm adı"
 
-#: src/common/bcp47.cpp:512
+#: src/common/bcp47.cpp:543
 #, no-c-format
 msgid "Five- to eight-letter language codes are currently not supported."
 msgstr "Beş ila sekiz harfli dil kodları şu anda desteklenmiyor."
@@ -6815,7 +6815,7 @@ msgstr "Zaman damgası ölçeği etkenini verilen değere zorlar."
 msgid "Found at least one B frame without second reference in a non closed GOP.\n"
 msgstr "Kapatılmamış GOP içinde ikinci referanssız en az bir B karesi bulundu.\n"
 
-#: src/common/bcp47.cpp:507
+#: src/common/bcp47.cpp:538
 #, no-c-format
 msgid "Four-letter language codes are reserved for future use and not supported."
 msgstr "Dört harfli dil kodları ileride kullanılmak üzere ayrılmıştır ve desteklenmiyor."
@@ -11915,6 +11915,11 @@ msgstr "Çalmak için ses dosyası henüz ayarlanmadı."
 msgid "The audio/video synchronization may have been lost."
 msgstr "Ses/görüntü eşitlemesi kaybolmuş olabilir."
 
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:508
+#, no-c-format
+msgid "The canonical form does use a suitable prefix."
+msgstr ""
+
 #: src/propedit/propedit.cpp:169
 #, no-c-format
 msgid "The changes are written to the file.\n"
@@ -11991,12 +11996,12 @@ msgstr "Düzeltme dosya üstbilgisi doğru olarak okunmadı.\n"
 msgid "The corresponding canonical & extended language subtags forms are: %1."
 msgstr "Karşılık gelen kurallı ve genişletilmiş dil alt etiketleri biçimleri: %1."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:487
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:486
 #, no-c-format
 msgid "The corresponding canonical form is: %1."
 msgstr "Karşılık gelen kurallı biçim: %1."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:492
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:491
 #, fuzzy, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
 msgstr "Karşılık gelen genişletilmiş dil alt etiketleri biçimi: %1."
@@ -12172,10 +12177,15 @@ msgstr "Hata iletisi şuydu:"
 msgid "The extended language subtag '%1' is deprecated."
 msgstr "'%1' genişletilmiş dil alt etiketi kullanım dışıdır."
 
-#: src/common/bcp47.cpp:417
+#: src/common/bcp47.cpp:448
 #, no-c-format
 msgid "The extended language subtag '{}' must only be used with one of the following prefixes: {}."
 msgstr "Genişletilmiş dil alt etiketi '{}' sadece şu öneklerden biriyle kullanılmak zorundadır: {}."
+
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:511
+#, fuzzy, no-c-format
+msgid "The extended language subtags form does use a suitable prefix."
+msgstr "'%1' genişletilmiş dil alt etiketi kullanım dışıdır."
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -12644,12 +12654,12 @@ msgstr "Burada seçilen dil, kaynak dosyası böyle bir özellik içermeyen gör
 msgid "The language set here is also used when chapters are generated."
 msgstr "Burada ayarlanan dil aynı zamanda bölümler oluşturulduğunda kullanılır."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, no-c-format
 msgid "The language tag is not valid."
 msgstr "Dil etiketi geçerli değil."
 
-#: src/mkvtoolnix-gui/util/language_dialog.cpp:501
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:521
 #, no-c-format
 msgid "The language tag is valid."
 msgstr "Dil etiketi geçerli."
@@ -13241,7 +13251,7 @@ msgstr "Kullanıcı ondan sonra aslında eklemek için oynatma listesini seçebi
 msgid "The value '{0}' is not a number.\n"
 msgstr "'{0}' değeri bir sayı değildir.\n"
 
-#: src/common/bcp47.cpp:463
+#: src/common/bcp47.cpp:494
 #, no-c-format
 msgid "The value '{0}' is not a registered IANA language tag identifier."
 msgstr "'{0}' değeri kayıtlı bir IANA dil etiketi tanımlayıcısı değil."
@@ -13293,7 +13303,7 @@ msgstr "Değer, ya kayan noktalı bir sayı (örn. 12.345) ya da kesirli bir say
 msgid "The value can be negative, but keep in mind that any frame whose timestamp is negative after this calculation is dropped."
 msgstr "Değer eksi olabilir, ancak unutmamak gerekir ki bu hesaplamadan sonra zaman damgası eksi olan herhangi bir kare kaldırılır."
 
-#: src/common/bcp47.cpp:489
+#: src/common/bcp47.cpp:520
 #, no-c-format
 msgid "The value does not adhere to the general structure of IETF BCP 47/RFC 5646 language tags."
 msgstr "Değer, IETF BCP 47/RFC 5646 dil etiketlerinin genel yapısına uymuyor."
@@ -13314,7 +13324,12 @@ msgstr "Değerler, çoklayıcıda kolay seçim için kullanılabilir olacaktır.
 msgid "The variant '%1' is deprecated."
 msgstr "'%1' çeşidi kullanım dışıdır."
 
-#: src/common/bcp47.cpp:429
+#: src/mkvtoolnix-gui/util/language_dialog.cpp:504
+#, no-c-format
+msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
+msgstr ""
+
+#: src/common/bcp47.cpp:460
 #, no-c-format
 msgid "The variant '{}' occurs more than once."
 msgstr "'{}' çeşidi bir kereden fazla ortaya çıkıyor."
