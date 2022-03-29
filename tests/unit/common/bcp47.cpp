@@ -614,6 +614,10 @@ TEST(BCP47LanguageTags, VariantPrefixValidation) {
   EXPECT_TRUE(l.is_valid());
   EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes()); // prefixes valid: zh-yue-jyutping canonicals to yue-jyutping & yue is a valid prefix
 
+  l = language_c::parse("yue-Latn-jyutping"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes()); // prefixes valid
+
   l = language_c::parse("cmn-pinyin"s);
   EXPECT_TRUE(l.is_valid());
   EXPECT_EQ("pinyin"s, l.get_first_variant_not_matching_prefixes()); // prefixes invalid: missing Latn
@@ -637,6 +641,22 @@ TEST(BCP47LanguageTags, VariantPrefixValidation) {
   l = language_c::parse("zh-cmn-Hans-pinyin"s);
   EXPECT_TRUE(l.is_valid());
   EXPECT_EQ("pinyin"s, l.get_first_variant_not_matching_prefixes()); // prefixes invalid: script not Latn
+
+  l = language_c::parse("sr-ijekavsk"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes());
+
+  l = language_c::parse("sr-Cyrl-ijekavsk"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes());
+
+  l = language_c::parse("sr-Latn-ijekavsk"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ(""s, l.get_first_variant_not_matching_prefixes());
+
+  l = language_c::parse("sr-Hans-ijekavsk"s);
+  EXPECT_TRUE(l.is_valid());
+  EXPECT_EQ("ijekavsk"s, l.get_first_variant_not_matching_prefixes());
 }
 
 }
