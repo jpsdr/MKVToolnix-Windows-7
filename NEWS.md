@@ -73,7 +73,7 @@
 ## Bug fixes
 
 * MKVToolNix GUI: job queue: fixed compiling in the audio player code for the
-  the "play audio" and-of-job action. Fixes #3303.
+  the "play audio" end-of-job action. Fixes #3303.
 * MKVToolNix GUI: multiplexer: recognizing added XML chapter, segment info or
   chapter files required the XML declaration & root node (e.g. `<?xml…?> …
   <Chapters>` for chapters) be located within the first 1 KB, which wasn't
