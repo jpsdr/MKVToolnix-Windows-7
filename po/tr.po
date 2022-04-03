@@ -660,17 +660,17 @@ msgid "  --no-global-tags         Don't keep global tags from the source file.\n
 msgstr "  --no-global-tags         Kaynak dosyadan olan genel etiketleri tutma.\n"
 
 #: src/merge/mkvmerge.cpp:145
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --normalize-language-ietf <canonical|extlang|off>\n"
 "                           Normalize all IETF BCP 47 language tags to either\n"
 "                           their canonical or their extended language subtags\n"
 "                           form or not at all (default: canonical form).\n"
 msgstr ""
-"  --stereo-mode <TID:n|anahtarkelime>\n"
-"                           Stereo kipi parametrelerini ayarlar. Bu ya\n"
-"                           bir numara 0 - 14 ya da anahtar kelime olabilir\n"
-"                           (tam liste için belgelere bakın).\n"
+"  --normalize-language-ietf <canonical|extlang|off>\n"
+"                           Tüm IETF BCP 47 dil etiketlerini ya kurallı ya da\n"
+"                           genişletilmiş dil alt etiketleri biçimine göre normalleştirin\n"
+"                           veya hiç normalleştirmeyin (varsayılan: kurallı biçim).\n"
 
 #: src/merge/mkvmerge.cpp:260
 #, no-c-format
@@ -1886,9 +1886,9 @@ msgid "&Expand all"
 msgstr "Tümünü &genişlet"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:383
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Extended language subtag:"
-msgstr "Karşılık gelen genişletilmiş dil alt etiketleri biçimi: %1."
+msgstr "&Genişletilmiş dil alt etiketi:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:698
 #, no-c-format
@@ -2223,7 +2223,7 @@ msgstr "Seçilen yayını ya da bölümü &kaldır"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:391
 #, no-c-format
 msgid "&Replace with normalized form"
-msgstr ""
+msgstr "Normalleştirilmiş biçimle &değiştir"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:202
 #, no-c-format
@@ -2670,9 +2670,9 @@ msgstr "'{0}' geçerli kurcalama değil.\n"
 
 #: src/merge/mkvmerge.cpp:2105
 #: src/propedit/propedit_cli_parser.cpp:224
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "'{0}' is not a valid language normalization mode.\n"
-msgstr "'{0}', geçerli ISO 639-2 dil kodu değil."
+msgstr "'{0}' geçerli bir dil normalleştirme kipi değil.\n"
 
 #: src/merge/mkvmerge.cpp:1528
 #, no-c-format
@@ -3706,12 +3706,12 @@ msgstr "Her zaman kullanıcıya sor"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:179
 #, no-c-format
 msgid "Always automatically replace with canonical form"
-msgstr ""
+msgstr "Her zaman otomatik olarak kurallı biçimle değiştir"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:182
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Always automatically replace with extended language subtags form"
-msgstr "Karşılık gelen genişletilmiş dil alt etiketleri biçimi: %1."
+msgstr "Her zaman otomatik olarak genişletilmiş dil alt etiketleri biçimiyle değiştir"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2189
 #, no-c-format
@@ -4364,7 +4364,7 @@ msgstr "KodekID '{1}' ile olan iz {0}, '{2}' dosyasına yazılamaz çünkü Kode
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:177
 #, no-c-format
 msgid "Canonical form"
-msgstr ""
+msgstr "Kurallı biçim"
 
 #: src/common/kax_info.cpp:1333
 #: src/common/kax_info.cpp:1337
@@ -6451,14 +6451,14 @@ msgid "Exports the chapter information in the simple format used in OGM tools (C
 msgstr "OGM araçları içinde kullanılan basit biçimdeki bölüm bilgilerini dışa aktarır (BÖLÜM01=... BÖLÜM01ADI=...)."
 
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:215
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extended language subtag"
-msgstr "Karşılık gelen genişletilmiş dil alt etiketleri biçimi: %1."
+msgstr "Genişletilmiş dil alt etiketi"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:180
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extended language subtags form"
-msgstr "Karşılık gelen genişletilmiş dil alt etiketleri biçimi: %1."
+msgstr "Genişletilmiş dil alt etiketleri biçimi"
 
 #: src/common/bcp47.cpp:476
 #, no-c-format
@@ -7114,9 +7114,9 @@ msgid "ID"
 msgstr "ID"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2108
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "IETF BCP 47 &normalization mode:"
-msgstr "Varsayılan IETF BCP 47 dil düzenleme &kipi:"
+msgstr "IETF BCP 47 &normalleştirme kipi:"
 
 #: src/common/iso639.cpp:43
 #, no-c-format
@@ -7610,9 +7610,9 @@ msgid "Information"
 msgstr "Bilgiler"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:388
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Information & Warnings:"
-msgstr "Bilgiler"
+msgstr "Bilgiler ve Uyarılar:"
 
 #: src/common/bitvalue.cpp:76
 #, no-c-format
@@ -9087,7 +9087,7 @@ msgstr "Normal öncelik"
 #: src/propedit/propedit_cli_parser.cpp:272
 #, no-c-format
 msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical'), their extended language subtags form (mode 'extlang') or not at all (mode 'off')"
-msgstr ""
+msgstr "Değiştirilen öğelerin tüm IETF BCP 47 dil etiketlerini kurallı biçimlerine ('canonical' kipi), genişletilmiş dil alt etiketleri biçimlerine ('extlang' kipi) normalleştirin veya hiç normalleştirmeyin ('off' kipi)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
 #, no-c-format
@@ -10390,12 +10390,12 @@ msgstr "Eki yeni bir dosya ile ve ondan gelen &türeyen ad ve MIME türü ile de
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:178
 #, no-c-format
 msgid "Replace with canonical form once"
-msgstr ""
+msgstr "Bir kez kurallı biçimle değiştir"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:181
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Replace with extended language subtags form once"
-msgstr "Karşılık gelen genişletilmiş dil alt etiketleri biçimi: %1."
+msgstr "Genişletilmiş dil alt etiketleri biçimiyle bir kez değiştir"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:721
 #, no-c-format
@@ -11918,7 +11918,7 @@ msgstr "Ses/görüntü eşitlemesi kaybolmuş olabilir."
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:487
 #, no-c-format
 msgid "The canonical form does use a suitable prefix."
-msgstr ""
+msgstr "Kurallı biçim uygun bir önek kullanır."
 
 #: src/propedit/propedit.cpp:169
 #, no-c-format
@@ -12002,7 +12002,7 @@ msgid "The corresponding canonical form is: %1."
 msgstr "Karşılık gelen kurallı biçim: %1."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:511
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
 msgstr "Karşılık gelen genişletilmiş dil alt etiketleri biçimi: %1."
 
@@ -12183,9 +12183,9 @@ msgid "The extended language subtag '{}' must only be used with one of the follo
 msgstr "Genişletilmiş dil alt etiketi '{}' sadece şu öneklerden biriyle kullanılmak zorundadır: {}."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:490
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The extended language subtags form does use a suitable prefix."
-msgstr "'%1' genişletilmiş dil alt etiketi kullanım dışıdır."
+msgstr "Genişletilmiş dil alt etiketleri biçimi uygun bir önek kullanır."
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -13332,7 +13332,7 @@ msgstr "'%1' çeşidi kullanım dışıdır."
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:483
 #, no-c-format
 msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
-msgstr ""
+msgstr "'%1' çeşidi, buna uygun olmayan öneklerle birlikte kullanılıyor. Uygun önekler: %2."
 
 #: src/common/bcp47.cpp:460
 #, no-c-format
@@ -15276,7 +15276,7 @@ msgstr "butonlar"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:843
 #, no-c-format
 msgid "canonical form"
-msgstr ""
+msgstr "kurallı biçim"
 
 #: src/common/kax_info.cpp:635
 #, no-c-format
@@ -15369,9 +15369,9 @@ msgid "equirectangular"
 msgstr ""
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:844
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "extended language subtags form"
-msgstr "Karşılık gelen genişletilmiş dil alt etiketleri biçimi: %1."
+msgstr "genişletilmiş dil alt etiketleri biçimi"
 
 #: src/merge/output_control.cpp:439
 #, no-c-format
@@ -15819,9 +15819,9 @@ msgid "no language selected"
 msgstr "seçilen dil yok"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:842
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "no normalization"
-msgstr "Bilgiler"
+msgstr "normalleştirme yok"
 
 #: src/common/kax_info.cpp:824
 #, no-c-format
