@@ -87,6 +87,11 @@
   variants. What is now verified, though, is that no variant is used multiple
   times within the same language tag. Part of the implementation/fix of #3307.
 
+## Build system changes
+
+* build system: fixed compilation on Unices other than Linux & macOS
+  (e.g. FreeBSD). Fixes #3316.
+
 
 # Version 66.0.0 "Josie" 2022-03-13
 
