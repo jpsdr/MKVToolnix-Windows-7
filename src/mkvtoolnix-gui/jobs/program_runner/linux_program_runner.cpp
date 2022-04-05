@@ -1,6 +1,6 @@
 #include "common/common_pch.h"
 
-#if defined(SYS_LINUX)
+#if !defined(SYS_APPLE) && !defined(SYS_WINDOWS)
 
 #include <QDebug>
 #include <QProcess>
@@ -57,4 +57,4 @@ LinuxProgramRunner::sleepComputer(Util::Settings::RunProgramConfig &) {
 
 }
 
-#endif  // SYS_LINUX
+#endif  // !SYS_APPLE && !SYS_WINDOWS
