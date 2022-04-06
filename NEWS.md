@@ -69,6 +69,7 @@
 * MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: the language dialog now
   shows a warning if a script is used with a language for which it should be
   suppressed. Part of the implementation of #3307.
+* all: added a new translation to Chinese Simplified (Singapore) by Dian Li.
 
 ## Bug fixes
 
