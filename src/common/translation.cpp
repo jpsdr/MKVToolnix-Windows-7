@@ -64,7 +64,8 @@ translation_c::translation_c(std::string iso639_alpha_3_code,
 {
 }
 
-// See http://msdn.microsoft.com/en-us/library/windows/desktop/dd318693.aspx for the (sub) language IDs.
+// See http://docs.translatehouse.org/projects/localization-guide/en/latest/guide/win_lang_ids.html for the (sub) language IDs.
+
 void
 translation_c::initialize_available_translations() {
   ms_available_translations.clear();
