@@ -84,7 +84,7 @@ translation_c::initialize_available_translations() {
   ms_available_translations.emplace_back("lit", "lt_LT",       "lt",          "lithuanian", "Lithuanian",           "Lietuvių",            false, 0x0027, 0x00);
   ms_available_translations.emplace_back("dut", "nl_NL",       "nl",          "dutch",      "Dutch",                "Nederlands",          false, 0x0013, 0x00);
   ms_available_translations.emplace_back("pol", "pl_PL",       "pl",          "polish",     "Polish",               "Polski",              false, 0x0015, 0x00);
-  ms_available_translations.emplace_back("por", "pt_BR",       "pt_BR",       "portuguese", "Brazilian Portuguese", "Português do Brasil", false, 0x0016, 0x01);
+  ms_available_translations.emplace_back("por", "pt_BR",       "pt_BR",       "portuguese", "Portuguese (Brazil)",  "Português do Brasil", false, 0x0016, 0x01);
   ms_available_translations.emplace_back("por", "pt_PT",       "pt",          "portuguese", "Portuguese",           "Português",           false, 0x0016, 0x02);
   ms_available_translations.emplace_back("rum", "ro_RO",       "ro",          "romanian",   "Romanian",             "Română",              false, 0x0018, 0x00);
   ms_available_translations.emplace_back("rus", "ru_RU",       "ru",          "russian",    "Russian",              "Русский",             false, 0x0019, 0x00);
@@ -93,8 +93,8 @@ translation_c::initialize_available_translations() {
   ms_available_translations.emplace_back("swe", "sv_SE",       "sv",          "swedish",    "Swedish",              "Svenska",             false, 0x001d, 0x01);
   ms_available_translations.emplace_back("tur", "tr_TR",       "tr",          "turkish",    "Turkish",              "Türkçe",              false, 0x001f, 0x00);
   ms_available_translations.emplace_back("ukr", "uk_UA",       "uk",          "ukrainian",  "Ukrainian",            "Українська",          false, 0x0022, 0x00);
-  ms_available_translations.emplace_back("chi", "zh_CN",       "zh_CN",       "chinese",    "Chinese Simplified",   "简体中文",            true,  0x0004, 0x02);
-  ms_available_translations.emplace_back("chi", "zh_TW",       "zh_TW",       "chinese",    "Chinese Traditional",  "正體中文",            true,  0x0004, 0x01);
+  ms_available_translations.emplace_back("chi", "zh_CN",       "zh_CN",       "chinese",    "Chinese (China)",      "简体中文",            true,  0x0004, 0x02);
+  ms_available_translations.emplace_back("chi", "zh_TW",       "zh_TW",       "chinese",    "Chinese (Taiwan)",     "正體中文",            true,  0x0004, 0x01);
 #endif
 
   ms_active_translation_idx = 0;
