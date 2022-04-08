@@ -2,6 +2,9 @@
 
 #include <Qt>
 #include <QDir>
+#if HAVE_QMEDIAPLAYER && (QT_VERSION >= QT_VERSION_CHECK(6, 2, 0))
+# include <QMediaFormat>
+#endif
 #include <QOperatingSystemVersion>
 #include <QScreen>
 #include <QSettings>
@@ -164,6 +167,61 @@ gatherQtInfo(QStringList &info) {
 
   info << Q("* Version: %1.%2.%3").arg((QT_VERSION >> 16) & 0xff).arg((QT_VERSION >> 8) & 0xff).arg(QT_VERSION & 0xff);
   info << Q("* Build ABI: %1").arg(QSysInfo::buildAbi());
+
+#if !HAVE_QMEDIAPLAYER
+  info << Q("* Multimedia module not found during build");
+#elif QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+  QMediaFormat formats;
+
+  QStringList lines;
+
+  for (auto const &format : formats.supportedAudioCodecs(QMediaFormat::Decode)) {
+    auto name = format == QMediaFormat::AudioCodec::WMA         ? Q("WMA")
+              : format == QMediaFormat::AudioCodec::AC3         ? Q("AC3")
+              : format == QMediaFormat::AudioCodec::AAC         ? Q("AAC")
+              : format == QMediaFormat::AudioCodec::ALAC        ? Q("ALAC")
+              : format == QMediaFormat::AudioCodec::DolbyTrueHD ? Q("DolbyTrueHD")
+              : format == QMediaFormat::AudioCodec::EAC3        ? Q("EAC3")
+              : format == QMediaFormat::AudioCodec::MP3         ? Q("MP3")
+              : format == QMediaFormat::AudioCodec::Wave        ? Q("Wave")
+              : format == QMediaFormat::AudioCodec::Vorbis      ? Q("Vorbis")
+              : format == QMediaFormat::AudioCodec::FLAC        ? Q("FLAC")
+              : format == QMediaFormat::AudioCodec::Opus        ? Q("Opus")
+              :                                                   Q("unknown (%1)").arg(static_cast<int>(format));
+    lines << Q("* %1").arg(name);
+  }
+
+  lines.sort();
+
+  info << Q("") << Q("## Supported audio codecs") << Q("");
+  info += lines;
+
+  lines.clear();
+
+  for (auto const &format : formats.supportedFileFormats(QMediaFormat::Decode)) {
+    auto name = format == QMediaFormat::WMA        ? Q("WMA")
+              : format == QMediaFormat::AAC        ? Q("AAC")
+              : format == QMediaFormat::Matroska   ? Q("Matroska")
+              : format == QMediaFormat::WMV        ? Q("WMV")
+              : format == QMediaFormat::MP3        ? Q("MP3")
+              : format == QMediaFormat::Wave       ? Q("Wave")
+              : format == QMediaFormat::Ogg        ? Q("Ogg")
+              : format == QMediaFormat::MPEG4      ? Q("MPEG4")
+              : format == QMediaFormat::AVI        ? Q("AVI")
+              : format == QMediaFormat::QuickTime  ? Q("QuickTime")
+              : format == QMediaFormat::WebM       ? Q("WebM")
+              : format == QMediaFormat::Mpeg4Audio ? Q("Mpeg4Audio")
+              : format == QMediaFormat::FLAC       ? Q("FLAC")
+              :                                      Q("unknown (%1)").arg(static_cast<int>(format));
+
+    lines << Q("* %1").arg(name);
+  }
+
+  lines.sort();
+
+  info << Q("") << Q("## Supported file formats") << Q("");
+  info += lines;
+#endif
 }
 
 void
