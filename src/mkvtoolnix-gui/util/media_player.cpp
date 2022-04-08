@@ -3,6 +3,9 @@
 #include <Qt>
 
 #if HAVE_QMEDIAPLAYER
+# if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+#  include <QAudioOutput>
+# endif
 # include <QMediaPlayer>
 
 #else  // HAVE_QMEDIAPLAYER
@@ -34,10 +37,17 @@ class MediaPlayerPrivate {
 public:
 
   std::unique_ptr<QMediaPlayer> player;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+  std::unique_ptr<QAudioOutput> audioOutput;
+#endif
 
   explicit MediaPlayerPrivate()
     : player{new QMediaPlayer}
   {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+    audioOutput.reset(new QAudioOutput);
+    player->setAudioOutput(audioOutput.get());
+#endif
   }
 };
 
@@ -53,7 +63,11 @@ MediaPlayer::~MediaPlayer() {
 bool
 MediaPlayer::isPlaying()
   const {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+  return p_func()->player->playbackState() == QMediaPlayer::PlayingState;
+#else
   return p_func()->player->state() == QMediaPlayer::PlayingState;
+#endif
 }
 
 void
@@ -63,8 +77,13 @@ MediaPlayer::playFile(QString const &fileName,
 
   stopPlayback();
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+  p->audioOutput->setVolume(volume);
+  p->player->setSource(QUrl::fromLocalFile(fileName));
+#else
   p->player->setVolume(volume);
   p->player->setMedia(QUrl::fromLocalFile(fileName));
+#endif
   p->player->play();
 }
 
@@ -73,7 +92,11 @@ MediaPlayer::stopPlayback() {
   auto p = p_func();
 
   p->player->stop();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+  p->player->setSource({});
+#else
   p->player->setMedia({});
+#endif
 }
 
 }

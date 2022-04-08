@@ -86,6 +86,8 @@
   saying only that prefixes "are suitable sequences" for use with the
   variants. What is now verified, though, is that no variant is used multiple
   times within the same language tag. Part of the implementation/fix of #3307.
+* build system & MKVToolNix GUI: fixed detecting the presence of & the
+  compilation with the multimedia module of Qt version 6.2.0 and newer.
 
 ## Build system changes
 

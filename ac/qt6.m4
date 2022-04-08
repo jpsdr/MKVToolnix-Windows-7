@@ -90,7 +90,7 @@ EOT
     "$QMAKE6" -makefile -nocache configure.pro > /dev/null
     result2=$?
 
-    if test -z $qmake_qt_ui_try; then
+    if test $result2 = 0 -o -z $qmake_qt_ui_try; then
       break
     fi
 
