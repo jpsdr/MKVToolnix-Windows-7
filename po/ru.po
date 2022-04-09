@@ -524,13 +524,17 @@ msgid "  --no-global-tags         Don't keep global tags from the source file.\n
 msgstr "  --no-global-tags - Указывает не сохранять глобальные теги из исходного файла.\n"
 
 #: src/merge/mkvmerge.cpp:145
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --normalize-language-ietf <canonical|extlang|off>\n"
 "                           Normalize all IETF BCP 47 language tags to either\n"
 "                           their canonical or their extended language subtags\n"
 "                           form or not at all (default: canonical form).\n"
-msgstr "  --probe-range-percentage <percent> - Устанавливает максимальный диапазон исследования для дорожек в процентах от общего размера файла для определённых типов файлов (по умолчанию: 0.3).\n"
+msgstr ""
+"  --normalize-language-ietf <canonical|extlang|off>\n"
+"                           Нормализовать все языковые теги IETF BCP 47 в их \n"
+"                           канонические или их расширенные языковые формы подтегов\n"
+"                           или вообще без них (по умолчанию: каноническая форма).\n"
 
 #: src/merge/mkvmerge.cpp:260
 #, no-c-format
@@ -8880,7 +8884,7 @@ msgstr "Нормальный приоритет"
 #: src/propedit/propedit_cli_parser.cpp:272
 #, no-c-format
 msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical'), their extended language subtags form (mode 'extlang') or not at all (mode 'off')"
-msgstr ""
+msgstr "Нормализовать все языковые теги IETF BCP 47 измененных элементов либо к их канонической форме (режим «canonical»), либо к форме их расширенных языковых подтегов (режим «extlang»), либо вообще не использовать (режим «off»)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
 #, no-c-format
@@ -10202,9 +10206,9 @@ msgid "Replace with canonical form once"
 msgstr "Заменить канонической формой один раз"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:181
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Replace with extended language subtags form once"
-msgstr "Соответствующая форма подтегов расширенного языка: %1."
+msgstr "Заменить на форму расширенных языковых подтегов в один раз"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:721
 #, no-c-format
@@ -11737,7 +11741,7 @@ msgstr "Возможна рассинхронизация аудио и виде
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:487
 #, no-c-format
 msgid "The canonical form does use a suitable prefix."
-msgstr ""
+msgstr "Каноническая форма использует подходящий префикс."
 
 #: src/propedit/propedit.cpp:169
 #, no-c-format
@@ -11821,7 +11825,7 @@ msgid "The corresponding canonical form is: %1."
 msgstr "Соответствующая каноническая форма: %1."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:511
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
 msgstr "Соответствующая форма подтегов расширенного языка: %1."
 
@@ -12004,9 +12008,9 @@ msgid "The extended language subtag '{}' must only be used with one of the follo
 msgstr "Расширенный подтег языка \"{}\" должен использоваться только с одним из следующих префиксов: {}."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:490
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The extended language subtags form does use a suitable prefix."
-msgstr "Расширенный языковой подтег «%1» устарел."
+msgstr "Форма расширенных языковых подтегов использует подходящий префикс."
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -12806,7 +12810,7 @@ msgstr "Сценарий «%1» устарел."
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:460
 #, no-c-format
 msgid "The script '%1' should not be used for the language '%2' as it is the script the overwhelming majority of documents for this language is written in."
-msgstr ""
+msgstr "Сценарий «%1» не следует использовать для языка «%2», поскольку именно на нём написано подавляющее большинство документов для этого языка."
 
 #: src/extract/extract_cli_parser.cpp:91
 #, no-c-format
@@ -13156,7 +13160,7 @@ msgstr "Вариант «%1» устарел."
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:483
 #, no-c-format
 msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
-msgstr ""
+msgstr "Вариант «%1» используется с префиксами, которые для него не подходят. Подходящие префиксы: %2."
 
 #: src/common/bcp47.cpp:460
 #, no-c-format
