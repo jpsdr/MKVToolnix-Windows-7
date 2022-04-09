@@ -264,6 +264,29 @@ convert67_0_0UseISO639_3Languages(version_number_t const &writtenByVersion) {
   reg->endGroup();
 }
 
+void
+convert67_0_0DefaultAudioFileNames(version_number_t const &writtenByVersion) {
+  if (writtenByVersion >= version_number_t{"67.0.0.0"})
+    return;
+
+  auto reg   = Settings::registry();
+  auto oggRe = QRegularExpression{Q("<MTX_INSTALLATION_DIRECTORY>.*ogg$")};
+
+  reg->beginGroup(s_grpRunProgramConfigurations);
+
+  for (auto const &group : reg->childGroups()) {
+    reg->beginGroup(group);
+    auto audioFile = reg->value(s_valAudioFile).toString();
+
+    if (audioFile.contains(oggRe))
+      reg->setValue(s_valAudioFile, audioFile.left(audioFile.length() - 3) + Q("wav"));
+
+    reg->endGroup();
+  }
+
+  reg->endGroup();            // runProgramConfigurations
+}
+
 } // anonymous namespace
 
 QString
@@ -449,6 +472,7 @@ Settings::convertOldSettings() {
   convert66_0_0LanguageShortcuts();
   convert67_0_0AttachmentsAlwaysSkipForExistingName(writtenByVersion);
   convert67_0_0UseISO639_3Languages(writtenByVersion);
+  convert67_0_0DefaultAudioFileNames(writtenByVersion);
 }
 
 void
