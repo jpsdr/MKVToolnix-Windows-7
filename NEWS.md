@@ -88,6 +88,7 @@
   times within the same language tag. Part of the implementation/fix of #3307.
 * build system & MKVToolNix GUI: fixed detecting the presence of & the
   compilation with the multimedia module of Qt version 6.2.0 and newer.
+* build system: the provided Windows binaries are now compiled with Qt 6.
 
 ## Build system changes
 
