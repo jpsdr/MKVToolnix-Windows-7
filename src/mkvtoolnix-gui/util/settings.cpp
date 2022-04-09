@@ -279,7 +279,7 @@ convert67_0_0DefaultAudioFileNames(version_number_t const &writtenByVersion) {
     auto audioFile = reg->value(s_valAudioFile).toString();
 
     if (audioFile.contains(oggRe))
-      reg->setValue(s_valAudioFile, audioFile.left(audioFile.length() - 3) + Q("wav"));
+      reg->setValue(s_valAudioFile, audioFile.left(audioFile.length() - 3) + Q("webm"));
 
     reg->endGroup();
   }
