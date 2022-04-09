@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.4.0\n"
 "POT-Creation-Date: 2022-03-28 19:05+0200\n"
-"PO-Revision-Date: 2022-03-05 13:53+0000\n"
-"Last-Translator: Vlad Anisimov <uniss@ua.fm>\n"
+"PO-Revision-Date: 2016-02-03 20:53+0000\n"
+"Last-Translator: Vlad Anisimov <uniss@ua.fm>, 2020,2022\n"
 "Language-Team: Ukrainian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -34,10 +34,8 @@ msgstr "66.0.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2022-02-06"
 msgid "2022-03-13"
-msgstr "2022-02-06"
+msgstr "2022-03-13"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -1593,10 +1591,8 @@ msgstr "Встановлює код мови за замовчуванням, я
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:133
-#, fuzzy
-#| msgid "The default language code is '<literal>und</literal>' for 'undefined'."
 msgid "The default language code is '<literal>und</literal>' for 'undetermined'."
-msgstr "Код мови за замовчуванням — '<literal>und</literal>' для 'невизначено'."
+msgstr "Кодом мови за замовчуванням є '<literal>und</literal>' для 'не визначено'."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:140
@@ -2033,28 +2029,26 @@ msgstr "Зазвичай &mkvmerge; записує нові мовні елем�
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:559
 #: doc/man/mkvpropedit.xml:402
-#, fuzzy
-#| msgid "<option>--ui-language</option> <parameter>code</parameter>"
 msgid "<option>--normalize-language-ietf</option> <parameter>mode</parameter>"
-msgstr "<option>--ui-language</option> <parameter>code</parameter>"
+msgstr "<option>--normalize-language-ietf</option> <parameter>mode</parameter>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:562
 #: doc/man/mkvpropedit.xml:405
 msgid "Enables normalizing all IETF BCP 47 language tags to either their canonical form with mode '<literal>canonical</literal>', to their extended language subtags form with mode '<literal>extlang</literal>' or turns it off with mode '<literal>off</literal>'. By default normalization to the canonical form is applied."
-msgstr ""
+msgstr "Дозволяє нормалізувати всі мовні теги IETF BCP 47 до їхньої канонічної форми з режимом '<literal>canonical</literal>', до форми розширених мовних підтегів за допомогою режиму '<literal>extlang</literal>' або вимикає його в режимі '<literal>off</literal>'. За замовчуванням застосовується нормалізація до канонічної форми."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:568
 #: doc/man/mkvpropedit.xml:411
 msgid "In the canonical form all subtags for which preferred values exist are replaced by those preferred values. This converts e.g. '<literal>zh-yue-jyutping</literal>' to '<literal>yue-jyutping</literal>' or '<literal>fr-FX</literal>' to '<literal>fr-FR</literal>'."
-msgstr ""
+msgstr "У канонічній формі всі підтеги, для яких існують бажані значення, замінюються цими бажаними значеннями. Це перетворює, наприклад, '<literal>zh-yue-jyutping</literal>' до '<literal>yue-jyutping</literal>' або '<literal>fr-FX</literal>' до '<literal>fr-FR</literal>'."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:573
 #: doc/man/mkvpropedit.xml:416
 msgid "For the extended language subtags form the canonical form is built first. Afterwards all primary languages for which an extended language subtag exists are replaced by that extended language subtag and its prefix. This converts e.g. '<literal>yue-jyutping</literal>' back to '<literal>zh-yue-jyutping</literal>' but has no effect on '<literal>fr-FR</literal>' as '<literal>fr</literal>' is not an extended language subtag."
-msgstr ""
+msgstr "Для форми розширених мовних підтегів спочатку будується канонічна форма. Після цього всі основні мови, для яких існує розширений мовний підтег, замінюються цим розширеним мовним підтегом та його префіксом. Це перетворює, наприклад, '<literal>yue-jyutping</literal>' повертається до '<literal>zh-yue-jyutping</literal>', але не впливає на '<literal>fr-FR</literal>', оскільки '<literal>fr</literal>' не є розширеним мовним підтегом."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:584
@@ -2588,7 +2582,7 @@ msgstr "Тип <abbrev>MIME</abbrev> наступного вкладення. З
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1126
 msgid "If no <abbrev>MIME</abbrev> type is given a for an attachment, its type will be detected automatically."
-msgstr ""
+msgstr "Якщо для вкладення не вказано тип <abbrev>MIME</abbrev>, його тип буде визначено автоматично."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1132
@@ -2619,10 +2613,8 @@ msgstr "&mkvextract; можна використовувати для витяг
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1163
 #: doc/man/mkvpropedit.xml:360
-#, fuzzy
-#| msgid "<option>--enable-durations</option>"
 msgid "<option>--enable-legacy-font-mime-types</option>"
-msgstr "<option>--enable-durations</option>"
+msgstr "<option>--enable-legacy-font-mime-types</option>"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1166
@@ -5166,7 +5158,7 @@ msgstr "Цей параметр не впливає на зміни, запит�
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:423
 msgid "This normalization is only applied to elements that are actually changed:"
-msgstr ""
+msgstr "Ця нормалізація застосовується лише до елементів, які фактично змінені:"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:429
@@ -5186,7 +5178,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:450
 msgid "The best way to normalize all existing language tags in a file is to remux it with &mkvmerge; and set its '<literal>--normalize-language-ietf</literal>' option to the desired mode."
-msgstr ""
+msgstr "Найкращий спосіб нормалізувати всі наявні мовні теги у файлі - це зробити його ремукс за допомогою &mkvmerge; і встановити його параметр '<literal>--normalize-language-ietf</literal>' у потрібний режим."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:480
