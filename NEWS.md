@@ -100,6 +100,7 @@
   (e.g. FreeBSD). Fixes #3316.
 * The bundled `fmt` library was updated to v8.1.1.
 * The bundled `nlohmann-json` library was updated to v3.10.5.
+* The bundled `pugixml` library was updated to v1.12.1.
 
 
 # Version 66.0.0 "Josie" 2022-03-13
