@@ -45,11 +45,10 @@ EOT
 
   qmake_qtplugin_ui=""
   qmake_qt_ui=""
-  qmake_qt_ui_try=""
+  qmake_qt_ui_try="multimedia"
 
   if ! test x"$MINGW" = x1; then
     qmake_qt_ui="dbus"
-    qmake_qt_ui_try="multimedia"
   fi
 
   cat > "$qmake_dir/configure_non_gui.pro" <<EOT
