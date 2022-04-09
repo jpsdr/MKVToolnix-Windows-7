@@ -391,8 +391,7 @@ PrefsRunProgramWidget::config()
 void
 PrefsRunProgramWidget::changeAudioFile() {
   auto p             = p_func();
-  auto filters       = QStringList{} << QY("Audio files") + Q(" (*.aac *.flac *.m4a *.mp3 *.ogg *.opus *.wav)")
-                                     << QY("All files")   + Q(" (*)");
+  auto filters       = QStringList{} << QY("All files") + Q(" (*)");
 
   auto realAudioFile = Util::replaceMtxVariableWithApplicationDirectory(p->ui->leAudioFile->text());
   auto newAudioFile  = Util::getOpenFileName(this, QY("Select audio file"), realAudioFile, filters.join(Q(";;")));
