@@ -456,15 +456,15 @@ msgid "  --enable-durations       Enable block durations for all blocks.\n"
 msgstr "  --enable-durations       為所有區塊啟用區塊時間長度寫入。\n"
 
 #: src/merge/mkvmerge.cpp:203
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --enable-legacy-font-mime-types\n"
 "                           Use legacy font MIME types when adding new\n"
 "                           attachments as well as for existing ones.\n"
 msgstr ""
-"  --attach-file-once <檔案>\n"
-"                           在即將寫入的第一個 Matroska 檔中\n"
-"                           建立檔案附件。\n"
+"  --enable-legacy-font-mime-types\n"
+"                           在添加新的字体附件以及导入现有附件时，\n"
+"                           使用传统的 MIME 类型代码。\n"
 
 #: src/merge/mkvmerge.cpp:406
 #, no-c-format
@@ -649,16 +649,17 @@ msgid "  --no-global-tags         Don't keep global tags from the source file.\n
 msgstr "  --no-global-tags         不要保留此原始檔案中的全域標籤。\n"
 
 #: src/merge/mkvmerge.cpp:145
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --normalize-language-ietf <canonical|extlang|off>\n"
 "                           Normalize all IETF BCP 47 language tags to either\n"
 "                           their canonical or their extended language subtags\n"
 "                           form or not at all (default: canonical form).\n"
 msgstr ""
-"  --probe-range-percentage <百分比>\n"
-"                           將最大大小設定以特定檔案類型的\n"
-"                          總檔案大小百分比(預設值:0.3)來探測軌道。\n"
+"  --normalize-language-ietf <canonical|extlang|off>\n"
+"                           将 IETF BCP 47 语言元素的值规范化为\n"
+"                           对应的最简式或扩展语言子标签形式\n"
+"                           或不作任何改动 (默认: 最简式)。\n"
 
 #: src/merge/mkvmerge.cpp:260
 #, no-c-format
@@ -896,15 +897,15 @@ msgid "  --title <title>          Title for this destination file.\n"
 msgstr "  --title <title>          輸出檔案的標題。\n"
 
 #: src/merge/mkvmerge.cpp:248
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --track-enabled-flag <TID[:bool]>\n"
 "                           Sets the \"track enabled\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
-"  --commentary-flag <TID[:bool]>\n"
-"                           為指定軌道設定 \"註釋\" 標記\n"
-"                           或是當布林值為 0 時強制不顯示。\n"
+"  --track-enabled-flag <TID[:布尔值]>\n"
+"                           为轨道设置「轨道启用」标记，\n"
+"                           若布尔值为 0 则强制去除该标记。.\n"
 
 #: src/merge/mkvmerge.cpp:268
 #, no-c-format
@@ -1745,9 +1746,9 @@ msgid "&Command line:"
 msgstr "命令行(&C)："
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:102
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Configure available languages"
-msgstr "檢查可更新的新版本"
+msgstr "配置可用语言(&C)"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
 #, no-c-format
@@ -1854,9 +1855,9 @@ msgid "&Expand all"
 msgstr "展開全部項目(&E)"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:383
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Extended language subtag:"
-msgstr "擃展的子標籤"
+msgstr "扩展语言子标签(&E):"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:698
 #, no-c-format
@@ -2188,7 +2189,7 @@ msgstr "移除選擇的版本或章節(&R)"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:391
 #, no-c-format
 msgid "&Replace with normalized form"
-msgstr ""
+msgstr "转为规范化形式(&R)"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:202
 #, no-c-format
@@ -2634,9 +2635,9 @@ msgstr "'{0}' 不是有效的 hack 程式語言。\n"
 
 #: src/merge/mkvmerge.cpp:2105
 #: src/propedit/propedit_cli_parser.cpp:224
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "'{0}' is not a valid language normalization mode.\n"
-msgstr "'{0}' 不是有效的 ISO 639-2 語言碼。"
+msgstr "「{0}」不是有效的语言规范化模式。\n"
 
 #: src/merge/mkvmerge.cpp:1528
 #, no-c-format
@@ -3350,9 +3351,9 @@ msgid "Add new ed&ition after"
 msgstr "後面加入新編輯"
 
 #: src/mkvtoolnix-gui/main_window/prefs_language_shortcut_dialog.cpp:28
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Add new language shortcut"
-msgstr "語言"
+msgstr "添加新的语言快捷方式"
 
 #: src/propedit/propedit_cli_parser.cpp:255
 #, no-c-format
@@ -3669,12 +3670,12 @@ msgstr "總是詢問使用者"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:179
 #, no-c-format
 msgid "Always automatically replace with canonical form"
-msgstr ""
+msgstr "总是自动替换为最简式(&Z)"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:182
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Always automatically replace with extended language subtags form"
-msgstr "有效的語言標籤。"
+msgstr "总是自动替换为扩展语言子标签形式(&K)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2189
 #, no-c-format
@@ -4327,7 +4328,7 @@ msgstr "無法寫入軌道 {0}（CodecID '{1}' ）至檔案 '{2}' ，因為軌�
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:177
 #, no-c-format
 msgid "Canonical form"
-msgstr ""
+msgstr "最简式"
 
 #: src/common/kax_info.cpp:1333
 #: src/common/kax_info.cpp:1337
@@ -5968,7 +5969,7 @@ msgstr "每個建立的檔案包含一段剪輯，且每段剪輯有一組剪輯
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:449
 #, no-c-format
 msgid "Each part is then matched against the list of languages selected below to determine whether or not to use it as the track language."
-msgstr ""
+msgstr "每一部分将与下方选中的语言列表作比较，决定是否将其用作轨道语言。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:305
 #, no-c-format
@@ -5987,9 +5988,9 @@ msgid "Edit language"
 msgstr "編輯語言"
 
 #: src/mkvtoolnix-gui/main_window/prefs_language_shortcut_dialog.cpp:28
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Edit language shortcut"
-msgstr "語言"
+msgstr "编辑语言快捷方式"
 
 #: src/propedit/propedit_cli_parser.cpp:278
 #, no-c-format
@@ -6413,14 +6414,14 @@ msgid "Exports the chapter information in the simple format used in OGM tools (C
 msgstr "用 OGM 工具的簡易格式來匯出章節資訊 (CHAPTER01=... CHAPTER01名稱=...)。"
 
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:215
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extended language subtag"
-msgstr "擃展的子標籤"
+msgstr "扩展语言子标签"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:180
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extended language subtags form"
-msgstr "擃展的子標籤"
+msgstr "扩展语言子标签形式"
 
 #: src/common/bcp47.cpp:476
 #, no-c-format
@@ -6458,9 +6459,9 @@ msgid "Extracted the aspect ratio information from the Theora video headers and 
 msgstr "從 Theora 視訊頭中擷取外觀比例資訊並設定顯示尺寸為 {0}/{1}。\n"
 
 #: src/output/p_avc_hevc_es.cpp:162
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extracted the aspect ratio information from the video bitstream and set the display dimensions to {0}/{1}.\n"
-msgstr "從 HEVC 視訊資料中擷取外觀比例資訊並設定顯示尺寸為 {0}/{1}。\n"
+msgstr "从视频码流中提取宽高比信息，并将显示尺寸设为 {0}/{1}。\n"
 
 #: src/extract/extract_cli_parser.cpp:139
 #, no-c-format
@@ -6724,7 +6725,7 @@ msgstr "要深入瞭解檔案/剪輯連接功能，請閱讀 mkvmerge 文件檔�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:377
 #, no-c-format
 msgid "For example, a file containing audio tracks but no video tracks will be inserted before the first file that contains neither video nor audio tracks."
-msgstr ""
+msgstr "例如，包含音频轨但不含视频轨的文件将插入至第一个既不含视频轨又不含音频轨的文件之前。"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 #, no-c-format
@@ -7075,9 +7076,9 @@ msgid "ID"
 msgstr "ID"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2108
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "IETF BCP 47 &normalization mode:"
-msgstr "預設 IETF BCP 47 語言編輯模式(&M):"
+msgstr "IETF BCP 47 规范化模式(&N):"
 
 #: src/common/iso639.cpp:43
 #, no-c-format
@@ -7179,14 +7180,14 @@ msgid "If checked, the program will ask for confirmation before closing or reloa
 msgstr "如果勾選該選項，程式將在關閉或載入已修改的標籤時，將請求確認。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:389
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If disabled, all files selected for adding will always be added regardless of their names."
-msgstr "如果勾選該選項，無限語言，此類型的軌道將永遠設定為複製。"
+msgstr "若禁用，则总是添加所有已选中的文件，不论其文件名为何。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:379
 #, no-c-format
 msgid "If disabled, files and tracks will be inserted after all existing files and tracks."
-msgstr ""
+msgstr "若禁用，文件/轨道将插入至所有现有文件/轨道之后。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:303
 #, no-c-format
@@ -7204,9 +7205,9 @@ msgid "If enabled, automatic scaling for high DPI displays will be disabled."
 msgstr "如果勾選該選項，將會停用高 DPI 顯示器的自動縮放。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:375
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If enabled, files and tracks will be sorted by track types when they're added to multiplex settings."
-msgstr "如果勾選該選項，加入時所有字幕軌的 '預設軌' 標記將被設定為 '否' 。"
+msgstr "若启用，则在将文件添加到混流设置时，其轨道将按轨道类型排序。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:365
 #, no-c-format
@@ -7216,17 +7217,17 @@ msgstr "如果勾選該選項，將對所有支援移除標準對話增益的音
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:407
 #, no-c-format
 msgid "If enabled, small colored boxes will be shown in the file and track lists as a visual clue to help associating tracks with the files they come from."
-msgstr ""
+msgstr "若启用，文件及轨道列表中将显示带颜色的小框，提示您哪些轨道来自同一个文件。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:489
 #, no-c-format
 msgid "If enabled, such files will always be skipped without asking."
-msgstr ""
+msgstr "若启用，将不经询问直接跳过此类文件。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:384
 #, no-c-format
 msgid "If enabled, the GUI will analyze the file names when you add multiple files at once."
-msgstr ""
+msgstr "若启用，GUI 将在您一次性添加多个文件时分析各文件名称。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:305
 #, no-c-format
@@ -7345,7 +7346,7 @@ msgstr "如果未輸入內容，將會自動產生章節，但不會設定名稱
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:488
 #, no-c-format
 msgid "If one is found, the GUI will ask whether to skip the file or to add it anyway."
-msgstr ""
+msgstr "若发现，GUI 将询问是否跳过文件或坚持添加它。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:489
 #, no-c-format
@@ -7360,7 +7361,7 @@ msgstr "如果設定為 '否' ，那麼選擇的軌道將不會複製到輸出�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:388
 #, no-c-format
 msgid "If such a sequence is detected, only the first file is added while the second and following files in the sequence are appended to the first one."
-msgstr ""
+msgstr "若侦测到顺序编号，则只将第一个文件按「添加」模式加入配置，其余文件将依次「追加」到第一个文件之后。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:216
 #, no-c-format
@@ -7400,7 +7401,7 @@ msgstr "如果原始檔案的音訊軌沒有此屬性，可以從檔名中特定
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:408
 #, no-c-format
 msgid "If there are more entries than configured colors, random colors will be used temporarily."
-msgstr ""
+msgstr "若条目数量多余已配置的颜色数量，则将临时使用随机颜色。"
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:76
 #, no-c-format
@@ -7571,9 +7572,9 @@ msgid "Information"
 msgstr "資訊"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:388
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Information & Warnings:"
-msgstr "資訊"
+msgstr "信息 & 警告:"
 
 #: src/common/bitvalue.cpp:76
 #, no-c-format
@@ -7994,7 +7995,7 @@ msgstr "XML 章節檔會忽略此項。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:385
 #, no-c-format
 msgid "It tries to detect sequences of names that likely belong to the same movie by splitting the name into three parts: a prefix, a running number and a suffix that doesn't contain digits."
-msgstr ""
+msgstr "它将尝试侦测按顺序排列的可能属于同一部影片的文件名，方法是将文件名切割为三个部分: 前缀、连续递增的数字、不含数字的后缀。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1941
 #, no-c-format
@@ -8121,9 +8122,9 @@ msgid "Language selected below"
 msgstr "下方選擇語言"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2110
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Language shortcuts"
-msgstr "語言"
+msgstr "语言快捷方式"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:308
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2211
@@ -8400,9 +8401,9 @@ msgid "Malformed codec id '{0}'.\n"
 msgstr "不正常的編碼器 id '{0}' 。\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:479
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Mark this track as \"enabled\" (the default) or \"disabled\"."
-msgstr "以 \"強制顯示\" 標記此軌道。"
+msgstr "将该轨道标记为「已启用」（默认）或「已禁用」。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:475
 #, no-c-format
@@ -8596,12 +8597,12 @@ msgstr "模式"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:389
 #, no-c-format
 msgid "Modif&y selected track"
-msgstr ""
+msgstr "修改选中的轨道(&Y)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:786
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Modif&y selected tracks"
-msgstr "靜音訊軌道"
+msgstr "修改选中的轨道(&Y)"
 
 #: src/propedit/options.cpp:185
 #, no-c-format
@@ -8744,7 +8745,7 @@ msgstr "名稱"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:386
 #, no-c-format
 msgid "Names are considered to be in sequence when the previous file name's prefix & suffix match the current file name's prefix & suffix and the running number is incremented by one."
-msgstr ""
+msgstr "若前一个文件名的前缀及后缀与当前文件名的前缀及后缀相匹配，而数字刚好增加 1，则两个文件名将被视作连续排列。"
 
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:68
 #, no-c-format
@@ -9047,7 +9048,7 @@ msgstr "一般優先"
 #: src/propedit/propedit_cli_parser.cpp:272
 #, no-c-format
 msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical'), their extended language subtags form (mode 'extlang') or not at all (mode 'off')"
-msgstr ""
+msgstr "将所有发生变化的元素的 IETF BCP 47 语言标签规范化为其最简式 (｢canonical｣ 模式) 或其扩展语言子标签形式 (｢extlang｣ 模式) 或不作改动 (｢off｣ 模式)。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
 #, no-c-format
@@ -9082,7 +9083,7 @@ msgstr "一般情形下，可以在列表檢視中透過拖曳和鍵盤快速鍵
 #: src/common/hacks.cpp:66
 #, no-c-format
 msgid "Normally the HEVC/H.265 code in mkvmerge and mkvextract normalizes parameter sets by prefixing all key frames with all currently active parameter sets and removes duplicates that might already be present."
-msgstr ""
+msgstr "mkvmerge 及 mkvextract 的 HEVC/H.265 程序代码通常会将所有当前活动的参数集移到所有关键帧之前，并移除可能已存在的重复参数集，以此实现参数集的常规化。"
 
 #: src/common/bitvalue.cpp:72
 #, no-c-format
@@ -9642,12 +9643,12 @@ msgstr "播放音訊檔案 '%1'"
 #: src/mkvtoolnix-gui/merge/input.cpp:480
 #, no-c-format
 msgid "Players should only consider enabled tracks for playback."
-msgstr ""
+msgstr "播放器应只选取已启用的轨道用于播放。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:472
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language."
-msgstr "播放器應該要優先播放有 '預設軌' 標記的軌道。"
+msgstr "播放器应优先选择带「默认轨」标记的轨道，同时也应考虑用户的偏好设置，例如轨道的语言。"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:323
 #, no-c-format
@@ -10342,12 +10343,12 @@ msgstr "用新檔案取代附件，並沿用其名稱及 MIME 類型(&D)"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:178
 #, no-c-format
 msgid "Replace with canonical form once"
-msgstr ""
+msgstr "仅本次替换为最简式(&J)"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:181
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Replace with extended language subtags form once"
-msgstr "有效的語言標籤。"
+msgstr "仅本次替换为扩展语言子标签形式(&E)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:721
 #, no-c-format
@@ -10797,9 +10798,9 @@ msgid "Select executable"
 msgstr "選擇可執行程式"
 
 #: src/mkvtoolnix-gui/util/file_dialog.cpp:125
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Select existing file"
-msgstr "選擇標籤檔案"
+msgstr "选择现有文件"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
 #, no-c-format
@@ -10850,9 +10851,9 @@ msgstr "選擇要用來寫入字幕檔或章節資訊的字元集。"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:397
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:149
 #: src/mkvtoolnix-gui/merge/tool.cpp:265
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Set &language"
-msgstr "編輯語言"
+msgstr "设置语言(&L)"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1836
 #, no-c-format
@@ -10897,7 +10898,7 @@ msgstr "設定章節名稱的語言(&L):"
 #: src/propedit/propedit_cli_parser.cpp:256
 #, no-c-format
 msgid "Set the charset to use when reading chapter files using the simple chapter format"
-msgstr ""
+msgstr "设置用于读取简易章节格式的章节文件时所用的字符集"
 
 #: src/propedit/propedit_cli_parser.cpp:266
 #, no-c-format
@@ -10996,9 +10997,9 @@ msgid "Show a &summary line with statistics for each track at the end"
 msgstr "在尾端顯示每個資料軌的統計資料(&S)"
 
 #: src/info/info_cli_parser.cpp:44
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Show all bytes of each frame and other binary elements as a hex dump."
-msgstr "以十六進位轉儲形式顯示每影格與 CodecPrivate 的全部位元組"
+msgstr "以十六进制转储的形式显示各帧以及其他二进制元素的所有字节。"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:170
 #, no-c-format
@@ -11126,7 +11127,7 @@ msgstr "靜音訊軌道"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:378
 #, no-c-format
 msgid "Similarly an audio track will be inserted before the first track that's neither a video nor an audio track."
-msgstr ""
+msgstr "类似地，一条音频轨将被插入至第一个既非视频轨又非音频轨的轨道之前。"
 
 #: src/common/kax_element_names.cpp:318
 #, no-c-format
@@ -11150,9 +11151,9 @@ msgid "Simple chapter parser: {0}\n"
 msgstr "樣本章節解析器: {0}\n"
 
 #: src/mpegparser/M2VParser.cpp:416
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Single field picture detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
-msgstr "在 GOP 表頭前偵測到單圖場影格。在分離前請修復 MPEG2 視訊串流。\n"
+msgstr "侦测到单场画面。在尝试混流前，请先修复 MPEG2 视频流。\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:73
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
@@ -11865,7 +11866,7 @@ msgstr "音訊/視訊可能發生不同步。"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:487
 #, no-c-format
 msgid "The canonical form does use a suitable prefix."
-msgstr ""
+msgstr "但对应的最简式却有与之匹配的前缀。"
 
 #: src/propedit/propedit.cpp:169
 #, no-c-format
@@ -11941,17 +11942,17 @@ msgstr "校正檔未能正常讀取。\n"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:501
 #, no-c-format
 msgid "The corresponding canonical & extended language subtags forms are: %1."
-msgstr ""
+msgstr "对应的最简式以及扩展语言子标签形式均为: %1。"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:506
 #, no-c-format
 msgid "The corresponding canonical form is: %1."
-msgstr ""
+msgstr "对应的最简式为: ｢%1｣。"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:511
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
-msgstr "有效的語言標籤。"
+msgstr "对应的扩展语言子标签形式为: ｢%1｣。"
 
 #: src/merge/output_control.cpp:1627
 #, no-c-format
@@ -12119,9 +12120,9 @@ msgid "The error message was:"
 msgstr "錯誤訊息是:"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:451
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The extended language subtag '%1' is deprecated."
-msgstr "有效的語言標籤。"
+msgstr "扩展语言子标签「%1」已被弃用。"
 
 #: src/common/bcp47.cpp:448
 #, no-c-format
@@ -12129,9 +12130,9 @@ msgid "The extended language subtag '{}' must only be used with one of the follo
 msgstr "擴展語言標籤的子標籤 '{}' 只能使用下列的首碼: {}."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:490
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The extended language subtags form does use a suitable prefix."
-msgstr "有效的語言標籤。"
+msgstr "但对应的扩展语言子标签形式却有与之匹配的前缀。"
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -12561,9 +12562,9 @@ msgid "The job has been added to the job queue."
 msgstr "作業已加入到作業佇列。"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:446
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The language '%1' is deprecated."
-msgstr "有效的語言標籤。"
+msgstr "语言「%1」已被弃用。"
 
 #: src/input/r_usf.cpp:106
 #, no-c-format
@@ -12636,9 +12637,9 @@ msgid "The line {0} of the timestamp file '{1}' does not contain a valid floatin
 msgstr "時間戳記檔案 '{1}' 的第 {0} 行不包含有效的浮點數。\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1334
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The list of boundary characters for deriving the track language from file names must not be empty."
-msgstr "檔案名中已識別的軌道語言清單不能為空白。"
+msgstr "用于根据文件名来推断轨道语言的边界字符列表不能为空。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1346
 #, no-c-format
@@ -12894,9 +12895,9 @@ msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, da
 msgstr "可是別的格式為 'YYYY-mm-ddTHH:MM:SS+zz:zz': 年-月-日-字母'T'-時-分-秒 與 UTC 時區位移；例如: 2017-03-28T17:28-02:00 。"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:466
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The region '%1' is deprecated."
-msgstr "檔案 '%1'  已存在。"
+msgstr "地区「%1」已被弃用。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:223
 #, no-c-format
@@ -12924,14 +12925,14 @@ msgid "The sample rate of the two audio tracks is different: {0} and {1}"
 msgstr "兩音訊軌的取樣頻率不同: {0} 與 {1}"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:456
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The script '%1' is deprecated."
-msgstr "檔案 '%1'  已存在。"
+msgstr "文字「%1」已被弃用。"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:460
 #, no-c-format
 msgid "The script '%1' should not be used for the language '%2' as it is the script the overwhelming majority of documents for this language is written in."
-msgstr ""
+msgstr "文字「%1」不应与语言「%2」搭配使用，因为此文字是书写该语言时占主导地位的最常见文字。"
 
 #: src/extract/extract_cli_parser.cpp:91
 #, no-c-format
@@ -13274,19 +13275,19 @@ msgid "The values will be available for easy selection in the multiplexer."
 msgstr "這些數值可在合併工具中輕鬆選擇。"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:472
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The variant '%1' is deprecated."
-msgstr "檔案 '%1'  已存在。"
+msgstr "变体「%1」已被弃用。"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:483
 #, no-c-format
 msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
-msgstr ""
+msgstr "未使用与变体标签「%1」相匹配的前缀。匹配的前缀为: %2。"
 
 #: src/common/bcp47.cpp:460
 #, no-c-format
 msgid "The variant '{}' occurs more than once."
-msgstr ""
+msgstr "变体「{}」重复出现。"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:747
 #, no-c-format
@@ -13309,9 +13310,9 @@ msgid "Theora"
 msgstr "Theora"
 
 #: src/merge/mkvmerge.cpp:3116
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "There are no chapters in source files & chapter files."
-msgstr "原始檔案及章節檔案中只有 {0} 個章節。"
+msgstr "输入文件及章节文件中没有章节。"
 
 #: src/extract/cues.cpp:54
 #, no-c-format
@@ -13319,9 +13320,9 @@ msgid "There are no cues for track ID {0}.\n"
 msgstr "軌道 ID {0} 沒有 cue 表單。\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:513
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "There are several potential sources for the container's timing information: a value given on the command line with the '--default-duration' option, the source container or the video bitstream."
-msgstr "容器時間資訊輸入的各種事項：命令列上用 '--default-duration' 選項給定數值，輸入容器或視訊位元串流。"
+msgstr "容器的计时信息有多个可能的来源: 通过命令行「--default-duration」选项给出的默认时长值，输入容器，以及视频码流。"
 
 #: src/mkvtoolnix-gui/main_window/available_update_info_dialog.cpp:93
 #, no-c-format
@@ -13542,7 +13543,7 @@ msgstr "這項在某些情況很有用，例如藍光光碟目錄有多份播放
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:495
 #, no-c-format
 msgid "This language tag is a grandfathered element only supported for historical reasons."
-msgstr ""
+msgstr "此语言标签是为向后兼容而保留的（grandfathered）古老标签，仅为历史因素而支持其输入，建议使用更为现代的标签。"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:100
 #, no-c-format
@@ -13573,7 +13574,7 @@ msgstr "此模式只會將最上層章節視為橫跨全部版本項目。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:299
 #, no-c-format
 msgid "This mostly affects TrueType fonts for which the legacy MIME type ('application/x-truetype-font') might be more widely supported than the standard MIME types ('font/sfnt' and 'font/ttf')."
-msgstr ""
+msgstr "最受影响的是 TrueType 字体文件，其传统 MIME 类型 ('application/x-truetype-font') 可能比标准 MIME 类型 ('font/sfnt' 与 'font/ttf') 的受支持度更广。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:534
 #, no-c-format
@@ -13583,7 +13584,7 @@ msgstr "必須是以逗號分隔開的四位數清單，其分別對應左邊、
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:380
 #, no-c-format
 msgid "This only determines the initial order which can still be changed manually later."
-msgstr ""
+msgstr "这只会决定初始顺序，随后仍可手动变更顺序。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:554
 #, no-c-format
@@ -13773,44 +13774,44 @@ msgid "To all destination files"
 msgstr "到所有輸出檔案"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:111
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&commentary\" flag"
-msgstr "\"註釋\" 標記"
+msgstr "切换「评论轨」标记(&C)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:108
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&default track\" flag"
-msgstr "\"預設軌\" 標記"
+msgstr "切换「默认轨」标记(&D)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:109
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&forced display\" flag"
-msgstr "\"強制顯示\" 標記"
+msgstr "切换「强制显示」标记(&F)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:112
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&hearing impaired\" flag"
-msgstr "\"聽覺障礙\" 標記"
+msgstr "切换「听觉障碍」标记(&H)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:110
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&original\" flag"
-msgstr "原始數值:"
+msgstr "切换「原始语言」标记(&O)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:114
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&text descriptions\" flag"
-msgstr "\"文字說明\" 標記"
+msgstr "切换「文字描述」标记(&T)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:113
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"&visual impaired\" flag"
-msgstr "\"視覺障礙\" 標記"
+msgstr "切换「视觉障碍」标记(&V)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:107
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Toggle \"track &enabled\" flag"
-msgstr "\"啟用軌\" 標記"
+msgstr "切换「轨道启用」标记(&E)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:854
 #, no-c-format
@@ -13828,9 +13829,9 @@ msgid "Track"
 msgstr "軌道"
 
 #: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:115
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Track &name (optional):"
-msgstr "軌道名稱(&K):"
+msgstr "轨道名称 (可选) (&N):"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:306
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:64
@@ -13869,9 +13870,9 @@ msgid "Track headers"
 msgstr "軌道表頭"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2112
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Track name"
-msgstr "軌道名稱(&K):"
+msgstr "轨道名称"
 
 #: src/common/kax_element_names.cpp:188
 #: src/common/property_element.cpp:131
@@ -13990,7 +13991,7 @@ msgstr "軌道 {0}: AAC 資訊無法解析。\n"
 #: src/extract/xtr_aac.cpp:54
 #, no-c-format
 msgid "Track {0}: extraction of AAC audio with a channel count of 7 or more than 8 in its 'audio-specific config' element is not supported.\n"
-msgstr ""
+msgstr "轨道 {0}: 不支持提取「音频特定配置」元素中声道数为 7 或超过 8 的 AAC 音频。\n"
 
 #: src/common/kax_info.cpp:665
 #, no-c-format
@@ -14265,7 +14266,7 @@ msgstr "使用舊版 MIME 類型附加字型(&Y)"
 #: src/propedit/propedit_cli_parser.cpp:245
 #, no-c-format
 msgid "Use legacy font MIME types when adding new attachments or replacing existing ones"
-msgstr ""
+msgstr "添加新的字体附件或替换现有字体附件时使用传统的 MIME 类型"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2175
 #, no-c-format
@@ -14825,7 +14826,7 @@ msgstr "透過 '加入原始檔案' 加入多個檔案時:"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:487
 #, no-c-format
 msgid "When adding new files as attachments the GUI will check if there are other attachments with the same name."
-msgstr ""
+msgstr "将新文件作为附件添加时，GUI 会检查是否存在同名的其他附件。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:515
 #, no-c-format
@@ -15152,7 +15153,7 @@ msgstr "可以省略 'HH' 小時數。"
 #: src/mkvtoolnix-gui/util/file_dialog.cpp:126
 #, no-c-format
 msgid "You must select an existing file."
-msgstr ""
+msgstr "您必须选择现有文件。"
 
 #: src/common/compression/zlib.cpp:52
 #: src/common/compression/zlib.cpp:90
@@ -15222,7 +15223,7 @@ msgstr "按鈕"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:843
 #, no-c-format
 msgid "canonical form"
-msgstr ""
+msgstr "最简式"
 
 #: src/common/kax_info.cpp:635
 #, no-c-format
@@ -15315,9 +15316,9 @@ msgid "equirectangular"
 msgstr "等量矩形投影"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:844
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "extended language subtags form"
-msgstr "有效的語言標籤。"
+msgstr "扩展语言子标签形式"
 
 #: src/merge/output_control.cpp:439
 #, no-c-format
@@ -15674,7 +15675,7 @@ msgstr "mkvmerge 不會辨別這兩個和簡易的區塊數量。"
 #: src/output/p_avc_hevc_es.cpp:97
 #, no-c-format
 msgid "mkvmerge encountered broken or unparsable data in this video track."
-msgstr ""
+msgstr "mkvmerge 在该视频轨道中遇到损坏或无法解析的数据。"
 
 #: src/input/r_ogm.cpp:462
 #, no-c-format
@@ -15765,9 +15766,9 @@ msgid "no language selected"
 msgstr "未選擇語言"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:842
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "no normalization"
-msgstr "資訊"
+msgstr "不作规范化处理"
 
 #: src/common/kax_info.cpp:824
 #, no-c-format
