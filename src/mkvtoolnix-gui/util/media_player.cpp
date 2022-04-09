@@ -40,12 +40,16 @@ public:
 #if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
   std::unique_ptr<QAudioOutput> audioOutput;
 #endif
+  QString lastPlayedFile;
+  bool errorReported{};
 
   explicit MediaPlayerPrivate()
     : player{new QMediaPlayer}
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+    , audioOutput{new QAudioOutput}
+#endif
   {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
-    audioOutput.reset(new QAudioOutput);
     player->setAudioOutput(audioOutput.get());
 #endif
   }
@@ -55,9 +59,28 @@ MediaPlayer::MediaPlayer()
   : QObject{}
   , p_ptr{new MediaPlayerPrivate}
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+  connect(p_ptr->player.get(), &QMediaPlayer::errorOccurred, this, &MediaPlayer::handleError);
+#else
+  connect(p_ptr->player.get(), static_cast<void (QMediaPlayer::*)(QMediaPlayer::Error)>(&QMediaPlayer::error), this, &MediaPlayer::handleError);
+#endif
 }
 
 MediaPlayer::~MediaPlayer() {
+}
+
+void
+MediaPlayer::handleError(QMediaPlayer::Error error) {
+  auto &p = *p_func();
+
+  qDebug() << "MediaPlayer::handleError" << error << p.errorReported;
+
+  if (p.lastPlayedFile.isEmpty() || p.errorReported)
+    return;
+
+  p.errorReported = true;
+
+  Q_EMIT errorOccurred(error, p.lastPlayedFile);
 }
 
 bool
@@ -73,30 +96,35 @@ MediaPlayer::isPlaying()
 void
 MediaPlayer::playFile(QString const &fileName,
                       unsigned int volume) {
-  auto p = p_func();
+  auto &p = *p_func();
 
   stopPlayback();
 
+  p.lastPlayedFile = fileName;
+
 #if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
-  p->audioOutput->setVolume(volume);
-  p->player->setSource(QUrl::fromLocalFile(fileName));
+  p.audioOutput->setVolume(volume);
+  p.player->setSource(QUrl::fromLocalFile(fileName));
 #else
-  p->player->setVolume(volume);
-  p->player->setMedia(QUrl::fromLocalFile(fileName));
+  p.player->setVolume(volume);
+  p.player->setMedia(QUrl::fromLocalFile(fileName));
 #endif
-  p->player->play();
+  p.player->play();
 }
 
 void
 MediaPlayer::stopPlayback() {
-  auto p = p_func();
+  auto &p = *p_func();
 
-  p->player->stop();
+  p.player->stop();
 #if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
-  p->player->setSource({});
+  p.player->setSource({});
 #else
-  p->player->setMedia({});
+  p.player->setMedia({});
 #endif
+
+  p.lastPlayedFile.clear();
+  p.errorReported = false;
 }
 
 }

@@ -3,6 +3,9 @@
 #include "common/common_pch.h"
 
 #include <QMainWindow>
+#if HAVE_QMEDIAPLAYER
+# include <QMediaPlayer>
+#endif
 
 #include "common/qt.h"
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
@@ -91,6 +94,10 @@ public Q_SLOTS:
   virtual void updateCheckFinished(UpdateCheckStatus status, mtx_release_version_t release);
   virtual void checkForUpdates();
 #endif  // HAVE_UPDATE_CHECK
+
+#if HAVE_QMEDIAPLAYER
+  virtual void handleMediaPlaybackError(QMediaPlayer::Error error, QString const &fileName);
+#endif  // HAVE_QMEDIAPLAYER
 
   virtual void displayInstallationProblems(Util::InstallationChecker::Problems const &problems);
 

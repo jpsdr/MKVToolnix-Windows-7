@@ -32,6 +32,7 @@
 #include "mkvtoolnix-gui/util/cache.h"
 #include "mkvtoolnix-gui/util/file_identifier.h"
 #include "mkvtoolnix-gui/util/language_dialog.h"
+#include "mkvtoolnix-gui/util/media_player.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/sleep_inhibitor.h"
@@ -236,6 +237,9 @@ MainWindow::setupConnections() {
   connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::setupAppearance);
 
   connect(app,                                    &App::toolRequested,                                    this,                 &MainWindow::switchToTool);
+#if HAVE_QMEDIAPLAYER
+  connect(&app->mediaPlayer(),                    &Util::MediaPlayer::errorOccurred,                      this,                 &MainWindow::handleMediaPlaybackError);
+#endif
 }
 
 void
@@ -906,5 +910,31 @@ void
 MainWindow::stopQueueSpinner() {
   startStopQueueSpinner(false);
 }
+
+#if HAVE_QMEDIAPLAYER
+void
+MainWindow::handleMediaPlaybackError(QMediaPlayer::Error error,
+                                     QString const &fileName) {
+  QStringList messages;
+
+  messages << QY("The audio file '%1' could not be played back.").arg(fileName);
+
+  if (error == QMediaPlayer::FormatError)
+    messages << QY("Either the file format or the audio codec is not supported.");
+
+  else if (   (error == QMediaPlayer::ResourceError)
+           || (error == QMediaPlayer::AccessDeniedError)
+# if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+           || (error == QMediaPlayer::ServiceMissingError)
+# endif
+           )
+    messages << QY("No audio device is available for playback, or accessing it failed.");
+
+  Util::MessageBox::critical(this)
+    ->title(QY("Error playing audio"))
+    .text(messages.join(Q(" ")))
+    .exec();
+}
+#endif  // HAVE_QMEDIAPLAYER
 
 }
