@@ -33,6 +33,7 @@ MKVToolNix 66.0.0
     10. [QtWaitingSpinner](#611-qtwaitingspinner)
     11. [Fancy tab widget](#612-fancy-tab-widget)
     12. [fmt](#613-fmt)
+    13. [QgsCollapsibleGroupBox](#613-qgscollapsiblegroupbox)
 
 -----------------
 
@@ -459,3 +460,12 @@ Small, safe and fast formatting library
   * License: BSD (see `doc/licenses/fmt-BSD.txt`)
   * URL: https://fmt.dev/latest/
   * Corresponding files: `lib/fmt/*`
+
+## 6.13. QgsCollapsibleGroupBox
+
+A groupbox that collapses/expands when toggled. Extracted from the QGIS project.
+
+  * Copyright: 2012–present by Etienne Tourigny
+  * License: GNU General Public License v2 or later (see `COPYING`)
+  * URL: https://github.com/qgis/QGIS
+  * Corresponding files: `src/mkvtoolnix-gui/util/qgs_collapsible_group_box.{h,cpp}`

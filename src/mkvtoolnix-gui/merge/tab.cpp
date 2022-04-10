@@ -97,6 +97,11 @@ Tab::Tab(QWidget *parent)
   // Setup UI controls.
   p.ui->setupUi(this);
 
+  for (auto const &groupBox : findChildren<Util::QgsCollapsibleGroupBox *>()) {
+    groupBox->setSettingGroup(Q("mergeTool"));
+    groupBox->loadState();
+  }
+
   auto mw = MainWindow::get();
   connect(mw, &MainWindow::preferencesChanged, this, [this]() { Util::setupTabWidgetHeaders(*p_func()->ui->tabs); });
 

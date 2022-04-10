@@ -70,6 +70,11 @@
   shows a warning if a script is used with a language for which it should be
   suppressed. Part of the implementation of #3307.
 * all: added a new translation to Chinese Simplified (Singapore) by Dian Li.
+* MKVToolNix GUI: multiplexer: the track property group boxes in the
+  scrollable pane are now collapsible & expandable, saving their state over
+  restarts of the GUI. This is in preparation of adding many more track
+  properties in future releases, allowing the user to hide parts they don't
+  use all that often.
 
 ## Bug fixes
 
