@@ -2,15 +2,6 @@
 
 ## New features and enhancements
 
-* mkvmerge, mkvpropedit: added a new command line option called
-  `--enable-legacy-font-mime-types`. With this option on the two programs will
-  use the same legacy MIME types for fonts whenever new attachments are added
-  (both programs), when reading existing attachments (only `mkvmerge`) or when
-  replacing existing ones (only `mkvpropedit`).
-* MKVToolNix GUI: multiplexer: if the option "use legacy font MIME types" is
-  enabled in the preferences, the new command line option
-  `--enable-legacy-font-mime-types` will be passed to `mkvmerge` in order to
-  have it remap the MIME types of existing attachments, too.
 * all: IETF BCP 47/RFC 5646 language tags: when deriving the legacy language
   element codes to use a language tag's ISO 639 code is also potentially
   interpreted as an & its prefix is used as the legacy language code. For
@@ -19,8 +10,6 @@
   "Chinese" there is an ISO 639-2 language code: `chi`. In this example the
   IETF language element would be set to `yue` and the corresponding legacy
   element to `chi`. Part of the implementation of #3307.
-* MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: ISO 639-3 and 639-5
-  languages will now be used by default. Part of the implementation of #3307.
 * all: IETF BCP 47/RFC 5646 language tags: grandfathered language tags are now
   supported. Part of the implementation of #3307.
 * all: IETF BCP 47/RFC 5646 language tags: all deprecated subtags from the
@@ -32,24 +21,6 @@
 * all: IETF BCP 47/RFC 5646 language tags: all in the IANA language subtag
   registry are now supported, even those marked as deprecated and of type
   'grandfathered'. Part of the implementation of #3307.
-* MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: the language editor
-  dialog will now show warnings in several cases: when deprecated tags are
-  used; when the tag's canonical and/or extlang forms differ from the user
-  input. Part of the implementation of #3307.
-* mkvmerge, mkvpropedit: IETF BCP 47/RFC 5646 language tags: added a command
-  line option `--normalize-language-ietf <mode>` which turns on normalization
-  of IETF BCP 47 language tags to either their canonical (mode `canonical`) or
-  extended language subtags form (mode `extlang`) or turns it off (mode
-  `off`). If the option isn't given, language tags will now be normalized to
-  the canonical form. Part of the implementation of #3307.
-* MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: the language editor now
-  has a button to replace the current tag with a normalized form (canonical or
-  extlang) if those differ from the current tag. Part of the implementation of
-  #3307.
-* MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: added an option in the
-  preferences to always normalize all language tags to their canonical or
-  extlang forms or to turn normalization off. Can also be enabled from the
-  language editor dialog. Part of the implementation of #3307.
 * all: IETF BCP 47/RFC 5646 language tags: reduced the maximum number of
   extended language subtags that are present in a valid tag from 3 to 1 in
   compliance with RFC 5646 section 2.2.2. Part of the implementation of #3307.
@@ -61,6 +32,32 @@
   (`qaa`–`qtz`) are now replaced by their IETF BCP 47 equivalents during
   normalization (e.g. `QMS` → `cmn-Hans`). Part of the implementation of
   #3307.
+* all: added a new translation to Chinese Simplified (Singapore) by Dian Li.
+* mkvmerge, mkvpropedit: added a new command line option called
+  `--enable-legacy-font-mime-types`. With this option on the two programs will
+  use the same legacy MIME types for fonts whenever new attachments are added
+  (both programs), when reading existing attachments (only `mkvmerge`) or when
+  replacing existing ones (only `mkvpropedit`).
+* mkvmerge, mkvpropedit: IETF BCP 47/RFC 5646 language tags: added a command
+  line option `--normalize-language-ietf <mode>` which turns on normalization
+  of IETF BCP 47 language tags to either their canonical (mode `canonical`) or
+  extended language subtags form (mode `extlang`) or turns it off (mode
+  `off`). If the option isn't given, language tags will now be normalized to
+  the canonical form. Part of the implementation of #3307.
+* MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: ISO 639-3 and 639-5
+  languages will now be used by default. Part of the implementation of #3307.
+* MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: the language editor
+  dialog will now show warnings in several cases: when deprecated tags are
+  used; when the tag's canonical and/or extlang forms differ from the user
+  input. Part of the implementation of #3307.
+* MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: the language editor now
+  has a button to replace the current tag with a normalized form (canonical or
+  extlang) if those differ from the current tag. Part of the implementation of
+  #3307.
+* MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: added an option in the
+  preferences to always normalize all language tags to their canonical or
+  extlang forms or to turn normalization off. Can also be enabled from the
+  language editor dialog. Part of the implementation of #3307.
 * MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: the language dialog now
   shows a warning if a variant is used with a prefix that isn't in the
   variant's list of suitable prefixes. It'll also say if the corresponding
@@ -69,15 +66,27 @@
 * MKVToolNix GUI: IETF BCP 47/RFC 5646 language tags: the language dialog now
   shows a warning if a script is used with a language for which it should be
   suppressed. Part of the implementation of #3307.
-* all: added a new translation to Chinese Simplified (Singapore) by Dian Li.
 * MKVToolNix GUI: multiplexer: the track property group boxes in the
   scrollable pane are now collapsible & expandable, saving their state over
   restarts of the GUI. This is in preparation of adding many more track
   properties in future releases, allowing the user to hide parts they don't
   use all that often.
+* MKVToolNix GUI: multiplexer: if the option "use legacy font MIME types" is
+  enabled in the preferences, the new command line option
+  `--enable-legacy-font-mime-types` will be passed to `mkvmerge` in order to
+  have it remap the MIME types of existing attachments, too.
 
 ## Bug fixes
 
+* all: IETF BCP 47/RFC 5646 language tags: variants aren't validated wrt. to
+  prefixes anymore as BCP 47 doesn't actually pose restrictions on them,
+  saying only that prefixes "are suitable sequences" for use with the
+  variants. What is now verified, though, is that no variant is used multiple
+  times within the same language tag. Part of the implementation/fix of #3307.
+* build system & MKVToolNix GUI: fixed detecting the presence of & the
+  compilation with the multimedia module of Qt version 6.2.0 and newer.
+* build system: fixed compilation on Unices other than Linux & macOS
+  (e.g. FreeBSD). Fixes #3316.
 * MKVToolNix GUI: job queue: fixed compiling in the audio player code for the
   the "play audio" end-of-job action. Fixes #3303.
 * MKVToolNix GUI: multiplexer: recognizing added XML chapter, segment info or
@@ -86,23 +95,14 @@
   enough for files that contain a lot of comments at the start like the
   included `example-chapters-2.xml`. The detection range was extended to 10
   KB. Fixes #3302.
-* all: IETF BCP 47/RFC 5646 language tags: variants aren't validated wrt. to
-  prefixes anymore as BCP 47 doesn't actually pose restrictions on them,
-  saying only that prefixes "are suitable sequences" for use with the
-  variants. What is now verified, though, is that no variant is used multiple
-  times within the same language tag. Part of the implementation/fix of #3307.
-* build system & MKVToolNix GUI: fixed detecting the presence of & the
-  compilation with the multimedia module of Qt version 6.2.0 and newer.
+
+## Build system changes
+
 * build system: the provided Windows binaries are now compiled with Qt 6. A
   drawback is that certain audio formats aren't supported anymore by Qt for
   the "end of job" sound notification playback, notably the Ogg file format &
   the Vorbis audio codec. MKVToolNix therefore now ships Opus-in-WebM files
   for the same purpose.
-
-## Build system changes
-
-* build system: fixed compilation on Unices other than Linux & macOS
-  (e.g. FreeBSD). Fixes #3316.
 * The bundled `fmt` library was updated to v8.1.1.
 * The bundled `nlohmann-json` library was updated to v3.10.5.
 * The bundled `pugixml` library was updated to v1.12.1.
