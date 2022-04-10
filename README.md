@@ -457,5 +457,5 @@ Small, safe and fast formatting library
 
   * Copyright: 2012–present by Victor Zverovich
   * License: BSD (see `doc/licenses/fmt-BSD.txt`)
-  * URL: http://fmtlib.net/latest/
+  * URL: https://fmt.dev/latest/
   * Corresponding files: `lib/fmt/*`
