@@ -92,14 +92,13 @@ for SUB_DIR in gcc-toolset-11 gcc-toolset 10 devtoolset-10; do
   fi
 done
 
+%build
 %configure \
   --disable-optimization \
   --enable-debug \
   --with-tools \
   --disable-qt6 \
   "$CONFIGURE_ARGS"
-
-%build
 # if [[ -f ~/mtx-rpm-compiled.tar.gz ]]; then
 #   tar xzf ~/mtx-rpm-compiled.tar.gz
 # fi
