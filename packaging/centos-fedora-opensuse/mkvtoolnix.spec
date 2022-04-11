@@ -33,7 +33,6 @@ BuildRequires: po4a
 BuildRequires: qt5-qtbase-devel
 BuildRequires: qt5-qtmultimedia-devel
 BuildRequires: zlib-devel
-BuildRequires: rubygem-drake
 
 %if 0%{?rhel}
 %if 0%{?rhel} <= 7
@@ -103,15 +102,15 @@ done
 #   tar xzf ~/mtx-rpm-compiled.tar.gz
 # fi
 
-drake
+./drake
 
 # tar czf ~/mtx-rpm-compiled-$(date '+%%Y%%m%%d%%H%%M%%S').tar .
 
 %check
-drake tests:run_unit
+./drake tests:run_unit
 
 %install
-drake DESTDIR=$RPM_BUILD_ROOT TOOLS=1 install
+./drake DESTDIR=$RPM_BUILD_ROOT TOOLS=1 install
 desktop-file-validate %{buildroot}%{_datadir}/applications/org.bunkus.mkvtoolnix-gui.desktop
 if test `lsb_release -is` = Fedora; then
   appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/org.bunkus.mkvtoolnix-gui.appdata.xml

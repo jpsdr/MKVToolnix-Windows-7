@@ -12,7 +12,7 @@ LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 	dh $@ --parallel
 
 override_dh_clean:
-	[ ! -f build-config ] || rake clean:dist
+	[ ! -f build-config ] || ./drake clean:dist
 
 	dh_clean config.status config.log \
 	rake.d/dependecy.d/*.rb src/input/*.d config.h build-config
@@ -43,13 +43,13 @@ endif
 
 override_dh_auto_build:
 ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
-	LC_ALL=C rake tests:run_unit
+	LC_ALL=C ./drake tests:run_unit
 endif
 
-	rake
+	./drake
 
 override_dh_install:
-	rake install DESTDIR=$(CURDIR)/debian/tmp
+	./drake install DESTDIR=$(CURDIR)/debian/tmp
 	install -m 755 -t $(CURDIR)/debian/tmp/usr/bin $(patsubst %,src/tools/%,bluray_dump ebml_validator hevcc_dump xvc_dump)
 
 	dh_install -Xorg.bunkus.mkvtoolnix-gui.xml
