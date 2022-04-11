@@ -94,7 +94,7 @@ function update_docs {
   perl -pi -e "s/<!ENTITY version \".*\">/<!ENTITY version \"${TO}\">/; s/<!ENTITY date \".*\">/<!ENTITY date \"${MANDATE}\">/;" doc/man/**/*.xml
   perl -pi -e 's/^msg(id|str) "'${FROM}'"/msg$1 "'${TO}'"/' doc/man/po4a/po/*.{po,pot}
 
-  drake
+  ./drake
 }
 
 function update_appstream_metainfo {

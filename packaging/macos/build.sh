@@ -7,11 +7,7 @@ export SCRIPT_PATH=${0:a:h}
 source ${SCRIPT_PATH}/config.sh
 source ${SCRIPT_PATH}/specs.sh
 
-if type -p drake &> /dev/null; then
-  RAKE=drake
-else
-  RAKE=rake
-fi
+RAKE=./drake
 
 if [[ ${spec_qtbase[1]} == *everywhere* ]]; then
   QTTYPE=everywhere

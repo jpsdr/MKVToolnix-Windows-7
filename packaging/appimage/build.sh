@@ -27,7 +27,6 @@
 #   po4a
 #   qt5-qtbase-devel
 #   qt5-qtmultimedia-devel
-#   rubygem-drake
 #   wget
 #   zlib-devel
 
@@ -73,7 +72,7 @@ Syntax:
 
 Parameters:
 
-  --no-build         don't run 'configure' and 'drake clean'; only
+  --no-build         don't run 'configure' and './drake clean'; only
                      possible if 'build-run' exists
   --qt <Qt version>  build against this Qt version (default: $QTVERSION)
   --release-version  don't built the version number via 'git describe'
@@ -142,14 +141,14 @@ if [[ ( ! -f build-config ) && ( "$NO_BUILD" != 1 ) ]]; then
     --with-qmake="${QTDIR}/bin/qmake" \
     "$CONFIGURE_ARGS"
 
-  drake clean
+  ./drake clean
 fi
 
 rm -rf "${APP_DIR}" out
 
-drake -j${JOBS} apps:mkvtoolnix-gui
-drake -j${JOBS}
-drake install DESTDIR="${APP_DIR}"
+./drake -j${JOBS} apps:mkvtoolnix-gui
+./drake -j${JOBS}
+./drake install DESTDIR="${APP_DIR}"
 
 cd appimage/${APP}.AppDir
 
