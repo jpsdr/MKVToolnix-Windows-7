@@ -51,11 +51,11 @@ function update_mingw_cross_env {
   cat > settings.mk <<EOF
 MXE_TARGETS = ${HOST}
 MXE_USE_CCACHE =
-MXE_PLUGIN_DIRS += plugins/gcc10
 JOBS = ${PARALLEL}
 
 MKVTOOLNIX_DEPENDENCIES=gettext libiconv zlib boost flac ogg pthreads vorbis cmark libdvdread gmp
-MKVTOOLNIX_DEPENDENCIES+=qtbase qttranslations
+MKVTOOLNIX_DEPENDENCIES+=qtbase qttranslations qtwinextras
+MKVTOOLNIX_DEPENDENCIES+=qt6 qt6-qtmultimedia
 
 LOCAL_PKG_LIST=\$(MKVTOOLNIX_DEPENDENCIES)
 local-pkg-list: \$(LOCAL_PKG_LIST)
