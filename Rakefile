@@ -298,6 +298,12 @@ def define_default_task
 
     puts "Done after #{build_duration}. Enjoy :)"
   end
+
+  return if %r{drake(?:\.exe)?$}i.match($PROGRAM_NAME)
+  return if !Rake.application.top_level_tasks.empty? && (Rake.application.top_level_tasks != ["default"])
+
+  Rake.application.top_level_tasks.clear
+  Rake.application.top_level_tasks.append(*targets.clone)
 end
 
 # main
