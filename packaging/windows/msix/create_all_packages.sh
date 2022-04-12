@@ -17,8 +17,14 @@ function determine_latest_version {
 
 mtxversion=$(determine_latest_version)
 
+sign=
+
+if [[ $1 =~ '^(-s|--sign|--signed)$' ]]; then
+  sign=--sign
+fi
+
 for file in "${archive_dir}"/${mtxversion}/*.7z; do
-  ./create_package.sh "$file" --sign
+  ./create_package.sh "$file" $sign
 done
 
 mv -v package-*/*.msix /z/home/mosu/dl/
