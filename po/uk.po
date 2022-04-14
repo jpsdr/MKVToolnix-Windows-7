@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2022-04-09 12:17+0200\n"
-"PO-Revision-Date: 2022-03-08 09:12+0000\n"
-"Last-Translator: Vlad Anisimov <uniss@ua.fm>\n"
+"PO-Revision-Date: 2016-01-14 08:27+0000\n"
+"Last-Translator: Vlad Anisimov <uniss@ua.fm>, 2020,2022\n"
 "Language-Team: Ukrainian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/uk/)\n"
 "Language: uk\n"
@@ -470,15 +470,15 @@ msgid "  --enable-durations       Enable block durations for all blocks.\n"
 msgstr "  --enable-durations       Ввімкнути тривалість блоку для всіх блоків.\n"
 
 #: src/merge/mkvmerge.cpp:203
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --enable-legacy-font-mime-types\n"
 "                           Use legacy font MIME types when adding new\n"
 "                           attachments as well as for existing ones.\n"
 msgstr ""
-"  --attach-file-once <file>\n"
-"                           Створює файл-вкладення тільки в\n"
-"                           найпершому створеному файлі Matroska.\n"
+"  --enable-legacy-font-mime-types\n"
+"                           Використовувати застарілі типи MIME шріфтів як при\n"
+"                           додаванні нових вкладень, так і для існуючих.\n"
 
 #: src/merge/mkvmerge.cpp:406
 #, no-c-format
@@ -668,17 +668,17 @@ msgid "  --no-global-tags         Don't keep global tags from the source file.\n
 msgstr "  --no-global-tags         Не брати глобальні теги з вхідного файлу.\n"
 
 #: src/merge/mkvmerge.cpp:145
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --normalize-language-ietf <canonical|extlang|off>\n"
 "                           Normalize all IETF BCP 47 language tags to either\n"
 "                           their canonical or their extended language subtags\n"
 "                           form or not at all (default: canonical form).\n"
 msgstr ""
-"  --probe-range-percentage <percent>\n"
-"                           Встановлює максимальний розмір зондування доріжок\n"
-"                           у відсотках від загального розміру файла для певних\n"
-"                           типів файлів (за замовчуванням: 0.3).\n"
+"  --normalize-language-ietf <canonical|extlang|off>\n"
+"                           Нормалізує всі мовні теги IETF BCP 47 до їх канонічної\n"
+"                           або розширеної форми мовних підтегів, або не додає\n"
+"                           її взагалі (за замовчуванням: канонічна форма).\n"
 
 #: src/merge/mkvmerge.cpp:260
 #, no-c-format
@@ -1910,9 +1910,9 @@ msgid "&Expand all"
 msgstr "&Розгорнути все"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:383
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Extended language subtag:"
-msgstr "Розширені субтеги"
+msgstr "Розширений мовний підтег:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:698
 #, no-c-format
@@ -2250,7 +2250,7 @@ msgstr "&Видалити обрану редакцію або главу"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:391
 #, no-c-format
 msgid "&Replace with normalized form"
-msgstr ""
+msgstr "Замінити нормалізованою формою"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:202
 #, no-c-format
@@ -2698,9 +2698,9 @@ msgstr "'{0}' не є вірним застосуванням.\n"
 
 #: src/merge/mkvmerge.cpp:2105
 #: src/propedit/propedit_cli_parser.cpp:224
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "'{0}' is not a valid language normalization mode.\n"
-msgstr "'{0}' не є допустимим ISO 639-2 кодом мови."
+msgstr "'{0}' не є дійсним режимом нормалізації мови.\n"
 
 #: src/merge/mkvmerge.cpp:1528
 #, no-c-format
@@ -3735,12 +3735,12 @@ msgstr "Завжди запитувати користувача"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:179
 #, no-c-format
 msgid "Always automatically replace with canonical form"
-msgstr ""
+msgstr "Завжди автоматично замінювати на канонічну форму"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:182
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Always automatically replace with extended language subtags form"
-msgstr "Тег мови дійсний."
+msgstr "Завжди автоматично замінювати форму з розширеними мовними підтегами"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2189
 #, no-c-format
@@ -4388,7 +4388,7 @@ msgstr "Неможливо записати доріжку {0} з CodecID '{1}' 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:177
 #, no-c-format
 msgid "Canonical form"
-msgstr ""
+msgstr "Канонічна форма"
 
 #: src/common/kax_info.cpp:1333
 #: src/common/kax_info.cpp:1337
@@ -6098,9 +6098,9 @@ msgid "Either fix the error or remove the configuration before closing the prefe
 msgstr "Виправте помилку або видаліть конфігурацію, перш ніж закрити діалогове вікно налаштувань."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:923
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Either the file format or the audio codec is not supported."
-msgstr "Розділення доріжок цього типу не підтримується."
+msgstr "Формат файлу або аудіокодек не підтримуються."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:334
 #, no-c-format
@@ -6305,9 +6305,9 @@ msgid "Error parsing the tags in '{0}': some mandatory elements are missing.\n"
 msgstr "Помилка при обробці тегу у '{0}': деякі обов'язкові елементи відсутні.\n"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:934
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Error playing audio"
-msgstr "Помилка завантаження файла налаштувань"
+msgstr "Помилка відтворення аудіо"
 
 #: src/mkvtoolnix-gui/info/tab.cpp:196
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:80
@@ -6486,14 +6486,14 @@ msgid "Exports the chapter information in the simple format used in OGM tools (C
 msgstr "Експортувати інформацію глав в простий формат, що використовується в утилітах OGM (CHAPTER01=... CHAPTER01NAME=...)."
 
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:215
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extended language subtag"
-msgstr "Розширені субтеги"
+msgstr "Розширений мовний підтег"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:180
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extended language subtags form"
-msgstr "Розширені субтеги"
+msgstr "Форма розширених мовних підтегів"
 
 #: src/common/bcp47.cpp:476
 #, no-c-format
@@ -7150,9 +7150,9 @@ msgid "ID"
 msgstr "ID"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2108
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "IETF BCP 47 &normalization mode:"
-msgstr "Режим редагування мови IETF BCP 47 за замовчуванням:"
+msgstr "IETF BCP 47 режим нормалізації:"
 
 #: src/common/iso639.cpp:43
 #, no-c-format
@@ -7646,9 +7646,9 @@ msgid "Information"
 msgstr "Інформація"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:388
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Information & Warnings:"
-msgstr "Інформація"
+msgstr "Інформація та попередження:"
 
 #: src/common/bitvalue.cpp:76
 #, no-c-format
@@ -8939,7 +8939,7 @@ msgstr "Жодних вкладень, що відповідають специ�
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:931
 #, no-c-format
 msgid "No audio device is available for playback, or accessing it failed."
-msgstr ""
+msgstr "Немає аудіопристрою, доступного для відтворення, або не вдалося отримати доступ до нього."
 
 #: src/propedit/propedit.cpp:187
 #, no-c-format
@@ -9129,7 +9129,7 @@ msgstr "Нормальний пріоритет"
 #: src/propedit/propedit_cli_parser.cpp:272
 #, no-c-format
 msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical'), their extended language subtags form (mode 'extlang') or not at all (mode 'off')"
-msgstr ""
+msgstr "Нормалізувати всі мовні теги IETF BCP 47 змінених елементів або до їхньої канонічної форми (режим «canonical»), до форми розширених мовних підтегів (режим «extlang») або взагалі (режим «off»)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
 #, no-c-format
@@ -10440,12 +10440,12 @@ msgstr "Замінити вкладення новим файлом і &вико
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:178
 #, no-c-format
 msgid "Replace with canonical form once"
-msgstr ""
+msgstr "Одноразово заміняє канонічною формою"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:181
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Replace with extended language subtags form once"
-msgstr "Тег мови дійсний."
+msgstr "Одноразово заміняє формою підтегів розширеної мови"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:721
 #, no-c-format
@@ -11960,9 +11960,9 @@ msgid "The attachment ({0}) is too big ({1})."
 msgstr "Вкладення ({0}) завелике ({1})."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:920
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The audio file '%1' could not be played back."
-msgstr "XML файл тегу '{0}' не може бути прочитаний.\n"
+msgstr "Не вдалося відтворити аудіофайл '%1'."
 
 #: src/mkvtoolnix-gui/util/settings.cpp:296
 #, no-c-format
@@ -11978,7 +11978,7 @@ msgstr "Аудіо/відео синхронізація могла бути в�
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:487
 #, no-c-format
 msgid "The canonical form does use a suitable prefix."
-msgstr ""
+msgstr "Канонічна форма дійсно використовує відповідний префікс"
 
 #: src/propedit/propedit.cpp:169
 #, no-c-format
@@ -12054,17 +12054,17 @@ msgstr "Коригуючий заголовок файла не був прав�
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:501
 #, no-c-format
 msgid "The corresponding canonical & extended language subtags forms are: %1."
-msgstr ""
+msgstr "Відповідні канонічна форма і форма розширених мовних підтегів: %1."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:506
 #, no-c-format
 msgid "The corresponding canonical form is: %1."
-msgstr ""
+msgstr "Відповідна канонічна форма: %1."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:511
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
-msgstr "Тег мови дійсний."
+msgstr "Відповідна форма розширених мовних підтегів: %1."
 
 #: src/merge/output_control.cpp:1627
 #, no-c-format
@@ -12234,9 +12234,9 @@ msgid "The error message was:"
 msgstr "Повідомлення про помилку було таке:"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:451
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The extended language subtag '%1' is deprecated."
-msgstr "Тег мови дійсний."
+msgstr "Розширений мовний підтег '%1' не підтримується."
 
 #: src/common/bcp47.cpp:448
 #, no-c-format
@@ -12244,9 +12244,9 @@ msgid "The extended language subtag '{}' must only be used with one of the follo
 msgstr "Розширений мовний підтег '{}' повинен використовуватися лише з одним із таких префіксів: {}."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:490
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The extended language subtags form does use a suitable prefix."
-msgstr "Тег мови дійсний."
+msgstr "Форма розширених мовних підтегів використовує відповідний префікс."
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -12676,9 +12676,9 @@ msgid "The job has been added to the job queue."
 msgstr "Роботу додано до черги завдань."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:446
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The language '%1' is deprecated."
-msgstr "Тег мови дійсний."
+msgstr "Мова '%1' не підтримується."
 
 #: src/input/r_usf.cpp:106
 #, no-c-format
@@ -13011,9 +13011,9 @@ msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, da
 msgstr "Розпізнаний формат «РРРР-мм-ддТГГ:ММ:СС+zz:zz»: рік, місяць, день, літера «Т», години, хвилини, секунди та зміщення часового поясу від UTC; приклад: 2017-03-28T17:28:00-02:00."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:466
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The region '%1' is deprecated."
-msgstr "Файл '%1' вже існує."
+msgstr "Регіон '%1' не підтримується."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:223
 #, no-c-format
@@ -13041,14 +13041,14 @@ msgid "The sample rate of the two audio tracks is different: {0} and {1}"
 msgstr "Частота дискретизації двох звукових доріжок є різною: {0} i {1}"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:456
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The script '%1' is deprecated."
-msgstr "Файл '%1' вже існує."
+msgstr "Скріпт '%1' не підтримується."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:460
 #, no-c-format
 msgid "The script '%1' should not be used for the language '%2' as it is the script the overwhelming majority of documents for this language is written in."
-msgstr ""
+msgstr "Скрипт '%1' не слід використовувати для мови '%2', оскільки саме на ньому написана переважна більшість документів для цієї мови."
 
 #: src/extract/extract_cli_parser.cpp:91
 #, no-c-format
@@ -13391,19 +13391,19 @@ msgid "The values will be available for easy selection in the multiplexer."
 msgstr "Значення будуть доступні для легкого вибору в мультиплексорі."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:472
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The variant '%1' is deprecated."
-msgstr "Файл '%1' вже існує."
+msgstr "Варіант '%1' не підтримується."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:483
 #, no-c-format
 msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
-msgstr ""
+msgstr "Варіант '%1' використовується з префіксами, які для нього не підходять. Відповідні префікси: %2."
 
 #: src/common/bcp47.cpp:460
 #, no-c-format
 msgid "The variant '{}' occurs more than once."
-msgstr ""
+msgstr "Варіант '{}' зустрічається більше одного разу."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:751
 #, no-c-format
@@ -13661,7 +13661,7 @@ msgstr "Це може бути корисним в ситуаціях з дис�
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:495
 #, no-c-format
 msgid "This language tag is a grandfathered element only supported for historical reasons."
-msgstr ""
+msgstr "Цей мовний тег є початковим елементом, який підтримується лише з історичних причин."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:100
 #, no-c-format
@@ -14384,7 +14384,7 @@ msgstr "Використовувати застарілі типи MIME для �
 #: src/propedit/propedit_cli_parser.cpp:245
 #, no-c-format
 msgid "Use legacy font MIME types when adding new attachments or replacing existing ones"
-msgstr ""
+msgstr "Використовувати застарілі типи шрифтів MIME під час додавання нових вкладень або заміни наявних"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2175
 #, no-c-format
@@ -15341,7 +15341,7 @@ msgstr "кнопки"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:843
 #, no-c-format
 msgid "canonical form"
-msgstr ""
+msgstr "канонічна форма"
 
 #: src/common/kax_info.cpp:635
 #, no-c-format
@@ -15434,9 +15434,9 @@ msgid "equirectangular"
 msgstr "Рівнопроміжна"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:844
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "extended language subtags form"
-msgstr "Тег мови дійсний."
+msgstr "розширена форма підтегів мови"
 
 #: src/merge/output_control.cpp:439
 #, no-c-format
@@ -15884,9 +15884,9 @@ msgid "no language selected"
 msgstr "немає обраної мови"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:842
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "no normalization"
-msgstr "Інформація"
+msgstr "немає нормалізації"
 
 #: src/common/kax_info.cpp:824
 #, no-c-format
