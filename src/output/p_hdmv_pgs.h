@@ -41,5 +41,5 @@ public:
 protected:
   virtual void process_impl(packet_cptr const &packet) override;
   void dump_and_add_packet(packet_cptr const &packet);
-  void dump_packet(memory_c const &data);
+  void dump_packet(packet_t const &packet);
 };

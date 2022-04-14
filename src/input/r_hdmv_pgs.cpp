@@ -17,6 +17,7 @@
 #include "common/endian.h"
 #include "common/mm_io_x.h"
 #include "common/hdmv_pgs.h"
+#include "common/strings/formatting.h"
 #include "input/r_hdmv_pgs.h"
 #include "output/p_hdmv_pgs.h"
 #include "merge/file_status.h"
@@ -56,13 +57,16 @@ file_status_e
 hdmv_pgs_reader_c::read(generic_packetizer_c *,
                         bool) {
   try {
-    if (m_debug)
-      mxinfo(fmt::format("hdmv_pgs_reader_c::read(): ---------- start read at {0}\n", m_in->getFilePointer()));
+    auto file_position = m_in->getFilePointer();
 
     if (mtx::hdmv_pgs::FILE_MAGIC != m_in->read_uint16_be())
       return flush_packetizers();
 
-    uint64_t timestamp = static_cast<uint64_t>(m_in->read_uint32_be()) * 100000Lu / 9;
+    auto timestamp_raw = static_cast<uint64_t>(m_in->read_uint32_be());
+    auto timestamp     = timestamp_raw * 100000Lu / 9;
+
+    mxdebug_if(m_debug, fmt::format("hdmv_pgs_reader_c::read(): ---------- start read at {0} timestamp_raw {1} (0x{1:08x}) = {2}\n", file_position, timestamp_raw, mtx::string::format_timestamp(timestamp)));
+
     m_in->skip(4);
 
     memory_cptr frame = memory_c::alloc(3);
@@ -75,14 +79,12 @@ hdmv_pgs_reader_c::read(generic_packetizer_c *,
     if (segment_size != m_in->read(frame->get_buffer() + 3, segment_size))
       return flush_packetizers();
 
-    if (m_debug)
-      mxinfo(fmt::format("hdmv_pgs_reader_c::read(): type {0:02x} size {1} at {2}\n", static_cast<unsigned int>(frame->get_buffer()[0]), segment_size, m_in->getFilePointer() - 10 - 3));
+    mxdebug_if(m_debug, fmt::format("hdmv_pgs_reader_c::read(): type {0:02x} size {1} at {2}\n", static_cast<unsigned int>(frame->get_buffer()[0]), segment_size, m_in->getFilePointer() - 10 - 3));
 
     ptzr(0).process(std::make_shared<packet_t>(frame, timestamp));
 
   } catch (...) {
-    if (m_debug)
-      mxinfo("hdmv_pgs_reader_c::read(): exception\n");
+    mxdebug_if(m_debug, "hdmv_pgs_reader_c::read(): exception\n");
 
     return flush_packetizers();
   }

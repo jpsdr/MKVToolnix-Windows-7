@@ -20,6 +20,7 @@
 #include "common/compression.h"
 #include "common/endian.h"
 #include "common/hdmv_pgs.h"
+#include "common/strings/formatting.h"
 #include "output/p_hdmv_pgs.h"
 
 using namespace libmatroska;
@@ -71,25 +72,27 @@ hdmv_pgs_packetizer_c::process_impl(packet_cptr const &packet) {
 void
 hdmv_pgs_packetizer_c::dump_and_add_packet(packet_cptr const &packet) {
   if (m_debug)
-    dump_packet(*packet->data);
+    dump_packet(*packet);
 
   add_packet(packet);
 }
 
 void
-hdmv_pgs_packetizer_c::dump_packet(memory_c const &data) {
-  auto ptr        = data.get_buffer();
-  auto frame_size = data.get_size();
+hdmv_pgs_packetizer_c::dump_packet(packet_t const &packet) {
+  auto ptr        = packet.data->get_buffer();
+  auto frame_size = packet.data->get_size();
   auto offset     = 0u;
 
-  mxdebug(fmt::format("HDMV PGS frame size {0}\n", frame_size));
+  mxdebug(fmt::format("HDMV PGS frame {0} size {1} timestamp {2} duration {3}\n", m_num_packets, frame_size, mtx::string::format_timestamp(packet.timestamp), mtx::string::format_timestamp(packet.duration)));
 
   while ((offset + 3) <= frame_size) {
     auto segment_size  = std::min<unsigned int>(get_uint16_be(ptr + offset + 1) + 3, frame_size - offset);
     auto type          = ptr[offset];
     offset            += segment_size;
 
-    mxdebug(fmt::format("  segment size {0} at {1} type 0x{2:02x} ({3})\n", segment_size, offset - segment_size, type, mtx::hdmv_pgs::name_for_type(type)));
+    mxdebug(fmt::format("  segment size {0} at {1} type 0x{2:02x} ({3}){4}\n",
+                        segment_size, offset - segment_size, type, mtx::hdmv_pgs::name_for_type(type),
+                        offset > frame_size ? " INVALID SEGMENT SIZE" : ""));
   }
 }
 
