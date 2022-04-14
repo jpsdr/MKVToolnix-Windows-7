@@ -20,9 +20,10 @@
 
 class hdmv_pgs_packetizer_c: public generic_packetizer_c {
 protected:
-  bool m_aggregate_packets;
+  bool m_aggregate_packets{};
   packet_cptr m_aggregated;
   debugging_option_c m_debug{"hdmv_pgs|hdmv_pgs_packetizer"};
+  int64_t m_last_good_timestamp{};
 
 public:
   hdmv_pgs_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
@@ -42,4 +43,5 @@ protected:
   virtual void process_impl(packet_cptr const &packet) override;
   void dump_and_add_packet(packet_cptr const &packet);
   void dump_packet(packet_t const &packet);
+  void maybe_fix_timestamp(packet_t &packet);
 };

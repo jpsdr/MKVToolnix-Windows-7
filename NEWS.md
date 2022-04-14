@@ -1,3 +1,15 @@
+# Version ?
+
+## New features and enhancements
+
+* mkvmerge: HDMV PGS subtitles: mkvmerge now tries to detect bogus timestamps
+  (where the current timestamp is two hours or more after the previous
+  timestamp) & correct them to something more sensible (1s after the previous
+  timestamp). That way one bogus timestamp cannot cause the rest of the frames
+  to not be interleaved properly with the other audio & video
+  packets. Implemented for #3268.
+
+
 # Version 67.0.0 "Under Stars" 2022-04-10
 
 ## New features and enhancements
