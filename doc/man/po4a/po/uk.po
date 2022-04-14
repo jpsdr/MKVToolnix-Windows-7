@@ -518,7 +518,7 @@ msgstr "<option>--blockadd</option> <parameter>level</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:264
 msgid "Keep only the BlockAdditions up to this level.  The default is to keep all levels.  This option only affects certain kinds of codecs like WAVPACK4."
-msgstr "Залишати лише BlockAdditions до цього рівня. Типово враховуються усі рівні. Даний параметр може нашкодити лише деяким кодекам, як то WAVPACK4."
+msgstr "Залишати лише BlockAdditions до цього рівня. Типово враховуються усі рівні. Даний параметр може вплинути лише на деякі кодеки, як то WAVPACK4."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:271
@@ -2620,18 +2620,18 @@ msgstr "<option>--enable-legacy-font-mime-types</option>"
 #: doc/man/mkvmerge.xml:1166
 #: doc/man/mkvpropedit.xml:363
 msgid "Enables the use of legacy <abbrev>MIME</abbrev> types for certain types of font attachments. For example, '<literal>application/x-truetype-font</literal>' will be used for TrueType fonts instead of '<literal>fonts/ttf</literal>'."
-msgstr ""
+msgstr "Дозволяє використовувати застарілі типи <abbrev>MIME</abbrev> для певних типів вкладень шрифтів. Наприклад, '<literal>application/x-truetype-font</literal>' використовуватиметься для шрифтів TrueType замість '<literal>fonts/ttf</literal>'."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1171
 msgid "This affects both new attachments if its <abbrev>MIME</abbrev> type is detected automatically and existing attachments whose stored <abbrev>MIME</abbrev> types will be remapped to the legacy ones."
-msgstr ""
+msgstr "Це впливає як на нові вкладення, якщо їх тип <abbrev>MIME</abbrev> виявляється автоматично, так і на існуючі вкладення, чиї збережені типи <abbrev>MIME</abbrev> будуть переставлені на застарілі."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1176
 #: doc/man/mkvpropedit.xml:373
 msgid "The affected <abbrev>MIME</abbrev> types are '<literal>font/sfnt</literal>', '<literal>font/ttf</literal>' and '<literal>font/collection</literal>' which are all mapped to '<literal>application/x-truetype-fonts</literal>' and '<literal>font/otf</literal>' which is mapped to '<literal>application/vnd.ms-opentype</literal>'."
-msgstr ""
+msgstr "Типи <abbrev>MIME</abbrev>, що піддаються впливу, це '<literal>font/sfnt</literal>', '<literal>font/ttf</literal>' та '<literal>font/collection</literal>', які всі зіставлені з '<literal>application/x-truetype-fonts</literal>' і '<literal>font/otf</literal>', який зіставляється з '<literal>application/vnd .ms-opentype</literal>'."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:1186
@@ -2933,7 +2933,7 @@ msgstr "<option>--blockadd</option> <parameter>TID:level</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1569
 msgid "Keep only the <classname>BlockAdditions</classname> up to the level <parameter>level</parameter> for the given track.  The default is to keep all levels.  This option only affects certain kinds of codecs like WAVPACK4."
-msgstr "Залишати лише <classname>BlockAdditions</classname> до рівня <parameter>рівень</parameter> для даної доріжки. За замовчуванням враховуються усі рівні. Даний параметр може нашкодити лише деяким кодекам, як то WAVPACK4."
+msgstr "Залишати лише <classname>BlockAdditions</classname> до рівня <parameter>level</parameter> для даної доріжки. За замовчуванням враховуються усі рівні. Даний параметр може вплинути лише на деякі кодеки, як то WAVPACK4."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1576
@@ -5138,7 +5138,7 @@ msgstr "Встановлює опис для наступної операції
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:368
 msgid "This affects both adding new attachments and replacing existing attachments, but only if the new <abbrev>MIME</abbrev> type isn't specified. Other existing attachments aren't changed."
-msgstr ""
+msgstr "Це впливає як на додавання нових вкладень, так і на заміну наявних вкладень, але лише якщо новий тип <abbrev>MIME</abbrev> не вказано. Інші наявні вкладення не змінюються."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:382
@@ -5163,17 +5163,17 @@ msgstr "Ця нормалізація застосовується лише до
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:429
 msgid "When editing track headers only those track language elements that are set via edit specifications are affected. Languages of tracks that aren't edited aren't changed. Editing a track but setting only properties other than the language won't affect the language either."
-msgstr ""
+msgstr "Під час редагування заголовків доріжок піддаються впливу лише ті елементи мови доріжки, які встановлені за допомогою специфікацій редагування. Мови доріжок, які не редагуються, не змінюються. Редагування доріжки, але встановлення лише властивостей, крім мови, також не вплине на мову."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:437
 msgid "When editing chapters all language elements of all chapter elements are affected as existing chapters are always fully replaced."
-msgstr ""
+msgstr "Під час редагування глав піддаються впливу всі мовні елементи всіх елементів глави, оскільки існуючі глави завжди замінюються повністю."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:443
 msgid "When editing tags only the language elements of the tags that are actually replaced are affected. For example, when you replace global tags then existing track tags aren't affected."
-msgstr ""
+msgstr "Під час редагування тегів піддаються впливу лише ті мовні елементи тегів, які фактично замінені. Наприклад, заміна глобальних тегів не впливає на наявні теги доріжок."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:450
