@@ -414,13 +414,19 @@ def libmatroska_elements
 
   $libmatroska_elements_cache = []
 
-  IO.readlines("lib/libmatroska/src/KaxSemantic.cpp").each do |line|
-    next unless %r{^DEFINE_MKX_([A-Z]+)(?:_[_A-Z]+)? *\([^,]+, *(0x[0-9a-fA-F]+),[^"]+"([^"]+)"}.match(line)
-    $libmatroska_elements_cache << {
-      name: $3,
-      id:   $2.downcase,
-      type: $1.downcase.to_sym,
-    }
+  %w{libebml/ebml libebml/src libmatroska/matroska libmatroska/src}.
+    map { |subdir| Dir.glob("lib/#{subdir}/*") }.
+    flatten.
+    select { |name| FileTest.file?(name) && %r{\.(cpp|h)$}.match(name) }.
+    each do |file_name|
+    IO.readlines(file_name).each do |line|
+      next unless %r{^DEFINE_(?:MKX|EBML)_([A-Z]+)(?:_[_A-Z]+)? *\([^,]+, *(0x[0-9a-fA-F]+),[^"]+"([^"\\]+)}.match(line)
+      $libmatroska_elements_cache << {
+        name: $3,
+        id:   $2.downcase,
+        type: $1.downcase.to_sym,
+      }
+    end
   end
 
   $libmatroska_elements_cache.sort_by! { |element| element[:name].downcase }
