@@ -1199,7 +1199,7 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
       continue;
 
     // Calculate how much free space there is behind the seek head.
-    // merge_void_elemens() guarantees that there is no EbmlVoid element
+    // merge_void_elements() guarantees that there is no EbmlVoid element
     // at the end of the file and that all consecutive EbmlVoid elements
     // have been merged into a single element.
     size_t available_space = m_data[data_idx]->m_size;
