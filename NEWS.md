@@ -9,6 +9,15 @@
   to not be interleaved properly with the other audio & video
   packets. Implemented for #3268.
 
+## Bug fixes
+
+* mkvpropedit, MKVToolNix GUI's chapter & header editors: fixed an invalid
+  memory access when trying to update existing Matroska files whose EBML Head
+  element had a "size" field length of eight bytes, and where rewriting said
+  element would shrink the element by one byte. Files created by gstreamer fit
+  the first part whereas the second depends on the changes requested by the
+  user. Part of the fix of #3325.
+
 
 # Version 67.0.0 "Under Stars" 2022-04-10
 

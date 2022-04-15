@@ -139,8 +139,15 @@ doc_type_version_handler_c::do_update_ebml_head(mm_io_c &file) {
     if (!changed)
       return update_result_e::ok_no_update_needed;
 
+    if (head->GetSizeLength() > 2) {
+      mxdebug_if(p->debug, fmt::format("do_update_ebml_head:   old head size length was {0}, limiting to 2 before updating the element's size\n", head->GetSizeLength()));
+      head->SetSizeLength(2);
+    }
+
     head->UpdateSize(true);
     auto new_size = head->ElementSize(true);
+
+    mxdebug_if(p->debug, fmt::format("do_update_ebml_head:   old size {0} new size {1} position {2} size length {3}\n", old_size, new_size, head->GetElementPosition(), head->GetSizeLength()));
 
     if (new_size > old_size)
       return update_result_e::err_not_enough_space;
