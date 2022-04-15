@@ -406,7 +406,7 @@ rule '.o' => '.rc' do |t|
 end
 
 rule '.xml' => '.xml.erb' do |t|
-  process_erb(t)
+  process_erb src: t.prerequisites[0], dest: t.name
 end
 
 # Resources depend on the manifest.xml file for Windows builds.
@@ -899,6 +899,11 @@ namespace :dev do
 
   desc "Create all auto-generated lists"
   task :lists => [ :iso639_list, :iso3166_list, :iso15924_list, :iana_language_subtag_registry_list ]
+
+  desc "Update src/tools/element_info.cpp from libMatroska"
+  task "update-element-info" do
+    process_erb src: "src/tools/element_info.cpp.erb", dest: "src/tools/element_info.cpp"
+  end
 end
 
 # Installation tasks

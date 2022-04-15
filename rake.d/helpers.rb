@@ -217,14 +217,14 @@ def list_targets? *targets
   targets.any? { |target| %r{\b#{target}\b}.match spec }
 end
 
-def process_erb t
-  puts_action "ERB", :target => t.name
+def process_erb args
+  puts_action "ERB", :target => args[:dest]
 
-  template = IO.readlines(t.prerequisites[0]).
+  template = IO.readlines(args[:src]).
     map { |line| line.gsub(%r{\{\{(.+?)\}\}}) { |match| (variables[$1] || ENV[$1]).to_s } }.
     join("")
 
-  File.open(t.name, 'w') { |file| file.puts(ERB.new(template).result) }
+  File.open(args[:dest], 'w') { |file| file.puts(ERB.new(template).result) }
 end
 
 def is_clang?
@@ -407,6 +407,25 @@ def parse_html_extract_table_data content, find_table_re
     gsub(%r{&nbsp;}i,                     '').                # ignore non-blanking spaces
     split(%r{<row-sep>}).                                     # split rows
     map { |row| CGI::unescapeHTML(row).split(%r{<col-sep>}) } # split each row into columns
+end
+
+def libmatroska_elements
+  return $libmatroska_elements_cache if $libmatroska_elements_cache
+
+  $libmatroska_elements_cache = []
+
+  IO.readlines("lib/libmatroska/src/KaxSemantic.cpp").each do |line|
+    next unless %r{^DEFINE_MKX_([A-Z]+)(?:_[_A-Z]+)? *\([^,]+, *(0x[0-9a-fA-F]+),[^"]+"([^"]+)"}.match(line)
+    $libmatroska_elements_cache << {
+      name: $3,
+      id:   $2.downcase,
+      type: $1.downcase.to_sym,
+    }
+  end
+
+  $libmatroska_elements_cache.sort_by! { |element| element[:name].downcase }
+
+  return $libmatroska_elements_cache
 end
 
 class Rake::Task
