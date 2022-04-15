@@ -474,15 +474,15 @@ msgid "  --enable-durations       Enable block durations for all blocks.\n"
 msgstr "  --enable-durations       Ativa durações de blocos para todos os blocos.\n"
 
 #: src/merge/mkvmerge.cpp:203
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --enable-legacy-font-mime-types\n"
 "                           Use legacy font MIME types when adding new\n"
 "                           attachments as well as for existing ones.\n"
 msgstr ""
-"--attach-file-once <file>\n"
-"Cria um ficheiro de anexo dentro do\n"
-"primeiro ficheiro Matroska criado.\n"
+"--enable-legacy-font-mime-types\n"
+"                           Use tipos MIME de fonte herdada ao adicionar novos\n"
+"                           anexos, bem como para os existentes.\n"
 
 #: src/merge/mkvmerge.cpp:406
 #, no-c-format
@@ -682,6 +682,10 @@ msgid ""
 "                           their canonical or their extended language subtags\n"
 "                           form or not at all (default: canonical form).\n"
 msgstr ""
+"--normalize-language-ietf <canonical|extlang|off>\n"
+"                           Normalize todas as etiquetas de idioma IETF BCP 47 para\n"
+"                           seu formato canônico ou de subetiquetas de idioma estendido\n"
+"                           ou para nenhum (padrão: formato canônico).\n"
 
 #: src/merge/mkvmerge.cpp:260
 #, no-c-format
@@ -1904,9 +1908,9 @@ msgid "&Expand all"
 msgstr "&Expandir tudo"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:383
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "&Extended language subtag:"
-msgstr "A percentagem do intervalo da analise '{0}' é inválido\n"
+msgstr "Subetiqueta de idioma &estendido:"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:698
 #, no-c-format
@@ -2241,7 +2245,7 @@ msgstr "Remover edição seleccionada ou capítulo"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:391
 #, no-c-format
 msgid "&Replace with normalized form"
-msgstr ""
+msgstr "Substituir por fo&rma normalizada"
 
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:202
 #, no-c-format
@@ -2688,9 +2692,9 @@ msgstr "'{0}' não é um hack válido.\n"
 
 #: src/merge/mkvmerge.cpp:2105
 #: src/propedit/propedit_cli_parser.cpp:224
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "'{0}' is not a valid language normalization mode.\n"
-msgstr "'{0}' não é um código de idioma ISO 639-2 válido."
+msgstr "'{0}' não é um modo de normalização de idioma válido.\n"
 
 #: src/merge/mkvmerge.cpp:1528
 #, no-c-format
@@ -3724,12 +3728,12 @@ msgstr "Perguntar sempre"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:179
 #, no-c-format
 msgid "Always automatically replace with canonical form"
-msgstr ""
+msgstr "Sempre substituir automaticamente pela forma canônica"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:182
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Always automatically replace with extended language subtags form"
-msgstr "A percentagem do intervalo da analise '{0}' é inválido\n"
+msgstr "Sempre substituir automaticamente pelo formulário de subetiquetas de idioma estendido"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2189
 #, no-c-format
@@ -4377,7 +4381,7 @@ msgstr "Não é possível escrever a faixa {0} com o ID de codec '{1}' para o ar
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:177
 #, no-c-format
 msgid "Canonical form"
-msgstr ""
+msgstr "Forma canônica"
 
 #: src/common/kax_info.cpp:1333
 #: src/common/kax_info.cpp:1337
@@ -6086,9 +6090,9 @@ msgid "Either fix the error or remove the configuration before closing the prefe
 msgstr "Corrija o erro ou remova a configuração antes de fechar a caixa de diálogo de preferências."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:923
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Either the file format or the audio codec is not supported."
-msgstr "A divisão de faixas deste tipo não é suportada."
+msgstr "O formato do arquivo ou o codec de áudio não é suportado."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:334
 #, no-c-format
@@ -6293,9 +6297,9 @@ msgid "Error parsing the tags in '{0}': some mandatory elements are missing.\n"
 msgstr "Erro ao analisar as tags em '{0}': alguns elementos obrigatórios estão faltando.\n"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:934
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Error playing audio"
-msgstr "Erro a ler ficheiro de configurações"
+msgstr "Erro ao reproduzir áudio"
 
 #: src/mkvtoolnix-gui/info/tab.cpp:196
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:80
@@ -6474,14 +6478,14 @@ msgid "Exports the chapter information in the simple format used in OGM tools (C
 msgstr "Exporta a informação do capítulo em um formato simples usado nas ferramentas OGM (CAPÍTULO01= ... NOMEDOCAPÍTULO01 = ...)."
 
 #: src/mkvtoolnix-gui/util/language_display_widget.cpp:215
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extended language subtag"
-msgstr "A percentagem do intervalo da analise '{0}' é inválido\n"
+msgstr "Subetiqueta de idioma estendido"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:180
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Extended language subtags form"
-msgstr "A percentagem do intervalo da analise '{0}' é inválido\n"
+msgstr "Formulário de subetiquetas de idioma estendido"
 
 #: src/common/bcp47.cpp:476
 #, no-c-format
@@ -7139,7 +7143,7 @@ msgstr "ID"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2108
 #, no-c-format
 msgid "IETF BCP 47 &normalization mode:"
-msgstr ""
+msgstr "Modo de &normalização IETF BCP 47:"
 
 #: src/common/iso639.cpp:43
 #, no-c-format
@@ -7633,9 +7637,9 @@ msgid "Information"
 msgstr "Informações"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:388
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Information & Warnings:"
-msgstr "Formato de vídeo DV"
+msgstr "Informações e Avisos:"
 
 #: src/common/bitvalue.cpp:76
 #, no-c-format
@@ -8925,7 +8929,7 @@ msgstr "O anexo com o ID {0} não foi encontrado.\n"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:931
 #, no-c-format
 msgid "No audio device is available for playback, or accessing it failed."
-msgstr ""
+msgstr "Nenhum dispositivo de áudio está disponível para reprodução ou o acesso falhou."
 
 #: src/propedit/propedit.cpp:187
 #, no-c-format
@@ -9115,7 +9119,7 @@ msgstr "Normal"
 #: src/propedit/propedit_cli_parser.cpp:272
 #, no-c-format
 msgid "Normalize all IETF BCP 47 language tags of changed elements to either their canonical form (mode 'canonical'), their extended language subtags form (mode 'extlang') or not at all (mode 'off')"
-msgstr ""
+msgstr "Normaliza todas as etiquetas de idioma IETF BCP 47 de elementos alterados para sua forma canônica (modo 'canônico'), seu formulário de subetiquetas de idioma estendido (modo 'extlang') ou nenhum (modo 'desligado')"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:313
 #, no-c-format
@@ -10419,12 +10423,12 @@ msgstr "Substituir o anexo por um novo arquivo e &derivar o nome do tipo e MIME 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:178
 #, no-c-format
 msgid "Replace with canonical form once"
-msgstr ""
+msgstr "Substituir pela forma canônica uma vez"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:181
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Replace with extended language subtags form once"
-msgstr "A percentagem do intervalo da analise '{0}' é inválido\n"
+msgstr "Substitui pelo formulário de subetiquetas de idioma estendido uma vez"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:721
 #, no-c-format
@@ -11934,9 +11938,9 @@ msgid "The attachment ({0}) is too big ({1})."
 msgstr "O anexo ({0}) é muito grande ({1})."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:920
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The audio file '%1' could not be played back."
-msgstr "O arquivo de tag XML '{0}' não pôde ser lido.\n"
+msgstr "O arquivo de áudio '%1' não pode ser reproduzido."
 
 #: src/mkvtoolnix-gui/util/settings.cpp:296
 #, no-c-format
@@ -11952,7 +11956,7 @@ msgstr "A sincronização de áudio/vídeo pode ter sido perdida."
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:487
 #, no-c-format
 msgid "The canonical form does use a suitable prefix."
-msgstr ""
+msgstr "A forma canônica usa um prefixo adequado."
 
 #: src/propedit/propedit.cpp:169
 #, no-c-format
@@ -12028,17 +12032,17 @@ msgstr "O cabeçalho do arquivo de correção não pôde ser lido corretamente.\
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:501
 #, no-c-format
 msgid "The corresponding canonical & extended language subtags forms are: %1."
-msgstr ""
+msgstr "Os formulários de subetiquetas de idioma canônico e estendido correspondentes são: %1."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:506
 #, no-c-format
 msgid "The corresponding canonical form is: %1."
-msgstr ""
+msgstr "A forma canônica correspondente é: %1."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:511
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The corresponding extended language subtags form is: %1."
-msgstr "A percentagem do intervalo da analise '{0}' é inválido\n"
+msgstr "O formulário de subetiquetas de idioma estendido correspondente é: %1."
 
 #: src/merge/output_control.cpp:1627
 #, no-c-format
@@ -12207,9 +12211,9 @@ msgid "The error message was:"
 msgstr "A mensagem de erro foi:"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:451
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The extended language subtag '%1' is deprecated."
-msgstr "A percentagem do intervalo da analise '{0}' é inválido\n"
+msgstr "A subetiqueta de idioma estendido '%1' está obsoleta."
 
 #: src/common/bcp47.cpp:448
 #, no-c-format
@@ -12217,9 +12221,9 @@ msgid "The extended language subtag '{}' must only be used with one of the follo
 msgstr "A subetiqueta de linguagem estendida '{}' deve ser usada apenas com um dos seguintes prefixos: {}."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:490
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The extended language subtags form does use a suitable prefix."
-msgstr "A percentagem do intervalo da analise '{0}' é inválido\n"
+msgstr "O formulário de subetiquetas de idioma estendido usa um prefixo adequado."
 
 #: src/output/p_mpeg4_p2.cpp:360
 #, no-c-format
@@ -12649,9 +12653,9 @@ msgid "The job has been added to the job queue."
 msgstr "A tarefa foi adicionada à fila de tarefas."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:446
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The language '%1' is deprecated."
-msgstr "A percentagem do intervalo da analise '{0}' é inválido\n"
+msgstr "O idioma '%1' está obsoleto."
 
 #: src/input/r_usf.cpp:106
 #, no-c-format
@@ -12982,9 +12986,9 @@ msgid "The recognized format is 'YYYY-mm-ddTHH:MM:SS+zz:zz': the year, month, da
 msgstr "O formato reconhecido é 'AAAA-mm-ddTHH:MM:SS+zz:zz': o ano, o mês, o dia, a letra 'T', horas, minutos, segundos e deslocamento do fuso horário em relação à UTC; exemplo: 2017-03-28T17:28:00-02:00."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:466
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The region '%1' is deprecated."
-msgstr "O ficheiro '%1' já existe."
+msgstr "A região '%1' está obsoleta."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:223
 #, no-c-format
@@ -13012,14 +13016,14 @@ msgid "The sample rate of the two audio tracks is different: {0} and {1}"
 msgstr "A frequência de amostra das duas faixas de áudio é diferente: {0} e {1}"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:456
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The script '%1' is deprecated."
-msgstr "O ficheiro '%1' já existe."
+msgstr "O script '%1' está obsoleto."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:460
 #, no-c-format
 msgid "The script '%1' should not be used for the language '%2' as it is the script the overwhelming majority of documents for this language is written in."
-msgstr ""
+msgstr "O script '%1' não deve ser usado para o idioma '%2', pois é o script em que a grande maioria dos documentos para esse idioma está escrita."
 
 #: src/extract/extract_cli_parser.cpp:91
 #, no-c-format
@@ -13362,19 +13366,19 @@ msgid "The values will be available for easy selection in the multiplexer."
 msgstr "Os valores estarão disponíveis para fácil seleção no multiplexador."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:472
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The variant '%1' is deprecated."
-msgstr "O ficheiro '%1' já existe."
+msgstr "A variante '%1' está obsoleta."
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:483
 #, no-c-format
 msgid "The variant '%1' is used with prefixes that aren't suited for it. Suitable prefixes are: %2."
-msgstr ""
+msgstr "A variante '%1' é usada com prefixos que não são adequadas para elas. Os prefixos adequados são: %2."
 
 #: src/common/bcp47.cpp:460
 #, no-c-format
 msgid "The variant '{}' occurs more than once."
-msgstr ""
+msgstr "A variante '{}' ocorre mais de uma vez."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:751
 #, no-c-format
@@ -13631,7 +13635,7 @@ msgstr "Isso é útil para situações como discos Blu-ray onde existem uma infi
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:495
 #, no-c-format
 msgid "This language tag is a grandfathered element only supported for historical reasons."
-msgstr ""
+msgstr "Essa etiqueta de idioma é um elemento adquirido com suporte apenas por motivos históricos."
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:100
 #, no-c-format
@@ -14354,7 +14358,7 @@ msgstr "Usar &tipos MIME legados para anexos de fonte"
 #: src/propedit/propedit_cli_parser.cpp:245
 #, no-c-format
 msgid "Use legacy font MIME types when adding new attachments or replacing existing ones"
-msgstr ""
+msgstr "Use tipos MIME de fonte herdada ao adicionar novos anexos ou substituir os existentes"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2175
 #, no-c-format
@@ -15311,7 +15315,7 @@ msgstr "botões"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:843
 #, no-c-format
 msgid "canonical form"
-msgstr ""
+msgstr "forma canônica"
 
 #: src/common/kax_info.cpp:635
 #, no-c-format
@@ -15404,9 +15408,9 @@ msgid "equirectangular"
 msgstr "equirretangular"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:844
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "extended language subtags form"
-msgstr "A percentagem do intervalo da analise '{0}' é inválido\n"
+msgstr "formulário de subetiquetas de idioma estendido"
 
 #: src/merge/output_control.cpp:439
 #, no-c-format
@@ -15854,9 +15858,9 @@ msgid "no language selected"
 msgstr "nenhum idioma selecionado"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:842
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "no normalization"
-msgstr "Formato de vídeo DV"
+msgstr "sem normalização"
 
 #: src/common/kax_info.cpp:824
 #, no-c-format
