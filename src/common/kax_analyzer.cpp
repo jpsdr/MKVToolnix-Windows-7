@@ -283,8 +283,17 @@ kax_analyzer_c::process() {
 
     return result;
 
+  } catch (std::exception const &ex) {
+    mxdebug_if(m_debug, fmt::format("kax_analyzer: parsing file '{0}' failed with an exception of type {1}: {2}\n", m_file->get_file_name(), typeid(ex).name(), ex.what()));
+
+    show_progress_done();
+
+    if (m_throw_on_error)
+      throw;
+    return false;
+
   } catch (...) {
-    mxdebug_if(m_debug, fmt::format("kax_analyzer: parsing file '{0}' failed with an exception\n", m_file->get_file_name()));
+    mxdebug_if(m_debug, fmt::format("kax_analyzer: parsing file '{0}' failed with an unknown exception\n", m_file->get_file_name()));
 
     show_progress_done();
 
