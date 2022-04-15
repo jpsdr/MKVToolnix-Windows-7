@@ -1032,9 +1032,14 @@ kax_analyzer_c::merge_void_elements() {
   if (m_data.size() <= start_idx)
     return;
 
+  mxdebug_if(m_debug, fmt::format("merge_void_elements: removing trailing void elements from start_idx {0} to m_data.size {1}\n", start_idx, m_data.size()));
+
   // Truncate the file after the last non-void element and update the segment size.
   m_file->truncate(m_data[start_idx]->m_pos);
   adjust_segment_size();
+
+  // Lastly remove the elements from our internal records.
+  m_data.erase(m_data.begin() + start_idx, m_data.end());
 }
 
 /** \brief Finds a suitable spot for an element and writes it to the file

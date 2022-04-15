@@ -17,6 +17,9 @@
   element would shrink the element by one byte. Files created by gstreamer fit
   the first part whereas the second depends on the changes requested by the
   user. Part of the fix of #3325.
+* mkvpropedit, MKVToolNix GUI's chapter & header editors: fixed the programs
+  not handling having to remove EBML void elements at the end of the file
+  correctly and consequently aborting. Part of the fix of #3325.
 
 
 # Version 67.0.0 "Under Stars" 2022-04-10
