@@ -207,7 +207,9 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
 
   auto pageIndex = 0;
   auto model     = new QStandardItemModel{this};
+
   ui->pageSelector->setModel(model);
+  ui->pageSelector->setIconSize({ 16, 16 });
 
   auto addItem = [this, model, &pageIndex](Page pageType, QStandardItem *parent, QString const &text, QString const &icon = QString{}) -> QStandardItem * {
     auto item = new QStandardItem{text};
@@ -216,7 +218,7 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
     m_pageIndexes[pageType] = pageIndex++;
 
     if (!icon.isEmpty())
-      item->setIcon(QIcon{Q(":/icons/16x16/%1.png").arg(icon)});
+      item->setIcon(QIcon::fromTheme(icon));
 
     if (parent)
       parent->appendRow(item);

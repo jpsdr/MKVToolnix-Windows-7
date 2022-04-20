@@ -99,7 +99,7 @@ ValuePage::init() {
   m_lNote->setWordWrap(true);
 
   m_bReset = new QPushButton{this};
-  m_bReset->setIcon(QIcon{Q(":/icons/16x16/edit-undo.png")});
+  m_bReset->setIcon(QIcon::fromTheme(Q("edit-undo")));
 
   // ----------------------------------------------------------------------
 

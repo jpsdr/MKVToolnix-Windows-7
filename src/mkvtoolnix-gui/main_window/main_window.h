@@ -124,8 +124,8 @@ public:                         // static
   static QString versionStringForSettings(version_number_t const &version);
 #endif  // HAVE_UPDATE_CHECK
 
-  static QIcon const & yesIcon();
-  static QIcon const & noIcon();
+  static QIcon yesIcon();
+  static QIcon noIcon();
 
 protected:
   virtual void setupConnections();

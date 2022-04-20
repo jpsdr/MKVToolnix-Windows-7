@@ -98,8 +98,8 @@ Tab::setupUi() {
 
   retranslateUi();
 
-  p->ui->acknowledgeWarningsAndErrorsButton->setIcon(QIcon{Q(":/icons/16x16/dialog-ok-apply.png")});
-  p->ui->abortButton->setIcon(QIcon{Q(":/icons/16x16/dialog-cancel.png")});
+  p->ui->acknowledgeWarningsAndErrorsButton->setIcon(QIcon::fromTheme(Q("dialog-ok-apply")));
+  p->ui->abortButton->setIcon(QIcon::fromTheme(Q("dialog-cancel")));
 
   auto model = MainWindow::jobTool()->model();
 
@@ -131,8 +131,8 @@ Tab::setupMoreActionsMenu() {
 
   p->ui->moreActionsButton->setMenu(p->m_moreActions);
 
-  p->m_openFolderAction->setIcon(QIcon{Q(":/icons/16x16/document-open-folder.png")});
-  p->m_saveOutputAction->setIcon(QIcon{Q(":/icons/16x16/document-save.png")});
+  p->m_openFolderAction->setIcon(QIcon::fromTheme(Q("document-open-folder")));
+  p->m_saveOutputAction->setIcon(QIcon::fromTheme(Q("document-save")));
 }
 
 void

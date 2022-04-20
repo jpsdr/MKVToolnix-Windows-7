@@ -92,7 +92,7 @@ MainWindow::MainWindow(QWidget *parent)
   setupDebuggingMenu();
 
   // Setup window properties.
-  setWindowIcon(Util::loadIcon(Q("mkvtoolnix-gui.png"), QList<int>{} << 32 << 48 << 64 << 128 << 256));
+  setWindowIcon(QIcon::fromTheme(Q("mkvtoolnix-gui")));
 
   retranslateUi();
 
@@ -265,14 +265,14 @@ MainWindow::setupToolSelector() {
   p->toolJobs          = new Jobs::Tool{p->ui->tool,          p->ui->menuJobQueue};
   p->watchJobTool      = new WatchJobs::Tool{p->ui->tool,     p->ui->menuJobOutput};
 
-  p->ui->tool->appendTab(p->toolMerge,                        QIcon{":/icons/48x48/merge.png"},                      QY("Multiplexer"));
-  // p->ui->tool->appendTab(createNotImplementedWidget(),        QIcon{":/icons/48x48/split.png"},                      QY("Extractor"));
-  p->ui->tool->appendTab(p->toolInfo,                         QIcon{":/icons/48x48/document-preview-archive.png"},   QY("Info tool"));
-  p->ui->tool->appendTab(p->toolHeaderEditor,                 QIcon{":/icons/48x48/document-edit.png"},              QY("Header editor"));
-  p->ui->tool->appendTab(p->toolChapterEditor,                QIcon{":/icons/48x48/story-editor.png"},               QY("Chapter editor"));
-  // p->ui->tool->appendTab(createNotImplementedWidget(),        QIcon{":/icons/48x48/document-edit-sign-encrypt.png"}, QY("Tags editor"));
-  p->ui->tool->appendTab(p->toolJobs,                         QIcon{":/icons/48x48/view-task.png"},                  QY("Job queue"));
-  p->ui->tool->appendTab(p->watchJobTool,                     QIcon{":/icons/48x48/system-run.png"},                 QY("Job output"));
+  p->ui->tool->appendTab(p->toolMerge,                        QIcon::fromTheme(Q("merge")),                      QY("Multiplexer"));
+  // p->ui->tool->appendTab(createNotImplementedWidget(),        QIcon::fromTheme(Q("split")),                      QY("Extractor"));
+  p->ui->tool->appendTab(p->toolInfo,                         QIcon::fromTheme(Q("document-preview-archive")),   QY("Info tool"));
+  p->ui->tool->appendTab(p->toolHeaderEditor,                 QIcon::fromTheme(Q("document-edit")),              QY("Header editor"));
+  p->ui->tool->appendTab(p->toolChapterEditor,                QIcon::fromTheme(Q("story-editor")),               QY("Chapter editor"));
+  // p->ui->tool->appendTab(createNotImplementedWidget(),        QIcon::fromTheme(Q("document-edit-sign-encrypt")), QY("Tags editor"));
+  p->ui->tool->appendTab(p->toolJobs,                         QIcon::fromTheme(Q("view-task")),                  QY("Job queue"));
+  p->ui->tool->appendTab(p->watchJobTool,                     QIcon::fromTheme(Q("system-run")),                 QY("Job output"));
 
   for (auto idx = 0, numTabs = p->ui->tool->count(); idx < numTabs; ++idx) {
     qobject_cast<ToolBase *>(p->ui->tool->widget(idx))->setupUi();
@@ -705,22 +705,14 @@ MainWindow::eventFilter(QObject *watched,
   return QMainWindow::eventFilter(watched, event);
 }
 
-QIcon const &
+QIcon
 MainWindow::yesIcon() {
-  static auto s_yesIcon = std::unique_ptr<QIcon>{};
-  if (!s_yesIcon)
-    s_yesIcon.reset(new QIcon{":/icons/16x16/dialog-ok-apply.png"});
-
-  return *s_yesIcon;
+  return QIcon::fromTheme("dialog-ok-apply");
 }
 
-QIcon const &
+QIcon
 MainWindow::noIcon() {
-  static auto s_noIcon = std::unique_ptr<QIcon>{};
-  if (!s_noIcon)
-    s_noIcon.reset(new QIcon{":/icons/16x16/dialog-cancel.png"});
-
-  return *s_noIcon;
+  return QIcon::fromTheme("dialog-cancel");
 }
 
 void

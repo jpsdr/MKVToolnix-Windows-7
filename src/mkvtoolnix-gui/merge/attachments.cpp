@@ -62,14 +62,14 @@ Tab::setupAttachmentsControls() {
 
   Util::HeaderViewManager::create(*p.ui->attachedFiles, "Merge::AttachedFiles").setDefaultSizes({ { Q("name"), 180 }, { Q("mimeType"), 180 }, { Q("size"), 100 } });
 
-  p.enableSelectedAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox.png")});
-  p.disableSelectedAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox-unchecked.png")});
-  p.enableAllAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox.png")});
-  p.disableAllAttachedFilesAction->setIcon(QIcon{Q(":/icons/16x16/checkbox-unchecked.png")});
+  p.enableSelectedAttachedFilesAction->setIcon(QIcon::fromTheme(Q("checkbox")));
+  p.disableSelectedAttachedFilesAction->setIcon(QIcon::fromTheme(Q("checkbox-unchecked")));
+  p.enableAllAttachedFilesAction->setIcon(QIcon::fromTheme(Q("checkbox")));
+  p.disableAllAttachedFilesAction->setIcon(QIcon::fromTheme(Q("checkbox-unchecked")));
 
-  p.addAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
-  p.removeAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
-  p.selectAllAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/edit-select-all.png")});
+  p.addAttachmentsAction->setIcon(QIcon::fromTheme(Q("list-add")));
+  p.removeAttachmentsAction->setIcon(QIcon::fromTheme(Q("list-remove")));
+  p.selectAllAttachmentsAction->setIcon(QIcon::fromTheme(Q("edit-select-all")));
 
   // Q_SIGNALS & Q_SLOTS
   connect(p.addAttachmentsAction,               &QAction::triggered,                                                    this, &Tab::onAddAttachments);

@@ -36,10 +36,10 @@ StatusBarProgressWidget::StatusBarProgressWidget(QWidget *parent)
 
   p->ui->setupUi(this);
 
-  p->m_pixmaps << QPixmap{Q(":/icons/16x16/dialog-warning.png")};
-  p->m_pixmaps << QPixmap{Q(":/icons/16x16/dialog-warning-grayscale.png")};
-  p->m_pixmaps << QPixmap{Q(":/icons/16x16/dialog-error.png")};
-  p->m_pixmaps << QPixmap{Q(":/icons/16x16/dialog-error-grayscale.png")};
+  p->m_pixmaps << QIcon::fromTheme(Q("dialog-warning")).pixmap(16, 16);
+  p->m_pixmaps << QIcon::fromTheme(Q("dialog-warning-grayscale")).pixmap(16, 16);
+  p->m_pixmaps << QIcon::fromTheme(Q("dialog-error")).pixmap(16, 16);
+  p->m_pixmaps << QIcon::fromTheme(Q("dialog-error-grayscale")).pixmap(16, 16);
 
   p->m_timer.setInterval(1000);
 

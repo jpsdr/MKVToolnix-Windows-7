@@ -27,8 +27,8 @@ namespace mtx::gui::Jobs {
 Model::Model(QObject *parent)
   : QStandardItemModel{parent}
   , m_mutex{MTX_QT_RECURSIVE_MUTEX_INIT}
-  , m_warningsIcon{Q(":/icons/16x16/dialog-warning.png")}
-  , m_errorsIcon{Q(":/icons/16x16/dialog-error.png")}
+  , m_warningsIcon{QIcon::fromTheme(Q("dialog-warning"))}
+  , m_errorsIcon{QIcon::fromTheme(Q("dialog-error"))}
   , m_started{}
   , m_dontStartJobsNow{}
   , m_running{}
@@ -57,7 +57,7 @@ Model::retranslateUi() {
     { QY("Date finished"), Q("dateFinished")   },
   });
 
-  horizontalHeaderItem(StatusIconColumn)->setIcon(QIcon{Q(":/icons/16x16/dialog-warning-grayscale.png")});
+  horizontalHeaderItem(StatusIconColumn)->setIcon(QIcon::fromTheme(Q("dialog-warning-grayscale")));
   horizontalHeaderItem(StatusIconColumn)->setData(QY("Warnings/Errors"), Util::HiddenDescriptionRole);
 
   horizontalHeaderItem(DescriptionColumn) ->setTextAlignment(Qt::AlignLeft  | Qt::AlignVCenter);

@@ -155,16 +155,16 @@ Tab::setupUi() {
   Util::HeaderViewManager::create(*p->ui->elements,  "ChapterEditor::Elements")    .setDefaultSizes({ { Q("editionChapter"), 200 }, { Q("start"),    130 }, { Q("end"), 130 } });
   Util::HeaderViewManager::create(*p->ui->tvChNames, "ChapterEditor::ChapterNames").setDefaultSizes({ { Q("name"),           200 }, { Q("language"), 150 } });
 
-  p->addEditionBeforeAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-above.png")});
-  p->addEditionAfterAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-below.png")});
-  p->addChapterBeforeAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-above.png")});
-  p->addChapterAfterAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-below.png")});
-  p->addSubChapterAction->setIcon(QIcon{Q(":/icons/16x16/edit-table-insert-row-under.png")});
-  p->duplicateAction->setIcon(QIcon{Q(":/icons/16x16/tab-duplicate.png")});
-  p->removeElementAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
-  p->renumberSubChaptersAction->setIcon(QIcon{Q(":/icons/16x16/format-list-ordered.png")});
-  p->massModificationAction->setIcon(QIcon{Q(":/icons/16x16/tools-wizard.png")});
-  p->copyToOtherTabMenu->setIcon(QIcon{Q(":/icons/16x16/edit-copy.png")});
+  p->addEditionBeforeAction->setIcon(QIcon::fromTheme(Q("edit-table-insert-row-above")));
+  p->addEditionAfterAction->setIcon(QIcon::fromTheme(Q("edit-table-insert-row-below")));
+  p->addChapterBeforeAction->setIcon(QIcon::fromTheme(Q("edit-table-insert-row-above")));
+  p->addChapterAfterAction->setIcon(QIcon::fromTheme(Q("edit-table-insert-row-below")));
+  p->addSubChapterAction->setIcon(QIcon::fromTheme(Q("edit-table-insert-row-under")));
+  p->duplicateAction->setIcon(QIcon::fromTheme(Q("tab-duplicate")));
+  p->removeElementAction->setIcon(QIcon::fromTheme(Q("list-remove")));
+  p->renumberSubChaptersAction->setIcon(QIcon::fromTheme(Q("format-list-ordered")));
+  p->massModificationAction->setIcon(QIcon::fromTheme(Q("tools-wizard")));
+  p->copyToOtherTabMenu->setIcon(QIcon::fromTheme(Q("edit-copy")));
 
   auto tool = MainWindow::chapterEditorTool();
   connect(p->ui->elements,                    &Util::BasicTreeView::customContextMenuRequested,                       this,                    &Tab::showChapterContextMenu);
@@ -1303,10 +1303,7 @@ Tab::addOneChapterNameLanguage(mtx::bcp47::language_c const &languageCode,
   QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
   language->setSizePolicy(sizePolicy);
 
-  QIcon removeIcon;
-  removeIcon.addFile(QString::fromUtf8(":/icons/16x16/list-remove.png"), QSize(), QIcon::Normal, QIcon::Off);
-
-  removeButton->setIcon(removeIcon);
+  removeButton->setIcon(QIcon::fromTheme(Q("list-remove")));
 
   layout->addWidget(language);
   layout->addWidget(removeButton);

@@ -40,13 +40,13 @@ insertPriorityForTrack(Track const &track) {
 TrackModel::TrackModel(QObject *parent)
   : QStandardItemModel{parent}
   , m_tracks{}
-  , m_audioIcon(":/icons/16x16/knotify.png")
-  , m_videoIcon(":/icons/16x16/tool-animator.png")
-  , m_subtitleIcon(":/icons/16x16/subtitles.png")
-  , m_attachmentIcon(":/icons/16x16/mail-attachment.png")
-  , m_chaptersIcon(":/icons/16x16/clock.png")
-  , m_tagsIcon(":/icons/16x16/mail-tagged.png")
-  , m_genericIcon(":/icons/16x16/application-octet-stream.png")
+  , m_audioIcon{QIcon::fromTheme(Q("knotify"))}
+  , m_videoIcon{QIcon::fromTheme(Q("tool-animator"))}
+  , m_subtitleIcon{QIcon::fromTheme(Q("subtitles"))}
+  , m_attachmentIcon{QIcon::fromTheme(Q("mail-attachment"))}
+  , m_chaptersIcon{QIcon::fromTheme(Q("clock"))}
+  , m_tagsIcon{QIcon::fromTheme(Q("mail-tagged"))}
+  , m_genericIcon{QIcon::fromTheme(Q("application-octet-stream"))}
   , m_ignoreTrackRemovals{}
   , m_nonAppendedSelected{}
   , m_appendedSelected{}

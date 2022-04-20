@@ -27,7 +27,6 @@
 
 #include "mkvtoolnix-gui/util/qgs_collapsible_group_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
-#include "mkvtoolnix-gui/util/widget.h"
 
 namespace mtx::gui::Util {
 
@@ -61,8 +60,8 @@ void QgsCollapsibleGroupBoxBasic::init()
   mTitleClicked = false;
 
   // init icons
-  mCollapseIcon = Util::loadIcon( QStringLiteral( "draw-triangle4.png" ), QList<int>{} << 16 );
-  mExpandIcon = Util::loadIcon( QStringLiteral( "draw-triangle2.png" ), QList<int>{} << 16 );
+  mCollapseIcon = QIcon::fromTheme(Q("draw-triangle4"));
+  mExpandIcon = QIcon::fromTheme(Q("draw-triangle2"));
 
   // collapse button
   mCollapseButton = new QgsGroupBoxCollapseButton( this );

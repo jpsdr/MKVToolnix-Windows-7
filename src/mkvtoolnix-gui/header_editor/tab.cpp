@@ -388,10 +388,10 @@ Tab::retranslateUi() {
   m_replaceAttachmentContentSetValuesAction->setText(QY("Replace attachment with a new file and &derive name && MIME type from it"));
   m_modifySelectedTrackMenu->setTitle(QY("Modif&y selected track"));
 
-  m_addAttachmentsAction->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
-  m_removeAttachmentAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
-  m_saveAttachmentContentAction->setIcon(QIcon{Q(":/icons/16x16/document-save.png")});
-  m_replaceAttachmentContentAction->setIcon(QIcon{Q(":/icons/16x16/document-open.png")});
+  m_addAttachmentsAction->setIcon(QIcon::fromTheme(Q("list-add")));
+  m_removeAttachmentAction->setIcon(QIcon::fromTheme(Q("list-remove")));
+  m_saveAttachmentContentAction->setIcon(QIcon::fromTheme(Q("document-save")));
+  m_replaceAttachmentContentAction->setIcon(QIcon::fromTheme(Q("document-open")));
 
   m_modifyTracksSubmenu.retranslateUi();
   m_languageShortcutsMenu->setTitle(QY("Set &language"));

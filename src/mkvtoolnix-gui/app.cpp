@@ -94,6 +94,7 @@ App::App(int &argc,
 #ifdef SYS_WINDOWS
   QApplication::setStyle(Q("windowsvista"));
 #endif
+  QIcon::setThemeName(Q("mkvtoolnix-gui"));
 
   Util::Settings::migrateFromRegistry();
   Util::Settings::get().load();

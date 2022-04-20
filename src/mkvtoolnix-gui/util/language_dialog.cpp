@@ -549,7 +549,7 @@ LanguageDialog::setStatusFromLanguageTag(mtx::bcp47::language_c const &tag) {
 
     sizePolicy.setHeightForWidth(textLabel->sizePolicy().hasHeightForWidth());
 
-    iconLabel->setPixmap({ Q(":/icons/16x16/%1.png").arg(isInfo ? Q("documentinfo") : Q("dialog-warning")) });
+    iconLabel->setPixmap(QIcon::fromTheme(isInfo ? Q("documentinfo") : Q("dialog-warning")).pixmap(16, 16));
     iconLabel->setAlignment(Qt::AlignLeft | Qt::AlignTop);
     textLabel->setSizePolicy(sizePolicy);
     textLabel->setWordWrap(true);
@@ -608,9 +608,7 @@ LanguageDialog::addRowItem(QString const &type,
   auto newButton = new QPushButton{p.ui->sawComponents};
 
   newButton->setObjectName(Q("pbRemove%1%2").arg(type.mid(2)).arg(newIdx));
-  QIcon icon;
-  icon.addFile(Q(":/icons/16x16/list-remove.png"), QSize{}, QIcon::Normal, QIcon::Off);
-  newButton->setIcon(icon);
+  newButton->setIcon(QIcon::fromTheme(Q("list-remove")));
 
   newWidget->setEnabled(enable);
   newButton->setEnabled(enable);

@@ -320,17 +320,19 @@ def update_qrc
   seen     = Hash.new
   add_node = lambda do |name_to_add, name_alias|
     node                     = REXML::Element.new "file"
-    node.attributes["alias"] = name_alias.gsub(/share\//, '')
+    node.attributes["alias"] = name_alias
     node.text                = "../../#{name_to_add}"
     parent << node
   end
 
+  add_node.call('share/icons/index.theme', 'icons/mkvtoolnix-gui/index.theme')
+
   icons.each do |file|
-    add_node.call(file, file)
+    add_node.call(file, file.gsub(%r{^share/icons}, 'icons/mkvtoolnix-gui'))
 
     base_name   = file.gsub(%r{.*/|\.png$},      '')
     size        = file.gsub(%r{.*/(\d+)x\d+/.*}, '\1').to_i
-    name_alias  = file.gsub(%r{\.png},           '@2x.png')
+    name_alias  = file.gsub(%r{\.png},           '@2x.png').gsub(%r{.*/}, "icons/mkvtoolnix-gui/#{size}x#{size}@2/")
     double_size = size * 2
     double_file = "share/icons/#{double_size}x#{double_size}/#{base_name}.png"
 

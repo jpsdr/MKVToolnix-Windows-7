@@ -293,11 +293,11 @@ Tab::setupInputControls() {
   p.filesMenu->addSeparator();
   p.filesMenu->addAction(p.selectTracksFromFilesAction);
 
-  p.addFilesAction->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
-  p.appendFilesAction->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-x.png")});
-  p.addAdditionalPartsAction->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-margin.png")});
-  p.removeFilesAction->setIcon(QIcon{Q(":/icons/16x16/list-remove.png")});
-  p.openFilesInMediaInfoAction->setIcon(QIcon{Q(":/icons/16x16/documentinfo.png")});
+  p.addFilesAction->setIcon(QIcon::fromTheme(Q("list-add")));
+  p.appendFilesAction->setIcon(QIcon::fromTheme(Q("distribute-horizontal-x")));
+  p.addAdditionalPartsAction->setIcon(QIcon::fromTheme(Q("distribute-horizontal-margin")));
+  p.removeFilesAction->setIcon(QIcon::fromTheme(Q("list-remove")));
+  p.openFilesInMediaInfoAction->setIcon(QIcon::fromTheme(Q("documentinfo")));
 
   // "tracks" context menu
   p.tracksMenu->addAction(p.selectAllTracksAction);
@@ -311,14 +311,14 @@ Tab::setupInputControls() {
   p.selectTracksOfTypeMenu->addAction(p.selectAllAudioTracksAction);
   p.selectTracksOfTypeMenu->addAction(p.selectAllSubtitlesTracksAction);
 
-  p.selectAllTracksAction->setIcon(QIcon{Q(":/icons/16x16/edit-select-all.png")});
-  p.enableAllTracksAction->setIcon(QIcon{Q(":/icons/16x16/checkbox.png")});
-  p.disableAllTracksAction->setIcon(QIcon{Q(":/icons/16x16/checkbox-unchecked.png")});
-  p.openTracksInMediaInfoAction->setIcon(QIcon{Q(":/icons/16x16/documentinfo.png")});
+  p.selectAllTracksAction->setIcon(QIcon::fromTheme(Q("edit-select-all")));
+  p.enableAllTracksAction->setIcon(QIcon::fromTheme(Q("checkbox")));
+  p.disableAllTracksAction->setIcon(QIcon::fromTheme(Q("checkbox-unchecked")));
+  p.openTracksInMediaInfoAction->setIcon(QIcon::fromTheme(Q("documentinfo")));
 
-  p.selectAllVideoTracksAction->setIcon(QIcon{Q(":/icons/16x16/tool-animator.png")});
-  p.selectAllAudioTracksAction->setIcon(QIcon{Q(":/icons/16x16/knotify.png")});
-  p.selectAllSubtitlesTracksAction->setIcon(QIcon{Q(":/icons/16x16/subtitles.png")});
+  p.selectAllVideoTracksAction->setIcon(QIcon::fromTheme(Q("tool-animator")));
+  p.selectAllAudioTracksAction->setIcon(QIcon::fromTheme(Q("knotify")));
+  p.selectAllSubtitlesTracksAction->setIcon(QIcon::fromTheme(Q("subtitles")));
 
   // "add source files" menu
   p.addFilesMenu->addAction(p.addFilesAction2);
@@ -340,9 +340,9 @@ Tab::setupInputControls() {
   p.addToJobQueueMenu->addAction(p.addToJobQueueCloseSettings);
   p.ui->addToJobQueue->setMenu(p.addToJobQueueMenu);
 
-  p.addFilesAction2->setIcon(QIcon{Q(":/icons/16x16/list-add.png")});
-  p.appendFilesAction2->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-x.png")});
-  p.addAdditionalPartsAction2->setIcon(QIcon{Q(":/icons/16x16/distribute-horizontal-margin.png")});
+  p.addFilesAction2->setIcon(QIcon::fromTheme(Q("list-add")));
+  p.appendFilesAction2->setIcon(QIcon::fromTheme(Q("distribute-horizontal-x")));
+  p.addAdditionalPartsAction2->setIcon(QIcon::fromTheme(Q("distribute-horizontal-margin")));
 
   // Connect Q_SIGNALS & Q_SLOTS.
   auto mw = MainWindow::get();
