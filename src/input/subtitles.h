@@ -40,9 +40,12 @@ protected:
   bool m_try_utf8{}, m_invalid_utf8_warned{};
   std::string m_file_name;
   int64_t m_track_id{};
+  unsigned int m_num_skipped{};
+  debugging_option_c m_debug{"srt_parser|ssa_parser|subtitle_parser"};
 
 public:
   subtitles_c(std::string const &file_name, int64_t track_id);
+  void add_maybe(int64_t start, int64_t end, unsigned int number, const std::string &subs);
   void add(int64_t start, int64_t end, unsigned int number, const std::string &subs) {
     entries.push_back(sub_t(start, end, number, subs));
   }
@@ -91,7 +94,6 @@ public:
 protected:
   mm_text_io_cptr m_io;
   bool m_coordinates_warning_shown;
-  debugging_option_c m_debug{"srt_parser"};
 
 public:
   srt_parser_c(mm_text_io_cptr const &io, const std::string &file_name, int64_t track_id);

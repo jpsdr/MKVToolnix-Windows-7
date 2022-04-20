@@ -42,6 +42,22 @@ subtitles_c::subtitles_c(std::string const &file_name,
 }
 
 void
+subtitles_c::add_maybe(int64_t start,
+                       int64_t end,
+                       unsigned int number,
+                       std::string const &subs) {
+  if (end <= start) {
+    ++m_num_skipped;
+    mxdebug_if(m_debug, fmt::format("skipping entry no. {0} {1} — {2} content: {3}\n", number, mtx::string::format_timestamp(start), mtx::string::format_timestamp(end), subs));
+    return;
+  }
+
+  auto subtitles = subs;
+  mtx::string::strip_back(subtitles, true);
+  add(start, end, number - m_num_skipped, subtitles);
+}
+
+void
 subtitles_c::set_charset_converter(charset_converter_cptr const &cc_utf8) {
   if (cc_utf8)
     m_cc_utf8 = cc_utf8;
@@ -219,10 +235,8 @@ srt_parser_c::parse() {
       }
 
       // The previous entry is done now. Append it to the list of subtitles.
-      if (!subtitles.empty()) {
-        mtx::string::strip_back(subtitles, true);
-        add(start, end, timestamp_number, subtitles.c_str());
-      }
+      if (!subtitles.empty())
+        add_maybe(start, end, timestamp_number, subtitles);
 
       while (s_rest.length() < 9)
         s_rest += "0";
@@ -281,10 +295,8 @@ srt_parser_c::parse() {
     }
   }
 
-  if (!subtitles.empty()) {
-    mtx::string::strip_back(subtitles, true);
-    add(start, end, timestamp_number, subtitles.c_str());
-  }
+  if (!subtitles.empty())
+    add_maybe(start, end, timestamp_number, subtitles);
 
   sort();
 }

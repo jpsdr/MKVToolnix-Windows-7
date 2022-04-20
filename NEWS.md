@@ -20,6 +20,8 @@
 * mkvpropedit, MKVToolNix GUI's chapter & header editors: fixed the programs
   not handling having to remove EBML void elements at the end of the file
   correctly and consequently aborting. Part of the fix of #3325.
+* SRT reader: entries with a duration of 0 or less will now be skipped. Fixes
+  #3332.
 
 
 # Version 67.0.0 "Under Stars" 2022-04-10
