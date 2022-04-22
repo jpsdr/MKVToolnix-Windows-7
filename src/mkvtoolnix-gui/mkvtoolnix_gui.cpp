@@ -38,6 +38,8 @@ enableOrDisableHighDPIScaling() {
 # if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
   QApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 # endif
+#else
+  QApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::RoundPreferFloor);
 #endif
 }
 
