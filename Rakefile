@@ -125,7 +125,8 @@ def setup_globals
   $unwrapped_po            = %{ca es eu it nl uk pl sr_RS@latin tr}
   $po_multiple_sources     = %{sv}
 
-  $benchmark_sources       = FileList["src/benchmark/*.cpp"].to_a if c?(:GOOGLE_BENCHMARK)
+  $benchmark_sources       = FileList["src/benchmark/*.cpp"].to_a
+  $benchmark_programs      = $benchmark_sources.map { |src| src.gsub(%r{\.cpp$}, '') + c(:EXEEXT) }
 
   $libmtxcommon_as_dll     = $building_for[:windows] && %r{shared}i.match(c(:host))
 
@@ -290,7 +291,7 @@ def define_default_task
   # needed for running the tests.
   targets << "apps:tools:ebml_validator" if c(:host) == c(:build)
 
-  targets << "src/benchmark/benchmark" if c?(:GOOGLE_BENCHMARK) && !$benchmark_sources.empty?
+  targets += $benchmark_programs
 
   task :default => targets do
     build_duration = Time.now - $build_start
@@ -1009,12 +1010,11 @@ task :clean do
     src/**/manifest.xml
     src/info/ui/*.h
     src/mkvtoolnix-gui/forms/**/*.h
-    src/benchmark/benchmark
     tests/unit/all
     tests/unit/merge/merge
     tests/unit/propedit/propedit
   }
-  patterns += $applications + $tools.collect { |name| "src/tools/#{name}" }
+  patterns += $applications + $tools.collect { |name| "src/tools/#{name}" } + $benchmark_programs
   patterns += PCH.clean_patterns
   patterns << $version_header_name
 
@@ -1219,13 +1219,16 @@ end
 # benchmark
 #
 
-if c?(:GOOGLE_BENCHMARK) && !$benchmark_sources.empty?
-  Application.new("src/benchmark/benchmark").
-    description("Build the benchmark executable").
-    aliases(:benchmark, :bench).
-    sources($benchmark_sources).
-    libraries($common_libs, :benchmark, :qt).
-    create
+if c?(:GOOGLE_BENCHMARK) && !$benchmark_programs.empty?
+  $benchmark_programs.each do |program|
+    Application.new(program).
+      sources(program.gsub(%r{\.exe$}, '') + '.cpp').
+      libraries($common_libs, :qt, :benchmark).
+      create
+  end
+
+  desc "Build the benchmark executables"
+  task :benchmarks => $benchmark_programs
 end
 
 #
