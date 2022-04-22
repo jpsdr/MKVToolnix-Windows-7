@@ -28,539 +28,1041 @@ std::unordered_map<std::string, std::string> g_suppress_scripts;
 
 using VS = std::vector<std::string>;
 
+struct extlang_variant_init_t {
+  char const *code, *description;
+  char const *prefixes[12];
+  bool is_deprecated;
+};
+
+struct suppress_script_init_t {
+  char const *first, *second;
+};
+
+struct preferred_values_init_t {
+  struct sub_t {
+    char const *tag, *region, *variant;
+
+    mtx::bcp47::language_c parse() const;
+  };
+
+  sub_t from, to;
+};
+
+mtx::bcp47::language_c
+preferred_values_init_t::sub_t::parse()
+  const {
+
+  auto language = tag ? mtx::bcp47::language_c::parse(tag) : mtx::bcp47::language_c{};
+
+  if (region)
+    language.set_region(region);
+
+  if (variant)
+    language.set_variants({ variant });
+
+  if (!tag)
+    language.set_valid(true);
+
+  return language;
+}
+
+static extlang_variant_init_t s_extlangs_init[] = {
+  { "aao", u8"Algerian Saharan Arabic",             { "ar", NULL },  false },
+  { "abh", u8"Tajiki Arabic",                       { "ar", NULL },  false },
+  { "abv", u8"Baharna Arabic",                      { "ar", NULL },  false },
+  { "acm", u8"Mesopotamian Arabic",                 { "ar", NULL },  false },
+  { "acq", u8"Ta'izzi-Adeni Arabic",                { "ar", NULL },  false },
+  { "acw", u8"Hijazi Arabic",                       { "ar", NULL },  false },
+  { "acx", u8"Omani Arabic",                        { "ar", NULL },  false },
+  { "acy", u8"Cypriot Arabic",                      { "ar", NULL },  false },
+  { "adf", u8"Dhofari Arabic",                      { "ar", NULL },  false },
+  { "ads", u8"Adamorobe Sign Language",             { "sgn", NULL }, false },
+  { "aeb", u8"Tunisian Arabic",                     { "ar", NULL },  false },
+  { "aec", u8"Saidi Arabic",                        { "ar", NULL },  false },
+  { "aed", u8"Argentine Sign Language",             { "sgn", NULL }, false },
+  { "aen", u8"Armenian Sign Language",              { "sgn", NULL }, false },
+  { "afb", u8"Gulf Arabic",                         { "ar", NULL },  false },
+  { "afg", u8"Afghan Sign Language",                { "sgn", NULL }, false },
+  { "ajp", u8"South Levantine Arabic",              { "ar", NULL },  false },
+  { "ajs", u8"Algerian Jewish Sign Language",       { "sgn", NULL }, false },
+  { "apc", u8"North Levantine Arabic",              { "ar", NULL },  false },
+  { "apd", u8"Sudanese Arabic",                     { "ar", NULL },  false },
+  { "arb", u8"Standard Arabic",                     { "ar", NULL },  false },
+  { "arq", u8"Algerian Arabic",                     { "ar", NULL },  false },
+  { "ars", u8"Najdi Arabic",                        { "ar", NULL },  false },
+  { "ary", u8"Moroccan Arabic",                     { "ar", NULL },  false },
+  { "arz", u8"Egyptian Arabic",                     { "ar", NULL },  false },
+  { "ase", u8"American Sign Language",              { "sgn", NULL }, false },
+  { "asf", u8"Australian Sign Language",            { "sgn", NULL }, false },
+  { "asp", u8"Algerian Sign Language",              { "sgn", NULL }, false },
+  { "asq", u8"Austrian Sign Language",              { "sgn", NULL }, false },
+  { "asw", u8"Australian Aborigines Sign Language", { "sgn", NULL }, false },
+  { "auz", u8"Uzbeki Arabic",                       { "ar", NULL },  false },
+  { "avl", u8"Eastern Egyptian Bedawi Arabic",      { "ar", NULL },  false },
+  { "ayh", u8"Hadrami Arabic",                      { "ar", NULL },  false },
+  { "ayl", u8"Libyan Arabic",                       { "ar", NULL },  false },
+  { "ayn", u8"Sanaani Arabic",                      { "ar", NULL },  false },
+  { "ayp", u8"North Mesopotamian Arabic",           { "ar", NULL },  false },
+  { "bbz", u8"Babalia Creole Arabic",               { "ar", NULL },  true  },
+  { "bfi", u8"British Sign Language",               { "sgn", NULL }, false },
+  { "bfk", u8"Ban Khor Sign Language",              { "sgn", NULL }, false },
+  { "bjn", u8"Banjar",                              { "ms", NULL },  false },
+  { "bog", u8"Bamako Sign Language",                { "sgn", NULL }, false },
+  { "bqn", u8"Bulgarian Sign Language",             { "sgn", NULL }, false },
+  { "bqy", u8"Bengkala Sign Language",              { "sgn", NULL }, false },
+  { "btj", u8"Bacanese Malay",                      { "ms", NULL },  false },
+  { "bve", u8"Berau Malay",                         { "ms", NULL },  false },
+  { "bvl", u8"Bolivian Sign Language",              { "sgn", NULL }, false },
+  { "bvu", u8"Bukit Malay",                         { "ms", NULL },  false },
+  { "bzs", u8"Brazilian Sign Language",             { "sgn", NULL }, false },
+  { "cdo", u8"Min Dong Chinese",                    { "zh", NULL },  false },
+  { "cds", u8"Chadian Sign Language",               { "sgn", NULL }, false },
+  { "cjy", u8"Jinyu Chinese",                       { "zh", NULL },  false },
+  { "cmn", u8"Mandarin Chinese",                    { "zh", NULL },  false },
+  { "cnp", u8"Northern Pinghua",                    { "zh", NULL },  false },
+  { "coa", u8"Cocos Islands Malay",                 { "ms", NULL },  false },
+  { "cpx", u8"Pu-Xian Chinese",                     { "zh", NULL },  false },
+  { "csc", u8"Llengua de Signes Catalana",          { "sgn", NULL }, false },
+  { "csd", u8"Chiangmai Sign Language",             { "sgn", NULL }, false },
+  { "cse", u8"Czech Sign Language",                 { "sgn", NULL }, false },
+  { "csf", u8"Cuba Sign Language",                  { "sgn", NULL }, false },
+  { "csg", u8"Chilean Sign Language",               { "sgn", NULL }, false },
+  { "csl", u8"Chinese Sign Language",               { "sgn", NULL }, false },
+  { "csn", u8"Colombian Sign Language",             { "sgn", NULL }, false },
+  { "csp", u8"Southern Pinghua",                    { "zh", NULL },  false },
+  { "csq", u8"Croatia Sign Language",               { "sgn", NULL }, false },
+  { "csr", u8"Costa Rican Sign Language",           { "sgn", NULL }, false },
+  { "csx", u8"Cambodian Sign Language",             { "sgn", NULL }, false },
+  { "czh", u8"Huizhou Chinese",                     { "zh", NULL },  false },
+  { "czo", u8"Min Zhong Chinese",                   { "zh", NULL },  false },
+  { "doq", u8"Dominican Sign Language",             { "sgn", NULL }, false },
+  { "dse", u8"Dutch Sign Language",                 { "sgn", NULL }, false },
+  { "dsl", u8"Danish Sign Language",                { "sgn", NULL }, false },
+  { "dsz", u8"Mardin Sign Language",                { "sgn", NULL }, false },
+  { "dup", u8"Duano",                               { "ms", NULL },  false },
+  { "ecs", u8"Ecuadorian Sign Language",            { "sgn", NULL }, false },
+  { "ehs", u8"Miyakubo Sign Language",              { "sgn", NULL }, false },
+  { "esl", u8"Egypt Sign Language",                 { "sgn", NULL }, false },
+  { "esn", u8"Salvadoran Sign Language",            { "sgn", NULL }, false },
+  { "eso", u8"Estonian Sign Language",              { "sgn", NULL }, false },
+  { "eth", u8"Ethiopian Sign Language",             { "sgn", NULL }, false },
+  { "fcs", u8"Quebec Sign Language",                { "sgn", NULL }, false },
+  { "fse", u8"Finnish Sign Language",               { "sgn", NULL }, false },
+  { "fsl", u8"French Sign Language",                { "sgn", NULL }, false },
+  { "fss", u8"suomenruotsalainen viittomakieli",    { "sgn", NULL }, false },
+  { "gan", u8"Gan Chinese",                         { "zh", NULL },  false },
+  { "gds", u8"Ghandruk Sign Language",              { "sgn", NULL }, false },
+  { "gom", u8"Goan Konkani",                        { "kok", NULL }, false },
+  { "gse", u8"Ghanaian Sign Language",              { "sgn", NULL }, false },
+  { "gsg", u8"German Sign Language",                { "sgn", NULL }, false },
+  { "gsm", u8"Guatemalan Sign Language",            { "sgn", NULL }, false },
+  { "gss", u8"Greek Sign Language",                 { "sgn", NULL }, false },
+  { "gus", u8"Guinean Sign Language",               { "sgn", NULL }, false },
+  { "hab", u8"Hanoi Sign Language",                 { "sgn", NULL }, false },
+  { "haf", u8"Haiphong Sign Language",              { "sgn", NULL }, false },
+  { "hak", u8"Hakka Chinese",                       { "zh", NULL },  false },
+  { "hds", u8"Honduras Sign Language",              { "sgn", NULL }, false },
+  { "hji", u8"Haji",                                { "ms", NULL },  false },
+  { "hks", u8"Heung Kong Sau Yue",                  { "sgn", NULL }, false },
+  { "hos", u8"Ho Chi Minh City Sign Language",      { "sgn", NULL }, false },
+  { "hps", u8"Hawai'i Pidgin Sign Language",        { "sgn", NULL }, false },
+  { "hsh", u8"Hungarian Sign Language",             { "sgn", NULL }, false },
+  { "hsl", u8"Hausa Sign Language",                 { "sgn", NULL }, false },
+  { "hsn", u8"Xiang Chinese",                       { "zh", NULL },  false },
+  { "icl", u8"Icelandic Sign Language",             { "sgn", NULL }, false },
+  { "iks", u8"Inuit Sign Language",                 { "sgn", NULL }, false },
+  { "ils", u8"International Sign",                  { "sgn", NULL }, false },
+  { "inl", u8"Indonesian Sign Language",            { "sgn", NULL }, false },
+  { "ins", u8"Indian Sign Language",                { "sgn", NULL }, false },
+  { "ise", u8"Italian Sign Language",               { "sgn", NULL }, false },
+  { "isg", u8"Irish Sign Language",                 { "sgn", NULL }, false },
+  { "isr", u8"Israeli Sign Language",               { "sgn", NULL }, false },
+  { "jak", u8"Jakun",                               { "ms", NULL },  false },
+  { "jax", u8"Jambi Malay",                         { "ms", NULL },  false },
+  { "jcs", u8"Jamaican Country Sign Language",      { "sgn", NULL }, false },
+  { "jhs", u8"Jhankot Sign Language",               { "sgn", NULL }, false },
+  { "jks", u8"Amami Koniya Sign Language",          { "sgn", NULL }, false },
+  { "jls", u8"Jamaican Sign Language",              { "sgn", NULL }, false },
+  { "jos", u8"Jordanian Sign Language",             { "sgn", NULL }, false },
+  { "jsl", u8"Japanese Sign Language",              { "sgn", NULL }, false },
+  { "jus", u8"Jumla Sign Language",                 { "sgn", NULL }, false },
+  { "kgi", u8"Selangor Sign Language",              { "sgn", NULL }, false },
+  { "knn", u8"Konkani (individual language)",       { "kok", NULL }, false },
+  { "kvb", u8"Kubu",                                { "ms", NULL },  false },
+  { "kvk", u8"Korean Sign Language",                { "sgn", NULL }, false },
+  { "kvr", u8"Kerinci",                             { "ms", NULL },  false },
+  { "kxd", u8"Brunei",                              { "ms", NULL },  false },
+  { "lbs", u8"Libyan Sign Language",                { "sgn", NULL }, false },
+  { "lce", u8"Sekak",                               { "ms", NULL },  false },
+  { "lcf", u8"Lubu",                                { "ms", NULL },  false },
+  { "liw", u8"Col",                                 { "ms", NULL },  false },
+  { "lls", u8"Lithuanian Sign Language",            { "sgn", NULL }, false },
+  { "lsb", u8"Langue des Signes Burundaise",        { "sgn", NULL }, false },
+  { "lsc", u8"Lengua de señas Albarradas",          { "sgn", NULL }, false },
+  { "lsg", u8"Lyons Sign Language",                 { "sgn", NULL }, true  },
+  { "lsl", u8"Latvian Sign Language",               { "sgn", NULL }, false },
+  { "lsn", u8"Tibetan Sign Language",               { "sgn", NULL }, false },
+  { "lso", u8"Laos Sign Language",                  { "sgn", NULL }, false },
+  { "lsp", u8"Lengua de Señas Panameñas",           { "sgn", NULL }, false },
+  { "lst", u8"Trinidad and Tobago Sign Language",   { "sgn", NULL }, false },
+  { "lsv", u8"Sivia Sign Language",                 { "sgn", NULL }, false },
+  { "lsw", u8"Langue des Signes Seychelloise",      { "sgn", NULL }, false },
+  { "lsy", u8"Mauritian Sign Language",             { "sgn", NULL }, false },
+  { "ltg", u8"Latgalian",                           { "lv", NULL },  false },
+  { "lvs", u8"Standard Latvian",                    { "lv", NULL },  false },
+  { "lws", u8"Malawian Sign Language",              { "sgn", NULL }, false },
+  { "lzh", u8"Literary Chinese",                    { "zh", NULL },  false },
+  { "max", u8"North Moluccan Malay",                { "ms", NULL },  false },
+  { "mdl", u8"Maltese Sign Language",               { "sgn", NULL }, false },
+  { "meo", u8"Kedah Malay",                         { "ms", NULL },  false },
+  { "mfa", u8"Pattani Malay",                       { "ms", NULL },  false },
+  { "mfb", u8"Bangka",                              { "ms", NULL },  false },
+  { "mfs", u8"Mexican Sign Language",               { "sgn", NULL }, false },
+  { "min", u8"Minangkabau",                         { "ms", NULL },  false },
+  { "mnp", u8"Min Bei Chinese",                     { "zh", NULL },  false },
+  { "mqg", u8"Kota Bangun Kutai Malay",             { "ms", NULL },  false },
+  { "mre", u8"Martha's Vineyard Sign Language",     { "sgn", NULL }, false },
+  { "msd", u8"Yucatec Maya Sign Language",          { "sgn", NULL }, false },
+  { "msi", u8"Sabah Malay",                         { "ms", NULL },  false },
+  { "msr", u8"Mongolian Sign Language",             { "sgn", NULL }, false },
+  { "mui", u8"Musi",                                { "ms", NULL },  false },
+  { "mzc", u8"Madagascar Sign Language",            { "sgn", NULL }, false },
+  { "mzg", u8"Monastic Sign Language",              { "sgn", NULL }, false },
+  { "mzy", u8"Mozambican Sign Language",            { "sgn", NULL }, false },
+  { "nan", u8"Min Nan Chinese",                     { "zh", NULL },  false },
+  { "nbs", u8"Namibian Sign Language",              { "sgn", NULL }, false },
+  { "ncs", u8"Nicaraguan Sign Language",            { "sgn", NULL }, false },
+  { "nsi", u8"Nigerian Sign Language",              { "sgn", NULL }, false },
+  { "nsl", u8"Norwegian Sign Language",             { "sgn", NULL }, false },
+  { "nsp", u8"Nepalese Sign Language",              { "sgn", NULL }, false },
+  { "nsr", u8"Maritime Sign Language",              { "sgn", NULL }, false },
+  { "nzs", u8"New Zealand Sign Language",           { "sgn", NULL }, false },
+  { "okl", u8"Old Kentish Sign Language",           { "sgn", NULL }, false },
+  { "orn", u8"Orang Kanaq",                         { "ms", NULL },  false },
+  { "ors", u8"Orang Seletar",                       { "ms", NULL },  false },
+  { "pel", u8"Pekal",                               { "ms", NULL },  false },
+  { "pga", u8"Sudanese Creole Arabic",              { "ar", NULL },  false },
+  { "pgz", u8"Papua New Guinean Sign Language",     { "sgn", NULL }, false },
+  { "pks", u8"Pakistan Sign Language",              { "sgn", NULL }, false },
+  { "prl", u8"Peruvian Sign Language",              { "sgn", NULL }, false },
+  { "prz", u8"Providencia Sign Language",           { "sgn", NULL }, false },
+  { "psc", u8"Persian Sign Language",               { "sgn", NULL }, false },
+  { "psd", u8"Plains Indian Sign Language",         { "sgn", NULL }, false },
+  { "pse", u8"Central Malay",                       { "ms", NULL },  false },
+  { "psg", u8"Penang Sign Language",                { "sgn", NULL }, false },
+  { "psl", u8"Puerto Rican Sign Language",          { "sgn", NULL }, false },
+  { "pso", u8"Polish Sign Language",                { "sgn", NULL }, false },
+  { "psp", u8"Philippine Sign Language",            { "sgn", NULL }, false },
+  { "psr", u8"Portuguese Sign Language",            { "sgn", NULL }, false },
+  { "pys", u8"Lengua de Señas del Paraguay",        { "sgn", NULL }, false },
+  { "rib", u8"Bribri Sign Language",                { "sgn", NULL }, false },
+  { "rms", u8"Romanian Sign Language",              { "sgn", NULL }, false },
+  { "rnb", u8"Brunca Sign Language",                { "sgn", NULL }, false },
+  { "rsi", u8"Rennellese Sign Language",            { "sgn", NULL }, true  },
+  { "rsl", u8"Russian Sign Language",               { "sgn", NULL }, false },
+  { "rsm", u8"Miriwoong Sign Language",             { "sgn", NULL }, false },
+  { "rsn", u8"Rwandan Sign Language",               { "sgn", NULL }, false },
+  { "sdl", u8"Saudi Arabian Sign Language",         { "sgn", NULL }, false },
+  { "sfb", u8"French Belgian Sign Language",        { "sgn", NULL }, false },
+  { "sfs", u8"South African Sign Language",         { "sgn", NULL }, false },
+  { "sgg", u8"Swiss-German Sign Language",          { "sgn", NULL }, false },
+  { "sgx", u8"Sierra Leone Sign Language",          { "sgn", NULL }, false },
+  { "shu", u8"Chadian Arabic",                      { "ar", NULL },  false },
+  { "slf", u8"Swiss-Italian Sign Language",         { "sgn", NULL }, false },
+  { "sls", u8"Singapore Sign Language",             { "sgn", NULL }, false },
+  { "sqk", u8"Albanian Sign Language",              { "sgn", NULL }, false },
+  { "sqs", u8"Sri Lankan Sign Language",            { "sgn", NULL }, false },
+  { "sqx", u8"Kufr Qassem Sign Language (KQSL)",    { "sgn", NULL }, false },
+  { "ssh", u8"Shihhi Arabic",                       { "ar", NULL },  false },
+  { "ssp", u8"Spanish Sign Language",               { "sgn", NULL }, false },
+  { "ssr", u8"Swiss-French Sign Language",          { "sgn", NULL }, false },
+  { "svk", u8"Slovakian Sign Language",             { "sgn", NULL }, false },
+  { "swc", u8"Congo Swahili",                       { "sw", NULL },  false },
+  { "swh", u8"Kiswahili",                           { "sw", NULL },  false },
+  { "swl", u8"Swedish Sign Language",               { "sgn", NULL }, false },
+  { "syy", u8"Al-Sayyid Bedouin Sign Language",     { "sgn", NULL }, false },
+  { "szs", u8"Solomon Islands Sign Language",       { "sgn", NULL }, false },
+  { "tmw", u8"Temuan",                              { "ms", NULL },  false },
+  { "tse", u8"Tunisian Sign Language",              { "sgn", NULL }, false },
+  { "tsm", u8"Türk İşaret Dili",                    { "sgn", NULL }, false },
+  { "tsq", u8"Thai Sign Language",                  { "sgn", NULL }, false },
+  { "tss", u8"Taiwan Sign Language",                { "sgn", NULL }, false },
+  { "tsy", u8"Tebul Sign Language",                 { "sgn", NULL }, false },
+  { "tza", u8"Tanzanian Sign Language",             { "sgn", NULL }, false },
+  { "ugn", u8"Ugandan Sign Language",               { "sgn", NULL }, false },
+  { "ugy", u8"Uruguayan Sign Language",             { "sgn", NULL }, false },
+  { "ukl", u8"Ukrainian Sign Language",             { "sgn", NULL }, false },
+  { "uks", u8"Kaapor Sign Language",                { "sgn", NULL }, false },
+  { "urk", u8"Urak Lawoi'",                         { "ms", NULL },  false },
+  { "uzn", u8"Northern Uzbek",                      { "uz", NULL },  false },
+  { "uzs", u8"Southern Uzbek",                      { "uz", NULL },  false },
+  { "vgt", u8"Flemish Sign Language",               { "sgn", NULL }, false },
+  { "vkk", u8"Kaur",                                { "ms", NULL },  false },
+  { "vkt", u8"Tenggarong Kutai Malay",              { "ms", NULL },  false },
+  { "vsi", u8"Moldova Sign Language",               { "sgn", NULL }, false },
+  { "vsl", u8"Venezuelan Sign Language",            { "sgn", NULL }, false },
+  { "vsv", u8"Llengua de signes valenciana",        { "sgn", NULL }, false },
+  { "wbs", u8"West Bengal Sign Language",           { "sgn", NULL }, false },
+  { "wuu", u8"Wu Chinese",                          { "zh", NULL },  false },
+  { "xki", u8"Kenyan Sign Language",                { "sgn", NULL }, false },
+  { "xml", u8"Malaysian Sign Language",             { "sgn", NULL }, false },
+  { "xmm", u8"Manado Malay",                        { "ms", NULL },  false },
+  { "xms", u8"Moroccan Sign Language",              { "sgn", NULL }, false },
+  { "yds", u8"Yiddish Sign Language",               { "sgn", NULL }, true  },
+  { "ygs", u8"Yolŋu Sign Language",                 { "sgn", NULL }, false },
+  { "yhs", u8"Yan-nhaŋu Sign Language",             { "sgn", NULL }, false },
+  { "ysl", u8"Yugoslavian Sign Language",           { "sgn", NULL }, false },
+  { "ysm", u8"Myanmar Sign Language",               { "sgn", NULL }, false },
+  { "yue", u8"Cantonese",                           { "zh", NULL },  false },
+  { "zib", u8"Zimbabwe Sign Language",              { "sgn", NULL }, false },
+  { "zlm", u8"Malay (individual language)",         { "ms", NULL },  false },
+  { "zmi", u8"Negeri Sembilan Malay",               { "ms", NULL },  false },
+  { "zsl", u8"Zambian Sign Language",               { "sgn", NULL }, false },
+  { "zsm", u8"Standard Malay",                      { "ms", NULL },  false },
+};
+
+static extlang_variant_init_t s_variants_init[] = {
+  { "1606nict", u8"Late Middle French (to 1606)",                                   { "frm", NULL },                                                                                                                                        false },
+  { "1694acad", u8"Early Modern French",                                            { "fr", NULL },                                                                                                                                         false },
+  { "1901",     u8"Traditional German orthography",                                 { "de", NULL },                                                                                                                                         false },
+  { "1959acad", u8"\"Academic\" variant of Belarusian as codified in 1959",         { "be", NULL },                                                                                                                                         false },
+  { "1994",     u8"Standardized Resian orthography",                                { "sl-rozaj", "sl-rozaj-biske", "sl-rozaj-njiva", "sl-rozaj-osojs", "sl-rozaj-solba", NULL },                                                           false },
+  { "1996",     u8"German orthography of 1996",                                     { "de", NULL },                                                                                                                                         false },
+  { "abl1943",  u8"Orthographic formulation of 1943 - Official in Brazil",          { "pt-BR", NULL },                                                                                                                                      false },
+  { "akuapem",  u8"Akuapem Twi",                                                    { "tw", NULL },                                                                                                                                         false },
+  { "alalc97",  u8"ALA-LC Romanization, 1997 edition",                              { NULL },                                                                                                                                               false },
+  { "aluku",    u8"Boni dialect",                                                   { "djk", NULL },                                                                                                                                        false },
+  { "ao1990",   u8"Portuguese Language Orthographic Agreement of 1990",             { "gl", "pt", NULL },                                                                                                                                   false },
+  { "aranes",   u8"Aranese",                                                        { "oc", NULL },                                                                                                                                         false },
+  { "arevela",  u8"Eastern Armenian",                                               { "hy", NULL },                                                                                                                                         true  },
+  { "arevmda",  u8"Western Armenian",                                               { "hy", NULL },                                                                                                                                         true  },
+  { "arkaika",  u8"Arkaika Esperanto",                                              { "eo", NULL },                                                                                                                                         false },
+  { "asante",   u8"Ashanti Twi",                                                    { "tw", NULL },                                                                                                                                         false },
+  { "auvern",   u8"Auvergnat",                                                      { "oc", NULL },                                                                                                                                         false },
+  { "baku1926", u8"Unified Turkic Latin Alphabet (Historical)",                     { "az", "ba", "crh", "kk", "krc", "ky", "sah", "tk", "tt", "uz", NULL },                                                                                false },
+  { "balanka",  u8"The Balanka dialect of Anii",                                    { "blo", NULL },                                                                                                                                        false },
+  { "barla",    u8"The Barlavento dialect group of Kabuverdianu",                   { "kea", NULL },                                                                                                                                        false },
+  { "basiceng", u8"Basic English",                                                  { "en", NULL },                                                                                                                                         false },
+  { "bauddha",  u8"Buddhist Hybrid Sanskrit",                                       { "sa", NULL },                                                                                                                                         false },
+  { "biscayan", u8"Biscayan dialect of Basque",                                     { "eu", NULL },                                                                                                                                         false },
+  { "biske",    u8"The Bila dialect of Resian",                                     { "sl-rozaj", NULL },                                                                                                                                   false },
+  { "bohoric",  u8"Slovene in Bohorič alphabet",                                    { "sl", NULL },                                                                                                                                         false },
+  { "boont",    u8"Boontling",                                                      { "en", NULL },                                                                                                                                         false },
+  { "bornholm", u8"Bornholmsk",                                                     { "da", NULL },                                                                                                                                         false },
+  { "cisaup",   u8"Cisalpine",                                                      { "oc", NULL },                                                                                                                                         false },
+  { "colb1945", u8"Portuguese-Brazilian Orthographic Convention of 1945",           { "pt", NULL },                                                                                                                                         false },
+  { "cornu",    u8"Anglo-Cornish",                                                  { "en", NULL },                                                                                                                                         false },
+  { "creiss",   u8"Occitan variants of the Croissant area",                         { "oc", NULL },                                                                                                                                         false },
+  { "dajnko",   u8"Slovene in Dajnko alphabet",                                     { "sl", NULL },                                                                                                                                         false },
+  { "ekavsk",   u8"Serbian with Ekavian pronunciation",                             { "sr", "sr-Cyrl", "sr-Latn", NULL },                                                                                                                   false },
+  { "emodeng",  u8"Early Modern English (1500-1700)",                               { "en", NULL },                                                                                                                                         false },
+  { "fonipa",   u8"International Phonetic Alphabet",                                { NULL },                                                                                                                                               false },
+  { "fonkirsh", u8"Kirshenbaum Phonetic Alphabet",                                  { NULL },                                                                                                                                               false },
+  { "fonnapa",  u8"Americanist Phonetic Notation",                                  { NULL },                                                                                                                                               false },
+  { "fonupa",   u8"Uralic Phonetic Alphabet",                                       { NULL },                                                                                                                                               false },
+  { "fonxsamp", u8"X-SAMPA transcription",                                          { NULL },                                                                                                                                               false },
+  { "gallo",    u8"Gallo",                                                          { "fr", NULL },                                                                                                                                         false },
+  { "gascon",   u8"Gascon",                                                         { "oc", NULL },                                                                                                                                         false },
+  { "grclass",  u8"Classical Occitan orthography",                                  { "oc", "oc-aranes", "oc-auvern", "oc-cisaup", "oc-creiss", "oc-gascon", "oc-lemosin", "oc-lengadoc", "oc-nicard", "oc-provenc", "oc-vivaraup", NULL }, false },
+  { "grital",   u8"Italian-inspired Occitan orthography",                           { "oc", "oc-cisaup", "oc-nicard", "oc-provenc", NULL },                                                                                                 false },
+  { "grmistr",  u8"Mistralian or Mistralian-inspired Occitan orthography",          { "oc", "oc-aranes", "oc-auvern", "oc-cisaup", "oc-creiss", "oc-gascon", "oc-lemosin", "oc-lengadoc", "oc-nicard", "oc-provenc", "oc-vivaraup", NULL }, false },
+  { "hepburn",  u8"Hepburn romanization",                                           { "ja-Latn", NULL },                                                                                                                                    false },
+  { "heploc",   u8"Hepburn romanization, Library of Congress method",               { "ja-Latn-hepburn", NULL },                                                                                                                            true  },
+  { "hognorsk", u8"Norwegian in Høgnorsk (High Norwegian) orthography",             { "nn", NULL },                                                                                                                                         false },
+  { "hsistemo", u8"Standard H-system orthographic fallback for spelling Esperanto", { "eo", NULL },                                                                                                                                         false },
+  { "ijekavsk", u8"Serbian with Ijekavian pronunciation",                           { "sr", "sr-Cyrl", "sr-Latn", NULL },                                                                                                                   false },
+  { "itihasa",  u8"Epic Sanskrit",                                                  { "sa", NULL },                                                                                                                                         false },
+  { "ivanchov", u8"Bulgarian in 1899 orthography",                                  { "bg", NULL },                                                                                                                                         false },
+  { "jauer",    u8"Jauer dialect of Romansh",                                       { "rm", NULL },                                                                                                                                         false },
+  { "jyutping", u8"Jyutping Cantonese Romanization",                                { "yue", NULL },                                                                                                                                        false },
+  { "kkcor",    u8"Common Cornish orthography of Revived Cornish",                  { "kw", NULL },                                                                                                                                         false },
+  { "kociewie", u8"The Kociewie dialect of Polish",                                 { "pl", NULL },                                                                                                                                         false },
+  { "kscor",    u8"Kernowek Standard",                                              { "kw", NULL },                                                                                                                                         false },
+  { "laukika",  u8"Classical Sanskrit",                                             { "sa", NULL },                                                                                                                                         false },
+  { "lemosin",  u8"Limousin",                                                       { "oc", NULL },                                                                                                                                         false },
+  { "lengadoc", u8"Languedocien",                                                   { "oc", NULL },                                                                                                                                         false },
+  { "lipaw",    u8"The Lipovec dialect of Resian",                                  { "sl-rozaj", NULL },                                                                                                                                   false },
+  { "luna1918", u8"Post-1917 Russian orthography",                                  { "ru", NULL },                                                                                                                                         false },
+  { "metelko",  u8"Slovene in Metelko alphabet",                                    { "sl", NULL },                                                                                                                                         false },
+  { "monoton",  u8"Monotonic Greek",                                                { "el", NULL },                                                                                                                                         false },
+  { "ndyuka",   u8"Aukan dialect",                                                  { "djk", NULL },                                                                                                                                        false },
+  { "nedis",    u8"Nadiza dialect",                                                 { "sl", NULL },                                                                                                                                         false },
+  { "newfound", u8"Newfoundland English",                                           { "en-CA", NULL },                                                                                                                                      false },
+  { "nicard",   u8"Niçard",                                                         { "oc", NULL },                                                                                                                                         false },
+  { "njiva",    u8"The Njiva dialect of Resian",                                    { "sl-rozaj", NULL },                                                                                                                                   false },
+  { "nulik",    u8"Modern Volapük",                                                 { "vo", NULL },                                                                                                                                         false },
+  { "osojs",    u8"The Osojane dialect of Resian",                                  { "sl-rozaj", NULL },                                                                                                                                   false },
+  { "oxendict", u8"Oxford English Dictionary spelling",                             { "en", NULL },                                                                                                                                         false },
+  { "pahawh2",  u8"Pahawh Hmong Second Stage Reduced orthography",                  { "hnj", "mww", NULL },                                                                                                                                 false },
+  { "pahawh3",  u8"Pahawh Hmong Third Stage Reduced orthography",                   { "hnj", "mww", NULL },                                                                                                                                 false },
+  { "pahawh4",  u8"Pahawh Hmong Final Version orthography",                         { "hnj", "mww", NULL },                                                                                                                                 false },
+  { "pamaka",   u8"Pamaka dialect",                                                 { "djk", NULL },                                                                                                                                        false },
+  { "peano",    u8"Interlingua de Peano",                                           { "la", NULL },                                                                                                                                         false },
+  { "petr1708", u8"Petrine orthography",                                            { "ru", NULL },                                                                                                                                         false },
+  { "pinyin",   u8"Pinyin romanization",                                            { "bo-Latn", "zh-Latn", NULL },                                                                                                                         false },
+  { "polyton",  u8"Polytonic Greek",                                                { "el", NULL },                                                                                                                                         false },
+  { "provenc",  u8"Provençal",                                                      { "oc", NULL },                                                                                                                                         false },
+  { "puter",    u8"Puter idiom of Romansh",                                         { "rm", NULL },                                                                                                                                         false },
+  { "rigik",    u8"Classic Volapük",                                                { "vo", NULL },                                                                                                                                         false },
+  { "rozaj",    u8"Rezijan",                                                        { "sl", NULL },                                                                                                                                         false },
+  { "rumgr",    u8"Rumantsch Grischun",                                             { "rm", NULL },                                                                                                                                         false },
+  { "scotland", u8"Scottish Standard English",                                      { "en", NULL },                                                                                                                                         false },
+  { "scouse",   u8"Scouse",                                                         { "en", NULL },                                                                                                                                         false },
+  { "simple",   u8"Simplified form",                                                { NULL },                                                                                                                                               false },
+  { "solba",    u8"The Solbica dialect of Resian",                                  { "sl-rozaj", NULL },                                                                                                                                   false },
+  { "sotav",    u8"The Sotavento dialect group of Kabuverdianu",                    { "kea", NULL },                                                                                                                                        false },
+  { "spanglis", u8"Spanglish",                                                      { "en", "es", NULL },                                                                                                                                   false },
+  { "surmiran", u8"Surmiran idiom of Romansh",                                      { "rm", NULL },                                                                                                                                         false },
+  { "sursilv",  u8"Sursilvan idiom of Romansh",                                     { "rm", NULL },                                                                                                                                         false },
+  { "sutsilv",  u8"Sutsilvan idiom of Romansh",                                     { "rm", NULL },                                                                                                                                         false },
+  { "synnejyl", u8"South Jutish",                                                   { "da", NULL },                                                                                                                                         false },
+  { "tarask",   u8"Belarusian in Taraskievica orthography",                         { "be", NULL },                                                                                                                                         false },
+  { "tongyong", u8"Tongyong Pinyin romanization",                                   { "zh-Latn", NULL },                                                                                                                                    false },
+  { "tunumiit", u8"Østgrønlandsk",                                                  { "kl", NULL },                                                                                                                                         false },
+  { "uccor",    u8"Unified Cornish orthography of Revived Cornish",                 { "kw", NULL },                                                                                                                                         false },
+  { "ucrcor",   u8"Unified Cornish Revised orthography of Revived Cornish",         { "kw", NULL },                                                                                                                                         false },
+  { "ulster",   u8"Ulster dialect of Scots",                                        { "sco", NULL },                                                                                                                                        false },
+  { "unifon",   u8"Unifon phonetic alphabet",                                       { "en", "hup", "kyh", "tol", "yur", NULL },                                                                                                             false },
+  { "vaidika",  u8"Vedic Sanskrit",                                                 { "sa", NULL },                                                                                                                                         false },
+  { "valencia", u8"Valencian",                                                      { "ca", NULL },                                                                                                                                         false },
+  { "vallader", u8"Vallader idiom of Romansh",                                      { "rm", NULL },                                                                                                                                         false },
+  { "vecdruka", u8"Latvian orthography used before 1920s (\"vecā druka\")",         { "lv", NULL },                                                                                                                                         false },
+  { "vivaraup", u8"Vivaro-Alpine",                                                  { "oc", NULL },                                                                                                                                         false },
+  { "wadegile", u8"Wade-Giles romanization",                                        { "zh-Latn", NULL },                                                                                                                                    false },
+  { "xsistemo", u8"Standard X-system orthographic fallback for spelling Esperanto", { "eo", NULL },                                                                                                                                         false },
+};
+
+static extlang_variant_init_t s_grandfathered_init[] = {
+  { "art-lojban",  u8"Lojban",                                                                                         { NULL }, true },
+  { "cel-gaulish", u8"Gaulish",                                                                                        { NULL }, true },
+  { "en-GB-oed",   u8"English, Oxford English Dictionary spelling",                                                    { NULL }, true },
+  { "i-ami",       u8"Amis",                                                                                           { NULL }, true },
+  { "i-bnn",       u8"Bunun",                                                                                          { NULL }, true },
+  { "i-default",   u8"Default Language",                                                                               { NULL }, true },
+  { "i-enochian",  u8"Enochian",                                                                                       { NULL }, true },
+  { "i-hak",       u8"Hakka",                                                                                          { NULL }, true },
+  { "i-klingon",   u8"Klingon",                                                                                        { NULL }, true },
+  { "i-lux",       u8"Luxembourgish",                                                                                  { NULL }, true },
+  { "i-mingo",     u8"Mingo",                                                                                          { NULL }, true },
+  { "i-navajo",    u8"Navajo",                                                                                         { NULL }, true },
+  { "i-pwn",       u8"Paiwan",                                                                                         { NULL }, true },
+  { "i-tao",       u8"Tao",                                                                                            { NULL }, true },
+  { "i-tay",       u8"Tayal",                                                                                          { NULL }, true },
+  { "i-tsu",       u8"Tsou",                                                                                           { NULL }, true },
+  { "no-bok",      u8"Norwegian Bokmal",                                                                               { NULL }, true },
+  { "no-nyn",      u8"Norwegian Nynorsk",                                                                              { NULL }, true },
+  { "sgn-BE-FR",   u8"Belgian-French Sign Language",                                                                   { NULL }, true },
+  { "sgn-BE-NL",   u8"Belgian-Flemish Sign Language",                                                                  { NULL }, true },
+  { "sgn-CH-DE",   u8"Swiss German Sign Language",                                                                     { NULL }, true },
+  { "zh-guoyu",    u8"Mandarin or Standard Chinese",                                                                   { NULL }, true },
+  { "zh-hakka",    u8"Hakka",                                                                                          { NULL }, true },
+  { "zh-min",      u8"Min, Fuzhou, Hokkien, Amoy, or Taiwanese",                                                       { NULL }, true },
+  { "zh-min-nan",  u8"Minnan, Hokkien, Amoy, Taiwanese, Southern Min, Southern Fujian, Hoklo, Southern Fukien, Ho-lo", { NULL }, true },
+  { "zh-xiang",    u8"Xiang or Hunanese",                                                                              { NULL }, true },
+};
+
+static suppress_script_init_t s_suppress_scripts_init[] = {
+  { "ab",  "Cyrl" },
+  { "af",  "Latn" },
+  { "am",  "Ethi" },
+  { "ar",  "Arab" },
+  { "as",  "Beng" },
+  { "ay",  "Latn" },
+  { "be",  "Cyrl" },
+  { "bg",  "Cyrl" },
+  { "bn",  "Beng" },
+  { "bs",  "Latn" },
+  { "ca",  "Latn" },
+  { "ch",  "Latn" },
+  { "cs",  "Latn" },
+  { "cy",  "Latn" },
+  { "da",  "Latn" },
+  { "de",  "Latn" },
+  { "dsb", "Latn" },
+  { "dv",  "Thaa" },
+  { "dz",  "Tibt" },
+  { "el",  "Grek" },
+  { "en",  "Latn" },
+  { "eo",  "Latn" },
+  { "es",  "Latn" },
+  { "et",  "Latn" },
+  { "eu",  "Latn" },
+  { "fa",  "Arab" },
+  { "fi",  "Latn" },
+  { "fj",  "Latn" },
+  { "fo",  "Latn" },
+  { "fr",  "Latn" },
+  { "frr", "Latn" },
+  { "frs", "Latn" },
+  { "fy",  "Latn" },
+  { "ga",  "Latn" },
+  { "gl",  "Latn" },
+  { "gn",  "Latn" },
+  { "gsw", "Latn" },
+  { "gu",  "Gujr" },
+  { "gv",  "Latn" },
+  { "he",  "Hebr" },
+  { "hi",  "Deva" },
+  { "hr",  "Latn" },
+  { "hsb", "Latn" },
+  { "ht",  "Latn" },
+  { "hu",  "Latn" },
+  { "hy",  "Armn" },
+  { "id",  "Latn" },
+  { "in",  "Latn" },
+  { "is",  "Latn" },
+  { "it",  "Latn" },
+  { "iw",  "Hebr" },
+  { "ja",  "Jpan" },
+  { "ka",  "Geor" },
+  { "kk",  "Cyrl" },
+  { "kl",  "Latn" },
+  { "km",  "Khmr" },
+  { "kn",  "Knda" },
+  { "ko",  "Kore" },
+  { "kok", "Deva" },
+  { "la",  "Latn" },
+  { "lb",  "Latn" },
+  { "ln",  "Latn" },
+  { "lo",  "Laoo" },
+  { "lt",  "Latn" },
+  { "lv",  "Latn" },
+  { "mai", "Deva" },
+  { "men", "Latn" },
+  { "mg",  "Latn" },
+  { "mh",  "Latn" },
+  { "mk",  "Cyrl" },
+  { "ml",  "Mlym" },
+  { "mo",  "Latn" },
+  { "mr",  "Deva" },
+  { "ms",  "Latn" },
+  { "mt",  "Latn" },
+  { "my",  "Mymr" },
+  { "na",  "Latn" },
+  { "nb",  "Latn" },
+  { "nd",  "Latn" },
+  { "nds", "Latn" },
+  { "ne",  "Deva" },
+  { "niu", "Latn" },
+  { "nl",  "Latn" },
+  { "nn",  "Latn" },
+  { "no",  "Latn" },
+  { "nqo", "Nkoo" },
+  { "nr",  "Latn" },
+  { "nso", "Latn" },
+  { "ny",  "Latn" },
+  { "om",  "Latn" },
+  { "or",  "Orya" },
+  { "pa",  "Guru" },
+  { "pl",  "Latn" },
+  { "ps",  "Arab" },
+  { "pt",  "Latn" },
+  { "qu",  "Latn" },
+  { "rm",  "Latn" },
+  { "rn",  "Latn" },
+  { "ro",  "Latn" },
+  { "ru",  "Cyrl" },
+  { "rw",  "Latn" },
+  { "sg",  "Latn" },
+  { "si",  "Sinh" },
+  { "sk",  "Latn" },
+  { "sl",  "Latn" },
+  { "sm",  "Latn" },
+  { "so",  "Latn" },
+  { "sq",  "Latn" },
+  { "ss",  "Latn" },
+  { "st",  "Latn" },
+  { "sv",  "Latn" },
+  { "sw",  "Latn" },
+  { "ta",  "Taml" },
+  { "te",  "Telu" },
+  { "tem", "Latn" },
+  { "th",  "Thai" },
+  { "ti",  "Ethi" },
+  { "tkl", "Latn" },
+  { "tl",  "Latn" },
+  { "tmh", "Latn" },
+  { "tn",  "Latn" },
+  { "to",  "Latn" },
+  { "tpi", "Latn" },
+  { "tr",  "Latn" },
+  { "ts",  "Latn" },
+  { "tvl", "Latn" },
+  { "uk",  "Cyrl" },
+  { "ur",  "Arab" },
+  { "ve",  "Latn" },
+  { "vi",  "Latn" },
+  { "xh",  "Latn" },
+  { "yi",  "Hebr" },
+  { "zbl", "Blis" },
+  { "zu",  "Latn" },
+};
+
+static preferred_values_init_t s_preferred_values_init[] = {
+  { { "ja-Latn-hepburn-heploc", NULL, NULL, }, { NULL,             NULL, "alalc97", } },
+  { { "en-GB-oed",              NULL, NULL, }, { "en-GB-oxendict", NULL, NULL,      } },
+  { { "sgn-BE-FR",              NULL, NULL, }, { "sfb",            NULL, NULL,      } },
+  { { "sgn-BE-NL",              NULL, NULL, }, { "vgt",            NULL, NULL,      } },
+  { { "sgn-CH-DE",              NULL, NULL, }, { "sgg",            NULL, NULL,      } },
+  { { "zh-cmn-Hans",            NULL, NULL, }, { "cmn-Hans",       NULL, NULL,      } },
+  { { "zh-cmn-Hant",            NULL, NULL, }, { "cmn-Hant",       NULL, NULL,      } },
+  { { "zh-min-nan",             NULL, NULL, }, { "nan",            NULL, NULL,      } },
+  { { "ar-aao",                 NULL, NULL, }, { "aao",            NULL, NULL,      } },
+  { { "ar-abh",                 NULL, NULL, }, { "abh",            NULL, NULL,      } },
+  { { "ar-abv",                 NULL, NULL, }, { "abv",            NULL, NULL,      } },
+  { { "ar-acm",                 NULL, NULL, }, { "acm",            NULL, NULL,      } },
+  { { "ar-acq",                 NULL, NULL, }, { "acq",            NULL, NULL,      } },
+  { { "ar-acw",                 NULL, NULL, }, { "acw",            NULL, NULL,      } },
+  { { "ar-acx",                 NULL, NULL, }, { "acx",            NULL, NULL,      } },
+  { { "ar-acy",                 NULL, NULL, }, { "acy",            NULL, NULL,      } },
+  { { "ar-adf",                 NULL, NULL, }, { "adf",            NULL, NULL,      } },
+  { { "ar-aeb",                 NULL, NULL, }, { "aeb",            NULL, NULL,      } },
+  { { "ar-aec",                 NULL, NULL, }, { "aec",            NULL, NULL,      } },
+  { { "ar-afb",                 NULL, NULL, }, { "afb",            NULL, NULL,      } },
+  { { "ar-ajp",                 NULL, NULL, }, { "ajp",            NULL, NULL,      } },
+  { { "ar-apc",                 NULL, NULL, }, { "apc",            NULL, NULL,      } },
+  { { "ar-apd",                 NULL, NULL, }, { "apd",            NULL, NULL,      } },
+  { { "ar-arb",                 NULL, NULL, }, { "arb",            NULL, NULL,      } },
+  { { "ar-arq",                 NULL, NULL, }, { "arq",            NULL, NULL,      } },
+  { { "ar-ars",                 NULL, NULL, }, { "ars",            NULL, NULL,      } },
+  { { "ar-ary",                 NULL, NULL, }, { "ary",            NULL, NULL,      } },
+  { { "ar-arz",                 NULL, NULL, }, { "arz",            NULL, NULL,      } },
+  { { "ar-auz",                 NULL, NULL, }, { "auz",            NULL, NULL,      } },
+  { { "ar-avl",                 NULL, NULL, }, { "avl",            NULL, NULL,      } },
+  { { "ar-ayh",                 NULL, NULL, }, { "ayh",            NULL, NULL,      } },
+  { { "ar-ayl",                 NULL, NULL, }, { "ayl",            NULL, NULL,      } },
+  { { "ar-ayn",                 NULL, NULL, }, { "ayn",            NULL, NULL,      } },
+  { { "ar-ayp",                 NULL, NULL, }, { "ayp",            NULL, NULL,      } },
+  { { "ar-bbz",                 NULL, NULL, }, { "bbz",            NULL, NULL,      } },
+  { { "ar-pga",                 NULL, NULL, }, { "pga",            NULL, NULL,      } },
+  { { "ar-shu",                 NULL, NULL, }, { "shu",            NULL, NULL,      } },
+  { { "ar-ssh",                 NULL, NULL, }, { "ssh",            NULL, NULL,      } },
+  { { "art-lojban",             NULL, NULL, }, { "jbo",            NULL, NULL,      } },
+  { { "i-ami",                  NULL, NULL, }, { "ami",            NULL, NULL,      } },
+  { { "i-bnn",                  NULL, NULL, }, { "bnn",            NULL, NULL,      } },
+  { { "i-hak",                  NULL, NULL, }, { "hak",            NULL, NULL,      } },
+  { { "i-klingon",              NULL, NULL, }, { "tlh",            NULL, NULL,      } },
+  { { "i-lux",                  NULL, NULL, }, { "lb",             NULL, NULL,      } },
+  { { "i-navajo",               NULL, NULL, }, { "nv",             NULL, NULL,      } },
+  { { "i-pwn",                  NULL, NULL, }, { "pwn",            NULL, NULL,      } },
+  { { "i-tao",                  NULL, NULL, }, { "tao",            NULL, NULL,      } },
+  { { "i-tay",                  NULL, NULL, }, { "tay",            NULL, NULL,      } },
+  { { "i-tsu",                  NULL, NULL, }, { "tsu",            NULL, NULL,      } },
+  { { "kok-gom",                NULL, NULL, }, { "gom",            NULL, NULL,      } },
+  { { "kok-knn",                NULL, NULL, }, { "knn",            NULL, NULL,      } },
+  { { "lv-ltg",                 NULL, NULL, }, { "ltg",            NULL, NULL,      } },
+  { { "lv-lvs",                 NULL, NULL, }, { "lvs",            NULL, NULL,      } },
+  { { "ms-bjn",                 NULL, NULL, }, { "bjn",            NULL, NULL,      } },
+  { { "ms-btj",                 NULL, NULL, }, { "btj",            NULL, NULL,      } },
+  { { "ms-bve",                 NULL, NULL, }, { "bve",            NULL, NULL,      } },
+  { { "ms-bvu",                 NULL, NULL, }, { "bvu",            NULL, NULL,      } },
+  { { "ms-coa",                 NULL, NULL, }, { "coa",            NULL, NULL,      } },
+  { { "ms-dup",                 NULL, NULL, }, { "dup",            NULL, NULL,      } },
+  { { "ms-hji",                 NULL, NULL, }, { "hji",            NULL, NULL,      } },
+  { { "ms-jak",                 NULL, NULL, }, { "jak",            NULL, NULL,      } },
+  { { "ms-jax",                 NULL, NULL, }, { "jax",            NULL, NULL,      } },
+  { { "ms-kvb",                 NULL, NULL, }, { "kvb",            NULL, NULL,      } },
+  { { "ms-kvr",                 NULL, NULL, }, { "kvr",            NULL, NULL,      } },
+  { { "ms-kxd",                 NULL, NULL, }, { "kxd",            NULL, NULL,      } },
+  { { "ms-lce",                 NULL, NULL, }, { "lce",            NULL, NULL,      } },
+  { { "ms-lcf",                 NULL, NULL, }, { "lcf",            NULL, NULL,      } },
+  { { "ms-liw",                 NULL, NULL, }, { "liw",            NULL, NULL,      } },
+  { { "ms-max",                 NULL, NULL, }, { "max",            NULL, NULL,      } },
+  { { "ms-meo",                 NULL, NULL, }, { "meo",            NULL, NULL,      } },
+  { { "ms-mfa",                 NULL, NULL, }, { "mfa",            NULL, NULL,      } },
+  { { "ms-mfb",                 NULL, NULL, }, { "mfb",            NULL, NULL,      } },
+  { { "ms-min",                 NULL, NULL, }, { "min",            NULL, NULL,      } },
+  { { "ms-mqg",                 NULL, NULL, }, { "mqg",            NULL, NULL,      } },
+  { { "ms-msi",                 NULL, NULL, }, { "msi",            NULL, NULL,      } },
+  { { "ms-mui",                 NULL, NULL, }, { "mui",            NULL, NULL,      } },
+  { { "ms-orn",                 NULL, NULL, }, { "orn",            NULL, NULL,      } },
+  { { "ms-ors",                 NULL, NULL, }, { "ors",            NULL, NULL,      } },
+  { { "ms-pel",                 NULL, NULL, }, { "pel",            NULL, NULL,      } },
+  { { "ms-pse",                 NULL, NULL, }, { "pse",            NULL, NULL,      } },
+  { { "ms-tmw",                 NULL, NULL, }, { "tmw",            NULL, NULL,      } },
+  { { "ms-urk",                 NULL, NULL, }, { "urk",            NULL, NULL,      } },
+  { { "ms-vkk",                 NULL, NULL, }, { "vkk",            NULL, NULL,      } },
+  { { "ms-vkt",                 NULL, NULL, }, { "vkt",            NULL, NULL,      } },
+  { { "ms-xmm",                 NULL, NULL, }, { "xmm",            NULL, NULL,      } },
+  { { "ms-zlm",                 NULL, NULL, }, { "zlm",            NULL, NULL,      } },
+  { { "ms-zmi",                 NULL, NULL, }, { "zmi",            NULL, NULL,      } },
+  { { "ms-zsm",                 NULL, NULL, }, { "zsm",            NULL, NULL,      } },
+  { { "no-bok",                 NULL, NULL, }, { "nb",             NULL, NULL,      } },
+  { { "no-nyn",                 NULL, NULL, }, { "nn",             NULL, NULL,      } },
+  { { "sgn-ads",                NULL, NULL, }, { "ads",            NULL, NULL,      } },
+  { { "sgn-aed",                NULL, NULL, }, { "aed",            NULL, NULL,      } },
+  { { "sgn-aen",                NULL, NULL, }, { "aen",            NULL, NULL,      } },
+  { { "sgn-afg",                NULL, NULL, }, { "afg",            NULL, NULL,      } },
+  { { "sgn-ajs",                NULL, NULL, }, { "ajs",            NULL, NULL,      } },
+  { { "sgn-ase",                NULL, NULL, }, { "ase",            NULL, NULL,      } },
+  { { "sgn-asf",                NULL, NULL, }, { "asf",            NULL, NULL,      } },
+  { { "sgn-asp",                NULL, NULL, }, { "asp",            NULL, NULL,      } },
+  { { "sgn-asq",                NULL, NULL, }, { "asq",            NULL, NULL,      } },
+  { { "sgn-asw",                NULL, NULL, }, { "asw",            NULL, NULL,      } },
+  { { "sgn-bfi",                NULL, NULL, }, { "bfi",            NULL, NULL,      } },
+  { { "sgn-bfk",                NULL, NULL, }, { "bfk",            NULL, NULL,      } },
+  { { "sgn-bog",                NULL, NULL, }, { "bog",            NULL, NULL,      } },
+  { { "sgn-bqn",                NULL, NULL, }, { "bqn",            NULL, NULL,      } },
+  { { "sgn-bqy",                NULL, NULL, }, { "bqy",            NULL, NULL,      } },
+  { { "sgn-BR",                 NULL, NULL, }, { "bzs",            NULL, NULL,      } },
+  { { "sgn-bvl",                NULL, NULL, }, { "bvl",            NULL, NULL,      } },
+  { { "sgn-bzs",                NULL, NULL, }, { "bzs",            NULL, NULL,      } },
+  { { "sgn-cds",                NULL, NULL, }, { "cds",            NULL, NULL,      } },
+  { { "sgn-CO",                 NULL, NULL, }, { "csn",            NULL, NULL,      } },
+  { { "sgn-csc",                NULL, NULL, }, { "csc",            NULL, NULL,      } },
+  { { "sgn-csd",                NULL, NULL, }, { "csd",            NULL, NULL,      } },
+  { { "sgn-cse",                NULL, NULL, }, { "cse",            NULL, NULL,      } },
+  { { "sgn-csf",                NULL, NULL, }, { "csf",            NULL, NULL,      } },
+  { { "sgn-csg",                NULL, NULL, }, { "csg",            NULL, NULL,      } },
+  { { "sgn-csl",                NULL, NULL, }, { "csl",            NULL, NULL,      } },
+  { { "sgn-csn",                NULL, NULL, }, { "csn",            NULL, NULL,      } },
+  { { "sgn-csq",                NULL, NULL, }, { "csq",            NULL, NULL,      } },
+  { { "sgn-csr",                NULL, NULL, }, { "csr",            NULL, NULL,      } },
+  { { "sgn-csx",                NULL, NULL, }, { "csx",            NULL, NULL,      } },
+  { { "sgn-DE",                 NULL, NULL, }, { "gsg",            NULL, NULL,      } },
+  { { "sgn-DK",                 NULL, NULL, }, { "dsl",            NULL, NULL,      } },
+  { { "sgn-doq",                NULL, NULL, }, { "doq",            NULL, NULL,      } },
+  { { "sgn-dse",                NULL, NULL, }, { "dse",            NULL, NULL,      } },
+  { { "sgn-dsl",                NULL, NULL, }, { "dsl",            NULL, NULL,      } },
+  { { "sgn-dsz",                NULL, NULL, }, { "dsz",            NULL, NULL,      } },
+  { { "sgn-ecs",                NULL, NULL, }, { "ecs",            NULL, NULL,      } },
+  { { "sgn-ehs",                NULL, NULL, }, { "ehs",            NULL, NULL,      } },
+  { { "sgn-ES",                 NULL, NULL, }, { "ssp",            NULL, NULL,      } },
+  { { "sgn-esl",                NULL, NULL, }, { "esl",            NULL, NULL,      } },
+  { { "sgn-esn",                NULL, NULL, }, { "esn",            NULL, NULL,      } },
+  { { "sgn-eso",                NULL, NULL, }, { "eso",            NULL, NULL,      } },
+  { { "sgn-eth",                NULL, NULL, }, { "eth",            NULL, NULL,      } },
+  { { "sgn-fcs",                NULL, NULL, }, { "fcs",            NULL, NULL,      } },
+  { { "sgn-FR",                 NULL, NULL, }, { "fsl",            NULL, NULL,      } },
+  { { "sgn-fse",                NULL, NULL, }, { "fse",            NULL, NULL,      } },
+  { { "sgn-fsl",                NULL, NULL, }, { "fsl",            NULL, NULL,      } },
+  { { "sgn-fss",                NULL, NULL, }, { "fss",            NULL, NULL,      } },
+  { { "sgn-GB",                 NULL, NULL, }, { "bfi",            NULL, NULL,      } },
+  { { "sgn-gds",                NULL, NULL, }, { "gds",            NULL, NULL,      } },
+  { { "sgn-GR",                 NULL, NULL, }, { "gss",            NULL, NULL,      } },
+  { { "sgn-gse",                NULL, NULL, }, { "gse",            NULL, NULL,      } },
+  { { "sgn-gsg",                NULL, NULL, }, { "gsg",            NULL, NULL,      } },
+  { { "sgn-gsm",                NULL, NULL, }, { "gsm",            NULL, NULL,      } },
+  { { "sgn-gss",                NULL, NULL, }, { "gss",            NULL, NULL,      } },
+  { { "sgn-gus",                NULL, NULL, }, { "gus",            NULL, NULL,      } },
+  { { "sgn-hab",                NULL, NULL, }, { "hab",            NULL, NULL,      } },
+  { { "sgn-haf",                NULL, NULL, }, { "haf",            NULL, NULL,      } },
+  { { "sgn-hds",                NULL, NULL, }, { "hds",            NULL, NULL,      } },
+  { { "sgn-hks",                NULL, NULL, }, { "hks",            NULL, NULL,      } },
+  { { "sgn-hos",                NULL, NULL, }, { "hos",            NULL, NULL,      } },
+  { { "sgn-hps",                NULL, NULL, }, { "hps",            NULL, NULL,      } },
+  { { "sgn-hsh",                NULL, NULL, }, { "hsh",            NULL, NULL,      } },
+  { { "sgn-hsl",                NULL, NULL, }, { "hsl",            NULL, NULL,      } },
+  { { "sgn-icl",                NULL, NULL, }, { "icl",            NULL, NULL,      } },
+  { { "sgn-IE",                 NULL, NULL, }, { "isg",            NULL, NULL,      } },
+  { { "sgn-iks",                NULL, NULL, }, { "iks",            NULL, NULL,      } },
+  { { "sgn-ils",                NULL, NULL, }, { "ils",            NULL, NULL,      } },
+  { { "sgn-inl",                NULL, NULL, }, { "inl",            NULL, NULL,      } },
+  { { "sgn-ins",                NULL, NULL, }, { "ins",            NULL, NULL,      } },
+  { { "sgn-ise",                NULL, NULL, }, { "ise",            NULL, NULL,      } },
+  { { "sgn-isg",                NULL, NULL, }, { "isg",            NULL, NULL,      } },
+  { { "sgn-isr",                NULL, NULL, }, { "isr",            NULL, NULL,      } },
+  { { "sgn-IT",                 NULL, NULL, }, { "ise",            NULL, NULL,      } },
+  { { "sgn-jcs",                NULL, NULL, }, { "jcs",            NULL, NULL,      } },
+  { { "sgn-jhs",                NULL, NULL, }, { "jhs",            NULL, NULL,      } },
+  { { "sgn-jks",                NULL, NULL, }, { "jks",            NULL, NULL,      } },
+  { { "sgn-jls",                NULL, NULL, }, { "jls",            NULL, NULL,      } },
+  { { "sgn-jos",                NULL, NULL, }, { "jos",            NULL, NULL,      } },
+  { { "sgn-JP",                 NULL, NULL, }, { "jsl",            NULL, NULL,      } },
+  { { "sgn-jsl",                NULL, NULL, }, { "jsl",            NULL, NULL,      } },
+  { { "sgn-jus",                NULL, NULL, }, { "jus",            NULL, NULL,      } },
+  { { "sgn-kgi",                NULL, NULL, }, { "kgi",            NULL, NULL,      } },
+  { { "sgn-kvk",                NULL, NULL, }, { "kvk",            NULL, NULL,      } },
+  { { "sgn-lbs",                NULL, NULL, }, { "lbs",            NULL, NULL,      } },
+  { { "sgn-lls",                NULL, NULL, }, { "lls",            NULL, NULL,      } },
+  { { "sgn-lsb",                NULL, NULL, }, { "lsb",            NULL, NULL,      } },
+  { { "sgn-lsc",                NULL, NULL, }, { "lsc",            NULL, NULL,      } },
+  { { "sgn-lsg",                NULL, NULL, }, { "lsg",            NULL, NULL,      } },
+  { { "sgn-lsl",                NULL, NULL, }, { "lsl",            NULL, NULL,      } },
+  { { "sgn-lsn",                NULL, NULL, }, { "lsn",            NULL, NULL,      } },
+  { { "sgn-lso",                NULL, NULL, }, { "lso",            NULL, NULL,      } },
+  { { "sgn-lsp",                NULL, NULL, }, { "lsp",            NULL, NULL,      } },
+  { { "sgn-lst",                NULL, NULL, }, { "lst",            NULL, NULL,      } },
+  { { "sgn-lsv",                NULL, NULL, }, { "lsv",            NULL, NULL,      } },
+  { { "sgn-lsw",                NULL, NULL, }, { "lsw",            NULL, NULL,      } },
+  { { "sgn-lsy",                NULL, NULL, }, { "lsy",            NULL, NULL,      } },
+  { { "sgn-lws",                NULL, NULL, }, { "lws",            NULL, NULL,      } },
+  { { "sgn-mdl",                NULL, NULL, }, { "mdl",            NULL, NULL,      } },
+  { { "sgn-mfs",                NULL, NULL, }, { "mfs",            NULL, NULL,      } },
+  { { "sgn-mre",                NULL, NULL, }, { "mre",            NULL, NULL,      } },
+  { { "sgn-msd",                NULL, NULL, }, { "msd",            NULL, NULL,      } },
+  { { "sgn-msr",                NULL, NULL, }, { "msr",            NULL, NULL,      } },
+  { { "sgn-MX",                 NULL, NULL, }, { "mfs",            NULL, NULL,      } },
+  { { "sgn-mzc",                NULL, NULL, }, { "mzc",            NULL, NULL,      } },
+  { { "sgn-mzg",                NULL, NULL, }, { "mzg",            NULL, NULL,      } },
+  { { "sgn-mzy",                NULL, NULL, }, { "mzy",            NULL, NULL,      } },
+  { { "sgn-nbs",                NULL, NULL, }, { "nbs",            NULL, NULL,      } },
+  { { "sgn-ncs",                NULL, NULL, }, { "ncs",            NULL, NULL,      } },
+  { { "sgn-NI",                 NULL, NULL, }, { "ncs",            NULL, NULL,      } },
+  { { "sgn-NL",                 NULL, NULL, }, { "dse",            NULL, NULL,      } },
+  { { "sgn-NO",                 NULL, NULL, }, { "nsl",            NULL, NULL,      } },
+  { { "sgn-nsi",                NULL, NULL, }, { "nsi",            NULL, NULL,      } },
+  { { "sgn-nsl",                NULL, NULL, }, { "nsl",            NULL, NULL,      } },
+  { { "sgn-nsp",                NULL, NULL, }, { "nsp",            NULL, NULL,      } },
+  { { "sgn-nsr",                NULL, NULL, }, { "nsr",            NULL, NULL,      } },
+  { { "sgn-nzs",                NULL, NULL, }, { "nzs",            NULL, NULL,      } },
+  { { "sgn-okl",                NULL, NULL, }, { "okl",            NULL, NULL,      } },
+  { { "sgn-pgz",                NULL, NULL, }, { "pgz",            NULL, NULL,      } },
+  { { "sgn-pks",                NULL, NULL, }, { "pks",            NULL, NULL,      } },
+  { { "sgn-prl",                NULL, NULL, }, { "prl",            NULL, NULL,      } },
+  { { "sgn-prz",                NULL, NULL, }, { "prz",            NULL, NULL,      } },
+  { { "sgn-psc",                NULL, NULL, }, { "psc",            NULL, NULL,      } },
+  { { "sgn-psd",                NULL, NULL, }, { "psd",            NULL, NULL,      } },
+  { { "sgn-psg",                NULL, NULL, }, { "psg",            NULL, NULL,      } },
+  { { "sgn-psl",                NULL, NULL, }, { "psl",            NULL, NULL,      } },
+  { { "sgn-pso",                NULL, NULL, }, { "pso",            NULL, NULL,      } },
+  { { "sgn-psp",                NULL, NULL, }, { "psp",            NULL, NULL,      } },
+  { { "sgn-psr",                NULL, NULL, }, { "psr",            NULL, NULL,      } },
+  { { "sgn-PT",                 NULL, NULL, }, { "psr",            NULL, NULL,      } },
+  { { "sgn-pys",                NULL, NULL, }, { "pys",            NULL, NULL,      } },
+  { { "sgn-rib",                NULL, NULL, }, { "rib",            NULL, NULL,      } },
+  { { "sgn-rms",                NULL, NULL, }, { "rms",            NULL, NULL,      } },
+  { { "sgn-rnb",                NULL, NULL, }, { "rnb",            NULL, NULL,      } },
+  { { "sgn-rsi",                NULL, NULL, }, { "rsi",            NULL, NULL,      } },
+  { { "sgn-rsl",                NULL, NULL, }, { "rsl",            NULL, NULL,      } },
+  { { "sgn-rsm",                NULL, NULL, }, { "rsm",            NULL, NULL,      } },
+  { { "sgn-rsn",                NULL, NULL, }, { "rsn",            NULL, NULL,      } },
+  { { "sgn-sdl",                NULL, NULL, }, { "sdl",            NULL, NULL,      } },
+  { { "sgn-SE",                 NULL, NULL, }, { "swl",            NULL, NULL,      } },
+  { { "sgn-sfb",                NULL, NULL, }, { "sfb",            NULL, NULL,      } },
+  { { "sgn-sfs",                NULL, NULL, }, { "sfs",            NULL, NULL,      } },
+  { { "sgn-sgg",                NULL, NULL, }, { "sgg",            NULL, NULL,      } },
+  { { "sgn-sgx",                NULL, NULL, }, { "sgx",            NULL, NULL,      } },
+  { { "sgn-slf",                NULL, NULL, }, { "slf",            NULL, NULL,      } },
+  { { "sgn-sls",                NULL, NULL, }, { "sls",            NULL, NULL,      } },
+  { { "sgn-sqk",                NULL, NULL, }, { "sqk",            NULL, NULL,      } },
+  { { "sgn-sqs",                NULL, NULL, }, { "sqs",            NULL, NULL,      } },
+  { { "sgn-sqx",                NULL, NULL, }, { "sqx",            NULL, NULL,      } },
+  { { "sgn-ssp",                NULL, NULL, }, { "ssp",            NULL, NULL,      } },
+  { { "sgn-ssr",                NULL, NULL, }, { "ssr",            NULL, NULL,      } },
+  { { "sgn-svk",                NULL, NULL, }, { "svk",            NULL, NULL,      } },
+  { { "sgn-swl",                NULL, NULL, }, { "swl",            NULL, NULL,      } },
+  { { "sgn-syy",                NULL, NULL, }, { "syy",            NULL, NULL,      } },
+  { { "sgn-szs",                NULL, NULL, }, { "szs",            NULL, NULL,      } },
+  { { "sgn-tse",                NULL, NULL, }, { "tse",            NULL, NULL,      } },
+  { { "sgn-tsm",                NULL, NULL, }, { "tsm",            NULL, NULL,      } },
+  { { "sgn-tsq",                NULL, NULL, }, { "tsq",            NULL, NULL,      } },
+  { { "sgn-tss",                NULL, NULL, }, { "tss",            NULL, NULL,      } },
+  { { "sgn-tsy",                NULL, NULL, }, { "tsy",            NULL, NULL,      } },
+  { { "sgn-tza",                NULL, NULL, }, { "tza",            NULL, NULL,      } },
+  { { "sgn-ugn",                NULL, NULL, }, { "ugn",            NULL, NULL,      } },
+  { { "sgn-ugy",                NULL, NULL, }, { "ugy",            NULL, NULL,      } },
+  { { "sgn-ukl",                NULL, NULL, }, { "ukl",            NULL, NULL,      } },
+  { { "sgn-uks",                NULL, NULL, }, { "uks",            NULL, NULL,      } },
+  { { "sgn-US",                 NULL, NULL, }, { "ase",            NULL, NULL,      } },
+  { { "sgn-vgt",                NULL, NULL, }, { "vgt",            NULL, NULL,      } },
+  { { "sgn-vsi",                NULL, NULL, }, { "vsi",            NULL, NULL,      } },
+  { { "sgn-vsl",                NULL, NULL, }, { "vsl",            NULL, NULL,      } },
+  { { "sgn-vsv",                NULL, NULL, }, { "vsv",            NULL, NULL,      } },
+  { { "sgn-wbs",                NULL, NULL, }, { "wbs",            NULL, NULL,      } },
+  { { "sgn-xki",                NULL, NULL, }, { "xki",            NULL, NULL,      } },
+  { { "sgn-xml",                NULL, NULL, }, { "xml",            NULL, NULL,      } },
+  { { "sgn-xms",                NULL, NULL, }, { "xms",            NULL, NULL,      } },
+  { { "sgn-yds",                NULL, NULL, }, { "yds",            NULL, NULL,      } },
+  { { "sgn-ygs",                NULL, NULL, }, { "ygs",            NULL, NULL,      } },
+  { { "sgn-yhs",                NULL, NULL, }, { "yhs",            NULL, NULL,      } },
+  { { "sgn-ysl",                NULL, NULL, }, { "ysl",            NULL, NULL,      } },
+  { { "sgn-ysm",                NULL, NULL, }, { "ysm",            NULL, NULL,      } },
+  { { "sgn-ZA",                 NULL, NULL, }, { "sfs",            NULL, NULL,      } },
+  { { "sgn-zib",                NULL, NULL, }, { "zib",            NULL, NULL,      } },
+  { { "sgn-zsl",                NULL, NULL, }, { "zsl",            NULL, NULL,      } },
+  { { "sw-swc",                 NULL, NULL, }, { "swc",            NULL, NULL,      } },
+  { { "sw-swh",                 NULL, NULL, }, { "swh",            NULL, NULL,      } },
+  { { "uz-uzn",                 NULL, NULL, }, { "uzn",            NULL, NULL,      } },
+  { { "uz-uzs",                 NULL, NULL, }, { "uzs",            NULL, NULL,      } },
+  { { "zh-cdo",                 NULL, NULL, }, { "cdo",            NULL, NULL,      } },
+  { { "zh-cjy",                 NULL, NULL, }, { "cjy",            NULL, NULL,      } },
+  { { "zh-cmn",                 NULL, NULL, }, { "cmn",            NULL, NULL,      } },
+  { { "zh-cmn",                 NULL, NULL, }, { "cmn",            NULL, NULL,      } },
+  { { "zh-cnp",                 NULL, NULL, }, { "cnp",            NULL, NULL,      } },
+  { { "zh-cpx",                 NULL, NULL, }, { "cpx",            NULL, NULL,      } },
+  { { "zh-csp",                 NULL, NULL, }, { "csp",            NULL, NULL,      } },
+  { { "zh-czh",                 NULL, NULL, }, { "czh",            NULL, NULL,      } },
+  { { "zh-czo",                 NULL, NULL, }, { "czo",            NULL, NULL,      } },
+  { { "zh-gan",                 NULL, NULL, }, { "gan",            NULL, NULL,      } },
+  { { "zh-gan",                 NULL, NULL, }, { "gan",            NULL, NULL,      } },
+  { { "zh-guoyu",               NULL, NULL, }, { "cmn",            NULL, NULL,      } },
+  { { "zh-hak",                 NULL, NULL, }, { "hak",            NULL, NULL,      } },
+  { { "zh-hakka",               NULL, NULL, }, { "hak",            NULL, NULL,      } },
+  { { "zh-hsn",                 NULL, NULL, }, { "hsn",            NULL, NULL,      } },
+  { { "zh-lzh",                 NULL, NULL, }, { "lzh",            NULL, NULL,      } },
+  { { "zh-mnp",                 NULL, NULL, }, { "mnp",            NULL, NULL,      } },
+  { { "zh-nan",                 NULL, NULL, }, { "nan",            NULL, NULL,      } },
+  { { "zh-wuu",                 NULL, NULL, }, { "wuu",            NULL, NULL,      } },
+  { { "zh-wuu",                 NULL, NULL, }, { "wuu",            NULL, NULL,      } },
+  { { "zh-xiang",               NULL, NULL, }, { "hsn",            NULL, NULL,      } },
+  { { "zh-yue",                 NULL, NULL, }, { "yue",            NULL, NULL,      } },
+  { { "zh-yue",                 NULL, NULL, }, { "yue",            NULL, NULL,      } },
+  { { "aam",                    NULL, NULL, }, { "aas",            NULL, NULL,      } },
+  { { "adp",                    NULL, NULL, }, { "dz",             NULL, NULL,      } },
+  { { "ajt",                    NULL, NULL, }, { "aeb",            NULL, NULL,      } },
+  { { "asd",                    NULL, NULL, }, { "snz",            NULL, NULL,      } },
+  { { "aue",                    NULL, NULL, }, { "ktz",            NULL, NULL,      } },
+  { { "ayx",                    NULL, NULL, }, { "nun",            NULL, NULL,      } },
+  { { "bgm",                    NULL, NULL, }, { "bcg",            NULL, NULL,      } },
+  { { "bic",                    NULL, NULL, }, { "bir",            NULL, NULL,      } },
+  { { "bjd",                    NULL, NULL, }, { "drl",            NULL, NULL,      } },
+  { { "blg",                    NULL, NULL, }, { "iba",            NULL, NULL,      } },
+  { { NULL,                     "BU", NULL, }, { NULL,             "MM", NULL,      } },
+  { { "ccq",                    NULL, NULL, }, { "rki",            NULL, NULL,      } },
+  { { "cjr",                    NULL, NULL, }, { "mom",            NULL, NULL,      } },
+  { { "cka",                    NULL, NULL, }, { "cmr",            NULL, NULL,      } },
+  { { "cmk",                    NULL, NULL, }, { "xch",            NULL, NULL,      } },
+  { { "coy",                    NULL, NULL, }, { "pij",            NULL, NULL,      } },
+  { { "cqu",                    NULL, NULL, }, { "quh",            NULL, NULL,      } },
+  { { NULL,                     "DD", NULL, }, { NULL,             "DE", NULL,      } },
+  { { "dit",                    NULL, NULL, }, { "dif",            NULL, NULL,      } },
+  { { "drh",                    NULL, NULL, }, { "khk",            NULL, NULL,      } },
+  { { "drr",                    NULL, NULL, }, { "kzk",            NULL, NULL,      } },
+  { { "drw",                    NULL, NULL, }, { "prs",            NULL, NULL,      } },
+  { { NULL,                     "FX", NULL, }, { NULL,             "FR", NULL,      } },
+  { { "gav",                    NULL, NULL, }, { "dev",            NULL, NULL,      } },
+  { { "gfx",                    NULL, NULL, }, { "vaj",            NULL, NULL,      } },
+  { { "ggn",                    NULL, NULL, }, { "gvr",            NULL, NULL,      } },
+  { { "gli",                    NULL, NULL, }, { "kzk",            NULL, NULL,      } },
+  { { "gti",                    NULL, NULL, }, { "nyc",            NULL, NULL,      } },
+  { { "guv",                    NULL, NULL, }, { "duz",            NULL, NULL,      } },
+  { { "hrr",                    NULL, NULL, }, { "jal",            NULL, NULL,      } },
+  { { "ibi",                    NULL, NULL, }, { "opa",            NULL, NULL,      } },
+  { { "ilw",                    NULL, NULL, }, { "gal",            NULL, NULL,      } },
+  { { "in",                     NULL, NULL, }, { "id",             NULL, NULL,      } },
+  { { "iw",                     NULL, NULL, }, { "he",             NULL, NULL,      } },
+  { { "jeg",                    NULL, NULL, }, { "oyb",            NULL, NULL,      } },
+  { { "ji",                     NULL, NULL, }, { "yi",             NULL, NULL,      } },
+  { { "jw",                     NULL, NULL, }, { "jv",             NULL, NULL,      } },
+  { { "kgc",                    NULL, NULL, }, { "tdf",            NULL, NULL,      } },
+  { { "kgh",                    NULL, NULL, }, { "kml",            NULL, NULL,      } },
+  { { "koj",                    NULL, NULL, }, { "kwv",            NULL, NULL,      } },
+  { { "krm",                    NULL, NULL, }, { "bmf",            NULL, NULL,      } },
+  { { "ktr",                    NULL, NULL, }, { "dtp",            NULL, NULL,      } },
+  { { "kvs",                    NULL, NULL, }, { "gdj",            NULL, NULL,      } },
+  { { "kwq",                    NULL, NULL, }, { "yam",            NULL, NULL,      } },
+  { { "kxe",                    NULL, NULL, }, { "tvd",            NULL, NULL,      } },
+  { { "kxl",                    NULL, NULL, }, { "kru",            NULL, NULL,      } },
+  { { "kzj",                    NULL, NULL, }, { "dtp",            NULL, NULL,      } },
+  { { "kzt",                    NULL, NULL, }, { "dtp",            NULL, NULL,      } },
+  { { "lak",                    NULL, NULL, }, { "ksp",            NULL, NULL,      } },
+  { { "lii",                    NULL, NULL, }, { "raq",            NULL, NULL,      } },
+  { { "llo",                    NULL, NULL, }, { "ngt",            NULL, NULL,      } },
+  { { "lmm",                    NULL, NULL, }, { "rmx",            NULL, NULL,      } },
+  { { "meg",                    NULL, NULL, }, { "cir",            NULL, NULL,      } },
+  { { "mo",                     NULL, NULL, }, { "ro",             NULL, NULL,      } },
+  { { "mst",                    NULL, NULL, }, { "mry",            NULL, NULL,      } },
+  { { "mwj",                    NULL, NULL, }, { "vaj",            NULL, NULL,      } },
+  { { "myd",                    NULL, NULL, }, { "aog",            NULL, NULL,      } },
+  { { "myt",                    NULL, NULL, }, { "mry",            NULL, NULL,      } },
+  { { "nad",                    NULL, NULL, }, { "xny",            NULL, NULL,      } },
+  { { "ncp",                    NULL, NULL, }, { "kdz",            NULL, NULL,      } },
+  { { "nns",                    NULL, NULL, }, { "nbr",            NULL, NULL,      } },
+  { { "nnx",                    NULL, NULL, }, { "ngv",            NULL, NULL,      } },
+  { { "nts",                    NULL, NULL, }, { "pij",            NULL, NULL,      } },
+  { { "nxu",                    NULL, NULL, }, { "bpp",            NULL, NULL,      } },
+  { { "oun",                    NULL, NULL, }, { "vaj",            NULL, NULL,      } },
+  { { "pat",                    NULL, NULL, }, { "kxr",            NULL, NULL,      } },
+  { { "pcr",                    NULL, NULL, }, { "adx",            NULL, NULL,      } },
+  { { "pmc",                    NULL, NULL, }, { "huw",            NULL, NULL,      } },
+  { { "pmu",                    NULL, NULL, }, { "phr",            NULL, NULL,      } },
+  { { "ppa",                    NULL, NULL, }, { "bfy",            NULL, NULL,      } },
+  { { "ppr",                    NULL, NULL, }, { "lcq",            NULL, NULL,      } },
+  { { "pry",                    NULL, NULL, }, { "prt",            NULL, NULL,      } },
+  { { "puz",                    NULL, NULL, }, { "pub",            NULL, NULL,      } },
+  { { "sca",                    NULL, NULL, }, { "hle",            NULL, NULL,      } },
+  { { "skk",                    NULL, NULL, }, { "oyb",            NULL, NULL,      } },
+  { { "smd",                    NULL, NULL, }, { "kmb",            NULL, NULL,      } },
+  { { "snb",                    NULL, NULL, }, { "iba",            NULL, NULL,      } },
+  { { "tdu",                    NULL, NULL, }, { "dtp",            NULL, NULL,      } },
+  { { "thc",                    NULL, NULL, }, { "tpo",            NULL, NULL,      } },
+  { { "thw",                    NULL, NULL, }, { "ola",            NULL, NULL,      } },
+  { { "thx",                    NULL, NULL, }, { "oyb",            NULL, NULL,      } },
+  { { "tie",                    NULL, NULL, }, { "ras",            NULL, NULL,      } },
+  { { "tkk",                    NULL, NULL, }, { "twm",            NULL, NULL,      } },
+  { { "tlw",                    NULL, NULL, }, { "weo",            NULL, NULL,      } },
+  { { "tmp",                    NULL, NULL, }, { "tyj",            NULL, NULL,      } },
+  { { "tne",                    NULL, NULL, }, { "kak",            NULL, NULL,      } },
+  { { "tnf",                    NULL, NULL, }, { "prs",            NULL, NULL,      } },
+  { { NULL,                     "TP", NULL, }, { NULL,             "TL", NULL,      } },
+  { { "tsf",                    NULL, NULL, }, { "taj",            NULL, NULL,      } },
+  { { "uok",                    NULL, NULL, }, { "ema",            NULL, NULL,      } },
+  { { "xba",                    NULL, NULL, }, { "cax",            NULL, NULL,      } },
+  { { "xia",                    NULL, NULL, }, { "acn",            NULL, NULL,      } },
+  { { "xkh",                    NULL, NULL, }, { "waw",            NULL, NULL,      } },
+  { { "xrq",                    NULL, NULL, }, { "dmw",            NULL, NULL,      } },
+  { { "ybd",                    NULL, NULL, }, { "rki",            NULL, NULL,      } },
+  { { NULL,                     "YD", NULL, }, { NULL,             "YE", NULL,      } },
+  { { "yma",                    NULL, NULL, }, { "lrr",            NULL, NULL,      } },
+  { { "ymt",                    NULL, NULL, }, { "mtm",            NULL, NULL,      } },
+  { { "yos",                    NULL, NULL, }, { "zom",            NULL, NULL,      } },
+  { { "yuu",                    NULL, NULL, }, { "yug",            NULL, NULL,      } },
+  { { "zir",                    NULL, NULL, }, { "scv",            NULL, NULL,      } },
+  { { NULL,                     "ZR", NULL, }, { NULL,             "CD", NULL,      } },
+  { { "QMS",                    NULL, NULL, }, { "cmn-Hans",       NULL, NULL,      } },
+  { { "QMT",                    NULL, NULL, }, { "cmn-Hant",       NULL, NULL,      } },
+  { { "QTM",                    NULL, NULL, }, { "cmn-TW",         NULL, NULL,      } },
+  { { "QFC",                    NULL, NULL, }, { "fr-CA",          NULL, NULL,      } },
+  { { "QUC",                    NULL, NULL, }, { "quc",            NULL, NULL,      } },
+  { { "QBP",                    NULL, NULL, }, { "pt-BR",          NULL, NULL,      } },
+  { { "QUZ",                    NULL, NULL, }, { "quz",            NULL, NULL,      } },
+  { { "QZB",                    NULL, NULL, }, { "quz-BO",         NULL, NULL,      } },
+  { { "QZE",                    NULL, NULL, }, { "quz-EC",         NULL, NULL,      } },
+  { { "QZP",                    NULL, NULL, }, { "quz-PE",         NULL, NULL,      } },
+  { { "QSA",                    NULL, NULL, }, { "es-AR",          NULL, NULL,      } },
+  { { "QSB",                    NULL, NULL, }, { "es-BO",          NULL, NULL,      } },
+  { { "QCL",                    NULL, NULL, }, { "es-CL",          NULL, NULL,      } },
+  { { "QCO",                    NULL, NULL, }, { "es-CO",          NULL, NULL,      } },
+  { { "QCA",                    NULL, NULL, }, { "es-CR",          NULL, NULL,      } },
+  { { "QCU",                    NULL, NULL, }, { "es-CU",          NULL, NULL,      } },
+  { { "QSD",                    NULL, NULL, }, { "es-DO",          NULL, NULL,      } },
+  { { "QSE",                    NULL, NULL, }, { "es-EC",          NULL, NULL,      } },
+  { { "QSL",                    NULL, NULL, }, { "es-SV",          NULL, NULL,      } },
+  { { "QGU",                    NULL, NULL, }, { "es-GT",          NULL, NULL,      } },
+  { { "QSH",                    NULL, NULL, }, { "es-HN",          NULL, NULL,      } },
+  { { "QSM",                    NULL, NULL, }, { "es-MX",          NULL, NULL,      } },
+  { { "QNI",                    NULL, NULL, }, { "es-NI",          NULL, NULL,      } },
+  { { "QPA",                    NULL, NULL, }, { "es-PA",          NULL, NULL,      } },
+  { { "QPY",                    NULL, NULL, }, { "es-PY",          NULL, NULL,      } },
+  { { "QPE",                    NULL, NULL, }, { "es-PE",          NULL, NULL,      } },
+  { { "QPR",                    NULL, NULL, }, { "es-PR",          NULL, NULL,      } },
+  { { "QUS",                    NULL, NULL, }, { "es-US",          NULL, NULL,      } },
+  { { "QUY",                    NULL, NULL, }, { "es-UY",          NULL, NULL,      } },
+  { { "QVE",                    NULL, NULL, }, { "es-VE",          NULL, NULL,      } },
+};
+
 void
 init() {
   g_extlangs.reserve(252);
 
-  g_extlangs.emplace_back("aao"s, u8"Algerian Saharan Arabic"s,             VS{ "ar"s },  false);
-  g_extlangs.emplace_back("abh"s, u8"Tajiki Arabic"s,                       VS{ "ar"s },  false);
-  g_extlangs.emplace_back("abv"s, u8"Baharna Arabic"s,                      VS{ "ar"s },  false);
-  g_extlangs.emplace_back("acm"s, u8"Mesopotamian Arabic"s,                 VS{ "ar"s },  false);
-  g_extlangs.emplace_back("acq"s, u8"Ta'izzi-Adeni Arabic"s,                VS{ "ar"s },  false);
-  g_extlangs.emplace_back("acw"s, u8"Hijazi Arabic"s,                       VS{ "ar"s },  false);
-  g_extlangs.emplace_back("acx"s, u8"Omani Arabic"s,                        VS{ "ar"s },  false);
-  g_extlangs.emplace_back("acy"s, u8"Cypriot Arabic"s,                      VS{ "ar"s },  false);
-  g_extlangs.emplace_back("adf"s, u8"Dhofari Arabic"s,                      VS{ "ar"s },  false);
-  g_extlangs.emplace_back("ads"s, u8"Adamorobe Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("aeb"s, u8"Tunisian Arabic"s,                     VS{ "ar"s },  false);
-  g_extlangs.emplace_back("aec"s, u8"Saidi Arabic"s,                        VS{ "ar"s },  false);
-  g_extlangs.emplace_back("aed"s, u8"Argentine Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("aen"s, u8"Armenian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("afb"s, u8"Gulf Arabic"s,                         VS{ "ar"s },  false);
-  g_extlangs.emplace_back("afg"s, u8"Afghan Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ajp"s, u8"South Levantine Arabic"s,              VS{ "ar"s },  false);
-  g_extlangs.emplace_back("ajs"s, u8"Algerian Jewish Sign Language"s,       VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("apc"s, u8"North Levantine Arabic"s,              VS{ "ar"s },  false);
-  g_extlangs.emplace_back("apd"s, u8"Sudanese Arabic"s,                     VS{ "ar"s },  false);
-  g_extlangs.emplace_back("arb"s, u8"Standard Arabic"s,                     VS{ "ar"s },  false);
-  g_extlangs.emplace_back("arq"s, u8"Algerian Arabic"s,                     VS{ "ar"s },  false);
-  g_extlangs.emplace_back("ars"s, u8"Najdi Arabic"s,                        VS{ "ar"s },  false);
-  g_extlangs.emplace_back("ary"s, u8"Moroccan Arabic"s,                     VS{ "ar"s },  false);
-  g_extlangs.emplace_back("arz"s, u8"Egyptian Arabic"s,                     VS{ "ar"s },  false);
-  g_extlangs.emplace_back("ase"s, u8"American Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("asf"s, u8"Australian Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("asp"s, u8"Algerian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("asq"s, u8"Austrian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("asw"s, u8"Australian Aborigines Sign Language"s, VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("auz"s, u8"Uzbeki Arabic"s,                       VS{ "ar"s },  false);
-  g_extlangs.emplace_back("avl"s, u8"Eastern Egyptian Bedawi Arabic"s,      VS{ "ar"s },  false);
-  g_extlangs.emplace_back("ayh"s, u8"Hadrami Arabic"s,                      VS{ "ar"s },  false);
-  g_extlangs.emplace_back("ayl"s, u8"Libyan Arabic"s,                       VS{ "ar"s },  false);
-  g_extlangs.emplace_back("ayn"s, u8"Sanaani Arabic"s,                      VS{ "ar"s },  false);
-  g_extlangs.emplace_back("ayp"s, u8"North Mesopotamian Arabic"s,           VS{ "ar"s },  false);
-  g_extlangs.emplace_back("bbz"s, u8"Babalia Creole Arabic"s,               VS{ "ar"s },  true );
-  g_extlangs.emplace_back("bfi"s, u8"British Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("bfk"s, u8"Ban Khor Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("bjn"s, u8"Banjar"s,                              VS{ "ms"s },  false);
-  g_extlangs.emplace_back("bog"s, u8"Bamako Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("bqn"s, u8"Bulgarian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("bqy"s, u8"Bengkala Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("btj"s, u8"Bacanese Malay"s,                      VS{ "ms"s },  false);
-  g_extlangs.emplace_back("bve"s, u8"Berau Malay"s,                         VS{ "ms"s },  false);
-  g_extlangs.emplace_back("bvl"s, u8"Bolivian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("bvu"s, u8"Bukit Malay"s,                         VS{ "ms"s },  false);
-  g_extlangs.emplace_back("bzs"s, u8"Brazilian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("cdo"s, u8"Min Dong Chinese"s,                    VS{ "zh"s },  false);
-  g_extlangs.emplace_back("cds"s, u8"Chadian Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("cjy"s, u8"Jinyu Chinese"s,                       VS{ "zh"s },  false);
-  g_extlangs.emplace_back("cmn"s, u8"Mandarin Chinese"s,                    VS{ "zh"s },  false);
-  g_extlangs.emplace_back("cnp"s, u8"Northern Pinghua"s,                    VS{ "zh"s },  false);
-  g_extlangs.emplace_back("coa"s, u8"Cocos Islands Malay"s,                 VS{ "ms"s },  false);
-  g_extlangs.emplace_back("cpx"s, u8"Pu-Xian Chinese"s,                     VS{ "zh"s },  false);
-  g_extlangs.emplace_back("csc"s, u8"Llengua de Signes Catalana"s,          VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("csd"s, u8"Chiangmai Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("cse"s, u8"Czech Sign Language"s,                 VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("csf"s, u8"Cuba Sign Language"s,                  VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("csg"s, u8"Chilean Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("csl"s, u8"Chinese Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("csn"s, u8"Colombian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("csp"s, u8"Southern Pinghua"s,                    VS{ "zh"s },  false);
-  g_extlangs.emplace_back("csq"s, u8"Croatia Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("csr"s, u8"Costa Rican Sign Language"s,           VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("csx"s, u8"Cambodian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("czh"s, u8"Huizhou Chinese"s,                     VS{ "zh"s },  false);
-  g_extlangs.emplace_back("czo"s, u8"Min Zhong Chinese"s,                   VS{ "zh"s },  false);
-  g_extlangs.emplace_back("doq"s, u8"Dominican Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("dse"s, u8"Dutch Sign Language"s,                 VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("dsl"s, u8"Danish Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("dsz"s, u8"Mardin Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("dup"s, u8"Duano"s,                               VS{ "ms"s },  false);
-  g_extlangs.emplace_back("ecs"s, u8"Ecuadorian Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ehs"s, u8"Miyakubo Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("esl"s, u8"Egypt Sign Language"s,                 VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("esn"s, u8"Salvadoran Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("eso"s, u8"Estonian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("eth"s, u8"Ethiopian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("fcs"s, u8"Quebec Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("fse"s, u8"Finnish Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("fsl"s, u8"French Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("fss"s, u8"suomenruotsalainen viittomakieli"s,    VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("gan"s, u8"Gan Chinese"s,                         VS{ "zh"s },  false);
-  g_extlangs.emplace_back("gds"s, u8"Ghandruk Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("gom"s, u8"Goan Konkani"s,                        VS{ "kok"s }, false);
-  g_extlangs.emplace_back("gse"s, u8"Ghanaian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("gsg"s, u8"German Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("gsm"s, u8"Guatemalan Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("gss"s, u8"Greek Sign Language"s,                 VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("gus"s, u8"Guinean Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("hab"s, u8"Hanoi Sign Language"s,                 VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("haf"s, u8"Haiphong Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("hak"s, u8"Hakka Chinese"s,                       VS{ "zh"s },  false);
-  g_extlangs.emplace_back("hds"s, u8"Honduras Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("hji"s, u8"Haji"s,                                VS{ "ms"s },  false);
-  g_extlangs.emplace_back("hks"s, u8"Heung Kong Sau Yue"s,                  VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("hos"s, u8"Ho Chi Minh City Sign Language"s,      VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("hps"s, u8"Hawai'i Pidgin Sign Language"s,        VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("hsh"s, u8"Hungarian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("hsl"s, u8"Hausa Sign Language"s,                 VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("hsn"s, u8"Xiang Chinese"s,                       VS{ "zh"s },  false);
-  g_extlangs.emplace_back("icl"s, u8"Icelandic Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("iks"s, u8"Inuit Sign Language"s,                 VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ils"s, u8"International Sign"s,                  VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("inl"s, u8"Indonesian Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ins"s, u8"Indian Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ise"s, u8"Italian Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("isg"s, u8"Irish Sign Language"s,                 VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("isr"s, u8"Israeli Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("jak"s, u8"Jakun"s,                               VS{ "ms"s },  false);
-  g_extlangs.emplace_back("jax"s, u8"Jambi Malay"s,                         VS{ "ms"s },  false);
-  g_extlangs.emplace_back("jcs"s, u8"Jamaican Country Sign Language"s,      VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("jhs"s, u8"Jhankot Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("jks"s, u8"Amami Koniya Sign Language"s,          VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("jls"s, u8"Jamaican Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("jos"s, u8"Jordanian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("jsl"s, u8"Japanese Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("jus"s, u8"Jumla Sign Language"s,                 VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("kgi"s, u8"Selangor Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("knn"s, u8"Konkani (individual language)"s,       VS{ "kok"s }, false);
-  g_extlangs.emplace_back("kvb"s, u8"Kubu"s,                                VS{ "ms"s },  false);
-  g_extlangs.emplace_back("kvk"s, u8"Korean Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("kvr"s, u8"Kerinci"s,                             VS{ "ms"s },  false);
-  g_extlangs.emplace_back("kxd"s, u8"Brunei"s,                              VS{ "ms"s },  false);
-  g_extlangs.emplace_back("lbs"s, u8"Libyan Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("lce"s, u8"Sekak"s,                               VS{ "ms"s },  false);
-  g_extlangs.emplace_back("lcf"s, u8"Lubu"s,                                VS{ "ms"s },  false);
-  g_extlangs.emplace_back("liw"s, u8"Col"s,                                 VS{ "ms"s },  false);
-  g_extlangs.emplace_back("lls"s, u8"Lithuanian Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("lsb"s, u8"Langue des Signes Burundaise"s,        VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("lsc"s, u8"Lengua de señas Albarradas"s,          VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("lsg"s, u8"Lyons Sign Language"s,                 VS{ "sgn"s }, true );
-  g_extlangs.emplace_back("lsl"s, u8"Latvian Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("lsn"s, u8"Tibetan Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("lso"s, u8"Laos Sign Language"s,                  VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("lsp"s, u8"Lengua de Señas Panameñas"s,           VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("lst"s, u8"Trinidad and Tobago Sign Language"s,   VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("lsv"s, u8"Sivia Sign Language"s,                 VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("lsw"s, u8"Langue des Signes Seychelloise"s,      VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("lsy"s, u8"Mauritian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ltg"s, u8"Latgalian"s,                           VS{ "lv"s },  false);
-  g_extlangs.emplace_back("lvs"s, u8"Standard Latvian"s,                    VS{ "lv"s },  false);
-  g_extlangs.emplace_back("lws"s, u8"Malawian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("lzh"s, u8"Literary Chinese"s,                    VS{ "zh"s },  false);
-  g_extlangs.emplace_back("max"s, u8"North Moluccan Malay"s,                VS{ "ms"s },  false);
-  g_extlangs.emplace_back("mdl"s, u8"Maltese Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("meo"s, u8"Kedah Malay"s,                         VS{ "ms"s },  false);
-  g_extlangs.emplace_back("mfa"s, u8"Pattani Malay"s,                       VS{ "ms"s },  false);
-  g_extlangs.emplace_back("mfb"s, u8"Bangka"s,                              VS{ "ms"s },  false);
-  g_extlangs.emplace_back("mfs"s, u8"Mexican Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("min"s, u8"Minangkabau"s,                         VS{ "ms"s },  false);
-  g_extlangs.emplace_back("mnp"s, u8"Min Bei Chinese"s,                     VS{ "zh"s },  false);
-  g_extlangs.emplace_back("mqg"s, u8"Kota Bangun Kutai Malay"s,             VS{ "ms"s },  false);
-  g_extlangs.emplace_back("mre"s, u8"Martha's Vineyard Sign Language"s,     VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("msd"s, u8"Yucatec Maya Sign Language"s,          VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("msi"s, u8"Sabah Malay"s,                         VS{ "ms"s },  false);
-  g_extlangs.emplace_back("msr"s, u8"Mongolian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("mui"s, u8"Musi"s,                                VS{ "ms"s },  false);
-  g_extlangs.emplace_back("mzc"s, u8"Madagascar Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("mzg"s, u8"Monastic Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("mzy"s, u8"Mozambican Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("nan"s, u8"Min Nan Chinese"s,                     VS{ "zh"s },  false);
-  g_extlangs.emplace_back("nbs"s, u8"Namibian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ncs"s, u8"Nicaraguan Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("nsi"s, u8"Nigerian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("nsl"s, u8"Norwegian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("nsp"s, u8"Nepalese Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("nsr"s, u8"Maritime Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("nzs"s, u8"New Zealand Sign Language"s,           VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("okl"s, u8"Old Kentish Sign Language"s,           VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("orn"s, u8"Orang Kanaq"s,                         VS{ "ms"s },  false);
-  g_extlangs.emplace_back("ors"s, u8"Orang Seletar"s,                       VS{ "ms"s },  false);
-  g_extlangs.emplace_back("pel"s, u8"Pekal"s,                               VS{ "ms"s },  false);
-  g_extlangs.emplace_back("pga"s, u8"Sudanese Creole Arabic"s,              VS{ "ar"s },  false);
-  g_extlangs.emplace_back("pgz"s, u8"Papua New Guinean Sign Language"s,     VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("pks"s, u8"Pakistan Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("prl"s, u8"Peruvian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("prz"s, u8"Providencia Sign Language"s,           VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("psc"s, u8"Persian Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("psd"s, u8"Plains Indian Sign Language"s,         VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("pse"s, u8"Central Malay"s,                       VS{ "ms"s },  false);
-  g_extlangs.emplace_back("psg"s, u8"Penang Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("psl"s, u8"Puerto Rican Sign Language"s,          VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("pso"s, u8"Polish Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("psp"s, u8"Philippine Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("psr"s, u8"Portuguese Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("pys"s, u8"Lengua de Señas del Paraguay"s,        VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("rib"s, u8"Bribri Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("rms"s, u8"Romanian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("rnb"s, u8"Brunca Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("rsi"s, u8"Rennellese Sign Language"s,            VS{ "sgn"s }, true );
-  g_extlangs.emplace_back("rsl"s, u8"Russian Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("rsm"s, u8"Miriwoong Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("rsn"s, u8"Rwandan Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("sdl"s, u8"Saudi Arabian Sign Language"s,         VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("sfb"s, u8"French Belgian Sign Language"s,        VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("sfs"s, u8"South African Sign Language"s,         VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("sgg"s, u8"Swiss-German Sign Language"s,          VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("sgx"s, u8"Sierra Leone Sign Language"s,          VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("shu"s, u8"Chadian Arabic"s,                      VS{ "ar"s },  false);
-  g_extlangs.emplace_back("slf"s, u8"Swiss-Italian Sign Language"s,         VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("sls"s, u8"Singapore Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("sqk"s, u8"Albanian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("sqs"s, u8"Sri Lankan Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("sqx"s, u8"Kufr Qassem Sign Language (KQSL)"s,    VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ssh"s, u8"Shihhi Arabic"s,                       VS{ "ar"s },  false);
-  g_extlangs.emplace_back("ssp"s, u8"Spanish Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ssr"s, u8"Swiss-French Sign Language"s,          VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("svk"s, u8"Slovakian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("swc"s, u8"Congo Swahili"s,                       VS{ "sw"s },  false);
-  g_extlangs.emplace_back("swh"s, u8"Kiswahili"s,                           VS{ "sw"s },  false);
-  g_extlangs.emplace_back("swl"s, u8"Swedish Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("syy"s, u8"Al-Sayyid Bedouin Sign Language"s,     VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("szs"s, u8"Solomon Islands Sign Language"s,       VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("tmw"s, u8"Temuan"s,                              VS{ "ms"s },  false);
-  g_extlangs.emplace_back("tse"s, u8"Tunisian Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("tsm"s, u8"Türk İşaret Dili"s,                    VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("tsq"s, u8"Thai Sign Language"s,                  VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("tss"s, u8"Taiwan Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("tsy"s, u8"Tebul Sign Language"s,                 VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("tza"s, u8"Tanzanian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ugn"s, u8"Ugandan Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ugy"s, u8"Uruguayan Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ukl"s, u8"Ukrainian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("uks"s, u8"Kaapor Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("urk"s, u8"Urak Lawoi'"s,                         VS{ "ms"s },  false);
-  g_extlangs.emplace_back("uzn"s, u8"Northern Uzbek"s,                      VS{ "uz"s },  false);
-  g_extlangs.emplace_back("uzs"s, u8"Southern Uzbek"s,                      VS{ "uz"s },  false);
-  g_extlangs.emplace_back("vgt"s, u8"Flemish Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("vkk"s, u8"Kaur"s,                                VS{ "ms"s },  false);
-  g_extlangs.emplace_back("vkt"s, u8"Tenggarong Kutai Malay"s,              VS{ "ms"s },  false);
-  g_extlangs.emplace_back("vsi"s, u8"Moldova Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("vsl"s, u8"Venezuelan Sign Language"s,            VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("vsv"s, u8"Llengua de signes valenciana"s,        VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("wbs"s, u8"West Bengal Sign Language"s,           VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("wuu"s, u8"Wu Chinese"s,                          VS{ "zh"s },  false);
-  g_extlangs.emplace_back("xki"s, u8"Kenyan Sign Language"s,                VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("xml"s, u8"Malaysian Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("xmm"s, u8"Manado Malay"s,                        VS{ "ms"s },  false);
-  g_extlangs.emplace_back("xms"s, u8"Moroccan Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("yds"s, u8"Yiddish Sign Language"s,               VS{ "sgn"s }, true );
-  g_extlangs.emplace_back("ygs"s, u8"Yolŋu Sign Language"s,                 VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("yhs"s, u8"Yan-nhaŋu Sign Language"s,             VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ysl"s, u8"Yugoslavian Sign Language"s,           VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("ysm"s, u8"Myanmar Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("yue"s, u8"Cantonese"s,                           VS{ "zh"s },  false);
-  g_extlangs.emplace_back("zib"s, u8"Zimbabwe Sign Language"s,              VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("zlm"s, u8"Malay (individual language)"s,         VS{ "ms"s },  false);
-  g_extlangs.emplace_back("zmi"s, u8"Negeri Sembilan Malay"s,               VS{ "ms"s },  false);
-  g_extlangs.emplace_back("zsl"s, u8"Zambian Sign Language"s,               VS{ "sgn"s }, false);
-  g_extlangs.emplace_back("zsm"s, u8"Standard Malay"s,                      VS{ "ms"s },  false);
+  for (auto const *extlang = s_extlangs_init, *end = extlang + 252; extlang < end; ++extlang) {
+    g_extlangs.emplace_back(extlang->code, extlang->description, extlang->is_deprecated);
+
+    auto &new_extlang = g_extlangs.back();
+    for (auto prefix = extlang->prefixes; *prefix; ++prefix)
+      new_extlang.prefixes.emplace_back(*prefix);
+  }
 
   g_variants.reserve(108);
 
-  g_variants.emplace_back("1606nict"s, u8"Late Middle French (to 1606)"s,                                   VS{ "frm"s },                                                                                                                                                  false);
-  g_variants.emplace_back("1694acad"s, u8"Early Modern French"s,                                            VS{ "fr"s },                                                                                                                                                   false);
-  g_variants.emplace_back("1901"s,     u8"Traditional German orthography"s,                                 VS{ "de"s },                                                                                                                                                   false);
-  g_variants.emplace_back("1959acad"s, u8"\"Academic\" variant of Belarusian as codified in 1959"s,         VS{ "be"s },                                                                                                                                                   false);
-  g_variants.emplace_back("1994"s,     u8"Standardized Resian orthography"s,                                VS{ "sl-rozaj"s, "sl-rozaj-biske"s, "sl-rozaj-njiva"s, "sl-rozaj-osojs"s, "sl-rozaj-solba"s },                                                                 false);
-  g_variants.emplace_back("1996"s,     u8"German orthography of 1996"s,                                     VS{ "de"s },                                                                                                                                                   false);
-  g_variants.emplace_back("abl1943"s,  u8"Orthographic formulation of 1943 - Official in Brazil"s,          VS{ "pt-BR"s },                                                                                                                                                false);
-  g_variants.emplace_back("akuapem"s,  u8"Akuapem Twi"s,                                                    VS{ "tw"s },                                                                                                                                                   false);
-  g_variants.emplace_back("alalc97"s,  u8"ALA-LC Romanization, 1997 edition"s,                              VS{},                                                                                                                                                          false);
-  g_variants.emplace_back("aluku"s,    u8"Boni dialect"s,                                                   VS{ "djk"s },                                                                                                                                                  false);
-  g_variants.emplace_back("ao1990"s,   u8"Portuguese Language Orthographic Agreement of 1990"s,             VS{ "gl"s, "pt"s },                                                                                                                                            false);
-  g_variants.emplace_back("aranes"s,   u8"Aranese"s,                                                        VS{ "oc"s },                                                                                                                                                   false);
-  g_variants.emplace_back("arevela"s,  u8"Eastern Armenian"s,                                               VS{ "hy"s },                                                                                                                                                   true );
-  g_variants.emplace_back("arevmda"s,  u8"Western Armenian"s,                                               VS{ "hy"s },                                                                                                                                                   true );
-  g_variants.emplace_back("arkaika"s,  u8"Arkaika Esperanto"s,                                              VS{ "eo"s },                                                                                                                                                   false);
-  g_variants.emplace_back("asante"s,   u8"Ashanti Twi"s,                                                    VS{ "tw"s },                                                                                                                                                   false);
-  g_variants.emplace_back("auvern"s,   u8"Auvergnat"s,                                                      VS{ "oc"s },                                                                                                                                                   false);
-  g_variants.emplace_back("baku1926"s, u8"Unified Turkic Latin Alphabet (Historical)"s,                     VS{ "az"s, "ba"s, "crh"s, "kk"s, "krc"s, "ky"s, "sah"s, "tk"s, "tt"s, "uz"s },                                                                                 false);
-  g_variants.emplace_back("balanka"s,  u8"The Balanka dialect of Anii"s,                                    VS{ "blo"s },                                                                                                                                                  false);
-  g_variants.emplace_back("barla"s,    u8"The Barlavento dialect group of Kabuverdianu"s,                   VS{ "kea"s },                                                                                                                                                  false);
-  g_variants.emplace_back("basiceng"s, u8"Basic English"s,                                                  VS{ "en"s },                                                                                                                                                   false);
-  g_variants.emplace_back("bauddha"s,  u8"Buddhist Hybrid Sanskrit"s,                                       VS{ "sa"s },                                                                                                                                                   false);
-  g_variants.emplace_back("biscayan"s, u8"Biscayan dialect of Basque"s,                                     VS{ "eu"s },                                                                                                                                                   false);
-  g_variants.emplace_back("biske"s,    u8"The Bila dialect of Resian"s,                                     VS{ "sl-rozaj"s },                                                                                                                                             false);
-  g_variants.emplace_back("bohoric"s,  u8"Slovene in Bohorič alphabet"s,                                    VS{ "sl"s },                                                                                                                                                   false);
-  g_variants.emplace_back("boont"s,    u8"Boontling"s,                                                      VS{ "en"s },                                                                                                                                                   false);
-  g_variants.emplace_back("bornholm"s, u8"Bornholmsk"s,                                                     VS{ "da"s },                                                                                                                                                   false);
-  g_variants.emplace_back("cisaup"s,   u8"Cisalpine"s,                                                      VS{ "oc"s },                                                                                                                                                   false);
-  g_variants.emplace_back("colb1945"s, u8"Portuguese-Brazilian Orthographic Convention of 1945"s,           VS{ "pt"s },                                                                                                                                                   false);
-  g_variants.emplace_back("cornu"s,    u8"Anglo-Cornish"s,                                                  VS{ "en"s },                                                                                                                                                   false);
-  g_variants.emplace_back("creiss"s,   u8"Occitan variants of the Croissant area"s,                         VS{ "oc"s },                                                                                                                                                   false);
-  g_variants.emplace_back("dajnko"s,   u8"Slovene in Dajnko alphabet"s,                                     VS{ "sl"s },                                                                                                                                                   false);
-  g_variants.emplace_back("ekavsk"s,   u8"Serbian with Ekavian pronunciation"s,                             VS{ "sr"s, "sr-Cyrl"s, "sr-Latn"s },                                                                                                                           false);
-  g_variants.emplace_back("emodeng"s,  u8"Early Modern English (1500-1700)"s,                               VS{ "en"s },                                                                                                                                                   false);
-  g_variants.emplace_back("fonipa"s,   u8"International Phonetic Alphabet"s,                                VS{},                                                                                                                                                          false);
-  g_variants.emplace_back("fonkirsh"s, u8"Kirshenbaum Phonetic Alphabet"s,                                  VS{},                                                                                                                                                          false);
-  g_variants.emplace_back("fonnapa"s,  u8"Americanist Phonetic Notation"s,                                  VS{},                                                                                                                                                          false);
-  g_variants.emplace_back("fonupa"s,   u8"Uralic Phonetic Alphabet"s,                                       VS{},                                                                                                                                                          false);
-  g_variants.emplace_back("fonxsamp"s, u8"X-SAMPA transcription"s,                                          VS{},                                                                                                                                                          false);
-  g_variants.emplace_back("gallo"s,    u8"Gallo"s,                                                          VS{ "fr"s },                                                                                                                                                   false);
-  g_variants.emplace_back("gascon"s,   u8"Gascon"s,                                                         VS{ "oc"s },                                                                                                                                                   false);
-  g_variants.emplace_back("grclass"s,  u8"Classical Occitan orthography"s,                                  VS{ "oc"s, "oc-aranes"s, "oc-auvern"s, "oc-cisaup"s, "oc-creiss"s, "oc-gascon"s, "oc-lemosin"s, "oc-lengadoc"s, "oc-nicard"s, "oc-provenc"s, "oc-vivaraup"s }, false);
-  g_variants.emplace_back("grital"s,   u8"Italian-inspired Occitan orthography"s,                           VS{ "oc"s, "oc-cisaup"s, "oc-nicard"s, "oc-provenc"s },                                                                                                        false);
-  g_variants.emplace_back("grmistr"s,  u8"Mistralian or Mistralian-inspired Occitan orthography"s,          VS{ "oc"s, "oc-aranes"s, "oc-auvern"s, "oc-cisaup"s, "oc-creiss"s, "oc-gascon"s, "oc-lemosin"s, "oc-lengadoc"s, "oc-nicard"s, "oc-provenc"s, "oc-vivaraup"s }, false);
-  g_variants.emplace_back("hepburn"s,  u8"Hepburn romanization"s,                                           VS{ "ja-Latn"s },                                                                                                                                              false);
-  g_variants.emplace_back("heploc"s,   u8"Hepburn romanization, Library of Congress method"s,               VS{ "ja-Latn-hepburn"s },                                                                                                                                      true );
-  g_variants.emplace_back("hognorsk"s, u8"Norwegian in Høgnorsk (High Norwegian) orthography"s,             VS{ "nn"s },                                                                                                                                                   false);
-  g_variants.emplace_back("hsistemo"s, u8"Standard H-system orthographic fallback for spelling Esperanto"s, VS{ "eo"s },                                                                                                                                                   false);
-  g_variants.emplace_back("ijekavsk"s, u8"Serbian with Ijekavian pronunciation"s,                           VS{ "sr"s, "sr-Cyrl"s, "sr-Latn"s },                                                                                                                           false);
-  g_variants.emplace_back("itihasa"s,  u8"Epic Sanskrit"s,                                                  VS{ "sa"s },                                                                                                                                                   false);
-  g_variants.emplace_back("ivanchov"s, u8"Bulgarian in 1899 orthography"s,                                  VS{ "bg"s },                                                                                                                                                   false);
-  g_variants.emplace_back("jauer"s,    u8"Jauer dialect of Romansh"s,                                       VS{ "rm"s },                                                                                                                                                   false);
-  g_variants.emplace_back("jyutping"s, u8"Jyutping Cantonese Romanization"s,                                VS{ "yue"s },                                                                                                                                                  false);
-  g_variants.emplace_back("kkcor"s,    u8"Common Cornish orthography of Revived Cornish"s,                  VS{ "kw"s },                                                                                                                                                   false);
-  g_variants.emplace_back("kociewie"s, u8"The Kociewie dialect of Polish"s,                                 VS{ "pl"s },                                                                                                                                                   false);
-  g_variants.emplace_back("kscor"s,    u8"Kernowek Standard"s,                                              VS{ "kw"s },                                                                                                                                                   false);
-  g_variants.emplace_back("laukika"s,  u8"Classical Sanskrit"s,                                             VS{ "sa"s },                                                                                                                                                   false);
-  g_variants.emplace_back("lemosin"s,  u8"Limousin"s,                                                       VS{ "oc"s },                                                                                                                                                   false);
-  g_variants.emplace_back("lengadoc"s, u8"Languedocien"s,                                                   VS{ "oc"s },                                                                                                                                                   false);
-  g_variants.emplace_back("lipaw"s,    u8"The Lipovec dialect of Resian"s,                                  VS{ "sl-rozaj"s },                                                                                                                                             false);
-  g_variants.emplace_back("luna1918"s, u8"Post-1917 Russian orthography"s,                                  VS{ "ru"s },                                                                                                                                                   false);
-  g_variants.emplace_back("metelko"s,  u8"Slovene in Metelko alphabet"s,                                    VS{ "sl"s },                                                                                                                                                   false);
-  g_variants.emplace_back("monoton"s,  u8"Monotonic Greek"s,                                                VS{ "el"s },                                                                                                                                                   false);
-  g_variants.emplace_back("ndyuka"s,   u8"Aukan dialect"s,                                                  VS{ "djk"s },                                                                                                                                                  false);
-  g_variants.emplace_back("nedis"s,    u8"Nadiza dialect"s,                                                 VS{ "sl"s },                                                                                                                                                   false);
-  g_variants.emplace_back("newfound"s, u8"Newfoundland English"s,                                           VS{ "en-CA"s },                                                                                                                                                false);
-  g_variants.emplace_back("nicard"s,   u8"Niçard"s,                                                         VS{ "oc"s },                                                                                                                                                   false);
-  g_variants.emplace_back("njiva"s,    u8"The Njiva dialect of Resian"s,                                    VS{ "sl-rozaj"s },                                                                                                                                             false);
-  g_variants.emplace_back("nulik"s,    u8"Modern Volapük"s,                                                 VS{ "vo"s },                                                                                                                                                   false);
-  g_variants.emplace_back("osojs"s,    u8"The Osojane dialect of Resian"s,                                  VS{ "sl-rozaj"s },                                                                                                                                             false);
-  g_variants.emplace_back("oxendict"s, u8"Oxford English Dictionary spelling"s,                             VS{ "en"s },                                                                                                                                                   false);
-  g_variants.emplace_back("pahawh2"s,  u8"Pahawh Hmong Second Stage Reduced orthography"s,                  VS{ "hnj"s, "mww"s },                                                                                                                                          false);
-  g_variants.emplace_back("pahawh3"s,  u8"Pahawh Hmong Third Stage Reduced orthography"s,                   VS{ "hnj"s, "mww"s },                                                                                                                                          false);
-  g_variants.emplace_back("pahawh4"s,  u8"Pahawh Hmong Final Version orthography"s,                         VS{ "hnj"s, "mww"s },                                                                                                                                          false);
-  g_variants.emplace_back("pamaka"s,   u8"Pamaka dialect"s,                                                 VS{ "djk"s },                                                                                                                                                  false);
-  g_variants.emplace_back("peano"s,    u8"Interlingua de Peano"s,                                           VS{ "la"s },                                                                                                                                                   false);
-  g_variants.emplace_back("petr1708"s, u8"Petrine orthography"s,                                            VS{ "ru"s },                                                                                                                                                   false);
-  g_variants.emplace_back("pinyin"s,   u8"Pinyin romanization"s,                                            VS{ "bo-Latn"s, "zh-Latn"s },                                                                                                                                  false);
-  g_variants.emplace_back("polyton"s,  u8"Polytonic Greek"s,                                                VS{ "el"s },                                                                                                                                                   false);
-  g_variants.emplace_back("provenc"s,  u8"Provençal"s,                                                      VS{ "oc"s },                                                                                                                                                   false);
-  g_variants.emplace_back("puter"s,    u8"Puter idiom of Romansh"s,                                         VS{ "rm"s },                                                                                                                                                   false);
-  g_variants.emplace_back("rigik"s,    u8"Classic Volapük"s,                                                VS{ "vo"s },                                                                                                                                                   false);
-  g_variants.emplace_back("rozaj"s,    u8"Rezijan"s,                                                        VS{ "sl"s },                                                                                                                                                   false);
-  g_variants.emplace_back("rumgr"s,    u8"Rumantsch Grischun"s,                                             VS{ "rm"s },                                                                                                                                                   false);
-  g_variants.emplace_back("scotland"s, u8"Scottish Standard English"s,                                      VS{ "en"s },                                                                                                                                                   false);
-  g_variants.emplace_back("scouse"s,   u8"Scouse"s,                                                         VS{ "en"s },                                                                                                                                                   false);
-  g_variants.emplace_back("simple"s,   u8"Simplified form"s,                                                VS{},                                                                                                                                                          false);
-  g_variants.emplace_back("solba"s,    u8"The Solbica dialect of Resian"s,                                  VS{ "sl-rozaj"s },                                                                                                                                             false);
-  g_variants.emplace_back("sotav"s,    u8"The Sotavento dialect group of Kabuverdianu"s,                    VS{ "kea"s },                                                                                                                                                  false);
-  g_variants.emplace_back("spanglis"s, u8"Spanglish"s,                                                      VS{ "en"s, "es"s },                                                                                                                                            false);
-  g_variants.emplace_back("surmiran"s, u8"Surmiran idiom of Romansh"s,                                      VS{ "rm"s },                                                                                                                                                   false);
-  g_variants.emplace_back("sursilv"s,  u8"Sursilvan idiom of Romansh"s,                                     VS{ "rm"s },                                                                                                                                                   false);
-  g_variants.emplace_back("sutsilv"s,  u8"Sutsilvan idiom of Romansh"s,                                     VS{ "rm"s },                                                                                                                                                   false);
-  g_variants.emplace_back("synnejyl"s, u8"South Jutish"s,                                                   VS{ "da"s },                                                                                                                                                   false);
-  g_variants.emplace_back("tarask"s,   u8"Belarusian in Taraskievica orthography"s,                         VS{ "be"s },                                                                                                                                                   false);
-  g_variants.emplace_back("tongyong"s, u8"Tongyong Pinyin romanization"s,                                   VS{ "zh-Latn"s },                                                                                                                                              false);
-  g_variants.emplace_back("tunumiit"s, u8"Østgrønlandsk"s,                                                  VS{ "kl"s },                                                                                                                                                   false);
-  g_variants.emplace_back("uccor"s,    u8"Unified Cornish orthography of Revived Cornish"s,                 VS{ "kw"s },                                                                                                                                                   false);
-  g_variants.emplace_back("ucrcor"s,   u8"Unified Cornish Revised orthography of Revived Cornish"s,         VS{ "kw"s },                                                                                                                                                   false);
-  g_variants.emplace_back("ulster"s,   u8"Ulster dialect of Scots"s,                                        VS{ "sco"s },                                                                                                                                                  false);
-  g_variants.emplace_back("unifon"s,   u8"Unifon phonetic alphabet"s,                                       VS{ "en"s, "hup"s, "kyh"s, "tol"s, "yur"s },                                                                                                                   false);
-  g_variants.emplace_back("vaidika"s,  u8"Vedic Sanskrit"s,                                                 VS{ "sa"s },                                                                                                                                                   false);
-  g_variants.emplace_back("valencia"s, u8"Valencian"s,                                                      VS{ "ca"s },                                                                                                                                                   false);
-  g_variants.emplace_back("vallader"s, u8"Vallader idiom of Romansh"s,                                      VS{ "rm"s },                                                                                                                                                   false);
-  g_variants.emplace_back("vecdruka"s, u8"Latvian orthography used before 1920s (\"vecā druka\")"s,         VS{ "lv"s },                                                                                                                                                   false);
-  g_variants.emplace_back("vivaraup"s, u8"Vivaro-Alpine"s,                                                  VS{ "oc"s },                                                                                                                                                   false);
-  g_variants.emplace_back("wadegile"s, u8"Wade-Giles romanization"s,                                        VS{ "zh-Latn"s },                                                                                                                                              false);
-  g_variants.emplace_back("xsistemo"s, u8"Standard X-system orthographic fallback for spelling Esperanto"s, VS{ "eo"s },                                                                                                                                                   false);
+  for (auto const *variant = s_variants_init, *end = variant + 108; variant < end; ++variant) {
+    g_variants.emplace_back(variant->code, variant->description, variant->is_deprecated);
+
+    auto &new_variant = g_variants.back();
+    for (auto prefix = variant->prefixes; *prefix; ++prefix)
+      new_variant.prefixes.emplace_back(*prefix);
+  }
 
   g_suppress_scripts.reserve(134);
 
-  g_suppress_scripts.insert_or_assign("ab"s,  "Cyrl"s);
-  g_suppress_scripts.insert_or_assign("af"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("am"s,  "Ethi"s);
-  g_suppress_scripts.insert_or_assign("ar"s,  "Arab"s);
-  g_suppress_scripts.insert_or_assign("as"s,  "Beng"s);
-  g_suppress_scripts.insert_or_assign("ay"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("be"s,  "Cyrl"s);
-  g_suppress_scripts.insert_or_assign("bg"s,  "Cyrl"s);
-  g_suppress_scripts.insert_or_assign("bn"s,  "Beng"s);
-  g_suppress_scripts.insert_or_assign("bs"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("ca"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("ch"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("cs"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("cy"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("da"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("de"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("dsb"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("dv"s,  "Thaa"s);
-  g_suppress_scripts.insert_or_assign("dz"s,  "Tibt"s);
-  g_suppress_scripts.insert_or_assign("el"s,  "Grek"s);
-  g_suppress_scripts.insert_or_assign("en"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("eo"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("es"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("et"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("eu"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("fa"s,  "Arab"s);
-  g_suppress_scripts.insert_or_assign("fi"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("fj"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("fo"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("fr"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("frr"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("frs"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("fy"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("ga"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("gl"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("gn"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("gsw"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("gu"s,  "Gujr"s);
-  g_suppress_scripts.insert_or_assign("gv"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("he"s,  "Hebr"s);
-  g_suppress_scripts.insert_or_assign("hi"s,  "Deva"s);
-  g_suppress_scripts.insert_or_assign("hr"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("hsb"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("ht"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("hu"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("hy"s,  "Armn"s);
-  g_suppress_scripts.insert_or_assign("id"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("in"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("is"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("it"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("iw"s,  "Hebr"s);
-  g_suppress_scripts.insert_or_assign("ja"s,  "Jpan"s);
-  g_suppress_scripts.insert_or_assign("ka"s,  "Geor"s);
-  g_suppress_scripts.insert_or_assign("kk"s,  "Cyrl"s);
-  g_suppress_scripts.insert_or_assign("kl"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("km"s,  "Khmr"s);
-  g_suppress_scripts.insert_or_assign("kn"s,  "Knda"s);
-  g_suppress_scripts.insert_or_assign("ko"s,  "Kore"s);
-  g_suppress_scripts.insert_or_assign("kok"s, "Deva"s);
-  g_suppress_scripts.insert_or_assign("la"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("lb"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("ln"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("lo"s,  "Laoo"s);
-  g_suppress_scripts.insert_or_assign("lt"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("lv"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("mai"s, "Deva"s);
-  g_suppress_scripts.insert_or_assign("men"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("mg"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("mh"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("mk"s,  "Cyrl"s);
-  g_suppress_scripts.insert_or_assign("ml"s,  "Mlym"s);
-  g_suppress_scripts.insert_or_assign("mo"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("mr"s,  "Deva"s);
-  g_suppress_scripts.insert_or_assign("ms"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("mt"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("my"s,  "Mymr"s);
-  g_suppress_scripts.insert_or_assign("na"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("nb"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("nd"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("nds"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("ne"s,  "Deva"s);
-  g_suppress_scripts.insert_or_assign("niu"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("nl"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("nn"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("no"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("nqo"s, "Nkoo"s);
-  g_suppress_scripts.insert_or_assign("nr"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("nso"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("ny"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("om"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("or"s,  "Orya"s);
-  g_suppress_scripts.insert_or_assign("pa"s,  "Guru"s);
-  g_suppress_scripts.insert_or_assign("pl"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("ps"s,  "Arab"s);
-  g_suppress_scripts.insert_or_assign("pt"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("qu"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("rm"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("rn"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("ro"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("ru"s,  "Cyrl"s);
-  g_suppress_scripts.insert_or_assign("rw"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("sg"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("si"s,  "Sinh"s);
-  g_suppress_scripts.insert_or_assign("sk"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("sl"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("sm"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("so"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("sq"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("ss"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("st"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("sv"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("sw"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("ta"s,  "Taml"s);
-  g_suppress_scripts.insert_or_assign("te"s,  "Telu"s);
-  g_suppress_scripts.insert_or_assign("tem"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("th"s,  "Thai"s);
-  g_suppress_scripts.insert_or_assign("ti"s,  "Ethi"s);
-  g_suppress_scripts.insert_or_assign("tkl"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("tl"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("tmh"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("tn"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("to"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("tpi"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("tr"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("ts"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("tvl"s, "Latn"s);
-  g_suppress_scripts.insert_or_assign("uk"s,  "Cyrl"s);
-  g_suppress_scripts.insert_or_assign("ur"s,  "Arab"s);
-  g_suppress_scripts.insert_or_assign("ve"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("vi"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("xh"s,  "Latn"s);
-  g_suppress_scripts.insert_or_assign("yi"s,  "Hebr"s);
-  g_suppress_scripts.insert_or_assign("zbl"s, "Blis"s);
-  g_suppress_scripts.insert_or_assign("zu"s,  "Latn"s);
+  for (auto const *suppress_script = s_suppress_scripts_init, *end = suppress_script + 134; suppress_script < end; ++suppress_script)
+    g_suppress_scripts.insert_or_assign(suppress_script->first, suppress_script->second);
 
   g_grandfathered.reserve(26);
 
-  g_grandfathered.emplace_back("art-lojban"s,  u8"Lojban"s,                                                                                         VS{}, true);
-  g_grandfathered.emplace_back("cel-gaulish"s, u8"Gaulish"s,                                                                                        VS{}, true);
-  g_grandfathered.emplace_back("en-GB-oed"s,   u8"English, Oxford English Dictionary spelling"s,                                                    VS{}, true);
-  g_grandfathered.emplace_back("i-ami"s,       u8"Amis"s,                                                                                           VS{}, true);
-  g_grandfathered.emplace_back("i-bnn"s,       u8"Bunun"s,                                                                                          VS{}, true);
-  g_grandfathered.emplace_back("i-default"s,   u8"Default Language"s,                                                                               VS{}, true);
-  g_grandfathered.emplace_back("i-enochian"s,  u8"Enochian"s,                                                                                       VS{}, true);
-  g_grandfathered.emplace_back("i-hak"s,       u8"Hakka"s,                                                                                          VS{}, true);
-  g_grandfathered.emplace_back("i-klingon"s,   u8"Klingon"s,                                                                                        VS{}, true);
-  g_grandfathered.emplace_back("i-lux"s,       u8"Luxembourgish"s,                                                                                  VS{}, true);
-  g_grandfathered.emplace_back("i-mingo"s,     u8"Mingo"s,                                                                                          VS{}, true);
-  g_grandfathered.emplace_back("i-navajo"s,    u8"Navajo"s,                                                                                         VS{}, true);
-  g_grandfathered.emplace_back("i-pwn"s,       u8"Paiwan"s,                                                                                         VS{}, true);
-  g_grandfathered.emplace_back("i-tao"s,       u8"Tao"s,                                                                                            VS{}, true);
-  g_grandfathered.emplace_back("i-tay"s,       u8"Tayal"s,                                                                                          VS{}, true);
-  g_grandfathered.emplace_back("i-tsu"s,       u8"Tsou"s,                                                                                           VS{}, true);
-  g_grandfathered.emplace_back("no-bok"s,      u8"Norwegian Bokmal"s,                                                                               VS{}, true);
-  g_grandfathered.emplace_back("no-nyn"s,      u8"Norwegian Nynorsk"s,                                                                              VS{}, true);
-  g_grandfathered.emplace_back("sgn-BE-FR"s,   u8"Belgian-French Sign Language"s,                                                                   VS{}, true);
-  g_grandfathered.emplace_back("sgn-BE-NL"s,   u8"Belgian-Flemish Sign Language"s,                                                                  VS{}, true);
-  g_grandfathered.emplace_back("sgn-CH-DE"s,   u8"Swiss German Sign Language"s,                                                                     VS{}, true);
-  g_grandfathered.emplace_back("zh-guoyu"s,    u8"Mandarin or Standard Chinese"s,                                                                   VS{}, true);
-  g_grandfathered.emplace_back("zh-hakka"s,    u8"Hakka"s,                                                                                          VS{}, true);
-  g_grandfathered.emplace_back("zh-min"s,      u8"Min, Fuzhou, Hokkien, Amoy, or Taiwanese"s,                                                       VS{}, true);
-  g_grandfathered.emplace_back("zh-min-nan"s,  u8"Minnan, Hokkien, Amoy, Taiwanese, Southern Min, Southern Fujian, Hoklo, Southern Fukien, Ho-lo"s, VS{}, true);
-  g_grandfathered.emplace_back("zh-xiang"s,    u8"Xiang or Hunanese"s,                                                                              VS{}, true);
+  for (auto const *grandfathered = s_grandfathered_init, *end = grandfathered + 26; grandfathered < end; ++grandfathered)
+    g_grandfathered.emplace_back(grandfathered->code, grandfathered->description, grandfathered->is_deprecated);
 }
 
 void
@@ -569,437 +1071,8 @@ init_preferred_values() {
 
   g_preferred_values.reserve(431);
 
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ja-Latn-hepburn-heploc"s),   mtx::bcp47::language_c{}.set_variants(VS{"alalc97"s}).set_valid(true));
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("en-GB-oed"s),                mtx::bcp47::language_c::parse("en-GB-oxendict"s)                     );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-BE-FR"s),                mtx::bcp47::language_c::parse("sfb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-BE-NL"s),                mtx::bcp47::language_c::parse("vgt"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-CH-DE"s),                mtx::bcp47::language_c::parse("sgg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-cmn-Hans"s),              mtx::bcp47::language_c::parse("cmn-Hans"s)                           );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-cmn-Hant"s),              mtx::bcp47::language_c::parse("cmn-Hant"s)                           );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-min-nan"s),               mtx::bcp47::language_c::parse("nan"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-aao"s),                   mtx::bcp47::language_c::parse("aao"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-abh"s),                   mtx::bcp47::language_c::parse("abh"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-abv"s),                   mtx::bcp47::language_c::parse("abv"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-acm"s),                   mtx::bcp47::language_c::parse("acm"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-acq"s),                   mtx::bcp47::language_c::parse("acq"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-acw"s),                   mtx::bcp47::language_c::parse("acw"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-acx"s),                   mtx::bcp47::language_c::parse("acx"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-acy"s),                   mtx::bcp47::language_c::parse("acy"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-adf"s),                   mtx::bcp47::language_c::parse("adf"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-aeb"s),                   mtx::bcp47::language_c::parse("aeb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-aec"s),                   mtx::bcp47::language_c::parse("aec"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-afb"s),                   mtx::bcp47::language_c::parse("afb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-ajp"s),                   mtx::bcp47::language_c::parse("ajp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-apc"s),                   mtx::bcp47::language_c::parse("apc"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-apd"s),                   mtx::bcp47::language_c::parse("apd"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-arb"s),                   mtx::bcp47::language_c::parse("arb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-arq"s),                   mtx::bcp47::language_c::parse("arq"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-ars"s),                   mtx::bcp47::language_c::parse("ars"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-ary"s),                   mtx::bcp47::language_c::parse("ary"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-arz"s),                   mtx::bcp47::language_c::parse("arz"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-auz"s),                   mtx::bcp47::language_c::parse("auz"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-avl"s),                   mtx::bcp47::language_c::parse("avl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-ayh"s),                   mtx::bcp47::language_c::parse("ayh"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-ayl"s),                   mtx::bcp47::language_c::parse("ayl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-ayn"s),                   mtx::bcp47::language_c::parse("ayn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-ayp"s),                   mtx::bcp47::language_c::parse("ayp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-bbz"s),                   mtx::bcp47::language_c::parse("bbz"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-pga"s),                   mtx::bcp47::language_c::parse("pga"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-shu"s),                   mtx::bcp47::language_c::parse("shu"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ar-ssh"s),                   mtx::bcp47::language_c::parse("ssh"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("art-lojban"s),               mtx::bcp47::language_c::parse("jbo"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("i-ami"s),                    mtx::bcp47::language_c::parse("ami"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("i-bnn"s),                    mtx::bcp47::language_c::parse("bnn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("i-hak"s),                    mtx::bcp47::language_c::parse("hak"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("i-klingon"s),                mtx::bcp47::language_c::parse("tlh"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("i-lux"s),                    mtx::bcp47::language_c::parse("lb"s)                                 );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("i-navajo"s),                 mtx::bcp47::language_c::parse("nv"s)                                 );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("i-pwn"s),                    mtx::bcp47::language_c::parse("pwn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("i-tao"s),                    mtx::bcp47::language_c::parse("tao"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("i-tay"s),                    mtx::bcp47::language_c::parse("tay"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("i-tsu"s),                    mtx::bcp47::language_c::parse("tsu"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("kok-gom"s),                  mtx::bcp47::language_c::parse("gom"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("kok-knn"s),                  mtx::bcp47::language_c::parse("knn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("lv-ltg"s),                   mtx::bcp47::language_c::parse("ltg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("lv-lvs"s),                   mtx::bcp47::language_c::parse("lvs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-bjn"s),                   mtx::bcp47::language_c::parse("bjn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-btj"s),                   mtx::bcp47::language_c::parse("btj"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-bve"s),                   mtx::bcp47::language_c::parse("bve"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-bvu"s),                   mtx::bcp47::language_c::parse("bvu"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-coa"s),                   mtx::bcp47::language_c::parse("coa"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-dup"s),                   mtx::bcp47::language_c::parse("dup"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-hji"s),                   mtx::bcp47::language_c::parse("hji"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-jak"s),                   mtx::bcp47::language_c::parse("jak"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-jax"s),                   mtx::bcp47::language_c::parse("jax"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-kvb"s),                   mtx::bcp47::language_c::parse("kvb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-kvr"s),                   mtx::bcp47::language_c::parse("kvr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-kxd"s),                   mtx::bcp47::language_c::parse("kxd"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-lce"s),                   mtx::bcp47::language_c::parse("lce"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-lcf"s),                   mtx::bcp47::language_c::parse("lcf"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-liw"s),                   mtx::bcp47::language_c::parse("liw"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-max"s),                   mtx::bcp47::language_c::parse("max"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-meo"s),                   mtx::bcp47::language_c::parse("meo"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-mfa"s),                   mtx::bcp47::language_c::parse("mfa"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-mfb"s),                   mtx::bcp47::language_c::parse("mfb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-min"s),                   mtx::bcp47::language_c::parse("min"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-mqg"s),                   mtx::bcp47::language_c::parse("mqg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-msi"s),                   mtx::bcp47::language_c::parse("msi"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-mui"s),                   mtx::bcp47::language_c::parse("mui"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-orn"s),                   mtx::bcp47::language_c::parse("orn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-ors"s),                   mtx::bcp47::language_c::parse("ors"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-pel"s),                   mtx::bcp47::language_c::parse("pel"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-pse"s),                   mtx::bcp47::language_c::parse("pse"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-tmw"s),                   mtx::bcp47::language_c::parse("tmw"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-urk"s),                   mtx::bcp47::language_c::parse("urk"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-vkk"s),                   mtx::bcp47::language_c::parse("vkk"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-vkt"s),                   mtx::bcp47::language_c::parse("vkt"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-xmm"s),                   mtx::bcp47::language_c::parse("xmm"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-zlm"s),                   mtx::bcp47::language_c::parse("zlm"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-zmi"s),                   mtx::bcp47::language_c::parse("zmi"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ms-zsm"s),                   mtx::bcp47::language_c::parse("zsm"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("no-bok"s),                   mtx::bcp47::language_c::parse("nb"s)                                 );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("no-nyn"s),                   mtx::bcp47::language_c::parse("nn"s)                                 );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ads"s),                  mtx::bcp47::language_c::parse("ads"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-aed"s),                  mtx::bcp47::language_c::parse("aed"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-aen"s),                  mtx::bcp47::language_c::parse("aen"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-afg"s),                  mtx::bcp47::language_c::parse("afg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ajs"s),                  mtx::bcp47::language_c::parse("ajs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ase"s),                  mtx::bcp47::language_c::parse("ase"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-asf"s),                  mtx::bcp47::language_c::parse("asf"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-asp"s),                  mtx::bcp47::language_c::parse("asp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-asq"s),                  mtx::bcp47::language_c::parse("asq"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-asw"s),                  mtx::bcp47::language_c::parse("asw"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-bfi"s),                  mtx::bcp47::language_c::parse("bfi"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-bfk"s),                  mtx::bcp47::language_c::parse("bfk"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-bog"s),                  mtx::bcp47::language_c::parse("bog"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-bqn"s),                  mtx::bcp47::language_c::parse("bqn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-bqy"s),                  mtx::bcp47::language_c::parse("bqy"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-BR"s),                   mtx::bcp47::language_c::parse("bzs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-bvl"s),                  mtx::bcp47::language_c::parse("bvl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-bzs"s),                  mtx::bcp47::language_c::parse("bzs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-cds"s),                  mtx::bcp47::language_c::parse("cds"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-CO"s),                   mtx::bcp47::language_c::parse("csn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-csc"s),                  mtx::bcp47::language_c::parse("csc"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-csd"s),                  mtx::bcp47::language_c::parse("csd"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-cse"s),                  mtx::bcp47::language_c::parse("cse"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-csf"s),                  mtx::bcp47::language_c::parse("csf"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-csg"s),                  mtx::bcp47::language_c::parse("csg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-csl"s),                  mtx::bcp47::language_c::parse("csl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-csn"s),                  mtx::bcp47::language_c::parse("csn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-csq"s),                  mtx::bcp47::language_c::parse("csq"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-csr"s),                  mtx::bcp47::language_c::parse("csr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-csx"s),                  mtx::bcp47::language_c::parse("csx"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-DE"s),                   mtx::bcp47::language_c::parse("gsg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-DK"s),                   mtx::bcp47::language_c::parse("dsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-doq"s),                  mtx::bcp47::language_c::parse("doq"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-dse"s),                  mtx::bcp47::language_c::parse("dse"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-dsl"s),                  mtx::bcp47::language_c::parse("dsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-dsz"s),                  mtx::bcp47::language_c::parse("dsz"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ecs"s),                  mtx::bcp47::language_c::parse("ecs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ehs"s),                  mtx::bcp47::language_c::parse("ehs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ES"s),                   mtx::bcp47::language_c::parse("ssp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-esl"s),                  mtx::bcp47::language_c::parse("esl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-esn"s),                  mtx::bcp47::language_c::parse("esn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-eso"s),                  mtx::bcp47::language_c::parse("eso"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-eth"s),                  mtx::bcp47::language_c::parse("eth"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-fcs"s),                  mtx::bcp47::language_c::parse("fcs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-FR"s),                   mtx::bcp47::language_c::parse("fsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-fse"s),                  mtx::bcp47::language_c::parse("fse"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-fsl"s),                  mtx::bcp47::language_c::parse("fsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-fss"s),                  mtx::bcp47::language_c::parse("fss"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-GB"s),                   mtx::bcp47::language_c::parse("bfi"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-gds"s),                  mtx::bcp47::language_c::parse("gds"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-GR"s),                   mtx::bcp47::language_c::parse("gss"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-gse"s),                  mtx::bcp47::language_c::parse("gse"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-gsg"s),                  mtx::bcp47::language_c::parse("gsg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-gsm"s),                  mtx::bcp47::language_c::parse("gsm"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-gss"s),                  mtx::bcp47::language_c::parse("gss"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-gus"s),                  mtx::bcp47::language_c::parse("gus"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-hab"s),                  mtx::bcp47::language_c::parse("hab"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-haf"s),                  mtx::bcp47::language_c::parse("haf"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-hds"s),                  mtx::bcp47::language_c::parse("hds"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-hks"s),                  mtx::bcp47::language_c::parse("hks"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-hos"s),                  mtx::bcp47::language_c::parse("hos"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-hps"s),                  mtx::bcp47::language_c::parse("hps"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-hsh"s),                  mtx::bcp47::language_c::parse("hsh"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-hsl"s),                  mtx::bcp47::language_c::parse("hsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-icl"s),                  mtx::bcp47::language_c::parse("icl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-IE"s),                   mtx::bcp47::language_c::parse("isg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-iks"s),                  mtx::bcp47::language_c::parse("iks"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ils"s),                  mtx::bcp47::language_c::parse("ils"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-inl"s),                  mtx::bcp47::language_c::parse("inl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ins"s),                  mtx::bcp47::language_c::parse("ins"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ise"s),                  mtx::bcp47::language_c::parse("ise"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-isg"s),                  mtx::bcp47::language_c::parse("isg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-isr"s),                  mtx::bcp47::language_c::parse("isr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-IT"s),                   mtx::bcp47::language_c::parse("ise"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-jcs"s),                  mtx::bcp47::language_c::parse("jcs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-jhs"s),                  mtx::bcp47::language_c::parse("jhs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-jks"s),                  mtx::bcp47::language_c::parse("jks"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-jls"s),                  mtx::bcp47::language_c::parse("jls"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-jos"s),                  mtx::bcp47::language_c::parse("jos"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-JP"s),                   mtx::bcp47::language_c::parse("jsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-jsl"s),                  mtx::bcp47::language_c::parse("jsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-jus"s),                  mtx::bcp47::language_c::parse("jus"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-kgi"s),                  mtx::bcp47::language_c::parse("kgi"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-kvk"s),                  mtx::bcp47::language_c::parse("kvk"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lbs"s),                  mtx::bcp47::language_c::parse("lbs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lls"s),                  mtx::bcp47::language_c::parse("lls"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lsb"s),                  mtx::bcp47::language_c::parse("lsb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lsc"s),                  mtx::bcp47::language_c::parse("lsc"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lsg"s),                  mtx::bcp47::language_c::parse("lsg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lsl"s),                  mtx::bcp47::language_c::parse("lsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lsn"s),                  mtx::bcp47::language_c::parse("lsn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lso"s),                  mtx::bcp47::language_c::parse("lso"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lsp"s),                  mtx::bcp47::language_c::parse("lsp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lst"s),                  mtx::bcp47::language_c::parse("lst"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lsv"s),                  mtx::bcp47::language_c::parse("lsv"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lsw"s),                  mtx::bcp47::language_c::parse("lsw"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lsy"s),                  mtx::bcp47::language_c::parse("lsy"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-lws"s),                  mtx::bcp47::language_c::parse("lws"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-mdl"s),                  mtx::bcp47::language_c::parse("mdl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-mfs"s),                  mtx::bcp47::language_c::parse("mfs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-mre"s),                  mtx::bcp47::language_c::parse("mre"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-msd"s),                  mtx::bcp47::language_c::parse("msd"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-msr"s),                  mtx::bcp47::language_c::parse("msr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-MX"s),                   mtx::bcp47::language_c::parse("mfs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-mzc"s),                  mtx::bcp47::language_c::parse("mzc"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-mzg"s),                  mtx::bcp47::language_c::parse("mzg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-mzy"s),                  mtx::bcp47::language_c::parse("mzy"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-nbs"s),                  mtx::bcp47::language_c::parse("nbs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ncs"s),                  mtx::bcp47::language_c::parse("ncs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-NI"s),                   mtx::bcp47::language_c::parse("ncs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-NL"s),                   mtx::bcp47::language_c::parse("dse"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-NO"s),                   mtx::bcp47::language_c::parse("nsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-nsi"s),                  mtx::bcp47::language_c::parse("nsi"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-nsl"s),                  mtx::bcp47::language_c::parse("nsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-nsp"s),                  mtx::bcp47::language_c::parse("nsp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-nsr"s),                  mtx::bcp47::language_c::parse("nsr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-nzs"s),                  mtx::bcp47::language_c::parse("nzs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-okl"s),                  mtx::bcp47::language_c::parse("okl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-pgz"s),                  mtx::bcp47::language_c::parse("pgz"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-pks"s),                  mtx::bcp47::language_c::parse("pks"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-prl"s),                  mtx::bcp47::language_c::parse("prl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-prz"s),                  mtx::bcp47::language_c::parse("prz"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-psc"s),                  mtx::bcp47::language_c::parse("psc"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-psd"s),                  mtx::bcp47::language_c::parse("psd"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-psg"s),                  mtx::bcp47::language_c::parse("psg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-psl"s),                  mtx::bcp47::language_c::parse("psl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-pso"s),                  mtx::bcp47::language_c::parse("pso"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-psp"s),                  mtx::bcp47::language_c::parse("psp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-psr"s),                  mtx::bcp47::language_c::parse("psr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-PT"s),                   mtx::bcp47::language_c::parse("psr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-pys"s),                  mtx::bcp47::language_c::parse("pys"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-rib"s),                  mtx::bcp47::language_c::parse("rib"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-rms"s),                  mtx::bcp47::language_c::parse("rms"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-rnb"s),                  mtx::bcp47::language_c::parse("rnb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-rsi"s),                  mtx::bcp47::language_c::parse("rsi"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-rsl"s),                  mtx::bcp47::language_c::parse("rsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-rsm"s),                  mtx::bcp47::language_c::parse("rsm"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-rsn"s),                  mtx::bcp47::language_c::parse("rsn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-sdl"s),                  mtx::bcp47::language_c::parse("sdl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-SE"s),                   mtx::bcp47::language_c::parse("swl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-sfb"s),                  mtx::bcp47::language_c::parse("sfb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-sfs"s),                  mtx::bcp47::language_c::parse("sfs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-sgg"s),                  mtx::bcp47::language_c::parse("sgg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-sgx"s),                  mtx::bcp47::language_c::parse("sgx"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-slf"s),                  mtx::bcp47::language_c::parse("slf"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-sls"s),                  mtx::bcp47::language_c::parse("sls"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-sqk"s),                  mtx::bcp47::language_c::parse("sqk"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-sqs"s),                  mtx::bcp47::language_c::parse("sqs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-sqx"s),                  mtx::bcp47::language_c::parse("sqx"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ssp"s),                  mtx::bcp47::language_c::parse("ssp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ssr"s),                  mtx::bcp47::language_c::parse("ssr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-svk"s),                  mtx::bcp47::language_c::parse("svk"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-swl"s),                  mtx::bcp47::language_c::parse("swl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-syy"s),                  mtx::bcp47::language_c::parse("syy"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-szs"s),                  mtx::bcp47::language_c::parse("szs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-tse"s),                  mtx::bcp47::language_c::parse("tse"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-tsm"s),                  mtx::bcp47::language_c::parse("tsm"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-tsq"s),                  mtx::bcp47::language_c::parse("tsq"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-tss"s),                  mtx::bcp47::language_c::parse("tss"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-tsy"s),                  mtx::bcp47::language_c::parse("tsy"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-tza"s),                  mtx::bcp47::language_c::parse("tza"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ugn"s),                  mtx::bcp47::language_c::parse("ugn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ugy"s),                  mtx::bcp47::language_c::parse("ugy"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ukl"s),                  mtx::bcp47::language_c::parse("ukl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-uks"s),                  mtx::bcp47::language_c::parse("uks"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-US"s),                   mtx::bcp47::language_c::parse("ase"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-vgt"s),                  mtx::bcp47::language_c::parse("vgt"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-vsi"s),                  mtx::bcp47::language_c::parse("vsi"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-vsl"s),                  mtx::bcp47::language_c::parse("vsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-vsv"s),                  mtx::bcp47::language_c::parse("vsv"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-wbs"s),                  mtx::bcp47::language_c::parse("wbs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-xki"s),                  mtx::bcp47::language_c::parse("xki"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-xml"s),                  mtx::bcp47::language_c::parse("xml"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-xms"s),                  mtx::bcp47::language_c::parse("xms"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-yds"s),                  mtx::bcp47::language_c::parse("yds"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ygs"s),                  mtx::bcp47::language_c::parse("ygs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-yhs"s),                  mtx::bcp47::language_c::parse("yhs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ysl"s),                  mtx::bcp47::language_c::parse("ysl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ysm"s),                  mtx::bcp47::language_c::parse("ysm"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-ZA"s),                   mtx::bcp47::language_c::parse("sfs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-zib"s),                  mtx::bcp47::language_c::parse("zib"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sgn-zsl"s),                  mtx::bcp47::language_c::parse("zsl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sw-swc"s),                   mtx::bcp47::language_c::parse("swc"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sw-swh"s),                   mtx::bcp47::language_c::parse("swh"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("uz-uzn"s),                   mtx::bcp47::language_c::parse("uzn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("uz-uzs"s),                   mtx::bcp47::language_c::parse("uzs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-cdo"s),                   mtx::bcp47::language_c::parse("cdo"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-cjy"s),                   mtx::bcp47::language_c::parse("cjy"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-cmn"s),                   mtx::bcp47::language_c::parse("cmn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-cmn"s),                   mtx::bcp47::language_c::parse("cmn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-cnp"s),                   mtx::bcp47::language_c::parse("cnp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-cpx"s),                   mtx::bcp47::language_c::parse("cpx"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-csp"s),                   mtx::bcp47::language_c::parse("csp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-czh"s),                   mtx::bcp47::language_c::parse("czh"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-czo"s),                   mtx::bcp47::language_c::parse("czo"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-gan"s),                   mtx::bcp47::language_c::parse("gan"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-gan"s),                   mtx::bcp47::language_c::parse("gan"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-guoyu"s),                 mtx::bcp47::language_c::parse("cmn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-hak"s),                   mtx::bcp47::language_c::parse("hak"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-hakka"s),                 mtx::bcp47::language_c::parse("hak"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-hsn"s),                   mtx::bcp47::language_c::parse("hsn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-lzh"s),                   mtx::bcp47::language_c::parse("lzh"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-mnp"s),                   mtx::bcp47::language_c::parse("mnp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-nan"s),                   mtx::bcp47::language_c::parse("nan"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-wuu"s),                   mtx::bcp47::language_c::parse("wuu"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-wuu"s),                   mtx::bcp47::language_c::parse("wuu"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-xiang"s),                 mtx::bcp47::language_c::parse("hsn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-yue"s),                   mtx::bcp47::language_c::parse("yue"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zh-yue"s),                   mtx::bcp47::language_c::parse("yue"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("aam"s),                      mtx::bcp47::language_c::parse("aas"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("adp"s),                      mtx::bcp47::language_c::parse("dz"s)                                 );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ajt"s),                      mtx::bcp47::language_c::parse("aeb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("asd"s),                      mtx::bcp47::language_c::parse("snz"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("aue"s),                      mtx::bcp47::language_c::parse("ktz"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ayx"s),                      mtx::bcp47::language_c::parse("nun"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("bgm"s),                      mtx::bcp47::language_c::parse("bcg"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("bic"s),                      mtx::bcp47::language_c::parse("bir"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("bjd"s),                      mtx::bcp47::language_c::parse("drl"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("blg"s),                      mtx::bcp47::language_c::parse("iba"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c{}.set_region("BU"s).set_valid(true), mtx::bcp47::language_c{}.set_region("MM"s).set_valid(true)           );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ccq"s),                      mtx::bcp47::language_c::parse("rki"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("cjr"s),                      mtx::bcp47::language_c::parse("mom"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("cka"s),                      mtx::bcp47::language_c::parse("cmr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("cmk"s),                      mtx::bcp47::language_c::parse("xch"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("coy"s),                      mtx::bcp47::language_c::parse("pij"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("cqu"s),                      mtx::bcp47::language_c::parse("quh"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c{}.set_region("DD"s).set_valid(true), mtx::bcp47::language_c{}.set_region("DE"s).set_valid(true)           );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("dit"s),                      mtx::bcp47::language_c::parse("dif"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("drh"s),                      mtx::bcp47::language_c::parse("khk"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("drr"s),                      mtx::bcp47::language_c::parse("kzk"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("drw"s),                      mtx::bcp47::language_c::parse("prs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c{}.set_region("FX"s).set_valid(true), mtx::bcp47::language_c{}.set_region("FR"s).set_valid(true)           );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("gav"s),                      mtx::bcp47::language_c::parse("dev"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("gfx"s),                      mtx::bcp47::language_c::parse("vaj"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ggn"s),                      mtx::bcp47::language_c::parse("gvr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("gli"s),                      mtx::bcp47::language_c::parse("kzk"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("gti"s),                      mtx::bcp47::language_c::parse("nyc"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("guv"s),                      mtx::bcp47::language_c::parse("duz"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("hrr"s),                      mtx::bcp47::language_c::parse("jal"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ibi"s),                      mtx::bcp47::language_c::parse("opa"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ilw"s),                      mtx::bcp47::language_c::parse("gal"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("in"s),                       mtx::bcp47::language_c::parse("id"s)                                 );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("iw"s),                       mtx::bcp47::language_c::parse("he"s)                                 );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("jeg"s),                      mtx::bcp47::language_c::parse("oyb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ji"s),                       mtx::bcp47::language_c::parse("yi"s)                                 );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("jw"s),                       mtx::bcp47::language_c::parse("jv"s)                                 );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("kgc"s),                      mtx::bcp47::language_c::parse("tdf"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("kgh"s),                      mtx::bcp47::language_c::parse("kml"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("koj"s),                      mtx::bcp47::language_c::parse("kwv"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("krm"s),                      mtx::bcp47::language_c::parse("bmf"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ktr"s),                      mtx::bcp47::language_c::parse("dtp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("kvs"s),                      mtx::bcp47::language_c::parse("gdj"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("kwq"s),                      mtx::bcp47::language_c::parse("yam"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("kxe"s),                      mtx::bcp47::language_c::parse("tvd"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("kxl"s),                      mtx::bcp47::language_c::parse("kru"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("kzj"s),                      mtx::bcp47::language_c::parse("dtp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("kzt"s),                      mtx::bcp47::language_c::parse("dtp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("lak"s),                      mtx::bcp47::language_c::parse("ksp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("lii"s),                      mtx::bcp47::language_c::parse("raq"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("llo"s),                      mtx::bcp47::language_c::parse("ngt"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("lmm"s),                      mtx::bcp47::language_c::parse("rmx"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("meg"s),                      mtx::bcp47::language_c::parse("cir"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("mo"s),                       mtx::bcp47::language_c::parse("ro"s)                                 );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("mst"s),                      mtx::bcp47::language_c::parse("mry"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("mwj"s),                      mtx::bcp47::language_c::parse("vaj"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("myd"s),                      mtx::bcp47::language_c::parse("aog"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("myt"s),                      mtx::bcp47::language_c::parse("mry"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("nad"s),                      mtx::bcp47::language_c::parse("xny"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ncp"s),                      mtx::bcp47::language_c::parse("kdz"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("nns"s),                      mtx::bcp47::language_c::parse("nbr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("nnx"s),                      mtx::bcp47::language_c::parse("ngv"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("nts"s),                      mtx::bcp47::language_c::parse("pij"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("nxu"s),                      mtx::bcp47::language_c::parse("bpp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("oun"s),                      mtx::bcp47::language_c::parse("vaj"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("pat"s),                      mtx::bcp47::language_c::parse("kxr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("pcr"s),                      mtx::bcp47::language_c::parse("adx"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("pmc"s),                      mtx::bcp47::language_c::parse("huw"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("pmu"s),                      mtx::bcp47::language_c::parse("phr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ppa"s),                      mtx::bcp47::language_c::parse("bfy"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ppr"s),                      mtx::bcp47::language_c::parse("lcq"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("pry"s),                      mtx::bcp47::language_c::parse("prt"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("puz"s),                      mtx::bcp47::language_c::parse("pub"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("sca"s),                      mtx::bcp47::language_c::parse("hle"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("skk"s),                      mtx::bcp47::language_c::parse("oyb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("smd"s),                      mtx::bcp47::language_c::parse("kmb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("snb"s),                      mtx::bcp47::language_c::parse("iba"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("tdu"s),                      mtx::bcp47::language_c::parse("dtp"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("thc"s),                      mtx::bcp47::language_c::parse("tpo"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("thw"s),                      mtx::bcp47::language_c::parse("ola"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("thx"s),                      mtx::bcp47::language_c::parse("oyb"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("tie"s),                      mtx::bcp47::language_c::parse("ras"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("tkk"s),                      mtx::bcp47::language_c::parse("twm"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("tlw"s),                      mtx::bcp47::language_c::parse("weo"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("tmp"s),                      mtx::bcp47::language_c::parse("tyj"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("tne"s),                      mtx::bcp47::language_c::parse("kak"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("tnf"s),                      mtx::bcp47::language_c::parse("prs"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c{}.set_region("TP"s).set_valid(true), mtx::bcp47::language_c{}.set_region("TL"s).set_valid(true)           );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("tsf"s),                      mtx::bcp47::language_c::parse("taj"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("uok"s),                      mtx::bcp47::language_c::parse("ema"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("xba"s),                      mtx::bcp47::language_c::parse("cax"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("xia"s),                      mtx::bcp47::language_c::parse("acn"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("xkh"s),                      mtx::bcp47::language_c::parse("waw"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("xrq"s),                      mtx::bcp47::language_c::parse("dmw"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ybd"s),                      mtx::bcp47::language_c::parse("rki"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c{}.set_region("YD"s).set_valid(true), mtx::bcp47::language_c{}.set_region("YE"s).set_valid(true)           );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("yma"s),                      mtx::bcp47::language_c::parse("lrr"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("ymt"s),                      mtx::bcp47::language_c::parse("mtm"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("yos"s),                      mtx::bcp47::language_c::parse("zom"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("yuu"s),                      mtx::bcp47::language_c::parse("yug"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("zir"s),                      mtx::bcp47::language_c::parse("scv"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c{}.set_region("ZR"s).set_valid(true), mtx::bcp47::language_c{}.set_region("CD"s).set_valid(true)           );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QMS"s),                      mtx::bcp47::language_c::parse("cmn-Hans"s)                           );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QMT"s),                      mtx::bcp47::language_c::parse("cmn-Hant"s)                           );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QTM"s),                      mtx::bcp47::language_c::parse("cmn-TW"s)                             );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QFC"s),                      mtx::bcp47::language_c::parse("fr-CA"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QUC"s),                      mtx::bcp47::language_c::parse("quc"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QBP"s),                      mtx::bcp47::language_c::parse("pt-BR"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QUZ"s),                      mtx::bcp47::language_c::parse("quz"s)                                );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QZB"s),                      mtx::bcp47::language_c::parse("quz-BO"s)                             );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QZE"s),                      mtx::bcp47::language_c::parse("quz-EC"s)                             );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QZP"s),                      mtx::bcp47::language_c::parse("quz-PE"s)                             );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSA"s),                      mtx::bcp47::language_c::parse("es-AR"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSB"s),                      mtx::bcp47::language_c::parse("es-BO"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QCL"s),                      mtx::bcp47::language_c::parse("es-CL"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QCO"s),                      mtx::bcp47::language_c::parse("es-CO"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QCA"s),                      mtx::bcp47::language_c::parse("es-CR"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QCU"s),                      mtx::bcp47::language_c::parse("es-CU"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSD"s),                      mtx::bcp47::language_c::parse("es-DO"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSE"s),                      mtx::bcp47::language_c::parse("es-EC"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSL"s),                      mtx::bcp47::language_c::parse("es-SV"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QGU"s),                      mtx::bcp47::language_c::parse("es-GT"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSH"s),                      mtx::bcp47::language_c::parse("es-HN"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QSM"s),                      mtx::bcp47::language_c::parse("es-MX"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QNI"s),                      mtx::bcp47::language_c::parse("es-NI"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QPA"s),                      mtx::bcp47::language_c::parse("es-PA"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QPY"s),                      mtx::bcp47::language_c::parse("es-PY"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QPE"s),                      mtx::bcp47::language_c::parse("es-PE"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QPR"s),                      mtx::bcp47::language_c::parse("es-PR"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QUS"s),                      mtx::bcp47::language_c::parse("es-US"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QUY"s),                      mtx::bcp47::language_c::parse("es-UY"s)                              );
-  g_preferred_values.emplace_back(mtx::bcp47::language_c::parse("QVE"s),                      mtx::bcp47::language_c::parse("es-VE"s)                              );
+  for (auto const *preferred_value = s_preferred_values_init, *end = preferred_value + 431; preferred_value < end; ++preferred_value)
+    g_preferred_values.emplace_back(preferred_value->from.parse(), preferred_value->to.parse());
 
   mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::default_mode);
 }

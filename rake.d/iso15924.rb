@@ -56,9 +56,9 @@ def create_iso15924_script_list_file
 
   rows = entries.
     map { |entry| [
-      entry[0].to_cpp_string,
+      entry[0].to_c_string,
       sprintf('%03s', entry[1]),
-      entry[2].to_u8_cpp_string,
+      entry[2].to_u8_c_string,
       (entry[3] || false).to_s,
     ] }
 
@@ -89,19 +89,31 @@ namespace mtx::iso15924 {
 
 std::vector<script_t> g_scripts;
 
+struct script_init_t {
+  char const *code;
+  unsigned int number;
+  char const *english_name;
+  bool is_deprecated;
+};
+
+static script_init_t const s_scripts_init[] = {
+EOT
+
+  footer = <<EOT
+};
+
 void
 init() {
   g_scripts.reserve(#{rows.size});
 
-EOT
-
-  footer = <<EOT
+  for (script_init_t const *script = s_scripts_init, *end = script + #{rows.size}; script < end; ++script)
+    g_scripts.emplace_back(script->code, script->number, script->english_name, script->is_deprecated);
 }
 
 } // namespace mtx::iso15924
 EOT
 
-  content       = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_scripts.emplace_back(", :row_suffix => ");").join("\n") + "\n" + footer
+  content       = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => " },").join("\n") + "\n" + footer
   cpp_file_name = "src/common/iso15924_script_list.cpp"
 
   runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }

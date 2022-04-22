@@ -21,6 +21,10 @@ class String
   '"' + self.gsub(%r{"}, '\"') + '"'
   end
 
+  def to_u8_c_string
+  'u8' + self.to_c_string
+  end
+
   def to_cpp_string
     self.to_c_string + "s"
   end

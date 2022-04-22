@@ -150,11 +150,11 @@ def create_iso3166_country_list_file
     uniq.
     sort_by { |entry| [ entry[:alpha_2_code], entry[:alpha_3_code], entry[:number] ] }.
     map do |entry|
-    [ entry[:alpha_2_code].upcase.to_cpp_string,
-      entry[:alpha_3_code].upcase.to_cpp_string,
+    [ entry[:alpha_2_code].upcase.to_c_string,
+      entry[:alpha_3_code].upcase.to_c_string,
       sprintf('%3d', entry[:number]),
-      entry[:name].to_u8_cpp_string,
-      entry[:official_name].to_u8_cpp_string,
+      entry[:name].to_u8_c_string,
+      entry[:official_name].to_u8_c_string,
       (entry[:deprecated] || false).to_s,
     ]
   end
@@ -185,20 +185,32 @@ namespace mtx::iso3166 {
 
 std::vector<region_t> g_regions;
 
+struct region_init_t {
+  char const *alpha_2_code, *alpha_3_code;
+  unsigned int number;
+  char const *name, *official_name;
+  bool is_deprecated;
+};
+
+static region_init_t const s_regions_init[] = {
+EOT
+
+  footer = <<EOT
+};
+
 void
 init() {
   g_regions.reserve(#{rows.size});
 
-EOT
-
-  footer = <<EOT
+  for (region_init_t const *region = s_regions_init, *end = region + #{rows.size}; region < end; ++region)
+    g_regions.emplace_back(region->alpha_2_code, region->alpha_3_code, region->number, region->name, region->official_name, region->is_deprecated);
 }
 
 } // namespace mtx::iso3166
 EOT
 
   rows          = rows.sort_by { |row| [ row[0], row[1], row[3] ].join('::') }
-  content       = header + format_table(rows, :column_suffix => ',', :row_prefix => "  g_regions.emplace_back(", :row_suffix => ");").join("\n") + "\n" + footer
+  content       = header + format_table(rows, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => " },").join("\n") + "\n" + footer
   cpp_file_name = "src/common/iso3166_country_list.cpp"
 
   runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }

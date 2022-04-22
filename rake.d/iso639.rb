@@ -132,10 +132,10 @@ def create_iso639_language_list_file
     values.
     map do |entry|
     name = name_overrides[ entry["alpha_3_to_use"] ] || entry["name"]
-    [ name.to_u8_cpp_string,
-      entry["alpha_3_to_use"].to_cpp_string,
-      (entry["alpha_2"] || '').to_cpp_string,
-      entry["bibliographic"] ? entry["alpha_3"].to_cpp_string : '""s',
+    [ name.to_u8_c_string,
+      entry["alpha_3_to_use"].to_c_string,
+      (entry["alpha_2"] || '').to_c_string,
+      entry["bibliographic"] ? entry["alpha_3"].to_c_string : '""',
       entry["has_639_2"].to_s,
       (entry["deprecated"] || false).to_s,
     ]
@@ -167,19 +167,29 @@ namespace mtx::iso639 {
 
 std::vector<language_t> g_languages;
 
+struct language_init_t {
+  char const *english_name, *alpha_3_code, *alpha_2_code, *terminology_abbrev;
+  bool is_part_of_iso639_2, is_deprecated;
+};
+
+static language_init_t const s_languages_init[] = {
+EOT
+
+  footer = <<EOT
+};
+
 void
 init() {
   g_languages.reserve(#{rows.size});
 
-EOT
-
-  footer = <<EOT
+  for (language_init_t const *lang = s_languages_init, *end = lang + #{rows.size}; lang < end; ++lang)
+    g_languages.emplace_back(lang->english_name, lang->alpha_3_code, lang->alpha_2_code, lang->terminology_abbrev, lang->is_part_of_iso639_2, lang->is_deprecated);
 }
 
 } // namespace mtx::iso639
 EOT
 
-  content       = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_languages.emplace_back(", :row_suffix => ");").join("\n") + "\n" + footer
+  content       = header + format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => " },").join("\n") + "\n" + footer
   cpp_file_name = "src/common/iso639_language_list.cpp"
 
   runq("write", cpp_file_name) { IO.write("#{$source_dir}/#{cpp_file_name}", content); 0 }

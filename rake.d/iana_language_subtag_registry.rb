@@ -30,16 +30,105 @@ std::unordered_map<std::string, std::string> g_suppress_scripts;
 
 using VS = std::vector<std::string>;
 
+struct extlang_variant_init_t {
+  char const *code, *description;
+  char const *prefixes[<%= content_of[:max_num_prefixes] + 1 %>];
+  bool is_deprecated;
+};
+
+struct suppress_script_init_t {
+  char const *first, *second;
+};
+
+struct preferred_values_init_t {
+  struct sub_t {
+    char const *tag, *region, *variant;
+
+    mtx::bcp47::language_c parse() const;
+  };
+
+  sub_t from, to;
+};
+
+mtx::bcp47::language_c
+preferred_values_init_t::sub_t::parse()
+  const {
+
+  auto language = tag ? mtx::bcp47::language_c::parse(tag) : mtx::bcp47::language_c{};
+
+  if (region)
+    language.set_region(region);
+
+  if (variant)
+    language.set_variants({ variant });
+
+  if (!tag)
+    language.set_valid(true);
+
+  return language;
+}
+
+static extlang_variant_init_t s_extlangs_init[] = {
+<%= content_of[:extlangs_init] %>
+};
+
+static extlang_variant_init_t s_variants_init[] = {
+<%= content_of[:variants_init] %>
+};
+
+static extlang_variant_init_t s_grandfathered_init[] = {
+<%= content_of[:grandfathered_init] %>
+};
+
+static suppress_script_init_t s_suppress_scripts_init[] = {
+<%= content_of[:suppress_scripts_init] %>
+};
+
+static preferred_values_init_t s_preferred_values_init[] = {
+<%= content_of[:preferred_values_init] %>
+};
+
 void
 init() {
-<%= content_of[:init] %>
+  g_extlangs.reserve(<%= content_of[:num_extlangs] %>);
+
+  for (auto const *extlang = s_extlangs_init, *end = extlang + <%= content_of[:num_extlangs] %>; extlang < end; ++extlang) {
+    g_extlangs.emplace_back(extlang->code, extlang->description, extlang->is_deprecated);
+
+    auto &new_extlang = g_extlangs.back();
+    for (auto prefix = extlang->prefixes; *prefix; ++prefix)
+      new_extlang.prefixes.emplace_back(*prefix);
+  }
+
+  g_variants.reserve(<%= content_of[:num_variants] %>);
+
+  for (auto const *variant = s_variants_init, *end = variant + <%= content_of[:num_variants] %>; variant < end; ++variant) {
+    g_variants.emplace_back(variant->code, variant->description, variant->is_deprecated);
+
+    auto &new_variant = g_variants.back();
+    for (auto prefix = variant->prefixes; *prefix; ++prefix)
+      new_variant.prefixes.emplace_back(*prefix);
+  }
+
+  g_suppress_scripts.reserve(<%= content_of[:num_suppress_scripts] %>);
+
+  for (auto const *suppress_script = s_suppress_scripts_init, *end = suppress_script + <%= content_of[:num_suppress_scripts] %>; suppress_script < end; ++suppress_script)
+    g_suppress_scripts.insert_or_assign(suppress_script->first, suppress_script->second);
+
+  g_grandfathered.reserve(<%= content_of[:num_grandfathered] %>);
+
+  for (auto const *grandfathered = s_grandfathered_init, *end = grandfathered + <%= content_of[:num_grandfathered] %>; grandfathered < end; ++grandfathered)
+    g_grandfathered.emplace_back(grandfathered->code, grandfathered->description, grandfathered->is_deprecated);
 }
 
 void
 init_preferred_values() {
   mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::none);
 
-<%= content_of[:init_preferred_values] %>
+  g_preferred_values.reserve(<%= content_of[:num_preferred_values] %>);
+
+  for (auto const *preferred_value = s_preferred_values_init, *end = preferred_value + <%= content_of[:num_preferred_values] %>; preferred_value < end; ++preferred_value)
+    g_preferred_values.emplace_back(preferred_value->from.parse(), preferred_value->to.parse());
 
   mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::default_mode);
 }
@@ -112,13 +201,13 @@ EOERB
 
   def self.format_one_extlang_variant entry
     if entry[:prefix]
-      prefix = 'VS{ ' + entry[:prefix].sort.map(&:to_cpp_string).join(', ') + ' }'
+      prefix = '{ ' + entry[:prefix].sort.map(&:to_c_string).join(', ') + ', NULL }'
     else
-      prefix = 'VS{}'
+      prefix = '{ NULL }'
     end
 
-    [ entry[:subtag].downcase.to_cpp_string,
-      entry[:description].to_u8_cpp_string,
+    [ entry[:subtag].downcase.to_c_string,
+      entry[:description].to_u8_c_string,
       prefix,
       entry.key?(:deprecated).to_s,
     ]
@@ -127,14 +216,13 @@ EOERB
   def self.format_extlangs_variants entries, type, name
     rows = entries[type].map { |entry| self.format_one_extlang_variant entry }
 
-    "  g_#{name}.reserve(#{entries[type].size});\n\n" +
-      format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_#{name}.emplace_back(", :row_suffix => ");").join("\n")
+    return entries[type].size, format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => " },").join("\n")
   end
 
   def self.format_one_grandfathered entry
-    [ entry[:tag].to_cpp_string,
-      entry[:description].to_u8_cpp_string,
-      'VS{}',
+    [ entry[:tag].to_c_string,
+      entry[:description].to_u8_c_string,
+      '{ NULL }',
       'true',
     ]
   end
@@ -142,8 +230,7 @@ EOERB
   def self.format_grandfathered entries
     rows = entries["grandfathered"].map { |entry| self.format_one_grandfathered entry }
 
-    "  g_grandfathered.reserve(#{entries["grandfathered"].size});\n\n" +
-      format_table(rows.sort, :column_suffix => ',', :row_prefix => "  g_grandfathered.emplace_back(", :row_suffix => ");").join("\n")
+    return entries["grandfathered"].size, format_table(rows.sort, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => " },").join("\n")
   end
 
   def self.preferred_value_type_original type, pv
@@ -155,40 +242,38 @@ EOERB
   end
 
   def self.format_one_preferred_value_construction pv_type, pv
-    pv_str = pv.to_cpp_string
+    pv_str  = pv.to_c_string
 
-    return "mtx::bcp47::language_c::parse(#{pv_str})"                                              if [:tag,    :language].include?(pv_type)
-    return "mtx::bcp47::language_c{}.set_#{pv_type}(#{pv_str}).set_valid(true)"                    if [:region, :grandfathered].include?(pv_type)
-    return "mtx::bcp47::language_c{}.set_extended_language_subtags(VS{#{pv_str}}).set_valid(true)" if :extlang == pv_type
-    return "mtx::bcp47::language_c{}.set_variants(VS{#{pv_str}}).set_valid(true)"                  if :variant == pv_type
+    tag     = [:tag, :language].include?(pv_type) ? pv_str : "NULL"
+    region  = :region  == pv_type                 ? pv_str : "NULL"
+    variant = :variant == pv_type                 ? pv_str : "NULL"
 
-    fail "unknown pv_type #{pv_type}"
+    fail "unknown pv_type #{pv_type}" if !tag && !region && !variant
+
+    [ "{ #{tag}", region, variant, "}" ]
   end
 
   def self.format_one_preferred_value_target type, pv
     pv_type = self.preferred_value_type type, pv
-    pv_str  = pv.to_cpp_string
+    pv_str  = pv.to_c_string
 
-    return "mtx::bcp47::language_c::parse(#{pv_str})"                                              if [:tag,    :language].include?(pv_type)
-    return "mtx::bcp47::language_c{}.set_#{pv_type}(#{pv_str}).set_valid(true)"                    if [:region, :grandfathered].include?(pv_type)
-    return "mtx::bcp47::language_c{}.set_extended_language_subtags(VS{#{pv_str}}).set_valid(true)" if :extlang == pv_type
-    return "mtx::bcp47::language_c{}.set_variants(VS{#{pv_str}}).set_valid(true)"                  if :variant == pv_type
+    tag     = [:tag, :language].include?(pv_type) ? pv_str : "NULL"
+    region  = :region  == pv_type                 ? pv_str : "NULL"
+    variant = :variant == pv_type                 ? pv_str : "NULL"
 
-    fail "unknown pv_type #{pv_type}"
+    fail "unknown pv_type #{pv_type}" if !tag && !region && !variant
+
+    [ "{ #{tag}", region, variant, "}" ]
   end
 
   def self.format_one_preferred_value entry
-    return [
-      self.format_one_preferred_value_construction(self.preferred_value_type_original(entry[:type], entry[:original_value]),  entry[:original_value]),
-      self.format_one_preferred_value_construction(self.preferred_value_type_target(  entry[:type], entry[:preferred_value]), entry[:preferred_value]),
-    ]
+    return self.format_one_preferred_value_construction(self.preferred_value_type_original(entry[:type], entry[:original_value]),  entry[:original_value]) \
+         + self.format_one_preferred_value_construction(self.preferred_value_type_target(  entry[:type], entry[:preferred_value]), entry[:preferred_value])
   end
 
   def self.format_one_preferred_value_isdcf entry
-    return [
-      self.format_one_preferred_value_construction(:tag, entry["dcncTag"]),
-      self.format_one_preferred_value_construction(:tag, entry["rfc5646Tag"]),
-    ]
+    return self.format_one_preferred_value_construction(:tag, entry["dcncTag"]) \
+         + self.format_one_preferred_value_construction(:tag, entry["rfc5646Tag"])
   end
 
   def self.format_preferred_values entries, isdcf_entries
@@ -204,34 +289,38 @@ EOERB
       select { |e| %r{^Q[A-Z]{2}$}.match(e["dcncTag"] || "") and !e["rfc5646Tag"].blank? }.
       map    { |e| self.format_one_preferred_value_isdcf e }
 
-    "  g_preferred_values.reserve(#{rows.size});\n\n" +
-      format_table(rows, :column_suffix => ',', :row_prefix => "  g_preferred_values.emplace_back(", :row_suffix => ");").join("\n")
+    return rows.size, format_table(rows, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => " },").join("\n")
   end
 
   def self.format_suppress_scripts entries
-    name = "g_suppress_scripts"
     rows = (entries["language"] + entries["extlang"]).
       select { |e| !e[:suppress_script].blank? }.
       map    { |e| [ e[:tag] || e[:subtag], e[:suppress_script] ] }.
       sort.
       uniq.
-      map    { |p| p.map(&:to_cpp_string) }
+      map    { |p| p.map(&:to_c_string) }
 
-    "  #{name}.reserve(#{rows.size});\n\n" +
-      format_table(rows, :column_suffix => ",", :row_prefix => "  #{name}.insert_or_assign(", :row_suffix => ");").join("\n")
+    return rows.size, format_table(rows, :column_suffix => ",", :row_prefix => "  { ", :row_suffix => " },").join("\n")
+  end
+
+  def self.calculate_max_num_prefixes entries
+    %w{extlang variant}.
+      map { |type| entries[type] }.
+      flatten.
+      map { |entry| (entry[:prefix] || []).length }.
+      max
   end
 
   def self.do_create_cpp entries, isdcf_entries
     cpp_file_name = "src/common/iana_language_subtag_registry_list.cpp"
 
-    content_of        = Hash.new
-    content_of[:init] = [
-      self.format_extlangs_variants(entries, "extlang", "extlangs"), "",
-      self.format_extlangs_variants(entries, "variant", "variants"), "",
-      self.format_suppress_scripts(entries),                         "",
-      self.format_grandfathered(entries),
-    ].join("\n")
-    content_of[:init_preferred_values] = self.format_preferred_values(entries, isdcf_entries)
+    content_of                                                            = Hash.new
+    content_of[:max_num_prefixes]                                         = self.calculate_max_num_prefixes(entries)
+    content_of[:num_extlangs],         content_of[:extlangs_init]         = self.format_extlangs_variants(entries, "extlang", "extlangs")
+    content_of[:num_variants],         content_of[:variants_init]         = self.format_extlangs_variants(entries, "variant", "variants")
+    content_of[:num_suppress_scripts], content_of[:suppress_scripts_init] = self.format_suppress_scripts(entries)
+    content_of[:num_grandfathered],    content_of[:grandfathered_init]    = self.format_grandfathered(entries)
+    content_of[:num_preferred_values], content_of[:preferred_values_init] = self.format_preferred_values(entries, isdcf_entries)
 
     content = ERB.new(@@list_cpp_content).result(binding)
 

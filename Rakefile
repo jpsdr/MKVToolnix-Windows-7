@@ -359,13 +359,6 @@ cxx_compiler = lambda do |*args|
     flags.gsub!(%r{-Wpedantic}, '')
   end
 
-  if %r{src/common/iso639_language_list.cpp}.match(source)
-    # Even -O1 causes compilation time & memory usage to skyrocket,
-    # possibly exponentially, with the number of entries to
-    # emplace_back() into the vector.
-    flags.gsub!(%r{(^| )-O[^ ]*}, ' -O0')
-  end
-
   args = [
     "cxx", source,
     "#{c(:CXX)} #{flags}#{pchu}#{pchx} #{$system_includes} -c -MMD -MF #{dep} -o #{t.name} -x #{lang} #{source}",
