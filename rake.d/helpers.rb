@@ -306,11 +306,14 @@ def format_table rows, options = {}
 end
 
 def update_qrc
-  require 'rexml/document'
-
   qrc = "src/mkvtoolnix-gui/qt_resources.qrc"
-  puts_action "UPDATE", :target => qrc
 
+  runq_code "update", :target => qrc do
+    update_qrc_worker qrc
+  end
+end
+
+def update_qrc_worker qrc
   doc = REXML::Document.new File.new(qrc)
 
   doc.elements.to_a("/RCC/qresource/file").select { |node| %r{icons/}.match(node.text) }.each(&:remove)
@@ -318,17 +321,19 @@ def update_qrc
   parent   = doc.elements.to_a("/RCC/qresource")[0]
   icons    = FileList["share/icons/*/*.png"].sort
   seen     = Hash.new
-  add_node = lambda do |name_to_add, name_alias|
-    node                     = REXML::Element.new "file"
-    node.attributes["alias"] = name_alias
-    node.text                = "../../#{name_to_add}"
+  add_node = lambda do |name_to_add, **attributes|
+    node      = REXML::Element.new "file"
+    node.text = "../../#{name_to_add}"
+
+    attributes.keys.sort.each { |key| node.attributes[key] = attributes[key] }
+
     parent << node
   end
 
-  add_node.call('share/icons/index.theme', 'icons/mkvtoolnix-gui/index.theme')
+  add_node.call('share/icons/index.theme', 'alias' => 'icons/mkvtoolnix-gui/index.theme')
 
   icons.each do |file|
-    add_node.call(file, file.gsub(%r{^share/icons}, 'icons/mkvtoolnix-gui'))
+    add_node.call(file, 'alias' => file.gsub(%r{^share/icons}, 'icons/mkvtoolnix-gui'))
 
     base_name   = file.gsub(%r{.*/|\.png$},      '')
     size        = file.gsub(%r{.*/(\d+)x\d+/.*}, '\1').to_i
@@ -338,8 +343,16 @@ def update_qrc
 
     next unless FileTest.exists?(double_file)
 
-    add_node.call(double_file, name_alias)
+    add_node.call(double_file, 'alias' => name_alias)
     seen[file.gsub(%r{.*/icons}, 'icons')] = true
+  end
+
+  FileList["share/icons/**/*.svgz"].
+    sort.
+    each do |file|
+    file.gsub!(%r{z$}, '')
+    name_alias = file.gsub(%r{.*/icons}, 'icons/mkvtoolnix-gui')
+    add_node.call(file, 'alias' => name_alias, 'compress' => '9', 'compress-algo' => 'zstd')
   end
 
   output            = ""
@@ -372,10 +385,15 @@ def add_qrc_dependencies *qrcs
   qrc_content = read_files(*qrcs)
   qrc_content.each do |file_name, content|
     dir          = file_name.gsub(%r{[^/]+$}, '')
+    pwd          = Pathname.new(Dir.pwd)
     dependencies = content.
       join('').
       scan(%r{<file[^>]*>([^<]+)}).
-      map { |matches| dir + matches[0] }
+      map do |matches|
+      path = Pathname.new(File.absolute_path(dir + matches[0]))
+      path = path.relative_path_from(pwd) unless path.relative?
+      path.to_s
+    end
 
     file file_name => dependencies do
       update_qrc

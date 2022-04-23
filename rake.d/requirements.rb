@@ -4,5 +4,7 @@ require "fileutils"
 require "json"
 require "pathname"
 require "pty"
+require 'rexml/document'
 require "tempfile"
 require "tmpdir"
+require "zlib"

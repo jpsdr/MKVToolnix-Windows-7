@@ -77,7 +77,7 @@ EOT
     rm -f Makefile Makefile.Release
 
     cat > "$qmake_dir/configure.pro" <<EOT
-QT = core $qmake_qt_ui $qmake_qt_ui_try gui widgets network concurrent
+QT = core $qmake_qt_ui $qmake_qt_ui_try gui widgets network concurrent svg
 QTPLUGIN += $qmake_qtplugin_ui
 
 FORMS = configure.ui

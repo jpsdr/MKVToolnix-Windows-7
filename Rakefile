@@ -403,6 +403,14 @@ rule '.xml' => '.xml.erb' do |t|
   process_erb src: t.prerequisites[0], dest: t.name
 end
 
+rule '.svg' => '.svgz' do |t|
+  runq_code "gunzip", :target => t.source do
+    Zlib::GzipReader.open(t.source) do |file|
+      IO.write(t.name, file.read)
+    end
+  end
+end
+
 # Resources depend on the manifest.xml file for Windows builds.
 if $building_for[:windows]
   $programs.each do |program|
@@ -999,6 +1007,7 @@ task :clean do
     doc/man/*/*.xsl
     lib/libebml/ebml/ebml_export.h
     packaging/windows/msix/assets/*.png
+    share/icons/scalable/**/*.svg
     src/*/qt_resources.cpp
     src/**/manifest.xml
     src/info/ui/*.h

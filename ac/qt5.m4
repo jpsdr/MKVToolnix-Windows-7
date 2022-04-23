@@ -87,7 +87,7 @@ check_qt5() {
     with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5Core"
 
     if test x"$enable_gui" = xyes; then
-        with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5Gui,Qt5Widgets,Qt5Multimedia,Qt5Network,Qt5Concurrent"
+        with_qt_pkg_config_modules="$with_qt_pkg_config_modules,Qt5Gui,Qt5Widgets,Qt5Multimedia,Qt5Network,Qt5Concurrent,Qt5Svg"
     fi
 
     if test x"$MINGW" = x1; then
@@ -177,6 +177,10 @@ return 0;
       QTPLUGIN="qwindowsvistastyle"
     else
       QTPLUGIN=""
+    fi
+
+    if test x"$MINGW" = x1; then
+      QTPLUGIN="qsvg qsvgicon $QTPLUGIN"
     fi
 
     touch "$qmake_dir/empty.cpp"
