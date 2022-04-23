@@ -317,7 +317,7 @@ Tab::setupInputControls() {
   p.openTracksInMediaInfoAction->setIcon(QIcon::fromTheme(Q("documentinfo")));
 
   p.selectAllVideoTracksAction->setIcon(QIcon::fromTheme(Q("tool-animator")));
-  p.selectAllAudioTracksAction->setIcon(QIcon::fromTheme(Q("knotify")));
+  p.selectAllAudioTracksAction->setIcon(QIcon::fromTheme(Q("audio-headphones")));
   p.selectAllSubtitlesTracksAction->setIcon(QIcon::fromTheme(Q("draw-text")));
 
   // "add source files" menu

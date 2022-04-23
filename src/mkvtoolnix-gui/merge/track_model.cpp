@@ -40,7 +40,7 @@ insertPriorityForTrack(Track const &track) {
 TrackModel::TrackModel(QObject *parent)
   : QStandardItemModel{parent}
   , m_tracks{}
-  , m_audioIcon{QIcon::fromTheme(Q("knotify"))}
+  , m_audioIcon{QIcon::fromTheme(Q("audio-headphones"))}
   , m_videoIcon{QIcon::fromTheme(Q("tool-animator"))}
   , m_subtitleIcon{QIcon::fromTheme(Q("draw-text"))}
   , m_attachmentIcon{QIcon::fromTheme(Q("mail-attachment"))}
