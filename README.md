@@ -403,15 +403,9 @@ UTF-8 with C++ in a Portable Way
 
 ## 6.8. Oxygen icons and sound files
 
-Most of the icons included in this package originate from the Oxygen
-Project. These include all files in the `share/icons` sub-directory
-safe for those whose name starts with `mkv`.
-
-The preferred form of modification are the SVG icons. These are not
-part of the binary distribution of MKVToolNix, but they are contained
-in the source code in the `icons/scalable` sub-directory. You can
-obtain the source code from the
-[MKVToolNix website](https://mkvtoolnix.download/).
+A lot of the icons included in this package originate from the Oxygen
+Project. These include all files in the `share/icons/oxygen`
+sub-directory.
 
 All of the sound files in the `share/sounds` sub-directory originate
 from the Oxygen project.
@@ -419,7 +413,7 @@ from the Oxygen project.
   * License: GNU Lesser General Public License v3 (see `doc/licenses/LGPL-3.0.txt`)
   * URL: https://techbase.kde.org/Projects/Oxygen
   * Corresponding files:
-    * `share/icons/*` (except for `share/icons/*/mkv*`)
+    * `share/icons/oxygen/*`
     * `share/sounds/*`
 
 ## 6.9. MKVToolNix icons

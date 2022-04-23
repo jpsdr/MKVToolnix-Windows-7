@@ -1007,7 +1007,7 @@ task :clean do
     doc/man/*/*.xsl
     lib/libebml/ebml/ebml_export.h
     packaging/windows/msix/assets/*.png
-    share/icons/scalable/**/*.svg
+    share/icons/**/*.svg
     src/*/qt_resources.cpp
     src/**/manifest.xml
     src/info/ui/*.h
