@@ -42,7 +42,7 @@ TrackModel::TrackModel(QObject *parent)
   , m_tracks{}
   , m_audioIcon{QIcon::fromTheme(Q("knotify"))}
   , m_videoIcon{QIcon::fromTheme(Q("tool-animator"))}
-  , m_subtitleIcon{QIcon::fromTheme(Q("subtitles"))}
+  , m_subtitleIcon{QIcon::fromTheme(Q("draw-text"))}
   , m_attachmentIcon{QIcon::fromTheme(Q("mail-attachment"))}
   , m_chaptersIcon{QIcon::fromTheme(Q("clock"))}
   , m_tagsIcon{QIcon::fromTheme(Q("mail-tagged"))}
