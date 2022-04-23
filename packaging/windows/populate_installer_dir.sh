@@ -188,6 +188,8 @@ function copy_files {
 
   cd ${src_dir}/doc/man
   xml_files=(*.xml)
+  to_ignore=(mkvtoolnix.xml)
+  xml_files=(${xml_files:|to_ignore})
 
   commands=$(mktemp)
 
