@@ -62,10 +62,10 @@ Tab::setupAttachmentsControls() {
 
   Util::HeaderViewManager::create(*p.ui->attachedFiles, "Merge::AttachedFiles").setDefaultSizes({ { Q("name"), 180 }, { Q("mimeType"), 180 }, { Q("size"), 100 } });
 
-  p.enableSelectedAttachedFilesAction->setIcon(QIcon::fromTheme(Q("checkbox")));
-  p.disableSelectedAttachedFilesAction->setIcon(QIcon::fromTheme(Q("checkbox-unchecked")));
-  p.enableAllAttachedFilesAction->setIcon(QIcon::fromTheme(Q("checkbox")));
-  p.disableAllAttachedFilesAction->setIcon(QIcon::fromTheme(Q("checkbox-unchecked")));
+  p.enableSelectedAttachedFilesAction->setIcon(QIcon::fromTheme(Q("dialog-ok-apply")));
+  p.disableSelectedAttachedFilesAction->setIcon(QIcon::fromTheme(Q("dialog-cancel")));
+  p.enableAllAttachedFilesAction->setIcon(QIcon::fromTheme(Q("dialog-ok-apply")));
+  p.disableAllAttachedFilesAction->setIcon(QIcon::fromTheme(Q("dialog-cancel")));
 
   p.addAttachmentsAction->setIcon(QIcon::fromTheme(Q("list-add")));
   p.removeAttachmentsAction->setIcon(QIcon::fromTheme(Q("list-remove")));

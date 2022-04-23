@@ -312,8 +312,8 @@ Tab::setupInputControls() {
   p.selectTracksOfTypeMenu->addAction(p.selectAllSubtitlesTracksAction);
 
   p.selectAllTracksAction->setIcon(QIcon::fromTheme(Q("edit-select-all")));
-  p.enableAllTracksAction->setIcon(QIcon::fromTheme(Q("checkbox")));
-  p.disableAllTracksAction->setIcon(QIcon::fromTheme(Q("checkbox-unchecked")));
+  p.enableAllTracksAction->setIcon(QIcon::fromTheme(Q("dialog-ok-apply")));
+  p.disableAllTracksAction->setIcon(QIcon::fromTheme(Q("dialog-cancel")));
   p.openTracksInMediaInfoAction->setIcon(QIcon::fromTheme(Q("documentinfo")));
 
   p.selectAllVideoTracksAction->setIcon(QIcon::fromTheme(Q("tool-animator")));
