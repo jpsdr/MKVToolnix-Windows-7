@@ -290,7 +290,7 @@ Tab::showElementHexDumpInViewer() {
   uint64_t effectiveElementSize{}, effectiveElementPosition{};
 
   {
-    QMutexLocker{&p->m_model->info().mutex()};
+    QMutexLocker locker{&p->m_model->info().mutex()};
 
     if (element) {
       if (element->IsFiniteSize())
