@@ -194,7 +194,8 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset theme="list-add"/>
+               <iconset theme="list-add">
+                <normaloff>.</normaloff>.</iconset>
               </property>
              </widget>
             </item>
@@ -220,7 +221,8 @@
                <string/>
               </property>
               <property name="icon">
-               <iconset theme="list-add"/>
+               <iconset theme="list-add">
+                <normaloff>.</normaloff>.</iconset>
               </property>
              </widget>
             </item>
@@ -253,7 +255,8 @@
                <string notr="true"/>
               </property>
               <property name="icon">
-               <iconset theme="list-add"/>
+               <iconset theme="list-add">
+                <normaloff>.</normaloff>.</iconset>
               </property>
              </widget>
             </item>
@@ -303,21 +306,39 @@
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <widget class="QLabel" name="lStatusOKIcon">
+          <property name="maximumSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
           <property name="text">
            <string notr="true"/>
           </property>
           <property name="pixmap">
-           <pixmap resource="../../qt_resources.qrc">:/icons/mkvtoolnix-gui/16x16/dialog-ok-apply.png</pixmap>
+           <pixmap resource="../../qt_resources.qrc">:/icons/mkvtoolnix-gui/scalable/small/16x16/dialog-ok-apply.svg</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="lStatusBadIcon">
+          <property name="maximumSize">
+           <size>
+            <width>16</width>
+            <height>16</height>
+           </size>
+          </property>
           <property name="text">
            <string notr="true"/>
           </property>
           <property name="pixmap">
-           <pixmap resource="../../qt_resources.qrc">:/icons/mkvtoolnix-gui/16x16/dialog-error.png</pixmap>
+           <pixmap resource="../../qt_resources.qrc">:/icons/mkvtoolnix-gui/scalable/small/16x16/dialog-error.svg</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
           </property>
          </widget>
         </item>

@@ -86,11 +86,32 @@
       </property>
       <item>
        <widget class="QLabel" name="warningsIconLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
         <property name="text">
-         <string/>
+         <string notr="true"/>
         </property>
         <property name="pixmap">
-         <pixmap resource="../../qt_resources.qrc">:/icons/mkvtoolnix-gui/16x16/dialog-warning-grayscale.png</pixmap>
+         <pixmap resource="../../qt_resources.qrc">:/icons/mkvtoolnix-gui/scalable/small/16x16/dialog-warning-grayscale.svg</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -124,11 +145,20 @@
       </property>
       <item>
        <widget class="QLabel" name="errorsIconLabel">
+        <property name="maximumSize">
+         <size>
+          <width>16</width>
+          <height>16</height>
+         </size>
+        </property>
         <property name="text">
-         <string/>
+         <string notr="true"/>
         </property>
         <property name="pixmap">
-         <pixmap resource="../../qt_resources.qrc">:/icons/mkvtoolnix-gui/16x16/dialog-error-grayscale.png</pixmap>
+         <pixmap resource="../../qt_resources.qrc">:/icons/mkvtoolnix-gui/scalable/small/16x16/dialog-error-grayscale.svg</pixmap>
+        </property>
+        <property name="scaledContents">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
