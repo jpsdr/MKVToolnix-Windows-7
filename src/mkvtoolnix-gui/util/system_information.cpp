@@ -175,6 +175,8 @@ gatherQtInfo(QStringList &info) {
 
   QStringList lines;
 
+  auto disclaimer = Q("The following list is only relevant for the GUI's 'play sound after job completion' functionality and doesn't affect which formats can be multiplexed by mkvmerge.");
+
   for (auto const &format : formats.supportedAudioCodecs(QMediaFormat::Decode)) {
     auto name = format == QMediaFormat::AudioCodec::WMA         ? Q("WMA")
               : format == QMediaFormat::AudioCodec::AC3         ? Q("AC3")
@@ -193,7 +195,7 @@ gatherQtInfo(QStringList &info) {
 
   lines.sort();
 
-  info << Q("") << Q("## Supported audio codecs") << Q("");
+  info << Q("") << Q("## Supported audio codecs") << Q("") << disclaimer << Q("");
   info += lines;
 
   lines.clear();
@@ -219,7 +221,7 @@ gatherQtInfo(QStringList &info) {
 
   lines.sort();
 
-  info << Q("") << Q("## Supported file formats") << Q("");
+  info << Q("") << Q("## Supported file formats") << Q("") << disclaimer << Q("");
   info += lines;
 #endif
 }
