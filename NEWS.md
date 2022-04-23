@@ -22,6 +22,12 @@
   correctly and consequently aborting. Part of the fix of #3325.
 * SRT reader: entries with a duration of 0 or less will now be skipped. Fixes
   #3332.
+* MKVToolNix GUI: the GUI now uses almost all SVG icons, allowing proper
+  scaling even for scaling factors such as 125%. Fixes #3335.
+
+## Build system changes
+
+* Qt's SVG library is now required.
 
 
 # Version 67.0.0 "Under Stars" 2022-04-10
