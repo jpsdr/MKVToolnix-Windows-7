@@ -125,7 +125,7 @@ def setup_globals
   $unwrapped_po            = %{ca es eu it nl uk pl sr_RS@latin tr}
   $po_multiple_sources     = %{sv}
 
-  $benchmark_sources       = FileList["src/benchmark/*.cpp"].to_a
+  $benchmark_sources       = c?(:GOOGLE_BENCHMARK) ? FileList["src/benchmark/*.cpp"].to_a : []
   $benchmark_programs      = $benchmark_sources.map { |src| src.gsub(%r{\.cpp$}, '') + c(:EXEEXT) }
 
   $libmtxcommon_as_dll     = $building_for[:windows] && %r{shared}i.match(c(:host))
