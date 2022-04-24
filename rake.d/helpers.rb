@@ -321,7 +321,7 @@ def update_qrc_worker qrc
   parent   = doc.elements.to_a("/RCC/qresource")[0]
   icons    = FileList["share/icons/*/*.png"].sort
   seen     = Hash.new
-  add_node = lambda do |name_to_add, **attributes|
+  add_node = lambda do |name_to_add, attributes|
     node      = REXML::Element.new "file"
     node.text = "../../#{name_to_add}"
 
