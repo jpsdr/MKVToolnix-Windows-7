@@ -34,7 +34,7 @@ createSourceIndicatorIcon(SourceFile &sourceFile) {
   auto icon     = QIcon::fromTheme(iconName);
 
   if (!Util::Settings::get().m_mergeUseFileAndTrackColors)
-    return icon;
+    return Util::fixStandardItemIcon(icon);
 
   auto color = Util::Settings::get().nthFileColor(sourceFile.m_colorIndex);
 
