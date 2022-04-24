@@ -306,6 +306,8 @@ def format_table rows, options = {}
 end
 
 def update_qrc
+  require 'rexml/document'
+
   qrc = "src/mkvtoolnix-gui/qt_resources.qrc"
 
   runq_code "update", :target => qrc do
@@ -396,7 +398,9 @@ def add_qrc_dependencies *qrcs
     end
 
     file file_name => dependencies do
-      update_qrc
+      runq_code "touch", :target => file_name do
+        FileUtils.touch file_name
+      end
     end
   end
 end
