@@ -218,7 +218,7 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
     m_pageIndexes[pageType] = pageIndex++;
 
     if (!icon.isEmpty())
-      item->setIcon(QIcon::fromTheme(icon));
+      item->setIcon(Util::fixStandardItemIcon(QIcon::fromTheme(icon)));
 
     if (parent)
       parent->appendRow(item);

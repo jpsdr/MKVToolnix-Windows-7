@@ -4,6 +4,7 @@
 
 class QAbstractItemModel;
 class QAbstractItemView;
+class QIcon;
 class QItemSelection;
 class QItemSelectionModel;
 class QStandardItem;
@@ -40,5 +41,7 @@ void walkTree(QAbstractItemModel &model, QModelIndex const &idx, std::function<v
 void requestAllItems(QStandardItemModel &model, QModelIndex const &parent = QModelIndex{});
 QModelIndex findIndex(QAbstractItemModel const &model, std::function<bool(QModelIndex const &)> const &predicate, QModelIndex const &idx = QModelIndex{});
 void setItemForegroundColorDisabled(QList<QStandardItem *> const &items, bool disabled);
+
+QIcon fixStandardItemIcon(QIcon const &icon);
 
 }

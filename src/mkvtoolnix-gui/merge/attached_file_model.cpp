@@ -14,6 +14,8 @@ namespace mtx::gui::Merge {
 
 AttachedFileModel::AttachedFileModel(QObject *parent)
   : QStandardItemModel{parent}
+  , m_yesIcon{Util::fixStandardItemIcon(MainWindow::yesIcon())}
+  , m_noIcon{Util::fixStandardItemIcon(MainWindow::noIcon())}
 {
   setSortRole(Util::SortRole);
 
@@ -68,9 +70,9 @@ AttachedFileModel::setRowData(QList<QStandardItem *> const &items,
   items[SizeColumn       ]->setData(static_cast<quint64>(attachedFile.m_size),      Util::SortRole);
 
   items[NameColumn       ]->setCheckable(true);
-  items[NameColumn       ]->setCheckState(attachedFile.m_muxThis ? Qt::Checked           : Qt::Unchecked);
+  items[NameColumn       ]->setCheckState(attachedFile.m_muxThis ? Qt::Checked : Qt::Unchecked);
 
-  items[MuxThisColumn    ]->setIcon(      attachedFile.m_muxThis ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items[MuxThisColumn    ]->setIcon(      attachedFile.m_muxThis ? m_yesIcon   : m_noIcon);
 
   Util::setItemForegroundColorDisabled(items, !attachedFile.m_muxThis);
 }

@@ -40,13 +40,15 @@ insertPriorityForTrack(Track const &track) {
 TrackModel::TrackModel(QObject *parent)
   : QStandardItemModel{parent}
   , m_tracks{}
-  , m_audioIcon{QIcon::fromTheme(Q("audio-headphones"))}
-  , m_videoIcon{QIcon::fromTheme(Q("tool-animator"))}
-  , m_subtitleIcon{QIcon::fromTheme(Q("draw-text"))}
-  , m_attachmentIcon{QIcon::fromTheme(Q("mail-attachment"))}
-  , m_chaptersIcon{QIcon::fromTheme(Q("clock"))}
-  , m_tagsIcon{QIcon::fromTheme(Q("mail-tagged"))}
-  , m_genericIcon{QIcon::fromTheme(Q("application-octet-stream"))}
+  , m_audioIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("audio-headphones")))}
+  , m_videoIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("tool-animator")))}
+  , m_subtitleIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("draw-text")))}
+  , m_attachmentIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("mail-attachment")))}
+  , m_chaptersIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("clock")))}
+  , m_tagsIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("mail-tagged")))}
+  , m_genericIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("application-octet-stream")))}
+  , m_yesIcon{Util::fixStandardItemIcon(MainWindow::yesIcon())}
+  , m_noIcon{Util::fixStandardItemIcon(MainWindow::noIcon())}
   , m_ignoreTrackRemovals{}
   , m_nonAppendedSelected{}
   , m_appendedSelected{}
@@ -60,6 +62,10 @@ TrackModel::TrackModel(QObject *parent)
   connect(this,              &TrackModel::rowsRemoved,        this, &TrackModel::updateTrackLists);
   connect(this,              &TrackModel::rowsMoved,          this, &TrackModel::updateTrackLists);
   connect(MainWindow::get(), &MainWindow::preferencesChanged, this, &TrackModel::updateTrackColors);
+
+#if defined(SYS_WINDOWS)
+  // Workaround for a bug in Qt on Windows where SVG icons in tree views are
+#endif  // SYS_WINDOWS
 }
 
 TrackModel::~TrackModel() {
@@ -156,9 +162,9 @@ TrackModel::setItemsFromTrack(QList<QStandardItem *> items,
                               : track->isTags()       ? m_tagsIcon
                               : track->isGlobalTags() ? m_tagsIcon
                               :                         m_genericIcon);
-  items[MuxThisColumn]         ->setIcon(track->m_muxThis                                          ? MainWindow::yesIcon() : MainWindow::noIcon());
-  items[DefaultTrackFlagColumn]->setIcon(!track->isRegular() ? QIcon{} : track->m_defaultTrackFlag ? MainWindow::yesIcon() : MainWindow::noIcon());
-  items[ForcedTrackFlagColumn] ->setIcon(!track->isRegular() ? QIcon{} : track->m_forcedTrackFlag  ? MainWindow::yesIcon() : MainWindow::noIcon());
+  items[MuxThisColumn]         ->setIcon(track->m_muxThis                                          ? m_yesIcon : m_noIcon);
+  items[DefaultTrackFlagColumn]->setIcon(!track->isRegular() ? QIcon{} : track->m_defaultTrackFlag ? m_yesIcon : m_noIcon);
+  items[ForcedTrackFlagColumn] ->setIcon(!track->isRegular() ? QIcon{} : track->m_forcedTrackFlag  ? m_yesIcon : m_noIcon);
 
   items[IDColumn]   ->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
   items[DelayColumn]->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);

@@ -17,6 +17,7 @@ class AttachedFileModel : public QStandardItemModel {
 
 protected:
   QHash<quint64, TrackPtr> m_attachedFilesMap;
+  QIcon m_yesIcon, m_noIcon;
 
 protected:
   static int const NameColumn        = 0;

@@ -27,8 +27,8 @@ namespace mtx::gui::Jobs {
 Model::Model(QObject *parent)
   : QStandardItemModel{parent}
   , m_mutex{MTX_QT_RECURSIVE_MUTEX_INIT}
-  , m_warningsIcon{QIcon::fromTheme(Q("dialog-warning"))}
-  , m_errorsIcon{QIcon::fromTheme(Q("dialog-error"))}
+  , m_warningsIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("dialog-warning")))}
+  , m_errorsIcon{Util::fixStandardItemIcon(QIcon::fromTheme(Q("dialog-error")))}
   , m_started{}
   , m_dontStartJobsNow{}
   , m_running{}

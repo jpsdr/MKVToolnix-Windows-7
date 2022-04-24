@@ -2,6 +2,7 @@
 
 #include <QAbstractItemModel>
 #include <QAbstractItemView>
+#include <QIcon>
 #include <QItemSelection>
 #include <QItemSelectionModel>
 #include <QStandardItemModel>
@@ -165,6 +166,22 @@ setItemForegroundColorDisabled(QList<QStandardItem *> const &items,
   auto brush = palette.text();
   for (auto &item : items)
     item->setForeground(brush);
+}
+
+QIcon
+fixStandardItemIcon(QIcon const &icon) {
+#if defined(SYS_WINDOWS)
+  // Workaround for a Qt bug on Windows: SVG icons used in item views
+  // are stretched somehow. Raster icons (PNGs) don't have that
+  // problem, though.
+  auto newIcon = QIcon{icon.pixmap(16)};
+  newIcon.addPixmap(icon.pixmap(24));
+  newIcon.addPixmap(icon.pixmap(32));
+  return newIcon;
+
+#else  // SYS_WINDOWS
+  return icon;
+#endif  // SYS_WINDOWS
 }
 
 }
