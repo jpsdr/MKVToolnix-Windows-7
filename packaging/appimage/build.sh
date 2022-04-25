@@ -158,8 +158,10 @@ chmod 0755 AppRun
 cd usr
 
 # Qt plugins
-mkdir -p bin/{audio,mediaservice,platforms}
+mkdir -p bin/{audio,mediaservice,platforms,iconengines,imageformats}
 cp ${QTDIR}/plugins/audio/*.so bin/audio/
+cp ${QTDIR}/plugins/iconengines/*svg*.so bin/iconengines/
+cp ${QTDIR}/plugins/imageformats/*svg*.so bin/imageformats/
 cp ${QTDIR}/plugins/mediaservice/libgst{audiodecoder,mediaplayer}*.so bin/mediaservice/
 cp ${QTDIR}/plugins/platforms/libq{minimal,offscreen,wayland,xcb}*.so bin/platforms/
 
