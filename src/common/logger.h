@@ -43,6 +43,16 @@ public:
   static int64_t runtime();
 };
 
+class lifetime_logger_c {
+private:
+  std::string const m_comment;
+  int64_t m_start{};
+
+public:
+  lifetime_logger_c(std::string const &comment);
+  ~lifetime_logger_c();
+};
+
 class file_target_c: public target_c {
 private:
   std::filesystem::path m_file_name;
@@ -77,4 +87,5 @@ void init();
 }
 
 #define log_current_location() mtx::log::target_c::get_default_logger() << fmt::format("Current file, line, function: {0}:{1} in {2}", __FILE__, __LINE__, __PRETTY_FUNCTION__)
+#define log_scope_lifetime()   mtx::log::lifetime_logger_c mtx_scope_lifetime_logger{fmt::format("{0}:{1} in {2}", __FILE__, __LINE__, __PRETTY_FUNCTION__)}
 #define log_it(arg)            mtx::log::target_c::get_default_logger() << (arg)

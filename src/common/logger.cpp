@@ -132,6 +132,19 @@ stderr_target_c::log_line(std::string const &message) {
 
 // ----------------------------------------------------------------------
 
+lifetime_logger_c::lifetime_logger_c(std::string const &comment)
+  : m_comment{comment}
+  , m_start{mtx::sys::get_current_time_millis()}
+{
+  target_c::get_default_logger() << fmt::format("lifetime log start for {0}\n", m_comment);
+}
+
+lifetime_logger_c::~lifetime_logger_c() {
+  target_c::get_default_logger() << fmt::format("lifetime log runtime +{0}ms for {1}\n", mtx::sys::get_current_time_millis() - m_start, m_comment);
+}
+
+// ----------------------------------------------------------------------
+
 void
 init() {
   s_program_start_time = QDateTime::currentDateTime();
