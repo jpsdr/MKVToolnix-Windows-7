@@ -60,8 +60,10 @@ primary_file_extension_for_type(std::string const &type_name) {
   auto q_type_name = Q(type_name).toLower();
 
   for (auto const &type : all_types)
-    if (type.name() == q_type_name)
-      return to_utf8(type.preferredSuffix());
+    if (type.name() == q_type_name) {
+      auto extension = to_utf8(type.preferredSuffix());
+      return extension == "jfif" ? "jpg"s : extension;
+    }
 
   return {};
 }
