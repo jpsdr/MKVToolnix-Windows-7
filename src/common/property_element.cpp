@@ -167,19 +167,19 @@ property_element_c::init_tables() {
   sub_master_callbacks     = &KaxTrackVideo::ClassInfos;
   sub_sub_master_callbacks = &KaxVideoColour::ClassInfos;
 
-  add("colour-matrix-coefficients",       KaxVideoColourMatrix::ClassInfos,            YT("Video: colour matrix coefficients"), YT("Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries."));
-  add("colour-bits-per-channel",          KaxVideoBitsPerChannel::ClassInfos,          YT("Video: bits per colour channel"),    YT("Sets the number of coded bits for a colour channel."));
-  add("chroma-subsample-horizontal",      KaxVideoChromaSubsampHorz::ClassInfos,       YT("Video: pixels to remove in chroma"), YT("The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally."));
-  add("chroma-subsample-vertical",        KaxVideoChromaSubsampVert::ClassInfos,       YT("Video: pixels to remove in chroma"), YT("The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."));
-  add("cb-subsample-horizontal",          KaxVideoCbSubsampHorz::ClassInfos,           YT("Video: pixels to remove in Cb"),     YT("The amount of pixels to remove in the Cb channel for every pixel not removed horizontally. This is additive with chroma-subsample-horizontal."));
-  add("cb-subsample-vertical",            KaxVideoCbSubsampVert::ClassInfos,           YT("Video: pixels to remove in Cb"),     YT("The amount of pixels to remove in the Cb channel for every pixel not removed vertically. This is additive with chroma-subsample-vertical."));
-  add("chroma-siting-horizontal",         KaxVideoChromaSitHorz::ClassInfos,           YT("Video: horizontal chroma siting"),   YT("How chroma is sited horizontally."));
-  add("chroma-siting-vertical",           KaxVideoChromaSitVert::ClassInfos,           YT("Video: vertical chroma siting"),     YT("How chroma is sited vertically."));
-  add("colour-range",                     KaxVideoColourRange::ClassInfos,             YT("Video: colour range"),               YT("Clipping of the color ranges."));
-  add("colour-transfer-characteristics",  KaxVideoColourTransferCharacter::ClassInfos, YT("Video: transfer characteristics"),   YT("The colour transfer characteristics of the video."));
-  add("colour-primaries",                 KaxVideoColourPrimaries::ClassInfos,         YT("Video: colour primaries"),           YT("The colour primaries of the video."));
-  add("max-content-light",                KaxVideoColourMaxCLL::ClassInfos,            YT("Video: maximum content light"),      YT("Maximum brightness of a single pixel in candelas per square meter (cd/m²)."));
-  add("max-frame-light",                  KaxVideoColourMaxFALL::ClassInfos,           YT("Video: maximum frame light"),        YT("Maximum frame-average light level in candelas per square meter (cd/m²)."));
+  add("colour-matrix-coefficients",      KaxVideoColourMatrix::ClassInfos,            YT("Video: colour matrix coefficients"),    YT("Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries."));
+  add("colour-bits-per-channel",         KaxVideoBitsPerChannel::ClassInfos,          YT("Video: bits per colour channel"),       YT("Sets the number of coded bits for a colour channel."));
+  add("chroma-subsample-horizontal",     KaxVideoChromaSubsampHorz::ClassInfos,       YT("Video: horizontal chroma subsampling"), YT("The amount of pixels to remove in the Cr and Cb channels for every pixel not removed horizontally."));
+  add("chroma-subsample-vertical",       KaxVideoChromaSubsampVert::ClassInfos,       YT("Video: vertical chroma subsampling"),   YT("The amount of pixels to remove in the Cr and Cb channels for every pixel not removed vertically."));
+  add("cb-subsample-horizontal",         KaxVideoCbSubsampHorz::ClassInfos,           YT("Video: horizontal Cb subsampling"),     YT("The amount of pixels to remove in the Cb channel for every pixel not removed horizontally. This is additive with chroma-subsample-horizontal."));
+  add("cb-subsample-vertical",           KaxVideoCbSubsampVert::ClassInfos,           YT("Video: vertical Cb subsampling"),       YT("The amount of pixels to remove in the Cb channel for every pixel not removed vertically. This is additive with chroma-subsample-vertical."));
+  add("chroma-siting-horizontal",        KaxVideoChromaSitHorz::ClassInfos,           YT("Video: horizontal chroma siting"),      YT("How chroma is sited horizontally."));
+  add("chroma-siting-vertical",          KaxVideoChromaSitVert::ClassInfos,           YT("Video: vertical chroma siting"),        YT("How chroma is sited vertically."));
+  add("colour-range",                    KaxVideoColourRange::ClassInfos,             YT("Video: colour range"),                  YT("Clipping of the color ranges."));
+  add("colour-transfer-characteristics", KaxVideoColourTransferCharacter::ClassInfos, YT("Video: transfer characteristics"),      YT("The colour transfer characteristics of the video."));
+  add("colour-primaries",                KaxVideoColourPrimaries::ClassInfos,         YT("Video: colour primaries"),              YT("The colour primaries of the video."));
+  add("max-content-light",               KaxVideoColourMaxCLL::ClassInfos,            YT("Video: maximum content light"),         YT("Maximum brightness of a single pixel in candelas per square meter (cd/m²)."));
+  add("max-frame-light",                 KaxVideoColourMaxFALL::ClassInfos,           YT("Video: maximum frame light"),           YT("Maximum frame-average light level in candelas per square meter (cd/m²)."));
 
   sub_sub_sub_master_callbacks = &KaxVideoColourMasterMeta::ClassInfos;
 
