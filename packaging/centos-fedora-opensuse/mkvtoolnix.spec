@@ -102,6 +102,8 @@ done
 #   tar xzf ~/mtx-rpm-compiled.tar.gz
 # fi
 
+./drake apps
+./drake tools
 ./drake
 
 # tar czf ~/mtx-rpm-compiled-$(date '+%%Y%%m%%d%%H%%M%%S').tar .
