@@ -445,7 +445,11 @@ Settings::migrateFromRegistry() {
 
 std::unique_ptr<QSettings>
 Settings::registry() {
-  return std::make_unique<QSettings>(iniFileName(), QSettings::IniFormat);
+  auto reg = std::make_unique<QSettings>(iniFileName(), QSettings::IniFormat);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+  reg->setIniCodec("UTF-8");
+#endif
+  return reg;
 }
 
 void

@@ -24,6 +24,9 @@
   #3332.
 * MKVToolNix GUI: the GUI now uses almost all SVG icons, allowing proper
   scaling even for scaling factors such as 125%. Fixes #3335.
+* MKVToolNix GUI: when compiled with Qt 5 the character set of INI files is
+  forced to UTF-8 in order to fix reading INI files written by a version
+  compiled with Qt 6. Fixes #3346.
 
 ## Build system changes
 

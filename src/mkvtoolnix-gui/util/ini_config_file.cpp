@@ -11,6 +11,9 @@ IniConfigFile::IniConfigFile(QString const &fileName)
   , m_settings{new QSettings{fileName, QSettings::IniFormat}}
   , m_settingsAreOwned{true}
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+  m_settings->setIniCodec("UTF-8");
+#endif
 }
 
 IniConfigFile::IniConfigFile(QSettings &settings)
