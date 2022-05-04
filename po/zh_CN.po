@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2022-04-26 23:25+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
-"Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2020,2022\n"
+"Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2022\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
@@ -211,8 +211,8 @@ msgid ""
 "  --chroma-siting <TID:hori,vert>\n"
 "                            How chroma is sited horizontally/vertically.\n"
 msgstr ""
-"  --chroma-siting <TID:hori,vert>\n"
-"                            色度在水平和竖直方向上的选址。\n"
+"  --chroma-siting <TID:水平,垂直>\n"
+"                            色度在水平/垂直方向上的分布方式。\n"
 
 #: src/merge/mkvmerge.cpp:319
 #, no-c-format
@@ -222,7 +222,7 @@ msgid ""
 "                           channels for every pixel not removed horizontally\n"
 "                           and vertically.\n"
 msgstr ""
-"  --chroma-subsample <TID:hori,vert>\n"
+"  --chroma-subsample <TID:水平,垂直>\n"
 "                           对 Cr 与 Cb 通道中未移除的像素\n"
 "                           水平与垂直方向需要移除的像素数量。\n"
 
@@ -1096,7 +1096,7 @@ msgstr "  -t, --tags <TID:file>    从 XML 文件读取用于指定轨道的标�
 #: src/merge/mkvmerge.cpp:93
 #, no-c-format
 msgid "  -w, --webm               Create WebM compliant file.\n"
-msgstr "  -w, --webm               创建 WebM 兼容文件。\n"
+msgstr "  -w, --webm               创建符合 WebM 规范的文件。\n"
 
 #: src/merge/mkvmerge.cpp:235
 #, no-c-format
@@ -1358,7 +1358,7 @@ msgstr " 大小 {0}"
 #: src/common/property_element.cpp:133
 #, no-c-format
 msgid "\"Commentary\" flag"
-msgstr "｢评论轨｣标记"
+msgstr "｢评论轨｣ 标记"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1814
 #, no-c-format
@@ -1369,7 +1369,7 @@ msgstr "｢评论轨｣标记:"
 #: src/common/property_element.cpp:134
 #, no-c-format
 msgid "\"Default track\" flag"
-msgstr "｢默认轨｣标记"
+msgstr "｢默认轨｣ 标记"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:310
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1802
@@ -1386,13 +1386,13 @@ msgstr "在几乎所有情况下，“自动决定”是个合适的选择。"
 #: src/common/kax_element_names.cpp:191
 #, no-c-format
 msgid "\"Enabled\" flag"
-msgstr "｢已启用｣标记"
+msgstr "｢已启用｣ 标记"
 
 #: src/common/kax_element_names.cpp:207
 #: src/common/property_element.cpp:136
 #, no-c-format
 msgid "\"Forced display\" flag"
-msgstr "｢强制显示｣标记"
+msgstr "｢强制显示｣ 标记"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:311
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1804
@@ -1405,7 +1405,7 @@ msgstr "｢强制显示｣标记:"
 #: src/common/property_element.cpp:137
 #, no-c-format
 msgid "\"Hearing impaired\" flag"
-msgstr "｢听觉障碍｣标记"
+msgstr "｢听觉障碍｣ 标记"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1806
 #, no-c-format
@@ -1415,13 +1415,13 @@ msgstr "｢听觉障碍｣标记:"
 #: src/common/kax_element_names.cpp:205
 #, no-c-format
 msgid "\"Lacing\" flag"
-msgstr "｢紧缩｣标记"
+msgstr "｢紧缩｣ 标记"
 
 #: src/common/kax_element_names.cpp:217
 #: src/common/property_element.cpp:138
 #, no-c-format
 msgid "\"Original language\" flag"
-msgstr "｢原始语言｣标记"
+msgstr "｢原始语言｣ 标记"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1809
 #, no-c-format
@@ -1432,7 +1432,7 @@ msgstr "｢原始语言｣标记:"
 #: src/common/property_element.cpp:139
 #, no-c-format
 msgid "\"Text descriptions\" flag"
-msgstr "｢文字描述｣标记"
+msgstr "｢文字描述｣ 标记"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1803
 #, no-c-format
@@ -1442,7 +1442,7 @@ msgstr "｢文字描述｣标记:"
 #: src/common/property_element.cpp:135
 #, no-c-format
 msgid "\"Track enabled\" flag"
-msgstr "｢轨道启用｣标记"
+msgstr "｢轨道启用｣ 标记"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:312
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1815
@@ -1455,7 +1455,7 @@ msgstr "｢轨道启用｣标记:"
 #: src/common/property_element.cpp:140
 #, no-c-format
 msgid "\"Visual impaired\" flag"
-msgstr "｢视觉障碍｣标记"
+msgstr "｢视觉障碍｣ 标记"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1808
 #, no-c-format
@@ -2229,7 +2229,7 @@ msgstr "全选(&S)"
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:184
 #, no-c-format
 msgid "&Skip chapters flagged \"hidden\""
-msgstr "跳过标记为“隐藏”的章节(&S)"
+msgstr "跳过标记为 ｢隐藏｣ 的章节(&S)"
 
 #: src/mkvtoolnix-gui/merge/attachments.cpp:256
 #, no-c-format
@@ -2615,7 +2615,7 @@ msgstr "｢{0}｣ 不是有效的 hack。\n"
 #: src/propedit/propedit_cli_parser.cpp:224
 #, no-c-format
 msgid "'{0}' is not a valid language normalization mode.\n"
-msgstr "「{0}」不是有效的语言规范化模式。\n"
+msgstr "｢{0}｣ 不是有效的语言规范化模式。\n"
 
 #: src/merge/mkvmerge.cpp:1528
 #, no-c-format
@@ -3954,7 +3954,7 @@ msgstr "最后一个文件被移除时，自动清空文件标题(&R)"
 #: src/merge/mkvmerge.cpp:2280
 #, no-c-format
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
-msgstr "根据输出文件扩展名自动启用 WebM 兼容模式。\n"
+msgstr "根据输出文件扩展名自动启用 WebM 规范模式。\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2146
 #, no-c-format
@@ -4193,7 +4193,7 @@ msgstr "复制到剪贴板(&O)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2096
 #, no-c-format
 msgid "C&ountries && regions"
-msgstr "国家及地区(&O)"
+msgstr "国家/地区(&O)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:625
 #, no-c-format
@@ -5000,12 +5000,12 @@ msgstr "封面图像"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1858
 #, no-c-format
 msgid "Create WebM compliant file"
-msgstr "创建 WebM 兼容文件"
+msgstr "创建符合 WebM 规范的文件"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:241
 #, no-c-format
 msgid "Create a WebM compliant file."
-msgstr "创建 WebM 兼容文件。"
+msgstr "创建符合 WebM 规范的文件。"
 
 #: src/mkvtoolnix-gui/forms/merge/tool.h:224
 #, no-c-format
@@ -5637,7 +5637,7 @@ msgstr "目录:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2149
 #, no-c-format
 msgid "Disable \"de&fault track\" flag for subtitle tracks"
-msgstr "禁用字幕轨道的「默认轨」标记(&F)"
+msgstr "禁用字幕轨道的 ｢默认轨｣ 标记(&F)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2079
 #, no-c-format
@@ -5699,17 +5699,17 @@ msgstr "显示尺寸: 格式不符合 <TID>:<width>x<height>，例如 1:640x480 
 #: src/common/kax_element_names.cpp:150
 #, no-c-format
 msgid "Display height"
-msgstr "显示器高度"
+msgstr "显示高度"
 
 #: src/common/kax_element_names.cpp:155
 #, no-c-format
 msgid "Display unit"
-msgstr "显示器单位"
+msgstr "显示单位"
 
 #: src/common/kax_element_names.cpp:149
 #, no-c-format
 msgid "Display width"
-msgstr "显示器宽度"
+msgstr "显示宽度"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:1825
 #, no-c-format
@@ -5810,7 +5810,7 @@ msgstr "不要生成章节"
 #: src/common/hacks.cpp:61
 #, no-c-format
 msgid "Don't remove track statistics tags when reading Matroska files, no matter if new ones are created or not."
-msgstr "读取 Matroska 文件时不要移除轨道统计标签，不论是否要创建新的轨道统计标签。"
+msgstr "对于 Matroska 格式的输入文件，不要移除现有的轨道统计标签，不论是否会创建新的轨道统计标签。"
 
 #: src/mkvtoolnix-gui/util/message_box.cpp:167
 #, no-c-format
@@ -6088,7 +6088,7 @@ msgstr "创建完全确定的文件。若输入文件一致，且使用相同的
 #: src/common/hacks.cpp:48
 #, no-c-format
 msgid "Enables warnings for certain conditions where timestamps aren't monotonous in situations where they should be which could indicate either a problem with the file or a programming error."
-msgstr "启用对特定情况下时间戳应该顺序排布却逆向排布的警告，这通常说明文件或程序出现错误。"
+msgstr "启用对特定情况下时间戳应该顺序排布但却逆向排布的警告，这通常说明文件或程序出错。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:239
 #, no-c-format
@@ -6771,12 +6771,12 @@ msgstr "暂不支持四个字母的语言代码，它们已保留供未来使用
 #: src/merge/mkvmerge.cpp:1458
 #, no-c-format
 msgid "FourCC: Invalid track ID in '{0} {1}'.\n"
-msgstr "FourCC: '{0} {1}' 中的轨道 ID 无效。\n"
+msgstr "FourCC: ｢{0} {1}｣ 中的轨道 ID 无效。\n"
 
 #: src/merge/mkvmerge.cpp:1454
 #, no-c-format
 msgid "FourCC: Missing track ID in '{0} {1}'.\n"
-msgstr "FourCC: '{0} {1}' 中缺少轨道 ID。\n"
+msgstr "FourCC: ｢{0} {1}｣ 中缺少轨道 ID。\n"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:192
 #: src/mkvtoolnix-gui/info/element_viewer_dialog.cpp:96
@@ -7032,17 +7032,17 @@ msgstr "最高优先级"
 #: src/common/kax_element_names.cpp:129
 #, no-c-format
 msgid "Horizontal Cb subsample"
-msgstr "水平 Cb 抽样"
+msgstr "水平方向 Cb 抽样"
 
 #: src/common/kax_element_names.cpp:131
 #, no-c-format
 msgid "Horizontal chroma siting"
-msgstr "水平色度分布"
+msgstr "水平方向色度分布"
 
 #: src/common/kax_element_names.cpp:127
 #, no-c-format
 msgid "Horizontal chroma subsample"
-msgstr "水平色度抽样"
+msgstr "水平方向色度抽样"
 
 #: src/common/property_element.cpp:176
 #, no-c-format
@@ -7661,7 +7661,7 @@ msgstr "'--aac-is-sbr {0}' 中指定的布尔值无效。\n"
 #: src/propedit/propedit_cli_parser.cpp:61
 #, no-c-format
 msgid "Invalid change spec ({2}) in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中的更改方式 ({2}) 无效。\n"
+msgstr "｢{0} {1}｣ 中的更改方式 ({2}) 无效。\n"
 
 #: src/merge/mkvmerge.cpp:1129
 #: src/merge/mkvmerge.cpp:3118
@@ -7822,7 +7822,7 @@ msgstr "秒值无效: {0}"
 #: src/propedit/propedit_cli_parser.cpp:137
 #, no-c-format
 msgid "Invalid selector in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中的选择器无效。\n"
+msgstr "｢{0} {1}｣ 中的选择器无效。\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1335
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1347
@@ -7880,7 +7880,7 @@ msgstr "'--sub-charset {0}' 中指定的字幕字符集无效。\n"
 #: src/merge/mkvmerge.cpp:679
 #, no-c-format
 msgid "Invalid sync option specified in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中指定的同步选项无效。\n"
+msgstr "｢{0} {1}｣ 中指定的同步选项无效。\n"
 
 #: src/merge/mkvmerge.cpp:669
 #, no-c-format
@@ -7890,22 +7890,22 @@ msgstr "｢{0} {1}｣ 中指定的同步选项无效。除数为零。\n"
 #: src/merge/mkvmerge.cpp:674
 #, no-c-format
 msgid "Invalid sync option specified in '{0} {1}'. The linear sync value may not be equal to or smaller than zero.\n"
-msgstr "'{0} {1}' 中指定的同步选项无效。线性同步值不得等于或小于 0。\n"
+msgstr "｢{0} {1}｣ 中指定的同步选项无效。线性同步值不得等于或小于 0。\n"
 
 #: src/merge/mkvmerge.cpp:635
 #, no-c-format
 msgid "Invalid sync option. No track ID specified in '{0} {1}'.\n"
-msgstr "无效的同步选项。未在 '{0} {1}' 指定轨道 ID。\n"
+msgstr "无效的同步选项。未在 ｢{0} {1}｣ 指定轨道 ID。\n"
 
 #: src/merge/mkvmerge.cpp:1437
 #, no-c-format
 msgid "Invalid tags file name specified in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中指定的标签文件名无效。\n"
+msgstr "｢{0} {1}｣ 中指定的标签文件名无效。\n"
 
 #: src/merge/mkvmerge.cpp:1430
 #, no-c-format
 msgid "Invalid tags option. No track ID specified in '{0} {1}'.\n"
-msgstr "无效的标签选项。未在 '{0} {1}' 指定轨道 ID。\n"
+msgstr "无效的标签选项。未在 ｢{0} {1}｣ 指定轨道 ID。\n"
 
 #: src/merge/mkvmerge.cpp:1066
 #, no-c-format
@@ -7940,7 +7940,7 @@ msgstr "'--sub-charset {0}' 中指定的轨道 ID 无效。\n"
 #: src/merge/mkvmerge.cpp:1377
 #, no-c-format
 msgid "Invalid track ID specified in '--{0} {1}'.\n"
-msgstr "'--{0} {1}' 中指定的轨道 ID 无效。\n"
+msgstr "｢--{0} {1}｣ 中指定的轨道 ID 无效。\n"
 
 #: src/merge/mkvmerge.cpp:638
 #: src/merge/mkvmerge.cpp:1271
@@ -7949,7 +7949,7 @@ msgstr "'--{0} {1}' 中指定的轨道 ID 无效。\n"
 #: src/merge/mkvmerge.cpp:1589
 #, no-c-format
 msgid "Invalid track ID specified in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中指定的轨道 ID 无效。\n"
+msgstr "｢{0} {1}｣ 中指定的轨道 ID 无效。\n"
 
 #: src/extract/extract_cli_parser.cpp:351
 #, no-c-format
@@ -8029,7 +8029,7 @@ msgstr "任务启动日期与时间 (ISO 8601 格式)"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:240
 #, no-c-format
 msgid "Job type ('multiplexer' or 'info')"
-msgstr "任务类型 (「混流」或「信息」)"
+msgstr "任务类型 (｢混流｣ 或 ｢信息｣)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:244
 #, no-c-format
@@ -8160,18 +8160,18 @@ msgstr[0] "长度: %1 字节"
 #: src/merge/timestamp_factory.cpp:359
 #, no-c-format
 msgid "Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the duration or the FPS are smaller than zero).\n"
-msgstr "时间戳文件｢{1}｣的第 {0} 行包含不相容的数据 (如时长或 FPS 小于零)。\n"
+msgstr "时间戳文件 ｢{1}｣ 的第 {0} 行包含不相容的数据 (如时长或 FPS 小于零)。\n"
 
 #: src/merge/timestamp_factory.cpp:124
 #, no-c-format
 msgid "Line {0} of the timestamp file '{1}' contains inconsistent data (e.g. the start frame number is bigger than the end frame number, or some values are smaller than zero).\n"
-msgstr "时间戳文件｢{1}｣的第 {0} 行包含不相容的数据 (如起始帧编号大于终止帧编号，或者某些值小于零)。\n"
+msgstr "时间戳文件 ｢{1}｣ 的第 {0} 行包含不相容的数据 (如起始帧编号大于终止帧编号，或者某些值小于零)。\n"
 
 #: src/merge/timestamp_factory.cpp:119
 #: src/merge/timestamp_factory.cpp:352
 #, no-c-format
 msgid "Line {0} of the timestamp file '{1}' could not be parsed.\n"
-msgstr "无法解析时间戳文件｢{1}｣的第 {0} 行。\n"
+msgstr "无法解析时间戳文件 ｢{1}｣ 的第 {0} 行。\n"
 
 #: src/input/subtitles.cpp:260
 #, no-c-format
@@ -8388,12 +8388,12 @@ msgstr "畸形的编码格式 ID ｢{0}｣。\n"
 #: src/mkvtoolnix-gui/merge/input.cpp:479
 #, no-c-format
 msgid "Mark this track as \"enabled\" (the default) or \"disabled\"."
-msgstr "将该轨道标记为「已启用」（默认）或「已禁用」。"
+msgstr "将该轨道标记为 ｢已启用｣ (默认) 或 ｢已禁用｣。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:475
 #, no-c-format
 msgid "Mark this track as \"forced display\"."
-msgstr "将该轨道标记为「强制显示」。"
+msgstr "将该轨道标记为 ｢强制显示｣。"
 
 #: src/common/file_types.cpp:91
 #, no-c-format
@@ -8405,7 +8405,7 @@ msgstr "Matroska"
 #: src/mkvtoolnix-gui/util/widget.cpp:179
 #, no-c-format
 msgid "Matroska and WebM files"
-msgstr "Matroska 和 WebM 文件"
+msgstr "Matroska 与 WebM 文件"
 
 #: src/common/file_types.cpp:49
 #, no-c-format
@@ -9279,7 +9279,7 @@ msgstr "仅在下列情况下需要:"
 #: src/merge/mkvmerge.cpp:1800
 #, no-c-format
 msgid "Only one chapter file allowed in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中仅允许一个章节文件。\n"
+msgstr "｢{0} {1}｣ 中仅允许一个章节文件。\n"
 
 #: src/merge/mkvmerge.cpp:2226
 #, no-c-format
@@ -9366,12 +9366,12 @@ msgstr "打开 Matroska 或 WebM 文件"
 #: src/mkvtoolnix-gui/forms/header_editor/tool.h:179
 #, no-c-format
 msgid "Open a Matroska or WebM file via the \"header editor\" menu, the button below or drag & drop one here."
-msgstr "通过「头部编辑器」菜单、下方按钮打开 Matroska 或 WebM 文件，也可以拖放到这里。"
+msgstr "通过「头部编辑器」菜单或下方按钮打开 Matroska 或 WebM 文件，也可以拖放到这里。"
 
 #: src/mkvtoolnix-gui/forms/info/tool.h:179
 #, no-c-format
 msgid "Open a Matroska or WebM file via the \"info tool\" menu, the button below or drag & drop one here."
-msgstr "通过「信息工具」菜单、下方按钮打开 Matroska 或 WebM 文件，也可以拖放到这里。"
+msgstr "通过「信息工具」菜单或下方按钮打开 Matroska 或 WebM 文件，也可以拖放到这里。"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tool.h:192
 #, no-c-format
@@ -10144,7 +10144,7 @@ msgstr "RealMedia 音频/视频文件"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2176
 #, no-c-format
 msgid "Recent destination directories"
-msgstr "最近使用的目标目录"
+msgstr "最近使用的输出目录"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2163
 #, no-c-format
@@ -10333,12 +10333,12 @@ msgstr "用新文件替换附件，并推断其名称及 MIME 类型(&D)"
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:178
 #, no-c-format
 msgid "Replace with canonical form once"
-msgstr "仅本次替换为最简式(&J)"
+msgstr "仅此次替换为最简式(&J)"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:181
 #, no-c-format
 msgid "Replace with extended language subtags form once"
-msgstr "仅本次替换为扩展语言子标签形式(&E)"
+msgstr "仅此次替换为扩展语言子标签形式(&E)"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:693
 #, no-c-format
@@ -10363,7 +10363,7 @@ msgstr "退出时清零警告与错误计数器(&C)"
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:203
 #, no-c-format
 msgid "Resets the header value on this page to how it's saved in the file."
-msgstr "将本页显示的头部信息重置为文件中储存的数值。"
+msgstr "将本页显示的头部字段值重置为文件中所储存的值。"
 
 #: src/common/kax_file.cpp:290
 #, no-c-format
@@ -10540,7 +10540,7 @@ msgstr "保存章节为 XML"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:805
 #, no-c-format
 msgid "Save chapters to Matroska or WebM file"
-msgstr "将更改保存到 Matroska 或 WebM 文件"
+msgstr "将章节保存到 Matroska 或 WebM 文件"
 
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:395
 #, no-c-format
@@ -11117,7 +11117,7 @@ msgstr "静默轨道"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:380
 #, no-c-format
 msgid "Similarly an audio track will be inserted before the first track that's neither a video nor an audio track."
-msgstr "类似地，一条音频轨将被插入至第一个既非视频轨又非音频轨的轨道之前。"
+msgstr "类似地，一条音频轨将被插入至第一条非音/视频轨道之前。"
 
 #: src/common/kax_element_names.cpp:318
 #, no-c-format
@@ -11599,7 +11599,7 @@ msgstr "两条轨道的 CodecID 不同: {0} 与 {1}"
 #: src/mkvtoolnix-gui/merge/output.cpp:246
 #, no-c-format
 msgid "The DocType header item is changed to \"webm\"."
-msgstr "文档类型头元素 DocType 将会被更改为“webm”。"
+msgstr "文档类型头元素 DocType 将会被更改为 ｢webm｣。"
 
 #: src/output/p_flac.cpp:48
 #, no-c-format
@@ -11614,7 +11614,7 @@ msgstr "FPS 为 0.0 且读取器未提供封包的时间戳。{0}\n"
 #: src/merge/mkvmerge.cpp:1461
 #, no-c-format
 msgid "The FourCC must be exactly four characters long in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中的 FourCC 长度必须为 4 个字符。\n"
+msgstr "｢{0} {1}｣ 中的 FourCC 长度必须为 4 个字符。\n"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:426
 #, no-c-format
@@ -11845,7 +11845,7 @@ msgstr "附件 ({0}) 太大 ({1})。"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:912
 #, no-c-format
 msgid "The audio file '%1' could not be played back."
-msgstr "无法回放音频文件 ｢%1｣。"
+msgstr "无法播放音频文件 ｢%1｣。"
 
 #: src/mkvtoolnix-gui/util/settings.cpp:296
 #, no-c-format
@@ -11891,7 +11891,7 @@ msgstr "缺少闭合字符 ｢{0}｣。\n"
 #: src/merge/generic_reader.cpp:115
 #, no-c-format
 msgid "The codec type '{0}' cannot be used in a WebM compliant file.\n"
-msgstr "WebM 兼容文件不允许编码类型 ｢{0}｣。\n"
+msgstr "WebM 规范不允许在文件中使用编码类型 ｢{0}｣。\n"
 
 #: src/merge/connection_checks.h:60
 #, no-c-format
@@ -12002,7 +12002,7 @@ msgstr "文件创建的日期。"
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:33
 #, no-c-format
 msgid "The default is 'file' with 'track' being an alternative mode."
-msgstr "默认为「文件」，备选模式为「轨道」。"
+msgstr "默认为 ｢文件｣ (file) 模式，也可以选择 ｢轨道｣ (track) 模式。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:425
 #, no-c-format
@@ -12447,7 +12447,7 @@ msgstr "您试图打开的文件 (%1) 不包含任何章节。"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:129
 #, no-c-format
 msgid "The file you tried to open (%1) is not recognized as a valid Matroska/WebM file."
-msgstr "您试图打开的文件 (%1) 无法被识别为有效的 Matroska/WebM 文件。"
+msgstr "您尝试打开的文件 (%1) 无法被识别为有效的 Matroska/WebM 文件。"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:481
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:585
@@ -12728,7 +12728,7 @@ msgstr "这些名称将出现在混流器与头部编辑器的下拉框中供您
 #: src/merge/mkvmerge.cpp:1686
 #, no-c-format
 msgid "The next UID was already given in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中已经指定了下一个 UID。\n"
+msgstr "｢{0} {1}｣ 中已经指定了下一个 UID。\n"
 
 #: src/merge/connection_checks.h:28
 #, no-c-format
@@ -12821,7 +12821,7 @@ msgstr "另外还有两种布局可选: 文件及轨道列表右侧固定两列�
 #: src/merge/mkvmerge.cpp:1673
 #, no-c-format
 msgid "The previous UID was already given in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中已经指定了上一个 UID。\n"
+msgstr "｢{0} {1}｣ 中已经指定了上一个 UID。\n"
 
 #: src/merge/mkvmerge.cpp:2094
 #, no-c-format
@@ -13133,7 +13133,7 @@ msgstr "整部影片的标题。"
 #: src/common/chapters/dvd.cpp:149
 #, no-c-format
 msgid "The title number '{0}' is higher than the number of titles on the DVD ({1})."
-msgstr "标题编号｢{0}｣已超过 DVD 中的总标题数({1})。"
+msgstr "标题编号 ｢{0}｣ 大于 DVD 中的总标题数目 ({1})。"
 
 #: src/extract/tracks.cpp:118
 #, no-c-format
@@ -13204,7 +13204,7 @@ msgstr "值 ｢{0}｣ 不是数字。\n"
 #: src/common/bcp47.cpp:494
 #, no-c-format
 msgid "The value '{0}' is not a registered IANA language tag identifier."
-msgstr "值｢{0}｣并非在 IANA 注册的语言标签标识符。"
+msgstr "值 ｢{0}｣ 并非已在 IANA 注册的语言标签标识符。"
 
 #: src/common/bcp47.cpp:252
 #, no-c-format
@@ -13625,7 +13625,7 @@ msgstr "该选项需要一个额外参数 'n'。"
 #: src/common/hacks.cpp:57
 #, no-c-format
 msgid "This option prevents that behavior."
-msgstr "该选项将禁止上述处理。"
+msgstr "此选项可禁止上述处理。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:210
 #, no-c-format
@@ -13771,42 +13771,42 @@ msgstr "所有输出文件"
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:111
 #, no-c-format
 msgid "Toggle \"&commentary\" flag"
-msgstr "切换「评论轨」标记(&C)"
+msgstr "切换 ｢评论轨｣ 标记(&C)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:108
 #, no-c-format
 msgid "Toggle \"&default track\" flag"
-msgstr "切换「默认轨」标记(&D)"
+msgstr "切换 ｢默认轨｣ 标记(&D)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:109
 #, no-c-format
 msgid "Toggle \"&forced display\" flag"
-msgstr "切换「强制显示」标记(&F)"
+msgstr "切换 ｢强制显示｣ 标记(&F)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:112
 #, no-c-format
 msgid "Toggle \"&hearing impaired\" flag"
-msgstr "切换「听觉障碍」标记(&H)"
+msgstr "切换 ｢听觉障碍｣ 标记(&H)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:110
 #, no-c-format
 msgid "Toggle \"&original\" flag"
-msgstr "切换「原始语言」标记(&O)"
+msgstr "切换 ｢原始语言｣ 标记(&O)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:114
 #, no-c-format
 msgid "Toggle \"&text descriptions\" flag"
-msgstr "切换「文字描述」标记(&T)"
+msgstr "切换 ｢文字描述｣ 标记(&T)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:113
 #, no-c-format
 msgid "Toggle \"&visual impaired\" flag"
-msgstr "切换「视觉障碍」标记(&V)"
+msgstr "切换 ｢视觉障碍｣ 标记(&V)"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:107
 #, no-c-format
 msgid "Toggle \"track &enabled\" flag"
-msgstr "切换「轨道启用」标记(&E)"
+msgstr "切换 ｢轨道启用｣ 标记(&E)"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:856
 #, no-c-format
@@ -14129,12 +14129,12 @@ msgstr "未知元素 (ID: 0x{0})"
 #: src/merge/mkvmerge.cpp:1691
 #, no-c-format
 msgid "Unknown format for the next UID in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中下一 UID 格式未知。\n"
+msgstr "｢{0} {1}｣ 中下一 UID 格式未知。\n"
 
 #: src/merge/mkvmerge.cpp:1678
 #, no-c-format
 msgid "Unknown format for the previous UID in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中上一 UID 格式未知。\n"
+msgstr "｢{0} {1}｣ 中上一 UID 格式未知。\n"
 
 #: src/merge/mkvmerge.cpp:1703
 #, no-c-format
@@ -14164,7 +14164,7 @@ msgstr "未知选项 ｢{0}｣。\n"
 #: src/propedit/propedit_cli_parser.cpp:40
 #, no-c-format
 msgid "Unknown parse mode in '{0} {1}'.\n"
-msgstr "'{0} {1}' 中解析模式未知。\n"
+msgstr "｢{0} {1}｣ 中解析模式未知。\n"
 
 #: src/input/r_avi.cpp:511
 #, no-c-format
@@ -14383,17 +14383,17 @@ msgstr "版本 %1 \"%2\""
 #: src/common/kax_element_names.cpp:130
 #, no-c-format
 msgid "Vertical Cb subsample"
-msgstr "垂直 Cb 抽样"
+msgstr "垂直方向 Cb 抽样"
 
 #: src/common/kax_element_names.cpp:132
 #, no-c-format
 msgid "Vertical chroma siting"
-msgstr "垂直色度分布"
+msgstr "垂直方向色度分布"
 
 #: src/common/kax_element_names.cpp:128
 #, no-c-format
 msgid "Vertical chroma subsample"
-msgstr "垂直色度抽样"
+msgstr "垂直方向色度抽样"
 
 #: src/output/p_video_for_windows.h:36
 #, no-c-format
@@ -14563,19 +14563,19 @@ msgid "Video: colour range"
 msgstr "视频: 色域"
 
 #: src/common/property_element.cpp:174
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video: horizontal Cb subsampling"
-msgstr "水平 Cb 抽样"
+msgstr "视频: 水平方向 Cb 抽样"
 
 #: src/common/property_element.cpp:176
 #, no-c-format
 msgid "Video: horizontal chroma siting"
-msgstr "视频: 水平色度分布"
+msgstr "视频: 水平方向色度分布"
 
 #: src/common/property_element.cpp:172
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video: horizontal chroma subsampling"
-msgstr "视频: 水平色度分布"
+msgstr "视频: 水平方向色度抽样"
 
 #: src/common/property_element.cpp:181
 #, no-c-format
@@ -14628,19 +14628,19 @@ msgid "Video: transfer characteristics"
 msgstr "视频: 传输特征"
 
 #: src/common/property_element.cpp:175
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video: vertical Cb subsampling"
-msgstr "垂直 Cb 抽样"
+msgstr "视频: 垂直方向 Cb 抽样"
 
 #: src/common/property_element.cpp:177
 #, no-c-format
 msgid "Video: vertical chroma siting"
-msgstr "视频: 垂直色度分布"
+msgstr "视频: 垂直方向色度分布"
 
 #: src/common/property_element.cpp:173
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video: vertical chroma subsampling"
-msgstr "视频: 垂直色度分布"
+msgstr "视频: 垂直方向色度抽样"
 
 #: src/common/property_element.cpp:192
 #, no-c-format
@@ -15411,7 +15411,7 @@ msgstr "inflateInit() 失败。结果: {0}\n"
 #: src/propedit/change.cpp:391
 #, no-c-format
 msgid "invalid language tag '{0}': {1}"
-msgstr "无效的语言标签｢{0}｣: {1}"
+msgstr "无效的语言标签 ｢{0}｣: {1}"
 
 #: src/common/kax_info.cpp:1026
 #, no-c-format
@@ -15652,7 +15652,7 @@ msgstr "mkvmerge -o 输出文件 [全局选项] [选项1] <文件1> [@选项文�
 #: src/mkvtoolnix-gui/merge/output.cpp:242
 #, no-c-format
 msgid "mkvmerge also turns this on if the destination file name's extension is \"webm\"."
-msgstr "若输出文件的扩展名为“webm”，mkvmerge 会自动启用该选项。"
+msgstr "若输出文件的扩展名为 ｢webm｣，mkvmerge 会自动启用该选项。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:232
 #, no-c-format
