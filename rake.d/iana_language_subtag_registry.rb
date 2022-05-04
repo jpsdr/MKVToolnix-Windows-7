@@ -286,7 +286,7 @@ EOERB
       map     { |e| self.format_one_preferred_value e }
 
     rows += isdcf_entries.
-      select { |e| %r{^Q[A-Z]{2}$}.match(e["dcncTag"] || "") and !e["rfc5646Tag"].blank? }.
+      select { |e| %r{^Q[A-T][A-Z]$}.match(e["dcncTag"] || "") and !e["rfc5646Tag"].blank? }.
       map    { |e| self.format_one_preferred_value_isdcf e }
 
     return rows.size, format_table(rows, :column_suffix => ',', :row_prefix => "  { ", :row_suffix => " },").join("\n")

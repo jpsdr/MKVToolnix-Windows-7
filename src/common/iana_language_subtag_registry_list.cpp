@@ -1004,12 +1004,7 @@ static preferred_values_init_t s_preferred_values_init[] = {
   { { "QMT",                    NULL, NULL, }, { "cmn-Hant",       NULL, NULL,      } },
   { { "QTM",                    NULL, NULL, }, { "cmn-TW",         NULL, NULL,      } },
   { { "QFC",                    NULL, NULL, }, { "fr-CA",          NULL, NULL,      } },
-  { { "QUC",                    NULL, NULL, }, { "quc",            NULL, NULL,      } },
   { { "QBP",                    NULL, NULL, }, { "pt-BR",          NULL, NULL,      } },
-  { { "QUZ",                    NULL, NULL, }, { "quz",            NULL, NULL,      } },
-  { { "QZB",                    NULL, NULL, }, { "quz-BO",         NULL, NULL,      } },
-  { { "QZE",                    NULL, NULL, }, { "quz-EC",         NULL, NULL,      } },
-  { { "QZP",                    NULL, NULL, }, { "quz-PE",         NULL, NULL,      } },
   { { "QSA",                    NULL, NULL, }, { "es-AR",          NULL, NULL,      } },
   { { "QSB",                    NULL, NULL, }, { "es-BO",          NULL, NULL,      } },
   { { "QCL",                    NULL, NULL, }, { "es-CL",          NULL, NULL,      } },
@@ -1027,9 +1022,6 @@ static preferred_values_init_t s_preferred_values_init[] = {
   { { "QPY",                    NULL, NULL, }, { "es-PY",          NULL, NULL,      } },
   { { "QPE",                    NULL, NULL, }, { "es-PE",          NULL, NULL,      } },
   { { "QPR",                    NULL, NULL, }, { "es-PR",          NULL, NULL,      } },
-  { { "QUS",                    NULL, NULL, }, { "es-US",          NULL, NULL,      } },
-  { { "QUY",                    NULL, NULL, }, { "es-UY",          NULL, NULL,      } },
-  { { "QVE",                    NULL, NULL, }, { "es-VE",          NULL, NULL,      } },
 };
 
 void
@@ -1069,9 +1061,9 @@ void
 init_preferred_values() {
   mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::none);
 
-  g_preferred_values.reserve(431);
+  g_preferred_values.reserve(423);
 
-  for (auto const *preferred_value = s_preferred_values_init, *end = preferred_value + 431; preferred_value < end; ++preferred_value)
+  for (auto const *preferred_value = s_preferred_values_init, *end = preferred_value + 423; preferred_value < end; ++preferred_value)
     g_preferred_values.emplace_back(preferred_value->from.parse(), preferred_value->to.parse());
 
   mtx::bcp47::language_c::set_normalization_mode(mtx::bcp47::normalization_mode_e::default_mode);
