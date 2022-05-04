@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix 8.0.0\n"
 "POT-Creation-Date: 2022-03-28 19:05+0200\n"
-"PO-Revision-Date: 2016-02-03 20:53+0000\n"
+"PO-Revision-Date: 2022-05-04 21:03+0200\n"
 "Last-Translator: overdrive80 <lukillas.ole@gmail.com>, 2016-2022\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/es/)\n"
 "Language: es\n"
@@ -2048,19 +2048,19 @@ msgstr "<option>--normalize-language-ietf</option> <parameter>modo</parameter>"
 #: doc/man/mkvmerge.xml:562
 #: doc/man/mkvpropedit.xml:405
 msgid "Enables normalizing all IETF BCP 47 language tags to either their canonical form with mode '<literal>canonical</literal>', to their extended language subtags form with mode '<literal>extlang</literal>' or turns it off with mode '<literal>off</literal>'. By default normalization to the canonical form is applied."
-msgstr ""
+msgstr "Habilita la normalización de todas las etiquetas de idioma IETF BCP 47 a su forma canónica con el modo '<literal>canonical</literal>', a su forma de sub-etiquetas de idioma extendido con el modo '<literal>extlang</literal>' o lo desactiva con el modo '<literal>off</literal>'. Por defecto, se aplica la normalización a la forma canónica."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:568
 #: doc/man/mkvpropedit.xml:411
 msgid "In the canonical form all subtags for which preferred values exist are replaced by those preferred values. This converts e.g. '<literal>zh-yue-jyutping</literal>' to '<literal>yue-jyutping</literal>' or '<literal>fr-FX</literal>' to '<literal>fr-FR</literal>'."
-msgstr ""
+msgstr "En la forma canónica todas las sub-etiquetas para las que existe valores preferidos se reemplazan por esos valores preferidos. Por ejemplo, convierte esto  '<literal>zh-yue-jyutping</literal>' a '<literal>yue-jyutping</literal>' o '<literal>fr-FX</literal>' a '<literal>fr-FR</literal>'."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:573
 #: doc/man/mkvpropedit.xml:416
 msgid "For the extended language subtags form the canonical form is built first. Afterwards all primary languages for which an extended language subtag exists are replaced by that extended language subtag and its prefix. This converts e.g. '<literal>yue-jyutping</literal>' back to '<literal>zh-yue-jyutping</literal>' but has no effect on '<literal>fr-FR</literal>' as '<literal>fr</literal>' is not an extended language subtag."
-msgstr ""
+msgstr "Para las sub-etiquetas de idioma extendido, primero se crea la forma canónica. Después se reemplazan por esa sub-etiqueta de idioma extendido y su prefijo todos los idiomas principales para los que existe una sub-etiqueta de idioma extendido. Por ejemplo, esto convierte '<literal>yue-jyutping</literal>' a '<literal>zh-yue-jyutping</literal>' y no sucede nada en '<literal>fr-FR</literal>' ya que '<literal>fr</literal>' no es una sub-etiqueta de idioma extendido. "
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:584
@@ -2597,7 +2597,7 @@ msgstr "Tipo <abbrev>MIME</abbrev>  del siguiente adjunto. Se aplica a una de la
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1126
 msgid "If no <abbrev>MIME</abbrev> type is given a for an attachment, its type will be detected automatically."
-msgstr ""
+msgstr "Si no especifica el tipo <abbrev>MIME</abbrev> para un adjunto, su tipo se detecterá automáticamente."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1132
@@ -2635,18 +2635,18 @@ msgstr "<option>--enable-legacy-font-mime-types</option>"
 #: doc/man/mkvmerge.xml:1166
 #: doc/man/mkvpropedit.xml:363
 msgid "Enables the use of legacy <abbrev>MIME</abbrev> types for certain types of font attachments. For example, '<literal>application/x-truetype-font</literal>' will be used for TrueType fonts instead of '<literal>fonts/ttf</literal>'."
-msgstr ""
+msgstr "Habilita el uso de tipos <abbrev>MIME</abbrev> heredados para ciertos tipos de fuentes adjuntas. Por ejemplo, '<literal>application/x-truetype-font</literal>' se usará para fuentes TrueType en vez de '<literal>fonts/ttf</literal>'."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1171
 msgid "This affects both new attachments if its <abbrev>MIME</abbrev> type is detected automatically and existing attachments whose stored <abbrev>MIME</abbrev> types will be remapped to the legacy ones."
-msgstr ""
+msgstr "Esto afecta tanto a los nuevos adjuntos, si su tipo <abbrev>MIME</abbrev> se detecta automáticamente, como a los adjuntos existentes cuyos tipos <abbrev>MIME</abbrev>almacenados serán reasignados a los heredados."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1176
 #: doc/man/mkvpropedit.xml:373
 msgid "The affected <abbrev>MIME</abbrev> types are '<literal>font/sfnt</literal>', '<literal>font/ttf</literal>' and '<literal>font/collection</literal>' which are all mapped to '<literal>application/x-truetype-fonts</literal>' and '<literal>font/otf</literal>' which is mapped to '<literal>application/vnd.ms-opentype</literal>'."
-msgstr ""
+msgstr "Los tipos <abbrev>MIME</abbrev> afectados son '<literal>font/sfnt</literal>', '<literal>font/ttf</literal>' y '<literal>font/collection</literal>' los cuales están asignados a '<literal>application/x-truetype-fonts</literal>' y '<literal>font/otf</literal>', que está asignado a '<literal>application/vnd.ms-opentype</literal>'."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:1186
@@ -5165,7 +5165,7 @@ msgstr "Establece la descripción a usar en la operación <option>--add-attachme
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:368
 msgid "This affects both adding new attachments and replacing existing attachments, but only if the new <abbrev>MIME</abbrev> type isn't specified. Other existing attachments aren't changed."
-msgstr ""
+msgstr "Esto afecta tanto al añadir nuevos adjuntos como al reemplazar los adjuntos existentes, pero sólo si no se especifica el nuevo tipo <abbrev>MIME</abbrev>. Otros adjuntos existentes no serán modificados."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:382
@@ -5185,27 +5185,27 @@ msgstr "Esta opción no afecta a los cambios solicitados mediante la propiedad d
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:423
 msgid "This normalization is only applied to elements that are actually changed:"
-msgstr ""
+msgstr "Esta normalización sólo se aplica a elementos que realmente han cambiado:"
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:429
 msgid "When editing track headers only those track language elements that are set via edit specifications are affected. Languages of tracks that aren't edited aren't changed. Editing a track but setting only properties other than the language won't affect the language either."
-msgstr ""
+msgstr "Al editar cabeceras de pista sólo se ven afectados los elementos del idioma de la pista que se establecen a través de las especificaciones de edición. Los idiomas de las pistas que no son editados no son modificados. Editar una pista y sólo configurar distintas propiedades del idioma tampoco afectará al idioma."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:437
 msgid "When editing chapters all language elements of all chapter elements are affected as existing chapters are always fully replaced."
-msgstr ""
+msgstr "Cuando se editan los capítulos todos los elementos del idioma, de todos los elementos del capítulo, se ven afectados; ya que los capítulos existentes siempre se reemplazan por completo."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:443
 msgid "When editing tags only the language elements of the tags that are actually replaced are affected. For example, when you replace global tags then existing track tags aren't affected."
-msgstr ""
+msgstr "Al editar etiquetas sólo se ven afectados los elementos de idioma de las etiquetas que realmente son sustituidos. Por ejemplo, cuando se reemplazan las etiquetas globales no se ven afectadas las etiquetas de pista existentes."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:450
 msgid "The best way to normalize all existing language tags in a file is to remux it with &mkvmerge; and set its '<literal>--normalize-language-ietf</literal>' option to the desired mode."
-msgstr ""
+msgstr "La mejor forma de normalizar todas las etiquetas existentes de idioma en un archivo es volver a multiplexarlas con &mkvmerge; y configurarles su opción '<literal>--normalize-language-ietf</literal>' al modo deseado."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:480
