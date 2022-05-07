@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>898</width>
-    <height>611</height>
+    <height>659</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -111,7 +111,8 @@
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset theme="arrow-up"/>
+                    <iconset theme="arrow-up">
+                     <normaloff>.</normaloff>.</iconset>
                    </property>
                   </widget>
                  </item>
@@ -121,7 +122,8 @@
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset theme="arrow-down"/>
+                    <iconset theme="arrow-down">
+                     <normaloff>.</normaloff>.</iconset>
                    </property>
                   </widget>
                  </item>
@@ -208,7 +210,8 @@
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset theme="arrow-up"/>
+                    <iconset theme="arrow-up">
+                     <normaloff>.</normaloff>.</iconset>
                    </property>
                   </widget>
                  </item>
@@ -218,7 +221,8 @@
                     <string/>
                    </property>
                    <property name="icon">
-                    <iconset theme="arrow-down"/>
+                    <iconset theme="arrow-down">
+                     <normaloff>.</normaloff>.</iconset>
                    </property>
                   </widget>
                  </item>
@@ -293,6 +297,66 @@
             <layout class="QVBoxLayout" name="verticalLayout_17">
              <item>
               <spacer name="verticalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="colourInformationPage">
+            <attribute name="title">
+             <string>Colour information</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_25">
+             <item>
+              <spacer name="verticalSpacer_13">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="colourMasteringMetaInformationPage">
+            <attribute name="title">
+             <string>Colour mastering meta information</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_26">
+             <item>
+              <spacer name="verticalSpacer_14">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="videoProjectionInformationPage">
+            <attribute name="title">
+             <string>Video projection information</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_27">
+             <item>
+              <spacer name="verticalSpacer_15">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
@@ -414,7 +478,7 @@
                     <x>0</x>
                     <y>0</y>
                     <width>430</width>
-                    <height>998</height>
+                    <height>1921</height>
                    </rect>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -501,7 +565,7 @@
                        <widget class="QComboBox" name="defaultTrackFlag"/>
                       </item>
                       <item row="2" column="1">
-                       <widget class="mtx::gui::Util::LanguageDisplayWidget" name="trackLanguage">
+                       <widget class="mtx::gui::Util::LanguageDisplayWidget" name="trackLanguage" native="true">
                         <property name="focusPolicy">
                          <enum>Qt::TabFocus</enum>
                         </property>
@@ -545,7 +609,8 @@
                             <string/>
                            </property>
                            <property name="icon">
-                            <iconset theme="document-open"/>
+                            <iconset theme="document-open">
+                             <normaloff>.</normaloff>.</iconset>
                            </property>
                           </widget>
                          </item>
@@ -743,7 +808,8 @@
                              <string/>
                             </property>
                             <property name="icon">
-                             <iconset theme="document-open"/>
+                             <iconset theme="document-open">
+                              <normaloff>.</normaloff>.</iconset>
                             </property>
                            </widget>
                           </item>
@@ -886,6 +952,223 @@
                     </widget>
                    </item>
                    <item>
+                    <widget class="mtx::gui::Util::QgsCollapsibleGroupBox" name="colourInformationBox">
+                     <property name="title">
+                      <string>Colour information</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_4">
+                      <item row="6" column="0">
+                       <widget class="QLabel" name="transferCharacteristicsLabel">
+                        <property name="text">
+                         <string>Transfer characteristics:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="5" column="1">
+                       <widget class="QLineEdit" name="colourRange"/>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="bitsPerColourChannelLabel">
+                        <property name="text">
+                         <string>Bits per colour channel:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="7" column="0">
+                       <widget class="QLabel" name="colourPrimariesLabel">
+                        <property name="text">
+                         <string>Colour primaries:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="0">
+                       <widget class="QLabel" name="cbSubsamplingLabel">
+                        <property name="text">
+                         <string>Cb subsampling:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="1">
+                       <widget class="QLineEdit" name="chromaSubsampling"/>
+                      </item>
+                      <item row="8" column="1">
+                       <widget class="QLineEdit" name="maximumContentLight"/>
+                      </item>
+                      <item row="8" column="0">
+                       <widget class="QLabel" name="maximumContentLightLabel">
+                        <property name="text">
+                         <string>Maximum content light:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="4" column="1">
+                       <widget class="QLineEdit" name="chromaSiting"/>
+                      </item>
+                      <item row="6" column="1">
+                       <widget class="QLineEdit" name="transferCharacteristics"/>
+                      </item>
+                      <item row="9" column="0">
+                       <widget class="QLabel" name="maximumFrameLightLabel">
+                        <property name="text">
+                         <string>Maximum frame light:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="0">
+                       <widget class="QLabel" name="chromaSubsamplingLabel">
+                        <property name="text">
+                         <string>Chroma subsampling:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="colourMatrixCoefficientsLabel">
+                        <property name="text">
+                         <string>Colour matrix coefficients:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1">
+                       <widget class="QLineEdit" name="bitsPerColourChannel"/>
+                      </item>
+                      <item row="7" column="1">
+                       <widget class="QLineEdit" name="colourPrimaries"/>
+                      </item>
+                      <item row="5" column="0">
+                       <widget class="QLabel" name="colourRangeLabel">
+                        <property name="text">
+                         <string>Colour range:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="1">
+                       <widget class="QLineEdit" name="cbSubsampling"/>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QLineEdit" name="colourMatrixCoefficients"/>
+                      </item>
+                      <item row="9" column="1">
+                       <widget class="QLineEdit" name="maximumFrameLight"/>
+                      </item>
+                      <item row="4" column="0">
+                       <widget class="QLabel" name="chromaSitingLabel">
+                        <property name="text">
+                         <string>Chroma siting:</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="mtx::gui::Util::QgsCollapsibleGroupBox" name="colourMasteringMetaInformationBox">
+                     <property name="title">
+                      <string>Colour mastering meta information</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_5">
+                      <item row="2" column="0">
+                       <widget class="QLabel" name="maximumLuminanceLabel">
+                        <property name="text">
+                         <string>Maximum luminance:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="chromaticityCoordinatesLabel">
+                        <property name="text">
+                         <string>Chromaticity coordinates:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1">
+                       <widget class="QLineEdit" name="whiteColourCoordinates"/>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="whiteColourCoordinatesLabel">
+                        <property name="text">
+                         <string>White colour coordinates:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="0">
+                       <widget class="QLabel" name="minimumLuminanceLabel">
+                        <property name="text">
+                         <string>Minimum luminance:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="2" column="1">
+                       <widget class="QLineEdit" name="maximumLuminance"/>
+                      </item>
+                      <item row="3" column="1">
+                       <widget class="QLineEdit" name="minimumLuminance"/>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QLineEdit" name="chromaticityCoordinates"/>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="mtx::gui::Util::QgsCollapsibleGroupBox" name="videoProjectionInformationBox">
+                     <property name="title">
+                      <string>Video projection information</string>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_10">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="projectionTypeLabel">
+                        <property name="text">
+                         <string>Projection type:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="1">
+                       <widget class="QLineEdit" name="projectionSpecificData"/>
+                      </item>
+                      <item row="2" column="1">
+                       <widget class="QLineEdit" name="yawRotation"/>
+                      </item>
+                      <item row="3" column="0">
+                       <widget class="QLabel" name="pitchRotationLabel">
+                        <property name="text">
+                         <string>Pitch rotation:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QLineEdit" name="projectionType"/>
+                      </item>
+                      <item row="2" column="0">
+                       <widget class="QLabel" name="yawRotationLabel">
+                        <property name="text">
+                         <string>Yaw rotation:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="projectionSpecificDataLabel">
+                        <property name="text">
+                         <string>Projection-specific data:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="3" column="1">
+                       <widget class="QLineEdit" name="pitchRotation"/>
+                      </item>
+                      <item row="4" column="0">
+                       <widget class="QLabel" name="rollRotationLabel">
+                        <property name="text">
+                         <string>Roll rotation:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="4" column="1">
+                       <widget class="QLineEdit" name="rollRotation"/>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
                     <widget class="mtx::gui::Util::QgsCollapsibleGroupBox" name="audioPropertiesBox">
                      <property name="title">
                       <string>Audio properties</string>
@@ -967,7 +1250,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="character-set"/>
+                         <iconset theme="character-set">
+                          <normaloff>.</normaloff>.</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1144,7 +1428,8 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="document-open"/>
+                   <iconset theme="document-open">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1154,7 +1439,8 @@
                    <string notr="true"/>
                   </property>
                   <property name="icon">
-                   <iconset theme="folder-favorites"/>
+                   <iconset theme="folder-favorites">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1185,7 +1471,8 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="document-open"/>
+                   <iconset theme="document-open">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1209,7 +1496,8 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="document-open"/>
+                   <iconset theme="document-open">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1352,7 +1640,8 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="view-choose"/>
+                   <iconset theme="view-choose">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1406,7 +1695,8 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="document-open"/>
+                   <iconset theme="document-open">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1434,7 +1724,8 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="document-open"/>
+                   <iconset theme="document-open">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1462,7 +1753,8 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="document-open"/>
+                   <iconset theme="document-open">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1512,7 +1804,7 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="chapterLanguage">
+               <widget class="mtx::gui::Util::LanguageDisplayWidget" name="chapterLanguage" native="true">
                 <property name="focusPolicy">
                  <enum>Qt::TabFocus</enum>
                 </property>
@@ -1536,7 +1828,8 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="character-set"/>
+                   <iconset theme="character-set">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1628,7 +1921,8 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="document-open"/>
+                   <iconset theme="document-open">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1802,7 +2096,8 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="arrow-up"/>
+                   <iconset theme="arrow-up">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1812,7 +2107,8 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="arrow-down"/>
+                   <iconset theme="arrow-down">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1954,7 +2250,8 @@
         <string>&amp;Add source files</string>
        </property>
        <property name="icon">
-        <iconset theme="list-add"/>
+        <iconset theme="list-add">
+         <normaloff>.</normaloff>.</iconset>
        </property>
        <property name="popupMode">
         <enum>QToolButton::MenuButtonPopup</enum>
@@ -1970,7 +2267,8 @@
         <string>Sta&amp;rt multiplexing</string>
        </property>
        <property name="icon">
-        <iconset theme="media-playback-start"/>
+        <iconset theme="media-playback-start">
+         <normaloff>.</normaloff>.</iconset>
        </property>
        <property name="popupMode">
         <enum>QToolButton::MenuButtonPopup</enum>
@@ -1986,7 +2284,8 @@
         <string>Add to job &amp;queue</string>
        </property>
        <property name="icon">
-        <iconset theme="task-delegate"/>
+        <iconset theme="task-delegate">
+         <normaloff>.</normaloff>.</iconset>
        </property>
        <property name="popupMode">
         <enum>QToolButton::MenuButtonPopup</enum>
@@ -2056,7 +2355,7 @@
   <tabstop>tracks</tabstop>
   <tabstop>moveTracksUp</tabstop>
   <tabstop>moveTracksDown</tabstop>
-  <tabstop>twProperties</tabstop>
+  <tabstop>videoProjectionInformationPage</tabstop>
   <tabstop>propertiesScrollArea</tabstop>
   <tabstop>muxThis</tabstop>
   <tabstop>trackName</tabstop>
@@ -2085,6 +2384,25 @@
   <tabstop>displayHeight</tabstop>
   <tabstop>cropping</tabstop>
   <tabstop>stereoscopy</tabstop>
+  <tabstop>colourMatrixCoefficients</tabstop>
+  <tabstop>bitsPerColourChannel</tabstop>
+  <tabstop>chromaSubsampling</tabstop>
+  <tabstop>cbSubsampling</tabstop>
+  <tabstop>chromaSiting</tabstop>
+  <tabstop>colourRange</tabstop>
+  <tabstop>transferCharacteristics</tabstop>
+  <tabstop>colourPrimaries</tabstop>
+  <tabstop>maximumContentLight</tabstop>
+  <tabstop>maximumFrameLight</tabstop>
+  <tabstop>chromaticityCoordinates</tabstop>
+  <tabstop>whiteColourCoordinates</tabstop>
+  <tabstop>maximumLuminance</tabstop>
+  <tabstop>minimumLuminance</tabstop>
+  <tabstop>projectionType</tabstop>
+  <tabstop>projectionSpecificData</tabstop>
+  <tabstop>yawRotation</tabstop>
+  <tabstop>pitchRotation</tabstop>
+  <tabstop>rollRotation</tabstop>
   <tabstop>aacIsSBR</tabstop>
   <tabstop>reduceToAudioCore</tabstop>
   <tabstop>removeDialogNormalizationGain</tabstop>
@@ -2139,8 +2457,6 @@
   <tabstop>startMuxing</tabstop>
   <tabstop>addToJobQueue</tabstop>
  </tabstops>
- <resources>
-  <include location="../../qt_resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

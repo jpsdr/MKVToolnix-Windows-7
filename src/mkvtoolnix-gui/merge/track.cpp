@@ -279,6 +279,28 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("originalFlagWasSet",            m_originalFlagWasSet);
   settings.setValue("commentaryFlag",                m_commentaryFlag);
   settings.setValue("commentaryFlagWasSet",          m_commentaryFlagWasSet);
+
+  settings.setValue("colourMatrixCoefficients",      m_colourMatrixCoefficients);
+  settings.setValue("bitsPerColourChannel",          m_bitsPerColourChannel);
+  settings.setValue("chromaSubsampling",             m_chromaSubsampling);
+  settings.setValue("cbSubsampling",                 m_cbSubsampling);
+  settings.setValue("chromaSiting",                  m_chromaSiting);
+  settings.setValue("colourRange",                   m_colourRange);
+  settings.setValue("transferCharacteristics",       m_transferCharacteristics);
+  settings.setValue("colourPrimaries",               m_colourPrimaries);
+  settings.setValue("maximumContentLight",           m_maximumContentLight);
+  settings.setValue("maximumFrameLight",             m_maximumFrameLight);
+
+  settings.setValue("chromaticityCoordinates",       m_chromaticityCoordinates);
+  settings.setValue("whiteColourCoordinates",        m_whiteColourCoordinates);
+  settings.setValue("maximumLuminance",              m_maximumLuminance);
+  settings.setValue("minimumLuminance",              m_minimumLuminance);
+
+  settings.setValue("projectionType",                m_projectionType);
+  settings.setValue("projectionSpecificData",        m_projectionSpecificData);
+  settings.setValue("yawRotation",                   m_yawRotation);
+  settings.setValue("pitchRotation",                 m_pitchRotation);
+  settings.setValue("rollRotation",                  m_rollRotation);
 }
 
 void
@@ -335,6 +357,28 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_originalFlagWasSet            = l.settings.value("originalFlagWasSet").toBool();
   m_commentaryFlag                = l.settings.value("commentaryFlag").toBool();
   m_commentaryFlagWasSet          = l.settings.value("commentaryFlagWasSet").toBool();
+
+  m_colourMatrixCoefficients      = l.settings.value("colourMatrixCoefficients").toString();
+  m_bitsPerColourChannel          = l.settings.value("bitsPerColourChannel").toString();
+  m_chromaSubsampling             = l.settings.value("chromaSubsampling").toString();
+  m_cbSubsampling                 = l.settings.value("cbSubsampling").toString();
+  m_chromaSiting                  = l.settings.value("chromaSiting").toString();
+  m_colourRange                   = l.settings.value("colourRange").toString();
+  m_transferCharacteristics       = l.settings.value("transferCharacteristics").toString();
+  m_colourPrimaries               = l.settings.value("colourPrimaries").toString();
+  m_maximumContentLight           = l.settings.value("maximumContentLight").toString();
+  m_maximumFrameLight             = l.settings.value("maximumFrameLight").toString();
+
+  m_chromaticityCoordinates       = l.settings.value("chromaticityCoordinates").toString();
+  m_whiteColourCoordinates        = l.settings.value("whiteColourCoordinates").toString();
+  m_maximumLuminance              = l.settings.value("maximumLuminance").toString();
+  m_minimumLuminance              = l.settings.value("minimumLuminance").toString();
+
+  m_projectionType                = l.settings.value("projectionType").toString();
+  m_projectionSpecificData        = l.settings.value("projectionSpecificData").toString();
+  m_yawRotation                   = l.settings.value("yawRotation").toString();
+  m_pitchRotation                 = l.settings.value("pitchRotation").toString();
+  m_rollRotation                  = l.settings.value("rollRotation").toString();
 
   if (   (TrackType::Min        > m_type)        || (TrackType::Max        < m_type)
       || (TrackCompression::Min > m_compression) || (TrackCompression::Max < m_compression))
@@ -458,6 +502,62 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
 
     if (m_stereoscopy)
       opt.options << Q("--stereo-mode") << Q("%1:%2").arg(sid).arg(m_stereoscopy - 1);
+
+    if (!m_colourMatrixCoefficients.isEmpty())
+      opt.options << Q("--colour-matrix-coefficients") << Q("%1:%2").arg(sid).arg(m_colourMatrixCoefficients);
+
+    if (!m_bitsPerColourChannel.isEmpty())
+      opt.options << Q("--colour-bits-per-channel") << Q("%1:%2").arg(sid).arg(m_bitsPerColourChannel);
+
+    if (!m_chromaSubsampling.isEmpty())
+      opt.options << Q("--chroma-subsample") << Q("%1:%2").arg(sid).arg(m_chromaSubsampling);
+
+    if (!m_cbSubsampling.isEmpty())
+      opt.options << Q("--cb-subsample") << Q("%1:%2").arg(sid).arg(m_cbSubsampling);
+
+    if (!m_chromaSiting.isEmpty())
+      opt.options << Q("--chroma-siting") << Q("%1:%2").arg(sid).arg(m_chromaSiting);
+
+    if (!m_colourRange.isEmpty())
+      opt.options << Q("--colour-range") << Q("%1:%2").arg(sid).arg(m_colourRange);
+
+    if (!m_transferCharacteristics.isEmpty())
+      opt.options << Q("--colour-transfer-characteristics") << Q("%1:%2").arg(sid).arg(m_transferCharacteristics);
+
+    if (!m_colourPrimaries.isEmpty())
+      opt.options << Q("--colour-primaries") << Q("%1:%2").arg(sid).arg(m_colourPrimaries);
+
+    if (!m_maximumContentLight.isEmpty())
+      opt.options << Q("--max-content-light") << Q("%1:%2").arg(sid).arg(m_maximumContentLight);
+
+    if (!m_maximumFrameLight.isEmpty())
+      opt.options << Q("--max-frame-light") << Q("%1:%2").arg(sid).arg(m_maximumFrameLight);
+
+    if (!m_chromaticityCoordinates.isEmpty())
+      opt.options << Q("--chromaticity-coordinates") << Q("%1:%2").arg(sid).arg(m_chromaticityCoordinates);
+
+    if (!m_whiteColourCoordinates.isEmpty())
+      opt.options << Q("--white-colour-coordinates") << Q("%1:%2").arg(sid).arg(m_whiteColourCoordinates);
+
+    if (!m_maximumLuminance.isEmpty())
+      opt.options << Q("--max-luminance") << Q("%1:%2").arg(sid).arg(m_maximumLuminance);
+
+    if (!m_minimumLuminance.isEmpty())
+      opt.options << Q("--min-luminance") << Q("%1:%2").arg(sid).arg(m_minimumLuminance);
+
+    if (!m_projectionType.isEmpty())
+      opt.options << Q("--projection-type") << Q("%1:%2").arg(sid).arg(m_projectionType);
+    if (!m_projectionSpecificData.isEmpty())
+      opt.options << Q("--projection-private") << Q("%1:%2").arg(sid).arg(m_projectionSpecificData);
+
+    if (!m_yawRotation.isEmpty())
+      opt.options << Q("--projection-pose-yaw") << Q("%1:%2").arg(sid).arg(m_yawRotation);
+
+    if (!m_pitchRotation.isEmpty())
+      opt.options << Q("--projection-pose-pitch") << Q("%1:%2").arg(sid).arg(m_pitchRotation);
+
+    if (!m_rollRotation.isEmpty())
+      opt.options << Q("--projection-pose-roll") << Q("%1:%2").arg(sid).arg(m_rollRotation);
 
     if (m_compression != TrackCompression::Default)
       opt.options << Q("--compression") << Q("%1:%2").arg(sid).arg(TrackCompression::None == m_compression ? Q("none") : Q("zlib"));

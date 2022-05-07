@@ -65,7 +65,22 @@ Tab::setupControlLists() {
                   << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->defaultDurationLabel << p.ui->defaultDuration << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps
                   << p.ui->videoPropertiesBox << p.ui->setAspectRatio << p.ui->aspectRatio << p.ui->setDisplayWidthHeight << p.ui->displayWidth << p.ui->displayDimensionsXLabel << p.ui->displayHeight << p.ui->stereoscopyLabel
                   << p.ui->stereoscopy << p.ui->croppingLabel << p.ui->cropping << p.ui->cuesLabel << p.ui->cues
-                  << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo;
+                  << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo
+
+                  << p.ui->colourInformationBox
+                  << p.ui->colourMatrixCoefficientsLabel << p.ui->colourMatrixCoefficients << p.ui->bitsPerColourChannelLabel   << p.ui->bitsPerColourChannel   << p.ui->chromaSubsamplingLabel   << p.ui->chromaSubsampling
+                  << p.ui->cbSubsamplingLabel            << p.ui->cbSubsampling            << p.ui->chromaSitingLabel           << p.ui->chromaSiting           << p.ui->colourRangeLabel         << p.ui->colourRange
+                  << p.ui->transferCharacteristicsLabel  << p.ui->transferCharacteristics  << p.ui->colourPrimariesLabel        << p.ui->colourPrimaries        << p.ui->maximumContentLightLabel << p.ui->maximumContentLight
+                  << p.ui->maximumFrameLightLabel        << p.ui->maximumFrameLight
+
+                  << p.ui->colourMasteringMetaInformationBox
+                  << p.ui->chromaticityCoordinatesLabel  << p.ui->chromaticityCoordinates  << p.ui->whiteColourCoordinatesLabel << p.ui->whiteColourCoordinates
+                  << p.ui->maximumLuminanceLabel         << p.ui->maximumLuminance         << p.ui->minimumLuminanceLabel       << p.ui->minimumLuminance
+
+                  << p.ui->videoProjectionInformationBox
+                  << p.ui->projectionTypeLabel           << p.ui->projectionType           << p.ui->projectionSpecificDataLabel << p.ui->projectionSpecificData << p.ui->yawRotationLabel         << p.ui->yawRotation
+                  << p.ui->pitchRotationLabel            << p.ui->pitchRotation            << p.ui->rollRotationLabel           << p.ui->rollRotation
+    ;
 
   p.subtitleControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
                      << p.ui->trackEnabledFlagLabel << p.ui->trackEnabledFlag << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlagLabel << p.ui->textDescriptionsFlag
@@ -87,7 +102,22 @@ Tab::setupControlLists() {
                      << p.ui->videoPropertiesBox << p.ui->setAspectRatio << p.ui->aspectRatio << p.ui->setDisplayWidthHeight << p.ui->displayWidth << p.ui->displayDimensionsXLabel << p.ui->displayHeight << p.ui->stereoscopyLabel
                      << p.ui->stereoscopy << p.ui->croppingLabel << p.ui->cropping << p.ui->audioPropertiesBox << p.ui->aacIsSBR << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet
                      << p.ui->miscellaneousBox << p.ui->cuesLabel << p.ui->cues << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions
-                     << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain;
+                     << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain
+
+                     << p.ui->colourInformationBox
+                     << p.ui->colourMatrixCoefficientsLabel << p.ui->colourMatrixCoefficients << p.ui->bitsPerColourChannelLabel   << p.ui->bitsPerColourChannel   << p.ui->chromaSubsamplingLabel   << p.ui->chromaSubsampling
+                     << p.ui->cbSubsamplingLabel            << p.ui->cbSubsampling            << p.ui->chromaSitingLabel           << p.ui->chromaSiting           << p.ui->colourRangeLabel         << p.ui->colourRange
+                     << p.ui->transferCharacteristicsLabel  << p.ui->transferCharacteristics  << p.ui->colourPrimariesLabel        << p.ui->colourPrimaries        << p.ui->maximumContentLightLabel << p.ui->maximumContentLight
+                     << p.ui->maximumFrameLightLabel        << p.ui->maximumFrameLight
+
+                     << p.ui->colourMasteringMetaInformationBox
+                     << p.ui->chromaticityCoordinatesLabel  << p.ui->chromaticityCoordinates  << p.ui->whiteColourCoordinatesLabel << p.ui->whiteColourCoordinates
+                     << p.ui->maximumLuminanceLabel         << p.ui->maximumLuminance         << p.ui->minimumLuminanceLabel       << p.ui->minimumLuminance
+
+                     << p.ui->videoProjectionInformationBox
+                     << p.ui->projectionTypeLabel           << p.ui->projectionType           << p.ui->projectionSpecificDataLabel << p.ui->projectionSpecificData << p.ui->yawRotationLabel         << p.ui->yawRotation
+                     << p.ui->pitchRotationLabel            << p.ui->pitchRotation            << p.ui->rollRotationLabel           << p.ui->rollRotation
+    ;
 
   p.comboBoxControls << p.ui->muxThis << p.ui->defaultTrackFlag << p.ui->forcedTrackFlag << p.ui->trackEnabledFlag << p.ui->compression << p.ui->cues << p.ui->stereoscopy << p.ui->aacIsSBR << p.ui->subtitleCharacterSet
                      << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlag<< p.ui->originalFlag << p.ui->commentaryFlag;
@@ -100,7 +130,22 @@ Tab::setupControlLists() {
                            << p.ui->defaultDurationLabel     << p.ui->defaultDuration         << p.ui->fixBitstreamTimingInfo      << p.ui->setAspectRatio     << p.ui->setDisplayWidthHeight     << p.ui->aspectRatio
                            << p.ui->displayWidth             << p.ui->displayDimensionsXLabel << p.ui->displayHeight               << p.ui->stereoscopyLabel   << p.ui->stereoscopy
                            << p.ui->croppingLabel            << p.ui->cropping                << p.ui->aacIsSBR
-                           << p.ui->cuesLabel                << p.ui->cues                    << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions;
+                           << p.ui->cuesLabel                << p.ui->cues                    << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions
+
+                           << p.ui->colourInformationBox
+                           << p.ui->colourMatrixCoefficientsLabel << p.ui->colourMatrixCoefficients << p.ui->bitsPerColourChannelLabel   << p.ui->bitsPerColourChannel   << p.ui->chromaSubsamplingLabel   << p.ui->chromaSubsampling
+                           << p.ui->cbSubsamplingLabel            << p.ui->cbSubsampling            << p.ui->chromaSitingLabel           << p.ui->chromaSiting           << p.ui->colourRangeLabel         << p.ui->colourRange
+                           << p.ui->transferCharacteristicsLabel  << p.ui->transferCharacteristics  << p.ui->colourPrimariesLabel        << p.ui->colourPrimaries        << p.ui->maximumContentLightLabel << p.ui->maximumContentLight
+                           << p.ui->maximumFrameLightLabel        << p.ui->maximumFrameLight
+
+                           << p.ui->colourMasteringMetaInformationBox
+                           << p.ui->chromaticityCoordinatesLabel  << p.ui->chromaticityCoordinates  << p.ui->whiteColourCoordinatesLabel << p.ui->whiteColourCoordinates
+                           << p.ui->maximumLuminanceLabel         << p.ui->maximumLuminance         << p.ui->minimumLuminanceLabel       << p.ui->minimumLuminance
+
+                           << p.ui->videoProjectionInformationBox
+                           << p.ui->projectionTypeLabel           << p.ui->projectionType           << p.ui->projectionSpecificDataLabel << p.ui->projectionSpecificData << p.ui->yawRotationLabel         << p.ui->yawRotation
+                           << p.ui->pitchRotationLabel            << p.ui->pitchRotation            << p.ui->rollRotationLabel           << p.ui->rollRotation
+    ;
 }
 
 void
@@ -145,12 +190,16 @@ Tab::setupHorizontalScrollAreaInputLayout() {
   for (auto const &widget : widgets)
     widget->setParent(p.ui->scrollAreaWidgetContents);
 
-  layout->insertWidget(0, p.ui->generalOptionsBox);
-  layout->insertWidget(1, p.ui->timestampsAndDefaultDurationBox);
-  layout->insertWidget(2, p.ui->videoPropertiesBox);
-  layout->insertWidget(3, p.ui->audioPropertiesBox);
-  layout->insertWidget(4, p.ui->subtitleAndChapterPropertiesBox);
-  layout->insertWidget(5, p.ui->miscellaneousBox);
+  auto idx = 0;
+  layout->insertWidget(idx++, p.ui->generalOptionsBox);
+  layout->insertWidget(idx++, p.ui->timestampsAndDefaultDurationBox);
+  layout->insertWidget(idx++, p.ui->videoPropertiesBox);
+  layout->insertWidget(idx++, p.ui->colourInformationBox);
+  layout->insertWidget(idx++, p.ui->colourMasteringMetaInformationBox);
+  layout->insertWidget(idx++, p.ui->videoProjectionInformationBox);
+  layout->insertWidget(idx++, p.ui->audioPropertiesBox);
+  layout->insertWidget(idx++, p.ui->subtitleAndChapterPropertiesBox);
+  layout->insertWidget(idx++, p.ui->miscellaneousBox);
 
   p.ui->propertiesColumn1->updateGeometry();
   p.ui->propertiesColumn2->updateGeometry();
@@ -179,12 +228,18 @@ Tab::setupHorizontalTwoColumnsInputLayout() {
     layout->insertWidget(position, widget);
   };
 
-  moveTo(p.ui->propertiesColumn1, 0, p.ui->generalOptionsBox);
-  moveTo(p.ui->propertiesColumn1, 1, p.ui->timestampsAndDefaultDurationBox);
-  moveTo(p.ui->propertiesColumn2, 0, p.ui->videoPropertiesBox);
-  moveTo(p.ui->propertiesColumn2, 1, p.ui->audioPropertiesBox);
-  moveTo(p.ui->propertiesColumn2, 2, p.ui->subtitleAndChapterPropertiesBox);
-  moveTo(p.ui->propertiesColumn2, 3, p.ui->miscellaneousBox);
+  auto idx = 0;
+  moveTo(p.ui->propertiesColumn1, idx++, p.ui->generalOptionsBox);
+  moveTo(p.ui->propertiesColumn1, idx++, p.ui->timestampsAndDefaultDurationBox);
+  moveTo(p.ui->propertiesColumn1, idx++, p.ui->audioPropertiesBox);
+  moveTo(p.ui->propertiesColumn1, idx++, p.ui->subtitleAndChapterPropertiesBox);
+  moveTo(p.ui->propertiesColumn1, idx++, p.ui->miscellaneousBox);
+
+  idx = 0;
+  moveTo(p.ui->propertiesColumn2, idx++, p.ui->videoPropertiesBox);
+  moveTo(p.ui->propertiesColumn2, idx++, p.ui->colourInformationBox);
+  moveTo(p.ui->propertiesColumn2, idx++, p.ui->colourMasteringMetaInformationBox);
+  moveTo(p.ui->propertiesColumn2, idx++, p.ui->videoProjectionInformationBox);
 
   Util::autoGroupBoxGridLayout(*p.ui->generalOptionsBox, 1);
 }
@@ -210,6 +265,9 @@ Tab::setupVerticalTabWidgetInputLayout() {
   moveTo(p.ui->generalOptionsPage,                 0, p.ui->generalOptionsBox);
   moveTo(p.ui->timestampsAndDefaultDurationPage,   0, p.ui->timestampsAndDefaultDurationBox);
   moveTo(p.ui->videoPropertiesPage,                0, p.ui->videoPropertiesBox);
+  moveTo(p.ui->colourInformationPage,              0, p.ui->colourInformationBox);
+  moveTo(p.ui->colourMasteringMetaInformationPage, 0, p.ui->colourMasteringMetaInformationBox);
+  moveTo(p.ui->videoProjectionInformationPage,     0, p.ui->videoProjectionInformationBox);
   moveTo(p.ui->audioSubtitleChapterPropertiesPage, 0, p.ui->audioPropertiesBox);
   moveTo(p.ui->audioSubtitleChapterPropertiesPage, 1, p.ui->subtitleAndChapterPropertiesBox);
   moveTo(p.ui->miscellaneousPage,                  0, p.ui->miscellaneousBox);
@@ -399,6 +457,25 @@ Tab::setupInputControls() {
   connect(p.ui->trackLanguage,                 &Util::LanguageDisplayWidget::languageChanged,                          this,                       &Tab::onTrackLanguageChanged);
   connect(p.ui->trackName,                     &QComboBox::editTextChanged,                                            this,                       &Tab::onTrackNameChanged);
   connect(p.ui->trackTags,                     &QLineEdit::textChanged,                                                this,                       &Tab::onTrackTagsChanged);
+  connect(p.ui->colourMatrixCoefficients,      &QLineEdit::textChanged,                                                this,                       &Tab::onColourMatrixCoefficientsChanged);
+  connect(p.ui->bitsPerColourChannel,          &QLineEdit::textChanged,                                                this,                       &Tab::onBitsPerColourChannelChanged);
+  connect(p.ui->chromaSubsampling,             &QLineEdit::textChanged,                                                this,                       &Tab::onChromaSubsamplingChanged);
+  connect(p.ui->cbSubsampling,                 &QLineEdit::textChanged,                                                this,                       &Tab::onCbSubsamplingChanged);
+  connect(p.ui->chromaSiting,                  &QLineEdit::textChanged,                                                this,                       &Tab::onChromaSitingChanged);
+  connect(p.ui->colourRange,                   &QLineEdit::textChanged,                                                this,                       &Tab::onColourRangeChanged);
+  connect(p.ui->transferCharacteristics,       &QLineEdit::textChanged,                                                this,                       &Tab::onTransferCharacteristicsChanged);
+  connect(p.ui->colourPrimaries,               &QLineEdit::textChanged,                                                this,                       &Tab::onColourPrimariesChanged);
+  connect(p.ui->maximumContentLight,           &QLineEdit::textChanged,                                                this,                       &Tab::onMaximumContentLightChanged);
+  connect(p.ui->maximumFrameLight,             &QLineEdit::textChanged,                                                this,                       &Tab::onMaximumFrameLightChanged);
+  connect(p.ui->chromaticityCoordinates,       &QLineEdit::textChanged,                                                this,                       &Tab::onChromaticityCoordinatesChanged);
+  connect(p.ui->whiteColourCoordinates,        &QLineEdit::textChanged,                                                this,                       &Tab::onWhiteColourCoordinatesChanged);
+  connect(p.ui->maximumLuminance,              &QLineEdit::textChanged,                                                this,                       &Tab::onMaximumLuminanceChanged);
+  connect(p.ui->minimumLuminance,              &QLineEdit::textChanged,                                                this,                       &Tab::onMinimumLuminanceChanged);
+  connect(p.ui->projectionType,                &QLineEdit::textChanged,                                                this,                       &Tab::onProjectionTypeChanged);
+  connect(p.ui->projectionSpecificData,        &QLineEdit::textChanged,                                                this,                       &Tab::onProjectionSpecificDataChanged);
+  connect(p.ui->yawRotation,                   &QLineEdit::textChanged,                                                this,                       &Tab::onYawRotationChanged);
+  connect(p.ui->pitchRotation,                 &QLineEdit::textChanged,                                                this,                       &Tab::onPitchRotationChanged);
+  connect(p.ui->rollRotation,                  &QLineEdit::textChanged,                                                this,                       &Tab::onRollRotationChanged);
   connect(p.ui->tracks,                        &QTreeView::doubleClicked,                                              this,                       &Tab::toggleMuxThisForSelectedTracks);
   connect(p.ui->tracks,                        &Util::BasicTreeView::allSelectedActivated,                             this,                       &Tab::toggleMuxThisForSelectedTracks);
   connect(p.ui->tracks,                        &Util::BasicTreeView::ctrlDownPressed,                                  this,                       &Tab::onMoveTracksDown);
@@ -781,6 +858,28 @@ Tab::setInputControlValues(Track *track) {
   p.ui->reduceToAudioCore->setChecked(             track->m_reduceAudioToCore);
   p.ui->removeDialogNormalizationGain->setChecked( track->m_removeDialogNormalizationGain);
 
+  p.ui->colourMatrixCoefficients->setText(         track->m_colourMatrixCoefficients);
+  p.ui->bitsPerColourChannel->setText(             track->m_bitsPerColourChannel);
+  p.ui->chromaSubsampling->setText(                track->m_chromaSubsampling);
+  p.ui->cbSubsampling->setText(                    track->m_cbSubsampling);
+  p.ui->chromaSiting->setText(                     track->m_chromaSiting);
+  p.ui->colourRange->setText(                      track->m_colourRange);
+  p.ui->transferCharacteristics->setText(          track->m_transferCharacteristics);
+  p.ui->colourPrimaries->setText(                  track->m_colourPrimaries);
+  p.ui->maximumContentLight->setText(              track->m_maximumContentLight);
+  p.ui->maximumFrameLight->setText(                track->m_maximumFrameLight);
+
+  p.ui->chromaticityCoordinates->setText(          track->m_chromaticityCoordinates);
+  p.ui->whiteColourCoordinates->setText(           track->m_whiteColourCoordinates);
+  p.ui->maximumLuminance->setText(                 track->m_maximumLuminance);
+  p.ui->minimumLuminance->setText(                 track->m_minimumLuminance);
+
+  p.ui->projectionType->setText(                   track->m_projectionType);
+  p.ui->projectionSpecificData->setText(           track->m_projectionSpecificData);
+  p.ui->yawRotation->setText(                      track->m_yawRotation);
+  p.ui->pitchRotation->setText(                    track->m_pitchRotation);
+  p.ui->rollRotation->setText(                     track->m_rollRotation);
+
   p.currentlySettingInputControlValues = false;
 }
 
@@ -1110,6 +1209,101 @@ Tab::onStretchByChanged(QString newValue) {
 void
 Tab::onDefaultDurationChanged(QString newValue) {
   withSelectedTracks([&newValue](auto &track) { track.m_defaultDuration = newValue; }, true);
+}
+
+void
+Tab::onColourMatrixCoefficientsChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_colourMatrixCoefficients = newValue; }, true);
+}
+
+void
+Tab::onBitsPerColourChannelChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_bitsPerColourChannel = newValue; }, true);
+}
+
+void
+Tab::onChromaSubsamplingChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_chromaSubsampling = newValue; }, true);
+}
+
+void
+Tab::onCbSubsamplingChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_cbSubsampling = newValue; }, true);
+}
+
+void
+Tab::onChromaSitingChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_chromaSiting = newValue; }, true);
+}
+
+void
+Tab::onColourRangeChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_colourRange = newValue; }, true);
+}
+
+void
+Tab::onTransferCharacteristicsChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_transferCharacteristics = newValue; }, true);
+}
+
+void
+Tab::onColourPrimariesChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_colourPrimaries = newValue; }, true);
+}
+
+void
+Tab::onMaximumContentLightChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_maximumContentLight = newValue; }, true);
+}
+
+void
+Tab::onMaximumFrameLightChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_maximumFrameLight = newValue; }, true);
+}
+
+void
+Tab::onChromaticityCoordinatesChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_chromaticityCoordinates = newValue; }, true);
+}
+
+void
+Tab::onWhiteColourCoordinatesChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_whiteColourCoordinates = newValue; }, true);
+}
+
+void
+Tab::onMaximumLuminanceChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_maximumLuminance = newValue; }, true);
+}
+
+void
+Tab::onMinimumLuminanceChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_minimumLuminance = newValue; }, true);
+}
+
+void
+Tab::onProjectionTypeChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_projectionType = newValue; }, true);
+}
+
+void
+Tab::onProjectionSpecificDataChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_projectionSpecificData = newValue; }, true);
+}
+
+void
+Tab::onYawRotationChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_yawRotation = newValue; }, true);
+}
+
+void
+Tab::onPitchRotationChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_pitchRotation = newValue; }, true);
+}
+
+void
+Tab::onRollRotationChanged(QString newValue) {
+  withSelectedTracks([&newValue](auto &track) { track.m_rollRotation = newValue; }, true);
 }
 
 void
