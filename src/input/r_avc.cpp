@@ -102,8 +102,8 @@ void
 avc_es_reader_c::identify() {
   auto info = mtx::id::info_c{};
   info.add(mtx::id::packetizer,       mtx::id::mpeg4_p10_es_video);
-  info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", m_width, m_height));
   info.add(mtx::id::default_duration, m_default_duration);
+  info.add_joined(mtx::id::pixel_dimensions, "x"s, m_width, m_height);
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_MPEG4_P10, "MPEG-4 part 10 ES"), info.get());

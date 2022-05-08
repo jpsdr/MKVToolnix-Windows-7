@@ -566,7 +566,7 @@ real_reader_c::identify() {
     info.set(mtx::id::number, demuxer->track->id);
 
     if (RMFF_TRACK_TYPE_VIDEO == demuxer->track->type)
-      info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", demuxer->width, demuxer->height));
+      info.add_joined(mtx::id::pixel_dimensions, "x"s, demuxer->width, demuxer->height);
 
     else if (RMFF_TRACK_TYPE_AUDIO == demuxer->track->type) {
       info.add(mtx::id::audio_channels,           demuxer->channels);

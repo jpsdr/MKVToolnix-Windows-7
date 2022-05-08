@@ -308,7 +308,7 @@ flv_reader_c::identify() {
       info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_video);
 
     if (track->is_video())
-      info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", track->m_v_width, track->m_v_height));
+      info.add_joined(mtx::id::pixel_dimensions, "x"s, track->m_v_width, track->m_v_height);
 
     else if (track->is_audio()) {
       info.add(mtx::id::audio_channels,           track->m_a_channels);

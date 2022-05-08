@@ -84,7 +84,7 @@ obu_reader_c::read(generic_packetizer_c *,
 void
 obu_reader_c::identify() {
   auto info = mtx::id::info_c{};
-  info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", m_width, m_height));
+  info.add_joined(mtx::id::pixel_dimensions, "x"s, m_width, m_height);
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_AV1, {}), info.get());

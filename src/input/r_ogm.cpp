@@ -689,8 +689,7 @@ ogm_reader_c::identify() {
     if (!dmx->title.empty() && !dmx->ms_compat)
       info.add(mtx::id::track_name, dmx->title);
 
-    if ((0 != dmx->display_width) && (0 != dmx->display_height))
-      info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", dmx->display_width, dmx->display_height));
+    info.add_joined(mtx::id::display_dimensions, "x"s, dmx->display_width, dmx->display_height);
 
     if (dynamic_cast<ogm_s_text_demuxer_c *>(dmx.get()) || dynamic_cast<ogm_s_kate_demuxer_c *>(dmx.get())) {
       info.add(mtx::id::text_subtitles, true);
@@ -698,8 +697,7 @@ ogm_reader_c::identify() {
     }
 
     auto pixel_dimensions = dmx->get_pixel_dimensions();
-    if (pixel_dimensions.first && pixel_dimensions.second)
-      info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", pixel_dimensions.first, pixel_dimensions.second));
+    info.add_joined(mtx::id::pixel_dimensions, "x"s, pixel_dimensions.first, pixel_dimensions.second);
 
     info.add(mtx::id::audio_channels,           dmx->channels);
     info.add(mtx::id::audio_sampling_frequency, dmx->sample_rate);

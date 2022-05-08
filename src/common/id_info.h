@@ -86,6 +86,29 @@ class info_c {
 protected:
   verbose_info_t m_info;
 
+private:
+  template<typename... Args>
+  bool
+  all(Args... args) {
+    return (... && args);
+  }
+
+  template<typename T>
+  std::string
+  join([[maybe_unused]] std::string const &separator,
+       T const &value) {
+    return fmt::to_string(value);
+  }
+
+  template<typename Tfirst,
+           typename... Trest>
+  std::string
+  join(std::string const &separator,
+       Tfirst const &first,
+       Trest... rest) {
+    return fmt::to_string(first) + separator + join(separator, rest...);
+  }
+
 public:
   template<typename T> info_c &
   set(std::string const &key,
@@ -103,6 +126,9 @@ public:
     return *this;
   }
 
+  info_c &add(std::string const &key, memory_c const *value);
+  info_c &add(std::string const &key, memory_cptr const &value);
+
   info_c &
   add(std::string const &key,
       char const *value,
@@ -112,12 +138,24 @@ public:
     return *this;
   }
 
+  template<typename T>
   info_c &
   add(std::string const &key,
-      std::optional<bool> const &value) {
+      std::optional<T> const &value) {
     if (value.has_value())
       set(key, *value);
     return *this;
+  }
+
+  template<typename... Tvalues>
+  info_c &
+  add_joined(std::string const &key,
+             std::string const &separator,
+             Tvalues... values) {
+    if (!all(values...))
+      return *this;
+
+    return add(key, join(separator, values...));
   }
 
   verbose_info_t const &get() const {

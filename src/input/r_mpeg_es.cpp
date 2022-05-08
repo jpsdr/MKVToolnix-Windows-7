@@ -217,7 +217,7 @@ void
 mpeg_es_reader_c::identify() {
   auto codec = fmt::format("mpg{0}", version);
   auto info  = mtx::id::info_c{};
-  info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", width, height));
+  info.add_joined(mtx::id::pixel_dimensions, "x"s, width, height);
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec, codec), info.get());

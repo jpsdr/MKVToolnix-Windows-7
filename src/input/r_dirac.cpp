@@ -96,7 +96,7 @@ dirac_es_reader_c::read(generic_packetizer_c *,
 void
 dirac_es_reader_c::identify() {
   auto info = mtx::id::info_c{};
-  info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", m_seqhdr.pixel_width, m_seqhdr.pixel_height));
+  info.add_joined(mtx::id::pixel_dimensions, "x"s, m_seqhdr.pixel_width, m_seqhdr.pixel_height);
 
   id_result_container();
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec_c::get_name(codec_c::type_e::V_DIRAC, "Dirac"), info.get());

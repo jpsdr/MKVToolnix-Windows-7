@@ -1384,12 +1384,10 @@ reader_c::identify() {
 
   for (auto const &track : m_tracks) {
     info = mtx::id::info_c{};
-    info.add(mtx::id::language,  track->language.get_iso639_alpha_3_code());
-    info.set(mtx::id::stream_id, track->pid);
-    info.set(mtx::id::number,    track->pid);
-
-    if (track->program_number)
-      info.set(mtx::id::program_number, track->program_number.value());
+    info.add(mtx::id::language,       track->language.get_iso639_alpha_3_code());
+    info.set(mtx::id::stream_id,      track->pid);
+    info.set(mtx::id::number,         track->pid);
+    info.add(mtx::id::program_number, track->program_number);
 
     if (pid_type_e::audio == track->type) {
       info.add(mtx::id::audio_channels,           track->a_channels);
@@ -1397,12 +1395,11 @@ reader_c::identify() {
       info.add(mtx::id::audio_bits_per_sample,    track->a_bits_per_sample);
 
     } else if (pid_type_e::video == track->type)
-      info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", track->v_width, track->v_height));
+      info.add_joined(mtx::id::pixel_dimensions, "x"s, track->v_width, track->v_height);
 
     else if (pid_type_e::subtitles == track->type) {
       info.set(mtx::id::text_subtitles, track->codec.is(codec_c::type_e::S_SRT));
-      if (track->m_ttx_wanted_page)
-        info.set(mtx::id::teletext_page, *track->m_ttx_wanted_page);
+      info.add(mtx::id::teletext_page,  track->m_ttx_wanted_page);
     }
 
     auto multiplexed_track_ids = std::vector<uint64_t>{};

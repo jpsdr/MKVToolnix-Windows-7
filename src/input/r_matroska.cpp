@@ -2749,6 +2749,7 @@ kax_reader_c::identify() {
     info.add(mtx::id::uid,                    track->track_uid);
     info.add(mtx::id::codec_id,               track->codec_id);
     info.set(mtx::id::codec_private_length,   track->private_data ? track->private_data->get_size() : 0u);
+    info.add(mtx::id::codec_private_data,     track->private_data);
     info.add(mtx::id::codec_delay,            track->codec_delay.to_ns(0));
     info.add(mtx::id::codec_name,             track->codec_name);
     info.add(mtx::id::language,               track->language.get_iso639_alpha_3_code());
@@ -2764,21 +2765,11 @@ kax_reader_c::identify() {
     info.add(mtx::id::flag_text_descriptions, track->text_descriptions_flag);
     info.add(mtx::id::flag_original,          track->original_flag);
     info.add(mtx::id::flag_commentary,        track->commentary_flag);
+    info.add(mtx::id::display_unit,           track->v_dunit);
 
-    if (track->private_data && (0 != track->private_data->get_size()))
-      info.add(mtx::id::codec_private_data, mtx::string::to_hex(track->private_data->get_buffer(), track->private_data->get_size(), true));
-
-    if ((0 != track->v_width) && (0 != track->v_height))
-      info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", track->v_width, track->v_height));
-
-    if ((0 != track->v_dwidth) && (0 != track->v_dheight))
-      info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", track->v_dwidth, track->v_dheight));
-
-    if (track->v_dunit)
-      info.set(mtx::id::display_unit, *track->v_dunit);
-
-    if ((0 != track->v_pcleft) || (0 != track->v_pctop) || (0 != track->v_pcright) || (0 != track->v_pcbottom))
-      info.add(mtx::id::cropping, fmt::format("{0},{1},{2},{3}", track->v_pcleft, track->v_pctop, track->v_pcright, track->v_pcbottom));
+    info.add_joined(mtx::id::pixel_dimensions,   "x"s, track->v_width, track->v_height);
+    info.add_joined(mtx::id::display_dimensions, "x"s, track->v_dwidth, track->v_dheight);
+    info.add_joined(mtx::id::cropping,           ","s, track->v_pcleft, track->v_pctop, track->v_pcright, track->v_pcbottom);
 
     if (track->codec.is(codec_c::type_e::V_MPEG4_P10))
       info.add(mtx::id::packetizer, track->ms_compat ? mtx::id::mpeg4_p10_es_video : mtx::id::mpeg4_p10_video);

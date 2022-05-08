@@ -132,6 +132,6 @@ ivf_reader_c::identify() {
     return;
 
   auto info = mtx::id::info_c{};
-  info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", m_width, m_height));
+  info.add_joined(mtx::id::pixel_dimensions, "x"s, m_width, m_height);
   id_result_track(0, ID_RESULT_TRACK_VIDEO, m_codec.get_name(), info.get());
 }

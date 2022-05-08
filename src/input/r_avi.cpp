@@ -866,7 +866,7 @@ avi_reader_c::extended_identify_mpeg4_l2(mtx::id::info_c &info) {
       disp_height = mtx::to_int_rounded(m_video_width / aspect_ratio);
     }
 
-    info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", disp_width, disp_height));
+    info.add_joined(mtx::id::display_dimensions, "x"s, disp_width, disp_height);
   }
 }
 
@@ -894,10 +894,8 @@ avi_reader_c::identify_video() {
   else if (codec.is(codec_c::type_e::V_MPEG4_P10))
     info.add(mtx::id::packetizer, mtx::id::mpeg4_p10_es_video);
 
-  info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", m_video_width, m_video_height));
-
-  if (m_video_display_width)
-    info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", m_video_display_width, m_video_display_height));
+  info.add_joined(mtx::id::pixel_dimensions,   "x"s, m_video_width, m_video_height);
+  info.add_joined(mtx::id::display_dimensions, "x"s, m_video_display_width, m_video_display_height);
 
   id_result_track(0, ID_RESULT_TRACK_VIDEO, codec.get_name(fourcc_str), info.get());
 }

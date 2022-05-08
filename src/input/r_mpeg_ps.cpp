@@ -1406,9 +1406,7 @@ mpeg_ps_reader_c::identify() {
     info.set(mtx::id::number,        (static_cast<uint64_t>(track->id.sub_id) << 32) | static_cast<uint64_t>(track->id.id));
     info.add(mtx::id::stream_id,     track->id.id);
     info.add(mtx::id::sub_stream_id, track->id.sub_id);
-
-    if ((0 != track->v_dwidth) && (0 != track->v_dheight))
-      info.add(mtx::id::display_dimensions, fmt::format("{0}x{1}", track->v_dwidth, track->v_dheight));
+    info.add_joined(mtx::id::display_dimensions, "x"s, track->v_dwidth, track->v_dheight);
 
     if ('a' == track->type) {
       info.add(mtx::id::audio_channels,           track->a_channels);
@@ -1416,7 +1414,7 @@ mpeg_ps_reader_c::identify() {
       info.add(mtx::id::audio_bits_per_sample,    track->a_bits_per_sample);
 
     } else if ('v' == track->type)
-      info.add(mtx::id::pixel_dimensions, fmt::format("{0}x{1}", track->v_width, track->v_height));
+      info.add_joined(mtx::id::pixel_dimensions, "x"s, track->v_width, track->v_height);
 
     id_result_track(i, 'a' == track->type ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO, track->codec.get_name(), info.get());
   }
