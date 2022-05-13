@@ -520,7 +520,7 @@ msgstr "<option>--blockadd</option> <parameter>层级</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:264
 msgid "Keep only the BlockAdditions up to this level.  The default is to keep all levels.  This option only affects certain kinds of codecs like WAVPACK4."
-msgstr "只保留低于或等于此层级的 BlockAdditions 附加块。默认保留所有层级。 本选项仅影响特定类别的编解码器，如 WAVPACK4。"
+msgstr "只保留不高于此层级的 BlockAdditions (附加区块)。默认保留所有层级。 此选项仅影响特定类型的编解码器，如 WAVPACK4。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:271
@@ -1970,7 +1970,7 @@ msgstr "<option>--enable-durations</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:496
 msgid "Write durations for all blocks. This will increase file size and does not offer any additional value for players at the moment."
-msgstr "为所有块写入时长。这将增大文件尺寸，而且目前对播放器来说不提供任何额外的益处。"
+msgstr "为所有区块写入时长。这将增大文件尺寸，而且目前对播放器来说没有额外的好处。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:502
@@ -2935,7 +2935,7 @@ msgstr "<option>--blockadd</option> <parameter>TID:层级</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1569
 msgid "Keep only the <classname>BlockAdditions</classname> up to the level <parameter>level</parameter> for the given track.  The default is to keep all levels.  This option only affects certain kinds of codecs like WAVPACK4."
-msgstr "只保留选定轨道中高达 <parameter>层级</parameter> 层级的 <classname>BlockAdditions</classname> 附加块。 默认保留所有层级。 此选项只影响特定类型的编解码器，如 WAVPACK4。"
+msgstr "对指定轨道只保留高达「<parameter>层级</parameter>」层级的「<classname>BlockAdditions</classname>」(附加块)。 默认保留所有层级。 此选项只影响特定类型的编解码器，如 WAVPACK4。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1576
