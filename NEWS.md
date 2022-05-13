@@ -8,6 +8,8 @@
   timestamp). That way one bogus timestamp cannot cause the rest of the frames
   to not be interleaved properly with the other audio & video
   packets. Implemented for #3268.
+* MKVToolNix GUI: multiplexer: added controls for all the video colour
+  information & the video projection information.
 
 ## Bug fixes
 
