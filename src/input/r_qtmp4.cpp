@@ -2028,10 +2028,17 @@ qtmp4_reader_c::identify() {
 
     info.add(mtx::id::language, dmx.language.get_iso639_alpha_3_code());
 
-    if (dmx.is_video())
+    if (dmx.is_video()) {
       info.add_joined(mtx::id::pixel_dimensions, "x"s, dmx.v_width, dmx.v_height);
 
-    else if (dmx.is_audio()) {
+      if (dmx.v_colour_primaries != 2)
+        info.set(mtx::id::colour_primaries, dmx.v_colour_primaries);
+      if (dmx.v_colour_transfer_characteristics != 2)
+        info.set(mtx::id::colour_transfer_characteristics, dmx.v_colour_transfer_characteristics);
+      if (dmx.v_colour_matrix_coefficients != 2)
+        info.set(mtx::id::colour_matrix_coefficients, dmx.v_colour_matrix_coefficients);
+
+    } else if (dmx.is_audio()) {
       info.add(mtx::id::audio_channels,           dmx.a_channels);
       info.add(mtx::id::audio_sampling_frequency, static_cast<uint64_t>(dmx.a_samplerate));
       info.add(mtx::id::audio_bits_per_sample,    dmx.a_bitdepth);

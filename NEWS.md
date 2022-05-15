@@ -10,6 +10,11 @@
   packets. Implemented for #3268.
 * MKVToolNix GUI: multiplexer: added controls for all the video colour
   information & the video projection information.
+* mkvmerge: added colour information, colour mastering meta information &
+  video projection information properties to the JSON identification
+  format. The properties are reported for container types for which mkvmerge
+  supports reading them (Matroska & MP4). The JSON identification format
+  version number has been bumped to v15.
 
 ## Bug fixes
 

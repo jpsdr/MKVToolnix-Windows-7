@@ -2786,6 +2786,40 @@ kax_reader_c::identify() {
         info.add(mtx::id::text_subtitles, true);
         info.add(mtx::id::encoding, "UTF-8");
       }
+
+    } else if ('v' == track->type) {
+      auto maybe_set = [&info](std::string const &key, double v1, double v2) {
+        if ((v1 != -1) || (v2 != -1))
+          info.set(key, fmt::format("{0},{1}", mtx::string::normalize_fmt_double_output(v1), mtx::string::normalize_fmt_double_output(v2)));
+      };
+
+      info.add(mtx::id::colour_bits_per_channel,         track->v_bits_per_channel);
+      info.add(mtx::id::colour_matrix_coefficients,      track->v_colour_matrix);
+      info.add(mtx::id::colour_primaries,                track->v_colour_primaries);
+      info.add(mtx::id::colour_range,                    track->v_colour_range);
+      info.add(mtx::id::colour_transfer_characteristics, track->v_transfer_character);
+      info.add(mtx::id::max_content_light,               track->v_max_cll);
+      info.add(mtx::id::max_frame_light,                 track->v_max_fall);
+      info.add(mtx::id::max_luminance,                   track->v_max_luminance);
+      info.add(mtx::id::min_luminance,                   track->v_min_luminance);
+      info.add(mtx::id::projection_pose_pitch,           track->v_projection_pose_pitch);
+      info.add(mtx::id::projection_pose_roll,            track->v_projection_pose_roll);
+      info.add(mtx::id::projection_pose_yaw,             track->v_projection_pose_yaw);
+      info.add(mtx::id::projection_private,              track->v_projection_private);
+      info.add(mtx::id::projection_type,                 track->v_projection_type);
+
+      maybe_set(mtx::id::cb_subsample,             track->v_cb_subsample.hori,          track->v_cb_subsample.vert);
+      maybe_set(mtx::id::chroma_siting,            track->v_chroma_siting.hori,         track->v_chroma_siting.vert);
+      maybe_set(mtx::id::chroma_subsample,         track->v_chroma_subsample.hori,      track->v_chroma_subsample.vert);
+      maybe_set(mtx::id::white_colour_coordinates, track->v_white_colour_coordinates.x, track->v_white_colour_coordinates.y);
+
+      if (   (track->v_chroma_coordinates.red_x   != -1) || (track->v_chroma_coordinates.red_y   != -1)
+          || (track->v_chroma_coordinates.green_x != -1) || (track->v_chroma_coordinates.green_y != -1)
+          || (track->v_chroma_coordinates.blue_x  != -1) || (track->v_chroma_coordinates.blue_y  != -1))
+        info.set(mtx::id::chromaticity_coordinates, fmt::format("{0},{1},{2},{3},{4},{5}",
+                                                                mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.red_x),   mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.red_y),
+                                                                mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.green_x), mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.green_y),
+                                                                mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.blue_x),  mtx::string::normalize_fmt_double_output(track->v_chroma_coordinates.blue_y)));
     }
 
     if (track->content_decoder.has_encodings())
