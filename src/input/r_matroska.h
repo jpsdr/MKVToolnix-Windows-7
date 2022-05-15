@@ -63,15 +63,15 @@ struct kax_track_t {
   std::optional<uint64_t> v_dunit;
   unsigned int v_display_unit;
   uint64_t v_pcleft, v_pctop, v_pcright, v_pcbottom;
-  int64_t v_colour_matrix, v_bits_per_channel;
+  std::optional<int64_t> v_colour_matrix, v_bits_per_channel;
   chroma_subsample_t v_chroma_subsample;
   cb_subsample_t v_cb_subsample;
   chroma_siting_t v_chroma_siting;
-  int64_t v_colour_range, v_transfer_character, v_colour_primaries, v_max_cll, v_max_fall;
+  std::optional<int64_t> v_colour_range, v_transfer_character, v_colour_primaries, v_max_cll, v_max_fall;
   chroma_coordinates_t v_chroma_coordinates;
   white_colour_coordinates_t v_white_colour_coordinates;
-  double v_max_luminance, v_min_luminance;
-  int64_t v_field_order;
+  std::optional<double> v_max_luminance, v_min_luminance;
+  std::optional<int64_t> v_field_order;
   stereo_mode_c::mode v_stereo_mode;
   char v_fourcc[5];
   std::optional<uint64_t> v_projection_type;
@@ -135,21 +135,8 @@ struct kax_track_t {
     , v_pctop(0)
     , v_pcright(0)
     , v_pcbottom(0)
-    , v_colour_matrix{-1}
-    , v_bits_per_channel{-1}
-    , v_chroma_subsample{}
-    , v_cb_subsample{}
-    , v_chroma_siting{}
-    , v_colour_range{-1}
-    , v_transfer_character{-1}
-    , v_colour_primaries{-1}
-    , v_max_cll{-1}
-    , v_max_fall{-1}
     , v_chroma_coordinates{}
     , v_white_colour_coordinates{}
-    , v_max_luminance{-1}
-    , v_min_luminance{-1}
-    , v_field_order{-1}
     , v_stereo_mode(stereo_mode_c::unspecified)
     , a_channels(0)
     , a_bps(0)
