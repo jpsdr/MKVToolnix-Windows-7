@@ -258,7 +258,7 @@ msgid ""
 "                           unspecified.\n"
 msgstr ""
 "  --colour-bits-per-channel <TID:n>\n"
-"                           设置颜色通道编码位数。\n"
+"                           设置每个色彩通道经编码后的位数。\n"
 "                           0 表示位数未指定。\n"
 
 #: src/merge/mkvmerge.cpp:311
@@ -270,9 +270,9 @@ msgid ""
 "                           and blue color primaries.\n"
 msgstr ""
 "  --colour-matrix-coefficients <TID:n>\n"
-"                           设置用于从红绿蓝颜色基准计算\n"
+"                           设置用于根据色彩基准信号 (红/绿/蓝) 推算\n"
 "                           亮度信号（luma）与色度信号（chroma）\n"
-"                           的矩阵系数。\n"
+"                           数值的矩阵系数。\n"
 
 #: src/merge/mkvmerge.cpp:333
 #, no-c-format
@@ -281,7 +281,7 @@ msgid ""
 "                           The colour primaries of the video.\n"
 msgstr ""
 "  --colour-primaries <TID:n>\n"
-"                           视频的颜色基准。\n"
+"                           视频的色彩基准。\n"
 
 #: src/merge/mkvmerge.cpp:330
 #, no-c-format
@@ -295,7 +295,7 @@ msgid ""
 "                           The transfer characteristics of the video.\n"
 msgstr ""
 "  --colour-transfer-characteristics <TID:n>\n"
-"                           视频的传输特征。\n"
+"                           视频色彩的光电转换特征。\n"
 
 #: src/merge/mkvmerge.cpp:392
 #, no-c-format
@@ -2967,7 +2967,7 @@ msgstr "逗号分隔的列表，指定要截取内容的时间戳范围。"
 #: src/input/r_matroska.cpp:753
 #, no-c-format
 msgid "A default index and with it default settings for the width, height and color palette will be used instead."
-msgstr "将使用默认的索引，以及与之匹配的宽度、高度与配色板设置。"
+msgstr "将使用默认的索引，以及与之匹配的默认宽度、高度与配色板设置。"
 
 #: src/merge/output_control.cpp:240
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:275
@@ -4002,9 +4002,9 @@ msgid "Bits per channel"
 msgstr "每通道位数"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2213
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Bits per colour channel:"
-msgstr "视频: 每颜色通道的位数"
+msgstr "单色彩通道位深:"
 
 #: src/common/property_element.cpp:213
 #, no-c-format
@@ -4101,12 +4101,12 @@ msgstr "CIE 1931 定义的蓝色度 Y 坐标。"
 #: src/common/kax_element_names.cpp:117
 #, no-c-format
 msgid "Blue colour coordinate x"
-msgstr "块颜色坐标 x"
+msgstr "蓝色坐标 x"
 
 #: src/common/kax_element_names.cpp:118
 #, no-c-format
 msgid "Blue colour coordinate y"
-msgstr "块颜色坐标 y"
+msgstr "蓝色坐标 y"
 
 #: src/input/r_vobsub.cpp:549
 #, no-c-format
@@ -4329,9 +4329,9 @@ msgid "Causes mkvmerge to write a second set of identical track headers near the
 msgstr "要求 mkvmerge 在文件末尾附近 (所有簇的后面) 写入另一组完全一致的轨道头部。"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2215
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Cb subsampling:"
-msgstr "视频: 垂直方向 Cb 抽样"
+msgstr "Cb 抽样:"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:333
 #, no-c-format
@@ -4630,19 +4630,19 @@ msgid "Checking this option causes the GUI to set that compression to \"none\" b
 msgstr "选择该选项后，添加文件时程序会默认将所有轨道的压缩方式设为 none (不做额外压缩)。"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2221
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chroma siting:"
-msgstr "垂直色度分布"
+msgstr "色度分布:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2218
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chroma subsampling:"
-msgstr "视频: 垂直方向色度抽样"
+msgstr "色度抽样:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2224
 #, no-c-format
 msgid "Chromaticity coordinates:"
-msgstr ""
+msgstr "色度坐标:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2107
 #, no-c-format
@@ -4787,22 +4787,22 @@ msgstr "颜色创作元讯息"
 #: src/common/kax_element_names.cpp:125
 #, no-c-format
 msgid "Colour matrix coefficients"
-msgstr "编解码器矩阵系数"
+msgstr "色彩矩阵系数"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2219
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Colour matrix coefficients:"
-msgstr "编解码器矩阵系数"
+msgstr "色彩矩阵系数:"
 
 #: src/common/kax_element_names.cpp:135
 #, no-c-format
 msgid "Colour primaries"
-msgstr "颜色基准"
+msgstr "色彩基准"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2214
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Colour primaries:"
-msgstr "颜色基准"
+msgstr "色彩基准:"
 
 #: src/common/kax_element_names.cpp:133
 #, no-c-format
@@ -4810,9 +4810,9 @@ msgid "Colour range"
 msgstr "颜色范围"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2220
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Colour range:"
-msgstr "颜色范围"
+msgstr "色域:"
 
 #: src/common/kax_element_names.cpp:161
 #, no-c-format
@@ -8503,9 +8503,9 @@ msgid "Maximum content light"
 msgstr "最高内容亮度"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2216
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Maximum content light:"
-msgstr "最高内容亮度"
+msgstr "最高内容亮度:"
 
 #: src/common/kax_element_names.cpp:137
 #, no-c-format
@@ -8513,9 +8513,9 @@ msgid "Maximum frame light"
 msgstr "最高帧亮度"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2217
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Maximum frame light:"
-msgstr "最高帧亮度"
+msgstr "最高帧亮度:"
 
 #: src/common/property_element.cpp:182
 #, no-c-format
@@ -8533,9 +8533,9 @@ msgid "Maximum luminance in candelas per square meter (cd/m²)."
 msgstr "最高亮度，单位为坎德拉每平方米 (cd/m²)。"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2223
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Maximum luminance:"
-msgstr "最高亮度"
+msgstr "最高亮度:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2254
 #, no-c-format
@@ -8586,9 +8586,9 @@ msgid "Minimum luminance in candelas per square meter (cd/m²)."
 msgstr "最低亮度，单位为坎德拉每平方米 (cd/m²)。"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2226
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Minimum luminance:"
-msgstr "最低亮度"
+msgstr "最低亮度:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2178
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2240
@@ -9639,9 +9639,9 @@ msgid "Pending manual start"
 msgstr "等待手动启动"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2229
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Pitch rotation:"
-msgstr "投影 pitch 轴旋转（左右轴不动）"
+msgstr "pitch 轴旋转:"
 
 #: src/common/kax_element_names.cpp:154
 #, no-c-format
@@ -9949,9 +9949,9 @@ msgid "Projection type"
 msgstr "投影类型"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2228
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Projection type:"
-msgstr "投影类型"
+msgstr "投影类型:"
 
 #: src/common/kax_element_names.cpp:143
 #, no-c-format
@@ -9974,9 +9974,9 @@ msgid "Projection's yaw rotation"
 msgstr "投影 yaw 轴旋转（上下轴不动）"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2231
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Projection-specific data:"
-msgstr "视频: 投影特定数据"
+msgstr "投影特定数据:"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:170
 #: src/mkvtoolnix-gui/merge/track_model.cpp:86
@@ -10490,9 +10490,9 @@ msgid "Right-click to add, append and remove files"
 msgstr "右键单击来添加、追加或移除文件"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2232
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Roll rotation:"
-msgstr "时长:"
+msgstr "roll 轴旋转:"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:270
 #, no-c-format
@@ -11002,12 +11002,12 @@ msgstr "设置将使用在该轨道的无损压缩算法。"
 #: src/common/property_element.cpp:170
 #, no-c-format
 msgid "Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries."
-msgstr "设置用于从红绿蓝颜色基准计算亮度信号（luma）与色度信号（chroma）的矩阵系数。"
+msgstr "设置用于根据红绿蓝（RGB）色彩基准信号计算亮度信号（luma）与色度信号（chroma）数值的矩阵系数。"
 
 #: src/common/property_element.cpp:171
 #, no-c-format
 msgid "Sets the number of coded bits for a colour channel."
-msgstr "设置某个颜色通道编码的位数。"
+msgstr "设置每个色彩通道经编码后的位数。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:196
 #, no-c-format
@@ -11980,12 +11980,12 @@ msgstr "编码格式私有数据不匹配。长度相同 ({0}) 但内容不同�
 #: src/common/property_element.cpp:180
 #, no-c-format
 msgid "The colour primaries of the video."
-msgstr "视频的颜色基准。"
+msgstr "视频的色彩基准。"
 
 #: src/common/property_element.cpp:179
 #, no-c-format
 msgid "The colour transfer characteristics of the video."
-msgstr "视频的颜色传输特征。"
+msgstr "视频的色彩转换特征。"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:99
 #, no-c-format
@@ -14093,9 +14093,9 @@ msgid "Tracks:"
 msgstr "轨道列表:"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2212
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Transfer characteristics:"
-msgstr "视频: 传输特征"
+msgstr "转换特征:"
 
 #: src/common/file_types.cpp:104
 #: src/output/p_truehd.h:41
@@ -14596,7 +14596,7 @@ msgstr "视频轨道 %1"
 #: src/common/property_element.cpp:171
 #, no-c-format
 msgid "Video: bits per colour channel"
-msgstr "视频: 每颜色通道的位数"
+msgstr "视频: 单色彩通道的位深"
 
 #: src/common/property_element.cpp:190
 #, no-c-format
@@ -14631,12 +14631,12 @@ msgstr "视频: 色度 红 Y"
 #: src/common/property_element.cpp:170
 #, no-c-format
 msgid "Video: colour matrix coefficients"
-msgstr "视频: 颜色矩阵系数"
+msgstr "视频: 色彩矩阵系数"
 
 #: src/common/property_element.cpp:180
 #, no-c-format
 msgid "Video: colour primaries"
-msgstr "视频: 颜色基准"
+msgstr "视频: 色彩基准"
 
 #: src/common/property_element.cpp:178
 #, no-c-format
@@ -14706,7 +14706,7 @@ msgstr "视频: 投影特定数据"
 #: src/common/property_element.cpp:179
 #, no-c-format
 msgid "Video: transfer characteristics"
-msgstr "视频: 传输特征"
+msgstr "视频: 转换特征"
 
 #: src/common/property_element.cpp:175
 #, no-c-format
@@ -14983,9 +14983,9 @@ msgid "White colour coordinate y"
 msgstr "白色坐标 y"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2225
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "White colour coordinates:"
-msgstr "白色坐标 x"
+msgstr "白色坐标:"
 
 #: src/common/property_element.cpp:154
 #, no-c-format
@@ -15118,9 +15118,9 @@ msgid "Xiph lacing"
 msgstr "Xiph 式紧缩"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2230
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Yaw rotation:"
-msgstr "时长:"
+msgstr "yaw 轴旋转:"
 
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:30
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:43
