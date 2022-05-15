@@ -21,6 +21,17 @@
 #include "common/terminal.h"
 #include "common/translation.h"
 
+namespace {
+
+QRegularExpression s_normalize_fmt_double_output_re{"\\.0*$|(\\.[0-9]*[1-9])0*$"};
+
+QString
+normalize_fmt_double_output_formatter(QRegularExpressionMatch const &match) {
+  return match.capturedLength(1) ? match.captured(1) : QString{};
+}
+
+} // anonymous namespace
+
 namespace mtx::string {
 
 std::string
@@ -348,6 +359,13 @@ to_lower_ascii(std::vector<std::string> const &src) {
 std::vector<std::string>
 to_upper_ascii(std::vector<std::string> const &src) {
   return to_lower_upper_ascii(src, [](auto const &elt) { return to_upper_ascii(elt); });
+}
+
+std::string
+normalize_fmt_double_output_str(std::string const &formatted_value) {
+  // Some fmt library versions output a trailing ".0" even if the
+  // decimal part is zero, others don't. Normalize to not include it.
+  return mtx::string::replace(formatted_value, s_normalize_fmt_double_output_re, normalize_fmt_double_output_formatter);
 }
 
 } // mtx::string

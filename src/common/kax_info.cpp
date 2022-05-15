@@ -86,25 +86,6 @@
 using namespace libmatroska;
 using namespace mtx::kax_info;
 
-namespace {
-
-QRegularExpression s_normalize_fmt_double_output_re{"\\.0*$|(\\.[0-9]*[1-9])0*$"};
-
-QString
-normalize_fmt_double_output_formatter(QRegularExpressionMatch const &match) {
-  return match.capturedLength(1) ? match.captured(1) : QString{};
-}
-
-template<typename T>
-std::string
-normalize_fmt_double_output(T value) {
-  // Some fmt library versions output a trailing ".0" even if the
-  // decimal part is zero, others don't. Normalize to not include it.
-  return mtx::string::replace(fmt::format("{}", value), s_normalize_fmt_double_output_re, normalize_fmt_double_output_formatter);
-}
-
-}
-
 namespace mtx {
 
 kax_info_c::kax_info_c()
@@ -370,7 +351,7 @@ kax_info_c::format_element_value_default(EbmlElement &e) {
     return {};
 
   if (dynamic_cast<EbmlFloat *>(&e))
-    return normalize_fmt_double_output(static_cast<EbmlFloat &>(e).GetValue());
+    return mtx::string::normalize_fmt_double_output(static_cast<EbmlFloat &>(e).GetValue());
 
   throw std::invalid_argument{"format_element_value: unsupported EbmlElement type"};
 }
@@ -630,8 +611,8 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return true;
   }));
 
-  add_post(KaxAudioSamplingFreq::ClassInfos,       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("sampling freq: {0}"), normalize_fmt_double_output(static_cast<KaxAudioSamplingFreq &>(e).GetValue()))); });
-  add_post(KaxAudioOutputSamplingFreq::ClassInfos, [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("output sampling freq: {0}"), normalize_fmt_double_output(static_cast<KaxAudioOutputSamplingFreq &>(e).GetValue()))); });
+  add_post(KaxAudioSamplingFreq::ClassInfos,       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<KaxAudioSamplingFreq &>(e).GetValue()))); });
+  add_post(KaxAudioOutputSamplingFreq::ClassInfos, [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("output sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<KaxAudioOutputSamplingFreq &>(e).GetValue()))); });
   add_post(KaxAudioChannels::ClassInfos,           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("channels: {0}"), static_cast<KaxAudioChannels &>(e).GetValue())); });
   add_post(KaxAudioBitDepth::ClassInfos,           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("bits per sample: {0}"), static_cast<KaxAudioBitDepth &>(e).GetValue())); });
 
@@ -1211,7 +1192,7 @@ kax_info_c::display_track_info() {
                                track->tnum,
                                tinfo.m_blocks,
                                tinfo.m_size,
-                               normalize_fmt_double_output(fmt::format("{0:.9f}", duration / 1000000000.0)),
+                               mtx::string::normalize_fmt_double_output(fmt::format("{0:.9f}", duration / 1000000000.0)),
                                static_cast<uint64_t>(duration == 0 ? 0 : tinfo.m_size * 8000000000.0 / duration)));
   }
 }

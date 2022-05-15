@@ -112,6 +112,14 @@ std::string to_upper_ascii(std::string const &src);
 std::vector<std::string> to_lower_ascii(std::vector<std::string> const &src);
 std::vector<std::string> to_upper_ascii(std::vector<std::string> const &src);
 
+std::string normalize_fmt_double_output_str(std::string const &formatted_value);
+
+template<typename T>
+std::string
+normalize_fmt_double_output(T value) {
+  return normalize_fmt_double_output_str(fmt::format("{}", value));
+}
+
 } // mtx::string
 
 template<typename T>
