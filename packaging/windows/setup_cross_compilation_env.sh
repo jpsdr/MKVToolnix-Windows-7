@@ -126,6 +126,11 @@ function configure_mkvtoolnix {
 }
 
 function build_libraries {
+  if [[ -n ${PKG_CACHE} ]]; then
+    rmdir ${INSTALL_DIR}/pkg || true
+    ln -fs ${PKG_CACHE} ${INSTALL_DIR}/pkg
+  fi
+
   echo Building the cross-compiler and the required libraries
   cd ${INSTALL_DIR}
   make >> $LOGFILE 2>&1
