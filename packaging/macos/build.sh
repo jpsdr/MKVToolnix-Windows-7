@@ -576,9 +576,9 @@ EOF
 EOF
 
   mkdir -p ${dmgmac}/libs
-  cp -v -a ${TARGET}/lib/libQt5{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Widgets*.dylib} ${dmgmac}/libs/
+  cp -v -a ${TARGET}/lib/libQt5{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Svg*.dylib,Widgets*.dylib} ${dmgmac}/libs/
 
-  for plugin (audio mediaservice platforms playlistformats styles) cp -v -R ${TARGET}/plugins/${plugin} ${dmgmac}/
+  for plugin (audio iconengines imageformats mediaservice platforms playlistformats styles) cp -v -R ${TARGET}/plugins/${plugin} ${dmgmac}/
 
   ${SCRIPT_PATH}/fix_library_paths.sh ${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvmerge,mkvinfo,mkvextract,mkvpropedit,mkvtoolnix-gui}
 
