@@ -8,16 +8,18 @@
   timestamp). That way one bogus timestamp cannot cause the rest of the frames
   to not be interleaved properly with the other audio & video
   packets. Implemented for #3268.
-* MKVToolNix GUI: multiplexer: added controls for all the video colour
-  information & the video projection information.
 * mkvmerge: added colour information, colour mastering meta information &
   video projection information properties to the JSON identification
   format. The properties are reported for container types for which mkvmerge
   supports reading them (Matroska & MP4). The JSON identification format
   version number has been bumped to v15.
+* MKVToolNix GUI: multiplexer: added controls for all the video colour
+  information & the video projection information.
 
 ## Bug fixes
 
+* mkvmerge: SRT reader: entries with a duration of 0 or less will now be
+  skipped. Fixes #3332.
 * mkvpropedit, MKVToolNix GUI's chapter & header editors: fixed an invalid
   memory access when trying to update existing Matroska files whose EBML Head
   element had a "size" field length of eight bytes, and where rewriting said
@@ -27,8 +29,6 @@
 * mkvpropedit, MKVToolNix GUI's chapter & header editors: fixed the programs
   not handling having to remove EBML void elements at the end of the file
   correctly and consequently aborting. Part of the fix of #3325.
-* SRT reader: entries with a duration of 0 or less will now be skipped. Fixes
-  #3332.
 * MKVToolNix GUI: the GUI now uses almost all SVG icons, allowing proper
   scaling even for scaling factors such as 125%. Fixes #3335.
 * MKVToolNix GUI: when compiled with Qt 5 the character set of INI files is
