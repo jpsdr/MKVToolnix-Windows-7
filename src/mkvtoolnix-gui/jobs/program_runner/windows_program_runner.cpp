@@ -94,7 +94,7 @@ WindowsProgramRunner::sleepComputer(Util::Settings::RunProgramConfig &) {
 QString
 WindowsProgramRunner::defaultAudioFileName()
   const {
-  return Q("<MTX_INSTALLATION_DIRECTORY>\\data\\sounds\\finished-1.ogg");
+  return Q("<MTX_INSTALLATION_DIRECTORY>\\data\\sounds\\finished-1.webm");
 }
 
 }

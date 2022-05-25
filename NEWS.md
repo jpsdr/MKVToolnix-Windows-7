@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: preferences: the default actions added to the "execute
+  programs" section on new installations now default to use WebM file names
+  instead of Ogg, matching the format of the included audio files.
+
+
 # Version 68.0.0 "The Curtain" 2022-05-22
 
 ## New features and enhancements

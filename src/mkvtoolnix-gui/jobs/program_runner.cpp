@@ -220,7 +220,7 @@ ProgramRunner::playAudioFile(Util::Settings::RunProgramConfig &config) {
 QString
 ProgramRunner::defaultAudioFileName()
   const {
-  return Q("%1/sounds/finished-1.ogg").arg(Q(MTX_PKG_DATA_DIR));
+  return Q("%1/sounds/finished-1.webm").arg(Q(MTX_PKG_DATA_DIR));
 }
 
 void
