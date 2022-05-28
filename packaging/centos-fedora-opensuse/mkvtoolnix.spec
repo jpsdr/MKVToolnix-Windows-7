@@ -30,28 +30,43 @@ BuildRequires: libxslt
 BuildRequires: make
 BuildRequires: pkgconfig
 BuildRequires: po4a
-BuildRequires: qt5-qtbase-devel
-BuildRequires: qt5-qtmultimedia-devel
 BuildRequires: zlib-devel
 
 %if 0%{?rhel}
+# RHEL, CentOS, AlmaLinux, RockyLinux
 %if 0%{?rhel} <= 7
 BuildRequires: boost169-devel
 BuildRequires: devtoolset-10-gcc-c++
-%else
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtmultimedia-devel
+BuildRequires: qt5-qtsvg
+%endif
+
+%if 0%{?rhel} == 8
 BuildRequires: boost-devel >= 1.66.0
 BuildRequires: gcc-toolset-11-gcc-c++
+BuildRequires: qt5-qtbase-devel
+BuildRequires: qt5-qtmultimedia-devel
+BuildRequires: qt5-qtsvg
 %endif
-%else
-BuildRequires: boost-devel >= 1.66.0
+
+%if 0%{?rhel} == 9
+BuildRequires: gcc-c++
+BuildRequires: qt6-qtbase-devel
+BuildRequires: qt6-qtmultimedia-devel
+BuildRequires: qt6-qtsvg
+%endif
 %endif
 
 %if 0%{?fedora}
-BuildRequires: gcc-c++ >= 7
+BuildRequires: gcc-c++
 BuildRequires: json-devel >= 2
 BuildRequires: libappstream-glib
 BuildRequires: pugixml-devel
 BuildRequires: rubypick
+BuildRequires: qt6-qtbase-devel
+BuildRequires: qt6-qtmultimedia-devel
+BuildRequires: qt6-qtsvg
 %endif
 
 %description
@@ -92,11 +107,20 @@ for SUB_DIR in gcc-toolset-11 gcc-toolset 10 devtoolset-10; do
 done
 
 %build
+%if 0%{?rhel} && 0%{?rhel} < 9
+export DISABLE_QT=--disable-qt6
+%endif
+%if 0%{?rhel} && 0%{?rhel} >= 9
+export DISABLE_QT=--disable-qt5
+%endif
+%if 0%{?fedora}
+export DISABLE_QT=--disable-qt5
+%endif
 %configure \
   --disable-optimization \
   --enable-debug \
   --with-tools \
-  --disable-qt6 \
+  "$DISABLE_QT" \
   "$CONFIGURE_ARGS"
 # if [[ -f ~/mtx-rpm-compiled.tar.gz ]]; then
 #   tar xzf ~/mtx-rpm-compiled.tar.gz
