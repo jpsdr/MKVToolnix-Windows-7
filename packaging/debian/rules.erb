@@ -29,6 +29,7 @@ ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	cp -R /usr/src/gtest/src lib/gtest/
 endif
 
+<% if (distro == 'debian') and (version >= Gem::Version.new('11')) %>
 # gcc 10 in Debian 11 Bullseye contains a bug that causes an
 # "internal compiler error" segfault. Workaround: compile with
 # clang.
@@ -37,16 +38,14 @@ endif
 # armhf has a bug with a simple format such as fmt::format("{}",
 # fmt::join(range, separator)). Therefore build with the internal
 # copy.
-
-	if grep -qr bullseye /etc/apt/sources.list*; then \
-	  dh_auto_configure -- CC=/usr/bin/clang CXX=/usr/bin/clang++ \
-	    --docdir='$${datarootdir}/doc/mkvtoolnix-gui' \
-	    --enable-debug --enable-optimization ; \
-	  perl -pi -e 's/FMT_INTERNAL *=.*/FMT_INTERNAL = yes/' build-config ; \
-	else \
-	  dh_auto_configure -- --docdir='$${datarootdir}/doc/mkvtoolnix-gui' \
-	    --enable-debug --enable-optimization ; \
-	fi
+	dh_auto_configure -- CC=/usr/bin/clang CXX=/usr/bin/clang++ \
+	  --docdir='$${datarootdir}/doc/mkvtoolnix-gui' \
+	  --enable-debug --enable-optimization
+	perl -pi -e 's/FMT_INTERNAL *=.*/FMT_INTERNAL = yes/' build-config
+<% else %>
+	dh_auto_configure -- --docdir='$${datarootdir}/doc/mkvtoolnix-gui' \
+	  --enable-debug --enable-optimization
+<% end %>
 
 override_dh_auto_build:
 ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
