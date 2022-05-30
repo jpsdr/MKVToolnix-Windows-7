@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.8.6\n"
 
@@ -1460,6 +1460,7 @@ msgid " day"
 msgid_plural " days"
 msgstr[0] " día"
 msgstr[1] " días"
+msgstr[2] " días"
 
 #: src/merge/output_control.cpp:276
 #: src/merge/output_control.cpp:286
@@ -1475,6 +1476,7 @@ msgid " second"
 msgid_plural " seconds"
 msgstr[0] " segundo"
 msgstr[1] " segundos"
+msgstr[2] " segundos"
 
 #: src/common/kax_info.cpp:303
 #, no-c-format
@@ -1612,6 +1614,7 @@ msgid "%1 bit per sample"
 msgid_plural "%1 bits per sample"
 msgstr[0] "%1 bit por muestra"
 msgstr[1] "%1 bits por muestra"
+msgstr[2] "%1 bits por muestra"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:123
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:127
@@ -1622,6 +1625,7 @@ msgid "%1 byte (%2)"
 msgid_plural "%1 bytes (%2)"
 msgstr[0] "%1 byte (%2)"
 msgstr[1] "%1 bytes (%2)"
+msgstr[2] "%1 bytes (%2)"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:132
 #: src/mkvtoolnix-gui/merge/track_model.cpp:706
@@ -1630,6 +1634,7 @@ msgid "%1 channel"
 msgid_plural "%1 channels"
 msgstr[0] "%1 Canal"
 msgstr[1] "%1 Canales"
+msgstr[2] "%1 Canales"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:139
 #: src/mkvtoolnix-gui/merge/track_model.cpp:342
@@ -1638,6 +1643,7 @@ msgid "%1 entry"
 msgid_plural "%1 entries"
 msgstr[0] "%1 registro"
 msgstr[1] "%1 registros"
+msgstr[2] "%1 registros"
 
 #: src/mkvtoolnix-gui/main_window/status_bar_progress_widget.cpp:113
 #, no-c-format
@@ -1645,6 +1651,7 @@ msgid "%1 error"
 msgid_plural "%1 errors"
 msgstr[0] "%1 error"
 msgstr[1] "%1 errores"
+msgstr[2] "%1 errores"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:142
 #: src/mkvtoolnix-gui/merge/track_model.cpp:716
@@ -1658,6 +1665,7 @@ msgid "%1 warning"
 msgid_plural "%1 warnings"
 msgstr[0] "%1 advertencia"
 msgstr[1] "%1 advertencias"
+msgstr[2] "%1 advertencias"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:349
 #, no-c-format
@@ -1913,6 +1921,7 @@ msgid "&Disable selected attachment"
 msgid_plural "&Disable selected attachments"
 msgstr[0] "&Deshabilitar el adjunto seleccionado"
 msgstr[1] "&Deshabilitar los adjuntos seleccionados"
+msgstr[2] "&Deshabilitar los adjuntos seleccionados"
 
 #: src/mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.cpp:34
 #, no-c-format
@@ -1955,6 +1964,7 @@ msgid "&Enable selected attachment"
 msgid_plural "&Enable selected attachments"
 msgstr[0] "&Habilitar el adjunto seleccionado"
 msgstr[1] "&Habilitar los adjuntos seleccionados"
+msgstr[2] "&Habilitar los adjuntos seleccionados"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:522
 #, no-c-format
@@ -2272,6 +2282,7 @@ msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
 msgstr[0] "&Eliminar adjunto"
 msgstr[1] "&Eliminar adjuntos"
+msgstr[2] "&Eliminar adjuntos"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
 #, no-c-format
@@ -2284,6 +2295,7 @@ msgid "&Remove file"
 msgid_plural "&Remove files"
 msgstr[0] "&Eliminar archivo"
 msgstr[1] "&Eliminar archivos"
+msgstr[2] "&Eliminar archivos"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:217
 #, no-c-format
@@ -2291,6 +2303,7 @@ msgid "&Remove job"
 msgid_plural "&Remove jobs"
 msgstr[0] "&Eliminar tarea"
 msgstr[1] "&Eliminar tareas"
+msgstr[2] "&Eliminar tareas"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2212
 #, no-c-format
@@ -2395,6 +2408,7 @@ msgid "&Start job automatically"
 msgid_plural "&Start jobs automatically"
 msgstr[0] "&Iniciar tarea automáticamente"
 msgstr[1] "&Iniciar tareas automáticamente"
+msgstr[2] "&Iniciar tareas automáticamente"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:183
 #, no-c-format
@@ -3154,6 +3168,7 @@ msgid "A problem has been detected with this installation of MKVToolNix:"
 msgid_plural "Several problems have been detected with this installation of MKVToolNix:"
 msgstr[0] "Se ha detectado un problema con esta instalación de MKVToolNix:"
 msgstr[1] "Se han detectado varios problemas con esta instalación de MKVToolNix:"
+msgstr[2] "Se han detectado varios problemas con esta instalación de MKVToolNix:"
 
 #: src/common/property_element.cpp:123
 #, no-c-format
@@ -4746,6 +4761,7 @@ msgid "Chapters: {0} entry"
 msgid_plural "Chapters: {0} entries"
 msgstr[0] "Capítulos: {0} registro"
 msgstr[1] "Capítulos: {0} registros"
+msgstr[2] "Capítulos: {0} registros"
 
 #: src/mkvtoolnix-gui/merge/track_model.cpp:85
 #, no-c-format
@@ -7097,6 +7113,7 @@ msgid "Global tags: {0} entry"
 msgid_plural "Global tags: {0} entries"
 msgstr[0] "Etiquetas generales: {0} registro"
 msgstr[1] "Etiquetas generales: {0} registros"
+msgstr[2] "Etiquetas generales: {0} registros"
 
 #: src/common/property_element.cpp:188
 #, no-c-format
@@ -8348,6 +8365,7 @@ msgid "Length: %1 byte"
 msgid_plural "Length: %1 bytes"
 msgstr[0] "Longitud: %1 byte"
 msgstr[1] "Longitud: %1 bytes"
+msgstr[2] "Longitud: %1 bytes"
 
 #: src/merge/timestamp_factory.cpp:359
 #, no-c-format
@@ -9564,6 +9582,7 @@ msgid "Only {0} chapter found in source files & chapter files."
 msgid_plural "Only {0} chapters found in source files & chapter files."
 msgstr[0] "Sólo {0} capítulo se encontró en los archivos de origen y capítulos."
 msgstr[1] "Sólo {0} capítulos se encontraron en los archivos de origen y capítulos."
+msgstr[2] "Sólo {0} capítulos se encontraron en los archivos de origen y capítulos."
 
 #: src/common/file_types.cpp:97
 #, no-c-format
@@ -9602,6 +9621,7 @@ msgid "Open corresponding file in &MediaInfo"
 msgid_plural "Open corresponding files in &MediaInfo"
 msgstr[0] "Abrir el archivo correspondiente en &Mediainfo"
 msgstr[1] "Abrir los archivos correspondientes en &Mediainfo"
+msgstr[2] "Abrir los archivos correspondientes en &Mediainfo"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1646
 #, no-c-format
@@ -9609,6 +9629,7 @@ msgid "Open file in &MediaInfo"
 msgid_plural "Open files in &MediaInfo"
 msgstr[0] "Abrir archivo en &Mediainfo"
 msgstr[1] "Abrir archivos en &Mediainfo"
+msgstr[2] "Abrir archivos en &Mediainfo"
 
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:195
 #, no-c-format
@@ -9631,6 +9652,7 @@ msgid "Opening %1 file in the chapter editor…"
 msgid_plural "Opening %1 files in the chapter editor…"
 msgstr[0] "Abriendo %1 archivo en el editor de capítulo…"
 msgstr[1] "Abriendo %1 archivos en el editor de capítulo…"
+msgstr[2] "Abriendo %1 archivos en el editor de capítulo…"
 
 #: src/mkvtoolnix-gui/header_editor/tool.cpp:206
 #, no-c-format
@@ -9638,6 +9660,7 @@ msgid "Opening %1 file in the header editor…"
 msgid_plural "Opening %1 files in the header editor…"
 msgstr[0] "Abriendo %1 archivo en el editor de cabecera…"
 msgstr[1] "Abriendo %1 archivos en el editor de cabecera…"
+msgstr[2] "Abriendo %1 archivos en el editor de cabecera…"
 
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:114
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:115
@@ -9878,6 +9901,7 @@ msgid "Playlists shorter than %1 second will be ignored."
 msgid_plural "Playlists shorter than %1 seconds will be ignored."
 msgstr[0] "Los playlists inferiores a %1 segundo serán ignorados."
 msgstr[1] "Los playlists inferiores a %1 segundos serán ignorados."
+msgstr[2] "Los playlists inferiores a %1 segundos serán ignorados."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:541
 #, no-c-format
@@ -9905,6 +9929,7 @@ msgid "Please re-install MKVToolNix or fix the problem manually."
 msgid_plural "Please re-install MKVToolNix or fix the problems manually."
 msgstr[0] "Por favor, reinstala MKVToolNix o arregla el problema manualmente."
 msgstr[1] "Por favor, reinstala MKVToolNix o arregla los problemas manualmente."
+msgstr[2] "Por favor, reinstala MKVToolNix o arregla los problemas manualmente."
 
 #: src/merge/mkvmerge.cpp:412
 #, no-c-format
@@ -10057,6 +10082,7 @@ msgid "Problem with MKVToolNix installation"
 msgid_plural "Problems with MKVToolNix installation"
 msgstr[0] "Existe un problema con la instalación de MKVToolNix"
 msgstr[1] "Existen problemas con la instalación de MKVToolNix"
+msgstr[2] "Existen problemas con la instalación de MKVToolNix"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2114
 #, no-c-format
@@ -10858,6 +10884,7 @@ msgid "Scanning {0} files in {1} playlist.\n"
 msgid_plural "Scanning {0} files in {1} playlists.\n"
 msgstr[0] "Analizando {0} archivos en {1} playlist.\n"
 msgstr[1] "Analizando {0} archivos en {1} playlists.\n"
+msgstr[2] "Analizando {0} archivos en {1} playlists.\n"
 
 #: src/common/kax_element_names.cpp:167
 #, no-c-format
@@ -10976,6 +11003,7 @@ msgid "Select all &items from selected file"
 msgid_plural "Select all &items from selected files"
 msgstr[0] "Seleccionar todos los ob&jetos del archivo escogido"
 msgstr[1] "Seleccionar todos los ob&jetos de los archivos escogidos"
+msgstr[2] "Seleccionar todos los ob&jetos de los archivos escogidos"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1691
 #, no-c-format
@@ -11561,6 +11589,7 @@ msgid "Start job &immediately"
 msgid_plural "Start jobs &immediately"
 msgstr[0] "Iniciar tarea &inmediatamente"
 msgstr[1] "Iniciar tareas &inmediatamente"
+msgstr[2] "Iniciar tareas &inmediatamente"
 
 #: src/mkvtoolnix-gui/jobs/tool.cpp:215
 #, no-c-format
@@ -11568,6 +11597,7 @@ msgid "Start job &manually"
 msgid_plural "Start jobs &manually"
 msgstr[0] "Iniciar tarea &manualmente"
 msgstr[1] "Iniciar tareas &manualmente"
+msgstr[2] "Iniciar tareas &manualmente"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:291
 #, no-c-format
@@ -11754,6 +11784,7 @@ msgid "Tags for track ID {0}: {1} entry"
 msgid_plural "Tags for track ID {0}: {1} entries"
 msgstr[0] "Etiquetas para el ID de la pista {0}: {1} registro"
 msgstr[1] "Etiquetas para el ID de la pista {0}: {1} registros"
+msgstr[2] "Etiquetas para el ID de la pista {0}: {1} registros"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2191
 #, no-c-format
@@ -12299,6 +12330,7 @@ msgid "The directory it is located in contains %1 other file with the same exten
 msgid_plural "The directory it is located in contains %1 other files with the same extension."
 msgstr[0] "El directorio en el que se encuentra contiene %1 otro archivo con la misma extensión."
 msgstr[1] "El directorio en el que se encuentra contiene %1 otros archivos con la misma extensión."
+msgstr[2] "El directorio en el que se encuentra contiene %1 otros archivos con la misma extensión."
 
 #: src/merge/connection_checks.h:48
 #, no-c-format
@@ -13670,6 +13702,7 @@ msgid "This audio track contains {0} byte of invalid data which was skipped befo
 msgid_plural "This audio track contains {0} bytes of invalid data which were skipped before timestamp {1}."
 msgstr[0] "Esta pista de audio contiene {0} byte de datos inservibles que fue omitido antes del código de tiempo {1}."
 msgstr[1] "Esta pista de audio contiene {0} bytes de datos inservibles que fueron omitidos antes del código de tiempo {1}."
+msgstr[2] "Esta pista de audio contiene {0} bytes de datos inservibles que fueron omitidos antes del código de tiempo {1}."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:50
 #, no-c-format
@@ -16325,6 +16358,7 @@ msgid "{0} byte"
 msgid_plural "{0} bytes"
 msgstr[0] "{0} byte"
 msgstr[1] "{0} bytes"
+msgstr[2] "{0} bytes"
 
 #: src/common/kax_info.cpp:943
 #, no-c-format
@@ -16347,6 +16381,7 @@ msgid "{0} minute"
 msgid_plural "{0} minutes"
 msgstr[0] "{0} minuto"
 msgstr[1] "{0} minutos"
+msgstr[2] "{0} minutos"
 
 #: src/common/strings/formatting.cpp:249
 #, no-c-format
@@ -16354,6 +16389,7 @@ msgid "{0} second"
 msgid_plural "{0} seconds"
 msgstr[0] "{0} segundo"
 msgstr[1] "{0} segundos"
+msgstr[2] "{0} segundos"
 
 #: src/common/strings/formatting.cpp:262
 #, no-c-format
