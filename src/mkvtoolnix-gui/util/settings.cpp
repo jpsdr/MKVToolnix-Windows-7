@@ -503,6 +503,7 @@ Settings::load() {
   m_lastOpenDir                               = QDir{reg.value(s_valLastOpenDir).toString()};
   m_lastOutputDir                             = QDir{reg.value(s_valLastOutputDir).toString()};
   m_lastConfigDir                             = QDir{reg.value(s_valLastConfigDir).toString()};
+  m_numRecentlyUsedStringsToRemember          = reg.value(s_valNumRecentlyUsedStringsToRemember,                                               10).toUInt();
 
   m_oftenUsedLanguages                        = reg.value(s_valOftenUsedLanguages).toStringList();
   m_oftenUsedRegions                          = reg.value(s_valOftenUsedRegions).toStringList();
@@ -603,6 +604,8 @@ Settings::load() {
   m_lastUpdateCheck                           = reg.value(s_valLastUpdateCheck,                                                                QDateTime{}).toDateTime();
 
   reg.endGroup();               // settings.updates
+
+  updateMaximumNumRecentlyUsedStrings();
 
   m_mergeLastFixedOutputDirs   .setItems(reg.value(s_valMergeLastFixedOutputDirs).toStringList());
   m_mergeLastOutputDirs        .setItems(reg.value(s_valMergeLastOutputDirs).toStringList());
@@ -908,6 +911,13 @@ Settings::actualMkvmergeExe()
 }
 
 void
+Settings::updateMaximumNumRecentlyUsedStrings() {
+  m_mergeLastFixedOutputDirs   .setMaximumNumItems(m_numRecentlyUsedStringsToRemember);
+  m_mergeLastOutputDirs        .setMaximumNumItems(m_numRecentlyUsedStringsToRemember);
+  m_mergeLastRelativeOutputDirs.setMaximumNumItems(m_numRecentlyUsedStringsToRemember);
+}
+
+void
 Settings::save()
   const {
   auto regPtr = registry();
@@ -930,6 +940,7 @@ Settings::save()
   reg.setValue(s_valLastOpenDir,                               m_lastOpenDir.path());
   reg.setValue(s_valLastOutputDir,                             m_lastOutputDir.path());
   reg.setValue(s_valLastConfigDir,                             m_lastConfigDir.path());
+  reg.setValue(s_valNumRecentlyUsedStringsToRemember,          m_numRecentlyUsedStringsToRemember);
 
   reg.setValue(s_valOftenUsedLanguages,                        m_oftenUsedLanguages);
   reg.setValue(s_valOftenUsedRegions,                          m_oftenUsedRegions);

@@ -63,6 +63,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbGuiWarnBeforeClosingModifiedTabs->setChecked(m_cfg.m_warnBeforeClosingModifiedTabs);
   ui->cbGuiWarnBeforeAbortingJobs->setChecked(m_cfg.m_warnBeforeAbortingJobs);
   ui->cbGuiWarnBeforeOverwriting->setChecked(m_cfg.m_warnBeforeOverwriting);
+  ui->sbGuiNumRecentlyUsedStrings->setValue(m_cfg.m_numRecentlyUsedStringsToRemember);
   setupFontAndScaling();
   setupInterfaceLanguage();
   setupTabPositions();
@@ -1048,6 +1049,7 @@ PreferencesDialog::save() {
   m_cfg.m_bcp47NormalizationMode                              = static_cast<mtx::bcp47::normalization_mode_e>(ui->cbGuiBCP47NormalizationMode->currentData().toInt());
   m_cfg.m_uiFontFamily                                        = ui->fcbGuiFontFamily->currentFont().family();
   m_cfg.m_uiFontPointSize                                     = ui->sbGuiFontPointSize->value();
+  m_cfg.m_numRecentlyUsedStringsToRemember                    = ui->sbGuiNumRecentlyUsedStrings->value();
   m_cfg.m_uiStayOnTop                                         = ui->cbGuiStayOnTop->isChecked();
   m_cfg.m_uiDisableHighDPIScaling                             = ui->cbGuiDisableHighDPIScaling->isChecked();
   m_cfg.m_uiDisableDarkStyleSheet                             = ui->cbGuiDisableDarkStyleSheet->isChecked();
@@ -1181,6 +1183,7 @@ PreferencesDialog::save() {
   saveFileColors();
 
   m_cfg.save();
+  m_cfg.updateMaximumNumRecentlyUsedStrings();
 
   mtx::chapters::g_chapter_generation_name_template.override(to_utf8(m_cfg.m_chapterNameTemplate));
 }

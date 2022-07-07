@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: the number of recently used entries (e.g. destination
+  directories) remembered by the GUI can now be configured in the
+  preferences. Implements #3362.
+
 ## Bug fixes
 
 * MKVToolNix GUI: preferences: the default actions added to the "execute

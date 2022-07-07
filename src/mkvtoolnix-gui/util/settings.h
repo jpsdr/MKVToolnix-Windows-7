@@ -168,6 +168,7 @@ public:
   using RunProgramConfigList = QList<RunProgramConfigPtr>;
   using LanguageShortcutList = QVector<LanguageShortcut>;
 
+  unsigned int m_numRecentlyUsedStringsToRemember;
   LanguageShortcutList m_languageShortcuts;
   bool m_useLegacyFontMIMETypes;
   mtx::bcp47::language_c m_defaultAudioTrackLanguage, m_defaultVideoTrackLanguage, m_defaultSubtitleTrackLanguage, m_defaultChapterLanguage;
@@ -258,6 +259,8 @@ public:
   QString lastConfigDirPath() const;
 
   QColor nthFileColor(int idx) const;
+
+  void updateMaximumNumRecentlyUsedStrings();
 
 public Q_SLOTS:
   void storeSplitterSizes();

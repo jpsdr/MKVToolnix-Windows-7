@@ -22,6 +22,7 @@ public:
   bool isEmpty() const;
 
   int maximumNumItems() const;
+  void setMaximumNumItems(int numItems);
   QStringList items() const;
   void setItems(QStringList const &newItems);
 

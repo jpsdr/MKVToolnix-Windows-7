@@ -33,6 +33,12 @@ RecentlyUsedStrings::items()
 }
 
 void
+RecentlyUsedStrings::setMaximumNumItems(int numItems) {
+  p_func()->m_numItems = numItems;
+  clamp();
+}
+
+void
 RecentlyUsedStrings::setItems(QStringList const &newItems) {
   p_func()->m_items = newItems;
   clamp();

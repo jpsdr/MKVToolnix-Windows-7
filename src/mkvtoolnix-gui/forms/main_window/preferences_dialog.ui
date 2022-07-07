@@ -80,16 +80,6 @@
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
             <layout class="QGridLayout" name="gridLayout_4">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_3">
-               <property name="text">
-                <string>Interface &amp;language:</string>
-               </property>
-               <property name="buddy">
-                <cstring>cbGuiInterfaceLanguage</cstring>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="1">
               <widget class="QComboBox" name="cbGuiInterfaceLanguage">
                <property name="sizePolicy">
@@ -130,6 +120,33 @@
                 </widget>
                </item>
               </layout>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Interface &amp;language:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbGuiInterfaceLanguage</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_24">
+               <property name="text">
+                <string>Number of &amp;recently used entries to remember:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QSpinBox" name="sbGuiNumRecentlyUsedStrings">
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <number>9999</number>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -489,7 +506,8 @@
                 <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="list-add"/>
+                <iconset theme="list-add">
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -505,7 +523,8 @@
                 <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="edit-entry"/>
+                <iconset theme="edit-entry">
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -521,7 +540,8 @@
                 <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="list-remove"/>
+                <iconset theme="list-remove">
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -684,7 +704,8 @@
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset theme="document-open-folder"/>
+                  <iconset theme="document-open-folder">
+                   <normaloff>.</normaloff>.</iconset>
                  </property>
                 </widget>
                </item>
@@ -943,7 +964,8 @@
                     <string notr="true"/>
                    </property>
                    <property name="icon">
-                    <iconset theme="list-add"/>
+                    <iconset theme="list-add">
+                     <normaloff>.</normaloff>.</iconset>
                    </property>
                   </widget>
                  </item>
@@ -953,7 +975,8 @@
                     <string notr="true"/>
                    </property>
                    <property name="icon">
-                    <iconset theme="list-remove"/>
+                    <iconset theme="list-remove">
+                     <normaloff>.</normaloff>.</iconset>
                    </property>
                   </widget>
                  </item>
@@ -963,7 +986,8 @@
                     <string notr="true"/>
                    </property>
                    <property name="icon">
-                    <iconset theme="document-edit"/>
+                    <iconset theme="document-edit">
+                     <normaloff>.</normaloff>.</iconset>
                    </property>
                   </widget>
                  </item>
@@ -992,7 +1016,8 @@
                     <string notr="true"/>
                    </property>
                    <property name="icon">
-                    <iconset theme="document-revert"/>
+                    <iconset theme="document-revert">
+                     <normaloff>.</normaloff>.</iconset>
                    </property>
                   </widget>
                  </item>
@@ -1152,7 +1177,8 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset theme="view-choose"/>
+                <iconset theme="view-choose">
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -1438,7 +1464,8 @@
                 <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="edit-undo"/>
+                <iconset theme="edit-undo">
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -1604,7 +1631,8 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="document-open-folder"/>
+                   <iconset theme="document-open-folder">
+                    <normaloff>.</normaloff>.</iconset>
                   </property>
                  </widget>
                 </item>
@@ -2394,7 +2422,8 @@
                 <string>&amp;Add action</string>
                </property>
                <property name="icon">
-                <iconset theme="list-add"/>
+                <iconset theme="list-add">
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </item>
@@ -2564,6 +2593,7 @@
   <tabstop>cbGuiInterfaceLanguage</tabstop>
   <tabstop>fcbGuiFontFamily</tabstop>
   <tabstop>sbGuiFontPointSize</tabstop>
+  <tabstop>sbGuiNumRecentlyUsedStrings</tabstop>
   <tabstop>cbGuiStayOnTop</tabstop>
   <tabstop>cbGuiDisableHighDPIScaling</tabstop>
   <tabstop>cbGuiDisableDarkStyleSheet</tabstop>
@@ -2671,9 +2701,7 @@
   <tabstop>pbJobsAddProgram</tabstop>
   <tabstop>twJobsPrograms</tabstop>
  </tabstops>
- <resources>
-  <include location="../../qt_resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
  <slots>
   <slot>addCommonLanguages()</slot>

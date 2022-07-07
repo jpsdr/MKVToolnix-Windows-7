@@ -98,6 +98,7 @@ char const * const s_valMergeWarnMissingAudioTrack                = "mergeWarnMi
 char const * const s_valMinimumPlaylistDuration                   = "minimumPlaylistDuration";
 char const * const s_valMode                                      = "mode";
 char const * const s_valName                                      = "name";
+char const * const s_valNumRecentlyUsedStringsToRemember          = "numRecentlyUsedStringsToRemember";
 char const * const s_valOftenUsedCharacterSets                    = "oftenUsedCharacterSets";
 char const * const s_valOftenUsedCharacterSetsOnly                = "oftenUsedCharacterSetsOnly";
 char const * const s_valOftenUsedCountries                        = "oftenUsedCountries";     // replaced by oftenUsedRegions in v51
