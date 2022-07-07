@@ -6,6 +6,10 @@
   programs" section on new installations now default to use WebM file names
   instead of Ogg, matching the format of the included audio files.
 
+## Build system changes
+
+* The bundled `fmt` library was updated to v9.0.0.
+
 
 # Version 68.0.0 "The Curtain" 2022-05-22
 
