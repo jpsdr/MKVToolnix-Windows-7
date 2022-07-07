@@ -104,7 +104,7 @@ fhe_metadata_cb(const FLAC__StreamDecoder *,
                              : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "VORBIS COMMENT"
                              : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "CUESHEET"
                              :                                                        "UNDEFINED",
-                             metadata->type, metadata->length));
+                             static_cast<unsigned int>(metadata->type), metadata->length));
       break;
   }
 }

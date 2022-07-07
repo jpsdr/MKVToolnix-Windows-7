@@ -18,6 +18,11 @@
 using mtx_mp_rational_t = boost::multiprecision::number<boost::multiprecision::backends::gmp_rational, boost::multiprecision::et_off>;
 using mtx_mp_int_t      = boost::multiprecision::number<boost::multiprecision::backends::gmp_int,      boost::multiprecision::et_off>;
 
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<mtx_mp_rational_t> : ostream_formatter {};
+template <> struct fmt::formatter<mtx_mp_int_t>      : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000
+
 namespace mtx {
 
 // This conversion function exists to work around incomplete

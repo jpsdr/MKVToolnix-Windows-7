@@ -102,3 +102,7 @@ operator <<(std::wostream &out,
   out << string.toStdWString();
   return out;
 }
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<QString> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

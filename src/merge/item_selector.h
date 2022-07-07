@@ -139,3 +139,7 @@ operator <<(std::ostream &out,
 
   return out;
 }
+
+#if FMT_VERSION >= 90000
+template <typename T> struct fmt::formatter<item_selector_c<T>> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

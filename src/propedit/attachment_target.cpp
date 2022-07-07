@@ -83,14 +83,14 @@ attachment_target_c::dump_info()
                      "    selector_num_arg: {6}\n"
                      "    selector_string_arg: {7}\n",
                      m_file_name,
-                     m_command,
+                     static_cast<unsigned int>(m_command),
                        ac_add     == m_command ? "add"
                      : ac_delete  == m_command ? "delete"
                      : ac_replace == m_command ? "replace"
                      : ac_update  == m_command ? "update"
                      :                           "unknown",
                      m_options,
-                     m_selector_type,
+                     static_cast<unsigned int>(m_selector_type),
                        st_id        == m_selector_type ? "ID"
                      : st_uid       == m_selector_type ? "UID"
                      : st_name      == m_selector_type ? "name"

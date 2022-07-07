@@ -91,3 +91,9 @@ operator <<(std::ostream &out,
 }
 
 }
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<mtx::opus::decode_error> : ostream_formatter {};
+template <> struct fmt::formatter<mtx::opus::id_header_t>  : ostream_formatter {};
+template <> struct fmt::formatter<mtx::opus::toc_t>        : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

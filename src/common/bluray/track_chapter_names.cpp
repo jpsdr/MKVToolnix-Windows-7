@@ -18,6 +18,7 @@
 #include "common/bluray/track_chapter_names.h"
 #include "common/bluray/util.h"
 #include "common/debugging.h"
+#include "common/path.h"
 #include "common/qt.h"
 #include "common/xml/xml.h"
 

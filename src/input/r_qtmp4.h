@@ -590,3 +590,7 @@ protected:
 
   virtual void process_atom(qt_atom_t const &parent, int level, std::function<void(qt_atom_t const &)> const &handler);
 };
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<qt_atom_t> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

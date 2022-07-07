@@ -176,3 +176,8 @@ struct hash<mtx::bcp47::language_c> {
 };
 
 } // namespace mtx::bcp47
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<mtx::bcp47::language_c::extension_t> : ostream_formatter {};
+template <> struct fmt::formatter<mtx::bcp47::language_c>              : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

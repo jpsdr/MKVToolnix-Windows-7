@@ -130,3 +130,7 @@ operator <<(std::ostream &out,
 
   return out;
 }
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<attachment_target_c::options_t> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

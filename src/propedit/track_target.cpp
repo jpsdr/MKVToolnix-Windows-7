@@ -78,9 +78,9 @@ track_target_c::dump_info()
                      "    selection_track_type: {2}\n"
                      "    track_uid:            {3}\n"
                      "    file_name:            {4}\n",
-                     static_cast<int>(m_selection_mode),
+                     static_cast<unsigned int>(m_selection_mode),
                      m_selection_param,
-                     m_selection_track_type,
+                     static_cast<unsigned int>(m_selection_track_type),
                      m_track_uid,
                      m_file_name));
 

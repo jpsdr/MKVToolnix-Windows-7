@@ -239,3 +239,7 @@ public:
   virtual void debug_abort_process();
 };
 using console_kax_analyzer_cptr = std::shared_ptr<console_kax_analyzer_c>;
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<mtx::kax_analyzer_x> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

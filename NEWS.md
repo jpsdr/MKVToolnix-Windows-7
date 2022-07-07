@@ -5,6 +5,7 @@
 * MKVToolNix GUI: preferences: the default actions added to the "execute
   programs" section on new installations now default to use WebM file names
   instead of Ogg, matching the format of the included audio files.
+* build system: fixed compilation with fmt v9. Fixes #3366.
 
 ## Build system changes
 

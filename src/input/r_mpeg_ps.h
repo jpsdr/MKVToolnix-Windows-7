@@ -244,3 +244,8 @@ private:
   void sort_tracks();
   void calculate_global_timestamp_offset();
 };
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<mpeg_ps_id_t>     : ostream_formatter {};
+template <> struct fmt::formatter<mpeg_ps_packet_c> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

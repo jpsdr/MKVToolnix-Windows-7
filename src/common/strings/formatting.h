@@ -129,3 +129,7 @@ operator <<(std::ostream &out,
   out << mtx::string::format_timestamp(timestamp);
   return out;
 }
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<basic_timestamp_c<int64_t>> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

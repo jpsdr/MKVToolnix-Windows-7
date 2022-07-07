@@ -155,3 +155,16 @@ operator <<(std::ostream &out,
 }
 
 }}
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<mtx::mm_io::exception>                : ostream_formatter {};
+template <> struct fmt::formatter<mtx::mm_io::end_of_file_x>            : ostream_formatter {};
+template <> struct fmt::formatter<mtx::mm_io::seek_x>                   : ostream_formatter {};
+template <> struct fmt::formatter<mtx::mm_io::read_write_x>             : ostream_formatter {};
+template <> struct fmt::formatter<mtx::mm_io::open_x>                   : ostream_formatter {};
+template <> struct fmt::formatter<mtx::mm_io::wrong_read_write_access_x>: ostream_formatter {};
+template <> struct fmt::formatter<mtx::mm_io::insufficient_space_x>     : ostream_formatter {};
+template <> struct fmt::formatter<mtx::mm_io::create_directory_x>       : ostream_formatter {};
+template <> struct fmt::formatter<mtx::mm_io::text::exception>          : ostream_formatter {};
+template <> struct fmt::formatter<mtx::mm_io::text::invalid_utf8_char_x>: ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

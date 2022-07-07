@@ -80,4 +80,8 @@ operator <<(std::ostream &out,
   return out;
 }
 
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<translatable_string_c> : ostream_formatter {};
+#endif
+
 void init_locales(std::string locale = "");

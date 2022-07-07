@@ -173,3 +173,8 @@ protected:
 
   unsigned int add_track(char type);
 };
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<flv_header_t> : ostream_formatter {};
+template <> struct fmt::formatter<flv_tag_c>    : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

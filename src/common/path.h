@@ -36,3 +36,7 @@ std::filesystem::path absolute(std::filesystem::path const &p);
 void create_directories(std::filesystem::path const &path, std::error_code &error_code);
 
 } // namespace mtx::fs
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<std::filesystem::path> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

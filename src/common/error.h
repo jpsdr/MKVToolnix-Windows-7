@@ -45,3 +45,7 @@ operator <<(std::ostream &out,
 }
 
 }
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<mtx::exception> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

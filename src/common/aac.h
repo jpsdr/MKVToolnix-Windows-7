@@ -221,3 +221,7 @@ protected:
 using parser_cptr = std::shared_ptr<parser_c>;
 
 } // namespace mtx::aac
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<mtx::aac::header_c> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000

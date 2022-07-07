@@ -240,7 +240,7 @@ flac_reader_c::handle_picture_metadata(FLAC__StreamMetadata const *metadata) {
   mxdebug_if(m_debug, fmt::format("flac_reader:   MIME type:   {0}\n", attachment->mime_type));
   mxdebug_if(m_debug, fmt::format("flac_reader:   data length: {0}\n", picture.data_length));
   mxdebug_if(m_debug, fmt::format("flac_reader:   ID:          {0}\n", m_attachment_id));
-  mxdebug_if(m_debug, fmt::format("flac_reader:   mode:        {0}\n", attach_mode));
+  mxdebug_if(m_debug, fmt::format("flac_reader:   mode:        {0}\n", static_cast<unsigned int>(attach_mode)));
 
   if (attachment->mime_type.empty() || attachment->name.empty())
     return;
@@ -276,7 +276,7 @@ flac_reader_c::flac_metadata_cb(const FLAC__StreamMetadata *metadata) {
                              : metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT ? "VORBIS COMMENT"
                              : metadata->type == FLAC__METADATA_TYPE_CUESHEET       ? "CUESHEET"
                              :                                                        "UNDEFINED",
-                             metadata->type, metadata->length));
+                             static_cast<unsigned int>(metadata->type), metadata->length));
       break;
   }
 }

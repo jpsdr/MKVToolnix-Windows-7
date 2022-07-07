@@ -104,10 +104,10 @@ tag_target_c::dump_info()
                      "    selection_track_type: {3}\n"
                      "    track_uid:            {4}\n"
                      "    file_name:            {5}\n",
-                     static_cast<int>(m_operation_mode),
-                     static_cast<int>(m_selection_mode),
+                     static_cast<unsigned int>(m_operation_mode),
+                     static_cast<unsigned int>(m_selection_mode),
                      m_selection_param,
-                     m_selection_track_type,
+                     static_cast<unsigned int>(m_selection_track_type),
                      m_track_uid,
                      m_file_name));
 

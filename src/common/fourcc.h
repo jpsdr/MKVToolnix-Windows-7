@@ -83,3 +83,7 @@ operator <<(std::ostream &out,
   out << fourcc.str();
   return out;
 }
+
+#if FMT_VERSION >= 90000
+template <> struct fmt::formatter<fourcc_c> : ostream_formatter {};
+#endif  // FMT_VERSION >= 90000
