@@ -11,6 +11,9 @@
   weren't previously known to the program those jobs will be sorted by their
   "date added" timestamp instead of using the order the operating system
   returns them in. Part of the implementation of #3365.
+* MKVToolNix GUI: multiplexer: when adding files the track properties
+  regarding colour information & colour mastering meta information will be
+  parsed & set in the corresponding GUI controls. Implements #3359.
 
 ## Bug fixes
 

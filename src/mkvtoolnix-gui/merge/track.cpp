@@ -221,6 +221,29 @@ Track::setDefaultsBasics() {
 }
 
 void
+Track::setDefaultsColour() {
+  m_bitsPerColourChannel     = m_properties.value(Q(mtx::id::colour_bits_per_channel)).toString();
+  m_colourMatrixCoefficients = m_properties.value(Q(mtx::id::colour_matrix_coefficients)).toString();
+  m_colourPrimaries          = m_properties.value(Q(mtx::id::colour_primaries)).toString();
+  m_colourRange              = m_properties.value(Q(mtx::id::colour_range)).toString();
+  m_transferCharacteristics  = m_properties.value(Q(mtx::id::colour_transfer_characteristics)).toString();
+  m_maximumContentLight      = m_properties.value(Q(mtx::id::max_content_light)).toString();
+  m_maximumFrameLight        = m_properties.value(Q(mtx::id::max_frame_light)).toString();
+  m_maximumLuminance         = m_properties.value(Q(mtx::id::max_luminance)).toString();
+  m_minimumLuminance         = m_properties.value(Q(mtx::id::min_luminance)).toString();
+  m_pitchRotation            = m_properties.value(Q(mtx::id::projection_pose_pitch)).toString();
+  m_rollRotation             = m_properties.value(Q(mtx::id::projection_pose_roll)).toString();
+  m_yawRotation              = m_properties.value(Q(mtx::id::projection_pose_yaw)).toString();
+  m_projectionSpecificData   = m_properties.value(Q(mtx::id::projection_private)).toString();
+  m_projectionType           = m_properties.value(Q(mtx::id::projection_type)).toString();
+  m_cbSubsampling            = m_properties.value(Q(mtx::id::cb_subsample)).toString();
+  m_chromaSiting             = m_properties.value(Q(mtx::id::chroma_siting)).toString();
+  m_chromaSubsampling        = m_properties.value(Q(mtx::id::chroma_subsample)).toString();
+  m_whiteColourCoordinates   = m_properties.value(Q(mtx::id::white_colour_coordinates)).toString();
+  m_chromaticityCoordinates  = m_properties.value(Q(mtx::id::chromaticity_coordinates)).toString();
+}
+
+void
 Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   if (!isRegular()) {
     setDefaultsNonRegular();
@@ -231,6 +254,7 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   setDefaultsLanguage(languageDerivedFromFileName);
   setDefaultsMuxThis();
   setDefaultsDisplayDimensions();
+  setDefaultsColour();
 }
 
 QString

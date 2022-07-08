@@ -90,6 +90,7 @@ protected:
   void setDefaultsMuxThis();
   void setDefaultsDisplayDimensions();
   void setDefaultsLanguage(mtx::bcp47::language_c const &languageDerivedFromFileName);
+  void setDefaultsColour();
 
 public:
   static QString nameForType(TrackType type);
