@@ -7,6 +7,10 @@
   preferences. Implements #3362.
 * MKVToolNix GUI: job queue: the job queue can now be sorted by clicking on
   the column headers. Part of the implementation of #3365.
+* MKVToolNix GUI: job queue: when loading jobs from the queue directory that
+  weren't previously known to the program those jobs will be sorted by their
+  "date added" timestamp instead of using the order the operating system
+  returns them in. Part of the implementation of #3365.
 
 ## Bug fixes
 

@@ -721,7 +721,8 @@ Model::loadJobs() {
 
   auto queueLocation = Job::queueLocation();
   auto jobQueueFiles = QDir{queueLocation}.entryList(QStringList{} << Q("*.mtxcfg"), QDir::Files);
-  auto loadedJobs    = QList<JobPtr>{};
+  auto knownJobs     = QList<JobPtr>{};
+  auto unknownJobs   = QList<JobPtr>{};
 
   for (auto const &fileName : jobQueueFiles) {
     try {
@@ -729,19 +730,24 @@ Model::loadJobs() {
       if (!job)
         continue;
 
-      loadedJobs << job;
-
       auto uuid = job->uuid().toString();
-      if (!orderByUuid.contains(uuid))
-        orderByUuid[uuid] = orderIdx++;
+
+      if (orderByUuid.contains(uuid))
+        knownJobs << job;
+      else
+        unknownJobs << job;
 
     } catch (Merge::InvalidSettingsX &) {
     }
   }
 
-  mtx::sort::by(loadedJobs.begin(), loadedJobs.end(), [&orderByUuid](JobPtr const &job) { return orderByUuid[ job->uuid().toString() ]; });
+  mtx::sort::by(knownJobs.begin(),   knownJobs.end(),   [&orderByUuid](JobPtr const &job) { return orderByUuid[ job->uuid().toString() ];   });
+  mtx::sort::by(unknownJobs.begin(), unknownJobs.end(),             [](JobPtr const &job) { return Util::displayableDate(job->dateAdded()); });
 
-  for (auto const &job : loadedJobs)
+  for (auto const &job : knownJobs)
+    add(job);
+
+  for (auto const &job : unknownJobs)
     add(job);
 
   updateProgress();
