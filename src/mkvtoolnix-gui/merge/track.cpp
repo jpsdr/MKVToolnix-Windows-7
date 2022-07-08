@@ -122,44 +122,10 @@ Track::setDefaultsNonRegular() {
 }
 
 void
-Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
-  if (!isRegular()) {
-    setDefaultsNonRegular();
-    return;
-  }
-
-  auto &settings = Util::Settings::get();
-
-  if (isAudio() && settings.m_setAudioDelayFromFileName)
-    m_delay = extractAudioDelayFromFileName();
-
-  m_forcedTrackFlag            = m_properties.value(Q(mtx::id::forced_track)).toBool() ? 1 : 0;
-  m_forcedTrackFlagWasSet      = m_forcedTrackFlag == 1;
-  m_trackEnabledFlag           = m_properties.value(Q(mtx::id::enabled_track), true).toBool() ? 1 : 0;
-  m_trackEnabledFlagWasSet     = m_trackEnabledFlag == 1;
-  m_hearingImpairedFlag        = m_properties.value(Q(mtx::id::flag_hearing_impaired)).toBool();
-  m_hearingImpairedFlagWasSet  = m_hearingImpairedFlag;
-  m_visualImpairedFlag         = m_properties.value(Q(mtx::id::flag_visual_impaired)).toBool();
-  m_visualImpairedFlagWasSet   = m_visualImpairedFlag;
-  m_textDescriptionsFlag       = m_properties.value(Q(mtx::id::flag_text_descriptions)).toBool();
-  m_textDescriptionsFlagWasSet = m_textDescriptionsFlag;
-  m_originalFlag               = m_properties.value(Q(mtx::id::flag_original)).toBool();
-  m_originalFlagWasSet         = m_originalFlag;
-  m_commentaryFlag             = m_properties.value(Q(mtx::id::flag_commentary)).toBool();
-  m_commentaryFlagWasSet       = m_commentaryFlag;
-  m_defaultTrackFlag           = m_properties.contains("default_track") ? m_properties.value("default_track").toBool() : true;
-  m_defaultTrackFlagWasSet     = m_defaultTrackFlag;
-  m_name                       = m_properties.value("track_name").toString();
-  m_nameWasPresent             = !m_name.isEmpty();
-  m_cropping                   = m_properties.value("cropping").toString();
-  m_aacSbrWasDetected          = m_properties.value("aac_is_sbr").toString().contains(QRegularExpression{"1|true"});
-  m_stereoscopy                = m_properties.contains("stereo_mode") ? m_properties.value("stereo_mode").toUInt() + 1 : 0;
-  auto encoding                = m_properties.value(Q("encoding")).toString();
-  m_characterSet               = !encoding.isEmpty()   ? encoding
-                               : canChangeSubCharset() ? settings.m_defaultSubtitleCharset
-                               :                         Q("");
-
+Track::setDefaultsLanguage(mtx::bcp47::language_c const &languageDerivedFromFileName) {
+  auto &settings        = Util::Settings::get();
   auto languageProperty = m_properties.value("language_ietf").toString();
+
   if (languageProperty.isEmpty())
     languageProperty = m_properties.value("language").toString();
 
@@ -186,31 +152,85 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
 
   if (language.is_valid())
     m_language = language;
+}
 
+void
+Track::setDefaultsDisplayDimensions() {
   QRegularExpression re_displayDimensions{"^(\\d+)x(\\d+)$"};
   auto matches = re_displayDimensions.match(m_properties.value("display_dimensions").toString());
-  if (matches.hasMatch()) {
-    m_displayWidth  = matches.captured(1);
-    m_displayHeight = matches.captured(2);
-  }
+  if (!matches.hasMatch())
+    return;
 
-  if (canRemoveDialogNormalizationGain() && settings.m_mergeEnableDialogNormGainRemoval)
-    m_removeDialogNormalizationGain = true;
+  m_displayWidth  = matches.captured(1);
+  m_displayHeight = matches.captured(2);
+}
 
-  if (!settings.m_enableMuxingTracksByTheseTypes.contains(m_type))
+void
+Track::setDefaultsMuxThis() {
+  auto &settings = Util::Settings::get();
+
+  if (!settings.m_enableMuxingTracksByTheseTypes.contains(m_type)) {
     m_muxThis = false;
-
-  else if (   !settings.m_enableMuxingTracksByLanguage
-           || !mtx::included_in(m_type, TrackType::Video, TrackType::Audio, TrackType::Subtitles)
-           || ((TrackType::Video     == m_type) && settings.m_enableMuxingAllVideoTracks)
-           || ((TrackType::Audio     == m_type) && settings.m_enableMuxingAllAudioTracks)
-           || ((TrackType::Subtitles == m_type) && settings.m_enableMuxingAllSubtitleTracks))
-    m_muxThis = true;
-
-  else {
-    language  = !m_language.is_valid() ? mtx::bcp47::language_c::parse("und"s) : m_language;
-    m_muxThis = settings.m_enableMuxingTracksByTheseLanguages.contains(Q(language.get_iso639_alpha_3_code()));
+    return;
   }
+
+  if (   !settings.m_enableMuxingTracksByLanguage
+      || !mtx::included_in(m_type, TrackType::Video, TrackType::Audio, TrackType::Subtitles)
+      || ((TrackType::Video     == m_type) && settings.m_enableMuxingAllVideoTracks)
+      || ((TrackType::Audio     == m_type) && settings.m_enableMuxingAllAudioTracks)
+      || ((TrackType::Subtitles == m_type) && settings.m_enableMuxingAllSubtitleTracks)) {
+    m_muxThis = true;
+    return;
+  }
+
+  auto language = !m_language.is_valid() ? mtx::bcp47::language_c::parse("und"s) : m_language;
+  m_muxThis     = settings.m_enableMuxingTracksByTheseLanguages.contains(Q(language.get_iso639_alpha_3_code()));
+}
+
+void
+Track::setDefaultsBasics() {
+  auto &settings = Util::Settings::get();
+
+  m_forcedTrackFlag               = m_properties.value(Q(mtx::id::forced_track)).toBool() ? 1 : 0;
+  m_forcedTrackFlagWasSet         = m_forcedTrackFlag == 1;
+  m_trackEnabledFlag              = m_properties.value(Q(mtx::id::enabled_track), true).toBool() ? 1 : 0;
+  m_trackEnabledFlagWasSet        = m_trackEnabledFlag == 1;
+  m_hearingImpairedFlag           = m_properties.value(Q(mtx::id::flag_hearing_impaired)).toBool();
+  m_hearingImpairedFlagWasSet     = m_hearingImpairedFlag;
+  m_visualImpairedFlag            = m_properties.value(Q(mtx::id::flag_visual_impaired)).toBool();
+  m_visualImpairedFlagWasSet      = m_visualImpairedFlag;
+  m_textDescriptionsFlag          = m_properties.value(Q(mtx::id::flag_text_descriptions)).toBool();
+  m_textDescriptionsFlagWasSet    = m_textDescriptionsFlag;
+  m_originalFlag                  = m_properties.value(Q(mtx::id::flag_original)).toBool();
+  m_originalFlagWasSet            = m_originalFlag;
+  m_commentaryFlag                = m_properties.value(Q(mtx::id::flag_commentary)).toBool();
+  m_commentaryFlagWasSet          = m_commentaryFlag;
+  m_defaultTrackFlag              = m_properties.contains("default_track") ? m_properties.value("default_track").toBool() : true;
+  m_defaultTrackFlagWasSet        = m_defaultTrackFlag;
+  m_name                          = m_properties.value("track_name").toString();
+  m_nameWasPresent                = !m_name.isEmpty();
+  m_cropping                      = m_properties.value("cropping").toString();
+  m_aacSbrWasDetected             = m_properties.value("aac_is_sbr").toString().contains(QRegularExpression{"1|true"});
+  m_stereoscopy                   = m_properties.contains("stereo_mode") ? m_properties.value("stereo_mode").toUInt() + 1 : 0;
+  auto encoding                   = m_properties.value(Q("encoding")).toString();
+  m_characterSet                  = !encoding.isEmpty()   ? encoding
+                                  : canChangeSubCharset() ? settings.m_defaultSubtitleCharset
+                                  :                         Q("");
+  m_delay                         = isAudio() && settings.m_setAudioDelayFromFileName ? extractAudioDelayFromFileName() : QString{};
+  m_removeDialogNormalizationGain = canRemoveDialogNormalizationGain() && settings.m_mergeEnableDialogNormGainRemoval;
+}
+
+void
+Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
+  if (!isRegular()) {
+    setDefaultsNonRegular();
+    return;
+  }
+
+  setDefaultsBasics();
+  setDefaultsLanguage(languageDerivedFromFileName);
+  setDefaultsMuxThis();
+  setDefaultsDisplayDimensions();
 }
 
 QString

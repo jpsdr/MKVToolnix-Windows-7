@@ -85,6 +85,12 @@ public:
 
   void buildMkvmergeOptions(MkvmergeOptionBuilder &opt) const;
 
+protected:
+  void setDefaultsBasics();
+  void setDefaultsMuxThis();
+  void setDefaultsDisplayDimensions();
+  void setDefaultsLanguage(mtx::bcp47::language_c const &languageDerivedFromFileName);
+
 public:
   static QString nameForType(TrackType type);
 };
