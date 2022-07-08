@@ -100,6 +100,8 @@ Tool::setupUi() {
   m_removeAction->setIcon(QIcon::fromTheme(Q("list-remove")));
   m_acknowledgeSelectedWarningsErrorsAction->setIcon(QIcon::fromTheme(Q("dialog-ok-apply")));
 
+  ui->jobs->header()->setSectionsClickable(true);
+
   retranslateUi();
 }
 
@@ -142,9 +144,10 @@ Tool::setupActions() {
   connect(ui->jobs,                                         &Util::BasicTreeView::deletePressed,              this,    &Tool::onRemove);
   connect(ui->jobs,                                         &Util::BasicTreeView::ctrlDownPressed,            this,    [this]() { moveJobsUpOrDown(false); });
   connect(ui->jobs,                                         &Util::BasicTreeView::ctrlUpPressed,              this,    [this]() { moveJobsUpOrDown(true); });
+  connect(ui->jobs->header(),                               &QHeaderView::sortIndicatorChanged,               this,    &Tool::sortJobs);
   connect(ui->moveJobsDown,                                 &QPushButton::clicked,                            this,    [this]() { moveJobsUpOrDown(false); });
   connect(ui->moveJobsUp,                                   &QPushButton::clicked,                            this,    [this]() { moveJobsUpOrDown(true); });
-
+  connect(m_model,                                          &Model::orderChanged,                             this,    &Tool::hideSortIndicator);
 
   connect(mw,                                               &MainWindow::preferencesChanged,                  this,    &Tool::retranslateUi);
   connect(mw,                                               &MainWindow::preferencesChanged,                  this,    &Tool::setupMoveJobsButtons);
@@ -624,6 +627,24 @@ Tool::checkIfOverwritingExistingJobIsOK(QString const &newDestination,
     .exec();
 
   return answer == QMessageBox::Yes;
+}
+
+void
+Tool::sortJobs(int logicalColumnIndex,
+               Qt::SortOrder order) {
+  m_model->withSelectedJobsAsList(ui->jobs, [this, logicalColumnIndex, order](auto const &selectedJobs) {
+    m_model->sortAllJobs(logicalColumnIndex, order);
+    this->selectJobs(selectedJobs);
+  });
+
+  ui->jobs->scrollToFirstSelected();
+
+  ui->jobs->header()->setSortIndicatorShown(true);
+}
+
+void
+Tool::hideSortIndicator() {
+  ui->jobs->header()->setSortIndicatorShown(false);
 }
 
 }

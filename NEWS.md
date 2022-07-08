@@ -5,6 +5,8 @@
 * MKVToolNix GUI: the number of recently used entries (e.g. destination
   directories) remembered by the GUI can now be configured in the
   preferences. Implements #3362.
+* MKVToolNix GUI: job queue: the job queue can now be sorted by clicking on
+  the column headers. Part of the implementation of #3365.
 
 ## Bug fixes
 

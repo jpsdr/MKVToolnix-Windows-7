@@ -83,12 +83,16 @@ public:
 
   QDateTime queueStartTime() const;
 
+  void sortAllJobs(int logicalColumnIdx, Qt::SortOrder order);
+
 Q_SIGNALS:
   void progressChanged(int progress, int totalProgress);
   void jobStatsChanged(int numPendingAutomatic, int numPendingManual, int numRunning, int numOther);
   void numUnacknowledgedWarningsOrErrorsChanged(int numWarnings, int numErrors);
 
   void queueStatusChanged(QueueStatus status);
+
+  void orderChanged();
 
 public Q_SLOTS:
   void onStatusChanged(uint64_t id, mtx::gui::Jobs::Job::Status oldStatus, mtx::gui::Jobs::Job::Status newStatus);
@@ -122,7 +126,7 @@ protected:
 
   QList<Job *> selectedJobs(QAbstractItemView *view);
 
-  void sortJobs(QList<Job *> &jobs, bool reverse);
+  void sortListOfJobs(QList<Job *> &jobs, bool reverse);
 
   void startJobInSingleJobMode(Job &job);
   void startJobsInMultiJobMode(QVector<Job *> const &jobs, unsigned int numRunning);

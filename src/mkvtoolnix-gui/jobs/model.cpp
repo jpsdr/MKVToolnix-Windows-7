@@ -24,6 +24,64 @@
 
 namespace mtx::gui::Jobs {
 
+namespace {
+
+QString
+formatStatusForSorting(JobPtr const &job) {
+  auto value = job->status() == Job::Status::PendingManual ? 0
+             : job->status() == Job::Status::PendingAuto   ? 1
+             : job->status() == Job::Status::Running       ? 2
+             : job->status() == Job::Status::DoneOk        ? 3
+             : job->status() == Job::Status::DoneWarnings  ? 4
+             : job->status() == Job::Status::Failed        ? 5
+             : job->status() == Job::Status::Aborted       ? 6
+             : job->status() == Job::Status::Disabled      ? 7
+             :                                               8;
+
+  return QString::number(value);
+}
+
+QString
+formatWarningsErrorForSorting(JobPtr const &job) {
+  auto value = !job->errors().isEmpty()   ? 2
+             : !job->warnings().isEmpty() ? 1
+             :                              0;
+
+  return QString::number(value);
+}
+
+QString
+formatDescriptionForSorting(JobPtr const &job) {
+  return job->displayableDescription();
+}
+
+QString
+formatTypeForSorting(JobPtr const &job) {
+  return job->displayableType();
+}
+
+QString
+formatProgressForSorting(JobPtr const &job) {
+  return Q(fmt::format("{0:04}", job->progress()));
+}
+
+QString
+formatDateAddedForSorting(JobPtr const &job) {
+  return Util::displayableDate(job->dateAdded());
+}
+
+QString
+formatDateStartedForSorting(JobPtr const &job) {
+  return Util::displayableDate(job->dateStarted());
+}
+
+QString
+formatDateFinishedForSorting(JobPtr const &job) {
+  return Util::displayableDate(job->dateFinished());
+}
+
+} // anonymous namespace
+
 Model::Model(QObject *parent)
   : QStandardItemModel{parent}
   , m_mutex{MTX_QT_RECURSIVE_MUTEX_INIT}
@@ -733,6 +791,9 @@ Model::dropMimeData(QMimeData const *data,
 
   Util::requestAllItems(*this);
 
+  if (result)
+    Q_EMIT orderChanged();
+
   return result;
 }
 
@@ -779,8 +840,38 @@ Model::runProgramOnQueueStop(QueueStatus status) {
 }
 
 void
-Model::sortJobs(QList<Job *> &jobs,
-                bool reverse) {
+Model::sortAllJobs(int logicalColumnIdx,
+                   Qt::SortOrder order) {
+  QMutexLocker locked{&m_mutex};
+
+  m_dontStartJobsNow = true;
+
+  auto jobs          = m_jobsById.values();
+  auto formatter     = logicalColumnIdx == 0 ? formatStatusForSorting
+                     : logicalColumnIdx == 1 ? formatWarningsErrorForSorting
+                     : logicalColumnIdx == 2 ? formatDescriptionForSorting
+                     : logicalColumnIdx == 3 ? formatTypeForSorting
+                     : logicalColumnIdx == 4 ? formatProgressForSorting
+                     : logicalColumnIdx == 5 ? formatDateAddedForSorting
+                     : logicalColumnIdx == 6 ? formatDateStartedForSorting
+                     :                         formatDateFinishedForSorting;
+
+  mtx::sort::by(jobs.begin(), jobs.end(), formatter);
+
+  if (order == Qt::DescendingOrder)
+    std::reverse(jobs.begin(), jobs.end());
+
+  removeRows(0, rowCount());
+
+  for (auto const &job : jobs)
+    invisibleRootItem()->appendRow(createRow(*job));
+
+  m_dontStartJobsNow = false;
+}
+
+void
+Model::sortListOfJobs(QList<Job *> &jobs,
+                      bool reverse) {
   auto rows = QHash<Job *, int>{};
 
   for (auto const &job : jobs)
@@ -799,7 +890,7 @@ Model::moveJobsUpOrDown(QList<Job *> jobs,
   auto const direction = up ? -1 : +1;
   auto const numRows   = rowCount();
 
-  sortJobs(jobs, !up);
+  sortListOfJobs(jobs, !up);
 
   for (auto const &job : jobs) {
     auto id  = job->id();
@@ -822,6 +913,8 @@ Model::moveJobsUpOrDown(QList<Job *> jobs,
     auto rowItems = rootItem->takeRow(row);
     rootItem->insertRow(targetRow, rowItems);
   }
+
+  Q_EMIT orderChanged();
 }
 
 }

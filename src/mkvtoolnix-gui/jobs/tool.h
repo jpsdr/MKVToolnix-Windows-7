@@ -64,6 +64,8 @@ public Q_SLOTS:
   void onRemoveAll();
   void onOpenFolder();
   void onEditAndRemove();
+  void sortJobs(int logicalColumnIndex, Qt::SortOrder order);
+  void hideSortIndicator();
 
   void onJobQueueMenu();
   void onContextMenu(QPoint pos);
