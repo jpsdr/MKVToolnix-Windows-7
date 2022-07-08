@@ -124,10 +124,10 @@ Track::setDefaultsNonRegular() {
 void
 Track::setDefaultsLanguage(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   auto &settings        = Util::Settings::get();
-  auto languageProperty = m_properties.value("language_ietf").toString();
+  auto languageProperty = m_properties.value(Q(mtx::id::language_ietf)).toString();
 
   if (languageProperty.isEmpty())
-    languageProperty = m_properties.value("language").toString();
+    languageProperty = m_properties.value(Q(mtx::id::language)).toString();
 
   auto language = mtx::bcp47::language_c::parse(to_utf8(languageProperty));
 
@@ -157,7 +157,7 @@ Track::setDefaultsLanguage(mtx::bcp47::language_c const &languageDerivedFromFile
 void
 Track::setDefaultsDisplayDimensions() {
   QRegularExpression re_displayDimensions{"^(\\d+)x(\\d+)$"};
-  auto matches = re_displayDimensions.match(m_properties.value("display_dimensions").toString());
+  auto matches = re_displayDimensions.match(m_properties.value(Q(mtx::id::display_dimensions)).toString());
   if (!matches.hasMatch())
     return;
 
@@ -205,14 +205,14 @@ Track::setDefaultsBasics() {
   m_originalFlagWasSet            = m_originalFlag;
   m_commentaryFlag                = m_properties.value(Q(mtx::id::flag_commentary)).toBool();
   m_commentaryFlagWasSet          = m_commentaryFlag;
-  m_defaultTrackFlag              = m_properties.contains("default_track") ? m_properties.value("default_track").toBool() : true;
+  m_defaultTrackFlag              = m_properties.contains(Q(mtx::id::default_track)) ? m_properties.value(Q(mtx::id::default_track)).toBool() : true;
   m_defaultTrackFlagWasSet        = m_defaultTrackFlag;
-  m_name                          = m_properties.value("track_name").toString();
+  m_name                          = m_properties.value(Q(mtx::id::track_name)).toString();
   m_nameWasPresent                = !m_name.isEmpty();
-  m_cropping                      = m_properties.value("cropping").toString();
-  m_aacSbrWasDetected             = m_properties.value("aac_is_sbr").toString().contains(QRegularExpression{"1|true"});
-  m_stereoscopy                   = m_properties.contains("stereo_mode") ? m_properties.value("stereo_mode").toUInt() + 1 : 0;
-  auto encoding                   = m_properties.value(Q("encoding")).toString();
+  m_cropping                      = m_properties.value(Q(mtx::id::cropping)).toString();
+  m_aacSbrWasDetected             = m_properties.value(Q(mtx::id::aac_is_sbr)).toString().contains(QRegularExpression{"1|true"});
+  m_stereoscopy                   = m_properties.contains(Q(mtx::id::stereo_mode)) ? m_properties.value(Q(mtx::id::stereo_mode)).toUInt() + 1 : 0;
+  auto encoding                   = m_properties.value(Q(Q(mtx::id::encoding))).toString();
   m_characterSet                  = !encoding.isEmpty()   ? encoding
                                   : canChangeSubCharset() ? settings.m_defaultSubtitleCharset
                                   :                         Q("");
