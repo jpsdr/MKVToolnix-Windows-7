@@ -17,21 +17,18 @@
 * MKVToolNix GUI: the number of recently used entries (e.g. destination
   directories) remembered by the GUI can now be configured in the
   preferences. Implements #3362.
+* MKVToolNix GUI: multiplexer: when adding files the track properties
+  regarding color information & color mastering meta information will be
+  parsed & set in the corresponding GUI controls. Implements #3359.
 * MKVToolNix GUI: job queue: the job queue can now be sorted by clicking on
   the column headers. Part of the implementation of #3365.
 * MKVToolNix GUI: job queue: when loading jobs from the queue directory that
   weren't previously known to the program those jobs will be sorted by their
   "date added" timestamp instead of using the order the operating system
   returns them in. Part of the implementation of #3365.
-* MKVToolNix GUI: multiplexer: when adding files the track properties
-  regarding color information & color mastering meta information will be
-  parsed & set in the corresponding GUI controls. Implements #3359.
 
 ## Bug fixes
 
-* MKVToolNix GUI: preferences: the default actions added to the "execute
-  programs" section on new installations now default to use WebM file names
-  instead of Ogg, matching the format of the included audio files.
 * build system: fixed compilation with fmt v9. Fixes #3366.
 * mkvmerge: HEVC ES parser: the parser will now parse at least the first full
   access unit before reporting that it has found all the required
@@ -39,6 +36,9 @@
   to the source reader not providing more data in the first call, leading to
   the parser not finding the `unspec62` and `unspec63` NALUs required for
   Dolby Vision. Fixes #3363.
+* MKVToolNix GUI: preferences: the default actions added to the "execute
+  programs" section on new installations now default to use WebM file names
+  instead of Ogg, matching the format of the included audio files.
 
 ## Build system changes
 
