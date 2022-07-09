@@ -33,6 +33,12 @@
   programs" section on new installations now default to use WebM file names
   instead of Ogg, matching the format of the included audio files.
 * build system: fixed compilation with fmt v9. Fixes #3366.
+* mkvmerge: HEVC ES parser: the parser will now parse at least the first full
+  access unit before reporting that it has found all the required
+  headers. Otherwise parsing might stop in the middle of the access unit due
+  to the source reader not providing more data in the first call, leading to
+  the parser not finding the `unspec62` and `unspec63` NALUs required for
+  Dolby Vision. Fixes #3363.
 
 ## Build system changes
 

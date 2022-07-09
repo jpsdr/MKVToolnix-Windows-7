@@ -26,6 +26,7 @@ namespace mtx::hevc {
 class es_parser_c: public mtx::avc_hevc::es_parser_c {
 protected:
   int m_prev_pic_order_cnt_lsb{}, m_prev_pic_order_cnt_msb{};
+  bool m_first_access_unit_parsed{}, m_first_access_unit_parsing_slices{};
 
   std::vector<vps_info_t> m_vps_info_list;
   std::vector<sps_info_t> m_sps_info_list;
@@ -85,6 +86,7 @@ protected:
   void handle_unspec62_nalu(memory_cptr const &nalu);
   void handle_slice_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
   void flush_incomplete_frame();
+  void determine_if_first_access_unit_parsed();
   virtual void calculate_frame_order() override;
   virtual bool does_nalu_get_included_in_extra_data(memory_c const &nalu) const override;
 
