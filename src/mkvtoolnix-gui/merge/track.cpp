@@ -20,6 +20,16 @@
 
 namespace mtx::gui::Merge {
 
+namespace {
+
+std::vector<std::pair<std::string, std::string>> trackSettingsNameReplacements{
+  { "colourMatrixCoefficients"s, "colorMatrixCoefficients"s },
+  { "colourRange"s,              "colorRange"s              },
+  { "colourPrimaries"s,          "colorPrimaries"s          },
+};
+
+} // anonymous namespace
+
 using namespace mtx::gui;
 
 Track::Track(SourceFile *file,
@@ -222,11 +232,11 @@ Track::setDefaultsBasics() {
 
 void
 Track::setDefaultsColour() {
-  m_bitsPerColourChannel     = m_properties.value(Q(mtx::id::colour_bits_per_channel)).toString();
-  m_colourMatrixCoefficients = m_properties.value(Q(mtx::id::colour_matrix_coefficients)).toString();
-  m_colourPrimaries          = m_properties.value(Q(mtx::id::colour_primaries)).toString();
-  m_colourRange              = m_properties.value(Q(mtx::id::colour_range)).toString();
-  m_transferCharacteristics  = m_properties.value(Q(mtx::id::colour_transfer_characteristics)).toString();
+  m_bitsPerColourChannel     = m_properties.value(Q(mtx::id::color_bits_per_channel)).toString();
+  m_colourMatrixCoefficients = m_properties.value(Q(mtx::id::color_matrix_coefficients)).toString();
+  m_colourPrimaries          = m_properties.value(Q(mtx::id::color_primaries)).toString();
+  m_colourRange              = m_properties.value(Q(mtx::id::color_range)).toString();
+  m_transferCharacteristics  = m_properties.value(Q(mtx::id::color_transfer_characteristics)).toString();
   m_maximumContentLight      = m_properties.value(Q(mtx::id::max_content_light)).toString();
   m_maximumFrameLight        = m_properties.value(Q(mtx::id::max_frame_light)).toString();
   m_maximumLuminance         = m_properties.value(Q(mtx::id::max_luminance)).toString();
@@ -269,6 +279,9 @@ Track::extractAudioDelayFromFileName()
 void
 Track::saveSettings(Util::ConfigFile &settings)
   const {
+  for (auto const &pair : trackSettingsNameReplacements)
+    settings.remove(Q(pair.first));
+
   MuxConfig::saveProperties(settings, m_properties);
 
   QStringList appendedTracks;
@@ -324,14 +337,14 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("commentaryFlag",                m_commentaryFlag);
   settings.setValue("commentaryFlagWasSet",          m_commentaryFlagWasSet);
 
-  settings.setValue("colourMatrixCoefficients",      m_colourMatrixCoefficients);
+  settings.setValue("colorMatrixCoefficients",       m_colourMatrixCoefficients);
   settings.setValue("bitsPerColourChannel",          m_bitsPerColourChannel);
   settings.setValue("chromaSubsampling",             m_chromaSubsampling);
   settings.setValue("cbSubsampling",                 m_cbSubsampling);
   settings.setValue("chromaSiting",                  m_chromaSiting);
-  settings.setValue("colourRange",                   m_colourRange);
+  settings.setValue("colorRange",                    m_colourRange);
   settings.setValue("transferCharacteristics",       m_transferCharacteristics);
-  settings.setValue("colourPrimaries",               m_colourPrimaries);
+  settings.setValue("colorPrimaries",                m_colourPrimaries);
   settings.setValue("maximumContentLight",           m_maximumContentLight);
   settings.setValue("maximumFrameLight",             m_maximumFrameLight);
 
@@ -354,6 +367,10 @@ Track::loadSettings(MuxConfig::Loader &l) {
   auto objectID = l.settings.value("objectID").toULongLong();
   if ((0 >= objectID) || l.objectIDToTrack.contains(objectID))
     throw InvalidSettingsX{};
+
+  for (auto const &pair : trackSettingsNameReplacements)
+    if (l.settings.childKeys().contains(Q(pair.first)))
+      l.settings.setValue(Q(pair.second), l.settings.value(Q(pair.first)));
 
   l.objectIDToTrack[objectID]     = this;
   m_type                          = static_cast<TrackType>(l.settings.value("type").toInt());
@@ -402,14 +419,14 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_commentaryFlag                = l.settings.value("commentaryFlag").toBool();
   m_commentaryFlagWasSet          = l.settings.value("commentaryFlagWasSet").toBool();
 
-  m_colourMatrixCoefficients      = l.settings.value("colourMatrixCoefficients").toString();
+  m_colourMatrixCoefficients      = l.settings.value("colorMatrixCoefficients").toString();
   m_bitsPerColourChannel          = l.settings.value("bitsPerColourChannel").toString();
   m_chromaSubsampling             = l.settings.value("chromaSubsampling").toString();
   m_cbSubsampling                 = l.settings.value("cbSubsampling").toString();
   m_chromaSiting                  = l.settings.value("chromaSiting").toString();
-  m_colourRange                   = l.settings.value("colourRange").toString();
+  m_colourRange                   = l.settings.value("colorRange").toString();
   m_transferCharacteristics       = l.settings.value("transferCharacteristics").toString();
-  m_colourPrimaries               = l.settings.value("colourPrimaries").toString();
+  m_colourPrimaries               = l.settings.value("colorPrimaries").toString();
   m_maximumContentLight           = l.settings.value("maximumContentLight").toString();
   m_maximumFrameLight             = l.settings.value("maximumFrameLight").toString();
 
@@ -548,10 +565,10 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
       opt.options << Q("--stereo-mode") << Q("%1:%2").arg(sid).arg(m_stereoscopy - 1);
 
     if (!m_colourMatrixCoefficients.isEmpty())
-      opt.options << Q("--colour-matrix-coefficients") << Q("%1:%2").arg(sid).arg(m_colourMatrixCoefficients);
+      opt.options << Q("--color-matrix-coefficients") << Q("%1:%2").arg(sid).arg(m_colourMatrixCoefficients);
 
     if (!m_bitsPerColourChannel.isEmpty())
-      opt.options << Q("--colour-bits-per-channel") << Q("%1:%2").arg(sid).arg(m_bitsPerColourChannel);
+      opt.options << Q("--color-bits-per-channel") << Q("%1:%2").arg(sid).arg(m_bitsPerColourChannel);
 
     if (!m_chromaSubsampling.isEmpty())
       opt.options << Q("--chroma-subsample") << Q("%1:%2").arg(sid).arg(m_chromaSubsampling);
@@ -563,13 +580,13 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
       opt.options << Q("--chroma-siting") << Q("%1:%2").arg(sid).arg(m_chromaSiting);
 
     if (!m_colourRange.isEmpty())
-      opt.options << Q("--colour-range") << Q("%1:%2").arg(sid).arg(m_colourRange);
+      opt.options << Q("--color-range") << Q("%1:%2").arg(sid).arg(m_colourRange);
 
     if (!m_transferCharacteristics.isEmpty())
-      opt.options << Q("--colour-transfer-characteristics") << Q("%1:%2").arg(sid).arg(m_transferCharacteristics);
+      opt.options << Q("--color-transfer-characteristics") << Q("%1:%2").arg(sid).arg(m_transferCharacteristics);
 
     if (!m_colourPrimaries.isEmpty())
-      opt.options << Q("--colour-primaries") << Q("%1:%2").arg(sid).arg(m_colourPrimaries);
+      opt.options << Q("--color-primaries") << Q("%1:%2").arg(sid).arg(m_colourPrimaries);
 
     if (!m_maximumContentLight.isEmpty())
       opt.options << Q("--max-content-light") << Q("%1:%2").arg(sid).arg(m_maximumContentLight);
@@ -581,7 +598,7 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
       opt.options << Q("--chromaticity-coordinates") << Q("%1:%2").arg(sid).arg(m_chromaticityCoordinates);
 
     if (!m_whiteColourCoordinates.isEmpty())
-      opt.options << Q("--white-colour-coordinates") << Q("%1:%2").arg(sid).arg(m_whiteColourCoordinates);
+      opt.options << Q("--white-color-coordinates") << Q("%1:%2").arg(sid).arg(m_whiteColourCoordinates);
 
     if (!m_maximumLuminance.isEmpty())
       opt.options << Q("--max-luminance") << Q("%1:%2").arg(sid).arg(m_maximumLuminance);

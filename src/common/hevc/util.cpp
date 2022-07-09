@@ -386,7 +386,7 @@ vui_parameters_copy(mtx::bits::reader_c &r,
 
     sps.vui.video_full_range_flag = w.copy_bits(1, r);      // video_full_range_flag
     if (w.copy_bits(1, r) == 1) {                           // color_desc_present_flag
-      sps.vui.colour_primaries         = w.copy_bits(8, r); // colour_primaries
+      sps.vui.color_primaries          = w.copy_bits(8, r); // color_primaries
       sps.vui.transfer_characteristics = w.copy_bits(8, r); // transfer_characteristics
       sps.vui.matrix_coefficients      = w.copy_bits(8, r); // matrix_coefficients
     }

@@ -67,19 +67,19 @@ Tab::setupControlLists() {
                   << p.ui->stereoscopy << p.ui->croppingLabel << p.ui->cropping << p.ui->cuesLabel << p.ui->cues
                   << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo
 
-                  << p.ui->colourInformationBox
-                  << p.ui->colourMatrixCoefficientsLabel << p.ui->colourMatrixCoefficients << p.ui->bitsPerColourChannelLabel   << p.ui->bitsPerColourChannel   << p.ui->chromaSubsamplingLabel   << p.ui->chromaSubsampling
-                  << p.ui->cbSubsamplingLabel            << p.ui->cbSubsampling            << p.ui->chromaSitingLabel           << p.ui->chromaSiting           << p.ui->colourRangeLabel         << p.ui->colourRange
-                  << p.ui->transferCharacteristicsLabel  << p.ui->transferCharacteristics  << p.ui->colourPrimariesLabel        << p.ui->colourPrimaries        << p.ui->maximumContentLightLabel << p.ui->maximumContentLight
-                  << p.ui->maximumFrameLightLabel        << p.ui->maximumFrameLight
+                  << p.ui->colorInformationBox
+                  << p.ui->colorMatrixCoefficientsLabel << p.ui->colorMatrixCoefficients << p.ui->bitsPerColourChannelLabel   << p.ui->bitsPerColourChannel   << p.ui->chromaSubsamplingLabel   << p.ui->chromaSubsampling
+                  << p.ui->cbSubsamplingLabel           << p.ui->cbSubsampling           << p.ui->chromaSitingLabel           << p.ui->chromaSiting           << p.ui->colorRangeLabel          << p.ui->colorRange
+                  << p.ui->transferCharacteristicsLabel << p.ui->transferCharacteristics << p.ui->colorPrimariesLabel         << p.ui->colorPrimaries         << p.ui->maximumContentLightLabel << p.ui->maximumContentLight
+                  << p.ui->maximumFrameLightLabel       << p.ui->maximumFrameLight
 
-                  << p.ui->colourMasteringMetaInformationBox
-                  << p.ui->chromaticityCoordinatesLabel  << p.ui->chromaticityCoordinates  << p.ui->whiteColourCoordinatesLabel << p.ui->whiteColourCoordinates
-                  << p.ui->maximumLuminanceLabel         << p.ui->maximumLuminance         << p.ui->minimumLuminanceLabel       << p.ui->minimumLuminance
+                  << p.ui->colorMasteringMetaInformationBox
+                  << p.ui->chromaticityCoordinatesLabel << p.ui->chromaticityCoordinates << p.ui->whiteColourCoordinatesLabel << p.ui->whiteColourCoordinates
+                  << p.ui->maximumLuminanceLabel        << p.ui->maximumLuminance        << p.ui->minimumLuminanceLabel       << p.ui->minimumLuminance
 
                   << p.ui->videoProjectionInformationBox
-                  << p.ui->projectionTypeLabel           << p.ui->projectionType           << p.ui->projectionSpecificDataLabel << p.ui->projectionSpecificData << p.ui->yawRotationLabel         << p.ui->yawRotation
-                  << p.ui->pitchRotationLabel            << p.ui->pitchRotation            << p.ui->rollRotationLabel           << p.ui->rollRotation
+                  << p.ui->projectionTypeLabel          << p.ui->projectionType          << p.ui->projectionSpecificDataLabel << p.ui->projectionSpecificData << p.ui->yawRotationLabel         << p.ui->yawRotation
+                  << p.ui->pitchRotationLabel           << p.ui->pitchRotation           << p.ui->rollRotationLabel           << p.ui->rollRotation
     ;
 
   p.subtitleControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
@@ -104,19 +104,19 @@ Tab::setupControlLists() {
                      << p.ui->miscellaneousBox << p.ui->cuesLabel << p.ui->cues << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions
                      << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain
 
-                     << p.ui->colourInformationBox
-                     << p.ui->colourMatrixCoefficientsLabel << p.ui->colourMatrixCoefficients << p.ui->bitsPerColourChannelLabel   << p.ui->bitsPerColourChannel   << p.ui->chromaSubsamplingLabel   << p.ui->chromaSubsampling
-                     << p.ui->cbSubsamplingLabel            << p.ui->cbSubsampling            << p.ui->chromaSitingLabel           << p.ui->chromaSiting           << p.ui->colourRangeLabel         << p.ui->colourRange
-                     << p.ui->transferCharacteristicsLabel  << p.ui->transferCharacteristics  << p.ui->colourPrimariesLabel        << p.ui->colourPrimaries        << p.ui->maximumContentLightLabel << p.ui->maximumContentLight
-                     << p.ui->maximumFrameLightLabel        << p.ui->maximumFrameLight
+                     << p.ui->colorInformationBox
+                     << p.ui->colorMatrixCoefficientsLabel << p.ui->colorMatrixCoefficients << p.ui->bitsPerColourChannelLabel   << p.ui->bitsPerColourChannel   << p.ui->chromaSubsamplingLabel   << p.ui->chromaSubsampling
+                     << p.ui->cbSubsamplingLabel           << p.ui->cbSubsampling           << p.ui->chromaSitingLabel           << p.ui->chromaSiting           << p.ui->colorRangeLabel          << p.ui->colorRange
+                     << p.ui->transferCharacteristicsLabel << p.ui->transferCharacteristics << p.ui->colorPrimariesLabel         << p.ui->colorPrimaries         << p.ui->maximumContentLightLabel << p.ui->maximumContentLight
+                     << p.ui->maximumFrameLightLabel       << p.ui->maximumFrameLight
 
-                     << p.ui->colourMasteringMetaInformationBox
-                     << p.ui->chromaticityCoordinatesLabel  << p.ui->chromaticityCoordinates  << p.ui->whiteColourCoordinatesLabel << p.ui->whiteColourCoordinates
-                     << p.ui->maximumLuminanceLabel         << p.ui->maximumLuminance         << p.ui->minimumLuminanceLabel       << p.ui->minimumLuminance
+                     << p.ui->colorMasteringMetaInformationBox
+                     << p.ui->chromaticityCoordinatesLabel << p.ui->chromaticityCoordinates << p.ui->whiteColourCoordinatesLabel << p.ui->whiteColourCoordinates
+                     << p.ui->maximumLuminanceLabel        << p.ui->maximumLuminance        << p.ui->minimumLuminanceLabel       << p.ui->minimumLuminance
 
                      << p.ui->videoProjectionInformationBox
-                     << p.ui->projectionTypeLabel           << p.ui->projectionType           << p.ui->projectionSpecificDataLabel << p.ui->projectionSpecificData << p.ui->yawRotationLabel         << p.ui->yawRotation
-                     << p.ui->pitchRotationLabel            << p.ui->pitchRotation            << p.ui->rollRotationLabel           << p.ui->rollRotation
+                     << p.ui->projectionTypeLabel          << p.ui->projectionType          << p.ui->projectionSpecificDataLabel << p.ui->projectionSpecificData << p.ui->yawRotationLabel         << p.ui->yawRotation
+                     << p.ui->pitchRotationLabel           << p.ui->pitchRotation           << p.ui->rollRotationLabel           << p.ui->rollRotation
     ;
 
   p.comboBoxControls << p.ui->muxThis << p.ui->defaultTrackFlag << p.ui->forcedTrackFlag << p.ui->trackEnabledFlag << p.ui->compression << p.ui->cues << p.ui->stereoscopy << p.ui->aacIsSBR << p.ui->subtitleCharacterSet
@@ -132,19 +132,19 @@ Tab::setupControlLists() {
                            << p.ui->croppingLabel            << p.ui->cropping                << p.ui->aacIsSBR
                            << p.ui->cuesLabel                << p.ui->cues                    << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions
 
-                           << p.ui->colourInformationBox
-                           << p.ui->colourMatrixCoefficientsLabel << p.ui->colourMatrixCoefficients << p.ui->bitsPerColourChannelLabel   << p.ui->bitsPerColourChannel   << p.ui->chromaSubsamplingLabel   << p.ui->chromaSubsampling
-                           << p.ui->cbSubsamplingLabel            << p.ui->cbSubsampling            << p.ui->chromaSitingLabel           << p.ui->chromaSiting           << p.ui->colourRangeLabel         << p.ui->colourRange
-                           << p.ui->transferCharacteristicsLabel  << p.ui->transferCharacteristics  << p.ui->colourPrimariesLabel        << p.ui->colourPrimaries        << p.ui->maximumContentLightLabel << p.ui->maximumContentLight
-                           << p.ui->maximumFrameLightLabel        << p.ui->maximumFrameLight
+                           << p.ui->colorInformationBox
+                           << p.ui->colorMatrixCoefficientsLabel << p.ui->colorMatrixCoefficients << p.ui->bitsPerColourChannelLabel   << p.ui->bitsPerColourChannel   << p.ui->chromaSubsamplingLabel   << p.ui->chromaSubsampling
+                           << p.ui->cbSubsamplingLabel           << p.ui->cbSubsampling           << p.ui->chromaSitingLabel           << p.ui->chromaSiting           << p.ui->colorRangeLabel          << p.ui->colorRange
+                           << p.ui->transferCharacteristicsLabel << p.ui->transferCharacteristics << p.ui->colorPrimariesLabel         << p.ui->colorPrimaries         << p.ui->maximumContentLightLabel << p.ui->maximumContentLight
+                           << p.ui->maximumFrameLightLabel       << p.ui->maximumFrameLight
 
-                           << p.ui->colourMasteringMetaInformationBox
-                           << p.ui->chromaticityCoordinatesLabel  << p.ui->chromaticityCoordinates  << p.ui->whiteColourCoordinatesLabel << p.ui->whiteColourCoordinates
-                           << p.ui->maximumLuminanceLabel         << p.ui->maximumLuminance         << p.ui->minimumLuminanceLabel       << p.ui->minimumLuminance
+                           << p.ui->colorMasteringMetaInformationBox
+                           << p.ui->chromaticityCoordinatesLabel << p.ui->chromaticityCoordinates << p.ui->whiteColourCoordinatesLabel << p.ui->whiteColourCoordinates
+                           << p.ui->maximumLuminanceLabel        << p.ui->maximumLuminance        << p.ui->minimumLuminanceLabel       << p.ui->minimumLuminance
 
                            << p.ui->videoProjectionInformationBox
-                           << p.ui->projectionTypeLabel           << p.ui->projectionType           << p.ui->projectionSpecificDataLabel << p.ui->projectionSpecificData << p.ui->yawRotationLabel         << p.ui->yawRotation
-                           << p.ui->pitchRotationLabel            << p.ui->pitchRotation            << p.ui->rollRotationLabel           << p.ui->rollRotation
+                           << p.ui->projectionTypeLabel          << p.ui->projectionType          << p.ui->projectionSpecificDataLabel << p.ui->projectionSpecificData << p.ui->yawRotationLabel         << p.ui->yawRotation
+                           << p.ui->pitchRotationLabel           << p.ui->pitchRotation           << p.ui->rollRotationLabel           << p.ui->rollRotation
     ;
 }
 
@@ -194,8 +194,8 @@ Tab::setupHorizontalScrollAreaInputLayout() {
   layout->insertWidget(idx++, p.ui->generalOptionsBox);
   layout->insertWidget(idx++, p.ui->timestampsAndDefaultDurationBox);
   layout->insertWidget(idx++, p.ui->videoPropertiesBox);
-  layout->insertWidget(idx++, p.ui->colourInformationBox);
-  layout->insertWidget(idx++, p.ui->colourMasteringMetaInformationBox);
+  layout->insertWidget(idx++, p.ui->colorInformationBox);
+  layout->insertWidget(idx++, p.ui->colorMasteringMetaInformationBox);
   layout->insertWidget(idx++, p.ui->videoProjectionInformationBox);
   layout->insertWidget(idx++, p.ui->audioPropertiesBox);
   layout->insertWidget(idx++, p.ui->subtitleAndChapterPropertiesBox);
@@ -237,8 +237,8 @@ Tab::setupHorizontalTwoColumnsInputLayout() {
 
   idx = 0;
   moveTo(p.ui->propertiesColumn2, idx++, p.ui->videoPropertiesBox);
-  moveTo(p.ui->propertiesColumn2, idx++, p.ui->colourInformationBox);
-  moveTo(p.ui->propertiesColumn2, idx++, p.ui->colourMasteringMetaInformationBox);
+  moveTo(p.ui->propertiesColumn2, idx++, p.ui->colorInformationBox);
+  moveTo(p.ui->propertiesColumn2, idx++, p.ui->colorMasteringMetaInformationBox);
   moveTo(p.ui->propertiesColumn2, idx++, p.ui->videoProjectionInformationBox);
 
   Util::autoGroupBoxGridLayout(*p.ui->generalOptionsBox, 1);
@@ -265,8 +265,8 @@ Tab::setupVerticalTabWidgetInputLayout() {
   moveTo(p.ui->generalOptionsPage,                 0, p.ui->generalOptionsBox);
   moveTo(p.ui->timestampsAndDefaultDurationPage,   0, p.ui->timestampsAndDefaultDurationBox);
   moveTo(p.ui->videoPropertiesPage,                0, p.ui->videoPropertiesBox);
-  moveTo(p.ui->colourInformationPage,              0, p.ui->colourInformationBox);
-  moveTo(p.ui->colourMasteringMetaInformationPage, 0, p.ui->colourMasteringMetaInformationBox);
+  moveTo(p.ui->colorInformationPage,              0, p.ui->colorInformationBox);
+  moveTo(p.ui->colorMasteringMetaInformationPage, 0, p.ui->colorMasteringMetaInformationBox);
   moveTo(p.ui->videoProjectionInformationPage,     0, p.ui->videoProjectionInformationBox);
   moveTo(p.ui->audioSubtitleChapterPropertiesPage, 0, p.ui->audioPropertiesBox);
   moveTo(p.ui->audioSubtitleChapterPropertiesPage, 1, p.ui->subtitleAndChapterPropertiesBox);
@@ -457,14 +457,14 @@ Tab::setupInputControls() {
   connect(p.ui->trackLanguage,                 &Util::LanguageDisplayWidget::languageChanged,                          this,                       &Tab::onTrackLanguageChanged);
   connect(p.ui->trackName,                     &QComboBox::editTextChanged,                                            this,                       &Tab::onTrackNameChanged);
   connect(p.ui->trackTags,                     &QLineEdit::textChanged,                                                this,                       &Tab::onTrackTagsChanged);
-  connect(p.ui->colourMatrixCoefficients,      &QLineEdit::textChanged,                                                this,                       &Tab::onColourMatrixCoefficientsChanged);
+  connect(p.ui->colorMatrixCoefficients,       &QLineEdit::textChanged,                                                this,                       &Tab::onColourMatrixCoefficientsChanged);
   connect(p.ui->bitsPerColourChannel,          &QLineEdit::textChanged,                                                this,                       &Tab::onBitsPerColourChannelChanged);
   connect(p.ui->chromaSubsampling,             &QLineEdit::textChanged,                                                this,                       &Tab::onChromaSubsamplingChanged);
   connect(p.ui->cbSubsampling,                 &QLineEdit::textChanged,                                                this,                       &Tab::onCbSubsamplingChanged);
   connect(p.ui->chromaSiting,                  &QLineEdit::textChanged,                                                this,                       &Tab::onChromaSitingChanged);
-  connect(p.ui->colourRange,                   &QLineEdit::textChanged,                                                this,                       &Tab::onColourRangeChanged);
+  connect(p.ui->colorRange,                    &QLineEdit::textChanged,                                                this,                       &Tab::onColourRangeChanged);
   connect(p.ui->transferCharacteristics,       &QLineEdit::textChanged,                                                this,                       &Tab::onTransferCharacteristicsChanged);
-  connect(p.ui->colourPrimaries,               &QLineEdit::textChanged,                                                this,                       &Tab::onColourPrimariesChanged);
+  connect(p.ui->colorPrimaries,                &QLineEdit::textChanged,                                                this,                       &Tab::onColourPrimariesChanged);
   connect(p.ui->maximumContentLight,           &QLineEdit::textChanged,                                                this,                       &Tab::onMaximumContentLightChanged);
   connect(p.ui->maximumFrameLight,             &QLineEdit::textChanged,                                                this,                       &Tab::onMaximumFrameLightChanged);
   connect(p.ui->chromaticityCoordinates,       &QLineEdit::textChanged,                                                this,                       &Tab::onChromaticityCoordinatesChanged);
@@ -858,14 +858,14 @@ Tab::setInputControlValues(Track *track) {
   p.ui->reduceToAudioCore->setChecked(             track->m_reduceAudioToCore);
   p.ui->removeDialogNormalizationGain->setChecked( track->m_removeDialogNormalizationGain);
 
-  p.ui->colourMatrixCoefficients->setText(         track->m_colourMatrixCoefficients);
+  p.ui->colorMatrixCoefficients->setText(          track->m_colourMatrixCoefficients);
   p.ui->bitsPerColourChannel->setText(             track->m_bitsPerColourChannel);
   p.ui->chromaSubsampling->setText(                track->m_chromaSubsampling);
   p.ui->cbSubsampling->setText(                    track->m_cbSubsampling);
   p.ui->chromaSiting->setText(                     track->m_chromaSiting);
-  p.ui->colourRange->setText(                      track->m_colourRange);
+  p.ui->colorRange->setText(                       track->m_colourRange);
   p.ui->transferCharacteristics->setText(          track->m_transferCharacteristics);
-  p.ui->colourPrimaries->setText(                  track->m_colourPrimaries);
+  p.ui->colorPrimaries->setText(                   track->m_colourPrimaries);
   p.ui->maximumContentLight->setText(              track->m_maximumContentLight);
   p.ui->maximumFrameLight->setText(                track->m_maximumFrameLight);
 

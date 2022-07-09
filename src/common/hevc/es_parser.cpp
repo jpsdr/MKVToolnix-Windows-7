@@ -503,7 +503,7 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
         r.get_bits(1);    // pic_output_flag
 
       if (sps.separate_colour_plane_flag == 1)
-        r.get_bits(1);    // colour_plane_id
+        r.get_bits(1);    // color_plane_id
 
       if ( (si.nalu_type != NALU_TYPE_IDR_W_RADL) && (si.nalu_type != NALU_TYPE_IDR_N_LP) ) {
         si.pic_order_cnt_lsb = r.get_bits(sps.log2_max_pic_order_cnt_lsb); // slice_pic_order_cnt_lsb

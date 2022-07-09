@@ -308,12 +308,12 @@ set_usage() {
                   "                           Sets the stereo mode parameter. It can\n"
                   "                           either be a number 0 - 14 or a keyword\n"
                   "                           (see documentation for the full list).\n");
-  usage_text += Y("  --colour-matrix-coefficients <TID:n>\n"
+  usage_text += Y("  --color-matrix-coefficients <TID:n>\n"
                   "                           Sets the matrix coefficients of the video used\n"
                   "                           to derive luma and chroma values from red, green\n"
                   "                           and blue color primaries.\n");
-  usage_text += Y("  --colour-bits-per-channel <TID:n>\n"
-                  "                           Sets the number of coded bits for a colour \n"
+  usage_text += Y("  --color-bits-per-channel <TID:n>\n"
+                  "                           Sets the number of coded bits for a color \n"
                   "                           channel. A value of 0 indicates that the number is\n"
                   "                           unspecified.\n");
   usage_text += Y("  --chroma-subsample <TID:hori,vert>\n"
@@ -327,11 +327,11 @@ set_usage() {
                   "                           --chroma-subsample.\n");
   usage_text += Y("  --chroma-siting <TID:hori,vert>\n "
                   "                           How chroma is sited horizontally/vertically.\n");
-  usage_text += Y("  --colour-range <TID:n>   Clipping of the color ranges.\n");
-  usage_text += Y("  --colour-transfer-characteristics <TID:n>\n"
+  usage_text += Y("  --color-range <TID:n>   Clipping of the color ranges.\n");
+  usage_text += Y("  --color-transfer-characteristics <TID:n>\n"
                   "                           The transfer characteristics of the video.\n");
-  usage_text += Y("  --colour-primaries <TID:n>\n"
-                  "                           The colour primaries of the video.\n");
+  usage_text += Y("  --color-primaries <TID:n>\n"
+                  "                           The color primaries of the video.\n");
   usage_text += Y("  --max-content-light <TID:n>\n"
                   "                           Maximum brightness of a single pixel in candelas\n"
                   "                           per square meter (cd/m²).\n");
@@ -341,8 +341,8 @@ set_usage() {
   usage_text += Y("  --chromaticity-coordinates <TID:red-x,red-y,green-x,green-y,blue-x,blue-y>\n"
                   "                           Red/Green/Blue chromaticity coordinates as defined\n"
                   "                           by CIE 1931.\n");
-  usage_text += Y("  --white-colour-coordinates <TID:x,y>\n"
-                  "                           White colour chromaticity coordinates as defined\n"
+  usage_text += Y("  --white-color-coordinates <TID:x,y>\n"
+                  "                           White color chromaticity coordinates as defined\n"
                   "                           by CIE 1931.\n");
   usage_text += Y("  --max-luminance <TID:float>\n"
                   "                           Maximum luminance in candelas per square meter\n"
@@ -790,7 +790,7 @@ parse_arg_cropping(std::string const &s,
   ti.m_pixel_crop_list[id] = crop;
 }
 
-/** \brief Parse the \c --colour-matrix-coefficients argument
+/** \brief Parse the \c --color-matrix-coefficients argument
 
    The argument must have the form \c TID:n e.g. \c 0:2
    The number n must be one of the following integer numbers
@@ -810,10 +810,10 @@ static void
 parse_arg_colour_matrix_coefficients(std::string const &s,
                                      track_info_c &ti) {
   if (!mtx::string::parse_property_to_value<int>(s, ti.m_colour_matrix_coeff_list))
-    mxerror(fmt::format("Colour matrix coefficients parameter: not given in the form <TID>:n (argument was '{0}').", s));
+    mxerror(fmt::format("Color matrix coefficients parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
-/** \brief Parse the \c --colour-bits-per-channel argument
+/** \brief Parse the \c --color-bits-per-channel argument
    The argument must have the form \c TID:n e.g. \c 0:8
 */
 static void
@@ -854,34 +854,34 @@ parse_arg_chroma_siting(std::string const &s,
     mxerror(fmt::format("Chroma siting parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
-/** \brief Parse the \c --colour-range argument
+/** \brief Parse the \c --color-range argument
    The argument must have the form \c TID:n e.g. \c 0:1
 */
 static void
 parse_arg_colour_range(std::string const &s,
                        track_info_c &ti) {
   if (!mtx::string::parse_property_to_value<int>(s, ti.m_colour_range_list))
-    mxerror(fmt::format("Colour range parameters: not given in the form <TID>:n (argument was '{0}').", s));
+    mxerror(fmt::format("Color range parameters: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
-/** \brief Parse the \c --colour-transfer-characteristics argument
+/** \brief Parse the \c --color-transfer-characteristics argument
    The argument must have the form \c TID:n e.g. \c 0:1
 */
 static void
 parse_arg_colour_transfer(std::string const &s,
                           track_info_c &ti) {
   if (!mtx::string::parse_property_to_value<int>(s, ti.m_colour_transfer_list))
-    mxerror(fmt::format("Colour transfer characteristics parameter : not given in the form <TID>:n (argument was '{0}').", s));
+    mxerror(fmt::format("Color transfer characteristics parameter : not given in the form <TID>:n (argument was '{0}').", s));
 }
 
-/** \brief Parse the \c --colour-primaries argument
+/** \brief Parse the \c --color-primaries argument
    The argument must have the form \c TID:n e.g. \c 0:1
 */
 static void
 parse_arg_colour_primaries(std::string const &s,
                            track_info_c &ti) {
   if (!mtx::string::parse_property_to_value<int>(s, ti.m_colour_primaries_list))
-    mxerror(fmt::format("Colour primaries parameter: not given in the form <TID>:n (argument was '{0}').", s));
+    mxerror(fmt::format("Color primaries parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
 /** \brief Parse the \c --max-content-light argument
@@ -915,14 +915,14 @@ parse_arg_chroma_coordinates(std::string const &s,
     mxerror(fmt::format("chromaticity coordinates parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
-/** \brief Parse the \c --white-colour-coordinates argument
+/** \brief Parse the \c --white-color-coordinates argument
    The argument must have the form \c TID:TID:x,y
 */
 static void
 parse_arg_white_coordinates(std::string const &s,
                             track_info_c &ti) {
   if (!mtx::string::parse_property_to_struct<white_colour_coordinates_t, double>(s, ti.m_white_coordinates_list))
-    mxerror(fmt::format("white colour coordinates parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
+    mxerror(fmt::format("white color coordinates parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
 /** \brief Parse the \c --max-luminance argument
@@ -2598,14 +2598,14 @@ parse_args(std::vector<std::string> args) {
       parse_arg_cropping(*next_arg, *ti);
       sit++;
 
-    } else if (mtx::included_in(this_arg, "--colour-matrix", "--colour-matrix-coefficients")) {
+    } else if (mtx::included_in(this_arg, "--color-matrix", "--color-matrix-coefficients", "--colour-matrix", "--colour-matrix-coefficients")) {
       if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
       parse_arg_colour_matrix_coefficients(*next_arg, *ti);
       sit++;
 
-    } else if (this_arg == "--colour-bits-per-channel") {
+    } else if (mtx::included_in(this_arg, "--color-bits-per-channel", "--colour-bits-per-channel")) {
       if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
@@ -2633,21 +2633,21 @@ parse_args(std::vector<std::string> args) {
       parse_arg_chroma_siting(*next_arg, *ti);
       sit++;
 
-    } else if (this_arg == "--colour-range") {
+    } else if (mtx::included_in(this_arg, "--color-range", "--colour-range")) {
       if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
       parse_arg_colour_range(*next_arg, *ti);
       sit++;
 
-    } else if (this_arg == "--colour-transfer-characteristics") {
+    } else if (mtx::included_in(this_arg, "--color-transfer-characteristics", "--colour-transfer-characteristics")) {
       if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
       parse_arg_colour_transfer(*next_arg, *ti);
       sit++;
 
-    } else if (this_arg == "--colour-primaries") {
+    } else if (mtx::included_in(this_arg, "--color-primaries", "--colour-primaries")) {
       if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
@@ -2675,7 +2675,7 @@ parse_args(std::vector<std::string> args) {
       parse_arg_chroma_coordinates(*next_arg, *ti);
       sit++;
 
-    } else if (this_arg == "--white-colour-coordinates") {
+    } else if (mtx::included_in(this_arg, "--white-color-coordinates", "--white-colour-coordinates")) {
       if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 

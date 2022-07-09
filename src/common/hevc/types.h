@@ -237,7 +237,7 @@ struct short_term_ref_pic_set_t {
 
 struct vui_info_t {
   unsigned int video_full_range_flag{};
-  unsigned int colour_primaries{};
+  unsigned int color_primaries{};
   unsigned int transfer_characteristics{};
   unsigned int matrix_coefficients{};
 

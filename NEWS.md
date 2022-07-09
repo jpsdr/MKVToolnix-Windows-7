@@ -1,5 +1,17 @@
 # Version ?
 
+## Important notes
+
+* all: the spelling of "colour" was changed to "color" throughout all programs
+  to match the use of American English spelling in MKVToolNix. This not only
+  affects documentation and user interface controls, but also program options
+  for mkvmerge & mkvpropedit. Both programs will continue to accept the
+  British English spelling of their respective options indefinitely. One
+  breaking change is that the property names in mkvmerge's JSON identification
+  mode have also been changed to American English spelling. As those
+  properties have only been introduced in release v68, this seems like a small
+  enough window to make such a change.
+
 ## New features and enhancements
 
 * MKVToolNix GUI: the number of recently used entries (e.g. destination
@@ -12,7 +24,7 @@
   "date added" timestamp instead of using the order the operating system
   returns them in. Part of the implementation of #3365.
 * MKVToolNix GUI: multiplexer: when adding files the track properties
-  regarding colour information & colour mastering meta information will be
+  regarding color information & color mastering meta information will be
   parsed & set in the corresponding GUI controls. Implements #3359.
 
 ## Bug fixes
@@ -37,12 +49,12 @@
   timestamp). That way one bogus timestamp cannot cause the rest of the frames
   to not be interleaved properly with the other audio & video
   packets. Implemented for #3268.
-* mkvmerge: added colour information, colour mastering meta information &
+* mkvmerge: added color information, color mastering meta information &
   video projection information properties to the JSON identification
   format. The properties are reported for container types for which mkvmerge
   supports reading them (Matroska & MP4). The JSON identification format
   version number has been bumped to v15.
-* MKVToolNix GUI: multiplexer: added controls for all the video colour
+* MKVToolNix GUI: multiplexer: added controls for all the video color
   information & the video projection information.
 
 ## Bug fixes
@@ -2867,9 +2879,9 @@
   written anymore. Fixes #2079.
 * mkvmerge: Matroska reader: the "key" and "discardable" flags of SimpleBlock
   elements will be kept as they are. Partial fix for #2047.
-* mkvmerge: Matroska reader: if present in the file, the "white colour
-  coordinate x" track header attribute was written to both "white colour
-  coordinate x" and "white colour coordinate y" in the output file.
+* mkvmerge: Matroska reader: if present in the file, the "white color
+  coordinate x" track header attribute was written to both "white color
+  coordinate x" and "white color coordinate y" in the output file.
 * mkvmerge: Opus output: mkvmerge will now put all frames with discard padding
   into their own block group. Fixes #2100.
 * MKVToolNix GUI: header editor: removed the check for external modification
@@ -2911,7 +2923,7 @@
   contains a video track". If enabled, only source files containing video
   tracks will be used for setting the destination file name. Other files that
   are added are ignore. Implements the rest of #2058.
-* MKVToolNix GUI: header editor: added support for editing the video colour
+* MKVToolNix GUI: header editor: added support for editing the video color
   attributes. Implements the second half of #2038.
 * MKVToolNix GUI: header editor: added support for the "video projection"
   track header attributes. Part of the implementation of #2064.
@@ -2923,7 +2935,7 @@
   attributes. Part of the implementation of #2064.
 * mkvinfo: added support for the "video projection" track header
   attributes. Part of the implementation of #2064.
-* mkvpropedit: added support for editing the video colour
+* mkvpropedit: added support for editing the video color
   attributes. Implements one half of #2038.
 * mkvpropedit: added support for the "video projection" track header
   attributes. Part of the implementation of #2064.
@@ -2963,8 +2975,8 @@
 
 ## Other changes
 
-* mkvmerge: the option `--colour-matrix` has been renamed to
-  `--colour-matrix-coefficients` in order to match the specification more
+* mkvmerge: the option `--color-matrix` has been renamed to
+  `--color-matrix-coefficients` in order to match the specification more
   closely. The old option name will continue to be recognized as well.
 
 
@@ -3168,7 +3180,7 @@
 * mkvmerge: MP4 reader: fixed finding and parsing the `colr` atom if there are
   more than one video extension atoms and the `colr` atom is not the first
   one.
-* mkvmerge: MP4 reader: the `nclx` colour type of the `colr` atom is now
+* mkvmerge: MP4 reader: the `nclx` color type of the `colr` atom is now
   recognized, too (as defined by ISO/IEC 14496-12, "ISO base media format").
 * configure: fixed configure aborting if a `moc`, `uic`, `rcc` or `qmake`
   binary is found, but the binary's version is too old. Fixes #1979.
@@ -3752,10 +3764,10 @@
   the same state it is in right after creating new mux settings). Implements #1738.
 * mkvmerge, MKVToolNix GUI: added an option for specifying how much of a MPEG PS or TS
   file is probed for tracks (--probe-range-percentage). Implements #1734.
-* mkvmerge, mkvinfo: new feature: added flags to support the Colour elements in the
-  video tracks of Matroska containers. Users can use those flags to specify the colour
+* mkvmerge, mkvinfo: new feature: added flags to support the Color elements in the
+  video tracks of Matroska containers. Users can use those flags to specify the color
   space, transfer function, chromaticity coordinates etc. These properties are
-  useful for correct colour reproduction of high dynamic range / wide colour gamut
+  useful for correct color reproduction of high dynamic range / wide color gamut
   videos.
 * MKVToolNix GUI: merge tool enhancement: the default track languages to set can now
   also be set whenever the language in the source file is 'undefined' ('und'). This is

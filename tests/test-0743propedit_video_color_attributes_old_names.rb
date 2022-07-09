@@ -1,7 +1,7 @@
 #!/usr/bin/ruby -w
 
-# T_609propedit_video_colour_attributes
-describe "mkvpropedit / video colour attributes"
+# T_743propedit_video_colour_attributes_old_names
+describe "mkvpropedit / video colour attributes (old spelling)"
 
 def args *arrays
   arrays.flatten.map.with_index { |elt, idx| "--set #{elt}=#{idx + 1}" }.join(" ")

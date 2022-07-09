@@ -109,20 +109,20 @@ kax_element_names_c::init() {
   add(KaxAudioPosition::ClassInfos,                Y("Channel positions"));
   add(KaxAudioBitDepth::ClassInfos,                Y("Bit depth"));
 
-  add(KaxVideoColourMasterMeta::ClassInfos,        Y("Video colour mastering metadata"));
-  add(KaxVideoRChromaX::ClassInfos,                Y("Red colour coordinate x"));
-  add(KaxVideoRChromaY::ClassInfos,                Y("Red colour coordinate y"));
-  add(KaxVideoGChromaX::ClassInfos,                Y("Green colour coordinate x"));
-  add(KaxVideoGChromaY::ClassInfos,                Y("Green colour coordinate y"));
-  add(KaxVideoBChromaX::ClassInfos,                Y("Blue colour coordinate x"));
-  add(KaxVideoBChromaY::ClassInfos,                Y("Blue colour coordinate y"));
-  add(KaxVideoWhitePointChromaX::ClassInfos,       Y("White colour coordinate x"));
-  add(KaxVideoWhitePointChromaY::ClassInfos,       Y("White colour coordinate y"));
+  add(KaxVideoColourMasterMeta::ClassInfos,        Y("Video color mastering metadata"));
+  add(KaxVideoRChromaX::ClassInfos,                Y("Red color coordinate x"));
+  add(KaxVideoRChromaY::ClassInfos,                Y("Red color coordinate y"));
+  add(KaxVideoGChromaX::ClassInfos,                Y("Green color coordinate x"));
+  add(KaxVideoGChromaY::ClassInfos,                Y("Green color coordinate y"));
+  add(KaxVideoBChromaX::ClassInfos,                Y("Blue color coordinate x"));
+  add(KaxVideoBChromaY::ClassInfos,                Y("Blue color coordinate y"));
+  add(KaxVideoWhitePointChromaX::ClassInfos,       Y("White color coordinate x"));
+  add(KaxVideoWhitePointChromaY::ClassInfos,       Y("White color coordinate y"));
   add(KaxVideoLuminanceMax::ClassInfos,            Y("Maximum luminance"));
   add(KaxVideoLuminanceMin::ClassInfos,            Y("Minimum luminance"));
 
-  add(KaxVideoColour::ClassInfos,                  Y("Video colour information"));
-  add(KaxVideoColourMatrix::ClassInfos,            Y("Colour matrix coefficients"));
+  add(KaxVideoColour::ClassInfos,                  Y("Video color information"));
+  add(KaxVideoColourMatrix::ClassInfos,            Y("Color matrix coefficients"));
   add(KaxVideoBitsPerChannel::ClassInfos,          Y("Bits per channel"));
   add(KaxVideoChromaSubsampHorz::ClassInfos,       Y("Horizontal chroma subsample"));
   add(KaxVideoChromaSubsampVert::ClassInfos,       Y("Vertical chroma subsample"));
@@ -130,9 +130,9 @@ kax_element_names_c::init() {
   add(KaxVideoCbSubsampVert::ClassInfos,           Y("Vertical Cb subsample"));
   add(KaxVideoChromaSitHorz::ClassInfos,           Y("Horizontal chroma siting"));
   add(KaxVideoChromaSitVert::ClassInfos,           Y("Vertical chroma siting"));
-  add(KaxVideoColourRange::ClassInfos,             Y("Colour range"));
-  add(KaxVideoColourTransferCharacter::ClassInfos, Y("Colour transfer"));
-  add(KaxVideoColourPrimaries::ClassInfos,         Y("Colour primaries"));
+  add(KaxVideoColourRange::ClassInfos,             Y("Color range"));
+  add(KaxVideoColourTransferCharacter::ClassInfos, Y("Color transfer"));
+  add(KaxVideoColourPrimaries::ClassInfos,         Y("Color primaries"));
   add(KaxVideoColourMaxCLL::ClassInfos,            Y("Maximum content light"));
   add(KaxVideoColourMaxFALL::ClassInfos,           Y("Maximum frame light"));
 
@@ -158,7 +158,7 @@ kax_element_names_c::init() {
   add(KaxVideoFieldOrder::ClassInfos,              Y("Field order"));
   add(KaxVideoStereoMode::ClassInfos,              Y("Stereo mode"));
   add(KaxVideoAspectRatio::ClassInfos,             Y("Aspect ratio type"));
-  add(KaxVideoColourSpace::ClassInfos,             Y("Colour space"));
+  add(KaxVideoColourSpace::ClassInfos,             Y("Color space"));
   add(KaxVideoFrameRate::ClassInfos,               Y("Frame rate"));
 
   add(KaxContentEncodings::ClassInfos,             Y("Content encodings"));

@@ -49,9 +49,11 @@ private:
 private:                        // static
   static std::map<uint32_t, std::vector<property_element_c> > s_properties;
   static std::map<uint32_t, std::vector<property_element_c> > s_composed_properties;
+  static std::unordered_map<std::string, std::string> s_aliases;
 
 public:                         // static
   static void init_tables();
   static std::vector<property_element_c> &get_table_for(const EbmlCallbacks &master_callbacks, const EbmlCallbacks *sub_master_callbacks = nullptr, bool full_table = false);
+  static std::string get_actual_name(std::string const &name);
 };
 using property_element_cptr = std::shared_ptr<property_element_c>;

@@ -365,14 +365,14 @@ parse_vui_parameters(std::size_t indent,
 
   v(indent, "video_signal_type_present_flag", video_signal_type_present_flag = r.get_bits(1));
   if (video_signal_type_present_flag) {
-    unsigned int colour_description_present_flag;
+    unsigned int color_description_present_flag;
 
-    v(indent, "video_format",                    r.get_bits(3));
-    v(indent, "video_full_range_flag",           r.get_bits(1));
-    v(indent, "colour_description_present_flag", colour_description_present_flag = r.get_bits(1));
+    v(indent, "video_format",                   r.get_bits(3));
+    v(indent, "video_full_range_flag",          r.get_bits(1));
+    v(indent, "color_description_present_flag", color_description_present_flag = r.get_bits(1));
 
-    if (colour_description_present_flag) {
-      v(indent, "colour_primaries",         r.get_bits(8));
+    if (color_description_present_flag) {
+      v(indent, "color_primaries",          r.get_bits(8));
       v(indent, "transfer_characteristics", r.get_bits(8));
       v(indent, "matrix_coeffs",            r.get_bits(8));
     }

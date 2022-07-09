@@ -370,7 +370,7 @@ file_base_name_for_picture_type(unsigned int type) {
        : type == FLAC__STREAM_METADATA_PICTURE_TYPE_DURING_RECORDING     ? "during recording"
        : type == FLAC__STREAM_METADATA_PICTURE_TYPE_DURING_PERFORMANCE   ? "during performance"
        : type == FLAC__STREAM_METADATA_PICTURE_TYPE_VIDEO_SCREEN_CAPTURE ? "movie - video screen capture"
-       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_FISH                 ? "a bright coloured fish"
+       : type == FLAC__STREAM_METADATA_PICTURE_TYPE_FISH                 ? "a bright colored fish"
        : type == FLAC__STREAM_METADATA_PICTURE_TYPE_ILLUSTRATION         ? "illustration"
        : type == FLAC__STREAM_METADATA_PICTURE_TYPE_BAND_LOGOTYPE        ? "band - artist logotype"
        : type == FLAC__STREAM_METADATA_PICTURE_TYPE_PUBLISHER_LOGOTYPE   ? "publisher - Studio logotype"

@@ -616,15 +616,15 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
     parentPagesByCallback[nullptr]   = page;
 
     if (track_video == trackType) {
-      auto colourPage = new TopLevelPage{*this, YT("Colour information")};
-      colourPage->setInternalIdentifier(Q("videoColour %1").arg(trackIdxMkvmerge - 1));
-      colourPage->setParentPage(*page);
-      colourPage->init();
+      auto colorPage = new TopLevelPage{*this, YT("Color information")};
+      colorPage->setInternalIdentifier(Q("videoColour %1").arg(trackIdxMkvmerge - 1));
+      colorPage->setParentPage(*page);
+      colorPage->init();
 
-      auto colourMasterMetaPage = new TopLevelPage{*this, YT("Colour mastering meta information")};
-      colourMasterMetaPage->setInternalIdentifier(Q("videoColourMasterMeta %1").arg(trackIdxMkvmerge - 1));
-      colourMasterMetaPage->setParentPage(*page);
-      colourMasterMetaPage->init();
+      auto colorMasterMetaPage = new TopLevelPage{*this, YT("Color mastering meta information")};
+      colorMasterMetaPage->setInternalIdentifier(Q("videoColourMasterMeta %1").arg(trackIdxMkvmerge - 1));
+      colorMasterMetaPage->setParentPage(*page);
+      colorMasterMetaPage->init();
 
       auto projectionPage = new TopLevelPage{*this, YT("Video projection information")};
       projectionPage->setInternalIdentifier(Q("videoProjection %1").arg(trackIdxMkvmerge - 1));
@@ -637,8 +637,8 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
       parentMastersByCallback[&KaxVideoProjection::ClassInfos]       = &GetChildEmptyIfNew<KaxVideoProjection>(parentMastersByCallback[&KaxTrackVideo::ClassInfos]);
 
       parentPagesByCallback[&KaxTrackVideo::ClassInfos]              = page;
-      parentPagesByCallback[&KaxVideoColour::ClassInfos]             = colourPage;
-      parentPagesByCallback[&KaxVideoColourMasterMeta::ClassInfos]   = colourMasterMetaPage;
+      parentPagesByCallback[&KaxVideoColour::ClassInfos]             = colorPage;
+      parentPagesByCallback[&KaxVideoColourMasterMeta::ClassInfos]   = colorMasterMetaPage;
       parentPagesByCallback[&KaxVideoProjection::ClassInfos]         = projectionPage;
 
     } else if (track_audio == trackType) {

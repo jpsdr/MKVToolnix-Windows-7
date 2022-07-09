@@ -1170,40 +1170,40 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
   track->v_pctop        = FindChildValue<KaxVideoPixelCropTop>(ktvideo);
   track->v_pcbottom     = FindChildValue<KaxVideoPixelCropBottom>(ktvideo);
 
-  auto colour_space = FindChild<KaxVideoColourSpace>(*ktvideo);
-  if (colour_space)
-    track->v_colour_space = memory_c::clone(colour_space->GetBuffer(), colour_space->GetSize());
+  auto color_space      = FindChild<KaxVideoColourSpace>(*ktvideo);
+  if (color_space)
+    track->v_colour_space = memory_c::clone(color_space->GetBuffer(), color_space->GetSize());
 
-  auto colour           = FindChild<KaxVideoColour>(*ktvideo);
+  auto color = FindChild<KaxVideoColour>(*ktvideo);
 
-  if (colour) {
-    track->v_colour_matrix         = FindOptionalChildValue<KaxVideoColourMatrix>(colour);
-    track->v_bits_per_channel      = FindOptionalChildValue<KaxVideoBitsPerChannel>(colour);
-    track->v_chroma_subsample.hori = FindChildValue<KaxVideoChromaSubsampHorz>(colour, -1.0);
-    track->v_chroma_subsample.vert = FindChildValue<KaxVideoChromaSubsampVert>(colour, -1.0);
-    track->v_cb_subsample.hori     = FindChildValue<KaxVideoCbSubsampHorz>(colour,     -1.0);
-    track->v_cb_subsample.vert     = FindChildValue<KaxVideoCbSubsampVert>(colour,     -1.0);
-    track->v_chroma_siting.hori    = FindChildValue<KaxVideoChromaSitHorz>(colour,     -1.0);
-    track->v_chroma_siting.vert    = FindChildValue<KaxVideoChromaSitVert>(colour,     -1.0);
-    track->v_colour_range          = FindOptionalChildValue<KaxVideoColourRange>(colour);
-    track->v_transfer_character    = FindOptionalChildValue<KaxVideoColourTransferCharacter>(colour);
-    track->v_colour_primaries      = FindOptionalChildValue<KaxVideoColourPrimaries>(colour);
-    track->v_max_cll               = FindOptionalChildValue<KaxVideoColourMaxCLL>(colour);
-    track->v_max_fall              = FindOptionalChildValue<KaxVideoColourMaxFALL>(colour);
+  if (color) {
+    track->v_colour_matrix         = FindOptionalChildValue<KaxVideoColourMatrix>(color);
+    track->v_bits_per_channel      = FindOptionalChildValue<KaxVideoBitsPerChannel>(color);
+    track->v_chroma_subsample.hori = FindChildValue<KaxVideoChromaSubsampHorz>(color, -1.0);
+    track->v_chroma_subsample.vert = FindChildValue<KaxVideoChromaSubsampVert>(color, -1.0);
+    track->v_cb_subsample.hori     = FindChildValue<KaxVideoCbSubsampHorz>(color,     -1.0);
+    track->v_cb_subsample.vert     = FindChildValue<KaxVideoCbSubsampVert>(color,     -1.0);
+    track->v_chroma_siting.hori    = FindChildValue<KaxVideoChromaSitHorz>(color,     -1.0);
+    track->v_chroma_siting.vert    = FindChildValue<KaxVideoChromaSitVert>(color,     -1.0);
+    track->v_colour_range          = FindOptionalChildValue<KaxVideoColourRange>(color);
+    track->v_transfer_character    = FindOptionalChildValue<KaxVideoColourTransferCharacter>(color);
+    track->v_colour_primaries      = FindOptionalChildValue<KaxVideoColourPrimaries>(color);
+    track->v_max_cll               = FindOptionalChildValue<KaxVideoColourMaxCLL>(color);
+    track->v_max_fall              = FindOptionalChildValue<KaxVideoColourMaxFALL>(color);
 
-    auto colour_meta               = FindChild<KaxVideoColourMasterMeta>(*colour);
+    auto color_meta                = FindChild<KaxVideoColourMasterMeta>(*color);
 
-    if (colour_meta) {
-      track->v_chroma_coordinates.red_x   = FindChildValue<KaxVideoRChromaX>(colour_meta, -1.0);
-      track->v_chroma_coordinates.red_y   = FindChildValue<KaxVideoRChromaY>(colour_meta, -1.0);
-      track->v_chroma_coordinates.green_x = FindChildValue<KaxVideoGChromaX>(colour_meta, -1.0);
-      track->v_chroma_coordinates.green_y = FindChildValue<KaxVideoGChromaY>(colour_meta, -1.0);
-      track->v_chroma_coordinates.blue_x  = FindChildValue<KaxVideoBChromaX>(colour_meta, -1.0);
-      track->v_chroma_coordinates.blue_y  = FindChildValue<KaxVideoBChromaY>(colour_meta, -1.0);
-      track->v_white_colour_coordinates.x = FindChildValue<KaxVideoWhitePointChromaX>(colour_meta, -1.0);
-      track->v_white_colour_coordinates.y = FindChildValue<KaxVideoWhitePointChromaY>(colour_meta, -1.0);
-      track->v_max_luminance              = FindOptionalChildValue<KaxVideoLuminanceMax>(colour_meta);
-      track->v_min_luminance              = FindOptionalChildValue<KaxVideoLuminanceMin>(colour_meta);
+    if (color_meta) {
+      track->v_chroma_coordinates.red_x   = FindChildValue<KaxVideoRChromaX>(color_meta, -1.0);
+      track->v_chroma_coordinates.red_y   = FindChildValue<KaxVideoRChromaY>(color_meta, -1.0);
+      track->v_chroma_coordinates.green_x = FindChildValue<KaxVideoGChromaX>(color_meta, -1.0);
+      track->v_chroma_coordinates.green_y = FindChildValue<KaxVideoGChromaY>(color_meta, -1.0);
+      track->v_chroma_coordinates.blue_x  = FindChildValue<KaxVideoBChromaX>(color_meta, -1.0);
+      track->v_chroma_coordinates.blue_y  = FindChildValue<KaxVideoBChromaY>(color_meta, -1.0);
+      track->v_white_colour_coordinates.x = FindChildValue<KaxVideoWhitePointChromaX>(color_meta, -1.0);
+      track->v_white_colour_coordinates.y = FindChildValue<KaxVideoWhitePointChromaY>(color_meta, -1.0);
+      track->v_max_luminance              = FindOptionalChildValue<KaxVideoLuminanceMax>(color_meta);
+      track->v_min_luminance              = FindOptionalChildValue<KaxVideoLuminanceMin>(color_meta);
     }
   }
 
@@ -2793,11 +2793,11 @@ kax_reader_c::identify() {
           info.set(key, fmt::format("{0},{1}", mtx::string::normalize_fmt_double_output(v1), mtx::string::normalize_fmt_double_output(v2)));
       };
 
-      info.add(mtx::id::colour_bits_per_channel,         track->v_bits_per_channel);
-      info.add(mtx::id::colour_matrix_coefficients,      track->v_colour_matrix);
-      info.add(mtx::id::colour_primaries,                track->v_colour_primaries);
-      info.add(mtx::id::colour_range,                    track->v_colour_range);
-      info.add(mtx::id::colour_transfer_characteristics, track->v_transfer_character);
+      info.add(mtx::id::color_bits_per_channel,         track->v_bits_per_channel);
+      info.add(mtx::id::color_matrix_coefficients,      track->v_colour_matrix);
+      info.add(mtx::id::color_primaries,                track->v_colour_primaries);
+      info.add(mtx::id::color_range,                    track->v_colour_range);
+      info.add(mtx::id::color_transfer_characteristics, track->v_transfer_character);
       info.add(mtx::id::max_content_light,               track->v_max_cll);
       info.add(mtx::id::max_frame_light,                 track->v_max_fall);
       info.add(mtx::id::max_luminance,                   track->v_max_luminance);

@@ -82,8 +82,10 @@ change_c::dump_info()
 
 bool
 change_c::look_up_property(std::vector<property_element_c> &table) {
+  auto actual_name = property_element_c::get_actual_name(m_name);
+
   for (auto &property : table)
-    if (property.m_name == m_name) {
+    if (property.m_name == actual_name) {
       m_property = property;
       return true;
     }

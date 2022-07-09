@@ -145,7 +145,7 @@ create_dovi_configuration_record(dovi_rpu_data_header_t const &hdr,
     auto trc = vui.transfer_characteristics;
 
     // WCG
-    if (vui.colour_primaries == 9 && vui.matrix_coefficients == 9) {
+    if (vui.color_primaries == 9 && vui.matrix_coefficients == 9) {
       if (trc == 16)                       // ST2084, HDR10 base layer
         conf.dv_bl_signal_compatibility_id = 1;
       else if ((trc == 14) || (trc == 18)) // ARIB STD-B67, HLG base layer

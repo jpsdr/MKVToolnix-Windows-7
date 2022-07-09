@@ -33,7 +33,7 @@ constexpr auto ID_RESULT_GLOBAL_TAGS_ID  = -1;
 //   1. `id`
 //   2. `properties` → `identification_format_version` → `minimum` and `maximum`
 // • adjust the link in `doc/man/mkvmerge.xml`
-constexpr auto ID_JSON_FORMAT_VERSION = 15;
+constexpr auto ID_JSON_FORMAT_VERSION = 16;
 
 struct id_result_t {
   int64_t id;

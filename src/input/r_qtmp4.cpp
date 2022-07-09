@@ -2032,11 +2032,11 @@ qtmp4_reader_c::identify() {
       info.add_joined(mtx::id::pixel_dimensions, "x"s, dmx.v_width, dmx.v_height);
 
       if (dmx.v_colour_primaries != 2)
-        info.set(mtx::id::colour_primaries, dmx.v_colour_primaries);
+        info.set(mtx::id::color_primaries, dmx.v_colour_primaries);
       if (dmx.v_colour_transfer_characteristics != 2)
-        info.set(mtx::id::colour_transfer_characteristics, dmx.v_colour_transfer_characteristics);
+        info.set(mtx::id::color_transfer_characteristics, dmx.v_colour_transfer_characteristics);
       if (dmx.v_colour_matrix_coefficients != 2)
-        info.set(mtx::id::colour_matrix_coefficients, dmx.v_colour_matrix_coefficients);
+        info.set(mtx::id::color_matrix_coefficients, dmx.v_colour_matrix_coefficients);
 
     } else if (dmx.is_audio()) {
       info.add(mtx::id::audio_channels,           dmx.a_channels);
@@ -2906,17 +2906,17 @@ qtmp4_demuxer_c::handle_colr_atom(memory_cptr const &atom_content,
     return;
 
   auto &colr_atom = *reinterpret_cast<colr_atom_t *>(atom_content->get_buffer());
-  fourcc_c colour_type{reinterpret_cast<unsigned char const *>(&colr_atom) + offsetof(colr_atom_t, colour_type)};
+  fourcc_c color_type{reinterpret_cast<unsigned char const *>(&colr_atom) + offsetof(colr_atom_t, color_type)};
 
-  if (!mtx::included_in(colour_type, "nclc", "nclx"))
+  if (!mtx::included_in(color_type, "nclc", "nclx"))
     return;
 
-  v_colour_primaries                = get_uint16_be(&colr_atom.colour_primaries);
+  v_colour_primaries                = get_uint16_be(&colr_atom.color_primaries);
   v_colour_transfer_characteristics = get_uint16_be(&colr_atom.transfer_characteristics);
   v_colour_matrix_coefficients      = get_uint16_be(&colr_atom.matrix_coefficients);
 
   mxdebug_if(m_debug_headers,
-             fmt::format("{0}colour primaries: {1}, transfer characteristics: {2}, matrix coefficients: {3}\n",
+             fmt::format("{0}color primaries: {1}, transfer characteristics: {2}, matrix coefficients: {3}\n",
                          space(level * 2 + 1), v_colour_primaries, v_colour_transfer_characteristics, v_colour_matrix_coefficients));
 }
 
