@@ -512,7 +512,7 @@ es_parser_c::parse_slice(memory_cptr const &nalu,
       if (pps.output_flag_present_flag)
         r.get_bits(1);    // pic_output_flag
 
-      if (sps.separate_colour_plane_flag == 1)
+      if (sps.separate_color_plane_flag == 1)
         r.get_bits(1);    // color_plane_id
 
       if ( (si.nalu_type != NALU_TYPE_IDR_W_RADL) && (si.nalu_type != NALU_TYPE_IDR_N_LP) ) {

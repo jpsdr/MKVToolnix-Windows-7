@@ -237,7 +237,7 @@ parse_sps_impl(memory_cptr const &buffer,
   sps.id             = w.copy_unsigned_golomb(r);      // sps id
   if (s_high_level_profile_ids[sps.profile_idc]) {   // high profile
     if ((sps.chroma_format_idc = w.copy_unsigned_golomb(r)) == 3) // chroma_format_idc
-      w.copy_bits(1, r);                  // separate_colour_plane_flag
+      w.copy_bits(1, r);                  // separate_color_plane_flag
     w.copy_unsigned_golomb(r);                         // bit_depth_luma_minus8
     w.copy_unsigned_golomb(r);                         // bit_depth_chroma_minus8
     w.copy_bits(1, r);                    // qpprime_y_zero_transform_bypass_flag

@@ -63,13 +63,13 @@ struct kax_track_t {
   std::optional<uint64_t> v_dunit;
   unsigned int v_display_unit;
   uint64_t v_pcleft, v_pctop, v_pcright, v_pcbottom;
-  std::optional<int64_t> v_colour_matrix, v_bits_per_channel;
+  std::optional<int64_t> v_color_matrix, v_bits_per_channel;
   chroma_subsample_t v_chroma_subsample;
   cb_subsample_t v_cb_subsample;
   chroma_siting_t v_chroma_siting;
-  std::optional<int64_t> v_colour_range, v_transfer_character, v_colour_primaries, v_max_cll, v_max_fall;
+  std::optional<int64_t> v_color_range, v_transfer_character, v_color_primaries, v_max_cll, v_max_fall;
   chroma_coordinates_t v_chroma_coordinates;
-  white_colour_coordinates_t v_white_colour_coordinates;
+  white_color_coordinates_t v_white_color_coordinates;
   std::optional<double> v_max_luminance, v_min_luminance;
   std::optional<int64_t> v_field_order;
   stereo_mode_c::mode v_stereo_mode;
@@ -113,7 +113,7 @@ struct kax_track_t {
 
   mtx::dts::header_t dts_header;
 
-  memory_cptr v_colour_space;
+  memory_cptr v_color_space;
 
   kax_track_t()
     : tnum(0)
@@ -136,7 +136,7 @@ struct kax_track_t {
     , v_pcright(0)
     , v_pcbottom(0)
     , v_chroma_coordinates{}
-    , v_white_colour_coordinates{}
+    , v_white_color_coordinates{}
     , v_stereo_mode(stereo_mode_c::unspecified)
     , a_channels(0)
     , a_bps(0)
@@ -155,14 +155,14 @@ struct kax_track_t {
     , ptzr_ptr(nullptr)
     , headers_set(false)
     , ignore_duration_hack(false)
-    , v_colour_space(0)
+    , v_color_space(0)
   {
     memset(v_fourcc, 0, 5);
   }
 
   void handle_packetizer_display_dimensions();
   void handle_packetizer_pixel_cropping();
-  void handle_packetizer_colour();
+  void handle_packetizer_color();
   void handle_packetizer_field_order();
   void handle_packetizer_stereo_mode();
   void handle_packetizer_pixel_dimensions();

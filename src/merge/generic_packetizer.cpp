@@ -213,9 +213,9 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
     set_video_pixel_cropping(m_ti.m_pixel_crop_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified color matrix for this track.
-  i = lookup_track_id(m_ti.m_colour_matrix_coeff_list, m_ti.m_id);
+  i = lookup_track_id(m_ti.m_color_matrix_coeff_list, m_ti.m_id);
   if (-2 != i)
-    set_video_colour_matrix(m_ti.m_colour_matrix_coeff_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_color_matrix(m_ti.m_color_matrix_coeff_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified bits per channel parameter for this track.
   i = lookup_track_id(m_ti.m_bits_per_channel_list, m_ti.m_id);
@@ -238,19 +238,19 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
     set_video_chroma_siting(m_ti.m_chroma_siting_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified color range parameter for this track.
-  i = lookup_track_id(m_ti.m_colour_range_list, m_ti.m_id);
+  i = lookup_track_id(m_ti.m_color_range_list, m_ti.m_id);
   if (-2 != i)
-    set_video_colour_range(m_ti.m_colour_range_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_color_range(m_ti.m_color_range_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified color transfer characteristics parameter for this track.
-  i = lookup_track_id(m_ti.m_colour_transfer_list, m_ti.m_id);
+  i = lookup_track_id(m_ti.m_color_transfer_list, m_ti.m_id);
   if (-2 != i)
-    set_video_colour_transfer_character(m_ti.m_colour_transfer_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_color_transfer_character(m_ti.m_color_transfer_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified color primaries parameter for this track.
-  i = lookup_track_id(m_ti.m_colour_primaries_list, m_ti.m_id);
+  i = lookup_track_id(m_ti.m_color_primaries_list, m_ti.m_id);
   if (-2 != i)
-    set_video_colour_primaries(m_ti.m_colour_primaries_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_color_primaries(m_ti.m_color_primaries_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified max content light parameter for this track.
   i = lookup_track_id(m_ti.m_max_cll_list, m_ti.m_id);
@@ -270,7 +270,7 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   // Let's see if the user has specified white color coordinates parameter for this track.
   i = lookup_track_id(m_ti.m_white_coordinates_list, m_ti.m_id);
   if (-2 != i)
-    set_video_white_colour_coordinates(m_ti.m_white_coordinates_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_white_color_coordinates(m_ti.m_white_coordinates_list[i], OPTION_SOURCE_COMMAND_LINE);
 
   // Let's see if the user has specified max luminance parameter for this track.
   i = lookup_track_id(m_ti.m_max_luminance_list, m_ti.m_id);
@@ -707,15 +707,15 @@ generic_packetizer_c::set_video_pixel_cropping(int left,
 }
 
 void
-generic_packetizer_c::set_video_colour_matrix(int matrix_index,
+generic_packetizer_c::set_video_color_matrix(int matrix_index,
                                               option_source_e source) {
-  m_ti.m_colour_matrix_coeff.set(matrix_index, source);
+  m_ti.m_color_matrix_coeff.set(matrix_index, source);
   if (   m_track_entry
       && (matrix_index >= 0)
       && (matrix_index <= 10)) {
     auto &video = GetChild<KaxTrackVideo>(m_track_entry);
     auto &color = GetChild<KaxVideoColour>(video);
-    GetChild<KaxVideoColourMatrix>(color).SetValue(m_ti.m_colour_matrix_coeff.get());
+    GetChild<KaxVideoColourMatrix>(color).SetValue(m_ti.m_color_matrix_coeff.get());
   }
 }
 
@@ -779,9 +779,9 @@ generic_packetizer_c::set_video_chroma_siting(const chroma_siting_t &siting,
 }
 
 void
-generic_packetizer_c::set_video_colour_range(int range,
+generic_packetizer_c::set_video_color_range(int range,
                                              option_source_e source) {
-  m_ti.m_colour_range.set(range, source);
+  m_ti.m_color_range.set(range, source);
   if (m_track_entry && (range >= 0) && (range <= 3)) {
     auto &video = GetChild<KaxTrackVideo>(m_track_entry);
     auto &color = GetChild<KaxVideoColour>(video);
@@ -790,9 +790,9 @@ generic_packetizer_c::set_video_colour_range(int range,
 }
 
 void
-generic_packetizer_c::set_video_colour_transfer_character(int transfer_index,
+generic_packetizer_c::set_video_color_transfer_character(int transfer_index,
                                                           option_source_e source) {
-  m_ti.m_colour_transfer.set(transfer_index, source);
+  m_ti.m_color_transfer.set(transfer_index, source);
   if (m_track_entry && (transfer_index >= 0) && (transfer_index <= 18)) {
     auto &video = GetChild<KaxTrackVideo>(m_track_entry);
     auto &color = GetChild<KaxVideoColour>(video);
@@ -801,9 +801,9 @@ generic_packetizer_c::set_video_colour_transfer_character(int transfer_index,
 }
 
 void
-generic_packetizer_c::set_video_colour_primaries(int primary_index,
+generic_packetizer_c::set_video_color_primaries(int primary_index,
                                                  option_source_e source) {
-  m_ti.m_colour_primaries.set(primary_index, source);
+  m_ti.m_color_primaries.set(primary_index, source);
   if (     m_track_entry
       && (primary_index >= 0)
       && ((primary_index <= 10) || (primary_index == 22))) {
@@ -864,9 +864,9 @@ generic_packetizer_c::set_video_chroma_coordinates(chroma_coordinates_t const &c
 }
 
 void
-generic_packetizer_c::set_video_white_colour_coordinates(white_colour_coordinates_t const &coordinates,
+generic_packetizer_c::set_video_white_color_coordinates(white_color_coordinates_t const &coordinates,
                                                          option_source_e source) {
-  m_ti.m_white_coordinates.set(white_colour_coordinates_t(coordinates.x, coordinates.y), source);
+  m_ti.m_white_coordinates.set(white_color_coordinates_t(coordinates.x, coordinates.y), source);
   if (   m_track_entry
       && (   ((coordinates.x >= 0) && (coordinates.x <= 1))
           || ((coordinates.y >= 0) && (coordinates.y <= 1)))) {
@@ -988,9 +988,9 @@ generic_packetizer_c::set_video_stereo_mode_impl(EbmlMaster &video,
 }
 
 void
-generic_packetizer_c::set_video_colour_space(memory_cptr const &value,
+generic_packetizer_c::set_video_color_space(memory_cptr const &value,
                                              option_source_e source) {
-  m_ti.m_colour_space.set(value, source);
+  m_ti.m_color_space.set(value, source);
 
   if (m_track_entry && value && value->get_size())
     GetChild<KaxVideoColourSpace>(m_track_entry).CopyBuffer(value->get_buffer(), value->get_size());
@@ -1137,8 +1137,8 @@ generic_packetizer_c::set_headers() {
       if (m_hvideo_display_unit != ddu_pixels)
         GetChild<KaxVideoDisplayUnit>(video).SetValue(m_hvideo_display_unit);
 
-      if (m_ti.m_colour_space)
-        GetChild<KaxVideoColourSpace>(video).CopyBuffer(m_ti.m_colour_space.get()->get_buffer(), m_ti.m_colour_space.get()->get_size());
+      if (m_ti.m_color_space)
+        GetChild<KaxVideoColourSpace>(video).CopyBuffer(m_ti.m_color_space.get()->get_buffer(), m_ti.m_color_space.get()->get_size());
 
       if (m_ti.m_pixel_cropping) {
         auto crop = m_ti.m_pixel_cropping.get();
@@ -1148,8 +1148,8 @@ generic_packetizer_c::set_headers() {
         GetChild<KaxVideoPixelCropBottom>(video).SetValue(crop.bottom);
       }
 
-      if (m_ti.m_colour_matrix_coeff) {
-        int color_matrix = m_ti.m_colour_matrix_coeff.get();
+      if (m_ti.m_color_matrix_coeff) {
+        int color_matrix = m_ti.m_color_matrix_coeff.get();
         auto &color      = GetChild<KaxVideoColour>(video);
         GetChild<KaxVideoColourMatrix>(color).SetValue(color_matrix);
       }
@@ -1181,20 +1181,20 @@ generic_packetizer_c::set_headers() {
         GetChild<KaxVideoChromaSitVert>(color).SetValue(siting.vert);
       }
 
-      if (m_ti.m_colour_range) {
-        int range_index = m_ti.m_colour_range.get();
+      if (m_ti.m_color_range) {
+        int range_index = m_ti.m_color_range.get();
         auto &color     = GetChild<KaxVideoColour>(video);
         GetChild<KaxVideoColourRange>(color).SetValue(range_index);
       }
 
-      if (m_ti.m_colour_transfer) {
-        int transfer_index = m_ti.m_colour_transfer.get();
+      if (m_ti.m_color_transfer) {
+        int transfer_index = m_ti.m_color_transfer.get();
         auto &color        = GetChild<KaxVideoColour>(video);
         GetChild<KaxVideoColourTransferCharacter>(color).SetValue(transfer_index);
       }
 
-      if (m_ti.m_colour_primaries) {
-        int primary_index = m_ti.m_colour_primaries.get();
+      if (m_ti.m_color_primaries) {
+        int primary_index = m_ti.m_color_primaries.get();
         auto &color       = GetChild<KaxVideoColour>(video);
         GetChild<KaxVideoColourPrimaries>(color).SetValue(primary_index);
       }

@@ -96,7 +96,7 @@ char const * const text_subtitles                  = "text_subtitles";          
 char const * const title                           = "title";                           // container unicoode-string
 char const * const track_name                      = "track_name";                      // track unicoode-string
 char const * const uid                             = "uid";                             // track attachments unsigned-integer
-char const * const white_colour_coordinates        = "white_colour_coordinates";        // track ascii-string format:^-?[0-9]+(\.[0-9]+)?,-?[0-9]+(\.[0-9]+)?$
+char const * const white_color_coordinates         = "white_color_coordinates";         // track ascii-string format:^-?[0-9]+(\.[0-9]+)?,-?[0-9]+(\.[0-9]+)?$
 char const * const writing_application             = "writing_application";             // container unicode-string
 
 using verbose_info_t = std::vector<std::pair<std::string, nlohmann::json>>;

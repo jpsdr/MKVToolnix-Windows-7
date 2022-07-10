@@ -478,15 +478,15 @@ Tab::pruneEmptyMastersForTrack(TrackTypePage &page) {
   std::unordered_map<EbmlMaster *, bool> handled;
 
   if (trackType == track_video) {
-    auto trackVideo            = &GetChildEmptyIfNew<KaxTrackVideo>(page.m_master);
-    auto videoColour           = &GetChildEmptyIfNew<KaxVideoColour>(trackVideo);
-    auto videoColourMasterMeta = &GetChildEmptyIfNew<KaxVideoColourMasterMeta>(videoColour);
-    auto videoProjection       = &GetChildEmptyIfNew<KaxVideoProjection>(trackVideo);
+    auto trackVideo           = &GetChildEmptyIfNew<KaxTrackVideo>(page.m_master);
+    auto videoColor           = &GetChildEmptyIfNew<KaxVideoColour>(trackVideo);
+    auto videoColorMasterMeta = &GetChildEmptyIfNew<KaxVideoColourMasterMeta>(videoColor);
+    auto videoProjection      = &GetChildEmptyIfNew<KaxVideoProjection>(trackVideo);
 
-    remove_master_from_parent_if_empty_or_only_defaults(videoColour,    videoColourMasterMeta, handled);
-    remove_master_from_parent_if_empty_or_only_defaults(trackVideo,     videoColour,           handled);
-    remove_master_from_parent_if_empty_or_only_defaults(trackVideo,     videoProjection,       handled);
-    remove_master_from_parent_if_empty_or_only_defaults(&page.m_master, trackVideo,            handled);
+    remove_master_from_parent_if_empty_or_only_defaults(videoColor,     videoColorMasterMeta, handled);
+    remove_master_from_parent_if_empty_or_only_defaults(trackVideo,     videoColor,           handled);
+    remove_master_from_parent_if_empty_or_only_defaults(trackVideo,     videoProjection,      handled);
+    remove_master_from_parent_if_empty_or_only_defaults(&page.m_master, trackVideo,           handled);
 
   } else
     // trackType is track_audio
@@ -617,12 +617,12 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
 
     if (track_video == trackType) {
       auto colorPage = new TopLevelPage{*this, YT("Color information")};
-      colorPage->setInternalIdentifier(Q("videoColour %1").arg(trackIdxMkvmerge - 1));
+      colorPage->setInternalIdentifier(Q("videoColor %1").arg(trackIdxMkvmerge - 1));
       colorPage->setParentPage(*page);
       colorPage->init();
 
       auto colorMasterMetaPage = new TopLevelPage{*this, YT("Color mastering meta information")};
-      colorMasterMetaPage->setInternalIdentifier(Q("videoColourMasterMeta %1").arg(trackIdxMkvmerge - 1));
+      colorMasterMetaPage->setInternalIdentifier(Q("videoColorMasterMeta %1").arg(trackIdxMkvmerge - 1));
       colorMasterMetaPage->setParentPage(*page);
       colorMasterMetaPage->init();
 

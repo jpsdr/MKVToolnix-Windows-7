@@ -160,9 +160,9 @@ kax_track_t::handle_packetizer_pixel_cropping() {
 }
 
 void
-kax_track_t::handle_packetizer_colour() {
-  if (v_colour_matrix)
-    ptzr_ptr->set_video_colour_matrix(*v_colour_matrix, OPTION_SOURCE_CONTAINER);
+kax_track_t::handle_packetizer_color() {
+  if (v_color_matrix)
+    ptzr_ptr->set_video_color_matrix(*v_color_matrix, OPTION_SOURCE_CONTAINER);
   if (v_bits_per_channel)
     ptzr_ptr->set_video_bits_per_channel(*v_bits_per_channel, OPTION_SOURCE_CONTAINER);
   if ((v_chroma_subsample.hori != -1) || (v_chroma_subsample.vert != -1))
@@ -171,12 +171,12 @@ kax_track_t::handle_packetizer_colour() {
     ptzr_ptr->set_video_cb_subsample(v_cb_subsample, OPTION_SOURCE_CONTAINER);
   if ((v_chroma_siting.hori != -1) || (v_chroma_siting.vert != -1))
     ptzr_ptr->set_video_chroma_siting(v_chroma_siting, OPTION_SOURCE_CONTAINER);
-  if (v_colour_range)
-    ptzr_ptr->set_video_colour_range(*v_colour_range, OPTION_SOURCE_CONTAINER);
+  if (v_color_range)
+    ptzr_ptr->set_video_color_range(*v_color_range, OPTION_SOURCE_CONTAINER);
   if (v_transfer_character)
-    ptzr_ptr->set_video_colour_transfer_character(*v_transfer_character, OPTION_SOURCE_CONTAINER);
-  if (v_colour_primaries)
-    ptzr_ptr->set_video_colour_primaries(*v_colour_primaries, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_color_transfer_character(*v_transfer_character, OPTION_SOURCE_CONTAINER);
+  if (v_color_primaries)
+    ptzr_ptr->set_video_color_primaries(*v_color_primaries, OPTION_SOURCE_CONTAINER);
   if (v_max_cll)
     ptzr_ptr->set_video_max_cll(*v_max_cll, OPTION_SOURCE_CONTAINER);
   if (v_max_fall)
@@ -186,8 +186,8 @@ kax_track_t::handle_packetizer_colour() {
       || (v_chroma_coordinates.blue_x  != -1) || (v_chroma_coordinates.blue_y  != -1)) {
     ptzr_ptr->set_video_chroma_coordinates(v_chroma_coordinates, OPTION_SOURCE_CONTAINER);
   }
-  if ((v_white_colour_coordinates.x != -1) && (v_white_colour_coordinates.y != -1))
-    ptzr_ptr->set_video_white_colour_coordinates(v_white_colour_coordinates, OPTION_SOURCE_CONTAINER);
+  if ((v_white_color_coordinates.x != -1) && (v_white_color_coordinates.y != -1))
+    ptzr_ptr->set_video_white_color_coordinates(v_white_color_coordinates, OPTION_SOURCE_CONTAINER);
   if (v_max_luminance)
     ptzr_ptr->set_video_max_luminance(*v_max_luminance, OPTION_SOURCE_CONTAINER);
   if (v_min_luminance)
@@ -205,7 +205,7 @@ kax_track_t::handle_packetizer_colour() {
     ptzr_ptr->set_video_projection_pose_roll(*v_projection_pose_roll, OPTION_SOURCE_CONTAINER);
 
   if (codec_id == MKV_V_UNCOMPRESSED)
-    ptzr_ptr->set_video_colour_space(v_colour_space, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_color_space(v_color_space, OPTION_SOURCE_CONTAINER);
 }
 
 void
@@ -1172,12 +1172,12 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
 
   auto color_space      = FindChild<KaxVideoColourSpace>(*ktvideo);
   if (color_space)
-    track->v_colour_space = memory_c::clone(color_space->GetBuffer(), color_space->GetSize());
+    track->v_color_space = memory_c::clone(color_space->GetBuffer(), color_space->GetSize());
 
   auto color = FindChild<KaxVideoColour>(*ktvideo);
 
   if (color) {
-    track->v_colour_matrix         = FindOptionalChildValue<KaxVideoColourMatrix>(color);
+    track->v_color_matrix          = FindOptionalChildValue<KaxVideoColourMatrix>(color);
     track->v_bits_per_channel      = FindOptionalChildValue<KaxVideoBitsPerChannel>(color);
     track->v_chroma_subsample.hori = FindChildValue<KaxVideoChromaSubsampHorz>(color, -1.0);
     track->v_chroma_subsample.vert = FindChildValue<KaxVideoChromaSubsampVert>(color, -1.0);
@@ -1185,9 +1185,9 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
     track->v_cb_subsample.vert     = FindChildValue<KaxVideoCbSubsampVert>(color,     -1.0);
     track->v_chroma_siting.hori    = FindChildValue<KaxVideoChromaSitHorz>(color,     -1.0);
     track->v_chroma_siting.vert    = FindChildValue<KaxVideoChromaSitVert>(color,     -1.0);
-    track->v_colour_range          = FindOptionalChildValue<KaxVideoColourRange>(color);
+    track->v_color_range           = FindOptionalChildValue<KaxVideoColourRange>(color);
     track->v_transfer_character    = FindOptionalChildValue<KaxVideoColourTransferCharacter>(color);
-    track->v_colour_primaries      = FindOptionalChildValue<KaxVideoColourPrimaries>(color);
+    track->v_color_primaries       = FindOptionalChildValue<KaxVideoColourPrimaries>(color);
     track->v_max_cll               = FindOptionalChildValue<KaxVideoColourMaxCLL>(color);
     track->v_max_fall              = FindOptionalChildValue<KaxVideoColourMaxFALL>(color);
 
@@ -1200,8 +1200,8 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
       track->v_chroma_coordinates.green_y = FindChildValue<KaxVideoGChromaY>(color_meta, -1.0);
       track->v_chroma_coordinates.blue_x  = FindChildValue<KaxVideoBChromaX>(color_meta, -1.0);
       track->v_chroma_coordinates.blue_y  = FindChildValue<KaxVideoBChromaY>(color_meta, -1.0);
-      track->v_white_colour_coordinates.x = FindChildValue<KaxVideoWhitePointChromaX>(color_meta, -1.0);
-      track->v_white_colour_coordinates.y = FindChildValue<KaxVideoWhitePointChromaY>(color_meta, -1.0);
+      track->v_white_color_coordinates.x  = FindChildValue<KaxVideoWhitePointChromaX>(color_meta, -1.0);
+      track->v_white_color_coordinates.y  = FindChildValue<KaxVideoWhitePointChromaY>(color_meta, -1.0);
       track->v_max_luminance              = FindOptionalChildValue<KaxVideoLuminanceMax>(color_meta);
       track->v_min_luminance              = FindOptionalChildValue<KaxVideoLuminanceMin>(color_meta);
     }
@@ -1668,7 +1668,7 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
 
     t->handle_packetizer_display_dimensions();
     t->handle_packetizer_pixel_cropping();
-    t->handle_packetizer_colour();
+    t->handle_packetizer_color();
     t->handle_packetizer_field_order();
     t->handle_packetizer_stereo_mode();
 
@@ -1786,7 +1786,7 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
 
   t->handle_packetizer_display_dimensions();
   t->handle_packetizer_pixel_cropping();
-  t->handle_packetizer_colour();
+  t->handle_packetizer_color();
   t->handle_packetizer_field_order();
   t->handle_packetizer_stereo_mode();
   t->handle_packetizer_codec_delay();
@@ -2794,24 +2794,24 @@ kax_reader_c::identify() {
       };
 
       info.add(mtx::id::color_bits_per_channel,         track->v_bits_per_channel);
-      info.add(mtx::id::color_matrix_coefficients,      track->v_colour_matrix);
-      info.add(mtx::id::color_primaries,                track->v_colour_primaries);
-      info.add(mtx::id::color_range,                    track->v_colour_range);
+      info.add(mtx::id::color_matrix_coefficients,      track->v_color_matrix);
+      info.add(mtx::id::color_primaries,                track->v_color_primaries);
+      info.add(mtx::id::color_range,                    track->v_color_range);
       info.add(mtx::id::color_transfer_characteristics, track->v_transfer_character);
-      info.add(mtx::id::max_content_light,               track->v_max_cll);
-      info.add(mtx::id::max_frame_light,                 track->v_max_fall);
-      info.add(mtx::id::max_luminance,                   track->v_max_luminance);
-      info.add(mtx::id::min_luminance,                   track->v_min_luminance);
-      info.add(mtx::id::projection_pose_pitch,           track->v_projection_pose_pitch);
-      info.add(mtx::id::projection_pose_roll,            track->v_projection_pose_roll);
-      info.add(mtx::id::projection_pose_yaw,             track->v_projection_pose_yaw);
-      info.add(mtx::id::projection_private,              track->v_projection_private);
-      info.add(mtx::id::projection_type,                 track->v_projection_type);
+      info.add(mtx::id::max_content_light,              track->v_max_cll);
+      info.add(mtx::id::max_frame_light,                track->v_max_fall);
+      info.add(mtx::id::max_luminance,                  track->v_max_luminance);
+      info.add(mtx::id::min_luminance,                  track->v_min_luminance);
+      info.add(mtx::id::projection_pose_pitch,          track->v_projection_pose_pitch);
+      info.add(mtx::id::projection_pose_roll,           track->v_projection_pose_roll);
+      info.add(mtx::id::projection_pose_yaw,            track->v_projection_pose_yaw);
+      info.add(mtx::id::projection_private,             track->v_projection_private);
+      info.add(mtx::id::projection_type,                track->v_projection_type);
 
-      maybe_set(mtx::id::cb_subsample,             track->v_cb_subsample.hori,          track->v_cb_subsample.vert);
-      maybe_set(mtx::id::chroma_siting,            track->v_chroma_siting.hori,         track->v_chroma_siting.vert);
-      maybe_set(mtx::id::chroma_subsample,         track->v_chroma_subsample.hori,      track->v_chroma_subsample.vert);
-      maybe_set(mtx::id::white_colour_coordinates, track->v_white_colour_coordinates.x, track->v_white_colour_coordinates.y);
+      maybe_set(mtx::id::cb_subsample,            track->v_cb_subsample.hori,         track->v_cb_subsample.vert);
+      maybe_set(mtx::id::chroma_siting,           track->v_chroma_siting.hori,        track->v_chroma_siting.vert);
+      maybe_set(mtx::id::chroma_subsample,        track->v_chroma_subsample.hori,     track->v_chroma_subsample.vert);
+      maybe_set(mtx::id::white_color_coordinates, track->v_white_color_coordinates.x, track->v_white_color_coordinates.y);
 
       if (   (track->v_chroma_coordinates.red_x   != -1) || (track->v_chroma_coordinates.red_y   != -1)
           || (track->v_chroma_coordinates.green_x != -1) || (track->v_chroma_coordinates.green_y != -1)

@@ -230,18 +230,18 @@ public:
   virtual void set_video_aspect_ratio(double aspect_ratio, bool is_factor, option_source_e source);
   virtual void set_video_pixel_cropping(int left, int top, int right, int bottom, option_source_e source);
   virtual void set_video_pixel_cropping(const pixel_crop_t &cropping, option_source_e source);
-  virtual void set_video_colour_matrix(int matrix_index, option_source_e source);
+  virtual void set_video_color_matrix(int matrix_index, option_source_e source);
   virtual void set_video_bits_per_channel(int num_bits, option_source_e source);
   virtual void set_video_chroma_subsample(chroma_subsample_t const &subsample, option_source_e source);
   virtual void set_video_cb_subsample(cb_subsample_t const &subsample, option_source_e source);
   virtual void set_video_chroma_siting(chroma_siting_t const &siting, option_source_e source);
-  virtual void set_video_colour_range(int range, option_source_e source);
-  virtual void set_video_colour_transfer_character(int transfer_index, option_source_e source);
-  virtual void set_video_colour_primaries(int primary_index, option_source_e source);
+  virtual void set_video_color_range(int range, option_source_e source);
+  virtual void set_video_color_transfer_character(int transfer_index, option_source_e source);
+  virtual void set_video_color_primaries(int primary_index, option_source_e source);
   virtual void set_video_max_cll(int max_cll, option_source_e source);
   virtual void set_video_max_fall(int max_fall, option_source_e source);
   virtual void set_video_chroma_coordinates(chroma_coordinates_t const &coordinates, option_source_e source);
-  virtual void set_video_white_colour_coordinates(white_colour_coordinates_t const &coordinates, option_source_e source);
+  virtual void set_video_white_color_coordinates(white_color_coordinates_t const &coordinates, option_source_e source);
   virtual void set_video_max_luminance(double max, option_source_e source);
   virtual void set_video_min_luminance(double min, option_source_e source);
   virtual void set_video_projection_type(uint64_t value, option_source_e source);
@@ -264,7 +264,7 @@ public:
       m_hcompression = method;
   }
 
-  virtual void set_video_colour_space(memory_cptr const &value, option_source_e source);
+  virtual void set_video_color_space(memory_cptr const &value, option_source_e source);
 
   virtual void force_duration_on_last_packet();
 

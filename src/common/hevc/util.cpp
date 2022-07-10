@@ -624,7 +624,7 @@ parse_sps_internal(memory_cptr const &buffer,
   sps.id = w.copy_unsigned_golomb(r);  // sps_seq_parameter_set_id
 
   if ((sps.chroma_format_idc = w.copy_unsigned_golomb(r)) == 3) // chroma_format_idc
-    sps.separate_colour_plane_flag = w.copy_bits(1, r);    // separate_colour_plane_flag
+    sps.separate_color_plane_flag = w.copy_bits(1, r);     // separate_color_plane_flag
 
   sps.width                   = w.copy_unsigned_golomb(r); // pic_width_in_luma_samples
   sps.height                  = w.copy_unsigned_golomb(r); // pic_height_in_luma_samples
@@ -709,8 +709,8 @@ parse_sps_internal(memory_cptr const &buffer,
   // See ITU-T H.265 section 7.4.3.2 for the width/height calculation
   // formula.
   if (sps.conformance_window_flag) {
-    auto sub_width_c  = ((1 == sps.chroma_format_idc) || (2 == sps.chroma_format_idc)) && (0 == sps.separate_colour_plane_flag) ? 2 : 1;
-    auto sub_height_c =  (1 == sps.chroma_format_idc)                                  && (0 == sps.separate_colour_plane_flag) ? 2 : 1;
+    auto sub_width_c  = ((1 == sps.chroma_format_idc) || (2 == sps.chroma_format_idc)) && (0 == sps.separate_color_plane_flag) ? 2 : 1;
+    auto sub_height_c =  (1 == sps.chroma_format_idc)                                  && (0 == sps.separate_color_plane_flag) ? 2 : 1;
 
     sps.width        -= std::min<unsigned int>((sub_width_c  * sps.conf_win_right_offset)  + (sub_width_c  * sps.conf_win_left_offset), sps.width);
     sps.height       -= std::min<unsigned int>((sub_height_c * sps.conf_win_bottom_offset) + (sub_height_c * sps.conf_win_top_offset),  sps.height);

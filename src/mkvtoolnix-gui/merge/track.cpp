@@ -23,9 +23,11 @@ namespace mtx::gui::Merge {
 namespace {
 
 std::vector<std::pair<std::string, std::string>> trackSettingsNameReplacements{
+  { "bitsPerColourChannel"s,     "bitsPerColorChannel"s     },
   { "colourMatrixCoefficients"s, "colorMatrixCoefficients"s },
   { "colourRange"s,              "colorRange"s              },
   { "colourPrimaries"s,          "colorPrimaries"s          },
+  { "whiteColourCoordinates"s,   "whiteColorCoordinates"s   },
 };
 
 } // anonymous namespace
@@ -231,26 +233,26 @@ Track::setDefaultsBasics() {
 }
 
 void
-Track::setDefaultsColour() {
-  m_bitsPerColourChannel     = m_properties.value(Q(mtx::id::color_bits_per_channel)).toString();
-  m_colourMatrixCoefficients = m_properties.value(Q(mtx::id::color_matrix_coefficients)).toString();
-  m_colourPrimaries          = m_properties.value(Q(mtx::id::color_primaries)).toString();
-  m_colourRange              = m_properties.value(Q(mtx::id::color_range)).toString();
-  m_transferCharacteristics  = m_properties.value(Q(mtx::id::color_transfer_characteristics)).toString();
-  m_maximumContentLight      = m_properties.value(Q(mtx::id::max_content_light)).toString();
-  m_maximumFrameLight        = m_properties.value(Q(mtx::id::max_frame_light)).toString();
-  m_maximumLuminance         = m_properties.value(Q(mtx::id::max_luminance)).toString();
-  m_minimumLuminance         = m_properties.value(Q(mtx::id::min_luminance)).toString();
-  m_pitchRotation            = m_properties.value(Q(mtx::id::projection_pose_pitch)).toString();
-  m_rollRotation             = m_properties.value(Q(mtx::id::projection_pose_roll)).toString();
-  m_yawRotation              = m_properties.value(Q(mtx::id::projection_pose_yaw)).toString();
-  m_projectionSpecificData   = m_properties.value(Q(mtx::id::projection_private)).toString();
-  m_projectionType           = m_properties.value(Q(mtx::id::projection_type)).toString();
-  m_cbSubsampling            = m_properties.value(Q(mtx::id::cb_subsample)).toString();
-  m_chromaSiting             = m_properties.value(Q(mtx::id::chroma_siting)).toString();
-  m_chromaSubsampling        = m_properties.value(Q(mtx::id::chroma_subsample)).toString();
-  m_whiteColourCoordinates   = m_properties.value(Q(mtx::id::white_colour_coordinates)).toString();
-  m_chromaticityCoordinates  = m_properties.value(Q(mtx::id::chromaticity_coordinates)).toString();
+Track::setDefaultsColor() {
+  m_bitsPerColorChannel     = m_properties.value(Q(mtx::id::color_bits_per_channel)).toString();
+  m_colorMatrixCoefficients = m_properties.value(Q(mtx::id::color_matrix_coefficients)).toString();
+  m_colorPrimaries          = m_properties.value(Q(mtx::id::color_primaries)).toString();
+  m_colorRange              = m_properties.value(Q(mtx::id::color_range)).toString();
+  m_transferCharacteristics = m_properties.value(Q(mtx::id::color_transfer_characteristics)).toString();
+  m_maximumContentLight     = m_properties.value(Q(mtx::id::max_content_light)).toString();
+  m_maximumFrameLight       = m_properties.value(Q(mtx::id::max_frame_light)).toString();
+  m_maximumLuminance        = m_properties.value(Q(mtx::id::max_luminance)).toString();
+  m_minimumLuminance        = m_properties.value(Q(mtx::id::min_luminance)).toString();
+  m_pitchRotation           = m_properties.value(Q(mtx::id::projection_pose_pitch)).toString();
+  m_rollRotation            = m_properties.value(Q(mtx::id::projection_pose_roll)).toString();
+  m_yawRotation             = m_properties.value(Q(mtx::id::projection_pose_yaw)).toString();
+  m_projectionSpecificData  = m_properties.value(Q(mtx::id::projection_private)).toString();
+  m_projectionType          = m_properties.value(Q(mtx::id::projection_type)).toString();
+  m_cbSubsampling           = m_properties.value(Q(mtx::id::cb_subsample)).toString();
+  m_chromaSiting            = m_properties.value(Q(mtx::id::chroma_siting)).toString();
+  m_chromaSubsampling       = m_properties.value(Q(mtx::id::chroma_subsample)).toString();
+  m_whiteColorCoordinates   = m_properties.value(Q(mtx::id::white_color_coordinates)).toString();
+  m_chromaticityCoordinates = m_properties.value(Q(mtx::id::chromaticity_coordinates)).toString();
 }
 
 void
@@ -264,7 +266,7 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   setDefaultsLanguage(languageDerivedFromFileName);
   setDefaultsMuxThis();
   setDefaultsDisplayDimensions();
-  setDefaultsColour();
+  setDefaultsColor();
 }
 
 QString
@@ -337,19 +339,19 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("commentaryFlag",                m_commentaryFlag);
   settings.setValue("commentaryFlagWasSet",          m_commentaryFlagWasSet);
 
-  settings.setValue("colorMatrixCoefficients",       m_colourMatrixCoefficients);
-  settings.setValue("bitsPerColourChannel",          m_bitsPerColourChannel);
+  settings.setValue("colorMatrixCoefficients",       m_colorMatrixCoefficients);
+  settings.setValue("bitsPerColorChannel",           m_bitsPerColorChannel);
   settings.setValue("chromaSubsampling",             m_chromaSubsampling);
   settings.setValue("cbSubsampling",                 m_cbSubsampling);
   settings.setValue("chromaSiting",                  m_chromaSiting);
-  settings.setValue("colorRange",                    m_colourRange);
+  settings.setValue("colorRange",                    m_colorRange);
   settings.setValue("transferCharacteristics",       m_transferCharacteristics);
-  settings.setValue("colorPrimaries",                m_colourPrimaries);
+  settings.setValue("colorPrimaries",                m_colorPrimaries);
   settings.setValue("maximumContentLight",           m_maximumContentLight);
   settings.setValue("maximumFrameLight",             m_maximumFrameLight);
 
   settings.setValue("chromaticityCoordinates",       m_chromaticityCoordinates);
-  settings.setValue("whiteColourCoordinates",        m_whiteColourCoordinates);
+  settings.setValue("whiteColorCoordinates",         m_whiteColorCoordinates);
   settings.setValue("maximumLuminance",              m_maximumLuminance);
   settings.setValue("minimumLuminance",              m_minimumLuminance);
 
@@ -419,19 +421,19 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_commentaryFlag                = l.settings.value("commentaryFlag").toBool();
   m_commentaryFlagWasSet          = l.settings.value("commentaryFlagWasSet").toBool();
 
-  m_colourMatrixCoefficients      = l.settings.value("colorMatrixCoefficients").toString();
-  m_bitsPerColourChannel          = l.settings.value("bitsPerColourChannel").toString();
+  m_colorMatrixCoefficients       = l.settings.value("colorMatrixCoefficients").toString();
+  m_bitsPerColorChannel           = l.settings.value("bitsPerColorChannel").toString();
   m_chromaSubsampling             = l.settings.value("chromaSubsampling").toString();
   m_cbSubsampling                 = l.settings.value("cbSubsampling").toString();
   m_chromaSiting                  = l.settings.value("chromaSiting").toString();
-  m_colourRange                   = l.settings.value("colorRange").toString();
+  m_colorRange                    = l.settings.value("colorRange").toString();
   m_transferCharacteristics       = l.settings.value("transferCharacteristics").toString();
-  m_colourPrimaries               = l.settings.value("colorPrimaries").toString();
+  m_colorPrimaries                = l.settings.value("colorPrimaries").toString();
   m_maximumContentLight           = l.settings.value("maximumContentLight").toString();
   m_maximumFrameLight             = l.settings.value("maximumFrameLight").toString();
 
   m_chromaticityCoordinates       = l.settings.value("chromaticityCoordinates").toString();
-  m_whiteColourCoordinates        = l.settings.value("whiteColourCoordinates").toString();
+  m_whiteColorCoordinates         = l.settings.value("whiteColorCoordinates").toString();
   m_maximumLuminance              = l.settings.value("maximumLuminance").toString();
   m_minimumLuminance              = l.settings.value("minimumLuminance").toString();
 
@@ -564,11 +566,11 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     if (m_stereoscopy)
       opt.options << Q("--stereo-mode") << Q("%1:%2").arg(sid).arg(m_stereoscopy - 1);
 
-    if (!m_colourMatrixCoefficients.isEmpty())
-      opt.options << Q("--color-matrix-coefficients") << Q("%1:%2").arg(sid).arg(m_colourMatrixCoefficients);
+    if (!m_colorMatrixCoefficients.isEmpty())
+      opt.options << Q("--color-matrix-coefficients") << Q("%1:%2").arg(sid).arg(m_colorMatrixCoefficients);
 
-    if (!m_bitsPerColourChannel.isEmpty())
-      opt.options << Q("--color-bits-per-channel") << Q("%1:%2").arg(sid).arg(m_bitsPerColourChannel);
+    if (!m_bitsPerColorChannel.isEmpty())
+      opt.options << Q("--color-bits-per-channel") << Q("%1:%2").arg(sid).arg(m_bitsPerColorChannel);
 
     if (!m_chromaSubsampling.isEmpty())
       opt.options << Q("--chroma-subsample") << Q("%1:%2").arg(sid).arg(m_chromaSubsampling);
@@ -579,14 +581,14 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     if (!m_chromaSiting.isEmpty())
       opt.options << Q("--chroma-siting") << Q("%1:%2").arg(sid).arg(m_chromaSiting);
 
-    if (!m_colourRange.isEmpty())
-      opt.options << Q("--color-range") << Q("%1:%2").arg(sid).arg(m_colourRange);
+    if (!m_colorRange.isEmpty())
+      opt.options << Q("--color-range") << Q("%1:%2").arg(sid).arg(m_colorRange);
 
     if (!m_transferCharacteristics.isEmpty())
       opt.options << Q("--color-transfer-characteristics") << Q("%1:%2").arg(sid).arg(m_transferCharacteristics);
 
-    if (!m_colourPrimaries.isEmpty())
-      opt.options << Q("--color-primaries") << Q("%1:%2").arg(sid).arg(m_colourPrimaries);
+    if (!m_colorPrimaries.isEmpty())
+      opt.options << Q("--color-primaries") << Q("%1:%2").arg(sid).arg(m_colorPrimaries);
 
     if (!m_maximumContentLight.isEmpty())
       opt.options << Q("--max-content-light") << Q("%1:%2").arg(sid).arg(m_maximumContentLight);
@@ -597,8 +599,8 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
     if (!m_chromaticityCoordinates.isEmpty())
       opt.options << Q("--chromaticity-coordinates") << Q("%1:%2").arg(sid).arg(m_chromaticityCoordinates);
 
-    if (!m_whiteColourCoordinates.isEmpty())
-      opt.options << Q("--white-color-coordinates") << Q("%1:%2").arg(sid).arg(m_whiteColourCoordinates);
+    if (!m_whiteColorCoordinates.isEmpty())
+      opt.options << Q("--white-color-coordinates") << Q("%1:%2").arg(sid).arg(m_whiteColorCoordinates);
 
     if (!m_maximumLuminance.isEmpty())
       opt.options << Q("--max-luminance") << Q("%1:%2").arg(sid).arg(m_maximumLuminance);

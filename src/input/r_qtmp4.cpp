@@ -1939,7 +1939,7 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
       create_video_packetizer_standard(dmx);
 
     dmx.set_packetizer_display_dimensions();
-    dmx.set_packetizer_colour_properties();
+    dmx.set_packetizer_color_properties();
 
   } else if (dmx.is_audio()) {
     if (dmx.codec.is(codec_c::type_e::A_AAC))
@@ -2031,12 +2031,12 @@ qtmp4_reader_c::identify() {
     if (dmx.is_video()) {
       info.add_joined(mtx::id::pixel_dimensions, "x"s, dmx.v_width, dmx.v_height);
 
-      if (dmx.v_colour_primaries != 2)
-        info.set(mtx::id::color_primaries, dmx.v_colour_primaries);
-      if (dmx.v_colour_transfer_characteristics != 2)
-        info.set(mtx::id::color_transfer_characteristics, dmx.v_colour_transfer_characteristics);
-      if (dmx.v_colour_matrix_coefficients != 2)
-        info.set(mtx::id::color_matrix_coefficients, dmx.v_colour_matrix_coefficients);
+      if (dmx.v_color_primaries != 2)
+        info.set(mtx::id::color_primaries, dmx.v_color_primaries);
+      if (dmx.v_color_transfer_characteristics != 2)
+        info.set(mtx::id::color_transfer_characteristics, dmx.v_color_transfer_characteristics);
+      if (dmx.v_color_matrix_coefficients != 2)
+        info.set(mtx::id::color_matrix_coefficients, dmx.v_color_matrix_coefficients);
 
     } else if (dmx.is_audio()) {
       info.add(mtx::id::audio_channels,           dmx.a_channels);
@@ -2744,15 +2744,15 @@ qtmp4_demuxer_c::set_packetizer_display_dimensions() {
 }
 
 void
-qtmp4_demuxer_c::set_packetizer_colour_properties() {
-  if (v_colour_primaries != 2) {
-    m_reader.m_reader_packetizers[ptzr]->set_video_colour_primaries(v_colour_primaries, OPTION_SOURCE_CONTAINER);
+qtmp4_demuxer_c::set_packetizer_color_properties() {
+  if (v_color_primaries != 2) {
+    m_reader.m_reader_packetizers[ptzr]->set_video_color_primaries(v_color_primaries, OPTION_SOURCE_CONTAINER);
   }
-  if (v_colour_transfer_characteristics != 2) {
-    m_reader.m_reader_packetizers[ptzr]->set_video_colour_transfer_character(v_colour_transfer_characteristics, OPTION_SOURCE_CONTAINER);
+  if (v_color_transfer_characteristics != 2) {
+    m_reader.m_reader_packetizers[ptzr]->set_video_color_transfer_character(v_color_transfer_characteristics, OPTION_SOURCE_CONTAINER);
   }
-  if (v_colour_matrix_coefficients != 2) {
-    m_reader.m_reader_packetizers[ptzr]->set_video_colour_matrix(v_colour_matrix_coefficients, OPTION_SOURCE_CONTAINER);
+  if (v_color_matrix_coefficients != 2) {
+    m_reader.m_reader_packetizers[ptzr]->set_video_color_matrix(v_color_matrix_coefficients, OPTION_SOURCE_CONTAINER);
   }
 }
 
@@ -2911,13 +2911,13 @@ qtmp4_demuxer_c::handle_colr_atom(memory_cptr const &atom_content,
   if (!mtx::included_in(color_type, "nclc", "nclx"))
     return;
 
-  v_colour_primaries                = get_uint16_be(&colr_atom.color_primaries);
-  v_colour_transfer_characteristics = get_uint16_be(&colr_atom.transfer_characteristics);
-  v_colour_matrix_coefficients      = get_uint16_be(&colr_atom.matrix_coefficients);
+  v_color_primaries                = get_uint16_be(&colr_atom.color_primaries);
+  v_color_transfer_characteristics = get_uint16_be(&colr_atom.transfer_characteristics);
+  v_color_matrix_coefficients      = get_uint16_be(&colr_atom.matrix_coefficients);
 
   mxdebug_if(m_debug_headers,
              fmt::format("{0}color primaries: {1}, transfer characteristics: {2}, matrix coefficients: {3}\n",
-                         space(level * 2 + 1), v_colour_primaries, v_colour_transfer_characteristics, v_colour_matrix_coefficients));
+                         space(level * 2 + 1), v_color_primaries, v_color_transfer_characteristics, v_color_matrix_coefficients));
 }
 
 void

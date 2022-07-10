@@ -180,20 +180,20 @@ struct chroma_coordinates_t {
   static int const num_properties = 6;
 };
 
-struct white_colour_coordinates_t {
+struct white_color_coordinates_t {
   double x, y;
 
-  white_colour_coordinates_t()
+  white_color_coordinates_t()
   : x{-1.0}
   , y{-1.0}
   {
   }
-  white_colour_coordinates_t(double p_x, double p_y)
+  white_color_coordinates_t(double p_x, double p_y)
   : x{p_x}
   , y{p_y}
   {
   }
-  white_colour_coordinates_t(std::vector<double> data)
+  white_color_coordinates_t(std::vector<double> data)
   : x{data[0]}
   , y{data[1]}
   {
@@ -302,8 +302,8 @@ public:
   std::map<int64_t, uint64_t> m_field_order_list; // As given on the command line
   option_with_source_c<uint64_t> m_field_order;   // For this very track
 
-  std::map<int64_t, int> m_colour_matrix_coeff_list; // As given on the command line
-  option_with_source_c<int> m_colour_matrix_coeff; // For this very track
+  std::map<int64_t, int> m_color_matrix_coeff_list; // As given on the command line
+  option_with_source_c<int> m_color_matrix_coeff; // For this very track
 
   std::map<int64_t, int> m_bits_per_channel_list; // As given on the command line
   option_with_source_c<int> m_bits_per_channel; // For this very track
@@ -317,14 +317,14 @@ public:
   std::map<int64_t, chroma_siting_t> m_chroma_siting_list; // As given on the command line
   option_with_source_c<chroma_siting_t> m_chroma_siting; // For this very track
 
-  std::map<int64_t, int> m_colour_range_list; // As given on the command line
-  option_with_source_c<int> m_colour_range; // For this very track
+  std::map<int64_t, int> m_color_range_list; // As given on the command line
+  option_with_source_c<int> m_color_range; // For this very track
 
-  std::map<int64_t, int> m_colour_transfer_list; // As given on the command line
-  option_with_source_c<int> m_colour_transfer; // For this very track
+  std::map<int64_t, int> m_color_transfer_list; // As given on the command line
+  option_with_source_c<int> m_color_transfer; // For this very track
 
-  std::map<int64_t, int> m_colour_primaries_list; // As given on the command line
-  option_with_source_c<int> m_colour_primaries; // For this very track
+  std::map<int64_t, int> m_color_primaries_list; // As given on the command line
+  option_with_source_c<int> m_color_primaries; // For this very track
 
   std::map<int64_t, int> m_max_cll_list; // As given on the command line
   option_with_source_c<int> m_max_cll; // For this very track
@@ -335,8 +335,8 @@ public:
   std::map<int64_t, chroma_coordinates_t> m_chroma_coordinates_list; // As given on the command line
   option_with_source_c<chroma_coordinates_t> m_chroma_coordinates; // For this very track
 
-  std::map<int64_t, white_colour_coordinates_t> m_white_coordinates_list; // As given on the command line
-  option_with_source_c<white_colour_coordinates_t> m_white_coordinates; // For this very track
+  std::map<int64_t, white_color_coordinates_t> m_white_coordinates_list; // As given on the command line
+  option_with_source_c<white_color_coordinates_t> m_white_coordinates; // For this very track
 
   std::map<int64_t, double> m_max_luminance_list; // As given on the command line
   option_with_source_c<double> m_max_luminance; // For this very track
@@ -359,8 +359,8 @@ public:
   std::map<int64_t, double> m_projection_pose_roll_list; // As given on the command line
   option_with_source_c<double> m_projection_pose_roll; // For this very track
 
-  std::map<int64_t, memory_cptr> m_colour_space_list; // As given on the command line
-  option_with_source_c<memory_cptr> m_colour_space; // For this very track
+  std::map<int64_t, memory_cptr> m_color_space_list; // As given on the command line
+  option_with_source_c<memory_cptr> m_color_space; // For this very track
 
   std::map<int64_t, std::pair<int64_t, bool>> m_default_durations; // As given on the command line
   std::map<int64_t, int> m_max_blockadd_ids; // As given on the command line

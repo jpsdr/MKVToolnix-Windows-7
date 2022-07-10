@@ -807,9 +807,9 @@ parse_arg_cropping(std::string const &s,
    10: BT2020 Constant Luminance)
 */
 static void
-parse_arg_colour_matrix_coefficients(std::string const &s,
+parse_arg_color_matrix_coefficients(std::string const &s,
                                      track_info_c &ti) {
-  if (!mtx::string::parse_property_to_value<int>(s, ti.m_colour_matrix_coeff_list))
+  if (!mtx::string::parse_property_to_value<int>(s, ti.m_color_matrix_coeff_list))
     mxerror(fmt::format("Color matrix coefficients parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -817,7 +817,7 @@ parse_arg_colour_matrix_coefficients(std::string const &s,
    The argument must have the form \c TID:n e.g. \c 0:8
 */
 static void
-parse_arg_colour_bits_per_channel(std::string const &s,
+parse_arg_color_bits_per_channel(std::string const &s,
                                   track_info_c &ti) {
   if (!mtx::string::parse_property_to_value<int>(s, ti.m_bits_per_channel_list))
     mxerror(fmt::format("Bits per channel parameter: not given in the form <TID>:n (argument was '{0}').", s));
@@ -858,9 +858,9 @@ parse_arg_chroma_siting(std::string const &s,
    The argument must have the form \c TID:n e.g. \c 0:1
 */
 static void
-parse_arg_colour_range(std::string const &s,
+parse_arg_color_range(std::string const &s,
                        track_info_c &ti) {
-  if (!mtx::string::parse_property_to_value<int>(s, ti.m_colour_range_list))
+  if (!mtx::string::parse_property_to_value<int>(s, ti.m_color_range_list))
     mxerror(fmt::format("Color range parameters: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -868,9 +868,9 @@ parse_arg_colour_range(std::string const &s,
    The argument must have the form \c TID:n e.g. \c 0:1
 */
 static void
-parse_arg_colour_transfer(std::string const &s,
+parse_arg_color_transfer(std::string const &s,
                           track_info_c &ti) {
-  if (!mtx::string::parse_property_to_value<int>(s, ti.m_colour_transfer_list))
+  if (!mtx::string::parse_property_to_value<int>(s, ti.m_color_transfer_list))
     mxerror(fmt::format("Color transfer characteristics parameter : not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -878,9 +878,9 @@ parse_arg_colour_transfer(std::string const &s,
    The argument must have the form \c TID:n e.g. \c 0:1
 */
 static void
-parse_arg_colour_primaries(std::string const &s,
+parse_arg_color_primaries(std::string const &s,
                            track_info_c &ti) {
-  if (!mtx::string::parse_property_to_value<int>(s, ti.m_colour_primaries_list))
+  if (!mtx::string::parse_property_to_value<int>(s, ti.m_color_primaries_list))
     mxerror(fmt::format("Color primaries parameter: not given in the form <TID>:n (argument was '{0}').", s));
 }
 
@@ -921,7 +921,7 @@ parse_arg_chroma_coordinates(std::string const &s,
 static void
 parse_arg_white_coordinates(std::string const &s,
                             track_info_c &ti) {
-  if (!mtx::string::parse_property_to_struct<white_colour_coordinates_t, double>(s, ti.m_white_coordinates_list))
+  if (!mtx::string::parse_property_to_struct<white_color_coordinates_t, double>(s, ti.m_white_coordinates_list))
     mxerror(fmt::format("white color coordinates parameter: not given in the form <TID>:hori,vert (argument was '{0}').", s));
 }
 
@@ -2602,14 +2602,14 @@ parse_args(std::vector<std::string> args) {
       if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_colour_matrix_coefficients(*next_arg, *ti);
+      parse_arg_color_matrix_coefficients(*next_arg, *ti);
       sit++;
 
     } else if (mtx::included_in(this_arg, "--color-bits-per-channel", "--colour-bits-per-channel")) {
       if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_colour_bits_per_channel(*next_arg, *ti);
+      parse_arg_color_bits_per_channel(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--chroma-subsample") {
@@ -2637,21 +2637,21 @@ parse_args(std::vector<std::string> args) {
       if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_colour_range(*next_arg, *ti);
+      parse_arg_color_range(*next_arg, *ti);
       sit++;
 
     } else if (mtx::included_in(this_arg, "--color-transfer-characteristics", "--colour-transfer-characteristics")) {
       if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_colour_transfer(*next_arg, *ti);
+      parse_arg_color_transfer(*next_arg, *ti);
       sit++;
 
     } else if (mtx::included_in(this_arg, "--color-primaries", "--colour-primaries")) {
       if (!next_arg)
         mxerror(fmt::format(Y("'{0}' lacks the parameter.\n"), this_arg));
 
-      parse_arg_colour_primaries(*next_arg, *ti);
+      parse_arg_color_primaries(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--max-content-light") {

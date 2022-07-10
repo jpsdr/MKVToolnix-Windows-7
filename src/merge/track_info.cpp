@@ -126,8 +126,8 @@ track_info_c::operator =(const track_info_c &src) {
   m_pixel_crop_list                  = src.m_pixel_crop_list;
   m_pixel_cropping                   = src.m_pixel_cropping;
 
-  m_colour_matrix_coeff_list         = src.m_colour_matrix_coeff_list;
-  m_colour_matrix_coeff              = src.m_colour_matrix_coeff;
+  m_color_matrix_coeff_list          = src.m_color_matrix_coeff_list;
+  m_color_matrix_coeff               = src.m_color_matrix_coeff;
 
   m_bits_per_channel_list            = src.m_bits_per_channel_list;
   m_bits_per_channel                 = src.m_bits_per_channel;
@@ -141,14 +141,14 @@ track_info_c::operator =(const track_info_c &src) {
   m_chroma_siting_list               = src.m_chroma_siting_list;
   m_chroma_siting                    = src.m_chroma_siting;
 
-  m_colour_range_list                = src.m_colour_range_list;
-  m_colour_range                     = src.m_colour_range;
+  m_color_range_list                 = src.m_color_range_list;
+  m_color_range                      = src.m_color_range;
 
-  m_colour_transfer_list             = src.m_colour_transfer_list;
-  m_colour_transfer                  = src.m_colour_transfer;
+  m_color_transfer_list              = src.m_color_transfer_list;
+  m_color_transfer                   = src.m_color_transfer;
 
-  m_colour_primaries_list            = src.m_colour_primaries_list;
-  m_colour_primaries                 = src.m_colour_primaries;
+  m_color_primaries_list             = src.m_color_primaries_list;
+  m_color_primaries                  = src.m_color_primaries;
 
   m_max_cll_list                     = src.m_max_cll_list;
   m_max_cll                          = src.m_max_cll;

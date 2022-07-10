@@ -38,8 +38,8 @@ public:
   unsigned int m_forcedTrackFlag{}, m_trackEnabledFlag{}, m_stereoscopy{}, m_cues{}, m_aacIsSBR{};
   TrackCompression m_compression{TrackCompression::Default};
 
-  QString m_colourMatrixCoefficients, m_bitsPerColourChannel, m_chromaSubsampling, m_cbSubsampling, m_chromaSiting, m_colourRange, m_transferCharacteristics, m_colourPrimaries, m_maximumContentLight, m_maximumFrameLight;
-  QString m_chromaticityCoordinates, m_whiteColourCoordinates, m_maximumLuminance, m_minimumLuminance;
+  QString m_colorMatrixCoefficients, m_bitsPerColorChannel, m_chromaSubsampling, m_cbSubsampling, m_chromaSiting, m_colorRange, m_transferCharacteristics, m_colorPrimaries, m_maximumContentLight, m_maximumFrameLight;
+  QString m_chromaticityCoordinates, m_whiteColorCoordinates, m_maximumLuminance, m_minimumLuminance;
   QString m_projectionType, m_projectionSpecificData, m_yawRotation, m_pitchRotation, m_rollRotation;
 
   int64_t m_size{};
@@ -90,7 +90,7 @@ protected:
   void setDefaultsMuxThis();
   void setDefaultsDisplayDimensions();
   void setDefaultsLanguage(mtx::bcp47::language_c const &languageDerivedFromFileName);
-  void setDefaultsColour();
+  void setDefaultsColor();
 
 public:
   static QString nameForType(TrackType type);

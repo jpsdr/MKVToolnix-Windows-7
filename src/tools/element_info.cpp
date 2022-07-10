@@ -234,15 +234,15 @@ init_element_names() {
   g_element_names[0x55b8]     = "VideoChromaSitVert";
   g_element_names[0x55b3]     = "VideoChromaSubsampHorz";
   g_element_names[0x55b4]     = "VideoChromaSubsampVert";
-  g_element_names[0x55b0]     = "VideoColour";
-  g_element_names[0x55d0]     = "VideoColourMasterMeta";
-  g_element_names[0x55b1]     = "VideoColourMatrix";
-  g_element_names[0x55bc]     = "VideoColourMaxCLL";
-  g_element_names[0x55bd]     = "VideoColourMaxFALL";
-  g_element_names[0x55bb]     = "VideoColourPrimaries";
-  g_element_names[0x55b9]     = "VideoColourRange";
-  g_element_names[0x2eb524]   = "VideoColourSpace";
-  g_element_names[0x55ba]     = "VideoColourTransferCharacter";
+  g_element_names[0x55b0]     = "VideoColor";
+  g_element_names[0x55d0]     = "VideoColorMasterMeta";
+  g_element_names[0x55b1]     = "VideoColorMatrix";
+  g_element_names[0x55bc]     = "VideoColorMaxCLL";
+  g_element_names[0x55bd]     = "VideoColorMaxFALL";
+  g_element_names[0x55bb]     = "VideoColorPrimaries";
+  g_element_names[0x55b9]     = "VideoColorRange";
+  g_element_names[0x2eb524]   = "VideoColorSpace";
+  g_element_names[0x55ba]     = "VideoColorTransferCharacter";
   g_element_names[0x54ba]     = "VideoDisplayHeight";
   g_element_names[0x54b2]     = "VideoDisplayUnit";
   g_element_names[0x54b0]     = "VideoDisplayWidth";
@@ -335,8 +335,8 @@ init_master_information() {
     "Tracks",
     "TrackTranslate",
     "TrackVideo",
-    "VideoColour",
-    "VideoColourMasterMeta",
+    "VideoColor",
+    "VideoColorMasterMeta",
     "VideoProjection",
     nullptr
   };

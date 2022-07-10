@@ -256,7 +256,7 @@ struct sps_info_t {
   unsigned int chroma_format_idc{};
   unsigned int bit_depth_luma_minus8{};
   unsigned int bit_depth_chroma_minus8{};
-  unsigned int separate_colour_plane_flag{};
+  unsigned int separate_color_plane_flag{};
   unsigned int log2_min_luma_coding_block_size_minus3{};
   unsigned int log2_diff_max_min_luma_coding_block_size{};
   unsigned int log2_max_pic_order_cnt_lsb{};

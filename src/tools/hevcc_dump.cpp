@@ -496,7 +496,7 @@ parse_sps(mtx::bits::reader_c &r) {
   v(6, "chroma_format_idc",        chroma_format_idc = r.get_unsigned_golomb());
 
   if (chroma_format_idc == 3)
-    v(6, "separate_colour_plane_flag", r.get_bits(1));
+    v(6, "separate_color_plane_flag", r.get_bits(1));
 
   v(6, "pic_width_in_luma_samples",  r.get_unsigned_golomb());
   v(6, "pic_height_in_luma_samples", r.get_unsigned_golomb());
