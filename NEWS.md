@@ -1,3 +1,14 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: multiplexer: reading color parameters from identified files
+  that are floating point numbers (minimum/maximum luminance, projection
+  pitch/roll/yaw) the numbers will be formatted in floating-point notation
+  instead of scientific notation as mkvmerge only supports the former. Fixes
+  #3368.
+
+
 # Version 69.0.0 "Day And Age" 2022-07-09
 
 ## Important notes

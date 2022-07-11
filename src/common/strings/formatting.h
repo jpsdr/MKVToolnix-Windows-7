@@ -120,6 +120,18 @@ normalize_fmt_double_output(T value) {
   return normalize_fmt_double_output_str(fmt::format("{}", value));
 }
 
+template<> inline
+std::string
+normalize_fmt_double_output(double value) {
+  return normalize_fmt_double_output_str(fmt::format("{0:f}", value));
+}
+
+template<> inline
+std::string
+normalize_fmt_double_output(float value) {
+  return normalize_fmt_double_output_str(fmt::format("{0:f}", value));
+}
+
 } // mtx::string
 
 template<typename T>

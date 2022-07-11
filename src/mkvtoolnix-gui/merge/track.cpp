@@ -7,6 +7,7 @@
 #include "common/list_utils.h"
 #include "common/qt6_compat/meta_type.h"
 #include "common/strings/editing.h"
+#include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/merge/mkvmerge_option_builder.h"
 #include "mkvtoolnix-gui/merge/mux_config.h"
@@ -241,11 +242,11 @@ Track::setDefaultsColor() {
   m_transferCharacteristics = m_properties.value(Q(mtx::id::color_transfer_characteristics)).toString();
   m_maximumContentLight     = m_properties.value(Q(mtx::id::max_content_light)).toString();
   m_maximumFrameLight       = m_properties.value(Q(mtx::id::max_frame_light)).toString();
-  m_maximumLuminance        = m_properties.value(Q(mtx::id::max_luminance)).toString();
-  m_minimumLuminance        = m_properties.value(Q(mtx::id::min_luminance)).toString();
-  m_pitchRotation           = m_properties.value(Q(mtx::id::projection_pose_pitch)).toString();
-  m_rollRotation            = m_properties.value(Q(mtx::id::projection_pose_roll)).toString();
-  m_yawRotation             = m_properties.value(Q(mtx::id::projection_pose_yaw)).toString();
+  m_maximumLuminance        = Q(mtx::string::normalize_fmt_double_output(m_properties.value(Q(mtx::id::max_luminance)).toDouble()));
+  m_minimumLuminance        = Q(mtx::string::normalize_fmt_double_output(m_properties.value(Q(mtx::id::min_luminance)).toDouble()));
+  m_pitchRotation           = Q(mtx::string::normalize_fmt_double_output(m_properties.value(Q(mtx::id::projection_pose_pitch)).toDouble()));
+  m_rollRotation            = Q(mtx::string::normalize_fmt_double_output(m_properties.value(Q(mtx::id::projection_pose_roll)).toDouble()));
+  m_yawRotation             = Q(mtx::string::normalize_fmt_double_output(m_properties.value(Q(mtx::id::projection_pose_yaw)).toDouble()));
   m_projectionSpecificData  = m_properties.value(Q(mtx::id::projection_private)).toString();
   m_projectionType          = m_properties.value(Q(mtx::id::projection_type)).toString();
   m_cbSubsampling           = m_properties.value(Q(mtx::id::cb_subsample)).toString();
