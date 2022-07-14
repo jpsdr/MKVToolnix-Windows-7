@@ -235,6 +235,12 @@ Track::setDefaultsBasics() {
 
 void
 Track::setDefaultsColor() {
+  auto toDoubleIfSet = [this](QString const &key) -> QString {
+    if (!m_properties.contains(key) || m_properties[key].toString().isEmpty())
+      return {};
+    return Q(mtx::string::normalize_fmt_double_output(m_properties[key].toDouble()));
+  };
+
   m_bitsPerColorChannel     = m_properties.value(Q(mtx::id::color_bits_per_channel)).toString();
   m_colorMatrixCoefficients = m_properties.value(Q(mtx::id::color_matrix_coefficients)).toString();
   m_colorPrimaries          = m_properties.value(Q(mtx::id::color_primaries)).toString();
@@ -242,11 +248,11 @@ Track::setDefaultsColor() {
   m_transferCharacteristics = m_properties.value(Q(mtx::id::color_transfer_characteristics)).toString();
   m_maximumContentLight     = m_properties.value(Q(mtx::id::max_content_light)).toString();
   m_maximumFrameLight       = m_properties.value(Q(mtx::id::max_frame_light)).toString();
-  m_maximumLuminance        = Q(mtx::string::normalize_fmt_double_output(m_properties.value(Q(mtx::id::max_luminance)).toDouble()));
-  m_minimumLuminance        = Q(mtx::string::normalize_fmt_double_output(m_properties.value(Q(mtx::id::min_luminance)).toDouble()));
-  m_pitchRotation           = Q(mtx::string::normalize_fmt_double_output(m_properties.value(Q(mtx::id::projection_pose_pitch)).toDouble()));
-  m_rollRotation            = Q(mtx::string::normalize_fmt_double_output(m_properties.value(Q(mtx::id::projection_pose_roll)).toDouble()));
-  m_yawRotation             = Q(mtx::string::normalize_fmt_double_output(m_properties.value(Q(mtx::id::projection_pose_yaw)).toDouble()));
+  m_maximumLuminance        = toDoubleIfSet(Q(mtx::id::max_luminance));
+  m_minimumLuminance        = toDoubleIfSet(Q(mtx::id::min_luminance));
+  m_pitchRotation           = toDoubleIfSet(Q(mtx::id::projection_pose_pitch));
+  m_rollRotation            = toDoubleIfSet(Q(mtx::id::projection_pose_roll));
+  m_yawRotation             = toDoubleIfSet(Q(mtx::id::projection_pose_yaw));
   m_projectionSpecificData  = m_properties.value(Q(mtx::id::projection_private)).toString();
   m_projectionType          = m_properties.value(Q(mtx::id::projection_type)).toString();
   m_cbSubsampling           = m_properties.value(Q(mtx::id::cb_subsample)).toString();
