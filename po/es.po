@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2022-07-09 10:50+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
-"Last-Translator: overdrive80 <lukillas.ole@gmail.com>, 2016-2022\n"
+"Last-Translator: Overdrive80 <lukillas.ole@gmail.com>, 2022\n"
 "Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
 "language/es/)\n"
 "Language: es\n"
@@ -28,7 +28,7 @@ msgid ""
 "The temporary TTA file for track ID {0} is being copied into the final TTA file. This may take some time.\n"
 msgstr ""
 "\n"
-"El archivo temporal de la TTA para track ID {0} se está copiando en el archivo final de TTA. Esto puede tomar algún tiempo.\n"
+"El archivo temporal TTA para el ID de pista {0} se está copiando en el archivo final TTA. Esto puede llevar algún tiempo.\n"
 
 #: src/merge/output_control.cpp:268
 #, no-c-format
@@ -304,8 +304,8 @@ msgid ""
 msgstr ""
 "  --color-bits-per-channel <TID:n>\n"
 "                           Establece el número de bits codificados para un canal\n"
-"                           de color. Un valor de 0 indica que el número no se \n"
-"                           ha específicado. \n"
+"                           de color. Un valor de 0 indica que el número no está \n"
+"                           especificado. \n"
 
 #: src/merge/mkvmerge.cpp:311
 #, no-c-format
@@ -317,7 +317,7 @@ msgid ""
 msgstr ""
 " --color-matrix-coefficients <TID:n>\n"
 "                           Establece los coeficientes de la matriz del\n"
-"                           vídeo usado para generar los valores de luminancia y\n"
+"                           vídeo usado para deducir los valores de luminancia y\n"
 "                           crominancia a partir de los colores primarios rojo, verde \n"
 "                           y azul. \n"
 
@@ -333,7 +333,7 @@ msgstr ""
 #: src/merge/mkvmerge.cpp:330
 #, no-c-format
 msgid "  --color-range <TID:n>   Clipping of the color ranges.\n"
-msgstr "  --color-range <TID:n>   Recorte de rangos de color.\n"
+msgstr "  --color-range <TID:n>   Recorte de los rangos de color.\n"
 
 #: src/merge/mkvmerge.cpp:331
 #, no-c-format
@@ -1041,7 +1041,7 @@ msgid ""
 msgstr ""
 "  --white-color-coordinates <TID:x,y>\n"
 "                           Coordenadas cromáticas de color blanco\n"
-"                           definida por CIE 1931.\n"
+"                           definidas en CIE 1931.\n"
 
 #: src/merge/mkvmerge.cpp:211
 #, no-c-format
@@ -4270,12 +4270,12 @@ msgstr "Coordenada cromática Y del azul definida por CIE 1931."
 #: src/common/kax_element_names.cpp:117
 #, no-c-format
 msgid "Blue color coordinate x"
-msgstr "Color azul, coordenada X"
+msgstr "Coordenada X del color azul"
 
 #: src/common/kax_element_names.cpp:118
 #, no-c-format
 msgid "Blue color coordinate y"
-msgstr "Color azul, coordenada Y"
+msgstr "Coordenada Y del color azul"
 
 #: src/input/r_vobsub.cpp:549
 #, no-c-format
@@ -4953,12 +4953,12 @@ msgstr "Información de color"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:624
 #, no-c-format
 msgid "Color mastering meta information"
-msgstr "Información meta de masterización de color"
+msgstr "Metainformación sobre el dominio del color"
 
 #: src/common/kax_element_names.cpp:125
 #, no-c-format
 msgid "Color matrix coefficients"
-msgstr "Coeficientes de matriz del códec"
+msgstr "Coeficientes de la matriz de color"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2219
 #, no-c-format
@@ -4968,7 +4968,7 @@ msgstr "Coeficientes de la matriz de color:"
 #: src/common/kax_element_names.cpp:135
 #, no-c-format
 msgid "Color primaries"
-msgstr "Primarias del códec"
+msgstr "Colores primarios"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2214
 #, no-c-format
@@ -7129,12 +7129,12 @@ msgstr "Coordenada cromática Y del verde definida por CIE 1931."
 #: src/common/kax_element_names.cpp:115
 #, no-c-format
 msgid "Green color coordinate x"
-msgstr "Color verde, coordenada X"
+msgstr "Coordenada X del color verde"
 
 #: src/common/kax_element_names.cpp:116
 #, no-c-format
 msgid "Green color coordinate y"
-msgstr "Color verde, coordenada Y"
+msgstr "Coordenada Y del color verde"
 
 #: src/common/file_types.cpp:89
 #, no-c-format
@@ -10432,12 +10432,12 @@ msgstr "Coordenada cromática Y del rojo definida por CIE 1931."
 #: src/common/kax_element_names.cpp:113
 #, no-c-format
 msgid "Red color coordinate x"
-msgstr "Color rojo, coordenada X"
+msgstr "Coordenada X del color rojo"
 
 #: src/common/kax_element_names.cpp:114
 #, no-c-format
 msgid "Red color coordinate y"
-msgstr "Color rojo, coordenada Y"
+msgstr "Coordenada Y del color rojo"
 
 #: src/common/cli_parser.cpp:193
 #, no-c-format
@@ -14844,7 +14844,7 @@ msgstr "Video: cromaticidad X del rojo"
 #: src/common/property_element.cpp:170
 #, no-c-format
 msgid "Video: color matrix coefficients"
-msgstr "Video: coeficientes de matriz de color"
+msgstr "Vídeo: coeficientes de la matriz de color"
 
 #: src/common/property_element.cpp:180
 #, no-c-format
@@ -15188,12 +15188,12 @@ msgstr "Coordenada cromática Y del color blanco definida por CIE 1931."
 #: src/common/kax_element_names.cpp:119
 #, no-c-format
 msgid "White color coordinate x"
-msgstr "Color blanco, coordenada X"
+msgstr "Coordenada X del color blanco"
 
 #: src/common/kax_element_names.cpp:120
 #, no-c-format
 msgid "White color coordinate y"
-msgstr "Color blanco, coordenada Y"
+msgstr "Coordenada Y del color blanco"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2225
 #, no-c-format
