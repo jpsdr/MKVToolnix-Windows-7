@@ -274,6 +274,9 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("By default the GUI will start up with a dark color scheme if the color scheme in Windows is set to dark mode."))
                    .arg(QY("If this option is enabled, the GUI will not use its dark mode and fall back to the default color scheme.")));
 
+
+  Util::setToolTip(ui->sbGuiNumRecentlyUsedStrings, QY("This affects functions such as the selector of recently used destination directories in the multiplexer."));
+
   Util::setToolTip(ui->cbGuiCheckForUpdates,
                    Q("%1 %2 %3")
                    .arg(QY("If enabled, the program will check online whether or not a new release of MKVToolNix is available on the home page."))
