@@ -7,6 +7,7 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 
 shell = @SHELL@
+installshell = @SHELL@
 
 # Where to?
 srcdir = @srcdir@
@@ -34,7 +35,7 @@ pkgdatadir = $(datadir)/mkvtoolnix
 pkglibdir = $(libdir)/mkvtoolnix
 pkgincludedir = $(includedir)/mkvtoolnix
 top_builddir = .
-mkinstalldirs = $(shell) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(installshell) $(top_srcdir)/mkinstalldirs
 localedir = $(datadir)/locale
 desktopdir = $(datadir)/applications
 appdatadir = $(datadir)/metainfo
