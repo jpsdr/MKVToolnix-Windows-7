@@ -538,7 +538,7 @@ PCH status: <%= c?(:USE_PRECOMPILED_HEADERS) ? "enabled" : "disabled" %>
   end
 
   def self.execute(command, options={}, &block)
-    if STDOUT.tty?
+    if STDOUT.tty? && $pty_module_available
       execute_tty(command, options, &block)
     else
       execute_command(command, options, &block)
