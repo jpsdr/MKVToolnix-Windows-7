@@ -45,7 +45,6 @@ end
 def run_wrapper cmdline, opts = {}
   cmdline = cmdline.gsub(/\n/, ' ').gsub(/^\s+/, '').gsub(/\s+$/, '').gsub(/\s+/, ' ')
   code    = nil
-  shell   = ENV["RUBYSHELL"].blank? ? "c:/msys/bin/sh" : ENV["RUBYSHELL"]
 
   puts cmdline unless opts[:dont_echo].to_bool
 
@@ -57,6 +56,8 @@ def run_wrapper cmdline, opts = {}
   end
 
   if $use_tempfile_for_run
+    shell = ENV["RUBYSHELL"].blank? ? ENV["SHELL"] : ENV["RUBYSHELL"]
+
     Tempfile.open("mkvtoolnix-rake-run") do |t|
       t.puts cmdline
       t.flush
