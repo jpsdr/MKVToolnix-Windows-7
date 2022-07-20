@@ -56,7 +56,7 @@ def run_wrapper cmdline, opts = {}
   end
 
   if $use_tempfile_for_run
-    shell = ENV["RUBYSHELL"].blank? ? ENV["SHELL"] : ENV["RUBYSHELL"]
+    shell = ENV["RUBYSHELL"].blank? ? (ENV["SHELL"].blank? ? "sh" : ENV["SHELL"]) : ENV["RUBYSHELL"]
 
     Tempfile.open("mkvtoolnix-rake-run") do |t|
       t.puts cmdline
