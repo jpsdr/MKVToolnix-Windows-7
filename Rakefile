@@ -464,11 +464,6 @@ rule '.1' => '.xml' do |t|
 
   stylesheet = "#{c(:DOCBOOK_ROOT)}/manpages/docbook.xsl"
 
-  if !FileTest.exists?(stylesheet)
-    puts "Error: the DocBook stylesheet '#{stylesheet}' does not exist."
-    exit 1
-  end
-
   runq "xsltproc", t.source, "#{c(:XSLTPROC)} #{c(:XSLTPROC_FLAGS)} -o #{t.name} #{stylesheet} #{t.sources.join(" ")}", :filter_output => filter
 end
 
