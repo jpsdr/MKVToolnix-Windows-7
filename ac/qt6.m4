@@ -127,7 +127,7 @@ EOT
     AC_MSG_RESULT(unknown; please contact the author)
     return
   elif ! check_version $qt_min_ver $qmake6_ver; then
-    AC_MSG_RESULT(too old: $qmake6_ver, need at least $qt_min-ver)
+    AC_MSG_RESULT(too old: $qmake6_ver, need at least $qt_min_ver)
     return
   else
     AC_MSG_RESULT($qmake6_ver)
