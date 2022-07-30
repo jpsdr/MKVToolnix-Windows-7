@@ -30,6 +30,7 @@ obu_reader_c::probe_file() {
 
   mtx::av1::parser_c parser;
   parser.parse(*m_buffer);
+  parser.flush();
 
   if (!parser.headers_parsed() || !parser.frame_available())
     return false;

@@ -11,6 +11,8 @@
   numbers (minimum/maximum luminance, projection pitch/roll/yaw) will only be
   set to a value during identification if the identification actually contains
   the property, and not to 0 anymore if it doesn't.
+* mkvmerge: AV1 OBU parser: fixed identifying files that only contain single
+  frame. Fixes #3380.
 
 
 # Version 69.0.0 "Day And Age" 2022-07-09
