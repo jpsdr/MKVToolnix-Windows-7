@@ -135,11 +135,26 @@ EOT
 
   qt_bindir="`$ac_cv_path_EGREP '^QT_HOST_BINS:' "$qmake_dir/configure.properties" | sed 's/^QT_HOST_BINS://'`"
   qt_libexecdir="`$ac_cv_path_EGREP '^QT_HOST_LIBEXECS:' "$qmake_dir/configure.properties" | sed 's/^QT_HOST_LIBEXECS://'`"
+
+  # If under MinGW/MSYS2, convert these two paths to Unix style
+  if ! test -z "${MINGW_PREFIX}"; then
+    qt_bindir="`cygpath -u ${qt_bindir}`"
+    qt_libexecdir="`cygpath -u ${qt_libexecdir}`"
+  fi
+
   qt_searchpath="$qt_libexecdir:$qt_bindir:$PATH"
 
   QT_CFLAGS="`$ac_cv_path_EGREP '^DEFINES *=' "$qmake_dir/Makefile" | sed 's/^DEFINES *= *//'`"
   QT_CFLAGS="$QT_CFLAGS `$ac_cv_path_EGREP '^CXXFLAGS *=' "$qmake_dir/Makefile" | sed -e 's/^CXXFLAGS *= *//' -e 's/-pipe//g' -e 's/-O.//g' -e 's/ -f[[a-z]][[^ ]]*//g' -e 's/ -W[[^ ]]*//g' -e 's/-std=[[^ ]]*//g' -e 's/\$([[^)]]*)//g'`"
-  QT_CFLAGS="$QT_CFLAGS `$ac_cv_path_EGREP '^INCPATH *=' "$qmake_dir/Makefile" | sed -e 's/^INCPATH *= *//' -e 's:-I[[^/]][[^ ]]*::g'`"
+  QT_INCFLAGS="`$ac_cv_path_EGREP '^INCPATH *=' "$qmake_dir/Makefile" | sed -e 's/^INCPATH *= *//'`"
+
+  # If under MinGW/MSYS2, fix relative include paths
+  if ! test -z "${MINGW_PREFIX}"; then
+    QT_INCFLAGS="`echo $QT_INCFLAGS | sed -e "s:../..${MINGW_PREFIX}:${MINGW_PREFIX}:g"`"
+  fi
+
+  QT_INCFLAGS="`echo $QT_INCFLAGS | sed -e 's:-I[[^/]][[^ ]]*::g'`"
+  QT_CFLAGS="$QT_CFLAGS $QT_INCFLAGS"
   QT_CFLAGS="`echo $QT_CFLAGS | sed -e 's/\$(EXPORT_ARCH_ARGS)//'`"
   QT_LIBS="`$ac_cv_path_EGREP '^LFLAGS *=' "$qmake_dir/Makefile" | sed -e 's/^LFLAGS *= *//' -e 's/-Wl,-O[[^ ]]*//g' -e 's/ -f[[a-z]][[^ ]]*//g'`"
   QT_LIBS="$QT_LIBS `$ac_cv_path_EGREP '^LIBS *=' "$qmake_dir/Makefile" | sed -e 's/^LIBS *= *//' -e 's/\$([[^)]]*)//g' -e 's:-L[[^/]][[^ ]]*::g'`"
