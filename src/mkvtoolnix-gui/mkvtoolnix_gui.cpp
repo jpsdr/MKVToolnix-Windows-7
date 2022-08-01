@@ -46,7 +46,7 @@ enableOrDisableHighDPIScaling() {
 void
 initiateSettings() {
 #if defined(SYS_WINDOWS)
-  if (mtx::sys::get_environment_variable("").empty())
+  if (mtx::sys::get_environment_variable("QT_MESSAGE_PATTERN").empty())
     mtx::sys::set_environment_variable("QT_MESSAGE_PATTERN", "[%{type}] %{appname} (%{file}:%{line}) - %{message}");
 #endif
 
