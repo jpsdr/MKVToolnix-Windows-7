@@ -1,5 +1,15 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: the user can now control where the job queue files & the
+  preferences INI file are stored via environment variables. If set, the
+  variable `MKVTOOLNIX_GUI_STATE_DIR` can point to a directory where the GUI
+  stores both the job queue sub-directory and the preferences INI file. If you
+  only want to relocate the preferences INI file, you can store the desired
+  file name for the INI file in `MKVTOOLNIX_GUI_CONFIG_FILE`. Implements
+  #3382.
+
 ## Bug fixes
 
 * MKVToolNix GUI: multiplexer: when reading color parameters from identified

@@ -360,6 +360,10 @@ Settings::get() {
 
 QString
 Settings::iniFileLocation() {
+  auto var = Q(mtx::sys::get_environment_variable("MKVTOOLNIX_GUI_STATE_DIR"));
+  if (!var.isEmpty())
+    return var;
+
 #if defined(SYS_WINDOWS)
   if (!App::isInstalled())
     // QApplication::applicationDirPath() cannot be used here as the
@@ -402,6 +406,10 @@ Settings::prepareCacheDir(QString const &subDir) {
 
 QString
 Settings::iniFileName() {
+  auto var = Q(mtx::sys::get_environment_variable("MKVTOOLNIX_GUI_CONFIG_FILE"));
+  if (!var.isEmpty())
+    return var;
+
   return Q("%1/mkvtoolnix-gui.ini").arg(iniFileLocation());
 }
 

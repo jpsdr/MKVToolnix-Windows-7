@@ -30,6 +30,7 @@
 #include "common/fs_sys_helpers.h"
 #include "common/version.h"
 #include "mkvtoolnix-gui/app.h"
+#include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/util/installation_checker.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/system_information.h"
@@ -71,6 +72,7 @@ gatherGeneralInfo(QStringList &info) {
 #endif
   info << Q("* Installation path: %1").arg(QDir::toNativeSeparators(App::applicationDirPath()));
   info << Q("* INI file location: %1").arg(QDir::toNativeSeparators(Util::Settings::iniFileName()));
+  info << Q("* Job queue location: %1").arg(QDir::toNativeSeparators(Jobs::Job::queueLocation()));
 
   info << Q("") << Q("## Installation problems") << Q("");
 
