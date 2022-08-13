@@ -28,6 +28,11 @@
 * mkvmerge: AV1 OBU parser: fixed identifying files that only contain single
   frame. Fixes #3380.
 
+## Build system changes
+
+* Several merge requests where accepted that improve compilation on MSYS2 on
+  Windows. Note that this build type isn't supported.
+
 
 # Version 69.0.0 "Day And Age" 2022-07-09
 
