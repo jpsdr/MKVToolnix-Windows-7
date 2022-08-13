@@ -19,6 +19,7 @@
 #include "mkvtoolnix-gui/main_window/preferences_dialog.h"
 #include "mkvtoolnix-gui/main_window/prefs_language_shortcut_dialog.h"
 #include "mkvtoolnix-gui/main_window/prefs_run_program_widget.h"
+#include "mkvtoolnix-gui/merge/adding_directories_dialog.h"
 #include "mkvtoolnix-gui/merge/additional_command_line_options_dialog.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
 #include "mkvtoolnix-gui/util/container.h"
@@ -123,6 +124,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupEnableMuxingTracksByType();
   setupEnableMuxingTracksByLanguage();
   setupMergeAddingAppendingFilesPolicy();
+  setupMergeAddingAppendingDirectoriesPolicy();
   setupMergeWarnMissingAudioTrack();
   setupMergePredefinedItems();
   setupTrackPropertiesLayout();
@@ -428,6 +430,16 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("When the user drags & drops files from an external application onto the multiplex tool the GUI can take different actions."))
                    .arg(QY("The default is to always add all the files to the current multiplex settings."))
                    .arg(QY("The GUI can also ask the user what to do each time, e.g. appending them instead of adding them, or creating new multiplex settings and adding them to those.")));
+
+  QString fullText;
+
+  for (auto const &text : Merge::AddingDirectoriesDialog::optionDescriptions())
+    fullText += Q("<li>%1</li>").arg(text.toHtmlEscaped());
+
+  Util::setToolTip(ui->cbMDragAndDropDirectoriesPolicy,
+                   Q("<p>%1</p><ol>%2</ol>")
+                   .arg(QY("When the user drags & drops directories from an external application onto the multiplex tool the GUI can take different actions."))
+                   .arg(fullText));
 
   Util::setToolTip(ui->cbMWarnMissingAudioTrack, QY("The GUI can ask for confirmation when you're about to create a file without audio tracks in it."));
 
@@ -779,6 +791,19 @@ PreferencesDialog::setupMergeAddingAppendingFilesPolicy() {
 }
 
 void
+PreferencesDialog::setupMergeAddingAppendingDirectoriesPolicy() {
+  ui->cbMDragAndDropDirectoriesPolicy->addItem(QY("Always ask the user"),                                             static_cast<int>(Util::Settings::MergeAddingDirectoriesPolicy::Ask));
+  ui->cbMDragAndDropDirectoriesPolicy->addItem(QY("Handle all files from all directories as a single list of files"), static_cast<int>(Util::Settings::MergeAddingDirectoriesPolicy::Flat));
+  ui->cbMDragAndDropDirectoriesPolicy->addItem(QY("Create a new multiplex settings tab for each directory"),          static_cast<int>(Util::Settings::MergeAddingDirectoriesPolicy::AddEachDirectoryToNew));
+
+  Util::setComboBoxIndexIf(ui->cbMDragAndDropDirectoriesPolicy, [this](QString const &, QVariant const &data) {
+    return data.isValid() && (static_cast<Util::Settings::MergeAddingDirectoriesPolicy>(data.toInt()) == m_cfg.m_mergeDragAndDropDirectoriesPolicy);
+  });
+
+  Util::fixComboBoxViewWidth(*ui->cbMDragAndDropDirectoriesPolicy);
+}
+
+void
 PreferencesDialog::setupMergeWarnMissingAudioTrack() {
   ui->cbMWarnMissingAudioTrack->addItem(QY("Never"),                                           static_cast<int>(Util::Settings::MergeMissingAudioTrackPolicy::Never));
   ui->cbMWarnMissingAudioTrack->addItem(QY("If audio tracks are present but none is enabled"), static_cast<int>(Util::Settings::MergeMissingAudioTrackPolicy::IfAudioTrackPresent));
@@ -1094,6 +1119,7 @@ PreferencesDialog::save() {
   m_cfg.m_mergeEnableDialogNormGainRemoval                    = ui->cbMEnableDialogNormGainRemoval->isChecked();
   m_cfg.m_mergeAddingAppendingFilesPolicy                     = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMAddingAppendingFilesPolicy->currentData().toInt());
   m_cfg.m_mergeDragAndDropFilesPolicy                         = static_cast<Util::Settings::MergeAddingAppendingFilesPolicy>(ui->cbMDragAndDropFilesPolicy->currentData().toInt());
+  m_cfg.m_mergeDragAndDropDirectoriesPolicy                   = static_cast<Util::Settings::MergeAddingDirectoriesPolicy>(ui->cbMDragAndDropDirectoriesPolicy->currentData().toInt());
   m_cfg.m_mergeAlwaysCreateNewSettingsForVideoFiles           = ui->cbMAlwaysCreateSettingsForVideoFiles->isChecked();
   m_cfg.m_mergeSortFilesTracksByTypeWhenAdding                = ui->cbMSortFilesTracksByTypeWhenAdding->isChecked();
   m_cfg.m_mergeReconstructSequencesWhenAdding                 = ui->cbMReconstructSequencesWhenAdding->isChecked();

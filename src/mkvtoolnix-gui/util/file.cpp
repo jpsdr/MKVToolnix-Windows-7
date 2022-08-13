@@ -1,8 +1,6 @@
 #include "common/common_pch.h"
 
 #include <QByteArray>
-#include <QDir>
-#include <QDirIterator>
 #include <QFile>
 #include <QFileInfo>
 #include <QIODevice>
@@ -88,41 +86,6 @@ replaceInvalidFileNameCharacters(QString fileName) {
   fileName.replace(*s_invalidCharRE, Q("-"));
 
   return fileName;
-}
-
-QStringList
-replaceDirectoriesByContainedFiles(QStringList const &namesToCheck) {
-  QStringList fileNames;
-
-  for (auto const &nameToCheck : namesToCheck) {
-    auto info = QFileInfo{nameToCheck};
-    if (!info.exists())
-      continue;
-
-    if (info.isFile()) {
-      fileNames << nameToCheck;
-      continue;
-    }
-
-    if (!info.isDir())
-      continue;
-
-    QStringList newFileNames;
-    QDirIterator it{nameToCheck, QDirIterator::Subdirectories};
-
-    while (it.hasNext()) {
-      it.next();
-      info = it.fileInfo();
-
-      if (info.isFile())
-        newFileNames << info.absoluteFilePath();
-    }
-
-    newFileNames.sort(Qt::CaseInsensitive);
-    fileNames += newFileNames;
-  }
-
-  return fileNames;
 }
 
 QString

@@ -12,7 +12,7 @@ using SourceFilePtr = std::shared_ptr<SourceFile>;
 
 struct IdentificationPack {
   enum class FileType { Regular,    Chapters, Tags, SegmentInfo };
-  enum class AddMode  { UserChoice, Add,      Append };
+  enum class AddMode  { UserChoice, Add,      Append, AddDontAsk };
 
   struct IdentifiedFile {
     FileType m_type{FileType::Regular};

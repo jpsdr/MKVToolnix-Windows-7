@@ -118,6 +118,7 @@ protected:
   void setupEnableMuxingTracksByType();
   void setupEnableMuxingTracksByLanguage();
   void setupMergeAddingAppendingFilesPolicy();
+  void setupMergeAddingAppendingDirectoriesPolicy();
   void setupMergeWarnMissingAudioTrack();
   void setupMergePredefinedItems();
   void setupHeaderEditorDroppedFilesPolicy();

@@ -40,6 +40,7 @@ FORMS += \
     forms/main_window/select_character_set_dialog.ui \
     forms/main_window/status_bar_progress_widget.ui \
     forms/merge/adding_appending_files_dialog.ui \
+    forms/merge/adding_directories_dialog.ui \
     forms/merge/additional_command_line_options_dialog.ui \
     forms/merge/ask_scan_for_playlists_dialog.ui \
     forms/merge/command_line_dialog.ui \

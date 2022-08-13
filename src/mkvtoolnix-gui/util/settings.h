@@ -113,6 +113,13 @@ public:
   };
   Q_ENUM(MergeAddingAppendingFilesPolicy);
 
+  enum class MergeAddingDirectoriesPolicy {
+    Ask,
+    Flat,
+    AddEachDirectoryToNew,
+  };
+  Q_ENUM(MergeAddingDirectoriesPolicy);
+
   enum class HeaderEditorDroppedFilesPolicy {
     Ask,
     Open,
@@ -190,6 +197,7 @@ public:
   bool m_mergeEnableDialogNormGainRemoval, m_mergeAddBlurayCovers, m_mergeAttachmentsAlwaysSkipForExistingName;
   ClearMergeSettingsAction m_clearMergeSettings;
   MergeAddingAppendingFilesPolicy m_mergeDragAndDropFilesPolicy, m_mergeLastDragAndDropFilesDecision, m_mergeAddingAppendingFilesPolicy, m_mergeLastAddingAppendingDecision;
+  MergeAddingDirectoriesPolicy m_mergeDragAndDropDirectoriesPolicy;
   bool m_mergeAlwaysCreateNewSettingsForVideoFiles, m_mergeSortFilesTracksByTypeWhenAdding, m_mergeReconstructSequencesWhenAdding;
   HeaderEditorDroppedFilesPolicy m_headerEditorDroppedFilesPolicy;
   bool m_headerEditorDateTimeInUTC;
@@ -315,6 +323,8 @@ public:
   static QString defaultBoundaryCharsForDerivingLanguageFromFileName();
 
   static QVector<QColor> defaultFileColors();
+
+  static MergeAddingDirectoriesPolicy toMergeAddingDirectoriesPolicy(int value);
 };
 
 }

@@ -5,6 +5,7 @@
 #include "mkvtoolnix-gui/main_window/tool_base.h"
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/source_file.h"
+#include "mkvtoolnix-gui/util/settings.h"
 
 class QDragEnterEvent;
 class QDragMoveEvent;
@@ -105,6 +106,8 @@ protected:
   virtual void enableCopyMenuActions();
   virtual void showMergeWidget();
 
+  virtual std::optional<Util::Settings::MergeAddingDirectoriesPolicy> determineAddingDirectoriesPolicy();
+  virtual void addFileIdentificationPack(QStringList const &fileNames, IdentificationPack::AddMode addMode, Qt::MouseButtons mouseButtons);
   virtual QStringList fileNamesFromClipboard() const;
 
   virtual void dragEnterEvent(QDragEnterEvent *event) override;

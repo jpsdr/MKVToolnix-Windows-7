@@ -547,6 +547,7 @@ Settings::load() {
   m_mergeAddingAppendingFilesPolicy           = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeAddingAppendingFilesPolicy,   static_cast<int>(MergeAddingAppendingFilesPolicy::Ask)).toInt());
   m_mergeLastAddingAppendingDecision          = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeLastAddingAppendingDecision,  static_cast<int>(MergeAddingAppendingFilesPolicy::Add)).toInt());
   m_mergeDragAndDropFilesPolicy               = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeDragAndDropFilesPolicy,       static_cast<int>(MergeAddingAppendingFilesPolicy::Ask)).toInt());
+  m_mergeDragAndDropDirectoriesPolicy         = toMergeAddingDirectoriesPolicy(reg.value(s_valMergeDragAndDropDirectoriesPolicy,               static_cast<int>(MergeAddingDirectoriesPolicy::Ask)).toInt());
   m_mergeLastDragAndDropFilesDecision         = static_cast<MergeAddingAppendingFilesPolicy>(reg.value(s_valMergeLastDragAndDropFilesDecision, static_cast<int>(MergeAddingAppendingFilesPolicy::Add)).toInt());
   m_mergeWarnMissingAudioTrack                = static_cast<MergeMissingAudioTrackPolicy>(reg.value(s_valMergeWarnMissingAudioTrack,           static_cast<int>(MergeMissingAudioTrackPolicy::IfAudioTrackPresent)).toInt());
   m_headerEditorDroppedFilesPolicy            = static_cast<HeaderEditorDroppedFilesPolicy>(reg.value(s_valHeaderEditorDroppedFilesPolicy,     static_cast<int>(HeaderEditorDroppedFilesPolicy::Ask)).toInt());
@@ -987,6 +988,7 @@ Settings::save()
   reg.setValue(s_valMergeAddingAppendingFilesPolicy,           static_cast<int>(m_mergeAddingAppendingFilesPolicy));
   reg.setValue(s_valMergeLastAddingAppendingDecision,          static_cast<int>(m_mergeLastAddingAppendingDecision));
   reg.setValue(s_valMergeDragAndDropFilesPolicy,               static_cast<int>(m_mergeDragAndDropFilesPolicy));
+  reg.setValue(s_valMergeDragAndDropDirectoriesPolicy,         static_cast<int>(m_mergeDragAndDropDirectoriesPolicy));
   reg.setValue(s_valMergeLastDragAndDropFilesDecision,         static_cast<int>(m_mergeLastDragAndDropFilesDecision));
   reg.setValue(s_valMergeWarnMissingAudioTrack,                static_cast<int>(m_mergeWarnMissingAudioTrack));
   reg.setValue(s_valHeaderEditorDroppedFilesPolicy,            static_cast<int>(m_headerEditorDroppedFilesPolicy));
@@ -1403,6 +1405,13 @@ Settings::nthFileColor(int idx)
     s_additionalColors << QColor{random_c::generate_8bits(), random_c::generate_8bits(), random_c::generate_8bits()};
 
   return s_additionalColors.at(idx);
+}
+
+Settings::MergeAddingDirectoriesPolicy
+Settings::toMergeAddingDirectoriesPolicy(int value) {
+  return value == static_cast<int>(MergeAddingDirectoriesPolicy::Flat)                  ? MergeAddingDirectoriesPolicy::Flat
+       : value == static_cast<int>(MergeAddingDirectoriesPolicy::AddEachDirectoryToNew) ? MergeAddingDirectoriesPolicy::AddEachDirectoryToNew
+       :                                                                                  MergeAddingDirectoriesPolicy::Ask;
 }
 
 }

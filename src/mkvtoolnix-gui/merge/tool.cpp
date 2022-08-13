@@ -1,6 +1,8 @@
 #include "common/common_pch.h"
 
 #include <QClipboard>
+#include <QDir>
+#include <QDirIterator>
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QFileInfo>
@@ -9,6 +11,7 @@
 #include <QProgressDialog>
 
 #include "common/bluray/util.h"
+#include "common/fs_sys_helpers.h"
 #include "common/path.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
@@ -16,6 +19,7 @@
 #include "mkvtoolnix-gui/forms/main_window/main_window.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/merge/adding_appending_files_dialog.h"
+#include "mkvtoolnix-gui/merge/adding_directories_dialog.h"
 #include "mkvtoolnix-gui/merge/ask_scan_for_playlists_dialog.h"
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
 #include "mkvtoolnix-gui/merge/file_identification_pack.h"
@@ -44,6 +48,53 @@ qHash(std::filesystem::path const &path) {
 }
 
 namespace mtx::gui::Merge {
+
+namespace {
+
+struct ResolvedDirectories {
+  using Dir = std::pair<QString, QStringList>;
+  QVector<Dir> m_directories;
+  QStringList m_files;
+};
+
+ResolvedDirectories
+resolveDirectoriesToContainedFilesAndDirectories(QStringList const &namesToCheck) {
+  ResolvedDirectories resolvedDirs;
+
+  for (auto const &nameToCheck : namesToCheck) {
+    auto info = QFileInfo{nameToCheck};
+    if (!info.exists())
+      continue;
+
+    if (info.isFile()) {
+      resolvedDirs.m_files << nameToCheck;
+      continue;
+    }
+
+    if (!info.isDir())
+      continue;
+
+    QStringList newFileNames;
+    QDirIterator it{nameToCheck, QDirIterator::Subdirectories};
+
+    while (it.hasNext()) {
+      it.next();
+      info = it.fileInfo();
+
+      if (info.isFile())
+        newFileNames << info.absoluteFilePath();
+    }
+
+    newFileNames.sort(Qt::CaseInsensitive);
+
+    if (!newFileNames.isEmpty())
+      resolvedDirs.m_directories << std::make_pair(nameToCheck, newFileNames);
+  }
+
+  return resolvedDirs;
+}
+
+}
 
 using namespace mtx::gui;
 
@@ -710,10 +761,12 @@ Tool::handleIdentifiedSourceFiles(IdentificationPack &pack) {
   retrieveDiscInformationForPlaylists(identifiedSourceFiles);
 
   if (   (pack.m_addMode == IdentificationPack::AddMode::Append)
+      || (pack.m_addMode == IdentificationPack::AddMode::AddDontAsk)
       || (   (identifiedSourceFiles.count() == 1)
           && (   tab->isEmpty()
               || (pack.m_addMode == IdentificationPack::AddMode::Add)))) {
-    tab->addOrAppendIdentifiedFiles(identifiedSourceFiles, pack.m_sourceFileIdx, pack.m_addMode);
+    auto addMode = pack.m_addMode == IdentificationPack::AddMode::AddDontAsk ? IdentificationPack::AddMode::Add : pack.m_addMode;
+    tab->addOrAppendIdentifiedFiles(identifiedSourceFiles, pack.m_sourceFileIdx, addMode);
     return;
   }
 
@@ -796,11 +849,34 @@ Tool::handleIdentifiedFiles(IdentificationPack identifiedFiles) {
   handleIdentifiedSourceFiles(identifiedFiles);
 }
 
+std::optional<Util::Settings::MergeAddingDirectoriesPolicy>
+Tool::determineAddingDirectoriesPolicy() {
+  auto &settings = Util::Settings::get();
+  auto policy    = settings.m_mergeDragAndDropDirectoriesPolicy;
+
+  if (policy != Util::Settings::MergeAddingDirectoriesPolicy::Ask)
+    return policy;
+
+  AddingDirectoriesDialog dlg{this, policy};
+
+  if (!dlg.exec())
+    return {};
+
+  policy = dlg.decision();
+
+  if (dlg.alwaysUseThisDecision()) {
+    settings.m_mergeDragAndDropDirectoriesPolicy = policy;
+    settings.save();
+  }
+
+  return policy;
+}
+
 void
-Tool::identifyMultipleFiles(QStringList const &fileNamesToIdentify,
-                            Qt::MouseButtons mouseButtons) {
-  auto &p        = *p_func();
-  auto fileNames = Util::replaceDirectoriesByContainedFiles(fileNamesToIdentify);
+Tool::addFileIdentificationPack(QStringList const &fileNames,
+                                IdentificationPack::AddMode addMode,
+                                Qt::MouseButtons mouseButtons) {
+  auto &p = *p_func();
 
   if (fileNames.isEmpty())
     return;
@@ -808,9 +884,54 @@ Tool::identifyMultipleFiles(QStringList const &fileNamesToIdentify,
   IdentificationPack pack;
   pack.m_tabId        = reinterpret_cast<uint64_t>(currentTab());
   pack.m_fileNames    = fileNames;
+  pack.m_addMode      = addMode;
   pack.m_mouseButtons = mouseButtons;
 
+  qDebug() << "tabId" << pack.m_tabId << pack.m_fileNames;
+
   p.identifier->worker().addPackToIdentify(pack);
+}
+
+void
+Tool::identifyMultipleFiles(QStringList const &fileNamesToIdentify,
+                            Qt::MouseButtons mouseButtons) {
+  auto resolvedDirs = resolveDirectoriesToContainedFilesAndDirectories(fileNamesToIdentify);
+
+  if (resolvedDirs.m_files.isEmpty() && resolvedDirs.m_directories.isEmpty())
+    return;
+
+  if (resolvedDirs.m_directories.isEmpty()) {
+    addFileIdentificationPack(resolvedDirs.m_files, IdentificationPack::AddMode::UserChoice, mouseButtons);
+    return;
+  }
+
+  auto policyOpt = determineAddingDirectoriesPolicy();
+
+  if (!policyOpt)
+    return;
+
+  auto policy = *policyOpt;
+
+  if (policy == Util::Settings::MergeAddingDirectoriesPolicy::Flat) {
+    auto fileNames = resolvedDirs.m_files;
+
+    for (auto const &dir : resolvedDirs.m_directories)
+      fileNames += dir.second;
+
+    addFileIdentificationPack(fileNames, IdentificationPack::AddMode::UserChoice, mouseButtons);
+    return;
+  }
+
+  if (!currentTab())
+    appendNewTab();
+
+  addFileIdentificationPack(resolvedDirs.m_files, IdentificationPack::AddMode::UserChoice, mouseButtons);
+
+  // Util::Settings::MergeAddingDirectoriesPolicy::AddEachDirectoryToNew
+  for (auto const &dir : resolvedDirs.m_directories) {
+    appendNewTab();
+    addFileIdentificationPack(dir.second, IdentificationPack::AddMode::AddDontAsk, mouseButtons);
+  }
 }
 
 void
