@@ -16,6 +16,8 @@
 
 ## Bug fixes
 
+* mkvmerge: AV1 OBU parser: fixed identifying files that only contain single
+  frame. Fixes #3380.
 * MKVToolNix GUI: multiplexer: when reading color parameters from identified
   files that are floating point numbers (minimum/maximum luminance, projection
   pitch/roll/yaw) the numbers will be formatted in floating-point notation
@@ -25,8 +27,6 @@
   numbers (minimum/maximum luminance, projection pitch/roll/yaw) will only be
   set to a value during identification if the identification actually contains
   the property, and not to 0 anymore if it doesn't.
-* mkvmerge: AV1 OBU parser: fixed identifying files that only contain single
-  frame. Fixes #3380.
 
 ## Build system changes
 
