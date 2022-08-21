@@ -62,14 +62,13 @@ xtr_vobsub_c::xtr_vobsub_c(const std::string &codec_id,
 void
 xtr_vobsub_c::create_file(xtr_base_c *master,
                           libmatroska::KaxTrackEntry &track) {
-  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
-  if (!priv)
-    mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
-
   init_content_decoder(track);
 
-  m_private_data = decode_codec_private(priv);
-  m_private_data->take_ownership();
+  auto priv = FindChild<libmatroska::KaxCodecPrivate>(&track);
+  if (priv) {
+    m_private_data = decode_codec_private(priv);
+    m_private_data->take_ownership();
+  }
 
   m_master   = master;
   m_language = kt_get_language(track);
@@ -88,7 +87,11 @@ xtr_vobsub_c::create_file(xtr_base_c *master,
       mxerror(fmt::format(Y("Cannot extract tracks of different kinds to the same file. This was requested for the tracks {0} and {1}.\n"),
                           m_tid, m_master->m_tid));
 
-    if ((m_private_data->get_size() != vmaster->m_private_data->get_size()) || memcmp(priv->GetBuffer(), vmaster->m_private_data->get_buffer(), m_private_data->get_size()))
+    if ((!m_private_data && vmaster->m_private_data) ||
+        (m_private_data &&
+         (!vmaster->m_private_data ||
+          (m_private_data->get_size() != vmaster->m_private_data->get_size() ||
+           memcmp(m_private_data->get_buffer(), vmaster->m_private_data->get_buffer(), m_private_data->get_size())))))
       mxerror(fmt::format(Y("Two VobSub tracks can only be extracted into the same file if their CodecPrivate data matches. "
                             "This is not the case for the tracks {0} and {1}.\n"), m_tid, m_master->m_tid));
 
@@ -235,19 +238,24 @@ xtr_vobsub_c::finish_file() {
     mm_write_buffer_io_c idx(std::make_shared<mm_file_io_c>(m_idx_file_name.u8string(), MODE_CREATE), 128 * 1024);
     mxinfo(fmt::format(Y("Writing the VobSub index file '{0}'.\n"), m_idx_file_name.u8string()));
 
-    auto buffer = reinterpret_cast<char const *>(m_private_data->get_buffer());
-    auto size   = m_private_data->get_size();
+    std::string header;
 
-    while ((size > 0) && (buffer[size - 1] == 0))
-      --size;
+    if (m_private_data) {
+      auto buffer = reinterpret_cast<char const *>(m_private_data->get_buffer());
+      auto size   = m_private_data->get_size();
 
-    auto header = std::string{ buffer, size };
-    mtx::string::strip(header, true);
+      while ((size > 0) && (buffer[size - 1] == 0))
+        --size;
+
+      header = std::string{ buffer, size };
+      mtx::string::strip(header, true);
+    }
 
     if (!balg::istarts_with(header, header_line))
       idx.puts(header_line);
 
-    idx.puts(header + "\n");
+    if (!header.empty())
+      idx.puts(header + "\n");
 
     if (header.find("langidx:") == std::string::npos)
       idx.puts("langidx: 0\n");
