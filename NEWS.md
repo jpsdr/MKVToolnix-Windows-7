@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: Ogg/OGM reader: mkvmerge will now correctly skip tracks of
+  unsupported types as well as tracks for which all track header pages
+  haven't been found. Fixes #3394.
+
+
 # Version 70.0.0 "Caught A Lite Sneeze" 2022-08-14
 
 ## New features and enhancements

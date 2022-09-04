@@ -600,10 +600,11 @@ ogm_reader_c::read_headers_internal() {
   ogg_page og;
 
   bool done = false;
+
   while (!done) {
     // Make sure we have a page that we can work with.
     if (read_page(&og) == FILE_STATUS_DONE)
-      return 0;
+      break;
 
     // Is this the first page of a new stream?
     if (ogg_page_bos(&og))
@@ -629,7 +630,9 @@ ogm_reader_c::read_headers_internal() {
   ogg_sync_clear(&oy);
   ogg_sync_init(&oy);
 
-  return 1;
+  sdemuxers.erase(std::remove_if(sdemuxers.begin(), sdemuxers.end(), [](auto const &dmx) { return !dmx->headers_read; }), sdemuxers.end());
+
+  return bos_pages_read ? 1 : 0;
 }
 
 /*
