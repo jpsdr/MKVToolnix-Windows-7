@@ -265,8 +265,8 @@ Tab::setupVerticalTabWidgetInputLayout() {
   moveTo(p.ui->generalOptionsPage,                 0, p.ui->generalOptionsBox);
   moveTo(p.ui->timestampsAndDefaultDurationPage,   0, p.ui->timestampsAndDefaultDurationBox);
   moveTo(p.ui->videoPropertiesPage,                0, p.ui->videoPropertiesBox);
-  moveTo(p.ui->colorInformationPage,              0, p.ui->colorInformationBox);
-  moveTo(p.ui->colorMasteringMetaInformationPage, 0, p.ui->colorMasteringMetaInformationBox);
+  moveTo(p.ui->colorInformationPage,               0, p.ui->colorInformationBox);
+  moveTo(p.ui->colorMasteringMetaInformationPage,  0, p.ui->colorMasteringMetaInformationBox);
   moveTo(p.ui->videoProjectionInformationPage,     0, p.ui->videoProjectionInformationBox);
   moveTo(p.ui->audioSubtitleChapterPropertiesPage, 0, p.ui->audioPropertiesBox);
   moveTo(p.ui->audioSubtitleChapterPropertiesPage, 1, p.ui->subtitleAndChapterPropertiesBox);
