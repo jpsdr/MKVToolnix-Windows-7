@@ -206,7 +206,8 @@ Tab::setupHorizontalScrollAreaInputLayout() {
 
   p.ui->propertiesStack->setCurrentIndex(0);
 
-  Util::autoGroupBoxGridLayout(*p.ui->generalOptionsBox, 1);
+  Util::autoGroupBoxGridLayout(*p.ui->generalOptionsBox,   1);
+  Util::autoGroupBoxGridLayout(*p.ui->colorInformationBox, 1);
 }
 
 void
@@ -241,7 +242,8 @@ Tab::setupHorizontalTwoColumnsInputLayout() {
   moveTo(p.ui->propertiesColumn2, idx++, p.ui->colorMasteringMetaInformationBox);
   moveTo(p.ui->propertiesColumn2, idx++, p.ui->videoProjectionInformationBox);
 
-  Util::autoGroupBoxGridLayout(*p.ui->generalOptionsBox, 1);
+  Util::autoGroupBoxGridLayout(*p.ui->generalOptionsBox,   1);
+  Util::autoGroupBoxGridLayout(*p.ui->colorInformationBox, 1);
 }
 
 void
@@ -275,7 +277,8 @@ Tab::setupVerticalTabWidgetInputLayout() {
   p.ui->propertiesColumn1->updateGeometry();
   p.ui->propertiesColumn2->updateGeometry();
 
-  Util::autoGroupBoxGridLayout(*p.ui->generalOptionsBox, 2);
+  Util::autoGroupBoxGridLayout(*p.ui->generalOptionsBox,   2);
+  Util::autoGroupBoxGridLayout(*p.ui->colorInformationBox, 2);
 }
 
 void

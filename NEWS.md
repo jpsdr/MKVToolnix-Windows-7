@@ -1,5 +1,13 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: when the track properties are
+  configured to be displayed in a tab widget below the files & tracks
+  in the "Input" tab, the "Color information" tab will be laid out in
+  two columns. This reduces the minimum height the whole tab widget
+  requires. Implements #3401.
+
 ## Bug fixes
 
 * mkvmerge: Ogg/OGM reader: mkvmerge will now correctly skip tracks of
