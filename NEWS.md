@@ -7,6 +7,9 @@
   in the "Input" tab, the "Color information" tab will be laid out in
   two columns. This reduces the minimum height the whole tab widget
   requires. Implements #3401.
+* MKVToolNix GUI: greatly sped up closing the preferences dialog by only
+  re-running certain initialization functions when their corresponding
+  settings have changed.
 
 ## Bug fixes
 

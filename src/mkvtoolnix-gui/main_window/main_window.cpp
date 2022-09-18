@@ -233,8 +233,6 @@ MainWindow::setupConnections() {
   connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::setToolSelectorVisibility);
   connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::setStayOnTopStatus);
   connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::showOrHideDebuggingMenu);
-  connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::reinitializeLanguageLists);
-  connect(this,                                   &MainWindow::preferencesChanged,                        app,                  &App::setupAppearance);
 
   connect(app,                                    &App::toolRequested,                                    this,                 &MainWindow::switchToTool);
 #if HAVE_QMEDIAPLAYER
@@ -515,17 +513,32 @@ MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
   if (!dlg.exec())
     return;
 
+  setUpdatesEnabled(false);
+
   dlg.save();
 
+  auto &app = *App::instance();
+
   if (dlg.uiLocaleChanged() || dlg.disableToolTipsChanged())
-    App::instance()->initializeLocale();
+    app.initializeLocale();
 
   if (dlg.uiLocaleChanged() || dlg.probeRangePercentageChanged())
     [[maybe_unused]] auto future = QtConcurrent::run(Util::FileIdentifier::cleanAllCacheFiles);
 
+  if (dlg.uiColorModeChanged())
+    app.setupColorMode();
+
+  if (dlg.uiFontChanged())
+    app.setupUiFont();
+
+  if (dlg.languageRegionCharacterSetSettingsChanged())
+    app.reinitializeLanguageLists();
+
   mtx::bcp47::language_c::set_normalization_mode(Util::Settings::get().m_bcp47NormalizationMode);
 
   Q_EMIT preferencesChanged();
+
+  setUpdatesEnabled(true);
 }
 
 #if defined(HAVE_UPDATE_CHECK)

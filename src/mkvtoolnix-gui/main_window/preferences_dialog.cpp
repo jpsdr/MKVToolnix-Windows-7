@@ -41,8 +41,14 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   , ui{new Ui::PreferencesDialog}
   , m_cfg(Util::Settings::get())
   , m_previousUiLocale{m_cfg.m_uiLocale}
+  , m_previousUiFontFamily{m_cfg.m_uiFontFamily}
+  , m_previousUiFontPointSize{m_cfg.m_uiFontPointSize}
+  , m_previousUiDisableDarkStyleSheet{m_cfg.m_uiDisableDarkStyleSheet}
   , m_previousDisableToolTips{m_cfg.m_uiDisableToolTips}
   , m_previousProbeRangePercentage{m_cfg.m_probeRangePercentage}
+  , m_previousOftenUsedLanguages{m_cfg.m_oftenUsedLanguages}
+  , m_previousOftenUsedRegions{m_cfg.m_oftenUsedRegions}
+  , m_previousOftenUsedCharacterSets{m_cfg.m_oftenUsedCharacterSets}
   , m_ignoreNextCurrentChange{}
 {
   ui->setupUi(this);
@@ -162,6 +168,19 @@ PreferencesDialog::uiLocaleChanged()
 }
 
 bool
+PreferencesDialog::uiFontChanged()
+  const {
+  return (m_previousUiFontFamily    != m_cfg.m_uiFontFamily)
+      || (m_previousUiFontPointSize != m_cfg.m_uiFontPointSize);
+}
+
+bool
+PreferencesDialog::uiColorModeChanged()
+  const {
+  return m_previousUiDisableDarkStyleSheet != m_cfg.m_uiDisableDarkStyleSheet;
+}
+
+bool
 PreferencesDialog::disableToolTipsChanged()
   const {
   return m_previousDisableToolTips != m_cfg.m_uiDisableToolTips;
@@ -171,6 +190,14 @@ bool
 PreferencesDialog::probeRangePercentageChanged()
   const {
   return m_previousProbeRangePercentage != m_cfg.m_probeRangePercentage;
+}
+
+bool
+PreferencesDialog::languageRegionCharacterSetSettingsChanged()
+  const {
+  return (m_previousOftenUsedLanguages     != m_cfg.m_oftenUsedLanguages)
+      || (m_previousOftenUsedRegions       != m_cfg.m_oftenUsedRegions)
+      || (m_previousOftenUsedCharacterSets != m_cfg.m_oftenUsedCharacterSets);
 }
 
 void

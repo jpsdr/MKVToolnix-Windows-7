@@ -86,14 +86,14 @@ public Q_SLOTS:
   void saveSettings() const;
   void receiveInstanceCommunication();
   void setupAppearance();
+  void setupColorMode();
+  void setupUiFont();
 
 protected:
   void setupInstanceCommunicator();
   void setupNetworkAccessManager();
   Util::MediaPlayer &setupMediaPlayer();
   Jobs::ProgramRunner &setupProgramRunner();
-  void setupColorMode();
-  void setupUiFont();
 
 public:
   static App *instance();

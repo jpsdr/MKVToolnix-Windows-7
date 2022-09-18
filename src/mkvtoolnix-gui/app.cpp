@@ -238,8 +238,6 @@ App::reinitializeLanguageLists() {
   s_commonCharacterSets.clear();
 
   initializeLanguageLists();
-
-  kax_element_names_c::reset();
 }
 
 void
@@ -404,6 +402,8 @@ App::initializeLocale(QString const &requestedLocale) {
   }
 
 #endif  // HAVE_LIBINTL_H
+
+  kax_element_names_c::reset();
 
   init_locales(to_utf8(locale));
 
