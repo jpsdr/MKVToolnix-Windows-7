@@ -127,7 +127,7 @@ stderr_target_c::stderr_target_c()
 
 void
 stderr_target_c::log_line(std::string const &message) {
-  std::cerr << message;
+  std::cerr << fmt::format("[mtx] +{0}ms {1}\n", runtime(), message);
 }
 
 // ----------------------------------------------------------------------
