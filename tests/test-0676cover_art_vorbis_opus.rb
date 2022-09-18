@@ -3,9 +3,6 @@
 # T_676cover_art_vorbis_opus
 describe "mkvmerge / reading cover art from Vorbis & Opus tags"
 
-skip_if c?(:USE_ADDRSAN)
-skip_if $is_windows
-
 expected_md5s = {
   :png => "72e193b0682dad985317cd03d2be1ab9",
   :jpg => "e55849ace1748ac515b16881e397101a",
