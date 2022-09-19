@@ -258,16 +258,19 @@ App::initializeIso639Languages() {
   s_iso639_2Languages.reserve(mtx::iso639::g_languages.size());
   s_commonIso639Languages.reserve(cfg.m_oftenUsedLanguages.size());
 
+  QHash<QString, bool> isCommon;
+  for (auto const &language : cfg.m_oftenUsedLanguages)
+    isCommon[language] = true;
+
   for (auto const &language : mtx::iso639::g_languages) {
     auto languageCode  = Q(language.alpha_3_code);
     auto languageCodes = language.alpha_2_code.empty() ? languageCode : Q("%1; %2").arg(Q(language.alpha_2_code)).arg(languageCode);
     auto description   = Q("%1 (%2)").arg(Q(gettext(language.english_name.c_str()))).arg(languageCodes);
-    auto isCommon      = cfg.m_oftenUsedLanguages.indexOf(languageCode) != -1;
 
     s_iso639Languages.emplace_back(description, languageCode);
     if (language.is_part_of_iso639_2)
       s_iso639_2Languages.emplace_back(description, languageCode);
-    if (isCommon)
+    if (isCommon[languageCode])
       s_commonIso639Languages.emplace_back(description, languageCode);
 
     s_iso639_2LanguageCodeToDescription[languageCode] = description;
@@ -283,15 +286,18 @@ App::initializeRegions() {
   auto &cfg = Util::Settings::get();
 
   s_regions.reserve(mtx::iso3166::g_regions.size());
-  s_commonRegions.reserve(mtx::iso3166::g_regions.size());
+  s_commonRegions.reserve(cfg.m_oftenUsedRegions.size());
+
+  QHash<QString, bool> isCommon;
+  for (auto const &region : cfg.m_oftenUsedRegions)
+    isCommon[region] = true;
 
   for (auto const &region : mtx::iso3166::g_regions) {
     auto countryCode = !region.alpha_2_code.empty() ? Q(region.alpha_2_code).toLower() : Q(fmt::format("{0:03}", region.number));
     auto description = formatRegionDescription(region);
-    auto isCommon    = cfg.m_oftenUsedRegions.indexOf(countryCode) != -1;
 
     s_regions.emplace_back(description, countryCode);
-    if (isCommon)
+    if (isCommon[countryCode])
       s_commonRegions.emplace_back(description, countryCode);
 
     s_regionToDescription[countryCode] = description;
@@ -308,11 +314,15 @@ App::initializeCharacterSets() {
   s_characterSets.reserve(g_character_sets.size());
   s_commonCharacterSets.reserve(cfg.m_oftenUsedCharacterSets.size());
 
+  QHash<QString, bool> isCommon;
+  for (auto const &characterSet : cfg.m_oftenUsedCharacterSets)
+    isCommon[characterSet] = true;
+
   for (auto const &characterSet : g_character_sets) {
     auto qCharacterSet = Q(characterSet);
 
     s_characterSets.emplace_back(qCharacterSet);
-    if (cfg.m_oftenUsedCharacterSets.contains(qCharacterSet))
+    if (isCommon[qCharacterSet])
       s_commonCharacterSets.emplace_back(qCharacterSet);
   }
 
