@@ -9,7 +9,7 @@
   requires. Implements #3401.
 * MKVToolNix GUI: greatly sped up closing the preferences dialog by only
   re-running certain initialization functions when their corresponding
-  settings have changed.
+  settings have changed. Also fixes issues such as #3406.
 
 ## Bug fixes
 
