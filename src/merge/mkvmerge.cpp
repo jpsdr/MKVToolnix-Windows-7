@@ -271,6 +271,12 @@ set_usage() {
                   "                           None at all, only for I frames, for all.\n");
   usage_text += Y("  --language <TID:lang>    Sets the language for the track (IETF BCP 47/\n"
                   "                           RFC 5646 language tag).\n");
+  usage_text += Y("  --timestamps <TID:file>  Read the timestamps to be used from a file.\n");
+  usage_text += Y("  --default-duration <TID:Xs|ms|us|ns|fps>\n"
+                  "                           Force the default duration of a track to X.\n"
+                  "                           X can be a floating point number or a fraction.\n");
+  usage_text +=   "\n";
+  usage_text += Y(" Options that only apply to audio tracks:\n");
   usage_text += Y("  --aac-is-sbr <TID[:0|1]> The track with the ID is HE-AAC/AAC+/SBR-AAC\n"
                   "                           or not. The value ':1' can be omitted.\n");
   usage_text += Y("  --reduce-to-core <TID>   Keeps only the core of audio tracks that support\n"
@@ -279,15 +285,11 @@ set_usage() {
   usage_text += Y("  --remove-dialog-normalization-gain <TID>\n"
                   "                           Removes or minimizes the dialog normalization gain\n"
                   "                           by modifying audio frame headers.\n");
-  usage_text += Y("  --timestamps <TID:file>  Read the timestamps to be used from a file.\n");
-  usage_text += Y("  --default-duration <TID:Xs|ms|us|ns|fps>\n"
-                  "                           Force the default duration of a track to X.\n"
-                  "                           X can be a floating point number or a fraction.\n");
+  usage_text +=   "\n";
+  usage_text += Y(" Options that only apply to video tracks:\n");
   usage_text += Y("  --fix-bitstream-timing-information <TID[:bool]>\n"
                   "                           Adjust the frame/field rate stored in the video\n"
                   "                           bitstream to match the track's default duration.\n");
-  usage_text +=   "\n";
-  usage_text += Y(" Options that only apply to video tracks:\n");
   usage_text += Y("  -f, --fourcc <FOURCC>    Forces the FourCC to the specified value.\n"
                   "                           Works only for video tracks.\n");
   usage_text += Y("  --aspect-ratio <TID:f|a/b>\n"
