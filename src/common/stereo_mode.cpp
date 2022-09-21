@@ -14,6 +14,7 @@
 #include "common/common_pch.h"
 
 #include "common/stereo_mode.h"
+#include "common/strings/table_formatter.h"
 
 #include <sstream>
 #include <string>
@@ -93,4 +94,16 @@ stereo_mode_c::displayable_modes_list() {
 bool
 stereo_mode_c::valid_index(int idx) {
   return (0 <= idx) && (static_cast<int>(s_modes.size()) > idx);
+}
+
+void
+stereo_mode_c::list() {
+  auto formatter = mtx::string::table_formatter_c{}
+    .set_header({ Y("Index"), Y("Symbolic name"), Y("Description") })
+    .set_alignment({ mtx::string::table_formatter_c::align_right });
+
+  for (auto idx = 0u; idx < s_modes.size(); ++idx)
+    formatter.add_row({ fmt::format("{}", idx), s_modes[idx],  translate(idx) });
+
+  mxinfo(formatter.format());
 }

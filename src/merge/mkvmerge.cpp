@@ -309,7 +309,7 @@ set_usage() {
   usage_text += Y("  --stereo-mode <TID:n|keyword>\n"
                   "                           Sets the stereo mode parameter. It can\n"
                   "                           either be a number 0 - 14 or a keyword\n"
-                  "                           (see documentation for the full list).\n");
+                  "                           (use '--list-stereo-modes' to see the full list).\n");
   usage_text += Y("  --color-matrix-coefficients <TID:n>\n"
                   "                           Sets the matrix coefficients of the video used\n"
                   "                           to derive luma and chroma values from red, green\n"
@@ -388,6 +388,8 @@ set_usage() {
   usage_text += Y("  -l, --list-types         Lists supported source file types.\n");
   usage_text += Y("  --list-languages         Lists all ISO 639 languages and their\n"
                   "                           ISO 639-2 codes.\n");
+  usage_text += Y("  --list-stereo-modes      Lists all supported values for the '--stereo-mode'\n"
+                  "                           parameter and their meaning.\n");
   usage_text += Y("  --capabilities           Lists optional features mkvmerge was compiled with.\n");
   usage_text += Y("  --priority <priority>    Set the priority mkvmerge runs with.\n");
   usage_text += Y("  --ui-language <code>     Force the translations for 'code' to be used.\n");
@@ -2192,6 +2194,10 @@ parse_args(std::vector<std::string> args) {
 
     } else if (this_arg == "--list-languages") {
       mtx::iso639::list_languages();
+      mxexit();
+
+    } else if (this_arg == "--list-stereo-modes") {
+      stereo_mode_c::list();
       mxexit();
 
     } else if (mtx::included_in(this_arg, "-i", "--identify", "-J"))
