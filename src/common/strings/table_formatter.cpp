@@ -25,6 +25,13 @@ table_formatter_c::set_header(std::vector<std::string> const &header) {
 }
 
 table_formatter_c &
+table_formatter_c::set_alignment(std::vector<alignment_e> const &alignment) {
+  m_alignment = alignment;
+  return *this;
+}
+
+
+table_formatter_c &
 table_formatter_c::add_row(std::vector<std::string> const &row) {
   m_rows.emplace_back(row);
   return *this;
@@ -37,6 +44,10 @@ table_formatter_c::format()
     return {};
 
   auto num_columns = m_header.size();
+  auto alignment   = m_alignment;
+
+  while (alignment.size() < num_columns)
+    alignment.push_back(align_left);
 
   // 1. Calculate column widths.
   std::vector<uint64_t> column_widths(num_columns, 0ull);
@@ -53,10 +64,16 @@ table_formatter_c::format()
   column_formats.reserve(num_columns);
 
   auto row_size = 1u + (num_columns - 1) * 3;
+  auto idx      = 0;
 
   for (auto width : column_widths) {
-    column_formats.emplace_back(fmt::format("{{0:{0:}s}}", width));
+    auto fmt_alignment = alignment[idx] == align_left  ? "<"
+                       : alignment[idx] == align_right ? ">"
+                       :                                 "^";
+
+    column_formats.emplace_back(fmt::format("{{0:{0}{1}s}}", fmt_alignment, width));
     row_size += width;
+    ++idx;
   }
 
   // 3. Reserve space for full output & create row formatting lambda.
