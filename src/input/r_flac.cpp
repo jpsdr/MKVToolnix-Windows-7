@@ -291,7 +291,6 @@ flac_reader_c::flac_error_cb(FLAC__StreamDecoderErrorStatus status) {
             : status == FLAC__STREAM_DECODER_ERROR_STATUS_BAD_HEADER         ? "FLAC__STREAM_DECODER_ERROR_STATUS_BAD_HEADER"
             : status == FLAC__STREAM_DECODER_ERROR_STATUS_FRAME_CRC_MISMATCH ? "FLAC__STREAM_DECODER_ERROR_STATUS_FRAME_CRC_MISMATCH"
             : status == FLAC__STREAM_DECODER_ERROR_STATUS_UNPARSEABLE_STREAM ? "FLAC__STREAM_DECODER_ERROR_STATUS_UNPARSEABLE_STREAM"
-            : status == FLAC__STREAM_DECODER_ERROR_STATUS_BAD_METADATA       ? "FLAC__STREAM_DECODER_ERROR_STATUS_BAD_METADATA"
             :                                                                  "<unknown>";
 
   mxdebug_if(m_debug, fmt::format("flac_reader: error callback: {0} ({1})\n", static_cast<int>(status), type));
