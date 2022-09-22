@@ -116,8 +116,10 @@ flac_reader_c::parse_file(bool for_identification_only) {
 
   mxdebug_if(m_debug, fmt::format("flac_reader: headers: block at {0} with size {1}\n", block.filepos, block.len));
 
-  old_progress = -5;
-  ok = FLAC__stream_decoder_skip_single_frame(m_flac_decoder.get());
+  old_progress         = -5;
+  current_frame_broken = false;
+  ok                   = FLAC__stream_decoder_skip_single_frame(m_flac_decoder.get());
+
   while (ok) {
     state = FLAC__stream_decoder_get_state(m_flac_decoder.get());
 
@@ -140,7 +142,9 @@ flac_reader_c::parse_file(bool for_identification_only) {
     if (state > FLAC__STREAM_DECODER_READ_FRAME)
       break;
 
-    ok = FLAC__stream_decoder_skip_single_frame(m_flac_decoder.get());
+    current_frame_broken = false;
+    ok                   = FLAC__stream_decoder_skip_single_frame(m_flac_decoder.get());
+    ok                   = ok && !current_frame_broken;
   }
 
   if (100 != old_progress)
@@ -283,7 +287,15 @@ flac_reader_c::flac_metadata_cb(const FLAC__StreamMetadata *metadata) {
 
 void
 flac_reader_c::flac_error_cb(FLAC__StreamDecoderErrorStatus status) {
-  mxerror(fmt::format(Y("flac_reader: Error parsing the file: {0}\n"), static_cast<int>(status)));
+  auto type = status == FLAC__STREAM_DECODER_ERROR_STATUS_LOST_SYNC          ? "FLAC__STREAM_DECODER_ERROR_STATUS_LOST_SYNC"
+            : status == FLAC__STREAM_DECODER_ERROR_STATUS_BAD_HEADER         ? "FLAC__STREAM_DECODER_ERROR_STATUS_BAD_HEADER"
+            : status == FLAC__STREAM_DECODER_ERROR_STATUS_FRAME_CRC_MISMATCH ? "FLAC__STREAM_DECODER_ERROR_STATUS_FRAME_CRC_MISMATCH"
+            : status == FLAC__STREAM_DECODER_ERROR_STATUS_UNPARSEABLE_STREAM ? "FLAC__STREAM_DECODER_ERROR_STATUS_UNPARSEABLE_STREAM"
+            : status == FLAC__STREAM_DECODER_ERROR_STATUS_BAD_METADATA       ? "FLAC__STREAM_DECODER_ERROR_STATUS_BAD_METADATA"
+            :                                                                  "<unknown>";
+
+  mxdebug_if(m_debug, fmt::format("flac_reader: error callback: {0} ({1})\n", static_cast<int>(status), type));
+  current_frame_broken = true;
 }
 
 FLAC__StreamDecoderSeekStatus

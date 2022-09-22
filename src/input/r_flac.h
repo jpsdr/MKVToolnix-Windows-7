@@ -44,6 +44,7 @@ private:
   unsigned int m_attachment_id{};
   debugging_option_c m_debug{"flac_reader|flac"};
   int64_t tag_size_start{}, tag_size_end{};
+  bool current_frame_broken{};
 
 public:
   virtual mtx::file_type_e get_format_type() const {
