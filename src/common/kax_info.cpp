@@ -51,6 +51,7 @@
 #include <matroska/KaxVersion.h>
 
 #include "avilib.h"
+#include "common/audio_emphasis.h"
 #include "common/at_scope_exit.h"
 #include "common/avc/avcc.h"
 #include "common/avc/util.h"
@@ -697,6 +698,11 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        : Is<KaxTags>(id)        ? "KaxTags"
                        : Is<KaxSeekHead>(id)    ? "KaxSeekHead"
                        :                          "unknown");
+  });
+
+  add_fmt(KaxEmphasis::ClassInfos, [](EbmlElement &e) -> std::string {
+    auto audio_emphasis = static_cast<KaxEmphasis &>(e).GetValue();
+    return fmt::format("{0} ({1})", audio_emphasis, audio_emphasis_c::translate(static_cast<audio_emphasis_c::mode_e>(audio_emphasis)));
   });
 
   add_fmt(KaxVideoProjectionType::ClassInfos, [](EbmlElement &e) -> std::string {

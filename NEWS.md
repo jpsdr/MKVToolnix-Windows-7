@@ -10,6 +10,7 @@
 * MKVToolNix GUI: greatly sped up closing the preferences dialog by only
   re-running certain initialization functions when their corresponding
   settings have changed. Also fixes issues such as #3406.
+* mkvinfo: added support for the Emphasis audio track header element.
 
 ## Bug fixes
 

@@ -108,6 +108,7 @@ kax_element_names_c::init() {
   add(KaxAudioChannels::ClassInfos,                Y("Channels"));
   add(KaxAudioPosition::ClassInfos,                Y("Channel positions"));
   add(KaxAudioBitDepth::ClassInfos,                Y("Bit depth"));
+  add(KaxEmphasis::ClassInfos,                     Y("Emphasis"));
 
   add(KaxVideoColourMasterMeta::ClassInfos,        Y("Video color mastering metadata"));
   add(KaxVideoRChromaX::ClassInfos,                Y("Red color coordinate x"));

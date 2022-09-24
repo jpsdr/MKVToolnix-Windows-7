@@ -26,6 +26,7 @@
 #include <matroska/KaxVersion.h>
 #include <matroska/FileKax.h>
 
+#include "common/audio_emphasis.h"
 #include "common/fs_sys_helpers.h"
 #include "common/hacks.h"
 #include "common/iana_language_subtag_registry.h"
@@ -154,6 +155,7 @@ mtx_common_init(std::string const &program_name,
   mtx::iso3166::init();
   mtx::iso15924::init();
   mtx::iana::language_subtag_registry::init_preferred_values(); // uses language_c::parse() & must therefore be initialized last
+  audio_emphasis_c::init();
   stereo_mode_c::init();
 }
 
