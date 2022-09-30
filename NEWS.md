@@ -18,6 +18,10 @@
   unsupported types as well as tracks for which all track header pages
   haven't been found. Fixes #3394.
 
+## Build system changes
+
+* libEBML 1.4.3 & libMatroska 1.7.0 are now required.
+
 
 # Version 70.0.0 "Caught A Lite Sneeze" 2022-08-14
 
