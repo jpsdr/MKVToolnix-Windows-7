@@ -244,9 +244,9 @@ PrefsRunProgramWidget::setupMenu() {
     { QY("Exit code (0: ok, 1: warnings occurred, 2: errors occurred)"), Q("JOB_EXIT_CODE")              },
 
     { QY("Variables for multiplex jobs"),                                Q("")                           },
-    { QY("Destination file's name"),                                     Q("DESTINATION_FILE_NAME")      },
-    { QY("Destination file's directory"),                                Q("DESTINATION_FILE_DIRECTORY") },
-    { QY("Source file names"),                                           Q("SOURCE_FILE_NAMES")          },
+    { QY("Destination file's absolute path"),                            Q("DESTINATION_FILE_NAME")      },
+    { QY("Destination folders's aboslute path"),                         Q("DESTINATION_FILE_DIRECTORY") },
+    { QY("Source files' absolute paths"),                                Q("SOURCE_FILE_NAMES")          },
 
     { QY("General variables"),                                           Q("")                           },
     { QY("Current date && time in ISO 8601 format"),                     Q("CURRENT_TIME")               },
