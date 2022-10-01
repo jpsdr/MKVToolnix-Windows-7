@@ -10,8 +10,9 @@
 * MKVToolNix GUI: greatly sped up closing the preferences dialog by only
   re-running certain initialization functions when their corresponding
   settings have changed. Also fixes issues such as #3406.
-* mkvinfo, MKVToolNix GUI's info tool: added support for the Emphasis audio
-  track header element.
+* mkvinfo, MKVToolNix GUI's info tool: added support for the following new
+  elements: Emphasis audio track header element; Chapter Skip Type; Edition
+  Display; Edition String; Edition Language IETF.
 * mkvmerge, MKVToolNix GUI's multiplexer: added support for the Emphasis audio
   track header element via the `--audio-emphasis` option. It is also read from
   Matroska files.

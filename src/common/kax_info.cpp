@@ -851,6 +851,20 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
       return fmt::format("{0} ({1})", value, fourcc_c{static_cast<uint32_t>(value)});
     return fmt::format("{0}", value);
   });
+
+  add_fmt(KaxChapterSkipType::ClassInfos, [](EbmlElement &e) -> std::string {
+    auto value       = static_cast<EbmlUInteger &>(e).GetValue();
+    auto description = value == MATROSKA_CHAPTERSKIPTYPE_NO_SKIPPING     ? Y("no skipping")
+                     : value == MATROSKA_CHAPTERSKIPTYPE_OPENING_CREDITS ? Y("opening credits")
+                     : value == MATROSKA_CHAPTERSKIPTYPE_END_CREDITS     ? Y("end credits")
+                     : value == MATROSKA_CHAPTERSKIPTYPE_RECAP           ? Y("recap")
+                     : value == MATROSKA_CHAPTERSKIPTYPE_NEXT_PREVIEW    ? Y("preview of next episode")
+                     : value == MATROSKA_CHAPTERSKIPTYPE_PREVIEW         ? Y("preview of current episode")
+                     : value == MATROSKA_CHAPTERSKIPTYPE_ADVERTISEMENT   ? Y("advertisement")
+                     :                                                     Y("unknown");
+
+    return fmt::format("{0} ({1})", value, description);
+  });
 }
 
 bool

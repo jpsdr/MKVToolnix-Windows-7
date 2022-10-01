@@ -161,6 +161,7 @@ kax_element_names_c::init() {
   add(KaxVideoAspectRatio::ClassInfos,             Y("Aspect ratio type"));
   add(KaxVideoColourSpace::ClassInfos,             Y("Color space"));
   add(KaxVideoFrameRate::ClassInfos,               Y("Frame rate"));
+  add(KaxOldStereoMode::ClassInfos,                Y("Stereo mode (deprecated element)"));
 
   add(KaxContentEncodings::ClassInfos,             Y("Content encodings"));
   add(KaxContentEncoding::ClassInfos,              Y("Content encoding"));
@@ -283,6 +284,9 @@ kax_element_names_c::init() {
   add(KaxEditionFlagHidden::ClassInfos,            Y("Edition flag hidden"));
   add(KaxEditionFlagDefault::ClassInfos,           Y("Edition flag default"));
   add(KaxEditionFlagOrdered::ClassInfos,           Y("Edition flag ordered"));
+  add(KaxEditionDisplay::ClassInfos,               Y("Edition display"));
+  add(KaxEditionString::ClassInfos,                Y("Edition string"));
+  add(KaxEditionLanguageIETF::ClassInfos,          Y("Edition language (IETF BCP 47)"));
   add(KaxChapterAtom::ClassInfos,                  Y("Chapter atom"));
   add(KaxChapterUID::ClassInfos,                   Y("Chapter UID"));
   add(KaxChapterStringUID::ClassInfos,             Y("Chapter string UID"));
@@ -306,6 +310,7 @@ kax_element_names_c::init() {
   add(KaxChapterProcessCommand::ClassInfos,        Y("Chapter process command"));
   add(KaxChapterProcessTime::ClassInfos,           Y("Chapter process time"));
   add(KaxChapterProcessData::ClassInfos,           Y("Chapter process data"));
+  add(KaxChapterSkipType::ClassInfos,              Y("Chapter skip type"));
 
   add(KaxTags::ClassInfos,                         Y("Tags"));
   add(KaxTag::ClassInfos,                          Y("Tag"));
@@ -323,6 +328,7 @@ kax_element_names_c::init() {
   add(KaxTagLangue::ClassInfos,                    Y("Tag language"));
   add(KaxTagLanguageIETF::ClassInfos,              Y("Tag language (IETF BCP 47)"));
   add(KaxTagDefault::ClassInfos,                   Y("Default language"));
+  add(KaxTagDefaultBogus::ClassInfos,              Y("Default language (bogus element with invalid ID)"));
 }
 
 }
