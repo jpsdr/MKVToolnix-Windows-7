@@ -11,6 +11,11 @@
   re-running certain initialization functions when their corresponding
   settings have changed. Also fixes issues such as #3406.
 * mkvinfo: added support for the Emphasis audio track header element.
+* mkvmerge: added support for the Emphasis audio track header element via the
+  `--audio-emphasis` option. It is also read from Matroska files.
+* mkvmerge: the options `--list-stereo-modes` and `--list-audio-emphasis` have
+  been added to list all support numerical & textual values for the
+  `--stereo-mode` & `--audio-emphasis` options.
 
 ## Bug fixes
 

@@ -47,6 +47,7 @@
 #include "avilib.h"
 #include "common/alac.h"
 #include "common/at_scope_exit.h"
+#include "common/audio_emphasis.h"
 #include "common/chapters/chapters.h"
 #include "common/codec.h"
 #include "common/container.h"
@@ -1154,6 +1155,7 @@ kax_reader_c::read_headers_track_audio(kax_track_t *track,
   track->a_osfreq   = FindChildValue<KaxAudioOutputSamplingFreq>(ktaudio);
   track->a_channels = FindChildValue<KaxAudioChannels>(ktaudio, 1);
   track->a_bps      = FindChildValue<KaxAudioBitDepth>(ktaudio);
+  track->a_emphasis = FindOptionalChildValue<KaxEmphasis>(ktaudio);
 }
 
 void
@@ -1726,6 +1728,9 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
 
   if ((t->type == 'a') && (0 != t->a_bps))
     ptzr(t->ptzr).set_audio_bit_depth(t->a_bps);
+
+  if (t->a_emphasis)
+    ptzr(t->ptzr).set_audio_emphasis(static_cast<audio_emphasis_c::mode_e>(*t->a_emphasis), OPTION_SOURCE_CONTAINER);
 
   t->handle_packetizer_block_addition_mapping();
 }
@@ -2780,6 +2785,7 @@ kax_reader_c::identify() {
       info.add(mtx::id::audio_sampling_frequency, static_cast<int64_t>(track->a_sfreq));
       info.add(mtx::id::audio_channels,           track->a_channels);
       info.add(mtx::id::audio_bits_per_sample,    track->a_bps);
+      info.add(mtx::id::audio_emphasis,           track->a_emphasis);
 
     } else if ('s' == track->type) {
       if (track->codec.is(codec_c::type_e::S_SRT) || track->codec.is(codec_c::type_e::S_SSA_ASS) || track->codec.is(codec_c::type_e::S_KATE)) {

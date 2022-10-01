@@ -123,6 +123,9 @@ track_info_c::operator =(const track_info_c &src) {
   m_all_ext_timestamps               = src.m_all_ext_timestamps;
   m_ext_timestamps                   = src.m_ext_timestamps;
 
+  m_audio_emphasis_list              = src.m_audio_emphasis_list;
+  m_audio_emphasis                   = src.m_audio_emphasis;
+
   m_pixel_crop_list                  = src.m_pixel_crop_list;
   m_pixel_cropping                   = src.m_pixel_cropping;
 

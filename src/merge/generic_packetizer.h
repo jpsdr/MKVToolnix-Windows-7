@@ -218,6 +218,8 @@ public:
   virtual void set_audio_output_sampling_freq(double freq);
   virtual void set_audio_channels(int channels);
   virtual void set_audio_bit_depth(int bit_depth);
+  virtual void set_audio_emphasis(audio_emphasis_c::mode_e audio_emphasis, option_source_e source);
+  virtual void set_audio_emphasis_impl(libebml::EbmlMaster &audio, audio_emphasis_c::mode_e audio_emphasis);
 
   virtual void set_video_interlaced_flag(bool interlaced);
   virtual void set_video_pixel_width(int width);

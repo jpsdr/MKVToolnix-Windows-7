@@ -81,6 +81,7 @@ struct kax_track_t {
 
   // Parameters for audio tracks
   uint64_t a_channels, a_bps, a_formattag;
+  std::optional<uint64_t> a_emphasis;
   double a_sfreq, a_osfreq;
 
   memory_cptr private_data;

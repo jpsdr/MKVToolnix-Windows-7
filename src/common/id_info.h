@@ -21,6 +21,7 @@ namespace mtx::id {
 char const * const aac_is_sbr                      = "aac_is_sbr";                      // track ascii-string format:^(true|unknown)$
 char const * const audio_bits_per_sample           = "audio_bits_per_sample";           // track unsigned-integer
 char const * const audio_channels                  = "audio_channels";                  // track unsigned-integer
+char const * const audio_emphasis                  = "audio_emphasis";                  // track unsigned-integer
 char const * const audio_output_sampling_frequency = "audio_output_sampling_frequency"; // track unsigned-integer
 char const * const audio_sampling_frequency        = "audio_sampling_frequency";        // track unsigned-integer
 char const * const cb_subsample                    = "cb_subsample";                    // track ascii-string format:^-?[0-9]+,-?[0-9]+$

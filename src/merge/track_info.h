@@ -15,6 +15,7 @@
 
 #include "common/common_pch.h"
 
+#include "common/audio_emphasis.h"
 #include "common/bcp47.h"
 #include "common/compression.h"
 #include "common/math.h"
@@ -292,6 +293,9 @@ public:
 
   std::map<int64_t, std::string> m_all_ext_timestamps; // As given on the command line
   std::string m_ext_timestamps;         // For this very track
+
+  std::map<int64_t, audio_emphasis_c::mode_e> m_audio_emphasis_list; // As given on the command line
+  option_with_source_c<audio_emphasis_c::mode_e> m_audio_emphasis;   // For this very track
 
   std::map<int64_t, pixel_crop_t> m_pixel_crop_list; // As given on the command line
   option_with_source_c<pixel_crop_t> m_pixel_cropping;  // For this very track

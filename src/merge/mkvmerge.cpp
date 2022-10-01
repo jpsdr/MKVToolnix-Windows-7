@@ -285,6 +285,10 @@ set_usage() {
   usage_text += Y("  --remove-dialog-normalization-gain <TID>\n"
                   "                           Removes or minimizes the dialog normalization gain\n"
                   "                           by modifying audio frame headers.\n");
+  usage_text += Y("  --audio-emphasis <TID:n|keyword>\n"
+                  "                           Sets the audio emphasis track header value. It can\n"
+                  "                           be either a number or a keyword (see\n"
+                  "                           '--list-audio-emphasis' for the full list).\n");
   usage_text +=   "\n";
   usage_text += Y(" Options that only apply to video tracks:\n");
   usage_text += Y("  --fix-bitstream-timing-information <TID[:bool]>\n"
@@ -386,10 +390,12 @@ set_usage() {
                   "                           of the total file size for certain file types\n"
                   "                           (default: 0.3).\n");
   usage_text += Y("  -l, --list-types         Lists supported source file types.\n");
+  usage_text += Y("  --list-audio-emphasis    Lists all supported values for the\n"
+                  "                           '--audio-emphasis' option and their meaning.\n");
   usage_text += Y("  --list-languages         Lists all ISO 639 languages and their\n"
                   "                           ISO 639-2 codes.\n");
   usage_text += Y("  --list-stereo-modes      Lists all supported values for the '--stereo-mode'\n"
-                  "                           parameter and their meaning.\n");
+                  "                           option and their meaning.\n");
   usage_text += Y("  --capabilities           Lists optional features mkvmerge was compiled with.\n");
   usage_text += Y("  --priority <priority>    Set the priority mkvmerge runs with.\n");
   usage_text += Y("  --ui-language <code>     Force the translations for 'code' to be used.\n");
@@ -1051,6 +1057,33 @@ parse_arg_field_order(const std::string &s,
                         fmt::format(Y("'{0}' is not a valid field order."), parts[0])));
 
   ti.m_field_order_list[id] = order;
+}
+
+static void
+parse_arg_audio_emphasis(const std::string &s,
+                              track_info_c &ti) {
+  auto error_message = Y("Audio emphasis mode option: not given in the form <TID>:<mode> where the mode is either a number or keyword from this list: {0} (argument was '{1}').\n");
+  auto error         = fmt::format(error_message, audio_emphasis_c::displayable_modes_list(), s);
+
+  auto v = mtx::string::split(s, ":");
+  if (v.size() != 2)
+    mxerror(error);
+
+  int64_t id = 0;
+  if (!mtx::string::parse_number(v[0], id))
+    mxerror(error);
+
+  auto mode = audio_emphasis_c::parse_mode(v[1]);
+  if (audio_emphasis_c::invalid != mode) {
+    ti.m_audio_emphasis_list[id] = mode;
+    return;
+  }
+
+  int index;
+  if (!mtx::string::parse_number(v[1], index) || !audio_emphasis_c::valid_index(index))
+    mxerror(error);
+
+  ti.m_audio_emphasis_list[id] = static_cast<audio_emphasis_c::mode_e>(index);
 }
 
 /** \brief Parse the duration formats to \c --split
@@ -2192,6 +2225,10 @@ parse_args(std::vector<std::string> args) {
       list_file_types();
       mxexit();
 
+    } else if (this_arg == "--list-audio-emphasis") {
+      audio_emphasis_c::list();
+      mxexit();
+
     } else if (this_arg == "--list-languages") {
       mtx::iso639::list_languages();
       mxexit();
@@ -2751,6 +2788,13 @@ parse_args(std::vector<std::string> args) {
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
       parse_arg_stereo_mode(*next_arg, *ti);
+      sit++;
+
+    } else if (this_arg == "--audio-emphasis") {
+      if (!next_arg)
+        mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
+
+      parse_arg_audio_emphasis(*next_arg, *ti);
       sit++;
 
     } else if ((this_arg == "-y") || (this_arg == "--sync")) {

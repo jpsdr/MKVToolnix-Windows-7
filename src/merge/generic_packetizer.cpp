@@ -181,9 +181,14 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   else if (mtx::includes(m_ti.m_all_ext_timestamps, -1))
     m_ti.m_ext_timestamps = m_ti.m_all_ext_timestamps[-1];
 
+  // Let's see if the user has specified an audio emphasis mode for this track.
+  int i = lookup_track_id(m_ti.m_audio_emphasis_list, m_ti.m_id);
+  if (-2 != i)
+    set_audio_emphasis(m_ti.m_audio_emphasis_list[m_ti.m_id], OPTION_SOURCE_COMMAND_LINE);
+
   // Let's see if the user has specified an aspect ratio or display dimensions
   // for this track.
-  int i = lookup_track_id(m_ti.m_display_properties, m_ti.m_id);
+  i = lookup_track_id(m_ti.m_display_properties, m_ti.m_id);
   if (-2 != i) {
     display_properties_t &dprop = m_ti.m_display_properties[i];
     if (0 > dprop.aspect_ratio) {
@@ -584,6 +589,21 @@ generic_packetizer_c::set_audio_bit_depth(int bit_depth) {
   m_haudio_bit_depth = bit_depth;
   if (m_track_entry)
     GetChild<KaxAudioBitDepth>(GetChild<KaxTrackAudio>(*m_track_entry)).SetValue(m_haudio_bit_depth);
+}
+
+void
+generic_packetizer_c::set_audio_emphasis(audio_emphasis_c::mode_e audio_emphasis,
+                                         option_source_e source) {
+  m_ti.m_audio_emphasis.set(audio_emphasis, source);
+
+  if (m_track_entry && (audio_emphasis_c::unspecified != m_ti.m_audio_emphasis.get()))
+    set_audio_emphasis_impl(GetChild<KaxTrackAudio>(*m_track_entry), m_ti.m_audio_emphasis.get());
+}
+
+void
+generic_packetizer_c::set_audio_emphasis_impl(EbmlMaster &audio,
+                                              audio_emphasis_c::mode_e audio_emphasis) {
+  GetChild<KaxEmphasis>(audio).SetValue(static_cast<unsigned int>(audio_emphasis));
 }
 
 void
@@ -1291,6 +1311,9 @@ generic_packetizer_c::set_headers() {
 
     if (-1   != m_haudio_bit_depth)
       GetChild<KaxAudioBitDepth>(audio).SetValue(m_haudio_bit_depth);
+
+    if (m_ti.m_audio_emphasis && (audio_emphasis_c::mode_e::none != m_ti.m_audio_emphasis.get()))
+      set_audio_emphasis_impl(audio, m_ti.m_audio_emphasis.get());
 
   } else if (track_buttons == m_htrack_type) {
     if ((-1 != m_hvideo_pixel_height) && (-1 != m_hvideo_pixel_width)) {
