@@ -5,6 +5,7 @@
 #include <QString>
 #include <QVariant>
 
+#include "common/audio_emphasis.h"
 #include "common/bcp47.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/merge/enums.h"
@@ -36,6 +37,7 @@ public:
   mtx::bcp47::language_c m_language;
   QString m_name, m_codec, m_tags, m_delay, m_stretchBy, m_defaultDuration, m_timestamps, m_aspectRatio, m_displayWidth, m_displayHeight, m_cropping, m_characterSet, m_additionalOptions;
   unsigned int m_forcedTrackFlag{}, m_trackEnabledFlag{}, m_stereoscopy{}, m_cues{}, m_aacIsSBR{};
+  audio_emphasis_c::mode_e m_audioEmphasis{audio_emphasis_c::unspecified};
   TrackCompression m_compression{TrackCompression::Default};
 
   QString m_colorMatrixCoefficients, m_bitsPerColorChannel, m_chromaSubsampling, m_cbSubsampling, m_chromaSiting, m_colorRange, m_transferCharacteristics, m_colorPrimaries, m_maximumContentLight, m_maximumFrameLight;

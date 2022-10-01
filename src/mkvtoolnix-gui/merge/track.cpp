@@ -231,6 +231,8 @@ Track::setDefaultsBasics() {
                                   :                         Q("");
   m_delay                         = isAudio() && settings.m_setAudioDelayFromFileName ? extractAudioDelayFromFileName() : QString{};
   m_removeDialogNormalizationGain = canRemoveDialogNormalizationGain() && settings.m_mergeEnableDialogNormGainRemoval;
+  auto emphasis                   = m_properties.value(Q(mtx::id::audio_emphasis), static_cast<int>(audio_emphasis_c::unspecified)).toInt();
+  m_audioEmphasis                 = audio_emphasis_c::valid_index(emphasis) ? static_cast<audio_emphasis_c::mode_e>(emphasis) : audio_emphasis_c::unspecified;
 }
 
 void
@@ -332,6 +334,7 @@ Track::saveSettings(Util::ConfigFile &settings)
   settings.setValue("aacIsSBR",                      m_aacIsSBR);
   settings.setValue("reduceAudioToCore",             m_reduceAudioToCore);
   settings.setValue("removeDialogNormalizationGain", m_removeDialogNormalizationGain);
+  settings.setValue("audioEmphasis",                 static_cast<int>(m_audioEmphasis));
   settings.setValue("compression",                   static_cast<int>(m_compression));
   settings.setValue("size",                          static_cast<qulonglong>(m_size));
   settings.setValue("attachmentDescription",         m_attachmentDescription);
@@ -414,6 +417,8 @@ Track::loadSettings(MuxConfig::Loader &l) {
   m_aacIsSBR                      = l.settings.value("aacIsSBR").toInt();
   m_reduceAudioToCore             = l.settings.value("reduceAudioToCore").toBool();
   m_removeDialogNormalizationGain = l.settings.value("removeDialogNormalizationGain").toBool();
+  auto emphasis                   = l.settings.value("audioEmphasis", static_cast<int>(audio_emphasis_c::unspecified)).toInt();
+  m_audioEmphasis                 = audio_emphasis_c::valid_index(emphasis) ? static_cast<audio_emphasis_c::mode_e>(emphasis) : audio_emphasis_c::unspecified;
   m_compression                   = static_cast<TrackCompression>(l.settings.value("compression").toInt());
   m_size                          = l.settings.value("size").toULongLong();
   m_attachmentDescription         = l.settings.value("attachmentDescription").toString();
@@ -560,6 +565,9 @@ Track::buildMkvmergeOptions(MkvmergeOptionBuilder &opt)
 
     if (m_commentaryFlagWasSet != m_commentaryFlag)
       opt.options << Q("--commentary-flag") << Q("%1:%2").arg(sid).arg(m_commentaryFlag ? Q("yes") : Q("no"));
+
+    if (m_audioEmphasis != audio_emphasis_c::unspecified)
+      opt.options << Q("--audio-emphasis") << Q("%1:%2").arg(sid).arg(Q(audio_emphasis_c::symbol(static_cast<int>(m_audioEmphasis))));
 
     if (!m_tags.isEmpty())
       opt.options << Q("--tags") << Util::CommandLineOption::fileName(Q("%1:%2").arg(sid).arg(m_tags));

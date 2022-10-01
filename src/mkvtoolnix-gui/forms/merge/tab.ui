@@ -1175,15 +1175,15 @@
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_12">
                       <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_3">
-                        <item>
+                       <layout class="QGridLayout" name="gridLayout_11">
+                        <item row="0" column="0">
                          <widget class="QLabel" name="aacIsSBRLabel">
                           <property name="text">
                            <string>AAC is SBR/HE-AAC/AAC+:</string>
                           </property>
                          </widget>
                         </item>
-                        <item>
+                        <item row="0" column="1">
                          <widget class="QComboBox" name="aacIsSBR">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -1192,6 +1192,16 @@
                            </sizepolicy>
                           </property>
                          </widget>
+                        </item>
+                        <item row="1" column="0">
+                         <widget class="QLabel" name="audioEmphasisLabel">
+                          <property name="text">
+                           <string>Emphasis:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="1" column="1">
+                         <widget class="QComboBox" name="audioEmphasis"/>
                         </item>
                        </layout>
                       </item>
@@ -2404,6 +2414,7 @@
   <tabstop>pitchRotation</tabstop>
   <tabstop>rollRotation</tabstop>
   <tabstop>aacIsSBR</tabstop>
+  <tabstop>audioEmphasis</tabstop>
   <tabstop>reduceToAudioCore</tabstop>
   <tabstop>removeDialogNormalizationGain</tabstop>
   <tabstop>subtitleCharacterSet</tabstop>

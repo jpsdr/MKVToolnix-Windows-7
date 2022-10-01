@@ -18,6 +18,7 @@
 
 #include <matroska/KaxSemantic.h>
 
+#include "common/audio_emphasis.h"
 #include "common/iso639.h"
 #include "common/logger.h"
 #include "common/qt.h"
@@ -56,7 +57,7 @@ Tab::setupControlLists() {
                   << p.ui->originalFlagLabel << p.ui->originalFlag << p.ui->commentaryFlagLabel << p.ui->commentaryFlag
                   << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
                   << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps << p.ui->audioPropertiesBox << p.ui->aacIsSBR << p.ui->aacIsSBRLabel
-                  << p.ui->cuesLabel << p.ui->cues << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain;
+                  << p.ui->cuesLabel << p.ui->cues << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain << p.ui->audioEmphasisLabel << p.ui->audioEmphasis;
 
   p.videoControls << p.ui->trackNameLabel << p.ui->trackName << p.ui->trackLanguageLabel << p.ui->trackLanguage << p.ui->defaultTrackFlagLabel << p.ui->defaultTrackFlag << p.ui->forcedTrackFlagLabel << p.ui->forcedTrackFlag
                   << p.ui->trackEnabledFlagLabel << p.ui->trackEnabledFlag << p.ui->hearingImpairedFlagLabel << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlagLabel << p.ui->visualImpairedFlag
@@ -100,8 +101,8 @@ Tab::setupControlLists() {
                      << p.ui->compressionLabel << p.ui->compression << p.ui->trackTagsLabel << p.ui->trackTags << p.ui->browseTrackTags << p.ui->timestampsAndDefaultDurationBox
                      << p.ui->delayLabel << p.ui->delay << p.ui->stretchByLabel << p.ui->stretchBy << p.ui->defaultDurationLabel << p.ui->defaultDuration << p.ui->timestampsLabel << p.ui->timestamps << p.ui->browseTimestamps
                      << p.ui->videoPropertiesBox << p.ui->setAspectRatio << p.ui->aspectRatio << p.ui->setDisplayWidthHeight << p.ui->displayWidth << p.ui->displayDimensionsXLabel << p.ui->displayHeight << p.ui->stereoscopyLabel
-                     << p.ui->stereoscopy << p.ui->croppingLabel << p.ui->cropping << p.ui->audioPropertiesBox << p.ui->aacIsSBR << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel << p.ui->subtitleCharacterSet
-                     << p.ui->miscellaneousBox << p.ui->cuesLabel << p.ui->cues << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions
+                     << p.ui->stereoscopy << p.ui->croppingLabel << p.ui->cropping << p.ui->audioPropertiesBox << p.ui->aacIsSBR << p.ui->audioEmphasis << p.ui->subtitleAndChapterPropertiesBox << p.ui->characterSetLabel
+                     << p.ui->subtitleCharacterSet << p.ui->miscellaneousBox << p.ui->cuesLabel << p.ui->cues << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions
                      << p.ui->propertiesLabel << p.ui->generalOptionsBox << p.ui->fixBitstreamTimingInfo << p.ui->reduceToAudioCore << p.ui->removeDialogNormalizationGain
 
                      << p.ui->colorInformationBox
@@ -119,8 +120,8 @@ Tab::setupControlLists() {
                      << p.ui->pitchRotationLabel           << p.ui->pitchRotation           << p.ui->rollRotationLabel           << p.ui->rollRotation
     ;
 
-  p.comboBoxControls << p.ui->muxThis << p.ui->defaultTrackFlag << p.ui->forcedTrackFlag << p.ui->trackEnabledFlag << p.ui->compression << p.ui->cues << p.ui->stereoscopy << p.ui->aacIsSBR << p.ui->subtitleCharacterSet
-                     << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlag<< p.ui->originalFlag << p.ui->commentaryFlag;
+  p.comboBoxControls << p.ui->muxThis << p.ui->defaultTrackFlag << p.ui->forcedTrackFlag << p.ui->trackEnabledFlag << p.ui->compression << p.ui->cues << p.ui->stereoscopy << p.ui->aacIsSBR << p.ui->audioEmphasis
+                     << p.ui->subtitleCharacterSet << p.ui->hearingImpairedFlag << p.ui->visualImpairedFlag << p.ui->textDescriptionsFlag<< p.ui->originalFlag << p.ui->commentaryFlag;
 
   p.notIfAppendingControls << p.ui->trackLanguageLabel       << p.ui->trackLanguage           << p.ui->trackNameLabel              << p.ui->trackName          << p.ui->defaultTrackFlagLabel     << p.ui->defaultTrackFlag
                            << p.ui->trackEnabledFlagLabel    << p.ui->trackEnabledFlag
@@ -129,7 +130,7 @@ Tab::setupControlLists() {
                            << p.ui->compressionLabel         << p.ui->compression             << p.ui->trackTagsLabel              << p.ui->trackTags          << p.ui->browseTrackTags
                            << p.ui->defaultDurationLabel     << p.ui->defaultDuration         << p.ui->fixBitstreamTimingInfo      << p.ui->setAspectRatio     << p.ui->setDisplayWidthHeight     << p.ui->aspectRatio
                            << p.ui->displayWidth             << p.ui->displayDimensionsXLabel << p.ui->displayHeight               << p.ui->stereoscopyLabel   << p.ui->stereoscopy
-                           << p.ui->croppingLabel            << p.ui->cropping                << p.ui->aacIsSBR
+                           << p.ui->croppingLabel            << p.ui->cropping                << p.ui->aacIsSBR                    << p.ui->audioEmphasis
                            << p.ui->cuesLabel                << p.ui->cues                    << p.ui->additionalTrackOptionsLabel << p.ui->additionalTrackOptions
 
                            << p.ui->colorInformationBox
@@ -335,6 +336,10 @@ Tab::setupInputControls() {
   for (auto idx = 0; idx < 3; ++idx)
     p.ui->aacIsSBR->addItem(QString{}, idx);
 
+  for (auto idx = -1; idx <= static_cast<int>(audio_emphasis_c::max_index()); ++idx)
+    if ((-1 == idx) || audio_emphasis_c::valid_index(idx))
+      p.ui->audioEmphasis->addItem(QString{}, idx);
+
   for (auto const &control : p.comboBoxControls) {
     control->view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     Util::fixComboBoxViewWidth(*control);
@@ -410,6 +415,7 @@ Tab::setupInputControls() {
   using CMSAction = Util::Settings::ClearMergeSettingsAction;
 
   connect(p.ui->aacIsSBR,                      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onAacIsSBRChanged);
+  connect(p.ui->audioEmphasis,                 static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this,                       &Tab::onAudioEmphasisChanged);
   connect(p.ui->addFiles,                      &QToolButton::clicked,                                                  this,                       &Tab::onAddFiles);
   connect(p.ui->addToJobQueue,                 &QPushButton::clicked,                                                  this,                       [=]() { addToJobQueue(false); });
   connect(p.ui->additionalTrackOptions,        &QLineEdit::textChanged,                                                this,                       &Tab::onAdditionalTrackOptionsChanged);
@@ -839,6 +845,7 @@ Tab::setInputControlValues(Track *track) {
   Util::setComboBoxIndexIf(p.ui->cues,                 [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_cues);                                   });
   Util::setComboBoxIndexIf(p.ui->stereoscopy,          [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_stereoscopy);                            });
   Util::setComboBoxIndexIf(p.ui->aacIsSBR,             [&track](auto const &, auto const &data) { return data.isValid() && (data.toUInt() == track->m_aacIsSBR);                               });
+  Util::setComboBoxIndexIf(p.ui->audioEmphasis,        [&track](auto const &, auto const &data) { return data.isValid() && (data.toInt()  == static_cast<int>(track->m_audioEmphasis));        });
 
   p.ui->trackLanguage->setLanguage(track->m_language);
   p.ui->subtitleCharacterSet->setCurrentByData(track->m_characterSet);
@@ -1399,6 +1406,16 @@ Tab::onAacIsSBRChanged(int newValue) {
 }
 
 void
+Tab::onAudioEmphasisChanged(int newValue) {
+  auto data = p_func()->ui->audioEmphasis->itemData(newValue);
+  if (!data.isValid())
+    return;
+  newValue = data.toInt();
+
+  withSelectedTracks([&newValue](auto &track) { track.m_audioEmphasis = static_cast<audio_emphasis_c::mode_e>(newValue); }, true);
+}
+
+void
 Tab::onReduceAudioToCoreChanged(bool newValue) {
   withSelectedTracks([&newValue](auto &track) {
     if (track.canReduceToAudioCore())
@@ -1725,6 +1742,13 @@ Tab::retranslateInputUI() {
   Util::setComboBoxTexts(p.ui->compression,      QStringList{} << QY("Determine automatically") << QY("No extra compression") << Q("zlib"));
   Util::setComboBoxTexts(p.ui->cues,             QStringList{} << QY("Determine automatically") << QY("Only for I frames")    << QY("For all frames") << QY("No cues"));
   Util::setComboBoxTexts(p.ui->aacIsSBR,         QStringList{} << QY("Determine automatically") << QY("Yes")                  << QY("No"));
+
+  QStringList texts;
+  texts << QString{};
+  for (auto idx = 0; idx <= static_cast<int>(audio_emphasis_c::max_index()); ++idx)
+    if (audio_emphasis_c::valid_index(idx))
+      texts << Q("%1 (%2)").arg(Q(audio_emphasis_c::symbol(idx))).arg(Q(audio_emphasis_c::translate(idx)));
+  Util::setComboBoxTexts(p.ui->audioEmphasis, texts);
 
   setupInputToolTips();
 }

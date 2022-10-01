@@ -138,6 +138,7 @@ public Q_SLOTS:
   virtual void onStereoscopyChanged(int newValue);
   virtual void onCroppingChanged(QString newValue);
   virtual void onAacIsSBRChanged(int newValue);
+  virtual void onAudioEmphasisChanged(int newValue);
   virtual void onReduceAudioToCoreChanged(bool newValue);
   virtual void onRemoveDialogNormalizationGainChanged(bool newValue);
   virtual void onSubtitleCharacterSetChanged(int newValue);
