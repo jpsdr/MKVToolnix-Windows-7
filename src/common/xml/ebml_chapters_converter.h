@@ -30,8 +30,10 @@ protected:
   virtual void fix_ebml(libebml::EbmlMaster &root) const;
   virtual void fix_edition_entry(libmatroska::KaxEditionEntry &eentry) const;
   virtual void fix_atom(libmatroska::KaxChapterAtom &atom) const;
-  virtual void fix_display(libmatroska::KaxChapterDisplay &display) const;
-  virtual void fix_display_languages_and_countries(libmatroska::KaxChapterDisplay &display) const;
+  virtual void fix_chapter_display(libmatroska::KaxChapterDisplay &display) const;
+  virtual void fix_chapter_display_languages_and_countries(libmatroska::KaxChapterDisplay &display) const;
+  virtual void fix_edition_display(libmatroska::KaxEditionDisplay &display) const;
+  virtual void fix_edition_display_languages(libmatroska::KaxEditionDisplay &display) const;
 
   void setup_maps();
 

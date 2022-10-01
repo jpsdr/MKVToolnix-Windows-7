@@ -55,6 +55,7 @@ ebml_chapters_converter_c::setup_maps() {
   m_limits["ChapterSegmentUID"]        = limits_t{ true, false, 1, 0 };
   m_limits["ChapterSegmentEditionUID"] = limits_t{ true, false, 1, 0 };
   m_limits["ChapterTrackNumber"]       = limits_t{ true, false, 1, 0 };
+  m_limits["ChapterSkipType"]          = limits_t{ true, true,  0, 6 };
 
   reverse_debug_to_tag_name_map();
 
@@ -96,7 +97,10 @@ ebml_chapters_converter_c::fix_edition_entry(KaxEditionEntry &eentry)
         euid->SetValue(create_unique_number(UNIQUE_EDITION_IDS));
       }
 
-    } else if (dynamic_cast<KaxChapterAtom *>(element)) {
+    } else if (dynamic_cast<KaxEditionDisplay *>(element))
+      fix_edition_display(static_cast<KaxEditionDisplay &>(*element));
+
+    else if (dynamic_cast<KaxChapterAtom *>(element)) {
       atom_found = true;
       fix_atom(static_cast<KaxChapterAtom &>(*element));
     }
@@ -127,11 +131,11 @@ ebml_chapters_converter_c::fix_atom(KaxChapterAtom &atom)
 
   auto cdisplay = FindChild<KaxChapterDisplay>(atom);
   if (cdisplay)
-    fix_display(*cdisplay);
+    fix_chapter_display(*cdisplay);
 }
 
 void
-ebml_chapters_converter_c::fix_display_languages_and_countries(libmatroska::KaxChapterDisplay &display)
+ebml_chapters_converter_c::fix_chapter_display_languages_and_countries(libmatroska::KaxChapterDisplay &display)
   const {
   for (auto const &child : display)
     if (auto kax_ietf_language = dynamic_cast<libmatroska::KaxChapLanguageIETF *>(child); kax_ietf_language) {
@@ -163,12 +167,33 @@ ebml_chapters_converter_c::fix_display_languages_and_countries(libmatroska::KaxC
 }
 
 void
-ebml_chapters_converter_c::fix_display(libmatroska::KaxChapterDisplay &display)
+ebml_chapters_converter_c::fix_chapter_display(libmatroska::KaxChapterDisplay &display)
   const {
   if (!FindChild<KaxChapterString>(display))
     throw conversion_x{Y("<ChapterDisplay> is missing the <ChapterString> child.")};
 
-  fix_display_languages_and_countries(display);
+  fix_chapter_display_languages_and_countries(display);
+}
+
+void
+ebml_chapters_converter_c::fix_edition_display_languages(libmatroska::KaxEditionDisplay &display)
+  const {
+  for (auto const &child : display)
+    if (auto kax_ietf_language = dynamic_cast<libmatroska::KaxEditionLanguageIETF *>(child); kax_ietf_language) {
+      auto parsed_language = mtx::bcp47::language_c::parse(kax_ietf_language->GetValue());
+
+      if (!parsed_language.is_valid())
+        throw conversion_x{fmt::format(Y("'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"), kax_ietf_language->GetValue(), parsed_language.get_error())};
+    }
+}
+
+void
+ebml_chapters_converter_c::fix_edition_display(libmatroska::KaxEditionDisplay &display)
+  const {
+  if (!FindChild<KaxEditionString>(display))
+    throw conversion_x{Y("<EditionDisplay> is missing the <EditionString> child.")};
+
+  fix_edition_display_languages(display);
 }
 
 void

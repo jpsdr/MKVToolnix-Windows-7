@@ -11,8 +11,8 @@
   re-running certain initialization functions when their corresponding
   settings have changed. Also fixes issues such as #3406.
 * mkvinfo, MKVToolNix GUI's info tool: added support for the following new
-  elements: Emphasis audio track header element; Chapter Skip Type; Edition
-  Display; Edition String; Edition Language IETF.
+  elements from Matroska v5: Emphasis audio track header element; Chapter Skip
+  Type; Edition Display; Edition String; Edition Language IETF.
 * mkvmerge, MKVToolNix GUI's multiplexer: added support for the Emphasis audio
   track header element via the `--audio-emphasis` option. It is also read from
   Matroska files.
@@ -21,6 +21,9 @@
   `--stereo-mode` & `--audio-emphasis` options.
 * mkvpropedit, MKVToolNix GUI's header editor: added support for the Emphasis
   audio track header element via the `emphasis` property.
+* mkvmerge, mkvpropedit: added support for the following new chapter elements
+  from Matroska v5: Chapter Skip Type; Edition Display; Edition String;
+  Edition Language IETF.
 
 ## Bug fixes
 
