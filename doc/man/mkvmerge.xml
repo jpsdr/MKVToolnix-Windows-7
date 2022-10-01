@@ -2052,21 +2052,12 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
     </varlistentry>
 
     <varlistentry id="mkvmerge.description.stereo_mode">
-     <term><option>--stereo-mode</option> <parameter>TID:n|keyword</parameter></term>
+     <term><option>--stereo-mode</option> <parameter>TID:n|symbolic-name</parameter></term>
      <listitem>
       <para>
        Sets the stereo mode for the video track with the track ID <parameter>TID</parameter>.  The mode can either be a number
-       <parameter>n</parameter> between <constant>0</constant> and <constant>14</constant> or one of these keywords:
-      </para>
-
-      <para>
-       '<literal>mono</literal>', '<literal>side_by_side_left_first</literal>', '<literal>top_bottom_right_first</literal>',
-       '<literal>top_bottom_left_first</literal>', '<literal>checkerboard_right_first</literal>',
-       '<literal>checkerboard_left_first</literal>', '<literal>row_interleaved_right_first</literal>',
-       '<literal>row_interleaved_left_first</literal>', '<literal>column_interleaved_right_first</literal>',
-       '<literal>column_interleaved_left_first</literal>', '<literal>anaglyph_cyan_red</literal>',
-       '<literal>side_by_side_right_first</literal>', '<literal>anaglyph_green_magenta</literal>',
-       '<literal>both_eyes_laced_left_first</literal>', '<literal>both_eyes_laced_right_first</literal>'.
+       <parameter>n</parameter> between <constant>0</constant> and <constant>14</constant> or a symbolic name. All valid numbers &amp; names
+       can be listed with the <link linkend="mkvmerge.description.list_stereo_modes"><option>--list-stereo-modes</option> option</link>.
       </para>
      </listitem>
     </varlistentry>
@@ -2177,6 +2168,16 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
       <para>
        Lists all languages and their ISO 639-2 code which can be used with the <link
        linkend="mkvmerge.description.language"><option>--language</option></link> option.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry id="mkvmerge.description.list_stereo_modes">
+     <term><option>--list-stereo-modes</option></term>
+     <listitem>
+      <para>
+       Lists all valid numbers &amp; their corresponding symbolic names for the <link
+       linkend="mkvmerge.description.stereo_mode"><option>--stereo-mode</option></link> option.
       </para>
      </listitem>
     </varlistentry>
