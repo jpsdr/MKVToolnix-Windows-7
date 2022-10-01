@@ -111,7 +111,7 @@ audio_emphasis_c::valid_index(int idx) {
 void
 audio_emphasis_c::list() {
   auto formatter = mtx::string::table_formatter_c{}
-    .set_header({ Y("Index"), Y("Symbolic name"), Y("Description") })
+    .set_header({ Y("Number"), Y("Symbolic name"), Y("Description") })
     .set_alignment({ mtx::string::table_formatter_c::align_right });
 
   for (auto idx = 0u; idx < s_modes.size(); ++idx)
