@@ -46,8 +46,8 @@ audio_emphasis_c::init_translations() {
   if (!s_translations.empty())
     return;
 
-  s_translations.emplace_back(YT("none"));
-  s_translations.emplace_back(YT("First order filter found in CD/DVD/MPEG audio"));
+  s_translations.emplace_back(YT("no emphasis"));
+  s_translations.emplace_back(YT("first order filter found in CD/DVD/MPEG audio"));
   s_translations.emplace_back(YT("unknown"));
   s_translations.emplace_back(YT("CCIT-J.17"));
   s_translations.emplace_back(YT("FM radio in Europe"));
@@ -56,16 +56,21 @@ audio_emphasis_c::init_translations() {
   s_translations.emplace_back(YT("unknown"));
   s_translations.emplace_back(YT("unknown"));
   s_translations.emplace_back(YT("unknown"));
-  s_translations.emplace_back(YT("Phono filter (RIAA)"));
-  s_translations.emplace_back(YT("Phono filter (IEC N78)"));
-  s_translations.emplace_back(YT("Phono filter (Teldec)"));
-  s_translations.emplace_back(YT("Phono filter (EMI)"));
-  s_translations.emplace_back(YT("Phono filter (Columbia LP"));
-  s_translations.emplace_back(YT("Phono filter (London)"));
-  s_translations.emplace_back(YT("Phono filter (NARTB)"));
+  s_translations.emplace_back(YT("phono filter (RIAA)"));
+  s_translations.emplace_back(YT("phono filter (IEC N78)"));
+  s_translations.emplace_back(YT("phono filter (Teldec)"));
+  s_translations.emplace_back(YT("phono filter (EMI)"));
+  s_translations.emplace_back(YT("phono filter (Columbia LP)"));
+  s_translations.emplace_back(YT("phono filter (London)"));
+  s_translations.emplace_back(YT("phono filter (NARTB)"));
 }
 
-const std::string
+std::string const
+audio_emphasis_c::symbol(unsigned int mode) {
+  return mode < s_modes.size() ? s_modes[mode] : std::string{};
+}
+
+std::string const
 audio_emphasis_c::translate(unsigned int mode) {
   init_translations();
   return mode < s_translations.size() ? s_translations[mode].get_translated() : Y("unknown");
@@ -114,4 +119,9 @@ audio_emphasis_c::list() {
       formatter.add_row({ fmt::format("{}", idx), s_modes[idx],  translate(idx) });
 
   mxinfo(formatter.format());
+}
+
+int
+audio_emphasis_c::max_index() {
+  return 16;
 }

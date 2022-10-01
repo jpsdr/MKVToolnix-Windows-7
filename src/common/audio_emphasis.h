@@ -41,9 +41,11 @@ public:
 
   static void init();
   static void init_translations();
-  static const std::string translate(unsigned int mode);
-  static const std::string displayable_modes_list();
+  static std::string const symbol(unsigned int mode);
+  static std::string const translate(unsigned int mode);
+  static std::string const displayable_modes_list();
   static mode_e parse_mode(const std::string &str);
   static bool valid_index(int index);
   static void list();
+  static int max_index();
 };
