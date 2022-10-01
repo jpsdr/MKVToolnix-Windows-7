@@ -16,6 +16,8 @@
 * mkvmerge: the options `--list-stereo-modes` and `--list-audio-emphasis` have
   been added to list all support numerical & textual values for the
   `--stereo-mode` & `--audio-emphasis` options.
+* mkvpropedit, MKVToolNix GUI's header editor: added support for the Emphasis
+  audio track header element via the `emphasis` property.
 
 ## Bug fixes
 

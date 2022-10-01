@@ -212,6 +212,7 @@ property_element_c::init_tables() {
   add("output-sampling-frequency", KaxAudioOutputSamplingFreq::ClassInfos, YT("Audio output sampling frequency"), YT("Real output sampling frequency in Hz."));
   add("channels",                  KaxAudioChannels::ClassInfos,           YT("Audio channels"),                  YT("Numbers of channels in the track."));
   add("bit-depth",                 KaxAudioBitDepth::ClassInfos,           YT("Audio bit depth"),                 YT("Bits per sample, mostly used for PCM."));
+  add("emphasis",                  KaxEmphasis::ClassInfos,                YT("Audio emphasis"),                  YT("Emphasis applied on audio which must be reversed by player to get the actual samples."));
 
   look_up(KaxTracks::ClassInfos, "projection-private").m_bit_length = 0;
 
