@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-10-01 20:30+0200\n"
+"POT-Creation-Date: 2022-10-01 20:57+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Pavel Rehak <pavel-rehak@email.cz>, 2019,2021-2022\n"
 "Language-Team: Czech (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/cs/)\n"
@@ -2682,13 +2682,14 @@ msgstr "{0}' není platné pořadí DVD."
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Additional information from the parser: {2}\n"
 msgstr ""
 
-#: src/common/xml/ebml_chapters_converter.cpp:141
+#: src/common/xml/ebml_chapters_converter.cpp:145
+#: src/common/xml/ebml_chapters_converter.cpp:186
 #: src/common/xml/ebml_tags_converter.cpp:125
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
 msgstr ""
 
-#: src/common/xml/ebml_chapters_converter.cpp:148
+#: src/common/xml/ebml_chapters_converter.cpp:152
 #, no-c-format
 msgid "'{0}' is not a valid ISO 639-2 language code."
 msgstr "'{0}' není platný kód jazyka ISO 639-2."
@@ -2703,7 +2704,7 @@ msgstr "'{0}' není platný režim připojení v '--append-mode {0}'.\n"
 msgid "'{0}' is not a valid block additional max in '--blockadd {1}'.\n"
 msgstr "'{0}' není platný maximální dodatečný blok v '--blockadd {1}'.\n"
 
-#: src/common/xml/ebml_chapters_converter.cpp:154
+#: src/common/xml/ebml_chapters_converter.cpp:158
 #, no-c-format
 msgid "'{0}' is not a valid ccTLD country code."
 msgstr "'{0}' není platný ccTLD kód země."
@@ -2999,17 +3000,17 @@ msgstr "2: soukromá data kodeku"
 msgid "3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."
 msgstr "3. Buď 'name:<value>' nebo 'mime-type:<value>', v takovém případě přepínač použije u všech příloh, jejichž název nebo typ MIME se rovná <value>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:119
+#: src/common/xml/ebml_chapters_converter.cpp:123
 #, no-c-format
 msgid "<ChapterAtom> is missing the <ChapterTimeStart> child."
 msgstr "<ChapterAtom> postrádá podřízený prvek <ChapterTimeStart>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:169
+#: src/common/xml/ebml_chapters_converter.cpp:173
 #, no-c-format
 msgid "<ChapterDisplay> is missing the <ChapterString> child."
 msgstr "<ChapterDisplay> postrádá podřízený prvek <ChapterString>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:126
+#: src/common/xml/ebml_chapters_converter.cpp:130
 #, no-c-format
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> postrádá podřízený prvek <ChapterTrackNumber>."
@@ -3021,6 +3022,11 @@ msgstr "<ChapterTrack> postrádá podřízený prvek <ChapterTrackNumber>."
 #, no-c-format
 msgid "<Do not change>"
 msgstr "<Neměnit>"
+
+#: src/common/xml/ebml_chapters_converter.cpp:194
+#, fuzzy, no-c-format
+msgid "<EditionDisplay> is missing the <EditionString> child."
+msgstr "<ChapterDisplay> postrádá podřízený prvek <ChapterString>."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:145
 #, no-c-format
@@ -3937,7 +3943,7 @@ msgstr "Činitel poměru stran"
 msgid "Aspect ratio type"
 msgstr "Typ pooměru stran"
 
-#: src/common/xml/ebml_chapters_converter.cpp:105
+#: src/common/xml/ebml_chapters_converter.cpp:109
 #, no-c-format
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "Je potřeba alespoň jeden prvek <ChapterAtom>."
@@ -4620,7 +4626,7 @@ msgstr ""
 msgid "Chapter numbers:"
 msgstr "Čísla kapitol:"
 
-#: src/common/xml/ebml_chapters_converter.cpp:95
+#: src/common/xml/ebml_chapters_converter.cpp:96
 #, no-c-format
 msgid "Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"
 msgstr "Analyzátor kapitol: UID edice {0} není jedinečné a nemůže být znovu použito. Bude vytvořeno nové.\n"
@@ -12082,19 +12088,19 @@ msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated wi
 msgstr ""
 
 #: src/common/chapters/chapters.cpp:504
-#: src/common/xml/ebml_chapters_converter.cpp:232
+#: src/common/xml/ebml_chapters_converter.cpp:257
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error at position {2}: {1}\n"
 msgstr "Soubor štítků XML '{0}' obsahuje chybu na pozici {2}: {1}\n"
 
 #: src/common/chapters/chapters.cpp:506
-#: src/common/xml/ebml_chapters_converter.cpp:235
+#: src/common/xml/ebml_chapters_converter.cpp:260
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
 msgstr "Soubor kapitol XML '{0}' obsahuje chybu: {1}\n"
 
 #: src/common/chapters/chapters.cpp:502
-#: src/common/xml/ebml_chapters_converter.cpp:229
+#: src/common/xml/ebml_chapters_converter.cpp:254
 #, no-c-format
 msgid "The XML chapter file '{0}' could not be read.\n"
 msgstr "Soubor kapitol XML '{0}' nemohl být přečten.\n"

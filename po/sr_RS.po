@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-8.3.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-10-01 20:30+0200\n"
+"POT-Creation-Date: 2022-10-01 20:57+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Симеон Цветков <sicvetkov@uni-sofia.bg>, 2019-2021\n"
 "Language-Team: Serbian (Serbia) (http://www.transifex.com/moritz-bunkus/"
@@ -2692,13 +2692,14 @@ msgstr "„{0}“ није ваљан „ccTLD“ кôд земље (Најви�
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Additional information from the parser: {2}\n"
 msgstr ""
 
-#: src/common/xml/ebml_chapters_converter.cpp:141
+#: src/common/xml/ebml_chapters_converter.cpp:145
+#: src/common/xml/ebml_chapters_converter.cpp:186
 #: src/common/xml/ebml_tags_converter.cpp:125
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
 msgstr ""
 
-#: src/common/xml/ebml_chapters_converter.cpp:148
+#: src/common/xml/ebml_chapters_converter.cpp:152
 #, no-c-format
 msgid "'{0}' is not a valid ISO 639-2 language code."
 msgstr "„{0}“ није ваљан ИСО639-2 језички код."
@@ -2715,7 +2716,7 @@ msgstr ""
 "„{0}“ није ваљан број највиших додатних нивоа блока у опцији \n"
 "„--blockadd {1}“.\n"
 
-#: src/common/xml/ebml_chapters_converter.cpp:154
+#: src/common/xml/ebml_chapters_converter.cpp:158
 #, no-c-format
 msgid "'{0}' is not a valid ccTLD country code."
 msgstr "„{0}“ није ваљан „ccTLD“ кôд земље (Највиши домен држав. кодова)."
@@ -3011,17 +3012,17 @@ msgstr "2: приватни подаци кодека"
 msgid "3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."
 msgstr "3. Или „name:<value>“ или „mime-type:<value>“ где ће се изборник применити на све прилоге чији су назив или Миме-врста респективно једнаки вредности унетој као „<value>“."
 
-#: src/common/xml/ebml_chapters_converter.cpp:119
+#: src/common/xml/ebml_chapters_converter.cpp:123
 #, no-c-format
 msgid "<ChapterAtom> is missing the <ChapterTimeStart> child."
 msgstr "<ChapterAtom> не садржи под-елеменат <ChapterTimeStart>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:169
+#: src/common/xml/ebml_chapters_converter.cpp:173
 #, no-c-format
 msgid "<ChapterDisplay> is missing the <ChapterString> child."
 msgstr "<ChapterDisplay> не садржи под-елеменат <ChapterString>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:126
+#: src/common/xml/ebml_chapters_converter.cpp:130
 #, no-c-format
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> не садржи под-елеменат <ChapterTrackNumber>."
@@ -3033,6 +3034,11 @@ msgstr "<ChapterTrack> не садржи под-елеменат <ChapterTrackNu
 #, no-c-format
 msgid "<Do not change>"
 msgstr "<Ne menjaj>"
+
+#: src/common/xml/ebml_chapters_converter.cpp:194
+#, fuzzy, no-c-format
+msgid "<EditionDisplay> is missing the <EditionString> child."
+msgstr "<ChapterDisplay> не садржи под-елеменат <ChapterString>."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:145
 #, no-c-format
@@ -3949,7 +3955,7 @@ msgstr "Чинилац пропорције слике"
 msgid "Aspect ratio type"
 msgstr "Tip formata slike"
 
-#: src/common/xml/ebml_chapters_converter.cpp:105
+#: src/common/xml/ebml_chapters_converter.cpp:109
 #, no-c-format
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "Неопходан је бар један елеменат „<ChapterAtom>“."
@@ -4632,7 +4638,7 @@ msgstr "Групна измена поглавља"
 msgid "Chapter numbers:"
 msgstr "Бројеви поглавља:"
 
-#: src/common/xml/ebml_chapters_converter.cpp:95
+#: src/common/xml/ebml_chapters_converter.cpp:96
 #, no-c-format
 msgid "Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"
 msgstr "Рашчлањивач поглавља: Овај ЈИБ-издања {0} није јединствен и не може да се употреби, па ћу, због тога, створити нов.\n"
@@ -12085,19 +12091,19 @@ msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated wi
 msgstr "Vorbis kodne knjige se razlikuju. Takve staze ne mogu biti spojene bez naknadnog kodovanja."
 
 #: src/common/chapters/chapters.cpp:504
-#: src/common/xml/ebml_chapters_converter.cpp:232
+#: src/common/xml/ebml_chapters_converter.cpp:257
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error at position {2}: {1}\n"
 msgstr "У ИксМЛ-датотеци поглавља „{0}“ постоји грешка на положају: {2}: {1}\n"
 
 #: src/common/chapters/chapters.cpp:506
-#: src/common/xml/ebml_chapters_converter.cpp:235
+#: src/common/xml/ebml_chapters_converter.cpp:260
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
 msgstr "У ИксМЛ-датотеци поглавља „{0}“ постоји грешка: {1}\n"
 
 #: src/common/chapters/chapters.cpp:502
-#: src/common/xml/ebml_chapters_converter.cpp:229
+#: src/common/xml/ebml_chapters_converter.cpp:254
 #, no-c-format
 msgid "The XML chapter file '{0}' could not be read.\n"
 msgstr "Не могу да читам ИксМЛ-датотеку поглавља „{0}“.\n"

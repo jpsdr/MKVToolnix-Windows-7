@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-10-01 20:30+0200\n"
+"POT-Creation-Date: 2022-10-01 20:57+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: HULEN, 2021-2022\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -2633,13 +2633,14 @@ msgstr "'{0}' 不是有效的 DVD 標題編號。"
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Additional information from the parser: {2}\n"
 msgstr "'{0}' 不是 '{1}' 的有效 IETF BCP 47/RFC 5646 語言標籤。來自解析器的其他資訊: {2}\n"
 
-#: src/common/xml/ebml_chapters_converter.cpp:141
+#: src/common/xml/ebml_chapters_converter.cpp:145
+#: src/common/xml/ebml_chapters_converter.cpp:186
 #: src/common/xml/ebml_tags_converter.cpp:125
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
 msgstr "'{0}' 不是 IETF BCP 47/RFC 5646 有效的語言標籤。來自解析器的其他資訊: {1}"
 
-#: src/common/xml/ebml_chapters_converter.cpp:148
+#: src/common/xml/ebml_chapters_converter.cpp:152
 #, no-c-format
 msgid "'{0}' is not a valid ISO 639-2 language code."
 msgstr "'{0}' 不是有效的 ISO 639-2 語言碼。"
@@ -2654,7 +2655,7 @@ msgstr "在 '--append-mode {0}' 中，'{0}' 不是有效的附加模式。\n"
 msgid "'{0}' is not a valid block additional max in '--blockadd {1}'.\n"
 msgstr "在 '--blockadd {1}'中，'{0}' 不是有效的附加區塊最大值。\n"
 
-#: src/common/xml/ebml_chapters_converter.cpp:154
+#: src/common/xml/ebml_chapters_converter.cpp:158
 #, no-c-format
 msgid "'{0}' is not a valid ccTLD country code."
 msgstr "'{0}' 不是有效的 ccTLD 國家代碼。"
@@ -2950,17 +2951,17 @@ msgstr "2: 編碼器私有資料"
 msgid "3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."
 msgstr "3. 選擇的 'name:<數值>' 或 'mime-type:<數值>' 會套用到所有附件，這些附件的的名稱或 MIME 類型分別為 <數值>。"
 
-#: src/common/xml/ebml_chapters_converter.cpp:119
+#: src/common/xml/ebml_chapters_converter.cpp:123
 #, no-c-format
 msgid "<ChapterAtom> is missing the <ChapterTimeStart> child."
 msgstr "<ChapterAtom> 缺少 <ChapterTimeStart> 子元件。"
 
-#: src/common/xml/ebml_chapters_converter.cpp:169
+#: src/common/xml/ebml_chapters_converter.cpp:173
 #, no-c-format
 msgid "<ChapterDisplay> is missing the <ChapterString> child."
 msgstr "<ChapterDisplay> 缺少 <ChapterString> 子元件。"
 
-#: src/common/xml/ebml_chapters_converter.cpp:126
+#: src/common/xml/ebml_chapters_converter.cpp:130
 #, no-c-format
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> 缺少 <ChapterTrackNumber> 子元件。"
@@ -2972,6 +2973,11 @@ msgstr "<ChapterTrack> 缺少 <ChapterTrackNumber> 子元件。"
 #, no-c-format
 msgid "<Do not change>"
 msgstr "<不更改>"
+
+#: src/common/xml/ebml_chapters_converter.cpp:194
+#, fuzzy, no-c-format
+msgid "<EditionDisplay> is missing the <EditionString> child."
+msgstr "<ChapterDisplay> 缺少 <ChapterString> 子元件。"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:145
 #, no-c-format
@@ -3886,7 +3892,7 @@ msgstr "外觀比例係數"
 msgid "Aspect ratio type"
 msgstr "外觀比例類型"
 
-#: src/common/xml/ebml_chapters_converter.cpp:105
+#: src/common/xml/ebml_chapters_converter.cpp:109
 #, no-c-format
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "至少需要一個 <ChapterAtom> 元件。"
@@ -4569,7 +4575,7 @@ msgstr "章節集體修正"
 msgid "Chapter numbers:"
 msgstr "章節編號:"
 
-#: src/common/xml/ebml_chapters_converter.cpp:95
+#: src/common/xml/ebml_chapters_converter.cpp:96
 #, no-c-format
 msgid "Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"
 msgstr "章節解析器: 版本 UID {0} 不唯一，不能重複使用。將建立一個新的。\n"
@@ -11977,19 +11983,19 @@ msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated wi
 msgstr "Vorbis 碼表不同。此類軌道無法在不重編碼的前提下連接。"
 
 #: src/common/chapters/chapters.cpp:504
-#: src/common/xml/ebml_chapters_converter.cpp:232
+#: src/common/xml/ebml_chapters_converter.cpp:257
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error at position {2}: {1}\n"
 msgstr "此 XML 章節檔案 '{0}' 於位置 {2} 含有一個錯誤: {1}\n"
 
 #: src/common/chapters/chapters.cpp:506
-#: src/common/xml/ebml_chapters_converter.cpp:235
+#: src/common/xml/ebml_chapters_converter.cpp:260
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
 msgstr "此 XML 章節檔案 '{0}' 含有一個錯誤: {1}\n"
 
 #: src/common/chapters/chapters.cpp:502
-#: src/common/xml/ebml_chapters_converter.cpp:229
+#: src/common/xml/ebml_chapters_converter.cpp:254
 #, no-c-format
 msgid "The XML chapter file '{0}' could not be read.\n"
 msgstr "此 XML 章節檔案 '{0}' 無法讀取。\n"

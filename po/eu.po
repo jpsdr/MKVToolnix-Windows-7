@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoonix-eu\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-10-01 20:30+0200\n"
+"POT-Creation-Date: 2022-10-01 20:57+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Xabier Aramendi <azpidatziak@gmail.com>, 2016-2018,2020\n"
 "Language-Team: Basque (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -2673,13 +2673,14 @@ msgstr "'{0}' ez da eremu hurrenkera baliozko bat."
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Additional information from the parser: {2}\n"
 msgstr ""
 
-#: src/common/xml/ebml_chapters_converter.cpp:141
+#: src/common/xml/ebml_chapters_converter.cpp:145
+#: src/common/xml/ebml_chapters_converter.cpp:186
 #: src/common/xml/ebml_tags_converter.cpp:125
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
 msgstr ""
 
-#: src/common/xml/ebml_chapters_converter.cpp:148
+#: src/common/xml/ebml_chapters_converter.cpp:152
 #, no-c-format
 msgid "'{0}' is not a valid ISO 639-2 language code."
 msgstr "'{0}' ez da ISO 639-2 hizkuntza kode baliozkoa."
@@ -2694,7 +2695,7 @@ msgstr "'{0}' ez da gehitze modu baliozkoa hemen: '--append-mode {0}'.\n"
 msgid "'{0}' is not a valid block additional max in '--blockadd {1}'.\n"
 msgstr "'{0}' ez da bloke gehigarri baliozko geh. bat hemen: '--blockadd {1}'.\n"
 
-#: src/common/xml/ebml_chapters_converter.cpp:154
+#: src/common/xml/ebml_chapters_converter.cpp:158
 #, no-c-format
 msgid "'{0}' is not a valid ccTLD country code."
 msgstr "'{0}' ez da ccTLD herrialde kode baliozko bat."
@@ -2990,17 +2991,17 @@ msgstr "2: kodekaren datu pribatuak"
 msgid "3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."
 msgstr "3. Biak 'name:<value>' edo 'mime-type:<value>' kasu honetan hautatzaileak izen edo MIME mota <value> berdina duten eranskin guztiei ezartzen die."
 
-#: src/common/xml/ebml_chapters_converter.cpp:119
+#: src/common/xml/ebml_chapters_converter.cpp:123
 #, no-c-format
 msgid "<ChapterAtom> is missing the <ChapterTimeStart> child."
 msgstr "<ChapterAtom> ez dago bigarren <ChapterTimeStart>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:169
+#: src/common/xml/ebml_chapters_converter.cpp:173
 #, no-c-format
 msgid "<ChapterDisplay> is missing the <ChapterString> child."
 msgstr "<ChapterDisplay> ez dago bigarren <ChapterString>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:126
+#: src/common/xml/ebml_chapters_converter.cpp:130
 #, no-c-format
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> ez dago bigarren <ChapterTrackNumber>."
@@ -3012,6 +3013,11 @@ msgstr "<ChapterTrack> ez dago bigarren <ChapterTrackNumber>."
 #, no-c-format
 msgid "<Do not change>"
 msgstr "<Ez aldatu>"
+
+#: src/common/xml/ebml_chapters_converter.cpp:194
+#, fuzzy, no-c-format
+msgid "<EditionDisplay> is missing the <EditionString> child."
+msgstr "<ChapterDisplay> ez dago bigarren <ChapterString>."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:145
 #, no-c-format
@@ -3927,7 +3933,7 @@ msgstr "Ikuspegi maila ezaugarria"
 msgid "Aspect ratio type"
 msgstr "Ikuspegi maila mota"
 
-#: src/common/xml/ebml_chapters_converter.cpp:105
+#: src/common/xml/ebml_chapters_converter.cpp:109
 #, no-c-format
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "Gutxienez <ChapterAtom> gai bat behar da."
@@ -4610,7 +4616,7 @@ msgstr "Atal multzo aldaketa "
 msgid "Chapter numbers:"
 msgstr "Atala zenbakiak:"
 
-#: src/common/xml/ebml_chapters_converter.cpp:95
+#: src/common/xml/ebml_chapters_converter.cpp:96
 #, no-c-format
 msgid "Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"
 msgstr "Atal aztertzailea: {0} UID-Edizioa ez da bakarra eta ezingo da berrerabili. Berri bat sortuko da.\n"
@@ -12045,19 +12051,19 @@ msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated wi
 msgstr "Vorbis kode-liburuak ezberdinak dira. Hortaz bideak ezin dira kateatu ber-kodeatu gabe."
 
 #: src/common/chapters/chapters.cpp:504
-#: src/common/xml/ebml_chapters_converter.cpp:232
+#: src/common/xml/ebml_chapters_converter.cpp:257
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error at position {2}: {1}\n"
 msgstr "'{0}' XML atal agiriak akats bat du kokapen honetan: {2}: {1}\n"
 
 #: src/common/chapters/chapters.cpp:506
-#: src/common/xml/ebml_chapters_converter.cpp:235
+#: src/common/xml/ebml_chapters_converter.cpp:260
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
 msgstr "'{0}' XML atal agiriak akats bat du: {1}\n"
 
 #: src/common/chapters/chapters.cpp:502
-#: src/common/xml/ebml_chapters_converter.cpp:229
+#: src/common/xml/ebml_chapters_converter.cpp:254
 #, no-c-format
 msgid "The XML chapter file '{0}' could not be read.\n"
 msgstr "'{0}' XML atal agiria ezin da irakurri.\n"

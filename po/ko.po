@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-10-01 20:30+0200\n"
+"POT-Creation-Date: 2022-10-01 20:57+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>, 2016-2018\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -2637,13 +2637,14 @@ msgstr "'{0}'는 유효한 필드 순서가 아닙니다."
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Additional information from the parser: {2}\n"
 msgstr ""
 
-#: src/common/xml/ebml_chapters_converter.cpp:141
+#: src/common/xml/ebml_chapters_converter.cpp:145
+#: src/common/xml/ebml_chapters_converter.cpp:186
 #: src/common/xml/ebml_tags_converter.cpp:125
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
 msgstr ""
 
-#: src/common/xml/ebml_chapters_converter.cpp:148
+#: src/common/xml/ebml_chapters_converter.cpp:152
 #, no-c-format
 msgid "'{0}' is not a valid ISO 639-2 language code."
 msgstr "'{0}'는 유효한 ISO 639-2 언어 코드가 아닙니다."
@@ -2658,7 +2659,7 @@ msgstr "'--append-mode {0}'의 '{0}'는 유효한 결합 모드가 아닙니다.
 msgid "'{0}' is not a valid block additional max in '--blockadd {1}'.\n"
 msgstr "'{0}'는 '--blockadd {1}'에서 유효한 최대 추가 블록이 아닙니다.\n"
 
-#: src/common/xml/ebml_chapters_converter.cpp:154
+#: src/common/xml/ebml_chapters_converter.cpp:158
 #, no-c-format
 msgid "'{0}' is not a valid ccTLD country code."
 msgstr "'{0}'는 유효한 ccTLD 국가 코드가 아닙니다."
@@ -2954,17 +2955,17 @@ msgstr "2: 코덱 개인 데이터"
 msgid "3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."
 msgstr "3. 'name:<value>' 또는 'mime-type:<value>' 두 경우 모두, 이름 또는 MIME 유형이 각각 <value>와 동일한 첨부 파일 선택기가 적용됩니다."
 
-#: src/common/xml/ebml_chapters_converter.cpp:119
+#: src/common/xml/ebml_chapters_converter.cpp:123
 #, no-c-format
 msgid "<ChapterAtom> is missing the <ChapterTimeStart> child."
 msgstr "<ChapterAtom>은 <ChapterTimeStart> 자식 요소가 누락되어 있습니다."
 
-#: src/common/xml/ebml_chapters_converter.cpp:169
+#: src/common/xml/ebml_chapters_converter.cpp:173
 #, no-c-format
 msgid "<ChapterDisplay> is missing the <ChapterString> child."
 msgstr "<ChapterDisplay>는 <ChapterString> 자식 요소가 누락되어 있습니다."
 
-#: src/common/xml/ebml_chapters_converter.cpp:126
+#: src/common/xml/ebml_chapters_converter.cpp:130
 #, no-c-format
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack>은 <ChapterTrackNumber> 자식 요소가 누락되어 있습니다."
@@ -2976,6 +2977,11 @@ msgstr "<ChapterTrack>은 <ChapterTrackNumber> 자식 요소가 누락되어 있
 #, no-c-format
 msgid "<Do not change>"
 msgstr "<변경 없음>"
+
+#: src/common/xml/ebml_chapters_converter.cpp:194
+#, fuzzy, no-c-format
+msgid "<EditionDisplay> is missing the <EditionString> child."
+msgstr "<ChapterDisplay>는 <ChapterString> 자식 요소가 누락되어 있습니다."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:145
 #, no-c-format
@@ -3890,7 +3896,7 @@ msgstr "화면 비율 계수"
 msgid "Aspect ratio type"
 msgstr "화면 비율 유형"
 
-#: src/common/xml/ebml_chapters_converter.cpp:105
+#: src/common/xml/ebml_chapters_converter.cpp:109
 #, no-c-format
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "적어도 하나의 <ChapterAtom> 요소가 필요합니다."
@@ -4573,7 +4579,7 @@ msgstr "챕터 대규모 변경"
 msgid "Chapter numbers:"
 msgstr "챕터 번호:"
 
-#: src/common/xml/ebml_chapters_converter.cpp:95
+#: src/common/xml/ebml_chapters_converter.cpp:96
 #, no-c-format
 msgid "Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"
 msgstr "챕터 분석: 판(Edition) UID {0}는 고유한 것이 아니므로 재사용될 수 없습니다. 새 UID가 만들어집니다.\n"
@@ -11988,19 +11994,19 @@ msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated wi
 msgstr "Vorbis 코드북이 다릅니다. 재인코딩 없이 그런 트랙을 연결할 수 없습니다."
 
 #: src/common/chapters/chapters.cpp:504
-#: src/common/xml/ebml_chapters_converter.cpp:232
+#: src/common/xml/ebml_chapters_converter.cpp:257
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error at position {2}: {1}\n"
 msgstr "XML 챕터 파일 '{0}'의 위치 {2}에 포함되어 있는 오류: {1}\n"
 
 #: src/common/chapters/chapters.cpp:506
-#: src/common/xml/ebml_chapters_converter.cpp:235
+#: src/common/xml/ebml_chapters_converter.cpp:260
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
 msgstr "XML 챕터 파일 '{0}'에 포함되어 있는 오류: {1}\n"
 
 #: src/common/chapters/chapters.cpp:502
-#: src/common/xml/ebml_chapters_converter.cpp:229
+#: src/common/xml/ebml_chapters_converter.cpp:254
 #, no-c-format
 msgid "The XML chapter file '{0}' could not be read.\n"
 msgstr "XML 챕터 파일 '{0}'은 읽을 수 없습니다.\n"

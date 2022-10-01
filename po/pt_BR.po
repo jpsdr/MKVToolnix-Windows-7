@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt-BR\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-10-01 20:30+0200\n"
+"POT-Creation-Date: 2022-10-01 20:57+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Fúlvio Alves <fga.fulvio@gmail.com>, 2021-2022\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/pt_BR/)\n"
@@ -2716,13 +2716,14 @@ msgstr "'{0}' não é um número de título de DVD válido."
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag in '{1}'. Additional information from the parser: {2}\n"
 msgstr "'{0}' não é uma etiqueta de idioma IETF BCP 47/RFC 5646 válida em '{1}'. Informações adicionais do analisador: {2}\n"
 
-#: src/common/xml/ebml_chapters_converter.cpp:141
+#: src/common/xml/ebml_chapters_converter.cpp:145
+#: src/common/xml/ebml_chapters_converter.cpp:186
 #: src/common/xml/ebml_tags_converter.cpp:125
 #, no-c-format
 msgid "'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"
 msgstr "'{0}' não é uma etiqueta de idioma IETF BCP 47/RFC 5646 válida. Informações adicionais do analisador: {1}"
 
-#: src/common/xml/ebml_chapters_converter.cpp:148
+#: src/common/xml/ebml_chapters_converter.cpp:152
 #, no-c-format
 msgid "'{0}' is not a valid ISO 639-2 language code."
 msgstr "'{0}' não é um código de idioma válido ISO 639-2."
@@ -2737,7 +2738,7 @@ msgstr "'{0}' não é um modo de união válido  em '--append-mode {0}'.\n"
 msgid "'{0}' is not a valid block additional max in '--blockadd {1}'.\n"
 msgstr "'{0}' não é um bloco adicional máximo válido em '--blockadd {1}'.\n"
 
-#: src/common/xml/ebml_chapters_converter.cpp:154
+#: src/common/xml/ebml_chapters_converter.cpp:158
 #, no-c-format
 msgid "'{0}' is not a valid ccTLD country code."
 msgstr "'{0}' não é um código de país válido ccTLD."
@@ -3033,17 +3034,17 @@ msgstr "2: dados privados do codec"
 msgid "3. Either 'name:<value>' or 'mime-type:<value>' in which case the selector applies to all attachments whose name or MIME type respectively equals <value>."
 msgstr "3. Ou 'name: <valor>' ou 'mime-type: <valor>', caso em que o seletor se aplica a todos os anexos cujo nome ou tipo MIME respectivamente seja igual a <valor>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:119
+#: src/common/xml/ebml_chapters_converter.cpp:123
 #, no-c-format
 msgid "<ChapterAtom> is missing the <ChapterTimeStart> child."
 msgstr "<ChapterAtom> não tem o filho <ChapterTimeStart>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:169
+#: src/common/xml/ebml_chapters_converter.cpp:173
 #, no-c-format
 msgid "<ChapterDisplay> is missing the <ChapterString> child."
 msgstr "<ChapterDisplay> não tem o filho <ChapterString>."
 
-#: src/common/xml/ebml_chapters_converter.cpp:126
+#: src/common/xml/ebml_chapters_converter.cpp:130
 #, no-c-format
 msgid "<ChapterTrack> is missing the <ChapterTrackNumber> child."
 msgstr "<ChapterTrack> não tem o filho <ChapterTrackNumber>."
@@ -3055,6 +3056,11 @@ msgstr "<ChapterTrack> não tem o filho <ChapterTrackNumber>."
 #, no-c-format
 msgid "<Do not change>"
 msgstr "<Não altere>"
+
+#: src/common/xml/ebml_chapters_converter.cpp:194
+#, fuzzy, no-c-format
+msgid "<EditionDisplay> is missing the <EditionString> child."
+msgstr "<ChapterDisplay> não tem o filho <ChapterString>."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:145
 #, no-c-format
@@ -3971,7 +3977,7 @@ msgstr "Fator de aspecto do vídeo"
 msgid "Aspect ratio type"
 msgstr "Tipo de proporção"
 
-#: src/common/xml/ebml_chapters_converter.cpp:105
+#: src/common/xml/ebml_chapters_converter.cpp:109
 #, no-c-format
 msgid "At least one <ChapterAtom> element is needed."
 msgstr "Pelo menos um elemento <ChapterAtom> é necessário."
@@ -4654,7 +4660,7 @@ msgstr "Modificação em massa de capítulos"
 msgid "Chapter numbers:"
 msgstr "Nº dos capítulos:"
 
-#: src/common/xml/ebml_chapters_converter.cpp:95
+#: src/common/xml/ebml_chapters_converter.cpp:96
 #, no-c-format
 msgid "Chapter parser: The EditionUID {0} is not unique and could not be reused. A new one will be created.\n"
 msgstr "Analisador do capítulo: O UID editado {0} não é único e não pôde ser usado de novo. Um novo será criado.\n"
@@ -12095,19 +12101,19 @@ msgid "The Vorbis codebooks are different. Such tracks cannot be concatenated wi
 msgstr "Os livros de código Vorbis são diferentes. Essas faixas não podem ser concatenadas sem recodificação."
 
 #: src/common/chapters/chapters.cpp:504
-#: src/common/xml/ebml_chapters_converter.cpp:232
+#: src/common/xml/ebml_chapters_converter.cpp:257
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error at position {2}: {1}\n"
 msgstr "O arquivo de capítulo XML '{0}' contém um erro na posição {2}: {1}\n"
 
 #: src/common/chapters/chapters.cpp:506
-#: src/common/xml/ebml_chapters_converter.cpp:235
+#: src/common/xml/ebml_chapters_converter.cpp:260
 #, no-c-format
 msgid "The XML chapter file '{0}' contains an error: {1}\n"
 msgstr "O arquivo de capítulo XML '{0}' contém um erro: {1}\n"
 
 #: src/common/chapters/chapters.cpp:502
-#: src/common/xml/ebml_chapters_converter.cpp:229
+#: src/common/xml/ebml_chapters_converter.cpp:254
 #, no-c-format
 msgid "The XML chapter file '{0}' could not be read.\n"
 msgstr "O arquivo de capítulo XML '{0}' não pôde ser lido.\n"
