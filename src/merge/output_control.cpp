@@ -1536,8 +1536,10 @@ render_chapters() {
     mtx::chapters::remove_elements_unsupported_by_webm(*s_chapters_in_this_file);
 
   auto replaced = false;
-  if (s_kax_chapters_void)
+  if (s_kax_chapters_void) {
+    g_doc_type_version_handler->account(*s_chapters_in_this_file);
     replaced = s_kax_chapters_void->ReplaceWith(*s_chapters_in_this_file, *s_out, true, true);
+  }
 
   if (!replaced) {
     s_out->setFilePointer(0, seek_end);
