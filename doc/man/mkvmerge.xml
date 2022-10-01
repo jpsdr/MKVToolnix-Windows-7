@@ -1633,6 +1633,18 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
      </listitem>
     </varlistentry>
 
+    <varlistentry id="mkvmerge.description.audio_emphasis">
+     <term><option>--audio-emphasis</option> <parameter>TID:n|symbolic-name</parameter></term>
+     <listitem>
+      <para>
+       Sets the emphasis for the audio track with the track ID <parameter>TID</parameter>.  The mode can either be a number
+       <parameter>n</parameter> (certain values between <constant>0</constant> and <constant>16</constant>) or a symbolic name. All valid
+       numbers &amp; symbolic names can be listed with the <link
+       linkend="mkvmerge.description.list_audio_emphasis"><option>--list-audio-emphasis</option> option</link>.
+      </para>
+     </listitem>
+    </varlistentry>
+
     <varlistentry id="mkvmerge.description.reduce_to_core">
      <term><option>--reduce-to-core</option> <parameter>TID</parameter></term>
      <listitem>
@@ -2158,6 +2170,16 @@ $ mkvmerge -o out.mkv '(' file.mkv ')'</screen>
       <para>
        If tracks are known to be present but not found then the percentage to probe can be changed with this option.  The minimum of 10 MB
        is built-in and cannot be changed.
+      </para>
+     </listitem>
+    </varlistentry>
+
+    <varlistentry id="mkvmerge.description.list_audio_emphasis">
+     <term><option>--list-audio-emphasis</option></term>
+     <listitem>
+      <para>
+       Lists all valid numbers &amp; their corresponding symbolic names for the <link
+       linkend="mkvmerge.description.audio_emphasis"><option>--audio-emphasis</option></link> option.
       </para>
      </listitem>
     </varlistentry>
