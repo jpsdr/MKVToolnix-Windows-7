@@ -95,6 +95,11 @@ doc_type_version_handler_private_c::init_tables() {
   s_version_by_element[KaxVideoWhitePointChromaX::ClassInfos.GlobalId.GetValue()]           = 4;
   s_version_by_element[KaxVideoWhitePointChromaY::ClassInfos.GlobalId.GetValue()]           = 4;
 
+  s_version_by_element[KaxEditionDisplay::ClassInfos.GlobalId.GetValue()]                   = 5;
+  s_version_by_element[KaxEditionLanguageIETF::ClassInfos.GlobalId.GetValue()]              = 5;
+  s_version_by_element[KaxEditionString::ClassInfos.GlobalId.GetValue()]                    = 5;
+  s_version_by_element[KaxEmphasis::ClassInfos.GlobalId.GetValue()]                         = 5;
+
   s_read_version_by_element[KaxSimpleBlock::ClassInfos.GlobalId.GetValue()]                 = 2;
 }
 
