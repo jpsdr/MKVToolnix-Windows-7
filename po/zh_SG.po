@@ -144,16 +144,17 @@ msgid ""
 msgstr "  --attachment-name <name> 下一附件存储在输出文件中的文件名。\n"
 
 #: src/merge/mkvmerge.cpp:288
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --audio-emphasis <TID:n|keyword>\n"
 "                           Sets the audio emphasis track header value. It can\n"
 "                           be either a number or a keyword (see\n"
 "                           '--list-audio-emphasis' for the full list).\n"
 msgstr ""
-"  --stereo-mode <TID:n|keyword>\n"
-"                           设置立体模式参数。可以为数字 0 - 14 或关键词\n"
-"                           (完整列表请参见文档)。\n"
+"  --audio-emphasis <TID:n|关键词>\n"
+"                           设置 ｢音频增强算法｣ 轨道头部值。\n"
+"                           可以是数字值，也可以是关键词 (可通过\n"
+"                           ｢--list-audio-emphasis｣ 选项查看完整列表)。\n"
 
 #: src/merge/mkvmerge.cpp:266
 #, no-c-format
@@ -575,6 +576,8 @@ msgid ""
 "  --list-audio-emphasis    Lists all supported values for the\n"
 "                           '--audio-emphasis' option and their meaning.\n"
 msgstr ""
+"  --list-audio-emphasis    列出 ｢--audio-emphasis｣ 选项\n"
+"                           所支持的所有有效数值及其含义。\n"
 
 #: src/merge/mkvmerge.cpp:395
 #, no-c-format
@@ -589,6 +592,8 @@ msgid ""
 "  --list-stereo-modes      Lists all supported values for the '--stereo-mode'\n"
 "                           option and their meaning.\n"
 msgstr ""
+"  --list-stereo-modes      列出 ｢--stereo-mode｣ 选项所支持的\n"
+"                           所有有效数值及其含义。\n"
 
 #: src/merge/mkvmerge.cpp:341
 #, no-c-format
@@ -854,16 +859,17 @@ msgid "  --split-max-files <n>    Create at most n files.\n"
 msgstr "  --split-max-files <n>    最多创建 n 个文件。\n"
 
 #: src/merge/mkvmerge.cpp:313
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --stereo-mode <TID:n|keyword>\n"
 "                           Sets the stereo mode parameter. It can\n"
 "                           either be a number 0 - 14 or a keyword\n"
 "                           (use '--list-stereo-modes' to see the full list).\n"
 msgstr ""
-"  --stereo-mode <TID:n|keyword>\n"
-"                           设置立体模式参数。可以为数字 0 - 14 或关键词\n"
-"                           (完整列表请参见文档)。\n"
+"  --stereo-mode <TID:n|关键词>\n"
+"                           设置 ｢立体模式｣ 参数。\n"
+"                           可以是数字 0 - 14，也可以是关键词 (可通过\n"
+"                           ｢--list-stereo-modes｣ 选项查看完整列表)。\n"
 
 #: src/merge/mkvmerge.cpp:372
 #, no-c-format
@@ -1307,9 +1313,9 @@ msgid " Options that only apply to VobSub subtitle tracks:\n"
 msgstr " 仅适用于 VobSub 字幕轨道的选项: \n"
 
 #: src/merge/mkvmerge.cpp:279
-#, fuzzy, no-c-format
+#, no-c-format
 msgid " Options that only apply to audio tracks:\n"
-msgstr " 仅适用于视频轨道的选项: \n"
+msgstr " 只适用于音频轨道的选项:\n"
 
 #: src/merge/mkvmerge.cpp:371
 #, no-c-format
@@ -2944,9 +2950,9 @@ msgid "<Do not change>"
 msgstr "<不更改>"
 
 #: src/common/xml/ebml_chapters_converter.cpp:194
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "<EditionDisplay> is missing the <EditionString> child."
-msgstr "<ChapterDisplay> 缺少 <ChapterString> 子元素。"
+msgstr "<EditionDisplay> 缺少 <EditionString> 子元素。"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:145
 #, no-c-format
@@ -3953,14 +3959,14 @@ msgid "Audio channels"
 msgstr "音频声道数"
 
 #: src/common/property_element.cpp:215
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Audio emphasis"
-msgstr "音频声道数"
+msgstr "音频增强算法"
 
 #: src/merge/mkvmerge.cpp:1065
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Audio emphasis mode option: not given in the form <TID>:<mode> where the mode is either a number or keyword from this list: {0} (argument was '{1}').\n"
-msgstr "立体模式参数: 格式不符合 <TID>:<n|keyword>，其中 n 为介于 0 与 {0} 的数字，keyword 为以下关键词之一: {1} (目前使用的参数为「{2}」)。\n"
+msgstr "｢音频增强算法｣ 模式选项: 未按 ｢<TID>:<mode>｣ 形式给出，其中模式（mode）可以是数字或此列表中的关键词: {0} (您输入的参数为 ｢{1}｣)。\n"
 
 #: src/common/property_element.cpp:212
 #, no-c-format
@@ -4264,7 +4270,7 @@ msgstr "创建选项文件(&R)"
 #: src/common/audio_emphasis.cpp:52
 #, no-c-format
 msgid "CCIT-J.17"
-msgstr ""
+msgstr "CCIT-J.17"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:173
 #, no-c-format
@@ -4595,9 +4601,9 @@ msgid "Chapter segment edition UID"
 msgstr "章节剪辑版本 UID"
 
 #: src/common/kax_element_names.cpp:313
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter skip type"
-msgstr "章节显示"
+msgstr "章节跳过类型"
 
 #: src/common/kax_element_names.cpp:303
 #, no-c-format
@@ -5524,7 +5530,7 @@ msgstr "默认语言"
 #: src/common/kax_element_names.cpp:331
 #, no-c-format
 msgid "Default language (bogus element with invalid ID)"
-msgstr ""
+msgstr "默认语言 (ID 无效的伪元素)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2234
 #, no-c-format
@@ -5688,9 +5694,9 @@ msgid "Destination file name: %1"
 msgstr "输出文件名: %1"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Destination file's absolute path"
-msgstr "输出文件名"
+msgstr "输出文件的绝对路径"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2263
 #, no-c-format
@@ -5698,9 +5704,9 @@ msgid "Destination file:"
 msgstr "输出文件:"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:248
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Destination folders's aboslute path"
-msgstr "输出文件名"
+msgstr "输出目录的绝对路径"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:310
 #, no-c-format
@@ -6101,9 +6107,9 @@ msgid "Edition UID"
 msgstr "版本 UID"
 
 #: src/common/kax_element_names.cpp:287
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Edition display"
-msgstr "版本条目"
+msgstr "版本显示项"
 
 #: src/common/kax_element_names.cpp:282
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:82
@@ -6128,14 +6134,14 @@ msgid "Edition flag ordered"
 msgstr "版本标记有序"
 
 #: src/common/kax_element_names.cpp:289
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Edition language (IETF BCP 47)"
-msgstr "标签语言 (IETF BCP 47)"
+msgstr "版本语言 (IETF BCP 47)"
 
 #: src/common/kax_element_names.cpp:288
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Edition string"
-msgstr "版本条目"
+msgstr "版本字符串"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:33
 #, no-c-format
@@ -6185,17 +6191,17 @@ msgstr "类别「{0}」中的元素 ('--edit {1}'): \n"
 #: src/common/kax_element_names.cpp:111
 #, no-c-format
 msgid "Emphasis"
-msgstr ""
+msgstr "增强算法"
 
 #: src/common/property_element.cpp:215
 #, no-c-format
 msgid "Emphasis applied on audio which must be reversed by player to get the actual samples."
-msgstr ""
+msgstr "已对音频实施的增强算法，播放器必须执行逆向算法，方可得到正确的原始采样。"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2248
 #, no-c-format
 msgid "Emphasis:"
-msgstr ""
+msgstr "增强算法:"
 
 #: src/common/hacks.cpp:64
 #, no-c-format
@@ -6639,12 +6645,12 @@ msgstr "FLV (Flash 视频)"
 #: src/common/audio_emphasis.cpp:53
 #, no-c-format
 msgid "FM radio in Europe"
-msgstr ""
+msgstr "欧洲调频电台"
 
 #: src/common/audio_emphasis.cpp:54
 #, no-c-format
 msgid "FM radio in the USA"
-msgstr ""
+msgstr "美国调频电台"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:273
 #, no-c-format
@@ -9378,7 +9384,7 @@ msgstr "新建条目数量(&M):"
 #: src/common/stereo_mode.cpp:102
 #, no-c-format
 msgid "Number"
-msgstr ""
+msgstr "数字"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2156
 #, no-c-format
@@ -11450,9 +11456,9 @@ msgid "Source file's directory"
 msgstr "输入文件目录"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:249
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Source files' absolute paths"
-msgstr "输入文件名"
+msgstr "输入文件的绝对路径"
 
 #: src/common/property_element.cpp:204
 #, no-c-format
@@ -11585,7 +11591,7 @@ msgstr "立体模式"
 #: src/common/kax_element_names.cpp:164
 #, no-c-format
 msgid "Stereo mode (deprecated element)"
-msgstr ""
+msgstr "立体模式 (已废弃元素)"
 
 #: src/merge/mkvmerge.cpp:1014
 #, no-c-format
@@ -11670,9 +11676,9 @@ msgstr "禁止输出状态消息。"
 
 #: src/common/audio_emphasis.cpp:114
 #: src/common/stereo_mode.cpp:102
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Symbolic name"
-msgstr "编码格式名称"
+msgstr "英文代号"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:663
 #, no-c-format
@@ -13653,7 +13659,7 @@ msgstr "该 Ogg/OGM 文件包含章节但无法解析。这可能是由于没有
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:307
 #, no-c-format
 msgid "This affects functions such as the selector of recently used destination directories in the multiplexer."
-msgstr "这会影响到例如混流器的 ｢最近使用的输出目录｣ 选择按钮等功能。"
+msgstr "影响到的功能包括混流器的 ｢最近使用的输出目录｣ 选择按钮等。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:405
 #, no-c-format
@@ -15448,7 +15454,7 @@ msgstr "ac3_bs_packetizer::add_to_buffer(): 未经测试的代码 ('size' 比较
 #: src/common/kax_info.cpp:863
 #, no-c-format
 msgid "advertisement"
-msgstr ""
+msgstr "广告"
 
 #: src/common/stereo_mode.cpp:60
 #, no-c-format
@@ -15597,7 +15603,7 @@ msgstr "加密"
 #: src/common/kax_info.cpp:859
 #, no-c-format
 msgid "end credits"
-msgstr ""
+msgstr "片尾演职员表"
 
 #: src/common/kax_info.cpp:711
 #, no-c-format
@@ -15617,7 +15623,7 @@ msgstr "未找到 generic_packetizer_c 所需的 filelist_t。 {0}\n"
 #: src/common/audio_emphasis.cpp:50
 #, no-c-format
 msgid "first order filter found in CD/DVD/MPEG audio"
-msgstr ""
+msgstr "CD/DVD/MPEG 音频所采用的一阶滤波器"
 
 #: src/common/flac.cpp:139
 #, no-c-format
@@ -16042,7 +16048,7 @@ msgstr "mpeg_ps_reader: 不该发生 #2。 {0}"
 #: src/common/audio_emphasis.cpp:49
 #, no-c-format
 msgid "no emphasis"
-msgstr ""
+msgstr "无增强算法"
 
 #: src/common/kax_info.cpp:798
 #, no-c-format
@@ -16075,9 +16081,9 @@ msgid "no signature hash algorithm"
 msgstr "未使用签名散列算法"
 
 #: src/common/kax_info.cpp:857
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "no skipping"
-msgstr "画面裁剪:"
+msgstr "不跳过"
 
 #: src/input/r_ogm.cpp:431
 #, no-c-format
@@ -16092,7 +16098,7 @@ msgstr "ogg_sync_buffer 失败\n"
 #: src/common/kax_info.cpp:858
 #, no-c-format
 msgid "opening credits"
-msgstr ""
+msgstr "片头演职员表"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:127
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:131
@@ -16113,37 +16119,37 @@ msgstr "呈递"
 #: src/common/audio_emphasis.cpp:63
 #, no-c-format
 msgid "phono filter (Columbia LP)"
-msgstr ""
+msgstr "唱片滤波器 (Columbia LP)"
 
 #: src/common/audio_emphasis.cpp:62
 #, no-c-format
 msgid "phono filter (EMI)"
-msgstr ""
+msgstr "唱片滤波器 (EMI)"
 
 #: src/common/audio_emphasis.cpp:60
 #, no-c-format
 msgid "phono filter (IEC N78)"
-msgstr ""
+msgstr "唱片滤波器 (IEC N78)"
 
 #: src/common/audio_emphasis.cpp:64
 #, no-c-format
 msgid "phono filter (London)"
-msgstr ""
+msgstr "唱片滤波器 (London)"
 
 #: src/common/audio_emphasis.cpp:65
 #, no-c-format
 msgid "phono filter (NARTB)"
-msgstr ""
+msgstr "唱片滤波器 (NARTB)"
 
 #: src/common/audio_emphasis.cpp:59
 #, no-c-format
 msgid "phono filter (RIAA)"
-msgstr ""
+msgstr "唱片滤波器 (RIAA)"
 
 #: src/common/audio_emphasis.cpp:61
 #, no-c-format
 msgid "phono filter (Teldec)"
-msgstr ""
+msgstr "唱片滤波器 (Teldec)"
 
 #: src/common/kax_info.cpp:627
 #, no-c-format
@@ -16178,12 +16184,12 @@ msgstr "像素宽度: {0}"
 #: src/common/kax_info.cpp:862
 #, no-c-format
 msgid "preview of current episode"
-msgstr ""
+msgstr "上集回顾"
 
 #: src/common/kax_info.cpp:861
 #, no-c-format
 msgid "preview of next episode"
-msgstr ""
+msgstr "下集预告"
 
 #: src/common/kax_info.cpp:734
 #, no-c-format
@@ -16213,7 +16219,7 @@ msgstr "real_reader: 仅支持第 3、4、5 版的音频头。轨道 ID {0} 所�
 #: src/common/kax_info.cpp:860
 #, no-c-format
 msgid "recap"
-msgstr ""
+msgstr "前情提要"
 
 #: src/common/kax_info.cpp:710
 #, no-c-format
