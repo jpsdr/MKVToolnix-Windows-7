@@ -1625,7 +1625,7 @@ qtmp4_reader_c::read(generic_packetizer_c *packetizer,
     buffer = memory_c::alloc(index.size);
   }
 
-  if (m_in->read(buffer->get_buffer() + buffer_offset, index.size) != index.size) {
+  if (m_in->read(buffer->get_buffer() + buffer_offset, index.size) != static_cast<uint64_t>(index.size)) {
     mxwarn(fmt::format(Y("Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"),
                        dmx.pos, dmx.m_index.size(), index.size, index.file_pos));
     return flush_packetizers();
@@ -3014,7 +3014,7 @@ qtmp4_demuxer_c::parse_dops_audio_header_priv_atom(mm_io_c &io,
 
   std::memcpy(opus_priv_ptr, "OpusHead", 8);
 
-  if (io.read(&opus_priv_ptr[8], io.get_size()) != io.get_size()) {
+  if (io.read(&opus_priv_ptr[8], io.get_size()) != static_cast<uint64_t>(io.get_size())) {
     mxdebug_if(m_debug_headers, fmt::format("{0}Opus box read failure", space((level + 1) * 2 + 1)));
     return;
   }

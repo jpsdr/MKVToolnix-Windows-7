@@ -61,7 +61,7 @@ void
 dts_reader_c::read_headers() {
   try {
     m_in->setFilePointer(m_current_chunk->data_start);
-    auto bytes_to_read = std::min<int64_t>(m_current_chunk->data_size, m_af_buf[0]->get_size());
+    auto bytes_to_read = std::min<uint64_t>(m_current_chunk->data_size, m_af_buf[0]->get_size());
     if (m_in->read(m_buf[m_cur_buf], bytes_to_read) != bytes_to_read)
       throw mtx::input::header_parsing_x();
     m_in->setFilePointer(m_current_chunk->data_start);
@@ -124,7 +124,7 @@ dts_reader_c::read(generic_packetizer_c *,
   if (m_current_chunk == chunks_end)
     return flush_packetizers();
 
-  auto bytes_to_read = std::min<int64_t>(m_current_chunk->data_end - std::min(m_in->getFilePointer(), m_current_chunk->data_end), m_af_buf[0]->get_size());
+  auto bytes_to_read = std::min<uint64_t>(m_current_chunk->data_end - std::min(m_in->getFilePointer(), m_current_chunk->data_end), m_af_buf[0]->get_size());
   if (m_swap_bytes)
     bytes_to_read &= ~0x1;
   if (m_dts14_to_16)

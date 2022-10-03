@@ -140,7 +140,7 @@ mm_io_c::read(size_t size) {
   return buffer;
 }
 
-uint32_t
+size_t
 mm_io_c::read(void *buffer,
               size_t size) {
   return _read(buffer, size);

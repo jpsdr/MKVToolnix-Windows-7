@@ -117,7 +117,7 @@ file_status_e
 truehd_reader_c::read(generic_packetizer_c *,
                       bool) {
   auto remaining_bytes = m_size - m_in->getFilePointer();
-  auto read_len        = std::min<int64_t>(m_chunk->get_size(), remaining_bytes);
+  auto read_len        = std::min<uint64_t>(m_chunk->get_size(), remaining_bytes);
 
   if (0 >= read_len) {
     m_converter.flush();
