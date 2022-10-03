@@ -245,7 +245,7 @@ PrefsRunProgramWidget::setupMenu() {
 
     { QY("Variables for multiplex jobs"),                                Q("")                           },
     { QY("Destination file's absolute path"),                            Q("DESTINATION_FILE_NAME")      },
-    { QY("Destination folders's aboslute path"),                         Q("DESTINATION_FILE_DIRECTORY") },
+    { QY("Destination folders's absolute path"),                         Q("DESTINATION_FILE_DIRECTORY") },
     { QY("Source files' absolute paths"),                                Q("SOURCE_FILE_NAMES")          },
 
     { QY("General variables"),                                           Q("")                           },
