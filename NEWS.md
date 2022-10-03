@@ -33,7 +33,7 @@
 
 ## Build system changes
 
-* libEBML 1.4.3 & libMatroska 1.7.0 are now required.
+* libEBML 2.0.0 & libMatroska 2.0.0 are now required.
 
 
 # Version 70.0.0 "Caught A Lite Sneeze" 2022-08-14
