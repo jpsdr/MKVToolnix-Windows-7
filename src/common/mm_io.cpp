@@ -140,7 +140,7 @@ mm_io_c::read(size_t size) {
   return buffer;
 }
 
-size_t
+MTX_EBML_IOCALLBACK_READ_RETURN_TYPE
 mm_io_c::read(void *buffer,
               size_t size) {
   return _read(buffer, size);

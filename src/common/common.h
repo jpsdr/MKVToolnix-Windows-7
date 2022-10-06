@@ -57,6 +57,7 @@ using namespace std::string_literals;
 
 #include <ebml/EbmlElement.h>
 #include <ebml/EbmlMaster.h>
+#include <ebml/EbmlVersion.h>
 
 /* i18n stuff */
 #if defined(HAVE_LIBINTL_H)
@@ -112,6 +113,12 @@ std::string const &get_program_name();
   inline Class* q_func() { return static_cast<Class *>(q_ptr); } \
   inline const Class* q_func() const { return static_cast<const Class *>(q_ptr); } \
   friend class Class;
+
+#if LIBEBML_VERSION >= 0x020000
+# define MTX_EBML_IOCALLBACK_READ_RETURN_TYPE std::size_t
+#else
+# define MTX_EBML_IOCALLBACK_READ_RETURN_TYPE std::uint32_t
+#endif
 
 #include "common/debugging.h"
 #include "common/error.h"

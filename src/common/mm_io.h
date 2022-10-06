@@ -38,7 +38,7 @@ public:
   virtual void setFilePointer(int64_t offset, libebml::seek_mode mode = libebml::seek_beginning) override = 0;
   virtual bool setFilePointer2(int64_t offset, libebml::seek_mode mode = libebml::seek_beginning);
   virtual memory_cptr read(size_t size);
-  virtual size_t read(void *buffer, size_t size) override;
+  virtual MTX_EBML_IOCALLBACK_READ_RETURN_TYPE read(void *buffer, size_t size) override;
   virtual uint32_t read(std::string &buffer, size_t size, size_t offset = 0);
   virtual uint32_t read(memory_cptr &buffer, size_t size, int offset = 0);
   virtual unsigned char read_uint8();
