@@ -1,3 +1,4 @@
+<!ENTITY % format "(ascii|base64|hex)">
 <!ELEMENT Tags (Tag*)>
 <!ELEMENT Tag (
           Targets,
@@ -29,5 +30,6 @@
 <!ELEMENT Name (#PCDATA)>
 <!ELEMENT String (#PCDATA)>
 <!ELEMENT Binary (#PCDATA)>
+<!ATTLIST Binary format %format; "ascii">
 <!ELEMENT TagLanguage (#PCDATA)>
 <!ELEMENT DefaultLanguage (#PCDATA)>

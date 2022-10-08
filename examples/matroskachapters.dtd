@@ -1,3 +1,4 @@
+<!ENTITY % format "(ascii|base64|hex)">
 <!ELEMENT Chapters (EditionEntry*)>
 <!ELEMENT EditionEntry (
           EditionUID?,
@@ -59,13 +60,16 @@
 <!ELEMENT ChapterSkipType (#PCDATA)>
 
 <!ELEMENT ChapterSegmentUID (#PCDATA)>
+<!ATTLIST ChapterSegmentUID format %format; "ascii">
 <!ELEMENT ChapterSegmentEditionUID (#PCDATA)>
 <!ELEMENT ChapterPhysicalEquiv (#PCDATA)>
 
 <!ELEMENT ChapterProcessCodecID (#PCDATA)>
 <!ELEMENT ChapterProcessPrivate (#PCDATA)>
+<!ATTLIST ChapterProcessPrivate format %format; "ascii">
 <!ELEMENT ChapterProcessTime (#PCDATA)>
 <!ELEMENT ChapterProcessData (#PCDATA)>
+<!ATTLIST ChapterProcessData format %format; "ascii">
 
 <!ELEMENT ChapterString (#PCDATA)>
 <!ELEMENT ChapterLanguage (#PCDATA)>

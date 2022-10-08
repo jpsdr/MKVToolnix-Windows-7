@@ -1,3 +1,4 @@
+<!ENTITY % format "(ascii|base64|hex)">
 <!ELEMENT Info (
           SegmentUID?,
           NextSegmentUID?,
@@ -9,9 +10,13 @@
           ChapterTranslate*)>
 
 <!ELEMENT SegmentUID (#PCDATA)>
+<!ATTLIST SegmentUID format %format; "ascii">
 <!ELEMENT NextSegmentUID (#PCDATA)>
+<!ATTLIST NextSegmentUID format %format; "ascii">
 <!ELEMENT PreviousSegmentUID (#PCDATA)>
+<!ATTLIST PreviousSegmentUID format %format; "ascii">
 <!ELEMENT SegmentFamily (#PCDATA)>
+<!ATTLIST SegmentFamily format %format; "ascii">
 <!ELEMENT SegmentFilename (#PCDATA)>
 <!ELEMENT NextSegmentFilename (#PCDATA)>
 <!ELEMENT PreviousSegmentFilename (#PCDATA)>
