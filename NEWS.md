@@ -36,6 +36,7 @@
 * libEBML 1.4.4 & libMatroska 1.7.1 are now required.
 * The bundled libEBML & libMatroska libraries were updated to v1.4.4 & v1.7.1
   respectively.
+* The bundled `fmt` library was updated to v9.1.0.
 
 
 # Version 70.0.0 "Caught A Lite Sneeze" 2022-08-14
