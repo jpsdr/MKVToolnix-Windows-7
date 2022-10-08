@@ -7,6 +7,8 @@
   it if it's missing from the XML file.
 * Chapters DTD: fixed the `example-chapters-1.xml` not validating against the
   DTD.
+* Chapters DTD: corrected the old name `EditionManaged` to
+  `EditionFlagOrdered`.
 * XML DTDs: fixed elements representing binary data not allowing the `format`
   attribute.
 
