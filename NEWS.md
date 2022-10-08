@@ -1,3 +1,16 @@
+# Version ?
+
+## Bug fixes
+
+* Chapters DTD: added the new edition & chapter elements from Matroska v5.
+* Chapters DTD: fixed EditionUID being mandatory. mkvmerge can auto-generate
+  it if it's missing from the XML file.
+* Chapters DTD: fixed the `example-chapters-1.xml` not validating against the
+  DTD.
+* XML DTDs: fixed elements representing binary data not allowing the `format`
+  attribute.
+
+
 # Version 71.0.0 "Altitude" 2022-10-08
 
 ## New features and enhancements
