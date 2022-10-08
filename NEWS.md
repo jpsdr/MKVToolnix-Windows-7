@@ -37,6 +37,7 @@
 * The bundled libEBML & libMatroska libraries were updated to v1.4.4 & v1.7.1
   respectively.
 * The bundled `fmt` library was updated to v9.1.0.
+* The bundled `nlohmann-json` library was updated to v3.11.2.
 
 
 # Version 70.0.0 "Caught A Lite Sneeze" 2022-08-14
