@@ -12,6 +12,11 @@
 * XML DTDs: fixed elements representing binary data not allowing the `format`
   attribute.
 
+## Build system changes
+
+* bug fix: configure accidentally tested for libEBML ≥ 2.0.0 & libMatroska ≥
+  2.0.0, even though the actual requirements are 1.4.4 & 1.7.1 respectively.
+
 
 # Version 71.0.0 "Altitude" 2022-10-08
 

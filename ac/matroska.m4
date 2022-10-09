@@ -3,8 +3,8 @@ dnl Test for libEBML and libMatroska, and define MATROSKA_CFLAGS and MATROSKA_LI
 dnl
 
 EBML_MATROSKA_INTERNAL=no
-PKG_CHECK_MODULES([EBML],[libebml >= 2.0.0],[],[EBML_MATROSKA_INTERNAL=yes])
-PKG_CHECK_MODULES([MATROSKA],[libmatroska >= 2.0.0],[],[EBML_MATROSKA_INTERNAL=yes])
+PKG_CHECK_MODULES([EBML],[libebml >= 1.4.4],[],[EBML_MATROSKA_INTERNAL=yes])
+PKG_CHECK_MODULES([MATROSKA],[libmatroska >= 1.7.1],[],[EBML_MATROSKA_INTERNAL=yes])
 
 if test x"$EBML_MATROSKA_INTERNAL" = xyes; then
   if ! test -f lib/libebml/ebml/EbmlTypes.h ; then
