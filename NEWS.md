@@ -9,6 +9,8 @@
   DTD.
 * Chapters DTD: corrected the old name `EditionManaged` to
   `EditionFlagOrdered`.
+* Chapters DTD: fixed `ChapLanguageIETF` missing its element declaration &
+  `ChapterLanguage` being required.
 * XML DTDs: fixed elements representing binary data not allowing the `format`
   attribute.
 

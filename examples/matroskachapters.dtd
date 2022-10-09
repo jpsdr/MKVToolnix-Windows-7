@@ -39,7 +39,7 @@
 
 <!ELEMENT ChapterDisplay (
           ChapterString,
-          ChapterLanguage+,
+          ChapterLanguage*,
           ChapLanguageIETF*,
           ChapterCountry*)>
 
@@ -73,4 +73,5 @@
 
 <!ELEMENT ChapterString (#PCDATA)>
 <!ELEMENT ChapterLanguage (#PCDATA)>
+<!ELEMENT ChapLanguageIETF (#PCDATA)>
 <!ELEMENT ChapterCountry (#PCDATA)>
