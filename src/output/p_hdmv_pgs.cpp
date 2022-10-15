@@ -28,6 +28,7 @@ using namespace libmatroska;
 hdmv_pgs_packetizer_c::hdmv_pgs_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti)
   : generic_packetizer_c(p_reader, p_ti)
+  , m_aggregate_packets(false)
 {
   set_track_type(track_subtitle);
   set_default_compression_method(COMPRESSION_ZLIB);
@@ -73,8 +74,6 @@ hdmv_pgs_packetizer_c::dump_and_add_packet(packet_cptr const &packet) {
   if (m_debug)
     dump_packet(*packet);
 
-  maybe_fix_timestamp(*packet);
-
   add_packet(packet);
 }
 
@@ -95,32 +94,6 @@ hdmv_pgs_packetizer_c::dump_packet(packet_t const &packet) {
                         segment_size, offset - segment_size, type, mtx::hdmv_pgs::name_for_type(type),
                         offset > frame_size ? " INVALID SEGMENT SIZE" : ""));
   }
-}
-
-void
-hdmv_pgs_packetizer_c::maybe_fix_timestamp(packet_t &packet) {
-  if (!m_num_packets) {
-    m_last_good_timestamp = packet.timestamp;
-    return;
-  }
-
-  if (packet.timestamp < m_last_good_timestamp)
-    return;
-
-  auto diff = packet.timestamp - m_last_good_timestamp;
-
-  if (diff < (2 * 60 * 60 * 1'000'000'000ll)) {
-    m_last_good_timestamp = packet.timestamp;
-    return;
-  }
-
-  auto new_timestamp = m_last_good_timestamp + 1'000'000'000;
-
-  mxdebug_if(m_debug, fmt::format("  fixing bogus timestamp from {0} to {1} (last good {2} diff {3})\n",
-                                  mtx::string::format_timestamp(packet.timestamp),      mtx::string::format_timestamp(new_timestamp),
-                                  mtx::string::format_timestamp(m_last_good_timestamp), mtx::string::format_timestamp(diff)));
-
-  packet.timestamp = new_timestamp;
 }
 
 connection_result_e

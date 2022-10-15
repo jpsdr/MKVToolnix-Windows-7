@@ -1,3 +1,14 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: HDMV PGS subtitles: reverted the change that implemented a
+  heuristic for detecting bogus timestamps & attempting to fix them. This was
+  done to fix #3268. Unfortunately this affected valid subtitle files with
+  intentional huge gaps in timestamps, e.g. forced subtitle tracks. The
+  heuristic has simply been removed, fixing #3392.
+
+
 # Version 71.1.0 "Fortitude" 2022-10-09
 
 ## Bug fixes
