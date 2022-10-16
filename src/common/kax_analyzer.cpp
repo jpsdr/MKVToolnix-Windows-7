@@ -52,7 +52,7 @@ template<typename Tmaster,
 kax_analyzer_c::update_element_result_e
 update_uid_referrals(kax_analyzer_c &analyzer,
                      std::unordered_map<uint64_t, uint64_t> const &changes) {
-  auto master = analyzer.read_all(Tmaster::ClassInfos);
+  auto master = analyzer.read_all(EBML_INFO(Tmaster));
   if (!master)
     return kax_analyzer_c::uer_success;
 

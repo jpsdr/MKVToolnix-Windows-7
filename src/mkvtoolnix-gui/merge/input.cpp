@@ -2237,15 +2237,15 @@ Tab::hasSourceFiles()
 void
 Tab::toggleSpecificTrackFlag(unsigned int wantedId) {
   auto &p       = *p_func();
-  auto comboBox = wantedId == libmatroska::KaxTrackFlagDefault    ::ClassInfos.GlobalId.GetValue() ? p.ui->defaultTrackFlag
-                : wantedId == libmatroska::KaxTrackFlagForced     ::ClassInfos.GlobalId.GetValue() ? p.ui->forcedTrackFlag
-                : wantedId == libmatroska::KaxTrackFlagEnabled    ::ClassInfos.GlobalId.GetValue() ? p.ui->trackEnabledFlag
-                : wantedId == libmatroska::KaxFlagCommentary      ::ClassInfos.GlobalId.GetValue() ? p.ui->commentaryFlag
-                : wantedId == libmatroska::KaxFlagOriginal        ::ClassInfos.GlobalId.GetValue() ? p.ui->originalFlag
-                : wantedId == libmatroska::KaxFlagHearingImpaired ::ClassInfos.GlobalId.GetValue() ? p.ui->hearingImpairedFlag
-                : wantedId == libmatroska::KaxFlagVisualImpaired  ::ClassInfos.GlobalId.GetValue() ? p.ui->visualImpairedFlag
-                : wantedId == libmatroska::KaxFlagTextDescriptions::ClassInfos.GlobalId.GetValue() ? p.ui->textDescriptionsFlag
-                :                                                                                    static_cast<QComboBox *>(nullptr);
+  auto comboBox = wantedId == EBML_ID(libmatroska::KaxTrackFlagDefault    ).GetValue() ? p.ui->defaultTrackFlag
+                : wantedId == EBML_ID(libmatroska::KaxTrackFlagForced     ).GetValue() ? p.ui->forcedTrackFlag
+                : wantedId == EBML_ID(libmatroska::KaxTrackFlagEnabled    ).GetValue() ? p.ui->trackEnabledFlag
+                : wantedId == EBML_ID(libmatroska::KaxFlagCommentary      ).GetValue() ? p.ui->commentaryFlag
+                : wantedId == EBML_ID(libmatroska::KaxFlagOriginal        ).GetValue() ? p.ui->originalFlag
+                : wantedId == EBML_ID(libmatroska::KaxFlagHearingImpaired ).GetValue() ? p.ui->hearingImpairedFlag
+                : wantedId == EBML_ID(libmatroska::KaxFlagVisualImpaired  ).GetValue() ? p.ui->visualImpairedFlag
+                : wantedId == EBML_ID(libmatroska::KaxFlagTextDescriptions).GetValue() ? p.ui->textDescriptionsFlag
+                :                                                                        static_cast<QComboBox *>(nullptr);
 
   if (!comboBox || !comboBox->isEnabled())
     return;

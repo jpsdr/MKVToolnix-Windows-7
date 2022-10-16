@@ -369,7 +369,7 @@ Tool::removeChaptersFromExistingMatroskaFile() {
     return;
   }
 
-  auto idx = analyzer->find(libmatroska::KaxChapters::ClassInfos.GlobalId);
+  auto idx = analyzer->find(EBML_ID(libmatroska::KaxChapters));
   if (-1 == idx) {
     Util::MessageBox::information(this)->title(QY("Removing chapters from existing Matroska file")).text(QY("The file you tried to open (%1) does not contain any chapters.").arg(fileName)).exec();
     return;

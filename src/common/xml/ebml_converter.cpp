@@ -443,13 +443,13 @@ ebml_converter_c::verify_and_create_element(EbmlMaster &parent,
     throw invalid_child_node_x{ name, get_tag_name(parent), node.offset_debug() };
 
   auto debug_name = get_debug_name(name);
-  auto &context   = EBML_CONTEXT(&parent);
+  auto &context   = EBML_CONTEXT(static_cast<EbmlElement *>(&parent));
   bool found      = false;
   EbmlId id(static_cast<uint32_t>(0), 0);
   size_t i;
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
-    if (debug_name == EBML_CTX_IDX_INFO(context, i).DebugName) {
+    if (debug_name == EbmlCallbacks(EBML_CTX_IDX_INFO(context, i)).GetName()) {
       found = true;
       id    = EBML_CTX_IDX_ID(context, i);
       break;
@@ -475,7 +475,7 @@ ebml_converter_c::dump_semantics(std::string const &top_element_name)
   size_t i;
 
   for (i = 0; i < EBML_CTX_SIZE(context); i++)
-    if (debug_name == EBML_CTX_IDX_INFO(context, i).DebugName) {
+    if (debug_name == EbmlCallbacks(EBML_CTX_IDX_INFO(context, i)).GetName()) {
       std::shared_ptr<EbmlElement> child{ &EBML_SEM_CREATE(EBML_CTX_IDX(context, i)) };
       std::map<std::string, bool> visited_masters;
       dump_semantics_recursively(0, *child, visited_masters);

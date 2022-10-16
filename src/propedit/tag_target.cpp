@@ -238,8 +238,8 @@ tag_target_c::add_or_replace_track_tags(KaxTags *tags) {
 
 bool
 tag_target_c::read_segment_info_and_tracks() {
-  auto tracks       = m_analyzer->read_all(KaxTracks::ClassInfos);
-  auto segment_info = m_analyzer->read_all(KaxInfo::ClassInfos);
+  auto tracks       = m_analyzer->read_all(EBML_INFO(KaxTracks));
+  auto segment_info = m_analyzer->read_all(EBML_INFO(KaxInfo));
   m_timestamp_scale = segment_info ? FindChildValue<KaxTimecodeScale>(*segment_info, 1000000ull) : 1000000ull;
 
   if (tracks && dynamic_cast<KaxTracks *>(tracks.get())) {

@@ -32,8 +32,8 @@ vint_c::vint_c(int64_t value,
 }
 
 vint_c::vint_c(libebml::EbmlId const &id)
-  : m_value{id.Value}
-  , m_coded_size{static_cast<int>(id.Length)}
+  : m_value{id.GetValue()}
+  , m_coded_size{static_cast<int>(id.GetLength())}
   , m_is_set{true}
 {
 }

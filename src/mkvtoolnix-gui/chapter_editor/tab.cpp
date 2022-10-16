@@ -309,7 +309,7 @@ Tab::readFileEndTimestampForMatroska(kax_analyzer_c &analyzer) {
 
   p->fileEndTimestamp.reset();
 
-  auto idx = analyzer.find(KaxInfo::ClassInfos.GlobalId);
+  auto idx = analyzer.find(EBML_ID(KaxInfo));
   if (-1 == idx) {
     Util::MessageBox::critical(this)->title(QY("File parsing failed")).text(QY("The file you tried to open (%1) could not be read successfully.").arg(p->fileName)).exec();
     return false;
@@ -402,7 +402,7 @@ Tab::loadFromMatroskaFile(QString const &fileName,
     return {};
   }
 
-  auto idx = analyzer->find(KaxChapters::ClassInfos.GlobalId);
+  auto idx = analyzer->find(EBML_ID(KaxChapters));
   if (-1 == idx) {
     analyzer->close_file();
 

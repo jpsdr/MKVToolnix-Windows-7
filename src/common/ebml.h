@@ -98,7 +98,7 @@ int write_ebml_element_head(mm_io_c &out, libebml::EbmlId const &id, int64_t con
 template<typename T>
 bool
 Is(libebml::EbmlId const &id) {
-  return id == T::ClassInfos.GlobalId;
+  return id == EBML_ID(T);
 }
 
 template<typename T1, typename T2, typename... Trest>
@@ -110,7 +110,7 @@ Is(libebml::EbmlId const &id) {
 template<typename T>
 bool
 Is(libebml::EbmlElement *e) {
-  return !e ? false : (libebml::EbmlId(*e) == T::ClassInfos.GlobalId);
+  return !e ? false : (libebml::EbmlId(*e) == EBML_ID(T));
 }
 
 template<typename T1, typename T2, typename... Trest>
@@ -122,7 +122,7 @@ Is(libebml::EbmlElement *e) {
 template<typename T>
 bool
 Is(libebml::EbmlElement const &e) {
-  return libebml::EbmlId(e) == T::ClassInfos.GlobalId;
+  return libebml::EbmlId(e) == EBML_ID(T);
 }
 
 template<typename T1, typename T2, typename... Trest>
@@ -421,7 +421,7 @@ libebml::EbmlElement *find_ebml_element_by_id(libebml::EbmlMaster *master, const
 std::pair<libebml::EbmlMaster *, size_t> find_element_in_master(libebml::EbmlMaster *master, libebml::EbmlElement *element_to_find);
 
 void fix_mandatory_elements(libebml::EbmlElement *master);
-bool must_be_present_in_master(libebml::EbmlCallbacks const &callbacks);
+bool must_be_present_in_master(libebml::EbmlId const &id);
 bool must_be_present_in_master(libebml::EbmlElement const &element);
 
 using ebml_element_cptr = std::shared_ptr<libebml::EbmlElement>;

@@ -30,7 +30,7 @@ ValuePage::ValuePage(Tab &parent,
   , m_callbacks(callbacks)
   , m_description{description}
   , m_valueType{valueType}
-  , m_element{find_ebml_element_by_id(&m_master, m_callbacks.GlobalId)}
+  , m_element{find_ebml_element_by_id(&m_master, m_callbacks.ClassId())}
   , m_present{!!m_element}
   , m_topLevelPage(topLevelPage)
 {
@@ -70,12 +70,12 @@ ValuePage::init() {
   m_cbAddOrRemove = new QCheckBox{this};
 
   if (m_present) {
-    auto semantic = find_ebml_semantic(libmatroska::KaxSegment::ClassInfos, m_callbacks.GlobalId);
-    if (semantic && semantic->Mandatory) {
+    auto semantic = find_ebml_semantic(EBML_INFO(libmatroska::KaxSegment), m_callbacks.ClassId());
+    if (semantic && semantic->IsMandatory()) {
       std::unique_ptr<EbmlElement> elt(&semantic->Create());
       m_mayBeRemoved = elt->DefaultISset();
 
-    } else if (semantic && !semantic->Mandatory)
+    } else if (semantic && !semantic->IsMandatory())
       m_mayBeRemoved = true;
 
     m_cbAddOrRemove->setEnabled(m_mayBeRemoved);
@@ -256,7 +256,7 @@ ValuePage::modifyThis() {
 
   if (m_present && m_cbAddOrRemove->isChecked()) {
     for (auto i = 0u; m_master.ListSize() > i; ++i) {
-      if (m_master[i]->Generic().GlobalId != m_callbacks.GlobalId)
+      if (EbmlId(*m_master[i]) != m_callbacks.ClassId())
         continue;
 
       auto e = m_master[i];
@@ -271,7 +271,7 @@ ValuePage::modifyThis() {
   }
 
   if (!m_present) {
-    m_element = &m_callbacks.Create();
+    m_element = &m_callbacks.NewElement();
     m_master.PushElement(*m_element);
   }
 

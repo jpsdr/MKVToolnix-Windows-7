@@ -175,7 +175,7 @@ template<typename T> static ebml_element_cptr
 read_element(kax_analyzer_c *analyzer,
              const std::string &category,
              bool require_existance = true) {
-  int index = analyzer->find(T::ClassInfos.GlobalId);
+  int index = analyzer->find(EBML_ID(T));
   ebml_element_cptr e;
 
   if (-1 != index)

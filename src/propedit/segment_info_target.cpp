@@ -42,7 +42,7 @@ segment_info_target_c::validate() {
 
 void
 segment_info_target_c::look_up_property_elements() {
-  auto &property_table = property_element_c::get_table_for(KaxInfo::ClassInfos, nullptr, false);
+  auto &property_table = property_element_c::get_table_for(EBML_INFO(KaxInfo), nullptr, false);
 
   for (auto &change : m_changes)
     change->look_up_property(property_table);

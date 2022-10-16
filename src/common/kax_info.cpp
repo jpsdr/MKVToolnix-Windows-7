@@ -498,28 +498,28 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
 
   auto p = p_func();
 
-  auto add_pre = [&p](EbmlCallbacks const &callbacks, std::function<bool(EbmlElement &)> const &processor) {
-    p->m_custom_element_pre_processors.insert({ callbacks.GlobalId.GetValue(), processor });
+  auto add_pre = [&p](EbmlId const &id, std::function<bool(EbmlElement &)> const &processor) {
+    p->m_custom_element_pre_processors.insert({ id.GetValue(), processor });
   };
 
-  auto add_pre_mem = [this, &p](EbmlCallbacks const &callbacks, pre_mem_fn_t processor) {
-    p->m_custom_element_pre_processors.insert({ callbacks.GlobalId.GetValue(), std::bind(processor, this, std::placeholders::_1) });
+  auto add_pre_mem = [this, &p](EbmlId const &id, pre_mem_fn_t processor) {
+    p->m_custom_element_pre_processors.insert({ id.GetValue(), std::bind(processor, this, std::placeholders::_1) });
   };
 
-  auto add_post = [&p](EbmlCallbacks const &callbacks, std::function<void(EbmlElement &)> const &processor) {
-    p->m_custom_element_post_processors.insert({ callbacks.GlobalId.GetValue(), processor });
+  auto add_post = [&p](EbmlId const &id, std::function<void(EbmlElement &)> const &processor) {
+    p->m_custom_element_post_processors.insert({ id.GetValue(), processor });
   };
 
-  auto add_post_mem = [this, &p](EbmlCallbacks const &callbacks, post_mem_fn_t processor) {
-    p->m_custom_element_post_processors.insert({ callbacks.GlobalId.GetValue(), std::bind(processor, this, std::placeholders::_1) });
+  auto add_post_mem = [this, &p](EbmlId const &id, post_mem_fn_t processor) {
+    p->m_custom_element_post_processors.insert({ id.GetValue(), std::bind(processor, this, std::placeholders::_1) });
   };
 
-  auto add_fmt = [&p](EbmlCallbacks const &callbacks, std::function<std::string(EbmlElement &)> const &formatter) {
-    p->m_custom_element_value_formatters.insert({ callbacks.GlobalId.GetValue(), formatter });
+  auto add_fmt = [&p](EbmlId const &id, std::function<std::string(EbmlElement &)> const &formatter) {
+    p->m_custom_element_value_formatters.insert({ id.GetValue(), formatter });
   };
 
-  auto add_fmt_mem = [this, &p](EbmlCallbacks const &callbacks, fmt_mem_fn_t formatter) {
-    p->m_custom_element_value_formatters.insert({ callbacks.GlobalId.GetValue(), std::bind(formatter, this, std::placeholders::_1) });
+  auto add_fmt_mem = [this, &p](EbmlId const &id, fmt_mem_fn_t formatter) {
+    p->m_custom_element_value_formatters.insert({ id.GetValue(), std::bind(formatter, this, std::placeholders::_1) });
   };
 
   p->m_custom_element_value_formatters.clear();
@@ -527,26 +527,26 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   p->m_custom_element_post_processors.clear();
 
   // Simple processors:
-  add_pre(    KaxInfo::ClassInfos,        [p](EbmlElement &e) -> bool { p->m_ts_scale = FindChildValue<KaxTimecodeScale>(static_cast<KaxInfo &>(e), TIMESTAMP_SCALE); return true; });
-  add_pre(    KaxTracks::ClassInfos,      [p](EbmlElement &)  -> bool { p->m_mkvmerge_track_id = 0; return true; });
-  add_pre_mem(KaxSimpleBlock::ClassInfos, &kax_info_c::pre_simple_block);
-  add_pre_mem(KaxBlockGroup::ClassInfos,  &kax_info_c::pre_block_group);
-  add_pre_mem(KaxBlock::ClassInfos,       &kax_info_c::pre_block);
+  add_pre(    EBML_ID(KaxInfo),        [p](EbmlElement &e) -> bool { p->m_ts_scale = FindChildValue<KaxTimecodeScale>(static_cast<KaxInfo &>(e), TIMESTAMP_SCALE); return true; });
+  add_pre(    EBML_ID(KaxTracks),      [p](EbmlElement &)  -> bool { p->m_mkvmerge_track_id = 0; return true; });
+  add_pre_mem(EBML_ID(KaxSimpleBlock), &kax_info_c::pre_simple_block);
+  add_pre_mem(EBML_ID(KaxBlockGroup),  &kax_info_c::pre_block_group);
+  add_pre_mem(EBML_ID(KaxBlock),       &kax_info_c::pre_block);
 
   // More complex processors:
-  add_pre(KaxSeekHead::ClassInfos, ([this, p](EbmlElement &e) -> bool {
+  add_pre(EBML_ID(KaxSeekHead), ([this, p](EbmlElement &e) -> bool {
     if (!p->m_show_all_elements && !p->m_use_gui)
       show_element(&e, p->m_level, Y("Seek head (subentries will be skipped)"));
     return p->m_show_all_elements || p->m_use_gui;
   }));
 
-  add_pre(KaxCues::ClassInfos, ([this, p](EbmlElement &e) -> bool {
+  add_pre(EBML_ID(KaxCues), ([this, p](EbmlElement &e) -> bool {
     if (!p->m_show_all_elements && !p->m_use_gui)
       show_element(&e, p->m_level, Y("Cues (subentries will be skipped)"));
     return p->m_show_all_elements || p->m_use_gui;
   }));
 
-  add_pre(KaxTrackEntry::ClassInfos, [p](EbmlElement &e) -> bool {
+  add_pre(EBML_ID(KaxTrackEntry), [p](EbmlElement &e) -> bool {
     p->m_summary.clear();
 
     auto &master                 = static_cast<EbmlMaster &>(e);
@@ -558,7 +558,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return true;
   });
 
-  add_pre(KaxTrackNumber::ClassInfos, ([this, p](EbmlElement &e) -> bool {
+  add_pre(EBML_ID(KaxTrackNumber), ([this, p](EbmlElement &e) -> bool {
     p->m_track->tnum    = static_cast<KaxTrackNumber &>(e).GetValue();
     auto existing_track = find_track(p->m_track->tnum);
     auto track_id       = p->m_mkvmerge_track_id;
@@ -578,7 +578,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return true;
   }));
 
-  add_pre(KaxTrackType::ClassInfos, [p](EbmlElement &e) -> bool {
+  add_pre(EBML_ID(KaxTrackType), [p](EbmlElement &e) -> bool {
     auto ttype       = static_cast<KaxTrackType &>(e).GetValue();
     p->m_track->type = track_audio    == ttype ? 'a'
                      : track_video    == ttype ? 'v'
@@ -588,7 +588,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return true;
   });
 
-  add_pre(KaxCodecPrivate::ClassInfos, ([this, p](EbmlElement &e) -> bool {
+  add_pre(EBML_ID(KaxCodecPrivate), ([this, p](EbmlElement &e) -> bool {
     auto &c_priv        = static_cast<KaxCodecPrivate &>(e);
     p->m_track-> fourcc = create_codec_dependent_private_info(c_priv, p->m_track->type, p->m_track->codec_id);
 
@@ -603,7 +603,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return true;
   }));
 
-  add_pre(KaxCluster::ClassInfos, ([this, p](EbmlElement &e) -> bool {
+  add_pre(EBML_ID(KaxCluster), ([this, p](EbmlElement &e) -> bool {
     p->m_cluster = static_cast<KaxCluster *>(&e);
     p->m_cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(p->m_cluster), p->m_ts_scale);
 
@@ -612,35 +612,35 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return true;
   }));
 
-  add_post(KaxAudioSamplingFreq::ClassInfos,       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<KaxAudioSamplingFreq &>(e).GetValue()))); });
-  add_post(KaxAudioOutputSamplingFreq::ClassInfos, [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("output sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<KaxAudioOutputSamplingFreq &>(e).GetValue()))); });
-  add_post(KaxAudioChannels::ClassInfos,           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("channels: {0}"), static_cast<KaxAudioChannels &>(e).GetValue())); });
-  add_post(KaxAudioBitDepth::ClassInfos,           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("bits per sample: {0}"), static_cast<KaxAudioBitDepth &>(e).GetValue())); });
+  add_post(EBML_ID(KaxAudioSamplingFreq),       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<KaxAudioSamplingFreq &>(e).GetValue()))); });
+  add_post(EBML_ID(KaxAudioOutputSamplingFreq), [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("output sampling freq: {0}"), mtx::string::normalize_fmt_double_output(static_cast<KaxAudioOutputSamplingFreq &>(e).GetValue()))); });
+  add_post(EBML_ID(KaxAudioChannels),           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("channels: {0}"), static_cast<KaxAudioChannels &>(e).GetValue())); });
+  add_post(EBML_ID(KaxAudioBitDepth),           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("bits per sample: {0}"), static_cast<KaxAudioBitDepth &>(e).GetValue())); });
 
-  add_post(KaxVideoPixelWidth::ClassInfos,         [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel width: {0}"), static_cast<KaxVideoPixelWidth &>(e).GetValue())); });
-  add_post(KaxVideoPixelHeight::ClassInfos,        [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel height: {0}"), static_cast<KaxVideoPixelHeight &>(e).GetValue())); });
-  add_post(KaxVideoDisplayWidth::ClassInfos,       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("display width: {0}"), static_cast<KaxVideoDisplayWidth &>(e).GetValue())); });
-  add_post(KaxVideoDisplayHeight::ClassInfos,      [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("display height: {0}"), static_cast<KaxVideoDisplayHeight &>(e).GetValue())); });
-  add_post(KaxVideoPixelCropLeft::ClassInfos,      [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop left: {0}"), static_cast<KaxVideoPixelCropLeft &>(e).GetValue())); });
-  add_post(KaxVideoPixelCropTop::ClassInfos,       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop top: {0}"), static_cast<KaxVideoPixelCropTop &>(e).GetValue())); });
-  add_post(KaxVideoPixelCropRight::ClassInfos,     [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop right: {0}"), static_cast<KaxVideoPixelCropRight &>(e).GetValue())); });
-  add_post(KaxVideoPixelCropBottom::ClassInfos,    [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop bottom: {0}"), static_cast<KaxVideoPixelCropBottom &>(e).GetValue())); });
-  add_post(KaxTrackLanguage::ClassInfos,           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("language: {0}"), static_cast<KaxTrackLanguage &>(e).GetValue())); });
-  add_post(KaxLanguageIETF::ClassInfos,            [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("language (IETF BCP 47): {0}"), static_cast<KaxLanguageIETF &>(e).GetValue())); });
-  add_post(KaxBlockDuration::ClassInfos,           [p](EbmlElement &e) { p->m_block_duration = static_cast<double>(static_cast<KaxBlockDuration &>(e).GetValue()) * p->m_ts_scale; });
-  add_post(KaxReferenceBlock::ClassInfos,          [p](EbmlElement &)  { ++p->m_num_references; });
+  add_post(EBML_ID(KaxVideoPixelWidth),         [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel width: {0}"), static_cast<KaxVideoPixelWidth &>(e).GetValue())); });
+  add_post(EBML_ID(KaxVideoPixelHeight),        [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel height: {0}"), static_cast<KaxVideoPixelHeight &>(e).GetValue())); });
+  add_post(EBML_ID(KaxVideoDisplayWidth),       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("display width: {0}"), static_cast<KaxVideoDisplayWidth &>(e).GetValue())); });
+  add_post(EBML_ID(KaxVideoDisplayHeight),      [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("display height: {0}"), static_cast<KaxVideoDisplayHeight &>(e).GetValue())); });
+  add_post(EBML_ID(KaxVideoPixelCropLeft),      [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop left: {0}"), static_cast<KaxVideoPixelCropLeft &>(e).GetValue())); });
+  add_post(EBML_ID(KaxVideoPixelCropTop),       [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop top: {0}"), static_cast<KaxVideoPixelCropTop &>(e).GetValue())); });
+  add_post(EBML_ID(KaxVideoPixelCropRight),     [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop right: {0}"), static_cast<KaxVideoPixelCropRight &>(e).GetValue())); });
+  add_post(EBML_ID(KaxVideoPixelCropBottom),    [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("pixel crop bottom: {0}"), static_cast<KaxVideoPixelCropBottom &>(e).GetValue())); });
+  add_post(EBML_ID(KaxTrackLanguage),           [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("language: {0}"), static_cast<KaxTrackLanguage &>(e).GetValue())); });
+  add_post(EBML_ID(KaxLanguageIETF),            [p](EbmlElement &e) { p->m_summary.push_back(fmt::format(Y("language (IETF BCP 47): {0}"), static_cast<KaxLanguageIETF &>(e).GetValue())); });
+  add_post(EBML_ID(KaxBlockDuration),           [p](EbmlElement &e) { p->m_block_duration = static_cast<double>(static_cast<KaxBlockDuration &>(e).GetValue()) * p->m_ts_scale; });
+  add_post(EBML_ID(KaxReferenceBlock),          [p](EbmlElement &)  { ++p->m_num_references; });
 
-  add_post_mem(KaxSimpleBlock::ClassInfos,         &kax_info_c::post_simple_block);
-  add_post_mem(KaxBlock::ClassInfos,               &kax_info_c::post_block);
-  add_post_mem(KaxBlockGroup::ClassInfos,          &kax_info_c::post_block_group);
+  add_post_mem(EBML_ID(KaxSimpleBlock),         &kax_info_c::post_simple_block);
+  add_post_mem(EBML_ID(KaxBlock),               &kax_info_c::post_block);
+  add_post_mem(EBML_ID(KaxBlockGroup),          &kax_info_c::post_block_group);
 
-  add_post(KaxTrackDefaultDuration::ClassInfos,    [p](EbmlElement &) {
+  add_post(EBML_ID(KaxTrackDefaultDuration),    [p](EbmlElement &) {
     p->m_summary.push_back(fmt::format(Y("default duration: {0:.3f}ms ({1:.3f} frames/fields per second for a video track)"),
                                        static_cast<double>(p->m_track->default_duration) / 1'000'000.0,
                                        1'000'000'000.0 / static_cast<double>(p->m_track->default_duration)));
   });
 
-  add_post(KaxTrackEntry::ClassInfos, [p](EbmlElement &) {
+  add_post(EBML_ID(KaxTrackEntry), [p](EbmlElement &) {
     if (!p->m_show_summary)
       return;
 
@@ -658,32 +658,32 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   });
 
   // Simple formatters:
-  add_fmt_mem(KaxSegmentUID::ClassInfos,       &kax_info_c::format_binary_as_hex);
-  add_fmt_mem(KaxSegmentFamily::ClassInfos,    &kax_info_c::format_binary_as_hex);
-  add_fmt_mem(KaxNextUID::ClassInfos,          &kax_info_c::format_binary_as_hex);
-  add_fmt_mem(KaxSegmentFamily::ClassInfos,    &kax_info_c::format_binary_as_hex);
-  add_fmt_mem(KaxPrevUID::ClassInfos,          &kax_info_c::format_binary_as_hex);
-  add_fmt_mem(KaxSegment::ClassInfos,          &kax_info_c::format_element_size);
-  add_fmt_mem(KaxFileData::ClassInfos,         &kax_info_c::format_element_size);
-  add_fmt_mem(KaxChapterTimeStart::ClassInfos, &kax_info_c::format_unsigned_integer_as_timestamp);
-  add_fmt_mem(KaxChapterTimeEnd::ClassInfos,   &kax_info_c::format_unsigned_integer_as_timestamp);
-  add_fmt_mem(KaxCueDuration::ClassInfos,      &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
-  add_fmt_mem(KaxCueTime::ClassInfos,          &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
-  add_fmt_mem(KaxCueRefTime::ClassInfos,       &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
-  add_fmt_mem(KaxCodecDelay::ClassInfos,       &kax_info_c::format_unsigned_integer_as_timestamp);
-  add_fmt_mem(KaxSeekPreRoll::ClassInfos,      &kax_info_c::format_unsigned_integer_as_timestamp);
-  add_fmt_mem(KaxClusterTimecode::ClassInfos,  &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
-  add_fmt_mem(KaxSliceDelay::ClassInfos,       &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
-  add_fmt_mem(KaxSliceDuration::ClassInfos,    &kax_info_c::format_signed_integer_as_timestamp);
-  add_fmt_mem(KaxSimpleBlock::ClassInfos,      &kax_info_c::format_simple_block);
-  add_fmt_mem(KaxBlock::ClassInfos,            &kax_info_c::format_block);
-  add_fmt_mem(KaxBlockDuration::ClassInfos,    &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
-  add_fmt_mem(KaxReferenceBlock::ClassInfos,   &kax_info_c::format_signed_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(KaxSegmentUID),       &kax_info_c::format_binary_as_hex);
+  add_fmt_mem(EBML_ID(KaxSegmentFamily),    &kax_info_c::format_binary_as_hex);
+  add_fmt_mem(EBML_ID(KaxNextUID),          &kax_info_c::format_binary_as_hex);
+  add_fmt_mem(EBML_ID(KaxSegmentFamily),    &kax_info_c::format_binary_as_hex);
+  add_fmt_mem(EBML_ID(KaxPrevUID),          &kax_info_c::format_binary_as_hex);
+  add_fmt_mem(EBML_ID(KaxSegment),          &kax_info_c::format_element_size);
+  add_fmt_mem(EBML_ID(KaxFileData),         &kax_info_c::format_element_size);
+  add_fmt_mem(EBML_ID(KaxChapterTimeStart), &kax_info_c::format_unsigned_integer_as_timestamp);
+  add_fmt_mem(EBML_ID(KaxChapterTimeEnd),   &kax_info_c::format_unsigned_integer_as_timestamp);
+  add_fmt_mem(EBML_ID(KaxCueDuration),      &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(KaxCueTime),          &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(KaxCueRefTime),       &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(KaxCodecDelay),       &kax_info_c::format_unsigned_integer_as_timestamp);
+  add_fmt_mem(EBML_ID(KaxSeekPreRoll),      &kax_info_c::format_unsigned_integer_as_timestamp);
+  add_fmt_mem(EBML_ID(KaxClusterTimecode),  &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(KaxSliceDelay),       &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(KaxSliceDuration),    &kax_info_c::format_signed_integer_as_timestamp);
+  add_fmt_mem(EBML_ID(KaxSimpleBlock),      &kax_info_c::format_simple_block);
+  add_fmt_mem(EBML_ID(KaxBlock),            &kax_info_c::format_block);
+  add_fmt_mem(EBML_ID(KaxBlockDuration),    &kax_info_c::format_unsigned_integer_as_scaled_timestamp);
+  add_fmt_mem(EBML_ID(KaxReferenceBlock),   &kax_info_c::format_signed_integer_as_scaled_timestamp);
 
-  add_fmt(KaxDuration::ClassInfos,             [p](EbmlElement &e) { return mtx::string::format_timestamp(static_cast<int64_t>(static_cast<EbmlFloat &>(e).GetValue() * p->m_ts_scale)); });
+  add_fmt(EBML_ID(KaxDuration),             [p](EbmlElement &e) { return mtx::string::format_timestamp(static_cast<int64_t>(static_cast<EbmlFloat &>(e).GetValue() * p->m_ts_scale)); });
 
   // More complex formatters:
-  add_fmt(KaxSeekID::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxSeekID), [](EbmlElement &e) -> std::string {
     auto &seek_id = static_cast<KaxSeekID &>(e);
     EbmlId id(seek_id.GetBuffer(), seek_id.GetSize());
 
@@ -700,12 +700,12 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :                          "unknown");
   });
 
-  add_fmt(KaxEmphasis::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxEmphasis), [](EbmlElement &e) -> std::string {
     auto audio_emphasis = static_cast<KaxEmphasis &>(e).GetValue();
     return fmt::format("{0} ({1})", audio_emphasis, audio_emphasis_c::translate(static_cast<audio_emphasis_c::mode_e>(audio_emphasis)));
   });
 
-  add_fmt(KaxVideoProjectionType::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxVideoProjectionType), [](EbmlElement &e) -> std::string {
     auto value       = static_cast<KaxVideoProjectionType &>(e).GetValue();
     auto description = 0 == value ? Y("rectangular")
                      : 1 == value ? Y("equirectangular")
@@ -716,7 +716,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return fmt::format("{0} ({1})", value, description);
   });
 
-  add_fmt(KaxVideoDisplayUnit::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxVideoDisplayUnit), [](EbmlElement &e) -> std::string {
       auto unit = static_cast<KaxVideoDisplayUnit &>(e).GetValue();
       return fmt::format("{0}{1}",
                          unit,
@@ -727,7 +727,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                          :               "");
   });
 
-  add_fmt(KaxVideoFieldOrder::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxVideoFieldOrder), [](EbmlElement &e) -> std::string {
     auto field_order = static_cast<KaxVideoFieldOrder &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        field_order,
@@ -740,12 +740,12 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :                     Y("unknown"));
   });
 
-  add_fmt(KaxVideoStereoMode::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxVideoStereoMode), [](EbmlElement &e) -> std::string {
     auto stereo_mode = static_cast<KaxVideoStereoMode &>(e).GetValue();
     return fmt::format("{0} ({1})", stereo_mode, stereo_mode_c::translate(static_cast<stereo_mode_c::mode>(stereo_mode)));
   });
 
-  add_fmt(KaxVideoAspectRatio::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxVideoAspectRatio), [](EbmlElement &e) -> std::string {
     auto ar_type = static_cast<KaxVideoAspectRatio &>(e).GetValue();
     return fmt::format("{0}{1}",
                        ar_type,
@@ -755,7 +755,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :                  "");
   });
 
-  add_fmt(KaxContentEncodingScope::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxContentEncodingScope), [](EbmlElement &e) -> std::string {
     std::vector<std::string> scope;
     auto ce_scope = static_cast<KaxContentEncodingScope &>(e).GetValue();
 
@@ -771,7 +771,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
     return fmt::format("{0} ({1})", ce_scope, mtx::string::join(scope, ", "));
   });
 
-  add_fmt(KaxContentEncodingType::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxContentEncodingType), [](EbmlElement &e) -> std::string {
     auto ce_type = static_cast<KaxContentEncodingType &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        ce_type,
@@ -780,7 +780,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :                Y("unknown"));
   });
 
-  add_fmt(KaxContentCompAlgo::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxContentCompAlgo), [](EbmlElement &e) -> std::string {
     auto c_algo = static_cast<KaxContentCompAlgo &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        c_algo,
@@ -791,7 +791,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :               Y("unknown"));
   });
 
-  add_fmt(KaxContentEncAlgo::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxContentEncAlgo), [](EbmlElement &e) -> std::string {
     auto e_algo = static_cast<KaxContentEncAlgo &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        e_algo,
@@ -804,7 +804,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :               Y("unknown"));
   });
 
-  add_fmt(KaxContentSigAlgo::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxContentSigAlgo), [](EbmlElement &e) -> std::string {
     auto s_algo = static_cast<KaxContentSigAlgo &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        s_algo,
@@ -813,7 +813,7 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :               Y("unknown"));
   });
 
-  add_fmt(KaxContentSigHashAlgo::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxContentSigHashAlgo), [](EbmlElement &e) -> std::string {
     auto s_halgo = static_cast<KaxContentSigHashAlgo &>(e).GetValue();
     return fmt::format("{0} ({1})",
                        s_halgo,
@@ -823,9 +823,9 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                        :                Y("unknown"));
   });
 
-  add_fmt(KaxTrackNumber::ClassInfos, [p](EbmlElement &e) -> std::string { return fmt::format(Y("{0} (track ID for mkvmerge & mkvextract: {1})"), p->m_track_by_element[&e]->tnum, p->m_track_by_element[&e]->mkvmerge_track_id); });
+  add_fmt(EBML_ID(KaxTrackNumber), [p](EbmlElement &e) -> std::string { return fmt::format(Y("{0} (track ID for mkvmerge & mkvextract: {1})"), p->m_track_by_element[&e]->tnum, p->m_track_by_element[&e]->mkvmerge_track_id); });
 
-  add_fmt(KaxTrackType::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxTrackType), [](EbmlElement &e) -> std::string {
     auto ttype = static_cast<KaxTrackType &>(e).GetValue();
     return track_audio    == ttype ? Y("audio")
          : track_video    == ttype ? Y("video")
@@ -834,25 +834,25 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
          :                           Y("unknown");
   });
 
-  add_fmt(KaxCodecPrivate::ClassInfos, [p](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxCodecPrivate), [p](EbmlElement &e) -> std::string {
     return fmt::format(Y("size {0}"), e.GetSize()) + p->m_track_by_element[&e]->fourcc;
   });
 
-  add_fmt(KaxTrackDefaultDuration::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxTrackDefaultDuration), [](EbmlElement &e) -> std::string {
     auto default_duration = static_cast<KaxTrackDefaultDuration &>(e).GetValue();
     return fmt::format(Y("{0} ({1:.3f} frames/fields per second for a video track)"),
                        mtx::string::format_timestamp(default_duration),
                        1'000'000'000.0 / static_cast<double>(default_duration));
   });
 
-  add_fmt(KaxBlockAddIDType::ClassInfos, [](auto &e) -> std::string {
+  add_fmt(EBML_ID(KaxBlockAddIDType), [](auto &e) -> std::string {
     auto value = static_cast<EbmlUInteger &>(e).GetValue();
     if (value < std::numeric_limits<uint32_t>::max())
       return fmt::format("{0} ({1})", value, fourcc_c{static_cast<uint32_t>(value)});
     return fmt::format("{0}", value);
   });
 
-  add_fmt(KaxChapterSkipType::ClassInfos, [](EbmlElement &e) -> std::string {
+  add_fmt(EBML_ID(KaxChapterSkipType), [](EbmlElement &e) -> std::string {
     auto value       = static_cast<EbmlUInteger &>(e).GetValue();
     auto description = value == MATROSKA_CHAPTERSKIPTYPE_NO_SKIPPING     ? Y("no skipping")
                      : value == MATROSKA_CHAPTERSKIPTYPE_OPENING_CREDITS ? Y("opening credits")

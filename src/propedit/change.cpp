@@ -242,7 +242,7 @@ change_c::execute_delete() {
   size_t idx               = 0;
   unsigned int num_deleted = 0;
   while (m_master->ListSize() > idx) {
-    if (m_property.m_callbacks->GlobalId == (*m_master)[idx]->Generic().GlobalId) {
+    if (m_property.m_callbacks->ClassId() == EbmlId(*(*m_master)[idx])) {
       delete (*m_master)[idx];
       m_master->Remove(idx);
       ++num_deleted;
@@ -256,7 +256,7 @@ change_c::execute_delete() {
 
 void
 change_c::record_track_uid_changes(std::size_t idx) {
-  if (m_property.m_callbacks->GlobalId != EBML_ID(libmatroska::KaxTrackUID))
+  if (m_property.m_callbacks->ClassId() != EBML_ID(libmatroska::KaxTrackUID))
     return;
 
   auto current_uid = static_cast<EbmlUInteger *>((*m_master)[idx])->GetValue();
@@ -269,7 +269,7 @@ change_c::execute_add_or_set() {
   size_t idx;
   unsigned int num_found = 0;
   for (idx = 0; m_master->ListSize() > idx; ++idx) {
-    if (m_property.m_callbacks->GlobalId != (*m_master)[idx]->Generic().GlobalId)
+    if (m_property.m_callbacks->ClassId() != EbmlId(*(*m_master)[idx]))
       continue;
 
     if (change_c::ct_set == m_type) {
@@ -294,7 +294,7 @@ change_c::execute_add_or_set() {
   }
 
   const EbmlSemantic *semantic = get_semantic();
-  if (semantic && semantic->Unique)
+  if (semantic && semantic->IsUnique())
     mxerror(fmt::format(Y("This property is unique. More instances cannot be added in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
 
   do_add_element();
@@ -305,7 +305,7 @@ change_c::execute_add_or_set() {
 
 void
 change_c::do_add_element() {
-  m_master->PushElement(m_property.m_callbacks->Create());
+  m_master->PushElement(m_property.m_callbacks->NewElement());
   set_element_at(m_master->ListSize() - 1);
 }
 
@@ -333,7 +333,7 @@ change_c::validate_deletion_of_mandatory() {
 
   const EbmlSemantic *semantic = get_semantic();
 
-  if (!semantic || !semantic->Mandatory)
+  if (!semantic || !semantic->IsMandatory())
     return;
 
   std::unique_ptr<EbmlElement> elt(&semantic->Create());
@@ -344,7 +344,7 @@ change_c::validate_deletion_of_mandatory() {
 
 const EbmlSemantic *
 change_c::get_semantic() {
-  return find_ebml_semantic(libmatroska::KaxSegment::ClassInfos, m_property.m_callbacks->GlobalId);
+  return find_ebml_semantic(EBML_INFO(libmatroska::KaxSegment), m_property.m_callbacks->ClassId());
 }
 
 std::vector<change_cptr>

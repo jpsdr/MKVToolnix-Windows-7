@@ -110,7 +110,7 @@ kax_file_c::read_next_level1_element_internal(uint32_t wanted_id) {
 
       // If a specific level 1 is wanted, make sure it was actually
       // read. Otherwise try again.
-      if (!wanted_id || (wanted_id == EbmlId(*l1).Value))
+      if (!wanted_id || (wanted_id == EbmlId(*l1).GetValue()))
         return l1;
       return read_next_level1_element(wanted_id);
     }

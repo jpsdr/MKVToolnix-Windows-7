@@ -247,7 +247,7 @@ Tab::save() {
         attachments->PushElement(*dynamic_cast<AttachedFilePage &>(*attachedFilePage).m_attachment.get());
 
       auto result = attachments->ListSize() ? m_analyzer->update_element(attachments.get(), true)
-                  :                           m_analyzer->remove_elements(KaxAttachments::ClassInfos.GlobalId);
+                  :                           m_analyzer->remove_elements(EBML_ID(KaxAttachments));
 
       attachments->RemoveAll();
 
@@ -411,11 +411,11 @@ Tab::setupToolTips() {
 
 void
 Tab::populateTree() {
-  m_analyzer->with_elements(KaxInfo::ClassInfos.GlobalId, [this](kax_analyzer_data_c const &data) {
+  m_analyzer->with_elements(EBML_ID(KaxInfo), [this](kax_analyzer_data_c const &data) {
     handleSegmentInfo(data);
   });
 
-  m_analyzer->with_elements(KaxTracks::ClassInfos.GlobalId, [this](kax_analyzer_data_c const &data) {
+    m_analyzer->with_elements(EBML_ID(KaxTracks), [this](kax_analyzer_data_c const &data) {
     handleTracks(data);
   });
 
@@ -510,7 +510,7 @@ Tab::determineTrackUIDChanges() {
       if (!uiValuePage)
         continue;
 
-      if (uiValuePage->m_callbacks.GlobalId != KaxTrackUID::ClassInfos.GlobalId)
+      if (uiValuePage->m_callbacks.ClassId() != EBML_ID(KaxTrackUID))
         continue;
 
       if (uiValuePage->m_cbAddOrRemove->isChecked())
@@ -550,9 +550,9 @@ Tab::createValuePage(TopLevelPage &parentPage,
   ValuePage *page{};
   auto const type = element.m_type;
 
-  page = element.m_callbacks == &KaxTrackLanguage::ClassInfos     ? new LanguageValuePage{       *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
-       : element.m_callbacks == &KaxLanguageIETF::ClassInfos      ? new LanguageIETFValuePage{   *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
-       : element.m_callbacks == &KaxTrackName::ClassInfos         ? new TrackNamePage{           *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
+  page = element.m_callbacks == &EBML_INFO(KaxTrackLanguage)      ? new LanguageValuePage{       *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
+       : element.m_callbacks == &EBML_INFO(KaxLanguageIETF)       ? new LanguageIETFValuePage{   *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
+       : element.m_callbacks == &EBML_INFO(KaxTrackName)          ? new TrackNamePage{           *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
        : type                == property_element_c::EBMLT_BOOL    ? new BoolValuePage{           *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
        : type                == property_element_c::EBMLT_BINARY  ? new BitValuePage{            *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description, element.m_bit_length}
        : type                == property_element_c::EBMLT_FLOAT   ? new FloatValuePage{          *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
@@ -561,7 +561,7 @@ Tab::createValuePage(TopLevelPage &parentPage,
        : type                == property_element_c::EBMLT_STRING  ? new AsciiStringValuePage{    *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
        : type                == property_element_c::EBMLT_USTRING ? new StringValuePage{         *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
        : type                == property_element_c::EBMLT_DATE    ? new TimeValuePage{           *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
-       :                                                             static_cast<ValuePage *>(nullptr);
+       :                                                            static_cast<ValuePage *>(nullptr);
 
   if (page)
     page->init();
@@ -580,7 +580,7 @@ Tab::handleSegmentInfo(kax_analyzer_data_c const &data) {
   page->setInternalIdentifier("segmentInfo");
   page->init();
 
-  auto &propertyElements = property_element_c::get_table_for(KaxInfo::ClassInfos, nullptr, true);
+  auto &propertyElements = property_element_c::get_table_for(EBML_INFO(KaxInfo), nullptr, true);
   for (auto const &element : propertyElements)
     createValuePage(*page, info, element);
 
@@ -594,7 +594,7 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
     return;
 
   auto trackIdxMkvmerge  = 0u;
-  auto &propertyElements = property_element_c::get_table_for(KaxTracks::ClassInfos, nullptr, true);
+  auto &propertyElements = property_element_c::get_table_for(EBML_INFO(KaxTracks), nullptr, true);
 
   for (auto const &element : dynamic_cast<EbmlMaster &>(*m_eTracks)) {
     auto kTrackEntry = dynamic_cast<KaxTrackEntry *>(element);
@@ -631,19 +631,19 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
       projectionPage->setParentPage(*page);
       projectionPage->init();
 
-      parentMastersByCallback[&KaxTrackVideo::ClassInfos]            = &GetChildEmptyIfNew<KaxTrackVideo>(kTrackEntry);
-      parentMastersByCallback[&KaxVideoColour::ClassInfos]           = &GetChildEmptyIfNew<KaxVideoColour>(parentMastersByCallback[&KaxTrackVideo::ClassInfos]);
-      parentMastersByCallback[&KaxVideoColourMasterMeta::ClassInfos] = &GetChildEmptyIfNew<KaxVideoColourMasterMeta>(parentMastersByCallback[&KaxVideoColour::ClassInfos]);
-      parentMastersByCallback[&KaxVideoProjection::ClassInfos]       = &GetChildEmptyIfNew<KaxVideoProjection>(parentMastersByCallback[&KaxTrackVideo::ClassInfos]);
+      parentMastersByCallback[&EBML_INFO(KaxTrackVideo)]            = &GetChildEmptyIfNew<KaxTrackVideo>(kTrackEntry);
+      parentMastersByCallback[&EBML_INFO(KaxVideoColour)]           = &GetChildEmptyIfNew<KaxVideoColour>(parentMastersByCallback[&EBML_INFO(KaxTrackVideo)]);
+      parentMastersByCallback[&EBML_INFO(KaxVideoColourMasterMeta)] = &GetChildEmptyIfNew<KaxVideoColourMasterMeta>(parentMastersByCallback[&EBML_INFO(KaxVideoColour)]);
+      parentMastersByCallback[&EBML_INFO(KaxVideoProjection)]       = &GetChildEmptyIfNew<KaxVideoProjection>(parentMastersByCallback[&EBML_INFO(KaxTrackVideo)]);
 
-      parentPagesByCallback[&KaxTrackVideo::ClassInfos]              = page;
-      parentPagesByCallback[&KaxVideoColour::ClassInfos]             = colorPage;
-      parentPagesByCallback[&KaxVideoColourMasterMeta::ClassInfos]   = colorMasterMetaPage;
-      parentPagesByCallback[&KaxVideoProjection::ClassInfos]         = projectionPage;
+      parentPagesByCallback[&EBML_INFO(KaxTrackVideo)]              = page;
+      parentPagesByCallback[&EBML_INFO(KaxVideoColour)]             = colorPage;
+      parentPagesByCallback[&EBML_INFO(KaxVideoColourMasterMeta)]   = colorMasterMetaPage;
+      parentPagesByCallback[&EBML_INFO(KaxVideoProjection)]         = projectionPage;
 
     } else if (track_audio == trackType) {
-      parentMastersByCallback[&KaxTrackAudio::ClassInfos]            = &GetChildEmptyIfNew<KaxTrackAudio>(kTrackEntry);
-      parentPagesByCallback[&KaxTrackAudio::ClassInfos]              = page;
+      parentMastersByCallback[&EBML_INFO(KaxTrackAudio)]            = &GetChildEmptyIfNew<KaxTrackAudio>(kTrackEntry);
+      parentPagesByCallback[&EBML_INFO(KaxTrackAudio)]              = page;
     }
 
     for (auto const &propElement : propertyElements) {
@@ -663,7 +663,7 @@ void
 Tab::handleAttachments() {
   auto attachments = KaxAttachedList{};
 
-  m_analyzer->with_elements(KaxAttachments::ClassInfos.GlobalId, [this, &attachments](kax_analyzer_data_c const &data) {
+  m_analyzer->with_elements(EBML_ID(KaxAttachments), [this, &attachments](kax_analyzer_data_c const &data) {
     auto master = std::dynamic_pointer_cast<KaxAttachments>(m_analyzer->read_element(data));
     if (!master)
       return;
@@ -1000,7 +1000,7 @@ Tab::toggleSpecificTrackFlag(unsigned int wantedId) {
   walkPagesOfSelectedTopLevelNode([wantedId](auto *pageBase) -> bool {
     auto page = dynamic_cast<BoolValuePage *>(pageBase);
 
-    if (page && (page->m_callbacks.GlobalId.GetValue() == wantedId)) {
+    if (page && (page->m_callbacks.ClassId().GetValue() == wantedId)) {
       page->toggleFlag();
       return false;
     }

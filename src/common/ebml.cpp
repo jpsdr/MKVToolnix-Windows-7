@@ -391,26 +391,26 @@ get_deprecated_elements_by_id() {
   if (!s_elements.empty())
     return s_elements;
 
-  s_elements[KaxBlockVirtual::ClassInfos.GlobalId.GetValue()]       = true;
-  s_elements[KaxReferenceVirtual::ClassInfos.GlobalId.GetValue()]   = true;
-  s_elements[KaxSliceFrameNumber::ClassInfos.GlobalId.GetValue()]   = true;
-  s_elements[KaxSliceBlockAddID::ClassInfos.GlobalId.GetValue()]    = true;
-  s_elements[KaxSliceDelay::ClassInfos.GlobalId.GetValue()]         = true;
-  s_elements[KaxSliceDuration::ClassInfos.GlobalId.GetValue()]      = true;
-  s_elements[KaxEncryptedBlock::ClassInfos.GlobalId.GetValue()]     = true;
-  s_elements[KaxTrackTimecodeScale::ClassInfos.GlobalId.GetValue()] = true;
-  s_elements[KaxTrackOffset::ClassInfos.GlobalId.GetValue()]        = true;
-  s_elements[KaxCodecSettings::ClassInfos.GlobalId.GetValue()]      = true;
-  s_elements[KaxCodecInfoURL::ClassInfos.GlobalId.GetValue()]       = true;
-  s_elements[KaxCodecDownloadURL::ClassInfos.GlobalId.GetValue()]   = true;
-  s_elements[KaxOldStereoMode::ClassInfos.GlobalId.GetValue()]      = true;
-  s_elements[KaxVideoGamma::ClassInfos.GlobalId.GetValue()]         = true;
-  s_elements[KaxVideoFrameRate::ClassInfos.GlobalId.GetValue()]     = true;
-  s_elements[KaxAudioPosition::ClassInfos.GlobalId.GetValue()]      = true;
-  s_elements[KaxCueRefCluster::ClassInfos.GlobalId.GetValue()]      = true;
-  s_elements[KaxCueRefNumber::ClassInfos.GlobalId.GetValue()]       = true;
-  s_elements[KaxCueRefCodecState::ClassInfos.GlobalId.GetValue()]   = true;
-  s_elements[KaxFileReferral::ClassInfos.GlobalId.GetValue()]       = true;
+  s_elements[EBML_ID(KaxBlockVirtual).GetValue()]       = true;
+  s_elements[EBML_ID(KaxReferenceVirtual).GetValue()]   = true;
+  s_elements[EBML_ID(KaxSliceFrameNumber).GetValue()]   = true;
+  s_elements[EBML_ID(KaxSliceBlockAddID).GetValue()]    = true;
+  s_elements[EBML_ID(KaxSliceDelay).GetValue()]         = true;
+  s_elements[EBML_ID(KaxSliceDuration).GetValue()]      = true;
+  s_elements[EBML_ID(KaxEncryptedBlock).GetValue()]     = true;
+  s_elements[EBML_ID(KaxTrackTimecodeScale).GetValue()] = true;
+  s_elements[EBML_ID(KaxTrackOffset).GetValue()]        = true;
+  s_elements[EBML_ID(KaxCodecSettings).GetValue()]      = true;
+  s_elements[EBML_ID(KaxCodecInfoURL).GetValue()]       = true;
+  s_elements[EBML_ID(KaxCodecDownloadURL).GetValue()]   = true;
+  s_elements[EBML_ID(KaxOldStereoMode).GetValue()]      = true;
+  s_elements[EBML_ID(KaxVideoGamma).GetValue()]         = true;
+  s_elements[EBML_ID(KaxVideoFrameRate).GetValue()]     = true;
+  s_elements[EBML_ID(KaxAudioPosition).GetValue()]      = true;
+  s_elements[EBML_ID(KaxCueRefCluster).GetValue()]      = true;
+  s_elements[EBML_ID(KaxCueRefNumber).GetValue()]       = true;
+  s_elements[EBML_ID(KaxCueRefCodecState).GetValue()]   = true;
+  s_elements[EBML_ID(KaxFileReferral).GetValue()]       = true;
 
   return s_elements;
 }
@@ -427,7 +427,7 @@ fix_elements_set_to_default_value_if_unset(EbmlElement *e) {
 
   mxdebug_if(s_debug,
              fmt::format("fix_elements_in_master: element has default, but value is no set; setting: ID {0:08x} name {1}\n",
-                         t->Generic().GlobalId.GetValue(), t->Generic().DebugName));
+                         EbmlId(*t).GetValue(), EBML_NAME(t)));
   t->SetValue(t->GetValue());
 }
 
@@ -438,9 +438,9 @@ fix_elements_in_master(EbmlMaster *master) {
   if (!master)
     return;
 
-  auto callbacks = find_ebml_callbacks(KaxSegment::ClassInfos, master->Generic().GlobalId);
+  auto callbacks = find_ebml_callbacks(EBML_INFO(KaxSegment), EbmlId(*master));
   if (!callbacks) {
-    mxdebug_if(s_debug, fmt::format("fix_elements_in_master: No callbacks found for ID {0:08x}\n", master->Generic().GlobalId.GetValue()));
+    mxdebug_if(s_debug, fmt::format("fix_elements_in_master: No callbacks found for ID {0:08x}\n", EbmlId(*master).GetValue()));
     return;
   }
 
@@ -457,7 +457,7 @@ fix_elements_in_master(EbmlMaster *master) {
 
   while (idx < master->ListSize()) {
     auto child    = (*master)[idx];
-    auto child_id = child->Generic().GlobalId.GetValue();
+    auto child_id = EbmlId(*child).GetValue();
     auto itr      = deprecated_elements.find(child_id);
 
     if (itr != deprecated_elements_end) {
@@ -500,59 +500,59 @@ fix_elements_in_master(EbmlMaster *master) {
   if (dynamic_cast<KaxInfo *>(master)) {
     auto info_data = get_default_segment_info_data();
 
-    if (!is_present[KaxMuxingApp::ClassInfos.GlobalId.GetValue()])
+    if (!is_present[EBML_ID(KaxMuxingApp).GetValue()])
       AddEmptyChild<KaxMuxingApp>(master).SetValueUTF8(info_data.muxing_app);
 
-    if (!is_present[KaxWritingApp::ClassInfos.GlobalId.GetValue()])
+    if (!is_present[EBML_ID(KaxWritingApp).GetValue()])
       AddEmptyChild<KaxWritingApp>(master).SetValueUTF8(info_data.writing_app);
   }
 
   // 4.2. Tracks
   else if (dynamic_cast<KaxTrackEntry *>(master)) {
-    if (!is_present[KaxTrackUID::ClassInfos.GlobalId.GetValue()])
+    if (!is_present[EBML_ID(KaxTrackUID).GetValue()])
       AddEmptyChild<KaxTrackUID>(master).SetValue(create_unique_number(UNIQUE_TRACK_IDS));
   }
 
   // 4.3. Chapters
   else if (dynamic_cast<KaxEditionEntry *>(master)) {
-    if (!is_present[KaxEditionUID::ClassInfos.GlobalId.GetValue()])
+    if (!is_present[EBML_ID(KaxEditionUID).GetValue()])
       AddEmptyChild<KaxEditionUID>(master).SetValue(create_unique_number(UNIQUE_EDITION_IDS));
 
 
   } else if (dynamic_cast<KaxChapterAtom *>(master)) {
-    if (!is_present[KaxChapterUID::ClassInfos.GlobalId.GetValue()])
+    if (!is_present[EBML_ID(KaxChapterUID).GetValue()])
       AddEmptyChild<KaxChapterUID>(master).SetValue(create_unique_number(UNIQUE_CHAPTER_IDS));
 
-    if (!is_present[KaxChapterTimeStart::ClassInfos.GlobalId.GetValue()])
+    if (!is_present[EBML_ID(KaxChapterTimeStart).GetValue()])
       AddEmptyChild<KaxChapterTimeStart>(master).SetValue(0);
 
   } else if (dynamic_cast<KaxChapterDisplay *>(master)) {
-    if (!is_present[KaxChapterString::ClassInfos.GlobalId.GetValue()])
+    if (!is_present[EBML_ID(KaxChapterString).GetValue()])
       AddEmptyChild<KaxChapterString>(master).SetValueUTF8("");
 
   }
 
   // 4.4. Tags
   else if (dynamic_cast<KaxTag *>(master)) {
-    if (!is_present[KaxTagTargets::ClassInfos.GlobalId.GetValue()])
+    if (!is_present[EBML_ID(KaxTagTargets).GetValue()])
       fix_elements_in_master(&AddEmptyChild<KaxTagTargets>(master));
 
-    else if (!is_present[KaxTagSimple::ClassInfos.GlobalId.GetValue()])
+    else if (!is_present[EBML_ID(KaxTagSimple).GetValue()])
       fix_elements_in_master(&AddEmptyChild<KaxTagSimple>(master));
 
   } else if (dynamic_cast<KaxTagTargets *>(master)) {
-    if (!is_present[KaxTagTargetTypeValue::ClassInfos.GlobalId.GetValue()])
+    if (!is_present[EBML_ID(KaxTagTargetTypeValue).GetValue()])
       AddEmptyChild<KaxTagTargetTypeValue>(master).SetValue(50); // = movie
 
   } else if (dynamic_cast<KaxTagSimple *>(master)) {
-    if (!is_present[KaxTagName::ClassInfos.GlobalId.GetValue()])
+    if (!is_present[EBML_ID(KaxTagName).GetValue()])
       AddEmptyChild<KaxTagName>(master).SetValueUTF8("");
 
   }
 
   // 4.5. Attachments
   else if (dynamic_cast<KaxAttached *>(master)) {
-    if (!is_present[KaxFileUID::ClassInfos.GlobalId.GetValue()])
+    if (!is_present[EBML_ID(KaxFileUID).GetValue()])
       AddEmptyChild<KaxFileUID>(master).SetValue(create_unique_number(UNIQUE_ATTACHMENT_IDS));
   }
 }
@@ -667,7 +667,7 @@ remove_mandatory_elements_set_to_their_default(libebml::EbmlMaster &master) {
     if (!child->IsDefaultValue())
       continue;
 
-    auto semantic = find_ebml_semantic(KaxSegment::ClassInfos, libebml::EbmlId(*child));
+    auto semantic = find_ebml_semantic(EBML_INFO(KaxSegment), libebml::EbmlId(*child));
 
     if (!semantic || !semantic->IsMandatory())
       continue;
@@ -704,7 +704,7 @@ static bool
 must_be_present_in_master_by_id(EbmlId const &id) {
   static debugging_option_c s_debug{"must_be_present_in_master"};
 
-  auto semantic = find_ebml_semantic(KaxSegment::ClassInfos, id);
+  auto semantic = find_ebml_semantic(EBML_INFO(KaxSegment), id);
   if (!semantic || !semantic->IsMandatory()) {
     mxdebug_if(s_debug, fmt::format("ID {0:08x}: 0 (either no semantic or not mandatory)\n", id.GetValue()));
     return false;
@@ -718,10 +718,9 @@ must_be_present_in_master_by_id(EbmlId const &id) {
 }
 
 bool
-must_be_present_in_master(EbmlCallbacks const &callbacks) {
+must_be_present_in_master(EbmlId const &id) {
   static std::unordered_map<uint32_t, bool> s_must_be_present;
 
-  auto id  = callbacks.ClassId();
   auto itr = s_must_be_present.find(id.GetValue());
 
   if (itr != s_must_be_present.end())
@@ -736,7 +735,7 @@ must_be_present_in_master(EbmlCallbacks const &callbacks) {
 
 bool
 must_be_present_in_master(EbmlElement const &element) {
-  return must_be_present_in_master(element.Generic());
+  return must_be_present_in_master(EbmlId(element));
 }
 
 bool

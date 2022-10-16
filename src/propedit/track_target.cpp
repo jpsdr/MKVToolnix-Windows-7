@@ -52,9 +52,9 @@ track_target_c::validate() {
 
 void
 track_target_c::look_up_property_elements() {
-  auto &property_table = property_element_c::get_table_for(KaxTracks::ClassInfos,
-                                                             track_audio == m_track_type ? &KaxTrackAudio::ClassInfos
-                                                           : track_video == m_track_type ? &KaxTrackVideo::ClassInfos
+  auto &property_table = property_element_c::get_table_for(EBML_INFO(KaxTracks),
+                                                             track_audio == m_track_type ? &EBML_INFO(KaxTrackAudio)
+                                                           : track_video == m_track_type ? &EBML_INFO(KaxTrackVideo)
                                                            :                               nullptr,
                                                            false);
 
@@ -177,9 +177,9 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
         if (!prop.m_sub_sub_master_callbacks)
           continue;
 
-        change.m_sub_sub_master = prop.m_sub_sub_master_callbacks == &KaxVideoColour::ClassInfos     ? &GetChildEmptyIfNew<KaxVideoColour>(m_sub_master)
-                                : prop.m_sub_sub_master_callbacks == &KaxVideoProjection::ClassInfos ? &GetChildEmptyIfNew<KaxVideoProjection>(m_sub_master)
-                                :                                                                      static_cast<EbmlMaster*>(nullptr);
+        change.m_sub_sub_master = prop.m_sub_sub_master_callbacks == &EBML_INFO(KaxVideoColour)     ? &GetChildEmptyIfNew<KaxVideoColour>(m_sub_master)
+                                : prop.m_sub_sub_master_callbacks == &EBML_INFO(KaxVideoProjection) ? &GetChildEmptyIfNew<KaxVideoProjection>(m_sub_master)
+                                :                                                                     static_cast<EbmlMaster*>(nullptr);
 
         if (!change.m_sub_sub_master)
           continue;
@@ -187,8 +187,8 @@ track_target_c::set_level1_element(ebml_element_cptr level1_element_cp,
         if (!prop.m_sub_sub_sub_master_callbacks)
           continue;
 
-        change.m_sub_sub_sub_master = prop.m_sub_sub_sub_master_callbacks == &KaxVideoColourMasterMeta::ClassInfos ? &GetChildEmptyIfNew<KaxVideoColourMasterMeta>(change.m_sub_sub_master)
-                                    :                                                                                nullptr;
+        change.m_sub_sub_sub_master = prop.m_sub_sub_sub_master_callbacks == &EBML_INFO(KaxVideoColourMasterMeta) ? &GetChildEmptyIfNew<KaxVideoColourMasterMeta>(change.m_sub_sub_master)
+                                    :                                                                               nullptr;
       }
 
     if (sub_master_is_track()) {
