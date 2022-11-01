@@ -83,8 +83,6 @@ def setup_globals
   $application_subdirs     =  { "mkvtoolnix-gui" => "mkvtoolnix-gui/", "mkvtoolnix" => "mkvtoolnix/" }
   $applications            =  $programs.map { |name| "src/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
   $manpages                =  $programs.map { |name| "doc/man/#{name}.1" }
-  $manpages                << "doc/man/mkvtoolnix.1"     if $build_mkvtoolnix
-  $manpages                << "doc/man/mkvtoolnix-gui.1" if $build_mkvtoolnix_gui
 
   $system_includes         = "-I. -Ilib -Ilib/avilib-0.6.10 -Isrc"
   $system_includes        += " -Ilib/utf8-cpp/source" if c?(:UTF8CPP_INTERNAL)
@@ -107,14 +105,18 @@ def setup_globals
 
   $version_header_name     = "#{$build_dir}/src/common/mkvtoolnix_version.h"
 
+  $po4a_cfg                = c(:PO4A).empty? ? nil : "doc/man/po4a/po4a.cfg"
+  $po4a_stamp              = "doc/man/po4a/latest_po4a_run.stamp"
+  $po4a_pot                = "doc/man/po4a/po/mkvtoolnix.pot"
+
   $languages               =  {
     :programs              => c(:TRANSLATIONS).split(/\s+/),
     :manpages              => c(:MANPAGES_TRANSLATIONS).split(/\s+/),
   }
 
   $translations            =  {
-    :programs              =>                         $languages[:programs].collect { |language| "po/#{language}.mo" },
-    :manpages              => !c?(:PO4A_WORKS) ? [] : $languages[:manpages].collect { |language| $manpages.collect { |manpage| manpage.gsub(/man\//, "man/#{language}/") } }.flatten,
+    :programs              =>             $languages[:programs].collect { |language| "po/#{language}.mo" },
+    :manpages              => $po4a_cfg ? $languages[:manpages].collect { |language| $manpages.collect { |manpage| manpage.gsub(/man\//, "man/#{language}/") } }.flatten : [],
   }
 
   $available_languages     =  {
@@ -186,6 +188,8 @@ def setup_globals
 
   ranlibflags              = $building_for[:macos] ? "-no_warning_for_no_symbols" : ""
 
+  po4aflags                = "#{c(:PO4A_FLAGS)} --msgmerge-opt=--no-wrap"
+
   $flags                   = {
     :cflags                => cflags,
     :cxxflags              => cxxflags,
@@ -193,6 +197,7 @@ def setup_globals
     :windres               => windres,
     :moc                   => mocflags,
     :ranlib                => ranlibflags,
+    :po4a                  => po4aflags,
   }
 
   setup_macos_specifics if $building_for[:macos]
@@ -279,7 +284,7 @@ def define_default_task
 
   # Build man pages and translations?
   targets << "manpages"
-  targets << "translations:manpages" if c?(:PO4A_WORKS)
+  targets << "translations:manpages" if $po4a_cfg
 
   # Build translations for the programs
   targets << "translations:programs"
@@ -529,12 +534,6 @@ end
 
 task :manpages => $manpages
 
-$po4a_output_filter = lambda do |code, lines|
-  lines = lines.reject { |l| %r{seems outdated.*differ between|please consider running po4a-updatepo|^$}i.match(l) }
-  puts lines.join('') unless lines.empty?
-  code
-end
-
 # Translations for the programs
 namespace :translations do
   desc "Create a template for translating the programs"
@@ -635,18 +634,6 @@ EOT
 
   task :qt => FileList[ "#{$source_dir }/po/qt/*.ts" ].collect { |file| file.ext 'qm' }
 
-  if c?(:PO4A_WORKS)
-    $available_languages[:manpages].each do |language|
-      $manpages.each do |manpage|
-        name = manpage.gsub(/man\//, "man/#{language}/")
-        file name            => [ name.ext('xml'),     "doc/man/po4a/po/#{language}.po" ]
-        file name.ext('xml') => [ manpage.ext('.xml'), "doc/man/po4a/po/#{language}.po" ] do |t|
-          runq "po4a", "#{manpage.ext('.xml')} (#{language})", "#{c(:PO4A_TRANSLATE)} #{c(:PO4A_TRANSLATE_FLAGS)} -m #{manpage.ext('.xml')} -p doc/man/po4a/po/#{language}.po -l #{t.name}", :filter_output => $po4a_output_filter
-        end
-      end
-    end
-  end
-
   desc "Update all translation files"
   task :update => [ "translations:update:programs", "translations:update:manpages", "translations:update:translations" ]
 
@@ -675,10 +662,12 @@ EOT
       end
     end
 
-    if c?(:PO4A_WORKS)
+    if $po4a_cfg
       desc "Update the man pages' translation files"
       task :manpages do
-        runq "po4a", "doc/man/po4a/po4a.cfg", "#{c(:PO4A)} #{c(:PO4A_FLAGS)} --msgmerge-opt=--no-wrap doc/man/po4a/po4a.cfg"
+        FileUtils.touch($po4a_pot) if !FileTest.exists?($po4a_pot)
+
+        runq "po4a", "#{$po4a_cfg} (update PO/POT)", "#{c(:PO4A)} #{$flags[:po4a]} --no-translations ${po4a_cfg}"
         $all_man_po_files.each do |po_file|
           normalize_po po_file
         end
@@ -776,38 +765,75 @@ end.flatten
   task task_name => targets
 end
 
-namespace :man2html do
-  xsl_source_dir   = "doc/stylesheets"
-  docbook_html_xsl = FileList[ "#{xsl_source_dir}/*.xsl" ].map { |f| f.gsub(%r{.*/}, '') }
+if $po4a_cfg
+  po4a_sources = []
 
-  ([ 'en' ] + $languages[:manpages]).collect do |language|
-    namespace language do
-      dir  = language == 'en' ? '' : "/#{language}"
-      xml  = FileList[ "doc/man#{dir}/*.xml" ].to_a
-      html = xml.map { |name| name.ext(".html") }
+  namespace :man2html do
+    xsl_source_dir    = "doc/stylesheets"
+    docbook_html_xsl  = FileList[ "#{xsl_source_dir}/*.xsl" ]
+    po4a_sources     += docbook_html_xsl
+    docbook_html_xsl  = docbook_html_xsl.map { |f| f.gsub(%r{.*/}, '') }
 
-      translated_xsls = docbook_html_xsl.map { |xsl| "doc/man#{dir}/#{xsl}" }
-      po_file         = language == 'en' ? nil : "doc/man/po4a/po/#{language}.po"
+    docbook_html_xsl.each do |xsl|
+      file "doc/man/#{xsl}" => "#{xsl_source_dir}/#{xsl}" do |t|
+        FileUtils.copy(t.prerequisites.first, t.name)
+      end
+    end
 
-      docbook_html_xsl.each do |xsl|
-        file "doc/man#{dir}/#{xsl}" => [ "#{xsl_source_dir}/#{xsl}", po_file ].compact do |t|
-          if language == 'en'
-            FileUtils.copy(t.prerequisites.first, t.name)
-          else
-            runq "po4a", "#{t.prerequisites.first} (#{language})", "#{c(:PO4A_TRANSLATE)} #{c(:PO4A_TRANSLATE_FLAGS)} -m #{t.prerequisites.first} -p doc/man/po4a/po/#{language}.po -l #{t.name}", :filter_output => $po4a_output_filter
+    ([ 'en' ] + $languages[:manpages]).collect do |language|
+      namespace language do
+        dir  = language == 'en' ? '' : "/#{language}"
+        xml  = FileList[ "doc/man#{dir}/*.xml" ].to_a
+        html = xml.map { |name| name.ext(".html") }
+
+        translated_xsls = docbook_html_xsl.map { |xsl| "doc/man#{dir}/#{xsl}" }
+
+        if language != 'en'
+          docbook_html_xsl.each do |xsl|
+            file "doc/man/#{language}/#{xsl}" => $po4a_stamp do |t|
+              runq_touch t.name
+            end
           end
         end
-      end
 
-      xml.each do |name|
-        file name.ext('html') => ([ name ] + translated_xsls) do
-          runq "saxon-he", name, "java -classpath lib/saxon-he/saxon9he.jar net.sf.saxon.Transform -o:#{name.ext('html')} '-xsl:doc/man#{dir}/docbook-to-html.xsl' '#{name}'"
+        xml.each do |name|
+          file name.ext('html') => ([ name ] + translated_xsls) do
+            runq "saxon-he", name, "java -classpath lib/saxon-he/saxon9he.jar net.sf.saxon.Transform -o:#{name.ext('html')} '-xsl:doc/man#{dir}/docbook-to-html.xsl' '#{name}'"
+          end
+
+          task File.basename(name, '.xml') => name.ext('html')
         end
 
-        task File.basename(name, '.xml') => name.ext('html')
+        task :all => html
       end
+    end
+  end
 
-      task :all => html
+  po4a_output_filter = lambda do |code, lines|
+    lines = lines.reject { |l| %r{seems outdated.*differ between|please consider running po4a-updatepo|^$}i.match(l) }
+    puts lines.join('') unless lines.empty?
+    code
+  end
+
+  po4a_sources += $manpages                      .map { |manpage|  manpage.ext('.xml')              }
+  po4a_sources += $available_languages[:manpages].map { |language| "doc/man/po4a/po/#{language}.po" }
+
+  file $po4a_stamp => po4a_sources do |t|
+    File.unlink($po4a_stamp)   if  FileTest.exists?($po4a_stamp)
+    FileUtils.touch($po4a_pot) if !FileTest.exists?($po4a_pot)
+
+    runq "po4a", "#{$po4a_cfg}", "#{c(:PO4A)} #{$flags[:po4a]} #{$po4a_cfg}", :filter_output => po4a_output_filter
+    runq_touch $po4a_stamp
+  end
+
+  $available_languages[:manpages].each do |language|
+    $manpages.each do |manpage|
+      po  = manpage.gsub(/man\//, "man/#{language}/")
+      xml = po.ext('xml')
+
+      file xml => $po4a_stamp do |t|
+        runq_touch xml
+      end
     end
   end
 end
@@ -906,7 +932,7 @@ end
 # Installation tasks
 desc "Install all applications and support files"
 targets  = [ "install:programs", "install:manpages", "install:translations:programs" ]
-targets += [ "install:translations:manpages" ] if c?(:PO4A_WORKS)
+targets += [ "install:translations:manpages" ] if $po4a_cfg
 targets += [ "install:shared" ]                if c?(:BUILD_GUI)
 task :install => targets
 
@@ -964,7 +990,7 @@ namespace :install do
       end
     end
 
-    if c?(:PO4A_WORKS)
+    if $po4a_cfg
       task :manpages => $translations[:manpages] do
         install_dir $languages[:manpages].collect { |language| "#{c(:mandir)}/#{language}/man1" }
         $languages[:manpages].each do |language|
@@ -993,6 +1019,7 @@ task :clean do
     **/*.o
     **/*.pot
     **/*.qm
+    **/*.stamp
     doc/man/*.1
     doc/man/*.html
     doc/man/*.xsl

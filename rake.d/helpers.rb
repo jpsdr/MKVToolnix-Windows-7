@@ -126,6 +126,12 @@ def runq_code(action, options = {})
   exit 1 if !ok
 end
 
+def runq_touch(file_name)
+  runq_code "touch", :target => file_name do
+    FileUtils.touch file_name
+  end
+end
+
 def ensure_dir dir
   File.unlink(dir) if FileTest.exist?(dir) && !FileTest.directory?(dir)
   FileUtils.mkdir_p(dir)
@@ -401,9 +407,7 @@ def add_qrc_dependencies *qrcs
     end
 
     file file_name => dependencies do
-      runq_code "touch", :target => file_name do
-        FileUtils.touch file_name
-      end
+      runq_touch file_name
     end
   end
 end
