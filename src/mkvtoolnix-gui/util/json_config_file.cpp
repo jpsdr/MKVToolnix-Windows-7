@@ -93,7 +93,7 @@ JsonConfigFile::load() {
   in.close();
 
   try {
-    reset(jsonToGroup(mtx::json::parse(std::string{data.data(), static_cast<std::string::size_type>(data.count())})));
+    reset(jsonToGroup(mtx::json::parse(std::string{data.data(), static_cast<std::string::size_type>(data.size())})));
 
   } catch (std::invalid_argument const &ex) {
     qDebug() << m_fileName << "std::invalid_argument" << ex.what();
