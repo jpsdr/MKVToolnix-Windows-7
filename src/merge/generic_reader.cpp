@@ -109,9 +109,9 @@ generic_reader_c::attachment_requested(int64_t id) {
     return ATTACH_MODE_TO_ALL_FILES;
 
   if (m_ti.m_attach_mode_list.selected(id))
-    return m_ti.m_attach_mode_list.get(id);
+    return m_ti.m_attach_mode_list.reversed() ? ATTACH_MODE_TO_ALL_FILES : m_ti.m_attach_mode_list.get(id);
 
-  if (m_ti.m_attach_mode_list.selected(-1))
+  if (!m_ti.m_attach_mode_list.reversed() && m_ti.m_attach_mode_list.selected(-1))
     return m_ti.m_attach_mode_list.get(-1);
 
   return ATTACH_MODE_SKIP;

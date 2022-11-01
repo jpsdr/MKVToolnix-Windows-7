@@ -7,6 +7,9 @@
   done to fix #3268. Unfortunately this affected valid subtitle files with
   intentional huge gaps in timestamps, e.g. forced subtitle tracks. The
   heuristic has simply been removed, fixing #3392.
+* mkvmerge: fixed reversed attachment selection: `--attachments !4` would not
+  copy any attachment instead of all attachments but the one with ID 4. Fixes
+  #3427.
 
 
 # Version 71.1.0 "Fortitude" 2022-10-09
