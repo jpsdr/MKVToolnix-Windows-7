@@ -66,6 +66,13 @@ require_relative "rake.d/tarball"
 require_relative 'rake.d/gtest' if $have_gtest
 
 def setup_globals
+  $po4a_cfg                 = c(:PO4A).empty? ? nil : "doc/man/po4a/po4a.cfg"
+  $po4a_stamp               = "doc/man/po4a/latest_po4a_run.stamp"
+  $po4a_pot                 = "doc/man/po4a/po/mkvtoolnix.pot"
+  $po4a_translated_programs = !$po4a_cfg ? [] : IO.readlines($po4a_cfg).
+    select { |line| %r{^\[ *type *: *docbook *\]}.match(line) }.
+    map    { |line| line.chomp.gsub(%r{.*\] *doc/man/|\.xml.*}, '') }
+
   $building_for = {
     :linux   => %r{linux}i.match(c(:host)),
     :macos   => %r{darwin}i.match(c(:host)),
@@ -105,10 +112,6 @@ def setup_globals
 
   $version_header_name     = "#{$build_dir}/src/common/mkvtoolnix_version.h"
 
-  $po4a_cfg                = c(:PO4A).empty? ? nil : "doc/man/po4a/po4a.cfg"
-  $po4a_stamp              = "doc/man/po4a/latest_po4a_run.stamp"
-  $po4a_pot                = "doc/man/po4a/po/mkvtoolnix.pot"
-
   $languages               =  {
     :programs              => c(:TRANSLATIONS).split(/\s+/),
     :manpages              => c(:MANPAGES_TRANSLATIONS).split(/\s+/),
@@ -116,7 +119,7 @@ def setup_globals
 
   $translations            =  {
     :programs              =>             $languages[:programs].collect { |language| "po/#{language}.mo" },
-    :manpages              => $po4a_cfg ? $languages[:manpages].collect { |language| $manpages.collect { |manpage| manpage.gsub(/man\//, "man/#{language}/") } }.flatten : [],
+    :manpages              => $po4a_cfg ? $languages[:manpages].collect { |language| $programs.select { |program| $po4a_translated_programs.include?(program) }.map { |program| "doc/man/#{language}/#{program}.1" } }.flatten : [],
   }
 
   $available_languages     =  {
