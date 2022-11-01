@@ -1001,17 +1001,24 @@ task :clean do
     doc/man/*/*.xml
     doc/man/*/*.xsl
     lib/libebml/ebml/ebml_export.h
+    lib/libmatroska/matroska/matroska_export.h
     packaging/windows/msix/assets/*.png
     share/icons/**/*.svg
     src/*/qt_resources.cpp
     src/**/manifest.xml
     src/info/ui/*.h
+    src/mkvextract
+    src/mkvinfo
+    src/mkvmerge
+    src/mkvpropedit
     src/mkvtoolnix-gui/forms/**/*.h
+    src/mkvtoolnix-gui/mkvtoolnix-gui
+    src/mkvtoolnix/mkvtoolnix
     tests/unit/all
     tests/unit/merge/merge
     tests/unit/propedit/propedit
   }
-  patterns += $applications + $tools.collect { |name| "src/tools/#{name}" } + $benchmark_programs
+  patterns += $tools.collect { |name| "src/tools/#{name}" } + $benchmark_programs
   patterns += PCH.clean_patterns
   patterns << $version_header_name
 
