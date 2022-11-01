@@ -34,6 +34,14 @@ add_all_requested_track_ids(generic_reader_c &reader,
     reader.add_requested_track_id(pair.first);
 }
 
+template<typename T>
+void
+add_all_requested_track_ids(generic_reader_c &reader,
+                            std::vector<T> const &container) {
+  for (auto const &key : container)
+    reader.add_requested_track_id(key);
+}
+
 void
 generic_reader_c::set_timestamp_restrictions(timestamp_c const &min,
                                              timestamp_c const &max) {
@@ -445,11 +453,11 @@ void
 generic_reader_c::set_track_info(track_info_c const &info) {
   m_ti = info;
 
-  add_all_requested_track_ids(*this, m_ti.m_atracks.m_items);
-  add_all_requested_track_ids(*this, m_ti.m_vtracks.m_items);
-  add_all_requested_track_ids(*this, m_ti.m_stracks.m_items);
-  add_all_requested_track_ids(*this, m_ti.m_btracks.m_items);
-  add_all_requested_track_ids(*this, m_ti.m_track_tags.m_items);
+  add_all_requested_track_ids(*this, m_ti.m_atracks.item_ids());
+  add_all_requested_track_ids(*this, m_ti.m_vtracks.item_ids());
+  add_all_requested_track_ids(*this, m_ti.m_stracks.item_ids());
+  add_all_requested_track_ids(*this, m_ti.m_btracks.item_ids());
+  add_all_requested_track_ids(*this, m_ti.m_track_tags.item_ids());
   add_all_requested_track_ids(*this, m_ti.m_all_fourccs);
   add_all_requested_track_ids(*this, m_ti.m_display_properties);
   add_all_requested_track_ids(*this, m_ti.m_timestamp_syncs);

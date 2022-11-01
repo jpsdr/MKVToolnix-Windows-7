@@ -18,9 +18,15 @@
 #include "common/bcp47.h"
 #include "common/container.h"
 
+// pre-declare operator << so that the compiler knows it's a template
+// function when it sees the friend declaration inside the class &
+// generates the proper code for the linker.
+template<typename T> class item_selector_c;
+template<typename T> std::ostream & operator <<(std::ostream &out, item_selector_c<T> const &selector);
+
 template<typename T>
 class item_selector_c {
-public:
+protected:
   T m_default_value;
   std::unordered_map<int64_t, T> m_items;
   std::unordered_map<mtx::bcp47::language_c, T> m_language_items;
@@ -85,6 +91,10 @@ public:
     m_none = true;
   }
 
+  bool reversed() const {
+    return m_reversed;
+  }
+
   void set_reversed() {
     m_reversed = true;
   }
@@ -105,6 +115,12 @@ public:
   bool empty() const {
     return m_items.empty() && m_language_items.empty();
   }
+
+  std::vector<int64_t> item_ids() const {
+    return mtx::keys(m_items);
+  }
+
+  friend std::ostream & operator << <>(std::ostream &out, item_selector_c<T> const &selector);
 };
 
 template<typename T>
