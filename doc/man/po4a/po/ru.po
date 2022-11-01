@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "POT-Creation-Date: 2022-10-15 17:02+0200\n"
-"PO-Revision-Date: 2016-02-03 20:53+0000\n"
+"PO-Revision-Date: 2022-11-01 13:05+0100\n"
 "Last-Translator: Andrei Stepanov, 2018-2022\n"
 "Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
 "Language: ru\n"
@@ -38,10 +38,8 @@ msgstr "71.1.0"
 #: doc/man/mkvmerge.xml:7
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
-#, fuzzy
-#| msgid "2022-08-14"
 msgid "2022-10-09"
-msgstr "2022-08-14"
+msgstr "2022-10-09"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -2362,7 +2360,7 @@ msgstr "Формат файла &matroska; поддерживает произв
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:900
 msgid "For this splitting mode the output filename is treated differently than for the normal operation. It may contain a <function>printf</function> like expression '<code>%d</code>' including an optional field width, e.g. '<code>%02d</code>'. If it does then the current file number will be formatted appropriately and inserted at that point in the filename.  If there is no such pattern then a pattern of '<code>-%03d</code>' is assumed right before the file's extension: '<code>-o output.mkv</code>' would result in '<code>output-001.mkv</code>' and so on. If there's no extension then '<code>-%03d</code>' will be appended to the name."
-msgstr ""
+msgstr "Для этого режима разделения имя исходного файла обрабатывается иначе, чем для обычной операции. Он может содержать <function>printf</function>, выражение на подобии «<code>%d</code>», включая необязательную ширину поля, напр. «<code>%02d</code>». Если это так, то номер текущего файла будет отформатирован соответствующим образом и вставлен в это место имени файла. Если такого шаблона нет, то перед расширением файла предусматривается шаблон «<code>-%03d</code>»: «<code>-o output.mkv</code>» приведёт к «<code>output-001.mkv</code>»' и т. д. Если расширения нет, к имени будет добавлено «<code>-%03d</code>»."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:909
@@ -2492,7 +2490,7 @@ msgstr "<option>=</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1033
 msgid "For certain file types (MPEG program streams = VOBs) &mkvmerge; normally looks for files in the same directory as an input file that have the same base name and only differ in their running number (e.g. 'VTS_01_1.VOB', 'VTS_01_2.VOB', 'VTS_01_3.VOB' etc) and treats all of those files as if they were concatenated into a single big file. This option, a single '=', causes mkvmerge not to look for those additional files."
-msgstr ""
+msgstr "Для определённых типов файлов (программные потоки MPEG, то есть файлы VOB) &mkvmerge; обычно ищет файлы в том же каталоге, что и входной файл, которые имеют тоэе базовое имя и отличаются лишь своим текущим номером (например, «VTS_01_1.VOB», «VTS_01_2.VOB», «VTS_01_3.VOB» и т. д.) и обрабатывает все эти файлы, как если бы они были объединены в один большой файл. Этот параметр, т. е. просто «=», вынудит mkvmerge не искать эти дополнительные файлы."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1040
@@ -2583,7 +2581,7 @@ msgstr "<option>--attachment-mime-type</option> <parameter>тип MIME</paramete
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1118
 msgid "<abbrev>MIME</abbrev> type of the following attachment. Applies to the next <link linkend=\"mkvmerge.description.attach_file\"><option>--attach-file</option></link> or <link linkend=\"mkvmerge.description.attach_file\"><option>--attach-file-once</option></link> option.  A list of officially recognized <abbrev>MIME</abbrev> types can be found e.g. at <ulink url=\"https://www.iana.org/assignments/media-types/\">the IANA homepage</ulink>. The <abbrev>MIME</abbrev> type is mandatory for an attachment."
-msgstr ""
+msgstr "Тип <abbrev>MIME</abbrev> следующего вложения. Применяется к следующему параметру <link linkend=\"mkvmerge.description.attach_file\"><option>--attach-file</option></link> или <link linkend=\"mkvmerge.description.attach_file\"><option>--attach-file-once</option></link>. Список официально распознаваемых типов <abbrev>MIME</abbrev> можно найти, например, на <ulink url=\"https://www.iana.org/assignments/media-types/\">домашней странице IANA</ulink>. Тип <abbrev>MIME</abbrev> является обязательным для вложения."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1126
@@ -2848,10 +2846,8 @@ msgstr "<option>--default-track-flag</option> <parameter>TID<optional>:bool</opt
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1439
-#, fuzzy
-#| msgid "Sets the track name for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) to <parameter>name</parameter>."
 msgid "Sets the &quot;default track&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present. The flag will be set if the source container doesn't provide that information and the user doesn't specify it via this option."
-msgstr "Указывает имя для выбранной дорожки (см. секцию <link linkend=\"mkvmerge.track_ids\">ID дорожек</link>) равным <parameter>name</parameter>."
+msgstr "Устанавливает флаг «дорожка по умолчанию» для данной дорожки (см. раздел <link linkend=\"mkvmerge.track_ids\">идентификаторы дорожек</link>), если необязательный аргумент <parameter>bool</parameter> равен <constant>1</constant> либо отсутствует. Флаг будет установлен, если исходный контейнер не предоставил эту информацию, и пользователь не указал её с помощью этого параметра."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1445
@@ -2865,10 +2861,8 @@ msgstr "<option>--track-enabled-flag</option> <parameter>TID<optional>:bool</opt
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1459
-#, fuzzy
-#| msgid "Sets the track name for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) to <parameter>name</parameter>."
 msgid "Sets the &quot;track enabled&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) to the given value <parameter>bool</parameter> (0 or 1; defaults to 1 if not specified).  Tracks are enabled by default if no option is specified for them and the source container doesn't provide this information either."
-msgstr "Указывает имя для выбранной дорожки (см. секцию <link linkend=\"mkvmerge.track_ids\">ID дорожек</link>) равным <parameter>name</parameter>."
+msgstr "Устанавливает флаг «дорожка включена» для данной дорожки (см. раздел <link linkend=\"mkvmerge.track_ids\">идентифкаторы дорожек</link>) в указанное значение <parameter>bool</parameter> (0 или 1, по умолчанию равно 1, если не указано). Дорожки включены по умолчанию, если для них не задан параметр, и исходный контейнер также не предоставляет эту информацию."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1465
@@ -2882,10 +2876,8 @@ msgstr "<option>--forced-display-flag</option> <parameter>TID<optional>:bool</op
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1478
-#, fuzzy
-#| msgid "Sets the track name for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) to <parameter>name</parameter>."
 msgid "Sets the &quot;forced display&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  Use this for tracks containing onscreen text or foreign-language dialogue."
-msgstr "Указывает имя для выбранной дорожки (см. секцию <link linkend=\"mkvmerge.track_ids\">ID дорожек</link>) равным <parameter>name</parameter>."
+msgstr "Устанавливает флаг «принудительное отображение» для данной дорожки (см. раздел <link linkend=\"mkvmerge.track_ids\">идентификаторы дорожек</link>), если необязательный аргумент <parameter>bool</parameter> равен <constant>1</constant> либо отсутствует. Используйте его для дорожек, содержащих экранный текст или диалог на иностранном языке."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1490
@@ -2894,10 +2886,8 @@ msgstr "<option>--hearing-impaired-flag</option> <parameter>TID<optional>:bool</
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1493
-#, fuzzy
-#| msgid "Sets the track name for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) to <parameter>name</parameter>."
 msgid "Sets the &quot;hearing impaired&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is suitable for users with hearing impairments."
-msgstr "Указывает имя для выбранной дорожки (см. секцию <link linkend=\"mkvmerge.track_ids\">ID дорожек</link>) равным <parameter>name</parameter>."
+msgstr "Устанавливает флаг «нарушение слуха» для данной дорожки (см. раздел <link linkend=\"mkvmerge.track_ids\">идентификаторы дорожек</link>), если необязательный аргумент <parameter>bool</parameter> равен <constant>1</constant> либо отсутствует. Этот флаг может быть установлен, если дорожка подходит для пользователей с нарушениями слуха."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1505
@@ -2906,10 +2896,8 @@ msgstr "<option>--visual-impaired-flag</option> <parameter>TID<optional>:bool</o
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1508
-#, fuzzy
-#| msgid "Sets the track name for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) to <parameter>name</parameter>."
 msgid "Sets the &quot;visual impaired&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is suitable for users with visual impairments."
-msgstr "Указывает имя для выбранной дорожки (см. секцию <link linkend=\"mkvmerge.track_ids\">ID дорожек</link>) равным <parameter>name</parameter>."
+msgstr "Устанавливает флаг «слабовидящие» для данной дорожки (см. раздел <link linkend=\"mkvmerge.track_ids\">идентификаторы дорожек</link>), если необязательный аргумент <parameter>bool</parameter> равен <constant>1</constant> либо отсутствует. Этот флаг может быть установлен, если дорожка подходит для пользователей с нарушениями зрения."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1520
@@ -2918,10 +2906,8 @@ msgstr "<option>--text-descriptions-flag</option> <parameter>TID<optional>:bool<
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1523
-#, fuzzy
-#| msgid "Sets the track name for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) to <parameter>name</parameter>."
 msgid "Sets the &quot;text descriptions&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."
-msgstr "Указывает имя для выбранной дорожки (см. секцию <link linkend=\"mkvmerge.track_ids\">ID дорожек</link>) равным <parameter>name</parameter>."
+msgstr "Устанавливает флаг «текстовые описания» для данной дорожки (см. раздел <link linkend=\"mkvmerge.track_ids\">идентификаторы дорожек</link>), если необязательный аргумент <parameter>bool</parameter> равен <constant>1</constant> либо отсутствует. Этот флаг может быть установлен, если дорожка содержит текстовые описания видеоматериала, пригодного для воспроизведения через систему преобразования текста в речь для слабовидящих пользователей."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1536
@@ -2930,10 +2916,8 @@ msgstr "<option>--original-flag</option> <parameter>TID<optional>:bool</optional
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1539
-#, fuzzy
-#| msgid "Sets the track name for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) to <parameter>name</parameter>."
 msgid "Sets the &quot;original language&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track is in the content's original language (not a translation)."
-msgstr "Указывает имя для выбранной дорожки (см. секцию <link linkend=\"mkvmerge.track_ids\">ID дорожек</link>) равным <parameter>name</parameter>."
+msgstr "Устанавливает флаг «исходный язык» для данной дорожки (см. раздел <link linkend=\"mkvmerge.track_ids\">идентификаторы дорожек</link>), если необязательный аргумент <parameter>bool</parameter> равен <constant>1</constant> либо отсутствует. Этот флаг может быть установлен, если дорожка на языке оригинала содержимого (не является переводом)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1551
@@ -2942,10 +2926,8 @@ msgstr "<option>--commentary-flag</option> <parameter>TID<optional>:bool</option
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1554
-#, fuzzy
-#| msgid "Sets the track name for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) to <parameter>name</parameter>."
 msgid "Sets the &quot;commentary&quot; flag for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>) if the optional argument <parameter>bool</parameter> is set to <constant>1</constant> or if it isn't present.  This flag can be set if the track contains commentary."
-msgstr "Указывает имя для выбранной дорожки (см. секцию <link linkend=\"mkvmerge.track_ids\">ID дорожек</link>) равным <parameter>name</parameter>."
+msgstr "Устанавливает флаг «комментарии» для данной дорожки (см. раздел <link linkend=\"mkvmerge.track_ids\">идентификаторы дорожек</link>), если необязательный аргумент <parameter>bool</parameter> равен <constant>1</constant> либо отсутствует. Этот флаг может быть установлен, если трек содержит комментарии."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1566
@@ -2975,7 +2957,7 @@ msgstr "<option>--language</option> <parameter>TID:язык</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1589
 msgid "Sets the language for the given track (see section <link linkend=\"mkvmerge.track_ids\">track IDs</link>). Both ISO 639-2 language codes and ISO 639-1 country codes are allowed. The country codes will be converted to language codes automatically.  All languages including their ISO 639-2 codes can be listed with the <link linkend=\"mkvmerge.description.list_languages\"><option>--list-languages</option></link> option."
-msgstr ""
+msgstr "Устанавливает язык для данной дорожки (см. раздел <link linkend=\"mkvmerge.track_ids\">идентификаторы дорожек</link>). Разрешены как коды языков ISO 639-2, так и коды стран ISO 639-1. Коды стран будут автоматически преобразованы в коды языков. Все языки, включая их коды ISO 639-2, можно указать с помощью параметра <link linkend=\"mkvmerge.description.list_languages\"><option>--list-languages</option></link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:1602
@@ -3102,7 +3084,7 @@ msgstr "<option>--compression</option> <parameter>TID:n</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1732
 msgid "Selects the compression method to be used for the track. Note that the player also has to support this method. Valid values are '<literal>none</literal>', '<literal>zlib</literal>' and '<literal>mpeg4_p2</literal>'/'<literal>mpeg4p2</literal>'."
-msgstr ""
+msgstr "Выбирает метод сжатия, который будет использоваться для дорожки. Обратите внимание, что плеер также должен поддерживать этот метод. Допустимые значения: «<literal>none</literal>», «<literal>zlib</literal>» и «<literal>mpeg4_p2</literal>»/«<literal>mpeg4p2</literal>»."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1736
@@ -3428,10 +3410,8 @@ msgstr "<option>--stereo-mode</option> <parameter>TID:n|symbolic-name</parameter
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2070
-#, fuzzy
-#| msgid "Sets the stereo mode for the video track with the track ID <parameter>TID</parameter>.  The mode can either be a number <parameter>n</parameter> between <constant>0</constant> and <constant>14</constant> or one of these keywords:"
 msgid "Sets the stereo mode for the video track with the track ID <parameter>TID</parameter>.  The mode can either be a number <parameter>n</parameter> between <constant>0</constant> and <constant>14</constant> or a symbolic name. All valid numbers &amp; names can be listed with the <link linkend=\"mkvmerge.description.list_stereo_modes\"><option>--list-stereo-modes</option> option</link>."
-msgstr "Устанавливает стереорежим для видеодорожки с идентификатором трека <parameter>TID</parameter>. Режим может принимать значения числа <parameter>n</parameter> от <constant>0</constant> до <constant>14</constant>, либо одним из следующих ключевых слов:"
+msgstr "Устанавливает стереорежим для видеодорожки с помощью идентификатора дорожки <parameter>TID</parameter>. Режим может быть числом <parameter>n</parameter> от <constant>0</constant> до <constant>14</constant> либо символьным именем. Все допустимые номера и имена могут быть перечислены с помощью <link linkend=\"mkvmerge.description.list_stereo_modes\">параметра <option>--list-stereo-modes</option></link>."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2080
@@ -3825,7 +3805,7 @@ msgstr "Параметры синхронизации могут использ�
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2549
 msgid "For text subtitles you can either use some Windows software (like <productname>SubRipper</productname>) or the <productname>subrip</productname> package found in <citerefentry><refentrytitle>transcode</refentrytitle><manvolnum>1</manvolnum></citerefentry>'s sources in the '<literal>contrib/subrip</literal>' directory. The general process is:"
-msgstr ""
+msgstr "Для текстовых субтитров можно использовать программное обеспечение Windows (типа <productname>SubRipper</productname>) или пакет <productname>subrip</productname>, который можно найти в исходных файлах <citerefentry><refentrytitle>transcode</refentrytitle><manvolnum>1</manvolnum></citerefentry> в каталоге «<literal>contrib/subrip</literal>». Общий процесс таков:"
 
 #. type: Content of: <refentry><refsect1><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2557
@@ -4039,7 +4019,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2718
 msgid "&mkvmerge; does this conversion automatically based on the presence of a byte order marker (short: <abbrev>BOM</abbrev>) or the system's current locale. How the character set is inferred from the locale depends on the operating system that &mkvmerge; is run on."
-msgstr ""
+msgstr "&mkvmerge; выполняет это преобразование автоматически на основе наличия маркера порядка байтов (коротко: <abbrev>BOM</abbrev>) или текущей локали системы. То, как набор символов выводится из локали, зависит от операционной системы, в которой &mkvmerge; выполняется."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2724
@@ -4258,7 +4238,7 @@ msgstr ""
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2946
 msgid "If a &matroska; containing attachments file is used as an input file then &mkvmerge; will copy the attachments into the new file. The selection which attachments are copied and which are not can be changed with the options <link linkend=\"mkvmerge.description.attachments\"><option>--attachments</option></link> and <link linkend=\"mkvmerge.description.no_attachments\"><option>--no-attachments</option></link>."
-msgstr ""
+msgstr "Если в качестве входного файла используется файл &matroska; с вложением, то &mkvmerge; скопирует вложения в новый файл. Выбор того, какие вложения копируются, а какие нет, можно изменить с помощью параметров <link linkend=\"mkvmerge.description.attachments\"><option>--attachments</option></link> и <link linkend=\"mkvmerge.description.no_attachments\"><option>--no-attachments</option></link>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2956
@@ -4268,7 +4248,7 @@ msgstr "Система глав &matroska; более обширна, чем с�
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2961
 msgid "&mkvmerge; supports two kinds of chapter files as its input. The first format, called 'simple chapter format', is the same format that the <abbrev>OGM</abbrev> tools expect. The second format is a &xml; based chapter format which supports all of &matroska;'s chapter functionality."
-msgstr ""
+msgstr "&mkvmerge; поддерживает два типа файлов глав в качестве входных данных. Первый формат под названием «простой формат главы» является тем же форматом, который ожидают инструменты <abbrev>OGM</abbrev>. Второй формат — это формат глав на основе &xml;, который поддерживает все функции глав &matroska;."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2967
