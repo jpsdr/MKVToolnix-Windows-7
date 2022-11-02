@@ -70,6 +70,7 @@ std::string format_paragraph(std::string const &text_to_wrap,
 std::string format_rational(int64_t numerator, int64_t denominator, unsigned int precision);
 std::string format_number(int64_t number);
 std::string format_number(uint64_t number);
+std::string format_thousands(uint64_t value);
 
 std::string to_hex(const unsigned char *buf, size_t size, bool compact = false);
 inline std::string

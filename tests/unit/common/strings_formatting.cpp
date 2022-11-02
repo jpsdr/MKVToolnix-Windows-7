@@ -7,18 +7,22 @@
 namespace {
 
 TEST(StringsFormatting, FileSize) {
-  EXPECT_EQ("1023 bytes", mtx::string::format_file_size(      1023ll));
-  EXPECT_EQ(   "1.0 KiB", mtx::string::format_file_size(      1024ll));
-  EXPECT_EQ(   "1.9 KiB", mtx::string::format_file_size(      2047ll));
-  EXPECT_EQ(   "2.0 KiB", mtx::string::format_file_size(      2048ll));
-  EXPECT_EQ("1023.9 KiB", mtx::string::format_file_size(   1048575ll));
-  EXPECT_EQ(   "1.0 MiB", mtx::string::format_file_size(   1048576ll));
-  EXPECT_EQ(   "1.9 MiB", mtx::string::format_file_size(   2097151ll));
-  EXPECT_EQ(   "2.0 MiB", mtx::string::format_file_size(   2097152ll));
-  EXPECT_EQ("1023.9 MiB", mtx::string::format_file_size(1073741823ll));
-  EXPECT_EQ(   "1.0 GiB", mtx::string::format_file_size(1073741824ll));
-  EXPECT_EQ(   "1.9 GiB", mtx::string::format_file_size(2147483647ll));
-  EXPECT_EQ(   "2.0 GiB", mtx::string::format_file_size(2147483648ll));
+  EXPECT_EQ(  "123 bytes", mtx::string::format_file_size(       123ll));
+  EXPECT_EQ("1,023 bytes", mtx::string::format_file_size(      1023ll));
+  EXPECT_EQ(    "1.0 KiB", mtx::string::format_file_size(      1024ll));
+  EXPECT_EQ(    "1.9 KiB", mtx::string::format_file_size(      2047ll));
+  EXPECT_EQ(    "2.0 KiB", mtx::string::format_file_size(      2048ll));
+  EXPECT_EQ("1,023.9 KiB", mtx::string::format_file_size(   1048575ll));
+  EXPECT_EQ(    "1.0 MiB", mtx::string::format_file_size(   1048576ll));
+  EXPECT_EQ(    "1.9 MiB", mtx::string::format_file_size(   2097151ll));
+  EXPECT_EQ(    "2.0 MiB", mtx::string::format_file_size(   2097152ll));
+  EXPECT_EQ("1,023.9 MiB", mtx::string::format_file_size(1073741823ll));
+  EXPECT_EQ(    "1.0 GiB", mtx::string::format_file_size(1073741824ll));
+  EXPECT_EQ(    "1.9 GiB", mtx::string::format_file_size(2147483647ll));
+  EXPECT_EQ(    "2.0 GiB", mtx::string::format_file_size(2147483648ll));
+
+  EXPECT_EQ("1,023 bytes",                   mtx::string::format_file_size(      1023ll, mtx::string::file_size_format_e::full));
+  EXPECT_EQ("2.0 GiB (2,147,483,648 bytes)", mtx::string::format_file_size(2147483648ll, mtx::string::file_size_format_e::full));
 }
 
 TEST(StringsFormatting, FormatTimecodeWithPrecision) {
