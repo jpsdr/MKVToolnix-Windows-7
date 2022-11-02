@@ -46,6 +46,7 @@ init_element_names() {
   g_element_names[0x1043a770] = "Chapters";
   g_element_names[0x6ebc]     = "ChapterSegmentEditionUID";
   g_element_names[0x6e67]     = "ChapterSegmentUID";
+  g_element_names[0x4588]     = "ChapterSkipType";
   g_element_names[0x85]       = "ChapterString";
   g_element_names[0x5654]     = "ChapterStringUID";
   g_element_names[0x92]       = "ChapterTimeEnd";
@@ -117,11 +118,15 @@ init_element_names() {
   g_element_names[0x42f7]     = "EBMLReadVersion";
   g_element_names[0x4286]     = "EBMLVersion";
   g_element_names[0xec]       = "EBMLVoid";
+  g_element_names[0x4520]     = "EditionDisplay";
   g_element_names[0x45b9]     = "EditionEntry";
   g_element_names[0x45db]     = "EditionFlagDefault";
   g_element_names[0x45bd]     = "EditionFlagHidden";
   g_element_names[0x45dd]     = "EditionFlagOrdered";
+  g_element_names[0x45e4]     = "EditionLanguageIETF";
+  g_element_names[0x4521]     = "EditionString";
   g_element_names[0x45bc]     = "EditionUID";
+  g_element_names[0x52f1]     = "Emphasis";
   g_element_names[0xaf]       = "EncryptedBlock";
   g_element_names[0x465c]     = "FileData";
   g_element_names[0x467e]     = "FileDescription";
@@ -172,6 +177,7 @@ init_element_names() {
   g_element_names[0x4485]     = "TagBinary";
   g_element_names[0x63c4]     = "TagChapterUID";
   g_element_names[0x4484]     = "TagDefault";
+  g_element_names[0x44b4]     = "TagDefaultBogus";
   g_element_names[0x63c9]     = "TagEditionUID";
   g_element_names[0x447a]     = "TagLanguage";
   g_element_names[0x447b]     = "TagLanguageIETF";
@@ -234,15 +240,15 @@ init_element_names() {
   g_element_names[0x55b8]     = "VideoChromaSitVert";
   g_element_names[0x55b3]     = "VideoChromaSubsampHorz";
   g_element_names[0x55b4]     = "VideoChromaSubsampVert";
-  g_element_names[0x55b0]     = "VideoColor";
-  g_element_names[0x55d0]     = "VideoColorMasterMeta";
-  g_element_names[0x55b1]     = "VideoColorMatrix";
-  g_element_names[0x55bc]     = "VideoColorMaxCLL";
-  g_element_names[0x55bd]     = "VideoColorMaxFALL";
-  g_element_names[0x55bb]     = "VideoColorPrimaries";
-  g_element_names[0x55b9]     = "VideoColorRange";
-  g_element_names[0x2eb524]   = "VideoColorSpace";
-  g_element_names[0x55ba]     = "VideoColorTransferCharacter";
+  g_element_names[0x55b0]     = "VideoColour";
+  g_element_names[0x55d0]     = "VideoColourMasterMeta";
+  g_element_names[0x55b1]     = "VideoColourMatrix";
+  g_element_names[0x55bc]     = "VideoColourMaxCLL";
+  g_element_names[0x55bd]     = "VideoColourMaxFALL";
+  g_element_names[0x55bb]     = "VideoColourPrimaries";
+  g_element_names[0x55b9]     = "VideoColourRange";
+  g_element_names[0x2eb524]   = "VideoColourSpace";
+  g_element_names[0x55ba]     = "VideoColourTransferCharacter";
   g_element_names[0x54ba]     = "VideoDisplayHeight";
   g_element_names[0x54b2]     = "VideoDisplayUnit";
   g_element_names[0x54b0]     = "VideoDisplayWidth";
@@ -314,6 +320,7 @@ init_master_information() {
     "Cues",
     "CueTrackPositions",
     "EBMLHead",
+    "EditionDisplay",
     "EditionEntry",
     "Info",
     "ReferenceFrame",
@@ -335,8 +342,8 @@ init_master_information() {
     "Tracks",
     "TrackTranslate",
     "TrackVideo",
-    "VideoColor",
-    "VideoColorMasterMeta",
+    "VideoColour",
+    "VideoColourMasterMeta",
     "VideoProjection",
     nullptr
   };
