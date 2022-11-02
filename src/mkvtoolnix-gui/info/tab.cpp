@@ -19,6 +19,7 @@
 #include "common/mm_read_buffer_io.h"
 #include "common/mm_io_x.h"
 #include "common/qt.h"
+#include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/forms/info/tab.h"
 #include "mkvtoolnix-gui/info/element_reader.h"
 #include "mkvtoolnix-gui/info/element_viewer_dialog.h"
@@ -31,6 +32,7 @@
 #include "mkvtoolnix-gui/jobs/info_job.h"
 #include "mkvtoolnix-gui/jobs/tool.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
+#include "mkvtoolnix-gui/util/date_time.h"
 #include "mkvtoolnix-gui/util/header_view_manager.h"
 #include "mkvtoolnix-gui/util/kax_info.h"
 #include "mkvtoolnix-gui/util/message_box.h"
@@ -106,12 +108,19 @@ Tab::load(QString const &fileName) {
   auto p = p_func();
 
   try {
+    QFileInfo fileInfo{fileName};
+
     p->m_model->setInfo(std::make_unique<Util::KaxInfo>());
     p->m_model->reset();
 
+    p->m_ui->fileName->setText(fileInfo.fileName());
+    p->m_ui->directory->setText(QDir::toNativeSeparators(fileInfo.absolutePath()));
+    p->m_ui->size->setText(to_qs(mtx::string::format_file_size(fileInfo.size(), mtx::string::file_size_format_e::full)));
+    p->m_ui->modified->setText(Util::displayableDate(fileInfo.lastModified()));
+
     auto &info         = p->m_model->info();
     p->m_fileName      = fileName;
-    p->m_savedFileName = QDir::toNativeSeparators( Q("%1.txt").arg(QFileInfo{ fileName }.absoluteFilePath().replace(QRegularExpression{Q("\\.[^.]*$")}, {})) );
+    p->m_savedFileName = QDir::toNativeSeparators( Q("%1.txt").arg(fileInfo.absoluteFilePath().replace(QRegularExpression{Q("\\.[^.]*$")}, {})) );
     p->m_file          = std::static_pointer_cast<mm_io_c>(std::make_shared<mm_read_buffer_io_c>(std::make_shared<mm_file_io_c>(to_utf8(fileName), MODE_READ)));
 
     info.moveToThread(p->m_queueThread);

@@ -266,11 +266,34 @@ create_minutes_seconds_time_string(unsigned int seconds,
 }
 
 std::string
-format_file_size(int64_t size) {
-  return size <       1024ll ? fmt::format(NY("{0} byte", "{0} bytes", size), size)
-       : size <    1048576ll ? fmt::format(Y("{0}.{1} KiB"),                  size / 1024,               (size * 10 /               1024) % 10)
-       : size < 1073741824ll ? fmt::format(Y("{0}.{1} MiB"),                  size / 1024 / 1024,        (size * 10 /        1024 / 1024) % 10)
-       :                       fmt::format(Y("{0}.{1} GiB"),                  size / 1024 / 1024 / 1024, (size * 10 / 1024 / 1024 / 1024) % 10);
+format_file_size(int64_t size,
+                 file_size_format_e format) {
+  std::string bytes, suffix;
+  auto full = format == file_size_format_e::full;
+
+  if ((size < 1024) || full) {
+    auto size_fmt = fmt::format("{0}", size);
+    if (size >= 1000) {
+      auto idx = (size_fmt.size() - 1) % 3 + 1;
+
+      while (idx < size_fmt.size()) {
+        size_fmt.insert(idx, ".");
+        idx += 4;
+      }
+    }
+
+    bytes = fmt::format(NY("{0} byte", "{0} bytes", size), size_fmt);
+  }
+
+  if (full)
+    suffix = fmt::format(" ({0})", bytes);
+
+  auto formatted = size <       1024ll ? bytes
+                 : size <    1048576ll ? fmt::format(Y("{0}.{1} KiB"), size / 1024,               (size * 10 /               1024) % 10)
+                 : size < 1073741824ll ? fmt::format(Y("{0}.{1} MiB"), size / 1024 / 1024,        (size * 10 /        1024 / 1024) % 10)
+                 :                       fmt::format(Y("{0}.{1} GiB"), size / 1024 / 1024 / 1024, (size * 10 / 1024 / 1024 / 1024) % 10);
+
+  return formatted + suffix;
 }
 
 std::string

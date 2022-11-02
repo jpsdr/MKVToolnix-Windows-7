@@ -8,6 +8,8 @@
   output as well. Lines prefixed with`#GUI#` are suitable for machine parsing,
   won't be translated and are guaranteed not to change in format. Implements
   #3421.
+* MKVToolNix GUI: info tool: added information about the file (directory,
+  size, modification timestamp) at the top of each tab. Implements #3407.
 
 ## Bug fixes
 
