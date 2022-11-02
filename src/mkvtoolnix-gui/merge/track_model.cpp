@@ -62,10 +62,6 @@ TrackModel::TrackModel(QObject *parent)
   connect(this,              &TrackModel::rowsRemoved,        this, &TrackModel::updateTrackLists);
   connect(this,              &TrackModel::rowsMoved,          this, &TrackModel::updateTrackLists);
   connect(MainWindow::get(), &MainWindow::preferencesChanged, this, &TrackModel::updateTrackColors);
-
-#if defined(SYS_WINDOWS)
-  // Workaround for a bug in Qt on Windows where SVG icons in tree views are
-#endif  // SYS_WINDOWS
 }
 
 TrackModel::~TrackModel() {
