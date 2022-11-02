@@ -10,6 +10,8 @@
 * mkvmerge: fixed reversed attachment selection: `--attachments !4` would not
   copy any attachment instead of all attachments but the one with ID 4. Fixes
   #3427.
+* MKVToolNix GUI: header editor: fixed pixelated icons on higher display
+  scaling values. Fixes #3420.
 
 
 # Version 71.1.0 "Fortitude" 2022-10-09
