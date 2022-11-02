@@ -21,6 +21,11 @@
   #3427.
 * MKVToolNix GUI: header editor: fixed pixelated icons on higher display
   scaling values. Fixes #3420.
+* mkvpropedit, MKVToolNix GUI's chapter & header editors: updated the list of
+  deprecated Matroska elements. The applications will no longer try to write
+  those elements, even if they're found in the file to be modified. The
+  programs will no longer abort with error messages such as `assertion "false"
+  failed`. Fixes #3416.
 
 
 # Version 71.1.0 "Fortitude" 2022-10-09
