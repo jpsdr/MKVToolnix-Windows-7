@@ -156,14 +156,17 @@ doc_type_version_handler_c::do_update_ebml_head(mm_io_c &file) {
     if (diff == 1)
       head->SetSizeLength(head->GetSizeLength() + 1);
 
+    else if (diff > 1) {
+      auto v = new EbmlVoid;
+      v->SetSize(diff - 2);
+      head->PushElement(*v);
+      new_size = head->UpdateSize(true);
+
+      mxdebug_if(p->debug, fmt::format("do_update_ebml_head:   diff > 1 case; new size now {0}\n", new_size));
+    }
+
     file.setFilePointer(head->GetElementPosition());
     head->Render(*stream, true);
-
-    if (diff > 1) {
-      EbmlVoid v;
-      v.SetSize(diff - 2);
-      v.Render(*stream);
-    }
 
   } catch (mtx::mm_io::exception &) {
     return update_result_e::err_read_or_write_failure;

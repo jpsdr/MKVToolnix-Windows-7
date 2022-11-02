@@ -26,6 +26,15 @@
   those elements, even if they're found in the file to be modified. The
   programs will no longer abort with error messages such as `assertion "false"
   failed`. Fixes #3416.
+* mkvpropedit, MKVToolNix GUI's chapter & header editors: when the Matroska
+  version numbers stored in the EBML Head element are updated, the updated
+  EBML Head element might be smaller than the existing one. In that case the
+  programs used to shrink the EBML Head & write a small EBML Void element
+  between the updated EBML Head & the following element, usually a Matroska
+  Segment element. This isn't widely supported by programs including
+  MKVToolNix itself, causing them to declare such files as invalid. The
+  programs will now create the EBML Void element inside the EBML Head element,
+  making them a level 1 element instead of a level 0 element. Fixes #3355.
 
 
 # Version 71.1.0 "Fortitude" 2022-10-09
