@@ -155,10 +155,13 @@ class SimpleTest
       :block => lambda {
         sys "../src/mkvmerge #{full_command_line} --engage no_variable_data > #{tmp}", :exit_code => options[:exit_code]
 
-        text = IO.readlines(tmp).
+        lines = IO.readlines(tmp).
           reject { |line| %r{^\s*"identification_format_version":\s*\d+}.match(line) }.
-          map    { |line| line.gsub(%r{\r}, '') }.
-          join('')
+          map    { |line| line.gsub(%r{\r}, '') }
+
+        lines.reject! { |line| %r{^\s*"file_name":}.match(line) if %r{^/tmp}.match(file) }
+
+        text = lines.join('')
 
         IO.write(tmp, text, mode: 'wb')
 
