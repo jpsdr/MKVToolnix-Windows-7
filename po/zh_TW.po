@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh-TW\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-11-02 13:08+0100\n"
+"POT-Creation-Date: 2022-11-02 19:48+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: HULEN, 2021-2022\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_TW/)\n"
@@ -5782,6 +5782,7 @@ msgstr "第一個原始檔案所在目錄的相對目錄(&R):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:515
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
+#: src/mkvtoolnix-gui/forms/info/tab.h:154
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:379
 #, no-c-format
 msgid "Directory:"
@@ -6405,7 +6406,7 @@ msgstr "解析 '{0}' 中的標籤發生錯誤: 缺少一些必須的元件。\n"
 msgid "Error playing audio"
 msgstr "播放音訊時出錯"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:196
+#: src/mkvtoolnix-gui/info/tab.cpp:205
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:80
 #, no-c-format
 msgid "Error reading Matroska file"
@@ -6784,6 +6785,7 @@ msgstr "檔名"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:514
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
+#: src/mkvtoolnix-gui/forms/info/tab.h:152
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 #, no-c-format
@@ -8432,7 +8434,7 @@ msgstr "若給出以 .mtxcfg 為尾碼的設定檔名，程式將在相應工具
 msgid "Listing content of file \"%1\" in directory \"%2\""
 msgstr "合併到在目錄 \"%2\" 中的檔案 \"%1\""
 
-#: src/mkvtoolnix-gui/info/tab.cpp:244
+#: src/mkvtoolnix-gui/info/tab.cpp:253
 #, no-c-format
 msgid "Loading…"
 msgstr "載入中…"
@@ -8816,6 +8818,11 @@ msgstr "修改選中的軌道(&Y)"
 #, no-c-format
 msgid "Modification of properties in the section '{0}' was requested, but no corresponding level 1 element was found in the file. {1}\n"
 msgstr "在段落 '{0}' 中屬性必須修改，但檔案裡未發現符合的等級 1 元件。{1}\n"
+
+#: src/mkvtoolnix-gui/forms/info/tab.h:155
+#, no-c-format
+msgid "Modified:"
+msgstr ""
 
 #: src/common/kax_element_names.cpp:271
 #, no-c-format
@@ -10354,7 +10361,7 @@ msgstr "不支援讀取加密的 VOB。\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:841
-#: src/mkvtoolnix-gui/info/tab.cpp:138
+#: src/mkvtoolnix-gui/info/tab.cpp:147
 #: src/mkvtoolnix-gui/merge/attachments.cpp:233
 #, no-c-format
 msgid "Reading failed"
@@ -11225,7 +11232,7 @@ msgstr "短的 AAC 音訊套件 (長: {0} < {1})\n"
 msgid "Show &buttons for moving list view entries up and down"
 msgstr "顯示用於上下移動列表條目的按鈕(&B)"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:189
+#: src/mkvtoolnix-gui/info/tab.cpp:198
 #, no-c-format
 msgid "Show &hex dump"
 msgstr "顯示十六進位轉儲形式"
@@ -11412,6 +11419,7 @@ msgstr "大小"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:174
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:224
+#: src/mkvtoolnix-gui/forms/info/tab.h:153
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
 #: src/mkvtoolnix-gui/merge/output.cpp:260
 #, no-c-format
@@ -12699,7 +12707,7 @@ msgstr "無法更進一步處理檔案。"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:366
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:155
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:841
-#: src/mkvtoolnix-gui/info/tab.cpp:138
+#: src/mkvtoolnix-gui/info/tab.cpp:147
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "嘗試開啟的檔案 (%1) 無法讀取成功。"
@@ -16448,7 +16456,7 @@ msgstr "{0} (mkvmerge & mkvextract 軌道 ID: {1})"
 msgid "{0} ({1:.3f} frames/fields per second for a video track)"
 msgstr "{0} (視訊軌為每秒 {1:.3f} 影格數/圖場數)"
 
-#: src/common/strings/formatting.cpp:270
+#: src/common/strings/formatting.cpp:285
 #, no-c-format
 msgid "{0} byte"
 msgid_plural "{0} bytes"
@@ -16481,17 +16489,17 @@ msgid "{0} second"
 msgid_plural "{0} seconds"
 msgstr[0] "{0} 秒"
 
-#: src/common/strings/formatting.cpp:273
+#: src/common/strings/formatting.cpp:294
 #, no-c-format
 msgid "{0}.{1} GiB"
 msgstr "{0}.{1} GiB"
 
-#: src/common/strings/formatting.cpp:271
+#: src/common/strings/formatting.cpp:292
 #, no-c-format
 msgid "{0}.{1} KiB"
 msgstr "{0}.{1} KiB"
 
-#: src/common/strings/formatting.cpp:272
+#: src/common/strings/formatting.cpp:293
 #, no-c-format
 msgid "{0}.{1} MiB"
 msgstr "{0}.{1} MiB"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-11-02 13:08+0100\n"
+"POT-Creation-Date: 2022-11-02 19:48+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>, 2016-2018\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -5786,6 +5786,7 @@ msgstr "첫 번째 소스 파일의 폴더에 상대적인 폴더(&R):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:515
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
+#: src/mkvtoolnix-gui/forms/info/tab.h:154
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:379
 #, no-c-format
 msgid "Directory:"
@@ -6412,7 +6413,7 @@ msgstr "'{0}'에서 태그를 분석하는 동안 오류 발생: 필수 요소�
 msgid "Error playing audio"
 msgstr "설정 파일 불러오는 중 오류 발생"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:196
+#: src/mkvtoolnix-gui/info/tab.cpp:205
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:80
 #, no-c-format
 msgid "Error reading Matroska file"
@@ -6791,6 +6792,7 @@ msgstr "파일 이름"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:514
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
+#: src/mkvtoolnix-gui/forms/info/tab.h:152
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 #, no-c-format
@@ -8439,7 +8441,7 @@ msgstr "GUI에서 .mtxcfg 확장자를 가진 설정 파일명의 목록을 만�
 msgid "Listing content of file \"%1\" in directory \"%2\""
 msgstr "\"%2\" 폴더의 \"%1\" 파일 내용 나열하는 중"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:244
+#: src/mkvtoolnix-gui/info/tab.cpp:253
 #, no-c-format
 msgid "Loading…"
 msgstr "불러오는 중..."
@@ -8823,6 +8825,11 @@ msgstr "묵음 트랙"
 #, no-c-format
 msgid "Modification of properties in the section '{0}' was requested, but no corresponding level 1 element was found in the file. {1}\n"
 msgstr "섹션 '{0}'의 속성 변경을 요청했지만, 파일에서 수준 1 요소에 해당하는 부분을 찾지 못했습니다. {1}\n"
+
+#: src/mkvtoolnix-gui/forms/info/tab.h:155
+#, no-c-format
+msgid "Modified:"
+msgstr ""
 
 #: src/common/kax_element_names.cpp:271
 #, no-c-format
@@ -10362,7 +10369,7 @@ msgstr "암호화된 VOB은 지원하지 않아 읽을 수 없습니다.\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:841
-#: src/mkvtoolnix-gui/info/tab.cpp:138
+#: src/mkvtoolnix-gui/info/tab.cpp:147
 #: src/mkvtoolnix-gui/merge/attachments.cpp:233
 #, no-c-format
 msgid "Reading failed"
@@ -11236,7 +11243,7 @@ msgstr "짧은 AAC 오디오 패킷 (길이: {0} < {1})\n"
 msgid "Show &buttons for moving list view entries up and down"
 msgstr "목록 보기 항목 위/아래로 이동 버튼 보기(&B)"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:189
+#: src/mkvtoolnix-gui/info/tab.cpp:198
 #, no-c-format
 msgid "Show &hex dump"
 msgstr "16진수 덤프 표시(&H):"
@@ -11423,6 +11430,7 @@ msgstr "크기"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:174
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:224
+#: src/mkvtoolnix-gui/forms/info/tab.h:153
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
 #: src/mkvtoolnix-gui/merge/output.cpp:260
 #, no-c-format
@@ -12710,7 +12718,7 @@ msgstr "이 파일은 더 이상 처리하지 않습니다."
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:366
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:155
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:841
-#: src/mkvtoolnix-gui/info/tab.cpp:138
+#: src/mkvtoolnix-gui/info/tab.cpp:147
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "열려고 했던 파일(%1)을 성공적으로 읽을 수 없었습니다."
@@ -16459,7 +16467,7 @@ msgstr "{0} (mkvmerge 및 mkvextract의 트랙 ID: {1})"
 msgid "{0} ({1:.3f} frames/fields per second for a video track)"
 msgstr "{0} (비디오 트랙에 대해 초당 {1:.3f} 프레임/필드)"
 
-#: src/common/strings/formatting.cpp:270
+#: src/common/strings/formatting.cpp:285
 #, no-c-format
 msgid "{0} byte"
 msgid_plural "{0} bytes"
@@ -16492,17 +16500,17 @@ msgid "{0} second"
 msgid_plural "{0} seconds"
 msgstr[0] "{0}초"
 
-#: src/common/strings/formatting.cpp:273
+#: src/common/strings/formatting.cpp:294
 #, no-c-format
 msgid "{0}.{1} GiB"
 msgstr "{0}.{1} GiB"
 
-#: src/common/strings/formatting.cpp:271
+#: src/common/strings/formatting.cpp:292
 #, no-c-format
 msgid "{0}.{1} KiB"
 msgstr "{0}.{1} KiB"
 
-#: src/common/strings/formatting.cpp:272
+#: src/common/strings/formatting.cpp:293
 #, no-c-format
 msgid "{0}.{1} MiB"
 msgstr "{0}.{1} MiB"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix_uk\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-11-02 13:08+0100\n"
+"POT-Creation-Date: 2022-11-02 19:48+0100\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Vlad Anisimov <uniss@ua.fm>, 2020,2022\n"
 "Language-Team: Ukrainian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -5849,6 +5849,7 @@ msgstr "Каталог відносно до каталогу першого в�
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:515
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
+#: src/mkvtoolnix-gui/forms/info/tab.h:154
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:379
 #, no-c-format
 msgid "Directory:"
@@ -6472,7 +6473,7 @@ msgstr "Помилка при обробці тегу у '{0}': деякі об�
 msgid "Error playing audio"
 msgstr "Помилка відтворення аудіо"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:196
+#: src/mkvtoolnix-gui/info/tab.cpp:205
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:80
 #, no-c-format
 msgid "Error reading Matroska file"
@@ -6851,6 +6852,7 @@ msgstr "Ім'я файла"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:514
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
+#: src/mkvtoolnix-gui/forms/info/tab.h:152
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 #, no-c-format
@@ -8503,7 +8505,7 @@ msgstr "Перелік імен файлів конфігурації з роз�
 msgid "Listing content of file \"%1\" in directory \"%2\""
 msgstr "Перелік вмісту файлу \"%1\" у каталозі \"%2\""
 
-#: src/mkvtoolnix-gui/info/tab.cpp:244
+#: src/mkvtoolnix-gui/info/tab.cpp:253
 #, no-c-format
 msgid "Loading…"
 msgstr "Завантаження…"
@@ -8887,6 +8889,11 @@ msgstr "Змінити обрані доріжки"
 #, no-c-format
 msgid "Modification of properties in the section '{0}' was requested, but no corresponding level 1 element was found in the file. {1}\n"
 msgstr "Була задана модифікація властивостей у главі '{0}', але не було знайдено відповідного елементу 1-го рівня у файлі. {1}\n"
+
+#: src/mkvtoolnix-gui/forms/info/tab.h:155
+#, no-c-format
+msgid "Modified:"
+msgstr ""
 
 #: src/common/kax_element_names.cpp:271
 #, no-c-format
@@ -10441,7 +10448,7 @@ msgstr "Читання зашифрованих VOBів не підтримує�
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:841
-#: src/mkvtoolnix-gui/info/tab.cpp:138
+#: src/mkvtoolnix-gui/info/tab.cpp:147
 #: src/mkvtoolnix-gui/merge/attachments.cpp:233
 #, no-c-format
 msgid "Reading failed"
@@ -11316,7 +11323,7 @@ msgstr "Короткий AAC аудіопакет (довжина: {0} < {1})\n"
 msgid "Show &buttons for moving list view entries up and down"
 msgstr "Показувати &кнопки для переміщення доріжок і інших елементів вгору і вниз"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:189
+#: src/mkvtoolnix-gui/info/tab.cpp:198
 #, no-c-format
 msgid "Show &hex dump"
 msgstr "Показувати шістнадцятковий дамп"
@@ -11503,6 +11510,7 @@ msgstr "Розмір"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:174
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:224
+#: src/mkvtoolnix-gui/forms/info/tab.h:153
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
 #: src/mkvtoolnix-gui/merge/output.cpp:260
 #, no-c-format
@@ -12798,7 +12806,7 @@ msgstr "Файл не буде оброблений далі."
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:366
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:155
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:841
-#: src/mkvtoolnix-gui/info/tab.cpp:138
+#: src/mkvtoolnix-gui/info/tab.cpp:147
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "Файл, який ви намагалися відкрити (%1) не можна прочитати."
@@ -16551,7 +16559,7 @@ msgstr "{0} (ідентифікатор доріжки для mkvmerge та mkve
 msgid "{0} ({1:.3f} frames/fields per second for a video track)"
 msgstr "{0} ({1:.3f} кадрів/полів за секунду для доріжки відео)"
 
-#: src/common/strings/formatting.cpp:270
+#: src/common/strings/formatting.cpp:285
 #, no-c-format
 msgid "{0} byte"
 msgid_plural "{0} bytes"
@@ -16590,17 +16598,17 @@ msgstr[0] "{0} секунда"
 msgstr[1] "{0} секунд"
 msgstr[2] "{0} секунд"
 
-#: src/common/strings/formatting.cpp:273
+#: src/common/strings/formatting.cpp:294
 #, no-c-format
 msgid "{0}.{1} GiB"
 msgstr "{0}.{1} ГіБ"
 
-#: src/common/strings/formatting.cpp:271
+#: src/common/strings/formatting.cpp:292
 #, no-c-format
 msgid "{0}.{1} KiB"
 msgstr "{0}.{1} КіБ"
 
-#: src/common/strings/formatting.cpp:272
+#: src/common/strings/formatting.cpp:293
 #, no-c-format
 msgid "{0}.{1} MiB"
 msgstr "{0}.{1} МіБ"

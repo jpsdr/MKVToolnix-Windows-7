@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pl\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2022-11-02 13:08+0100\n"
+"POT-Creation-Date: 2022-11-02 19:48+0100\n"
 "PO-Revision-Date: 2022-01-30 21:30+0100\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Polish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/"
@@ -5827,6 +5827,7 @@ msgstr "&Katalog podrzędny względem katalogu pierwszego pliku źródłowego:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:515
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:145
+#: src/mkvtoolnix-gui/forms/info/tab.h:154
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:379
 #, no-c-format
 msgid "Directory:"
@@ -6450,7 +6451,7 @@ msgstr "Błąd analizy składniowej tagów w \"{0}\": brakuje niektórych wymaga
 msgid "Error playing audio"
 msgstr "Błąd podczas wczytywania pliku ustawień"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:196
+#: src/mkvtoolnix-gui/info/tab.cpp:205
 #: src/mkvtoolnix-gui/util/kax_analyzer.cpp:80
 #, no-c-format
 msgid "Error reading Matroska file"
@@ -6829,6 +6830,7 @@ msgstr "Nazwa pliku"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:514
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
+#: src/mkvtoolnix-gui/forms/info/tab.h:152
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 #, no-c-format
@@ -8481,7 +8483,7 @@ msgstr "Wyszczególnienie plików konfiguracyjnych (mających rozszerzenie .mtxc
 msgid "Listing content of file \"%1\" in directory \"%2\""
 msgstr "Listowanie zawartości pliku »%1« w katalogu »%2«"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:244
+#: src/mkvtoolnix-gui/info/tab.cpp:253
 #, no-c-format
 msgid "Loading…"
 msgstr "Wczytywanie..."
@@ -8865,6 +8867,11 @@ msgstr "Ścieżki segmentu"
 #, no-c-format
 msgid "Modification of properties in the section '{0}' was requested, but no corresponding level 1 element was found in the file. {1}\n"
 msgstr "Zostało wydane żądanie modyfikacji właściwości w sekcji \"{0}\", ale nie został znaleziony w pliku żaden odpowiedni element poziomu1. {1}\n"
+
+#: src/mkvtoolnix-gui/forms/info/tab.h:155
+#, no-c-format
+msgid "Modified:"
+msgstr ""
 
 #: src/common/kax_element_names.cpp:271
 #, no-c-format
@@ -10421,7 +10428,7 @@ msgstr "Zaszyfrowane pliki VOB nie są obsługiwane.\n"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:829
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:841
-#: src/mkvtoolnix-gui/info/tab.cpp:138
+#: src/mkvtoolnix-gui/info/tab.cpp:147
 #: src/mkvtoolnix-gui/merge/attachments.cpp:233
 #, no-c-format
 msgid "Reading failed"
@@ -11299,7 +11306,7 @@ msgstr "Krótki pakiet dźwięku AAC (długość: {0} < {1})\n"
 msgid "Show &buttons for moving list view entries up and down"
 msgstr "Pokaż przycis&ki służące do przesuwania pozycji — np. plików, ścieżek, załączników — w widoku listowym (w górę i w dół)"
 
-#: src/mkvtoolnix-gui/info/tab.cpp:189
+#: src/mkvtoolnix-gui/info/tab.cpp:198
 #, no-c-format
 msgid "Show &hex dump"
 msgstr "Pokaż zrz&ut szesnastkowy"
@@ -11486,6 +11493,7 @@ msgstr "Rozmiar"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:174
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:224
+#: src/mkvtoolnix-gui/forms/info/tab.h:153
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
 #: src/mkvtoolnix-gui/merge/output.cpp:260
 #, no-c-format
@@ -12791,7 +12799,7 @@ msgstr "Plik nie może być dalej przetwarzany."
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:366
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:155
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:841
-#: src/mkvtoolnix-gui/info/tab.cpp:138
+#: src/mkvtoolnix-gui/info/tab.cpp:147
 #, no-c-format
 msgid "The file you tried to open (%1) could not be read successfully."
 msgstr "Plik, który próbujesz otworzyć (%1), nie mógł zostać wczytany pomyślnie."
@@ -16549,7 +16557,7 @@ msgstr "{0} (ID ścieżki dla mkvmerge i mkvextract: {1})"
 msgid "{0} ({1:.3f} frames/fields per second for a video track)"
 msgstr "{0} ({1:.3f} klatek/pól na sekundę dla ścieżki wideo)"
 
-#: src/common/strings/formatting.cpp:270
+#: src/common/strings/formatting.cpp:285
 #, no-c-format
 msgid "{0} byte"
 msgid_plural "{0} bytes"
@@ -16588,17 +16596,17 @@ msgstr[0] "{0} sekunda"
 msgstr[1] "{0} sekundy"
 msgstr[2] "{0} sekund"
 
-#: src/common/strings/formatting.cpp:273
+#: src/common/strings/formatting.cpp:294
 #, no-c-format
 msgid "{0}.{1} GiB"
 msgstr "{0},{1} GiB"
 
-#: src/common/strings/formatting.cpp:271
+#: src/common/strings/formatting.cpp:292
 #, no-c-format
 msgid "{0}.{1} KiB"
 msgstr "{0},{1} KiB"
 
-#: src/common/strings/formatting.cpp:272
+#: src/common/strings/formatting.cpp:293
 #, no-c-format
 msgid "{0}.{1} MiB"
 msgstr "{0},{1} MiB"
