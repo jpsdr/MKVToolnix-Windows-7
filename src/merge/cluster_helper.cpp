@@ -15,6 +15,7 @@
 #include "common/common_pch.h"
 
 #include "common/at_scope_exit.h"
+#include "common/command_line.h"
 #include "common/doc_type_version_handler.h"
 #include "common/ebml.h"
 #include "common/hacks.h"
@@ -217,10 +218,16 @@ cluster_helper_c::split(packet_cptr &packet) {
   bool create_new_file       = current_split_point.m_create_new_file;
   bool previously_discarding = m->discarding;
   auto generate_chapter      = false;
+  auto formatted_splitting_before = mtx::string::format_timestamp(packet->assigned_timestamp);
 
-  mxdebug_if(m->debug_splitting, fmt::format("Splitting: splitpoint {0} reached before timestamp {1}, create new? {2}.\n", current_split_point.str(), mtx::string::format_timestamp(packet->assigned_timestamp), create_new_file));
+  mxdebug_if(m->debug_splitting, fmt::format("Splitting: splitpoint {0} reached before timestamp {1}, create new? {2}.\n", current_split_point.str(), formatted_splitting_before, create_new_file));
 
   finish_file(false, create_new_file, previously_discarding);
+
+  if (mtx::cli::g_gui_mode)
+    mxinfo(fmt::format("#GUI#splitting_befeore_timestamp {0}\n", formatted_splitting_before));
+
+  mxinfo(fmt::format(Y("Timestamp used in split decision: {0}\n"), formatted_splitting_before));
 
   if (current_split_point.m_use_once) {
     if (   !current_split_point.m_discard

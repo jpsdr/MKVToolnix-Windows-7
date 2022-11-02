@@ -1,5 +1,14 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: when splitting is active the program will output the timestamps
+  actually used for making the decision when to split. If GUI mode is active,
+  a specially formatted line `#GUI#splitting_before_timestamp <timestamp>` is
+  output as well. Lines prefixed with`#GUI#` are suitable for machine parsing,
+  won't be translated and are guaranteed not to change in format. Implements
+  #3421.
+
 ## Bug fixes
 
 * mkvmerge: HDMV PGS subtitles: reverted the change that implemented a
