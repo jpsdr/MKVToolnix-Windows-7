@@ -26,13 +26,13 @@
 
 #include "element_info.h"
 
-static int64_t g_start = 0;
-static int64_t g_end   = std::numeric_limits<long long>::max();
+static uint64_t g_start = 0;
+static uint64_t g_end   = std::numeric_limits<uint64_t>::max();
 
 static auto g_errors_found   = false;
 static auto g_warnings_found = false;
 
-static int64_t g_file_size;
+static uint64_t g_file_size;
 static mm_file_io_c *g_in;
 
 static std::map<int64_t, bool> g_is_master;
@@ -44,8 +44,8 @@ public:
 
   vint_c(int64_t p_value,
          int p_coded_size)
-    : value(p_value)
-    , coded_size(p_coded_size)
+    : value{p_value}
+    , coded_size{p_coded_size}
   {
   }
 
@@ -83,7 +83,8 @@ static std::string
 parse_args(std::vector<std::string> &args) {
   std::string file_name;
 
-  std::vector<std::string>::iterator arg = args.begin();
+  auto arg = args.begin();
+
   while (arg != args.end()) {
     if ((*arg == "-s") || (*arg == "--start")) {
       ++arg;
@@ -145,7 +146,7 @@ public:
   error_type_e code;
 
   id_error_c(error_type_e p_code)
-    : code(p_code)
+    : code{p_code}
   {
   }
 };
@@ -160,33 +161,27 @@ public:
   error_type_e code;
 
   size_error_c(error_type_e p_code)
-    : code(p_code)
+    : code{p_code}
   {
   }
 };
 
 static std::string
-level_string(int level) {
-  std::string s;
-  int i;
-
-  for (i = 0; i < level; ++i)
-    s += " ";
-
-  return s;
+level_string(unsigned int level) {
+  return std::string(static_cast<std::string::size_type>(level), ' ');
 }
 
 static vint_c
-read_id(int64_t end_pos) {
+read_id(uint64_t end_pos) {
   try {
-    int64_t pos = g_in->getFilePointer();
-    int mask    = 0x80;
-    int id_len  = 1;
+    auto pos    = g_in->getFilePointer();
+    auto mask   = 0x80;
+    auto id_len = 1;
 
     if (pos >= end_pos)
       throw id_error_c(id_error_c::end_of_scope);
 
-    unsigned char first_byte = g_in->read_uint8();
+    auto first_byte = g_in->read_uint8();
 
     while (0 != mask) {
       if (0 != (first_byte & mask))
@@ -206,13 +201,13 @@ read_id(int64_t end_pos) {
       throw id_error_c(id_error_c::end_of_scope);
 
     uint32_t id = first_byte;
-    int i;
-    for (i = 1; i < id_len; ++i) {
+
+    for (int i = 1; i < id_len; ++i) {
       id <<= 8;
       id  |= g_in->read_uint8();
     }
 
-    return vint_c(id, id_len);
+    return { id, id_len };
 
   } catch (mtx::exception &error) {
     throw id_error_c(id_error_c::end_of_file);
@@ -220,16 +215,16 @@ read_id(int64_t end_pos) {
 }
 
 static vint_c
-read_size(int64_t end_pos) {
+read_size(uint64_t end_pos) {
   try {
-    int64_t pos  = g_in->getFilePointer();
-    int mask     = 0x80;
-    int size_len = 1;
+    auto pos      = g_in->getFilePointer();
+    auto mask     = 0x80;
+    auto size_len = 1;
 
     if (pos >= end_pos)
       throw size_error_c(size_error_c::end_of_scope);
 
-    unsigned char first_byte = g_in->read_uint8();
+    auto first_byte = g_in->read_uint8();
 
     while (0 != mask) {
       if (0 != (first_byte & mask))
@@ -243,13 +238,13 @@ read_size(int64_t end_pos) {
       throw size_error_c(size_error_c::end_of_scope);
 
     int64_t size = first_byte & ~mask;
-    int i;
-    for (i = 1; i < size_len; ++i) {
+
+    for (int i = 1; i < size_len; ++i) {
       size <<= 8;
       size  |= g_in->read_uint8();
     }
 
-    return vint_c(size, size_len);
+    return { size, size_len };
 
   } catch (mtx::exception &error) {
     throw size_error_c(size_error_c::end_of_file);
@@ -257,16 +252,16 @@ read_size(int64_t end_pos) {
 }
 
 static void
-parse_content(int level,
-              int64_t end_pos) {
-  while (static_cast<int64_t>(g_in->getFilePointer()) < end_pos) {
-    int64_t element_start_pos = g_in->getFilePointer();
+parse_content(unsigned int level,
+              uint64_t end_pos) {
+  while (g_in->getFilePointer() < end_pos) {
+    auto element_start_pos = g_in->getFilePointer();
 
     try {
-      vint_c  id          = read_id(end_pos);
-      vint_c size         = read_size(end_pos);
+      auto  id          = read_id(end_pos);
+      auto size         = read_size(end_pos);
+      auto element_name = g_element_names[id.value];
 
-      std::string element_name = g_element_names[id.value];
       if (element_name.empty())
         element_name      = Y("unknown");
 
@@ -282,7 +277,7 @@ parse_content(int level,
           g_warnings_found = true;
       }
 
-      int64_t content_end_pos = size.is_unknown() ? end_pos : g_in->getFilePointer() + size.value;
+      auto content_end_pos = size.is_unknown() ? end_pos : g_in->getFilePointer() + size.value;
 
       if (content_end_pos > end_pos) {
         mxinfo(fmt::format(Y("{0}  Error: Element ends after scope\n"), level_string(level)));
@@ -334,7 +329,7 @@ parse_content(int level,
 
 static void
 parse_file(const std::string &file_name) {
-  mm_file_io_c in(file_name);
+  mm_file_io_c in{file_name};
 
   g_in        = &in;
   g_file_size = in.get_size();
