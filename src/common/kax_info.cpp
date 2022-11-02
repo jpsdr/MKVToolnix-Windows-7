@@ -1262,7 +1262,7 @@ kax_info_c::process_file() {
     retain_element(l0);
 
     if (!Is<KaxSegment>(*l0)) {
-      show_element(l0.get(), 0, Y("Unknown element"));
+      handle_elements_generic(*l0);
       l0->SkipData(*p->m_es, EBML_CONTEXT(l0));
 
       continue;
