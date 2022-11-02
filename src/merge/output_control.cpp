@@ -1613,8 +1613,6 @@ finish_file(bool last_file,
   run_before_file_finished_packetizer_hooks();
 
   bool do_output = verbose && !dynamic_cast<mm_null_io_c *>(s_out.get());
-  if (do_output)
-    mxinfo("\n");
 
   // Render the track headers a second time if the user has requested that.
   if (mtx::hacks::is_engaged(mtx::hacks::WRITE_HEADERS_TWICE)) {
