@@ -1314,6 +1314,37 @@ kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e
 
   mxdebug_if(m_debug, fmt::format("  trailing seek head written; segment size adjusted; forward seek head size {0} available(first seek head's size) {1} diff {2}\n", m_data[first_seek_head_idx]->m_size, forward_seek_head->ElementSize(true), size_diff));
 
+  if (size_diff < 0) {
+    mxdebug_if(m_debug, fmt::format("  not enough space! voiding existing entry & re-trying to create_new_meta_seek_at_start\n"));
+
+    auto &data = *m_data[first_seek_head_idx];
+
+    m_file->setFilePointer(data.m_pos);
+
+    EbmlVoid evoid;
+    evoid.SetSize(data.m_size);
+    evoid.UpdateSize();
+    evoid.SetSize(data.m_size - evoid.HeadSize());
+    evoid.Render(*m_file);
+
+    // Update the internal records to reflect the changes.
+    data.m_id = EBML_ID(EbmlVoid);
+
+    // We don't have a seek head to copy. Create one before the first chapter if possible.
+    if (create_new_meta_seek_at_start(seek_head))
+      return;
+
+    mxdebug_if(m_debug, fmt::format("  no place found for one; trying move_seek_head_to_end_and_create_new_one_at_start\n"));
+
+    // We haven't found a place for the new seek head before the first
+    // cluster. Therefore we must try to move an existing level 1
+    // element to the end of the file first.
+    if (move_level1_element_before_cluster_to_end_of_file())
+      add_to_meta_seek(seek_head);
+
+    return;
+  }
+
   m_file->setFilePointer(m_data[first_seek_head_idx]->m_pos);
   forward_seek_head->Render(*m_file, true);
   if (m_doc_type_version_handler)

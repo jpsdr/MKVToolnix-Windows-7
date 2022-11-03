@@ -37,6 +37,15 @@
   MKVToolNix itself, causing them to declare such files as invalid. The
   programs will now create the EBML Void element inside the EBML Head element,
   making them a level 1 element instead of a level 0 element. Fixes #3355.
+* mkvpropedit, MKVToolNix GUI's chapter & header editors: often the programs
+  have to relocate the Master elements in which the modifications were
+  done. In that case the Seek Head elements must also be updated to reflect to
+  the Master elements' new positions. If a file contained a Seek Head element
+  at the start already and if that Seek Head was too small to contain the
+  updated positions, the programs would end up in an endless loop trying to
+  write data to the end, creating ever-growing files. This is now handled
+  properly by voiding this too-small Seek Head & finding a proper space for a
+  new one instead. Fixes #3338.
 
 
 # Version 71.1.0 "Fortitude" 2022-10-09
