@@ -52,6 +52,8 @@
 * mkvextract: IETF BCP 47/RFC 5646 language tags: mkvextract will now use &
   prefer IETF BCP 47 track language elements if they're present. Only affects
   the VobSub & USF subtitle extraction.
+* mkvmerge: Matroska reader: fixed reading files with EBML Void elements
+  before the Matroska Segment element.
 
 
 # Version 71.1.0 "Fortitude" 2022-10-09

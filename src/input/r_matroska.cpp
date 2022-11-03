@@ -19,7 +19,9 @@
 #include <QDateTime>
 #include <QRegularExpression>
 
+#include <ebml/EbmlCrc32.h>
 #include <ebml/EbmlContexts.h>
+#include <ebml/EbmlDummy.h>
 #include <ebml/EbmlHead.h>
 #include <ebml/EbmlStream.h>
 #include <ebml/EbmlSubHead.h>
@@ -1550,14 +1552,23 @@ kax_reader_c::read_headers_internal() {
     // Don't verify its data for now.
     l0->SkipData(*m_es, EBML_CONTEXT(l0));
 
-    // Next element must be a segment
-    l0.reset(m_es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL));
-    if (!l0) {
-      if (verbose)
-        mxwarn(Y("matroska_reader: No segment found.\n"));
-      return false;
-    }
-    if (!Is<KaxSegment>(*l0)) {
+    while (true) {
+      // Next element must be a segment
+      l0.reset(m_es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL));
+      if (!l0) {
+        if (verbose)
+          mxwarn(Y("matroska_reader: No segment found.\n"));
+        return false;
+      }
+
+      if (Is<KaxSegment>(*l0))
+        break;
+
+      if (Is<EbmlDummy>(*l0) || Is<EbmlCrc32>(*l0) || Is<EbmlVoid>(*l0)) {
+        l0->SkipData(*m_es, EBML_CONTEXT(l0));
+        continue;
+      }
+
       if (verbose)
         mxwarn(Y("matroska_reader: No segment found.\n"));
       return false;
