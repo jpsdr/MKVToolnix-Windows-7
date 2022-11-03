@@ -87,11 +87,9 @@ xtr_vobsub_c::create_file(xtr_base_c *master,
       mxerror(fmt::format(Y("Cannot extract tracks of different kinds to the same file. This was requested for the tracks {0} and {1}.\n"),
                           m_tid, m_master->m_tid));
 
-    if ((!m_private_data && vmaster->m_private_data) ||
-        (m_private_data &&
-         (!vmaster->m_private_data ||
-          (m_private_data->get_size() != vmaster->m_private_data->get_size() ||
-           memcmp(m_private_data->get_buffer(), vmaster->m_private_data->get_buffer(), m_private_data->get_size())))))
+    if (   (!m_private_data != !vmaster->m_private_data)
+        || (m_private_data && (m_private_data->get_size() != vmaster->m_private_data->get_size()))
+        || (m_private_data && memcmp(m_private_data->get_buffer(), vmaster->m_private_data->get_buffer(), m_private_data->get_size())))
       mxerror(fmt::format(Y("Two VobSub tracks can only be extracted into the same file if their CodecPrivate data matches. "
                             "This is not the case for the tracks {0} and {1}.\n"), m_tid, m_master->m_tid));
 
