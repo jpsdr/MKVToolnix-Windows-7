@@ -10,6 +10,9 @@
   #3421.
 * MKVToolNix GUI: info tool: added information about the file (directory,
   size, modification timestamp) at the top of each tab. Implements #3407.
+* MKVToolNix GUI: multiplexer: when dragging & dropping directories to the
+  "attachments" tab, the files contained in those directories will be
+  attached. Implements #3410.
 
 ## Bug fixes
 

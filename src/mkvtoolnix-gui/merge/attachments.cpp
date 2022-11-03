@@ -9,6 +9,7 @@
 #include "mkvtoolnix-gui/merge/tab.h"
 #include "mkvtoolnix-gui/merge/tab_p.h"
 #include "mkvtoolnix-gui/forms/merge/tab.h"
+#include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_widget.h"
 #include "mkvtoolnix-gui/util/header_view_manager.h"
@@ -277,7 +278,7 @@ Tab::prepareFileForAttaching(QString const &fileName,
 void
 Tab::addAttachments(QStringList const &fileNames) {
   QList<AttachmentPtr> attachmentsToAdd;
-  for (auto &fileName : fileNames) {
+  for (auto &fileName : Util::replaceDirectoriesByContainedFiles(fileNames)) {
     auto attachment = prepareFileForAttaching(fileName, false);
     if (attachment)
       attachmentsToAdd << attachment;

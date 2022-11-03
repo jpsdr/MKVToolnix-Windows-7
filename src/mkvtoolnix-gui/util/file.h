@@ -20,6 +20,8 @@ QUrl pathToFileUrl(QString const &path);
 QString removeInvalidPathCharacters(QString fileName);
 QString replaceInvalidFileNameCharacters(QString fileName);
 
+QStringList replaceDirectoriesByContainedFiles(QStringList const &namesToCheck);
+
 QString detectMIMEType(QString const &fileName);
 
 }
