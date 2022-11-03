@@ -17,6 +17,7 @@
 #include <matroska/KaxBlock.h>
 #include <matroska/KaxTracks.h>
 
+#include "common/bcp47.h"
 #include "common/content_decoder.h"
 #include "common/path.h"
 #include "common/timestamp.h"
@@ -66,6 +67,8 @@ public:
   virtual const char *get_container_name() {
     return m_container_name.c_str();
   };
+
+  virtual mtx::bcp47::language_c get_track_language(libmatroska::KaxTrackEntry &track);
 
   virtual void init_content_decoder(libmatroska::KaxTrackEntry &track);
   virtual memory_cptr decode_codec_private(libmatroska::KaxCodecPrivate *priv);

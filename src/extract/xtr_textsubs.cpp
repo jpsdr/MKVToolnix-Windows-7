@@ -281,11 +281,7 @@ xtr_usf_c::create_file(xtr_base_c *master,
   memory_cptr new_priv = decode_codec_private(priv);
   m_codec_private.append((const char *)new_priv->get_buffer(), new_priv->get_size());
 
-  auto language = FindChild<libmatroska::KaxTrackLanguage>(&track);
-  if (!language)
-    m_language = "eng";
-  else
-    m_language = std::string(*language);
+  m_language = get_track_language(track);
 
   if (master) {
     xtr_usf_c *usf_master = dynamic_cast<xtr_usf_c *>(master);
@@ -358,7 +354,7 @@ xtr_usf_c::handle_frame(xtr_frame_t &f) {
 void
 xtr_usf_c::finish_track() {
   auto subtitles = m_doc->document_element().append_child("subtitles");
-  subtitles.append_child("language").append_attribute("code").set_value(m_language.c_str());
+  subtitles.append_child("language").append_attribute("code").set_value(m_language.get_closest_iso639_2_alpha_3_code().c_str());
 
   for (auto &entry : m_entries) {
     std::string text = "<subtitle>"s + entry.m_text + "</subtitle>";

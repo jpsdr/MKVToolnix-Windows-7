@@ -71,7 +71,7 @@ xtr_vobsub_c::create_file(xtr_base_c *master,
   }
 
   m_master   = master;
-  m_language = kt_get_language(track);
+  m_language = get_track_language(track);
 
   if (!master) {
     try {
@@ -273,8 +273,7 @@ xtr_vobsub_c::finish_file() {
 void
 xtr_vobsub_c::write_idx(mm_io_c &idx,
                         int index) {
-  auto language = mtx::iso639::look_up(m_language);
-  auto iso639_1 = language ? language->alpha_2_code : "--"s;
+  auto iso639_1 = m_language.get_language();
   idx.puts(fmt::format("\nid: {0}, index: {1}\n", iso639_1.empty() ? "--"s : iso639_1, index));
 
   size_t i;

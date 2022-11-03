@@ -87,7 +87,8 @@ private:
       m_text(text), m_start(start), m_end(end) { }
   };
 
-  std::string m_sub_charset, m_simplified_sub_charset, m_codec_private, m_language;
+  std::string m_sub_charset, m_simplified_sub_charset, m_codec_private;
+  mtx::bcp47::language_c m_language;
   mtx::xml::document_cptr m_doc;
   std::vector<usf_entry_t> m_entries;
 

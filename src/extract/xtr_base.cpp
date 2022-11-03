@@ -208,6 +208,17 @@ xtr_base_c::create_extractor(const std::string &new_codec_id,
   return result;
 }
 
+mtx::bcp47::language_c
+xtr_base_c::get_track_language(libmatroska::KaxTrackEntry &track) {
+  auto language_bcp47 = FindChild<libmatroska::KaxLanguageIETF>(&track);
+  if (language_bcp47)
+    return mtx::bcp47::language_c::parse(language_bcp47->GetValue());
+
+  auto language = FindChild<libmatroska::KaxTrackLanguage>(&track);
+
+  return mtx::bcp47::language_c::parse(language ? language->GetValue() : "eng"s);
+}
+
 void
 xtr_fullraw_c::create_file(xtr_base_c *master,
                            KaxTrackEntry &track) {

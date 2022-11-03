@@ -25,7 +25,6 @@ int64_t kt_get_number(libmatroska::KaxTrackEntry &track);
 int64_t kt_get_uid(libmatroska::KaxTrackEntry &track);
 std::string kt_get_codec_id(libmatroska::KaxTrackEntry &track);
 int kt_get_max_blockadd_id(libmatroska::KaxTrackEntry &track);
-std::string kt_get_language(libmatroska::KaxTrackEntry &track);
 
 int kt_get_a_channels(libmatroska::KaxTrackEntry &track);
 double kt_get_a_sfreq(libmatroska::KaxTrackEntry &track);

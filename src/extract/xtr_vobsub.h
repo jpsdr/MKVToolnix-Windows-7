@@ -23,7 +23,7 @@ public:
   std::vector<xtr_vobsub_c *> m_slaves;
   memory_cptr m_private_data;
   std::filesystem::path m_idx_file_name, m_sub_file_name;
-  std::string m_language;
+  mtx::bcp47::language_c m_language;
   int m_stream_id;
 
 public:

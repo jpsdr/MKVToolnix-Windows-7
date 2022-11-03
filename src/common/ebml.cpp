@@ -303,11 +303,6 @@ kt_get_codec_id(KaxTrackEntry &track) {
   return FindChildValue<KaxCodecID>(track);
 }
 
-std::string
-kt_get_language(KaxTrackEntry &track) {
-  return FindChildValue<KaxTrackLanguage>(track);
-}
-
 int
 kt_get_max_blockadd_id(KaxTrackEntry &track) {
   return FindChildValue<KaxMaxBlockAdditionID>(track);

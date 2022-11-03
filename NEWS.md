@@ -49,6 +49,9 @@
   write data to the end, creating ever-growing files. This is now handled
   properly by voiding this too-small Seek Head & finding a proper space for a
   new one instead. Fixes #3338.
+* mkvextract: IETF BCP 47/RFC 5646 language tags: mkvextract will now use &
+  prefer IETF BCP 47 track language elements if they're present. Only affects
+  the VobSub & USF subtitle extraction.
 
 
 # Version 71.1.0 "Fortitude" 2022-10-09
