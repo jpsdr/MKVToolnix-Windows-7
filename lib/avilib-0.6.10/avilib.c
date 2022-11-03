@@ -486,7 +486,7 @@ static int avi_add_odml_index_entry(avi_t *AVI, unsigned char *tag, long flags, 
 	    return -1;
 
 	for (audtr = 0; audtr < AVI->anum; audtr++) {
-	    char aud[5];
+	    char aud[14];
 	    if (!AVI->track[audtr].audio_superindex) {
 		// not initialized -> no index
 		continue;
