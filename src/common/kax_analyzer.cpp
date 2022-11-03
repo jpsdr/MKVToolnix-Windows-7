@@ -186,14 +186,15 @@ kax_analyzer_c::validate_data_structures(const std::string &hook_name) {
     }
   }
 
-  if (!ok) {
-    debug_dump_elements();
+  if (ok)
+    return;
 
-    if (m_throw_on_error)
-      throw mtx::kax_analyzer_x{Y("The data in the file is corrupted and cannot be modified safely")};
+  debug_dump_elements();
 
-    debug_abort_process();
-  }
+  if (m_throw_on_error)
+    throw mtx::kax_analyzer_x{Y("The data in the file is corrupted and cannot be modified safely")};
+
+  debug_abort_process();
 }
 
 void
@@ -1320,23 +1321,25 @@ kax_analyzer_c::create_new_meta_seek_at_start(EbmlElement *e) {
   new_seek_head->UpdateSize(true);
 
   for (auto data_idx = 0u; m_data.size() > data_idx; ++data_idx) {
+    auto &data = *m_data[data_idx];
+
     // We can only overwrite void elements. Skip the others.
-    if (!Is<EbmlVoid>(m_data[data_idx]->m_id))
+    if (!Is<EbmlVoid>(data.m_id))
       continue;
 
     // Skip the element if it doesn't offer enough space for the seek head.
-    if (m_data[data_idx]->m_size < static_cast<int64_t>(new_seek_head->ElementSize(true)))
+    if (data.m_size < static_cast<int64_t>(new_seek_head->ElementSize(true)))
       continue;
 
     // We've found a suitable spot. Write the seek head.
-    m_file->setFilePointer(m_data[data_idx]->m_pos);
+    m_file->setFilePointer(data.m_pos);
     new_seek_head->Render(*m_file, true);
     if (m_doc_type_version_handler)
       m_doc_type_version_handler->account(*new_seek_head, true);
 
     // Adjust the internal records for the new seek head.
-    m_data[data_idx]->m_size = new_seek_head->ElementSize(true);
-    m_data[data_idx]->m_id   = EBML_ID(KaxSeekHead);
+    data.m_size = new_seek_head->ElementSize(true);
+    data.m_id   = EBML_ID(KaxSeekHead);
 
     // Write a void element after the newly written seek head in order to
     // cover the space previously occupied by the old void element.
