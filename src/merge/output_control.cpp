@@ -540,6 +540,12 @@ render_headers(mm_io_c *out) {
   try {
     render_ebml_head(out);
 
+    if (debugging_c::requested("void_before_segment")) {
+      EbmlVoid v;
+      v.SetSize(4);
+      v.Render(*out);
+    }
+
     s_kax_infos = std::make_unique<KaxInfo>();
 
     s_kax_duration = new KaxMyDuration{ !g_video_packetizer || (TIMESTAMP_SCALE_MODE_AUTO == g_timestamp_scale_mode) ? EbmlFloat::FLOAT_64 : EbmlFloat::FLOAT_32};
