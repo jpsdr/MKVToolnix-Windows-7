@@ -160,7 +160,7 @@ kax_analyzer_c::debug_dump_elements() {
 
 void
 kax_analyzer_c::debug_dump_elements_maybe(const std::string &hook_name) {
-  if (!analyzer_debugging_requested(hook_name))
+  if (!m_debug_elements && !debugging_c::requested("kax_analyzer_"s + hook_name))
     return;
 
   log_debug_message(fmt::format("kax_analyzer_{0} dumping elements:\n", hook_name));
@@ -451,6 +451,7 @@ kax_analyzer_c::read_element(kax_analyzer_data_c const &element_data) {
 
 bool
 kax_analyzer_c::validate_and_break(std::string const &hook_name) {
+  mxdebug_if(m_debug, fmt::format("validate_and_break {0}\n", hook_name));
   debug_dump_elements_maybe(hook_name);
   validate_data_structures(hook_name);
 
@@ -1206,6 +1207,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
 
 std::pair<bool, int>
 kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
+  mxdebug_if(m_debug, fmt::format("try_adding_to_existing_meta_seek start\n"));
   auto first_seek_head_idx = -1;
 
   for (auto data_idx = 0u; m_data.size() > data_idx; ++data_idx) {
@@ -1235,7 +1237,13 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
 
     // We can use this seek head if it is at the end of the file, or if there
     // is enough space behind it in form of void elements.
-    if ((m_data.size() != (data_idx + 1)) && (seek_head->ElementSize(true) > available_space))
+    auto is_at_end         = m_data.size() == (data_idx + 1);
+    auto have_enough_space = seek_head->ElementSize(true) <= available_space;
+    auto use_this          = is_at_end || have_enough_space;
+
+    mxdebug_if(m_debug, fmt::format("  seek head idx {0} available_space {1} at end? {2} enough space? {3} use? {4}\n", data_idx, available_space, is_at_end, have_enough_space, use_this));
+
+    if (!use_this)
       continue;
 
     // Write the seek head.
@@ -1273,6 +1281,8 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
 void
 kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e,
                                                                   int first_seek_head_idx) {
+  mxdebug_if(m_debug, fmt::format("move_seek_head_to_end_and_create_new_one_at_start start first_seek_head_idx {0}\n", first_seek_head_idx));
+
   // Read the first seek head…
   auto element   = read_element(first_seek_head_idx);
   auto seek_head = dynamic_cast<KaxSeekHead *>(element.get());
@@ -1300,6 +1310,10 @@ kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e
   forward_seek_head->IndexThis(*seek_head, *m_segment.get());
   forward_seek_head->UpdateSize(true);
 
+  auto size_diff = static_cast<int>(m_data[first_seek_head_idx]->m_size) - static_cast<int>(forward_seek_head->ElementSize(true));
+
+  mxdebug_if(m_debug, fmt::format("  trailing seek head written; segment size adjusted; forward seek head size {0} available(first seek head's size) {1} diff {2}\n", m_data[first_seek_head_idx]->m_size, forward_seek_head->ElementSize(true), size_diff));
+
   m_file->setFilePointer(m_data[first_seek_head_idx]->m_pos);
   forward_seek_head->Render(*m_file, true);
   if (m_doc_type_version_handler)
@@ -1308,14 +1322,20 @@ kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e
   // Update the internal record to reflect that there's a new seek head.
   m_data[first_seek_head_idx]->m_size = forward_seek_head->ElementSize(true);
 
+  mxdebug_if(m_debug, fmt::format("  about to handle void elements\n"));
+
   // Create a void element behind the small new first seek head.
   handle_void_elements(first_seek_head_idx);
+
+  mxdebug_if(m_debug, fmt::format("  void elements handled\n"));
 
   // We're done.
 }
 
 bool
 kax_analyzer_c::create_new_meta_seek_at_start(EbmlElement *e) {
+  mxdebug_if(m_debug, fmt::format("create_new_meta_seek_at_start start\n"));
+
   auto new_seek_head = std::make_shared<KaxSeekHead>();
   new_seek_head->IndexThis(*e, *m_segment.get());
   new_seek_head->UpdateSize(true);
@@ -1330,6 +1350,8 @@ kax_analyzer_c::create_new_meta_seek_at_start(EbmlElement *e) {
     // Skip the element if it doesn't offer enough space for the seek head.
     if (data.m_size < static_cast<int64_t>(new_seek_head->ElementSize(true)))
       continue;
+
+    mxdebug_if(m_debug, fmt::format("  spot at idx {0} size {1} file pos {2}\n", data_idx, data.m_size, data.m_pos));
 
     // We've found a suitable spot. Write the seek head.
     m_file->setFilePointer(data.m_pos);
@@ -1431,6 +1453,8 @@ kax_analyzer_c::move_level1_element_before_cluster_to_end_of_file() {
 void
 kax_analyzer_c::add_to_meta_seek(EbmlElement *e) {
   auto result = try_adding_to_existing_meta_seek(e);
+
+  mxdebug_if(m_debug, fmt::format("add_to_meta_seek: adding to existing result {0}/{1}\n", result.first, result.second));
 
   if (result.first)
     return;

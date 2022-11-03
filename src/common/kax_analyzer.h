@@ -110,7 +110,7 @@ private:
   uint64_t m_segment_end{};
   std::map<int64_t, bool> m_meta_seeks_by_position;
   std::shared_ptr<libebml::EbmlStream> m_stream;
-  debugging_option_c m_debug{"kax_analyzer"};
+  debugging_option_c m_debug{"kax_analyzer"}, m_debug_elements{"kax_analyzer_elements"};
   parse_mode_e m_parse_mode{parse_mode_full};
   open_mode m_open_mode{MODE_WRITE};
   bool m_throw_on_error{};
