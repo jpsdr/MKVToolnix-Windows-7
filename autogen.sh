@@ -49,17 +49,6 @@ if test "$DIE" -eq 1; then
         exit 1
 fi
 
-export WANT_AUTOCONF_2_5=1
-AUTOCONFVER=`autoconf --version | head -n 1 | sed 's;[^0-9\.];;g'`
-case $AUTOCONFVER in
-  2.1*)
-    echo autoconf 2.5 or later is required to build mkvtoolnix.
-    echo "Download the appropriate package for your distribution,"
-    echo "or get the source tarball at ftp://ftp.gnu.org/pub/gnu/"
-    exit 1
-    ;;
-esac
-
 echo "Generating configuration files for $package, please wait...."
 
 rm -f config.h config.h.in stamp-h1 &> /dev/null
