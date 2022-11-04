@@ -35,10 +35,13 @@ LinuxProgramRunner::isRunProgramTypeSupported(Util::Settings::RunProgramType typ
   if (mtx::sys::find_exe_in_path(mtx::fs::to_path("systemctl")).empty())
     return false;
 
-#if defined(HAVE_QTDBUS)
-  if (type == Util::Settings::RunProgramType::ShowDesktopNotification)
-    return true;
-#endif
+// Intentionally deactivated for the time being as there's no
+// implementation for Windows yet.
+
+// #if defined(HAVE_QTDBUS)
+//   if (type == Util::Settings::RunProgramType::ShowDesktopNotification)
+//     return true;
+// #endif
 
   return mtx::included_in(type, Util::Settings::RunProgramType::ShutDownComputer, Util::Settings::RunProgramType::HibernateComputer, Util::Settings::RunProgramType::SleepComputer);
 }
