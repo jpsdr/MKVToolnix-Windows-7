@@ -6,7 +6,7 @@ qt_min_ver=5.9.0
 
 check_qt5() {
   AC_ARG_WITH(qmake,
-    AC_HELP_STRING([--with-qmake=prog],[use prog instead of looking for qmake for Qt 5]),
+    AS_HELP_STRING([--with-qmake=prog],[use prog instead of looking for qmake for Qt 5]),
     [ QMAKE="$with_qmake" ],)
 
   if ! test -z "$QMAKE"; then
@@ -128,7 +128,7 @@ check_qt5() {
       LIBS="$LDFLAGS $QT_LIBS"
       unset ac_cv_qt_compilation
 
-      AC_TRY_LINK([
+      AC_LINK_IFELSE([AC_LANG_PROGRAM([[
 #include <QtCore>
 #include <QCoreApplication>
 class Config : public QCoreApplication {
@@ -137,12 +137,12 @@ Config(int &argc, char **argv);
 };
 Config::Config(int &argc, char **argv)
 : QCoreApplication(argc,argv) {setApplicationName("config");}
-        ], [
+        ]], [[
 int ai = 0;
 char **ac = 0;
 Config app(ai,ac);
 return 0;
-        ], [ am_cv_qt5_compilation=1 ], [ am_cv_qt5_compilation=0 ])
+        ]])],[ am_cv_qt5_compilation=1 ],[ am_cv_qt5_compilation=0 ])
 
       CXXFLAGS="$ac_save_CXXFLAGS"
       LIBS="$ac_save_LIBS"
@@ -245,14 +245,14 @@ EOF
 }
 
 AC_ARG_ENABLE([qt5],
-  AC_HELP_STRING([--enable-qt5],[compile with Qt 5 (yes if Qt 6 is not found)]),
+  AS_HELP_STRING([--enable-qt5],[compile with Qt 5 (yes if Qt 6 is not found)]),
   [],[enable_qt5=yes])
 AC_ARG_ENABLE([static_qt],
-  AC_HELP_STRING([--enable-static-qt],[link to static versions of the Qt library (no)]))
+  AS_HELP_STRING([--enable-static-qt],[link to static versions of the Qt library (no)]))
 AC_ARG_WITH([qt_pkg_config_modules],
-  AC_HELP_STRING([--with-qt-pkg-config-modules=modules],[gather include/link flags for additional Qt 5 modules from pkg-config]))
+  AS_HELP_STRING([--with-qt-pkg-config-modules=modules],[gather include/link flags for additional Qt 5 modules from pkg-config]))
 AC_ARG_WITH([qt_pkg_config],
-  AC_HELP_STRING([--without-qt-pkg-config], [do not use pkg-config for detecting Qt 5; instead rely on QT_CFLAGS/QT_LIBS being set correctly already]),
+  AS_HELP_STRING([--without-qt-pkg-config],[do not use pkg-config for detecting Qt 5; instead rely on QT_CFLAGS/QT_LIBS being set correctly already]),
   [ with_qt_pkg_config=${withval} ], [ with_qt_pkg_config=yes ])
 
 have_qt5=no

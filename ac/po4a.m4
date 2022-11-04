@@ -2,7 +2,7 @@ TRANSLATE_PERCENT=0
 PO4A_FLAGS="-k $TRANSLATE_PERCENT"
 
 AC_ARG_WITH(po4a,
-  AC_HELP_STRING([--with-po4a=prog],[use prog instead of looking for po4a]),
+  AS_HELP_STRING([--with-po4a=prog],[use prog instead of looking for po4a]),
   [ PO4A="$with_po4a" ],)
 
 if ! test -z "$PO4A"; then

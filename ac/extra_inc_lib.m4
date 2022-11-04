@@ -2,10 +2,10 @@ dnl
 dnl Extra include and library dirs that someone would like to specify.
 dnl
 AC_ARG_WITH(extra-includes,
-  AC_HELP_STRING([--with-extra-includes=DIR],[Path to other include directories separated by ';']),,
+  AS_HELP_STRING([--with-extra-includes=DIR],[Path to other include directories separated by ';']),,
   with_extra_include_given=no)
 AC_ARG_WITH(extra-libs,
-  AC_HELP_STRING([--with-extra-libs=DIR],[Path to other library directories separated by ';']),,
+  AS_HELP_STRING([--with-extra-libs=DIR],[Path to other library directories separated by ';']),,
   with_extra_libs_given=no)
   EXTRA_CFLAGS=
 

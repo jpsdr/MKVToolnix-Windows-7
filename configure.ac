@@ -1,5 +1,5 @@
 AC_INIT([MKVToolNix],[71.1.0],[https://gitlab.com/mbunkus/mkvtoolnix/issues/],[mkvtoolnix])
-AC_PREREQ(2.50)
+AC_PREREQ([2.69])
 
 AC_CONFIG_HEADERS(config.h:config.h.in)
 
@@ -51,7 +51,8 @@ m4_include(ac/po4a.m4)
 m4_include(ac/translations.m4)
 m4_include(ac/manpages_translations.m4)
 
-AC_OUTPUT(build-config)
+AC_CONFIG_FILES([build-config])
+AC_OUTPUT
 
 echo ''
 echo 'The mkvtoolnix configuration is complete.'

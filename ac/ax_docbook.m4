@@ -1,5 +1,5 @@
 AC_ARG_WITH(docbook_xsl_root,
-  AC_HELP_STRING([--with-docbook-xsl-root=dir],[use dir as base for DocBook XSL stylesheets instead of looking for it; must contain the "manpages/docbook.xsl" sub-directory and file]),
+  AS_HELP_STRING([--with-docbook-xsl-root=dir],[use dir as base for DocBook XSL stylesheets instead of looking for it; must contain the "manpages/docbook.xsl" sub-directory and file]),
   [ DOCBOOK_ROOT="$with_docbook_xsl_root" ],)
 
 if ! test -z "$DOCBOOK_ROOT"; then
@@ -36,7 +36,7 @@ fi
 XSLTPROC_FLAGS="--nonet --maxdepth 10000"
 
 AC_ARG_WITH(xsltproc,
-  AC_HELP_STRING([--with-xsltproc=prog],[use prog instead of looking for xsltproc]),
+  AS_HELP_STRING([--with-xsltproc=prog],[use prog instead of looking for xsltproc]),
   [ XSLTPROC="$with_xsltproc" ],)
 
 if ! test -z "$XSLTPROC"; then

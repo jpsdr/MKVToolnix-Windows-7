@@ -11,7 +11,7 @@ AC_DEFUN([AX_GTEST],[
     AC_MSG_CHECKING(for internal gtest)
     AC_CACHE_VAL(ax_cv_gtest_internal,[
       CPPFLAGS="$CPPFLAGS_SAVED -Ilib/gtest/include"
-      AC_TRY_COMPILE([#include <gtest/gtest.h>],,ax_cv_gtest_internal=yes,ax_cv_gtest_internal=no)
+      AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <gtest/gtest.h>]], [[]])],[ax_cv_gtest_internal=yes],[ax_cv_gtest_internal=no])
     ])
     AC_MSG_RESULT($ax_cv_gtest_internal)
 

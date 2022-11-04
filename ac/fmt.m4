@@ -11,29 +11,29 @@ AC_CACHE_CHECK([fmt],[ac_cv_fmt],[
   CXXFLAGS="$STD_CXX $CXXFLAGS"
   LIBS="$LIBS -lfmt"
 
-  AC_TRY_COMPILE([
+  AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
     #include <fmt/format.h>
     #include <fmt/ostream.h>
 
     #if !defined(FMT_VERSION) || (FMT_VERSION < 60100)
     #error fmtlib is too old, need 6.1.0 or later
     #endif
-  ],[
+  ]], [[
     fmt::format("{0:02}", fmt::to_string(4254));
-  ],[ac_cv_fmt=yes],[ac_cv_fmt=no])
+  ]])],[ac_cv_fmt=yes],[ac_cv_fmt=no])
 
   AC_CACHE_VAL(ac_cv_fmt_v8, [
     if test $ac_cv_fmt=yes; then
-      AC_TRY_COMPILE([
+      AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
         #include <fmt/format.h>
         #include <fmt/ostream.h>
 
         #if !defined(FMT_VERSION) || (FMT_VERSION < 80000)
         #error fmt is older than v8
         #endif
-      ],[
+      ]], [[
         fmt::format("{0:02}", fmt::to_string(4254));
-      ],[ac_cv_fmt_v8=yes],[ac_cv_fmt_v8=no])
+      ]])],[ac_cv_fmt_v8=yes],[ac_cv_fmt_v8=no])
     fi
   ])
 

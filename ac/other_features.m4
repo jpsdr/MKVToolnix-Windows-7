@@ -4,7 +4,7 @@ dnl
 
 AC_ARG_ENABLE(
   [update-check],
-  AC_HELP_STRING([--enable-update-check],[If enabled, the GUI will check online for available updates daily by downloading a small XML file from the MKVToolNix home page (default: yes)]),
+  AS_HELP_STRING([--enable-update-check],[If enabled, the GUI will check online for available updates daily by downloading a small XML file from the MKVToolNix home page (default: yes)]),
   [],
   [enable_update_check=yes]
 )
@@ -22,7 +22,7 @@ dnl
 
 AC_ARG_ENABLE(
   [mkvtoolnix],
-  AC_HELP_STRING([--enable-mkvtoolnix],[If enabled, the 'mkvtoolnix' wrapper binary will be built (default: no)]),
+  AS_HELP_STRING([--enable-mkvtoolnix],[If enabled, the 'mkvtoolnix' wrapper binary will be built (default: no)]),
   [BUILD_MKVTOOLNIX=$enable_mkvtoolnix],
   [BUILD_MKVTOOLNIX=no]
 )

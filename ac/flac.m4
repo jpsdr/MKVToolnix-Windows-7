@@ -9,7 +9,7 @@ dnl
   fi
 
   AC_ARG_WITH([flac],
-              AC_HELP_STRING([--without-flac], [do not build with flac support]),
+              AS_HELP_STRING([--without-flac],[do not build with flac support]),
               [ with_flac=${withval} ], [ with_flac=yes ])
 
   if test "$with_flac" != "no"; then

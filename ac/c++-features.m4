@@ -6,7 +6,7 @@ AC_DEFUN([AX_CXX_STD_CXX_FLAG],[
 
     for flag in c++17; do
       CXXFLAGS="$CXXFLAGS_SAVED -std=$flag"
-      AC_TRY_COMPILE([], [true;], [ax_cv_std_cxx_flag="-std=$flag"], [ax_cv_std_cxx_flag="undecided"])
+      AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[true;]])],[ax_cv_std_cxx_flag="-std=$flag"],[ax_cv_std_cxx_flag="undecided"])
 
       if test x"$ax_cv_std_cxx_flag" != xundecided ; then
         break
@@ -37,13 +37,11 @@ AC_DEFUN([AX_CXX17_ATTRIBUTE_MAYBE_UNUSED],[
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
-    AC_TRY_COMPILE(
-      [
+    AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 int testme([[maybe_unused]] int the_var) {
   return 42;
 }
-      ],
-      [return testme(54);],
+      ]], [[return testme(54);]])],
       [ax_cv_cxx17_attribute_maybe_unused="yes"],
       [ax_cv_cxx17_attribute_maybe_unused="no"])
     AC_LANG_POP
@@ -64,17 +62,15 @@ AC_DEFUN([AX_CXX17_STRUCTURED_BINDINGS],[
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
-    AC_TRY_COMPILE(
-      [
+    AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 #include <utility>
 std::pair<int, char> testme() {
   return std::make_pair(42, '!');
 }
-      ],
-      [
+      ]], [[
 auto const &[the_int, the_char] = testme();
 return the_int;
-      ],
+      ]])],
       [ax_cv_cxx17_structured_bindings="yes"],
       [ax_cv_cxx17_structured_bindings="no"])
     AC_LANG_POP
@@ -95,9 +91,9 @@ AC_DEFUN([AX_CXX17_NESTED_NAMESPACE_DEFINITION],[
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
-    AC_TRY_COMPILE(
-      [namespace A::B::C { int d; }],
-      [A::B::C::d = 1; return A::B::C::d;],
+    AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+        [[namespace A::B::C { int d; }]],
+        [[A::B::C::d = 1; return A::B::C::d;]])],
       [ax_cv_cxx17_nested_namespace_definition="yes"],
       [ax_cv_cxx17_nested_namespace_definition="no"])
     AC_LANG_POP
@@ -118,13 +114,12 @@ AC_DEFUN([AX_CXX17_STD_OPTIONAL],[
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
-    AC_TRY_COMPILE(
-      [#include <optional>],
-      [
-  std::optional<int> moo;
-  moo = 42;
-  return moo ? moo.value() : moo.value_or(54);
-],
+    AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+        [[#include <optional>]], [[
+          std::optional<int> moo;
+          moo = 42;
+          return moo ? moo.value() : moo.value_or(54);
+        ]])],
       [ax_cv_cxx17_std_optional="yes"],
       [ax_cv_cxx17_std_optional="no"])
     AC_LANG_POP
@@ -145,9 +140,9 @@ AC_DEFUN([AX_CXX17_STD_GCD],[
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
-    AC_TRY_COMPILE(
-      [#include <numeric>],
-      [return std::gcd(42, 54);],
+    AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+        [[#include <numeric>]],
+        [[return std::gcd(42, 54);]])],
       [ax_cv_cxx17_std_gcd="yes"],
       [ax_cv_cxx17_std_gcd="no"])
     AC_LANG_POP
@@ -168,9 +163,7 @@ AC_DEFUN([AX_CXX17_CONSTEXPR_IF],[
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
-    AC_TRY_COMPILE(
-      [],
-      [if constexpr (true) return 42; else return 54;],
+    AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[if constexpr (true) return 42; else return 54;]])],
       [ax_cv_cxx17_constexpr_if="yes"],
       [ax_cv_cxx17_constexpr_if="no"])
     AC_LANG_POP
@@ -191,9 +184,9 @@ AC_DEFUN([AX_CXX17_FILESYSTEM_LIBRARY],[
     export CXXFLAGS
 
     AC_LANG_PUSH(C++)
-    AC_TRY_COMPILE(
-      [#include <filesystem>],
-      [return std::filesystem::exists(std::filesystem::path{"/etc/passwd"}) ? 1 : 0;],
+    AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+        [[#include <filesystem>]],
+        [[return std::filesystem::exists(std::filesystem::path{"/etc/passwd"}) ? 1 : 0;]])],
       [ax_cv_cxx17_filesystem_library="yes"],
       [ax_cv_cxx17_filesystem_library="no"])
     AC_LANG_POP
@@ -216,9 +209,9 @@ AC_DEFUN([AX_CXX17_LIBSTDCPPFS],[
     export CXXFLAGS LIBS
 
     AC_LANG_PUSH(C++)
-    AC_TRY_LINK(
-      [#include <filesystem>],
-      [return std::filesystem::exists(std::filesystem::path{"/etc/passwd"}) ? 1 : 0;],
+    AC_LINK_IFELSE([AC_LANG_PROGRAM(
+        [[#include <filesystem>]],
+        [[return std::filesystem::exists(std::filesystem::path{"/etc/passwd"}) ? 1 : 0;]])],
       [ax_cv_cxx17_libstdcppfs="-lstdc++fs"],
       [ax_cv_cxx17_libstdcppfs=""])
     AC_LANG_POP
@@ -240,9 +233,9 @@ dnl     CXXFLAGS="$CXXFLAGS $STD_CXX"
 dnl     export CXXFLAGS
 dnl
 dnl     AC_LANG_PUSH(C++)
-dnl     AC_TRY_COMPILE(
-dnl       [],
-dnl       [],
+dnl     AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+dnl         [[#include <…>]],
+dnl         [[code("…");]])],
 dnl       [ax_cv_cxx17_def_name="yes"],
 dnl       [ax_cv_cxx17_def_name="no"])
 dnl     AC_LANG_POP

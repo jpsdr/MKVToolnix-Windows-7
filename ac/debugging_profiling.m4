@@ -3,7 +3,7 @@ dnl Debugging
 dnl
 
 AC_ARG_ENABLE([debug],
-  AC_HELP_STRING([--enable-debug],[compile with debug information (no)]),
+  AS_HELP_STRING([--enable-debug],[compile with debug information (no)]),
   [],
   [enable_debug=no])
 
@@ -22,7 +22,7 @@ dnl Profiling
 dnl
 
 AC_ARG_ENABLE([profiling],
-  AC_HELP_STRING([--enable-profiling],[compile with profiling information (no)]),
+  AS_HELP_STRING([--enable-profiling],[compile with profiling information (no)]),
   [],
   [enable_profiling=no])
 
@@ -41,7 +41,7 @@ dnl Optimization
 dnl
 
 AC_ARG_ENABLE([optimization],
-  AC_HELP_STRING([--enable-optimization],[compile with optimization: -O3 (yes)]),
+  AS_HELP_STRING([--enable-optimization],[compile with optimization: -O3 (yes)]),
   [],
   [if test x"$enable_debug" = xyes ; then
      enable_optimization=no
@@ -73,7 +73,7 @@ dnl Address sanitizer
 dnl
 
 AC_ARG_ENABLE([addrsan],
-  AC_HELP_STRING([--enable-addrsan],[compile with address sanitization turned on (no)]),
+  AS_HELP_STRING([--enable-addrsan],[compile with address sanitization turned on (no)]),
   [],[enable_addrsan=no])
 
 if test x"$enable_addrsan" = xyes ; then
@@ -91,7 +91,7 @@ dnl Undefined behavior sanitizer
 dnl
 
 AC_ARG_ENABLE([ubsan],
-  AC_HELP_STRING([--enable-ubsan],[compile with sanitization for undefined behavior turned on (no)]),
+  AS_HELP_STRING([--enable-ubsan],[compile with sanitization for undefined behavior turned on (no)]),
   [],[enable_ubsan=no])
 
 if test x"$enable_ubsan" = xyes ; then

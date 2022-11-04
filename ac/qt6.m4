@@ -6,7 +6,7 @@ qt_min_ver=6.1.0
 
 check_qt6() {
   AC_ARG_WITH(qmake6,
-    AC_HELP_STRING([--with-qmake6=prog],[use prog instead of looking for qmake6]),
+    AS_HELP_STRING([--with-qmake6=prog],[use prog instead of looking for qmake6]),
     [ QMAKE6="$with_qmake6" ],)
 
   if ! test -z "$QMAKE6"; then
@@ -202,7 +202,7 @@ EOT
     LIBS="$LDFLAGS $QT_LIBS"
     unset ac_cv_qt_compilation
 
-    AC_TRY_LINK([
+    AC_LINK_IFELSE([AC_LANG_PROGRAM([[
 #include <QtCore>
 #include <QCoreApplication>
 class Config : public QCoreApplication {
@@ -211,12 +211,12 @@ Config(int &argc, char **argv);
 };
 Config::Config(int &argc, char **argv)
 : QCoreApplication(argc,argv) {setApplicationName("config");}
-      ], [
+      ]], [[
 int ai = 0;
 char **ac = 0;
 Config app(ai,ac);
 return 0;
-      ], [ am_cv_qt6_compilation=1 ], [ am_cv_qt6_compilation=0 ])
+      ]])],[ am_cv_qt6_compilation=1 ],[ am_cv_qt6_compilation=0 ])
 
     CXXFLAGS="$ac_save_CXXFLAGS"
     LIBS="$ac_save_LIBS"
@@ -243,10 +243,10 @@ return 0;
 }
 
 AC_ARG_ENABLE([gui],
-  AC_HELP_STRING([--enable-gui],[compile the Qt-based GUI (yes)]),
+  AS_HELP_STRING([--enable-gui],[compile the Qt-based GUI (yes)]),
   [],[enable_gui=yes])
 AC_ARG_ENABLE([qt6],
-  AC_HELP_STRING([--enable-qt6],[compile with Qt 6 (yes)]),
+  AS_HELP_STRING([--enable-qt6],[compile with Qt 6 (yes)]),
   [],[enable_qt6=yes])
 
 have_qt6=no

@@ -2,7 +2,7 @@ dnl
 dnl Check for static
 dnl
 
-AC_ARG_ENABLE([static], AC_HELP_STRING([--enable-static],[make a static build of the applications (no)]), [], [enable_static=no])
+AC_ARG_ENABLE([static], AS_HELP_STRING([--enable-static],[make a static build of the applications (no)]), [], [enable_static=no])
 
 LINK_STATICALLY=""
 

@@ -4,12 +4,11 @@ dnl
 if test x"$MINGW" != "x1" ; then
   AC_MSG_CHECKING(for nl_langinfo)
   AC_CACHE_VAL(ac_cv_has_nl_langinfo,[
-    AC_TRY_COMPILE([
+    AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 #include <langinfo.h>
-      ],
-      [nl_langinfo(CODESET);],
-      ac_cv_has_nl_langinfo=yes,
-      ac_cv_has_nl_langinfo=no)
+        ]], [[nl_langinfo(CODESET);]])],
+      [ac_cv_has_nl_langinfo=yes],
+      [ac_cv_has_nl_langinfo=no])
     ])
   AC_MSG_RESULT($ac_cv_has_nl_langinfo)
   if test x"$ac_cv_has_nl_langinfo" = "xyes" ; then
@@ -17,12 +16,11 @@ if test x"$MINGW" != "x1" ; then
   else
     AC_MSG_CHECKING(for locale_charset)
     AC_CACHE_VAL(ac_cv_has_locale_charset,[
-      AC_TRY_COMPILE([
+      AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 #include <libcharset.h>
-        ],
-        [locale_charset();],
-        ac_cv_has_locale_charset=yes,
-        ac_cv_has_locale_charset=no)
+          ]], [[locale_charset();]])],
+        [ac_cv_has_locale_charset=yes],
+        [ac_cv_has_locale_charset=no])
       ])
     AC_MSG_RESULT($ac_cv_has_locale_charset)
     if test x"$ac_cv_has_locale_charset" = "xyes" ; then

@@ -1,5 +1,5 @@
 AC_ARG_WITH(drmingw,
-  AC_HELP_STRING([--with-drmingw=path],[use link against Dr. MinGW's crash reporting library found in path]),
+  AS_HELP_STRING([--with-drmingw=path],[use link against Dr. MinGW's crash reporting library found in path]),
   [ drmingw_path="$with_drmingw" ],)
 
 USE_DRMINGW=no
@@ -10,9 +10,9 @@ if ! test -z "$drmingw_path"; then
     save_LIBS="$LIBS"
     CFLAGS="$CFLAGS -I$drmingw_path/include"
     LIBS="$LIBS -L$drmingw_path/lib -lexchndl"
-    AC_TRY_LINK(
-      [#include "exchndl.h"],
-      [ExcHndlInit();],
+    AC_LINK_IFELSE([AC_LANG_PROGRAM(
+        [[#include "exchndl.h"]],
+        [[ExcHndlInit();]])],
       [ax_cv_drmingw_found=yes],
       [ax_cv_drmingw_found=no])
     CFLAGS="$save_CFLAGS"

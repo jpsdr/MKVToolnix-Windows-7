@@ -9,36 +9,36 @@ AC_CACHE_CHECK([nlohmann's json-cpp],[ac_cv_nlohmann_jsoncpp],[
   ac_save_CXXFLAGS="$CXXFLAGS"
   CXXFLAGS="$STD_CXX $CXXFLAGS"
 
-  AC_TRY_COMPILE([
+  AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
     #include <cstdint>
     #include <iostream>
     #include <limits>
 
     #include <nlohmann/json.hpp>
-  ],[
+  ]], [[
     nlohmann::json json{
       { "unsigned_64bit_integer", std::numeric_limits<std::uint64_t>::max() },
       { "signed_64bit_integer",   std::numeric_limits<std::int64_t>::min()  },
     };
 
     std::cout << json.dump();
-  ],[ac_cv_nlohmann_jsoncpp=yes],[ac_cv_nlohmann_jsoncpp=undetermined])
+  ]])],[ac_cv_nlohmann_jsoncpp=yes],[ac_cv_nlohmann_jsoncpp=undetermined])
 
   if test x"$ac_cv_nlohmann_jsoncpp" = xundetermined; then
-    AC_TRY_COMPILE([
+    AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
       #include <cstdint>
       #include <iostream>
       #include <limits>
 
       #include <json.hpp>
-    ],[
+    ]], [[
       nlohmann::json json{
         { "unsigned_64bit_integer", std::numeric_limits<std::uint64_t>::max() },
         { "signed_64bit_integer",   std::numeric_limits<std::int64_t>::min()  },
       };
 
       std::cout << json.dump();
-    ],[ac_cv_nlohmann_jsoncpp="yes, without the nlohmann subdir"],[ac_cv_nlohmann_jsoncpp=no])
+    ]])],[ac_cv_nlohmann_jsoncpp="yes, without the nlohmann subdir"],[ac_cv_nlohmann_jsoncpp=no])
   fi
 
   CXXFLAGS="$ac_save_CXXFLAGS"

@@ -9,10 +9,10 @@ else
   AC_MSG_CHECKING(for ZLIB)
   save_LIBS="$LIBS"
   LIBS="$LIBS -lz"
-  AC_TRY_LINK(
-    [#include <zlib.h>],
-    [inflate(0, 0);],
-    [zlib_found=yes; ZLIB_LIBS=-lz])
+  AC_LINK_IFELSE([AC_LANG_PROGRAM(
+      [[#include <zlib.h>]],
+      [[inflate(0, 0);]])],
+    [zlib_found=yes; ZLIB_LIBS=-lz],[])
   LIBS="$save_LIBS"
   AC_MSG_RESULT($zlib_found)
 fi

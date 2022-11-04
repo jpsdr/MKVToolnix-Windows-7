@@ -17,8 +17,6 @@ AC_CHECK_TOOL(LD, ld, :)
 AC_CHECK_TOOL(STRINGS, strings, :)
 AC_CHECK_TOOL(OBJDUMP, objdump, :)
 PKG_PROG_PKG_CONFIG
-
-dnl Check for headers
-AC_HEADER_STDC()
+AC_PROG_EGREP
 AC_CHECK_HEADERS([inttypes.h stdint.h sys/types.h sys/syscall.h stropts.h])
 AC_CHECK_FUNCS([syscall],,)

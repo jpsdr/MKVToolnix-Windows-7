@@ -1,7 +1,7 @@
 dnl
 dnl Which translations should be installed?
 dnl
-AC_ARG_WITH([gettext], AC_HELP_STRING([--without-gettext], [do not build with gettext support]),
+AC_ARG_WITH([gettext], AS_HELP_STRING([--without-gettext],[do not build with gettext support]),
             [ with_gettext=${withval} ], [ with_gettext=yes ])
 if test "x$with_gettext" != "xno"; then
   AC_CHECK_FUNCS(gettext, gettext_found=yes, gettext_found=no)

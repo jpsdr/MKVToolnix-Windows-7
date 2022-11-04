@@ -5,7 +5,7 @@ dnl
 AC_MSG_CHECKING(for int64_t)
 AC_LANG_PUSH(C++)
 AC_CACHE_VAL(ac_cv_has_int64_t,[
-  AC_TRY_COMPILE([
+  AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 #if HAVE_INTTYPES_H
 # include <inttypes.h>
 #endif
@@ -15,16 +15,15 @@ AC_CACHE_VAL(ac_cv_has_int64_t,[
 #if HAVE_SYS_TYPES_H
 # include <sys/types.h>
 #endif
-    ],
-    [int64_t foo;],
-    ac_cv_has_int64_t=yes,
-    ac_cv_has_int64_t=no)
+      ]], [[int64_t foo;]])],
+    [ac_cv_has_int64_t=yes],
+    [ac_cv_has_int64_t=no])
   ])
 AC_MSG_RESULT($ac_cv_has_int64_t)
 
 AC_MSG_CHECKING(for uint64_t)
 AC_CACHE_VAL(ac_cv_has_uint64_t,[
-  AC_TRY_COMPILE([
+  AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 #if HAVE_INTTYPES_H
 # include <inttypes.h>
 #endif
@@ -34,10 +33,9 @@ AC_CACHE_VAL(ac_cv_has_uint64_t,[
 #if HAVE_SYS_TYPES_H
 # include <sys/types.h>
 #endif
-    ],
-    [int64_t foo;],
-    ac_cv_has_uint64_t=yes,
-    ac_cv_has_uint64_t=no)
+      ]], [[int64_t foo;]])],
+    [ac_cv_has_uint64_t=yes],
+    [ac_cv_has_uint64_t=no])
   ])
 AC_MSG_RESULT($ac_cv_has_uint64_t)
 AC_LANG_POP
