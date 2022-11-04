@@ -49,6 +49,7 @@ EOT
 
   if ! test x"$MINGW" = x1; then
     qmake_qt_ui="dbus"
+    AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
   fi
 
   cat > "$qmake_dir/configure_non_gui.pro" <<EOT
