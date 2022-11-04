@@ -2,7 +2,7 @@
 
 require "digest/md5"
 require "json"
-require "json_schema"
+require "json-schema"
 require "pp"
 require "rexml/document"
 require "tempfile"

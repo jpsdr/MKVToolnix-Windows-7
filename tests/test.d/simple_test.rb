@@ -1,5 +1,5 @@
 class SimpleTest
-  @@json_schema_identification = nil
+  @@json_schema = nil
 
   EXIT_CODE_ALIASES = {
     :success => 0,
@@ -369,19 +369,15 @@ class SimpleTest
     raise "test failed"
   end
 
-  def json_schema_identification
-    return @@json_schema_identification if @@json_schema_identification
+  def json_schema_validate json
+    if !@@json_schema
+      version       = IO.readlines("../src/merge/id_result.h").detect { |line| /^constexpr.*\bID_JSON_FORMAT_VERSION\b/.match line }.gsub(/.*= *|;/, '').chop
+      @@json_schema = JSON.load(File.read("../doc/json-schema/mkvmerge-identification-output-schema-v#{version}.json"))
+    end
 
-    json_store = JsonSchema::DocumentStore.new
-    parser     = JsonSchema::Parser.new
-    expander   = JsonSchema::ReferenceExpander.new
-    version    = IO.readlines("../src/merge/id_result.h").detect { |line| /^constexpr.*\bID_JSON_FORMAT_VERSION\b/.match line }.gsub(/.*= *|;/, '').chop
-    schema     = parser.parse JSON.load(File.read("../doc/json-schema/mkvmerge-identification-output-schema-v#{version}.json"))
+    errors = JSON::Validator.fully_validate(@@json_schema, json)
 
-    expander.expand(schema, store: json_store)
-    json_store.add_schema schema
-
-    @@json_schema_identification = schema
+    return errors.empty?, errors
   end
 
   def json_summarize_tracks json

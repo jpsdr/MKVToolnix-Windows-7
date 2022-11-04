@@ -31,11 +31,11 @@ test "identification and validation" do
     output        = output.join ''
     json          = JSON.load(output)
 
-    valid, errors = json_schema_identification.validate(json)
+    valid, errors = json_schema_validate(json)
 
     if !valid
       puts " JSON validation errors in #{file}:"
-      puts errors.join("\n")
+      puts errors.map { |err| "  #{err}" }.join("\n")
     end
 
     json.delete("identification_format_version")

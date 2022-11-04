@@ -10,12 +10,12 @@ def verify520 file, track, codec
     output, _     = identify file, :format => :json
     output        = output.join ''
     json          = JSON.parse(output)
-    valid, errors = json_schema_identification.validate(JSON.load(output))
+    valid, errors = json_schema_validate(JSON.load(output))
     ok            = false
 
     if !valid
       puts " JSON validation errors in #{file}:"
-      puts errors.join("\n")
+      puts errors.map { |err| "  #{err}" }.join("\n")
 
     elsif json["tracks"][track]["codec"] == codec
       ok = true
