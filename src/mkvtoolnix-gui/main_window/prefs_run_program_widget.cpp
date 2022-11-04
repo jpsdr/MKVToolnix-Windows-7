@@ -194,17 +194,19 @@ PrefsRunProgramWidget::setupTypeControl(Util::Settings::RunProgramConfig const &
 
   addItemIfSupported(QY("Execute a program"),                        Util::Settings::RunProgramType::ExecuteProgram);
   addItemIfSupported(QY("Play an audio file"),                       Util::Settings::RunProgramType::PlayAudioFile);
+  addItemIfSupported(QY("Show a desktop notification"),              Util::Settings::RunProgramType::ShowDesktopNotification);
   addItemIfSupported(QY("Shut down the computer"),                   Util::Settings::RunProgramType::ShutDownComputer);
   addItemIfSupported(QY("Hibernate the computer"),                   Util::Settings::RunProgramType::HibernateComputer);
   addItemIfSupported(QY("Sleep the computer"),                       Util::Settings::RunProgramType::SleepComputer);
   addItemIfSupported(QY("Delete source files for multiplexer jobs"), Util::Settings::RunProgramType::DeleteSourceFiles);
 
-  p->pagesByType[Util::Settings::RunProgramType::ExecuteProgram]    = p->ui->executeProgramTypePage;
-  p->pagesByType[Util::Settings::RunProgramType::PlayAudioFile]     = p->ui->playAudioFileTypePage;
-  p->pagesByType[Util::Settings::RunProgramType::ShutDownComputer]  = p->ui->emptyTypePage;
-  p->pagesByType[Util::Settings::RunProgramType::HibernateComputer] = p->ui->emptyTypePage;
-  p->pagesByType[Util::Settings::RunProgramType::SleepComputer]     = p->ui->emptyTypePage;
-  p->pagesByType[Util::Settings::RunProgramType::DeleteSourceFiles] = p->ui->emptyTypePage;
+  p->pagesByType[Util::Settings::RunProgramType::ExecuteProgram]          = p->ui->executeProgramTypePage;
+  p->pagesByType[Util::Settings::RunProgramType::PlayAudioFile]           = p->ui->playAudioFileTypePage;
+  p->pagesByType[Util::Settings::RunProgramType::ShowDesktopNotification] = p->ui->emptyTypePage;
+  p->pagesByType[Util::Settings::RunProgramType::ShutDownComputer]        = p->ui->emptyTypePage;
+  p->pagesByType[Util::Settings::RunProgramType::HibernateComputer]       = p->ui->emptyTypePage;
+  p->pagesByType[Util::Settings::RunProgramType::SleepComputer]           = p->ui->emptyTypePage;
+  p->pagesByType[Util::Settings::RunProgramType::DeleteSourceFiles]       = p->ui->emptyTypePage;
 
   showPageForType(cfg.m_type);
 

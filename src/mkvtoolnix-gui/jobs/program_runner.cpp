@@ -115,6 +115,9 @@ ProgramRunner::run(Util::Settings::RunProgramForEvent forEvent,
 
     else if (runConfig->m_type == Util::Settings::RunProgramType::SleepComputer)
       sleepComputer(*runConfig);
+
+    else if (runConfig->m_type == Util::Settings::RunProgramType::ShowDesktopNotification)
+      showDesktopNotification(forEvent, variables);
   }
 }
 
@@ -179,6 +182,12 @@ ProgramRunner::isRunProgramTypeSupported(Util::Settings::RunProgramType type) {
   return mtx::included_in(type, Util::Settings::RunProgramType::ExecuteProgram, Util::Settings::RunProgramType::PlayAudioFile, Util::Settings::RunProgramType::DeleteSourceFiles);
 }
 
+bool
+ProgramRunner::isJobType(VariableMap const &variables,
+                         QString const &type) {
+  return variables.contains(Q("JOB_TYPE")) && (variables[Q("JOB_TYPE")][0] == type);
+}
+
 void
 ProgramRunner::executeProgram(Util::Settings::RunProgramConfig &config,
                               VariableMap const &variables) {
@@ -203,7 +212,7 @@ ProgramRunner::executeProgram(Util::Settings::RunProgramConfig &config,
 
 void
 ProgramRunner::deleteSourceFiles(VariableMap const &variables) {
-  if (!variables.contains(Q("JOB_TYPE")) || (variables[Q("JOB_TYPE")][0] != Q("multiplexer")))
+  if (!isJobType(variables, Q("multiplexer")))
     return;
 
   for (auto const &sourceFileName : variables[Q("SOURCE_FILE_NAMES")]) {
@@ -221,6 +230,12 @@ QString
 ProgramRunner::defaultAudioFileName()
   const {
   return Q("%1/sounds/finished-1.webm").arg(Q(MTX_PKG_DATA_DIR));
+}
+
+void
+ProgramRunner::showDesktopNotification(Util::Settings::RunProgramForEvent const /* forEvent */,
+                                       VariableMap const &/* variables */) {
+  // Not supported in an OS-agnostic way.
 }
 
 void

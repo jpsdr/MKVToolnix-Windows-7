@@ -51,6 +51,7 @@ protected:
   virtual void shutDownComputer(Util::Settings::RunProgramConfig &config);
   virtual void hibernateComputer(Util::Settings::RunProgramConfig &config);
   virtual void sleepComputer(Util::Settings::RunProgramConfig &config);
+  virtual void showDesktopNotification(Util::Settings::RunProgramForEvent const forEvent, VariableMap const &variables);
 
 public:
   static std::unique_ptr<ProgramRunner> create();
@@ -58,6 +59,7 @@ public:
 protected:
   static void setupGeneralVariables(VariableMap &variables);
   static QStringList replaceVariables(QStringList const &commandLine, VariableMap const &variables);
+  static bool isJobType(VariableMap const &variables, QString const &type);
 };
 
 }}

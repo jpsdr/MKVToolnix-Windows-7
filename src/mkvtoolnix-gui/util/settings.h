@@ -33,6 +33,7 @@ public:
     HibernateComputer,
     SleepComputer,
     DeleteSourceFiles,
+    ShowDesktopNotification,
     Max,
     Default = ExecuteProgram,
   };
