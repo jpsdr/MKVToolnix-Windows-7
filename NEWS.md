@@ -55,6 +55,13 @@
 * mkvmerge: Matroska reader: fixed reading files with EBML Void elements
   before the Matroska Segment element.
 
+## Build system changes
+
+* bug fix: libFLAC detection is now done via `pkg-config`, and the
+  corresponding compiler flags are honored. Fixes static compilation with
+  newer versions of libFLAC with MXE where a compiler definition is required
+  to signal that it libFLAC wasn't built as a DLL.
+
 
 # Version 71.1.0 "Fortitude" 2022-10-09
 

@@ -149,7 +149,7 @@ def setup_globals
   cflags_common           += " -Ilib/libebml -Ilib/libmatroska"                          if c?(:EBML_MATROSKA_INTERNAL)
   cflags_common           += " -Ilib/nlohmann-json/include"                              if c?(:NLOHMANN_JSON_INTERNAL)
   cflags_common           += " -Ilib/fmt/include"                                        if c?(:FMT_INTERNAL)
-  cflags_common           += " #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:PUGIXML_CFLAGS)} #{c(:CMARK_CFLAGS)} #{c(:DVDREAD_CFLAGS)} #{c(:EXTRA_CFLAGS)} #{c(:USER_CPPFLAGS)}"
+  cflags_common           += " #{c(:MATROSKA_CFLAGS)} #{c(:EBML_CFLAGS)} #{c(:PUGIXML_CFLAGS)} #{c(:CMARK_CFLAGS)} #{c(:DVDREAD_CFLAGS)} #{c(:FLAC_CFLAGS)}  #{c(:EXTRA_CFLAGS)} #{c(:USER_CPPFLAGS)}"
   cflags_common           += " -mno-ms-bitfields -DWINVER=0x0601 -D_WIN32_WINNT=0x0601 " if $building_for[:windows] # 0x0601 = Windows 7/Server 2008 R2
   cflags_common           += " -march=i686"                                              if $building_for[:windows] && /i686/.match(c(:host))
   cflags_common           += " -fPIC "                                                   if !$building_for[:windows]

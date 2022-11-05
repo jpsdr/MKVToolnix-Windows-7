@@ -2,31 +2,21 @@ dnl
 dnl Check for libFLAC
 dnl
 
-  dnl FLAC 1.2.1 with mingw needs the winsock library.
-  flac_winsock=
-  if test "x$MINGW" = "x1" ; then
-    flac_winsock="-lwsock32"
-  fi
-
   AC_ARG_WITH([flac],
               AS_HELP_STRING([--without-flac],[do not build with flac support]),
               [ with_flac=${withval} ], [ with_flac=yes ])
 
   if test "$with_flac" != "no"; then
-    AC_CHECK_LIB(FLAC, FLAC__stream_decoder_new,
-                 [ FLAC_LIBS="-lFLAC $OGG_LIBS -lm $flac_winsock"
-                   flac_found=yes ],
-                 [ flac_found=no ],
-                 $OGG_LIBS -lm $flac_winsock)
+    PKG_CHECK_EXISTS([flac],[flac_found=yes],[flac_found=no])
+    if test x"$flac_found" = xyes; then
+      PKG_CHECK_MODULES([flac],[flac],[flac_found=yes])
+      FLAC_CFLAGS="`$PKG_CONFIG --cflags flac`"
+      FLAC_LIBS="`$PKG_CONFIG --libs flac`"
+    fi
   else
     flac_found=no
   fi
-  if test "$flac_found" = "yes"; then
-    AC_CHECK_MEMBER(FLAC__StreamMetadata_StreamInfo.sample_rate, ,
-                    [ flac_found=no ],
-                    [ #include <FLAC/format.h>
-                    ])
-  fi
+
   if test x"$flac_found" = xyes ; then
     AC_CHECK_LIB(FLAC, FLAC__stream_decoder_skip_single_frame,
                  [ flac_decoder_skip_found=yes ],
@@ -37,12 +27,15 @@ dnl
       AC_DEFINE(HAVE_FLAC_DECODER_SKIP, [1], [Define if FLAC__stream_decoder_skip_single_frame exists])
       AC_DEFINE(HAVE_FLAC_FORMAT_H, [1], [Define if the FLAC headers are present])
     else
+      FLAC_CFLAGS=""
       FLAC_LIBS=""
       opt_features_no="$opt_features_no\n   * FLAC audio (version too old)"
     fi
   else
+    FLAC_CFLAGS=""
     FLAC_LIBS=""
     opt_features_no="$opt_features_no\n   * FLAC audio"
   fi
 
+AC_SUBST(FLAC_CFLAGS)
 AC_SUBST(FLAC_LIBS)
