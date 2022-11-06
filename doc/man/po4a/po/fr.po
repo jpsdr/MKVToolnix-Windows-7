@@ -1740,7 +1740,7 @@ msgstr "'<literal>when-appending</literal>' – Ce mode crée un chapitre au dé
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvmerge.xml:260
 msgid "This mode also works with split modes '<literal>parts:</literal>' and '<literal>parts-frames:</literal>'. For these modes one chapter will be generated for each appended timestamp range (those whose start timestamps are prefixed with '<literal>+</literal>')."
-msgstr "Ce mode fonctionne aussi avec les modes de découpage « <literal>parts:</literal> » et « <literal>parts-frames:</literal> ». Pour ces modes, un chapitre sera généré pour chaque plage d'horodatage ajoutée (celles qui débutent les horodatages sont préfixées avec « <literal>+</literal> »)."
+msgstr "Ce mode fonctionne aussi avec les modes de scission « <literal>parts:</literal> » et « <literal>parts-frames:</literal> ». Pour ces modes, un chapitre sera généré pour chaque plage d'horodatage ajoutée (celles qui débutent les horodatages sont préfixées avec « <literal>+</literal> »)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><itemizedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:267
@@ -2070,7 +2070,7 @@ msgstr "<option>--split</option> <parameter>specification</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:592
 msgid "Splits the output file after a given size or a given time.  Please note that tracks can only be split right before a key frame.  Therefore the split point may be a bit off from what the user has specified."
-msgstr "Découpe le fichier cible après une taille ou une durée donnée. Merci de noter que les pistes peuvent être seulement coupées après une trame clé. Le point de coupe peut donc être un peu décalé par rapport à ce que l'utilisateur a spécifié."
+msgstr "Scinde le fichier cible après une taille ou une durée donnée. Merci de noter que les pistes peuvent être seulement scindées après une trame clé. Le point de scission peut donc être un peu décalé par rapport à ce que l'utilisateur a spécifié."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:597
@@ -2140,7 +2140,7 @@ msgstr "Syntaxe : <option>--split</option> <literal>timestamps:</literal><parame
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:662
 msgid "Example: <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
-msgstr "Exemple : <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
+msgstr "Exemple : <code>--split timestamps:00:45:00.000,01:20:00.250,6300s</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:666
@@ -2271,7 +2271,7 @@ msgstr "Normalement chaque plage sera écrite dans un nouveau fichier. Ceci peut
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><note><para>
 #: doc/man/mkvmerge.xml:787
 msgid "Note that &mkvmerge; only makes decisions about splitting at key frame positions. This applies to both the start and the end of each range. So even if an end frame/field number is between two key frames &mkvmerge; will continue outputting the frames up to but excluding the following key frame."
-msgstr "Note : &mkvmerge; prend seulement des décisions de scission aux positions de trames clés. Ceci s'applique au début et à la fin de chaque plage. Donc même si un numéro de trame/champ se situe entre deux trames clés, &mkvmerge; continuera de générer les trames jusqu'à la prochaine trame clé exclue."
+msgstr "Note : &mkvmerge; prend seulement des décisions de scission aux positions de trames clés. Ceci s'applique au début et à la fin de chaque plage. Donc même si un numéro de trame/champ se situe entre deux trames clés, &mkvmerge; continuera de générer les trames jusqu'à la prochaine trame clé exclue."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:794
@@ -2308,12 +2308,12 @@ msgstr "Scission après des trames/champs spécifiques."
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:830
 msgid "Syntax: <option>--split</option> <literal>frames:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
-msgstr "Syntaxe : <option>--split</option> <literal>frames:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+msgstr "Syntaxe : <option>--split</option> <literal>frames:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:834
 msgid "Example: <code>--split frames:120,237,891</code>"
-msgstr "Exemple : <code>--split frames:120,237,891</code>"
+msgstr "Exemple : <code>--split frames:120,237,891</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:838
@@ -2333,12 +2333,12 @@ msgstr "Scission avant des chapitres spécifiques."
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:867
 msgid "Syntax: <option>--split</option> <literal>chapters:all</literal> or <option>--split</option> <literal>chapters:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
-msgstr "Syntaxe : <option>--split</option> <literal>chapters:all</literal> ou <option>--split</option> <literal>chapters:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
+msgstr "Syntaxe : <option>--split</option> <literal>chapters:all</literal> ou <option>--split</option> <literal>chapters:</literal><parameter>A</parameter><optional>,<parameter>B</parameter><optional>,<parameter>C</parameter>...</optional></optional>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:872
 msgid "Example: <code>--split chapters:5,8</code>"
-msgstr "Exemple : <code>--split chapters:5,8</code>"
+msgstr "Exemple : <code>--split chapters:5,8</code>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:876
