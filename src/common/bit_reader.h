@@ -138,6 +138,20 @@ public:
     return v & 1 ? (v + 1) / 2 : -(v / 2);
   }
 
+  inline uint64_t get_leb128() {
+    uint64_t value{};
+
+    for (int idx = 0; idx < 8; ++idx) {
+      auto byte  = get_bits(8);
+      value     |= (byte & 0x7f) << (idx * 7);
+
+      if ((byte & 0x80) == 0)
+        break;
+    }
+
+    return value;
+  }
+
   uint64_t peek_bits(std::size_t n) {
     uint64_t r                             = 0;
     const unsigned char *tmp_byte_position = m_byte_position;

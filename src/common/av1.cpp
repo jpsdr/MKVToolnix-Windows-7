@@ -97,17 +97,7 @@ parser_c::get_next_timestamp() {
 
 uint64_t
 parser_c::read_leb128(mtx::bits::reader_c &r) {
-  uint64_t value{};
-
-  for (int idx = 0; idx < 8; ++idx) {
-    auto byte  = r.get_bits(8);
-    value     |= (byte & 0x7f) << (idx * 7);
-
-    if ((byte & 0x80) == 0)
-      break;
-  }
-
-  return value;
+  return r.get_leb128();
 }
 
 uint64_t

@@ -385,4 +385,15 @@ TEST(BitReader, RBSPMode5) {
   EXPECT_EQ(0x6e, b.get_bits(8));
 }
 
+TEST(BitReader, GetLEB128) {
+  unsigned char value1[4] = { 0xa1, 0x80, 0x80, 0x00 };
+  unsigned char value2[4] = { 0x97, 0x81, 0x07 };
+
+  auto b = mtx::bits::reader_c{value1, 4};
+  EXPECT_EQ(b.get_leb128(), 0x21);
+
+  b = mtx::bits::reader_c{value2, 3};
+  EXPECT_EQ(b.get_leb128(), (0x17) | (0x01 << 7) | (0x07 << 14));
+}
+
 }
