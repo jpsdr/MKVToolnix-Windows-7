@@ -574,6 +574,8 @@ parser_c::flush() {
     if (frame.is_keyframe && !p->current_frame_contains_sequence_header)
       frame.mem->prepend(p->sequence_header_obu);
 
+    mtx::av1::maybe_shrink_size_fields(*frame.mem);
+
     p->frames.push_back(frame);
   }
 
@@ -685,4 +687,80 @@ parser_c::debug_obu_types(unsigned char const *buffer,
   }
 }
 
+void
+maybe_shrink_size_fields(memory_c &mem) {
+  static debugging_option_c s_debug{"av1_shrink_size_field"};
+
+  if (mem.get_size() < 2)
+    return;
+
+  mxdebug_if(s_debug, fmt::format("start\n"));
+
+  auto buffer      = mem.get_buffer();
+  auto buffer_size = mem.get_size();
+  auto idx_src     = 0u;
+  auto idx_dest    = 0u;
+
+  while ((idx_src + 2) < buffer_size) {
+    try {
+      mxdebug_if(s_debug, fmt::format("  idx_src {0} idx_dest {1} buffer_size {2}\n", idx_src, idx_dest, buffer_size));
+
+      mtx::bits::reader_c r{&buffer[idx_src], buffer_size - idx_src};
+      // See 5.3.2 OBU header syntax
+      r.skip_bits(1 + 4 + 1);
+
+      if (!r.get_bit()) {
+        mxdebug_if(s_debug, fmt::format("  ouff no size field\n"));
+        // copy rest
+        std::memmove(&buffer[idx_dest], &buffer[idx_src], buffer_size - idx_src);
+        idx_dest += buffer_size - idx_src;
+
+        break;
+      }
+
+      r.skip_bit();
+
+      auto obu_size   = r.get_leb128();
+      auto field_size = r.get_bit_position() / 8 - 1u;
+
+      unsigned char new_size_field[9];
+      mtx::bits::writer_c w{new_size_field, 9};
+
+      w.put_leb128(obu_size);
+
+      auto new_field_size = w.get_bit_position() / 8;
+
+      mxdebug_if(s_debug, fmt::format("  obu_size {0} field_size {1} new_field_size {2}\n", obu_size, field_size, new_field_size));
+
+      if ((1 + idx_src + field_size + obu_size) > buffer_size)
+        return;
+
+      auto full_obu_size = 1 + field_size + obu_size;
+
+      if (field_size <= new_field_size) {
+        if (idx_src != idx_dest)
+          std::memmove(&buffer[idx_dest], &buffer[idx_src], full_obu_size);
+
+        idx_src  += full_obu_size;
+        idx_dest += full_obu_size;
+
+        continue;
+      }
+
+      buffer[idx_dest] = buffer[idx_src];
+      std::memcpy(&buffer[idx_dest + 1], new_size_field, new_field_size);
+      std::memmove(&buffer[idx_dest + 1 + new_field_size], &buffer[idx_src + 1 + field_size], obu_size);
+
+      idx_src  += 1 +     field_size + obu_size;
+      idx_dest += 1 + new_field_size + obu_size;
+
+    } catch (mtx::mm_io::end_of_file_x &) {
+    }
+  }
+
+  if (idx_src == idx_dest)
+    return;
+
+  mem.resize(idx_dest);
+}
 }

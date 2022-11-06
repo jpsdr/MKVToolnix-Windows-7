@@ -133,4 +133,6 @@ protected:
   uint64_t get_next_timestamp();
 };
 
+void maybe_shrink_size_fields(memory_c &mem);
+
 }}

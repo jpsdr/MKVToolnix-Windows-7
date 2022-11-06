@@ -13,6 +13,8 @@
 * MKVToolNix GUI: multiplexer: when dragging & dropping directories to the
   "attachments" tab, the files contained in those directories will be
   attached. Implements #3410.
+* mkvmerge: AV1 parser: the variable-width OBU size field will be re-written
+  with minimal length if it's encoded longer than necessary.
 
 ## Bug fixes
 
