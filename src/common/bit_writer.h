@@ -110,6 +110,19 @@ public:
     update_size();
   }
 
+  inline void put_leb128(uint64_t value) {
+    do {
+      auto this_byte = value & 0x7f;
+      value        >>= 7;
+
+      if (value != 0)
+        this_byte |= 0x80;
+
+      put_bits(8, this_byte);
+
+    } while (value != 0);
+  }
+
   inline void byte_align() {
     while (0x80 != m_mask)
       put_bit(false);

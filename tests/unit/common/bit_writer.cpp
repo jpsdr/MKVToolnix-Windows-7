@@ -170,4 +170,16 @@ TEST(BitWriter, ProvidingABuffer) {
   ASSERT_EQ(0x0001020304050607ull, get_uint64_be(buffer->get_buffer()));
 }
 
+TEST(BitWriter, PutLEB128) {
+  unsigned char buf[4] = { 0x00, 0x00, 0x00, 0x00 };
+
+  auto w = mtx::bits::writer_c{buf, 4};
+  w.put_leb128(0x21);
+  EXPECT_EQ(get_uint32_be(buf), 0x21000000u);
+
+  w = mtx::bits::writer_c{buf, 4};
+  w.put_leb128((0x17) | (0x01 << 7) | (0x07 << 14));
+  EXPECT_EQ(get_uint32_be(buf), 0x97810700u);
+}
+
 }
