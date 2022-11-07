@@ -375,11 +375,20 @@ parser_c::parse(unsigned char const *buffer,
 
   mxdebug_if(p->debug_parser, fmt::format("debug_parser: start at {0} size {1}\n", p->input_pos, buffer_size));
 
+  auto last_good_bit_position = r.get_bit_position();
+
   while (r.get_remaining_bits() > 0)
     try {
       if (!parse_obu())
         break;
-    } catch (exception const &ex) {
+      last_good_bit_position = r.get_bit_position();
+
+    } catch (mtx::mm_io::end_of_file_x const &ex) {
+      mxdebug_if(p->debug_parser, fmt::format("debug_parser: end of file exception: {0}\n", ex.what()));
+      r.set_bit_position(last_good_bit_position);
+      break;
+
+    } catch (mtx::exception const &ex) {
       mxdebug_if(p->debug_parser, fmt::format("debug_parser: exception: {0}\n", ex.what()));
       break;
     }

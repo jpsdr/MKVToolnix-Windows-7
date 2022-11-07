@@ -56,6 +56,10 @@
   the VobSub & USF subtitle extraction.
 * mkvmerge: Matroska reader: fixed reading files with EBML Void elements
   before the Matroska Segment element.
+* mkvmerge: AV1 parser: fixed the parser completely aborting when parsing the
+  OBU size field fails due to there not being enough data to parse. Instead
+  the parser will remember the last known-good position & restart from there
+  after more data is available. Fixes #3431.
 
 ## Build system changes
 
