@@ -42,7 +42,7 @@ class parser_private_c {
   mtx::bytes::buffer_c buffer;
   frame_t current_frame;
   std::deque<frame_t> frames;
-  uint64_t frame_number{}, num_units_in_display_tick{}, time_scale{}, num_ticks_per_picture{};
+  uint64_t frame_number{}, num_units_in_display_tick{}, time_scale{}, num_ticks_per_picture{}, input_pos{};
   mtx_mp_rational_t forced_default_duration, bitstream_default_duration = mtx::rational(1'000'000'000ull, 25);
 
   memory_cptr sequence_header_obu;
@@ -373,7 +373,7 @@ parser_c::parse(unsigned char const *buffer,
 
   r.init(p->buffer.get_buffer(), p->buffer.get_size());
 
-  mxdebug_if(p->debug_parser, fmt::format("debug_parser: start on size {0}\n", buffer_size));
+  mxdebug_if(p->debug_parser, fmt::format("debug_parser: start at {0} size {1}\n", p->input_pos, buffer_size));
 
   while (r.get_remaining_bits() > 0)
     try {
@@ -398,7 +398,8 @@ parser_c::parse_obu() {
     throw obu_without_size_unsupported_x{};
 
   mxdebug_if(p->debug_parser,
-             fmt::format("debug_parser:   at {0} type {1} ({2}) size {3} remaining {4}\n",
+             fmt::format("debug_parser:   at absolute {0} relative {1} type {2} ({3}) size {4} remaining {5}\n",
+                         p->input_pos,
                          start_bit_position / 8,
                          p->obu_type,
                          get_obu_type_name(p->obu_type),
@@ -415,8 +416,10 @@ parser_c::parse_obu() {
   mtx::bits::reader_c sub_r{obu->get_buffer(), obu->get_size()};
   sub_r.set_bit_position(r.get_bit_position() - start_bit_position);
 
-  at_scope_exit_c copy_current_and_seek_to_next_obu([this, next_obu_bit_position, &obu, &keep_obu]() {
+  at_scope_exit_c copy_current_and_seek_to_next_obu([this, start_bit_position, next_obu_bit_position, &obu, &keep_obu]() {
     p->r.set_bit_position(next_obu_bit_position);
+    p->input_pos += (next_obu_bit_position - start_bit_position) / 8;
+
     if (!keep_obu)
       return;
 
@@ -437,17 +440,20 @@ parser_c::parse_obu() {
     auto in_spatial_layer  = !!((p->operating_point_idc >> (*p->spatial_id + 8)) & 1);
 
     if (!in_temporal_layer || !in_spatial_layer) {
+      mxdebug_if(p->debug_parser, fmt::format("debug_parser:     not keeping due to layer; in_temporal_layer {0} in_spatial_layer {1}\n", in_temporal_layer, in_spatial_layer));
       keep_obu = false;
       return true;
     }
   }
 
   if (mtx::included_in(p->obu_type, OBU_PADDING, OBU_REDUNDANT_FRAME_HEADER)) {
+    mxdebug_if(p->debug_parser, fmt::format("debug_parser:     not keeping due to type {0}\n", p->obu_type));
     keep_obu = false;
     return true;
   }
 
   if (p->obu_type == OBU_TEMPORAL_DELIMITER) {
+    mxdebug_if(p->debug_parser, fmt::format("debug_parser:     not keeping due to type being temporal delimiter\n"));
     flush();
     p->seen_frame_header = false;
     keep_obu             = false;
