@@ -30,7 +30,7 @@ function run_build {
   $DEBUG tar czf ${PACKAGE_DIR}/${package}.tar.gz .
   $DEBUG cd ${tmpdir}/..
   $DEBUG rm -rf $tmpdir
-  $DEBUG cd ~/opt/mac
+  $DEBUG cd ${TARGET}
   $DEBUG tar xzf ${PACKAGE_DIR}/${package}.tar.gz
 }
 
@@ -41,7 +41,7 @@ function run_uninstall {
   if [[ ! -f $FILE ]] fail "No such package: $FILE"
 
   local tmpfile=$(mktemp ${TMPDIR}/uninstallXXXXXX)
-  cd ~/opt/mac
+  cd ${TARGET}
   tar tzf ${FILE} > ${tmpfile}
   grep -v '/$' ${tmpfile} | tr '\n' '\0' | xargs -0 $DEBUG rm -f
   grep    '/$' ${tmpfile} | perl -le '$/ = ""; print join("\n", reverse split(/\n/, <>))' | tr '\n' '\0' | xargs -0 $DEBUG rmdir || true
@@ -54,7 +54,7 @@ function run_install {
   if [[ ! -f $FILE ]] FILE=${PACKAGE_DIR}/${FILE}.tar.gz
   if [[ ! -f $FILE ]] fail "No such package: $FILE"
 
-  cd ~/opt/mac
+  cd ${TARGET}
   tar xzf ${FILE}
 }
 

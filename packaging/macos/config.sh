@@ -1,7 +1,7 @@
-export TARGET=$HOME/net/sweet-chili/home/mosu/opt/mac
-export SRCDIR=$HOME/net/sweet-chili/home/mosu/prog/mac/source
-export PACKAGE_DIR=$HOME/prog/mac/packages
-export DOCBOOK_XSL_ROOT_DIR=$HOME/prog/mac/xsl-stylesheets
+export TARGET=$HOME/opt
+export SRCDIR=$HOME/opt/source
+export PACKAGE_DIR=$HOME/opt/packages
+export DOCBOOK_XSL_ROOT_DIR=$HOME/opt/xsl-stylesheets
 export CMPL=$HOME/tmp/compile
 export PATH=${TARGET}/bin:$PATH
 export CC="clang"
