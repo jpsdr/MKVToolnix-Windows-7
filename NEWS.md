@@ -2,32 +2,39 @@
 
 ## New features and enhancements
 
+* mkvmerge: AV1 parser: the variable-width OBU size field will be re-written
+  with minimal length if it's encoded longer than necessary.
 * mkvmerge: when splitting is active the program will output the timestamps
   actually used for making the decision when to split. If GUI mode is active,
   a specially formatted line `#GUI#splitting_before_timestamp <timestamp>` is
   output as well. Lines prefixed with`#GUI#` are suitable for machine parsing,
   won't be translated and are guaranteed not to change in format. Implements
   #3421.
-* MKVToolNix GUI: info tool: added information about the file (directory,
-  size, modification timestamp) at the top of each tab. Implements #3407.
 * MKVToolNix GUI: multiplexer: when dragging & dropping directories to the
   "attachments" tab, the files contained in those directories will be
   attached. Implements #3410.
-* mkvmerge: AV1 parser: the variable-width OBU size field will be re-written
-  with minimal length if it's encoded longer than necessary.
+* MKVToolNix GUI: info tool: added information about the file (directory,
+  size, modification timestamp) at the top of each tab. Implements #3407.
 
 ## Bug fixes
 
+* mkvmerge: AV1 parser: fixed the parser completely aborting when parsing the
+  OBU size field fails due to there not being enough data to parse. Instead
+  the parser will remember the last known-good position & restart from there
+  after more data is available. Fixes #3431.
 * mkvmerge: HDMV PGS subtitles: reverted the change that implemented a
   heuristic for detecting bogus timestamps & attempting to fix them. This was
   done to fix #3268. Unfortunately this affected valid subtitle files with
   intentional huge gaps in timestamps, e.g. forced subtitle tracks. The
   heuristic has simply been removed, fixing #3392.
+* mkvmerge: Matroska reader: fixed reading files with EBML Void elements
+  before the Matroska Segment element.
 * mkvmerge: fixed reversed attachment selection: `--attachments !4` would not
   copy any attachment instead of all attachments but the one with ID 4. Fixes
   #3427.
-* MKVToolNix GUI: header editor: fixed pixelated icons on higher display
-  scaling values. Fixes #3420.
+* mkvextract: IETF BCP 47/RFC 5646 language tags: mkvextract will now use &
+  prefer IETF BCP 47 track language elements if they're present. Only affects
+  the VobSub & USF subtitle extraction.
 * mkvpropedit, MKVToolNix GUI's chapter & header editors: updated the list of
   deprecated Matroska elements. The applications will no longer try to write
   those elements, even if they're found in the file to be modified. The
@@ -51,15 +58,8 @@
   write data to the end, creating ever-growing files. This is now handled
   properly by voiding this too-small Seek Head & finding a proper space for a
   new one instead. Fixes #3338.
-* mkvextract: IETF BCP 47/RFC 5646 language tags: mkvextract will now use &
-  prefer IETF BCP 47 track language elements if they're present. Only affects
-  the VobSub & USF subtitle extraction.
-* mkvmerge: Matroska reader: fixed reading files with EBML Void elements
-  before the Matroska Segment element.
-* mkvmerge: AV1 parser: fixed the parser completely aborting when parsing the
-  OBU size field fails due to there not being enough data to parse. Instead
-  the parser will remember the last known-good position & restart from there
-  after more data is available. Fixes #3431.
+* MKVToolNix GUI: header editor: fixed pixelated icons on higher display
+  scaling values. Fixes #3420.
 
 ## Build system changes
 
