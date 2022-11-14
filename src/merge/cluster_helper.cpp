@@ -225,7 +225,7 @@ cluster_helper_c::split(packet_cptr &packet) {
   finish_file(false, create_new_file, previously_discarding);
 
   if (mtx::cli::g_gui_mode)
-    mxinfo(fmt::format("#GUI#splitting_befeore_timestamp {0}\n", formatted_splitting_before));
+    mxinfo(fmt::format("#GUI#splitting_before_timestamp {0}\n", formatted_splitting_before));
 
   mxinfo(fmt::format(Y("Timestamp used in split decision: {0}\n"), formatted_splitting_before));
 

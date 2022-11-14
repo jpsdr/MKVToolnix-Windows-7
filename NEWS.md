@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: splitting: fixed a typo in the string output in GUI mode regarding
+  the timestamps before which splitting was done. See #3421.
+
+
 # Version 72.0.0 "Minuano (Six-eight)" 2022-11-13
 
 ## New features and enhancements
