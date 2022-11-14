@@ -103,8 +103,10 @@ memory_cptr
 decode(std::string const &src) {
   auto pos      = 0u;
   auto pad      = 0u;
-  auto dst      = memory_c::alloc(0);
   auto src_size = src.size();
+  auto dst      = memory_c::alloc(src_size);
+  auto dst_ptr  = dst->get_buffer();
+  auto dst_idx  = 0;
 
   while (pos < src_size) {
     unsigned char in[4];
@@ -149,20 +151,20 @@ decode(std::string const &src) {
     mid[4] = values[2] << 6;
     mid[5] = values[3];
 
-    auto dst_prev_size = dst->get_size();
-    dst->resize(dst_prev_size + (0 == pad ? 3 : 1 == pad ? 2 : 1));
-    auto dst_ptr = dst->get_buffer() + dst_prev_size;
-
-    dst_ptr[0] = mid[0] | mid[1];
+    dst_ptr[dst_idx] = mid[0] | mid[1];
     if (1 >= pad) {
-      dst_ptr[1] = mid[2] | mid[3];
+      dst_ptr[dst_idx + 1] = mid[2] | mid[3];
       if (0 == pad)
-        dst_ptr[2] = mid[4] | mid[5];
+        dst_ptr[dst_idx + 2] = mid[4] | mid[5];
     }
+
+    dst_idx += 0 == pad ? 3 : 1 == pad ? 2 : 1;
 
     if (0 != pad)
       break;
   }
+
+  dst->resize(dst_idx);
 
   return dst;
 }

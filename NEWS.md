@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: greatly enhanced the speed of Base64 decoding which is used used
+  e.g. when reading pictures embedded in Ogg or FLAC files or for binary data
+  inside XML chapter & tag files. Even small blocks of data could take
+  unreasonably long.
+
 ## Bug fixes
 
 * mkvmerge: splitting: fixed a typo in the string output in GUI mode regarding
