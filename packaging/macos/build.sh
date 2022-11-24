@@ -598,7 +598,7 @@ EOF
   if [[ $DMG_PRE == 1 ]]; then
     # Ziel: 29.0.0-revision-008-gb71b2b27c-01808
     # describe: release-29.0.0-8-gb71b2b27c
-    local build_number_file=$HOME/net/home/prog/mac/build-number
+    local build_number_file=$HOME/opt/build-number
     local build_number=$(< $build_number_file)
     let build_number=$build_number+1
     echo $build_number > $build_number_file
