@@ -443,6 +443,7 @@ Tab::clearOutput() {
   p->ui->warnings->clear();
   p->ui->errors->clear();
   p->ui->acknowledgeWarningsAndErrorsButton->setEnabled(false);
+  p->m_fullOutput.clear();
 
   if (MainWindow::jobTool()->model()->isRunning())
     return;

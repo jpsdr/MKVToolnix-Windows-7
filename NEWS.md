@@ -11,6 +11,11 @@
 
 * mkvmerge: splitting: fixed a typo in the string output in GUI mode regarding
   the timestamps before which splitting was done. See #3421.
+* MKVToolNix GUI: job output: after having run multiple jobs the "Clear
+  output" functionality only reset the visible parts. However, using the "save
+  output" function would also save the output generated before the user used
+  "clear output". Now only the output after the last use of "clear output" is
+  saved. Fixes #3438.
 
 
 # Version 72.0.0 "Minuano (Six-eight)" 2022-11-13
