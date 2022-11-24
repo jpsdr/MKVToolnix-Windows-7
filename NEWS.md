@@ -16,6 +16,10 @@
   output" function would also save the output generated before the user used
   "clear output". Now only the output after the last use of "clear output" is
   saved. Fixes #3438.
+* build system: when probing for the FLAC library the Ogg libraries will be
+  linked with the compiled test program as well. This fixes detection if the
+  `pkg-config` settings for FLAC don't list Ogg & the linker doesn't find the
+  library automatically (e.g. for my macOS builds). Fixes #3439.
 
 
 # Version 72.0.0 "Minuano (Six-eight)" 2022-11-13

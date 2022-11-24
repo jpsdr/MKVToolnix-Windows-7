@@ -21,7 +21,7 @@ dnl
     AC_CHECK_LIB(FLAC, FLAC__stream_decoder_skip_single_frame,
                  [ flac_decoder_skip_found=yes ],
                  [ flac_decoder_skip_found=no ],
-                 $FLAC_LIBS)
+                 [ $FLAC_LIBS $OGG_LIBS ])
     if test x"$flac_decoder_skip_found" = xyes; then
       opt_features_yes="$opt_features_yes\n   * FLAC audio"
       AC_DEFINE(HAVE_FLAC_DECODER_SKIP, [1], [Define if FLAC__stream_decoder_skip_single_frame exists])
