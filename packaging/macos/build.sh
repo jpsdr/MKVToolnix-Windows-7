@@ -5,6 +5,7 @@ set -x
 
 export SCRIPT_PATH=${0:a:h}
 source ${SCRIPT_PATH}/config.sh
+test -f ${SCRIPT_PATH}/config.local.sh && source ${SCRIPT_PATH}/config.local.sh
 source ${SCRIPT_PATH}/specs.sh
 
 RAKE=./drake
