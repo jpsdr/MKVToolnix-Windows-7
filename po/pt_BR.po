@@ -163,17 +163,17 @@ msgid ""
 msgstr "  --attachment-name <nome> O nome deve ser guardado no seguinte anexo.\n"
 
 #: src/merge/mkvmerge.cpp:288
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --audio-emphasis <TID:n|keyword>\n"
 "                           Sets the audio emphasis track header value. It can\n"
 "                           be either a number or a keyword (see\n"
 "                           '--list-audio-emphasis' for the full list).\n"
 msgstr ""
-"  --stereo-mode <TID:n|keyword>\n"
-"                           Define o parâmetro do modo estéreo. Pode ser\n"
-"                           um número de 0 - 14 ou uma palavra-chave\n"
-"                           (veja a documentação para a lista completa).\n"
+"  --audio-emphasis <TID:n|keyword>\n"
+"                           Define o valor do cabeçalho da faixa de ênfase de áudio.\n"
+"                           Pode ser um número ou uma palavra-chave (consulte\n"
+"                           '--list-audio-emphasis' para a lista completa).\n"
 
 #: src/merge/mkvmerge.cpp:266
 #, no-c-format
@@ -619,6 +619,8 @@ msgid ""
 "  --list-audio-emphasis    Lists all supported values for the\n"
 "                           '--audio-emphasis' option and their meaning.\n"
 msgstr ""
+"  --list-audio-emphasis    Lista todos os valores suportados pela opção\n"
+"                           '--audio-emphasis' e seus significados.\n"
 
 #: src/merge/mkvmerge.cpp:395
 #, no-c-format
@@ -635,6 +637,8 @@ msgid ""
 "  --list-stereo-modes      Lists all supported values for the '--stereo-mode'\n"
 "                           option and their meaning.\n"
 msgstr ""
+"  --list-stereo-modes      Lista todos os valores suportados\n"
+"                           pela opção '--stereo-mode' e seus significados.\n"
 
 #: src/merge/mkvmerge.cpp:341
 #, no-c-format
@@ -914,7 +918,7 @@ msgid "  --split-max-files <n>    Create at most n files.\n"
 msgstr "  --split-max-files <n>    Cria no máximo n arquivos.\n"
 
 #: src/merge/mkvmerge.cpp:313
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --stereo-mode <TID:n|keyword>\n"
 "                           Sets the stereo mode parameter. It can\n"
@@ -923,8 +927,8 @@ msgid ""
 msgstr ""
 "  --stereo-mode <TID:n|keyword>\n"
 "                           Define o parâmetro do modo estéreo. Pode ser\n"
-"                           um número de 0 - 14 ou uma palavra-chave\n"
-"                           (veja a documentação para a lista completa).\n"
+"                           um número de 0 a 14 ou uma palavra-chave\n"
+"                           (use '--list-stereo-modes' para a lista completa).\n"
 
 #: src/merge/mkvmerge.cpp:372
 #, no-c-format
@@ -1393,9 +1397,9 @@ msgid " Options that only apply to VobSub subtitle tracks:\n"
 msgstr " Opções que só se aplicam a faixas de legendas VobSub:\n"
 
 #: src/merge/mkvmerge.cpp:279
-#, fuzzy, no-c-format
+#, no-c-format
 msgid " Options that only apply to audio tracks:\n"
-msgstr " Opções que apenas se aplicam a faixas de vídeo:\n"
+msgstr "Opções que se aplicam apenas a faixas de áudio:\n"
 
 #: src/merge/mkvmerge.cpp:371
 #, no-c-format
@@ -3058,9 +3062,9 @@ msgid "<Do not change>"
 msgstr "<Não altere>"
 
 #: src/common/xml/ebml_chapters_converter.cpp:194
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "<EditionDisplay> is missing the <EditionString> child."
-msgstr "<ChapterDisplay> não tem o filho <ChapterString>."
+msgstr "<EditionDisplay> não tem o filho <EditionString>."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:145
 #, no-c-format
@@ -3629,7 +3633,7 @@ msgstr "Após a &fila de tarefa ter parado"
 #: src/mkvtoolnix-gui/merge/input.cpp:1726
 #, no-c-format
 msgid "Afterwards &close the current multiplex settings."
-msgstr "Em seguida, &fechar as configurações atuais do multiplex."
+msgstr "Em seguida, &fechar as configurações de multiplexação atuais."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:1719
 #: src/mkvtoolnix-gui/merge/input.cpp:1724
@@ -4069,14 +4073,14 @@ msgid "Audio channels"
 msgstr "Canais de áudio"
 
 #: src/common/property_element.cpp:214
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Audio emphasis"
-msgstr "Canais de áudio"
+msgstr "Ênfase de áudio"
 
 #: src/merge/mkvmerge.cpp:1065
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Audio emphasis mode option: not given in the form <TID>:<mode> where the mode is either a number or keyword from this list: {0} (argument was '{1}').\n"
-msgstr "Parâmetro de modo estéreo: não dado na forma <TID>:<n|keyword>, onde n é um número entre 0 e {0} ou uma destas palavras-chave: {1} (o argumento foi '{2}').\n"
+msgstr "Opção de modo de ênfase de áudio: não fornecida na forma <TID>:<mode>, onde o modo é um número ou uma palavra-chave desta lista: {0} (o argumento era '{1}').\n"
 
 #: src/common/property_element.cpp:211
 #, no-c-format
@@ -4380,7 +4384,7 @@ msgstr "Criar arquivo de &opções"
 #: src/common/audio_emphasis.cpp:52
 #, no-c-format
 msgid "CCIT-J.17"
-msgstr ""
+msgstr "CCIT-J.17"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:173
 #, no-c-format
@@ -4711,9 +4715,9 @@ msgid "Chapter segment edition UID"
 msgstr "UID da edição do segmento de capítulo"
 
 #: src/common/kax_element_names.cpp:313
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Chapter skip type"
-msgstr "Exibição do capítulo"
+msgstr "Tipo de pular capítulo"
 
 #: src/common/kax_element_names.cpp:303
 #, no-c-format
@@ -5642,7 +5646,7 @@ msgstr "Idioma padrão"
 #: src/common/kax_element_names.cpp:331
 #, no-c-format
 msgid "Default language (bogus element with invalid ID)"
-msgstr ""
+msgstr "Idioma padrão (elemento falso com ID inválido)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2234
 #, no-c-format
@@ -5806,9 +5810,9 @@ msgid "Destination file name: %1"
 msgstr "Nome de arquivo de destino: %1"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:247
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Destination file's absolute path"
-msgstr "Nome do arquivo de destino"
+msgstr "Caminho absoluto do arquivo de destino"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2263
 #, no-c-format
@@ -5816,9 +5820,9 @@ msgid "Destination file:"
 msgstr "Arquivo de destino:"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:248
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Destination folders's absolute path"
-msgstr "Nome do arquivo de destino"
+msgstr "Caminho absoluto das pastas de destino"
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:310
 #, no-c-format
@@ -6220,9 +6224,9 @@ msgid "Edition UID"
 msgstr "UID da edição"
 
 #: src/common/kax_element_names.cpp:287
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Edition display"
-msgstr "Entrada de edição"
+msgstr "Exibição da edição"
 
 #: src/common/kax_element_names.cpp:282
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:82
@@ -6247,14 +6251,14 @@ msgid "Edition flag ordered"
 msgstr "Flag de edição ordenada"
 
 #: src/common/kax_element_names.cpp:289
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Edition language (IETF BCP 47)"
-msgstr "Etiqueta de idioma (IETF BCP 47)"
+msgstr "Idioma da edição (IETF BCP 47)"
 
 #: src/common/kax_element_names.cpp:288
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Edition string"
-msgstr "Entrada de edição"
+msgstr "String da edição"
 
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:33
 #, no-c-format
@@ -6304,17 +6308,17 @@ msgstr "Elementos na categoria '{0}' ('--edit {1}'):\n"
 #: src/common/kax_element_names.cpp:111
 #, no-c-format
 msgid "Emphasis"
-msgstr ""
+msgstr "Ênfase"
 
 #: src/common/property_element.cpp:214
 #, no-c-format
 msgid "Emphasis applied on audio which must be reversed by player to get the actual samples."
-msgstr ""
+msgstr "Ênfase aplicada no áudio que deve ser invertida pelo reprodutor para obter as amostras reais."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2248
 #, no-c-format
 msgid "Emphasis:"
-msgstr ""
+msgstr "Ênfase:"
 
 #: src/common/hacks.cpp:64
 #, no-c-format
@@ -6758,12 +6762,12 @@ msgstr "FLV (Flash Video)"
 #: src/common/audio_emphasis.cpp:53
 #, no-c-format
 msgid "FM radio in Europe"
-msgstr ""
+msgstr "rádio FM na Europa"
 
 #: src/common/audio_emphasis.cpp:54
 #, no-c-format
 msgid "FM radio in the USA"
-msgstr ""
+msgstr "rádio FM nos EUA"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:273
 #, no-c-format
@@ -8913,7 +8917,7 @@ msgstr "Foi requirida uma modificação de propriedades na seção '{0}', mas ne
 #: src/mkvtoolnix-gui/forms/info/tab.h:155
 #, no-c-format
 msgid "Modified:"
-msgstr ""
+msgstr "Modificado:"
 
 #: src/common/kax_element_names.cpp:271
 #, no-c-format
@@ -9507,7 +9511,7 @@ msgstr "Nú&mero de entradas a serem criadas:"
 #: src/common/stereo_mode.cpp:102
 #, no-c-format
 msgid "Number"
-msgstr ""
+msgstr "Número"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2156
 #, no-c-format
@@ -11601,9 +11605,9 @@ msgid "Source file's directory"
 msgstr "Diretório do arquivo de origem"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:249
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Source files' absolute paths"
-msgstr "Nomes de arquivos de origem"
+msgstr "Caminhos absolutos dos arquivos de origem"
 
 #: src/common/property_element.cpp:203
 #, no-c-format
@@ -11740,7 +11744,7 @@ msgstr "Modo estéreo"
 #: src/common/kax_element_names.cpp:164
 #, no-c-format
 msgid "Stereo mode (deprecated element)"
-msgstr ""
+msgstr "Modo estéreo (elemento obsoleto)"
 
 #: src/merge/mkvmerge.cpp:1014
 #, no-c-format
@@ -11825,9 +11829,9 @@ msgstr "Suprime o estado criado."
 
 #: src/common/audio_emphasis.cpp:114
 #: src/common/stereo_mode.cpp:102
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Symbolic name"
-msgstr "Nome do codec"
+msgstr "Nome simbólico"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:663
 #, no-c-format
@@ -14151,7 +14155,7 @@ msgstr "Escala de código de tempo"
 #: src/merge/cluster_helper.cpp:230
 #, no-c-format
 msgid "Timestamp used in split decision: {0}\n"
-msgstr ""
+msgstr "Código de tempo usado na decisão de dividir: {0}\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2185
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2208
@@ -15614,7 +15618,7 @@ msgstr "ac3_bs_packetizer::add_to_buffer(): Código não testado (o 'tamanho' é
 #: src/common/kax_info.cpp:863
 #, no-c-format
 msgid "advertisement"
-msgstr ""
+msgstr "publicidade"
 
 #: src/common/stereo_mode.cpp:60
 #, no-c-format
@@ -15763,7 +15767,7 @@ msgstr "encriptação"
 #: src/common/kax_info.cpp:859
 #, no-c-format
 msgid "end credits"
-msgstr ""
+msgstr "créditos finais"
 
 #: src/common/kax_info.cpp:711
 #, no-c-format
@@ -15783,7 +15787,7 @@ msgstr "filelist_t não encontrado para generic_packetizer_c. {0}\n"
 #: src/common/audio_emphasis.cpp:50
 #, no-c-format
 msgid "first order filter found in CD/DVD/MPEG audio"
-msgstr ""
+msgstr "filtro de primeira ordem encontrado em áudios de CD/DVD/MPEG"
 
 #: src/common/flac.cpp:139
 #, no-c-format
@@ -16208,7 +16212,7 @@ msgstr "mpeg_ps_reader: Não deveria ter acontecido #2. {0}"
 #: src/common/audio_emphasis.cpp:49
 #, no-c-format
 msgid "no emphasis"
-msgstr ""
+msgstr "sem ênfase"
 
 #: src/common/kax_info.cpp:798
 #, no-c-format
@@ -16241,9 +16245,9 @@ msgid "no signature hash algorithm"
 msgstr "nenhuma assinatura com função algorítmica"
 
 #: src/common/kax_info.cpp:857
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "no skipping"
-msgstr "Cortar:"
+msgstr "sem saltos"
 
 #: src/input/r_ogm.cpp:431
 #, no-c-format
@@ -16258,7 +16262,7 @@ msgstr "ogg_sync_buffer falhou\n"
 #: src/common/kax_info.cpp:858
 #, no-c-format
 msgid "opening credits"
-msgstr ""
+msgstr "créditos de abertura"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:127
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:131
@@ -16279,37 +16283,37 @@ msgstr "passar"
 #: src/common/audio_emphasis.cpp:63
 #, no-c-format
 msgid "phono filter (Columbia LP)"
-msgstr ""
+msgstr "filtro phono (Columbia LP)"
 
 #: src/common/audio_emphasis.cpp:62
 #, no-c-format
 msgid "phono filter (EMI)"
-msgstr ""
+msgstr "filtro phono (EMI)"
 
 #: src/common/audio_emphasis.cpp:60
 #, no-c-format
 msgid "phono filter (IEC N78)"
-msgstr ""
+msgstr "filtro phono (IEC N78)"
 
 #: src/common/audio_emphasis.cpp:64
 #, no-c-format
 msgid "phono filter (London)"
-msgstr ""
+msgstr "filtro phono (London)"
 
 #: src/common/audio_emphasis.cpp:65
 #, no-c-format
 msgid "phono filter (NARTB)"
-msgstr ""
+msgstr "filtro phono (NARTB)"
 
 #: src/common/audio_emphasis.cpp:59
 #, no-c-format
 msgid "phono filter (RIAA)"
-msgstr ""
+msgstr "filtro phono (RIAA)"
 
 #: src/common/audio_emphasis.cpp:61
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "phono filter (Teldec)"
-msgstr "nenhum arquivo carregado"
+msgstr "filtro phono (Teldec)"
 
 #: src/common/kax_info.cpp:627
 #, no-c-format
@@ -16344,12 +16348,12 @@ msgstr "largura de pixels: {0}"
 #: src/common/kax_info.cpp:862
 #, no-c-format
 msgid "preview of current episode"
-msgstr ""
+msgstr "prévia do episódio atual"
 
 #: src/common/kax_info.cpp:861
 #, no-c-format
 msgid "preview of next episode"
-msgstr ""
+msgstr "prévia do próximo episódio"
 
 #: src/common/kax_info.cpp:734
 #, no-c-format
@@ -16379,7 +16383,7 @@ msgstr "real_reader: Somente as versões de cabeçalho 3, 4 e 5 são suportadas.
 #: src/common/kax_info.cpp:860
 #, no-c-format
 msgid "recap"
-msgstr ""
+msgstr "recapitular"
 
 #: src/common/kax_info.cpp:710
 #, no-c-format
