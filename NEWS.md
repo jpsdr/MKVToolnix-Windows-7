@@ -6,6 +6,8 @@
   e.g. when reading pictures embedded in Ogg or FLAC files or for binary data
   inside XML chapter & tag files. Even small blocks of data could take
   unreasonably long.
+* mkvmerge: added support for reading HEVC/H.265 video from FLV
+  containers. Implements #3466.
 
 ## Bug fixes
 

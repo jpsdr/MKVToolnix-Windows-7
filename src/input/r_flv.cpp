@@ -20,6 +20,8 @@
 #include "common/bit_reader.h"
 #include "common/codec.h"
 #include "common/endian.h"
+#include "common/hevc/hevcc.h"
+#include "common/hevc/es_parser.h"
 #include "common/mm_io_x.h"
 #include "common/id_info.h"
 #include "common/strings/formatting.h"
@@ -27,6 +29,7 @@
 #include "merge/input_x.h"
 #include "output/p_aac.h"
 #include "output/p_avc.h"
+#include "output/p_hevc.h"
 #include "output/p_mp3.h"
 #include "output/p_video_for_windows.h"
 
@@ -319,6 +322,7 @@ flv_reader_c::identify() {
     id_result_track(idx, track->is_audio() ? ID_RESULT_TRACK_AUDIO : ID_RESULT_TRACK_VIDEO,
                       track->m_fourcc.equiv("AVC1") ? "AVC/H.264"
                     : track->m_fourcc.equiv("FLV1") ? "Sorenson h.263 (Flash version)"
+                    : track->m_fourcc.equiv("HVC1") ? "HEVC/H.265/MPEG-H"
                     : track->m_fourcc.equiv("VP6F") ? "On2 VP6 (Flash version)"
                     : track->m_fourcc.equiv("VP6A") ? "On2 VP6 (Flash version with alpha channel)"
                     : track->m_fourcc.equiv("AAC ") ? "AAC"
@@ -353,6 +357,9 @@ flv_reader_c::create_packetizer(int64_t id) {
   else if (track->m_fourcc.equiv("FLV1") || track->m_fourcc.equiv("VP6F") || track->m_fourcc.equiv("VP6A"))
     create_v_generic_packetizer(track);
 
+  else if (track->m_fourcc.equiv("HVC1"))
+    create_v_hevc_packetizer(track);
+
   else if (track->m_fourcc.equiv("AAC "))
     create_a_aac_packetizer(track);
 
@@ -364,6 +371,13 @@ void
 flv_reader_c::create_v_avc_packetizer(flv_track_cptr &track) {
   m_ti.m_private_data = track->m_private_data;
   track->m_ptzr       = add_packetizer(new avc_video_packetizer_c(this, m_ti, track->m_v_frame_rate ? mtx::to_int_rounded(1'000'000'000 / track->m_v_frame_rate) : 0, track->m_v_width, track->m_v_height));
+  show_packetizer_info(m_video_track_idx, ptzr(track->m_ptzr));
+}
+
+void
+flv_reader_c::create_v_hevc_packetizer(flv_track_cptr &track) {
+  m_ti.m_private_data = track->m_private_data;
+  track->m_ptzr       = add_packetizer(new hevc_video_packetizer_c(this, m_ti, track->m_v_frame_rate ? mtx::to_int_rounded(1'000'000'000 / track->m_v_frame_rate) : 0, track->m_v_width, track->m_v_height));
   show_packetizer_info(m_video_track_idx, ptzr(track->m_ptzr));
 }
 
@@ -433,6 +447,35 @@ flv_reader_c::new_stream_v_avc(flv_track_cptr &track,
   }
 
   mxdebug_if(m_debug, fmt::format("new_stream_v_avc: video width: {0}, height: {1}, frame rate: {2}\n", track->m_v_width, track->m_v_height, track->m_v_frame_rate));
+
+  return true;
+}
+
+bool
+flv_reader_c::new_stream_v_hevc(flv_track_cptr &track,
+                                memory_cptr const &data) {
+  try {
+    auto hevcc = mtx::hevc::hevcc_c::unpack(data);
+    hevcc.parse_vps_list(true);
+    hevcc.parse_sps_list(true);
+
+    for (auto &sps_info : hevcc.m_sps_info_list) {
+      if (!track->m_v_width)
+        track->m_v_width = sps_info.width;
+      if (!track->m_v_height)
+        track->m_v_height = sps_info.height;
+      if (!track->m_v_frame_rate && sps_info.timing_info_present && sps_info.num_units_in_tick && sps_info.time_scale)
+        track->m_v_frame_rate = mtx::rational(sps_info.time_scale, sps_info.num_units_in_tick);
+    }
+
+    if (!track->m_v_frame_rate)
+      track->m_v_frame_rate = 25;
+
+  } catch (mtx::mm_io::exception &ex) {
+    mxdebug_if(m_debug, fmt::format("new_stream_v_hevc: HEVCC parsing failed: {0}\n", ex.what()));
+  }
+
+  mxdebug_if(m_debug, fmt::format("new_stream_v_hevc: video width: {0}, height: {1}, frame rate: {2}\n", track->m_v_width, track->m_v_height, track->m_v_frame_rate));
 
   return true;
 }
@@ -580,6 +623,45 @@ flv_reader_c::process_video_tag_avc(flv_track_cptr &track) {
 }
 
 bool
+flv_reader_c::process_video_tag_hevc(flv_track_cptr &track) {
+  if (4 > m_tag.m_data_size)
+    return false;
+
+  track->m_fourcc         = "HVC1";
+  auto hevc_packet_type   = m_in->read_uint8();
+  track->m_v_cts_offset   = m_in->read_int24_be();
+  m_tag.m_data_size      -= 4;
+
+  mxdebug_if(m_debug, fmt::format("  process_video_tag_hevc: hevc_packet_type {0} size {1}\n", hevc_packet_type, m_tag.m_data_size));
+
+  // The CTS offset is only valid for NALUs.
+  if (1 != hevc_packet_type)
+    track->m_v_cts_offset = 0;
+
+  // Only sequence headers need more processing
+  if (0 != hevc_packet_type)
+    return true;
+
+  mxdebug_if(m_debug, fmt::format("  HEVC sequence header at {0} size {1}\n", m_in->getFilePointer(), m_tag.m_data_size));
+
+  auto data         = m_in->read(m_tag.m_data_size);
+  m_tag.m_data_size = 0;
+
+  if (!track->m_headers_read) {
+    if (!new_stream_v_hevc(track, data))
+      return false;
+
+    track->m_headers_read = true;
+  }
+
+  track->m_extra_data = data;
+  if (!track->m_private_data)
+    track->m_private_data = data->clone();
+
+  return true;
+}
+
+bool
 flv_reader_c::process_video_tag_generic(flv_track_cptr &track,
                                         flv_tag_c::codec_type_e codec_id) {
   track->m_fourcc       = flv_tag_c::CODEC_SORENSON_H263  == codec_id ? "FLV1"
@@ -657,6 +739,10 @@ flv_reader_c::process_video_tag(flv_track_cptr &track) {
 
     else
       track->m_headers_read = true;
+
+  } else if (flv_tag_c::CODEC_H265 == codec_id) {
+    mxdebug_if(m_debug, "  Codec type: H.265\n");
+    return process_video_tag_hevc(track);
 
   } else {
     mxdebug_if(m_debug, fmt::format("  Codec type unknown ({0})\n", static_cast<unsigned int>(codec_id)));

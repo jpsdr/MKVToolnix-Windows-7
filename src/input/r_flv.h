@@ -64,6 +64,7 @@ public:
     , CODEC_VP6_WITH_ALPHA
     , CODEC_SCREEN_VIDEO_V2
     , CODEC_H264
+    , CODEC_H265 = 12,
   };
 
 public:
@@ -142,6 +143,7 @@ private:
 
 public:
   virtual bool new_stream_v_avc(flv_track_cptr &track, memory_cptr const &data);
+  virtual bool new_stream_v_hevc(flv_track_cptr &track, memory_cptr const &data);
 
   virtual void read_headers();
   virtual void identify();
@@ -164,11 +166,13 @@ protected:
   bool process_audio_tag_sound_format(flv_track_cptr &track, uint8_t sound_format);
   bool process_video_tag(flv_track_cptr &track);
   bool process_video_tag_avc(flv_track_cptr &track);
+  bool process_video_tag_hevc(flv_track_cptr &track);
   bool process_video_tag_generic(flv_track_cptr &track, flv_tag_c::codec_type_e codec_id);
 
   void create_a_aac_packetizer(flv_track_cptr &track);
   void create_a_mp3_packetizer(flv_track_cptr &track);
   void create_v_avc_packetizer(flv_track_cptr &track);
+  void create_v_hevc_packetizer(flv_track_cptr &track);
   void create_v_generic_packetizer(flv_track_cptr &track);
 
   unsigned int add_track(char type);
