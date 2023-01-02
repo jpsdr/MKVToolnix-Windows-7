@@ -26,7 +26,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-constexpr auto VERSIONNAME = "Minuano (Six-eight)";
+constexpr auto VERSIONNAME = "25 or 6 to 4";
 
 version_number_t::version_number_t(const std::string &s)
   : valid{}
