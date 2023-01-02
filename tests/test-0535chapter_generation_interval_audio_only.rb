@@ -5,7 +5,7 @@ file = "data/simple/v.mp3"
 describe "mkvmerge / generate chapter »interval« without video tracks"
 
 def hash_results max
-  ( (1..max).collect { |i| hash_file(sprintf("%s-%02d", tmp, i)) } + [ File.exists?(sprintf("%s-%02d", tmp, max + 1)) ? 'bad' : 'ok' ]).join '+'
+  ( (1..max).collect { |i| hash_file(sprintf("%s-%02d", tmp, i)) } + [ FileTest.exist?(sprintf("%s-%02d", tmp, max + 1)) ? 'bad' : 'ok' ]).join '+'
 end
 
 test_merge "#{file} + #{file} + #{file}", :args => "--generate-chapters interval:30s"

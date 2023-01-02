@@ -1,6 +1,6 @@
 def create_source_tarball suffix = ""
   tarball = "#{Dir.pwd}/../mkvtoolnix-#{c(:PACKAGE_VERSION)}#{suffix}.tar.xz"
-  fail "#{tarball} does already exist" if FileTest.exists?(tarball)
+  fail "#{tarball} does already exist" if FileTest.exist?(tarball)
 
   Dir.mktmpdir do |dir|
     clone_dir = "#{dir}/mkvtoolnix-#{c(:PACKAGE_VERSION)}"

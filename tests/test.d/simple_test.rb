@@ -85,7 +85,7 @@ class SimpleTest
   end
 
   def clean_tmp
-    File.unlink(@tmp) if @tmp && File.exists?(@tmp) && !ENV["KEEP_TMPFILES"].nil? && (ENV["KEEP_TMPFILES"] != "1")
+    File.unlink(@tmp) if @tmp && FileTest.exist?(@tmp) && !ENV["KEEP_TMPFILES"].nil? && (ENV["KEEP_TMPFILES"] != "1")
     @tmp = nil
   end
 
@@ -106,7 +106,7 @@ class SimpleTest
     re = %r{^#{self.tmp_name_prefix}}
     Dir.entries($temp_dir).each do |entry|
       file = "#{$temp_dir}/#{entry}"
-      File.unlink(file) if re.match(file) and File.exists?(file)
+      File.unlink(file) if re.match(file) and FileTest.exist?(file)
     end
   end
 
@@ -326,7 +326,7 @@ class SimpleTest
     command = "../src/mkvpropedit --engage no_variable_data #{file_name} #{args.first}"
     *result = self.sys command, :exit_code => options[:exit_code], :no_result => options[:no_result]
 
-    self.sys "../src/tools/ebml_validator -M #{file_name}", dont_record_command: true if FileTest.exists?("../src/tools/ebml_validator")
+    self.sys "../src/tools/ebml_validator -M #{file_name}", dont_record_command: true if FileTest.exist?("../src/tools/ebml_validator")
 
     return *result
   end

@@ -277,7 +277,7 @@ def define_default_task
   targets << ($run_unit_tests ? 'tests:run_unit' : 'tests:unit') if $have_gtest
 
   # The tags file -- but only if it exists already
-  if File.exists?("TAGS")
+  if FileTest.exist?("TAGS")
     targets << "TAGS"   if !c(:ETAGS).empty?
     targets << "BROWSE" if !c(:EBROWSE).empty?
   end
@@ -454,7 +454,7 @@ end
 rule '.1' => '.xml' do |t|
   filter = lambda do |code, lines|
     if (0 == code) && lines.any? { |line| /^error|parser error/i.match(line) }
-      File.unlink(t.name) if File.exists?(t.name)
+      File.unlink(t.name) if FileTest.exist?(t.name)
       result = 1
       puts lines.join('')
 
@@ -668,7 +668,7 @@ EOT
     if $po4a_cfg
       desc "Update the man pages' translation files"
       task :manpages do
-        FileUtils.touch($po4a_pot) if !FileTest.exists?($po4a_pot)
+        FileUtils.touch($po4a_pot) if !FileTest.exist?($po4a_pot)
 
         runq "po4a", "#{$po4a_cfg} (update PO/POT)", "#{c(:PO4A)} #{$flags[:po4a]} --no-translations ${po4a_cfg}"
         $all_man_po_files.each do |po_file|
@@ -822,8 +822,8 @@ if $po4a_cfg
   po4a_sources += $available_languages[:manpages].map { |language| "doc/man/po4a/po/#{language}.po" }
 
   file $po4a_stamp => po4a_sources do |t|
-    File.unlink($po4a_stamp)   if  FileTest.exists?($po4a_stamp)
-    FileUtils.touch($po4a_pot) if !FileTest.exists?($po4a_pot)
+    File.unlink($po4a_stamp)   if  FileTest.exist?($po4a_stamp)
+    FileUtils.touch($po4a_pot) if !FileTest.exist?($po4a_pot)
 
     runq "po4a", "#{$po4a_cfg}", "#{c(:PO4A)} #{$flags[:po4a]} #{$po4a_cfg}", :filter_output => po4a_output_filter
     runq_touch $po4a_stamp
@@ -1054,7 +1054,7 @@ task :clean do
 
   remove_files_by_patterns patterns
 
-  if Dir.exists? $dependency_dir
+  if FileTest.exist? $dependency_dir
     puts_vaction "rm -rf", :target => "#{$dependency_dir}"
     FileUtils.rm_rf $dependency_dir
   end

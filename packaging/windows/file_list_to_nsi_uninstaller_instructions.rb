@@ -7,7 +7,7 @@ fail "Missing file list name" if ARGV.empty?
 
 config    = read_config
 file_name = ARGV[0]
-file_name = "#{config['file_list_dir']}/#{file_name}.txt" if !FileTest.exists?(file_name)
+file_name = "#{config['file_list_dir']}/#{file_name}.txt" if !FileTest.exist?(file_name)
 files     = IO.readlines(file_name).map { |file| file.chomp.gsub(%r{^\.}, '').gsub(%r{^/}, '').gsub(%r{/}, '\\') }
 dirs      = {}
 

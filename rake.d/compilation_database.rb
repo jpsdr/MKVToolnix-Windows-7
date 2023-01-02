@@ -8,7 +8,7 @@ module Mtx
     end
 
     def self.read
-      return {} unless FileTest.exists?(@file_name)
+      return {} unless FileTest.exist?(@file_name)
 
       Hash[
         *JSON.parse(IO.readlines(@file_name).join("")).
@@ -19,7 +19,7 @@ module Mtx
 
     def self.write
       return if @compilation_commands.empty?
-      return if !FileTest.exists?(@file_name) && !c?(:BUILD_COMPILATION_DATABASE)
+      return if !FileTest.exist?(@file_name) && !c?(:BUILD_COMPILATION_DATABASE)
 
       entries = self.read.merge(@compilation_commands).values.sort_by { |e| e["file"] }
       File.open(@file_name, "w") do |f|

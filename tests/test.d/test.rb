@@ -25,7 +25,7 @@ class Test
     re = /^#{self.tmp_name_prefix}/
     Dir.entries($temp_dir).each do |entry|
       file = "#{$temp_dir}/#{entry}"
-      File.unlink(file) if re.match(file) and File.exists?(file)
+      File.unlink(file) if re.match(file) and FileTest.exist?(file)
     end
   end
 
@@ -84,7 +84,7 @@ class Test
     output = hash_file @tmp
 
     if erase
-      File.unlink(@tmp) if File.exists?(@tmp) && (ENV["KEEP_TMPFILES"] != "1")
+      File.unlink(@tmp) if FileTest.exist?(@tmp) && (ENV["KEEP_TMPFILES"] != "1")
       @debug_commands << "rm #{@tmp}"
       @tmp = nil
     end
@@ -111,7 +111,7 @@ class Test
     command = "../src/mkvpropedit --engage no_variable_data #{file_name} #{args.shift}"
     *result = sys command, retcode
 
-    sys "../src/tools/ebml_validator -M #{file_name}", :dont_record_command => true if FileTest.exists?("../src/tools/ebml_validator")
+    sys "../src/tools/ebml_validator -M #{file_name}", :dont_record_command => true if FileTest.exist?("../src/tools/ebml_validator")
 
     return *result
   end

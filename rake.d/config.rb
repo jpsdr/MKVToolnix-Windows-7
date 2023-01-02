@@ -13,10 +13,10 @@ end
 def read_build_config
   dir = File.dirname(__FILE__) + '/..'
 
-  fail "build-config not found: please run ./configure" unless File.exists?("#{dir}/build-config")
+  fail "build-config not found: please run ./configure" unless FileTest.exist?("#{dir}/build-config")
 
   config = read_config_file("#{dir}/build-config")
-  config = config.merge(read_config_file("#{dir}/build-config.local")) if File.exists?("#{dir}/build-config.local")
+  config = config.merge(read_config_file("#{dir}/build-config.local")) if FileTest.exist?("#{dir}/build-config.local")
 
   config
 end

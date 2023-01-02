@@ -181,7 +181,7 @@ def import_dependencies
   Dir.glob("#{$dependency_dir}/*.dep").each do |file_name|
     lines  = IO.readlines(file_name).collect(&:chomp)
     target = lines.shift
-    file target => lines.select { |dep_name| File.exists? dep_name }
+    file target => lines.select { |dep_name| FileTest.exist? dep_name }
   end
 end
 
@@ -211,7 +211,7 @@ def install_data(destination, *files)
 end
 
 def remove_files_by_patterns patterns
-  patterns.collect { |pattern| FileList[pattern].to_a }.flatten.uniq.select { |file_name| File.exists? file_name }.each do |file_name|
+  patterns.collect { |pattern| FileList[pattern].to_a }.flatten.uniq.select { |file_name| FileTest.exist? file_name }.each do |file_name|
     puts_vaction "rm", :target => file_name
     File.unlink file_name
   end
@@ -254,7 +254,7 @@ def check_version required, actual
 end
 
 def ensure_file file_name, content = ""
-  if FileTest.exists?(file_name)
+  if FileTest.exist?(file_name)
     current_content = IO.readlines(file_name).join("\n")
     return if current_content == content
   end
@@ -267,7 +267,7 @@ def update_version_number_include
   current_version = nil
   wanted_version  = c(:PACKAGE_VERSION)
 
-  if FileTest.exists?($version_header_name)
+  if FileTest.exist?($version_header_name)
     lines = IO.readlines($version_header_name)
 
     if !lines.empty? && %r{#define.*?"([0-9.]+)"}.match(lines[0])
@@ -352,7 +352,7 @@ def update_qrc_worker qrc
     double_size = size * 2
     double_file = "share/icons/#{double_size}x#{double_size}/#{base_name}.png"
 
-    next unless FileTest.exists?(double_file)
+    next unless FileTest.exist?(double_file)
 
     add_node.call(double_file, 'alias' => name_alias)
     seen[file.gsub(%r{.*/icons}, 'icons')] = true

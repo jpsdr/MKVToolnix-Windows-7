@@ -106,11 +106,11 @@ module AddPo
     base ||= ''
     target = "#{$po_dir}/qt/qt#{base}_#{language}.ts"
 
-    if !FileTest.exists?(target) && /^([a-z]+)_[a-z]+/i.match(language)
+    if !FileTest.exist?(target) && /^([a-z]+)_[a-z]+/i.match(language)
       target = "#{$po_dir}/qt/qt#{base}_#{$1}.ts"
     end
 
-    fail "target file does not exist yet: #{target} (wrong language?)" if !FileTest.exists?(target)
+    fail "target file does not exist yet: #{target} (wrong language?)" if !FileTest.exist?(target)
 
     File.open(target, "w") { |file| file.puts content.map(&:chomp).join("\n") }
     File.unlink file_name

@@ -7,7 +7,7 @@ avi      = "data/avi/v-h264-aac.avi"
 chapters = "data/text/chapters-v-h264-aac.txt"
 
 def hash_results max
-  ( (1..max).collect { |i| hash_file(sprintf("%s-%02d", tmp, i)) } + [ File.exists?(sprintf("%s-%02d", tmp, max + 1)) ? 'bad' : 'ok' ]).join '+'
+  ( (1..max).collect { |i| hash_file(sprintf("%s-%02d", tmp, i)) } + [ FileTest.exist?(sprintf("%s-%02d", tmp, max + 1)) ? 'bad' : 'ok' ]).join '+'
 end
 
 test "chapters-in-mkv: numbers 1 & 7" do

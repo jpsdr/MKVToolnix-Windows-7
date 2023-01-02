@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* build system: fixed compatibility with Ruby 3.2.0 by using `FileTest.exist?`
+  instead of `File.exists?`, `Dir.exists?` & `FileTest.exists?` which were
+  removed in that release.
+
+
 # Version 73.0.0 "25 or 6 to 4" 2023-01-02
 
 ## New features and enhancements
