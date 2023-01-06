@@ -260,16 +260,6 @@ probe_file_format(filelist_t &file) {
   if (is_playlist)
     io = std::make_shared<mm_read_buffer_io_c>(file.playlist_mpls_in);
 
-  // Prefer types hinted by extension
-  auto extension = mtx::fs::to_path(file.name).extension().u8string();
-  if (!extension.empty()) {
-    for (auto type : mtx::file_type_t::by_extension(extension.substr(1))) {
-      auto p = prober_for_type(type);
-      if (p && (reader = p(io, {})))
-        return reader;
-    }
-  }
-
   // File types that can be detected unambiguously but are not
   // supported. The prober does not return if it detects the type.
   do_probe<unsupported_types_signature_prober_c>(io);
@@ -307,6 +297,16 @@ probe_file_format(filelist_t &file) {
     return reader;
   if ((reader = do_probe<dirac_es_reader_c>(io)))
     return reader;
+
+  // Prefer types hinted by extension
+  auto extension = mtx::fs::to_path(file.name).extension().u8string();
+  if (!extension.empty()) {
+    for (auto type : mtx::file_type_t::by_extension(extension.substr(1))) {
+      auto p = prober_for_type(type);
+      if (p && (reader = p(io, {})))
+        return reader;
+    }
+  }
 
   // All text file types (subtitles).
   if ((reader = detect_text_file_formats(file)))

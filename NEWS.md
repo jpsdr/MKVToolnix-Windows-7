@@ -5,6 +5,11 @@
 * build system: fixed compatibility with Ruby 3.2.0 by using `FileTest.exist?`
   instead of `File.exists?`, `Dir.exists?` & `FileTest.exists?` which were
   removed in that release.
+* mkvmerge: file type detection: file types that can be detected unambiguously
+  by their content (e.g. Matroska, MP4, WAV…) will now preferred in the
+  detection order over file types based on their extension. Prevents certain
+  cases of mis-detection, e.g. DTS in WAV but with a file name extension of
+  `.dts` being detected as the wrong type of DTS. Fixes #3462.
 
 
 # Version 73.0.0 "25 or 6 to 4" 2023-01-02
