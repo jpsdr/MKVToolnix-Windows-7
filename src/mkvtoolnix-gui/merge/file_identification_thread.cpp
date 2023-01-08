@@ -73,7 +73,7 @@ FileIdentificationWorker::addIdentifiedFile(SourceFilePtr const &sourceFile) {
   auto p = p_func();
 
   QMutexLocker lock{&p->m_mutex};
-  p->m_toIdentify.first().m_identifiedFiles << IdentificationPack::IdentifiedFile{ IdentificationPack::FileType::Regular, sourceFile->m_fileName, sourceFile };
+  p->m_toIdentify.first().m_identifiedSourceFiles << IdentificationPack::IdentifiedFile{ IdentificationPack::FileType::Regular, sourceFile->m_fileName, sourceFile };
 }
 
 void
@@ -82,7 +82,7 @@ FileIdentificationWorker::addIdentifiedFile(IdentificationPack::FileType type,
   auto p = p_func();
 
   QMutexLocker lock{&p->m_mutex};
-  p->m_toIdentify.first().m_identifiedFiles << IdentificationPack::IdentifiedFile{ type, fileName, {} };
+  p->m_toIdentify.first().m_identifiedNonSourceFiles << IdentificationPack::IdentifiedFile{ type, fileName, {} };
 }
 
 bool

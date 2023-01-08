@@ -729,9 +729,7 @@ Tool::retrieveDiscInformationForPlaylists(QVector<SourceFilePtr> &sourceFiles) {
 
 void
 Tool::handleIdentifiedNonSourceFiles(IdentificationPack &pack) {
-  QVector<IdentificationPack::IdentifiedFile> sourceFiles;
-
-  for (auto const &identifiedFile : pack.m_identifiedFiles) {
+  for (auto const &identifiedFile : pack.m_identifiedNonSourceFiles) {
     if (identifiedFile.m_type == IdentificationPack::FileType::Chapters)
       handleIdentifiedXmlOrSimpleChapters(identifiedFile.m_fileName);
 
@@ -740,23 +738,19 @@ Tool::handleIdentifiedNonSourceFiles(IdentificationPack &pack) {
 
     else if (identifiedFile.m_type == IdentificationPack::FileType::SegmentInfo)
       handleIdentifiedXmlSegmentInfo(identifiedFile.m_fileName);
-
-    else
-      sourceFiles << identifiedFile;
   }
-
-  pack.m_identifiedFiles = sourceFiles;
 }
 
 void
 Tool::handleIdentifiedSourceFiles(IdentificationPack &pack) {
   auto &p = *p_func();
 
-  if (pack.m_identifiedFiles.isEmpty())
+  auto identifiedSourceFiles = pack.sourceFiles();
+
+  if (identifiedSourceFiles.isEmpty())
     return;
 
-  auto identifiedSourceFiles = pack.sourceFiles();
-  auto tab                   = tabForAddingOrAppending(pack.m_tabId);
+  auto tab = tabForAddingOrAppending(pack.m_tabId);
 
   retrieveDiscInformationForPlaylists(identifiedSourceFiles);
 
@@ -845,8 +839,8 @@ void
 Tool::handleIdentifiedFiles(IdentificationPack identifiedFiles) {
   addMergeTabIfNoneOpen();
 
-  handleIdentifiedNonSourceFiles(identifiedFiles);
   handleIdentifiedSourceFiles(identifiedFiles);
+  handleIdentifiedNonSourceFiles(identifiedFiles);
 }
 
 std::optional<Util::Settings::MergeAddingDirectoriesPolicy>

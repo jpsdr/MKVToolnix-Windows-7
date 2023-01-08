@@ -10,6 +10,11 @@
   detection order over file types based on their extension. Prevents certain
   cases of mis-detection, e.g. DTS in WAV but with a file name extension of
   `.dts` being detected as the wrong type of DTS. Fixes #3462.
+* MKVToolNix GUI: multiplexer: when adding multiple files that include certain
+  file types (chapters, segment info and tag files) and when the choice where
+  to add them is "all files to a single new tab", these certain file types
+  will now be added in the newly added tab as well instead of the current tab
+  that had already been open. Fixes #3469.
 
 
 # Version 73.0.0 "25 or 6 to 4" 2023-01-02

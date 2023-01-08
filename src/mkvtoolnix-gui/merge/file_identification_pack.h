@@ -25,15 +25,15 @@ struct IdentificationPack {
   QModelIndex m_sourceFileIdx{};
   Qt::MouseButtons m_mouseButtons{};
   QStringList m_fileNames;
-  QVector<IdentifiedFile> m_identifiedFiles;
+  QVector<IdentifiedFile> m_identifiedSourceFiles, m_identifiedNonSourceFiles;
 
   QVector<SourceFilePtr>
   sourceFiles() {
     QVector<SourceFilePtr> result;
-    result.reserve(m_identifiedFiles.count());
+    result.reserve(m_identifiedSourceFiles.count());
 
-    for (auto &identifiedFile : m_identifiedFiles)
-      result << identifiedFile.m_sourceFile;
+    for (auto &identifiedSourceFile : m_identifiedSourceFiles)
+      result << identifiedSourceFile.m_sourceFile;
 
     return result;
   }
