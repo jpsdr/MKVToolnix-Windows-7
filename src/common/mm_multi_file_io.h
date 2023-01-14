@@ -29,7 +29,7 @@ protected:
   explicit mm_multi_file_io_c(mm_multi_file_io_private_c &p);
 
 public:
-  mm_multi_file_io_c(std::vector<std::filesystem::path> const &file_names, std::string const &display_file_name);
+  mm_multi_file_io_c(std::vector<boost::filesystem::path> const &file_names, std::string const &display_file_name);
   virtual ~mm_multi_file_io_c();
 
   virtual uint64_t getFilePointer() override;
@@ -38,7 +38,7 @@ public:
   virtual bool eof() override;
 
   virtual std::string get_file_name() const override;
-  virtual std::vector<std::filesystem::path> get_file_names();
+  virtual std::vector<boost::filesystem::path> get_file_names();
   virtual void create_verbose_identification_info(mtx::id::info_c &info);
   virtual void display_other_file_info();
   virtual void enable_buffering(bool enable);

@@ -104,7 +104,7 @@ get_windows_version() {
   return (os_version_info.dwMajorVersion << 16) | os_version_info.dwMinorVersion;
 }
 
-std::filesystem::path
+boost::filesystem::path
 get_application_data_folder() {
   wchar_t szPath[MAX_PATH];
 
@@ -147,7 +147,7 @@ system(std::string const &command) {
 
 }
 
-std::filesystem::path
+boost::filesystem::path
 get_current_exe_path(std::string const &) {
   std::wstring file_name;
   file_name.resize(4000);
@@ -169,7 +169,7 @@ get_current_exe_path(std::string const &) {
 bool
 is_installed() {
   auto file_to_test = get_installation_path() / "data" / "portable-app";
-  return !std::filesystem::is_regular_file(file_to_test);
+  return !boost::filesystem::is_regular_file(file_to_test);
 }
 
 uint64_t

@@ -67,7 +67,7 @@ xtr_base_c::~xtr_base_c() {
 void
 xtr_base_c::create_file(xtr_base_c *master,
                         KaxTrackEntry &track) {
-  auto actual_file_name = get_file_name().u8string();
+  auto actual_file_name = get_file_name().string();
 
   if (master)
     mxerror(fmt::format(Y("Cannot write track {0} with the CodecID '{1}' to the file '{2}' because "

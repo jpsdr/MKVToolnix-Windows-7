@@ -34,10 +34,10 @@ mm_file_io_c::mm_file_io_c(mm_file_io_private_c &p)
 void
 mm_file_io_c::prepare_path(const std::string &path) {
   auto directory = mtx::fs::to_path(path).parent_path();
-  if (directory.empty() || std::filesystem::is_directory(directory))
+  if (directory.empty() || boost::filesystem::is_directory(directory))
     return;
 
-  std::error_code error_code;
+  boost::system::error_code error_code;
   mtx::fs::create_directories(directory, error_code);
   if (error_code)
     throw mtx::mm_io::create_directory_x(path, mtx::mm_io::make_error_code());

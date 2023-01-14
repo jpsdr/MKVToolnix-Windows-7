@@ -17,26 +17,26 @@
 
 namespace mtx::fs {
 
-std::filesystem::path to_path(std::string const &name);
-std::filesystem::path to_path(std::wstring const &name);
+boost::filesystem::path to_path(std::string const &name);
+boost::filesystem::path to_path(std::wstring const &name);
 
-inline std::filesystem::path
+inline boost::filesystem::path
 to_path(char const *name) {
   return to_path(std::string{name});
 }
 
-inline std::filesystem::path
+inline boost::filesystem::path
 to_path(QString const &name) {
   return to_path(name.toStdWString());
 }
 
 // Compatibility functions due to bugs in gcc/libstdc++ on Windows:
-bool is_absolute(std::filesystem::path const &p);
-std::filesystem::path absolute(std::filesystem::path const &p);
-void create_directories(std::filesystem::path const &path, std::error_code &error_code);
+bool is_absolute(boost::filesystem::path const &p);
+boost::filesystem::path absolute(boost::filesystem::path const &p);
+void create_directories(boost::filesystem::path const &path, boost::system::error_code &error_code);
 
 } // namespace mtx::fs
 
 #if FMT_VERSION >= 90000
-template <> struct fmt::formatter<std::filesystem::path> : ostream_formatter {};
+template <> struct fmt::formatter<boost::filesystem::path> : ostream_formatter {};
 #endif  // FMT_VERSION >= 90000

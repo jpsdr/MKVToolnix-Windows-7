@@ -3026,16 +3026,16 @@ display_playlist_scan_progress(size_t num_scanned,
 }
 
 static filelist_cptr
-create_filelist_for_playlist(std::filesystem::path const &file_name,
+create_filelist_for_playlist(boost::filesystem::path const &file_name,
                              size_t previous_filelist_id,
                              size_t current_filelist_id,
                              size_t idx,
                              track_info_c const &src_ti) {
   auto new_filelist_p                        = std::make_shared<filelist_t>();
   auto &new_filelist                         = *new_filelist_p;
-  new_filelist.name                          = file_name.u8string();
+  new_filelist.name                          = file_name.string();
   new_filelist.all_names                     = std::vector<std::string>{ new_filelist.name };
-  new_filelist.size                          = std::filesystem::file_size(file_name);
+  new_filelist.size                          = boost::filesystem::file_size(file_name);
   new_filelist.id                            = current_filelist_id;
   new_filelist.appending                     = true;
   new_filelist.is_playlist                   = true;

@@ -134,7 +134,7 @@ xtr_wav_c::finish_file() {
   }
 
   if (!m_w64_requested)
-    mxinfo(fmt::format(Y("The file '{0}' was written as a W64 file instead of WAV as it is bigger than 4 GB and therefore too big to fit into the WAV container.\n"), get_file_name().u8string()));
+    mxinfo(fmt::format(Y("The file '{0}' was written as a W64 file instead of WAV as it is bigger than 4 GB and therefore too big to fit into the WAV container.\n"), get_file_name().string()));
 
   write_w64_header();
 }

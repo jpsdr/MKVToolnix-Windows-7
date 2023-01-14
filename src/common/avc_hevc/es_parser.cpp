@@ -65,7 +65,7 @@ es_parser_c::maybe_dump_raw_data(unsigned char const *buffer,
     return;
 
   auto file_name = fmt::format("{0}_raw_data-{1:p}", m_debug_type, static_cast<void *>(this));
-  mm_file_io_c out{file_name, std::filesystem::is_regular_file(file_name) ? MODE_WRITE : MODE_CREATE};
+  mm_file_io_c out{file_name, boost::filesystem::is_regular_file(file_name) ? MODE_WRITE : MODE_CREATE};
 
   out.setFilePointer(0, libebml::seek_end);
   out.write(buffer, size);

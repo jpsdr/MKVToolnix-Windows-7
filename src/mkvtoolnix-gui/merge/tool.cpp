@@ -38,11 +38,11 @@
 #include "mkvtoolnix-gui/util/string.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-namespace std::filesystem {
+namespace boost::filesystem {
 
 uint
-qHash(std::filesystem::path const &path) {
-  return qHash(Q(path));
+qHash(boost::filesystem::path const &path) {
+  return qHash(Q(path.string()));
 }
 
 }
@@ -686,7 +686,7 @@ Tool::nextPreviousWindowActionTexts()
 
 void
 Tool::retrieveDiscInformationForPlaylists(QVector<SourceFilePtr> &sourceFiles) {
-  QHash<std::filesystem::path, mtx::bluray::disc_library::info_t> infoByBaseDir;
+  QHash<boost::filesystem::path, mtx::bluray::disc_library::info_t> infoByBaseDir;
 
   for (auto const &sourceFile : sourceFiles) {
     if (!sourceFile->isPlaylist() || sourceFile->m_discLibraryInfoSelected)

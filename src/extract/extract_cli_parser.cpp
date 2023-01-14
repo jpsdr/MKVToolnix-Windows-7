@@ -260,7 +260,7 @@ extract_cli_parser_c::set_cli_mode() {
 
     mxdebug_if(m_debug, fmt::format("set_cli_mode: new mode is single\n"));
 
-  } else if (std::filesystem::is_regular_file(mtx::fs::to_path(m_current_arg))) {
+  } else if (boost::filesystem::is_regular_file(mtx::fs::to_path(m_current_arg))) {
     m_cli_type            = cli_type_e::multiple;
     m_options.m_file_name = m_current_arg;
 
@@ -389,11 +389,11 @@ extract_cli_parser_c::check_for_identical_source_and_destination_file_names() {
 
   for (auto const &mode_option : m_options.m_modes) {
     if (!mode_option.m_output_file_name.empty() && (mtx::fs::absolute(mtx::fs::to_path(mode_option.m_output_file_name)) == source_file_name))
-      mxerror(fmt::format(Y("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.u8string()));
+      mxerror(fmt::format(Y("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.string()));
 
     for (auto const &track_spec : mode_option.m_tracks)
       if (!track_spec.out_name.empty() && (mtx::fs::absolute(mtx::fs::to_path(track_spec.out_name)) == source_file_name))
-        mxerror(fmt::format(Y("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.u8string()));
+        mxerror(fmt::format(Y("The name of one of the destination files is the same as the name of the source file ({0}).\n"), source_file_name.string()));
   }
 }
 

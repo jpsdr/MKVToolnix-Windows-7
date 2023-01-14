@@ -23,10 +23,10 @@ int64_t get_current_time_millis();
 int system(std::string const &command);
 
 void determine_path_to_current_executable(std::string const &argv0);
-std::filesystem::path get_current_exe_path(std::string const &argv0);
-std::filesystem::path get_application_data_folder();
-std::filesystem::path get_installation_path();
-std::filesystem::path find_exe_in_path(std::filesystem::path const &exe);
+boost::filesystem::path get_current_exe_path(std::string const &argv0);
+boost::filesystem::path get_application_data_folder();
+boost::filesystem::path get_installation_path();
+boost::filesystem::path find_exe_in_path(boost::filesystem::path const &exe);
 uint64_t get_memory_usage();
 
 bool is_installed();

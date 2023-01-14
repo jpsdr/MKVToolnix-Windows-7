@@ -28,9 +28,9 @@ namespace {
 debugging_option_c debug{"disc_library|bdmt"};
 
 std::optional<info_t>
-parse_bdmt_xml(std::filesystem::path const &file_name) {
+parse_bdmt_xml(boost::filesystem::path const &file_name) {
   try {
-    auto doc = mtx::xml::load_file(file_name.u8string());
+    auto doc = mtx::xml::load_file(file_name.string());
 
     if (!doc) {
       mxdebug_if(debug, fmt::format("{}: could not load the XML file\n", file_name));
@@ -57,7 +57,7 @@ parse_bdmt_xml(std::filesystem::path const &file_name) {
       auto ok               = false;
 
       if (thumbnail.m_file_name.is_relative())
-        thumbnail.m_file_name = (mtx::fs::absolute(file_name).parent_path() / mtx::fs::to_path(thumbnail.m_file_name)).lexically_normal();
+        thumbnail.m_file_name = (mtx::fs::absolute(file_name).parent_path() / thumbnail.m_file_name).lexically_normal();
 
       auto matches = size_re.match(Q(size));
 
@@ -77,7 +77,7 @@ parse_bdmt_xml(std::filesystem::path const &file_name) {
 
       if (ok) {
         info.m_thumbnails.push_back(thumbnail);
-        mxdebug_if(debug, fmt::format("{}: file name: {} width: {} height: {}\n", file_name, thumbnail.m_file_name.u8string(), thumbnail.m_width, thumbnail.m_height));
+        mxdebug_if(debug, fmt::format("{}: file name: {} width: {} height: {}\n", file_name, thumbnail.m_file_name.string(), thumbnail.m_width, thumbnail.m_height));
       }
     }
 
@@ -101,7 +101,7 @@ info_t::dump()
   const {
   mxinfo(fmt::format("    title: {}\n", m_title));
   for (auto const &thumbnail : m_thumbnails)
-    mxinfo(fmt::format("    thumbnail: {}x{} @ {}\n", thumbnail.m_width, thumbnail.m_height, thumbnail.m_file_name.u8string()));
+    mxinfo(fmt::format("    thumbnail: {}x{} @ {}\n", thumbnail.m_width, thumbnail.m_height, thumbnail.m_file_name.string()));
 }
 
 // ------------------------------------------------------------
@@ -126,13 +126,13 @@ disc_library_t::dump()
 // ------------------------------------------------------------
 
 std::optional<disc_library_t>
-locate_and_parse(std::filesystem::path const &location) {
+locate_and_parse(boost::filesystem::path const &location) {
   auto base_dir = mtx::bluray::find_base_dir(location);
   if (base_dir.empty())
     return {};
 
   auto disc_library_dir = base_dir / "META" / "DL";
-  if (!std::filesystem::is_directory(disc_library_dir))
+  if (!boost::filesystem::is_directory(disc_library_dir))
     return {};
 
   mxdebug_if(debug, fmt::format("found DL directory at {}\n", disc_library_dir));
@@ -141,8 +141,8 @@ locate_and_parse(std::filesystem::path const &location) {
 
   disc_library_t lib;
 
-  for (std::filesystem::directory_iterator dir_itr{disc_library_dir}, end_itr; dir_itr != end_itr; ++dir_itr) {
-    auto other_file_name = dir_itr->path().filename().u8string();
+  for (boost::filesystem::directory_iterator dir_itr{disc_library_dir}, end_itr; dir_itr != end_itr; ++dir_itr) {
+    auto other_file_name = dir_itr->path().filename().string();
     auto matches         = bdmt_re.match(Q(other_file_name));
 
     if (!matches.hasMatch())
@@ -164,14 +164,14 @@ locate_and_parse(std::filesystem::path const &location) {
 }
 
 std::optional<info_t>
-locate_and_parse_for_language(std::filesystem::path const &location,
+locate_and_parse_for_language(boost::filesystem::path const &location,
                               std::string const &language) {
   auto base_dir = mtx::bluray::find_base_dir(location);
   if (base_dir.empty())
     return {};
 
   auto disc_library_file = base_dir / "META" / "DL" / fmt::format("bdmt_{}.xml", language);
-  if (!std::filesystem::is_regular_file(disc_library_file))
+  if (!boost::filesystem::is_regular_file(disc_library_file))
     return {};
 
   mxdebug_if(debug, fmt::format("found DL file for language {} at {}\n", language, disc_library_file));

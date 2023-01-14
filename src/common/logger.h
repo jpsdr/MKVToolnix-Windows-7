@@ -55,10 +55,10 @@ public:
 
 class file_target_c: public target_c {
 private:
-  std::filesystem::path m_file_name;
+  boost::filesystem::path m_file_name;
 
 public:
-  file_target_c(std::filesystem::path file_name);
+  file_target_c(boost::filesystem::path file_name);
   virtual ~file_target_c() = default;
 
 protected:

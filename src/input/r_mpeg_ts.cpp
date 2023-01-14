@@ -2495,18 +2495,18 @@ void
 reader_c::parse_clip_info_file(std::size_t file_idx) {
   auto &file         = *m_files[file_idx];
   auto mpls_multi_in = dynamic_cast<mm_mpls_multi_file_io_c *>(get_underlying_input(file.m_in.get()));
-  auto source_file   = mpls_multi_in ? mpls_multi_in->get_file_names()[0] : mtx::fs::to_path(file.m_in->get_file_name());
+  auto source_file   = mpls_multi_in ? mpls_multi_in->get_file_names()[0] : file.m_in->get_file_name();
 
-  mxdebug_if(m_debug_clpi, fmt::format("find_clip_info_file: Searching for CLPI corresponding to {0}\n", source_file.u8string()));
+  mxdebug_if(m_debug_clpi, fmt::format("find_clip_info_file: Searching for CLPI corresponding to {0}\n", source_file.string()));
 
-  auto clpi_file = mtx::bluray::find_other_file(source_file, mtx::fs::to_path("CLIPINF") / mtx::fs::to_path(fmt::format("{0}.clpi", source_file.stem().u8string())));
+  auto clpi_file = mtx::bluray::find_other_file(source_file, mtx::fs::to_path("CLIPINF") / mtx::fs::to_path(fmt::format("{0}.clpi", source_file.stem().string())));
 
-  mxdebug_if(m_debug_clpi, fmt::format("reader_c::find_clip_info_file: CLPI file: {0}\n", !clpi_file.empty() ? clpi_file.u8string() : "not found"));
+  mxdebug_if(m_debug_clpi, fmt::format("reader_c::find_clip_info_file: CLPI file: {0}\n", !clpi_file.empty() ? clpi_file.string() : "not found"));
 
   if (clpi_file.empty())
     return;
 
-  file.m_clpi_parser.reset(new mtx::bluray::clpi::parser_c{clpi_file.u8string()});
+  file.m_clpi_parser.reset(new mtx::bluray::clpi::parser_c{clpi_file.string()});
   if (!file.m_clpi_parser->parse()) {
     file.m_clpi_parser.reset();
     return;
@@ -2643,15 +2643,15 @@ reader_c::add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in) {
       continue;
 
     auto &item = sub_path.items.front();
-    auto m2ts  = mtx::bluray::find_other_file(mtx::fs::to_path(source_file), mtx::fs::to_path("STREAM") / mtx::fs::to_path(fmt::format("{0}.m2ts", mtx::fs::to_path(item.clpi_file_name).stem().u8string())));
+    auto m2ts  = mtx::bluray::find_other_file(source_file, mtx::fs::to_path("STREAM") / mtx::fs::to_path(fmt::format("{0}.m2ts", mtx::fs::to_path(item.clpi_file_name).stem().string())));
 
-    mxdebug_if(m_debug_mpls, fmt::format("add_external_files_from_mpls: M2TS for sub_path {0}: {1}\n", sub_path_idx - 1, !m2ts.empty() ? m2ts.u8string() : "not found"));
+    mxdebug_if(m_debug_mpls, fmt::format("add_external_files_from_mpls: M2TS for sub_path {0}: {1}\n", sub_path_idx - 1, !m2ts.empty() ? m2ts.string() : "not found"));
 
     if (m2ts.empty())
       continue;
 
     try {
-      auto in                           = std::make_shared<mm_file_io_c>(m2ts.u8string(), MODE_READ);
+      auto in                           = std::make_shared<mm_file_io_c>(m2ts.string(), MODE_READ);
       auto file                         = std::make_shared<file_t>(std::static_pointer_cast<mm_io_c>(in));
 
       file->m_timestamp_restriction_min = item.in_time;
@@ -2661,10 +2661,10 @@ reader_c::add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in) {
       m_files.push_back(file);
 
       mxdebug_if(m_debug_mpls, fmt::format("add_external_files_from_mpls: sub_path file num {0} name {1} ts_rec_min {2} ts_rec_max {3} ts_mpls_sync {4}\n",
-                                           m_files.size() - 1, m2ts.u8string(), file->m_timestamp_restriction_min, file->m_timestamp_restriction_max, file->m_timestamp_mpls_sync));
+                                           m_files.size() - 1, m2ts.string(), file->m_timestamp_restriction_min, file->m_timestamp_restriction_max, file->m_timestamp_mpls_sync));
 
     } catch (mtx::mm_io::exception &ex) {
-      mxdebug_if(m_debug_mpls, fmt::format("add_external_files_from_mpls: could not open {0}: {1}\n", m2ts.u8string(), ex.error()));
+      mxdebug_if(m_debug_mpls, fmt::format("add_external_files_from_mpls: could not open {0}: {1}\n", m2ts.string(), ex.error()));
     }
   }
 }

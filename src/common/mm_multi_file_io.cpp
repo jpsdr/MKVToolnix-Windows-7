@@ -26,7 +26,7 @@
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 
-mm_multi_file_io_c::mm_multi_file_io_c(std::vector<std::filesystem::path> const &file_names,
+mm_multi_file_io_c::mm_multi_file_io_c(std::vector<boost::filesystem::path> const &file_names,
                                        std::string const &display_file_name)
   : mm_io_c{*new mm_multi_file_io_private_c{file_names, display_file_name}}
 {
@@ -137,11 +137,11 @@ mm_multi_file_io_c::eof() {
   return p->files.empty() || ((p->current_file == (p->files.size() - 1)) && (p->current_local_pos >= p->files[p->current_file].size));
 }
 
-std::vector<std::filesystem::path>
+std::vector<boost::filesystem::path>
 mm_multi_file_io_c::get_file_names() {
   auto p = p_func();
 
-  std::vector<std::filesystem::path> file_names;
+  std::vector<boost::filesystem::path> file_names;
   for (auto &file : p->files)
     file_names.push_back(file.file_name);
 
@@ -154,7 +154,7 @@ mm_multi_file_io_c::create_verbose_identification_info(mtx::id::info_c &info) {
   auto file_names = nlohmann::json::array();
   for (auto &file : p->files)
     if (file.file_name != p->files.front().file_name)
-    file_names.push_back(file.file_name.u8string());
+    file_names.push_back(file.file_name.string());
 
   info.add(mtx::id::other_file, file_names);
 }
@@ -194,14 +194,14 @@ mm_io_cptr
 mm_multi_file_io_c::open_multi(const std::string &display_file_name,
                                bool single_only) {
   auto first_file_name = mtx::fs::absolute(mtx::fs::to_path(display_file_name));
-  auto base_name       = mtx::fs::to_path(first_file_name).stem().u8string();
-  auto extension       = balg::to_lower_copy(mtx::fs::to_path(first_file_name).extension().u8string());
+  auto base_name       = first_file_name.stem().string();
+  auto extension       = balg::to_lower_copy(first_file_name.extension().string());
 
   QRegularExpression file_name_re{"(.+[_\\-])(\\d+)$"};
   auto matches = file_name_re.match(Q(base_name));
 
   if (!matches.hasMatch() || single_only) {
-    std::vector<std::filesystem::path> file_names;
+    std::vector<boost::filesystem::path> file_names;
     file_names.push_back(first_file_name);
     return mm_io_cptr(new mm_multi_file_io_c(file_names, display_file_name));
   }
@@ -211,16 +211,16 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
 
   base_name = to_utf8(matches.captured(1).toLower());
 
-  std::vector<std::pair<int, std::filesystem::path>> paths;
+  std::vector<std::pair<int, boost::filesystem::path>> paths;
   paths.emplace_back(start_number, first_file_name);
 
-  std::filesystem::directory_iterator end_itr;
-  for (std::filesystem::directory_iterator itr(first_file_name.parent_path()); itr != end_itr; ++itr) {
-    if (   std::filesystem::is_directory(itr->status())
-        || !balg::iequals(itr->path().extension().u8string(), extension))
+  boost::filesystem::directory_iterator end_itr;
+  for (boost::filesystem::directory_iterator itr(first_file_name.branch_path()); itr != end_itr; ++itr) {
+    if (   boost::filesystem::is_directory(itr->status())
+        || !balg::iequals(boost::filesystem::extension(itr->path()), extension))
       continue;
 
-    auto stem          = itr->path().stem();
+    auto stem          = boost::filesystem::basename(itr->path());
     int current_number = 0;
     matches            = file_name_re.match(Q(stem));
 
@@ -235,7 +235,7 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
 
   std::sort(paths.begin(), paths.end());
 
-  std::vector<std::filesystem::path> file_names;
+  std::vector<boost::filesystem::path> file_names;
   for (auto &path : paths)
     file_names.emplace_back(std::get<1>(path));
 

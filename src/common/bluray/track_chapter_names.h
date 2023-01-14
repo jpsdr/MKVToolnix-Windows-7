@@ -20,7 +20,7 @@ namespace mtx::bluray::track_chapter_names {
 using chapter_names_t     = std::pair<std::string, std::vector<std::string>>;
 using all_chapter_names_t = std::vector<chapter_names_t>;
 
-all_chapter_names_t locate_and_parse_for_title(std::filesystem::path const &location, std::string const &title_number);
+all_chapter_names_t locate_and_parse_for_title(boost::filesystem::path const &location, std::string const &title_number);
 void dump(all_chapter_names_t const &list);
 
 } // namespace mtx::bluray::track_chapter_names

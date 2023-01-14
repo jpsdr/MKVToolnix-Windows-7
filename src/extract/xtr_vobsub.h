@@ -22,7 +22,7 @@ public:
   std::vector<int64_t> m_positions, m_timestamps;
   std::vector<xtr_vobsub_c *> m_slaves;
   memory_cptr m_private_data;
-  std::filesystem::path m_idx_file_name, m_sub_file_name;
+  boost::filesystem::path m_idx_file_name, m_sub_file_name;
   mtx::bcp47::language_c m_language;
   int m_stream_id;
 
@@ -34,7 +34,7 @@ public:
   virtual void finish_file();
   virtual void write_idx(mm_io_c &idx, int index);
 
-  virtual std::filesystem::path get_file_name() const;
+  virtual boost::filesystem::path get_file_name() const;
   virtual const char *get_container_name() {
     return "VobSubs";
   };

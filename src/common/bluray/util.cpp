@@ -21,23 +21,23 @@ namespace mtx::bluray {
 
 namespace {
 
-std::filesystem::path
-find_base_dir_impl(std::filesystem::path const &file_name) {
+boost::filesystem::path
+find_base_dir_impl(boost::filesystem::path const &file_name) {
   static debugging_option_c s_debug{"bluray_find_base_dir"};
 
   auto dir = mtx::fs::absolute(file_name);
-  if (!std::filesystem::is_directory(dir))
+  if (!boost::filesystem::is_directory(dir))
     dir = dir.parent_path();
 
-  mxdebug_if(s_debug, fmt::format("mtx::bluray::find_base_dir_impl: file_name {0} dir {1}\n", file_name.u8string(), dir.u8string()));
+  mxdebug_if(s_debug, fmt::format("mtx::bluray::find_base_dir_impl: file_name {0} dir {1}\n", file_name.string(), dir.string()));
 
   while (!dir.empty()) {
     mxdebug_if(s_debug, fmt::format("mtx::bluray::find_base_dir_impl:   checking {0} is_regular(index.bdmv) {1} is_directory(STREAM) {2} is_directory(PLAYLIST) {3}\n",
-                                    dir.u8string(), std::filesystem::is_regular_file(dir / "index.bdmv"), std::filesystem::is_directory(dir / "STREAM"), std::filesystem::is_directory(dir / "PLAYLIST")));
+                                    dir.string(), boost::filesystem::is_regular_file(dir / "index.bdmv"), boost::filesystem::is_directory(dir / "STREAM"), boost::filesystem::is_directory(dir / "PLAYLIST")));
 
-    if (   std::filesystem::is_regular_file(dir / "index.bdmv")
-        && std::filesystem::is_directory(dir / "STREAM")
-        && std::filesystem::is_directory(dir / "PLAYLIST"))
+    if (   boost::filesystem::is_regular_file(dir / "index.bdmv")
+        && boost::filesystem::is_directory(dir / "STREAM")
+        && boost::filesystem::is_directory(dir / "PLAYLIST"))
       return dir;
 
     auto parent_path = dir.parent_path();
@@ -50,15 +50,15 @@ find_base_dir_impl(std::filesystem::path const &file_name) {
   return {};
 }
 
-std::filesystem::path
-find_other_file_impl(std::filesystem::path const &reference_file_name,
-                     std::filesystem::path const &other_file_name) {
+boost::filesystem::path
+find_other_file_impl(boost::filesystem::path const &reference_file_name,
+                     boost::filesystem::path const &other_file_name) {
   auto base_dir = find_base_dir(reference_file_name);
   if (base_dir.empty())
     return {};
 
   auto file_name = base_dir / other_file_name;
-  if (std::filesystem::is_regular_file(file_name))
+  if (boost::filesystem::is_regular_file(file_name))
     return file_name;
 
   return {};
@@ -66,21 +66,21 @@ find_other_file_impl(std::filesystem::path const &reference_file_name,
 
 } // anonymous namespace
 
-std::filesystem::path
-find_base_dir(std::filesystem::path const &file_name) {
+boost::filesystem::path
+find_base_dir(boost::filesystem::path const &file_name) {
   try {
     return find_base_dir_impl(file_name);
-  } catch (std::filesystem::filesystem_error &) {
+  } catch (boost::filesystem::filesystem_error &) {
     return {};
   }
 }
 
-std::filesystem::path
-find_other_file(std::filesystem::path const &reference_file_name,
-                std::filesystem::path const &other_file_name) {
+boost::filesystem::path
+find_other_file(boost::filesystem::path const &reference_file_name,
+                boost::filesystem::path const &other_file_name) {
   try {
     return find_other_file_impl(reference_file_name, other_file_name);
-  } catch (std::filesystem::filesystem_error &) {
+  } catch (boost::filesystem::filesystem_error &) {
     return {};
   }
 }

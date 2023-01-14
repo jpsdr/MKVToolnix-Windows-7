@@ -135,7 +135,7 @@ create_extractors(KaxTracks &kax_tracks,
     track_extractor_list.push_back(extractor);
 
     mxinfo(fmt::format(Y("Extracting track {0} with the CodecID '{1}' to the file '{2}'. Container format: {3}\n"),
-                       track_id, codec_id, extractor->get_file_name().u8string(), extractor->get_container_name()));
+                       track_id, codec_id, extractor->get_file_name().string(), extractor->get_container_name()));
   }
 
   // Signal that all headers have been taken care of.

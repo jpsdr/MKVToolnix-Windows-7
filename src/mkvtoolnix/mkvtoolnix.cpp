@@ -90,7 +90,7 @@ find_executable(std::string const &argv0,
   auto base_path    = mtx::sys::get_current_exe_path(argv0);
   auto program_path = mtx::fs::to_path(program);
 
-  std::vector<std::filesystem::path> potential_paths{
+  std::vector<boost::filesystem::path> potential_paths{
     base_path,
     base_path / "tools",
     base_path / "..",
@@ -100,8 +100,8 @@ find_executable(std::string const &argv0,
 
   for (auto const & potential_path: potential_paths) {
     auto exe_path = potential_path / program_path;
-    if (std::filesystem::is_regular_file(exe_path))
-      return exe_path.u8string();
+    if (boost::filesystem::is_regular_file(exe_path))
+      return exe_path.string();
   }
 
   mxerror(fmt::format("{0}: {1}\n", Y("Executable not found"), program));

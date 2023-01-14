@@ -21,20 +21,20 @@ namespace mtx::sys {
 
 namespace {
 
-std::filesystem::path s_current_executable_path;
-std::unordered_map<std::string, std::filesystem::path> s_exes_in_path;
+boost::filesystem::path s_current_executable_path;
+std::unordered_map<std::string, boost::filesystem::path> s_exes_in_path;
 
-std::filesystem::path
-find_exe_in_path_worker(std::filesystem::path const &exe) {
+boost::filesystem::path
+find_exe_in_path_worker(boost::filesystem::path const &exe) {
   auto paths = mtx::string::split(get_environment_variable("PATH"), ":");
 
   for (auto const &path : paths) {
     auto potential_exe = mtx::fs::to_path(path) / exe;
-    if (std::filesystem::exists(potential_exe))
+    if (boost::filesystem::exists(potential_exe))
       return potential_exe;
 
     potential_exe += mtx::fs::to_path(".exe");
-    if (std::filesystem::exists(potential_exe))
+    if (boost::filesystem::exists(potential_exe))
       return potential_exe;
   }
 
@@ -43,7 +43,7 @@ find_exe_in_path_worker(std::filesystem::path const &exe) {
 
 } // anonymous
 
-std::filesystem::path
+boost::filesystem::path
 get_installation_path() {
   return s_current_executable_path;
 }
@@ -53,9 +53,9 @@ determine_path_to_current_executable(std::string const &argv0) {
   s_current_executable_path = get_current_exe_path(argv0);
 }
 
-std::filesystem::path
-find_exe_in_path(std::filesystem::path const &exe) {
-  auto const exe_str = exe.u8string();
+boost::filesystem::path
+find_exe_in_path(boost::filesystem::path const &exe) {
+  auto const exe_str = exe.string();
   auto const itr     = s_exes_in_path.find(exe_str);
 
   if (itr == s_exes_in_path.end())

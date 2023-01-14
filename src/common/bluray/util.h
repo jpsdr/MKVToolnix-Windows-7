@@ -17,7 +17,7 @@
 
 namespace mtx::bluray {
 
-std::filesystem::path find_base_dir(std::filesystem::path const &file_name);
-std::filesystem::path find_other_file(std::filesystem::path const &reference_file_name, std::filesystem::path const &other_file_name);
+boost::filesystem::path find_base_dir(boost::filesystem::path const &file_name);
+boost::filesystem::path find_other_file(boost::filesystem::path const &reference_file_name, boost::filesystem::path const &other_file_name);
 
 }

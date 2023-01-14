@@ -57,7 +57,7 @@ get_current_time_millis() {
   return (int64_t)tv.tv_sec * 1000 + (int64_t)tv.tv_usec / 1000;
 }
 
-std::filesystem::path
+boost::filesystem::path
 get_application_data_folder() {
   auto home = getenv("HOME");
   if (!home)
@@ -66,7 +66,7 @@ get_application_data_folder() {
   // If $HOME/.mkvtoolnix exists already then keep using it to avoid
   // losing existing user configuration.
   auto old_default_folder = mtx::fs::to_path(home) / ".mkvtoolnix";
-  if (std::filesystem::is_directory(old_default_folder))
+  if (boost::filesystem::is_directory(old_default_folder))
     return old_default_folder;
 
   // If XDG_CONFIG_HOME is set then use that folder.
@@ -94,7 +94,7 @@ system(std::string const &command) {
   return ::system(command.c_str());
 }
 
-std::filesystem::path
+boost::filesystem::path
 get_current_exe_path([[maybe_unused]] std::string const &argv0) {
 #if defined(SYS_APPLE)
   std::string file_name;
@@ -114,20 +114,20 @@ get_current_exe_path([[maybe_unused]] std::string const &argv0) {
 
 #else // SYS_APPLE
   auto exe = mtx::fs::to_path("/proc/self/exe");
-  if (std::filesystem::is_regular_file(exe)) {
-    auto exe_path = std::filesystem::read_symlink(exe);
+  if (boost::filesystem::is_regular_file(exe)) {
+    auto exe_path = boost::filesystem::read_symlink(exe);
 
     return mtx::fs::absolute(exe_path).parent_path();
   }
 
   if (argv0.empty())
-    return std::filesystem::current_path();
+    return boost::filesystem::current_path();
 
   exe = mtx::fs::absolute(argv0);
-  if (std::filesystem::is_regular_file(exe))
+  if (boost::filesystem::is_regular_file(exe))
     return exe.parent_path();
 
-  return std::filesystem::current_path();
+  return boost::filesystem::current_path();
 #endif
 }
 

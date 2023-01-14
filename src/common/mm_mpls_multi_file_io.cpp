@@ -15,7 +15,7 @@ namespace {
 debugging_option_c s_debug{"mpls|mpls_multi_io"};
 }
 
-mm_mpls_multi_file_io_c::mm_mpls_multi_file_io_c(std::vector<std::filesystem::path> const &file_names,
+mm_mpls_multi_file_io_c::mm_mpls_multi_file_io_c(std::vector<boost::filesystem::path> const &file_names,
                                                  std::string const &display_file_name,
                                                  mtx::bluray::mpls::parser_cptr const &mpls_parser)
   : mm_file_io_c{*new mm_mpls_multi_file_io_private_c{file_names, display_file_name, mpls_parser}}
@@ -55,7 +55,7 @@ mm_mpls_multi_file_io_c::open_multi(mm_io_c &in) {
     return mm_io_cptr{};
   }
 
-  std::vector<std::filesystem::path> file_names;
+  std::vector<boost::filesystem::path> file_names;
 
   for (auto const &item : mpls_parser->get_playlist().items) {
     auto file = mtx::bluray::find_other_file(mtx::fs::to_path(in.get_file_name()), mtx::fs::to_path("STREAM") / mtx::fs::to_path(fmt::format("{0}.{1}", item.clip_id, balg::to_lower_copy(item.codec_id))));
@@ -65,7 +65,7 @@ mm_mpls_multi_file_io_c::open_multi(mm_io_c &in) {
     if (!file.empty())
       file_names.push_back(file);
 
-    mxdebug_if(s_debug, fmt::format("Item clip ID: {0} codec ID: {1}: have file? {2} file: {3}\n", item.clip_id, item.codec_id, !file.empty(), file.u8string()));
+    mxdebug_if(s_debug, fmt::format("Item clip ID: {0} codec ID: {1}: have file? {2} file: {3}\n", item.clip_id, item.codec_id, !file.empty(), file.string()));
   }
 
   mxdebug_if(s_debug, fmt::format("Number of files left: {0}\n", file_names.size()));
@@ -73,7 +73,7 @@ mm_mpls_multi_file_io_c::open_multi(mm_io_c &in) {
   if (file_names.empty())
     return mm_io_cptr{};
 
-  return mm_io_cptr{new mm_mpls_multi_file_io_c{file_names, file_names[0].u8string(), mpls_parser}};
+  return mm_io_cptr{new mm_mpls_multi_file_io_c{file_names, file_names[0].string(), mpls_parser}};
 }
 
 void
@@ -87,7 +87,7 @@ mm_mpls_multi_file_io_c::create_verbose_identification_info(mtx::id::info_c &inf
 
   auto file_names = nlohmann::json::array();
   for (auto &file : p->files)
-    file_names.push_back(file.u8string());
+    file_names.push_back(file.string());
 
   info.add(mtx::id::playlist_file, file_names);
 }
@@ -98,7 +98,7 @@ mm_mpls_multi_file_io_c::get_file_name()
   return p_func()->display_file_name;
 }
 
-std::vector<std::filesystem::path> const &
+std::vector<boost::filesystem::path> const &
 mm_mpls_multi_file_io_c::get_file_names()
   const {
   return p_func()->files;

@@ -138,12 +138,12 @@ maybe_parse_dvd(std::string const &file_name,
   if (Q(cleaned_file_name).contains(QRegularExpression{"\\.(bup|ifo|vob)$", QRegularExpression::CaseInsensitiveOption}))
     dvd_dir = dvd_dir.parent_path();
 
-  else if (   !std::filesystem::is_directory(dvd_dir)
-           || (   !std::filesystem::is_regular_file(dvd_dir / "VIDEO_TS.IFO")
-               && !std::filesystem::is_regular_file(dvd_dir / "VIDEO_TS" / "VIDEO_TS.IFO")))
+  else if (   !boost::filesystem::is_directory(dvd_dir)
+           || (   !boost::filesystem::is_regular_file(dvd_dir / "VIDEO_TS.IFO")
+               && !boost::filesystem::is_regular_file(dvd_dir / "VIDEO_TS" / "VIDEO_TS.IFO")))
     return {};
 
-  auto titles_and_timestamps = parse_dvd(dvd_dir.u8string());
+  auto titles_and_timestamps = parse_dvd(dvd_dir.string());
 
   if (title > titles_and_timestamps.size())
     throw parser_x{fmt::format(Y("The title number '{0}' is higher than the number of titles on the DVD ({1})."), title, titles_and_timestamps.size())};

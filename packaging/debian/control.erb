@@ -9,8 +9,9 @@ Build-Depends:
  debhelper (>= 9),
  rake (>= 10),
  zlib1g-dev, libflac-dev, libogg-dev, libvorbis-dev, libgmp-dev, libcmark-dev,
- libboost-dev (>= 1.66), libgtest-dev, libfmt-dev (>= 4), libdvdread-dev,
- nlohmann-json3-dev, pkg-config, po4a, docbook-xsl, xsltproc,
+ libboost-dev (>= 1.66), libboost-filesystem-dev (>= 1.66),
+ libboost-system-dev (>= 1.66), libgtest-dev, libfmt-dev (>= 4),
+ libdvdread-dev, nlohmann-json3-dev, pkg-config, po4a, docbook-xsl, xsltproc,
 <% if use_qt6 %>
  qt6-base-dev, qt6-base-dev-tools, qt6-multimedia-dev, libqt6svg6-dev
 <% else %>

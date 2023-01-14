@@ -38,9 +38,9 @@ sanitizeDirectory(QString const &directory,
   auto dir     = to_utf8(directory.isEmpty() || (directory == Q(".")) ? QStandardPaths::writableLocation(QStandardPaths::MoviesLocation) : directory);
   auto oldPath = mtx::fs::absolute(mtx::fs::to_path(dir));
   auto newPath = oldPath;
-  auto ec      = std::error_code{};
+  auto ec      = boost::system::error_code{};
 
-  while (   !std::filesystem::is_directory(newPath, ec)
+  while (   !boost::filesystem::is_directory(newPath, ec)
          && !newPath.parent_path().empty()
          && (newPath.parent_path() != newPath))
     newPath = newPath.parent_path();
@@ -51,7 +51,7 @@ sanitizeDirectory(QString const &directory,
   // if (withFileName && (oldPath != newPath) && (oldPath.filename() != "."))
   //   newPath /= oldPath.filename();
 
-  return Q(newPath.u8string());
+  return Q(newPath.string());
 }
 
 QString

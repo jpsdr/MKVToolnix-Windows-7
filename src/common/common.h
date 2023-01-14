@@ -22,7 +22,6 @@
 #include <cassert>
 #include <cstdint>
 #include <cstring>
-#include <filesystem>
 #include <functional>
 #include <memory>
 #include <numeric>
@@ -46,6 +45,8 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
 #include <boost/multiprecision/gmp.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/system/error_code.hpp>
 
 namespace balg = boost::algorithm;
 

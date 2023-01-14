@@ -887,7 +887,7 @@ render_attachments(mm_io_c &out) {
 
       std::string name;
       if (attch.stored_name == "")
-        name = mtx::fs::to_path(attch.name).filename().u8string();
+        name = mtx::fs::to_path(attch.name).filename().string();
 
       else
         name = attch.stored_name;
@@ -1569,7 +1569,7 @@ set_track_statistics_tags(KaxTags *tags) {
 }
 
 static void
-insert_chapter_name_in_output_file_name(std::filesystem::path const &original_file_name,
+insert_chapter_name_in_output_file_name(boost::filesystem::path const &original_file_name,
                                         std::string const &chapter_name) {
 #if defined(SYS_WINDOWS)
   static QRegularExpression s_invalid_char_re{R"([\\/:<>"|?*]+)"};
@@ -1585,16 +1585,16 @@ insert_chapter_name_in_output_file_name(std::filesystem::path const &original_fi
   auto cleaned_chapter_name = Q(chapter_name).replace(s_invalid_char_re, "-");
   auto new_file_name        = original_file_name.parent_path() / mtx::fs::to_path(Q(original_file_name.filename()).replace(QRegularExpression{"%c"}, cleaned_chapter_name));
 
-  mxdebug_if(s_debug_splitting_chapters, fmt::format("insert_chapter_name_in_output_file_name: cleaned name {0} old {1} new {2}\n", to_utf8(cleaned_chapter_name), original_file_name.u8string(), new_file_name.u8string()));
+  mxdebug_if(s_debug_splitting_chapters, fmt::format("insert_chapter_name_in_output_file_name: cleaned name {0} old {1} new {2}\n", to_utf8(cleaned_chapter_name), original_file_name.string(), new_file_name.string()));
 
   if (original_file_name == new_file_name)
     return;
 
   try {
-    std::filesystem::rename(original_file_name, new_file_name);
-    mxinfo(fmt::format(Y("The file '{0}' was renamed to '{1}'.\n"), original_file_name.u8string(), new_file_name.u8string()));
-  } catch (std::filesystem::filesystem_error &) {
-    mxerror(fmt::format(Y("The file '{0}' could not be renamed to '{1}'.\n"), original_file_name.u8string(), new_file_name.u8string()));
+    boost::filesystem::rename(original_file_name, new_file_name);
+    mxinfo(fmt::format(Y("The file '{0}' was renamed to '{1}'.\n"), original_file_name.string(), new_file_name.string()));
+  } catch (boost::filesystem::filesystem_error &) {
+    mxerror(fmt::format(Y("The file '{0}' could not be renamed to '{1}'.\n"), original_file_name.string(), new_file_name.string()));
   }
 }
 

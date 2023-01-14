@@ -61,7 +61,7 @@ public:
 
   virtual void headers_done();
 
-  virtual std::filesystem::path get_file_name() const {
+  virtual boost::filesystem::path get_file_name() const {
     return mtx::fs::to_path(m_file_name);
   }
   virtual const char *get_container_name() {

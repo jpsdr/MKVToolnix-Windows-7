@@ -65,7 +65,7 @@ DiscLibraryItem::create(std::string const &language,
   auto item = new DiscLibraryItem{info, QStringList{
     languageName,
     Q(info.m_title),
-    biggestThumbnail == end ? Q("") : Q(biggestThumbnail->m_file_name.filename().u8string()),
+    biggestThumbnail == end ? Q("") : Q(biggestThumbnail->m_file_name.filename().string()),
     biggestThumbnail == end ? Q("") : Q("%1x%2").arg(biggestThumbnail->m_width).arg(biggestThumbnail->m_height),
   }};
 

@@ -15,9 +15,9 @@
 
 namespace mtx::fs {
 
-std::filesystem::path
-absolute(std::filesystem::path const &p) {
-  return is_absolute(p) ? p : std::filesystem::absolute(p);
+boost::filesystem::path
+absolute(boost::filesystem::path const &p) {
+  return is_absolute(p) ? p : boost::filesystem::absolute(p);
 }
 
 } // namespace mtx::fs

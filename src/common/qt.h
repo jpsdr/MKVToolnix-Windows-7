@@ -75,8 +75,8 @@ to_qs(::libebml::UTFstring *s) {
 }
 
 inline QString
-to_qs(std::filesystem::path const &source) {
-  return to_qs(source.u8string());
+to_qs(boost::filesystem::path const &source) {
+  return to_qs(source.string());
 }
 
 inline std::string

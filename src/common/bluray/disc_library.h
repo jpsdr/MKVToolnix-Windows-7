@@ -18,7 +18,7 @@
 namespace mtx::bluray::disc_library {
 
 struct thumbnail_t {
-  std::filesystem::path m_file_name;
+  boost::filesystem::path m_file_name;
   unsigned int m_width, m_height;
 };
 
@@ -35,7 +35,7 @@ struct disc_library_t {
   void dump() const;
 };
 
-std::optional<disc_library_t> locate_and_parse(std::filesystem::path const &location);
-std::optional<info_t> locate_and_parse_for_language(std::filesystem::path const &location, std::string const &language);
+std::optional<disc_library_t> locate_and_parse(boost::filesystem::path const &location);
+std::optional<info_t> locate_and_parse_for_language(boost::filesystem::path const &location, std::string const &language);
 
 } // namespace mtx::bluray::disc_library

@@ -15,6 +15,15 @@
   to add them is "all files to a single new tab", these certain file types
   will now be added in the newly added tab as well instead of the current tab
   that had already been open. Fixes #3469.
+* all: Windows: UNC paths of type `\\?\C:\…` are supported again by switching
+  back to Boost's file system library instead of using C++17's file system
+  library. Fixes #3058.
+
+## Build system changes
+
+* MKVToolNix is now using & requiring Boost's "file system" and "system"
+  libraries again instead of C++17's file system library. This is due to gcc's
+  library not supporting UNC paths of types `\\?\C:\dir\file.ext`.
 
 
 # Version 73.0.0 "25 or 6 to 4" 2023-01-02

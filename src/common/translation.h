@@ -42,7 +42,7 @@ public:
   bool matches(std::string const &locale) const;
 
   static void initialize_available_translations();
-  static void initialize_std_locale();
+  static void initialize_std_and_boost_filesystem_locales();
   static int look_up_translation(const std::string &locale);
   static int look_up_translation(int language_id, int sub_language_id);
   static std::string get_default_ui_locale();

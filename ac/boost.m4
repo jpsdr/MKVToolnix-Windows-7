@@ -36,6 +36,20 @@ if test "x$am_cv_bmp_gmp" != xyes; then
 fi
 AC_MSG_RESULT([yes])
 
+# boost::system must be present.
+AX_BOOST_SYSTEM()
+
+# boost::filesystem must be present.
+AX_BOOST_FILESYSTEM()
+
+if test x"$ax_cv_boost_filesystem" != "xyes"; then
+  AC_MSG_ERROR(The Boost Filesystem Library was not found.)
+fi
+
+if test x"$ax_cv_boost_system" != "xyes"; then
+  AC_MSG_ERROR(The Boost System Library was not found.)
+fi
+
 AX_BOOST_CHECK_HEADERS([boost/operators.hpp],,[
   AC_MSG_ERROR([Boost's Operators library is required but wasn't found])
 ])

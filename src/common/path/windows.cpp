@@ -16,19 +16,19 @@
 
 namespace mtx::fs {
 
-std::filesystem::path
+boost::filesystem::path
 to_path(std::string const &name) {
-  return std::filesystem::path{to_wide(name)};
+  return boost::filesystem::path{to_wide(name)};
 }
 
-std::filesystem::path
+boost::filesystem::path
 to_path(std::wstring const &name) {
-  return std::filesystem::path{name};
+  return boost::filesystem::path{name};
 }
 
 bool
-is_absolute(std::filesystem::path const &p) {
-  auto p_s = p.u8string();
+is_absolute(boost::filesystem::path const &p) {
+  auto p_s = p.string();
 
   if (   (p_s.substr(0, 2) == "//"s)
       || (p_s.substr(0, 2) == "\\\\"s))
@@ -38,9 +38,9 @@ is_absolute(std::filesystem::path const &p) {
 }
 
 void
-create_directories(std::filesystem::path const &path,
-                   std::error_code &error_code) {
-  auto normalized_path = path.u8string();
+create_directories(boost::filesystem::path const &path,
+                   boost::system::error_code &error_code) {
+  auto normalized_path = path.string();
 
   for (auto &c : normalized_path)
     if (c == '/')
@@ -49,12 +49,12 @@ create_directories(std::filesystem::path const &path,
   auto directory = mtx::fs::to_path(normalized_path);
   error_code     = {};
 
-  if (directory.empty() || std::filesystem::is_directory(directory))
+  if (directory.empty() || boost::filesystem::is_directory(directory))
     return;
 
   auto is_unc = normalized_path.substr(0, 2) == "\\\\"s;
 
-  std::vector<std::filesystem::path> to_check;
+  std::vector<boost::filesystem::path> to_check;
 
   // path                   | is_unc | parent_path        | parent_path.parent_path | to_check
   // -----------------------+--------+--------------------+-------------------------+----------------------
@@ -69,16 +69,16 @@ create_directories(std::filesystem::path const &path,
   while (   !directory.empty()
          && (directory.parent_path() != directory)
          && (   !is_unc
-             || (directory.parent_path().parent_path().u8string() != "\\"s))) {
+             || (directory.parent_path().parent_path().string() != "\\"s))) {
     to_check.emplace_back(directory);
     directory = directory.parent_path();
   }
 
   for (auto itr = to_check.rbegin(), end = to_check.rend(); itr != end; ++itr) {
-    if (std::filesystem::is_directory(*itr))
+    if (boost::filesystem::is_directory(*itr))
       continue;
 
-    std::filesystem::create_directory(*itr, error_code);
+    boost::filesystem::create_directory(*itr, error_code);
 
     if (error_code)
       return;

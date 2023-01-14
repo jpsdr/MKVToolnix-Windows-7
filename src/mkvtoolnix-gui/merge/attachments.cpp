@@ -573,7 +573,7 @@ Tab::findExistingAttachmentFileName(QString const &fileName) {
 void
 Tab::addAttachmentsFromIdentifiedBluray(mtx::bluray::disc_library::info_t const &info) {
   unsigned int maxSize = 0;
-  std::filesystem::path fileName;
+  boost::filesystem::path fileName;
 
   for (auto const &thumbnail : info.m_thumbnails) {
     auto size = thumbnail.m_width * thumbnail.m_height;
@@ -584,14 +584,14 @@ Tab::addAttachmentsFromIdentifiedBluray(mtx::bluray::disc_library::info_t const 
     fileName = thumbnail.m_file_name;
   }
 
-  if (fileName.empty() || !std::filesystem::is_regular_file(fileName))
+  if (fileName.empty() || !boost::filesystem::is_regular_file(fileName))
     return;
 
-  auto attachment = prepareFileForAttaching(Q(fileName.u8string()), true);
+  auto attachment = prepareFileForAttaching(Q(fileName.string()), true);
   if (!attachment)
     return;
 
-  attachment->m_name = Q("cover%2").arg(Q(fileName.extension().u8string()).toLower());
+  attachment->m_name = Q("cover%2").arg(Q(fileName.extension().string()).toLower());
 
   p_func()->attachmentsModel->addAttachments(QList<AttachmentPtr>{} << attachment);
 }

@@ -63,9 +63,9 @@
 #include "merge/probe_range_info.h"
 #include "merge/reader_detection_and_creation.h"
 
-static std::vector<std::filesystem::path>
+static std::vector<boost::filesystem::path>
 file_names_to_paths(const std::vector<std::string> &file_names) {
-  std::vector<std::filesystem::path> paths;
+  std::vector<boost::filesystem::path> paths;
   for (auto &file_name : file_names)
     paths.push_back(mtx::fs::absolute(mtx::fs::to_path(file_name)));
 
@@ -79,7 +79,7 @@ open_input_file(filelist_t &file) {
       return std::make_shared<mm_read_buffer_io_c>(std::make_shared<mm_file_io_c>(file.name));
 
     else {
-      std::vector<std::filesystem::path> paths = file_names_to_paths(file.all_names);
+      auto paths = file_names_to_paths(file.all_names);
       return std::make_shared<mm_read_buffer_io_c>(std::make_shared<mm_multi_file_io_c>(paths, file.name));
     }
 
@@ -229,7 +229,7 @@ detect_text_file_formats(filelist_t const &file) {
     if ((text_io->get_size() - text_io->get_byte_order_length()) > 1)
       return {};
 
-    auto extension = mtx::fs::to_path(file.name).extension().u8string().substr(1);
+    auto extension = mtx::fs::to_path(file.name).extension().string().substr(1);
 
     for (auto type : mtx::file_type_t::by_extension(extension))
       if (type == mtx::file_type_e::srt)
@@ -299,7 +299,7 @@ probe_file_format(filelist_t &file) {
     return reader;
 
   // Prefer types hinted by extension
-  auto extension = mtx::fs::to_path(file.name).extension().u8string();
+  auto extension = mtx::fs::to_path(file.name).extension().string();
   if (!extension.empty()) {
     for (auto type : mtx::file_type_t::by_extension(extension.substr(1))) {
       auto p = prober_for_type(type);

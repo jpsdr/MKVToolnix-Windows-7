@@ -371,7 +371,7 @@ Settings::iniFileLocation() {
     // Util::Settings class might be used before QCoreApplication's
     // been instantiated, which QApplication::applicationDirPath()
     // requires.
-    return Q(mtx::sys::get_current_exe_path("").u8string());
+    return Q(mtx::sys::get_current_exe_path("").string());
 
   return QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
 #else
@@ -1206,7 +1206,7 @@ Settings::exeWithPath(QString const &exe) {
   auto path          = mtx::fs::to_path( to_utf8(exe) );
   auto program       = path.filename();
   auto installPath   = mtx::fs::to_path( to_utf8(App::applicationDirPath()) );
-  auto potentialExes = QList<std::filesystem::path>{} << path << (installPath / path) << (installPath / ".." / path);
+  auto potentialExes = QList<boost::filesystem::path>{} << path << (installPath / path) << (installPath / ".." / path);
 
 #if defined(SYS_WINDOWS)
   for (auto &potentialExe : potentialExes)
@@ -1216,10 +1216,10 @@ Settings::exeWithPath(QString const &exe) {
 #endif  // SYS_WINDOWS
 
   for (auto const &potentialExe : potentialExes)
-    if (std::filesystem::is_regular_file(potentialExe))
-      return QDir::toNativeSeparators(to_qs(potentialExe.u8string()));
+    if (boost::filesystem::is_regular_file(potentialExe))
+      return QDir::toNativeSeparators(to_qs(potentialExe.string()));
 
-  auto location = QStandardPaths::findExecutable(to_qs(program.u8string()));
+  auto location = QStandardPaths::findExecutable(to_qs(program.string()));
   if (!location.isEmpty())
     return QDir::toNativeSeparators(location);
 
