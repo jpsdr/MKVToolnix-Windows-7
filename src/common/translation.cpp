@@ -271,6 +271,11 @@ translation_c::set_active_translation(const std::string &locale) {
   mxdebug_if(debugging_c::requested("locale"), fmt::format("[translation_c::set_active_translation() active_translation_idx {0} for locale {1}]\n", ms_active_translation_idx, locale));
 }
 
+void
+translation_c::initialize_std_and_boost_filesystem_locales() {
+  std::locale::global(std::locale{ std::locale(), new std::codecvt_utf8<wchar_t> });
+}
+
 // ------------------------------------------------------------
 
 translatable_string_c::translatable_string_c(const std::string &untranslated_string)
@@ -434,11 +439,6 @@ init_locales(std::string locale) {
   bindtextdomain("mkvtoolnix", locale_dir.c_str());
   textdomain("mkvtoolnix");
   bind_textdomain_codeset("mkvtoolnix", "UTF-8");
-}
-
-void
-translation_c::initialize_std_and_boost_filesystem_locales() {
-  std::locale::global(std::locale{ std::locale(), new std::codecvt_utf8<wchar_t> });
 }
 
 #else  // HAVE_LIBINTL_H
