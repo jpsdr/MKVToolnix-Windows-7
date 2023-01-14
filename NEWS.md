@@ -18,6 +18,9 @@
 * all: Windows: UNC paths of type `\\?\C:\…` are supported again by switching
   back to Boost's file system library instead of using C++17's file system
   library. Fixes #3058.
+* mkvmerge: SRT handling: whitespaces will now be stripped from the start &
+  the end of each line of each entry, not just from the end of the last
+  line. Part of the fix of #3470.
 
 ## Build system changes
 

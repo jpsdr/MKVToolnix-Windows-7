@@ -17,6 +17,7 @@
 
 #include "common/codec.h"
 #include "common/debugging.h"
+#include "common/qt.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
 #include "common/strings/utf8.h"
@@ -86,15 +87,18 @@ textsubs_packetizer_c::process_impl(packet_cptr const &packet) {
     m_buffered_packet.reset();
   }
 
-  auto subs = recode(packet->data->to_string());
-  subs      = mtx::string::normalize_line_endings(subs, m_line_ending_style);
+  auto subs   = recode(packet->data->to_string());
+  subs        = mtx::string::normalize_line_endings(subs, m_line_ending_style);
 
-  mtx::string::strip_back(subs);
+  auto q_subs = Q(subs);
+  q_subs.replace(QRegularExpression{Q("^[ \t]+|[ \t]+$"), QRegularExpression::MultilineOption}, {});
+  q_subs.replace(QRegularExpression{Q("[ \t]+\r")},                                             Q("\r"));
+  q_subs.replace(QRegularExpression{Q("[\r\n]+\\z")},                                           {});
 
-  if (subs.empty())
+  if (q_subs.isEmpty())
     return;
 
-  packet->data = memory_c::clone(subs);
+  packet->data = memory_c::clone(to_utf8(q_subs));
 
   packet->force_key_frame();
 

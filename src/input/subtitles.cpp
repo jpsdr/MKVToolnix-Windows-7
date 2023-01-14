@@ -52,9 +52,7 @@ subtitles_c::add_maybe(int64_t start,
     return;
   }
 
-  auto subtitles = subs;
-  mtx::string::strip_back(subtitles, true);
-  add(start, end, number - m_num_skipped, subtitles);
+  add(start, end, number - m_num_skipped, subs);
 }
 
 void
@@ -167,9 +165,10 @@ srt_parser_c::parse() {
       break;
 
     s = recode(s);
+    auto unstripped_line = s;
+    mtx::string::strip_back(s);
 
     line_number++;
-    mtx::string::strip_back(s);
 
     mxdebug_if(m_debug, fmt::format("line {0} state {1} content »{2}«\n", line_number, state == STATE_INITIAL ? "initial" : state == STATE_TIME ? "time" : state == STATE_SUBS ? "subs" : "subs-or-number", s));
 
@@ -282,7 +281,7 @@ srt_parser_c::parse() {
     } else if (STATE_SUBS == state) {
       if (!subtitles.empty())
         subtitles += "\n";
-      subtitles += s;
+      subtitles += unstripped_line;
 
     } else if (Q(s).contains(number_re)) {
       state = STATE_TIME;
@@ -291,7 +290,7 @@ srt_parser_c::parse() {
     } else {
       if (!subtitles.empty())
         subtitles += "\n";
-      subtitles += s;
+      subtitles += unstripped_line;
     }
   }
 
