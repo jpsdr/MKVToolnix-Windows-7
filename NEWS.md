@@ -21,6 +21,8 @@
 * mkvmerge: SRT handling: whitespaces will now be stripped from the start &
   the end of each line of each entry, not just from the end of the last
   line. Part of the fix of #3470.
+* mkvextract: SRT extraction: whitespaces will not be stripped from the start
+  & end of the whole entry anymore. Part of the fix of #3470.
 
 ## Build system changes
 

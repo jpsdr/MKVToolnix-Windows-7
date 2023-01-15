@@ -51,7 +51,7 @@ xtr_srt_c::handle_frame(xtr_frame_t &f) {
   m_entry.m_timestamp = f.timestamp;
   m_entry.m_duration  = f.duration;
   m_entry.m_text      = m_conv->native(f.frame->to_string());
-  m_entry.m_text      = mtx::string::strip_copy(to_utf8(Q(m_entry.m_text).replace(QRegularExpression{"\r+"}, {})), true);
+  m_entry.m_text      = to_utf8(Q(m_entry.m_text).replace(QRegularExpression{"\r+"}, {}));
 
   if (m_entry.m_duration && !m_entry.m_text.empty())
     flush_entry();
