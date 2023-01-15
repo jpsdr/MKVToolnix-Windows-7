@@ -30,44 +30,44 @@ get_list() {
 
   std::vector<hack_t> hacks;
 
-  hacks.emplace_back("space_after_chapters",          svec{ Y("Leave additional space (EbmlVoid) in the destination file after the chapters.") });
-  hacks.emplace_back("no_chapters_in_meta_seek",      svec{ Y("Do not add an entry for the chapters in the meta seek element.") });
-  hacks.emplace_back("no_meta_seek",                  svec{ Y("Do not write meta seek elements at all.") });
-  hacks.emplace_back("lacing_xiph",                   svec{ Y("Force Xiph style lacing.") });
-  hacks.emplace_back("lacing_ebml",                   svec{ Y("Force EBML style lacing.") });
-  hacks.emplace_back("native_mpeg4",                  svec{ Y("Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs.") });
-  hacks.emplace_back("no_variable_data",              svec{ Y("Use fixed values for the elements that change with each file otherwise (multiplexing date, segment UID, track UIDs etc.)."),
-                                                            Y("Two files multiplexed with the same settings and this switch activated will be identical.") });
-  hacks.emplace_back("force_passthrough_packetizer",  svec{ Y("Forces the Matroska reader to use the generic passthrough packetizer even for known and supported track types.") });
-  hacks.emplace_back("write_headers_twice",           svec{ Y("Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters).") });
-  hacks.emplace_back("allow_avc_in_vfw_mode",         svec{ Y("Allows storing AVC/H.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI.") });
-  hacks.emplace_back("keep_bitstream_ar_info",        svec{ Y("This option does nothing and is only kept for backwards compatibility.") });
-  hacks.emplace_back("no_simpleblocks",               svec{ Y("Disable the use of SimpleBlocks instead of BlockGroups.") });
-  hacks.emplace_back("use_codec_state_only",          svec{ Y("Store changes in CodecPrivate data in CodecState elements instead of the frames."),
-                                                            Y("This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers.") });
-  hacks.emplace_back("enable_timestamp_warning",      svec{ Y("Enables warnings for certain conditions where timestamps aren't monotonous in situations where they should be which could indicate either a problem with "
-                                                              "the file or a programming error.") });
-  hacks.emplace_back("remove_bitstream_ar_info",      svec{ Y("Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."),
-                                                            Y("This option causes mkvmerge to remove the aspect ratio information from the bitstream.") });
-  hacks.emplace_back("vobsub_subpic_stop_cmds",       svec{ Y("Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field.") });
-  hacks.emplace_back("no_cue_duration",               svec{ Y("Causes mkvmerge not to write 'CueDuration' elements in the cues.") });
-  hacks.emplace_back("no_cue_relative_position",      svec{ Y("Causes mkvmerge not to write 'CueRelativePosition' elements in the cues.") });
-  hacks.emplace_back("no_delay_for_garbage_in_avi",   svec{ Y("Garbage at the start of audio tracks in AVI files is normally used for delaying that track."),
-                                                            Y("mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timestamps by it."),
-                                                            Y("This option prevents that behavior.") });
-  hacks.emplace_back("keep_last_chapter_in_mpls",     svec{ Y("Blu-ray discs often contain a chapter entry very close to the end of the movie."),
-                                                            Y("mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."),
-                                                            Y("Enabling this option causes mkvmerge to keep that last entry.") });
-  hacks.emplace_back("keep_track_statistics_tags",    svec{ Y("Don't remove track statistics tags when reading Matroska files, no matter if new ones are created or not.") });
-  hacks.emplace_back("all_i_slices_are_key_frames",   svec{ Y("Some AVC/H.264 tracks contain I slices but lack real key frames."),
-                                                            Y("This option forces mkvmerge to treat all of those I slices as key frames.") });
-  hacks.emplace_back("append_and_split_flac",         svec{ Y("Enable appending and splitting FLAC tracks."),
-                                                            Y("The resulting tracks will be broken: the official FLAC tools will not be able to decode them and seeking will not work as expected.") });
-  hacks.emplace_back("dont_normalize_parameter_sets", svec{ Y("Normally the HEVC/H.265 code in mkvmerge and mkvextract normalizes parameter sets by prefixing all key frames with all currently active parameter sets and removes duplicates that might already be present."),
-                                                            Y("If this hack is enabled, the code will leave the parameter sets as they are.") });
+  hacks.emplace_back("space_after_chapters",               svec{ Y("Leave additional space (EbmlVoid) in the destination file after the chapters.") });
+  hacks.emplace_back("no_chapters_in_meta_seek",           svec{ Y("Do not add an entry for the chapters in the meta seek element.") });
+  hacks.emplace_back("no_meta_seek",                       svec{ Y("Do not write meta seek elements at all.") });
+  hacks.emplace_back("lacing_xiph",                        svec{ Y("Force Xiph style lacing.") });
+  hacks.emplace_back("lacing_ebml",                        svec{ Y("Force EBML style lacing.") });
+  hacks.emplace_back("native_mpeg4",                       svec{ Y("Analyze MPEG4 bitstreams, put each frame into one Matroska block, use proper timestamping (I P B B = 0 120 40 80), use V_MPEG4/ISO/... CodecIDs.") });
+  hacks.emplace_back("no_variable_data",                   svec{ Y("Use fixed values for the elements that change with each file otherwise (multiplexing date, segment UID, track UIDs etc.)."),
+                                                                 Y("Two files multiplexed with the same settings and this switch activated will be identical.") });
+  hacks.emplace_back("force_passthrough_packetizer",       svec{ Y("Forces the Matroska reader to use the generic passthrough packetizer even for known and supported track types.") });
+  hacks.emplace_back("write_headers_twice",                svec{ Y("Causes mkvmerge to write a second set of identical track headers near the end of the file (after all the clusters).") });
+  hacks.emplace_back("allow_avc_in_vfw_mode",              svec{ Y("Allows storing AVC/H.264 video in Video-for-Windows compatibility mode, e.g. when it is read from an AVI.") });
+  hacks.emplace_back("keep_bitstream_ar_info",             svec{ Y("This option does nothing and is only kept for backwards compatibility.") });
+  hacks.emplace_back("no_simpleblocks",                    svec{ Y("Disable the use of SimpleBlocks instead of BlockGroups.") });
+  hacks.emplace_back("use_codec_state_only",               svec{ Y("Store changes in CodecPrivate data in CodecState elements instead of the frames."),
+                                                                 Y("This is used for e.g. MPEG-1/-2 video tracks for storing the sequence headers.") });
+  hacks.emplace_back("enable_timestamp_warning",           svec{ Y("Enables warnings for certain conditions where timestamps aren't monotonous in situations where they should be which could indicate either a problem with "
+                                                                   "the file or a programming error.") });
+  hacks.emplace_back("remove_bitstream_ar_info",           svec{ Y("Normally mkvmerge keeps aspect ratio information in MPEG4 video bitstreams and puts the information into the container."),
+                                                                 Y("This option causes mkvmerge to remove the aspect ratio information from the bitstream.") });
+  hacks.emplace_back("vobsub_subpic_stop_cmds",            svec{ Y("Causes mkvmerge to add 'stop display' commands to VobSub subtitle packets that do not contain a duration field.") });
+  hacks.emplace_back("no_cue_duration",                    svec{ Y("Causes mkvmerge not to write 'CueDuration' elements in the cues.") });
+  hacks.emplace_back("no_cue_relative_position",           svec{ Y("Causes mkvmerge not to write 'CueRelativePosition' elements in the cues.") });
+  hacks.emplace_back("no_delay_for_garbage_in_avi",        svec{ Y("Garbage at the start of audio tracks in AVI files is normally used for delaying that track."),
+                                                                 Y("mkvmerge normally calculates the delay implied by its presence and offsets all of the track's timestamps by it."),
+                                                                 Y("This option prevents that behavior.") });
+  hacks.emplace_back("keep_last_chapter_in_mpls",          svec{ Y("Blu-ray discs often contain a chapter entry very close to the end of the movie."),
+                                                                 Y("mkvmerge normally removes that last entry if it's timestamp is within five seconds of the total duration."),
+                                                                 Y("Enabling this option causes mkvmerge to keep that last entry.") });
+  hacks.emplace_back("keep_track_statistics_tags",         svec{ Y("Don't remove track statistics tags when reading Matroska files, no matter if new ones are created or not.") });
+  hacks.emplace_back("all_i_slices_are_key_frames",        svec{ Y("Some AVC/H.264 tracks contain I slices but lack real key frames."),
+                                                                 Y("This option forces mkvmerge to treat all of those I slices as key frames.") });
+  hacks.emplace_back("append_and_split_flac",              svec{ Y("Enable appending and splitting FLAC tracks."),
+                                                                 Y("The resulting tracks will be broken: the official FLAC tools will not be able to decode them and seeking will not work as expected.") });
+  hacks.emplace_back("dont_normalize_parameter_sets",      svec{ Y("Normally the HEVC/H.265 code in mkvmerge and mkvextract normalizes parameter sets by prefixing all key frames with all currently active parameter sets and removes duplicates that might already be present."),
+                                                                 Y("If this hack is enabled, the code will leave the parameter sets as they are.") });
   hacks.emplace_back("keep_whitespaces_in_text_subtitles", svec{ Y("Normally spaces & tabs are removed from the beginning & the end of each line in text subtitles."),
                                                                  Y("If this hack is enabled, they won't be removed.") });
-  hacks.emplace_back("cow",                           svec{ Y("No help available.") });
+  hacks.emplace_back("cow",                                svec{ Y("No help available.") });
 
 
   return hacks;
