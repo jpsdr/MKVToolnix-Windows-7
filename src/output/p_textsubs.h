@@ -23,7 +23,7 @@ protected:
   unsigned int m_packetno{};
   std::optional<unsigned int> m_force_rerender_track_headers_on_packetno;
   charset_converter_cptr m_cc_utf8;
-  bool m_try_utf8{}, m_invalid_utf8_warned{}, m_converter_is_utf8{};
+  bool m_try_utf8{}, m_invalid_utf8_warned{}, m_converter_is_utf8{}, m_strip_whitespaces{};
   std::string m_codec_id;
   mtx::string::line_ending_style_e m_line_ending_style{mtx::string::line_ending_style_e::cr_lf};
   packet_cptr m_buffered_packet;

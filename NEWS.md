@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: SRT handling: added a hack called `--engage
+  keep_whitespaces_in_text_subtitles` which disables stripping whitespaces
+  from the start & end of each line of SRT entries during muxing. Part of the
+  implementation of #3470.
+
 ## Bug fixes
 
 * build system: fixed compatibility with Ruby 3.2.0 by using `FileTest.exist?`

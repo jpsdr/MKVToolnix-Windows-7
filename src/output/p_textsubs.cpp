@@ -17,6 +17,7 @@
 
 #include "common/codec.h"
 #include "common/debugging.h"
+#include "common/hacks.h"
 #include "common/qt.h"
 #include "common/strings/editing.h"
 #include "common/strings/parsing.h"
@@ -33,6 +34,7 @@ textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
                                              const char *codec_id,
                                              bool recode)
   : generic_packetizer_c(p_reader, p_ti)
+  , m_strip_whitespaces{!mtx::hacks::is_engaged(mtx::hacks::KEEP_WHITESPACES_IN_TEXT_SUBTITLES)}
   , m_codec_id{codec_id}
 {
   if (recode) {
@@ -91,9 +93,12 @@ textsubs_packetizer_c::process_impl(packet_cptr const &packet) {
   subs        = mtx::string::normalize_line_endings(subs, m_line_ending_style);
 
   auto q_subs = Q(subs);
-  q_subs.replace(QRegularExpression{Q("^[ \t]+|[ \t]+$"), QRegularExpression::MultilineOption}, {});
-  q_subs.replace(QRegularExpression{Q("[ \t]+\r")},                                             Q("\r"));
-  q_subs.replace(QRegularExpression{Q("[\r\n]+\\z")},                                           {});
+
+  if (m_strip_whitespaces) {
+    q_subs.replace(QRegularExpression{Q("^[ \t]+|[ \t]+$"), QRegularExpression::MultilineOption}, {});
+    q_subs.replace(QRegularExpression{Q("[ \t]+\r")},                                             Q("\r"));
+    q_subs.replace(QRegularExpression{Q("[\r\n]+\\z")},                                           {});
+  }
 
   if (q_subs.isEmpty())
     return;
