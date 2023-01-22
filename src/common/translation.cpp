@@ -273,7 +273,10 @@ translation_c::set_active_translation(const std::string &locale) {
 
 void
 translation_c::initialize_std_and_boost_filesystem_locales() {
-  std::locale::global(std::locale{ std::locale(), new std::codecvt_utf8<wchar_t> });
+  std::locale utf8_locale{ std::locale(), new std::codecvt_utf8<wchar_t> };
+
+  std::locale::global(utf8_locale);
+  boost::filesystem::path::imbue(utf8_locale);
 }
 
 // ------------------------------------------------------------
