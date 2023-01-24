@@ -92,18 +92,22 @@ textsubs_packetizer_c::process_impl(packet_cptr const &packet) {
   auto subs   = recode(packet->data->to_string());
   subs        = mtx::string::normalize_line_endings(subs, m_line_ending_style);
 
-  auto q_subs = Q(subs);
-
   if (m_strip_whitespaces) {
+    auto q_subs = Q(subs);
+
     q_subs.replace(QRegularExpression{Q("^[ \t]+|[ \t]+$"), QRegularExpression::MultilineOption}, {});
     q_subs.replace(QRegularExpression{Q("[ \t]+\r")},                                             Q("\r"));
     q_subs.replace(QRegularExpression{Q("[\r\n]+\\z")},                                           {});
-  }
 
-  if (q_subs.isEmpty())
+    subs = to_utf8(q_subs);
+
+  } else
+    subs = mtx::string::chomp(subs);
+
+  if (subs.empty())
     return;
 
-  packet->data = memory_c::clone(to_utf8(q_subs));
+  packet->data = memory_c::clone(subs);
 
   packet->force_key_frame();
 
