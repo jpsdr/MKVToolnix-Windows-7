@@ -215,12 +215,12 @@ mm_multi_file_io_c::open_multi(const std::string &display_file_name,
   paths.emplace_back(start_number, first_file_name);
 
   boost::filesystem::directory_iterator end_itr;
-  for (boost::filesystem::directory_iterator itr(first_file_name.branch_path()); itr != end_itr; ++itr) {
+  for (boost::filesystem::directory_iterator itr(first_file_name.parent_path()); itr != end_itr; ++itr) {
     if (   boost::filesystem::is_directory(itr->status())
-        || !balg::iequals(boost::filesystem::extension(itr->path()), extension))
+        || !balg::iequals(itr->path().extension().string(), extension))
       continue;
 
-    auto stem          = boost::filesystem::basename(itr->path());
+    auto stem          = itr->path().stem().string();
     int current_number = 0;
     matches            = file_name_re.match(Q(stem));
 
