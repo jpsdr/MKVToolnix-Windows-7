@@ -45,12 +45,6 @@ EOT
 
   qmake_qtplugin_ui=""
   qmake_qt_ui=""
-  qmake_qt_ui_try="multimedia"
-
-  if ! test x"$MINGW" = x1; then
-    qmake_qt_ui="dbus"
-    AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
-  fi
 
   cat > "$qmake_dir/configure_non_gui.pro" <<EOT
 QT = core
@@ -74,11 +68,11 @@ EOT
     fi
   fi
 
-  while true; do
+  for qt_module in dbus multimedia; do
     rm -f Makefile Makefile.Release
 
     cat > "$qmake_dir/configure.pro" <<EOT
-QT = core $qmake_qt_ui $qmake_qt_ui_try gui widgets network concurrent svg
+QT = core $qt_module gui widgets network concurrent svg
 QTPLUGIN += $qmake_qtplugin_ui
 
 FORMS = configure.ui
@@ -90,12 +84,30 @@ EOT
     "$QMAKE6" -makefile -nocache configure.pro > /dev/null
     result2=$?
 
-    if test $result2 = 0 -o -z $qmake_qt_ui_try; then
-      break
+    if test $result2 != 0; then
+      continue
+    elif test $qt_module = dbus; then
+      qmake_qt_ui="$qmake_qt_ui dbus"
+      AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
+    elif test $qt_module = multimedia; then
+      qmake_qt_ui="$qmake_qt_ui multimedia"
     fi
-
-    qmake_qt_ui_try=""
   done
+
+  rm -f Makefile Makefile.Release
+
+  cat > "$qmake_dir/configure.pro" <<EOT
+QT = core $qmake_qt_ui gui widgets network concurrent svg
+QTPLUGIN += $qmake_qtplugin_ui
+
+FORMS = configure.ui
+RESOURCES = configure.qrc
+HEADERS = configure.h
+SOURCES = configure.cpp
+EOT
+
+  "$QMAKE6" -makefile -nocache configure.pro > /dev/null
+  result2=$?
 
   if test $result2 = 0; then
     if test -f Makefile.Release; then
