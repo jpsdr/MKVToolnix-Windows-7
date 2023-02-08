@@ -13,16 +13,16 @@ if [[ -z ${QT_VERSION} ]]; then
   print -- "Determining latest Qt version"
 
   curl --silent ${QT_BASE_URL} | \
-    grep -E '<a +href *= *"5\.' | \
-    sed -Ee 's/.*<a +href *= *"5\./5./' -e 's/[/"].*//' | \
+    grep -E '<a +href *= *"6\.' | \
+    sed -Ee 's/.*<a +href *= *"6\./6./' -e 's/[/"].*//' | \
     sort --version-sort | \
     tail -n 1 > ${TMPF}
 
   QT_VERSION=$(<${TMPF})
 
   curl --silent ${QT_BASE_URL}/${QT_VERSION}/ | \
-    grep -E '<a +href *= *"5\.' | \
-    sed -Ee 's/.*<a +href *= *"5\./5./' -e 's/[/"].*//' | \
+    grep -E '<a +href *= *"6\.' | \
+    sed -Ee 's/.*<a +href *= *"6\./6./' -e 's/[/"].*//' | \
     sort --version-sort | \
     tail -n 1 > ${TMPF}
 

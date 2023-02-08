@@ -9,11 +9,10 @@ export CPP="clang -E"
 export CXX="clang++"
 export CXXCPP="clang++ -E"
 export CFLAGS=""
-export CXXFLAGS="-std=c++17"
+export CXXFLAGS="-std=c++17 -Wno-unused-parameter -Wno-deprecated-declarations"
 export QT_CXXFLAGS="-stdlib=libc++"
 export MACOSX_DEPLOYMENT_TARGET="10.15"
 export DRAKETHREADS=${DRAKETHREADS:-4}
 export MAKEFLAGS="-j ${DRAKETHREADS}"
-export SHARED_QT=1
-export QTVER=${QTVER:-5.13.1}
+export QTVER=${QTVER:-6.4.2}
 export SIGNATURE_IDENTITY="Developer ID Application: Moritz Bunkus (YZ9DVS8D8C)"

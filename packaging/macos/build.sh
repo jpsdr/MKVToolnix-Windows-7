@@ -3,18 +3,14 @@
 set -e
 set -x
 
+setopt nullglob
+
 export SCRIPT_PATH=${0:a:h}
 source ${SCRIPT_PATH}/config.sh
 test -f ${SCRIPT_PATH}/config.local.sh && source ${SCRIPT_PATH}/config.local.sh
 source ${SCRIPT_PATH}/specs.sh
 
 RAKE=./drake
-
-if [[ ${spec_qtbase[1]} == *everywhere* ]]; then
-  QTTYPE=everywhere
-else
-  QTTYPE=opensource
-fi
 
 function fail {
   echo $@
@@ -305,130 +301,59 @@ function build_curl {
     --with-ca-path=${TARGET}/etc/openssl/certs
 }
 
-function build_qtbase {
+function build_qt {
   local -a args
-  args=(--prefix=${TARGET} -opensource -confirm-license -release
-        -c++std c++14
-        -force-pkg-config -pkg-config -nomake examples -nomake tests
-        -no-glib -no-dbus  -no-sql-mysql -no-sql-sqlite -no-sql-odbc -no-sql-psql -no-sql-tds
-        -no-openssl -no-cups -no-feature-cups
-        # -no-feature-printer
-        -no-feature-printpreviewwidget -no-feature-printdialog -no-feature-printpreviewdialog)
-  args+=(-no-framework)
-  if [[ -z $SHARED_QT ]] args+=(-static)
+  args=(
+    --prefix=${TARGET}
+    -opensource
+    -confirm-license
+    -release
+    -force-pkg-config
+    -pkg-config
 
-  local package=qtbase-${QTTYPE}-src-${QTVER}
+    -nomake benchmarks
+    -nomake examples
+    -nomake tests
+
+    -skip qt3d,qt5compat,qtactiveqt,qtcharts,qtcoap,qtconnectivity,qtdatavis3d,qtdeclarative,qtdoc,qthttpserver,qtlanguageserver,qtlottie,qtmqtt,qtnetworkauth,qtopcua,qtpositioning,qtquick3d,qtquick3dphysics,qtquicktimeline,qtremoteobjects,qtscxml,qtsensors,qtserialbus,qtserialport,qtspeech,qtvirtualkeyboard,qtwayland,qtwebchannel,qtwebengine,qtwebsockets,qtwebview
+
+    -no-framework
+    -no-avx512
+
+    -no-feature-cups
+    -no-feature-dbus
+    -no-feature-glib
+    -no-feature-openssl
+    -no-feature-sql
+    -no-feature-sql-db2
+    -no-feature-sql-ibase
+    -no-feature-sql-mysql
+    -no-feature-sql-oci
+    -no-feature-sql-odbc
+    -no-feature-sql-sqlite
+
+    --
+    -DCMAKE_OSX_DEPLOYMENT_TARGET=$MACOSX_DEPLOYMENT_TARGET
+  )
+
+  local package=qt-everywhere-src-${QTVER}
   local saved_CXXFLAGS=$CXXFLAGS
   export CXXFLAGS="${QT_CXXFLAGS}"
   export QMAKE_CXXFLAGS="${CXXFLAGS}"
 
-  NO_CONFIGURE=1 build_package qtbase
+  NO_CONFIGURE=1 build_package qt
 
+  cd ${CMPL}/${package}
   $DEBUG ./configure ${args}
 
-  # find . -name Makefile| xargs perl -pi -e 's{-fvisibility=hidden|-fvisibility-inlines-hidden}{}g'
-
-  $DEBUG make
-
-  # cd ${CMPL}/${package}
-  build_tarball command "make INSTALL_ROOT=TMPDIR install"
-
-  CXXFLAGS=$saved_CXXFLAGS
-}
-
-function build_qttools {
-  local -a tools to_install
-  tools=(linguist/lrelease linguist/lconvert linguist/lupdate macdeployqt)
-  to_install=()
-
-  local package=qttools-${QTTYPE}-src-${QTVER}
-  local saved_CXXFLAGS=$CXXFLAGS
-  export CXXFLAGS="${QT_CXXFLAGS}"
-  export QMAKE_CXXFLAGS="${CXXFLAGS}"
-
-  CONFIGURE=qmake NO_MAKE=1 build_package qttools
-
-  for tool ($tools) {
-    to_install+=($PWD/bin/${tool##*/})
-    pushd src/$tool
-    qmake
-    make
-    popd
-  }
+  time $DEBUG cmake \
+       --build . \
+       --parallel $DRAKETHREADS
 
   # cd ${CMPL}/${package}
-  build_tarball command "mkdir -p TMPDIR/${TARGET}/bin && cp -v $to_install TMPDIR/${TARGET}/bin/"
+  build_tarball command "make DESTDIR=TMPDIR install"
 
   CXXFLAGS=$saved_CXXFLAGS
-}
-
-function build_qttranslations {
-  local saved_CXXFLAGS=$CXXFLAGS
-  export CXXFLAGS="${QT_CXXFLAGS}"
-  export QMAKE_CXXFLAGS="${CXXFLAGS}"
-
-  CONFIGURE=qmake NO_MAKE=1 build_package qttranslations
-  $DEBUG make
-  build_tarball command "make INSTALL_ROOT=TMPDIR install"
-
-  CXXFLAGS=$saved_CXXFLAGS
-}
-
-function build_qtmacextras {
-  local saved_CXXFLAGS=$CXXFLAGS
-  export CXXFLAGS="${QT_CXXFLAGS}"
-  export QMAKE_CXXFLAGS="${CXXFLAGS}"
-
-  CONFIGURE=qmake NO_MAKE=1 build_package qtmacextras
-  $DEBUG make
-  build_tarball command "make INSTALL_ROOT=TMPDIR install"
-
-  CXXFLAGS=$saved_CXXFLAGS
-}
-
-function build_qtmultimedia {
-  local saved_CXXFLAGS=$CXXFLAGS
-  export CXXFLAGS="${QT_CXXFLAGS}"
-  export QMAKE_CXXFLAGS="${CXXFLAGS}"
-
-  CONFIGURE=qmake NO_MAKE=1 build_package qtmultimedia
-  $DEBUG make
-  build_tarball command "make INSTALL_ROOT=TMPDIR install"
-
-  CXXFLAGS=$saved_CXXFLAGS
-}
-
-function build_qtsvg {
-  local saved_CXXFLAGS=$CXXFLAGS
-  export CXXFLAGS="${QT_CXXFLAGS}"
-  export QMAKE_CXXFLAGS="${CXXFLAGS}"
-
-  CONFIGURE=qmake NO_MAKE=1 build_package qtsvg
-  $DEBUG make
-  build_tarball command "make INSTALL_ROOT=TMPDIR install"
-
-  CXXFLAGS=$saved_CXXFLAGS
-}
-
-function build_qtimageformats {
-  local saved_CXXFLAGS=$CXXFLAGS
-  export CXXFLAGS="${QT_CXXFLAGS}"
-  export QMAKE_CXXFLAGS="${CXXFLAGS}"
-
-  CONFIGURE=qmake NO_MAKE=1 build_package qtimageformats
-  $DEBUG make
-  build_tarball command "make INSTALL_ROOT=TMPDIR install"
-
-  CXXFLAGS=$saved_CXXFLAGS
-}
-
-function build_qt {
-  build_qtbase
-  build_qtmultimedia
-  build_qtsvg
-  build_qtimageformats
-  build_qttools
-  build_qttranslations
 }
 
 function build_configured_mkvtoolnix {
@@ -449,8 +374,6 @@ function build_configured_mkvtoolnix {
     --with-docbook-xsl-root=${DOCBOOK_XSL_ROOT_DIR}
     --disable-debug
   )
-
-  if [[ -z $SHARED_QT ]] args+=(--enable-static-qt)
 
   ./configure ${args}
 
@@ -506,7 +429,7 @@ MKVToolNix – macOS specific notes
 Configuration files are stored in ~/.config/bunkus.org and temporary
 files are stored in the folder automatically set via TMPDIR.
 
-This build works only with macOS 10.14 "Mojave" or newer. Older
+This build works only with macOS 10.15 "Catalina" or newer. Older
 releases that work on older macOS versions can be found at
 https://mkvtoolnix.download/downloads.html#macosx-old
 
@@ -577,9 +500,17 @@ EOF
 EOF
 
   mkdir -p ${dmgmac}/libs
-  cp -v -a ${TARGET}/lib/libQt5{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Svg*.dylib,Widgets*.dylib} ${dmgmac}/libs/
+  cp -v -a ${TARGET}/lib/libQt6{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Svg*.dylib,Widgets*.dylib} ${dmgmac}/libs/
 
-  for plugin (audio iconengines imageformats mediaservice platforms playlistformats styles) cp -v -R ${TARGET}/plugins/${plugin} ${dmgmac}/
+  cd ${TARGET}/plugins
+
+  for dylib in audio/* iconengines/libqsvg*dylib imageformats/libqico*dylib imageformats/libqsvg*dylib imageformats/libqweb*dylib multimedia/lib*dylib platforms/libqcocoa*dylib styles/*dylib tls/*dylib; do
+    dstdir=${dmgmac}/${dylib:h:t}
+    mkdir -p ${dstdir}
+    cp -v ${dylib} ${dstdir}/
+  done
+
+  cd -
 
   ${SCRIPT_PATH}/fix_library_paths.sh ${dmgmac}/**/*.dylib(.) ${dmgmac}/{mkvmerge,mkvinfo,mkvextract,mkvpropedit,mkvtoolnix-gui}
 
