@@ -81,7 +81,7 @@ HEADERS = configure.h
 SOURCES = configure.cpp
 EOT
 
-    "$QMAKE6" -makefile -nocache configure.pro > /dev/null
+    "$QMAKE6" -makefile -nocache configure.pro > /dev/null 2> /dev/null
     result2=$?
 
     if test $result2 != 0; then
