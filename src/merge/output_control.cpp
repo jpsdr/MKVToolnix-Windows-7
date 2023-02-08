@@ -1066,13 +1066,11 @@ check_append_mapping() {
 
     // Find consecutive mappings.
     auto trav_amap  = amap;
-    int path_length = 2;
     do {
       for (cmp_amap = g_append_mapping.begin(); cmp_amap != amap_end; ++cmp_amap)
         if (   (trav_amap->src_file_id  == cmp_amap->dst_file_id)
             && (trav_amap->src_track_id == cmp_amap->dst_track_id)) {
           trav_amap = cmp_amap;
-          path_length++;
           break;
         }
     } while (cmp_amap != amap_end);

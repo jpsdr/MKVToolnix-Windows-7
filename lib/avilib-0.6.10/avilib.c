@@ -2160,7 +2160,7 @@ int avi_parse_index_from_file(avi_t *AVI, const char *filename)
     int64_t pos, len, f_pos, tot_chunks[AVI_MAX_TRACKS];
     int key=0, type;
     int vid_chunks=0, aud_chunks[AVI_MAX_TRACKS];
-    long line_count=0;
+    /* long line_count=0; */
     char *c, d;
     int i,j;
 
@@ -2206,7 +2206,7 @@ int avi_parse_index_from_file(avi_t *AVI, const char *filename)
 	} else 
 	    continue;
 
-	line_count++;
+	/* line_count++; */
     }
 
     AVI->video_frames = vid_chunks;
