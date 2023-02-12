@@ -252,31 +252,8 @@ FancyTabBar::paintTab(QPainter *painter,
   bool selected = (tabIndex == m_currentIndex);
   bool enabled = isTabEnabled(tabIndex);
 
-  if (selected) {
-    //background
-    painter->save();
-    QLinearGradient grad(rect.topLeft(), rect.topRight());
-    grad.setColorAt(0, QColor(255, 255, 255, 140));
-    grad.setColorAt(1, QColor(255, 255, 255, 210));
-    painter->fillRect(rect.adjusted(0, 0, 0, -1), grad);
-    painter->restore();
-
-    //shadows
-    painter->setPen(QColor(0, 0, 0, 110));
-    painter->drawLine(rect.topLeft() + QPoint(1,-1), rect.topRight() - QPoint(0,1));
-    painter->drawLine(rect.bottomLeft(), rect.bottomRight());
-    painter->setPen(QColor(0, 0, 0, 40));
-    painter->drawLine(rect.topLeft(), rect.bottomLeft());
-
-    //highlights
-    painter->setPen(QColor(255, 255, 255, 50));
-    painter->drawLine(rect.topLeft() + QPoint(0, -2), rect.topRight() - QPoint(0,2));
-    painter->drawLine(rect.bottomLeft() + QPoint(0, 1), rect.bottomRight() + QPoint(0,1));
-    painter->setPen(QColor(255, 255, 255, 40));
-    painter->drawLine(rect.topLeft() + QPoint(0, 0), rect.topRight());
-    painter->drawLine(rect.topRight() + QPoint(0, 1), rect.bottomRight() - QPoint(0, 1));
-    painter->drawLine(rect.bottomLeft() + QPoint(0,-1), rect.bottomRight()-QPoint(0,1));
-  }
+  if (selected)
+    painter->fillRect(rect.adjusted(0, 0, 0, -1), QColor(255, 255, 255, 240));
 
   QString tabText(this->tabText(tabIndex));
   QRect tabTextRect(tabRect(tabIndex));
