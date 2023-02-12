@@ -9,30 +9,30 @@
 
 ## Bug fixes
 
-* build system: fixed compatibility with Ruby 3.2.0 by using `FileTest.exist?`
-  instead of `File.exists?`, `Dir.exists?` & `FileTest.exists?` which were
-  removed in that release.
+* all: Windows: UNC paths of type `\\?\C:\…` are supported again by switching
+  back to Boost's file system library instead of using C++17's file system
+  library. Fixes #3058.
+* mkvmerge: AVC/H.264 & HEVC/H.265 packetizers: when appending tracks the
+  pixel dimensions will be checked & muxing will be aborted if they don't
+  match. Fixes #3480.
 * mkvmerge: file type detection: file types that can be detected unambiguously
   by their content (e.g. Matroska, MP4, WAV…) will now preferred in the
   detection order over file types based on their extension. Prevents certain
   cases of mis-detection, e.g. DTS in WAV but with a file name extension of
   `.dts` being detected as the wrong type of DTS. Fixes #3462.
-* MKVToolNix GUI: multiplexer: when adding multiple files that include certain
-  file types (chapters, segment info and tag files) and when the choice where
-  to add them is "all files to a single new tab", these certain file types
-  will now be added in the newly added tab as well instead of the current tab
-  that had already been open. Fixes #3469.
-* all: Windows: UNC paths of type `\\?\C:\…` are supported again by switching
-  back to Boost's file system library instead of using C++17's file system
-  library. Fixes #3058.
 * mkvmerge: SRT handling: whitespaces will now be stripped from the start &
   the end of each line of each entry, not just from the end of the last
   line. Part of the fix of #3470.
 * mkvextract: SRT extraction: whitespaces will not be stripped from the start
   & end of the whole entry anymore. Part of the fix of #3470.
-* mkvmerge: AVC/H.264 & HEVC/H.265 packetizers: when appending tracks the
-  pixel dimensions will be checked & muxing will be aborted if they don't
-  match. Fixes #3480.
+* MKVToolNix GUI: multiplexer: when adding multiple files that include certain
+  file types (chapters, segment info and tag files) and when the choice where
+  to add them is "all files to a single new tab", these certain file types
+  will now be added in the newly added tab as well instead of the current tab
+  that had already been open. Fixes #3469.
+* build system: fixed compatibility with Ruby 3.2.0 by using `FileTest.exist?`
+  instead of `File.exists?`, `Dir.exists?` & `FileTest.exists?` which were
+  removed in that release.
 
 ## Build system changes
 
