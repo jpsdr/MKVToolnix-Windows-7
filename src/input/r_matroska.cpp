@@ -1917,10 +1917,7 @@ kax_reader_c::create_av1_video_packetizer(kax_track_t *t,
 void
 kax_reader_c::create_hevc_es_video_packetizer(kax_track_t *t,
                                               track_info_c &nti) {
-  auto packetizer = new hevc_es_video_packetizer_c(this, nti);
-  set_track_packetizer(t, packetizer);
-
-  packetizer->set_video_pixel_dimensions(t->v_width, t->v_height);
+  set_track_packetizer(t, new hevc_es_video_packetizer_c(this, nti, t->v_width, t->v_height));
 
   show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }
@@ -2214,10 +2211,7 @@ kax_reader_c::create_packetizers() {
 void
 kax_reader_c::create_avc_es_video_packetizer(kax_track_t *t,
                                              track_info_c &nti) {
-  auto ptzr = new avc_es_video_packetizer_c(this, nti);
-  set_track_packetizer(t, ptzr);
-
-  ptzr->set_video_pixel_dimensions(t->v_width, t->v_height);
+  set_track_packetizer(t, new avc_es_video_packetizer_c(this, nti, t->v_width, t->v_height));
 
   show_packetizer_info(t->tnum, *t->ptzr_ptr);
 }

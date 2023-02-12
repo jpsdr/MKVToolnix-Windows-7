@@ -19,8 +19,10 @@
 #include "output/p_hevc_es.h"
 
 hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reader,
-                                                       track_info_c &p_ti)
-  : avc_hevc_es_video_packetizer_c{p_reader, p_ti, "hevc", std::unique_ptr<mtx::avc_hevc::es_parser_c>(new mtx::hevc::es_parser_c)}
+                                                       track_info_c &p_ti,
+                                                       uint32_t width,
+                                                       uint32_t height)
+  : avc_hevc_es_video_packetizer_c{p_reader, p_ti, "hevc", std::unique_ptr<mtx::avc_hevc::es_parser_c>(new mtx::hevc::es_parser_c), width, height}
   , m_parser{static_cast<mtx::hevc::es_parser_c &>(*m_parser_base)}
 {
   set_codec_id(MKV_V_MPEGH_HEVC);
@@ -30,10 +32,13 @@ hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reade
 
 connection_result_e
 hevc_es_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
-                                           [[maybe_unused]] std::string &error_message) {
+                                           std::string &error_message) {
   auto *vsrc = dynamic_cast<hevc_es_video_packetizer_c *>(src);
   if (!vsrc)
     return CAN_CONNECT_NO_FORMAT;
+
+  connect_check_v_width( m_width,  vsrc->m_width);
+  connect_check_v_height(m_height, vsrc->m_height);
 
   return CAN_CONNECT_YES;
 }

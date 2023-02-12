@@ -23,7 +23,7 @@ protected:
   mtx::avc::es_parser_c &m_parser;
 
 public:
-  avc_es_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
+  avc_es_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, uint32_t width, uint32_t height);
 
   virtual translatable_string_c get_format_name() const override {
     return YT("AVC/H.264 (unframed)");

@@ -23,9 +23,13 @@ avc_hevc_es_video_packetizer_c::
 avc_hevc_es_video_packetizer_c(generic_reader_c *p_reader,
                                track_info_c &p_ti,
                                std::string const &p_debug_type,
-                               std::unique_ptr<mtx::avc_hevc::es_parser_c> &&parser_base)
+                               std::unique_ptr<mtx::avc_hevc::es_parser_c> &&parser_base,
+                               uint32_t width,
+                               uint32_t height)
   : generic_packetizer_c{p_reader, p_ti}
   , m_parser_base{std::move(parser_base)}
+  , m_width{width}
+  , m_height{height}
   , m_debug_timestamps{  fmt::format("{0}_es|{0}_es_timestamps",   p_debug_type)}
   , m_debug_aspect_ratio{fmt::format("{0}_es|{0}_es_aspect_ratio", p_debug_type)}
 {
@@ -58,6 +62,8 @@ avc_hevc_es_video_packetizer_c(generic_reader_c *p_reader,
 
   if (m_parser_default_duration_to_force)
     m_parser_base->force_default_duration(*m_parser_default_duration_to_force);
+
+  set_video_pixel_dimensions(m_width, m_height);
 }
 
 void

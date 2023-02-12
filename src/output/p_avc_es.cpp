@@ -21,8 +21,10 @@
 
 avc_es_video_packetizer_c::
 avc_es_video_packetizer_c(generic_reader_c *p_reader,
-                          track_info_c &p_ti)
-  : avc_hevc_es_video_packetizer_c{p_reader, p_ti, "avc", std::unique_ptr<mtx::avc_hevc::es_parser_c>(new mtx::avc::es_parser_c)}
+                          track_info_c &p_ti,
+                          uint32_t width,
+                          uint32_t height)
+  : avc_hevc_es_video_packetizer_c{p_reader, p_ti, "avc", std::unique_ptr<mtx::avc_hevc::es_parser_c>(new mtx::avc::es_parser_c), width, height}
   , m_parser{static_cast<mtx::avc::es_parser_c &>(*m_parser_base)}
 {
   set_codec_id(MKV_V_MPEG4_AVC);
@@ -52,6 +54,8 @@ avc_es_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
     return CAN_CONNECT_NO_FORMAT;
 
   connect_check_codec_private(src);
+  connect_check_v_width( m_width,  vsrc->m_width);
+  connect_check_v_height(m_height, vsrc->m_height);
 
   return CAN_CONNECT_YES;
 }

@@ -2343,16 +2343,12 @@ reader_c::create_mpeg1_2_video_packetizer(track_ptr &track) {
 
 void
 reader_c::create_mpeg4_p10_es_video_packetizer(track_ptr &track) {
-  auto ptzr   = new avc_es_video_packetizer_c(this, m_ti);
-  track->ptzr = add_packetizer(ptzr);
-  ptzr->set_video_pixel_dimensions(track->v_width, track->v_height);
+  track->ptzr = add_packetizer(new avc_es_video_packetizer_c(this, m_ti, track->v_width, track->v_height));
 }
 
 void
 reader_c::create_mpegh_p2_es_video_packetizer(track_ptr &track) {
-  auto ptzr   = new hevc_es_video_packetizer_c(this, m_ti);
-  track->ptzr = add_packetizer(ptzr);
-  ptzr->set_video_pixel_dimensions(track->v_width, track->v_height);
+  track->ptzr = add_packetizer(new hevc_es_video_packetizer_c(this, m_ti, track->v_width, track->v_height));
 }
 
 void

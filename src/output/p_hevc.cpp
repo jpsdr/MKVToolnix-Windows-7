@@ -20,6 +20,7 @@
 #include "common/hevc/util.h"
 #include "common/hevc/es_parser.h"
 #include "common/strings/formatting.h"
+#include "merge/connection_checks.h"
 #include "merge/output_control.h"
 #include "output/p_hevc.h"
 
@@ -128,10 +129,13 @@ hevc_video_packetizer_c::process_impl(packet_cptr const &packet) {
 
 connection_result_e
 hevc_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
-                                        [[maybe_unused]] std::string &error_message) {
-  hevc_video_packetizer_c *vsrc = dynamic_cast<hevc_video_packetizer_c *>(src);
+                                        std::string &error_message) {
+  auto vsrc = dynamic_cast<hevc_video_packetizer_c *>(src);
   if (!vsrc)
     return CAN_CONNECT_NO_FORMAT;
+
+  connect_check_v_width( m_width,  vsrc->m_width);
+  connect_check_v_height(m_height, vsrc->m_height);
 
   return CAN_CONNECT_YES;
 }

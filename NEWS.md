@@ -30,6 +30,9 @@
   line. Part of the fix of #3470.
 * mkvextract: SRT extraction: whitespaces will not be stripped from the start
   & end of the whole entry anymore. Part of the fix of #3470.
+* mkvmerge: AVC/H.264 & HEVC/H.265 packetizers: when appending tracks the
+  pixel dimensions will be checked & muxing will be aborted if they don't
+  match. Fixes #3480.
 
 ## Build system changes
 

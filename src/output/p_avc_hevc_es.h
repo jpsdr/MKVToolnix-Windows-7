@@ -24,10 +24,11 @@ protected:
   int64_t m_default_duration_for_interlaced_content{-1};
   std::optional<int64_t> m_parser_default_duration_to_force;
   bool m_first_frame{true}, m_set_display_dimensions{false};
+  uint32_t m_width{}, m_height{};
   debugging_option_c m_debug_timestamps, m_debug_aspect_ratio;
 
 public:
-  avc_hevc_es_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, std::string const &p_debug_type, std::unique_ptr<mtx::avc_hevc::es_parser_c> &&parser_base);
+  avc_hevc_es_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, std::string const &p_debug_type, std::unique_ptr<mtx::avc_hevc::es_parser_c> &&parser_base, uint32_t width, uint32_t height);
 
   virtual void set_headers() override;
 

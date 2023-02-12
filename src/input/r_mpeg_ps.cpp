@@ -1242,8 +1242,7 @@ mpeg_ps_reader_c::create_packetizer(int64_t id) {
       m2vpacketizer->set_video_interlaced_flag(track->v_interlaced);
 
     } else if (track->codec.is(codec_c::type_e::V_MPEG4_P10)) {
-      track->ptzr = add_packetizer(new avc_es_video_packetizer_c(this, m_ti));
-      ptzr(track->ptzr).set_video_pixel_dimensions(track->v_width, track->v_height);
+      track->ptzr = add_packetizer(new avc_es_video_packetizer_c(this, m_ti, track->v_width, track->v_height));
       show_packetizer_info(id, ptzr(track->ptzr));
 
     } else if (track->codec.is(codec_c::type_e::V_VC1)) {

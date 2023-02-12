@@ -334,10 +334,8 @@ avi_reader_c::create_mpeg4_p2_packetizer() {
 void
 avi_reader_c::create_mpeg4_p10_packetizer() {
   try {
-    auto ptzr = new avc_es_video_packetizer_c(this, m_ti);
+    auto ptzr = new avc_es_video_packetizer_c(this, m_ti, m_video_width, m_video_height);
     m_vptzr   = add_packetizer(ptzr);
-
-    ptzr->set_video_pixel_dimensions(m_video_width, m_video_height);
 
     if (0 != m_default_duration)
       ptzr->set_container_default_field_duration(mtx::to_int_rounded(m_default_duration / 2));

@@ -1327,10 +1327,8 @@ ogm_v_avc_demuxer_c::ogm_v_avc_demuxer_c(ogm_reader_c *p_reader)
 
 generic_packetizer_c *
 ogm_v_avc_demuxer_c::create_packetizer() {
-  auto sth                    = reinterpret_cast<mtx::ogm::stream_header *>(&packet_data[0]->get_buffer()[1]);
-  generic_packetizer_c *vptzr = new avc_es_video_packetizer_c(reader, m_ti);
-
-  vptzr->set_video_pixel_dimensions(get_uint32_le(&sth->sh.video.width), get_uint32_le(&sth->sh.video.height));
+  auto sth   = reinterpret_cast<mtx::ogm::stream_header *>(&packet_data[0]->get_buffer()[1]);
+  auto vptzr = new avc_es_video_packetizer_c(reader, m_ti, get_uint32_le(&sth->sh.video.width), get_uint32_le(&sth->sh.video.height));
 
   reader->show_packetizer_info(m_ti.m_id, *vptzr);
 

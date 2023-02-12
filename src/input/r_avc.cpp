@@ -79,8 +79,7 @@ avc_es_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('v', 0) || !m_reader_packetizers.empty())
     return;
 
-  add_packetizer(new avc_es_video_packetizer_c(this, m_ti));
-  ptzr(0).set_video_pixel_dimensions(m_width, m_height);
+  add_packetizer(new avc_es_video_packetizer_c(this, m_ti, m_width, m_height));
 
   show_packetizer_info(0, ptzr(0));
 }

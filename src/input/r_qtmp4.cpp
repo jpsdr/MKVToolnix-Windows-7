@@ -1749,9 +1749,7 @@ qtmp4_reader_c::create_video_packetizer_avc(qtmp4_demuxer_c &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_mpegh_p2_es(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.priv.size() && dmx.priv[0]->get_size() ? dmx.priv[0] : memory_cptr{};
-  dmx.ptzr            = add_packetizer(new hevc_es_video_packetizer_c(this, m_ti));
-
-  ptzr(dmx.ptzr).set_video_pixel_dimensions(dmx.v_width, dmx.v_height);
+  dmx.ptzr            = add_packetizer(new hevc_es_video_packetizer_c(this, m_ti, dmx.v_width, dmx.v_height));
 
   if (boost::multiprecision::numerator(dmx.frame_rate)) {
     auto duration = mtx::to_int(mtx_mp_rational_t{boost::multiprecision::denominator(dmx.frame_rate), boost::multiprecision::numerator(dmx.frame_rate)} * 1'000'000'000ll);
