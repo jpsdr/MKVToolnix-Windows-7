@@ -1215,9 +1215,11 @@ Settings::exeWithPath(QString const &exe) {
   program.replace_extension(mtx::fs::to_path("exe"));
 #endif  // SYS_WINDOWS
 
-  for (auto const &potentialExe : potentialExes)
-    if (boost::filesystem::is_regular_file(potentialExe))
+  for (auto const &potentialExe : potentialExes) {
+    [[maybe_unused]] boost::system::error_code ec;
+    if (boost::filesystem::is_regular_file(potentialExe, ec))
       return QDir::toNativeSeparators(to_qs(potentialExe.string()));
+  }
 
   auto location = QStandardPaths::findExecutable(to_qs(program.string()));
   if (!location.isEmpty())

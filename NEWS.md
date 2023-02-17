@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: the GUI could abort with an exception on startup while
+  looking for the `mkvmerge` or `mediainfo` executables due to inaccessible
+  folders. Fixes #3481.
+
+
 # Version 74.0.0 "You Oughta Know" 2023-02-12
 
 ## New features and enhancements
