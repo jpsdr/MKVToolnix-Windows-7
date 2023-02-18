@@ -26,15 +26,4 @@ to_path(std::wstring const &name) {
   return boost::filesystem::path{to_utf8(name)};
 }
 
-bool
-is_absolute(boost::filesystem::path const &p) {
-  return p.is_absolute();
-}
-
-void
-create_directories(boost::filesystem::path const &path,
-                   boost::system::error_code &error_code) {
-  boost::filesystem::create_directories(path, error_code);
-}
-
 } // namespace mtx::fs

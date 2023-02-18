@@ -30,11 +30,6 @@ to_path(QString const &name) {
   return to_path(name.toStdWString());
 }
 
-// Compatibility functions due to bugs in gcc/libstdc++ on Windows:
-bool is_absolute(boost::filesystem::path const &p);
-boost::filesystem::path absolute(boost::filesystem::path const &p);
-void create_directories(boost::filesystem::path const &path, boost::system::error_code &error_code);
-
 } // namespace mtx::fs
 
 #if FMT_VERSION >= 90000

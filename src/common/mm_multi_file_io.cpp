@@ -193,7 +193,7 @@ mm_multi_file_io_c::get_file_name()
 mm_io_cptr
 mm_multi_file_io_c::open_multi(const std::string &display_file_name,
                                bool single_only) {
-  auto first_file_name = mtx::fs::absolute(mtx::fs::to_path(display_file_name));
+  auto first_file_name = boost::filesystem::absolute(mtx::fs::to_path(display_file_name));
   auto base_name       = first_file_name.stem().string();
   auto extension       = balg::to_lower_copy(first_file_name.extension().string());
 

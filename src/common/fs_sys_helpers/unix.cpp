@@ -110,20 +110,20 @@ get_current_exe_path([[maybe_unused]] std::string const &argv0) {
       break;
   }
 
-  return mtx::fs::absolute(mtx::fs::to_path(file_name)).parent_path();
+  return boost::filesystem::absolute(mtx::fs::to_path(file_name)).parent_path();
 
 #else // SYS_APPLE
   auto exe = mtx::fs::to_path("/proc/self/exe");
   if (boost::filesystem::is_regular_file(exe)) {
     auto exe_path = boost::filesystem::read_symlink(exe);
 
-    return mtx::fs::absolute(exe_path).parent_path();
+    return boost::filesystem::absolute(exe_path).parent_path();
   }
 
   if (argv0.empty())
     return boost::filesystem::current_path();
 
-  exe = mtx::fs::absolute(argv0);
+  exe = boost::filesystem::absolute(argv0);
   if (boost::filesystem::is_regular_file(exe))
     return exe.parent_path();
 

@@ -25,7 +25,7 @@ boost::filesystem::path
 find_base_dir_impl(boost::filesystem::path const &file_name) {
   static debugging_option_c s_debug{"bluray_find_base_dir"};
 
-  auto dir = mtx::fs::absolute(file_name);
+  auto dir = boost::filesystem::absolute(file_name);
   if (!boost::filesystem::is_directory(dir))
     dir = dir.parent_path();
 

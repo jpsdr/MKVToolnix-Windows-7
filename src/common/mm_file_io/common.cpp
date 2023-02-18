@@ -38,7 +38,7 @@ mm_file_io_c::prepare_path(const std::string &path) {
     return;
 
   boost::system::error_code error_code;
-  mtx::fs::create_directories(directory, error_code);
+  boost::filesystem::create_directories(directory, error_code);
   if (error_code)
     throw mtx::mm_io::create_directory_x(path, mtx::mm_io::make_error_code());
 }

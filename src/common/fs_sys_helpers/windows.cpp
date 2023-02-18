@@ -163,7 +163,7 @@ get_current_exe_path(std::string const &) {
     file_name.resize(file_name.size() + 4000);
   }
 
-  return mtx::fs::absolute(mtx::fs::to_path(file_name)).parent_path();
+  return boost::filesystem::absolute(mtx::fs::to_path(file_name)).parent_path();
 }
 
 bool

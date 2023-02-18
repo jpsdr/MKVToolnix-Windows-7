@@ -5,6 +5,10 @@
 * MKVToolNix GUI: the GUI could abort with an exception on startup while
   looking for the `mkvmerge` or `mediainfo` executables due to inaccessible
   folders. Fixes #3481.
+* all: switched back to using `boost::filesystem` functions for creating
+  directories instead of the ones introduced to work around bugs in
+  `std::filesystem`. The latter didn't work correctly with UNC paths after the
+  switch to `boost::filesystem::path` in v74. Fixes #3483.
 
 
 # Version 74.0.0 "You Oughta Know" 2023-02-12

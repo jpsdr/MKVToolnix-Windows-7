@@ -99,7 +99,7 @@ file_target_c::file_target_c(boost::filesystem::path file_name)
   : target_c{}
   , m_file_name{std::move(file_name)}
 {
-  if (!mtx::fs::is_absolute(m_file_name))
+  if (!m_file_name.is_absolute())
     m_file_name = boost::filesystem::temp_directory_path() / m_file_name;
 
   if (boost::filesystem::is_regular_file(m_file_name)) {

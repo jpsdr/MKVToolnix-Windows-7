@@ -67,7 +67,7 @@ static std::vector<boost::filesystem::path>
 file_names_to_paths(const std::vector<std::string> &file_names) {
   std::vector<boost::filesystem::path> paths;
   for (auto &file_name : file_names)
-    paths.push_back(mtx::fs::absolute(mtx::fs::to_path(file_name)));
+    paths.push_back(boost::filesystem::absolute(mtx::fs::to_path(file_name)));
 
   return paths;
 }
