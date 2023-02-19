@@ -149,6 +149,7 @@ public:
     , S_KATE
     , S_SRT
     , S_SSA_ASS
+    , S_TX3G
     , S_USF
     , S_VOBSUB
     , S_WEBVTT

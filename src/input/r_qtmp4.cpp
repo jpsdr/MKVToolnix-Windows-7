@@ -48,6 +48,7 @@
 #include "common/strings/parsing.h"
 #include "common/vobsub.h"
 #include "input/r_qtmp4.h"
+#include "input/timed_text_to_text_utf8_converter.h"
 #include "merge/file_status.h"
 #include "merge/input_x.h"
 #include "merge/output_control.h"
@@ -67,6 +68,7 @@
 #include "output/p_pcm.h"
 #include "output/p_prores.h"
 #include "output/p_quicktime.h"
+#include "output/p_textsubs.h"
 #include "output/p_video_for_windows.h"
 #include "output/p_vobsub.h"
 #include "output/p_vorbis.h"
@@ -634,7 +636,7 @@ qtmp4_reader_c::handle_hdlr_atom(qtmp4_demuxer_c &dmx,
   else if (subtype == "vide")
     dmx.type = 'v';
 
-  else if ((subtype == "text") || (subtype == "subp"))
+  else if (mtx::included_in(subtype, "text", "subp", "sbtl"))
     dmx.type = 's';
 }
 
@@ -1582,7 +1584,7 @@ qtmp4_reader_c::handle_trak_atom(qtmp4_demuxer_c &dmx,
   });
 
   dmx.determine_codec();
-  mxdebug_if(m_debug_headers, fmt::format("{0}Codec determination result: {1}\n", space(level * 2 + 1), dmx.codec));
+  mxdebug_if(m_debug_headers, fmt::format("{0}Codec determination result: {1} ok {2} type {3}\n", space(level * 2 + 1), dmx.codec.get_name(), dmx.ok, dmx.type));
 }
 
 file_status_e
@@ -1601,7 +1603,7 @@ qtmp4_reader_c::read(generic_packetizer_c *packetizer,
   }
 
   if (m_demuxers.size() == dmx_idx)
-    return flush_packetizers();
+    return finish();
 
   auto &dmx   = *m_demuxers[dmx_idx];
   auto &index = dmx.m_index[dmx.pos];
@@ -1628,17 +1630,28 @@ qtmp4_reader_c::read(generic_packetizer_c *packetizer,
   if (m_in->read(buffer->get_buffer() + buffer_offset, index.size) != static_cast<uint64_t>(index.size)) {
     mxwarn(fmt::format(Y("Quicktime/MP4 reader: Could not read chunk number {0}/{1} with size {2} from position {3}. Aborting.\n"),
                        dmx.pos, dmx.m_index.size(), index.size, index.file_pos));
-    return flush_packetizers();
+    return finish();
   }
 
   auto duration = dmx.m_use_frame_rate_for_duration ? *dmx.m_use_frame_rate_for_duration : index.duration;
-  ptzr(dmx.ptzr).process(std::make_shared<packet_t>(buffer, index.timestamp, duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME));
+  auto packet   = std::make_shared<packet_t>(buffer, index.timestamp, duration, index.is_keyframe ? VFT_IFRAME : VFT_PFRAMEAUTOMATIC, VFT_NOBFRAME);
+  dmx.process(packet);
+
   ++dmx.pos;
 
   m_bytes_processed += index.size;
 
   if (dmx.pos < dmx.m_index.size())
     return FILE_STATUS_MOREDATA;
+
+  return finish();
+}
+
+file_status_e
+qtmp4_reader_c::finish() {
+  for (auto const &dmx : m_demuxers)
+    if (dmx->m_converter)
+      dmx->m_converter->flush();
 
   return flush_packetizers();
 }
@@ -1853,6 +1866,13 @@ qtmp4_reader_c::create_audio_packetizer_passthrough(qtmp4_demuxer_c &dmx) {
 }
 
 void
+qtmp4_reader_c::create_subtitles_packetizer_timed_text(qtmp4_demuxer_c &dmx) {
+  dmx.ptzr        = add_packetizer(new textsubs_packetizer_c{this, m_ti, MKV_S_TEXTUTF8});
+  dmx.m_converter = std::make_shared<timed_text_to_text_utf8_converter_c>(ptzr(dmx.ptzr));
+  show_packetizer_info(dmx.id, ptzr(dmx.ptzr));
+}
+
+void
 qtmp4_reader_c::create_subtitles_packetizer_vobsub(qtmp4_demuxer_c &dmx) {
   std::string palette;
   auto format = [](int v) { return fmt::format("{0:02x}", std::min(std::max(v, 0), 255)); };
@@ -1972,6 +1992,9 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
   } else {
     if (dmx.codec.is(codec_c::type_e::S_VOBSUB))
       create_subtitles_packetizer_vobsub(dmx);
+
+    else if (dmx.codec.is(codec_c::type_e::S_TX3G))
+      create_subtitles_packetizer_timed_text(dmx);
   }
 
   if (packetizer_ok) {
@@ -3589,6 +3612,9 @@ qtmp4_demuxer_c::verify_subtitles_parameters() {
   if (codec.is(codec_c::type_e::S_VOBSUB))
     return verify_vobsub_subtitles_parameters();
 
+  else if (codec.is(codec_c::type_e::S_TX3G))
+    return true;
+
   return false;
 }
 
@@ -3612,4 +3638,10 @@ qtmp4_demuxer_c::determine_codec() {
     if (codec.is(codec_c::type_e::A_PCM))
       m_pcm_format = fourcc == "twos" ? pcm_packetizer_c::big_endian_integer : pcm_packetizer_c::little_endian_integer;
   }
+}
+
+void
+qtmp4_demuxer_c::process(packet_cptr const &packet) {
+  if (!m_converter || !m_converter->convert(packet))
+    m_reader.m_reader_packetizers[ptzr]->process(packet);
 }

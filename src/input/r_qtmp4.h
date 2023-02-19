@@ -19,6 +19,7 @@
 #include "common/codec.h"
 #include "common/dts.h"
 #include "common/fourcc.h"
+#include "input/packet_converter.h"
 #include "input/qtmp4_atoms.h"
 #include "merge/generic_reader.h"
 #include "output/p_pcm.h"
@@ -278,6 +279,7 @@ struct qtmp4_demuxer_c {
   bool warning_printed;
 
   int ptzr;
+  packet_converter_cptr m_converter;
 
   mtx::bcp47::language_c language;
 
@@ -384,6 +386,8 @@ struct qtmp4_demuxer_c {
   std::optional<int64_t> min_timestamp() const;
 
   void determine_codec();
+
+  void process(packet_cptr const &packet);
 
 private:
   void build_index_chunk_mode();
@@ -502,6 +506,7 @@ public:
 
 protected:
   virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
+  file_status_e finish();
 
   virtual void parse_headers();
   virtual void verify_track_parameters_and_update_indexes();
@@ -575,6 +580,7 @@ protected:
   virtual void create_video_packetizer_prores(qtmp4_demuxer_c &dmx);
   virtual void create_video_packetizer_vpx(qtmp4_demuxer_c &dmx);
 
+  virtual void create_subtitles_packetizer_timed_text(qtmp4_demuxer_c &dmx);
   virtual void create_subtitles_packetizer_vobsub(qtmp4_demuxer_c &dmx);
 
   virtual void handle_audio_encoder_delay(qtmp4_demuxer_c &dmx);

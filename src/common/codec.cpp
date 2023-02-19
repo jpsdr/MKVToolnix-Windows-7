@@ -181,6 +181,7 @@ codec_c::initialize() {
   s_codecs.emplace_back("Kate",                    type_e::S_KATE,         track_subtitle, "kate|S_KATE");
   s_codecs.emplace_back("SubRip/SRT",              type_e::S_SRT,          track_subtitle, "S_TEXT/(?:UTF8|ASCII)");
   s_codecs.emplace_back("SubStationAlpha",         type_e::S_SSA_ASS,      track_subtitle, "ssa\\s|ass\\s|S_TEXT/(?:SSA|ASS)");
+  s_codecs.emplace_back("Timed Text",              type_e::S_TX3G,         track_subtitle, "tx3g");
   s_codecs.emplace_back("UniversalSubtitleFormat", type_e::S_USF,          track_subtitle, "usf\\s|S_TEXT/USF");
   s_codecs.emplace_back("VobSub",                  type_e::S_VOBSUB,       track_subtitle, "S_VOBSUB(?:/ZLIB)?");
   s_codecs.emplace_back("WebVTT",                  type_e::S_WEBVTT,       track_subtitle, MKV_S_TEXTWEBVTT);

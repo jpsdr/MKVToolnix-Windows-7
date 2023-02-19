@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: MP4 reader: mkvmerge will now read Timed Text (FourCC `tx3g`)
+  subtitle tracks & convert them on the fly to Matroska's simple text subtitle
+  format (`S_TEXT/UTF8`; text only, no styles). Implements #2208, #2242,
+  #2613, #3000, #3243, #3418 and possibly others.
+
 ## Bug fixes
 
 * MKVToolNix GUI: the GUI could abort with an exception on startup while
