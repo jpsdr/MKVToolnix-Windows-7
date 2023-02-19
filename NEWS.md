@@ -9,6 +9,11 @@
   directories instead of the ones introduced to work around bugs in
   `std::filesystem`. The latter didn't work correctly with UNC paths after the
   switch to `boost::filesystem::path` in v74. Fixes #3483.
+* MKVToolNix GUI: preferences: when opening the preferences the first time the
+  UI might pre-select the first entry in the list of interface languages if
+  the operating system's language is not available for MKVToolNix. This might
+  also happen on Linux if e.g. `en_GB` is set, even though `en_US` is
+  available. Now English (`en_US`) will be selected instead. Fixes #3486.
 
 
 # Version 74.0.0 "You Oughta Know" 2023-02-12

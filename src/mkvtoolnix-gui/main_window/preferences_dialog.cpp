@@ -652,7 +652,9 @@ PreferencesDialog::setupInterfaceLanguage() {
   for (auto const &translation : translations)
     ui->cbGuiInterfaceLanguage->addItem(translation.first, translation.second);
 
-  Util::setComboBoxTextByData(ui->cbGuiInterfaceLanguage, m_cfg.m_uiLocale);
+  if (!Util::setComboBoxTextByData(ui->cbGuiInterfaceLanguage, m_cfg.m_uiLocale))
+    Util::setComboBoxTextByData(ui->cbGuiInterfaceLanguage, Q(translation_c::ms_available_translations[0].get_locale()));
+
   Util::fixComboBoxViewWidth(*ui->cbGuiInterfaceLanguage);
 #endif  // HAVE_LIBINTL_H
 }
