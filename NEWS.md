@@ -21,6 +21,13 @@
   the operating system's language is not available for MKVToolNix. This might
   also happen on Linux if e.g. `en_GB` is set, even though `en_US` is
   available. Now English (`en_US`) will be selected instead. Fixes #3486.
+* MKVToolNix GUI: multiplexer: when adding files the GUI has special handling
+  for chapter/tags/segment info files. This is done by comparing their content
+  to certain patterns. This recognition could wrongfully be triggered if any
+  such file was embedded in another file verbatim, e.g. with a chapter XML
+  file attachment in a Matroska file. When trying to add that Matroska file,
+  the GUI would treat it as a chapter file instead of a regular one. This
+  content-based detection was fixed. Fixes #3487.
 
 
 # Version 74.0.0 "You Oughta Know" 2023-02-12

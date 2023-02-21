@@ -9,6 +9,8 @@
 #include <QRegularExpression>
 #include <QTimer>
 
+#include "common/mm_proxy_io.h"
+#include "common/mm_text_io.h"
 #include "common/qt.h"
 #include "common/timestamp.h"
 #include "mkvtoolnix-gui/merge/file_identification_thread.h"
@@ -39,9 +41,9 @@ FileIdentificationWorker::FileIdentificationWorker(QObject *parent)
 {
   auto p                = p_func();
   p->m_simpleChaptersRE = QRegularExpression{R"(^CHAPTER\d{2}=[\s\S]*CHAPTER\d{2}NAME=)"};
-  p->m_xmlChaptersRE    = QRegularExpression{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Chapters>)"};
-  p->m_xmlSegmentInfoRE = QRegularExpression{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Info>)"};
-  p->m_xmlTagsRE        = QRegularExpression{R"(<\?xml[^>]+version[\s\S]*\?>[\s\S]*<Tags>)"};
+  p->m_xmlChaptersRE    = QRegularExpression{R"(^(<!--.*?-->\s*)*<\?xml[^>]+version[\s\S]*?\?>[\s\S]*?<Chapters>)"};
+  p->m_xmlSegmentInfoRE = QRegularExpression{R"(^(<!--.*?-->\s*)*<\?xml[^>]+version[\s\S]*?\?>[\s\S]*?<Info>)"};
+  p->m_xmlTagsRE        = QRegularExpression{R"(^(<!--.*?-->\s*)*<\?xml[^>]+version[\s\S]*?\?>[\s\S]*?<Tags>)"};
 }
 
 FileIdentificationWorker::~FileIdentificationWorker() {
@@ -167,7 +169,15 @@ FileIdentificationWorker::determineIfFileThatShouldBeSelectedElsewhere(QString c
   if (!file.open(QIODevice::ReadOnly))
     return IdentificationPack::FileType::Regular;
 
-  auto content = QString::fromUtf8(file.read(1024 * 10));
+  auto contentBytes = file.read(1024 * 10);
+  auto bytes        = reinterpret_cast<unsigned char const *>(contentBytes.data());
+  auto bom_type     = byte_order_mark_e::none;
+  unsigned int bom_length{};
+
+  if (mm_text_io_c::detect_byte_order_marker(bytes, contentBytes.size(), bom_type, bom_length))
+    bytes += bom_length;
+
+  auto content = QString::fromUtf8(bytes);
 
   if (content.contains(p->m_simpleChaptersRE) || content.contains(p->m_xmlChaptersRE))
     return IdentificationPack::FileType::Chapters;
