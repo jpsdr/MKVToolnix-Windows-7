@@ -170,11 +170,11 @@ FileIdentificationWorker::determineIfFileThatShouldBeSelectedElsewhere(QString c
     return IdentificationPack::FileType::Regular;
 
   auto contentBytes = file.read(1024 * 10);
-  auto bytes        = reinterpret_cast<unsigned char const *>(contentBytes.data());
+  auto bytes        = contentBytes.data();
   auto bom_type     = byte_order_mark_e::none;
   unsigned int bom_length{};
 
-  if (mm_text_io_c::detect_byte_order_marker(bytes, contentBytes.size(), bom_type, bom_length))
+  if (mm_text_io_c::detect_byte_order_marker(reinterpret_cast<unsigned char const *>(bytes), contentBytes.size(), bom_type, bom_length))
     bytes += bom_length;
 
   auto content = QString::fromUtf8(bytes);
