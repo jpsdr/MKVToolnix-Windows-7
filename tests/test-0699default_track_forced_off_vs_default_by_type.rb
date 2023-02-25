@@ -4,7 +4,7 @@
 describe "mkvmerge / Matroska file with 'default track' set, overwritten on command line, track from additional SRT file should become default"
 
 file_names = "data/mkv/sub-is-default.mks data/subtitles/srt/ven.srt"
-specs      = [ [ "", true, false ], [ "--default-track 0:yes", true, false ], [ "--default-track 0:no", false, true ] ]
+specs      = [ [ "", true, false ], [ "--default-track-flag 0:yes", true, false ], [ "--default-track-flag 0:no", false, true ] ]
 
 specs.each do |spec|
   test_merge file_names, :args => spec[0], :keep_tmp => true
