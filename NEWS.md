@@ -28,6 +28,10 @@
   file attachment in a Matroska file. When trying to add that Matroska file,
   the GUI would treat it as a chapter file instead of a regular one. This
   content-based detection was fixed. Fixes #3487.
+* mkvmerge: VobSub reader: mkvmerge will now probe the `.idx` file during
+  VobSub identification even if the `.sub` file is passed as the
+  source. Avoids mis-detection of the `.sub` as MPEG program streams. Fixes
+  #3489.
 
 
 # Version 74.0.0 "You Oughta Know" 2023-02-12

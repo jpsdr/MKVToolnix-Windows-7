@@ -22,9 +22,11 @@
 #include "common/iso639.h"
 #include "common/endian.h"
 #include "common/mm_io.h"
+#include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
+#include "common/path.h"
 #include "common/qt.h"
 #include "common/spu.h"
 #include "common/strings/formatting.h"
@@ -54,9 +56,21 @@ ishexdigit(char s) {
   return isdigit(s) || strchr("abcdefABCDEF", s);
 }
 
+std::pair<std::string, std::string>
+idx_and_sub_file_names(std::string const &file_name) {
+  auto idx_path = mtx::fs::to_path(file_name);
+  auto sub_path = idx_path;
+
+  idx_path.replace_extension(".idx");
+  sub_path.replace_extension(".sub");
+
+  return { idx_path.string(), sub_path.string() };
+}
+
 } // anonymous namespace
 
 const std::string vobsub_reader_c::id_string("# VobSub index file, v");
+
 
 bool
 vobsub_entry_c::operator < (const vobsub_entry_c &cmp) const {
@@ -65,30 +79,44 @@ vobsub_entry_c::operator < (const vobsub_entry_c &cmp) const {
 
 bool
 vobsub_reader_c::probe_file() {
-  std::string chunk;
-  return (m_in->read(chunk, id_string.size()) == id_string.size())
+  auto idx_path = idx_and_sub_file_names(m_in->get_file_name()).first;
+
+  try {
+    mm_file_io_c in{idx_path};
+
+    std::string chunk;
+    return (in.read(chunk, id_string.size()) == id_string.size())
       && boost::istarts_with(chunk, id_string);
+
+  } catch (mtx::mm_io::exception &) {
+  }
+
+  return false;
 }
 
 void
 vobsub_reader_c::read_headers() {
-  std::string sub_name = m_ti.m_fname;
-  size_t len           = sub_name.rfind(".");
-  if (std::string::npos != len)
-    sub_name.erase(len);
-  sub_name += ".sub";
+  auto [idx_name, sub_name] = idx_and_sub_file_names(m_ti.m_fname);
+
+  m_in->close();
 
   try {
-    m_sub_file = mm_file_io_cptr(new mm_file_io_c(sub_name));
+    m_idx_file = std::make_shared<mm_file_io_c>(idx_name);
   } catch (...) {
-    throw mtx::input::extended_x(fmt::format(Y("{0}: Could not open the sub file"), get_format_name()));
+    throw mtx::input::extended_x(fmt::format(Y("Could not open '{0}' for reading.\n"), idx_name));
+  }
+
+  try {
+    m_sub_file = std::make_shared<mm_file_io_c>(sub_name);
+  } catch (...) {
+    throw mtx::input::extended_x(fmt::format(Y("Could not open '{0}' for reading.\n"), sub_name));
   }
 
   idx_data = "";
-  len      = id_string.length();
+  auto len = id_string.length();
 
   std::string line;
-  if (!m_in->getline2(line) || !balg::istarts_with(line, id_string) || (line.length() < (len + 1)))
+  if (!m_idx_file->getline2(line) || !balg::istarts_with(line, id_string) || (line.length() < (len + 1)))
     mxerror_fn(m_ti.m_fname, Y("No version number found.\n"));
 
   version = line[len] - '0';
@@ -143,7 +171,7 @@ vobsub_reader_c::create_packetizer(int64_t tid) {
   track->entries[track->entries.size() - 1].duration = avg_duration;
 
   for (int idx = 0, end = track->entries.size(); idx < end; ++idx) {
-    auto end_position   = (idx + 1) < end ? track->entries[idx + 1].position : m_in->get_size();
+    auto end_position   = (idx + 1) < end ? track->entries[idx + 1].position : m_idx_file->get_size();
     m_bytes_to_process += end_position - track->entries[idx].position;
   }
 
@@ -168,10 +196,10 @@ vobsub_reader_c::parse_headers() {
   int64_t last_timestamp = 0;
   bool sort_required     = false;
 
-  m_in->setFilePointer(0);
+  m_idx_file->setFilePointer(0);
 
   while (1) {
-    if (!m_in->getline2(line))
+    if (!m_idx_file->getline2(line))
       break;
     line_no++;
 
