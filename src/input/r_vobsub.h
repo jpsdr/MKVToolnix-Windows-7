@@ -52,7 +52,7 @@ public:
 
 class vobsub_reader_c: public generic_reader_c {
 private:
-  mm_file_io_cptr m_idx_file, m_sub_file;
+  mm_file_io_cptr m_sub_file;
   int version;
   int64_t delay;
   int64_t m_bytes_to_process{}, m_bytes_processed{};

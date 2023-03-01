@@ -98,10 +98,8 @@ void
 vobsub_reader_c::read_headers() {
   auto [idx_name, sub_name] = idx_and_sub_file_names(m_ti.m_fname);
 
-  m_in->close();
-
   try {
-    m_idx_file = std::make_shared<mm_file_io_c>(idx_name);
+    m_in = std::make_shared<mm_file_io_c>(idx_name);
   } catch (...) {
     throw mtx::input::extended_x(fmt::format(Y("Could not open '{0}' for reading.\n"), idx_name));
   }
@@ -116,7 +114,7 @@ vobsub_reader_c::read_headers() {
   auto len = id_string.length();
 
   std::string line;
-  if (!m_idx_file->getline2(line) || !balg::istarts_with(line, id_string) || (line.length() < (len + 1)))
+  if (!m_in->getline2(line) || !balg::istarts_with(line, id_string) || (line.length() < (len + 1)))
     mxerror_fn(m_ti.m_fname, Y("No version number found.\n"));
 
   version = line[len] - '0';
@@ -171,7 +169,7 @@ vobsub_reader_c::create_packetizer(int64_t tid) {
   track->entries[track->entries.size() - 1].duration = avg_duration;
 
   for (int idx = 0, end = track->entries.size(); idx < end; ++idx) {
-    auto end_position   = (idx + 1) < end ? track->entries[idx + 1].position : m_idx_file->get_size();
+    auto end_position   = (idx + 1) < end ? track->entries[idx + 1].position : m_in->get_size();
     m_bytes_to_process += end_position - track->entries[idx].position;
   }
 
@@ -196,10 +194,10 @@ vobsub_reader_c::parse_headers() {
   int64_t last_timestamp = 0;
   bool sort_required     = false;
 
-  m_idx_file->setFilePointer(0);
+  m_in->setFilePointer(0);
 
   while (1) {
-    if (!m_idx_file->getline2(line))
+    if (!m_in->getline2(line))
       break;
     line_no++;
 
