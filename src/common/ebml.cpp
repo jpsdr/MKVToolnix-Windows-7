@@ -419,6 +419,8 @@ get_deprecated_elements_by_id() {
   s_elements[EBML_ID(KaxTagDefaultBogus).GetValue()]            = true;
   s_elements[EBML_ID(KaxTimeSlice).GetValue()]                  = true;
   s_elements[EBML_ID(KaxTrackAttachmentLink).GetValue()]        = true;
+  s_elements[EBML_ID(KaxTrackMaxCache).GetValue()]              = true;
+  s_elements[EBML_ID(KaxTrackMinCache).GetValue()]              = true;
   s_elements[EBML_ID(KaxTrackOffset).GetValue()]                = true;
   s_elements[EBML_ID(KaxTrackTimecodeScale).GetValue()]         = true;
   s_elements[EBML_ID(KaxTrickMasterTrackSegmentUID).GetValue()] = true;

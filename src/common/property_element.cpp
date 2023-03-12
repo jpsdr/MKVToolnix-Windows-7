@@ -138,8 +138,6 @@ property_element_c::init_tables() {
   add("flag-original",          EBML_INFO(KaxFlagOriginal),         YT("\"Original language\" flag"), YT("Can be set if the track is in the content's original language (not a translation)."));
   add("flag-text-descriptions", EBML_INFO(KaxFlagTextDescriptions), YT("\"Text descriptions\" flag"), YT("Can be set if the track contains textual descriptions of video content suitable for playback via a text-to-speech system for a visually-impaired user."));
   add("flag-visual-impaired",   EBML_INFO(KaxFlagVisualImpaired),   YT("\"Visual impaired\" flag"),   YT("Can be set if the track is suitable for users with visual impairments."));
-  add("min-cache",              EBML_INFO(KaxTrackMinCache),        YT("Minimum cache"),              YT("The minimum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."));
-  add("max-cache",              EBML_INFO(KaxTrackMaxCache),        YT("Maximum cache"),              YT("The maximum number of frames a player should be able to cache during playback. If set to 0, the reference pseudo-cache system is not used."));
   add("default-duration",       EBML_INFO(KaxTrackDefaultDuration), YT("Default duration"),           YT("Number of nanoseconds (not scaled) per frame."));
   add("name",                   EBML_INFO(KaxTrackName),            YT("Name"),                       YT("A human-readable track name."));
   add("language",               EBML_INFO(KaxTrackLanguage),        YT("Language"),                   YT("Specifies the language of the track."));

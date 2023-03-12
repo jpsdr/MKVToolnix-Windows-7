@@ -33,6 +33,11 @@
   source. Avoids mis-detection of the `.sub` as MPEG program streams. Fixes
   #3489.
 
+## Other changes
+
+* mkvpropedit, GUI's header editor: removed support for the deprecated
+  "minimum cache" & "maximum cache" track header elements.
+
 
 # Version 74.0.0 "You Oughta Know" 2023-02-12
 
