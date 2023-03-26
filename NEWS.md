@@ -1,4 +1,4 @@
-# Version ?
+# Version 75.0.0 "Goliath" 2023-03-26
 
 ## New features and enhancements
 
