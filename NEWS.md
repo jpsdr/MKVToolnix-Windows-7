@@ -9,13 +9,17 @@
 
 ## Bug fixes
 
-* MKVToolNix GUI: the GUI could abort with an exception on startup while
-  looking for the `mkvmerge` or `mediainfo` executables due to inaccessible
-  folders. Fixes #3481.
 * all: switched back to using `boost::filesystem` functions for creating
   directories instead of the ones introduced to work around bugs in
   `std::filesystem`. The latter didn't work correctly with UNC paths after the
   switch to `boost::filesystem::path` in v74. Fixes #3483.
+* mkvmerge: VobSub reader: mkvmerge will now probe the `.idx` file during
+  VobSub identification even if the `.sub` file is passed as the
+  source. Avoids mis-detection of the `.sub` as MPEG program streams. Fixes
+  #3489.
+* MKVToolNix GUI: the GUI could abort with an exception on startup while
+  looking for the `mkvmerge` or `mediainfo` executables due to inaccessible
+  folders. Fixes #3481.
 * MKVToolNix GUI: preferences: when opening the preferences the first time the
   UI might pre-select the first entry in the list of interface languages if
   the operating system's language is not available for MKVToolNix. This might
@@ -28,10 +32,6 @@
   file attachment in a Matroska file. When trying to add that Matroska file,
   the GUI would treat it as a chapter file instead of a regular one. This
   content-based detection was fixed. Fixes #3487.
-* mkvmerge: VobSub reader: mkvmerge will now probe the `.idx` file during
-  VobSub identification even if the `.sub` file is passed as the
-  source. Avoids mis-detection of the `.sub` as MPEG program streams. Fixes
-  #3489.
 
 ## Other changes
 
