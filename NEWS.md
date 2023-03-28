@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* mkvpropedit: fixed replacing chapters & tags in files that don't contain
+  tracks. Fixes #3498.
+
+
 # Version 75.0.0 "Goliath" 2023-03-26
 
 ## New features and enhancements

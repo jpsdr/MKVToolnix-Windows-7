@@ -189,7 +189,10 @@ read_element(kax_analyzer_c *analyzer,
 
 void
 options_c::find_elements(kax_analyzer_c *analyzer) {
-  ebml_element_cptr tracks(read_element<KaxTracks>(analyzer, Y("Track headers")));
+  auto tracks_required = std::find_if(m_targets.begin(), m_targets.end(), [](auto const &target) { return !!dynamic_cast<track_target_c *>(target.get()); })
+    != m_targets.end();
+
+  ebml_element_cptr tracks(read_element<KaxTracks>(analyzer, Y("Track headers"), tracks_required));
   ebml_element_cptr info, tags, chapters, attachments;
   attachment_id_manager_cptr attachment_id_manager;
 
