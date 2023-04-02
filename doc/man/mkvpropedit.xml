@@ -711,6 +711,35 @@
   </orderedlist>
  </refsect1>
 
+ <refsect1 id="mkvpropedit.language_handling">
+  <title>Language handling</title>
+
+  <para>
+   &mkvpropedit; mostly tries to do the right thing by default. Therefore changes to the <option>language</option> property will cause
+   &mkvpropedit; to apply the same change to both the new "LanguageIETF" element as well as the old "Language" element similar to how
+   &mkvmerge; applies the language to both elements. For example, when using <literal>mkvpropedit movie.mkv --edit track:2 --set
+   language=zh-TW</literal> the "LanguageIETF" element will be set to <literal>zh-TW</literal> and the old "Language" element to
+   <literal>chi</literal>.
+  </para>
+
+  <para>
+   Additionally there's a new track header property named <option>language-ietf</option> that can be set or removed. Changes to this
+   property only apply to the new "LanguageIETF" track header element. A caveat is that the old "Language" track header element is a
+   mandatory element in Matroska — meaning even if it isn't present in the file it still has an implied value. When the user only sets the
+   <option>language-ietf</option> property but not the <option>language</option> property, &mkvpropedit; will therefore add the old
+   "Language" element in certain cases &amp; set it to <literal>und</literal> (meaning "undetermined") as the user didn't specify a value
+   for it.
+  </para>
+
+  <para>When reading XML chapter or tag files &mkvpropedit; works like &mkvmerge; does.</para>
+
+  <para>The creation of the new elements can be disabled completely with the command-line option `--disable-language-ietf` which operates on
+  all three new elements.</para>
+
+  <para>You can chose the normalization method applied to extended language sub-tags with the parameter
+  <option>--normalize-language-ietf</option>.</para>
+ </refsect1>
+
  <refsect1 id="mkvpropedit.examples">
   <title>Examples</title>
   <para>

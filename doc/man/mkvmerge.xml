@@ -2697,6 +2697,45 @@ Track ID 1: audio (A_MPEG/L3)</screen>
   </refsect2>
  </refsect1>
 
+ <refsect1 id="mkvmerge.language_handling">
+  <title>Language handling</title>
+
+  <para>
+   &matroska; has support for two different types of language elements: the old, deprecated "Language" element containing ISO 639-2 alpha 3
+   codes and the new "LanguageIETF" tags containing IETF BCP 47 language tags. All of &mkvmerge;'s options that accept a language accept a
+   BCP 47 language tag. &mkvmerge; will derive the value for the deprecated "Language" element from the BCP 47 language tags wherever possible.
+  </para>
+
+  <para>
+   When identifying a file in JSON mode, existing "LanguageIETF" track header elements will be output as the
+   <literal>language_ietf</literal> track property.
+  </para>
+
+  <para>
+   When writing a file &mkvmerge; will always write the "LanguageIETF", "ChapLanguageIETF" and "TagLanguageIETF" elements (the latter two
+   only if chapters or tags are written respectively). In addition to those elements the corresponding old elements will be written; they'll
+   be set to the ISO 639-2 code portion of the BCP 47 language tag. For example, when the track language is set to
+   <literal>sr-Cyrl-RS</literal> "LanguageIETF" will be set to <literal>sr-Cyrl-RS</literal> and the old "Language" element will be set to
+   <literal>srp</literal>.
+  </para>
+
+  <para>
+   When reading existing files (Matroska files, XML chapter or tag files etc.) that already contain "…LanguageIETF" elements the existing
+   elements will be kept. Otherwise "…LanguageIETF" elements will be added based on command-line options and other existing deprecated
+   "…Language" elements.
+  </para>
+
+  <para>
+   The creation of the new elements can be disabled completely with the command-line option <option>--disable-language-ietf</option> which
+   operates on all three new elements.
+  </para>
+
+  <para>
+   You can chose the normalization method applied to extended language sub-tags with the parameter <link
+   linkend="mkvmerge.description.normalize_language_ietf"><option>--normalize-language-ietf</option></link>.
+  </para>
+ </refsect1>
+
  <refsect1 id="mkvmerge.text_files_and_charsets">
   <title>Text files and character set conversions</title>
   <note>
