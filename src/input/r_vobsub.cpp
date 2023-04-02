@@ -17,10 +17,11 @@
 
 #include "common/codec.h"
 #include "common/debugging.h"
+#include "common/endian.h"
 #include "common/hacks.h"
 #include "common/id_info.h"
 #include "common/iso639.h"
-#include "common/endian.h"
+#include "common/list_utils.h"
 #include "common/mm_io.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
@@ -79,6 +80,10 @@ vobsub_entry_c::operator < (const vobsub_entry_c &cmp) const {
 
 bool
 vobsub_reader_c::probe_file() {
+  auto extension = boost::algorithm::to_lower_copy(mtx::fs::to_path(m_in->get_file_name()).extension().string());
+  if (!mtx::included_in(extension, ".idx", ".sub"))
+    return false;
+
   auto idx_path = idx_and_sub_file_names(m_in->get_file_name()).first;
 
   try {
