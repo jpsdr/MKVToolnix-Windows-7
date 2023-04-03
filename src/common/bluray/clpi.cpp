@@ -198,15 +198,15 @@ parser_c::parse_program_info(mtx::bits::reader_c &bc) {
     program->num_groups                 = bc.get_bits(8);
 
     for (stream_idx = 0; stream_idx < program->num_streams; ++stream_idx)
-      parse_program_stream(bc, program);
+      parse_program_stream(bc, *program);
   }
 }
 
 void
 parser_c::parse_program_stream(mtx::bits::reader_c &bc,
-                               program_cptr &program) {
+                               program_t &program) {
   program_stream_cptr stream(new program_stream_t);
-  program->program_streams.push_back(stream);
+  program.program_streams.push_back(stream);
 
   stream->pid = bc.get_bits(16);
 

@@ -107,7 +107,7 @@ cluster_helper_c::is_splitting_and_processed_fully()
 }
 
 void
-cluster_helper_c::render_before_adding_if_necessary(packet_cptr &packet) {
+cluster_helper_c::render_before_adding_if_necessary(packet_cptr const &packet) {
   int64_t timestamp        = get_timestamp();
   int64_t timestamp_delay  = (   (packet->assigned_timestamp > m->max_timestamp_in_cluster)
                               || (-1 == m->max_timestamp_in_cluster))                        ? packet->assigned_timestamp : m->max_timestamp_in_cluster;
@@ -147,7 +147,7 @@ cluster_helper_c::render_before_adding_if_necessary(packet_cptr &packet) {
 }
 
 void
-cluster_helper_c::render_after_adding_if_necessary(packet_cptr &packet) {
+cluster_helper_c::render_after_adding_if_necessary(packet_cptr const &packet) {
   // Render the cluster if it is full (according to my many criteria).
   auto timestamp = get_timestamp();
   if (   ((packet->assigned_timestamp - timestamp) > g_max_ns_per_cluster)
@@ -159,7 +159,7 @@ cluster_helper_c::render_after_adding_if_necessary(packet_cptr &packet) {
 }
 
 void
-cluster_helper_c::split_if_necessary(packet_cptr &packet) {
+cluster_helper_c::split_if_necessary(packet_cptr const &packet) {
   if (   !splitting()
       || (m->current_split_point_idx >= m->split_points.size())
       || (g_file_num > g_split_max_num_files)
@@ -209,7 +209,7 @@ cluster_helper_c::split_if_necessary(packet_cptr &packet) {
 }
 
 void
-cluster_helper_c::split(packet_cptr &packet) {
+cluster_helper_c::split(packet_cptr const &packet) {
   render();
 
   m->num_cue_elements = 0;
@@ -272,7 +272,7 @@ cluster_helper_c::split(packet_cptr &packet) {
 }
 
 void
-cluster_helper_c::add_packet(packet_cptr packet) {
+cluster_helper_c::add_packet(packet_cptr const &packet) {
   if (!m->cluster)
     prepare_new_cluster();
 
@@ -355,7 +355,7 @@ cluster_helper_c::set_duration(render_groups_c *rg) {
 
 bool
 cluster_helper_c::must_duration_be_set(render_groups_c *rg,
-                                       packet_cptr &new_packet) {
+                                       packet_cptr const &new_packet) {
   size_t i;
   int64_t block_duration = 0;
   int64_t def_duration   = new_packet->source->get_track_default_duration();
@@ -611,7 +611,7 @@ cluster_helper_c::render() {
 }
 
 bool
-cluster_helper_c::add_to_cues_maybe(packet_cptr &pack) {
+cluster_helper_c::add_to_cues_maybe(packet_cptr const &pack) {
   auto &source  = *pack->source;
   auto strategy = source.get_cue_creation();
 

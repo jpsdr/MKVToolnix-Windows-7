@@ -51,7 +51,7 @@ public:
   mm_io_c *get_output();
   void prepare_new_cluster();
   libmatroska::KaxCluster *get_cluster();
-  void add_packet(packet_cptr packet);
+  void add_packet(packet_cptr const &packet);
   int64_t get_timestamp();
   int render();
   int get_cluster_content_size();
@@ -85,16 +85,16 @@ public:
 
 private:
   void set_duration(render_groups_c *rg);
-  bool must_duration_be_set(render_groups_c *rg, packet_cptr &new_packet);
+  bool must_duration_be_set(render_groups_c *rg, packet_cptr const &new_packet);
 
-  void render_before_adding_if_necessary(packet_cptr &packet);
-  void render_after_adding_if_necessary(packet_cptr &packet);
-  void split_if_necessary(packet_cptr &packet);
+  void render_before_adding_if_necessary(packet_cptr const &packet);
+  void render_after_adding_if_necessary(packet_cptr const &packet);
+  void split_if_necessary(packet_cptr const &packet);
   void generate_chapters_if_necessary(packet_cptr const &packet);
   void generate_one_chapter(timestamp_c const &timestamp);
-  void split(packet_cptr &packet);
+  void split(packet_cptr const &packet);
 
-  bool add_to_cues_maybe(packet_cptr &pack);
+  bool add_to_cues_maybe(packet_cptr const &pack);
 };
 
 extern std::unique_ptr<cluster_helper_c> g_cluster_helper;

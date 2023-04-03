@@ -2176,11 +2176,9 @@ main_loop() {
     bool appended_a_track = s_appending_files && append_tracks_maybe();
 
     if (winner && winner->pack) {
-      packet_cptr pack = winner->pack;
-
       // Step 3: Add the winning packet to a cluster. Full clusters will be
       // rendered automatically.
-      g_cluster_helper->add_packet(pack);
+      g_cluster_helper->add_packet(winner->pack);
 
       winner->pack.reset();
 

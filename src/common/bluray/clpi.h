@@ -108,7 +108,7 @@ public:
 protected:
   virtual void parse_header(mtx::bits::reader_c &bc);
   virtual void parse_program_info(mtx::bits::reader_c &bc);
-  virtual void parse_program_stream(mtx::bits::reader_c &bc, program_cptr &program);
+  virtual void parse_program_stream(mtx::bits::reader_c &bc, program_t &program);
   virtual void parse_characteristic_point_info(mtx::bits::reader_c &bc);
   virtual void parse_ep_map(mtx::bits::reader_c &bc);
   virtual void parse_ep_map_for_one_stream_pid(mtx::bits::reader_c &bc, ep_map_one_stream_t &map);
