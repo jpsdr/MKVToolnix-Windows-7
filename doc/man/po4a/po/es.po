@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: MKVToolNix 8.0.0\n"
 "POT-Creation-Date: 2023-04-02 11:37+0200\n"
 "PO-Revision-Date: 2016-02-03 20:53+0000\n"
-"Last-Translator: Overdrive80 <lukillas.ole@gmail.com>, 2022\n"
-"Language-Team: Spanish (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/es/)\n"
+"Last-Translator: overdrive80 <lukillas.ole@gmail.com>, 2016-2023\n"
+"Language-Team: Spanish (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgstr "75.0.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2023-03-26"
-msgstr ""
+msgstr "2023-03-26"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -4018,39 +4018,37 @@ msgstr "El ID de pista especial '<constant>-2</constant>' se refiere a los cap�
 #: doc/man/mkvmerge.xml:2701
 #: doc/man/mkvpropedit.xml:715
 msgid "Language handling"
-msgstr ""
+msgstr "Manipulador de idiomas"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2704
 msgid "&matroska; has support for two different types of language elements: the old, deprecated \"Language\" element containing ISO 639-2 alpha 3 codes and the new \"LanguageIETF\" tags containing IETF BCP 47 language tags. All of &mkvmerge;'s options that accept a language accept a BCP 47 language tag. &mkvmerge; will derive the value for the deprecated \"Language\" element from the BCP 47 language tags wherever possible."
-msgstr ""
+msgstr "&matroska; admite dos tipos diferentes de elementos de idioma: el antiguo y obsoleto elemento \"Language\", que contiene códigos ISO 639-2 alfa 3, y las nuevas etiquetas \"LanguageIETF\", que contienen etiquetas de idioma BCP 47 del IETF. Todas las opciones de &mkvmerge; que aceptan un idioma también admiten una etiqueta de idioma BCP 47. &mkvmerge; obtendrá, siempre que sea posible, el valor del elemento \"Idioma\" obsoleto a partir de las etiquetas de idioma BCP 47."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2710
 msgid "When identifying a file in JSON mode, existing \"LanguageIETF\" track header elements will be output as the <literal>language_ietf</literal> track property."
-msgstr ""
+msgstr "Al identificar un archivo en modo JSON, los elementos existentes de cabecera de pista \"LanguageIETF\" se mostrarán como la propiedad de pista <literal>language_ietf</literal>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2715
 msgid "When writing a file &mkvmerge; will always write the \"LanguageIETF\", \"ChapLanguageIETF\" and \"TagLanguageIETF\" elements (the latter two only if chapters or tags are written respectively). In addition to those elements the corresponding old elements will be written; they'll be set to the ISO 639-2 code portion of the BCP 47 language tag. For example, when the track language is set to <literal>sr-Cyrl-RS</literal> \"LanguageIETF\" will be set to <literal>sr-Cyrl-RS</literal> and the old \"Language\" element will be set to <literal>srp</literal>."
-msgstr ""
+msgstr "Al escribir un archivo &mkvmerge; siempre escribirá los elementos \"LanguageIETF\", \"ChapLanguageIETF\" y \"TagLanguageIETF\" (los dos últimos sólo si se escriben capítulos o etiquetas respectivamente). Además de esos elementos, se escribirán los elementos antiguos correspondientes; se ajustarán a la parte del código ISO 639-2 de la etiqueta de idioma BCP 47. Por ejemplo, cuando el idioma de la pista se establece a <literal>sr-Cyrl-RS</literal> \"LanguageIETF\" se establecerá a<literal>sr-Cyrl-RS</literal> y el antiguo elemento \"Language\" se establecerá a<literal>srp</literal>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2723
 msgid "When reading existing files (Matroska files, XML chapter or tag files etc.) that already contain \"…LanguageIETF\" elements the existing elements will be kept. Otherwise \"…LanguageIETF\" elements will be added based on command-line options and other existing deprecated \"…Language\" elements."
-msgstr ""
+msgstr "Al leer archivos existentes (archivos Matroska, archivos de capítulos o etiquetas XML, etc.) que ya contengan elementos \"...LanguageIETF\", se conservarán los elementos previos. En caso contrario, se añadirán elementos \"...LanguageIETF\" en función de las opciones de la línea de comandos y de otros elementos \"...Language\" obsoletos existentes."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2729
 msgid "The creation of the new elements can be disabled completely with the command-line option <option>--disable-language-ietf</option> which operates on all three new elements."
-msgstr ""
+msgstr "La creación de los nuevos elementos puede desactivarse por completo con la opción de línea de comandos <option>--disable-language-ietf</option>, que actúa sobre los tres nuevos elementos."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2734
-#, fuzzy
-#| msgid "The content is treated as if it had been passed via the <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link> option."
 msgid "You can chose the normalization method applied to extended language sub-tags with the parameter <link linkend=\"mkvmerge.description.normalize_language_ietf\"><option>--normalize-language-ietf</option></link>."
-msgstr "El contenido se trata como si se hubiese pasado a través de la opción <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link>."
+msgstr "Puede elegir el método de normalización aplicado a las subetiquetas de idioma extendidas con el parámetro <link linkend=\"mkvmerge.description.normalize_language_ietf\"><option>--normalize-language-ietf</option></link>."
 
 #. type: Content of: <refentry><refsect1><note><para>
 #: doc/man/mkvmerge.xml:2743
@@ -5394,27 +5392,27 @@ msgstr "Selección mediante el MIME type (tipo MIME). De esta forma el selector 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:718
 msgid "&mkvpropedit; mostly tries to do the right thing by default. Therefore changes to the <option>language</option> property will cause &mkvpropedit; to apply the same change to both the new \"LanguageIETF\" element as well as the old \"Language\" element similar to how &mkvmerge; applies the language to both elements. For example, when using <literal>mkvpropedit movie.mkv --edit track:2 --set language=zh-TW</literal> the \"LanguageIETF\" element will be set to <literal>zh-TW</literal> and the old \"Language\" element to <literal>chi</literal>."
-msgstr ""
+msgstr "&mkvpropedit; intenta hacer lo correcto por defecto. Por lo tanto, los cambios en la propiedad <option>language</option> harán que &mkvpropedit; aplique el mismo cambio tanto al nuevo elemento \"LanguageIETF\" así como al antiguo elemento \"Language\" de forma similar a como &mkvmerge; aplica el idioma a ambos elementos. Por ejemplo, al utilizar <literal>mkvpropedit movie.mkv --edit track:2 --set language=zh-TW</literal> el elemento \"LanguageIETF\" se establecerá en <literal>zh-TW</literal> y el antiguo elemento \"Language\" a<literal>chi</literal>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:726
 msgid "Additionally there's a new track header property named <option>language-ietf</option> that can be set or removed. Changes to this property only apply to the new \"LanguageIETF\" track header element. A caveat is that the old \"Language\" track header element is a mandatory element in Matroska — meaning even if it isn't present in the file it still has an implied value. When the user only sets the <option>language-ietf</option> property but not the <option>language</option> property, &mkvpropedit; will therefore add the old \"Language\" element in certain cases &amp; set it to <literal>und</literal> (meaning \"undetermined\") as the user didn't specify a value for it."
-msgstr ""
+msgstr "Además, hay una nueva propiedad de cabecera de pista llamada <option>language-ietf</option> que se puede establecer o eliminar. Los cambios en esta propiedad sólo se aplican al nuevo elemento de cabecera de pista \"LanguageIETF\". Hay que tener en cuenta que el antiguo elemento de cabecera de pista \"Language\" es un elemento obligatorio en Matroska — lo que significa que, aunque no esté presente en el archivo, tiene un valor implícito. Cuando el usuario sólo establece la propiedad <option>language-ietf</option> pero no la propiedad <option>language</option>, &mkvpropedit; añadirá el antiguo elemento \"Language\" en algunos casos &amp; lo establecerá en <literal>und</literal> (que significa \"indeterminado\") ya que el usuario no especificó un valor para él."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:734
 msgid "When reading XML chapter or tag files &mkvpropedit; works like &mkvmerge; does."
-msgstr ""
+msgstr "Al leer archivos XML de capítulos o etiquetas &mkvpropedit; funciona como lo hace &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:736
 msgid "The creation of the new elements can be disabled completely with the command-line option `--disable-language-ietf` which operates on all three new elements."
-msgstr ""
+msgstr "La creación de los nuevos elementos puede desactivarse por completo con la opción de línea de comandos `--disable-language-ietf`, que actúa sobre los tres nuevos elementos."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:739
 msgid "You can chose the normalization method applied to extended language sub-tags with the parameter <option>--normalize-language-ietf</option>."
-msgstr ""
+msgstr "Puedes elegir el método de normalización aplicado a las subetiquetas de idioma extendidas con el parámetro <option>--normalize-language-ietf</option>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:746
