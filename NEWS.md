@@ -1,5 +1,12 @@
 # Version ?
 
+## New features and enhancements
+
+* mkvmerge: JSON file identification: added a child element called
+  `num_index_entries` to the `properties` track element containing the number
+  of index entries found for a track. Currently only implemented for Matroska
+  files where it contains the number of cue points. See #3510.
+
 ## Bug fixes
 
 * mkvpropedit: fixed replacing chapters & tags in files that don't contain

@@ -36,6 +36,7 @@
 #include <matroska/KaxCluster.h>
 #include <matroska/KaxClusterData.h>
 #include <matroska/KaxContexts.h>
+#include <matroska/KaxCuesData.h>
 #include <matroska/KaxInfo.h>
 #include <matroska/KaxInfoData.h>
 #include <matroska/KaxSeekHead.h>
@@ -334,6 +335,7 @@ kax_reader_c::init_l1_position_storage(deferred_positions_t &storage) {
   storage[dl1t_tags]        = std::vector<int64_t>();
   storage[dl1t_tracks]      = std::vector<int64_t>();
   storage[dl1t_seek_head]   = std::vector<int64_t>();
+  storage[dl1t_cues]        = std::vector<int64_t>();
 }
 
 bool
@@ -1019,6 +1021,58 @@ kax_reader_c::handle_track_statistics_tags() {
 }
 
 void
+kax_reader_c::handle_cues(mm_io_c *io,
+                          EbmlElement *l0,
+                          int64_t pos) {
+  if (has_deferred_element_been_processed(dl1t_cues, pos))
+    return;
+
+  io->save_pos(pos);
+  mtx::at_scope_exit_c restore([io]() { io->restore_pos(); });
+
+  int upper_lvl_el = 0;
+  std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
+  KaxCues *cues = dynamic_cast<KaxCues *>(l1.get());
+
+  if (!cues)
+    return;
+
+  EbmlElement *element_found = nullptr;
+  upper_lvl_el               = 0;
+
+  cues->Read(*m_es, EBML_CLASS_CONTEXT(KaxCues), upper_lvl_el, element_found, true);
+  if (!found_in(*cues, element_found))
+    delete element_found;
+
+  std::unordered_map<uint64_t, kax_track_t *> tracks_by_number;
+
+  for (auto const &track : m_tracks)
+    tracks_by_number[track->track_number] = track.get();
+
+  auto not_found = tracks_by_number.end();
+
+  for (auto const &cues_child : *cues) {
+    if (!Is<KaxCuePoint>(cues_child))
+      continue;
+
+    auto const &cue_point = *static_cast<KaxCuePoint *>(cues_child);
+
+    for (auto const &point_child : cue_point) {
+      if (!Is<KaxCueTrackPositions>(point_child))
+        continue;
+
+      auto cue_track = FindChild<KaxCueTrack>(static_cast<KaxCueTrackPositions *>(point_child));
+      if (!cue_track)
+        continue;
+
+      auto itr = tracks_by_number.find(static_cast<KaxCueTrack *>(cue_track)->GetValue());
+      if (itr != not_found)
+        itr->second->num_cue_points++;
+    }
+  }
+}
+
+void
 kax_reader_c::read_headers_info(mm_io_c *io,
                                 EbmlElement *l0,
                                 int64_t pos) {
@@ -1436,6 +1490,7 @@ kax_reader_c::handle_seek_head(mm_io_c *io,
         :                       Is<KaxTracks>(id)      ? dl1t_tracks
         :                       Is<KaxSeekHead>(id)    ? dl1t_seek_head
         :                       Is<KaxInfo>(id)        ? dl1t_info
+        :                       Is<KaxCues>(id)        ? dl1t_cues
         :                                                dl1t_unknown;
 
       if (dl1t_unknown == type)
@@ -1524,6 +1579,9 @@ kax_reader_c::read_deferred_level1_elements(KaxSegment &segment) {
   if (!m_ti.m_no_chapters)
     for (auto position : m_deferred_l1_positions[dl1t_chapters])
       handle_chapters(m_in.get(), &segment, position);
+
+  for (auto position : m_deferred_l1_positions[dl1t_cues])
+    handle_cues(m_in.get(), &segment, position);
 
   handle_track_statistics_tags();
 
@@ -2757,6 +2815,7 @@ kax_reader_c::identify() {
 
     info.add(mtx::id::number,                 track->track_number);
     info.add(mtx::id::uid,                    track->track_uid);
+    info.set(mtx::id::num_index_entries,      track->num_cue_points);
     info.add(mtx::id::codec_id,               track->codec_id);
     info.set(mtx::id::codec_private_length,   track->private_data ? track->private_data->get_size() : 0u);
     info.add(mtx::id::codec_private_data,     track->private_data);

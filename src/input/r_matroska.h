@@ -43,7 +43,7 @@ struct converted_vorbis_comments_t;
 }
 
 struct kax_track_t {
-  uint64_t tnum, track_number, track_uid;
+  uint64_t tnum, track_number, track_uid, num_cue_points;
 
   std::string codec_id, codec_name, source_id;
   codec_c codec;
@@ -120,6 +120,7 @@ struct kax_track_t {
     : tnum(0)
     , track_number(0)
     , track_uid(0)
+    , num_cue_points(0)
     , ms_compat(false)
     , type(' ')
     , sub_type(' ')
@@ -187,6 +188,7 @@ private:
     dl1t_tracks,
     dl1t_seek_head,
     dl1t_info,
+    dl1t_cues,
   };
 
   std::vector<kax_track_cptr> m_tracks;
@@ -273,6 +275,7 @@ protected:
   virtual bool packets_available();
   virtual void handle_attachments(mm_io_c *io, libebml::EbmlElement *l0, int64_t pos);
   virtual void handle_chapters(mm_io_c *io, libebml::EbmlElement *l0, int64_t pos);
+  virtual void handle_cues(mm_io_c *io, libebml::EbmlElement *l0, int64_t pos);
   virtual void handle_seek_head(mm_io_c *io, libebml::EbmlElement *l0, int64_t pos);
   virtual void handle_tags(mm_io_c *io, libebml::EbmlElement *l0, int64_t pos);
   virtual void process_global_tags();
