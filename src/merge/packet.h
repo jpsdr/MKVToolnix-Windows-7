@@ -87,7 +87,7 @@ struct packet_t {
   {
   }
 
-  packet_t(memory_cptr p_memory,
+  packet_t(memory_cptr const &p_memory,
            int64_t p_timestamp = -1,
            int64_t p_duration = -1,
            int64_t p_bref     = -1,

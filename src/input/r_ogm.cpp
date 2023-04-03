@@ -413,7 +413,7 @@ ogm_reader_c::handle_new_stream_and_packets(ogg_page *og) {
   handle_new_stream(og);
   dmx = find_demuxer(ogg_page_serialno(og));
   if (dmx)
-    process_header_packets(dmx);
+    process_header_packets(*dmx);
 }
 
 /*
@@ -577,18 +577,18 @@ ogm_reader_c::process_header_page(ogg_page *og) {
     return;
 
   ogg_stream_pagein(&dmx->os, og);
-  process_header_packets(dmx);
+  process_header_packets(*dmx);
 }
 
 /*
    Search and store additional headers for the Ogg streams.
 */
 void
-ogm_reader_c::process_header_packets(ogm_demuxer_cptr dmx) {
-  if (dmx->headers_read)
+ogm_reader_c::process_header_packets(ogm_demuxer_c &dmx) {
+  if (dmx.headers_read)
     return;
 
-  dmx->process_header_page();
+  dmx.process_header_page();
 }
 
 /*

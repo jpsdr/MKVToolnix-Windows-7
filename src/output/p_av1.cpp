@@ -101,7 +101,7 @@ av1_video_packetizer_c::process_impl(packet_cptr const &packet) {
 }
 
 void
-av1_video_packetizer_c::process_framed(packet_cptr packet) {
+av1_video_packetizer_c::process_framed(packet_cptr const &packet) {
   packet->bref         = m_parser.is_keyframe(*packet->data) ? -1 : m_previous_timestamp;
   m_previous_timestamp = packet->timestamp;
 

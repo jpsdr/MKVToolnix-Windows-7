@@ -84,7 +84,7 @@ protected:
   void parse_pakt_chunk();
   void parse_kuki_chunk();
 
-  void handle_alac_magic_cookie(memory_cptr chunk);
+  void handle_alac_magic_cookie(memory_cptr const &chunk);
 
   generic_packetizer_c *create_alac_packetizer();
 

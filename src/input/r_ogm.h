@@ -119,7 +119,7 @@ private:
   virtual int packet_available();
   virtual int read_headers_internal();
   virtual void process_header_page(ogg_page *pg);
-  virtual void process_header_packets(ogm_demuxer_cptr dmx);
+  virtual void process_header_packets(ogm_demuxer_c &dmx);
   virtual void handle_stream_comments();
   virtual void handle_cover_art(mtx::tags::converted_vorbis_comments_t const &converted);
   virtual void handle_chapters(mtx::tags::vorbis_comments_t const &comments);

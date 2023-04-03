@@ -237,7 +237,7 @@ real_reader_c::parse_headers() {
 }
 
 void
-real_reader_c::create_video_packetizer(real_demuxer_cptr dmx) {
+real_reader_c::create_video_packetizer(real_demuxer_cptr const &dmx) {
   m_ti.m_private_data  = dmx->private_data;
   std::string codec_id = fmt::format("V_REAL/{0}", dmx->fourcc);
   dmx->ptzr            = add_packetizer(new generic_video_packetizer_c(this, m_ti, codec_id.c_str(), 0.0, dmx->width, dmx->height));
@@ -249,13 +249,13 @@ real_reader_c::create_video_packetizer(real_demuxer_cptr dmx) {
 }
 
 void
-real_reader_c::create_dnet_audio_packetizer(real_demuxer_cptr dmx) {
+real_reader_c::create_dnet_audio_packetizer(real_demuxer_cptr const &dmx) {
   dmx->ptzr = add_packetizer(new ac3_bs_packetizer_c(this, m_ti, dmx->samples_per_second, dmx->channels, dmx->bsid));
   show_packetizer_info(dmx->track->id, ptzr(dmx->ptzr));
 }
 
 void
-real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
+real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr const &dmx) {
   auto audio_config     = mtx::aac::audio_config_t{};
   bool profile_detected = false;
 
@@ -325,7 +325,7 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr dmx) {
 }
 
 void
-real_reader_c::create_audio_packetizer(real_demuxer_cptr dmx) {
+real_reader_c::create_audio_packetizer(real_demuxer_cptr const &dmx) {
   if (!strncmp(dmx->fourcc, "dnet", 4))
     create_dnet_audio_packetizer(dmx);
 
@@ -460,7 +460,7 @@ real_reader_c::read(generic_packetizer_c *,
 }
 
 void
-real_reader_c::queue_one_audio_frame(real_demuxer_cptr dmx,
+real_reader_c::queue_one_audio_frame(real_demuxer_cptr const &dmx,
                                      memory_cptr const &mem,
                                      uint64_t timestamp,
                                      uint32_t flags) {
@@ -476,7 +476,7 @@ real_reader_c::queue_one_audio_frame(real_demuxer_cptr dmx,
 }
 
 void
-real_reader_c::queue_audio_frames(real_demuxer_cptr dmx,
+real_reader_c::queue_audio_frames(real_demuxer_cptr const &dmx,
                                   memory_cptr const &mem,
                                   uint64_t timestamp,
                                   uint32_t flags) {
@@ -495,7 +495,7 @@ real_reader_c::queue_audio_frames(real_demuxer_cptr dmx,
 }
 
 void
-real_reader_c::deliver_audio_frames(real_demuxer_cptr dmx,
+real_reader_c::deliver_audio_frames(real_demuxer_cptr const &dmx,
                                     uint64_t duration) {
   uint32_t i;
 
@@ -516,7 +516,7 @@ real_reader_c::deliver_audio_frames(real_demuxer_cptr dmx,
 }
 
 void
-real_reader_c::deliver_aac_frames(real_demuxer_cptr dmx,
+real_reader_c::deliver_aac_frames(real_demuxer_cptr const &dmx,
                                   memory_c &mem) {
   unsigned char *chunk = mem.get_buffer();
   int length           = mem.get_size();
@@ -579,7 +579,7 @@ real_reader_c::identify() {
 }
 
 void
-real_reader_c::assemble_video_packet(real_demuxer_cptr dmx,
+real_reader_c::assemble_video_packet(real_demuxer_cptr const &dmx,
                                      rmff_frame_t *frame) {
   int result = rmff_assemble_packed_video_frame(dmx->track, frame);
   if (0 > result) {
@@ -654,7 +654,7 @@ real_reader_c::get_rv_dimensions(unsigned char *buf,
 }
 
 void
-real_reader_c::set_dimensions(real_demuxer_cptr dmx,
+real_reader_c::set_dimensions(real_demuxer_cptr const &dmx,
                               unsigned char *buffer,
                               int size) {
   unsigned char *ptr  = buffer;

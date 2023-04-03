@@ -108,18 +108,18 @@ protected:
 
   virtual void parse_headers();
   virtual real_demuxer_cptr find_demuxer(unsigned int id);
-  virtual void assemble_video_packet(real_demuxer_cptr dmx, rmff_frame_t *frame);
+  virtual void assemble_video_packet(real_demuxer_cptr const &dmx, rmff_frame_t *frame);
   virtual file_status_e finish();
   virtual bool get_rv_dimensions(unsigned char *buf, int size, uint32_t &width, uint32_t &height);
-  virtual void set_dimensions(real_demuxer_cptr dmx, unsigned char *buffer, int size);
+  virtual void set_dimensions(real_demuxer_cptr const &dmx, unsigned char *buffer, int size);
   virtual void get_information_from_data();
-  virtual void deliver_aac_frames(real_demuxer_cptr dmx, memory_c &mem);
-  virtual void queue_audio_frames(real_demuxer_cptr dmx, memory_cptr const &mem, uint64_t timestamp, uint32_t flags);
-  virtual void queue_one_audio_frame(real_demuxer_cptr dmx, memory_cptr const &mem, uint64_t timestamp, uint32_t flags);
-  virtual void deliver_audio_frames(real_demuxer_cptr dmx, uint64_t duration);
+  virtual void deliver_aac_frames(real_demuxer_cptr const &dmx, memory_c &mem);
+  virtual void queue_audio_frames(real_demuxer_cptr const &dmx, memory_cptr const &mem, uint64_t timestamp, uint32_t flags);
+  virtual void queue_one_audio_frame(real_demuxer_cptr const &dmx, memory_cptr const &mem, uint64_t timestamp, uint32_t flags);
+  virtual void deliver_audio_frames(real_demuxer_cptr const &dmx, uint64_t duration);
 
-  virtual void create_audio_packetizer(real_demuxer_cptr dmx);
-  virtual void create_aac_audio_packetizer(real_demuxer_cptr dmx);
-  virtual void create_dnet_audio_packetizer(real_demuxer_cptr dmx);
-  virtual void create_video_packetizer(real_demuxer_cptr dmx);
+  virtual void create_audio_packetizer(real_demuxer_cptr const &dmx);
+  virtual void create_aac_audio_packetizer(real_demuxer_cptr const &dmx);
+  virtual void create_dnet_audio_packetizer(real_demuxer_cptr const &dmx);
+  virtual void create_video_packetizer(real_demuxer_cptr const &dmx);
 };

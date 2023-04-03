@@ -319,7 +319,7 @@ coreaudio_reader_c::parse_kuki_chunk() {
 }
 
 void
-coreaudio_reader_c::handle_alac_magic_cookie(memory_cptr chunk) {
+coreaudio_reader_c::handle_alac_magic_cookie(memory_cptr const &chunk) {
   if (chunk->get_size() < sizeof(mtx::alac::codec_config_t))
     debug_error_and_throw(fmt::format("Invalid ALAC magic cookie; size: {0} < {1}", chunk->get_size(), sizeof(mtx::alac::codec_config_t)));
 
