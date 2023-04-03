@@ -178,7 +178,7 @@ public:
   virtual ~es_parser_c() = default;
 
   virtual void add_bytes(unsigned char *buf, int size);
-  virtual void add_bytes(memory_cptr &buf) {
+  virtual void add_bytes(memory_cptr const &buf) {
     add_bytes(buf->get_buffer(), buf->get_size());
   };
 
@@ -209,7 +209,7 @@ public:
     return m_raw_entrypoint ? m_raw_entrypoint->clone() : memory_cptr{};
   }
 
-  virtual void handle_packet(memory_cptr packet);
+  virtual void handle_packet(memory_cptr const &packet);
 
   virtual bool is_frame_available() const {
     return !m_frames.empty();
@@ -238,22 +238,22 @@ public:
   }
 
 protected:
-  virtual void handle_end_of_sequence_packet(memory_cptr packet);
-  virtual void handle_entrypoint_packet(memory_cptr packet);
-  virtual void handle_field_packet(memory_cptr packet);
-  virtual void handle_frame_packet(memory_cptr packet);
-  virtual void handle_sequence_header_packet(memory_cptr packet);
-  virtual void handle_slice_packet(memory_cptr packet);
-  virtual void handle_unknown_packet(uint32_t marker, memory_cptr packet);
+  virtual void handle_end_of_sequence_packet(memory_cptr const &packet);
+  virtual void handle_entrypoint_packet(memory_cptr const &packet);
+  virtual void handle_field_packet(memory_cptr const &packet);
+  virtual void handle_frame_packet(memory_cptr const &packet);
+  virtual void handle_sequence_header_packet(memory_cptr const &packet);
+  virtual void handle_slice_packet(memory_cptr const &packet);
+  virtual void handle_unknown_packet(uint32_t marker, memory_cptr const &packet);
 
   virtual int64_t get_next_timestamp();
   virtual int64_t peek_next_calculated_timestamp() const;
 
-  virtual void add_pre_frame_extra_data(memory_cptr packet);
-  virtual void add_post_frame_extra_data(memory_cptr packet);
+  virtual void add_pre_frame_extra_data(memory_cptr const &packet);
+  virtual void add_post_frame_extra_data(memory_cptr const &packet);
   virtual void combine_extra_data_with_packet();
 
-  virtual bool postpone_processing(memory_cptr &packet);
+  virtual bool postpone_processing(memory_cptr const &packet);
   virtual void process_unparsed_packets();
 
   virtual void flush_frame();

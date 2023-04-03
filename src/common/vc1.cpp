@@ -366,7 +366,7 @@ es_parser_c::flush() {
 }
 
 void
-es_parser_c::handle_packet(memory_cptr packet) {
+es_parser_c::handle_packet(memory_cptr const &packet) {
   uint32_t marker = get_uint32_be(packet->get_buffer());
 
   switch (marker) {
@@ -401,20 +401,20 @@ es_parser_c::handle_packet(memory_cptr packet) {
 }
 
 void
-es_parser_c::handle_end_of_sequence_packet(memory_cptr) {
+es_parser_c::handle_end_of_sequence_packet(memory_cptr const &) {
 }
 
 void
-es_parser_c::handle_entrypoint_packet(memory_cptr packet) {
+es_parser_c::handle_entrypoint_packet(memory_cptr const &packet) {
   if (!postpone_processing(packet))
     add_pre_frame_extra_data(packet);
 
   if (!m_raw_entrypoint)
-    m_raw_entrypoint = memory_cptr(packet->clone());
+    m_raw_entrypoint = packet->clone();
 }
 
 void
-es_parser_c::handle_field_packet(memory_cptr packet) {
+es_parser_c::handle_field_packet(memory_cptr const &packet) {
   if (postpone_processing(packet))
     return;
 
@@ -422,7 +422,7 @@ es_parser_c::handle_field_packet(memory_cptr packet) {
 }
 
 void
-es_parser_c::handle_frame_packet(memory_cptr packet) {
+es_parser_c::handle_frame_packet(memory_cptr const &packet) {
   if (postpone_processing(packet))
     return;
 
@@ -442,7 +442,7 @@ es_parser_c::handle_frame_packet(memory_cptr packet) {
 }
 
 void
-es_parser_c::handle_sequence_header_packet(memory_cptr packet) {
+es_parser_c::handle_sequence_header_packet(memory_cptr const &packet) {
   flush_frame();
 
   add_pre_frame_extra_data(packet);
@@ -454,7 +454,7 @@ es_parser_c::handle_sequence_header_packet(memory_cptr packet) {
   m_seqhdr_changed = !m_seqhdr_found || (packet->get_size() != m_raw_seqhdr->get_size()) || memcmp(packet->get_buffer(), m_raw_seqhdr->get_buffer(), packet->get_size());
 
   memcpy(&m_seqhdr, &seqhdr, sizeof(sequence_header_t));
-  m_raw_seqhdr   = memory_cptr(packet->clone());
+  m_raw_seqhdr   = packet->clone();
   m_seqhdr_found = true;
 
   if (!m_default_duration_forced && m_seqhdr.framerate_flag && (0 != m_seqhdr.framerate_num) && (0 != m_seqhdr.framerate_den))
@@ -464,7 +464,7 @@ es_parser_c::handle_sequence_header_packet(memory_cptr packet) {
 }
 
 void
-es_parser_c::handle_slice_packet(memory_cptr packet) {
+es_parser_c::handle_slice_packet(memory_cptr const &packet) {
   if (postpone_processing(packet))
     return;
 
@@ -473,7 +473,7 @@ es_parser_c::handle_slice_packet(memory_cptr packet) {
 
 void
 es_parser_c::handle_unknown_packet(uint32_t,
-                                   memory_cptr packet) {
+                                   memory_cptr const &packet) {
   if (postpone_processing(packet))
     return;
 
@@ -497,7 +497,7 @@ es_parser_c::flush_frame() {
 }
 
 bool
-es_parser_c::postpone_processing(memory_cptr &packet) {
+es_parser_c::postpone_processing(memory_cptr const &packet) {
   if (m_seqhdr_found)
     return false;
 
@@ -581,12 +581,12 @@ es_parser_c::peek_next_calculated_timestamp()
 }
 
 void
-es_parser_c::add_pre_frame_extra_data(memory_cptr packet) {
+es_parser_c::add_pre_frame_extra_data(memory_cptr const &packet) {
   add_extra_data_if_not_present(m_pre_frame_extra_data, packet);
 }
 
 void
-es_parser_c::add_post_frame_extra_data(memory_cptr packet) {
+es_parser_c::add_post_frame_extra_data(memory_cptr const &packet) {
   add_extra_data_if_not_present(m_post_frame_extra_data, packet);
 }
 

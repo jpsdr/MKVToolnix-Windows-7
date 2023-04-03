@@ -281,7 +281,7 @@ mm_io_c::read_mp4_descriptor_len() {
 }
 
 uint32_t
-mm_io_c::read(memory_cptr &buffer,
+mm_io_c::read(memory_cptr const &buffer,
               size_t size,
               int offset) {
   if (-1 == offset)

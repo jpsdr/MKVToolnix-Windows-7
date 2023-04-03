@@ -33,29 +33,29 @@ public:
   }
 
 protected:
-  virtual void handle_end_of_sequence_packet(memory_cptr packet);
-  virtual void handle_entrypoint_packet(memory_cptr packet);
-  virtual void handle_field_packet(memory_cptr packet);
-  virtual void handle_frame_packet(memory_cptr packet);
-  virtual void handle_sequence_header_packet(memory_cptr packet);
-  virtual void handle_slice_packet(memory_cptr packet);
-  virtual void handle_unknown_packet(uint32_t marker, memory_cptr packet);
+  virtual void handle_end_of_sequence_packet(memory_cptr const &packet) override;
+  virtual void handle_entrypoint_packet(memory_cptr const &packet) override;
+  virtual void handle_field_packet(memory_cptr const &packet) override;
+  virtual void handle_frame_packet(memory_cptr const &packet) override;
+  virtual void handle_sequence_header_packet(memory_cptr const &packet) override;
+  virtual void handle_slice_packet(memory_cptr const &packet) override;
+  virtual void handle_unknown_packet(uint32_t marker, memory_cptr const &packet) override;
 
   virtual void dump_sequence_header(mtx::vc1::sequence_header_t &seqhdr);
   virtual void dump_entrypoint(mtx::vc1::entrypoint_t &entrypoint);
   virtual void dump_frame_header(mtx::vc1::frame_header_t &frame_header);
 
-  virtual std::string create_checksum_info(memory_cptr packet);
+  virtual std::string create_checksum_info(memory_cptr const &packet);
 };
 
 void
-vc1_info_c::handle_end_of_sequence_packet(memory_cptr packet) {
+vc1_info_c::handle_end_of_sequence_packet(memory_cptr const &packet) {
   std::string checksum = create_checksum_info(packet);
   mxinfo(fmt::format(Y("End of sequence at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 }
 
 void
-vc1_info_c::handle_entrypoint_packet(memory_cptr packet) {
+vc1_info_c::handle_entrypoint_packet(memory_cptr const &packet) {
   std::string checksum = create_checksum_info(packet);
   mxinfo(fmt::format(Y("Entrypoint at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 
@@ -73,13 +73,13 @@ vc1_info_c::handle_entrypoint_packet(memory_cptr packet) {
 }
 
 void
-vc1_info_c::handle_field_packet(memory_cptr packet) {
+vc1_info_c::handle_field_packet(memory_cptr const &packet) {
   std::string checksum = create_checksum_info(packet);
   mxinfo(fmt::format(Y("Field at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 }
 
 void
-vc1_info_c::handle_frame_packet(memory_cptr packet) {
+vc1_info_c::handle_frame_packet(memory_cptr const &packet) {
   std::string checksum = create_checksum_info(packet);
   mxinfo(fmt::format(Y("Frame at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 
@@ -97,7 +97,7 @@ vc1_info_c::handle_frame_packet(memory_cptr packet) {
 }
 
 void
-vc1_info_c::handle_sequence_header_packet(memory_cptr packet) {
+vc1_info_c::handle_sequence_header_packet(memory_cptr const &packet) {
   std::string checksum = create_checksum_info(packet);
   mxinfo(fmt::format(Y("Sequence header at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 
@@ -112,20 +112,20 @@ vc1_info_c::handle_sequence_header_packet(memory_cptr packet) {
 }
 
 void
-vc1_info_c::handle_slice_packet(memory_cptr packet) {
+vc1_info_c::handle_slice_packet(memory_cptr const &packet) {
   std::string checksum = create_checksum_info(packet);
   mxinfo(fmt::format(Y("Slice at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 }
 
 void
 vc1_info_c::handle_unknown_packet(uint32_t marker,
-                                  memory_cptr packet) {
+                                  memory_cptr const &packet) {
   std::string checksum = create_checksum_info(packet);
   mxinfo(fmt::format(Y("Unknown (0x{0:08x}) at {1} size {2}{3}\n"), marker, m_stream_pos, packet->get_size(), checksum));
 }
 
 std::string
-vc1_info_c::create_checksum_info(memory_cptr packet) {
+vc1_info_c::create_checksum_info(memory_cptr const &packet) {
   if (!g_opt_checksum)
     return "";
 

@@ -40,7 +40,7 @@ public:
   virtual memory_cptr read(size_t size);
   virtual MTX_EBML_IOCALLBACK_READ_RETURN_TYPE read(void *buffer, size_t size) override;
   virtual uint32_t read(std::string &buffer, size_t size, size_t offset = 0);
-  virtual uint32_t read(memory_cptr &buffer, size_t size, int offset = 0);
+  virtual uint32_t read(memory_cptr const &buffer, size_t size, int offset = 0);
   virtual unsigned char read_uint8();
   virtual uint16_t read_uint16_le();
   virtual uint32_t read_uint24_le();
