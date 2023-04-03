@@ -11,7 +11,7 @@ msgstr ""
 "POT-Creation-Date: 2023-04-02 11:37+0200\n"
 "PO-Revision-Date: 2016-02-03 20:53+0000\n"
 "Last-Translator: Andrei Stepanov, 2018-2023\n"
-"Language-Team: Russian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
+"Language-Team: Russian (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +39,7 @@ msgstr "75.0.0"
 #: doc/man/mkvpropedit.xml:7
 #: doc/man/mkvtoolnix-gui.xml:7
 msgid "2023-03-26"
-msgstr ""
+msgstr "2023-03-26"
 
 #. type: Content of the mkvmerge entity
 #: doc/man/mkvextract.xml:9
@@ -3469,7 +3469,7 @@ msgstr "Определяет исходный формат, используем
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2137
 msgid "The <literal>text</literal> format is short and human-readable. It consists of one line per item found (container, tracks, attachments etc.)."
-msgstr "<literal>Текстовый</literal> формат выглядит коротким и удобочитаемым для человека. Он состоит из одной строки для каждого найденного элемента (контейнера, дорожки, вложения и т. д.)."
+msgstr "<literal>Текстовый</literal> формат выглядит коротким и удобочитаемым для человека. Он состоит из одной строки для каждого найденного объекта (контейнера, дорожки, вложения и т. д.)."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2139
@@ -4002,39 +4002,37 @@ msgstr "Специальный идентификатор дорожки '<const
 #: doc/man/mkvmerge.xml:2701
 #: doc/man/mkvpropedit.xml:715
 msgid "Language handling"
-msgstr ""
+msgstr "Работа с языками"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2704
 msgid "&matroska; has support for two different types of language elements: the old, deprecated \"Language\" element containing ISO 639-2 alpha 3 codes and the new \"LanguageIETF\" tags containing IETF BCP 47 language tags. All of &mkvmerge;'s options that accept a language accept a BCP 47 language tag. &mkvmerge; will derive the value for the deprecated \"Language\" element from the BCP 47 language tags wherever possible."
-msgstr ""
+msgstr "&matroska; поддерживает два различных типа языковых элементов: старый, устаревший элемент «Language», содержащий коды ISO 639-2 alpha 3, и новые теги «LanguageIETF», содержащие языковые теги IETF BCP 47. Все параметры &mkvmerge;, которые принимают язык, принимают языковой тег BCP 47. &mkvmerge; будет выводить значение для устаревшего элемента «Language» из языковых тегов BCP 47, где это возможно."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2710
 msgid "When identifying a file in JSON mode, existing \"LanguageIETF\" track header elements will be output as the <literal>language_ietf</literal> track property."
-msgstr ""
+msgstr "При идентификации файла в режиме JSON существующие элементы заголовка дорожки «LanguageIETF» будут выведены в качестве свойства дорожки <literal>language_ietf</literal>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2715
 msgid "When writing a file &mkvmerge; will always write the \"LanguageIETF\", \"ChapLanguageIETF\" and \"TagLanguageIETF\" elements (the latter two only if chapters or tags are written respectively). In addition to those elements the corresponding old elements will be written; they'll be set to the ISO 639-2 code portion of the BCP 47 language tag. For example, when the track language is set to <literal>sr-Cyrl-RS</literal> \"LanguageIETF\" will be set to <literal>sr-Cyrl-RS</literal> and the old \"Language\" element will be set to <literal>srp</literal>."
-msgstr ""
+msgstr "При записи файла &mkvmerge; всегда будет записывать элементы «LanguageIETF», «ChapLanguageIETF» и «TagLanguageIETF» (последние два только в случае записи глав или тегов соответственно). В дополнение к этим элементам будут записаны соответствующие старые элементы; они будут установлены на часть кода ISO 639-2 языкового тега BCP 47. Например, когда язык дорожки установлен на <literal>sr-Cyrl-RS</literal>, «LanguageIETF» будет установлен на <literal>sr-Cyrl-RS</literal>, а старый элемент «Language» будет установлен на <literal>srp</literal>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2723
 msgid "When reading existing files (Matroska files, XML chapter or tag files etc.) that already contain \"…LanguageIETF\" elements the existing elements will be kept. Otherwise \"…LanguageIETF\" elements will be added based on command-line options and other existing deprecated \"…Language\" elements."
-msgstr ""
+msgstr "При чтении существующих файлов (файлы Matroska, файлы глав или тегов XML и т. д.), которые уже содержат элементы «...LanguageIETF\"» существующие элементы будут сохранены. В противном случае элементы \"«..LanguageIETF» будут добавлены на основе параметров командной строки и других существующих устаревших элементов «...Language»."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2729
 msgid "The creation of the new elements can be disabled completely with the command-line option <option>--disable-language-ietf</option> which operates on all three new elements."
-msgstr ""
+msgstr "Создание новых элементов можно полностью отключить с помощью параметра командной строки <option>--disable-language-ietf</option>, который действует на все три новых элемента."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2734
-#, fuzzy
-#| msgid "The content is treated as if it had been passed via the <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link> option."
 msgid "You can chose the normalization method applied to extended language sub-tags with the parameter <link linkend=\"mkvmerge.description.normalize_language_ietf\"><option>--normalize-language-ietf</option></link>."
-msgstr "Содержимое обрабатывается так, как если бы оно было передано с помощью параметра <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link>."
+msgstr "С помощью параметра <link linkend=\"mkvmerge.description.normalize_language_ietf\"><option>--normalize-language-ietf</option></link> можно выбрать метод нормализации, применяемый к расширенным языковым подтегам."
 
 #. type: Content of: <refentry><refsect1><note><para>
 #: doc/man/mkvmerge.xml:2743
@@ -4994,7 +4992,7 @@ msgstr "По умолчанию &mkvpropedit; будет править разд
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:115
 msgid "See the section about <link linkend=\"mkvpropedit.edit_selectors\">edit selectors</link> for a full description of the syntax."
-msgstr "Смотрите раздел <link linkend=\"mkvpropedit.edit_selectors\">редактирование селекторов</link> для полного описания синтаксиса."
+msgstr "Смотрите раздел <link linkend=\"mkvpropedit.edit_selectors\">правка селекторов</link> для полного описания синтаксиса."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:121
@@ -5049,7 +5047,7 @@ msgstr "<parameter>selector</parameter> должен быть одним из с
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:170
 msgid "With <constant>track</constant> &mkvpropedit; will replace tags for a specific track. Additionally the tags read from <filename>filename</filename> will be assigned to the same track. The track is specified in the same way <link linkend=\"mkvpropedit.edit_selectors\">edit selectors</link> are specified (see below), e.g. <code>--tags track:a1:new-audio-tags.xml</code>."
-msgstr "С <constant>дорожкой</constant> &mkvpropedit; заменит теги для определённой дорожки. Кроме того, теги, прочитанные из <filename>filename</filename>, будут назначены той же дорожке. Дорожка указывается так же, как указываются <link linkend=\"mkvpropedit.edit_selectors\">селекторы редактирования</link> (см. ниже), например, <code>--tags track:a1:new-audio-tags.xml</code>."
+msgstr "С <constant>дорожкой</constant> &mkvpropedit; заменит теги для определённой дорожки. Кроме того, теги, прочитанные из <filename>filename</filename>, будут назначены той же дорожке. Дорожка указывается так же, как указываются <link linkend=\"mkvpropedit.edit_selectors\">селекторы правки</link> (см. ниже), например, <code>--tags track:a1:new-audio-tags.xml</code>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:179
@@ -5235,12 +5233,12 @@ msgstr "При редактировании заголовков дорожек 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:437
 msgid "When editing chapters all language elements of all chapter elements are affected as existing chapters are always fully replaced."
-msgstr "Во время редактирования глав подвергаются воздействию все языковые элементы всех элементов главы, поскольку существующие главы всегда заменяются полностью."
+msgstr "Во время правки глав подвергаются воздействию все языковые элементы всех элементов главы, поскольку существующие главы всегда заменяются полностью."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><itemizedlist><listitem><para>
 #: doc/man/mkvpropedit.xml:443
 msgid "When editing tags only the language elements of the tags that are actually replaced are affected. For example, when you replace global tags then existing track tags aren't affected."
-msgstr "При редактировании тегов подвергаются воздействию только те языковые элементы тегов, которые фактически заменены. Например, замена глобальных тегов не влияет на существующие теги дорожек."
+msgstr "При изменении тегов подвергаются воздействию только те языковые элементы тегов, которые фактически заменены. Например, замена глобальных тегов не влияет на существующие теги дорожек."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:450
@@ -5260,7 +5258,7 @@ msgstr "Включает экспериментальные функции. Сп
 #. type: Content of: <refentry><refsect1><title>
 #: doc/man/mkvpropedit.xml:579
 msgid "Edit selectors"
-msgstr "Редактирование селекторов"
+msgstr "Правка селекторов"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:581
@@ -5371,27 +5369,27 @@ msgstr "Выбор по типу MIME. В этой форме селекторо
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:718
 msgid "&mkvpropedit; mostly tries to do the right thing by default. Therefore changes to the <option>language</option> property will cause &mkvpropedit; to apply the same change to both the new \"LanguageIETF\" element as well as the old \"Language\" element similar to how &mkvmerge; applies the language to both elements. For example, when using <literal>mkvpropedit movie.mkv --edit track:2 --set language=zh-TW</literal> the \"LanguageIETF\" element will be set to <literal>zh-TW</literal> and the old \"Language\" element to <literal>chi</literal>."
-msgstr ""
+msgstr "&mkvpropedit; в основном старается делать правильные вещи по умолчанию. Поэтому изменения свойства <option>language</option> заставят &mkvpropedit; применить то же самое изменение как к новому элементу «LanguageIETF», так и к старому элементу «Language», подобно тому, как &mkvmerge; применяет язык к обоим элементам. Например, при использовании <literal>mkvpropedit movie.mkv --edit track:2 --set language=zh-TW</literal> элемент «LanguageIETF» будет установлен на <literal>zh-TW</literal>, а старый элемент «Language» на <literal>chi</literal>."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:726
 msgid "Additionally there's a new track header property named <option>language-ietf</option> that can be set or removed. Changes to this property only apply to the new \"LanguageIETF\" track header element. A caveat is that the old \"Language\" track header element is a mandatory element in Matroska — meaning even if it isn't present in the file it still has an implied value. When the user only sets the <option>language-ietf</option> property but not the <option>language</option> property, &mkvpropedit; will therefore add the old \"Language\" element in certain cases &amp; set it to <literal>und</literal> (meaning \"undetermined\") as the user didn't specify a value for it."
-msgstr ""
+msgstr "Кроме того, есть новое свойство заголовка дорожки под названием <option>language-ietf</option>, которое можно установить или удалить. Изменения этого свойства применяются только к новому элементу заголовка дорожки «LanguageIETF». Оговорка заключается в том, что старый элемент заголовка дорожки «Language» является обязательным элементом в Matroska — это означает, что даже если он отсутствует в файле, он все равно имеет подразумеваемое значение. Когда пользователь устанавливает только свойство <option>language-ietf</option>, но не свойство <option>language</option>, &mkvpropedit; будет добавлять старый элемент «Language» в определённых случаях и установит его в <literal>und</literal> (что означает «неопределённый»), так как пользователь не указал для него значение."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:734
 msgid "When reading XML chapter or tag files &mkvpropedit; works like &mkvmerge; does."
-msgstr ""
+msgstr "При чтении файлов глав XML или тегов &mkvpropedit; работает так же, как &mkvmerge;."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:736
 msgid "The creation of the new elements can be disabled completely with the command-line option `--disable-language-ietf` which operates on all three new elements."
-msgstr ""
+msgstr "Создание новых элементов может быть полностью отключено с помощью параметра командной строки «--disable-language-ietf», который действует на все три новых элемента."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:739
 msgid "You can chose the normalization method applied to extended language sub-tags with the parameter <option>--normalize-language-ietf</option>."
-msgstr ""
+msgstr "С помощью параметра <option>--normalize-language-ietf</option> можно выбрать метод нормализации, применяемый к расширенным языковым подтегам."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:746
