@@ -31,48 +31,48 @@ public:
   }
 
 protected:
-  virtual void handle_auxiliary_data_unit(memory_cptr packet);
-  virtual void handle_end_of_sequence_unit(memory_cptr packet);
-  virtual void handle_padding_unit(memory_cptr packet);
-  virtual void handle_picture_unit(memory_cptr packet);
-  virtual void handle_sequence_header_unit(memory_cptr packet);
-  virtual void handle_unknown_unit(memory_cptr packet);
+  virtual void handle_auxiliary_data_unit(memory_c const &packet) override;
+  virtual void handle_end_of_sequence_unit(memory_c const &packet) override;
+  virtual void handle_padding_unit(memory_c const &packet) override;
+  virtual void handle_picture_unit(memory_cptr const &packet) override;
+  virtual void handle_sequence_header_unit(memory_c const &packet) override;
+  virtual void handle_unknown_unit(memory_c const &packet) override;
 
   virtual void dump_sequence_header(mtx::dirac::sequence_header_t &seqhdr);
 
-  virtual std::string create_checksum_info(memory_cptr packet);
+  virtual std::string create_checksum_info(memory_c const &packet);
 };
 
 void
-dirac_info_c::handle_auxiliary_data_unit(memory_cptr packet) {
+dirac_info_c::handle_auxiliary_data_unit(memory_c const &packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(fmt::format(Y("Auxiliary data at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
+  mxinfo(fmt::format(Y("Auxiliary data at {0} size {1}{2}\n"), m_stream_pos, packet.get_size(), checksum));
 }
 
 void
-dirac_info_c::handle_end_of_sequence_unit(memory_cptr packet) {
+dirac_info_c::handle_end_of_sequence_unit(memory_c const &packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(fmt::format(Y("End of sequence at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
+  mxinfo(fmt::format(Y("End of sequence at {0} size {1}{2}\n"), m_stream_pos, packet.get_size(), checksum));
 }
 
 void
-dirac_info_c::handle_padding_unit(memory_cptr packet) {
+dirac_info_c::handle_padding_unit(memory_c const &packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(fmt::format(Y("Padding at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
+  mxinfo(fmt::format(Y("Padding at {0} size {1}{2}\n"), m_stream_pos, packet.get_size(), checksum));
 }
 
 void
-dirac_info_c::handle_picture_unit(memory_cptr packet) {
-  std::string checksum = create_checksum_info(packet);
+dirac_info_c::handle_picture_unit(memory_cptr const &packet) {
+  std::string checksum = create_checksum_info(*packet);
   mxinfo(fmt::format(Y("Picture at {0} size {1}{2}\n"), m_stream_pos, packet->get_size(), checksum));
 }
 
 void
-dirac_info_c::handle_sequence_header_unit(memory_cptr packet) {
+dirac_info_c::handle_sequence_header_unit(memory_c const &packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(fmt::format(Y("Sequence header at {0} size {1}{2}\n" ),m_stream_pos, packet->get_size(), checksum));
+  mxinfo(fmt::format(Y("Sequence header at {0} size {1}{2}\n" ),m_stream_pos, packet.get_size(), checksum));
 
-  m_seqhdr_found = mtx::dirac::parse_sequence_header(packet->get_buffer(), packet->get_size(), m_seqhdr);
+  m_seqhdr_found = mtx::dirac::parse_sequence_header(packet.get_buffer(), packet.get_size(), m_seqhdr);
 
   if (g_opt_sequence_headers) {
     if (m_seqhdr_found)
@@ -83,17 +83,17 @@ dirac_info_c::handle_sequence_header_unit(memory_cptr packet) {
 }
 
 void
-dirac_info_c::handle_unknown_unit(memory_cptr packet) {
+dirac_info_c::handle_unknown_unit(memory_c const &packet) {
   std::string checksum = create_checksum_info(packet);
-  mxinfo(fmt::format(Y("Unknown (0x{0:02x}) at {1} size {2}{3}\n"), static_cast<int>(packet->get_buffer()[4]), m_stream_pos, packet->get_size(), checksum));
+  mxinfo(fmt::format(Y("Unknown (0x{0:02x}) at {1} size {2}{3}\n"), static_cast<int>(packet.get_buffer()[4]), m_stream_pos, packet.get_size(), checksum));
 }
 
 std::string
-dirac_info_c::create_checksum_info(memory_cptr packet) {
+dirac_info_c::create_checksum_info(memory_c const &packet) {
   if (!g_opt_checksum)
     return "";
 
-  return fmt::format(Y(" checksum 0x{0:08x}"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *packet));
+  return fmt::format(Y(" checksum 0x{0:08x}"), mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, packet));
 }
 
 void

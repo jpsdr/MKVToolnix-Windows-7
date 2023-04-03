@@ -24,7 +24,7 @@ protected:
 public:
   header_removal_compressor_c();
 
-  virtual void set_bytes(memory_cptr &bytes) {
+  virtual void set_bytes(memory_cptr const &bytes) {
     m_bytes = bytes;
     m_bytes->take_ownership();
   }

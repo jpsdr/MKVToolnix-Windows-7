@@ -125,7 +125,7 @@ public:
     return m_seqhdr_found ? memory_cptr{m_raw_seqhdr->clone()} : memory_cptr{};
   }
 
-  virtual void handle_unit(memory_cptr packet);
+  virtual void handle_unit(memory_cptr const &packet);
 
   virtual bool is_frame_available() {
     return !m_frames.empty();
@@ -156,18 +156,18 @@ public:
   }
 
 protected:
-  virtual void handle_auxiliary_data_unit(memory_cptr packet);
-  virtual void handle_end_of_sequence_unit(memory_cptr packet);
-  virtual void handle_padding_unit(memory_cptr packet);
-  virtual void handle_picture_unit(memory_cptr packet);
-  virtual void handle_sequence_header_unit(memory_cptr packet);
-  virtual void handle_unknown_unit(memory_cptr packet);
+  virtual void handle_auxiliary_data_unit(memory_c const &packet);
+  virtual void handle_end_of_sequence_unit(memory_c const &packet);
+  virtual void handle_padding_unit(memory_c const &packet);
+  virtual void handle_picture_unit(memory_cptr const &packet);
+  virtual void handle_sequence_header_unit(memory_c const &packet);
+  virtual void handle_unknown_unit(memory_c const &packet);
 
   virtual int64_t get_next_timestamp();
   virtual int64_t peek_next_calculated_timestamp();
 
-  virtual void add_pre_frame_extra_data(memory_cptr packet);
-  virtual void add_post_frame_extra_data(memory_cptr packet);
+  virtual void add_pre_frame_extra_data(memory_c const &packet);
+  virtual void add_post_frame_extra_data(memory_c const &packet);
   virtual void combine_extra_data_with_packet();
 
   virtual void flush_frame();
