@@ -826,6 +826,11 @@ if $po4a_cfg
     FileUtils.touch($po4a_pot) if !FileTest.exist?($po4a_pot)
 
     runq "po4a", "#{$po4a_cfg}", "#{c(:PO4A)} #{$flags[:po4a]} #{$po4a_cfg}", :filter_output => po4a_output_filter
+
+    $all_man_po_files.each do |po_file|
+      normalize_po po_file
+    end
+
     runq_touch $po4a_stamp
   end
 
