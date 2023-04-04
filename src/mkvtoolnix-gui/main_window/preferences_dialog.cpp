@@ -43,7 +43,6 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   , m_previousUiLocale{m_cfg.m_uiLocale}
   , m_previousUiFontFamily{m_cfg.m_uiFontFamily}
   , m_previousUiFontPointSize{m_cfg.m_uiFontPointSize}
-  , m_previousUiDisableDarkStyleSheet{m_cfg.m_uiDisableDarkStyleSheet}
   , m_previousDisableToolTips{m_cfg.m_uiDisableToolTips}
   , m_previousProbeRangePercentage{m_cfg.m_probeRangePercentage}
   , m_previousOftenUsedLanguages{m_cfg.m_oftenUsedLanguages}
@@ -175,12 +174,6 @@ PreferencesDialog::uiFontChanged()
 }
 
 bool
-PreferencesDialog::uiColorModeChanged()
-  const {
-  return m_previousUiDisableDarkStyleSheet != m_cfg.m_uiDisableDarkStyleSheet;
-}
-
-bool
 PreferencesDialog::disableToolTipsChanged()
   const {
   return m_previousDisableToolTips != m_cfg.m_uiDisableToolTips;
@@ -298,11 +291,6 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("Changes to this option will only take effect the next time the application is started.")));
 
   Util::setToolTip(ui->cbGuiDisableToolTips, QY("If checked, the GUI will not show helpful usage tips in popup windows while hovering over a control — such as this one."));
-  Util::setToolTip(ui->cbGuiDisableDarkStyleSheet,
-                   Q("%1 %2")
-                   .arg(QY("By default the GUI will start up with a dark color scheme if the color scheme in Windows is set to dark mode."))
-                   .arg(QY("If this option is enabled, the GUI will not use its dark mode and fall back to the default color scheme.")));
-
 
   Util::setToolTip(ui->sbGuiNumRecentlyUsedStrings, QY("This affects functions such as the selector of recently used destination directories in the multiplexer."));
 
@@ -985,11 +973,6 @@ PreferencesDialog::setupFontAndScaling() {
   ui->cbGuiDisableHighDPIScaling->setVisible(false);
 #endif
 
-  ui->cbGuiDisableDarkStyleSheet->setChecked(m_cfg.m_uiDisableDarkStyleSheet);
-#if !defined(SYS_WINDOWS)
-  ui->cbGuiDisableDarkStyleSheet->setVisible(false);
-#endif
-
   ui->cbGuiStayOnTop->setChecked(m_cfg.m_uiStayOnTop);
 }
 
@@ -1109,7 +1092,6 @@ PreferencesDialog::save() {
   m_cfg.m_numRecentlyUsedStringsToRemember                    = ui->sbGuiNumRecentlyUsedStrings->value();
   m_cfg.m_uiStayOnTop                                         = ui->cbGuiStayOnTop->isChecked();
   m_cfg.m_uiDisableHighDPIScaling                             = ui->cbGuiDisableHighDPIScaling->isChecked();
-  m_cfg.m_uiDisableDarkStyleSheet                             = ui->cbGuiDisableDarkStyleSheet->isChecked();
   m_cfg.m_uiDisableToolTips                                   = ui->cbGuiDisableToolTips->isChecked();
   m_cfg.m_checkForUpdates                                     = ui->cbGuiCheckForUpdates->isChecked();
   m_cfg.m_showDebuggingMenu                                   = ui->cbGuiShowDebuggingMenu->isChecked();

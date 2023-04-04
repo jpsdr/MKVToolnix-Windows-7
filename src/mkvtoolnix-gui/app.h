@@ -69,9 +69,6 @@ public:
 
   void run();
 
-  void disableDarkMode();
-  void enableDarkMode();
-
   Util::NetworkAccessManager &networkAccessManager();
 
 Q_SIGNALS:
@@ -86,7 +83,6 @@ public Q_SLOTS:
   void saveSettings() const;
   void receiveInstanceCommunication();
   void setupAppearance();
-  void setupColorMode();
   void setupUiFont();
 
 protected:

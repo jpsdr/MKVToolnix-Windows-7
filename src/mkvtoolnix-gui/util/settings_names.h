@@ -129,7 +129,6 @@ char const * const s_valTabPosition                               = "tabPosition
 char const * const s_valTrackInfo                                 = "trackInfo";
 char const * const s_valTrackName                                 = "trackName";
 char const * const s_valType                                      = "type";
-char const * const s_valUiDisableDarkStyleSheet                   = "uiDisableDarkStyleSheet";
 char const * const s_valUiDisableHighDPIScaling                   = "uiDisableHighDPIScaling";
 char const * const s_valUiDisableToolTips                         = "uiDisableToolTips";
 char const * const s_valUiFontFamily                              = "uiFontFamily";

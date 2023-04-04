@@ -10,6 +10,12 @@
   after the primary video track ends called `--stop-after-video-ends`. This
   discards any remaining packets of other tracks. Part of the implementation
   #3506.
+* MKVToolNix GUI: only on Windows: the GUI now uses Qt's "Fusion" style
+  instead of the deprecated "Windows Vista" style. The advantage is that as of
+  Qt 6.5 the "Fusion" style properly supports Windows 10's & 11's dark
+  application mode. The Windows binaries are now built with said Qt
+  version. Therefore the option to disable the dark mode has been
+  removed. Fixes #3264 and likely others.
 
 ## Bug fixes
 

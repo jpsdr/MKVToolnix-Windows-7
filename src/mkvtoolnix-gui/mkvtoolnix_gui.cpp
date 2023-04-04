@@ -48,6 +48,8 @@ initiateSettings() {
 #if defined(SYS_WINDOWS)
   if (mtx::sys::get_environment_variable("QT_MESSAGE_PATTERN").empty())
     mtx::sys::set_environment_variable("QT_MESSAGE_PATTERN", "[%{type}] %{appname} (%{file}:%{line}) - %{message}");
+
+  QApplication::setStyle(Q("Fusion"));
 #endif
 
   QCoreApplication::setOrganizationName("bunkus.org");

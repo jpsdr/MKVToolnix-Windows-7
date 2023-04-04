@@ -49,7 +49,7 @@ protected:
   Util::Settings &m_cfg;
   QString const m_previousUiLocale, m_previousUiFontFamily;
   int const m_previousUiFontPointSize;
-  bool const m_previousUiDisableDarkStyleSheet, m_previousDisableToolTips;
+  bool const m_previousDisableToolTips;
   double m_previousProbeRangePercentage;
   QStringList const m_previousOftenUsedLanguages, m_previousOftenUsedRegions, m_previousOftenUsedCharacterSets;
   QMap<Page, int> m_pageIndexes;
@@ -62,7 +62,6 @@ public:
   void save();
   bool uiLocaleChanged() const;
   bool uiFontChanged() const;
-  bool uiColorModeChanged() const;
   bool disableToolTipsChanged() const;
   bool probeRangePercentageChanged() const;
   bool languageRegionCharacterSetSettingsChanged() const;

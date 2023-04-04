@@ -525,9 +525,6 @@ MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
   if (dlg.uiLocaleChanged() || dlg.probeRangePercentageChanged())
     [[maybe_unused]] auto future = QtConcurrent::run(Util::FileIdentifier::cleanAllCacheFiles);
 
-  if (dlg.uiColorModeChanged())
-    app.setupColorMode();
-
   if (dlg.uiFontChanged())
     app.setupUiFont();
 

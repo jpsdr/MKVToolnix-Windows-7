@@ -6,9 +6,7 @@
 #include <QLibraryInfo>
 #include <QLocalServer>
 #include <QLocalSocket>
-#include <QPalette>
 #include <QSettings>
-#include <QStyleFactory>
 #include <QTextStream>
 #include <QThread>
 #include <QTranslator>
@@ -72,8 +70,6 @@ class AppPrivate {
   Util::NetworkAccessManager *m_networkAccessManager{new Util::NetworkAccessManager{}};
   QThread m_networkAccessManagerThread;
   bool m_otherInstanceRunning{};
-  QString m_defaultStyleSheet;
-  QPalette m_defaultPalette;
 
   explicit AppPrivate()
   {
@@ -91,9 +87,6 @@ App::App(int &argc,
   ignore_unique_numbers(UNIQUE_CHAPTER_IDS);
   ignore_unique_numbers(UNIQUE_EDITION_IDS);
 
-#ifdef SYS_WINDOWS
-  QApplication::setStyle(Q("windowsvista"));
-#endif
   QIcon::setThemeName(Q("mkvtoolnix-gui"));
 
   Util::Settings::migrateFromRegistry();
@@ -107,9 +100,6 @@ App::App(int &argc,
   QObject::connect(this, &App::aboutToQuit, this, &App::saveSettings);
 
   initializeLocale();
-
-  p_ptr->m_defaultStyleSheet = styleSheet();
-  p_ptr->m_defaultPalette    = palette();
 }
 
 App::~App() {
@@ -572,69 +562,7 @@ App::settingsBaseGroupName() {
 
 void
 App::setupAppearance() {
-  setupColorMode();
   setupUiFont();
-}
-
-void
-App::setupColorMode() {
-#if defined(SYS_WINDOWS)
-  if (Util::Settings::get().m_uiDisableDarkStyleSheet) {
-    disableDarkMode();
-    return;
-  }
-
-  QSettings regKey{Q("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"), QSettings::NativeFormat};
-
-  auto useLightTheme = regKey.value(Q("AppsUseLightTheme"));
-
-  if (useLightTheme.isValid() && !useLightTheme.toBool())
-    enableDarkMode();
-  else
-    disableDarkMode();
-#endif  // SYS_WINDOWS
-}
-
-void
-App::disableDarkMode() {
-#if defined(SYS_WINDOWS)
-  auto p = p_func();
-
-  setStyle(QStyleFactory::create("windowsvista"));
-  setStyleSheet(p->m_defaultStyleSheet);
-  setPalette(p->m_defaultPalette);
-#endif
-}
-
-void
-App::enableDarkMode() {
-#if defined(SYS_WINDOWS)
-  QPalette darkPalette;
-  auto darkColor     = QColor{45, 45, 45};
-  auto disabledColor = QColor{127, 127, 127};
-
-  darkPalette.setColor(QPalette::AlternateBase,   darkColor);
-  darkPalette.setColor(QPalette::Base,            QColor{18, 18, 18});
-  darkPalette.setColor(QPalette::BrightText,      Qt::red);
-  darkPalette.setColor(QPalette::Button,          darkColor);
-  darkPalette.setColor(QPalette::ButtonText,      Qt::white);
-  darkPalette.setColor(QPalette::Disabled,        QPalette::ButtonText,      disabledColor);
-  darkPalette.setColor(QPalette::Disabled,        QPalette::HighlightedText, disabledColor);
-  darkPalette.setColor(QPalette::Disabled,        QPalette::Text,            disabledColor);
-  darkPalette.setColor(QPalette::Disabled,        QPalette::WindowText,      disabledColor);
-  darkPalette.setColor(QPalette::Highlight,       QColor{42, 130, 218});
-  darkPalette.setColor(QPalette::HighlightedText, Qt::black);
-  darkPalette.setColor(QPalette::Link,            QColor{42, 130, 218});
-  darkPalette.setColor(QPalette::Text,            Qt::white);
-  darkPalette.setColor(QPalette::ToolTipBase,     Qt::white);
-  darkPalette.setColor(QPalette::ToolTipText,     Qt::white);
-  darkPalette.setColor(QPalette::Window,          darkColor);
-  darkPalette.setColor(QPalette::WindowText,      Qt::white);
-
-  setStyle(QStyleFactory::create("Fusion"));
-  setPalette(darkPalette);
-  setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
-#endif
 }
 
 void

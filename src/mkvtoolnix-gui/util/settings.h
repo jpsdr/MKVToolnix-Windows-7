@@ -223,7 +223,7 @@ public:
   bool m_useDefaultJobDescription, m_showOutputOfAllJobs, m_switchToJobOutputAfterStarting, m_resetJobWarningErrorCountersOnExit;
   bool m_removeOutputFileOnJobFailure;
 
-  bool m_uiDisableHighDPIScaling, m_uiDisableDarkStyleSheet, m_uiDisableToolTips;
+  bool m_uiDisableHighDPIScaling, m_uiDisableToolTips;
   bool m_checkForUpdates;
   QDateTime m_lastUpdateCheck;
 

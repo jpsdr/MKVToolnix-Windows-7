@@ -114,6 +114,7 @@ EOT
       mv Makefile.Release Makefile
     fi
     if test -f configure_plugin_import.cpp; then
+      sed -i -e 's/Q_IMPORT_PLUGIN[(]QWindowsVistaStylePlugin[)]//' configure_plugin_import.cpp
       cp configure_plugin_import.cpp "$old_wd/src/mkvtoolnix-gui/static_plugins.cpp"
     fi
   fi
