@@ -121,6 +121,7 @@ bool g_no_linking                                             = true;
 bool g_use_durations                                          = false;
 bool g_no_track_statistics_tags                               = false;
 bool g_write_date                                             = true;
+bool g_stop_after_video_ends                                  = false;
 
 double g_timestamp_scale                                      = TIMESTAMP_SCALE;
 timestamp_scale_mode_e g_timestamp_scale_mode                 = timestamp_scale_mode_e{TIMESTAMP_SCALE_MODE_NORMAL};
@@ -2048,8 +2049,16 @@ establish_deferred_connections(filelist_t &file) {
   // \todo Select a new file that the subs will defer to.
 }
 
-static void
+static bool
 check_and_handle_end_of_input_after_pulling(packetizer_t &ptzr) {
+  auto end_of_video_reached = false;
+
+  if (   !ptzr.pack
+      && g_video_packetizer
+      && (g_video_packetizer == ptzr.packetizer)
+      && mtx::included_in(ptzr.status, FILE_STATUS_DONE, FILE_STATUS_HOLDING))
+    end_of_video_reached = true;
+
   if (!ptzr.pack && (FILE_STATUS_DONE == ptzr.status))
     ptzr.status = FILE_STATUS_DONE_AND_DRY;
 
@@ -2058,7 +2067,7 @@ check_and_handle_end_of_input_after_pulling(packetizer_t &ptzr) {
   // unfinished packetizers in the corresponding file structure.
   if (   (FILE_STATUS_DONE_AND_DRY != ptzr.status)
       || (ptzr.old_status          == ptzr.status))
-    return;
+    return end_of_video_reached;
 
   auto &file = *g_files[ptzr.file];
   file.num_unfinished_packetizers--;
@@ -2070,11 +2079,14 @@ check_and_handle_end_of_input_after_pulling(packetizer_t &ptzr) {
     file.done = true;
   }
   file.old_num_unfinished_packetizers = file.num_unfinished_packetizers;
+
+  return end_of_video_reached;
 }
 
-static bool
+static std::pair<bool, bool>
 force_pull_packetizers_of_fully_held_files() {
   std::unordered_map<generic_reader_c *, bool> fully_held_files;
+  auto end_of_video_reached = false;
 
   for (auto &ptzr : g_packetizers) {
     auto reader = ptzr.packetizer->m_reader;
@@ -2097,14 +2109,17 @@ force_pull_packetizers_of_fully_held_files() {
       if (!ptzr.pack)
         ptzr.pack = ptzr.packetizer->get_packet();
 
-      check_and_handle_end_of_input_after_pulling(ptzr);
+      if (check_and_handle_end_of_input_after_pulling(ptzr))
+        end_of_video_reached = true;
     }
 
-  return force_pulled;
+  return { end_of_video_reached, force_pulled };
 }
 
-static void
+static bool
 pull_packetizers_for_packets() {
+  auto end_of_video_reached = false;
+
   for (auto &ptzr : g_packetizers) {
     if (FILE_STATUS_HOLDING == ptzr.status)
       ptzr.status = FILE_STATUS_MOREDATA;
@@ -2123,8 +2138,11 @@ pull_packetizers_for_packets() {
     if (!ptzr.pack)
       ptzr.pack = ptzr.packetizer->get_packet();
 
-    check_and_handle_end_of_input_after_pulling(ptzr);
+    if (check_and_handle_end_of_input_after_pulling(ptzr))
+      end_of_video_reached = true;
   }
+
+  return end_of_video_reached;
 }
 
 static packetizer_t *
@@ -2165,8 +2183,11 @@ main_loop() {
   while (1) {
     // Step 1: Make sure a packet is available for each output
     // as long we haven't already processed the last one.
-    pull_packetizers_for_packets();
-    auto force_pulled = force_pull_packetizers_of_fully_held_files();
+    auto end_of_video_reached1                 = pull_packetizers_for_packets();
+    auto [end_of_video_reached2, force_pulled] = force_pull_packetizers_of_fully_held_files();
+
+    if (g_stop_after_video_ends && (end_of_video_reached1 || end_of_video_reached2))
+      break;
 
     // Step 2: Pick the packet with the lowest timestamp and
     // stuff it into the Matroska file.

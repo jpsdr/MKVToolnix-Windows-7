@@ -146,6 +146,8 @@ set_usage() {
                   "                           Normalize all IETF BCP 47 language tags to either\n"
                   "                           their canonical or their extended language subtags\n"
                   "                           form or not at all (default: canonical form).\n");
+  usage_text += Y("  --stop-after-video-ends  Stops processing after the primary video track ends,\n"
+                  "                           discarding any remaining packets of other tracks.\n");
   usage_text +=   "\n";
   usage_text += Y(" File splitting, linking, appending and concatenating (more global options):\n");
   usage_text += Y("  --split <d[K,M,G]|HH:MM:SS|s>\n"
@@ -2424,6 +2426,9 @@ parse_args(std::vector<std::string> args) {
 
     else if (this_arg == "--disable-track-statistics-tags")
       g_no_track_statistics_tags = true;
+
+    else if (this_arg == "--stop-after-video-ends")
+      g_stop_after_video_ends = true;
 
     else if (this_arg == "--attachment-description") {
       if (!next_arg)
