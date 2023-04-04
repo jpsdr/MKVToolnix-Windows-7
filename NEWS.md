@@ -6,9 +6,10 @@
   `num_index_entries` to the `properties` track element containing the number
   of index entries found for a track. Currently only implemented for Matroska
   files where it contains the number of cue points. See #3510.
-* mkvmerge: added an option to stop processing after the primary video track
-  ends called `--stop-after-video-ends`. This discards any remaining packets
-  of other tracks. Part of the implementation #3506.
+* mkvmerge, MKVToolNix GUI's multiplexer: added an option to stop processing
+  after the primary video track ends called `--stop-after-video-ends`. This
+  discards any remaining packets of other tracks. Part of the implementation
+  #3506.
 
 ## Bug fixes
 

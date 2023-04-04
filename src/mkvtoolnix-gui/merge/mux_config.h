@@ -80,7 +80,7 @@ public:
   mtx::bcp47::language_c m_chapterLanguage;
   SplitMode m_splitMode{DoNotSplit};
   unsigned int m_splitMaxFiles{1}, m_chapterTitleNumber{1};
-  bool m_linkFiles{}, m_webmMode{};
+  bool m_linkFiles{}, m_webmMode{}, m_stopAfterVideoEnds{};
 
   ChapterGenerationMode m_chapterGenerationMode;
   QString m_chapterGenerationNameTemplate, m_chapterGenerationInterval;

@@ -89,6 +89,7 @@ Tab::setupOutputControls() {
   connect(p.ui->splitOptions,                  &QComboBox::editTextChanged,                                                                      this, &Tab::onSplitOptionsChanged);
   connect(p.ui->title,                         &QLineEdit::textChanged,                                                                          this, &Tab::onTitleChanged);
   connect(p.ui->webmMode,                      &QPushButton::clicked,                                                                            this, &Tab::onWebmClicked);
+  connect(p.ui->stopAfterVideoEnds,            &QPushButton::clicked,                                                                            this, &Tab::onStopAfterVideoEndsClicked);
   connect(p.ui->chapterGenerationMode,         static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),                           this, &Tab::onChapterGenerationModeChanged);
   connect(p.ui->chapterGenerationNameTemplate, &QLineEdit::textChanged,                                                                          this, &Tab::onChapterGenerationNameTemplateChanged);
   connect(p.ui->chapterGenerationInterval,     &QLineEdit::textChanged,                                                                          this, &Tab::onChapterGenerationIntervalChanged);
@@ -244,6 +245,10 @@ Tab::setupOutputToolTips() {
                    .arg(QYH("The only allowed codecs are VP8/VP9 video and Vorbis/Opus audio tracks."))
                    .arg(QYH("Tags are allowed, but chapters are not."))
                    .arg(QYH("The DocType header item is changed to \"webm\".")));
+  Util::setToolTip(p.ui->stopAfterVideoEnds,
+                   Q("<p>%1 %2</p>")
+                   .arg(QYH("Stops processing after the primary video track ends."))
+                   .arg(QYH("Any later packets of other tracks will be discarded.")));
   Util::setToolTip(p.ui->additionalOptions,     QY("Any option given here will be added at the end of the mkvmerge command line."));
   Util::setToolTip(p.ui->editAdditionalOptions, QY("Any option given here will be added at the end of the mkvmerge command line."));
 }
@@ -592,6 +597,11 @@ Tab::onWebmClicked(bool newValue) {
 }
 
 void
+Tab::onStopAfterVideoEndsClicked(bool newValue) {
+  p_func()->config.m_stopAfterVideoEnds = newValue;
+}
+
+void
 Tab::onAdditionalOptionsChanged(QString newValue) {
   p_func()->config.m_additionalOptions = newValue;
 }
@@ -638,6 +648,7 @@ Tab::setOutputControlValues() {
   p.ui->chapterCueNameFormat->setText(p.config.m_chapterCueNameFormat);
   p.ui->additionalOptions->setText(p.config.m_additionalOptions);
   p.ui->webmMode->setChecked(p.config.m_webmMode);
+  p.ui->stopAfterVideoEnds->setChecked(p.config.m_stopAfterVideoEnds);
 
   p.ui->chapterLanguage->setLanguage(p.config.m_chapterLanguage);
   p.ui->chapterCharacterSet->setAdditionalItems(p.config.m_chapterCharacterSet)

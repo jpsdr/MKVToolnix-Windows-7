@@ -124,6 +124,7 @@ MuxConfig::operator =(MuxConfig const &other) {
   m_splitMaxFiles                 = other.m_splitMaxFiles;
   m_linkFiles                     = other.m_linkFiles;
   m_webmMode                      = other.m_webmMode;
+  m_stopAfterVideoEnds            = other.m_stopAfterVideoEnds;
   m_chapterGenerationMode         = other.m_chapterGenerationMode;
   m_chapterGenerationNameTemplate = other.m_chapterGenerationNameTemplate;
   m_chapterGenerationInterval     = other.m_chapterGenerationInterval;
@@ -494,6 +495,7 @@ MuxConfig::load(Util::ConfigFile &settings) {
   m_splitMaxFiles                 = std::max(settings.value("splitMaxFiles").toInt(), 1);
   m_linkFiles                     = settings.value("linkFiles").toBool();
   m_webmMode                      = settings.value("webmMode").toBool();
+  m_stopAfterVideoEnds            = settings.value("stopAfterVideoEnds").toBool();
   m_chapterGenerationMode         = static_cast<ChapterGenerationMode>(settings.value("chapterGenerationMode").toInt());
   m_chapterGenerationNameTemplate = settings.value("chapterGenerationNameTemplate").toString();
   m_chapterGenerationInterval     = settings.value("chapterGenerationInterval").toString();
@@ -547,6 +549,7 @@ MuxConfig::save(Util::ConfigFile &settings)
   settings.setValue("splitMaxFiles",                 m_splitMaxFiles);
   settings.setValue("linkFiles",                     m_linkFiles);
   settings.setValue("webmMode",                      m_webmMode);
+  settings.setValue("stopAfterVideoEnds",            m_stopAfterVideoEnds);
   settings.setValue("chapterGenerationMode",         static_cast<int>(m_chapterGenerationMode));
   settings.setValue("chapterGenerationNameTemplate", m_chapterGenerationNameTemplate);
   settings.setValue("chapterGenerationInterval",     m_chapterGenerationInterval);
@@ -679,6 +682,9 @@ MuxConfig::buildMkvmergeOptions()
 
   if (m_webmMode)
     options << Q("--webm");
+
+  if (m_stopAfterVideoEnds)
+    options << Q("--stop-after-video-ends");
 
   if (settings.m_useLegacyFontMIMETypes) {
     auto haveAttachments = !m_attachments.isEmpty()

@@ -217,6 +217,7 @@ public Q_SLOTS:
   virtual void onChapterStretchByChanged(QString newValue);
   virtual void onChapterCueNameFormatChanged(QString newValue);
   virtual void onWebmClicked(bool newValue);
+  virtual void onStopAfterVideoEndsClicked(bool newValue);
   virtual void onAdditionalOptionsChanged(QString newValue);
   virtual void onEditAdditionalOptions();
   virtual void onPreviewSubtitleCharacterSet();
