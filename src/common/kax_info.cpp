@@ -846,10 +846,14 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
   });
 
   add_fmt(EBML_ID(KaxBlockAddIDType), [](auto &e) -> std::string {
-    auto value = static_cast<EbmlUInteger &>(e).GetValue();
-    if (value < std::numeric_limits<uint32_t>::max())
-      return fmt::format("{0} ({1})", value, fourcc_c{static_cast<uint32_t>(value)});
-    return fmt::format("{0}", value);
+    auto value       = static_cast<EbmlUInteger &>(e).GetValue();
+    auto description = value >  std::numeric_limits<uint32_t>::max() ? Y("unknown")
+                     : value >= 1u << 24                             ? fourcc_c{static_cast<uint32_t>(value)}.str()
+                     : value ==   1                                  ? Y("codec-specific")
+                     : value ==   4                                  ?   "ITU-T T.35"s
+                     : value == 121                                  ? Y("SMPTE ST 12-1 timecodes")
+                     :                                                 Y("unknown");
+    return fmt::format("{0} ({1})", value, description);
   });
 
   add_fmt(EBML_ID(KaxChapterSkipType), [](EbmlElement &e) -> std::string {
