@@ -1854,12 +1854,13 @@ Tab::setOutputFileNameMaybe(bool force) {
   else
     Q_ASSERT_X(false, "setOutputFileNameMaybe", "Untested destination file name policy");
 
-  auto cleanedTitle          = Util::replaceInvalidFileNameCharacters(p.config.m_title);
-  auto firstInputBaseName    = QFileInfo{ p.config.m_firstInputFileName }.completeBaseName();
-  auto baseName              = !settings.m_mergeSetDestinationFromTitle ? firstInputBaseName
-                             : !cleanedTitle.isEmpty()                  ? cleanedTitle
-                             :                                            firstInputBaseName;
-  p.config.m_destinationAuto = generateUniqueOutputFileName(baseName, outputDir);
+  auto cleanedTitle            = Util::replaceInvalidFileNameCharacters(p.config.m_title);
+  auto firstInputFileInfo      = QFileInfo{ p.config.m_firstInputFileName };
+  auto firstInputFileDirectory = firstInputFileInfo.dir().dirName();
+  auto baseName                = settings.m_mergeSetDestinationFromTitle     && !cleanedTitle.isEmpty()            ? cleanedTitle
+                               : settings.m_mergeSetDestinationFromDirectory && !firstInputFileDirectory.isEmpty() ? firstInputFileDirectory
+                               :                                                                                     firstInputFileInfo.completeBaseName();
+  p.config.m_destinationAuto   = generateUniqueOutputFileName(baseName, outputDir);
 
   p.ui->output->setText(p.config.m_destinationAuto);
   setDestination(p.config.m_destinationAuto);

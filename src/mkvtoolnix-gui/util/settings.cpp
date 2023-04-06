@@ -557,6 +557,7 @@ Settings::load() {
   m_outputFileNamePolicy                      = static_cast<OutputFileNamePolicy>(reg.value(s_valOutputFileNamePolicy,                         static_cast<int>(ToSameAsFirstInputFile)).toInt());
   m_autoDestinationOnlyForVideoFiles          = reg.value(s_valAutoDestinationOnlyForVideoFiles,                                               false).toBool();
   m_mergeSetDestinationFromTitle              = reg.value(s_valMergeSetDestinationFromTitle,                                                   true).toBool();
+  m_mergeSetDestinationFromDirectory          = reg.value(s_valMergeSetDestinationFromDirectory).toBool();
   m_relativeOutputDir                         = QDir{reg.value(s_valRelativeOutputDir).toString()};
   m_fixedOutputDir                            = QDir{reg.value(s_valFixedOutputDir).toString()};
   m_uniqueOutputFileNames                     = reg.value(s_valUniqueOutputFileNames,                                                          true).toBool();
@@ -998,6 +999,7 @@ Settings::save()
   reg.setValue(s_valOutputFileNamePolicy,                      static_cast<int>(m_outputFileNamePolicy));
   reg.setValue(s_valAutoDestinationOnlyForVideoFiles,          m_autoDestinationOnlyForVideoFiles);
   reg.setValue(s_valMergeSetDestinationFromTitle,              m_mergeSetDestinationFromTitle);
+  reg.setValue(s_valMergeSetDestinationFromDirectory,          m_mergeSetDestinationFromDirectory);
   reg.setValue(s_valRelativeOutputDir,                         m_relativeOutputDir.path());
   reg.setValue(s_valFixedOutputDir,                            m_fixedOutputDir.path());
   reg.setValue(s_valUniqueOutputFileNames,                     m_uniqueOutputFileNames);

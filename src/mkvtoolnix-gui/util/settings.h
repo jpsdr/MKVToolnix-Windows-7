@@ -209,7 +209,7 @@ public:
   QVector<QColor> m_mergeFileColors;
 
   OutputFileNamePolicy m_outputFileNamePolicy;
-  bool m_autoDestinationOnlyForVideoFiles, m_mergeSetDestinationFromTitle;
+  bool m_autoDestinationOnlyForVideoFiles, m_mergeSetDestinationFromTitle, m_mergeSetDestinationFromDirectory;
   QDir m_relativeOutputDir, m_fixedOutputDir;
   bool m_uniqueOutputFileNames, m_autoClearOutputFileName;
 

@@ -536,6 +536,11 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("If this option is enabled, the file title will be used as the basis for the destination file name if a file title is set."))
                    .arg(QY("Otherwise the destination file name is derived from the source file names.")));
 
+  Util::setToolTip(ui->cbMAutoSetDestinationFromDirectory,
+                   Q("%1 %2")
+                   .arg(QY("If this option is enabled, the name of the directory the file is located in will be used as the basis for the destination file name."))
+                   .arg(QY("Otherwise the destination file name is derived from the source file names.")));
+
   Util::setToolTip(ui->cbMUniqueOutputFileNames,
                    Q("%1 %2")
                    .arg(QY("If checked, the program makes sure the suggested destination file name is unique by adding a number (e.g. ' (1)') to the end of the file name."))
@@ -739,6 +744,7 @@ PreferencesDialog::setupOutputFileNamePolicy() {
   ui->cbMAutoSetDestinationFileName->setChecked(isChecked);
   ui->cbMAutoSetDestinationOnlyForVideoFiles->setChecked(m_cfg.m_autoDestinationOnlyForVideoFiles);
   ui->cbMAutoSetDestinationFromTitle->setChecked(m_cfg.m_mergeSetDestinationFromTitle);
+  ui->cbMAutoSetDestinationFromDirectory->setChecked(m_cfg.m_mergeSetDestinationFromDirectory);
   rbToCheck->setChecked(true);
   ui->cbMAutoSetDestinationRelativeDirectory->addItems(m_cfg.m_mergeLastRelativeOutputDirs.items());
   ui->cbMAutoSetDestinationRelativeDirectory->setCurrentText(dRelative);
@@ -1167,6 +1173,7 @@ PreferencesDialog::save() {
                                                               :                                                           Util::Settings::ToSameAsFirstInputFile;
   m_cfg.m_autoDestinationOnlyForVideoFiles                    = ui->cbMAutoSetDestinationOnlyForVideoFiles->isChecked();
   m_cfg.m_mergeSetDestinationFromTitle                        = ui->cbMAutoSetDestinationFromTitle->isChecked();
+  m_cfg.m_mergeSetDestinationFromDirectory                    = ui->cbMAutoSetDestinationFromDirectory->isChecked();
   m_cfg.m_relativeOutputDir.setPath(ui->cbMAutoSetDestinationRelativeDirectory->currentText());
   m_cfg.m_fixedOutputDir.setPath(ui->cbMAutoSetDestinationFixedDirectory->currentText());
   m_cfg.m_uniqueOutputFileNames                               = ui->cbMUniqueOutputFileNames->isChecked();
@@ -1258,7 +1265,9 @@ PreferencesDialog::enableOutputFileNameControls() {
   bool relativeSelected = ui->rbMAutoSetDestinationRelativeDirectory->isChecked();
   bool fixedSelected    = ui->rbMAutoSetDestinationFixedDirectory->isChecked();
 
-  Util::enableWidgets(QList<QWidget *>{} << ui->gbMAutoSetDestinationDirectory << ui->cbMUniqueOutputFileNames << ui->cbMAutoSetDestinationOnlyForVideoFiles << ui->cbMAutoSetDestinationFromTitle, isChecked);
+  Util::enableWidgets(QList<QWidget *>{} << ui->gbMAutoSetDestinationDirectory << ui->cbMUniqueOutputFileNames << ui->cbMAutoSetDestinationOnlyForVideoFiles << ui->cbMAutoSetDestinationFromTitle
+                      << ui->cbMAutoSetDestinationFromDirectory,
+                      isChecked);
   Util::enableWidgets(QList<QWidget *>{} << ui->cbMAutoSetDestinationFixedDirectory << ui->pbMAutoSetDestinationBrowseFixedDirectory, isChecked && fixedSelected);
   ui->cbMAutoSetDestinationRelativeDirectory->setEnabled(isChecked && relativeSelected);
 }

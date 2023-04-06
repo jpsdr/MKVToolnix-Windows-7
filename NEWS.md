@@ -16,6 +16,10 @@
   application mode. The Windows binaries are now built with said Qt
   version. Therefore the option to disable the dark mode has been
   removed. Fixes #3264 and likely others.
+* MKVToolNix GUI: multiplexer: automatically setting the destination file
+  name: added an option in the preferences for using the first source file's
+  directory name instead of its file name as the basis for the destination
+  file name. Implements #3512.
 
 ## Bug fixes
 
