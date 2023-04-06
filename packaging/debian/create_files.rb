@@ -85,6 +85,12 @@ def parse_sources_list
 
   ### Ubuntu
 
+  if content.any? { |line| %r{ubuntu.*kinetic}.match(line) }
+    $distribution         = 'ubuntu'
+    $distribution_version = '22.10'
+    return true
+  end
+
   if content.any? { |line| %r{ubuntu.*jammy}.match(line) }
     $distribution         = 'ubuntu'
     $distribution_version = '22.04'
