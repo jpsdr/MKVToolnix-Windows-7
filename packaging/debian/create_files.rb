@@ -85,6 +85,12 @@ def parse_sources_list
 
   ### Ubuntu
 
+  if content.any? { |line| %r{linuxming.*vanessa}.match(line) }
+    $distribution         = 'linuxmint'
+    $distribution_version = '21'
+    return true
+  end
+
   if content.any? { |line| %r{ubuntu.*kinetic}.match(line) }
     $distribution         = 'ubuntu'
     $distribution_version = '22.10'
