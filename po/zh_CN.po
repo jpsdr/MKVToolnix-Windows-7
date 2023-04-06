@@ -8,8 +8,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
 "POT-Creation-Date: 2023-04-04 22:09+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
-"Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2022\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
+"Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2023\n"
+"Language-Team: Chinese (China) (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -884,6 +884,8 @@ msgid ""
 "  --stop-after-video-ends  Stops processing after the primary video track ends,\n"
 "                           discarding any remaining packets of other tracks.\n"
 msgstr ""
+"  --stop-after-video-ends  在主视频轨结束时停止处理，\n"
+"                           并丢弃其余轨道的剩余数据包。\n"
 
 #: src/merge/mkvmerge.cpp:374
 #, no-c-format
@@ -3829,7 +3831,7 @@ msgstr "分析 MPEG4 码流，将每一帧置入单独的 Matroska 区块，使�
 #: src/mkvtoolnix-gui/merge/output.cpp:251
 #, no-c-format
 msgid "Any later packets of other tracks will be discarded."
-msgstr ""
+msgstr "其余轨道在这之后的所有数据包都将被丢弃。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:252
 #: src/mkvtoolnix-gui/merge/output.cpp:253
@@ -7603,9 +7605,9 @@ msgid "If this hack is enabled, the code will leave the parameter sets as they a
 msgstr "若启用此 hack，程序代码将按原样保留这些参数集。"
 
 #: src/common/hacks.cpp:69
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If this hack is enabled, they won't be removed."
-msgstr "若启用此 hack，程序代码将按原样保留这些参数集。"
+msgstr "若启用本 hack，它们将不会被移除。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:538
 #, no-c-format
@@ -8208,9 +8210,9 @@ msgid "Job &output"
 msgstr "任务输出消息(&O)"
 
 #: src/mkvtoolnix-gui/jobs/program_runner/linux_program_runner.cpp:91
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Job completed with warnings"
-msgstr "完成，有警告"
+msgstr "任务完成，有警告"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:243
 #, no-c-format
@@ -8223,9 +8225,9 @@ msgid "Job end date && time in ISO 8601 format"
 msgstr "任务完成日期与时间 (ISO 8601 格式)"
 
 #: src/mkvtoolnix-gui/jobs/program_runner/linux_program_runner.cpp:92
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Job failed"
-msgstr "失败"
+msgstr "任务执行失败"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:273
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:431
@@ -8241,9 +8243,9 @@ msgid "Job queue"
 msgstr "任务队列"
 
 #: src/mkvtoolnix-gui/jobs/program_runner/linux_program_runner.cpp:120
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Job queue changed"
-msgstr "任务队列"
+msgstr "任务队列已变更"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
 #, no-c-format
@@ -8251,9 +8253,9 @@ msgid "Job start date && time in ISO 8601 format"
 msgstr "任务启动日期与时间 (ISO 8601 格式)"
 
 #: src/mkvtoolnix-gui/jobs/program_runner/linux_program_runner.cpp:90
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Job succeeded"
-msgstr "任务队列"
+msgstr "任务成功完成"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:242
 #, no-c-format
@@ -9325,7 +9327,7 @@ msgstr "通常情况下，可以在列表视图中通过拖拽和键盘快捷键
 #: src/common/hacks.cpp:68
 #, no-c-format
 msgid "Normally spaces & tabs are removed from the beginning & the end of each line in text subtitles."
-msgstr ""
+msgstr "通常情况下，位于文本字幕每一行开头或结尾的空格与制表符会被移除。"
 
 #: src/common/hacks.cpp:66
 #, no-c-format
@@ -11276,9 +11278,9 @@ msgstr "结束时显示各轨道的统计信息(&S)"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:197
 #: src/mkvtoolnix-gui/util/settings.cpp:314
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Show a desktop notification"
-msgstr "显示版本信息。"
+msgstr "显示桌面通知"
 
 #: src/info/info_cli_parser.cpp:44
 #, no-c-format
@@ -11680,9 +11682,9 @@ msgid "Stop &after all running jobs have finished"
 msgstr "所有正在运行的任务都完成后再停止(&A)"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2281
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Stop after video track ends"
-msgstr "设置轨道是否隔行扫描。"
+msgstr "在视频轨结束时停止"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
 #, no-c-format
@@ -11692,7 +11694,7 @@ msgstr "在第一个簇停止"
 #: src/mkvtoolnix-gui/merge/output.cpp:250
 #, no-c-format
 msgid "Stops processing after the primary video track ends."
-msgstr ""
+msgstr "在主视频轨结束时停止处理。"
 
 #: src/common/hacks.cpp:46
 #, no-c-format
@@ -12875,7 +12877,7 @@ msgstr "任务已添加到任务队列。"
 #: src/mkvtoolnix-gui/jobs/program_runner/linux_program_runner.cpp:100
 #, no-c-format
 msgid "The job queue has finished processing."
-msgstr ""
+msgstr "任务队列已执行完毕。"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:446
 #, no-c-format
