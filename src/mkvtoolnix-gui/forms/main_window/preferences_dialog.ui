@@ -1536,48 +1536,48 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
-            <widget class="QCheckBox" name="cbMAutoSetOutputFileName">
+            <widget class="QCheckBox" name="cbMAutoSetDestinationFileName">
              <property name="text">
               <string>&amp;Automatically set the destination file name</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="cbMAutoDestinationOnlyForVideoFiles">
+            <widget class="QCheckBox" name="cbMAutoSetDestinationOnlyForVideoFiles">
              <property name="text">
               <string>&amp;Only use the first source file that contains a video track</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="cbMSetDestinationFromTitle">
+            <widget class="QCheckBox" name="cbMAutoSetDestinationFromTitle">
              <property name="text">
               <string>Use the &amp;title as the base file name if a title is set</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QGroupBox" name="gbDestinationDirectory">
+            <widget class="QGroupBox" name="gbMAutoSetDestinationDirectory">
              <property name="title">
               <string>Destination directory</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_31">
               <item>
-               <widget class="QRadioButton" name="rbMAutoSetSameDirectory">
+               <widget class="QRadioButton" name="rbMAutoSetDestinationSameDirectory">
                 <property name="text">
                  <string>Sa&amp;me directory as the first source file</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QRadioButton" name="rbMAutoSetPreviousDirectory">
+               <widget class="QRadioButton" name="rbMAutoSetDestinationPreviousDirectory">
                 <property name="text">
                  <string>Pre&amp;viously used destination directory</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QRadioButton" name="rbMAutoSetRelativeDirectory">
+               <widget class="QRadioButton" name="rbMAutoSetDestinationRelativeDirectory">
                 <property name="text">
                  <string>Directory &amp;relative to first source file's directory:</string>
                 </property>
@@ -1602,7 +1602,7 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="cbMAutoSetRelativeDirectory">
+                 <widget class="QComboBox" name="cbMAutoSetDestinationRelativeDirectory">
                   <property name="editable">
                    <bool>true</bool>
                   </property>
@@ -1611,7 +1611,7 @@
                </layout>
               </item>
               <item>
-               <widget class="QRadioButton" name="rbMAutoSetFixedDirectory">
+               <widget class="QRadioButton" name="rbMAutoSetDestinationFixedDirectory">
                 <property name="text">
                  <string>Use fi&amp;xed directory:</string>
                 </property>
@@ -1636,7 +1636,7 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QComboBox" name="cbMAutoSetFixedDirectory">
+                 <widget class="QComboBox" name="cbMAutoSetDestinationFixedDirectory">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1649,7 +1649,7 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pbMBrowseAutoSetFixedDirectory">
+                 <widget class="QPushButton" name="pbMAutoSetDestinationBrowseFixedDirectory">
                   <property name="text">
                    <string/>
                   </property>
@@ -2683,16 +2683,16 @@
   <tabstop>leMDeriveTrackLanguageBoundaryChars</tabstop>
   <tabstop>pbMDeriveTrackLanguageRevertBoundaryChars</tabstop>
   <tabstop>tbMDeriveTrackLanguageRecognizedLanguages</tabstop>
-  <tabstop>cbMAutoSetOutputFileName</tabstop>
-  <tabstop>cbMAutoDestinationOnlyForVideoFiles</tabstop>
-  <tabstop>cbMSetDestinationFromTitle</tabstop>
-  <tabstop>rbMAutoSetSameDirectory</tabstop>
-  <tabstop>rbMAutoSetPreviousDirectory</tabstop>
-  <tabstop>rbMAutoSetRelativeDirectory</tabstop>
-  <tabstop>cbMAutoSetRelativeDirectory</tabstop>
-  <tabstop>rbMAutoSetFixedDirectory</tabstop>
-  <tabstop>cbMAutoSetFixedDirectory</tabstop>
-  <tabstop>pbMBrowseAutoSetFixedDirectory</tabstop>
+  <tabstop>cbMAutoSetDestinationFileName</tabstop>
+  <tabstop>cbMAutoSetDestinationOnlyForVideoFiles</tabstop>
+  <tabstop>cbMAutoSetDestinationFromTitle</tabstop>
+  <tabstop>rbMAutoSetDestinationSameDirectory</tabstop>
+  <tabstop>rbMAutoSetDestinationPreviousDirectory</tabstop>
+  <tabstop>rbMAutoSetDestinationRelativeDirectory</tabstop>
+  <tabstop>cbMAutoSetDestinationRelativeDirectory</tabstop>
+  <tabstop>rbMAutoSetDestinationFixedDirectory</tabstop>
+  <tabstop>cbMAutoSetDestinationFixedDirectory</tabstop>
+  <tabstop>pbMAutoSetDestinationBrowseFixedDirectory</tabstop>
   <tabstop>cbMUniqueOutputFileNames</tabstop>
   <tabstop>cbMAutoClearOutputFileName</tabstop>
   <tabstop>tbMEnableMuxingTracksByType</tabstop>

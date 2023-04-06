@@ -521,17 +521,17 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("If one is found, the GUI will ask whether to skip the file or to add it anyway."))
                    .arg(QY("If enabled, such files will always be skipped without asking.")));
 
-  Util::setToolTip(ui->cbMAutoSetOutputFileName,
+  Util::setToolTip(ui->cbMAutoSetDestinationFileName,
                    Q("%1 %2")
                    .arg(QY("If this option is enabled and if there is currently no destination file name set, the program will set one for you when you add a source file."))
                    .arg(QY("The generated destination file name has the same base name as the source file name but with an extension based on the track types present in the file.")));
 
-  Util::setToolTip(ui->cbMAutoDestinationOnlyForVideoFiles,
+  Util::setToolTip(ui->cbMAutoSetDestinationOnlyForVideoFiles,
                    Q("%1 %2")
                    .arg(QY("If this option is enabled, only source files containing video tracks will be used for setting the destination file name."))
                    .arg(QY("Other files are ignored when they're added.")));
 
-  Util::setToolTip(ui->cbMSetDestinationFromTitle,
+  Util::setToolTip(ui->cbMAutoSetDestinationFromTitle,
                    Q("%1 %2")
                    .arg(QY("If this option is enabled, the file title will be used as the basis for the destination file name if a file title is set."))
                    .arg(QY("Otherwise the destination file name is derived from the source file names.")));
@@ -595,12 +595,12 @@ PreferencesDialog::setupConnections() {
   connect(ui->pbMEditDefaultAdditionalCommandLineOptions, &QPushButton::clicked,                                         this,                                 &PreferencesDialog::editDefaultAdditionalCommandLineOptions);
 
   connect(ui->pbMBrowseMediaInfoExe,                      &QPushButton::clicked,                                         this,                                 &PreferencesDialog::browseMediaInfoExe);
-  connect(ui->cbMAutoSetOutputFileName,                   &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetSameDirectory,                    &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetRelativeDirectory,                &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetPreviousDirectory,                &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->rbMAutoSetFixedDirectory,                   &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
-  connect(ui->pbMBrowseAutoSetFixedDirectory,             &QPushButton::clicked,                                         this,                                 &PreferencesDialog::browseFixedOutputDirectory);
+  connect(ui->cbMAutoSetDestinationFileName,              &QCheckBox::toggled,                                           this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetDestinationSameDirectory,         &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetDestinationRelativeDirectory,     &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetDestinationPreviousDirectory,     &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->rbMAutoSetDestinationFixedDirectory,        &QRadioButton::toggled,                                        this,                                 &PreferencesDialog::enableOutputFileNameControls);
+  connect(ui->pbMAutoSetDestinationBrowseFixedDirectory,  &QPushButton::clicked,                                         this,                                 &PreferencesDialog::browseFixedOutputDirectory);
 
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->lMEnableMuxingAllTracksOfType,    &QLabel::setEnabled);
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->gbMEnableMuxingExceptions,        &QLabel::setEnabled);
@@ -725,10 +725,10 @@ PreferencesDialog::setupPlaylistScanningPolicy() {
 void
 PreferencesDialog::setupOutputFileNamePolicy() {
   auto isChecked = Util::Settings::DontSetOutputFileName != m_cfg.m_outputFileNamePolicy;
-  auto rbToCheck = Util::Settings::ToPreviousDirectory        == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetPreviousDirectory
-                 : Util::Settings::ToFixedDirectory           == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetFixedDirectory
-                 : Util::Settings::ToRelativeOfFirstInputFile == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetRelativeDirectory
-                 :                                                                              ui->rbMAutoSetSameDirectory;
+  auto rbToCheck = Util::Settings::ToPreviousDirectory        == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetDestinationPreviousDirectory
+                 : Util::Settings::ToFixedDirectory           == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetDestinationFixedDirectory
+                 : Util::Settings::ToRelativeOfFirstInputFile == m_cfg.m_outputFileNamePolicy ? ui->rbMAutoSetDestinationRelativeDirectory
+                 :                                                                              ui->rbMAutoSetDestinationSameDirectory;
 
   auto dFixed    = QDir::toNativeSeparators(m_cfg.m_fixedOutputDir.path());
   auto dRelative = QDir::toNativeSeparators(m_cfg.m_relativeOutputDir.path());
@@ -736,16 +736,16 @@ PreferencesDialog::setupOutputFileNamePolicy() {
   m_cfg.m_mergeLastFixedOutputDirs.add(dFixed);
   m_cfg.m_mergeLastRelativeOutputDirs.add(dRelative);
 
-  ui->cbMAutoSetOutputFileName->setChecked(isChecked);
-  ui->cbMAutoDestinationOnlyForVideoFiles->setChecked(m_cfg.m_autoDestinationOnlyForVideoFiles);
-  ui->cbMSetDestinationFromTitle->setChecked(m_cfg.m_mergeSetDestinationFromTitle);
+  ui->cbMAutoSetDestinationFileName->setChecked(isChecked);
+  ui->cbMAutoSetDestinationOnlyForVideoFiles->setChecked(m_cfg.m_autoDestinationOnlyForVideoFiles);
+  ui->cbMAutoSetDestinationFromTitle->setChecked(m_cfg.m_mergeSetDestinationFromTitle);
   rbToCheck->setChecked(true);
-  ui->cbMAutoSetRelativeDirectory->addItems(m_cfg.m_mergeLastRelativeOutputDirs.items());
-  ui->cbMAutoSetRelativeDirectory->setCurrentText(dRelative);
-  ui->cbMAutoSetRelativeDirectory->lineEdit()->setClearButtonEnabled(true);
-  ui->cbMAutoSetFixedDirectory->addItems(m_cfg.m_mergeLastFixedOutputDirs.items());
-  ui->cbMAutoSetFixedDirectory->setCurrentText(dFixed);
-  ui->cbMAutoSetFixedDirectory->lineEdit()->setClearButtonEnabled(true);
+  ui->cbMAutoSetDestinationRelativeDirectory->addItems(m_cfg.m_mergeLastRelativeOutputDirs.items());
+  ui->cbMAutoSetDestinationRelativeDirectory->setCurrentText(dRelative);
+  ui->cbMAutoSetDestinationRelativeDirectory->lineEdit()->setClearButtonEnabled(true);
+  ui->cbMAutoSetDestinationFixedDirectory->addItems(m_cfg.m_mergeLastFixedOutputDirs.items());
+  ui->cbMAutoSetDestinationFixedDirectory->setCurrentText(dFixed);
+  ui->cbMAutoSetDestinationFixedDirectory->lineEdit()->setClearButtonEnabled(true);
   ui->cbMUniqueOutputFileNames->setChecked(m_cfg.m_uniqueOutputFileNames);
   ui->cbMAutoClearOutputFileName->setChecked(m_cfg.m_autoClearOutputFileName);
 
@@ -1160,15 +1160,15 @@ PreferencesDialog::save() {
   m_cfg.m_mergeAddBlurayCovers                                = ui->cbMAddBlurayCovers->isChecked();
   m_cfg.m_mergeAttachmentsAlwaysSkipForExistingName           = ui->cbMAttachmentAlwaysSkipForExistingName->isChecked();
 
-  m_cfg.m_outputFileNamePolicy                                = !ui->cbMAutoSetOutputFileName->isChecked()   ? Util::Settings::DontSetOutputFileName
-                                                              : ui->rbMAutoSetRelativeDirectory->isChecked() ? Util::Settings::ToRelativeOfFirstInputFile
-                                                              : ui->rbMAutoSetFixedDirectory->isChecked()    ? Util::Settings::ToFixedDirectory
-                                                              : ui->rbMAutoSetPreviousDirectory->isChecked() ? Util::Settings::ToPreviousDirectory
-                                                              :                                                Util::Settings::ToSameAsFirstInputFile;
-  m_cfg.m_autoDestinationOnlyForVideoFiles                    = ui->cbMAutoDestinationOnlyForVideoFiles->isChecked();
-  m_cfg.m_mergeSetDestinationFromTitle                        = ui->cbMSetDestinationFromTitle->isChecked();
-  m_cfg.m_relativeOutputDir.setPath(ui->cbMAutoSetRelativeDirectory->currentText());
-  m_cfg.m_fixedOutputDir.setPath(ui->cbMAutoSetFixedDirectory->currentText());
+  m_cfg.m_outputFileNamePolicy                                = !ui->cbMAutoSetDestinationFileName->isChecked()         ? Util::Settings::DontSetOutputFileName
+                                                              : ui->rbMAutoSetDestinationRelativeDirectory->isChecked() ? Util::Settings::ToRelativeOfFirstInputFile
+                                                              : ui->rbMAutoSetDestinationFixedDirectory->isChecked()    ? Util::Settings::ToFixedDirectory
+                                                              : ui->rbMAutoSetDestinationPreviousDirectory->isChecked() ? Util::Settings::ToPreviousDirectory
+                                                              :                                                           Util::Settings::ToSameAsFirstInputFile;
+  m_cfg.m_autoDestinationOnlyForVideoFiles                    = ui->cbMAutoSetDestinationOnlyForVideoFiles->isChecked();
+  m_cfg.m_mergeSetDestinationFromTitle                        = ui->cbMAutoSetDestinationFromTitle->isChecked();
+  m_cfg.m_relativeOutputDir.setPath(ui->cbMAutoSetDestinationRelativeDirectory->currentText());
+  m_cfg.m_fixedOutputDir.setPath(ui->cbMAutoSetDestinationFixedDirectory->currentText());
   m_cfg.m_uniqueOutputFileNames                               = ui->cbMUniqueOutputFileNames->isChecked();
   m_cfg.m_autoClearOutputFileName                             = ui->cbMAutoClearOutputFileName->isChecked();
 
@@ -1254,20 +1254,20 @@ PreferencesDialog::enableOftendUsedCharacterSetsOnly() {
 
 void
 PreferencesDialog::enableOutputFileNameControls() {
-  bool isChecked        = ui->cbMAutoSetOutputFileName->isChecked();
-  bool relativeSelected = ui->rbMAutoSetRelativeDirectory->isChecked();
-  bool fixedSelected    = ui->rbMAutoSetFixedDirectory->isChecked();
+  bool isChecked        = ui->cbMAutoSetDestinationFileName->isChecked();
+  bool relativeSelected = ui->rbMAutoSetDestinationRelativeDirectory->isChecked();
+  bool fixedSelected    = ui->rbMAutoSetDestinationFixedDirectory->isChecked();
 
-  Util::enableWidgets(QList<QWidget *>{} << ui->gbDestinationDirectory   << ui->cbMUniqueOutputFileNames << ui->cbMAutoDestinationOnlyForVideoFiles << ui->cbMSetDestinationFromTitle, isChecked);
-  Util::enableWidgets(QList<QWidget *>{} << ui->cbMAutoSetFixedDirectory << ui->pbMBrowseAutoSetFixedDirectory, isChecked && fixedSelected);
-  ui->cbMAutoSetRelativeDirectory->setEnabled(isChecked && relativeSelected);
+  Util::enableWidgets(QList<QWidget *>{} << ui->gbMAutoSetDestinationDirectory << ui->cbMUniqueOutputFileNames << ui->cbMAutoSetDestinationOnlyForVideoFiles << ui->cbMAutoSetDestinationFromTitle, isChecked);
+  Util::enableWidgets(QList<QWidget *>{} << ui->cbMAutoSetDestinationFixedDirectory << ui->pbMAutoSetDestinationBrowseFixedDirectory, isChecked && fixedSelected);
+  ui->cbMAutoSetDestinationRelativeDirectory->setEnabled(isChecked && relativeSelected);
 }
 
 void
 PreferencesDialog::browseFixedOutputDirectory() {
-  auto dir = Util::getExistingDirectory(this, QY("Select destination directory"), ui->cbMAutoSetFixedDirectory->currentText());
+  auto dir = Util::getExistingDirectory(this, QY("Select destination directory"), ui->cbMAutoSetDestinationFixedDirectory->currentText());
   if (!dir.isEmpty())
-    ui->cbMAutoSetFixedDirectory->setCurrentText(dir);
+    ui->cbMAutoSetDestinationFixedDirectory->setCurrentText(dir);
 }
 
 void
