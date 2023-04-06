@@ -1,4 +1,4 @@
-<% use_qt6 = (distro == 'ubuntu') && (version >= Gem::Version.new('22.04')) %>
+<% use_qt6 = ((distro == 'ubuntu') && (version >= Gem::Version.new('22.04'))) || ((distro == 'debian') && (version >= Gem::Version.new('12'))) %>
 Source: mkvtoolnix
 Section: video
 Priority: optional
