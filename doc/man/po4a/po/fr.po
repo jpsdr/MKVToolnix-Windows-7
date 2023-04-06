@@ -267,7 +267,7 @@ msgstr "Ce logiciel extrait des parties spécifiques d'un fichier &matroska; ver
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:71
 msgid "All other arguments either switch to a certain extraction mode, change options for the currently active mode or specify what to extract into which file.  Multiple modes can be used in the same invocation of mkvextract allowing the extraction of multiple things in a single pass.  Most options can only be used in certain modes with a few options applying to all modes."
-msgstr "Tous les autres arguments soit basculent vers un mode d'extraction particulier, soit modifient des options pour le mode en cours, soit spécifient quoi extraire vers quel fichier. Plusieurs modes peuvent être utilisés en invoquant mkvextract, ce qui permet d'extraire plusieurs choses en une seule passe. La plupart des options peuvent seulement être utilisées dans certains modes avec quelques options s'appliquant à tous les modes."
+msgstr "Tous les autres arguments soit basculent vers un mode d'extraction particulier, soit modifient des options pour le mode en cours, soit spécifient quoi extraire vers quel fichier. Plusieurs modes peuvent être utilisés en même temps en invoquant mkvextract, ce qui permet d'extraire plusieurs choses en une seule passe. La plupart des options peuvent seulement être utilisées dans certains modes, avec quelques options qui s'appliquent à tous les modes."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvextract.xml:77
@@ -292,7 +292,7 @@ msgstr "<option>-f</option>, <option>--parse-fully</option>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:95
 msgid "Sets the parse mode to 'full'. The default mode does not parse the whole file but uses the meta seek elements for locating the required elements of a source file. In 99% of all cases this is enough. But for files that do not contain meta seek elements or which are damaged the user might have to use this mode. A full scan of a file can take a couple of minutes while a fast scan only takes seconds."
-msgstr "Définit le mode d'analyse à « complet ». Le mode par défaut n'analyse pas entièrement le fichier nais utilise les méta-éléments de recherche pour localiser les éléments requis d'un fichier source. Dans 99% des cas cela est suffisant. Mais pour les fichiers qui ne contiennent pas ces méta-éléments ou qui sont endommagés, l'utilisateur pourrait utiliser ce mode. L'analyse complète d'un fichier peut prendre plusieurs minutes tandis qu'une analyse rapide ne prend que quelques secondes."
+msgstr "Définit le mode d'analyse à « complet ». Le mode par défaut n'analyse pas entièrement le fichier nais utilise les méta-éléments de recherche pour localiser les éléments requis d'un fichier source. Dans la grand majorité des cas, cela est suffisant. Mais pour les fichiers qui ne contiennent pas ces méta-éléments ou qui sont endommagés, l'utilisateur pourrait utiliser ce mode. L'analyse complète d'un fichier peut prendre plusieurs minutes tandis qu'une analyse rapide ne prend que quelques secondes."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:104
@@ -1308,7 +1308,7 @@ msgstr "<option>-a</option>, <option>--all</option>"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:69
 msgid "By default &mkvinfo; stops when it encounters the first cluster.  Additionally it doesn't show certain often occurring elements.  With this option &mkvinfo; will continue processing regardless of the verbosity level and show all elements."
-msgstr "Par défaut &mkvinfo; s'arrête quand il rencontre la première grappe. De plus il n'affichera pas certains éléments répétitifs. Avec cette option &mkvinfo; continuera l'exécution quelle que soit le niveau de verbosité et affichera tous les éléments."
+msgstr "Par défaut &mkvinfo; s'arrête quand il rencontre la première grappe. De plus il n'affichera pas certains éléments répétitifs. Avec cette option &mkvinfo; continue l'exécution quel que soit le niveau de verbosité et affiche tous les éléments."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:76
@@ -1328,7 +1328,7 @@ msgstr "<option>-o</option>, <option>--continue</option>"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvinfo.xml:88
 msgid "By default &mkvinfo; stops when it encounters the first cluster.  With this option &mkvinfo; will continue processing regardless of the verbosity level."
-msgstr "Par défaut &mkvinfo; s'arrête quand il rencontre la première grappe. Avec cette option &mkvinfo; continuera l'exécution quelle que soit le niveau de verbosité."
+msgstr "Par défaut &mkvinfo; s'arrête quand il rencontre la première grappe. Avec cette option &mkvinfo; continue l'exécution quel que soit le niveau de verbosité."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvinfo.xml:95
@@ -2059,15 +2059,13 @@ msgstr "Pour la forme des sous-étiquettes de langue étendue, la forme canoniqu
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:582
-#, fuzzy
-#| msgid "<option>--list-stereo-modes</option>"
 msgid "<option>--stop-after-video-ends</option>"
-msgstr "<option>--list-stereo-modes</option>"
+msgstr "<option>--stop-after-video-ends</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:585
 msgid "Stops processing after the primary video track ends, discarding any remaining packets of other tracks."
-msgstr ""
+msgstr "Arrête l'exécution à la fin de la première piste vidéo en ignorant les paquets restants des autres pistes."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:593
