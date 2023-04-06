@@ -29,7 +29,7 @@ ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	cp -R /usr/src/gtest/src lib/gtest/
 endif
 
-<% if (distro == 'debian') and (version >= Gem::Version.new('11') and (version < Gem::Version.new('12')) %>
+<% if (distro == 'debian') and (version >= Gem::Version.new('11')) and (version < Gem::Version.new('12')) %>
 # gcc 10 in Debian 11 Bullseye contains a bug that causes an
 # "internal compiler error" segfault. Workaround: compile with
 # clang.
