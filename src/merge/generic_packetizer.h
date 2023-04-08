@@ -74,8 +74,7 @@ protected:
   int64_t m_htrack_default_duration;
   bool m_htrack_default_duration_indicates_fields;
   bool m_default_duration_forced;
-  uint64_t m_huid;
-  int m_htrack_max_add_block_ids;
+  uint64_t m_huid, m_max_block_add_id{};
   timestamp_c m_seek_pre_roll, m_codec_delay;
 
   std::string m_hcodec_id, m_hcodec_name;
@@ -198,7 +197,6 @@ public:
   virtual void set_codec_name(std::string const &name);
 
   virtual void set_track_default_duration(int64_t default_duration, bool force = false);
-  virtual void set_track_max_additionals(int max_add_block_ids);
   virtual int64_t get_track_default_duration() const;
   virtual void set_track_default_flag(bool default_track);
   virtual void set_track_forced_flag(bool forced_track);

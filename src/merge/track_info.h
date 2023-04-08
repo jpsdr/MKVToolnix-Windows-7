@@ -367,7 +367,6 @@ public:
   option_with_source_c<memory_cptr> m_color_space; // For this very track
 
   std::map<int64_t, std::pair<int64_t, bool>> m_default_durations; // As given on the command line
-  std::map<int64_t, int> m_max_blockadd_ids; // As given on the command line
 
   item_selector_c<attach_mode_e> m_attach_mode_list; // As given on the command line
 

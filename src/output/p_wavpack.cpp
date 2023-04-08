@@ -33,7 +33,7 @@ wavpack_packetizer_c::wavpack_packetizer_c(generic_reader_c *p_reader,
   , m_bits_per_sample(meta.bits_per_sample)
   , m_samples_per_block(meta.samples_per_block)
   , m_samples_output(0)
-  , m_has_correction(meta.has_correction && (0 != m_htrack_max_add_block_ids))
+  , m_has_correction(meta.has_correction)
 {
   set_track_type(track_audio);
   m_sample_duration = mtx::rational(1'000'000'000, m_sample_rate);
@@ -47,7 +47,6 @@ wavpack_packetizer_c::set_headers() {
   set_audio_channels(m_channels);
   set_audio_bit_depth(m_bits_per_sample);
   set_track_default_duration(m_samples_per_block * 1000000000 / m_sample_rate);
-  set_track_max_additionals(m_has_correction ? 1 : 0);
 
   generic_packetizer_c::set_headers();
 

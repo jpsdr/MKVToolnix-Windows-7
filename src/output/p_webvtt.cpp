@@ -31,7 +31,7 @@ webvtt_packetizer_c::~webvtt_packetizer_c() {
 void
 webvtt_packetizer_c::process_impl(packet_cptr const &packet) {
   for (auto &addition : packet->data_adds)
-    addition = memory_c::clone(mtx::string::normalize_line_endings(addition->to_string()));
+    addition.data = memory_c::clone(mtx::string::normalize_line_endings(addition.data->to_string()));
   textsubs_packetizer_c::process_impl(packet);
 }
 

@@ -265,8 +265,6 @@ set_usage() {
   usage_text += Y("  --commentary-flag <TID[:bool]>\n"
                   "                           Sets the \"commentary\" flag for this track or\n"
                   "                           forces it not to be present if bool is 0.\n");
-  usage_text += Y("  --blockadd <TID:x>       Sets the max number of block additional\n"
-                  "                           levels for this track.\n");
   usage_text += Y("  --track-name <TID:name>  Sets the name for a track.\n");
   usage_text += Y("  --cues <TID:none|iframes|all>\n"
                   "                           Create cue (index) entries for this track:\n"
@@ -1630,29 +1628,6 @@ parse_arg_remove_dialog_normalization_gain(const std::string &s,
   ti.m_remove_dialog_normalization_gain[id] = true;
 }
 
-/** \brief Parse the argument for \c --blockadd
-
-   The argument must be a tupel consisting of a track ID and the max number
-   of BlockAdditional IDs.
-*/
-static void
-parse_arg_max_blockadd_id(const std::string &s,
-                          track_info_c &ti) {
-  auto parts = mtx::string::split(s, ":");
-  if (parts.size() != 2)
-    mxerror(fmt::format(Y("'{0}' is not a valid pair of track ID and block additional in '--blockadd {0}'.\n"), s));
-
-  int64_t id = 0;
-  if (!mtx::string::parse_number(parts[0], id))
-    mxerror(fmt::format(Y("'{0}' is not a valid track ID in '--blockadd {1}'.\n"), parts[0], s));
-
-  int64_t max_blockadd_id = 0;
-  if (!mtx::string::parse_number(parts[1], max_blockadd_id) || (max_blockadd_id < 0))
-    mxerror(fmt::format(Y("'{0}' is not a valid block additional max in '--blockadd {1}'.\n"), parts[1], s));
-
-  ti.m_max_blockadd_ids[id] = max_blockadd_id;
-}
-
 /** \brief Parse the argument for \c --aac-is-sbr
 
    The argument can either be just a number (the track ID) or a tupel
@@ -2912,13 +2887,6 @@ parse_args(std::vector<std::string> args) {
         mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
 
       parse_arg_compression(*next_arg, *ti);
-      sit++;
-
-    } else if (this_arg == "--blockadd") {
-      if (!next_arg)
-        mxerror(fmt::format(Y("'{0}' lacks its argument.\n"), this_arg));
-
-      parse_arg_max_blockadd_id(*next_arg, *ti);
       sit++;
 
     } else if (this_arg == "--track-name") {

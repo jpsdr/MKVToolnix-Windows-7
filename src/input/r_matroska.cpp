@@ -2549,12 +2549,22 @@ kax_reader_c::process_block_group_common(KaxBlockGroup *block_group,
     if (!(Is<KaxBlockMore>(child)))
       continue;
 
-    auto blockmore     = static_cast<KaxBlockMore *>(child);
-    auto blockadd_data = &GetChild<KaxBlockAdditional>(*blockmore);
-    auto blockadded    = memory_c::borrow(blockadd_data->GetBuffer(), blockadd_data->GetSize());
-    block_track.content_decoder.reverse(blockadded, CONTENT_ENCODING_SCOPE_BLOCK);
+    auto blockmore  = static_cast<KaxBlockMore *>(child);
+    auto k_blockadd = FindChild<KaxBlockAdditional>(*blockmore);
 
-    packet->data_adds.push_back(blockadded);
+    if (!k_blockadd)
+      continue;
+
+    block_add_t add{ memory_c::borrow(k_blockadd->GetBuffer(), k_blockadd->GetSize()) };
+
+    block_track.content_decoder.reverse(add.data, CONTENT_ENCODING_SCOPE_BLOCK);
+
+    // auto k_blockadd_id = FindChild<KaxBlockAddID>(*blockmore);
+
+    // if (k_blockadd_id)
+    //   add.id = k_blockadd_id->GetValue();
+
+    packet->data_adds.push_back(add);
   }
 }
 

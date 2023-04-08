@@ -20,6 +20,12 @@
   name: added an option in the preferences for using the first source file's
   directory name instead of its file name as the basis for the destination
   file name. Implements #3512.
+* mkvmerge: removed the option `--blockadd`. Removing block additional data is
+  not possible anymore, as it is often required for proper decoding. Part of
+  the implementation of #3511.
+* mkvmerge: the maximum block addition ID track header value is now calculated
+  automatically from both the existing mappings & the actually used block
+  additions in the block groups. Part of the implementation of #3511.
 
 ## Bug fixes
 

@@ -548,7 +548,7 @@ cluster_helper_c::render() {
         for (data_add_idx = 0; pack->data_adds.size() > data_add_idx; ++data_add_idx) {
           auto &block_more = AddEmptyChild<KaxBlockMore>(additions);
           GetChild<KaxBlockAddID     >(block_more).SetValue(data_add_idx + 1);
-          GetChild<KaxBlockAdditional>(block_more).CopyBuffer((binary *)pack->data_adds[data_add_idx]->get_buffer(), pack->data_adds[data_add_idx]->get_size());
+          GetChild<KaxBlockAdditional>(block_more).CopyBuffer((binary *)pack->data_adds[data_add_idx].data->get_buffer(), pack->data_adds[data_add_idx].data->get_size());
         }
       }
 

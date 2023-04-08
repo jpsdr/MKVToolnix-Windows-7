@@ -45,9 +45,31 @@ public:
 };
 using packet_extension_cptr = std::shared_ptr<packet_extension_c>;
 
+struct block_add_t {
+  memory_cptr data;
+  std::optional<uint64_t> id;
+
+  block_add_t() = default;
+
+  block_add_t(memory_cptr const &p_data)
+    : data{p_data}
+    , id{std::nullopt}
+  {
+  }
+
+  block_add_t(memory_cptr const &p_data, uint64_t p_id)
+    : data{p_data}
+    , id{p_id}
+  {
+  }
+
+  block_add_t(block_add_t const &) = default;
+  block_add_t(block_add_t &&) = default;
+};
+
 struct packet_t {
   memory_cptr data;
-  std::vector<memory_cptr> data_adds;
+  std::vector<block_add_t> data_adds;
   memory_cptr codec_state;
 
   libmatroska::KaxBlockBlob *group;

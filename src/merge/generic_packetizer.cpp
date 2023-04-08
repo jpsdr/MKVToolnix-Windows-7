@@ -84,7 +84,6 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_htrack_default_duration_indicates_fields{}
   , m_default_duration_forced{true}
   , m_huid{}
-  , m_htrack_max_add_block_ids{-1}
   , m_haudio_sampling_freq{-1.0}
   , m_haudio_output_sampling_freq{-1.0}
   , m_haudio_channels{-1}
@@ -329,12 +328,6 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   } else
     m_default_duration_forced = false;
 
-  // Let's see if the user has set a max_block_add_id
-  if (mtx::includes(m_ti.m_max_blockadd_ids, m_ti.m_id))
-    m_htrack_max_add_block_ids = m_ti.m_max_blockadd_ids[m_ti.m_id];
-  else if (mtx::includes(m_ti.m_max_blockadd_ids, -1))
-    m_htrack_max_add_block_ids = m_ti.m_max_blockadd_ids[-1];
-
   // Let's see if the user has specified a compression scheme for this track.
   if (COMPRESSION_UNSPECIFIED != m_ti.m_compression)
     m_hcompression = m_ti.m_compression;
@@ -478,13 +471,6 @@ generic_packetizer_c::set_track_default_duration(int64_t def_dur,
     else
       DeleteChildren<KaxTrackDefaultDuration>(m_track_entry);
   }
-}
-
-void
-generic_packetizer_c::set_track_max_additionals(int max_add_block_ids) {
-  m_htrack_max_add_block_ids = max_add_block_ids;
-  if (m_track_entry)
-    GetChild<KaxMaxBlockAdditionID>(m_track_entry).SetValue(max_add_block_ids);
 }
 
 int64_t
@@ -1065,9 +1051,12 @@ generic_packetizer_c::set_headers() {
   if (!m_hcodec_name.empty())
     GetChild<KaxCodecName>(m_track_entry).SetValueUTF8(m_hcodec_name);
 
-  if (!outputting_webm()) {
-    if (-1 != m_htrack_max_add_block_ids)
-      GetChild<KaxMaxBlockAdditionID>(m_track_entry).SetValue(m_htrack_max_add_block_ids);
+  if (!outputting_webm() && !m_block_addition_mappings.empty()) {
+    m_max_block_add_id = std::accumulate(m_block_addition_mappings.begin(), m_block_addition_mappings.end(), m_max_block_add_id,
+                                         [](auto max, auto const &mapping) { return std::max(max, mapping.id_value.value_or(1)); });
+
+    if (m_max_block_add_id > 0)
+      GetChild<KaxMaxBlockAdditionID>(m_track_entry).SetValue(m_max_block_add_id);
   }
 
   if (m_timestamp_factory)
@@ -1392,7 +1381,7 @@ generic_packetizer_c::compress_packet(packet_t &packet) {
     packet.data = m_compressor->compress(packet.data);
     size_t i;
     for (i = 0; packet.data_adds.size() > i; ++i)
-      packet.data_adds[i] = m_compressor->compress(packet.data_adds[i]);
+      packet.data_adds[i].data = m_compressor->compress(packet.data_adds[i].data);
 
   } catch (mtx::compression_x &e) {
     mxerror_tid(m_ti.m_fname, m_ti.m_id, fmt::format(Y("Compression failed: {0}\n"), e.error()));
@@ -1415,14 +1404,9 @@ generic_packetizer_c::add_packet(packet_cptr const &pack) {
   if (!m_reader->m_ptzr_first_packet)
     m_reader->m_ptzr_first_packet = this;
 
-  // strip elements to be removed
-  if (   (-1                     != m_htrack_max_add_block_ids)
-      && (pack->data_adds.size()  > static_cast<size_t>(m_htrack_max_add_block_ids)))
-    pack->data_adds.resize(m_htrack_max_add_block_ids);
-
   pack->data->take_ownership();
   for (auto &data_add : pack->data_adds)
-    data_add->take_ownership();
+    data_add.data->take_ownership();
 
   pack->source = this;
 
@@ -1431,6 +1415,18 @@ generic_packetizer_c::add_packet(packet_cptr const &pack) {
     std::swap(pack->bref, pack->fref);
 
   account_enqueued_bytes(*pack, +1);
+
+  if (!pack->data_adds.empty()) {
+    auto new_max = std::accumulate(pack->data_adds.begin(), pack->data_adds.end(), m_max_block_add_id,
+                                   [](auto max, auto const &add) { return std::max(max, add.id.value_or(1)); });
+
+    if (new_max > m_max_block_add_id) {
+      m_max_block_add_id = new_max;
+      GetChild<KaxMaxBlockAdditionID>(m_track_entry).SetValue(m_max_block_add_id);
+
+      rerender_track_headers();
+    }
+  }
 
   if (1 != m_connected_to)
     add_packet2(pack);

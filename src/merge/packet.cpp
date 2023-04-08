@@ -47,7 +47,7 @@ packet_t::account(track_statistics_c &statistics,
 uint64_t
 packet_t::calculate_uncompressed_size() {
   if (!uncompressed_size) {
-    uncompressed_size = data->get_size() + std::accumulate(data_adds.begin(), data_adds.end(), 0ull, [](auto const &sum, auto const &data_add) { return sum + data_add->get_size(); });
+    uncompressed_size = data->get_size() + std::accumulate(data_adds.begin(), data_adds.end(), 0ull, [](auto const &sum, auto const &data_add) { return sum + data_add.data->get_size(); });
   }
 
   return *uncompressed_size;
