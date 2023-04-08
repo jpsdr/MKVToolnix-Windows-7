@@ -313,6 +313,30 @@ kax_track_t::discard_track_statistics_tags() {
     tags.reset();
 }
 
+void
+kax_track_t::register_use_of_webm_block_addition_id(uint64_t id) {
+  // So far we only know about IDs 1 & 4. For 1 no mapping must be added.
+
+  if ((id != 4) || m_registered_used_of_webm_block_addition_id[id])
+    return;
+
+  m_registered_used_of_webm_block_addition_id[id] = true;
+
+  for (auto const &mapping : block_addition_mappings)
+    if (mapping.id_value.value_or(1) == id)
+      return;
+
+  block_addition_mapping_t mapping;
+  mapping.id_type  = 4;
+  mapping.id_value = id;
+
+  block_addition_mappings.push_back(mapping);
+  ptzr_ptr->set_block_addition_mappings(block_addition_mappings);
+
+  rerender_track_headers();
+}
+
+
 /*
    Probes a file by simply comparing the first four bytes to the EBML
    head signature.
@@ -2559,12 +2583,13 @@ kax_reader_c::process_block_group_common(KaxBlockGroup *block_group,
 
     block_track.content_decoder.reverse(add.data, CONTENT_ENCODING_SCOPE_BLOCK);
 
-    // auto k_blockadd_id = FindChild<KaxBlockAddID>(*blockmore);
-
-    // if (k_blockadd_id)
-    //   add.id = k_blockadd_id->GetValue();
+    auto k_blockadd_id = FindChild<KaxBlockAddID>(*blockmore);
+    add.id             = k_blockadd_id ? k_blockadd_id->GetValue() : 1;
 
     packet->data_adds.push_back(add);
+
+    if (m_is_webm)
+      block_track.register_use_of_webm_block_addition_id(add.id.value());
   }
 }
 

@@ -544,11 +544,13 @@ cluster_helper_c::render() {
       if (!pack->data_adds.empty() && new_block_group->ReplaceSimpleByGroup()) {
         KaxBlockAdditions &additions = AddEmptyChild<KaxBlockAdditions>(*new_block_group);
 
-        size_t data_add_idx;
-        for (data_add_idx = 0; pack->data_adds.size() > data_add_idx; ++data_add_idx) {
+        for (auto const &add : pack->data_adds) {
           auto &block_more = AddEmptyChild<KaxBlockMore>(additions);
-          GetChild<KaxBlockAddID     >(block_more).SetValue(data_add_idx + 1);
-          GetChild<KaxBlockAdditional>(block_more).CopyBuffer((binary *)pack->data_adds[data_add_idx].data->get_buffer(), pack->data_adds[data_add_idx].data->get_size());
+
+          if (add.id.value_or(1) > 1)
+            GetChild<KaxBlockAddID>(block_more).SetValue(add.id.value());
+
+          GetChild<KaxBlockAdditional>(block_more).CopyBuffer(static_cast<binary *>(add.data->get_buffer()), add.data->get_size());
         }
       }
 
