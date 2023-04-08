@@ -43,6 +43,9 @@
   to the output file. Before no ID would be written, effectively using 1 as
   that's the default value for the corresponding element. Part of the
   implementation of #3511.
+* mkvmerge: mkvmerge will no longer write block addition mappings or the max
+  block addition ID track header elements when creating a WebM file as those
+  elements aren't supported there. Part of the implementation of #3511.
 
 
 # Version 75.0.0 "Goliath" 2023-03-26

@@ -1341,7 +1341,7 @@ generic_packetizer_c::set_headers() {
 
 void
 generic_packetizer_c::apply_block_addition_mappings() {
-  if (!m_track_entry || m_block_addition_mappings.empty())
+  if (outputting_webm() || !m_track_entry || m_block_addition_mappings.empty())
     return;
 
   std::sort(m_block_addition_mappings.begin(), m_block_addition_mappings.end(),
@@ -1419,7 +1419,7 @@ generic_packetizer_c::add_packet(packet_cptr const &pack) {
 
   account_enqueued_bytes(*pack, +1);
 
-  if (!pack->data_adds.empty()) {
+  if (!outputting_webm() && !pack->data_adds.empty()) {
     auto new_max = std::accumulate(pack->data_adds.begin(), pack->data_adds.end(), m_max_block_add_id,
                                    [](auto max, auto const &add) { return std::max(max, add.id.value_or(1)); });
 
