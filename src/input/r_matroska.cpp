@@ -1602,12 +1602,20 @@ kax_reader_c::read_headers_internal() {
 
     // Find the EbmlHead element. Must be the first one.
     auto l0 = std::shared_ptr<EbmlElement>(m_es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFFFFFFFFFLL));
-    if (!l0) {
+    if (!l0 || !dynamic_cast<EbmlHead *>(l0.get())) {
       mxwarn(Y("matroska_reader: no EBML head found.\n"));
       return false;
     }
 
-    // Don't verify its data for now.
+    auto &head                 = static_cast<EbmlHead &>(*l0);
+    int upper_lvl_el           = 0;
+    EbmlElement *element_found = nullptr;
+
+    head.Read(*m_es, EBML_CONTEXT(&head), upper_lvl_el, element_found, true);
+    delete element_found;
+
+    m_is_webm = FindChildValue<EDocType>(head) == "webm";
+
     l0->SkipData(*m_es, EBML_CONTEXT(l0));
 
     while (true) {
