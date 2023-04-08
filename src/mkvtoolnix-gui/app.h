@@ -83,6 +83,9 @@ public Q_SLOTS:
   void saveSettings() const;
   void receiveInstanceCommunication();
   void setupAppearance();
+#if defined(SYS_WINDOWS)
+  void setupColorMode();
+#endif
   void setupUiFont();
 
 protected:
@@ -112,6 +115,9 @@ public:
   static void initializeCharacterSets();
 
   static bool isInstalled();
+#if defined(SYS_WINDOWS)
+  static bool isWindows11OrLater();
+#endif
 
   static QString communicatorSocketName();
   static QString settingsBaseGroupName();

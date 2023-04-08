@@ -6,6 +6,9 @@
 #include <QLibraryInfo>
 #include <QLocalServer>
 #include <QLocalSocket>
+#if defined(SYS_WINDOWS)
+# include <QOperatingSystemVersion>
+#endif
 #include <QSettings>
 #include <QTextStream>
 #include <QThread>
@@ -562,8 +565,61 @@ App::settingsBaseGroupName() {
 
 void
 App::setupAppearance() {
+#if defined(SYS_WINDOWS)
+  setupColorMode();
+#endif  // SYS_WINDOWS
   setupUiFont();
 }
+
+#if defined(SYS_WINDOWS)
+void
+App::setupColorMode() {
+  if (isWindows11OrLater())
+    return;
+
+  QSettings regKey{Q("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"), QSettings::NativeFormat};
+
+  auto useLightTheme = regKey.value(Q("AppsUseLightTheme"));
+
+  if (!useLightTheme.isValid() || useLightTheme.toBool())
+    return;
+
+  QPalette darkPalette;
+  auto darkColor     = QColor{45, 45, 45};
+  auto disabledColor = QColor{127, 127, 127};
+
+  darkPalette.setColor(QPalette::AlternateBase,   darkColor);
+  darkPalette.setColor(QPalette::Base,            QColor{18, 18, 18});
+  darkPalette.setColor(QPalette::BrightText,      Qt::red);
+  darkPalette.setColor(QPalette::Button,          darkColor);
+  darkPalette.setColor(QPalette::ButtonText,      Qt::white);
+  darkPalette.setColor(QPalette::Disabled,        QPalette::ButtonText,      disabledColor);
+  darkPalette.setColor(QPalette::Disabled,        QPalette::HighlightedText, disabledColor);
+  darkPalette.setColor(QPalette::Disabled,        QPalette::Text,            disabledColor);
+  darkPalette.setColor(QPalette::Disabled,        QPalette::WindowText,      disabledColor);
+  darkPalette.setColor(QPalette::Highlight,       QColor{42, 130, 218});
+  darkPalette.setColor(QPalette::HighlightedText, Qt::black);
+  darkPalette.setColor(QPalette::Link,            QColor{42, 130, 218});
+  darkPalette.setColor(QPalette::Text,            Qt::white);
+  darkPalette.setColor(QPalette::ToolTipBase,     Qt::white);
+  darkPalette.setColor(QPalette::ToolTipText,     Qt::white);
+  darkPalette.setColor(QPalette::Window,          darkColor);
+  darkPalette.setColor(QPalette::WindowText,      Qt::white);
+
+  setPalette(darkPalette);
+  setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
+}
+
+bool
+App::isWindows11OrLater() {
+  static std::optional<bool> s_isWindows11OrLater;
+
+  if (!s_isWindows11OrLater)
+    s_isWindows11OrLater = QOperatingSystemVersion::current() >= QOperatingSystemVersion::Windows11;
+
+  return *s_isWindows11OrLater;
+}
+#endif  // SYS_WINDOWS
 
 void
 App::run() {
