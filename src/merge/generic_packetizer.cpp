@@ -1341,8 +1341,11 @@ generic_packetizer_c::set_headers() {
 
 void
 generic_packetizer_c::apply_block_addition_mappings() {
-  if (!m_track_entry)
+  if (!m_track_entry || m_block_addition_mappings.empty())
     return;
+
+  std::sort(m_block_addition_mappings.begin(), m_block_addition_mappings.end(),
+            [](auto const &a, auto const &b) { return a.id_value.value_or(1) < b.id_value.value_or(1); });
 
   DeleteChildren<KaxBlockAdditionMapping>(m_track_entry);
 
