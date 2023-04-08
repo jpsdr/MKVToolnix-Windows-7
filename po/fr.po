@@ -5,7 +5,7 @@ msgstr ""
 "POT-Creation-Date: 2023-04-06 16:41+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: tmtisfree <tmtisfree@free.fr>, 2016-2023\n"
-"Language-Team: French (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
+"Language-Team: French (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -915,6 +915,8 @@ msgid ""
 "  --stop-after-video-ends  Stops processing after the primary video track ends,\n"
 "                           discarding any remaining packets of other tracks.\n"
 msgstr ""
+"  --stop-after-video-ends  Arrête l'exécution dès que la fin de la première piste vidéo est atteinte,\n"
+"                           en ignorant tous les paquets suivants des autres pistes.\n"
 
 #: src/merge/mkvmerge.cpp:374
 #, no-c-format
@@ -3912,7 +3914,7 @@ msgstr "Analyse les flux binaires MPEG-4, place chaque trame dans un bloc Matros
 #: src/mkvtoolnix-gui/merge/output.cpp:251
 #, no-c-format
 msgid "Any later packets of other tracks will be discarded."
-msgstr ""
+msgstr "Tous les paquets suivants des autres pistes seront ignorés."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:252
 #: src/mkvtoolnix-gui/merge/output.cpp:253
@@ -7718,9 +7720,9 @@ msgid "If this option is enabled, the file title will be used as the basis for t
 msgstr "Si cette option est activée, le titre du fichier sera utilisé comme base pour le nom de fichier de destination si un titre de fichier est défini."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:541
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If this option is enabled, the name of the directory the file is located in will be used as the basis for the destination file name."
-msgstr "Si cette option est activée, le titre du fichier sera utilisé comme base pour le nom de fichier de destination si un titre de fichier est défini."
+msgstr "Si cette option est activée, le nom du dossier dans lequel se situe le fichier sera utilisé comme base pour le nom du fichier destination."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:394
 #, no-c-format
@@ -10856,7 +10858,7 @@ msgstr "SHA1-160"
 #: src/common/kax_info.cpp:854
 #, no-c-format
 msgid "SMPTE ST 12-1 timecodes"
-msgstr ""
+msgstr "code temporels SMPTE ST 12-1"
 
 #: src/common/file_types.cpp:102
 #, no-c-format
@@ -11792,9 +11794,9 @@ msgid "Stop &after all running jobs have finished"
 msgstr "Arrêter &après que toutes les tâches actives soient terminées"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2281
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Stop after video track ends"
-msgstr "Est défini si la vidéo est entrelacée."
+msgstr "Stopper à la fin de la piste vidéo"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_widget.h:163
 #, no-c-format
@@ -11804,7 +11806,7 @@ msgstr "Arrêter à la première grappe"
 #: src/mkvtoolnix-gui/merge/output.cpp:250
 #, no-c-format
 msgid "Stops processing after the primary video track ends."
-msgstr ""
+msgstr "Arrête l'exécution dès que la fin de la première piste vidéo est atteinte."
 
 #: src/common/hacks.cpp:46
 #, no-c-format
@@ -14718,9 +14720,9 @@ msgid "Use the &title as the base file name if a title is set"
 msgstr "Utiliser le &titre comme base de nom de fichier si un titre est défini"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2257
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Use the input file's &directory name instead of the file name"
-msgstr "Sinon le nom de fichier de destination est dérivé des noms de fichiers source."
+msgstr "Utiliser le nom du dossier parent comme nom du fichier"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:562
 #, no-c-format
@@ -15735,9 +15737,9 @@ msgid "checkerboard (right first)"
 msgstr "échiquier (droite d'abord)"
 
 #: src/common/kax_info.cpp:852
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "codec-specific"
-msgstr "Données de projection spécifique :"
+msgstr "spécifique au codec"
 
 #: src/common/stereo_mode.cpp:59
 #, no-c-format
