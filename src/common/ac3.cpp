@@ -446,10 +446,17 @@ parser_c::parse(bool end_of_stream) {
   std::size_t position        = 0;
 
   while ((position + 18) < buffer_size) {
+    auto sync_word = get_uint16_le(&buffer[position]);
+
+    if (sync_word == 0x1001) {
+      position += 16;
+      continue;
+    }
+
     frame_c frame;
     unsigned char const *buffer_to_decode;
 
-    if (get_uint16_le(&buffer[position]) == SYNC_WORD) {
+    if (sync_word == SYNC_WORD) {
       mtx::bytes::swap_buffer(&buffer[position], swapped_buffer, 18, 2);
       buffer_to_decode = swapped_buffer;
 
@@ -506,6 +513,9 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
 
     std::size_t position = base;
 
+    if (((position + 16) < buffer_size) && get_uint16_be(&buffer[position]) == 0x0110)
+      position += 16;
+
     frame_c first_frame;
     while (((position + 8) < buffer_size) && !first_frame.decode_header(&buffer[position], buffer_size - position))
       ++position;
@@ -520,6 +530,9 @@ parser_c::find_consecutive_frames(unsigned char const *buffer,
 
     while (   (num_headers_found < num_required_headers)
            && (offset            < buffer_size)) {
+
+      if (((offset + 16) < buffer_size) && get_uint16_be(&buffer[offset]) == 0x0110)
+        offset += 16;
 
       frame_c current_frame;
       if (!current_frame.decode_header(&buffer[offset], buffer_size - offset))

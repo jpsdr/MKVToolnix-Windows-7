@@ -46,6 +46,9 @@
 * mkvmerge: mkvmerge will no longer write block addition mappings or the max
   block addition ID track header elements when creating a WebM file as those
   elements aren't supported there. Part of the implementation of #3511.
+* mkvmerge: AC-3: mkvmerge will now skip certain types of garbage data (16
+  bytes starting with 0x01 0x10) that can occur before each sync frame,
+  fixing the file not being identified as AC-3. Fixes #3484.
 
 
 # Version 75.0.0 "Goliath" 2023-03-26
