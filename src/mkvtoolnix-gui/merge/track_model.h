@@ -19,7 +19,7 @@ using TrackModelPtr = std::shared_ptr<TrackModel>;
 class TrackModel : public QStandardItemModel {
   Q_OBJECT
 
-protected:
+public:
   static int const CodecColumn            =  0;
   static int const TypeColumn             =  1;
   static int const MuxThisColumn          =  2;

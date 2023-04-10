@@ -90,6 +90,13 @@ public Q_SLOTS:
   virtual void enableAllTracks();
   virtual void disableAllTracks();
 
+  virtual void onTracksDoubleClicked(QModelIndex const &idx);
+  virtual void onDefaultTrackFlagColumnDoubleClicked();
+  virtual void onForcedTrackFlagColumnDoubleClicked();
+  virtual void onTrackDelayColumnDoubleClicked();
+  virtual void onTrackLanguageColumnDoubleClicked();
+  virtual void onTrackNameColumnDoubleClicked();
+  virtual void onTrackNameOrDelayColumnDoubleClicked(QWidget *widget, unsigned int tabIndex);
   virtual void toggleMuxThisForSelectedTracks();
   virtual void toggleMuxThisForSelectedAttachedFiles();
 

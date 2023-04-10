@@ -485,7 +485,7 @@ Tab::setupInputControls() {
   connect(p.ui->yawRotation,                   &QLineEdit::textChanged,                                                this,                       &Tab::onYawRotationChanged);
   connect(p.ui->pitchRotation,                 &QLineEdit::textChanged,                                                this,                       &Tab::onPitchRotationChanged);
   connect(p.ui->rollRotation,                  &QLineEdit::textChanged,                                                this,                       &Tab::onRollRotationChanged);
-  connect(p.ui->tracks,                        &QTreeView::doubleClicked,                                              this,                       &Tab::toggleMuxThisForSelectedTracks);
+  connect(p.ui->tracks,                        &QTreeView::doubleClicked,                                              this,                       &Tab::onTracksDoubleClicked);
   connect(p.ui->tracks,                        &Util::BasicTreeView::allSelectedActivated,                             this,                       &Tab::toggleMuxThisForSelectedTracks);
   connect(p.ui->tracks,                        &Util::BasicTreeView::ctrlDownPressed,                                  this,                       &Tab::onMoveTracksDown);
   connect(p.ui->tracks,                        &Util::BasicTreeView::ctrlUpPressed,                                    this,                       &Tab::onMoveTracksUp);
@@ -1043,6 +1043,89 @@ Tab::onMuxThisChanged(int selected) {
   auto tracks = selectedTracks();
   if (1 == tracks.count())
     Util::setComboBoxIndexIf(p.ui->muxThis, [&tracks](QString const &, QVariant const &eltData) { return eltData.isValid() && (eltData.toBool() == tracks[0]->m_muxThis); });
+}
+
+void
+Tab::onTrackLanguageColumnDoubleClicked() {
+  auto &p = *p_func();
+
+  if (p.ui->trackLanguage->isEnabled())
+      p.ui->trackLanguage->editLanguage();
+}
+
+void
+Tab::onTrackNameOrDelayColumnDoubleClicked(QWidget *widget,
+                                           unsigned int tabIndex) {
+  auto &p              = *p_func();
+  auto const &settings = Util::Settings::get();
+
+  if (!widget->isEnabled())
+    return;
+
+  if (settings.m_mergeTrackPropertiesLayout == Util::Settings::TrackPropertiesLayout::HorizontalScrollArea)
+    p.ui->propertiesScrollArea->ensureWidgetVisible(widget);
+
+  else if (settings.m_mergeTrackPropertiesLayout == Util::Settings::TrackPropertiesLayout::VerticalTabWidget)
+    p.ui->twProperties->setCurrentIndex(tabIndex);
+
+  widget->setFocus();
+}
+
+void
+Tab::onTrackNameColumnDoubleClicked() {
+  onTrackNameOrDelayColumnDoubleClicked(p_func()->ui->trackName, 0);
+}
+
+void
+Tab::onTrackDelayColumnDoubleClicked() {
+  onTrackNameOrDelayColumnDoubleClicked(p_func()->ui->delay, 1);
+}
+
+void
+Tab::onDefaultTrackFlagColumnDoubleClicked() {
+  auto &p = *p_func();
+
+  if (!p.ui->defaultTrackFlag->isEnabled())
+    return;
+
+  withSelectedTracks([&p](auto &track) {
+    Util::setComboBoxIndexIf(p.ui->defaultTrackFlag, [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == !track.m_defaultTrackFlag); });
+  }, true, p.ui->defaultTrackFlag);
+}
+
+void
+Tab::onForcedTrackFlagColumnDoubleClicked() {
+  auto &p = *p_func();
+
+  if (!p.ui->forcedTrackFlag->isEnabled())
+    return;
+
+  withSelectedTracks([&p](auto &track) {
+    Util::setComboBoxIndexIf(p.ui->forcedTrackFlag, [&track](auto const &, auto const &data) { return data.isValid() && (data.toBool() == !track.m_forcedTrackFlag); });
+  }, true, p.ui->forcedTrackFlag);
+}
+
+void
+Tab::onTracksDoubleClicked(QModelIndex const &idx) {
+  auto const column = idx.column();
+
+  if (column == TrackModel::LanguageColumn)
+    onTrackLanguageColumnDoubleClicked();
+
+  else if (column == TrackModel::NameColumn)
+    onTrackNameColumnDoubleClicked();
+
+  else if (column == TrackModel::DefaultTrackFlagColumn)
+    onDefaultTrackFlagColumnDoubleClicked();
+
+  else if (column == TrackModel::ForcedTrackFlagColumn)
+    onForcedTrackFlagColumnDoubleClicked();
+
+  else if (column == TrackModel::DelayColumn)
+    onTrackDelayColumnDoubleClicked();
+
+  else
+    toggleMuxThisForSelectedTracks();
 }
 
 void
