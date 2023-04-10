@@ -894,4 +894,19 @@ LanguageDialog::exec() {
   return result;
 }
 
+void
+LanguageDialog::reset() {
+  auto &p = *p_func();
+
+  if (Settings::get().m_bcp47LanguageEditingMode == Settings::BCP47LanguageEditingMode::FreeForm)
+    p.ui->rbFreeForm->setChecked(true);
+
+  else
+    p.ui->rbComponentSelection->setChecked(true);
+
+  p.ui->leFreeForm->setText({});
+
+  updateFromFreeForm();
+}
+
 }

@@ -40,6 +40,8 @@ public:
   void setLanguage(mtx::bcp47::language_c const &language);
   mtx::bcp47::language_c language() const;
 
+  void reset();
+
   void retranslateUi();
 
 public Q_SLOTS:

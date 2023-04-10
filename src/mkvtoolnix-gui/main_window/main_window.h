@@ -39,6 +39,9 @@ class Tool;
 namespace Ui {
 class MainWindow;
 }
+namespace Util {
+class LanguageDialog;
+}
 namespace WatchJobs {
 class Tab;
 class Tool;
@@ -120,6 +123,7 @@ public:                         // static
   static Jobs::Tool *jobTool();
   static WatchJobs::Tab *watchCurrentJobTab();
   static WatchJobs::Tool *watchJobTool();
+  static Util::LanguageDialog &languageDialog();
 #if defined(HAVE_UPDATE_CHECK)
   static QString versionStringForSettings(version_number_t const &version);
 #endif  // HAVE_UPDATE_CHECK
@@ -134,6 +138,7 @@ protected:
   virtual void setupAuxiliaryWidgets();
   virtual void setupDebuggingMenu();
   virtual QWidget *createNotImplementedWidget();
+  Util::LanguageDialog &setupLanguageDialog();
 
   virtual void showEvent(QShowEvent *event);
   virtual void closeEvent(QCloseEvent *event);

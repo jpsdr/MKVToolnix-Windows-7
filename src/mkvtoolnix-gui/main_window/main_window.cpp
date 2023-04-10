@@ -60,6 +60,7 @@ class MainWindowPrivate {
   HeaderEditor::Tool *toolHeaderEditor{};
   ChapterEditor::Tool *toolChapterEditor{};
   WatchJobs::Tool *watchJobTool{};
+  std::unique_ptr<Util::LanguageDialog> languageDialog;
   QList<QAction *> toolSelectionActions;
   bool queueIsRunning{};
   int spinnerIsSpinning{};
@@ -509,6 +510,8 @@ MainWindow::editRunProgramConfigurations() {
 
 void
 MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
+  auto &p = *p_func();
+
   PreferencesDialog dlg{this, page};
   if (!dlg.exec())
     return;
@@ -532,6 +535,8 @@ MainWindow::editPreferencesAndShowPage(PreferencesDialog::Page page) {
     app.reinitializeLanguageLists();
 
   mtx::bcp47::language_c::set_normalization_mode(Util::Settings::get().m_bcp47NormalizationMode);
+
+  p.languageDialog.release();
 
   Q_EMIT preferencesChanged();
 
@@ -938,5 +943,19 @@ MainWindow::handleMediaPlaybackError(QMediaPlayer::Error error,
     .exec();
 }
 #endif  // HAVE_QMEDIAPLAYER
+
+Util::LanguageDialog &
+MainWindow::setupLanguageDialog() {
+  auto p = p_func();
+
+  if (!p->languageDialog)
+    p->languageDialog.reset(new Util::LanguageDialog{nullptr});
+  return *p->languageDialog;
+}
+
+Util::LanguageDialog &
+MainWindow::languageDialog() {
+  return MainWindow::get()->setupLanguageDialog();
+}
 
 }

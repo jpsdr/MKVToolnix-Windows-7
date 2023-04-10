@@ -34,6 +34,9 @@
   "Forced track") or activate the corresponding control (columns "Language",
   "Name" & "Delay"). Double-clicks on other columns will do what they've done
   before, too: toggling the "Copy item" state. Implements #3513 & others.
+* MKVToolNix GUI: the dialog for editing language tags is now created only the
+  first time the user wants to edit a language tag & cached afterwards instead
+  of creating a new instance each time. This makes subsequent uses instant.
 
 ## Bug fixes
 

@@ -11,6 +11,7 @@
 #include "common/iso15924.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/util/language_display_widget.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/elide_label.h"
 #include "mkvtoolnix-gui/util/language_dialog.h"
 #include "mkvtoolnix-gui/util/language_display_widget.h"
@@ -67,9 +68,10 @@ LanguageDisplayWidget::enableClearingLanguage(bool enable) {
 
 void
 LanguageDisplayWidget::editLanguage() {
-  auto &p = *p_func();
+  auto &p   = *p_func();
+  auto &dlg = MainWindow::languageDialog();
 
-  LanguageDialog dlg{this};
+  dlg.reset();
 
   if (p.language.is_valid())
     dlg.setLanguage(p.language);
