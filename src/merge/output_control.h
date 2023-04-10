@@ -204,6 +204,8 @@ void force_close_output_file();
 void rerender_track_headers();
 std::string create_output_name();
 
+void maybe_set_segment_title(std::string const &title);
+
 void add_to_progress(int64_t num_bytes_processed);
 
 void add_split_points_from_remainig_chapter_numbers();

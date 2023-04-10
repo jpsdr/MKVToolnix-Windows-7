@@ -442,6 +442,15 @@ add_packetizer_globally(generic_packetizer_c *packetizer) {
   g_packetizers.push_back(pack);
 }
 
+void
+maybe_set_segment_title(std::string const &title) {
+  if (g_segment_title_set || title.empty())
+    return;
+
+  g_segment_title     = title;
+  g_segment_title_set = true;
+}
+
 static void
 set_timestamp_scale() {
   bool video_present          = false;

@@ -1834,10 +1834,7 @@ parse_arg_chapters(const std::string &param,
 
   auto cue_title = mtx::tags::get_simple_value("TITLE", *g_tags_from_cue_chapters);
 
-  if (!cue_title.empty()) {
-    g_segment_title     = cue_title;
-    g_segment_title_set = true;
-  }
+  maybe_set_segment_title(cue_title);
 }
 
 static void
