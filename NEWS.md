@@ -37,6 +37,9 @@
 * MKVToolNix GUI: the dialog for editing language tags is now created only the
   first time the user wants to edit a language tag & cached afterwards instead
   of creating a new instance each time. This makes subsequent uses instant.
+* mkvmerge: MP4 reader: the title/movie name meta data (content of the
+  `udta.meta.ilst.©nam` atom) will now be copied over as the segment title
+  track header attribute. Part of the implementation of #3475.
 
 ## Bug fixes
 

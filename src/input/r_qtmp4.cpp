@@ -1017,6 +1017,12 @@ qtmp4_reader_c::handle_ilst_atom(qt_atom_t parent,
 
     else if (atom.fourcc == "covr")
       handle_covr_atom(atom.to_parent(), level + 1);
+
+    else if (mtx::included_in(atom.fourcc,
+                              fourcc_c{0xa96e'616du},  // ©nam
+                              fourcc_c{0xa974'6f6fu},  // ©too
+                              fourcc_c{0xa963'6d74u})) // ©cmt
+      handle_ilst_metadata_atom(atom.to_parent(), level + 1, atom.fourcc);
   });
 }
 
@@ -1093,6 +1099,36 @@ qtmp4_reader_c::handle_covr_atom(qt_atom_t parent,
 
     } catch (mtx::exception const &ex) {
       mxdebug_if(m_debug_headers, fmt::format("{0}exception while reading cover art: {}\n", ex.what()));
+    }
+  });
+}
+
+void
+qtmp4_reader_c::handle_ilst_metadata_atom(qt_atom_t parent,
+                                          int level,
+                                          fourcc_c const &fourcc) {
+  process_atom(parent, level, [&](qt_atom_t const &atom) {
+    if (atom.fourcc != "data")
+      return;
+
+    size_t data_size = atom.size - atom.hsize;
+    if (data_size <= 8)
+      return;
+
+    try {
+      auto content = read_string_atom(atom, 8);
+
+      if (fourcc == fourcc_c{0xa96e'616du}) // ©nam
+        m_title = content;
+
+      else if (fourcc == fourcc_c{0xa974'6f6fu}) // ©too
+        m_encoder = content;
+
+      else if (fourcc == fourcc_c{0xa963'6d74u}) // ©cmt
+        m_comment = content;
+
+    } catch (mtx::exception const &ex) {
+      mxdebug_if(m_debug_headers, fmt::format("{0}exception while reading title: {}\n", ex.what()));
     }
   });
 }
@@ -2010,11 +2046,11 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
 
 void
 qtmp4_reader_c::create_packetizers() {
-  unsigned int i;
+  maybe_set_segment_title(m_title);
 
   m_main_dmx = -1;
 
-  for (i = 0; i < m_demuxers.size(); ++i)
+  for (unsigned int i = 0; i < m_demuxers.size(); ++i)
     create_packetizer(m_demuxers[i]->id);
 }
 
@@ -2031,12 +2067,16 @@ qtmp4_reader_c::get_maximum_progress() {
 void
 qtmp4_reader_c::identify() {
   unsigned int i;
+  auto info = mtx::id::info_c{};
 
-  id_result_container();
+  if (!m_title.empty())
+    info.add(mtx::id::title, m_title);
+
+  id_result_container(info.get());
 
   for (i = 0; i < m_demuxers.size(); ++i) {
     auto &dmx = *m_demuxers[i];
-    auto info = mtx::id::info_c{};
+    info      = mtx::id::info_c{};
 
     info.set(mtx::id::number, dmx.container_id);
     info.set(mtx::id::enabled_track, dmx.m_enabled);
