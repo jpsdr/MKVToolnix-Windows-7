@@ -40,6 +40,10 @@
 * mkvmerge: MP4 reader: the title/movie name meta data (content of the
   `udta.meta.ilst.©nam` atom) will now be copied over as the segment title
   track header attribute. Part of the implementation of #3475.
+* mkvmerge: MP4 reader: the comment & encoder meta data (content of the
+  `udta.meta.ilst.©cmt` & `….©too` atoms) will now be copied over as global
+  tags `COMMENT` & `ENCODER` respectively. Part of the implementation of
+  #3475.
 
 ## Bug fixes
 

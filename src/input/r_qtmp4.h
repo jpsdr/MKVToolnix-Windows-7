@@ -461,6 +461,7 @@ private:
   std::vector<qtmp4_demuxer_cptr> m_demuxers;
   std::unordered_map<unsigned int, bool> m_chapter_track_ids;
   std::unordered_map<unsigned int, qt_track_defaults_t> m_track_defaults;
+  std::unique_ptr<libmatroska::KaxTags> m_tags;
 
   int64_t m_time_scale{1};
   fourcc_c m_compression_algorithm;
@@ -515,6 +516,9 @@ protected:
   virtual void calculate_timestamps();
   virtual std::optional<int64_t> calculate_global_min_timestamp() const;
   virtual void calculate_num_bytes_to_process();
+
+  virtual void create_global_tags_from_meta_data();
+  virtual void process_global_tags();
 
   virtual qt_atom_t read_atom(mm_io_c *read_from = nullptr, bool exit_on_error = true);
   virtual bool resync_to_top_level_atom(uint64_t start_pos);
