@@ -1,3 +1,11 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix GUI: the defunct "disable the dark mode" checkbox was removed
+  from the preferences.
+
+
 # Version 76.0 "Celebration" 2023-04-30
 
 ## Important notes
