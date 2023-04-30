@@ -7,7 +7,7 @@ class T_0260version_numbers < Test
 
   def run
     %w{merge info extract propedit}.each do |name|
-      sys "../src/mkv#{name} --version | grep -E 'v([0-9]{1,2}\\.){2}[0-9]+'"
+      sys "../src/mkv#{name} --version | grep -E 'v[0-9]{1,3}(\\.[0-9]+){1,2}'"
     end
 
     return 'ok'
