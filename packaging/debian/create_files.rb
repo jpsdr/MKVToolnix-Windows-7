@@ -77,6 +77,7 @@ def parse_lsb_release
 
   $distribution         = values["DISTRIB_ID"]
   version               = (values["DISTRIB_RELEASE"] || '').gsub(%r{[^\d.].*}, '')
+  version               = version.gsub(%r{\..*}, '') if ($distribution.downcase == 'linuxmint')
   $distribution_version = version != '' ? version : nil
 
   return false # $distribution && $distribution_version
@@ -90,7 +91,7 @@ def parse_sources_list
 
   ### Ubuntu
 
-  if content.any? { |line| %r{linuxming.*vanessa}.match(line) }
+  if content.any? { |line| %r{linuxming.*(vanessa|vera|victoria)}.match(line) }
     $distribution         = 'linuxmint'
     $distribution_version = '21'
     return true
