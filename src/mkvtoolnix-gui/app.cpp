@@ -574,15 +574,20 @@ App::setupAppearance() {
 #if defined(SYS_WINDOWS)
 void
 App::setupColorMode() {
-  if (isWindows11OrLater())
-    return;
-
   QSettings regKey{Q("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"), QSettings::NativeFormat};
 
   auto useLightTheme = regKey.value(Q("AppsUseLightTheme"));
 
   if (!useLightTheme.isValid() || useLightTheme.toBool())
     return;
+
+  if (isWindows11OrLater()) {
+    auto darkPalette = palette();
+    darkPalette.setColor(QPalette::Link, QColor{29, 153, 243});
+    setPalette(darkPalette);
+
+    return;
+  }
 
   QPalette darkPalette;
   auto darkColor     = QColor{45, 45, 45};

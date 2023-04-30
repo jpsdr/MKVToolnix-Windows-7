@@ -4,6 +4,9 @@
 
 * MKVToolNix GUI: the defunct "disable the dark mode" checkbox was removed
   from the preferences.
+* MKVToolNix GUI: Windows 11: if Windows 11's dark application mode is active,
+  links are now displayed in lighter blue, making them much easier to
+  read. This circumvents a bug in Qt 6.5.0.
 
 
 # Version 76.0 "Celebration" 2023-04-30
