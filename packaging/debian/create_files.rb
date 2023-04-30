@@ -80,7 +80,7 @@ def parse_lsb_release
   version               = version.gsub(%r{\..*}, '') if ($distribution.downcase == 'linuxmint')
   $distribution_version = version != '' ? version : nil
 
-  return false # $distribution && $distribution_version
+  return $distribution && $distribution_version
 end
 
 def parse_sources_list
