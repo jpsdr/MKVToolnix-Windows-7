@@ -7,6 +7,7 @@
 #include <QTemporaryFile>
 
 #include "common/qt.h"
+#include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/string.h"
@@ -16,11 +17,7 @@ namespace mtx::gui::Util {
 void
 OptionFile::create(QString const &fileName,
                    QStringList const &options) {
-  QFile file{fileName};
-  file.open(QIODevice::WriteOnly | QIODevice::Truncate);
-  write(file, options);
-  file.flush();
-  file.close();
+  Util::saveTextToFile(fileName, escape(options, EscapeJSON)[0]);
 }
 
 std::unique_ptr<QTemporaryFile>
@@ -31,19 +28,12 @@ OptionFile::createTemporary(QString const &prefix,
   if (!file->open())
     throw ProcessX{ to_utf8(QY("Error creating a temporary file (reason: %1).").arg(file->errorString())) };
 
-  write(*file, options);
+  auto serialized = to_utf8(escape(options, EscapeJSON)[0]);
 
+  file->write(serialized.c_str());
   file->close();
 
   return file;
-}
-
-void
-OptionFile::write(QFile &file,
-                  QStringList const &options) {
-  auto serialized = to_utf8(escape(options, EscapeJSON)[0]);
-
-  file.write(serialized.c_str());
 }
 
 }

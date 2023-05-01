@@ -394,18 +394,8 @@ Tab::onSaveOutput() {
   auto txtName  = Util::replaceInvalidFileNameCharacters(p->m_currentJobDescription) + Q(".txt");
   auto fileName = Util::getSaveFileName(this, QY("Save job output"), cfg.lastOpenDirPath(), txtName, QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"), Q("txt"));
 
-  if (fileName.isEmpty())
-    return;
-
-  QFile out{fileName};
-  if (out.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-    out.write(Q("%1\n").arg(p->m_fullOutput.join(Q("\n"))).toUtf8());
-    out.flush();
-    out.close();
-  }
-
-  cfg.m_lastOpenDir.setPath(QFileInfo{fileName}.path());
-  cfg.save();
+  if (!fileName.isEmpty())
+    Util::saveTextToFile(fileName, p->m_fullOutput);
 }
 
 std::optional<uint64_t>

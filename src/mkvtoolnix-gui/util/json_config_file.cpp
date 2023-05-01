@@ -9,6 +9,7 @@
 
 #include "common/qt.h"
 #include "common/json.h"
+#include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/json.h"
 #include "mkvtoolnix-gui/util/json_config_file.h"
 
@@ -107,16 +108,11 @@ JsonConfigFile::load() {
 void
 JsonConfigFile::save() {
   QFileInfo{m_fileName}.dir().mkpath(".");
-  QFile out{m_fileName};
-
-  if (!out.open(QIODevice::WriteOnly | QIODevice::Truncate))
-    return;
 
   auto json = groupToJson(*m_rootGroup);
   auto dump = mtx::json::dump(json, jsonIndentation());
-  out.write(QByteArray::fromRawData(dump.data(), dump.size()));
-  out.flush();
-  out.close();
+
+  Util::saveTextToFile(m_fileName, Q(dump));
 }
 
 void
