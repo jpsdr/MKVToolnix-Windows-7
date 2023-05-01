@@ -24,4 +24,7 @@ QStringList replaceDirectoriesByContainedFiles(QStringList const &namesToCheck);
 
 QString detectMIMEType(QString const &fileName);
 
+void saveTextToFile(QString const &fileName, QString const &content);
+void saveTextToFile(QString const &fileName, QStringList const &content);
+
 }

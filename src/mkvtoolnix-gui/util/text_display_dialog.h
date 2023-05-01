@@ -30,11 +30,13 @@ public:
 
   TextDisplayDialog &setTitle(QString const &title);
   TextDisplayDialog &setText(QString const &text, Format format);
+  TextDisplayDialog &setSaveInfo(QString const &defaultFileName, QString const &filter, QString const &defaultSuffix);
 
   virtual bool eventFilter(QObject *o, QEvent *e) override;
 
 public Q_SLOTS:
   virtual void copyToClipboard();
+  virtual void save();
 };
 
 }

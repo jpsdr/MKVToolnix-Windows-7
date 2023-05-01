@@ -653,7 +653,8 @@ MainWindow::showCodeOfConduct() {
 
   QFile coc{Q(":/CODE_OF_CONDUCT.md")};
   if (coc.open(QIODevice::ReadOnly))
-    dlg.setText(Q(std::string{coc.readAll().constData()}), Util::TextDisplayDialog::Format::Markdown);
+    dlg.setText(Q(std::string{coc.readAll().constData()}), Util::TextDisplayDialog::Format::Markdown)
+      .setSaveInfo(Q("mkvtoolnix_code_of_conduct.md"), QY("Markdown files"), Q("md"));
 
   dlg.exec();
 }
@@ -664,6 +665,7 @@ MainWindow::showSystemInformation() {
 
   dlg.setTitle(QY("System information"))
     .setText(Util::gatherSystemInformation(), Util::TextDisplayDialog::Format::Markdown)
+    .setSaveInfo(Q("mkvtoolnix_gui_system_information.md"), QY("Markdown files"), Q("md"))
     .exec();
 }
 

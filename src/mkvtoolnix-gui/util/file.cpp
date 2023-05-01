@@ -13,7 +13,9 @@
 #include "common/mm_proxy_io.h"
 #include "common/mm_text_io.h"
 #include "common/qt.h"
+#include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/file.h"
+#include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
 
@@ -129,6 +131,35 @@ QString
 detectMIMEType(QString const &fileName) {
   auto mimeType = ::mtx::mime::guess_type_for_file(to_utf8(fileName));
   return Q(::mtx::mime::maybe_map_to_legacy_font_mime_type(mimeType, Util::Settings::get().m_useLegacyFontMIMETypes));
+}
+
+void
+saveTextToFile(QString const &fileName,
+               QStringList const &content) {
+  saveTextToFile(fileName, content.join(Q("\n")) + Q("\n"));
+}
+
+void
+saveTextToFile(QString const &fileName,
+               QString const &content) {
+  QFile out{fileName};
+
+  if (!out.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+    MessageBox::critical(MainWindow::get())
+      ->title(QY("Saving failed"))
+      .text(QY("Saving the file failed. Error message from the system: %1").arg(out.errorString()))
+      .exec();
+
+    return;
+  }
+
+  out.write(content.toUtf8());
+  out.flush();
+  out.close();
+
+  auto &cfg = Util::Settings::get();
+  cfg.m_lastOpenDir.setPath(QFileInfo{fileName}.path());
+  cfg.save();
 }
 
 }

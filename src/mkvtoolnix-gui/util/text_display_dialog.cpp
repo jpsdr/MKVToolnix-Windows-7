@@ -8,6 +8,9 @@
 #include "common/markdown.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/util/text_display_dialog.h"
+#include "mkvtoolnix-gui/util/file.h"
+#include "mkvtoolnix-gui/util/file_dialog.h"
+#include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/text_display_dialog.h"
 
 namespace mtx::gui::Util {
@@ -16,7 +19,7 @@ class TextDisplayDialogPrivate {
   friend class TextDisplayDialog;
 
   std::unique_ptr<Ui::TextDisplayDialog> ui;
-  QString m_text;
+  QString m_text, m_saveDefaultFileName, m_saveFilter, m_saveDefaultSuffix;
   TextDisplayDialog::Format m_format{TextDisplayDialog::Format::Plain};
 
   TextDisplayDialogPrivate()
@@ -35,9 +38,11 @@ TextDisplayDialog::TextDisplayDialog(QWidget *parent)
   p->ui->setupUi(this);
 
   p->ui->text->installEventFilter(this);
+  p->ui->pbSave->hide();
 
   connect(p->ui->pbClose,           &QPushButton::clicked, this, &TextDisplayDialog::accept);
   connect(p->ui->pbCopyToClipboard, &QPushButton::clicked, this, &TextDisplayDialog::copyToClipboard);
+  connect(p->ui->pbSave,            &QPushButton::clicked, this, &TextDisplayDialog::save);
 }
 
 TextDisplayDialog::~TextDisplayDialog() {
@@ -74,9 +79,34 @@ TextDisplayDialog::setText(QString const &text,
   return *this;
 }
 
+TextDisplayDialog &
+TextDisplayDialog::setSaveInfo(QString const &defaultFileName,
+                               QString const &filter,
+                               QString const &defaultSuffix) {
+  auto &p                 = *p_func();
+  p.m_saveDefaultFileName = defaultFileName;
+  p.m_saveFilter          = filter;
+  p.m_saveDefaultSuffix   = defaultSuffix;
+
+  p.ui->pbSave->show();
+
+  return *this;
+}
+
 void
 TextDisplayDialog::copyToClipboard() {
   QApplication::clipboard()->setText(p_func()->m_text);
+}
+
+void
+TextDisplayDialog::save() {
+  auto &p       = *p_func();
+  auto &cfg     = Util::Settings::get();
+  auto filter   = Q("%1 (*.%2);;%3 (*)").arg(p.m_saveFilter).arg(p.m_saveDefaultSuffix).arg(QY("All files"));
+  auto fileName = Util::getSaveFileName(this, QY("Save"), cfg.lastOpenDirPath(), p.m_saveDefaultFileName, filter, p.m_saveDefaultSuffix);
+
+  if (!fileName.isEmpty())
+    Util::saveTextToFile(fileName, p.m_text);
 }
 
 bool
