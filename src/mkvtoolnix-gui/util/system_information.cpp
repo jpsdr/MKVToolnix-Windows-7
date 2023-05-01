@@ -178,7 +178,7 @@ gatherEnvironmentVariables(QStringList &info) {
   info << Q("") << Q("## Environment variables") << Q("");
 
   auto keys = QStringList{} << Q("QT_AUTO_SCREEN_SCALE_FACTOR") << Q("QT_SCALE_FACTOR") << Q("QT_SCREEN_SCALE_FACTORS") << Q("QT_DEVICE_PIXEL_RATIO") << Q("QT_SCALE_FACTOR_ROUNDING_POLICY")
-                            << Q("QT_STYLE_OVERRIDE")           << Q("QT_QPA_PLATFORMTHEME")
+                            << Q("QT_STYLE_OVERRIDE")           << Q("QT_QPA_PLATFORM") << Q("QT_QPA_PLATFORMTHEME")    << Q("QT_QPA_GENERIC_PLUGINS")
                             << Q("MTX_LOGGER")                  << Q("MTX_DEBUG")       << Q("MKVTOOLNIX_DEBUG")        << Q("MKVMERGE_DEBUG")
                             << Q("LC_ALL")                      << Q("LC_MESSAGES")     << Q("LC_CTYPE")                << Q("LANG") << Q("LANGUAGE");
   keys.sort();
