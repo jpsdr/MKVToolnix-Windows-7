@@ -123,6 +123,9 @@ public:
   static QString settingsBaseGroupName();
 
   static void fixLockFileHostName(QString const &lockFilePath);
+
+  static void registerOriginalCLIArgs(int argc, char **argv);
+  static QStringList const &originalCLIArgs();
 };
 
 }

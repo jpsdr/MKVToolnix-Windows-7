@@ -74,6 +74,24 @@ gatherGeneralInfo(QStringList &info) {
   info << Q("* INI file location: %1").arg(QDir::toNativeSeparators(Util::Settings::iniFileName()));
   info << Q("* Job queue location: %1").arg(QDir::toNativeSeparators(Jobs::Job::queueLocation()));
 
+  //
+  // Original command-line arguments
+  //
+
+  info << QString{} << Q("## Original command-line arguments") << QString{};
+  auto &args = App::originalCLIArgs();
+
+  if (args.isEmpty())
+    info << Q("The application was started without command-line arguments.");
+
+  else
+    for (auto const &arg : args)
+      info << Q("* `%1`").arg(arg);
+
+  //
+  // Installation problems
+  //
+
   info << Q("") << Q("## Installation problems") << Q("");
 
   auto problems = checker.problems();

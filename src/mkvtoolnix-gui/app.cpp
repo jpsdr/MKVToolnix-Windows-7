@@ -59,6 +59,7 @@ static Iso639LanguageList s_iso639Languages, s_iso639_2Languages, s_commonIso639
 static RegionList s_regions, s_commonRegions;
 static CharacterSetList s_characterSets, s_commonCharacterSets;
 static QHash<QString, QString> s_iso639_2LanguageCodeToDescription, s_regionToDescription;
+static QStringList s_originalCLIArgs;
 
 static std::optional<bool> s_is_installed;
 
@@ -645,6 +646,18 @@ App::run() {
   MainWindow::mergeTool()->addMergeTabIfNoneOpen();
 
   exec();
+}
+
+void
+App::registerOriginalCLIArgs(int argc,
+                             char **argv) {
+  for (int arg = 1; (arg < argc) && argv[arg]; ++arg)
+    s_originalCLIArgs << Q(argv[arg]);
+}
+
+QStringList const &
+App::originalCLIArgs() {
+  return s_originalCLIArgs;
 }
 
 }

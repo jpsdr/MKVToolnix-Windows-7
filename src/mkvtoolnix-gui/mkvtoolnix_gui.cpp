@@ -95,6 +95,8 @@ main(int argc,
 
   registerMetaTypes();
 
+  App::registerOriginalCLIArgs(argc, argv);
+
   auto app = std::make_unique<App>(argc, argv);
 
   app->run();
