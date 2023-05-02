@@ -197,4 +197,13 @@ format_windows_message(uint64_t message_id) {
   return mtx::string::chomp(message);
 }
 
+bool
+is_high_contrast_enabled() {
+  BOOL result;
+  if (SystemParametersInfo(SPI_GETHIGHCONTRAST, 0, &result, 0))
+    return result != FALSE;
+
+  return false;
+}
+
 }

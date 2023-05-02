@@ -50,6 +50,8 @@ constexpr auto WINDOWS_VERSION_7            = 0x00060001;
 unsigned int get_windows_version();
 std::string format_windows_message(uint64_t message_id);
 
+bool is_high_contrast_enabled();
+
 #endif  // SYS_WINDOWS
 
 #if defined(SYS_APPLE)
