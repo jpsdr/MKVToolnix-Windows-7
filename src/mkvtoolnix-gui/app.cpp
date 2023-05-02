@@ -575,14 +575,23 @@ App::setupAppearance() {
 #if defined(SYS_WINDOWS)
 void
 App::setupColorMode() {
-  QSettings regKey{Q("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"), QSettings::NativeFormat};
+  enum Palette {
+    OsLight,
+    OsDark,
+    LegacyDark,
+  };
 
-  auto useLightTheme = regKey.value(Q("AppsUseLightTheme"));
+  auto const &cfg                 = Util::Settings::get();
+  auto const regAppsUseLightTheme = QSettings{Q("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"), QSettings::NativeFormat}.value(Q("AppsUseLightTheme"));
+  auto const paletteToUse         = App::isWindows11OrLater() && cfg.m_uiForceLegacyDarkPalette      ? Palette::LegacyDark
+                                  : !regAppsUseLightTheme.isValid() || regAppsUseLightTheme.toBool() ? Palette::OsLight
+                                  : App::isWindows11OrLater()                                        ? Palette::OsDark
+                                  :                                                                    Palette::LegacyDark;
 
-  if (!useLightTheme.isValid() || useLightTheme.toBool())
+  if (paletteToUse == Palette::OsLight)
     return;
 
-  if (isWindows11OrLater()) {
+  if (paletteToUse == Palette::OsDark) {
     auto darkPalette = palette();
     darkPalette.setColor(QPalette::Link, QColor{29, 153, 243});
     setPalette(darkPalette);

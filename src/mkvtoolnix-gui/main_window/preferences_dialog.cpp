@@ -71,6 +71,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   ui->cbGuiWarnBeforeOverwriting->setChecked(m_cfg.m_warnBeforeOverwriting);
   ui->sbGuiNumRecentlyUsedStrings->setValue(m_cfg.m_numRecentlyUsedStringsToRemember);
   setupFontAndScaling();
+  setupForceLegacyDarkPalette();
   setupInterfaceLanguage();
   setupTabPositions();
   setupBCP47LanguageEditMode();
@@ -320,6 +321,12 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("If enabled, the GUI will use legacy MIME types when detecting the MIME type of font attachments instead of the current standard MIME types."))
                    .arg(QY("This mostly affects TrueType fonts for which the legacy MIME type ('application/x-truetype-font') might be more widely supported than the standard MIME types ('font/sfnt' and 'font/ttf').")));
+
+  Util::setToolTip(ui->cbGuiForceLegacyDarkPalette,
+                   Q("%1 %2 %3")
+                   .arg(QY("If enabled, the legacy dark palette will be used, no matter which color mode is enabled for applications in the operating system."))
+                   .arg(QY("Enable this option as a workaround for a bug in Qt if MKVToolNix uses the light palette on your Windows installation even though Windows' application color mode is set to 'dark'."))
+                   .arg(QY("Changes to this option will only take effect the next time the application is started.")));
 
   Util::setToolTip(ui->cbGuiWarnBeforeOverwriting, QY("If enabled, the program will ask for confirmation before overwriting files and jobs."));
 
@@ -650,6 +657,16 @@ PreferencesDialog::setupInterfaceLanguage() {
 
   Util::fixComboBoxViewWidth(*ui->cbGuiInterfaceLanguage);
 #endif  // HAVE_LIBINTL_H
+}
+
+void
+PreferencesDialog::setupForceLegacyDarkPalette() {
+  if (App::isWindows11OrLater()) {
+    ui->cbGuiForceLegacyDarkPalette->show();
+    ui->cbGuiForceLegacyDarkPalette->setChecked(m_cfg.m_uiForceLegacyDarkPalette);
+
+  } else
+    ui->cbGuiForceLegacyDarkPalette->hide();
 }
 
 void
@@ -1095,6 +1112,7 @@ PreferencesDialog::save() {
   m_cfg.m_bcp47NormalizationMode                              = static_cast<mtx::bcp47::normalization_mode_e>(ui->cbGuiBCP47NormalizationMode->currentData().toInt());
   m_cfg.m_uiFontFamily                                        = ui->fcbGuiFontFamily->currentFont().family();
   m_cfg.m_uiFontPointSize                                     = ui->sbGuiFontPointSize->value();
+  m_cfg.m_uiForceLegacyDarkPalette                            = ui->cbGuiForceLegacyDarkPalette->isChecked();
   m_cfg.m_numRecentlyUsedStringsToRemember                    = ui->sbGuiNumRecentlyUsedStrings->value();
   m_cfg.m_uiStayOnTop                                         = ui->cbGuiStayOnTop->isChecked();
   m_cfg.m_uiDisableHighDPIScaling                             = ui->cbGuiDisableHighDPIScaling->isChecked();

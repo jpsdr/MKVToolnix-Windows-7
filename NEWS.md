@@ -7,6 +7,13 @@
 * MKVToolNix GUI: Windows 11: if Windows 11's dark application mode is active,
   links are now displayed in lighter blue, making them much easier to
   read. This circumvents a bug in Qt 6.5.0.
+* MKVToolNix GUI: Windows 11: due to a bug in Qt 6.5.0 the dark palette will
+  not be enabled on certain installations. For those situations a new option
+  was added to the preferences called "Force the use of the legacy dark
+  palette" which forces MKVToolNix GUI to use the legacy dark palette, no
+  matter what Windows 11's application color mode is set to. This option will
+  be removed once the bug in Qt has been fixed. This is a workaround for
+  #3528.
 
 
 # Version 76.0 "Celebration" 2023-04-30

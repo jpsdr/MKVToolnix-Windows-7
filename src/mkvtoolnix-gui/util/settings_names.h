@@ -134,6 +134,7 @@ char const * const s_valUiDisableHighDPIScaling                   = "uiDisableHi
 char const * const s_valUiDisableToolTips                         = "uiDisableToolTips";
 char const * const s_valUiFontFamily                              = "uiFontFamily";
 char const * const s_valUiFontPointSize                           = "uiFontPointSize";
+char const * const s_valUiForceLegacyDarkPalette                  = "uiForceLegacyDarkPalette";
 char const * const s_valUiLocale                                  = "uiLocale";
 char const * const s_valUiStayOnTop                               = "uiStayOnTop";
 char const * const s_valUniqueOutputFileNames                     = "uniqueOutputFileNames";

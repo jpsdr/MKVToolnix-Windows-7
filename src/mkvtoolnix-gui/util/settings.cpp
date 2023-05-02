@@ -606,6 +606,7 @@ Settings::load() {
   m_uiFontFamily                              = reg.value(s_valUiFontFamily,                                                                   defaultFont.family()).toString();
   m_uiFontPointSize                           = reg.value(s_valUiFontPointSize,                                                                defaultFont.pointSize()).toInt();
   m_uiStayOnTop                               = reg.value(s_valUiStayOnTop,                                                                    false).toBool();
+  m_uiForceLegacyDarkPalette                  = reg.value(s_valUiForceLegacyDarkPalette,                                                       false).toBool();
 
   m_showDebuggingMenu                         = reg.value(s_valShowDebuggingMenu,                                                              false).toBool();
 
@@ -1041,6 +1042,7 @@ Settings::save()
   reg.setValue(s_valUiFontFamily,                              m_uiFontFamily);
   reg.setValue(s_valUiFontPointSize,                           m_uiFontPointSize);
   reg.setValue(s_valUiStayOnTop,                               m_uiStayOnTop);
+  reg.setValue(s_valUiForceLegacyDarkPalette,                  m_uiForceLegacyDarkPalette);
 
   reg.setValue(s_valMediaInfoExe,                              m_mediaInfoExe);
 
