@@ -661,12 +661,15 @@ PreferencesDialog::setupInterfaceLanguage() {
 
 void
 PreferencesDialog::setupForceLegacyDarkPalette() {
+#if defined(SYS_WINDOWS)
   if (App::isWindows11OrLater()) {
     ui->cbGuiForceLegacyDarkPalette->show();
     ui->cbGuiForceLegacyDarkPalette->setChecked(m_cfg.m_uiForceLegacyDarkPalette);
+    return;
+  }
+#endif
 
-  } else
-    ui->cbGuiForceLegacyDarkPalette->hide();
+  ui->cbGuiForceLegacyDarkPalette->hide();
 }
 
 void
