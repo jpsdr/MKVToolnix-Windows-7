@@ -110,8 +110,8 @@ protected:
 private:
   template<typename... Args>
   bool
-  all(Args... args) {
-    return (... && args);
+  any(Args... args) {
+    return (... || args);
   }
 
   template<typename T>
@@ -173,10 +173,10 @@ public:
   add_joined(std::string const &key,
              std::string const &separator,
              Tvalues... values) {
-    if (!all(values...))
-      return *this;
+    if (any(values...))
+      return add(key, join(separator, values...));
 
-    return add(key, join(separator, values...));
+    return *this;
   }
 
   verbose_info_t const &get() const {

@@ -31,6 +31,9 @@
   all following times, potentially leaving previously selected/entered entries
   intact, primarily when editing multiple tracks at once. Part of the fix of
   #3532.
+* mkvmerge: JSON identification: cropping parameters are reported again even
+  if some of the four values are not present in the file or set to 0. Fixes
+  #3534.
 
 
 # Version 76.0 "Celebration" 2023-04-30
