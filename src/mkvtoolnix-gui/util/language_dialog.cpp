@@ -904,6 +904,8 @@ LanguageDialog::reset() {
   else
     p.ui->rbComponentSelection->setChecked(true);
 
+  setupFreeFormAndComponentControls();
+
   p.ui->leFreeForm->setText({});
 
   updateFromFreeForm();

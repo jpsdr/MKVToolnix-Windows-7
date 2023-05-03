@@ -14,6 +14,10 @@
   matter what Windows 11's application color mode is set to. This option will
   be removed once the bug in Qt has been fixed. This is a workaround for
   #3528.
+* MKVToolNix GUI: language dialog: under certain conditions the controls for
+  the individual components remained disabled when the dialog is opened even
+  though editing of individual components is selected. Part of the fix of
+  #3532.
 
 
 # Version 76.0 "Celebration" 2023-04-30
