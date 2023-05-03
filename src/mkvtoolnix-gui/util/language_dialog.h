@@ -45,7 +45,7 @@ public:
   void retranslateUi();
 
 public Q_SLOTS:
-  void updateFromFreeForm();
+  void updateFromFreeForm(bool force = false);
   void updateFromComponents();
 
   void addVariantRowAndUpdateLayout();
@@ -83,7 +83,7 @@ protected:
   QVector<QWidget *> allComponentWidgetsMatchingName(QRegularExpression const &matcher);
 
   mtx::bcp47::language_c languageTagFromComponents();
-  void setComponentsFromLanguageTag(mtx::bcp47::language_c const &tag);
+  void setComponentsFromLanguageTag(mtx::bcp47::language_c const &tag, bool force);
 
   void setStatusFromLanguageTag(mtx::bcp47::language_c const &tag);
   void setMultipleWidgetsTexts(QString const &objectNamePrefix, std::vector<std::string> const &values);

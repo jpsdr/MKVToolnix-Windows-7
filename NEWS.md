@@ -18,6 +18,11 @@
   the individual components remained disabled when the dialog is opened even
   though editing of individual components is selected. Part of the fix of
   #3532.
+* MKVToolNix GUI: language dialog: the controls for the individual components
+  weren't re-initialized properly after opening the dialog for the second &
+  all following times, potentially leaving previously selected/entered entries
+  intact, primarily when editing multiple tracks at once. Part of the fix of
+  #3532.
 
 
 # Version 76.0 "Celebration" 2023-04-30

@@ -410,7 +410,7 @@ LanguageDialog::setupFreeFormAndComponentControls() {
       else
         disconnect(static_cast<QLineEdit *>(widget), &QLineEdit::textChanged,                                                nullptr, nullptr);
 
-    connect(p.ui->leFreeForm, &QLineEdit::textChanged, this, &LanguageDialog::updateFromFreeForm);
+    connect(p.ui->leFreeForm, &QLineEdit::textChanged, this, [this]() { updateFromFreeForm(); });
 
     p.ui->leFreeForm->setFocus();
 
@@ -758,10 +758,11 @@ LanguageDialog::setMultipleWidgetsTexts(QString const &objectNamePrefix,
 }
 
 void
-LanguageDialog::setComponentsFromLanguageTag(mtx::bcp47::language_c const &tag) {
+LanguageDialog::setComponentsFromLanguageTag(mtx::bcp47::language_c const &tag,
+                                             bool force) {
   auto &p = *p_func();
 
-  if (!tag.is_valid())
+  if (!tag.is_valid() && !force)
     return;
 
   reinitializeLanguageComboBox();
@@ -826,11 +827,11 @@ LanguageDialog::languageTagFromComponents() {
 }
 
 void
-LanguageDialog::updateFromFreeForm() {
+LanguageDialog::updateFromFreeForm(bool force) {
   auto &p  = *p_func();
   auto tag = mtx::bcp47::language_c::parse(to_utf8(p.ui->leFreeForm->text()), mtx::bcp47::normalization_mode_e::none);
 
-  setComponentsFromLanguageTag(tag);
+  setComponentsFromLanguageTag(tag, force);
 
   setStatusFromLanguageTag(tag);
   enableNormalizeActions(tag);
@@ -908,7 +909,7 @@ LanguageDialog::reset() {
 
   p.ui->leFreeForm->setText({});
 
-  updateFromFreeForm();
+  updateFromFreeForm(true);
 }
 
 }
