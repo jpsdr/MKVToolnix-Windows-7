@@ -1,5 +1,13 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: the default list colors used for distinguishing
+  source files does not include the darkest tier anymore (the ones where one
+  or two components are set to the value 0x3f) as they're hard to distinguish
+  from each other. Only affects new installations, or when the user presses
+  the "reset to default colors" button. Implements #3533.
+
 ## Bug fixes
 
 * MKVToolNix GUI: the defunct "disable the dark mode" checkbox was removed

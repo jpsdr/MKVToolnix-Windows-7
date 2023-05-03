@@ -1382,13 +1382,14 @@ Settings::defaultFileColors() {
   colors.clear();
   colors.reserve(6 * (256 / step));
 
-  for (int value = 255; value > 0; value -= step) {
-    colors << QColor{0,     value, 0};
-    colors << QColor{0,     0,     value};
-    colors << QColor{value, 0,     0};
-    colors << QColor{value, value, 0};
-    colors << QColor{value, 0,     value};
-    colors << QColor{0,     value, value};
+  for (int value = 255; value > step; value -= step) {
+    colors << QColor{0,            value,        0};
+    colors << QColor{0,            0,            value};
+    colors << QColor{value,        0,            0};
+    colors << QColor{value,        value,        0};
+    colors << QColor{value,        0,            value};
+    colors << QColor{0,            value,        value};
+    colors << QColor{value - step, value - step, value - step};
   }
 
   return colors;
