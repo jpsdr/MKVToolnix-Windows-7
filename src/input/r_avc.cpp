@@ -14,13 +14,10 @@
 #include "common/common_pch.h"
 
 #include "common/avc_hevc/util.h"
-#include "common/byte_buffer.h"
 #include "common/codec.h"
-#include "common/error.h"
 #include "common/memory.h"
 #include "common/id_info.h"
 #include "input/r_avc.h"
-#include "merge/input_x.h"
 #include "merge/file_status.h"
 #include "output/p_avc_es.h"
 

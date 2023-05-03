@@ -18,7 +18,6 @@
 #include "common/codec.h"
 #include "common/debugging.h"
 #include "common/dts.h"
-#include "common/error.h"
 #include "common/id_info.h"
 #include "common/mm_io_x.h"
 #include "input/r_dts.h"

@@ -13,7 +13,6 @@
 
 #include "common/common_pch.h"
 
-#include "common/strings/formatting.h"
 #include "merge/generic_packetizer.h"
 #include "input/aac_framing_packet_converter.h"
 

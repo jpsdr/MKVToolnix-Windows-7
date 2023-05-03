@@ -13,13 +13,10 @@
 
 #include "common/common_pch.h"
 
-#include "common/list_utils.h"
 #include "common/mm_proxy_io.h"
-#include "common/strings/formatting.h"
 #include "common/tags/tags.h"
 #include "merge/generic_packetizer.h"
 #include "merge/generic_reader.h"
-#include "merge/input_x.h"
 #include "merge/output_control.h"
 
 static mtx_mp_rational_t s_probe_range_percentage{3, 10}; // 0.3%

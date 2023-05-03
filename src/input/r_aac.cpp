@@ -16,7 +16,6 @@
 #include <algorithm>
 
 #include "common/codec.h"
-#include "common/error.h"
 #include "common/id3.h"
 #include "common/id_info.h"
 #include "input/r_aac.h"

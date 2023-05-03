@@ -20,7 +20,6 @@
 #include "common/ebml.h"
 #include "common/hacks.h"
 #include "common/strings/formatting.h"
-#include "common/tags/tags.h"
 #include "common/translation.h"
 #include "merge/cluster_helper.h"
 #include "merge/cues.h"
