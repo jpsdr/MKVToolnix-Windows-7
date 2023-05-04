@@ -163,7 +163,7 @@ msgstr "  --chapter-charset <cset> - Кодировка для простого 
 #: src/merge/mkvmerge.cpp:99
 #, no-c-format
 msgid "  --chapter-language <lng> Set the 'language' element in chapter entries.\n"
-msgstr "  --chapter-language <lng> - Устанавливает элемент «язык» в записях глав.\n"
+msgstr "  --chapter-language <lng> - Устанавливает элемент \"язык\" в записях глав.\n"
 
 #: src/merge/mkvmerge.cpp:101
 #, no-c-format
@@ -700,11 +700,7 @@ msgid ""
 "                           Sets the stereo mode parameter. It can\n"
 "                           either be a number 0 - 14 or a keyword\n"
 "                           (use '--list-stereo-modes' to see the full list).\n"
-msgstr ""
-"  --stereo-mode <TID:n|keyword>\n"
-"                           Задаёт параметр режима стерео. Может\n"
-"                           быть числом 0 - 14 или ключевым словом\n"
-"                           («--list-stereo-modes» для вывода полного списка).\n"
+msgstr "  --stereo-mode <TID:n|keyword> - Задаёт параметр режима стерео. Может быть числом 0 - 14 или ключевым словом (\"--list-stereo-modes\" для вывода полного списка).\n"
 
 #: src/merge/mkvmerge.cpp:149
 #, no-c-format
@@ -750,7 +746,7 @@ msgid ""
 "  --track-enabled-flag <TID[:bool]>\n"
 "                           Sets the \"track enabled\" flag for this track or\n"
 "                           forces it not to be present if bool is 0.\n"
-msgstr "  --track-enabled-flag <TID[:bool]> - Устанавливает для этой дорожки флаг \"дорожка включена» или отключает её, если логическое значение равно 0.\n"
+msgstr "  --track-enabled-flag <TID[:bool]> - Устанавливает для этой дорожки флаг \"дорожка включена\" или отключает её, если логическое значение равно 0.\n"
 
 #: src/merge/mkvmerge.cpp:268
 #, no-c-format
@@ -1013,7 +1009,7 @@ msgstr "  X:  двоичный в шестнадцатеричном предс�
 #: src/merge/mkvmerge.cpp:186
 #, no-c-format
 msgid "  [ <file1> <file2> ]      Same as \"<file1> + <file2>\".\n"
-msgstr "  [ <file1> <file2> ]      То же, что и \"<file1> + <file2>\".\n"
+msgstr "  [ <file1> <file2> ] - То же, что и \"<file1> + <file2>\".\n"
 
 #: src/common/kax_info.cpp:379
 #, no-c-format
@@ -1527,7 +1523,7 @@ msgstr "&Кодировки"
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:146
 #, no-c-format
 msgid "&Clear output and reset progress"
-msgstr "Очи&стить вывод и сбросить индикатор прогресса"
+msgstr "Очи&стить вывод и сбросить индикатор выполнения"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:639
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:658
@@ -1977,7 +1973,7 @@ msgstr "&Предыдущие настройки паковки"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:390
 #, no-c-format
 msgid "&Private use:"
-msgstr "&Личное пользование:"
+msgstr "&Личное пользование"
 
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:387
 #, no-c-format
@@ -2284,7 +2280,7 @@ msgstr "\"--chapter-language\" должен быть указан перед \"-
 #: src/merge/mkvmerge.cpp:2486
 #, no-c-format
 msgid "'--chapters' lacks the file name.\n"
-msgstr "«--chapters» не хватает имени файла.\n"
+msgstr "\"--chapters\" не хватает имени файла.\n"
 
 #: src/merge/mkvmerge.cpp:2379
 #, no-c-format
@@ -3803,7 +3799,7 @@ msgstr "Звуковой эмфазис"
 #: src/merge/mkvmerge.cpp:1065
 #, no-c-format
 msgid "Audio emphasis mode option: not given in the form <TID>:<mode> where the mode is either a number or keyword from this list: {0} (argument was '{1}').\n"
-msgstr "Параметр режима звукового эмфазиса: не указан в форме <TID>:<mode>, где режим является числом либо ключевым словом из этого списка: {0} (аргумент был «{1}»).\n"
+msgstr "Параметр режима звукового эмфазиса: не указан в форме <TID>:<mode>, где режим является числом либо ключевым словом из этого списка: {0} (аргумент был \"{1}\").\n"
 
 #: src/common/property_element.cpp:209
 #, no-c-format
@@ -4762,7 +4758,7 @@ msgstr "Завершено с предупреждениями"
 #: src/merge/generic_packetizer.cpp:1390
 #, no-c-format
 msgid "Compression failed: {0}\n"
-msgstr "Сжатие не удалось: {0}\n"
+msgstr "Сжатие не выполнено: {0}\n"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2212
 #, no-c-format
@@ -4814,7 +4810,7 @@ msgstr "Конвертировать текстовые субтитры в эт
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:782
 #, no-c-format
 msgid "Converting the chapters to XML failed: %1"
-msgstr "Преобразование глав в XML не удалось: %1"
+msgstr "Преобразование глав в XML не выполнено: %1"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2204
 #, no-c-format
@@ -4880,32 +4876,32 @@ msgstr "Невозможно обнаружить gptzr при присоеди�
 #: src/output/p_mpeg4_p2.cpp:174
 #, no-c-format
 msgid "Could not find the codec configuration data in the first MPEG-4 part 2 video frame. This track cannot be stored in native mode.\n"
-msgstr "Не удалось найти данные конфигурации кодека в первом кадре MPEG-4 part 2 видео. Эта дорожка не может быть сохранена в родном режиме.\n"
+msgstr "Невозможно найти данные конфигурации кодека в первом кадре MPEG-4 part 2 видео. Эта дорожка не может быть сохранена в родном режиме.\n"
 
 #: src/input/r_ogm.cpp:337
 #, no-c-format
 msgid "Could not find the next Ogg page. This indicates a damaged Ogg/Ogm file. Will try to continue.\n"
-msgstr "Не удалось найти следующую страницу Ogg. Это означает, что Ogg/Ogm-файл повреждён. Попытаюсь продолжить.\n"
+msgstr "Невозможно найти следующую страницу Ogg. Это означает, что Ogg/Ogm-файл повреждён. Попытаюсь продолжить.\n"
 
 #: src/input/r_avi.cpp:605
 #, no-c-format
 msgid "Could not find valid DTS headers in this track's first frames.\n"
-msgstr "Не удалось найти правильных заголовков DTS в первых кадрах этой дорожки.\n"
+msgstr "Невозможно найти правильных заголовков DTS в первых кадрах этой дорожки.\n"
 
 #: src/common/locale.cpp:137
 #, no-c-format
 msgid "Could not initialize the iconv library for the conversion from UTF-8 to {0}. Some strings cannot be converted from UTF-8 and might be displayed incorrectly (error: {1}, {2}).\n"
-msgstr "Не удалось инициализировать библиотеку iconv для преобразования UTF-8 в {0}. Некоторые строки не могут быть преобразованы из UTF-8 и могут отображаться неправильно (ошибка: {1}, {2}).\n"
+msgstr "Невозможно инициализировать библиотеку iconv для преобразования UTF-8 в {0}. Некоторые строки не могут быть преобразованы из UTF-8 и могут отображаться неправильно (ошибка: {1}, {2}).\n"
 
 #: src/common/locale.cpp:130
 #, no-c-format
 msgid "Could not initialize the iconv library for the conversion from {0} to UTF-8. Some strings will not be converted to UTF-8 and the resulting Matroska file might not comply with the Matroska specs (error: {1}, {2}).\n"
-msgstr "Не удалось инициализировать библиотеку iconv для преобразования {0} в UTF-8. Некоторые строки не будут преобразованы в UTF-8, и итоговый файл Matroska может не соответствовать спецификациям Matroska (ошибка: {1}, {2}).\n"
+msgstr "Невозможно инициализировать библиотеку iconv для преобразования {0} в UTF-8. Некоторые строки не будут преобразованы в UTF-8, и итоговый файл Matroska может не соответствовать спецификациям Matroska (ошибка: {1}, {2}).\n"
 
 #: src/input/r_matroska.cpp:1823
 #, no-c-format
 msgid "Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"
-msgstr "Не удалось сохранить UID дорожки {0}, поскольку он уже назначен другой дорожке. Автоматически будет назначен новый случайный UID.\n"
+msgstr "Невозможно сохранить UID дорожки {0}, поскольку он уже назначен другой дорожке. Автоматически будет назначен новый случайный UID.\n"
 
 #: src/common/chapters/chapters.cpp:424
 #: src/common/chapters/chapters.cpp:426
@@ -4914,17 +4910,17 @@ msgstr "Не удалось сохранить UID дорожки {0}, поск�
 #: src/input/r_vobsub.cpp:115
 #, no-c-format
 msgid "Could not open '{0}' for reading.\n"
-msgstr "Не удалось открыть «{0}» для чтения.\n"
+msgstr "Невозможно открыть \"{0}\" для чтения.\n"
 
 #: src/input/r_wavpack.cpp:66
 #, no-c-format
 msgid "Could not open the corresponding correction file '{0}c'.\n"
-msgstr "Не удалось открыть соответствующий файл коррекции \"{0}c\".\n"
+msgstr "Невозможно открыть соответствующий файл коррекции \"{0}c\".\n"
 
 #: src/common/command_line.cpp:244
 #, no-c-format
 msgid "Could not open the file '{0}' for directing the output.\n"
-msgstr "Не удалось открыть файл «{0}» для перенаправления вывода.\n"
+msgstr "Невозможно открыть файл \"{0}\" для перенаправления вывода.\n"
 
 #: src/extract/tracks.cpp:197
 #, no-c-format
@@ -4934,22 +4930,22 @@ msgstr "Невозможно открыть файл меток времени \
 #: src/common/xml/ebml_converter.cpp:259
 #, no-c-format
 msgid "Could not open/read the file '{0}'."
-msgstr "Не удалось открыть/прочитать файл «{0}»."
+msgstr "Невозможно открыть/прочитать файл \"{0}\"."
 
 #: src/common/chapters/chapters.cpp:420
 #, no-c-format
 msgid "Could not parse the chapters in '{0}': {1}\n"
-msgstr "Не удалось разобрать главы в \"{0}\": {1}\n"
+msgstr "Невозможно разобрать главы в \"{0}\": {1}\n"
 
 #: src/input/r_ogm_flac.cpp:255
 #, no-c-format
 msgid "Could not read the FLAC header packets.\n"
-msgstr "Не удалось прочитать заголовочные пакеты FLAC.\n"
+msgstr "Невозможно прочитать заголовочные пакеты FLAC.\n"
 
 #: src/common/mm_file_io/windows.cpp:158
 #, no-c-format
 msgid "Could not write to the destination file: {0} ({1})\n"
-msgstr "Не удалось записать в файл назначения: {0} ({1})\n"
+msgstr "Невозможно записать в файл назначения: {0} ({1})\n"
 
 #: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:74
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
@@ -4976,7 +4972,7 @@ msgstr "Создать отдельную вкладку параметров с
 #: src/mkvtoolnix-gui/forms/merge/tool.h:224
 #, no-c-format
 msgid "Create a new one or open an existing one via the \"multiplexer\" menu, the buttons below or drag & drop one here."
-msgstr "Создать новый файл или открыть существующий через меню «паковщика» кнопкой ниже или поместить сюда с помощью перетаскивания."
+msgstr "Создать новый файл или открыть существующий через меню \"паковщика\" кнопкой ниже или поместить сюда с помощью перетаскивания."
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:504
 #, no-c-format
@@ -5011,13 +5007,13 @@ msgstr "Создать для каждого файла свою вкладку 
 #: src/common/mm_io_x.h:117
 #, no-c-format
 msgid "Creating directory '{0}' failed: {1}"
-msgstr "Создание папки \"{0}\" не удалось: {1}"
+msgstr "Создание папки \"{0}\" не выполнено: {1}"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:778
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:203
 #, no-c-format
 msgid "Creating the file failed. Check to make sure you have permission to write to that directory and that the drive is not full."
-msgstr "Создание файла не удалось. Убедитесь, что у вас есть разрешение на его запись в эту папку и что диск не заполнен."
+msgstr "Создание файла не выполнено. Убедитесь, что у вас есть разрешение на его запись в эту папку и что диск не заполнен."
 
 #: src/merge/mkvmerge.cpp:783
 #, no-c-format
@@ -6259,7 +6255,7 @@ msgstr "Ошибка:"
 #: src/common/kax_info.cpp:1309
 #, no-c-format
 msgid "Error: Couldn't open source file {0} ({1})."
-msgstr "Ошибка: не удалось открыть исходный файл {0} ({1})."
+msgstr "Ошибка: невозможно открыть исходный файл {0} ({1})."
 
 #: src/extract/tracks.cpp:467
 #, no-c-format
@@ -6506,28 +6502,28 @@ msgstr "Неудачно"
 #: src/extract/xtr_vobsub.cpp:80
 #, no-c-format
 msgid "Failed to create the VobSub data file '{0}': {1}\n"
-msgstr "Не удалось создать файл данных VobSub \"{0}\": {1}\n"
+msgstr "Невозможно создать файл данных VobSub \"{0}\": {1}\n"
 
 #: src/extract/xtr_textsubs.cpp:339
 #: src/extract/xtr_vobsub.cpp:267
 #, no-c-format
 msgid "Failed to create the file '{0}': {1}\n"
-msgstr "Не удалось создать файл \"{0}\": {1}\n"
+msgstr "Невозможно создать файл \"{0}\": {1}\n"
 
 #: src/extract/xtr_base.cpp:81
 #, no-c-format
 msgid "Failed to create the file '{0}': {1} ({2})\n"
-msgstr "Не удалось создать файл \"{0}\": {1} ({2})\n"
+msgstr "Невозможно создать файл \"{0}\": {1} ({2})\n"
 
 #: src/extract/xtr_tta.cpp:45
 #, no-c-format
 msgid "Failed to create the temporary file '{0}': {1}\n"
-msgstr "Не удалось создать временный файл \"{0}\": {1}\n"
+msgstr "Невозможно создать временный файл \"{0}\": {1}\n"
 
 #: src/extract/xtr_textsubs.cpp:342
 #, no-c-format
 msgid "Failed to parse the USF codec private data for track {0}: {1}\n"
-msgstr "Не удалось разобрать внутренние данные кодека USF для дорожки {0}: {1}\n"
+msgstr "Невозможно разобрать внутренние данные кодека USF для дорожки {0}: {1}\n"
 
 #: src/common/kax_element_names.cpp:92
 #, no-c-format
@@ -6631,7 +6627,7 @@ msgstr "Файл не найден"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:157
 #, no-c-format
 msgid "File parsing failed"
-msgstr "Не удалось выполнить разбор файла"
+msgstr "Невозможно выполнить разбор файла"
 
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:112
 #, no-c-format
@@ -7245,7 +7241,7 @@ msgstr "Если включено, GUI будет анализировать и�
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:331
 #, no-c-format
 msgid "If enabled, the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start multiplexing\")."
-msgstr "Если включено, то GUI будет автоматически переходить к разделу «Вывод задания» всегда, когда запускается выполнение задания (например, при нажатии кнопки «Выполнить паковку»). "
+msgstr "Если включено, то GUI будет автоматически переходить к разделу \"Вывод задания\" всегда, когда запускается выполнение задания (например, при нажатии кнопки \"Выполнить паковку\"). "
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:334
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:335
@@ -7997,7 +7993,7 @@ msgstr "Не отображается"
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:185
 #, no-c-format
 msgid "It cannot be removed because it is a mandatory header field."
-msgstr "Он не может быть удалён, потому что является обязательным полем заголовка."
+msgstr "Невозможно удалить, потому что является обязательным полем заголовка."
 
 #: src/merge/mkvmerge.cpp:1045
 #, no-c-format
@@ -8018,7 +8014,7 @@ msgstr "GUI попытается обнаружить последователь
 #: src/mkvtoolnix-gui/merge/input.cpp:2246
 #, no-c-format
 msgid "Its installation location could not be determined automatically."
-msgstr "Автоматически не удалось определить папку, в которую установлена эта программа."
+msgstr "Невозможно автоматически определить папку, в которую установлена эта программа."
 
 #: src/common/command_line.cpp:61
 #: src/common/command_line.cpp:65
@@ -8082,7 +8078,7 @@ msgstr "Задание выполнено"
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:242
 #, no-c-format
 msgid "Job type ('multiplexer' or 'info')"
-msgstr "Тип задания («паковка» или «информация»)"
+msgstr "Тип задания (\"паковка\" или \"информация\")"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:268
 #, no-c-format
@@ -8458,9 +8454,9 @@ msgstr "Отметить эту дорожку для \"принудительн
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:657
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:668
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Markdown files"
-msgstr "Файлы Matroska"
+msgstr "Файлы разметки"
 
 #: src/common/file_types.cpp:91
 #, no-c-format
@@ -8756,7 +8752,7 @@ msgstr "Приложение слияния"
 #: src/mkvtoolnix-gui/jobs/mux_job.cpp:191
 #, no-c-format
 msgid "Multiplexing to file \"%1\" in directory \"%2\""
-msgstr "Паковка в файл «%1» в папке «%2»"
+msgstr "Паковка в файл \"%1\" в папке \"%2\""
 
 #: src/merge/mkvmerge.cpp:3219
 #, no-c-format
@@ -8917,7 +8913,7 @@ msgstr "Не найден заголовок EBML."
 #: src/merge/mkvmerge.cpp:448
 #, no-c-format
 msgid "No MIME type has been set for the attachment '{0}', and it could not be guessed.\n"
-msgstr "Не был установлен тип MIME для вложения \"{0}\", автоматическое определение не удалось.\n"
+msgstr "Не был установлен тип MIME для вложения \"{0}\", автоматическое определение не выполнено.\n"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2328
 #, no-c-format
@@ -8938,7 +8934,7 @@ msgstr "Нет вложений, подходящих под описание \"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:940
 #, no-c-format
 msgid "No audio device is available for playback, or accessing it failed."
-msgstr "Аудиоустройство не доступно для воспроизведения, или доступ к нему не удался."
+msgstr "Аудиоустройство недоступно для воспроизведения или к нему отсутствует доступ."
 
 #: src/propedit/propedit.cpp:187
 #, no-c-format
@@ -9083,7 +9079,7 @@ msgstr "Не указан идентификатор дорожки в \"--{0} {
 #: src/propedit/track_target.cpp:202
 #, no-c-format
 msgid "No track corresponding to the edit specification '{0}' was found. {1}\n"
-msgstr "Не найдено дорожки, соответствующей спецификации редактирования «{0}». {1}\n"
+msgstr "Не найдено дорожки, соответствующей спецификации редактирования \"{0}\". {1}\n"
 
 #: src/propedit/tag_target.cpp:268
 #, no-c-format
@@ -9198,7 +9194,7 @@ msgstr "Число  неправильное или не положительн�
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:187
 #, no-c-format
 msgid "Not discardable"
-msgstr "Не удаляемое"
+msgstr "Неудаляемое"
 
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:296
 #: src/mkvtoolnix-gui/watch_jobs/tab.cpp:371
@@ -10255,12 +10251,12 @@ msgstr "Чтение зашифрованных VOB не поддерживае�
 #: src/mkvtoolnix-gui/merge/attachments.cpp:234
 #, no-c-format
 msgid "Reading failed"
-msgstr "Чтение не удалось"
+msgstr "Чтение не выполнено"
 
 #: src/mkvtoolnix-gui/util/widget.cpp:205
 #, no-c-format
 msgid "Reading the segment UID failed"
-msgstr "Прочитать UID сегмента не удалось"
+msgstr "Невозможно прочитать UID сегмента"
 
 #: src/common/cli_parser.cpp:196
 #, no-c-format
@@ -10449,7 +10445,7 @@ msgstr "Удаление глав из существующего файла Mat
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:381
 #, no-c-format
 msgid "Removing the chapters failed."
-msgstr "Не удалось удалить главы."
+msgstr "Невозможно удалить главы."
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
 #, no-c-format
@@ -10514,7 +10510,7 @@ msgstr "Сбросить значения заголовка на этой ст�
 #: src/common/kax_file.cpp:290
 #, no-c-format
 msgid "Resync failed: no valid Matroska level 1 element found.\n"
-msgstr "Пересинхронизация не удалась: не найден правильный элемент Matroska первого уровня.\n"
+msgstr "Пересинхронизация не выполнена: не найден правильный элемент Matroska первого уровня.\n"
 
 #: src/common/kax_file.cpp:282
 #, no-c-format
@@ -10669,9 +10665,9 @@ msgid "Sampling frequency in Hz."
 msgstr "Частота дискретизации (Гц)."
 
 #: src/mkvtoolnix-gui/util/text_display_dialog.cpp:106
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Save"
-msgstr "&Сохранить"
+msgstr "Сохранить"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:666
 #, no-c-format
@@ -10729,33 +10725,33 @@ msgstr "Сохра&нить в файл Matroska или WebM"
 #: src/mkvtoolnix-gui/util/file.cpp:149
 #, no-c-format
 msgid "Saving failed"
-msgstr "Сохранить не удалось."
+msgstr "Невозможно сохранить."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:847
 #, no-c-format
 msgid "Saving the chapters failed."
-msgstr "Сохранить главы не удалось."
+msgstr "Невозможно сохранить главы."
 
 #: src/mkvtoolnix-gui/util/file.cpp:150
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Saving the file failed. Error message from the system: %1"
-msgstr "Сообщение об ошибке от синтаксического анализатора: %1"
+msgstr "Сохранение файла не выполнено. Сообщение об ошибке от системы: %1"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:255
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:264
 #, no-c-format
 msgid "Saving the modified attachments failed."
-msgstr "Сохранить изменённое вложение не удалось."
+msgstr "Невозможно сохранить изменённое вложение."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:228
 #, no-c-format
 msgid "Saving the modified segment information header failed."
-msgstr "Сохранение изменённого сегмента информационного заголовка не удалось."
+msgstr "Сохранение изменённого сегмента информационного заголовка не выполнено."
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:238
 #, no-c-format
 msgid "Saving the modified track headers failed."
-msgstr "Сохранить изменённые заголовки дорожек не удалось."
+msgstr "Невозможно сохранить изменённые заголовки дорожек."
 
 #: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
 #, no-c-format
@@ -12055,7 +12051,7 @@ msgstr "Вложение ({0}) слишком большое ({1})."
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:929
 #, no-c-format
 msgid "The audio file '%1' could not be played back."
-msgstr "Не удалось воспроизвести аудиофайл \"%1\"."
+msgstr "Невозможно воспроизвести аудиофайл \"%1\"."
 
 #: src/mkvtoolnix-gui/util/settings.cpp:296
 #, no-c-format
@@ -12244,7 +12240,7 @@ msgid ""
 "The demultiplexer for the file '{0}' failed to initialize:\n"
 "{1}\n"
 msgstr ""
-"Не удалось запустить процесс разбиения для файла \"{0}\":\n"
+"Невозможно запустить процесс разбиения для файла \"{0}\":\n"
 "{1}\n"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:52
@@ -12878,7 +12874,7 @@ msgstr "Максимальное число файлов, которые буд�
 #: src/propedit/propedit.cpp:40
 #, no-c-format
 msgid "The meta seek element was written at the end of the file, but the segment size could not be updated. Therefore the element will not be visible. The process will be aborted. The file has been changed!"
-msgstr "Метаэлемент поиска был записан в конце файла, но размер сегмента обновить не удалось. Поэтому элемент не будет видим. Процесс будет прерван. Файл был изменён!"
+msgstr "Метаэлемент поиска был записан в конце файла, но размер сегмента невозможно обновить. Поэтому элемент не будет видим. Процесс будет прерван. Файл был изменён!"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:756
 #, no-c-format
@@ -12895,12 +12891,12 @@ msgstr "Исполняемый файл mkvmerge"
 #: src/mkvtoolnix-gui/merge/tool.cpp:390
 #, no-c-format
 msgid "The multiplex settings creating \"%1\" have been modified. Do you really want to close? All changes will be lost."
-msgstr "Настройки паковки, создающие «%1», были изменены. Вы действительно хотите закрыть? Все изменения будут утеряны."
+msgstr "Настройки паковки, создающие \"%1\", были изменены. Вы действительно хотите закрыть? Все изменения будут утеряны."
 
 #: src/propedit/change.cpp:56
 #, no-c-format
 msgid "The name '{0}' is not a valid property name for the current edit specification in '{1}'.\n"
-msgstr "Имя «{0}» не является допустимым именем свойства для текущей спецификации редактирования в «{1}».\n"
+msgstr "Имя \"{0}\" не является допустимым именем свойства для текущей спецификации редактирования в \"{1}\".\n"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:51
 #, no-c-format
@@ -13397,7 +13393,7 @@ msgstr "Дорожка {0} файла номер {1} ({2}) присоединя�
 #: src/merge/mkvmerge.cpp:3018
 #, no-c-format
 msgid "The type of file '{0}' could not be recognized.\n"
-msgstr "Тип файла \"{0}\" не удаётся распознать.\n"
+msgstr "Тип файла \"{0}\" невозможно распознать.\n"
 
 #: src/merge/mkvmerge.cpp:517
 #, no-c-format
@@ -14206,7 +14202,7 @@ msgstr "Дорожка {0}: для элемента субтитров номе�
 #: src/input/r_qtmp4.cpp:3064
 #, no-c-format
 msgid "Track {0}: The AAC information could not be parsed.\n"
-msgstr "Дорожка {0}: информацию AAC не удалось разобрать.\n"
+msgstr "Дорожка {0}: информацию AAC невозможно разобрать.\n"
 
 #: src/extract/xtr_aac.cpp:54
 #, no-c-format
@@ -14315,7 +14311,7 @@ msgstr "Текстовые субтитры USF"
 #: src/mkvtoolnix-gui/merge/input.cpp:1668
 #, no-c-format
 msgid "Unable to append files"
-msgstr "Не удаётся добавить файлы"
+msgstr "Невозможно добавить файлы"
 
 #: src/common/iso639.cpp:109
 #, no-c-format
@@ -14441,12 +14437,12 @@ msgstr "Обновить свойства вложения"
 #: src/propedit/propedit.cpp:120
 #, no-c-format
 msgid "Updating the 'document type version' or 'document type read version' header fields failed."
-msgstr "Не удалось обновить поля заголовка \"версия типа документа\" или \"прочитанная версия типа документа\"."
+msgstr "Невозможно обновить поля заголовка \"версия типа документа\" или \"прочитанная версия типа документа\"."
 
 #: src/propedit/propedit.cpp:31
 #, no-c-format
 msgid "Updating the '{0}' element failed. Reason:"
-msgstr "Обновление элемента \"{0}\" не удалось. Причина:"
+msgstr "Обновление элемента \"{0}\" не выполнено. Причина:"
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:44
 #, no-c-format
@@ -14578,7 +14574,7 @@ msgstr "Действительные трюки:\n"
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:888
 #, no-c-format
 msgid "Validation failed"
-msgstr "Не удалось проверить"
+msgstr "Невозможно проверить"
 
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 #, no-c-format
@@ -14704,7 +14700,7 @@ msgstr "Флаг чересстрочного видео"
 #: src/input/r_real.cpp:586
 #, no-c-format
 msgid "Video packet assembly failed. Error code: {0} ({1})\n"
-msgstr "Пакет видео собрать не удалось. Код ошибки: {0} ({1})\n"
+msgstr "Невозможно собрать пакет видео. Код ошибки: {0} ({1})\n"
 
 #: src/common/property_element.cpp:153
 #, no-c-format
@@ -15181,12 +15177,12 @@ msgstr "Видеорегистратор Windows Television"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:444
 #, no-c-format
 msgid "With \"close current settings\" the current multiplex settings will be closed without opening new ones."
-msgstr "При использовании пункта «закрыть текущие настройки» активный набор настроек паковки будет закрыт без открытия нового."
+msgstr "При использовании пункта \"закрыть текущие настройки\" активный набор настроек паковки будет закрыт без открытия нового."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:440
 #, no-c-format
 msgid "With \"create new settings\" a new set of multiplex settings will be added."
-msgstr "При использовании пункта «создать новые настройки» будет добавлен новый набор настроек паковки."
+msgstr "При использовании пункта \"создать новые настройки\" будет добавлен новый набор настроек паковки."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:442
 #, no-c-format
@@ -15312,7 +15308,7 @@ msgstr "Да"
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:110
 #, no-c-format
 msgid "You can add attachments by clicking on the button below, by right-clicking on a node in the tree and selecting \"Add attachments\" from the popup menu or by dragging & dropping files here or onto the tree."
-msgstr "Вы можете добавлять вложения, нажав на кнопку ниже, щёлкнув правой кнопкой мыши на узле в дереве файлов и выбрав «Добавить вложение» из всплывающего меню или путём перетаскивания файлов сюда или на дерево файлов."
+msgstr "Вы можете добавлять вложения, нажав на кнопку ниже, щёлкнув правой кнопкой мыши на узле в дереве файлов и выбрав \"Добавить вложение\" из всплывающего меню или путём перетаскивания файлов сюда или на дерево файлов."
 
 #: src/mkvtoolnix-gui/forms/merge/tool.h:225
 #, no-c-format
@@ -15424,7 +15420,7 @@ msgstr "Вы перетащили или скопировали/вставили
 #: src/common/compression/zlib.cpp:90
 #, no-c-format
 msgid "Zlib decompression failed. Result: {0}\n"
-msgstr "Распаковка Zlib не удалась. Результат: {0}\n"
+msgstr "Распаковка Zlib не выполнена. Результат: {0}\n"
 
 #: src/output/p_ac3.cpp:237
 #, no-c-format
@@ -15613,12 +15609,12 @@ msgstr "фильтр первого порядка, найденный в ауд
 #: src/common/flac.cpp:139
 #, no-c-format
 msgid "flac_decoder: Could not initialize the FLAC decoder.\n"
-msgstr "flac_decoder: не удалось инициализировать декодер FLAC.\n"
+msgstr "flac_decoder: невозможно инициализировать декодер FLAC.\n"
 
 #: src/common/flac.cpp:135
 #, no-c-format
 msgid "flac_decoder: Could not set metadata_respond_all.\n"
-msgstr "flac_decoder: не удалось установить metadata_respond_all.\n"
+msgstr "flac_decoder: невозможно установить metadata_respond_all.\n"
 
 #: src/common/flac.cpp:132
 #, no-c-format
@@ -15628,37 +15624,37 @@ msgstr "flac_decoder: FLAC__stream_decoder_new() окончился неудач
 #: src/input/r_ogm_flac.cpp:138
 #, no-c-format
 msgid "flac_header_extraction: Could not initialize the FLAC decoder.\n"
-msgstr "flac_header_extraction: не удалось инициализировать декодер FLAC.\n"
+msgstr "flac_header_extraction: невозможно инициализировать декодер FLAC.\n"
 
 #: src/input/r_ogm_flac.cpp:136
 #, no-c-format
 msgid "flac_header_extraction: Could not set metadata_respond_all.\n"
-msgstr "flac_header_extraction: не удалось metadata_respond_all.\n"
+msgstr "flac_header_extraction: невозможно установить metadata_respond_all.\n"
 
 #: src/input/r_ogm_flac.cpp:134
 #, no-c-format
 msgid "flac_header_extraction: FLAC__stream_decoder_new() failed.\n"
-msgstr "flac_header_extraction: FLAC__stream_decoder_new() окончился неудачно.\n"
+msgstr "flac_header_extraction: FLAC__stream_decoder_new() не выполнено.\n"
 
 #: src/input/r_ogm_flac.cpp:48
 #, no-c-format
 msgid "flac_header_extraction: bytes ({0}) < op.bytes ({1}). Could not read the FLAC headers.\n"
-msgstr "flac_header_extraction: байтов ({0}) < оп.байтов ({1}). Не удалось прочитать заголовки FLAC.\n"
+msgstr "flac_header_extraction: байтов ({0}) < оп.байтов ({1}). Невозможно прочитать заголовки FLAC.\n"
 
 #: src/input/r_flac.cpp:60
 #, no-c-format
 msgid "flac_reader: Could not read a header packet.\n"
-msgstr "Считыватель FLAC: не удалось прочитать пакет заголовка.\n"
+msgstr "Считыватель FLAC: невозможно прочитать пакет заголовка.\n"
 
 #: src/input/r_flac.cpp:156
 #, no-c-format
 msgid "flac_reader: Could not read all header packets.\n"
-msgstr "Считыватель FLAC: не удалось прочитать все пакеты заголовка.\n"
+msgstr "Считыватель FLAC: невозможно прочитать все пакеты заголовка.\n"
 
 #: src/input/r_flac.cpp:65
 #, no-c-format
 msgid "flac_reader: could not initialize the FLAC packetizer.\n"
-msgstr "Считыватель FLAC: не удалось инициализировать формирователь пакетов FLAC.\n"
+msgstr "Считыватель FLAC: невозможно инициализировать формирователь пакетов FLAC.\n"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:646
 #, no-c-format
@@ -15683,7 +15679,7 @@ msgstr "удаление заголовка"
 #: src/common/compression/zlib.cpp:37
 #, no-c-format
 msgid "inflateInit() failed. Result: {0}\n"
-msgstr "inflateInit() окончился неудачно. Результат: {0}\n"
+msgstr "inflateInit() не выполнено. Результат: {0}\n"
 
 #: src/propedit/change.cpp:393
 #, no-c-format
@@ -16073,12 +16069,12 @@ msgstr "без пропуска"
 #: src/input/r_ogm.cpp:431
 #, no-c-format
 msgid "ogg_stream_init for stream number {0} failed. Will try to continue and ignore this stream.\n"
-msgstr "ogg_stream_init для потока номер {0} окончился неудачно. Попытаюсь продолжить, проигнорировав этот поток.\n"
+msgstr "ogg_stream_init для потока номер {0} не выполнено. Попытка продолжить, проигнорировав этот поток.\n"
 
 #: src/input/r_ogm.cpp:341
 #, no-c-format
 msgid "ogg_sync_buffer failed\n"
-msgstr "ogg_sync_buffer окончился неудачно\n"
+msgstr "ogg_sync_buffer не выполнено\n"
 
 #: src/common/kax_info.cpp:862
 #, no-c-format
@@ -16194,7 +16190,7 @@ msgstr "Считыватель: обнаружен блок незвуковых
 #: src/input/r_real.cpp:200
 #, no-c-format
 msgid "real_reader: Couldn't find RealAudio FourCC for id {0} (description length: {1}) Skipping track.\n"
-msgstr "Считыватель Real: не удалось найти FourCC RealAudio для идентификатора {0} (длина описания: {1}). Пропуск дорожки.\n"
+msgstr "Считыватель Real: невозможно найти FourCC RealAudio для идентификатора {0} (длина описания: {1}). Пропуск дорожки.\n"
 
 #: src/input/r_real.cpp:224
 #, no-c-format
@@ -16255,7 +16251,7 @@ msgstr "размер {0}"
 #: src/input/subtitles.cpp:421
 #, no-c-format
 msgid "ssa_reader: Invalid format. Could not find the \"Format\" line in the \"[Events]\" section."
-msgstr "Считыватель SSA: неверный формат. Не найдена строка \"Format\" в разделе \"[Events]\"."
+msgstr "Считыватель SSA: неправильный формат. Не найдена строка \"Format\" в разделе \"[Events]\"."
 
 #: src/input/r_matroska.cpp:141
 #, no-c-format
