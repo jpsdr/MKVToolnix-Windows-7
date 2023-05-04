@@ -464,3 +464,12 @@ A groupbox that collapses/expands when toggled. Extracted from the QGIS project.
   * License: GNU General Public License v2 or later (see `COPYING`)
   * URL: https://github.com/qgis/QGIS
   * Corresponding files: `src/mkvtoolnix-gui/util/qgs_collapsible_group_box.{h,cpp}`
+
+## 6.14. Windows theme
+
+The theme (palette) used on Windows
+
+  * Copyright: 2016 The Qt Company Ltd.
+  * License: GNU General Public License v2 (see `COPYING`)
+  * Corresponding files: `src/mkvtoolnix-gui/app/windows.cpp`
+

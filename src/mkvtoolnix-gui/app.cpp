@@ -567,62 +567,23 @@ App::settingsBaseGroupName() {
 void
 App::setupAppearance() {
 #if defined(SYS_WINDOWS)
-  setupColorMode();
+  setupPalette();
 #endif  // SYS_WINDOWS
   setupUiFont();
 }
 
 #if defined(SYS_WINDOWS)
 void
-App::setupColorMode() {
-  enum Palette {
-    OsLight,
-    OsDark,
-    LegacyDark,
-  };
-
+App::setupPalette() {
   auto const &cfg                 = Util::Settings::get();
   auto const regAppsUseLightTheme = QSettings{Q("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize"), QSettings::NativeFormat}.value(Q("AppsUseLightTheme"));
-  auto const paletteToUse         = App::isWindows11OrLater() && cfg.m_uiForceLegacyDarkPalette      ? Palette::LegacyDark
-                                  : !regAppsUseLightTheme.isValid() || regAppsUseLightTheme.toBool() ? Palette::OsLight
-                                  : App::isWindows11OrLater()                                        ? Palette::OsDark
-                                  :                                                                    Palette::LegacyDark;
+  auto const paletteToUse         = cfg.m_uiPalette != Util::Settings::AppPalette::OS                ? cfg.m_uiPalette
+                                  : !regAppsUseLightTheme.isValid() || regAppsUseLightTheme.toBool() ? Util::Settings::AppPalette::Light
+                                  :                                                                    Util::Settings::AppPalette::Dark;
 
-  if (paletteToUse == Palette::OsLight)
-    return;
+  auto newPalette = systemPalette(paletteToUse == Util::Settings::AppPalette::Light);
 
-  if (paletteToUse == Palette::OsDark) {
-    auto darkPalette = palette();
-    darkPalette.setColor(QPalette::Link, QColor{29, 153, 243});
-    setPalette(darkPalette);
-
-    return;
-  }
-
-  QPalette darkPalette;
-  auto darkColor     = QColor{45, 45, 45};
-  auto disabledColor = QColor{127, 127, 127};
-
-  darkPalette.setColor(QPalette::AlternateBase,   darkColor);
-  darkPalette.setColor(QPalette::Base,            QColor{18, 18, 18});
-  darkPalette.setColor(QPalette::BrightText,      Qt::red);
-  darkPalette.setColor(QPalette::Button,          darkColor);
-  darkPalette.setColor(QPalette::ButtonText,      Qt::white);
-  darkPalette.setColor(QPalette::Disabled,        QPalette::ButtonText,      disabledColor);
-  darkPalette.setColor(QPalette::Disabled,        QPalette::HighlightedText, disabledColor);
-  darkPalette.setColor(QPalette::Disabled,        QPalette::Text,            disabledColor);
-  darkPalette.setColor(QPalette::Disabled,        QPalette::WindowText,      disabledColor);
-  darkPalette.setColor(QPalette::Highlight,       QColor{42, 130, 218});
-  darkPalette.setColor(QPalette::HighlightedText, Qt::black);
-  darkPalette.setColor(QPalette::Link,            QColor{42, 130, 218});
-  darkPalette.setColor(QPalette::Text,            Qt::white);
-  darkPalette.setColor(QPalette::ToolTipBase,     Qt::white);
-  darkPalette.setColor(QPalette::ToolTipText,     Qt::white);
-  darkPalette.setColor(QPalette::Window,          darkColor);
-  darkPalette.setColor(QPalette::WindowText,      Qt::white);
-
-  setPalette(darkPalette);
-  setStyleSheet("QToolTip { color: #ffffff; background-color: #2a82da; border: 1px solid white; }");
+  setPalette(newPalette);
 }
 
 bool

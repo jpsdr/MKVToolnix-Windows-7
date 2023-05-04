@@ -7,21 +7,22 @@
   or two components are set to the value 0x3f) as they're hard to distinguish
   from each other. Only affects new installations, or when the user presses
   the "reset to default colors" button. Implements #3533.
+* MKVToolNix GUI: Windows: a new settings in the preferences lets the user
+  chose whether to use the light or the dark color palette, or to follow the
+  system settings. Part of the fix for #3528.
 
 ## Bug fixes
 
 * MKVToolNix GUI: the defunct "disable the dark mode" checkbox was removed
   from the preferences.
-* MKVToolNix GUI: Windows 11: if Windows 11's dark application mode is active,
-  links are now displayed in lighter blue, making them much easier to
-  read. This circumvents a bug in Qt 6.5.0.
-* MKVToolNix GUI: Windows 11: due to a bug in Qt 6.5.0 the dark palette will
-  not be enabled on certain installations. For those situations a new option
-  was added to the preferences called "Force the use of the legacy dark
-  palette" which forces MKVToolNix GUI to use the legacy dark palette, no
-  matter what Windows 11's application color mode is set to. This option will
-  be removed once the bug in Qt has been fixed. This is a workaround for
-  #3528.
+* MKVToolNix GUI: Windows: the GUI will now always use its own implementation
+  of light & dark palettes instead of relying on Qt. This circumvents two
+  issues with the palette support in Qt 6.5.0:
+  1. if Windows 11's dark application mode is active, links were displayed in
+     a hard-to-read dark blue.
+  2. for unknown reasons the the dark palette was not chosen on some Windows
+     11 installations even though Windows 11's color mode was set to "dark".
+  This is a workaround for #3528.
 * MKVToolNix GUI: language dialog: under certain conditions the controls for
   the individual components remained disabled when the dialog is opened even
   though editing of individual components is selected. Part of the fix of

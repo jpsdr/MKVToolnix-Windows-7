@@ -128,7 +128,7 @@ protected:
   void setupHeaderEditorDroppedFilesPolicy();
   void setupJobsRunPrograms();
   void setupFontAndScaling();
-  void setupForceLegacyDarkPalette();
+  void setupPalette();
   void setupFileColorsControls();
   void setupFileColors(QVector<QColor> const &colors);
 

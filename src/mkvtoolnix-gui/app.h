@@ -5,7 +5,6 @@
 #include <QApplication>
 #include <QStringList>
 
-#include "common/qt.h"
 #include "mkvtoolnix-gui/gui_cli_parser.h"
 
 class QLocalServer;
@@ -84,7 +83,7 @@ public Q_SLOTS:
   void receiveInstanceCommunication();
   void setupAppearance();
 #if defined(SYS_WINDOWS)
-  void setupColorMode();
+  void setupPalette();
 #endif
   void setupUiFont();
 
@@ -117,6 +116,7 @@ public:
   static bool isInstalled();
 #if defined(SYS_WINDOWS)
   static bool isWindows11OrLater();
+  static QPalette systemPalette(bool light);
 #endif
 
   static QString communicatorSocketName();

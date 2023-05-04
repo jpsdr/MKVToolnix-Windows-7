@@ -80,6 +80,16 @@
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
             <layout class="QGridLayout" name="gridLayout_4">
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_24">
+               <property name="text">
+                <string>Number of &amp;recently used entries to remember:</string>
+               </property>
+               <property name="buddy">
+                <cstring>sbGuiNumRecentlyUsedStrings</cstring>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="1">
               <widget class="QComboBox" name="cbGuiInterfaceLanguage">
                <property name="sizePolicy">
@@ -90,13 +100,23 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_12">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_3">
                <property name="text">
-                <string>&amp;Font &amp;&amp; size:</string>
+                <string>Interface &amp;language:</string>
                </property>
                <property name="buddy">
-                <cstring>fcbGuiFontFamily</cstring>
+                <cstring>cbGuiInterfaceLanguage</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QSpinBox" name="sbGuiNumRecentlyUsedStrings">
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <number>9999</number>
                </property>
               </widget>
              </item>
@@ -121,33 +141,42 @@
                </item>
               </layout>
              </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_3">
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_12">
                <property name="text">
-                <string>Interface &amp;language:</string>
+                <string>&amp;Font &amp;&amp; size:</string>
                </property>
                <property name="buddy">
-                <cstring>cbGuiInterfaceLanguage</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_24">
-               <property name="text">
-                <string>Number of &amp;recently used entries to remember:</string>
-               </property>
-               <property name="buddy">
-                <cstring>sbGuiNumRecentlyUsedStrings</cstring>
+                <cstring>fcbGuiFontFamily</cstring>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QSpinBox" name="sbGuiNumRecentlyUsedStrings">
-               <property name="minimum">
-                <number>1</number>
+              <widget class="QComboBox" name="cbGuiPalette">
+               <item>
+                <property name="text">
+                 <string>Use system settings</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Light</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Dark</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="cbGuiPaletteLabel">
+               <property name="text">
+                <string>Color palette:</string>
                </property>
-               <property name="maximum">
-                <number>9999</number>
+               <property name="buddy">
+                <cstring>cbGuiPalette</cstring>
                </property>
               </widget>
              </item>
@@ -164,13 +193,6 @@
             <widget class="QCheckBox" name="cbGuiDisableHighDPIScaling">
              <property name="text">
               <string>Disable scaling for &amp;high DPI displays</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="cbGuiForceLegacyDarkPalette">
-             <property name="text">
-              <string>Force the use of the legacy &amp;dark palette</string>
              </property>
             </widget>
            </item>
@@ -2622,11 +2644,11 @@
   <tabstop>pageSelector</tabstop>
   <tabstop>cbGuiInterfaceLanguage</tabstop>
   <tabstop>fcbGuiFontFamily</tabstop>
+  <tabstop>cbGuiPalette</tabstop>
   <tabstop>sbGuiFontPointSize</tabstop>
   <tabstop>sbGuiNumRecentlyUsedStrings</tabstop>
   <tabstop>cbGuiStayOnTop</tabstop>
   <tabstop>cbGuiDisableHighDPIScaling</tabstop>
-  <tabstop>cbGuiForceLegacyDarkPalette</tabstop>
   <tabstop>cbGuiDisableToolTips</tabstop>
   <tabstop>cbGuiCheckForUpdates</tabstop>
   <tabstop>cbGuiUseLegacyFontMIMETypes</tabstop>

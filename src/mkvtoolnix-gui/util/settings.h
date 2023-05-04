@@ -148,6 +148,13 @@ public:
   };
   Q_ENUM(BCP47LanguageEditingMode);
 
+  enum class AppPalette {
+    OS,
+    Light,
+    Dark,
+  };
+  Q_ENUM(AppPalette);
+
   class RunProgramConfig {
   public:
     RunProgramType m_type{RunProgramType::ExecuteProgram};
@@ -230,7 +237,8 @@ public:
   bool m_showToolSelector, m_warnBeforeClosingModifiedTabs, m_warnBeforeAbortingJobs, m_warnBeforeOverwriting, m_showMoveUpDownButtons;
   QString m_uiLocale, m_uiFontFamily;
   int m_uiFontPointSize;
-  bool m_uiStayOnTop, m_uiForceLegacyDarkPalette;
+  bool m_uiStayOnTop;
+  AppPalette m_uiPalette;
 
   bool m_enableMuxingTracksByLanguage, m_enableMuxingAllVideoTracks, m_enableMuxingAllAudioTracks, m_enableMuxingAllSubtitleTracks;
   QStringList m_enableMuxingTracksByTheseLanguages;
