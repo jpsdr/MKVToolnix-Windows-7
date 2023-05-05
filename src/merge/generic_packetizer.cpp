@@ -600,24 +600,14 @@ generic_packetizer_c::set_video_interlaced_flag(bool interlaced) {
 }
 
 void
-generic_packetizer_c::set_video_pixel_width(int width) {
-  m_hvideo_pixel_width = width;
-  if (m_track_entry)
-    GetChild<KaxVideoPixelWidth>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_pixel_width);
-}
-
-void
-generic_packetizer_c::set_video_pixel_height(int height) {
-  m_hvideo_pixel_height = height;
-  if (m_track_entry)
-    GetChild<KaxVideoPixelHeight>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_pixel_height);
-}
-
-void
 generic_packetizer_c::set_video_pixel_dimensions(int width,
                                                  int height) {
-  set_video_pixel_width(width);
-  set_video_pixel_height(height);
+  m_hvideo_pixel_width  = width;
+  m_hvideo_pixel_height = height;
+  if (m_track_entry) {
+    GetChild<KaxVideoPixelHeight>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_pixel_height);
+    GetChild<KaxVideoPixelWidth>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_pixel_width);
+  }
 }
 
 void

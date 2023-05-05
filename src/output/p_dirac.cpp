@@ -39,8 +39,7 @@ dirac_video_packetizer_c::dirac_video_packetizer_c(generic_reader_c *p_reader, t
 
 void
 dirac_video_packetizer_c::set_headers() {
-  set_video_pixel_width(m_seqhdr.pixel_width);
-  set_video_pixel_height(m_seqhdr.pixel_height);
+  set_video_pixel_dimensions(m_seqhdr.pixel_width, m_seqhdr.pixel_height);
 
   if (m_headers_found) {
     int display_width  = m_seqhdr.pixel_width;

@@ -15,8 +15,6 @@
 
 #include "common/av1.h"
 #include "common/codec.h"
-#include "common/hacks.h"
-#include "merge/connection_checks.h"
 #include "merge/output_control.h"
 #include "output/p_av1.h"
 
@@ -31,8 +29,7 @@ av1_video_packetizer_c::av1_video_packetizer_c(generic_reader_c *p_reader,
   set_track_type(track_video);
   set_codec_id(MKV_V_AV1);
   set_codec_private(m_ti.m_private_data);
-  set_video_pixel_width(0);
-  set_video_pixel_height(0);
+  set_video_pixel_dimensions(0, 0);
 }
 
 void
@@ -53,8 +50,7 @@ av1_video_packetizer_c::set_header_parameters() {
   auto dimensions = m_parser.get_pixel_dimensions();
 
   if (!m_hvideo_pixel_width || !m_hvideo_pixel_height) {
-    set_video_pixel_width(dimensions.first);
-    set_video_pixel_height(dimensions.second);
+    set_video_pixel_dimensions(dimensions.first, dimensions.second);
     need_to_rerender = true;
   }
 

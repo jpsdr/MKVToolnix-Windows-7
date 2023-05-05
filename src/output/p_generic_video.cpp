@@ -52,8 +52,7 @@ generic_video_packetizer_c::set_headers() {
   if (0 < m_default_duration)
     set_track_default_duration(m_default_duration);
 
-  set_video_pixel_width(m_width);
-  set_video_pixel_height(m_height);
+  set_video_pixel_dimensions(m_width, m_height);
 
   generic_packetizer_c::set_headers();
 

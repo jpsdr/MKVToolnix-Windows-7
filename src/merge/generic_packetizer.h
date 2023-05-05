@@ -220,8 +220,6 @@ public:
   virtual void set_audio_emphasis_impl(libebml::EbmlMaster &audio, audio_emphasis_c::mode_e audio_emphasis);
 
   virtual void set_video_interlaced_flag(bool interlaced);
-  virtual void set_video_pixel_width(int width);
-  virtual void set_video_pixel_height(int height);
   virtual void set_video_pixel_dimensions(int width, int height);
   virtual void set_video_display_width(int width);
   virtual void set_video_display_height(int height);

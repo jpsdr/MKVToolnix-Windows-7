@@ -58,8 +58,7 @@ vc1_video_packetizer_c::set_headers() {
   put_uint32_le(&bih->bi_x_pels_per_meter, 1);
   put_uint32_le(&bih->bi_y_pels_per_meter, 1);
 
-  set_video_pixel_width(m_seqhdr.pixel_width);
-  set_video_pixel_height(m_seqhdr.pixel_height);
+  set_video_pixel_dimensions(m_seqhdr.pixel_width, m_seqhdr.pixel_height);
 
   if (m_raw_headers) {
     if (m_seqhdr.display_info_flag) {

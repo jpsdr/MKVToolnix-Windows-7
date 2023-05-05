@@ -227,8 +227,7 @@ kax_track_t::handle_packetizer_pixel_dimensions() {
   if ((0 == v_width) || (0 == v_height))
     return;
 
-  ptzr_ptr->set_video_pixel_width(v_width);
-  ptzr_ptr->set_video_pixel_height(v_height);
+  ptzr_ptr->set_video_pixel_dimensions(v_width, v_height);
 }
 
 void
@@ -1764,8 +1763,7 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
   t->handle_packetizer_block_addition_mapping();
 
   if ('v' == t->type) {
-    packetizer->set_video_pixel_width(t->v_width);
-    packetizer->set_video_pixel_height(t->v_height);
+    packetizer->set_video_pixel_dimensions(t->v_width, t->v_height);
 
     t->handle_packetizer_display_dimensions();
     t->handle_packetizer_pixel_cropping();

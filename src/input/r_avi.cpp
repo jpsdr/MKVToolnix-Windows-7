@@ -358,8 +358,7 @@ avi_reader_c::create_vp8_packetizer() {
   m_vptzr = add_packetizer(new vpx_video_packetizer_c(this, m_ti, codec_c::type_e::V_VP8));
 
   ptzr(m_vptzr).set_track_default_duration(mtx::to_int_rounded(m_default_duration));
-  ptzr(m_vptzr).set_video_pixel_width(m_video_width);
-  ptzr(m_vptzr).set_video_pixel_height(m_video_height);
+  ptzr(m_vptzr).set_video_pixel_dimensions(m_video_width, m_video_height);
 
   show_packetizer_info(0, ptzr(m_vptzr));
 }

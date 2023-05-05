@@ -45,8 +45,7 @@ void
 vobbtn_packetizer_c::set_headers() {
   set_codec_id(MKV_B_VOBBTN);
 
-  set_video_pixel_width(m_width);
-  set_video_pixel_height(m_height);
+  set_video_pixel_dimensions(m_width, m_height);
 
   generic_packetizer_c::set_headers();
 

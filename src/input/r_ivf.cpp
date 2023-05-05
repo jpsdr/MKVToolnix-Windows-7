@@ -69,8 +69,7 @@ ivf_reader_c::create_packetizer(int64_t) {
 
   auto &packetizer = ptzr(0);
 
-  packetizer.set_video_pixel_width(m_width);
-  packetizer.set_video_pixel_height(m_height);
+  packetizer.set_video_pixel_dimensions(m_width, m_height);
 
   auto default_duration = 1000000000ll * m_frame_rate_den / m_frame_rate_num;
   if (default_duration >= 1000000)

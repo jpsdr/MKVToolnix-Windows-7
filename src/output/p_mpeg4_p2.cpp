@@ -340,8 +340,7 @@ mpeg4_p2_video_packetizer_c::extract_size(const unsigned char *buffer,
     m_size_extracted = true;
 
     if (!m_reader->m_appending && ((xtr_width != static_cast<uint32_t>(m_hvideo_pixel_width)) || (xtr_height != static_cast<uint32_t>(m_hvideo_pixel_height)))) {
-      set_video_pixel_width(xtr_width);
-      set_video_pixel_height(xtr_height);
+      set_video_pixel_dimensions(xtr_width, xtr_height);
 
       if (!m_output_is_native && m_ti.m_private_data && (sizeof(alBITMAPINFOHEADER) <= m_ti.m_private_data->get_size())) {
         auto bih = reinterpret_cast<alBITMAPINFOHEADER *>(m_ti.m_private_data->get_buffer());
