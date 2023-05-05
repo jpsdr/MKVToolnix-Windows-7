@@ -611,29 +611,6 @@ generic_packetizer_c::set_video_pixel_dimensions(int width,
 }
 
 void
-generic_packetizer_c::set_video_display_width(int width) {
-  m_hvideo_display_width = width;
-  if (m_track_entry)
-    GetChild<KaxVideoDisplayWidth>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_width);
-}
-
-void
-generic_packetizer_c::set_video_display_height(int height) {
-  m_hvideo_display_height = height;
-  if (m_track_entry)
-    GetChild<KaxVideoDisplayHeight>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_height);
-}
-
-void
-generic_packetizer_c::set_video_display_unit(int unit) {
-  m_hvideo_display_unit = unit;
-  if (   m_track_entry
-      && (   (unit != ddu_pixels)
-          || (unit != FindChildValue<KaxVideoDisplayUnit>(GetChild<KaxTrackVideo>(*m_track_entry), ddu_pixels))))
-    GetChild<KaxVideoDisplayUnit>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_unit);
-}
-
-void
 generic_packetizer_c::set_video_display_dimensions(int width,
                                                    int height,
                                                    int unit,
@@ -648,9 +625,18 @@ generic_packetizer_c::set_video_display_dimensions(int width,
   m_ti.m_display_dimensions_given  = true;
   m_ti.m_aspect_ratio_given        = false;
 
-  set_video_display_width(width);
-  set_video_display_height(height);
-  set_video_display_unit(unit);
+  m_hvideo_display_width = width;
+  m_hvideo_display_height = height;
+  m_hvideo_display_unit = unit;
+
+  if (m_track_entry) {
+    GetChild<KaxVideoDisplayWidth>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_width);
+    GetChild<KaxVideoDisplayHeight>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_height);
+
+    if (   (unit != ddu_pixels)
+        || (unit != FindChildValue<KaxVideoDisplayUnit>(GetChild<KaxTrackVideo>(*m_track_entry), ddu_pixels)))
+      GetChild<KaxVideoDisplayUnit>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_unit);
+  }
 }
 
 void

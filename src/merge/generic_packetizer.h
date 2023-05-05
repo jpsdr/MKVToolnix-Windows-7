@@ -221,9 +221,6 @@ public:
 
   virtual void set_video_interlaced_flag(bool interlaced);
   virtual void set_video_pixel_dimensions(int width, int height);
-  virtual void set_video_display_width(int width);
-  virtual void set_video_display_height(int height);
-  virtual void set_video_display_unit(int unit);
   virtual void set_video_display_dimensions(int width, int height, int unit, option_source_e source);
   virtual void set_video_aspect_ratio(double aspect_ratio, bool is_factor, option_source_e source);
   virtual void set_video_pixel_cropping(int left, int top, int right, int bottom, option_source_e source);
