@@ -1,6 +1,5 @@
 #include "common/common_pch.h"
 
-#include <QColor>
 #include <QDebug>
 #include <QFile>
 #include <QLibraryInfo>
