@@ -10,6 +10,9 @@
 * MKVToolNix GUI: Windows: a new settings in the preferences lets the user
   chose whether to use the light or the dark color palette, or to follow the
   system settings. Part of the fix for #3528.
+* MKVToolNix GUI: macOS: when you install the application from the DMG it'll
+  register itself as an alternate handler for its supported file types. This
+  allows the use of the "Open with" context menu action in Finder.
 
 ## Bug fixes
 

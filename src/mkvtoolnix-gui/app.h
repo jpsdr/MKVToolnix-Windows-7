@@ -7,6 +7,7 @@
 
 #include "mkvtoolnix-gui/gui_cli_parser.h"
 
+class QEvent;
 class QLocalServer;
 class QThread;
 
@@ -69,6 +70,10 @@ public:
   void run();
 
   Util::NetworkAccessManager &networkAccessManager();
+
+#if defined(SYS_APPLE)
+  virtual bool event(QEvent *event) override;
+#endif
 
 Q_SIGNALS:
   void addingFilesToMergeRequested(QStringList const &fileNames);

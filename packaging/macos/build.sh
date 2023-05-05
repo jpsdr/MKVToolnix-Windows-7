@@ -454,50 +454,11 @@ EOF
 APPL????
 EOF
 
-  cat <<EOF > $dmgcnt/Info.plist
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-  <dict>
-    <key>LSEnvironment</key>
-    <dict>
-      <key>LANG</key>
-      <string>en_US.UTF-8</string>
-    </dict>
-    <key>Properties</key>
-    <dict>
-      <key>file.encoding</key> <string>UTF-8</string>
-    </dict>
-    <key>CFBundleDevelopmentRegion</key>     <string>en-US</string>
-    <key>CFBundleIdentifier</key>            <string>download.mkvtoolnix.MKVToolNix</string>
-    <key>CFBundleExecutable</key>            <string>mkvtoolnix-gui</string>
-    <key>CFBundleInfoDictionaryVersion</key> <string>6.0</string>
-    <key>CFBundlePackageType</key>           <string>APPL</string>
-    <key>CSResourcesFileMapped</key>         <true/>
-    <key>CFBundleVersion</key>               <string>${MTX_VER}</string>
-    <key>CFBundleShortVersionString</key>    <string>${MTX_VER}</string>
-    <key>NSPrincipalClass</key>              <string>NSApplication</string>
-    <key>LSMinimumSystemVersion</key>        <string>${MACOSX_DEPLOYMENT_TARGET}</string>
-    <key>CFBundleDisplayName</key>           <string>MKVToolNix</string>
-    <key>CFBundleName</key>                  <string>MKVToolNix</string>
-    <key>CFBundleIconFile</key>              <string>MKVToolNix.icns</string>
-    <key>CFBundleDocumentTypes</key>
-    <array>
-      <dict>
-        <key>CFBundleTypeExtensions</key>
-        <array>
-          <!-- Here goes the file formats your app can read -->
-        </array>
-        <key>CFBundleTypeIconFile</key>      <string>MKVToolNix.icns</string>
-        <key>CFBundleTypeName</key>          <string>MKVToolNix-${MTX_VER}</string>
-        <key>CFBundleTypeRole</key>          <string>Editor</string>
-        <key>LSIsAppleDefaultForType</key>   <true/>
-        <key>LSTypeIsPackage</key>           <false/>
-      </dict>
-   </array>
-  </dict>
-</plist>
-EOF
+  sed -e "s/::MTX_VER::/${MTX_VER}/" -e "s/::MACOSX_DEPLOYMENT_TARGET::/${MACOSX_DEPLOYMENT_TARGET}/" \
+      < packaging/macos/Info.plist \
+      > $dmgcnt/Info.plist
+
+  cat $dmgcnt/Info.plist
 
   mkdir -p ${dmgmac}/libs
   cp -v -a ${TARGET}/lib/libQt6{Concurrent*.dylib,Core*.dylib,Gui*.dylib,Multimedia*.dylib,Network*.dylib,PrintSupport*.dylib,Svg*.dylib,Widgets*.dylib} ${dmgmac}/libs/
