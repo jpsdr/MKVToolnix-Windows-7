@@ -534,7 +534,7 @@ Settings::load() {
   m_disableDefaultTrackForSubtitles           = reg.value(s_valDisableDefaultTrackForSubtitles,                                                false).toBool();
   m_mergeEnableDialogNormGainRemoval          = reg.value(s_valMergeEnableDialogNormGainRemoval,                                               false).toBool();
   m_mergeAddBlurayCovers                      = reg.value(s_valMergeAddBlurayCovers,                                                           true).toBool();
-  m_mergeAttachmentsAlwaysSkipForExistingName = reg.value(s_valMergeAttachmentsAlwaysSkipForExistingName,                                      false).toBool();
+  m_mergeAttachmentsAlwaysSkipForExistingName = reg.value(s_valMergeAttachmentsAlwaysSkipForExistingName,                                      true).toBool();
   m_mergeAlwaysCreateNewSettingsForVideoFiles = reg.value(s_valMergeAlwaysCreateNewSettingsForVideoFiles).toBool();
   m_mergeSortFilesTracksByTypeWhenAdding      = reg.value(s_valMergeSortFilesTracksByTypeWhenAdding,                                           true).toBool();
   m_mergeReconstructSequencesWhenAdding       = reg.value(s_valMergeReconstructSequencesWhenAdding,                                            true).toBool();
