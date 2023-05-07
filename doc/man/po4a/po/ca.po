@@ -971,7 +971,7 @@ msgstr "A_TTA1"
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvextract.xml:668
 msgid "<productname>TrueAudio</productname> tracks are written to <abbrev>TTA</abbrev> files. Please note that due to &matroska;'s limited timestamp precision the extracted file's header will be different regarding two fields: <varname>data_length</varname> (the total number of samples in the file) and the <abbrev>CRC</abbrev>."
-msgstr "Les pistes <productname>TrueAudio</productname> s'escriuran en fitxers <abbrev>TTA</abbrev>. Si us plau, tingueu en compte que a causa de la limitada precisió dels codis de temps del &matroska;, la capçalera extreta del fitxer serà diferent pel que fa a dos camps: <varname>data_length</varname> (el nombre total de fluxos en el fitxer) i la <abbrev>CRC</abbrev>."
+msgstr "Les pistes <productname>TrueAudio</productname> s'escriuran en fitxers <abbrev>TTA</abbrev>. Si us plau, cal tenir en compte que a causa de la limitada precisió dels codis de temps del &matroska;, la capçalera extreta del fitxer serà diferent pel que fa a dos camps: <varname>data_length</varname> (el nombre total de fluxos en el fitxer) i la <abbrev>CRC</abbrev>."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvextract.xml:676
@@ -2079,7 +2079,7 @@ msgstr "<option>--split</option> <parameter>especificació</parameter>"
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:601
 msgid "Splits the output file after a given size or a given time.  Please note that tracks can only be split right before a key frame.  Therefore the split point may be a bit off from what the user has specified."
-msgstr "Divideix el fitxer de sortida després d'una mida o temps especificat. Si us plau, tingueu en compte que aquestes pistes només es poden dividir just abans d'un fotograma clau. Per tant, el punt de divisió podria ser un xic diferent de l'especificat per l'usuari."
+msgstr "Divideix el fitxer de sortida després d'una mida o temps especificat. Si us plau, cal tenir en compte que aquestes pistes només es poden dividir just abans d'un fotograma clau. Per tant, el punt de divisió podria ser un xic diferent de l'especificat per l'usuari."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:606
@@ -2636,7 +2636,7 @@ msgstr "<option>--enable-legacy-font-mime-types</option>"
 #: doc/man/mkvmerge.xml:1175
 #: doc/man/mkvpropedit.xml:363
 msgid "Enables the use of legacy <abbrev>MIME</abbrev> types for certain types of font attachments. For example, '<literal>application/x-truetype-font</literal>' will be used for TrueType fonts instead of '<literal>fonts/ttf</literal>'."
-msgstr "Permet l'ús de tipus <abbrev>MIME</abbrev> llegats per a determinats tipus d'adjunts de lletra. Per exemple, s'usarà «<literal>application/x-truetype-font</literal>» per lletres TrueType en lloc de «<literal>fonts/ttf</literal>»."
+msgstr "Permet l'ús de tipus <abbrev>MIME</abbrev> llegats per a determinats tipus d'adjunts de lletra tipogràfica. Per exemple, s'usarà «<literal>application/x-truetype-font</literal>» per a les lletres TrueType en lloc de «<literal>fonts/ttf</literal>»."
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:1180
@@ -3426,7 +3426,7 @@ msgstr "<option>--sub-charset</option> <parameter>TID:joc_de_caràcters</paramet
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:2086
 msgid "Sets the character set for the conversion to UTF-8 for UTF-8 subtitles for the given track ID. If not specified the charset will be derived from the current locale settings. Note that a charset is not needed for subtitles read from &matroska; files or from Kate streams, as these are always stored in UTF-8. See the section about <link linkend=\"mkvmerge.text_files_and_charsets\">text files and character sets</link> for an explanation how &mkvmerge; converts between character sets."
-msgstr "Estableix el joc de caràcters per a la conversió a UTF-8 dels subtítols per a un ID indicat de pista. Si no s'especifica el joc de caràcters, aquest derivarà dels ajustaments per a la configuració regional. Tingueu en compte que no és necessari un joc de caràcters per a llegir els subtítols des de fitxers &matroska; o des de fluxos Kate, ja que aquests sempre s'emmagatzemen en UTF-8. Vegeu la secció sobre <link linkend=\"mkvmerge.text_files_and_charsets\">la conversió per a fitxers de text i jocs de caràcters</link>, per a una explicació sobre com realitza el &mkvmerge; la conversió entre els jocs de caràcters."
+msgstr "Estableix el joc de caràcters per a la conversió a UTF-8 dels subtítols per a un ID indicat de pista. Si no s'especifica el joc de caràcters, aquest derivarà dels ajustaments per a la configuració regional. Cal tenir en compte que no és necessari un joc de caràcters per a llegir els subtítols des de fitxers &matroska; o des de fluxos Kate, ja que aquests sempre s'emmagatzemen en UTF-8. Vegeu la secció sobre <link linkend=\"mkvmerge.text_files_and_charsets\">la conversió per a fitxers de text i jocs de caràcters</link>, per a una explicació sobre com realitza el &mkvmerge; la conversió entre els jocs de caràcters."
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:2101
@@ -3953,7 +3953,7 @@ msgstr "No s'han de confondre els ID de les pistes que s'assignen a les pistes q
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2643
 msgid "Also note that each input file has its own set of track IDs. Therefore the track IDs for file '<filename>file1.ext</filename>' as reported by '<literal>mkvmerge --identify</literal>' do not change no matter how many other input files are there or in which position '<filename>file1.ext</filename>' is used."
-msgstr "Tingueu també en compte que cada fitxer d'entrada té el seu propi conjunt d'ID de les pistes. Per tant, els ID de les pistes per al fitxer «<filename>fitxer_1.ext</filename>» tal com havia informat l'ordre «<literal>mkvmerge --identify</literal>» no canviaran, no importa quants fitxers d'entrada hi hagi o en quina posició es faci servir «<filename>fitxer_1.ext</filename>»."
+msgstr "Cal tenir també en compte que cada fitxer d'entrada té el seu propi conjunt d'ID de les pistes. Per tant, els ID de les pistes per al fitxer «<filename>fitxer_1.ext</filename>» tal com havia informat l'ordre «<literal>mkvmerge --identify</literal>» no canviaran, no importa quants fitxers d'entrada hi hagi o en quina posició es faci servir «<filename>fitxer_1.ext</filename>»."
 
 #. type: Content of: <refentry><refsect1><refsect2><para>
 #: doc/man/mkvmerge.xml:2649
@@ -4244,7 +4244,7 @@ msgstr "L'especificació &matroska; defineix que alguns elements tenen un valor 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2965
 msgid "Maybe you also want to keep some photos along with your &matroska; file, or you're using <abbrev>SSA</abbrev> subtitles and need a special <productname>TrueType</productname> font that's really rare. In these cases you can attach those files to the &matroska; file. They will not be just appended to the file but embedded in it. A player can then show those files (the 'photos' case) or use them to render the subtitles (the '<productname>TrueType</productname> fonts' case)."
-msgstr "Possiblement, també voldreu conservar algunes fotografies juntament amb el vostre fitxer &matroska;, o emprar subtítols <abbrev>SSA</abbrev> i necessitareu una  lletra <productname>TrueType</productname> especial que és realment rar. En aquests casos els podeu adjuntar al fitxer &matroska;. No seran simplement annexats, sinó que seran incrustats. Un reproductor els podrà mostrar (en el cas de les «fotografies») o emprar-los per a renderitzar els subtítols (en el cas de la lletra «<productname>TrueType</productname>»."
+msgstr "Possiblement, també voldreu conservar algunes fotografies juntament amb el vostre fitxer &matroska;, o emprar subtítols <abbrev>SSA</abbrev> i necessitareu una lletra <productname>TrueType</productname> especial que és realment rar. En aquests casos els podeu adjuntar al fitxer &matroska;. No seran simplement annexats, sinó que seran incrustats. Un reproductor els podrà mostrar (en el cas de les «fotografies») o emprar-los per a renderitzar els subtítols (en el cas de la lletra «<productname>TrueType</productname>»."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2972
@@ -5004,7 +5004,7 @@ msgstr "<option>-a</option>, <option>--add</option> <parameter>nom</parameter>=<
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:124
 msgid "Adds a property <parameter>name</parameter> with the value <parameter>value</parameter>. The property will be added even if such a property exists already. Note that most properties are unique and cannot occur more than once."
-msgstr "Afegeix una propietat <parameter>nom</parameter> amb el contingut de <parameter>valor</parameter>. Aquesta propietat serà afegida fins i tot si ja existeix. Tingueu en compte que la majoria de les propietats són úniques i només es troben una vegada."
+msgstr "Afegeix una propietat <parameter>nom</parameter> amb el contingut de <parameter>valor</parameter>. Aquesta propietat serà afegida fins i tot si ja existeix. Cal tenir en compte que la majoria de les propietats són úniques i només es troben una vegada."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvpropedit.xml:131
@@ -5024,7 +5024,7 @@ msgstr "<option>-d</option>, <option>--delete</option> <parameter>nom</parameter
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvpropedit.xml:144
 msgid "Deletes all occurrences of the property <parameter>name</parameter>. Note that some properties are required and cannot be deleted."
-msgstr "Suprimeix totes les ocurrències de la propietat <parameter>nom</parameter>. Tingueu en compte que algunes propietats són requerides i no es poden suprimir."
+msgstr "Suprimeix totes les ocurrències de la propietat <parameter>nom</parameter>. Cal tenir en compte que algunes propietats són requerides i no es poden suprimir."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:151
@@ -5396,7 +5396,7 @@ msgstr "Podeu triar el mètode de normalització aplicat a les subetiquetes d'id
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:746
 msgid "The following example edits a file called '<literal>movie.mkv</literal>'. It sets the segment title and modifies the language code of an audio and a subtitle track. Note that this example can be shortened by leaving out the first <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option because editing the segment information element is the default for all options found before the first <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link> option anyway."
-msgstr "El següent exemple edita un fitxer anomenat «<literal>peli.mkv</literal>». Estableix el títol del segment i modifica el codi d'idioma d'una pista d'àudio i d'una pista de subtítols. Tingueu en compte que aquest exemple es pot escurçar llevant la primera opció <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link>, ja que editar l'element d'informació del segment està inclòs per omissió per a totes les opcions trobades abans de la primera opció <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link>."
+msgstr "El següent exemple edita un fitxer anomenat «<literal>peli.mkv</literal>». Estableix el títol del segment i modifica el codi d'idioma d'una pista d'àudio i d'una pista de subtítols. Cal tenir en compte que aquest exemple es pot escurçar llevant la primera opció <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link>, ja que editar l'element d'informació del segment està inclòs per omissió per a totes les opcions trobades abans de la primera opció <link linkend=\"mkvpropedit.description.edit\"><option>--edit</option></link>."
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:752
@@ -5407,7 +5407,7 @@ msgstr "$ mkvpropedit peli.mkv --edit info --set \"title=La pel·lícula\" --edi
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:755
 msgid "The second example removes the 'default track flag' from the first subtitle track and sets it for the second one. Note that &mkvpropedit;, unlike &mkvmerge;, does not set the 'default track flag' of other tracks to '0' if it is set to '1' for a different track automatically."
-msgstr "El segon exemple elimina l'«etiqueta de pista per omissió» de la primera pista de subtítols i l'estableix per a la segona. Tingueu present que el &mkvpropedit;, a diferència del &mkvmerge;, no estableix automàticament a «0» el valor de l'«etiqueta de pista per omissió» quan una pista diferent s'ha establert a «1»."
+msgstr "El segon exemple elimina l'«etiqueta de pista per omissió» de la primera pista de subtítols i l'estableix per a la segona. Cal tenir present que el &mkvpropedit;, a diferència del &mkvmerge;, no estableix automàticament a «0» el valor de l'«etiqueta de pista per omissió» quan una pista diferent s'ha establert a «1»."
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:760
@@ -5506,7 +5506,7 @@ msgstr "$ mkvpropedit peli.mkv --delete-attachment 2"
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:811
 msgid "Deleting all attached fonts by MIME type:"
-msgstr "Suprimir totes les lletres adjuntades segons el tipus MIME:"
+msgstr "Suprimir totes les lletres tipogràfiques adjuntades segons el tipus MIME:"
 
 #. type: Content of: <refentry><refsect1><screen>
 #: doc/man/mkvpropedit.xml:814
@@ -5592,7 +5592,7 @@ msgstr "El fet de llistar noms de fitxer de configuració amb l'extensió <liter
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvtoolnix-gui.xml:78
 msgid "Note that if an instance of the application is already running when the application is started a second time, all file names given on the command line are handled by the already-running instance."
-msgstr "Tingueu en compte que si ja s'està executant una instància de l'aplicació quan es llança una segona instància, tots els noms de fitxer indicats a la línia d'ordres restaran a càrrec de la primera instància."
+msgstr "Cal tenir en compte que si ja s'està executant una instància de l'aplicació quan es llança una segona instància, tots els noms de fitxer indicats a la línia d'ordres restaran a càrrec de la primera instància."
 
 #. type: Content of: <refentry><refsect1><variablelist><varlistentry><term>
 #: doc/man/mkvtoolnix-gui.xml:84
