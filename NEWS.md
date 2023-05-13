@@ -41,6 +41,8 @@
 * mkvmerge: AV1 packetizer: the packetizer did not honor the aspect ratio
   (factor) given on the command-line via the `--aspect-ratio` or
   `--aspect-ratio-factor` options.
+* Fixed compilation with fmt v10.0.0.
+
 ## Build system changes
 
 * The bundled `fmt` library was updated to v10.0.0.
