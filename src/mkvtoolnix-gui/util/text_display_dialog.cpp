@@ -106,7 +106,7 @@ TextDisplayDialog::save() {
   auto fileName = Util::getSaveFileName(this, QY("Save"), cfg.lastOpenDirPath(), p.m_saveDefaultFileName, filter, p.m_saveDefaultSuffix);
 
   if (!fileName.isEmpty())
-    Util::saveTextToFile(fileName, p.m_text);
+    Util::saveTextToFile(fileName, p.m_text, true);
 }
 
 bool

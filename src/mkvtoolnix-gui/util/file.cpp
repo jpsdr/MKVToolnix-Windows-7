@@ -135,13 +135,15 @@ detectMIMEType(QString const &fileName) {
 
 void
 saveTextToFile(QString const &fileName,
-               QStringList const &content) {
-  saveTextToFile(fileName, content.join(Q("\n")) + Q("\n"));
+               QStringList const &content,
+               bool saveLastOpenDir) {
+  saveTextToFile(fileName, content.join(Q("\n")) + Q("\n"), saveLastOpenDir);
 }
 
 void
 saveTextToFile(QString const &fileName,
-               QString const &content) {
+               QString const &content,
+               bool saveLastOpenDir) {
   QFile out{fileName};
 
   if (!out.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
@@ -156,6 +158,9 @@ saveTextToFile(QString const &fileName,
   out.write(content.toUtf8());
   out.flush();
   out.close();
+
+  if (!saveLastOpenDir)
+    return;
 
   auto &cfg = Util::Settings::get();
   cfg.m_lastOpenDir.setPath(QFileInfo{fileName}.path());

@@ -395,7 +395,7 @@ Tab::onSaveOutput() {
   auto fileName = Util::getSaveFileName(this, QY("Save job output"), cfg.lastOpenDirPath(), txtName, QY("Text files") + Q(" (*.txt);;") + QY("All files") + Q(" (*)"), Q("txt"));
 
   if (!fileName.isEmpty())
-    Util::saveTextToFile(fileName, p->m_fullOutput);
+    Util::saveTextToFile(fileName, p->m_fullOutput, true);
 }
 
 std::optional<uint64_t>
