@@ -1053,11 +1053,9 @@ task :clean do
     src/mkvtoolnix-gui/forms/**/*.h
     src/mkvtoolnix-gui/mkvtoolnix-gui
     src/mkvtoolnix/mkvtoolnix
-    tests/unit/all
-    tests/unit/merge/merge
-    tests/unit/propedit/propedit
   }
   patterns += $tools.collect { |name| "src/tools/#{name}" } + $benchmark_programs
+  patterns += $gtest_apps
   patterns += PCH.clean_patterns
   patterns += $qt_resources
   patterns << $version_header_name
