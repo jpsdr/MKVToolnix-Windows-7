@@ -25,6 +25,7 @@ int system(std::string const &command);
 void determine_path_to_current_executable(std::string const &argv0);
 boost::filesystem::path get_current_exe_path(std::string const &argv0);
 boost::filesystem::path get_application_data_folder();
+boost::filesystem::path get_package_data_folder();
 boost::filesystem::path get_installation_path();
 boost::filesystem::path find_exe_in_path(boost::filesystem::path const &exe);
 uint64_t get_memory_usage();

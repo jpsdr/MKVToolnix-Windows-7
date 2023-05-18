@@ -5,6 +5,7 @@
 #include <QProcess>
 #include <QRegularExpression>
 
+#include "common/fs_sys_helpers.h"
 #include "common/list_utils.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/app.h"
@@ -229,7 +230,7 @@ ProgramRunner::playAudioFile(Util::Settings::RunProgramConfig &config) {
 QString
 ProgramRunner::defaultAudioFileName()
   const {
-  return Q("%1/sounds/finished-1.webm").arg(Q(MTX_PKG_DATA_DIR));
+  return Q("%1/sounds/finished-1.webm").arg(Q(mtx::sys::get_package_data_folder()));
 }
 
 void

@@ -166,9 +166,14 @@ get_current_exe_path(std::string const &) {
   return boost::filesystem::absolute(mtx::fs::to_path(file_name)).parent_path();
 }
 
+boost::filesystem::path
+get_package_data_folder() {
+  return get_installation_path() / "data";
+}
+
 bool
 is_installed() {
-  auto file_to_test = get_installation_path() / "data" / "portable-app";
+  auto file_to_test = get_package_data_folder() / "portable-app";
   return !boost::filesystem::is_regular_file(file_to_test);
 }
 

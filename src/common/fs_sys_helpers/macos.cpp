@@ -54,4 +54,27 @@ normalize_unicode_string(std::string const &src,
   return { &buffer[0], static_cast<std::string::size_type>(byte_length) };
 }
 
+boost::filesystem::path
+get_current_exe_path([[maybe_unused]] std::string const &argv0) {
+  std::string file_name;
+  file_name.resize(4000);
+
+  while (true) {
+    memset(&file_name[0], 0, file_name.size());
+    uint32_t size = file_name.size();
+    auto result   = _NSGetExecutablePath(&file_name[0], &size);
+    file_name.resize(size);
+
+    if (0 == result)
+      break;
+  }
+
+  return boost::filesystem::absolute(mtx::fs::to_path(file_name)).parent_path();
+}
+
+boost::filesystem::path
+get_package_data_folder() {
+  return get_current_exe_path() / "data";
+}
+
 }

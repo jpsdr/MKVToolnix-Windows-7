@@ -94,25 +94,9 @@ system(std::string const &command) {
   return ::system(command.c_str());
 }
 
+#if !defined(SYS_APPLE)
 boost::filesystem::path
 get_current_exe_path([[maybe_unused]] std::string const &argv0) {
-#if defined(SYS_APPLE)
-  std::string file_name;
-  file_name.resize(4000);
-
-  while (true) {
-    memset(&file_name[0], 0, file_name.size());
-    uint32_t size = file_name.size();
-    auto result   = _NSGetExecutablePath(&file_name[0], &size);
-    file_name.resize(size);
-
-    if (0 == result)
-      break;
-  }
-
-  return boost::filesystem::absolute(mtx::fs::to_path(file_name)).parent_path();
-
-#else // SYS_APPLE
   auto exe = mtx::fs::to_path("/proc/self/exe");
   if (boost::filesystem::is_regular_file(exe)) {
     auto exe_path = boost::filesystem::read_symlink(exe);
@@ -128,8 +112,13 @@ get_current_exe_path([[maybe_unused]] std::string const &argv0) {
     return exe.parent_path();
 
   return boost::filesystem::current_path();
-#endif
 }
+
+boost::filesystem::path
+get_package_data_folder() {
+  return mtx::fs::to_path(MTX_PKG_DATA_DIR);
+}
+#endif
 
 bool
 is_installed() {

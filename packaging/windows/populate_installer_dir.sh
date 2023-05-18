@@ -135,6 +135,7 @@ function copy_files {
   mkdir ${tgt_dir}/tools
   cp src/tools/{bluray_dump,ebml_validator,hevcc_dump,xvc_dump}.exe ${tgt_dir}/tools/
 
+  cp src/mkvtoolnix-gui/qt_resources.rcc ${tgt_dir}/data/
   cp share/sounds/* ${tgt_dir}/data/sounds/
   touch ${tgt_dir}/data/portable-app
 

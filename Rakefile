@@ -107,6 +107,9 @@ def setup_globals
   $gui_ui_files            = FileList["src/mkvtoolnix-gui/forms/**/*.ui"].to_a
   $gui_ui_h_files          = $gui_ui_files.collect { |file| file.ext 'h' }
 
+  $qrc                     = $build_mkvtoolnix_gui ? FileList[ "src/mkvtoolnix-gui/qt_resources.qrc" ].to_a : []
+  $qt_resources            = $qrc.map { |file| file.ext('rcc') }
+
   $dependency_dir          = "#{$source_dir}/rake.d/dependency.d"
   $dependency_tmp_dir      = "#{$dependency_dir}/tmp"
 
@@ -269,6 +272,7 @@ def define_default_task
   # The applications themselves
   targets  = $applications.clone
   targets += $tools.map { |name| "src/tools/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
+  targets += $qt_resources
 
   targets << "msix-assets" if $building_for[:windows] && !c(:CONVERT).empty?
   targets += (c(:ADDITIONAL_TARGETS) || '').split(%r{ +})
@@ -388,7 +392,7 @@ qrc_compiler = lambda do |*args|
   t       = args[0]
   sources = t.prerequisites
 
-  runq "rcc", sources[0], "#{c(:RCC)} -o #{t.name} #{sources.join(" ")}"
+  runq "rcc", sources[0], "#{c(:RCC)} -o #{t.name} -binary #{sources.join(" ")}"
 end
 
 # Pattern rules
@@ -954,7 +958,7 @@ namespace :install do
     $applications.each { |application| install_program "#{c(:bindir)}/#{application_name_mapper[application]}", application }
   end
 
-  task :shared do
+  task :shared => $qt_resources do
     install_dir :desktopdir, :mimepackagesdir
     install_data :mimepackagesdir, FileList[ "#{$source_dir}/share/mime/*.xml" ]
     if c?(:BUILD_GUI)
@@ -978,6 +982,7 @@ namespace :install do
 
       install_dir  sounds_dir
       install_data sounds_dir, FileList["#{$source_dir}/share/sounds/*"]
+      install_data c(:pkgdatadir), $qt_resources
     end
   end
 
@@ -1039,7 +1044,6 @@ task :clean do
     lib/libmatroska/matroska/matroska_export.h
     packaging/windows/msix/assets/*.png
     share/icons/**/*.svg
-    src/*/qt_resources.cpp
     src/**/manifest.xml
     src/info/ui/*.h
     src/mkvextract
@@ -1055,6 +1059,7 @@ task :clean do
   }
   patterns += $tools.collect { |name| "src/tools/#{name}" } + $benchmark_programs
   patterns += PCH.clean_patterns
+  patterns += $qt_resources
   patterns << $version_header_name
 
   remove_files_by_patterns patterns
@@ -1237,17 +1242,14 @@ end
 #
 
 if $build_mkvtoolnix_gui
-  qrc = [ "src/mkvtoolnix-gui/qt_resources.qrc" ]
+  add_qrc_dependencies(*$qrc)
 
-  add_qrc_dependencies(*qrc)
-
-  file "src/mkvtoolnix-gui/qt_resources.cpp" => qrc, &qrc_compiler
+  file "src/mkvtoolnix-gui/qt_resources.rcc" => $qrc, &qrc_compiler
 
   Application.new("src/mkvtoolnix-gui/mkvtoolnix-gui").
     description("Build the mkvtoolnix-gui executable").
     aliases("mkvtoolnix-gui").
     qt_dependencies_and_sources("mkvtoolnix-gui").
-    sources("src/mkvtoolnix-gui/qt_resources.cpp").
     sources("src/mkvtoolnix-gui/resources.o", :if => $building_for[:windows]).
     libraries($common_libs - [ :qt_non_gui ], :qt, :vorbis, :ogg).
     libraries("-mwindows", :ole32, :powrprof, :uuid, :if => $building_for[:windows]).

@@ -46,6 +46,14 @@
 ## Build system changes
 
 * The bundled `fmt` library was updated to v10.0.0.
+* MKVToolNix GUI now uses an external Qt resource file instead of compiling it
+  into the executable. The resource file has reached a size at which the C++
+  compiler exhausts available virtual memory on some 32-bit architectures. On
+  Windows & macOS the GUI will look for the file in
+  `<folder_with_executables>/data/qt_resources.rcc`, and in the directory set
+  with `configure`'s `--datadir` parameter on other systems (which usually
+  means `/usr/share/mkvtoolnix`). The `install` build system commands installs
+  it into that folder.
 
 
 # Version 76.0 "Celebration" 2023-04-30
