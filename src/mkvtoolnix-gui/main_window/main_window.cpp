@@ -97,7 +97,8 @@ MainWindow::MainWindow(QWidget *parent)
 
   retranslateUi();
 
-  Util::restoreWidgetGeometry(this);
+  if (!Util::restoreWidgetGeometry(this))
+    resize(1060, 780);
 
   App::programRunner().setup();
 

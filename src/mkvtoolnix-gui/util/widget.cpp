@@ -121,13 +121,15 @@ saveWidgetGeometry(QWidget *widget) {
   reg->endGroup();
 }
 
-void
+bool
 restoreWidgetGeometry(QWidget *widget) {
   auto reg = Util::Settings::registry();
 
   reg->beginGroup(s_grpWindowGeometry);
-  widget->restoreGeometry(reg->value(widget->objectName()).toByteArray());
+  auto restored = widget->restoreGeometry(reg->value(widget->objectName()).toByteArray());
   reg->endGroup();
+
+  return restored;
 }
 
 QWidget *
