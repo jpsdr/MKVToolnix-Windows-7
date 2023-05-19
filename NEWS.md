@@ -42,6 +42,11 @@
   (factor) given on the command-line via the `--aspect-ratio` or
   `--aspect-ratio-factor` options.
 * Fixed compilation with fmt v10.0.0.
+* mkvmerge: Windows: when writing to a network share connected via SMB1
+  `mkvmerge` was aborting with a error about `create_directory() failed` with
+  existing directories. This was due to a bug in recent versions of the
+  Boost.Filesystem library. The Windows version of MKVToolNix will be built
+  with Boost 1.82.0 from now on which includes the fix. Fixes #3547.
 
 ## Build system changes
 
