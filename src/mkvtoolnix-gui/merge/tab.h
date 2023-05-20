@@ -334,6 +334,8 @@ protected:
   virtual QString suggestOutputFileNameExtension() const;
   virtual QString generateUniqueOutputFileName(QString const &baseName, QDir const &outputDir, bool removeUniquenessSuffix = false);
 
+  virtual void ensureAtLeastOneTrackEnabledMaybe();
+
   virtual void enableDisableAllTracks(bool enable);
 
   virtual QString currentState();

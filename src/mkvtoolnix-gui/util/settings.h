@@ -201,7 +201,7 @@ public:
   bool m_elideTabHeaderLabels;
   QDir m_lastOpenDir, m_lastOutputDir, m_lastConfigDir;
   bool m_setAudioDelayFromFileName, m_autoSetFileTitle, m_autoClearFileTitle, m_disableCompressionForAllTrackTypes, m_disableDefaultTrackForSubtitles, m_mergeAlwaysShowOutputFileControls, m_dropLastChapterFromBlurayPlaylist;
-  bool m_mergeEnableDialogNormGainRemoval, m_mergeAddBlurayCovers, m_mergeAttachmentsAlwaysSkipForExistingName;
+  bool m_mergeEnableDialogNormGainRemoval, m_mergeAddBlurayCovers, m_mergeAttachmentsAlwaysSkipForExistingName, m_mergeEnsureAtLeastOneTrackEnabled;
   ClearMergeSettingsAction m_clearMergeSettings;
   MergeAddingAppendingFilesPolicy m_mergeDragAndDropFilesPolicy, m_mergeLastDragAndDropFilesDecision, m_mergeAddingAppendingFilesPolicy, m_mergeLastAddingAppendingDecision;
   MergeAddingDirectoriesPolicy m_mergeDragAndDropDirectoriesPolicy;

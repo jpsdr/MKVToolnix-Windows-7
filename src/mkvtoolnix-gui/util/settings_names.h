@@ -77,6 +77,7 @@ char const * const s_valMergeAttachmentsAlwaysSkipForExistingName = "mergeAttach
 char const * const s_valMergeDragAndDropDirectoriesPolicy         = "mergeDragAndDropDirectoriesPolicy";
 char const * const s_valMergeDragAndDropFilesPolicy               = "mergeDragAndDropFilesPolicy";
 char const * const s_valMergeEnableDialogNormGainRemoval          = "mergeEnableDialogNormGainRemoval";
+char const * const s_valMergeEnsureAtLeastOneTrackEnabled         = "mergeEnsureAtLeastOneTrackEnabled";
 char const * const s_valMergeFileColors                           = "mergeFileColors";
 char const * const s_valMergeLastAddingAppendingDecision          = "mergeLastAddingAppendingDecision";
 char const * const s_valMergeLastDragAndDropFilesDecision         = "mergeLastDragAndDropFilesDecision";

@@ -20,6 +20,12 @@
   same type will be sorted in the same order as their source files occur in
   the command-line arguments. Note that this doesn't affect file
   identification. Implements #3545.
+* MKVToolNix GUI: multiplexer: the GUI will now check the state of the 'track
+  enabled' flag of all video, audio & subtitle tracks when starting to
+  multiplex or adding a job to the job queue. If there's no track with its
+  flag turned on for a type, the GUI will turn on the flag for the first track
+  of the type. This behavior can be turned off in the preferences. Implements
+  #3535.
 
 ## Bug fixes
 

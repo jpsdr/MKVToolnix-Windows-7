@@ -1,5 +1,8 @@
 #include "common/common_pch.h"
 
+#include <array>
+
+#include "common/list_utils.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 #include "mkvtoolnix-gui/jobs/mux_job.h"
@@ -511,12 +514,55 @@ Tab::checkIfMissingAudioTrackIsOK() {
 }
 
 void
+Tab::ensureAtLeastOneTrackEnabledMaybe() {
+  if (!Util::Settings::get().m_mergeEnsureAtLeastOneTrackEnabled)
+    return;
+
+  auto &p = *p_func();
+
+  std::array<bool, 3> hasEnabledTrack;
+  std::array<TrackPtr, 3> firstTrack;
+
+  for (auto const &sourceFile : p.config.m_files) {
+    if (sourceFile->m_appended)
+      continue;
+
+    for (auto const &track : sourceFile->m_tracks) {
+      if (!mtx::included_in(track->m_type, TrackType::Video, TrackType::Audio, TrackType::Subtitles))
+        continue;
+
+      auto idx = track->m_type == TrackType::Video ? 0
+               : track->m_type == TrackType::Audio ? 1
+               :                                     2;
+
+      if (track->m_trackEnabledFlag == 1)
+        hasEnabledTrack[idx] = true;
+
+      if (!firstTrack[idx])
+        firstTrack[idx] = track;
+    }
+  }
+
+  auto modified = false;
+
+  for (auto idx = 0u; idx < hasEnabledTrack.size(); ++idx)
+    if (!hasEnabledTrack[idx] && firstTrack[idx]) {
+      firstTrack[idx]->m_trackEnabledFlag = true;
+      modified                            = true;
+    }
+
+  if (modified)
+    setControlValuesFromConfig();
+}
+
+void
 Tab::addToJobQueue(bool startNow,
                    std::optional<Util::Settings::ClearMergeSettingsAction> clearSettings) {
   auto &p = *p_func();
 
   updateConfigFromControlValues();
   setOutputFileNameMaybe();
+  ensureAtLeastOneTrackEnabledMaybe();
 
   if (   !isReadyForMerging()
       || !checkIfOverwritingIsOK()

@@ -99,6 +99,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   // Merge page
   if (!m_cfg.m_mediaInfoExe.isEmpty())
     ui->leMMediaInfoExe->setText(QDir::toNativeSeparators(m_cfg.m_mediaInfoExe));
+  ui->cbMEnsureAtLeastOneTrackEnabled->setChecked(m_cfg.m_mergeEnsureAtLeastOneTrackEnabled);
   ui->cbMSortFilesTracksByTypeWhenAdding->setChecked(m_cfg.m_mergeSortFilesTracksByTypeWhenAdding);
   ui->cbMReconstructSequencesWhenAdding->setChecked(m_cfg.m_mergeReconstructSequencesWhenAdding);
   ui->cbMAutoSetFileTitle->setChecked(m_cfg.m_autoSetFileTitle);
@@ -321,6 +322,12 @@ PreferencesDialog::setupToolTips() {
                    Q("%1 %2")
                    .arg(QY("If enabled, the GUI will use legacy MIME types when detecting the MIME type of font attachments instead of the current standard MIME types."))
                    .arg(QY("This mostly affects TrueType fonts for which the legacy MIME type ('application/x-truetype-font') might be more widely supported than the standard MIME types ('font/sfnt' and 'font/ttf').")));
+
+  Util::setToolTip(ui->cbMEnsureAtLeastOneTrackEnabled,
+                   Q("%1 %2 %3")
+                   .arg(QY("If enabled, the GUI checks the state of the 'track enabled' flag of all video, audio & subtitle tracks when starting to multiplex or adding a job to the job queue."))
+                   .arg(QY("For each track type the GUI determines if at least one track has the flag turned on."))
+                   .arg(QY("If not, it will turn on the flag for the first track of the current type.")));
 
   Util::setToolTip(ui->cbGuiPalette, QY("Changes to this option will only take effect the next time the application is started."));
 
@@ -1143,6 +1150,7 @@ PreferencesDialog::save() {
 
   // Merge page:
   m_cfg.m_mediaInfoExe                                        = ui->leMMediaInfoExe->text();
+  m_cfg.m_mergeEnsureAtLeastOneTrackEnabled                   = ui->cbMEnsureAtLeastOneTrackEnabled->isChecked();
   m_cfg.m_autoSetFileTitle                                    = ui->cbMAutoSetFileTitle->isChecked();
   m_cfg.m_autoClearFileTitle                                  = ui->cbMAutoClearFileTitle->isChecked();
   m_cfg.m_setAudioDelayFromFileName                           = ui->cbMSetAudioDelayFromFileName->isChecked();
