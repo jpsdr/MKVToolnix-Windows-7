@@ -174,7 +174,8 @@ Section "Program files" SEC01
 
   CreateDirectory "$SMPROGRAMS\$ICONS_GROUP"
   SetOutPath "$INSTDIR"
-  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI.lnk" "$INSTDIR\mkvtoolnix-gui.exe" "" "$INSTDIR\mkvtoolnix-gui.exe"
+  Delete "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI.lnk"
+  CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix.lnk" "$INSTDIR\mkvtoolnix-gui.exe" "" "$INSTDIR\mkvtoolnix-gui.exe"
   SetOutPath "$INSTDIR\Doc"
   CreateDirectory "$SMPROGRAMS\$ICONS_GROUP\Documentation"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\Documentation\Command line references.lnk" "$INSTDIR\doc\command_line_references.html"
@@ -182,7 +183,7 @@ Section "Program files" SEC01
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\Documentation\README.lnk" "$INSTDIR\doc\README.txt"
   !insertmacro MUI_STARTMENU_WRITE_END
 
-  ${registerExtension} "$INSTDIR\mkvtoolnix-gui.exe" ".mtxcfg" "MKVToolNix GUI Settings"
+  ${registerExtension} "$INSTDIR\mkvtoolnix-gui.exe" ".mtxcfg" "MKVToolNix Settings"
 
   SetOutPath "$INSTDIR"
 SectionEnd
@@ -308,13 +309,13 @@ FunctionEnd
 Section Uninstall
   SetShellVarContext all
 
-  ${unregisterExtension} ".mtxcfg" "MKVToolNix GUI Settings"
+  ${unregisterExtension} ".mtxcfg" "MKVToolNix Settings"
 
   !insertmacro MUI_STARTMENU_GETFOLDER "Application" $ICONS_GROUP
   Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\Website.lnk"
 
-  Delete "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI.lnk"
+  Delete "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix.lnk"
 
   RMDir /r "$SMPROGRAMS\$ICONS_GROUP\Documentation"
   RMDir "$SMPROGRAMS\$ICONS_GROUP"
