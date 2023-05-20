@@ -651,20 +651,19 @@ render_headers(mm_io_c *out) {
     if (first_file) {
       g_kax_last_entry = nullptr;
 
-      size_t i;
-      for (i = 0; i < g_track_order.size(); i++)
-        if ((g_track_order[i].file_id >= 0) && (g_track_order[i].file_id < static_cast<int>(g_files.size())) && !g_files[g_track_order[i].file_id]->appending)
-          g_files[g_track_order[i].file_id]->reader->set_headers_for_track(g_track_order[i].track_id);
+      for (auto const &order : g_track_order)
+        if ((order.file_id >= 0) && (order.file_id < static_cast<int>(g_files.size())) && !g_files[order.file_id]->appending)
+          g_files[order.file_id]->reader->set_headers_for_track(order.track_id);
 
-      for (i = 0; i < g_files.size(); i++)
-        if (!g_files[i]->appending)
-          g_files[i]->reader->set_headers();
+      for (auto const &file : g_files)
+        if (!file->appending)
+          file->reader->set_headers();
 
       set_timestamp_scale();
 
-      for (i = 0; i < g_packetizers.size(); i++)
-        if (g_packetizers[i].packetizer)
-          g_packetizers[i].packetizer->fix_headers();
+      for (auto const &packetizer : g_packetizers)
+        if (packetizer.packetizer)
+          packetizer.packetizer->fix_headers();
 
     } else
       set_timestamp_scale();
