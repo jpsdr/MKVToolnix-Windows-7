@@ -10,7 +10,6 @@
 #include <QVariant>
 
 #include "common/bcp47.h"
-#include "common/translation.h"
 #include "mkvtoolnix-gui/info/job_settings.h"
 #include "mkvtoolnix-gui/merge/enums.h"
 #include "mkvtoolnix-gui/util/recently_used_strings.h"
