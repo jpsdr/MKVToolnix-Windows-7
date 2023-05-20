@@ -674,7 +674,7 @@ EOT
       task :manpages do
         FileUtils.touch($po4a_pot) if !FileTest.exist?($po4a_pot)
 
-        runq "po4a", "#{$po4a_cfg} (update PO/POT)", "#{c(:PO4A)} #{$flags[:po4a]} --no-translations ${po4a_cfg}"
+        runq "po4a", "#{$po4a_cfg} (update PO/POT)", "#{c(:PO4A)} #{$flags[:po4a]} --no-translations #{$po4a_cfg}"
         $all_man_po_files.each do |po_file|
           normalize_po po_file
         end
