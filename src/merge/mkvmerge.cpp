@@ -126,7 +126,9 @@ set_usage() {
   usage_text += Y("  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
                   "                           A comma separated list of both file IDs\n"
                   "                           and track IDs that controls the order of the\n"
-                  "                           tracks in the destination file.\n");
+                  "                           tracks in the destination file. If not given,\n"
+                  "                           the tracks will sorted by type (video, audio,\n"
+                  "                           subtitles, others).\n");
   usage_text += Y("  --cluster-length <n[ms]> Put at most n data blocks into each cluster.\n"
                   "                           If the number is postfixed with 'ms' then\n"
                   "                           put at most n milliseconds of data into each\n"

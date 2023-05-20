@@ -539,6 +539,39 @@ generate_segment_uids() {
   s_seguid_next.generate_random();
 }
 
+static int
+sortable_track_type_for_file_and_track_id(track_order_t const &track_order) {
+  auto const type = g_files[track_order.file_id]->reader->m_reader_packetizers[track_order.track_id]->get_track_type();
+
+  return type == track_video    ?  1
+       : type == track_audio    ?  2
+       : type == track_subtitle ?  3
+       :                          99;
+}
+
+static bool
+track_order_less_than_for_type(track_order_t const &a,
+                               track_order_t const &b) {
+  return sortable_track_type_for_file_and_track_id(a) < sortable_track_type_for_file_and_track_id(b);
+}
+
+static void
+create_type_based_track_order() {
+  auto file_id = -1;
+
+  for (auto const &file : g_files) {
+    ++file_id;
+
+    if (file->appending)
+      continue;
+
+    for (int track_id = 0, end = file.get()->reader->m_reader_packetizers.size(); track_id < end; ++track_id)
+      g_track_order.push_back(track_order_t{ file_id, track_id });
+  }
+
+  std::stable_sort(g_track_order.begin(), g_track_order.end(), track_order_less_than_for_type);
+}
+
 /** \brief Render the basic EBML and Matroska headers
 
    Renders the segment information and track headers. Also reserves
@@ -650,6 +683,9 @@ render_headers(mm_io_c *out) {
 
     if (first_file) {
       g_kax_last_entry = nullptr;
+
+      if (g_track_order.empty())
+        create_type_based_track_order();
 
       for (auto const &order : g_track_order)
         if ((order.file_id >= 0) && (order.file_id < static_cast<int>(g_files.size())) && !g_files[order.file_id]->appending)

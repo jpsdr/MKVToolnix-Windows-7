@@ -13,6 +13,13 @@
 * MKVToolNix GUI: macOS: when you install the application from the DMG it'll
   register itself as an alternate handler for its supported file types. This
   allows the use of the "Open with" context menu action in Finder.
+* mkvmerge: tracks in the destination file will now be sorted by their type
+  automatically unless the track order is specified with the `--track-order`
+  option. The order is as follows: video tracks first followed by audio &
+  subtitle tracks with other rarely used types of tracks last. Tracks of the
+  same type will be sorted in the same order as their source files occur in
+  the command-line arguments. Note that this doesn't affect file
+  identification. Implements #3545.
 
 ## Bug fixes
 
