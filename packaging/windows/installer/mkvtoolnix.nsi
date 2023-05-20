@@ -169,93 +169,11 @@ Section "Program files" SEC01
   File /r "../plugins"
 !endif
 
-  # Delete files that might be present from older installation
-  # if this is just an upgrade.
-  Delete "$INSTDIR\mkv*.ico"
-  Delete "$INSTDIR\mkvinfo-gui.exe"
-  Delete "$INSTDIR\mmg.exe"
-  Delete "$INSTDIR\data\magic.mgc"
-  Delete "$INSTDIR\doc\command_line_references_and_guide.html"
-  Delete "$INSTDIR\doc\en\mmg.html"
-  Delete "$INSTDIR\doc\de\mmg.html"
-  Delete "$INSTDIR\doc\es\mmg.html"
-  Delete "$INSTDIR\doc\ja\mmg.html"
-  Delete "$INSTDIR\doc\nl\mmg.html"
-  Delete "$INSTDIR\doc\uk\mmg.html"
-  Delete "$INSTDIR\doc\zh_CN\mmg.html"
-  Delete "$INSTDIR\examples\example-timecodes-v1.txt"
-  Delete "$INSTDIR\examples\example-timecodes-v2.txt"
-  Delete "$INSTDIR\locale\cs\LC_MESSAGES\qtbase.qm"
-  Delete "$INSTDIR\locale\de\LC_MESSAGES\qtbase.qm"
-  Delete "$INSTDIR\locale\fr\LC_MESSAGES\qtbase.qm"
-  Delete "$INSTDIR\locale\it\LC_MESSAGES\qtbase.qm"
-  Delete "$INSTDIR\locale\ja\LC_MESSAGES\qtbase.qm"
-  Delete "$INSTDIR\locale\pl\LC_MESSAGES\qtbase.qm"
-  Delete "$INSTDIR\locale\ru\LC_MESSAGES\qtbase.qm"
-  Delete "$INSTDIR\locale\uk\LC_MESSAGES\qtbase.qm"
-  Delete "$INSTDIR\locale\ca\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\cs\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\de\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\es\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\eu\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\fr\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\it\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\it\LC_MESSAGES\wxmsw.mo"
-  Delete "$INSTDIR\locale\ja\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\nl\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\pl\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\ru\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\sv\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\tr\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\uk\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\zh_CN\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\locale\zh_TW\LC_MESSAGES\wxstd.mo"
-  Delete "$INSTDIR\share\misc\magic.mgc"
-  RMDir /r "$INSTDIR\doc\guide"
-  RMDir /r "$INSTDIR\doc\images"
-  RMDir /r "$INSTDIR\locale\rs"
-  RMDir    "$INSTDIR\share\misc"
-  RMDir    "$INSTDIR\share"
-
-  # The docs have been moved to locale specific subfolders.
-  Delete "$INSTDIR\doc\mkvextract.html"
-  Delete "$INSTDIR\doc\mkvinfo.html"
-  Delete "$INSTDIR\doc\mkvmerge.html"
-  Delete "$INSTDIR\doc\mkvpropedit.html"
-  Delete "$INSTDIR\doc\mmg.html"
-  Delete "$INSTDIR\doc\mkvmerge-gui.*"
-
-  Delete "$INSTDIR\doc\README.Windows.txt"
-  Delete "$INSTDIR\doc\ChangeLog.txt"
-
-  Delete "$SMPROGRAMS\$ICONS_GROUP\mkvmerge GUI.lnk"
-  Delete "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI preview.lnk"
-  Delete "$SMPROGRAMS\$ICONS_GROUP\Documentation\ChangeLog - What is new.lnk"
-
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\App Paths\AppMainExe.exe"
-
-  Delete "$SMPROGRAMS\$ICONS_GROUP\Documentation\mkvmerge GUI guide.lnk"
-  RMDir /r "$SMPROGRAMS\$ICONS_GROUP\Documentation\mkvmerge GUI guide"
-  RMDir /r "$SMPROGRAMS\$ICONS_GROUP\Documentation\Other documentation"
-  RMDir /r "$SMPROGRAMS\$ICONS_GROUP\Documentation\Command line reference"
-
-  SetShellVarContext current
-
-  Delete "$SMPROGRAMS\$ICONS_GROUP\Documentation\mkvmerge GUI guide.lnk"
-  RMDir /r "$SMPROGRAMS\$ICONS_GROUP\Documentation\mkvmerge GUI guide"
-  RMDir /r "$SMPROGRAMS\$ICONS_GROUP\Documentation\Other documentation"
-  RMDir /r "$SMPROGRAMS\$ICONS_GROUP\Documentation\Command line reference"
-
-  SetShellVarContext all
-
   # Shortcuts
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
 
   CreateDirectory "$SMPROGRAMS\$ICONS_GROUP"
   SetOutPath "$INSTDIR"
-  Delete "$SMPROGRAMS\$ICONS_GROUP\mkvinfo GUI.lnk"
-  Delete "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI preview.lnk"
-  Delete "$SMPROGRAMS\$ICONS_GROUP\Documentation\Command line references and guide.lnk"
   CreateShortCut "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI.lnk" "$INSTDIR\mkvtoolnix-gui.exe" "" "$INSTDIR\mkvtoolnix-gui.exe"
   SetOutPath "$INSTDIR\Doc"
   CreateDirectory "$SMPROGRAMS\$ICONS_GROUP\Documentation"
@@ -396,16 +314,10 @@ Section Uninstall
   Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\Website.lnk"
 
-  Delete "$SMPROGRAMS\$ICONS_GROUP\mkvinfo GUI.lnk"
-  Delete "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI preview.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\MKVToolNix GUI.lnk"
 
   RMDir /r "$SMPROGRAMS\$ICONS_GROUP\Documentation"
   RMDir "$SMPROGRAMS\$ICONS_GROUP"
-
-  Delete "$DESKTOP\mkvmerge GUI.lnk"
-  Delete "$DESKTOP\MKVToolNix GUI preview.lnk"
-  Delete "$DESKTOP\MKVToolNix GUI.lnk"
 
   Delete "$INSTDIR\MKVToolNix.url"
   Delete "$INSTDIR\uninst.exe"
