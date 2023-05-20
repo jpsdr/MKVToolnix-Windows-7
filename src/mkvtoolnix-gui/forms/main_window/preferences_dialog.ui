@@ -852,39 +852,202 @@
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="1,0">
-          <item>
-           <widget class="QGroupBox" name="groupBox_12">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="title">
-             <string>Layout</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_20">
+         <spacer name="verticalSpacer_12">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pMergeLayout">
+       <layout class="QVBoxLayout" name="verticalLayout_53">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QGroupBox" name="groupBox_12">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="title">
+           <string>Layout</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_20">
+           <item>
+            <widget class="QCheckBox" name="cbMAlwaysShowOutputFileControls">
+             <property name="text">
+              <string>Always show the destination file controls &amp;below tabs</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="cbMTrackPropertiesLayoutLabel">
+             <property name="text">
+              <string>Position for the track properties on the &quot;input&quot; tab:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
              <item>
-              <widget class="QCheckBox" name="cbMAlwaysShowOutputFileControls">
-               <property name="text">
-                <string>Always show the destination file controls &amp;below tabs</string>
+              <spacer name="horizontalSpacer_8">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
                </property>
-              </widget>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
              </item>
              <item>
-              <widget class="QLabel" name="cbMTrackPropertiesLayoutLabel">
-               <property name="text">
-                <string>Position for the track properties on the &quot;input&quot; tab:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <layout class="QVBoxLayout" name="verticalLayout_12">
                <item>
-                <spacer name="horizontalSpacer_8">
+                <widget class="QRadioButton" name="rbMTrackPropertiesLayoutHorizontalScrollArea">
+                 <property name="text">
+                  <string>In a &amp;scrollable column on the right of the files and tracks</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="rbMTrackPropertiesLayoutHorizontalTwoColumns">
+                 <property name="text">
+                  <string>In &amp;two fixed columns on the right of the files and tracks</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QRadioButton" name="rbMTrackPropertiesLayoutVerticalTabWidget">
+                 <property name="text">
+                  <string>In a tab &amp;widget below the files and tracks</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_24">
+          <property name="title">
+           <string>File &amp;&amp; track colors</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_46">
+           <item>
+            <widget class="QCheckBox" name="cbMUseFileAndTrackColors">
+             <property name="text">
+              <string>Use &amp;file &amp;&amp; track colors</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QListWidget" name="lwMFileColors">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>200</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+               <property name="dragEnabled">
+                <bool>true</bool>
+               </property>
+               <property name="dragDropMode">
+                <enum>QAbstractItemView::InternalMove</enum>
+               </property>
+               <property name="defaultDropAction">
+                <enum>Qt::MoveAction</enum>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::ExtendedSelection</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_37">
+               <item>
+                <widget class="QPushButton" name="pbMAddFileColor">
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="list-add">
+                   <normaloff>.</normaloff>.</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbMRemoveFileColors">
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="list-remove">
+                   <normaloff>.</normaloff>.</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbMEditFileColor">
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="document-edit">
+                   <normaloff>.</normaloff>.</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer">
                  <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
+                  <enum>Qt::Vertical</enum>
                  </property>
                  <property name="sizeType">
                   <enum>QSizePolicy::Fixed</enum>
@@ -898,198 +1061,67 @@
                 </spacer>
                </item>
                <item>
-                <layout class="QVBoxLayout" name="verticalLayout_12">
-                 <item>
-                  <widget class="QRadioButton" name="rbMTrackPropertiesLayoutHorizontalScrollArea">
-                   <property name="text">
-                    <string>In a &amp;scrollable column on the right of the files and tracks</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">bgMTrackPropertiesLayout</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="rbMTrackPropertiesLayoutHorizontalTwoColumns">
-                   <property name="text">
-                    <string>In &amp;two fixed columns on the right of the files and tracks</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">bgMTrackPropertiesLayout</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="rbMTrackPropertiesLayoutVerticalTabWidget">
-                   <property name="text">
-                    <string>In a tab &amp;widget below the files and tracks</string>
-                   </property>
-                   <attribute name="buttonGroup">
-                    <string notr="true">bgMTrackPropertiesLayout</string>
-                   </attribute>
-                  </widget>
-                 </item>
-                </layout>
+                <widget class="QPushButton" name="pbMRevertFileColorsToDefault">
+                 <property name="toolTip">
+                  <string>Revert to default colors</string>
+                 </property>
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="document-revert">
+                   <normaloff>.</normaloff>.</iconset>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::MinimumExpanding</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </spacer>
                </item>
               </layout>
              </item>
              <item>
-              <spacer name="verticalSpacer_12">
+              <spacer name="horizontalSpacer_11">
                <property name="orientation">
-                <enum>Qt::Vertical</enum>
+                <enum>Qt::Horizontal</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
-                 <width>20</width>
-                 <height>40</height>
+                 <width>40</width>
+                 <height>20</height>
                 </size>
                </property>
               </spacer>
              </item>
             </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_24">
-            <property name="title">
-             <string>File &amp;&amp; track colors</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_46">
-             <item>
-              <widget class="QCheckBox" name="cbMUseFileAndTrackColors">
-               <property name="text">
-                <string>Use &amp;file &amp;&amp; track colors</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_3">
-               <item>
-                <widget class="QListWidget" name="lwMFileColors">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>100</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="editTriggers">
-                  <set>QAbstractItemView::NoEditTriggers</set>
-                 </property>
-                 <property name="dragEnabled">
-                  <bool>true</bool>
-                 </property>
-                 <property name="dragDropMode">
-                  <enum>QAbstractItemView::InternalMove</enum>
-                 </property>
-                 <property name="defaultDropAction">
-                  <enum>Qt::MoveAction</enum>
-                 </property>
-                 <property name="selectionMode">
-                  <enum>QAbstractItemView::ExtendedSelection</enum>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <layout class="QVBoxLayout" name="verticalLayout_37">
-                 <item>
-                  <widget class="QPushButton" name="pbMAddFileColor">
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                   <property name="icon">
-                    <iconset theme="list-add">
-                     <normaloff>.</normaloff>.</iconset>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pbMRemoveFileColors">
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                   <property name="icon">
-                    <iconset theme="list-remove">
-                     <normaloff>.</normaloff>.</iconset>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pbMEditFileColor">
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                   <property name="icon">
-                    <iconset theme="document-edit">
-                     <normaloff>.</normaloff>.</iconset>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="verticalSpacer">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Fixed</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pbMRevertFileColorsToDefault">
-                   <property name="toolTip">
-                    <string>Revert to default colors</string>
-                   </property>
-                   <property name="text">
-                    <string notr="true"/>
-                   </property>
-                   <property name="icon">
-                    <iconset theme="document-revert">
-                     <normaloff>.</normaloff>.</iconset>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <spacer name="verticalSpacer_7">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::MinimumExpanding</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-         </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_13">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>276</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
@@ -2764,7 +2796,4 @@
   <slot>removeCommonCountries()</slot>
   <slot>enableOutputFileNameControls()</slot>
  </slots>
- <buttongroups>
-  <buttongroup name="bgMTrackPropertiesLayout"/>
- </buttongroups>
 </ui>

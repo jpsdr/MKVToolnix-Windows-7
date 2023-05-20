@@ -256,6 +256,7 @@ PreferencesDialog::setupPageSelector(Page pageToShow) {
                    addItem(Page::OftenUsedSelections, pGui,    QY("Often used selections"));
                    addItem(Page::Languages,           pGui,    QY("Languages"));
   auto pMerge    = addItem(Page::Merge,               nullptr, QY("Multiplexer"),      "merge");
+                   addItem(Page::MergeLayout,         pMerge,  QY("Layout"));
                    addItem(Page::PredefinedValues,    pMerge,  QY("Predefined values"));
                    addItem(Page::DefaultValues,       pMerge,  QY("Default values"));
                    addItem(Page::DeriveTrackLanguage, pMerge,  QY("Deriving track languages"));

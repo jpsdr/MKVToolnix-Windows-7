@@ -26,6 +26,7 @@ public:
     OftenUsedSelections,
     Languages,
     Merge,
+    MergeLayout,
     PredefinedValues,
     DefaultValues,
     DeriveTrackLanguage,
