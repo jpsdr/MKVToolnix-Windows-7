@@ -26,11 +26,9 @@ using namespace libmatroska;
 
 kate_packetizer_c::kate_packetizer_c(generic_reader_c *reader,
                                      track_info_c &ti)
-  : generic_packetizer_c{reader, ti}
+  : generic_packetizer_c{reader, ti, track_subtitle}
   , m_previous_timestamp{}
 {
-  set_track_type(track_subtitle);
-
   // the number of headers to expect is stored in the first header
   auto blocks = unlace_memory_xiph(m_ti.m_private_data);
 

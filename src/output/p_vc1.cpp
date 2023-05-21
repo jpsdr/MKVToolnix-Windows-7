@@ -27,12 +27,11 @@
 using namespace libmatroska;
 
 vc1_video_packetizer_c::vc1_video_packetizer_c(generic_reader_c *n_reader, track_info_c &n_ti)
-  : generic_packetizer_c(n_reader, n_ti)
+  : generic_packetizer_c{n_reader, n_ti, track_video}
   , m_previous_timestamp(-1)
 {
   m_relaxed_timestamp_checking = true;
 
-  set_track_type(track_video);
   set_codec_id(MKV_V_MSCOMP);
 
   // Dummy values

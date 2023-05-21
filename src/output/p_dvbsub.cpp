@@ -23,9 +23,8 @@ using namespace libmatroska;
 dvbsub_packetizer_c::dvbsub_packetizer_c(generic_reader_c *reader,
                                          track_info_c &ti,
                                          memory_cptr const &private_data)
-  : generic_packetizer_c(reader, ti)
+  : generic_packetizer_c{reader, ti, track_subtitle}
 {
-  set_track_type(track_subtitle);
   set_default_compression_method(COMPRESSION_ZLIB);
   m_ti.m_private_data = private_data->clone();
 }

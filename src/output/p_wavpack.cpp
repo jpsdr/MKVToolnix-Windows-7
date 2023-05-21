@@ -27,7 +27,7 @@ using namespace libmatroska;
 wavpack_packetizer_c::wavpack_packetizer_c(generic_reader_c *p_reader,
                                            track_info_c &p_ti,
                                            mtx::wavpack::meta_t &meta)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_audio}
   , m_channels(meta.channel_count)
   , m_sample_rate(meta.sample_rate)
   , m_bits_per_sample(meta.bits_per_sample)
@@ -35,7 +35,6 @@ wavpack_packetizer_c::wavpack_packetizer_c(generic_reader_c *p_reader,
   , m_samples_output(0)
   , m_has_correction(meta.has_correction)
 {
-  set_track_type(track_audio);
   m_sample_duration = mtx::rational(1'000'000'000, m_sample_rate);
 }
 

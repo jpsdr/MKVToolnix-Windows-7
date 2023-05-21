@@ -28,10 +28,9 @@ using namespace libmatroska;
 hdmv_textst_packetizer_c::hdmv_textst_packetizer_c(generic_reader_c *p_reader,
                                                    track_info_c &p_ti,
                                                    memory_cptr const &dialog_style_segment)
-  : generic_packetizer_c{p_reader, p_ti}
+  : generic_packetizer_c{p_reader, p_ti, track_subtitle}
 {
   m_ti.m_private_data = dialog_style_segment->clone();
-  set_track_type(track_subtitle);
   // set_default_compression_method(COMPRESSION_ZLIB);
 }
 

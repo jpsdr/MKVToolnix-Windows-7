@@ -27,9 +27,8 @@ using namespace libmatroska;
 
 vobsub_packetizer_c::vobsub_packetizer_c(generic_reader_c *reader,
                                          track_info_c &ti)
-  : generic_packetizer_c(reader, ti)
+  : generic_packetizer_c{reader, ti, track_subtitle}
 {
-  set_track_type(track_subtitle);
   set_default_compression_method(COMPRESSION_ZLIB);
 }
 

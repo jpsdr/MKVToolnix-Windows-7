@@ -69,7 +69,8 @@ std::vector<generic_packetizer_c *> ptzrs_in_header_order;
 int generic_packetizer_c::ms_track_number = 0;
 
 generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
-                                           track_info_c &ti)
+                                           track_info_c &ti,
+                                           track_type type)
   : m_num_packets{}
   , m_next_packet_wo_assigned_timestamp{}
   , m_free_refs{-1}
@@ -347,6 +348,8 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
     auto divisor        = m_htrack_default_duration_indicates_fields ? 2 : 1;
     m_timestamp_factory = timestamp_factory_c::create_fps_factory(m_htrack_default_duration / divisor, m_ti.m_tcsync);
   }
+
+  set_track_type(type);
 }
 
 generic_packetizer_c::~generic_packetizer_c() {
@@ -388,8 +391,7 @@ generic_packetizer_c::set_uid(uint64_t uid) {
 }
 
 void
-generic_packetizer_c::set_track_type(int type,
-                                     timestamp_factory_application_e tfa_mode) {
+generic_packetizer_c::set_track_type(track_type type) {
   m_htrack_type = type;
 
   if (CUE_STRATEGY_UNSPECIFIED == get_cue_creation())
@@ -408,19 +410,22 @@ generic_packetizer_c::set_track_type(int type,
     m_reader->m_num_subtitle_tracks++;
 
   g_cluster_helper->register_new_packetizer(*this);
+}
 
+void
+generic_packetizer_c::set_timestamp_factory_application_mode(timestamp_factory_application_e tfa_mode) {
   if (   (TFA_AUTOMATIC == tfa_mode)
       && (TFA_AUTOMATIC == m_timestamp_factory_application_mode))
     m_timestamp_factory_application_mode
-      = (track_video    == type) ? TFA_FULL_QUEUEING
-      : (track_subtitle == type) ? TFA_IMMEDIATE
-      : (track_buttons  == type) ? TFA_IMMEDIATE
-      :                            TFA_FULL_QUEUEING;
+      = (track_video    == m_htrack_type) ? TFA_FULL_QUEUEING
+      : (track_subtitle == m_htrack_type) ? TFA_IMMEDIATE
+      : (track_buttons  == m_htrack_type) ? TFA_IMMEDIATE
+      :                                     TFA_FULL_QUEUEING;
 
   else if (TFA_AUTOMATIC != tfa_mode)
     m_timestamp_factory_application_mode = tfa_mode;
 
-  if (m_timestamp_factory && (track_video != type) && (track_audio != type))
+  if (m_timestamp_factory && (track_video != m_htrack_type) && (track_audio != m_htrack_type))
     m_timestamp_factory->set_preserve_duration(true);
 }
 

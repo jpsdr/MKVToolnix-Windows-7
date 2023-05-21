@@ -27,13 +27,13 @@ ra_packetizer_c::ra_packetizer_c(generic_reader_c *p_reader,
                                  int channels,
                                  int bits_per_sample,
                                  uint32_t fourcc)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_audio}
   , m_samples_per_sec(samples_per_sec)
   , m_channels(channels)
   , m_bits_per_sample(bits_per_sample)
   , m_fourcc(fourcc)
 {
-  set_track_type(track_audio, TFA_SHORT_QUEUEING);
+  set_timestamp_factory_application_mode(TFA_SHORT_QUEUEING);
 }
 
 ra_packetizer_c::~ra_packetizer_c() {

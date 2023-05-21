@@ -27,13 +27,12 @@ tta_packetizer_c::tta_packetizer_c(generic_reader_c *p_reader,
                                    int channels,
                                    int bits_per_sample,
                                    int sample_rate)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_audio}
   , m_channels(channels)
   , m_bits_per_sample(bits_per_sample)
   , m_sample_rate(sample_rate)
   , m_samples_output(0)
 {
-  set_track_type(track_audio);
   set_track_default_duration(std::llround(1000000000.0 * mtx::tta::FRAME_TIME));
 
   m_samples_per_frame = std::llround(m_sample_rate * mtx::tta::FRAME_TIME);

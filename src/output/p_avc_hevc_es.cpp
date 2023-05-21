@@ -26,7 +26,7 @@ avc_hevc_es_video_packetizer_c(generic_reader_c *p_reader,
                                std::unique_ptr<mtx::avc_hevc::es_parser_c> &&parser_base,
                                uint32_t width,
                                uint32_t height)
-  : generic_packetizer_c{p_reader, p_ti}
+  : generic_packetizer_c{p_reader, p_ti, track_video}
   , m_parser_base{std::move(parser_base)}
   , m_width{width}
   , m_height{height}
@@ -34,8 +34,6 @@ avc_hevc_es_video_packetizer_c(generic_reader_c *p_reader,
   , m_debug_aspect_ratio{fmt::format("{0}_es|{0}_es_aspect_ratio", p_debug_type)}
 {
   m_relaxed_timestamp_checking = true;
-
-  set_track_type(track_video);
 
   // If no external timestamp file has been specified then mkvmerge
   // might have created a factory due to the --default-duration

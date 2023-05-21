@@ -22,11 +22,10 @@ using namespace libmatroska;
 
 av1_video_packetizer_c::av1_video_packetizer_c(generic_reader_c *p_reader,
                                                track_info_c &p_ti)
-  : generic_packetizer_c{p_reader, p_ti}
+  : generic_packetizer_c{p_reader, p_ti, track_video}
 {
   m_timestamp_factory_application_mode = TFA_SHORT_QUEUEING;
 
-  set_track_type(track_video);
   set_codec_id(MKV_V_AV1);
   set_codec_private(m_ti.m_private_data);
   set_video_pixel_dimensions(0, 0);

@@ -27,10 +27,9 @@ using namespace libmatroska;
 
 hdmv_pgs_packetizer_c::hdmv_pgs_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_subtitle}
   , m_aggregate_packets(false)
 {
-  set_track_type(track_subtitle);
   set_default_compression_method(COMPRESSION_ZLIB);
 }
 

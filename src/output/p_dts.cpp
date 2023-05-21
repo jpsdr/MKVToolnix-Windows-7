@@ -26,7 +26,7 @@ using namespace libmatroska;
 dts_packetizer_c::dts_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
                                    mtx::dts::header_t const &dtsheader)
-  : generic_packetizer_c{p_reader, p_ti}
+  : generic_packetizer_c{p_reader, p_ti, track_audio}
   , m_packet_buffer{128 * 1024}
   , m_first_header{dtsheader}
   , m_previous_header{dtsheader}
@@ -37,7 +37,6 @@ dts_packetizer_c::dts_packetizer_c(generic_reader_c *p_reader,
   , m_stream_position{}
   , m_packet_position{}
 {
-  set_track_type(track_audio);
 }
 
 dts_packetizer_c::~dts_packetizer_c() {

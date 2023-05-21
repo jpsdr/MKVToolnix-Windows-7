@@ -28,7 +28,7 @@ mp3_packetizer_c::mp3_packetizer_c(generic_reader_c *p_reader,
                                    int samples_per_sec,
                                    int channels,
                                    bool source_is_good)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_audio}
   , m_first_packet{true}
   , m_bytes_skipped(0)
   , m_samples_per_sec(samples_per_sec)
@@ -40,7 +40,6 @@ mp3_packetizer_c::mp3_packetizer_c(generic_reader_c *p_reader,
   , m_timestamp_calculator{static_cast<int64_t>(samples_per_sec)}
   , m_packet_duration{m_timestamp_calculator.get_duration(m_samples_per_frame).to_ns()}
 {
-  set_track_type(track_audio);
   set_track_default_duration(m_packet_duration);
   m_timestamp_calculator.set_allow_smaller_timestamps(true);
 }

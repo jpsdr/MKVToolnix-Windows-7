@@ -19,8 +19,9 @@
 using namespace libmatroska;
 
 passthrough_packetizer_c::passthrough_packetizer_c(generic_reader_c *p_reader,
-                                                   track_info_c &p_ti)
-  : generic_packetizer_c(p_reader, p_ti)
+                                                   track_info_c &p_ti,
+                                                   track_type type)
+  : generic_packetizer_c{p_reader, p_ti, type}
 {
   m_timestamp_factory_application_mode = TFA_FULL_QUEUEING;
 }

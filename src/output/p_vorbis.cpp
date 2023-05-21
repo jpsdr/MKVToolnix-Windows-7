@@ -26,7 +26,7 @@ using namespace libmatroska;
 vorbis_packetizer_c::vorbis_packetizer_c(generic_reader_c *reader,
                                          track_info_c &ti,
                                          std::vector<memory_cptr> const &headers)
-  : generic_packetizer_c{reader, ti}
+  : generic_packetizer_c{reader, ti, track_audio}
   , m_headers{headers}
 {
   for (auto const &header : m_headers)
@@ -52,7 +52,6 @@ vorbis_packetizer_c::vorbis_packetizer_c(generic_reader_c *reader,
     if (vorbis_synthesis_headerin(&m_vi, &m_vc, &ogg_headers[i]) < 0)
       throw mtx::output::vorbis_x(Y("Error: vorbis_packetizer: Could not extract the stream's parameters from the first packets.\n"));
 
-  set_track_type(track_audio);
   if (g_use_durations)
     set_track_default_duration((int64_t)(1024000000000.0 / m_vi.rate));
 }

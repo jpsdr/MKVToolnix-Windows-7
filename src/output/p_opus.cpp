@@ -22,14 +22,13 @@ using namespace libmatroska;
 
 opus_packetizer_c::opus_packetizer_c(generic_reader_c *reader,
                                      track_info_c &ti)
-  : generic_packetizer_c(reader, ti)
+  : generic_packetizer_c{reader, ti, track_audio}
   , m_debug{"opus|opus_packetizer"}
   , m_next_calculated_timestamp{timestamp_c::ns(0)}
   , m_id_header(mtx::opus::id_header_t::decode(ti.m_private_data))
 {
   mxdebug_if(m_debug, fmt::format("ID header: {0}\n", m_id_header));
 
-  set_track_type(track_audio);
   set_codec_private(m_ti.m_private_data);
 }
 

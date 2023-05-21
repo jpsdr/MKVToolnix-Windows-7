@@ -25,15 +25,13 @@ aac_packetizer_c::aac_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
                                    mtx::aac::audio_config_t const &config,
                                    mode_e mode)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_audio}
   , m_config{config}
   , m_mode{mode}
   , m_timestamp_calculator{static_cast<int64_t>(config.sample_rate)}
   , m_packet_duration{}
   , m_first_packet{true}
 {
-  set_track_type(track_audio);
-
   if (!m_config.samples_per_frame)
     m_config.samples_per_frame = 1024;
 

@@ -31,7 +31,7 @@ flac_packetizer_c::flac_packetizer_c(generic_reader_c *p_reader,
                                      track_info_c &p_ti,
                                      unsigned char *header,
                                      int l_header)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_audio}
   , m_header{memory_c::clone(header, l_header)}
 {
   int result;
@@ -47,7 +47,6 @@ flac_packetizer_c::flac_packetizer_c(generic_reader_c *p_reader,
   if (!(result & mtx::flac::HEADER_STREAM_INFO))
     mxerror_tid(m_ti.m_fname, m_ti.m_id, Y("The FLAC headers could not be parsed: the stream info structure was not found.\n"));
 
-  set_track_type(track_audio);
   if (m_stream_info.min_blocksize == m_stream_info.max_blocksize)
     set_track_default_duration((int64_t)(1000000000ll * m_stream_info.min_blocksize / m_stream_info.sample_rate));
 }

@@ -114,7 +114,7 @@ public:
   bool m_relaxed_timestamp_checking;
 
 public:
-  generic_packetizer_c(generic_reader_c *reader, track_info_c &ti);
+  generic_packetizer_c(generic_reader_c *reader, track_info_c &ti, track_type type);
   virtual ~generic_packetizer_c();
 
   virtual bool contains_gap();
@@ -177,7 +177,8 @@ public:
   virtual uint64_t get_uid() const {
     return m_huid;
   }
-  virtual void set_track_type(int type, timestamp_factory_application_e tfa_mode = TFA_AUTOMATIC);
+  void set_track_type(track_type type);
+  void set_timestamp_factory_application_mode(timestamp_factory_application_e tfa_mode);
   virtual int get_track_type() const {
     return m_htrack_type;
   }

@@ -1894,10 +1894,9 @@ qtmp4_reader_c::create_audio_packetizer_vorbis(qtmp4_demuxer_c &dmx) {
 
 void
 qtmp4_reader_c::create_audio_packetizer_passthrough(qtmp4_demuxer_c &dmx) {
-  auto packetizer = new passthrough_packetizer_c(this, m_ti);
+  auto packetizer = new passthrough_packetizer_c{this, m_ti, track_audio};
   dmx.ptzr        = add_packetizer(packetizer);
 
-  packetizer->set_track_type(track_audio);
   packetizer->set_codec_id(MKV_A_QUICKTIME);
   packetizer->set_codec_private(dmx.stsd);
   packetizer->set_audio_sampling_freq(dmx.a_samplerate);

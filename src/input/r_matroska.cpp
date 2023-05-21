@@ -1744,13 +1744,12 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
                                           track_info_c &nti) {
   mxinfo_tid(m_ti.m_fname, t->tnum, fmt::format(Y("Using the generic output module for track type '{0}'.\n"), map_track_type_string(t->type)));
 
-  auto packetizer                 = new passthrough_packetizer_c(this, nti);
+  auto packetizer                 = new passthrough_packetizer_c{this, nti, map_track_type(t->type)};
   t->ptzr                         = add_packetizer(packetizer);
   t->ptzr_ptr                     = packetizer;
   t->passthrough                  = true;
   m_ptzr_to_track_map[packetizer] = t;
 
-  packetizer->set_track_type(map_track_type(t->type));
   packetizer->set_codec_id(t->codec_id);
   packetizer->set_codec_private(t->private_data);
   packetizer->set_codec_name(t->codec_name);

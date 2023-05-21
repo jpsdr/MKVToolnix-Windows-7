@@ -29,7 +29,7 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
                                    int channels,
                                    int bits_per_sample,
                                    pcm_format_e format)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_audio}
   , m_samples_per_sec(samples_per_sec)
   , m_channels(channels)
   , m_bits_per_sample(bits_per_sample)
@@ -54,7 +54,6 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
   m_samples_per_packet = samples_per_sec / 25;
   m_packet_size        = samples_to_size(m_samples_per_packet);
 
-  set_track_type(track_audio);
   set_track_default_duration((int64_t)(1000000000.0 * m_samples_per_packet / m_samples_per_sec));
 
   if (m_format == big_endian_integer)

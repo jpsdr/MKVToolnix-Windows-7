@@ -25,11 +25,10 @@ nn   see the file COPYING for details
 using namespace libmatroska;
 
 dirac_video_packetizer_c::dirac_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_video}
   , m_headers_found(false)
   , m_previous_timestamp(-1)
 {
-  set_track_type(track_video);
   set_codec_id(MKV_V_DIRAC);
 
   // Dummy values

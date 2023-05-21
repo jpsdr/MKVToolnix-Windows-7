@@ -29,12 +29,11 @@ vobbtn_packetizer_c::vobbtn_packetizer_c(generic_reader_c *p_reader,
                                          track_info_c &p_ti,
                                          int width,
                                          int height)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_buttons}
   , m_previous_timestamp(0)
   , m_width(width)
   , m_height(height)
 {
-  set_track_type(track_buttons);
   set_default_compression_method(COMPRESSION_ZLIB);
 }
 

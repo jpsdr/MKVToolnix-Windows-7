@@ -28,7 +28,7 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
                                    int samples_per_sec,
                                    int channels,
                                    int bsid)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_audio}
   , m_timestamp_calculator{samples_per_sec}
   , m_samples_per_packet{1536}
   , m_packet_duration{m_timestamp_calculator.get_duration(m_samples_per_packet).to_ns()}
@@ -41,7 +41,6 @@ ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
   m_first_ac3_header.m_bs_id       = bsid;
   m_first_ac3_header.m_channels    = channels;
 
-  set_track_type(track_audio);
   set_track_default_duration(m_packet_duration);
 }
 

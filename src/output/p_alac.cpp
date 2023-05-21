@@ -26,14 +26,12 @@ alac_packetizer_c::alac_packetizer_c(generic_reader_c *p_reader,
                                      memory_cptr const &magic_cookie,
                                      unsigned int sample_rate,
                                      unsigned int channels)
-  : generic_packetizer_c{p_reader, p_ti}
+  : generic_packetizer_c{p_reader, p_ti, track_audio}
   , m_magic_cookie{magic_cookie->clone()}
   , m_sample_rate{sample_rate}
   , m_channels{channels}
 {
   set_codec_id(MKV_A_ALAC);
-
-  set_track_type(track_audio);
 
   set_audio_sampling_freq(static_cast<double>(m_sample_rate));
   set_audio_channels(m_channels);

@@ -28,7 +28,7 @@ truehd_packetizer_c::truehd_packetizer_c(generic_reader_c *p_reader,
                                          mtx::truehd::frame_t::codec_e codec,
                                          int sampling_rate,
                                          int channels)
-  : generic_packetizer_c{p_reader, p_ti}
+  : generic_packetizer_c{p_reader, p_ti, track_audio}
   , m_first_frame{true}
   , m_remove_dialog_normalization_gain{get_option_for_track(m_ti.m_remove_dialog_normalization_gain, m_ti.m_id)}
   , m_current_samples_per_frame{}
@@ -38,8 +38,6 @@ truehd_packetizer_c::truehd_packetizer_c(generic_reader_c *p_reader,
   m_first_truehd_header.m_codec         = codec;
   m_first_truehd_header.m_sampling_rate = sampling_rate;
   m_first_truehd_header.m_channels      = channels;
-
-  set_track_type(track_audio);
 }
 
 truehd_packetizer_c::~truehd_packetizer_c() {

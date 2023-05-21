@@ -33,7 +33,7 @@ textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
                                              track_info_c &p_ti,
                                              const char *codec_id,
                                              bool recode)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_subtitle}
   , m_strip_whitespaces{!mtx::hacks::is_engaged(mtx::hacks::KEEP_WHITESPACES_IN_TEXT_SUBTITLES)}
   , m_codec_id{codec_id}
 {
@@ -43,7 +43,6 @@ textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
     m_try_utf8          = m_ti.m_sub_charset.empty();
   }
 
-  set_track_type(track_subtitle);
   if (m_codec_id == MKV_S_TEXTUSF)
     set_default_compression_method(COMPRESSION_ZLIB);
 

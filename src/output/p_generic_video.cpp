@@ -32,7 +32,7 @@ generic_video_packetizer_c::generic_video_packetizer_c(generic_reader_c *p_reade
                                                        int64_t default_duration,
                                                        int width,
                                                        int height)
-  : generic_packetizer_c{p_reader, p_ti}
+  : generic_packetizer_c{p_reader, p_ti, track_video}
   , m_width{width}
   , m_height{height}
   , m_frames_output{}
@@ -41,8 +41,6 @@ generic_video_packetizer_c::generic_video_packetizer_c(generic_reader_c *p_reade
   , m_duration_shift{}
   , m_bframe_bref{-1}
 {
-  set_track_type(track_video);
-
   set_codec_id(codec_id);
   set_codec_private(m_ti.m_private_data);
 }

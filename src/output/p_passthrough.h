@@ -19,7 +19,7 @@
 
 class passthrough_packetizer_c: public generic_packetizer_c {
 public:
-  passthrough_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
+  passthrough_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, track_type type);
 
   virtual void set_headers();
 

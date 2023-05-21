@@ -25,14 +25,13 @@ using namespace libmatroska;
 vpx_video_packetizer_c::vpx_video_packetizer_c(generic_reader_c *p_reader,
                                                track_info_c &p_ti,
                                                codec_c::type_e p_codec)
-  : generic_packetizer_c(p_reader, p_ti)
+  : generic_packetizer_c{p_reader, p_ti, track_video}
   , m_previous_timestamp(-1)
   , m_codec{p_codec}
   , m_is_vp9{p_codec == codec_c::type_e::V_VP9}
 {
   m_timestamp_factory_application_mode = TFA_SHORT_QUEUEING;
 
-  set_track_type(track_video);
   set_codec_id(m_is_vp9 ? MKV_V_VP9 : MKV_V_VP8);
   set_codec_private(p_ti.m_private_data);
 }
