@@ -381,7 +381,7 @@ frame_c::to_string(bool verbose)
                             get_effective_channel_layout());
 
   for (auto &frame : m_dependent_frames)
-    output += fmt::format(" { {0} }", frame.to_string(verbose));
+    output += fmt::format(" {{ {0} }}", frame.to_string(verbose));
 
   return output;
 }

@@ -60,6 +60,8 @@
   existing directories. This was due to a bug in recent versions of the
   Boost.Filesystem library. The Windows version of MKVToolNix will be built
   with Boost 1.82.0 from now on which includes the fix. Fixes #3547.
+* mkvmerge: fixed several instances of wrong format strings for `fmt::format`
+  used in debug messages. Fixes #3548.
 
 ## Build system changes
 

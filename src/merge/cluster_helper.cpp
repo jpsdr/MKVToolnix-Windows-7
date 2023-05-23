@@ -115,8 +115,8 @@ cluster_helper_c::render_before_adding_if_necessary(packet_cptr const &packet) {
   timestamp_delay          = (int64_t)(timestamp_delay / g_timestamp_scale);
 
   mxdebug_if(m->debug_packets,
-             fmt::format("cluster_helper_c::add_packet(): new packet { source {0}/{1} "
-                         "timestamp: {2} duration: {3} bref: {4} fref: {5} assigned_timestamp: {6} timestamp_delay: {7} }\n",
+             fmt::format("cluster_helper_c::add_packet(): new packet {{ source {0}/{1} "
+                         "timestamp: {2} duration: {3} bref: {4} fref: {5} assigned_timestamp: {6} timestamp_delay: {7} }}\n",
                          packet->source->m_ti.m_id, packet->source->m_ti.m_fname, packet->timestamp,          packet->duration,
                          packet->bref,              packet->fref,                 packet->assigned_timestamp, mtx::string::format_timestamp(timestamp_delay)));
 
