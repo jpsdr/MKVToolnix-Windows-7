@@ -415,7 +415,7 @@ Tab::populateTree() {
     handleSegmentInfo(data);
   });
 
-    m_analyzer->with_elements(EBML_ID(KaxTracks), [this](kax_analyzer_data_c const &data) {
+  m_analyzer->with_elements(EBML_ID(KaxTracks), [this](kax_analyzer_data_c const &data) {
     handleTracks(data);
   });
 
