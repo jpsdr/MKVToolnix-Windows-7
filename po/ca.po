@@ -1012,7 +1012,7 @@ msgid "  --track-name <TID:name>  Sets the name for a track.\n"
 msgstr "  --track-name <TID:nom>   Estableix el nom per a una pista.\n"
 
 #: src/merge/mkvmerge.cpp:126
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
 "                           A comma separated list of both file IDs\n"
@@ -1021,10 +1021,12 @@ msgid ""
 "                           the tracks will sorted by type (video, audio,\n"
 "                           subtitles, others).\n"
 msgstr ""
-"  --track-order <ID1_fitxer:TID1,ID2_fitxer:TID2,ID3_fitxer:TID3...>\n"
-"                           Una llista separada per comes dels ID per als fitxers\n"
-"                           i pistes, això controla l'ordre de les pistes en\n"
-"                           el fitxer de destinació.\n"
+"  --track-order <FitxerID1:TID1,FitxerID2:TID2,FitxerID3:TID3,...>\n"
+"                           Una llista separada per comes dels ID de fitxers\n"
+"                           i els ID de seguiment que controlen l'ordre de\n"
+"                           les pistes en el fitxer de destinació. Si no\n"
+"                           s'indica, les pistes seran ordenades per tipus\n"
+"                           (vídeo, àudio, subtítols, altres).\n"
 
 #: src/merge/mkvmerge.cpp:234
 #, no-c-format
@@ -1991,7 +1993,7 @@ msgstr "&Habilitades"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2231
 #, no-c-format
 msgid "&Ensure at least one track of each type has its \"track enabled\" flag set"
-msgstr ""
+msgstr "Ass&egura que com a mínim una pista de cada tipus tingui establerta l'etiqueta «Pista habilitada»"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:119
 #, no-c-format
@@ -7026,7 +7028,7 @@ msgstr "Per a cada directori es pot crear una pestanya nova d'ajustaments de mul
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:329
 #, no-c-format
 msgid "For each track type the GUI determines if at least one track has the flag turned on."
-msgstr ""
+msgstr "Per a cada tipus de pista, la IGU determina si almenys una pista té l'etiqueta d'habilitada."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:410
 #, no-c-format
@@ -7539,7 +7541,7 @@ msgstr "Si està habilitada, aquests fitxers s'ometran sempre sense preguntar."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:328
 #, no-c-format
 msgid "If enabled, the GUI checks the state of the 'track enabled' flag of all video, audio & subtitle tracks when starting to multiplex or adding a job to the job queue."
-msgstr ""
+msgstr "Si està activada, la IGU verificarà l'estat de l'etiqueta «Pista habilitada» de totes les pistes de vídeo, àudio i subtítols en començar el multiplexat o afegir una tasca a la cua de treball."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:417
 #, no-c-format
@@ -7653,7 +7655,7 @@ msgstr "Si no hi ha cap pista de vídeo a la sortida, no es produirà cap divisi
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:330
 #, no-c-format
 msgid "If not, it will turn on the flag for the first track of the current type."
-msgstr ""
+msgstr "Si no, activarà l'etiqueta per a la primera pista del tipus actual."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:225
 #, no-c-format
