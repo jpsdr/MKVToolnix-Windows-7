@@ -963,7 +963,7 @@ msgid "  --track-name <TID:name>  Sets the name for a track.\n"
 msgstr "  --track-name <TID:name>   Définit le nom d'une piste.\n"
 
 #: src/merge/mkvmerge.cpp:126
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
 "                           A comma separated list of both file IDs\n"
@@ -973,10 +973,10 @@ msgid ""
 "                           subtitles, others).\n"
 msgstr ""
 "  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
-"                           Une liste d'ID de fichiers et de pistes,\n"
-"                           séparée par des virgules, qui contrôle\n"
-"                           l'ordre des pistes dans le fichier de\n"
-"                           destination.\n"
+"                           Une liste séparée par des virgules des ID de fichiers\n"
+"                           et des ID de pistes qui contrôlent l'ordre des pistes dans\n"
+"                           le fichier destination. En l'absence, les pistes seront\n"
+"                           triées par type (vidéo, audio, sous-titres, autres).\n"
 
 #: src/merge/mkvmerge.cpp:234
 #, no-c-format
@@ -1941,7 +1941,7 @@ msgstr "&Activé"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2231
 #, no-c-format
 msgid "&Ensure at least one track of each type has its \"track enabled\" flag set"
-msgstr ""
+msgstr "&S'assurer qu'au moins une piste de chaque type a un indicateur « Piste activée » défini"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:119
 #, no-c-format
@@ -6979,7 +6979,7 @@ msgstr "Pour chaque dossier, un nouvel onglet de paramètres de multiplexage peu
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:329
 #, no-c-format
 msgid "For each track type the GUI determines if at least one track has the flag turned on."
-msgstr ""
+msgstr "Pour chaque type de piste, l'interface détermine si au moins une piste a l'indicateur activé."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:410
 #, no-c-format
@@ -7493,7 +7493,7 @@ msgstr "Si activé, de tels fichiers seront toujours ignorés sans confirmation.
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:328
 #, no-c-format
 msgid "If enabled, the GUI checks the state of the 'track enabled' flag of all video, audio & subtitle tracks when starting to multiplex or adding a job to the job queue."
-msgstr ""
+msgstr "Si activé, l'interface vérifie l'état de indicateur « Piste activée » pour toutes les pistes vidéo, audio et de sous-titres au lancement du multiplexage ou à l'ajout d'une tâche en file d'attente."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:417
 #, no-c-format
@@ -7607,7 +7607,7 @@ msgstr "Si aucune piste vidéo n'est produite, aucune scission n'aura lieu."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:330
 #, no-c-format
 msgid "If not, it will turn on the flag for the first track of the current type."
-msgstr ""
+msgstr "Sinon elle activera l'indicateur pour la première piste du type courant."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:225
 #, no-c-format
