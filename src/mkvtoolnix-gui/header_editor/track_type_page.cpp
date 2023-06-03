@@ -100,20 +100,20 @@ TrackTypePage::setItems(QList<QStandardItem *> const &items)
   const {
   TopLevelPage::setItems(items);
 
-  items.at(1)->setText(m_codecId);
-  items.at(2)->setText(Q(m_language.format_long()));
-  items.at(3)->setText(m_name);
-  items.at(4)->setText(QString::number(m_trackUid));
-  items.at(5)->setText(m_defaultTrackFlag ? QY("Yes") : QY("No"));
-  items.at(6)->setText(m_forcedTrackFlag  ? QY("Yes") : QY("No"));
-  items.at(7)->setText(m_enabledTrackFlag ? QY("Yes") : QY("No"));
-  items.at(8)->setText(m_properties);
+  items.at(PageModel::CodecColumn)        ->setText(m_codecId);
+  items.at(PageModel::LanguageColumn)     ->setText(Q(m_language.format_long()));
+  items.at(PageModel::NameColumn)         ->setText(m_name);
+  items.at(PageModel::UidColumn)          ->setText(QString::number(m_trackUid));
+  items.at(PageModel::DefaultTrackColumn) ->setText(m_defaultTrackFlag ? QY("Yes") : QY("No"));
+  items.at(PageModel::ForcedDisplayColumn)->setText(m_forcedTrackFlag  ? QY("Yes") : QY("No"));
+  items.at(PageModel::EnabledColumn)      ->setText(m_enabledTrackFlag ? QY("Yes") : QY("No"));
+  items.at(PageModel::PropertiesColumn)   ->setText(m_properties);
 
-  items.at(5)->setIcon(m_defaultTrackFlag ? m_yesIcon : m_noIcon);
-  items.at(6)->setIcon(m_forcedTrackFlag  ? m_yesIcon : m_noIcon);
-  items.at(7)->setIcon(m_enabledTrackFlag ? m_yesIcon : m_noIcon);
+  items.at(PageModel::DefaultTrackColumn) ->setIcon(m_defaultTrackFlag ? m_yesIcon : m_noIcon);
+  items.at(PageModel::ForcedDisplayColumn)->setIcon(m_forcedTrackFlag  ? m_yesIcon : m_noIcon);
+  items.at(PageModel::EnabledColumn)      ->setIcon(m_enabledTrackFlag ? m_yesIcon : m_noIcon);
 
-  items.at(4)->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+  items.at(PageModel::UidColumn)          ->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 }
 
 void

@@ -20,6 +20,17 @@ protected:
   QModelIndex m_lastSelectedIdx;
 
 public:
+  static const int TypeColumn          = 0;
+  static const int CodecColumn         = 1;
+  static const int LanguageColumn      = 2;
+  static const int NameColumn          = 3;
+  static const int UidColumn           = 4;
+  static const int DefaultTrackColumn  = 5;
+  static const int ForcedDisplayColumn = 6;
+  static const int EnabledColumn       = 7;
+  static const int PropertiesColumn    = 8;
+
+public:
   PageModel(QObject *parent);
   virtual ~PageModel();
 

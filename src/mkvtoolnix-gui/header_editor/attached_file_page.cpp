@@ -110,10 +110,10 @@ AttachedFilePage::setItems(QList<QStandardItem *> const &items)
   const {
   PageBase::setItems(items);
 
-  items.at(1)->setText(Q(FindChildValue<KaxMimeType>(*m_attachment)));
-  items.at(3)->setText(Q(FindChildValue<KaxFileDescription>(*m_attachment)));
-  items.at(4)->setText(QString::number(FindChildValue<KaxFileUID>(*m_attachment)));
-  items.at(7)->setText(formatSize());
+  items.at(PageModel::CodecColumn)     ->setText(Q(FindChildValue<KaxMimeType>(*m_attachment)));
+  items.at(PageModel::NameColumn)      ->setText(Q(FindChildValue<KaxFileDescription>(*m_attachment)));
+  items.at(PageModel::UidColumn)       ->setText(QString::number(FindChildValue<KaxFileUID>(*m_attachment)));
+  items.at(PageModel::PropertiesColumn)->setText(formatSize());
 }
 
 QString
