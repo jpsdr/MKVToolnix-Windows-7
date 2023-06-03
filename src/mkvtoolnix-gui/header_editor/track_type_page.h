@@ -34,9 +34,15 @@ public:
 protected:
   virtual void setItems(QList<QStandardItem *> const &items) const override;
   virtual void summarizeProperties();
+  virtual ValuePage *findPageForElement(EbmlId const &id);
+  virtual QString getPageStringValueForElement(EbmlId const &wantedId);
+  virtual double getPageDoubleValueForElement(EbmlId const &wantedId, double valueIfNotPresent);
+  virtual uint64_t getPageUnsignedIntegerValueForElement(EbmlId const &wantedId, uint64_t valueIfNotPresent);
+  virtual bool getPageBoolValueForElement(EbmlId const &wantedId, bool valueIfNotPresent);
 
 public Q_SLOTS:
   virtual void retranslateUi() override;
+  virtual void updateModelItems();
 };
 
 }

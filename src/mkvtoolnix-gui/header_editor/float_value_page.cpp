@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QCheckBox>
 #include <QLineEdit>
 
 #include "common/qt.h"
@@ -32,6 +33,8 @@ FloatValuePage::createInputControl() {
     m_leValue->setText(QString::number(m_originalValue));
   }
 
+  connect(m_leValue, &QLineEdit::textChanged, this, [this]() { Q_EMIT valueChanged(); });
+
   return m_leValue;
 }
 
@@ -47,6 +50,15 @@ QString
 FloatValuePage::currentValueAsString()
   const {
   return m_leValue->text();
+}
+
+double
+FloatValuePage::currentValue(double valueIfNotPresent)
+  const {
+  if (!m_present && !m_cbAddOrRemove->isChecked())
+    return valueIfNotPresent;
+
+  return m_leValue->text().toDouble();
 }
 
 void

@@ -41,6 +41,8 @@ LanguageIETFValuePage::createInputControl() {
 
   m_ldwValue->registerBuddyLabel(*m_lValueLabel);
 
+  connect(m_ldwValue, &Util::LanguageDisplayWidget::languageChanged, this, [this]() { Q_EMIT valueChanged(); });
+
   return m_ldwValue;
 }
 
@@ -54,6 +56,15 @@ QString
 LanguageIETFValuePage::currentValueAsString()
   const {
   return Q(m_ldwValue->language().format());
+}
+
+mtx::bcp47::language_c
+LanguageIETFValuePage::currentValue(mtx::bcp47::language_c const &valueIfNotPresent)
+  const {
+  if (!m_present && !m_cbAddOrRemove->isChecked())
+    return valueIfNotPresent;
+
+  return m_ldwValue->language();
 }
 
 void

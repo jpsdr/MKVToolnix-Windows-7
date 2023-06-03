@@ -34,6 +34,8 @@ BoolValuePage::createInputControl() {
 
   m_cbValue->setCurrentIndex(m_originalValue);
 
+  connect(m_cbValue, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]() { Q_EMIT valueChanged(); });
+
   return m_cbValue;
 }
 
@@ -47,6 +49,15 @@ QString
 BoolValuePage::currentValueAsString()
   const {
   return m_cbValue->currentText();
+}
+
+bool
+BoolValuePage::currentValue(bool valueIfNotPresent)
+  const {
+  if (!m_present && !m_cbAddOrRemove->isChecked())
+    return valueIfNotPresent;
+
+  return m_cbValue->currentIndex() == 1;
 }
 
 void

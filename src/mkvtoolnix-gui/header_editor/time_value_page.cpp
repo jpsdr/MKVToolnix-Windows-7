@@ -39,6 +39,8 @@ TimeValuePage::createInputControl() {
   m_dteValue->setDateTime(cfg.m_headerEditorDateTimeInUTC ? m_originalValueUTC : m_originalValueUTC.toLocalTime());
   m_dteValue->setDisplayFormat(Q("yyyy-MM-dd hh:mm:ss"));
 
+  connect(m_dteValue, &QDateTimeEdit::dateTimeChanged, this, [this]() { Q_EMIT valueChanged(); });
+
   return m_dteValue;
 }
 

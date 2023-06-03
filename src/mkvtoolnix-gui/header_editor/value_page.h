@@ -64,6 +64,9 @@ public:
   virtual void modifyThis() override;
   virtual void retranslateUi() override;
 
+Q_SIGNALS:
+  virtual void valueChanged();
+
 public Q_SLOTS:
   virtual void onResetClicked();
   virtual void onAddOrRemoveChecked();

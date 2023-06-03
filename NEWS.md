@@ -26,6 +26,10 @@
   flag turned on for a type, the GUI will turn on the flag for the first track
   of the type. This behavior can be turned off in the preferences. Implements
   #3535.
+* MKVToolNix GUI: header editor: the columns in the tracks/attachments view
+  will now be updated each time a corresponding property is changed (e.g. when
+  a track's name is changed) instead of showing what's in the file on disk.
+  Implements #3554.
 
 ## Bug fixes
 

@@ -43,6 +43,7 @@ LanguageValuePage::createInputControl() {
     .setCurrentByData(QStringList{} << Q(currentValue) << Q("und"));
 
   connect(MainWindow::get(), &MainWindow::preferencesChanged, m_cbValue, &Util::ComboBoxBase::reInitialize);
+  connect(m_cbValue, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, [this]() { Q_EMIT valueChanged(); });
 
   return m_cbValue;
 }

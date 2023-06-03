@@ -221,11 +221,13 @@ ValuePage::onResetClicked() {
   resetValue();
   m_cbAddOrRemove->setChecked(false);
   m_input->setEnabled(m_present);
+  Q_EMIT valueChanged();
 }
 
 void
 ValuePage::onAddOrRemoveChecked() {
   m_input->setEnabled(willBePresent());
+  Q_EMIT valueChanged();
 }
 
 bool

@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include <QCheckBox>
 #include <QLineEdit>
 
 #include "common/qt.h"
@@ -32,6 +33,8 @@ UnsignedIntegerValuePage::createInputControl() {
     m_leValue->setText(QString::number(m_originalValue));
   }
 
+  connect(m_leValue, &QLineEdit::textChanged, this, [this]() { Q_EMIT valueChanged(); });
+
   return m_leValue;
 }
 
@@ -47,6 +50,15 @@ QString
 UnsignedIntegerValuePage::currentValueAsString()
   const {
   return m_leValue->text();
+}
+
+uint64_t
+UnsignedIntegerValuePage::currentValue(uint64_t valueIfNotPresent)
+  const {
+  if (!m_present && !m_cbAddOrRemove->isChecked())
+    return valueIfNotPresent;
+
+  return m_leValue->text().toULongLong();
 }
 
 void

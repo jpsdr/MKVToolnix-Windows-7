@@ -13,6 +13,7 @@
 #include "mkvtoolnix-gui/forms/header_editor/attached_file_page.h"
 #include "mkvtoolnix-gui/forms/header_editor/tab.h"
 #include "mkvtoolnix-gui/header_editor/attached_file_page.h"
+#include "mkvtoolnix-gui/header_editor/page_model.h"
 #include "mkvtoolnix-gui/header_editor/tab.h"
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/file_dialog.h"
@@ -35,8 +36,6 @@ AttachedFilePage::AttachedFilePage(Tab &parent,
   , m_attachment{attachment}
 {
   ui->setupUi(this);
-
-  connect(ui->reset, &QPushButton::clicked, this, &AttachedFilePage::setControlsFromAttachment);
 }
 
 AttachedFilePage::~AttachedFilePage() {
@@ -69,6 +68,14 @@ AttachedFilePage::init() {
   m_parent.appendPage(this, m_topLevelPage.m_pageIdx);
 
   m_topLevelPage.m_children << this;
+
+  connect(ui->reset,    &QPushButton::clicked,          this, &AttachedFilePage::setControlsFromAttachment);
+  connect(ui->reset,    &QPushButton::clicked,          this, &AttachedFilePage::updateItems);
+  connect(ui->name,     &QLineEdit::textChanged,        this, &AttachedFilePage::updateItems);
+  connect(ui->mimeType, &QComboBox::currentTextChanged, this, &AttachedFilePage::updateItems);
+  connect(ui->uid,      &QLineEdit::textChanged,        this, &AttachedFilePage::updateItems);
+
+  updateItems();
 }
 
 void
@@ -110,10 +117,15 @@ AttachedFilePage::setItems(QList<QStandardItem *> const &items)
   const {
   PageBase::setItems(items);
 
-  items.at(PageModel::CodecColumn)     ->setText(Q(FindChildValue<KaxMimeType>(*m_attachment)));
-  items.at(PageModel::NameColumn)      ->setText(Q(FindChildValue<KaxFileDescription>(*m_attachment)));
-  items.at(PageModel::UidColumn)       ->setText(QString::number(FindChildValue<KaxFileUID>(*m_attachment)));
+  items.at(PageModel::CodecColumn)     ->setText(ui->mimeType->currentText());
+  items.at(PageModel::NameColumn)      ->setText(ui->name->text());
+  items.at(PageModel::UidColumn)       ->setText(ui->uid->text());
   items.at(PageModel::PropertiesColumn)->setText(formatSize());
+}
+
+void
+AttachedFilePage::updateItems() {
+  setItems(m_parent.model()->itemsForIndex(m_pageIdx));
 }
 
 QString
@@ -222,6 +234,8 @@ AttachedFilePage::replaceContent(bool deriveNameAndMimeType) {
   m_newFileContent = newContent;
 
   ui->size->setText(formatSize());
+
+  updateItems();
 
   if (!deriveNameAndMimeType)
     return;

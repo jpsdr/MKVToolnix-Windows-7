@@ -420,6 +420,10 @@ Tab::populateTree() {
   });
 
   handleAttachments();
+
+  for (auto const &page : m_model->topLevelPages())
+    if (dynamic_cast<TrackTypePage *>(page))
+      static_cast<TrackTypePage *>(page)->updateModelItems();
 }
 
 void
@@ -563,8 +567,10 @@ Tab::createValuePage(TopLevelPage &parentPage,
        : type                == property_element_c::EBMLT_DATE    ? new TimeValuePage{           *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
        :                                                            static_cast<ValuePage *>(nullptr);
 
-  if (page)
+  if (page) {
     page->init();
+    connect(page, &ValuePage::valueChanged, static_cast<TrackTypePage *>(&parentPage), &TrackTypePage::updateModelItems);
+  }
 
   return page;
 }
@@ -1007,6 +1013,8 @@ Tab::toggleSpecificTrackFlag(unsigned int wantedId) {
 
     return true;
   });
+
+  updateSelectedTopLevelPageModelItems();
 }
 
 void
@@ -1045,8 +1053,10 @@ Tab::changeTrackLanguage(QString const &formattedLanguage,
     return !languageFound || !languageIETFFound;
   });
 
-  if (trackName.isEmpty())
+  if (trackName.isEmpty()) {
+    updateSelectedTopLevelPageModelItems();
     return;
+  }
 
   walkPagesOfSelectedTopLevelNode([&trackName](auto *pageBase) -> bool {
     auto trackNamePage = dynamic_cast<TrackNamePage *>(pageBase);
@@ -1058,6 +1068,8 @@ Tab::changeTrackLanguage(QString const &formattedLanguage,
 
     return false;
   });
+
+  updateSelectedTopLevelPageModelItems();
 }
 
 void
@@ -1094,6 +1106,21 @@ Tab::moveElementUpOrDown(bool up) {
 
   if (focus)
     focus->setFocus();
+}
+
+void
+Tab::updateSelectedTopLevelPageModelItems() {
+  auto topLevelIdx = ui->elements->selectionModel()->currentIndex();
+
+  if (!topLevelIdx.isValid())
+    return;
+
+  while (topLevelIdx.parent().isValid())
+    topLevelIdx = topLevelIdx.parent();
+
+  auto page = m_model->selectedPage(topLevelIdx);
+  if (dynamic_cast<TrackTypePage *>(page))
+    static_cast<TrackTypePage *>(page)->updateModelItems();
 }
 
 }

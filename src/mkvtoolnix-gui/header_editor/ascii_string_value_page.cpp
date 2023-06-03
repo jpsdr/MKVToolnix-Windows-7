@@ -31,6 +31,8 @@ AsciiStringValuePage::createInputControl() {
   m_leValue->setText(Q(m_originalValue));
   m_leValue->setClearButtonEnabled(true);
 
+  connect(m_leValue, &QLineEdit::textChanged, this, [this]() { Q_EMIT valueChanged(); });
+
   return m_leValue;
 }
 
