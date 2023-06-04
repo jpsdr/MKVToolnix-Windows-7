@@ -210,8 +210,6 @@ TrackTypePage::updateModelItems() {
 
   summarizeProperties();
 
-  qDebug() << m_trackNumber << m_trackUid << m_codecId << m_name << m_defaultTrackFlag << m_forcedTrackFlag << m_enabledTrackFlag << m_properties;
-
   setItems(m_parent.model()->itemsForIndex(m_pageIdx));
 }
 
