@@ -13,10 +13,12 @@
 
 #include "common/common_pch.h"
 
+#include <mach-o/dyld.h>
 #include <CoreFoundation/CoreFoundation.h>
 
 #include "common/at_scope_exit.h"
 #include "common/fs_sys_helpers.h"
+#include "common/path.h"
 
 namespace mtx::sys {
 
@@ -74,7 +76,7 @@ get_current_exe_path([[maybe_unused]] std::string const &argv0) {
 
 boost::filesystem::path
 get_package_data_folder() {
-  return get_current_exe_path() / "data";
+  return get_current_exe_path({}) / "data";
 }
 
 }

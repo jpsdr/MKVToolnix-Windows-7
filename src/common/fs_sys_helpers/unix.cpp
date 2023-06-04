@@ -16,10 +16,6 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#if defined(SYS_APPLE)
-# include <mach-o/dyld.h>
-#endif
-
 #include "common/error.h"
 #include "common/fs_sys_helpers.h"
 #include "common/mm_file_io.h"
