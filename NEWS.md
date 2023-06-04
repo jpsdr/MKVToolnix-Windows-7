@@ -70,6 +70,10 @@
   track" context menu only worked if the user right-clicked on the first
   column in the view. They now work for clicks on any of the columns. See also
   #3554.
+* MKVToolNix GUI: header editor: some of the actions toggling specific flags
+  from the "modify selected track" did not work correctly if the flag wasn't
+  currently present in the file, especially if the underlying value has a
+  default value in the Matroska specs.
 
 ## Build system changes
 

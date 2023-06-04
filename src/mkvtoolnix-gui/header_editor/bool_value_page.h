@@ -14,6 +14,7 @@ class BoolValuePage: public ValuePage {
 public:
   QComboBox *m_cbValue{};
   uint64_t m_originalValue{};
+  bool m_valueIfNotPresent{};
 
 public:
   BoolValuePage(Tab &parent, PageBase &topLevelPage, EbmlMaster &master, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
