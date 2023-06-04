@@ -211,6 +211,8 @@ TrackTypePage::updateModelItems() {
   summarizeProperties();
 
   setItems(m_parent.model()->itemsForIndex(m_pageIdx));
+
+  retranslateUi();
 }
 
 }
