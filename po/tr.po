@@ -592,6 +592,8 @@ msgid ""
 "  --list-audio-emphasis    Lists all supported values for the\n"
 "                           '--audio-emphasis' option and their meaning.\n"
 msgstr ""
+"  --list-audio-emphasis    '--audio-emphasis' seçeneği için desteklenen tüm\n"
+"                            değerleri ve bunların anlamlarını listeler.\n"
 
 #: src/merge/mkvmerge.cpp:397
 #, no-c-format
@@ -608,6 +610,8 @@ msgid ""
 "  --list-stereo-modes      Lists all supported values for the '--stereo-mode'\n"
 "                           option and their meaning.\n"
 msgstr ""
+"  --list-stereo-modes      '--stereo-modu' seçeneği için desteklenen tüm\n"
+"                           değerleri ve bunların anlamlarını listeler.\n"
 
 #: src/merge/mkvmerge.cpp:343
 #, no-c-format
@@ -712,17 +716,17 @@ msgid "  --priority <priority>    Set the priority mkvmerge runs with.\n"
 msgstr "  --priority <öncelik>    mkvmerge'ün birlikte çalışacağı önceliği ayarlar.\n"
 
 #: src/merge/mkvmerge.cpp:390
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --probe-range-percentage <percent>\n"
 "                           Sets maximum size to probe for tracks in percent\n"
 "                           of the total file size for certain file types\n"
 "                           (default: 0.3).\n"
 msgstr ""
-"  --stereo-mode <TID:n|anahtarkelime>\n"
-"                           Stereo kipi parametrelerini ayarlar. Bu ya\n"
-"                           bir numara 0 - 14 ya da anahtar kelime olabilir\n"
-"                           (tam liste için belgelere bakın).\n"
+"  --probe-range-percentage <percent>\n"
+"                           Belirli dosya türleri için toplam dosya boyutunun yüzdesi  \n"
+"                           olarak izler için araştırma yapmak üzere en fazla\n"
+"                           boyutu ayarlar (varsayılan: 0,3).\n"
 
 #: src/merge/mkvmerge.cpp:368
 #, no-c-format
@@ -881,7 +885,7 @@ msgid "  --split-max-files <n>    Create at most n files.\n"
 msgstr "  --split-max-files <n>    En fazla n dosya oluştur.\n"
 
 #: src/merge/mkvmerge.cpp:315
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --stereo-mode <TID:n|keyword>\n"
 "                           Sets the stereo mode parameter. It can\n"
@@ -891,7 +895,7 @@ msgstr ""
 "  --stereo-mode <TID:n|anahtarkelime>\n"
 "                           Stereo kipi parametrelerini ayarlar. Bu ya\n"
 "                           bir numara 0 - 14 ya da anahtar kelime olabilir\n"
-"                           (tam liste için belgelere bakın).\n"
+"                           (tam listeyi görmek için '--list-stereo-modes' kullanın).\n"
 
 #: src/merge/mkvmerge.cpp:151
 #, no-c-format
@@ -954,7 +958,7 @@ msgid "  --track-name <TID:name>  Sets the name for a track.\n"
 msgstr "  --track-name <TID:name>  İz için adı ayarlar.\n"
 
 #: src/merge/mkvmerge.cpp:126
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
 "                           A comma separated list of both file IDs\n"
@@ -966,7 +970,8 @@ msgstr ""
 "  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
 "                           Virgülle ayrılmış her iki dosya ID ve iz ID'leri\n"
 "                           listesi, hedef dosyadaki izlerin sırasını\n"
-"                           denetler.\n"
+"                           denetler. Eğer verilmezse, izler türe göre\n"
+"                           sıralanacaktır (görüntü, ses, altyazılar, diğerleri).\n"
 
 #: src/merge/mkvmerge.cpp:234
 #, no-c-format
@@ -1914,7 +1919,7 @@ msgstr "&Etkinleştirildi"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2231
 #, no-c-format
 msgid "&Ensure at least one track of each type has its \"track enabled\" flag set"
-msgstr ""
+msgstr "Her türden en az bir izin \"iz etkinleştirildi\" işaret ayarına sahip olduğundan &emin olun"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:119
 #, no-c-format
@@ -6946,7 +6951,7 @@ msgstr "Her dizin için yeni bir çoklama ayarları sekmesi oluşturulabilir. Bu
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:329
 #, no-c-format
 msgid "For each track type the GUI determines if at least one track has the flag turned on."
-msgstr ""
+msgstr "Her iz türü için GKA, en az bir izde işaretin açık olup olmadığını belirler."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:410
 #, no-c-format
@@ -7439,7 +7444,7 @@ msgstr "Eğer etkinleştirildiyse, yüksek DPI ekranlar için otomatik ölçekle
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:408
 #, no-c-format
 msgid "If enabled, files and tracks will be sorted by track types when they're added to multiplex settings."
-msgstr "Eğer etkisizleştirildiyse, dosyalar ve izler, çoklu ayarlara eklendiklerinde iz türlerine göre sıralanacaktır."
+msgstr "Eğer etkinleştirildiyse, dosyalar ve izler, çoklama ayarlarına eklendiklerinde iz türlerine göre sıralanacaktır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:398
 #, no-c-format
@@ -7459,17 +7464,17 @@ msgstr "Eğer etkinleştirildiyse, bu tür dosyalar her zaman sorulmadan atlanac
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:328
 #, no-c-format
 msgid "If enabled, the GUI checks the state of the 'track enabled' flag of all video, audio & subtitle tracks when starting to multiplex or adding a job to the job queue."
-msgstr ""
+msgstr "Eğer etkinleştirildiyse, GKA çoklamaya başlarken veya iş kuyruğuna bir iş eklerken tüm görüntü, ses ve altyazı izlerinin \"iz etkinleştirildi\" işaretinin durumunu denetler."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:417
 #, no-c-format
 msgid "If enabled, the GUI will analyze the file names when you add multiple files at once."
-msgstr "Eğer etkinleştirildiyse, GKA, bir defada birden çok dosya eklediğinizde dosya adlarını çözümleyecek."
+msgstr "Eğer etkinleştirildiyse, GKA bir defada birden çok dosya eklediğinizde dosya adlarını çözümleyecek."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:338
 #, no-c-format
 msgid "If enabled, the GUI will automatically switch to the job output tool whenever you start a job (e.g. by pressing \"start multiplexing\")."
-msgstr "Eğer etkinleştirildiyse, GKA, bir iş başlattığınız zaman otomatik olarak iş çıktısı aracına geçecek (örn. \"çoklamayı başlat\" düğmesine basarak)."
+msgstr "Eğer etkinleştirildiyse, GKA bir iş başlattığınız zaman otomatik olarak iş çıktısı aracına geçecek (örn. \"çoklamayı başlat\" düğmesine basarak)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:341
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:342
@@ -7480,12 +7485,12 @@ msgstr "Eğer etkinleştirildiyse, GKA ayarlanan gün sayısından daha eski tam
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:340
 #, no-c-format
 msgid "If enabled, the GUI will remove the output file created by a job if that job ends with an error or if the user aborts the job."
-msgstr "Etkinleştirildiyse, GKA, bu iş bir hatayla biterse veya kullanıcı işi iptal ederse, bir iş tarafından oluşturulan çıktı dosyasını kaldıracak."
+msgstr "Eğer etkinleştirildiyse, GKA bu iş bir hatayla biterse veya kullanıcı işi iptal ederse, bir iş tarafından oluşturulan çıktı dosyasını kaldıracak."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:323
 #, no-c-format
 msgid "If enabled, the GUI will use legacy MIME types when detecting the MIME type of font attachments instead of the current standard MIME types."
-msgstr "Eğer etkinleştirildiyse, GKA, şu anki standart MIME türleri yerine MIME yazı tipi eklerini saptarken eski MIME türlerini kullanacak."
+msgstr "Eğer etkinleştirildiyse, GKA şu anki standart MIME türleri yerine MIME yazı tipi eklerini saptarken eski MIME türlerini kullanacak."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:426
 #, no-c-format
@@ -7500,7 +7505,7 @@ msgstr "Eğer etkinleştirildiyse, \"iş çıktısı\" aracındaki ilk sekme yen
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:527
 #, no-c-format
 msgid "If enabled, the largest cover image of a Blu-ray will be added as an attachment when adding a Blu-ray playlist."
-msgstr "Etkinleştirildiyse, Blu-ray oynatma listesi eklenirken bir Blu-ray'in en büyük kapak resmi ek olarak eklenecektir."
+msgstr "Eğer etkinleştirildiyse, Blu-ray oynatma listesi eklenirken bir Blu-ray'in en büyük kapak resmi ek olarak eklenecektir."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:354
 #, no-c-format
@@ -7573,7 +7578,7 @@ msgstr "Eğer çıktı olan görüntü izi yoksa bölme meydana gelmeyecek."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:330
 #, no-c-format
 msgid "If not, it will turn on the flag for the first track of the current type."
-msgstr ""
+msgstr "Değilse, şu anki türün ilk izi için işareti açacaktır."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:225
 #, no-c-format
@@ -7656,9 +7661,9 @@ msgid "If this hack is enabled, the code will leave the parameter sets as they a
 msgstr "Eğer bu kurcalama etkinleştirilirse, kod, parametre kümelerini oldukları gibi bırakacak."
 
 #: src/common/hacks.cpp:69
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "If this hack is enabled, they won't be removed."
-msgstr "Eğer bu kurcalama etkinleştirilirse, kod, parametre kümelerini oldukları gibi bırakacak."
+msgstr "Eğer bu kurcalama etkinleştirilirse, kaldırılmayacaktır."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:536
 #, no-c-format
@@ -7678,12 +7683,12 @@ msgstr "Eğer bu seçenek etkinleştirilirse, sadece bu izler, aşağıda hangis
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:558
 #, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"destination file name\" input box whenever the last source file is removed."
-msgstr "Eğer bu seçenek etkinleştirilirse, GKA, son kaynak dosyası her kaldırıldığında \"hedef dosya adı\" girdi kutusunu her zaman temizleyecek."
+msgstr "Eğer bu seçenek etkinleştirilirse GKA, son kaynak dosyasını her kaldırıldığında \"hedef dosya adı\" girdi kutusunu her zaman temizleyecek."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:367
 #, no-c-format
 msgid "If this option is enabled, the GUI will always clear the \"file title\" input box whenever the last source file is removed."
-msgstr "Eğer bu seçenek etkinleştirilirse, GKA, son kaynak dosyası her kaldırıldığında \"dosya başlığı\" girdi kutusunu her zaman temizleyecek."
+msgstr "Eğer bu seçenek etkinleştirilirse GKA, son kaynak dosyasını her kaldırıldığında \"dosya başlığı\" girdi kutusunu her zaman temizleyecek."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:546
 #, no-c-format
