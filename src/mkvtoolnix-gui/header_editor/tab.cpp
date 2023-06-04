@@ -983,6 +983,8 @@ Tab::walkPagesOfSelectedTopLevelNode(std::function<bool(PageBase *)> worker) {
   if (!topLevelIdx.isValid())
     return;
 
+  topLevelIdx = topLevelIdx.sibling(topLevelIdx.row(), 0);
+
   while (topLevelIdx.parent().isValid())
     topLevelIdx = topLevelIdx.parent();
 

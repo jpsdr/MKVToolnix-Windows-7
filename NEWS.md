@@ -66,6 +66,10 @@
   with Boost 1.82.0 from now on which includes the fix. Fixes #3547.
 * mkvmerge: fixed several instances of wrong format strings for `fmt::format`
   used in debug messages. Fixes #3548.
+* MKVToolNix GUI: header editor: using the actions from the "modify selected
+  track" context menu only worked if the user right-clicked on the first
+  column in the view. They now work for clicks on any of the columns. See also
+  #3554.
 
 ## Build system changes
 
