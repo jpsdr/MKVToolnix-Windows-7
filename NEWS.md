@@ -2,17 +2,6 @@
 
 ## New features and enhancements
 
-* MKVToolNix GUI: multiplexer: the default list colors used for distinguishing
-  source files does not include the darkest tier anymore (the ones where one
-  or two components are set to the value 0x3f) as they're hard to distinguish
-  from each other. Only affects new installations, or when the user presses
-  the "reset to default colors" button. Implements #3533.
-* MKVToolNix GUI: Windows: a new settings in the preferences lets the user
-  chose whether to use the light or the dark color palette, or to follow the
-  system settings. Part of the fix for #3528.
-* MKVToolNix GUI: macOS: when you install the application from the DMG it'll
-  register itself as an alternate handler for its supported file types. This
-  allows the use of the "Open with" context menu action in Finder.
 * mkvmerge: tracks in the destination file will now be sorted by their type
   automatically unless the track order is specified with the `--track-order`
   option. The order is as follows: video tracks first followed by audio &
@@ -20,6 +9,11 @@
   same type will be sorted in the same order as their source files occur in
   the command-line arguments. Note that this doesn't affect file
   identification. Implements #3545.
+* MKVToolNix GUI: multiplexer: the default list colors used for distinguishing
+  source files does not include the darkest tier anymore (the ones where one
+  or two components are set to the value 0x3f) as they're hard to distinguish
+  from each other. Only affects new installations, or when the user presses
+  the "reset to default colors" button. Implements #3533.
 * MKVToolNix GUI: multiplexer: the GUI will now check the state of the 'track
   enabled' flag of all video, audio & subtitle tracks when starting to
   multiplex or adding a job to the job queue. If there's no track with its
@@ -30,19 +24,31 @@
   and the values on the "track type" page will now be updated each time a
   corresponding property is changed (e.g. when a track's name is changed)
   instead of showing what's in the file on disk. Implements #3554.
+* MKVToolNix GUI: macOS: when you install the application from the DMG it'll
+  register itself as an alternate handler for its supported file types. This
+  allows the use of the "Open with" context menu action in Finder.
+* MKVToolNix GUI: Windows: a new settings in the preferences lets the user
+  chose whether to use the light or the dark color palette, or to follow the
+  system settings. Part of the fix for #3528.
 
 ## Bug fixes
 
+* Fixed compilation with fmt v10.0.0.
+* mkvmerge: fixed several instances of wrong format strings for `fmt::format`
+  used in debug messages. Fixes #3548.
+* mkvmerge: AV1 packetizer: the packetizer did not honor the aspect ratio
+  (factor) given on the command-line via the `--aspect-ratio` or
+  `--aspect-ratio-factor` options.
+* mkvmerge: JSON identification: cropping parameters are reported again even
+  if some of the four values are not present in the file or set to 0. Fixes
+  #3534.
+* mkvmerge: Windows: when writing to a network share connected via SMB1
+  `mkvmerge` was aborting with a error about `create_directory() failed` with
+  existing directories. This was due to a bug in recent versions of the
+  Boost.Filesystem library. The Windows version of MKVToolNix will be built
+  with Boost 1.82.0 from now on which includes the fix. Fixes #3547.
 * MKVToolNix GUI: the defunct "disable the dark mode" checkbox was removed
   from the preferences.
-* MKVToolNix GUI: Windows: the GUI will now always use its own implementation
-  of light & dark palettes instead of relying on Qt. This circumvents two
-  issues with the palette support in Qt 6.5.0:
-  1. if Windows 11's dark application mode is active, links were displayed in
-     a hard-to-read dark blue.
-  2. for unknown reasons the the dark palette was not chosen on some Windows
-     11 installations even though Windows 11's color mode was set to "dark".
-  This is a workaround for #3528.
 * MKVToolNix GUI: language dialog: under certain conditions the controls for
   the individual components remained disabled when the dialog is opened even
   though editing of individual components is selected. Part of the fix of
@@ -52,20 +58,6 @@
   all following times, potentially leaving previously selected/entered entries
   intact, primarily when editing multiple tracks at once. Part of the fix of
   #3532.
-* mkvmerge: JSON identification: cropping parameters are reported again even
-  if some of the four values are not present in the file or set to 0. Fixes
-  #3534.
-* mkvmerge: AV1 packetizer: the packetizer did not honor the aspect ratio
-  (factor) given on the command-line via the `--aspect-ratio` or
-  `--aspect-ratio-factor` options.
-* Fixed compilation with fmt v10.0.0.
-* mkvmerge: Windows: when writing to a network share connected via SMB1
-  `mkvmerge` was aborting with a error about `create_directory() failed` with
-  existing directories. This was due to a bug in recent versions of the
-  Boost.Filesystem library. The Windows version of MKVToolNix will be built
-  with Boost 1.82.0 from now on which includes the fix. Fixes #3547.
-* mkvmerge: fixed several instances of wrong format strings for `fmt::format`
-  used in debug messages. Fixes #3548.
 * MKVToolNix GUI: header editor: using the actions from the "modify selected
   track" context menu only worked if the user right-clicked on the first
   column in the view. They now work for clicks on any of the columns. See also
@@ -74,6 +66,14 @@
   from the "modify selected track" did not work correctly if the flag wasn't
   currently present in the file, especially if the underlying value has a
   default value in the Matroska specs.
+* MKVToolNix GUI: Windows: the GUI will now always use its own implementation
+  of light & dark palettes instead of relying on Qt. This circumvents two
+  issues with the palette support in Qt 6.5.0:
+  1. if Windows 11's dark application mode is active, links were displayed in
+     a hard-to-read dark blue.
+  2. for unknown reasons the the dark palette was not chosen on some Windows
+     11 installations even though Windows 11's color mode was set to "dark".
+  This is a workaround for #3528.
 
 ## Build system changes
 
