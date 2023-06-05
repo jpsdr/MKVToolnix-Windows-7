@@ -569,7 +569,8 @@ Tab::createValuePage(TopLevelPage &parentPage,
 
   if (page) {
     page->init();
-    connect(page, &ValuePage::valueChanged, static_cast<TrackTypePage *>(&parentPage), &TrackTypePage::updateModelItems);
+    if (dynamic_cast<TrackTypePage *>(&parentPage))
+      connect(page, &ValuePage::valueChanged, static_cast<TrackTypePage *>(&parentPage), &TrackTypePage::updateModelItems);
   }
 
   return page;

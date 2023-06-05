@@ -1,3 +1,12 @@
+# Version ?
+
+## Bug fixes
+
+* MKVToolNix: header editor: fixed the application crashing whenever you
+  change a property below the "segment information" node. This bug was
+  introduced in v77. Fixes #3556.
+
+
 # Version 77.0 "Elemental" 2023-06-04
 
 ## New features and enhancements
