@@ -60,6 +60,15 @@ LanguageValuePage::currentValueAsString()
   return m_cbValue->currentData().toString();
 }
 
+mtx::bcp47::language_c
+LanguageValuePage::currentValue(mtx::bcp47::language_c const &valueIfNotPresent)
+  const {
+  if (!m_present && !m_cbAddOrRemove->isChecked())
+    return valueIfNotPresent;
+
+  return mtx::bcp47::language_c::parse(to_utf8(m_cbValue->currentData().toString()));
+}
+
 void
 LanguageValuePage::resetValue() {
   m_cbValue->setCurrentByData(Q(m_originalValue));

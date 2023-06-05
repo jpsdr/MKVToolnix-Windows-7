@@ -27,6 +27,7 @@ public:
   virtual QWidget *createInputControl() override;
   virtual QString originalValueAsString() const override;
   virtual QString currentValueAsString() const override;
+  virtual mtx::bcp47::language_c currentValue(mtx::bcp47::language_c const &valueIfNotPresent) const;
   virtual void resetValue() override;
   virtual bool validateValue() const override;
   virtual void copyValueToElement() override;

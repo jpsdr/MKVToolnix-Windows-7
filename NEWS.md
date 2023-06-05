@@ -5,6 +5,10 @@
 * MKVToolNix: header editor: fixed the application crashing whenever you
   change a property below the "segment information" node. This bug was
   introduced in v77. Fixes #3556.
+* MKVToolNix: header editor: when reading files that only contain legacy track
+  language elements but no IETF track language elements, the header editor was
+  showing all tracks as having "English" as the language. This bug was
+  introduced in v77. Fixes #3557.
 
 
 # Version 77.0 "Elemental" 2023-06-04

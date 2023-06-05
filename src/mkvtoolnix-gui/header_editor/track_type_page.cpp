@@ -6,6 +6,7 @@
 #include "mkvtoolnix-gui/header_editor/bool_value_page.h"
 #include "mkvtoolnix-gui/header_editor/float_value_page.h"
 #include "mkvtoolnix-gui/header_editor/language_ietf_value_page.h"
+#include "mkvtoolnix-gui/header_editor/language_value_page.h"
 #include "mkvtoolnix-gui/header_editor/page_model.h"
 #include "mkvtoolnix-gui/header_editor/track_type_page.h"
 #include "mkvtoolnix-gui/header_editor/unsigned_integer_value_page.h"
@@ -199,11 +200,11 @@ TrackTypePage::updateModelItems() {
   m_forcedTrackFlag         = getPageBoolValueForElement(EBML_ID(KaxTrackFlagForced),  false);
   m_enabledTrackFlag        = getPageBoolValueForElement(EBML_ID(KaxTrackFlagEnabled), true);
 
-  auto languagePage         = dynamic_cast<LanguageIETFValuePage *>(findPageForElement(EBML_ID(KaxLanguageIETF)));
+  auto languageIETFPage     = static_cast<LanguageIETFValuePage *>(findPageForElement(EBML_ID(KaxLanguageIETF)));
+  auto languagePage         = static_cast<LanguageValuePage     *>(findPageForElement(EBML_ID(KaxTrackLanguage)));
   auto languageIfNotPresent = mtx::bcp47::language_c::parse("eng");
-
-  if (languagePage)
-    m_language = languagePage->currentValue(languageIfNotPresent);
+  m_language                = languagePage->currentValue(languageIfNotPresent);
+  m_language                = languageIETFPage->currentValue(m_language);
 
   if (!m_language.is_valid())
     m_language = languageIfNotPresent;
