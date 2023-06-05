@@ -31,7 +31,9 @@ LanguageValuePage::~LanguageValuePage() {
 QWidget *
 LanguageValuePage::createInputControl() {
   m_originalValue   = m_element ? static_cast<EbmlString *>(m_element)->GetValue() : "eng";
-  auto languageOpt  = mtx::iso639::look_up(m_originalValue, true);
+  auto qOriginal    = Q(m_originalValue);
+  auto languageOnly = qOriginal.mid(0, qOriginal.indexOf(L'-'));
+  auto languageOpt  = mtx::iso639::look_up(to_utf8(languageOnly), true);
   auto currentValue = languageOpt ? languageOpt->alpha_3_code : m_originalValue;
 
   m_cbValue = new Util::LanguageComboBox{this};

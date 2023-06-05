@@ -9,6 +9,11 @@
   track language elements but no IETF track language elements, the header
   editor was showing all tracks as having "English" as the language. This bug
   was introduced in v77. Fixes #3557.
+* MKVToolNix GUI: header editor: when a legacy track language element contains
+  a country code (e.g. `fr-CA`), the header editor was wrongfully using `und`
+  = "undetermined" as the language for that element. Now it'll use the
+  language from the language/country pair, which would be `fr` in the earlier
+  example. Part of the fix of #3557.
 
 
 # Version 77.0 "Elemental" 2023-06-04
