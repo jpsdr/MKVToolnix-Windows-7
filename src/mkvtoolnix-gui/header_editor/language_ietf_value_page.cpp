@@ -99,4 +99,16 @@ LanguageIETFValuePage::setLanguage(mtx::bcp47::language_c const &parsedLanguage)
   m_ldwValue->setLanguage(parsedLanguage);
 }
 
+void
+LanguageIETFValuePage::deriveFromLegacyIfNotPresent(QString const &languageStr) {
+  if (m_present)
+    return;
+
+  auto language = mtx::bcp47::language_c::parse(to_utf8(languageStr));
+  if (!language.is_valid())
+    language = mtx::bcp47::language_c::parse("eng");
+
+  setLanguage(language);
+}
+
 }

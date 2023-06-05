@@ -1,5 +1,11 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: header editor: for files that only contain legacy track
+  language elements but no IETF language elements the header editor will now
+  derive the IETF language elements from the legacy elements. See #3557.
+
 ## Bug fixes
 
 * MKVToolNix GUI: header editor: fixed the application crashing whenever you

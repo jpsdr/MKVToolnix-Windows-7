@@ -216,4 +216,14 @@ TrackTypePage::updateModelItems() {
   retranslateUi();
 }
 
+void
+TrackTypePage::deriveLanguageIETFFromLegacyIfNotPresent() {
+  auto languageIETFPage = static_cast<LanguageIETFValuePage *>(findPageForElement(EBML_ID(KaxLanguageIETF)));
+  auto languagePage     = static_cast<LanguageValuePage     *>(findPageForElement(EBML_ID(KaxTrackLanguage)));
+
+  languageIETFPage->deriveFromLegacyIfNotPresent(languagePage->originalValueAsString());
+
+  updateModelItems();
+}
+
 }

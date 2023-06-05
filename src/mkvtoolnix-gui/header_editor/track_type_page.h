@@ -31,6 +31,8 @@ public:
 
   virtual QString internalIdentifier() const override;
 
+  virtual void deriveLanguageIETFFromLegacyIfNotPresent();
+
 protected:
   virtual void setItems(QList<QStandardItem *> const &items) const override;
   virtual void summarizeProperties();

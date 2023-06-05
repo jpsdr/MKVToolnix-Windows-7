@@ -663,6 +663,8 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
       if (parentPage && parentMaster)
         createValuePage(*parentPage, *parentMaster, propElement);
     }
+
+    page->deriveLanguageIETFFromLegacyIfNotPresent();
   }
 }
 

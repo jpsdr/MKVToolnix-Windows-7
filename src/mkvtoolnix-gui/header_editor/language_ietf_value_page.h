@@ -34,6 +34,7 @@ public:
   virtual void retranslateUi() override;
 
   virtual void setLanguage(mtx::bcp47::language_c const &parsedLanguage);
+  virtual void deriveFromLegacyIfNotPresent(QString const &languageStr);
 };
 
 }}
