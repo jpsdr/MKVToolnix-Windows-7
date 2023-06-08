@@ -17,6 +17,7 @@
 #include "mkvtoolnix-gui/util/file_dialog.h"
 #include "mkvtoolnix-gui/util/message_box.h"
 #include "mkvtoolnix-gui/util/option_file.h"
+#include "mkvtoolnix-gui/util/process_x.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/widget.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
@@ -593,7 +594,16 @@ Tab::addToJobQueue(bool startNow,
   } else if (cfg.m_switchToJobOutputAfterStarting)
     MainWindow::get()->switchToTool(MainWindow::watchJobTool());
 
-  MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
+  try {
+    MainWindow::jobTool()->addJob(std::static_pointer_cast<Jobs::Job>(job));
+
+  } catch (Util::ProcessX const &ex) {
+    Util::MessageBox::critical(MainWindow::get())
+      ->title(QY("Adding the job to the queue failed"))
+      .text(Q(ex.what()))
+      .exec();
+    return;
+  }
 
   p.savedState = currentState();
 
