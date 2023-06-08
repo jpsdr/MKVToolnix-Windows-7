@@ -26,7 +26,7 @@ OptionFile::createTemporary(QString const &prefix,
   auto file = std::make_unique<QTemporaryFile>(QDir::temp().filePath(Q("%1-XXXXXX.json").arg(prefix)));
 
   if (!file->open())
-    throw ProcessX{ to_utf8(QY("Error creating a temporary file (reason: %1).").arg(file->errorString())) };
+    throw ProcessX{ to_utf8(QY("Saving the file '%1' failed. Error message from the system: %2").arg(file->fileName()).arg(file->errorString())) };
 
   auto serialized = to_utf8(escape(options, EscapeJSON)[0]);
 

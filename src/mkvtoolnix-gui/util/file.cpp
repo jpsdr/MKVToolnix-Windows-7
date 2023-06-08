@@ -16,6 +16,7 @@
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/file.h"
 #include "mkvtoolnix-gui/util/message_box.h"
+#include "mkvtoolnix-gui/util/process_x.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "mkvtoolnix-gui/util/string.h"
 
@@ -144,16 +145,11 @@ void
 saveTextToFile(QString const &fileName,
                QString const &content,
                bool saveLastOpenDir) {
+  qDebug() << "saveTextToFile" << fileName;
   QFile out{fileName};
 
-  if (!out.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-    MessageBox::critical(MainWindow::get())
-      ->title(QY("Saving failed"))
-      .text(QY("Saving the file failed. Error message from the system: %1").arg(out.errorString()))
-      .exec();
-
-    return;
-  }
+  if (!out.open(QIODevice::WriteOnly | QIODevice::Truncate))
+    throw ProcessX{ to_utf8(QY("Saving the file '%1' failed. Error message from the system: %2").arg(fileName).arg(out.errorString())) };
 
   out.write(content.toUtf8());
   out.flush();

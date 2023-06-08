@@ -79,7 +79,12 @@ FileIdentifier::identify() {
   p->m_output    = process->output();
   p->m_succeeded = parseOutput();
 
-  storeResultInCache();
+  try {
+    storeResultInCache();
+  } catch (ProcessX const &ex) {
+    setError(QY("Storing result in cache filed"), Q(ex.what()));
+    return false;
+  }
 
   setDefaults();
 
