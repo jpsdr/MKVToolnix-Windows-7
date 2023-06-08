@@ -29,6 +29,11 @@
   directory, MKVToolNix's file identification cache directory and others) &
   display proper error messages if not. Part of the fix of #3556 & #3561.
 
+## Build system changes
+
+* The compilation database (`compile_commands.json`) is now always built. The
+  variable `BUILD_COMPILATION_DATABASE` is not evaluated anymore.
+
 
 # Version 77.0 "Elemental" 2023-06-04
 

@@ -19,7 +19,6 @@ module Mtx
 
     def self.write
       return if @compilation_commands.empty?
-      return if !FileTest.exist?(@file_name) && !c?(:BUILD_COMPILATION_DATABASE)
 
       entries = self.read.merge(@compilation_commands).values.sort_by { |e| e["file"] }
       File.open(@file_name, "w") do |f|
