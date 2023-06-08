@@ -20,6 +20,14 @@
   = "undetermined" as the language for that element. Now it'll use the
   language from the language/country pair, which would be `fr` in the earlier
   example. Part of the fix of #3557.
+* MKVToolNix GUI: under certain circumstances the GUI would try to display
+  error messages from a secondary thread, which isn't allowed in Qt, causing
+  to program to either hang or outright crash. Part of the fix of #3556 &
+  #3561.
+* MKVToolNix GUI: the GUI will check for several potential installation issues
+  wrt. to having write access to certain directories (system's temporary
+  directory, MKVToolNix's file identification cache directory and others) &
+  display proper error messages if not. Part of the fix of #3556 & #3561.
 
 
 # Version 77.0 "Elemental" 2023-06-04
