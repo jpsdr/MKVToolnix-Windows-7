@@ -595,7 +595,7 @@ App::isWindows11OrLater() {
   static std::optional<bool> s_isWindows11OrLater;
 
   if (!s_isWindows11OrLater)
-    s_isWindows11OrLater = QOperatingSystemVersion::current() >= QOperatingSystemVersion::Windows11;
+    s_isWindows11OrLater = false;
 
   return *s_isWindows11OrLater;
 }
