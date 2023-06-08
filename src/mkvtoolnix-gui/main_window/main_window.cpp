@@ -764,6 +764,10 @@ MainWindow::displayInstallationProblems(Util::InstallationChecker::Problems cons
       case Util::InstallationChecker::ProblemType::MkvmergeVersionDiffers:
         description = QY("The versions of mkvmerge (%1) and the GUI (%2) differ.").arg(problem.second).arg(Q(get_current_version().to_string()));
         break;
+
+      case Util::InstallationChecker::ProblemType::TemporaryDirectoryNotWritable:
+        description = QY("Temporary files cannot be created. Additional information: %1").arg(problem.second);
+        break;
     }
 
     problemsString += Q("<li>%1</li>").arg(description.toHtmlEscaped());

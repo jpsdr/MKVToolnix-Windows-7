@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QRegularExpression>
+#include <QTemporaryFile>
 #include <QThread>
 
 #include "common/qt.h"
@@ -8,6 +9,7 @@
 #include "mkvtoolnix-gui/app.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
 #include "mkvtoolnix-gui/util/installation_checker.h"
+#include "mkvtoolnix-gui/util/option_file.h"
 #include "mkvtoolnix-gui/util/process.h"
 #include "mkvtoolnix-gui/util/settings.h"
 
@@ -24,14 +26,26 @@ InstallationChecker::~InstallationChecker() {
 void
 InstallationChecker::runChecks() {
   m_problems.clear();
-  auto mkvmergeExe = Util::Settings::get().actualMkvmergeExe();
-  auto versionRE   = QRegularExpression{Q("^mkvmerge [[:space:]]+ v ( [[:digit:].]+ )"), QRegularExpression::ExtendedPatternSyntaxOption};
-  auto guiVersion  = Q(get_current_version().to_string());
+  auto mkvmergeExe  = Util::Settings::get().actualMkvmergeExe();
+  auto versionRE    = QRegularExpression{Q("^mkvmerge [[:space:]]+ v ( [[:digit:].]+ )"), QRegularExpression::ExtendedPatternSyntaxOption};
+  auto guiVersion   = Q(get_current_version().to_string());
+  auto testMkvmerge = true;
 
-  if (mkvmergeExe.isEmpty() || !QFileInfo{mkvmergeExe}.exists())
+
+  if (mkvmergeExe.isEmpty() || !QFileInfo{mkvmergeExe}.exists()) {
     m_problems << Problem{ ProblemType::MkvmergeNotFound, {} };
+    testMkvmerge = false;
+  }
 
-  else {
+  try {
+    auto optFile = OptionFile::createTemporary(Q("MKVToolNix-process"), {});
+
+  } catch (ProcessX const &ex) {
+    m_problems << Problem{ ProblemType::TemporaryDirectoryNotWritable, Q(ex.what()) };
+    testMkvmerge = false;
+  }
+
+  if (testMkvmerge) {
     auto process = Process::execute(mkvmergeExe, { Q("--version") });
 
     if (process->hasError())
