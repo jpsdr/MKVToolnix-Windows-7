@@ -768,6 +768,12 @@ MainWindow::displayInstallationProblems(Util::InstallationChecker::Problems cons
       case Util::InstallationChecker::ProblemType::TemporaryDirectoryNotWritable:
         description = QY("Temporary files cannot be created. Additional information: %1").arg(problem.second);
         break;
+
+      case Util::InstallationChecker::ProblemType::PortableDirectoryNotWritable:
+        description = QY("MKVToolNix GUI acts as a portable application but cannot write to its base directory, '%1'. If it should act as an installed application, remove the file '%2'.")
+          .arg(QDir::toNativeSeparators(problem.second))
+          .arg(QDir::toNativeSeparators(Q("%1/data/portable-app").arg(problem.second)));
+        break;
     }
 
     problemsString += Q("<li>%1</li>").arg(description.toHtmlEscaped());

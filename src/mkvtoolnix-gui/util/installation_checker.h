@@ -20,6 +20,7 @@ public:
     MkvmergeVersionNotRecognized,
     MkvmergeVersionDiffers,
     TemporaryDirectoryNotWritable,
+    PortableDirectoryNotWritable,
   };
 
   using Problem  = std::pair<ProblemType, QString>;

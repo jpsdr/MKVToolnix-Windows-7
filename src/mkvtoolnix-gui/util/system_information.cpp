@@ -102,12 +102,14 @@ gatherGeneralInfo(QStringList &info) {
   }
 
   for (auto const &problem : problems) {
-    auto name = problem.first == InstallationChecker::ProblemType::FileNotFound                 ? Q("FileNotFound")
-              : problem.first == InstallationChecker::ProblemType::MkvmergeNotFound             ? Q("MkvmergeNotFound")
-              : problem.first == InstallationChecker::ProblemType::MkvmergeCannotBeExecuted     ? Q("MkvmergeCannotBeExecuted")
-              : problem.first == InstallationChecker::ProblemType::MkvmergeVersionNotRecognized ? Q("MkvmergeVersionNotRecognized")
-              : problem.first == InstallationChecker::ProblemType::MkvmergeVersionDiffers       ? Q("MkvmergeVersionDiffers")
-              :                                                                                   Q("unknown");
+    auto name = problem.first == InstallationChecker::ProblemType::FileNotFound                  ? Q("FileNotFound")
+              : problem.first == InstallationChecker::ProblemType::MkvmergeNotFound              ? Q("MkvmergeNotFound")
+              : problem.first == InstallationChecker::ProblemType::MkvmergeCannotBeExecuted      ? Q("MkvmergeCannotBeExecuted")
+              : problem.first == InstallationChecker::ProblemType::MkvmergeVersionNotRecognized  ? Q("MkvmergeVersionNotRecognized")
+              : problem.first == InstallationChecker::ProblemType::MkvmergeVersionDiffers        ? Q("MkvmergeVersionDiffers")
+              : problem.first == InstallationChecker::ProblemType::TemporaryDirectoryNotWritable ? Q("TemporaryDirectoryNotWritable")
+              : problem.first == InstallationChecker::ProblemType::PortableDirectoryNotWritable  ? Q("PortableDirectoryNotWritable")
+              :                                                                                    Q("unknown");
     info << Q("* Type: %1, info: %2").arg(name).arg(problem.second.isEmpty() ? Q("—") : problem.second);
   }
 }

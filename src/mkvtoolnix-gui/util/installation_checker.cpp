@@ -67,6 +67,20 @@ InstallationChecker::runChecks() {
     }
   }
 
+#if defined(SYS_WINDOWS)
+  if (!App::isInstalled()) {
+    auto dir = App::applicationDirPath();
+    QFile tempFile{Q("%1/writeTest").arg(dir)};
+
+    if (!tempFile.open(QIODeviceBase::WriteOnly))
+      m_problems << Problem{ ProblemType::PortableDirectoryNotWritable, dir };
+    else {
+      tempFile.close();
+      tempFile.remove();
+    }
+  }
+#endif
+
   if (!m_problems.isEmpty())
     Q_EMIT problemsFound(m_problems);
 
