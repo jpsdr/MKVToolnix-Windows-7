@@ -8,6 +8,7 @@
 #include <QOperatingSystemVersion>
 #include <QScreen>
 #include <QSettings>
+#include <QStandardPaths>
 #include <QString>
 #include <QStringList>
 #include <QSysInfo>
@@ -140,6 +141,14 @@ gatherOperatingSystemInfo(QStringList &info) {
   info << Q("* Name: %1").arg(osName);
   info << Q("* Version: %1").arg(osVersion);
   info << Q("* Pretty name: %1").arg(QSysInfo::prettyProductName());
+}
+
+void
+gatherPathInformation(QStringList &info) {
+  info << Q("") << Q("## Paths");
+  info << Q("* Is installed: %1").arg(App::isInstalled());
+  info << Q("* Application directory: %1").arg(QDir::toNativeSeparators(App::applicationDirPath()));
+  info << Q("* Cache directory (via Qt): %1").arg(QDir::toNativeSeparators(QStandardPaths::writableLocation(QStandardPaths::CacheLocation)));
 }
 
 void
@@ -293,6 +302,7 @@ gatherSystemInformation() {
   info << Q("") << Q("# System");
 
   gatherOperatingSystemInfo(info);
+  gatherPathInformation(info);
   gatherScreenInfo(info);
   gatherDesktopScalingAndThemeSettings(info);
   gatherEnvironmentVariables(info);
