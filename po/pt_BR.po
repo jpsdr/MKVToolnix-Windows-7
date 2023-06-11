@@ -989,7 +989,7 @@ msgid "  --track-name <TID:name>  Sets the name for a track.\n"
 msgstr "  --track-name <TID:nome>  Define o nome para uma faixa.\n"
 
 #: src/merge/mkvmerge.cpp:126
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
 "                           A comma separated list of both file IDs\n"
@@ -998,11 +998,12 @@ msgid ""
 "                           the tracks will sorted by type (video, audio,\n"
 "                           subtitles, others).\n"
 msgstr ""
-"  --track-order <IDarquivo1:TID1,IDarquivo2:TID2,IDarquivo3:TID3,...>\n"
-"                           Uma lista separada por vírgula com os IDs de\n"
-"                           arquivos (IDarquivo) e IDs de faixas (TID)\n"
-"                           que controla a ordem das faixas no arquivo\n"
-"                           de destino.\n"
+"  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
+"                           Uma lista separada por vírgulas de IDs de\n"
+"                           arquivo e IDs de faixa que controla a ordem das\n"
+"                           faixas no arquivo de destino. Se não for fornecido,\n"
+"                           as faixas serão classificadas por tipo (vídeo, áudio,\n"
+"                           legendas, outros).\n"
 
 #: src/merge/mkvmerge.cpp:234
 #, no-c-format
@@ -1964,7 +1965,7 @@ msgstr "&Ativado"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2231
 #, no-c-format
 msgid "&Ensure at least one track of each type has its \"track enabled\" flag set"
-msgstr ""
+msgstr "C&ertifique-se de que pelo menos uma faixa de cada tipo tenha sua flag \"faixa ativada\" definida"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:119
 #, no-c-format
@@ -2171,7 +2172,7 @@ msgstr "&Só ativar cópia de faixas com idiomas específicos por padrão"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2210
 #, no-c-format
 msgid "&Only include often used entries in selections"
-msgstr "&Só incluir entradas frequentemente usadas nas seleções"
+msgstr "Incluir &apenas entradas frequentemente usadas nas seleções"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2281
 #, no-c-format
@@ -4987,9 +4988,9 @@ msgid "Color matrix coefficients:"
 msgstr "Coeficiente da matriz de cores:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2189
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Color palette:"
-msgstr "Espaço de cores"
+msgstr "Paleta de cores:"
 
 #: src/common/kax_element_names.cpp:136
 #, no-c-format
@@ -5580,7 +5581,7 @@ msgstr "DVDs"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2187
 #, no-c-format
 msgid "Dark"
-msgstr ""
+msgstr "Escuro"
 
 #: src/mkvtoolnix-gui/info/model.cpp:90
 #, no-c-format
@@ -7002,7 +7003,7 @@ msgstr "Para cada diretório, uma nova guia de configurações de multiplexaçã
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:329
 #, no-c-format
 msgid "For each track type the GUI determines if at least one track has the flag turned on."
-msgstr ""
+msgstr "Para cada tipo de faixa, a GUI determina se pelo menos uma faixa tem a flag ativa."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:410
 #, no-c-format
@@ -7516,7 +7517,7 @@ msgstr "Se ativado, esses arquivos sempre serão ignorados sem perguntas."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:328
 #, no-c-format
 msgid "If enabled, the GUI checks the state of the 'track enabled' flag of all video, audio & subtitle tracks when starting to multiplex or adding a job to the job queue."
-msgstr ""
+msgstr "Se ativado, a GUI verifica o estado da flag 'faixa ativada' de todas as faixas de vídeo, áudio e legenda ao iniciar a multiplexação ou ao adicionar uma tarefa à fila de tarefas."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:417
 #, no-c-format
@@ -7630,7 +7631,7 @@ msgstr "Se não há uma faixa de vídeo de saída, não ocorrerão divisões."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:330
 #, no-c-format
 msgid "If not, it will turn on the flag for the first track of the current type."
-msgstr ""
+msgstr "Caso contrário, ele ativará a flag para a primeira faixa do tipo atual."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:225
 #, no-c-format
@@ -7878,7 +7879,7 @@ msgstr "Informações"
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:396
 #, no-c-format
 msgid "Information & Warnings:"
-msgstr "Informações e Avisos:"
+msgstr "Informações e avisos:"
 
 #: src/common/bitvalue.cpp:76
 #, no-c-format
@@ -8500,9 +8501,9 @@ msgstr[1] "Comprimento: %1 bytes"
 msgstr[2] "Comprimento: %1 bytes"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2186
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Light"
-msgstr "Direita"
+msgstr "Claro"
 
 #: src/merge/timestamp_factory.cpp:359
 #, no-c-format
@@ -8744,9 +8745,9 @@ msgstr "Marcar esta faixa como \"exibição forçada\"."
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:658
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:669
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Markdown files"
-msgstr "Arquivos Matroska"
+msgstr "Arquivos de remarcação"
 
 #: src/common/file_types.cpp:91
 #, no-c-format
@@ -9645,7 +9646,7 @@ msgstr "Apenas para quadros I"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2333
 #, no-c-format
 msgid "Only if the job completed successfully"
-msgstr "Apenas se a tarefa concluir com sucesso"
+msgstr "Apenas se a tarefa for concluída com sucesso"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:944
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:964
@@ -10948,9 +10949,9 @@ msgid "Sampling frequency in Hz."
 msgstr "Frequência de amostragem em Hz."
 
 #: src/mkvtoolnix-gui/util/text_display_dialog.cpp:106
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Save"
-msgstr "&Salvar"
+msgstr "Salvar"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:666
 #, no-c-format
@@ -11016,9 +11017,9 @@ msgid "Saving the chapters failed."
 msgstr "Falha ao salvar os capítulos."
 
 #: src/mkvtoolnix-gui/util/file.cpp:152
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Saving the file failed. Error message from the system: %1"
-msgstr "Mensagem de erro do analisador: %1"
+msgstr "Falha ao salvar o arquivo. Mensagem de erro do sistema: %1"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:255
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:264
@@ -14761,9 +14762,9 @@ msgid "Use legacy font MIME types when adding new attachments or replacing exist
 msgstr "Use tipos MIME de fonte herdada ao adicionar novos anexos ou substituir os existentes"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2185
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Use system settings"
-msgstr "Fechar &configurações"
+msgstr "Usar configurações do sistema"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2282
 #, no-c-format
