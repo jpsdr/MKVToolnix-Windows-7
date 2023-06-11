@@ -169,6 +169,8 @@ Section "Program files" SEC01
   File /r "../plugins"
 !endif
 
+  Delete "$INSTDIR\data\portable-app"
+
   # Shortcuts
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
 

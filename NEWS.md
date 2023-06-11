@@ -5,6 +5,13 @@
 * MKVToolNix GUI: header editor: for files that only contain legacy track
   language elements but no IETF language elements the header editor will now
   derive the IETF language elements from the legacy elements. See #3557.
+* Windows installer: the installer will now remove the file
+  `data\portable-app` if it's present in the installation directory as its
+  presence would signal to the app to run in portable mode, requiring write
+  access to its base directory. This fixes some installation issues that could
+  occur when a user extracted a portable app archive into a folder like
+  `C:\Program Files\MKVToolNix`. Also added an installation check for the same
+  issue. See #3558.
 
 ## Bug fixes
 
