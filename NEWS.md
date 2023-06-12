@@ -35,6 +35,8 @@
   wrt. to having write access to certain directories (system's temporary
   directory, MKVToolNix's file identification cache directory and others) &
   display proper error messages if not. Part of the fix of #3556 & #3561.
+* mkvmerge: sorting tracks by type did not work properly when some tracks
+  weren't copied. Part of the fix of #3567.
 
 ## Build system changes
 
