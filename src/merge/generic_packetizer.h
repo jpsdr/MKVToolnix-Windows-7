@@ -284,8 +284,6 @@ public:
 
   virtual bool is_compatible_with(output_compatibility_e compatibility);
 
-  int64_t create_track_number();
-
   virtual void prevent_lacing();
   virtual bool is_lacing_prevented() const;
 

@@ -568,6 +568,13 @@ create_type_based_track_order() {
   for (auto const &to : to_sort)
     g_track_order.push_back({ std::get<1>(to), std::get<2>(to) });
 }
+
+static void
+sort_tracks_by_track_number() {
+  std::stable_sort(g_kax_tracks->begin(), g_kax_tracks->end(), [](auto a, auto b) {
+    return GetChildValue<libmatroska::KaxTrackNumber>(dynamic_cast<libmatroska::KaxTrackEntry &>(*a))
+         < GetChildValue<libmatroska::KaxTrackNumber>(dynamic_cast<libmatroska::KaxTrackEntry &>(*b));
+  });
 }
 
 /** \brief Render the basic EBML and Matroska headers
@@ -698,6 +705,8 @@ render_headers(mm_io_c *out) {
       for (auto const &packetizer : g_packetizers)
         if (packetizer.packetizer)
           packetizer.packetizer->fix_headers();
+
+      sort_tracks_by_track_number();
 
     } else
       set_timestamp_scale();

@@ -79,7 +79,7 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_safety_last_timestamp{}
   , m_safety_last_duration{}
   , m_track_entry{}
-  , m_hserialno{-1}
+  , m_hserialno{0}
   , m_htrack_type{-1}
   , m_htrack_default_duration{-1}
   , m_htrack_default_duration_indicates_fields{}
@@ -332,12 +332,6 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   // Let's see if the user has specified a compression scheme for this track.
   if (COMPRESSION_UNSPECIFIED != m_ti.m_compression)
     m_hcompression = m_ti.m_compression;
-
-  // Set default header values to 'unset'.
-  if (!m_reader->m_appending) {
-    m_hserialno                             = create_track_number();
-    g_packetizers_by_track_num[m_hserialno] = this;
-  }
 
   m_timestamp_factory = timestamp_factory_c::create(m_ti.m_ext_timestamps, m_ti.m_fname, m_ti.m_id);
 
@@ -1011,6 +1005,11 @@ generic_packetizer_c::set_headers() {
     m_track_entry    = !g_kax_last_entry ? &GetChild<KaxTrackEntry>(*g_kax_tracks) : &GetNextChild<KaxTrackEntry>(*g_kax_tracks, *g_kax_last_entry);
     g_kax_last_entry = m_track_entry;
     m_track_entry->SetGlobalTimecodeScale((int64_t)g_timestamp_scale);
+  }
+
+  if (!m_hserialno && !m_reader->m_appending) {
+    m_hserialno                             = ++ms_track_number;
+    g_packetizers_by_track_num[m_hserialno] = this;
   }
 
   GetChild<KaxTrackNumber>(m_track_entry).SetValue(m_hserialno);
@@ -1742,44 +1741,6 @@ generic_packetizer_c::show_experimental_status_version(std::string const &codec_
                        "mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. "
                        "This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"),
                      get_format_name().get_translated(), codec_id));
-}
-
-int64_t
-generic_packetizer_c::create_track_number() {
-  int file_num = -1;
-  size_t i;
-
-  // Determine current file's file number regarding --track-order.
-  for (i = 0; i < g_files.size(); i++)
-    if (g_files[i]->reader.get() == this->m_reader) {
-      file_num = i;
-      break;
-    }
-
-  if (file_num == -1)
-    mxerror(fmt::format(Y("create_track_number: file_num not found. {0}\n"), BUGMSG));
-
-  // Determine current track's track number regarding --track-order
-  // and look up the pair in g_track_order.
-  int tnum = -1;
-  for (i = 0; i < g_track_order.size(); i++)
-    if (   (g_track_order[i].file_id  == file_num)
-        && (g_track_order[i].track_id == m_ti.m_id)) {
-      tnum = i + 1;
-      break;
-    }
-
-  // If the track's file/track number pair was found in g_track_order,
-  // use the resulting track number unconditionally.
-  if (tnum > 0)
-    return tnum;
-
-  // The file/track number pair wasn't found. Create a new track
-  // number. Don't use numbers that might be assigned by
-  // --track-order.
-
-  ++ms_track_number;
-  return ms_track_number + g_track_order.size();
 }
 
 file_status_e

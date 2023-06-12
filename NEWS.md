@@ -37,6 +37,10 @@
   display proper error messages if not. Part of the fix of #3556 & #3561.
 * mkvmerge: sorting tracks by type did not work properly when some tracks
   weren't copied. Part of the fix of #3567.
+* mkvmerge: track numbers in the destination file were assigned out-of-order
+  when the track order in the source files differs from the one in the
+  destination file. Now they're assigned sequentially in the order the tracks
+  appear in the destination file again. Part of the fix of #3567.
 
 ## Build system changes
 
