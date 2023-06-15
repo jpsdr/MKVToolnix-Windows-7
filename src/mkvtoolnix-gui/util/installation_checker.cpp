@@ -72,7 +72,7 @@ InstallationChecker::runChecks() {
     auto dir = App::applicationDirPath();
     QFile tempFile{Q("%1/writeTest").arg(dir)};
 
-    if (!tempFile.open(QIODeviceBase::WriteOnly))
+    if (!tempFile.open(QIODevice::WriteOnly))
       m_problems << Problem{ ProblemType::PortableDirectoryNotWritable, dir };
     else {
       tempFile.close();
