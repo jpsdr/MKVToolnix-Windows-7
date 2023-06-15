@@ -202,7 +202,7 @@ MainWindow::setupConnections() {
   connect(p->ui->actionHelpWebSite,               &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
   connect(p->ui->actionHelpReportBug,             &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
   connect(p->ui->actionHelpSystemInformation,     &QAction::triggered,                                    this,                 &MainWindow::showSystemInformation);
-  connect(p->ui->actionHelpForumSubReddit,        &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
+  connect(p->ui->actionHelpForum,                 &QAction::triggered,                                    this,                 &MainWindow::visitHelpURL);
   connect(p->ui->actionHelpCodeOfConduct,         &QAction::triggered,                                    this,                 &MainWindow::showCodeOfConduct);
 
   connect(p->ui->actionWindowNext,                &QAction::triggered,                                    this,                 [this]() { showNextOrPreviousSubWindow(1);  });
@@ -303,7 +303,7 @@ MainWindow::setupHelpURLs() {
   p->helpURLs[p->ui->actionHelpMkvmergeDocumentation] = "https://mkvtoolnix.download/doc/mkvmerge.html";
   p->helpURLs[p->ui->actionHelpWebSite]               = "https://mkvtoolnix.download/";
   p->helpURLs[p->ui->actionHelpReportBug]             = "https://gitlab.com/mbunkus/mkvtoolnix/issues/";
-  p->helpURLs[p->ui->actionHelpForumSubReddit]        = "https://www.reddit.com/r/mkvtoolnix/";
+  p->helpURLs[p->ui->actionHelpForum]                 = "https://help.mkvtoolnix.download/";
 }
 
 void
