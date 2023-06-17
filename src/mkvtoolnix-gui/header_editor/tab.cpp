@@ -437,6 +437,8 @@ Tab::selectionChanged(QModelIndex const &current,
   auto selectedPage = m_model->selectedPage(current);
   if (selectedPage)
     ui->pageContainer->setCurrentWidget(selectedPage);
+
+  MainWindow::get()->headerEditorTool()->enableMenuActions();
 }
 
 bool

@@ -41,6 +41,9 @@
   when the track order in the source files differs from the one in the
   destination file. Now they're assigned sequentially in the order the tracks
   appear in the destination file again. Part of the fix of #3567.
+* MKVToolNix GUI: header editor: the keyboard shortcuts from the "modify
+  selected track" sub-menu didn't work right after opening a file. They only
+  started working after opening the "header editor" menu. Fixes #3573.
 
 ## Build system changes
 
