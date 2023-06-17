@@ -109,8 +109,8 @@ teletext_to_srt_packet_converter_c::ttx_page_data_t::reset() {
   erase_flag   = false;
 
   page_buffer.clear();
-  page_buffer.reserve(TTX_PAGE_ROW_SIZE + 1);
-  for (auto idx = 0; idx <= TTX_PAGE_ROW_SIZE; ++idx)
+  page_buffer.reserve(TTX_PAGE_TEXT_ROW_SIZE + 1);
+  for (auto idx = 0; idx <= TTX_PAGE_TEXT_ROW_SIZE; ++idx)
     page_buffer.emplace_back();
 }
 
@@ -263,7 +263,7 @@ teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
   auto prior      = recoded;
 
   if (!m_current_track->m_forced_char_map_idx && (page_data.national_set >= ms_char_maps.size())) {
-    recoded = std::string{reinterpret_cast<char const *>(buffer), TTX_PAGE_COL_SIZE};
+    recoded = std::string{reinterpret_cast<char const *>(buffer), TTX_PAGE_TEXT_COLUMN_SIZE};
     return recoded != prior;
   }
 
@@ -272,7 +272,7 @@ teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
 
   recoded.clear();
 
-  for (auto idx = 0u; idx < TTX_PAGE_COL_SIZE; ++idx) {
+  for (auto idx = 0u; idx < TTX_PAGE_TEXT_COLUMN_SIZE; ++idx) {
     auto c      = buffer[idx];
     auto mapped = char_map[static_cast<int>(c)];
 
@@ -467,7 +467,7 @@ teletext_to_srt_packet_converter_c::process_ttx_packet() {
   if (   !m_current_track
       || (ttx_header_magazine != m_current_track->m_magazine)
       || (row_number          <  0)
-      || (row_number          >= TTX_PAGE_ROW_SIZE))
+      || (row_number          >= TTX_PAGE_TEXT_ROW_SIZE))
     return;
 
   process_single_row(row_number);

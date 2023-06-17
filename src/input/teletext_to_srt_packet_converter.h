@@ -19,8 +19,8 @@
 #include "common/timestamp.h"
 #include "input/packet_converter.h"
 
-constexpr auto TTX_PAGE_ROW_SIZE = 24;
-constexpr auto TTX_PAGE_COL_SIZE = 40;
+constexpr auto TTX_PAGE_TEXT_ROW_SIZE    = 24;
+constexpr auto TTX_PAGE_TEXT_COLUMN_SIZE = 40;
 
 class teletext_to_srt_packet_converter_c: public packet_converter_c {
 protected:
