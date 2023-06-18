@@ -15,6 +15,7 @@
 
 #include <cerrno>
 #include <clocale>
+#include <codecvt>
 #if HAVE_NL_LANGINFO
 # include <langinfo.h>
 #elif HAVE_LOCALE_CHARSET
