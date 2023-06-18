@@ -271,14 +271,6 @@ translation_c::set_active_translation(const std::string &locale) {
   mxdebug_if(debugging_c::requested("locale"), fmt::format("[translation_c::set_active_translation() active_translation_idx {0} for locale {1}]\n", ms_active_translation_idx, locale));
 }
 
-void
-translation_c::initialize_std_and_boost_filesystem_locales() {
-  std::locale utf8_locale{ std::locale(), new std::codecvt_utf8<wchar_t> };
-
-  std::locale::global(utf8_locale);
-  boost::filesystem::path::imbue(utf8_locale);
-}
-
 // ------------------------------------------------------------
 
 translatable_string_c::translatable_string_c(const std::string &untranslated_string)

@@ -44,6 +44,14 @@
 * MKVToolNix GUI: header editor: the keyboard shortcuts from the "modify
   selected track" sub-menu didn't work right after opening a file. They only
   started working after opening the "header editor" menu. Fixes #3573.
+* all: Linux: if initializing the locale system based on the system's settings
+  fails, e.g. if environment variables such as `LC_ALL` have been set to
+  `fr_FR.UTF-8` but the locale for `fr_FR.UTF-8` hasn't been built, MKVToolNix
+  will try to fall back to `en_US.UTF-8` first & `C.UTF-8` second. If neither
+  of the three succeeds, an error message will be shown, and the program will
+  abort. This fixes the programs not catching an exception from the
+  `boost::filesystem` library which doesn't cope with mis-configured locale
+  systems well. Workaround for #3574.
 
 ## Build system changes
 

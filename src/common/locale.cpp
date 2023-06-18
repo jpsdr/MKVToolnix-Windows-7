@@ -283,7 +283,6 @@ std::string
 get_local_charset() {
   std::string lc_charset;
 
-  setlocale(LC_CTYPE, "");
 #if defined(COMP_MINGW) || defined(COMP_MSC)
   lc_charset = fmt::format("CP{0}", GetACP());
 #elif defined(SYS_SOLARIS)
@@ -307,5 +306,54 @@ get_local_console_charset() {
   return fmt::format("CP{0}", GetACP());
 #else
   return get_local_charset();
+#endif
+}
+
+void
+initialize_std_and_boost_filesystem_locales() {
+  auto debug = debugging_c::requested("locale");
+
+  mxinfo(fmt::format("woohoo\n"));
+
+  std::vector<std::string> locales_to_try{""};
+
+#if defined(SYS_UNIX)
+  locales_to_try.emplace_back("en_US.UTF-8");
+  locales_to_try.emplace_back("C.UTF-8");
+#endif
+
+  auto boost_initialized = false;
+  auto ctype_initialized = false;
+
+  for (auto const &locale_name : locales_to_try) {
+    if (std::setlocale(LC_CTYPE, locale_name.c_str())) {
+      ctype_initialized = true;
+      mxdebug_if(debug, fmt::format("initialize_std_and_boost_filesystem_locales: LC_CTYPE initialized from '{0}'\n", locale_name));
+      break;
+    }
+  }
+
+  for (auto const &locale_name : locales_to_try) {
+    auto locale      = locale_name.empty() ? std::locale() : std::locale{locale_name};
+    auto utf8_locale = std::locale{ locale, new std::codecvt_utf8<wchar_t> };
+
+    try {
+      std::locale::global(utf8_locale);
+      boost::filesystem::path::imbue(utf8_locale);
+
+      boost_initialized = true;
+      mxdebug_if(debug, fmt::format("initialize_std_and_boost_filesystem_locales: boost::filesystem initialized from '{0}' ({1})\n", locale_name, utf8_locale.name()));
+
+      break;
+
+    } catch (std::runtime_error &) {
+    }
+  }
+
+#if defined(SYS_UNIX)
+  if (!boost_initialized || !ctype_initialized)
+    mxerror("Setting up the locale system based on the system's locale configuration failed. "
+            "The fallback values of 'en_US.UTF-8' and 'C.UTF-8' did not work either. "
+            "MKVToolNix requires a correctly configured & working locale system.");
 #endif
 }

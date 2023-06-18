@@ -91,3 +91,4 @@ extern charset_converter_cptr g_cc_local_utf8;
 
 std::string get_local_charset();
 std::string get_local_console_charset();
+void initialize_std_and_boost_filesystem_locales();

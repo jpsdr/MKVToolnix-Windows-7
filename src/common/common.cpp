@@ -124,12 +124,13 @@ mtx_common_init(std::string const &program_name,
   ExcHndlInit();
 #endif
 
+  debugging_c::init();
   mtx::log::init();
   random_c::init();
 
-  g_cc_local_utf8 = charset_converter_c::init("");
+  initialize_std_and_boost_filesystem_locales();
 
-  translation_c::initialize_std_and_boost_filesystem_locales();
+  g_cc_local_utf8 = charset_converter_c::init("");
 
   mtx::sys::determine_path_to_current_executable(argv0 ? std::string{argv0} : std::string{});
 
@@ -143,7 +144,6 @@ mtx_common_init(std::string const &program_name,
 
   matroska_init();
 
-  debugging_c::init();
   mtx::hacks::init();
 
   init_locales();
