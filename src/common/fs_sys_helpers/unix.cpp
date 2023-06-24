@@ -112,7 +112,8 @@ get_current_exe_path([[maybe_unused]] std::string const &argv0) {
 
 boost::filesystem::path
 get_package_data_folder() {
-  return mtx::fs::to_path(MTX_PKG_DATA_DIR);
+  auto appimage_data_dir = mtx::sys::get_installation_path() / ".." / "share" / "mkvtoolnix";
+  return boost::filesystem::is_directory(appimage_data_dir) ? appimage_data_dir : mtx::fs::to_path(MTX_PKG_DATA_DIR);
 }
 #endif
 

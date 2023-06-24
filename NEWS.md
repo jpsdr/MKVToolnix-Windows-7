@@ -52,6 +52,7 @@
   abort. This fixes the programs not catching an exception from the
   `boost::filesystem` library which doesn't cope with mis-configured locale
   systems well. Workaround for #3574.
+* AppImage: fixed the GUI resources (e.g. icons) not being found.
 
 ## Build system changes
 
