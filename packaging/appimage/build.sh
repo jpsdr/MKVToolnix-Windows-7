@@ -112,8 +112,11 @@ else
 fi
 JOBS=$(nproc)
 
-wget -O "${TOP_DIR}/packaging/appimage/functions.sh" -q https://raw.githubusercontent.com/AppImage/AppImages/master/functions.sh
-. "${TOP_DIR}/packaging/appimage/functions.sh"
+functions_sh="${TOP_DIR}/packaging/appimage/functions.sh"
+if [[ ! -f "${functions_sh}" ]]; then
+   wget -O "${functions_sh}" -q https://raw.githubusercontent.com/AppImage/AppImages/master/functions.sh
+fi
+source "${functions_sh}"
 
 if [[ ! -f configure ]]; then
   ./autogen.sh
