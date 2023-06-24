@@ -97,7 +97,7 @@ done
 QTDIR="${HOME}/opt/qt/${QTVERSION}/gcc_64"
 NO_GLIBC_VERSION=1
 
-if [[ ( -d .git ) && ( $RELEASE_VERSION == 0 ) ]]; then
+if git rev-parse --show-toplevel &> /dev/null && [[ $RELEASE_VERSION == 0 ]]; then
   # If revision is a tag: release-28.2.0
   # If it isn't: release-28.1.0-7-g558fbc986
   VERSION="$(git describe --tags | sed -e 's/release-//')"
