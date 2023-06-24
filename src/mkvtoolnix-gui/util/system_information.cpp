@@ -74,6 +74,7 @@ gatherGeneralInfo(QStringList &info) {
   info << Q("* Installation path: %1").arg(QDir::toNativeSeparators(App::applicationDirPath()));
   info << Q("* INI file location: %1").arg(QDir::toNativeSeparators(Util::Settings::iniFileName()));
   info << Q("* Job queue location: %1").arg(QDir::toNativeSeparators(Jobs::Job::queueLocation()));
+  info << Q("* Package data path: %1").arg(QDir::toNativeSeparators(Q(mtx::sys::get_package_data_folder())));
 
   //
   // Original command-line arguments
