@@ -12,6 +12,10 @@
   occur when a user extracted a portable app archive into a folder like
   `C:\Program Files\MKVToolNix`. Also added an installation check for the same
   issue. See #3558.
+* AppImage: the AppImage is now built on AlmaLinux 8 with Qt 6.5.1. This means
+  that the minimum glibc version this AppImage is compatible with has also
+  been bumped, to v2.28. The oldest Debian coming with this version is Debian
+  10 "Buster"; for Ubuntu it's 18.10 "Cosmic Cuttlefish".
 
 ## Bug fixes
 

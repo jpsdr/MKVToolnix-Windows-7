@@ -1,45 +1,51 @@
 #!/bin/bash
 
-# This only works on CentOS 7 so far. At least the following packages
-# must be installed:
+# This only works on AlmaLinux 8 with Qt 6.5.x. At least the following
+# packages must be installed:
 
-#   cmark-devel
+#   attr
+#   autoconf
+#   bash
+#   boost-devel
+#   createrepo
 #   desktop-file-utils
-#   devtoolset-8-gcc-c++
 #   docbook-style-xsl
 #   fdupes
 #   file-devel
 #   flac
 #   flac-devel
+#   fmt-devel
 #   fuse
 #   fuse-libs
+#   gcc-c++
+#   gcc-toolset-11-annobin-plugin-gcc
+#   gcc-toolset-11-gcc-c++
 #   gettext-devel
+#   git
 #   glibc-devel
+#   gmp-devel
 #   gtest-devel
+#   hicolor-icon-theme
+#   libdvdread-devel
 #   libogg-devel
 #   libstdc++-devel
 #   libvorbis-devel
 #   libxslt
 #   make
-#   pcre2
+#   moreutils
 #   pcre2-devel
 #   pkgconfig
 #   po4a
-#   qt5-qtbase-devel
-#   qt5-qtmultimedia-devel
+#   rpm-build
+#   rpmlint
+#   ruby
+#   rubygem-rake
+#   strace
+#   sudo
+#   vim
 #   wget
 #   zlib-devel
-
-# Note that you also need Boost. While CentOS 7 includes Boost, the
-# included version is too old.  Instead compile Boost yourself (as
-# static libraries) and adjust the path to it down below where
-# configure is executed, e.g. like this:
-
-#   echo "using gcc : : /opt/rh/devtoolset-8/root/usr/bin/g++ ; " > tools/build/src/user-config.jam
-#   ./bootstrap.sh --prefix=/opt/boost/${PWD:t} \
-#     --without-libraries=python,mpi,wave,graph_parallel
-#    ./b2 -j$(( $(nproc) + 2 )) variant=release link=static install
-
+#   zsh
 
 # This must be run from inside an unpacked MKVToolNix source
 # directory. You can run it from inside a git checkout, but make sure
@@ -123,26 +129,20 @@ if [[ ! -f configure ]]; then
 fi
 
 if [[ -f /etc/centos-release ]]; then
-  devtoolset=$(ls -1d /opt/rh/devtoolset-* | tail -n 1)
-  boost=$(ls -1d /opt/boost/boost* | tail -n 1)
+  devtoolset=$(ls -1d /opt/rh/*toolset-* | tail -n 1)
   export CC=${devtoolset}/root/bin/gcc
   export CXX=${devtoolset}/root/bin/g++
-  export CONFIGURE_ARGS="--with-boost=${boost}"
 fi
 
 export PKG_CONFIG_PATH="${QTDIR}/lib/pkgconfig:${PKG_CONFIG_PATH}"
 export LD_LIBRARY_PATH="${QTDIR}/lib:${LD_LIBRARY_PATH}"
 export LDFLAGS="-L${QTDIR}/lib ${LDFLAGS}"
+export PATH="${QTDIR}/bin:${PATH}"
 
 if [[ ( ! -f build-config ) && ( "$NO_BUILD" != 1 ) ]]; then
   ./configure \
     --prefix=/usr \
-    --enable-optimization \
-    --with-moc="${QTDIR}/bin/moc" \
-    --with-uic="${QTDIR}/bin/uic" \
-    --with-rcc="${QTDIR}/bin/rcc" \
-    --with-qmake="${QTDIR}/bin/qmake" \
-    "$CONFIGURE_ARGS"
+    --enable-optimization
 
   ./drake clean
 fi
@@ -161,12 +161,12 @@ chmod 0755 AppRun
 cd usr
 
 # Qt plugins
-mkdir -p bin/{audio,mediaservice,platforms,iconengines,imageformats}
-cp ${QTDIR}/plugins/audio/*.so bin/audio/
+mkdir -p bin/{iconengines,imageformats,multimedia,platforms,tls}
 cp ${QTDIR}/plugins/iconengines/*svg*.so bin/iconengines/
 cp ${QTDIR}/plugins/imageformats/*svg*.so bin/imageformats/
-cp ${QTDIR}/plugins/mediaservice/libgst{audiodecoder,mediaplayer}*.so bin/mediaservice/
+cp ${QTDIR}/plugins/multimedia/libgst*.so bin/multimedia/
 cp ${QTDIR}/plugins/platforms/libq{minimal,offscreen,wayland,xcb}*.so bin/platforms/
+cp ${QTDIR}/plugins/tls/libqopensslbackend.so bin/tls/
 
 find bin -type f -exec strip {} \+
 
@@ -182,7 +182,12 @@ mv ./home all_libs
 mv ./lib* all_libs
 mv ./usr all_libs
 mkdir lib
-mv `find all_libs -type f` lib
+# inefficient loop due to the same lib potentially being present in
+# several directories & mv throwing a fit about it ("will not
+# overwrite just-created…")
+for lib in `find all_libs -type f` ; do
+  mv $lib lib/
+done
 rm -rf all_libs
 
 # dlopen()ed by libQt5Network
