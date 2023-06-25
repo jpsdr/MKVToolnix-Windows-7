@@ -161,11 +161,12 @@ chmod 0755 AppRun
 cd usr
 
 # Qt plugins
-mkdir -p bin/{iconengines,imageformats,multimedia,platforms,tls}
+mkdir -p bin/{iconengines,imageformats,multimedia,platforms,platforminputcontexts,tls}
 cp ${QTDIR}/plugins/iconengines/*svg*.so bin/iconengines/
 cp ${QTDIR}/plugins/imageformats/*svg*.so bin/imageformats/
 cp ${QTDIR}/plugins/multimedia/libgst*.so bin/multimedia/
 cp ${QTDIR}/plugins/platforms/libq{minimal,offscreen,wayland,xcb}*.so bin/platforms/
+cp ${QTDIR}/plugins/platforminputcontexts/lib*.so bin/platforminputcontexts/
 cp ${QTDIR}/plugins/tls/libqopensslbackend.so bin/tls/
 
 find bin -type f -exec strip {} \+

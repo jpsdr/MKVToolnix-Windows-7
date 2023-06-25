@@ -57,6 +57,8 @@
   `boost::filesystem` library which doesn't cope with mis-configured locale
   systems well. Workaround for #3574.
 * AppImage: fixed the GUI resources (e.g. icons) not being found.
+* AppImage: the Qt plugins required for using compose key/dead keys are now
+  included. Fixes #3577.
 
 ## Build system changes
 
