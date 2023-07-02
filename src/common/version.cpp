@@ -26,7 +26,7 @@
 #include "common/strings/parsing.h"
 #include "common/version.h"
 
-constexpr auto VERSIONNAME = "Elemental";
+constexpr auto VERSIONNAME = "Running";
 
 version_number_t::version_number_t(const std::string &s)
   : valid{}
