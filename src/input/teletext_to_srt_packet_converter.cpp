@@ -298,8 +298,8 @@ teletext_to_srt_packet_converter_c::decode_color_text(unsigned char c) {
       font_tag_opened = false;
     }
 
-    // black is considered as white for telxcc purpose
-    // telxcc writes <font/> tags only when needed
+    // black is considered as white
+    // <font/> tags are only written when needed
     if ((c > 0x0) && (c < 0x7))
     {
       font_str += "<font color=\"" ;
