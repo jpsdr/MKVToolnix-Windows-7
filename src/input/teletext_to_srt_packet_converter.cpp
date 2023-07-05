@@ -288,7 +288,7 @@ teletext_to_srt_packet_converter_c::remove_parity(unsigned char *buffer,
 
 std::string
 teletext_to_srt_packet_converter_c::decode_color_text(unsigned char c) {
-  if ((c < 0x0) || (c > 0x07))
+  if (c > 0x07)
     return " "s;
 
   auto font_str = maybe_close_color_font_tag();
