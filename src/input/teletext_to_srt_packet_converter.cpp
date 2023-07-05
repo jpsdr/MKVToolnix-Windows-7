@@ -340,7 +340,7 @@ teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
     auto c      = buffer[idx];
     auto mapped = char_map[static_cast<int>(c)];
 
-    mxdebug_if(m_debug_packet, fmt::format("  txt char {0}\n", c));
+    mxdebug_if(m_debug_packet, fmt::format("  txt char {0} ({1})\n", c, static_cast<int>(c)));
 
     recoded += mapped  ? std::string{mapped}
              : c < ' ' ? decode_color_text(c)
