@@ -3,7 +3,7 @@
 ## New features and enhancements
 
 * mkvmerge: MPEG TS reader: added support for colors in teletext
-  subtitles. Patch by Angelad Schmid.
+  subtitles. Patch by Angela Schmid.
 
 
 # Version 78.0 "Running" 2023-07-02
