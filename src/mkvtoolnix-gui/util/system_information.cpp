@@ -68,13 +68,6 @@ gatherGeneralInfo(QStringList &info) {
 
   info << Q("* MKVToolNix GUI version: %1").arg(Q(get_current_version().to_string()));
   info << Q("* mkvmerge version: %1").arg(checker.mkvmergeVersion().isEmpty() ? Q("unknown") : checker.mkvmergeVersion());
-#if defined(SYS_WINDOWS)
-  info << Q("* Installation type: %1").arg(App::isInstalled() ? Q("installed") : Q("portable"));
-#endif
-  info << Q("* Installation path: %1").arg(QDir::toNativeSeparators(App::applicationDirPath()));
-  info << Q("* INI file location: %1").arg(QDir::toNativeSeparators(Util::Settings::iniFileName()));
-  info << Q("* Job queue location: %1").arg(QDir::toNativeSeparators(Jobs::Job::queueLocation()));
-  info << Q("* Package data path: %1").arg(QDir::toNativeSeparators(Q(mtx::sys::get_package_data_folder())));
 
   //
   // Original command-line arguments
@@ -149,8 +142,13 @@ gatherOperatingSystemInfo(QStringList &info) {
 void
 gatherPathInformation(QStringList &info) {
   info << Q("") << Q("## Paths");
-  info << Q("* Is installed: %1").arg(App::isInstalled());
+#if defined(SYS_WINDOWS)
+  info << Q("* Installation type: %1").arg(App::isInstalled() ? Q("installed") : Q("portable"));
+#endif
   info << Q("* Application directory: %1").arg(QDir::toNativeSeparators(App::applicationDirPath()));
+  info << Q("* INI (preferences) file location: %1").arg(QDir::toNativeSeparators(Util::Settings::iniFileName()));
+  info << Q("* Job queue location: %1").arg(QDir::toNativeSeparators(Jobs::Job::queueLocation()));
+  info << Q("* Package data path: %1").arg(QDir::toNativeSeparators(Q(mtx::sys::get_package_data_folder())));
   info << Q("* Cache directory (via Qt): %1").arg(QDir::toNativeSeparators(QStandardPaths::writableLocation(QStandardPaths::CacheLocation)));
 }
 
