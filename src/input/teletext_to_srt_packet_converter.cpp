@@ -331,9 +331,8 @@ teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
     return recoded != prior;
   }
 
-  auto char_map_idx        = m_current_track->m_forced_char_map_idx ? *m_current_track->m_forced_char_map_idx : page_data.national_set;
-  auto &char_map           = ms_char_maps[char_map_idx];
-  auto skip_leading_spaces = true;
+  auto char_map_idx = m_current_track->m_forced_char_map_idx ? *m_current_track->m_forced_char_map_idx : page_data.national_set;
+  auto &char_map    = ms_char_maps[char_map_idx];
 
   recoded.clear();
 
@@ -343,14 +342,9 @@ teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
 
     mxdebug_if(m_debug_packet, fmt::format("  txt char {0}\n", c));
 
-    if (c >= ' ') {
-      if (skip_leading_spaces && c == ' ') continue;
-      skip_leading_spaces = false;
-    }
-
-    recoded    += mapped  ? std::string{mapped}
-                : c < ' ' ? decode_color_text(c)
-                :           std::string{static_cast<char>(c)};
+    recoded += mapped  ? std::string{mapped}
+             : c < ' ' ? decode_color_text(c)
+             :           std::string{static_cast<char>(c)};
 
   }
 
