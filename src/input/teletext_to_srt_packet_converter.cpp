@@ -356,6 +356,25 @@ teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
 
   recoded += maybe_close_color_font_tag();
 
+  auto to_clean = Q(recoded);
+
+  static std::optional<QRegularExpression> s_re_spaces_start_end, s_re_spaces_before_closing_tag, s_re_spaces_after_opening_tag, s_re_no_content;
+
+  if (!s_re_spaces_start_end) {
+    s_re_spaces_before_closing_tag = QRegularExpression{Q("[[:space:]]+</font>[[:space:]]*")};
+    s_re_spaces_after_opening_tag  = QRegularExpression{Q("[[:space:]]*(<font color=.*?>)[[:space:]]+")};
+    s_re_spaces_start_end          = QRegularExpression{Q("^[[:space:]]+|[[:space:]]+$")};
+    s_re_no_content                = QRegularExpression{Q("<font color=.*?>[[:space:]]*</font>")};
+  }
+
+  to_clean
+    .replace(*s_re_spaces_before_closing_tag, Q("</font> "))
+    .replace(*s_re_spaces_after_opening_tag,  Q(" \\1"))
+    .replace(*s_re_no_content,                {})
+    .replace(*s_re_spaces_start_end,          {});
+
+  recoded = to_utf8(to_clean);
+
   return recoded != prior;
 }
 
