@@ -356,9 +356,9 @@ teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
 
   if (!s_re_spaces_start_end) {
     s_re_spaces_before_closing_tag = QRegularExpression{Q("[[:space:]]+</font>[[:space:]]*")};
-    s_re_spaces_after_opening_tag  = QRegularExpression{Q("[[:space:]]*(<font color=.*?>)[[:space:]]+")};
+    s_re_spaces_after_opening_tag  = QRegularExpression{Q("[[:space:]]*(<font color=[^>]+>)[[:space:]]+")};
     s_re_spaces_start_end          = QRegularExpression{Q("^[[:space:]]+|[[:space:]]+$")};
-    s_re_no_content                = QRegularExpression{Q("<font color=.*?>[[:space:]]*</font>")};
+    s_re_no_content                = QRegularExpression{Q("<font color=[^>]+>[[:space:]]*</font>")};
   }
 
   to_clean
