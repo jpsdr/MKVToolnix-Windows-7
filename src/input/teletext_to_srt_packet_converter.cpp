@@ -100,7 +100,7 @@ static unsigned char unhamtab[256] = {
   0xff, 0x0e, 0x0f, 0xff, 0x0e, 0x8e, 0xff, 0x0e,
 };
 
-// Subtitle conversation color support 
+// Subtitle conversation color support
 //
 // ETSI EN 300 706 V1.2.1 (2003-04)
 // Enhanced Teletext specification
@@ -122,11 +122,11 @@ static unsigned char unhamtab[256] = {
 //      5     Magenta
 //      6     Cyan
 //      7     White
-//	 
+//
 // Only using CLUT 0, the rest is ignored
 //
 // Implemented in decode_color_text() and decode_color_text_end_of_line()
-// Implementation used from https://github.com/CCExtractor/ccextractor/blob/master/src/lib_ccx/telxcc.c 
+// Implementation used from https://github.com/CCExtractor/ccextractor/blob/master/src/lib_ccx/telxcc.c
 
 static const char *TTXT_COLOURS[8] = {
     // black,   red,       green,     yellow,    blue,      magenta,   cyan,      white
@@ -288,34 +288,23 @@ teletext_to_srt_packet_converter_c::remove_parity(unsigned char *buffer,
 
 std::string
 teletext_to_srt_packet_converter_c::decode_color_text(unsigned char c) {
-  
-  std::string font_str = "";
+  if (c > 0x07)
+    return {};
 
-  if (c <= 0x07) {  
-    
-    if (font_tag_opened) {
-      font_str += "</font>";
-      font_tag_opened = false;
-    }
+  auto font_str = maybe_close_color_font_tag();
 
-    // black is considered as white
-    // <font/> tags are only written when needed
-    if ((c > 0x0) && (c < 0x7))
-    {
-      font_str += "<font color=\"" ;
-      font_str += TTXT_COLOURS[c];
-      font_str += "\">";
-
-      font_tag_opened = true;
-    }
+  // black is considered as white
+  // <font/> tags are only written when needed
+  if ((c > 0x0) && (c < 0x7)) {
+    font_str       += fmt::format("<font color=\"{0}\">", TTXT_COLOURS[c]);
+    font_tag_opened = true;
   }
 
   return font_str;
 }
 
 std::string
-teletext_to_srt_packet_converter_c::decode_color_text_end_of_line() {
- 
+teletext_to_srt_packet_converter_c::maybe_close_color_font_tag() {
   std::string font_str = "";
 
   if (font_tag_opened) {
@@ -342,8 +331,8 @@ teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
     return recoded != prior;
   }
 
-  auto char_map_idx = m_current_track->m_forced_char_map_idx ? *m_current_track->m_forced_char_map_idx : page_data.national_set;
-  auto &char_map    = ms_char_maps[char_map_idx];
+  auto char_map_idx        = m_current_track->m_forced_char_map_idx ? *m_current_track->m_forced_char_map_idx : page_data.national_set;
+  auto &char_map           = ms_char_maps[char_map_idx];
   auto skip_leading_spaces = true;
 
   recoded.clear();
@@ -362,10 +351,10 @@ teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
     recoded    += mapped  ? std::string{mapped}
                 : c < ' ' ? decode_color_text(c)
                 :           std::string{static_cast<char>(c)};
-  
+
   }
 
-  recoded += decode_color_text_end_of_line();
+  recoded += maybe_close_color_font_tag();
 
   return recoded != prior;
 }

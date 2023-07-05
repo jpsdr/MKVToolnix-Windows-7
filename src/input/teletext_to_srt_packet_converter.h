@@ -83,7 +83,7 @@ protected:
   void process_ttx_packet();
   std::string page_to_string() const;
   std::string decode_color_text(unsigned char c);
-  std::string decode_color_text_end_of_line();
+  std::string maybe_close_color_font_tag();
   bool decode_line(unsigned char const *buffer, unsigned int row_number);
   void process_single_row(unsigned int row_number);
   void decode_page_data(unsigned char ttx_header_magazine);
