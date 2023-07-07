@@ -168,8 +168,13 @@ preventScrollingWithoutFocus(QObject *parent) {
 
 void
 fixComboBoxViewWidth(QComboBox &comboBox) {
+  auto previousPolicy = comboBox.sizeAdjustPolicy();
+
   comboBox.setSizeAdjustPolicy(QComboBox::AdjustToContents);
   comboBox.view()->setMinimumWidth(comboBox.sizeHint().width());
+
+  if (!mtx::included_in(previousPolicy, QComboBox::AdjustToContents, QComboBox::AdjustToContentsOnFirstShow))
+    comboBox.setSizeAdjustPolicy(previousPolicy);
 }
 
 void

@@ -1832,6 +1832,7 @@ Tab::retranslateInputUI() {
     if (audio_emphasis_c::valid_index(idx))
       texts << Q("%1 (%2)").arg(Q(audio_emphasis_c::symbol(idx))).arg(Q(audio_emphasis_c::translate(idx)));
   Util::setComboBoxTexts(p.ui->audioEmphasis, texts);
+  Util::fixComboBoxViewWidth(*p.ui->audioEmphasis);
 
   setupInputToolTips();
 }

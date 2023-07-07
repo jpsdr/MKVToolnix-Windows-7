@@ -5,6 +5,12 @@
 * mkvmerge: MPEG TS reader: added support for colors in teletext
   subtitles. Patch by Angela Schmid.
 
+## Bug fixes
+
+* MKVToolNix GUI: multiplexer: the "emphasis" and "stereoscopy" combo-boxes
+  now have a much smaller minimum width, allowing to make the whole
+  "properties" pane much smaller again. Fixes #3581.
+
 
 # Version 78.0 "Running" 2023-07-02
 
