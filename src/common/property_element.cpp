@@ -140,8 +140,8 @@ property_element_c::init_tables() {
   add("flag-visual-impaired",   EBML_INFO(KaxFlagVisualImpaired),   YT("\"Visual impaired\" flag"),   YT("Can be set if the track is suitable for users with visual impairments."));
   add("default-duration",       EBML_INFO(KaxTrackDefaultDuration), YT("Default duration"),           YT("Number of nanoseconds (not scaled) per frame."));
   add("name",                   EBML_INFO(KaxTrackName),            YT("Name"),                       YT("A human-readable track name."));
-  add("language",               EBML_INFO(KaxTrackLanguage),        YT("Language"),                   YT("Specifies the language of the track."));
-  add("language-ietf",          EBML_INFO(KaxLanguageIETF),         YT("Language (IETF BCP 47)"),     YT("Specifies the language of the track in the form of a BCP 47 language tag."));
+  add("language",               EBML_INFO(KaxTrackLanguage),        YT("Language (obsolete)"),        YT("Specifies the language of the track (obsolete)."));
+  add("language-ietf",          EBML_INFO(KaxLanguageIETF),         YT("Language"),                   YT("Specifies the language of the track in the form of a BCP 47 language tag."));
   add("codec-id",               EBML_INFO(KaxCodecID),              YT("Codec ID"),                   YT("An ID corresponding to the codec."));
   add("codec-name",             EBML_INFO(KaxCodecName),            YT("Codec name"),                 YT("A human-readable string specifying the codec."));
   add("codec-delay",            EBML_INFO(KaxCodecDelay),           YT("Codec-inherent delay"),       YT("Delay built into the codec during decoding in ns."));

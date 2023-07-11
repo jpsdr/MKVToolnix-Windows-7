@@ -4,6 +4,11 @@
 
 * mkvmerge: MPEG TS reader: added support for colors in teletext
   subtitles. Patch by Angela Schmid.
+* MKVToolNix GUI: header editor: in order to reduce confusion with users non
+  that versed in Matroska elements, the naming of the two "language" track
+  properties has been changed: the old element is now titled "Language
+  (obsolete)" & the current, IETF BCP 47 based one is simply called
+  "Language".
 
 ## Bug fixes
 
