@@ -9,6 +9,9 @@
   properties has been changed: the old element is now titled "Language
   (obsolete)" & the current, IETF BCP 47 based one is simply called
   "Language".
+* MKVToolNix GUI: preferences: you can now use the "delete" key to remove
+  entries from simple list widgets for strings (e.g. the list of recently used
+  destination directories).
 
 ## Bug fixes
 

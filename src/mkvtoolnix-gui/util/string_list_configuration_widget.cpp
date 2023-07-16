@@ -2,6 +2,8 @@
 
 #include <QDir>
 #include <QInputDialog>
+#include <QKeyEvent>
+#include <QKeySequence>
 #include <QListWidget>
 #include <QPushButton>
 #include <QRegularExpression>
@@ -34,6 +36,8 @@ StringListConfigurationWidget::StringListConfigurationWidget(QWidget *parent)
   p->ui->setupUi(this);
 
   p->ui->pbRemoveItem->setEnabled(false);
+
+  p->ui->lwItems->installEventFilter(this);
 
   setupConnections();
 }
@@ -159,6 +163,21 @@ StringListConfigurationWidget::items()
 void
 StringListConfigurationWidget::setItemType(ItemType itemType) {
   p_func()->itemType = itemType;
+}
+
+bool
+StringListConfigurationWidget::eventFilter(QObject *o,
+                                           QEvent *e) {
+  auto p = p_func();
+
+  if (   (o           == p->ui->lwItems)
+      && (e->type()   == QEvent::KeyPress)
+      && (static_cast<QKeyEvent *>(e)->matches(QKeySequence::Delete))) {
+    removeSelectedItems();
+    return true;
+  }
+
+  return QWidget::eventFilter(o, e);
 }
 
 }

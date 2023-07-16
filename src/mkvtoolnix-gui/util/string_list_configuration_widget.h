@@ -2,6 +2,7 @@
 
 #include "common/common_pch.h"
 
+#include <QEvent>
 #include <QList>
 #include <QStringList>
 #include <QWidget>
@@ -46,6 +47,8 @@ public:
   QStringList items() const;
 
   void addItem(QString const &name);
+
+  virtual bool eventFilter(QObject *o, QEvent *e) override;
 
 public Q_SLOTS:
   void enableControls();
