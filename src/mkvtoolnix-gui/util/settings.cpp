@@ -711,15 +711,15 @@ Settings::setDefaults(std::optional<QVariant> enableMuxingTracksByTheseTypes) {
 void
 Settings::loadDefaults(QSettings &reg) {
   reg.beginGroup(s_grpDefaults);
-  m_defaultAudioTrackLanguage          = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultAudioTrackLanguage,    Q("und")).toString()));
-  m_defaultVideoTrackLanguage          = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultVideoTrackLanguage,    Q("und")).toString()));
-  m_defaultSubtitleTrackLanguage       = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultSubtitleTrackLanguage, Q("und")).toString()));
-  m_whenToSetDefaultLanguage           = static_cast<SetDefaultLanguagePolicy>(reg.value(s_valWhenToSetDefaultLanguage,     static_cast<int>(SetDefaultLanguagePolicy::IfAbsentOrUndetermined)).toInt());
-  m_defaultChapterLanguage             = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultChapterLanguage,       Q("und")).toString()));
-  m_defaultSubtitleCharset             = reg.value(s_valDefaultSubtitleCharset).toString();
-  m_defaultAdditionalMergeOptions      = reg.value(s_valDefaultAdditionalMergeOptions).toString();
-  m_deriveSubtitlesForcedFlagFromFileNames           = reg.value(s_valDefaultDeriveSubtitlesForcedFlagFromFileNames, true).toBool();
-  m_regexForDerivingSubtitlesForcedFlagFromFileNames = reg.value(s_valDefaultRegexForDerivingSubtitlesForcedFlagFromFileNames, defaultRegexForDerivingForcedDisplayFlagForSubtitlesFromFileName()).toString();
+  m_defaultAudioTrackLanguage                        = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultAudioTrackLanguage,    Q("und")).toString()));
+  m_defaultVideoTrackLanguage                        = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultVideoTrackLanguage,    Q("und")).toString()));
+  m_defaultSubtitleTrackLanguage                     = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultSubtitleTrackLanguage, Q("und")).toString()));
+  m_whenToSetDefaultLanguage                         = static_cast<SetDefaultLanguagePolicy>(reg.value(s_valWhenToSetDefaultLanguage,     static_cast<int>(SetDefaultLanguagePolicy::IfAbsentOrUndetermined)).toInt());
+  m_defaultChapterLanguage                           = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultChapterLanguage,       Q("und")).toString()));
+  m_defaultSubtitleCharset                           = reg.value(s_valDefaultSubtitleCharset).toString();
+  m_defaultAdditionalMergeOptions                    = reg.value(s_valDefaultAdditionalMergeOptions).toString();
+  m_deriveSubtitlesForcedFlagFromFileNames           = reg.value(s_valDefaultDeriveSubtitlesForcedFlagFromFileNames,                      true).toBool();
+  m_regexForDerivingSubtitlesForcedFlagFromFileNames = reg.value(s_valDefaultRegexForDerivingSubtitlesForcedFlagFromFileNames,            defaultRegexForDerivingForcedDisplayFlagForSubtitlesFromFileName()).toString();
   reg.endGroup();               // defaults
 }
 
@@ -1071,13 +1071,13 @@ void
 Settings::saveDefaults(QSettings &reg)
   const {
   reg.beginGroup(s_grpDefaults);
-  reg.setValue(s_valDefaultAudioTrackLanguage,     Q(m_defaultAudioTrackLanguage.format()));
-  reg.setValue(s_valDefaultVideoTrackLanguage,     Q(m_defaultVideoTrackLanguage.format()));
-  reg.setValue(s_valDefaultSubtitleTrackLanguage,  Q(m_defaultSubtitleTrackLanguage.format()));
-  reg.setValue(s_valWhenToSetDefaultLanguage,      static_cast<int>(m_whenToSetDefaultLanguage));
-  reg.setValue(s_valDefaultChapterLanguage,        Q(m_defaultChapterLanguage.format()));
-  reg.setValue(s_valDefaultSubtitleCharset,        m_defaultSubtitleCharset);
-  reg.setValue(s_valDefaultAdditionalMergeOptions, m_defaultAdditionalMergeOptions);
+  reg.setValue(s_valDefaultAudioTrackLanguage,                               Q(m_defaultAudioTrackLanguage.format()));
+  reg.setValue(s_valDefaultVideoTrackLanguage,                               Q(m_defaultVideoTrackLanguage.format()));
+  reg.setValue(s_valDefaultSubtitleTrackLanguage,                            Q(m_defaultSubtitleTrackLanguage.format()));
+  reg.setValue(s_valWhenToSetDefaultLanguage,                                static_cast<int>(m_whenToSetDefaultLanguage));
+  reg.setValue(s_valDefaultChapterLanguage,                                  Q(m_defaultChapterLanguage.format()));
+  reg.setValue(s_valDefaultSubtitleCharset,                                  m_defaultSubtitleCharset);
+  reg.setValue(s_valDefaultAdditionalMergeOptions,                           m_defaultAdditionalMergeOptions);
   reg.setValue(s_valDefaultDeriveSubtitlesForcedFlagFromFileNames,           m_deriveSubtitlesForcedFlagFromFileNames);
   reg.setValue(s_valDefaultRegexForDerivingSubtitlesForcedFlagFromFileNames, m_regexForDerivingSubtitlesForcedFlagFromFileNames);
   reg.endGroup();               // defaults
