@@ -90,6 +90,7 @@ public:
 protected:
   void setDefaultsBasics();
   void setDefaultsMuxThis();
+  void setDefaultsForcedDisplayFlag();
   void setDefaultsDisplayDimensions();
   void setDefaultsLanguage(mtx::bcp47::language_c const &languageDerivedFromFileName);
   void setDefaultsColor();

@@ -1320,8 +1320,33 @@
             </widget>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <item>
+            <layout class="QGridLayout" name="gridLayout_12">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="cbMForcedDisplayFlagSubtitles">
+               <property name="text">
+                <string>Set &quot;forced display&quot; flag for subtitles whose file names match:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QLineEdit" name="leMForcedDisplayFlagSubtitlesRE"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbMForcedDisplayFlagSubtitlesRERevert">
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="edit-undo">
+                   <normaloff>.</normaloff>.</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="0">
               <widget class="QLabel" name="label_4">
                <property name="text">
                 <string>Default subtitle &amp;charset to set:</string>
@@ -1331,7 +1356,7 @@
                </property>
               </widget>
              </item>
-             <item>
+             <item row="1" column="1">
               <widget class="mtx::gui::Util::CharacterSetComboBox" name="cbMDefaultSubtitleCharset">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -2744,6 +2769,9 @@
   <tabstop>cbMDisableDefaultTrackForSubtitles</tabstop>
   <tabstop>cbMDisableCompressionForAllTrackTypes</tabstop>
   <tabstop>cbMEnableDialogNormGainRemoval</tabstop>
+  <tabstop>cbMForcedDisplayFlagSubtitles</tabstop>
+  <tabstop>leMForcedDisplayFlagSubtitlesRE</tabstop>
+  <tabstop>pbMForcedDisplayFlagSubtitlesRERevert</tabstop>
   <tabstop>cbMDefaultSubtitleCharset</tabstop>
   <tabstop>cbMWhenToSetDefaultLanguage</tabstop>
   <tabstop>cbMDeriveAudioTrackLanguageFromFileName</tabstop>

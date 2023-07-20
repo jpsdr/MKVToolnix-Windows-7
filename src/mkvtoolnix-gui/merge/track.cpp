@@ -16,6 +16,7 @@
 #include "mkvtoolnix-gui/util/command_line_options.h"
 #include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
+#include "qregularexpression.h"
 
 #include <QVariant>
 
@@ -201,6 +202,21 @@ Track::setDefaultsMuxThis() {
 }
 
 void
+Track::setDefaultsForcedDisplayFlag() {
+  auto &settings = Util::Settings::get();
+
+  if (!settings.m_deriveSubtitlesForcedFlagFromFileNames || isAppended() || !isSubtitles())
+    return;
+
+  QRegularExpression re{settings.m_regexForDerivingSubtitlesForcedFlagFromFileNames, QRegularExpression::CaseInsensitiveOption};
+
+  if (re.isValid() && m_file->m_fileName.contains(re)) {
+    m_forcedTrackFlag       = 1;
+    m_forcedTrackFlagWasSet = true;
+  }
+}
+
+void
 Track::setDefaultsBasics() {
   auto &settings = Util::Settings::get();
 
@@ -274,6 +290,7 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   setDefaultsBasics();
   setDefaultsLanguage(languageDerivedFromFileName);
   setDefaultsMuxThis();
+  setDefaultsForcedDisplayFlag();
   setDefaultsDisplayDimensions();
   setDefaultsColor();
 }

@@ -12,6 +12,10 @@
 * MKVToolNix GUI: preferences: you can now use the "delete" key to remove
   entries from simple list widgets for strings (e.g. the list of recently used
   destination directories).
+* MKVToolNix GUI: multiplexer: when adding files the GUI can automatically
+  enable the "forced display" flag for subtitle tracks if the file name
+  contains the word "forced" delimited by certain characters
+  (configurable). This feature is turned on by default. Implements #3586.
 
 ## Bug fixes
 
