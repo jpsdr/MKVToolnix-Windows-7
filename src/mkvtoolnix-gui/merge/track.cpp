@@ -210,10 +210,8 @@ Track::setDefaultsForcedDisplayFlag() {
 
   QRegularExpression re{settings.m_regexForDerivingSubtitlesForcedFlagFromFileNames, QRegularExpression::CaseInsensitiveOption};
 
-  if (re.isValid() && m_file->m_fileName.contains(re)) {
-    m_forcedTrackFlag       = 1;
-    m_forcedTrackFlagWasSet = true;
-  }
+  if (re.isValid() && m_file->m_fileName.contains(re))
+    m_forcedTrackFlag = 1;
 }
 
 void
