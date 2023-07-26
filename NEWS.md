@@ -22,6 +22,12 @@
 * MKVToolNix GUI: multiplexer: the "emphasis" and "stereoscopy" combo-boxes
   now have a much smaller minimum width, allowing to make the whole
   "properties" pane much smaller again. Fixes #3581.
+* MKVToolNix GUI: macOS: when you install the application from the DMG it'll
+  no longer register itself as an alternate handler for its supported file
+  types. It seems like this overrode existing associations, forcing people to
+  change them manually to whatever they wanted them to be. Additionally this
+  forced the associated file to always be shown with an MKVToolNix icon. The
+  GUI's own `.mtxcfg` files will still be registered. Fixes #3588.
 
 
 # Version 78.0 "Running" 2023-07-02
