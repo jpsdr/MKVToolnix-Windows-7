@@ -532,7 +532,7 @@ file "po/mkvtoolnix.pot" => $all_sources + $all_headers + $gui_ui_h_files + %w{R
 
   flags     = %w{Y NY YT QTR QY QNY QYH}.map { |func| "--flag=#{func}:1:no-c-format --flag=#{func}:1:no-boost-format" }.join(" ")
 
-  options   = %w{--default-domain=mkvtoolnix --from-code=UTF-8 --sort-output --language=c++}
+  options   = %w{--default-domain=mkvtoolnix --from-code=UTF-8 --language=c++}
   options  += ["'--msgid-bugs-address=Moritz Bunkus <moritz@bunkus.org>'"]
   options  += ["'--copyright-holder=Moritz Bunkus <moritz@bunkus.org>'", "--package-name=MKVToolNix", "--package-version=#{c(:PACKAGE_VERSION)}", "--foreign-user"]
 
