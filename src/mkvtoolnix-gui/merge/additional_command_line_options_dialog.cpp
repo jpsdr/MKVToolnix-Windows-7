@@ -51,6 +51,8 @@ AdditionalCommandLineOptionsDialog::AdditionalCommandLineOptionsDialog(QWidget *
         QY("The downside is that multiplexing will take longer as mkvmerge will wait until all data has been written to the storage before exiting."),
         QY("See issues #2469 and #2480 on the MKVToolNix bug tracker for in-depth discussions on the pros and cons.") });
 
+  add(Q("--stop-after-video-ends"), false, global, { QY("Stops processing after the primary video track ends, discarding any remaining packets of other tracks.") });
+
   add(Q("--no-cues"), false, global,
       { QY("Tells mkvmerge not to create and write the cue data which can be compared to an index in an AVI."),
         QY("Matroska files can be played back without the cue data, but seeking will probably be imprecise and slower."),

@@ -16,6 +16,8 @@
   enable the "forced display" flag for subtitle tracks if the file name
   contains the word "forced" delimited by certain characters
   (configurable). This feature is turned on by default. Implements #3586.
+* MKVToolNix GUI: multiplexer: added the option `--stop-after-video-ends` to
+  the dialog for additional command line options. Implements #3594.
 
 ## Bug fixes
 
