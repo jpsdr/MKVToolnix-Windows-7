@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ja\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2023-07-21 13:53+0200\n"
+"POT-Creation-Date: 2023-07-27 13:21+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: NipponGo, 2020\n"
 "Language-Team: Japanese (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ja/)\n"
@@ -3938,7 +3938,7 @@ msgid "Attached"
 msgstr "添付ファイル"
 
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:171
-#: src/mkvtoolnix-gui/merge/track.cpp:683
+#: src/mkvtoolnix-gui/merge/track.cpp:681
 #, no-c-format
 msgid "Attachment"
 msgstr "添付ファイル"
@@ -3983,7 +3983,7 @@ msgid "Attachments from &source files:"
 msgstr "ソースファイルからの添付ファイル：(&S)"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:61
-#: src/mkvtoolnix-gui/merge/track.cpp:679
+#: src/mkvtoolnix-gui/merge/track.cpp:677
 #, no-c-format
 msgid "Audio"
 msgstr "オーディオ"
@@ -4251,7 +4251,7 @@ msgid "Button track %1"
 msgstr "ボタントラック%1"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:64
-#: src/mkvtoolnix-gui/merge/track.cpp:682
+#: src/mkvtoolnix-gui/merge/track.cpp:680
 #, no-c-format
 msgid "Buttons"
 msgstr "ボタン"
@@ -4694,7 +4694,7 @@ msgstr "Chapter Translate Edition UID: {0}"
 #: src/common/kax_element_names.cpp:281
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2295
-#: src/mkvtoolnix-gui/merge/track.cpp:684
+#: src/mkvtoolnix-gui/merge/track.cpp:682
 #: src/propedit/options.cpp:217
 #, no-c-format
 msgid "Chapters"
@@ -6946,7 +6946,7 @@ msgstr ""
 msgid "For example, a file containing audio tracks but no video tracks will be inserted before the first file that contains neither video nor audio tracks."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
 #, no-c-format
 msgid "For files that will not contain a video track but at least one audio track mkvmerge will automatically choose a timestamp scale factor so that all timestamps and durations have a precision of one sample."
 msgstr "ビデオトラックは含まないが1つ以上のオーディオトラックを含むファイルに対してはmkvmergeは自動的に、全てのタイムコードと継続時間が1サンプル単位の精度を持つようにタイムコードのスケール係数を選択します。"
@@ -6987,7 +6987,7 @@ msgstr "既知のサポートされたトラックタイプに対しても、Mat
 msgid "Forces the default duration or number of frames per second for a track."
 msgstr "トラックのデフォルトのデュレーション、または1秒あたりのフレーム数を強制します。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:63
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:65
 #, no-c-format
 msgid "Forces the timestamp scale factor to the given value."
 msgstr "タイムコードスケール係数を指定された値に強制的に設定します。"
@@ -7127,7 +7127,7 @@ msgstr " グローバルオプション"
 msgid "Global output control"
 msgstr "グローバル出力コントロール"
 
-#: src/mkvtoolnix-gui/merge/track.cpp:686
+#: src/mkvtoolnix-gui/merge/track.cpp:684
 #, fuzzy, no-c-format
 msgid "Global tags"
 msgstr " グローバルタグ："
@@ -7607,7 +7607,7 @@ msgstr "もしOGMフォーマットが使用され、ファイルの文字セッ
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:68
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:70
 #, no-c-format
 msgid "If the magical value -1 is used then mkvmerge will use sample precision even if a video track is present."
 msgstr "マジック値である-1を使用するとmkvmergeは、ビデオトラックが存在していてもサンプル単位の精度を使用します。"
@@ -8716,7 +8716,7 @@ msgstr "Matroskaオーディオ/ビデオファイル"
 msgid "Matroska files"
 msgstr "Matroskaファイル"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:56
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:58
 #, no-c-format
 msgid "Matroska files can be played back without the cue data, but seeking will probably be imprecise and slower."
 msgstr "Matroskaファイルはキューデータ無しでも再生できますが、恐らくシークが不正確で遅くなります。"
@@ -9385,7 +9385,7 @@ msgstr "通常mkvmergeは、MPEG4ビデオビットストリームのアスペ�
 msgid "Normally mkvmerge will apply additional lossless compression for subtitle tracks for certain codecs."
 msgstr "通常mkmergerは、特定のコーデックの字幕トラックに対してロスレス圧縮を追加で適用します。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:65
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
 #, no-c-format
 msgid "Normally mkvmerge will use a value of 1000000 which means that timestamps and durations will have a precision of 1ms."
 msgstr "通常mkvmergeは、タイムコードや継続時間が1msの精度を持つことを意味する1000000という値を使用します。"
@@ -11782,6 +11782,11 @@ msgstr "ビデオがインターレースかどうかを設定します。"
 msgid "Stop at the first cluster"
 msgstr ""
 
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:54
+#, no-c-format
+msgid "Stops processing after the primary video track ends, discarding any remaining packets of other tracks."
+msgstr ""
+
 #: src/mkvtoolnix-gui/merge/output.cpp:250
 #, no-c-format
 msgid "Stops processing after the primary video track ends."
@@ -11830,7 +11835,7 @@ msgid "Subtitle track {0} is missing some duration elements. Please check the re
 msgstr "字幕トラック{0}に失われている持続時間要素があります。同じ開始時間と終了時間がないか出力されるSSA/ASSファイルのエントリをチェックしてください。\n"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:63
-#: src/mkvtoolnix-gui/merge/track.cpp:681
+#: src/mkvtoolnix-gui/merge/track.cpp:679
 #, no-c-format
 msgid "Subtitles"
 msgstr "字幕"
@@ -11911,7 +11916,7 @@ msgid "Tag selectors"
 msgstr "タグ選択子"
 
 #: src/common/kax_element_names.cpp:315
-#: src/mkvtoolnix-gui/merge/track.cpp:685
+#: src/mkvtoolnix-gui/merge/track.cpp:683
 #: src/propedit/options.cpp:208
 #, no-c-format
 msgid "Tags"
@@ -11948,7 +11953,7 @@ msgstr "対象の種別値"
 msgid "Targets"
 msgstr "対象"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:55
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
 #, no-c-format
 msgid "Tells mkvmerge not to create and write the cue data which can be compared to an index in an AVI."
 msgstr "mkvmergeがAVIのインデックスに相当するキューデータを作成して記録しないようにします。"
@@ -11963,7 +11968,7 @@ msgstr ""
 msgid "Tells mkvmerge not to write tags with statistics for each track."
 msgstr "mkvmergeが各トラックの統計情報が含まれるタグを書き込まないようにします。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:59
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:61
 #, no-c-format
 msgid "Tells mkvmerge not to write the 'date' field in the segment information headers."
 msgstr "mkvmergeがセグメント情報ヘッダの「date」欄を書き込まないようにします。"
@@ -13875,7 +13880,7 @@ msgstr[0] "このオーディオトラックは{0}バイトの不正なデータ
 msgid "This can be used to prevent data loss on power outages or to circumvent certain problems in the operating system or drivers."
 msgstr ""
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:67
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:69
 #, no-c-format
 msgid "This causes bigger overhead but allows precise seeking and extraction."
 msgstr "これによりオーバーヘッドは大きくなりますが、正確なシークと抽出が可能となります。"
@@ -13896,7 +13901,7 @@ msgstr "この要素は現在ファイルに存在します。"
 msgid "This element is not currently present in the file."
 msgstr "この要素は現在ファイルには存在しません。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:60
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:62
 #, no-c-format
 msgid "This field is normally set to the date the file is created."
 msgstr ""
@@ -14735,7 +14740,7 @@ msgid "Use this for tracks containing onscreen text or foreign-language dialogue
 msgstr ""
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:43
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:57
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:59
 #, no-c-format
 msgid "Use this only for testing purposes."
 msgstr "テスト目的でのみ使用してください。"
@@ -14857,7 +14862,7 @@ msgid "VfW compatible video"
 msgstr "VfW互換ビデオ"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:62
-#: src/mkvtoolnix-gui/merge/track.cpp:680
+#: src/mkvtoolnix-gui/merge/track.cpp:678
 #, no-c-format
 msgid "Video"
 msgstr "ビデオ"
@@ -15611,7 +15616,7 @@ msgstr ""
 msgid "You cannot add additional parts to files that don't contain tracks."
 msgstr "トラックを含まないファイルをファイルに追加することはできません。"
 
-#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:64
+#: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:66
 #, no-c-format
 msgid "You have to enter a value between 1000 and 10000000 or the magic value -1."
 msgstr "1000から10000000までの値、またはマジック値である-1を入力する必要があります。"
