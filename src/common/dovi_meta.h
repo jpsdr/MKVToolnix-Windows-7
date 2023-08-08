@@ -13,6 +13,7 @@
 
 #pragma once
 
+#include "common/bit_reader.h"
 #include "common/common_pch.h"
 #include "merge/block_addition_mapping.h"
 #include "common/hevc/types.h"
@@ -70,8 +71,16 @@ struct dovi_rpu_data_header_t {
   void dump();
 };
 
-dovi_decoder_configuration_record_t create_dovi_configuration_record(dovi_rpu_data_header_t const &hdr, unsigned int width, unsigned int height, mtx::hevc::vui_info_t const &vui, uint64_t duration);
+bool parse_dovi_rpu(mtx::bits::reader_c &r, dovi_rpu_data_header_t &hdr);
+
+uint8_t guess_dovi_rpu_data_header_profile(dovi_rpu_data_header_t const &hdr);
+uint8_t get_dovi_bl_signal_compatibility_id(uint8_t dv_profile,
+                                            unsigned int color_primaries,
+                                            unsigned int matrix_coefficients,
+                                            unsigned int transfer_characteristics);
 uint8_t calculate_dovi_level(unsigned int width, unsigned int height, uint64_t duration);
+
+dovi_decoder_configuration_record_t create_dovi_configuration_record(dovi_rpu_data_header_t const &hdr, unsigned int width, unsigned int height, mtx::hevc::vui_info_t const &vui, uint64_t duration);
 
 block_addition_mapping_t create_dovi_block_addition_mapping(dovi_decoder_configuration_record_t const &dovi_conf);
 
