@@ -1,5 +1,6 @@
 #include "common/common_pch.h"
 
+#include "common/id_info.h"
 #include "common/strings/formatting.h"
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/merge/select_playlist_dialog.h"
@@ -72,6 +73,7 @@ public:
 
 public:
   static TrackItem *create(Track const &track);
+  static QString summarizeProperties(Track const &track);
 };
 
 TrackItem::TrackItem(Track const &track,
@@ -95,6 +97,30 @@ TrackItem::operator <(QTreeWidgetItem const &cmp)
        :                                                   m_track->m_id                   >= 0;
 }
 
+QString
+TrackItem::summarizeProperties(Track const &track) {
+  auto properties = QStringList{};
+
+  if (track.isAudio()) {
+    auto channels          = track.isPropertySet(Q(mtx::id::audio_channels))           ? track.m_properties[Q(mtx::id::audio_channels)].toUInt()           :      1;
+    auto bitsPerSample     = track.isPropertySet(Q(mtx::id::audio_bits_per_sample))    ? track.m_properties[Q(mtx::id::audio_bits_per_sample)].toUInt()    :      1;
+    auto samplingFrequency = track.isPropertySet(Q(mtx::id::audio_sampling_frequency)) ? track.m_properties[Q(mtx::id::audio_sampling_frequency)].toUInt() : 8'000u;
+
+    properties << QY("%1 Hz").arg(samplingFrequency);
+    properties << QNY("%1 channel", "%1 channels", channels).arg(channels);
+    if (bitsPerSample != 0)
+      properties << QNY("%1 bit per sample", "%1 bits per sample", bitsPerSample).arg(bitsPerSample);
+
+  } else if (track.isVideo()) {
+    auto pixelDimensions = (track.isPropertySet(Q(mtx::id::pixel_dimensions)) ? track.m_properties[Q(mtx::id::pixel_dimensions)].toString() : QString{}).split(Q("x"));
+
+    if (pixelDimensions.size() == 2)
+      properties << QY("%1 pixels").arg(Q("%1x%2").arg(pixelDimensions[0]).arg(pixelDimensions[1]));
+  }
+
+  return properties.join(Q(", "));
+}
+
 TrackItem *
 TrackItem::create(Track const &track) {
   auto item = new TrackItem{ track, QStringList{
@@ -102,6 +128,7 @@ TrackItem::create(Track const &track) {
       track.nameForType(),
       track.m_codec,
       Q(track.m_language.format()),
+      summarizeProperties(track),
     }};
 
   item->setTextAlignment(0, Qt::AlignRight | Qt::AlignVCenter);

@@ -18,6 +18,10 @@
   (configurable). This feature is turned on by default. Implements #3586.
 * MKVToolNix GUI: multiplexer: added the option `--stop-after-video-ends` to
   the dialog for additional command line options. Implements #3594.
+* MKVToolNix GUI: multiplexer: when adding Blu-ray playlists the dialog
+  allowing the user to select the playlist to add will now show audio & video
+  track properties as well (pixel dimensions for video; sampling frequency,
+  channels for audio). Implements #3597.
 
 ## Bug fixes
 
