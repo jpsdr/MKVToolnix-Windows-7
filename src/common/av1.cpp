@@ -363,6 +363,17 @@ parser_c::parse_frame_header_obu(mtx::bits::reader_c &r) {
 }
 
 void
+parser_c::parse_metadata_obu(mtx::bits::reader_c &r) {
+  auto metadata_type = r.get_leb128();
+
+  switch (metadata_type) {
+    case METADATA_TYPE_ITUT_T35:
+      parse_metadata_type_itu_t_t35(r);
+      break;
+  }
+}
+
+void
 parser_c::parse(memory_c const &buffer) {
   parse(buffer.get_buffer(), buffer.get_size());
 }
@@ -493,8 +504,10 @@ parser_c::parse_obu() {
   }
 
   if (p->obu_type == OBU_METADATA) {
-    if (!p->frame_found)
+    if (!p->frame_found) {
       p->metadata_obus.emplace_back(obu->clone());
+      parse_metadata_obu(sub_r);
+    }
 
     return true;
   }
@@ -581,6 +594,12 @@ parser_c::get_av1c()
   }
 
   return av1c;
+}
+
+color_config_t
+parser_c::get_color_config()
+  const {
+  return p->color_config;
 }
 
 void
@@ -781,5 +800,80 @@ maybe_shrink_size_fields(memory_c &mem) {
     return;
 
   mem.resize(idx_dest);
+}
+
+void
+parser_c::parse_metadata_type_itu_t_t35(mtx::bits::reader_c &r) {
+  auto itu_t_t35_country_code = r.get_bits(8);
+
+  if (itu_t_t35_country_code == 0xFF) {
+    r.skip_bits(8); // itu_t_t35_country_code_extension_byte
+  }
+
+  auto payload_bytes_size = r.get_remaining_bits() / 8;
+  auto itu_t_t35_payload_bytes = memory_c::alloc(payload_bytes_size);
+  auto buffer = itu_t_t35_payload_bytes->get_buffer();
+  r.get_bytes(buffer, payload_bytes_size);
+
+  // Check for Dolby Vision header
+  auto dovi_rpu_header_size = sizeof(ITU_T_T35_DOVI_RPU_PAYLOAD_HEADER);
+  if (itu_t_t35_payload_bytes->get_size() > dovi_rpu_header_size) {
+    if (!std::memcmp(buffer, &ITU_T_T35_DOVI_RPU_PAYLOAD_HEADER, dovi_rpu_header_size)) {
+      itu_t_t35_payload_bytes->set_offset(dovi_rpu_header_size);
+      handle_itu_t_t35_dovi_rpu_payload(itu_t_t35_payload_bytes);
+    }
+  }
+}
+
+void
+parser_c::handle_itu_t_t35_dovi_rpu_payload(const memory_cptr payload_mem) {
+  auto buffer = payload_mem->get_buffer();
+  auto buffer_size = payload_mem->get_size();
+
+  size_t rpu_size{};
+
+  // Convert into regular Dolby Vision RPU
+  if (buffer[1] & 0x10) {
+    if (buffer[2] & 0x08) {
+      // RPU size > 512 bytes
+      return;
+    }
+
+    rpu_size = 0x100;
+    rpu_size |= (buffer[1] & 0x0F) << 4;
+    rpu_size |= (buffer[2] >> 4) & 0x0F;
+
+    if (rpu_size + 2 >= buffer_size) {
+      return;
+    }
+
+    for (size_t i = 0; i < rpu_size; i++) {
+      auto converted_byte = (buffer[i + 2] & 0x07) << 5;
+      converted_byte |= (buffer[i + 3] >> 3) & 0x1F;
+
+      buffer[i + 1] = converted_byte;
+    }
+  } else {
+    rpu_size = (buffer[0] & 0x1F) << 3;
+    rpu_size |= (buffer[1] >> 5) & 0x07;
+
+    if (rpu_size + 1 >= buffer_size) {
+      return;
+    }
+
+    for (size_t i = 0; i < rpu_size; i++) {
+      auto converted_byte = (buffer[i + 1] & 0x0F) << 4;
+      converted_byte |= (buffer[i + 2] >> 4) & 0x0F;
+
+      buffer[i + 1] = converted_byte;
+    }
+  }
+
+  // Set prefix
+  buffer[0] = 0x19;
+  rpu_size += 1;
+
+  mtx::bits::reader_c r(buffer, rpu_size);
+  mtx::dovi::parse_dovi_rpu(r, m_dovi_rpu_data_header);
 }
 }

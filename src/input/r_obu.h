@@ -16,8 +16,12 @@
 #include "common/common_pch.h"
 
 #include "merge/generic_reader.h"
+#include "merge/block_addition_mapping.h"
 
 class obu_reader_c: public generic_reader_c {
+private:
+  std::vector<block_addition_mapping_t> m_block_addition_mappings;
+
 protected:
   unsigned int m_width{}, m_height{};
   memory_cptr m_buffer{memory_c::alloc(1024 * 1024)};

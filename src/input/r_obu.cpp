@@ -15,12 +15,15 @@
 
 #include "common/av1.h"
 #include "common/codec.h"
+#include "common/dovi_meta.h"
 #include "common/endian.h"
 #include "common/mm_io_x.h"
 #include "common/id_info.h"
 #include "input/r_obu.h"
 #include "merge/input_x.h"
 #include "output/p_av1.h"
+
+static debugging_option_c s_debug_dovi_configuration_record{"dovi_configuration_record"};
 
 bool
 obu_reader_c::probe_file() {
@@ -39,6 +42,31 @@ obu_reader_c::probe_file() {
   m_width         = dimensions.first;
   m_height        = dimensions.second;
 
+  if (parser.has_dovi_rpu_header()) {
+    auto hdr                = parser.get_dovi_rpu_header();
+    auto color_config       = parser.get_color_config();
+    auto frame_duration     = parser.get_frame_duration();
+
+    uint64_t duration;
+    if (frame_duration)
+      duration = mtx::to_int(frame_duration);
+    else
+      duration = 1000000000ll / 25;
+
+    auto dovi_config_record = create_av1_dovi_configuration_record(hdr, m_width, m_height, color_config, duration);
+
+    auto mapping            = mtx::dovi::create_dovi_block_addition_mapping(dovi_config_record);
+
+    if (mapping.is_valid()) {
+      if (s_debug_dovi_configuration_record) {
+        hdr.dump();
+        dovi_config_record.dump();
+      }
+
+      m_block_addition_mappings.push_back(mapping);
+    }
+  }
+
   return (m_width > 0) && (m_height > 0);
 }
 
@@ -56,6 +84,7 @@ obu_reader_c::create_packetizer(int64_t) {
   packetizer->set_is_unframed();
 
   add_packetizer(packetizer);
+  ptzr(0).set_block_addition_mappings(m_block_addition_mappings);
 
   show_packetizer_info(0, *packetizer);
 }

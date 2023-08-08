@@ -297,6 +297,35 @@ create_dovi_configuration_record(dovi_rpu_data_header_t const &hdr,
   return conf;
 }
 
+dovi_decoder_configuration_record_t
+create_av1_dovi_configuration_record(dovi_rpu_data_header_t const &hdr,
+                                     unsigned int width,
+                                     unsigned int height,
+                                     mtx::av1::color_config_t const &color_config,
+                                     uint64_t duration) {
+  dovi_decoder_configuration_record_t conf{};
+
+  conf.dv_version_major = 1;
+  conf.dv_version_minor = 0;
+
+  // AV1 profile is always 10
+  conf.dv_profile = 10;
+  conf.dv_level = calculate_dovi_level(width, height, duration);
+
+  conf.rpu_present_flag = 1;
+  conf.bl_present_flag  = 1;
+  // Not sure it's possible to have an EL in AV1
+  conf.el_present_flag  = 0;
+
+  // Actual profile based on header
+  auto dv_profile = guess_dovi_rpu_data_header_profile(hdr);
+
+  conf.dv_bl_signal_compatibility_id = get_dovi_bl_signal_compatibility_id(dv_profile,
+    color_config.color_primaries, color_config.matrix_coefficients, color_config.transfer_characteristics);
+
+  return conf;
+}
+
 block_addition_mapping_t
 create_dovi_block_addition_mapping(dovi_decoder_configuration_record_t const &dovi_conf) {
   block_addition_mapping_t mapping;
