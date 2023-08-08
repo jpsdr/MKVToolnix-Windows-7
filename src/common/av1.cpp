@@ -33,11 +33,12 @@ class parser_private_c {
   bool frame_found{}, reduced_still_picture_header{}, parse_sequence_header_obus_only{};
 
   unsigned int obu_type{};
-  bool obu_extension_flag{}, obu_has_size_field{}, seen_frame_header{}, frame_id_numbers_present_flag{}, equal_picture_interval{}, high_bitdepth{}, twelve_bit{}, mono_chrome{}, seq_tier_0{};
-  bool chroma_subsampling_x{}, chroma_subsampling_y{}, current_frame_contains_sequence_header{};
+  bool obu_extension_flag{}, obu_has_size_field{}, seen_frame_header{}, frame_id_numbers_present_flag{}, equal_picture_interval{}, seq_tier_0{};
+  bool current_frame_contains_sequence_header{};
   std::optional<unsigned int> temporal_id, spatial_id;
-  unsigned int operating_point_idc{}, seq_profile{}, seq_level_idx_0{}, max_frame_width{}, max_frame_height{}, buffer_delay_length{1}, chroma_sample_position{};
-  unsigned int color_primaries{}, transfer_characteristics{}, matrix_coefficients{};
+  unsigned int operating_point_idc{}, seq_profile{}, seq_level_idx_0{}, max_frame_width{}, max_frame_height{}, buffer_delay_length{1};
+
+  color_config_t color_config{};
 
   mtx::bytes::buffer_c buffer;
   frame_t current_frame;
@@ -158,55 +159,57 @@ parser_c::parse_obu_common_data() {
 
 void
 parser_c::parse_color_config(mtx::bits::reader_c &r) {
-  p->high_bitdepth = r.get_bit();
+  color_config_t *cc = &p->color_config;
+
+  cc->high_bitdepth = r.get_bit();
   auto bit_depth     = 0u;
 
-  if ((p->seq_profile == 2) && p->high_bitdepth) {
-    p->twelve_bit = r.get_bit();
-    bit_depth     = p->twelve_bit ? 12 : 10;
+  if ((p->seq_profile == 2) && cc->high_bitdepth) {
+    cc->twelve_bit = r.get_bit();
+    bit_depth     = cc->twelve_bit ? 12 : 10;
   } else
-    bit_depth     = p->high_bitdepth ? 10 :  8;
+    bit_depth     = cc->high_bitdepth ? 10 :  8;
 
-  p->mono_chrome = (p->seq_profile != 1) ? r.get_bit() : false;
+  cc->mono_chrome = (p->seq_profile != 1) ? r.get_bit() : false;
 
   if (r.get_bit()) {            // color_description_present_flag
-    p->color_primaries          = r.get_bits(8);
-    p->transfer_characteristics = r.get_bits(8);
-    p->matrix_coefficients      = r.get_bits(8);
+    cc->color_primaries          = r.get_bits(8);
+    cc->transfer_characteristics = r.get_bits(8);
+    cc->matrix_coefficients      = r.get_bits(8);
   } else {
-    p->color_primaries          = CP_UNSPECIFIED;
-    p->transfer_characteristics = TC_UNSPECIFIED;
-    p->matrix_coefficients      = MC_UNSPECIFIED;
+    cc->color_primaries          = CP_UNSPECIFIED;
+    cc->transfer_characteristics = TC_UNSPECIFIED;
+    cc->matrix_coefficients      = MC_UNSPECIFIED;
   }
 
-  if (p->mono_chrome) {
-    r.skip_bits(1);             // color_range
+  if (cc->mono_chrome) {
+    cc->video_full_range_flag = r.get_bit();
     return;
 
-  } else if (   (p->color_primaries          == CP_BT_709)
-             && (p->transfer_characteristics == TC_SRGB)
-             && (p->matrix_coefficients      == MC_IDENTITY)) {
+  } else if (   (cc->color_primaries          == CP_BT_709)
+             && (cc->transfer_characteristics == TC_SRGB)
+             && (cc->matrix_coefficients      == MC_IDENTITY)) {
   } else {
-    r.skip_bits(1);             // color_range
+    cc->video_full_range_flag = r.get_bit();
 
-    p->chroma_subsampling_x = false;
-    p->chroma_subsampling_y = false;
+    cc->chroma_subsampling_x = false;
+    cc->chroma_subsampling_y = false;
 
     if (p->seq_profile == 0) {
-      p->chroma_subsampling_x = true;
-      p->chroma_subsampling_y = true;
+      cc->chroma_subsampling_x = true;
+      cc->chroma_subsampling_y = true;
 
     } else if (p->seq_profile > 1) {
       if (bit_depth == 12) {
-        p->chroma_subsampling_x = r.get_bit();
-        if (p->chroma_subsampling_x)
-          p->chroma_subsampling_y = r.get_bit();
+        cc->chroma_subsampling_x = r.get_bit();
+        if (cc->chroma_subsampling_x)
+          cc->chroma_subsampling_y = r.get_bit();
       } else
-        p->chroma_subsampling_x = true;
+        cc->chroma_subsampling_x = true;
     }
 
-    if (p->chroma_subsampling_x && p->chroma_subsampling_y)
-      p->chroma_sample_position = r.get_bits(2);
+    if (cc->chroma_subsampling_x && cc->chroma_subsampling_y)
+      cc->chroma_sample_position = r.get_bits(2);
   }
 
   r.skip_bits(1);               // separate_uv_delta_q
@@ -544,6 +547,7 @@ parser_c::get_av1c()
     size += obu->get_size();
 
   auto av1c = memory_c::alloc(size);
+  const auto *cc = &p->color_config;
 
   mtx::bits::writer_c w{av1c->get_buffer(), 4};
 
@@ -554,12 +558,12 @@ parser_c::get_av1c()
   w.put_bits(5, p->seq_level_idx_0);
 
   w.put_bits(1, p->seq_tier_0);
-  w.put_bits(1, p->high_bitdepth);
-  w.put_bits(1, p->twelve_bit);
-  w.put_bits(1, p->mono_chrome);
-  w.put_bits(1, p->chroma_subsampling_x);
-  w.put_bits(1, p->chroma_subsampling_y);
-  w.put_bits(2, p->chroma_sample_position);
+  w.put_bits(1, cc->high_bitdepth);
+  w.put_bits(1, cc->twelve_bit);
+  w.put_bits(1, cc->mono_chrome);
+  w.put_bits(1, cc->chroma_subsampling_x);
+  w.put_bits(1, cc->chroma_subsampling_y);
+  w.put_bits(2, cc->chroma_sample_position);
 
   w.put_bits(3, 0);             // reserved
   w.put_bits(1, 0);             // initial_presentation_delay_present

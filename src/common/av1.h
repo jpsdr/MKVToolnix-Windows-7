@@ -16,6 +16,7 @@
 #include "common/common_pch.h"
 
 #include "common/math_fwd.h"
+#include "common/av1/types.h"
 
 namespace mtx {
 
@@ -135,4 +136,5 @@ protected:
 
 void maybe_shrink_size_fields(memory_c &mem);
 
-}}
+}
+}
