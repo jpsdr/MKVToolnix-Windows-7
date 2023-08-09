@@ -47,11 +47,7 @@ obu_reader_c::probe_file() {
     auto color_config       = parser.get_color_config();
     auto frame_duration     = parser.get_frame_duration();
 
-    uint64_t duration;
-    if (frame_duration)
-      duration = mtx::to_int(frame_duration);
-    else
-      duration = 1000000000ll / 25;
+    uint64_t duration       = frame_duration ? mtx::to_int(frame_duration) : 1000000000ll / 25;
 
     auto dovi_config_record = create_av1_dovi_configuration_record(hdr, m_width, m_height, color_config, duration);
 

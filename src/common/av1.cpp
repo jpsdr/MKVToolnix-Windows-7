@@ -810,24 +810,25 @@ parser_c::parse_metadata_type_itu_t_t35(mtx::bits::reader_c &r) {
     r.skip_bits(8); // itu_t_t35_country_code_extension_byte
   }
 
-  auto payload_bytes_size = r.get_remaining_bits() / 8;
+  auto payload_bytes_size      = r.get_remaining_bits() / 8;
   auto itu_t_t35_payload_bytes = memory_c::alloc(payload_bytes_size);
-  auto buffer = itu_t_t35_payload_bytes->get_buffer();
+  auto buffer                  = itu_t_t35_payload_bytes->get_buffer();
   r.get_bytes(buffer, payload_bytes_size);
 
   // Check for Dolby Vision header
   auto dovi_rpu_header_size = sizeof(ITU_T_T35_DOVI_RPU_PAYLOAD_HEADER);
-  if (itu_t_t35_payload_bytes->get_size() > dovi_rpu_header_size) {
-    if (!std::memcmp(buffer, &ITU_T_T35_DOVI_RPU_PAYLOAD_HEADER, dovi_rpu_header_size)) {
-      itu_t_t35_payload_bytes->set_offset(dovi_rpu_header_size);
-      handle_itu_t_t35_dovi_rpu_payload(itu_t_t35_payload_bytes);
-    }
-  }
+
+  if (   (itu_t_t35_payload_bytes->get_size() <= dovi_rpu_header_size)
+      || std::memcmp(buffer, &ITU_T_T35_DOVI_RPU_PAYLOAD_HEADER, dovi_rpu_header_size))
+    return;
+
+  itu_t_t35_payload_bytes->set_offset(dovi_rpu_header_size);
+  handle_itu_t_t35_dovi_rpu_payload(itu_t_t35_payload_bytes);
 }
 
 void
 parser_c::handle_itu_t_t35_dovi_rpu_payload(const memory_cptr payload_mem) {
-  auto buffer = payload_mem->get_buffer();
+  auto buffer      = payload_mem->get_buffer();
   auto buffer_size = payload_mem->get_size();
 
   size_t rpu_size{};
@@ -839,7 +840,7 @@ parser_c::handle_itu_t_t35_dovi_rpu_payload(const memory_cptr payload_mem) {
       return;
     }
 
-    rpu_size = 0x100;
+    rpu_size  = 0x100;
     rpu_size |= (buffer[1] & 0x0F) << 4;
     rpu_size |= (buffer[2] >> 4) & 0x0F;
 
@@ -849,12 +850,12 @@ parser_c::handle_itu_t_t35_dovi_rpu_payload(const memory_cptr payload_mem) {
 
     for (size_t i = 0; i < rpu_size; i++) {
       auto converted_byte = (buffer[i + 2] & 0x07) << 5;
-      converted_byte |= (buffer[i + 3] >> 3) & 0x1F;
+      converted_byte     |= (buffer[i + 3] >> 3) & 0x1F;
 
       buffer[i + 1] = converted_byte;
     }
   } else {
-    rpu_size = (buffer[0] & 0x1F) << 3;
+    rpu_size  = (buffer[0] & 0x1F) << 3;
     rpu_size |= (buffer[1] >> 5) & 0x07;
 
     if (rpu_size + 1 >= buffer_size) {
@@ -876,4 +877,5 @@ parser_c::handle_itu_t_t35_dovi_rpu_payload(const memory_cptr payload_mem) {
   mtx::bits::reader_c r(buffer, rpu_size);
   mtx::dovi::parse_dovi_rpu(r, m_dovi_rpu_data_header);
 }
+
 }
