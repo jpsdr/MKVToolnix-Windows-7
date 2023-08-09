@@ -33,11 +33,12 @@ class parser_private_c {
   bool frame_found{}, reduced_still_picture_header{}, parse_sequence_header_obus_only{};
 
   unsigned int obu_type{};
-  bool obu_extension_flag{}, obu_has_size_field{}, seen_frame_header{}, frame_id_numbers_present_flag{}, equal_picture_interval{}, high_bitdepth{}, twelve_bit{}, mono_chrome{}, seq_tier_0{};
-  bool chroma_subsampling_x{}, chroma_subsampling_y{}, current_frame_contains_sequence_header{};
+  bool obu_extension_flag{}, obu_has_size_field{}, seen_frame_header{}, frame_id_numbers_present_flag{}, equal_picture_interval{}, seq_tier_0{};
+  bool current_frame_contains_sequence_header{};
   std::optional<unsigned int> temporal_id, spatial_id;
-  unsigned int operating_point_idc{}, seq_profile{}, seq_level_idx_0{}, max_frame_width{}, max_frame_height{}, buffer_delay_length{1}, chroma_sample_position{};
-  unsigned int color_primaries{}, transfer_characteristics{}, matrix_coefficients{};
+  unsigned int operating_point_idc{}, seq_profile{}, seq_level_idx_0{}, max_frame_width{}, max_frame_height{}, buffer_delay_length{1};
+
+  color_config_t color_config{};
 
   mtx::bytes::buffer_c buffer;
   frame_t current_frame;
@@ -158,55 +159,57 @@ parser_c::parse_obu_common_data() {
 
 void
 parser_c::parse_color_config(mtx::bits::reader_c &r) {
-  p->high_bitdepth = r.get_bit();
+  color_config_t *cc = &p->color_config;
+
+  cc->high_bitdepth = r.get_bit();
   auto bit_depth     = 0u;
 
-  if ((p->seq_profile == 2) && p->high_bitdepth) {
-    p->twelve_bit = r.get_bit();
-    bit_depth     = p->twelve_bit ? 12 : 10;
+  if ((p->seq_profile == 2) && cc->high_bitdepth) {
+    cc->twelve_bit = r.get_bit();
+    bit_depth     = cc->twelve_bit ? 12 : 10;
   } else
-    bit_depth     = p->high_bitdepth ? 10 :  8;
+    bit_depth     = cc->high_bitdepth ? 10 :  8;
 
-  p->mono_chrome = (p->seq_profile != 1) ? r.get_bit() : false;
+  cc->mono_chrome = (p->seq_profile != 1) ? r.get_bit() : false;
 
   if (r.get_bit()) {            // color_description_present_flag
-    p->color_primaries          = r.get_bits(8);
-    p->transfer_characteristics = r.get_bits(8);
-    p->matrix_coefficients      = r.get_bits(8);
+    cc->color_primaries          = r.get_bits(8);
+    cc->transfer_characteristics = r.get_bits(8);
+    cc->matrix_coefficients      = r.get_bits(8);
   } else {
-    p->color_primaries          = CP_UNSPECIFIED;
-    p->transfer_characteristics = TC_UNSPECIFIED;
-    p->matrix_coefficients      = MC_UNSPECIFIED;
+    cc->color_primaries          = CP_UNSPECIFIED;
+    cc->transfer_characteristics = TC_UNSPECIFIED;
+    cc->matrix_coefficients      = MC_UNSPECIFIED;
   }
 
-  if (p->mono_chrome) {
-    r.skip_bits(1);             // color_range
+  if (cc->mono_chrome) {
+    cc->video_full_range_flag = r.get_bit();
     return;
 
-  } else if (   (p->color_primaries          == CP_BT_709)
-             && (p->transfer_characteristics == TC_SRGB)
-             && (p->matrix_coefficients      == MC_IDENTITY)) {
+  } else if (   (cc->color_primaries          == CP_BT_709)
+             && (cc->transfer_characteristics == TC_SRGB)
+             && (cc->matrix_coefficients      == MC_IDENTITY)) {
   } else {
-    r.skip_bits(1);             // color_range
+    cc->video_full_range_flag = r.get_bit();
 
-    p->chroma_subsampling_x = false;
-    p->chroma_subsampling_y = false;
+    cc->chroma_subsampling_x = false;
+    cc->chroma_subsampling_y = false;
 
     if (p->seq_profile == 0) {
-      p->chroma_subsampling_x = true;
-      p->chroma_subsampling_y = true;
+      cc->chroma_subsampling_x = true;
+      cc->chroma_subsampling_y = true;
 
     } else if (p->seq_profile > 1) {
       if (bit_depth == 12) {
-        p->chroma_subsampling_x = r.get_bit();
-        if (p->chroma_subsampling_x)
-          p->chroma_subsampling_y = r.get_bit();
+        cc->chroma_subsampling_x = r.get_bit();
+        if (cc->chroma_subsampling_x)
+          cc->chroma_subsampling_y = r.get_bit();
       } else
-        p->chroma_subsampling_x = true;
+        cc->chroma_subsampling_x = true;
     }
 
-    if (p->chroma_subsampling_x && p->chroma_subsampling_y)
-      p->chroma_sample_position = r.get_bits(2);
+    if (cc->chroma_subsampling_x && cc->chroma_subsampling_y)
+      cc->chroma_sample_position = r.get_bits(2);
   }
 
   r.skip_bits(1);               // separate_uv_delta_q
@@ -360,6 +363,17 @@ parser_c::parse_frame_header_obu(mtx::bits::reader_c &r) {
 }
 
 void
+parser_c::parse_metadata_obu(mtx::bits::reader_c &r) {
+  auto metadata_type = r.get_leb128();
+
+  switch (metadata_type) {
+    case METADATA_TYPE_ITUT_T35:
+      parse_metadata_type_itu_t_t35(r);
+      break;
+  }
+}
+
+void
 parser_c::parse(memory_c const &buffer) {
   parse(buffer.get_buffer(), buffer.get_size());
 }
@@ -490,8 +504,10 @@ parser_c::parse_obu() {
   }
 
   if (p->obu_type == OBU_METADATA) {
-    if (!p->frame_found)
+    if (!p->frame_found) {
       p->metadata_obus.emplace_back(obu->clone());
+      parse_metadata_obu(sub_r);
+    }
 
     return true;
   }
@@ -544,6 +560,7 @@ parser_c::get_av1c()
     size += obu->get_size();
 
   auto av1c = memory_c::alloc(size);
+  const auto *cc = &p->color_config;
 
   mtx::bits::writer_c w{av1c->get_buffer(), 4};
 
@@ -554,12 +571,12 @@ parser_c::get_av1c()
   w.put_bits(5, p->seq_level_idx_0);
 
   w.put_bits(1, p->seq_tier_0);
-  w.put_bits(1, p->high_bitdepth);
-  w.put_bits(1, p->twelve_bit);
-  w.put_bits(1, p->mono_chrome);
-  w.put_bits(1, p->chroma_subsampling_x);
-  w.put_bits(1, p->chroma_subsampling_y);
-  w.put_bits(2, p->chroma_sample_position);
+  w.put_bits(1, cc->high_bitdepth);
+  w.put_bits(1, cc->twelve_bit);
+  w.put_bits(1, cc->mono_chrome);
+  w.put_bits(1, cc->chroma_subsampling_x);
+  w.put_bits(1, cc->chroma_subsampling_y);
+  w.put_bits(2, cc->chroma_sample_position);
 
   w.put_bits(3, 0);             // reserved
   w.put_bits(1, 0);             // initial_presentation_delay_present
@@ -577,6 +594,12 @@ parser_c::get_av1c()
   }
 
   return av1c;
+}
+
+color_config_t
+parser_c::get_color_config()
+  const {
+  return p->color_config;
 }
 
 void
@@ -777,5 +800,80 @@ maybe_shrink_size_fields(memory_c &mem) {
     return;
 
   mem.resize(idx_dest);
+}
+
+void
+parser_c::parse_metadata_type_itu_t_t35(mtx::bits::reader_c &r) {
+  auto itu_t_t35_country_code = r.get_bits(8);
+
+  if (itu_t_t35_country_code == 0xFF) {
+    r.skip_bits(8); // itu_t_t35_country_code_extension_byte
+  }
+
+  auto payload_bytes_size = r.get_remaining_bits() / 8;
+  auto itu_t_t35_payload_bytes = memory_c::alloc(payload_bytes_size);
+  auto buffer = itu_t_t35_payload_bytes->get_buffer();
+  r.get_bytes(buffer, payload_bytes_size);
+
+  // Check for Dolby Vision header
+  auto dovi_rpu_header_size = sizeof(ITU_T_T35_DOVI_RPU_PAYLOAD_HEADER);
+  if (itu_t_t35_payload_bytes->get_size() > dovi_rpu_header_size) {
+    if (!std::memcmp(buffer, &ITU_T_T35_DOVI_RPU_PAYLOAD_HEADER, dovi_rpu_header_size)) {
+      itu_t_t35_payload_bytes->set_offset(dovi_rpu_header_size);
+      handle_itu_t_t35_dovi_rpu_payload(itu_t_t35_payload_bytes);
+    }
+  }
+}
+
+void
+parser_c::handle_itu_t_t35_dovi_rpu_payload(const memory_cptr payload_mem) {
+  auto buffer = payload_mem->get_buffer();
+  auto buffer_size = payload_mem->get_size();
+
+  size_t rpu_size{};
+
+  // Convert into regular Dolby Vision RPU
+  if (buffer[1] & 0x10) {
+    if (buffer[2] & 0x08) {
+      // RPU size > 512 bytes
+      return;
+    }
+
+    rpu_size = 0x100;
+    rpu_size |= (buffer[1] & 0x0F) << 4;
+    rpu_size |= (buffer[2] >> 4) & 0x0F;
+
+    if (rpu_size + 2 >= buffer_size) {
+      return;
+    }
+
+    for (size_t i = 0; i < rpu_size; i++) {
+      auto converted_byte = (buffer[i + 2] & 0x07) << 5;
+      converted_byte |= (buffer[i + 3] >> 3) & 0x1F;
+
+      buffer[i + 1] = converted_byte;
+    }
+  } else {
+    rpu_size = (buffer[0] & 0x1F) << 3;
+    rpu_size |= (buffer[1] >> 5) & 0x07;
+
+    if (rpu_size + 1 >= buffer_size) {
+      return;
+    }
+
+    for (size_t i = 0; i < rpu_size; i++) {
+      auto converted_byte = (buffer[i + 1] & 0x0F) << 4;
+      converted_byte |= (buffer[i + 2] >> 4) & 0x0F;
+
+      buffer[i + 1] = converted_byte;
+    }
+  }
+
+  // Set prefix
+  buffer[0] = 0x19;
+  rpu_size += 1;
+
+  mtx::bits::reader_c r(buffer, rpu_size);
+  mtx::dovi::parse_dovi_rpu(r, m_dovi_rpu_data_header);
 }
 }

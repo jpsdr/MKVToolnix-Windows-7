@@ -100,79 +100,127 @@ dovi_decoder_configuration_record_t::dump() {
                      ));
 }
 
-dovi_decoder_configuration_record_t
-create_dovi_configuration_record(dovi_rpu_data_header_t const &hdr,
-                                 unsigned int width,
-                                 unsigned int height,
-                                 mtx::hevc::vui_info_t const &vui,
-                                 uint64_t duration) {
-  dovi_decoder_configuration_record_t conf{};
+bool
+parse_dovi_rpu(mtx::bits::reader_c &r, mtx::dovi::dovi_rpu_data_header_t &hdr) {
+  hdr.rpu_nal_prefix = r.get_bits(8);
 
-  bool has_el           = hdr.el_spatial_resampling_filter_flag && !hdr.disable_residual_flag;
-  conf.dv_version_major = 1;
-  conf.dv_version_minor = 0;
+  if (hdr.rpu_nal_prefix == 25) {
+    hdr.rpu_type   = r.get_bits(6);
+    hdr.rpu_format = r.get_bits(11);
+
+    if (hdr.rpu_type == 2) {
+      hdr.vdr_rpu_profile           = r.get_bits(4);
+      hdr.vdr_rpu_level             = r.get_bits(4);
+      hdr.vdr_seq_info_present_flag = r.get_bit();
+
+      if (hdr.vdr_seq_info_present_flag) {
+        hdr.chroma_resampling_explicit_filter_flag = r.get_bit();
+        hdr.coefficient_data_type                  = r.get_bits(2);
+
+        if (hdr.coefficient_data_type == 0)
+          hdr.coefficient_log2_denom = r.get_unsigned_golomb();
+
+        hdr.vdr_rpu_normalized_idc   = r.get_bits(2);
+        hdr.bl_video_full_range_flag = r.get_bit();
+
+        if ((hdr.rpu_format & 0x700) == 0) {
+          hdr.bl_bit_depth_minus8               = r.get_unsigned_golomb();
+          hdr.el_bit_depth_minus8               = r.get_unsigned_golomb();
+          hdr.vdr_bit_depth_minus_8             = r.get_unsigned_golomb();
+          hdr.spatial_resampling_filter_flag    = r.get_bit();
+          hdr.reserved_zero_3bits               = r.get_bits(3);
+          hdr.el_spatial_resampling_filter_flag = r.get_bit();
+          hdr.disable_residual_flag             = r.get_bit();
+        }
+      }
+
+      hdr.vdr_dm_metadata_present_flag = r.get_bit();
+      hdr.use_prev_vdr_rpu_flag        = r.get_bit();
+
+      if (hdr.use_prev_vdr_rpu_flag)
+        hdr.prev_vdr_rpu_id = r.get_unsigned_golomb();
+
+      else {
+        hdr.vdr_rpu_id                = r.get_unsigned_golomb();
+        hdr.mapping_color_space       = r.get_unsigned_golomb();
+        hdr.mapping_chroma_format_idc = r.get_unsigned_golomb();
+
+        for (int cmp = 0; cmp < 3; ++cmp) {
+          auto num_pivots_minus2 = r.get_unsigned_golomb();
+
+          for (uint64_t pivot_idx = 0; pivot_idx < num_pivots_minus2 + 2; pivot_idx++)
+            r.skip_bits(hdr.bl_bit_depth_minus8 + 8); // pred_pivot_value[cmp][pivot_idx]
+        }
+
+        if ((hdr.rpu_format & 0x700) && !hdr.disable_residual_flag)
+          r.skip_bits(3); // nlq_method_idc
+
+        hdr.num_x_partitions_minus1 = r.get_unsigned_golomb();
+        hdr.num_y_partitions_minus1 = r.get_unsigned_golomb();
+      }
+    }
+  }
+
+  return true;
+}
+
+uint8_t
+guess_dovi_rpu_data_header_profile(dovi_rpu_data_header_t const &hdr) {
+  bool has_el = hdr.el_spatial_resampling_filter_flag && !hdr.disable_residual_flag;
 
   if (hdr.rpu_nal_prefix == 25) {
     if ((hdr.vdr_rpu_profile == 0) && hdr.bl_video_full_range_flag)
-      conf.dv_profile = 5;
+      return 5;
 
     else if (has_el) {
       // Profile 7 is max 12 bits, both MEL & FEL
       if (hdr.vdr_bit_depth_minus_8 == 4)
-        conf.dv_profile = 7;
+        return 7;
       else
-        conf.dv_profile = 4;
+        return 4;
 
     } else
-      conf.dv_profile = 8;
+      return 8;
   }
 
-  conf.dv_level = calculate_dovi_level(width, height, duration);
+  return 0;
+}
 
-  // In all single PID cases, these are set to 1
-  conf.rpu_present_flag = 1;
-  conf.bl_present_flag  = 1;
+uint8_t
+get_dovi_bl_signal_compatibility_id(uint8_t dv_profile,
+                                   unsigned int color_primaries,
+                                   unsigned int matrix_coefficients,
+                                   unsigned int transfer_characteristics) {
+  if (dv_profile == 4)
+    return 2;
 
-  conf.el_present_flag  = 0;
+  if (dv_profile == 5)
+    return 0;
 
-  if (conf.dv_profile == 4)
-    conf.dv_bl_signal_compatibility_id = 2;
-
-  else if (conf.dv_profile == 5)
-    conf.dv_bl_signal_compatibility_id = 0;
-
-  else if (conf.dv_profile == 8) {
-    auto trc = vui.transfer_characteristics;
+  if (dv_profile == 8) {
+    auto trc = transfer_characteristics;
 
     // WCG
-    if (vui.color_primaries == 9 && vui.matrix_coefficients == 9) {
+    if (color_primaries == 9 && matrix_coefficients == 9) {
       if (trc == 16)                       // ST2084, HDR10 base layer
-        conf.dv_bl_signal_compatibility_id = 1;
+        return 1;
       else if ((trc == 14) || (trc == 18)) // ARIB STD-B67, HLG base layer
-        conf.dv_bl_signal_compatibility_id = 4;
+        return 4;
       else                                 // undefined
-        conf.dv_bl_signal_compatibility_id = 0;
+        return 0;
 
     } else                                 // BT.709, BT.1886, SDR
-      conf.dv_bl_signal_compatibility_id = 2;
+      return 2;
 
-  } else if (conf.dv_profile == 7)
-    conf.dv_bl_signal_compatibility_id = 6;
-
-  else if (conf.dv_profile == 9)
-    conf.dv_bl_signal_compatibility_id = 2;
-
-  // Profile 4 is necessarily SDR with an enhancement-layer
-  // It's possible that the first guess was wrong, so correct it
-  if (has_el && (conf.dv_bl_signal_compatibility_id == 2) && (conf.dv_profile != 4))
-    conf.dv_profile = 4;
-
-  // Set EL present for profile 4 and 7
-  if ((conf.dv_profile == 4) || (conf.dv_profile == 7)) {
-    conf.el_present_flag = 1;
   }
+  
+  if (dv_profile == 7)
+    return 6; 
 
-  return conf;
+  if (dv_profile == 9)
+    return 2;
+
+  return 0;
 }
 
 uint8_t
@@ -211,6 +259,71 @@ calculate_dovi_level(unsigned int width,
                             :                                           0;
 
   return level;
+}
+
+dovi_decoder_configuration_record_t
+create_dovi_configuration_record(dovi_rpu_data_header_t const &hdr,
+                                 unsigned int width,
+                                 unsigned int height,
+                                 mtx::hevc::vui_info_t const &vui,
+                                 uint64_t duration) {
+  dovi_decoder_configuration_record_t conf{};
+
+  bool has_el           = hdr.el_spatial_resampling_filter_flag && !hdr.disable_residual_flag;
+  conf.dv_version_major = 1;
+  conf.dv_version_minor = 0;
+
+  conf.dv_profile = guess_dovi_rpu_data_header_profile(hdr);
+  conf.dv_level = calculate_dovi_level(width, height, duration);
+  conf.dv_bl_signal_compatibility_id = get_dovi_bl_signal_compatibility_id(conf.dv_profile,
+    vui.color_primaries, vui.matrix_coefficients, vui.transfer_characteristics);
+
+  // In all single PID cases, these are set to 1
+  conf.rpu_present_flag = 1;
+  conf.bl_present_flag  = 1;
+
+  conf.el_present_flag  = 0;
+
+  // Profile 4 is necessarily SDR with an enhancement-layer
+  // It's possible that the first guess was wrong, so correct it
+  if (has_el && (conf.dv_bl_signal_compatibility_id == 2) && (conf.dv_profile != 4))
+    conf.dv_profile = 4;
+
+  // Set EL present for profile 4 and 7
+  if ((conf.dv_profile == 4) || (conf.dv_profile == 7)) {
+    conf.el_present_flag = 1;
+  }
+
+  return conf;
+}
+
+dovi_decoder_configuration_record_t
+create_av1_dovi_configuration_record(dovi_rpu_data_header_t const &hdr,
+                                     unsigned int width,
+                                     unsigned int height,
+                                     mtx::av1::color_config_t const &color_config,
+                                     uint64_t duration) {
+  dovi_decoder_configuration_record_t conf{};
+
+  conf.dv_version_major = 1;
+  conf.dv_version_minor = 0;
+
+  // AV1 profile is always 10
+  conf.dv_profile = 10;
+  conf.dv_level = calculate_dovi_level(width, height, duration);
+
+  conf.rpu_present_flag = 1;
+  conf.bl_present_flag  = 1;
+  // Not sure it's possible to have an EL in AV1
+  conf.el_present_flag  = 0;
+
+  // Actual profile based on header
+  auto dv_profile = guess_dovi_rpu_data_header_profile(hdr);
+
+  conf.dv_bl_signal_compatibility_id = get_dovi_bl_signal_compatibility_id(dv_profile,
+    color_config.color_primaries, color_config.matrix_coefficients, color_config.transfer_characteristics);
+
+  return conf;
 }
 
 block_addition_mapping_t

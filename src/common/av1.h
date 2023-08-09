@@ -16,6 +16,8 @@
 #include "common/common_pch.h"
 
 #include "common/math_fwd.h"
+#include "common/av1/types.h"
+#include "common/dovi_meta.h"
 
 namespace mtx {
 
@@ -74,6 +76,12 @@ unsigned int constexpr TC_SRGB                     = 13;
 unsigned int constexpr MC_IDENTITY                 =  0;
 unsigned int constexpr MC_UNSPECIFIED              =  2;
 
+unsigned int constexpr METADATA_TYPE_ITUT_T35      =  4;
+
+unsigned char constexpr ITU_T_T35_DOVI_RPU_PAYLOAD_HEADER[] = {
+  0x00, 0x3B, 0x00, 0x00, 0x08, 0x00, 0x37, 0xCD, 0x08
+};
+
 }
 
 struct frame_t {
@@ -86,6 +94,8 @@ class parser_private_c;
 class parser_c {
 protected:
   std::unique_ptr<parser_private_c> const p;
+
+  mtx::dovi::dovi_rpu_data_header_t m_dovi_rpu_data_header;
 
 public:
   parser_c();
@@ -111,6 +121,15 @@ public:
   mtx_mp_rational_t get_frame_duration() const;
   bool headers_parsed() const;
   memory_cptr get_av1c() const;
+  color_config_t get_color_config() const;
+
+  bool has_dovi_rpu_header() const {
+    return m_dovi_rpu_data_header.rpu_nal_prefix == 25;
+  }
+
+  mtx::dovi::dovi_rpu_data_header_t get_dovi_rpu_header() const {
+    return m_dovi_rpu_data_header;
+  }
 
 public:
   static char const *get_obu_type_name(unsigned int obu_type);
@@ -128,11 +147,16 @@ protected:
   void parse_decoder_model_info(mtx::bits::reader_c &r);
   void parse_operating_parameters_info(mtx::bits::reader_c &r);
   void parse_frame_header_obu(mtx::bits::reader_c &r);
+  void parse_metadata_obu(mtx::bits::reader_c &r);
   bool parse_obu();
 
   uint64_t get_next_timestamp();
+
+  void parse_metadata_type_itu_t_t35(mtx::bits::reader_c &r);
+  void handle_itu_t_t35_dovi_rpu_payload(const memory_cptr payload_mem);
 };
 
 void maybe_shrink_size_fields(memory_c &mem);
 
-}}
+}
+}
