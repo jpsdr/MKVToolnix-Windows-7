@@ -159,57 +159,57 @@ parser_c::parse_obu_common_data() {
 
 void
 parser_c::parse_color_config(mtx::bits::reader_c &r) {
-  color_config_t *cc = &p->color_config;
+  auto &cc = p->color_config;
 
-  cc->high_bitdepth = r.get_bit();
-  auto bit_depth     = 0u;
+  cc.high_bitdepth = r.get_bit();
+  auto bit_depth   = 0u;
 
-  if ((p->seq_profile == 2) && cc->high_bitdepth) {
-    cc->twelve_bit = r.get_bit();
-    bit_depth     = cc->twelve_bit ? 12 : 10;
+  if ((p->seq_profile == 2) && cc.high_bitdepth) {
+    cc.twelve_bit = r.get_bit();
+    bit_depth     = cc.twelve_bit ? 12 : 10;
   } else
-    bit_depth     = cc->high_bitdepth ? 10 :  8;
+    bit_depth     = cc.high_bitdepth ? 10 :  8;
 
-  cc->mono_chrome = (p->seq_profile != 1) ? r.get_bit() : false;
+  cc.mono_chrome = (p->seq_profile != 1) ? r.get_bit() : false;
 
   if (r.get_bit()) {            // color_description_present_flag
-    cc->color_primaries          = r.get_bits(8);
-    cc->transfer_characteristics = r.get_bits(8);
-    cc->matrix_coefficients      = r.get_bits(8);
+    cc.color_primaries          = r.get_bits(8);
+    cc.transfer_characteristics = r.get_bits(8);
+    cc.matrix_coefficients      = r.get_bits(8);
   } else {
-    cc->color_primaries          = CP_UNSPECIFIED;
-    cc->transfer_characteristics = TC_UNSPECIFIED;
-    cc->matrix_coefficients      = MC_UNSPECIFIED;
+    cc.color_primaries          = CP_UNSPECIFIED;
+    cc.transfer_characteristics = TC_UNSPECIFIED;
+    cc.matrix_coefficients      = MC_UNSPECIFIED;
   }
 
-  if (cc->mono_chrome) {
-    cc->video_full_range_flag = r.get_bit();
+  if (cc.mono_chrome) {
+    cc.video_full_range_flag = r.get_bit();
     return;
 
-  } else if (   (cc->color_primaries          == CP_BT_709)
-             && (cc->transfer_characteristics == TC_SRGB)
-             && (cc->matrix_coefficients      == MC_IDENTITY)) {
+  } else if (   (cc.color_primaries          == CP_BT_709)
+             && (cc.transfer_characteristics == TC_SRGB)
+             && (cc.matrix_coefficients      == MC_IDENTITY)) {
   } else {
-    cc->video_full_range_flag = r.get_bit();
+    cc.video_full_range_flag = r.get_bit();
 
-    cc->chroma_subsampling_x = false;
-    cc->chroma_subsampling_y = false;
+    cc.chroma_subsampling_x  = false;
+    cc.chroma_subsampling_y  = false;
 
     if (p->seq_profile == 0) {
-      cc->chroma_subsampling_x = true;
-      cc->chroma_subsampling_y = true;
+      cc.chroma_subsampling_x = true;
+      cc.chroma_subsampling_y = true;
 
     } else if (p->seq_profile > 1) {
       if (bit_depth == 12) {
-        cc->chroma_subsampling_x = r.get_bit();
-        if (cc->chroma_subsampling_x)
-          cc->chroma_subsampling_y = r.get_bit();
+        cc.chroma_subsampling_x = r.get_bit();
+        if (cc.chroma_subsampling_x)
+          cc.chroma_subsampling_y = r.get_bit();
       } else
-        cc->chroma_subsampling_x = true;
+        cc.chroma_subsampling_x = true;
     }
 
-    if (cc->chroma_subsampling_x && cc->chroma_subsampling_y)
-      cc->chroma_sample_position = r.get_bits(2);
+    if (cc.chroma_subsampling_x && cc.chroma_subsampling_y)
+      cc.chroma_sample_position = r.get_bits(2);
   }
 
   r.skip_bits(1);               // separate_uv_delta_q
@@ -559,8 +559,8 @@ parser_c::get_av1c()
   for (auto const &obu : p->metadata_obus)
     size += obu->get_size();
 
-  auto av1c = memory_c::alloc(size);
-  const auto *cc = &p->color_config;
+  auto av1c      = memory_c::alloc(size);
+  auto const &cc = p->color_config;
 
   mtx::bits::writer_c w{av1c->get_buffer(), 4};
 
@@ -571,12 +571,12 @@ parser_c::get_av1c()
   w.put_bits(5, p->seq_level_idx_0);
 
   w.put_bits(1, p->seq_tier_0);
-  w.put_bits(1, cc->high_bitdepth);
-  w.put_bits(1, cc->twelve_bit);
-  w.put_bits(1, cc->mono_chrome);
-  w.put_bits(1, cc->chroma_subsampling_x);
-  w.put_bits(1, cc->chroma_subsampling_y);
-  w.put_bits(2, cc->chroma_sample_position);
+  w.put_bits(1, cc.high_bitdepth);
+  w.put_bits(1, cc.twelve_bit);
+  w.put_bits(1, cc.mono_chrome);
+  w.put_bits(1, cc.chroma_subsampling_x);
+  w.put_bits(1, cc.chroma_subsampling_y);
+  w.put_bits(2, cc.chroma_sample_position);
 
   w.put_bits(3, 0);             // reserved
   w.put_bits(1, 0);             // initial_presentation_delay_present
