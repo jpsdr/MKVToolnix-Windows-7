@@ -269,20 +269,18 @@ create_dovi_configuration_record(dovi_rpu_data_header_t const &hdr,
                                  uint64_t duration) {
   dovi_decoder_configuration_record_t conf{};
 
-  bool has_el           = hdr.el_spatial_resampling_filter_flag && !hdr.disable_residual_flag;
-  conf.dv_version_major = 1;
-  conf.dv_version_minor = 0;
+  bool has_el                        = hdr.el_spatial_resampling_filter_flag && !hdr.disable_residual_flag;
+  conf.dv_version_major              = 1;
+  conf.dv_version_minor              = 0;
 
-  conf.dv_profile = guess_dovi_rpu_data_header_profile(hdr);
-  conf.dv_level = calculate_dovi_level(width, height, duration);
-  conf.dv_bl_signal_compatibility_id = get_dovi_bl_signal_compatibility_id(conf.dv_profile,
-    vui.color_primaries, vui.matrix_coefficients, vui.transfer_characteristics);
+  conf.dv_profile                    = guess_dovi_rpu_data_header_profile(hdr);
+  conf.dv_level                      = calculate_dovi_level(width, height, duration);
+  conf.dv_bl_signal_compatibility_id = get_dovi_bl_signal_compatibility_id(conf.dv_profile, vui.color_primaries, vui.matrix_coefficients, vui.transfer_characteristics);
 
   // In all single PID cases, these are set to 1
-  conf.rpu_present_flag = 1;
-  conf.bl_present_flag  = 1;
-
-  conf.el_present_flag  = 0;
+  conf.rpu_present_flag              = 1;
+  conf.bl_present_flag               = 1;
+  conf.el_present_flag               = 0;
 
   // Profile 4 is necessarily SDR with an enhancement-layer
   // It's possible that the first guess was wrong, so correct it
@@ -308,20 +306,17 @@ create_av1_dovi_configuration_record(dovi_rpu_data_header_t const &hdr,
   conf.dv_version_major = 1;
   conf.dv_version_minor = 0;
 
-  // AV1 profile is always 10
-  conf.dv_profile = 10;
-  conf.dv_level = calculate_dovi_level(width, height, duration);
+  conf.dv_profile       = 10; // AV1 profile is always 10
+  conf.dv_level         = calculate_dovi_level(width, height, duration);
 
   conf.rpu_present_flag = 1;
   conf.bl_present_flag  = 1;
-  // Not sure it's possible to have an EL in AV1
-  conf.el_present_flag  = 0;
+  conf.el_present_flag  = 0; // Not sure it's possible to have an EL in AV1
 
   // Actual profile based on header
   auto dv_profile = guess_dovi_rpu_data_header_profile(hdr);
 
-  conf.dv_bl_signal_compatibility_id = get_dovi_bl_signal_compatibility_id(dv_profile,
-    color_config.color_primaries, color_config.matrix_coefficients, color_config.transfer_characteristics);
+  conf.dv_bl_signal_compatibility_id = get_dovi_bl_signal_compatibility_id(dv_profile, color_config.color_primaries, color_config.matrix_coefficients, color_config.transfer_characteristics);
 
   return conf;
 }
