@@ -42,28 +42,33 @@ obu_reader_c::probe_file() {
   m_width         = dimensions.first;
   m_height        = dimensions.second;
 
-  if (parser.has_dovi_rpu_header()) {
-    auto hdr                = parser.get_dovi_rpu_header();
-    auto color_config       = parser.get_color_config();
-    auto frame_duration     = parser.get_frame_duration();
+  if ((m_width <= 0) || (m_height <= 0))
+    return false;
 
-    uint64_t duration       = frame_duration ? mtx::to_int(frame_duration) : 1000000000ll / 25;
+  if (!parser.has_dovi_rpu_header())
+    return true;
 
-    auto dovi_config_record = create_av1_dovi_configuration_record(hdr, m_width, m_height, color_config, duration);
+  auto hdr                = parser.get_dovi_rpu_header();
+  auto color_config       = parser.get_color_config();
+  auto frame_duration     = parser.get_frame_duration();
 
-    auto mapping            = mtx::dovi::create_dovi_block_addition_mapping(dovi_config_record);
+  uint64_t duration       = frame_duration ? mtx::to_int(frame_duration) : 1000000000ll / 25;
 
-    if (mapping.is_valid()) {
-      if (s_debug_dovi_configuration_record) {
-        hdr.dump();
-        dovi_config_record.dump();
-      }
+  auto dovi_config_record = create_av1_dovi_configuration_record(hdr, m_width, m_height, color_config, duration);
 
-      m_block_addition_mappings.push_back(mapping);
-    }
+  auto mapping            = mtx::dovi::create_dovi_block_addition_mapping(dovi_config_record);
+
+  if (!mapping.is_valid())
+    return true;
+
+  if (s_debug_dovi_configuration_record) {
+    hdr.dump();
+    dovi_config_record.dump();
   }
 
-  return (m_width > 0) && (m_height > 0);
+  m_block_addition_mappings.push_back(mapping);
+
+  return true;
 }
 
 void
