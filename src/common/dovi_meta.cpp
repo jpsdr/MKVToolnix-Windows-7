@@ -104,60 +104,61 @@ bool
 parse_dovi_rpu(mtx::bits::reader_c &r, mtx::dovi::dovi_rpu_data_header_t &hdr) {
   hdr.rpu_nal_prefix = r.get_bits(8);
 
-  if (hdr.rpu_nal_prefix == 25) {
-    hdr.rpu_type   = r.get_bits(6);
-    hdr.rpu_format = r.get_bits(11);
+  if (hdr.rpu_nal_prefix != 25)
+    return true;
 
-    if (hdr.rpu_type == 2) {
-      hdr.vdr_rpu_profile           = r.get_bits(4);
-      hdr.vdr_rpu_level             = r.get_bits(4);
-      hdr.vdr_seq_info_present_flag = r.get_bit();
+  hdr.rpu_type   = r.get_bits(6);
+  hdr.rpu_format = r.get_bits(11);
 
-      if (hdr.vdr_seq_info_present_flag) {
-        hdr.chroma_resampling_explicit_filter_flag = r.get_bit();
-        hdr.coefficient_data_type                  = r.get_bits(2);
+  if (hdr.rpu_type == 2) {
+    hdr.vdr_rpu_profile           = r.get_bits(4);
+    hdr.vdr_rpu_level             = r.get_bits(4);
+    hdr.vdr_seq_info_present_flag = r.get_bit();
 
-        if (hdr.coefficient_data_type == 0)
-          hdr.coefficient_log2_denom = r.get_unsigned_golomb();
+    if (hdr.vdr_seq_info_present_flag) {
+      hdr.chroma_resampling_explicit_filter_flag = r.get_bit();
+      hdr.coefficient_data_type                  = r.get_bits(2);
 
-        hdr.vdr_rpu_normalized_idc   = r.get_bits(2);
-        hdr.bl_video_full_range_flag = r.get_bit();
+      if (hdr.coefficient_data_type == 0)
+        hdr.coefficient_log2_denom = r.get_unsigned_golomb();
 
-        if ((hdr.rpu_format & 0x700) == 0) {
-          hdr.bl_bit_depth_minus8               = r.get_unsigned_golomb();
-          hdr.el_bit_depth_minus8               = r.get_unsigned_golomb();
-          hdr.vdr_bit_depth_minus_8             = r.get_unsigned_golomb();
-          hdr.spatial_resampling_filter_flag    = r.get_bit();
-          hdr.reserved_zero_3bits               = r.get_bits(3);
-          hdr.el_spatial_resampling_filter_flag = r.get_bit();
-          hdr.disable_residual_flag             = r.get_bit();
-        }
+      hdr.vdr_rpu_normalized_idc   = r.get_bits(2);
+      hdr.bl_video_full_range_flag = r.get_bit();
+
+      if ((hdr.rpu_format & 0x700) == 0) {
+        hdr.bl_bit_depth_minus8               = r.get_unsigned_golomb();
+        hdr.el_bit_depth_minus8               = r.get_unsigned_golomb();
+        hdr.vdr_bit_depth_minus_8             = r.get_unsigned_golomb();
+        hdr.spatial_resampling_filter_flag    = r.get_bit();
+        hdr.reserved_zero_3bits               = r.get_bits(3);
+        hdr.el_spatial_resampling_filter_flag = r.get_bit();
+        hdr.disable_residual_flag             = r.get_bit();
+      }
+    }
+
+    hdr.vdr_dm_metadata_present_flag = r.get_bit();
+    hdr.use_prev_vdr_rpu_flag        = r.get_bit();
+
+    if (hdr.use_prev_vdr_rpu_flag)
+      hdr.prev_vdr_rpu_id = r.get_unsigned_golomb();
+
+    else {
+      hdr.vdr_rpu_id                = r.get_unsigned_golomb();
+      hdr.mapping_color_space       = r.get_unsigned_golomb();
+      hdr.mapping_chroma_format_idc = r.get_unsigned_golomb();
+
+      for (int cmp = 0; cmp < 3; ++cmp) {
+        auto num_pivots_minus2 = r.get_unsigned_golomb();
+
+        for (uint64_t pivot_idx = 0; pivot_idx < num_pivots_minus2 + 2; pivot_idx++)
+          r.skip_bits(hdr.bl_bit_depth_minus8 + 8); // pred_pivot_value[cmp][pivot_idx]
       }
 
-      hdr.vdr_dm_metadata_present_flag = r.get_bit();
-      hdr.use_prev_vdr_rpu_flag        = r.get_bit();
+      if ((hdr.rpu_format & 0x700) && !hdr.disable_residual_flag)
+        r.skip_bits(3); // nlq_method_idc
 
-      if (hdr.use_prev_vdr_rpu_flag)
-        hdr.prev_vdr_rpu_id = r.get_unsigned_golomb();
-
-      else {
-        hdr.vdr_rpu_id                = r.get_unsigned_golomb();
-        hdr.mapping_color_space       = r.get_unsigned_golomb();
-        hdr.mapping_chroma_format_idc = r.get_unsigned_golomb();
-
-        for (int cmp = 0; cmp < 3; ++cmp) {
-          auto num_pivots_minus2 = r.get_unsigned_golomb();
-
-          for (uint64_t pivot_idx = 0; pivot_idx < num_pivots_minus2 + 2; pivot_idx++)
-            r.skip_bits(hdr.bl_bit_depth_minus8 + 8); // pred_pivot_value[cmp][pivot_idx]
-        }
-
-        if ((hdr.rpu_format & 0x700) && !hdr.disable_residual_flag)
-          r.skip_bits(3); // nlq_method_idc
-
-        hdr.num_x_partitions_minus1 = r.get_unsigned_golomb();
-        hdr.num_y_partitions_minus1 = r.get_unsigned_golomb();
-      }
+      hdr.num_x_partitions_minus1 = r.get_unsigned_golomb();
+      hdr.num_y_partitions_minus1 = r.get_unsigned_golomb();
     }
   }
 
@@ -168,22 +169,21 @@ uint8_t
 guess_dovi_rpu_data_header_profile(dovi_rpu_data_header_t const &hdr) {
   bool has_el = hdr.el_spatial_resampling_filter_flag && !hdr.disable_residual_flag;
 
-  if (hdr.rpu_nal_prefix == 25) {
-    if ((hdr.vdr_rpu_profile == 0) && hdr.bl_video_full_range_flag)
-      return 5;
+  if (hdr.rpu_nal_prefix != 25)
+    return 0;
 
-    else if (has_el) {
-      // Profile 7 is max 12 bits, both MEL & FEL
-      if (hdr.vdr_bit_depth_minus_8 == 4)
-        return 7;
-      else
-        return 4;
+  if ((hdr.vdr_rpu_profile == 0) && hdr.bl_video_full_range_flag)
+    return 5;
 
-    } else
-      return 8;
-  }
+  if (has_el) {
+    // Profile 7 is max 12 bits, both MEL & FEL
+    if (hdr.vdr_bit_depth_minus_8 == 4)
+      return 7;
+    else
+      return 4;
 
-  return 0;
+  } else
+    return 8;
 }
 
 uint8_t
@@ -213,9 +213,9 @@ get_dovi_bl_signal_compatibility_id(uint8_t dv_profile,
       return 2;
 
   }
-  
+
   if (dv_profile == 7)
-    return 6; 
+    return 6;
 
   if (dv_profile == 9)
     return 2;
