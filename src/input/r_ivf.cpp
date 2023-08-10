@@ -24,6 +24,8 @@
 #include "merge/input_x.h"
 #include "merge/file_status.h"
 
+static debugging_option_c s_debug_dovi_configuration_record{"dovi_configuration_record"};
+
 bool
 ivf_reader_c::probe_file() {
   if (m_in->read(&m_header, sizeof(ivf::file_header_t)) < sizeof(ivf::file_header_t))
@@ -48,6 +50,9 @@ ivf_reader_c::read_headers() {
   m_ok             = m_width && m_height && m_frame_rate_num && m_frame_rate_den;
 
   show_demuxer_info();
+
+  if (m_codec.is(codec_c::type_e::V_AV1))
+    parse_first_av1_frame();
 }
 
 void
@@ -84,6 +89,7 @@ ivf_reader_c::create_av1_packetizer() {
   av1_ptzr->set_is_unframed();
 
   add_packetizer(av1_ptzr);
+  ptzr(0).set_block_addition_mappings(m_block_addition_mappings);
 }
 
 void
@@ -133,4 +139,56 @@ ivf_reader_c::identify() {
   auto info = mtx::id::info_c{};
   info.add_joined(mtx::id::pixel_dimensions, "x"s, m_width, m_height);
   id_result_track(0, ID_RESULT_TRACK_VIDEO, m_codec.get_name(), info.get());
+}
+
+void
+ivf_reader_c::parse_first_av1_frame() {
+  size_t remaining_bytes  = m_size - m_in->getFilePointer();
+
+  ivf::frame_header_t header;
+  if ((sizeof(ivf::frame_header_t) > remaining_bytes) || (m_in->read(&header, sizeof(ivf::frame_header_t)) != sizeof(ivf::frame_header_t)))
+    return;
+
+  remaining_bytes        -= sizeof(ivf::frame_header_t);
+  uint32_t frame_size     = get_uint32_le(&header.frame_size);
+
+  if (remaining_bytes < frame_size) {
+    m_in->setFilePointer(0, seek_end);
+    return;
+  }
+
+  memory_cptr buffer = memory_c::alloc(frame_size);
+  if (m_in->read(buffer->get_buffer(), frame_size) < frame_size) {
+    m_in->setFilePointer(0, seek_end);
+    return;
+  }
+
+  m_in->setFilePointer(sizeof(ivf::file_header_t)); // rewind to frame header
+
+  mtx::av1::parser_c parser{};
+  parser.debug_obu_types(*buffer);
+  parser.parse(*buffer);
+
+  if (!parser.headers_parsed() || !parser.has_dovi_rpu_header())
+    return;
+
+  auto hdr                = parser.get_dovi_rpu_header();
+  auto color_config       = parser.get_color_config();
+  auto frame_duration     = 1000000000ll * m_frame_rate_den / m_frame_rate_num;
+
+  uint64_t duration       = frame_duration >= 1000000 ? frame_duration : 1000000000ll / 25;
+
+  auto dovi_config_record = create_av1_dovi_configuration_record(hdr, m_width, m_height, color_config, duration);
+
+  auto mapping            = mtx::dovi::create_dovi_block_addition_mapping(dovi_config_record);
+
+  if (!mapping.is_valid())
+    return;
+
+  if (s_debug_dovi_configuration_record) {
+    hdr.dump();
+    dovi_config_record.dump();
+  }
+
+  m_block_addition_mappings.push_back(mapping);
 }

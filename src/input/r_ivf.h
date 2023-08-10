@@ -19,6 +19,7 @@
 #include "common/ivf.h"
 #include "common/mm_io.h"
 #include "merge/generic_reader.h"
+#include "merge/block_addition_mapping.h"
 
 class ivf_reader_c: public generic_reader_c {
 private:
@@ -28,6 +29,8 @@ private:
   codec_c m_codec;
   bool m_ok{};
   debugging_option_c m_debug{"ivf_reader"};
+
+  std::vector<block_addition_mapping_t> m_block_addition_mappings;
 
 public:
   virtual mtx::file_type_e get_format_type() const {
@@ -46,4 +49,6 @@ protected:
 
   void create_av1_packetizer();
   void create_vpx_packetizer();
+
+  void parse_first_av1_frame();
 };
