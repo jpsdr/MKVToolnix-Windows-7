@@ -22,8 +22,8 @@
   allowing the user to select the playlist to add will now show audio & video
   track properties as well (pixel dimensions for video; sampling frequency,
   channels for audio). Implements #3597.
-* mkvmerge: AV1: added support for reading Dolby Vision from AV1 OBU
-  streams. Patch by Quietvoid.
+* mkvmerge: AV1: added support for reading Dolby Vision from AV1 IVF & OBU
+  streams. Patches by Quietvoid.
 
 ## Bug fixes
 
