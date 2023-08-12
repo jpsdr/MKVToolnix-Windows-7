@@ -143,31 +143,28 @@ ivf_reader_c::identify() {
 
 void
 ivf_reader_c::parse_first_av1_frame() {
-  size_t remaining_bytes  = m_size - m_in->getFilePointer();
+  memory_cptr frame;
 
-  ivf::frame_header_t header;
-  if ((sizeof(ivf::frame_header_t) > remaining_bytes) || (m_in->read(&header, sizeof(ivf::frame_header_t)) != sizeof(ivf::frame_header_t)))
-    return;
+  auto prior_file_position = m_in->getFilePointer();
 
-  remaining_bytes        -= sizeof(ivf::frame_header_t);
-  uint32_t frame_size     = get_uint32_le(&header.frame_size);
+  try {
+    auto header_mem = m_in->read(sizeof(ivf::frame_header_t));
+    auto header     = reinterpret_cast<ivf::frame_header_t *>(header_mem->get_buffer());
+    auto frame_size = get_uint32_le(&header->frame_size);
+    frame           = m_in->read(frame_size);
 
-  if (remaining_bytes < frame_size) {
-    m_in->setFilePointer(0, seek_end);
-    return;
+  } catch (mtx::mm_io::exception &) {
   }
 
-  memory_cptr buffer = memory_c::alloc(frame_size);
-  if (m_in->read(buffer->get_buffer(), frame_size) < frame_size) {
-    m_in->setFilePointer(0, seek_end);
-    return;
-  }
+  m_in->setFilePointer(prior_file_position);
 
-  m_in->setFilePointer(sizeof(ivf::file_header_t)); // rewind to frame header
+  if (!frame)
+    // Not enough data was available in the file.
+    return;
 
   mtx::av1::parser_c parser{};
-  parser.debug_obu_types(*buffer);
-  parser.parse(*buffer);
+  parser.debug_obu_types(*frame);
+  parser.parse(*frame);
 
   if (!parser.headers_parsed() || !parser.has_dovi_rpu_header())
     return;
