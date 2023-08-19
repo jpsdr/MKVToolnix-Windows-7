@@ -77,7 +77,7 @@ class Controller
     duration = test_end - start
 
     show_message "#{@num_failed}/#{num_tests} failed (" + (num_tests > 0 ? (@num_failed * 100 / num_tests).to_s : "0") + "%). " +
-      "Tests took #{duration}s (#{start.strftime("%Y-%m-%m %H:%M:%S")} – #{test_end.strftime("%Y-%m-%m %H:%M:%S")})"
+      "Tests took #{duration}s (#{start.strftime("%Y-%m-%d %H:%M:%S")} – #{test_end.strftime("%Y-%m-%d %H:%M:%S")})"
   end
 
   def run_threads
