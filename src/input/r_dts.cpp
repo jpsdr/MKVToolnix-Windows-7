@@ -18,6 +18,7 @@
 #include "common/codec.h"
 #include "common/debugging.h"
 #include "common/dts.h"
+#include "common/endian.h"
 #include "common/id_info.h"
 #include "common/mm_io_x.h"
 #include "input/r_dts.h"
@@ -48,8 +49,8 @@ dts_reader_c::probe_file() {
 }
 
 dts_reader_c::dts_reader_c() {
-  m_af_buf[0] = memory_c::alloc(128 * 1024);
-  m_af_buf[1] = memory_c::alloc(128 * 1024);
+  m_af_buf[0] = memory_c::alloc(s_buf_size);
+  m_af_buf[1] = memory_c::alloc(s_buf_size);
   m_buf[0]    = reinterpret_cast<unsigned short *>(m_af_buf[0]->get_buffer());
   m_buf[1]    = reinterpret_cast<unsigned short *>(m_af_buf[1]->get_buffer());
 
@@ -60,7 +61,7 @@ void
 dts_reader_c::read_headers() {
   try {
     m_in->setFilePointer(m_current_chunk->data_start);
-    auto bytes_to_read = std::min<uint64_t>(m_current_chunk->data_size, m_af_buf[0]->get_size());
+    auto bytes_to_read = std::min<uint64_t>(m_current_chunk->data_size, s_buf_size);
     if (m_in->read(m_buf[m_cur_buf], bytes_to_read) != bytes_to_read)
       throw mtx::input::header_parsing_x();
     m_in->setFilePointer(m_current_chunk->data_start);
@@ -69,22 +70,53 @@ dts_reader_c::read_headers() {
     throw mtx::input::open_x();
   }
 
-  mtx::dts::detect(m_buf[m_cur_buf], m_af_buf[0]->get_size(), m_dts14_to_16, m_swap_bytes);
+  mtx::dts::detect(m_buf[m_cur_buf], s_buf_size, m_dts14_to_16, m_swap_bytes);
 
-  mxdebug_if(m_debug, fmt::format("DTS: 14->16 {0} swap {1} buf size {2}\n", m_dts14_to_16, m_swap_bytes, m_af_buf[0]->get_size()));
+  mxdebug_if(m_debug, fmt::format("DTS: 14->16 {0} swap {1} buf size {2}\n", m_dts14_to_16, m_swap_bytes, s_buf_size));
 
-  if (m_swap_bytes && (m_af_buf[0]->get_size() % 2))
-    m_af_buf[0]->set_size(m_af_buf[0]->get_size() - 1);
+  if (m_swap_bytes && (s_buf_size % 2))
+    m_af_buf[0]->set_size(s_buf_size - 1);
 
-  decode_buffer(m_af_buf[0]->get_size());
-  int pos = mtx::dts::find_header(reinterpret_cast<const unsigned char *>(m_buf[m_cur_buf]), m_af_buf[0]->get_size(), m_dtsheader);
+  decode_buffer(s_buf_size);
 
-  if (0 > pos)
-    throw mtx::input::header_parsing_x();
+  find_first_header_to_use();
 
   m_codec.set_specialization(m_dtsheader.get_codec_specialization());
 
   show_demuxer_info();
+}
+
+void
+dts_reader_c::find_first_header_to_use() {
+  int pos = mtx::dts::find_header(reinterpret_cast<const unsigned char *>(m_buf[m_cur_buf]), s_buf_size, m_dtsheader);
+
+  if (0 > pos)
+    throw mtx::input::header_parsing_x();
+
+  auto buf             = reinterpret_cast<unsigned char const *>(m_buf[m_cur_buf]);
+  auto core_search_pos = pos;
+  auto core_found      = false;
+
+  while (!core_found && ((core_search_pos + 4) <  static_cast<int>(s_buf_size))) {
+    auto sync_word = get_uint32_be(&buf[core_search_pos]);
+
+    mxdebug_if(m_debug, fmt::format("DTS: core search @ {0} sync word 0x{1:08x}\n", core_search_pos, sync_word));
+
+    if (sync_word == static_cast<uint32_t>(mtx::dts::sync_word_e::core)) {
+      pos        = core_search_pos;
+      core_found = true;
+      break;
+    }
+
+    auto next_header_pos = mtx::dts::find_header(&buf[core_search_pos + 4], s_buf_size - core_search_pos - 4, m_dtsheader);
+
+    if (next_header_pos < 0)
+      break;
+
+    core_search_pos += next_header_pos + 4;
+  }
+
+  mxdebug_if(m_debug, fmt::format("DTS: core found? {0} pos {1}\n", core_found, pos));
 }
 
 int

@@ -55,6 +55,8 @@ private:
   chunks_t m_chunks;
   chunks_t::const_iterator m_current_chunk;
 
+  static auto const s_buf_size = 128 * 1000;
+
 public:
   dts_reader_c();
 
@@ -76,4 +78,5 @@ protected:
   virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
   virtual int decode_buffer(size_t length);
+  virtual void find_first_header_to_use();
 };

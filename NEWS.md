@@ -36,6 +36,11 @@
   change them manually to whatever they wanted them to be. Additionally this
   forced the associated file to always be shown with an MKVToolNix icon. The
   GUI's own `.mtxcfg` files will still be registered. Fixes #3588.
+* mkvmerge: DTS reader: if a DTS stream doesn't start with a DTS core but a
+  sub-stream element (EXSS), the reader will now look for a core. If found,
+  it'll start processing from there instead of from the start. This fixes the
+  timestamp calculation if the sampling frequency in the core & in the
+  extensions are different. Fixes #3602.
 
 
 # Version 78.0 "Running" 2023-07-02
