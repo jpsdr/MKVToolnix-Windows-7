@@ -40,11 +40,13 @@ LOGFILE=${LOGFILE:-$(mktemp -p '' mkvtoolnix_setup_cross_compilation_env.XXXXXX)
 function update_mingw_cross_env {
   if [[ ! -d $INSTALL_DIR ]]; then
     echo Retrieving the M cross environment build scripts >> $LOGFILE
-    git clone https://gitlab.com/mbunkus/mxe $INSTALL_DIR >> $LOGFILE 2>&1
+    git clone --branch master https://gitlab.com/mbunkus/mxe $INSTALL_DIR >> $LOGFILE 2>&1
   else
     echo Updating the M cross environment build scripts >> $LOGFILE
     cd $INSTALL_DIR
-    git fetch >> $LOGFILE 2>&1 && git reset --hard >> $LOGFILE 2>&1
+    git fetch >> $LOGFILE 2>&1 \
+      && git reset --hard origin/master >> $LOGFILE 2>&1 \
+      && git config branch.$(git branch --show-current).merge refs/heads/master >> $LOGFILE 2>&1
   fi
 
   cd ${INSTALL_DIR}
