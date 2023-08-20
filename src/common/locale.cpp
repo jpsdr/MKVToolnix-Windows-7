@@ -314,8 +314,6 @@ void
 initialize_std_and_boost_filesystem_locales() {
   auto debug = debugging_c::requested("locale");
 
-  mxinfo(fmt::format("woohoo\n"));
-
   std::vector<std::string> locales_to_try{""};
 
 #if defined(SYS_UNIX)
