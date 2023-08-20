@@ -321,8 +321,8 @@ initialize_std_and_boost_filesystem_locales() {
   locales_to_try.emplace_back("C.UTF-8");
 #endif
 
-  auto boost_initialized = false;
-  auto ctype_initialized = false;
+  [[maybe_unused]] auto boost_initialized = false;
+  [[maybe_unused]] auto ctype_initialized = false;
 
   for (auto const &locale_name : locales_to_try) {
     if (std::setlocale(LC_CTYPE, locale_name.c_str())) {
