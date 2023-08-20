@@ -1,4 +1,4 @@
-# Version ?
+# Version 79.0 "Funeral Pyres" 2023-08-20
 
 ## New features and enhancements
 
