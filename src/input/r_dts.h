@@ -55,7 +55,7 @@ private:
   chunks_t m_chunks;
   chunks_t::const_iterator m_current_chunk;
 
-  static auto const s_buf_size = 128 * 1000;
+  static unsigned int const s_buf_size;
 
 public:
   dts_reader_c();

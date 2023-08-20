@@ -25,6 +25,8 @@
 #include "merge/input_x.h"
 #include "output/p_dts.h"
 
+unsigned int const dts_reader_c::s_buf_size = 128 * 1000;
+
 bool
 dts_reader_c::probe_file() {
   m_chunks        = scan_chunks(*m_in);
