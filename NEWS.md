@@ -2,16 +2,10 @@
 
 ## New features and enhancements
 
+* mkvmerge: AV1: added support for reading Dolby Vision from AV1 IVF & OBU
+  streams. Patches by Quietvoid.
 * mkvmerge: MPEG TS reader: added support for colors in teletext
   subtitles. Patch by Angela Schmid.
-* MKVToolNix GUI: header editor: in order to reduce confusion with users non
-  that versed in Matroska elements, the naming of the two "language" track
-  properties has been changed: the old element is now titled "Language
-  (obsolete)" & the current, IETF BCP 47 based one is simply called
-  "Language".
-* MKVToolNix GUI: preferences: you can now use the "delete" key to remove
-  entries from simple list widgets for strings (e.g. the list of recently used
-  destination directories).
 * MKVToolNix GUI: multiplexer: when adding files the GUI can automatically
   enable the "forced display" flag for subtitle tracks if the file name
   contains the word "forced" delimited by certain characters
@@ -22,11 +16,22 @@
   allowing the user to select the playlist to add will now show audio & video
   track properties as well (pixel dimensions for video; sampling frequency,
   channels for audio). Implements #3597.
-* mkvmerge: AV1: added support for reading Dolby Vision from AV1 IVF & OBU
-  streams. Patches by Quietvoid.
+* MKVToolNix GUI: header editor: in order to reduce confusion with users non
+  that versed in Matroska elements, the naming of the two "language" track
+  properties has been changed: the old element is now titled "Language
+  (obsolete)" & the current, IETF BCP 47 based one is simply called
+  "Language".
+* MKVToolNix GUI: preferences: you can now use the "delete" key to remove
+  entries from simple list widgets for strings (e.g. the list of recently used
+  destination directories).
 
 ## Bug fixes
 
+* mkvmerge: DTS reader: if a DTS stream doesn't start with a DTS core but a
+  sub-stream element (EXSS), the reader will now look for a core. If found,
+  it'll start processing from there instead of from the start. This fixes the
+  timestamp calculation if the sampling frequency in the core & in the
+  extensions are different. Fixes #3602.
 * MKVToolNix GUI: multiplexer: the "emphasis" and "stereoscopy" combo-boxes
   now have a much smaller minimum width, allowing to make the whole
   "properties" pane much smaller again. Fixes #3581.
@@ -36,11 +41,6 @@
   change them manually to whatever they wanted them to be. Additionally this
   forced the associated file to always be shown with an MKVToolNix icon. The
   GUI's own `.mtxcfg` files will still be registered. Fixes #3588.
-* mkvmerge: DTS reader: if a DTS stream doesn't start with a DTS core but a
-  sub-stream element (EXSS), the reader will now look for a core. If found,
-  it'll start processing from there instead of from the start. This fixes the
-  timestamp calculation if the sampling frequency in the core & in the
-  extensions are different. Fixes #3602.
 
 
 # Version 78.0 "Running" 2023-07-02
