@@ -1,3 +1,14 @@
+# Version ?
+
+## Bug fixes
+
+* build system: fixed detection of Qt6 if `clang` is used for compilation on
+  Linux. In that case Qt's `qmake` added a `gcc`-specific option that `clang`
+  doesn't understand, `-mno-direct-extern-access`. `configure` will now pass
+  the parameter `-spec linux-clang` to `qmake` so that it uses the correct
+  compiler flags.
+
+
 # Version 79.0 "Funeral Pyres" 2023-08-20
 
 ## New features and enhancements

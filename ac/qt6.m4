@@ -22,6 +22,15 @@ check_qt6() {
     return
   fi
 
+  QMAKE_SPEC=""
+  if "$QMAKE6" -query | grep -F -q "QMAKE_XSPEC:linux-g++"; then
+    if test x"$COMPILER_TYPE" = xclang; then
+      QMAKE_SPEC="-spec linux-clang"
+    else
+      QMAKE_SPEC="-spec linux-g++"
+    fi
+  fi
+
   rm -f src/mkvtoolnix-gui/static_plugins.cpp
   qmake_dir="`mktemp -d`"
 
@@ -57,7 +66,7 @@ EOT
   old_wd="$PWD"
   cd "$qmake_dir"
 
-  "$QMAKE6" -makefile -nocache configure_non_gui.pro > /dev/null
+  "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure_non_gui.pro > /dev/null
   result=$?
 
   if test $result = 0; then
@@ -81,7 +90,7 @@ HEADERS = configure.h
 SOURCES = configure.cpp
 EOT
 
-    "$QMAKE6" -makefile -nocache configure.pro > /dev/null 2> /dev/null
+    "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure.pro > /dev/null 2> /dev/null
     result2=$?
 
     if test $result2 != 0; then
@@ -106,7 +115,7 @@ HEADERS = configure.h
 SOURCES = configure.cpp
 EOT
 
-  "$QMAKE6" -makefile -nocache configure.pro > /dev/null
+  "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure.pro > /dev/null
   result2=$?
 
   if test $result2 = 0; then
@@ -119,7 +128,7 @@ EOT
     fi
   fi
 
-  "$QMAKE6" -query > "$qmake_dir/configure.properties"
+  "$QMAKE6" -query $QMAKE_SPEC > "$qmake_dir/configure.properties"
   result3=$?
 
   cd "$old_wd"
