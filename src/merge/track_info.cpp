@@ -28,6 +28,7 @@ track_info_c::track_info_c()
   , m_display_unit{generic_packetizer_c::ddu_pixels}
   , m_aspect_ratio_given{}
   , m_aspect_ratio_is_factor{}
+  , m_aspect_ratio_factor_applied{}
   , m_display_dimensions_given{}
   , m_display_dimensions_source{OPTION_SOURCE_NONE}
   , m_reset_timestamps{}
@@ -60,6 +61,7 @@ track_info_c::operator =(const track_info_c &src) {
   m_aspect_ratio                     = src.m_aspect_ratio;
   m_aspect_ratio_given               = false;
   m_aspect_ratio_is_factor           = false;
+  m_aspect_ratio_factor_applied      = src.m_aspect_ratio_factor_applied;
   m_display_dimensions_given         = false;
   m_display_dimensions_source        = src.m_display_dimensions_source;
 

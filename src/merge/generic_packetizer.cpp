@@ -1100,8 +1100,10 @@ generic_packetizer_c::set_headers() {
           if (!m_ti.m_aspect_ratio_given)
             m_ti.m_aspect_ratio = static_cast<double>(m_hvideo_pixel_width)                       / m_hvideo_pixel_height;
 
-          else if (m_ti.m_aspect_ratio_is_factor)
+          else if (m_ti.m_aspect_ratio_is_factor && !m_ti.m_aspect_ratio_factor_applied) {
             m_ti.m_aspect_ratio = static_cast<double>(m_hvideo_pixel_width) * m_ti.m_aspect_ratio / m_hvideo_pixel_height;
+            m_ti.m_aspect_ratio_factor_applied = true;
+          }
 
           if (m_ti.m_aspect_ratio > (static_cast<double>(m_hvideo_pixel_width) / m_hvideo_pixel_height)) {
             m_hvideo_display_width  = std::llround(m_hvideo_pixel_height * m_ti.m_aspect_ratio);

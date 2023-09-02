@@ -234,7 +234,7 @@ public:
   std::map<int64_t, display_properties_t> m_display_properties;
   double m_aspect_ratio;
   int m_display_width, m_display_height, m_display_unit;
-  bool m_aspect_ratio_given, m_aspect_ratio_is_factor, m_display_dimensions_given;
+  bool m_aspect_ratio_given, m_aspect_ratio_is_factor, m_aspect_ratio_factor_applied, m_display_dimensions_given;
   option_source_e m_display_dimensions_source;
 
   std::map<int64_t, timestamp_sync_t> m_timestamp_syncs; // As given on the command line
