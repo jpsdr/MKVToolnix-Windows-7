@@ -32,7 +32,7 @@ check_qt6() {
   fi
 
   rm -f src/mkvtoolnix-gui/static_plugins.cpp
-  qmake_dir="`mktemp -d`"
+  qmake_dir="`mktemp -d "${TMPDIR:-/tmp}/tmp.mkvtoolnix.XXXXXX"`"
 
   touch "$qmake_dir/configure.cpp" "$qmake_dir/configure.h"
 

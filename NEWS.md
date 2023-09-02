@@ -7,6 +7,8 @@
   doesn't understand, `-mno-direct-extern-access`. `configure` will now pass
   the parameter `-spec linux-clang` to `qmake` so that it uses the correct
   compiler flags.
+* build system: fixed the use of `mktemp` to be more portable to
+  e.g. macOS. Fixes #3608.
 
 
 # Version 79.0 "Funeral Pyres" 2023-08-20

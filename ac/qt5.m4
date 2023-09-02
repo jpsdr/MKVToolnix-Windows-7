@@ -25,7 +25,7 @@ check_qt5() {
     return
   fi
 
-  qmake_properties="`mktemp`"
+  qmake_properties="`mktemp "${TMPDIR:-/tmp}/tmp.mkvtoolnix.XXXXXX"`"
 
   "$QMAKE" -query > "$qmake_properties"
 
@@ -171,7 +171,7 @@ return 0;
   fi
 
   if test x"$QT_PKG_CONFIG_STATIC" != x; then
-    qmake_dir="`mktemp -d`"
+    qmake_dir="`mktemp -d "${TMPDIR:-/tmp}/tmp.mkvtoolnix.XXXXXX"`"
 
     if test x"$MINGW" = x1 && check_version 5.10.0 $moc_ver; then
       QTPLUGIN="qwindowsvistastyle"
