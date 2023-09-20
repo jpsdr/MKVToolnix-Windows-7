@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-4.2.0\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2023-07-27 13:21+0200\n"
+"POT-Creation-Date: 2023-09-20 12:07+0200\n"
 "PO-Revision-Date: 2018-05-02 15:51+0000\n"
 "Last-Translator: Moritz Bunkus <moritz@bunkus.org>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/lt/)\n"
@@ -1387,6 +1387,7 @@ msgid "\"Visual impaired\" flag:"
 msgstr ""
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:136
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:109
 #: src/mkvtoolnix-gui/merge/track_model.cpp:698
 #, no-c-format
 msgid "%1 Hz"
@@ -1398,6 +1399,7 @@ msgid "%1 automatic, %2 manual, %3 running"
 msgstr ""
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:139
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:112
 #: src/mkvtoolnix-gui/merge/track_model.cpp:707
 #, no-c-format
 msgid "%1 bit per sample"
@@ -1418,6 +1420,7 @@ msgstr[1] "2 baitai"
 msgstr[2] "2 baitai"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:137
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:110
 #: src/mkvtoolnix-gui/merge/track_model.cpp:702
 #, fuzzy, no-c-format
 msgid "%1 channel"
@@ -1444,6 +1447,7 @@ msgstr[1] "klaidų nėra"
 msgstr[2] "klaidų nėra"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:142
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:118
 #: src/mkvtoolnix-gui/merge/track_model.cpp:712
 #, fuzzy, no-c-format
 msgid "%1 pixels"
@@ -1520,12 +1524,12 @@ msgstr "&Nutraukti"
 msgid "&Acknowledge warnings and errors"
 msgstr "užbaigta, bet buvo įspėjimų"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:213
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:240
 #, no-c-format
 msgid "&Add"
 msgstr "Pri&dėti"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2369
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2370
 #, fuzzy, no-c-format
 msgid "&Add action"
 msgstr "Veiksmai"
@@ -1553,24 +1557,24 @@ msgstr "Esami priedai"
 msgid "&Add source files"
 msgstr "Esami priedai"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2329
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2330
 #: src/mkvtoolnix-gui/merge/input.cpp:1799
 #, fuzzy, no-c-format
 msgid "&Audio"
 msgstr "garsas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2299
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2304
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2300
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2305
 #, fuzzy, no-c-format
 msgid "&Audio tracks:"
 msgstr "Takelis"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2310
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2311
 #, fuzzy, no-c-format
 msgid "&Automatically set the destination file name"
 msgstr "Automatiškai parinkti išvestinos rinkmenos pavadinimą"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2307
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2308
 #, fuzzy, no-c-format
 msgid "&Boundary characters:"
 msgstr "Koduotė:"
@@ -1586,22 +1590,22 @@ msgstr ""
 msgid "&Chapter editor"
 msgstr "&Skyriai"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:181
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:182
 #, no-c-format
 msgid "&Chapter number of first created entry:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2346
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2347
 #, fuzzy, no-c-format
 msgid "&Character set for text files:"
 msgstr "Koduotė:"
 
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:149
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:150
 #, fuzzy, no-c-format
 msgid "&Character set:"
 msgstr "Koduotė:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2240
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2241
 #, fuzzy, no-c-format
 msgid "&Character sets"
 msgstr "Koduotė:"
@@ -1664,7 +1668,7 @@ msgstr "Dabartinė komandinė eilutė"
 msgid "&Configure available languages"
 msgstr "Tikrinti, ar yra programos atnaujinimų."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
 #, fuzzy, no-c-format
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "Derinti skyriaus laiko kodus"
@@ -1679,7 +1683,7 @@ msgstr "Turinio šifravimas"
 msgid "&Copy command line to clipboard"
 msgstr "&Komandinę eilutę nukopijuoti į iškarpinę"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:138
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:139
 #, fuzzy, no-c-format
 msgid "&Create a new multiplex settings tab for each directory"
 msgstr "Tankinimo nuostatas įrašyti į rinkmeną"
@@ -1733,7 +1737,7 @@ msgstr "Informacija apie segmentą"
 msgid "&Download"
 msgstr "Par&sisiųsti:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:185
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:186
 #, no-c-format
 msgid "&Duration of each entry in seconds:"
 msgstr ""
@@ -1743,7 +1747,7 @@ msgstr ""
 msgid "&Edit available actions to execute"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2228
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2229
 #, no-c-format
 msgid "&Elide text in tab headers of tab widgets"
 msgstr ""
@@ -1766,7 +1770,7 @@ msgstr[2] "Pašalinti elementą"
 msgid "&Enabled"
 msgstr "įgalinta"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2260
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2261
 #, no-c-format
 msgid "&Ensure at least one track of each type has its \"track enabled\" flag set"
 msgstr ""
@@ -1782,7 +1786,7 @@ msgstr ""
 msgid "&Expand all"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:391
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:392
 #, fuzzy, no-c-format
 msgid "&Extended language subtag:"
 msgstr "Kalbos"
@@ -1802,17 +1806,17 @@ msgstr ""
 msgid "&File name:"
 msgstr "Rinkmenos pavadinimas:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 #, fuzzy, no-c-format
 msgid "&First entry to renumber:"
 msgstr "&Naujas skyrius"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2213
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2214
 #, no-c-format
 msgid "&Font && size:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:384
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:385
 #, no-c-format
 msgid "&Free-form input"
 msgstr ""
@@ -1822,7 +1826,7 @@ msgstr ""
 msgid "&Generate sub-chapters"
 msgstr "skaidyti prieš skyrius"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:137
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:138
 #, no-c-format
 msgid "&Handle all files from all directories as a single list of files"
 msgstr ""
@@ -1848,7 +1852,7 @@ msgstr ""
 msgid "&Hidden"
 msgstr "paslėpta"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:385
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:386
 #, fuzzy, no-c-format
 msgid "&Individually selected components"
 msgstr "Pašalinti elementą"
@@ -1876,20 +1880,20 @@ msgstr "Darbo išvedimas"
 msgid "&Job queue"
 msgstr "Įtraukti į &darbų eilę"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:182
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:183
 #, no-c-format
 msgid "&Language of chapter names to replace:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:181
-#: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:113
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:182
+#: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:114
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2210
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:387
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:388
 #, fuzzy, no-c-format
 msgid "&Language:"
 msgstr "Kalba"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2236
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2237
 #, fuzzy, no-c-format
 msgid "&Languages"
 msgstr "Kalbos"
@@ -1900,7 +1904,7 @@ msgstr "Kalbos"
 msgid "&MIME type:"
 msgstr "MIME tipas:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2337
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2338
 #, no-c-format
 msgid "&Minimum playlist duration:"
 msgstr ""
@@ -1916,7 +1920,7 @@ msgstr ""
 msgid "&Multiplexer"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:205
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
 #, no-c-format
 msgid "&Multiply start and end timestamps by the following factor:"
 msgstr ""
@@ -1961,24 +1965,24 @@ msgstr "mkvmerge išvestis:"
 msgid "&Next multiplex settings"
 msgstr "skaidyti prieš skyrius"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:179
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:180
 #, fuzzy, no-c-format
 msgid "&Number of entries to renumber:"
 msgstr "&Naujas skyrius"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2325
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2326
 #, no-c-format
 msgid "&Only enable copying of tracks with specific languages by default"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2235
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2237
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2239
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2236
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2238
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2240
 #, no-c-format
 msgid "&Only include often used entries in selections"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2311
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2312
 #, no-c-format
 msgid "&Only use the first source file that contains a video track"
 msgstr ""
@@ -1991,7 +1995,7 @@ msgstr ""
 msgid "&Open Matroska or WebM file"
 msgstr "Atverti Matroska rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:116
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:117
 #, fuzzy, no-c-format
 msgid "&Open as new tabs in the header editor"
 msgstr "Užverti antraščių redagavimo priemonę"
@@ -2059,12 +2063,12 @@ msgstr "mkvmerge išvestis:"
 msgid "&Previous multiplex settings"
 msgstr "skaidyti prieš skyrius"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:389
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:390
 #, no-c-format
 msgid "&Private use:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:386
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:387
 #, no-c-format
 msgid "&Region:"
 msgstr ""
@@ -2089,7 +2093,7 @@ msgstr[0] "Pašalinti elementą"
 msgstr[1] "Pašalinti elementą"
 msgstr[2] "Pašalinti elementą"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
 #, fuzzy, no-c-format
 msgid "&Remove end timestamps"
 msgstr "laiko kodai"
@@ -2110,7 +2114,7 @@ msgstr[0] "pašalinti visas"
 msgstr[1] "pašalinti visas"
 msgstr[2] "pašalinti visas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2358
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2359
 #, no-c-format
 msgid "&Remove job from queue after completion:"
 msgstr ""
@@ -2125,7 +2129,7 @@ msgstr "Pašalinti elementą"
 msgid "&Remove selected edition or chapter"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:399
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:400
 #, no-c-format
 msgid "&Replace with normalized form"
 msgstr ""
@@ -2163,7 +2167,7 @@ msgstr "mkvmerge išvestis:"
 msgid "&Save settings"
 msgstr "Į&rašyti nuostatas\tCtrl-S"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2332
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2333
 #, no-c-format
 msgid "&Scan directory for other playlists:"
 msgstr ""
@@ -2173,7 +2177,7 @@ msgstr ""
 msgid "&Scan for other playlists"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:393
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:394
 #, fuzzy, no-c-format
 msgid "&Script:"
 msgstr "Aprašas:"
@@ -2188,7 +2192,7 @@ msgstr "Segmento takeliai"
 msgid "&Select all items"
 msgstr "Segmento takeliai"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:183
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:184
 #, no-c-format
 msgid "&Skip chapters flagged \"hidden\""
 msgstr ""
@@ -2198,7 +2202,7 @@ msgstr ""
 msgid "&Skip file"
 msgstr "Esami priedai"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 #, fuzzy, no-c-format
 msgid "&Sort chapters by their start and end timestamps"
 msgstr "Derinti skyriaus laiko kodus"
@@ -2216,18 +2220,18 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:182
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:183
 #, no-c-format
 msgid "&Start timestamp of first created entry:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2301
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2306
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2302
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2307
 #, fuzzy, no-c-format
 msgid "&Subtitle tracks:"
 msgstr "subtitrai"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2330
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2331
 #: src/mkvtoolnix-gui/merge/input.cpp:1800
 #, fuzzy, no-c-format
 msgid "&Subtitles"
@@ -2265,7 +2269,7 @@ msgstr "Informacija apie segmentą"
 msgid "&Validate values"
 msgstr "Nepavyko sukurti rinkmenos"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:388
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:389
 #, no-c-format
 msgid "&Variants:"
 msgstr ""
@@ -2275,14 +2279,14 @@ msgstr ""
 msgid "&Verbosity:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2328
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2329
 #: src/mkvtoolnix-gui/merge/input.cpp:1798
 #, fuzzy, no-c-format
 msgid "&Video"
 msgstr "vaizdo įrašas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2300
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2305
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2301
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2306
 #, fuzzy, no-c-format
 msgid "&Video tracks:"
 msgstr "Vaizdo takelis"
@@ -2297,7 +2301,7 @@ msgstr "mkvmerge išvestis:"
 msgid "&Volume:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2302
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2303
 #, fuzzy, no-c-format
 msgid "&When to set the language:"
 msgstr "Pasirinkite Matroska rinkmeną"
@@ -3188,7 +3192,7 @@ msgstr ""
 msgid "Actions for handling tags and chapters"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2339
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2340
 #, no-c-format
 msgid "Add &Blu-ray cover images as attachments"
 msgstr ""
@@ -3198,7 +3202,7 @@ msgstr ""
 msgid "Add &variable"
 msgstr "Galimos parinktys:"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:216
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:217
 #, fuzzy, no-c-format
 msgid "Add additional command line options for mkvmerge"
 msgstr "Pridėti komandinės eilutės parinkčių"
@@ -3213,17 +3217,17 @@ msgstr ""
 msgid "Add all files to the current multiplex settings"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:171
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:172
 #, no-c-format
 msgid "Add as additional &parts to an existing source file"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:117
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:118
 #, no-c-format
 msgid "Add as new &attachments to the current file"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:167
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:168
 #, no-c-format
 msgid "Add as new source fi&les to the current multiplex settings"
 msgstr ""
@@ -3317,19 +3321,19 @@ msgstr "Įtraukti į &darbų eilę"
 msgid "Adding chapter files"
 msgstr "(nauja skyriaus rinkmena)"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:134
 #: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:135
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:136
 #, no-c-format
 msgid "Adding directories via drag & drop or copy & paste"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2261
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2262
 #, fuzzy, no-c-format
 msgid "Adding files"
 msgstr "Klaida atveriant rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:164
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:165
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:166
 #, no-c-format
 msgid "Adding files via drag & drop or copy & paste"
 msgstr ""
@@ -3360,7 +3364,7 @@ msgstr ""
 msgid "Additional &modifications"
 msgstr "Kitos parinktys"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:215
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:216
 #, fuzzy, no-c-format
 msgid "Additional command line options"
 msgstr "Pridėti komandinės eilutės parinkčių"
@@ -3480,7 +3484,7 @@ msgstr "visų išeigų rinkmenoms"
 msgid "All elements in a tree-like structure"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:178
 #, fuzzy, no-c-format
 msgid "All entries"
 msgstr "prie visų rinkmenų"
@@ -3588,26 +3592,26 @@ msgstr ""
 msgid "Also using the correction file '{0}c'.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2265
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:173
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2266
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:174
 #, fuzzy, no-c-format
 msgid "Alwa&ys create new mutliplex settings for files containing video tracks"
 msgstr "Tankinimo nuostatas įrašyti į rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:118
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:174
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:139
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:119
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:175
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:140
 #, fuzzy, no-c-format
 msgid "Alwa&ys use the action selected above and don't ask again"
 msgstr "Pasirinkite įvedimo rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2351
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2352
 #, no-c-format
 msgid "Always &switch to the job output tool after starting one immediately"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2333
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:141
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2334
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:142
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:146
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:831
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:851
@@ -3626,7 +3630,7 @@ msgstr ""
 msgid "Always automatically replace with extended language subtags form"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2327
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2328
 #, no-c-format
 msgid "Always enable copying for all tracks of the following types regardless of their language:"
 msgstr ""
@@ -3636,23 +3640,23 @@ msgstr ""
 msgid "Always s&kip files"
 msgstr "Esami priedai"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2269
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2270
 #, no-c-format
 msgid "Always s&kip while attaching new files when attachment with same name exists"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2334
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:142
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2335
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
 #, no-c-format
 msgid "Always scan for other playlists"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2271
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2272
 #, fuzzy, no-c-format
 msgid "Always show the destination file controls &below tabs"
 msgstr "Leidžiama tik viena įvedimo rinkmena.\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2352
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2353
 #, no-c-format
 msgid "Always use a &default description when adding a job to the queue"
 msgstr ""
@@ -3759,7 +3763,7 @@ msgstr "Užverti antraščių redagavimo priemonę"
 msgid "Append media files"
 msgstr "Visos palaikomos įvairialypės terpės rinkmenos|%s%s|%s"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:170
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:171
 #, fuzzy, no-c-format
 msgid "Append to an e&xisting source file"
 msgstr "Atverti esamą Matroska rinkmeną"
@@ -3852,7 +3856,7 @@ msgstr "Nauji priedai"
 
 #: src/common/kax_element_names.cpp:243
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:109
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2268
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2269
 #: src/mkvtoolnix-gui/header_editor/attachments_page.cpp:20
 #: src/propedit/options.cpp:226
 #, no-c-format
@@ -3925,12 +3929,12 @@ msgstr ""
 msgid "Automatic MIME type recognition for '{0}': {1}\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2321
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2322
 #, fuzzy, no-c-format
 msgid "Automatically &clear the destination file name when the last file is removed"
 msgstr "Automatiškai parinkti išvestinos rinkmenos pavadinimą"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2291
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2292
 #, fuzzy, no-c-format
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "Automatiškai parinkti išvestinos rinkmenos pavadinimą"
@@ -3940,12 +3944,12 @@ msgstr "Automatiškai parinkti išvestinos rinkmenos pavadinimą"
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2290
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2291
 #, fuzzy, no-c-format
 msgid "Automatically set the file &title from source files"
 msgstr "Automatiškai parinkti išvestinos rinkmenos pavadinimą"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2292
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2293
 #, no-c-format
 msgid "Automatically set track &delays from source file name"
 msgstr ""
@@ -4077,7 +4081,7 @@ msgstr ""
 msgid "Blu-ray playlist files"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2338
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2339
 #, no-c-format
 msgid "Blu-rays"
 msgstr ""
@@ -4158,7 +4162,7 @@ msgstr "Derinti skyriaus laiko kodus"
 msgid "C&onfiguration active"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
 #, no-c-format
 msgid "C&onstrict or expand timestamps"
 msgstr ""
@@ -4174,7 +4178,7 @@ msgstr ""
 msgid "C&opy to clipboard"
 msgstr "&Kopijuoti į iškarpinę"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2238
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2239
 #, fuzzy, no-c-format
 msgid "C&ountries && regions"
 msgstr "Šalis:"
@@ -4383,7 +4387,7 @@ msgstr "Bendros takelio parinktys"
 msgid "Channels"
 msgstr "Kanalai: {0}"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:180
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:181
 #, no-c-format
 msgid "Chapter &number of first created entry:"
 msgstr ""
@@ -4415,7 +4419,7 @@ msgstr "&Skyriai"
 msgid "Chapter display"
 msgstr "Skyrių rinkmena:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2344
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2345
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:272
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:433
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:270
@@ -4458,7 +4462,7 @@ msgstr "Skyrių rinkmena:"
 msgid "Chapter language (IETF BCP 47)"
 msgstr "Skyrių rinkmena:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:202
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:203
 #, fuzzy, no-c-format
 msgid "Chapter mass modification"
 msgstr "Skyrių parinktys"
@@ -4574,7 +4578,7 @@ msgid "Chapter translate edition UID"
 msgstr "Skyrių parinktys"
 
 #: src/common/kax_element_names.cpp:281
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2295
 #: src/mkvtoolnix-gui/merge/track.cpp:682
 #: src/propedit/options.cpp:217
@@ -4621,7 +4625,7 @@ msgstr "&Tikrinti, ar yra atnaujinimų"
 msgid "Check for available updates"
 msgstr "Tikrinti, ar yra programos atnaujinimų."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2222
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2223
 #, fuzzy, no-c-format
 msgid "Check online for available &updates"
 msgstr "Tikrinti, ar yra programos atnaujinimų."
@@ -4646,7 +4650,7 @@ msgstr ", pozicija {0}"
 msgid "Chromaticity coordinates:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2249
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2250
 #, fuzzy, no-c-format
 msgid "Clearing settings auto&matically:"
 msgstr "Tankinimo nuostatas įrašyti į rinkmeną"
@@ -4661,7 +4665,7 @@ msgstr ""
 msgid "Close &all tabs"
 msgstr "Bendros parinktys"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2253
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2254
 #, fuzzy, no-c-format
 msgid "Close current settings"
 msgstr "Kodeko nuostatos: {0}"
@@ -4707,7 +4711,7 @@ msgstr ""
 msgid "Cluster timestamp"
 msgstr "laiko kodai"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:319
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:321
 #: src/mkvtoolnix-gui/merge/track_model.cpp:73
 #, fuzzy, no-c-format
 msgid "Codec"
@@ -4796,7 +4800,7 @@ msgstr "Vaizdo takelis"
 msgid "Color matrix coefficients:"
 msgstr "Vaizdo takelis"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2218
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2219
 #, fuzzy, no-c-format
 msgid "Color palette:"
 msgstr "kalba: {0}"
@@ -4846,7 +4850,7 @@ msgstr "užbaigta sėkmingai"
 msgid "Completed with warnings"
 msgstr "užbaigta, bet buvo įspėjimų"
 
-#: src/merge/generic_packetizer.cpp:1370
+#: src/merge/generic_packetizer.cpp:1372
 #, no-c-format, c++-format
 msgid "Compression failed: {0}\n"
 msgstr "Nepavyko suglaudinti: {0}\n"
@@ -5038,8 +5042,8 @@ msgstr ""
 msgid "Could not write to the destination file: {0} ({1})\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:73
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:330
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:74
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:332
 #: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:128
 #, no-c-format
 msgid "Cover image"
@@ -5070,17 +5074,17 @@ msgstr ""
 msgid "Create file without audio track"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:168
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:169
 #, fuzzy, no-c-format
 msgid "Create new &multiplex settings and add to those"
 msgstr "Tankinimo nuostatas įrašyti į rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:169
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:170
 #, fuzzy, no-c-format
 msgid "Create new multiplex settings for &each file"
 msgstr "Tankinimo nuostatas įrašyti į rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2251
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2252
 #, fuzzy, no-c-format
 msgid "Create new settings"
 msgstr "kurti naujus nustatymus"
@@ -5392,7 +5396,7 @@ msgstr "Skyrių numeriai:"
 msgid "DVDs"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2216
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2217
 #, no-c-format
 msgid "Dark"
 msgstr ""
@@ -5438,12 +5442,12 @@ msgstr ""
 msgid "Default"
 msgstr "Numatyta"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2227
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2228
 #, no-c-format
 msgid "Default IETF BCP 47 language editing &mode:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2287
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2288
 #, fuzzy, no-c-format
 msgid "Default additional co&mmand line options:"
 msgstr "Pridėti komandinės eilutės parinkčių"
@@ -5469,7 +5473,7 @@ msgstr "Numatyta"
 msgid "Default language (bogus element with invalid ID)"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2297
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2298
 #, fuzzy, no-c-format
 msgid "Default subtitle &charset to set:"
 msgstr "tekstiniai subtitrai"
@@ -5480,7 +5484,7 @@ msgstr "tekstiniai subtitrai"
 msgid "Default track"
 msgstr "Numatyta trukmė"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2298
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2299
 #, fuzzy, no-c-format
 msgid "Default track languages to set"
 msgstr "Nurodykite kalbą:"
@@ -5490,22 +5494,22 @@ msgstr "Nurodykite kalbą:"
 msgid "Default values"
 msgstr "Numatyta"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2340
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2341
 #, no-c-format
 msgid "Defaults for jobs saving info tool output to text files"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2347
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2348
 #, fuzzy, no-c-format
 msgid "Defaults for new chapter entries"
 msgstr "skaidyti prieš skyrius"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2286
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2287
 #, fuzzy, no-c-format
 msgid "Defaults for new multiplex settings"
 msgstr "skaidyti prieš skyrius"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2289
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2290
 #, fuzzy, no-c-format
 msgid "Defaults for newly added tracks"
 msgstr "skaidyti prieš skyrius"
@@ -5572,12 +5576,12 @@ msgstr ""
 msgid "Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und')."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2296
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2297
 #, fuzzy, no-c-format
 msgid "Derive \"forced display\" fla&g for subtitles from file names:"
 msgstr "Nurodykite kalbą:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
 #, no-c-format
 msgid "Derive &end timestamps from start timestamps"
 msgstr ""
@@ -5587,7 +5591,7 @@ msgstr ""
 msgid "Deriving track languages"
 msgstr "Nurodykite kalbą:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2303
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2304
 #, fuzzy, no-c-format
 msgid "Deriving track languages from file names"
 msgstr "Nurodykite kalbą:"
@@ -5599,8 +5603,8 @@ msgstr ""
 
 #: src/common/audio_emphasis.cpp:114
 #: src/common/stereo_mode.cpp:102
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:222
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:226
 #: src/mkvtoolnix-gui/jobs/model.cpp:110
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:93
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
@@ -5614,7 +5618,7 @@ msgstr "Aprašas"
 msgid "Description:"
 msgstr "Aprašas:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2314
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2315
 #, fuzzy, no-c-format
 msgid "Destination directory"
 msgstr "Išvestinos rinkmenos pavadinimas"
@@ -5624,7 +5628,7 @@ msgstr "Išvestinos rinkmenos pavadinimas"
 msgid "Destination file"
 msgstr "Išvestinos rinkmenos pavadinimas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2309
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2310
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:265
 #, fuzzy, no-c-format
 msgid "Destination file name"
@@ -5650,12 +5654,12 @@ msgstr "Išvestinos rinkmenos pavadinimas"
 msgid "Destination folders's absolute path"
 msgstr "Išvestinos rinkmenos pavadinimas"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:309
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:310
 #, no-c-format
 msgid "Details"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2267
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2268
 #, no-c-format
 msgid "Detect file name se&quences when adding multiple files"
 msgstr ""
@@ -5667,7 +5671,7 @@ msgstr ""
 msgid "Determine automatically"
 msgstr "Tankinimo nuostatas įrašyti į rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:222
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
 #, fuzzy, no-c-format
 msgid "Development hacks"
 msgstr "Segmento takeliai"
@@ -5684,7 +5688,7 @@ msgstr "Segmento takeliai"
 msgid "Dirac"
 msgstr "Dirac"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:326
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:95
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:67
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:113
@@ -5692,7 +5696,7 @@ msgstr "Dirac"
 msgid "Directory"
 msgstr "Katalogas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2317
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2318
 #, fuzzy, no-c-format
 msgid "Directory &relative to first source file's directory:"
 msgstr "tik prie pirmos"
@@ -5705,22 +5709,22 @@ msgstr "tik prie pirmos"
 msgid "Directory:"
 msgstr "Katalogas:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2293
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2294
 #, no-c-format
 msgid "Disable \"de&fault track\" flag for subtitle tracks"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2221
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2222
 #, fuzzy, no-c-format
 msgid "Disable &tooltips"
 msgstr "Prieinami vertimai:\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2294
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2295
 #, no-c-format
 msgid "Disable additional lossless c&ompression for all track types"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2220
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2221
 #, no-c-format
 msgid "Disable scaling for &high DPI displays"
 msgstr ""
@@ -5741,7 +5745,7 @@ msgstr "&Uždrausti"
 msgid "Disables lacing for all tracks."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:69
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:70
 #, no-c-format
 msgid "Disc library information selection"
 msgstr ""
@@ -5908,7 +5912,7 @@ msgstr "Parsisiuntimo URL:"
 msgid "Downloading release information"
 msgstr "Rodyti informaciją apie programą"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2345
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2346
 #, no-c-format
 msgid "Drop last entry from imported &Blu-ray playlists if it's near the end"
 msgstr ""
@@ -5926,12 +5930,12 @@ msgstr ""
 
 #: src/common/kax_element_names.cpp:87
 #: src/common/kax_element_names.cpp:267
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:308
 #, fuzzy, no-c-format
 msgid "Duration"
 msgstr "Trukmė:"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:310
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:311
 #: src/mkvtoolnix-gui/merge/output.cpp:273
 #, no-c-format
 msgid "Duration:"
@@ -5957,12 +5961,12 @@ msgstr "mkvmerge programa"
 msgid "E&xit"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
 #, no-c-format
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:394
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:395
 #, fuzzy, no-c-format
 msgid "E&xtensions:"
 msgstr "Parinktys"
@@ -6022,8 +6026,8 @@ msgstr ""
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:382
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:383
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:384
 #, fuzzy, no-c-format
 msgid "Edit language"
 msgstr "Kalba"
@@ -6146,22 +6150,22 @@ msgstr ""
 msgid "Enable appending and splitting FLAC tracks."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2323
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2324
 #, no-c-format
 msgid "Enable copying of items by their type"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2324
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2325
 #, no-c-format
 msgid "Enable copying of tracks by their language"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2295
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2296
 #, fuzzy, no-c-format
 msgid "Enable dialog &normalization gain removal for audio tracks"
 msgstr "Informacija apie segmentą"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2243
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2244
 #, no-c-format
 msgid "Enable language codes from &ISO 639-3 && 639-5"
 msgstr ""
@@ -6196,7 +6200,7 @@ msgstr "įgalinti visus"
 msgid "Enabling this option causes mkvmerge to keep that last entry."
 msgstr ""
 
-#: src/common/av1.h:45
+#: src/common/av1.h:47
 #, no-c-format
 msgid "Encountered OBUs with invalid data."
 msgstr ""
@@ -6221,7 +6225,7 @@ msgstr "Pabaiga:"
 msgid "English language name"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2320
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2321
 #, fuzzy, no-c-format
 msgid "Ensure the file name is &unique"
 msgstr "Automatiškai parinkti išvestinos rinkmenos pavadinimą"
@@ -6376,14 +6380,14 @@ msgstr "Klaidos:"
 msgid "Even if no audio tracks are present"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2361
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2365
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2362
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2366
 #, fuzzy, no-c-format
 msgid "Even if there were errors"
 msgstr "užbaigta, bet buvo įspėjimų"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2360
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2364
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2361
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2365
 #, fuzzy, no-c-format
 msgid "Even if there were warnings"
 msgstr "užbaigta, bet buvo įspėjimų"
@@ -6420,7 +6424,7 @@ msgstr ""
 msgid "Exception details:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2326
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2327
 #, fuzzy, no-c-format
 msgid "Exceptions"
 msgstr "Parinktys"
@@ -6468,7 +6472,7 @@ msgstr ""
 msgid "Executing actions"
 msgstr "Tankinimo programa: {0}"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2368
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2369
 #, no-c-format
 msgid "Executing actions after certain events"
 msgstr ""
@@ -6640,7 +6644,7 @@ msgstr "Vaizdo taškų plotis"
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2276
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2277
 #, fuzzy, no-c-format
 msgid "File && track colors"
 msgstr "Segmento takeliai"
@@ -6682,8 +6686,8 @@ msgid "File has not been modified"
 msgstr "Rinkmena nepakeista."
 
 #: src/common/kax_element_names.cpp:246
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:308
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:325
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:309
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:327
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:110
 #, no-c-format
 msgid "File name"
@@ -6692,7 +6696,7 @@ msgstr "Rinkmenos pavadinimas"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:514
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
 #: src/mkvtoolnix-gui/forms/info/tab.h:152
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:148
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 #, no-c-format
 msgid "File name:"
@@ -6964,9 +6968,9 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2210
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2241
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2248
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2211
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2242
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2249
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2195
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2204
 #, fuzzy, no-c-format
@@ -6978,12 +6982,12 @@ msgstr "Bendros takelio parinktys"
 msgid "General variables"
 msgstr "Bendros takelio parinktys"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:177
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:178
 #, fuzzy, no-c-format
 msgid "Generate sub-chapters"
 msgstr "skaidyti prieš skyrius"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:178
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:179
 #, no-c-format
 msgid "Generating a number of chapters spaced evenly apart"
 msgstr ""
@@ -6999,7 +7003,7 @@ msgstr "skaidyti prieš skyrius"
 msgid "Global options"
 msgstr "Bendros parinktys"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:217
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
 #, fuzzy, no-c-format
 msgid "Global output control"
 msgstr "Bendros parinktys"
@@ -7090,7 +7094,7 @@ msgstr ""
 msgid "Header &editor"
 msgstr "Antraščių redagavimas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2341
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2342
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:271
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:433
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
@@ -7172,13 +7176,13 @@ msgstr ""
 msgid "How chroma is sited vertically."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:321
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:323
 #: src/mkvtoolnix-gui/merge/track_model.cpp:78
 #, no-c-format
 msgid "ID"
 msgstr "Nr."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2242
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2243
 #, no-c-format
 msgid "IETF BCP 47 &normalization mode:"
 msgstr ""
@@ -7601,7 +7605,7 @@ msgstr ""
 msgid "If you often use the same values when splitting by size, you can enter them here."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:172
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:173
 #, no-c-format
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr ""
@@ -7621,17 +7625,17 @@ msgstr ""
 msgid "Imported picture from {0}"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2274
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2275
 #, no-c-format
 msgid "In &two fixed columns on the right of the files and tracks"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2273
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2274
 #, no-c-format
 msgid "In a &scrollable column on the right of the files and tracks"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2275
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2276
 #, no-c-format
 msgid "In a tab &widget below the files and tracks"
 msgstr ""
@@ -7689,7 +7693,7 @@ msgstr "mkvInfo"
 msgid "Information"
 msgstr "Vaizdo takelis"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:396
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:397
 #, fuzzy, no-c-format
 msgid "Information & Warnings:"
 msgstr "Vaizdo takelis"
@@ -7714,7 +7718,7 @@ msgstr ""
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2212
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2213
 #, fuzzy, no-c-format
 msgid "Interface &language:"
 msgstr "Sąsajos kalba:"
@@ -8190,7 +8194,7 @@ msgstr ""
 msgid "Jobs & job queue"
 msgstr "Įtraukti į &darbų eilę"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2350
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2351
 #, fuzzy, no-c-format
 msgid "Jobs and job output"
 msgstr "Darbo išvedimas"
@@ -8237,10 +8241,10 @@ msgstr "Takelio numeris"
 
 #: src/common/kax_element_names.cpp:210
 #: src/common/property_element.cpp:144
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2247
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:75
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:318
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:332
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2248
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:76
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:334
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:164
 #: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:126
 #: src/mkvtoolnix-gui/merge/track_model.cpp:76
@@ -8264,13 +8268,13 @@ msgstr "Kalbos"
 msgid "Language selected below"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2244
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2245
 #, fuzzy, no-c-format
 msgid "Language shortcuts"
 msgstr "Kalbos"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:308
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2349
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2350
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2309
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:83
 #, no-c-format
@@ -8288,8 +8292,8 @@ msgstr "Kalbos"
 msgid "Languages:"
 msgstr "Kalba"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2225
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2270
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2226
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2271
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:261
 #, no-c-format
 msgid "Layout"
@@ -8318,7 +8322,7 @@ msgstr[0] "2 baitai"
 msgstr[1] "2 baitai"
 msgstr[2] "2 baitai"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2215
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2216
 #, fuzzy, no-c-format
 msgid "Light"
 msgstr "dėšinė"
@@ -8400,7 +8404,7 @@ msgstr "liejama į rinkmeną \"%1\" kataloge \"%2\""
 msgid "Loading…"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2258
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2259
 #, no-c-format
 msgid "Location of MediaInfo &GUI:"
 msgstr ""
@@ -8453,7 +8457,7 @@ msgstr ""
 msgid "MKVToolNix GUI config files"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2209
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2210
 #, no-c-format
 msgid "MKVToolNix GUI preferences"
 msgstr ""
@@ -8535,7 +8539,7 @@ msgstr "MPEG-4"
 msgid "MPLS Blu-ray playlist"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2367
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2368
 #, fuzzy, no-c-format
 msgid "Ma&ximum number of concurrent jobs:"
 msgstr "didžiausias rinkmenų skaičius:"
@@ -8889,8 +8893,8 @@ msgstr ""
 msgid "Multiply this track's timestamps with a factor."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:180
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2348
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:181
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2349
 #, no-c-format
 msgid "Na&me template:"
 msgstr ""
@@ -8906,7 +8910,7 @@ msgstr ""
 msgid "Name"
 msgstr "Pavadinimas"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:183
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:184
 #, no-c-format
 msgid "Name tem&plate:"
 msgstr ""
@@ -8949,8 +8953,8 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2335
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2336
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:144
 #, no-c-format
 msgid "Never scan for other playlists"
 msgstr ""
@@ -8986,7 +8990,7 @@ msgstr "Tolesnio segmento UID:"
 msgid "Next segment's unique ID"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2250
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2251
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:36
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:52
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:90
@@ -9035,7 +9039,7 @@ msgstr ""
 msgid "No MIME type has been set for the attachment '{0}', and it could not be guessed.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2370
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2371
 #, fuzzy, no-c-format
 msgid "No actions have been added yet."
 msgstr ", pradėta %s"
@@ -9081,7 +9085,7 @@ msgstr "Versijos numeris nerastas.\n"
 msgid "No destination file name specified, will use attachment name.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:333
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:335
 #, no-c-format
 msgid "No disc library information was found."
 msgstr ""
@@ -9362,7 +9366,7 @@ msgstr ""
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr ""
 
-#: src/merge/generic_packetizer.cpp:1740
+#: src/merge/generic_packetizer.cpp:1742
 #, no-c-format, c++-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr ""
@@ -9388,7 +9392,7 @@ msgstr ""
 msgid "Nothing to do.\n"
 msgstr "Nėra ką daryti. \n"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:179
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:180
 #, fuzzy, no-c-format
 msgid "Nu&mber of entries to create:"
 msgstr "&Naujas skyrius"
@@ -9399,12 +9403,12 @@ msgstr "&Naujas skyrius"
 msgid "Number"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2211
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2212
 #, fuzzy, no-c-format
 msgid "Number of &recently used entries to remember:"
 msgstr "&Naujas skyrius"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:314
 #, fuzzy, no-c-format
 msgid "Number of chapters:"
 msgstr "&Naujas skyrius"
@@ -9471,8 +9475,8 @@ msgstr ""
 msgid "Only for I frames"
 msgstr "tik I kadrams"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2359
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2363
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2360
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2364
 #, no-c-format
 msgid "Only if the job completed successfully"
 msgstr ""
@@ -9658,14 +9662,14 @@ msgstr[0] "Užverti antraščių redagavimo priemonę"
 msgstr[1] "Užverti antraščių redagavimo priemonę"
 msgstr[2] "Užverti antraščių redagavimo priemonę"
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:113
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:114
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:115
 #, no-c-format
 msgid "Opening files or adding as attachments"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
 #, fuzzy, no-c-format
 msgid "Option"
 msgstr "Parinktys"
@@ -9694,7 +9698,7 @@ msgid "Opus (in Ogg) audio files"
 msgstr "Ogg/OGM garso/vaizdo rinkmenos"
 
 #: src/common/kax_element_names.cpp:168
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:326
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:328
 #, fuzzy, no-c-format
 msgid "Order"
 msgstr "T&varka: {0}"
@@ -9795,7 +9799,7 @@ msgstr ""
 msgid "Parse the whole file instead of relying on the index."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:398
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:399
 #, no-c-format
 msgid "Parser error:"
 msgstr ""
@@ -9882,7 +9886,7 @@ msgstr ""
 msgid "Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:322
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
 #, no-c-format
 msgid "Playlist items:"
 msgstr ""
@@ -9951,7 +9955,7 @@ msgstr ""
 msgid "Please select the actions to apply to the selected edition or chapter and all of its children."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:147
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:148
 #, no-c-format
 msgid "Please select the character set the following file is encoded in."
 msgstr ""
@@ -9961,7 +9965,7 @@ msgstr ""
 msgid "Position"
 msgstr ", pozicija {0}"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2272
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2273
 #, no-c-format
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr ""
@@ -9989,32 +9993,32 @@ msgstr ""
 msgid "Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:150
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
 #, no-c-format
 msgid "Pre&view:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2316
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2317
 #, fuzzy, no-c-format
 msgid "Pre&viously used destination directory"
 msgstr "Naudoti ankstesnį išvedimo katalogą"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2282
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2283
 #, fuzzy, no-c-format
 msgid "Predefined audio track names"
 msgstr "takelio pavadinimas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2285
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2286
 #, fuzzy, no-c-format
 msgid "Predefined split durations"
 msgstr "takelio pavadinimas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2284
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2285
 #, fuzzy, no-c-format
 msgid "Predefined split sizes"
 msgstr "takelio pavadinimas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2283
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2284
 #, fuzzy, no-c-format
 msgid "Predefined subtitle track names"
 msgstr "takelio pavadinimas"
@@ -10024,7 +10028,7 @@ msgstr "takelio pavadinimas"
 msgid "Predefined values"
 msgstr "takelio pavadinimas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2281
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2282
 #, fuzzy, no-c-format
 msgid "Predefined video track names"
 msgstr "takelio pavadinimas"
@@ -10065,7 +10069,7 @@ msgstr ""
 msgid "ProRes video"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2257
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2258
 #, no-c-format
 msgid "Probe &range percentage:"
 msgstr ""
@@ -10078,7 +10082,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2256
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2257
 #, fuzzy, no-c-format
 msgid "Process &priority:"
 msgstr "Proceso prioritetas:"
@@ -10165,6 +10169,7 @@ msgstr "Įrašyta su programa: {0}"
 msgid "Projection-specific data:"
 msgstr "Įrašyta su programa: {0}"
 
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:319
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:170
 #: src/mkvtoolnix-gui/merge/track_model.cpp:82
 #, no-c-format
@@ -10333,7 +10338,7 @@ msgstr ""
 msgid "RSA"
 msgstr ""
 
-#: src/common/av1.h:38
+#: src/common/av1.h:40
 #, no-c-format
 msgid "Raw OBUs without a size field are not supported."
 msgstr ""
@@ -10397,12 +10402,12 @@ msgstr "RealMedia"
 msgid "RealMedia audio/video files"
 msgstr "RealMedia garso/vaizdo rinkmenos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2322
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2323
 #, fuzzy, no-c-format
 msgid "Recent destination directories"
 msgstr "Nurodykite išvedimo rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2308
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2309
 #, fuzzy, no-c-format
 msgid "Recognized languages"
 msgstr "Kalba"
@@ -10488,7 +10493,7 @@ msgstr "Įrašyti į &Matroska rinkmeną"
 msgid "Remove &completed jobs"
 msgstr "Pašalinti skyrių"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
 #, fuzzy, no-c-format
 msgid "Remove &names"
 msgstr "Pašalinti elementą"
@@ -10514,12 +10519,12 @@ msgstr "prie visų rinkmenų"
 msgid "Remove a&ll jobs"
 msgstr "pašalinti visas"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2356
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2357
 #, fuzzy, no-c-format
 msgid "Remove com&pleted jobs older than x days:"
 msgstr "Pašalinti skyrių"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2357
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2358
 #, fuzzy, no-c-format
 msgid "Remove completed jobs from queue on &exit:"
 msgstr "Pašalinti skyrių"
@@ -10534,12 +10539,12 @@ msgstr "Informacija apie segmentą"
 msgid "Remove element"
 msgstr "Pašalinti elementą"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2252
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2253
 #, fuzzy, no-c-format
 msgid "Remove source files"
 msgstr "Esami priedai"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2355
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2356
 #, no-c-format
 msgid "Remove the output &file when a job ends with errors or when it is aborted"
 msgstr ""
@@ -10561,12 +10566,12 @@ msgstr "Įrašyti į &Matroska rinkmeną"
 msgid "Removing the chapters failed."
 msgstr "Pasirinkite skyriaus rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:175
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
 #, fuzzy, no-c-format
 msgid "Renumbering existing sub-chapters"
 msgstr "skaidyti prieš skyrius"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:175
 #, fuzzy, no-c-format
 msgid "Renumbering sub-chapters"
 msgstr "skaidyti prieš skyrius"
@@ -10611,7 +10616,7 @@ msgstr ""
 msgid "Reset the attachment values on this page to how they're saved in the file."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2354
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2355
 #, no-c-format
 msgid "Reset the warning and error &counters on exit"
 msgstr ""
@@ -10637,7 +10642,7 @@ msgstr ""
 msgid "Revert the entry to its default value."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2279
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2280
 #, no-c-format
 msgid "Revert to default colors"
 msgstr ""
@@ -10698,7 +10703,7 @@ msgstr ""
 msgid "Running jobs cannot be removed."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:203
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:204
 #, no-c-format
 msgid "S&hift start and end timestamps by the following amount:"
 msgstr ""
@@ -10708,7 +10713,7 @@ msgstr ""
 msgid "S&how command line"
 msgstr "Ro&dyti komandinę eilutę"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2266
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2267
 #, no-c-format
 msgid "S&ort files && tracks by track type when adding files"
 msgstr ""
@@ -10759,7 +10764,7 @@ msgstr "SSA/ASS tekstiniai subtitrai"
 msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2315
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2316
 #, fuzzy, no-c-format
 msgid "Sa&me directory as the first source file"
 msgstr "tik pirmai išeigos rinkmenai"
@@ -10789,12 +10794,12 @@ msgstr "Į&rašyti"
 msgid "Save as &XML file"
 msgstr "Įrašyti į &Matroska rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:226
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:227
 #, fuzzy, no-c-format
 msgid "Save as &default for new multiplex jobs"
 msgstr "skaidyti prieš skyrius"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:74
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:75
 #, fuzzy, no-c-format
 msgid "Save as &default for saving output to text files"
 msgstr "skaidyti prieš skyrius"
@@ -10868,12 +10873,12 @@ msgstr ""
 msgid "Saving the modified track headers failed."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:139
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
 #, no-c-format
 msgid "Scan directory for other playlists"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:303
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:304
 #, no-c-format
 msgid "Scanned Files"
 msgstr "Nuskaitytos rinkmenos"
@@ -10884,7 +10889,7 @@ msgstr "Nuskaitytos rinkmenos"
 msgid "Scanning directory"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2331
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2332
 #, no-c-format
 msgid "Scanning playlists"
 msgstr ""
@@ -11039,8 +11044,8 @@ msgstr "Pasirinkite Matroska rinkmeną"
 msgid "Select chapter file"
 msgstr "Pasirinkite Matroska rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:145
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:146
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:147
 #, fuzzy, no-c-format
 msgid "Select character set"
 msgstr "Pasirinkite Matroska rinkmeną"
@@ -11056,8 +11061,8 @@ msgstr "Nurodykite išvedimo rinkmeną"
 msgid "Select destination file name"
 msgstr "Nurodykite išvedimo rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:70
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:327
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:71
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:329
 #, no-c-format
 msgid "Select disc library information to use"
 msgstr ""
@@ -11074,12 +11079,12 @@ msgstr "Pasirinkite Matroska rinkmeną"
 msgid "Select existing file"
 msgstr "Pasirinkite Matroska rinkmeną"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:301
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
 #, fuzzy, no-c-format
 msgid "Select file to add"
 msgstr "Pasirinkite norimas pritaikyti reikšmes"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:303
 #, fuzzy, no-c-format
 msgid "Select one or more playlists to add"
 msgstr "Pasirinkite norimas pritaikyti reikšmes"
@@ -11165,7 +11170,7 @@ msgstr ""
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:204
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:205
 #, fuzzy, no-c-format
 msgid "Set the chapter names' &languages:"
 msgstr "Skyrių pavadinimai ir kalbos"
@@ -11236,7 +11241,7 @@ msgstr ""
 msgid "Settings"
 msgstr "Nuostatos: {0}"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:73
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:74
 #, no-c-format
 msgid "Settings for saving output to a text file"
 msgstr ""
@@ -11251,7 +11256,7 @@ msgstr ""
 msgid "Short AAC audio packet (length: {0} < {1})\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2230
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2231
 #, no-c-format
 msgid "Show &buttons for moving list view entries up and down"
 msgstr ""
@@ -11261,7 +11266,7 @@ msgstr ""
 msgid "Show &hex dump"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2353
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2354
 #, no-c-format
 msgid "Show &output of all jobs instead of current job only"
 msgstr ""
@@ -11297,12 +11302,12 @@ msgstr "Rodyti &visus elementus\tCtrl-A"
 msgid "Show all sub-elements (including cues & seek heads entries) and don't stop at the first cluster."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2343
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2344
 #, no-c-format
 msgid "Show dates && times in &UTC instead of the local time zone"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2224
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2225
 #, no-c-format
 msgid "Show debu&gging menu"
 msgstr ""
@@ -11347,7 +11352,7 @@ msgstr ""
 msgid "Show the size of each element including its header."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2229
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2230
 #, no-c-format
 msgid "Show the tool &selector"
 msgstr ""
@@ -11436,9 +11441,9 @@ msgstr "Paprastas skyrių analizatorius: {0}\n"
 msgid "Single field picture detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:72
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:305
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:329
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:73
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
 #: src/mkvtoolnix-gui/info/model.cpp:89
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:96
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:68
@@ -11450,7 +11455,7 @@ msgstr "Dydis:"
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:174
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:224
 #: src/mkvtoolnix-gui/forms/info/tab.h:153
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:312
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
 #: src/mkvtoolnix-gui/merge/output.cpp:265
 #, no-c-format
 msgid "Size:"
@@ -11630,7 +11635,7 @@ msgstr "Pradėta:"
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:395
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:396
 #: src/mkvtoolnix-gui/jobs/model.cpp:108
 #, no-c-format
 msgid "Status"
@@ -11638,14 +11643,14 @@ msgstr "Būsena"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:206
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:397
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:398
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:289
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:182
 #, no-c-format
 msgid "Status:"
 msgstr "Būsena:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2219
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2220
 #, no-c-format
 msgid "Stay on top of other &windows"
 msgstr ""
@@ -11788,7 +11793,7 @@ msgstr "TTA"
 msgid "TTA (The lossless True Audio codec)"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2226
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2227
 #, no-c-format
 msgid "Tab &position in tab widgets:"
 msgstr ""
@@ -12330,7 +12335,7 @@ msgstr ""
 msgid "The current multiplex settings will be closed."
 msgstr ""
 
-#: src/merge/generic_packetizer.cpp:1454
+#: src/merge/generic_packetizer.cpp:1456
 #, no-c-format, c++-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr ""
@@ -13720,12 +13725,12 @@ msgstr ""
 msgid "There's not enough space at the beginning of the file to fit the updated 'EBML head' element in."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
 #, no-c-format
 msgid "These are less often used options that control the output structure that mkvmerge creates."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #, no-c-format
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr ""
@@ -14130,8 +14135,8 @@ msgstr "Laiko kodai:"
 
 #: src/common/kax_element_names.cpp:98
 #: src/common/property_element.cpp:118
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:74
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:75
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:333
 #: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:127
 #, no-c-format
 msgid "Title"
@@ -14197,7 +14202,7 @@ msgstr "Ta&kelio pavadinimas:"
 msgid "Track"
 msgstr "Takeliai:"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:114
+#: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:115
 #, fuzzy, no-c-format
 msgid "Track &name (optional):"
 msgstr "Ta&kelio pavadinimas:"
@@ -14238,7 +14243,7 @@ msgstr "Takelio išgavimas"
 msgid "Track headers"
 msgstr "Takelio antraštės"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2246
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2247
 #, fuzzy, no-c-format
 msgid "Track name"
 msgstr "Ta&kelio pavadinimas:"
@@ -14386,7 +14391,7 @@ msgstr ""
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:316
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:317
 #, no-c-format
 msgid "Tracks:"
 msgstr "Takeliai:"
@@ -14413,7 +14418,7 @@ msgid "Two files multiplexed with the same settings and this switch activated wi
 msgstr ""
 
 #: src/common/kax_element_names.cpp:170
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:322
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:162
 #: src/mkvtoolnix-gui/jobs/model.cpp:111
 #: src/mkvtoolnix-gui/merge/track_model.cpp:74
@@ -14606,7 +14611,7 @@ msgstr "Naudojimas"
 msgid "Usage and examples"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2277
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2278
 #, fuzzy, no-c-format
 msgid "Use &file && track colors"
 msgstr "Segmento takeliai"
@@ -14616,7 +14621,7 @@ msgstr "Segmento takeliai"
 msgid "Use 'segment linking' for the resulting files."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2318
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2319
 #, fuzzy, no-c-format
 msgid "Use fi&xed directory:"
 msgstr "Naudoti šį išvedimo katalogą:"
@@ -14626,7 +14631,7 @@ msgstr "Naudoti šį išvedimo katalogą:"
 msgid "Use fixed values for the elements that change with each file otherwise (multiplexing date, segment UID, track UIDs etc.)."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2223
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2224
 #, no-c-format
 msgid "Use legac&y MIME types for font attachments"
 msgstr ""
@@ -14636,17 +14641,17 @@ msgstr ""
 msgid "Use legacy font MIME types when adding new attachments or replacing existing ones"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2214
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2215
 #, fuzzy, no-c-format
 msgid "Use system settings"
 msgstr "Kodeko nuostatos: {0}"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2312
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2313
 #, no-c-format
 msgid "Use the &title as the base file name if a title is set"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2313
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2314
 #, fuzzy, no-c-format
 msgid "Use the input file's &directory name instead of the file name"
 msgstr "Segmento takeliai"
@@ -14723,7 +14728,7 @@ msgstr ""
 msgid "Validation failed"
 msgstr "Patvirtinimas nepavyko"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 #, no-c-format
 msgid "Value"
 msgstr "Reikšmė"
@@ -15089,22 +15094,22 @@ msgstr "WAVPACK v4 garsas"
 msgid "WAVPACK4"
 msgstr "WAVPACK4"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2255
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2256
 #, no-c-format
 msgid "Warn about missing &audio tracks:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2233
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2234
 #, fuzzy, no-c-format
 msgid "Warn before &aborting running jobs"
 msgstr "Nutraukti po šio darbo"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2232
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2233
 #, no-c-format
 msgid "Warn before &closing modified tabs"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2234
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2235
 #, no-c-format
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr ""
@@ -15121,7 +15126,7 @@ msgstr ""
 msgid "Warning:"
 msgstr "Įspėjimas:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2231
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2232
 #, no-c-format
 msgid "Warnings"
 msgstr "Įspėjimai"
@@ -15156,12 +15161,12 @@ msgstr "WebM rinkmenos"
 msgid "WebVTT subtitles"
 msgstr "SRT subtitrai"
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:115
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:116
 #, no-c-format
 msgid "What do you want to do with the files you've dragged & dropped here?"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:166
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:167
 #, no-c-format
 msgid "What do you want to do with the files you've dragged & dropped or copied & pasted here?"
 msgstr ""
@@ -15171,7 +15176,7 @@ msgstr ""
 msgid "What do you want to do with the files?"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:141
 #, no-c-format
 msgid "What to do in the future:"
 msgstr ""
@@ -15181,7 +15186,7 @@ msgstr ""
 msgid "What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2342
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2343
 #, fuzzy, no-c-format
 msgid "When &dropping files:"
 msgstr "Klaida atveriant rinkmeną"
@@ -15196,17 +15201,17 @@ msgstr ", baigta %s"
 msgid "When a file is added its name is scanned."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2264
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2265
 #, no-c-format
 msgid "When adding d&irectories via drag && drop/copy && paste:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2262
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2263
 #, no-c-format
 msgid "When adding files via &drag && drop/copy && paste:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2263
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2264
 #, fuzzy, no-c-format
 msgid "When adding m&ultiple files via \"add source files\":"
 msgstr "Klaida atveriant rinkmeną"
@@ -15558,7 +15563,7 @@ msgstr ""
 msgid "You must select an existing file."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:136
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:137
 #, no-c-format
 msgid "You've dragged & dropped or copied & pasted at least one directory. There are several ways to handle them:"
 msgstr ""

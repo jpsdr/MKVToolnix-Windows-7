@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2023-07-27 13:21+0200\n"
+"POT-Creation-Date: 2023-09-20 12:07+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Daniel <danny3@tutanota.com>, 2016-2018,2021-2022\n"
 "Language-Team: Romanian (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ro/)\n"
@@ -1324,6 +1324,7 @@ msgid "\"Visual impaired\" flag:"
 msgstr ""
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:136
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:109
 #: src/mkvtoolnix-gui/merge/track_model.cpp:698
 #, no-c-format
 msgid "%1 Hz"
@@ -1335,6 +1336,7 @@ msgid "%1 automatic, %2 manual, %3 running"
 msgstr "%1 automate, %2 manuale, %3 în desfășurare"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:139
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:112
 #: src/mkvtoolnix-gui/merge/track_model.cpp:707
 #, no-c-format
 msgid "%1 bit per sample"
@@ -1355,6 +1357,7 @@ msgstr[1] "%1 octeți (%2)"
 msgstr[2] "%1 de octeți (%2)"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:137
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:110
 #: src/mkvtoolnix-gui/merge/track_model.cpp:702
 #, no-c-format
 msgid "%1 channel"
@@ -1381,6 +1384,7 @@ msgstr[1] "%1 erori"
 msgstr[2] "%1 de erori"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:142
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:118
 #: src/mkvtoolnix-gui/merge/track_model.cpp:712
 #, no-c-format
 msgid "%1 pixels"
@@ -1457,12 +1461,12 @@ msgstr "&Abandonează activitățile"
 msgid "&Acknowledge warnings and errors"
 msgstr "&Admite avertizările și erorile"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:213
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:240
 #, no-c-format
 msgid "&Add"
 msgstr "&Adaugă"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2369
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2370
 #, no-c-format
 msgid "&Add action"
 msgstr "&Adaugă acțiune"
@@ -1490,24 +1494,24 @@ msgstr "&Adăugare fișiere"
 msgid "&Add source files"
 msgstr "&Adăugare fișiere sursă"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2329
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2330
 #: src/mkvtoolnix-gui/merge/input.cpp:1799
 #, no-c-format
 msgid "&Audio"
 msgstr "&Audio"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2299
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2304
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2300
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2305
 #, no-c-format
 msgid "&Audio tracks:"
 msgstr "&Toate pistele audio:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2310
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2311
 #, no-c-format
 msgid "&Automatically set the destination file name"
 msgstr "Stabilește &automat numele fișierului de destinație"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2307
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2308
 #, fuzzy, no-c-format
 msgid "&Boundary characters:"
 msgstr "&Set de caractere:"
@@ -1523,22 +1527,22 @@ msgstr "&Renunță"
 msgid "&Chapter editor"
 msgstr "Editor de &capitole"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:181
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:182
 #, no-c-format
 msgid "&Chapter number of first created entry:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2346
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2347
 #, no-c-format
 msgid "&Character set for text files:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:149
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:150
 #, no-c-format
 msgid "&Character set:"
 msgstr "&Set de caractere:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2240
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2241
 #, no-c-format
 msgid "&Character sets"
 msgstr "&Seturi de caractere"
@@ -1601,7 +1605,7 @@ msgstr "Linie de &comandă:"
 msgid "&Configure available languages"
 msgstr "Verifică dacă există actualizări disponibile"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
 #, no-c-format
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr ""
@@ -1616,7 +1620,7 @@ msgstr "Criptare conținut"
 msgid "&Copy command line to clipboard"
 msgstr "&Copiază comanda în spațiul de transfer"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:138
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:139
 #, fuzzy, no-c-format
 msgid "&Create a new multiplex settings tab for each directory"
 msgstr "După aceea creează stabiliri &noi de multiplexare și închide-le pe cele actuale."
@@ -1670,7 +1674,7 @@ msgstr "Informații segment"
 msgid "&Download"
 msgstr "&Descarcă"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:185
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:186
 #, no-c-format
 msgid "&Duration of each entry in seconds:"
 msgstr "&Durata fiecărei intrări în secunde:"
@@ -1680,7 +1684,7 @@ msgstr "&Durata fiecărei intrări în secunde:"
 msgid "&Edit available actions to execute"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2228
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2229
 #, no-c-format
 msgid "&Elide text in tab headers of tab widgets"
 msgstr ""
@@ -1703,7 +1707,7 @@ msgstr[2] "Activ&ează elementele selectate"
 msgid "&Enabled"
 msgstr "&Activat"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2260
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2261
 #, no-c-format
 msgid "&Ensure at least one track of each type has its \"track enabled\" flag set"
 msgstr ""
@@ -1719,7 +1723,7 @@ msgstr "&Scapă argumentele pentru:"
 msgid "&Expand all"
 msgstr "&Extinde toate"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:391
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:392
 #, fuzzy, no-c-format
 msgid "&Extended language subtag:"
 msgstr "Eticheta limbii este valid."
@@ -1739,17 +1743,17 @@ msgstr "Întrebări &frecvente"
 msgid "&File name:"
 msgstr "Nume fișier:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 #, no-c-format
 msgid "&First entry to renumber:"
 msgstr "&Prima intrare de renumărat:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2213
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2214
 #, no-c-format
 msgid "&Font && size:"
 msgstr "&Font și dimensiune:"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:384
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:385
 #, no-c-format
 msgid "&Free-form input"
 msgstr ""
@@ -1759,7 +1763,7 @@ msgstr ""
 msgid "&Generate sub-chapters"
 msgstr "&Generează sub-capitole"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:137
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:138
 #, no-c-format
 msgid "&Handle all files from all directories as a single list of files"
 msgstr ""
@@ -1785,7 +1789,7 @@ msgstr ""
 msgid "&Hidden"
 msgstr "&Ascuns"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:385
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:386
 #, fuzzy, no-c-format
 msgid "&Individually selected components"
 msgstr "Activ&ează elementul selectat"
@@ -1813,20 +1817,20 @@ msgstr "Ieșirea &activităților"
 msgid "&Job queue"
 msgstr "&Coada activităților"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:182
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:183
 #, no-c-format
 msgid "&Language of chapter names to replace:"
 msgstr "&Limba numelor de capitole pentru înlocuire:"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:181
-#: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:113
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:182
+#: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:114
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2210
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:387
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:388
 #, no-c-format
 msgid "&Language:"
 msgstr "&Limbă:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2236
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2237
 #, no-c-format
 msgid "&Languages"
 msgstr "&Limbi"
@@ -1837,7 +1841,7 @@ msgstr "&Limbi"
 msgid "&MIME type:"
 msgstr "Tip &MIME:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2337
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2338
 #, no-c-format
 msgid "&Minimum playlist duration:"
 msgstr "Durată &minimă listă de redare:"
@@ -1853,7 +1857,7 @@ msgstr "&Mod:"
 msgid "&Multiplexer"
 msgstr "&Multiplexator"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:205
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
 #, no-c-format
 msgid "&Multiply start and end timestamps by the following factor:"
 msgstr ""
@@ -1898,24 +1902,24 @@ msgstr ""
 msgid "&Next multiplex settings"
 msgstr "Stabiliri de multiplexare &următoare"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:179
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:180
 #, no-c-format
 msgid "&Number of entries to renumber:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2325
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2326
 #, no-c-format
 msgid "&Only enable copying of tracks with specific languages by default"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2235
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2237
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2239
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2236
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2238
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2240
 #, no-c-format
 msgid "&Only include often used entries in selections"
 msgstr "Include d&oar intrările folosite frecvent în selecții"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2311
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2312
 #, no-c-format
 msgid "&Only use the first source file that contains a video track"
 msgstr ""
@@ -1928,7 +1932,7 @@ msgstr ""
 msgid "&Open Matroska or WebM file"
 msgstr "&Deschide Matroska sau fișier de capitole"
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:116
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:117
 #, no-c-format
 msgid "&Open as new tabs in the header editor"
 msgstr ""
@@ -1996,12 +2000,12 @@ msgstr ""
 msgid "&Previous multiplex settings"
 msgstr "Stabiliri de multiplexare &precedente"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:389
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:390
 #, no-c-format
 msgid "&Private use:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:386
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:387
 #, no-c-format
 msgid "&Region:"
 msgstr ""
@@ -2026,7 +2030,7 @@ msgstr[0] "&Elimină atașamentul"
 msgstr[1] "&Elimină atașamentele"
 msgstr[2] "&Elimină atașamentele"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
 #, fuzzy, no-c-format
 msgid "&Remove end timestamps"
 msgstr "coduri de timp"
@@ -2047,7 +2051,7 @@ msgstr[0] "&Elimină activitatea"
 msgstr[1] "&Elimină activitățile"
 msgstr[2] "&Elimină activitățile"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2358
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2359
 #, no-c-format
 msgid "&Remove job from queue after completion:"
 msgstr ""
@@ -2062,7 +2066,7 @@ msgstr "&Elimină atașamentul selectat"
 msgid "&Remove selected edition or chapter"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:399
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:400
 #, no-c-format
 msgid "&Replace with normalized form"
 msgstr ""
@@ -2100,7 +2104,7 @@ msgstr "&Salvează ieșirea"
 msgid "&Save settings"
 msgstr "&Salvează stabilirile"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2332
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2333
 #, no-c-format
 msgid "&Scan directory for other playlists:"
 msgstr "&Scanează directorul pentru alte liste de redare:"
@@ -2110,7 +2114,7 @@ msgstr "&Scanează directorul pentru alte liste de redare:"
 msgid "&Scan for other playlists"
 msgstr "&Scanează pentru alte liste de redare"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:393
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:394
 #, fuzzy, no-c-format
 msgid "&Script:"
 msgstr "&Descriere:"
@@ -2125,7 +2129,7 @@ msgstr "&Selectează toate atașamentele"
 msgid "&Select all items"
 msgstr "&Selectează toate elementele"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:183
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:184
 #, no-c-format
 msgid "&Skip chapters flagged \"hidden\""
 msgstr ""
@@ -2135,7 +2139,7 @@ msgstr ""
 msgid "&Skip file"
 msgstr "&Omite fișierul"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 #, no-c-format
 msgid "&Sort chapters by their start and end timestamps"
 msgstr ""
@@ -2153,18 +2157,18 @@ msgstr[0] "&Pornește activitatea automat"
 msgstr[1] "&Pornește activitățile automat"
 msgstr[2] "&Pornește activitățile automat"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:182
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:183
 #, no-c-format
 msgid "&Start timestamp of first created entry:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2301
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2306
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2302
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2307
 #, no-c-format
 msgid "&Subtitle tracks:"
 msgstr "Piste &subtitluri:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2330
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2331
 #: src/mkvtoolnix-gui/merge/input.cpp:1800
 #, no-c-format
 msgid "&Subtitles"
@@ -2202,7 +2206,7 @@ msgstr "Informații segment"
 msgid "&Validate values"
 msgstr "&Validează valorile"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:388
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:389
 #, no-c-format
 msgid "&Variants:"
 msgstr ""
@@ -2212,14 +2216,14 @@ msgstr ""
 msgid "&Verbosity:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2328
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2329
 #: src/mkvtoolnix-gui/merge/input.cpp:1798
 #, no-c-format
 msgid "&Video"
 msgstr "&Video"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2300
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2305
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2301
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2306
 #, no-c-format
 msgid "&Video tracks:"
 msgstr "Piste &video:"
@@ -2234,7 +2238,7 @@ msgstr "&Arată ieșirea"
 msgid "&Volume:"
 msgstr "&Volum:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2302
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2303
 #, no-c-format
 msgid "&When to set the language:"
 msgstr "&Când să fie stabilită limba:"
@@ -3125,7 +3129,7 @@ msgstr ""
 msgid "Actions for handling tags and chapters"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2339
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2340
 #, no-c-format
 msgid "Add &Blu-ray cover images as attachments"
 msgstr ""
@@ -3135,7 +3139,7 @@ msgstr ""
 msgid "Add &variable"
 msgstr "Adăugare &variabilă"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:216
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:217
 #, no-c-format
 msgid "Add additional command line options for mkvmerge"
 msgstr ""
@@ -3150,17 +3154,17 @@ msgstr ""
 msgid "Add all files to the current multiplex settings"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:171
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:172
 #, no-c-format
 msgid "Add as additional &parts to an existing source file"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:117
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:118
 #, no-c-format
 msgid "Add as new &attachments to the current file"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:167
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:168
 #, no-c-format
 msgid "Add as new source fi&les to the current multiplex settings"
 msgstr ""
@@ -3254,19 +3258,19 @@ msgstr "Adaugă la &coada de activități"
 msgid "Adding chapter files"
 msgstr "Adăugare fișiere capitole"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:134
 #: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:135
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:136
 #, no-c-format
 msgid "Adding directories via drag & drop or copy & paste"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2261
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2262
 #, fuzzy, no-c-format
 msgid "Adding files"
 msgstr "Adăugare fișiere etichete"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:164
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:165
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:166
 #, no-c-format
 msgid "Adding files via drag & drop or copy & paste"
 msgstr ""
@@ -3297,7 +3301,7 @@ msgstr ""
 msgid "Additional &modifications"
 msgstr " &Modificări adiționale"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:215
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:216
 #, no-c-format
 msgid "Additional command line options"
 msgstr "Opțiuni linie de comandă adiționale"
@@ -3417,7 +3421,7 @@ msgstr "Toate fișierele de destinație"
 msgid "All elements in a tree-like structure"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:178
 #, no-c-format
 msgid "All entries"
 msgstr "Toate intrările"
@@ -3525,26 +3529,26 @@ msgstr ""
 msgid "Also using the correction file '{0}c'.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2265
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:173
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2266
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:174
 #, fuzzy, no-c-format
 msgid "Alwa&ys create new mutliplex settings for files containing video tracks"
 msgstr "După aceea creează stabiliri &noi de multiplexare și închide-le pe cele actuale."
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:118
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:174
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:139
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:119
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:175
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:140
 #, no-c-format
 msgid "Alwa&ys use the action selected above and don't ask again"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2351
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2352
 #, no-c-format
 msgid "Always &switch to the job output tool after starting one immediately"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2333
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:141
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2334
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:142
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:146
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:831
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:851
@@ -3563,7 +3567,7 @@ msgstr ""
 msgid "Always automatically replace with extended language subtags form"
 msgstr "Eticheta limbii este valid."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2327
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2328
 #, no-c-format
 msgid "Always enable copying for all tracks of the following types regardless of their language:"
 msgstr ""
@@ -3573,23 +3577,23 @@ msgstr ""
 msgid "Always s&kip files"
 msgstr "Întreabă întotdeauna utilizatorul"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2269
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2270
 #, no-c-format
 msgid "Always s&kip while attaching new files when attachment with same name exists"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2334
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:142
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2335
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
 #, no-c-format
 msgid "Always scan for other playlists"
 msgstr "Scanează întotdeauna pentru alte liste de redare"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2271
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2272
 #, no-c-format
 msgid "Always show the destination file controls &below tabs"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2352
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2353
 #, no-c-format
 msgid "Always use a &default description when adding a job to the queue"
 msgstr "Folosește întotdeauna o descriere &implicită când se adaugă o activitate la coadă"
@@ -3696,7 +3700,7 @@ msgstr "Deschide fișierele în editorul de capitole"
 msgid "Append media files"
 msgstr "Anexează fișiere media"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:170
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:171
 #, no-c-format
 msgid "Append to an e&xisting source file"
 msgstr ""
@@ -3789,7 +3793,7 @@ msgstr ""
 
 #: src/common/kax_element_names.cpp:243
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:109
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2268
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2269
 #: src/mkvtoolnix-gui/header_editor/attachments_page.cpp:20
 #: src/propedit/options.cpp:226
 #, no-c-format
@@ -3862,12 +3866,12 @@ msgstr "Proprietăți audio, subtitlu, capitol"
 msgid "Automatic MIME type recognition for '{0}': {1}\n"
 msgstr "Recunoaștere automată a tipului MIME pentru „{0}”: {1}\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2321
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2322
 #, no-c-format
 msgid "Automatically &clear the destination file name when the last file is removed"
 msgstr "&Curăță automat numele de fișier când utimul fișier este eliminat"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2291
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2292
 #, no-c-format
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr ""
@@ -3877,12 +3881,12 @@ msgstr ""
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2290
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2291
 #, no-c-format
 msgid "Automatically set the file &title from source files"
 msgstr "Stabilește automat &titlul fișierului după fișierele sursă"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2292
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2293
 #, no-c-format
 msgid "Automatically set track &delays from source file name"
 msgstr ""
@@ -4014,7 +4018,7 @@ msgstr ""
 msgid "Blu-ray playlist files"
 msgstr "Fișiere listă de redare Blu-ray"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2338
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2339
 #, no-c-format
 msgid "Blu-rays"
 msgstr "Discuri Blu-ray"
@@ -4095,7 +4099,7 @@ msgstr ""
 msgid "C&onfiguration active"
 msgstr "C&onfigurație activă"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
 #, no-c-format
 msgid "C&onstrict or expand timestamps"
 msgstr ""
@@ -4111,7 +4115,7 @@ msgstr "C&ontinuă"
 msgid "C&opy to clipboard"
 msgstr "C&opiază în spațiul de transfer"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2238
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2239
 #, fuzzy, no-c-format
 msgid "C&ountries && regions"
 msgstr "Ță&ri"
@@ -4320,7 +4324,7 @@ msgstr "Poziție canale: {0}"
 msgid "Channels"
 msgstr "Canale"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:180
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:181
 #, no-c-format
 msgid "Chapter &number of first created entry:"
 msgstr ""
@@ -4352,7 +4356,7 @@ msgstr "Capitole: {0} intrare"
 msgid "Chapter display"
 msgstr "Fișier de capitole:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2344
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2345
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:272
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:433
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:270
@@ -4395,7 +4399,7 @@ msgstr "Limba capitolelor"
 msgid "Chapter language (IETF BCP 47)"
 msgstr "Traducere capitole"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:202
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:203
 #, no-c-format
 msgid "Chapter mass modification"
 msgstr ""
@@ -4511,7 +4515,7 @@ msgid "Chapter translate edition UID"
 msgstr "Traducere capitole"
 
 #: src/common/kax_element_names.cpp:281
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2295
 #: src/mkvtoolnix-gui/merge/track.cpp:682
 #: src/propedit/options.cpp:217
@@ -4558,7 +4562,7 @@ msgstr "Verifică dacă există &actualizări"
 msgid "Check for available updates"
 msgstr "Verifică dacă există actualizări disponibile"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2222
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2223
 #, no-c-format
 msgid "Check online for available &updates"
 msgstr "Verifică pe linie dacă există &actualizări"
@@ -4583,7 +4587,7 @@ msgstr "Decupare video în dreapta"
 msgid "Chromaticity coordinates:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2249
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2250
 #, no-c-format
 msgid "Clearing settings auto&matically:"
 msgstr "Curățarea stabilirilor auto&mată:"
@@ -4598,7 +4602,7 @@ msgstr ""
 msgid "Close &all tabs"
 msgstr "Etichete globale"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2253
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2254
 #, no-c-format
 msgid "Close current settings"
 msgstr "Închide stabilirile actuale"
@@ -4644,7 +4648,7 @@ msgstr ""
 msgid "Cluster timestamp"
 msgstr "coduri de timp"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:319
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:321
 #: src/mkvtoolnix-gui/merge/track_model.cpp:73
 #, no-c-format
 msgid "Codec"
@@ -4733,7 +4737,7 @@ msgstr "Matrice de culori: {0}"
 msgid "Color matrix coefficients:"
 msgstr "Matrice de culori: {0}"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2218
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2219
 #, fuzzy, no-c-format
 msgid "Color palette:"
 msgstr "Spațiu de culori: {0}"
@@ -4783,7 +4787,7 @@ msgstr "Terminată cu bine"
 msgid "Completed with warnings"
 msgstr "Terminată cu avertizări"
 
-#: src/merge/generic_packetizer.cpp:1370
+#: src/merge/generic_packetizer.cpp:1372
 #, no-c-format, c++-format
 msgid "Compression failed: {0}\n"
 msgstr "Comprimarea a eșuat: {0}\n"
@@ -4975,8 +4979,8 @@ msgstr ""
 msgid "Could not write to the destination file: {0} ({1})\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:73
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:330
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:74
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:332
 #: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:128
 #, no-c-format
 msgid "Cover image"
@@ -5007,17 +5011,17 @@ msgstr "Creați unul nou sau deschideți unul existent din meniul „Multiplexat
 msgid "Create file without audio track"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:168
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:169
 #, no-c-format
 msgid "Create new &multiplex settings and add to those"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:169
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:170
 #, no-c-format
 msgid "Create new multiplex settings for &each file"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2251
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2252
 #, no-c-format
 msgid "Create new settings"
 msgstr "Creează stabiliri noi"
@@ -5329,7 +5333,7 @@ msgstr "Numere capitol:"
 msgid "DVDs"
 msgstr "Discuri DVD"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2216
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2217
 #, no-c-format
 msgid "Dark"
 msgstr ""
@@ -5375,12 +5379,12 @@ msgstr ""
 msgid "Default"
 msgstr "Implicit"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2227
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2228
 #, no-c-format
 msgid "Default IETF BCP 47 language editing &mode:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2287
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2288
 #, no-c-format
 msgid "Default additional co&mmand line options:"
 msgstr "Opțiuni linie de co&mandă implicite:"
@@ -5406,7 +5410,7 @@ msgstr "Limba implicită"
 msgid "Default language (bogus element with invalid ID)"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2297
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2298
 #, no-c-format
 msgid "Default subtitle &charset to set:"
 msgstr "Set de &caractere implicit de stabilit:"
@@ -5417,7 +5421,7 @@ msgstr "Set de &caractere implicit de stabilit:"
 msgid "Default track"
 msgstr "Pistă implicită"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2298
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2299
 #, no-c-format
 msgid "Default track languages to set"
 msgstr "Limbile implicite pentru piste de stabilit"
@@ -5427,22 +5431,22 @@ msgstr "Limbile implicite pentru piste de stabilit"
 msgid "Default values"
 msgstr "Valori implicite"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2340
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2341
 #, no-c-format
 msgid "Defaults for jobs saving info tool output to text files"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2347
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2348
 #, no-c-format
 msgid "Defaults for new chapter entries"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2286
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2287
 #, no-c-format
 msgid "Defaults for new multiplex settings"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2289
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2290
 #, no-c-format
 msgid "Defaults for newly added tracks"
 msgstr "Valori implicite pentru pistele nou adăugate"
@@ -5509,12 +5513,12 @@ msgstr ""
 msgid "Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und')."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2296
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2297
 #, fuzzy, no-c-format
 msgid "Derive \"forced display\" fla&g for subtitles from file names:"
 msgstr "Limbile implicite pentru piste de stabilit"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
 #, no-c-format
 msgid "Derive &end timestamps from start timestamps"
 msgstr ""
@@ -5524,7 +5528,7 @@ msgstr ""
 msgid "Deriving track languages"
 msgstr "Limbile implicite pentru piste de stabilit"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2303
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2304
 #, fuzzy, no-c-format
 msgid "Deriving track languages from file names"
 msgstr "Limbile implicite pentru piste de stabilit"
@@ -5536,8 +5540,8 @@ msgstr ""
 
 #: src/common/audio_emphasis.cpp:114
 #: src/common/stereo_mode.cpp:102
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:222
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:226
 #: src/mkvtoolnix-gui/jobs/model.cpp:110
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:93
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
@@ -5551,7 +5555,7 @@ msgstr "Descriere"
 msgid "Description:"
 msgstr "Descriere:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2314
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2315
 #, no-c-format
 msgid "Destination directory"
 msgstr "Director de destinație"
@@ -5561,7 +5565,7 @@ msgstr "Director de destinație"
 msgid "Destination file"
 msgstr "Fișier de destinație"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2309
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2310
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:265
 #, no-c-format
 msgid "Destination file name"
@@ -5587,12 +5591,12 @@ msgstr "Fișierul de destinație:"
 msgid "Destination folders's absolute path"
 msgstr "Numele fișierului de destinație"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:309
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:310
 #, no-c-format
 msgid "Details"
 msgstr "Detalii"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2267
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2268
 #, no-c-format
 msgid "Detect file name se&quences when adding multiple files"
 msgstr ""
@@ -5604,7 +5608,7 @@ msgstr ""
 msgid "Determine automatically"
 msgstr "determină automat"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:222
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
 #, no-c-format
 msgid "Development hacks"
 msgstr ""
@@ -5621,7 +5625,7 @@ msgstr "De&zactivează toate atașamentele"
 msgid "Dirac"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:326
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:95
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:67
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:113
@@ -5629,7 +5633,7 @@ msgstr ""
 msgid "Directory"
 msgstr "Director"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2317
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2318
 #, no-c-format
 msgid "Directory &relative to first source file's directory:"
 msgstr "Director &relativ la directorul primului fișier sursă:"
@@ -5642,22 +5646,22 @@ msgstr "Director &relativ la directorul primului fișier sursă:"
 msgid "Directory:"
 msgstr "Director:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2293
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2294
 #, no-c-format
 msgid "Disable \"de&fault track\" flag for subtitle tracks"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2221
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2222
 #, fuzzy, no-c-format
 msgid "Disable &tooltips"
 msgstr "Dezactivează ani&mațiile"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2294
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2295
 #, no-c-format
 msgid "Disable additional lossless c&ompression for all track types"
 msgstr "Dezactivează c&omprimarea fără pierderi adițională pentru toate tipurile de piste"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2220
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2221
 #, no-c-format
 msgid "Disable scaling for &high DPI displays"
 msgstr ""
@@ -5678,7 +5682,7 @@ msgstr "Dezactivat"
 msgid "Disables lacing for all tracks."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:69
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:70
 #, no-c-format
 msgid "Disc library information selection"
 msgstr ""
@@ -5845,7 +5849,7 @@ msgstr "Adresă URL de descărcare:"
 msgid "Downloading release information"
 msgstr "Se descarcă informații lansări"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2345
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2346
 #, no-c-format
 msgid "Drop last entry from imported &Blu-ray playlists if it's near the end"
 msgstr ""
@@ -5863,12 +5867,12 @@ msgstr ""
 
 #: src/common/kax_element_names.cpp:87
 #: src/common/kax_element_names.cpp:267
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:308
 #, no-c-format
 msgid "Duration"
 msgstr "Durată"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:310
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:311
 #: src/mkvtoolnix-gui/merge/output.cpp:273
 #, no-c-format
 msgid "Duration:"
@@ -5894,12 +5898,12 @@ msgstr "E&xecută acum"
 msgid "E&xit"
 msgstr "Î&nchide programul"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
 #, no-c-format
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:394
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:395
 #, no-c-format
 msgid "E&xtensions:"
 msgstr "E&xtensii:"
@@ -5959,8 +5963,8 @@ msgstr ""
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:382
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:383
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:384
 #, no-c-format
 msgid "Edit language"
 msgstr "Modificare limbă"
@@ -6083,22 +6087,22 @@ msgstr ""
 msgid "Enable appending and splitting FLAC tracks."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2323
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2324
 #, fuzzy, no-c-format
 msgid "Enable copying of items by their type"
 msgstr "Activează copierea pistelor după limba lor"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2324
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2325
 #, no-c-format
 msgid "Enable copying of tracks by their language"
 msgstr "Activează copierea pistelor după limba lor"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2295
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2296
 #, fuzzy, no-c-format
 msgid "Enable dialog &normalization gain removal for audio tracks"
 msgstr "Informații segment"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2243
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2244
 #, no-c-format
 msgid "Enable language codes from &ISO 639-3 && 639-5"
 msgstr ""
@@ -6133,7 +6137,7 @@ msgstr "Activarea pistelor"
 msgid "Enabling this option causes mkvmerge to keep that last entry."
 msgstr ""
 
-#: src/common/av1.h:45
+#: src/common/av1.h:47
 #, no-c-format
 msgid "Encountered OBUs with invalid data."
 msgstr ""
@@ -6158,7 +6162,7 @@ msgstr "Sfârșit"
 msgid "English language name"
 msgstr "Nume limba engleză"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2320
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2321
 #, no-c-format
 msgid "Ensure the file name is &unique"
 msgstr "Asigură că numele fișierului este &unic"
@@ -6315,14 +6319,14 @@ msgstr "Erori:"
 msgid "Even if no audio tracks are present"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2361
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2365
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2362
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2366
 #, no-c-format
 msgid "Even if there were errors"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2360
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2364
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2361
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2365
 #, no-c-format
 msgid "Even if there were warnings"
 msgstr "Chiar dacă au fost avertizări"
@@ -6359,7 +6363,7 @@ msgstr ""
 msgid "Exception details:"
 msgstr "Detalii excepție:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2326
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2327
 #, no-c-format
 msgid "Exceptions"
 msgstr "Excepții"
@@ -6407,7 +6411,7 @@ msgstr "Execută acțiunea imediat."
 msgid "Executing actions"
 msgstr "Se execută acțiunile"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2368
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2369
 #, no-c-format
 msgid "Executing actions after certain events"
 msgstr ""
@@ -6579,7 +6583,7 @@ msgstr ""
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2276
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2277
 #, fuzzy, no-c-format
 msgid "File && track colors"
 msgstr "Piste silențioase"
@@ -6621,8 +6625,8 @@ msgid "File has not been modified"
 msgstr "Fișierul nu a fost modificat"
 
 #: src/common/kax_element_names.cpp:246
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:308
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:325
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:309
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:327
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:110
 #, no-c-format
 msgid "File name"
@@ -6631,7 +6635,7 @@ msgstr "Nume fișier"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:514
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
 #: src/mkvtoolnix-gui/forms/info/tab.h:152
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:148
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 #, no-c-format
 msgid "File name:"
@@ -6903,9 +6907,9 @@ msgstr ""
 msgid "General"
 msgstr "General"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2210
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2241
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2248
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2211
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2242
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2249
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2195
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2204
 #, no-c-format
@@ -6917,12 +6921,12 @@ msgstr "Opțiuni generale"
 msgid "General variables"
 msgstr "Variable generale"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:177
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:178
 #, no-c-format
 msgid "Generate sub-chapters"
 msgstr "Generează sub-capitole"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:178
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:179
 #, no-c-format
 msgid "Generating a number of chapters spaced evenly apart"
 msgstr ""
@@ -6938,7 +6942,7 @@ msgstr ""
 msgid "Global options"
 msgstr "Opțiuni globale"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:217
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
 #, no-c-format
 msgid "Global output control"
 msgstr "Control ieșire global"
@@ -7029,7 +7033,7 @@ msgstr ""
 msgid "Header &editor"
 msgstr "Editor de &antete"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2341
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2342
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:271
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:433
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
@@ -7111,13 +7115,13 @@ msgstr ""
 msgid "How chroma is sited vertically."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:321
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:323
 #: src/mkvtoolnix-gui/merge/track_model.cpp:78
 #, no-c-format
 msgid "ID"
 msgstr "ID"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2242
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2243
 #, no-c-format
 msgid "IETF BCP 47 &normalization mode:"
 msgstr ""
@@ -7540,7 +7544,7 @@ msgstr ""
 msgid "If you often use the same values when splitting by size, you can enter them here."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:172
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:173
 #, no-c-format
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr ""
@@ -7560,17 +7564,17 @@ msgstr "Font importat din {0}"
 msgid "Imported picture from {0}"
 msgstr "Imagine importată din {0}"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2274
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2275
 #, no-c-format
 msgid "In &two fixed columns on the right of the files and tracks"
 msgstr "În &două coloane fixe la dreapta fișierelor și pistelor"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2273
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2274
 #, no-c-format
 msgid "In a &scrollable column on the right of the files and tracks"
 msgstr "Într-o coloană &derulabilă la dreapta fișierelor și pistelor"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2275
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2276
 #, no-c-format
 msgid "In a tab &widget below the files and tracks"
 msgstr "Într-un &accesoriu de taburi sub fișiere și piste"
@@ -7628,7 +7632,7 @@ msgstr "Unealtă de informații"
 msgid "Information"
 msgstr "Informații"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:396
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:397
 #, no-c-format
 msgid "Information & Warnings:"
 msgstr "Informații și avertizări"
@@ -7653,7 +7657,7 @@ msgstr ""
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2212
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2213
 #, no-c-format
 msgid "Interface &language:"
 msgstr "&Limbă interfață:"
@@ -8129,7 +8133,7 @@ msgstr ""
 msgid "Jobs & job queue"
 msgstr "Activitățile și coada activităților"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2350
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2351
 #, no-c-format
 msgid "Jobs and job output"
 msgstr "Activități și ieșire activități"
@@ -8176,10 +8180,10 @@ msgstr "Număr pistă"
 
 #: src/common/kax_element_names.cpp:210
 #: src/common/property_element.cpp:144
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2247
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:75
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:318
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:332
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2248
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:76
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:334
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:164
 #: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:126
 #: src/mkvtoolnix-gui/merge/track_model.cpp:76
@@ -8203,13 +8207,13 @@ msgstr "Limba selectată mai jos"
 msgid "Language selected below"
 msgstr "Limba selectată mai jos"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2244
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2245
 #, fuzzy, no-c-format
 msgid "Language shortcuts"
 msgstr "&Limbi"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:308
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2349
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2350
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2309
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:83
 #, no-c-format
@@ -8227,8 +8231,8 @@ msgstr "Limbi"
 msgid "Languages:"
 msgstr "Limbi:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2225
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2270
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2226
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2271
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:261
 #, no-c-format
 msgid "Layout"
@@ -8257,7 +8261,7 @@ msgstr[0] "{0} octet"
 msgstr[1] "{0} octeți"
 msgstr[2] "{0} de octeți"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2215
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2216
 #, fuzzy, no-c-format
 msgid "Light"
 msgstr "Dreapta"
@@ -8339,7 +8343,7 @@ msgstr "Multiplexare către fișierul „%1” în directorul „%2”"
 msgid "Loading…"
 msgstr "Se încarcă…"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2258
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2259
 #, no-c-format
 msgid "Location of MediaInfo &GUI:"
 msgstr ""
@@ -8392,7 +8396,7 @@ msgstr ""
 msgid "MKVToolNix GUI config files"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2209
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2210
 #, no-c-format
 msgid "MKVToolNix GUI preferences"
 msgstr "Preferințe interfață MKVToolNix"
@@ -8474,7 +8478,7 @@ msgstr "MPEG-4"
 msgid "MPLS Blu-ray playlist"
 msgstr "Listă de redare MPLS Blu-ray"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2367
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2368
 #, fuzzy, no-c-format
 msgid "Ma&ximum number of concurrent jobs:"
 msgstr "Număr maxim de fișiere:"
@@ -8822,8 +8826,8 @@ msgstr ""
 msgid "Multiply this track's timestamps with a factor."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:180
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2348
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:181
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2349
 #, no-c-format
 msgid "Na&me template:"
 msgstr "Șablon nu&me:"
@@ -8839,7 +8843,7 @@ msgstr "Șablon nu&me:"
 msgid "Name"
 msgstr "Nume"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:183
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:184
 #, no-c-format
 msgid "Name tem&plate:"
 msgstr "Șab&lon nume:"
@@ -8882,8 +8886,8 @@ msgstr "Sunt permise valori negative."
 msgid "Never"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2335
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2336
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:144
 #, no-c-format
 msgid "Never scan for other playlists"
 msgstr "Nu scana niciodată pentru alte liste de redare"
@@ -8919,7 +8923,7 @@ msgstr ""
 msgid "Next segment's unique ID"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2250
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2251
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:36
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:52
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:90
@@ -8968,7 +8972,7 @@ msgstr ""
 msgid "No MIME type has been set for the attachment '{0}', and it could not be guessed.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2370
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2371
 #, no-c-format
 msgid "No actions have been added yet."
 msgstr "Nu a fost adăugată nicio acțiune deocamdată."
@@ -9014,7 +9018,7 @@ msgstr "Nu a fost găsit niciun indiciu.\n"
 msgid "No destination file name specified, will use attachment name.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:333
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:335
 #, no-c-format
 msgid "No disc library information was found."
 msgstr ""
@@ -9295,7 +9299,7 @@ msgstr ""
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr ""
 
-#: src/merge/generic_packetizer.cpp:1740
+#: src/merge/generic_packetizer.cpp:1742
 #, no-c-format, c++-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr ""
@@ -9321,7 +9325,7 @@ msgstr ""
 msgid "Nothing to do.\n"
 msgstr "Nimic de făcut.\n"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:179
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:180
 #, no-c-format
 msgid "Nu&mber of entries to create:"
 msgstr "Nu&măr de intrări de creat:"
@@ -9332,12 +9336,12 @@ msgstr "Nu&măr de intrări de creat:"
 msgid "Number"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2211
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2212
 #, fuzzy, no-c-format
 msgid "Number of &recently used entries to remember:"
 msgstr "Nu&măr de intrări de creat:"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:314
 #, no-c-format
 msgid "Number of chapters:"
 msgstr "Număr de capitole:"
@@ -9404,8 +9408,8 @@ msgstr "Sunt compatibile doar fișiere mai mici de 2 GiB."
 msgid "Only for I frames"
 msgstr "Doar pentru cadrele I"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2359
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2363
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2360
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2364
 #, no-c-format
 msgid "Only if the job completed successfully"
 msgstr "Doar dacă activitatea s-a terminat cu succes"
@@ -9587,14 +9591,14 @@ msgstr[0] "Se deschide %1 fișier în editorul de antete…"
 msgstr[1] "Se deschid %1 fișiere în editorul de antete…"
 msgstr[2] "Se deschid %1 de fișiere în editorul de antete…"
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:113
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:114
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:115
 #, no-c-format
 msgid "Opening files or adding as attachments"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
 #, no-c-format
 msgid "Option"
 msgstr "Opțiune"
@@ -9623,7 +9627,7 @@ msgid "Opus (in Ogg) audio files"
 msgstr ""
 
 #: src/common/kax_element_names.cpp:168
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:326
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:328
 #, no-c-format
 msgid "Order"
 msgstr "Ordonare"
@@ -9724,7 +9728,7 @@ msgstr "Numărul pachet {0} conține un antet FLAC nevalid și va fi omis.\n"
 msgid "Parse the whole file instead of relying on the index."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:398
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:399
 #, no-c-format
 msgid "Parser error:"
 msgstr ""
@@ -9811,7 +9815,7 @@ msgstr ""
 msgid "Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language."
 msgstr "Redoarele ar trebui să prefere pistele cu indicatorul de pistă implicită stabilit."
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:322
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
 #, no-c-format
 msgid "Playlist items:"
 msgstr "Elemente listă de redare:"
@@ -9880,7 +9884,7 @@ msgstr ""
 msgid "Please select the actions to apply to the selected edition or chapter and all of its children."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:147
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:148
 #, no-c-format
 msgid "Please select the character set the following file is encoded in."
 msgstr ""
@@ -9890,7 +9894,7 @@ msgstr ""
 msgid "Position"
 msgstr "Poziție"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2272
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2273
 #, no-c-format
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr "Poziția proprietăților pistei în tabul (pagina) „intrare”:"
@@ -9918,32 +9922,32 @@ msgstr ""
 msgid "Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:150
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
 #, no-c-format
 msgid "Pre&view:"
 msgstr "Pre&vizualizare:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2316
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2317
 #, no-c-format
 msgid "Pre&viously used destination directory"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2282
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2283
 #, fuzzy, no-c-format
 msgid "Predefined audio track names"
 msgstr "Nume pistă"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2285
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2286
 #, fuzzy, no-c-format
 msgid "Predefined split durations"
 msgstr "Nume pistă"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2284
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2285
 #, fuzzy, no-c-format
 msgid "Predefined split sizes"
 msgstr "Nume pistă"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2283
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2284
 #, fuzzy, no-c-format
 msgid "Predefined subtitle track names"
 msgstr "Nume pistă"
@@ -9953,7 +9957,7 @@ msgstr "Nume pistă"
 msgid "Predefined values"
 msgstr "Nume pistă"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2281
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2282
 #, fuzzy, no-c-format
 msgid "Predefined video track names"
 msgstr "Nume pistă"
@@ -9994,7 +9998,7 @@ msgstr ""
 msgid "ProRes video"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2257
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2258
 #, no-c-format
 msgid "Probe &range percentage:"
 msgstr ""
@@ -10007,7 +10011,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2256
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2257
 #, no-c-format
 msgid "Process &priority:"
 msgstr "&Prioritate proces:"
@@ -10094,6 +10098,7 @@ msgstr "Aplicație scriitoare: {0}"
 msgid "Projection-specific data:"
 msgstr "2: date private codec"
 
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:319
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:170
 #: src/mkvtoolnix-gui/merge/track_model.cpp:82
 #, no-c-format
@@ -10262,7 +10267,7 @@ msgstr ""
 msgid "RSA"
 msgstr ""
 
-#: src/common/av1.h:38
+#: src/common/av1.h:40
 #, no-c-format
 msgid "Raw OBUs without a size field are not supported."
 msgstr ""
@@ -10326,12 +10331,12 @@ msgstr ""
 msgid "RealMedia audio/video files"
 msgstr "Fișiere audio/video RealMedia"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2322
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2323
 #, fuzzy, no-c-format
 msgid "Recent destination directories"
 msgstr "Selectați director de destinație"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2308
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2309
 #, fuzzy, no-c-format
 msgid "Recognized languages"
 msgstr "Limbă"
@@ -10417,7 +10422,7 @@ msgstr ""
 msgid "Remove &completed jobs"
 msgstr "Elimină activitățile &terminate"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
 #, no-c-format
 msgid "Remove &names"
 msgstr "Elimină &numele"
@@ -10443,12 +10448,12 @@ msgstr "E&limină toate fișierele"
 msgid "Remove a&ll jobs"
 msgstr "Elimină toa&te activitățile"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2356
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2357
 #, no-c-format
 msgid "Remove com&pleted jobs older than x days:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2357
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2358
 #, fuzzy, no-c-format
 msgid "Remove completed jobs from queue on &exit:"
 msgstr "Elimină activitățile &terminate"
@@ -10463,12 +10468,12 @@ msgstr "Informații segment"
 msgid "Remove element"
 msgstr "Elimină elementul"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2252
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2253
 #, no-c-format
 msgid "Remove source files"
 msgstr "Elimină fișierele sursă"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2355
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2356
 #, no-c-format
 msgid "Remove the output &file when a job ends with errors or when it is aborted"
 msgstr ""
@@ -10490,12 +10495,12 @@ msgstr ""
 msgid "Removing the chapters failed."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:175
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
 #, no-c-format
 msgid "Renumbering existing sub-chapters"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:175
 #, no-c-format
 msgid "Renumbering sub-chapters"
 msgstr ""
@@ -10540,7 +10545,7 @@ msgstr "Restabilește toate coloanele"
 msgid "Reset the attachment values on this page to how they're saved in the file."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2354
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2355
 #, no-c-format
 msgid "Reset the warning and error &counters on exit"
 msgstr "Restabilește &numărătorii de avertizări și erori la ieșire"
@@ -10566,7 +10571,7 @@ msgstr ""
 msgid "Revert the entry to its default value."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2279
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2280
 #, no-c-format
 msgid "Revert to default colors"
 msgstr ""
@@ -10627,7 +10632,7 @@ msgstr "Activitățile în desfășurare nu pot fi editate."
 msgid "Running jobs cannot be removed."
 msgstr "Activitățile în desfășurare nu pot fi eliminate."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:203
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:204
 #, no-c-format
 msgid "S&hift start and end timestamps by the following amount:"
 msgstr ""
@@ -10637,7 +10642,7 @@ msgstr ""
 msgid "S&how command line"
 msgstr "Arată linia de &comandă"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2266
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2267
 #, no-c-format
 msgid "S&ort files && tracks by track type when adding files"
 msgstr ""
@@ -10688,7 +10693,7 @@ msgstr "Subtitluri text SSA/ASS"
 msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2315
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2316
 #, no-c-format
 msgid "Sa&me directory as the first source file"
 msgstr ""
@@ -10718,12 +10723,12 @@ msgstr "&Salvează"
 msgid "Save as &XML file"
 msgstr "Salvează ca fișier &XML"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:226
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:227
 #, no-c-format
 msgid "Save as &default for new multiplex jobs"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:74
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:75
 #, no-c-format
 msgid "Save as &default for saving output to text files"
 msgstr ""
@@ -10797,12 +10802,12 @@ msgstr ""
 msgid "Saving the modified track headers failed."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:139
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
 #, no-c-format
 msgid "Scan directory for other playlists"
 msgstr "Scanează directorul pentru alte liste de redare"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:303
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:304
 #, no-c-format
 msgid "Scanned Files"
 msgstr "Fișiere scanate"
@@ -10813,7 +10818,7 @@ msgstr "Fișiere scanate"
 msgid "Scanning directory"
 msgstr "Se scanează directorul"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2331
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2332
 #, no-c-format
 msgid "Scanning playlists"
 msgstr "Se scanează listele de redare"
@@ -10968,8 +10973,8 @@ msgstr "Selectați fișier audio"
 msgid "Select chapter file"
 msgstr "Selectați fișierul de capitole"
 
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:145
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:146
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:147
 #, no-c-format
 msgid "Select character set"
 msgstr "Selectați set de caractere"
@@ -10985,8 +10990,8 @@ msgstr "Selectați director de destinație"
 msgid "Select destination file name"
 msgstr "Selectați nume fișier de destinație"
 
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:70
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:327
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:71
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:329
 #, no-c-format
 msgid "Select disc library information to use"
 msgstr ""
@@ -11003,12 +11008,12 @@ msgstr "Selectați executabil"
 msgid "Select existing file"
 msgstr "Selectați fișier de etichete"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:301
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
 #, no-c-format
 msgid "Select file to add"
 msgstr "Selectați fișier de adăugat"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:303
 #, fuzzy, no-c-format
 msgid "Select one or more playlists to add"
 msgstr "Selectați fișier de adăugat"
@@ -11091,7 +11096,7 @@ msgstr ""
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:204
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:205
 #, no-c-format
 msgid "Set the chapter names' &languages:"
 msgstr ""
@@ -11162,7 +11167,7 @@ msgstr ""
 msgid "Settings"
 msgstr "Stabiliri"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:73
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:74
 #, no-c-format
 msgid "Settings for saving output to a text file"
 msgstr ""
@@ -11177,7 +11182,7 @@ msgstr ""
 msgid "Short AAC audio packet (length: {0} < {1})\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2230
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2231
 #, no-c-format
 msgid "Show &buttons for moving list view entries up and down"
 msgstr "Arată &butoane pentru a muta intrările dintr-o listă mai sus sau mai jos"
@@ -11187,7 +11192,7 @@ msgstr "Arată &butoane pentru a muta intrările dintr-o listă mai sus sau mai 
 msgid "Show &hex dump"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2353
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2354
 #, no-c-format
 msgid "Show &output of all jobs instead of current job only"
 msgstr "Arată i&eșirile tuturor activităților în loc de doar cea a activității actuale"
@@ -11223,12 +11228,12 @@ msgstr "Arată to&ate elementele"
 msgid "Show all sub-elements (including cues & seek heads entries) and don't stop at the first cluster."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2343
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2344
 #, no-c-format
 msgid "Show dates && times in &UTC instead of the local time zone"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2224
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2225
 #, no-c-format
 msgid "Show debu&gging menu"
 msgstr ""
@@ -11273,7 +11278,7 @@ msgstr ""
 msgid "Show the size of each element including its header."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2229
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2230
 #, no-c-format
 msgid "Show the tool &selector"
 msgstr "Arată &selectorul de unelte"
@@ -11362,9 +11367,9 @@ msgstr ""
 msgid "Single field picture detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:72
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:305
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:329
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:73
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
 #: src/mkvtoolnix-gui/info/model.cpp:89
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:96
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:68
@@ -11376,7 +11381,7 @@ msgstr "Dimensiune"
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:174
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:224
 #: src/mkvtoolnix-gui/forms/info/tab.h:153
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:312
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
 #: src/mkvtoolnix-gui/merge/output.cpp:265
 #, no-c-format
 msgid "Size:"
@@ -11556,7 +11561,7 @@ msgstr "Pornită la:"
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:395
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:396
 #: src/mkvtoolnix-gui/jobs/model.cpp:108
 #, no-c-format
 msgid "Status"
@@ -11564,14 +11569,14 @@ msgstr "Stare"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:206
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:397
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:398
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:289
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:182
 #, no-c-format
 msgid "Status:"
 msgstr "Stare:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2219
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2220
 #, no-c-format
 msgid "Stay on top of other &windows"
 msgstr ""
@@ -11714,7 +11719,7 @@ msgstr ""
 msgid "TTA (The lossless True Audio codec)"
 msgstr "TTA (Codecul audio fără piederi adevărat)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2226
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2227
 #, no-c-format
 msgid "Tab &position in tab widgets:"
 msgstr "Poziția taburilor în accesoriile de taburi:"
@@ -12244,7 +12249,7 @@ msgstr ""
 msgid "The current multiplex settings will be closed."
 msgstr "Stabilirile de multiplexare actuale vor fi închise."
 
-#: src/merge/generic_packetizer.cpp:1454
+#: src/merge/generic_packetizer.cpp:1456
 #, no-c-format, c++-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr ""
@@ -13632,12 +13637,12 @@ msgstr ""
 msgid "There's not enough space at the beginning of the file to fit the updated 'EBML head' element in."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
 #, no-c-format
 msgid "These are less often used options that control the output structure that mkvmerge creates."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #, no-c-format
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr ""
@@ -14042,8 +14047,8 @@ msgstr "Coduri de timp:"
 
 #: src/common/kax_element_names.cpp:98
 #: src/common/property_element.cpp:118
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:74
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:75
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:333
 #: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:127
 #, no-c-format
 msgid "Title"
@@ -14109,7 +14114,7 @@ msgstr "Nume pis&tă:"
 msgid "Track"
 msgstr "Piste:"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:114
+#: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:115
 #, fuzzy, no-c-format
 msgid "Track &name (optional):"
 msgstr "Nume pis&tă:"
@@ -14150,7 +14155,7 @@ msgstr "Extragere pistă"
 msgid "Track headers"
 msgstr "Antete pistă"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2246
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2247
 #, fuzzy, no-c-format
 msgid "Track name"
 msgstr "Nume pis&tă:"
@@ -14298,7 +14303,7 @@ msgstr "Pistele cu scheme de codare conținut nsprijinite (comprimare sau cripta
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr "Pistele cu scheme de codare conținut nsprijinite (comprimare sau criptare) nu pot fi extrase.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:316
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:317
 #, no-c-format
 msgid "Tracks:"
 msgstr "Piste:"
@@ -14325,7 +14330,7 @@ msgid "Two files multiplexed with the same settings and this switch activated wi
 msgstr ""
 
 #: src/common/kax_element_names.cpp:170
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:322
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:162
 #: src/mkvtoolnix-gui/jobs/model.cpp:111
 #: src/mkvtoolnix-gui/merge/track_model.cpp:74
@@ -14518,7 +14523,7 @@ msgstr "Folosință"
 msgid "Usage and examples"
 msgstr "Folosință și exemple"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2277
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2278
 #, fuzzy, no-c-format
 msgid "Use &file && track colors"
 msgstr "Piste silențioase"
@@ -14528,7 +14533,7 @@ msgstr "Piste silențioase"
 msgid "Use 'segment linking' for the resulting files."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2318
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2319
 #, no-c-format
 msgid "Use fi&xed directory:"
 msgstr "Folosește un director fi&x:"
@@ -14538,7 +14543,7 @@ msgstr "Folosește un director fi&x:"
 msgid "Use fixed values for the elements that change with each file otherwise (multiplexing date, segment UID, track UIDs etc.)."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2223
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2224
 #, fuzzy, no-c-format
 msgid "Use legac&y MIME types for font attachments"
 msgstr "Șterge unul sau mai multe atașamente"
@@ -14548,17 +14553,17 @@ msgstr "Șterge unul sau mai multe atașamente"
 msgid "Use legacy font MIME types when adding new attachments or replacing existing ones"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2214
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2215
 #, fuzzy, no-c-format
 msgid "Use system settings"
 msgstr "Stabiliri codec: {0}"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2312
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2313
 #, no-c-format
 msgid "Use the &title as the base file name if a title is set"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2313
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2314
 #, fuzzy, no-c-format
 msgid "Use the input file's &directory name instead of the file name"
 msgstr "&Curăță automat numele de fișier când utimul fișier este eliminat"
@@ -14635,7 +14640,7 @@ msgstr ""
 msgid "Validation failed"
 msgstr "Validarea a eșuat"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 #, no-c-format
 msgid "Value"
 msgstr "Valoare"
@@ -15001,22 +15006,22 @@ msgstr ""
 msgid "WAVPACK4"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2255
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2256
 #, no-c-format
 msgid "Warn about missing &audio tracks:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2233
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2234
 #, no-c-format
 msgid "Warn before &aborting running jobs"
 msgstr "Avertizează înainte de &abandonarea activitățiilor în desfășurare"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2232
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2233
 #, no-c-format
 msgid "Warn before &closing modified tabs"
 msgstr "Avertizează înainte de în&chiderea etichetelor cu modificări"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2234
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2235
 #, no-c-format
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "Avertizează înainte de &suprascrierea elementelor existente (fișiere, activități etc.)"
@@ -15033,7 +15038,7 @@ msgstr "Avertizare pe linia {0}: Codul de timp de început este mai mic decât a
 msgid "Warning:"
 msgstr "Avertizare:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2231
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2232
 #, no-c-format
 msgid "Warnings"
 msgstr "Avertizări"
@@ -15068,12 +15073,12 @@ msgstr "Fișiere WebM"
 msgid "WebVTT subtitles"
 msgstr "Subtitluri WebVTT"
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:115
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:116
 #, no-c-format
 msgid "What do you want to do with the files you've dragged & dropped here?"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:166
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:167
 #, no-c-format
 msgid "What do you want to do with the files you've dragged & dropped or copied & pasted here?"
 msgstr ""
@@ -15083,7 +15088,7 @@ msgstr ""
 msgid "What do you want to do with the files?"
 msgstr "Doriți să suprascrieți acest fișier?"
 
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:141
 #, no-c-format
 msgid "What to do in the future:"
 msgstr "Ce să se facă pe viitor:"
@@ -15093,7 +15098,7 @@ msgstr "Ce să se facă pe viitor:"
 msgid "What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2342
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2343
 #, no-c-format
 msgid "When &dropping files:"
 msgstr "Când se dă drumul la fișiere:"
@@ -15108,17 +15113,17 @@ msgstr "La &terminare…"
 msgid "When a file is added its name is scanned."
 msgstr "Când un fișier este adăugat numele lui este scanat."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2264
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2265
 #, no-c-format
 msgid "When adding d&irectories via drag && drop/copy && paste:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2262
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2263
 #, no-c-format
 msgid "When adding files via &drag && drop/copy && paste:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2263
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2264
 #, fuzzy, no-c-format
 msgid "When adding m&ultiple files via \"add source files\":"
 msgstr "Când se dă drumul la fișiere:"
@@ -15470,7 +15475,7 @@ msgstr ""
 msgid "You must select an existing file."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:136
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:137
 #, no-c-format
 msgid "You've dragged & dropped or copied & pasted at least one directory. There are several ways to handle them:"
 msgstr ""

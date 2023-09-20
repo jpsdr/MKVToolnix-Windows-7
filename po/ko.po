@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKVToolNix\n"
 "Report-Msgid-Bugs-To: Moritz Bunkus <moritz@bunkus.org>\n"
-"POT-Creation-Date: 2023-07-27 13:21+0200\n"
+"POT-Creation-Date: 2023-09-20 12:07+0200\n"
 "PO-Revision-Date: 2016-01-14 08:27+0000\n"
 "Last-Translator: Potato <sheppaul@naver.com>, 2016-2018\n"
 "Language-Team: Korean (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/ko/)\n"
@@ -1521,6 +1521,7 @@ msgid "\"Visual impaired\" flag:"
 msgstr ""
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:136
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:109
 #: src/mkvtoolnix-gui/merge/track_model.cpp:698
 #, no-c-format
 msgid "%1 Hz"
@@ -1532,6 +1533,7 @@ msgid "%1 automatic, %2 manual, %3 running"
 msgstr "자동 %1, 수동 %2, 실행 중 %3"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:139
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:112
 #: src/mkvtoolnix-gui/merge/track_model.cpp:707
 #, no-c-format
 msgid "%1 bit per sample"
@@ -1548,6 +1550,7 @@ msgid_plural "%1 bytes (%2)"
 msgstr[0] "%1 바이트 (%2)"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:137
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:110
 #: src/mkvtoolnix-gui/merge/track_model.cpp:702
 #, no-c-format
 msgid "%1 channel"
@@ -1568,6 +1571,7 @@ msgid_plural "%1 errors"
 msgstr[0] "오류 %1"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:142
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:118
 #: src/mkvtoolnix-gui/merge/track_model.cpp:712
 #, no-c-format
 msgid "%1 pixels"
@@ -1642,12 +1646,12 @@ msgstr "작업 취소(&A)"
 msgid "&Acknowledge warnings and errors"
 msgstr "경고와 오류 알리기(&A)"
 
-#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:213
+#: src/mkvtoolnix-gui/merge/select_playlist_dialog.cpp:240
 #, no-c-format
 msgid "&Add"
 msgstr "추가(&A)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2369
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2370
 #, no-c-format
 msgid "&Add action"
 msgstr "동작 추가(&A)"
@@ -1675,24 +1679,24 @@ msgstr "파일 추가(&A)"
 msgid "&Add source files"
 msgstr "소스 파일 추가(&A)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2329
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2330
 #: src/mkvtoolnix-gui/merge/input.cpp:1799
 #, no-c-format
 msgid "&Audio"
 msgstr "오디오(&A)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2299
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2304
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2300
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2305
 #, no-c-format
 msgid "&Audio tracks:"
 msgstr "오디오 트랙(&A):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2310
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2311
 #, no-c-format
 msgid "&Automatically set the destination file name"
 msgstr "대상 파일명을 자동으로 정하기(&A)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2307
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2308
 #, fuzzy, no-c-format
 msgid "&Boundary characters:"
 msgstr "문자셋(&C):"
@@ -1708,22 +1712,22 @@ msgstr "취소(&C)"
 msgid "&Chapter editor"
 msgstr "챕터 편집기(&C)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:181
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:182
 #, no-c-format
 msgid "&Chapter number of first created entry:"
 msgstr "최초 만든 항목의 챕터 번호(&C):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2346
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2347
 #, no-c-format
 msgid "&Character set for text files:"
 msgstr "텍스트 파일용 문자셋(&C):"
 
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:149
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:150
 #, no-c-format
 msgid "&Character set:"
 msgstr "문자셋(&C):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2240
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2241
 #, no-c-format
 msgid "&Character sets"
 msgstr "문자셋(&C)"
@@ -1786,7 +1790,7 @@ msgstr "명령행(&C):"
 msgid "&Configure available languages"
 msgstr "이용 가능한 업데이트가 있는지 확인합니다"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
 #, no-c-format
 msgid "&Constrict start and end timestamps of sub-chapters to their parent's start and end timestamps"
 msgstr "하위 챕터의 시작과 끝 타임스탬프를 그 부모의 시작과 끝 타임스탬프로 축소(&C)"
@@ -1801,7 +1805,7 @@ msgstr "내용 암호화"
 msgid "&Copy command line to clipboard"
 msgstr "명령-행을 클립보드에 복사(&C)"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:138
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:139
 #, fuzzy, no-c-format
 msgid "&Create a new multiplex settings tab for each directory"
 msgstr "각 파일에 대해 새 합치기 설정 탭을 하나 만들기"
@@ -1853,7 +1857,7 @@ msgstr "세그먼트 정보"
 msgid "&Download"
 msgstr "다운로드(&D)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:185
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:186
 #, no-c-format
 msgid "&Duration of each entry in seconds:"
 msgstr "각 항목의 재생 시간, 초 단위(&D):"
@@ -1863,7 +1867,7 @@ msgstr "각 항목의 재생 시간, 초 단위(&D):"
 msgid "&Edit available actions to execute"
 msgstr "실행할 이용 가능한 동작 편집(&E)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2228
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2229
 #, no-c-format
 msgid "&Elide text in tab headers of tab widgets"
 msgstr ""
@@ -1884,7 +1888,7 @@ msgstr[0] "선택한 첨부 파일 사용(&E)"
 msgid "&Enabled"
 msgstr "사용(&E)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2260
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2261
 #, no-c-format
 msgid "&Ensure at least one track of each type has its \"track enabled\" flag set"
 msgstr ""
@@ -1900,7 +1904,7 @@ msgstr "이스케이프 인수(&E):"
 msgid "&Expand all"
 msgstr "모두 확장(&E)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:391
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:392
 #, fuzzy, no-c-format
 msgid "&Extended language subtag:"
 msgstr "조사 범위 '{0}' 퍼센트는 무효합니다.\n"
@@ -1920,17 +1924,17 @@ msgstr "자주 묻는 질문(&F)"
 msgid "&File name:"
 msgstr "파일명(&F):"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
 #, no-c-format
 msgid "&First entry to renumber:"
 msgstr "다시 번호를 매길 처음 항목(&F):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2213
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2214
 #, no-c-format
 msgid "&Font && size:"
 msgstr "글꼴 && 크기(&F):"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:384
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:385
 #, no-c-format
 msgid "&Free-form input"
 msgstr ""
@@ -1940,7 +1944,7 @@ msgstr ""
 msgid "&Generate sub-chapters"
 msgstr "하위 챕터 만들기(&G)"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:137
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:138
 #, no-c-format
 msgid "&Handle all files from all directories as a single list of files"
 msgstr ""
@@ -1966,7 +1970,7 @@ msgstr "16진수 덤프(&H):"
 msgid "&Hidden"
 msgstr "숨김(&H)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:385
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:386
 #, fuzzy, no-c-format
 msgid "&Individually selected components"
 msgstr "선택한 첨부 파일 사용(&E)"
@@ -1994,20 +1998,20 @@ msgstr "작업 출력(&J)"
 msgid "&Job queue"
 msgstr "작업 대기열(&J)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:182
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:183
 #, no-c-format
 msgid "&Language of chapter names to replace:"
 msgstr "교체할 챕터 이름의 언어(&L):"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:181
-#: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:113
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:182
+#: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:114
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2210
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:387
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:388
 #, no-c-format
 msgid "&Language:"
 msgstr "언어(&L):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2236
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2237
 #, no-c-format
 msgid "&Languages"
 msgstr "언어(&L)"
@@ -2018,7 +2022,7 @@ msgstr "언어(&L)"
 msgid "&MIME type:"
 msgstr "&MIME 형식:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2337
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2338
 #, no-c-format
 msgid "&Minimum playlist duration:"
 msgstr "최소 재생목록 시간(&M):"
@@ -2034,7 +2038,7 @@ msgstr "모드(&M):"
 msgid "&Multiplexer"
 msgstr "합치기(&M)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:205
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
 #, no-c-format
 msgid "&Multiply start and end timestamps by the following factor:"
 msgstr "시작과 종료 타임스탬프를 다음 인수로 곱하기(&M):"
@@ -2079,24 +2083,24 @@ msgstr "다음 작업 출력 탭(&N)"
 msgid "&Next multiplex settings"
 msgstr "다음 합치기 설정(&N)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:179
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:180
 #, no-c-format
 msgid "&Number of entries to renumber:"
 msgstr "번호를 다시 매길 항목 개수(&N):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2325
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2326
 #, no-c-format
 msgid "&Only enable copying of tracks with specific languages by default"
 msgstr "기본적으로 지정한 언어의 트랙만 복사하기(&O)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2235
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2237
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2239
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2236
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2238
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2240
 #, no-c-format
 msgid "&Only include often used entries in selections"
 msgstr "선택항목에 자주 쓰는 항목만 포함하기(&O)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2311
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2312
 #, no-c-format
 msgid "&Only use the first source file that contains a video track"
 msgstr "비디오 트랙이 있는 첫 번째 소스 파일만 사용하기(&O)"
@@ -2109,7 +2113,7 @@ msgstr "비디오 트랙이 있는 첫 번째 소스 파일만 사용하기(&O)"
 msgid "&Open Matroska or WebM file"
 msgstr "Matroska나 WebM 파일 열기(&O)"
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:116
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:117
 #, no-c-format
 msgid "&Open as new tabs in the header editor"
 msgstr "헤더 편집기에서 새 탭으로 열기(&O)"
@@ -2177,12 +2181,12 @@ msgstr "이전 다음 작업 출력 탭(&P)"
 msgid "&Previous multiplex settings"
 msgstr "이전 합치기 설정(&P)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:389
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:390
 #, no-c-format
 msgid "&Private use:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:386
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:387
 #, no-c-format
 msgid "&Region:"
 msgstr ""
@@ -2205,7 +2209,7 @@ msgid "&Remove attachment"
 msgid_plural "&Remove attachments"
 msgstr[0] "첨부 파일 삭제(&R)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
 #, no-c-format
 msgid "&Remove end timestamps"
 msgstr "끝 타임스탬프 제거(&R)"
@@ -2222,7 +2226,7 @@ msgid "&Remove job"
 msgid_plural "&Remove jobs"
 msgstr[0] "작업 삭제(&R)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2358
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2359
 #, no-c-format
 msgid "&Remove job from queue after completion:"
 msgstr "작업 완료 후 대기열에서 삭제(&R):"
@@ -2237,7 +2241,7 @@ msgstr "선택한 첨부 파일 삭제(&R)"
 msgid "&Remove selected edition or chapter"
 msgstr "선택한 에디션이나 챕터 삭제(&R)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:399
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:400
 #, no-c-format
 msgid "&Replace with normalized form"
 msgstr ""
@@ -2275,7 +2279,7 @@ msgstr "출력 저장(&S)"
 msgid "&Save settings"
 msgstr "설정 저장(&S)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2332
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2333
 #, no-c-format
 msgid "&Scan directory for other playlists:"
 msgstr "다른 재생목록에 대해 폴더 검색(&S):"
@@ -2285,7 +2289,7 @@ msgstr "다른 재생목록에 대해 폴더 검색(&S):"
 msgid "&Scan for other playlists"
 msgstr "다른 재생목록 검사하기(&S)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:393
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:394
 #, fuzzy, no-c-format
 msgid "&Script:"
 msgstr "설명(&D):"
@@ -2300,7 +2304,7 @@ msgstr "모든 첨부 파일 선택(&S)"
 msgid "&Select all items"
 msgstr "모든 항목 선택(&S)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:183
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:184
 #, no-c-format
 msgid "&Skip chapters flagged \"hidden\""
 msgstr "\"감추기\" 표시된 챕터 건너뛰기(&S)"
@@ -2310,7 +2314,7 @@ msgstr "\"감추기\" 표시된 챕터 건너뛰기(&S)"
 msgid "&Skip file"
 msgstr "파일 건너뛰기(&S)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:206
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
 #, no-c-format
 msgid "&Sort chapters by their start and end timestamps"
 msgstr "그 시작과 끝 타임스탬프 순서로 챕터 정렬(&S)"
@@ -2326,18 +2330,18 @@ msgid "&Start job automatically"
 msgid_plural "&Start jobs automatically"
 msgstr[0] "작업 자동 시작(&S)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:182
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:183
 #, no-c-format
 msgid "&Start timestamp of first created entry:"
 msgstr "처음 만든 항목의 시작 타임스탬프(&S):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2301
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2306
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2302
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2307
 #, no-c-format
 msgid "&Subtitle tracks:"
 msgstr "자막 트랙(&S):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2330
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2331
 #: src/mkvtoolnix-gui/merge/input.cpp:1800
 #, no-c-format
 msgid "&Subtitles"
@@ -2375,7 +2379,7 @@ msgstr "세그먼트 정보"
 msgid "&Validate values"
 msgstr "값 검증(&V)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:388
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:389
 #, no-c-format
 msgid "&Variants:"
 msgstr ""
@@ -2385,14 +2389,14 @@ msgstr ""
 msgid "&Verbosity:"
 msgstr "상세 출력(&V):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2328
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2329
 #: src/mkvtoolnix-gui/merge/input.cpp:1798
 #, no-c-format
 msgid "&Video"
 msgstr "비디오(&V)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2300
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2305
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2301
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2306
 #, no-c-format
 msgid "&Video tracks:"
 msgstr "비디오 트랙(&V):"
@@ -2407,7 +2411,7 @@ msgstr "출력 보기(&v)"
 msgid "&Volume:"
 msgstr "볼륨(&V):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2302
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2303
 #, no-c-format
 msgid "&When to set the language:"
 msgstr "언어 설정시(&W):"
@@ -3296,7 +3300,7 @@ msgstr "속성을 처리하는 동작"
 msgid "Actions for handling tags and chapters"
 msgstr "테그와 챕터를 처리하는 동작"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2339
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2340
 #, no-c-format
 msgid "Add &Blu-ray cover images as attachments"
 msgstr ""
@@ -3306,7 +3310,7 @@ msgstr ""
 msgid "Add &variable"
 msgstr "변수 추가(&V)"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:216
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:217
 #, no-c-format
 msgid "Add additional command line options for mkvmerge"
 msgstr "mkvmerge에 추가 명령행 옵션을 추가합니다"
@@ -3321,17 +3325,17 @@ msgstr "모든 파일을 현재 탭의 새 첨부 파일로 추가"
 msgid "Add all files to the current multiplex settings"
 msgstr "모든 파일을 현재 합치기 설정에 추가"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:171
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:172
 #, no-c-format
 msgid "Add as additional &parts to an existing source file"
 msgstr "기존의 소스 파일에 추가적인 부분으로 추가(&P)"
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:117
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:118
 #, no-c-format
 msgid "Add as new &attachments to the current file"
 msgstr "현재 파일에 새 첨부 파일로 추가(&A)"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:167
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:168
 #, no-c-format
 msgid "Add as new source fi&les to the current multiplex settings"
 msgstr "현재 합치기 설정에 새 소스 파일로 추가(&L)"
@@ -3425,19 +3429,19 @@ msgstr "작업 대기열에 추가(&Q)"
 msgid "Adding chapter files"
 msgstr "챕터 파일 추가 중"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:134
 #: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:135
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:136
 #, no-c-format
 msgid "Adding directories via drag & drop or copy & paste"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2261
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2262
 #, fuzzy, no-c-format
 msgid "Adding files"
 msgstr "태그 파일 추가 중"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:164
 #: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:165
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:166
 #, no-c-format
 msgid "Adding files via drag & drop or copy & paste"
 msgstr ""
@@ -3468,7 +3472,7 @@ msgstr ""
 msgid "Additional &modifications"
 msgstr "추가 변경(&M)"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:215
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:216
 #, no-c-format
 msgid "Additional command line options"
 msgstr "추가 명령행 옵션"
@@ -3588,7 +3592,7 @@ msgstr "모든 대상 파일"
 msgid "All elements in a tree-like structure"
 msgstr "트리같은 구조의 모든 요소"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:177
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:178
 #, no-c-format
 msgid "All entries"
 msgstr "모든 항목"
@@ -3696,26 +3700,26 @@ msgstr "이 트랙의 챕터 정보와 태그에서 큐 시트 추출을 시도�
 msgid "Also using the correction file '{0}c'.\n"
 msgstr "수정 파일 '{0}c' 또한 사용 중입니다.\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2265
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:173
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2266
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:174
 #, fuzzy, no-c-format
 msgid "Alwa&ys create new mutliplex settings for files containing video tracks"
 msgstr "각 파일에 대해 새 합치기 설정 만들기(&E)"
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:118
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:174
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:139
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:119
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:175
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:140
 #, no-c-format
 msgid "Alwa&ys use the action selected above and don't ask again"
 msgstr "위에 선택한 동작을 항상 사용하고 다시 묻지 않기(&Y)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2351
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2352
 #, no-c-format
 msgid "Always &switch to the job output tool after starting one immediately"
 msgstr "작업을 시작함과 동시에 작업 출력 도구로 항상 전환하기(&S)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2333
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:141
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2334
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:142
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:146
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:831
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:851
@@ -3734,7 +3738,7 @@ msgstr ""
 msgid "Always automatically replace with extended language subtags form"
 msgstr "조사 범위 '{0}' 퍼센트는 무효합니다.\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2327
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2328
 #, no-c-format
 msgid "Always enable copying for all tracks of the following types regardless of their language:"
 msgstr "복사할 때 언어에 상관없이 다음 형식의 모든 트랙을 사용합니다."
@@ -3744,23 +3748,23 @@ msgstr "복사할 때 언어에 상관없이 다음 형식의 모든 트랙을 �
 msgid "Always s&kip files"
 msgstr "사용자에게 항상 묻기"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2269
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2270
 #, no-c-format
 msgid "Always s&kip while attaching new files when attachment with same name exists"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2334
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:142
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2335
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
 #, no-c-format
 msgid "Always scan for other playlists"
 msgstr "항상 다른 재생목록 검색하기"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2271
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2272
 #, no-c-format
 msgid "Always show the destination file controls &below tabs"
 msgstr "항상 탭 아래에 대상 파일 제어 보기(&B)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2352
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2353
 #, no-c-format
 msgid "Always use a &default description when adding a job to the queue"
 msgstr "작업을 대기열에 추가시 항상 기본 설명 사용하기(&D)"
@@ -3867,7 +3871,7 @@ msgstr "챕터 편집기에서 파일 열기"
 msgid "Append media files"
 msgstr "미디어 파일 결합하기"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:170
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:171
 #, no-c-format
 msgid "Append to an e&xisting source file"
 msgstr "기존의 소스 파일에 결합하기(&X)"
@@ -3960,7 +3964,7 @@ msgstr "같은 이름의 첨부 파일이 존재합니다"
 
 #: src/common/kax_element_names.cpp:243
 #: src/mkvtoolnix-gui/forms/header_editor/attachments_page.h:109
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2268
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2269
 #: src/mkvtoolnix-gui/header_editor/attachments_page.cpp:20
 #: src/propedit/options.cpp:226
 #, no-c-format
@@ -4033,12 +4037,12 @@ msgstr "오디오, 자막, 챕터 속성"
 msgid "Automatic MIME type recognition for '{0}': {1}\n"
 msgstr "'{0}'의 MIME 유형 자동 인식: {1}\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2321
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2322
 #, no-c-format
 msgid "Automatically &clear the destination file name when the last file is removed"
 msgstr "마지막 파일이 삭제될 때 자동으로 대상 파일명 지우기(&C)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2291
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2292
 #, no-c-format
 msgid "Automatically clea&r the file title when the last file is removed"
 msgstr "마지막 파일이 삭제될 때 자동으로 파일 제목 지우기(&R)"
@@ -4048,12 +4052,12 @@ msgstr "마지막 파일이 삭제될 때 자동으로 파일 제목 지우기(&
 msgid "Automatically enabling WebM compliance mode due to destination file name extension.\n"
 msgstr "대상 파일 이름의 확장자에 따라 표준 WebM 호환 모드를 자동으로 활성화합니다.\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2290
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2291
 #, no-c-format
 msgid "Automatically set the file &title from source files"
 msgstr "소스 파일에서 파일 제목을 자동으로 정하기(&T)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2292
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2293
 #, no-c-format
 msgid "Automatically set track &delays from source file name"
 msgstr "소스 파일명에서 트랙 지연 시간을 자동으로 정하기(&D)"
@@ -4185,7 +4189,7 @@ msgstr "블루레이 인덱스 파일"
 msgid "Blu-ray playlist files"
 msgstr "블루레이 재생목록 파일"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2338
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2339
 #, no-c-format
 msgid "Blu-rays"
 msgstr ""
@@ -4266,7 +4270,7 @@ msgstr "타임코드에 기반한 부분들로"
 msgid "C&onfiguration active"
 msgstr "설정 활성화하기(&O)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:207
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:208
 #, no-c-format
 msgid "C&onstrict or expand timestamps"
 msgstr "타임스탬프 축소 또는 확장(&O)"
@@ -4282,7 +4286,7 @@ msgstr ""
 msgid "C&opy to clipboard"
 msgstr "클립보드로 복사(&O)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2238
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2239
 #, fuzzy, no-c-format
 msgid "C&ountries && regions"
 msgstr "국가(&O)"
@@ -4491,7 +4495,7 @@ msgstr "채널 위치"
 msgid "Channels"
 msgstr "채널"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:180
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:181
 #, no-c-format
 msgid "Chapter &number of first created entry:"
 msgstr "최초 만든 항목의 챕터 번호(&N):"
@@ -4523,7 +4527,7 @@ msgstr "챕터 국가"
 msgid "Chapter display"
 msgstr "챕터 표시"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2344
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2345
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:272
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:433
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:270
@@ -4566,7 +4570,7 @@ msgstr "챕터 언어"
 msgid "Chapter language (IETF BCP 47)"
 msgstr "챕터 언어 (IETF)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:202
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:203
 #, no-c-format
 msgid "Chapter mass modification"
 msgstr "챕터 대규모 변경"
@@ -4682,7 +4686,7 @@ msgid "Chapter translate edition UID"
 msgstr "챕터 번역 에디션 UID"
 
 #: src/common/kax_element_names.cpp:281
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2295
 #: src/mkvtoolnix-gui/merge/track.cpp:682
 #: src/propedit/options.cpp:217
@@ -4727,7 +4731,7 @@ msgstr "업데이트 확인(&U)"
 msgid "Check for available updates"
 msgstr "이용 가능한 업데이트가 있는지 확인합니다"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2222
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2223
 #, no-c-format
 msgid "Check online for available &updates"
 msgstr "온라인으로 이용 가능한 업데이트 확인하기(&U)"
@@ -4752,7 +4756,7 @@ msgstr "수직 크로마 위치선정"
 msgid "Chromaticity coordinates:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2249
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2250
 #, no-c-format
 msgid "Clearing settings auto&matically:"
 msgstr "설정  자동 삭제(&M):"
@@ -4767,7 +4771,7 @@ msgstr "색상 범위 잘라내기."
 msgid "Close &all tabs"
 msgstr "모든 탭 닫기(&A)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2253
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2254
 #, no-c-format
 msgid "Close current settings"
 msgstr "현재 설정 닫기"
@@ -4813,7 +4817,7 @@ msgstr "클러스터 이전 크기"
 msgid "Cluster timestamp"
 msgstr "클러스터 타임스탬프"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:319
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:321
 #: src/mkvtoolnix-gui/merge/track_model.cpp:73
 #, no-c-format
 msgid "Codec"
@@ -4902,7 +4906,7 @@ msgstr "색상 매트릭스 계수"
 msgid "Color matrix coefficients:"
 msgstr "색상 매트릭스 계수"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2218
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2219
 #, fuzzy, no-c-format
 msgid "Color palette:"
 msgstr "색공간"
@@ -4952,7 +4956,7 @@ msgstr "완료 확인"
 msgid "Completed with warnings"
 msgstr "완료했으나 경고 있음"
 
-#: src/merge/generic_packetizer.cpp:1370
+#: src/merge/generic_packetizer.cpp:1372
 #, no-c-format, c++-format
 msgid "Compression failed: {0}\n"
 msgstr "압축 실패: {0}\n"
@@ -5144,8 +5148,8 @@ msgstr "FLAC 헤더 패킷을 읽을 수 없습니다.\n"
 msgid "Could not write to the destination file: {0} ({1})\n"
 msgstr "대상 파일에 기록할 수 없습니다: {0} ({1})\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:73
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:330
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:74
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:332
 #: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:128
 #, no-c-format
 msgid "Cover image"
@@ -5176,17 +5180,17 @@ msgstr "새로 만들거나 \"합치기\" 메뉴에서 기존의 것을 엽니�
 msgid "Create file without audio track"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:168
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:169
 #, no-c-format
 msgid "Create new &multiplex settings and add to those"
 msgstr "새 합치기 설정을 만들고 거기에 추가하기(&M)"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:169
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:170
 #, no-c-format
 msgid "Create new multiplex settings for &each file"
 msgstr "각 파일에 대해 새 합치기 설정 만들기(&E)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2251
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2252
 #, no-c-format
 msgid "Create new settings"
 msgstr "새 설정 만들기"
@@ -5498,7 +5502,7 @@ msgstr "챕터 번호:"
 msgid "DVDs"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2216
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2217
 #, no-c-format
 msgid "Dark"
 msgstr ""
@@ -5544,12 +5548,12 @@ msgstr "이 체크박스를 비활성화하면 그 변수를 바꾸지 않고 �
 msgid "Default"
 msgstr "기본값"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2227
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2228
 #, no-c-format
 msgid "Default IETF BCP 47 language editing &mode:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2287
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2288
 #, no-c-format
 msgid "Default additional co&mmand line options:"
 msgstr "기본 추가 명령행 옵션(&M):"
@@ -5575,7 +5579,7 @@ msgstr "기본 언어"
 msgid "Default language (bogus element with invalid ID)"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2297
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2298
 #, no-c-format
 msgid "Default subtitle &charset to set:"
 msgstr "기본 자막 문자셋 설정(&C):"
@@ -5586,7 +5590,7 @@ msgstr "기본 자막 문자셋 설정(&C):"
 msgid "Default track"
 msgstr "기본 트랙"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2298
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2299
 #, no-c-format
 msgid "Default track languages to set"
 msgstr "기본 트랙 언어 설정"
@@ -5596,22 +5600,22 @@ msgstr "기본 트랙 언어 설정"
 msgid "Default values"
 msgstr "기본값"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2340
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2341
 #, no-c-format
 msgid "Defaults for jobs saving info tool output to text files"
 msgstr "정보 도구 출력을 텍스트 파일로 저장하는 작업에 대한 기본값"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2347
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2348
 #, no-c-format
 msgid "Defaults for new chapter entries"
 msgstr "새 챕터 항목의 기본값"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2286
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2287
 #, no-c-format
 msgid "Defaults for new multiplex settings"
 msgstr "새 합치기 설정의 기본값"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2289
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2290
 #, no-c-format
 msgid "Defaults for newly added tracks"
 msgstr "새로 추가한 트랙의 기본값"
@@ -5678,12 +5682,12 @@ msgstr "아래 설정에 따라서 소스 파일의 언어가 '미정의' ('und'
 msgid "Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und')."
 msgstr "이 설정에 따라서 소스 파일의 언어가 '미정의' ('und') 상태이면, 언어도 파일명에서 얻을 수 있솝니다."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2296
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2297
 #, fuzzy, no-c-format
 msgid "Derive \"forced display\" fla&g for subtitles from file names:"
 msgstr "파일명에서 트랙 언어 얻는 중"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
 #, no-c-format
 msgid "Derive &end timestamps from start timestamps"
 msgstr "시작 타임스탬프에서 끝 타임스탬프 얻기(&E)"
@@ -5693,7 +5697,7 @@ msgstr "시작 타임스탬프에서 끝 타임스탬프 얻기(&E)"
 msgid "Deriving track languages"
 msgstr "트랙 언어 유추 중"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2303
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2304
 #, no-c-format
 msgid "Deriving track languages from file names"
 msgstr "파일명에서 트랙 언어 얻는 중"
@@ -5705,8 +5709,8 @@ msgstr "이 비디오 트랙에 사용된 투사 방법을 설명합니다 (0 �
 
 #: src/common/audio_emphasis.cpp:114
 #: src/common/stereo_mode.cpp:102
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:222
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:226
 #: src/mkvtoolnix-gui/jobs/model.cpp:110
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:93
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:65
@@ -5720,7 +5724,7 @@ msgstr "설명"
 msgid "Description:"
 msgstr "설명:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2314
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2315
 #, no-c-format
 msgid "Destination directory"
 msgstr "대상 폴더"
@@ -5730,7 +5734,7 @@ msgstr "대상 폴더"
 msgid "Destination file"
 msgstr "대상 파일"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2309
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2310
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:265
 #, no-c-format
 msgid "Destination file name"
@@ -5756,12 +5760,12 @@ msgstr "대상 파일:"
 msgid "Destination folders's absolute path"
 msgstr "대상 파일의 이름"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:309
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:310
 #, no-c-format
 msgid "Details"
 msgstr "자세히"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2267
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2268
 #, no-c-format
 msgid "Detect file name se&quences when adding multiple files"
 msgstr ""
@@ -5773,7 +5777,7 @@ msgstr ""
 msgid "Determine automatically"
 msgstr "자동으로 결정"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:222
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
 #, no-c-format
 msgid "Development hacks"
 msgstr "개발 핵"
@@ -5790,7 +5794,7 @@ msgstr "모든 첨부 파일 사용 안 함(&S)"
 msgid "Dirac"
 msgstr "Dirac"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:326
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:95
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:67
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:113
@@ -5798,7 +5802,7 @@ msgstr "Dirac"
 msgid "Directory"
 msgstr "폴더"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2317
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2318
 #, no-c-format
 msgid "Directory &relative to first source file's directory:"
 msgstr "첫 번째 소스 파일의 폴더에 상대적인 폴더(&R):"
@@ -5811,22 +5815,22 @@ msgstr "첫 번째 소스 파일의 폴더에 상대적인 폴더(&R):"
 msgid "Directory:"
 msgstr "폴더:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2293
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2294
 #, no-c-format
 msgid "Disable \"de&fault track\" flag for subtitle tracks"
 msgstr "자막 트랙의 \"기본 트랙\" 플래그 비활성화하기(&F)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2221
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2222
 #, fuzzy, no-c-format
 msgid "Disable &tooltips"
 msgstr "애니메이션 사용 안하기(&M)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2294
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2295
 #, no-c-format
 msgid "Disable additional lossless c&ompression for all track types"
 msgstr "모든 트랙 형식에 추가적인 무손실 압축 비활성화하기(&O)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2220
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2221
 #, no-c-format
 msgid "Disable scaling for &high DPI displays"
 msgstr ""
@@ -5847,7 +5851,7 @@ msgstr "사용 안 함"
 msgid "Disables lacing for all tracks."
 msgstr "모든 트랙의 레이싱(lacing)을 사용하지 않습니다."
 
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:69
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:70
 #, no-c-format
 msgid "Disc library information selection"
 msgstr ""
@@ -6014,7 +6018,7 @@ msgstr "다운로드 URL:"
 msgid "Downloading release information"
 msgstr "배포 정보 다운로드 중"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2345
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2346
 #, no-c-format
 msgid "Drop last entry from imported &Blu-ray playlists if it's near the end"
 msgstr "가져온 블루레이 재생목이 마지막 근처에 있으면 재생목록에서 마지막 항목 빼기"
@@ -6032,12 +6036,12 @@ msgstr "파일의 특정한 구조 때문에 이 상황은 자동으로 고칠 �
 
 #: src/common/kax_element_names.cpp:87
 #: src/common/kax_element_names.cpp:267
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:307
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:308
 #, no-c-format
 msgid "Duration"
 msgstr "재생 시간"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:310
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:311
 #: src/mkvtoolnix-gui/merge/output.cpp:273
 #, no-c-format
 msgid "Duration:"
@@ -6063,12 +6067,12 @@ msgstr "지금 실행(&X)"
 msgid "E&xit"
 msgstr "종료(&X)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:209
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
 #, no-c-format
 msgid "E&xpand chapter's start and end timestamps to include the minimum/maximum timestamps of all their sub-chapters"
 msgstr "모든 하위 챕터의 최소/최대 타임스탬프를 포함하도록 챕터의 시작과 끝 타임스탬프 확장(&X)"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:394
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:395
 #, fuzzy, no-c-format
 msgid "E&xtensions:"
 msgstr "예외 세부 사항:"
@@ -6128,8 +6132,8 @@ msgstr "각 범위는 '-'을 중앙에 두고 시작과 끝 프레임/필드 번
 msgid "Each range consists of a start and end timestamp with a '-' in the middle, e.g. '00:01:15-00:03:20'."
 msgstr "각 범위는 '-'를 중앙에 두고 시작과 끝의 타임코드로 구성됩니다. 예) '00:01:15-00:03:20'"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:382
 #: src/mkvtoolnix-gui/forms/util/language_dialog.h:383
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:384
 #, fuzzy, no-c-format
 msgid "Edit language"
 msgstr "태그 언어"
@@ -6252,22 +6256,22 @@ msgstr ""
 msgid "Enable appending and splitting FLAC tracks."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2323
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2324
 #, fuzzy, no-c-format
 msgid "Enable copying of items by their type"
 msgstr "트랙의 형식으로 트랙을 복사하기"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2324
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2325
 #, no-c-format
 msgid "Enable copying of tracks by their language"
 msgstr "트랙의 언어로 트랙을 복사하기"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2295
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2296
 #, no-c-format
 msgid "Enable dialog &normalization gain removal for audio tracks"
 msgstr "오디오 트랙의 대화 정규화 게인 제거 사용하기(&N)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2243
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2244
 #, no-c-format
 msgid "Enable language codes from &ISO 639-3 && 639-5"
 msgstr ""
@@ -6305,7 +6309,7 @@ msgstr "기본 사용 트랙"
 msgid "Enabling this option causes mkvmerge to keep that last entry."
 msgstr "이 옵션 사용시 mkvmerge는 그 마지막 항목을 유지합니다."
 
-#: src/common/av1.h:45
+#: src/common/av1.h:47
 #, no-c-format
 msgid "Encountered OBUs with invalid data."
 msgstr "무효한 데이터가 있는 OBU가 발생했습니다."
@@ -6330,7 +6334,7 @@ msgstr "끝"
 msgid "English language name"
 msgstr "영어 언어 이름"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2320
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2321
 #, no-c-format
 msgid "Ensure the file name is &unique"
 msgstr "파일 이름이 유일한지 확인하기(&U)"
@@ -6487,14 +6491,14 @@ msgstr "오류:"
 msgid "Even if no audio tracks are present"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2361
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2365
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2362
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2366
 #, no-c-format
 msgid "Even if there were errors"
 msgstr "오류가 있었다고 해도"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2360
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2364
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2361
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2365
 #, no-c-format
 msgid "Even if there were warnings"
 msgstr "경고가 있었다고 해도"
@@ -6531,7 +6535,7 @@ msgstr "예: 01:00:00,01:30:00 (한 시간 이후, 한 시간 30분 이후) 또�
 msgid "Exception details:"
 msgstr "예외 세부 사항:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2326
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2327
 #, fuzzy, no-c-format
 msgid "Exceptions"
 msgstr "예외 세부 사항:"
@@ -6579,7 +6583,7 @@ msgstr "동작을 즉시 실행합니다."
 msgid "Executing actions"
 msgstr "동작 실행"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2368
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2369
 #, no-c-format
 msgid "Executing actions after certain events"
 msgstr "특정 이벤트 후 동작 실행하기"
@@ -6751,7 +6755,7 @@ msgstr "필드 순서"
 msgid "Field order (0, 1, 2, 6, 9 or 14, see documentation)."
 msgstr "필드 순서 (0, 1, 2, 6, 9 또는 14, 문서를 참조하세요)."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2276
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2277
 #, fuzzy, no-c-format
 msgid "File && track colors"
 msgstr "묵음 트랙"
@@ -6793,8 +6797,8 @@ msgid "File has not been modified"
 msgstr "파일이 변경되지 않았습니다"
 
 #: src/common/kax_element_names.cpp:246
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:308
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:325
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:309
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:327
 #: src/mkvtoolnix-gui/merge/source_file_model.cpp:110
 #, no-c-format
 msgid "File name"
@@ -6803,7 +6807,7 @@ msgstr "파일 이름"
 #: src/mkvtoolnix-gui/forms/chapter_editor/tab.h:514
 #: src/mkvtoolnix-gui/forms/header_editor/tab.h:144
 #: src/mkvtoolnix-gui/forms/info/tab.h:152
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:148
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:149
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:378
 #, no-c-format
 msgid "File name:"
@@ -7075,9 +7079,9 @@ msgstr "AVI 파일에서 오디오 트랙의 시작 부분에 있는 쓰레기�
 msgid "General"
 msgstr "일반"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2210
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2241
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2248
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2211
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2242
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2249
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2195
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2204
 #, no-c-format
@@ -7089,12 +7093,12 @@ msgstr "일반 옵션"
 msgid "General variables"
 msgstr "일반 변수"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:177
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:178
 #, no-c-format
 msgid "Generate sub-chapters"
 msgstr "하위 챕터 만들기"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:178
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:179
 #, no-c-format
 msgid "Generating a number of chapters spaced evenly apart"
 msgstr "몇 개의 챕터를 균등한 간격으로 두어서 만드는 중"
@@ -7110,7 +7114,7 @@ msgstr "챕터 만들기:"
 msgid "Global options"
 msgstr "전역 옵션"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:217
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
 #, no-c-format
 msgid "Global output control"
 msgstr "전역 출력 제어"
@@ -7199,7 +7203,7 @@ msgstr ""
 msgid "Header &editor"
 msgstr "헤더 편집기(&E)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2341
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2342
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:271
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:433
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:269
@@ -7281,13 +7285,13 @@ msgstr "크로마를 수평으로 위치시키는 방법."
 msgid "How chroma is sited vertically."
 msgstr "크로마를 수직으로 위치시키는 방법."
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:321
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:323
 #: src/mkvtoolnix-gui/merge/track_model.cpp:78
 #, no-c-format
 msgid "ID"
 msgstr "ID"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2242
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2243
 #, no-c-format
 msgid "IETF BCP 47 &normalization mode:"
 msgstr ""
@@ -7710,7 +7714,7 @@ msgstr ""
 msgid "If you often use the same values when splitting by size, you can enter them here."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:172
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:173
 #, no-c-format
 msgid "If you want to append or add them as additional parts you have to select which source file to append or add them to:"
 msgstr "그것을 추가적인 부분으로 결합하거나 추가하고 싶으면 결합하거나 추가할 소스 파일을 선택해야 합니다:"
@@ -7730,17 +7734,17 @@ msgstr "{0}에서 글꼴을 가져왔습니다."
 msgid "Imported picture from {0}"
 msgstr "{0}에서 이미지를 가져왔습니다."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2274
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2275
 #, no-c-format
 msgid "In &two fixed columns on the right of the files and tracks"
 msgstr "파일과 트랙의 오른쪽에 있는 두 개의 고정된 세로줄에서(&T)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2273
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2274
 #, no-c-format
 msgid "In a &scrollable column on the right of the files and tracks"
 msgstr "파일과 트랙의 오른쪽에 있는 스크롤할 수 있는 세로줄에서(&S)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2275
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2276
 #, no-c-format
 msgid "In a tab &widget below the files and tracks"
 msgstr "파일과 트랙 아래쪽의 탭 위젯에서(&W)"
@@ -7798,7 +7802,7 @@ msgstr "정보 도구"
 msgid "Information"
 msgstr "정보"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:396
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:397
 #, fuzzy, no-c-format
 msgid "Information & Warnings:"
 msgstr "정보"
@@ -7823,7 +7827,7 @@ msgstr "대신에 그런 파일은 '출력' 탭의 '전역 태그' 옵션에서 
 msgid "Instead such a file must be set via the 'segment info' option on the 'output' tab."
 msgstr "대신에 그런 파일은 '출력' 탭의 '세그먼트 정보' 옵션에서 설정해야 합니다."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2212
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2213
 #, no-c-format
 msgid "Interface &language:"
 msgstr "인터페이스 언어(&L):"
@@ -8299,7 +8303,7 @@ msgstr ""
 msgid "Jobs & job queue"
 msgstr "작업 & 작업 대기열"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2350
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2351
 #, no-c-format
 msgid "Jobs and job output"
 msgstr "작업과 작업 출력"
@@ -8346,10 +8350,10 @@ msgstr "Lace 번호"
 
 #: src/common/kax_element_names.cpp:210
 #: src/common/property_element.cpp:144
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2247
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:75
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:318
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:332
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2248
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:76
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:334
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:164
 #: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:126
 #: src/mkvtoolnix-gui/merge/track_model.cpp:76
@@ -8373,13 +8377,13 @@ msgstr "언어(&L)"
 msgid "Language selected below"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2244
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2245
 #, fuzzy, no-c-format
 msgid "Language shortcuts"
 msgstr "언어(&L)"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:308
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2349
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2350
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2309
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:83
 #, no-c-format
@@ -8397,8 +8401,8 @@ msgstr "언어(&L)"
 msgid "Languages:"
 msgstr "언어:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2225
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2270
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2226
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2271
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:261
 #, no-c-format
 msgid "Layout"
@@ -8425,7 +8429,7 @@ msgid "Length: %1 byte"
 msgid_plural "Length: %1 bytes"
 msgstr[0] "길이: %1 바이트"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2215
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2216
 #, fuzzy, no-c-format
 msgid "Light"
 msgstr "오른쪽"
@@ -8507,7 +8511,7 @@ msgstr "\"%2\" 폴더의 \"%1\" 파일 내용 나열하는 중"
 msgid "Loading…"
 msgstr "불러오는 중..."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2258
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2259
 #, no-c-format
 msgid "Location of MediaInfo &GUI:"
 msgstr ""
@@ -8560,7 +8564,7 @@ msgstr ""
 msgid "MKVToolNix GUI config files"
 msgstr "MKVToolNix GUI 설정 파일"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2209
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2210
 #, no-c-format
 msgid "MKVToolNix GUI preferences"
 msgstr "MKVToolNix GUI 환경설정"
@@ -8642,7 +8646,7 @@ msgstr "MPEG-4"
 msgid "MPLS Blu-ray playlist"
 msgstr "MPLS Blu-ray 재생목록"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2367
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2368
 #, fuzzy, no-c-format
 msgid "Ma&ximum number of concurrent jobs:"
 msgstr "최대 파일 개수:"
@@ -8990,8 +8994,8 @@ msgstr "이 트랙의 타임코드를 인수로 곱합니다."
 msgid "Multiply this track's timestamps with a factor."
 msgstr "이 트랙의 타임코드를 인수로 곱합니다."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:180
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2348
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:181
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2349
 #, no-c-format
 msgid "Na&me template:"
 msgstr "이름 템플릿(&M):"
@@ -9007,7 +9011,7 @@ msgstr "이름 템플릿(&M):"
 msgid "Name"
 msgstr "이름"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:183
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:184
 #, no-c-format
 msgid "Name tem&plate:"
 msgstr "이름 템플릿(&P):"
@@ -9050,8 +9054,8 @@ msgstr "음수값을 사용할 수 있습니다."
 msgid "Never"
 msgstr "동작 없음"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2335
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:143
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2336
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:144
 #, no-c-format
 msgid "Never scan for other playlists"
 msgstr "다른 재생목록은 검색하지 않기"
@@ -9087,7 +9091,7 @@ msgstr "다음 세그먼트 UID:"
 msgid "Next segment's unique ID"
 msgstr "다음 세그먼트의 고유 ID"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2250
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2251
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:36
 #: src/mkvtoolnix-gui/header_editor/bool_value_page.cpp:52
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:90
@@ -9136,7 +9140,7 @@ msgstr "EBML 헤더를 찾지 못했습니다."
 msgid "No MIME type has been set for the attachment '{0}', and it could not be guessed.\n"
 msgstr "첨부 파일 '{0}'에 MIME 유형이 설정되지 않았고, 이것을 추정할 수 없습니다.\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2370
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2371
 #, no-c-format
 msgid "No actions have been added yet."
 msgstr "아직 추가한 동작이 없습니다."
@@ -9182,7 +9186,7 @@ msgstr "큐를 찾을 수 없습니다.\n"
 msgid "No destination file name specified, will use attachment name.\n"
 msgstr "대상 파일 이름이 지정되지 않았기 때문에, 대신 첨부 파일 이름을 사용합니다.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:333
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:335
 #, no-c-format
 msgid "No disc library information was found."
 msgstr ""
@@ -9463,7 +9467,7 @@ msgstr "주의: 대부분의 <MTX_…> 변수는 비어 있고 변수를 인수�
 msgid "Note that on Windows forward slashes can be used instead of backslashes in path names, too."
 msgstr "주의: 윈도우상의 경로명에 슬래시는 역슬래시 대신으로도 사용할 수 있습니다."
 
-#: src/merge/generic_packetizer.cpp:1740
+#: src/merge/generic_packetizer.cpp:1742
 #, no-c-format, c++-format
 msgid "Note that the Matroska specifications regarding the storage of '{0}' have not been finalized yet. mkvmerge's support for it is therefore subject to change and uses the CodecID '{1}/EXPERIMENTAL' instead of '{1}'. This warning will be removed once the specifications have been finalized and mkvmerge has been updated accordingly.\n"
 msgstr "'{0}' 저장에 대한 Matroska 사양은 아직 최종 결정되지 않았음에 유의하십시오. 따라서 mkvmerge 지원은 변경 될 수 있으며, '{1}'대신 '{1}/EXPERIMENTAL' 코덱ID를 사용합니다. 사양이 최종 결정되는대로 이 경고는 삭제되고 mkvmerge도 그에 따라 업데이트됩니다.\n"
@@ -9489,7 +9493,7 @@ msgstr ""
 msgid "Nothing to do.\n"
 msgstr "아무것도 할 수 없습니다.\n"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:179
+#: src/mkvtoolnix-gui/forms/chapter_editor/generate_sub_chapters_parameters_dialog.h:180
 #, no-c-format
 msgid "Nu&mber of entries to create:"
 msgstr "만들 항목 개수(&M):"
@@ -9500,12 +9504,12 @@ msgstr "만들 항목 개수(&M):"
 msgid "Number"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2211
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2212
 #, fuzzy, no-c-format
 msgid "Number of &recently used entries to remember:"
 msgstr "번호를 다시 매길 항목 개수(&N):"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:314
 #, no-c-format
 msgid "Number of chapters:"
 msgstr "챕터 수:"
@@ -9572,8 +9576,8 @@ msgstr "2 GiB보다 작은 파일만 지원합니다."
 msgid "Only for I frames"
 msgstr "I 프레임만"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2359
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2363
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2360
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2364
 #, no-c-format
 msgid "Only if the job completed successfully"
 msgstr "작업을 성공적으로 완료한 경우에만"
@@ -9745,14 +9749,14 @@ msgid "Opening %1 file in the header editor…"
 msgid_plural "Opening %1 files in the header editor…"
 msgstr[0] "%1 파일을 헤더 편집기에서 여는 중..."
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:113
 #: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:114
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:115
 #, no-c-format
 msgid "Opening files or adding as attachments"
 msgstr "파일을 열거나 첨부 파일로 추가하는 중"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:225
 #, no-c-format
 msgid "Option"
 msgstr "옵션"
@@ -9781,7 +9785,7 @@ msgid "Opus (in Ogg) audio files"
 msgstr "Opus (OGG 안에) 오디오 파일"
 
 #: src/common/kax_element_names.cpp:168
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:326
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:328
 #, no-c-format
 msgid "Order"
 msgstr "순서"
@@ -9882,7 +9886,7 @@ msgstr "패킷 번호 {0}는 잘못된 FLAC 헤더가 포함되어 있기 때문
 msgid "Parse the whole file instead of relying on the index."
 msgstr "인덱스를 신뢰하는 대신에 파일의 전체를 분석합니다."
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:398
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:399
 #, no-c-format
 msgid "Parser error:"
 msgstr ""
@@ -9969,7 +9973,7 @@ msgstr ""
 msgid "Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language."
 msgstr "재생기는 기본 트랙 플래그 설정이 있는 트랙을 선호합니다."
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:322
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
 #, no-c-format
 msgid "Playlist items:"
 msgstr "재생목록 항목:"
@@ -10037,7 +10041,7 @@ msgstr "모든 에디션, 챕터와 하위 챕터에 적용할 동작을 선택�
 msgid "Please select the actions to apply to the selected edition or chapter and all of its children."
 msgstr "선택한 에디션이나 챕터와 그 모든 자손에 적용할 동작을 선택하세요."
 
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:147
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:148
 #, no-c-format
 msgid "Please select the character set the following file is encoded in."
 msgstr "다음 파일이 인코딩된 문자셋을 선택하세요."
@@ -10047,7 +10051,7 @@ msgstr "다음 파일이 인코딩된 문자셋을 선택하세요."
 msgid "Position"
 msgstr "위치"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2272
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2273
 #, no-c-format
 msgid "Position for the track properties on the \"input\" tab:"
 msgstr "\"입력\" 탭에서 트랙 속성에 대한 위치:"
@@ -10075,32 +10079,32 @@ msgstr "가능한 원인은 프로그램이 없거나 그 프로그램 또는 �
 msgid "Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."
 msgstr "가능한 이유: 파일이 Matroska 파일이 아니다; 파일에 쓰기 방지가 되어 있다; 파일이 다른 프로세스에 의해 잠겨 있다; 그 파일에 접근할 권한이 없다."
 
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:150
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:151
 #, no-c-format
 msgid "Pre&view:"
 msgstr "미리보기(&V):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2316
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2317
 #, no-c-format
 msgid "Pre&viously used destination directory"
 msgstr "이전에 사용한 대상 폴더(&V)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2282
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2283
 #, fuzzy, no-c-format
 msgid "Predefined audio track names"
 msgstr "트랙 이름"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2285
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2286
 #, fuzzy, no-c-format
 msgid "Predefined split durations"
 msgstr "트랙 이름"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2284
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2285
 #, fuzzy, no-c-format
 msgid "Predefined split sizes"
 msgstr "트랙 이름"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2283
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2284
 #, fuzzy, no-c-format
 msgid "Predefined subtitle track names"
 msgstr "트랙 이름"
@@ -10110,7 +10114,7 @@ msgstr "트랙 이름"
 msgid "Predefined values"
 msgstr "트랙 이름"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2281
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2282
 #, fuzzy, no-c-format
 msgid "Predefined video track names"
 msgstr "트랙 이름"
@@ -10151,7 +10155,7 @@ msgstr ""
 msgid "ProRes video"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2257
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2258
 #, no-c-format
 msgid "Probe &range percentage:"
 msgstr "조사 범위 퍼센트:"
@@ -10162,7 +10166,7 @@ msgid "Problem with MKVToolNix installation"
 msgid_plural "Problems with MKVToolNix installation"
 msgstr[0] "MKVToolNix 설치시의 문제"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2256
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2257
 #, no-c-format
 msgid "Process &priority:"
 msgstr "처리 순위(&P):"
@@ -10249,6 +10253,7 @@ msgstr "투사 요(yaw) 회전"
 msgid "Projection-specific data:"
 msgstr "비디오: 투사-특정 데이터"
 
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:319
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:170
 #: src/mkvtoolnix-gui/merge/track_model.cpp:82
 #, no-c-format
@@ -10417,7 +10422,7 @@ msgstr "RIFF CDXA"
 msgid "RSA"
 msgstr "RSA"
 
-#: src/common/av1.h:38
+#: src/common/av1.h:40
 #, no-c-format
 msgid "Raw OBUs without a size field are not supported."
 msgstr ""
@@ -10481,12 +10486,12 @@ msgstr "RealMedia"
 msgid "RealMedia audio/video files"
 msgstr "RealMedia 오디오/비디오 파일"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2322
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2323
 #, fuzzy, no-c-format
 msgid "Recent destination directories"
 msgstr "대상 폴더 선택"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2308
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2309
 #, no-c-format
 msgid "Recognized languages"
 msgstr "인식된 언어"
@@ -10572,7 +10577,7 @@ msgstr "기존의 Matroska 파일에서 챕터 삭제(&V)"
 msgid "Remove &completed jobs"
 msgstr "완료한 작업 삭제(&C)"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:212
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:213
 #, fuzzy, no-c-format
 msgid "Remove &names"
 msgstr "모든 첨부 파일 삭제(&L)"
@@ -10598,12 +10603,12 @@ msgstr "모든 파일 삭제(&L)"
 msgid "Remove a&ll jobs"
 msgstr "모든 작업 삭제(&L)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2356
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2357
 #, no-c-format
 msgid "Remove com&pleted jobs older than x days:"
 msgstr "x일보다 오래된 완료 작업 삭제(&P):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2357
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2358
 #, fuzzy, no-c-format
 msgid "Remove completed jobs from queue on &exit:"
 msgstr "x일보다 오래된 완료 작업 삭제(&P):"
@@ -10618,12 +10623,12 @@ msgstr "대화 볼륨 노멀라이징 게인 제거하기"
 msgid "Remove element"
 msgstr "요소 제거"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2252
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2253
 #, no-c-format
 msgid "Remove source files"
 msgstr "소스 파일 삭제"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2355
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2356
 #, no-c-format
 msgid "Remove the output &file when a job ends with errors or when it is aborted"
 msgstr ""
@@ -10645,12 +10650,12 @@ msgstr "기존의 Matroska 파일에서 챕터 삭제 중"
 msgid "Removing the chapters failed."
 msgstr "챕터 삭제에 실패했습니다."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:175
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:176
 #, no-c-format
 msgid "Renumbering existing sub-chapters"
 msgstr "기존의 하위 챕터 번호 다시 매기는 중"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:174
+#: src/mkvtoolnix-gui/forms/chapter_editor/renumber_sub_chapters_parameters_dialog.h:175
 #, no-c-format
 msgid "Renumbering sub-chapters"
 msgstr "하위 챕터 번호 다시 매기는 중"
@@ -10695,7 +10700,7 @@ msgstr "모든 세로줄 초기화"
 msgid "Reset the attachment values on this page to how they're saved in the file."
 msgstr "이 페이지상의 첨부 파일 값을 파일에 저장된 방식으로 초기화합니다."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2354
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2355
 #, no-c-format
 msgid "Reset the warning and error &counters on exit"
 msgstr "종료시 경고와 오류 횟수 초기화하기(&C)"
@@ -10721,7 +10726,7 @@ msgstr "{0} 위치에 성공적으로 재동기화 하였습니다.\n"
 msgid "Revert the entry to its default value."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2279
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2280
 #, no-c-format
 msgid "Revert to default colors"
 msgstr ""
@@ -10782,7 +10787,7 @@ msgstr "실행 중인 작업은 편집할 수 없습니다."
 msgid "Running jobs cannot be removed."
 msgstr "실행 중인 작업은 삭제할 수 없습니다."
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:203
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:204
 #, no-c-format
 msgid "S&hift start and end timestamps by the following amount:"
 msgstr "시작과 끝 타임스탬프를 다음 양만큼 이동하기(&H):"
@@ -10792,7 +10797,7 @@ msgstr "시작과 끝 타임스탬프를 다음 양만큼 이동하기(&H):"
 msgid "S&how command line"
 msgstr "명령행 보기(&H)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2266
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2267
 #, no-c-format
 msgid "S&ort files && tracks by track type when adding files"
 msgstr ""
@@ -10843,7 +10848,7 @@ msgstr "SSA/ASS 텍스트 자막"
 msgid "SSA/ASS: The following line will be skipped as one of the timestamps is less than 0, or the end timestamp is less than the start timestamp: {0}\n"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2315
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2316
 #, no-c-format
 msgid "Sa&me directory as the first source file"
 msgstr "처음 소스 파일과 같은 폴더(&M)"
@@ -10873,12 +10878,12 @@ msgstr "저장(&S)"
 msgid "Save as &XML file"
 msgstr "&XML 파일로 저장"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:226
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:227
 #, no-c-format
 msgid "Save as &default for new multiplex jobs"
 msgstr "새 합치기 작업의 기본값으로 저장하기(&D)"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:74
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:75
 #, no-c-format
 msgid "Save as &default for saving output to text files"
 msgstr "출력을 텍스트 파일로 저장시의 기본값으로 저장하기(&D)"
@@ -10952,12 +10957,12 @@ msgstr "변경된 세그먼트 정보 헤더 저장에 실패했습니다."
 msgid "Saving the modified track headers failed."
 msgstr "변경된 트랙 헤더 저장에 실패했습니다."
 
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:139
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
 #, no-c-format
 msgid "Scan directory for other playlists"
 msgstr "다른 재생목록이 있는지 폴더를 검색합니다"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:303
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:304
 #, no-c-format
 msgid "Scanned Files"
 msgstr "검색한 파일"
@@ -10968,7 +10973,7 @@ msgstr "검색한 파일"
 msgid "Scanning directory"
 msgstr "폴더 검색 중"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2331
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2332
 #, no-c-format
 msgid "Scanning playlists"
 msgstr "재생목록 검색 중"
@@ -11119,8 +11124,8 @@ msgstr "오디오 파일 선택"
 msgid "Select chapter file"
 msgstr "챕터 파일 선택"
 
-#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:145
 #: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:146
+#: src/mkvtoolnix-gui/forms/main_window/select_character_set_dialog.h:147
 #, no-c-format
 msgid "Select character set"
 msgstr "문자셋 선택"
@@ -11136,8 +11141,8 @@ msgstr "대상 폴더 선택"
 msgid "Select destination file name"
 msgstr "대상 파일명 선택"
 
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:70
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:327
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:71
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:329
 #, no-c-format
 msgid "Select disc library information to use"
 msgstr ""
@@ -11154,12 +11159,12 @@ msgstr "실행 파일 선택"
 msgid "Select existing file"
 msgstr "태그 파일 선택"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:301
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
 #, no-c-format
 msgid "Select file to add"
 msgstr "추가할 파일 선택"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:302
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:303
 #, fuzzy, no-c-format
 msgid "Select one or more playlists to add"
 msgstr "추가할 파일 선택"
@@ -11245,7 +11250,7 @@ msgstr "다음 '--add-attachment', '--replace-attachment' 또는 '--update-attac
 msgid "Set the UID to use for the following '--add-attachment', '--replace-attachment' or '--update-attachment' option"
 msgstr "다음 '--add-attachment', '--replace-attachment' 또는 '--update-attachment' 옵션에 사용할 UID를 설정하세요"
 
-#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:204
+#: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:205
 #, no-c-format
 msgid "Set the chapter names' &languages:"
 msgstr "챕터 이름의 언어 설정(&L):"
@@ -11316,7 +11321,7 @@ msgstr "비디오 트랙의 스테레오 모드를 이 값으로 설정합니다
 msgid "Settings"
 msgstr "설정"
 
-#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:73
+#: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:74
 #, no-c-format
 msgid "Settings for saving output to a text file"
 msgstr "출력을 텍스트 파일로 저장시의 설정"
@@ -11331,7 +11336,7 @@ msgstr "짧은 AAC 오디오 패킷 (길이: {0} < 2)\n"
 msgid "Short AAC audio packet (length: {0} < {1})\n"
 msgstr "짧은 AAC 오디오 패킷 (길이: {0} < {1})\n"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2230
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2231
 #, no-c-format
 msgid "Show &buttons for moving list view entries up and down"
 msgstr "목록 보기 항목 위/아래로 이동 버튼 보기(&B)"
@@ -11341,7 +11346,7 @@ msgstr "목록 보기 항목 위/아래로 이동 버튼 보기(&B)"
 msgid "Show &hex dump"
 msgstr "16진수 덤프 표시(&H):"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2353
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2354
 #, no-c-format
 msgid "Show &output of all jobs instead of current job only"
 msgstr "현재 작업 대신 모든 작업의 출력 보기(&O)"
@@ -11377,12 +11382,12 @@ msgstr "모든 요소 보기"
 msgid "Show all sub-elements (including cues & seek heads entries) and don't stop at the first cluster."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2343
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2344
 #, no-c-format
 msgid "Show dates && times in &UTC instead of the local time zone"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2224
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2225
 #, no-c-format
 msgid "Show debu&gging menu"
 msgstr ""
@@ -11427,7 +11432,7 @@ msgstr "헤더를 포함한 각 요소의 크기를 표시합니다."
 msgid "Show the size of each element including its header."
 msgstr "헤더를 포함한 각 요소의 크기를 표시합니다."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2229
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2230
 #, no-c-format
 msgid "Show the tool &selector"
 msgstr "도구 선택기 보기(&S)"
@@ -11516,9 +11521,9 @@ msgstr "단순 챕터 분석: {0}\n"
 msgid "Single field picture detected. Fix the MPEG2 video stream before attempting to multiplex it.\n"
 msgstr "GOP(Group Of Picture) 헤더 이전에 하나의 필드 프레임이 검색되었습니다. MUX를 시도하려고 하기 전에 이 MPEG2 비디오 스트림을 수정하십시오.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:72
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:305
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:329
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:73
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:306
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
 #: src/mkvtoolnix-gui/info/model.cpp:89
 #: src/mkvtoolnix-gui/merge/attached_file_model.cpp:96
 #: src/mkvtoolnix-gui/merge/attachment_model.cpp:68
@@ -11530,7 +11535,7 @@ msgstr "크기"
 #: src/mkvtoolnix-gui/forms/header_editor/attached_file_page.h:174
 #: src/mkvtoolnix-gui/forms/info/element_viewer_dialog.h:224
 #: src/mkvtoolnix-gui/forms/info/tab.h:153
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:312
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:313
 #: src/mkvtoolnix-gui/merge/output.cpp:265
 #, no-c-format
 msgid "Size:"
@@ -11706,7 +11711,7 @@ msgstr "시작:"
 msgid "Statistics for track number {0}: number of blocks: {1}; size in bytes: {2}; duration in seconds: {3}; approximate bitrate in bits/second: {4}\n"
 msgstr "트랙 번호 {0} 통계: 블록 수: {1}; 크기(바이트): {2}; 재생 시간(초): {3}; 비트 전송률[근사치](비트/초): {4}\n"
 
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:395
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:396
 #: src/mkvtoolnix-gui/jobs/model.cpp:108
 #, no-c-format
 msgid "Status"
@@ -11714,14 +11719,14 @@ msgstr "상태"
 
 #: src/mkvtoolnix-gui/forms/header_editor/value_page.h:206
 #: src/mkvtoolnix-gui/forms/main_window/available_update_info_dialog.h:159
-#: src/mkvtoolnix-gui/forms/util/language_dialog.h:397
+#: src/mkvtoolnix-gui/forms/util/language_dialog.h:398
 #: src/mkvtoolnix-gui/forms/watch_jobs/tab.h:289
 #: src/mkvtoolnix-gui/header_editor/value_page.cpp:182
 #, no-c-format
 msgid "Status:"
 msgstr "상태:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2219
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2220
 #, no-c-format
 msgid "Stay on top of other &windows"
 msgstr ""
@@ -11864,7 +11869,7 @@ msgstr "TTA"
 msgid "TTA (The lossless True Audio codec)"
 msgstr "TTA [무손실 가역압축 오디오 코덱](The lossless True Audio codec)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2226
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2227
 #, no-c-format
 msgid "Tab &position in tab widgets:"
 msgstr "탭 위젯의 탭 위치(&P):"
@@ -12392,7 +12397,7 @@ msgstr "현재 모드는 --multiplex, --edit-chapters 나 --edit-headers로 바�
 msgid "The current multiplex settings will be closed."
 msgstr "현재 합치기 설정을 닫습니다."
 
-#: src/merge/generic_packetizer.cpp:1454
+#: src/merge/generic_packetizer.cpp:1456
 #, no-c-format, c++-format
 msgid "The current packet's timestamp is smaller than that of the previous packet. This usually means that the source file is a Matroska file that has not been created 100% correctly. The timestamps of all packets will be adjusted by {0}ms in order not to lose any data. This may throw audio/video synchronization off, but that can be corrected with mkvmerge's \"--sync\" option. If you already use \"--sync\" and you still get this warning then do NOT worry -- this is normal. If this error happens more than once and you get this message more than once for a particular track then either is the source file badly mastered, or mkvmerge contains a bug. In this case you should contact the author Moritz Bunkus <moritz@bunkus.org>.\n"
 msgstr "현재 패킷의 타임코드는 이전 패킷의 타임코드보다 작습니다. 이것은 보통 소스 파일이 100%정확하게 작성되지 않은 Matroska 파일임을 의미합니다. 데이터 손실을 피하기 위해 타임코드는 {0}밀리초 조정됩니다. 이 때문에 오디오/비디오 동기화에 영향을 미칠 수 있지만, mkvmerge의 \"--sync\"옵션으로 보정할 수 있습니다. 만약 이미 \"--sync\"옵션을 사용하고 있지만 여전히 이 경고가 표시되는 경우는 걱정할 필요가 없습니다 -- 이것은 정상입니다. 이 오류가 여러번 발생하고, 특정 트랙에서 이 메시지가 여러번 표시되는 경우, 원본 파일 자체에 문제가 있거나 mkvmerge의 자체 버그일 수 있습니다. 이런 경우, 제작자 Moritz Bunkus <moritz@bunkus.org>에게 문의하십시오.\n"
@@ -13781,12 +13786,12 @@ msgstr "헤더 값에 오류가 있어 헤더를 저장할 수 없습니다. 첫
 msgid "There's not enough space at the beginning of the file to fit the updated 'EBML head' element in."
 msgstr "파일의 시작 부분에 업데이트된 'EBML 헤드' 요소를 맞춰 넣기에 충분한 공간이 없습니다."
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:218
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:219
 #, no-c-format
 msgid "These are less often used options that control the output structure that mkvmerge creates."
 msgstr "이것들은 mkvmerge가 생성하는 출력 구조를 제어하는데 덜 자주 사용되는 옵션입니다."
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:223
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:224
 #, no-c-format
 msgid "These are options meant for development. They're not officially supported and may change from release to release."
 msgstr "이것들은 개발 중이라는 뜻의 옵션입니다. 공식적으로는 지원하지 않으며 배포시마다 바뀔 수 있습니다."
@@ -14189,8 +14194,8 @@ msgstr "타임코드:"
 
 #: src/common/kax_element_names.cpp:98
 #: src/common/property_element.cpp:118
-#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:74
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:331
+#: src/mkvtoolnix-gui/forms/merge/select_disc_library_information_dialog.h:75
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:333
 #: src/mkvtoolnix-gui/merge/disc_library_information_widget.cpp:127
 #, no-c-format
 msgid "Title"
@@ -14256,7 +14261,7 @@ msgstr "트랙 이름(&K):"
 msgid "Track"
 msgstr "트랙"
 
-#: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:114
+#: src/mkvtoolnix-gui/forms/main_window/prefs_language_shortcut_dialog.h:115
 #, fuzzy, no-c-format
 msgid "Track &name (optional):"
 msgstr "트랙 이름(&K):"
@@ -14297,7 +14302,7 @@ msgstr "트랙 추출"
 msgid "Track headers"
 msgstr "트랙 헤더"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2246
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2247
 #, fuzzy, no-c-format
 msgid "Track name"
 msgstr "트랙 이름(&K):"
@@ -14445,7 +14450,7 @@ msgstr "지원되지 않는 방식(압축/암호화)으로 인코딩된 내용�
 msgid "Tracks with unsupported content encoding schemes (compression or encryption) cannot be modified.\n"
 msgstr "지원되지 않는컨텐츠 인코딩 체계(압축 또는 암호화)가 있는 트랙은 수정할 수 없습니다.\n"
 
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:316
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:317
 #, no-c-format
 msgid "Tracks:"
 msgstr "트랙:"
@@ -14472,7 +14477,7 @@ msgid "Two files multiplexed with the same settings and this switch activated wi
 msgstr "같은 설정으로 합친 두 파일과 활성화된 이 스위치는 동일합니다."
 
 #: src/common/kax_element_names.cpp:170
-#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:320
+#: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:322
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:162
 #: src/mkvtoolnix-gui/jobs/model.cpp:111
 #: src/mkvtoolnix-gui/merge/track_model.cpp:74
@@ -14665,7 +14670,7 @@ msgstr "사용법"
 msgid "Usage and examples"
 msgstr "사용법과 예"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2277
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2278
 #, fuzzy, no-c-format
 msgid "Use &file && track colors"
 msgstr "묵음 트랙"
@@ -14675,7 +14680,7 @@ msgstr "묵음 트랙"
 msgid "Use 'segment linking' for the resulting files."
 msgstr "결과로 나오는 파일에 '세그먼트 링크'를 사용합니다."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2318
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2319
 #, no-c-format
 msgid "Use fi&xed directory:"
 msgstr "고정 폴더 사용(&X):"
@@ -14685,7 +14690,7 @@ msgstr "고정 폴더 사용(&X):"
 msgid "Use fixed values for the elements that change with each file otherwise (multiplexing date, segment UID, track UIDs etc.)."
 msgstr "각 파일에서 다르게 바뀌는 요소(합친 날짜, 세그먼트 UID, 트랙 UID 등)에 대해 고정된 값을 사용하세요."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2223
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2224
 #, fuzzy, no-c-format
 msgid "Use legac&y MIME types for font attachments"
 msgstr "하나 이상의 첨부 파일을 삭제합니다"
@@ -14695,17 +14700,17 @@ msgstr "하나 이상의 첨부 파일을 삭제합니다"
 msgid "Use legacy font MIME types when adding new attachments or replacing existing ones"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2214
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2215
 #, fuzzy, no-c-format
 msgid "Use system settings"
 msgstr "코덱 설정"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2312
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2313
 #, no-c-format
 msgid "Use the &title as the base file name if a title is set"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2313
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2314
 #, fuzzy, no-c-format
 msgid "Use the input file's &directory name instead of the file name"
 msgstr "선택한 파일명에서 대상 파일명 정하기(&F)"
@@ -14782,7 +14787,7 @@ msgstr "유효한 해킹:\n"
 msgid "Validation failed"
 msgstr "검증 실패"
 
-#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:220
+#: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:221
 #, no-c-format
 msgid "Value"
 msgstr "값"
@@ -15148,22 +15153,22 @@ msgstr "WAVPACK v4 오디오"
 msgid "WAVPACK4"
 msgstr "WAVPACK4"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2255
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2256
 #, no-c-format
 msgid "Warn about missing &audio tracks:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2233
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2234
 #, no-c-format
 msgid "Warn before &aborting running jobs"
 msgstr "실행 중인 작업 취소 전 경고하기(&A)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2232
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2233
 #, no-c-format
 msgid "Warn before &closing modified tabs"
 msgstr "변경된 탭 닫기 전 경고하기(&C)"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2234
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2235
 #, no-c-format
 msgid "Warn before &overwriting existing items (files, jobs etc.)"
 msgstr "파일, 작업 등 기존 항목 덮어쓰기 전 경고하기(&O)"
@@ -15180,7 +15185,7 @@ msgstr "{0}번째 경고: 시작 시간 타임코드가 이전 항목의 타임�
 msgid "Warning:"
 msgstr "경고:"
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2231
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2232
 #, no-c-format
 msgid "Warnings"
 msgstr "경고"
@@ -15215,12 +15220,12 @@ msgstr "WebM 파일"
 msgid "WebVTT subtitles"
 msgstr "WebVTT 자막"
 
-#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:115
+#: src/mkvtoolnix-gui/forms/header_editor/action_for_dropped_files_dialog.h:116
 #, no-c-format
 msgid "What do you want to do with the files you've dragged & dropped here?"
 msgstr "여기에 드래그 드롭한 파일로 무슨 작업을 할까요?"
 
-#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:166
+#: src/mkvtoolnix-gui/forms/merge/adding_appending_files_dialog.h:167
 #, fuzzy, no-c-format
 msgid "What do you want to do with the files you've dragged & dropped or copied & pasted here?"
 msgstr "여기에 드래그 드롭한 파일로 무슨 작업을 할까요?"
@@ -15230,7 +15235,7 @@ msgstr "여기에 드래그 드롭한 파일로 무슨 작업을 할까요?"
 msgid "What do you want to do with the files?"
 msgstr "파일을 덮어쓸까요?"
 
-#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:140
+#: src/mkvtoolnix-gui/forms/merge/ask_scan_for_playlists_dialog.h:141
 #, no-c-format
 msgid "What to do in the future:"
 msgstr "앞으로 할 작업:"
@@ -15240,7 +15245,7 @@ msgstr "앞으로 할 작업:"
 msgid "What you input here is added after all the other options the GUI adds so that you could overwrite any of the GUI's options for this track."
 msgstr "이 트랙에 대해 GUI의 어떤 옵션이든 덮어쓸 수 있도록, GUI의 다른 모든 옵션을 추가한 후에 여기에 입력한 것을 추가합니다."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2342
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2343
 #, no-c-format
 msgid "When &dropping files:"
 msgstr "파일 드롭시(&D)"
@@ -15255,17 +15260,17 @@ msgstr "완료시...(&F)"
 msgid "When a file is added its name is scanned."
 msgstr "파일 추가시 그 이름을 검색합니다."
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2264
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2265
 #, no-c-format
 msgid "When adding d&irectories via drag && drop/copy && paste:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2262
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2263
 #, no-c-format
 msgid "When adding files via &drag && drop/copy && paste:"
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2263
+#: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2264
 #, fuzzy, no-c-format
 msgid "When adding m&ultiple files via \"add source files\":"
 msgstr "파일 드롭시(&D)"
@@ -15617,7 +15622,7 @@ msgstr "시간 숫자 'HH'를 빠뜨린 것 같습니다."
 msgid "You must select an existing file."
 msgstr ""
 
-#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:136
+#: src/mkvtoolnix-gui/forms/merge/adding_directories_dialog.h:137
 #, no-c-format
 msgid "You've dragged & dropped or copied & pasted at least one directory. There are several ways to handle them:"
 msgstr ""
