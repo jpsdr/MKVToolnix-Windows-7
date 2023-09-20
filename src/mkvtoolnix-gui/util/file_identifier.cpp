@@ -90,7 +90,7 @@ FileIdentifier::identify() {
   try {
     storeResultInCache();
   } catch (ProcessX const &ex) {
-    setError(QY("Storing result in cache filed"), Q(ex.what()));
+    setError(QY("Storing result in cache failed"), Q(ex.what()));
     return false;
   }
 
