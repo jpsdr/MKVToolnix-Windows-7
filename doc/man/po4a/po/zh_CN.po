@@ -5,9 +5,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mkvtoolnix-man\n"
 "POT-Creation-Date: 2023-08-20 10:59+0200\n"
-"PO-Revision-Date: 2016-02-03 20:53+0000\n"
-"Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2022\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
+"PO-Revision-Date: 2023-09-20 12:05+0200\n"
+"Last-Translator: Dian Li <xslidian@gmail.com>, 2009-2023\n"
+"Language-Team: Chinese (China) (http://app.transifex.com/moritz-bunkus/mkvtoolnix/language/zh_CN/)\n"
 "Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1907,7 +1907,7 @@ msgstr "此选项更改输入文件创建时轨道的顺序。变量为逗号分
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:429
 msgid "If this option isn't given, tracks will be sorted by their type first &amp; the order of their source file second. Video tracks come first followed by audio &amp; subtitle tracks. Other rarely used track types come last."
-msgstr ""
+msgstr "若未指定该选项，那么轨道将首先按照其类型，其次按照其源文件的顺序排序。视频轨道最先，音轨和字幕轨道其次，其他较少用的类型的轨道最后。"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:436
@@ -2061,15 +2061,13 @@ msgstr "扩展语言子标签形式在最简式的基础上生成。所有存在
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><term>
 #: doc/man/mkvmerge.xml:587
-#, fuzzy
-#| msgid "<option>--list-stereo-modes</option>"
 msgid "<option>--stop-after-video-ends</option>"
-msgstr "<option>--list-stereo-modes</option>"
+msgstr "<option>--stop-after-video-ends</option>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><para>
 #: doc/man/mkvmerge.xml:590
 msgid "Stops processing after the primary video track ends, discarding any remaining packets of other tracks."
-msgstr ""
+msgstr "主要视频轨道结束后停止处理，丢弃任何其他轨道剩余的包。"
 
 #. type: Content of: <refentry><refsect1><refsect2><title>
 #: doc/man/mkvmerge.xml:598
@@ -3490,10 +3488,8 @@ msgstr "<literal>json</literal> 格式输出机器可读的 JSON 表达式。此
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2154
-#, fuzzy
-#| msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v17.json\"><literal>mkvmerge-identification-output-schema-v17.json</literal></ulink>"
 msgid "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v18.json\"><literal>mkvmerge-identification-output-schema-v18.json</literal></ulink>"
-msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v17.json\"><literal>mkvmerge-identification-output-schema-v17.json</literal></ulink>"
+msgstr "<ulink url=\"https://mkvtoolnix.download/doc/mkvmerge-identification-output-schema-v18.json\"><literal>mkvmerge-identification-output-schema-v18.json</literal></ulink>"
 
 #. type: Content of: <refentry><refsect1><refsect2><variablelist><varlistentry><listitem><orderedlist><listitem><para>
 #: doc/man/mkvmerge.xml:2158
@@ -4011,39 +4007,37 @@ msgstr "特殊轨道 ID '<constant>-2</constant>' 指输入文件中的章节。
 #: doc/man/mkvmerge.xml:2705
 #: doc/man/mkvpropedit.xml:715
 msgid "Language handling"
-msgstr ""
+msgstr "语言处理"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2708
 msgid "&matroska; has support for two different types of language elements: the old, deprecated \"Language\" element containing ISO 639-2 alpha 3 codes and the new \"LanguageIETF\" tags containing IETF BCP 47 language tags. All of &mkvmerge;'s options that accept a language accept a BCP 47 language tag. &mkvmerge; will derive the value for the deprecated \"Language\" element from the BCP 47 language tags wherever possible."
-msgstr ""
+msgstr "&matroska;支持两种不同类型的语言元素：古旧不再推荐使用的“Language”元素，其使用的是ISO 639-2 alpha 3语言代码，以及包含IETF BCP 47语言标签的新加入的“LanguageIETF”标签。所有接受语言的&mkvmerge;选项都接受BCP 47语言标签。&mkvmerge;会在可能的情况下推导出不推荐的“Language”元素的值。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2714
 msgid "When identifying a file in JSON mode, existing \"LanguageIETF\" track header elements will be output as the <literal>language_ietf</literal> track property."
-msgstr ""
+msgstr "在JSON模式中识别文件时，现存的“LanguageIETF”轨道头元素会被输出作<literal>language_ietf</literal>轨道属性。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2719
 msgid "When writing a file &mkvmerge; will always write the \"LanguageIETF\", \"ChapLanguageIETF\" and \"TagLanguageIETF\" elements (the latter two only if chapters or tags are written respectively). In addition to those elements the corresponding old elements will be written; they'll be set to the ISO 639-2 code portion of the BCP 47 language tag. For example, when the track language is set to <literal>sr-Cyrl-RS</literal> \"LanguageIETF\" will be set to <literal>sr-Cyrl-RS</literal> and the old \"Language\" element will be set to <literal>srp</literal>."
-msgstr ""
+msgstr "写入文件时，&mkvmerge;总会写入“LanguageIETF”、“ChapLanguageIETF”和“TagLanguageIETF”元素（如果章节和标签分别写入，那么仅会写入这三项的后两个）。除这些元素外，也会对应的古旧元素，它们会被设为BCP 47语言标签中的ISO 639-2代码部分。比如轨道语言设为<literal>sr-Cyrl-RS1</literal>时，“LanguageIETF”会被设为<literal>sr-Cyrl-RS</literal>，而古旧的“Language”元素会被设为<literal>srp</literal>。."
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2727
 msgid "When reading existing files (Matroska files, XML chapter or tag files etc.) that already contain \"…LanguageIETF\" elements the existing elements will be kept. Otherwise \"…LanguageIETF\" elements will be added based on command-line options and other existing deprecated \"…Language\" elements."
-msgstr ""
+msgstr "若读取的现有文件 (Matroska 文件、XML 章节或标签文件等) 已含有 ｢…LanguageIETF｣ 元素，这些已有的元素将会被保留。否则将根据命令行选项及其他已有的 ｢…Language｣ 元素新建 ｢…LanguageIETF｣ 元素。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2733
 msgid "The creation of the new elements can be disabled completely with the command-line option <option>--disable-language-ietf</option> which operates on all three new elements."
-msgstr ""
+msgstr "可通过命令行选项 ｢<option>--disable-language-ietf</option>｣ 来彻底禁止创建新的元素，该选项对现有的三类新元素均有效。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvmerge.xml:2738
-#, fuzzy
-#| msgid "The content is treated as if it had been passed via the <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link> option."
 msgid "You can chose the normalization method applied to extended language sub-tags with the parameter <link linkend=\"mkvmerge.description.normalize_language_ietf\"><option>--normalize-language-ietf</option></link>."
-msgstr "内容将被当作通过 <link linkend=\"mkvmerge.description.engage\"><option>--engage</option></link> 选项传递的参数对待。"
+msgstr "您可以通过参数 ｢<link linkend=\"mkvmerge.description.normalize_language_ietf\"><option>--normalize-language-ietf</option></link>｣ 选择适用于扩展语言子标签的规范化方式。"
 
 #. type: Content of: <refentry><refsect1><note><para>
 #: doc/man/mkvmerge.xml:2747
@@ -5380,27 +5374,27 @@ msgstr "按 MIME 类型选择。本格式的选择器为纯文本「<literal>mim
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:718
 msgid "&mkvpropedit; mostly tries to do the right thing by default. Therefore changes to the <option>language</option> property will cause &mkvpropedit; to apply the same change to both the new \"LanguageIETF\" element as well as the old \"Language\" element similar to how &mkvmerge; applies the language to both elements. For example, when using <literal>mkvpropedit movie.mkv --edit track:2 --set language=zh-TW</literal> the \"LanguageIETF\" element will be set to <literal>zh-TW</literal> and the old \"Language\" element to <literal>chi</literal>."
-msgstr ""
+msgstr "&mkvpropedit; 基本上会默认做正确的事。因此修改 ｢<option>language</option> ｣ 属性会令 &mkvpropedit; 将改动同时应用至 ｢LanguageIETF｣ 元素以及旧版的 ｢Language｣ 元素，与 &mkvmerge; 将语言属性应用至这两个元素的行为相似。例如，命令 ｢<literal>mkvpropedit 影片.mkv --edit track:2 --set language=zh-HK</literal>｣ 可将 ｢LanguageIETF｣ 元素设为 ｢<literal>zh-HK</literal>｣ ，同时将旧版 ｢Language｣ 元素设为 ｢<literal>chi</literal>｣。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:726
 msgid "Additionally there's a new track header property named <option>language-ietf</option> that can be set or removed. Changes to this property only apply to the new \"LanguageIETF\" track header element. A caveat is that the old \"Language\" track header element is a mandatory element in Matroska — meaning even if it isn't present in the file it still has an implied value. When the user only sets the <option>language-ietf</option> property but not the <option>language</option> property, &mkvpropedit; will therefore add the old \"Language\" element in certain cases &amp; set it to <literal>und</literal> (meaning \"undetermined\") as the user didn't specify a value for it."
-msgstr ""
+msgstr "此外，还有一个新的名为 ｢<option>language-ietf</option>｣ 的轨道头部属性可以设置或移除。对该属性的变更只会应用到新的 ｢LanguageIETF｣ 轨道头部元素。需要提醒的是，旧版 ｢Language｣ 轨道头部元素是 Matroska 格式的必备元素 — 也就是说，即使它在文件中未出现，它也存在一个隐含的默认值。若用户只设置 ｢<option>language-ietf</option>｣ 属性但不设置 ｢<option>language</option>｣ 属性，&mkvpropedit; 将在必要时添加旧版 ｢Language｣ 元素，并将其值设为 ｢<literal>und</literal>｣ (即 ｢未定｣)，因为用户未为其指定一个值。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:734
 msgid "When reading XML chapter or tag files &mkvpropedit; works like &mkvmerge; does."
-msgstr ""
+msgstr "读取 XML 章节或标签文件时，&mkvpropedit; 的行为逻辑与 &mkvmerge; 一致。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:736
 msgid "The creation of the new elements can be disabled completely with the command-line option `--disable-language-ietf` which operates on all three new elements."
-msgstr ""
+msgstr "可通过命令行选项 ｢--disable-language-ietf｣ 来彻底禁止创建新的元素，该选项对现有的三类新元素均有效。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:739
 msgid "You can chose the normalization method applied to extended language sub-tags with the parameter <option>--normalize-language-ietf</option>."
-msgstr ""
+msgstr "您可以通过参数 ｢<option>--normalize-language-ietf</option>｣ 选择适用于扩展语言子标签的规范化方式。"
 
 #. type: Content of: <refentry><refsect1><para>
 #: doc/man/mkvpropedit.xml:746
