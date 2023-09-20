@@ -934,7 +934,7 @@ msgid "  --track-name <TID:name>  Sets the name for a track.\n"
 msgstr "  --track-name <TID:name>  设置指定轨道的名称。\n"
 
 #: src/merge/mkvmerge.cpp:126
-#, fuzzy, no-c-format
+#, no-c-format
 msgid ""
 "  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
 "                           A comma separated list of both file IDs\n"
@@ -943,9 +943,11 @@ msgid ""
 "                           the tracks will sorted by type (video, audio,\n"
 "                           subtitles, others).\n"
 msgstr ""
-"  --track-order <文件ID1:TID1,文件ID2:TID2,文件ID3:TID3,...>\n"
-"                           逗号分隔的列表，内容为文件 ID 与轨道 ID，\n"
-"                           控制输出文件中轨道的顺序。\n"
+"  --track-order <FileID1:TID1,FileID2:TID2,FileID3:TID3,...>\n"
+"                           逗号分隔的文件 ID、轨道 ID 列表，\n"
+"                           控制输出文件中各轨道的次序。\n"
+"                           若参数为空，则各轨道将按照其类型\n"
+"                           (视频、音频、字幕、其他) 排序。\n"
 
 #: src/merge/mkvmerge.cpp:234
 #, no-c-format
@@ -1870,7 +1872,7 @@ msgstr "启用(&E)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2260
 #, no-c-format
 msgid "&Ensure at least one track of each type has its \"track enabled\" flag set"
-msgstr ""
+msgstr "确保每种类型至少有一条轨道设置 ｢轨道启用｣ 标记 (&E)"
 
 #: src/mkvtoolnix-gui/forms/merge/command_line_dialog.h:119
 #, no-c-format
@@ -3444,7 +3446,7 @@ msgstr "添加标签文件"
 #: src/mkvtoolnix-gui/merge/tab.cpp:602
 #, no-c-format
 msgid "Adding the job to the queue failed"
-msgstr ""
+msgstr "将任务添加到队列失败"
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:236
 #, no-c-format
@@ -4888,9 +4890,9 @@ msgid "Color matrix coefficients:"
 msgstr "颜色矩阵系数:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2218
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Color palette:"
-msgstr "颜色空间"
+msgstr "配色:"
 
 #: src/common/kax_element_names.cpp:136
 #, no-c-format
@@ -4925,7 +4927,7 @@ msgstr "颜色转换"
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:690
 #, no-c-format
 msgid "Community && &help forum"
-msgstr ""
+msgstr "社区 && 帮助论坛(&H)"
 
 #: src/mkvtoolnix-gui/jobs/job.cpp:271
 #, no-c-format
@@ -5486,7 +5488,7 @@ msgstr "DVD"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2216
 #, no-c-format
 msgid "Dark"
-msgstr ""
+msgstr "深色"
 
 #: src/mkvtoolnix-gui/info/model.cpp:90
 #, no-c-format
@@ -5664,9 +5666,9 @@ msgid "Depending on this setting the language can also be derived from the file 
 msgstr "根据此项设置，输入文件中语言为「未定」(“und”) 时，也可根据文件名推断语言。"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2296
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Derive \"forced display\" fla&g for subtitles from file names:"
-msgstr "根据文件名来推断轨道语言"
+msgstr "根据文件名推断 ｢强制显示｣ 标记 (&G):"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:210
 #, no-c-format
@@ -6250,7 +6252,7 @@ msgstr "按语言选中要复制的轨道"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2295
 #, no-c-format
 msgid "Enable dialog &normalization gain removal for audio tracks"
-msgstr "为音频轨道启用对白正常化增益移除(&N)"
+msgstr "为音频轨道启用对白正规化增益移除(&N)"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2243
 #, no-c-format
@@ -6909,7 +6911,7 @@ msgstr "可以为每个目录创建一个新的混流设置标签页。同一个
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:331
 #, no-c-format
 msgid "For each track type the GUI determines if at least one track has the flag turned on."
-msgstr ""
+msgstr "对于每种轨道类型，GUI 将推断是否有至少一条轨道启用了该标记。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:412
 #, no-c-format
@@ -7421,7 +7423,7 @@ msgstr "若启用，将不经询问直接跳过此类文件。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:330
 #, no-c-format
 msgid "If enabled, the GUI checks the state of the 'track enabled' flag of all video, audio & subtitle tracks when starting to multiplex or adding a job to the job queue."
-msgstr ""
+msgstr "若存在，GUI 将在开始混流或将任务添加到任务队列时检查所有视频、音频及字幕轨道的 ｢轨道启用｣ 标记的状态。"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:419
 #, no-c-format
@@ -7535,7 +7537,7 @@ msgstr "若没有输出视频轨道，则将不进行切割操作。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:332
 #, no-c-format
 msgid "If not, it will turn on the flag for the first track of the current type."
-msgstr ""
+msgstr "若不存在，则会为每种类型中的第一条轨道启用该标记。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:225
 #, no-c-format
@@ -8259,7 +8261,7 @@ msgstr "任务队列"
 #: src/mkvtoolnix-gui/jobs/program_runner/linux_program_runner.cpp:120
 #, no-c-format
 msgid "Job queue changed"
-msgstr "任务队列已变更"
+msgstr "任务队列有变化"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:244
 #, no-c-format
@@ -8269,7 +8271,7 @@ msgstr "任务启动日期与时间 (ISO 8601 格式)"
 #: src/mkvtoolnix-gui/jobs/program_runner/linux_program_runner.cpp:90
 #, no-c-format
 msgid "Job succeeded"
-msgstr "任务成功完成"
+msgstr "任务已成功执行完毕"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:242
 #, no-c-format
@@ -8346,9 +8348,9 @@ msgid "Language (IETF BCP 47)"
 msgstr "语言 (IETF BCP 47)"
 
 #: src/common/property_element.cpp:143
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Language (obsolete)"
-msgstr "下方选中的语言"
+msgstr "语言 (废弃)"
 
 #: src/mkvtoolnix-gui/chapter_editor/renumber_sub_chapters_parameters_dialog.cpp:53
 #, no-c-format
@@ -8408,9 +8410,9 @@ msgid_plural "Length: %1 bytes"
 msgstr[0] "长度: %1 字节"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2215
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Light"
-msgstr "右侧"
+msgstr "浅色"
 
 #: src/merge/timestamp_factory.cpp:359
 #, no-c-format, c++-format
@@ -8534,7 +8536,7 @@ msgstr "MKVToolNix 网站(&W)"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:773
 #, no-c-format
 msgid "MKVToolNix GUI acts as a portable application but cannot write to its base directory, '%1'. If it should act as an installed application, remove the file '%2'."
-msgstr ""
+msgstr "MKVToolNix GUI 作为便携式应用启动，但没有自身目录 ｢%1｣ 的写入权限。若您打算以本机常驻应用模式启动，请删除目录中的 ｢%2｣ 文件。"
 
 #: src/mkvtoolnix-gui/merge/tab.cpp:236
 #: src/mkvtoolnix-gui/merge/tool.cpp:345
@@ -8657,9 +8659,9 @@ msgstr "将该轨道标记为 ｢强制显示｣。"
 
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:658
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:669
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Markdown files"
-msgstr "Matroska 文件"
+msgstr "Markdown 文件"
 
 #: src/common/file_types.cpp:91
 #, no-c-format
@@ -10845,9 +10847,9 @@ msgid "Sampling frequency in Hz."
 msgstr "采样率，单位 Hz。"
 
 #: src/mkvtoolnix-gui/util/text_display_dialog.cpp:106
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Save"
-msgstr "保存(&S)"
+msgstr "保存"
 
 #: src/mkvtoolnix-gui/forms/main_window/main_window.h:666
 #, no-c-format
@@ -10913,9 +10915,9 @@ msgstr "保存章节失败。"
 
 #: src/mkvtoolnix-gui/util/file.cpp:152
 #: src/mkvtoolnix-gui/util/option_file.cpp:31
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Saving the file '%1' failed. Error message from the system: %2"
-msgstr "解析器错误消息: %1"
+msgstr "文件 ｢%1｣ 保存失败。操作系统提供的错误消息: %2"
 
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:255
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:264
@@ -11597,9 +11599,9 @@ msgid "Specifies a yaw rotation to the projection."
 msgstr "设置投影的水平平面旋转（yaw，上下轴不动）。"
 
 #: src/common/property_element.cpp:143
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Specifies the language of the track (obsolete)."
-msgstr "指定轨道语言。"
+msgstr "指定轨道语言 (已废弃元素)。"
 
 #: src/common/property_element.cpp:144
 #, no-c-format
@@ -11745,11 +11747,9 @@ msgid "Stop at the first cluster"
 msgstr "在第一个簇停止"
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:54
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Stops processing after the primary video track ends, discarding any remaining packets of other tracks."
-msgstr ""
-"  --stop-after-video-ends  在主视频轨结束时停止处理，\n"
-"                           并丢弃其余轨道的剩余数据包。\n"
+msgstr "主要视频轨道结束时就停止处理，丢弃其他轨道剩余的任何数据包。"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:250
 #, no-c-format
@@ -11764,7 +11764,7 @@ msgstr "将 CodecPrivate 数据的变更存储在 CodecState 元素中，而非�
 #: src/mkvtoolnix-gui/util/file_identifier.cpp:93
 #, no-c-format
 msgid "Storing result in cache filed"
-msgstr ""
+msgstr "将结果储存到缓存时失败"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2221
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2302
@@ -11786,7 +11786,7 @@ msgstr "字幕和章节属性"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:518
 #, no-c-format
 msgid "Subtitle files often contain the word 'forced' in their file name to signal that they're intended for 'forced display' only (e.g. when they speak Elfish in 'Lord of the Rings')."
-msgstr ""
+msgstr "字幕文件常在文件名中以 ｢forced｣ (强制) 字样表明它们应该 ｢强制显示｣ (例如《指环王》中角色讲精灵语时的字幕)。"
 
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:56
 #, no-c-format
@@ -11960,7 +11960,7 @@ msgstr "要求 mkvmerge 在每个簇中最多置入「n」个数据区块。"
 #: src/mkvtoolnix-gui/main_window/main_window.cpp:769
 #, no-c-format
 msgid "Temporary files cannot be created. Additional information: %1"
-msgstr ""
+msgstr "无法创建临时文件。其他信息: %1"
 
 #: src/mkvtoolnix-gui/info/job_settings_widget.cpp:94
 #: src/mkvtoolnix-gui/merge/input.cpp:1409
@@ -12032,7 +12032,7 @@ msgstr "程序可以扫描这些文件，扫描结果包括每个播放列表的
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:519
 #, no-c-format
 msgid "The GUI can set the 'forced display' flag for such tracks if the file name matches this regular expression."
-msgstr ""
+msgstr "GUI 可将文件名与此处的正则表达式匹配的轨道设置 ｢强制显示｣ 标记。"
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:949
 #: src/mkvtoolnix-gui/merge/tool.cpp:964
@@ -13659,7 +13659,7 @@ msgstr "此值不符合 IETF BCP 47/RFC 5646 语言标签的常规结构。"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1477
 #, no-c-format
 msgid "The value for deriving the 'forced display' flag for subtitles from file names must be a valid regular expression."
-msgstr ""
+msgstr "用于根据字幕文件名推断 ｢强制显示｣ 标记的值必须是有效的正则表达式。"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:622
 #, no-c-format
@@ -14676,9 +14676,9 @@ msgid "Use legacy font MIME types when adding new attachments or replacing exist
 msgstr "添加新的字体附件或替换已有的字体附件时使用传统的 MIME 类型"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2214
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Use system settings"
-msgstr "关闭设置(&C)"
+msgstr "使用系统设置"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2312
 #, no-c-format
