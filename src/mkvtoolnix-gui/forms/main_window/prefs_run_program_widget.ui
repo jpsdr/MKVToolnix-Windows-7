@@ -268,7 +268,7 @@ p, li { white-space: pre-wrap; }
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QSpinBox" name="sbVolume">
+             <widget class="mtx::gui::Util::BasicSpinBox" name="sbVolume">
               <property name="suffix">
                <string notr="true">%</string>
               </property>
@@ -314,6 +314,13 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>mtx::gui::Util::BasicSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>mkvtoolnix-gui/util/basic_spin_box.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>cbConfigurationActive</tabstop>
   <tabstop>leName</tabstop>
