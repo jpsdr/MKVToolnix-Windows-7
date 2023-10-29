@@ -5,7 +5,7 @@
 * MKVToolNix GUI: if the system's locale uses one of the Han scripts, the GUI
   will force Arabic numerals to be used in spin boxes. This prevents Suzhou
   numerals from being used which seems to be the default on Windows systems
-  sold in China. Fixes #3624.
+  sold in China. Implements #3624.
 
 ## Bug fixes
 
