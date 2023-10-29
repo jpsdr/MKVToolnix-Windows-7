@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>838</width>
-    <height>710</height>
+    <width>850</width>
+    <height>745</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -111,7 +111,7 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QSpinBox" name="sbGuiNumRecentlyUsedStrings">
+              <widget class="mtx::gui::Util::BasicSpinBox" name="sbGuiNumRecentlyUsedStrings">
                <property name="minimum">
                 <number>1</number>
                </property>
@@ -133,7 +133,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="sbGuiFontPointSize">
+                <widget class="mtx::gui::Util::BasicSpinBox" name="sbGuiFontPointSize">
                  <property name="minimum">
                   <number>5</number>
                  </property>
@@ -531,8 +531,7 @@
                 <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="list-add">
-                 <normaloff>.</normaloff>.</iconset>
+                <iconset theme="list-add"/>
                </property>
               </widget>
              </item>
@@ -548,8 +547,7 @@
                 <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="edit-entry">
-                 <normaloff>.</normaloff>.</iconset>
+                <iconset theme="edit-entry"/>
                </property>
               </widget>
              </item>
@@ -565,8 +563,7 @@
                 <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="list-remove">
-                 <normaloff>.</normaloff>.</iconset>
+                <iconset theme="list-remove"/>
                </property>
               </widget>
              </item>
@@ -729,8 +726,7 @@
                   <string/>
                  </property>
                  <property name="icon">
-                  <iconset theme="document-open-folder">
-                   <normaloff>.</normaloff>.</iconset>
+                  <iconset theme="document-open-folder"/>
                  </property>
                 </widget>
                </item>
@@ -1024,8 +1020,7 @@
                   <string notr="true"/>
                  </property>
                  <property name="icon">
-                  <iconset theme="list-add">
-                   <normaloff>.</normaloff>.</iconset>
+                  <iconset theme="list-add"/>
                  </property>
                 </widget>
                </item>
@@ -1035,8 +1030,7 @@
                   <string notr="true"/>
                  </property>
                  <property name="icon">
-                  <iconset theme="list-remove">
-                   <normaloff>.</normaloff>.</iconset>
+                  <iconset theme="list-remove"/>
                  </property>
                 </widget>
                </item>
@@ -1046,8 +1040,7 @@
                   <string notr="true"/>
                  </property>
                  <property name="icon">
-                  <iconset theme="document-edit">
-                   <normaloff>.</normaloff>.</iconset>
+                  <iconset theme="document-edit"/>
                  </property>
                 </widget>
                </item>
@@ -1076,8 +1069,7 @@
                   <string notr="true"/>
                  </property>
                  <property name="icon">
-                  <iconset theme="document-revert">
-                   <normaloff>.</normaloff>.</iconset>
+                  <iconset theme="document-revert"/>
                  </property>
                 </widget>
                </item>
@@ -1261,8 +1253,7 @@
                 <string/>
                </property>
                <property name="icon">
-                <iconset theme="view-choose">
-                 <normaloff>.</normaloff>.</iconset>
+                <iconset theme="view-choose"/>
                </property>
               </widget>
              </item>
@@ -1339,8 +1330,7 @@
                   <string notr="true"/>
                  </property>
                  <property name="icon">
-                  <iconset theme="edit-undo">
-                   <normaloff>.</normaloff>.</iconset>
+                  <iconset theme="edit-undo"/>
                  </property>
                 </widget>
                </item>
@@ -1573,8 +1563,7 @@
                 <string notr="true"/>
                </property>
                <property name="icon">
-                <iconset theme="edit-undo">
-                 <normaloff>.</normaloff>.</iconset>
+                <iconset theme="edit-undo"/>
                </property>
               </widget>
              </item>
@@ -1747,8 +1736,7 @@
                    <string/>
                   </property>
                   <property name="icon">
-                   <iconset theme="document-open-folder">
-                    <normaloff>.</normaloff>.</iconset>
+                   <iconset theme="document-open-folder"/>
                   </property>
                  </widget>
                 </item>
@@ -2047,7 +2035,7 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QSpinBox" name="sbMMinPlaylistDuration">
+            <widget class="mtx::gui::Util::BasicSpinBox" name="sbMMinPlaylistDuration">
              <property name="sizePolicy">
               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -2429,7 +2417,7 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QSpinBox" name="sbGuiRemoveOldJobsDays">
+              <widget class="mtx::gui::Util::BasicSpinBox" name="sbGuiRemoveOldJobsDays">
                <property name="suffix">
                 <string notr="true"> days</string>
                </property>
@@ -2471,7 +2459,7 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QSpinBox" name="sbGuiMaximumConcurrentJobs">
+              <widget class="mtx::gui::Util::BasicSpinBox" name="sbGuiMaximumConcurrentJobs">
                <property name="minimum">
                 <number>1</number>
                </property>
@@ -2538,8 +2526,7 @@
                 <string>&amp;Add action</string>
                </property>
                <property name="icon">
-                <iconset theme="list-add">
-                 <normaloff>.</normaloff>.</iconset>
+                <iconset theme="list-add"/>
                </property>
               </widget>
              </item>
@@ -2702,6 +2689,11 @@
    <extends>QWidget</extends>
    <header>mkvtoolnix-gui/util/string_list_configuration_widget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::BasicSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>mkvtoolnix-gui/util/basic_spin_box.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

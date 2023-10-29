@@ -1597,7 +1597,7 @@
                </widget>
               </item>
               <item row="3" column="1">
-               <widget class="QSpinBox" name="splitMaxFiles">
+               <widget class="mtx::gui::Util::BasicSpinBox" name="splitMaxFiles">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -1981,7 +1981,7 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QSpinBox" name="chapterTitleNumber">
+               <widget class="mtx::gui::Util::BasicSpinBox" name="chapterTitleNumber">
                 <property name="minimum">
                  <number>1</number>
                 </property>
@@ -2377,6 +2377,11 @@
    <extends>QGroupBox</extends>
    <header>mkvtoolnix-gui/util/qgs_collapsible_group_box.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>mtx::gui::Util::BasicSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>mkvtoolnix-gui/util/basic_spin_box.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>
