@@ -2237,15 +2237,15 @@ main_loop() {
     auto end_of_video_reached1                 = pull_packetizers_for_packets();
     auto [end_of_video_reached2, force_pulled] = force_pull_packetizers_of_fully_held_files();
 
-    if (g_stop_after_video_ends && (end_of_video_reached1 || end_of_video_reached2))
-      break;
-
     // Step 2: Pick the packet with the lowest timestamp and
     // stuff it into the Matroska file.
     auto winner = select_winning_packetizer();
 
     // Append the next track if appending is wanted.
     bool appended_a_track = s_appending_files && append_tracks_maybe();
+
+    if (g_stop_after_video_ends && (end_of_video_reached1 || end_of_video_reached2) && !appended_a_track)
+      break;
 
     if (winner && winner->pack) {
       // Step 3: Add the winning packet to a cluster. Full clusters will be

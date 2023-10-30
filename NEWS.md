@@ -1,3 +1,13 @@
+# Version ?
+
+## Bug fixes
+
+* mkvmerge: when the user requests processing be stopped after the video ends
+  `mkvmerge` will now take appending files into account properly. It won't
+  stop processing unconditionally after the first file ends anymore. Fixes
+  #3618.
+
+
 # Version 80.0 "Roundabout" 2023-10-29
 
 ## New features and enhancements
