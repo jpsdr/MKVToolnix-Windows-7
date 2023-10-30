@@ -10,7 +10,7 @@ sources = [
   { :file => "tags.xml",       :name => "Hitme.xml",                :mime_type => "text/plain",      :description => "Gonzo"                  },
 ]
 
-small_file = "data/avi/1-frame.avi"
+small_file = "data/text/tags.xml"
 
 commands = [
   "--delete-attachment 2",
