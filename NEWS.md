@@ -15,6 +15,13 @@
   `mkvmerge` will now take appending files into account properly. It won't
   stop processing unconditionally after the first file ends anymore. Fixes
   #3618.
+* mkvmerge: AV1 handling in readers: the readers will now provide the pixel
+  dimensions to the AV1 packetizer as early as possible, just like for other
+  video packetizers. That way the pixel dimensions are available for
+  calculating the display dimensions when command-line options such as
+  `--aspect-ratio` & `--aspect-ratio-factor` are used. Before the change the
+  calculation was done based on initial pixel dimension values of 0x0,
+  resulting in display dimensions of 0x0, too. Fixes #3611.
 
 
 # Version 80.0 "Roundabout" 2023-10-29

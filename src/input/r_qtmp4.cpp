@@ -1785,7 +1785,7 @@ qtmp4_reader_c::create_video_packetizer_mpeg1_2(qtmp4_demuxer_c &dmx) {
 void
 qtmp4_reader_c::create_video_packetizer_av1(qtmp4_demuxer_c &dmx) {
   m_ti.m_private_data = dmx.priv.empty() || (4 > dmx.priv[0]->get_size()) ? memory_cptr{} : dmx.priv[0];
-  dmx.ptzr            = add_packetizer(new av1_video_packetizer_c(this, m_ti));
+  dmx.ptzr            = add_packetizer(new av1_video_packetizer_c(this, m_ti, dmx.v_width, dmx.v_height));
 
   if (dmx.frame_rate)
     ptzr(dmx.ptzr).set_track_default_duration(mtx::to_int(mtx_mp_rational_t{boost::multiprecision::denominator(dmx.frame_rate), boost::multiprecision::numerator(dmx.frame_rate)} * 1'000'000'000ll));

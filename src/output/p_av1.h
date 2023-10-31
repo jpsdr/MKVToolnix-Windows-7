@@ -25,7 +25,7 @@ protected:
   bool m_is_framed{true}, m_header_parameters_set{};
 
 public:
-  av1_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti);
+  av1_video_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, unsigned int width, unsigned int height);
 
   virtual void set_is_unframed();
 

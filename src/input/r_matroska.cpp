@@ -1993,7 +1993,7 @@ kax_reader_c::create_av1_video_packetizer(kax_track_t *t,
     nti.m_private_data.reset();
   }
 
-  set_track_packetizer(t, new av1_video_packetizer_c(this, nti));
+  set_track_packetizer(t, new av1_video_packetizer_c(this, nti, t->v_width, t->v_height));
   show_packetizer_info(t->tnum, *t->ptzr_ptr);
   t->handle_packetizer_pixel_dimensions();
   t->handle_packetizer_default_duration();

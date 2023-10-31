@@ -81,7 +81,7 @@ obu_reader_c::create_packetizer(int64_t) {
   if (!demuxing_requested('v', 0) || !m_reader_packetizers.empty())
     return;
 
-  auto packetizer = new av1_video_packetizer_c{this, m_ti};
+  auto packetizer = new av1_video_packetizer_c{this, m_ti, m_width, m_height};
   packetizer->set_is_unframed();
 
   add_packetizer(packetizer);
