@@ -17,6 +17,7 @@
 #include "common/bit_writer.h"
 #include "common/codec.h"
 #include "common/ebml.h"
+#include "common/mm_io_x.h"
 #include "extract/xtr_aac.h"
 
 xtr_aac_c::xtr_aac_c(const std::string &codec_id,
@@ -61,17 +62,20 @@ xtr_aac_c::create_file(xtr_base_c *master,
       mtx::bits::reader_c r{audio_config->ga_specific_config->get_buffer(), audio_config->ga_specific_config->get_size()};
       mtx::bits::writer_c w{};
 
-      w.put_bits(3, mtx::aac::ID_PCE);
+      try {
+        w.put_bits(3, mtx::aac::ID_PCE);
 
-      r.skip_bits(1);           // frame_length_flag
-      if (r.get_bit())          // depends_on_core_coder
-        r.skip_bits(14);        // core_coder_delay
-      r.skip_bits(1);           // extension_flag
+        r.skip_bits(1);           // frame_length_flag
+        if (r.get_bit())          // depends_on_core_coder
+          r.skip_bits(14);        // core_coder_delay
+        r.skip_bits(1);           // extension_flag
 
-      mtx::aac::copy_program_config_element(r, w);
+        mtx::aac::copy_program_config_element(r, w);
 
-      m_program_config_element            = w.get_buffer();
-      m_program_config_element_bit_length = w.get_bit_position();
+        m_program_config_element            = w.get_buffer();
+        m_program_config_element_bit_length = w.get_bit_position();
+      } catch (mtx::mm_io::exception &) {
+      }
     }
 
   } else {

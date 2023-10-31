@@ -22,6 +22,10 @@
   `--aspect-ratio` & `--aspect-ratio-factor` are used. Before the change the
   calculation was done based on initial pixel dimension values of 0x0,
   resulting in display dimensions of 0x0, too. Fixes #3611.
+* mkvextract: AAC extractor: when an invalid program config element in the
+  GA-specific config element is encountered, the program config element will
+  be disregarded, which avoids mkvextract aborting with an exception. Fixes
+  #3606.
 
 
 # Version 80.0 "Roundabout" 2023-10-29
