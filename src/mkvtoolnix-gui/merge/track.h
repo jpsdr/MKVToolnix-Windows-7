@@ -65,6 +65,8 @@ public:
   virtual bool isRegular() const;
   virtual bool isAppended() const;
 
+  virtual bool isForcedSubtitles() const;
+
   virtual bool isPropertySet(QString const &property) const;
   virtual bool canChangeSubCharset() const;
   virtual bool canReduceToAudioCore() const;

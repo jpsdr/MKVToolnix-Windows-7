@@ -131,6 +131,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent,
   setupRecentDestinationDirectoryList();
   setupEnableMuxingTracksByType();
   setupEnableMuxingTracksByLanguage();
+  ui->cbMEnableMuxingForcedSubtitleTracks->setChecked(m_cfg.m_enableMuxingForcedSubtitleTracks);
   setupMergeAddingAppendingFilesPolicy();
   setupMergeAddingAppendingDirectoriesPolicy();
   setupMergeWarnMissingAudioTrack();
@@ -580,6 +581,14 @@ PreferencesDialog::setupToolTips() {
   ui->tbMEnableMuxingTracksByLanguage->setToolTips(QY("Tracks with a language in this list will be set not to be copied by default."),
                                                    QY("Only tracks with a language in this list will be set to be copied by default."));
 
+  Util::setToolTip(ui->cbMEnableMuxingForcedSubtitleTracks,
+                   Q("<p>%1 %2</p><ul><li>%3</li><li>%4</li><li>%5</li></ul>")
+                   .arg(QYH("If enabled, forced subtitle tracks will always be set to be copied."))
+                   .arg(QYH("A subtitle track is considered to be 'forced' track if any of the following conditions are met:"))
+                   .arg(QYH("Its 'forced display' property is set in the source file."))
+                   .arg(QYH("Its name contains the word 'forced' (in English)."))
+                   .arg(QYH("Deriving the 'forced display' flag from file names is active & the file name matches the corresponding pattern.")));
+
   // Often used XYZ page
   ui->tbOftenUsedLanguages->setToolTips(QY("The languages in the 'selected' list on the right will be shown at the top of all the language drop-down boxes in the program."));
   Util::setToolTip(ui->cbOftenUsedLanguagesOnly,
@@ -628,7 +637,6 @@ PreferencesDialog::setupConnections() {
   connect(ui->pbMAutoSetDestinationBrowseFixedDirectory,  &QPushButton::clicked,                                         this,                                 &PreferencesDialog::browseFixedOutputDirectory);
 
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->lMEnableMuxingAllTracksOfType,    &QLabel::setEnabled);
-  connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->gbMEnableMuxingExceptions,        &QLabel::setEnabled);
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllVideoTracks,    &QLabel::setEnabled);
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllAudioTracks,    &QLabel::setEnabled);
   connect(ui->cbMEnableMuxingTracksByLanguage,            &QCheckBox::toggled,                                           ui->cbMEnableMuxingAllSubtitleTracks, &QLabel::setEnabled);
@@ -815,7 +823,7 @@ PreferencesDialog::setupEnableMuxingTracksByType() {
 
 void
 PreferencesDialog::setupEnableMuxingTracksByLanguage() {
-  auto widgets = QList<QWidget *>{} << ui->lMEnableMuxingAllTracksOfType << ui->gbMEnableMuxingExceptions << ui->cbMEnableMuxingAllVideoTracks << ui->cbMEnableMuxingAllAudioTracks << ui->cbMEnableMuxingAllSubtitleTracks << ui->tbMEnableMuxingTracksByLanguage;
+  auto widgets = QList<QWidget *>{} << ui->lMEnableMuxingAllTracksOfType << ui->cbMEnableMuxingAllVideoTracks << ui->cbMEnableMuxingAllAudioTracks << ui->cbMEnableMuxingAllSubtitleTracks << ui->tbMEnableMuxingTracksByLanguage;
   for (auto const &widget : widgets)
     widget->setEnabled(m_cfg.m_enableMuxingTracksByLanguage);
 
@@ -1241,6 +1249,7 @@ PreferencesDialog::save() {
   m_cfg.m_enableMuxingAllAudioTracks                          = ui->cbMEnableMuxingAllAudioTracks->isChecked();
   m_cfg.m_enableMuxingAllSubtitleTracks                       = ui->cbMEnableMuxingAllSubtitleTracks->isChecked();
   m_cfg.m_enableMuxingTracksByTheseLanguages                  = ui->tbMEnableMuxingTracksByLanguage->selectedItemValues();
+  m_cfg.m_enableMuxingForcedSubtitleTracks                    = ui->cbMEnableMuxingForcedSubtitleTracks->isChecked();
 
   // Often used selections page:
   m_cfg.m_oftenUsedLanguages                                  = ui->tbOftenUsedLanguages->selectedItemValues();

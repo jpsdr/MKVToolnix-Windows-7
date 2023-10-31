@@ -1,5 +1,14 @@
 # Version ?
 
+## New features and enhancements
+
+* MKVToolNix GUI: multiplexer: added a new option in the preferences for
+  always enabling 'forced' subtitle tracks. A subtitle track is considered to
+  be 'forced' if: the corresponding property is set in the source file; the
+  track's name contains the word 'forced' (in English); deriving the 'forced
+  display' flag from file names is active & the file name matches the
+  corresponding pattern. The option is disabled by default. Implements #3627.
+
 ## Bug fixes
 
 * mkvmerge: when the user requests processing be stopped after the video ends

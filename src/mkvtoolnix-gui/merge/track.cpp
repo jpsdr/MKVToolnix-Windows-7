@@ -1,6 +1,7 @@
 #include "common/common_pch.h"
 
 #include <QRegularExpression>
+#include <QVariant>
 
 #include "common/id_info.h"
 #include "common/iso639.h"
@@ -17,8 +18,6 @@
 #include "mkvtoolnix-gui/util/config_file.h"
 #include "mkvtoolnix-gui/util/settings.h"
 #include "qregularexpression.h"
-
-#include <QVariant>
 
 namespace mtx::gui::Merge {
 
@@ -113,6 +112,24 @@ Track::isRegular()
 }
 
 bool
+Track::isForcedSubtitles()
+  const {
+  if (!isSubtitles())
+    return false;
+
+  if (m_forcedTrackFlag == 1)
+    return true;
+
+  auto &settings = Util::Settings::get();
+  QRegularExpression re{settings.m_regexForRecognizingForcedSubtitleNames, QRegularExpression::CaseInsensitiveOption};
+
+  if (re.isValid() && m_name.contains(re))
+    return true;
+
+  return false;
+}
+
+bool
 Track::isPropertySet(QString const &property)
   const {
   if (!m_properties.contains(property))
@@ -182,6 +199,11 @@ Track::setDefaultsDisplayDimensions() {
 void
 Track::setDefaultsMuxThis() {
   auto &settings = Util::Settings::get();
+
+  if (settings.m_enableMuxingForcedSubtitleTracks && isForcedSubtitles()) {
+    m_muxThis = true;
+    return;
+  }
 
   if (!settings.m_enableMuxingTracksByTheseTypes.contains(m_type)) {
     m_muxThis = false;
@@ -287,8 +309,8 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
 
   setDefaultsBasics();
   setDefaultsLanguage(languageDerivedFromFileName);
-  setDefaultsMuxThis();
   setDefaultsForcedDisplayFlag();
+  setDefaultsMuxThis();
   setDefaultsDisplayDimensions();
   setDefaultsColor();
 }

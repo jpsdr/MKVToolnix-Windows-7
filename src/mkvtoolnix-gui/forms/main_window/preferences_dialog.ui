@@ -1777,7 +1777,7 @@
        </layout>
       </widget>
       <widget class="QWidget" name="pMergeEnableTracks">
-       <layout class="QVBoxLayout" name="verticalLayout_9" stretch="0,1">
+       <layout class="QVBoxLayout" name="verticalLayout_13" stretch="0,1,0">
         <property name="leftMargin">
          <number>0</number>
         </property>
@@ -1856,106 +1856,113 @@
              </property>
             </widget>
            </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="gbMEnableMuxingGeneral">
+          <property name="title">
+           <string>General options</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
            <item>
-            <widget class="QGroupBox" name="gbMEnableMuxingExceptions">
-             <property name="title">
-              <string>Exceptions</string>
+            <widget class="QLabel" name="lMEnableMuxingAllTracksOfType">
+             <property name="text">
+              <string>Always enable copying for all tracks of the following types regardless of their language:</string>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_13">
-              <item>
-               <widget class="QLabel" name="lMEnableMuxingAllTracksOfType">
-                <property name="text">
-                 <string>Always enable copying for all tracks of the following types regardless of their language:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_2">
-                <item>
-                 <spacer name="horizontalSpacer">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Fixed</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="cbMEnableMuxingAllVideoTracks">
-                  <property name="text">
-                   <string>&amp;Video</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_9">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Fixed</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>10</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="cbMEnableMuxingAllAudioTracks">
-                  <property name="text">
-                   <string>&amp;Audio</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_10">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Fixed</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>10</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QCheckBox" name="cbMEnableMuxingAllSubtitleTracks">
-                  <property name="text">
-                   <string>&amp;Subtitles</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_2">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
-              </item>
-             </layout>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="cbMEnableMuxingAllVideoTracks">
+               <property name="text">
+                <string>&amp;Video</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_9">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="cbMEnableMuxingAllAudioTracks">
+               <property name="text">
+                <string>&amp;Audio</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_10">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>10</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="cbMEnableMuxingAllSubtitleTracks">
+               <property name="text">
+                <string>&amp;Subtitles</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbMEnableMuxingForcedSubtitleTracks">
+             <property name="text">
+              <string>Always enable copying of &amp;forced subtitle tracks</string>
+             </property>
             </widget>
            </item>
           </layout>
@@ -2791,6 +2798,7 @@
   <tabstop>cbMEnableMuxingAllVideoTracks</tabstop>
   <tabstop>cbMEnableMuxingAllAudioTracks</tabstop>
   <tabstop>cbMEnableMuxingAllSubtitleTracks</tabstop>
+  <tabstop>cbMEnableMuxingForcedSubtitleTracks</tabstop>
   <tabstop>cbMScanPlaylistsPolicy</tabstop>
   <tabstop>sbMMinPlaylistDuration</tabstop>
   <tabstop>cbMAddBlurayCovers</tabstop>

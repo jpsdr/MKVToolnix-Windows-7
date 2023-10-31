@@ -49,6 +49,7 @@ char const * const s_valElideTabHeaderLabels                                    
 char const * const s_valEnableMuxingAllAudioTracks                              = "enableMuxingAllAudioTracks";
 char const * const s_valEnableMuxingAllSubtitleTracks                           = "enableMuxingAllSubtitleTracks";
 char const * const s_valEnableMuxingAllVideoTracks                              = "enableMuxingAllVideoTracks";
+char const * const s_valEnableMuxingForcedSubtitleTracks                        = "enableMuxingForcedSubtitleTracks";
 char const * const s_valEnableMuxingTracksByLanguage                            = "enableMuxingTracksByLanguage";
 char const * const s_valEnableMuxingTracksByTheseLanguages                      = "enableMuxingTracksByTheseLanguages";
 char const * const s_valEnableMuxingTracksByTheseTypes                          = "enableMuxingTracksByTheseTypes";
@@ -116,6 +117,7 @@ char const * const s_valOutputFileNamePolicy                                    
 char const * const s_valPriority                                                = "priority";
 char const * const s_valProbeRangePercentage                                    = "probeRangePercentage";
 char const * const s_valRecognizedTrackLanguagesInFileNames                     = "recognizedTrackLanguagesInFileNames";
+char const * const s_valRegexForRecognizingForcedSubtitleNames                  = "regexForRecognizingForcedSubtitleNames";
 char const * const s_valRelativeOutputDir                                       = "relativeOutputDir";
 char const * const s_valRemoveOldJobs                                           = "removeOldJobs";
 char const * const s_valRemoveOldJobsDays                                       = "removeOldJobsDays";

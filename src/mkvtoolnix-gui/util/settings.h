@@ -241,7 +241,8 @@ public:
   bool m_uiStayOnTop;
   AppPalette m_uiPalette;
 
-  bool m_enableMuxingTracksByLanguage, m_enableMuxingAllVideoTracks, m_enableMuxingAllAudioTracks, m_enableMuxingAllSubtitleTracks;
+  bool m_enableMuxingTracksByLanguage, m_enableMuxingAllVideoTracks, m_enableMuxingAllAudioTracks, m_enableMuxingAllSubtitleTracks, m_enableMuxingForcedSubtitleTracks;
+  QString m_regexForRecognizingForcedSubtitleNames;
   QStringList m_enableMuxingTracksByTheseLanguages;
   QList<Merge::TrackType> m_enableMuxingTracksByTheseTypes;
 

@@ -568,6 +568,8 @@ Settings::load() {
   m_enableMuxingAllVideoTracks                = reg.value(s_valEnableMuxingAllVideoTracks,                                                     true).toBool();
   m_enableMuxingAllAudioTracks                = reg.value(s_valEnableMuxingAllAudioTracks,                                                     false).toBool();
   m_enableMuxingAllSubtitleTracks             = reg.value(s_valEnableMuxingAllSubtitleTracks,                                                  false).toBool();
+  m_enableMuxingForcedSubtitleTracks          = reg.value(s_valEnableMuxingForcedSubtitleTracks,                                               false).toBool();
+  m_regexForRecognizingForcedSubtitleNames    = reg.value(s_valRegexForRecognizingForcedSubtitleNames,                                         Q("forced")).toString();
   m_enableMuxingTracksByTheseLanguages        = reg.value(s_valEnableMuxingTracksByTheseLanguages).toStringList();
 
   if (reg.contains("enableMuxingTracksByTheseTypes"))
@@ -1014,6 +1016,8 @@ Settings::save()
   reg.setValue(s_valEnableMuxingAllVideoTracks,                m_enableMuxingAllVideoTracks);
   reg.setValue(s_valEnableMuxingAllAudioTracks,                m_enableMuxingAllAudioTracks);
   reg.setValue(s_valEnableMuxingAllSubtitleTracks,             m_enableMuxingAllSubtitleTracks);
+  reg.setValue(s_valEnableMuxingForcedSubtitleTracks,          m_enableMuxingForcedSubtitleTracks);
+  reg.setValue(s_valRegexForRecognizingForcedSubtitleNames,    m_regexForRecognizingForcedSubtitleNames);
   reg.setValue(s_valEnableMuxingTracksByTheseLanguages,        m_enableMuxingTracksByTheseLanguages);
   reg.setValue(s_valEnableMuxingTracksByTheseTypes,            enableMuxingTracksByTheseTypes);
 
