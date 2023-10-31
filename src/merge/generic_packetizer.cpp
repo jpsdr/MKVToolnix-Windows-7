@@ -624,9 +624,9 @@ generic_packetizer_c::set_video_display_dimensions(int width,
   m_ti.m_display_dimensions_given  = true;
   m_ti.m_aspect_ratio_given        = false;
 
-  m_hvideo_display_width = width;
-  m_hvideo_display_height = height;
-  m_hvideo_display_unit = unit;
+  m_hvideo_display_width           = width;
+  m_hvideo_display_height          = height;
+  m_hvideo_display_unit            = unit;
 
   if (m_track_entry) {
     GetChild<KaxVideoDisplayWidth>(GetChild<KaxTrackVideo>(*m_track_entry)).SetValue(m_hvideo_display_width);
