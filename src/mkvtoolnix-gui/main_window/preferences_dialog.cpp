@@ -416,11 +416,13 @@ PreferencesDialog::setupToolTips() {
                    .arg(QY("This only determines the initial order which can still be changed manually later.")));
 
   Util::setToolTip(ui->cbMReconstructSequencesWhenAdding,
-                   Q("<p>%1 %2 %3</p><p>%4</p><p>%5</p><p>%6</p>")
+                   Q("<p>%1 %2 %3</p><p>%4</p><p>%5 %6</p><p>%7</p><p>%8</p>")
                    .arg(QY("If enabled, the GUI will analyze the file names when you add multiple files at once."))
                    .arg(QY("It tries to detect sequences of names that likely belong to the same movie by splitting the name into three parts: a prefix, a running number and a suffix that doesn't contain digits."))
                    .arg(QY("Names are considered to be in sequence when the previous file name's prefix & suffix match the current file name's prefix & suffix and the running number is incremented by one."))
                    .arg(QY("An example: 'movie.001.mp4', 'movie.002.mp4' and 'movie.003.mp4'"))
+                   .arg(QY("The format used by GoPro cameras for chaptered video files is recognized as well."))
+                   .arg(QY("Both of the schemes used by older models (e.g. GOPR1234.mp4, GP011234.mp4, GP021234.mp4…) & by current ones (e.g. GH019876.mp4, GH029876.mp4, GH039876.mp4…) are supported."))
                    .arg(QY("If such a sequence is detected, only the first file is added while the second and following files in the sequence are appended to the first one."))
                    .arg(QY("If disabled, all files selected for adding will always be added regardless of their names.")));
 

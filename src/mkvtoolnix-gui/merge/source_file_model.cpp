@@ -11,6 +11,7 @@
 #include <QRegularExpression>
 
 #include "common/logger.h"
+#include "common/sequenced_file_names.h"
 #include "common/sorting.h"
 #include "common/strings/formatting.h"
 #include "mkvtoolnix-gui/main_window/main_window.h"
@@ -53,28 +54,6 @@ createSourceIndicatorIcon(SourceFile &sourceFile) {
   combinedIcon.addPixmap(combinedPixmap);
 
   return combinedIcon;
-}
-
-struct SequencedFileNameData {
-  QString prefix, suffix;
-  unsigned int number{};
-
-  bool follows(SequencedFileNameData const &previous) const {
-    return (prefix == previous.prefix)
-        && (suffix == previous.suffix)
-        && (number == (previous.number + 1));
-  }
-};
-
-std::optional<SequencedFileNameData>
-analyzeFileNameForSequenceData(QString const &fileName) {
-  QRegularExpression re{Q(R"(([^/\\]*)(\d+)([^\d]+)$)")};
-  auto match = re.match(fileName);
-
-  if (match.hasMatch())
-    return SequencedFileNameData{ match.captured(1), match.captured(3), match.captured(2).toUInt() };
-
-  return {};
 }
 
 int
@@ -363,7 +342,7 @@ SourceFileModel::addFileAtAppropriatePlace(SourceFilePtr const &file,
 
 void
 SourceFileModel::addFilesAndTracks(QVector<SourceFilePtr> const &files) {
-  std::optional<SequencedFileNameData> previouslyAddedSequenceData;
+  std::optional<mtx::sequenced_file_names::SequencedFileNameData> previouslyAddedSequenceData;
   QModelIndex previouslyAddedPosition;
 
   auto &cfg                 = Util::Settings::get();
@@ -377,7 +356,7 @@ SourceFileModel::addFilesAndTracks(QVector<SourceFilePtr> const &files) {
     });
 
   for (auto const &file : filesToProcess) {
-    auto sequenceData = analyzeFileNameForSequenceData(file->m_fileName);
+    auto sequenceData = mtx::sequenced_file_names::analyzeFileNameForSequenceData(file->m_fileName);
 
     if (   reconstructSequences
         && previouslyAddedSequenceData

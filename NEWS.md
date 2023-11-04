@@ -8,6 +8,9 @@
   track's name contains the word 'forced' (in English); deriving the 'forced
   display' flag from file names is active & the file name matches the
   corresponding pattern. The option is disabled by default. Implements #3627.
+* MKVToolNix GUI: multiplexer: the functionality for detecting file name
+  sequences when adding files can now recognize the patterns used by GoPro's
+  cameras for chaptered video files. Implements #3633.
 
 ## Bug fixes
 
