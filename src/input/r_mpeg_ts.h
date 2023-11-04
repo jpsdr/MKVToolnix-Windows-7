@@ -400,6 +400,8 @@ public:
 struct file_t {
   mm_io_cptr m_in;
 
+  unsigned int m_header_offset{};
+
   std::unordered_map<uint16_t, track_ptr> m_pid_to_track_map;
   std::unordered_map<uint16_t, bool> m_ignored_pids, m_pmt_pid_seen;
   std::vector<generic_packetizer_c *> m_packetizers;
@@ -479,7 +481,7 @@ public:
   virtual int64_t get_maximum_progress() override;
 
   static timestamp_c read_timestamp(unsigned char *p);
-  static int detect_packet_size(mm_io_c &in, uint64_t size);
+  static std::optional<std::pair<unsigned int, unsigned int>> detect_packet_size(mm_io_c &in, uint64_t size);
 
 private:
   virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;

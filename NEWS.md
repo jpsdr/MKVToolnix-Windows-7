@@ -29,6 +29,12 @@
   GA-specific config element is encountered, the program config element will
   be disregarded, which avoids mkvextract aborting with an exception. Fixes
   #3606.
+* mkvmerge: MPEG TS reader: when reading MPEG transport streams from Blu-rays
+  the four-byte long `TP_extra_header` structure in front of the transport
+  packets are now skipped properly. Before the fix a stray byte with value of
+  `0x47` inside that `TP_extra_header` structure could have thrown off the
+  detection of where the transport packets start, leading to mkvmerge dropping
+  a few audio and/or video frames at the start of the file. Fixes #3632.
 
 
 # Version 80.0 "Roundabout" 2023-10-29

@@ -1018,10 +1018,10 @@ file_t::get_start_source_packet_position()
 
 bool
 reader_c::probe_file() {
-  return detect_packet_size(*m_in, m_in->get_size()) > 0;
+  return detect_packet_size(*m_in, m_in->get_size()).has_value();
 }
 
-int
+std::optional<std::pair<unsigned int, unsigned int>>
 reader_c::detect_packet_size(mm_io_c &in,
                              uint64_t size) {
   debugging_option_c debug{"mpeg_ts|mpeg_ts_packet_size"};
@@ -1054,8 +1054,19 @@ reader_c::detect_packet_size(mm_io_c &in,
         }
 
         if (num_startcodes_required <= num_startcodes) {
-          mxdebug_if(debug, fmt::format("detect_packet_size: detected packet size {0} at offset {1}\n", packet_size, positions[i]));
-          return packet_size;
+          auto offset = 0u;
+
+          // Blu-ray specs 6.2.1: 192 byte "source packets" that start
+          // with a four-byte "TP_extra_header" followed by 188 bytes
+          // actual "transport packet". The latter one is the one
+          // starting with 0x47.
+          if (   (packet_size  == 192)
+              && (positions[i] ==   4))
+            offset = 4;
+
+          mxdebug_if(debug, fmt::format("detect_packet_size: detected packet size {0} at offset {1}; returning offset {2}\n", packet_size, positions[i], offset));
+
+          return std::make_pair(packet_size, offset);
         }
       }
     }
@@ -1064,7 +1075,7 @@ reader_c::detect_packet_size(mm_io_c &in,
 
   mxdebug_if(debug, "detect_packet_size: packet size could not be determined\n");
 
-  return -1;
+  return {};
 }
 
 void
@@ -1093,7 +1104,9 @@ reader_c::read_headers_for_file(std::size_t file_num) {
     f.m_probe_range          = calculate_probe_range(file_size, 10 * 1024 * 1024);
     auto size_to_probe       = std::min<uint64_t>(file_size,     f.m_probe_range);
     auto min_size_to_probe   = std::min<uint64_t>(size_to_probe, 5 * 1024 * 1024);
-    f.m_detected_packet_size = detect_packet_size(*f.m_in, size_to_probe);
+    auto detection_result    = detect_packet_size(*f.m_in, size_to_probe);
+    f.m_detected_packet_size = detection_result->first;
+    f.m_header_offset        = detection_result->second;
 
     f.m_in->setFilePointer(0);
 
@@ -1105,13 +1118,13 @@ reader_c::read_headers_for_file(std::size_t file_num) {
       if (f.m_in->read(buf, f.m_detected_packet_size) != static_cast<unsigned int>(f.m_detected_packet_size))
         break;
 
-      if (buf[0] != 0x47) {
+      if (buf[f.m_header_offset] != 0x47) {
         if (resync(f.m_in->getFilePointer() - f.m_detected_packet_size))
           continue;
         break;
       }
 
-      parse_packet(buf);
+      parse_packet(&buf[f.m_header_offset]);
 
       if (   f.m_pat_found
           && f.all_pmts_found()
@@ -1292,13 +1305,13 @@ reader_c::determine_global_timestamp_offset() {
       if (f.m_in->read(buf, f.m_detected_packet_size) != static_cast<unsigned int>(f.m_detected_packet_size))
         break;
 
-      if (buf[0] != 0x47) {
+      if (buf[f.m_header_offset] != 0x47) {
         if (resync(f.m_in->getFilePointer() - f.m_detected_packet_size))
           continue;
         break;
       }
 
-      parse_packet(buf);
+      parse_packet(&buf[f.m_header_offset]);
     }
   } catch (...) {
     mxdebug_if(m_debug_timestamp_offset, fmt::format("determine_global_timestamp_offset: caught exception\n"));
@@ -2471,7 +2484,7 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
     if (f.m_in->read(buf, f.m_detected_packet_size) != static_cast<unsigned int>(f.m_detected_packet_size))
       return finish();
 
-    if (buf[0] != 0x47) {
+    if (buf[f.m_header_offset] != 0x47) {
       if (resync(f.m_position))
         continue;
       return finish();
@@ -2479,7 +2492,7 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
 
     ++m_packet_num;
 
-    parse_packet(buf);
+    parse_packet(&buf[f.m_header_offset]);
   }
 
   m_bytes_processed += f.m_in->getFilePointer() - prior_position;
@@ -2554,6 +2567,9 @@ reader_c::resync(int64_t start_at) {
         f.m_in->setFilePointer(curr_pos + 1);
         continue;
       }
+
+      if (curr_pos >= f.m_header_offset)
+        curr_pos -= f.m_header_offset;
 
       mxdebug_if(m_debug_resync, fmt::format("resync: Re-established at {0}\n", curr_pos));
 
