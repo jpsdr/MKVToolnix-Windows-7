@@ -35,6 +35,10 @@
   `0x47` inside that `TP_extra_header` structure could have thrown off the
   detection of where the transport packets start, leading to mkvmerge dropping
   a few audio and/or video frames at the start of the file. Fixes #3632.
+* mkvmerge: HEVC/H.265 packetizer: when reading & appending HEVC/H.265 from
+  Matroska, MP4/MOV or FLV files the first frame of all the appended files was
+  sometimes dropped, resulting in broken video at the point where video is
+  appended. Fixes #3479.
 
 
 # Version 80.0 "Roundabout" 2023-10-29

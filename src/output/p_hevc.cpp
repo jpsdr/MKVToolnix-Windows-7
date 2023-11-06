@@ -29,6 +29,7 @@ public:
   int nalu_size_len{};
   int64_t max_nalu_size{}, source_timestamp_resolution{1};
   std::shared_ptr<mtx::hevc::es_parser_c> parser{new mtx::hevc::es_parser_c};
+  bool flushed{};
 };
 
 hevc_video_packetizer_c::
@@ -154,6 +155,11 @@ hevc_video_packetizer_c::connect(generic_packetizer_c *src,
 void
 hevc_video_packetizer_c::flush_impl() {
   auto &p = *p_func();
+
+  if (p.flushed)
+    return;
+
+  p.flushed = true;
 
   p.parser->flush();
   flush_frames();
