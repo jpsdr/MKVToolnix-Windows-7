@@ -101,7 +101,8 @@ public:
   void set_nalu_size_length(int nalu_size_length);
   int get_nalu_size_length() const;
 
-  bool frame_available();
+  bool frame_available() const;
+  std::size_t get_num_frames_available() const;
   mtx::avc_hevc::frame_t get_frame();
 
   bool configuration_record_changed() const;

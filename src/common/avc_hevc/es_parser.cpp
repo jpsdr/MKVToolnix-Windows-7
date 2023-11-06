@@ -221,8 +221,15 @@ es_parser_c::get_nalu_size_length()
 }
 
 bool
-es_parser_c::frame_available() {
+es_parser_c::frame_available()
+  const {
   return !m_frames_out.empty();
+}
+
+std::size_t
+es_parser_c::get_num_frames_available()
+  const {
+  return m_frames_out.size();
 }
 
 mtx::avc_hevc::frame_t
