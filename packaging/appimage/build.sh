@@ -79,7 +79,7 @@ Syntax:
 Parameters:
 
   --no-build         don't run 'configure' and './drake clean'; only
-                     possible if 'build-run' exists
+                     possible if 'build-config' exists
   --qt <Qt version>  build against this Qt version (default: $QTVERSION)
   --release-version  don't built the version number via 'git describe'
                      even if '.git' directory is present
