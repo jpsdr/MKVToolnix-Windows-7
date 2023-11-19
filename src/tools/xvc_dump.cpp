@@ -16,6 +16,8 @@
 #include "common/checksums/base_fwd.h"
 #include "common/command_line.h"
 #include "common/hevc/es_parser.h"
+#include "common/hevc/types.h"
+#include "common/list_utils.h"
 #include "common/mm_io_x.h"
 #include "common/mm_file_io.h"
 #include "common/qt.h"
@@ -186,14 +188,33 @@ show_nalu(uint32_t type,
           uint64_t size,
           uint64_t position,
           std::string const &checksum,
-          std::optional<uint64_t> marker_size = std::nullopt) {
-  mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2}{3}{4} checksum 0x{5}\n",
+          std::optional<uint64_t> marker_size = std::nullopt,
+          std::optional<uint32_t> inner_type = std::nullopt) {
+  std::string inner_type_str;
+
+  if (inner_type)
+    inner_type_str = fmt::format(" inner NALU type 0x{0:02x} ({1})", *inner_type, s_parser->get_nalu_type_name(*inner_type));
+
+  mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2}{3}{4} checksum 0x{5}{6}\n",
                      type,
                      s_parser->get_nalu_type_name(type),
                      size,
                      s_portable_format ? ""s : marker_size ? fmt::format(" marker size {0}", *marker_size) : ""s,
                      s_portable_format ? ""s : fmt::format(" at {0}", position),
-                     checksum));
+                     checksum,
+                     inner_type_str));
+}
+
+static std::optional<uint32_t>
+determine_inner_nalu_type(unsigned char const *buffer,
+                          uint64_t size,
+                          uint32_t type) {
+  if (   (size         >= 3)
+         && (s_codec_type == codec_type_e::hevc)
+         && mtx::included_in(static_cast<int>(type), mtx::hevc::NALU_TYPE_UNSPEC62, mtx::hevc::NALU_TYPE_UNSPEC63))
+    return (buffer[2] >> 1) & 0x3f;
+
+  return {};
 }
 
 static void
@@ -239,9 +260,12 @@ parse_file_annex_b(std::string const &file_name) {
 
     pos -= marker_size;
 
-    if (-1 != previous_pos)
-      show_nalu(previous_type, pos - previous_pos - previous_marker_size, previous_pos, calc_frame_checksum(marker_size), previous_marker_size);
-    else
+    if (-1 != previous_pos) {
+      auto size       = pos - previous_pos - previous_marker_size;
+      auto inner_type = determine_inner_nalu_type(s_frame->get_buffer(), size, previous_type);
+      show_nalu(previous_type, size, previous_pos, calc_frame_checksum(marker_size), previous_marker_size, inner_type);
+
+    } else
       s_frame_fill = 0;
 
     auto next_bytes      = in.read_uint32_be();
@@ -254,8 +278,13 @@ parse_file_annex_b(std::string const &file_name) {
       add_frame_byte(next_bytes >> ((3 - idx) * 8));
   }
 
-  if (-1 != previous_pos)
-    show_nalu(previous_type, in.getFilePointer() - previous_pos - previous_marker_size, previous_pos, calc_frame_checksum(0), previous_marker_size);
+  if (-1 == previous_pos)
+    return;
+
+  auto size       = in.getFilePointer() - previous_pos - previous_marker_size;
+  auto inner_type = determine_inner_nalu_type(s_frame->get_buffer(), size, previous_type);
+
+  show_nalu(previous_type, size, previous_pos, calc_frame_checksum(0), previous_marker_size, inner_type);
 }
 
 static void
@@ -277,9 +306,10 @@ parse_file_iso_14496_15(std::string const &file_name) {
       return;
 
     in.setFilePointer(pos + 4);
-    auto frame = in.read(nalu_size);
+    auto frame      = in.read(nalu_size);
+    auto inner_type = determine_inner_nalu_type(frame->get_buffer(), nalu_size, nalu_type);
 
-    show_nalu(nalu_type, nalu_size, pos, mtx::checksum::calculate_as_hex_string(mtx::checksum::algorithm_e::md5, *frame));
+    show_nalu(nalu_type, nalu_size, pos, mtx::checksum::calculate_as_hex_string(mtx::checksum::algorithm_e::md5, *frame), std::nullopt, inner_type);
 
     pos += nalu_size + 4;
   }
