@@ -1268,8 +1268,8 @@
   dimensions (AVC only; were present for HEVC already) & default
   duration. Implements #3116.
 * mkvmerge, mkvextract: HEVC/H.265: added support for reading single-layer
-  Dolby Vision from Annex B type bitstreams (elementary streams, MPEG
-  transport streams). Patch by quietvoid. Implements #3113.
+  Dolby Vision from Annex B type bitstream files (elementary streams). Patch
+  by quietvoid. Partially implements #3113.
 * mkvinfo: the option `-X`/`--full-hexdump` now affects all binary elements,
   not just the frame data in `SimpleBlock` and `BlockGroup` elements.
 * MKVToolNix GUI: multiplexer: the "delay" and "sync" options can now be used
