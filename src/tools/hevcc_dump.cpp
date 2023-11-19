@@ -327,14 +327,100 @@ parse_short_term_reference_picture_set(std::size_t indent,
 }
 
 static void
+parse_sub_layer_hrd_parameters(std::size_t indent,
+                               mtx::bits::reader_c &r,
+                               unsigned int sub_layer_id,
+                               unsigned int cpb_cnt,
+                               bool sub_pic_hrd_params_present_flag) {
+  for (unsigned int i = 0; i < cpb_cnt; ++i) {
+    v(indent, fmt::format("bit_rate_value_minus1[{0}][{1}]", sub_layer_id, i), r.get_unsigned_golomb());
+    v(indent, fmt::format("cpb_size_value_minus1[{0}][{1}]", sub_layer_id, i), r.get_unsigned_golomb());
+
+    if (sub_pic_hrd_params_present_flag) {
+      v(indent, fmt::format("cpb_size_du_value_minus1[{0}][{1}]", sub_layer_id, i), r.get_unsigned_golomb());
+      v(indent, fmt::format("bit_rate_du_value_minus1[{0}][{1}]", sub_layer_id, i), r.get_unsigned_golomb());
+    }
+
+    v(indent, fmt::format("cbr_flag[{0}][{1}]", sub_layer_id, i), r.get_bit());
+  }
+}
+
+static void
 parse_hrd_parameters(std::size_t indent,
-                     mtx::bits::reader_c &/* r */,
-                     bool /* stuff */,
-                     unsigned int /* sps_max_sub_layers_minus1 */) {
+                     mtx::bits::reader_c &r,
+                     bool common_inf_present_flag,
+                     unsigned int sps_max_sub_layers_minus1) {
   v(indent, "HRD parameters");
   indent += 2;
 
-  mxerror("parse_hrd_parameters NOT IMPLEMENTED YET!\n");
+  auto nal_hrd_parameters_present_flag = false;
+  auto vcl_hrd_parameters_present_flag = false;
+  auto sub_pic_hrd_params_present_flag = false;
+
+  if (common_inf_present_flag) {
+    nal_hrd_parameters_present_flag = r.get_bit();
+    vcl_hrd_parameters_present_flag = r.get_bit();
+
+    v(indent, "nal_hrd_parameters_present_flag", nal_hrd_parameters_present_flag);
+    v(indent, "vcl_hrd_parameters_present_flag", vcl_hrd_parameters_present_flag);
+
+    if (nal_hrd_parameters_present_flag || vcl_hrd_parameters_present_flag) {
+      sub_pic_hrd_params_present_flag = r.get_bit();
+
+      v(indent, "sub_pic_hrd_params_present_flag", sub_pic_hrd_params_present_flag);
+
+      if (sub_pic_hrd_params_present_flag) {
+        v(indent, "tick_divisor_minus2",                          r.get_bits(8));
+        v(indent, "du_cpb_removal_delay_increment_length_minus1", r.get_bits(5));
+        v(indent, "sub_pic_cpb_params_in_pic_timing_sei_flag",    r.get_bit());
+        v(indent, "dpb_output_delay_du_length_minus1",            r.get_bits(5));
+      }
+
+      v(indent, "bit_rate_scale", r.get_bits(4));
+      v(indent, "cpb_size_scale", r.get_bits(4));
+
+      if (sub_pic_hrd_params_present_flag)
+        v(indent, "cpb_size_du_scale", r.get_bits(4));
+
+      v(indent, "initial_cpb_removal_delay_length_minus1", r.get_bits(5));
+      v(indent, "au_cpb_removal_delay_length_minus1",      r.get_bits(5));
+      v(indent, "dpb_output_delay_length_minus1",          r.get_bits(5));
+    }
+  }
+
+  for (unsigned int i = 0; i <= sps_max_sub_layers_minus1; ++i) {
+    auto fixed_pic_rate_general_flag = r.get_bit();
+
+    v(indent, fmt::format("fixed_pic_rate_general_flag[{0}]", i), fixed_pic_rate_general_flag);
+
+    auto fixed_pic_rate_within_cvs_flag = false;
+
+    if (!fixed_pic_rate_general_flag) {
+      fixed_pic_rate_within_cvs_flag = r.get_bit();
+      v(indent, fmt::format("fixed_pic_rate_within_cvs_flag[{0}]", i), fixed_pic_rate_within_cvs_flag);
+    }
+
+    auto low_delay_hrd_flag = false;
+    if (fixed_pic_rate_within_cvs_flag)
+      v(indent, fmt::format("elemental_duration_in_tc_minus1[{0}]", i), r.get_unsigned_golomb());
+
+    else {
+      low_delay_hrd_flag = r.get_bit();
+      v(indent, fmt::format("low_delay_hrd_flag[{0}]", i), low_delay_hrd_flag);
+    }
+
+    auto cpb_cnt = 1u;
+    if (!low_delay_hrd_flag) {
+      cpb_cnt = r.get_unsigned_golomb() + 1;
+      v(indent, fmt::format("cpb_cnt_minus1[{0}]", i), cpb_cnt - 1);
+    }
+
+    if (nal_hrd_parameters_present_flag)
+      parse_sub_layer_hrd_parameters(indent, r, i, cpb_cnt, sub_pic_hrd_params_present_flag);
+
+    if (vcl_hrd_parameters_present_flag)
+      parse_sub_layer_hrd_parameters(indent, r, i, cpb_cnt, sub_pic_hrd_params_present_flag);
+  }
 }
 
 static void
