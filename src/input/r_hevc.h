@@ -16,14 +16,11 @@
 
 #include "common/hevc/util.h"
 #include "merge/generic_reader.h"
-#include "merge/block_addition_mapping.h"
 
 class hevc_es_reader_c: public generic_reader_c {
 private:
   int m_width{}, m_height{};
   int64_t m_default_duration{};
-
-  std::vector<block_addition_mapping_t> m_block_addition_mappings;
 
   memory_cptr m_buffer{memory_c::alloc(1024 * 1024)};
 

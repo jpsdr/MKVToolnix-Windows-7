@@ -250,6 +250,7 @@ public:
   virtual void set_video_stereo_mode_impl(libebml::EbmlMaster &video, stereo_mode_c::mode stereo_mode);
 
   virtual void set_block_addition_mappings(std::vector<block_addition_mapping_t> const &mappings);
+  virtual void update_max_block_addition_id();
 
   virtual void set_tag_track_uid();
 

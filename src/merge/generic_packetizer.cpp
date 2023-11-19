@@ -981,6 +981,21 @@ void
 generic_packetizer_c::set_block_addition_mappings(std::vector<block_addition_mapping_t> const &mappings) {
   m_block_addition_mappings = mappings;
   apply_block_addition_mappings();
+  update_max_block_addition_id();
+}
+
+void
+generic_packetizer_c::update_max_block_addition_id() {
+  if (!m_track_entry || outputting_webm() || m_block_addition_mappings.empty())
+    return;
+
+  auto new_max_block_add_id = std::accumulate(m_block_addition_mappings.begin(), m_block_addition_mappings.end(), m_max_block_add_id,
+                                              [](auto max, auto const &mapping) { return std::max(max, mapping.id_value.value_or(1)); });
+
+  if ((new_max_block_add_id > 0) && (new_max_block_add_id > m_max_block_add_id)) {
+    m_max_block_add_id = new_max_block_add_id;
+    GetChild<KaxMaxBlockAdditionID>(m_track_entry).SetValue(m_max_block_add_id);
+  }
 }
 
 void
@@ -1031,13 +1046,7 @@ generic_packetizer_c::set_headers() {
   if (!m_hcodec_name.empty())
     GetChild<KaxCodecName>(m_track_entry).SetValueUTF8(m_hcodec_name);
 
-  if (!outputting_webm() && !m_block_addition_mappings.empty()) {
-    m_max_block_add_id = std::accumulate(m_block_addition_mappings.begin(), m_block_addition_mappings.end(), m_max_block_add_id,
-                                         [](auto max, auto const &mapping) { return std::max(max, mapping.id_value.value_or(1)); });
-
-    if (m_max_block_add_id > 0)
-      GetChild<KaxMaxBlockAdditionID>(m_track_entry).SetValue(m_max_block_add_id);
-  }
+  update_max_block_addition_id();
 
   if (m_timestamp_factory)
     m_htrack_default_duration = (int64_t)m_timestamp_factory->get_default_duration(m_htrack_default_duration);

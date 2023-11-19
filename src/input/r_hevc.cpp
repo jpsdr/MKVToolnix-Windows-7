@@ -15,17 +15,13 @@
 #include "common/avc_hevc/util.h"
 #include "common/byte_buffer.h"
 #include "common/codec.h"
-#include "common/debugging.h"
 #include "common/error.h"
 #include "common/memory.h"
 #include "common/id_info.h"
-#include "common/dovi_meta.h"
 #include "input/r_hevc.h"
 #include "merge/input_x.h"
 #include "merge/file_status.h"
 #include "output/p_hevc_es.h"
-
-static debugging_option_c s_debug_dovi_configuration_record{"dovi_configuration_record"};
 
 bool
 hevc_es_reader_c::probe_file() {
@@ -61,25 +57,6 @@ hevc_es_reader_c::probe_file() {
     if (parser.has_stream_default_duration())
       m_default_duration = parser.get_stream_default_duration();
 
-    if (m_block_addition_mappings.empty() && parser.has_dovi_rpu_header()) {
-      auto hdr                = parser.get_dovi_rpu_header();
-      auto vui                = parser.get_vui_info();
-      auto duration           = parser.has_stream_default_duration() ? m_default_duration : parser.get_most_often_used_duration();
-
-      auto dovi_config_record = create_dovi_configuration_record(hdr, m_width, m_height, vui, duration);
-
-      auto mapping            = mtx::dovi::create_dovi_block_addition_mapping(dovi_config_record);
-
-      if (mapping.is_valid()) {
-        if (s_debug_dovi_configuration_record) {
-          hdr.dump();
-          dovi_config_record.dump();
-        }
-
-        m_block_addition_mappings.push_back(mapping);
-      }
-    }
-
     if ((0 >= m_width) || (0 >= m_height))
       return false;
 
@@ -100,7 +77,6 @@ hevc_es_reader_c::create_packetizer(int64_t) {
     return;
 
   add_packetizer(new hevc_es_video_packetizer_c(this, m_ti, m_width, m_height));
-  ptzr(0).set_block_addition_mappings(m_block_addition_mappings);
 
   show_packetizer_info(0, ptzr(0));
 }

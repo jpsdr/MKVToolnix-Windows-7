@@ -11,6 +11,9 @@
 * MKVToolNix GUI: multiplexer: the functionality for detecting file name
   sequences when adding files can now recognize the patterns used by GoPro's
   cameras for chaptered video files. Implements #3633.
+* mkvmerge: HEVC/H.265: added support for reading single-layer Dolby Vision
+  from Annex B type bitstream read from MPEG transport streams. Partially
+  implements #3113.
 
 ## Bug fixes
 

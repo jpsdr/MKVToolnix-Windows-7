@@ -28,5 +28,10 @@ public:
     return YT("HEVC/H.265 (unframed)");
   };
 
+  virtual void handle_delayed_headers() override;
+
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) override;
+
+protected:
+  virtual void handle_dovi_block_addition_mappings();
 };
