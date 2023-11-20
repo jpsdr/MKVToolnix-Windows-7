@@ -998,6 +998,14 @@ generic_packetizer_c::update_max_block_addition_id() {
   }
 }
 
+bool
+generic_packetizer_c::have_block_addition_mapping_type(uint64_t type)
+  const {
+  return std::find_if(m_block_addition_mappings.begin(), m_block_addition_mappings.end(),
+                      [type](auto const &mapping) { return mapping.is_valid() && (*mapping.id_type == type); })
+    != m_block_addition_mappings.end();
+}
+
 void
 generic_packetizer_c::set_headers() {
   if (0 < m_connected_to) {

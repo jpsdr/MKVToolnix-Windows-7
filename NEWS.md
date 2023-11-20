@@ -14,6 +14,10 @@
 * mkvmerge: HEVC/H.265: added support for reading single-layer Dolby Vision
   from Annex B type bitstream read from MPEG transport streams. Partially
   implements #3113.
+* mkvmerge: HEVC/H.265: added support for reading dual-layer Dolby Vision with
+  both the base & enhancement layers in the same track from Annex B type
+  bitstreams in MPEG transport files & elementary stream files. Implements
+  #3126.
 
 ## Bug fixes
 

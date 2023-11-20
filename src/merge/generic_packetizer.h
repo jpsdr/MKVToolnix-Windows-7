@@ -251,6 +251,7 @@ public:
 
   virtual void set_block_addition_mappings(std::vector<block_addition_mapping_t> const &mappings);
   virtual void update_max_block_addition_id();
+  virtual bool have_block_addition_mapping_type(uint64_t type) const;
 
   virtual void set_tag_track_uid();
 

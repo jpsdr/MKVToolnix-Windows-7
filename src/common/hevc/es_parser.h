@@ -34,7 +34,14 @@ protected:
   user_data_t m_user_data;
   codec_private_t m_codec_private;
 
+  enum class dovi_el_parsing_state_e {
+    pending,
+    started,
+    finished,
+  };
   mtx::dovi::dovi_rpu_data_header_t m_dovi_rpu_data_header;
+  std::unique_ptr<es_parser_c> m_dovi_el_parser;
+  dovi_el_parsing_state_e m_dovi_el_parsing_state{dovi_el_parsing_state_e::pending};
 
   debugging_option_c m_debug_parameter_sets{"hevc_parser|hevc_parameter_sets"}, m_debug_frame_order{"hevc_parser|hevc_frame_order"};
 
@@ -46,6 +53,7 @@ public:
 
   virtual void set_configuration_record(memory_cptr const &bytes) override;
   virtual memory_cptr get_configuration_record() const override;
+  virtual memory_cptr get_dovi_enhancement_layer_configuration_record() const;
 
   virtual int get_width() const override {
     assert(!m_sps_info_list.empty());
@@ -84,9 +92,11 @@ protected:
   void handle_pps_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);
   void handle_sei_nalu(memory_cptr const &nalu, extra_data_position_e extra_data_position = extra_data_position_e::pre);
   void handle_unspec62_nalu(memory_cptr const &nalu);
+  void handle_unspec63_nalu(memory_cptr const &nalu);
   void handle_slice_nalu(memory_cptr const &nalu, uint64_t nalu_pos);
   void flush_incomplete_frame();
   void determine_if_first_access_unit_parsed();
+  void maybe_set_configuration_record_ready();
   virtual void calculate_frame_order() override;
   virtual bool does_nalu_get_included_in_extra_data(memory_c const &nalu) const override;
 

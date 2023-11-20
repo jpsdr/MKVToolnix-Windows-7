@@ -50,6 +50,25 @@ es_parser_c::headers_parsed()
 }
 
 void
+es_parser_c::maybe_set_configuration_record_ready() {
+  if (!m_configuration_record_ready && !m_vps_info_list.empty() && !m_sps_info_list.empty() && !m_pps_info_list.empty()) {
+    m_configuration_record_ready = true;
+    flush_unhandled_nalus();
+  }
+
+  if (!m_configuration_record_ready || !m_dovi_el_parser)
+    return;
+
+  if (m_dovi_el_parsing_state == dovi_el_parsing_state_e::started) {
+    m_dovi_el_parser->flush();
+    m_dovi_el_parser->maybe_set_configuration_record_ready();
+
+    if (m_dovi_el_parser->headers_parsed())
+      m_dovi_el_parsing_state = dovi_el_parsing_state_e::finished;
+  }
+}
+
+void
 es_parser_c::flush() {
   if (m_unparsed_buffer && (5 <= m_unparsed_buffer->get_size())) {
     m_parsed_position += m_unparsed_buffer->get_size();
@@ -327,6 +346,25 @@ es_parser_c::handle_unspec62_nalu(memory_cptr const &nalu) {
 }
 
 void
+es_parser_c::handle_unspec63_nalu(memory_cptr const &nalu) {
+  add_nalu_to_pending_frame_data(nalu);
+
+  auto const nalu_size = nalu->get_size();
+
+  if (   (nalu_size                < 3)
+      || (m_dovi_el_parsing_state == dovi_el_parsing_state_e::finished)
+      || (m_dovi_el_parser        && m_dovi_el_parser->headers_parsed()))
+    return;
+
+  if (!m_dovi_el_parser) {
+    m_dovi_el_parser.reset(new es_parser_c());
+    m_dovi_el_parsing_state = dovi_el_parsing_state_e::started;
+  }
+
+  m_dovi_el_parser->handle_nalu_internal(memory_c::borrow(&nalu->get_buffer()[2], nalu_size - 2), 0);
+}
+
+void
 es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
                                   uint64_t nalu_pos) {
   static debugging_option_c s_debug_discard_access_unit_delimiters{"hevc_discard_access_unit_delimiters"};
@@ -379,6 +417,10 @@ es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
       handle_unspec62_nalu(nalu);
       break;
 
+    case NALU_TYPE_UNSPEC63:
+      handle_unspec63_nalu(nalu);
+      break;
+
     case NALU_TYPE_TRAIL_N:
     case NALU_TYPE_TRAIL_R:
     case NALU_TYPE_TSA_N:
@@ -395,10 +437,7 @@ es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
     case NALU_TYPE_IDR_W_RADL:
     case NALU_TYPE_IDR_N_LP:
     case NALU_TYPE_CRA_NUT:
-      if (!m_configuration_record_ready && !m_vps_info_list.empty() && !m_sps_info_list.empty() && !m_pps_info_list.empty()) {
-        m_configuration_record_ready = true;
-        flush_unhandled_nalus();
-      }
+      maybe_set_configuration_record_ready();
       handle_slice_nalu(nalu, nalu_pos);
       m_first_access_unit_parsing_slices = true;
       break;
@@ -414,16 +453,12 @@ es_parser_c::handle_nalu_internal(memory_cptr const &nalu,
     case NALU_TYPE_UNSPEC59:
     case NALU_TYPE_UNSPEC60:
     case NALU_TYPE_UNSPEC61:
-    case NALU_TYPE_UNSPEC63:
       add_nalu_to_pending_frame_data(nalu);
       break;
 
     default:
       flush_incomplete_frame();
-      if (!m_configuration_record_ready && !m_vps_info_list.empty() && !m_sps_info_list.empty() && !m_pps_info_list.empty()) {
-        m_configuration_record_ready = true;
-        flush_unhandled_nalus();
-      }
+      maybe_set_configuration_record_ready();
       add_nalu_to_extra_data(nalu);
 
       break;
@@ -606,6 +641,15 @@ memory_cptr
 es_parser_c::get_configuration_record()
   const {
   return hevcc_c{static_cast<unsigned int>(m_nalu_size_length), m_vps_list, m_sps_list, m_pps_list, m_user_data, m_codec_private}.pack();
+}
+
+memory_cptr
+es_parser_c::get_dovi_enhancement_layer_configuration_record()
+  const {
+  if (m_dovi_el_parser)
+    return m_dovi_el_parser->get_configuration_record();
+
+  return {};
 }
 
 void

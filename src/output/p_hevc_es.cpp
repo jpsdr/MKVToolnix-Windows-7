@@ -19,7 +19,7 @@
 #include "common/fourcc.h"
 #include "common/hacks.h"
 #include "common/hevc/es_parser.h"
-#include "common/list_utils.h"
+#include "merge/block_addition_mapping.h"
 #include "merge/connection_checks.h"
 #include "output/p_avc_hevc_es.h"
 #include "output/p_hevc_es.h"
@@ -40,21 +40,27 @@ hevc_es_video_packetizer_c::hevc_es_video_packetizer_c(generic_reader_c *p_reade
 
 void
 hevc_es_video_packetizer_c::handle_dovi_block_addition_mappings() {
-  mxdebug_if(s_debug_dovi_configuration_record, fmt::format("hevc_es_video_packetizer_c::handle_dovi_block_addition_mappings: parser has DOVI RPU? {0} headers parsed? {1}\n", m_parser.has_dovi_rpu_header(), m_parser.headers_parsed()));
+  auto el_configuration_record = m_parser.get_dovi_enhancement_layer_configuration_record();
+
+  mxdebug_if(s_debug_dovi_configuration_record, fmt::format("hevc_es_video_packetizer_c::handle_dovi_block_addition_mappings: parser headers parsed: {0}; has DOVI RPU: {1}; has enhancement layer configuration record: {2}\n", m_parser.headers_parsed(), m_parser.has_dovi_rpu_header(), !!el_configuration_record));
 
   if (!m_parser.has_dovi_rpu_header())
     return;
 
-  for (auto const &addition : m_block_addition_mappings) {
-    if (!addition.id_type)
-      continue;
+  if (!handle_dovi_configuration_record())
+    return;
 
-    auto type = fourcc_c{static_cast<uint32_t>(*addition.id_type)};
+  handle_dovi_enhancement_layer_configuration_record();
 
-    mxdebug_if(s_debug_dovi_configuration_record, fmt::format("hevc_es_video_packetizer_c::handle_dovi_block_addition_mappings: have addition mapping with type {0}\n", type));
+  if (!m_block_addition_mappings.empty())
+    set_block_addition_mappings(m_block_addition_mappings);
+}
 
-    if (mtx::included_in(type, fourcc_c{"dvcC"}, fourcc_c{"dvvC"}))
-      return;
+bool
+hevc_es_video_packetizer_c::handle_dovi_configuration_record() {
+  if (have_block_addition_mapping_type(fourcc_c{"dvcC"}.value()) || have_block_addition_mapping_type(fourcc_c{"dvvC"}.value())) {
+    mxdebug_if(s_debug_dovi_configuration_record, fmt::format("hevc_es_video_packetizer_c::handle_dovi_configuration_record: have addition mapping of type dvcC or dvvC already\n"));
+    return true;
   }
 
   auto hdr                = m_parser.get_dovi_rpu_header();
@@ -66,18 +72,42 @@ hevc_es_video_packetizer_c::handle_dovi_block_addition_mappings() {
   auto mapping            = mtx::dovi::create_dovi_block_addition_mapping(dovi_config_record);
 
   if (!mapping.is_valid()) {
-    mxdebug_if(s_debug_dovi_configuration_record, fmt::format("hevc_es_video_packetizer_c::handle_dovi_block_addition_mappings: no existing mapping found but could not create a new one!?\n"));
-    return;
+    mxdebug_if(s_debug_dovi_configuration_record, fmt::format("hevc_es_video_packetizer_c::handle_dovi_configuration_record: no existing mapping found but could not create a new one!?\n"));
+    return false;
   }
 
   if (s_debug_dovi_configuration_record) {
-    mxdebug(fmt::format("hevc_es_video_packetizer_c::handle_dovi_block_addition_mappings: no existing mapping found; creating new one; dumping DOVI RPU header & configuration record\n"));
+    mxdebug(fmt::format("hevc_es_video_packetizer_c::handle_dovi_configuration_record: no existing mapping found; creating new one; dumping DOVI RPU header & configuration record\n"));
     hdr.dump();
     dovi_config_record.dump();
   }
 
   m_block_addition_mappings.push_back(mapping);
-  set_block_addition_mappings(m_block_addition_mappings);
+
+  return true;
+}
+
+void
+hevc_es_video_packetizer_c::handle_dovi_enhancement_layer_configuration_record() {
+  auto el_configuration_record = m_parser.get_dovi_enhancement_layer_configuration_record();
+
+  if (!el_configuration_record)
+    return;
+
+  if (have_block_addition_mapping_type(fourcc_c{"hvcE"}.value())) {
+    mxdebug_if(s_debug_dovi_configuration_record, fmt::format("hevc_es_video_packetizer_c::handle_dovi_enhancement_layer_configuration_record: have addition mapping of type hvcE already\n"));
+    return;
+  }
+
+  mxdebug_if(s_debug_dovi_configuration_record, fmt::format("hevc_es_video_packetizer_c::handle_dovi_enhancement_layer_configuration_record: no existing mapping found; creating new one\n"));
+
+  block_addition_mapping_t mapping{};
+
+  mapping.id_name       = "Dolby Vision enhancement-layer HEVC configuration";
+  mapping.id_type       = fourcc_c{"hvcE"}.value();
+  mapping.id_extra_data = el_configuration_record->clone();
+
+  m_block_addition_mappings.push_back(mapping);
 }
 
 void

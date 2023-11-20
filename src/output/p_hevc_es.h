@@ -34,4 +34,6 @@ public:
 
 protected:
   virtual void handle_dovi_block_addition_mappings();
+  virtual bool handle_dovi_configuration_record();
+  virtual void handle_dovi_enhancement_layer_configuration_record();
 };
