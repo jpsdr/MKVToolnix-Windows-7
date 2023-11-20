@@ -352,4 +352,22 @@ create_dovi_block_addition_mapping(dovi_decoder_configuration_record_t const &do
   return mapping;
 }
 
+dovi_decoder_configuration_record_t
+parse_dovi_decoder_configuration_record(mtx::bits::reader_c &r) {
+  dovi_decoder_configuration_record_t dovi_conf{};
+
+  dovi_conf.dv_version_major              = r.get_bits(8);
+  dovi_conf.dv_version_minor              = r.get_bits(8);
+  dovi_conf.dv_profile                    = r.get_bits(7);
+  dovi_conf.dv_level                      = r.get_bits(6);
+  dovi_conf.rpu_present_flag              = r.get_bit();
+  dovi_conf.el_present_flag               = r.get_bit();
+  dovi_conf.bl_present_flag               = r.get_bit();
+  dovi_conf.dv_bl_signal_compatibility_id = r.get_bits(4);
+
+  r.skip_bits(28 + 32 + 32 + 32 + 32); // reserved
+
+  return dovi_conf;
+}
+
 }                              // namespace mtx::dovi

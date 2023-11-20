@@ -83,6 +83,7 @@ uint8_t calculate_dovi_level(unsigned int width, unsigned int height, uint64_t d
 
 dovi_decoder_configuration_record_t create_dovi_configuration_record(dovi_rpu_data_header_t const &hdr, unsigned int width, unsigned int height, mtx::hevc::vui_info_t const &vui, uint64_t duration);
 dovi_decoder_configuration_record_t create_av1_dovi_configuration_record(dovi_rpu_data_header_t const &hdr, unsigned int width, unsigned int height, mtx::av1::color_config_t const &color_config, uint64_t duration);
+dovi_decoder_configuration_record_t parse_dovi_decoder_configuration_record(mtx::bits::reader_c &r);
 
 block_addition_mapping_t create_dovi_block_addition_mapping(dovi_decoder_configuration_record_t const &dovi_conf);
 

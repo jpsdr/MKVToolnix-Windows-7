@@ -85,7 +85,7 @@ def setup_globals
   $programs                =  %w{mkvmerge mkvinfo mkvextract mkvpropedit}
   $programs                << "mkvtoolnix"     if $build_mkvtoolnix
   $programs                << "mkvtoolnix-gui" if $build_mkvtoolnix_gui
-  $tools                   =  %w{ac3parser base64tool bluray_dump checksum diracparser dts_dump ebml_validator hevcc_dump pgs_dump vc1parser xyzvc_dump}
+  $tools                   =  %w{ac3parser base64tool bluray_dump checksum diracparser dovic_dump dts_dump ebml_validator hevcc_dump pgs_dump vc1parser xyzvc_dump}
 
   $application_subdirs     =  { "mkvtoolnix-gui" => "mkvtoolnix-gui/", "mkvtoolnix" => "mkvtoolnix/" }
   $applications            =  $programs.map { |name| "src/#{$application_subdirs[name]}#{name}" + c(:EXEEXT) }
