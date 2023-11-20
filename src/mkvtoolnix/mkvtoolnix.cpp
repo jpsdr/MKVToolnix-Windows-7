@@ -43,7 +43,7 @@ determine_program(std::vector<std::string> &args) {
     return program;
 
   QRegularExpression main_name_re{"^(?:mkv)?(merge|info|extract|propedit|toolnix-gui)(?:\\.exe)?$"};
-  QRegularExpression tool_name_re{"^(bluray_dump|ebml_validator|hevcc_dump|xvc_dump)(?:\\.exe)?$"};
+  QRegularExpression tool_name_re{"^(bluray_dump|ebml_validator|hevcc_dump|xyzvc_dump)(?:\\.exe)?$"};
 
   auto matches = main_name_re.match(Q(args[0]));
 

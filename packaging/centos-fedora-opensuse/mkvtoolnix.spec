@@ -142,7 +142,7 @@ if test `lsb_release -is` = Fedora; then
   appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/org.bunkus.mkvtoolnix-gui.appdata.xml
 fi
 
-install -pm 755 src/tools/{bluray_dump,ebml_validator,hevcc_dump,xvc_dump} $RPM_BUILD_ROOT%{_bindir}
+install -pm 755 src/tools/{bluray_dump,ebml_validator,hevcc_dump,xyzvc_dump} $RPM_BUILD_ROOT%{_bindir}
 
 %find_lang %{name}
 %find_lang mkvextract --with-man
@@ -185,7 +185,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || true
 %{_bindir}/mkvinfo
 %{_bindir}/mkvmerge
 %{_bindir}/mkvpropedit
-%{_bindir}/xvc_dump
+%{_bindir}/xyzvc_dump
 %{_mandir}/man1/mkvextract.1*
 %{_mandir}/man1/mkvinfo.1*
 %{_mandir}/man1/mkvmerge.1*

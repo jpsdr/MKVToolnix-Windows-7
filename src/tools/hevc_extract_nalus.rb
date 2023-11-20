@@ -10,7 +10,7 @@ end
 
 nalus = []
 
-`xvc_dump #{Shellwords.escape(ARGV[0])}`.
+`xyzvc_dump #{Shellwords.escape(ARGV[0])}`.
   split(%r{\n+}).
   each do |line|
 

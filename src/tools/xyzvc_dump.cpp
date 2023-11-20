@@ -1,5 +1,5 @@
 /*
-   xvc_dump - A tool for dumping HEVC structures
+   xyzvc_dump - A tool for dumping HEVC structures
 
    Distributed under the GPL v2
    see the file COPYING for details
@@ -43,7 +43,7 @@ static std::unique_ptr<mtx::avc_hevc::es_parser_c> s_parser;
 
 static void
 setup_help() {
-  mtx::cli::g_usage_text = "xvc_dump [options] input_file_name\n"
+  mtx::cli::g_usage_text = "xyzvc_dump [options] input_file_name\n"
     "\n"
     "General options:\n"
     "\n"
@@ -135,14 +135,14 @@ parse_args(std::vector<std::string> &args) {
       s_codec_type = codec_type_e::hevc;
 
     else
-      mxerror("The file type could not be derived from the file name's extension. Please specify the corresponding command line option (see 'xvc_dump --help').\n");
+      mxerror("The file type could not be derived from the file name's extension. Please specify the corresponding command line option (see 'xyzvc_dump --help').\n");
   }
 
   if (s_framing_type == framing_type_e::unknown) {
     s_framing_type = detect_framing_type(file_name);
 
     if (s_framing_type == framing_type_e::unknown)
-      mxerror("The framing type could not be derived from the file's content. Please specify the corresponding command line option (see 'xvc_dump --help').\n");
+      mxerror("The framing type could not be derived from the file's content. Please specify the corresponding command line option (see 'xyzvc_dump --help').\n");
   }
 
   return file_name;
@@ -318,7 +318,7 @@ parse_file_iso_14496_15(std::string const &file_name) {
 int
 main(int argc,
      char **argv) {
-  mtx_common_init("xvc_dump", argv[0]);
+  mtx_common_init("xyzvc_dump", argv[0]);
   setup_help();
 
   auto args = mtx::cli::args_in_utf8(argc, argv);

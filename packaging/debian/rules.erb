@@ -56,7 +56,7 @@ endif
 
 override_dh_install:
 	./drake install DESTDIR=$(CURDIR)/debian/tmp
-	install -m 755 -t $(CURDIR)/debian/tmp/usr/bin $(patsubst %,src/tools/%,bluray_dump ebml_validator hevcc_dump xvc_dump)
+	install -m 755 -t $(CURDIR)/debian/tmp/usr/bin $(patsubst %,src/tools/%,bluray_dump ebml_validator hevcc_dump xyzvc_dump)
 
 	dh_install -Xorg.bunkus.mkvtoolnix-gui.xml
 	dh_missing --fail-missing -Xorg.bunkus.mkvtoolnix-gui.xml

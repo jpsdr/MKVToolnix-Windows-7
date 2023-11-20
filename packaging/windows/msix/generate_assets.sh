@@ -54,7 +54,7 @@ for file in *.scale-100.png; do
 done
 
 # dir=../../../../share/icons/windows/msix
-# for program in mkvmerge mkvinfo mkvextract mkvpropedit bluray_dump ebml_validator hevcc_dump xvc_dump; do
+# for program in mkvmerge mkvinfo mkvextract mkvpropedit bluray_dump ebml_validator hevcc_dump xyzvc_dump; do
 #   for size in 44 150; do
 #     convert ${dir}/${program}.xcf -background transparent -layers flatten -size ${size}x${size} Square${size}x${size}Logo-${program}.png
 #   done
