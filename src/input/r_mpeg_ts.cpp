@@ -750,8 +750,8 @@ track_c::parse_registration_pmt_descriptor(pmt_descriptor_t const &pmt_descripto
   if (pmt_descriptor.length < 4)
     return false;
 
-  auto fourcc = fourcc_c{reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1)};
-  auto reg_codec  = codec_c::look_up(fourcc.str());
+  auto fourcc    = fourcc_c{reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1)};
+  auto reg_codec = codec_c::look_up(fourcc.str());
 
   mxdebug_if(reader.m_debug_pat_pmt, fmt::format("parse_registration_pmt_descriptor: Registration descriptor with FourCC: {0} codec: {1}\n", fourcc.description(), reg_codec));
 
@@ -759,9 +759,9 @@ track_c::parse_registration_pmt_descriptor(pmt_descriptor_t const &pmt_descripto
     return false;
 
   switch (reg_codec.get_track_type()) {
-    case track_audio:    type = pid_type_e::audio; break;
-    case track_video:    type = pid_type_e::video; break;
-    case track_subtitle: type = pid_type_e::subtitles;  break;
+    case track_audio:    type = pid_type_e::audio;     break;
+    case track_video:    type = pid_type_e::video;     break;
+    case track_subtitle: type = pid_type_e::subtitles; break;
     default:
       return false;
   }
