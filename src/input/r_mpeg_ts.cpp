@@ -1546,7 +1546,7 @@ reader_c::parse_pmt_pid_info(mm_mem_io_c &mem,
     auto pmt_descriptor_buffer = read_pmt_descriptor(mem);
     auto pmt_descriptor        = reinterpret_cast<pmt_descriptor_t *>(pmt_descriptor_buffer->get_buffer());
 
-    mxdebug_if(m_debug_pat_pmt, fmt::format("parse_pmt: PMT descriptor tag 0x{0:02x} length {1}\n", static_cast<unsigned int>(pmt_descriptor->tag), static_cast<unsigned int>(pmt_descriptor->length)));
+    mxdebug_if(m_debug_pat_pmt, fmt::format("parse_pmt: PID {2} PMT descriptor tag 0x{0:02x} length {1}\n", static_cast<unsigned int>(pmt_descriptor->tag), static_cast<unsigned int>(pmt_descriptor->length), track->pid));
 
     if (pmt_descriptor_buffer->get_size() > es_info_length)
       break;
