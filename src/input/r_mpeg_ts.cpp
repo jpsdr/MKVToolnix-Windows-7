@@ -33,8 +33,6 @@
 #include "common/id_info.h"
 #include "common/list_utils.h"
 #include "common/mm_mem_io.h"
-#include "common/mm_proxy_io.h"
-#include "common/mm_text_io.h"
 #include "common/mpeg1_2.h"
 #include "common/mpeg4_p2.h"
 #include "common/path.h"
