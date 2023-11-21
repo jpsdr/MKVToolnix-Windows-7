@@ -39,7 +39,7 @@ protected:
     started,
     finished,
   };
-  mtx::dovi::dovi_rpu_data_header_t m_dovi_rpu_data_header;
+  std::optional<mtx::dovi::dovi_rpu_data_header_t> m_dovi_rpu_data_header;
   std::unique_ptr<es_parser_c> m_dovi_el_parser;
   dovi_el_parsing_state_e m_dovi_el_parsing_state{dovi_el_parsing_state_e::pending};
 
@@ -72,11 +72,13 @@ public:
   virtual int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const override;
 
   bool has_dovi_rpu_header() const {
-    return m_dovi_rpu_data_header.rpu_nal_prefix == 25;
+    return m_dovi_rpu_data_header.has_value();
   }
 
   mtx::dovi::dovi_rpu_data_header_t get_dovi_rpu_header() const {
-    return m_dovi_rpu_data_header;
+    if (m_dovi_rpu_data_header.has_value())
+      return *m_dovi_rpu_data_header;
+    return {};
   }
 
   vui_info_t get_vui_info() const {

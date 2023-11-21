@@ -341,8 +341,13 @@ es_parser_c::handle_sei_nalu(memory_cptr const &nalu,
 
 void
 es_parser_c::handle_unspec62_nalu(memory_cptr const &nalu) {
-  if (parse_dovi_rpu(mpeg::nalu_to_rbsp(nalu), m_dovi_rpu_data_header))
-    add_nalu_to_pending_frame_data(nalu);
+  mtx::dovi::dovi_rpu_data_header_t header{};
+
+  if (!parse_dovi_rpu(mpeg::nalu_to_rbsp(nalu), header))
+    return;
+
+  add_nalu_to_pending_frame_data(nalu);
+  m_dovi_rpu_data_header = header;
 }
 
 void
