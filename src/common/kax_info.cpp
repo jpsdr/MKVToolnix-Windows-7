@@ -83,6 +83,7 @@
 #include "common/version.h"
 #include "common/xml/ebml_chapters_converter.h"
 #include "common/xml/ebml_tags_converter.h"
+#include "matroska/KaxSemantic.h"
 
 using namespace libmatroska;
 using namespace mtx::kax_info;
@@ -656,6 +657,25 @@ kax_info_c::init_custom_element_value_formatters_and_processors() {
                                p->m_summary.empty() ? "" : ", ",
                                mtx::string::join(p->m_summary, ", ")));
   });
+
+  if (debugging_c::requested("dovi")) {
+    add_post(EBML_ID(KaxBlockAddIDType),       [p](EbmlElement &e) { p->m_block_add_id_type       = static_cast<KaxBlockAddIDType &>(e).GetValue(); });
+    add_post(EBML_ID(KaxBlockAddIDExtraData),  [p](EbmlElement &e) { p->m_block_add_id_extra_data = memory_c::clone(static_cast<KaxBlockAddIDExtraData &>(e)); });
+    add_post(EBML_ID(KaxBlockAdditionMapping), [p](EbmlElement &) {
+      if (p->m_block_add_id_type && p->m_block_add_id_extra_data) {
+        try {
+          mtx::bits::reader_c r{*p->m_block_add_id_extra_data};
+          auto dovi_cfg = mtx::dovi::parse_dovi_decoder_configuration_record(r);
+          dovi_cfg.dump();
+
+        } catch(...) {
+        }
+      }
+
+      p->m_block_add_id_type.reset();
+      p->m_block_add_id_extra_data.reset();
+    });
+  }
 
   // Simple formatters:
   add_fmt_mem(EBML_ID(KaxSegmentUID),       &kax_info_c::format_binary_as_hex);
