@@ -15,6 +15,8 @@
 
 #include "common/common_pch.h"
 
+#include <ebml/EbmlBinary.h>
+
 #include "common/error.h"
 
 namespace mtx {
@@ -205,6 +207,11 @@ public:
   clone(const void *buffer,
         std::size_t size) {
     return take_ownership(safememdup(buffer, size), size);
+  }
+
+  static inline memory_cptr
+  clone(libebml::EbmlBinary const &binary) {
+    return take_ownership(safememdup(binary.GetBuffer(), binary.GetSize()), binary.GetSize());
   }
 
   static inline memory_cptr
