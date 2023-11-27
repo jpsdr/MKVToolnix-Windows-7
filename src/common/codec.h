@@ -13,6 +13,7 @@
 
 #pragma once
 
+#include "common/bluray/mpls.h"
 #include "common/common_pch.h"
 
 #include <ostream>
@@ -214,6 +215,7 @@ public:                         // static
   static codec_c const look_up(char const *fourcc_or_codec_id);
   static codec_c const look_up(fourcc_c const &fourcc);
   static codec_c const look_up(type_e type);
+  static codec_c const look_up_bluray_stream_coding_type(unsigned char coding_type);
   static codec_c const look_up_audio_format(uint16_t audio_format);
   static codec_c const look_up_object_type_id(unsigned int object_type_id);
 
