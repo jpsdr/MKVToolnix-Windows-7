@@ -739,19 +739,81 @@ track_c::parse_srt_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
   return true;
 }
 
+codec_c
+track_c::determine_codec_for_hdmv_registration_descriptor(pmt_descriptor_t const &pmt_descriptor) {
+  if (pmt_descriptor.length < 8)
+    return {};
+
+  // 187
+  // Blu-ray specs, Table 9-9 – HDMV_video_registration_descriptor
+  //   descriptor_tag     8
+  //   descriptor_length  8
+  //   format_identifier 32 ("HDMV")
+  //   stuffing_bits      8 (0xff)
+  //   stream_coding_type 8
+  //   video_format       4
+  //   frame_rate         4
+  //   aspect_ratio       4
+  //   stuffing_bits      4
+
+  mtx::bits::reader_c r{reinterpret_cast<unsigned char const *>(&pmt_descriptor), static_cast<std::size_t>(pmt_descriptor.length + 2)};
+
+  try {
+    r.skip_bits(2 * 8 + 32);
+    if (r.get_bits(8) != 0xff)
+      return {};
+
+    auto stream_coding_type = r.get_bits(8);
+    auto derived_codec      = codec_c::look_up_bluray_stream_coding_type(stream_coding_type);
+    auto video_format       = r.get_bits(4);
+    auto frame_rate         = r.get_bits(4);
+    auto aspect_ratio       = r.get_bits(4);
+
+    if (reader.m_debug_pat_pmt) {
+      auto frame_rate_desc    = frame_rate == 1 ? "24000/1001"
+                              : frame_rate == 2 ? "24"
+                              : frame_rate == 3 ? "25"
+                              : frame_rate == 4 ? "30000/1001"
+                              : frame_rate == 6 ? "50"
+                              : frame_rate == 7 ? "60000/1001"
+                              :                   "reserved";
+      auto aspect_ratio_desc  = aspect_ratio == 2 ? "4:3"
+                              : aspect_ratio == 3 ? "16:9"
+                              :                     "reserved";
+
+      mxdebug(fmt::format("determine_codec_for_hdmv_registration_descriptor: stream coding type: 0x{0:02x} ({1}) derived codec: {2} video format: {3} ({4}) frame rate: {5} ({6}) aspect ratio: {7} ({8})\n",
+                          stream_coding_type, mtx::bluray::mpls::get_stream_coding_type_description(stream_coding_type), derived_codec,
+                          video_format,       mtx::bluray::mpls::get_video_format_description(video_format),
+                          frame_rate,         frame_rate_desc,
+                          aspect_ratio,       aspect_ratio_desc));
+    }
+
+    return derived_codec;
+
+  } catch (mtx::mm_io::end_of_file_x &) {
+  }
+
+  return {};
+}
+
 bool
 track_c::parse_registration_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
                                            pmt_pid_info_t const &pmt_pid_info) {
+  if (reader.m_debug_pat_pmt) {
+    mxdebug(fmt::format("parse_registration_pmt_descriptor: starting to parse the following:\n"));
+    debugging_c::hexdump(reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1), pmt_descriptor.length);
+  }
+
   if (pmt_pid_info.stream_type != stream_type_e::iso_13818_pes_private)
     return false;
 
   if (pmt_descriptor.length < 4)
     return false;
 
-  auto fourcc    = fourcc_c{reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1)};
-  auto reg_codec = codec_c::look_up(fourcc.str());
+  auto reg_fourcc = fourcc_c{reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1)};
+  auto reg_codec  = reg_fourcc == fourcc_c{"HDMV"} ? determine_codec_for_hdmv_registration_descriptor(pmt_descriptor) : codec_c::look_up(reg_fourcc.str());
 
-  mxdebug_if(reader.m_debug_pat_pmt, fmt::format("parse_registration_pmt_descriptor: Registration descriptor with FourCC: {0} codec: {1}\n", fourcc.description(), reg_codec));
+  mxdebug_if(reader.m_debug_pat_pmt, fmt::format("parse_registration_pmt_descriptor: Registration descriptor with FourCC: {0} codec: {1}\n", reg_fourcc.description(), reg_codec));
 
   if (!reg_codec.valid())
     return false;

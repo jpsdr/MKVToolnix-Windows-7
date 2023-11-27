@@ -387,6 +387,7 @@ public:
   timestamp_c derive_hdmv_textst_pts_from_content();
 
   void determine_codec_from_stream_type(stream_type_e stream_type);
+  codec_c determine_codec_for_hdmv_registration_descriptor(pmt_descriptor_t const &pmt_descriptor);
 
   void process(packet_cptr const &packet);
 
