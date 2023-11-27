@@ -32,21 +32,33 @@ enum class stream_type_e {
 
 // Blu-ray specs 5.4.4.3.2 table 5-16
 enum class stream_coding_type_e {
-  mpeg2_video_primary_secondary     = 0x02,
-  mpeg4_avc_video_primary_secondary = 0x1b,
-  vc1_video_primary_secondary       = 0xea,
-  lpcm_audio_primary                = 0x80,
-  ac3_audio_primary                 = 0x81,
-  dts_audio_primary                 = 0x82,
-  truehd_audio_primary              = 0x83,
-  eac3_audio_primary                = 0x84,
-  dts_hd_audio_primary              = 0x85,
-  dts_hd_xll_audio_primary          = 0x86,
-  eac3_audio_secondary              = 0xa1,
-  dts_hd_audio_secondary            = 0xa2,
-  presentation_graphics_subtitles   = 0x90,
-  interactive_graphics_menu         = 0x91,
-  text_subtitles                    = 0x92,
+  mpeg2_video_primary_secondary      = 0x02,
+  mpeg4_avc_video_primary_secondary  = 0x1b,
+  mpegh_hevc_video_primary_secondary = 0x24,
+  vc1_video_primary_secondary        = 0xea,
+  lpcm_audio_primary                 = 0x80,
+  ac3_audio_primary                  = 0x81,
+  dts_audio_primary                  = 0x82,
+  truehd_audio_primary               = 0x83,
+  eac3_audio_primary                 = 0x84,
+  dts_hd_audio_primary               = 0x85,
+  dts_hd_xll_audio_primary           = 0x86,
+  eac3_audio_secondary               = 0xa1,
+  dts_hd_audio_secondary             = 0xa2,
+  presentation_graphics_subtitles    = 0x90,
+  interactive_graphics_menu          = 0x91,
+  text_subtitles                     = 0x92,
+};
+
+// Blu-ray specs 5.4.4.3.2 table 5-17
+enum class video_format_e {
+  i480  = 1,
+  i576  = 2,
+  p480  = 3,
+  i1080 = 4,
+  p720  = 5,
+  p1080 = 6,
+  p576  = 7,
 };
 
 enum class sub_path_type_e {
@@ -197,5 +209,8 @@ protected:
   virtual void read_chapter_names(std::string const &base_file_name);
 };
 using parser_cptr = std::shared_ptr<parser_c>;
+
+std::string get_stream_coding_type_description(unsigned char coding_type);
+std::string get_video_format_description(unsigned char video_format);
 
 }

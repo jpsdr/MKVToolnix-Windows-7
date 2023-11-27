@@ -526,4 +526,43 @@ parser_c::dump()
   m_playlist.dump();
 }
 
+std::string
+get_stream_coding_type_description(unsigned char coding_type) {
+  switch (coding_type) {
+    case static_cast<unsigned char>(stream_coding_type_e::mpeg2_video_primary_secondary):      return "MPEG-2 video primary/secondary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::mpeg4_avc_video_primary_secondary):  return "MPEG-4 AVC primary/secondary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::mpegh_hevc_video_primary_secondary): return "MPEG-H HEVC primary/secondary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::vc1_video_primary_secondary):        return "VC-1 video primary/secondary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::lpcm_audio_primary):                 return "LPCM audio primary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::ac3_audio_primary):                  return "Dolby Digital (AC-3) audio primary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::dts_audio_primary):                  return "DTS audio primary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::truehd_audio_primary):               return "Dolby Lossless (TrueHD) audio primary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::eac3_audio_primary):                 return "Dolby Digital Plus (E-AC-3) audio primary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::dts_hd_audio_primary):               return "DTS HD except XLL audio primary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::dts_hd_xll_audio_primary):           return "DTS HD XLL audio primary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::eac3_audio_secondary):               return "Dolby Digital Plus (E-AC-3) audio secondary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::dts_hd_audio_secondary):             return "DTS HD except XLL audio secondary"s;
+    case static_cast<unsigned char>(stream_coding_type_e::presentation_graphics_subtitles):    return "Presentation Graphics subtitles"s;
+    case static_cast<unsigned char>(stream_coding_type_e::interactive_graphics_menu):          return "Interactive Graphics menu"s;
+    case static_cast<unsigned char>(stream_coding_type_e::text_subtitles):                     return "Text subtitles"s;
+  }
+
+  return "unknown"s;
+}
+
+std::string
+get_video_format_description(unsigned char video_format) {
+  switch (video_format) {
+    case static_cast<unsigned char>(video_format_e::i480):  return "480i"s;
+    case static_cast<unsigned char>(video_format_e::i576):  return "576i"s;
+    case static_cast<unsigned char>(video_format_e::p480):  return "480p"s;
+    case static_cast<unsigned char>(video_format_e::i1080): return "1080i"s;
+    case static_cast<unsigned char>(video_format_e::p720):  return "720p"s;
+    case static_cast<unsigned char>(video_format_e::p1080): return "1080p"s;
+    case static_cast<unsigned char>(video_format_e::p576):  return "576p"s;
+  }
+
+  return "reserved"s;
+}
+
 }
