@@ -11,13 +11,13 @@
 * MKVToolNix GUI: multiplexer: the functionality for detecting file name
   sequences when adding files can now recognize the patterns used by GoPro's
   cameras for chaptered video files. Implements #3633.
-* mkvmerge: HEVC/H.265: added support for reading single-layer Dolby Vision
-  from Annex B type bitstream read from MPEG transport streams. Partially
-  implements #3113.
-* mkvmerge: HEVC/H.265: added support for reading dual-layer Dolby Vision with
-  both the base & enhancement layers in the same track from Annex B type
-  bitstreams in MPEG transport files & elementary stream files. Implements
-  #3126.
+* mkvmerge: MPEG transport stream reader: HEVC/H.265: added support for
+  reading single-layer Dolby Vision from Annex B type bitstream read from MPEG
+  transport streams. Partially implements #3113.
+* mkvmerge: MPEG transport stream reader, HEVC/H.265 elementary stream reader:
+  added support for reading dual-layer Dolby Vision with both the base &
+  enhancement layers in the same track from Annex B type bitstreams in MPEG
+  transport files & elementary stream files. Implements #3126.
 
 ## Bug fixes
 
