@@ -50,6 +50,8 @@
   Matroska, MP4/MOV or FLV files the first frame of all the appended files was
   sometimes dropped, resulting in broken video at the point where video is
   appended. Fixes #3479.
+* xyzvc_dump: fixed the tool aborting with an exception when the last NALU in
+  an Annex B type file was shorter than four bytes.
 
 ## Other changes
 

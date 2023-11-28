@@ -15,6 +15,7 @@
 #include "common/avc/es_parser.h"
 #include "common/checksums/base_fwd.h"
 #include "common/command_line.h"
+#include "common/endian.h"
 #include "common/hevc/es_parser.h"
 #include "common/hevc/types.h"
 #include "common/list_utils.h"
@@ -238,6 +239,9 @@ parse_file_annex_b(std::string const &file_name) {
   auto previous_marker_size = 0;
   auto previous_pos         = static_cast<int64_t>(-1);
   auto previous_type        = 0;
+  unsigned char next_bytes[4];
+
+  std::memset(next_bytes, 0, 4);
 
   while (true) {
     auto pos = in.getFilePointer();
@@ -269,14 +273,18 @@ parse_file_annex_b(std::string const &file_name) {
     } else
       s_frame_fill = 0;
 
-    auto next_bytes      = in.read_uint32_be();
+    if (in.getFilePointer() >= file_size)
+      return;
+
+    auto num_to_read     = std::min<uint64_t>(4, file_size - in.getFilePointer());
+    auto num_read        = in.read(next_bytes, num_to_read);
     previous_pos         = pos;
     previous_marker_size = marker_size;
-    previous_type        = s_codec_type == codec_type_e::avc ? (next_bytes >> 24) & 0x1f : (next_bytes >> (24 + 1)) & 0x3f;
-    marker               = (1ull << 24) | (next_bytes & 0x00ff'ffff);
+    previous_type        = s_codec_type == codec_type_e::avc ? next_bytes[0] & 0x1f : (next_bytes[0] >> 1) & 0x3f;
+    marker               = (1ull << 24) | get_uint24_be(&next_bytes[1]);
 
-    for (auto idx = 0; idx < 4; ++idx)
-      add_frame_byte(next_bytes >> ((3 - idx) * 8));
+    for (auto idx = 0u; idx < num_read; ++idx)
+      add_frame_byte(next_bytes[idx]);
   }
 
   if (-1 == previous_pos)
