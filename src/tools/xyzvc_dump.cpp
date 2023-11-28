@@ -163,7 +163,7 @@ add_frame_byte(uint8_t byte) {
 static std::string
 calc_frame_checksum(uint64_t skip_at_end) {
   if (skip_at_end >= s_frame_fill)
-    return 0;
+    return {};
 
   auto checksum = mtx::checksum::calculate_as_hex_string(mtx::checksum::algorithm_e::md5, s_frame->get_buffer(), s_frame_fill - skip_at_end);
   s_frame_fill  = 0;
