@@ -195,12 +195,13 @@ show_nalu(uint32_t type,
   if (inner_type)
     inner_type_str = fmt::format(" inner NALU type 0x{0:02x} ({1})", *inner_type, s_parser->get_nalu_type_name(*inner_type));
 
-  mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2}{3}{4} checksum 0x{5}{6}\n",
+  mxinfo(fmt::format("NALU type 0x{0:02x} ({1}) size {2}{3}{4}{5} checksum 0x{6}{7}\n",
                      type,
                      s_parser->get_nalu_type_name(type),
                      size,
                      s_portable_format ? ""s : marker_size ? fmt::format(" marker size {0}", *marker_size) : ""s,
                      s_portable_format ? ""s : fmt::format(" at {0}", position),
+                     s_portable_format ? ""s : fmt::format(" ends at {0}", position + size + marker_size.value_or(4)),
                      checksum,
                      inner_type_str));
 }

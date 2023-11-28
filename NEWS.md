@@ -18,6 +18,10 @@
   added support for reading dual-layer Dolby Vision with both the base &
   enhancement layers in the same track from Annex B type bitstreams in MPEG
   transport files & elementary stream files. Implements #3126.
+* xyzvc_dump: the end position of the current NALU will be output in
+  non-portable format as well.
+* xyzvc_dump: HEVC: the tool will now also output the inner NALU type of Dolby
+  Vision NALUs (`unspec62` and `unspec63`).
 
 ## Bug fixes
 
