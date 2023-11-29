@@ -13,6 +13,7 @@
 #include "common/common_pch.h"
 
 #include "common/avc_hevc/types.h"
+#include "common/mpeg.h"
 
 namespace mtx::avc_hevc {
 
@@ -97,6 +98,35 @@ std::optional<bool>
 frame_t::is_discardable()
   const {
   return m_discardable;
+}
+
+void
+frame_t::combine_nalus_to_data(std::size_t nalu_size_length) {
+  if (m_data)
+    return;
+
+  auto final_size = 0;
+
+  for (auto const &nalu : m_data_parts)
+    final_size += nalu_size_length + nalu->get_size();
+
+  m_data    = memory_c::alloc(final_size);
+  auto dest = m_data->get_buffer();
+
+  for (auto const &nalu : m_data_parts) {
+    mtx::mpeg::write_nalu_size(dest, nalu->get_size(), nalu_size_length);
+    std::memcpy(dest + nalu_size_length, nalu->get_buffer(), nalu->get_size());
+
+    dest += nalu_size_length + nalu->get_size();
+  }
+
+  m_data_parts.clear();
+}
+
+std::size_t
+frame_t::get_data_size()
+  const {
+  return m_data ? m_data->get_size() : std::accumulate(m_data_parts.begin(), m_data_parts.end(), 0u, [](unsigned int size, auto const &mem) { return size + 4 + mem->get_size(); });
 }
 
 }

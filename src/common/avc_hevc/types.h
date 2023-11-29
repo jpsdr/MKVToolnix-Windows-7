@@ -50,6 +50,7 @@ struct frame_t {
 public:
   // Fields common to AVC & HEVC:
   memory_cptr m_data;
+  std::vector<memory_cptr> m_data_parts;
   int64_t m_start{}, m_end{}, m_ref1{}, m_ref2{};
   uint64_t m_position{};
   bool m_keyframe{}, m_has_provided_timestamp{};
@@ -68,6 +69,9 @@ public:
   bool is_b_frame() const;
   bool is_key_frame() const;
   std::optional<bool> is_discardable() const;
+  std::size_t get_data_size() const;
+
+  void combine_nalus_to_data(std::size_t nalu_size_length);
 };
 
 }

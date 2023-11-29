@@ -239,6 +239,8 @@ es_parser_c::get_frame() {
   auto frame = *m_frames_out.begin();
   m_frames_out.erase(m_frames_out.begin(), m_frames_out.begin() + 1);
 
+  frame.combine_nalus_to_data(m_nalu_size_length);
+
   return frame;
 }
 
@@ -308,28 +310,13 @@ es_parser_c::build_frame_data() {
   if (m_incomplete_frame.m_keyframe && m_normalize_parameter_sets)
     add_parameter_sets_to_extra_data();
 
-  auto all_nalus = std::move(m_extra_data_pre);
-  all_nalus.reserve(all_nalus.size() + m_pending_frame_data.size());
+  m_incomplete_frame.m_data_parts = std::move(m_extra_data_pre);
+  m_incomplete_frame.m_data_parts.reserve(m_incomplete_frame.m_data_parts.size() + m_pending_frame_data.size());
 
-  std::copy(m_pending_frame_data.begin(), m_pending_frame_data.end(), std::back_inserter(all_nalus));
+  std::copy(m_pending_frame_data.begin(), m_pending_frame_data.end(), std::back_inserter(m_incomplete_frame.m_data_parts));
 
   m_extra_data_pre.clear();
   m_pending_frame_data.clear();
-
-  auto final_size = 0;
-
-  for (auto const &nalu : all_nalus)
-    final_size += m_nalu_size_length + nalu->get_size();
-
-  m_incomplete_frame.m_data = memory_c::alloc(final_size);
-  auto dest                 = m_incomplete_frame.m_data->get_buffer();
-
-  for (auto const &nalu : all_nalus) {
-    mtx::mpeg::write_nalu_size(dest, nalu->get_size(), m_nalu_size_length);
-    std::memcpy(dest + m_nalu_size_length, nalu->get_buffer(), nalu->get_size());
-
-    dest += m_nalu_size_length + nalu->get_size();
-  }
 }
 
 void
@@ -437,7 +424,7 @@ es_parser_c::calculate_provided_timestamps_to_use() {
   //                        "  provided timestamps (to use):\n{5}",
   //                        num_frames, num_provided_timestamps, provided_timestamps_to_use.size(),
   //                        std::accumulate(m_frames.begin(), m_frames.end(), std::string{}, [](auto const &str, auto const &frame) {
-  //                          return str + fmt::format("    pos {0} size {1} type {2}\n", frame.m_position, frame.m_data->get_size(), frame.m_type);
+  //                          return str + fmt::format("    pos {0} size {1} type {2}\n", frame.m_position, frame.get_data_size(), frame.m_type);
   //                        }),
   //                        std::accumulate(m_provided_timestamps.begin(), m_provided_timestamps.end(), std::string{}, [](auto const &str, auto const &provided_timestamp) {
   //                          return str + fmt::format("    pos {0} timestamp {1}\n", provided_timestamp.second, mtx::string::format_timestamp(provided_timestamp.first));
@@ -511,7 +498,7 @@ es_parser_c::update_frame_stats() {
   mxdebug_if(m_debug_timestamps, fmt::format("DECODE order dump\n"));
 
   for (auto &frame : m_frames) {
-    mxdebug_if(m_debug_timestamps, fmt::format("  type {0} TS {1} size {2} pos 0x{3:x} ref1 {4} ref2 {5}\n", frame.m_type, mtx::string::format_timestamp(frame.m_start), frame.m_data->get_size(), frame.m_position, frame.m_ref1, frame.m_ref2));
+    mxdebug_if(m_debug_timestamps, fmt::format("  type {0} TS {1} size {2} pos 0x{3:x} ref1 {4} ref2 {5}\n", frame.m_type, mtx::string::format_timestamp(frame.m_start), frame.get_data_size(), frame.m_position, frame.m_ref1, frame.m_ref2));
 
     ++m_duration_frequency[frame.m_end - frame.m_start];
 
@@ -635,12 +622,12 @@ es_parser_c::dump_info()
   mxinfo("Dumping m_frames_out:\n");
   for (auto &frame : m_frames_out) {
     mxinfo(fmt::format("  size {0} key {1} start {2} end {3} ref1 {4} adler32 0x{5:08x}\n",
-                       frame.m_data->get_size(),
+                       frame.get_data_size(),
                        frame.m_keyframe,
                        mtx::string::format_timestamp(frame.m_start),
                        mtx::string::format_timestamp(frame.m_end),
                        mtx::string::format_timestamp(frame.m_ref1),
-                       mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *frame.m_data)));
+                       frame.m_data ? mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::adler32, *frame.m_data) : 0u));
   }
 }
 
