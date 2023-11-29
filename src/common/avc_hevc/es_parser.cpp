@@ -510,7 +510,7 @@ es_parser_c::update_frame_stats() {
 }
 
 void
-es_parser_c::cleanup() {
+es_parser_c::cleanup(std::deque<frame_t> &queue) {
   auto num_frames = m_frames.size();
   if (!num_frames)
     return;
@@ -551,7 +551,7 @@ es_parser_c::cleanup() {
 
   m_first_cleanup         = false;
   m_stats.num_frames_out += m_frames.size();
-  m_frames_out.insert(m_frames_out.end(), m_frames.begin(), m_frames.end());
+  queue.insert(queue.end(), m_frames.begin(), m_frames.end());
   m_frames.clear();
 }
 

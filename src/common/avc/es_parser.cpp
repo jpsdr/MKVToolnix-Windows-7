@@ -59,7 +59,7 @@ es_parser_c::flush() {
     m_have_incomplete_frame = false;
   }
 
-  cleanup();
+  cleanup(m_frames_out);
 }
 
 void
@@ -209,7 +209,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
     m_first_keyframe_found    = true;
     m_b_frames_since_keyframe = false;
     if (!si.field_pic_flag || !m_current_key_frame_bottom_field || (*m_current_key_frame_bottom_field == si.bottom_field_flag)) {
-      cleanup();
+      cleanup(m_frames_out);
 
       if (m_configuration_record_changed)
         add_sps_and_pps_to_extra_data();
@@ -259,7 +259,7 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu) {
   } else if (m_sps_info_list[i].checksum != sps_info.checksum) {
     mxdebug_if(m_debug_sps_pps_changes, fmt::format("avc: SPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", sps_info.id, m_sps_info_list[i].checksum, sps_info.checksum));
 
-    cleanup();
+    cleanup(m_frames_out);
 
     m_sps_info_list[i] = sps_info;
     m_sps_list[i]      = parsed_nalu;
@@ -315,7 +315,7 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu) {
     mxdebug_if(m_debug_sps_pps_changes, fmt::format("avc: PPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", pps_info.id, m_pps_info_list[i].checksum, pps_info.checksum));
 
     if (m_pps_info_list[i].sps_id != pps_info.sps_id)
-      cleanup();
+      cleanup(m_frames_out);
 
     m_pps_info_list[i] = pps_info;
     m_pps_list[i]      = nalu;

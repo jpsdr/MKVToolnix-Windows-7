@@ -15,10 +15,12 @@
 
 #include <cmath>
 
+#include "common/avc_hevc/types.h"
 #include "common/bit_reader.h"
 #include "common/checksums/base_fwd.h"
 #include "common/endian.h"
 #include "common/hacks.h"
+#include "common/hevc/types.h"
 #include "common/math.h"
 #include "common/mm_io.h"
 #include "common/mm_file_io.h"
@@ -42,11 +44,19 @@ es_parser_c::es_parser_c()
 bool
 es_parser_c::headers_parsed()
   const {
-  return m_configuration_record_ready
-      && m_first_access_unit_parsed
-      && !m_sps_info_list.empty()
-      && (m_sps_info_list.front().get_width()  > 0)
-      && (m_sps_info_list.front().get_height() > 0);
+  auto this_parsed = m_configuration_record_ready
+    && m_first_access_unit_parsed
+    && !m_sps_info_list.empty()
+    && (m_sps_info_list.front().get_width()  > 0)
+    && (m_sps_info_list.front().get_height() > 0);
+
+  if (!this_parsed)
+    return false;
+
+  if (m_dovi_el_combiner && !m_dovi_el_combiner->headers_parsed())
+    return false;
+
+  return true;
 }
 
 void
@@ -56,20 +66,23 @@ es_parser_c::maybe_set_configuration_record_ready() {
     flush_unhandled_nalus();
   }
 
-  if (!m_configuration_record_ready || !m_dovi_el_parser)
+  if (!m_configuration_record_ready || !m_dovi_el_config_parser)
     return;
 
   if (m_dovi_el_parsing_state == dovi_el_parsing_state_e::started) {
-    m_dovi_el_parser->flush();
-    m_dovi_el_parser->maybe_set_configuration_record_ready();
+    m_dovi_el_config_parser->flush();
+    m_dovi_el_config_parser->maybe_set_configuration_record_ready();
 
-    if (m_dovi_el_parser->headers_parsed())
+    if (m_dovi_el_config_parser->headers_parsed())
       m_dovi_el_parsing_state = dovi_el_parsing_state_e::finished;
   }
 }
 
 void
 es_parser_c::flush() {
+  if (m_dovi_el_combiner)
+    m_dovi_el_combiner->flush();
+
   if (m_unparsed_buffer && (5 <= m_unparsed_buffer->get_size())) {
     m_parsed_position += m_unparsed_buffer->get_size();
     auto marker_size   = get_uint32_be(m_unparsed_buffer->get_buffer()) == mtx::avc_hevc::NALU_START_CODE ? 4 : 3;
@@ -83,7 +96,7 @@ es_parser_c::flush() {
     m_frames.emplace_back(m_incomplete_frame);
   }
 
-  cleanup();
+  cleanup_and_combine_dovi_layers();
 }
 
 void
@@ -94,12 +107,64 @@ es_parser_c::clear() {
   m_pending_frame_data.clear();
 
   m_parsed_position = 0;
+
+  if (m_dovi_el_combiner)
+    m_dovi_el_combiner->clear();
 }
 
 void
 es_parser_c::determine_if_first_access_unit_parsed() {
   if (!m_first_access_unit_parsed && m_first_access_unit_parsing_slices)
     m_first_access_unit_parsed = true;
+}
+
+bool
+es_parser_c::add_dovi_combiner_frame_data(mtx::avc_hevc::frame_t &frame) {
+  mxdebug_if(m_debug_dovi_el_combiner, fmt::format("add_dovi_combiner_frame_data_to_incomplete_frame: starting\n"));
+
+  if (!m_dovi_el_combiner->frame_available())
+    return false;
+
+  auto el_frame   = m_dovi_el_combiner->get_frame();
+  auto insert_pos = frame.m_data_parts.size();
+
+  if (   !frame.m_data_parts.empty()
+      && (((frame.m_data_parts.back()->get_buffer()[0] >> 1) & 0x3f) == NALU_TYPE_END_OF_SEQ))
+    --insert_pos;
+
+  for (auto const &m : frame.m_data_parts) {
+    auto type = (m->get_buffer()[0] >> 1) & 0x3f;
+    mxdebug_if(m_debug_dovi_el_combiner, fmt::format("  base layer/rpu {0} ({1})\n", type, get_nalu_type_name(type)));
+  }
+
+  auto src_buffer    = el_frame.m_data->get_buffer();
+  auto src_size      = el_frame.m_data->get_size();
+  auto src_remaining = src_size;
+
+  while (src_remaining >= 5) {
+    auto const src_pos = src_size - src_remaining;
+    auto src_nalu_size = get_uint32_be(&src_buffer[src_pos]);
+
+    if (src_nalu_size > (src_remaining - 4))
+      break;
+
+    auto const type = (src_buffer[src_pos + 4] >> 1) & 0x3f;
+    mxdebug_if(m_debug_dovi_el_combiner, fmt::format("  enhancement layer {0} ({1})\n", type, get_nalu_type_name(type)));
+
+    if (type == NALU_TYPE_UNSPEC62)
+      frame.m_data_parts.insert(frame.m_data_parts.begin() + insert_pos, memory_c::clone(&src_buffer[src_pos + 4], src_nalu_size));
+
+    else {
+      src_buffer[src_pos + 2] = NALU_TYPE_UNSPEC63 << 1;
+      src_buffer[src_pos + 3] = 0x01;
+      frame.m_data_parts.insert(frame.m_data_parts.begin() + insert_pos, memory_c::clone(&src_buffer[src_pos + 2], src_nalu_size + 2));
+    }
+
+    src_remaining -= 4 + src_nalu_size;
+    ++insert_pos;
+  }
+
+  return true;
 }
 
 void
@@ -162,7 +227,7 @@ es_parser_c::handle_slice_nalu(memory_cptr const &nalu,
   if (m_incomplete_frame.m_keyframe) {
     m_first_keyframe_found    = true;
     m_b_frames_since_keyframe = false;
-    cleanup();
+    cleanup_and_combine_dovi_layers();
 
   } else
     m_b_frames_since_keyframe |= is_discardable;
@@ -251,7 +316,7 @@ es_parser_c::handle_sps_nalu(memory_cptr const &nalu,
   } else if (m_sps_info_list[i].checksum != sps_info.checksum) {
     mxdebug_if(m_debug_parameter_sets, fmt::format("hevc: SPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", sps_info.id, m_sps_info_list[i].checksum, sps_info.checksum));
 
-    cleanup();
+    cleanup_and_combine_dovi_layers();
 
     m_sps_info_list[i] = sps_info;
     m_sps_list[i]      = parsed_nalu->clone();
@@ -322,7 +387,7 @@ es_parser_c::handle_pps_nalu(memory_cptr const &nalu,
     mxdebug_if(m_debug_parameter_sets, fmt::format("hevc: PPS ID {0:04x} changed; checksum old {1:04x} new {2:04x}\n", pps_info.id, m_pps_info_list[i].checksum, pps_info.checksum));
 
     if (m_pps_info_list[i].sps_id != pps_info.sps_id)
-      cleanup();
+      cleanup_and_combine_dovi_layers();
 
     m_pps_info_list[i]             = pps_info;
     m_pps_list[i]                  = nalu->clone();
@@ -358,15 +423,15 @@ es_parser_c::handle_unspec63_nalu(memory_cptr const &nalu) {
 
   if (   (nalu_size                < 3)
       || (m_dovi_el_parsing_state == dovi_el_parsing_state_e::finished)
-      || (m_dovi_el_parser        && m_dovi_el_parser->headers_parsed()))
+      || (m_dovi_el_config_parser        && m_dovi_el_config_parser->headers_parsed()))
     return;
 
-  if (!m_dovi_el_parser) {
-    m_dovi_el_parser.reset(new es_parser_c());
+  if (!m_dovi_el_config_parser) {
+    m_dovi_el_config_parser.reset(new es_parser_c());
     m_dovi_el_parsing_state = dovi_el_parsing_state_e::started;
   }
 
-  m_dovi_el_parser->handle_nalu_internal(memory_c::borrow(&nalu->get_buffer()[2], nalu_size - 2), 0);
+  m_dovi_el_config_parser->handle_nalu_internal(memory_c::borrow(&nalu->get_buffer()[2], nalu_size - 2), 0);
 }
 
 void
@@ -642,6 +707,28 @@ es_parser_c::calculate_frame_order() {
   }
 }
 
+void
+es_parser_c::cleanup_and_combine_dovi_layers() {
+  if (!m_dovi_el_combiner)
+    cleanup(m_frames_out);
+
+  else {
+    cleanup(m_frames_awaiting_dovi_el);
+    combine_dovi_layers();
+  }
+}
+
+void
+es_parser_c::combine_dovi_layers() {
+  if (!m_dovi_el_combiner)
+    return;
+
+  while (!m_frames_awaiting_dovi_el.empty() && add_dovi_combiner_frame_data(m_frames_awaiting_dovi_el.front())) {
+    m_frames_out.emplace_back(m_frames_awaiting_dovi_el.front());
+    m_frames_awaiting_dovi_el.pop_front();
+  }
+}
+
 memory_cptr
 es_parser_c::get_configuration_record()
   const {
@@ -651,8 +738,11 @@ es_parser_c::get_configuration_record()
 memory_cptr
 es_parser_c::get_dovi_enhancement_layer_configuration_record()
   const {
-  if (m_dovi_el_parser)
-    return m_dovi_el_parser->get_configuration_record();
+  if (m_dovi_el_config_parser)
+    return m_dovi_el_config_parser->get_configuration_record();
+
+  if (m_dovi_el_combiner)
+    return m_dovi_el_combiner->get_configuration_record();
 
   return {};
 }
@@ -672,6 +762,42 @@ es_parser_c::set_configuration_record(memory_cptr const &bytes) {
 
   for (auto const &nalu : hevcc.m_sei_list)
     handle_sei_nalu(nalu, extra_data_position_e::initial);
+}
+
+void
+es_parser_c::enable_dovi_layer_combiner() {
+  m_dovi_el_combiner.reset(new es_parser_c);
+  m_dovi_el_combiner->m_dovi_is_enhancement_layer_parser = true;
+}
+
+void
+es_parser_c::add_enhancement_layer_bytes(unsigned char *buf, std::size_t size) {
+  m_dovi_el_combiner->add_bytes(buf, size);
+  combine_dovi_layers();
+}
+
+void
+es_parser_c::add_enhancement_layer_bytes(memory_cptr const &buf) {
+  add_enhancement_layer_bytes(buf->get_buffer(), buf->get_size());
+}
+
+bool
+es_parser_c::has_dovi_rpu_header()
+  const {
+  return (m_dovi_el_combiner && m_dovi_el_combiner->has_dovi_rpu_header())
+    || m_dovi_rpu_data_header.has_value();
+}
+
+mtx::dovi::dovi_rpu_data_header_t
+es_parser_c::get_dovi_rpu_header()
+  const {
+  if (m_dovi_el_combiner && m_dovi_el_combiner->has_dovi_rpu_header())
+    return m_dovi_el_combiner->get_dovi_rpu_header();
+
+  if (m_dovi_rpu_data_header.has_value())
+    return *m_dovi_rpu_data_header;
+
+  return {};
 }
 
 void

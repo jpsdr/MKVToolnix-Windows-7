@@ -28,6 +28,7 @@ protected:
   int m_prev_pic_order_cnt_lsb{}, m_prev_pic_order_cnt_msb{};
   bool m_first_access_unit_parsed{}, m_first_access_unit_parsing_slices{};
 
+  std::deque<mtx::avc_hevc::frame_t> m_frames_awaiting_dovi_el;
   std::vector<vps_info_t> m_vps_info_list;
   std::vector<sps_info_t> m_sps_info_list;
   std::vector<pps_info_t> m_pps_info_list;
@@ -40,10 +41,11 @@ protected:
     finished,
   };
   std::optional<mtx::dovi::dovi_rpu_data_header_t> m_dovi_rpu_data_header;
-  std::unique_ptr<es_parser_c> m_dovi_el_parser;
+  std::unique_ptr<es_parser_c> m_dovi_el_config_parser, m_dovi_el_combiner;
   dovi_el_parsing_state_e m_dovi_el_parsing_state{dovi_el_parsing_state_e::pending};
+  bool m_dovi_is_enhancement_layer_parser{};
 
-  debugging_option_c m_debug_parameter_sets{"hevc_parser|hevc_parameter_sets"}, m_debug_frame_order{"hevc_parser|hevc_frame_order"};
+  debugging_option_c m_debug_parameter_sets{"hevc_parser|hevc_parameter_sets"}, m_debug_frame_order{"hevc_parser|hevc_frame_order"}, m_debug_dovi_el_combiner{"hevc_parser|hevc_dovi_layer_combiner"};
 
 public:
   es_parser_c();
@@ -71,20 +73,19 @@ public:
 
   virtual int64_t duration_for(mtx::avc_hevc::slice_info_t const &si) const override;
 
-  bool has_dovi_rpu_header() const {
-    return m_dovi_rpu_data_header.has_value();
-  }
+  bool has_dovi_rpu_header() const;
 
-  mtx::dovi::dovi_rpu_data_header_t get_dovi_rpu_header() const {
-    if (m_dovi_rpu_data_header.has_value())
-      return *m_dovi_rpu_data_header;
-    return {};
-  }
+  mtx::dovi::dovi_rpu_data_header_t get_dovi_rpu_header() const;
 
   vui_info_t get_vui_info() const {
     assert(!m_sps_info_list.empty());
     return m_sps_info_list.front().vui;
   }
+
+  void enable_dovi_layer_combiner();
+
+  void add_enhancement_layer_bytes(unsigned char *buf, std::size_t size);
+  void add_enhancement_layer_bytes(memory_cptr const &buf);
 
 protected:
   bool parse_slice(memory_cptr const &nalu, mtx::avc_hevc::slice_info_t &si);
@@ -101,6 +102,11 @@ protected:
   void maybe_set_configuration_record_ready();
   virtual void calculate_frame_order() override;
   virtual bool does_nalu_get_included_in_extra_data(memory_c const &nalu) const override;
+
+  bool add_dovi_combiner_frame_data(mtx::avc_hevc::frame_t &frame);
+
+  void cleanup_and_combine_dovi_layers();
+  void combine_dovi_layers();
 
   virtual void init_nalu_names() const override;
 };

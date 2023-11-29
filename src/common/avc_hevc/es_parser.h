@@ -125,7 +125,7 @@ public:
 
   std::vector<int64_t> calculate_provided_timestamps_to_use();
 
-  void cleanup();
+  void cleanup(std::deque<frame_t> &queue);
 
   void maybe_dump_raw_data(unsigned char const *buffer, std::size_t size);
 
