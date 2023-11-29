@@ -30,6 +30,9 @@ public:
 
   virtual void handle_delayed_headers() override;
 
+  virtual void enable_dovi_layer_combiner();
+  virtual void process_enhancement_layer(packet_cptr const &packet);
+
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message) override;
 
 protected:

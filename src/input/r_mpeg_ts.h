@@ -298,13 +298,13 @@ public:
   pid_type_e type;
   codec_c codec;
   uint16_t pid;
-  std::optional<uint16_t> program_number;
+  std::optional<uint16_t> program_number, m_dovi_base_layer_pid;
   std::optional<int> m_ttx_wanted_page;
   std::optional<uint8_t> m_expected_next_continuity_counter;
   std::size_t pes_payload_size_to_read; // size of the current PID payload in bytes
   mtx::bytes::buffer_cptr pes_payload_read;    // buffer with the current PID payload
 
-  bool probed_ok;
+  bool probed_ok, m_hidden{};
   int ptzr;                         // the actual packetizer instance
 
   timestamp_c m_timestamp, m_previous_timestamp, m_previous_valid_timestamp, m_timestamp_wrap_add, m_subtitle_timestamp_correction;
@@ -315,6 +315,8 @@ public:
   int v_version, v_width, v_height, v_dwidth, v_dheight;
   mtx_mp_rational_t v_aspect_ratio;
   memory_cptr m_codec_private_data;
+  std::optional<mtx::dovi::dovi_decoder_configuration_record_t> m_dovi_config;
+  track_c *m_dovi_el_track{};
 
   // audio related parameters
   int a_channels, a_sample_rate, a_bits_per_sample, a_bsid;
@@ -368,6 +370,7 @@ public:
   int new_stream_s_dvbsub();
 
   bool parse_ac3_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
+  bool parse_dovi_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
   bool parse_dts_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
   bool parse_registration_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
   bool parse_srt_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
@@ -388,6 +391,8 @@ public:
 
   void determine_codec_from_stream_type(stream_type_e stream_type);
   codec_c determine_codec_for_hdmv_registration_descriptor(pmt_descriptor_t const &pmt_descriptor);
+
+  bool contains_dovi_base_layer_for_enhancement_layer(track_c const &el_track) const;
 
   void process(packet_cptr const &packet);
 
@@ -458,7 +463,8 @@ protected:
     , m_debug_timestamp_wrapping{"mpeg_ts|mpeg_ts_timestamp_wrapping"}
     , m_debug_clpi{              "mpeg_ts|mpeg_ts_clpi|clpi"}
     , m_debug_mpls{              "mpeg_ts|mpeg_ts_mpls|mpls"}
-    , m_debug_timestamp_offset{  "mpeg_ts|mpeg_ts_headers|mpeg_ts_timestamp_offset|mpeg_ts_timestamp_offsets"};
+    , m_debug_timestamp_offset{  "mpeg_ts|mpeg_ts_headers|mpeg_ts_timestamp_offset|mpeg_ts_timestamp_offsets"}
+    , m_debug_dovi{              "mpeg_ts|mpeg_ts_dovi|dovi"};
 
 protected:
   static int potential_packet_sizes[];
@@ -508,6 +514,7 @@ private:
   void probe_packet_complete(track_c &track, bool end_of_detection = false);
   int determine_track_parameters(track_c &track, bool end_of_detection);
   void determine_track_type_by_pes_content(track_c &track);
+  void pair_dovi_base_and_enhancement_layer_tracks();
 
   file_status_e finish();
   bool all_files_done() const;

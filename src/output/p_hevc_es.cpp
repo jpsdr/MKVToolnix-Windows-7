@@ -117,6 +117,26 @@ hevc_es_video_packetizer_c::handle_delayed_headers() {
   avc_hevc_es_video_packetizer_c::handle_delayed_headers();
 }
 
+void
+hevc_es_video_packetizer_c::enable_dovi_layer_combiner() {
+  m_parser.enable_dovi_layer_combiner();
+}
+
+void
+hevc_es_video_packetizer_c::process_enhancement_layer(packet_cptr const &packet) {
+  try {
+    m_parser.add_enhancement_layer_bytes(packet->data->get_buffer(), packet->data->get_size());
+    flush_frames();
+
+  } catch (mtx::exception &error) {
+    mxerror_tid(m_ti.m_fname, m_ti.m_id,
+                fmt::format("{0} {1}\n{2}\n",
+                            Y("mkvmerge encountered broken or unparsable data in this video track."),
+                            Y("The error message was:"),
+                            error.error()));
+  }
+}
+
 connection_result_e
 hevc_es_video_packetizer_c::can_connect_to(generic_packetizer_c *src,
                                            std::string &error_message) {

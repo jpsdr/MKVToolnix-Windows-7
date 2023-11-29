@@ -22,6 +22,8 @@
   non-portable format as well.
 * xyzvc_dump: HEVC: the tool will now also output the inner NALU type of Dolby
   Vision NALUs (`unspec62` and `unspec63`).
+* mkvmerge: MPEG transport stream reader: implemented combining Dolby Vision
+  base & enhancement layers from different tracks. Implements #3127.
 
 ## Bug fixes
 

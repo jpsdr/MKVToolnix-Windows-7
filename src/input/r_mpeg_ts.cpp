@@ -18,14 +18,19 @@
 
 #include "common/at_scope_exit.h"
 #include "common/avc/es_parser.h"
+#include "common/avc/types.h"
+#include "common/bit_reader.h"
 #include "common/bluray/clpi.h"
+#include "common/bluray/mpls.h"
 #include "common/bluray/util.h"
 #include "common/bswap.h"
 #include "common/chapters/bluray.h"
 #include "common/checksums/crc.h"
 #include "common/checksums/base_fwd.h"
+#include "common/dovi_meta.h"
 #include "common/endian.h"
 #include "common/hdmv_textst.h"
+#include "common/mm_io_x.h"
 #include "common/mp3.h"
 #include "common/mm_file_io.h"
 #include "common/mm_mpls_multi_file_io.h"
@@ -41,6 +46,7 @@
 #include "input/aac_framing_packet_converter.h"
 #include "input/bluray_pcm_channel_layout_packet_converter.h"
 #include "input/dvbsub_pes_framing_removal_packet_converter.h"
+#include "input/hevc_dovi_layer_combiner_packet_converter.h"
 #include "input/r_mpeg_ts.h"
 #include "input/teletext_to_srt_packet_converter.h"
 #include "input/truehd_ac3_splitting_packet_converter.h"
@@ -133,7 +139,7 @@ track_c::send_to_packetizer() {
   auto timestamp_to_check = f.m_stream_timestamp.valid() ? f.m_stream_timestamp : timestamp_c::ns(0);
   auto const &min         = f.m_timestamp_restriction_min;
   auto const &max         = f.m_timestamp_restriction_max;
-  auto use_packet         = ptzr != -1;
+  auto use_packet         = (ptzr != -1) || converter;
   auto bytes_to_skip      = std::min<size_t>(pes_payload_read->get_size(), skip_packet_data_bytes);
 
   if (   (min.valid() && (timestamp_to_check <  min) && !f.m_timestamp_restriction_min_seen)
@@ -290,6 +296,22 @@ track_c::new_stream_v_hevc(bool end_of_detection) {
     auto dimensions = m_hevc_parser->get_display_dimensions();
     v_dwidth        = dimensions.first;
     v_dheight       = dimensions.second;
+  }
+
+  if (!m_hevc_parser->has_dovi_rpu_header()) {
+    mxdebug_if(reader.m_debug_dovi, fmt::format("new_stream_v_hevc: no DOVI RPU found\n"));
+    return 0;
+  }
+
+  auto hdr      = m_hevc_parser->get_dovi_rpu_header();
+  auto vui      = m_hevc_parser->get_vui_info();
+  auto duration = m_hevc_parser->has_stream_default_duration() ? m_hevc_parser->get_stream_default_duration() : m_hevc_parser->get_most_often_used_duration();
+
+  m_dovi_config = create_dovi_configuration_record(hdr, v_width, v_height, vui, duration);
+
+  if (reader.m_debug_dovi) {
+    mxdebug(fmt::format("new_stream_v_hevc: PID {0} DOVI decoder configuration record parsed; dumping:\n", pid));
+    m_dovi_config->dump();
   }
 
   return 0;
@@ -653,6 +675,58 @@ track_c::parse_ac3_pmt_descriptor(pmt_descriptor_t const &,
   codec = codec_c::look_up(codec_c::type_e::A_AC3);
 
   return true;
+}
+
+bool
+track_c::parse_dovi_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
+                                   pmt_pid_info_t const &pmt_pid_info) {
+  if (pmt_pid_info.stream_type != stream_type_e::iso_13818_pes_private)
+    return false;
+
+  mxdebug_if(reader.m_debug_dovi, fmt::format("parse_dovi_pmt_descriptor: parsing PMT descriptor of length {0}\n", pmt_descriptor.length));
+
+  mtx::bits::reader_c r{reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1), pmt_descriptor.length};
+
+  try {
+    mtx::dovi::dovi_decoder_configuration_record_t cfg;
+
+    cfg.dv_version_major = r.get_bits(8);
+    cfg.dv_version_minor = r.get_bits(8);
+    cfg.dv_profile       = r.get_bits(7);
+    cfg.dv_level         = r.get_bits(6);
+    cfg.rpu_present_flag = r.get_bit();
+    cfg.bl_present_flag  = r.get_bit();
+    cfg.el_present_flag  = r.get_bit();
+
+    if (!cfg.bl_present_flag) {
+      m_dovi_base_layer_pid = r.get_bits(13);
+      r.skip_bits(3);
+    }
+
+    cfg.dv_bl_signal_compatibility_id = r.get_bits(4);
+    r.skip_bits(4);
+
+    m_dovi_config = cfg;
+
+    if (reader.m_debug_dovi) {
+      std::string base_layer_pid;
+      if (m_dovi_base_layer_pid)
+        base_layer_pid = fmt::format("; base layer PID: {0}", *m_dovi_base_layer_pid);
+
+      mxdebug(fmt::format("parse_dovi_pmt_descriptor: DOVI decoder configuration record parsed{0}; dumping:\n", base_layer_pid));
+      cfg.dump();
+    }
+
+    return true;
+
+  } catch (mtx::mm_io::exception const &) {
+    mxdebug_if(reader.m_debug_dovi, fmt::format("parse_dovi_pmt_descriptor: I/O exception\n"));
+    return false;
+
+  } catch (...) {
+    mxdebug_if(reader.m_debug_dovi, fmt::format("parse_dovi_pmt_descriptor: unknown exception\n"));
+    return false;
+  }
 }
 
 bool
@@ -1021,6 +1095,41 @@ track_c::set_packetizer_source_id()
   reader.m_reader_packetizers[ptzr]->set_source_id(fmt::format("00{0:04x}", pid));
 }
 
+bool
+track_c::contains_dovi_base_layer_for_enhancement_layer(track_c const &el_track)
+  const {
+  if (&el_track == this)
+    return false;
+
+  if (el_track.codec != codec)
+    return false;
+
+  if (!el_track.m_dovi_config)
+    return false;
+
+  auto profile         = el_track.m_dovi_config->dv_profile;
+  auto resolution_type = (v_width == 3840) && (v_height == 2160) ? 'U'
+                       : (v_width == 1920) && (v_height == 1080) ? 'F'
+                       :                                           '?';
+
+  if (!mtx::included_in(profile, 4, 7))
+    return false;
+
+  if (profile == 4) {
+    if ((resolution_type == 'F') && (el_track.v_width == (v_width / 2)) && (el_track.v_height == (v_height / 2)))
+      return true;
+
+  } else {                      // profile == 7
+    if ((resolution_type == 'F') && (el_track.v_width == v_width) && (el_track.v_height == v_height))
+      return true;
+
+    else if ((resolution_type == 'U') && (el_track.v_width == (v_width / 2)) && (el_track.v_height == (v_height / 2)))
+      return true;
+  }
+
+  return false;
+}
+
 // ------------------------------------------------------------
 
 file_t::file_t(mm_io_cptr const &in)
@@ -1237,7 +1346,51 @@ reader_c::read_headers_for_file(std::size_t file_num) {
     probe_packet_complete(*track, true);
   }
 
+  pair_dovi_base_and_enhancement_layer_tracks();
+
   std::copy(m_tracks.begin(), m_tracks.end(), std::back_inserter(m_all_probed_tracks));
+}
+
+void
+reader_c::pair_dovi_base_and_enhancement_layer_tracks() {
+  for (std::size_t idx = 0, num_tracks = m_tracks.size(); idx < num_tracks; ++idx) {
+    auto &track = *m_tracks[idx];
+
+    if (track.m_hidden || !track.m_dovi_config)
+      continue;
+
+    mxdebug_if(m_debug_dovi, fmt::format("pair_dovi_base_and_enhancement_layer_tracks: PID {0}: looking for a suitable base layer track; base layer PID from PMT: {1}\n",
+                                         track.pid, track.m_dovi_base_layer_pid ? fmt::to_string(*track.m_dovi_base_layer_pid) : "–"s));
+
+    track_c *bl_track = nullptr;
+
+    if (track.m_dovi_base_layer_pid) {
+      auto itr = std::find_if(m_tracks.begin(), m_tracks.end(), [&track](auto const &track_candidate) {
+        return (track_candidate.get() != &track) && (track_candidate->pid == *track.m_dovi_base_layer_pid);
+      });
+
+      if (itr != m_tracks.end())
+        bl_track = itr->get();
+
+    } else {
+      for (std::size_t candidate_idx = 0; candidate_idx < num_tracks; ++candidate_idx) {
+        if (m_tracks[candidate_idx]->contains_dovi_base_layer_for_enhancement_layer(track)) {
+          bl_track = m_tracks[candidate_idx].get();
+          break;
+        }
+      }
+    }
+
+    if (!bl_track) {
+      mxdebug_if(m_debug_dovi, fmt::format("pair_dovi_base_and_enhancement_layer_tracks: PID {0}: no suitable track found; ignoring track\n", track.pid));
+      continue;
+    }
+
+    mxdebug_if(m_debug_dovi, fmt::format("pair_dovi_base_and_enhancement_layer_tracks: PID {0}: found base layer track with PID {1}\n", track.pid, bl_track->pid));
+
+    track.m_hidden            = true;
+    bl_track->m_dovi_el_track = &track;
+  }
 }
 
 void
@@ -1456,6 +1609,9 @@ reader_c::identify() {
   id_result_container(info.get());
 
   for (auto const &track : m_tracks) {
+    if (track->m_hidden)
+      continue;
+
     info = mtx::id::info_c{};
     info.add(mtx::id::language,       track->language.get_iso639_alpha_3_code());
     info.set(mtx::id::stream_id,      track->pid);
@@ -1635,6 +1791,9 @@ reader_c::parse_pmt_pid_info(mm_mem_io_c &mem,
         break;
       case 0x7b: // DTS descriptor
         track->parse_dts_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+        break;
+      case 0xb0: // Dolby Vision descriptor
+        track->parse_dovi_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
         break;
     }
   }
@@ -2188,8 +2347,8 @@ reader_c::determine_track_type_by_pes_content(track_c &track) {
     return;
 
   if (m_debug_pat_pmt) {
-    auto data = mtx::string::to_hex(buffer, std::min<unsigned int>(size, 4));
-    mxdebug(fmt::format("PID {0}: attempting type detection from content for with size {1}; first four bytes: {2}\n", track.pid, size, data));
+    auto data = mtx::string::to_hex(buffer, std::min<unsigned int>(size, 16));
+    mxdebug(fmt::format("determine_track_type_by_pes_content: PID {0}: attempting type detection from content for with size: {1} have DOVI config: {2} first 16 bytes: {3}\n", track.pid, size, track.m_dovi_config.has_value(), data));
   }
 
   if ((size >= 3) && ((get_uint24_be(buffer) & mtx::aac::ADTS_SYNC_WORD_MASK) == mtx::aac::ADTS_SYNC_WORD)) {
@@ -2201,7 +2360,7 @@ reader_c::determine_track_type_by_pes_content(track_c &track) {
     track.codec = codec_c::look_up(codec_c::type_e::A_AC3);
   }
 
-  mxdebug_if(m_debug_pat_pmt, fmt::format("Detected type: {0} codec: {1}\n", static_cast<unsigned int>(track.type), track.codec));
+  mxdebug_if(m_debug_pat_pmt, fmt::format("determine_track_type_by_pes_content: detected type: {0} codec: {1}\n", static_cast<unsigned int>(track.type), track.codec));
 }
 
 int
@@ -2309,7 +2468,7 @@ reader_c::create_packetizer(int64_t id) {
               : track->type == pid_type_e::video ? 'v'
               :                                    's';
 
-  if (!track->probed_ok || (0 == track->ptzr) || !demuxing_requested(type, id, track->language))
+  if (!track->probed_ok || track->m_hidden || (0 == track->ptzr) || !demuxing_requested(type, id, track->language))
     return;
 
   m_ti.m_id       = id;
@@ -2422,6 +2581,12 @@ reader_c::create_mpeg4_p10_es_video_packetizer(track_ptr &track) {
 void
 reader_c::create_mpegh_p2_es_video_packetizer(track_ptr &track) {
   track->ptzr = add_packetizer(new hevc_es_video_packetizer_c(this, m_ti, track->v_width, track->v_height));
+
+  if (!track->m_dovi_el_track)
+    return;
+
+  track->converter                  = std::make_shared<hevc_dovi_layer_combiner_packet_converter_c>(static_cast<hevc_es_video_packetizer_c *>(&ptzr(track->ptzr)), track->pid, track->m_dovi_el_track->pid);
+  track->m_dovi_el_track->converter = track->converter;
 }
 
 void
