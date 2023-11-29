@@ -118,7 +118,7 @@ track_c::track_c(reader_c &p_reader,
 
 void
 track_c::process(packet_cptr const &packet) {
-  if (!converter || !converter->convert(packet))
+  if (!converter || !converter->convert_for_pid(packet, pid))
     reader.m_reader_packetizers[ptzr]->process(packet);
 }
 

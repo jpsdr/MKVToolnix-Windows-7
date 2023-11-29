@@ -22,6 +22,7 @@ class packet_t;
 class packet_converter_c {
 protected:
   generic_packetizer_c *m_ptzr;
+  uint16_t m_current_pid{};
 
 public:
   packet_converter_c(generic_packetizer_c *packetizer)
@@ -31,6 +32,7 @@ public:
   virtual ~packet_converter_c() {}
 
   virtual bool convert(packet_cptr const &packet) = 0;
+  virtual bool convert_for_pid(packet_cptr const &packet, uint16_t pid);
   virtual void flush() {}
 
   virtual void set_packetizer(generic_packetizer_c *packetizer) {
