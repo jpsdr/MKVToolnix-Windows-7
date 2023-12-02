@@ -2,6 +2,16 @@
 
 ## New features and enhancements
 
+* mkvmerge: MPEG transport stream reader: HEVC/H.265: added support for
+  reading single-layer Dolby Vision from Annex B type bitstream read from MPEG
+  transport streams. Partially implements #3113.
+* mkvmerge: MPEG transport stream reader, HEVC/H.265 elementary stream reader:
+  added support for reading dual-layer Dolby Vision with both the base &
+  enhancement layers in the same track from Annex B type bitstreams in MPEG
+  transport files & elementary stream files. Implements #3126.
+* mkvmerge: MPEG transport stream reader: HEVC/H.265: implemented combining
+  dual-layer Dolby Vision with base & enhancement layers in different
+  tracks. Implements #3127.
 * MKVToolNix GUI: multiplexer: added a new option in the preferences for
   always enabling 'forced' subtitle tracks. A subtitle track is considered to
   be 'forced' if: the corresponding property is set in the source file; the
@@ -11,19 +21,10 @@
 * MKVToolNix GUI: multiplexer: the functionality for detecting file name
   sequences when adding files can now recognize the patterns used by GoPro's
   cameras for chaptered video files. Implements #3633.
-* mkvmerge: MPEG transport stream reader: HEVC/H.265: added support for
-  reading single-layer Dolby Vision from Annex B type bitstream read from MPEG
-  transport streams. Partially implements #3113.
-* mkvmerge: MPEG transport stream reader, HEVC/H.265 elementary stream reader:
-  added support for reading dual-layer Dolby Vision with both the base &
-  enhancement layers in the same track from Annex B type bitstreams in MPEG
-  transport files & elementary stream files. Implements #3126.
 * xyzvc_dump: the end position of the current NALU will be output in
   non-portable format as well.
 * xyzvc_dump: HEVC: the tool will now also output the inner NALU type of Dolby
   Vision NALUs (`unspec62` and `unspec63`).
-* mkvmerge: MPEG transport stream reader: implemented combining Dolby Vision
-  base & enhancement layers from different tracks. Implements #3127.
 
 ## Bug fixes
 
@@ -38,20 +39,21 @@
   `--aspect-ratio` & `--aspect-ratio-factor` are used. Before the change the
   calculation was done based on initial pixel dimension values of 0x0,
   resulting in display dimensions of 0x0, too. Fixes #3611.
-* mkvextract: AAC extractor: when an invalid program config element in the
-  GA-specific config element is encountered, the program config element will
-  be disregarded, which avoids mkvextract aborting with an exception. Fixes
-  #3606.
-* mkvmerge: MPEG TS reader: when reading MPEG transport streams from Blu-rays
-  the four-byte long `TP_extra_header` structure in front of the transport
-  packets are now skipped properly. Before the fix a stray byte with value of
-  `0x47` inside that `TP_extra_header` structure could have thrown off the
-  detection of where the transport packets start, leading to mkvmerge dropping
-  a few audio and/or video frames at the start of the file. Fixes #3632.
 * mkvmerge: HEVC/H.265 packetizer: when reading & appending HEVC/H.265 from
   Matroska, MP4/MOV or FLV files the first frame of all the appended files was
   sometimes dropped, resulting in broken video at the point where video is
   appended. Fixes #3479.
+* mkvmerge: MPEG transport stream reader: when reading MPEG transport streams
+  from Blu-rays the four-byte long `TP_extra_header` structure in front of the
+  transport packets are now skipped properly. Before the fix a stray byte with
+  value of `0x47` inside that `TP_extra_header` structure could have thrown
+  off the detection of where the transport packets start, leading to mkvmerge
+  dropping a few audio and/or video frames at the start of the file. Fixes
+  #3632.
+* mkvextract: AAC extractor: when an invalid program config element in the
+  GA-specific config element is encountered, the program config element will
+  be disregarded, which avoids mkvextract aborting with an exception. Fixes
+  #3606.
 * xyzvc_dump: fixed the tool aborting with an exception when the last NALU in
   an Annex B type file was shorter than four bytes.
 
