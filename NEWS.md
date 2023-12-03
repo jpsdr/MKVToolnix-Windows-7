@@ -4,6 +4,10 @@
 
 * mkvinfo: added support for the "video alpha mode" track header element. Part
   of the implementation of #3643.
+* mkvmerge: Matroska reader: the "video alpha mode" track header property will
+  be reported in JSON identification mode as the property `alpha_mode`. The
+  JSON identification output schema has been bumped to v19. Part of the
+  implementation of #3643.
 
 
 # Version 81.0 "Milliontown" 2023-12-02

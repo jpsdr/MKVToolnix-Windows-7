@@ -1249,6 +1249,8 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
   track->v_pctop        = FindChildValue<KaxVideoPixelCropTop>(ktvideo);
   track->v_pcbottom     = FindChildValue<KaxVideoPixelCropBottom>(ktvideo);
 
+  track->v_alpha_mode   = FindOptionalChildBoolValue<KaxVideoAlphaMode>(ktvideo);
+
   auto color_space      = FindChild<KaxVideoColourSpace>(*ktvideo);
   if (color_space)
     track->v_color_space = memory_c::clone(color_space->GetBuffer(), color_space->GetSize());
@@ -2860,6 +2862,7 @@ kax_reader_c::identify() {
     info.add(mtx::id::language_ietf,          track->language_ietf.format());
     info.add(mtx::id::track_name,             track->track_name);
     info.add(mtx::id::stereo_mode,            static_cast<int>(track->v_stereo_mode), static_cast<int>(stereo_mode_c::unspecified));
+    info.add(mtx::id::alpha_mode,             track->v_alpha_mode);
     info.add(mtx::id::default_duration,       track->default_duration);
     info.set(mtx::id::default_track,          track->default_track ? true : false);
     info.set(mtx::id::forced_track,           track->forced_track  ? true : false);

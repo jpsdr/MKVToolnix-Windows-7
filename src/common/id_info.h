@@ -19,6 +19,7 @@
 namespace mtx::id {
 
 char const * const aac_is_sbr                      = "aac_is_sbr";                      // track ascii-string format:^(true|unknown)$
+char const * const alpha_mode                      = "alpha_mode";                      // track unsigned-integer
 char const * const audio_bits_per_sample           = "audio_bits_per_sample";           // track unsigned-integer
 char const * const audio_channels                  = "audio_channels";                  // track unsigned-integer
 char const * const audio_emphasis                  = "audio_emphasis";                  // track unsigned-integer

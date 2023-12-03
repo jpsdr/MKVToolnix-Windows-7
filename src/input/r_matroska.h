@@ -73,6 +73,7 @@ struct kax_track_t {
   std::optional<double> v_max_luminance, v_min_luminance;
   std::optional<int64_t> v_field_order;
   stereo_mode_c::mode v_stereo_mode;
+  std::optional<bool> v_alpha_mode;
   char v_fourcc[5];
   std::optional<uint64_t> v_projection_type;
   memory_cptr v_projection_private;
