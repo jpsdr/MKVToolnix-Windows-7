@@ -1,3 +1,11 @@
+# Version ?
+
+## New features and enhancements
+
+* mkvinfo: added support for the "video alpha mode" track header element. Part
+  of the implementation of #3643.
+
+
 # Version 81.0 "Milliontown" 2023-12-02
 
 ## New features and enhancements
