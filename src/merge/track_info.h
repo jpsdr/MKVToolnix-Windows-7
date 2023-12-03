@@ -303,6 +303,9 @@ public:
   std::map<int64_t, stereo_mode_c::mode> m_stereo_mode_list; // As given on the command line
   option_with_source_c<stereo_mode_c::mode> m_stereo_mode;   // For this very track
 
+  std::map<int64_t, bool> m_alpha_mode_list;
+  option_with_source_c<bool> m_alpha_mode;
+
   std::map<int64_t, uint64_t> m_field_order_list; // As given on the command line
   option_with_source_c<uint64_t> m_field_order;   // For this very track
 

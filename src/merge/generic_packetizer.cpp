@@ -317,6 +317,10 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   if (-2 != i)
     set_video_stereo_mode(m_ti.m_stereo_mode_list[m_ti.m_id], OPTION_SOURCE_COMMAND_LINE);
 
+  i = lookup_track_id(m_ti.m_alpha_mode_list, m_ti.m_id);
+  if (-2 != i)
+    set_video_alpha_mode(m_ti.m_alpha_mode_list[m_ti.m_id], OPTION_SOURCE_COMMAND_LINE);
+
   // Let's see if the user has specified a default duration for this track.
   if (mtx::includes(m_ti.m_default_durations, m_ti.m_id)) {
     m_htrack_default_duration                  = m_ti.m_default_durations[m_ti.m_id].first;
@@ -954,6 +958,24 @@ generic_packetizer_c::set_video_field_order(uint64_t order,
 }
 
 void
+generic_packetizer_c::set_video_alpha_mode(bool alpha_mode,
+                                           option_source_e source) {
+  m_ti.m_alpha_mode.set(alpha_mode, source);
+
+  if (m_track_entry)
+    set_video_alpha_mode_impl(GetChild<KaxTrackVideo>(*m_track_entry), m_ti.m_alpha_mode.get());
+}
+
+void
+generic_packetizer_c::set_video_alpha_mode_impl(EbmlMaster &video,
+                                                bool alpha_mode) {
+  if (alpha_mode)
+    GetChild<KaxVideoAlphaMode>(video).SetValue(1);
+  else
+    DeleteChildren<KaxVideoAlphaMode>(video);
+}
+
+void
 generic_packetizer_c::set_video_stereo_mode(stereo_mode_c::mode stereo_mode,
                                             option_source_e source) {
   m_ti.m_stereo_mode.set(stereo_mode, source);
@@ -1283,6 +1305,9 @@ generic_packetizer_c::set_headers() {
 
       if (m_ti.m_stereo_mode && (stereo_mode_c::unspecified != m_ti.m_stereo_mode.get()))
         set_video_stereo_mode_impl(video, m_ti.m_stereo_mode.get());
+
+      if (m_ti.m_alpha_mode && m_ti.m_alpha_mode.get())
+        set_video_alpha_mode_impl(video, m_ti.m_alpha_mode.get());
     }
 
   } else if (track_audio == m_htrack_type) {

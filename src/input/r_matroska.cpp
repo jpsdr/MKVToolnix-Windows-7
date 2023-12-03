@@ -223,6 +223,12 @@ kax_track_t::handle_packetizer_stereo_mode() {
 }
 
 void
+kax_track_t::handle_packetizer_alpha_mode() {
+  if (v_alpha_mode)
+    ptzr_ptr->set_video_alpha_mode(*v_alpha_mode, OPTION_SOURCE_CONTAINER);
+}
+
+void
 kax_track_t::handle_packetizer_pixel_dimensions() {
   if ((0 == v_width) || (0 == v_height))
     return;
@@ -1771,6 +1777,7 @@ kax_reader_c::init_passthrough_packetizer(kax_track_t *t,
     t->handle_packetizer_color();
     t->handle_packetizer_field_order();
     t->handle_packetizer_stereo_mode();
+    t->handle_packetizer_alpha_mode();
 
     if (CUE_STRATEGY_UNSPECIFIED == packetizer->get_cue_creation())
       packetizer->set_cue_creation(CUE_STRATEGY_IFRAMES);
@@ -1892,6 +1899,7 @@ kax_reader_c::create_video_packetizer(kax_track_t *t,
   t->handle_packetizer_color();
   t->handle_packetizer_field_order();
   t->handle_packetizer_stereo_mode();
+  t->handle_packetizer_alpha_mode();
   t->handle_packetizer_codec_delay();
 }
 

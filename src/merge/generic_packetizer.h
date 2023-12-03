@@ -248,6 +248,8 @@ public:
   virtual void set_video_field_order(uint64_t order, option_source_e source);
   virtual void set_video_stereo_mode(stereo_mode_c::mode stereo_mode, option_source_e source);
   virtual void set_video_stereo_mode_impl(libebml::EbmlMaster &video, stereo_mode_c::mode stereo_mode);
+  virtual void set_video_alpha_mode(bool alpha_mode, option_source_e source);
+  virtual void set_video_alpha_mode_impl(libebml::EbmlMaster &video, bool alpha_mode);
 
   virtual void set_block_addition_mappings(std::vector<block_addition_mapping_t> const &mappings);
   virtual void update_max_block_addition_id();

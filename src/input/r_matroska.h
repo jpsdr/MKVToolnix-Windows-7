@@ -170,6 +170,7 @@ struct kax_track_t {
   void handle_packetizer_color();
   void handle_packetizer_field_order();
   void handle_packetizer_stereo_mode();
+  void handle_packetizer_alpha_mode();
   void handle_packetizer_pixel_dimensions();
   void handle_packetizer_default_duration();
   void handle_packetizer_output_sampling_freq();
