@@ -30,6 +30,7 @@
 
 #include "common/common_pch.h"
 #include "common/ebml.h"
+#include "common/list_utils.h"
 #include "common/property_element.h"
 #include "common/translation.h"
 
@@ -90,7 +91,9 @@ property_element_c::derive_type() {
   if (EBMLT_SKIP == m_type)
     mxerror(fmt::format("property_element_c::derive_type(): programming error: unknown type for EBML ID {0:08x}\n", m_callbacks->ClassId().GetValue()));
 
-  if ((EBMLT_UINT == m_type) && (m_name.find("flag") != std::string::npos))
+  if (   (EBMLT_UINT == m_type)
+      && (   (m_name.find("flag") != std::string::npos)
+          || mtx::included_in(m_name, "alpha-mode")))
     m_type = EBMLT_BOOL;
 }
 
@@ -148,6 +151,7 @@ property_element_c::init_tables() {
 
   sub_master_callbacks = &EBML_INFO(KaxTrackVideo);
 
+  add("alpha-mode",        EBML_INFO(KaxVideoAlphaMode),       YT("Video alpha mode"),        YT("Set if the BlockAdditional element with BlockAddID of '1' contains alpha channel data."));
   add("interlaced",        EBML_INFO(KaxVideoFlagInterlaced),  YT("Video interlaced flag"),   YT("Set if the video is interlaced."));
   add("pixel-width",       EBML_INFO(KaxVideoPixelWidth),      YT("Video pixel width"),       YT("Width of the encoded video frames in pixels."));
   add("pixel-height",      EBML_INFO(KaxVideoPixelHeight),     YT("Video pixel height"),      YT("Height of the encoded video frames in pixels."));
