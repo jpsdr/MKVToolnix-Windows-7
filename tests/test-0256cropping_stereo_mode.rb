@@ -8,7 +8,7 @@ class T_0256cropping_stereo_mode < Test
   def get_info file_name
     command = "mkvinfo --ui-language #{$ui_language_en_us} \"#{file_name}\" | " +
       "grep -E -i 'crop|stereo' | " +
-      "sed -e 's/Stereo mode: /: S/' -e 's/.*: //' -e 's/ .*//' | " +
+      "sed -e 's/tereo mode: /: S/' -e 's/.*: //' -e 's/ .*//' | " +
       "sort -n | " +
       "tr '\n' '-' | " +
       "sed -e 's/-$//'"
