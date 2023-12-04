@@ -443,11 +443,6 @@ track_c::new_stream_a_pcm() {
              fmt::format("new_stream_a_pcm: header: 0x{0:08x} channels: {1}, sample rate: {2}, bits per channel: {3}\n",
                          get_uint32_be(buffer), a_channels, a_sample_rate, a_bits_per_sample));
 
-  if ((a_sample_rate == 0) || !mtx::included_in(a_bits_per_sample, 16, 24))
-    return FILE_STATUS_DONE;
-
-  converter = std::make_shared<bluray_pcm_channel_layout_packet_converter_c>(a_bits_per_sample / 8, a_channels + 1, a_channels);
-
   return 0;
 }
 
@@ -2552,8 +2547,11 @@ void
 reader_c::create_pcm_audio_packetizer(track_ptr const &track) {
   track->ptzr = add_packetizer(new pcm_packetizer_c(this, m_ti, track->a_sample_rate, track->a_channels, track->a_bits_per_sample, pcm_packetizer_c::big_endian_integer));
 
-  if (track->converter)
-    track->converter->set_packetizer(&ptzr(track->ptzr));
+  if ((track->a_sample_rate == 0) || !mtx::included_in(track->a_bits_per_sample, 16, 24))
+    return;
+
+  track->converter = std::make_shared<bluray_pcm_channel_layout_packet_converter_c>(track->a_bits_per_sample / 8, track->a_channels + 1, track->a_channels);
+  track->converter->set_packetizer(&ptzr(track->ptzr));
 }
 
 void

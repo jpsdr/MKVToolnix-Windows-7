@@ -572,6 +572,9 @@ teletext_to_srt_packet_converter_c::page_to_string()
 
 bool
 teletext_to_srt_packet_converter_c::convert(packet_cptr const &packet) {
+  if (!m_current_track->m_ptzr)
+    return true;
+
   m_in_size                  = packet->data->get_size();
   m_buf                      = packet->data->get_buffer();
   m_pos                      = 1;                // skip sub ID

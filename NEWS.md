@@ -15,6 +15,12 @@
   be copied to the output file if present. Part of the implementation of
   #3643.
 
+## Bug fixes
+
+* mkvmerge: MPEG transport stream reader: fixed a crash introduced in v81 that
+  occurred when there was at least one PCM track that wasn't copied from the
+  transport stream file. Fixes #3645.
+
 
 # Version 81.0 "Milliontown" 2023-12-02
 
