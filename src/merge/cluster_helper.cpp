@@ -402,6 +402,7 @@ cluster_helper_c::must_duration_be_set(render_groups_c *rg,
 
 int
 cluster_helper_c::render() {
+
   std::vector<render_groups_cptr> render_groups;
   kax_cues_with_cleanup_c cues;
   cues.SetGlobalTimecodeScale(g_timestamp_scale);
@@ -546,9 +547,8 @@ cluster_helper_c::render() {
         for (auto const &add : pack->data_adds) {
           auto &block_more = AddEmptyChild<KaxBlockMore>(additions);
 
-          if (add.id.value_or(1) > 1)
-            GetChild<KaxBlockAddID>(block_more).SetValue(add.id.value());
-
+          block_more.PushElement(*new kax_block_add_id_c{m->always_write_block_add_ids});
+          static_cast<kax_block_add_id_c &>(*block_more.GetElementList().back()).SetValue(add.id.value_or(1));
           GetChild<KaxBlockAdditional>(block_more).CopyBuffer(static_cast<binary *>(add.data->get_buffer()), add.data->get_size());
         }
       }

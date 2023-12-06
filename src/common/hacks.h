@@ -46,7 +46,8 @@ constexpr unsigned int ALL_I_SLICES_ARE_KEY_FRAMES        = 21;
 constexpr unsigned int APPEND_AND_SPLIT_FLAC              = 22;
 constexpr unsigned int DONT_NORMALIZE_PARAMETER_SETS      = 23;
 constexpr unsigned int KEEP_WHITESPACES_IN_TEXT_SUBTITLES = 24;
-constexpr unsigned int MAX_IDX                            = 24;
+constexpr unsigned int ALWAYS_WRITE_BLOCK_ADD_IDS         = 25;
+constexpr unsigned int MAX_IDX                            = 25;
 }
 
 struct hack_t {

@@ -14,6 +14,7 @@
 
 #pragma once
 
+#include "common/hacks.h"
 #include "common/track_statistics.h"
 
 class render_groups_c {
@@ -60,7 +61,7 @@ public:
   int64_t bytes_in_file{}, first_timestamp_in_file{-1}, first_timestamp_in_part{-1}, first_discarded_timestamp{-1}, last_discarded_timestamp_and_duration{}, discarded_duration{}, previous_discarded_duration{};
   timestamp_c min_timestamp_in_file;
   int64_t max_timestamp_in_file{-1}, min_timestamp_in_cluster{-1}, max_timestamp_in_cluster{-1}, frame_field_number{1};
-  bool first_video_keyframe_seen{};
+  bool first_video_keyframe_seen{}, always_write_block_add_ids{};
   mm_io_c *out{};
 
   std::vector<split_point_c> split_points;
@@ -80,5 +81,10 @@ public:
     debug_rendering{"cluster_helper|cluster_helper_rendering"}, debug_chapter_generation{"cluster_helper|cluster_helper_chapter_generation"};
 
 public:
+  impl_t()
+    : always_write_block_add_ids{mtx::hacks::is_engaged(mtx::hacks::ALWAYS_WRITE_BLOCK_ADD_IDS)}
+  {
+  }
+
   ~impl_t();
 };

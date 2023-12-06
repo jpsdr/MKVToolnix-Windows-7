@@ -14,6 +14,12 @@
 * mkvmerge: Matroska reader: the "video alpha mode" track header property will
   be copied to the output file if present. Part of the implementation of
   #3643.
+* mkvmerge: added a new hack `always_write_block_add_ids` that can be used as
+  a workaround for players that don't support the handling of missing "Block
+  Addition ID" sub-elements of "Block More" elements in block additions
+  properly. These are used for e.g. alpha channel data in VP9 with a "Block
+  Addition ID" value of 1, which is also its default value. Workaround for the
+  player issues listed in #3643.
 
 ## Bug fixes
 

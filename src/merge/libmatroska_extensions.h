@@ -21,6 +21,7 @@
 #include <matroska/KaxBlockData.h>
 #include <matroska/KaxCluster.h>
 #include <matroska/KaxSeekHead.h>
+#include <matroska/KaxSemantic.h>
 
 class kax_cluster_c: public libmatroska::KaxCluster {
 public:
@@ -94,4 +95,14 @@ class kax_cues_with_cleanup_c: public libmatroska::KaxCues {
 public:
   kax_cues_with_cleanup_c();
   virtual ~kax_cues_with_cleanup_c();
+};
+
+class kax_block_add_id_c: public libmatroska::KaxBlockAddID {
+public:
+  kax_block_add_id_c(bool always_write)
+    : libmatroska::KaxBlockAddID{}
+  {
+    if (always_write)
+      ForceNoDefault();
+  }
 };
