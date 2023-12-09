@@ -1329,7 +1329,7 @@
                </item>
               </layout>
              </item>
-             <item row="1" column="0">
+             <item row="2" column="0">
               <widget class="QLabel" name="label_4">
                <property name="text">
                 <string>Default subtitle &amp;charset to set:</string>
@@ -1346,6 +1346,7 @@
                </property>
               </widget>
              </item>
+             <item row="2" column="1">
               <widget class="mtx::gui::Util::CharacterSetComboBox" name="cbMDefaultSubtitleCharset">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -1354,6 +1355,30 @@
                 </sizepolicy>
                </property>
               </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="cbMDeriveHearingImpairedFlag">
+               <property name="text">
+                <string>Derive &quot;&amp;hearing impair&quot; flag for audio/subtitles from file names:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_17">
+               <item>
+                <widget class="QLineEdit" name="leMDeriveHearingImpairedFlagRE"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbMDeriveHearingImpairedFlagRERevert">
+                 <property name="text">
+                  <string notr="true"/>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="edit-undo"/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </item>
@@ -2770,6 +2795,9 @@
   <tabstop>cbMDeriveForcedDisplayFlagSubtitles</tabstop>
   <tabstop>leMDeriveForcedDisplayFlagSubtitlesRE</tabstop>
   <tabstop>pbMDeriveForcedDisplayFlagSubtitlesRERevert</tabstop>
+  <tabstop>cbMDeriveHearingImpairedFlag</tabstop>
+  <tabstop>leMDeriveHearingImpairedFlagRE</tabstop>
+  <tabstop>pbMDeriveHearingImpairedFlagRERevert</tabstop>
   <tabstop>cbMDefaultSubtitleCharset</tabstop>
   <tabstop>cbMWhenToSetDefaultLanguage</tabstop>
   <tabstop>cbMDeriveAudioTrackLanguageFromFileName</tabstop>

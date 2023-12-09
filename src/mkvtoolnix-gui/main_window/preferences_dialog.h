@@ -79,6 +79,8 @@ public Q_SLOTS:
   void adjustPlaylistControls();
   void adjustRemoveOldJobsControls();
   void revertDeriveTrackLanguageFromFileNameChars();
+  void revertDeriveHearingImpairedFlagRE();
+  void revertDeriveForcedDisplayFlagSubtitlesRE();
   void enableDeriveHearingImpairedFlagControls();
   void enableDeriveForcedDisplayFlagSubtitlesControls();
   void setupCommonLanguages(bool withISO639_3);
@@ -114,6 +116,7 @@ protected:
   void setupTabPositions();
   void setupDerivingTrackLanguagesFromFileName();
   void setupDeriveForcedDisplayFlagSubtitles();
+  void setupDeriveHearingImpairedFlag();
   void setupWhenToSetDefaultLanguage();
   void setupJobRemovalPolicy();
   void setupCommonRegions();
@@ -145,6 +148,7 @@ protected:
   QModelIndex modelIndexForPage(int pageIndex);
 
   bool verifyDeriveTrackLanguageSettings();
+  bool verifyDeriveHearingImpairedFlagSettings();
   bool verifyDeriveForcedDisplayFlagSettings();
   bool verifyRunProgramConfigurations();
 

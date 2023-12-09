@@ -189,8 +189,8 @@ public:
   SetDefaultLanguagePolicy m_whenToSetDefaultLanguage;
   DeriveLanguageFromFileNamePolicy m_deriveAudioTrackLanguageFromFileNamePolicy, m_deriveVideoTrackLanguageFromFileNamePolicy, m_deriveSubtitleTrackLanguageFromFileNamePolicy;
   QString m_boundaryCharsForDerivingTrackLanguagesFromFileNames;
-  bool m_deriveSubtitlesForcedFlagFromFileNames;
-  QString m_regexForDerivingSubtitlesForcedFlagFromFileNames;
+  bool m_deriveSubtitlesForcedFlagFromFileNames, m_deriveHearingImpairedFlagFromFileNames;
+  QString m_regexForDerivingSubtitlesForcedFlagFromFileNames, m_regexForDerivingHearingImpairedFlagFromFileNames;
   QStringList m_recognizedTrackLanguagesInFileNames, m_mergePredefinedSplitSizes, m_mergePredefinedSplitDurations;
   QStringList m_mergePredefinedVideoTrackNames, m_mergePredefinedAudioTrackNames, m_mergePredefinedSubtitleTrackNames;
   QString m_chapterNameTemplate, m_ceTextFileCharacterSet, m_defaultSubtitleCharset, m_defaultAdditionalMergeOptions;
@@ -332,6 +332,7 @@ public:
   static QString prepareCacheDir(QString const &subDir);
 
   static QString defaultBoundaryCharsForDerivingLanguageFromFileName();
+  static QString defaultRegexForDerivingHearingImpairedFlagFromFileName();
   static QString defaultRegexForDerivingForcedDisplayFlagForSubtitlesFromFileName();
 
   static QVector<QColor> defaultFileColors();

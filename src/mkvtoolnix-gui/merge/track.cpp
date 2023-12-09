@@ -224,6 +224,19 @@ Track::setDefaultsMuxThis() {
 }
 
 void
+Track::setDefaultsHearingImpairedFlag() {
+  auto &settings = Util::Settings::get();
+
+  if (!settings.m_deriveHearingImpairedFlagFromFileNames || isAppended() || (!isAudio() && !isSubtitles()))
+    return;
+
+  QRegularExpression re{settings.m_regexForDerivingHearingImpairedFlagFromFileNames, QRegularExpression::CaseInsensitiveOption};
+
+  if (re.isValid() && m_file->m_fileName.contains(re))
+    m_hearingImpairedFlag = 1;
+}
+
+void
 Track::setDefaultsForcedDisplayFlag() {
   auto &settings = Util::Settings::get();
 
@@ -310,6 +323,7 @@ Track::setDefaults(mtx::bcp47::language_c const &languageDerivedFromFileName) {
   setDefaultsBasics();
   setDefaultsLanguage(languageDerivedFromFileName);
   setDefaultsForcedDisplayFlag();
+  setDefaultsHearingImpairedFlag();
   setDefaultsMuxThis();
   setDefaultsDisplayDimensions();
   setDefaultsColor();

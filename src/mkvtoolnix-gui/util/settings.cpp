@@ -720,6 +720,8 @@ Settings::loadDefaults(QSettings &reg) {
   m_defaultChapterLanguage                           = mtx::bcp47::language_c::parse(to_utf8(reg.value(s_valDefaultChapterLanguage,       Q("und")).toString()));
   m_defaultSubtitleCharset                           = reg.value(s_valDefaultSubtitleCharset).toString();
   m_defaultAdditionalMergeOptions                    = reg.value(s_valDefaultAdditionalMergeOptions).toString();
+  m_deriveHearingImpairedFlagFromFileNames           = reg.value(s_valDefaultDeriveHearingImpairedFlagFromFileNames,                      true).toBool();
+  m_regexForDerivingHearingImpairedFlagFromFileNames = reg.value(s_valDefaultRegexForDerivingHearingImpairedFlagFromFileNames,            defaultRegexForDerivingHearingImpairedFlagFromFileName()).toString();
   m_deriveSubtitlesForcedFlagFromFileNames           = reg.value(s_valDefaultDeriveSubtitlesForcedFlagFromFileNames,                      true).toBool();
   m_regexForDerivingSubtitlesForcedFlagFromFileNames = reg.value(s_valDefaultRegexForDerivingSubtitlesForcedFlagFromFileNames,            defaultRegexForDerivingForcedDisplayFlagForSubtitlesFromFileName()).toString();
   reg.endGroup();               // defaults
@@ -1082,6 +1084,8 @@ Settings::saveDefaults(QSettings &reg)
   reg.setValue(s_valDefaultChapterLanguage,                                  Q(m_defaultChapterLanguage.format()));
   reg.setValue(s_valDefaultSubtitleCharset,                                  m_defaultSubtitleCharset);
   reg.setValue(s_valDefaultAdditionalMergeOptions,                           m_defaultAdditionalMergeOptions);
+  reg.setValue(s_valDefaultDeriveHearingImpairedFlagFromFileNames,           m_deriveHearingImpairedFlagFromFileNames);
+  reg.setValue(s_valDefaultRegexForDerivingHearingImpairedFlagFromFileNames, m_regexForDerivingHearingImpairedFlagFromFileNames);
   reg.setValue(s_valDefaultDeriveSubtitlesForcedFlagFromFileNames,           m_deriveSubtitlesForcedFlagFromFileNames);
   reg.setValue(s_valDefaultRegexForDerivingSubtitlesForcedFlagFromFileNames, m_regexForDerivingSubtitlesForcedFlagFromFileNames);
   reg.endGroup();               // defaults
@@ -1381,6 +1385,11 @@ Settings::determineMediaInfoExePath() {
 QString
 Settings::defaultBoundaryCharsForDerivingLanguageFromFileName() {
   return Q("[](){}.+-=#");
+}
+
+QString
+Settings::defaultRegexForDerivingHearingImpairedFlagFromFileName() {
+  return Q("[[\\](){} .+=#-](cc|sdh)[[\\](){} .+=#-]");
 }
 
 QString

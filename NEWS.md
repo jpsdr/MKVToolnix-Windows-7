@@ -20,6 +20,10 @@
   properly. These are used for e.g. alpha channel data in VP9 with a "Block
   Addition ID" value of 1, which is also its default value. Workaround for the
   player issues listed in #3643.
+* MKVToolNix GUI: multiplexer: when adding files the GUI can automatically
+  enable the "hearing impaired" flag for audio and subtitle tracks if the file
+  name contains the word "cc" or "sdh" delimited by certain characters
+  (configurable). This feature is turned on by default. Implements #3648.
 
 ## Bug fixes
 
