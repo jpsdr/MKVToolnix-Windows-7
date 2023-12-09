@@ -2,7 +2,7 @@ dnl
 dnl Check for Qt 6
 dnl
 
-qt_min_ver=6.1.0
+qt_min_ver=6.2.0
 
 check_qt6() {
   AC_ARG_WITH(qmake6,
@@ -77,7 +77,7 @@ EOT
     fi
   fi
 
-  for qt_module in dbus multimedia; do
+  for qt_module in dbus; do
     rm -f Makefile Makefile.Release
 
     cat > "$qmake_dir/configure.pro" <<EOT
@@ -98,15 +98,13 @@ EOT
     elif test $qt_module = dbus; then
       qmake_qt_ui="$qmake_qt_ui dbus"
       AC_DEFINE(HAVE_QTDBUS, 1, [Define if QtDBus is present])
-    elif test $qt_module = multimedia; then
-      qmake_qt_ui="$qmake_qt_ui multimedia"
     fi
   done
 
   rm -f Makefile Makefile.Release
 
   cat > "$qmake_dir/configure.pro" <<EOT
-QT = core $qmake_qt_ui gui widgets network concurrent svg
+QT = core $qmake_qt_ui gui widgets network concurrent svg multimedia
 QTPLUGIN += $qmake_qtplugin_ui
 
 FORMS = configure.ui
@@ -118,14 +116,18 @@ EOT
   "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure.pro 2>&5 > /dev/null
   result2=$?
 
-  if test $result2 = 0; then
-    if test -f Makefile.Release; then
-      mv Makefile.Release Makefile
-    fi
-    if test -f configure_plugin_import.cpp; then
-      sed -i -e 's/Q_IMPORT_PLUGIN[(]QWindowsVistaStylePlugin[)]//' configure_plugin_import.cpp
-      cp configure_plugin_import.cpp "$old_wd/src/mkvtoolnix-gui/static_plugins.cpp"
-    fi
+  if test $result2 != 0; then
+    cd "$old_wd"
+    AC_MSG_RESULT(no: not all of the required Qt6 modules were found (needed: core gui widgets network concurrent svg multimedia))
+    return
+  fi
+
+  if test -f Makefile.Release; then
+    mv Makefile.Release Makefile
+  fi
+  if test -f configure_plugin_import.cpp; then
+    sed -i -e 's/Q_IMPORT_PLUGIN[(]QWindowsVistaStylePlugin[)]//' configure_plugin_import.cpp
+    cp configure_plugin_import.cpp "$old_wd/src/mkvtoolnix-gui/static_plugins.cpp"
   fi
 
   "$QMAKE6" -query $QMAKE_SPEC > "$qmake_dir/configure.properties" 2>&5
@@ -250,13 +252,6 @@ return 0;
     AC_MSG_RESULT(no: could not compile a test program)
     return
   fi
-
-  AC_LANG_PUSH(C++)
-  ac_save_CXXFLAGS="$CXXFLAGS"
-  CXXFLAGS="$STD_CXX $CXXFLAGS $QT_CFLAGS -fPIC"
-  AC_CHECK_HEADERS([QMediaPlayer])
-  CXXFLAGS="$ac_save_CXXFLAGS"
-  AC_LANG_POP()
 
   AC_DEFINE(HAVE_QT, 1, [Define if Qt is present])
   AC_MSG_CHECKING(for Qt 6)

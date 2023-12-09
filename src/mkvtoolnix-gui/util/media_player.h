@@ -3,10 +3,7 @@
 #include "common/common_pch.h"
 
 #include <QObject>
-
-#if HAVE_QMEDIAPLAYER
-# include <QMediaPlayer>
-#endif
+#include <QMediaPlayer>
 
 #include "common/qt.h"
 
@@ -32,13 +29,10 @@ public:
 public Q_SLOTS:
   void playFile(QString const &fileName, unsigned int volume);
   void stopPlayback();
-
-#if HAVE_QMEDIAPLAYER
   void handleError(QMediaPlayer::Error error);
 
 Q_SIGNALS:
   void errorOccurred(QMediaPlayer::Error error, QString const &fileName);
-#endif
 };
 
 }

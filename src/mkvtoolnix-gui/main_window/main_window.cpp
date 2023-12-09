@@ -237,9 +237,7 @@ MainWindow::setupConnections() {
   connect(this,                                   &MainWindow::preferencesChanged,                        this,                 &MainWindow::showOrHideDebuggingMenu);
 
   connect(app,                                    &App::toolRequested,                                    this,                 &MainWindow::switchToTool);
-#if HAVE_QMEDIAPLAYER
   connect(&app->mediaPlayer(),                    &Util::MediaPlayer::errorOccurred,                      this,                 &MainWindow::handleMediaPlaybackError);
-#endif
 }
 
 void
@@ -931,7 +929,6 @@ MainWindow::stopQueueSpinner() {
   startStopQueueSpinner(false);
 }
 
-#if HAVE_QMEDIAPLAYER
 void
 MainWindow::handleMediaPlaybackError(QMediaPlayer::Error error,
                                      QString const &fileName) {
@@ -955,7 +952,6 @@ MainWindow::handleMediaPlaybackError(QMediaPlayer::Error error,
     .text(messages.join(Q(" ")))
     .exec();
 }
-#endif  // HAVE_QMEDIAPLAYER
 
 Util::LanguageDialog &
 MainWindow::setupLanguageDialog() {
