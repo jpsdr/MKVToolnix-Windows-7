@@ -79,8 +79,8 @@ public Q_SLOTS:
   void adjustPlaylistControls();
   void adjustRemoveOldJobsControls();
   void revertDeriveTrackLanguageFromFileNameChars();
-  void revertForcedDisplayFlagSubtitlesRE();
-  void enableForcedDisplayFlagSubtitlesControls();
+  void enableDeriveHearingImpairedFlagControls();
+  void enableDeriveForcedDisplayFlagSubtitlesControls();
   void setupCommonLanguages(bool withISO639_3);
 
   void setupLanguageShortcuts();
@@ -113,7 +113,7 @@ protected:
   void setupInterfaceLanguage();
   void setupTabPositions();
   void setupDerivingTrackLanguagesFromFileName();
-  void setupForcedDisplayFlagSubtitles();
+  void setupDeriveForcedDisplayFlagSubtitles();
   void setupWhenToSetDefaultLanguage();
   void setupJobRemovalPolicy();
   void setupCommonRegions();
