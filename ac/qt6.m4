@@ -66,7 +66,7 @@ EOT
   old_wd="$PWD"
   cd "$qmake_dir"
 
-  "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure_non_gui.pro 2>&5
+  "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure_non_gui.pro 2>&5 > /dev/null
   result=$?
 
   if test $result = 0; then
@@ -90,7 +90,7 @@ HEADERS = configure.h
 SOURCES = configure.cpp
 EOT
 
-    "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure.pro 2>&5
+    "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure.pro 2>&5 > /dev/null
     result2=$?
 
     if test $result2 != 0; then
@@ -115,7 +115,7 @@ HEADERS = configure.h
 SOURCES = configure.cpp
 EOT
 
-  "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure.pro 2>&5
+  "$QMAKE6" -makefile -nocache $QMAKE_SPEC configure.pro 2>&5 > /dev/null
   result2=$?
 
   if test $result2 = 0; then
