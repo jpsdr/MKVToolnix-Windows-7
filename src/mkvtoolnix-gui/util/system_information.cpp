@@ -2,9 +2,7 @@
 
 #include <Qt>
 #include <QDir>
-#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
-# include <QMediaFormat>
-#endif
+#include <QMediaFormat>
 #include <QOperatingSystemVersion>
 #include <QScreen>
 #include <QSettings>

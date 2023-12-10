@@ -1061,9 +1061,7 @@ PreferencesDialog::setupFontAndScaling() {
   ui->sbGuiFontPointSize->setValue(font.pointSize());
 
   ui->cbGuiDisableHighDPIScaling->setChecked(m_cfg.m_uiDisableHighDPIScaling);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
   ui->cbGuiDisableHighDPIScaling->setVisible(false);
-#endif
 
   ui->cbGuiStayOnTop->setChecked(m_cfg.m_uiStayOnTop);
 }

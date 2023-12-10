@@ -384,12 +384,7 @@ StyleHelper::drawIconWithShadow(QIcon const &icon,
     // return a high-dpi pixmap, which will in that case have a devicePixelRatio
     // different than 1. The shadow drawing caluculations are done in device
     // pixels.
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     QPixmap px = icon.pixmap(rect.size(), devicePixelRatio, iconMode);
-#else
-    QWindow *window = dynamic_cast<QWidget*>(p->device())->window()->windowHandle();
-    QPixmap px = icon.pixmap(window, rect.size(), iconMode);
-#endif
     int radius = dipRadius * devicePixelRatio;
     QPoint offset = dipOffset * devicePixelRatio;
     cache = QPixmap(px.size() + QSize(radius * 2, radius * 2));

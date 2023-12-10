@@ -1,4 +1,3 @@
-<% use_qt6 = ((distro == 'ubuntu') && (version >= Gem::Version.new('22.04'))) || ((distro == 'debian') && (version >= Gem::Version.new('12'))) || ((distro == 'linuxmint') && (version >= Gem::Version.new('21'))) %>
 Source: mkvtoolnix
 Section: video
 Priority: optional
@@ -12,14 +11,7 @@ Build-Depends:
  libboost-dev (>= 1.66), libboost-filesystem-dev (>= 1.66),
  libboost-system-dev (>= 1.66), libgtest-dev, libfmt-dev (>= 4),
  libdvdread-dev, nlohmann-json3-dev, pkg-config, po4a, docbook-xsl, xsltproc,
-<% if use_qt6 %>
  qt6-base-dev, qt6-base-dev-tools, qt6-multimedia-dev, libqt6svg6-dev
-<% else %>
-<%   if ((distro == 'ubuntu') && (version < Gem::Version.new('20.04'))) || ((distro == 'debian') && (version < Gem::Version.new('11'))) %>
- qt5-default,
-<%   end %>
- qtbase5-dev, qtbase5-dev-tools, qtmultimedia5-dev, libqt5svg5-dev
-<% end %>
 
 Package: mkvtoolnix
 Architecture: any
@@ -40,11 +32,7 @@ Description: Set of command-line tools to work with Matroska files
 Package: mkvtoolnix-gui
 Architecture: any
 Depends: mkvtoolnix (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends},
-<% if use_qt6 %>
  libqt6svg6, qt6-qpa-plugins | qt6-wayland
-<% else %>
- libqt5svg5
-<% end %>
 Suggests: mediainfo-gui
 Replaces: mkvtoolnix (<= 4.6.0-1)
 Description: Set of tools to work with Matroska files - GUI frontend

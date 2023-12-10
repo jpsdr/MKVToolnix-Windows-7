@@ -40,6 +40,10 @@
 * Qt 6 detection: `configure` will now fail to detect Qt 6 if the 'multimedia'
   module is not found by `qmake` (e.g. due to development packages not being
   installed). See #3649.
+* Qt 5 is no longer supported. Qt 6 is now required for building
+  MKVToolNix. This implies that the options to `configure` revolving around
+  configuring Qt 5 or choosing between the two have been removed
+  (e.g. `--disable-qt6`).
 
 
 # Version 81.0 "Milliontown" 2023-12-02
