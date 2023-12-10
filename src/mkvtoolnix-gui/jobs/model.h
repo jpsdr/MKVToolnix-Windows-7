@@ -6,7 +6,6 @@
 #include <QList>
 #include <QSet>
 
-#include "common/qt6_compat/mutex.h"
 #include "mkvtoolnix-gui/jobs/job.h"
 
 class QAbstractItemView;
@@ -24,7 +23,7 @@ protected:
   QHash<uint64_t, JobPtr> m_jobsById;
   QSet<Job const *> m_toBeProcessed;
   QHash<uint64_t, bool> m_toBeRemoved;
-  MtxQRecursiveMutex m_mutex;
+  QRecursiveMutex m_mutex;
   QIcon m_warningsIcon, m_errorsIcon;
 
   bool m_started, m_dontStartJobsNow, m_running;

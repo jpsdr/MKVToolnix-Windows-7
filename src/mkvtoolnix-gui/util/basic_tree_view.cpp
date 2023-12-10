@@ -5,7 +5,6 @@
 #include <QStandardItemModel>
 
 #include "common/list_utils.h"
-#include "common/qt6_compat/event.h"
 #include "mkvtoolnix-gui/util/basic_tree_view.h"
 #include "mkvtoolnix-gui/util/files_drag_drop_handler.h"
 #include "mkvtoolnix-gui/util/model.h"
@@ -75,7 +74,7 @@ BasicTreeView::dropEvent(QDropEvent *event) {
   auto p = p_func();
 
   if (p->m_acceptDroppedFiles && p->m_filesDDHandler.handle(event, true)) {
-    Q_EMIT filesDropped(p->m_filesDDHandler.fileNames(), mtxMouseButtonsFor(event), mtxKeyboardModifiersFor(event));
+    Q_EMIT filesDropped(p->m_filesDDHandler.fileNames(), event->buttons(), event->modifiers());
     return;
   }
 

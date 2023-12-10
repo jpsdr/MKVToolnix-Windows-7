@@ -25,7 +25,6 @@
 #include "common/mm_proxy_io.h"
 #include "common/mm_read_buffer_io.h"
 #include "common/qt.h"
-#include "common/qt6_compat/mutex.h"
 #include "common/kax_info_p.h"
 #include "mkvtoolnix-gui/util/kax_info.h"
 
@@ -37,10 +36,10 @@ class KaxInfoPrivate: public mtx::kax_info::private_c {
 public:
   KaxInfo::ScanType m_scanType{KaxInfo::ScanType::StartOfFile};
   std::optional<uint64_t> m_firstLevel1ElementPosition;
-  MtxQRecursiveMutex m_mutex;
+  QRecursiveMutex m_mutex;
 
   explicit KaxInfoPrivate()
-    : m_mutex{MTX_QT_RECURSIVE_MUTEX_INIT}
+    : m_mutex{}
   {
   }
 };
@@ -213,7 +212,7 @@ KaxInfo::doScanLevel1Elements() {
   return p->m_abort ? result_e::aborted : result_e::succeeded;
 }
 
-MtxQRecursiveMutex &
+QRecursiveMutex &
 KaxInfo::mutex() {
   return p_func()->m_mutex;
 }
