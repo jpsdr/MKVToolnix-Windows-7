@@ -2040,9 +2040,7 @@ qtmp4_reader_c::create_packetizer(int64_t tid) {
 
   if (packetizer_ok) {
     dmx.set_packetizer_block_addition_mappings();
-
-    if (!m_reader_packetizers[dmx.ptzr]->m_ti.m_enabled_track.has_value())
-      m_reader_packetizers[dmx.ptzr]->set_track_enabled_flag(dmx.m_enabled);
+    m_reader_packetizers[dmx.ptzr]->set_track_enabled_flag(dmx.m_enabled, option_source_e::container);
   }
 
   if (packetizer_ok && (-1 == m_main_dmx))

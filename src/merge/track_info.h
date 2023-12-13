@@ -247,31 +247,31 @@ public:
   cue_strategy_e m_cues;          // For this very track
 
   std::map<int64_t, bool> m_default_track_flags; // As given on the command line
-  std::optional<bool> m_default_track;    // For this very track
+  option_with_source_c<bool> m_default_track;    // For this very track
 
   std::map<int64_t, bool> m_fix_bitstream_frame_rate_flags; // As given on the command line
   std::optional<bool> m_fix_bitstream_frame_rate;         // For this very track
 
   std::map<int64_t, bool> m_forced_track_flags; // As given on the command line
-  std::optional<bool> m_forced_track;    // For this very track
+  option_with_source_c<bool> m_forced_track;    // For this very track
 
   std::map<int64_t, bool> m_enabled_track_flags; // As given on the command line
-  std::optional<bool> m_enabled_track;    // For this very track
+  option_with_source_c<bool> m_enabled_track;    // For this very track
 
   std::map<int64_t, bool> m_hearing_impaired_flags;
-  std::optional<bool> m_hearing_impaired_flag;
+  option_with_source_c<bool> m_hearing_impaired_flag;
 
   std::map<int64_t, bool> m_visual_impaired_flags;
-  std::optional<bool> m_visual_impaired_flag;
+  option_with_source_c<bool> m_visual_impaired_flag;
 
   std::map<int64_t, bool> m_text_descriptions_flags;
-  std::optional<bool> m_text_descriptions_flag;
+  option_with_source_c<bool> m_text_descriptions_flag;
 
   std::map<int64_t, bool> m_original_flags;
-  std::optional<bool> m_original_flag;
+  option_with_source_c<bool> m_original_flag;
 
   std::map<int64_t, bool> m_commentary_flags;
-  std::optional<bool> m_commentary_flag;
+  option_with_source_c<bool> m_commentary_flag;
 
   std::map<int64_t, mtx::bcp47::language_c> m_languages; // As given on the command line
   mtx::bcp47::language_c m_language;                     // For this very track
