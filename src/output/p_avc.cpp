@@ -96,7 +96,7 @@ avc_video_packetizer_c::extract_aspect_ratio() {
   set_video_display_dimensions(1 <= par ? mtx::to_int_rounded(m_width * par) : m_width,
                                1 <= par ? m_height                           : mtx::to_int_rounded(m_height / par),
                                generic_packetizer_c::ddu_pixels,
-                               OPTION_SOURCE_BITSTREAM);
+                               option_source_e::bitstream);
 
   mxinfo_tid(m_ti.m_fname, m_ti.m_id,
              fmt::format(Y("Extracted the aspect ratio information from the MPEG-4 layer 10 (AVC) video data and set the display dimensions to {0}/{1}.\n"),

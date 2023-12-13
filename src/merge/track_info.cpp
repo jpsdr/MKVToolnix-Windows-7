@@ -30,7 +30,7 @@ track_info_c::track_info_c()
   , m_aspect_ratio_is_factor{}
   , m_aspect_ratio_factor_applied{}
   , m_display_dimensions_given{}
-  , m_display_dimensions_source{OPTION_SOURCE_NONE}
+  , m_display_dimensions_source{option_source_e::none}
   , m_reset_timestamps{}
   , m_cues{CUE_STRATEGY_UNSPECIFIED}
   , m_compression{COMPRESSION_UNSPECIFIED}
@@ -214,5 +214,5 @@ track_info_c::operator =(const track_info_c &src) {
 
 bool
 track_info_c::display_dimensions_or_aspect_ratio_set() {
-  return OPTION_SOURCE_NONE != m_display_dimensions_source;
+  return option_source_e::none != m_display_dimensions_source;
 }

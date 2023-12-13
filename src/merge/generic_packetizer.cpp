@@ -184,7 +184,7 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   // Let's see if the user has specified an audio emphasis mode for this track.
   int i = lookup_track_id(m_ti.m_audio_emphasis_list, m_ti.m_id);
   if (-2 != i)
-    set_audio_emphasis(m_ti.m_audio_emphasis_list[m_ti.m_id], OPTION_SOURCE_COMMAND_LINE);
+    set_audio_emphasis(m_ti.m_audio_emphasis_list[m_ti.m_id], option_source_e::command_line);
 
   // Let's see if the user has specified an aspect ratio or display dimensions
   // for this track.
@@ -192,9 +192,9 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   if (-2 != i) {
     display_properties_t &dprop = m_ti.m_display_properties[i];
     if (0 > dprop.aspect_ratio) {
-      set_video_display_dimensions(dprop.width, dprop.height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_COMMAND_LINE);
+      set_video_display_dimensions(dprop.width, dprop.height, generic_packetizer_c::ddu_pixels, option_source_e::command_line);
     } else {
-      set_video_aspect_ratio(dprop.aspect_ratio, dprop.ar_factor, OPTION_SOURCE_COMMAND_LINE);
+      set_video_aspect_ratio(dprop.aspect_ratio, dprop.ar_factor, option_source_e::command_line);
       m_ti.m_aspect_ratio_given = true;
     }
   }
@@ -215,111 +215,111 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   // Let's see if the user has specified cropping parameters for this track.
   i = lookup_track_id(m_ti.m_pixel_crop_list, m_ti.m_id);
   if (-2 != i)
-    set_video_pixel_cropping(m_ti.m_pixel_crop_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_pixel_cropping(m_ti.m_pixel_crop_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified color matrix for this track.
   i = lookup_track_id(m_ti.m_color_matrix_coeff_list, m_ti.m_id);
   if (-2 != i)
-    set_video_color_matrix(m_ti.m_color_matrix_coeff_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_color_matrix(m_ti.m_color_matrix_coeff_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified bits per channel parameter for this track.
   i = lookup_track_id(m_ti.m_bits_per_channel_list, m_ti.m_id);
   if (-2 != i)
-    set_video_bits_per_channel(m_ti.m_bits_per_channel_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_bits_per_channel(m_ti.m_bits_per_channel_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified chroma subsampling parameter for this track.
   i = lookup_track_id(m_ti.m_chroma_subsample_list, m_ti.m_id);
   if (-2 != i)
-    set_video_chroma_subsample(m_ti.m_chroma_subsample_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_chroma_subsample(m_ti.m_chroma_subsample_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified Cb subsampling parameter for this track.
   i = lookup_track_id(m_ti.m_cb_subsample_list, m_ti.m_id);
   if (-2 != i)
-    set_video_cb_subsample(m_ti.m_cb_subsample_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_cb_subsample(m_ti.m_cb_subsample_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified chroma siting parameter for this track.
   i = lookup_track_id(m_ti.m_chroma_siting_list, m_ti.m_id);
   if (-2 != i)
-    set_video_chroma_siting(m_ti.m_chroma_siting_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_chroma_siting(m_ti.m_chroma_siting_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified color range parameter for this track.
   i = lookup_track_id(m_ti.m_color_range_list, m_ti.m_id);
   if (-2 != i)
-    set_video_color_range(m_ti.m_color_range_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_color_range(m_ti.m_color_range_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified color transfer characteristics parameter for this track.
   i = lookup_track_id(m_ti.m_color_transfer_list, m_ti.m_id);
   if (-2 != i)
-    set_video_color_transfer_character(m_ti.m_color_transfer_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_color_transfer_character(m_ti.m_color_transfer_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified color primaries parameter for this track.
   i = lookup_track_id(m_ti.m_color_primaries_list, m_ti.m_id);
   if (-2 != i)
-    set_video_color_primaries(m_ti.m_color_primaries_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_color_primaries(m_ti.m_color_primaries_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified max content light parameter for this track.
   i = lookup_track_id(m_ti.m_max_cll_list, m_ti.m_id);
   if (-2 != i)
-    set_video_max_cll(m_ti.m_max_cll_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_max_cll(m_ti.m_max_cll_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified max frame light parameter for this track.
   i = lookup_track_id(m_ti.m_max_fall_list, m_ti.m_id);
   if (-2 != i)
-    set_video_max_fall(m_ti.m_max_fall_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_max_fall(m_ti.m_max_fall_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified chromaticity coordinates parameter for this track.
   i = lookup_track_id(m_ti.m_chroma_coordinates_list, m_ti.m_id);
   if (-2 != i)
-    set_video_chroma_coordinates(m_ti.m_chroma_coordinates_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_chroma_coordinates(m_ti.m_chroma_coordinates_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified white color coordinates parameter for this track.
   i = lookup_track_id(m_ti.m_white_coordinates_list, m_ti.m_id);
   if (-2 != i)
-    set_video_white_color_coordinates(m_ti.m_white_coordinates_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_white_color_coordinates(m_ti.m_white_coordinates_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified max luminance parameter for this track.
   i = lookup_track_id(m_ti.m_max_luminance_list, m_ti.m_id);
   if (-2 != i)
-    set_video_max_luminance(m_ti.m_max_luminance_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_max_luminance(m_ti.m_max_luminance_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified min luminance parameter for this track.
   i = lookup_track_id(m_ti.m_min_luminance_list, m_ti.m_id);
   if (-2 != i)
-    set_video_min_luminance(m_ti.m_min_luminance_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_min_luminance(m_ti.m_min_luminance_list[i], option_source_e::command_line);
 
   i = lookup_track_id(m_ti.m_projection_type_list, m_ti.m_id);
   if (-2 != i)
-    set_video_projection_type(m_ti.m_projection_type_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_projection_type(m_ti.m_projection_type_list[i], option_source_e::command_line);
 
   i = lookup_track_id(m_ti.m_projection_private_list, m_ti.m_id);
   if (-2 != i)
-    set_video_projection_private(m_ti.m_projection_private_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_projection_private(m_ti.m_projection_private_list[i], option_source_e::command_line);
 
   i = lookup_track_id(m_ti.m_projection_pose_yaw_list, m_ti.m_id);
   if (-2 != i)
-    set_video_projection_pose_yaw(m_ti.m_projection_pose_yaw_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_projection_pose_yaw(m_ti.m_projection_pose_yaw_list[i], option_source_e::command_line);
 
   i = lookup_track_id(m_ti.m_projection_pose_pitch_list, m_ti.m_id);
   if (-2 != i)
-    set_video_projection_pose_pitch(m_ti.m_projection_pose_pitch_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_projection_pose_pitch(m_ti.m_projection_pose_pitch_list[i], option_source_e::command_line);
 
   i = lookup_track_id(m_ti.m_projection_pose_roll_list, m_ti.m_id);
   if (-2 != i)
-    set_video_projection_pose_roll(m_ti.m_projection_pose_roll_list[i], OPTION_SOURCE_COMMAND_LINE);
+    set_video_projection_pose_roll(m_ti.m_projection_pose_roll_list[i], option_source_e::command_line);
 
   // Let's see if the user has specified a field order for this track.
   i = lookup_track_id(m_ti.m_field_order_list, m_ti.m_id);
   if (-2 != i)
-    set_video_field_order(m_ti.m_field_order_list[m_ti.m_id], OPTION_SOURCE_COMMAND_LINE);
+    set_video_field_order(m_ti.m_field_order_list[m_ti.m_id], option_source_e::command_line);
 
   // Let's see if the user has specified a stereo mode for this track.
   i = lookup_track_id(m_ti.m_stereo_mode_list, m_ti.m_id);
   if (-2 != i)
-    set_video_stereo_mode(m_ti.m_stereo_mode_list[m_ti.m_id], OPTION_SOURCE_COMMAND_LINE);
+    set_video_stereo_mode(m_ti.m_stereo_mode_list[m_ti.m_id], option_source_e::command_line);
 
   i = lookup_track_id(m_ti.m_alpha_mode_list, m_ti.m_id);
   if (-2 != i)
-    set_video_alpha_mode(m_ti.m_alpha_mode_list[m_ti.m_id], OPTION_SOURCE_COMMAND_LINE);
+    set_video_alpha_mode(m_ti.m_alpha_mode_list[m_ti.m_id], option_source_e::command_line);
 
   // Let's see if the user has specified a default duration for this track.
   if (mtx::includes(m_ti.m_default_durations, m_ti.m_id)) {

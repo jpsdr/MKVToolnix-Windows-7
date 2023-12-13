@@ -56,7 +56,7 @@ av1_video_packetizer_c::set_header_parameters() {
   }
 
   if (!m_hvideo_display_width || !m_hvideo_display_height) {
-    set_video_display_dimensions(dimensions.first, dimensions.second, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
+    set_video_display_dimensions(dimensions.first, dimensions.second, generic_packetizer_c::ddu_pixels, option_source_e::bitstream);
     need_to_rerender = true;
   }
 

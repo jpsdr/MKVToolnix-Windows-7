@@ -15,11 +15,11 @@
 
 #include "common/common_pch.h"
 
-enum option_source_e {
-    OPTION_SOURCE_NONE         =  0
-  , OPTION_SOURCE_BITSTREAM    = 10
-  , OPTION_SOURCE_CONTAINER    = 20
-  , OPTION_SOURCE_COMMAND_LINE = 30
+enum class option_source_e {
+    none         =  0
+  , bitstream    = 10
+  , container    = 20
+  , command_line = 30
 };
 
 template<typename T>
@@ -31,13 +31,13 @@ protected:
 
 public:
   option_with_source_c()
-    : m_source{OPTION_SOURCE_NONE}
+    : m_source{option_source_e::none}
   {
   }
 
   option_with_source_c(T const &value,
                        option_source_e source)
-    : m_source{OPTION_SOURCE_NONE}
+    : m_source{option_source_e::none}
   {
     set(value, source);
   }
