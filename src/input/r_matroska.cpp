@@ -1801,29 +1801,27 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
   if (m_appending)
     return;
 
-  if (!ptzr(t->ptzr).m_ti.m_default_track.has_value())
-    ptzr(t->ptzr).set_track_default_flag(t->default_track);
+  ptzr(t->ptzr).set_track_default_flag(t->default_track, option_source_e::container);
 
-  if (t->forced_track && !ptzr(t->ptzr).m_ti.m_forced_track.has_value())
-    ptzr(t->ptzr).set_track_forced_flag(true);
+  if (t->forced_track)
+    ptzr(t->ptzr).set_track_forced_flag(true, option_source_e::container);
 
-  if (t->hearing_impaired_flag.has_value() && !ptzr(t->ptzr).m_ti.m_hearing_impaired_flag.has_value())
-    ptzr(t->ptzr).set_hearing_impaired_flag(*t->hearing_impaired_flag);
+  if (t->hearing_impaired_flag.has_value())
+    ptzr(t->ptzr).set_hearing_impaired_flag(*t->hearing_impaired_flag, option_source_e::container);
 
-  if (t->visual_impaired_flag.has_value() && !ptzr(t->ptzr).m_ti.m_visual_impaired_flag.has_value())
-    ptzr(t->ptzr).set_visual_impaired_flag(*t->visual_impaired_flag);
+  if (t->visual_impaired_flag.has_value())
+    ptzr(t->ptzr).set_visual_impaired_flag(*t->visual_impaired_flag, option_source_e::container);
 
-  if (t->text_descriptions_flag.has_value() && !ptzr(t->ptzr).m_ti.m_text_descriptions_flag.has_value())
-    ptzr(t->ptzr).set_text_descriptions_flag(*t->text_descriptions_flag);
+  if (t->text_descriptions_flag.has_value())
+    ptzr(t->ptzr).set_text_descriptions_flag(*t->text_descriptions_flag, option_source_e::container);
 
-  if (t->original_flag.has_value() && !ptzr(t->ptzr).m_ti.m_original_flag.has_value())
-    ptzr(t->ptzr).set_original_flag(*t->original_flag);
+  if (t->original_flag.has_value())
+    ptzr(t->ptzr).set_original_flag(*t->original_flag, option_source_e::container);
 
-  if (t->commentary_flag.has_value() && !ptzr(t->ptzr).m_ti.m_commentary_flag.has_value())
-    ptzr(t->ptzr).set_commentary_flag(*t->commentary_flag);
+  if (t->commentary_flag.has_value())
+    ptzr(t->ptzr).set_commentary_flag(*t->commentary_flag, option_source_e::container);
 
-  if (!ptzr(t->ptzr).m_ti.m_enabled_track.has_value())
-    ptzr(t->ptzr).set_track_enabled_flag(static_cast<bool>(t->enabled_track));
+  ptzr(t->ptzr).set_track_enabled_flag(static_cast<bool>(t->enabled_track), option_source_e::container);
 
   if ((0 != t->track_uid) && !ptzr(t->ptzr).set_uid(t->track_uid))
     mxwarn_fn(m_ti.m_fname, fmt::format(Y("Could not keep a track's UID {0} because it is already allocated for another track. A new random UID will be allocated automatically.\n"), t->track_uid));

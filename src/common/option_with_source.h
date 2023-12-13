@@ -44,7 +44,13 @@ public:
 
   operator bool()
     const {
-    return !!m_value;
+    return m_value.has_value();
+  }
+
+  bool
+  has_value()
+    const {
+    return m_value.has_value();
   }
 
   T const &
@@ -53,6 +59,12 @@ public:
     if (!*this)
       throw std::logic_error{"not set yet"};
     return m_value.value();
+  }
+
+  T const &
+  value()
+    const {
+    return get();
   }
 
   option_source_e

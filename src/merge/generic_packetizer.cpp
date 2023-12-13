@@ -29,6 +29,7 @@
 #include "common/debugging.h"
 #include "common/ebml.h"
 #include "common/hacks.h"
+#include "common/option_with_source.h"
 #include "common/strings/formatting.h"
 #include "common/unique_numbers.h"
 #include "common/xml/ebml_tags_converter.h"
@@ -109,11 +110,11 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   , m_max_timestamp_seen{}
   , m_relaxed_timestamp_checking{}
 {
-  auto set_bool_maybe = [this](std::map<int64_t, bool> &flags, std::optional<bool> &flag) {
+  auto set_bool_maybe = [this](std::map<int64_t, bool> &flags, option_with_source_c<bool> &flag) {
     if (mtx::includes(flags, m_ti.m_id))
-      flag = flags[m_ti.m_id];
+      flag.set(flags[m_ti.m_id], option_source_e::command_line);
     else if (mtx::includes(flags, -1))
-      flag = flags[-1];
+      flag.set(flags[-1], option_source_e::command_line);
   };
 
   // Let's see if the user specified timestamp sync for this track.
@@ -133,15 +134,19 @@ generic_packetizer_c::generic_packetizer_c(generic_reader_c *reader,
   else if (mtx::includes(m_ti.m_cue_creations, -1))
     m_ti.m_cues = m_ti.m_cue_creations[-1];
 
-  set_bool_maybe(m_ti.m_default_track_flags,            m_ti.m_default_track);
-  set_bool_maybe(m_ti.m_forced_track_flags,             m_ti.m_forced_track);
-  set_bool_maybe(m_ti.m_enabled_track_flags,            m_ti.m_enabled_track);
-  set_bool_maybe(m_ti.m_fix_bitstream_frame_rate_flags, m_ti.m_fix_bitstream_frame_rate);
-  set_bool_maybe(m_ti.m_hearing_impaired_flags,         m_ti.m_hearing_impaired_flag);
-  set_bool_maybe(m_ti.m_visual_impaired_flags,          m_ti.m_visual_impaired_flag);
-  set_bool_maybe(m_ti.m_text_descriptions_flags,        m_ti.m_text_descriptions_flag);
-  set_bool_maybe(m_ti.m_original_flags,                 m_ti.m_original_flag);
-  set_bool_maybe(m_ti.m_commentary_flags,               m_ti.m_commentary_flag);
+  if (mtx::includes(m_ti.m_fix_bitstream_frame_rate_flags, m_ti.m_id))
+    m_ti.m_fix_bitstream_frame_rate = m_ti.m_fix_bitstream_frame_rate_flags[m_ti.m_id];
+  else if (mtx::includes(m_ti.m_fix_bitstream_frame_rate_flags, -1))
+    m_ti.m_fix_bitstream_frame_rate = m_ti.m_fix_bitstream_frame_rate_flags[-1];
+
+  set_bool_maybe(m_ti.m_default_track_flags,     m_ti.m_default_track);
+  set_bool_maybe(m_ti.m_forced_track_flags,      m_ti.m_forced_track);
+  set_bool_maybe(m_ti.m_enabled_track_flags,     m_ti.m_enabled_track);
+  set_bool_maybe(m_ti.m_hearing_impaired_flags,  m_ti.m_hearing_impaired_flag);
+  set_bool_maybe(m_ti.m_visual_impaired_flags,   m_ti.m_visual_impaired_flag);
+  set_bool_maybe(m_ti.m_text_descriptions_flags, m_ti.m_text_descriptions_flag);
+  set_bool_maybe(m_ti.m_original_flags,          m_ti.m_original_flag);
+  set_bool_maybe(m_ti.m_commentary_flags,        m_ti.m_commentary_flag);
 
   // Let's see if the user has specified a language for this track.
   if (mtx::includes(m_ti.m_languages, m_ti.m_id))
@@ -483,59 +488,67 @@ generic_packetizer_c::get_track_default_duration()
 }
 
 void
-generic_packetizer_c::set_track_default_flag(bool default_track) {
-  m_ti.m_default_track = default_track;
+generic_packetizer_c::set_track_default_flag(bool default_track,
+                                             option_source_e source) {
+  m_ti.m_default_track.set(default_track, source);
   if (m_track_entry)
-    GetChild<KaxTrackFlagDefault>(m_track_entry).SetValue(default_track ? 1 : 0);
+    GetChild<KaxTrackFlagDefault>(m_track_entry).SetValue(m_ti.m_default_track.get() ? 1 : 0);
 }
 
 void
-generic_packetizer_c::set_track_forced_flag(bool forced_track) {
-  m_ti.m_forced_track = forced_track;
+generic_packetizer_c::set_track_forced_flag(bool forced_track,
+                                            option_source_e source) {
+  m_ti.m_forced_track.set(forced_track, source);
   if (m_track_entry)
-    GetChild<KaxTrackFlagForced>(m_track_entry).SetValue(forced_track ? 1 : 0);
+    GetChild<KaxTrackFlagForced>(m_track_entry).SetValue(m_ti.m_forced_track.get() ? 1 : 0);
 }
 
 void
-generic_packetizer_c::set_track_enabled_flag(bool enabled_track) {
-  m_ti.m_enabled_track = enabled_track;
+generic_packetizer_c::set_track_enabled_flag(bool enabled_track,
+                                             option_source_e source) {
+  m_ti.m_enabled_track.set(enabled_track, source);
   if (m_track_entry)
-    GetChild<KaxTrackFlagEnabled>(m_track_entry).SetValue(enabled_track ? 1 : 0);
+    GetChild<KaxTrackFlagEnabled>(m_track_entry).SetValue(m_ti.m_enabled_track.get() ? 1 : 0);
 }
 
 void
-generic_packetizer_c::set_hearing_impaired_flag(bool hearing_impaired_flag) {
-  m_ti.m_hearing_impaired_flag = hearing_impaired_flag;
+generic_packetizer_c::set_hearing_impaired_flag(bool hearing_impaired_flag,
+                                                option_source_e source) {
+  m_ti.m_hearing_impaired_flag.set(hearing_impaired_flag, source);
   if (m_track_entry)
-    GetChild<KaxFlagHearingImpaired>(m_track_entry).SetValue(hearing_impaired_flag ? 1 : 0);
+    GetChild<KaxFlagHearingImpaired>(m_track_entry).SetValue(m_ti.m_hearing_impaired_flag.get() ? 1 : 0);
 }
 
 void
-generic_packetizer_c::set_visual_impaired_flag(bool visual_impaired_flag) {
-  m_ti.m_visual_impaired_flag = visual_impaired_flag;
+generic_packetizer_c::set_visual_impaired_flag(bool visual_impaired_flag,
+                                               option_source_e source) {
+  m_ti.m_visual_impaired_flag.set(visual_impaired_flag, source);
   if (m_track_entry)
-    GetChild<KaxFlagVisualImpaired>(m_track_entry).SetValue(visual_impaired_flag ? 1 : 0);
+    GetChild<KaxFlagVisualImpaired>(m_track_entry).SetValue(m_ti.m_visual_impaired_flag.get() ? 1 : 0);
 }
 
 void
-generic_packetizer_c::set_text_descriptions_flag(bool text_descriptions_flag) {
-  m_ti.m_text_descriptions_flag = text_descriptions_flag;
+generic_packetizer_c::set_text_descriptions_flag(bool text_descriptions_flag,
+                                                 option_source_e source) {
+  m_ti.m_text_descriptions_flag.set(text_descriptions_flag, source);
   if (m_track_entry)
-    GetChild<KaxFlagTextDescriptions>(m_track_entry).SetValue(text_descriptions_flag ? 1 : 0);
+    GetChild<KaxFlagTextDescriptions>(m_track_entry).SetValue(m_ti.m_text_descriptions_flag.get() ? 1 : 0);
 }
 
 void
-generic_packetizer_c::set_original_flag(bool original_flag) {
-  m_ti.m_original_flag = original_flag;
+generic_packetizer_c::set_original_flag(bool original_flag,
+                                        option_source_e source) {
+  m_ti.m_original_flag.set(original_flag, source);
   if (m_track_entry)
-    GetChild<KaxFlagOriginal>(m_track_entry).SetValue(original_flag ? 1 : 0);
+    GetChild<KaxFlagOriginal>(m_track_entry).SetValue(m_ti.m_original_flag.get() ? 1 : 0);
 }
 
 void
-generic_packetizer_c::set_commentary_flag(bool commentary_flag) {
-  m_ti.m_commentary_flag = commentary_flag;
+generic_packetizer_c::set_commentary_flag(bool commentary_flag,
+                                          option_source_e source) {
+  m_ti.m_commentary_flag.set(commentary_flag, source);
   if (m_track_entry)
-    GetChild<KaxFlagCommentary>(m_track_entry).SetValue(commentary_flag ? 1 : 0);
+    GetChild<KaxFlagCommentary>(m_track_entry).SetValue(m_ti.m_commentary_flag.get() ? 1 : 0);
 }
 
 void
