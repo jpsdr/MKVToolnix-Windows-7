@@ -796,11 +796,12 @@ track_c::parse_teletext_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
     }
 
     to_set_up->parse_iso639_language_from(buffer);
-    to_set_up->m_ttx_wanted_page = ttx_page;
 
-    to_set_up->type      = pid_type_e::subtitles;
-    to_set_up->codec     = codec_c::look_up(codec_c::type_e::S_SRT);
-    to_set_up->probed_ok = true;
+    to_set_up->m_ttx_wanted_page       = ttx_page;
+    to_set_up->type                    = pid_type_e::subtitles;
+    to_set_up->codec                   = codec_c::look_up(codec_c::type_e::S_SRT);
+    to_set_up->m_hearing_impaired_flag = ttx_type == 5;
+    to_set_up->probed_ok               = true;
 
     buffer += 5;
   }
@@ -1622,8 +1623,9 @@ reader_c::identify() {
       info.add_joined(mtx::id::pixel_dimensions, "x"s, track->v_width, track->v_height);
 
     else if (pid_type_e::subtitles == track->type) {
-      info.set(mtx::id::text_subtitles, track->codec.is(codec_c::type_e::S_SRT));
-      info.add(mtx::id::teletext_page,  track->m_ttx_wanted_page);
+      info.set(mtx::id::text_subtitles,        track->codec.is(codec_c::type_e::S_SRT));
+      info.add(mtx::id::teletext_page,         track->m_ttx_wanted_page);
+      info.add(mtx::id::flag_hearing_impaired, track->m_hearing_impaired_flag);
     }
 
     auto multiplexed_track_ids = std::vector<uint64_t>{};
@@ -2513,16 +2515,20 @@ reader_c::create_packetizer(int64_t id) {
   else if (track->codec.is(codec_c::type_e::S_DVBSUB))
     create_dvbsub_subtitles_packetizer(track);
 
-  if (-1 != track->ptzr) {
-    auto &packetizer                 = ptzr(track->ptzr);
-    m_ptzr_to_track_map[&packetizer] = track;
+  if (-1 == track->ptzr)
+    return;
 
-    m_files[track->m_file_num]->m_packetizers.push_back(&packetizer);
+  auto &packetizer                 = ptzr(track->ptzr);
+  m_ptzr_to_track_map[&packetizer] = track;
 
-    track->set_packetizer_source_id();
+  m_files[track->m_file_num]->m_packetizers.push_back(&packetizer);
 
-    show_packetizer_info(id, packetizer);
-  }
+  track->set_packetizer_source_id();
+
+  if (track->m_hearing_impaired_flag.has_value() &&track->m_hearing_impaired_flag.value())
+    packetizer.set_hearing_impaired_flag(true, option_source_e::container);
+
+  show_packetizer_info(id, packetizer);
 }
 
 void

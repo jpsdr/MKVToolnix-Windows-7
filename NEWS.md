@@ -24,6 +24,9 @@
   enable the "hearing impaired" flag for audio and subtitle tracks if the file
   name contains the word "cc" or "sdh" delimited by certain characters
   (configurable). This feature is turned on by default. Implements #3648.
+* mkvmerge: MPEG transport stream reader: teletext subtitles intended for
+  hearing impaired people (type 0x05) are now marked as such via the
+  appropriate flag in the track headers.
 
 ## Bug fixes
 
