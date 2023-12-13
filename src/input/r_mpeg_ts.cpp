@@ -737,29 +737,22 @@ track_c::parse_dts_pmt_descriptor(pmt_descriptor_t const &,
 }
 
 bool
-track_c::parse_srt_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
-                                  pmt_pid_info_t const &pmt_pid_info) {
+track_c::parse_teletext_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
+                                       pmt_pid_info_t const &pmt_pid_info) {
   if (pmt_pid_info.stream_type != stream_type_e::iso_13818_pes_private)
     return false;
 
   auto buffer      = reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1);
   auto num_entries = static_cast<unsigned int>(pmt_descriptor.length) / 5;
-  mxdebug_if(reader.m_debug_pat_pmt, fmt::format("parse_srt_pmt_descriptor: Teletext PMT descriptor, {0} entries\n", num_entries));
+  mxdebug_if(reader.m_debug_pat_pmt, fmt::format("parse_teletext_pmt_descriptor: Teletext PMT descriptor, {0} entries\n", num_entries));
   for (auto idx = 0u; idx < num_entries; ++idx) {
-    // Bits:
-    //  0–23: ISO 639 language code
-    // 24–28: teletext type
-    // 29-31: teletext magazine number
-    // 32-35: teletext page number (units)
-    // 36-39: teletext page number (tens)
+    // EN 300 468, 6.2.43 "Teletext descriptor":
 
-    // Teletext type is:
-    //   0: ?
-    //   1: teletext
-    //   2: teletext subtitles
-    //   3: teletext additional information
-    //   4: teletext program schedule
-    //   5: teletext subtitles: hearing impaired
+    // Bits:
+    //  24: ISO 639 language code
+    //   5: teletext type
+    //   3: teletext magazine number
+    //   8: teletext page number (4 bits: unit, 4 bits: tens)
 
     mtx::bits::reader_c r{buffer, 5};
 
@@ -774,6 +767,13 @@ track_c::parse_srt_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
                           idx, std::string(reinterpret_cast<char const *>(buffer), 3), ttx_type, ttx_magazine, ttx_page));
     }
 
+    // Table 94: teletext_type
+    //   0x00: reserved for future use
+    //   0x01: initial Teletext page
+    //   0x02: Teletext subtitles page
+    //   0x03: additional information page
+    //   0x04: program schedule page
+    //   0x05: Teletext subtitle page for hearing impaired people
     if (!mtx::included_in(ttx_type, 2u, 5u)) {
       buffer += 5;
       continue;
@@ -1775,7 +1775,7 @@ reader_c::parse_pmt_pid_info(mm_mem_io_c &mem,
         track->parse_iso639_language_from(pmt_descriptor + 1);
         break;
       case 0x56: // Teletext descriptor
-        track->parse_srt_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
+        track->parse_teletext_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);
         break;
       case 0x59: // Subtitles descriptor
         track->parse_subtitling_pmt_descriptor(*pmt_descriptor, *pmt_pid_info);

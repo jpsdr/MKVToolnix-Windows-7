@@ -301,6 +301,7 @@ public:
   std::optional<uint16_t> program_number, m_dovi_base_layer_pid;
   std::optional<int> m_ttx_wanted_page;
   std::optional<uint8_t> m_expected_next_continuity_counter;
+  std::optional<bool> m_hearing_impaired_flag;
   std::size_t pes_payload_size_to_read; // size of the current PID payload in bytes
   mtx::bytes::buffer_cptr pes_payload_read;    // buffer with the current PID payload
 
@@ -373,7 +374,7 @@ public:
   bool parse_dovi_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
   bool parse_dts_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
   bool parse_registration_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
-  bool parse_srt_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
+  bool parse_teletext_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
   bool parse_subtitling_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor, pmt_pid_info_t const &pmt_pid_info);
 
   bool has_packetizer() const;
