@@ -152,80 +152,80 @@ kax_track_t::handle_packetizer_display_dimensions() {
   // these and signal the packetizer not to extract the dimensions
   // from the bitstream.
   if ((0 != v_dwidth) && (0 != v_dheight))
-    ptzr_ptr->set_video_display_dimensions(v_dwidth, v_dheight, v_dunit.value_or(generic_packetizer_c::ddu_pixels), OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_display_dimensions(v_dwidth, v_dheight, v_dunit.value_or(generic_packetizer_c::ddu_pixels), option_source_e::container);
 }
 
 void
 kax_track_t::handle_packetizer_pixel_cropping() {
   if ((0 < v_pcleft) || (0 < v_pctop) || (0 < v_pcright) || (0 < v_pcbottom))
-    ptzr_ptr->set_video_pixel_cropping(v_pcleft, v_pctop, v_pcright, v_pcbottom, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_pixel_cropping(v_pcleft, v_pctop, v_pcright, v_pcbottom, option_source_e::container);
 }
 
 void
 kax_track_t::handle_packetizer_color() {
   if (v_color_matrix)
-    ptzr_ptr->set_video_color_matrix(*v_color_matrix, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_color_matrix(*v_color_matrix, option_source_e::container);
   if (v_bits_per_channel)
-    ptzr_ptr->set_video_bits_per_channel(*v_bits_per_channel, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_bits_per_channel(*v_bits_per_channel, option_source_e::container);
   if ((v_chroma_subsample.hori != -1) || (v_chroma_subsample.vert != -1))
-    ptzr_ptr->set_video_chroma_subsample(v_chroma_subsample, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_chroma_subsample(v_chroma_subsample, option_source_e::container);
   if ((v_cb_subsample.hori != -1) || (v_cb_subsample.vert != -1))
-    ptzr_ptr->set_video_cb_subsample(v_cb_subsample, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_cb_subsample(v_cb_subsample, option_source_e::container);
   if ((v_chroma_siting.hori != -1) || (v_chroma_siting.vert != -1))
-    ptzr_ptr->set_video_chroma_siting(v_chroma_siting, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_chroma_siting(v_chroma_siting, option_source_e::container);
   if (v_color_range)
-    ptzr_ptr->set_video_color_range(*v_color_range, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_color_range(*v_color_range, option_source_e::container);
   if (v_transfer_character)
-    ptzr_ptr->set_video_color_transfer_character(*v_transfer_character, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_color_transfer_character(*v_transfer_character, option_source_e::container);
   if (v_color_primaries)
-    ptzr_ptr->set_video_color_primaries(*v_color_primaries, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_color_primaries(*v_color_primaries, option_source_e::container);
   if (v_max_cll)
-    ptzr_ptr->set_video_max_cll(*v_max_cll, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_max_cll(*v_max_cll, option_source_e::container);
   if (v_max_fall)
-    ptzr_ptr->set_video_max_fall(*v_max_fall, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_max_fall(*v_max_fall, option_source_e::container);
   if (   (v_chroma_coordinates.red_x   != -1) || (v_chroma_coordinates.red_y   != -1)
       || (v_chroma_coordinates.green_x != -1) || (v_chroma_coordinates.green_y != -1)
       || (v_chroma_coordinates.blue_x  != -1) || (v_chroma_coordinates.blue_y  != -1)) {
-    ptzr_ptr->set_video_chroma_coordinates(v_chroma_coordinates, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_chroma_coordinates(v_chroma_coordinates, option_source_e::container);
   }
   if ((v_white_color_coordinates.x != -1) && (v_white_color_coordinates.y != -1))
-    ptzr_ptr->set_video_white_color_coordinates(v_white_color_coordinates, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_white_color_coordinates(v_white_color_coordinates, option_source_e::container);
   if (v_max_luminance)
-    ptzr_ptr->set_video_max_luminance(*v_max_luminance, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_max_luminance(*v_max_luminance, option_source_e::container);
   if (v_min_luminance)
-    ptzr_ptr->set_video_min_luminance(*v_min_luminance, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_min_luminance(*v_min_luminance, option_source_e::container);
 
   if (v_projection_type)
-    ptzr_ptr->set_video_projection_type(*v_projection_type, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_projection_type(*v_projection_type, option_source_e::container);
   if (v_projection_private)
-    ptzr_ptr->set_video_projection_private(v_projection_private, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_projection_private(v_projection_private, option_source_e::container);
   if (v_projection_pose_yaw)
-    ptzr_ptr->set_video_projection_pose_yaw(*v_projection_pose_yaw, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_projection_pose_yaw(*v_projection_pose_yaw, option_source_e::container);
   if (v_projection_pose_pitch)
-    ptzr_ptr->set_video_projection_pose_pitch(*v_projection_pose_pitch, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_projection_pose_pitch(*v_projection_pose_pitch, option_source_e::container);
   if (v_projection_pose_roll)
-    ptzr_ptr->set_video_projection_pose_roll(*v_projection_pose_roll, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_projection_pose_roll(*v_projection_pose_roll, option_source_e::container);
 
   if (codec_id == MKV_V_UNCOMPRESSED)
-    ptzr_ptr->set_video_color_space(v_color_space, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_color_space(v_color_space, option_source_e::container);
 }
 
 void
 kax_track_t::handle_packetizer_field_order() {
   if (v_field_order)
-    ptzr_ptr->set_video_field_order(*v_field_order, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_field_order(*v_field_order, option_source_e::container);
 }
 
 void
 kax_track_t::handle_packetizer_stereo_mode() {
   if (stereo_mode_c::unspecified != v_stereo_mode)
-    ptzr_ptr->set_video_stereo_mode(v_stereo_mode, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_stereo_mode(v_stereo_mode, option_source_e::container);
 }
 
 void
 kax_track_t::handle_packetizer_alpha_mode() {
   if (v_alpha_mode)
-    ptzr_ptr->set_video_alpha_mode(*v_alpha_mode, OPTION_SOURCE_CONTAINER);
+    ptzr_ptr->set_video_alpha_mode(*v_alpha_mode, option_source_e::container);
 }
 
 void
@@ -1835,7 +1835,7 @@ kax_reader_c::set_packetizer_headers(kax_track_t *t) {
     ptzr(t->ptzr).set_audio_bit_depth(t->a_bps);
 
   if (t->a_emphasis)
-    ptzr(t->ptzr).set_audio_emphasis(static_cast<audio_emphasis_c::mode_e>(*t->a_emphasis), OPTION_SOURCE_CONTAINER);
+    ptzr(t->ptzr).set_audio_emphasis(static_cast<audio_emphasis_c::mode_e>(*t->a_emphasis), option_source_e::container);
 
   t->handle_packetizer_block_addition_mapping();
 }

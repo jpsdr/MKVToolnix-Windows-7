@@ -234,7 +234,7 @@ avi_reader_c::create_video_packetizer() {
     create_standard_video_packetizer();
 
   if (m_video_display_width)
-    ptzr(m_vptzr).set_video_display_dimensions(m_video_display_width, m_video_display_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_CONTAINER);
+    ptzr(m_vptzr).set_video_display_dimensions(m_video_display_width, m_video_display_height, generic_packetizer_c::ddu_pixels, option_source_e::container);
 }
 
 void

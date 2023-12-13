@@ -64,10 +64,10 @@ vc1_video_packetizer_c::set_headers() {
       int display_width  = m_seqhdr.display_width;
       int display_height = m_seqhdr.display_height;
 
-      set_video_display_dimensions(display_width, display_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
+      set_video_display_dimensions(display_width, display_height, generic_packetizer_c::ddu_pixels, option_source_e::bitstream);
 
     } else
-      set_video_display_dimensions(m_seqhdr.pixel_width, m_seqhdr.pixel_height, generic_packetizer_c::ddu_pixels, OPTION_SOURCE_BITSTREAM);
+      set_video_display_dimensions(m_seqhdr.pixel_width, m_seqhdr.pixel_height, generic_packetizer_c::ddu_pixels, option_source_e::bitstream);
 
     if (m_default_duration_forced)
       m_parser.set_default_duration(get_track_default_duration());
