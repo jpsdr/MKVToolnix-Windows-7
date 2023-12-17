@@ -51,6 +51,7 @@
   MKVToolNix. This implies that the options to `configure` revolving around
   configuring Qt 5 or choosing between the two have been removed
   (e.g. `--disable-qt6`).
+* The bundled `fmt` library was updated to v10.1.1.
 
 
 # Version 81.0 "Milliontown" 2023-12-02
