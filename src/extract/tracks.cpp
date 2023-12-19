@@ -21,14 +21,8 @@
 #include <matroska/KaxBlock.h>
 #include <matroska/KaxBlockData.h>
 #include <matroska/KaxCluster.h>
-#include <matroska/KaxClusterData.h>
-#include <matroska/KaxInfo.h>
-#include <matroska/KaxInfoData.h>
 #include <matroska/KaxSegment.h>
 #include <matroska/KaxTracks.h>
-#include <matroska/KaxTrackEntryData.h>
-#include <matroska/KaxTrackAudio.h>
-#include <matroska/KaxTrackVideo.h>
 
 #include "common/command_line.h"
 #include "common/ebml.h"

@@ -13,8 +13,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxChapters.h>
-
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"
 #include "common/strings/utf8.h"

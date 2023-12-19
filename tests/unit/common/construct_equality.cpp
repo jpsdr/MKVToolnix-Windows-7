@@ -7,8 +7,6 @@
 #include "tests/unit/util.h"
 
 #include <matroska/KaxTracks.h>
-#include <matroska/KaxTrackEntryData.h>
-#include <matroska/KaxTrackVideo.h>
 
 namespace {
 

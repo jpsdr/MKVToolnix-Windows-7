@@ -4,8 +4,6 @@
 #include <QDropEvent>
 #include <QSaveFile>
 
-#include <matroska/KaxAttached.h>
-
 #include "common/ebml.h"
 #include "common/mime.h"
 #include "common/qt.h"

@@ -14,10 +14,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxChapters.h>
-#include <matroska/KaxTags.h>
-#include <matroska/KaxTracks.h>
-
 #include "common/file_types.h"
 #include "common/kax_analyzer.h"
 #include "common/mm_io.h"

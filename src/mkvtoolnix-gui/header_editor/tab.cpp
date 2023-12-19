@@ -7,9 +7,6 @@
 #include <QMenu>
 #include <QMessageBox>
 
-#include <matroska/KaxAttached.h>
-#include <matroska/KaxAttachments.h>
-#include <matroska/KaxInfoData.h>
 #include <matroska/KaxSemantic.h>
 
 #include "common/construct.h"

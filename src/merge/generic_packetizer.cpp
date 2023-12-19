@@ -17,12 +17,7 @@
 #include <cmath>
 #include <unordered_map>
 
-#include <matroska/KaxContentEncoding.h>
-#include <matroska/KaxTag.h>
 #include <matroska/KaxTracks.h>
-#include <matroska/KaxTrackEntryData.h>
-#include <matroska/KaxTrackAudio.h>
-#include <matroska/KaxTrackVideo.h>
 
 #include "common/compression.h"
 #include "common/container.h"

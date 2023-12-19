@@ -15,10 +15,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxChapters.h>
-#include <matroska/KaxTag.h>
-#include <matroska/KaxTags.h>
-
 #include "common/chapters/chapters.h"
 #include "common/chapters/physical.h"
 #include "common/ebml.h"

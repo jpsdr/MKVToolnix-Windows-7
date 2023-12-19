@@ -459,7 +459,7 @@ ebml_converter_c::verify_and_create_element(EbmlMaster &parent,
     throw invalid_child_node_x{ name, get_tag_name(parent), node.offset_debug() };
 
   auto semantic = find_ebml_semantic(EBML_INFO(KaxSegment), id);
-  if (semantic && EBML_SEM_UNIQUE(*semantic))
+  if (semantic && semantic->IsUnique())
     for (auto child : parent)
       if (EbmlId(*child) == id)
         throw duplicate_child_node_x{ name, get_tag_name(parent), node.offset_debug() };

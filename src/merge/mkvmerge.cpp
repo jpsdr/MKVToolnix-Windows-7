@@ -36,11 +36,10 @@
 
 #include <QRegularExpression>
 
-#include <matroska/KaxChapters.h>
-#include <matroska/KaxInfoData.h>
+#if LIBMATROSKA_VERSION < 0x020000
+# include <matroska/KaxInfoData.h>
+#endif
 #include <matroska/KaxSegment.h>
-#include <matroska/KaxTag.h>
-#include <matroska/KaxTags.h>
 
 #include "common/chapters/chapters.h"
 #include "common/checksums/base.h"

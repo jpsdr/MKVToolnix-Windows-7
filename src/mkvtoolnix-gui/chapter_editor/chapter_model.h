@@ -2,11 +2,11 @@
 
 #include "common/common_pch.h"
 
+#include <matroska/KaxSemantic.h>
+
 #include <QIcon>
 #include <QList>
 #include <QStandardItemModel>
-
-#include <matroska/KaxChapters.h>
 
 // class QAbstractItemView;
 

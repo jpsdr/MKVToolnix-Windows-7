@@ -15,8 +15,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxTags.h>
-
 #include "common/tags/tags.h"
 #include "common/xml/ebml_converter.h"
 

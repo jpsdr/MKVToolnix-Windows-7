@@ -21,12 +21,8 @@
 #include <ebml/EbmlVoid.h>
 #include <matroska/FileKax.h>
 
-#include <matroska/KaxChapters.h>
 #include <matroska/KaxCluster.h>
-#include <matroska/KaxClusterData.h>
 #include <matroska/KaxSegment.h>
-#include <matroska/KaxTag.h>
-#include <matroska/KaxTags.h>
 
 #include "common/chapters/chapters.h"
 #include "common/ebml.h"

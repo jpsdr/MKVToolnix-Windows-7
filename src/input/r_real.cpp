@@ -13,8 +13,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxTrackVideo.h>
-
 #include "common/bit_reader.h"
 #include "common/codec.h"
 #include "common/debugging.h"

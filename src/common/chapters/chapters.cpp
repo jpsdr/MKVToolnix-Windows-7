@@ -19,8 +19,6 @@
 
 #include <QRegularExpression>
 
-#include <matroska/KaxChapters.h>
-
 #include "common/bcp47.h"
 #include "common/chapters/chapters.h"
 #include "common/chapters/dvd.h"

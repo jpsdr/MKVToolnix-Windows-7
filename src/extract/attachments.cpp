@@ -21,8 +21,6 @@
 #include <ebml/EbmlVoid.h>
 #include <matroska/FileKax.h>
 
-#include <matroska/KaxAttached.h>
-#include <matroska/KaxAttachments.h>
 #include <matroska/KaxSegment.h>
 
 #include "common/ebml.h"

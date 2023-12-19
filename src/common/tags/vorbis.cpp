@@ -13,6 +13,7 @@
 
 #include "common/common_pch.h"
 
+#include <matroska/KaxSemantic.h>
 #include <QRegularExpression>
 
 #include "common/base64.h"
@@ -29,9 +30,6 @@
 #include "common/strings/parsing.h"
 #include "common/tags/target_type.h"
 #include "common/tags/vorbis.h"
-
-#include <matroska/KaxTags.h>
-#include <matroska/KaxTag.h>
 
 namespace mtx::tags {
 

@@ -12,8 +12,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxAttached.h>
-
 #include "propedit/target.h"
 #include "propedit/target_id_manager.h"
 

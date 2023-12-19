@@ -23,11 +23,7 @@
 #include <ebml/EbmlVoid.h>
 
 #include <matroska/KaxBlock.h>
-#include <matroska/KaxChapters.h>
 #include <matroska/KaxSegment.h>
-#include <matroska/KaxTags.h>
-#include <matroska/KaxTrackAudio.h>
-#include <matroska/KaxTrackVideo.h>
 
 #include "common/date_time.h"
 #include "common/ebml.h"

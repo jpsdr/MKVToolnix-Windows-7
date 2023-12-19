@@ -12,8 +12,6 @@
 
 #include <QRegularExpression>
 
-#include <matroska/KaxAttachments.h>
-
 #include "common/construct.h"
 #include "common/list_utils.h"
 #include "common/mime.h"

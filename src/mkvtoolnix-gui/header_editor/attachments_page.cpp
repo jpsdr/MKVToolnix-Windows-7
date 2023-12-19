@@ -3,8 +3,6 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 
-#include <matroska/KaxAttached.h>
-
 #include "common/qt.h"
 #include "mkvtoolnix-gui/forms/header_editor/attachments_page.h"
 #include "mkvtoolnix-gui/forms/header_editor/tab.h"
