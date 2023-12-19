@@ -1,7 +1,6 @@
 #include "common/common_pch.h"
 
-#include <matroska/KaxAttached.h>
-#include <matroska/KaxAttachments.h>
+#include <matroska/KaxSemantic.h>
 
 #include "common/construct.h"
 #include "common/strings/utf8.h"

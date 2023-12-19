@@ -10,10 +10,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxChapters.h>
-#include <matroska/KaxTag.h>
-#include <matroska/KaxTags.h>
-
 #include "propedit/chapter_target.h"
 #include "propedit/options.h"
 #include "propedit/segment_info_target.h"

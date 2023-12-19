@@ -2,10 +2,9 @@
 
 #include "common/common_pch.h"
 
+#include <matroska/KaxSemantic.h>
 #include <QList>
 #include <QStandardItemModel>
-
-#include <matroska/KaxChapters.h>
 
 #include "common/bcp47.h"
 

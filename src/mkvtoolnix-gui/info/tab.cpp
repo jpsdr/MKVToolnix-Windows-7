@@ -9,7 +9,6 @@
 
 #include <ebml/EbmlHead.h>
 #include <matroska/KaxSegment.h>
-#include <matroska/KaxInfo.h>
 
 #include "common/ebml.h"
 #include "common/kax_element_names.h"

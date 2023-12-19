@@ -60,6 +60,7 @@ using namespace std::string_literals;
 #include <ebml/EbmlElement.h>
 #include <ebml/EbmlMaster.h>
 #include <ebml/EbmlVersion.h>
+#include <matroska/KaxVersion.h>
 
 /* i18n stuff */
 #if defined(HAVE_LIBINTL_H)

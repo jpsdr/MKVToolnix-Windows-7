@@ -90,8 +90,6 @@ mtx_common_cleanup() {
     g_mm_stdio->close();
     g_mm_stdio = std::shared_ptr<mm_io_c>(new mm_stdio_c);
   }
-
-  matroska_done();
 }
 
 static std::vector<std::function<void()> > s_to_run_before_exit;
@@ -141,8 +139,6 @@ mtx_common_init(std::string const &program_name,
 #if defined(SYS_WINDOWS)
   fix_windows_errormode();
 #endif
-
-  matroska_init();
 
   mtx::hacks::init();
 

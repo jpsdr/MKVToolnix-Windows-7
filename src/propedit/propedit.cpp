@@ -10,9 +10,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxChapters.h>
-#include <matroska/KaxInfo.h>
-#include <matroska/KaxTags.h>
 #include <matroska/KaxTracks.h>
 
 #include "common/command_line.h"

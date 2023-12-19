@@ -15,7 +15,7 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxContentEncoding.h>
+#include <matroska/KaxSemantic.h>
 
 /* compression types */
 enum compression_method_e {

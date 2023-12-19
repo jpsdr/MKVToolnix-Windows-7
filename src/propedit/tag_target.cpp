@@ -11,9 +11,6 @@
 #include "common/common_pch.h"
 
 #include <matroska/KaxCluster.h>
-#include <matroska/KaxInfo.h>
-#include <matroska/KaxTag.h>
-#include <matroska/KaxTags.h>
 #include <matroska/KaxTracks.h>
 
 #include "common/content_decoder.h"

@@ -16,26 +16,17 @@
 #include <ebml/EbmlVoid.h>
 #include <ebml/EbmlCrc32.h>
 
-#include <matroska/KaxAttached.h>
-#include <matroska/KaxAttachments.h>
 #include <matroska/KaxBlock.h>
 #include <matroska/KaxBlockData.h>
-#include <matroska/KaxChapters.h>
 #include <matroska/KaxCluster.h>
-#include <matroska/KaxClusterData.h>
-#include <matroska/KaxContentEncoding.h>
 #include <matroska/KaxCues.h>
 #include <matroska/KaxCuesData.h>
-#include <matroska/KaxInfo.h>
-#include <matroska/KaxInfoData.h>
+#if LIBMATROSKA_VERSION < 0x020000
+# include <matroska/KaxInfoData.h>
+#endif
 #include <matroska/KaxSeekHead.h>
 #include <matroska/KaxSegment.h>
-#include <matroska/KaxTags.h>
-#include <matroska/KaxTag.h>
 #include <matroska/KaxTracks.h>
-#include <matroska/KaxTrackEntryData.h>
-#include <matroska/KaxTrackAudio.h>
-#include <matroska/KaxTrackVideo.h>
 #include <matroska/KaxVersion.h>
 
 #include "common/kax_element_names.h"

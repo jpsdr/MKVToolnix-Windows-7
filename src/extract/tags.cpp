@@ -21,8 +21,6 @@
 #include <ebml/EbmlVoid.h>
 #include <matroska/FileKax.h>
 
-#include <matroska/KaxTags.h>
-
 #include "common/ebml.h"
 #include "common/kax_analyzer.h"
 #include "common/mm_io.h"

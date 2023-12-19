@@ -23,8 +23,6 @@
 #include "common/tags/tags.h"
 #include "common/tags/target_type.h"
 
-#include <matroska/KaxTags.h>
-#include <matroska/KaxTag.h>
 
 using namespace libebml;
 using namespace libmatroska;

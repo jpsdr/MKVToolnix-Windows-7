@@ -10,12 +10,7 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxInfo.h>
-#include <matroska/KaxInfoData.h>
 #include <matroska/KaxTracks.h>
-#include <matroska/KaxTrackAudio.h>
-#include <matroska/KaxTrackEntryData.h>
-#include <matroska/KaxTrackVideo.h>
 
 #include "common/kax_analyzer.h"
 #include "common/output.h"

@@ -13,9 +13,6 @@
 #include "common/common_pch.h"
 
 #include <matroska/KaxTracks.h>
-#include <matroska/KaxTrackEntryData.h>
-#include <matroska/KaxTrackAudio.h>
-#include <matroska/KaxTrackVideo.h>
 
 #include "common/codec.h"
 #include "common/ebml.h"

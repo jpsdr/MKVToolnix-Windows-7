@@ -10,9 +10,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxInfo.h>
-#include <matroska/KaxInfoData.h>
-
 #include "common/output.h"
 #include "propedit/segment_info_target.h"
 

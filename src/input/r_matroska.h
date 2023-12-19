@@ -32,7 +32,6 @@
 
 #include <matroska/KaxBlock.h>
 #include <matroska/KaxCluster.h>
-#include <matroska/KaxContentEncoding.h>
 
 namespace mtx::id {
 class info_c;

@@ -20,7 +20,6 @@
 #include <ebml/EbmlVoid.h>
 
 #include <matroska/FileKax.h>
-#include <matroska/KaxChapters.h>
 
 #include "avilib.h"
 #include "common/chapters/chapters.h"

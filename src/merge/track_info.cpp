@@ -13,8 +13,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxTags.h>
-
 #include "common/ebml.h"
 #include "merge/generic_packetizer.h"
 #include "merge/track_info.h"

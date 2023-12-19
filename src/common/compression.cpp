@@ -13,7 +13,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxContentEncoding.h>
 #include <matroska/KaxTracks.h>
 
 #include "common/compression.h"

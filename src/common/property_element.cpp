@@ -21,12 +21,11 @@
 #include <ebml/EbmlString.h>
 #include <ebml/EbmlUInteger.h>
 #include <ebml/EbmlUnicodeString.h>
-#include <matroska/KaxInfo.h>
-#include <matroska/KaxInfoData.h>
+
+#if LIBMATROSKA_VERSION < 0x020000
+# include <matroska/KaxInfoData.h>
+#endif
 #include <matroska/KaxTracks.h>
-#include <matroska/KaxTrackAudio.h>
-#include <matroska/KaxTrackEntryData.h>
-#include <matroska/KaxTrackVideo.h>
 
 #include "common/common_pch.h"
 #include "common/ebml.h"

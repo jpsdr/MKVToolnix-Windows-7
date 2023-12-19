@@ -15,6 +15,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxInfo.h>
+#include <matroska/KaxSemantic.h>
 
 using kax_info_cptr = std::shared_ptr<libmatroska::KaxInfo>;

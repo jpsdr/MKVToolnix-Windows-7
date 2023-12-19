@@ -10,8 +10,6 @@
 
 #include "common/common_pch.h"
 
-#include <matroska/KaxChapters.h>
-
 #include "common/chapters/chapters.h"
 #include "common/kax_analyzer.h"
 #include "propedit/chapter_target.h"

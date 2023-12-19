@@ -23,7 +23,6 @@
 #include <matroska/KaxCuesData.h>
 #include <matroska/KaxSeekHead.h>
 #include <matroska/KaxSegment.h>
-#include <matroska/KaxTags.h>
 
 #include "common/bitvalue.h"
 #include "common/construct.h"
