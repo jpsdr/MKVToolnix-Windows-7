@@ -481,3 +481,4 @@ change_values(EbmlMaster &master,
 }
 
 bool found_in(libebml::EbmlElement &haystack, libebml::EbmlElement const *needle);
+void remove_dummy_elements(libebml::EbmlMaster &master);
