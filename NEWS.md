@@ -33,6 +33,10 @@
 * mkvmerge: MPEG transport stream reader: fixed a crash introduced in v81 that
   occurred when there was at least one PCM track that wasn't copied from the
   transport stream file. Fixes #3645.
+* mkvmerge: Matroska reader: when reading data from files damaged in a
+  specific way, mkvmerge ended up trying to write so-called `EbmlDummy`
+  elements to the output file, which caused the underlying `libebml` library
+  to abort. These types of broken elements are now filtered out.
 
 ## Build system changes
 

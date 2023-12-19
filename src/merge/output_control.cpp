@@ -1385,6 +1385,7 @@ prepare_tags_for_rendering() {
     mtx::tags::remove_elements_unsupported_by_webm(*s_kax_tags);
 
   fix_mandatory_elements(s_kax_tags.get());
+  remove_dummy_elements(*s_kax_tags);
   sort_ebml_master(s_kax_tags.get());
   if (!s_kax_tags->CheckMandatory())
     mxerror(fmt::format(Y("Some tag elements are missing (this error should not have occurred - another similar error should have occurred earlier). {0}\n"), BUGMSG));
@@ -1579,6 +1580,7 @@ render_chapters() {
 
   fix_mandatory_elements(s_chapters_in_this_file.get());
   mtx::chapters::fix_country_codes(*s_chapters_in_this_file);
+  remove_dummy_elements(*s_chapters_in_this_file);
 
   if (outputting_webm())
     mtx::chapters::remove_elements_unsupported_by_webm(*s_chapters_in_this_file);
@@ -1765,6 +1767,7 @@ finish_file(bool last_file,
     if (mtx::bcp47::language_c::is_disabled())
       remove_ietf_language_elements(*tags_here);
     remove_mandatory_elements_set_to_their_default(*tags_here);
+    remove_dummy_elements(*tags_here);
     tags_here->UpdateSize();
     g_doc_type_version_handler->render(*tags_here, *s_out, true);
 
