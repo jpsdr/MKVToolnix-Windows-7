@@ -546,6 +546,10 @@ PreferencesDialog::setupToolTips() {
                             "a playlist belongs to.")));
 
   Util::setToolTip(ui->sbMMinPlaylistDuration, QY("Only playlists whose duration are at least this long are considered and offered to the user for selection."));
+  Util::setToolTip(ui->cbMIgnorePlaylistsForMenus,
+                   Q("<p>%1 %2</p>")
+                   .arg(QY("Ignores playlists which are likely meant for menus."))
+                   .arg(QY("This is considered to be the case when a playlist contains the same item at least five times.")));
   Util::setToolTip(ui->cbMAddBlurayCovers, QY("If enabled, the largest cover image of a Blu-ray will be added as an attachment when adding a Blu-ray playlist."));
   Util::setToolTip(ui->cbMAttachmentAlwaysSkipForExistingName,
                    Q("<p>%1 %2 %3</p>")
@@ -775,6 +779,7 @@ PreferencesDialog::setupPlaylistScanningPolicy() {
 
   ui->cbMScanPlaylistsPolicy->setCurrentIndex(selected);
   ui->sbMMinPlaylistDuration->setValue(m_cfg.m_minimumPlaylistDuration);
+  ui->cbMIgnorePlaylistsForMenus->setChecked(m_cfg.m_ignorePlaylistsForMenus);
 
   adjustPlaylistControls();
 
@@ -1255,6 +1260,7 @@ PreferencesDialog::save() {
 
   m_cfg.m_scanForPlaylistsPolicy                              = static_cast<Util::Settings::ScanForPlaylistsPolicy>(ui->cbMScanPlaylistsPolicy->currentIndex());
   m_cfg.m_minimumPlaylistDuration                             = ui->sbMMinPlaylistDuration->value();
+  m_cfg.m_ignorePlaylistsForMenus                             = ui->cbMIgnorePlaylistsForMenus->isChecked();
   m_cfg.m_mergeAddBlurayCovers                                = ui->cbMAddBlurayCovers->isChecked();
   m_cfg.m_mergeAttachmentsAlwaysSkipForExistingName           = ui->cbMAttachmentAlwaysSkipForExistingName->isChecked();
 

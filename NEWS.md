@@ -27,6 +27,11 @@
 * mkvmerge: MPEG transport stream reader: teletext subtitles intended for
   hearing impaired people (type 0x05) are now marked as such via the
   appropriate flag in the track headers.
+* MKVToolNix GUI: multiplexer: when scanning for Blu-ray playlists the GUI
+  will now ignore playlists that are likely meant for menus. Currently the GUI
+  considers this to be the case when a playlist contains the same item at
+  least five times. This behavior can be turned off in the
+  preferences. Implements #3658.
 
 ## Bug fixes
 

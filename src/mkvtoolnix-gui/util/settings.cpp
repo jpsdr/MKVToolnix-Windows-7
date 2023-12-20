@@ -525,6 +525,7 @@ Settings::load() {
 
   m_scanForPlaylistsPolicy                    = static_cast<ScanForPlaylistsPolicy>(reg.value(s_valScanForPlaylistsPolicy,                     static_cast<int>(AskBeforeScanning)).toInt());
   m_minimumPlaylistDuration                   = reg.value(s_valMinimumPlaylistDuration,                                                        120).toUInt();
+  m_ignorePlaylistsForMenus                   = reg.value(s_valIgnorePlaylistsForMenus,                                                        true).toBool();
 
   m_setAudioDelayFromFileName                 = reg.value(s_valSetAudioDelayFromFileName,                                                      true).toBool();
   m_autoSetFileTitle                          = reg.value(s_valAutoSetFileTitle,                                                               true).toBool();
@@ -972,6 +973,7 @@ Settings::save()
 
   reg.setValue(s_valScanForPlaylistsPolicy,                    static_cast<int>(m_scanForPlaylistsPolicy));
   reg.setValue(s_valMinimumPlaylistDuration,                   m_minimumPlaylistDuration);
+  reg.setValue(s_valIgnorePlaylistsForMenus,                   m_ignorePlaylistsForMenus);
 
   reg.setValue(s_valSetAudioDelayFromFileName,                 m_setAudioDelayFromFileName);
   reg.setValue(s_valAutoSetFileTitle,                          m_autoSetFileTitle);

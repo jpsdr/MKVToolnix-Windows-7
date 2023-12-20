@@ -63,6 +63,7 @@ char const * const s_valHeaderEditorDroppedFilesPolicy                          
 char const * const s_valHexDumps                                                = "hexDumps";
 char const * const s_valHexPositions                                            = "hexPositions";
 char const * const s_valHiddenColumns                                           = "hiddenColumns";
+char const * const s_valIgnorePlaylistsForMenus                                 = "ignorePlaylistsForMenus";
 char const * const s_valJobRemovalOnExitPolicy                                  = "jobRemovalOnExitPolicy";
 char const * const s_valJobRemovalPolicy                                        = "jobRemovalPolicy";
 char const * const s_valLanguage                                                = "language";

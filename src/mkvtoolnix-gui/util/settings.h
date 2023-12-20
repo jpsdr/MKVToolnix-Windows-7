@@ -223,6 +223,7 @@ public:
 
   ScanForPlaylistsPolicy m_scanForPlaylistsPolicy;
   unsigned int m_minimumPlaylistDuration;
+  bool m_ignorePlaylistsForMenus;
 
   JobRemovalPolicy m_jobRemovalPolicy, m_jobRemovalOnExitPolicy;
   unsigned int m_maximumConcurrentJobs;
