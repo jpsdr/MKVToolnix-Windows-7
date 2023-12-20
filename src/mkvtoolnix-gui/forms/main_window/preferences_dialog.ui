@@ -2013,74 +2013,85 @@
           <property name="title">
            <string>Scanning playlists</string>
           </property>
-          <layout class="QGridLayout" name="gridLayout">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label">
+          <layout class="QVBoxLayout" name="verticalLayout_54">
+           <item>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>&amp;Scan directory for other playlists:</string>
+               </property>
+               <property name="buddy">
+                <cstring>cbMScanPlaylistsPolicy</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="cbMScanPlaylistsPolicy">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Always ask the user</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Always scan for other playlists</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Never scan for other playlists</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>&amp;Minimum playlist duration:</string>
+               </property>
+               <property name="buddy">
+                <cstring>sbMMinPlaylistDuration</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="mtx::gui::Util::BasicSpinBox" name="sbMMinPlaylistDuration">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="suffix">
+                <string notr="true"> seconds</string>
+               </property>
+               <property name="maximum">
+                <number>99999</number>
+               </property>
+               <property name="singleStep">
+                <number>10</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbMIgnorePlaylistsForMenus">
              <property name="text">
-              <string>&amp;Scan directory for other playlists:</string>
-             </property>
-             <property name="buddy">
-              <cstring>cbMScanPlaylistsPolicy</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="cbMScanPlaylistsPolicy">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>0</height>
-              </size>
-             </property>
-             <item>
-              <property name="text">
-               <string>Always ask the user</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Always scan for other playlists</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Never scan for other playlists</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>&amp;Minimum playlist duration:</string>
-             </property>
-             <property name="buddy">
-              <cstring>sbMMinPlaylistDuration</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="mtx::gui::Util::BasicSpinBox" name="sbMMinPlaylistDuration">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="suffix">
-              <string notr="true"> seconds</string>
-             </property>
-             <property name="maximum">
-              <number>99999</number>
-             </property>
-             <property name="singleStep">
-              <number>10</number>
+              <string>&amp;Ignore playlists meant for menus</string>
              </property>
             </widget>
            </item>
@@ -2828,6 +2839,7 @@
   <tabstop>cbMEnableMuxingForcedSubtitleTracks</tabstop>
   <tabstop>cbMScanPlaylistsPolicy</tabstop>
   <tabstop>sbMMinPlaylistDuration</tabstop>
+  <tabstop>cbMIgnorePlaylistsForMenus</tabstop>
   <tabstop>cbMAddBlurayCovers</tabstop>
   <tabstop>wIDefaultJobSettings</tabstop>
   <tabstop>cbHEDroppedFilesPolicy</tabstop>

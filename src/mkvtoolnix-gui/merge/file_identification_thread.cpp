@@ -250,13 +250,33 @@ FileIdentificationWorker::scanPlaylists(QFileInfoList const &files) {
   Q_EMIT playlistScanStarted(numFiles);
 
   QVector<SourceFilePtr> identifiedPlaylists;
-  auto minimumPlaylistDuration = timestamp_c::s(Util::Settings::get().m_minimumPlaylistDuration);
+  auto const &cfg              = Util::Settings::get();
+  auto minimumPlaylistDuration = timestamp_c::s(cfg.m_minimumPlaylistDuration);
+  auto useThisPlaylist         = [&minimumPlaylistDuration, &cfg](SourceFile const &file) -> bool {
+    if (timestamp_c::ns(file.m_playlistDuration) < minimumPlaylistDuration)
+      return false;
+
+    if (!cfg.m_ignorePlaylistsForMenus)
+      return true;
+
+    std::unordered_map<QString, unsigned int> occurrences;
+
+    for (auto const &playlistFile : file.m_playlistFiles) {
+      ++occurrences[playlistFile.fileName()];
+
+      if (occurrences[playlistFile.fileName()] >= 5)
+        return false;
+    }
+
+    return true;
+  };
 
   for (auto idx = 0; idx < numFiles; ++idx) {
     Util::FileIdentifier identifier{files[idx].filePath()};
     if (identifier.identify()) {
       auto file = identifier.file();
-      if (timestamp_c::ns(file->m_playlistDuration) >= minimumPlaylistDuration)
+
+      if (useThisPlaylist(*file))
         identifiedPlaylists << file;
 
     } else
