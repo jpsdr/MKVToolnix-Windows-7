@@ -322,9 +322,9 @@ msgid ""
 msgstr ""
 "  --color-matrix-coefficients <TID:n>\n"
 "                           Estableix els coeficients de la matriu del vídeo\n"
-"                           usada per a derivar els valors de luminància i de\n"
-"                           crominància dels colors primaris vermell, verd i\n"
-"                           blau.\n"
+"                           usada per a obtenir els valors de luminància i de\n"
+"                           crominància a partir dels colors primaris vermell,\n"
+"                           verd i blau.\n"
 
 #: src/merge/mkvmerge.cpp:341
 #, no-c-format
@@ -447,7 +447,7 @@ msgid ""
 "                           forces it not to be present if bool is 0.\n"
 msgstr ""
 "  --default-track-flag <TID[:booleà]>\n"
-"                           Estableix l'etiqueta «Pista per omissió» en aquesta pista\n"
+"                           Estableix l'etiqueta «Pista predeterminada» en aquesta pista\n"
 "                           o la força a no estar present si el booleà és 0.\n"
 
 #: src/merge/mkvmerge.cpp:413
@@ -538,7 +538,7 @@ msgstr ""
 "  --fix-bitstream-timing-information <TID[:booleà]>\n"
 "                           Ajusta la taxa de fotogrames/camps emmagatzemats\n"
 "                           al flux de bits del vídeo perquè coincideixin\n"
-"                           amb la durada per omissió de la pista.\n"
+"                           amb la durada predeterminada de la pista.\n"
 
 #: src/merge/mkvmerge.cpp:409
 #, no-c-format
@@ -580,7 +580,7 @@ msgid ""
 msgstr ""
 "  --generate-chapters-name-template <plantilla>\n"
 "                           Plantilla per als noms dels capítols generats\n"
-"                           (omissió: «Chapter <NUM:2>»).\n"
+"                           (predeterminat: «Chapter <NUM:2>»).\n"
 
 #: src/merge/mkvmerge.cpp:95
 #, no-c-format
@@ -769,7 +769,7 @@ msgstr ""
 "  --probe-range-percentage <percentatge>\n"
 "                           Defineix la mida màxima per a provar les pistes\n"
 "                           en el percentatge de la mida total del fitxer\n"
-"                           per a certs tipus de fitxers (per omissió: 0,3).\n"
+"                           per a certs tipus de fitxers (predeterminat: 0,3).\n"
 
 #: src/merge/mkvmerge.cpp:368
 #, no-c-format
@@ -1035,7 +1035,7 @@ msgid ""
 "                           tags for all tracks.\n"
 msgstr ""
 "  --track-tags <n, m...>    Copia les etiquetes per a les pistes «n», «m»,\n"
-"                           etc. Per omissió: copia les etiquetes per a totes\n"
+"                           etc. Predeterminat: copia les etiquetes per a totes\n"
 "                           les pistes.\n"
 
 #: src/merge/mkvmerge.cpp:403
@@ -1091,8 +1091,8 @@ msgid ""
 msgstr ""
 "  -F, --identification-format <format>\n"
 "                           Estableix el format dels resultats de la\n"
-"                           identificació. («text» o «json»; per omissió\n"
-"                           és  «json»).\n"
+"                           identificació. («text» o «json», el predeterminat\n"
+"                           és  «text»).\n"
 
 #: src/merge/mkvmerge.cpp:385
 #, no-c-format
@@ -1135,8 +1135,8 @@ msgid ""
 "                           audio tracks.\n"
 msgstr ""
 "  -a, --audio-tracks <n, m...>\n"
-"                           Copia les pistes d'àudio «n», «m», etc. Per\n"
-"                           omissió: es copien totes les pistes d'àudio.\n"
+"                           Copia les pistes d'àudio «n», «m», etc.\n"
+"                           Predeterminat: es copien totes les pistes d'àudio.\n"
 
 #: src/merge/mkvmerge.cpp:224
 #, no-c-format
@@ -1147,7 +1147,7 @@ msgid ""
 msgstr ""
 "  -b, --button-tracks <n, m...>\n"
 "                           Copia els botons de les pistes «n», «m», etc.\n"
-"                           Per omissió: es copien tots els botons de les\n"
+"                           Predeterminat: es copien tots els botons de les\n"
 "                           pistes.\n"
 
 #: src/merge/mkvmerge.cpp:216
@@ -1158,8 +1158,8 @@ msgid ""
 "                           video tracks.\n"
 msgstr ""
 "  -d, --video-tracks <n, m...>\n"
-"                           Copia les pistes de vídeo «n», «m», etc. Per\n"
-"                           omissió: es copien totes les pistes de vídeo.\n"
+"                           Copia les pistes de vídeo «n», «m», etc.\n"
+"                           Predeterminat: es copien totes les pistes de vídeo.\n"
 
 #: src/merge/mkvmerge.cpp:299
 #, no-c-format
@@ -1198,7 +1198,7 @@ msgstr ""
 "  -m, --attachments <n[:all|first],m[:all|first]...>\n"
 "                           Copia els adjunts amb els ID «n», «m», etc.,\n"
 "                           a tots o només el primer fitxer de destinació.\n"
-"                           Per omissió: es copien tots els adjunts als\n"
+"                           Predeterminat: es copien tots els adjunts als\n"
 "                           fitxers de destinació.\n"
 
 #: src/merge/mkvmerge.cpp:92
@@ -1224,7 +1224,7 @@ msgid ""
 msgstr ""
 "  -s, --subtitle-tracks <n, m...>\n"
 "                           Copia les pistes dels subtítols «n», «m», etc.\n"
-"                           Per omissió: es copien totes les pistes dels\n"
+"                           Predeterminat: es copien totes les pistes dels\n"
 "                           subtítols.\n"
 
 #: src/merge/mkvmerge.cpp:233
@@ -1525,14 +1525,14 @@ msgstr "Etiqueta «Comentari»:"
 #: src/common/property_element.cpp:137
 #, no-c-format
 msgid "\"Default track\" flag"
-msgstr "Etiqueta «Pista per omissió»"
+msgstr "Etiqueta «Pista predeterminada»"
 
 #: src/mkvtoolnix-gui/forms/header_editor/track_type_page.h:310
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2205
 #: src/mkvtoolnix-gui/header_editor/track_type_page.cpp:89
 #, no-c-format
 msgid "\"Default track\" flag:"
-msgstr "Etiqueta «Pista per omissió»:"
+msgstr "Etiqueta «Pista predeterminada»:"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:650
 #, no-c-format
@@ -2197,7 +2197,7 @@ msgstr "&Nombre d'entrades a tornar a numerar:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2315
 #, no-c-format
 msgid "&Only enable copying of tracks with specific languages by default"
-msgstr "Per omissió, permet n&omés la còpia de les pistes amb els idiomes especificats"
+msgstr "De manera predeterminada, permet n&omés la còpia de les pistes amb els idiomes especificats"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2224
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2226
@@ -2814,7 +2814,7 @@ msgstr "«{0}» no és un parell vàlid per a l'ID del fitxer i l'ID de la pista
 #: src/merge/mkvmerge.cpp:1596
 #, no-c-format, c++-format
 msgid "'{0}' is not a valid pair of track ID and default duration in '--default-duration {0}'.\n"
-msgstr "«{0}» no és un parell vàlid per a l'ID de la pista i durada per omissió a «--default-duration {0}».\n"
+msgstr "«{0}» no és un parell vàlid per a l'ID de la pista i durada predeterminada a «--default-duration {0}».\n"
 
 #: src/merge/mkvmerge.cpp:1665
 #, no-c-format, c++-format
@@ -3888,7 +3888,7 @@ msgstr "Mostra sempre els controls del fitxer de destinació per s&ota de les pe
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2343
 #, no-c-format
 msgid "Always use a &default description when adding a job to the queue"
-msgstr "Empra sempre una descripció per &omissió quan s'afegeixi una tasca a la cua de treball"
+msgstr "Empra sempre una descripció pre&determinada quan s'afegeixi una tasca a la cua de treball"
 
 #: src/mkvtoolnix-gui/main_window/prefs_run_program_widget.cpp:107
 #, no-c-format
@@ -4104,9 +4104,9 @@ msgid "Audio"
 msgstr "Àudio"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:522
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Audio and subtitle files often contain the words 'cc' or 'sdh' in their file name to signal that they're intended for hearing impaired people."
-msgstr "Els fitxers de subtítols sovint contenen la paraula «forced» en el nom del fitxer per a indicar que només estan destinats a «Força el mostrar» (p. ex., quan Elfish parla a «El Senyor dels Anells»)."
+msgstr "Els fitxers d'àudio i de subtítols sovint contenen les lletres «cc» o «sdh» al nom de fitxer per a indicar que estan destinats a persones amb discapacitat auditiva."
 
 #: src/common/property_element.cpp:215
 #, no-c-format
@@ -4384,7 +4384,7 @@ msgstr "Botons"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:362
 #, no-c-format
 msgid "By default it always asks the user which character set to use when opening a file for which it cannot be recognized automatically."
-msgstr "Per omissió, sempre es preguntarà a l'usuari quin joc de caràcters usar en obrir un fitxer per al qual no es pot reconèixer de forma automàtica."
+msgstr "De manera predeterminada, sempre es preguntarà a l'usuari quin joc de caràcters usar en obrir un fitxer per al qual no es pot reconèixer de forma automàtica."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:169
 #, no-c-format
@@ -4871,7 +4871,7 @@ msgstr "Comprova en línia si hi ha act&ualitzacions disponibles"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:400
 #, no-c-format
 msgid "Checking this option causes the GUI to set that compression to \"none\" by default for all track types when adding files."
-msgstr "Marcant aquesta opció provocareu que la IGU estableixi per omissió la compressió a «cap» per a tots els tipus de pista quan s'afegeixin fitxers."
+msgstr "Marcant aquesta opció provocareu que la IGU estableixi de manera predeterminada la compressió a «cap» per a tots els tipus de pista quan s'afegeixin fitxers."
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2245
 #, no-c-format
@@ -5139,7 +5139,7 @@ msgstr "Mida del contingut:"
 #: src/extract/extract_cli_parser.cpp:78
 #, no-c-format
 msgid "Convert text subtitles to this charset (default: UTF-8)."
-msgstr "Converteix els subtítols de text a aquest joc de caràcters (omissió: UTF-8)."
+msgstr "Converteix els subtítols de text a aquest joc de caràcters (predeterminat: UTF-8)."
 
 #: src/mkvtoolnix-gui/chapter_editor/tab.cpp:782
 #, no-c-format
@@ -5680,7 +5680,7 @@ msgstr "El fet de desactivar aquesta casella de selecció és una manera d'inhab
 #: src/mkvtoolnix-gui/chapter_editor/chapter_model.cpp:80
 #, no-c-format
 msgid "Default"
-msgstr "Omissió"
+msgstr "Predeterminat"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2216
 #, no-c-format
@@ -5690,23 +5690,23 @@ msgstr "&Mode predeterminat per a l'edició de l'idioma BCP 47 de l'IETF:"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2276
 #, no-c-format
 msgid "Default additional co&mmand line options:"
-msgstr "Opcions per omissió addicionals de la &línia d'ordres:"
+msgstr "Opcions predeterminades addicionals de la &línia d'ordres:"
 
 #: src/common/kax_element_names.cpp:207
 #: src/common/property_element.cpp:144
 #, no-c-format
 msgid "Default duration"
-msgstr "Durada per omissió"
+msgstr "Durada predeterminada"
 
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2222
 #, no-c-format
 msgid "Default duration/FPS:"
-msgstr "Durada/FPS per omissió:"
+msgstr "Durada o FPS predeterminats:"
 
 #: src/common/kax_element_names.cpp:331
 #, no-c-format
 msgid "Default language"
-msgstr "Idioma per omissió"
+msgstr "Idioma predeterminat"
 
 #: src/common/kax_element_names.cpp:332
 #, no-c-format
@@ -5716,23 +5716,23 @@ msgstr "Idioma predeterminat (element fals amb ID no vàlid)"
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2285
 #, no-c-format
 msgid "Default subtitle &charset to set:"
-msgstr "&Joc de caràcters a establir com per omissió per als subtítols:"
+msgstr "&Joc de caràcters a establir com a predeterminat per als subtítols:"
 
 #: src/mkvtoolnix-gui/header_editor/page_model.cpp:167
 #: src/mkvtoolnix-gui/merge/track_model.cpp:79
 #, no-c-format
 msgid "Default track"
-msgstr "Pista per omissió"
+msgstr "Pista predeterminada"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2288
 #, no-c-format
 msgid "Default track languages to set"
-msgstr "Idiomes a establir com per omissió per a les pistes"
+msgstr "Idiomes a establir com a predeterminats per a les pistes"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:265
 #, no-c-format
 msgid "Default values"
-msgstr "Valors per omissió"
+msgstr "Valors predeterminats"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2331
 #, no-c-format
@@ -5742,17 +5742,17 @@ msgstr "Valors predeterminats per a les tasques de desar la sortida de l'eina d'
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2338
 #, no-c-format
 msgid "Defaults for new chapter entries"
-msgstr "Per omissió per a les entrades de capítols nous"
+msgstr "De manera predeterminada per a les entrades de capítols nous"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2275
 #, no-c-format
 msgid "Defaults for new multiplex settings"
-msgstr "Per omissió per als ajustaments de multiplexat nous"
+msgstr "Predeterminat per als ajustaments de multiplexat nous"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2278
 #, no-c-format
 msgid "Defaults for newly added tracks"
-msgstr "Per omissió per a les pistes que s'afegeixin noves"
+msgstr "Predeterminat per a les pistes que s'afegeixin noves"
 
 #: src/common/kax_element_names.cpp:267
 #: src/mkvtoolnix-gui/merge/track_model.cpp:86
@@ -5814,37 +5814,37 @@ msgstr "Depenent del següent ajustament, aquest idioma també es podrà emprar 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:494
 #, no-c-format
 msgid "Depending on this setting the language can also be derived from the file name if the language in the source file is 'undetermined' ('und')."
-msgstr "Depenent d'aquest ajustament, l'idioma també podrà derivar del nom del fitxer si l'idioma al fitxer d'origen és «undetermined» («und»)."
+msgstr "Depenent d'aquest ajustament, l'idioma també podrà obtenir a partir del nom de fitxer si l'idioma al fitxer d'origen és «undetermined» («und»)."
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2287
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Derive \"&hearing impair\" flag for audio/subtitles from file names:"
-msgstr "Deriva l'e&tiqueta «Força el mostrar» per als subtítols dels noms de fitxer:"
+msgstr "Obtén l'etiqueta «discapacitat auditiva» per a àudio i subtítols a partir dels noms de fitxer:"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2286
 #, no-c-format
 msgid "Derive \"forced display\" fla&g for subtitles from file names:"
-msgstr "Deriva l'e&tiqueta «Força el mostrar» per als subtítols dels noms de fitxer:"
+msgstr "Obtén l'e&tiqueta «Força el mostrar» per als subtítols a partir dels noms de fitxer:"
 
 #: src/mkvtoolnix-gui/forms/chapter_editor/mass_modification_dialog.h:211
 #, no-c-format
 msgid "Derive &end timestamps from start timestamps"
-msgstr "Deriva &els codis de temps de final dels codis de temps d'inici"
+msgstr "Obtén &els codis de temps de final dels codis a partir dels temps d'inici"
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:601
 #, no-c-format
 msgid "Deriving the 'forced display' flag from file names is active & the file name matches the corresponding pattern."
-msgstr "La derivació de l'etiqueta «Força el mostrar» a partir dels noms de fitxer està activada i el nom de fitxer coincideix amb el patró corresponent."
+msgstr "L'obtenció de l'etiqueta «Força el mostrar» a partir dels noms de fitxer està activada i el nom de fitxer coincideix amb el patró corresponent."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:266
 #, no-c-format
 msgid "Deriving track languages"
-msgstr "Deriva el seguiment dels idiomes"
+msgstr "Obtén el seguiment dels idiomes"
 
 #: src/mkvtoolnix-gui/forms/main_window/preferences_dialog.h:2293
 #, no-c-format
 msgid "Deriving track languages from file names"
-msgstr "Deriva el seguiment dels idiomes dels noms de fitxers"
+msgstr "Obtén el seguiment dels idiomes a partir dels noms de fitxer"
 
 #: src/common/property_element.cpp:202
 #, no-c-format
@@ -7114,7 +7114,7 @@ msgstr "Força al lector de Matroska a usar l'empaquetatge genèric fins i tot p
 #: src/mkvtoolnix-gui/merge/input.cpp:591
 #, no-c-format
 msgid "Forces the default duration or number of frames per second for a track."
-msgstr "Força una durada per omissió o un nombre de fotogrames per segon per a una pista."
+msgstr "Força una durada predeterminada o un nombre de fotogrames per segon per a una pista."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:65
 #, no-c-format
@@ -7552,7 +7552,7 @@ msgstr "Si està inhabilitada, la IGU permetrà introduir una descripció per a 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:395
 #, no-c-format
 msgid "If enabled, all subtitle tracks will have their \"default track\" flag set to \"no\" when they're added."
-msgstr "Si està habilitada, totes les pistes de subtítols tindran l'etiqueta «Pista per omissió» establerta a «no» quan siguin afegides."
+msgstr "Si està habilitada, totes les pistes de subtítols tindran l'etiqueta «Pista predeterminada» establerta a «no» quan siguin afegides."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:296
 #, no-c-format
@@ -7587,7 +7587,7 @@ msgstr "Si està habilitada, aquests fitxers s'ometran sempre sense preguntar."
 #: src/common/hacks.cpp:70
 #, no-c-format
 msgid "If enabled, the BlockAddID element will be written even if it's set to its default value of 1."
-msgstr ""
+msgstr "Si se selecciona, l'element BlockAddID s'escriurà fins i tot si està establert al valor predeterminat d'1."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:332
 #, no-c-format
@@ -7746,7 +7746,7 @@ msgstr "Si s'usa el format OGM i el joc de caràcters del fitxer no és correcta
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:77
 #, no-c-format
 msgid "If the chapters were loaded from a Matroska file, the end timestamp for very last chapter on the top-most level will be derived from the file's duration."
-msgstr "Si els capítols s'han carregat des d'un fitxer Matroska, el codi de temps final per al darrer capítol del nivell superior es derivarà de la durada del fitxer."
+msgstr "Si els capítols s'han carregat des d'un fitxer Matroska, el codi de temps final per al darrer capítol del nivell superior s'obtindrà a partir de la durada del fitxer."
 
 #: src/mkvtoolnix-gui/merge/additional_command_line_options_dialog.cpp:70
 #, no-c-format
@@ -7761,17 +7761,17 @@ msgstr "Si posteriorment el nombre s'estableix amb «ms», llavors posarà almen
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:493
 #, no-c-format
 msgid "If the source file contains no such property for a subtitle track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr "Si el fitxer d'origen no conté aquesta propietat per a una pista de subtítols, llavors l'idioma podrà derivar del nom del fitxer si coincideix amb certs patrons (p. ex., «...[ger]...» per a l'alemany)."
+msgstr "Si el fitxer d'origen no conté aquesta propietat per a una pista de subtítols, llavors l'idioma podrà derivar a partir del nom de fitxer si coincideix amb certs patrons (p. ex., «...[ger]...» per a l'alemany)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:487
 #, no-c-format
 msgid "If the source file contains no such property for a video track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr "Si el fitxer d'origen no conté aquesta propietat per a una pista de vídeo, llavors l'idioma podrà derivar del nom del fitxer si coincideix amb certs patrons (p. ex., «...[ger]...» per a l'alemany)."
+msgstr "Si el fitxer d'origen no conté aquesta propietat per a una pista de vídeo, llavors l'idioma podrà obtenir a partir del nom de fitxer si coincideix amb certs patrons (p. ex., «...[ger]...» per a l'alemany)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:481
 #, no-c-format
 msgid "If the source file contains no such property for an audio track, then the language can be derived from the file name if it matches certain patterns (e.g. '…[ger]…' for German)."
-msgstr "Si el fitxer d'origen no conté aquesta propietat per a una pista d'àudio, llavors l'idioma podrà derivar del nom del fitxer si coincideix amb certs patrons (p. ex., «...[ger]...» per a l'alemany)."
+msgstr "Si el fitxer d'origen no conté aquesta propietat per a una pista d'àudio, llavors l'idioma podrà obtenir a partir del nom de fitxer si coincideix amb certs patrons (p. ex., «...[ger]...» per a l'alemany)."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:447
 #, no-c-format
@@ -8486,7 +8486,7 @@ msgstr "El paquet Kate és massa petit i s'està ometent.\n"
 #: src/extract/extract_cli_parser.cpp:80
 #, no-c-format
 msgid "Keep only the BlockAdditions up to this level (default: keep all levels)"
-msgstr "Mantenir només els «BlockAdditions» fins aquest nivell (omissió: mantenir tots els nivells)"
+msgstr "Mantenir només els «BlockAdditions» fins aquest nivell (predeterminat: mantenir tots els nivells)"
 
 #: src/mkvtoolnix-gui/info/element_highlighter.cpp:183
 #, no-c-format
@@ -9309,7 +9309,7 @@ msgstr "Encara no s'ha afegit cap acció."
 #: src/merge/output_control.cpp:1020
 #, no-c-format, c++-format
 msgid "No append mapping was given for the file no. {0} ('{1}'). A default mapping of {2} will be used instead. Please keep that in mind if mkvmerge aborts with an error message regarding invalid '--append-to' options.\n"
-msgstr "No s'ha donat cap assignació d'annexió per al fitxer núm. {0} («{1}»). En el seu lloc s'emparà una assignació d'annexió per omissió de {2}. Si us plau, tingueu-ho en compte per si el «mkvmerge» avorta amb un missatge d'error respecte a opcions no vàlides per a «--append-to».\n"
+msgstr "No s'ha donat cap assignació d'annexió per al fitxer núm. {0} («{1}»). En el seu lloc s'emparà una assignació d'annexió predeterminada de {2}. Si us plau, tingueu-ho en compte per si el «mkvmerge» s'interromp amb un missatge d'error respecte a opcions no vàlides per a «--append-to».\n"
 
 #: src/propedit/attachment_target.cpp:210
 #: src/propedit/attachment_target.cpp:221
@@ -9752,7 +9752,7 @@ msgstr "Només si l'origen no conté un idioma"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:582
 #, no-c-format
 msgid "Only items whose type is in the 'selected' list on the right will be set to be copied by default."
-msgstr "Només els elements en què el tipus es trobi a la llista «seleccionats» de la dreta, seran establerts per omissió per a copiar."
+msgstr "Només els elements en què el tipus es trobi a la llista «seleccionats» de la dreta, seran establerts de manera predeterminada per a copiar."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:631
 #, no-c-format
@@ -9827,7 +9827,7 @@ msgstr "Només al primer fitxer de sortida"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:593
 #, no-c-format
 msgid "Only tracks with a language in this list will be set to be copied by default."
-msgstr "Per omissió, només les pistes amb un idioma en aquesta llista seran establertes per a copiar."
+msgstr "De manera predeterminada, només les pistes amb un idioma en aquesta llista seran establertes per a copiar."
 
 #: src/input/r_vobsub.cpp:132
 #, no-c-format
@@ -9987,7 +9987,7 @@ msgstr "Altres parts del fitxer (p. ex., una pista de subtítols) poden referir-
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:574
 #, no-c-format
 msgid "Otherwise the destination file name is derived from the source file names."
-msgstr "Altrament, el nom del fitxer de destinació derivarà del/s nom/s del/s fitxer/s d'origen."
+msgstr "Altrament, el nom del fitxer de destinació s'obtindrà a partir dels noms dels fitxers d'origen."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:608
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:614
@@ -10138,7 +10138,7 @@ msgstr "Els reproductors només haurien de tenir en compte per a reproducció le
 #: src/mkvtoolnix-gui/merge/input.cpp:558
 #, no-c-format
 msgid "Players should prefer tracks with the default track flag set while taking into account user preferences such as the track's language."
-msgstr "Els reproductors haurien de preferir les pistes amb l'etiqueta establerta de pista per omissió tenint en compte les preferències de l'usuari, així com l'idioma de la pista."
+msgstr "Els reproductors haurien de preferir les pistes amb l'etiqueta establerta de pista predeterminada tenint en compte les preferències de l'usuari, així com l'idioma de la pista."
 
 #: src/mkvtoolnix-gui/forms/merge/select_playlist_dialog.h:324
 #, no-c-format
@@ -10844,7 +10844,7 @@ msgstr "Substitueix l'adjunt"
 #: src/mkvtoolnix-gui/header_editor/tab.cpp:388
 #, no-c-format
 msgid "Replace attachment with a new file and &derive name && MIME type from it"
-msgstr "Substitueix l'adjunt amb un nom de fitxer nou i o&btén el nom del tipus MIME"
+msgstr "Substitueix l'adjunt amb un nom de fitxer nou i o&btén el nom a partir del tipus MIME"
 
 #: src/mkvtoolnix-gui/util/language_dialog.cpp:178
 #, no-c-format
@@ -11053,12 +11053,12 @@ msgstr "Desa a un fitxer en &XML"
 #: src/mkvtoolnix-gui/forms/merge/additional_command_line_options_dialog.h:227
 #, no-c-format
 msgid "Save as &default for new multiplex jobs"
-msgstr "Desa com per &omissió per a les tasques de multiplexat noves"
+msgstr "Desa com a pre&determinat per a les tasques de multiplexat noves"
 
 #: src/mkvtoolnix-gui/forms/info/job_settings_dialog.h:75
 #, no-c-format
 msgid "Save as &default for saving output to text files"
-msgstr "Desa com per &omissió per a desar la sortida a fitxers de text"
+msgstr "Desa com a pre&determinat per a desar la sortida a fitxers de text"
 
 #: src/mkvtoolnix-gui/header_editor/attached_file_page.cpp:193
 #, no-c-format
@@ -11404,7 +11404,7 @@ msgstr "Estableix si S'HA d'emprar aquesta pista (àudio, vídeo o subtítols) s
 #: src/common/property_element.cpp:154
 #, no-c-format
 msgid "Set if the BlockAdditional element with BlockAddID of '1' contains alpha channel data."
-msgstr ""
+msgstr "Establiu-la si l'element BlockAdditional amb un BlockAddID d'«1» conté dades del canal alfa."
 
 #: src/common/property_element.cpp:138
 #, no-c-format
@@ -11459,7 +11459,7 @@ msgstr "Estableix la secció del fitxer Matroska perquè funcionin totes les acc
 #: src/propedit/propedit_cli_parser.cpp:244
 #, no-c-format
 msgid "Sets the Matroska parser mode to 'fast' (default) or 'full'"
-msgstr "Estableix el mode d'analitzar els Matroska a «ràpida» (omissió) o «completa»"
+msgstr "Estableix el mode d'analitzar els Matroska a «ràpida» (predeterminat) o «completa»"
 
 #: src/mkvtoolnix-gui/merge/input.cpp:619
 #, no-c-format
@@ -11474,7 +11474,7 @@ msgstr "Estableix l'algoritme de compressió sense pèrdues a usar per a aquesta
 #: src/common/property_element.cpp:172
 #, no-c-format
 msgid "Sets the matrix coefficients of the video used to derive luma and chroma values from red, green and blue color primaries."
-msgstr "Estableix els coeficients de la matriu del vídeo usat per a obtenir els valors de luminància i crominància a partir dels colors primaris vermell, verd i blau."
+msgstr "Estableix els coeficients de la matriu del vídeo usat per a obtenir els valors de la luminància i la crominància a partir dels colors primaris vermell, verd i blau."
 
 #: src/common/property_element.cpp:173
 #, no-c-format
@@ -12234,9 +12234,9 @@ msgid "The GUI can set the 'forced display' flag for such tracks if the file nam
 msgstr "La IGU pot establir l'etiqueta «Força el mostrar» per a aquestes pistes si el nom del fitxer coincideix amb aquesta expressió regular."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:523
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The GUI can set the 'hearing impaired' flag for such tracks if the file name matches this regular expression."
-msgstr "La IGU pot establir l'etiqueta «Força el mostrar» per a aquestes pistes si el nom del fitxer coincideix amb aquesta expressió regular."
+msgstr "La IGU pot establir l'etiqueta «discapacitat auditiva» per a aquestes pistes si el nom del fitxer coincideix amb aquesta expressió regular."
 
 #: src/mkvtoolnix-gui/merge/tool.cpp:949
 #: src/mkvtoolnix-gui/merge/tool.cpp:964
@@ -12609,22 +12609,22 @@ msgstr "El mode predeterminat és «fitxer» amb «pista» com a mode alternatiu
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:462
 #, no-c-format
 msgid "The default is to always add all the files to the current multiplex settings."
-msgstr "El valor per omissió és afegir sempre tots els fitxers als ajustaments de multiplexat actuals."
+msgstr "El valor predeterminat és afegir sempre tots els fitxers als ajustaments de multiplexat actuals."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:626
 #, no-c-format
 msgid "The default is to ask the user what to do with the dropped files."
-msgstr "El valor per omissió és demanar a l'usuari què fer amb els fitxers deixats anar."
+msgstr "El valor predeterminat és demanar a l'usuari què fer amb els fitxers deixats anar."
 
 #: src/input/r_usf.cpp:88
 #, no-c-format, c++-format
 msgid "The default language code '{0}' is not a valid ISO 639-2 language code and will be ignored.\n"
-msgstr "El codi «{0}» de l'idioma per omissió no és un codi d'idioma ISO 639-2 vàlid i serà ignorat.\n"
+msgstr "El codi «{0}» de l'idioma predeterminat no és un codi d'idioma ISO 639-2 vàlid i serà ignorat.\n"
 
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:54
 #, no-c-format
 msgid "The default mode is adding files for multiplexing."
-msgstr "El mode per omissió és afegir fitxers per al multiplexat."
+msgstr "El mode predeterminat és afegir fitxers per al multiplexat."
 
 #: src/merge/reader_detection_and_creation.cpp:423
 #: src/merge/reader_detection_and_creation.cpp:426
@@ -13103,7 +13103,7 @@ msgstr "El següent programa no s'ha pogut executar: %1"
 #: src/mkvtoolnix-gui/chapter_editor/tool.cpp:339
 #, no-c-format
 msgid "The format defaults to %H:%M:%S if none is given."
-msgstr "Si no s'indica, el format per omissió és %H:%M:%S."
+msgstr "Si no s'indica, el format predeterminat és %H:%M:%S."
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:67
 #: src/mkvtoolnix-gui/chapter_editor/mass_modification_dialog.cpp:67
@@ -13193,17 +13193,17 @@ msgstr "L'idioma de la pista perquè els reproductors puguin seleccionar-la i re
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:506
 #, no-c-format
 msgid "The language selected here is used for audio tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "L'idioma seleccionat aquí és usat per a aquelles pistes d'àudio on el seu fitxer d'origen no conté aquesta propietat i per a això l'idioma no s'ha derivat del nom del fitxer."
+msgstr "L'idioma seleccionat aquí és usat per a aquelles pistes d'àudio on el seu fitxer d'origen no conté aquesta propietat i per a això l'idioma no s'ha obtingut a partir del nom del fitxer."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:518
 #, no-c-format
 msgid "The language selected here is used for subtitle tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "L'idioma seleccionat aquí és usat per a aquelles pistes de subtítols on el seu fitxer d'origen no conté aquesta propietat i per a això l'idioma no s'ha derivat del nom del fitxer."
+msgstr "L'idioma seleccionat aquí és usat per a aquelles pistes de subtítols on el seu fitxer d'origen no conté aquesta propietat i per a això l'idioma no s'ha obtingut a partir del nom de fitxer."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:512
 #, no-c-format
 msgid "The language selected here is used for video tracks for which their source file contains no such property and for which the language has not been derived from the file name."
-msgstr "L'idioma seleccionat aquí és usat per a aquelles pistes de vídeo on el seu fitxer d'origen no conté aquesta propietat i per a això l'idioma no s'ha derivat del nom del fitxer."
+msgstr "L'idioma seleccionat aquí és usat per a aquelles pistes de vídeo on el seu fitxer d'origen no conté aquesta propietat i per a això l'idioma no s'ha obtingut a partir del nom de fitxer."
 
 #: src/mkvtoolnix-gui/merge/output.cpp:213
 #, no-c-format
@@ -13248,7 +13248,7 @@ msgstr "La línia {0} del fitxer del codi de temps «{1}» no conté un nombre d
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1491
 #, no-c-format
 msgid "The list of boundary characters for deriving the track language from file names must not be empty."
-msgstr "La llista de caràcters delimitadors per a derivar l'idioma de la pista a partir dels noms dels fitxers no ha d'estar buida."
+msgstr "La llista de caràcters delimitadors per a obtenir l'idioma de la pista a partir dels noms dels fitxers no ha d'estar buida."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1503
 #, no-c-format
@@ -13405,7 +13405,7 @@ msgstr "El fitxer d'opcions ha estat creat."
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:539
 #, no-c-format
 msgid "The options entered here are set for all new multiplex jobs by default."
-msgstr "Les opcions introduïdes aquí són establertes per omissió per a totes les tasques de multiplexat noves."
+msgstr "Les opcions introduïdes aquí són establertes de manera predeterminada per a totes les tasques de multiplexat noves."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:413
 #, no-c-format
@@ -13695,7 +13695,7 @@ msgstr "El fitxer del codi de temps «{0}» no s'ha pogut obrir per a lectura.\n
 #: src/merge/timestamp_factory.cpp:306
 #, no-c-format, c++-format
 msgid "The timestamp file '{0}' does not contain a valid 'Assume' line with the default number of frames per second.\n"
-msgstr "El fitxer del codi de temps «{0}» no conté una línia «Assume» vàlida amb el nombre de fotogrames per segon per omissió.\n"
+msgstr "El fitxer del codi de temps «{0}» no conté una línia «Assume» vàlida amb el nombre de fotogrames per segon predeterminat.\n"
 
 #: src/merge/timestamp_factory.cpp:341
 #, no-c-format, c++-format
@@ -13873,9 +13873,9 @@ msgid "The value for deriving the 'forced display' flag for subtitles from file 
 msgstr "El valor per a obtenir l'etiqueta «Força el mostrar» per als subtítols a partir dels noms de fitxer haurà de ser una expressió regular vàlida."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:1522
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "The value for deriving the 'hearing impaired' flag from file names must be a valid regular expression."
-msgstr "El valor per a obtenir l'etiqueta «Força el mostrar» per als subtítols a partir dels noms de fitxer haurà de ser una expressió regular vàlida."
+msgstr "El valor per a obtenir l'etiqueta «discapacitat auditiva» a partir dels noms de fitxer haurà de ser una expressió regular vàlida."
 
 #: src/mkvtoolnix-gui/merge/input.cpp:622
 #, no-c-format
@@ -14138,7 +14138,7 @@ msgstr "Això només es farà si ja existeix un fitxer anomenat com el nom del f
 #: src/mkvtoolnix-gui/gui_cli_parser.cpp:58
 #, no-c-format
 msgid "This is the default mode."
-msgstr "Aquest és el mode per omissió."
+msgstr "Aquest és el mode predeterminat."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:354
 #, no-c-format
@@ -14377,7 +14377,7 @@ msgstr "Codi de temps emprat en la decisió de dividir: {0}\n"
 #: src/mkvtoolnix-gui/forms/merge/tab.h:2219
 #, no-c-format
 msgid "Timestamps and default duration"
-msgstr "Codis de temps i durada per omissió"
+msgstr "Codis de temps i durada predeterminada"
 
 #: src/mkvtoolnix-gui/merge/output.cpp:284
 #, no-c-format
@@ -14406,7 +14406,7 @@ msgstr "Alterna l'etiqueta «&Comentari»"
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:108
 #, no-c-format
 msgid "Toggle \"&default track\" flag"
-msgstr "Alterna l'etiqueta «Pista &per omissió»"
+msgstr "Alterna l'etiqueta «Pista pre&determinada»"
 
 #: src/mkvtoolnix-gui/util/modify_tracks_submenu.cpp:109
 #, no-c-format
@@ -14589,7 +14589,7 @@ msgstr "La pista {0} amb l'ID del còdec «{1}» li manca l'element «privat del
 #: src/extract/xtr_avi.cpp:46
 #, no-c-format, c++-format
 msgid "Track {0} with the CodecID '{1}' is missing the \"default duration\" element and cannot be extracted.\n"
-msgstr "La pista {0} amb l'ID del còdec «{1}» li manca l'element «durada per omissió» i no es pot extreure.\n"
+msgstr "La pista {0} amb l'ID del còdec «{1}» li manca l'element «durada predeterminada» i no es pot extreure.\n"
 
 #: src/extract/xtr_textsubs.cpp:366
 #, no-c-format, c++-format
@@ -14630,7 +14630,7 @@ msgstr "Pistes"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:592
 #, no-c-format
 msgid "Tracks with a language in this list will be set not to be copied by default."
-msgstr "Per omissió, les pistes amb un idioma en aquesta llista no seran establertes per a copiar."
+msgstr "De manera predeterminada, les pistes amb un idioma en aquesta llista no seran establertes per a copiar."
 
 #: src/extract/xtr_base.cpp:125
 #, no-c-format
@@ -15042,9 +15042,9 @@ msgstr "Vídeo"
 
 #: src/common/kax_element_names.cpp:165
 #: src/common/property_element.cpp:154
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Video alpha mode"
-msgstr "Mode estèreo del vídeo"
+msgstr "Mode alfa de vídeo"
 
 #: src/common/property_element.cpp:165
 #, no-c-format
@@ -15492,7 +15492,7 @@ msgstr "En annexar: al començament es crearà un capítol i un cada vegada que 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:497
 #, no-c-format
 msgid "When deriving the track language from the file name, the file name is split into parts on the characters in this list."
-msgstr "Quan es deriva l'idioma de la pista a partir del nom del fitxer, el nom del fitxer es divideix en parts amb els caràcters en aquesta llista."
+msgstr "Quan s'obté l'idioma de la pista a partir del nom del fitxer, el nom del fitxer es dividirà en parts amb els caràcters en aquesta llista."
 
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:369
 #, no-c-format
@@ -15960,7 +15960,7 @@ msgstr "cuesheet [opcions] sortida.cue"
 #: src/common/kax_info.cpp:639
 #, no-c-format, c++-format
 msgid "default duration: {0:.3f}ms ({1:.3f} frames/fields per second for a video track)"
-msgstr "Durada per omissió: {0:.3f}ms ({1:.3f} fotogrames/camps per segon per a una pista de vídeo)"
+msgstr "Durada predeterminada: {0:.3f}ms ({1:.3f} fotogrames/camps per segon per a una pista de vídeo)"
 
 #: src/common/compression/zlib.cpp:75
 #, no-c-format, c++-format
@@ -16913,7 +16913,7 @@ msgstr "{0}número de pista {1}, {2} fotograma/es, codi de temps {3}"
 #: src/mkvtoolnix-gui/main_window/preferences_dialog.cpp:120
 #, no-c-format
 msgid "– No selection by default –"
-msgstr "– Per omissió sense seleccionar –"
+msgstr "– De manera predeterminada, sense seleccionar –"
 
 #: src/mkvtoolnix-gui/chapter_editor/generate_sub_chapters_parameters_dialog.cpp:52
 #, no-c-format
