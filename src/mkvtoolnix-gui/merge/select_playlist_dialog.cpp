@@ -197,6 +197,8 @@ SelectPlaylistDialog::SelectPlaylistDialog(QWidget *parent,
     ui->discLibrary->setDiscLibrary(*discLibrary);
 
   setupUi();
+
+  ui->scannedFiles->setCurrentItem(ui->scannedFiles->topLevelItem(0));
 }
 
 SelectPlaylistDialog::~SelectPlaylistDialog() {
