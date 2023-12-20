@@ -1,4 +1,4 @@
-# Version ?
+﻿# Version ?
 
 ## New features and enhancements
 
@@ -33,6 +33,24 @@
 * mkvmerge: MPEG transport stream reader: fixed a crash introduced in v81 that
   occurred when there was at least one PCM track that wasn't copied from the
   transport stream file. Fixes #3645.
+* mkvmerge: Matroska reader: when reading data from files damaged in a
+  specific way, mkvmerge ended up trying to write so-called `EbmlDummy`
+  elements to the output file, which caused the underlying `libebml` library
+  to abort. These types of broken elements are now filtered out.
+
+## Build system changes
+
+* Qt 6 detection: if detection fails, error messages from `qmake` can now be
+  found in `config.log`. See #3649.
+* Qt 6 detection: `configure` will only consider Qt 6.2.0 or newer, not 6.0.x
+  or 6.1.y anymore, due to the lack of support for the multimedia module.
+* Qt 6 detection: `configure` will now fail to detect Qt 6 if the 'multimedia'
+  module is not found by `qmake` (e.g. due to development packages not being
+  installed). See #3649.
+* Qt 5 is no longer supported. Qt 6 is now required for building
+  MKVToolNix. This implies that the options to `configure` revolving around
+  configuring Qt 5 or choosing between the two have been removed
+  (e.g. `--disable-qt6`).
 
 
 # Version 81.0 "Milliontown" 2023-12-02
