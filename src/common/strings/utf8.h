@@ -29,11 +29,6 @@ to_wide(std::wstring const &source) {
   return source;
 }
 
-inline std::wstring
-to_wide(::libebml::UTFstring const &source) {
-  return source.c_str();
-}
-
 inline ::libebml::UTFstring
 to_utfstring(std::wstring const &source) {
   return libebml::UTFstring{source};

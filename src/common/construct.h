@@ -89,7 +89,7 @@ cons_impl(libebml::EbmlMaster *master,
           Tvalue const &value) {
   if (!object)
     return;
-  master->PushElement(object->SetValue(to_wide(value).c_str()));
+  master->PushElement(object->SetValue(to_wide(value)));
 }
 
 template<typename Tobject,

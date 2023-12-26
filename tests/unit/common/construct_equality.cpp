@@ -117,10 +117,10 @@ TEST(ConstructAndEquality, AllTypes) {
 
   *dynamic_cast<EbmlString *>((*m1)[0])        = "Stuff";
   *dynamic_cast<EbmlString *>((*m1)[1])        = "Stuff";
-  *dynamic_cast<EbmlUnicodeString *>((*m1)[2]) = L"UniStuffAsWcharString";
-  *dynamic_cast<EbmlUnicodeString *>((*m1)[3]) = L"UniStuffAsStdWString";
-  *dynamic_cast<EbmlUnicodeString *>((*m1)[4]) = L"UniStuffAsStdString";
-  *dynamic_cast<EbmlUnicodeString *>((*m1)[5]) = L"UniStuffAsCharString";
+  *dynamic_cast<EbmlUnicodeString *>((*m1)[2]) = L"UniStuffAsWcharString"s;
+  *dynamic_cast<EbmlUnicodeString *>((*m1)[3]) = L"UniStuffAsStdWString"s;
+  *dynamic_cast<EbmlUnicodeString *>((*m1)[4]) = L"UniStuffAsStdString"s;
+  *dynamic_cast<EbmlUnicodeString *>((*m1)[5]) = L"UniStuffAsCharString"s;
   *dynamic_cast<EbmlUInteger *>((*m1)[6])      = 4254;
   *dynamic_cast<EbmlSInteger *>((*m1)[7])      = -22;
    dynamic_cast<EbmlDate *>((*m1)[8])->SetEpochDate(98273);
