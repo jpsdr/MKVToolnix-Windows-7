@@ -172,7 +172,7 @@ void
 convert_old(KaxTags &tags) {
   bool has_level_type = false;
   try {
-    find_simple("LEVEL_TYPE", tags);
+    find_simple("LEVEL_TYPE"s, tags);
     has_level_type = true;
   } catch (...) {
   }
