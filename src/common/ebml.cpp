@@ -35,6 +35,31 @@
 using namespace libebml;
 using namespace libmatroska;
 
+namespace {
+
+void
+remove_elements_recursively_if(libebml::EbmlMaster &master,
+                               std::function<bool(libebml::EbmlElement &child)> predicate) {
+  auto idx = 0u;
+
+  while (idx < master.ListSize()) {
+    auto child = master[idx];
+
+    if (predicate(*child)) {
+      delete child;
+      master.Remove(idx);
+      continue;
+    }
+
+    if (dynamic_cast<libebml::EbmlMaster *>(child))
+      remove_elements_recursively_if(*static_cast<libebml::EbmlMaster *>(child), predicate);
+
+    ++idx;
+  }
+}
+
+}
+
 EbmlElement *
 empty_ebml_master(EbmlElement *e) {
   EbmlMaster *m;
@@ -646,24 +671,11 @@ remove_master_from_parent_if_empty_or_only_defaults(EbmlMaster *parent,
 
 void
 remove_ietf_language_elements(libebml::EbmlMaster &master) {
-  auto idx = 0u;
-
-  while (idx < master.ListSize()) {
-    auto e = master[idx];
-
-    if (   dynamic_cast<KaxLanguageIETF *>(e)
-        || dynamic_cast<KaxChapLanguageIETF *>(e)
-        || dynamic_cast<KaxTagLanguageIETF *>(e)) {
-      delete e;
-      master.Remove(idx);
-      continue;
-    }
-
-    if (dynamic_cast<EbmlMaster *>(e))
-      remove_ietf_language_elements(*static_cast<EbmlMaster *>(e));
-
-    ++idx;
-  }
+  remove_elements_recursively_if(master, [](auto &child) {
+    return dynamic_cast<KaxLanguageIETF *>(&child)
+        || dynamic_cast<KaxChapLanguageIETF *>(&child)
+        || dynamic_cast<KaxTagLanguageIETF *>(&child);
+  });
 }
 
 void
@@ -781,20 +793,5 @@ found_in(EbmlElement &haystack,
 
 void
 remove_dummy_elements(libebml::EbmlMaster &master) {
-  auto idx = 0u;
-
-  while (idx < master.ListSize()) {
-    auto child = master[idx];
-
-    if (Is<libebml::EbmlDummy>(child)) {
-      delete child;
-      master.Remove(idx);
-      continue;
-    }
-
-    if (dynamic_cast<libebml::EbmlMaster *>(child))
-      remove_dummy_elements(*static_cast<libebml::EbmlMaster *>(child));
-
-    ++idx;
-  }
+  remove_elements_recursively_if(master, [](auto &child) { return Is<libebml::EbmlDummy>(child); });
 }
