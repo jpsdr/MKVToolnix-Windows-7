@@ -795,3 +795,12 @@ void
 remove_dummy_elements(libebml::EbmlMaster &master) {
   remove_elements_recursively_if(master, [](auto &child) { return Is<libebml::EbmlDummy>(child); });
 }
+
+void
+remove_unrenderable_elements(libebml::EbmlMaster &master,
+                             bool with_default) {
+  remove_elements_recursively_if(master, [with_default](auto &child) {
+    auto renderable = child.ValueIsSet() || (with_default && child.DefaultISset());
+    return !renderable;
+  });
+}

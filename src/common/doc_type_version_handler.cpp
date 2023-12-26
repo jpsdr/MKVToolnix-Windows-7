@@ -44,6 +44,9 @@ EbmlElement &
 doc_type_version_handler_c::render(EbmlElement &element,
                                    mm_io_c &file,
                                    bool with_default) {
+  if (dynamic_cast<libebml::EbmlMaster *>(&element))
+    remove_unrenderable_elements(static_cast<libebml::EbmlMaster &>(element), with_default);
+
   element.Render(file, with_default);
   return account(element, with_default);
 }
