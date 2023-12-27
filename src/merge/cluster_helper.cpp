@@ -590,7 +590,11 @@ cluster_helper_c::render() {
       m->cluster->set_min_timestamp(min_cl_timestamp - timestamp_offset);
       m->cluster->set_max_timestamp(max_cl_timestamp - timestamp_offset);
 
+#if LIBEBML_VERSION >= 0x020000
+      m->cluster->Render(*m->out, cues, std::bind(&cluster_helper_c::write_element_pred, this, std::placeholders::_1));
+#else
       m->cluster->Render(*m->out, cues);
+#endif
       g_doc_type_version_handler->account(*m->cluster);
       m->bytes_in_file += m->cluster->ElementSize();
 
@@ -862,5 +866,15 @@ cluster_helper_c::generate_one_chapter(timestamp_c const &timestamp) {
 
   add_chapter_atom(timestamp, name, m->chapter_generation_language);
 }
+
+#if LIBEBML_VERSION >= 0x020000
+bool
+cluster_helper_c::write_element_pred(libebml::EbmlElement const &elt) {
+  if (elt.GetClassId() == libmatroska::KaxBlockAddID::ClassId())
+    return m->always_write_block_add_ids || !elt.IsDefaultValue();
+
+  return libebml::EbmlElement::WriteSkipDefault(elt);
+}
+#endif
 
 std::unique_ptr<cluster_helper_c> g_cluster_helper;

@@ -95,6 +95,10 @@ private:
   void split(packet_cptr const &packet);
 
   bool add_to_cues_maybe(packet_cptr const &pack);
+
+#if LIBEBML_VERSION >= 0x020000
+  bool write_element_pred(libebml::EbmlElement const &elt);
+#endif
 };
 
 extern std::unique_ptr<cluster_helper_c> g_cluster_helper;

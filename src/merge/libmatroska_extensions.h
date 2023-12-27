@@ -56,7 +56,11 @@ public:
 #endif
   }
 
-  virtual filepos_t UpdateSize(bool bSaveDefault, bool bForceRender);
+#if LIBEBML_VERSION >= 0x020000
+  virtual filepos_t UpdateSize(ShouldWrite writeFilter = WriteSkipDefault, bool bForceRender = false) override;
+#else
+  virtual filepos_t UpdateSize(bool bSaveDefault, bool bForceRender) override;
+#endif
 };
 
 class kax_block_group_c: public libmatroska::KaxBlockGroup {
@@ -87,7 +91,11 @@ public:
   }
 
   filepos_t Render(libebml::IOCallback &output) {
+#if LIBEBML_VERSION >= 0x020000
+    return libebml::EbmlElement::Render(output, WriteAll, false, true);
+#else
     return libebml::EbmlElement::Render(output, true, false, true);
+#endif
   }
 };
 
@@ -99,10 +107,12 @@ public:
 
 class kax_block_add_id_c: public libmatroska::KaxBlockAddID {
 public:
-  kax_block_add_id_c(bool always_write)
+  kax_block_add_id_c([[maybe_unused]] bool always_write)
     : libmatroska::KaxBlockAddID{}
   {
+#if LIBEBML_VERSION < 0x020000
     if (always_write)
       ForceNoDefault();
+#endif
   }
 };

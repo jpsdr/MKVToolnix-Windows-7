@@ -537,12 +537,12 @@ Tab::doModifications() {
 
   if (m_eSegmentInfo) {
     fix_mandatory_elements(m_eSegmentInfo.get());
-    m_eSegmentInfo->UpdateSize(true, true);
+    m_eSegmentInfo->UpdateSize(render_should_write_arg(true), true);
   }
 
   if (m_eTracks) {
     fix_mandatory_elements(m_eTracks.get());
-    m_eTracks->UpdateSize(true, true);
+    m_eTracks->UpdateSize(render_should_write_arg(true), true);
   }
 }
 
