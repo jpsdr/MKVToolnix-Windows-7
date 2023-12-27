@@ -25,14 +25,23 @@ kax_reference_block_c::kax_reference_block_c():
 }
 
 filepos_t
-kax_reference_block_c::UpdateSize(bool bSaveDefault,
+kax_reference_block_c::UpdateSize(
+#if LIBEBML_VERSION >= 0x020000
+                                  ShouldWrite writeFilter,
+#else
+                                  bool bSaveDefault,
+#endif
                                   bool bForceRender) {
   if (!bTimecodeSet) {
     assert(-1 != m_value);
     SetValue((m_value - static_cast<int64_t>(ParentBlock->GlobalTimecode())) / static_cast<int64_t>(ParentBlock->GlobalTimecodeScale()));
   }
 
+#if LIBEBML_VERSION >= 0x020000
+  return EbmlSInteger::UpdateSize(writeFilter, bForceRender);
+#else
   return EbmlSInteger::UpdateSize(bSaveDefault, bForceRender);
+#endif
 }
 
 bool

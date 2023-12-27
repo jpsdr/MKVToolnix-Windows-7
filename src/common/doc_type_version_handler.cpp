@@ -47,7 +47,7 @@ doc_type_version_handler_c::render(EbmlElement &element,
   if (dynamic_cast<libebml::EbmlMaster *>(&element))
     remove_unrenderable_elements(static_cast<libebml::EbmlMaster &>(element), with_default);
 
-  element.Render(file, with_default);
+  element.Render(file, render_should_write_arg(with_default));
   return account(element, with_default);
 }
 
@@ -147,8 +147,8 @@ doc_type_version_handler_c::do_update_ebml_head(mm_io_c &file) {
       head->SetSizeLength(2);
     }
 
-    head->UpdateSize(true);
-    auto new_size = head->ElementSize(true);
+    head->UpdateSize(render_should_write_arg(true));
+    auto new_size = head->ElementSize(render_should_write_arg(true));
 
     mxdebug_if(p->debug, fmt::format("do_update_ebml_head:   old size {0} new size {1} position {2} size length {3}\n", old_size, new_size, head->GetElementPosition(), head->GetSizeLength()));
 
@@ -163,13 +163,13 @@ doc_type_version_handler_c::do_update_ebml_head(mm_io_c &file) {
       auto v = new EbmlVoid;
       v->SetSize(diff - 2);
       head->PushElement(*v);
-      new_size = head->UpdateSize(true);
+      new_size = head->UpdateSize(render_should_write_arg(true));
 
       mxdebug_if(p->debug, fmt::format("do_update_ebml_head:   diff > 1 case; new size now {0}\n", new_size));
     }
 
     file.setFilePointer(head->GetElementPosition());
-    head->Render(*stream, true);
+    head->Render(*stream, render_should_write_arg(true));
 
   } catch (mtx::mm_io::exception &) {
     return update_result_e::err_read_or_write_failure;

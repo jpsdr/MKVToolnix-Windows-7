@@ -483,3 +483,9 @@ change_values(EbmlMaster &master,
 }
 
 bool found_in(libebml::EbmlElement &haystack, libebml::EbmlElement const *needle);
+
+#if LIBEBML_VERSION >= 0x020000
+libebml::EbmlElement::ShouldWrite render_should_write_arg(bool with_default);
+#else
+bool render_should_write_arg(bool with_default);
+#endif

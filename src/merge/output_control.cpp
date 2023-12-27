@@ -492,7 +492,11 @@ render_ebml_head(mm_io_c *out) {
   GetChild<EDocTypeVersion    >(*s_head).SetValue(1);
   GetChild<EDocTypeReadVersion>(*s_head).SetValue(1);
 
+#if LIBEBML_VERSION >= 0x020000
+  s_head->Render(*out, render_should_write_arg(true));
+#else
   s_head->Render(*out, true);
+#endif
 }
 
 static void
@@ -707,9 +711,9 @@ render_headers(mm_io_c *out) {
     g_kax_sh_main->IndexThis(*s_kax_infos, *g_kax_segment);
 
     if (!g_packetizers.empty()) {
-      g_kax_tracks->UpdateSize(true);
-      uint64_t full_header_size = g_kax_tracks->ElementSize(true);
-      g_kax_tracks->UpdateSize(false);
+      g_kax_tracks->UpdateSize(render_should_write_arg(true));
+      uint64_t full_header_size = g_kax_tracks->ElementSize(render_should_write_arg(true));
+      g_kax_tracks->UpdateSize(render_should_write_arg(false));
 
       g_doc_type_version_handler->render(*g_kax_tracks, *out);
       g_kax_sh_main->IndexThis(*g_kax_tracks, *g_kax_segment);
@@ -717,7 +721,7 @@ render_headers(mm_io_c *out) {
       // Reserve some small amount of space for header changes by the
       // packetizers.
       s_void_after_track_headers = std::make_unique<EbmlVoid>();
-      s_void_after_track_headers->SetSize(1024 + full_header_size - g_kax_tracks->ElementSize(false));
+      s_void_after_track_headers->SetSize(1024 + full_header_size - g_kax_tracks->ElementSize(render_should_write_arg(false)));
       s_void_after_track_headers->Render(*out);
     }
 
@@ -774,7 +778,7 @@ relocate_written_data(uint64_t data_start_pos,
 
   mxdebug_if(s_debug_rerender_track_headers,
              fmt::format("[rerender] relocate_written_data: void pos {0} void size {1} = data_start_pos {2} s_out size {3} delta {4} to_relocate {5} rel_pos_from_end {6}\n",
-                         s_void_after_track_headers->GetElementPosition(), s_void_after_track_headers->ElementSize(true), data_start_pos, s_out->get_size(), delta, to_relocate, rel_pos_from_end));
+                         s_void_after_track_headers->GetElementPosition(), s_void_after_track_headers->ElementSize(render_should_write_arg(true)), data_start_pos, s_out->get_size(), delta, to_relocate, rel_pos_from_end));
 
   // Extend the file's size. Setting the file pointer to beyond the
   // end and starting to write from there won't work with most of the
@@ -878,18 +882,18 @@ shrink_void_and_rerender_track_headers(int64_t new_void_size) {
 */
 void
 rerender_track_headers() {
-  g_kax_tracks->UpdateSize(false);
+  g_kax_tracks->UpdateSize(render_should_write_arg(false));
 
   auto position_before    = s_out->getFilePointer();
   auto file_size_before   = s_out->get_size();
   auto new_tracks_end_pos = g_kax_tracks->GetElementPosition() + g_kax_tracks->ElementSize();
-  auto data_start_pos     = s_void_after_track_headers->GetElementPosition() + s_void_after_track_headers->ElementSize(true);
+  auto data_start_pos     = s_void_after_track_headers->GetElementPosition() + s_void_after_track_headers->ElementSize(render_should_write_arg(true));
   auto data_size          = file_size_before - data_start_pos;
   auto new_void_size      = data_start_pos >= (new_tracks_end_pos + 4) ? data_start_pos - new_tracks_end_pos : 1024;
 
   mxdebug_if(s_debug_rerender_track_headers,
              fmt::format("[rerender] track_headers: new_tracks_end_pos {0} data_start_pos {1} data_size {2} old void at {3} size {4} new_void_size {5}\n",
-                         new_tracks_end_pos, data_start_pos, data_size, s_void_after_track_headers->GetElementPosition(), s_void_after_track_headers->ElementSize(true), new_void_size));
+                         new_tracks_end_pos, data_start_pos, data_size, s_void_after_track_headers->GetElementPosition(), s_void_after_track_headers->ElementSize(render_should_write_arg(true)), new_void_size));
 
   if (data_size  && (new_tracks_end_pos >= (data_start_pos - 3))) {
     auto delta      = 1024 + new_tracks_end_pos - data_start_pos;
@@ -904,7 +908,7 @@ rerender_track_headers() {
   mxdebug_if(s_debug_rerender_track_headers,
              fmt::format("[rerender] track_headers:   position_before {0} file_size_before {1} (diff {2}) position_after {3} file_size_after {4} (diff {5}) void now at {6} size {7}\n",
                          position_before, file_size_before, file_size_before - position_before, s_out->getFilePointer(), s_out->get_size(), s_out->get_size() - s_out->getFilePointer(),
-                         s_void_after_track_headers->GetElementPosition(), s_void_after_track_headers->ElementSize(true)));
+                         s_void_after_track_headers->GetElementPosition(), s_void_after_track_headers->ElementSize(render_should_write_arg(true))));
 }
 
 /** \brief Render all attachments into the output file at the current position
@@ -1175,7 +1179,7 @@ calc_max_chapter_size() {
   if (g_kax_chapters) {
     mtx::chapters::unify_legacy_and_bcp47_languages_and_countries(*g_kax_chapters);
     fix_mandatory_elements(g_kax_chapters.get());
-    g_kax_chapters->UpdateSize(true);
+    g_kax_chapters->UpdateSize(render_should_write_arg(true));
     s_max_chapter_size += g_kax_chapters->ElementSize();
   }
 
@@ -1185,7 +1189,7 @@ calc_max_chapter_size() {
       continue;
 
     fix_mandatory_elements(chapters);
-    chapters->UpdateSize(true);
+    chapters->UpdateSize(render_should_write_arg(true));
     s_max_chapter_size += chapters->ElementSize();
   }
 }
@@ -1588,7 +1592,7 @@ render_chapters() {
   auto replaced = false;
   if (s_kax_chapters_void) {
     g_doc_type_version_handler->account(*s_chapters_in_this_file);
-    replaced = s_kax_chapters_void->ReplaceWith(*s_chapters_in_this_file, *s_out, true, true);
+    replaced = s_kax_chapters_void->ReplaceWith(*s_chapters_in_this_file, *s_out, true, render_should_write_arg(true));
   }
 
   if (!replaced) {
@@ -1689,7 +1693,7 @@ finish_file(bool last_file,
   // Otherwise remove an existing one (e.g. from file linking during
   // splitting).
 
-  s_kax_infos->UpdateSize(true);
+  s_kax_infos->UpdateSize(render_should_write_arg(true));
   int64_t info_size = s_kax_infos->ElementSize();
   int changed       = 0;
 
@@ -1710,7 +1714,7 @@ finish_file(bool last_file,
 
   if (0 != changed) {
     s_out->setFilePointer(s_kax_infos->GetElementPosition());
-    s_kax_infos->UpdateSize(true);
+    s_kax_infos->UpdateSize(render_should_write_arg(true));
     info_size -= s_kax_infos->ElementSize();
     g_doc_type_version_handler->render(*s_kax_infos, *s_out, true);
     if (2 == changed) {

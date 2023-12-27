@@ -804,3 +804,16 @@ remove_unrenderable_elements(libebml::EbmlMaster &master,
     return !renderable;
   });
 }
+
+#if LIBEBML_VERSION >= 0x020000
+libebml::EbmlElement::ShouldWrite
+render_should_write_arg(bool with_default) {
+  return with_default ? libebml::EbmlElement::WriteAll : libebml::EbmlElement::WriteSkipDefault;
+}
+
+#else
+bool
+render_should_write_arg(bool with_default) {
+  return with_default;
+}
+#endif

@@ -373,7 +373,7 @@ kax_analyzer_c::process_internal() {
     if (!l1 || (0 < upper_lvl_el))
       break;
 
-    m_data.push_back(kax_analyzer_data_c::create(EbmlId(*l1), l1->GetElementPosition(), l1->ElementSize(true), l1->IsFiniteSize()));
+    m_data.push_back(kax_analyzer_data_c::create(EbmlId(*l1), l1->GetElementPosition(), l1->ElementSize(render_should_write_arg(true)), l1->IsFiniteSize()));
 
     cluster_found   |= Is<KaxCluster>(l1);
     meta_seek_found |= Is<KaxSeekHead>(l1);
@@ -893,7 +893,7 @@ kax_analyzer_c::remove_from_meta_seeks(EbmlId id) {
     if (!seek_head)
       throw uer_error_unknown;
 
-    int64_t old_size = seek_head->ElementSize(true);
+    int64_t old_size = seek_head->ElementSize(render_should_write_arg(true));
 
     // Iterate over its children and delete the ones we're looking for.
     bool modified = false;
@@ -932,14 +932,14 @@ kax_analyzer_c::remove_from_meta_seeks(EbmlId id) {
 
     // First make sure the new element is smaller than the old one.
     // The following code cannot deal with the other case.
-    seek_head->UpdateSize(true);
-    int64_t new_size = seek_head->ElementSize(true);
+    seek_head->UpdateSize(render_should_write_arg(true));
+    int64_t new_size = seek_head->ElementSize(render_should_write_arg(true));
     if (new_size > old_size)
       throw uer_error_unknown;
 
     // Overwrite the element itself and update its internal record.
     m_file->setFilePointer(m_data[data_idx]->m_pos);
-    seek_head->Render(*m_file, true);
+    seek_head->Render(*m_file, render_should_write_arg(true));
     if (m_doc_type_version_handler)
       m_doc_type_version_handler->account(*seek_head, true);
 
@@ -1064,8 +1064,8 @@ void
 kax_analyzer_c::write_element(EbmlElement *e,
                               bool write_defaults,
                               placement_strategy_e strategy) {
-  e->UpdateSize(write_defaults, true);
-  int64_t element_size = e->ElementSize(write_defaults);
+  e->UpdateSize(render_should_write_arg(write_defaults), true);
+  int64_t element_size = e->ElementSize(render_should_write_arg(write_defaults));
 
   size_t data_idx;
   for (data_idx = (ps_anywhere == strategy ? 0 : m_data.size() - 1); m_data.size() > data_idx; ++data_idx) {
@@ -1079,13 +1079,13 @@ kax_analyzer_c::write_element(EbmlElement *e,
 
     // We've found our element. Overwrite it.
     m_file->setFilePointer(m_data[data_idx]->m_pos);
-    e->Render(*m_file, write_defaults, false, true);
+    e->Render(*m_file, render_should_write_arg(write_defaults), false, true);
     if (m_doc_type_version_handler)
       m_doc_type_version_handler->account(*e, write_defaults);
 
     // Update the internal records.
     m_data[data_idx]->m_id   = EbmlId(*e);
-    m_data[data_idx]->m_size = e->ElementSize(write_defaults);
+    m_data[data_idx]->m_size = e->ElementSize(render_should_write_arg(write_defaults));
 
     // Create a new void element after the element we've just written.
     handle_void_elements(data_idx);
@@ -1097,10 +1097,10 @@ kax_analyzer_c::write_element(EbmlElement *e,
   // We haven't found a suitable place. So store the element at the end of the file
   // and update the internal records.
   m_file->setFilePointer(0, seek_end);
-  e->Render(*m_file, write_defaults, false, true);
+  e->Render(*m_file, render_should_write_arg(write_defaults), false, true);
   if (m_doc_type_version_handler)
     m_doc_type_version_handler->account(*e, write_defaults);
-  m_data.push_back(kax_analyzer_data_c::create(EbmlId(*e), m_file->getFilePointer() - e->ElementSize(write_defaults), e->ElementSize(write_defaults)));
+  m_data.push_back(kax_analyzer_data_c::create(EbmlId(*e), m_file->getFilePointer() - e->ElementSize(render_should_write_arg(write_defaults)), e->ElementSize(render_should_write_arg(write_defaults))));
 
   // Adjust the segment's size.
   adjust_segment_size();
@@ -1153,7 +1153,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
   };
 
   new_seek_head->UpdateSize();
-  auto needed_size = static_cast<int64_t>(new_seek_head->ElementSize(true));
+  auto needed_size = static_cast<int64_t>(new_seek_head->ElementSize(render_should_write_arg(true)));
   auto first_time  = true;
 
   while (first_time) {
@@ -1178,7 +1178,7 @@ kax_analyzer_c::ensure_front_seek_head_links_to(unsigned int seek_head_idx) {
       // Got a place. Write the seek head, update the internal record &
       // write a new void element.
       m_file->setFilePointer(data.m_pos);
-      new_seek_head->Render(*m_file, true);
+      new_seek_head->Render(*m_file, render_should_write_arg(true));
       if (m_doc_type_version_handler)
         m_doc_type_version_handler->account(*new_seek_head, true);
 
@@ -1232,12 +1232,12 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
       first_seek_head_idx = data_idx;
 
     seek_head->IndexThis(*e, *m_segment.get());
-    seek_head->UpdateSize(true);
+    seek_head->UpdateSize(render_should_write_arg(true));
 
     // We can use this seek head if it is at the end of the file, or if there
     // is enough space behind it in form of void elements.
     auto is_at_end         = m_data.size() == (data_idx + 1);
-    auto have_enough_space = seek_head->ElementSize(true) <= available_space;
+    auto have_enough_space = seek_head->ElementSize(render_should_write_arg(true)) <= available_space;
     auto use_this          = is_at_end || have_enough_space;
 
     mxdebug_if(m_debug, fmt::format("  seek head idx {0} available_space {1} at end? {2} enough space? {3} use? {4}\n", data_idx, available_space, is_at_end, have_enough_space, use_this));
@@ -1247,12 +1247,12 @@ kax_analyzer_c::try_adding_to_existing_meta_seek(EbmlElement *e) {
 
     // Write the seek head.
     m_file->setFilePointer(m_data[data_idx]->m_pos);
-    seek_head->Render(*m_file, true);
+    seek_head->Render(*m_file, render_should_write_arg(true));
     if (m_doc_type_version_handler)
       m_doc_type_version_handler->account(*seek_head, true);
 
     // Update the internal record.
-    m_data[data_idx]->m_size = seek_head->ElementSize(true);
+    m_data[data_idx]->m_size = seek_head->ElementSize(render_should_write_arg(true));
 
     // If this seek head is located at the end of the file then we have
     // to adjust the segment size.
@@ -1290,16 +1290,16 @@ kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e
 
   // …index our element…
   seek_head->IndexThis(*e, *m_segment.get());
-  seek_head->UpdateSize(true);
+  seek_head->UpdateSize(render_should_write_arg(true));
 
   // …write the seek head at the end of the file…
   m_file->setFilePointer(0, seek_end);
-  seek_head->Render(*m_file, true);
+  seek_head->Render(*m_file, render_should_write_arg(true));
   if (m_doc_type_version_handler)
     m_doc_type_version_handler->account(*seek_head, true);
 
   // …and update the internal records.
-  m_data.push_back(kax_analyzer_data_c::create(EBML_ID(KaxSeekHead), seek_head->GetElementPosition(), seek_head->ElementSize(true)));
+  m_data.push_back(kax_analyzer_data_c::create(EBML_ID(KaxSeekHead), seek_head->GetElementPosition(), seek_head->ElementSize(render_should_write_arg(true))));
 
   // Update the segment size.
   adjust_segment_size();
@@ -1307,11 +1307,11 @@ kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e
   // Create a new seek head and write it to the file.
   std::shared_ptr<KaxSeekHead> forward_seek_head(new KaxSeekHead);
   forward_seek_head->IndexThis(*seek_head, *m_segment.get());
-  forward_seek_head->UpdateSize(true);
+  forward_seek_head->UpdateSize(render_should_write_arg(true));
 
-  auto size_diff = static_cast<int>(m_data[first_seek_head_idx]->m_size) - static_cast<int>(forward_seek_head->ElementSize(true));
+  auto size_diff = static_cast<int>(m_data[first_seek_head_idx]->m_size) - static_cast<int>(forward_seek_head->ElementSize(render_should_write_arg(true)));
 
-  mxdebug_if(m_debug, fmt::format("  trailing seek head written; segment size adjusted; forward seek head size {0} available(first seek head's size) {1} diff {2}\n", m_data[first_seek_head_idx]->m_size, forward_seek_head->ElementSize(true), size_diff));
+  mxdebug_if(m_debug, fmt::format("  trailing seek head written; segment size adjusted; forward seek head size {0} available(first seek head's size) {1} diff {2}\n", m_data[first_seek_head_idx]->m_size, forward_seek_head->ElementSize(render_should_write_arg(true)), size_diff));
 
   if (size_diff < 0) {
     mxdebug_if(m_debug, fmt::format("  not enough space! voiding existing entry & re-trying to create_new_meta_seek_at_start\n"));
@@ -1345,12 +1345,12 @@ kax_analyzer_c::move_seek_head_to_end_and_create_new_one_at_start(EbmlElement *e
   }
 
   m_file->setFilePointer(m_data[first_seek_head_idx]->m_pos);
-  forward_seek_head->Render(*m_file, true);
+  forward_seek_head->Render(*m_file, render_should_write_arg(true));
   if (m_doc_type_version_handler)
     m_doc_type_version_handler->account(*forward_seek_head, true);
 
   // Update the internal record to reflect that there's a new seek head.
-  m_data[first_seek_head_idx]->m_size = forward_seek_head->ElementSize(true);
+  m_data[first_seek_head_idx]->m_size = forward_seek_head->ElementSize(render_should_write_arg(true));
 
   mxdebug_if(m_debug, fmt::format("  about to handle void elements\n"));
 
@@ -1368,7 +1368,7 @@ kax_analyzer_c::create_new_meta_seek_at_start(EbmlElement *e) {
 
   auto new_seek_head = std::make_shared<KaxSeekHead>();
   new_seek_head->IndexThis(*e, *m_segment.get());
-  new_seek_head->UpdateSize(true);
+  new_seek_head->UpdateSize(render_should_write_arg(true));
 
   for (auto data_idx = 0u; m_data.size() > data_idx; ++data_idx) {
     auto &data = *m_data[data_idx];
@@ -1378,19 +1378,19 @@ kax_analyzer_c::create_new_meta_seek_at_start(EbmlElement *e) {
       continue;
 
     // Skip the element if it doesn't offer enough space for the seek head.
-    if (data.m_size < static_cast<int64_t>(new_seek_head->ElementSize(true)))
+    if (data.m_size < static_cast<int64_t>(new_seek_head->ElementSize(render_should_write_arg(true))))
       continue;
 
     mxdebug_if(m_debug, fmt::format("  spot at idx {0} size {1} file pos {2}\n", data_idx, data.m_size, data.m_pos));
 
     // We've found a suitable spot. Write the seek head.
     m_file->setFilePointer(data.m_pos);
-    new_seek_head->Render(*m_file, true);
+    new_seek_head->Render(*m_file, render_should_write_arg(true));
     if (m_doc_type_version_handler)
       m_doc_type_version_handler->account(*new_seek_head, true);
 
     // Adjust the internal records for the new seek head.
-    data.m_size = new_seek_head->ElementSize(true);
+    data.m_size = new_seek_head->ElementSize(render_should_write_arg(true));
     data.m_id   = EBML_ID(KaxSeekHead);
 
     // Write a void element after the newly written seek head in order to
