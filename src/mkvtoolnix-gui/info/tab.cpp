@@ -120,7 +120,7 @@ Tab::load(QString const &fileName) {
     auto &info         = p->m_model->info();
     p->m_fileName      = fileName;
     p->m_savedFileName = QDir::toNativeSeparators( Q("%1.txt").arg(fileInfo.absoluteFilePath().replace(QRegularExpression{Q("\\.[^.]*$")}, {})) );
-    p->m_file          = std::static_pointer_cast<mm_io_c>(std::make_shared<mm_read_buffer_io_c>(std::make_shared<mm_file_io_c>(to_utf8(fileName), MODE_READ)));
+    p->m_file          = std::static_pointer_cast<mm_io_c>(std::make_shared<mm_read_buffer_io_c>(std::make_shared<mm_file_io_c>(to_utf8(fileName), libebml::MODE_READ)));
 
     info.moveToThread(p->m_queueThread);
     info.set_source_file(p->m_file);

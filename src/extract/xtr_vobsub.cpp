@@ -233,7 +233,7 @@ xtr_vobsub_c::finish_file() {
 
     m_out.reset();
 
-    mm_write_buffer_io_c idx(std::make_shared<mm_file_io_c>(m_idx_file_name.string(), MODE_CREATE), 128 * 1024);
+    mm_write_buffer_io_c idx(std::make_shared<mm_file_io_c>(m_idx_file_name.string(), libebml::MODE_CREATE), 128 * 1024);
     mxinfo(fmt::format(Y("Writing the VobSub index file '{0}'.\n"), m_idx_file_name.string()));
 
     std::string header;

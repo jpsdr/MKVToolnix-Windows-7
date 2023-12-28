@@ -31,19 +31,19 @@ dump(EbmlElement *element,
 
   if (with_values) {
     if (dynamic_cast<EbmlUInteger *>(element))
-      value_str = fmt::to_string(uint64(*static_cast<EbmlUInteger *>(element)));
+      value_str = fmt::to_string(static_cast<EbmlUInteger *>(element)->GetValue());
 
     else if (dynamic_cast<EbmlSInteger *>(element))
-      value_str = fmt::to_string(int64(*static_cast<EbmlSInteger *>(element)));
+      value_str = fmt::to_string(static_cast<EbmlSInteger *>(element)->GetValue());
 
     else if (dynamic_cast<EbmlFloat *>(element))
-      value_str = fmt::to_string(double(*static_cast<EbmlFloat *>(element)));
+      value_str = fmt::to_string(static_cast<EbmlFloat *>(element)->GetValue());
 
     else if (dynamic_cast<EbmlUnicodeString *>(element))
-      value_str = UTFstring(*static_cast<EbmlUnicodeString *>(element)).GetUTF8();
+      value_str = static_cast<EbmlUnicodeString *>(element)->GetValueUTF8();
 
     else if (dynamic_cast<EbmlString *>(element))
-      value_str = std::string(*static_cast<EbmlString *>(element));
+      value_str = static_cast<EbmlString *>(element)->GetValue();
 
     else if (dynamic_cast<EbmlDate *>(element))
       value_str = fmt::to_string(static_cast<EbmlDate *>(element)->GetEpochDate());
@@ -137,12 +137,12 @@ ebml_equals_c::compare_impl(EbmlElement &a,
   EbmlBinary *b_a;
 
   if ((ui_a = dynamic_cast<EbmlUInteger *>(&a))) {
-    auto val_b = uint64(*dynamic_cast<EbmlUInteger *>(&b));
-    return uint64(*ui_a) == val_b ? true : set_error(fmt::format("UInteger values differ: {0} vs {1}", uint64(*ui_a), val_b), &a);
+    auto val_b = dynamic_cast<EbmlUInteger *>(&b)->GetValue();
+    return ui_a->GetValue() == val_b ? true : set_error(fmt::format("UInteger values differ: {0} vs {1}", ui_a->GetValue(), val_b), &a);
 
   } else if ((si_a = dynamic_cast<EbmlSInteger *>(&a))) {
-    auto val_b = int64(*dynamic_cast<EbmlSInteger *>(&b));
-    return int64(*si_a) == val_b ? true : set_error(fmt::format("SInteger values differ: {0} vs {1}", int64(*si_a), val_b), &a);
+    auto val_b = dynamic_cast<EbmlSInteger *>(&b)->GetValue();
+    return si_a->GetValue() == val_b ? true : set_error(fmt::format("SInteger values differ: {0} vs {1}", si_a->GetValue(), val_b), &a);
 
   } else if ((d_a = dynamic_cast<EbmlDate *>(&a))) {
     auto val_a = d_a->GetEpochDate();
@@ -150,16 +150,16 @@ ebml_equals_c::compare_impl(EbmlElement &a,
     return val_a == val_b ? true : set_error(fmt::format("Date values differ: {0} vs {1}", val_a, val_b), &a);
 
   } else if ((f_a = dynamic_cast<EbmlFloat *>(&a))) {
-    auto val_b = double(*dynamic_cast<EbmlFloat *>(&b));
-    return double(*f_a) == val_b ? true : set_error(fmt::format("Float values differ: {0} vs {1}", double(*f_a), val_b), &a);
+    auto val_b = dynamic_cast<EbmlFloat *>(&b)->GetValue();
+    return f_a->GetValue() == val_b ? true : set_error(fmt::format("Float values differ: {0} vs {1}", f_a->GetValue(), val_b), &a);
 
   } else if ((str_a = dynamic_cast<EbmlString *>(&a))) {
-    auto val_b = std::string(*dynamic_cast<EbmlString *>(&b));
-    return std::string(*str_a) == val_b ? true : set_error(fmt::format("String values differ: {0} vs {1}", std::string(*str_a), val_b), &a);
+    auto val_b = dynamic_cast<EbmlString *>(&b)->GetValue();
+    return str_a->GetValue() == val_b ? true : set_error(fmt::format("String values differ: {0} vs {1}", str_a->GetValue(), val_b), &a);
 
   } else if ((ustr_a = dynamic_cast<EbmlUnicodeString *>(&a))) {
-    auto val_a = UTFstring(*dynamic_cast<EbmlUnicodeString *>(&a)).GetUTF8();
-    auto val_b = UTFstring(*dynamic_cast<EbmlUnicodeString *>(&b)).GetUTF8();
+    auto val_a = dynamic_cast<EbmlUnicodeString *>(&a)->GetValueUTF8();
+    auto val_b = dynamic_cast<EbmlUnicodeString *>(&b)->GetValueUTF8();
     return val_a == val_b ? true : set_error(fmt::format("UnicodeString values differ: {0} vs {1}", val_a, val_b), &a);
 
   } else if ((b_a = dynamic_cast<EbmlBinary *>(&a))) {

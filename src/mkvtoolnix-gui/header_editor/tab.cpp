@@ -136,7 +136,7 @@ Tab::load() {
 
   try {
     ok = m_analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast)
-      .set_open_mode(MODE_READ)
+      .set_open_mode(libebml::MODE_READ)
       .set_throw_on_error(true)
       .process();
 

@@ -69,7 +69,7 @@ setup_help() {
 
 static framing_type_e
 detect_framing_type(std::string const &file_name) {
-  mm_file_io_c in{file_name, MODE_READ};
+  mm_file_io_c in{file_name, libebml::MODE_READ};
 
   auto marker_or_size = in.read_uint32_be();
 

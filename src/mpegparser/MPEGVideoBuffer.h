@@ -85,11 +85,11 @@ struct MPEG2PictureHeader {
 
 class MPEGChunk{
 private:
-  binary * data;
+  uint8_t * data;
   uint32_t size;
   uint8_t type;
 public:
-  MPEGChunk(binary* n_data, uint32_t n_size):
+  MPEGChunk(uint8_t* n_data, uint32_t n_size):
     data(n_data), size(n_size) {
 
     assert(data);
@@ -111,15 +111,15 @@ public:
     return size;
   }
 
-  binary & operator[](unsigned int i){
+  uint8_t & operator[](unsigned int i){
     return data[i];
   }
 
-  binary & at(unsigned int i) {
+  uint8_t & at(unsigned int i) {
     return data[i];
   }
 
-  inline binary * GetPointer(){
+  inline uint8_t * GetPointer(){
     return data;
   }
 };
@@ -160,5 +160,5 @@ public:
 
   void ForceFinal();  //prepares the remaining data as a chunk
   MPEGChunk * ReadChunk();
-  int32_t Feed(binary* data, uint32_t numBytes);
+  int32_t Feed(uint8_t* data, uint32_t numBytes);
 };

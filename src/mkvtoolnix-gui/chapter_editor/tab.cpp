@@ -386,7 +386,7 @@ Tab::loadFromMatroskaFile(QString const &fileName,
   auto p        = p_func();
   auto analyzer = std::make_unique<Util::KaxAnalyzer>(this, fileName);
 
-  if (!analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).set_open_mode(MODE_READ).process()) {
+  if (!analyzer->set_parse_mode(kax_analyzer_c::parse_mode_fast).set_open_mode(libebml::MODE_READ).process()) {
     auto text = Q("%1 %2")
       .arg(QY("The file you tried to open (%1) could not be read successfully.").arg(fileName))
       .arg(QY("Possible reasons are: the file is not a Matroska file; the file is write-protected; the file is locked by another process; you do not have permission to access the file."));
@@ -771,7 +771,7 @@ Tab::saveAsXmlImpl(bool requireNewFileName) {
 
     try {
       auto chapters = p->chapterModel->allChapters();
-      mm_file_io_c out{to_utf8(newFileName), MODE_CREATE};
+      mm_file_io_c out{to_utf8(newFileName), libebml::MODE_CREATE};
       mtx::xml::ebml_chapters_converter_c::write_xml(*chapters, out);
 
     } catch (mtx::mm_io::exception &) {

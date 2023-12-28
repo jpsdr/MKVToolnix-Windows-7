@@ -100,7 +100,7 @@ cons_impl(libebml::EbmlMaster *master,
           Tvalue const &value) {
   if (!object)
     return;
-  object->CopyBuffer(static_cast<binary *>(value->get_buffer()), value->get_size());
+  object->CopyBuffer(value->get_buffer(), value->get_size());
   master->PushElement(*object);
 }
 

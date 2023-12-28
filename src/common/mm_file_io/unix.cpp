@@ -29,7 +29,7 @@
 #endif
 
 mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
-                                           open_mode const p_mode)
+                                           libebml::open_mode const p_mode)
   : file_name{p_file_name}
   , mode{p_mode}
 {
@@ -40,23 +40,23 @@ mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
   const char *cmode;
 
   switch (mode) {
-    case MODE_READ:
+    case libebml::MODE_READ:
       cmode = "rb";
       break;
-    case MODE_WRITE:
+    case libebml::MODE_WRITE:
       cmode = "r+b";
       break;
-    case MODE_CREATE:
+    case libebml::MODE_CREATE:
       cmode = "w+b";
       break;
-    case MODE_SAFE:
+    case libebml::MODE_SAFE:
       cmode = "rb";
       break;
     default:
       throw mtx::invalid_parameter_x();
   }
 
-  if ((MODE_WRITE == mode) || (MODE_CREATE == mode))
+  if ((libebml::MODE_WRITE == mode) || (libebml::MODE_CREATE == mode))
     mm_file_io_c::prepare_path(file_name);
   std::string local_path = g_cc_local_utf8->native(file_name);
 
@@ -67,7 +67,7 @@ mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
   file = fopen(local_path.c_str(), cmode);
 
 #if defined(SYS_APPLE)
-  if (!file && (MODE_CREATE != mode)) {
+  if (!file && (libebml::MODE_CREATE != mode)) {
     // When reading files on macOS retry with names in NFC as they
     // might come from other sources, e.g. via NFS mounts from NFC
     // systems such as Linux.
@@ -124,7 +124,7 @@ mm_file_io_c::close() {
   auto p = p_func();
 
   if (p->file) {
-    if (mm_file_io_private_c::ms_flush_on_close && (p->mode != MODE_READ))
+    if (mm_file_io_private_c::ms_flush_on_close && (p->mode != libebml::MODE_READ))
       fflush(p->file);
 
     fclose(p->file);

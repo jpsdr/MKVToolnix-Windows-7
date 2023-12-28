@@ -2892,7 +2892,7 @@ reader_c::add_external_files_from_mpls(mm_mpls_multi_file_io_c &mpls_in) {
       continue;
 
     try {
-      auto in                           = std::make_shared<mm_file_io_c>(m2ts.string(), MODE_READ);
+      auto in                           = std::make_shared<mm_file_io_c>(m2ts.string(), libebml::MODE_READ);
       auto file                         = std::make_shared<file_t>(std::static_pointer_cast<mm_io_c>(in));
 
       file->m_timestamp_restriction_min = item.in_time;

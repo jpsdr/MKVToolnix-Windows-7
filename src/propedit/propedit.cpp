@@ -140,7 +140,7 @@ run(options_cptr &options) {
   try {
     ok = analyzer
       ->set_parse_mode(options->m_parse_mode)
-      .set_open_mode(MODE_READ)
+      .set_open_mode(libebml::MODE_READ)
       .set_throw_on_error(true)
       .set_doc_type_version_handler(g_doc_type_version_handler.get())
       .process();

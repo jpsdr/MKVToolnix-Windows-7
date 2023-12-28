@@ -117,13 +117,13 @@ kax_analyzer_c::reopen_file() {
 
   try {
     m_file = std::make_shared<mm_file_io_c>(m_file_name, m_open_mode);
-    if (MODE_READ == m_open_mode)
+    if (libebml::MODE_READ == m_open_mode)
       m_file = std::make_shared<mm_read_buffer_io_c>(m_file);
 
   } catch (mtx::mm_io::exception &) {
     m_file.reset();
 
-    throw MODE_READ == m_open_mode ? uer_error_opening_for_reading : uer_error_opening_for_writing;
+    throw libebml::MODE_READ == m_open_mode ? uer_error_opening_for_reading : uer_error_opening_for_writing;
   }
 
   m_stream = std::make_shared<EbmlStream>(*m_file);
@@ -131,11 +131,11 @@ kax_analyzer_c::reopen_file() {
 
 void
 kax_analyzer_c::reopen_file_for_writing() {
-  if (m_file && (MODE_WRITE == m_open_mode))
+  if (m_file && (libebml::MODE_WRITE == m_open_mode))
     return;
 
   m_file.reset();
-  m_open_mode = MODE_WRITE;
+  m_open_mode = libebml::MODE_WRITE;
 
   reopen_file();
 }
@@ -252,7 +252,7 @@ kax_analyzer_c::set_parse_mode(parse_mode_e parse_mode) {
 }
 
 kax_analyzer_c &
-kax_analyzer_c::set_open_mode(open_mode mode) {
+kax_analyzer_c::set_open_mode(libebml::open_mode mode) {
   m_open_mode = mode;
   return *this;
 }
@@ -1709,7 +1709,7 @@ kax_analyzer_c::read_segment_uid_from(std::string const &file_name) {
     auto analyzer = std::make_shared<kax_analyzer_c>(file_name);
     auto ok       = analyzer
       ->set_parse_mode(kax_analyzer_c::parse_mode_fast)
-      .set_open_mode(MODE_READ)
+      .set_open_mode(libebml::MODE_READ)
       .process();
 
     if (ok) {

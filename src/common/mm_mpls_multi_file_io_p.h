@@ -27,7 +27,7 @@ public:
   explicit mm_mpls_multi_file_io_private_c(std::vector<boost::filesystem::path> const &p_file_names,
                                            std::string const &p_display_file_name,
                                            mtx::bluray::mpls::parser_cptr const &p_mpls_parser)
-    : mm_file_io_private_c{p_file_names[0].string(), MODE_READ}
+    : mm_file_io_private_c{p_file_names[0].string(), libebml::MODE_READ}
     , files{p_file_names}
     , display_file_name{p_display_file_name}
     , mpls_parser{p_mpls_parser}

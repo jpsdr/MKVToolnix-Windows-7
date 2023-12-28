@@ -1566,7 +1566,7 @@ kax_reader_c::find_level1_elements_via_analyzer() {
     auto analyzer  = std::make_shared<kax_analyzer_c>(m_in);
     auto ok        = analyzer
       ->set_parse_mode(kax_analyzer_c::parse_mode_full)
-      .set_open_mode(MODE_READ)
+      .set_open_mode(libebml::MODE_READ)
       .set_parser_start_position(start_pos)
       .process();
 

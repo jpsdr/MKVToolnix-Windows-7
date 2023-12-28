@@ -28,9 +28,9 @@
 
 class CircBuffer {
 private:
-  binary *m_buf;
-  binary *read_ptr;
-  binary *write_ptr;
+  uint8_t *m_buf;
+  uint8_t *read_ptr;
+  uint8_t *write_ptr;
 
 
   inline uint32_t bytes_left() {
@@ -61,7 +61,7 @@ private:
     return (bytes_in_buf) >= numBytes;
   }
 
-  inline void move_pointer(binary** ptr, uint32_t numBytes){
+  inline void move_pointer(uint8_t** ptr, uint32_t numBytes){
     *ptr += numBytes;
     if(((m_buf + buf_capacity) - *ptr) == 0){
       *ptr = m_buf;
@@ -77,19 +77,19 @@ public:
   CircBuffer(uint32_t size);
   ~CircBuffer();
 
-  const binary* GetReadPtr(){
+  const uint8_t* GetReadPtr(){
     return read_ptr;
   }
 
-  const binary* GetWritePtr(){
+  const uint8_t* GetWritePtr(){
     return read_ptr;
   }
 
-  const binary* GetBufPtr(){
+  const uint8_t* GetBufPtr(){
     return read_ptr;
   }
 
-  binary& operator[](unsigned int i){
+  uint8_t& operator[](unsigned int i){
     if(i > bytes_in_buf){
       return read_ptr[0];
     }
@@ -100,9 +100,9 @@ public:
       return m_buf[i - bbw];
   }
 
-  int32_t Read(binary* dest, uint32_t numBytes);
+  int32_t Read(uint8_t* dest, uint32_t numBytes);
   int32_t Skip(uint32_t numBytes);
-  int32_t Write(binary* data, uint32_t numBytes);
+  int32_t Write(uint8_t* data, uint32_t numBytes);
 
   uint32_t GetLength(){
     return bytes_in_buf;

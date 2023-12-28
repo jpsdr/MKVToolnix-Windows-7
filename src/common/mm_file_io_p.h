@@ -24,7 +24,7 @@ class mm_file_io_c;
 class mm_file_io_private_c : public mm_io_private_c {
 public:
   std::string file_name;
-  open_mode mode{MODE_READ};
+  libebml::open_mode mode{libebml::MODE_READ};
 
 #if defined(SYS_WINDOWS)
   bool eof{};
@@ -33,7 +33,7 @@ public:
   FILE *file{};
 #endif
 
-  explicit mm_file_io_private_c(std::string const &p_file_name, open_mode const p_mode);
+  explicit mm_file_io_private_c(std::string const &p_file_name, libebml::open_mode const p_mode);
 
 public:
   static bool ms_flush_on_close;

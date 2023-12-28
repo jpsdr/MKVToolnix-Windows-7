@@ -27,11 +27,11 @@
 
 constexpr auto BUFF_SIZE = 2 * 1024 * 1024;
 
-MPEGFrame::MPEGFrame(binary *n_data, uint32_t n_size, bool n_bCopy):
+MPEGFrame::MPEGFrame(uint8_t *n_data, uint32_t n_size, bool n_bCopy):
   size(n_size), bCopy(n_bCopy) {
 
   if(bCopy) {
-    data = (binary *)safemalloc(size);
+    data = (uint8_t *)safemalloc(size);
     memcpy(data, n_data, size);
   } else {
     data = n_data;
@@ -61,7 +61,7 @@ void M2VParser::SetEOS(){
 }
 
 
-int32_t M2VParser::WriteData(binary* data, uint32_t dataSize){
+int32_t M2VParser::WriteData(uint8_t* data, uint32_t dataSize){
   //If we are at EOS
   if(m_eos)
     return -1;
@@ -136,13 +136,13 @@ int32_t M2VParser::InitParser(){
     chunk = chunks[i];
     if(chunk->GetType() == MPEG_VIDEO_SEQUENCE_START_CODE){
       //Copy the header for later, we must copy because the actual chunk will be deleted in a bit
-      binary * hdrData = new binary[chunk->GetSize()];
+      uint8_t * hdrData = new uint8_t[chunk->GetSize()];
       memcpy(hdrData, chunk->GetPointer(), chunk->GetSize());
       seqHdrChunk = new MPEGChunk(hdrData, chunk->GetSize()); //Save this for adding as private data...
       ParseSequenceHeader(chunk, m_seqHdr);
 
       //Look for sequence extension to identify mpeg2
-      binary* pData = chunk->GetPointer();
+      uint8_t* pData = chunk->GetPointer();
       for (int j = 3, chunkSize = chunk->GetSize() - 4; j < chunkSize; j++){
         if(pData[j] == 0x00 && pData[j+1] == 0x00 && pData[j+2] == 0x01 && pData[j+3] == 0xb5 && ((pData[j+4] & 0xF0) == 0x10)){
           mpegVersion = 2;
@@ -268,7 +268,7 @@ M2VParser::TimestampWaitingFrames() {
 int32_t M2VParser::PrepareFrame(MPEGChunk* chunk, MediaTime timestamp, MPEG2PictureHeader picHdr, MPEGChunk* secondField){
   MPEGFrame* outBuf;
   bool bCopy = true;
-  binary* pData = chunk->GetPointer();
+  uint8_t* pData = chunk->GetPointer();
   uint32_t dataLen = chunk->GetSize();
 
   if ((seqHdrChunk && keepSeqHdrsInBitstream &&
@@ -279,7 +279,7 @@ int32_t M2VParser::PrepareFrame(MPEGChunk* chunk, MediaTime timestamp, MPEG2Pict
       (secondField ? secondField->GetSize() : 0) +
       (seqHdrChunk && keepSeqHdrsInBitstream && (MPEG2_I_FRAME == picHdr.frameType) ? seqHdrChunk->GetSize() : 0) +
       (gopChunk ? gopChunk->GetSize() : 0);
-    pData = (binary *)safemalloc(dataLen);
+    pData = (uint8_t *)safemalloc(dataLen);
     if (seqHdrChunk && keepSeqHdrsInBitstream &&
         (MPEG2_I_FRAME == picHdr.frameType)) {
       memcpy(pData, seqHdrChunk->GetPointer(), seqHdrChunk->GetSize());
@@ -304,7 +304,7 @@ int32_t M2VParser::PrepareFrame(MPEGChunk* chunk, MediaTime timestamp, MPEG2Pict
 
   if (seqHdrChunk && !keepSeqHdrsInBitstream &&
       (MPEG2_I_FRAME == picHdr.frameType)) {
-    outBuf->seqHdrData = (binary *)safemalloc(seqHdrChunk->GetSize());
+    outBuf->seqHdrData = (uint8_t *)safemalloc(seqHdrChunk->GetSize());
     outBuf->seqHdrDataSize = seqHdrChunk->GetSize();
     memcpy(outBuf->seqHdrData, seqHdrChunk->GetPointer(),
            outBuf->seqHdrDataSize);

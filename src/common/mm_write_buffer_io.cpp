@@ -42,7 +42,7 @@ mm_write_buffer_io_c::~mm_write_buffer_io_c() {
 mm_io_cptr
 mm_write_buffer_io_c::open(const std::string &file_name,
                            size_t buffer_size) {
-  return std::make_shared<mm_write_buffer_io_c>(std::make_shared<mm_file_io_c>(file_name, MODE_CREATE), buffer_size);
+  return std::make_shared<mm_write_buffer_io_c>(std::make_shared<mm_file_io_c>(file_name, libebml::MODE_CREATE), buffer_size);
 }
 
 uint64_t

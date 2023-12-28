@@ -16,6 +16,7 @@
 #include "common/common_pch.h"
 
 #include <ebml/EbmlHead.h>
+#include <ebml/StdIOCallback.h>
 #include <matroska/KaxSegment.h>
 
 #include "common/ebml.h"
@@ -112,7 +113,7 @@ private:
   std::shared_ptr<libebml::EbmlStream> m_stream;
   debugging_option_c m_debug{"kax_analyzer"}, m_debug_elements{"kax_analyzer_elements"};
   parse_mode_e m_parse_mode{parse_mode_full};
-  open_mode m_open_mode{MODE_WRITE};
+  libebml::open_mode m_open_mode{libebml::MODE_WRITE};
   bool m_throw_on_error{};
   std::optional<uint64_t> m_parser_start_position;
   bool m_is_webm{};
@@ -148,7 +149,7 @@ public:
   virtual uint64_t get_segment_data_start_pos() const;
 
   virtual kax_analyzer_c &set_parse_mode(parse_mode_e parse_mode);
-  virtual kax_analyzer_c &set_open_mode(open_mode mode);
+  virtual kax_analyzer_c &set_open_mode(libebml::open_mode mode);
   virtual kax_analyzer_c &set_throw_on_error(bool throw_on_error);
   virtual kax_analyzer_c &set_parser_start_position(uint64_t position);
   virtual kax_analyzer_c &set_doc_type_version_handler(mtx::doc_type_version_handler_c *handler);
