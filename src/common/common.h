@@ -57,12 +57,12 @@ using namespace std::string_literals;
 #undef min
 #undef max
 
-#if LIBEBML_VERSION < 0x020000
-# include <ebml/c/libebml_t.h>
-#endif
 #include <ebml/EbmlElement.h>
 #include <ebml/EbmlMaster.h>
 #include <ebml/EbmlVersion.h>
+#if LIBEBML_VERSION < 0x020000
+# include <ebml/c/libebml_t.h>
+#endif
 #include <matroska/KaxVersion.h>
 
 /* i18n stuff */
