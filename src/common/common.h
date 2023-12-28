@@ -57,6 +57,9 @@ using namespace std::string_literals;
 #undef min
 #undef max
 
+#if LIBEBML_VERSION < 0x020000
+# include <ebml/c/libebml_t.h>
+#endif
 #include <ebml/EbmlElement.h>
 #include <ebml/EbmlMaster.h>
 #include <ebml/EbmlVersion.h>
@@ -121,6 +124,15 @@ std::string const &get_program_name();
 # define MTX_EBML_IOCALLBACK_READ_RETURN_TYPE std::size_t
 #else
 # define MTX_EBML_IOCALLBACK_READ_RETURN_TYPE std::uint32_t
+
+namespace libebml {
+using open_mode                 = ::open_mode;
+constexpr open_mode MODE_READ   = ::open_mode::MODE_READ;
+constexpr open_mode MODE_WRITE  = ::open_mode::MODE_WRITE;
+constexpr open_mode MODE_CREATE = ::open_mode::MODE_CREATE;
+constexpr open_mode MODE_SAFE   = ::open_mode::MODE_SAFE;
+}
+
 #endif
 
 #include "common/debugging.h"
