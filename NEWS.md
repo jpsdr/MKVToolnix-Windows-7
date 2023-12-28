@@ -65,6 +65,11 @@
 
 ## New features and enhancements
 
+* mkvmerge: when Dolby Vision comes in two separate tracks (as is the case on
+  Blu-rays, for example) mkvmerge will now combine those two into a single
+  track properly. This is done automatically. In order not to confuse the
+  user, the secondary track carrying solely Dolby Vision information is not
+  shown as a separate track by mkvmerge anymore.
 * mkvmerge: MPEG transport stream reader: HEVC/H.265: added support for
   reading single-layer Dolby Vision from Annex B type bitstream read from MPEG
   transport streams. Partially implements #3113.
