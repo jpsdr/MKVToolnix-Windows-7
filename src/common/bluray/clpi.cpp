@@ -133,7 +133,7 @@ parser_c::dump() {
 bool
 parser_c::parse() {
   try {
-    mm_file_io_c m_file(m_file_name, MODE_READ);
+    mm_file_io_c m_file(m_file_name, libebml::MODE_READ);
 
     int64_t file_size   = m_file.get_size();
     memory_cptr content = memory_c::alloc(file_size);

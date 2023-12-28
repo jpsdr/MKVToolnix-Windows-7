@@ -58,7 +58,7 @@ write_cues(std::vector<track_spec_t> const &tracks,
     try {
       mxinfo(fmt::format(Y("The cues for track {0} are written to '{1}'.\n"), track.tid, track.out_name));
 
-       mm_file_io_c out{track.out_name, MODE_CREATE};
+       mm_file_io_c out{track.out_name, libebml::MODE_CREATE};
 
       for (auto const &p : track_cue_points) {
         auto line = fmt::format("timestamp={0} duration={1} cluster_position={2} relative_position={3}\n",

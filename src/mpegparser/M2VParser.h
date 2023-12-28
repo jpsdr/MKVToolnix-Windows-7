@@ -58,9 +58,9 @@ public:
 
 class MPEGFrame {
 public:
-  binary *data;
+  uint8_t *data;
   uint32_t size;
-  binary *seqHdrData;
+  uint8_t *seqHdrData;
   uint32_t seqHdrDataSize;
   MediaTime duration;
   char frameType;
@@ -71,7 +71,7 @@ public:
   bool bCopy;
   uint64_t frameNumber;
 
-  MPEGFrame(binary* data, uint32_t size, bool bCopy);
+  MPEGFrame(uint8_t* data, uint32_t size, bool bCopy);
   ~MPEGFrame();
 };
 
@@ -144,7 +144,7 @@ public:
   }
 
   //Writes data to the internal buffer.
-  int32_t WriteData(binary* data, uint32_t dataSize);
+  int32_t WriteData(uint8_t* data, uint32_t dataSize);
 
   //Returns the current state of the parser
   MPEG2ParserState_e GetState();

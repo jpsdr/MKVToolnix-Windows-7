@@ -34,7 +34,7 @@ debugging_option_c s_debug{"jpeg"};
 std::optional<std::pair<unsigned int, unsigned int>>
 get_size(boost::filesystem::path const &file_name) {
   try {
-    mm_file_io_c file{file_name.string(), MODE_READ};
+    mm_file_io_c file{file_name.string(), libebml::MODE_READ};
     return get_size(file);
   } catch (mtx::mm_io::exception &) {
   }

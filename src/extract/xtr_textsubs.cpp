@@ -300,7 +300,7 @@ xtr_usf_c::create_file(xtr_base_c *master,
 
   } else {
     try {
-      m_out = mm_file_io_c::open(m_file_name, MODE_CREATE);
+      m_out = mm_file_io_c::open(m_file_name, libebml::MODE_CREATE);
       m_doc = std::make_shared<pugi::xml_document>();
 
       std::stringstream codec_private{m_codec_private};

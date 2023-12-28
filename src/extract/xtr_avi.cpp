@@ -53,7 +53,7 @@ xtr_avi_c::create_file(xtr_base_c *master,
                         m_tid, m_codec_id, m_file_name, master->m_tid, master->m_codec_id));
 
   try {
-    m_out = mm_file_io_c::open(m_file_name.c_str(), MODE_CREATE);
+    m_out = mm_file_io_c::open(m_file_name.c_str(), libebml::MODE_CREATE);
     m_avi = AVI_open_output_file(m_out.get());
   } catch (mtx::mm_io::exception &ex) {
     mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), m_file_name, ex));

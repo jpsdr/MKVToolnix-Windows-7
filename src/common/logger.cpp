@@ -111,7 +111,7 @@ file_target_c::file_target_c(boost::filesystem::path file_name)
 void
 file_target_c::log_line(std::string const &message) {
   try {
-    mm_text_io_c out(std::make_shared<mm_file_io_c>(m_file_name.string(), boost::filesystem::is_regular_file(m_file_name) ? MODE_WRITE : MODE_CREATE));
+    mm_text_io_c out(std::make_shared<mm_file_io_c>(m_file_name.string(), boost::filesystem::is_regular_file(m_file_name) ? libebml::MODE_WRITE : libebml::MODE_CREATE));
     out.setFilePointer(0, libebml::seek_end);
     out.puts(format_line(message));
   } catch (mtx::mm_io::exception &ex) {

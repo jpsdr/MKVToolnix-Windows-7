@@ -26,7 +26,7 @@
 #include <cassert>
 
 CircBuffer::CircBuffer(uint32_t size){
-  m_buf = new binary[size];
+  m_buf = new uint8_t[size];
   read_ptr = m_buf;
   write_ptr = m_buf;
   buf_capacity = size;
@@ -60,7 +60,7 @@ int32_t CircBuffer::Skip(uint32_t numBytes){
   }
 }
 
-int32_t CircBuffer::Read(binary* dest, uint32_t numBytes){
+int32_t CircBuffer::Read(uint8_t* dest, uint32_t numBytes){
   if(can_read(numBytes)){
     unsigned int bbw = bytes_before_wrap_read(); //how many bytes we have before the buffer must be wrapped
     if (bbw >= numBytes) {
@@ -85,7 +85,7 @@ int32_t CircBuffer::Read(binary* dest, uint32_t numBytes){
   }
 }
 
-int32_t CircBuffer::Write(binary* data, uint32_t length){
+int32_t CircBuffer::Write(uint8_t* data, uint32_t length){
   if(can_write(length)){
     unsigned int bbw = bytes_before_wrap_write();
     if (bbw >= length) {

@@ -113,7 +113,7 @@ handle_attachments(KaxAttachments *atts,
     mxinfo(fmt::format(Y("The attachment #{0}, ID {1}, MIME type {2}, size {3}, is written to '{4}'.\n"),
                        track.tid, attachment.id, attachment.type, attachment.size, track.out_name));
     try {
-      mm_file_io_c out(track.out_name, MODE_CREATE);
+      mm_file_io_c out(track.out_name, libebml::MODE_CREATE);
       out.write(attachment.fdata->GetBuffer(), attachment.fdata->GetSize());
     } catch (mtx::mm_io::exception &ex) {
       mxerror(fmt::format(Y("The file '{0}' could not be opened for writing: {1}.\n"), track.out_name, ex));

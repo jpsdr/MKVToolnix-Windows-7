@@ -1330,7 +1330,7 @@ kax_info_c::open_and_process_file() {
   // open output file
   if (!p->m_destination_file_name.empty()) {
     try {
-      p->m_out = std::make_shared<mm_write_buffer_io_c>(mm_file_io_c::open(p->m_destination_file_name, MODE_CREATE), 1024 * 1024);
+      p->m_out = std::make_shared<mm_write_buffer_io_c>(mm_file_io_c::open(p->m_destination_file_name, libebml::MODE_CREATE), 1024 * 1024);
 
     } catch (mtx::mm_io::exception &ex) {
       ui_show_error(fmt::format(Y("The file '{0}' could not be opened for writing: {1}."), p->m_destination_file_name, ex));

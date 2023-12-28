@@ -21,7 +21,7 @@
 bool mm_file_io_private_c::ms_flush_on_close = false;
 
 mm_file_io_c::mm_file_io_c(std::string const &path,
-                           open_mode const mode)
+                           libebml::open_mode const mode)
   : mm_io_c{*new mm_file_io_private_c{path, mode}}
 {
 }
@@ -45,7 +45,7 @@ mm_file_io_c::prepare_path(const std::string &path) {
 
 memory_cptr
 mm_file_io_c::slurp(std::string const &file_name) {
-  mm_file_io_c in(file_name, MODE_READ);
+  mm_file_io_c in(file_name, libebml::MODE_READ);
 
   // Don't try to retrieve the file size in order to enable reading
   // from pseudo file systems such as /proc on Linux.
@@ -86,7 +86,7 @@ mm_file_io_c::get_file_name()
 
 mm_io_cptr
 mm_file_io_c::open(const std::string &path,
-                   const open_mode mode) {
+                   const libebml::open_mode mode) {
   return mm_io_cptr(new mm_file_io_c(path, mode));
 }
 

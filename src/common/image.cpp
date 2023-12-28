@@ -23,7 +23,7 @@ namespace mtx::image {
 std::optional<std::pair<unsigned int, unsigned int>>
 get_size(boost::filesystem::path const &file_name) {
   try {
-    mm_file_io_c file{file_name.string(), MODE_READ};
+    mm_file_io_c file{file_name.string(), libebml::MODE_READ};
 
     auto marker = file.read_uint64_be();
 

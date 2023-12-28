@@ -45,7 +45,7 @@ int32_t MPEGVideoBuffer::FindStartCode(uint32_t startPos){
 
   for(int i = startPos, endPos = startPos + window - 3; i < endPos; i++){
     CircBuffer& buf = *myBuffer;
-    binary a,b,c,d;
+    uint8_t a,b,c,d;
     a = buf[i];
     b = buf[i+1];
     c = buf[i+2];
@@ -99,7 +99,7 @@ MPEGChunk * MPEGVideoBuffer::ReadChunk(){
       myBuffer->Skip(chunkStart);
     }
     uint32_t chunkLength = chunkEnd - chunkStart;
-    binary* chunkData = new binary[chunkLength];
+    uint8_t* chunkData = new uint8_t[chunkLength];
     myBuffer->Read(chunkData, chunkLength);
     chunkStart = 0; //we read up to the next start code
     chunkEnd = -1;
@@ -119,14 +119,14 @@ void MPEGVideoBuffer::ForceFinal(){
   }
 }
 
-int32_t MPEGVideoBuffer::Feed(binary* data, uint32_t numBytes){
+int32_t MPEGVideoBuffer::Feed(uint8_t* data, uint32_t numBytes){
   uint32_t res = myBuffer->Write(data, numBytes);
   UpdateState();
   return res;
 }
 
 void ParseSequenceHeader(MPEGChunk* chunk, MPEG2SequenceHeader & hdr){
-  binary* pos = chunk->GetPointer();
+  uint8_t* pos = chunk->GetPointer();
   //Parse out the resolution info, horizontal first
   pos+=4; //Skip the start code
   hdr.width = (((unsigned int)pos[0]) << 4) | (((unsigned int) pos[1])>>4);  //xx x0 00
@@ -198,7 +198,7 @@ bool ParseGOPHeader(MPEGChunk* chunk, MPEG2GOPHeader & hdr){
     //printf("Don't feed parse_gop_header a chunk that isn't a gop header!!!\n");
     return false;
   }
-  binary* pos = chunk->GetPointer();
+  uint8_t* pos = chunk->GetPointer();
   uint32_t timestamp;
   pos+=4; //skip the startcode
   //Parse GOP timestamp structure
@@ -225,7 +225,7 @@ bool ParsePictureHeader(MPEGChunk* chunk, MPEG2PictureHeader & hdr){
   if (chunk->GetSize() < 7)
     return false;
 
-  binary* pos = chunk->GetPointer();
+  uint8_t* pos = chunk->GetPointer();
   int havePicExt = 0;
   uint32_t temp = 0;
   pos+=4;

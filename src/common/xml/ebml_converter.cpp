@@ -244,7 +244,7 @@ ebml_converter_c::parse_binary(parser_context_t &ctx) {
 
     auto file_name = content.substr(1);
     try {
-      mm_file_io_c in(file_name, MODE_READ);
+      mm_file_io_c in(file_name, libebml::MODE_READ);
       auto size = in.get_size();
       content.resize(size);
 

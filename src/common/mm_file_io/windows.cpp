@@ -36,29 +36,29 @@
 #include "common/strings/utf8.h"
 
 mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
-                                           open_mode const p_mode)
+                                           libebml::open_mode const p_mode)
   : file_name{p_file_name}
   , mode{p_mode}
 {
   DWORD access_mode, share_mode, disposition;
 
   switch (mode) {
-    case MODE_READ:
+    case libebml::MODE_READ:
       access_mode = GENERIC_READ;
       share_mode  = FILE_SHARE_READ | FILE_SHARE_WRITE;
       disposition = OPEN_EXISTING;
       break;
-    case MODE_WRITE:
+    case libebml::MODE_WRITE:
       access_mode = GENERIC_WRITE | GENERIC_READ;
       share_mode  = FILE_SHARE_READ;
       disposition = OPEN_EXISTING;
       break;
-    case MODE_SAFE:
+    case libebml::MODE_SAFE:
       access_mode = GENERIC_WRITE | GENERIC_READ;
       share_mode  = FILE_SHARE_READ;
       disposition = OPEN_ALWAYS;
       break;
-    case MODE_CREATE:
+    case libebml::MODE_CREATE:
       access_mode = GENERIC_WRITE | GENERIC_READ;
       share_mode  = FILE_SHARE_READ;
       disposition = CREATE_ALWAYS;
@@ -67,7 +67,7 @@ mm_file_io_private_c::mm_file_io_private_c(std::string const &p_file_name,
       throw mtx::invalid_parameter_x();
   }
 
-  if ((MODE_WRITE == mode) || (MODE_CREATE == mode))
+  if ((libebml::MODE_WRITE == mode) || (libebml::MODE_CREATE == mode))
     mm_file_io_c::prepare_path(file_name);
 
   auto w_file_name = to_wide(file_name);
@@ -83,7 +83,7 @@ mm_file_io_c::close() {
   auto p = p_func();
 
   if (p->file) {
-    if (mm_file_io_private_c::ms_flush_on_close && (p->mode != MODE_READ))
+    if (mm_file_io_private_c::ms_flush_on_close && (p->mode != libebml::MODE_READ))
       FlushFileBuffers(p->file);
 
     CloseHandle(p->file);

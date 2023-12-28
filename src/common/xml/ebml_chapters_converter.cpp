@@ -216,7 +216,7 @@ ebml_chapters_converter_c::write_xml(KaxChapters &chapters,
 bool
 ebml_chapters_converter_c::probe_file(std::string const &file_name) {
   try {
-    mm_text_io_c in(std::make_shared<mm_file_io_c>(file_name, MODE_READ));
+    mm_text_io_c in(std::make_shared<mm_file_io_c>(file_name, libebml::MODE_READ));
     std::string line;
 
     while (in.getline2(line)) {
