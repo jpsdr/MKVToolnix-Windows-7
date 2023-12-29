@@ -464,7 +464,7 @@ fix_elements_set_to_default_value_if_unset(EbmlElement *e) {
 
   auto t = static_cast<T *>(e);
 
-  if (!t->DefaultISset() || t->ValueIsSet())
+  if (!has_default_value(t) || t->ValueIsSet())
     return;
 
   mxdebug_if(s_debug,
@@ -739,11 +739,12 @@ must_be_present_in_master_by_id(EbmlId const &id) {
     return false;
   }
 
-  auto elt = std::shared_ptr<EbmlElement>(&semantic->Create());
+  auto elt         = std::shared_ptr<EbmlElement>(&semantic->Create());
+  auto has_default = has_default_value(*elt);
 
-  mxdebug_if(s_debug, fmt::format("ID {0:08x}: {1} (default is {2}set)\n", id.GetValue(), !elt->DefaultISset(), elt->DefaultISset() ? "" : "not "));
+  mxdebug_if(s_debug, fmt::format("ID {0:08x}: {1} (does {2}have a default value)\n", id.GetValue(), !has_default, has_default ? "" : "not "));
 
-  return !elt->DefaultISset();
+  return !has_default;
 }
 
 bool
@@ -800,9 +801,14 @@ void
 remove_unrenderable_elements(libebml::EbmlMaster &master,
                              bool with_default) {
   remove_elements_recursively_if(master, [with_default](auto &child) {
-    auto renderable = child.ValueIsSet() || (with_default && child.DefaultISset());
+    auto renderable = child.ValueIsSet() || (with_default && has_default_value(child));
     return !renderable;
   });
+}
+
+bool
+has_default_value(EbmlElement const *elt) {
+  return elt ? has_default_value(*elt) : false;
 }
 
 #if LIBEBML_VERSION >= 0x020000
@@ -811,9 +817,21 @@ render_should_write_arg(bool with_default) {
   return with_default ? libebml::EbmlElement::WriteAll : libebml::EbmlElement::WriteSkipDefault;
 }
 
+bool
+has_default_value(EbmlElement const &elt) {
+  return elt.DefaultISset();
+  // return elt.GetClassInfo().HasDefault();
+}
+
 #else
 bool
 render_should_write_arg(bool with_default) {
   return with_default;
 }
+
+bool
+has_default_value(EbmlElement const &elt) {
+  return elt.DefaultISset();
+}
+
 #endif
