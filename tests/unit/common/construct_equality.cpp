@@ -27,8 +27,8 @@ TEST(ConstructAndEquality, SingleLevel) {
   auto b = ebml_master_cptr{ master<KaxTrackVideo>() };
   b->PushElement(*new KaxVideoPixelWidth);
   b->PushElement(*new KaxVideoPixelHeight);
-  *dynamic_cast<EbmlUInteger *>((*b)[0]) = 123;
-  *dynamic_cast<EbmlUInteger *>((*b)[1]) = 456;
+  dynamic_cast<EbmlUInteger *>((*b)[0])->SetValue(123);
+  dynamic_cast<EbmlUInteger *>((*b)[1])->SetValue(456);
   EXPECT_EBML_EQ(*a, *b);
 }
 
@@ -45,7 +45,7 @@ TEST(ConstructAndEquality, MasterAtTheFront) {
   auto b = ebml_master_cptr{ master<KaxTracks>() };
   b->PushElement(*master<KaxTrackEntry>());
   b->PushElement(*new KaxCodecID);
-  *static_cast<EbmlString *>((*b)[1]) = "Stuff";
+  static_cast<EbmlString *>((*b)[1])->SetValue("Stuff");
   EXPECT_EBML_EQ(*a, *b);
 }
 
@@ -55,8 +55,8 @@ TEST(ConstructAndEquality, MasterInTheMiddle) {
   b->PushElement(*new KaxTrackUID);
   b->PushElement(*master<KaxTrackEntry>());
   b->PushElement(*new KaxTrackUID);
-  *static_cast<EbmlUInteger *>((*b)[0]) = 4711;
-  *static_cast<EbmlUInteger *>((*b)[2]) = 4712;
+  static_cast<EbmlUInteger *>((*b)[0])->SetValue(4711);
+  static_cast<EbmlUInteger *>((*b)[2])->SetValue(4712);
   EXPECT_EBML_EQ(*a, *b);
 }
 
@@ -65,7 +65,7 @@ TEST(ConstructAndEquality, MasterAtTheBack) {
   auto b = ebml_master_cptr{ master<KaxTracks>() };
   b->PushElement(*new KaxCodecID);
   b->PushElement(*master<KaxTrackEntry>());
-  *static_cast<EbmlString *>((*b)[0]) = "Stuff";
+  static_cast<EbmlString *>((*b)[0])->SetValue("Stuff");
   EXPECT_EBML_EQ(*a, *b);
 }
 
@@ -74,8 +74,8 @@ TEST(ConstructAndEquality, NoMaster) {
   auto b = ebml_master_cptr{ master<KaxTracks>() };
   b->PushElement(*new KaxCodecID);
   b->PushElement(*new KaxCodecID);
-  *static_cast<EbmlString *>((*b)[0]) = "Stuff1";
-  *static_cast<EbmlString *>((*b)[1]) = "Stuff2";
+  static_cast<EbmlString *>((*b)[0])->SetValue("Stuff1");
+  static_cast<EbmlString *>((*b)[1])->SetValue("Stuff2");
   EXPECT_EBML_EQ(*a, *b);
 }
 
@@ -115,19 +115,19 @@ TEST(ConstructAndEquality, AllTypes) {
   m2->PushElement(*new KaxVideoPixelWidth);
   m2->PushElement(*new KaxVideoPixelHeight);
 
-  *dynamic_cast<EbmlString *>((*m1)[0])        = "Stuff";
-  *dynamic_cast<EbmlString *>((*m1)[1])        = "Stuff";
-  *dynamic_cast<EbmlUnicodeString *>((*m1)[2]) = L"UniStuffAsWcharString"s;
-  *dynamic_cast<EbmlUnicodeString *>((*m1)[3]) = L"UniStuffAsStdWString"s;
-  *dynamic_cast<EbmlUnicodeString *>((*m1)[4]) = L"UniStuffAsStdString"s;
-  *dynamic_cast<EbmlUnicodeString *>((*m1)[5]) = L"UniStuffAsCharString"s;
-  *dynamic_cast<EbmlUInteger *>((*m1)[6])      = 4254;
-  *dynamic_cast<EbmlSInteger *>((*m1)[7])      = -22;
-   dynamic_cast<EbmlDate *>((*m1)[8])->SetEpochDate(98273);
-  *dynamic_cast<EbmlFloat *>((*m1)[9])          = 47.11;
+  static_cast<EbmlString *>((*m1)[0])       ->SetValue("Stuff");
+  static_cast<EbmlString *>((*m1)[1])       ->SetValue("Stuff");
+  static_cast<EbmlUnicodeString *>((*m1)[2])->SetValue(L"UniStuffAsWcharString"s);
+  static_cast<EbmlUnicodeString *>((*m1)[3])->SetValue(L"UniStuffAsStdWString"s);
+  static_cast<EbmlUnicodeString *>((*m1)[4])->SetValue(L"UniStuffAsStdString"s);
+  static_cast<EbmlUnicodeString *>((*m1)[5])->SetValue(L"UniStuffAsCharString"s);
+  static_cast<EbmlUInteger *>((*m1)[6])     ->SetValue(4254);
+  static_cast<EbmlSInteger *>((*m1)[7])     ->SetValue(-22);
+  static_cast<EbmlDate *>((*m1)[8])         ->SetEpochDate(98273);
+  static_cast<EbmlFloat *>((*m1)[9])        ->SetValue(47.11);
 
-  *dynamic_cast<EbmlUInteger *>((*m2)[0])      = 123;
-  *dynamic_cast<EbmlUInteger *>((*m2)[1])      = 456;
+  static_cast<EbmlUInteger *>((*m2)[0])     ->SetValue(123);
+  static_cast<EbmlUInteger *>((*m2)[1])     ->SetValue(456);
 
   EXPECT_EBML_EQ(*a, *b);
 }
