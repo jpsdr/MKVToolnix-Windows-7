@@ -184,6 +184,11 @@
               "minLength": 32,
               "maxLength": 32
             },
+            "timestamp_scale": {
+              "description": "Base unit for segment ticks and track ticks, in nanoseconds. A timestamp_scale value of 1.000.000 means scaled timestamps in the segment are expressed in milliseconds.",
+              "type": "integer",
+              "minimum": 0
+            },
             "title": {
               "type": "string"
             },

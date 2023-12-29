@@ -96,6 +96,7 @@ char const * const stream_id                       = "stream_id";               
 char const * const sub_stream_id                   = "sub_stream_id";                   // track unsigned-integer
 char const * const teletext_page                   = "teletext_page";                   // track unsigned-integer
 char const * const text_subtitles                  = "text_subtitles";                  // track boolean
+char const * const timestamp_scale                 = "timestamp_scale";                 // container unsigned-integer
 char const * const title                           = "title";                           // container unicoode-string
 char const * const track_name                      = "track_name";                      // track unicoode-string
 char const * const uid                             = "uid";                             // track attachments unsigned-integer

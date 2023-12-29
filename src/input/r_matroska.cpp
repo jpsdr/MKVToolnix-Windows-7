@@ -2824,6 +2824,7 @@ kax_reader_c::identify() {
   info.set(mtx::id::writing_application, m_raw_writing_app);
   info.add(mtx::id::title,               m_title);
   info.add(mtx::id::duration,            m_segment_duration);
+  info.add(mtx::id::timestamp_scale,     m_tc_scale);
 
   auto add_uid_info = [&info](memory_cptr const &uid, std::string const &property) {
     if (uid)
