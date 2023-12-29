@@ -2820,10 +2820,10 @@ void
 kax_reader_c::identify() {
   auto info = mtx::id::info_c{};
 
-  if (!m_title.empty())
-    info.add(mtx::id::title, m_title);
-  if (0 != m_segment_duration)
-    info.add(mtx::id::duration, m_segment_duration);
+  info.set(mtx::id::muxing_application,  m_muxing_app);
+  info.set(mtx::id::writing_application, m_raw_writing_app);
+  info.add(mtx::id::title,               m_title);
+  info.add(mtx::id::duration,            m_segment_duration);
 
   auto add_uid_info = [&info](memory_cptr const &uid, std::string const &property) {
     if (uid)
@@ -2833,8 +2833,6 @@ kax_reader_c::identify() {
   add_uid_info(m_next_segment_uid,     mtx::id::next_segment_uid);
   add_uid_info(m_previous_segment_uid, mtx::id::previous_segment_uid);
 
-  info.set(mtx::id::muxing_application,  m_muxing_app);
-  info.set(mtx::id::writing_application, m_raw_writing_app);
   if (m_muxing_date_epoch) {
     auto timestamp = QDateTime::fromSecsSinceEpoch(m_muxing_date_epoch.value(), Qt::UTC);
     info.add(mtx::id::date_utc,   mtx::date_time::format_iso_8601(timestamp));
