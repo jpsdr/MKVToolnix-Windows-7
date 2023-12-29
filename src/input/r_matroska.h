@@ -200,7 +200,7 @@ private:
   std::unordered_map<uint64_t, timestamp_c> m_minimum_timestamps_by_track_number;
   std::unordered_map<uint64_t, bool> m_known_bad_track_numbers;
 
-  int64_t m_tc_scale;
+  uint64_t m_tc_scale;
 
   kax_file_cptr m_in_file;
 

@@ -5,9 +5,13 @@
 * mkvinfo: added support for the "video alpha mode" track header element. Part
   of the implementation of #3643.
 * mkvmerge: Matroska reader: the "video alpha mode" track header property will
-  be reported in JSON identification mode as the property `alpha_mode`. The
-  JSON identification output schema has been bumped to v19. Part of the
-  implementation of #3643.
+  be reported in JSON identification mode as the track property
+  `alpha_mode`. Part of the implementation of #3643.
+* mkvmerge: Matroska reader: the file's timestamp scaling factor will be
+  reported in JSON identification mode as the container property
+  `timestamp_scale`.
+* mkvmerge: file identification: the JSON identification output schema version
+  has been bumped to 19.
 * mkvpropedit, MKVToolNix GUI's header editor: added support for the "video
   alpha mode" track header property. In `mkvpropedit` it's called
   `alpha-mode`. Part of the implementation of #3643.
