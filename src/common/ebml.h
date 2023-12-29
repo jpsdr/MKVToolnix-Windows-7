@@ -336,7 +336,8 @@ template<typename Telement,
 Tvalue
 FindChildValue(libebml::EbmlMaster const *master,
                Tvalue const &default_value = Tvalue{}) {
-  return FindChildValue<Telement>(*master, default_value);
+  auto child = FindChild<Telement>(*master);
+  return child ? static_cast<Tvalue>(child->GetValue()) : default_value;
 }
 
 template<typename T>
@@ -481,6 +482,9 @@ change_values(EbmlMaster &master,
 
   return modified;
 }
+
+bool has_default_value(EbmlElement const &elt);
+bool has_default_value(EbmlElement const *elt);
 
 bool found_in(libebml::EbmlElement &haystack, libebml::EbmlElement const *needle);
 

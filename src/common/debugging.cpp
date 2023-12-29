@@ -26,6 +26,7 @@
 #include <ebml/EbmlVoid.h>
 
 #include "common/debugging.h"
+#include "common/ebml.h"
 #include "common/logger.h"
 #include "common/mm_mem_io.h"
 #include "common/strings/editing.h"
@@ -277,7 +278,7 @@ ebml_dumper_c::dump_impl(EbmlElement const *element,
   if (m_values)
     m_buffer << " " << to_string(*element);
 
-  m_buffer << fmt::format(" ID 0x{0:x} valueIsSet {1} defaultIsSet {2}", libebml::EbmlId(*element).GetValue(), element->ValueIsSet(), element->DefaultISset());
+  m_buffer << fmt::format(" ID 0x{0:x} valueIsSet {1} has_default_value {2}", libebml::EbmlId(*element).GetValue(), element->ValueIsSet(), has_default_value(element));
 
   m_buffer << std::endl;
 
