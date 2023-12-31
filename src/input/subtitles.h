@@ -149,6 +149,6 @@ protected:
   int64_t parse_time(std::string &time);
   std::string get_element(const char *index, std::vector<std::string> &fields);
   void add_attachment_maybe(std::string &name, std::string &data_uu, ssa_section_e section);
-  void decode_chars(unsigned char const *in, unsigned char *out, size_t bytes_in);
+  void decode_chars(uint8_t const *in, uint8_t *out, size_t bytes_in);
 };
 using ssa_parser_cptr = std::shared_ptr<ssa_parser_c>;

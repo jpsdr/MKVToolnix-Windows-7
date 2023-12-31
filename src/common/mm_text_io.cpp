@@ -28,7 +28,7 @@ mm_text_io_private_c::mm_text_io_private_c(mm_io_cptr const &in)
 {
   proxy_io->setFilePointer(0);
 
-  unsigned char buffer[4];
+  uint8_t buffer[4];
   int num_read = in->read(buffer, 4);
   if (2 > num_read) {
     in->setFilePointer(0);
@@ -95,7 +95,7 @@ mm_text_io_c::detect_eol_style() {
 }
 
 bool
-mm_text_io_c::detect_byte_order_marker(const unsigned char *buffer,
+mm_text_io_c::detect_byte_order_marker(const uint8_t *buffer,
                                        unsigned int size,
                                        byte_order_mark_e &byte_order_mark,
                                        unsigned int &bom_length) {
@@ -126,7 +126,7 @@ bool
 mm_text_io_c::has_byte_order_marker(const std::string &string) {
   byte_order_mark_e byte_order_mark;
   unsigned int bom_length;
-  return detect_byte_order_marker(reinterpret_cast<const unsigned char *>(string.c_str()), string.length(), byte_order_mark, bom_length);
+  return detect_byte_order_marker(reinterpret_cast<const uint8_t *>(string.c_str()), string.length(), byte_order_mark, bom_length);
 }
 
 std::optional<std::string>
@@ -149,7 +149,7 @@ std::string
 mm_text_io_c::read_next_codepoint() {
   auto p = p_func();
 
-  unsigned char buffer[9];
+  uint8_t buffer[9];
 
   if (byte_order_mark_e::none == p->byte_order_mark) {
     std::string::size_type length = read(buffer, 1);

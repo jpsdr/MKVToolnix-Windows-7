@@ -23,8 +23,8 @@ protected:
   explicit mm_mem_io_c(mm_mem_io_private_c &p);
 
 public:
-  mm_mem_io_c(unsigned char *mem, uint64_t mem_size, std::size_t increase);
-  mm_mem_io_c(const unsigned char *mem, uint64_t mem_size);
+  mm_mem_io_c(uint8_t *mem, uint64_t mem_size, std::size_t increase);
+  mm_mem_io_c(const uint8_t *mem, uint64_t mem_size);
   mm_mem_io_c(memory_c const &mem);
   virtual ~mm_mem_io_c();
 
@@ -35,8 +35,8 @@ public:
   virtual std::string get_file_name() const override;
   virtual void set_file_name(const std::string &file_name);
 
-  virtual unsigned char *get_buffer() const;
-  virtual unsigned char const *get_ro_buffer() const;
+  virtual uint8_t *get_buffer() const;
+  virtual uint8_t const *get_ro_buffer() const;
   virtual memory_cptr get_and_lock_buffer();
   virtual std::string get_content() const;
 

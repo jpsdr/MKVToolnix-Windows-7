@@ -140,9 +140,9 @@ inline bool is_fourcc(const char *value) {
   return !strncasecmp(value, "WVC1", 4);
 }
 
-bool parse_sequence_header(const unsigned char *buf, int size, sequence_header_t &seqhdr);
-bool parse_entrypoint(const unsigned char *buf, int size, entrypoint_t &entrypoint, sequence_header_t &seqhdr);
-bool parse_frame_header(const unsigned char *buf, int size, frame_header_t &frame_header, sequence_header_t &seqhdr);
+bool parse_sequence_header(const uint8_t *buf, int size, sequence_header_t &seqhdr);
+bool parse_entrypoint(const uint8_t *buf, int size, entrypoint_t &entrypoint, sequence_header_t &seqhdr);
+bool parse_frame_header(const uint8_t *buf, int size, frame_header_t &frame_header, sequence_header_t &seqhdr);
 
 class es_parser_c {
 protected:
@@ -177,7 +177,7 @@ public:
   es_parser_c();
   virtual ~es_parser_c() = default;
 
-  virtual void add_bytes(unsigned char *buf, int size);
+  virtual void add_bytes(uint8_t *buf, int size);
   virtual void add_bytes(memory_cptr const &buf) {
     add_bytes(buf->get_buffer(), buf->get_size());
   };

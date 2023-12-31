@@ -59,7 +59,7 @@ struct audio_config_t {
 
 unsigned int get_sampling_freq_idx(unsigned int sampling_freq);
 bool parse_codec_id(const std::string &codec_id, int &id, int &profile);
-std::optional<audio_config_t> parse_audio_specific_config(unsigned char const *data, std::size_t size);
+std::optional<audio_config_t> parse_audio_specific_config(uint8_t const *data, std::size_t size);
 void copy_program_config_element(mtx::bits::reader_c &r, mtx::bits::writer_c &w);
 memory_cptr create_audio_specific_config(audio_config_t const &audio_config);
 
@@ -80,9 +80,9 @@ public:
   std::string to_string() const;
 
 public:
-  static header_c from_audio_specific_config(const unsigned char *data, size_t size);
+  static header_c from_audio_specific_config(const uint8_t *data, size_t size);
 
-  void parse_audio_specific_config(const unsigned char *data, size_t size, bool look_for_sync_extension = true);
+  void parse_audio_specific_config(const uint8_t *data, size_t size, bool look_for_sync_extension = true);
   void parse_audio_specific_config(mtx::bits::reader_c &bc, bool look_for_sync_extension = true);
   void parse_program_config_element(mtx::bits::reader_c &bc);
 
@@ -170,7 +170,7 @@ protected:
   std::deque<frame_c> m_frames;
   std::deque<timestamp_c> m_provided_timestamps;
   mtx::bytes::buffer_c m_buffer;
-  unsigned char const *m_fixed_buffer;
+  uint8_t const *m_fixed_buffer;
   size_t m_fixed_buffer_size;
   uint64_t m_parsed_stream_position, m_total_stream_position;
   size_t m_garbage_size, m_num_frames_found, m_abort_after_num_frames;
@@ -185,9 +185,9 @@ public:
   void add_timestamp(timestamp_c const &timestamp);
 
   void add_bytes(memory_cptr const &mem);
-  void add_bytes(unsigned char const *buffer, size_t size);
+  void add_bytes(uint8_t const *buffer, size_t size);
 
-  void parse_fixed_buffer(unsigned char const *fixed_buffer, size_t fixed_buffer_size);
+  void parse_fixed_buffer(uint8_t const *fixed_buffer, size_t fixed_buffer_size);
   void parse_fixed_buffer(memory_cptr const &fixed_buffer);
 
   void flush();
@@ -208,14 +208,14 @@ public:
   void copy_data(bool copy);
 
 public:                         // static functions
-  static int find_consecutive_frames(unsigned char const *buffer, size_t buffer_size, size_t num_required_frames);
+  static int find_consecutive_frames(uint8_t const *buffer, size_t buffer_size, size_t num_required_frames);
   static std::string get_multiplex_type_name(multiplex_type_e multiplex_type);
 
 protected:
   void parse();
-  std::pair<parse_result_e, size_t> decode_header(unsigned char const *buffer, size_t buffer_size);
-  std::pair<parse_result_e, size_t> decode_adts_header(unsigned char const *buffer, size_t buffer_size);
-  std::pair<parse_result_e, size_t> decode_loas_latm_header(unsigned char const *buffer, size_t buffer_size);
+  std::pair<parse_result_e, size_t> decode_header(uint8_t const *buffer, size_t buffer_size);
+  std::pair<parse_result_e, size_t> decode_adts_header(uint8_t const *buffer, size_t buffer_size);
+  std::pair<parse_result_e, size_t> decode_loas_latm_header(uint8_t const *buffer, size_t buffer_size);
   void push_frame(frame_c &frame);
 };
 using parser_cptr = std::shared_ptr<parser_c>;

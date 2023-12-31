@@ -48,8 +48,8 @@ public:
   void init();
   bool is_eac3() const;
   codec_c get_codec() const;
-  void add_dependent_frame(frame_c const &frame, unsigned char const *buffer, std::size_t buffer_size);
-  bool decode_header(unsigned char const *buffer, std::size_t buffer_size);
+  void add_dependent_frame(frame_c const &frame, uint8_t const *buffer, std::size_t buffer_size);
+  bool decode_header(uint8_t const *buffer, std::size_t buffer_size);
   bool decode_header_type_eac3(mtx::bits::reader_c &bc);
   bool decode_header_type_ac3(mtx::bits::reader_c &bc);
 
@@ -59,7 +59,7 @@ public:
   std::string to_string(bool verbose) const;
 
   int find_in(memory_cptr const &buffer);
-  int find_in(unsigned char const *buffer, std::size_t buffer_size);
+  int find_in(uint8_t const *buffer, std::size_t buffer_size);
 };
 
 class parser_c {
@@ -73,19 +73,19 @@ protected:
 public:
   parser_c();
   void add_bytes(memory_cptr const &mem);
-  void add_bytes(unsigned char *const buffer, std::size_t size);
+  void add_bytes(uint8_t *const buffer, std::size_t size);
   void flush();
   std::size_t frame_available() const;
   frame_c get_frame();
   uint64_t get_parsed_stream_position() const;
   uint64_t get_total_stream_position() const;
 
-  int find_consecutive_frames(unsigned char const *buffer, std::size_t buffer_size, std::size_t num_required_headers);
+  int find_consecutive_frames(uint8_t const *buffer, std::size_t buffer_size, std::size_t num_required_headers);
 
   void parse(bool end_of_stream);
 };
 
-bool verify_checksums(unsigned char const *buf, std::size_t size, bool full_buffer = false);
-void remove_dialog_normalization_gain(unsigned char *buf, std::size_t size);
+bool verify_checksums(uint8_t const *buf, std::size_t size, bool full_buffer = false);
+void remove_dialog_normalization_gain(uint8_t *buf, std::size_t size);
 
 }}                              // namespace mtx::ac3

@@ -285,7 +285,7 @@ protected:
   virtual void process_global_tags();
   virtual void handle_track_statistics_tags();
 
-  virtual bool unlace_vorbis_private_data(kax_track_t *t, unsigned char *buffer, int size);
+  virtual bool unlace_vorbis_private_data(kax_track_t *t, uint8_t *buffer, int size);
 
   virtual void create_video_packetizer(kax_track_t *t, track_info_c &nti);
   virtual void create_audio_packetizer(kax_track_t *t, track_info_c &nti);

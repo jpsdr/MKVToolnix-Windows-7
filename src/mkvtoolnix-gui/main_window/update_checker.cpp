@@ -126,7 +126,7 @@ UpdateChecker::handleDownloadedContent(quint64 token,
 mtx::xml::document_cptr
 UpdateChecker::parseXml(QByteArray const &content) {
   try {
-    auto data = compressor_c::create_from_file_name("dummy.gz")->decompress(reinterpret_cast<unsigned char const *>(content.data()), content.size());
+    auto data = compressor_c::create_from_file_name("dummy.gz")->decompress(reinterpret_cast<uint8_t const *>(content.data()), content.size());
     auto doc  = std::make_shared<pugi::xml_document>();
 
     std::stringstream sdata{data->to_string()};

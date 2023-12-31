@@ -252,7 +252,7 @@ mpeg1_2_video_packetizer_c::flush_impl() {
 }
 
 void
-mpeg1_2_video_packetizer_c::extract_fps(const unsigned char *buffer,
+mpeg1_2_video_packetizer_c::extract_fps(const uint8_t *buffer,
                                         int size) {
   int idx = mtx::mpeg1_2::extract_fps_idx(buffer, size);
   if (0 > idx)
@@ -269,7 +269,7 @@ mpeg1_2_video_packetizer_c::extract_fps(const unsigned char *buffer,
 }
 
 void
-mpeg1_2_video_packetizer_c::extract_aspect_ratio(const unsigned char *buffer,
+mpeg1_2_video_packetizer_c::extract_aspect_ratio(const uint8_t *buffer,
                                                  int size) {
   if (display_dimensions_or_aspect_ratio_set())
     return;

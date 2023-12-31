@@ -25,7 +25,7 @@ constexpr auto is_start_code(uint32_t v) {
 memory_cptr nalu_to_rbsp(memory_cptr const &buffer);
 memory_cptr rbsp_to_nalu(memory_cptr const &buffer);
 
-void write_nalu_size(unsigned char *buffer, std::size_t size, std::size_t nalu_size_length);
+void write_nalu_size(uint8_t *buffer, std::size_t size, std::size_t nalu_size_length);
 memory_cptr create_nalu_with_size(memory_cptr const &src, std::size_t nalu_size_length, std::vector<memory_cptr> extra_data = {});
 
 void remove_trailing_zero_bytes(memory_c &buffer);

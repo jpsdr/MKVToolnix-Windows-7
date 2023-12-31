@@ -172,7 +172,7 @@ skip_utf8(mtx::bits::reader_c &bits,
 
 // See http://flac.sourceforge.net/format.html#frame_header
 static int
-get_num_samples_internal(unsigned char const *mem,
+get_num_samples_internal(uint8_t const *mem,
                          int size,
                          FLAC__StreamMetadata_StreamInfo const &stream_info) {
   mtx::bits::reader_c bits(mem, size);
@@ -234,7 +234,7 @@ get_num_samples_internal(unsigned char const *mem,
 }
 
 int
-get_num_samples(unsigned char const *mem,
+get_num_samples(uint8_t const *mem,
                 int size,
                 FLAC__StreamMetadata_StreamInfo const &stream_info) {
   try {
@@ -245,7 +245,7 @@ get_num_samples(unsigned char const *mem,
 }
 
 struct header_extractor_t {
-  unsigned char const *mem;
+  uint8_t const *mem;
   unsigned int size;
   unsigned int nread;
 
@@ -297,7 +297,7 @@ error_cb(FLAC__StreamDecoder const *,
 }
 
 int
-decode_headers(unsigned char const *mem,
+decode_headers(uint8_t const *mem,
                int size,
                int num_elements,
                ...) {

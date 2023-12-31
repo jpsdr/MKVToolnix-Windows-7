@@ -31,7 +31,7 @@ public:
   virtual memory_cptr get_result() const = 0;
 
 protected:
-  virtual void add_impl(unsigned char const *buffer, size_t size) = 0;
+  virtual void add_impl(uint8_t const *buffer, size_t size) = 0;
 };
 
 class set_initial_value_c {
@@ -39,11 +39,11 @@ public:
   virtual ~set_initial_value_c() = default;
   virtual void set_initial_value(uint64_t initial_value);
   virtual void set_initial_value(memory_c const &initial_value);
-  virtual void set_initial_value(unsigned char const *buffer, size_t size);
+  virtual void set_initial_value(uint8_t const *buffer, size_t size);
 
 protected:
   virtual void set_initial_value_impl(uint64_t initial_value) = 0;
-  virtual void set_initial_value_impl(unsigned char const *buffer, size_t size) = 0;
+  virtual void set_initial_value_impl(uint8_t const *buffer, size_t size) = 0;
 };
 
 class uint_result_c {

@@ -18,15 +18,15 @@
 namespace mtx::w64 {
 
 struct chunk_t {
-  unsigned char guid[16];
+  uint8_t guid[16];
   uint64_t size;
 };
 
 struct header_t {
   chunk_t riff;
-  unsigned char wave_guid[16];
+  uint8_t wave_guid[16];
 };
 
-extern unsigned char const g_guid_riff[16], g_guid_wave[16], g_guid_fmt[16], g_guid_data[16];
+extern uint8_t const g_guid_riff[16], g_guid_wave[16], g_guid_fmt[16], g_guid_data[16];
 
 }

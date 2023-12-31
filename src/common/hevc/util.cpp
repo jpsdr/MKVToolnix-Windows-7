@@ -823,7 +823,7 @@ handle_sei_payload(mm_mem_io_c &byte_reader,
                    unsigned int sei_payload_type,
                    unsigned int sei_payload_size,
                    user_data_t &user_data) {
-  std::vector<unsigned char> uuid;
+  std::vector<uint8_t> uuid;
   uint64_t file_pos = byte_reader.getFilePointer();
 
   uuid.resize(16);
@@ -832,7 +832,7 @@ handle_sei_payload(mm_mem_io_c &byte_reader,
       byte_reader.read(&uuid[0], 16); // uuid
 
       if (user_data.find(uuid) == user_data.end()) {
-        std::vector<unsigned char> &payload = user_data[uuid];
+        std::vector<uint8_t> &payload = user_data[uuid];
 
         payload.resize(sei_payload_size);
         memcpy(&payload[0], &uuid[0], 16);
@@ -915,7 +915,7 @@ is_fourcc(const char *fourcc) {
 }
 
 memory_cptr
-hevcc_to_nalus(const unsigned char *buffer,
+hevcc_to_nalus(const uint8_t *buffer,
                size_t size) {
   try {
     if (6 > size)

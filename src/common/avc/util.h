@@ -26,6 +26,6 @@ bool parse_pps(memory_cptr const &buffer, pps_info_t &pps);
 par_extraction_t extract_par(memory_cptr const &buffer);
 memory_cptr fix_sps_fps(memory_cptr const &buffer, int64_t duration);
 bool is_avc_fourcc(const char *fourcc);
-memory_cptr avcc_to_nalus(const unsigned char *buffer, size_t size);
+memory_cptr avcc_to_nalus(const uint8_t *buffer, size_t size);
 
 }

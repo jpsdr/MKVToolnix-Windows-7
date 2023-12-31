@@ -20,7 +20,7 @@ namespace mtx::bits {
 class writer_c {
 private:
   memory_cptr m_buffer;
-  unsigned char *m_data{};
+  uint8_t *m_data{};
   std::size_t m_size{}, m_byte_position{}, m_mask{0x80u}, m_data_size{};
   bool m_can_extend{};
 
@@ -34,7 +34,7 @@ public:
     std::memset(m_buffer->get_buffer(), 0, m_buffer->get_size());
   }
 
-  writer_c(unsigned char *data, std::size_t size)
+  writer_c(uint8_t *data, std::size_t size)
     : m_data{data}
     , m_size{size}
     , m_data_size{size}

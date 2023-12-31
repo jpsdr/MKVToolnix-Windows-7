@@ -242,9 +242,9 @@ public:
 
   void print() const;
 
-  bool decode_core_header(unsigned char const *buf, std::size_t size, bool allow_no_exss_search = false);
-  bool decode_exss_header(unsigned char const *buf, std::size_t size);
-  bool decode_x96_header(unsigned char const *buf, std::size_t size);
+  bool decode_core_header(uint8_t const *buf, std::size_t size, bool allow_no_exss_search = false);
+  bool decode_exss_header(uint8_t const *buf, std::size_t size);
+  bool decode_x96_header(uint8_t const *buf, std::size_t size);
 
 protected:
   bool decode_asset(mtx::bits::reader_c &bc, substream_asset_t &asset);
@@ -252,15 +252,15 @@ protected:
   bool decode_xll_header(mtx::bits::reader_c &bc, substream_asset_t &asset);
   void parse_lbr_parameters(mtx::bits::reader_c &bc, substream_asset_t &asset);
   void parse_xll_parameters(mtx::bits::reader_c &bc, substream_asset_t &asset);
-  void locate_and_decode_xch_header(unsigned char const *buf, std::size_t size);
+  void locate_and_decode_xch_header(uint8_t const *buf, std::size_t size);
 
   bool set_one_extension_offset(substream_asset_t &asset, extension_mask_e wanted_mask, std::size_t &offset, std::size_t &size, std::size_t &offset_in_asset, std::size_t size_in_asset);
   bool set_extension_offsets(substream_asset_t &asset);
 };
 
-int find_sync_word(unsigned char const *buf, std::size_t size);
-int find_header(unsigned char const *buf, std::size_t size, header_t &header, bool allow_no_exss_search = false);
-int find_consecutive_headers(unsigned char const *buf, std::size_t size, unsigned int num);
+int find_sync_word(uint8_t const *buf, std::size_t size);
+int find_header(uint8_t const *buf, std::size_t size, header_t &header, bool allow_no_exss_search = false);
+int find_consecutive_headers(uint8_t const *buf, std::size_t size, unsigned int num);
 
 bool operator ==(header_t const &h1, header_t const &h2);
 bool operator!=(header_t const &h1, header_t const &h2);
@@ -269,7 +269,7 @@ void convert_14_to_16_bits(const unsigned short *src, unsigned long srcwords, un
 
 bool detect(const void *src_buf, int len, bool &convert_14_to_16, bool &swap_bytes);
 
-void remove_dialog_normalization_gain(unsigned char *buf, std::size_t size);
+void remove_dialog_normalization_gain(uint8_t *buf, std::size_t size);
 
 
 }

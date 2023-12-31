@@ -36,7 +36,7 @@ enum character_code_e {         // corresponding iconv charset names
   big5      = 0x07,             // BIG-5
 };
 
-::timestamp_c get_timestamp(unsigned char const *buf);
-void put_timestamp(unsigned char *buf, ::timestamp_c const &timestamp);
+::timestamp_c get_timestamp(uint8_t const *buf);
+void put_timestamp(uint8_t *buf, ::timestamp_c const &timestamp);
 
 }

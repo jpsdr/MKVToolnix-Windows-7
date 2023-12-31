@@ -174,7 +174,7 @@ xtr_aac_c::handle_frame(xtr_frame_t &f) {
   // a matter of perspective. And if I didn't enjoy writing even this
   // code then I wouldn't do it at all. So let's get to it!
 
-  unsigned char adts[56 / 8];
+  uint8_t adts[56 / 8];
   // sync word, 12 bits
   adts[0]  = 0xff;
   adts[1]  = 0xf0;

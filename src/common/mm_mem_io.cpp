@@ -21,14 +21,14 @@
 /*
    IO callback class working on memory
 */
-mm_mem_io_c::mm_mem_io_c(unsigned char *mem,
+mm_mem_io_c::mm_mem_io_c(uint8_t *mem,
                          uint64_t mem_size,
                          std::size_t increase)
   : mm_io_c{*new mm_mem_io_private_c{mem, mem_size, increase}}
 {
 }
 
-mm_mem_io_c::mm_mem_io_c(const unsigned char *mem,
+mm_mem_io_c::mm_mem_io_c(const uint8_t *mem,
                          uint64_t mem_size)
   : mm_io_c{*new mm_mem_io_private_c{mem, mem_size}}
 {
@@ -100,7 +100,7 @@ mm_mem_io_c::_write(const void *buffer,
       int64_t new_allocated  = p->pos + size - p->allocated;
       new_allocated          = ((new_allocated / p->increase) + 1 ) * p->increase;
       p->allocated           += new_allocated;
-      p->mem                  = (unsigned char *)saferealloc(p->mem, p->allocated);
+      p->mem                  = (uint8_t *)saferealloc(p->mem, p->allocated);
       wbytes                 = size;
     } else
       wbytes                 = p->allocated - p->pos;
@@ -145,7 +145,7 @@ mm_mem_io_c::eof() {
   return p->pos >= p->mem_size;
 }
 
-unsigned char *
+uint8_t *
 mm_mem_io_c::get_buffer()
   const {
   auto p = p_func();
@@ -155,7 +155,7 @@ mm_mem_io_c::get_buffer()
   return p->mem;
 }
 
-unsigned char const *
+uint8_t const *
 mm_mem_io_c::get_ro_buffer()
   const {
   auto p = p_func();

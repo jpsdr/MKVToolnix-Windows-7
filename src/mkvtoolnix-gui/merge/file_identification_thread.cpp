@@ -174,7 +174,7 @@ FileIdentificationWorker::determineIfFileThatShouldBeSelectedElsewhere(QString c
   auto bom_type     = byte_order_mark_e::none;
   unsigned int bom_length{};
 
-  if (mm_text_io_c::detect_byte_order_marker(reinterpret_cast<unsigned char const *>(bytes), contentBytes.size(), bom_type, bom_length))
+  if (mm_text_io_c::detect_byte_order_marker(reinterpret_cast<uint8_t const *>(bytes), contentBytes.size(), bom_type, bom_length))
     bytes += bom_length;
 
   auto content = QString::fromUtf8(bytes);

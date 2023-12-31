@@ -35,7 +35,7 @@ public:
     return AC3ACM_READ_SIZE;
   };
 
-  virtual unsigned char *get_buffer() {
+  virtual uint8_t *get_buffer() {
     return m_buf[m_cur_buf]->get_buffer();
   };
 

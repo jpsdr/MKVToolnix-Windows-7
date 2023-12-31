@@ -49,7 +49,7 @@ normalize_unicode_string(std::string const &src,
   std::string buffer;
   buffer.reserve(byte_length + 1);
 
-  converted = CFStringGetBytes(cf_src_mutable, whole_string, kCFStringEncodingUTF8, 0, false, reinterpret_cast<unsigned char *>(&buffer[0]), byte_length + 1, NULL);
+  converted = CFStringGetBytes(cf_src_mutable, whole_string, kCFStringEncodingUTF8, 0, false, reinterpret_cast<uint8_t *>(&buffer[0]), byte_length + 1, NULL);
   if (!converted)
     return {};
 

@@ -78,7 +78,7 @@ public:
   std::string create_element_text(std::string const &text, std::optional<int64_t> position, std::optional<int64_t> size, std::optional<int64_t> data_size);
   std::string create_unknown_element_text(libebml::EbmlElement &e);
   std::string create_known_element_but_not_allowed_here_text(libebml::EbmlElement &e);
-  std::string create_hexdump(unsigned char const *buf, int size);
+  std::string create_hexdump(uint8_t const *buf, int size);
   std::string create_codec_dependent_private_info(libmatroska::KaxCodecPrivate &c_priv, char track_type, std::string const &codec_id);
   std::string create_text_representation(libebml::EbmlElement &e);
   std::string format_binary(libebml::EbmlBinary &bin);

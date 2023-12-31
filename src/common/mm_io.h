@@ -41,7 +41,7 @@ public:
   virtual MTX_EBML_IOCALLBACK_READ_RETURN_TYPE read(void *buffer, size_t size) override;
   virtual uint32_t read(std::string &buffer, size_t size, size_t offset = 0);
   virtual uint32_t read(memory_cptr const &buffer, size_t size, int offset = 0);
-  virtual unsigned char read_uint8();
+  virtual uint8_t read_uint8();
   virtual uint16_t read_uint16_le();
   virtual uint32_t read_uint24_le();
   virtual uint32_t read_uint32_le();
@@ -53,7 +53,7 @@ public:
   virtual uint64_t read_uint64_be();
   virtual double read_double();
   virtual unsigned int read_mp4_descriptor_len();
-  virtual int write_uint8(unsigned char value);
+  virtual int write_uint8(uint8_t value);
   virtual int write_uint16_le(uint16_t value);
   virtual int write_uint32_le(uint32_t value);
   virtual int write_uint64_le(uint64_t value);

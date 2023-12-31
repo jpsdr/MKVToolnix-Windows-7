@@ -50,7 +50,7 @@ random_c::init(std::optional<uint64_t> seed) {
 void
 random_c::generate_bytes(void *destination,
                          size_t num_bytes) {
-  auto dst = static_cast<unsigned char *>(destination);
+  auto dst = static_cast<uint8_t *>(destination);
 
   for (int i = 0; i < static_cast<int>(num_bytes); ++i, ++dst)
     *dst = s_uint8_distribution(*s_generator);

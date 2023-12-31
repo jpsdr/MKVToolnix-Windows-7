@@ -86,7 +86,7 @@ frame_c::get_codec()
 
 void
 frame_c::add_dependent_frame(frame_c const &frame,
-                             unsigned char const *buffer,
+                             uint8_t const *buffer,
                              std::size_t buffer_size) {
   m_data->add(buffer, buffer_size);
   m_dependent_frames.push_back(frame);
@@ -95,12 +95,12 @@ frame_c::add_dependent_frame(frame_c const &frame,
 }
 
 bool
-frame_c::decode_header(unsigned char const *buffer,
+frame_c::decode_header(uint8_t const *buffer,
                        std::size_t buffer_size) {
   if (buffer_size < 18)
     return false;
 
-  unsigned char swapped_buffer[18];
+  uint8_t swapped_buffer[18];
   std::unique_ptr<mtx::bits::reader_c> r;
 
   if (get_uint16_le(buffer) == SYNC_WORD) {
@@ -318,7 +318,7 @@ frame_c::find_in(memory_cptr const &buffer) {
 }
 
 int
-frame_c::find_in(unsigned char const *buffer,
+frame_c::find_in(uint8_t const *buffer,
                  std::size_t buffer_size) {
   for (int offset = 0; offset < static_cast<int>(buffer_size); ++offset)
     if (decode_header(&buffer[offset], buffer_size - offset))
@@ -401,7 +401,7 @@ parser_c::add_bytes(memory_cptr const &mem) {
 }
 
 void
-parser_c::add_bytes(unsigned char *const buffer,
+parser_c::add_bytes(uint8_t *const buffer,
                     std::size_t size) {
   m_buffer.add(buffer, size);
   m_total_stream_position += size;
@@ -440,10 +440,10 @@ parser_c::get_parsed_stream_position()
 
 void
 parser_c::parse(bool end_of_stream) {
-  unsigned char swapped_buffer[18];
-  unsigned char *const buffer = m_buffer.get_buffer();
-  std::size_t buffer_size     = m_buffer.get_size();
-  std::size_t position        = 0;
+  uint8_t swapped_buffer[18];
+  auto buffer          = m_buffer.get_buffer();
+  auto buffer_size     = m_buffer.get_size();
+  std::size_t position = 0;
 
   while ((position + 18) < buffer_size) {
     auto sync_word = get_uint16_le(&buffer[position]);
@@ -454,7 +454,7 @@ parser_c::parse(bool end_of_stream) {
     }
 
     frame_c frame;
-    unsigned char const *buffer_to_decode;
+    uint8_t const *buffer_to_decode;
 
     if (sync_word == SYNC_WORD) {
       mtx::bytes::swap_buffer(&buffer[position], swapped_buffer, 18, 2);
@@ -502,7 +502,7 @@ parser_c::parse(bool end_of_stream) {
 }
 
 int
-parser_c::find_consecutive_frames(unsigned char const *buffer,
+parser_c::find_consecutive_frames(uint8_t const *buffer,
                                   std::size_t buffer_size,
                                   std::size_t num_required_headers) {
   static auto s_debug = debugging_option_c{"ac3_consecutive_frames"};
@@ -611,7 +611,7 @@ pow_poly(unsigned int a,
 }
 
 static uint16_t
-calculate_crc1(unsigned char const *buf,
+calculate_crc1(uint8_t const *buf,
                std::size_t frame_size) {
   int frame_size_words = frame_size >> 1;
   int frame_size_58    = (frame_size_words >> 1) + (frame_size_words >> 3);
@@ -623,13 +623,13 @@ calculate_crc1(unsigned char const *buf,
 }
 
 static uint16_t
-calculate_crc2(unsigned char const *buf,
+calculate_crc2(uint8_t const *buf,
                std::size_t frame_size) {
   return mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_ansi, &buf[2], frame_size - 4));
 }
 
 bool
-verify_checksums(unsigned char const *buf,
+verify_checksums(uint8_t const *buf,
                  std::size_t size,
                  bool full_buffer) {
   while (size) {
@@ -669,7 +669,7 @@ verify_checksums(unsigned char const *buf,
 }
 
 static void
-remove_dialog_normalization_gain_impl(unsigned char *buf,
+remove_dialog_normalization_gain_impl(uint8_t *buf,
                                       frame_c &frame) {
   static debugging_option_c s_debug{"ac3_remove_dialog_normalization_gain|remove_dialog_normalization_gain"};
 
@@ -714,7 +714,7 @@ remove_dialog_normalization_gain_impl(unsigned char *buf,
 }
 
 void
-remove_dialog_normalization_gain(unsigned char *buf,
+remove_dialog_normalization_gain(uint8_t *buf,
                                  std::size_t size) {
   while (true) {
     frame_c frame;

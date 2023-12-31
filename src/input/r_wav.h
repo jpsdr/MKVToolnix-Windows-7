@@ -37,7 +37,7 @@ public:
   virtual ~wav_demuxer_c() {};
 
   virtual int64_t get_preferred_input_size() = 0;
-  virtual unsigned char *get_buffer() = 0;
+  virtual uint8_t *get_buffer() = 0;
   virtual void process(int64_t len) = 0;
 
   virtual generic_packetizer_c *create_packetizer() = 0;

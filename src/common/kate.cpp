@@ -34,7 +34,7 @@ get_bits32_le(mtx::bits::reader_c &bc) {
 } // anonymous namespace
 
 void
-parse_identification_header(unsigned char const *buffer,
+parse_identification_header(uint8_t const *buffer,
                             int size,
                             identification_header_t &header) {
   mtx::bits::reader_c bc(buffer, size);

@@ -33,7 +33,7 @@ checkForBomAndNonAscii(QString const &fileName) {
 
   auto result   = BomAsciiCheckResult{};
   auto dataSize = content.size();
-  auto dataPtr  = reinterpret_cast<unsigned char const *>(content.constData());
+  auto dataPtr  = reinterpret_cast<uint8_t const *>(content.constData());
   auto dataEnd  = dataPtr + dataSize;
 
   mm_text_io_c::detect_byte_order_marker(dataPtr, dataSize, result.byteOrderMark, result.bomLength);

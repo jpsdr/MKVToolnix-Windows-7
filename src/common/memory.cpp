@@ -24,11 +24,11 @@ memory_c::resize(size_t new_size)
     return;
 
   if (m_is_owned) {
-    m_ptr  = static_cast<unsigned char *>(saferealloc(m_ptr, new_size + m_offset));
+    m_ptr  = static_cast<uint8_t *>(saferealloc(m_ptr, new_size + m_offset));
     m_size = new_size + m_offset;
 
   } else {
-    auto tmp = static_cast<unsigned char *>(safemalloc(new_size));
+    auto tmp = static_cast<uint8_t *>(safemalloc(new_size));
     std::memcpy(tmp, m_ptr + m_offset, std::min(new_size, m_size - m_offset));
     m_ptr      = tmp;
     m_is_owned = true;
@@ -37,7 +37,7 @@ memory_c::resize(size_t new_size)
 }
 
 void
-memory_c::add(unsigned char const *new_buffer,
+memory_c::add(uint8_t const *new_buffer,
               size_t new_size) {
   if ((0 == new_size) || !new_buffer)
     return;
@@ -48,7 +48,7 @@ memory_c::add(unsigned char const *new_buffer,
 }
 
 void
-memory_c::prepend(unsigned char const *new_buffer,
+memory_c::prepend(uint8_t const *new_buffer,
                   size_t new_size) {
   if ((0 == new_size) || !new_buffer)
     return;
@@ -70,7 +70,7 @@ lace_memory_xiph(std::vector<memory_cptr> const &blocks) {
   size += blocks.back()->get_size();
 
   memory_cptr mem       = memory_c::alloc(size);
-  unsigned char *buffer = mem->get_buffer();
+  uint8_t *buffer = mem->get_buffer();
 
   buffer[0]             = blocks.size() - 1;
   size_t offset         = 1;
@@ -98,10 +98,10 @@ unlace_memory_xiph(memory_cptr const &buffer) {
     throw mtx::mem::lacing_x("Buffer too small");
 
   std::vector<int> sizes;
-  unsigned char *ptr = buffer->get_buffer();
-  unsigned char *end = buffer->get_buffer() + buffer->get_size();
-  size_t last_size   = buffer->get_size();
-  size_t num_blocks  = ptr[0] + 1;
+  auto ptr          = buffer->get_buffer();
+  auto end          = buffer->get_buffer() + buffer->get_size();
+  auto last_size    = buffer->get_size();
+  size_t num_blocks = ptr[0] + 1;
   size_t i;
   ++ptr;
 
@@ -137,7 +137,7 @@ unlace_memory_xiph(memory_cptr const &buffer) {
   return blocks;
 }
 
-unsigned char *
+uint8_t *
 _safememdup(const void *s,
             size_t size,
             const char *file,
@@ -145,7 +145,7 @@ _safememdup(const void *s,
   if (!s)
     return nullptr;
 
-  auto copy = reinterpret_cast<unsigned char *>(malloc(size));
+  auto copy = reinterpret_cast<uint8_t *>(malloc(size));
   if (!copy)
     mxerror(fmt::format(Y("memory.cpp/safememdup() called from file {0}, line {1}: malloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
   memcpy(copy, s, size);        // NOLINT(clang-analyzer-core.NonNullParamChecker) as mxerror() terminates the program
@@ -153,18 +153,18 @@ _safememdup(const void *s,
   return copy;
 }
 
-unsigned char *
+uint8_t *
 _safemalloc(size_t size,
             const char *file,
             int line) {
-  auto mem = reinterpret_cast<unsigned char *>(malloc(size));
+  auto mem = reinterpret_cast<uint8_t *>(malloc(size));
   if (!mem)
     mxerror(fmt::format(Y("memory.cpp/safemalloc() called from file {0}, line {1}: malloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
 
   return mem;
 }
 
-unsigned char *
+uint8_t *
 _saferealloc(void *mem,
              size_t size,
              const char *file,
@@ -177,7 +177,7 @@ _saferealloc(void *mem,
   if (!mem)
     mxerror(fmt::format(Y("memory.cpp/saferealloc() called from file {0}, line {1}: realloc() returned nullptr for a size of {2} bytes.\n"), file, line, size));
 
-  return reinterpret_cast<unsigned char *>(mem);
+  return reinterpret_cast<uint8_t *>(mem);
 }
 
 // ----------------------------------------------------------------------

@@ -189,7 +189,7 @@ flac_reader_c::flac_read_cb(FLAC__byte buffer[],
   unsigned bytes_read, wanted_bytes;
 
   wanted_bytes = *bytes;
-  bytes_read   = m_in->read(reinterpret_cast<unsigned char *>(buffer), wanted_bytes);
+  bytes_read   = m_in->read(reinterpret_cast<uint8_t *>(buffer), wanted_bytes);
   *bytes       = bytes_read;
 
   return bytes_read == wanted_bytes ? FLAC__STREAM_DECODER_READ_STATUS_CONTINUE : FLAC__STREAM_DECODER_READ_STATUS_END_OF_STREAM;

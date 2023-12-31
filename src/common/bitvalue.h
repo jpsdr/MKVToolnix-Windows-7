@@ -45,7 +45,7 @@ public:
 
   value_c &operator =(const value_c &src);
   bool operator ==(const value_c &cmp) const;
-  unsigned char operator [](size_t index) const;
+  uint8_t operator [](size_t index) const;
 
   inline bool empty() const {
     return 0 == m_value->get_size();
@@ -57,7 +57,7 @@ public:
     return m_value->get_size();
   }
   void generate_random();
-  unsigned char *data() const {
+  uint8_t *data() const {
     return m_value->get_buffer();
   }
   void zero_content();

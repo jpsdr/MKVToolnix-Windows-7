@@ -98,8 +98,8 @@ video_for_windows_packetizer_c::rederive_frame_type_div3(packet_cptr const &pack
 
 void
 video_for_windows_packetizer_c::rederive_frame_type_mpeg4_p2(packet_cptr const &packet) {
-  size_t idx, size    = packet->data->get_size();
-  unsigned char *data = packet->data->get_buffer();
+  size_t idx, size = packet->data->get_size();
+  auto data        = packet->data->get_buffer();
 
   for (idx = 0; idx < size - 5; ++idx) {
     if ((0x00 == data[idx]) && (0x00 == data[idx + 1]) && (0x01 == data[idx + 2])) {

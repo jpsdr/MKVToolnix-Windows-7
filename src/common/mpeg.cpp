@@ -54,7 +54,7 @@ memory_cptr
 rbsp_to_nalu(memory_cptr const &buffer) {
   int pos, size = buffer->get_size();
   mm_mem_io_c d(nullptr, size, 100);
-  unsigned char *b = buffer->get_buffer();
+  uint8_t *b = buffer->get_buffer();
 
   for (pos = 0; pos < size; ++pos) {
     if (   ((pos + 2) < size)
@@ -74,7 +74,7 @@ rbsp_to_nalu(memory_cptr const &buffer) {
 }
 
 void
-write_nalu_size(unsigned char *buffer,
+write_nalu_size(uint8_t *buffer,
                 std::size_t size,
                 std::size_t nalu_size_length) {
   put_uint_be(buffer, size, nalu_size_length);

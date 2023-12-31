@@ -66,7 +66,7 @@ struct frame_t {
 };
 using frame_cptr = std::shared_ptr<frame_t>;
 
-bool parse_sequence_header(const unsigned char *buf, int size, sequence_header_t &seqhdr);
+bool parse_sequence_header(const uint8_t *buf, int size, sequence_header_t &seqhdr);
 
 class es_parser_c {
 protected:
@@ -97,7 +97,7 @@ public:
   es_parser_c();
   virtual ~es_parser_c() = default;
 
-  virtual void add_bytes(unsigned char *buf, size_t size);
+  virtual void add_bytes(uint8_t *buf, size_t size);
   virtual void add_bytes(memory_cptr &buf) {
     add_bytes(buf->get_buffer(), buf->get_size());
   };

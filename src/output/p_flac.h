@@ -28,7 +28,7 @@ private:
   int64_t m_num_packets{};
 
 public:
-  flac_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, unsigned char *header, int l_header);
+  flac_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, uint8_t *header, int l_header);
   virtual ~flac_packetizer_c();
 
   virtual void set_headers();

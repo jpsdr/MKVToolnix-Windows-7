@@ -90,7 +90,7 @@ read_next_header(mm_io_c &in,
 // must be reset.
 
 int
-checksum_byte_count(unsigned char const *buffer,
+checksum_byte_count(uint8_t const *buffer,
                     int bcount) {
   while (bcount >= 2) {
     auto meta_id = *buffer++;
@@ -129,7 +129,7 @@ checksum_byte_count(unsigned char const *buffer,
 // contained there, or zero if no such block is found.
 
 static int
-get_non_standard_rate(unsigned char const *buffer,
+get_non_standard_rate(uint8_t const *buffer,
                       int bcount) {
   while (bcount >= 2) {
     auto meta_id  = *buffer++;
@@ -180,7 +180,7 @@ get_non_standard_rate(unsigned char const *buffer,
 // bit sample rate.
 
 static int
-get_dsd_rate_shifter(unsigned char const *buffer,
+get_dsd_rate_shifter(uint8_t const *buffer,
                      int bcount) {
   while (bcount >= 2) {
     auto meta_id  = *buffer++;

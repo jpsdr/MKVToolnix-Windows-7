@@ -79,7 +79,7 @@ mm_multi_file_io_c::_read(void *buffer,
   auto p                = p_func();
 
   size_t num_read_total = 0;
-  auto buffer_ptr       = static_cast<unsigned char *>(buffer);
+  auto buffer_ptr       = static_cast<uint8_t *>(buffer);
 
   while (!eof() && (num_read_total < size)) {
     auto &file       = p->files[p->current_file];

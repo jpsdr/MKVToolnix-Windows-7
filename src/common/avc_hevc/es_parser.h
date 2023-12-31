@@ -80,10 +80,10 @@ protected:
 public:
   virtual ~es_parser_c();
 
-  void add_bytes(unsigned char *buf, std::size_t size);
+  void add_bytes(uint8_t *buf, std::size_t size);
   void add_bytes(memory_cptr const &buf);
 
-  void add_bytes_framed(unsigned char *buf, std::size_t buffer_size, std::size_t nalu_size_length);
+  void add_bytes_framed(uint8_t *buf, std::size_t buffer_size, std::size_t nalu_size_length);
   void add_bytes_framed(memory_cptr const &buf, std::size_t nalu_size_length);
 
   void force_default_duration(int64_t default_duration);
@@ -127,7 +127,7 @@ public:
 
   void cleanup(std::deque<frame_t> &queue);
 
-  void maybe_dump_raw_data(unsigned char const *buffer, std::size_t size);
+  void maybe_dump_raw_data(uint8_t const *buffer, std::size_t size);
 
   virtual void flush() = 0;
   virtual void clear() = 0;

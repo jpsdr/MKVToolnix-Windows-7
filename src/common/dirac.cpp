@@ -57,7 +57,7 @@ read_uint(mtx::bits::reader_c &bc) {
 }
 
 bool
-parse_sequence_header(const unsigned char *buf,
+parse_sequence_header(const uint8_t *buf,
                       int size,
                       sequence_header_t &seqhdr) {
   struct standard_video_format {
@@ -222,7 +222,7 @@ es_parser_c::es_parser_c()
 }
 
 void
-es_parser_c::add_bytes(unsigned char *buffer,
+es_parser_c::add_bytes(uint8_t *buffer,
                        size_t size) {
   mtx::mem::slice_cursor_c cursor;
 
@@ -253,7 +253,7 @@ es_parser_c::add_bytes(unsigned char *buffer,
           continue;
         }
 
-        unsigned char offset_buffer[4];
+        uint8_t offset_buffer[4];
         cursor.copy(offset_buffer, previous_pos + 4 + 1, 4);
         uint32_t next_offset = get_uint32_be(offset_buffer);
 
@@ -303,7 +303,7 @@ es_parser_c::flush() {
 
 void
 es_parser_c::handle_unit(memory_cptr const &packet) {
-  unsigned char type = packet->get_buffer()[4];
+  auto type = packet->get_buffer()[4];
 
   if (UNIT_SEQUENCE_HEADER == type)
     handle_sequence_header_unit(*packet);
@@ -402,8 +402,8 @@ es_parser_c::combine_extra_data_with_packet() {
   for (auto &mem : m_post_frame_extra_data)
     extra_size += mem->get_size();
 
-  memory_cptr new_packet = memory_c::alloc(extra_size + m_current_frame->data->get_size());
-  unsigned char *ptr     = new_packet->get_buffer();
+  auto new_packet = memory_c::alloc(extra_size + m_current_frame->data->get_size());
+  auto ptr        = new_packet->get_buffer();
 
   for (auto &mem : m_pre_frame_extra_data) {
     memcpy(ptr, mem->get_buffer(), mem->get_size());

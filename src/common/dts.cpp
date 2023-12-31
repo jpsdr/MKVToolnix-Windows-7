@@ -30,7 +30,7 @@ namespace mtx::dts {
 namespace {
 
 uint16_t
-calculate_crc(unsigned char const *buf,
+calculate_crc(uint8_t const *buf,
               std::size_t size) {
   // See ETSI TS 102 114 Annex B
   return mtx::bytes::swap_16(mtx::checksum::calculate_as_uint(mtx::checksum::algorithm_e::crc16_ccitt, buf, size, 0xffff));
@@ -96,7 +96,7 @@ count_channels_for_mask(unsigned int mask) {
 }
 
 int
-find_header_internal(unsigned char const *buf,
+find_header_internal(uint8_t const *buf,
                      std::size_t size,
                      header_t &header,
                      bool allow_no_exss_search) {
@@ -127,7 +127,7 @@ find_header_internal(unsigned char const *buf,
 } // anonymous namespace
 
 int
-find_sync_word(unsigned char const *buf,
+find_sync_word(uint8_t const *buf,
                std::size_t size) {
   if (4 > size)
     // not enough data for one header
@@ -150,7 +150,7 @@ find_sync_word(unsigned char const *buf,
 }
 
 int
-find_header(unsigned char const *buf,
+find_header(uint8_t const *buf,
             std::size_t size,
             header_t &header,
             bool allow_no_exss_search) {
@@ -162,7 +162,7 @@ find_header(unsigned char const *buf,
 }
 
 int
-find_consecutive_headers(unsigned char const *buf,
+find_consecutive_headers(uint8_t const *buf,
                          std::size_t size,
                          unsigned int num) {
   static auto s_debug = debugging_option_c{"dts_detection"};
@@ -432,7 +432,7 @@ header_t::set_extension_offsets(substream_asset_t &asset) {
 }
 
 void
-header_t::locate_and_decode_xch_header(unsigned char const *buf,
+header_t::locate_and_decode_xch_header(uint8_t const *buf,
                                        std::size_t size) {
   static auto s_debug = debugging_option_c{"dts_xch"};
 
@@ -467,7 +467,7 @@ header_t::locate_and_decode_xch_header(unsigned char const *buf,
 }
 
 bool
-header_t::decode_core_header(unsigned char const *buf,
+header_t::decode_core_header(uint8_t const *buf,
                              std::size_t size,
                              bool allow_no_exss_search) {
   try {
@@ -853,7 +853,7 @@ header_t::decode_asset(mtx::bits::reader_c &bc,
 #undef test_mask
 
 bool
-header_t::decode_x96_header(unsigned char const *buf,
+header_t::decode_x96_header(uint8_t const *buf,
                              std::size_t size) {
   try {
     auto bc = mtx::bits::reader_c{buf, size};
@@ -871,7 +871,7 @@ header_t::decode_x96_header(unsigned char const *buf,
 }
 
 bool
-header_t::decode_exss_header(unsigned char const *buf,
+header_t::decode_exss_header(uint8_t const *buf,
                              std::size_t size) {
   try {
     auto bc = mtx::bits::reader_c{buf, size};
@@ -1005,7 +1005,7 @@ detect(const void *src_buf,
     memcpy(buf[cur_buf], src_buf, len);
 
     if (dts_swap_bytes) {
-      mtx::bytes::swap_buffer(reinterpret_cast<unsigned char const *>(buf[cur_buf]), reinterpret_cast<unsigned char *>(buf[cur_buf ^ 1]), len, 2);
+      mtx::bytes::swap_buffer(reinterpret_cast<uint8_t const *>(buf[cur_buf]), reinterpret_cast<uint8_t *>(buf[cur_buf ^ 1]), len, 2);
       cur_buf ^= 1;
     }
 
@@ -1038,7 +1038,7 @@ debugging_option_c s_debug_dng_removal{"dts_remove_dialog_normalization_gain|rem
 unsigned int const s_dng_removed_level = 0;
 
 void
-remove_dialog_normalization_gain_from_core(unsigned char *buf,
+remove_dialog_normalization_gain_from_core(uint8_t *buf,
                                            header_t &header) {
   if (!header.has_core || !header.dialog_normalization_gain_bit_position)
     return;
@@ -1065,7 +1065,7 @@ remove_dialog_normalization_gain_from_core(unsigned char *buf,
 }
 
 void
-remove_dialog_normalization_gain_from_extension(unsigned char *buf,
+remove_dialog_normalization_gain_from_extension(uint8_t *buf,
                                                 header_t &header) {
   if (!header.has_exss || !header.extension_dialog_normalization_gain_bit_position)
     return;
@@ -1098,7 +1098,7 @@ remove_dialog_normalization_gain_from_extension(unsigned char *buf,
 }
 
 void
-remove_dialog_normalization_gain(unsigned char *buf,
+remove_dialog_normalization_gain(uint8_t *buf,
                                  std::size_t size) {
   while (size > 0) {
     header_t header;

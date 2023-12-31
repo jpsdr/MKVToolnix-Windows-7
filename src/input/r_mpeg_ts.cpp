@@ -183,7 +183,7 @@ track_c::is_pes_payload_size_unbounded()
 }
 
 void
-track_c::add_pes_payload(unsigned char *ts_payload,
+track_c::add_pes_payload(uint8_t *ts_payload,
                          size_t ts_payload_size) {
   auto to_add = is_pes_payload_size_unbounded() ? ts_payload_size : std::min(ts_payload_size, remaining_payload_size_to_read());
 
@@ -680,7 +680,7 @@ track_c::parse_dovi_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
 
   mxdebug_if(reader.m_debug_dovi, fmt::format("parse_dovi_pmt_descriptor: parsing PMT descriptor of length {0}\n", pmt_descriptor.length));
 
-  mtx::bits::reader_c r{reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1), pmt_descriptor.length};
+  mtx::bits::reader_c r{reinterpret_cast<uint8_t const *>(&pmt_descriptor + 1), pmt_descriptor.length};
 
   try {
     mtx::dovi::dovi_decoder_configuration_record_t cfg;
@@ -742,7 +742,7 @@ track_c::parse_teletext_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
   if (pmt_pid_info.stream_type != stream_type_e::iso_13818_pes_private)
     return false;
 
-  auto buffer      = reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1);
+  auto buffer      = reinterpret_cast<uint8_t const *>(&pmt_descriptor + 1);
   auto num_entries = static_cast<unsigned int>(pmt_descriptor.length) / 5;
   mxdebug_if(reader.m_debug_pat_pmt, fmt::format("parse_teletext_pmt_descriptor: Teletext PMT descriptor, {0} entries\n", num_entries));
   for (auto idx = 0u; idx < num_entries; ++idx) {
@@ -826,7 +826,7 @@ track_c::determine_codec_for_hdmv_registration_descriptor(pmt_descriptor_t const
   //   aspect_ratio       4
   //   stuffing_bits      4
 
-  mtx::bits::reader_c r{reinterpret_cast<unsigned char const *>(&pmt_descriptor), static_cast<std::size_t>(pmt_descriptor.length + 2)};
+  mtx::bits::reader_c r{reinterpret_cast<uint8_t const *>(&pmt_descriptor), static_cast<std::size_t>(pmt_descriptor.length + 2)};
 
   try {
     r.skip_bits(2 * 8 + 32);
@@ -871,7 +871,7 @@ track_c::parse_registration_pmt_descriptor(pmt_descriptor_t const &pmt_descripto
                                            pmt_pid_info_t const &pmt_pid_info) {
   if (reader.m_debug_pat_pmt) {
     mxdebug(fmt::format("parse_registration_pmt_descriptor: starting to parse the following:\n"));
-    debugging_c::hexdump(reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1), pmt_descriptor.length);
+    debugging_c::hexdump(reinterpret_cast<uint8_t const *>(&pmt_descriptor + 1), pmt_descriptor.length);
   }
 
   if (pmt_pid_info.stream_type != stream_type_e::iso_13818_pes_private)
@@ -880,7 +880,7 @@ track_c::parse_registration_pmt_descriptor(pmt_descriptor_t const &pmt_descripto
   if (pmt_descriptor.length < 4)
     return false;
 
-  auto reg_fourcc = fourcc_c{reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1)};
+  auto reg_fourcc = fourcc_c{reinterpret_cast<uint8_t const *>(&pmt_descriptor + 1)};
   auto reg_codec  = reg_fourcc == fourcc_c{"HDMV"} ? determine_codec_for_hdmv_registration_descriptor(pmt_descriptor) : codec_c::look_up(reg_fourcc.str());
 
   mxdebug_if(reader.m_debug_pat_pmt, fmt::format("parse_registration_pmt_descriptor: Registration descriptor with FourCC: {0} codec: {1}\n", reg_fourcc.description(), reg_codec));
@@ -918,7 +918,7 @@ track_c::parse_subtitling_pmt_descriptor(pmt_descriptor_t const &pmt_descriptor,
   codec                = codec_c::look_up(codec_c::type_e::S_DVBSUB);
   m_codec_private_data = memory_c::alloc(5);
   auto codec_private   = m_codec_private_data->get_buffer();
-  auto descriptor      = reinterpret_cast<unsigned char const *>(&pmt_descriptor + 1);
+  auto descriptor      = reinterpret_cast<uint8_t const *>(&pmt_descriptor + 1);
 
   parse_iso639_language_from(descriptor);
 
@@ -1277,7 +1277,7 @@ reader_c::read_headers_for_file(std::size_t file_num) {
 
     mxdebug_if(m_debug_headers, fmt::format("read_headers: Starting to build PID list. (packet size: {0})\n", f.m_detected_packet_size));
 
-    unsigned char buf[TS_MAX_PACKET_SIZE]; // maximum TS packet size + 1
+    uint8_t buf[TS_MAX_PACKET_SIZE]; // maximum TS packet size + 1
 
     while (true) {
       if (f.m_in->read(buf, f.m_detected_packet_size) != static_cast<unsigned int>(f.m_detected_packet_size))
@@ -1508,7 +1508,7 @@ reader_c::determine_global_timestamp_offset() {
   mxdebug_if(m_debug_timestamp_offset, fmt::format("determine_global_timestamp_offset: determining global timestamp offset from the first {0} bytes\n", f.m_probe_range));
 
   try {
-    unsigned char buf[TS_MAX_PACKET_SIZE]; // maximum TS packet size + 1
+    uint8_t buf[TS_MAX_PACKET_SIZE]; // maximum TS packet size + 1
 
     while (f.m_in->getFilePointer() < probe_end_pos) {
       if (f.m_in->read(buf, f.m_detected_packet_size) != static_cast<unsigned int>(f.m_detected_packet_size))
@@ -1961,7 +1961,7 @@ reader_c::read_descriptor_string(mtx::bits::reader_c &r) {
 
   std::string content(str_length, ' ');
 
-  r.get_bytes(reinterpret_cast<unsigned char *>(&content[0]), str_length);
+  r.get_bytes(reinterpret_cast<uint8_t *>(&content[0]), str_length);
 
   auto coding = static_cast<unsigned int>(content[0]);
 
@@ -1979,7 +1979,7 @@ reader_c::read_descriptor_string(mtx::bits::reader_c &r) {
     if (str_length < 3)
       return {};
 
-    coding = 0x1f00 | static_cast<unsigned char>(content[1]);
+    coding = 0x1f00 | static_cast<uint8_t>(content[1]);
     content.erase(0, 2);
 
   } else
@@ -2165,7 +2165,7 @@ reader_c::parse_pes(track_c &track) {
 }
 
 timestamp_c
-reader_c::read_timestamp(unsigned char *p) {
+reader_c::read_timestamp(uint8_t *p) {
   int64_t mpeg_timestamp  =  static_cast<int64_t>(             ( p[0]   >> 1) & 0x07) << 30;
   mpeg_timestamp         |= (static_cast<int64_t>(get_uint16_be(&p[1])) >> 1)         << 15;
   mpeg_timestamp         |=  static_cast<int64_t>(get_uint16_be(&p[3]))               >>  1;
@@ -2195,7 +2195,7 @@ reader_c::handle_packet_for_pid_not_listed_in_pmt(uint16_t pid) {
 }
 
 void
-reader_c::parse_packet(unsigned char *buf) {
+reader_c::parse_packet(uint8_t *buf) {
   auto hdr   = reinterpret_cast<packet_header_t *>(buf);
   auto track = find_track_for_pid(hdr->get_pid());
 
@@ -2222,7 +2222,7 @@ reader_c::parse_packet(unsigned char *buf) {
 void
 reader_c::handle_ts_payload(track_c &track,
                             packet_header_t &ts_header,
-                            unsigned char *ts_payload,
+                            uint8_t *ts_payload,
                             std::size_t ts_payload_size) {
   if (mtx::included_in(track.type, pid_type_e::pat, pid_type_e::pmt, pid_type_e::sdt))
     handle_pat_pmt_payload(track, ts_header, ts_payload, ts_payload_size);
@@ -2238,7 +2238,7 @@ reader_c::handle_ts_payload(track_c &track,
 void
 reader_c::handle_pat_pmt_payload(track_c &track,
                                  packet_header_t &ts_header,
-                                 unsigned char *ts_payload,
+                                 uint8_t *ts_payload,
                                  std::size_t ts_payload_size) {
   auto &f = file();
 
@@ -2297,7 +2297,7 @@ reader_c::handle_transport_errors(track_c &track,
 void
 reader_c::handle_pes_payload(track_c &track,
                              packet_header_t &ts_header,
-                             unsigned char *ts_payload,
+                             uint8_t *ts_payload,
                              std::size_t ts_payload_size) {
   if (ts_header.is_payload_unit_start()) {
     if (track.is_pes_payload_size_unbounded() && track.pes_payload_read->get_size())
@@ -2705,7 +2705,7 @@ reader_c::read(generic_packetizer_c *requested_ptzr,
   f.m_packet_sent_to_packetizer = false;
   auto prior_position           = f.m_in->getFilePointer();
 
-  unsigned char buf[TS_MAX_PACKET_SIZE + 1];
+  uint8_t buf[TS_MAX_PACKET_SIZE + 1];
 
   while (!f.m_packet_sent_to_packetizer) {
     f.m_position = f.m_in->getFilePointer();
@@ -2780,7 +2780,7 @@ reader_c::resync(int64_t start_at) {
     mxdebug_if(m_debug_resync, fmt::format("resync: Start resync for data from {0}\n", start_at));
     f.m_in->setFilePointer(start_at);
 
-    unsigned char buf[TS_MAX_PACKET_SIZE + 1];
+    uint8_t buf[TS_MAX_PACKET_SIZE + 1];
 
     while (!f.m_in->eof()) {
       auto curr_pos = f.m_in->getFilePointer();
@@ -2836,10 +2836,10 @@ reader_c::find_track_for_pid(uint16_t pid)
   return {};
 }
 
-std::pair<unsigned char *, std::size_t>
+std::pair<uint8_t *, std::size_t>
 reader_c::determine_ts_payload_start(packet_header_t *hdr)
   const {
-  auto ts_header_start  = reinterpret_cast<unsigned char *>(hdr);
+  auto ts_header_start  = reinterpret_cast<uint8_t *>(hdr);
   auto ts_payload_start = ts_header_start + sizeof(packet_header_t);
 
   if (hdr->has_adaptation_field())

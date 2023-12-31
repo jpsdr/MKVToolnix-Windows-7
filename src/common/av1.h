@@ -78,7 +78,7 @@ unsigned int constexpr MC_UNSPECIFIED              =  2;
 
 unsigned int constexpr METADATA_TYPE_ITUT_T35      =  4;
 
-unsigned char constexpr ITU_T_T35_DOVI_RPU_PAYLOAD_HEADER[] = {
+uint8_t constexpr ITU_T_T35_DOVI_RPU_PAYLOAD_HEADER[] = {
   0x00, 0x3B, 0x00, 0x00, 0x08, 0x00, 0x37, 0xCD, 0x08
 };
 
@@ -104,17 +104,17 @@ public:
   void set_default_duration(mtx_mp_rational_t default_duration);
   void set_parse_sequence_header_obus_only(bool parse_sequence_header_obus_only);
 
-  void parse(unsigned char const *buffer, uint64_t buffer_size);
+  void parse(uint8_t const *buffer, uint64_t buffer_size);
   void parse(memory_c const &buffer);
 
   void flush();
   bool frame_available() const;
   frame_t get_next_frame();
 
-  bool is_keyframe(unsigned char const *buffer, uint64_t buffer_size);
+  bool is_keyframe(uint8_t const *buffer, uint64_t buffer_size);
   bool is_keyframe(memory_c const &buffer);
 
-  void debug_obu_types(unsigned char const *buffer, uint64_t buffer_size);
+  void debug_obu_types(uint8_t const *buffer, uint64_t buffer_size);
   void debug_obu_types(memory_c const &buffer);
 
   std::pair<unsigned int, unsigned int> get_pixel_dimensions() const;
@@ -138,7 +138,7 @@ protected:
   static uint64_t read_leb128(mtx::bits::reader_c &r);
   static uint64_t read_uvlc(mtx::bits::reader_c &r);
 
-  std::optional<uint64_t> parse_obu_common_data(unsigned char const *buffer, uint64_t buffer_size);
+  std::optional<uint64_t> parse_obu_common_data(uint8_t const *buffer, uint64_t buffer_size);
   std::optional<uint64_t> parse_obu_common_data(memory_c const &buffer);
   std::optional<uint64_t> parse_obu_common_data();
   void parse_sequence_header_obu(mtx::bits::reader_c &r);

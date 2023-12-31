@@ -25,6 +25,6 @@ public:
   virtual ~zlib_compressor_c();
 
 protected:
-  virtual memory_cptr do_compress(unsigned char const *buffer, std::size_t size) override;
-  virtual memory_cptr do_decompress(unsigned char const *buffer, std::size_t size) override;
+  virtual memory_cptr do_compress(uint8_t const *buffer, std::size_t size) override;
+  virtual memory_cptr do_decompress(uint8_t const *buffer, std::size_t size) override;
 };

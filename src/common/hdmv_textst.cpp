@@ -19,13 +19,13 @@
 namespace mtx::hdmv_textst {
 
 ::timestamp_c
-get_timestamp(unsigned char const *buf) {
+get_timestamp(uint8_t const *buf) {
   auto value = (static_cast<uint64_t>(buf[0] & 0x01) << 32) | get_uint32_be(&buf[1]);
   return timestamp_c::mpeg(value);
 }
 
 void
-put_timestamp(unsigned char *buf,
+put_timestamp(uint8_t *buf,
              ::timestamp_c const &timestamp) {
   auto pts = timestamp.to_mpeg();
 

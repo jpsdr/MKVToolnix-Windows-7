@@ -56,7 +56,7 @@ xtr_avc_c::write_nal(uint8_t *data,
 }
 
 bool
-xtr_avc_c::need_to_write_access_unit_delimiter(unsigned char *buffer,
+xtr_avc_c::need_to_write_access_unit_delimiter(uint8_t *buffer,
                                                std::size_t size) {
   auto nalu_positions = find_nal_units(buffer, size);
   auto have_aud       = false;
@@ -199,8 +199,8 @@ xtr_avc_c::handle_frame(xtr_frame_t &f) {
       return;
 }
 
-unsigned char
-xtr_avc_c::get_nalu_type(unsigned char const *buffer,
+uint8_t
+xtr_avc_c::get_nalu_type(uint8_t const *buffer,
                          std::size_t size)
   const {
   return size > 0 ? buffer[0] & 0x1f : 0;

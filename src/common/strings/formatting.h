@@ -72,11 +72,11 @@ std::string format_number(int64_t number);
 std::string format_number(uint64_t number);
 std::string format_thousands(uint64_t value);
 
-std::string to_hex(const unsigned char *buf, size_t size, bool compact = false);
+std::string to_hex(const uint8_t *buf, size_t size, bool compact = false);
 inline std::string
 to_hex(const std::string &buf,
        bool compact = false) {
-  return to_hex(reinterpret_cast<const unsigned char *>(buf.c_str()), buf.length(), compact);
+  return to_hex(reinterpret_cast<const uint8_t *>(buf.c_str()), buf.length(), compact);
 }
 inline std::string
 to_hex(memory_cptr const &buf,

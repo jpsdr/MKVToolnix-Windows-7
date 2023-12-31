@@ -22,7 +22,7 @@ namespace mtx::ape {
 
 int
 tag_present_at_end(mm_io_c &io) {
-  unsigned char buffer[24];
+  uint8_t buffer[24];
 
   io.save_pos();
   at_scope_exit_c restore([&io]() { io.restore_pos(); });

@@ -34,5 +34,5 @@ public:
   }
 
 protected:
-  void put_timestamp(unsigned char *buf, timestamp_c const &timestamp);
+  void put_timestamp(uint8_t *buf, timestamp_c const &timestamp);
 };

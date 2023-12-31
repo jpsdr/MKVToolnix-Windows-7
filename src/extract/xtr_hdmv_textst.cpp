@@ -69,14 +69,14 @@ xtr_hdmv_textst_c::create_file(xtr_base_c *master,
 
   // Remember the position for fixing the number of presentation
   // segments.
-  unsigned char const zero[2] = { 0, 0 };
+  uint8_t const zero[2] = { 0, 0 };
   m_num_presentation_segment_position = m_out->getFilePointer();
   m_out->write(&zero[0], 2);
 }
 
 void
 xtr_hdmv_textst_c::finish_file() {
-  unsigned char buf[2];
+  uint8_t buf[2];
 
   put_uint16_be(&buf[0], m_num_presentation_segments);
   m_out->setFilePointer(m_num_presentation_segment_position);

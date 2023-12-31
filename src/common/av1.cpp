@@ -121,7 +121,7 @@ parser_c::parse_obu_common_data(memory_c const &buffer) {
 }
 
 std::optional<uint64_t>
-parser_c::parse_obu_common_data(unsigned char const *buffer,
+parser_c::parse_obu_common_data(uint8_t const *buffer,
                                 uint64_t buffer_size) {
   p->r.init(buffer, buffer_size);
   return parse_obu_common_data();
@@ -379,7 +379,7 @@ parser_c::parse(memory_c const &buffer) {
 }
 
 void
-parser_c::parse(unsigned char const *buffer,
+parser_c::parse(uint8_t const *buffer,
                 uint64_t buffer_size) {
   auto &r = p->r;
 
@@ -627,7 +627,7 @@ parser_c::is_keyframe(memory_c const &buffer) {
 }
 
 bool
-parser_c::is_keyframe(unsigned char const *buffer,
+parser_c::is_keyframe(uint8_t const *buffer,
                       uint64_t buffer_size) {
   mxdebug_if(p->debug_is_keyframe, fmt::format("is_keyframe: start on size {0}\n", buffer_size));
 
@@ -693,7 +693,7 @@ parser_c::debug_obu_types(memory_c const &buffer) {
 }
 
 void
-parser_c::debug_obu_types(unsigned char const *buffer,
+parser_c::debug_obu_types(uint8_t const *buffer,
                           uint64_t buffer_size) {
   if (!p->debug_obu_types)
     return;
@@ -761,7 +761,7 @@ maybe_shrink_size_fields(memory_c &mem) {
       auto obu_size   = r.get_leb128();
       auto field_size = r.get_bit_position() / 8 - 1u;
 
-      unsigned char new_size_field[9];
+      uint8_t new_size_field[9];
       mtx::bits::writer_c w{new_size_field, 9};
 
       w.put_leb128(obu_size);

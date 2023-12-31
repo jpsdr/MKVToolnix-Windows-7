@@ -337,7 +337,7 @@ kax_track_t::register_use_of_webm_block_addition_id(uint64_t id) {
 */
 bool
 kax_reader_c::probe_file() {
-  unsigned char data[4];
+  uint8_t data[4];
   return (m_in->read(data, 4) == 4) && (get_uint32_be(data) == MAGIC_MKV);
 }
 
@@ -381,7 +381,7 @@ kax_reader_c::find_track_by_uid(uint64_t uid,
 
 bool
 kax_reader_c::unlace_vorbis_private_data(kax_track_t *t,
-                                         unsigned char *buffer,
+                                         uint8_t *buffer,
                                          int size) {
   try {
     t->headers = unlace_memory_xiph(memory_c::borrow(buffer, size));
@@ -900,7 +900,7 @@ kax_reader_c::handle_attachments(mm_io_c *io,
     matt->description = to_utf8(FindChildValue<libmatroska::KaxFileDescription>(att));
     matt->mime_type   = ::mtx::mime::maybe_map_to_legacy_font_mime_type(FindChildValue<libmatroska::KaxMimeType>(att), g_use_legacy_font_mime_types);
     matt->id          = FindChildValue<libmatroska::KaxFileUID>(att);
-    matt->data        = memory_c::clone(static_cast<unsigned char *>(fdata->GetBuffer()), fdata->GetSize());
+    matt->data        = memory_c::clone(static_cast<uint8_t *>(fdata->GetBuffer()), fdata->GetSize());
 
     auto attach_mode  = attachment_requested(m_attachment_id);
 
@@ -1375,11 +1375,11 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
       continue;
     }
 
-    unsigned char track_type = kttype->GetValue();
-    track->type              = track_type == track_audio    ? 'a'
-                             : track_type == track_video    ? 'v'
-                             : track_type == track_subtitle ? 's'
-                             :                                '?';
+    auto track_type = kttype->GetValue();
+    track->type     = track_type == track_audio    ? 'a'
+                    : track_type == track_video    ? 'v'
+                    : track_type == track_subtitle ? 's'
+                    :                                '?';
 
     auto ktaudio = FindChild<libmatroska::KaxTrackAudio>(ktentry);
     if (ktaudio)

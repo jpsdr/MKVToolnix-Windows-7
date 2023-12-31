@@ -55,7 +55,7 @@ uint8_t const frame_t::ms_mlp_channels[32] = {     1,     2,      3, 4, 3, 4, 5,
 constexpr std::size_t PARSER_MIN_HEADER_SIZE = 12;
 
 bool
-frame_t::parse_header(unsigned char const *data,
+frame_t::parse_header(uint8_t const *data,
                       std::size_t size) {
   if (size < PARSER_MIN_HEADER_SIZE)
     return false;
@@ -77,7 +77,7 @@ frame_t::parse_header(unsigned char const *data,
 }
 
 bool
-frame_t::parse_ac3_header(unsigned char const *data,
+frame_t::parse_ac3_header(uint8_t const *data,
                           std::size_t size) {
   if (!m_ac3_header.decode_header(data, size))
     return false;
@@ -98,7 +98,7 @@ frame_t::decode_rate_bits(unsigned int rate_bits) {
 }
 
 bool
-frame_t::parse_mlp_header(unsigned char const *data,
+frame_t::parse_mlp_header(uint8_t const *data,
                           std::size_t) {
   m_sampling_rate     = decode_rate_bits(data[9] >> 4);
   m_samples_per_frame = 40 << ((data[9] >> 4) & 0x07);
@@ -108,7 +108,7 @@ frame_t::parse_mlp_header(unsigned char const *data,
 }
 
 bool
-frame_t::parse_truehd_header(unsigned char const *data,
+frame_t::parse_truehd_header(uint8_t const *data,
                              std::size_t size) {
   static debugging_option_c s_debug{"truehd_atmos"};
 
@@ -183,7 +183,7 @@ frame_t::decode_channel_map(int channel_map) {
 // ----------------------------------------------------------------------
 
 void
-parser_c::add_data(unsigned char const *new_data,
+parser_c::add_data(uint8_t const *new_data,
                    unsigned int new_size) {
   if (!new_data || (0 == new_size))
     return;
@@ -197,8 +197,8 @@ void
 parser_c::parse(bool end_of_stream) {
   static debugging_option_c s_debug{"truehd_parser"};
 
-  unsigned char *data = m_buffer.get_buffer();
-  unsigned int size   = m_buffer.get_size();
+  auto data           = m_buffer.get_buffer();
+  auto size           = m_buffer.get_size();
   unsigned int offset = 0;
 
   if (PARSER_MIN_HEADER_SIZE > size)
@@ -277,11 +277,11 @@ parser_c::get_next_frame() {
 
 unsigned int
 parser_c::resync(unsigned int offset) {
-  const unsigned char *data = m_buffer.get_buffer();
-  unsigned int size         = m_buffer.get_size();
+  auto data    = m_buffer.get_buffer();
+  auto size    = m_buffer.get_size();
 
-  m_sync_state              = state_unsynced;
-  auto frame                = frame_t{};
+  m_sync_state = state_unsynced;
+  auto frame   = frame_t{};
 
   for (offset = offset + 4; (offset + 4) < size; ++offset) {
     uint32_t sync_word = get_uint32_be(&data[offset]);
@@ -299,7 +299,7 @@ parser_c::resync(unsigned int offset) {
 // ----------------------------------------------------------------------
 
 void
-remove_dialog_normalization_gain(unsigned char *buf,
+remove_dialog_normalization_gain(uint8_t *buf,
                                  std::size_t size) {
   if (size < 32)
     return;

@@ -38,6 +38,6 @@ bool parse_dovi_rpu(memory_cptr const &buffer, mtx::dovi::dovi_rpu_data_header_t
 
 par_extraction_t extract_par(memory_cptr const &buffer);
 bool is_fourcc(const char *fourcc);
-memory_cptr hevcc_to_nalus(const unsigned char *buffer, size_t size);
+memory_cptr hevcc_to_nalus(const uint8_t *buffer, size_t size);
 
 }                              // namespace mtx::hevc

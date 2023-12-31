@@ -208,7 +208,7 @@ show_nalu(uint32_t type,
 }
 
 static std::optional<uint32_t>
-determine_inner_nalu_type(unsigned char const *buffer,
+determine_inner_nalu_type(uint8_t const *buffer,
                           uint64_t size,
                           uint32_t type) {
   if (   (size         >= 3)
@@ -239,7 +239,7 @@ parse_file_annex_b(std::string const &file_name) {
   auto previous_marker_size = 0;
   auto previous_pos         = static_cast<int64_t>(-1);
   auto previous_type        = 0;
-  unsigned char next_bytes[4];
+  uint8_t next_bytes[4];
 
   std::memset(next_bytes, 0, 4);
 

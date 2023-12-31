@@ -84,6 +84,6 @@ constexpr auto HAS_CHECKSUM   = 0x10000000; // block contains a trailing checksu
 constexpr auto DSD_FLAG       = 0x80000000; // block is encoded DSD (1-bit PCM)
 
 int32_t parse_frame(mm_io_c &mm_io, header_t &header, meta_t &meta, bool read_blocked_frames, bool keep_initial_position);
-int checksum_byte_count(unsigned char const *buffer, int bcount);
+int checksum_byte_count(uint8_t const *buffer, int bcount);
 
 } // namespace mtx::wavpack

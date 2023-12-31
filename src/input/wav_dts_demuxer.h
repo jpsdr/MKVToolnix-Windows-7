@@ -33,7 +33,7 @@ public:
     return DTS_READ_SIZE;
   };
 
-  virtual unsigned char *get_buffer() {
+  virtual uint8_t *get_buffer() {
     return m_read_buffer->get_buffer();
   }
 

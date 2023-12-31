@@ -392,7 +392,7 @@ flv_reader_c::create_v_generic_packetizer(flv_track_cptr &track) {
   put_uint16_le(&bih.bi_planes,      1);
   put_uint16_le(&bih.bi_bit_count,   24);
   put_uint32_le(&bih.bi_size_image,  track->m_v_width * track->m_v_height * 3);
-  track->m_fourcc.write(reinterpret_cast<unsigned char *>(&bih.bi_compression));
+  track->m_fourcc.write(reinterpret_cast<uint8_t *>(&bih.bi_compression));
 
   m_ti.m_private_data = memory_c::clone(&bih, sizeof(bih));
 

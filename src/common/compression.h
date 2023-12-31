@@ -73,7 +73,7 @@ public:
     return do_compress(buffer->get_buffer(), buffer->get_size());
   }
 
-  virtual memory_cptr compress(unsigned char const *buffer,
+  virtual memory_cptr compress(uint8_t const *buffer,
                                std::size_t size) {
     return do_compress(buffer, size);
   }
@@ -82,7 +82,7 @@ public:
     return do_decompress(buffer->get_buffer(), buffer->get_size());
   }
 
-  virtual memory_cptr decompress(unsigned char const *buffer,
+  virtual memory_cptr decompress(uint8_t const *buffer,
                                  std::size_t size) {
     return do_decompress(buffer, size);
   }
@@ -94,11 +94,11 @@ public:
   static compressor_ptr create_from_file_name(std::string const &file_name);
 
 protected:
-  virtual memory_cptr do_compress(unsigned char const *buffer,
+  virtual memory_cptr do_compress(uint8_t const *buffer,
                                   std::size_t size) {
     return memory_c::clone(buffer, size);
   }
-  virtual memory_cptr do_decompress(unsigned char const *buffer,
+  virtual memory_cptr do_decompress(uint8_t const *buffer,
                                     std::size_t size) {
     return memory_c::clone(buffer, size);
   }

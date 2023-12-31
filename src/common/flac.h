@@ -62,8 +62,8 @@ public:
   virtual void init_flac_decoder();
 };
 
-int get_num_samples(unsigned char const *buf, int size, FLAC__StreamMetadata_StreamInfo const &stream_info);
-int decode_headers(unsigned char const *mem, int size, int num_elements, ...);
+int get_num_samples(uint8_t const *buf, int size, FLAC__StreamMetadata_StreamInfo const &stream_info);
+int decode_headers(uint8_t const *mem, int size, int num_elements, ...);
 
 std::string file_base_name_for_picture_type(unsigned int type);
 

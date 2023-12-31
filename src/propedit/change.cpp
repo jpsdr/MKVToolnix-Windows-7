@@ -112,7 +112,7 @@ void
 change_c::parse_ascii_string() {
   size_t i;
   for (i = 0; m_value.length() > i; ++i)
-    if (127 < static_cast<unsigned char>(m_value[i]))
+    if (127 < static_cast<uint8_t>(m_value[i]))
       mxerror(fmt::format(Y("The property value contains non-ASCII characters, but the property is not a Unicode string in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
 
   m_s_value = m_value;

@@ -584,7 +584,7 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
   data_size              += data_uu.length() / 4 * 3;
   attachment.data         = memory_c::alloc(data_size);
   auto out                = attachment.data->get_buffer();
-  auto in                 = reinterpret_cast<unsigned char const *>(data_uu.c_str());
+  auto in                 = reinterpret_cast<uint8_t const *>(data_uu.c_str());
 
   for (auto end = in + (data_uu.length() / 4) * 4; in < end; in += 4, out += 3)
     decode_chars(in, out, 4);
@@ -601,8 +601,8 @@ ssa_parser_c::add_attachment_maybe(std::string &name,
 }
 
 void
-ssa_parser_c::decode_chars(unsigned char const *in,
-                           unsigned char *out,
+ssa_parser_c::decode_chars(uint8_t const *in,
+                           uint8_t *out,
                            size_t bytes_in) {
   if (!bytes_in)
     return;

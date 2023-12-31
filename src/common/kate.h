@@ -53,6 +53,6 @@ struct identification_header_t {
   std::string language, category;
 };
 
-void parse_identification_header(unsigned char const *buffer, int size, identification_header_t &header);
+void parse_identification_header(uint8_t const *buffer, int size, identification_header_t &header);
 
 } // namespace mtx::kate

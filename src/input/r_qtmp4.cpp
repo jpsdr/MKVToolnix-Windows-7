@@ -456,12 +456,12 @@ qtmp4_reader_c::handle_cmvd_atom(qt_atom_t atom,
     mxerror(fmt::format(Y("Quicktime/MP4 reader: This file uses compressed headers with an unknown "
                           "or unsupported compression algorithm '{0}'. Aborting.\n"), m_compression_algorithm));
 
-  mm_io_cptr old_in       = m_in;
-  uint32_t cmov_size      = atom.size - atom.hsize;
-  memory_cptr af_cmov_buf = memory_c::alloc(cmov_size);
-  unsigned char *cmov_buf = af_cmov_buf->get_buffer();
-  memory_cptr af_moov_buf = memory_c::alloc(moov_size + 16);
-  unsigned char *moov_buf = af_moov_buf->get_buffer();
+  auto old_in      = m_in;
+  auto cmov_size   = atom.size - atom.hsize;
+  auto af_cmov_buf = memory_c::alloc(cmov_size);
+  auto cmov_buf    = af_cmov_buf->get_buffer();
+  auto af_moov_buf = memory_c::alloc(moov_size + 16);
+  auto moov_buf    = af_moov_buf->get_buffer();
 
   if (m_in->read(cmov_buf, cmov_size) != cmov_size)
     throw mtx::input::header_parsing_x();
@@ -632,7 +632,7 @@ qtmp4_reader_c::handle_hdlr_atom(qtmp4_demuxer_c &dmx,
 
   mxdebug_if(m_debug_headers, fmt::format("{0}Component type: {1:4s} subtype: {2:4s}\n", space(level * 2 + 1), reinterpret_cast<char const *>(&hdlr.type), reinterpret_cast<char const *>(&hdlr.subtype)));
 
-  auto subtype = fourcc_c{reinterpret_cast<unsigned char const *>(&hdlr) + offsetof(hdlr_atom_t, subtype)};
+  auto subtype = fourcc_c{reinterpret_cast<uint8_t const *>(&hdlr) + offsetof(hdlr_atom_t, subtype)};
   if (subtype == "soun")
     dmx.type = 'a';
 
@@ -2907,7 +2907,7 @@ qtmp4_demuxer_c::handle_audio_stsd_atom(uint64_t atom_size,
   mxdebug_if(m_debug_headers,
              fmt::format("{0}[v0] FourCC: {1} channels: {2} sample size: {3} compression id: {4} sample rate: {5} version: {6}",
                          space(level * 2 + 1),
-                         fourcc_c{reinterpret_cast<const unsigned char *>(sv1_stsd.v0.base.fourcc)}.description(),
+                         fourcc_c{reinterpret_cast<const uint8_t *>(sv1_stsd.v0.base.fourcc)}.description(),
                          a_channels,
                          a_bitdepth,
                          get_uint16_be(&sv1_stsd.v0.compression_id),
@@ -3002,7 +3002,7 @@ qtmp4_demuxer_c::handle_colr_atom(memory_cptr const &atom_content,
     return;
 
   auto &colr_atom = *reinterpret_cast<colr_atom_t *>(atom_content->get_buffer());
-  fourcc_c color_type{reinterpret_cast<unsigned char const *>(&colr_atom) + offsetof(colr_atom_t, color_type)};
+  fourcc_c color_type{reinterpret_cast<uint8_t const *>(&colr_atom) + offsetof(colr_atom_t, color_type)};
 
   if (!mtx::included_in(color_type, "nclc", "nclx"))
     return;

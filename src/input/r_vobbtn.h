@@ -22,7 +22,7 @@
 class vobbtn_reader_c: public generic_reader_c {
 private:
   uint16_t width, height;
-  unsigned char chunk[0x400];
+  uint8_t chunk[0x400];
 
 public:
   virtual mtx::file_type_e get_format_type() const {

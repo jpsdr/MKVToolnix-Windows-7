@@ -30,9 +30,9 @@ namespace {
 debugging_option_c s_debug{"mpeg4_p2"};
 
 bool find_vol_header(mtx::bits::reader_c &bits);
-bool parse_vol_header(const unsigned char *buffer, int buffer_size, config_data_t &config_data);
-bool extract_par_internal(const unsigned char *buffer, int buffer_size, uint32_t &par_num, uint32_t &par_den);
-void parse_frame(video_frame_t &frame, const unsigned char *buffer, const config_data_t &config_data);
+bool parse_vol_header(const uint8_t *buffer, int buffer_size, config_data_t &config_data);
+bool extract_par_internal(const uint8_t *buffer, int buffer_size, uint32_t &par_num, uint32_t &par_den);
+void parse_frame(video_frame_t &frame, const uint8_t *buffer, const config_data_t &config_data);
 
 bool
 find_vol_header(mtx::bits::reader_c &bits) {
@@ -59,7 +59,7 @@ find_vol_header(mtx::bits::reader_c &bits) {
 }
 
 bool
-parse_vol_header(unsigned char const *buffer,
+parse_vol_header(uint8_t const *buffer,
                  int buffer_size,
                  config_data_t &config_data) {
   mtx::bits::reader_c bits(buffer, buffer_size);
@@ -126,7 +126,7 @@ parse_vol_header(unsigned char const *buffer,
 }
 
 bool
-extract_par_internal(unsigned char const *buffer,
+extract_par_internal(uint8_t const *buffer,
                      int buffer_size,
                      uint32_t &par_num,
                      uint32_t &par_den) {
@@ -171,7 +171,7 @@ extract_par_internal(unsigned char const *buffer,
 
 void
 parse_frame(video_frame_t &frame,
-            unsigned char const *buffer,
+            uint8_t const *buffer,
             config_data_t const &config_data) {
   static const frame_type_e s_frame_type_map[4] = { FRAME_TYPE_I, FRAME_TYPE_P, FRAME_TYPE_B, FRAME_TYPE_P };
 
@@ -210,7 +210,7 @@ config_data_t::config_data_t()
      otherwise.
 */
 bool
-extract_size(unsigned char const *buffer,
+extract_size(uint8_t const *buffer,
              int buffer_size,
              uint32_t &width,
              uint32_t &height) {
@@ -243,7 +243,7 @@ extract_size(unsigned char const *buffer,
      otherwise.
 */
 bool
-extract_par(unsigned char const *buffer,
+extract_par(uint8_t const *buffer,
             int buffer_size,
             uint32_t &par_num,
             uint32_t &par_den) {
@@ -269,7 +269,7 @@ extract_par(unsigned char const *buffer,
      a dummy frame) then \a frames will contain no elements.
 */
 void
-find_frame_types(unsigned char const *buffer,
+find_frame_types(uint8_t const *buffer,
                  int buffer_size,
                  std::vector<video_frame_t> &frames,
                  config_data_t const &config_data) {
@@ -347,7 +347,7 @@ find_frame_types(unsigned char const *buffer,
      a memory_c object otherwise. This object has to be deleted manually.
 */
 memory_cptr
-parse_config_data(unsigned char const *buffer,
+parse_config_data(uint8_t const *buffer,
                   int buffer_size,
                   config_data_t &config_data) {
   if (5 > buffer_size)
@@ -355,12 +355,12 @@ parse_config_data(unsigned char const *buffer,
 
   mxdebug_if(s_debug, fmt::format("\nmpeg4_config_data: start search in {0} bytes\n", buffer_size));
 
-  uint32_t marker          = get_uint32_be(buffer) >> 8;
-  const unsigned char *p   = buffer + 3;
-  const unsigned char *end = buffer + buffer_size;
-  int vos_offset           = -1;
-  int vol_offset           = -1;
-  unsigned int size        = 0;
+  auto marker       = get_uint32_be(buffer) >> 8;
+  auto p            = buffer + 3;
+  auto end          = buffer + buffer_size;
+  int vos_offset    = -1;
+  int vol_offset    = -1;
+  unsigned int size = 0;
 
   while (p < end) {
     marker = (marker << 8) | *p;
@@ -395,15 +395,15 @@ parse_config_data(unsigned char const *buffer,
 
   memory_cptr mem;
   if (-1 == vos_offset) {
-    mem                = memory_c::alloc(size + 5);
-    unsigned char *dst = mem->get_buffer();
+    mem      = memory_c::alloc(size + 5);
+    auto dst = mem->get_buffer();
     put_uint32_be(dst, VOS_START_CODE);
     dst[4] = 0xf5;
     memcpy(dst + 5, buffer, size);
 
   } else {
-    mem                = memory_c::alloc(size);
-    unsigned char *dst = mem->get_buffer();
+    mem      = memory_c::alloc(size);
+    auto dst = mem->get_buffer();
     put_uint32_be(dst, VOS_START_CODE);
     if (3 >= buffer[vos_offset + 4])
       dst[4] = 0xf5;

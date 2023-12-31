@@ -161,9 +161,9 @@ mm_io_c::read(std::string &buffer,
   return num_read;
 }
 
-unsigned char
+uint8_t
 mm_io_c::read_uint8() {
-  unsigned char value;
+  uint8_t value;
 
   if (read(&value, 1) != 1)
     throw mtx::mm_io::end_of_file_x{mtx::mm_io::make_error_code()};
@@ -173,7 +173,7 @@ mm_io_c::read_uint8() {
 
 uint16_t
 mm_io_c::read_uint16_le() {
-  unsigned char buffer[2];
+  uint8_t buffer[2];
 
   if (read(buffer, 2) != 2)
     throw mtx::mm_io::end_of_file_x{mtx::mm_io::make_error_code()};
@@ -183,7 +183,7 @@ mm_io_c::read_uint16_le() {
 
 uint32_t
 mm_io_c::read_uint24_le() {
-  unsigned char buffer[3];
+  uint8_t buffer[3];
 
   if (read(buffer, 3) != 3)
     throw mtx::mm_io::end_of_file_x{mtx::mm_io::make_error_code()};
@@ -193,7 +193,7 @@ mm_io_c::read_uint24_le() {
 
 uint32_t
 mm_io_c::read_uint32_le() {
-  unsigned char buffer[4];
+  uint8_t buffer[4];
 
   if (read(buffer, 4) != 4)
     throw mtx::mm_io::end_of_file_x{mtx::mm_io::make_error_code()};
@@ -203,7 +203,7 @@ mm_io_c::read_uint32_le() {
 
 uint64_t
 mm_io_c::read_uint64_le() {
-  unsigned char buffer[8];
+  uint8_t buffer[8];
 
   if (read(buffer, 8) != 8)
     throw mtx::mm_io::end_of_file_x{mtx::mm_io::make_error_code()};
@@ -213,7 +213,7 @@ mm_io_c::read_uint64_le() {
 
 uint16_t
 mm_io_c::read_uint16_be() {
-  unsigned char buffer[2];
+  uint8_t buffer[2];
 
   if (read(buffer, 2) != 2)
     throw mtx::mm_io::end_of_file_x{mtx::mm_io::make_error_code()};
@@ -228,7 +228,7 @@ mm_io_c::read_int24_be() {
 
 uint32_t
 mm_io_c::read_uint24_be() {
-  unsigned char buffer[3];
+  uint8_t buffer[3];
 
   if (read(buffer, 3) != 3)
     throw mtx::mm_io::end_of_file_x{mtx::mm_io::make_error_code()};
@@ -238,7 +238,7 @@ mm_io_c::read_uint24_be() {
 
 uint32_t
 mm_io_c::read_uint32_be() {
-  unsigned char buffer[4];
+  uint8_t buffer[4];
 
   if (read(buffer, 4) != 4)
     throw mtx::mm_io::end_of_file_x{mtx::mm_io::make_error_code()};
@@ -248,7 +248,7 @@ mm_io_c::read_uint32_be() {
 
 uint64_t
 mm_io_c::read_uint64_be() {
-  unsigned char buffer[8];
+  uint8_t buffer[8];
 
   if (read(buffer, 8) != 8)
     throw mtx::mm_io::end_of_file_x{mtx::mm_io::make_error_code()};
@@ -299,7 +299,7 @@ mm_io_c::read(memory_cptr const &buffer,
 }
 
 int
-mm_io_c::write_uint8(unsigned char value) {
+mm_io_c::write_uint8(uint8_t value) {
   return write(&value, 1);
 }
 
@@ -418,12 +418,12 @@ bool
 mm_io_c::write_bom(const std::string &charset_) {
   auto p = p_func();
 
-  static const unsigned char utf8_bom[3]    = {0xef, 0xbb, 0xbf};
-  static const unsigned char utf16le_bom[2] = {0xff, 0xfe};
-  static const unsigned char utf16be_bom[2] = {0xfe, 0xff};
-  static const unsigned char utf32le_bom[4] = {0xff, 0xfe, 0x00, 0x00};
-  static const unsigned char utf32be_bom[4] = {0x00, 0x00, 0xff, 0xfe};
-  const unsigned char *bom;
+  static const uint8_t utf8_bom[3]    = {0xef, 0xbb, 0xbf};
+  static const uint8_t utf16le_bom[2] = {0xff, 0xfe};
+  static const uint8_t utf16be_bom[2] = {0xfe, 0xff};
+  static const uint8_t utf32le_bom[4] = {0xff, 0xfe, 0x00, 0x00};
+  static const uint8_t utf32be_bom[4] = {0x00, 0x00, 0xff, 0xfe};
+  const uint8_t *bom;
   unsigned int bom_len;
 
   if (p->bom_written || charset_.empty())
@@ -480,7 +480,7 @@ mm_io_c::get_size() {
 
 int
 mm_io_c::getch() {
-  unsigned char c;
+  uint8_t c;
 
   if (read(&c, 1) != 1)
     return -1;

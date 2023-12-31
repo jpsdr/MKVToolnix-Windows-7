@@ -34,7 +34,7 @@ debugging_option_c s_debug{"tta_reader"};
 
 bool
 tta_reader_c::probe_file() {
-  unsigned char buf[4];
+  uint8_t buf[4];
 
   int tag_size = mtx::id3::skip_v2_tag(*m_in);
   if (-1 == tag_size)

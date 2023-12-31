@@ -28,7 +28,7 @@ memory_cptr
 adler32_c::get_result()
   const {
   auto result = (m_b << 16) | m_a;
-  unsigned char buf[4];
+  uint8_t buf[4];
 
   put_uint32_be(buf, result);
 
@@ -42,7 +42,7 @@ adler32_c::get_result_as_uint()
 }
 
 void
-adler32_c::add_impl(unsigned char const *buffer,
+adler32_c::add_impl(uint8_t const *buffer,
                     size_t size) {
   for (auto idx = 0u; idx < size; ++idx) {
     m_a = (m_a + buffer[idx]) % msc_mod_adler;

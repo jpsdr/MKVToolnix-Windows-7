@@ -42,7 +42,7 @@ get_uint_le(const void *buf,
             int num_bytes) {
   int i;
   num_bytes    = std::min(std::max(1, num_bytes), 8);
-  auto tmp     = static_cast<unsigned char const *>(buf);
+  auto tmp     = static_cast<uint8_t const *>(buf);
   uint64_t ret = 0;
   for (i = num_bytes - 1; 0 <= i; --i)
     ret = (ret << 8) + (tmp[i] & 0xff);
@@ -75,7 +75,7 @@ get_uint_be(const void *buf,
             int num_bytes) {
   int i;
   num_bytes    = std::min(std::max(1, num_bytes), 8);
-  auto tmp     = static_cast<unsigned char const *>(buf);
+  auto tmp     = static_cast<uint8_t const *>(buf);
   uint64_t ret = 0;
   for (i = 0; num_bytes > i; ++i)
     ret = (ret << 8) + (tmp[i] & 0xff);
@@ -87,7 +87,7 @@ void
 put_uint_le(void *buf,
             uint64_t value,
             size_t num_bytes) {
-  auto tmp  = static_cast<unsigned char *>(buf);
+  auto tmp  = static_cast<uint8_t *>(buf);
   num_bytes = std::min<size_t>(std::max<size_t>(1, num_bytes), 8);
 
   for (auto idx = 0u; idx < num_bytes; ++idx) {
@@ -100,7 +100,7 @@ void
 put_uint_be(void *buf,
             uint64_t value,
             size_t num_bytes) {
-  auto tmp  = static_cast<unsigned char *>(buf);
+  auto tmp  = static_cast<uint8_t *>(buf);
   num_bytes = std::min<size_t>(std::max<size_t>(1, num_bytes), 8);
 
   for (auto idx = 0u; idx < num_bytes; ++idx) {

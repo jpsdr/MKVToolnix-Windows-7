@@ -68,6 +68,6 @@ struct identification_header_t {
   int display_width{}, display_height{};
 };
 
-void parse_identification_header(unsigned char *buffer, int size, identification_header_t &header);
+void parse_identification_header(uint8_t *buffer, int size, identification_header_t &header);
 
 } // namespace mtx::theora

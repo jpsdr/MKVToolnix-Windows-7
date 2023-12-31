@@ -155,7 +155,7 @@ ElementViewerDialog::createHtmlHead(ElementHighlighter::Highlights const &highli
 QString
 ElementViewerDialog::createHexDump(memory_c const &mem,
                                    ElementHighlighter::Highlights const &highlights) {
-  QHash<unsigned char, QString> htmlChars;
+  QHash<uint8_t, QString> htmlChars;
 
   htmlChars['<']        = Q("&lt;");
   htmlChars['>']        = Q("&gt;");

@@ -316,8 +316,8 @@ parse_file(const std::string &file_name) {
   if (4 > size)
     mxerror(Y("File too small\n"));
 
-  memory_cptr mem    = memory_c::alloc(buf_size);
-  unsigned char *ptr = mem->get_buffer();
+  auto mem = memory_c::alloc(buf_size);
+  auto ptr = mem->get_buffer();
 
   vc1_info_c parser;
 

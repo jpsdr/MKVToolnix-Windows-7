@@ -349,7 +349,7 @@ kax_info_c::format_element_value_default(libebml::EbmlElement &e) {
 }
 
 std::string
-kax_info_c::create_hexdump(unsigned char const *buf,
+kax_info_c::create_hexdump(uint8_t const *buf,
                            int size) {
   std::string hex(" hexdump");
   int bmax = std::min(size, p_func()->m_hexdump_max_size);

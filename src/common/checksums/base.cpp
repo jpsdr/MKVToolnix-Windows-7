@@ -126,7 +126,7 @@ calculate_as_hex_string(algorithm_e algorithm,
 base_c &
 base_c::add(void const *buffer,
             size_t size) {
-  add_impl(static_cast<unsigned char const *>(buffer), size);
+  add_impl(static_cast<uint8_t const *>(buffer), size);
   return *this;
 }
 
@@ -154,7 +154,7 @@ set_initial_value_c::set_initial_value(memory_c const &initial_value) {
 }
 
 void
-set_initial_value_c::set_initial_value(unsigned char const *buffer,
+set_initial_value_c::set_initial_value(uint8_t const *buffer,
                                        size_t size) {
   set_initial_value_impl(buffer, size);
 }

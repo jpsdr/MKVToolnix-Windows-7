@@ -210,7 +210,7 @@ protected:
 };
 using parser_cptr = std::shared_ptr<parser_c>;
 
-std::string get_stream_coding_type_description(unsigned char coding_type);
-std::string get_video_format_description(unsigned char video_format);
+std::string get_stream_coding_type_description(uint8_t coding_type);
+std::string get_video_format_description(uint8_t video_format);
 
 }

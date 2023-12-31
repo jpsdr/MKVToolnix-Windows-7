@@ -96,7 +96,7 @@ parse_codec_id(const std::string &codec_id,
 }
 
 std::optional<audio_config_t>
-parse_audio_specific_config(unsigned char const *data,
+parse_audio_specific_config(uint8_t const *data,
                             std::size_t size) {
   auto h = header_c::from_audio_specific_config(data, size);
   if (h.is_valid)
@@ -481,7 +481,7 @@ parser_c::add_bytes(memory_cptr const &mem) {
 }
 
 void
-parser_c::add_bytes(unsigned char const *buffer,
+parser_c::add_bytes(uint8_t const *buffer,
                     size_t size) {
   m_buffer.add(buffer, size);
   m_total_stream_position += size;
@@ -489,7 +489,7 @@ parser_c::add_bytes(unsigned char const *buffer,
 }
 
 void
-parser_c::parse_fixed_buffer(unsigned char const *fixed_buffer,
+parser_c::parse_fixed_buffer(uint8_t const *fixed_buffer,
                              size_t fixed_buffer_size) {
   auto cleanup = at_scope_exit_c{[this]() {
       m_fixed_buffer      = nullptr;
@@ -573,7 +573,7 @@ parser_c::headers_parsed()
 }
 
 std::pair<parser_c::parse_result_e, size_t>
-parser_c::decode_adts_header(unsigned char const *buffer,
+parser_c::decode_adts_header(uint8_t const *buffer,
                              size_t buffer_size) {
   try {
     auto frame = frame_c{};
@@ -637,7 +637,7 @@ parser_c::decode_adts_header(unsigned char const *buffer,
 }
 
 std::pair<parser_c::parse_result_e, size_t>
-parser_c::decode_loas_latm_header(unsigned char const *buffer,
+parser_c::decode_loas_latm_header(uint8_t const *buffer,
                                   size_t buffer_size) {
   try {
     if (buffer_size < 3)
@@ -679,7 +679,7 @@ parser_c::decode_loas_latm_header(unsigned char const *buffer,
     frame.m_header.data_byte_size   = decoded_frame_length;
     frame.m_header.bytes            = loas_frame_size + 3;
 
-    unsigned char *dst_buffer       = nullptr;
+    uint8_t *dst_buffer             = nullptr;
 
     if (m_copy_data) {
       frame.m_data = memory_c::alloc(decoded_frame_length);
@@ -708,7 +708,7 @@ parser_c::decode_loas_latm_header(unsigned char const *buffer,
 }
 
 std::pair<parser_c::parse_result_e, size_t>
-parser_c::decode_header(unsigned char const *buffer,
+parser_c::decode_header(uint8_t const *buffer,
                         size_t buffer_size) {
   if (adif_multiplex == m_multiplex_type)
     return { failure, 0 };
@@ -814,7 +814,7 @@ parser_c::get_audio_specific_config()
 }
 
 int
-parser_c::find_consecutive_frames(unsigned char const *buffer,
+parser_c::find_consecutive_frames(uint8_t const *buffer,
                                   size_t buffer_size,
                                   size_t num_required_frames) {
   static auto s_debug = debugging_option_c{"aac_consecutive_frames"};
@@ -941,7 +941,7 @@ header_c::read_sample_rate() {
 }
 
 header_c
-header_c::from_audio_specific_config(unsigned char const *data,
+header_c::from_audio_specific_config(uint8_t const *data,
                                      size_t size) {
   header_c header;
   header.parse_audio_specific_config(data, size);
@@ -1207,7 +1207,7 @@ header_c::parse_audio_specific_config(mtx::bits::reader_c &bc,
 }
 
 void
-header_c::parse_audio_specific_config(const unsigned char *data,
+header_c::parse_audio_specific_config(const uint8_t *data,
                                       size_t size,
                                       bool look_for_sync_extension) {
   if (size < 2)

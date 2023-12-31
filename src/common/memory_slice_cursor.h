@@ -20,7 +20,7 @@ namespace mtx::mem {
 class slice_cursor_c {
 protected:
   std::size_t m_pos{}, m_pos_in_slice{}, m_size{}, m_current_slice_num{}, m_current_slice_size{};
-  unsigned char *m_current_slice_buffer{};
+  uint8_t *m_current_slice_buffer{};
   std::vector<memory_cptr> m_slices;
 
 public:
@@ -55,14 +55,14 @@ public:
       init_slice_variables();
   }
 
-  void add_slice(unsigned char *buffer, std::size_t size) {
+  void add_slice(uint8_t *buffer, std::size_t size) {
     if (0 == size)
       return;
 
     add_slice(memory_c::borrow(buffer, size));
   }
 
-  inline unsigned char get_char() {
+  inline uint8_t get_char() {
     assert(m_current_slice_buffer && (m_pos < m_size));
 
     auto c = m_current_slice_buffer[m_pos_in_slice];
@@ -110,7 +110,7 @@ public:
     init_slice_variables();
   }
 
-  void copy(unsigned char *dest, std::size_t start, std::size_t size) {
+  void copy(uint8_t *dest, std::size_t start, std::size_t size) {
     assert((start + size) <= m_size);
 
     auto curr   = m_slices.begin();
