@@ -31,14 +31,19 @@ kax_reference_block_c::UpdateSize(
                                   bool bSaveDefault,
 #endif
                                   bool bForceRender) {
+#if LIBEBML_VERSION >= 0x020000
+  if (!bTimestampSet) {
+    assert(-1 != m_value);
+    SetValue((m_value - static_cast<int64_t>(ParentBlock->GlobalTimecode())) / static_cast<int64_t>(ParentBlock->GlobalTimecodeScale()));
+  }
+
+  return libebml::EbmlSInteger::UpdateSize(writeFilter, bForceRender);
+#else
   if (!bTimecodeSet) {
     assert(-1 != m_value);
     SetValue((m_value - static_cast<int64_t>(ParentBlock->GlobalTimecode())) / static_cast<int64_t>(ParentBlock->GlobalTimecodeScale()));
   }
 
-#if LIBEBML_VERSION >= 0x020000
-  return libebml::EbmlSInteger::UpdateSize(writeFilter, bForceRender);
-#else
   return libebml::EbmlSInteger::UpdateSize(bSaveDefault, bForceRender);
 #endif
 }
