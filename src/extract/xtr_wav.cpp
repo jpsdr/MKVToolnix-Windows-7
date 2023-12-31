@@ -51,7 +51,7 @@ xtr_wav_c::create_file(xtr_base_c *master,
     mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"bits per second (bps)\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
   if (m_codec_id == MKV_A_PCM_BE)
-    m_byte_swapper = [this](unsigned char const *src, unsigned char *dst, std::size_t num_bytes) {
+    m_byte_swapper = [this](uint8_t const *src, uint8_t *dst, std::size_t num_bytes) {
       mtx::bytes::swap_buffer(src, dst, num_bytes, m_bps / 8);
     };
 

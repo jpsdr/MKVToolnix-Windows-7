@@ -167,7 +167,7 @@ Bytes                                    Bits
 */
 
 struct codec_private_t {
-  unsigned char configuration_version{};
+  uint8_t configuration_version{};
 
   // vps data
   unsigned int profile_space{};
@@ -182,14 +182,14 @@ struct codec_private_t {
 
   // sps data
   unsigned int  min_spatial_segmentation_idc{};
-  unsigned char chroma_format_idc{};
-  unsigned char bit_depth_luma_minus8{};
-  unsigned char bit_depth_chroma_minus8{};
+  uint8_t chroma_format_idc{};
+  uint8_t bit_depth_luma_minus8{};
+  uint8_t bit_depth_chroma_minus8{};
   unsigned int  max_sub_layers_minus1{};
   unsigned int  temporal_id_nesting_flag{};
 
-  unsigned char num_parameter_sets{};
-  unsigned char parallelism_type{};
+  uint8_t num_parameter_sets{};
+  uint8_t parallelism_type{};
 
   int vps_data_id{-1};
   int sps_data_id{-1};
@@ -312,7 +312,7 @@ struct pps_info_t {
 
 class es_parser_c;
 
-using user_data_t = std::map< std::vector<unsigned char>, std::vector<unsigned char> >;
+using user_data_t    = std::map< std::vector<uint8_t>, std::vector<uint8_t> >;
 using es_parser_cptr = std::shared_ptr<es_parser_c>;
 
 }                              // namespace mtx::hevc

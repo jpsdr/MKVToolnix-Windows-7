@@ -230,7 +230,7 @@ kax_analyzer_c::verify_data_structures_against_file(const std::string &hook_name
 bool
 kax_analyzer_c::probe(std::string file_name) {
   try {
-    unsigned char data[4];
+    uint8_t data[4];
     mm_file_io_c in(file_name.c_str());
 
     if (in.read(data, 4) != 4)

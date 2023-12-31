@@ -57,7 +57,7 @@ es_parser_c::set_normalize_parameter_sets(bool normalize) {
 }
 
 void
-es_parser_c::maybe_dump_raw_data(unsigned char const *buffer,
+es_parser_c::maybe_dump_raw_data(uint8_t const *buffer,
                                  std::size_t size) {
   static debugging_option_c s_dump_raw_data{fmt::format("{0}_es_parser_dump_raw_data", m_debug_type)};
 
@@ -77,7 +77,7 @@ es_parser_c::add_bytes(memory_cptr const &buf) {
 }
 
 void
-es_parser_c::add_bytes(unsigned char *buffer,
+es_parser_c::add_bytes(uint8_t *buffer,
                        std::size_t size) {
   maybe_dump_raw_data(buffer, size);
 
@@ -149,7 +149,7 @@ es_parser_c::add_bytes_framed(memory_cptr const &buf,
 }
 
 void
-es_parser_c::add_bytes_framed(unsigned char *buffer,
+es_parser_c::add_bytes_framed(uint8_t *buffer,
                               std::size_t buffer_size,
                               std::size_t nalu_size_length) {
   maybe_dump_raw_data(buffer, buffer_size);

@@ -48,8 +48,8 @@ md5_c::md5_c()
 
 // This processes one or more 64-byte data blocks, but does NOT update
 // the bit counters.  There are no alignment requirements.
-unsigned char const *
-md5_c::work(unsigned char const *data,
+uint8_t const *
+md5_c::work(uint8_t const *data,
             size_t size) {
   auto a = m_a;
   auto b = m_b;
@@ -152,7 +152,7 @@ md5_c::work(unsigned char const *data,
 }
 
 void
-md5_c::add_impl(unsigned char const *data,
+md5_c::add_impl(uint8_t const *data,
                 size_t size) {
   auto saved_size  = m_size;
   m_size          += size;

@@ -20,7 +20,7 @@ class mm_read_buffer_io_c;
 class mm_read_buffer_io_private_c : public mm_proxy_io_private_c {
 public:
   memory_cptr af_buffer;
-  unsigned char *buffer{};
+  uint8_t *buffer{};
   std::size_t cursor{};
   bool eof{};
   size_t fill{};

@@ -59,7 +59,7 @@ enum frame_type_e {
 struct video_frame_t {
   /** The beginning of the frame data. This is a pointer into an existing
       buffer handed over to ::mpeg4_find_frame_types. */
-  unsigned char *data;
+  uint8_t *data;
   /** The size of the frame in bytes. */
   int size;
   /** The position of the frame in the original buffer. */
@@ -67,7 +67,7 @@ struct video_frame_t {
   /** The frame type: \c 'I', \c 'P' or \c 'B'. */
   frame_type_e type;
   /** Private data. */
-  unsigned char *priv;
+  uint8_t *priv;
   /** The timestamp of the frame in \c ns. */
   int64_t timestamp;
   /** The duration of the frame in \c ns. */
@@ -110,9 +110,9 @@ struct config_data_t {
 bool is_fourcc(const void *fourcc);
 bool is_v3_fourcc(const void *fourcc);
 
-bool extract_par(const unsigned char *buffer, int buffer_size, uint32_t &par_num, uint32_t &par_den);
-bool extract_size(const unsigned char *buffer, int buffer_size, uint32_t &width, uint32_t &height);
-void find_frame_types(const unsigned char *buffer, int buffer_size, std::vector<video_frame_t> &frames, const config_data_t &config_data);
-memory_cptr parse_config_data(const unsigned char *buffer, int buffer_size, config_data_t &config_data);
+bool extract_par(const uint8_t *buffer, int buffer_size, uint32_t &par_num, uint32_t &par_den);
+bool extract_size(const uint8_t *buffer, int buffer_size, uint32_t &width, uint32_t &height);
+void find_frame_types(const uint8_t *buffer, int buffer_size, std::vector<video_frame_t> &frames, const config_data_t &config_data);
+memory_cptr parse_config_data(const uint8_t *buffer, int buffer_size, config_data_t &config_data);
 
 }

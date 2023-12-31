@@ -49,7 +49,7 @@ parser_c::reset() {
 }
 
 bool
-parser_c::detect(unsigned char const *buffer,
+parser_c::detect(uint8_t const *buffer,
                  std::size_t size,
                  std::size_t num_required_headers) {
   for (auto swap_bytes = 0; swap_bytes < 2; ++swap_bytes) {
@@ -134,7 +134,7 @@ parser_c::decode_buffer() {
 }
 
 memory_cptr
-parser_c::decode(unsigned char const *buffer,
+parser_c::decode(uint8_t const *buffer,
                  std::size_t size) {
   m->decode_buffer.add(buffer, size);
   decode_buffer();

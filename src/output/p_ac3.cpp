@@ -144,7 +144,7 @@ ac3_packetizer_c::set_timestamp_and_add_packet(packet_cptr const &packet,
 }
 
 void
-ac3_packetizer_c::add_to_buffer(unsigned char *const buf,
+ac3_packetizer_c::add_to_buffer(uint8_t *const buf,
                                 int size) {
   m_parser.add_bytes(buf, size);
 }
@@ -228,7 +228,7 @@ ac3_bs_packetizer_c::ac3_bs_packetizer_c(generic_reader_c *p_reader,
 static bool s_warning_printed = false;
 
 void
-ac3_bs_packetizer_c::add_to_buffer(unsigned char *const buf,
+ac3_bs_packetizer_c::add_to_buffer(uint8_t *const buf,
                                    int size) {
   if (((size % 2) == 1) && !s_warning_printed) {
     mxwarn(Y("ac3_bs_packetizer::add_to_buffer(): Untested code ('size' is odd). "
@@ -237,7 +237,7 @@ ac3_bs_packetizer_c::add_to_buffer(unsigned char *const buf,
     s_warning_printed = true;
   }
 
-  unsigned char *sendptr;
+  uint8_t *sendptr;
   int size_add;
   bool new_bsb_present = false;
 
@@ -256,9 +256,10 @@ ac3_bs_packetizer_c::add_to_buffer(unsigned char *const buf,
     new_bsb_present = true;
   }
 
-  unsigned char *new_buffer = (unsigned char *)safemalloc(size_add);
-  unsigned char *dptr       = new_buffer;
-  unsigned char *sptr       = buf;
+  auto af_new_buffer = memory_c::alloc(size_add);
+  auto new_buffer    = af_new_buffer->get_buffer();
+  auto dptr          = new_buffer;
+  auto sptr          = buf;
 
   if (m_bsb_present) {
     dptr[1]  = m_bsb;
@@ -280,6 +281,4 @@ ac3_bs_packetizer_c::add_to_buffer(unsigned char *const buf,
   m_bsb_present = new_bsb_present;
 
   m_parser.add_bytes(new_buffer, size_add);
-
-  safefree(new_buffer);
 }

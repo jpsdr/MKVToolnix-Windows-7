@@ -42,7 +42,7 @@
 
 bool
 mpeg_ps_reader_c::probe_file() {
-  unsigned char buf[4];
+  uint8_t buf[4];
 
   if (m_in->read(buf, 4) != 4)
     return false;
@@ -481,7 +481,7 @@ mpeg_ps_reader_c::parse_packet(mpeg_ps_id_t id,
 
 void
 mpeg_ps_reader_c::new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id,
-                                               unsigned char *buf,
+                                               uint8_t *buf,
                                                unsigned int length,
                                                mpeg_ps_track_ptr &track) {
   try {
@@ -499,7 +499,7 @@ mpeg_ps_reader_c::new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id,
     bool avc_access_unit_found = false;
 
     uint64_t marker            = 0;
-    int pos                    = 0;
+    std::size_t pos            = 0;
 
     while (4 > buffer.get_size()) {
       if (!find_next_packet_for_id(id, m_probe_range))
@@ -520,8 +520,8 @@ mpeg_ps_reader_c::new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id,
     }
 
     while (1) {
-      unsigned char *ptr = buffer.get_buffer();
-      int buffer_size    = buffer.get_size();
+      auto ptr         = buffer.get_buffer();
+      auto buffer_size = buffer.get_size();
 
       while (buffer_size > pos) {
         marker <<= 8;
@@ -600,7 +600,7 @@ mpeg_ps_reader_c::new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id,
 
 void
 mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
-                                        unsigned char *buf,
+                                        uint8_t *buf,
                                         unsigned int length,
                                         mpeg_ps_track_ptr &track) {
   std::shared_ptr<M2VParser> m2v_parser(new M2VParser);
@@ -695,7 +695,7 @@ mpeg_ps_reader_c::new_stream_v_mpeg_1_2(mpeg_ps_id_t id,
 
 void
 mpeg_ps_reader_c::new_stream_v_avc(mpeg_ps_id_t id,
-                                   unsigned char *buf,
+                                   uint8_t *buf,
                                    unsigned int length,
                                    mpeg_ps_track_ptr &track) {
   mtx::avc::es_parser_c parser;
@@ -729,7 +729,7 @@ mpeg_ps_reader_c::new_stream_v_avc(mpeg_ps_id_t id,
 
 void
 mpeg_ps_reader_c::new_stream_v_vc1(mpeg_ps_id_t id,
-                                   unsigned char *buf,
+                                   uint8_t *buf,
                                    unsigned int length,
                                    mpeg_ps_track_ptr &track) {
   mtx::vc1::es_parser_c parser;
@@ -763,7 +763,7 @@ mpeg_ps_reader_c::new_stream_v_vc1(mpeg_ps_id_t id,
 
 void
 mpeg_ps_reader_c::new_stream_a_mpeg(mpeg_ps_id_t,
-                                    unsigned char *buf,
+                                    uint8_t *buf,
                                     unsigned int length,
                                     mpeg_ps_track_ptr &track) {
   mp3_header_t header;
@@ -778,7 +778,7 @@ mpeg_ps_reader_c::new_stream_a_mpeg(mpeg_ps_id_t,
 
 void
 mpeg_ps_reader_c::new_stream_a_ac3(mpeg_ps_id_t id,
-                                   unsigned char *buf,
+                                   uint8_t *buf,
                                    unsigned int length,
                                    mpeg_ps_track_ptr &track) {
   mxdebug_if(m_debug_headers, fmt::format("new_stream_a_ac3 for ID {0} buf len {1}\n", id, length));
@@ -818,7 +818,7 @@ mpeg_ps_reader_c::new_stream_a_ac3(mpeg_ps_id_t id,
 
 void
 mpeg_ps_reader_c::new_stream_a_dts(mpeg_ps_id_t id,
-                                   unsigned char *buf,
+                                   uint8_t *buf,
                                    unsigned int length,
                                    mpeg_ps_track_ptr &track) {
   mtx::bytes::buffer_c buffer;
@@ -844,7 +844,7 @@ mpeg_ps_reader_c::new_stream_a_dts(mpeg_ps_id_t id,
 
 void
 mpeg_ps_reader_c::new_stream_a_truehd(mpeg_ps_id_t id,
-                                      unsigned char *buf,
+                                      uint8_t *buf,
                                       unsigned int length,
                                       mpeg_ps_track_ptr &track) {
   mtx::truehd::parser_c parser;
@@ -884,7 +884,7 @@ mpeg_ps_reader_c::new_stream_a_truehd(mpeg_ps_id_t id,
 
 void
 mpeg_ps_reader_c::new_stream_a_pcm(mpeg_ps_id_t,
-                                   unsigned char *buffer,
+                                   uint8_t *buffer,
                                    unsigned int length,
                                    mpeg_ps_track_ptr &track) {
   static int const s_lpcm_frequency_table[4] = { 48000, 96000, 44100, 32000 };

@@ -103,7 +103,7 @@ xtr_ssa_c::create_file(xtr_base_c *master,
 
   memory_cptr mpriv       = decode_codec_private(priv);
 
-  const unsigned char *pd = mpriv->get_buffer();
+  const uint8_t *pd = mpriv->get_buffer();
   int priv_size           = mpriv->get_size();
   unsigned int bom_len    = 0;
   byte_order_mark_e byte_order_mark = byte_order_mark_e::none;

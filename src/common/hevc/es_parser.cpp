@@ -771,7 +771,7 @@ es_parser_c::enable_dovi_layer_combiner() {
 }
 
 void
-es_parser_c::add_enhancement_layer_bytes(unsigned char *buf, std::size_t size) {
+es_parser_c::add_enhancement_layer_bytes(uint8_t *buf, std::size_t size) {
   m_dovi_el_combiner->add_bytes(buf, size);
   combine_dovi_layers();
 }

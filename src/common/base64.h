@@ -29,7 +29,7 @@ public:
   }
 };
 
-std::string encode(const unsigned char *src, int src_len, bool line_breaks = false, int max_line_len = 72);
+std::string encode(const uint8_t *src, int src_len, bool line_breaks = false, int max_line_len = 72);
 memory_cptr decode(std::string const &src);
 
 }

@@ -21,15 +21,15 @@ constexpr auto NALU_START_CODE = 0x00000001;
 struct slice_info_t {
 public:
   // Fields common to AVC & HEVC:
-  unsigned char nalu_type{};
-  unsigned char slice_type{};
-  unsigned char pps_id{};
+  uint8_t nalu_type{};
+  uint8_t slice_type{};
+  uint8_t pps_id{};
   unsigned int sps{};
   unsigned int pps{};
   unsigned int pic_order_cnt_lsb{};
 
   // AVC-specific fields:
-  unsigned char nal_ref_idc{};
+  uint8_t nal_ref_idc{};
   unsigned int frame_num{};
   bool field_pic_flag{}, bottom_field_flag{};
   unsigned int idr_pic_id{};

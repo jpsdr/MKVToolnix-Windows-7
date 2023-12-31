@@ -32,7 +32,7 @@ public:
   virtual uint64_t get_result_as_uint() const;
 
 protected:
-  virtual void add_impl(unsigned char const *buffer, size_t size);
+  virtual void add_impl(uint8_t const *buffer, size_t size);
 };
 
 } // namespace mtx::checksum

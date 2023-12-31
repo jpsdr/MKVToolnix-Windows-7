@@ -104,7 +104,7 @@ charset_converter_c::handle_string_with_bom(const std::string &source,
     return false;
 
   recoded.clear();
-  mm_text_io_c io(std::make_shared<mm_mem_io_c>(reinterpret_cast<const unsigned char *>(source.c_str()), source.length()));
+  mm_text_io_c io(std::make_shared<mm_mem_io_c>(reinterpret_cast<const uint8_t *>(source.c_str()), source.length()));
   std::string line;
   while (io.getline2(line))
     recoded += line;

@@ -101,7 +101,7 @@ mb_file_io_t mm_io_file_io = {
 
 bool
 real_reader_c::probe_file() {
-  unsigned char data[4];
+  uint8_t data[4];
   return (m_in->read(data, 4) == 4) && (memcmp(data, ".RMF", 4) == 0);
 }
 
@@ -149,8 +149,8 @@ real_reader_c::parse_headers() {
             && strcmp(track->mdpr_header.mime_type, "video/x-pn-realvideo")))
       continue;
 
-    unsigned char *ts_data = track->mdpr_header.type_specific_data;
-    uint32_t ts_size       = get_uint32_be(&track->mdpr_header.type_specific_size);
+    auto ts_data = track->mdpr_header.type_specific_data;
+    auto ts_size = get_uint32_be(&track->mdpr_header.type_specific_size);
 
     real_demuxer_cptr dmx(new real_demuxer_t(track));
 
@@ -186,10 +186,10 @@ real_reader_c::parse_headers() {
         dmx->channels            = get_uint16_be(&dmx->ra4p->channels);
         dmx->bits_per_sample     = get_uint16_be(&dmx->ra4p->sample_size);
 
-        unsigned char *p         = (unsigned char *)(dmx->ra4p + 1);
-        int slen                 = p[0];
-        p                       += (slen + 1);
-        slen                     = p[0];
+        auto p    = (uint8_t *)(dmx->ra4p + 1);
+        int slen  = p[0];
+        p        += (slen + 1);
+        slen      = p[0];
         p++;
 
         if (4 != slen) {
@@ -214,7 +214,7 @@ real_reader_c::parse_headers() {
         dmx->fourcc[4] = 0;
 
         if ((sizeof(real_audio_v5_props_t) + 4) < ts_size)
-          dmx->extra_data = memory_c::clone(reinterpret_cast<unsigned char *>(dmx->ra5p) + 4 + sizeof(real_audio_v5_props_t), ts_size - 4 - sizeof(real_audio_v5_props_t));
+          dmx->extra_data = memory_c::clone(reinterpret_cast<uint8_t *>(dmx->ra5p) + 4 + sizeof(real_audio_v5_props_t), ts_size - 4 - sizeof(real_audio_v5_props_t));
 
       } else {
         mxwarn(fmt::format(Y("real_reader: Only audio header versions 3, 4 and 5 are supported. Track ID {0} uses version {1} and will be skipped.\n"),
@@ -258,8 +258,8 @@ real_reader_c::create_aac_audio_packetizer(real_demuxer_cptr const &dmx) {
   int64_t tid           = dmx->track->id;
 
   if ((dmx->extra_data) && (4 < dmx->extra_data->get_size())) {
-    const unsigned char *extra_data = dmx->extra_data->get_buffer();
-    uint32_t extra_len              = get_uint32_be(extra_data);
+    auto extra_data = dmx->extra_data->get_buffer();
+    auto extra_len  = get_uint32_be(extra_data);
     mxdebug_if(s_debug, fmt::format("real_reader: extra_len: {0}\n", extra_len));
 
     if ((4 + extra_len) <= dmx->extra_data->get_size()) {
@@ -514,21 +514,21 @@ real_reader_c::deliver_audio_frames(real_demuxer_cptr const &dmx,
 void
 real_reader_c::deliver_aac_frames(real_demuxer_cptr const &dmx,
                                   memory_c &mem) {
-  unsigned char *chunk = mem.get_buffer();
-  int length           = mem.get_size();
+  auto chunk  = mem.get_buffer();
+  auto length = mem.get_size();
   if (2 > length) {
     mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(Y("Short AAC audio packet (length: {0} < 2)\n"), length));
     return;
   }
 
-  int num_sub_packets = chunk[1] >> 4;
+  std::size_t num_sub_packets = chunk[1] >> 4;
   mxdebug_if(s_debug, fmt::format("real_reader: num_sub_packets = {0}\n", num_sub_packets));
   if ((2 + num_sub_packets * 2) > length) {
     mxwarn_tid(m_ti.m_fname, dmx->track->id, fmt::format(Y("Short AAC audio packet (length: {0} < {1})\n"), length, 2 + num_sub_packets * 2));
     return;
   }
 
-  int i, len_check = 2 + num_sub_packets * 2;
+  std::size_t i, len_check = 2 + num_sub_packets * 2;
   for (i = 0; i < num_sub_packets; i++) {
     int sub_length  = get_uint16_be(&chunk[2 + i * 2]);
     len_check      += sub_length;
@@ -602,7 +602,7 @@ real_reader_c::assemble_video_packet(real_demuxer_cptr const &dmx,
 }
 
 bool
-real_reader_c::get_rv_dimensions(unsigned char *buf,
+real_reader_c::get_rv_dimensions(uint8_t *buf,
                                  int size,
                                  uint32_t &width,
                                  uint32_t &height) {
@@ -651,10 +651,10 @@ real_reader_c::get_rv_dimensions(unsigned char *buf,
 
 void
 real_reader_c::set_dimensions(real_demuxer_cptr const &dmx,
-                              unsigned char *buffer,
+                              uint8_t *buffer,
                               int size) {
-  unsigned char *ptr  = buffer;
-  ptr                += 1 + 2 * 4 * (*ptr + 1);
+  auto ptr  = buffer;
+  ptr      += 1 + 2 * 4 * (*ptr + 1);
 
   if ((ptr + 10) >= (buffer + size))
     return;

@@ -62,10 +62,10 @@ public:
   virtual void set_result_in_le(bool result_in_le);
 
 protected:
-  virtual void add_impl(unsigned char const *buffer, size_t size);
+  virtual void add_impl(uint8_t const *buffer, size_t size);
 
   virtual void set_initial_value_impl(uint64_t initial_value) ;
-  virtual void set_initial_value_impl(unsigned char const *buffer, size_t size);
+  virtual void set_initial_value_impl(uint8_t const *buffer, size_t size);
 };
 
 class crc8_atm_c: public crc_base_c {

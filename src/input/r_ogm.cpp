@@ -61,7 +61,7 @@ constexpr auto BUFFER_SIZE = 4096;
 struct ogm_frame_t {
   memory_cptr mem;
   int64_t duration;
-  unsigned char flags;
+  uint8_t flags;
 };
 
 class ogm_a_aac_demuxer_c: public ogm_demuxer_c {
@@ -284,7 +284,7 @@ ogm_reader_c::~ogm_reader_c() {
 */
 bool
 ogm_reader_c::probe_file() {
-  unsigned char data[4];
+  uint8_t data[4];
   return (m_in->read(data, 4) == 4) && (memcmp(data, "OggS", 4) == 0);
 }
 
@@ -324,7 +324,7 @@ ogm_reader_c::find_demuxer(int serialno) {
 int
 ogm_reader_c::read_page(ogg_page *og) {
   int np, done, nread;
-  unsigned char *buf;
+  uint8_t *buf;
 
   done = 0;
   while (!done) {
@@ -336,7 +336,7 @@ ogm_reader_c::read_page(ogg_page *og) {
       if (0 > np)
         mxwarn_fn(m_ti.m_fname, Y("Could not find the next Ogg page. This indicates a damaged Ogg/Ogm file. Will try to continue.\n"));
 
-      buf = (unsigned char *)ogg_sync_buffer(&oy, BUFFER_SIZE);
+      buf = (uint8_t *)ogg_sync_buffer(&oy, BUFFER_SIZE);
       if (!buf)
         mxerror_fn(m_ti.m_fname, Y("ogg_sync_buffer failed\n"));
 
@@ -905,7 +905,7 @@ ogm_demuxer_c::get_duration_and_len(ogg_packet &op,
   if ((0 < duration_len) && (op.bytes >= (duration_len + 1))) {
     for (int i = 0; i < duration_len; i++) {
       duration <<= 8;
-      duration  += *((unsigned char *)op.packet + duration_len - i);
+      duration  += *((uint8_t *)op.packet + duration_len - i);
     }
   } else
     duration = 0;

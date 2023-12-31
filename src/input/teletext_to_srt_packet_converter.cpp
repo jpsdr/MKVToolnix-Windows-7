@@ -30,7 +30,7 @@ displayable_packet_content(memory_c const &mem) {
 
 std::vector<teletext_to_srt_packet_converter_c::char_map_t> teletext_to_srt_packet_converter_c::ms_char_maps;
 
-static unsigned char invtab[256] = {
+static uint8_t invtab[256] = {
   0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0,
   0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,
   0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8,
@@ -65,7 +65,7 @@ static unsigned char invtab[256] = {
   0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff,
 };
 
-static unsigned char unhamtab[256] = {
+static uint8_t unhamtab[256] = {
   0x01, 0xff, 0x81, 0x01, 0xff, 0x00, 0x01, 0xff,
   0xff, 0x02, 0x01, 0xff, 0x0a, 0xff, 0xff, 0x07,
   0xff, 0x00, 0x01, 0xff, 0x00, 0x80, 0xff, 0x00,
@@ -251,15 +251,15 @@ teletext_to_srt_packet_converter_c::setup_character_maps() {
 }
 
 void
-teletext_to_srt_packet_converter_c::bit_reverse(unsigned char *buffer,
+teletext_to_srt_packet_converter_c::bit_reverse(uint8_t *buffer,
                                                 size_t length) {
   for (int idx = 0; idx < static_cast<int>(length); ++idx)
     buffer[idx] = invtab[buffer[idx]];
 }
 
 void
-teletext_to_srt_packet_converter_c::unham(unsigned char const *in,
-                                          unsigned char *out,
+teletext_to_srt_packet_converter_c::unham(uint8_t const *in,
+                                          uint8_t *out,
                                           size_t hambytes) {
   for (int idx = 0; idx < static_cast<int>(hambytes / 2); ++idx, ++out, in += 2)
     *out = (unhamtab[*in] & 0x0f) | ((unhamtab[*(in + 1)] & 0x0f) << 4);
@@ -280,14 +280,14 @@ teletext_to_srt_packet_converter_c::ttx_to_page(int ttx) {
 }
 
 void
-teletext_to_srt_packet_converter_c::remove_parity(unsigned char *buffer,
+teletext_to_srt_packet_converter_c::remove_parity(uint8_t *buffer,
                                                   size_t length) {
   for (int idx = 0; idx < static_cast<int>(length); ++idx)
     buffer[idx] &= 0x7f;
 }
 
 std::string
-teletext_to_srt_packet_converter_c::decode_color_text(unsigned char c) {
+teletext_to_srt_packet_converter_c::decode_color_text(uint8_t c) {
   if (c > 0x07)
     return " "s;
 
@@ -315,7 +315,7 @@ teletext_to_srt_packet_converter_c::maybe_close_color_font_tag() {
 
 
 bool
-teletext_to_srt_packet_converter_c::decode_line(unsigned char const *buffer,
+teletext_to_srt_packet_converter_c::decode_line(uint8_t const *buffer,
                                                 unsigned int row_number) {
   if (!m_current_track)
     return false;
@@ -383,8 +383,8 @@ teletext_to_srt_packet_converter_c::process_single_row(unsigned int row_number) 
 }
 
 void
-teletext_to_srt_packet_converter_c::decode_page_data(unsigned char ttx_header_magazine) {
-  unsigned char ttx_packet_0_header[4];
+teletext_to_srt_packet_converter_c::decode_page_data(uint8_t ttx_header_magazine) {
+  uint8_t ttx_packet_0_header[4];
   unham(&m_buf[m_pos + 6], ttx_packet_0_header, 8);
 
   auto page     = ttx_packet_0_header[0] == 0xff ? -1 : ttx_to_page(ttx_packet_0_header[0]) + 100 * ttx_header_magazine;
@@ -534,7 +534,7 @@ teletext_to_srt_packet_converter_c::process_ttx_packet() {
 
   bit_reverse(&m_buf[m_pos + 2], m_data_length);
 
-  unsigned char ttx_header[2];
+  uint8_t ttx_header[2];
   unham(&m_buf[m_pos + 4], ttx_header, 2);
 
   auto ttx_header_magazine =  ttx_header[0] & 0x07;

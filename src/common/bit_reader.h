@@ -22,9 +22,9 @@ namespace mtx::bits {
 
 class reader_c {
 private:
-  const unsigned char *m_end_of_data;
-  const unsigned char *m_byte_position;
-  const unsigned char *m_start_of_data;
+  const uint8_t *m_end_of_data;
+  const uint8_t *m_byte_position;
+  const uint8_t *m_start_of_data;
   std::size_t m_bits_valid;
   bool m_out_of_data, m_rbsp_mode;
   uint16_t m_rbsp_bytes;
@@ -34,7 +34,7 @@ public:
     init(nullptr, 0);
   }
 
-  reader_c(unsigned char const *data, std::size_t len) {
+  reader_c(uint8_t const *data, std::size_t len) {
     init(data, len);
   }
 
@@ -42,7 +42,7 @@ public:
     init(data.get_buffer(), data.get_size());
   }
 
-  void init(const unsigned char *data, std::size_t len) {
+  void init(const uint8_t *data, std::size_t len) {
     m_end_of_data   = data + len;
     m_byte_position = data;
     m_start_of_data = data;
@@ -153,9 +153,9 @@ public:
   }
 
   uint64_t peek_bits(std::size_t n) {
-    uint64_t r                             = 0;
-    const unsigned char *tmp_byte_position = m_byte_position;
-    std::size_t tmp_bits_valid             = m_bits_valid;
+    uint64_t r                       = 0;
+    const uint8_t *tmp_byte_position = m_byte_position;
+    std::size_t tmp_bits_valid       = m_bits_valid;
 
     while (0 < n) {
       if (tmp_byte_position >= m_end_of_data)
@@ -184,7 +184,7 @@ public:
     return r;
   }
 
-  void get_bytes(unsigned char *buf, std::size_t n) {
+  void get_bytes(uint8_t *buf, std::size_t n) {
     if (8 == m_bits_valid) {
       get_bytes_byte_aligned(buf, n);
       return;
@@ -248,7 +248,7 @@ public:
   }
 
 protected:
-  void get_bytes_byte_aligned(unsigned char *buf, std::size_t n) {
+  void get_bytes_byte_aligned(uint8_t *buf, std::size_t n) {
     auto bytes_to_copy = std::min<std::size_t>(n, m_end_of_data - m_byte_position);
     std::memcpy(buf, m_byte_position, bytes_to_copy);
 

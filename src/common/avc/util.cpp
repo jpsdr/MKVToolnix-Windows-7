@@ -620,7 +620,7 @@ is_avc_fourcc(const char *fourcc) {
 }
 
 memory_cptr
-avcc_to_nalus(const unsigned char *buffer,
+avcc_to_nalus(const uint8_t *buffer,
               size_t size) {
   try {
     if (6 > size)

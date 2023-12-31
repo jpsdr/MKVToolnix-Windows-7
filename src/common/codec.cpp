@@ -302,24 +302,24 @@ codec_c::look_up(fourcc_c const &fourcc) {
 }
 
 codec_c const
-codec_c::look_up_bluray_stream_coding_type(unsigned char coding_type) {
+codec_c::look_up_bluray_stream_coding_type(uint8_t coding_type) {
   switch (coding_type) {
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::mpeg2_video_primary_secondary):      return look_up(type_e::V_MPEG12);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::mpeg4_avc_video_primary_secondary):  return look_up(type_e::V_MPEG4_P10);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::mpegh_hevc_video_primary_secondary): return look_up(type_e::V_MPEGH_P2);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::vc1_video_primary_secondary):        return look_up(type_e::V_VC1);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::lpcm_audio_primary):                 return look_up(type_e::A_PCM);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::ac3_audio_primary):                  return look_up(type_e::A_AC3);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::dts_audio_primary):                  return look_up(type_e::A_DTS);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::truehd_audio_primary):               return look_up(type_e::A_TRUEHD);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::eac3_audio_primary):                 return look_up(type_e::A_AC3).specialize(specialization_e::e_ac_3);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::dts_hd_audio_primary):               return look_up(type_e::A_DTS).specialize(specialization_e::dts_hd_master_audio);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::dts_hd_xll_audio_primary):           return look_up(type_e::A_DTS).specialize(specialization_e::dts_x);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::eac3_audio_secondary):               return look_up(type_e::A_AC3).specialize(specialization_e::e_ac_3);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::dts_hd_audio_secondary):             return look_up(type_e::A_DTS).specialize(specialization_e::dts_hd_master_audio);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::presentation_graphics_subtitles):    return look_up(type_e::S_HDMV_PGS);
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::interactive_graphics_menu):          return {}; // unsupported
-    case static_cast<unsigned char>(mtx::bluray::mpls::stream_coding_type_e::text_subtitles):                     return look_up(type_e::S_HDMV_TEXTST);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::mpeg2_video_primary_secondary):      return look_up(type_e::V_MPEG12);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::mpeg4_avc_video_primary_secondary):  return look_up(type_e::V_MPEG4_P10);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::mpegh_hevc_video_primary_secondary): return look_up(type_e::V_MPEGH_P2);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::vc1_video_primary_secondary):        return look_up(type_e::V_VC1);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::lpcm_audio_primary):                 return look_up(type_e::A_PCM);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::ac3_audio_primary):                  return look_up(type_e::A_AC3);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::dts_audio_primary):                  return look_up(type_e::A_DTS);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::truehd_audio_primary):               return look_up(type_e::A_TRUEHD);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::eac3_audio_primary):                 return look_up(type_e::A_AC3).specialize(specialization_e::e_ac_3);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::dts_hd_audio_primary):               return look_up(type_e::A_DTS).specialize(specialization_e::dts_hd_master_audio);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::dts_hd_xll_audio_primary):           return look_up(type_e::A_DTS).specialize(specialization_e::dts_x);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::eac3_audio_secondary):               return look_up(type_e::A_AC3).specialize(specialization_e::e_ac_3);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::dts_hd_audio_secondary):             return look_up(type_e::A_DTS).specialize(specialization_e::dts_hd_master_audio);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::presentation_graphics_subtitles):    return look_up(type_e::S_HDMV_PGS);
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::interactive_graphics_menu):          return {}; // unsupported
+    case static_cast<uint8_t>(mtx::bluray::mpls::stream_coding_type_e::text_subtitles):                     return look_up(type_e::S_HDMV_TEXTST);
   }
 
   return {};

@@ -84,7 +84,7 @@ public:
 
   void enable_dovi_layer_combiner();
 
-  void add_enhancement_layer_bytes(unsigned char *buf, std::size_t size);
+  void add_enhancement_layer_bytes(uint8_t *buf, std::size_t size);
   void add_enhancement_layer_bytes(memory_cptr const &buf);
 
 protected:

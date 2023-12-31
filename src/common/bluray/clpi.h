@@ -31,12 +31,12 @@ constexpr auto FILE_MAGIC2C = mtx::calc_fourcc('0', '3', '0', '0');
 
 struct program_stream_t {
   uint16_t pid;
-  unsigned char coding_type;
-  unsigned char format;
-  unsigned char rate;
-  unsigned char aspect;
-  unsigned char oc_flag;
-  unsigned char char_code;
+  uint8_t coding_type;
+  uint8_t format;
+  uint8_t rate;
+  uint8_t aspect;
+  uint8_t oc_flag;
+  uint8_t char_code;
   mtx::bcp47::language_c language;
 
   program_stream_t();
@@ -48,8 +48,8 @@ using program_stream_cptr = std::shared_ptr<program_stream_t>;
 struct program_t {
   uint32_t spn_program_sequence_start;
   uint16_t program_map_pid;
-  unsigned char num_streams;
-  unsigned char num_groups;
+  uint8_t num_streams;
+  uint8_t num_groups;
   std::vector<program_stream_cptr> program_streams;
 
   program_t();

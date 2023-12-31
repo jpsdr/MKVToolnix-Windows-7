@@ -217,11 +217,9 @@ wav_reader_c::read(generic_packetizer_c *,
   if (!m_demuxer)
     return FILE_STATUS_DONE;
 
-  int64_t        requested_bytes = std::min(m_remaining_bytes_in_current_data_chunk, m_demuxer->get_preferred_input_size());
-  unsigned char *buffer          = m_demuxer->get_buffer();
-  int64_t        num_read;
-
-  num_read = m_in->read(buffer, requested_bytes);
+  auto requested_bytes = std::min(m_remaining_bytes_in_current_data_chunk, m_demuxer->get_preferred_input_size());
+  auto buffer          = m_demuxer->get_buffer();
+  auto num_read        = m_in->read(buffer, requested_bytes);
 
   if (0 >= num_read)
     return flush_packetizers();

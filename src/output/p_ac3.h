@@ -46,7 +46,7 @@ public:
   virtual connection_result_e can_connect_to(generic_packetizer_c *src, std::string &error_message);
 
 protected:
-  virtual void add_to_buffer(unsigned char *const buf, int size);
+  virtual void add_to_buffer(uint8_t *const buf, int size);
   virtual void adjust_header_values(mtx::ac3::frame_c const &ac3_header);
   virtual mtx::ac3::frame_c get_frame();
   virtual void flush_impl();
@@ -56,12 +56,12 @@ protected:
 
 class ac3_bs_packetizer_c: public ac3_packetizer_c {
 protected:
-  unsigned char m_bsb;
+  uint8_t m_bsb;
   bool m_bsb_present;
 
 public:
   ac3_bs_packetizer_c(generic_reader_c *p_reader, track_info_c &p_ti, unsigned long samples_per_sec, int channels, int bsid);
 
 protected:
-  virtual void add_to_buffer(unsigned char *const buf, int size);
+  virtual void add_to_buffer(uint8_t *const buf, int size);
 };

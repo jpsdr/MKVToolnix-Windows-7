@@ -18,7 +18,7 @@
 #include "common/debugging.h"
 #include "extract/xtr_base.h"
 
-using nal_unit_list_t = std::vector< std::pair<memory_cptr, unsigned char> >;
+using nal_unit_list_t = std::vector< std::pair<memory_cptr, uint8_t> >;
 
 class xtr_avc_c: public xtr_base_c {
 protected:
@@ -45,5 +45,5 @@ public:
 protected:
   virtual bool need_to_write_access_unit_delimiter(uint8_t *buffer, std::size_t size);
   virtual void write_access_unit_delimiter();
-  virtual unsigned char get_nalu_type(unsigned char const *buffer, std::size_t size) const;
+  virtual uint8_t get_nalu_type(uint8_t const *buffer, std::size_t size) const;
 };

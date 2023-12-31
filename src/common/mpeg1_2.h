@@ -65,9 +65,9 @@ constexpr auto AR_2_21                       = 0x40u; //  2.21
 constexpr auto FOURCC_MPEG1                  = 0x10000001u;
 constexpr auto FOURCC_MPEG2                  = 0x10000002u;
 
-int extract_fps_idx(const unsigned char *buffer, int buffer_size);
+int extract_fps_idx(const uint8_t *buffer, int buffer_size);
 double get_fps(int idx);
-std::optional<mtx_mp_rational_t> extract_aspect_ratio(const unsigned char *buffer, int buffer_size);
+std::optional<mtx_mp_rational_t> extract_aspect_ratio(const uint8_t *buffer, int buffer_size);
 bool is_fourcc(uint32_t fourcc);
 
 }

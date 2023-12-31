@@ -54,17 +54,17 @@ namespace mtx::base64 {
 static const char base64_encoding[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 static void
-encode_block(const unsigned char in[3],
+encode_block(const uint8_t in[3],
              int len,
              std::string &out) {
   out += base64_encoding[in[0] >> 2];
   out += base64_encoding[((in[0] & 0x03) << 4) | ((in[1] & 0xf0) >> 4)];
-  out += (unsigned char)(len > 1 ? base64_encoding[((in[1] & 0x0f) << 2) | ((in[2] & 0xc0) >> 6)] : '=');
-  out += (unsigned char)(len > 2 ? base64_encoding[in[2] & 0x3f]                                  : '=');
+  out += (uint8_t)(len > 1 ? base64_encoding[((in[1] & 0x0f) << 2) | ((in[2] & 0xc0) >> 6)] : '=');
+  out += (uint8_t)(len > 2 ? base64_encoding[in[2] & 0x3f]                                  : '=');
 }
 
 std::string
-encode(const unsigned char *src,
+encode(const uint8_t *src,
        int src_len,
        bool line_breaks,
        int max_line_len) {
@@ -78,12 +78,12 @@ encode(const unsigned char *src,
   std::string out;
 
   while (pos < src_len) {
-    unsigned char in[3];
+    uint8_t in[3];
     int len = 0;
     for (i = 0; 3 > i; ++i) {
       if (pos < src_len) {
         ++len;
-        in[i] = (unsigned char)src[pos];
+        in[i] = (uint8_t)src[pos];
       } else
         in[i] = 0;
       ++pos;
@@ -109,11 +109,11 @@ decode(std::string const &src) {
   auto dst_idx  = 0;
 
   while (pos < src_size) {
-    unsigned char in[4];
+    uint8_t in[4];
     unsigned int in_pos = 0;
 
     while ((src_size > pos) && (4 > in_pos)) {
-      auto c = static_cast<unsigned char>(src[pos]);
+      auto c = static_cast<uint8_t>(src[pos]);
       ++pos;
 
       if ((('A' <= c) && ('Z' >= c)) || (('a' <= c) && ('z' >= 'c')) || (('0' <= c) && ('9' >= c)) || ('+' == c) || ('/' == c)) {
@@ -128,7 +128,7 @@ decode(std::string const &src) {
     }
 
     unsigned int values_idx;
-    unsigned char values[4];
+    uint8_t values[4];
     memset(values, 0, 4);
     for (values_idx = 0; values_idx < in_pos; values_idx++) {
       values[values_idx] =
@@ -143,7 +143,7 @@ decode(std::string const &src) {
         throw mtx::base64::invalid_data_x{};
     }
 
-    unsigned char mid[6];
+    uint8_t mid[6];
     mid[0] = values[0] << 2;
     mid[1] = values[1] >> 4;
     mid[2] = values[1] << 4;

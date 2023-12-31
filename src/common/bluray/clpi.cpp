@@ -249,18 +249,18 @@ parser_c::parse_program_stream(mtx::bits::reader_c &bc,
     case 0xa2:
       stream->format = bc.get_bits(4);
       stream->rate   = bc.get_bits(4);
-      bc.get_bytes(reinterpret_cast<unsigned char *>(language), 3);
+      bc.get_bytes(reinterpret_cast<uint8_t *>(language), 3);
       break;
 
     case 0x90:
     case 0x91:
     case 0xa0:
-      bc.get_bytes(reinterpret_cast<unsigned char *>(language), 3);
+      bc.get_bytes(reinterpret_cast<uint8_t *>(language), 3);
       break;
 
     case 0x92:
       stream->char_code = bc.get_bits(8);
-      bc.get_bytes(reinterpret_cast<unsigned char *>(language), 3);
+      bc.get_bytes(reinterpret_cast<uint8_t *>(language), 3);
       break;
 
     default:

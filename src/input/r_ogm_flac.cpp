@@ -174,7 +174,7 @@ flac_header_extractor_c::read_page() {
       if (np < 0)
         return false;
 
-      unsigned char *buf = (unsigned char *)ogg_sync_buffer(&oy, BUFFER_SIZE);
+      uint8_t *buf = (uint8_t *)ogg_sync_buffer(&oy, BUFFER_SIZE);
       if (!buf)
         return false;
 
@@ -273,8 +273,9 @@ ogm_a_flac_demuxer_c::create_packetizer() {
   for (i = start_at_header; i < (int)packet_data.size(); i++)
     size += packet_data[i]->get_size();
 
-  unsigned char *buf = (unsigned char *)safemalloc(size);
-  size               = 0;
+  auto af_buf = memory_c::alloc(size);
+  auto buf    = af_buf->get_buffer();
+  size        = 0;
 
   for (i = start_at_header; i < (int)packet_data.size(); i++) {
     memcpy(&buf[size], packet_data[i]->get_buffer(), packet_data[i]->get_size());
@@ -282,7 +283,6 @@ ogm_a_flac_demuxer_c::create_packetizer() {
   }
 
   generic_packetizer_c *ptzr_obj = new flac_packetizer_c(reader, m_ti, buf, size);
-  safefree(buf);
 
   reader->show_packetizer_info(m_ti.m_id, *ptzr_obj);
 

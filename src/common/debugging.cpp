@@ -107,7 +107,7 @@ void
 debugging_c::hexdump(const void *buffer_to_dump,
                      size_t length) {
   std::stringstream dump, ascii;
-  auto buffer     = static_cast<const unsigned char *>(buffer_to_dump);
+  auto buffer     = static_cast<const uint8_t *>(buffer_to_dump);
   auto buffer_idx = 0u;
 
   while (buffer_idx < length) {

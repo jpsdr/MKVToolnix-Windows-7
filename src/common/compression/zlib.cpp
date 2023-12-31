@@ -24,7 +24,7 @@ zlib_compressor_c::~zlib_compressor_c() {
 }
 
 memory_cptr
-zlib_compressor_c::do_decompress(unsigned char const *buffer,
+zlib_compressor_c::do_decompress(uint8_t const *buffer,
                                  std::size_t size) {
   z_stream d_stream;
 
@@ -62,7 +62,7 @@ zlib_compressor_c::do_decompress(unsigned char const *buffer,
 }
 
 memory_cptr
-zlib_compressor_c::do_compress(unsigned char const *buffer,
+zlib_compressor_c::do_compress(uint8_t const *buffer,
                                std::size_t size) {
   z_stream c_stream;
 

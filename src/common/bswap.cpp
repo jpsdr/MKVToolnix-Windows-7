@@ -19,8 +19,8 @@
 namespace mtx::bytes {
 
 void
-swap_buffer(unsigned char const *src,
-            unsigned char *dst,
+swap_buffer(uint8_t const *src,
+            uint8_t *dst,
             std::size_t num_bytes,
             std::size_t word_length) {
   if ((num_bytes % word_length) != 0)

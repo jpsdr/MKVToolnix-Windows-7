@@ -36,11 +36,11 @@ constexpr auto READ_SIZE = 1024 * 1024;
 
 bool
 mpeg_es_reader_c::probe_file() {
-  auto debug = debugging_option_c{"mpeg_es_detection|mpeg_es_probe"};
+  auto debug    = debugging_option_c{"mpeg_es_detection|mpeg_es_probe"};
 
-  memory_cptr af_buf = memory_c::alloc(READ_SIZE);
-  unsigned char *buf = af_buf->get_buffer();
-  int num_read       = m_in->read(buf, READ_SIZE);
+  auto af_buf   = memory_c::alloc(READ_SIZE);
+  auto buf      = af_buf->get_buffer();
+  auto num_read = m_in->read(buf, READ_SIZE);
 
   if (4 > num_read)
     return 0;
@@ -66,8 +66,8 @@ mpeg_es_reader_c::probe_file() {
   auto ok                          = false;
 
   // Let's look for a MPEG ES start code inside the first 1 MB.
-  int i;
-  for (i = 4; i < num_read - 1; i++) {
+  std::size_t i = 4;
+  for (; i < num_read - 1; i++) {
     if (mtx::mpeg::is_start_code(value)) {
       mxdebug_if(debug, fmt::format("mpeg_es_detection: start code found; fourth byte: 0x{0:02x}\n", value & 0xff));
 

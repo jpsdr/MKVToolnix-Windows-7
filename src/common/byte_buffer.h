@@ -60,7 +60,7 @@ public:
     }
   }
 
-  void add(unsigned char const *new_data, std::size_t new_size, position_e const add_where = at_back) {
+  void add(uint8_t const *new_data, std::size_t new_size, position_e const add_where = at_back) {
     if ((m_offset != 0) && ((m_offset + m_filled + new_size) >= m_chunk_size))
       trim();
 
@@ -85,7 +85,7 @@ public:
     add(new_buffer.get_buffer(), new_buffer.get_size(), add_where);
   }
 
-  void prepend(unsigned char const *new_data, std::size_t new_size) {
+  void prepend(uint8_t const *new_data, std::size_t new_size) {
     add(new_data, new_size, at_front);
   }
 
@@ -110,7 +110,7 @@ public:
       remove(m_filled);
   }
 
-  unsigned char *get_buffer() const {
+  uint8_t *get_buffer() const {
     return m_data->get_buffer() + m_offset;
   }
 

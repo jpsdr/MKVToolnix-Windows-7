@@ -19,7 +19,7 @@
 
 class xtr_wav_c: public xtr_base_c {
 private:
-  std::function<void(unsigned char const *, unsigned char *, std::size_t)> m_byte_swapper;
+  std::function<void(uint8_t const *, uint8_t *, std::size_t)> m_byte_swapper;
   uint64_t m_channels{}, m_sfreq{}, m_w64_header_size{};
   int m_bps{-1};
   bool m_w64_requested{};

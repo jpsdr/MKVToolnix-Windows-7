@@ -138,7 +138,7 @@ static int mp3_samples_per_channel[3][3] = {
 };
 
 int
-find_mp3_header(const unsigned char *buf,
+find_mp3_header(const uint8_t *buf,
                 int size) {
   int i, pos;
   unsigned long header;
@@ -184,7 +184,7 @@ find_mp3_header(const unsigned char *buf,
 }
 
 bool
-decode_mp3_header(const unsigned char *buf,
+decode_mp3_header(const uint8_t *buf,
                   mp3_header_t *h) {
   unsigned long header;
   int i;
@@ -249,7 +249,7 @@ decode_mp3_header(const unsigned char *buf,
 }
 
 int
-find_consecutive_mp3_headers(const unsigned char *buf,
+find_consecutive_mp3_headers(const uint8_t *buf,
                              int size,
                              int num,
                              mp3_header_t *header_found) {

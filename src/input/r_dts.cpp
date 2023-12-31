@@ -90,12 +90,12 @@ dts_reader_c::read_headers() {
 
 void
 dts_reader_c::find_first_header_to_use() {
-  int pos = mtx::dts::find_header(reinterpret_cast<const unsigned char *>(m_buf[m_cur_buf]), s_buf_size, m_dtsheader);
+  int pos = mtx::dts::find_header(reinterpret_cast<const uint8_t *>(m_buf[m_cur_buf]), s_buf_size, m_dtsheader);
 
   if (0 > pos)
     throw mtx::input::header_parsing_x();
 
-  auto buf             = reinterpret_cast<unsigned char const *>(m_buf[m_cur_buf]);
+  auto buf             = reinterpret_cast<uint8_t const *>(m_buf[m_cur_buf]);
   auto core_search_pos = pos;
   auto core_found      = false;
 
@@ -124,7 +124,7 @@ dts_reader_c::find_first_header_to_use() {
 int
 dts_reader_c::decode_buffer(size_t length) {
   if (m_swap_bytes) {
-    mtx::bytes::swap_buffer(reinterpret_cast<unsigned char const *>(m_buf[m_cur_buf]), reinterpret_cast<unsigned char *>(m_buf[m_cur_buf ^ 1]), length, 2);
+    mtx::bytes::swap_buffer(reinterpret_cast<uint8_t const *>(m_buf[m_cur_buf]), reinterpret_cast<uint8_t *>(m_buf[m_cur_buf ^ 1]), length, 2);
     m_cur_buf ^= 1;
   }
 

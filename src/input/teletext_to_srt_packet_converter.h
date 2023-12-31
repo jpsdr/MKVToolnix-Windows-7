@@ -60,7 +60,7 @@ protected:
   static std::vector<char_map_t> ms_char_maps;
 
   size_t m_in_size, m_pos, m_data_length;
-  unsigned char *m_buf;
+  uint8_t *m_buf;
   timestamp_c m_current_packet_timestamp;
   std::unordered_map<int, track_data_cptr> m_track_data;
   track_data_t *m_current_track{};
@@ -82,11 +82,11 @@ public:
 protected:
   void process_ttx_packet();
   std::string page_to_string() const;
-  std::string decode_color_text(unsigned char c);
+  std::string decode_color_text(uint8_t c);
   std::string maybe_close_color_font_tag();
-  bool decode_line(unsigned char const *buffer, unsigned int row_number);
+  bool decode_line(uint8_t const *buffer, unsigned int row_number);
   void process_single_row(unsigned int row_number);
-  void decode_page_data(unsigned char ttx_header_magazine);
+  void decode_page_data(uint8_t ttx_header_magazine);
   void queue_page_content(std::string const &content);
   void queue_packet(packet_cptr const &new_packet);
   void deliver_queued_packet();
@@ -94,8 +94,8 @@ protected:
 
 protected:
   static int ttx_to_page(int ttx);
-  static void bit_reverse(unsigned char *buffer, size_t length);
-  static void unham(unsigned char const *in, unsigned char *out, size_t hambytes);
-  static void remove_parity(unsigned char *buffer, size_t length);
+  static void bit_reverse(uint8_t *buffer, size_t length);
+  static void unham(uint8_t const *in, uint8_t *out, size_t hambytes);
+  static void remove_parity(uint8_t *buffer, size_t length);
   static void setup_character_maps();
 };

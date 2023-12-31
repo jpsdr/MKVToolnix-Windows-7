@@ -83,12 +83,12 @@ struct frame_t {
          :                    codec_c::look_up(codec_c::type_e::A_TRUEHD);
   }
 
-  bool parse_header(unsigned char const *data, std::size_t size);
+  bool parse_header(uint8_t const *data, std::size_t size);
 
 protected:
-  bool parse_ac3_header(unsigned char const *data, std::size_t size);
-  bool parse_mlp_header(unsigned char const *data, std::size_t size);
-  bool parse_truehd_header(unsigned char const *data, std::size_t size);
+  bool parse_ac3_header(uint8_t const *data, std::size_t size);
+  bool parse_mlp_header(uint8_t const *data, std::size_t size);
+  bool parse_truehd_header(uint8_t const *data, std::size_t size);
 
 public:
   static int decode_channel_map(int channel_map);
@@ -111,7 +111,7 @@ public:
   parser_c() = default;
   virtual ~parser_c() = default;
 
-  virtual void add_data(const unsigned char *new_data, unsigned int new_size);
+  virtual void add_data(const uint8_t *new_data, unsigned int new_size);
   virtual void parse(bool end_of_stream = false);
   virtual bool frame_available();
   virtual frame_cptr get_next_frame();
@@ -121,6 +121,6 @@ protected:
 };
 using parser_cptr = std::shared_ptr<parser_c>;
 
-void remove_dialog_normalization_gain(unsigned char *buf, std::size_t size);
+void remove_dialog_normalization_gain(uint8_t *buf, std::size_t size);
 
 }

@@ -352,7 +352,7 @@ vobsub_reader_c::parse_headers() {
 }
 
 int
-vobsub_reader_c::deliver_packet(unsigned char *buf,
+vobsub_reader_c::deliver_packet(uint8_t *buf,
                                 int size,
                                 int64_t timestamp,
                                 int64_t default_duration,
@@ -380,7 +380,7 @@ vobsub_reader_c::deliver_packet(unsigned char *buf,
       dcsq         += 2;        // points to first command chain
       dcsq2        += 4;        // find end of first command chain
       bool unknown  = false;
-      unsigned char type;
+      uint8_t type;
       for (type = buf[dcsq2++]; 0xff != type; type = buf[dcsq2++]) {
         switch(type) {
           case 0x00:            // Menu ID, 1 byte
@@ -445,8 +445,8 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
   uint32_t len, idx, mpeg_version;
   int c, packet_aid;
   /* Goto start of a packet, it starts with 0x000001?? */
-  const unsigned char wanted[] = { 0, 0, 1 };
-  unsigned char buf[5];
+  const uint8_t wanted[] = { 0, 0, 1 };
+  uint8_t buf[5];
 
   vobsub_track_c *track         = tracks[track_id];
   auto &packetizer              = ptzr(track->ptzr);
@@ -456,7 +456,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
   uint64_t extraction_end_pos   = track->idx >= track->entries.size() - 1 ? m_sub_file->get_size() : track->entries[track->idx + 1].position;
 
   int64_t pts                   = 0;
-  unsigned char *dst_buf        = nullptr;
+  uint8_t *dst_buf              = nullptr;
   uint32_t dst_size             = 0;
   uint32_t packet_size          = 0;
   unsigned int spu_len          = 0;
@@ -596,11 +596,11 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
 
           if (mtx::hacks::is_engaged(mtx::hacks::VOBSUB_SUBPIC_STOP_CMDS)) {
             // Space for the stop display command and padding
-            dst_buf = (unsigned char *)saferealloc(dst_buf, dst_size + packet_size + 6);
+            dst_buf = (uint8_t *)saferealloc(dst_buf, dst_size + packet_size + 6);
             memset(dst_buf + dst_size + packet_size, 0xff, 6);
 
           } else
-            dst_buf = (unsigned char *)saferealloc(dst_buf, dst_size + packet_size);
+            dst_buf = (uint8_t *)saferealloc(dst_buf, dst_size + packet_size);
 
           mxdebug_if(s_debug, fmt::format("vobsub_reader: sub packet data: aid: {0}, pts: {1}, packet_size: {2}\n", track->aid, mtx::string::format_timestamp(pts, 3), packet_size));
           if (m_sub_file->read(&dst_buf[dst_size], packet_size) != packet_size) {

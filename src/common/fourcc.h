@@ -38,7 +38,7 @@ public:
 
   // From memory:
   fourcc_c(memory_cptr const &mem, byte_order_e byte_order = byte_order_e::big_endian);
-  fourcc_c(unsigned char const *mem, byte_order_e byte_order = byte_order_e::big_endian);
+  fourcc_c(uint8_t const *mem, byte_order_e byte_order = byte_order_e::big_endian);
   fourcc_c(uint32_t const *mem, byte_order_e byte_order = byte_order_e::big_endian);
 
   // From mm_io_c instances:
@@ -51,7 +51,7 @@ public:
   fourcc_c &shift_read(mm_io_c *io, byte_order_e byte_order = byte_order_e::big_endian);
 
   size_t write(memory_cptr const &mem, byte_order_e byte_order = byte_order_e::big_endian);
-  size_t write(unsigned char *mem, byte_order_e byte_order = byte_order_e::big_endian);
+  size_t write(uint8_t *mem, byte_order_e byte_order = byte_order_e::big_endian);
   size_t write(mm_io_cptr const &io, byte_order_e byte_order = byte_order_e::big_endian);
   size_t write(mm_io_c &io, byte_order_e byte_order = byte_order_e::big_endian);
   size_t write(mm_io_c *io, byte_order_e byte_order = byte_order_e::big_endian);

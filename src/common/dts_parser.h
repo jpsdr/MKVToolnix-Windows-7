@@ -34,11 +34,11 @@ public:
   parser_c();
   virtual ~parser_c();
 
-  bool detect(unsigned char const *buffer, std::size_t size, std::size_t num_required_headers);
+  bool detect(uint8_t const *buffer, std::size_t size, std::size_t num_required_headers);
   bool detect(memory_c &buffer, std::size_t num_required_headers);
   header_t get_first_header() const;
 
-  memory_cptr decode(unsigned char const *buffer, std::size_t size);
+  memory_cptr decode(uint8_t const *buffer, std::size_t size);
   memory_cptr decode(memory_c &buffer);
 
   void reset();

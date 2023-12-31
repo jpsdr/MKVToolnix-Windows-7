@@ -123,11 +123,11 @@ void
 xtr_vobsub_c::handle_frame(xtr_frame_t &f) {
   fix_spu_duration(*f.frame, f.duration > 0 ? timestamp_c::ns(f.duration) : timestamp_c{});
 
-  static unsigned char padding_data[8] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+  static uint8_t padding_data[8] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
 
   xtr_vobsub_c *vmaster = !m_master ? this : static_cast<xtr_vobsub_c *>(m_master);
 
-  unsigned char *data = f.frame->get_buffer();
+  uint8_t *data = f.frame->get_buffer();
   size_t size         = f.frame->get_size();
 
   if (size < 4)

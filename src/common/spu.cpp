@@ -20,7 +20,7 @@
 namespace mtx::spu {
 
 static std::optional<std::size_t>
-find_stop_display_position(unsigned char const *data,
+find_stop_display_position(uint8_t const *data,
                            std::size_t const buf_size) {
   static debugging_option_c debug{"spu|spu_find_stop_display_position"};
 
@@ -96,7 +96,7 @@ find_stop_display_position(unsigned char const *data,
 }
 
 timestamp_c
-get_duration(unsigned char const *data,
+get_duration(uint8_t const *data,
              std::size_t const buf_size) {
   auto position = find_stop_display_position(data, buf_size);
   if (!position || ((*position + 2) > buf_size))
@@ -106,7 +106,7 @@ get_duration(unsigned char const *data,
 }
 
 void
-set_duration(unsigned char *data,
+set_duration(uint8_t *data,
              std::size_t const buf_size,
              timestamp_c const &duration) {
   auto position = find_stop_display_position(data, buf_size);

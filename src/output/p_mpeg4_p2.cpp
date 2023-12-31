@@ -152,7 +152,7 @@ mpeg4_p2_video_packetizer_c::process_non_native(packet_cptr const &packet) {
     if (mtx::mpeg4_p2::FRAME_TYPE_B != frame.type)
       flush_frames(false);
 
-    frame.data      = (unsigned char *)safememdup(packet->data->get_buffer() + frame.pos, frame.size);
+    frame.data      = (uint8_t *)safememdup(packet->data->get_buffer() + frame.pos, frame.size);
     frame.timestamp = -1;
 
     if (mtx::mpeg4_p2::FRAME_TYPE_B == frame.type)
@@ -180,7 +180,7 @@ mpeg4_p2_video_packetizer_c::extract_config_data(packet_cptr const &packet) {
 
 void
 mpeg4_p2_video_packetizer_c::fix_codec_string() {
-  static const unsigned char start_code[4] = {0x00, 0x00, 0x01, 0xb2};
+  static const uint8_t start_code[4] = {0x00, 0x00, 0x01, 0xb2};
 
   if (!m_ti.m_private_data || (0 == m_ti.m_private_data->get_size()))
     return;
@@ -200,7 +200,7 @@ mpeg4_p2_video_packetizer_c::fix_codec_string() {
     if (strncasecmp((const char *)&private_data[i - 4], "divx", 4) != 0)
       continue;
 
-    unsigned char *end_pos = (unsigned char *)memchr(&private_data[i], 0, size);
+    uint8_t *end_pos = (uint8_t *)memchr(&private_data[i], 0, size);
     if (!end_pos)
       end_pos = &private_data[i + size];
 
@@ -298,7 +298,7 @@ mpeg4_p2_video_packetizer_c::flush_impl() {
 }
 
 void
-mpeg4_p2_video_packetizer_c::extract_aspect_ratio(const unsigned char *buffer,
+mpeg4_p2_video_packetizer_c::extract_aspect_ratio(const uint8_t *buffer,
                                                   int size) {
   if (m_aspect_ratio_extracted)
     return;
@@ -324,7 +324,7 @@ mpeg4_p2_video_packetizer_c::extract_aspect_ratio(const unsigned char *buffer,
 }
 
 void
-mpeg4_p2_video_packetizer_c::extract_size(const unsigned char *buffer,
+mpeg4_p2_video_packetizer_c::extract_size(const uint8_t *buffer,
                                           int size) {
   if (m_size_extracted)
     return;

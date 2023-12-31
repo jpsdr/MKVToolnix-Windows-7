@@ -121,7 +121,7 @@ struct mpeg_ps_track_t {
   int a_channels, a_sample_rate, a_bits_per_sample, a_bsid;
   mtx::dts::header_t dts_header;
 
-  unsigned char *buffer;
+  uint8_t *buffer;
   unsigned int buffer_usage, buffer_size;
 
   multiple_timestamps_packet_extension_c *multiple_timestamps_packet_extension;
@@ -155,7 +155,7 @@ struct mpeg_ps_track_t {
 
   void use_buffer(size_t size) {
     safefree(buffer);
-    buffer       = (unsigned char *)safemalloc(size);
+    buffer       = (uint8_t *)safemalloc(size);
     buffer_size  = size;
     buffer_usage = 0;
   }
@@ -164,7 +164,7 @@ struct mpeg_ps_track_t {
     if (!buffer)
       use_buffer(size);
     else if (size > buffer_size) {
-      buffer      = (unsigned char *)saferealloc(buffer, size);
+      buffer      = (uint8_t *)saferealloc(buffer, size);
       buffer_size = size;
     }
   }
@@ -230,15 +230,15 @@ public:
 private:
   virtual file_status_e read(generic_packetizer_c *packetizer, bool force = false) override;
 
-  virtual void new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
-  virtual void new_stream_v_mpeg_1_2(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
-  virtual void new_stream_v_avc(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
-  virtual void new_stream_v_vc1(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
-  virtual void new_stream_a_mpeg(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
-  virtual void new_stream_a_ac3(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
-  virtual void new_stream_a_dts(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
-  virtual void new_stream_a_pcm(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
-  virtual void new_stream_a_truehd(mpeg_ps_id_t id, unsigned char *buf, unsigned int length, mpeg_ps_track_ptr &track);
+  virtual void new_stream_v_avc_or_mpeg_1_2(mpeg_ps_id_t id, uint8_t *buf, unsigned int length, mpeg_ps_track_ptr &track);
+  virtual void new_stream_v_mpeg_1_2(mpeg_ps_id_t id, uint8_t *buf, unsigned int length, mpeg_ps_track_ptr &track);
+  virtual void new_stream_v_avc(mpeg_ps_id_t id, uint8_t *buf, unsigned int length, mpeg_ps_track_ptr &track);
+  virtual void new_stream_v_vc1(mpeg_ps_id_t id, uint8_t *buf, unsigned int length, mpeg_ps_track_ptr &track);
+  virtual void new_stream_a_mpeg(mpeg_ps_id_t id, uint8_t *buf, unsigned int length, mpeg_ps_track_ptr &track);
+  virtual void new_stream_a_ac3(mpeg_ps_id_t id, uint8_t *buf, unsigned int length, mpeg_ps_track_ptr &track);
+  virtual void new_stream_a_dts(mpeg_ps_id_t id, uint8_t *buf, unsigned int length, mpeg_ps_track_ptr &track);
+  virtual void new_stream_a_pcm(mpeg_ps_id_t id, uint8_t *buf, unsigned int length, mpeg_ps_track_ptr &track);
+  virtual void new_stream_a_truehd(mpeg_ps_id_t id, uint8_t *buf, unsigned int length, mpeg_ps_track_ptr &track);
   virtual bool resync_stream(uint32_t &header);
   virtual file_status_e finish();
   void sort_tracks();

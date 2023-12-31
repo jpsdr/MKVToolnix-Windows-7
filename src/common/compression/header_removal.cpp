@@ -25,7 +25,7 @@ header_removal_compressor_c::header_removal_compressor_c()
 }
 
 memory_cptr
-header_removal_compressor_c::do_decompress(unsigned char const *buffer,
+header_removal_compressor_c::do_decompress(uint8_t const *buffer,
                                            std::size_t size) {
   if (!m_bytes || (0 == m_bytes->get_size()))
     return memory_c::clone(buffer, size);
@@ -39,7 +39,7 @@ header_removal_compressor_c::do_decompress(unsigned char const *buffer,
 }
 
 memory_cptr
-header_removal_compressor_c::do_compress(unsigned char const *buffer,
+header_removal_compressor_c::do_compress(uint8_t const *buffer,
                                          std::size_t size) {
   if (!m_bytes || (0 == m_bytes->get_size()))
     return memory_c::clone(buffer, size);
@@ -96,14 +96,14 @@ analyze_header_removal_compressor_c::~analyze_header_removal_compressor_c() {
 }
 
 memory_cptr
-analyze_header_removal_compressor_c::do_decompress(unsigned char const *,
+analyze_header_removal_compressor_c::do_decompress(uint8_t const *,
                                                    std::size_t) {
   mxerror("analyze_header_removal_compressor_c::do_decompress(): not supported\n");
   return {};
 }
 
 memory_cptr
-analyze_header_removal_compressor_c::do_compress(unsigned char const *buffer,
+analyze_header_removal_compressor_c::do_compress(uint8_t const *buffer,
                                                  std::size_t size) {
   ++m_packet_counter;
 

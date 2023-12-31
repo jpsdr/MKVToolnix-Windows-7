@@ -19,7 +19,7 @@
 
 namespace mtx::spu {
 
-timestamp_c get_duration(unsigned char const *data, std::size_t const buf_size);
-void set_duration(unsigned char *data, std::size_t const buf_size, timestamp_c const &duration);
+timestamp_c get_duration(uint8_t const *data, std::size_t const buf_size);
+void set_duration(uint8_t *data, std::size_t const buf_size, timestamp_c const &duration);
 
 }

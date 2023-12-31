@@ -55,7 +55,7 @@ wav_ac3wav_demuxer_c::decode_buffer(int len) {
     m_cur_buf ^= 1;
   }
 
-  unsigned char *base = m_buf[m_cur_buf]->get_buffer();
+  auto base = m_buf[m_cur_buf]->get_buffer();
 
   if ((get_uint16_le(&base[0]) != AC3WAV_SYNC_WORD1) || (get_uint16_le(&base[2]) != AC3WAV_SYNC_WORD2) || (0x01 != base[4]))
     return -1;

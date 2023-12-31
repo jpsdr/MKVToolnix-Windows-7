@@ -110,8 +110,8 @@ protected:
   virtual real_demuxer_cptr find_demuxer(unsigned int id);
   virtual void assemble_video_packet(real_demuxer_cptr const &dmx, rmff_frame_t *frame);
   virtual file_status_e finish();
-  virtual bool get_rv_dimensions(unsigned char *buf, int size, uint32_t &width, uint32_t &height);
-  virtual void set_dimensions(real_demuxer_cptr const &dmx, unsigned char *buffer, int size);
+  virtual bool get_rv_dimensions(uint8_t *buf, int size, uint32_t &width, uint32_t &height);
+  virtual void set_dimensions(real_demuxer_cptr const &dmx, uint8_t *buffer, int size);
   virtual void get_information_from_data();
   virtual void deliver_aac_frames(real_demuxer_cptr const &dmx, memory_c &mem);
   virtual void queue_audio_frames(real_demuxer_cptr const &dmx, memory_cptr const &mem, uint64_t timestamp, uint32_t flags);

@@ -45,6 +45,6 @@ swap_64(uint64_t x) {
   return r.ll;
 }
 
-void swap_buffer(unsigned char const *src, unsigned char *dst, std::size_t num_bytes, std::size_t word_length);
+void swap_buffer(uint8_t const *src, uint8_t *dst, std::size_t num_bytes, std::size_t word_length);
 
 }

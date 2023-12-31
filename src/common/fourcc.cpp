@@ -27,7 +27,7 @@ val(uint32_t value,
 }
 
 char
-printable_char(unsigned char c) {
+printable_char(uint8_t c) {
   return (32 <= c) && (127 > c) ? static_cast<char>(c) : '?';
 }
 
@@ -60,7 +60,7 @@ fourcc_c::fourcc_c(memory_cptr const &mem,
 {
 }
 
-fourcc_c::fourcc_c(unsigned char const *mem,
+fourcc_c::fourcc_c(uint8_t const *mem,
                    fourcc_c::byte_order_e byte_order)
   : m_value{read(mem, byte_order)}
 {
@@ -97,7 +97,7 @@ fourcc_c::write(memory_cptr const &mem,
 }
 
 size_t
-fourcc_c::write(unsigned char *mem,
+fourcc_c::write(uint8_t *mem,
                 fourcc_c::byte_order_e byte_order) {
   put_uint32_be(mem, val(m_value, byte_order));
   return 4;
@@ -141,7 +141,7 @@ fourcc_c::str()
 std::string
 fourcc_c::description()
   const {
-  unsigned char buffer[4];
+  uint8_t buffer[4];
   put_uint32_be(buffer, m_value);
 
   auto result = fmt::format("0x{0:08x} \"{1}{2}{3}{4}\"", m_value, printable_char(buffer[0]), printable_char(buffer[1]), printable_char(buffer[2]), printable_char(buffer[3]));

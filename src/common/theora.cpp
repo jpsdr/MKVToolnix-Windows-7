@@ -20,7 +20,7 @@
 namespace mtx::theora {
 
 void
-parse_identification_header(unsigned char *buffer,
+parse_identification_header(uint8_t *buffer,
                             int size,
                             identification_header_t &header) {
   mtx::bits::reader_c bc(buffer, size);

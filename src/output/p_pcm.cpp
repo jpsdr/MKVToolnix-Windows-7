@@ -55,7 +55,7 @@ pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
   set_track_default_duration((int64_t)(1000000000.0 * m_samples_per_packet / m_samples_per_sec));
 
   if (m_format == big_endian_integer)
-    m_byte_swapper = [this](unsigned char const *src, unsigned char *dst, std::size_t num_bytes) {
+    m_byte_swapper = [this](uint8_t const *src, uint8_t *dst, std::size_t num_bytes) {
       mtx::bytes::swap_buffer(src, dst, num_bytes, m_bits_per_sample / 8);
     };
 }

@@ -338,7 +338,7 @@ avi_reader_c::create_mpeg4_p10_packetizer() {
       ptzr->set_container_default_field_duration(mtx::to_int_rounded(m_default_duration / 2));
 
     if (0 < m_avi->extradata_size) {
-      auto avc_extra_nalus = mtx::avc::avcc_to_nalus(reinterpret_cast<unsigned char *>(m_avi->bitmap_info_header + 1), m_avi->extradata_size);
+      auto avc_extra_nalus = mtx::avc::avcc_to_nalus(reinterpret_cast<uint8_t *>(m_avi->bitmap_info_header + 1), m_avi->extradata_size);
       if (avc_extra_nalus)
         ptzr->add_extra_data(avc_extra_nalus);
     }
@@ -841,7 +841,7 @@ avi_reader_c::extended_identify_mpeg4_l2(mtx::id::info_c &info) {
     return;
 
   memory_cptr af_buffer = memory_c::alloc(size);
-  unsigned char *buffer = af_buffer->get_buffer();
+  uint8_t *buffer = af_buffer->get_buffer();
   int dummy_key;
 
   AVI_read_frame(m_avi, reinterpret_cast<char *>(buffer), &dummy_key);

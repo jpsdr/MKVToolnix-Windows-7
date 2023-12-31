@@ -255,7 +255,7 @@ format_paragraph(const std::string &text_to_wrap,
 }
 
 std::string
-to_hex(const unsigned char *buf,
+to_hex(const uint8_t *buf,
        size_t size,
        bool compact) {
   if (!buf || !size)

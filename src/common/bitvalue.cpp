@@ -23,7 +23,7 @@ namespace mtx::bits {
 
 namespace {
 
-unsigned char
+uint8_t
 hex_digit_to_decimal(char c) {
   return isdigit(c) ? (c - '0') : (c - 'a' + 10);
 }
@@ -88,7 +88,7 @@ value_c::value_c(std::string s,
 
   m_value = memory_c::alloc(len / 2);
 
-  unsigned char *buffer = m_value->get_buffer();
+  auto buffer = m_value->get_buffer();
   for (i = 0; i < len; i += 2)
     buffer[i / 2] = (hex_digit_to_decimal(s2[i]) << 4) | hex_digit_to_decimal(s2[i + 1]);
 }
@@ -111,7 +111,7 @@ value_c::operator ==(const value_c &cmp)
   return (cmp.m_value->get_size() == m_value->get_size()) && (0 == memcmp(m_value->get_buffer(), cmp.m_value->get_buffer(), m_value->get_size()));
 }
 
-unsigned char
+uint8_t
 value_c::operator [](size_t index)
   const {
   assert(m_value->get_size() > index);

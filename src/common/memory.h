@@ -49,10 +49,10 @@ safefree(void *p) {
 }
 
 #define safemalloc(s) _safemalloc(s, __FILE__, __LINE__)
-unsigned char *_safemalloc(size_t size, const char *file, int line);
+uint8_t *_safemalloc(size_t size, const char *file, int line);
 
 #define safememdup(src, size) _safememdup(src, size, __FILE__, __LINE__)
-unsigned char *_safememdup(const void *src, size_t size, const char *file, int line);
+uint8_t *_safememdup(const void *src, size_t size, const char *file, int line);
 
 #define safestrdup(s) _safestrdup(s, __FILE__, __LINE__)
 inline char *
@@ -61,8 +61,8 @@ _safestrdup(const std::string &s,
             int line) {
   return reinterpret_cast<char *>(_safememdup(s.c_str(), s.length() + 1, file, line));
 }
-inline unsigned char *
-_safestrdup(const unsigned char *s,
+inline uint8_t *
+_safestrdup(const uint8_t *s,
             const char *file,
             int line) {
   return _safememdup(s, strlen(reinterpret_cast<const char *>(s)) + 1, file, line);
@@ -75,7 +75,7 @@ _safestrdup(const char *s,
 }
 
 #define saferealloc(mem, size) _saferealloc(mem, size, __FILE__, __LINE__)
-unsigned char *_saferealloc(void *mem, size_t size, const char *file, int line);
+uint8_t *_saferealloc(void *mem, size_t size, const char *file, int line);
 
 class memory_c;
 using memory_cptr = std::shared_ptr<memory_c>;
@@ -83,14 +83,14 @@ using memories_c  = std::vector<memory_cptr>;
 
 class memory_c {
 private:
-  unsigned char *m_ptr{};
+  uint8_t *m_ptr{};
   std::size_t m_size{}, m_offset{};
   bool m_is_owned{};
 
   explicit memory_c(void *ptr,
                     std::size_t size,
                     bool take_ownership) // allocate a new counter
-    : m_ptr{static_cast<unsigned char *>(ptr)}
+    : m_ptr{static_cast<uint8_t *>(ptr)}
     , m_size{size}
     , m_is_owned{take_ownership}
   {
@@ -107,7 +107,7 @@ public:
   memory_c(const memory_c &r) = delete;
   memory_c &operator=(const memory_c &r) = delete;
 
-  unsigned char *get_buffer() const {
+  uint8_t *get_buffer() const {
     return m_ptr ? m_ptr + m_offset : nullptr;
   }
 
@@ -141,7 +141,7 @@ public:
     if (m_is_owned)
       return;
 
-    m_ptr       = static_cast<unsigned char *>(safememdup(get_buffer(), get_size()));
+    m_ptr       = static_cast<uint8_t *>(safememdup(get_buffer(), get_size()));
     m_is_owned  = true;
     m_size     -= m_offset;
     m_offset    = 0;
@@ -152,7 +152,7 @@ public:
   }
 
   void resize(std::size_t new_size) noexcept;
-  void add(unsigned char const *new_buffer, std::size_t new_size);
+  void add(uint8_t const *new_buffer, std::size_t new_size);
   void add(memory_c const &new_buffer) {
     add(new_buffer.get_buffer(), new_buffer.get_size());
   }
@@ -160,7 +160,7 @@ public:
     add(*new_buffer);
   }
 
-  void prepend(unsigned char const *new_buffer, std::size_t new_size);
+  void prepend(uint8_t const *new_buffer, std::size_t new_size);
   void prepend(memory_c const &new_buffer) {
     prepend(new_buffer.get_buffer(), new_buffer.get_size());
   }
@@ -174,23 +174,23 @@ public:
     return { reinterpret_cast<char const *>(get_buffer()), static_cast<std::string::size_type>(get_size()) };
   }
 
-  unsigned char &operator [](std::size_t idx) noexcept {
+  uint8_t &operator [](std::size_t idx) noexcept {
     return m_ptr[m_offset + idx];
   }
 
-  unsigned char operator [](std::size_t idx) const noexcept {
+  uint8_t operator [](std::size_t idx) const noexcept {
     return m_ptr[m_offset + idx];
   }
 
 public:
   static inline memory_cptr
   take_ownership(void *buffer, std::size_t length) {
-    return memory_cptr{ new memory_c(reinterpret_cast<unsigned char *>(buffer), length, true) };
+    return memory_cptr{ new memory_c(reinterpret_cast<uint8_t *>(buffer), length, true) };
   }
 
   static inline memory_cptr
   borrow(void *buffer, std::size_t length) {
-    return memory_cptr{ new memory_c(reinterpret_cast<unsigned char *>(buffer), length, false) };
+    return memory_cptr{ new memory_c(reinterpret_cast<uint8_t *>(buffer), length, false) };
   }
 
   static inline memory_cptr

@@ -38,6 +38,6 @@ protected:
 
 public:
   static bool has_byte_order_marker(const std::string &string);
-  static bool detect_byte_order_marker(const unsigned char *buffer, unsigned int size, byte_order_mark_e &byte_order_mark, unsigned int &bom_length);
+  static bool detect_byte_order_marker(const uint8_t *buffer, unsigned int size, byte_order_mark_e &byte_order_mark, unsigned int &bom_length);
   static std::optional<std::string> get_encoding(byte_order_mark_e byte_order_mark);
 };

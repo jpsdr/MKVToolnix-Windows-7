@@ -1944,7 +1944,7 @@ Tab::expandInsertedElements(QModelIndex const &parentIdx,
 QString
 Tab::formatEbmlBinary(libebml::EbmlBinary *binary) {
   auto value = std::string{};
-  auto data  = static_cast<unsigned char const *>(binary ? binary->GetBuffer() : nullptr);
+  auto data  = static_cast<uint8_t const *>(binary ? binary->GetBuffer() : nullptr);
 
   if (data)
     for (auto end = data + binary->GetSize(); data < end; ++data)

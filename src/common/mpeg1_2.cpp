@@ -39,7 +39,7 @@ debugging_option_c s_debug{"mpeg1_2"};
      if the buffer was too small.
 */
 int
-extract_fps_idx(unsigned char const *buffer,
+extract_fps_idx(uint8_t const *buffer,
                 int buffer_size) {
   mxdebug_if(s_debug, fmt::format("mpeg_video_fps: start search in {0} bytes\n", buffer_size));
   if (buffer_size < 8) {
@@ -76,7 +76,7 @@ extract_fps_idx(unsigned char const *buffer,
    \return \c true if a MPEG sequence header was found and \c false otherwise.
 */
 std::optional<mtx_mp_rational_t>
-extract_aspect_ratio(unsigned char const *buffer,
+extract_aspect_ratio(uint8_t const *buffer,
                      int buffer_size) {
   uint32_t marker;
   int idx;

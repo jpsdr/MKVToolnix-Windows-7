@@ -106,7 +106,7 @@ crc_base_c::set_initial_value_impl(uint64_t initial_value) {
 }
 
 void
-crc_base_c::set_initial_value_impl(unsigned char const *buffer,
+crc_base_c::set_initial_value_impl(uint8_t const *buffer,
                                    size_t size) {
   m_crc = get_uint_be(buffer, size);
 }
@@ -122,7 +122,7 @@ crc_base_c::set_result_in_le(bool result_in_le) {
 }
 
 void
-crc_base_c::add_impl(unsigned char const *buffer,
+crc_base_c::add_impl(uint8_t const *buffer,
                      size_t size) {
   auto end = buffer + size;
 

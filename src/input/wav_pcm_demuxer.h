@@ -30,7 +30,7 @@ public:
     return m_bps;
   };
 
-  virtual unsigned char *get_buffer() {
+  virtual uint8_t *get_buffer() {
     return m_buffer->get_buffer();
   };
 

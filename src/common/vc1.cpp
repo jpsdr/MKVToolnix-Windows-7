@@ -66,7 +66,7 @@ frame_t::is_key()
 }
 
 bool
-parse_sequence_header(const unsigned char *buf,
+parse_sequence_header(const uint8_t *buf,
                       int size,
                       sequence_header_t &seqhdr) {
   try {
@@ -178,7 +178,7 @@ parse_sequence_header(const unsigned char *buf,
 }
 
 bool
-parse_entrypoint(const unsigned char *buf,
+parse_entrypoint(const uint8_t *buf,
                  int size,
                  entrypoint_t &entrypoint,
                  sequence_header_t &seqhdr) {
@@ -228,7 +228,7 @@ parse_entrypoint(const unsigned char *buf,
 }
 
 bool
-parse_frame_header(const unsigned char *buf,
+parse_frame_header(const uint8_t *buf,
                    int size,
                    frame_header_t &frame_header,
                    sequence_header_t &seqhdr) {
@@ -302,7 +302,7 @@ es_parser_c::es_parser_c()
 }
 
 void
-es_parser_c::add_bytes(unsigned char *buffer,
+es_parser_c::add_bytes(uint8_t *buffer,
                        int size) {
   mtx::mem::slice_cursor_c cursor;
 

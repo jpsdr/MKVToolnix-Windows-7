@@ -20,12 +20,12 @@ class mm_mem_io_c;
 class mm_mem_io_private_c : public mm_io_private_c {
 public:
   std::size_t pos{}, mem_size{}, allocated{}, increase{};
-  unsigned char *mem{};
-  const unsigned char *ro_mem{};
+  uint8_t *mem{};
+  const uint8_t *ro_mem{};
   bool free_mem{}, read_only{};
   std::string file_name;
 
-  explicit mm_mem_io_private_c(unsigned char *p_mem,
+  explicit mm_mem_io_private_c(uint8_t *p_mem,
                                uint64_t p_mem_size,
                                std::size_t p_increase)
     : mem_size{static_cast<std::size_t>(p_mem_size)}
@@ -46,7 +46,7 @@ public:
     }
   }
 
-  explicit mm_mem_io_private_c(unsigned char const *p_mem,
+  explicit mm_mem_io_private_c(uint8_t const *p_mem,
                                uint64_t p_mem_size)
     : mem_size{static_cast<std::size_t>(p_mem_size)}
     , allocated{static_cast<std::size_t>(p_mem_size)}

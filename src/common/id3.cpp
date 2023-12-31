@@ -19,7 +19,7 @@ namespace mtx::id3 {
 
 int
 skip_v2_tag(mm_io_c &io) {
-  unsigned char buffer[10];
+  uint8_t buffer[10];
 
   io.setFilePointer(0);
   if (io.read(buffer, 10) != 10) {
@@ -50,7 +50,7 @@ skip_v2_tag(mm_io_c &io) {
 
 int
 v2_tag_present_at_end(mm_io_c &io) {
-  unsigned char buffer[10];
+  uint8_t buffer[10];
   int tag_size;
 
   io.save_pos();
@@ -80,7 +80,7 @@ v2_tag_present_at_end(mm_io_c &io) {
 
 int
 v1_tag_present_at_end(mm_io_c &io) {
-  unsigned char buffer[3];
+  uint8_t buffer[3];
 
   if (io.get_size() < 128)
     return 0;

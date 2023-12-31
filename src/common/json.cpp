@@ -36,7 +36,7 @@ enum class parser_state_e {
 
 nlohmann::json::string_t
 strip_comments(nlohmann::json::string_t const &data)  {
-  mm_text_io_c in{std::make_shared<mm_mem_io_c>(reinterpret_cast<unsigned char const *>(data.c_str()), data.length())};
+  mm_text_io_c in{std::make_shared<mm_mem_io_c>(reinterpret_cast<uint8_t const *>(data.c_str()), data.length())};
   mm_mem_io_c out{nullptr, data.length(), 100};
 
   auto state = parser_state_e::normal;
