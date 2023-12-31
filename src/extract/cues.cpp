@@ -26,7 +26,7 @@
 #include "common/strings/formatting.h"
 #include "extract/mkvextract.h"
 
-using namespace libmatroska;
+
 
 struct cue_point_t {
   uint64_t timestamp;
@@ -78,8 +78,8 @@ write_cues(std::vector<track_spec_t> const &tracks,
 static std::map<int64_t, int64_t>
 generate_track_number_map(kax_analyzer_c &analyzer) {
   auto track_number_map = std::map<int64_t, int64_t>{};
-  auto tracks_m         = analyzer.read_all(EBML_INFO(KaxTracks));
-  auto tracks           = dynamic_cast<KaxTracks *>(tracks_m.get());
+  auto tracks_m         = analyzer.read_all(EBML_INFO(libmatroska::KaxTracks));
+  auto tracks           = dynamic_cast<libmatroska::KaxTracks *>(tracks_m.get());
 
   if (!tracks)
     return track_number_map;
@@ -87,11 +87,11 @@ generate_track_number_map(kax_analyzer_c &analyzer) {
   auto tid = 0;
 
   for (auto const &elt : *tracks) {
-    auto ktrack_entry = dynamic_cast<KaxTrackEntry *>(elt);
+    auto ktrack_entry = dynamic_cast<libmatroska::KaxTrackEntry *>(elt);
     if (!ktrack_entry)
       continue;
 
-    auto ktrack_number = FindChild<KaxTrackNumber>(ktrack_entry);
+    auto ktrack_number = FindChild<libmatroska::KaxTrackNumber>(ktrack_entry);
     if (ktrack_number)
       track_number_map[tid++] = ktrack_number->GetValue();
   }
@@ -101,16 +101,16 @@ generate_track_number_map(kax_analyzer_c &analyzer) {
 
 static uint64_t
 find_timestamp_scale(kax_analyzer_c &analyzer) {
-  auto info_m = analyzer.read_all(EBML_INFO(KaxInfo));
-  auto info   = dynamic_cast<KaxInfo *>(info_m.get());
+  auto info_m = analyzer.read_all(EBML_INFO(libmatroska::KaxInfo));
+  auto info   = dynamic_cast<libmatroska::KaxInfo *>(info_m.get());
 
-  return info ? FindChildValue<KaxTimecodeScale>(info, 1000000ull) : 1000000ull;
+  return info ? FindChildValue<libmatroska::KaxTimecodeScale>(info, 1000000ull) : 1000000ull;
 }
 
 static std::unordered_map<int64_t, std::vector<cue_point_t> >
 parse_cue_points(kax_analyzer_c &analyzer) {
-  auto cues_m = analyzer.read_all(EBML_INFO(KaxCues));
-  auto cues   = dynamic_cast<KaxCues *>(cues_m.get());
+  auto cues_m = analyzer.read_all(EBML_INFO(libmatroska::KaxCues));
+  auto cues   = dynamic_cast<libmatroska::KaxCues *>(cues_m.get());
 
   if (!cues)
     mxerror(Y("No cues were found.\n"));
@@ -118,33 +118,33 @@ parse_cue_points(kax_analyzer_c &analyzer) {
   auto cue_points = std::unordered_map<int64_t, std::vector<cue_point_t> >{};
 
   for (auto const &elt : *cues) {
-    auto kcue_point = dynamic_cast<KaxCuePoint *>(elt);
+    auto kcue_point = dynamic_cast<libmatroska::KaxCuePoint *>(elt);
     if (!kcue_point)
       continue;
 
-    auto ktime = FindChild<KaxCueTime>(*kcue_point);
+    auto ktime = FindChild<libmatroska::KaxCueTime>(*kcue_point);
     if (!ktime)
       continue;
 
     auto p = cue_point_t{ktime->GetValue()};
-    auto ktrack_pos = FindChild<KaxCueTrackPositions>(*kcue_point);
+    auto ktrack_pos = FindChild<libmatroska::KaxCueTrackPositions>(*kcue_point);
     if (!ktrack_pos)
       continue;
 
     for (auto const &pos_elt : *ktrack_pos) {
-      if (Is<KaxCueClusterPosition>(pos_elt))
-        p.cluster_position = static_cast<KaxCueClusterPosition *>(pos_elt)->GetValue();
+      if (Is<libmatroska::KaxCueClusterPosition>(pos_elt))
+        p.cluster_position = static_cast<libmatroska::KaxCueClusterPosition *>(pos_elt)->GetValue();
 
-      else if (Is<KaxCueRelativePosition>(pos_elt))
-        p.relative_position = static_cast<KaxCueRelativePosition *>(pos_elt)->GetValue();
+      else if (Is<libmatroska::KaxCueRelativePosition>(pos_elt))
+        p.relative_position = static_cast<libmatroska::KaxCueRelativePosition *>(pos_elt)->GetValue();
 
-      else if (Is<KaxCueDuration>(pos_elt))
-        p.duration = static_cast<KaxCueDuration *>(pos_elt)->GetValue();
+      else if (Is<libmatroska::KaxCueDuration>(pos_elt))
+        p.duration = static_cast<libmatroska::KaxCueDuration *>(pos_elt)->GetValue();
     }
 
     for (auto const &pos_elt : *ktrack_pos)
-      if (Is<KaxCueTrack>(pos_elt))
-        cue_points[ static_cast<KaxCueTrack *>(pos_elt)->GetValue() ].push_back(p);
+      if (Is<libmatroska::KaxCueTrack>(pos_elt))
+        cue_points[ static_cast<libmatroska::KaxCueTrack *>(pos_elt)->GetValue() ].push_back(p);
   }
 
   return cue_points;
@@ -154,7 +154,7 @@ static void
 determine_cluster_data_start_positions(mm_io_c &file,
                                        uint64_t segment_data_start_pos,
                                        std::unordered_map<int64_t, std::vector<cue_point_t> > &cue_points) {
-  auto es           = std::make_shared<EbmlStream>(file);
+  auto es           = std::make_shared<libebml::EbmlStream>(file);
   auto upper_lvl_el = 0;
 
   for (auto &track_cue_points_pair : cue_points) {
@@ -164,9 +164,9 @@ determine_cluster_data_start_positions(mm_io_c &file,
 
       try {
         file.setFilePointer(segment_data_start_pos + cue_point.cluster_position.value());
-        auto elt = std::shared_ptr<EbmlElement>(es->FindNextElement(EBML_CLASS_CONTEXT(KaxSegment), upper_lvl_el, std::numeric_limits<int64_t>::max(), true));
+        auto elt = std::shared_ptr<libebml::EbmlElement>(es->FindNextElement(EBML_CLASS_CONTEXT(libmatroska::KaxSegment), upper_lvl_el, std::numeric_limits<int64_t>::max(), true));
 
-        if (elt && Is<KaxCluster>(*elt))
+        if (elt && Is<libmatroska::KaxCluster>(*elt))
           cue_point.relative_position = cue_point.relative_position.value() + elt->HeadSize();
 
       } catch (mtx::mm_io::exception &) {

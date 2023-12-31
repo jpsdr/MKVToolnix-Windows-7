@@ -54,7 +54,7 @@ protected:
 
   mtx::gui::Util::ModifyTracksSubmenu m_modifyTracksSubmenu;
 
-  std::shared_ptr<EbmlElement> m_eSegmentInfo, m_eTracks;
+  std::shared_ptr<libebml::EbmlElement> m_eSegmentInfo, m_eTracks;
 
 public:
   explicit Tab(QWidget *parent, QString const &fileName);
@@ -110,7 +110,7 @@ protected:
   std::unordered_map<uint64_t, uint64_t> determineTrackUIDChanges();
   void updateSelectedTopLevelPageModelItems();
 
-  ValuePage *createValuePage(TopLevelPage &parentPage, EbmlMaster &parentMaster, property_element_c const &element);
+  ValuePage *createValuePage(TopLevelPage &parentPage, libebml::EbmlMaster &parentMaster, property_element_c const &element);
   PageBase *currentlySelectedPage() const;
 
   KaxAttachedPtr createAttachmentFromFile(QString const &fileName);

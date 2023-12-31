@@ -29,12 +29,10 @@
 #include "common/mm_file_io.h"
 #include "extract/mkvextract.h"
 
-using namespace libmatroska;
-
 struct attachment_t {
   std::string name, type;
   uint64_t size, id;
-  KaxFileData *fdata;
+  libmatroska::KaxFileData *fdata;
   bool valid;
 
   attachment_t()
@@ -45,33 +43,33 @@ struct attachment_t {
   {
   };
 
-  attachment_t &parse(KaxAttached &att);
-  static attachment_t parse_new(KaxAttached &att);
+  attachment_t &parse(libmatroska::KaxAttached &att);
+  static attachment_t parse_new(libmatroska::KaxAttached &att);
 };
 
 attachment_t
-attachment_t::parse_new(KaxAttached &att) {
+attachment_t::parse_new(libmatroska::KaxAttached &att) {
   attachment_t attachment;
   return attachment.parse(att);
 }
 
 attachment_t &
-attachment_t::parse(KaxAttached &att) {
+attachment_t::parse(libmatroska::KaxAttached &att) {
   size_t k;
   for (k = 0; att.ListSize() > k; ++k) {
-    EbmlElement *e = att[k];
+    libebml::EbmlElement *e = att[k];
 
-    if (Is<KaxFileName>(e))
-      name = static_cast<KaxFileName *>(e)->GetValueUTF8();
+    if (Is<libmatroska::KaxFileName>(e))
+      name = static_cast<libmatroska::KaxFileName *>(e)->GetValueUTF8();
 
-    else if (Is<KaxMimeType>(e))
-      type = static_cast<KaxMimeType *>(e)->GetValue();
+    else if (Is<libmatroska::KaxMimeType>(e))
+      type = static_cast<libmatroska::KaxMimeType *>(e)->GetValue();
 
-    else if (Is<KaxFileUID>(e))
-      id = static_cast<KaxFileUID *>(e)->GetValue();
+    else if (Is<libmatroska::KaxFileUID>(e))
+      id = static_cast<libmatroska::KaxFileUID *>(e)->GetValue();
 
-    else if (Is<KaxFileData>(e)) {
-      fdata = static_cast<KaxFileData *>(e);
+    else if (Is<libmatroska::KaxFileData>(e)) {
+      fdata = static_cast<libmatroska::KaxFileData *>(e);
       size  = fdata->GetSize();
     }
   }
@@ -82,14 +80,14 @@ attachment_t::parse(KaxAttached &att) {
 }
 
 static void
-handle_attachments(KaxAttachments *atts,
+handle_attachments(libmatroska::KaxAttachments *atts,
                    std::vector<track_spec_t> &tracks) {
   int64_t attachment_ui_id = 0;
   std::map<int64_t, attachment_t> attachments;
 
   size_t i;
   for (i = 0; atts->ListSize() > i; ++i) {
-    KaxAttached *att = dynamic_cast<KaxAttached *>((*atts)[i]);
+    libmatroska::KaxAttached *att = dynamic_cast<libmatroska::KaxAttached *>((*atts)[i]);
     assert(att);
 
     attachment_t attachment = attachment_t::parse_new(*att);
@@ -127,11 +125,11 @@ extract_attachments(kax_analyzer_c &analyzer,
   if (options.m_tracks.empty())
     return false;
 
-  auto attachments = analyzer.read_all(EBML_INFO(KaxAttachments));
-  if (!dynamic_cast<KaxAttachments *>(attachments.get()))
+  auto attachments = analyzer.read_all(EBML_INFO(libmatroska::KaxAttachments));
+  if (!dynamic_cast<libmatroska::KaxAttachments *>(attachments.get()))
     return false;
 
-  handle_attachments(static_cast<KaxAttachments *>(attachments.get()), options.m_tracks);
+  handle_attachments(static_cast<libmatroska::KaxAttachments *>(attachments.get()), options.m_tracks);
 
   return true;
 }

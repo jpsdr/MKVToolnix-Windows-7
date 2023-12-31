@@ -20,8 +20,6 @@
 #include "propedit/globals.h"
 #include "propedit/propedit_cli_parser.h"
 
-using namespace libmatroska;
-
 static void
 display_update_element_result(std::string const &element_name,
                               kax_analyzer_c::update_element_result_e result) {
@@ -77,25 +75,25 @@ has_content_been_modified(options_cptr const &options) {
 static void
 write_changes(options_cptr &options,
               kax_analyzer_c *analyzer) {
-  std::vector<EbmlId> ids_to_write;
-  ids_to_write.push_back(EBML_ID(KaxInfo));
-  ids_to_write.push_back(EBML_ID(KaxTracks));
-  ids_to_write.push_back(EBML_ID(KaxTags));
-  ids_to_write.push_back(EBML_ID(KaxChapters));
-  ids_to_write.push_back(EBML_ID(KaxAttachments));
+  std::vector<libebml::EbmlId> ids_to_write;
+  ids_to_write.push_back(EBML_ID(libmatroska::KaxInfo));
+  ids_to_write.push_back(EBML_ID(libmatroska::KaxTracks));
+  ids_to_write.push_back(EBML_ID(libmatroska::KaxTags));
+  ids_to_write.push_back(EBML_ID(libmatroska::KaxChapters));
+  ids_to_write.push_back(EBML_ID(libmatroska::KaxAttachments));
 
   for (auto &id_to_write : ids_to_write) {
     for (auto &target : options->m_targets) {
       if (!target->get_level1_element())
         continue;
 
-      EbmlMaster &l1_element = *target->get_level1_element();
+      libebml::EbmlMaster &l1_element = *target->get_level1_element();
 
-      if (id_to_write != EbmlId(l1_element))
+      if (id_to_write != libebml::EbmlId(l1_element))
         continue;
 
       auto result = l1_element.ListSize() ? analyzer->update_element(&l1_element, target->write_elements_set_to_default_value(), target->add_mandatory_elements_if_missing())
-                  :                         analyzer->remove_elements(EbmlId(l1_element));
+                  :                         analyzer->remove_elements(libebml::EbmlId(l1_element));
       if (kax_analyzer_c::uer_success != result)
         display_update_element_result(EBML_NAME(&l1_element), result);
 
@@ -170,7 +168,7 @@ run(options_cptr &options) {
 
       auto result = analyzer->update_uid_referrals(g_track_uid_changes);
       if (kax_analyzer_c::uer_success != result)
-        display_update_element_result(EBML_INFO(KaxTracks).GetName(), result);
+        display_update_element_result(EBML_INFO(libmatroska::KaxTracks).GetName(), result);
 
       update_ebml_head(analyzer->get_file());
     } catch (mtx::exception &ex) {

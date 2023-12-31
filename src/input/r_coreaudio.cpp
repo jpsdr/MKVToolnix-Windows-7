@@ -170,7 +170,7 @@ coreaudio_reader_c::scan_chunks() {
       mxdebug_if(m_debug_chunks,fmt::format("scan_chunks() new chunk at {0} data position {3} type '{1}' size {2}\n", chunk.m_position, mtx::string::get_displayable(chunk.m_type), chunk.m_size, chunk.m_data_position));
 
       m_chunks.push_back(chunk);
-      m_in->setFilePointer(chunk.m_size, seek_current);
+      m_in->setFilePointer(chunk.m_size, libebml::seek_current);
 
     }
   } catch (...) {

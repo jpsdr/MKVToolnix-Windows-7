@@ -13,8 +13,6 @@
 #include "common/output.h"
 #include "propedit/segment_info_target.h"
 
-using namespace libmatroska;
-
 segment_info_target_c::segment_info_target_c()
   : target_c()
 {
@@ -39,7 +37,7 @@ segment_info_target_c::validate() {
 
 void
 segment_info_target_c::look_up_property_elements() {
-  auto &property_table = property_element_c::get_table_for(EBML_INFO(KaxInfo), nullptr, false);
+  auto &property_table = property_element_c::get_table_for(EBML_INFO(libmatroska::KaxInfo), nullptr, false);
 
   for (auto &change : m_changes)
     change->look_up_property(property_table);

@@ -22,8 +22,6 @@
 #include "merge/libmatroska_extensions.h"
 #include "merge/output_control.h"
 
-using namespace libmatroska;
-
 cues_cptr cues_c::s_cues;
 
 cues_c::cues_c()
@@ -44,29 +42,29 @@ cues_c::set_duration_for_id_timestamp(uint64_t id,
 }
 
 void
-cues_c::add(KaxCues &cues) {
+cues_c::add(libmatroska::KaxCues &cues) {
   for (auto child : cues) {
-    auto point = dynamic_cast<KaxCuePoint *>(child);
+    auto point = dynamic_cast<libmatroska::KaxCuePoint *>(child);
     if (point)
       add(*point);
   }
 }
 
 void
-cues_c::add(KaxCuePoint &point) {
-  uint64_t timestamp = FindChildValue<KaxCueTime>(point) * g_timestamp_scale;
+cues_c::add(libmatroska::KaxCuePoint &point) {
+  uint64_t timestamp = FindChildValue<libmatroska::KaxCueTime>(point) * g_timestamp_scale;
 
   for (auto point_child : point) {
-    auto positions = dynamic_cast<KaxCueTrackPositions *>(point_child);
+    auto positions = dynamic_cast<libmatroska::KaxCueTrackPositions *>(point_child);
     if (!positions)
       continue;
 
-    uint64_t track_num = FindChildValue<KaxCueTrack>(*positions);
+    uint64_t track_num = FindChildValue<libmatroska::KaxCueTrack>(*positions);
     assert(track_num <= static_cast<uint64_t>(std::numeric_limits<uint32_t>::max()));
 
-    m_points.push_back({ timestamp, 0, FindChildValue<KaxCueClusterPosition>(*positions), static_cast<uint32_t>(track_num), 0 });
+    m_points.push_back({ timestamp, 0, FindChildValue<libmatroska::KaxCueClusterPosition>(*positions), static_cast<uint32_t>(track_num), 0 });
 
-    uint64_t codec_state_position = FindChildValue<KaxCueCodecState>(*positions);
+    uint64_t codec_state_position = FindChildValue<libmatroska::KaxCueCodecState>(*positions);
     if (codec_state_position)
       m_codec_state_position_map[ id_timestamp_t{ track_num, timestamp } ] = codec_state_position;
   }
@@ -74,7 +72,7 @@ cues_c::add(KaxCuePoint &point) {
 
 void
 cues_c::write(mm_io_c &out,
-              KaxSeekHead &seek_head) {
+              libmatroska::KaxSeekHead &seek_head) {
   if (!m_points.size() || !g_cue_writing_requested)
     return;
 
@@ -85,7 +83,7 @@ cues_c::write(mm_io_c &out,
   // Need to write the (empty) cues element so that its position will
   // be set for indexing in g_kax_sh_main. Necessary because there's
   // no API function to force the position to a certain value; nor is
-  // there a different API function in KaxSeekHead for adding anything
+  // there a different API function in libmatroska::KaxSeekHead for adding anything
   // by ID and position manually.
   out.save_pos();
   kax_cues_position_dummy_c cues_dummy;
@@ -98,26 +96,26 @@ cues_c::write(mm_io_c &out,
   // Forcefully write the correct head and copy its content from the
   // temporary storage location.
   auto total_size = calculate_total_size();
-  write_ebml_element_head(out, EBML_ID(KaxCues), total_size);
+  write_ebml_element_head(out, EBML_ID(libmatroska::KaxCues), total_size);
 
   for (auto &point : m_points) {
-    KaxCuePoint kc_point;
+    libmatroska::KaxCuePoint kc_point;
 
-    GetChild<KaxCueTime>(kc_point).SetValue(point.timestamp / g_timestamp_scale);
+    GetChild<libmatroska::KaxCueTime>(kc_point).SetValue(point.timestamp / g_timestamp_scale);
 
-    auto &positions = GetChild<KaxCueTrackPositions>(kc_point);
-    GetChild<KaxCueTrack>(positions).SetValue(point.track_num);
-    GetChild<KaxCueClusterPosition>(positions).SetValue(point.cluster_position);
+    auto &positions = GetChild<libmatroska::KaxCueTrackPositions>(kc_point);
+    GetChild<libmatroska::KaxCueTrack>(positions).SetValue(point.track_num);
+    GetChild<libmatroska::KaxCueClusterPosition>(positions).SetValue(point.cluster_position);
 
     auto codec_state_position = m_codec_state_position_map.find({ point.track_num, point.timestamp });
     if (codec_state_position != m_codec_state_position_map.end())
-      GetChild<KaxCueCodecState>(positions).SetValue(codec_state_position->second);
+      GetChild<libmatroska::KaxCueCodecState>(positions).SetValue(codec_state_position->second);
 
     if (point.relative_position)
-      GetChild<KaxCueRelativePosition>(positions).SetValue(point.relative_position);
+      GetChild<libmatroska::KaxCueRelativePosition>(positions).SetValue(point.relative_position);
 
     if (point.duration)
-      GetChild<KaxCueDuration>(positions).SetValue(round_timestamp_scale(point.duration) / g_timestamp_scale);
+      GetChild<libmatroska::KaxCueDuration>(positions).SetValue(round_timestamp_scale(point.duration) / g_timestamp_scale);
 
     g_doc_type_version_handler->render(kc_point, out);
   }
@@ -146,24 +144,24 @@ cues_c::sort() {
 }
 
 std::multimap<id_timestamp_t, uint64_t>
-cues_c::calculate_block_positions(KaxCluster &cluster)
+cues_c::calculate_block_positions(libmatroska::KaxCluster &cluster)
   const {
 
   std::multimap<id_timestamp_t, uint64_t> positions;
 
   for (auto child : cluster) {
-    auto simple_block = dynamic_cast<KaxSimpleBlock *>(child);
+    auto simple_block = dynamic_cast<libmatroska::KaxSimpleBlock *>(child);
     if (simple_block) {
       simple_block->SetParent(cluster);
       positions.insert({ id_timestamp_t{ simple_block->TrackNum(), simple_block->GlobalTimecode()}, simple_block->GetElementPosition() });
       continue;
     }
 
-    auto block_group = dynamic_cast<KaxBlockGroup *>(child);
+    auto block_group = dynamic_cast<libmatroska::KaxBlockGroup *>(child);
     if (!block_group)
       continue;
 
-    auto block = FindChild<KaxBlock>(block_group);
+    auto block = FindChild<libmatroska::KaxBlock>(block_group);
     if (!block)
       continue;
 
@@ -175,8 +173,8 @@ cues_c::calculate_block_positions(KaxCluster &cluster)
 }
 
 void
-cues_c::postprocess_cues(KaxCues &cues,
-                         KaxCluster &cluster) {
+cues_c::postprocess_cues(libmatroska::KaxCues &cues,
+                         libmatroska::KaxCluster &cluster) {
   add(cues);
 
   if (m_no_cue_duration && m_no_cue_relative_position)
@@ -258,21 +256,21 @@ cues_c::calculate_bytes_for_uint(uint64_t value)
 uint64_t
 cues_c::calculate_point_size(cue_point_t const &point)
   const {
-  uint64_t point_size = EBML_ID_LENGTH(EBML_ID(KaxCuePoint))           + 1
-                      + EBML_ID_LENGTH(EBML_ID(KaxCuePoint))           + 1 + calculate_bytes_for_uint(point.timestamp / g_timestamp_scale)
-                      + EBML_ID_LENGTH(EBML_ID(KaxCueTrackPositions))  + 1
-                      + EBML_ID_LENGTH(EBML_ID(KaxCueTrack))           + 1 + calculate_bytes_for_uint(point.track_num)
-                      + EBML_ID_LENGTH(EBML_ID(KaxCueClusterPosition)) + 1 + calculate_bytes_for_uint(point.cluster_position);
+  uint64_t point_size = EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCuePoint))           + 1
+                      + EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCuePoint))           + 1 + calculate_bytes_for_uint(point.timestamp / g_timestamp_scale)
+                      + EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCueTrackPositions))  + 1
+                      + EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCueTrack))           + 1 + calculate_bytes_for_uint(point.track_num)
+                      + EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCueClusterPosition)) + 1 + calculate_bytes_for_uint(point.cluster_position);
 
   auto codec_state_position = m_codec_state_position_map.find({ point.track_num, point.timestamp });
   if (codec_state_position != m_codec_state_position_map.end())
-    point_size += EBML_ID_LENGTH(EBML_ID(KaxCueCodecState)) + 1 + calculate_bytes_for_uint(codec_state_position->second);
+    point_size += EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCueCodecState)) + 1 + calculate_bytes_for_uint(codec_state_position->second);
 
   if (point.relative_position)
-    point_size += EBML_ID_LENGTH(EBML_ID(KaxCueRelativePosition)) + 1 + calculate_bytes_for_uint(point.relative_position);
+    point_size += EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCueRelativePosition)) + 1 + calculate_bytes_for_uint(point.relative_position);
 
   if (point.duration)
-    point_size += EBML_ID_LENGTH(EBML_ID(KaxCueDuration)) + 1 + calculate_bytes_for_uint(round_timestamp_scale(point.duration) / g_timestamp_scale);
+    point_size += EBML_ID_LENGTH(EBML_ID(libmatroska::KaxCueDuration)) + 1 + calculate_bytes_for_uint(round_timestamp_scale(point.duration) / g_timestamp_scale);
 
   return point_size;
 }

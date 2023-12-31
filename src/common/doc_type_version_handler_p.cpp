@@ -17,8 +17,6 @@
 
 #include "common/doc_type_version_handler_p.h"
 
-using namespace libmatroska;
-
 namespace mtx {
 
 std::unordered_map<unsigned int, unsigned int> doc_type_version_handler_private_c::s_version_by_element, doc_type_version_handler_private_c::s_read_version_by_element;
@@ -28,79 +26,79 @@ doc_type_version_handler_private_c::init_tables() {
   if (!s_version_by_element.empty())
     return;
 
-  s_version_by_element[EBML_ID(KaxCodecDecodeAll).GetValue()]                   = 2;
-  s_version_by_element[EBML_ID(KaxCodecState).GetValue()]                       = 2;
-  s_version_by_element[EBML_ID(KaxCueCodecState).GetValue()]                    = 2;
-  s_version_by_element[EBML_ID(KaxCueRefTime).GetValue()]                       = 2;
-  s_version_by_element[EBML_ID(KaxCueReference).GetValue()]                     = 2;
-  s_version_by_element[EBML_ID(KaxSimpleBlock).GetValue()]                      = 2;
-  s_version_by_element[EBML_ID(KaxTrackFlagEnabled).GetValue()]                 = 2;
-  s_version_by_element[EBML_ID(KaxVideoFlagInterlaced).GetValue()]              = 2;
+  s_version_by_element[EBML_ID(libmatroska::KaxCodecDecodeAll).GetValue()]                   = 2;
+  s_version_by_element[EBML_ID(libmatroska::KaxCodecState).GetValue()]                       = 2;
+  s_version_by_element[EBML_ID(libmatroska::KaxCueCodecState).GetValue()]                    = 2;
+  s_version_by_element[EBML_ID(libmatroska::KaxCueRefTime).GetValue()]                       = 2;
+  s_version_by_element[EBML_ID(libmatroska::KaxCueReference).GetValue()]                     = 2;
+  s_version_by_element[EBML_ID(libmatroska::KaxSimpleBlock).GetValue()]                      = 2;
+  s_version_by_element[EBML_ID(libmatroska::KaxTrackFlagEnabled).GetValue()]                 = 2;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoFlagInterlaced).GetValue()]              = 2;
 
-  s_version_by_element[EBML_ID(KaxChapterStringUID).GetValue()]                 = 3;
-  s_version_by_element[EBML_ID(KaxTrackCombinePlanes).GetValue()]               = 3;
-  s_version_by_element[EBML_ID(KaxTrackJoinBlocks).GetValue()]                  = 3;
-  s_version_by_element[EBML_ID(KaxTrackJoinUID).GetValue()]                     = 3;
-  s_version_by_element[EBML_ID(KaxTrackOperation).GetValue()]                   = 3;
-  s_version_by_element[EBML_ID(KaxTrackPlane).GetValue()]                       = 3;
-  s_version_by_element[EBML_ID(KaxTrackPlaneType).GetValue()]                   = 3;
-  s_version_by_element[EBML_ID(KaxTrackPlaneUID).GetValue()]                    = 3;
-  s_version_by_element[EBML_ID(KaxVideoAlphaMode).GetValue()]                   = 3;
-  s_version_by_element[EBML_ID(KaxVideoStereoMode).GetValue()]                  = 3;
+  s_version_by_element[EBML_ID(libmatroska::KaxChapterStringUID).GetValue()]                 = 3;
+  s_version_by_element[EBML_ID(libmatroska::KaxTrackCombinePlanes).GetValue()]               = 3;
+  s_version_by_element[EBML_ID(libmatroska::KaxTrackJoinBlocks).GetValue()]                  = 3;
+  s_version_by_element[EBML_ID(libmatroska::KaxTrackJoinUID).GetValue()]                     = 3;
+  s_version_by_element[EBML_ID(libmatroska::KaxTrackOperation).GetValue()]                   = 3;
+  s_version_by_element[EBML_ID(libmatroska::KaxTrackPlane).GetValue()]                       = 3;
+  s_version_by_element[EBML_ID(libmatroska::KaxTrackPlaneType).GetValue()]                   = 3;
+  s_version_by_element[EBML_ID(libmatroska::KaxTrackPlaneUID).GetValue()]                    = 3;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoAlphaMode).GetValue()]                   = 3;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoStereoMode).GetValue()]                  = 3;
 
-  s_version_by_element[EBML_ID(KaxChapLanguageIETF).GetValue()]                 = 4;
-  s_version_by_element[EBML_ID(KaxCodecDelay).GetValue()]                       = 4;
-  s_version_by_element[EBML_ID(KaxCueDuration).GetValue()]                      = 4;
-  s_version_by_element[EBML_ID(KaxCueRelativePosition).GetValue()]              = 4;
-  s_version_by_element[EBML_ID(KaxDiscardPadding).GetValue()]                   = 4;
-  s_version_by_element[EBML_ID(KaxFlagCommentary).GetValue()]                   = 4;
-  s_version_by_element[EBML_ID(KaxFlagHearingImpaired).GetValue()]              = 4;
-  s_version_by_element[EBML_ID(KaxFlagOriginal).GetValue()]                     = 4;
-  s_version_by_element[EBML_ID(KaxFlagTextDescriptions).GetValue()]             = 4;
-  s_version_by_element[EBML_ID(KaxFlagVisualImpaired).GetValue()]               = 4;
-  s_version_by_element[EBML_ID(KaxLanguageIETF).GetValue()]                     = 4;
-  s_version_by_element[EBML_ID(KaxSeekPreRoll).GetValue()]                      = 4;
-  s_version_by_element[EBML_ID(KaxTagLanguageIETF).GetValue()]                  = 4;
-  s_version_by_element[EBML_ID(KaxTrackDefaultDecodedFieldDuration).GetValue()] = 4;
-  s_version_by_element[EBML_ID(KaxVideoBChromaX).GetValue()]                    = 4;
-  s_version_by_element[EBML_ID(KaxVideoBChromaY).GetValue()]                    = 4;
-  s_version_by_element[EBML_ID(KaxVideoBitsPerChannel).GetValue()]              = 4;
-  s_version_by_element[EBML_ID(KaxVideoCbSubsampHorz).GetValue()]               = 4;
-  s_version_by_element[EBML_ID(KaxVideoCbSubsampVert).GetValue()]               = 4;
-  s_version_by_element[EBML_ID(KaxVideoChromaSitHorz).GetValue()]               = 4;
-  s_version_by_element[EBML_ID(KaxVideoChromaSitVert).GetValue()]               = 4;
-  s_version_by_element[EBML_ID(KaxVideoChromaSubsampHorz).GetValue()]           = 4;
-  s_version_by_element[EBML_ID(KaxVideoChromaSubsampVert).GetValue()]           = 4;
-  s_version_by_element[EBML_ID(KaxVideoColour).GetValue()]                      = 4;
-  s_version_by_element[EBML_ID(KaxVideoColourMasterMeta).GetValue()]            = 4;
-  s_version_by_element[EBML_ID(KaxVideoColourMatrix).GetValue()]                = 4;
-  s_version_by_element[EBML_ID(KaxVideoColourMaxCLL).GetValue()]                = 4;
-  s_version_by_element[EBML_ID(KaxVideoColourMaxFALL).GetValue()]               = 4;
-  s_version_by_element[EBML_ID(KaxVideoColourPrimaries).GetValue()]             = 4;
-  s_version_by_element[EBML_ID(KaxVideoColourRange).GetValue()]                 = 4;
-  s_version_by_element[EBML_ID(KaxVideoColourTransferCharacter).GetValue()]     = 4;
-  s_version_by_element[EBML_ID(KaxVideoFieldOrder).GetValue()]                  = 4;
-  s_version_by_element[EBML_ID(KaxVideoGChromaX).GetValue()]                    = 4;
-  s_version_by_element[EBML_ID(KaxVideoGChromaY).GetValue()]                    = 4;
-  s_version_by_element[EBML_ID(KaxVideoLuminanceMax).GetValue()]                = 4;
-  s_version_by_element[EBML_ID(KaxVideoLuminanceMin).GetValue()]                = 4;
-  s_version_by_element[EBML_ID(KaxVideoProjection).GetValue()]                  = 4;
-  s_version_by_element[EBML_ID(KaxVideoProjectionPosePitch).GetValue()]         = 4;
-  s_version_by_element[EBML_ID(KaxVideoProjectionPoseRoll).GetValue()]          = 4;
-  s_version_by_element[EBML_ID(KaxVideoProjectionPoseYaw).GetValue()]           = 4;
-  s_version_by_element[EBML_ID(KaxVideoProjectionPrivate).GetValue()]           = 4;
-  s_version_by_element[EBML_ID(KaxVideoProjectionType).GetValue()]              = 4;
-  s_version_by_element[EBML_ID(KaxVideoRChromaX).GetValue()]                    = 4;
-  s_version_by_element[EBML_ID(KaxVideoRChromaY).GetValue()]                    = 4;
-  s_version_by_element[EBML_ID(KaxVideoWhitePointChromaX).GetValue()]           = 4;
-  s_version_by_element[EBML_ID(KaxVideoWhitePointChromaY).GetValue()]           = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxChapLanguageIETF).GetValue()]                 = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxCodecDelay).GetValue()]                       = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxCueDuration).GetValue()]                      = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxCueRelativePosition).GetValue()]              = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxDiscardPadding).GetValue()]                   = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxFlagCommentary).GetValue()]                   = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxFlagHearingImpaired).GetValue()]              = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxFlagOriginal).GetValue()]                     = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxFlagTextDescriptions).GetValue()]             = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxFlagVisualImpaired).GetValue()]               = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxLanguageIETF).GetValue()]                     = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxSeekPreRoll).GetValue()]                      = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxTagLanguageIETF).GetValue()]                  = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxTrackDefaultDecodedFieldDuration).GetValue()] = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoBChromaX).GetValue()]                    = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoBChromaY).GetValue()]                    = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoBitsPerChannel).GetValue()]              = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoCbSubsampHorz).GetValue()]               = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoCbSubsampVert).GetValue()]               = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoChromaSitHorz).GetValue()]               = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoChromaSitVert).GetValue()]               = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoChromaSubsampHorz).GetValue()]           = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoChromaSubsampVert).GetValue()]           = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoColour).GetValue()]                      = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoColourMasterMeta).GetValue()]            = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoColourMatrix).GetValue()]                = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoColourMaxCLL).GetValue()]                = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoColourMaxFALL).GetValue()]               = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoColourPrimaries).GetValue()]             = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoColourRange).GetValue()]                 = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoColourTransferCharacter).GetValue()]     = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoFieldOrder).GetValue()]                  = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoGChromaX).GetValue()]                    = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoGChromaY).GetValue()]                    = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoLuminanceMax).GetValue()]                = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoLuminanceMin).GetValue()]                = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoProjection).GetValue()]                  = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoProjectionPosePitch).GetValue()]         = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoProjectionPoseRoll).GetValue()]          = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoProjectionPoseYaw).GetValue()]           = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoProjectionPrivate).GetValue()]           = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoProjectionType).GetValue()]              = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoRChromaX).GetValue()]                    = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoRChromaY).GetValue()]                    = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoWhitePointChromaX).GetValue()]           = 4;
+  s_version_by_element[EBML_ID(libmatroska::KaxVideoWhitePointChromaY).GetValue()]           = 4;
 
-  s_version_by_element[EBML_ID(KaxEditionDisplay).GetValue()]                   = 5;
-  s_version_by_element[EBML_ID(KaxEditionLanguageIETF).GetValue()]              = 5;
-  s_version_by_element[EBML_ID(KaxEditionString).GetValue()]                    = 5;
-  s_version_by_element[EBML_ID(KaxEmphasis).GetValue()]                         = 5;
+  s_version_by_element[EBML_ID(libmatroska::KaxEditionDisplay).GetValue()]                   = 5;
+  s_version_by_element[EBML_ID(libmatroska::KaxEditionLanguageIETF).GetValue()]              = 5;
+  s_version_by_element[EBML_ID(libmatroska::KaxEditionString).GetValue()]                    = 5;
+  s_version_by_element[EBML_ID(libmatroska::KaxEmphasis).GetValue()]                         = 5;
 
-  s_read_version_by_element[EBML_ID(KaxSimpleBlock).GetValue()]                 = 2;
+  s_read_version_by_element[EBML_ID(libmatroska::KaxSimpleBlock).GetValue()]                 = 2;
 }
 
 } // namespace mtx

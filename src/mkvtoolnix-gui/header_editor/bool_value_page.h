@@ -17,7 +17,7 @@ public:
   bool m_valueIfNotPresent{};
 
 public:
-  BoolValuePage(Tab &parent, PageBase &topLevelPage, EbmlMaster &master, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
+  BoolValuePage(Tab &parent, PageBase &topLevelPage, libebml::EbmlMaster &master, libebml::EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
   virtual ~BoolValuePage();
 
   virtual QWidget *createInputControl() override;

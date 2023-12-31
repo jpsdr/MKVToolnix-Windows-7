@@ -18,7 +18,7 @@ public:
   QDateTime m_originalValueUTC;
 
 public:
-  TimeValuePage(Tab &parent, PageBase &topLevelPage, EbmlMaster &master, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
+  TimeValuePage(Tab &parent, PageBase &topLevelPage, libebml::EbmlMaster &master, libebml::EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
   virtual ~TimeValuePage();
 
   virtual QWidget *createInputControl() override;

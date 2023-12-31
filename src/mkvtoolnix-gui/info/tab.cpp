@@ -40,7 +40,6 @@
 #include "mkvtoolnix-gui/util/tree.h"
 #include "mkvtoolnix-gui/watch_jobs/tool.h"
 
-using namespace libmatroska;
 using namespace mtx::gui;
 
 namespace mtx::gui::Info {
@@ -218,17 +217,17 @@ Tab::expandImportantElements() {
     auto l0Item      = rootItem->child(l0Row);
     auto l0ElementId = l0Item->data(Roles::EbmlId).toUInt();
 
-    if (l0ElementId == EBML_ID(EbmlHead).GetValue())
+    if (l0ElementId == EBML_ID(libebml::EbmlHead).GetValue())
       Util::expandCollapseAll(view, true, p->m_model->indexFromItem(l0Item));
 
-    else if (l0ElementId == EBML_ID(KaxSegment).GetValue()) {
+    else if (l0ElementId == EBML_ID(libmatroska::KaxSegment).GetValue()) {
       view->setExpanded(p->m_model->indexFromItem(l0Item), true);
 
       for (int l1Row = 0, numL1Rows = l0Item->rowCount(); l1Row < numL1Rows; ++l1Row) {
         auto l1Item      = l0Item->child(l1Row);
         auto l1ElementId = l1Item->data(Roles::EbmlId).toUInt();
 
-        if (mtx::included_in(l1ElementId, EBML_ID(KaxInfo).GetValue(), EBML_ID(KaxTracks).GetValue()))
+        if (mtx::included_in(l1ElementId, EBML_ID(libmatroska::KaxInfo).GetValue(), EBML_ID(libmatroska::KaxTracks).GetValue()))
           Util::expandCollapseAll(view, true, p->m_model->indexFromItem(l1Item));
       }
     }
@@ -327,7 +326,7 @@ Tab::showElementHexDumpInViewer() {
   auto dlg    = new ElementViewerDialog{this};
   auto result = dlg
     ->setContent(mem, !!element)
-    .setId(element ? EbmlId(*element).GetValue() : pseudoType.toUInt())
+    .setId(element ? libebml::EbmlId(*element).GetValue() : pseudoType.toUInt())
     .setPosition(effectiveElementPosition)
     .setSize(signaledElementSize, effectiveElementSize)
     .exec();

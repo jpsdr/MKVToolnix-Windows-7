@@ -18,8 +18,8 @@ using namespace mtx::gui;
 
 LanguageIETFValuePage::LanguageIETFValuePage(Tab &parent,
                                              PageBase &topLevelPage,
-                                             EbmlMaster &master,
-                                             EbmlCallbacks const &callbacks,
+                                             libebml::EbmlMaster &master,
+                                             libebml::EbmlCallbacks const &callbacks,
                                              translatable_string_c const &title,
                                              translatable_string_c const &description)
   : ValuePage{parent, topLevelPage, master, callbacks, ValueType::AsciiString, title, description}
@@ -31,7 +31,7 @@ LanguageIETFValuePage::~LanguageIETFValuePage() {
 
 QWidget *
 LanguageIETFValuePage::createInputControl() {
-  m_originalValue     = m_element ? static_cast<EbmlString *>(m_element)->GetValue() : ""s;
+  m_originalValue     = m_element ? static_cast<libebml::EbmlString *>(m_element)->GetValue() : ""s;
   auto parsedLanguage = mtx::bcp47::language_c::parse(m_originalValue);
   auto currentValue   = parsedLanguage.is_valid() ? parsedLanguage.format() : m_originalValue;
 
@@ -80,7 +80,7 @@ LanguageIETFValuePage::validateValue()
 
 void
 LanguageIETFValuePage::copyValueToElement() {
-  static_cast<EbmlString *>(m_element)->SetValue(to_utf8(currentValueAsString()));
+  static_cast<libebml::EbmlString *>(m_element)->SetValue(to_utf8(currentValueAsString()));
 }
 
 void

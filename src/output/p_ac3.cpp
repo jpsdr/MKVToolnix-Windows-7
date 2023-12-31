@@ -21,8 +21,6 @@
 #include "merge/packet_extensions.h"
 #include "output/p_ac3.h"
 
-using namespace libmatroska;
-
 ac3_packetizer_c::ac3_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
                                    int samples_per_sec,

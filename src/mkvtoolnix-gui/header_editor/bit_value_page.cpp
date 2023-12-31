@@ -12,8 +12,8 @@ using namespace mtx::gui;
 
 BitValuePage::BitValuePage(Tab &parent,
                            PageBase &topLevelPage,
-                           EbmlMaster &master,
-                           EbmlCallbacks const &callbacks,
+                           libebml::EbmlMaster &master,
+                           libebml::EbmlCallbacks const &callbacks,
                            translatable_string_c const &title,
                            translatable_string_c const &description,
                            unsigned int bitLength)
@@ -29,7 +29,7 @@ BitValuePage::~BitValuePage() {
 QWidget *
 BitValuePage::createInputControl() {
   if (m_element)
-    m_originalValue = mtx::bits::value_c{*static_cast<EbmlBinary *>(m_element)};
+    m_originalValue = mtx::bits::value_c{*static_cast<libebml::EbmlBinary *>(m_element)};
 
   m_leValue = new QLineEdit{this};
   m_leValue->setText(originalValueAsString());
@@ -79,7 +79,7 @@ BitValuePage::validateValue()
 void
 BitValuePage::copyValueToElement() {
   auto bitValue = valueToBitvalue();
-  static_cast<EbmlBinary *>(m_element)->CopyBuffer(bitValue.data(), bitValue.byte_size());
+  static_cast<libebml::EbmlBinary *>(m_element)->CopyBuffer(bitValue.data(), bitValue.byte_size());
 }
 
 mtx::bits::value_c

@@ -516,10 +516,10 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
         }
 
         if (4 == mpeg_version) {
-          if (!m_sub_file->setFilePointer2(9, seek_current))
+          if (!m_sub_file->setFilePointer2(9, libebml::seek_current))
             return deliver();
         } else if (2 == mpeg_version) {
-          if (!m_sub_file->setFilePointer2(7, seek_current))
+          if (!m_sub_file->setFilePointer2(7, libebml::seek_current))
             return deliver();
         } else
           abort();
@@ -624,7 +624,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
         if (m_sub_file->read(buf, 2) != 2)
           return deliver();
         len = buf[0] << 8 | buf[1];
-        if ((0 < len) && !m_sub_file->setFilePointer2(len, seek_current))
+        if ((0 < len) && !m_sub_file->setFilePointer2(len, libebml::seek_current))
           return deliver();
         break;
 
@@ -634,7 +634,7 @@ vobsub_reader_c::extract_one_spu_packet(int64_t track_id) {
           if (m_sub_file->read(buf, 2) != 2)
             return deliver();
           len = (buf[0] << 8) | buf[1];
-          if ((0 < len) && !m_sub_file->setFilePointer2(len, seek_current))
+          if ((0 < len) && !m_sub_file->setFilePointer2(len, libebml::seek_current))
             return deliver();
 
         } else {

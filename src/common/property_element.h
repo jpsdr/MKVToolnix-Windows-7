@@ -27,14 +27,14 @@ public:
   std::string m_name;
   translatable_string_c m_title, m_description;
 
-  EbmlCallbacks const *m_callbacks, *m_sub_master_callbacks, *m_sub_sub_master_callbacks, *m_sub_sub_sub_master_callbacks;
+  libebml::EbmlCallbacks const *m_callbacks, *m_sub_master_callbacks, *m_sub_sub_master_callbacks, *m_sub_sub_sub_master_callbacks;
 
   unsigned int m_bit_length;
   ebml_type_e m_type;
 
   property_element_c();
-  property_element_c(std::string name, EbmlCallbacks const &callbacks, translatable_string_c title, translatable_string_c description,
-                     EbmlCallbacks const &sub_master_callbacks, EbmlCallbacks const *sub_sub_master_callbacks = nullptr, EbmlCallbacks const *sub_sub_sub_master_callbacks = nullptr);
+  property_element_c(std::string name, libebml::EbmlCallbacks const &callbacks, translatable_string_c title, translatable_string_c description,
+                     libebml::EbmlCallbacks const &sub_master_callbacks, libebml::EbmlCallbacks const *sub_sub_master_callbacks = nullptr, libebml::EbmlCallbacks const *sub_sub_sub_master_callbacks = nullptr);
 
   bool is_valid() const;
 
@@ -48,7 +48,7 @@ private:                        // static
 
 public:                         // static
   static void init_tables();
-  static std::vector<property_element_c> &get_table_for(const EbmlCallbacks &master_callbacks, const EbmlCallbacks *sub_master_callbacks = nullptr, bool full_table = false);
+  static std::vector<property_element_c> &get_table_for(const libebml::EbmlCallbacks &master_callbacks, const libebml::EbmlCallbacks *sub_master_callbacks = nullptr, bool full_table = false);
   static std::string get_actual_name(std::string const &name);
 };
 using property_element_cptr = std::shared_ptr<property_element_c>;

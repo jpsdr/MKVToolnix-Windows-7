@@ -203,7 +203,7 @@ void
 xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
   // build the main header
 
-  binary wv_header[32];
+  uint8_t wv_header[32];
   memcpy(wv_header, "wvpk", 4);
   memcpy(&wv_header[8], m_version, 2); // version
   wv_header[10] = 0;                   // track_no
@@ -214,10 +214,10 @@ xtr_wavpack4_c::handle_frame(xtr_frame_t &f) {
   wv_header[15] = 0xFF;
   put_uint32_le(&wv_header[16], m_number_of_samples); // block_index
 
-  const binary *mybuffer  = f.frame->get_buffer();
-  int data_size           = f.frame->get_size();
-  int truncate_bytes      = 0;
-  m_number_of_samples    += get_uint32_le(mybuffer);
+  auto mybuffer        = f.frame->get_buffer();
+  int data_size        = f.frame->get_size();
+  int truncate_bytes   = 0;
+  m_number_of_samples += get_uint32_le(mybuffer);
 
   // rest of the header:
   memcpy(&wv_header[20], mybuffer, 3 * sizeof(uint32_t));

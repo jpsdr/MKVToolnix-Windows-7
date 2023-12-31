@@ -12,8 +12,8 @@ using namespace mtx::gui;
 
 FloatValuePage::FloatValuePage(Tab &parent,
                                PageBase &topLevelPage,
-                               EbmlMaster &master,
-                               EbmlCallbacks const &callbacks,
+                               libebml::EbmlMaster &master,
+                               libebml::EbmlCallbacks const &callbacks,
                                translatable_string_c const &title,
                                translatable_string_c const &description)
   : ValuePage{parent, topLevelPage, master, callbacks, ValueType::Float, title, description}
@@ -29,7 +29,7 @@ FloatValuePage::createInputControl() {
   m_leValue->setClearButtonEnabled(true);
 
   if (m_element) {
-    m_originalValue = static_cast<EbmlFloat *>(m_element)->GetValue();
+    m_originalValue = static_cast<libebml::EbmlFloat *>(m_element)->GetValue();
     m_leValue->setText(QString::number(m_originalValue));
   }
 
@@ -76,7 +76,7 @@ FloatValuePage::validateValue()
 
 void
 FloatValuePage::copyValueToElement() {
-  static_cast<EbmlFloat *>(m_element)->SetValue(m_leValue->text().toDouble());
+  static_cast<libebml::EbmlFloat *>(m_element)->SetValue(m_leValue->text().toDouble());
 }
 
 }

@@ -11,8 +11,8 @@ using namespace mtx::gui;
 
 StringValuePage::StringValuePage(Tab &parent,
                                  PageBase &topLevelPage,
-                                 EbmlMaster &master,
-                                 EbmlCallbacks const &callbacks,
+                                 libebml::EbmlMaster &master,
+                                 libebml::EbmlCallbacks const &callbacks,
                                  translatable_string_c const &title,
                                  translatable_string_c const &description)
   : ValuePage{parent, topLevelPage, master, callbacks, ValueType::String, title, description}
@@ -25,7 +25,7 @@ StringValuePage::~StringValuePage() {
 QWidget *
 StringValuePage::createInputControl() {
   if (m_element)
-    m_originalValue = Q(static_cast<EbmlUnicodeString *>(m_element)->GetValue());
+    m_originalValue = Q(static_cast<libebml::EbmlUnicodeString *>(m_element)->GetValue());
 
   m_leValue = new QLineEdit{this};
   m_leValue->setText(m_originalValue);
@@ -61,7 +61,7 @@ StringValuePage::validateValue()
 
 void
 StringValuePage::copyValueToElement() {
-  static_cast<EbmlUnicodeString *>(m_element)->SetValue(to_wide(m_leValue->text()));
+  static_cast<libebml::EbmlUnicodeString *>(m_element)->SetValue(to_wide(m_leValue->text()));
 }
 
 }

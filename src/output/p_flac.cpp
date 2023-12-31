@@ -25,8 +25,6 @@
 #include "merge/connection_checks.h"
 #include "output/p_flac.h"
 
-using namespace libmatroska;
-
 flac_packetizer_c::flac_packetizer_c(generic_reader_c *p_reader,
                                      track_info_c &p_ti,
                                      unsigned char *header,

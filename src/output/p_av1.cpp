@@ -18,8 +18,6 @@
 #include "merge/output_control.h"
 #include "output/p_av1.h"
 
-using namespace libmatroska;
-
 av1_video_packetizer_c::av1_video_packetizer_c(generic_reader_c *p_reader,
                                                track_info_c &p_ti,
                                                unsigned int width,

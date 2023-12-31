@@ -20,8 +20,6 @@
 #include "merge/output_control.h"
 #include "output/p_vpx.h"
 
-using namespace libmatroska;
-
 vpx_video_packetizer_c::vpx_video_packetizer_c(generic_reader_c *p_reader,
                                                track_info_c &p_ti,
                                                codec_c::type_e p_codec)

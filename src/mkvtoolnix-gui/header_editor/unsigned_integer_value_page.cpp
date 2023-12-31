@@ -12,8 +12,8 @@ using namespace mtx::gui;
 
 UnsignedIntegerValuePage::UnsignedIntegerValuePage(Tab &parent,
                                                    PageBase &topLevelPage,
-                                                   EbmlMaster &master,
-                                                   EbmlCallbacks const &callbacks,
+                                                   libebml::EbmlMaster &master,
+                                                   libebml::EbmlCallbacks const &callbacks,
                                                    translatable_string_c const &title,
                                                    translatable_string_c const &description)
   : ValuePage{parent, topLevelPage, master, callbacks, ValueType::UnsignedInteger, title, description}
@@ -29,7 +29,7 @@ UnsignedIntegerValuePage::createInputControl() {
   m_leValue->setClearButtonEnabled(true);
 
   if (m_element) {
-    m_originalValue = static_cast<EbmlUInteger *>(m_element)->GetValue();
+    m_originalValue = static_cast<libebml::EbmlUInteger *>(m_element)->GetValue();
     m_leValue->setText(QString::number(m_originalValue));
   }
 
@@ -76,7 +76,7 @@ UnsignedIntegerValuePage::validateValue()
 
 void
 UnsignedIntegerValuePage::copyValueToElement() {
-  static_cast<EbmlUInteger *>(m_element)->SetValue(m_leValue->text().toULongLong());
+  static_cast<libebml::EbmlUInteger *>(m_element)->SetValue(m_leValue->text().toULongLong());
 }
 
 }

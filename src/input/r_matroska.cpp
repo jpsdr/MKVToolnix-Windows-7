@@ -106,8 +106,6 @@
 #include "output/p_wavpack.h"
 #include "output/p_webvtt.h"
 
-using namespace libmatroska;
-
 namespace {
 unsigned int
 writing_app_ver(unsigned int major,
@@ -286,10 +284,10 @@ kax_track_t::get_source_id_from_track_statistics_tags() {
     return;
 
   for (auto const &tags_child : *tags) {
-    if (!dynamic_cast<KaxTag *>(tags_child))
+    if (!dynamic_cast<libmatroska::KaxTag *>(tags_child))
       continue;
 
-    auto value = mtx::tags::get_simple_value("SOURCE_ID", static_cast<KaxTag &>(*tags_child));
+    auto value = mtx::tags::get_simple_value("SOURCE_ID", static_cast<libmatroska::KaxTag &>(*tags_child));
     if (value.empty())
       continue;
 
@@ -864,7 +862,7 @@ kax_reader_c::has_deferred_element_been_processed(kax_reader_c::deferred_l1_type
 
 void
 kax_reader_c::handle_attachments(mm_io_c *io,
-                                 EbmlElement *l0,
+                                 libebml::EbmlElement *l0,
                                  int64_t pos) {
   if (has_deferred_element_been_processed(dl1t_attachments, pos))
     return;
@@ -873,35 +871,35 @@ kax_reader_c::handle_attachments(mm_io_c *io,
   mtx::at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
-  std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
-  KaxAttachments *atts = dynamic_cast<KaxAttachments *>(l1.get());
+  std::shared_ptr<libebml::EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
+  auto atts = dynamic_cast<libmatroska::KaxAttachments *>(l1.get());
 
   if (!atts)
     return;
 
-  EbmlElement *element_found = nullptr;
-  upper_lvl_el               = 0;
+  libebml::EbmlElement *element_found{};
+  upper_lvl_el = 0;
 
-  atts->Read(*m_es, EBML_CLASS_CONTEXT(KaxAttachments), upper_lvl_el, element_found, true);
+  atts->Read(*m_es, EBML_CLASS_CONTEXT(libmatroska::KaxAttachments), upper_lvl_el, element_found, true);
   if (!found_in(*atts, element_found))
     delete element_found;
 
   for (auto l1_att : *atts) {
-    auto att = dynamic_cast<KaxAttached *>(l1_att);
+    auto att = dynamic_cast<libmatroska::KaxAttached *>(l1_att);
     if (!att)
       continue;
 
     ++m_attachment_id;
 
-    auto fdata = FindChild<KaxFileData>(att);
+    auto fdata = FindChild<libmatroska::KaxFileData>(att);
     if (!fdata)
       continue;
 
     auto matt         = std::make_shared<attachment_t>();
-    matt->name        = to_utf8(FindChildValue<KaxFileName>(att));
-    matt->description = to_utf8(FindChildValue<KaxFileDescription>(att));
-    matt->mime_type   = ::mtx::mime::maybe_map_to_legacy_font_mime_type(FindChildValue<KaxMimeType>(att), g_use_legacy_font_mime_types);
-    matt->id          = FindChildValue<KaxFileUID>(att);
+    matt->name        = to_utf8(FindChildValue<libmatroska::KaxFileName>(att));
+    matt->description = to_utf8(FindChildValue<libmatroska::KaxFileDescription>(att));
+    matt->mime_type   = ::mtx::mime::maybe_map_to_legacy_font_mime_type(FindChildValue<libmatroska::KaxMimeType>(att), g_use_legacy_font_mime_types);
+    matt->id          = FindChildValue<libmatroska::KaxFileUID>(att);
     matt->data        = memory_c::clone(static_cast<unsigned char *>(fdata->GetBuffer()), fdata->GetSize());
 
     auto attach_mode  = attachment_requested(m_attachment_id);
@@ -921,7 +919,7 @@ kax_reader_c::handle_attachments(mm_io_c *io,
 
 void
 kax_reader_c::handle_chapters(mm_io_c *io,
-                              EbmlElement *l0,
+                              libebml::EbmlElement *l0,
                               int64_t pos) {
   if (has_deferred_element_been_processed(dl1t_chapters, pos))
     return;
@@ -930,16 +928,16 @@ kax_reader_c::handle_chapters(mm_io_c *io,
   mtx::at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
-  std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
-  KaxChapters *tmp_chapters = dynamic_cast<KaxChapters *>(l1.get());
+  std::shared_ptr<libebml::EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
+  auto tmp_chapters = dynamic_cast<libmatroska::KaxChapters *>(l1.get());
 
   if (!tmp_chapters)
     return;
 
-  EbmlElement *element_found = nullptr;
-  upper_lvl_el               = 0;
+  libebml::EbmlElement *element_found{};
+  upper_lvl_el = 0;
 
-  tmp_chapters->Read(*m_es, EBML_CLASS_CONTEXT(KaxChapters), upper_lvl_el, element_found, true);
+  tmp_chapters->Read(*m_es, EBML_CLASS_CONTEXT(libmatroska::KaxChapters), upper_lvl_el, element_found, true);
   if (!found_in(*tmp_chapters, element_found))
     delete element_found;
 
@@ -947,7 +945,7 @@ kax_reader_c::handle_chapters(mm_io_c *io,
     mtx::chapters::regenerate_uids(*tmp_chapters, m_tags.get());
 
   if (!m_chapters)
-    m_chapters = mtx::chapters::kax_cptr{new KaxChapters};
+    m_chapters = mtx::chapters::kax_cptr{new libmatroska::KaxChapters};
 
   m_chapters->GetElementList().insert(m_chapters->begin(), tmp_chapters->begin(), tmp_chapters->end());
   tmp_chapters->RemoveAll();
@@ -955,7 +953,7 @@ kax_reader_c::handle_chapters(mm_io_c *io,
 
 void
 kax_reader_c::handle_tags(mm_io_c *io,
-                          EbmlElement *l0,
+                          libebml::EbmlElement *l0,
                           int64_t pos) {
   if (has_deferred_element_been_processed(dl1t_tags, pos))
     return;
@@ -964,51 +962,51 @@ kax_reader_c::handle_tags(mm_io_c *io,
   mtx::at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
-  std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
-  KaxTags *tags = dynamic_cast<KaxTags *>(l1.get());
+  std::shared_ptr<libebml::EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
+  auto tags = dynamic_cast<libmatroska::KaxTags *>(l1.get());
 
   if (!tags)
     return;
 
-  EbmlElement *element_found = nullptr;
-  upper_lvl_el               = 0;
+  libebml::EbmlElement *element_found{};
+  upper_lvl_el = 0;
 
-  tags->Read(*m_es, EBML_CLASS_CONTEXT(KaxTags), upper_lvl_el, element_found, true);
+  tags->Read(*m_es, EBML_CLASS_CONTEXT(libmatroska::KaxTags), upper_lvl_el, element_found, true);
   if (!found_in(*tags, element_found))
     delete element_found;
 
   while (tags->ListSize() > 0) {
-    if (!Is<KaxTag>((*tags)[0])) {
+    if (!Is<libmatroska::KaxTag>((*tags)[0])) {
       delete (*tags)[0];
       tags->Remove(0);
       continue;
     }
 
-    bool delete_tag       = true;
-    bool is_global        = true;
-    KaxTag *tag           = static_cast<KaxTag *>((*tags)[0]);
-    KaxTagTargets *target = FindChild<KaxTagTargets>(tag);
+    bool delete_tag = true;
+    bool is_global  = true;
+    auto tag        = static_cast<libmatroska::KaxTag *>((*tags)[0]);
+    auto target     = FindChild<libmatroska::KaxTagTargets>(tag);
 
     if (target) {
-      KaxTagTrackUID *tuid = FindChild<KaxTagTrackUID>(target);
+      auto tuid = FindChild<libmatroska::KaxTagTrackUID>(target);
 
       if (tuid) {
-        is_global          = false;
-        kax_track_t *track = find_track_by_uid(tuid->GetValue());
+        is_global  = false;
+        auto track = find_track_by_uid(tuid->GetValue());
 
         if (track) {
           bool contains_tag = false;
 
           size_t i;
           for (i = 0; i < tag->ListSize(); i++)
-            if (dynamic_cast<KaxTagSimple *>((*tag)[i])) {
+            if (dynamic_cast<libmatroska::KaxTagSimple *>((*tag)[i])) {
               contains_tag = true;
               break;
             }
 
           if (contains_tag) {
             if (!track->tags)
-              track->tags.reset(new KaxTags);
+              track->tags.reset(new libmatroska::KaxTags);
             track->tags->PushElement(*tag);
 
             delete_tag = false;
@@ -1019,7 +1017,7 @@ kax_reader_c::handle_tags(mm_io_c *io,
 
     if (is_global) {
       if (!m_tags)
-        m_tags = std::shared_ptr<KaxTags>(new KaxTags);
+        m_tags = std::shared_ptr<libmatroska::KaxTags>(new libmatroska::KaxTags);
       m_tags->PushElement(*tag);
 
     } else if (delete_tag)
@@ -1042,7 +1040,7 @@ kax_reader_c::handle_track_statistics_tags() {
 
 void
 kax_reader_c::handle_cues(mm_io_c *io,
-                          EbmlElement *l0,
+                          libebml::EbmlElement *l0,
                           int64_t pos) {
   if (has_deferred_element_been_processed(dl1t_cues, pos))
     return;
@@ -1051,16 +1049,16 @@ kax_reader_c::handle_cues(mm_io_c *io,
   mtx::at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
-  std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
-  KaxCues *cues = dynamic_cast<KaxCues *>(l1.get());
+  std::shared_ptr<libebml::EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
+  auto cues = dynamic_cast<libmatroska::KaxCues *>(l1.get());
 
   if (!cues)
     return;
 
-  EbmlElement *element_found = nullptr;
-  upper_lvl_el               = 0;
+  libebml::EbmlElement *element_found{};
+  upper_lvl_el = 0;
 
-  cues->Read(*m_es, EBML_CLASS_CONTEXT(KaxCues), upper_lvl_el, element_found, true);
+  cues->Read(*m_es, EBML_CLASS_CONTEXT(libmatroska::KaxCues), upper_lvl_el, element_found, true);
   if (!found_in(*cues, element_found))
     delete element_found;
 
@@ -1072,20 +1070,20 @@ kax_reader_c::handle_cues(mm_io_c *io,
   auto not_found = tracks_by_number.end();
 
   for (auto const &cues_child : *cues) {
-    if (!Is<KaxCuePoint>(cues_child))
+    if (!Is<libmatroska::KaxCuePoint>(cues_child))
       continue;
 
-    auto const &cue_point = *static_cast<KaxCuePoint *>(cues_child);
+    auto const &cue_point = *static_cast<libmatroska::KaxCuePoint *>(cues_child);
 
     for (auto const &point_child : cue_point) {
-      if (!Is<KaxCueTrackPositions>(point_child))
+      if (!Is<libmatroska::KaxCueTrackPositions>(point_child))
         continue;
 
-      auto cue_track = FindChild<KaxCueTrack>(static_cast<KaxCueTrackPositions *>(point_child));
+      auto cue_track = FindChild<libmatroska::KaxCueTrack>(static_cast<libmatroska::KaxCueTrackPositions *>(point_child));
       if (!cue_track)
         continue;
 
-      auto itr = tracks_by_number.find(static_cast<KaxCueTrack *>(cue_track)->GetValue());
+      auto itr = tracks_by_number.find(static_cast<libmatroska::KaxCueTrack *>(cue_track)->GetValue());
       if (itr != not_found)
         itr->second->num_cue_points++;
     }
@@ -1094,7 +1092,7 @@ kax_reader_c::handle_cues(mm_io_c *io,
 
 void
 kax_reader_c::read_headers_info(mm_io_c *io,
-                                EbmlElement *l0,
+                                libebml::EbmlElement *l0,
                                 int64_t pos) {
   // General info about this Matroska file
   if (has_deferred_element_been_processed(dl1t_info, pos))
@@ -1104,23 +1102,23 @@ kax_reader_c::read_headers_info(mm_io_c *io,
   mtx::at_scope_exit_c restore([io]() { io->restore_pos(); });
 
   int upper_lvl_el = 0;
-  std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
-  KaxInfo *info = dynamic_cast<KaxInfo *>(l1.get());
+  std::shared_ptr<libebml::EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
+  auto info = dynamic_cast<libmatroska::KaxInfo *>(l1.get());
 
   if (!info)
     return;
 
-  EbmlElement *element_found = nullptr;
-  upper_lvl_el               = 0;
+  libebml::EbmlElement *element_found{};
+  upper_lvl_el = 0;
 
-  info->Read(*m_es, EBML_CLASS_CONTEXT(KaxInfo), upper_lvl_el, element_found, true);
+  info->Read(*m_es, EBML_CLASS_CONTEXT(libmatroska::KaxInfo), upper_lvl_el, element_found, true);
   if (!found_in(*info, element_found))
     delete element_found;
 
-  m_tc_scale          = FindChildValue<KaxTimecodeScale, uint64_t>(info, 1000000);
-  m_segment_duration  = std::llround(FindChildValue<KaxDuration>(info) * m_tc_scale);
-  m_title             = to_utf8(FindChildValue<KaxTitle>(info));
-  auto muxing_date    = FindChild<KaxDateUTC>(info);
+  m_tc_scale          = FindChildValue<libmatroska::KaxTimecodeScale, uint64_t>(info, 1000000);
+  m_segment_duration  = std::llround(FindChildValue<libmatroska::KaxDuration>(info) * m_tc_scale);
+  m_title             = to_utf8(FindChildValue<libmatroska::KaxTitle>(info));
+  auto muxing_date    = FindChild<libmatroska::KaxDateUTC>(info);
   if (muxing_date)
     m_muxing_date_epoch = muxing_date->GetEpochDate();
 
@@ -1141,7 +1139,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
   // spaces into at most three parts. If the result is at least two parts
   // long then try to parse the version number from the second and
   // store a lower case version of the first as the application's name.
-  auto km_writing_app = FindChild<KaxWritingApp>(info);
+  auto km_writing_app = FindChild<libmatroska::KaxWritingApp>(info);
   if (km_writing_app) {
     read_headers_info_writing_app(km_writing_app);
 
@@ -1155,7 +1153,7 @@ kax_reader_c::read_headers_info(mm_io_c *io,
       m_regenerate_chapter_uids = true;
   }
 
-  auto km_muxing_app = FindChild<KaxMuxingApp>(info);
+  auto km_muxing_app = FindChild<libmatroska::KaxMuxingApp>(info);
   if (km_muxing_app) {
     m_muxing_app = km_muxing_app->GetValueUTF8();
 
@@ -1167,13 +1165,13 @@ kax_reader_c::read_headers_info(mm_io_c *io,
       m_reference_timestamp_tolerance = 1000000;
   }
 
-  m_segment_uid          = FindChildValue<KaxSegmentUID>(info);
-  m_next_segment_uid     = FindChildValue<KaxNextUID>(info);
-  m_previous_segment_uid = FindChildValue<KaxPrevUID>(info);
+  m_segment_uid          = FindChildValue<libmatroska::KaxSegmentUID>(info);
+  m_next_segment_uid     = FindChildValue<libmatroska::KaxNextUID>(info);
+  m_previous_segment_uid = FindChildValue<libmatroska::KaxPrevUID>(info);
 }
 
 void
-kax_reader_c::read_headers_info_writing_app(KaxWritingApp *&km_writing_app) {
+kax_reader_c::read_headers_info_writing_app(libmatroska::KaxWritingApp *&km_writing_app) {
   size_t idx;
 
   std::string s = km_writing_app->GetValueUTF8();
@@ -1226,86 +1224,86 @@ kax_reader_c::read_headers_info_writing_app(KaxWritingApp *&km_writing_app) {
 
 void
 kax_reader_c::read_headers_track_audio(kax_track_t *track,
-                                       KaxTrackAudio *ktaudio) {
-  track->a_sfreq    = FindChildValue<KaxAudioSamplingFreq>(ktaudio, 8000.0);
-  track->a_osfreq   = FindChildValue<KaxAudioOutputSamplingFreq>(ktaudio);
-  track->a_channels = FindChildValue<KaxAudioChannels>(ktaudio, 1);
-  track->a_bps      = FindChildValue<KaxAudioBitDepth>(ktaudio);
-  track->a_emphasis = FindOptionalChildValue<KaxEmphasis>(ktaudio);
+                                       libmatroska::KaxTrackAudio *ktaudio) {
+  track->a_sfreq    = FindChildValue<libmatroska::KaxAudioSamplingFreq>(ktaudio, 8000.0);
+  track->a_osfreq   = FindChildValue<libmatroska::KaxAudioOutputSamplingFreq>(ktaudio);
+  track->a_channels = FindChildValue<libmatroska::KaxAudioChannels>(ktaudio, 1);
+  track->a_bps      = FindChildValue<libmatroska::KaxAudioBitDepth>(ktaudio);
+  track->a_emphasis = FindOptionalChildValue<libmatroska::KaxEmphasis>(ktaudio);
 }
 
 void
 kax_reader_c::read_headers_track_video(kax_track_t *track,
-                                       KaxTrackVideo *ktvideo) {
-  track->v_width        = FindChildValue<KaxVideoPixelWidth>(ktvideo);
-  track->v_height       = FindChildValue<KaxVideoPixelHeight>(ktvideo);
-  track->v_dwidth       = FindChildValue<KaxVideoDisplayWidth>(ktvideo,  track->v_width);
-  track->v_dheight      = FindChildValue<KaxVideoDisplayHeight>(ktvideo, track->v_height);
-  track->v_dunit        = FindChildValue<KaxVideoDisplayUnit>(ktvideo,   generic_packetizer_c::ddu_pixels);
+                                       libmatroska::KaxTrackVideo *ktvideo) {
+  track->v_width        = FindChildValue<libmatroska::KaxVideoPixelWidth>(ktvideo);
+  track->v_height       = FindChildValue<libmatroska::KaxVideoPixelHeight>(ktvideo);
+  track->v_dwidth       = FindChildValue<libmatroska::KaxVideoDisplayWidth>(ktvideo,  track->v_width);
+  track->v_dheight      = FindChildValue<libmatroska::KaxVideoDisplayHeight>(ktvideo, track->v_height);
+  track->v_dunit        = FindChildValue<libmatroska::KaxVideoDisplayUnit>(ktvideo,   generic_packetizer_c::ddu_pixels);
 
-  track->v_pcleft       = FindChildValue<KaxVideoPixelCropLeft>(ktvideo);
-  track->v_pcright      = FindChildValue<KaxVideoPixelCropRight>(ktvideo);
-  track->v_pctop        = FindChildValue<KaxVideoPixelCropTop>(ktvideo);
-  track->v_pcbottom     = FindChildValue<KaxVideoPixelCropBottom>(ktvideo);
+  track->v_pcleft       = FindChildValue<libmatroska::KaxVideoPixelCropLeft>(ktvideo);
+  track->v_pcright      = FindChildValue<libmatroska::KaxVideoPixelCropRight>(ktvideo);
+  track->v_pctop        = FindChildValue<libmatroska::KaxVideoPixelCropTop>(ktvideo);
+  track->v_pcbottom     = FindChildValue<libmatroska::KaxVideoPixelCropBottom>(ktvideo);
 
-  track->v_alpha_mode   = FindOptionalChildBoolValue<KaxVideoAlphaMode>(ktvideo);
+  track->v_alpha_mode   = FindOptionalChildBoolValue<libmatroska::KaxVideoAlphaMode>(ktvideo);
 
-  auto color_space      = FindChild<KaxVideoColourSpace>(*ktvideo);
+  auto color_space      = FindChild<libmatroska::KaxVideoColourSpace>(*ktvideo);
   if (color_space)
     track->v_color_space = memory_c::clone(color_space->GetBuffer(), color_space->GetSize());
 
-  auto color = FindChild<KaxVideoColour>(*ktvideo);
+  auto color = FindChild<libmatroska::KaxVideoColour>(*ktvideo);
 
   if (color) {
-    track->v_color_matrix          = FindOptionalChildValue<KaxVideoColourMatrix>(color);
-    track->v_bits_per_channel      = FindOptionalChildValue<KaxVideoBitsPerChannel>(color);
-    track->v_chroma_subsample.hori = FindChildValue<KaxVideoChromaSubsampHorz>(color, -1.0);
-    track->v_chroma_subsample.vert = FindChildValue<KaxVideoChromaSubsampVert>(color, -1.0);
-    track->v_cb_subsample.hori     = FindChildValue<KaxVideoCbSubsampHorz>(color,     -1.0);
-    track->v_cb_subsample.vert     = FindChildValue<KaxVideoCbSubsampVert>(color,     -1.0);
-    track->v_chroma_siting.hori    = FindChildValue<KaxVideoChromaSitHorz>(color,     -1.0);
-    track->v_chroma_siting.vert    = FindChildValue<KaxVideoChromaSitVert>(color,     -1.0);
-    track->v_color_range           = FindOptionalChildValue<KaxVideoColourRange>(color);
-    track->v_transfer_character    = FindOptionalChildValue<KaxVideoColourTransferCharacter>(color);
-    track->v_color_primaries       = FindOptionalChildValue<KaxVideoColourPrimaries>(color);
-    track->v_max_cll               = FindOptionalChildValue<KaxVideoColourMaxCLL>(color);
-    track->v_max_fall              = FindOptionalChildValue<KaxVideoColourMaxFALL>(color);
+    track->v_color_matrix          = FindOptionalChildValue<libmatroska::KaxVideoColourMatrix>(color);
+    track->v_bits_per_channel      = FindOptionalChildValue<libmatroska::KaxVideoBitsPerChannel>(color);
+    track->v_chroma_subsample.hori = FindChildValue<libmatroska::KaxVideoChromaSubsampHorz>(color, -1.0);
+    track->v_chroma_subsample.vert = FindChildValue<libmatroska::KaxVideoChromaSubsampVert>(color, -1.0);
+    track->v_cb_subsample.hori     = FindChildValue<libmatroska::KaxVideoCbSubsampHorz>(color,     -1.0);
+    track->v_cb_subsample.vert     = FindChildValue<libmatroska::KaxVideoCbSubsampVert>(color,     -1.0);
+    track->v_chroma_siting.hori    = FindChildValue<libmatroska::KaxVideoChromaSitHorz>(color,     -1.0);
+    track->v_chroma_siting.vert    = FindChildValue<libmatroska::KaxVideoChromaSitVert>(color,     -1.0);
+    track->v_color_range           = FindOptionalChildValue<libmatroska::KaxVideoColourRange>(color);
+    track->v_transfer_character    = FindOptionalChildValue<libmatroska::KaxVideoColourTransferCharacter>(color);
+    track->v_color_primaries       = FindOptionalChildValue<libmatroska::KaxVideoColourPrimaries>(color);
+    track->v_max_cll               = FindOptionalChildValue<libmatroska::KaxVideoColourMaxCLL>(color);
+    track->v_max_fall              = FindOptionalChildValue<libmatroska::KaxVideoColourMaxFALL>(color);
 
-    auto color_meta                = FindChild<KaxVideoColourMasterMeta>(*color);
+    auto color_meta                = FindChild<libmatroska::KaxVideoColourMasterMeta>(*color);
 
     if (color_meta) {
-      track->v_chroma_coordinates.red_x   = FindChildValue<KaxVideoRChromaX>(color_meta, -1.0);
-      track->v_chroma_coordinates.red_y   = FindChildValue<KaxVideoRChromaY>(color_meta, -1.0);
-      track->v_chroma_coordinates.green_x = FindChildValue<KaxVideoGChromaX>(color_meta, -1.0);
-      track->v_chroma_coordinates.green_y = FindChildValue<KaxVideoGChromaY>(color_meta, -1.0);
-      track->v_chroma_coordinates.blue_x  = FindChildValue<KaxVideoBChromaX>(color_meta, -1.0);
-      track->v_chroma_coordinates.blue_y  = FindChildValue<KaxVideoBChromaY>(color_meta, -1.0);
-      track->v_white_color_coordinates.x  = FindChildValue<KaxVideoWhitePointChromaX>(color_meta, -1.0);
-      track->v_white_color_coordinates.y  = FindChildValue<KaxVideoWhitePointChromaY>(color_meta, -1.0);
-      track->v_max_luminance              = FindOptionalChildValue<KaxVideoLuminanceMax>(color_meta);
-      track->v_min_luminance              = FindOptionalChildValue<KaxVideoLuminanceMin>(color_meta);
+      track->v_chroma_coordinates.red_x   = FindChildValue<libmatroska::KaxVideoRChromaX>(color_meta, -1.0);
+      track->v_chroma_coordinates.red_y   = FindChildValue<libmatroska::KaxVideoRChromaY>(color_meta, -1.0);
+      track->v_chroma_coordinates.green_x = FindChildValue<libmatroska::KaxVideoGChromaX>(color_meta, -1.0);
+      track->v_chroma_coordinates.green_y = FindChildValue<libmatroska::KaxVideoGChromaY>(color_meta, -1.0);
+      track->v_chroma_coordinates.blue_x  = FindChildValue<libmatroska::KaxVideoBChromaX>(color_meta, -1.0);
+      track->v_chroma_coordinates.blue_y  = FindChildValue<libmatroska::KaxVideoBChromaY>(color_meta, -1.0);
+      track->v_white_color_coordinates.x  = FindChildValue<libmatroska::KaxVideoWhitePointChromaX>(color_meta, -1.0);
+      track->v_white_color_coordinates.y  = FindChildValue<libmatroska::KaxVideoWhitePointChromaY>(color_meta, -1.0);
+      track->v_max_luminance              = FindOptionalChildValue<libmatroska::KaxVideoLuminanceMax>(color_meta);
+      track->v_min_luminance              = FindOptionalChildValue<libmatroska::KaxVideoLuminanceMin>(color_meta);
     }
   }
 
-  auto projection = FindChild<KaxVideoProjection>(*ktvideo);
+  auto projection = FindChild<libmatroska::KaxVideoProjection>(*ktvideo);
 
   if (projection) {
-    track->v_projection_type       = FindOptionalChildValue<KaxVideoProjectionType>(projection);
-    track->v_projection_pose_yaw   = FindOptionalChildValue<KaxVideoProjectionPoseYaw>(projection);
-    track->v_projection_pose_pitch = FindOptionalChildValue<KaxVideoProjectionPosePitch>(projection);
-    track->v_projection_pose_roll  = FindOptionalChildValue<KaxVideoProjectionPoseRoll>(projection);
+    track->v_projection_type       = FindOptionalChildValue<libmatroska::KaxVideoProjectionType>(projection);
+    track->v_projection_pose_yaw   = FindOptionalChildValue<libmatroska::KaxVideoProjectionPoseYaw>(projection);
+    track->v_projection_pose_pitch = FindOptionalChildValue<libmatroska::KaxVideoProjectionPosePitch>(projection);
+    track->v_projection_pose_roll  = FindOptionalChildValue<libmatroska::KaxVideoProjectionPoseRoll>(projection);
 
-    auto kprojection_private = FindChild<KaxVideoProjectionPrivate>(projection);
+    auto kprojection_private = FindChild<libmatroska::KaxVideoProjectionPrivate>(projection);
     if (kprojection_private)
       track->v_projection_private = memory_c::clone(kprojection_private->GetBuffer(), kprojection_private->GetSize());
   }
 
-  track->v_field_order  = FindOptionalChildValue<KaxVideoFieldOrder>(ktvideo);
-  track->v_stereo_mode  = FindChildValue<KaxVideoStereoMode, stereo_mode_c::mode>(ktvideo, stereo_mode_c::unspecified);
+  track->v_field_order  = FindOptionalChildValue<libmatroska::KaxVideoFieldOrder>(ktvideo);
+  track->v_stereo_mode  = FindChildValue<libmatroska::KaxVideoStereoMode, stereo_mode_c::mode>(ktvideo, stereo_mode_c::unspecified);
 
   // For older files.
-  auto frame_rate       = FindChildValue<KaxVideoFrameRate>(ktvideo);
-  track->v_display_unit = FindChildValue<KaxVideoDisplayUnit>(ktvideo);
+  auto frame_rate       = FindChildValue<libmatroska::KaxVideoFrameRate>(ktvideo);
+  track->v_display_unit = FindChildValue<libmatroska::KaxVideoDisplayUnit>(ktvideo);
 
   if (0 < frame_rate)
     track->default_duration = static_cast<int64_t>(1'000'000'000 / frame_rate);
@@ -1320,35 +1318,36 @@ kax_reader_c::read_headers_track_video(kax_track_t *track,
 
 void
 kax_reader_c::read_headers_tracks(mm_io_c *io,
-                                  EbmlElement *l0,
+                                  libebml::EbmlElement *l0,
                                   int64_t position) {
-  // Yep, we've found our KaxTracks element. Now find all m_tracks
+  // Yep, we've found our libmatroska::KaxTracks element. Now find all m_tracks
   // contained in this segment.
   if (has_deferred_element_been_processed(dl1t_tracks, position))
     return;
 
   int upper_lvl_el = 0;
   io->save_pos(position);
-  auto l1 = std::shared_ptr<EbmlElement>(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
+  auto l1 = std::shared_ptr<libebml::EbmlElement>(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
 
-  if (!l1 || !Is<KaxTracks>(*l1)) {
+  if (!l1 || !Is<libmatroska::KaxTracks>(*l1)) {
     io->restore_pos();
 
     return;
   }
 
-  EbmlElement *element_found = nullptr;
-  upper_lvl_el               = 0;
-  l1->Read(*m_es, EBML_CLASS_CONTEXT(KaxTracks), upper_lvl_el, element_found, true);
+  libebml::EbmlElement *element_found{};
+  upper_lvl_el = 0;
+
+  l1->Read(*m_es, EBML_CLASS_CONTEXT(libmatroska::KaxTracks), upper_lvl_el, element_found, true);
   if (!found_in(*l1, element_found))
     delete element_found;
 
-  for (auto *ktentry = FindChild<KaxTrackEntry>(*l1); ktentry; ktentry = FindNextChild(static_cast<EbmlMaster &>(*l1), *ktentry)) {
+  for (auto *ktentry = FindChild<libmatroska::KaxTrackEntry>(*l1); ktentry; ktentry = FindNextChild(static_cast<libebml::EbmlMaster &>(*l1), *ktentry)) {
     // We actually found a track entry :) We're happy now.
     auto track  = std::make_shared<kax_track_t>();
     track->tnum = m_tracks.size();
 
-    auto ktnum = FindChild<KaxTrackNumber>(ktentry);
+    auto ktnum = FindChild<libmatroska::KaxTrackNumber>(ktentry);
     if (!ktnum) {
       mxdebug_if(m_debug_track_headers, fmt::format("matroska_reader: track ID {} is missing its track number.\n", track->tnum));
       continue;
@@ -1361,7 +1360,7 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
       continue;
     }
 
-    auto ktuid = FindChild<KaxTrackUID>(ktentry);
+    auto ktuid = FindChild<libmatroska::KaxTrackUID>(ktentry);
     if (!ktuid)
       mxwarn_fn(m_ti.m_fname,
                 fmt::format(Y("Track {0} is missing its track UID element which is required to be present by the Matroska specification. If the file contains tags then those tags might be broken.\n"),
@@ -1369,7 +1368,7 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
     else
       track->track_uid = ktuid->GetValue();
 
-    auto kttype = FindChild<KaxTrackType>(ktentry);
+    auto kttype = FindChild<libmatroska::KaxTrackType>(ktentry);
     if (!kttype) {
       mxdebug_if(m_debug_track_headers, fmt::format("matroska_reader: track number {} is missing the track type.\n", track->track_number));
       m_known_bad_track_numbers[track->track_number] = true;
@@ -1382,37 +1381,37 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
                              : track_type == track_subtitle ? 's'
                              :                                '?';
 
-    auto ktaudio = FindChild<KaxTrackAudio>(ktentry);
+    auto ktaudio = FindChild<libmatroska::KaxTrackAudio>(ktentry);
     if (ktaudio)
       read_headers_track_audio(track.get(), ktaudio);
 
-    auto ktvideo = FindChild<KaxTrackVideo>(ktentry);
+    auto ktvideo = FindChild<libmatroska::KaxTrackVideo>(ktentry);
     if (ktvideo)
       read_headers_track_video(track.get(), ktvideo);
 
-    auto kcodecpriv = FindChild<KaxCodecPrivate>(ktentry);
+    auto kcodecpriv = FindChild<libmatroska::KaxCodecPrivate>(ktentry);
     if (kcodecpriv)
       track->private_data = memory_c::clone(kcodecpriv->GetBuffer(), kcodecpriv->GetSize());
 
-    track->codec_id               = FindChildValue<KaxCodecID>(ktentry);
-    track->codec_name             = to_utf8(FindChildValue<KaxCodecName>(ktentry));
-    track->track_name             = to_utf8(FindChildValue<KaxTrackName>(ktentry));
-    track->language               = mtx::bcp47::language_c::parse(FindChildValue<KaxTrackLanguage, std::string>(ktentry, "eng"));
-    track->language_ietf          = mtx::bcp47::language_c::parse(FindChildValue<KaxLanguageIETF, std::string>(ktentry, {}));
-    track->default_duration       = FindChildValue<KaxTrackDefaultDuration>(ktentry, track->default_duration);
-    track->default_track          = FindChildValue<KaxTrackFlagDefault, bool>(ktentry, true);
-    track->forced_track           = FindChildValue<KaxTrackFlagForced>(ktentry);
-    track->enabled_track          = FindChildValue<KaxTrackFlagEnabled, bool>(ktentry, true);
-    track->lacing_flag            = FindChildValue<KaxTrackFlagLacing>(ktentry);
-    track->max_blockadd_id        = FindChildValue<KaxMaxBlockAdditionID>(ktentry);
-    track->hearing_impaired_flag  = FindOptionalChildBoolValue<KaxFlagHearingImpaired>(ktentry);
-    track->visual_impaired_flag   = FindOptionalChildBoolValue<KaxFlagVisualImpaired>(ktentry);
-    track->text_descriptions_flag = FindOptionalChildBoolValue<KaxFlagTextDescriptions>(ktentry);
-    track->original_flag          = FindOptionalChildBoolValue<KaxFlagOriginal>(ktentry);
-    track->commentary_flag        = FindOptionalChildBoolValue<KaxFlagCommentary>(ktentry);
+    track->codec_id               = FindChildValue<libmatroska::KaxCodecID>(ktentry);
+    track->codec_name             = to_utf8(FindChildValue<libmatroska::KaxCodecName>(ktentry));
+    track->track_name             = to_utf8(FindChildValue<libmatroska::KaxTrackName>(ktentry));
+    track->language               = mtx::bcp47::language_c::parse(FindChildValue<libmatroska::KaxTrackLanguage, std::string>(ktentry, "eng"));
+    track->language_ietf          = mtx::bcp47::language_c::parse(FindChildValue<libmatroska::KaxLanguageIETF, std::string>(ktentry, {}));
+    track->default_duration       = FindChildValue<libmatroska::KaxTrackDefaultDuration>(ktentry, track->default_duration);
+    track->default_track          = FindChildValue<libmatroska::KaxTrackFlagDefault, bool>(ktentry, true);
+    track->forced_track           = FindChildValue<libmatroska::KaxTrackFlagForced>(ktentry);
+    track->enabled_track          = FindChildValue<libmatroska::KaxTrackFlagEnabled, bool>(ktentry, true);
+    track->lacing_flag            = FindChildValue<libmatroska::KaxTrackFlagLacing>(ktentry);
+    track->max_blockadd_id        = FindChildValue<libmatroska::KaxMaxBlockAdditionID>(ktentry);
+    track->hearing_impaired_flag  = FindOptionalChildBoolValue<libmatroska::KaxFlagHearingImpaired>(ktentry);
+    track->visual_impaired_flag   = FindOptionalChildBoolValue<libmatroska::KaxFlagVisualImpaired>(ktentry);
+    track->text_descriptions_flag = FindOptionalChildBoolValue<libmatroska::KaxFlagTextDescriptions>(ktentry);
+    track->original_flag          = FindOptionalChildBoolValue<libmatroska::KaxFlagOriginal>(ktentry);
+    track->commentary_flag        = FindOptionalChildBoolValue<libmatroska::KaxFlagCommentary>(ktentry);
 
-    auto kax_seek_pre_roll  = FindChild<KaxSeekPreRoll>(ktentry);
-    auto kax_codec_delay    = FindChild<KaxCodecDelay>(ktentry);
+    auto kax_seek_pre_roll        = FindChild<libmatroska::KaxSeekPreRoll>(ktentry);
+    auto kax_codec_delay          = FindChild<libmatroska::KaxCodecDelay>(ktentry);
 
     if (kax_seek_pre_roll)
       track->seek_pre_roll = timestamp_c::ns(kax_seek_pre_roll->GetValue());
@@ -1420,16 +1419,16 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
       track->codec_delay   = timestamp_c::ns(kax_codec_delay->GetValue());
 
     for (auto const &child : *ktentry) {
-      auto kmapping = dynamic_cast<KaxBlockAdditionMapping *>(child);
+      auto kmapping = dynamic_cast<libmatroska::KaxBlockAdditionMapping *>(child);
       if (!kmapping)
         continue;
 
       block_addition_mapping_t mapping;
 
-      mapping.id_name       = FindChildValue<KaxBlockAddIDName>(kmapping);
-      mapping.id_type       = FindOptionalChildValue<KaxBlockAddIDType>(kmapping);
-      mapping.id_value      = FindOptionalChildValue<KaxBlockAddIDValue>(kmapping);
-      mapping.id_extra_data = FindChildValue<KaxBlockAddIDExtraData>(kmapping);
+      mapping.id_name       = FindChildValue<libmatroska::KaxBlockAddIDName>(kmapping);
+      mapping.id_type       = FindOptionalChildValue<libmatroska::KaxBlockAddIDType>(kmapping);
+      mapping.id_value      = FindOptionalChildValue<libmatroska::KaxBlockAddIDValue>(kmapping);
+      mapping.id_extra_data = FindChildValue<libmatroska::KaxBlockAddIDExtraData>(kmapping);
 
       if (mapping.is_valid())
         track->block_addition_mappings.push_back(mapping);
@@ -1465,7 +1464,7 @@ kax_reader_c::read_headers_tracks(mm_io_c *io,
 
 void
 kax_reader_c::handle_seek_head(mm_io_c *io,
-                               EbmlElement *l0,
+                               libebml::EbmlElement *l0,
                                int64_t pos) {
   if (has_deferred_element_been_processed(dl1t_seek_head, pos))
     return;
@@ -1477,48 +1476,48 @@ kax_reader_c::handle_seek_head(mm_io_c *io,
     io->save_pos(pos);
 
     int upper_lvl_el = 0;
-    std::shared_ptr<EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
-    auto *seek_head = dynamic_cast<KaxSeekHead *>(l1.get());
+    std::shared_ptr<libebml::EbmlElement> l1(m_es->FindNextElement(EBML_CONTEXT(l0), upper_lvl_el, 0xFFFFFFFFL, true));
+    auto *seek_head = dynamic_cast<libmatroska::KaxSeekHead *>(l1.get());
 
     if (!seek_head)
       return;
 
-    EbmlElement *element_found = nullptr;
+    libebml::EbmlElement *element_found = nullptr;
     upper_lvl_el               = 0;
 
-    seek_head->Read(*m_es, EBML_CLASS_CONTEXT(KaxSeekHead), upper_lvl_el, element_found, true);
+    seek_head->Read(*m_es, EBML_CLASS_CONTEXT(libmatroska::KaxSeekHead), upper_lvl_el, element_found, true);
     if (!found_in(*seek_head, element_found))
       delete element_found;
 
     for (auto l2 : *seek_head) {
-      if (!Is<KaxSeek>(l2))
+      if (!Is<libmatroska::KaxSeek>(l2))
         continue;
 
-      auto &seek        = *static_cast<KaxSeek *>(l2);
-      auto new_seek_pos = FindChildValue<KaxSeekPosition, int64_t>(seek, -1);
+      auto &seek        = *static_cast<libmatroska::KaxSeek *>(l2);
+      auto new_seek_pos = FindChildValue<libmatroska::KaxSeekPosition, int64_t>(seek, -1);
 
       if (-1 == new_seek_pos)
         continue;
 
-      auto *k_id = FindChild<KaxSeekID>(seek);
+      auto *k_id = FindChild<libmatroska::KaxSeekID>(seek);
       if (!k_id)
         continue;
 
-      EbmlId id(k_id->GetBuffer(), k_id->GetSize());
+      libebml::EbmlId id(k_id->GetBuffer(), k_id->GetSize());
 
-      deferred_l1_type_e type = Is<KaxAttachments>(id) ? dl1t_attachments
-        :                       Is<KaxChapters>(id)    ? dl1t_chapters
-        :                       Is<KaxTags>(id)        ? dl1t_tags
-        :                       Is<KaxTracks>(id)      ? dl1t_tracks
-        :                       Is<KaxSeekHead>(id)    ? dl1t_seek_head
-        :                       Is<KaxInfo>(id)        ? dl1t_info
-        :                       Is<KaxCues>(id)        ? dl1t_cues
-        :                                                dl1t_unknown;
+      deferred_l1_type_e type = Is<libmatroska::KaxAttachments>(id) ? dl1t_attachments
+        :                       Is<libmatroska::KaxChapters>(id)    ? dl1t_chapters
+        :                       Is<libmatroska::KaxTags>(id)        ? dl1t_tags
+        :                       Is<libmatroska::KaxTracks>(id)      ? dl1t_tracks
+        :                       Is<libmatroska::KaxSeekHead>(id)    ? dl1t_seek_head
+        :                       Is<libmatroska::KaxInfo>(id)        ? dl1t_info
+        :                       Is<libmatroska::KaxCues>(id)        ? dl1t_cues
+        :                                                             dl1t_unknown;
 
       if (dl1t_unknown == type)
         continue;
 
-      new_seek_pos = static_cast<KaxSegment *>(l0)->GetGlobalPosition(new_seek_pos);
+      new_seek_pos = static_cast<libmatroska::KaxSegment *>(l0)->GetGlobalPosition(new_seek_pos);
 
       if (dl1t_seek_head == type)
         next_seek_head_positions.push_back(new_seek_pos);
@@ -1573,18 +1572,18 @@ kax_reader_c::find_level1_elements_via_analyzer() {
     if (!ok)
       return;
 
-    analyzer->with_elements(EBML_ID(KaxInfo),        [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_info       ].push_back(data.m_pos); });
-    analyzer->with_elements(EBML_ID(KaxTracks),      [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_tracks     ].push_back(data.m_pos); });
-    analyzer->with_elements(EBML_ID(KaxAttachments), [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_attachments].push_back(data.m_pos); });
-    analyzer->with_elements(EBML_ID(KaxChapters),    [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_chapters   ].push_back(data.m_pos); });
-    analyzer->with_elements(EBML_ID(KaxTags),        [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_tags       ].push_back(data.m_pos); });
+    analyzer->with_elements(EBML_ID(libmatroska::KaxInfo),        [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_info       ].push_back(data.m_pos); });
+    analyzer->with_elements(EBML_ID(libmatroska::KaxTracks),      [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_tracks     ].push_back(data.m_pos); });
+    analyzer->with_elements(EBML_ID(libmatroska::KaxAttachments), [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_attachments].push_back(data.m_pos); });
+    analyzer->with_elements(EBML_ID(libmatroska::KaxChapters),    [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_chapters   ].push_back(data.m_pos); });
+    analyzer->with_elements(EBML_ID(libmatroska::KaxTags),        [this](kax_analyzer_data_c const &data) { m_deferred_l1_positions[dl1t_tags       ].push_back(data.m_pos); });
 
   } catch (...) {
   }
 }
 
 void
-kax_reader_c::read_deferred_level1_elements(KaxSegment &segment) {
+kax_reader_c::read_deferred_level1_elements(libmatroska::KaxSegment &segment) {
   for (auto position : m_deferred_l1_positions[dl1t_info])
     read_headers_info(m_in.get(), &segment, position);
 
@@ -1615,44 +1614,44 @@ bool
 kax_reader_c::read_headers_internal() {
   // Elements for different levels
 
-  auto cluster = std::shared_ptr<KaxCluster>{};
+  auto cluster = std::shared_ptr<libmatroska::KaxCluster>{};
   try {
-    m_es      = std::shared_ptr<EbmlStream>(new EbmlStream(*m_in));
+    m_es      = std::shared_ptr<libebml::EbmlStream>(new libebml::EbmlStream(*m_in));
     m_in_file = std::make_shared<kax_file_c>(*m_in);
 
     m_in_file->enable_reporting(!g_identifying);
 
-    // Find the EbmlHead element. Must be the first one.
-    auto l0 = std::shared_ptr<EbmlElement>(m_es->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFFFFFFFFFLL));
-    if (!l0 || !dynamic_cast<EbmlHead *>(l0.get())) {
+    // Find the libebml::EbmlHead element. Must be the first one.
+    auto l0 = std::shared_ptr<libebml::EbmlElement>(m_es->FindNextID(EBML_INFO(libebml::EbmlHead), 0xFFFFFFFFFFFFFFFFLL));
+    if (!l0 || !dynamic_cast<libebml::EbmlHead *>(l0.get())) {
       mxwarn(Y("matroska_reader: no EBML head found.\n"));
       return false;
     }
 
-    auto &head                 = static_cast<EbmlHead &>(*l0);
-    int upper_lvl_el           = 0;
-    EbmlElement *element_found = nullptr;
+    auto &head = static_cast<libebml::EbmlHead &>(*l0);
+    int upper_lvl_el{};
+    libebml::EbmlElement *element_found{};
 
     head.Read(*m_es, EBML_CONTEXT(&head), upper_lvl_el, element_found, true);
     delete element_found;
 
-    m_is_webm = FindChildValue<EDocType>(head) == "webm";
+    m_is_webm = FindChildValue<libebml::EDocType>(head) == "webm";
 
     l0->SkipData(*m_es, EBML_CONTEXT(l0));
 
     while (true) {
       // Next element must be a segment
-      l0.reset(m_es->FindNextID(EBML_INFO(KaxSegment), 0xFFFFFFFFFFFFFFFFLL));
+      l0.reset(m_es->FindNextID(EBML_INFO(libmatroska::KaxSegment), 0xFFFFFFFFFFFFFFFFLL));
       if (!l0) {
         if (verbose)
           mxwarn(Y("matroska_reader: No segment found.\n"));
         return false;
       }
 
-      if (Is<KaxSegment>(*l0))
+      if (Is<libmatroska::KaxSegment>(*l0))
         break;
 
-      if (Is<EbmlDummy>(*l0) || Is<EbmlCrc32>(*l0) || Is<EbmlVoid>(*l0)) {
+      if (Is<libebml::EbmlDummy>(*l0) || Is<libebml::EbmlCrc32>(*l0) || Is<libebml::EbmlVoid>(*l0)) {
         l0->SkipData(*m_es, EBML_CONTEXT(l0));
         continue;
       }
@@ -1672,26 +1671,26 @@ kax_reader_c::read_headers_internal() {
       if (!l1)
         break;
 
-      if (Is<KaxInfo>(*l1))
+      if (Is<libmatroska::KaxInfo>(*l1))
         m_deferred_l1_positions[dl1t_info].push_back(l1->GetElementPosition());
 
-      else if (Is<KaxTracks>(*l1))
+      else if (Is<libmatroska::KaxTracks>(*l1))
         m_deferred_l1_positions[dl1t_tracks].push_back(l1->GetElementPosition());
 
-      else if (Is<KaxAttachments>(*l1))
+      else if (Is<libmatroska::KaxAttachments>(*l1))
         m_deferred_l1_positions[dl1t_attachments].push_back(l1->GetElementPosition());
 
-      else if (Is<KaxChapters>(*l1))
+      else if (Is<libmatroska::KaxChapters>(*l1))
         m_deferred_l1_positions[dl1t_chapters].push_back(l1->GetElementPosition());
 
-      else if (Is<KaxTags>(*l1))
+      else if (Is<libmatroska::KaxTags>(*l1))
         m_deferred_l1_positions[dl1t_tags].push_back(l1->GetElementPosition());
 
-      else if (Is<KaxSeekHead>(*l1))
+      else if (Is<libmatroska::KaxSeekHead>(*l1))
         handle_seek_head(m_in.get(), l0.get(), l1->GetElementPosition());
 
-      else if (Is<KaxCluster>(*l1))
-        cluster = std::static_pointer_cast<KaxCluster>(l1);
+      else if (Is<libmatroska::KaxCluster>(*l1))
+        cluster = std::static_pointer_cast<libmatroska::KaxCluster>(l1);
 
       else
         l1->SkipData(*m_es, EBML_CONTEXT(l1));
@@ -1711,7 +1710,7 @@ kax_reader_c::read_headers_internal() {
     if (m_handled_l1_positions[dl1t_seek_head].empty() || debugging_c::requested("kax_reader_use_analyzer"))
       find_level1_elements_via_analyzer();
 
-    read_deferred_level1_elements(static_cast<KaxSegment &>(*l0));
+    read_deferred_level1_elements(static_cast<libmatroska::KaxSegment &>(*l0));
 
   } catch (...) {
     mxwarn(fmt::format("{0} {1} {2}\n",
@@ -1735,7 +1734,7 @@ kax_reader_c::process_global_tags() {
     return;
 
   for (auto tag : *m_tags)
-    add_tags(static_cast<KaxTag &>(*tag));
+    add_tags(static_cast<libmatroska::KaxTag &>(*tag));
 
   m_tags->RemoveAll();
 }
@@ -2350,14 +2349,14 @@ kax_reader_c::read_first_frames(kax_track_t *t,
       if (!cluster)
         return;
 
-      KaxClusterTimecode *ctc = static_cast<KaxClusterTimecode *> (cluster->FindFirstElt(EBML_INFO(KaxClusterTimecode), false));
+      auto ctc = static_cast<libmatroska::KaxClusterTimecode *> (cluster->FindFirstElt(EBML_INFO(libmatroska::KaxClusterTimecode), false));
       if (ctc)
         cluster->InitTimecode(ctc->GetValue(), m_tc_scale);
 
       size_t bgidx;
       for (bgidx = 0; bgidx < cluster->ListSize(); bgidx++) {
-        if (Is<KaxSimpleBlock>((*cluster)[bgidx])) {
-          KaxSimpleBlock *block_simple = static_cast<KaxSimpleBlock *>((*cluster)[bgidx]);
+        if (Is<libmatroska::KaxSimpleBlock>((*cluster)[bgidx])) {
+          libmatroska::KaxSimpleBlock *block_simple = static_cast<libmatroska::KaxSimpleBlock *>((*cluster)[bgidx]);
 
           block_simple->SetParent(*cluster);
           kax_track_t *block_track = find_track_by_num(block_simple->TrackNum());
@@ -2371,15 +2370,15 @@ kax_reader_c::read_first_frames(kax_track_t *t,
             if (frames_by_track_id[ block_simple->TrackNum() ] <= block_track->first_frames_data.size())
               continue;
 
-            DataBuffer &data_buffer = block_simple->GetBuffer(frame_idx);
+            auto &data_buffer = block_simple->GetBuffer(frame_idx);
             block_track->first_frames_data.push_back(memory_c::borrow(data_buffer.Buffer(), data_buffer.Size()));
             block_track->content_decoder.reverse(block_track->first_frames_data.back(), CONTENT_ENCODING_SCOPE_BLOCK);
             block_track->first_frames_data.back()->take_ownership();
           }
 
-        } else if (Is<KaxBlockGroup>((*cluster)[bgidx])) {
-          KaxBlockGroup *block_group = static_cast<KaxBlockGroup *>((*cluster)[bgidx]);
-          KaxBlock *block            = static_cast<KaxBlock *>(block_group->FindFirstElt(EBML_INFO(KaxBlock), false));
+        } else if (Is<libmatroska::KaxBlockGroup>((*cluster)[bgidx])) {
+          auto block_group = static_cast<libmatroska::KaxBlockGroup *>((*cluster)[bgidx]);
+          auto block       = static_cast<libmatroska::KaxBlock *>(block_group->FindFirstElt(EBML_INFO(libmatroska::KaxBlock), false));
 
           if (!block)
             continue;
@@ -2396,7 +2395,7 @@ kax_reader_c::read_first_frames(kax_track_t *t,
             if (frames_by_track_id[ block->TrackNum() ] <= block_track->first_frames_data.size())
               continue;
 
-            DataBuffer &data_buffer = block->GetBuffer(frame_idx);
+            auto &data_buffer = block->GetBuffer(frame_idx);
             block_track->first_frames_data.push_back(memory_cptr(memory_c::borrow(data_buffer.Buffer(), data_buffer.Size())));
             block_track->content_decoder.reverse(block_track->first_frames_data.back(), CONTENT_ENCODING_SCOPE_BLOCK);
             block_track->first_frames_data.back()->take_ownership();
@@ -2432,18 +2431,18 @@ kax_reader_c::read(generic_packetizer_c *requested_ptzr,
     if (!cluster)
       return finish_file();
 
-    auto cluster_ts = FindChildValue<KaxClusterTimecode>(*cluster);
+    auto cluster_ts = FindChildValue<libmatroska::KaxClusterTimecode>(*cluster);
     cluster->InitTimecode(cluster_ts, m_tc_scale);
 
     size_t bgidx;
     for (bgidx = 0; bgidx < cluster->ListSize(); bgidx++) {
-      EbmlElement *element = (*cluster)[bgidx];
+      libebml::EbmlElement *element = (*cluster)[bgidx];
 
-      if (Is<KaxSimpleBlock>(element))
-        process_simple_block(cluster.get(), static_cast<KaxSimpleBlock *>(element));
+      if (Is<libmatroska::KaxSimpleBlock>(element))
+        process_simple_block(cluster.get(), static_cast<libmatroska::KaxSimpleBlock *>(element));
 
-      else if (Is<KaxBlockGroup>(element))
-        process_block_group(cluster.get(), static_cast<KaxBlockGroup *>(element));
+      else if (Is<libmatroska::KaxBlockGroup>(element))
+        process_block_group(cluster.get(), static_cast<libmatroska::KaxBlockGroup *>(element));
     }
 
   } catch (...) {
@@ -2460,15 +2459,15 @@ file_status_e
 kax_reader_c::finish_file() {
   flush_packetizers();
 
-  m_in->setFilePointer(0, seek_end);
+  m_in->setFilePointer(0, libebml::seek_end);
   m_file_status = FILE_STATUS_DONE;
 
   return FILE_STATUS_DONE;
 }
 
 void
-kax_reader_c::process_simple_block(KaxCluster *cluster,
-                                   KaxSimpleBlock *block_simple) {
+kax_reader_c::process_simple_block(libmatroska::KaxCluster *cluster,
+                                   libmatroska::KaxSimpleBlock *block_simple) {
   int64_t block_duration = -1;
   int64_t block_bref     = VFT_IFRAME;
   int64_t block_fref     = VFT_NOBFRAME;
@@ -2515,8 +2514,8 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
     // and stuff. Just pass everything through as it is.
     size_t i;
     for (i = 0; block_simple->NumberFrames() > i; ++i) {
-      DataBuffer &data_buffer = block_simple->GetBuffer(i);
-      auto data = memory_c::borrow(data_buffer.Buffer(), data_buffer.Size());
+      auto &data_buffer = block_simple->GetBuffer(i);
+      auto data         = memory_c::borrow(data_buffer.Buffer(), data_buffer.Size());
       block_track->content_decoder.reverse(data, CONTENT_ENCODING_SCOPE_BLOCK);
 
       packet_cptr packet(new packet_t(data, m_last_timestamp + i * frame_duration, block_duration, block_bref, block_fref));
@@ -2529,8 +2528,8 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
   } else if (-1 != block_track->ptzr) {
     size_t i;
     for (i = 0; i < block_simple->NumberFrames(); i++) {
-      DataBuffer &data_buffer = block_simple->GetBuffer(i);
-      auto data = memory_c::borrow(data_buffer.Buffer(), data_buffer.Size());
+      auto &data_buffer = block_simple->GetBuffer(i);
+      auto data         = memory_c::borrow(data_buffer.Buffer(), data_buffer.Size());
       block_track->content_decoder.reverse(data, CONTENT_ENCODING_SCOPE_BLOCK);
 
       auto packet              = std::make_shared<packet_t>(data, m_last_timestamp + i * frame_duration, block_duration, block_bref, block_fref);
@@ -2546,12 +2545,12 @@ kax_reader_c::process_simple_block(KaxCluster *cluster,
 }
 
 void
-kax_reader_c::process_block_group_common(KaxBlockGroup *block_group,
+kax_reader_c::process_block_group_common(libmatroska::KaxBlockGroup *block_group,
                                          packet_t *packet,
                                          kax_track_t &block_track) {
-  auto codec_state     = FindChild<KaxCodecState>(block_group);
-  auto discard_padding = FindChild<KaxDiscardPadding>(block_group);
-  auto blockadd        = FindChild<KaxBlockAdditions>(block_group);
+  auto codec_state     = FindChild<libmatroska::KaxCodecState>(block_group);
+  auto discard_padding = FindChild<libmatroska::KaxDiscardPadding>(block_group);
+  auto blockadd        = FindChild<libmatroska::KaxBlockAdditions>(block_group);
 
   if (codec_state)
     packet->codec_state = memory_c::clone(codec_state->GetBuffer(), codec_state->GetSize());
@@ -2563,11 +2562,11 @@ kax_reader_c::process_block_group_common(KaxBlockGroup *block_group,
     return;
 
   for (auto &child : *blockadd) {
-    if (!(Is<KaxBlockMore>(child)))
+    if (!(Is<libmatroska::KaxBlockMore>(child)))
       continue;
 
-    auto blockmore  = static_cast<KaxBlockMore *>(child);
-    auto k_blockadd = FindChild<KaxBlockAdditional>(*blockmore);
+    auto blockmore  = static_cast<libmatroska::KaxBlockMore *>(child);
+    auto k_blockadd = FindChild<libmatroska::KaxBlockAdditional>(*blockmore);
 
     if (!k_blockadd)
       continue;
@@ -2576,7 +2575,7 @@ kax_reader_c::process_block_group_common(KaxBlockGroup *block_group,
 
     block_track.content_decoder.reverse(add.data, CONTENT_ENCODING_SCOPE_BLOCK);
 
-    auto k_blockadd_id = FindChild<KaxBlockAddID>(*blockmore);
+    auto k_blockadd_id = FindChild<libmatroska::KaxBlockAddID>(*blockmore);
     add.id             = k_blockadd_id ? k_blockadd_id->GetValue() : 1;
 
     packet->data_adds.push_back(add);
@@ -2587,9 +2586,9 @@ kax_reader_c::process_block_group_common(KaxBlockGroup *block_group,
 }
 
 void
-kax_reader_c::process_block_group(KaxCluster *cluster,
-                                  KaxBlockGroup *block_group) {
-  auto block = FindChild<KaxBlock>(block_group);
+kax_reader_c::process_block_group(libmatroska::KaxCluster *cluster,
+                                  libmatroska::KaxBlockGroup *block_group) {
+  auto block = FindChild<libmatroska::KaxBlock>(block_group);
   if (!block)
     return;
 
@@ -2605,7 +2604,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
     return;
   }
 
-  auto duration       = FindChild<KaxBlockDuration>(block_group);
+  auto duration       = FindChild<libmatroska::KaxBlockDuration>(block_group);
   auto block_duration = duration                      ? static_cast<int64_t>(duration->GetValue() * m_tc_scale / block->NumberFrames())
                       : block_track->default_duration ? block_track->default_duration
                       :                                 int64_t{-1};
@@ -2622,7 +2621,7 @@ kax_reader_c::process_block_group(KaxCluster *cluster,
   auto block_fref = int64_t{VFT_NOBFRAME};
   bool bref_found = false;
   bool fref_found = false;
-  auto ref_block  = FindChild<KaxReferenceBlock>(block_group);
+  auto ref_block  = FindChild<libmatroska::KaxReferenceBlock>(block_group);
 
   while (ref_block) {
     if (0 >= ref_block->GetValue()) {
@@ -2725,21 +2724,21 @@ kax_reader_c::determine_minimum_timestamps() {
       if (!cluster)
         break;
 
-      auto cluster_ts = FindChildValue<KaxClusterTimecode>(*cluster);
+      auto cluster_ts = FindChildValue<libmatroska::KaxClusterTimecode>(*cluster);
       cluster->InitTimecode(cluster_ts, m_tc_scale);
 
       for (auto const &element : *cluster) {
         uint64_t track_number{};
 
-        if (Is<KaxSimpleBlock>(element)) {
-          auto block = static_cast<KaxSimpleBlock *>(element);
+        if (Is<libmatroska::KaxSimpleBlock>(element)) {
+          auto block = static_cast<libmatroska::KaxSimpleBlock *>(element);
           block->SetParent(*cluster);
 
           last_timestamp = timestamp_c::ns(mtx::math::to_signed(block->GlobalTimecode()));
           track_number   = block->TrackNum();
 
-        } else if (Is<KaxBlockGroup>(element)) {
-          auto block = FindChild<KaxBlock>(static_cast<KaxBlockGroup *>(element));
+        } else if (Is<libmatroska::KaxBlockGroup>(element)) {
+          auto block = FindChild<libmatroska::KaxBlock>(static_cast<libmatroska::KaxBlockGroup *>(element));
           if (!block)
             continue;
 

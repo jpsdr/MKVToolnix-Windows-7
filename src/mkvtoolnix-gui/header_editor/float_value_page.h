@@ -16,7 +16,7 @@ public:
   double m_originalValue{};
 
 public:
-  FloatValuePage(Tab &parent, PageBase &topLevelPage, EbmlMaster &master, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
+  FloatValuePage(Tab &parent, PageBase &topLevelPage, libebml::EbmlMaster &master, libebml::EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
   virtual ~FloatValuePage();
 
   virtual QWidget *createInputControl() override;

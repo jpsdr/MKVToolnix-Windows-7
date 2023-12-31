@@ -32,8 +32,6 @@
 #include "common/strings/editing.h"
 #include "common/strings/formatting.h"
 
-using namespace libebml;
-
 std::unordered_map<std::string, std::string> debugging_c::ms_debugging_options;
 bool debugging_c::ms_send_to_logger = false;
 
@@ -190,19 +188,19 @@ ebml_dumper_c::ebml_dumper_c()
 }
 
 std::string
-ebml_dumper_c::to_string(EbmlElement const &element) {
-  return dynamic_cast<EbmlUInteger      const *>(&element) ? fmt::to_string(        static_cast<EbmlUInteger      const &>(element).GetValue())
-       : dynamic_cast<EbmlSInteger      const *>(&element) ? fmt::to_string(        static_cast<EbmlSInteger      const &>(element).GetValue())
-       : dynamic_cast<EbmlFloat         const *>(&element) ? fmt::format("{0:.9f}", static_cast<EbmlFloat         const &>(element).GetValue())
-       : dynamic_cast<EbmlUnicodeString const *>(&element) ?                        static_cast<EbmlUnicodeString const &>(element).GetValueUTF8()
-       : dynamic_cast<EbmlString        const *>(&element) ?                        static_cast<EbmlString        const &>(element).GetValue()
-       : dynamic_cast<EbmlDate          const *>(&element) ? fmt::to_string(        static_cast<EbmlDate          const &>(element).GetEpochDate())
-       :                                                     fmt::format("(type: {0} size: {1})",
-                                                                           dynamic_cast<EbmlBinary const *>(&element) ? "binary"
-                                                                         : dynamic_cast<EbmlMaster const *>(&element) ? "master"
-                                                                         : dynamic_cast<EbmlVoid   const *>(&element) ? "void"
-                                                                         :                                              "unknown",
-                                                                         element.GetSize());
+ebml_dumper_c::to_string(libebml::EbmlElement const &element) {
+  return dynamic_cast<libebml::EbmlUInteger      const *>(&element) ? fmt::to_string(        static_cast<libebml::EbmlUInteger      const &>(element).GetValue())
+       : dynamic_cast<libebml::EbmlSInteger      const *>(&element) ? fmt::to_string(        static_cast<libebml::EbmlSInteger      const &>(element).GetValue())
+       : dynamic_cast<libebml::EbmlFloat         const *>(&element) ? fmt::format("{0:.9f}", static_cast<libebml::EbmlFloat         const &>(element).GetValue())
+       : dynamic_cast<libebml::EbmlUnicodeString const *>(&element) ?                        static_cast<libebml::EbmlUnicodeString const &>(element).GetValueUTF8()
+       : dynamic_cast<libebml::EbmlString        const *>(&element) ?                        static_cast<libebml::EbmlString        const &>(element).GetValue()
+       : dynamic_cast<libebml::EbmlDate          const *>(&element) ? fmt::to_string(        static_cast<libebml::EbmlDate          const &>(element).GetEpochDate())
+       :                                                              fmt::format("(type: {0} size: {1})",
+                                                                                    dynamic_cast<libebml::EbmlBinary const *>(&element) ? "binary"
+                                                                                  : dynamic_cast<libebml::EbmlMaster const *>(&element) ? "master"
+                                                                                  : dynamic_cast<libebml::EbmlVoid   const *>(&element) ? "void"
+                                                                                  :                                                       "unknown",
+                                                                                  element.GetSize());
 }
 
 ebml_dumper_c &
@@ -238,7 +236,7 @@ ebml_dumper_c::target(target_type_e p_target_type,
 }
 
 ebml_dumper_c &
-ebml_dumper_c::dump(EbmlElement const *element) {
+ebml_dumper_c::dump(libebml::EbmlElement const *element) {
   dump_impl(element, 0, 0);
 
   switch (m_target_type) {
@@ -254,7 +252,7 @@ ebml_dumper_c::dump(EbmlElement const *element) {
 }
 
 void
-ebml_dumper_c::dump_impl(EbmlElement const *element,
+ebml_dumper_c::dump_impl(libebml::EbmlElement const *element,
                          size_t level,
                          size_t index) {
   if (level > m_max_level)
@@ -282,7 +280,7 @@ ebml_dumper_c::dump_impl(EbmlElement const *element,
 
   m_buffer << std::endl;
 
-  auto master = dynamic_cast<EbmlMaster const *>(element);
+  auto master = dynamic_cast<libebml::EbmlMaster const *>(element);
   if (!master)
     return;
 
@@ -306,7 +304,7 @@ ebml_dumper_c::dump_to_string(libebml::EbmlElement const *element,
 }
 
 void
-dump_ebml_elements(EbmlElement *element,
+dump_ebml_elements(libebml::EbmlElement *element,
                    bool with_values) {
   ebml_dumper_c{}.values(with_values).dump(element);
 }

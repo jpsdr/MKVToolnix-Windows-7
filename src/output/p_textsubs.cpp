@@ -27,8 +27,6 @@
 #include "merge/packet_extensions.h"
 #include "output/p_textsubs.h"
 
-using namespace libmatroska;
-
 textsubs_packetizer_c::textsubs_packetizer_c(generic_reader_c *p_reader,
                                              track_info_c &p_ti,
                                              const char *codec_id,

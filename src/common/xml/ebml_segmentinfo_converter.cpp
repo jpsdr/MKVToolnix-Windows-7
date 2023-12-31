@@ -19,8 +19,6 @@
 #include "common/strings/formatting.h"
 #include "common/xml/ebml_segmentinfo_converter.h"
 
-using namespace libmatroska;
-
 namespace mtx::xml {
 
 ebml_segmentinfo_converter_c::ebml_segmentinfo_converter_c()
@@ -57,7 +55,7 @@ ebml_segmentinfo_converter_c::setup_maps() {
 }
 
 void
-ebml_segmentinfo_converter_c::write_xml(KaxInfo &segmentinfo,
+ebml_segmentinfo_converter_c::write_xml(libmatroska::KaxInfo &segmentinfo,
                                         mm_io_c &out) {
   document_cptr doc(new pugi::xml_document);
 
@@ -79,7 +77,7 @@ ebml_segmentinfo_converter_c::parse_file(std::string const &file_name,
   auto parse = [&file_name]() -> auto {
     auto master = ebml_segmentinfo_converter_c{}.to_ebml(file_name, "Info");
     fix_mandatory_elements(master.get());
-    return std::dynamic_pointer_cast<KaxInfo>(master);
+    return std::dynamic_pointer_cast<libmatroska::KaxInfo>(master);
   };
 
   if (throw_on_error)

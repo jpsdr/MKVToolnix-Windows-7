@@ -21,8 +21,6 @@
 #include "merge/output_control.h"
 #include "output/p_pcm.h"
 
-using namespace libmatroska;
-
 pcm_packetizer_c::pcm_packetizer_c(generic_reader_c *p_reader,
                                    track_info_c &p_ti,
                                    int samples_per_sec,

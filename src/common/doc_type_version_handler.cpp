@@ -27,8 +27,6 @@
 #include "common/mm_io_x.h"
 #include "common/stereo_mode.h"
 
-using namespace libmatroska;
-
 namespace mtx {
 
 doc_type_version_handler_c::doc_type_version_handler_c()
@@ -40,8 +38,8 @@ doc_type_version_handler_c::doc_type_version_handler_c()
 doc_type_version_handler_c::~doc_type_version_handler_c() { // NOLINT(modernize-use-equals-default) Need to tell compiler where to put code for this function.
 }
 
-EbmlElement &
-doc_type_version_handler_c::render(EbmlElement &element,
+libebml::EbmlElement &
+doc_type_version_handler_c::render(libebml::EbmlElement &element,
                                    mm_io_c &file,
                                    bool with_default) {
   if (dynamic_cast<libebml::EbmlMaster *>(&element))
@@ -51,14 +49,14 @@ doc_type_version_handler_c::render(EbmlElement &element,
   return account(element, with_default);
 }
 
-EbmlElement &
-doc_type_version_handler_c::account(EbmlElement &element,
+libebml::EbmlElement &
+doc_type_version_handler_c::account(libebml::EbmlElement &element,
                                     bool with_default) {
   if (!with_default && element.IsDefaultValue())
     return element;
 
   auto p  = p_func();
-  auto id = EbmlId(element).GetValue();
+  auto id = libebml::EbmlId(element).GetValue();
 
   if (p->s_version_by_element[id] > p->version) {
     mxdebug_if(p->debug, fmt::format("account: bumping version from {0} to {1} due to ID 0x{2:x}\n", p->version, p->s_version_by_element[id], id));
@@ -70,15 +68,15 @@ doc_type_version_handler_c::account(EbmlElement &element,
     p->read_version = p->s_read_version_by_element[id];
   }
 
-  if (dynamic_cast<EbmlMaster *>(&element)) {
-    auto &master = static_cast<EbmlMaster &>(element);
+  if (dynamic_cast<libebml::EbmlMaster *>(&element)) {
+    auto &master = static_cast<libebml::EbmlMaster &>(element);
     for (auto child : master)
       account(*child);
 
-  } else if (dynamic_cast<KaxVideoStereoMode *>(&element)) {
-    auto value = static_cast<KaxVideoStereoMode &>(element).GetValue();
+  } else if (dynamic_cast<libmatroska::KaxVideoStereoMode *>(&element)) {
+    auto value = static_cast<libmatroska::KaxVideoStereoMode &>(element).GetValue();
     if (!mtx::included_in(static_cast<stereo_mode_c::mode>(value), stereo_mode_c::mono, stereo_mode_c::unspecified) && (p->version < 3)) {
-      mxdebug_if(p->debug, fmt::format("account: bumping version from {0} to 3 due to KaxVideoStereoMode value {1}\n", p->version, value));
+      mxdebug_if(p->debug, fmt::format("account: bumping version from {0} to 3 due to libmatroska::KaxVideoStereoMode value {1}\n", p->version, value));
       p->version = 3;
     }
   }
@@ -105,23 +103,23 @@ doc_type_version_handler_c::do_update_ebml_head(mm_io_c &file) {
 
   try {
     file.setFilePointer(0);
-    auto stream = std::make_shared<EbmlStream>(file);
-    auto head   = std::shared_ptr<EbmlHead>(static_cast<EbmlHead *>(stream->FindNextID(EBML_INFO(EbmlHead), 0xFFFFFFFFL)));
+    auto stream = std::make_shared<libebml::EbmlStream>(file);
+    auto head   = std::shared_ptr<libebml::EbmlHead>(static_cast<libebml::EbmlHead *>(stream->FindNextID(EBML_INFO(libebml::EbmlHead), 0xFFFFFFFFL)));
 
     if (!head)
       return update_result_e::err_no_head_found;
 
-    EbmlElement *l0{};
+    libebml::EbmlElement *l0{};
     int upper_lvl_el{};
     auto &context = EBML_CONTEXT(head.get());
 
-    head->Read(*stream, context, upper_lvl_el, l0, true, SCOPE_ALL_DATA);
+    head->Read(*stream, context, upper_lvl_el, l0, true, libebml::SCOPE_ALL_DATA);
     head->SkipData(*stream, context);
 
     auto old_size          = file.getFilePointer() - head->GetElementPosition();
-    auto &dt_version       = GetChild<EDocTypeVersion>(*head);
+    auto &dt_version       = GetChild<libebml::EDocTypeVersion>(*head);
     auto file_version      = dt_version.GetValue();
-    auto &dt_read_version  = GetChild<EDocTypeReadVersion>(*head);
+    auto &dt_read_version  = GetChild<libebml::EDocTypeReadVersion>(*head);
     auto file_read_version = dt_read_version.GetValue();
     auto changed           = false;
 
@@ -160,7 +158,7 @@ doc_type_version_handler_c::do_update_ebml_head(mm_io_c &file) {
       head->SetSizeLength(head->GetSizeLength() + 1);
 
     else if (diff > 1) {
-      auto v = new EbmlVoid;
+      auto v = new libebml::EbmlVoid;
       v->SetSize(diff - 2);
       head->PushElement(*v);
       new_size = head->UpdateSize(render_should_write_arg(true));

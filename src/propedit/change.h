@@ -38,7 +38,7 @@ public:
   mtx::bits::value_c m_x_value;
   double m_fp_value;
 
-  EbmlMaster *m_master, *m_sub_sub_master, *m_sub_sub_sub_master;
+  libebml::EbmlMaster *m_master, *m_sub_sub_master, *m_sub_sub_sub_master;
 
 public:
   change_c(change_type_e type, const std::string &name, const std::string &value);
@@ -50,7 +50,7 @@ public:
 
   std::string get_spec();
 
-  void execute(EbmlMaster *master, EbmlMaster *sub_master);
+  void execute(libebml::EbmlMaster *master, libebml::EbmlMaster *sub_master);
 
 public:
   static std::vector<change_cptr> parse_spec(change_type_e type, std::string const &spec);
@@ -74,7 +74,7 @@ protected:
 
   void validate_deletion_of_mandatory();
 
-  const EbmlSemantic *get_semantic();
+  const libebml::EbmlSemantic *get_semantic();
 
   void record_track_uid_changes(std::size_t idx);
 };

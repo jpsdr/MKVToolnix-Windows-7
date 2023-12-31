@@ -14,8 +14,6 @@
 #include "common/kax_analyzer.h"
 #include "propedit/chapter_target.h"
 
-using namespace libmatroska;
-
 chapter_target_c::chapter_target_c()
   : target_c()
 {

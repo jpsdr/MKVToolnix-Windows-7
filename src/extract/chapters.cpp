@@ -30,13 +30,13 @@
 #include "common/xml/ebml_chapters_converter.h"
 #include "extract/mkvextract.h"
 
-using namespace libmatroska;
+
 
 bool
 extract_chapters(kax_analyzer_c &analyzer,
                  options_c::mode_options_c &options) {
-  auto element  = analyzer.read_all(EBML_INFO(KaxChapters));
-  auto chapters = dynamic_cast<KaxChapters *>(element.get());
+  auto element  = analyzer.read_all(EBML_INFO(libmatroska::KaxChapters));
+  auto chapters = dynamic_cast<libmatroska::KaxChapters *>(element.get());
 
   if (!chapters)
     return true;

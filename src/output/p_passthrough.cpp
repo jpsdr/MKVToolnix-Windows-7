@@ -16,8 +16,6 @@
 #include "merge/connection_checks.h"
 #include "output/p_passthrough.h"
 
-using namespace libmatroska;
-
 passthrough_packetizer_c::passthrough_packetizer_c(generic_reader_c *p_reader,
                                                    track_info_c &p_ti,
                                                    track_type type)

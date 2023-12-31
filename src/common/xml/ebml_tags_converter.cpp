@@ -19,7 +19,7 @@
 #include "common/strings/formatting.h"
 #include "common/xml/ebml_tags_converter.h"
 
-using namespace libmatroska;
+
 
 namespace mtx::xml {
 
@@ -58,7 +58,7 @@ ebml_tags_converter_c::setup_maps() {
 }
 
 void
-ebml_tags_converter_c::write_xml(KaxTags &tags,
+ebml_tags_converter_c::write_xml(libmatroska::KaxTags &tags,
                                  mm_io_c &out) {
   document_cptr doc(new pugi::xml_document);
 
@@ -75,24 +75,24 @@ ebml_tags_converter_c::write_xml(KaxTags &tags,
 }
 
 void
-ebml_tags_converter_c::fix_ebml(EbmlMaster &root)
+ebml_tags_converter_c::fix_ebml(libebml::EbmlMaster &root)
   const {
   for (auto child : root)
-    if (dynamic_cast<KaxTag *>(child))
-      fix_tag(*static_cast<KaxTag *>(child));
+    if (dynamic_cast<libmatroska::KaxTag *>(child))
+      fix_tag(*static_cast<libmatroska::KaxTag *>(child));
 }
 
 void
-ebml_tags_converter_c::fix_tag(KaxTag &tag)
+ebml_tags_converter_c::fix_tag(libmatroska::KaxTag &tag)
   const {
   auto have_simple_tag = false;
 
   for (auto child : tag) {
-    if (dynamic_cast<KaxTag *>(child))
-      fix_tag(*static_cast<KaxTag *>(child));
+    if (dynamic_cast<libmatroska::KaxTag *>(child))
+      fix_tag(*static_cast<libmatroska::KaxTag *>(child));
 
-    else if (dynamic_cast<KaxTagSimple *>(child)) {
-      fix_simple_tag(*static_cast<KaxTagSimple *>(child));
+    else if (dynamic_cast<libmatroska::KaxTagSimple *>(child)) {
+      fix_simple_tag(*static_cast<libmatroska::KaxTagSimple *>(child));
       have_simple_tag = true;
     }
   }
@@ -102,20 +102,20 @@ ebml_tags_converter_c::fix_tag(KaxTag &tag)
 }
 
 void
-ebml_tags_converter_c::fix_simple_tag(KaxTagSimple &simple_tag)
+ebml_tags_converter_c::fix_simple_tag(libmatroska::KaxTagSimple &simple_tag)
   const {
-  if (!FindChild<KaxTagName>(simple_tag))
+  if (!FindChild<libmatroska::KaxTagName>(simple_tag))
     throw conversion_x{ Y("<Simple> is missing the <Name> child.") };
 
-  auto string = FindChild<KaxTagString>(simple_tag);
-  auto binary = FindChild<KaxTagBinary>(simple_tag);
+  auto string = FindChild<libmatroska::KaxTagString>(simple_tag);
+  auto binary = FindChild<libmatroska::KaxTagBinary>(simple_tag);
   if (string && binary)
     throw conversion_x{ Y("Only one of <String> and <Binary> may be used beneath <Simple> but not both at the same time.") };
-  if (!string && !binary && !FindChild<KaxTagSimple>(simple_tag))
+  if (!string && !binary && !FindChild<libmatroska::KaxTagSimple>(simple_tag))
     throw conversion_x{ Y("<Simple> must contain either a <String> or a <Binary> child.") };
 
-  auto tlanguage_ietf  = FindChild<KaxTagLanguageIETF>(simple_tag);
-  auto tlanguage       = FindChild<KaxTagLangue>(simple_tag);
+  auto tlanguage_ietf  = FindChild<libmatroska::KaxTagLanguageIETF>(simple_tag);
+  auto tlanguage       = FindChild<libmatroska::KaxTagLangue>(simple_tag);
   auto value_to_parse  = tlanguage_ietf ? tlanguage_ietf->GetValue()
                        : tlanguage      ? tlanguage->GetValue()
                        :                  "und"s;
@@ -125,7 +125,7 @@ ebml_tags_converter_c::fix_simple_tag(KaxTagSimple &simple_tag)
     throw conversion_x{fmt::format(Y("'{0}' is not a valid IETF BCP 47/RFC 5646 language tag. Additional information from the parser: {1}"), value_to_parse, parsed_language.get_error())};
 
   if (!tlanguage_ietf && !mtx::bcp47::language_c::is_disabled()) {
-    tlanguage_ietf = new KaxTagLanguageIETF;
+    tlanguage_ietf = new libmatroska::KaxTagLanguageIETF;
     simple_tag.PushElement(*tlanguage_ietf);
   }
 
@@ -133,20 +133,20 @@ ebml_tags_converter_c::fix_simple_tag(KaxTagSimple &simple_tag)
     tlanguage_ietf->SetValue(parsed_language.format());
 
   if (!tlanguage) {
-    tlanguage = new KaxTagLangue;
+    tlanguage = new libmatroska::KaxTagLangue;
     simple_tag.PushElement(*tlanguage);
   }
 
   tlanguage->SetValue(parsed_language.get_closest_iso639_2_alpha_3_code());
 }
 
-std::shared_ptr<KaxTags>
+std::shared_ptr<libmatroska::KaxTags>
 ebml_tags_converter_c::parse_file(std::string const &file_name,
                                   bool throw_on_error) {
   auto parse = [&file_name]() -> auto {
     auto master = ebml_tags_converter_c{}.to_ebml(file_name, "Tags");
-    fix_mandatory_elements(static_cast<KaxTags *>(master.get()));
-    return std::dynamic_pointer_cast<KaxTags>(master);
+    fix_mandatory_elements(static_cast<libmatroska::KaxTags *>(master.get()));
+    return std::dynamic_pointer_cast<libmatroska::KaxTags>(master);
   };
 
   if (throw_on_error)

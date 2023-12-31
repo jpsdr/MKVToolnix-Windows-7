@@ -32,7 +32,7 @@ set_usage() {
                              "\n"
                              "  encode - Read from <input>, encode to Base64 and write to <output>.\n"
                              "           Max line length can be specified and is 72 if left out.\n"
-                             "  decode - Read from <input>, decode to binary and write to <output>.\n");
+                             "  decode - Read from <input>, decode to uint8_t and write to <output>.\n");
 }
 
 int

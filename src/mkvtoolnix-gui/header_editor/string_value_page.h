@@ -16,7 +16,7 @@ public:
   QString m_originalValue;
 
 public:
-  StringValuePage(Tab &parent, PageBase &topLevelPage, EbmlMaster &master, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
+  StringValuePage(Tab &parent, PageBase &topLevelPage, libebml::EbmlMaster &master, libebml::EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
   virtual ~StringValuePage();
 
   virtual QWidget *createInputControl() override;

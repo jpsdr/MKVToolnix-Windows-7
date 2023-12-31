@@ -20,8 +20,6 @@
 #include "common/endian.h"
 #include "common/strings/formatting.h"
 
-using namespace libmatroska;
-
 static const char *compression_methods[] = {
   "unspecified", "zlib", "header_removal", "mpeg4_p2", "mpeg4_p10", "dirac", "dts", "ac3", "mp3", "analyze_header_removal", "none"
 };
@@ -50,9 +48,9 @@ compressor_c::~compressor_c() {
 }
 
 void
-compressor_c::set_track_headers(KaxContentEncoding &c_encoding) {
+compressor_c::set_track_headers(libmatroska::KaxContentEncoding &c_encoding) {
   // Set compression method.
-  GetChild<KaxContentCompAlgo>(GetChild<KaxContentCompression>(c_encoding)).SetValue(compression_method_map[method]);
+  GetChild<libmatroska::KaxContentCompAlgo>(GetChild<libmatroska::KaxContentCompression>(c_encoding)).SetValue(compression_method_map[method]);
 }
 
 compressor_ptr

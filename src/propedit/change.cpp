@@ -221,8 +221,8 @@ change_c::parse_date_time() {
 }
 
 void
-change_c::execute(EbmlMaster *master,
-                  EbmlMaster *sub_master) {
+change_c::execute(libebml::EbmlMaster *master,
+                  libebml::EbmlMaster *sub_master) {
   m_master = m_property.m_sub_sub_sub_master_callbacks ? m_sub_sub_sub_master
            : m_property.m_sub_sub_master_callbacks     ? m_sub_sub_master
            : m_property.m_sub_master_callbacks         ? sub_master
@@ -242,7 +242,7 @@ change_c::execute_delete() {
   size_t idx               = 0;
   unsigned int num_deleted = 0;
   while (m_master->ListSize() > idx) {
-    if (m_property.m_callbacks->ClassId() == EbmlId(*(*m_master)[idx])) {
+    if (m_property.m_callbacks->ClassId() == libebml::EbmlId(*(*m_master)[idx])) {
       delete (*m_master)[idx];
       m_master->Remove(idx);
       ++num_deleted;
@@ -259,7 +259,7 @@ change_c::record_track_uid_changes(std::size_t idx) {
   if (m_property.m_callbacks->ClassId() != EBML_ID(libmatroska::KaxTrackUID))
     return;
 
-  auto current_uid = static_cast<EbmlUInteger *>((*m_master)[idx])->GetValue();
+  auto current_uid = static_cast<libebml::EbmlUInteger *>((*m_master)[idx])->GetValue();
   if (current_uid != m_ui_value)
     g_track_uid_changes[current_uid] = m_ui_value;
 }
@@ -269,7 +269,7 @@ change_c::execute_add_or_set() {
   size_t idx;
   unsigned int num_found = 0;
   for (idx = 0; m_master->ListSize() > idx; ++idx) {
-    if (m_property.m_callbacks->ClassId() != EbmlId(*(*m_master)[idx]))
+    if (m_property.m_callbacks->ClassId() != libebml::EbmlId(*(*m_master)[idx]))
       continue;
 
     if (change_c::ct_set == m_type) {
@@ -293,7 +293,7 @@ change_c::execute_add_or_set() {
     return;
   }
 
-  const EbmlSemantic *semantic = get_semantic();
+  const libebml::EbmlSemantic *semantic = get_semantic();
   if (semantic && semantic->IsUnique())
     mxerror(fmt::format(Y("This property is unique. More instances cannot be added in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
 
@@ -311,17 +311,17 @@ change_c::do_add_element() {
 
 void
 change_c::set_element_at(int idx) {
-  EbmlElement *e = (*m_master)[idx];
+  libebml::EbmlElement *e = (*m_master)[idx];
 
   switch (m_property.m_type) {
-    case property_element_c::EBMLT_STRING:  static_cast<EbmlString        *>(e)->SetValue(m_s_value);                                 break;
-    case property_element_c::EBMLT_USTRING: static_cast<EbmlUnicodeString *>(e)->SetValueUTF8(m_s_value);                             break;
-    case property_element_c::EBMLT_UINT:    static_cast<EbmlUInteger      *>(e)->SetValue(m_ui_value);                                break;
-    case property_element_c::EBMLT_INT:     static_cast<EbmlSInteger      *>(e)->SetValue(m_si_value);                                break;
-    case property_element_c::EBMLT_BOOL:    static_cast<EbmlUInteger      *>(e)->SetValue(m_b_value ? 1 : 0);                         break;
-    case property_element_c::EBMLT_FLOAT:   static_cast<EbmlFloat         *>(e)->SetValue(m_fp_value);                                break;
-    case property_element_c::EBMLT_BINARY:  static_cast<EbmlBinary        *>(e)->CopyBuffer(m_x_value.data(), m_x_value.byte_size()); break;
-    case property_element_c::EBMLT_DATE:    static_cast<EbmlDate          *>(e)->SetEpochDate(m_ui_value);                            break;
+    case property_element_c::EBMLT_STRING:  static_cast<libebml::EbmlString        *>(e)->SetValue(m_s_value);                                 break;
+    case property_element_c::EBMLT_USTRING: static_cast<libebml::EbmlUnicodeString *>(e)->SetValueUTF8(m_s_value);                             break;
+    case property_element_c::EBMLT_UINT:    static_cast<libebml::EbmlUInteger      *>(e)->SetValue(m_ui_value);                                break;
+    case property_element_c::EBMLT_INT:     static_cast<libebml::EbmlSInteger      *>(e)->SetValue(m_si_value);                                break;
+    case property_element_c::EBMLT_BOOL:    static_cast<libebml::EbmlUInteger      *>(e)->SetValue(m_b_value ? 1 : 0);                         break;
+    case property_element_c::EBMLT_FLOAT:   static_cast<libebml::EbmlFloat         *>(e)->SetValue(m_fp_value);                                break;
+    case property_element_c::EBMLT_BINARY:  static_cast<libebml::EbmlBinary        *>(e)->CopyBuffer(m_x_value.data(), m_x_value.byte_size()); break;
+    case property_element_c::EBMLT_DATE:    static_cast<libebml::EbmlDate          *>(e)->SetEpochDate(m_ui_value);                            break;
     default:                                assert(false);
   }
 }
@@ -331,18 +331,18 @@ change_c::validate_deletion_of_mandatory() {
   if (m_sub_sub_master)
     return;
 
-  const EbmlSemantic *semantic = get_semantic();
+  const libebml::EbmlSemantic *semantic = get_semantic();
 
   if (!semantic || !semantic->IsMandatory())
     return;
 
-  std::unique_ptr<EbmlElement> elt(&semantic->Create());
+  std::unique_ptr<libebml::EbmlElement> elt(&semantic->Create());
 
   if (!has_default_value(*elt))
     mxerror(fmt::format(Y("This property is mandatory and cannot be deleted in '{0}'. {1}\n"), get_spec(), Y("The file has not been modified.")));
 }
 
-const EbmlSemantic *
+const libebml::EbmlSemantic *
 change_c::get_semantic() {
   return find_ebml_semantic(EBML_INFO(libmatroska::KaxSegment), m_property.m_callbacks->ClassId());
 }

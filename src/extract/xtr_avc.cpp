@@ -15,8 +15,8 @@
 #include "common/list_utils.h"
 #include "extract/xtr_avc.h"
 
-binary const xtr_avc_c::ms_start_code[4] = { 0x00, 0x00, 0x00, 0x01 };
-binary const xtr_avc_c::ms_aud_nalu[2]   = { 0x09, 0xf0 };
+uint8_t const xtr_avc_c::ms_start_code[4] = { 0x00, 0x00, 0x00, 0x01 };
+uint8_t const xtr_avc_c::ms_aud_nalu[2]   = { 0x09, 0xf0 };
 
 xtr_avc_c::xtr_avc_c(const std::string &codec_id,
                      int64_t tid,
@@ -27,7 +27,7 @@ xtr_avc_c::xtr_avc_c(const std::string &codec_id,
 }
 
 bool
-xtr_avc_c::write_nal(binary *data,
+xtr_avc_c::write_nal(uint8_t *data,
                      size_t &pos,
                      size_t data_size,
                      size_t write_nal_size_size) {
@@ -133,12 +133,12 @@ xtr_avc_c::create_file(xtr_base_c *master,
   if (!priv)
     mxerror(fmt::format(Y("Track {0} with the CodecID '{1}' is missing the \"codec private\" element and cannot be extracted.\n"), m_tid, m_codec_id));
 
-  memory_cptr mpriv = decode_codec_private(priv);
+  auto mpriv = decode_codec_private(priv);
 
   if (mpriv->get_size() < 6)
     mxerror(fmt::format(Y("Track {0} CodecPrivate is too small.\n"), m_tid));
 
-  binary *buf     = mpriv->get_buffer();
+  auto buf        = mpriv->get_buffer();
   m_nal_size_size = 1 + (buf[4] & 3);
 
   size_t pos          = 6;
@@ -166,7 +166,7 @@ xtr_avc_c::create_file(xtr_base_c *master,
 }
 
 nal_unit_list_t
-xtr_avc_c::find_nal_units(binary *buf,
+xtr_avc_c::find_nal_units(uint8_t *buf,
                           std::size_t frame_size)
   const {
   auto list = nal_unit_list_t{};
@@ -186,8 +186,8 @@ xtr_avc_c::find_nal_units(binary *buf,
 
 void
 xtr_avc_c::handle_frame(xtr_frame_t &f) {
-  size_t pos  = 0;
-  binary *buf = (binary *)f.frame->get_buffer();
+  size_t pos = 0;
+  auto buf   = f.frame->get_buffer();
 
   mxdebug_if(m_debug_access_unit_delimiters, "handle_frame() start\n");
 

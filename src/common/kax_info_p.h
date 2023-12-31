@@ -35,11 +35,11 @@ public:
   std::vector<std::shared_ptr<track_t>> m_tracks;
   std::unordered_map<unsigned int, std::shared_ptr<track_t>> m_tracks_by_number;
   std::unordered_map<unsigned int, track_info_t> m_track_info;
-  std::vector<std::shared_ptr<EbmlElement>> m_retained_elements;
-  std::unordered_map<EbmlElement *, std::shared_ptr<track_t>> m_track_by_element;
+  std::vector<std::shared_ptr<libebml::EbmlElement>> m_retained_elements;
+  std::unordered_map<libebml::EbmlElement *, std::shared_ptr<track_t>> m_track_by_element;
   uint64_t m_ts_scale{TIMESTAMP_SCALE}, m_file_size{};
   std::size_t m_mkvmerge_track_id{};
-  std::shared_ptr<EbmlStream> m_es;
+  std::shared_ptr<libebml::EbmlStream> m_es;
   mm_io_cptr m_in, m_out{g_mm_stdio};
   std::string m_source_file_name, m_destination_file_name;
   int m_level{};
@@ -59,9 +59,9 @@ public:
 
   bool m_abort{};
 
-  std::unordered_map<uint32_t, std::function<std::string(EbmlElement &)>> m_custom_element_value_formatters;
-  std::unordered_map<uint32_t, std::function<bool(EbmlElement &)>> m_custom_element_pre_processors;
-  std::unordered_map<uint32_t, std::function<void(EbmlElement &)>> m_custom_element_post_processors;
+  std::unordered_map<uint32_t, std::function<std::string(libebml::EbmlElement &)>> m_custom_element_value_formatters;
+  std::unordered_map<uint32_t, std::function<bool(libebml::EbmlElement &)>> m_custom_element_pre_processors;
+  std::unordered_map<uint32_t, std::function<void(libebml::EbmlElement &)>> m_custom_element_post_processors;
 
 public:
   private_c() = default;

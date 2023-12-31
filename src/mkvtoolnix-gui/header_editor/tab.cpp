@@ -52,7 +52,6 @@
 #include "mkvtoolnix-gui/util/tree.h"
 #include "mkvtoolnix-gui/util/widget.h"
 
-using namespace libmatroska;
 using namespace mtx::gui;
 
 namespace mtx::gui::HeaderEditor {
@@ -238,13 +237,13 @@ Tab::save() {
     }
 
     if (ok && attachmentsModified) {
-      auto attachments = std::make_shared<KaxAttachments>();
+      auto attachments = std::make_shared<libmatroska::KaxAttachments>();
 
       for (auto const &attachedFilePage : m_attachmentsPage->m_children)
         attachments->PushElement(*dynamic_cast<AttachedFilePage &>(*attachedFilePage).m_attachment.get());
 
       auto result = attachments->ListSize() ? m_analyzer->update_element(attachments.get(), true)
-                  :                           m_analyzer->remove_elements(EBML_ID(KaxAttachments));
+                  :                           m_analyzer->remove_elements(EBML_ID(libmatroska::KaxAttachments));
 
       attachments->RemoveAll();
 
@@ -408,11 +407,11 @@ Tab::setupToolTips() {
 
 void
 Tab::populateTree() {
-  m_analyzer->with_elements(EBML_ID(KaxInfo), [this](kax_analyzer_data_c const &data) {
+  m_analyzer->with_elements(EBML_ID(libmatroska::KaxInfo), [this](kax_analyzer_data_c const &data) {
     handleSegmentInfo(data);
   });
 
-  m_analyzer->with_elements(EBML_ID(KaxTracks), [this](kax_analyzer_data_c const &data) {
+  m_analyzer->with_elements(EBML_ID(libmatroska::KaxTracks), [this](kax_analyzer_data_c const &data) {
     handleTracks(data);
   });
 
@@ -473,18 +472,18 @@ Tab::hasBeenModified() {
 
 void
 Tab::pruneEmptyMastersForTrack(TrackTypePage &page) {
-  auto trackType = FindChildValue<KaxTrackType>(page.m_master);
+  auto trackType = FindChildValue<libmatroska::KaxTrackType>(page.m_master);
 
   if (!mtx::included_in(trackType, track_video, track_audio))
     return;
 
-  std::unordered_map<EbmlMaster *, bool> handled;
+  std::unordered_map<libebml::EbmlMaster *, bool> handled;
 
   if (trackType == track_video) {
-    auto trackVideo           = &GetChildEmptyIfNew<KaxTrackVideo>(page.m_master);
-    auto videoColor           = &GetChildEmptyIfNew<KaxVideoColour>(trackVideo);
-    auto videoColorMasterMeta = &GetChildEmptyIfNew<KaxVideoColourMasterMeta>(videoColor);
-    auto videoProjection      = &GetChildEmptyIfNew<KaxVideoProjection>(trackVideo);
+    auto trackVideo           = &GetChildEmptyIfNew<libmatroska::KaxTrackVideo>(page.m_master);
+    auto videoColor           = &GetChildEmptyIfNew<libmatroska::KaxVideoColour>(trackVideo);
+    auto videoColorMasterMeta = &GetChildEmptyIfNew<libmatroska::KaxVideoColourMasterMeta>(videoColor);
+    auto videoProjection      = &GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(trackVideo);
 
     remove_master_from_parent_if_empty_or_only_defaults(videoColor,     videoColorMasterMeta, handled);
     remove_master_from_parent_if_empty_or_only_defaults(trackVideo,     videoColor,           handled);
@@ -493,7 +492,7 @@ Tab::pruneEmptyMastersForTrack(TrackTypePage &page) {
 
   } else
     // trackType is track_audio
-    remove_master_from_parent_if_empty_or_only_defaults(&page.m_master, &GetChildEmptyIfNew<KaxTrackAudio>(page.m_master), handled);
+    remove_master_from_parent_if_empty_or_only_defaults(&page.m_master, &GetChildEmptyIfNew<libmatroska::KaxTrackAudio>(page.m_master), handled);
 }
 
 void
@@ -513,7 +512,7 @@ Tab::determineTrackUIDChanges() {
       if (!uiValuePage)
         continue;
 
-      if (uiValuePage->m_callbacks.ClassId() != EBML_ID(KaxTrackUID))
+      if (uiValuePage->m_callbacks.ClassId() != EBML_ID(libmatroska::KaxTrackUID))
         continue;
 
       if (uiValuePage->m_cbAddOrRemove->isChecked())
@@ -548,14 +547,14 @@ Tab::doModifications() {
 
 ValuePage *
 Tab::createValuePage(TopLevelPage &parentPage,
-                     EbmlMaster &parentMaster,
+                     libebml::EbmlMaster &parentMaster,
                      property_element_c const &element) {
   ValuePage *page{};
   auto const type = element.m_type;
 
-  page = element.m_callbacks == &EBML_INFO(KaxTrackLanguage)      ? new LanguageValuePage{       *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
-       : element.m_callbacks == &EBML_INFO(KaxLanguageIETF)       ? new LanguageIETFValuePage{   *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
-       : element.m_callbacks == &EBML_INFO(KaxTrackName)          ? new TrackNamePage{           *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
+  page = element.m_callbacks == &EBML_INFO(libmatroska::KaxTrackLanguage)      ? new LanguageValuePage{       *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
+       : element.m_callbacks == &EBML_INFO(libmatroska::KaxLanguageIETF)       ? new LanguageIETFValuePage{   *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
+       : element.m_callbacks == &EBML_INFO(libmatroska::KaxTrackName)          ? new TrackNamePage{           *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
        : type                == property_element_c::EBMLT_BOOL    ? new BoolValuePage{           *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
        : type                == property_element_c::EBMLT_BINARY  ? new BitValuePage{            *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description, element.m_bit_length}
        : type                == property_element_c::EBMLT_FLOAT   ? new FloatValuePage{          *this, parentPage, parentMaster, *element.m_callbacks, element.m_title, element.m_description}
@@ -581,12 +580,12 @@ Tab::handleSegmentInfo(kax_analyzer_data_c const &data) {
   if (!m_eSegmentInfo)
     return;
 
-  auto &info = dynamic_cast<KaxInfo &>(*m_eSegmentInfo.get());
+  auto &info = dynamic_cast<libmatroska::KaxInfo &>(*m_eSegmentInfo.get());
   auto page  = new TopLevelPage{*this, YT("Segment information")};
   page->setInternalIdentifier("segmentInfo");
   page->init();
 
-  auto &propertyElements = property_element_c::get_table_for(EBML_INFO(KaxInfo), nullptr, true);
+  auto &propertyElements = property_element_c::get_table_for(EBML_INFO(libmatroska::KaxInfo), nullptr, true);
   for (auto const &element : propertyElements)
     createValuePage(*page, info, element);
 
@@ -600,14 +599,14 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
     return;
 
   auto trackIdxMkvmerge  = 0u;
-  auto &propertyElements = property_element_c::get_table_for(EBML_INFO(KaxTracks), nullptr, true);
+  auto &propertyElements = property_element_c::get_table_for(EBML_INFO(libmatroska::KaxTracks), nullptr, true);
 
-  for (auto const &element : dynamic_cast<EbmlMaster &>(*m_eTracks)) {
-    auto kTrackEntry = dynamic_cast<KaxTrackEntry *>(element);
+  for (auto const &element : dynamic_cast<libebml::EbmlMaster &>(*m_eTracks)) {
+    auto kTrackEntry = dynamic_cast<libmatroska::KaxTrackEntry *>(element);
     if (!kTrackEntry)
       continue;
 
-    auto kTrackType = FindChild<KaxTrackType>(kTrackEntry);
+    auto kTrackType = FindChild<libmatroska::KaxTrackType>(kTrackEntry);
     if (!kTrackType)
       continue;
 
@@ -615,8 +614,8 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
     auto page      = new TrackTypePage{*this, *kTrackEntry, trackIdxMkvmerge++};
     page->init();
 
-    QHash<EbmlCallbacks const *, EbmlMaster *> parentMastersByCallback;
-    QHash<EbmlCallbacks const *, TopLevelPage *> parentPagesByCallback;
+    QHash<libebml::EbmlCallbacks const *, libebml::EbmlMaster *> parentMastersByCallback;
+    QHash<libebml::EbmlCallbacks const *, TopLevelPage *> parentPagesByCallback;
 
     parentMastersByCallback[nullptr] = kTrackEntry;
     parentPagesByCallback[nullptr]   = page;
@@ -637,19 +636,19 @@ Tab::handleTracks(kax_analyzer_data_c const &data) {
       projectionPage->setParentPage(*page);
       projectionPage->init();
 
-      parentMastersByCallback[&EBML_INFO(KaxTrackVideo)]            = &GetChildEmptyIfNew<KaxTrackVideo>(kTrackEntry);
-      parentMastersByCallback[&EBML_INFO(KaxVideoColour)]           = &GetChildEmptyIfNew<KaxVideoColour>(parentMastersByCallback[&EBML_INFO(KaxTrackVideo)]);
-      parentMastersByCallback[&EBML_INFO(KaxVideoColourMasterMeta)] = &GetChildEmptyIfNew<KaxVideoColourMasterMeta>(parentMastersByCallback[&EBML_INFO(KaxVideoColour)]);
-      parentMastersByCallback[&EBML_INFO(KaxVideoProjection)]       = &GetChildEmptyIfNew<KaxVideoProjection>(parentMastersByCallback[&EBML_INFO(KaxTrackVideo)]);
+      parentMastersByCallback[&EBML_INFO(libmatroska::KaxTrackVideo)]            = &GetChildEmptyIfNew<libmatroska::KaxTrackVideo>(kTrackEntry);
+      parentMastersByCallback[&EBML_INFO(libmatroska::KaxVideoColour)]           = &GetChildEmptyIfNew<libmatroska::KaxVideoColour>(parentMastersByCallback[&EBML_INFO(libmatroska::KaxTrackVideo)]);
+      parentMastersByCallback[&EBML_INFO(libmatroska::KaxVideoColourMasterMeta)] = &GetChildEmptyIfNew<libmatroska::KaxVideoColourMasterMeta>(parentMastersByCallback[&EBML_INFO(libmatroska::KaxVideoColour)]);
+      parentMastersByCallback[&EBML_INFO(libmatroska::KaxVideoProjection)]       = &GetChildEmptyIfNew<libmatroska::KaxVideoProjection>(parentMastersByCallback[&EBML_INFO(libmatroska::KaxTrackVideo)]);
 
-      parentPagesByCallback[&EBML_INFO(KaxTrackVideo)]              = page;
-      parentPagesByCallback[&EBML_INFO(KaxVideoColour)]             = colorPage;
-      parentPagesByCallback[&EBML_INFO(KaxVideoColourMasterMeta)]   = colorMasterMetaPage;
-      parentPagesByCallback[&EBML_INFO(KaxVideoProjection)]         = projectionPage;
+      parentPagesByCallback[&EBML_INFO(libmatroska::KaxTrackVideo)]              = page;
+      parentPagesByCallback[&EBML_INFO(libmatroska::KaxVideoColour)]             = colorPage;
+      parentPagesByCallback[&EBML_INFO(libmatroska::KaxVideoColourMasterMeta)]   = colorMasterMetaPage;
+      parentPagesByCallback[&EBML_INFO(libmatroska::KaxVideoProjection)]         = projectionPage;
 
     } else if (track_audio == trackType) {
-      parentMastersByCallback[&EBML_INFO(KaxTrackAudio)]            = &GetChildEmptyIfNew<KaxTrackAudio>(kTrackEntry);
-      parentPagesByCallback[&EBML_INFO(KaxTrackAudio)]              = page;
+      parentMastersByCallback[&EBML_INFO(libmatroska::KaxTrackAudio)]            = &GetChildEmptyIfNew<libmatroska::KaxTrackAudio>(kTrackEntry);
+      parentPagesByCallback[&EBML_INFO(libmatroska::KaxTrackAudio)]              = page;
     }
 
     for (auto const &propElement : propertyElements) {
@@ -671,14 +670,14 @@ void
 Tab::handleAttachments() {
   auto attachments = KaxAttachedList{};
 
-  m_analyzer->with_elements(EBML_ID(KaxAttachments), [this, &attachments](kax_analyzer_data_c const &data) {
-    auto master = std::dynamic_pointer_cast<KaxAttachments>(m_analyzer->read_element(data));
+  m_analyzer->with_elements(EBML_ID(libmatroska::KaxAttachments), [this, &attachments](kax_analyzer_data_c const &data) {
+    auto master = std::dynamic_pointer_cast<libmatroska::KaxAttachments>(m_analyzer->read_element(data));
     if (!master)
       return;
 
     auto idx = 0u;
     while (idx < master->ListSize()) {
-      auto attached = dynamic_cast<KaxAttached *>((*master)[idx]);
+      auto attached = dynamic_cast<libmatroska::KaxAttached *>((*master)[idx]);
       if (attached) {
         attachments << KaxAttachedPtr{attached};
         master->Remove(idx);
@@ -860,11 +859,11 @@ Tab::createAttachmentFromFile(QString const &fileName) {
 
   auto mimeType   = Util::detectMIMEType(fileName);
   auto uid        = create_unique_number(UNIQUE_ATTACHMENT_IDS);
-  auto fileData   = new KaxFileData;
+  auto fileData   = new libmatroska::KaxFileData;
   auto attachment = KaxAttachedPtr{
-    mtx::construct::cons<KaxAttached>(new KaxFileName, to_wide(QFileInfo{fileName}.fileName()),
-                                      new KaxMimeType, to_utf8(mimeType),
-                                      new KaxFileUID,  uid)
+    mtx::construct::cons<libmatroska::KaxAttached>(new libmatroska::KaxFileName, to_wide(QFileInfo{fileName}.fileName()),
+                                                   new libmatroska::KaxMimeType, to_utf8(mimeType),
+                                                   new libmatroska::KaxFileUID,  uid)
   };
 
   fileData->SetBuffer(content->get_buffer(), content->get_size());

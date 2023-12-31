@@ -18,8 +18,6 @@
 #include "common/list_utils.h"
 #include "common/strings/formatting.h"
 
-using namespace libmatroska;
-
 kax_content_encoding_t::kax_content_encoding_t()
   : order{}
   , type{}
@@ -33,37 +31,37 @@ content_decoder_c::content_decoder_c()
 {
 }
 
-content_decoder_c::content_decoder_c(KaxTrackEntry &ktentry)
+content_decoder_c::content_decoder_c(libmatroska::KaxTrackEntry &ktentry)
   : ok{true}
 {
   initialize(ktentry);
 }
 
 bool
-content_decoder_c::initialize(KaxTrackEntry &ktentry) {
+content_decoder_c::initialize(libmatroska::KaxTrackEntry &ktentry) {
   encodings.clear();
 
-  auto kcencodings = FindChild<KaxContentEncodings>(&ktentry);
+  auto kcencodings = FindChild<libmatroska::KaxContentEncodings>(&ktentry);
   if (!kcencodings)
     return true;
 
   int tid = kt_get_number(ktentry);
 
   for (auto kcenc_el : *kcencodings) {
-    auto kcenc = dynamic_cast<KaxContentEncoding *>(kcenc_el);
+    auto kcenc = dynamic_cast<libmatroska::KaxContentEncoding *>(kcenc_el);
     if (!kcenc)
       continue;
 
     kax_content_encoding_t enc;
 
-    enc.order    = FindChildValue<KaxContentEncodingOrder>(kcenc);
-    enc.type     = FindChildValue<KaxContentEncodingType >(kcenc);
-    enc.scope    = FindChildValue<KaxContentEncodingScope>(kcenc, 1u);
+    enc.order    = FindChildValue<libmatroska::KaxContentEncodingOrder>(kcenc);
+    enc.type     = FindChildValue<libmatroska::KaxContentEncodingType >(kcenc);
+    enc.scope    = FindChildValue<libmatroska::KaxContentEncodingScope>(kcenc, 1u);
 
-    auto ce_comp = FindChild<KaxContentCompression>(kcenc);
+    auto ce_comp = FindChild<libmatroska::KaxContentCompression>(kcenc);
     if (ce_comp) {
-      enc.comp_algo     = FindChildValue<KaxContentCompAlgo    >(ce_comp);
-      enc.comp_settings = FindChildValue<KaxContentCompSettings>(ce_comp);
+      enc.comp_algo     = FindChildValue<libmatroska::KaxContentCompAlgo    >(ce_comp);
+      enc.comp_settings = FindChildValue<libmatroska::KaxContentCompSettings>(ce_comp);
     }
 
     if (1 == enc.type) {

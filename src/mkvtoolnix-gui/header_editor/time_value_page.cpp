@@ -14,8 +14,8 @@ using namespace mtx::gui;
 
 TimeValuePage::TimeValuePage(Tab &parent,
                              PageBase &topLevelPage,
-                             EbmlMaster &master,
-                             EbmlCallbacks const &callbacks,
+                             libebml::EbmlMaster &master,
+                             libebml::EbmlCallbacks const &callbacks,
                              translatable_string_c const &title,
                              translatable_string_c const &description)
   : ValuePage{parent, topLevelPage, master, callbacks, ValueType::Timestamp, title, description}
@@ -31,7 +31,7 @@ TimeValuePage::createInputControl() {
   auto &cfg = Util::Settings::get();
 
   if (m_element)
-    m_originalValueUTC = QDateTime::fromSecsSinceEpoch(static_cast<EbmlDate *>(m_element)->GetEpochDate(), Qt::UTC);
+    m_originalValueUTC = QDateTime::fromSecsSinceEpoch(static_cast<libebml::EbmlDate *>(m_element)->GetEpochDate(), Qt::UTC);
 
   m_dteValue = new QDateTimeEdit{this};
   m_dteValue->setCalendarPopup(true);
@@ -73,7 +73,7 @@ TimeValuePage::validateValue()
 
 void
 TimeValuePage::copyValueToElement() {
-  static_cast<EbmlDate *>(m_element)->SetEpochDate(m_dteValue->dateTime().toUTC().toSecsSinceEpoch());
+  static_cast<libebml::EbmlDate *>(m_element)->SetEpochDate(m_dteValue->dateTime().toUTC().toSecsSinceEpoch());
 }
 
 void

@@ -25,8 +25,6 @@
 #include "common/xml/ebml_tags_converter.h"
 #include "propedit/tag_target.h"
 
-using namespace libmatroska;
-
 tag_target_c::tag_target_c()
   : track_target_c{""}
   , m_operation_mode{tom_undefined}
@@ -171,10 +169,10 @@ tag_target_c::execute() {
 }
 
 void
-tag_target_c::add_or_replace_global_tags(KaxTags *tags) {
+tag_target_c::add_or_replace_global_tags(libmatroska::KaxTags *tags) {
   size_t idx = 0;
   while (m_level1_element->ListSize() > idx) {
-    KaxTag *tag = dynamic_cast<KaxTag *>((*m_level1_element)[idx]);
+    libmatroska::KaxTag *tag = dynamic_cast<libmatroska::KaxTag *>((*m_level1_element)[idx]);
     if (!tag || (-1 != mtx::tags::get_tuid(*tag)))
       ++idx;
     else {
@@ -187,7 +185,7 @@ tag_target_c::add_or_replace_global_tags(KaxTags *tags) {
   if (tags) {
     idx = 0;
     while (tags->ListSize() > idx) {
-      KaxTag *tag = dynamic_cast<KaxTag *>((*tags)[0]);
+      libmatroska::KaxTag *tag = dynamic_cast<libmatroska::KaxTag *>((*tags)[0]);
       if (!tag || (-1 != mtx::tags::get_tuid(*tag)))
         ++idx;
       else {
@@ -200,12 +198,12 @@ tag_target_c::add_or_replace_global_tags(KaxTags *tags) {
 }
 
 void
-tag_target_c::add_or_replace_track_tags(KaxTags *tags) {
-  int64_t track_uid = GetChild<KaxTrackUID>(m_sub_master).GetValue();
+tag_target_c::add_or_replace_track_tags(libmatroska::KaxTags *tags) {
+  int64_t track_uid = GetChild<libmatroska::KaxTrackUID>(m_sub_master).GetValue();
 
   size_t idx = 0;
   while (m_level1_element->ListSize() > idx) {
-    KaxTag *tag = dynamic_cast<KaxTag *>((*m_level1_element)[idx]);
+    libmatroska::KaxTag *tag = dynamic_cast<libmatroska::KaxTag *>((*m_level1_element)[idx]);
     if (!tag || (track_uid != mtx::tags::get_tuid(*tag)))
       ++idx;
     else {
@@ -220,11 +218,11 @@ tag_target_c::add_or_replace_track_tags(KaxTags *tags) {
 
     idx = 0;
     while (tags->ListSize() > idx) {
-      KaxTag *tag = dynamic_cast<KaxTag *>((*tags)[0]);
+      libmatroska::KaxTag *tag = dynamic_cast<libmatroska::KaxTag *>((*tags)[0]);
       if (!tag)
         ++idx;
       else {
-        GetChild<KaxTagTrackUID>(GetChild<KaxTagTargets>(tag)).SetValue(track_uid);
+        GetChild<libmatroska::KaxTagTrackUID>(GetChild<libmatroska::KaxTagTargets>(tag)).SetValue(track_uid);
         m_level1_element->PushElement(*tag);
         tags->Remove(idx);
         m_tags_modified = true;
@@ -235,20 +233,20 @@ tag_target_c::add_or_replace_track_tags(KaxTags *tags) {
 
 bool
 tag_target_c::read_segment_info_and_tracks() {
-  auto tracks       = m_analyzer->read_all(EBML_INFO(KaxTracks));
-  auto segment_info = m_analyzer->read_all(EBML_INFO(KaxInfo));
-  m_timestamp_scale = segment_info ? FindChildValue<KaxTimecodeScale>(*segment_info, 1000000ull) : 1000000ull;
+  auto tracks       = m_analyzer->read_all(EBML_INFO(libmatroska::KaxTracks));
+  auto segment_info = m_analyzer->read_all(EBML_INFO(libmatroska::KaxInfo));
+  m_timestamp_scale = segment_info ? FindChildValue<libmatroska::KaxTimecodeScale>(*segment_info, 1000000ull) : 1000000ull;
 
-  if (tracks && dynamic_cast<KaxTracks *>(tracks.get())) {
+  if (tracks && dynamic_cast<libmatroska::KaxTracks *>(tracks.get())) {
     for (int idx = 0, num_children = tracks->ListSize(); idx < num_children; ++idx) {
-      auto track = dynamic_cast<KaxTrackEntry *>((*tracks)[idx]);
+      auto track = dynamic_cast<libmatroska::KaxTrackEntry *>((*tracks)[idx]);
 
       if (!track)
         continue;
 
-      auto track_number     = FindChildValue<KaxTrackNumber>(*track);
-      auto track_uid        = FindChildValue<KaxTrackUID>(*track);
-      auto default_duration = FindChildValue<KaxTrackDefaultDuration>(*track);
+      auto track_number     = FindChildValue<libmatroska::KaxTrackNumber>(*track);
+      auto track_uid        = FindChildValue<libmatroska::KaxTrackUID>(*track);
+      auto default_duration = FindChildValue<libmatroska::KaxTrackDefaultDuration>(*track);
 
       m_default_durations_by_number[track_number] = default_duration;
       m_track_statistics_by_number.emplace(track_number, track_statistics_c{track_uid});
@@ -280,9 +278,9 @@ tag_target_c::account_frame(uint64_t track_num,
 }
 
 void
-tag_target_c::account_block_group(KaxBlockGroup &block_group,
-                                  KaxCluster &cluster) {
-  auto block = FindChild<KaxBlock>(block_group);
+tag_target_c::account_block_group(libmatroska::KaxBlockGroup &block_group,
+                                  libmatroska::KaxCluster &cluster) {
+  auto block = FindChild<libmatroska::KaxBlock>(block_group);
   if (!block)
     return;
 
@@ -294,7 +292,7 @@ tag_target_c::account_block_group(KaxBlockGroup &block_group,
 
   block->SetParent(cluster);
 
-  auto block_duration  = FindChild<KaxBlockDuration>(block_group);
+  auto block_duration  = FindChild<libmatroska::KaxBlockDuration>(block_group);
   auto frame_duration  = block_duration ? static_cast<uint64_t>(block_duration->GetValue() * m_timestamp_scale / num_frames) : m_default_durations_by_number[block->TrackNum()];
   auto first_timestamp = block->GlobalTimecode();
 
@@ -305,8 +303,8 @@ tag_target_c::account_block_group(KaxBlockGroup &block_group,
 }
 
 void
-tag_target_c::account_simple_block(KaxSimpleBlock &simple_block,
-                                   KaxCluster &cluster) {
+tag_target_c::account_simple_block(libmatroska::KaxSimpleBlock &simple_block,
+                                   libmatroska::KaxCluster &cluster) {
   auto num_frames = simple_block.NumberFrames();
   auto stats_itr  = m_track_statistics_by_number.find(simple_block.TrackNum());
 
@@ -325,15 +323,15 @@ tag_target_c::account_simple_block(KaxSimpleBlock &simple_block,
 }
 
 void
-tag_target_c::account_one_cluster(KaxCluster &cluster) {
+tag_target_c::account_one_cluster(libmatroska::KaxCluster &cluster) {
   for (int idx = 0, num_children = cluster.ListSize(); idx < num_children; ++idx) {
     auto child = cluster[idx];
 
-    if (Is<KaxBlockGroup>(child))
-      account_block_group(*static_cast<KaxBlockGroup *>(child), cluster);
+    if (Is<libmatroska::KaxBlockGroup>(child))
+      account_block_group(*static_cast<libmatroska::KaxBlockGroup *>(child), cluster);
 
-    else if (Is<KaxSimpleBlock>(child))
-      account_simple_block(*static_cast<KaxSimpleBlock *>(child), cluster);
+    else if (Is<libmatroska::KaxSimpleBlock>(child))
+      account_simple_block(*static_cast<libmatroska::KaxSimpleBlock *>(child), cluster);
   }
 }
 
@@ -354,7 +352,7 @@ tag_target_c::account_all_clusters() {
     if (!cluster)
       break;
 
-    cluster->InitTimecode(FindChildValue<KaxClusterTimecode>(*cluster), m_timestamp_scale);
+    cluster->InitTimecode(FindChildValue<libmatroska::KaxClusterTimecode>(*cluster), m_timestamp_scale);
 
     account_one_cluster(*cluster);
 
@@ -382,7 +380,7 @@ tag_target_c::create_track_statistics_tags() {
   std::sort(track_numbers.begin(), track_numbers.end());
 
   for (auto const &track_number : track_numbers)
-    m_track_statistics_by_number[track_number].create_tags(*static_cast<KaxTags *>(m_level1_element), writing_app, writing_date);
+    m_track_statistics_by_number[track_number].create_tags(*static_cast<libmatroska::KaxTags *>(m_level1_element), writing_app, writing_date);
 }
 
 void
@@ -401,7 +399,7 @@ tag_target_c::add_or_replace_track_statistics_tags() {
 
 void
 tag_target_c::delete_track_statistics_tags() {
-  m_tags_modified = mtx::tags::remove_track_statistics(static_cast<KaxTags *>(m_level1_element), std::nullopt);
+  m_tags_modified = mtx::tags::remove_track_statistics(static_cast<libmatroska::KaxTags *>(m_level1_element), std::nullopt);
 }
 
 bool

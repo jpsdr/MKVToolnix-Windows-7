@@ -210,8 +210,8 @@ from_vorbis_comments(vorbis_comments_t const &vorbis_comments) {
       tags.reset(cons<libmatroska::KaxTags>(cons<libmatroska::KaxTag>(cons<libmatroska::KaxTagTargets>(new libmatroska::KaxTagTargetTypeValue, target_type,
                                                                                                        new libmatroska::KaxTagTargetType,      target_type == Track ? "TRACK" : "ALBUM"))));
 
-    static_cast<EbmlMaster *>((*tags)[0])->PushElement(*cons<libmatroska::KaxTagSimple>(new libmatroska::KaxTagName,   matroska_key,
-                                                                                        new libmatroska::KaxTagString, value));
+    static_cast<libebml::EbmlMaster *>((*tags)[0])->PushElement(*cons<libmatroska::KaxTagSimple>(new libmatroska::KaxTagName,   matroska_key,
+                                                                                                 new libmatroska::KaxTagString, value));
   }
 
   return converted;

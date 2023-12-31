@@ -16,7 +16,7 @@ public:
   uint64_t m_originalValue{};
 
 public:
-  UnsignedIntegerValuePage(Tab &parent, PageBase &topLevelPage, EbmlMaster &master, EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
+  UnsignedIntegerValuePage(Tab &parent, PageBase &topLevelPage, libebml::EbmlMaster &master, libebml::EbmlCallbacks const &callbacks, translatable_string_c const &title, translatable_string_c const &description);
   virtual ~UnsignedIntegerValuePage();
 
   virtual QWidget *createInputControl() override;

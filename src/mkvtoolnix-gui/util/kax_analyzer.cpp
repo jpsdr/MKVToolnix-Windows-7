@@ -21,7 +21,7 @@
 namespace mtx::gui::Util {
 
 KaxAnalyzer::KaxAnalyzer(QWidget *parent,
-                             QString const &fileName)
+                         QString const &fileName)
   : kax_analyzer_c{to_utf8(fileName)}
   , m_parent{parent}
 {
@@ -52,8 +52,8 @@ KaxAnalyzer::show_progress_done() {
 
 void
 KaxAnalyzer::displayUpdateElementResult(QWidget *parent,
-                                          update_element_result_e result,
-                                          QString const &message) {
+                                        update_element_result_e result,
+                                        QString const &message) {
   switch (result) {
     case kax_analyzer_c::uer_success:
       return;

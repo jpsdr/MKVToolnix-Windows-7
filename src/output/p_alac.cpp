@@ -19,8 +19,6 @@
 #include "merge/connection_checks.h"
 #include "output/p_alac.h"
 
-using namespace libmatroska;
-
 alac_packetizer_c::alac_packetizer_c(generic_reader_c *p_reader,
                                      track_info_c &p_ti,
                                      memory_cptr const &magic_cookie,

@@ -71,8 +71,6 @@
 #include "merge/reader_detection_and_creation.h"
 #include "merge/track_info.h"
 
-using namespace libmatroska;
-
 static std::string s_split_by_chapters_arg;
 
 /** \brief Outputs usage information
@@ -453,33 +451,33 @@ guess_mime_type_and_report(std::string file_name) {
 static void
 handle_segmentinfo() {
   // segment families
-  KaxSegmentFamily *family = FindChild<KaxSegmentFamily>(g_kax_info_chap.get());
+  libmatroska::KaxSegmentFamily *family = FindChild<libmatroska::KaxSegmentFamily>(g_kax_info_chap.get());
   while (family) {
     g_segfamily_uids.add_family_uid(*family);
     family = FindNextChild(*g_kax_info_chap, *family);
   }
 
-  EbmlBinary *uid = FindChild<KaxSegmentUID>(g_kax_info_chap.get());
+  libebml::EbmlBinary *uid = FindChild<libmatroska::KaxSegmentUID>(g_kax_info_chap.get());
   if (uid)
     g_forced_seguids.push_back(mtx::bits::value_cptr(new mtx::bits::value_c(*uid)));
 
-  uid = FindChild<KaxNextUID>(g_kax_info_chap.get());
+  uid = FindChild<libmatroska::KaxNextUID>(g_kax_info_chap.get());
   if (uid)
     g_seguid_link_next = mtx::bits::value_cptr(new mtx::bits::value_c(*uid));
 
-  uid = FindChild<KaxPrevUID>(g_kax_info_chap.get());
+  uid = FindChild<libmatroska::KaxPrevUID>(g_kax_info_chap.get());
   if (uid)
     g_seguid_link_previous = mtx::bits::value_cptr(new mtx::bits::value_c(*uid));
 
-  auto segment_filename = FindChild<KaxSegmentFilename>(g_kax_info_chap.get());
+  auto segment_filename = FindChild<libmatroska::KaxSegmentFilename>(g_kax_info_chap.get());
   if (segment_filename)
     g_segment_filename = segment_filename->GetValueUTF8();
 
-  auto next_segment_filename = FindChild<KaxNextFilename>(g_kax_info_chap.get());
+  auto next_segment_filename = FindChild<libmatroska::KaxNextFilename>(g_kax_info_chap.get());
   if (next_segment_filename)
     g_next_segment_filename = next_segment_filename->GetValueUTF8();
 
-  auto previous_segment_filename = FindChild<KaxPrevFilename>(g_kax_info_chap.get());
+  auto previous_segment_filename = FindChild<libmatroska::KaxPrevFilename>(g_kax_info_chap.get());
   if (previous_segment_filename)
     g_previous_segment_filename = previous_segment_filename->GetValueUTF8();
 }
@@ -566,7 +564,7 @@ parse_and_add_tags(std::string const &file_name) {
     return;
 
   for (auto element : *tags) {
-    auto tag = dynamic_cast<KaxTag *>(element);
+    auto tag = dynamic_cast<libmatroska::KaxTag *>(element);
     if (tag) {
       if (!tag->CheckMandatory())
         mxerror(fmt::format(Y("Error parsing the tags in '{0}': some mandatory elements are missing.\n"), file_name));
@@ -3154,7 +3152,7 @@ setup(int argc,
 
   mtx_common_init("mkvmerge", argv[0]);
 
-  g_kax_tracks       = std::make_unique<KaxTracks>();
+  g_kax_tracks       = std::make_unique<libmatroska::KaxTracks>();
   g_default_language = mtx::bcp47::language_c::parse("und");
 
 #if defined(SYS_UNIX) || defined(SYS_APPLE)
