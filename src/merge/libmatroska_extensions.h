@@ -28,18 +28,32 @@
 class kax_cluster_c: public libmatroska::KaxCluster {
 public:
   kax_cluster_c(): libmatroska::KaxCluster() {
+#if LIBMATROSKA_VERSION >= 0x020000
+    PreviousTimestamp = 0;
+#else
     PreviousTimecode = 0;
+#endif
+
   }
   virtual ~kax_cluster_c();
 
   void delete_non_blocks();
 
+#if LIBMATROSKA_VERSION >= 0x020000
+  void set_min_timestamp(int64_t min_timestamp) {
+    MinTimestamp = min_timestamp;
+  }
+  void set_max_timestamp(int64_t max_timestamp) {
+    MaxTimestamp = max_timestamp;
+  }
+#else
   void set_min_timestamp(int64_t min_timestamp) {
     MinTimecode = min_timestamp;
   }
   void set_max_timestamp(int64_t max_timestamp) {
     MaxTimecode = max_timestamp;
   }
+#endif
 };
 
 class kax_reference_block_c: public libmatroska::KaxReferenceBlock {
@@ -50,12 +64,8 @@ public:
   kax_reference_block_c();
 
   void set_value(int64_t value) {
-    m_value     = value;
-#if LIBEBML_VERSION < 0x000800
-    bValueIsSet = true;
-#else
+    m_value = value;
     SetValueIsSet();
-#endif
   }
 
 #if LIBEBML_VERSION >= 0x020000
