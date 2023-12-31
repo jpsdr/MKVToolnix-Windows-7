@@ -76,15 +76,12 @@
 using namespace libmatroska;
 using namespace mtx::construct;
 
-namespace libmatroska {
-
-  class KaxMyDuration: public KaxDuration {
-  public:
-    KaxMyDuration(const EbmlFloat::Precision prec): KaxDuration() {
-      SetPrecision(prec);
-    }
-  };
-}
+class kax_my_duration: public KaxDuration {
+public:
+  kax_my_duration(const EbmlFloat::Precision prec): KaxDuration() {
+    SetPrecision(prec);
+  }
+};
 
 std::vector<packetizer_t> g_packetizers;
 std::vector<filelist_cptr> g_files;
@@ -164,7 +161,7 @@ mtx::bits::value_cptr g_seguid_link_next;
 std::deque<mtx::bits::value_cptr> g_forced_seguids;
 
 std::unique_ptr<KaxInfo> s_kax_infos;
-static KaxMyDuration *s_kax_duration;
+static kax_my_duration *s_kax_duration;
 
 static std::unique_ptr<KaxTags> s_kax_tags;
 static mtx::chapters::kax_cptr s_chapters_in_this_file;
@@ -592,7 +589,7 @@ render_headers(mm_io_c *out) {
 
     s_kax_infos = std::make_unique<KaxInfo>();
 
-    s_kax_duration = new KaxMyDuration{ !g_video_packetizer || (TIMESTAMP_SCALE_MODE_AUTO == g_timestamp_scale_mode) ? EbmlFloat::FLOAT_64 : EbmlFloat::FLOAT_32};
+    s_kax_duration = new kax_my_duration{ !g_video_packetizer || (TIMESTAMP_SCALE_MODE_AUTO == g_timestamp_scale_mode) ? EbmlFloat::FLOAT_64 : EbmlFloat::FLOAT_32};
 
     s_kax_duration->SetValue(0.0);
     s_kax_infos->PushElement(*s_kax_duration);
